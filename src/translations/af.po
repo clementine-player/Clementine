@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-04-16 14:19+0000\n"
+"PO-Revision-Date: 2013-04-27 05:44+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,8 +33,9 @@ msgid " kbps"
 msgstr "kbps"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
-#: ../bin/src/ui_playbacksettingspage.h:272
-#: ../bin/src/ui_playbacksettingspage.h:292
+#: ../bin/src/ui_playbacksettingspage.h:305
+#: ../bin/src/ui_playbacksettingspage.h:308
+#: ../bin/src/ui_playbacksettingspage.h:328
 msgid " ms"
 msgstr "ms"
 
@@ -56,12 +57,12 @@ msgstr "liedjies"
 msgid "%1 albums"
 msgstr "%1 albums"
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dae"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 dae terug"
@@ -231,7 +232,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr ""
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 msgid "1 day"
 msgstr "1 dag"
 
@@ -408,7 +409,7 @@ msgstr "Voeg nog 'n stroom by..."
 msgid "Add directory..."
 msgstr "Voeg gids by..."
 
-#: ui/mainwindow.cpp:1598
+#: ui/mainwindow.cpp:1601
 msgid "Add file"
 msgstr "Voeg lêer by"
 
@@ -420,7 +421,7 @@ msgstr "Voeg lêer by..."
 msgid "Add files to transcode"
 msgstr "Voeg lêers by om te transkodeer"
 
-#: ui/mainwindow.cpp:1626
+#: ui/mainwindow.cpp:1629
 msgid "Add folder"
 msgstr "Voeg vouer by"
 
@@ -524,7 +525,7 @@ msgstr "Voeg toe aan Grooveshark gunstelinge"
 msgid "Add to Grooveshark playlists"
 msgstr "Voeg toe aan Grooveshark afspeellys"
 
-#: ui/mainwindow.cpp:1423
+#: ui/mainwindow.cpp:1426
 msgid "Add to another playlist"
 msgstr "Voeg by 'n ander afspeellys by"
 
@@ -594,7 +595,7 @@ msgstr "Na kopiëring..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:279
+#: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideale hardheid vir alle snitte)"
 
@@ -728,11 +729,11 @@ msgstr "Voeg by huidige afspeellys by"
 msgid "Append to the playlist"
 msgstr "Voeg by afspeellys by"
 
-#: ../bin/src/ui_playbacksettingspage.h:282
+#: ../bin/src/ui_playbacksettingspage.h:318
 msgid "Apply compression to prevent clipping"
 msgstr "Doen kompressie om afkapping te voorkom"
 
-#: ui/equalizer.cpp:191
+#: ui/equalizer.cpp:197
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Is jy seker jy wil die \"%1\" opstellingspatroon verwyder?"
@@ -848,6 +849,10 @@ msgstr "Agtergrond deurskynendheid"
 msgid "Backing up database"
 msgstr "Databasis word gerugsteun"
 
+#: ../bin/src/ui_equalizer.h:173
+msgid "Balance"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
 msgstr "Verban"
@@ -923,11 +928,11 @@ msgstr ""
 msgid "Browse..."
 msgstr "Gaan soek..."
 
-#: ../bin/src/ui_playbacksettingspage.h:291
+#: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Buffer duration"
-msgstr "Bufferlengte"
+msgstr ""
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:900
 msgid "Buffering"
 msgstr "Buffering"
 
@@ -975,7 +980,7 @@ msgstr "Verander skommel modus"
 msgid "Change the language"
 msgstr "Verander die taal"
 
-#: ../bin/src/ui_playbacksettingspage.h:294
+#: ../bin/src/ui_playbacksettingspage.h:330
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -993,7 +998,7 @@ msgstr "Kyk vir nuwer weergawes..."
 msgid "Choose a name for your smart playlist"
 msgstr "Kies 'n naam vir jou slimspeellys"
 
-#: ../bin/src/ui_playbacksettingspage.h:287
+#: ../bin/src/ui_playbacksettingspage.h:323
 msgid "Choose automatically"
 msgstr "Kies outomaties"
 
@@ -1022,7 +1027,7 @@ msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr "Titel"
 
-#: ui/equalizer.cpp:109
+#: ui/equalizer.cpp:115
 msgid "Classical"
 msgstr "Klassiek"
 
@@ -1151,7 +1156,7 @@ msgstr "Die aflaai sal stop as hierdie venster toegemaak word."
 msgid "Closing this window will stop searching for album covers."
 msgstr "Die soek vir album-omslae sal stop as hierdie venster toegemaak word."
 
-#: ui/equalizer.cpp:110
+#: ui/equalizer.cpp:116
 msgid "Club"
 msgstr "Klub"
 
@@ -1356,11 +1361,11 @@ msgstr "Omslae vanaf %1"
 msgid "Create a new Grooveshark playlist"
 msgstr "Skep 'n nuwe Grooveshark afspeellys"
 
-#: ../bin/src/ui_playbacksettingspage.h:269
+#: ../bin/src/ui_playbacksettingspage.h:302
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Pas oorgangsdowing toe wanneer snitte outomaties verander word"
 
-#: ../bin/src/ui_playbacksettingspage.h:268
+#: ../bin/src/ui_playbacksettingspage.h:301
 msgid "Cross-fade when changing tracks manually"
 msgstr "Pas oorgangsdowing toe wanneer snitte per hand verander word"
 
@@ -1436,7 +1441,7 @@ msgstr "Ctrl+T"
 msgid "Ctrl+Up"
 msgstr "Ctrl+Op"
 
-#: ui/equalizer.cpp:108 ../bin/src/ui_lastfmstationdialog.h:98
+#: ui/equalizer.cpp:114 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
 msgstr "Na keuse"
 
@@ -1460,7 +1465,7 @@ msgstr "Na keuse..."
 msgid "DBus path"
 msgstr "DBus lêergids"
 
-#: ui/equalizer.cpp:111
+#: ui/equalizer.cpp:117
 msgid "Dance"
 msgstr "Dans"
 
@@ -1525,7 +1530,7 @@ msgid "Delete downloaded data"
 msgstr "Vee afgelaaide data uit"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1875 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1878 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Skrap lêers"
 
@@ -1546,7 +1551,7 @@ msgstr "Vee afgespeelde episodes uit"
 msgid "Delete playlists"
 msgstr ""
 
-#: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
+#: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Skrap voorafinstelling"
 
@@ -1562,11 +1567,11 @@ msgstr "Skrap die oorspronklike lêers"
 msgid "Deleting files"
 msgstr "Lêers word geskrap"
 
-#: ui/mainwindow.cpp:1358
+#: ui/mainwindow.cpp:1361
 msgid "Dequeue selected tracks"
 msgstr "Verwyder gekose snitte uit die tou"
 
-#: ui/mainwindow.cpp:1356
+#: ui/mainwindow.cpp:1359
 msgid "Dequeue track"
 msgstr "Verwyder snit uit die tou"
 
@@ -1780,7 +1785,7 @@ msgstr "Dinamiese skommeling"
 msgid "Edit smart playlist..."
 msgstr "Verander slimspeellys"
 
-#: ui/mainwindow.cpp:1391
+#: ui/mainwindow.cpp:1394
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Verander etiket \"%1\"..."
@@ -1814,7 +1819,7 @@ msgstr "Verander..."
 msgid "Enable Wii Remote support"
 msgstr "Skakel Wii-afstansbeheer ondersteuning aan"
 
-#: ../bin/src/ui_equalizer.h:126
+#: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
 msgstr "Skakel grafiese effenaar aan"
 
@@ -1895,7 +1900,7 @@ msgstr ""
 msgid "Entire collection"
 msgstr "Hele versameling"
 
-#: ../bin/src/ui_equalizer.h:118 ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:693
 msgid "Equalizer"
 msgstr "Grafiese effenaar"
 
@@ -1909,7 +1914,7 @@ msgstr "Ekwivalent aan --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1827 ui/mainwindow.cpp:1943
+#: ui/mainwindow.cpp:1830 ui/mainwindow.cpp:1946
 msgid "Error"
 msgstr "Fout"
 
@@ -1980,7 +1985,7 @@ msgstr "Elke 6 ure"
 msgid "Every hour"
 msgstr "Uurliks"
 
-#: ../bin/src/ui_playbacksettingspage.h:270
+#: ../bin/src/ui_playbacksettingspage.h:303
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Behalwe tussen snitte van die selfde album of CUE blad"
 
@@ -2023,15 +2028,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:267
+#: ../bin/src/ui_playbacksettingspage.h:306
+msgid "Fade out on pause / fade in on resume"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:300
 msgid "Fade out when stopping a track"
 msgstr "Doof klank uit as snit gestop word"
 
-#: ../bin/src/ui_playbacksettingspage.h:266
+#: ../bin/src/ui_playbacksettingspage.h:299
 msgid "Fading"
 msgstr "Uitdowing"
 
-#: ../bin/src/ui_playbacksettingspage.h:271
+#: ../bin/src/ui_playbacksettingspage.h:304
+#: ../bin/src/ui_playbacksettingspage.h:307
 msgid "Fading duration"
 msgstr "Duur van uitdowing"
 
@@ -2223,19 +2233,19 @@ msgstr "Vriende"
 msgid "Frozen"
 msgstr "Bevrore"
 
-#: ui/equalizer.cpp:112
+#: ui/equalizer.cpp:118
 msgid "Full Bass"
 msgstr "Volle bas"
 
-#: ui/equalizer.cpp:114
+#: ui/equalizer.cpp:120
 msgid "Full Bass + Treble"
 msgstr "Volle bas + hoëtoon"
 
-#: ui/equalizer.cpp:113
+#: ui/equalizer.cpp:119
 msgid "Full Treble"
 msgstr "Volle hoëtoon"
 
-#: ../bin/src/ui_playbacksettingspage.h:283
+#: ../bin/src/ui_playbacksettingspage.h:319
 msgid "GStreamer audio engine"
 msgstr "GStreamer oudioenjin"
 
@@ -2440,12 +2450,12 @@ msgstr "Beelde (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Beelde (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 days"
 msgstr "Oor %1 dae"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Oor %1 weke"
@@ -2605,11 +2615,11 @@ msgstr "Katjies"
 msgid "Language"
 msgstr "Taal"
 
-#: ui/equalizer.cpp:115
+#: ui/equalizer.cpp:121
 msgid "Laptop/Headphones"
 msgstr "Laptop/Oorfone"
 
-#: ui/equalizer.cpp:116
+#: ui/equalizer.cpp:122
 msgid "Large Hall"
 msgstr "Groot saal"
 
@@ -2696,9 +2706,13 @@ msgstr "Last.fm wiki"
 msgid "Least favourite tracks"
 msgstr "Mins gunsteling snitte"
 
-#: ../bin/src/ui_playbacksettingspage.h:290
+#: ../bin/src/ui_playbacksettingspage.h:326
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Laat leeg vir standaardwaarde.  Voorbeelde: \"/dev/dsp\", \"front\", ens."
+
+#: ../bin/src/ui_equalizer.h:172
+msgid "Left"
+msgstr ""
 
 #: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -2713,7 +2727,7 @@ msgstr "Versameling"
 msgid "Library advanced grouping"
 msgstr "Gevorderde groeppering van versameling"
 
-#: ui/mainwindow.cpp:2060
+#: ui/mainwindow.cpp:2063
 msgid "Library rescan notice"
 msgstr "Versameling hernagaan kennisgewing"
 
@@ -2730,7 +2744,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Luister na Grooveshark liedjies soortgelyk aan wat jy al voorheen geluister het"
 
-#: ui/equalizer.cpp:117
+#: ui/equalizer.cpp:123
 msgid "Live"
 msgstr "Regstreeks"
 
@@ -2967,7 +2981,7 @@ msgstr "Model"
 msgid "Monitor the library for changes"
 msgstr "Hou my versameling dop vir veranderings"
 
-#: ../bin/src/ui_playbacksettingspage.h:296
+#: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Mono playback"
 msgstr "Speel in Mono af"
 
@@ -3014,7 +3028,7 @@ msgstr "Skuif na my versameling..."
 msgid "Move up"
 msgstr "Skuid op"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1600
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1603
 msgid "Music"
 msgstr "Musiek"
 
@@ -3064,7 +3078,7 @@ msgid "My Recommendations"
 msgstr "Aanbevelings"
 
 #: internet/groovesharkservice.cpp:1243 internet/groovesharkservice.cpp:1336
-#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
+#: ui/equalizer.cpp:178 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -3114,7 +3128,7 @@ msgstr "Nooit begin afspeel"
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1440 ../bin/src/ui_mainwindow.h:698
+#: ui/mainwindow.cpp:1443 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
 msgstr "Nuwe afspeellys"
 
@@ -3143,7 +3157,7 @@ msgstr "Volgende"
 msgid "Next track"
 msgstr "Volgende snit"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 msgid "Next week"
 msgstr "Volgende week"
 
@@ -3173,7 +3187,7 @@ msgstr "Geen kort blokke"
 msgid "None"
 msgstr "Geen"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Geen van die gekose liedjies is geskik om na die toestel te kopiëer nie."
 
@@ -3354,17 +3368,17 @@ msgstr "Oorspronklike etikette"
 msgid "Other options"
 msgstr "Ander keuses"
 
-#: ../bin/src/ui_playbacksettingspage.h:289
+#: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
-msgstr "Uittree toestel"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
 msgstr "Uittree keuses"
 
-#: ../bin/src/ui_playbacksettingspage.h:284
+#: ../bin/src/ui_playbacksettingspage.h:320
 msgid "Output plugin"
-msgstr "Uittree uitbreiding"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
@@ -3378,7 +3392,7 @@ msgstr "Eienaar"
 msgid "Parsing Jamendo catalogue"
 msgstr "Verwerk Jamendo katalogus"
 
-#: ui/equalizer.cpp:118
+#: ui/equalizer.cpp:124
 msgid "Party"
 msgstr "Partytjie"
 
@@ -3395,7 +3409,7 @@ msgstr "Wagwoord"
 msgid "Password Protected"
 msgstr "Beskermd deur 'n wagwoord"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:850 ui/mainwindow.cpp:1281
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pause"
@@ -3417,8 +3431,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Gewone sykieslys"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:489 ui/mainwindow.cpp:818
-#: ui/mainwindow.cpp:837 ui/mainwindow.cpp:1284 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:489 ui/mainwindow.cpp:821
+#: ui/mainwindow.cpp:840 ui/mainwindow.cpp:1287 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3461,7 +3475,7 @@ msgstr "Speel die <n>de snit in die afspeellys"
 msgid "Play/Pause"
 msgstr "Speel/Pause"
 
-#: ../bin/src/ui_playbacksettingspage.h:264
+#: ../bin/src/ui_playbacksettingspage.h:297
 msgid "Playback"
 msgstr "Afspeel"
 
@@ -3502,7 +3516,7 @@ msgstr "Uitbreiding toestand:"
 msgid "Podcasts"
 msgstr "Potgooie"
 
-#: ui/equalizer.cpp:119
+#: ui/equalizer.cpp:125
 msgid "Pop"
 msgstr "Pop"
 
@@ -3527,7 +3541,7 @@ msgstr "Duur van opspringkennisgewing"
 msgid "Port"
 msgstr "Poort"
 
-#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:281
+#: ui/equalizer.cpp:47 ../bin/src/ui_playbacksettingspage.h:317
 msgid "Pre-amp"
 msgstr "Voorversterker"
 
@@ -3562,7 +3576,7 @@ msgstr "Voorkeur formaat"
 msgid "Premium audio type"
 msgstr "Premium oudio tipe"
 
-#: ../bin/src/ui_equalizer.h:119
+#: ../bin/src/ui_equalizer.h:164
 msgid "Preset:"
 msgstr "Voorinstelling:"
 
@@ -3636,16 +3650,16 @@ msgstr "Toestel word ondervra..."
 msgid "Queue Manager"
 msgstr "Tou bestuurder"
 
-#: ui/mainwindow.cpp:1362
+#: ui/mainwindow.cpp:1365
 msgid "Queue selected tracks"
 msgstr "Plaas geselekteerde snitte in die tou"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1360
+#: ui/mainwindow.cpp:1363
 msgid "Queue track"
 msgstr "Plaas snit in die tou"
 
-#: ../bin/src/ui_playbacksettingspage.h:278
+#: ../bin/src/ui_playbacksettingspage.h:314
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (selfde hardheid vir alle snitte)"
 
@@ -3718,7 +3732,7 @@ msgstr "Verfris lys van stasies"
 msgid "Refresh streams"
 msgstr "Verfris strome"
 
-#: ui/equalizer.cpp:120
+#: ui/equalizer.cpp:126
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -3818,13 +3832,13 @@ msgstr "Vervang die afspeellys"
 msgid "Replaces spaces with underscores"
 msgstr "Vervang spasies met onderstrepe"
 
-#: ../bin/src/ui_playbacksettingspage.h:273
+#: ../bin/src/ui_playbacksettingspage.h:309
 msgid "Replay Gain"
 msgstr "Afspeel wins"
 
-#: ../bin/src/ui_playbacksettingspage.h:275
+#: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr "Afspeel wins modus"
+msgstr ""
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3862,7 +3876,11 @@ msgstr "Grooveshark afspeellys word verkry"
 msgid "Return to Clementine"
 msgstr "Gaan terug na Clementine."
 
-#: ui/equalizer.cpp:121
+#: ../bin/src/ui_equalizer.h:174
+msgid "Right"
+msgstr ""
+
+#: ui/equalizer.cpp:127
 msgid "Rock"
 msgstr "Rock"
 
@@ -3914,7 +3932,7 @@ msgstr "Stoor afspeellys"
 msgid "Save playlist..."
 msgstr "Stoor afspeellys"
 
-#: ui/equalizer.cpp:172 ../bin/src/ui_equalizer.h:121
+#: ui/equalizer.cpp:178 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Stoor voorinstelling"
 
@@ -4079,7 +4097,7 @@ msgstr ""
 msgid "Service offline"
 msgstr "Diens aflyn"
 
-#: ui/mainwindow.cpp:1389
+#: ui/mainwindow.cpp:1392
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Stel %1 na \"%2\"..."
@@ -4115,7 +4133,7 @@ msgstr "Wys"
 msgid "Show OSD"
 msgstr "Wys skermbeeld"
 
-#: ../bin/src/ui_playbacksettingspage.h:265
+#: ../bin/src/ui_playbacksettingspage.h:298
 msgid "Show a glowing animation on the current track"
 msgstr "Maak die huidige snit gloei"
 
@@ -4248,7 +4266,7 @@ msgstr "Aan die aanteken..."
 msgid "Similar artists"
 msgstr "Soortgelyke kunstenaars"
 
-#: ui/equalizer.cpp:123
+#: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "Ska"
 
@@ -4280,11 +4298,11 @@ msgstr "Slimspeellys"
 msgid "Smart playlists"
 msgstr "Slimspeellyste"
 
-#: ui/equalizer.cpp:122
+#: ui/equalizer.cpp:128
 msgid "Soft"
 msgstr "Sag"
 
-#: ui/equalizer.cpp:124
+#: ui/equalizer.cpp:130
 msgid "Soft Rock"
 msgstr "Sagte Rock"
 
@@ -4511,7 +4529,7 @@ msgstr "Etiketteer radio"
 msgid "Target bitrate"
 msgstr "Teiken bistempo"
 
-#: ui/equalizer.cpp:125
+#: ui/equalizer.cpp:131
 msgid "Techno"
 msgstr "Techno"
 
@@ -4560,7 +4578,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2053
+#: ui/mainwindow.cpp:2056
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4595,7 +4613,7 @@ msgid ""
 "deleted:"
 msgstr "Daar was 'n probleem met die verwydering van sommige liedjies.  Die volgende lêers kan nie verwyder word nie:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1876 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1879 widgets/fileview.cpp:188
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Hierdie lêers sal vanaf die skyf verwyder word. Is jy seker jy wil voortgaan?"
@@ -4688,7 +4706,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Om Grooveshark radio te begin moet jy eers na 'n paar ander Grooveshark liedjies luister"
 
-#: core/utilities.cpp:123 core/utilities.cpp:139
+#: core/utilities.cpp:124 core/utilities.cpp:140
 msgid "Today"
 msgstr "Vandag"
 
@@ -4700,7 +4718,7 @@ msgstr "Skakel mooi skermbeeld aan/af"
 msgid "Toggle fullscreen"
 msgstr "Skakel volskerm aan/af"
 
-#: ui/mainwindow.cpp:1364
+#: ui/mainwindow.cpp:1367
 msgid "Toggle queue status"
 msgstr "Skakel tou-status aan/af"
 
@@ -4712,7 +4730,7 @@ msgstr "Skakel log van geluisterde musiek aanlyn aan/af"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Skakel mooi skermbeeld aan/af"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:142
 msgid "Tomorrow"
 msgstr "Môre"
 
@@ -4873,7 +4891,7 @@ msgstr "Gebruik Gnome se kortskakel knoppies"
 msgid "Use Remotecontrol"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:274
+#: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Gebruik afspeel-aanwins metadata as dit beskikbaar is"
 
@@ -5110,7 +5128,7 @@ msgid ""
 "well?"
 msgstr "Wil jy die ander liedjies in hierdie album ook na Verskeie Kunstenaars skuif?"
 
-#: ui/mainwindow.cpp:2058
+#: ui/mainwindow.cpp:2061
 msgid "Would you like to run a full rescan right now?"
 msgstr "Wil jy alles van voor af deursoek?"
 
@@ -5138,7 +5156,7 @@ msgstr "Jaar -Album"
 msgid "Years"
 msgstr "Jare"
 
-#: core/utilities.cpp:125
+#: core/utilities.cpp:126
 msgid "Yesterday"
 msgstr "Gister"
 
@@ -5279,7 +5297,7 @@ msgstr "Jou gebruikersnaam of wagwoord was verkeerd."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:126
+#: ui/equalizer.cpp:132
 msgid "Zero"
 msgstr "Zero"
 

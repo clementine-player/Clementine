@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-04-16 14:19+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-04-28 12:28+0000\n"
+"Last-Translator: Yhal Htet Aung <jumoun@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: my\n"
@@ -32,8 +32,9 @@ msgid " kbps"
 msgstr "တစ်စက္ကန့်ကီလိုဘိုက်နှုန်း"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
-#: ../bin/src/ui_playbacksettingspage.h:272
-#: ../bin/src/ui_playbacksettingspage.h:292
+#: ../bin/src/ui_playbacksettingspage.h:305
+#: ../bin/src/ui_playbacksettingspage.h:308
+#: ../bin/src/ui_playbacksettingspage.h:328
 msgid " ms"
 msgstr "မိုက်ခရိုစက္ကန့်"
 
@@ -55,12 +56,12 @@ msgstr "သီချင်းများ"
 msgid "%1 albums"
 msgstr "%1 အယ်လဘမ်များ"
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 #, qt-format
 msgid "%1 days"
 msgstr "%1 နေ့များ"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 လွန်ခဲ့သောနေ့များ"
@@ -230,7 +231,7 @@ msgstr "၀:၀၀:၀၀"
 msgid "0px"
 msgstr "၀ပီအိတ်စ်"
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 msgid "1 day"
 msgstr "တစ်နေ့"
 
@@ -407,7 +408,7 @@ msgstr "သီချင်းစီးကြောင်းနောက်တစ
 msgid "Add directory..."
 msgstr "ဖိုင်လမ်းညွှန်ထည့်..."
 
-#: ui/mainwindow.cpp:1598
+#: ui/mainwindow.cpp:1601
 msgid "Add file"
 msgstr "ဖိုင်ထည့်"
 
@@ -419,7 +420,7 @@ msgstr "ဖိုင်ထည့်..."
 msgid "Add files to transcode"
 msgstr "ဖိုင်များကိုပံုစံပြောင်းလဲရန်ထည့်ပါ"
 
-#: ui/mainwindow.cpp:1626
+#: ui/mainwindow.cpp:1629
 msgid "Add folder"
 msgstr "ဖိုင်တွဲထည့်"
 
@@ -523,7 +524,7 @@ msgstr "ဂရုရှက်အနှစ်သက်ဆုံးများသ
 msgid "Add to Grooveshark playlists"
 msgstr "ဂရုရှက်သီချင်းစာရင်းများသို့ထည့်"
 
-#: ui/mainwindow.cpp:1423
+#: ui/mainwindow.cpp:1426
 msgid "Add to another playlist"
 msgstr "သီချင်းစာရင်းနောက်တစ်ခုသို့ထည့်"
 
@@ -593,7 +594,7 @@ msgstr "ကူးယူပြီးနောက်..."
 msgid "Album"
 msgstr "အယ်လဘမ်"
 
-#: ../bin/src/ui_playbacksettingspage.h:279
+#: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Album (ideal loudness for all tracks)"
 msgstr "အယ်လဘမ် (တေးသံလမ်းကြောများအားလံုးအတွက်အကောင်းဆုံးအသံကျယ်ကျယ်)"
 
@@ -727,11 +728,11 @@ msgstr "ယခုသီချင်းစာရင်းသို့ဖြည်
 msgid "Append to the playlist"
 msgstr "သီချင်းစာရင်းသို့ဖြည့်စွက်"
 
-#: ../bin/src/ui_playbacksettingspage.h:282
+#: ../bin/src/ui_playbacksettingspage.h:318
 msgid "Apply compression to prevent clipping"
 msgstr "ဖြတ်ညှပ်ခံရခြင်းကာကွယ်ရန်ချုံ့"
 
-#: ui/equalizer.cpp:191
+#: ui/equalizer.cpp:197
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "ယခု \"%1\" ကြိုတင်ထိန်းညှိပယ်ဖျက်မှာသေချာသလား?"
@@ -847,6 +848,10 @@ msgstr "နောက်ခံအလင်းပိတ်"
 msgid "Backing up database"
 msgstr "အချက်အလက်အစုအရန်မှတ်သိမ်း"
 
+#: ../bin/src/ui_equalizer.h:173
+msgid "Balance"
+msgstr "ချိန်ညှိချက်"
+
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
 msgstr "တားမြစ်"
@@ -922,11 +927,11 @@ msgstr "သေတ္တာ"
 msgid "Browse..."
 msgstr "လျှောက်ကြည့်..."
 
-#: ../bin/src/ui_playbacksettingspage.h:291
+#: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Buffer duration"
 msgstr "ကြားခံကြာချိန်"
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:900
 msgid "Buffering"
 msgstr "ကြားခံ"
 
@@ -974,7 +979,7 @@ msgstr "ကုလားဖန်ထိုးစနစ်ပြောင်းလ
 msgid "Change the language"
 msgstr "ဒီဘာသာစကားပြောင်းလဲ"
 
-#: ../bin/src/ui_playbacksettingspage.h:294
+#: ../bin/src/ui_playbacksettingspage.h:330
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -992,7 +997,7 @@ msgstr "မွမ်းမံများစစ်ဆေးခြင်း..."
 msgid "Choose a name for your smart playlist"
 msgstr "သင့်ရဲ့ချက်ချာသီချင်းစာရင်းအတွက်နာမည်တစ်ခုရွေး"
 
-#: ../bin/src/ui_playbacksettingspage.h:287
+#: ../bin/src/ui_playbacksettingspage.h:323
 msgid "Choose automatically"
 msgstr "အလိုအလျောက်ရွေးချယ်ခြင်း"
 
@@ -1021,7 +1026,7 @@ msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr "သီချင်းစာသားများရှာဖွေရန်ကလီမန်တိုင်းအသံုးချ၍ဝက်ဘ်ဆိုက်များရွေးချယ်"
 
-#: ui/equalizer.cpp:109
+#: ui/equalizer.cpp:115
 msgid "Classical"
 msgstr "ဂန္တဝင်"
 
@@ -1150,7 +1155,7 @@ msgstr "ယခုဝင်းဒိုးပိတ်လျှင်ကူးဆ
 msgid "Closing this window will stop searching for album covers."
 msgstr "ယခုဝင်းဒိုးပိတ်လျှင်အယ်လဘမ်အဖုံးများရှာဖွေခြင်းရပ်သွားလိမ့်မည်။"
 
-#: ui/equalizer.cpp:110
+#: ui/equalizer.cpp:116
 msgid "Club"
 msgstr "ကလပ်"
 
@@ -1355,11 +1360,11 @@ msgstr "%1 မှအဖုံးများ"
 msgid "Create a new Grooveshark playlist"
 msgstr "ဂရုရှက်သီချင်းစာရင်းအသစ်တစ်ခုဖန်တီး"
 
-#: ../bin/src/ui_playbacksettingspage.h:269
+#: ../bin/src/ui_playbacksettingspage.h:302
 msgid "Cross-fade when changing tracks automatically"
 msgstr "တေးသံလမ်းကြောများအလိုအလျောက်ပြောင်းလဲသွားသောအခါအရောင်မှိန်ဖြတ်သန်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:268
+#: ../bin/src/ui_playbacksettingspage.h:301
 msgid "Cross-fade when changing tracks manually"
 msgstr "တေးသံလမ်းကြောများလက်အားသံုးပြောင်းလဲသွားသောအခါအရောင်မှိန်ဖြတ်သန်း"
 
@@ -1435,7 +1440,7 @@ msgstr "ကွန်+တီ"
 msgid "Ctrl+Up"
 msgstr "ကွန်+အပေါ်"
 
-#: ui/equalizer.cpp:108 ../bin/src/ui_lastfmstationdialog.h:98
+#: ui/equalizer.cpp:114 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
 msgstr "စိတ်ကြိုက်"
 
@@ -1459,7 +1464,7 @@ msgstr "စိတ်ကြိုက်..."
 msgid "DBus path"
 msgstr "ဒီဘတ်စ်လမ်းကြောင်း"
 
-#: ui/equalizer.cpp:111
+#: ui/equalizer.cpp:117
 msgid "Dance"
 msgstr "အက"
 
@@ -1524,7 +1529,7 @@ msgid "Delete downloaded data"
 msgstr "ကူးဆွဲပြီးအချက်အလက်ပယ်ဖျက်"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1875 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1878 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "ဖိုင်များပယ်ဖျက်"
 
@@ -1545,7 +1550,7 @@ msgstr "ဖွင့်ပြီးတွဲများပယ်ဖျက်"
 msgid "Delete playlists"
 msgstr "သီချင်းစာရင်းများပယ်ဖျက်"
 
-#: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
+#: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "ကြိုတင်ထိန်းညှိပယ်ဖျက်"
 
@@ -1561,11 +1566,11 @@ msgstr "မူရင်းဖိုင်များပယ်ဖျက်"
 msgid "Deleting files"
 msgstr "ဖိုင်များပယ်ဖျက်နေ"
 
-#: ui/mainwindow.cpp:1358
+#: ui/mainwindow.cpp:1361
 msgid "Dequeue selected tracks"
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများမစီတန်း"
 
-#: ui/mainwindow.cpp:1356
+#: ui/mainwindow.cpp:1359
 msgid "Dequeue track"
 msgstr "တေးသံလမ်းကြောမစီတန်း"
 
@@ -1679,7 +1684,7 @@ msgstr "မရပ်ဆိုင်းနဲ့!"
 
 #: internet/somafmservice.cpp:103
 msgid "Donate"
-msgstr ""
+msgstr "လှုဒါန်း"
 
 #: devices/deviceview.cpp:115
 msgid "Double click to open"
@@ -1779,7 +1784,7 @@ msgstr "ကျပန်းရောသမမွှေအရှင်"
 msgid "Edit smart playlist..."
 msgstr "ချက်ချာသီချင်းစာရင်းပြင်ဆင်..."
 
-#: ui/mainwindow.cpp:1391
+#: ui/mainwindow.cpp:1394
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "အမည်ပြင်ဆင် \"%1\"..."
@@ -1813,7 +1818,7 @@ msgstr "ပြင်ဆင်..."
 msgid "Enable Wii Remote support"
 msgstr "ဝီအဝေးထိန်းအထောက်အကူလုပ်ဆောင်စေ"
 
-#: ../bin/src/ui_equalizer.h:126
+#: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
 msgstr "အသံထိန်းညှိသူလုပ်ဆောင်စေ"
 
@@ -1894,7 +1899,7 @@ msgstr "ကလီမန်တိုင်းသို့ချိတ်ဆက်
 msgid "Entire collection"
 msgstr "စုပေါင်းမှုတစ်ခုလုံး"
 
-#: ../bin/src/ui_equalizer.h:118 ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:693
 msgid "Equalizer"
 msgstr "အသံထိန်းညှိသူ"
 
@@ -1908,7 +1913,7 @@ msgstr "Equivalent to --log-levels *:3တူညီ"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1827 ui/mainwindow.cpp:1943
+#: ui/mainwindow.cpp:1830 ui/mainwindow.cpp:1946
 msgid "Error"
 msgstr "အမှားပြ"
 
@@ -1979,7 +1984,7 @@ msgstr "၆နာရီတိုင်း"
 msgid "Every hour"
 msgstr "နာရီတိုင်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:270
+#: ../bin/src/ui_playbacksettingspage.h:303
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "အယ်လဘမ်တူသို့ကယူးအပြားပေါ်မှတေးသံလမ်းကြောများအကြားမှလွဲ၍"
 
@@ -2022,15 +2027,20 @@ msgstr "အက်ဖ်၈"
 msgid "FLAC"
 msgstr "အက်ဖ်အယ်အေစီ"
 
-#: ../bin/src/ui_playbacksettingspage.h:267
+#: ../bin/src/ui_playbacksettingspage.h:306
+msgid "Fade out on pause / fade in on resume"
+msgstr "ရပ်တန့်နေစဥ်အပြင်သို့အရောင်မှိန်၊ပြန်စလျှင်အတွင်းသို့အရောင်မှိန်"
+
+#: ../bin/src/ui_playbacksettingspage.h:300
 msgid "Fade out when stopping a track"
 msgstr "တေးသံလမ်းကြောရပ်နေစဉ်အပြင်သို့အရောင်မှိန်"
 
-#: ../bin/src/ui_playbacksettingspage.h:266
+#: ../bin/src/ui_playbacksettingspage.h:299
 msgid "Fading"
 msgstr "အရောင်မှိန်"
 
-#: ../bin/src/ui_playbacksettingspage.h:271
+#: ../bin/src/ui_playbacksettingspage.h:304
+#: ../bin/src/ui_playbacksettingspage.h:307
 msgid "Fading duration"
 msgstr "အရောင်မှိန်ကြာချိန်"
 
@@ -2222,19 +2232,19 @@ msgstr "သူငယ်ချင်းများ"
 msgid "Frozen"
 msgstr "လှုပ်မရ"
 
-#: ui/equalizer.cpp:112
+#: ui/equalizer.cpp:118
 msgid "Full Bass"
 msgstr "ဘက်စ်အပြည့်"
 
-#: ui/equalizer.cpp:114
+#: ui/equalizer.cpp:120
 msgid "Full Bass + Treble"
 msgstr "ဘက်စ်အပြည့် + အမြင့်သံ"
 
-#: ui/equalizer.cpp:113
+#: ui/equalizer.cpp:119
 msgid "Full Treble"
 msgstr "အမြင့်သံအပြည့်"
 
-#: ../bin/src/ui_playbacksettingspage.h:283
+#: ../bin/src/ui_playbacksettingspage.h:319
 msgid "GStreamer audio engine"
 msgstr "ဂျီသီချင်းစီးကြောင်းအသံအင်ဂျင်"
 
@@ -2439,12 +2449,12 @@ msgstr "ပုံများ (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "ပုံများ (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 နေ့များအတွင်း"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 အပတ်များအတွင်း"
@@ -2604,11 +2614,11 @@ msgstr "ကြောင်ပေါက်စများ"
 msgid "Language"
 msgstr "ဘာသာစကား"
 
-#: ui/equalizer.cpp:115
+#: ui/equalizer.cpp:121
 msgid "Laptop/Headphones"
 msgstr "လက်ဆွဲကွန်ပျူတာ/နားကြပ်များ"
 
-#: ui/equalizer.cpp:116
+#: ui/equalizer.cpp:122
 msgid "Large Hall"
 msgstr "ခန်းမကြီး"
 
@@ -2695,9 +2705,13 @@ msgstr "လက်စ်.အက်ဖ်အမ်ဝီကီ"
 msgid "Least favourite tracks"
 msgstr "အနှစ်သက်ဆုံးတေးသံလမ်းကြောများအနည်းဆုံး"
 
-#: ../bin/src/ui_playbacksettingspage.h:290
+#: ../bin/src/ui_playbacksettingspage.h:326
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "မူလပံုစံအတွက်အလွတ်ထားရှိပါ။ ဥပမာ: \"/dev/dsp\", \"front\", စသည်ဖြင့်"
+
+#: ../bin/src/ui_equalizer.h:172
+msgid "Left"
+msgstr "ဘယ်"
 
 #: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -2712,7 +2726,7 @@ msgstr "သီချင်းတိုက်"
 msgid "Library advanced grouping"
 msgstr "သီချင်းတိုက်အဆင့်မြင့်အုပ်စုဖွဲ့ခြင်း"
 
-#: ui/mainwindow.cpp:2060
+#: ui/mainwindow.cpp:2063
 msgid "Library rescan notice"
 msgstr "သီချင်းတိုက်ပြန်လည်ဖတ်ရှုအကြောင်းကြားစာ"
 
@@ -2729,7 +2743,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "ယခင်နားဆင်မှုများအပေါ်မူတည်၍ဂရုရှက်သီချင်းများကိုနားဆင်"
 
-#: ui/equalizer.cpp:117
+#: ui/equalizer.cpp:123
 msgid "Live"
 msgstr "တိုက်ရိုက်ထုတ်လွှင့်မှု"
 
@@ -2966,7 +2980,7 @@ msgstr "ပုံစံ"
 msgid "Monitor the library for changes"
 msgstr "သီချင်းတိုက်ပြောင်းလဲမှုများစောင့်ကြည့်"
 
-#: ../bin/src/ui_playbacksettingspage.h:296
+#: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Mono playback"
 msgstr "မိုနိတစ်ခုတည်း"
 
@@ -3013,7 +3027,7 @@ msgstr "သီချင်းတိုက်သို့ရွှေ့..."
 msgid "Move up"
 msgstr "အပေါ်သို့ရွှေ့"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1600
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1603
 msgid "Music"
 msgstr "ဂီတ"
 
@@ -3063,7 +3077,7 @@ msgid "My Recommendations"
 msgstr "ငါ့ထောက်ခံချက်များ"
 
 #: internet/groovesharkservice.cpp:1243 internet/groovesharkservice.cpp:1336
-#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
+#: ui/equalizer.cpp:178 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -3113,7 +3127,7 @@ msgstr "သီချင်းလုံးဝစတင်မဖွင့်"
 msgid "New folder"
 msgstr "ဖိုင်တွဲအသစ်"
 
-#: ui/mainwindow.cpp:1440 ../bin/src/ui_mainwindow.h:698
+#: ui/mainwindow.cpp:1443 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
 msgstr "သီချင်းစာရင်းအသစ်"
 
@@ -3142,7 +3156,7 @@ msgstr "နောက်တစ်ခု"
 msgid "Next track"
 msgstr "နောက်တေးသံလမ်းကြော"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 msgid "Next week"
 msgstr "နောက်အပတ်"
 
@@ -3172,7 +3186,7 @@ msgstr "ဘလောက်တိုများမရှိ"
 msgid "None"
 msgstr "ဘယ်တစ်ခုမျှ"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "ရွေးချယ်ပြီးသီချင်းများတစ်ခုမှပစ္စည်းသို့ကူးယူရန်မသင့်တော်"
 
@@ -3353,7 +3367,7 @@ msgstr "မူရင်းအမည်များ"
 msgid "Other options"
 msgstr "အခြားရွေးပိုင်ခွင့်များ"
 
-#: ../bin/src/ui_playbacksettingspage.h:289
+#: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
 msgstr "ပေးပို့ပစ္စည်း"
 
@@ -3361,7 +3375,7 @@ msgstr "ပေးပို့ပစ္စည်း"
 msgid "Output options"
 msgstr "ပေးပို့ရွေးပိုင်ခွင့်များ"
 
-#: ../bin/src/ui_playbacksettingspage.h:284
+#: ../bin/src/ui_playbacksettingspage.h:320
 msgid "Output plugin"
 msgstr "ပေးပို့ဖြည့်စွက်ပရိုဂရမ်"
 
@@ -3377,7 +3391,7 @@ msgstr "ပိုင်ရှင်"
 msgid "Parsing Jamendo catalogue"
 msgstr "ဂျမန်တိုစာရင်းစစ်ထုတ်ခြင်း"
 
-#: ui/equalizer.cpp:118
+#: ui/equalizer.cpp:124
 msgid "Party"
 msgstr "အဖွဲ့"
 
@@ -3394,7 +3408,7 @@ msgstr "စကားဝှက်"
 msgid "Password Protected"
 msgstr "ကာကွယ်ပြီးစကားဝှက်"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:850 ui/mainwindow.cpp:1281
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "ရပ်တန့်"
@@ -3416,8 +3430,8 @@ msgstr "တင်ဆင်သူ"
 msgid "Plain sidebar"
 msgstr "ဘေးတိုင်ရိုးရိုး"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:489 ui/mainwindow.cpp:818
-#: ui/mainwindow.cpp:837 ui/mainwindow.cpp:1284 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:489 ui/mainwindow.cpp:821
+#: ui/mainwindow.cpp:840 ui/mainwindow.cpp:1287 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3460,7 +3474,7 @@ msgstr "သီချင်းစာရင်းတွင်တေးသံလမ
 msgid "Play/Pause"
 msgstr "ဖွင့်/ရပ်တန့်"
 
-#: ../bin/src/ui_playbacksettingspage.h:264
+#: ../bin/src/ui_playbacksettingspage.h:297
 msgid "Playback"
 msgstr "ပြန်ဖွင့်"
 
@@ -3501,7 +3515,7 @@ msgstr "ဖြည့်စွက်ပရိုဂရမ်အခြေအနေ
 msgid "Podcasts"
 msgstr "ပို့စ်ကဒ်များ"
 
-#: ui/equalizer.cpp:119
+#: ui/equalizer.cpp:125
 msgid "Pop"
 msgstr "ပေါ့ဂီတ"
 
@@ -3526,7 +3540,7 @@ msgstr "ထွက်ပေါ်ကြာချိန်"
 msgid "Port"
 msgstr "နံပါတ်ပေါက်"
 
-#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:281
+#: ui/equalizer.cpp:47 ../bin/src/ui_playbacksettingspage.h:317
 msgid "Pre-amp"
 msgstr "အသံချဲ့အကြို"
 
@@ -3561,7 +3575,7 @@ msgstr "နှစ်သက်သောပုံစံ"
 msgid "Premium audio type"
 msgstr "အရစ်ကျစနစ်အသံအမျိုးအစား"
 
-#: ../bin/src/ui_equalizer.h:119
+#: ../bin/src/ui_equalizer.h:164
 msgid "Preset:"
 msgstr "ကြိုတင်ထိန်းညှိ:"
 
@@ -3635,16 +3649,16 @@ msgstr "ပစ္စည်းမေးမြန်းခြင်း..."
 msgid "Queue Manager"
 msgstr "စီတန်းမန်နေဂျာ"
 
-#: ui/mainwindow.cpp:1362
+#: ui/mainwindow.cpp:1365
 msgid "Queue selected tracks"
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများစီတန်း"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1360
+#: ui/mainwindow.cpp:1363
 msgid "Queue track"
 msgstr "တေးသံလမ်းကြောစီတန်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:278
+#: ../bin/src/ui_playbacksettingspage.h:314
 msgid "Radio (equal loudness for all tracks)"
 msgstr "ရေဒီယို (တေးသံလမ်းကြောများအားလံုးအတွက်တူညီအသံကျယ်ကျယ်)"
 
@@ -3717,7 +3731,7 @@ msgstr "ထုတ်လွှင့်မှုဌာနစာရင်းပြ
 msgid "Refresh streams"
 msgstr "သီချင်းစီးကြောင်းများပြန်လည်"
 
-#: ui/equalizer.cpp:120
+#: ui/equalizer.cpp:126
 msgid "Reggae"
 msgstr "ရက်ပ်ဂယ်"
 
@@ -3817,13 +3831,13 @@ msgstr "သီချင်းစာရင်းအစားထိုး"
 msgid "Replaces spaces with underscores"
 msgstr "ကွက်လပ်များကိုအောက်မျဉ်းများနှင့်အစားထိုး"
 
-#: ../bin/src/ui_playbacksettingspage.h:273
+#: ../bin/src/ui_playbacksettingspage.h:309
 msgid "Replay Gain"
 msgstr "ရီပလေးဂိမ်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:275
+#: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr "ရီပလေးဂိမ်းစနစ်"
+msgstr "ဂိမ်းစနစ်ပြန်ဖွင့်"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3861,7 +3875,11 @@ msgstr "ဂရုရှက်သီချင်းစာရင်းများ
 msgid "Return to Clementine"
 msgstr "ကလီမန်တိုင်းသို့ပြန်သွား"
 
-#: ui/equalizer.cpp:121
+#: ../bin/src/ui_equalizer.h:174
+msgid "Right"
+msgstr "ညာ"
+
+#: ui/equalizer.cpp:127
 msgid "Rock"
 msgstr "ရော့ခ်"
 
@@ -3913,7 +3931,7 @@ msgstr "သီချင်းစာရင်းမှတ်သား"
 msgid "Save playlist..."
 msgstr "သီချင်းစာရင်းမှတ်သား..."
 
-#: ui/equalizer.cpp:172 ../bin/src/ui_equalizer.h:121
+#: ui/equalizer.cpp:178 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "ကြိုတင်ထိန်းညှိမှတ်သား"
 
@@ -4078,7 +4096,7 @@ msgstr "ဆာဗာအသေးစိတ်အကြောင်းအရာမ
 msgid "Service offline"
 msgstr "အောဖ့်လိုင်းဝန်ဆောင်မှု"
 
-#: ui/mainwindow.cpp:1389
+#: ui/mainwindow.cpp:1392
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 မှ \"%2\" ထိန်းညှိ..."
@@ -4114,7 +4132,7 @@ msgstr "ပြသ"
 msgid "Show OSD"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ပြသ"
 
-#: ../bin/src/ui_playbacksettingspage.h:265
+#: ../bin/src/ui_playbacksettingspage.h:298
 msgid "Show a glowing animation on the current track"
 msgstr "လက်ရှိတေးသံလမ်းကြောပေါ်ခပ်မှိန်မှိန်အန်နီမေးရှင်းပြသ"
 
@@ -4247,7 +4265,7 @@ msgstr "အတွင်းသို့ဝင်..."
 msgid "Similar artists"
 msgstr "တူညီအနုပညာရှင်များအားလံုး"
 
-#: ui/equalizer.cpp:123
+#: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "စကာဂီတ"
 
@@ -4279,11 +4297,11 @@ msgstr "ချက်ချာသီချင်းစာရင်း"
 msgid "Smart playlists"
 msgstr "ချက်ချာသီချင်းစာရင်းများ"
 
-#: ui/equalizer.cpp:122
+#: ui/equalizer.cpp:128
 msgid "Soft"
 msgstr "ပျော့"
 
-#: ui/equalizer.cpp:124
+#: ui/equalizer.cpp:130
 msgid "Soft Rock"
 msgstr "ပျော့ရော့ခ်ဂီတ"
 
@@ -4510,7 +4528,7 @@ msgstr "အမည်ရေဒီယို"
 msgid "Target bitrate"
 msgstr "ရည်မှန်းချက်ဘစ်နှုန်း"
 
-#: ui/equalizer.cpp:125
+#: ui/equalizer.cpp:131
 msgid "Techno"
 msgstr "အီလက်ထရွန်နစ်အက"
 
@@ -4559,7 +4577,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "ဆပ်ဆိုးနစ်ဆာဗာအစမ်းသံုးကာလပြီးဆံုး။ လိုင်စင်ကီးရယူရန်ငွေလှုပါ။ အသေးစိတ်အကြောင်းအရာများအတွက် subsonic.org သို့လည်ပတ်ပါ။"
 
-#: ui/mainwindow.cpp:2053
+#: ui/mainwindow.cpp:2056
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4594,7 +4612,7 @@ msgid ""
 "deleted:"
 msgstr "တစ်ချို့သီချင်းများပယ်ဖျက်ရန်ပြသနာတွေ့။ အောက်ဖော်ပြပါဖိုင်များမပယ်ဖျက်နိုင်: "
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1876 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1879 widgets/fileview.cpp:188
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "ဓာတ်ပြားမှယခုဖို်င်များအားလံုးပယ်ဖျက်မည်၊ လုပ်ဆောင်မည်လား?"
@@ -4687,7 +4705,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "ဂရုရှက်ရေဒီယိုမဖွင့်မီတစ်ခြားဂရုရှက်သီချင်းများအနည်းငယ်ကိုအရင်နားဆင်ပါ။"
 
-#: core/utilities.cpp:123 core/utilities.cpp:139
+#: core/utilities.cpp:124 core/utilities.cpp:140
 msgid "Today"
 msgstr "ယနေ့"
 
@@ -4699,7 +4717,7 @@ msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလ
 msgid "Toggle fullscreen"
 msgstr "ဖန်သားပြင်အပြည့်ဖွင့်ပိတ်လုပ်"
 
-#: ui/mainwindow.cpp:1364
+#: ui/mainwindow.cpp:1367
 msgid "Toggle queue status"
 msgstr "စီတန်းအခြေအနေဖွင့်ပိတ်လုပ်"
 
@@ -4711,7 +4729,7 @@ msgstr "သီချင်းနာမည်ပေးပို့ခြင်း
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှမြင်ကွင်းပေါ်ရန်ဖွင့်ပိတ်လုပ်"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:142
 msgid "Tomorrow"
 msgstr "မနက်ဖြန်"
 
@@ -4872,7 +4890,7 @@ msgstr "ဂျီနှုန်းအတိုကောက်ကီးမျာ
 msgid "Use Remotecontrol"
 msgstr "အဝေးထိန်းအသုံးပြု"
 
-#: ../bin/src/ui_playbacksettingspage.h:274
+#: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "ရနိုင်ခဲ့ပါကရီပလေးဂိမ်းအချက်အလက်ဖွဲ့စည်းမှုသံုး"
 
@@ -5109,7 +5127,7 @@ msgid ""
 "well?"
 msgstr "အနုပညာရှင်များအမျိုးမျိုးသို့ယခုအယ်လဘမ်မှတစ်ခြားသီချင်းများကိုရွှေ့"
 
-#: ui/mainwindow.cpp:2058
+#: ui/mainwindow.cpp:2061
 msgid "Would you like to run a full rescan right now?"
 msgstr "ယခုနောက်တစ်ချိန်အပြည့်ပြန်လည်ဖတ်ရှု?"
 
@@ -5137,7 +5155,7 @@ msgstr "နှစ် - အယ်လဘမ်"
 msgid "Years"
 msgstr "နှစ်များ"
 
-#: core/utilities.cpp:125
+#: core/utilities.cpp:126
 msgid "Yesterday"
 msgstr "မနေ့က"
 
@@ -5278,7 +5296,7 @@ msgstr "သင့်အသင်းဝင်အမည်သို့စကား
 msgid "Z-A"
 msgstr "ဇက်-အေ"
 
-#: ui/equalizer.cpp:126
+#: ui/equalizer.cpp:132
 msgid "Zero"
 msgstr "သုည"
 

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-04-16 14:19+0000\n"
+"PO-Revision-Date: 2013-04-27 05:44+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,8 +37,9 @@ msgid " kbps"
 msgstr " kbps"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
-#: ../bin/src/ui_playbacksettingspage.h:272
-#: ../bin/src/ui_playbacksettingspage.h:292
+#: ../bin/src/ui_playbacksettingspage.h:305
+#: ../bin/src/ui_playbacksettingspage.h:308
+#: ../bin/src/ui_playbacksettingspage.h:328
 msgid " ms"
 msgstr " ms"
 
@@ -60,12 +61,12 @@ msgstr " lagu"
 msgid "%1 albums"
 msgstr "%1 album"
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 #, qt-format
 msgid "%1 days"
 msgstr "%1 hari"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 hari yang lalu"
@@ -235,7 +236,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 msgid "1 day"
 msgstr "1 Hari"
 
@@ -412,7 +413,7 @@ msgstr "Tambah stream lainnya..."
 msgid "Add directory..."
 msgstr "Tambah direktori..."
 
-#: ui/mainwindow.cpp:1598
+#: ui/mainwindow.cpp:1601
 msgid "Add file"
 msgstr "Tambah berkas"
 
@@ -424,7 +425,7 @@ msgstr "Tambah berkas..."
 msgid "Add files to transcode"
 msgstr "Tambah berkas untuk ditranskode"
 
-#: ui/mainwindow.cpp:1626
+#: ui/mainwindow.cpp:1629
 msgid "Add folder"
 msgstr "Tambah folder"
 
@@ -528,7 +529,7 @@ msgstr "Tambah ke favorit Grooveshark"
 msgid "Add to Grooveshark playlists"
 msgstr "Tambah ke daftar main Grooveshark"
 
-#: ui/mainwindow.cpp:1423
+#: ui/mainwindow.cpp:1426
 msgid "Add to another playlist"
 msgstr "Tambah ke daftar main lainnya"
 
@@ -598,7 +599,7 @@ msgstr "Setelah menyalin..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:279
+#: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (kenyaringan ideal untuk semua trek)"
 
@@ -732,11 +733,11 @@ msgstr "Tambah ke playlist sementara"
 msgid "Append to the playlist"
 msgstr "Tambah ke playlist"
 
-#: ../bin/src/ui_playbacksettingspage.h:282
+#: ../bin/src/ui_playbacksettingspage.h:318
 msgid "Apply compression to prevent clipping"
 msgstr "Terapkan kompresi untuk mencegah clipping"
 
-#: ui/equalizer.cpp:191
+#: ui/equalizer.cpp:197
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Anda yakin untuk menghapus preset \"%1\"?"
@@ -852,6 +853,10 @@ msgstr "Keburaman Latar Belakang"
 msgid "Backing up database"
 msgstr "Buat cadangan database"
 
+#: ../bin/src/ui_equalizer.h:173
+msgid "Balance"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
 msgstr "Larangan"
@@ -927,11 +932,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Menelusuri..."
 
-#: ../bin/src/ui_playbacksettingspage.h:291
+#: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Buffer duration"
-msgstr "Durasi buffer"
+msgstr ""
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:900
 msgid "Buffering"
 msgstr "Menyangga..."
 
@@ -979,7 +984,7 @@ msgstr "Ubah mode pengacakan"
 msgid "Change the language"
 msgstr "Ganti bahasa"
 
-#: ../bin/src/ui_playbacksettingspage.h:294
+#: ../bin/src/ui_playbacksettingspage.h:330
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -997,7 +1002,7 @@ msgstr "Cek pembaruan..."
 msgid "Choose a name for your smart playlist"
 msgstr "Pilih nama untuk playlist pintar"
 
-#: ../bin/src/ui_playbacksettingspage.h:287
+#: ../bin/src/ui_playbacksettingspage.h:323
 msgid "Choose automatically"
 msgstr "Pilih otomatis"
 
@@ -1026,7 +1031,7 @@ msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr "Pilih situs yang digunakan Clementine saat mencari lirik."
 
-#: ui/equalizer.cpp:109
+#: ui/equalizer.cpp:115
 msgid "Classical"
 msgstr "Klasik"
 
@@ -1155,7 +1160,7 @@ msgstr "Menutup jendela ini akan membatalkan semua download."
 msgid "Closing this window will stop searching for album covers."
 msgstr "Menutup jendela ini akan menghentikan pencarian semua sampul album."
 
-#: ui/equalizer.cpp:110
+#: ui/equalizer.cpp:116
 msgid "Club"
 msgstr "Klub"
 
@@ -1360,11 +1365,11 @@ msgstr "Sampul mulai dari %1"
 msgid "Create a new Grooveshark playlist"
 msgstr "Buat daftar lagu baru Grooveshark"
 
-#: ../bin/src/ui_playbacksettingspage.h:269
+#: ../bin/src/ui_playbacksettingspage.h:302
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Pudaran-suara ketika mengubah trek secara otomatis"
 
-#: ../bin/src/ui_playbacksettingspage.h:268
+#: ../bin/src/ui_playbacksettingspage.h:301
 msgid "Cross-fade when changing tracks manually"
 msgstr "Pudaran-suara ketika mengubah trek secara manual"
 
@@ -1440,7 +1445,7 @@ msgstr "Ctrl+T"
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
-#: ui/equalizer.cpp:108 ../bin/src/ui_lastfmstationdialog.h:98
+#: ui/equalizer.cpp:114 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
 msgstr "Ubahsuaian"
 
@@ -1464,7 +1469,7 @@ msgstr "Ubahsuaian..."
 msgid "DBus path"
 msgstr "Jalur Dbus"
 
-#: ui/equalizer.cpp:111
+#: ui/equalizer.cpp:117
 msgid "Dance"
 msgstr "Dansa"
 
@@ -1529,7 +1534,7 @@ msgid "Delete downloaded data"
 msgstr "Hapus data yang sudah diunduh"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1875 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1878 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Hapus file"
 
@@ -1550,7 +1555,7 @@ msgstr "Hapus episode yang sudah diputar"
 msgid "Delete playlists"
 msgstr "Hapus daftar lagu"
 
-#: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
+#: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Hapus pengaturan sebelumnya"
 
@@ -1566,11 +1571,11 @@ msgstr "Hapus file asli"
 msgid "Deleting files"
 msgstr "Menghapus file"
 
-#: ui/mainwindow.cpp:1358
+#: ui/mainwindow.cpp:1361
 msgid "Dequeue selected tracks"
 msgstr "Batalkan antrian trek terpilih"
 
-#: ui/mainwindow.cpp:1356
+#: ui/mainwindow.cpp:1359
 msgid "Dequeue track"
 msgstr "Batalkan antrian trek"
 
@@ -1784,7 +1789,7 @@ msgstr "Campuran random dinamik"
 msgid "Edit smart playlist..."
 msgstr "Sunting daftar lagu pintar..."
 
-#: ui/mainwindow.cpp:1391
+#: ui/mainwindow.cpp:1394
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Sunting label \" %1\"..."
@@ -1818,7 +1823,7 @@ msgstr "Sunting..."
 msgid "Enable Wii Remote support"
 msgstr "Aktifkan dukungan Remote Wii"
 
-#: ../bin/src/ui_equalizer.h:126
+#: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
 msgstr "Aktifkan ekualiser"
 
@@ -1899,7 +1904,7 @@ msgstr ""
 msgid "Entire collection"
 msgstr "Semua koleksi"
 
-#: ../bin/src/ui_equalizer.h:118 ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:693
 msgid "Equalizer"
 msgstr "Ekualiser"
 
@@ -1913,7 +1918,7 @@ msgstr "Setara dengan --log-level *: 3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1827 ui/mainwindow.cpp:1943
+#: ui/mainwindow.cpp:1830 ui/mainwindow.cpp:1946
 msgid "Error"
 msgstr "Kesalahan"
 
@@ -1984,7 +1989,7 @@ msgstr "Setiap 6 jam"
 msgid "Every hour"
 msgstr "Setiap jam"
 
-#: ../bin/src/ui_playbacksettingspage.h:270
+#: ../bin/src/ui_playbacksettingspage.h:303
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Kecuali antara trek pada album yang sama atau di lembar CUE yang sama"
 
@@ -2027,15 +2032,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:267
+#: ../bin/src/ui_playbacksettingspage.h:306
+msgid "Fade out on pause / fade in on resume"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:300
 msgid "Fade out when stopping a track"
 msgstr "Pudar ketika menghentikan trek"
 
-#: ../bin/src/ui_playbacksettingspage.h:266
+#: ../bin/src/ui_playbacksettingspage.h:299
 msgid "Fading"
 msgstr "Memudar"
 
-#: ../bin/src/ui_playbacksettingspage.h:271
+#: ../bin/src/ui_playbacksettingspage.h:304
+#: ../bin/src/ui_playbacksettingspage.h:307
 msgid "Fading duration"
 msgstr "Durasi memudar"
 
@@ -2227,19 +2237,19 @@ msgstr "Teman"
 msgid "Frozen"
 msgstr "Beku"
 
-#: ui/equalizer.cpp:112
+#: ui/equalizer.cpp:118
 msgid "Full Bass"
 msgstr "Bass Penuh"
 
-#: ui/equalizer.cpp:114
+#: ui/equalizer.cpp:120
 msgid "Full Bass + Treble"
 msgstr "Bass + Treble Penuh"
 
-#: ui/equalizer.cpp:113
+#: ui/equalizer.cpp:119
 msgid "Full Treble"
 msgstr "Treble Penuh"
 
-#: ../bin/src/ui_playbacksettingspage.h:283
+#: ../bin/src/ui_playbacksettingspage.h:319
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio engine"
 
@@ -2444,12 +2454,12 @@ msgstr "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 days"
 msgstr "Dalam %1 hari"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Dalam %1 minggu"
@@ -2609,11 +2619,11 @@ msgstr "Anak kucing"
 msgid "Language"
 msgstr "Bahasa"
 
-#: ui/equalizer.cpp:115
+#: ui/equalizer.cpp:121
 msgid "Laptop/Headphones"
 msgstr "Laptop/Headphone"
 
-#: ui/equalizer.cpp:116
+#: ui/equalizer.cpp:122
 msgid "Large Hall"
 msgstr "Balai Besar"
 
@@ -2700,9 +2710,13 @@ msgstr "Wiki Last.fm"
 msgid "Least favourite tracks"
 msgstr "Trek paling tidak disukai"
 
-#: ../bin/src/ui_playbacksettingspage.h:290
+#: ../bin/src/ui_playbacksettingspage.h:326
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Kosongkan untuk standarnya.  Contoh: \"/dev/dsp\", \"front\", dll."
+
+#: ../bin/src/ui_equalizer.h:172
+msgid "Left"
+msgstr ""
 
 #: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -2717,7 +2731,7 @@ msgstr "Pustaka"
 msgid "Library advanced grouping"
 msgstr "Pengelompokan pustaka lanjutan"
 
-#: ui/mainwindow.cpp:2060
+#: ui/mainwindow.cpp:2063
 msgid "Library rescan notice"
 msgstr "Pemberitahuan pemindaian ulang Pustaka"
 
@@ -2734,7 +2748,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Mendengarkan lagu di Grooveshark berdasarkan jenis lagu yang Anda dengar sebelumnya"
 
-#: ui/equalizer.cpp:117
+#: ui/equalizer.cpp:123
 msgid "Live"
 msgstr "Langsung"
 
@@ -2971,7 +2985,7 @@ msgstr "Model"
 msgid "Monitor the library for changes"
 msgstr "Monitor perubahan pustaka"
 
-#: ../bin/src/ui_playbacksettingspage.h:296
+#: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Mono playback"
 msgstr "Pemutaran mono"
 
@@ -3018,7 +3032,7 @@ msgstr "Pindah ke pustaka..."
 msgid "Move up"
 msgstr "Pindah ke atas"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1600
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1603
 msgid "Music"
 msgstr "Musik"
 
@@ -3068,7 +3082,7 @@ msgid "My Recommendations"
 msgstr "Rekomendasi Saya"
 
 #: internet/groovesharkservice.cpp:1243 internet/groovesharkservice.cpp:1336
-#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
+#: ui/equalizer.cpp:178 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -3118,7 +3132,7 @@ msgstr "Jangan pernah putar"
 msgid "New folder"
 msgstr "Folder baru"
 
-#: ui/mainwindow.cpp:1440 ../bin/src/ui_mainwindow.h:698
+#: ui/mainwindow.cpp:1443 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
 msgstr "Playlist baru"
 
@@ -3147,7 +3161,7 @@ msgstr "Berikut"
 msgid "Next track"
 msgstr "Trek berikutnya"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 msgid "Next week"
 msgstr "Minggu depan"
 
@@ -3177,7 +3191,7 @@ msgstr "Tidak ada blok pendek"
 msgid "None"
 msgstr "Tidak ada"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Tak satu pun dari lagu-lagu yang dipilih cocok untuk disalin ke perangkat"
 
@@ -3358,17 +3372,17 @@ msgstr "Label asli"
 msgid "Other options"
 msgstr "Pilihan lainnya"
 
-#: ../bin/src/ui_playbacksettingspage.h:289
+#: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
-msgstr "Perangkat output"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
 msgstr "Pilihan keluaran"
 
-#: ../bin/src/ui_playbacksettingspage.h:284
+#: ../bin/src/ui_playbacksettingspage.h:320
 msgid "Output plugin"
-msgstr "Pengaya keluaran"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
@@ -3382,7 +3396,7 @@ msgstr "Pemilik"
 msgid "Parsing Jamendo catalogue"
 msgstr "Menguraikan katalog Jamendo"
 
-#: ui/equalizer.cpp:118
+#: ui/equalizer.cpp:124
 msgid "Party"
 msgstr "Pesta"
 
@@ -3399,7 +3413,7 @@ msgstr "Kata sandi"
 msgid "Password Protected"
 msgstr "Kata sandi terproteksi"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:850 ui/mainwindow.cpp:1281
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Jeda"
@@ -3421,8 +3435,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Bilah samping polos"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:489 ui/mainwindow.cpp:818
-#: ui/mainwindow.cpp:837 ui/mainwindow.cpp:1284 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:489 ui/mainwindow.cpp:821
+#: ui/mainwindow.cpp:840 ui/mainwindow.cpp:1287 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3465,7 +3479,7 @@ msgstr "Putar trek ke <n> dalam daftar lagu"
 msgid "Play/Pause"
 msgstr "Putar/Jeda"
 
-#: ../bin/src/ui_playbacksettingspage.h:264
+#: ../bin/src/ui_playbacksettingspage.h:297
 msgid "Playback"
 msgstr "Pemutaran"
 
@@ -3506,7 +3520,7 @@ msgstr "Status plugin:"
 msgid "Podcasts"
 msgstr "Podcast"
 
-#: ui/equalizer.cpp:119
+#: ui/equalizer.cpp:125
 msgid "Pop"
 msgstr "Pop"
 
@@ -3531,7 +3545,7 @@ msgstr "Durasi popup"
 msgid "Port"
 msgstr "Gerbang"
 
-#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:281
+#: ui/equalizer.cpp:47 ../bin/src/ui_playbacksettingspage.h:317
 msgid "Pre-amp"
 msgstr "Pre-amp"
 
@@ -3566,7 +3580,7 @@ msgstr "Lebih disukai format"
 msgid "Premium audio type"
 msgstr "Tipe audio premium"
 
-#: ../bin/src/ui_equalizer.h:119
+#: ../bin/src/ui_equalizer.h:164
 msgid "Preset:"
 msgstr "Pengaturan"
 
@@ -3640,16 +3654,16 @@ msgstr "Query perangkat"
 msgid "Queue Manager"
 msgstr "Manajer antrian"
 
-#: ui/mainwindow.cpp:1362
+#: ui/mainwindow.cpp:1365
 msgid "Queue selected tracks"
 msgstr "Antri trek terpilih"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1360
+#: ui/mainwindow.cpp:1363
 msgid "Queue track"
 msgstr "Antri trek"
 
-#: ../bin/src/ui_playbacksettingspage.h:278
+#: ../bin/src/ui_playbacksettingspage.h:314
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (samakan kenyaringan  untuk semua trek)"
 
@@ -3722,7 +3736,7 @@ msgstr "Segarkan daftar stasiun"
 msgid "Refresh streams"
 msgstr "Segarkan aliran"
 
-#: ui/equalizer.cpp:120
+#: ui/equalizer.cpp:126
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -3822,13 +3836,13 @@ msgstr "Ganti playlist"
 msgid "Replaces spaces with underscores"
 msgstr "Menggantikan spasi dengan garis bawah"
 
-#: ../bin/src/ui_playbacksettingspage.h:273
+#: ../bin/src/ui_playbacksettingspage.h:309
 msgid "Replay Gain"
 msgstr "Penguatan Putar Ulang"
 
-#: ../bin/src/ui_playbacksettingspage.h:275
+#: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr "Mode Penguatan Putar Ulang"
+msgstr ""
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3866,7 +3880,11 @@ msgstr "Mengambil daftar lagu Grooveshark"
 msgid "Return to Clementine"
 msgstr "Kembali ke Clementine"
 
-#: ui/equalizer.cpp:121
+#: ../bin/src/ui_equalizer.h:174
+msgid "Right"
+msgstr ""
+
+#: ui/equalizer.cpp:127
 msgid "Rock"
 msgstr "Rock"
 
@@ -3918,7 +3936,7 @@ msgstr "Simpan playlist"
 msgid "Save playlist..."
 msgstr "Simpan playlist..."
 
-#: ui/equalizer.cpp:172 ../bin/src/ui_equalizer.h:121
+#: ui/equalizer.cpp:178 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Simpan pratinjau"
 
@@ -4083,7 +4101,7 @@ msgstr "Detil-detil server"
 msgid "Service offline"
 msgstr "Layanan offline"
 
-#: ui/mainwindow.cpp:1389
+#: ui/mainwindow.cpp:1392
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Atur %1 to \"%2\"..."
@@ -4119,7 +4137,7 @@ msgstr "Tunjukkan"
 msgid "Show OSD"
 msgstr "Tunjukkan OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:265
+#: ../bin/src/ui_playbacksettingspage.h:298
 msgid "Show a glowing animation on the current track"
 msgstr "Tampilkan animasi bersinar di trek saat ini"
 
@@ -4252,7 +4270,7 @@ msgstr "Masuk"
 msgid "Similar artists"
 msgstr "Artis serupa"
 
-#: ui/equalizer.cpp:123
+#: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "Ska"
 
@@ -4284,11 +4302,11 @@ msgstr "Daftar lagu pintar"
 msgid "Smart playlists"
 msgstr "Daftar lagu pintar"
 
-#: ui/equalizer.cpp:122
+#: ui/equalizer.cpp:128
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:124
+#: ui/equalizer.cpp:130
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -4515,7 +4533,7 @@ msgstr "Label radio"
 msgid "Target bitrate"
 msgstr "Target laju bit"
 
-#: ui/equalizer.cpp:125
+#: ui/equalizer.cpp:131
 msgid "Techno"
 msgstr "Tekno"
 
@@ -4564,7 +4582,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Masa uji coba untuk server Subsonic sudah berakhir. Silakan donasi untuk mendapatkan kunci lisensi. Kunjungi subsonic.org untuk lebih detil."
 
-#: ui/mainwindow.cpp:2053
+#: ui/mainwindow.cpp:2056
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4599,7 +4617,7 @@ msgid ""
 "deleted:"
 msgstr "Ada masalah dalam menghapus beberapa lagu. Berkas-berkas berikut tidak dapat dihapus:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1876 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1879 widgets/fileview.cpp:188
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Berkas-berkas berikut akan dihapus dari media penyimpan, Anda yakin ingin melanjutkan?"
@@ -4692,7 +4710,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Untuk memulai radio Grooveshark, Anda harus terlebih dahulu mendengarkan beberapa lagu Grooveshark lainnya"
 
-#: core/utilities.cpp:123 core/utilities.cpp:139
+#: core/utilities.cpp:124 core/utilities.cpp:140
 msgid "Today"
 msgstr "Hari Ini"
 
@@ -4704,7 +4722,7 @@ msgstr "Aktifkan Pretty OSD"
 msgid "Toggle fullscreen"
 msgstr "Aktifkan layar penuh"
 
-#: ui/mainwindow.cpp:1364
+#: ui/mainwindow.cpp:1367
 msgid "Toggle queue status"
 msgstr "Alihkan status antrian"
 
@@ -4716,7 +4734,7 @@ msgstr "Alihkan scrobbling"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Alihkan visibilitas tampilan layar cantik"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:142
 msgid "Tomorrow"
 msgstr "Besok"
 
@@ -4877,7 +4895,7 @@ msgstr "Gunakan tombol pintas  Gnome"
 msgid "Use Remotecontrol"
 msgstr "Gunakan Remotekontrol"
 
-#: ../bin/src/ui_playbacksettingspage.h:274
+#: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Gunakan metadata penguatan putar ulang jika tersedia"
 
@@ -5114,7 +5132,7 @@ msgid ""
 "well?"
 msgstr "Apakah Anda ingin memindahkan lagu lainnya dalam album ini seperti Beragam Artis?"
 
-#: ui/mainwindow.cpp:2058
+#: ui/mainwindow.cpp:2061
 msgid "Would you like to run a full rescan right now?"
 msgstr "Apakah Anda ingin menjalankan pemindaian ulang penuh sekarang?"
 
@@ -5142,7 +5160,7 @@ msgstr "Tahun - Album"
 msgid "Years"
 msgstr "Tahun"
 
-#: core/utilities.cpp:125
+#: core/utilities.cpp:126
 msgid "Yesterday"
 msgstr "Kemarin"
 
@@ -5283,7 +5301,7 @@ msgstr "Username atau passwor anda salah."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:126
+#: ui/equalizer.cpp:132
 msgid "Zero"
 msgstr "Nol"
 

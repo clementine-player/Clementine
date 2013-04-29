@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-04-16 14:19+0000\n"
+"PO-Revision-Date: 2013-04-27 05:44+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,8 +36,9 @@ msgid " kbps"
 msgstr " ک.ب.د.ث"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
-#: ../bin/src/ui_playbacksettingspage.h:272
-#: ../bin/src/ui_playbacksettingspage.h:292
+#: ../bin/src/ui_playbacksettingspage.h:305
+#: ../bin/src/ui_playbacksettingspage.h:308
+#: ../bin/src/ui_playbacksettingspage.h:328
 msgid " ms"
 msgstr " م.ث"
 
@@ -59,12 +60,12 @@ msgstr " آهنگ‌ها"
 msgid "%1 albums"
 msgstr "%1 آلبوم"
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 #, qt-format
 msgid "%1 days"
 msgstr "%1 روز"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 روز پیش"
@@ -234,7 +235,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 msgid "1 day"
 msgstr "۱ روز"
 
@@ -411,7 +412,7 @@ msgstr "افزودن جریان دیگر..."
 msgid "Add directory..."
 msgstr "افزودن پوشه..."
 
-#: ui/mainwindow.cpp:1598
+#: ui/mainwindow.cpp:1601
 msgid "Add file"
 msgstr "افزودن پرونده"
 
@@ -423,7 +424,7 @@ msgstr "افزودن پرونده..."
 msgid "Add files to transcode"
 msgstr "افزودن پرونده‌ها به تراکد"
 
-#: ui/mainwindow.cpp:1626
+#: ui/mainwindow.cpp:1629
 msgid "Add folder"
 msgstr "افزودن پوشه"
 
@@ -527,7 +528,7 @@ msgstr "افزودن به دلخواه گرووشارک"
 msgid "Add to Grooveshark playlists"
 msgstr "افزودن به لیست‌پخش‌های گرووشارک"
 
-#: ui/mainwindow.cpp:1423
+#: ui/mainwindow.cpp:1426
 msgid "Add to another playlist"
 msgstr "افزودن به لیست‌پخش دیگر"
 
@@ -597,7 +598,7 @@ msgstr "پس از کپی‌کردن..."
 msgid "Album"
 msgstr "آلبوم"
 
-#: ../bin/src/ui_playbacksettingspage.h:279
+#: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Album (ideal loudness for all tracks)"
 msgstr "آلبوم (بلندی صدای ایده‌آل برای همه‌ی ترک‌ها)"
 
@@ -731,11 +732,11 @@ msgstr "پیوست به لیست‌پخش جاری"
 msgid "Append to the playlist"
 msgstr "پیوست به لیست‌پخش"
 
-#: ../bin/src/ui_playbacksettingspage.h:282
+#: ../bin/src/ui_playbacksettingspage.h:318
 msgid "Apply compression to prevent clipping"
 msgstr "فشرده‌سازی برای چیده نشدن"
 
-#: ui/equalizer.cpp:191
+#: ui/equalizer.cpp:197
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "آیا مطمئنید که می‌خواهید پیش‌نشانده‌ی «%1» را پاک کنید؟"
@@ -851,6 +852,10 @@ msgstr "تاری پس‌زمینه"
 msgid "Backing up database"
 msgstr "پشتیبان‌گیری از پایگاه داده"
 
+#: ../bin/src/ui_equalizer.h:173
+msgid "Balance"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
 msgstr "تحریم"
@@ -926,11 +931,11 @@ msgstr "باکس"
 msgid "Browse..."
 msgstr "مرور..."
 
-#: ../bin/src/ui_playbacksettingspage.h:291
+#: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Buffer duration"
-msgstr "مدت میانگیر"
+msgstr ""
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:900
 msgid "Buffering"
 msgstr "میان‌گیری"
 
@@ -978,7 +983,7 @@ msgstr "تغییر سبک درهم"
 msgid "Change the language"
 msgstr "تغییر زبان"
 
-#: ../bin/src/ui_playbacksettingspage.h:294
+#: ../bin/src/ui_playbacksettingspage.h:330
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -996,7 +1001,7 @@ msgstr "بررسی به‌روز رسانی..."
 msgid "Choose a name for your smart playlist"
 msgstr "گزینش نام برای لیست‌پخش هوشمند"
 
-#: ../bin/src/ui_playbacksettingspage.h:287
+#: ../bin/src/ui_playbacksettingspage.h:323
 msgid "Choose automatically"
 msgstr "گزینش خودکار"
 
@@ -1025,7 +1030,7 @@ msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr "پایگاه اینترنتی را برگزینید که می‌خواهید کلمنتاین متن آهنگ‌ها را بارگیری کند"
 
-#: ui/equalizer.cpp:109
+#: ui/equalizer.cpp:115
 msgid "Classical"
 msgstr "کلاسیک"
 
@@ -1154,7 +1159,7 @@ msgstr "بستن این پنجره، بارگیری را کنسل می‌کند.
 msgid "Closing this window will stop searching for album covers."
 msgstr "بستن این پنجره، جستجوی جلد آلبوم‌ها را کنسل می‌کند."
 
-#: ui/equalizer.cpp:110
+#: ui/equalizer.cpp:116
 msgid "Club"
 msgstr "باشگاه"
 
@@ -1359,11 +1364,11 @@ msgstr "جلدها از %1"
 msgid "Create a new Grooveshark playlist"
 msgstr "افزودن لیست‌پخش تازه‌ی گرووشارک"
 
-#: ../bin/src/ui_playbacksettingspage.h:269
+#: ../bin/src/ui_playbacksettingspage.h:302
 msgid "Cross-fade when changing tracks automatically"
 msgstr "پژمردن آهنگ زمانی که ترک‌ها خودکار تغییر می‌کنند"
 
-#: ../bin/src/ui_playbacksettingspage.h:268
+#: ../bin/src/ui_playbacksettingspage.h:301
 msgid "Cross-fade when changing tracks manually"
 msgstr "پژمردن آهنگ زمانی که ترک‌ها دستی تغییر می‌کنند"
 
@@ -1439,7 +1444,7 @@ msgstr "Ctrl+T"
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
-#: ui/equalizer.cpp:108 ../bin/src/ui_lastfmstationdialog.h:98
+#: ui/equalizer.cpp:114 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
 msgstr "سفارشی"
 
@@ -1463,7 +1468,7 @@ msgstr "سفارشی..."
 msgid "DBus path"
 msgstr "مسیر DBus"
 
-#: ui/equalizer.cpp:111
+#: ui/equalizer.cpp:117
 msgid "Dance"
 msgstr "رقص"
 
@@ -1528,7 +1533,7 @@ msgid "Delete downloaded data"
 msgstr "پاک‌کردن دانستنی‌های بارگیری شده"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1875 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1878 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
 
@@ -1549,7 +1554,7 @@ msgstr "پاک‌کردن داستانهای پخش‌شده"
 msgid "Delete playlists"
 msgstr "پاک‌کردن لیست‌پخش‌ها"
 
-#: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
+#: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "پاک کردن پیش‌نشانده"
 
@@ -1565,11 +1570,11 @@ msgstr "پاک کردن اصل پرونده‌ها"
 msgid "Deleting files"
 msgstr "پاک کردن پرونده‌ها"
 
-#: ui/mainwindow.cpp:1358
+#: ui/mainwindow.cpp:1361
 msgid "Dequeue selected tracks"
 msgstr "صف‌بندی دوباره‌ی ترک‌های برگزیده"
 
-#: ui/mainwindow.cpp:1356
+#: ui/mainwindow.cpp:1359
 msgid "Dequeue track"
 msgstr "صف‌بندی دوباره‌ی ترک"
 
@@ -1783,7 +1788,7 @@ msgstr "درهم‌ریختن تصادفی دینامیک"
 msgid "Edit smart playlist..."
 msgstr "ویرایش لیست‌پخش هوشمند..."
 
-#: ui/mainwindow.cpp:1391
+#: ui/mainwindow.cpp:1394
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "ویرایش برچسب \"%1\"..."
@@ -1817,7 +1822,7 @@ msgstr "ویرایش...."
 msgid "Enable Wii Remote support"
 msgstr "پویا‌سازی پشتیبانی کنترل Wii"
 
-#: ../bin/src/ui_equalizer.h:126
+#: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
 msgstr "پویاسازی برابرساز"
 
@@ -1898,7 +1903,7 @@ msgstr ""
 msgid "Entire collection"
 msgstr "همه‌ی مجموعه"
 
-#: ../bin/src/ui_equalizer.h:118 ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:693
 msgid "Equalizer"
 msgstr "برابرساز"
 
@@ -1912,7 +1917,7 @@ msgstr "برابر است با --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1827 ui/mainwindow.cpp:1943
+#: ui/mainwindow.cpp:1830 ui/mainwindow.cpp:1946
 msgid "Error"
 msgstr "خطا"
 
@@ -1983,7 +1988,7 @@ msgstr "هر ۶ ساعت"
 msgid "Every hour"
 msgstr "هر ساعت"
 
-#: ../bin/src/ui_playbacksettingspage.h:270
+#: ../bin/src/ui_playbacksettingspage.h:303
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "به جز بین ترک‌ها یک آلبوم یا یک سیاهه"
 
@@ -2026,15 +2031,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:267
+#: ../bin/src/ui_playbacksettingspage.h:306
+msgid "Fade out on pause / fade in on resume"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:300
 msgid "Fade out when stopping a track"
 msgstr "پژمردن هنگام ایست یک ترک"
 
-#: ../bin/src/ui_playbacksettingspage.h:266
+#: ../bin/src/ui_playbacksettingspage.h:299
 msgid "Fading"
 msgstr "پژمردن"
 
-#: ../bin/src/ui_playbacksettingspage.h:271
+#: ../bin/src/ui_playbacksettingspage.h:304
+#: ../bin/src/ui_playbacksettingspage.h:307
 msgid "Fading duration"
 msgstr "زمان پژمردن"
 
@@ -2226,19 +2236,19 @@ msgstr "دوستان"
 msgid "Frozen"
 msgstr "منجمد"
 
-#: ui/equalizer.cpp:112
+#: ui/equalizer.cpp:118
 msgid "Full Bass"
 msgstr "باس کامل"
 
-#: ui/equalizer.cpp:114
+#: ui/equalizer.cpp:120
 msgid "Full Bass + Treble"
 msgstr "باس کامل + لرزش"
 
-#: ui/equalizer.cpp:113
+#: ui/equalizer.cpp:119
 msgid "Full Treble"
 msgstr "لرزش کامل"
 
-#: ../bin/src/ui_playbacksettingspage.h:283
+#: ../bin/src/ui_playbacksettingspage.h:319
 msgid "GStreamer audio engine"
 msgstr "موتور آوای GStreamer"
 
@@ -2443,12 +2453,12 @@ msgstr "تصاویر (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.x
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "تصاویر (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 days"
 msgstr "در %1 روز "
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 #, qt-format
 msgid "In %1 weeks"
 msgstr "در %1 هفته"
@@ -2608,11 +2618,11 @@ msgstr "توله گربه‌ها"
 msgid "Language"
 msgstr "زبان"
 
-#: ui/equalizer.cpp:115
+#: ui/equalizer.cpp:121
 msgid "Laptop/Headphones"
 msgstr "لپتاپ/هدفون"
 
-#: ui/equalizer.cpp:116
+#: ui/equalizer.cpp:122
 msgid "Large Hall"
 msgstr "سالن بزرگ"
 
@@ -2699,9 +2709,13 @@ msgstr "ویکی لست‌‌اف‌ام"
 msgid "Least favourite tracks"
 msgstr "ترک‌های کمتر برگزیده"
 
-#: ../bin/src/ui_playbacksettingspage.h:290
+#: ../bin/src/ui_playbacksettingspage.h:326
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "برای پیش‌نشان، تهی رها کنید. مثال:   \"/dev/dsp\"، \"front\"، و ..."
+
+#: ../bin/src/ui_equalizer.h:172
+msgid "Left"
+msgstr ""
 
 #: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -2716,7 +2730,7 @@ msgstr "کتابخانه"
 msgid "Library advanced grouping"
 msgstr "گروه‌بندی پیشرفته‌ی کتابخانه"
 
-#: ui/mainwindow.cpp:2060
+#: ui/mainwindow.cpp:2063
 msgid "Library rescan notice"
 msgstr "آگاه‌سازی پویش دوباره‌ی کتابخانه"
 
@@ -2733,7 +2747,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "شنیدن آهنگ‌های گرووشارک برپایه‌ی چیزهایی که پیش از این شنیده‌اید"
 
-#: ui/equalizer.cpp:117
+#: ui/equalizer.cpp:123
 msgid "Live"
 msgstr "زنده"
 
@@ -2970,7 +2984,7 @@ msgstr "مدل"
 msgid "Monitor the library for changes"
 msgstr "رسد کتابخانه برای تغییرات"
 
-#: ../bin/src/ui_playbacksettingspage.h:296
+#: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Mono playback"
 msgstr "پخش مونو"
 
@@ -3017,7 +3031,7 @@ msgstr "جابه‌جایی به کتابخانه..."
 msgid "Move up"
 msgstr "بالا بردن"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1600
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1603
 msgid "Music"
 msgstr "آهنگ"
 
@@ -3067,7 +3081,7 @@ msgid "My Recommendations"
 msgstr "پیشنهادهای من"
 
 #: internet/groovesharkservice.cpp:1243 internet/groovesharkservice.cpp:1336
-#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
+#: ui/equalizer.cpp:178 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -3117,7 +3131,7 @@ msgstr "هرگز آغاز به پخش نمی‌کند"
 msgid "New folder"
 msgstr "پوشه‌ی تازه"
 
-#: ui/mainwindow.cpp:1440 ../bin/src/ui_mainwindow.h:698
+#: ui/mainwindow.cpp:1443 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
 msgstr "لیست‌پخش تازه"
 
@@ -3146,7 +3160,7 @@ msgstr "پسین"
 msgid "Next track"
 msgstr "ترک پسین"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 msgid "Next week"
 msgstr "هفته‌ی پسین"
 
@@ -3176,7 +3190,7 @@ msgstr "بدون بلوک‌های کوتاه"
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های برگزیده مناسب کپی کردن در دستگاه نیستند"
 
@@ -3357,17 +3371,17 @@ msgstr "برچسب‌های اصلی"
 msgid "Other options"
 msgstr "گزینه‌های دیگر"
 
-#: ../bin/src/ui_playbacksettingspage.h:289
+#: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
-msgstr "دستگاه بروندادی"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
 msgstr "گزینه‌های بروندادی"
 
-#: ../bin/src/ui_playbacksettingspage.h:284
+#: ../bin/src/ui_playbacksettingspage.h:320
 msgid "Output plugin"
-msgstr "افزونه‌ی بروندادی"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
@@ -3381,7 +3395,7 @@ msgstr "دارنده"
 msgid "Parsing Jamendo catalogue"
 msgstr "بررسی کاتالوگ جامندو"
 
-#: ui/equalizer.cpp:118
+#: ui/equalizer.cpp:124
 msgid "Party"
 msgstr "مهمانی"
 
@@ -3398,7 +3412,7 @@ msgstr "گذرواژه"
 msgid "Password Protected"
 msgstr "نگهبانی گذرواژه"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:850 ui/mainwindow.cpp:1281
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "درنگ"
@@ -3420,8 +3434,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "میله‌کنار ساده"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:489 ui/mainwindow.cpp:818
-#: ui/mainwindow.cpp:837 ui/mainwindow.cpp:1284 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:489 ui/mainwindow.cpp:821
+#: ui/mainwindow.cpp:840 ui/mainwindow.cpp:1287 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3464,7 +3478,7 @@ msgstr "ترک <n>-ام در لیست‌پخش را پخش کن"
 msgid "Play/Pause"
 msgstr "پخش/درنگ"
 
-#: ../bin/src/ui_playbacksettingspage.h:264
+#: ../bin/src/ui_playbacksettingspage.h:297
 msgid "Playback"
 msgstr "بازپخش"
 
@@ -3505,7 +3519,7 @@ msgstr "وضعیت افزونه"
 msgid "Podcasts"
 msgstr "پادکست"
 
-#: ui/equalizer.cpp:119
+#: ui/equalizer.cpp:125
 msgid "Pop"
 msgstr "پاپ"
 
@@ -3530,7 +3544,7 @@ msgstr "پنجرک"
 msgid "Port"
 msgstr "درگاه"
 
-#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:281
+#: ui/equalizer.cpp:47 ../bin/src/ui_playbacksettingspage.h:317
 msgid "Pre-amp"
 msgstr "پیش‌تقویت"
 
@@ -3565,7 +3579,7 @@ msgstr "فرمت دلخواه"
 msgid "Premium audio type"
 msgstr "سبک آوایی برتر"
 
-#: ../bin/src/ui_equalizer.h:119
+#: ../bin/src/ui_equalizer.h:164
 msgid "Preset:"
 msgstr "پیش‌نشانده:"
 
@@ -3639,16 +3653,16 @@ msgstr "جستجوی دستگاه..."
 msgid "Queue Manager"
 msgstr "مدیر به‌خط کردن"
 
-#: ui/mainwindow.cpp:1362
+#: ui/mainwindow.cpp:1365
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن ترک‌های گزیده"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1360
+#: ui/mainwindow.cpp:1363
 msgid "Queue track"
 msgstr "به‌خط کردن ترک"
 
-#: ../bin/src/ui_playbacksettingspage.h:278
+#: ../bin/src/ui_playbacksettingspage.h:314
 msgid "Radio (equal loudness for all tracks)"
 msgstr "رادیو (بلندی یکسان برای همه‌ی ترک‌ها)"
 
@@ -3721,7 +3735,7 @@ msgstr "بازخوانی لیست ایستگاه‌ها"
 msgid "Refresh streams"
 msgstr "نوسازی جریان‌ها"
 
-#: ui/equalizer.cpp:120
+#: ui/equalizer.cpp:126
 msgid "Reggae"
 msgstr "رگه"
 
@@ -3821,13 +3835,13 @@ msgstr "دوباره جانشانی لیست‌پخش شود"
 msgid "Replaces spaces with underscores"
 msgstr "فاصله‌ها را با زیرخط جانشانی کن"
 
-#: ../bin/src/ui_playbacksettingspage.h:273
+#: ../bin/src/ui_playbacksettingspage.h:309
 msgid "Replay Gain"
 msgstr "پخش دوباره‌ی دستاورد"
 
-#: ../bin/src/ui_playbacksettingspage.h:275
+#: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr "پخش دوباره‌ی سبک دستاورد"
+msgstr ""
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3865,7 +3879,11 @@ msgstr "بازبینی لیست‌پخش‌های گرووشارک"
 msgid "Return to Clementine"
 msgstr "برگشتن به کلمنتاین"
 
-#: ui/equalizer.cpp:121
+#: ../bin/src/ui_equalizer.h:174
+msgid "Right"
+msgstr ""
+
+#: ui/equalizer.cpp:127
 msgid "Rock"
 msgstr "راک"
 
@@ -3917,7 +3935,7 @@ msgstr "ذخیره‌ی لیست‌پخش"
 msgid "Save playlist..."
 msgstr "ذخیره‌ی لیست‌پخش..."
 
-#: ui/equalizer.cpp:172 ../bin/src/ui_equalizer.h:121
+#: ui/equalizer.cpp:178 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "ذخیره‌ی بازنشانده"
 
@@ -4082,7 +4100,7 @@ msgstr "جزئیات سرور"
 msgid "Service offline"
 msgstr "سرویس برون‌خط"
 
-#: ui/mainwindow.cpp:1389
+#: ui/mainwindow.cpp:1392
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 را برابر \"%2‌\"قرار بده..."
@@ -4118,7 +4136,7 @@ msgstr "نمایش"
 msgid "Show OSD"
 msgstr "نمایش OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:265
+#: ../bin/src/ui_playbacksettingspage.h:298
 msgid "Show a glowing animation on the current track"
 msgstr "انیمیشنی درخشان در ترک جاری نمایش بده"
 
@@ -4251,7 +4269,7 @@ msgstr "ورود به ..."
 msgid "Similar artists"
 msgstr "هنرمندان مشابه"
 
-#: ui/equalizer.cpp:123
+#: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "Ska"
 
@@ -4283,11 +4301,11 @@ msgstr "لیست‌پخش هوشمند"
 msgid "Smart playlists"
 msgstr "لیست‌پخش‌های هوشمند"
 
-#: ui/equalizer.cpp:122
+#: ui/equalizer.cpp:128
 msgid "Soft"
 msgstr "ملایم"
 
-#: ui/equalizer.cpp:124
+#: ui/equalizer.cpp:130
 msgid "Soft Rock"
 msgstr "راک ملایم"
 
@@ -4514,7 +4532,7 @@ msgstr "برچسب رادیو"
 msgid "Target bitrate"
 msgstr "ضرباهنگ هدف"
 
-#: ui/equalizer.cpp:125
+#: ui/equalizer.cpp:131
 msgid "Techno"
 msgstr "تکنو"
 
@@ -4563,7 +4581,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "زمان آزمایشی سرور ساب‌سونیک پایان یافته است. خواهش می‌کنیم هزینه‌ای را کمک کنید تا کلید پروانه را دریافت کنید. برای راهنمایی انجام کار تارنمای subsonic.org را ببینید."
 
-#: ui/mainwindow.cpp:2053
+#: ui/mainwindow.cpp:2056
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4598,7 +4616,7 @@ msgid ""
 "deleted:"
 msgstr "مشکلی در پاک کردن تعدادی از آهنگ‌ها وجود داشت. پرونده‌های زیر پاک نشدند:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1876 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1879 widgets/fileview.cpp:188
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "این پرونده‌ها از دیسک پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
@@ -4691,7 +4709,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "برای راه‌اندازی رادیوی گرووشارک، ابتدا باید چند آهنگ دیگر از گرووشارک را بشنوید"
 
-#: core/utilities.cpp:123 core/utilities.cpp:139
+#: core/utilities.cpp:124 core/utilities.cpp:140
 msgid "Today"
 msgstr "امروز"
 
@@ -4703,7 +4721,7 @@ msgstr "تبدیل به OSD زیبا"
 msgid "Toggle fullscreen"
 msgstr "تبدیل به تمام‌صفحه"
 
-#: ui/mainwindow.cpp:1364
+#: ui/mainwindow.cpp:1367
 msgid "Toggle queue status"
 msgstr "تبدیل به وضعیت صف"
 
@@ -4715,7 +4733,7 @@ msgstr "تبدیل به وارانی"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "تبدیل به پدیداری برای نمایش‌برصفحه‌ی زیبا"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:142
 msgid "Tomorrow"
 msgstr "فردا"
 
@@ -4876,7 +4894,7 @@ msgstr "بکار بردن کلیدهای میان‌بر گنوم"
 msgid "Use Remotecontrol"
 msgstr "استفاده از کنترل از راه دور"
 
-#: ../bin/src/ui_playbacksettingspage.h:274
+#: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "در صورت وجود، از ابرداده‌ی  Replay Gain استفاده کن"
 
@@ -5113,7 +5131,7 @@ msgid ""
 "well?"
 msgstr "آیا می‌خواهید آهنگ‌های دیگر در این آلبوم را به «هنرمندان گوناگون» تراببرید؟"
 
-#: ui/mainwindow.cpp:2058
+#: ui/mainwindow.cpp:2061
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
 
@@ -5141,7 +5159,7 @@ msgstr "سال - آلبوم"
 msgid "Years"
 msgstr "سال"
 
-#: core/utilities.cpp:125
+#: core/utilities.cpp:126
 msgid "Yesterday"
 msgstr "دیروز"
 
@@ -5282,7 +5300,7 @@ msgstr "شناسه یا گذرواژه نادرست است."
 msgid "Z-A"
 msgstr "ی-ا"
 
-#: ui/equalizer.cpp:126
+#: ui/equalizer.cpp:132
 msgid "Zero"
 msgstr "صفر"
 
