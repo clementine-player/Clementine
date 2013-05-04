@@ -23,6 +23,7 @@
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
+#include "core/utilities.h"
 
 bool MoodbarPipeline::sIsAvailable = false;
 
@@ -73,6 +74,8 @@ GstElement* MoodbarPipeline::CreateElement(const QString& factory_name) {
 
 void MoodbarPipeline::Start() {
   Q_ASSERT(QThread::currentThread() != qApp->thread());
+
+  Utilities::SetThreadIOPriority(Utilities::IOPRIO_CLASS_IDLE);
 
   if (pipeline_) {
     return;

@@ -111,7 +111,7 @@ MoodbarLoader::Result MoodbarLoader::Load(
   }
 
   if (!thread_->isRunning())
-    thread_->start();
+    thread_->start(QThread::IdlePriority);
 
   // There was no existing file, analyze the audio file and create one.
   MoodbarPipeline* pipeline = new MoodbarPipeline(url);
