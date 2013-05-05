@@ -57,6 +57,13 @@
       <item row="0" column="1" colspan="2">
        <widget class="QLineEdit" name="server"/>
       </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="usesslv3">
+        <property name="text">
+         <string>Use SSLv3</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="2">
        <widget class="QPushButton" name="login">
         <property name="text">
@@ -94,6 +101,7 @@
   <tabstop>server</tabstop>
   <tabstop>username</tabstop>
   <tabstop>password</tabstop>
+  <tabstop>usesslv3</tabstop>
   <tabstop>login</tabstop>
  </tabstops>
  <resources/>

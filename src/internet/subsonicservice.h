@@ -68,7 +68,7 @@ class SubsonicService : public InternetService
 
   void Login();
   void Login(
-      const QString &server, const QString &username, const QString &password);
+      const QString &server, const QString &username, const QString &password, const bool &usesslv3);
   LoginState login_state() const { return login_state_; }
 
   // Subsonic API methods
@@ -111,6 +111,7 @@ class SubsonicService : public InternetService
   QString server_;
   QString username_;
   QString password_;
+  bool usesslv3_;
 
   LoginState login_state_;
 
