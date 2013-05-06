@@ -114,10 +114,12 @@ set(SOURCES
   core/urlhandler.cpp
   core/utilities.cpp
 
+  covers/albumcoverexporter.cpp
   covers/albumcoverfetcher.cpp
   covers/albumcoverfetchersearch.cpp
   covers/albumcoverloader.cpp
   covers/amazoncoverprovider.cpp
+  covers/coverexportrunnable.cpp
   covers/coverprovider.cpp
   covers/coverproviders.cpp
   covers/coversearchstatistics.cpp
@@ -321,6 +323,7 @@ set(SOURCES
   ui/about.cpp
   ui/addstreamdialog.cpp
   ui/albumcoverchoicecontroller.cpp
+  ui/albumcoverexport.cpp
   ui/albumcovermanager.cpp
   ui/albumcovermanagerlist.cpp
   ui/albumcoversearcher.cpp
@@ -417,10 +420,12 @@ set(HEADERS
   core/taskmanager.h
   core/urlhandler.h
 
+  covers/albumcoverexporter.h
   covers/albumcoverfetcher.h
   covers/albumcoverfetchersearch.h
   covers/albumcoverloader.h
   covers/amazoncoverprovider.h
+  covers/coverexportrunnable.h
   covers/coverprovider.h
   covers/coverproviders.h
   covers/coversearchstatisticsdialog.h
@@ -590,6 +595,7 @@ set(HEADERS
   ui/about.h
   ui/addstreamdialog.h
   ui/albumcoverchoicecontroller.h
+  ui/albumcoverexport.h
   ui/albumcovermanager.h
   ui/albumcovermanagerlist.h
   ui/albumcoversearcher.h
@@ -711,6 +717,7 @@ set(UI
 
   ui/about.ui
   ui/addstreamdialog.ui
+  ui/albumcoverexport.ui
   ui/albumcovermanager.ui
   ui/albumcoversearcher.ui
   ui/appearancesettingspage.ui

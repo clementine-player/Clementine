@@ -29,6 +29,8 @@
 #include "covers/coversearchstatistics.h"
 
 class AlbumCoverChoiceController;
+class AlbumCoverExport;
+class AlbumCoverExporter;
 class AlbumCoverFetcher;
 class AlbumCoverSearcher;
 class Application;
@@ -39,6 +41,7 @@ class Ui_CoverManager;
 class QListWidgetItem;
 class QMenu;
 class QNetworkAccessManager;
+class QPushButton;
 class QProgressBar;
 
 class AlbumCoverManager : public QMainWindow {
@@ -58,7 +61,8 @@ class AlbumCoverManager : public QMainWindow {
   void Reset();
   void Init();
 
-  void ResetFetchCoversButton();
+  void EnableCoversButtons();
+  void DisableCoversButtons();
 
   SongList GetSongsInAlbum(const QModelIndex& index) const;
   SongList GetSongsInAlbums(const QModelIndexList& indexes) const;
@@ -79,8 +83,10 @@ class AlbumCoverManager : public QMainWindow {
   void CoverImageLoaded(quint64 id, const QImage& image);
   void UpdateFilter();
   void FetchAlbumCovers();
+  void ExportCovers();
   void AlbumCoverFetched(quint64 id, const QImage& image,
                          const CoverSearchStatistics& statistics);
+  void CancelRequests();
 
   // On the context menu
   void FetchSingleCover();
@@ -98,6 +104,7 @@ class AlbumCoverManager : public QMainWindow {
   void LoadSelectedToPlaylist();
 
   void UpdateCoverInList(QListWidgetItem* item, const QString& cover);
+  void UpdateExportStatus(int exported, int bad, int count);
 
  private:
   enum ArtistItemType {
@@ -133,8 +140,6 @@ class AlbumCoverManager : public QMainWindow {
 
   Song ItemAsSong(QListWidgetItem* item);
 
-  void CancelRequests();
-
   void UpdateStatusText();
   bool ShouldHide(const QListWidgetItem& item, const QString& filter, HideCovers hide) const;
   void SaveAndSetCover(QListWidgetItem* item, const QImage& image);
@@ -157,6 +162,8 @@ class AlbumCoverManager : public QMainWindow {
   CoverSearchStatistics fetch_statistics_;
 
   AlbumCoverSearcher* cover_searcher_;
+  AlbumCoverExport* cover_export_;
+  AlbumCoverExporter* cover_exporter_;
 
   QIcon artist_icon_;
   QIcon all_artists_icon_;
@@ -167,6 +174,7 @@ class AlbumCoverManager : public QMainWindow {
   QList<QListWidgetItem*> context_menu_items_;
 
   QProgressBar* progress_bar_;
+  QPushButton* abort_progress_;
   int jobs_;
 
   LibraryBackend* library_backend_;

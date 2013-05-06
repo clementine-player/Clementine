@@ -22,6 +22,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/utilities.h"
+#include "covers/albumcoverexporter.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
@@ -32,8 +33,10 @@
 #include "playlist/songmimedata.h"
 #include "widgets/forcescrollperpixel.h"
 #include "ui/albumcoverchoicecontroller.h"
+#include "ui/albumcoverexport.h"
 
 #include <QActionGroup>
+#include <QPushButton>
 #include <QContextMenuEvent>
 #include <QEvent>
 #include <QFileDialog>
@@ -60,10 +63,13 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     cover_fetcher_(new AlbumCoverFetcher(app_->cover_providers(), this, network)),
     cover_searcher_(NULL),
+    cover_export_(NULL),
+    cover_exporter_(new AlbumCoverExporter(this)),
     artist_icon_(IconLoader::Load("x-clementine-artist")),
     all_artists_icon_(IconLoader::Load("x-clementine-album")),
     context_menu_(new QMenu(this)),
     progress_bar_(new QProgressBar(this)),
+    abort_progress_(new QPushButton(this)),
     jobs_(0),
     library_backend_(library_backend)
 {
@@ -72,6 +78,7 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
 
   // Icons
   ui_->action_fetch->setIcon(IconLoader::Load("download"));
+  ui_->export_covers->setIcon(IconLoader::Load("document-save"));
   ui_->view->setIcon(IconLoader::Load("view-choose"));
   ui_->fetch->setIcon(IconLoader::Load("download"));
   ui_->action_add_to_playlist->setIcon(IconLoader::Load("media-playback-start"));
@@ -91,10 +98,15 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
   no_cover_icon_ = QPixmap::fromImage(square_nocover);
 
   cover_searcher_ = new AlbumCoverSearcher(no_cover_icon_, app_, this);
+  cover_export_ = new AlbumCoverExport(this);
 
   // Set up the status bar
   statusBar()->addPermanentWidget(progress_bar_);
+  statusBar()->addPermanentWidget(abort_progress_);
   progress_bar_->hide();
+  abort_progress_->hide();
+  abort_progress_->setText(tr("Abort"));
+  connect(abort_progress_, SIGNAL(clicked()), this, SLOT(CancelRequests()));
 
   ui_->albums->setAttribute(Qt::WA_MacShowFocusRect, false);
   ui_->artists->setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -102,7 +114,7 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
   QShortcut* close = new QShortcut(QKeySequence::Close, this);
   connect(close, SIGNAL(activated()), SLOT(close()));
 
-  ResetFetchCoversButton();
+  EnableCoversButtons();
 }
 
 AlbumCoverManager::~AlbumCoverManager() {
@@ -149,6 +161,9 @@ void AlbumCoverManager::Init() {
   connect(album_cover_choice_controller_->show_cover_action(),
           SIGNAL(triggered()), this, SLOT(ShowCover()));
 
+  connect(cover_exporter_, SIGNAL(AlbumCoversExportUpdate(int, int, int)),
+          SLOT(UpdateExportStatus(int, int, int)));
+
   context_menu_->addActions(actions);
   context_menu_->addSeparator();
   context_menu_->addAction(ui_->action_load);
@@ -163,6 +178,7 @@ void AlbumCoverManager::Init() {
   connect(filter_group, SIGNAL(triggered(QAction*)), SLOT(UpdateFilter()));
   connect(ui_->view, SIGNAL(clicked()), ui_->view, SLOT(showMenu()));
   connect(ui_->fetch, SIGNAL(clicked()), SLOT(FetchAlbumCovers()));
+  connect(ui_->export_covers, SIGNAL(clicked()), SLOT(ExportCovers()));
   connect(cover_fetcher_, SIGNAL(AlbumCoverFetched(quint64,QImage,CoverSearchStatistics)),
           SLOT(AlbumCoverFetched(quint64,QImage,CoverSearchStatistics)));
   connect(ui_->action_fetch, SIGNAL(triggered()), SLOT(FetchSingleCover()));
@@ -223,11 +239,14 @@ void AlbumCoverManager::CancelRequests() {
         QSet<quint64>::fromList(cover_loading_tasks_.keys()));
   cover_loading_tasks_.clear();
 
+  cover_exporter_->Cancel();
+
   cover_fetching_tasks_.clear();
   cover_fetcher_->Clear();
   progress_bar_->hide();
+  abort_progress_->hide();
   statusBar()->clearMessage();
-  ResetFetchCoversButton();
+  EnableCoversButtons();
 }
 
 static bool CompareNocase(const QString& left, const QString& right) {
@@ -240,7 +259,7 @@ static bool CompareAlbumNameNocase(const LibraryBackend::Album& left,
 }
 
 void AlbumCoverManager::Reset() {
-  ResetFetchCoversButton();
+  EnableCoversButtons();
 
   ui_->artists->clear();
   new QListWidgetItem(all_artists_icon_, tr("All artists"), ui_->artists, All_Artists);
@@ -257,8 +276,14 @@ void AlbumCoverManager::Reset() {
   }
 }
 
-void AlbumCoverManager::ResetFetchCoversButton() {
+void AlbumCoverManager::EnableCoversButtons() {
   ui_->fetch->setEnabled(app_->cover_providers()->HasAnyProviders());
+  ui_->export_covers->setEnabled(true);
+}
+
+void AlbumCoverManager::DisableCoversButtons() {
+  ui_->fetch->setEnabled(false);
+  ui_->export_covers->setEnabled(false);
 }
 
 void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
@@ -338,10 +363,24 @@ void AlbumCoverManager::UpdateFilter() {
     hide = Hide_WithoutCovers;
   }
 
+  qint32 total_count = 0;
+  qint32 without_cover = 0;
+
   for (int i = 0; i < ui_->albums->count(); ++i) {
     QListWidgetItem* item = ui_->albums->item(i);
-    item->setHidden(ShouldHide(*item, filter, hide));
+    bool should_hide = ShouldHide(*item, filter, hide);
+    item->setHidden(should_hide);
+
+    if (!should_hide) {
+      total_count++;
+      if (item->icon().cacheKey() == no_cover_icon_.cacheKey()) {
+        without_cover++;
+      }
+    }
   }
+
+  ui_->total_albums->setText(QString::number(total_count));
+  ui_->without_cover->setText(QString::number(without_cover));
 }
 
 bool AlbumCoverManager::ShouldHide(
@@ -387,6 +426,7 @@ void AlbumCoverManager::FetchAlbumCovers() {
 
   progress_bar_->setMaximum(jobs_);
   progress_bar_->show();
+  abort_progress_->show();
   fetch_statistics_ = CoverSearchStatistics();
   UpdateStatusText();
 }
@@ -402,7 +442,7 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage& image,
   }
 
   if (cover_fetching_tasks_.isEmpty()) {
-    ResetFetchCoversButton();
+    EnableCoversButtons();
   }
 
   fetch_statistics_ += statistics;
@@ -427,6 +467,7 @@ void AlbumCoverManager::UpdateStatusText() {
   if (cover_fetching_tasks_.isEmpty()) {
     QTimer::singleShot(2000, statusBar(), SLOT(clearMessage()));
     progress_bar_->hide();
+    abort_progress_->hide();
 
     CoverSearchStatisticsDialog* dialog = new CoverSearchStatisticsDialog(this);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
@@ -516,6 +557,7 @@ void AlbumCoverManager::FetchSingleCover() {
 
   progress_bar_->setMaximum(jobs_);
   progress_bar_->show();
+  abort_progress_->show();
   UpdateStatusText();
 }
 
@@ -700,4 +742,57 @@ void AlbumCoverManager::SaveAndSetCover(QListWidgetItem *item, const QImage &ima
         cover_loader_options_, QString(), path);
   item->setData(Role_PathManual, path);
   cover_loading_tasks_[id] = item;
+}
+
+void AlbumCoverManager::ExportCovers() {
+  AlbumCoverExport::DialogResult result = cover_export_->Exec();
+
+  if(result.cancelled_) {
+    return;
+  }
+
+  DisableCoversButtons();
+
+  cover_exporter_->SetDialogResult(result);
+
+  for (int i=0 ; i<ui_->albums->count() ; ++i) {
+    QListWidgetItem* item = ui_->albums->item(i);
+
+    // skip hidden and coverless albums
+    if (item->isHidden() || item->icon().cacheKey() == no_cover_icon_.cacheKey()) {
+      continue;
+    }
+
+    cover_exporter_->AddExportRequest(ItemAsSong(item));
+  }
+
+  progress_bar_->setMaximum(cover_exporter_->request_count());
+  progress_bar_->show();
+  abort_progress_->show();
+
+  cover_exporter_->StartExporting();
+}
+
+void AlbumCoverManager::UpdateExportStatus(int exported, int skipped, int max) {
+  progress_bar_->setValue(exported);
+
+  QString message = tr("Exported %1 covers out of %2 (%3 skipped)")
+                      .arg(exported)
+                      .arg(max)
+                      .arg(skipped);
+  statusBar()->showMessage(message);
+
+  // end of the current process
+  if(exported + skipped >= max) {
+    QTimer::singleShot(2000, statusBar(), SLOT(clearMessage()));
+
+    progress_bar_->hide();
+    abort_progress_->hide();
+    EnableCoversButtons();
+
+    QMessageBox msg;
+    msg.setWindowTitle(tr("Export finished"));
+    msg.setText(message);
+    msg.exec();
+  }
 }
