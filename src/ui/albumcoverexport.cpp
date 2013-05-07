@@ -58,7 +58,7 @@ AlbumCoverExport::DialogResult AlbumCoverExport::Exec() {
   if(!result.cancelled_) {
     QString fileName = ui_->fileName->text();
     if (fileName.isEmpty()) {
-      fileName = "folder";
+      fileName = "cover";
     }
     OverwriteMode overwrite = ui_->doNotOverwrite->isChecked()
                                 ? OverwriteMode_None

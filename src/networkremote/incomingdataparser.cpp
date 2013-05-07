@@ -21,6 +21,8 @@
 
 #include "core/logging.h"
 #include "engines/enginebase.h"
+#include "internet/internetmodel.h"
+#include "internet/lastfmservice.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "playlist/playlist.h"
@@ -69,6 +71,11 @@ IncomingDataParser::IncomingDataParser(Application* app)
           app_->playlist_manager(), SLOT(Open(int)));
   connect(this, SIGNAL(Close(int)),
           app_->playlist_manager(), SLOT(Close(int)));
+
+  connect(this, SIGNAL(Love()),
+          InternetModel::Service<LastFMService>(), SLOT(Love()));
+  connect(this, SIGNAL(Ban()),
+          InternetModel::Service<LastFMService>(), SLOT(Ban()));
 }
 
 IncomingDataParser::~IncomingDataParser() {
@@ -125,6 +132,10 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
                                   break;
     case pb::remote::CLOSE_PLAYLIST:
                                   ClosePlaylist(msg);
+                                  break;
+    case pb::remote::LOVE:        emit Love();
+                                  break;
+    case pb::remote::BAN:         emit Ban();
                                   break;
     default: break;
   }

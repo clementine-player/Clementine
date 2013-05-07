@@ -24,6 +24,8 @@ signals:
   void SendPlaylistSongs(int id);
   void Open(int id);
   void Close(int id);
+  void Love();
+  void Ban();
 
   void Play();
   void PlayPause();

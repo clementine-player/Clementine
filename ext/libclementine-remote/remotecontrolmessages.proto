@@ -14,6 +14,9 @@ enum MsgType {
   REMOVE_SONGS = 9;
   OPEN_PLAYLIST = 10;
   CLOSE_PLAYLIST = 11;
+  // Lastfm
+  LOVE = 12;
+  BAN = 13;
 
   // Messages send by both
   DISCONNECT = 2;
