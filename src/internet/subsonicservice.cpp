@@ -244,7 +244,23 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
-    login_state_ = LoginState_BadServer;
+    switch(reply->error()) {
+      case QNetworkReply::ConnectionRefusedError:
+        login_state_ = LoginState_ConnectionRefused;
+        break;
+      case QNetworkReply::HostNotFoundError:
+        login_state_ = LoginState_HostNotFound;
+        break;
+      case QNetworkReply::TimeoutError:
+        login_state_ = LoginState_Timeout;
+        break;
+      case QNetworkReply::SslHandshakeFailedError:
+        login_state_ = LoginState_SslError;
+        break;
+      default: //Treat uncaught error types here as generic
+        login_state_ = LoginState_BadServer;
+        break;
+    }
     qLog(Error) << "Failed to connect ("
                 << Utilities::EnumToString(QNetworkReply::staticMetaObject, "NetworkError", reply->error())
                 << "):" << reply->errorString();

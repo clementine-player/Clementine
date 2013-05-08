@@ -33,6 +33,10 @@ class SubsonicService : public InternetService
     LoginState_Unlicensed,
     LoginState_OtherError,
     LoginState_Unknown,
+    LoginState_ConnectionRefused,
+    LoginState_HostNotFound,
+    LoginState_Timeout,
+    LoginState_SslError,
   };
 
   enum ApiError {

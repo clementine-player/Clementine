@@ -103,6 +103,26 @@ void SubsonicSettingsPage::LoginStateChanged(SubsonicService::LoginState newstat
     ui_->login_state->SetAccountTypeText(tr("An unspecified error occurred."));
     break;
 
+  case SubsonicService::LoginState_ConnectionRefused:
+    ui_->login_state->SetAccountTypeText(tr("Connection refused by server, check server URL. "
+                                            "Example: http://localhost:4040/"));
+    break;
+
+  case SubsonicService::LoginState_HostNotFound:
+    ui_->login_state->SetAccountTypeText(tr("Host not found, check server URL. "
+                                            "Example: http://localhost:4040/"));
+    break;
+
+  case SubsonicService::LoginState_Timeout:
+    ui_->login_state->SetAccountTypeText(tr("Connection timed out, check server URL. "
+                                            "Example: http://localhost:4040/"));
+    break;
+
+  case SubsonicService::LoginState_SslError:
+    ui_->login_state->SetAccountTypeText(tr("SSL handshake error, verify server configuration. "
+                                            "SSLv3 option below may workaround some issues."));
+    break;
+
   default:
     break;
   }
