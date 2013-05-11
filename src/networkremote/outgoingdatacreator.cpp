@@ -166,7 +166,7 @@ void OutgoingDataCreator::ActiveChanged(Playlist* playlist) {
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::PlaylistAdded(int id, const QString& name) {
+void OutgoingDataCreator::PlaylistAdded(int id, const QString& name, bool favorite) {
   SendAllActivePlaylists();
 }
 

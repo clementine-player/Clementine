@@ -61,6 +61,7 @@ class PlaylistBackend : public QObject {
 
   static const int kSongTableJoins;
 
+  PlaylistList GetAllPlaylists();
   PlaylistList GetAllOpenPlaylists();
   PlaylistList GetAllFavoritePlaylists();
   PlaylistBackend::Playlist GetPlaylist(int id);

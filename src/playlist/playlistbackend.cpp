@@ -48,6 +48,10 @@ PlaylistBackend::PlaylistBackend(Application* app, QObject* parent)
 {
 }
 
+PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
+  return GetPlaylists(GetPlaylists_All);
+}
+
 PlaylistBackend::PlaylistList PlaylistBackend::GetAllOpenPlaylists() {
   return GetPlaylists(GetPlaylists_OpenInUi);
 }
@@ -62,16 +66,18 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetPlaylists(GetPlaylistsFlags fl
 
   PlaylistList ret;
 
-  QString condition;
+  QStringList condition_list;
   if (flags & GetPlaylists_OpenInUi) {
-    condition += "WHERE ui_order != -1";
-  }
-  if (flags == GetPlaylists_All) {
-    condition += " AND ";
+    condition_list << "ui_order != -1";
   }
   if (flags & GetPlaylists_Favorite) {
-    condition += "WHERE is_favorite != 0";
+    condition_list << "is_favorite != 0";
   }
+  QString condition;
+  if (!condition_list.isEmpty()) {
+    condition = " WHERE " + condition_list.join(" OR ");
+  }
+
 
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
               "       dynamic_playlist_data, dynamic_playlist_backend,"
