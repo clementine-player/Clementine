@@ -49,26 +49,35 @@ PlaylistBackend::PlaylistBackend(Application* app, QObject* parent)
 }
 
 PlaylistBackend::PlaylistList PlaylistBackend::GetAllOpenPlaylists() {
-  return GetPlaylists(true);
+  return GetPlaylists(GetPlaylists_OpenInUi);
 }
 
-PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
-  return GetPlaylists(false);
+PlaylistBackend::PlaylistList PlaylistBackend::GetAllFavoritePlaylists() {
+  return GetPlaylists(GetPlaylists_Favorite);
 }
 
-PlaylistBackend::PlaylistList PlaylistBackend::GetPlaylists(bool open_in_ui) {
+PlaylistBackend::PlaylistList PlaylistBackend::GetPlaylists(GetPlaylistsFlags flags) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   PlaylistList ret;
 
-  const QString open_in_ui_condition = open_in_ui ? "WHERE ui_order != -1" : "";
+  QString condition;
+  if (flags & GetPlaylists_OpenInUi) {
+    condition += "WHERE ui_order != -1";
+  }
+  if (flags == GetPlaylists_All) {
+    condition += " AND ";
+  }
+  if (flags & GetPlaylists_Favorite) {
+    condition += "WHERE is_favorite != 0";
+  }
 
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
               "       dynamic_playlist_data, dynamic_playlist_backend,"
-              "       special_type, ui_path"
+              "       special_type, ui_path, is_favorite"
               " FROM playlists"
-              " " + open_in_ui_condition +
+              " " + condition +
               " ORDER BY ui_order", db);
   q.exec();
   if (db_->CheckErrors(q))
@@ -84,6 +93,7 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetPlaylists(bool open_in_ui) {
     p.dynamic_backend = q.value(5).toString();
     p.special_type = q.value(6).toString();
     p.ui_path = q.value(7).toString();
+    p.favorite = q.value(8).toBool();
     ret << p;
   }
 
@@ -96,7 +106,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
 
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
               "       dynamic_playlist_data, dynamic_playlist_backend,"
-              "       special_type"
+              "       special_type, ui_path, is_favorite"
               " FROM playlists"
               " WHERE ROWID=:id", db);
   q.bindValue(":id", id);
@@ -114,6 +124,8 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   p.dynamic_data = q.value(4).toByteArray();
   p.dynamic_backend = q.value(5).toString();
   p.special_type = q.value(6).toString();
+  p.ui_path = q.value(7).toString();
+  p.favorite = q.value(8).toBool();
 
   return p;
 }
@@ -325,6 +337,17 @@ void PlaylistBackend::RenamePlaylist(int id, const QString &new_name) {
   QSqlDatabase db(db_->Connect());
   QSqlQuery q("UPDATE playlists SET name=:name WHERE ROWID=:id", db);
   q.bindValue(":name", new_name);
+  q.bindValue(":id", id);
+
+  q.exec();
+  db_->CheckErrors(q);
+}
+
+void PlaylistBackend::FavoritePlaylist(int id, bool is_favorite) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+  QSqlQuery q("UPDATE playlists SET is_favorite=:is_favorite WHERE ROWID=:id", db);
+  q.bindValue(":is_favorite", is_favorite ? 1 : 0);
   q.bindValue(":id", id);
 
   q.exec();

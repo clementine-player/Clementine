@@ -71,7 +71,7 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   connect(library_backend_, SIGNAL(SongsRatingChanged(SongList)), SLOT(SongsDiscovered(SongList)));
 
   foreach (const PlaylistBackend::Playlist& p, playlist_backend->GetAllOpenPlaylists()) {
-    AddPlaylist(p.id, p.name, p.special_type, p.ui_path);
+    AddPlaylist(p.id, p.name, p.special_type, p.ui_path, p.favorite);
   }
 
   // If no playlist exists then make a new one
@@ -98,9 +98,10 @@ QItemSelection PlaylistManager::selection(int id) const {
 
 Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
                                        const QString& special_type,
-                                       const QString& ui_path) {
+                                       const QString& ui_path,
+                                       bool favorite) {
   Playlist* ret = new Playlist(playlist_backend_, app_->task_manager(),
-                               library_backend_, id, special_type);
+                               library_backend_, id, special_type, favorite);
   ret->set_sequence(sequence_);
   ret->set_ui_path(ui_path);
 
@@ -115,7 +116,7 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
 
   playlists_[id] = Data(ret, name);
 
-  emit PlaylistAdded(id, name);
+  emit PlaylistAdded(id, name, favorite);
 
   if (current_ == -1) {
     SetCurrentPlaylist(id);
@@ -137,7 +138,7 @@ void PlaylistManager::New(const QString& name, const SongList& songs,
   if (id == -1)
     qFatal("Couldn't create playlist");
 
-  Playlist* playlist = AddPlaylist(id, name, special_type, QString());
+  Playlist* playlist = AddPlaylist(id, name, special_type, QString(), false);
   playlist->InsertSongsOrLibraryItems(songs);
 
   SetCurrentPlaylist(id);
@@ -192,6 +193,12 @@ void PlaylistManager::Rename(int id, const QString& new_name) {
   emit PlaylistRenamed(id, new_name);
 }
 
+void PlaylistManager::Favorite(int id, bool favorite) {
+  playlist_backend_->FavoritePlaylist(id, favorite);
+  playlists_[id].p->set_favorite(favorite);
+  emit PlaylistFavorited(id, favorite);
+}
+
 bool PlaylistManager::Close(int id) {
   // Won't allow removing the last playlist
   if (playlists_.count() <= 1 || !playlists_.contains(id))
@@ -213,9 +220,15 @@ bool PlaylistManager::Close(int id) {
     SetCurrentPlaylist(next_id);
 
   Data data = playlists_.take(id);
+  emit PlaylistClosed(id);
+
+  if (!data.p->is_favorite()) {
+    // TODO: should we warn the user this action cannot be undone?
+    playlist_backend_->RemovePlaylist(id);
+    emit PlaylistDeleted(id);
+  }
   delete data.p;
 
-  emit PlaylistClosed(id);
   return true;
 }
 
@@ -439,7 +452,7 @@ void PlaylistManager::Open(int id) {
     return;
   }
 
-  AddPlaylist(p.id, p.name, p.special_type, p.ui_path);
+  AddPlaylist(p.id, p.name, p.special_type, p.ui_path, p.favorite);
 }
 
 void PlaylistManager::SetCurrentOrOpen(int id) {

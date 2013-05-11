@@ -138,10 +138,10 @@ void PlaylistListContainer::SetApplication(Application* app) {
   PlaylistManager* manager = app_->playlist_manager();
   Player* player = app_->player();
 
-  connect(manager, SIGNAL(PlaylistAdded(int,QString)),
-          SLOT(PlaylistAdded(int,QString)));
-  connect(manager, SIGNAL(PlaylistDeleted(int)),
-          SLOT(PlaylistDeleted(int)));
+  connect(manager, SIGNAL(PlaylistAdded(int,QString,bool)),
+          SLOT(AddPlaylist(int,QString,bool)));
+  connect(manager, SIGNAL(PlaylistFavorited(int,bool)),
+          SLOT(PlaylistFavoriteStateChanged(int,bool)));
   connect(manager, SIGNAL(PlaylistRenamed(int,QString)),
           SLOT(PlaylistRenamed(int,QString)));
   connect(manager, SIGNAL(CurrentChanged(Playlist*)),
@@ -158,7 +158,7 @@ void PlaylistListContainer::SetApplication(Application* app) {
 
   // Get all playlists, even ones that are hidden in the UI.
   foreach (const PlaylistBackend::Playlist& p,
-           app->playlist_backend()->GetAllPlaylists()) {
+           app->playlist_backend()->GetAllFavoritePlaylists()) {
     QStandardItem* playlist_item = model_->NewPlaylist(p.name, p.id);
     QStandardItem* parent_folder = model_->FolderByPath(p.ui_path);
     parent_folder->appendRow(playlist_item);
@@ -190,7 +190,11 @@ void PlaylistListContainer::NewFolderClicked() {
   model_->invisibleRootItem()->appendRow(model_->NewFolder(name));
 }
 
-void PlaylistListContainer::PlaylistAdded(int id, const QString& name) {
+void PlaylistListContainer::AddPlaylist(int id, const QString& name, bool favorite) {
+  if (!favorite) {
+    return;
+  }
+
   if (model_->PlaylistById(id)) {
     // We know about this playlist already - it was probably one of the open
     // ones that was loaded on startup.
@@ -213,7 +217,7 @@ void PlaylistListContainer::PlaylistRenamed(int id, const QString& new_name) {
   item->setText(new_name);
 }
 
-void PlaylistListContainer::PlaylistDeleted(int id) {
+void PlaylistListContainer::RemovePlaylist(int id) {
   QStandardItem* item = model_->PlaylistById(id);
   if (item) {
     QStandardItem* parent = item->parent();
@@ -221,6 +225,15 @@ void PlaylistListContainer::PlaylistDeleted(int id) {
       parent = model_->invisibleRootItem();
     }
     parent->removeRow(item->row());
+  }
+}
+
+void PlaylistListContainer::PlaylistFavoriteStateChanged(int id, bool favorite) {
+  if (favorite) {
+    const QString& name = app_->playlist_manager()->GetPlaylistName(id);
+    AddPlaylist(id, name, favorite);
+  } else {
+    RemovePlaylist(id);
   }
 }
 
@@ -254,6 +267,7 @@ void PlaylistListContainer::CurrentChanged(Playlist* new_playlist) {
 void PlaylistListContainer::PlaylistPathChanged(int id, const QString& new_path) {
   // Update the path in the database
   app_->playlist_backend()->SetPlaylistUiPath(id, new_path);
+  app_->playlist_manager()->playlist(id)->set_ui_path(new_path);
 }
 
 void PlaylistListContainer::ViewIndexSelected(const QModelIndex& proxy_index) {
@@ -289,11 +303,11 @@ void PlaylistListContainer::DeleteClicked() {
     }
   }
 
-  // Make sure the user really wants to delete all these playlists.
+  // Make sure the user really wants to unfavorite all these playlists.
   if (ids.count() > 1) {
     const int button =
-        QMessageBox::question(this, tr("Delete playlists"),
-                              tr("You are about to delete %1 playlists, are you sure?").arg(ids.count()),
+        QMessageBox::question(this, tr("Remove playlists"),
+                              tr("You are about to remove %1 playlists from your favorites, are you sure?").arg(ids.count()),
                               QMessageBox::Yes, QMessageBox::Cancel);
 
     if (button != QMessageBox::Yes) {
@@ -301,9 +315,9 @@ void PlaylistListContainer::DeleteClicked() {
     }
   }
 
-  // Delete the playlists
+  // Unfavorite the playlists
   foreach (int id, ids) {
-    app_->playlist_manager()->Delete(id);
+    app_->playlist_manager()->Favorite(id, false);
   }
 
   // Delete the top-level folders.

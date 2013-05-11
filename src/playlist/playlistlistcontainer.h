@@ -56,9 +56,11 @@ private slots:
   void PlaylistPathChanged(int id, const QString& new_path);
 
   // From the PlaylistManager
-  void PlaylistAdded(int id, const QString& name);
   void PlaylistRenamed(int id, const QString& new_name);
-  void PlaylistDeleted(int id);
+  // Add playlist if favorite == true
+  void AddPlaylist(int id, const QString& name, bool favorite);
+  void RemovePlaylist(int id);
+  void PlaylistFavoriteStateChanged(int id, bool favorite);
   void CurrentChanged(Playlist* new_playlist);
   void ActiveChanged(Playlist* new_playlist);
 

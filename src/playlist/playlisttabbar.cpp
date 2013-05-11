@@ -24,11 +24,13 @@
 #include "internet/internetmimedata.h"
 #include "ui/iconloader.h"
 #include "widgets/renametablineedit.h"
+#include "widgets/favoritewidget.h"
 
 #include <QContextMenuEvent>
+#include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
-#include <QInputDialog>
+#include <QPushButton>
 #include <QToolTip>
 
 PlaylistTabBar::PlaylistTabBar(QWidget *parent)
@@ -69,6 +71,8 @@ void PlaylistTabBar::SetActions(
 
 void PlaylistTabBar::SetManager(PlaylistManager *manager) {
   manager_ = manager;
+  connect(manager_, SIGNAL(PlaylistFavorited(int, bool)),
+      SLOT(PlaylistFavoritedSlot(int, bool)));
 }
 
 void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
@@ -223,11 +227,14 @@ void PlaylistTabBar::CurrentIndexChanged(int index) {
     emit CurrentIdChanged(tabData(index).toInt());
 }
 
-void PlaylistTabBar::InsertTab(int id, int index, const QString& text) {
+void PlaylistTabBar::InsertTab(int id, int index, const QString& text, bool favorite) {
   suppress_current_changed_ = true;
   insertTab(index, text);
   setTabData(index, id);
   setTabToolTip(index, text);
+  FavoriteWidget* widget = new FavoriteWidget(index, favorite);
+  connect(widget, SIGNAL(FavoriteStateChanged(int, bool)), SLOT(TabFavorited(int, bool)));
+  setTabButton(index, QTabBar::LeftSide, widget);
   suppress_current_changed_ = false;
 
   if (currentIndex() == index)
@@ -243,6 +250,10 @@ void PlaylistTabBar::TabMoved() {
     ids << tabData(i).toInt();
   }
   emit PlaylistOrderChanged(ids);
+}
+
+void PlaylistTabBar::TabFavorited(int index, bool favorite) {
+  emit PlaylistFavorited(tabData(index).toInt(), favorite);
 }
 
 void PlaylistTabBar::dragEnterEvent(QDragEnterEvent* e) {
@@ -320,5 +331,13 @@ bool PlaylistTabBar::event(QEvent* e) {
     }
     default:
       return QTabBar::event(e);
+  }
+}
+
+void PlaylistTabBar::PlaylistFavoritedSlot(int id, bool favorite) {
+  const int index = index_of(id);
+  FavoriteWidget* favorite_widget = qobject_cast<FavoriteWidget*>(tabButton(index, QTabBar::LeftSide));
+  if (favorite_widget) {
+    favorite_widget->SetFavorite(favorite);
   }
 }

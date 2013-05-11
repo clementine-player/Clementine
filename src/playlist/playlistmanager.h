@@ -108,10 +108,11 @@ public slots:
 signals:
   void PlaylistManagerInitialized();
 
-  void PlaylistAdded(int id, const QString& name);
+  void PlaylistAdded(int id, const QString& name, bool favorite);
   void PlaylistDeleted(int id);
   void PlaylistClosed(int id);
   void PlaylistRenamed(int id, const QString& new_name);
+  void PlaylistFavorited(int id, bool favorite);
   void CurrentChanged(Playlist* new_playlist);
   void ActiveChanged(Playlist* new_playlist);
 
@@ -176,6 +177,7 @@ public slots:
   void Load(const QString& filename);
   void Save(int id, const QString& filename);
   void Rename(int id, const QString& new_name);
+  void Favorite(int id, bool favorite);
   void Delete(int id);
   bool Close(int id);
   void Open(int id);
@@ -217,7 +219,7 @@ private slots:
 
 private:
   Playlist* AddPlaylist(int id, const QString& name, const QString& special_type,
-                        const QString& ui_path);
+                        const QString& ui_path, bool favorite);
 
 private:
   struct Data {

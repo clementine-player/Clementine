@@ -70,7 +70,7 @@ private slots:
   void GoToPreviousPlaylistTab();
 
   void SetViewModel(Playlist* playlist);
-  void PlaylistAdded(int id, const QString& name);
+  void PlaylistAdded(int id, const QString& name, bool favorite);
   void PlaylistClosed(int id);
   void PlaylistRenamed(int id, const QString& new_name);
 

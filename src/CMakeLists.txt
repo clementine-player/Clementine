@@ -362,6 +362,7 @@ set(SOURCES
   widgets/equalizerslider.cpp
   widgets/errordialog.cpp
   widgets/fancytabwidget.cpp
+  widgets/favoritewidget.cpp
   widgets/fileview.cpp
   widgets/fileviewlist.cpp
   widgets/forcescrollperpixel.cpp
@@ -631,6 +632,7 @@ set(HEADERS
   widgets/equalizerslider.h
   widgets/errordialog.h
   widgets/fancytabwidget.h
+  widgets/favoritewidget.h
   widgets/fileview.h
   widgets/fileviewlist.h
   widgets/freespacebar.h
