@@ -232,8 +232,9 @@ void PlaylistTabBar::InsertTab(int id, int index, const QString& text, bool favo
   insertTab(index, text);
   setTabData(index, id);
   setTabToolTip(index, text);
-  FavoriteWidget* widget = new FavoriteWidget(index, favorite);
-  connect(widget, SIGNAL(FavoriteStateChanged(int, bool)), SLOT(TabFavorited(int, bool)));
+  FavoriteWidget* widget = new FavoriteWidget(id, favorite);
+  connect(widget, SIGNAL(FavoriteStateChanged(int, bool)),
+                  SIGNAL(PlaylistFavorited(int, bool)));
   setTabButton(index, QTabBar::LeftSide, widget);
   suppress_current_changed_ = false;
 
@@ -250,10 +251,6 @@ void PlaylistTabBar::TabMoved() {
     ids << tabData(i).toInt();
   }
   emit PlaylistOrderChanged(ids);
-}
-
-void PlaylistTabBar::TabFavorited(int index, bool favorite) {
-  emit PlaylistFavorited(tabData(index).toInt(), favorite);
 }
 
 void PlaylistTabBar::dragEnterEvent(QDragEnterEvent* e) {

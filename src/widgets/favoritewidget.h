@@ -42,7 +42,7 @@ class FavoriteWidget : public QWidget {
  private:
   static const int kStarSize;
 
-  // The tab's id this widget belongs to
+  // The playlist's id this widget belongs to
   int tab_index_;
   bool favorite_;
   QPixmap on_;

@@ -78,7 +78,6 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetPlaylists(GetPlaylistsFlags fl
     condition = " WHERE " + condition_list.join(" OR ");
   }
 
-
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
               "       dynamic_playlist_data, dynamic_playlist_backend,"
               "       special_type, ui_path, is_favorite"

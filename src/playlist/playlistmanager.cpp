@@ -194,6 +194,8 @@ void PlaylistManager::Rename(int id, const QString& new_name) {
 }
 
 void PlaylistManager::Favorite(int id, bool favorite) {
+  Q_ASSERT(playlists_.contains(id));
+
   playlist_backend_->FavoritePlaylist(id, favorite);
   playlists_[id].p->set_favorite(favorite);
   emit PlaylistFavorited(id, favorite);
