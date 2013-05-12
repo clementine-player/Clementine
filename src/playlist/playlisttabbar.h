@@ -78,7 +78,6 @@ private slots:
   void HideEditor();
   void Close();
   void CloseFromTabIndex(int index);
-  void TabFavorited(int index, bool favorite);
   // Used when playlist's favorite flag isn't changed from the favorite widget
   // (e.g. from the playlistlistcontainer): will update the favorite widget
   void PlaylistFavoritedSlot(int id, bool favorite);
