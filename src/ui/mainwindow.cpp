@@ -2324,3 +2324,18 @@ void MainWindow::ShowConsole() {
   Console* console = new Console(app_, this);
   console->show();
 }
+
+void MainWindow::keyPressEvent(QKeyEvent* event) {
+  if(event->key() == Qt::Key_Space) {
+    app_->player()->PlayPause();
+    event->accept();
+  } else if(event->key() == Qt::Key_Left) {
+    ui_->track_slider->Seek(-1);
+    event->accept();
+  } else if(event->key() == Qt::Key_Right) {
+    ui_->track_slider->Seek(1);
+    event->accept();
+  } else {
+    QMainWindow::keyPressEvent(event);
+  }
+}

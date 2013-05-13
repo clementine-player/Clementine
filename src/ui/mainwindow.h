@@ -121,6 +121,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void CommandlineOptionsReceived(const CommandlineOptions& options);
 
  protected:
+  void keyPressEvent(QKeyEvent* event);
   void resizeEvent(QResizeEvent* event);
   void closeEvent(QCloseEvent* event);
 
