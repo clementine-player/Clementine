@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-04-27 05:44+0000\n"
+"PO-Revision-Date: 2013-05-11 23:39+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -79,7 +79,7 @@ msgstr "%1 war %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 roll seniñ (%2)"
 
-#: playlist/playlistmanager.cpp:326
+#: playlist/playlistmanager.cpp:341
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 diuzet eus"
@@ -104,12 +104,12 @@ msgstr "%1 ton kavet"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 ton kavet (%2 diskouezet)"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 ton"
 
-#: ui/albumcovermanager.cpp:419
+#: ui/albumcovermanager.cpp:459
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 kaset"
@@ -226,6 +226,10 @@ msgstr "(disheñvel a-dreuz kanaouennoù liesseurt)"
 msgid "...and all the Amarok contributors"
 msgstr "... Hag holl kenlabourerien Amarok"
 
+#: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
+msgid "0"
+msgstr ""
+
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
 msgstr "0:00:00"
@@ -238,7 +242,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 devezh"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 msgid "1 track"
 msgstr "1 ton"
 
@@ -347,7 +351,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
-#: ui/albumcoversearcher.cpp:166
+#: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
 msgid "Abort"
 msgstr "Dilezel"
 
@@ -531,7 +535,7 @@ msgstr "Ouzhpennañ da rolloù seniñ Grooveshark"
 msgid "Add to another playlist"
 msgstr "Ouzhpennañ d'ur roll seniñ all"
 
-#: ../bin/src/ui_albumcovermanager.h:152
+#: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ"
 
@@ -588,7 +592,7 @@ msgstr "Goude "
 msgid "After copying..."
 msgstr "Goude an eiladur..."
 
-#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -601,7 +605,7 @@ msgstr "Albom"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albom (Ampled peurvat evit an holl roud)"
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -615,11 +619,11 @@ msgstr "Golo Albom"
 msgid "Album info on jamendo.com..."
 msgstr "Titouroù an albom war jamendo.com..."
 
-#: ui/albumcovermanager.cpp:122
+#: ui/albumcovermanager.cpp:134
 msgid "Albums with covers"
 msgstr "Albomoù gant ur golo"
 
-#: ui/albumcovermanager.cpp:123
+#: ui/albumcovermanager.cpp:135
 msgid "Albums without covers"
 msgstr "Albomoù hep golo"
 
@@ -631,11 +635,11 @@ msgstr "Holl restroù (*)"
 msgid "All Glory to the Hypnotoad!"
 msgstr "All Glory to the Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:121
+#: ui/albumcovermanager.cpp:133
 msgid "All albums"
 msgstr "An holl albomoù"
 
-#: ui/albumcovermanager.cpp:246
+#: ui/albumcovermanager.cpp:265
 msgid "All artists"
 msgstr "An holl arzourien"
 
@@ -754,7 +758,7 @@ msgid ""
 "the songs of your library?"
 msgstr ""
 
-#: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -826,7 +830,7 @@ msgstr "Ment keidennek ar skeudenn"
 msgid "BBC Podcasts"
 msgstr "Podkastoù BBC"
 
-#: playlist/playlist.cpp:1223 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1225 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -884,7 +888,7 @@ msgstr "Gwell"
 msgid "Biography from %1"
 msgstr "Buhezskrid %1"
 
-#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Fonnder"
 
@@ -1142,7 +1146,7 @@ msgstr "Pouezhit war ar bouton Login evit digeriñ ur merdeer web. Ret e vo deoc
 msgid "Close"
 msgstr "Serriñ"
 
-#: playlist/playlisttabbar.cpp:47
+#: playlist/playlisttabbar.cpp:49
 msgid "Close playlist"
 msgstr "Serriñ ar roll seniñ"
 
@@ -1154,7 +1158,7 @@ msgstr "Serriñ an hewelaat"
 msgid "Closing this window will cancel the download."
 msgstr "Serrin ar prenestr-mañ a paouezo ar pellgargadenn"
 
-#: ui/albumcovermanager.cpp:200
+#: ui/albumcovermanager.cpp:216
 msgid "Closing this window will stop searching for album covers."
 msgstr "Ma serrit ar prenestr-mañ e vo paouezet gant an enklask golo albom."
 
@@ -1174,7 +1178,7 @@ msgstr "Livioù"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listenn dispartiet gant ur virgulenn eus klas:live, live etre 0 ha 3"
 
-#: playlist/playlist.cpp:1233 smartplaylists/searchterm.cpp:288
+#: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
 #: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Evezhiadenn"
@@ -1187,7 +1191,7 @@ msgstr "Leuniañ ar c'hlavioù ent emgefreek"
 msgid "Complete tags automatically..."
 msgstr "Leuniañ ar c'hlavioù ent emgefreek..."
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
@@ -1326,7 +1330,7 @@ msgstr "Dibosupl kargañ ar skingomz last.fm"
 msgid "Couldn't open output file %1"
 msgstr "Dibosubl eo digeriñ ar restr ec'hankañ %1"
 
-#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
@@ -1478,11 +1482,11 @@ msgid ""
 "recover your database"
 msgstr "Goubrenet eo ar stlennvon. Lennit https://code.google.com/p/clementine-player/wiki/DatabaseCorruption evit kaout titouroù a-benn adkavout ho stlennvon."
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Deizad krouadur"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1232 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Deizad kemmadur"
 
@@ -1548,10 +1552,6 @@ msgstr "Diverkañ eus ar bladenn"
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
 msgstr "Diverkañ ar pennadoù lennet"
-
-#: playlist/playlistlistcontainer.cpp:295
-msgid "Delete playlists"
-msgstr "Diverkañ ar rolloù seniñ"
 
 #: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
@@ -1643,7 +1643,7 @@ msgstr "Diweredekaat ar varenn-imor"
 msgid "Disabled"
 msgstr "Diwederakaet"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:63
 #: ../bin/src/ui_edittagdialog.h:685
 msgid "Disc"
 msgstr "Pladenn"
@@ -1669,6 +1669,10 @@ msgstr "Ober un adc'hwilervadur eus ar sonaoueg a-bezh"
 msgid "Do not convert any music"
 msgstr "Chom hep treuzkemm ar sonerezh"
 
+#: ../bin/src/ui_albumcoverexport.h:208
+msgid "Do not overwrite"
+msgstr ""
+
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "Chom hep adlenn"
@@ -1681,7 +1685,7 @@ msgstr "Chom hep diskouez el lodenn \"arzourien liesseurt\""
 msgid "Don't shuffle"
 msgstr "Chom hep meskañ"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:202
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:218
 msgid "Don't stop!"
 msgstr "Chom hep paouez!"
 
@@ -1859,7 +1863,11 @@ msgstr "Lakait un URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Lakait un URL evit pellgargañ ur golo adalek internet"
 
-#: playlist/playlisttabbar.cpp:128
+#: ../bin/src/ui_albumcoverexport.h:204
+msgid "Enter a filename for exported covers (no extension):"
+msgstr ""
+
+#: playlist/playlisttabbar.cpp:132
 msgid "Enter a new name for this playlist"
 msgstr "Lakait un anv evit ar roll seniñ"
 
@@ -1882,7 +1890,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Lakait gerioù enklask dindan evit kavout podkastoù war gpodder.net"
 
 #: ../bin/src/ui_libraryfilterwidget.h:96
-#: ../bin/src/ui_albumcovermanager.h:153
+#: ../bin/src/ui_albumcovermanager.h:219
 msgid "Enter search terms here"
 msgstr "Lakait amañ gerioù ho enklask"
 
@@ -1991,6 +1999,10 @@ msgstr "Bep eurvezh"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "War-bouezh etre ar roudoù eus ar memes albom pe eus ar memes follenn CUE"
 
+#: ../bin/src/ui_albumcoverexport.h:207
+msgid "Existing covers"
+msgstr ""
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
 msgstr "Brasaat"
@@ -1999,6 +2011,31 @@ msgstr "Brasaat"
 #, qt-format
 msgid "Expires on %1"
 msgstr "Ne vo ket mat ken d'an %1"
+
+#: ../bin/src/ui_albumcovermanager.h:226
+msgid "Export Covers"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:202
+msgid "Export covers"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:205
+msgid "Export downloaded covers"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:206
+msgid "Export embedded covers"
+msgstr ""
+
+#: ui/albumcovermanager.cpp:794
+msgid "Export finished"
+msgstr ""
+
+#: ui/albumcovermanager.cpp:779
+#, qt-format
+msgid "Exported %1 covers out of %2 (%3 skipped)"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -2078,11 +2115,11 @@ msgstr "Ma re garetañ"
 msgid "Favourite tracks"
 msgstr "Roudoù karetañ"
 
-#: ../bin/src/ui_albumcovermanager.h:155
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "Fetch Missing Covers"
 msgstr "Tapout ar goloioù a vank"
 
-#: ../bin/src/ui_albumcovermanager.h:150
+#: ../bin/src/ui_albumcovermanager.h:216
 msgid "Fetch automatically"
 msgstr "Kerc'hat ent emgefreek"
 
@@ -2106,19 +2143,19 @@ msgstr "Askouzehadenn ar restr"
 msgid "File formats"
 msgstr "Mentrezhoù restroù"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Anv ar restr"
 
-#: playlist/playlist.cpp:1227
+#: playlist/playlist.cpp:1229
 msgid "File name (without path)"
 msgstr "Anv ar restr (hep an hent)"
 
-#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Ment ar restr"
 
-#: playlist/playlist.cpp:1229 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1231 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2196,7 +2233,7 @@ msgstr "Disoñjal un drobarzhell a denn anezhi eus al listenn-mañ ha rediet e v
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:119
+#: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:117
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
@@ -2259,7 +2296,7 @@ msgstr "Hollek"
 msgid "General settings"
 msgstr "Kefluniadur hollek"
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:66
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Genre"
@@ -2305,7 +2342,7 @@ msgstr "Mont d'ar roll seniñ a-raok"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:413
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:453
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2367,7 +2404,7 @@ msgstr "Strollañ dre Zoare/Albom"
 msgid "Group by Genre/Artist/Album"
 msgstr "Strollañ dre Zoare/Arzour/Albom"
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr ""
@@ -2633,7 +2670,7 @@ msgstr "Golo albom tev"
 msgid "Large sidebar"
 msgstr "Barenn gostez ledan"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1222
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Selaouet e ziwezhañ"
@@ -2716,7 +2753,7 @@ msgstr "Laoskit goullo evit an arventennoù dre ziouer"
 msgid "Left"
 msgstr ""
 
-#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Padelezh"
@@ -2750,7 +2787,7 @@ msgstr "Selaou ouzh tonioù Grooveshark diazezet war ar pezh ho peus selaouet a-
 msgid "Live"
 msgstr "End-eeun"
 
-#: ../bin/src/ui_albumcovermanager.h:151
+#: ../bin/src/ui_albumcovermanager.h:217
 msgid "Load"
 msgstr "Kargañ"
 
@@ -2770,7 +2807,7 @@ msgstr "Kargañ ur golo adalek ar bladenn"
 msgid "Load cover from disk..."
 msgstr "Kargañ ar golo adalek ur bladenn..."
 
-#: playlist/playlistcontainer.cpp:279
+#: playlist/playlistcontainer.cpp:286
 msgid "Load playlist"
 msgstr "Kargañ ar roll seniñ"
 
@@ -2991,7 +3028,7 @@ msgstr "Lenn e mono"
 msgid "Months"
 msgstr "Mizioù"
 
-#: playlist/playlist.cpp:1235
+#: playlist/playlist.cpp:1237
 msgid "Mood"
 msgstr "Imor"
 
@@ -3175,7 +3212,7 @@ msgstr "Skeudenn drekleur ebet"
 msgid "No long blocks"
 msgstr "Bloc'h hir ebet"
 
-#: playlist/playlistcontainer.cpp:389
+#: playlist/playlistcontainer.cpp:396
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "N'eo bet kavet netra. Diverkañ ar boest enklask evit diskouez ar roll seniñ en e-bezh."
@@ -3370,6 +3407,10 @@ msgstr "Klavioù orin"
 msgid "Other options"
 msgstr "Dibarzhioù all"
 
+#: ../bin/src/ui_albumcoverexport.h:203
+msgid "Output"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
 msgstr ""
@@ -3382,9 +3423,17 @@ msgstr "Dibarzhioù ezkas"
 msgid "Output plugin"
 msgstr ""
 
+#: ../bin/src/ui_albumcoverexport.h:209
+msgid "Overwrite all"
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "Flastrañ ar restroù a vez diouto dija"
+
+#: ../bin/src/ui_albumcoverexport.h:210
+msgid "Overwrite smaller ones only"
+msgstr ""
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3424,9 +3473,13 @@ msgstr "Ehan al lenn"
 msgid "Paused"
 msgstr "Ehanet"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:215
+msgid "Pixel"
 msgstr ""
 
 #: widgets/fancytabwidget.cpp:672
@@ -3448,7 +3501,7 @@ msgstr "Seniñ an Arzour pe ar c'hlav"
 msgid "Play artist radio..."
 msgstr "Seniñ skingomz an arzour..."
 
-#: playlist/playlist.cpp:1218 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1220 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Konter selaouadennoù"
 
@@ -3485,8 +3538,8 @@ msgstr "Lenn sonerezh"
 msgid "Player options"
 msgstr "Dibarzhioù al lenner"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
-#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:280 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:412 playlist/playlisttabbar.cpp:298
 msgid "Playlist"
 msgstr "Roll seniñ"
 
@@ -3701,11 +3754,11 @@ msgstr "Lakaat 4 steredenn evit an ton lennet"
 msgid "Rate the current song 5 stars"
 msgstr "Lakaat 5 steredenn evit an ton lennet"
 
-#: playlist/playlist.cpp:1217 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "Notenn"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:199
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:215
 msgid "Really cancel?"
 msgstr "Sur oc'h da gaout c'hoant da nullañ"
 
@@ -3775,6 +3828,10 @@ msgstr "Tennañ eus an tonioù karetañ"
 msgid "Remove from playlist"
 msgstr "Tennañ kuit eus ar roll seniñ"
 
+#: playlist/playlistlistcontainer.cpp:309
+msgid "Remove playlists"
+msgstr ""
+
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
 msgstr "Diverkañ tonioù eus va sonerezh"
@@ -3792,11 +3849,11 @@ msgstr "Cheñch anv \"%1\" ar roll seniñ."
 msgid "Rename Grooveshark playlist"
 msgstr "Cheñch anv roll seniñ Grooveshark"
 
-#: playlist/playlisttabbar.cpp:128
+#: playlist/playlisttabbar.cpp:132
 msgid "Rename playlist"
 msgstr "Adenvel ar roll seniñ"
 
-#: playlist/playlisttabbar.cpp:48
+#: playlist/playlisttabbar.cpp:50
 msgid "Rename playlist..."
 msgstr "Adenvel ar roll seniñ..."
 
@@ -3902,7 +3959,7 @@ msgstr "Tennañ an drobarzhell diarvar"
 msgid "Safely remove the device after copying"
 msgstr "Tennañ an drobarzhell diarvar goude an eilañ"
 
-#: playlist/playlist.cpp:1225 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1227 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Standilhonañ"
 
@@ -3926,11 +3983,11 @@ msgstr "Enrollan ar golo war ar bladenn..."
 msgid "Save image"
 msgstr "Enrollañ ar skeudenn"
 
-#: playlist/playlistcontainer.cpp:316
+#: playlist/playlistcontainer.cpp:323
 msgid "Save playlist"
 msgstr "Enrollañ ar roll seniñ"
 
-#: playlist/playlisttabbar.cpp:49 ../bin/src/ui_mainwindow.h:700
+#: playlist/playlisttabbar.cpp:51 ../bin/src/ui_mainwindow.h:700
 msgid "Save playlist..."
 msgstr "Enrollañ ar roll seniñ..."
 
@@ -3962,7 +4019,11 @@ msgstr "Enrolladur an tonioù"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Aelad ar feur standilhonañ (SSR)"
 
-#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:673
+#: ../bin/src/ui_albumcoverexport.h:212
+msgid "Scale size"
+msgstr ""
+
+#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Poentoù"
 
@@ -4268,6 +4329,14 @@ msgstr "O kennaskañ..."
 msgid "Similar artists"
 msgstr "Arzourien dammheñvel"
 
+#: ../bin/src/ui_albumcoverexport.h:211
+msgid "Size"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:213
+msgid "Size:"
+msgstr ""
+
 #: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "Ska"
@@ -4276,7 +4345,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Mont a-drek er roll seniñ"
 
-#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "Konter tonioù lammet"
 
@@ -4344,7 +4413,7 @@ msgstr "Urzhiañ an tonioù gant"
 msgid "Sorting"
 msgstr "Urzhiañ"
 
-#: playlist/playlist.cpp:1234
+#: playlist/playlist.cpp:1236
 msgid "Source"
 msgstr "Mammenn"
 
@@ -4557,7 +4626,7 @@ msgstr "Golo an albom o vezañ lennet"
 msgid "The directory %1 is not valid"
 msgstr "An teuliad %1 a zo direizh"
 
-#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
+#: playlist/playlistmanager.cpp:156 playlist/playlistmanager.cpp:174
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Ar roll seniñ '%1' a oa goulo pe n'eus ket bet tu he kargañ"
@@ -4696,7 +4765,7 @@ msgstr "Padelezh termen"
 msgid "Timezone"
 msgstr "Gwerzhid-eur"
 
-#: playlist/playlist.cpp:1204 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4744,6 +4813,10 @@ msgstr "Bet adkaset re a wech "
 msgid "Top tracks"
 msgstr "Top tonioù"
 
+#: ../bin/src/ui_albumcovermanager.h:221
+msgid "Total albums:"
+msgstr ""
+
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
 msgstr "Niver a eizhbit treuzkaset"
@@ -4752,7 +4825,7 @@ msgstr "Niver a eizhbit treuzkaset"
 msgid "Total network requests made"
 msgstr "Niver a atersadennoù rouedad"
 
-#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "Roud"
@@ -4813,7 +4886,7 @@ msgstr "N'eus ket tu pellgargañ %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:420 playlist/playlistmanager.cpp:423
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4985,7 +5058,7 @@ msgid "Variable bit rate"
 msgstr "Fonnder kemmus"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:435 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Arzourien Liesseurt"
 
@@ -4994,7 +5067,7 @@ msgstr "Arzourien Liesseurt"
 msgid "Version %1"
 msgstr "Handelv %1"
 
-#: ../bin/src/ui_albumcovermanager.h:154
+#: ../bin/src/ui_albumcovermanager.h:220
 msgid "View"
 msgstr "Gwelout"
 
@@ -5124,6 +5197,10 @@ msgstr "Windows Media 64k"
 msgid "Windows Media audio"
 msgstr "ausio Windows Media"
 
+#: ../bin/src/ui_albumcovermanager.h:222
+msgid "Without cover:"
+msgstr ""
+
 #: library/libraryview.cpp:530
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
@@ -5142,7 +5219,7 @@ msgstr ""
 msgid "Wrong username or password."
 msgstr "Anv-implijer pe ger-tremen fall."
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -5162,14 +5239,15 @@ msgstr "Bloaz"
 msgid "Yesterday"
 msgstr "Dec'h"
 
-#: playlist/playlistlistcontainer.cpp:296
-#, qt-format
-msgid "You are about to delete %1 playlists, are you sure?"
-msgstr "Diverket e vo %1 roll-seniñ. Sur oc'h ?"
-
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
 msgstr "Emaoc'h o vont da pellgargañ an albomoù-mañ"
+
+#: playlist/playlistlistcontainer.cpp:310
+#, qt-format
+msgid ""
+"You are about to remove %1 playlists from your favorites, are you sure?"
+msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5467,3 +5545,7 @@ msgstr "paouez"
 #, qt-format
 msgid "track %1"
 msgstr "roud %1"
+
+#: ../bin/src/ui_albumcoverexport.h:214
+msgid "x"
+msgstr ""

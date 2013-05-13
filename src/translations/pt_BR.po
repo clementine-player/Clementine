@@ -7,6 +7,7 @@
 # bedi1982 <bedi.com@gmail.com>, 2012
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Israel IsraeLins <israelins85@yahoo.com.br>, 2012
+# aramaicus <maico.sertorio@gmail.com>, 2013
 # Marco Tulio Costa <mmarcottulio@gmail.com>, 2012
 # salmora8 <shorterfire@gmail.com>, 2012
 # Weiller Cardoso <>, 2012-2013
@@ -14,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-04-29 04:14+0000\n"
-"Last-Translator: salmora8 <shorterfire@gmail.com>\n"
+"PO-Revision-Date: 2013-05-13 06:22+0000\n"
+"Last-Translator: aramaicus <maico.sertorio@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
@@ -82,7 +83,7 @@ msgstr "%1 de %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reprodução (%2)"
 
-#: playlist/playlistmanager.cpp:326
+#: playlist/playlistmanager.cpp:341
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 selecionado(s) de"
@@ -107,12 +108,12 @@ msgstr "%1 músicas encontradas"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 músicas encontradas (Exibindo %2)"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 faixas"
 
-#: ui/albumcovermanager.cpp:419
+#: ui/albumcovermanager.cpp:459
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 transferido"
@@ -229,6 +230,10 @@ msgstr "(diferentes em várias músicas)"
 msgid "...and all the Amarok contributors"
 msgstr "...todos que contribuíram com o Amarok"
 
+#: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
+msgid "0"
+msgstr "0"
+
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
 msgstr "0:00:00"
@@ -241,7 +246,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 msgid "1 track"
 msgstr "1 faixa"
 
@@ -350,7 +355,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "TODA A GLÓRIA PARA O HYPNOTOAD"
 
-#: ui/albumcoversearcher.cpp:166
+#: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
 msgid "Abort"
 msgstr "Abortar"
 
@@ -534,7 +539,7 @@ msgstr "Adicionar à lista de reprodução Grooveshark"
 msgid "Add to another playlist"
 msgstr "Adicionar à outra lista de reprodução"
 
-#: ../bin/src/ui_albumcovermanager.h:152
+#: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
 msgstr "Adicionar à lista de reprodução"
 
@@ -591,7 +596,7 @@ msgstr "Depois"
 msgid "After copying..."
 msgstr "Depois de copiar..."
 
-#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -604,7 +609,7 @@ msgstr "Álbum"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Álbum (volume ideal para todas as faixas)"
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -618,11 +623,11 @@ msgstr "Capa do Álbum"
 msgid "Album info on jamendo.com..."
 msgstr "Informação do álbum no jamendo.com..."
 
-#: ui/albumcovermanager.cpp:122
+#: ui/albumcovermanager.cpp:134
 msgid "Albums with covers"
 msgstr "Álbuns com capas"
 
-#: ui/albumcovermanager.cpp:123
+#: ui/albumcovermanager.cpp:135
 msgid "Albums without covers"
 msgstr "Álbuns sem capas"
 
@@ -634,11 +639,11 @@ msgstr "Todos os arquivos (*)"
 msgid "All Glory to the Hypnotoad!"
 msgstr "Toda a Glória para o Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:121
+#: ui/albumcovermanager.cpp:133
 msgid "All albums"
 msgstr "Todos os álbuns"
 
-#: ui/albumcovermanager.cpp:246
+#: ui/albumcovermanager.cpp:265
 msgid "All artists"
 msgstr "Todos os artistas"
 
@@ -757,7 +762,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Tem certeza de que deseja escrever estatísticas de música em arquivo de músicas para todas as músicas da sua biblioteca?"
 
-#: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -829,7 +834,7 @@ msgstr "Tamanho médio de imagem"
 msgid "BBC Podcasts"
 msgstr "Podcasts BBC"
 
-#: playlist/playlist.cpp:1223 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1225 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -887,7 +892,7 @@ msgstr "Melhor"
 msgid "Biography from %1"
 msgstr "Biografia de %1"
 
-#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Taxa de bits"
 
@@ -1145,7 +1150,7 @@ msgstr "Clicando no botão de Login irá aparecer uma janela do seu navegador. V
 msgid "Close"
 msgstr "Fechar"
 
-#: playlist/playlisttabbar.cpp:47
+#: playlist/playlisttabbar.cpp:49
 msgid "Close playlist"
 msgstr "Fechar lista de reprodução"
 
@@ -1157,7 +1162,7 @@ msgstr "Fechar visualização"
 msgid "Closing this window will cancel the download."
 msgstr "Fechar esta janela cancelará o download"
 
-#: ui/albumcovermanager.cpp:200
+#: ui/albumcovermanager.cpp:216
 msgid "Closing this window will stop searching for album covers."
 msgstr "Fechar esta janela irá parar a busca por capas de álbuns"
 
@@ -1177,7 +1182,7 @@ msgstr "Cores"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista separada por vírgulas de classe: o nível, o nível é 0-3"
 
-#: playlist/playlist.cpp:1233 smartplaylists/searchterm.cpp:288
+#: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
 #: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Comentário"
@@ -1190,7 +1195,7 @@ msgstr "Completar tags automaticamente"
 msgid "Complete tags automatically..."
 msgstr "Preencher tags automaticamente..."
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
@@ -1329,7 +1334,7 @@ msgstr "Não foi possível carregar a estação de rádio do last.fm"
 msgid "Couldn't open output file %1"
 msgstr "Não foi possível abrir o arquivo de saída %1"
 
-#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
@@ -1481,11 +1486,11 @@ msgid ""
 "recover your database"
 msgstr "Banco de dados corrompido detectado. Por favor, leia https://code.google.com/p/clementine-player/wiki/Database para instruções de como recuperar seu banco de dados"
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Data de criação"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1232 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Data de modificação"
 
@@ -1551,10 +1556,6 @@ msgstr "Apagar do disco..."
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
 msgstr "Apagar episódios reproduzidos"
-
-#: playlist/playlistlistcontainer.cpp:295
-msgid "Delete playlists"
-msgstr "Apagar listas de reprodução"
 
 #: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
@@ -1646,7 +1647,7 @@ msgstr "Desabilitar criação da moodbar."
 msgid "Disabled"
 msgstr "Desativado"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:63
 #: ../bin/src/ui_edittagdialog.h:685
 msgid "Disc"
 msgstr "Disco"
@@ -1672,6 +1673,10 @@ msgstr "Reescanear por completo a biblioteca"
 msgid "Do not convert any music"
 msgstr "Não converter nenhuma música"
 
+#: ../bin/src/ui_albumcoverexport.h:208
+msgid "Do not overwrite"
+msgstr "Não substituir"
+
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "Não repetir"
@@ -1684,7 +1689,7 @@ msgstr "Não exibir em vários artistas"
 msgid "Don't shuffle"
 msgstr "Não embaralhar"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:202
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:218
 msgid "Don't stop!"
 msgstr "Não parar!"
 
@@ -1862,7 +1867,11 @@ msgstr "Digite uma URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Insira uma URL para fazer baixar uma capa da Internet:"
 
-#: playlist/playlisttabbar.cpp:128
+#: ../bin/src/ui_albumcoverexport.h:204
+msgid "Enter a filename for exported covers (no extension):"
+msgstr "Digite um nome de arquivo para capas exportadas (sem extensão):"
+
+#: playlist/playlisttabbar.cpp:132
 msgid "Enter a new name for this playlist"
 msgstr "Digite um novo nome para esta lista"
 
@@ -1885,7 +1894,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Digite os termos da busca para procurar podcasts no gpodder.net"
 
 #: ../bin/src/ui_libraryfilterwidget.h:96
-#: ../bin/src/ui_albumcovermanager.h:153
+#: ../bin/src/ui_albumcovermanager.h:219
 msgid "Enter search terms here"
 msgstr "Digite os termos da pesquisa aqui"
 
@@ -1994,6 +2003,10 @@ msgstr "A cada hora"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Exceto entre as faixas do mesmo álbum ou lista CUE"
 
+#: ../bin/src/ui_albumcoverexport.h:207
+msgid "Existing covers"
+msgstr "Capas existentes"
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
 msgstr "Expandir"
@@ -2002,6 +2015,31 @@ msgstr "Expandir"
 #, qt-format
 msgid "Expires on %1"
 msgstr "Expira em %1"
+
+#: ../bin/src/ui_albumcovermanager.h:226
+msgid "Export Covers"
+msgstr "Exportar Capas"
+
+#: ../bin/src/ui_albumcoverexport.h:202
+msgid "Export covers"
+msgstr "Exportar capas"
+
+#: ../bin/src/ui_albumcoverexport.h:205
+msgid "Export downloaded covers"
+msgstr "Exportar capas baixadas"
+
+#: ../bin/src/ui_albumcoverexport.h:206
+msgid "Export embedded covers"
+msgstr "Exportar capas embutidas"
+
+#: ui/albumcovermanager.cpp:794
+msgid "Export finished"
+msgstr "Exportação terminou"
+
+#: ui/albumcovermanager.cpp:779
+#, qt-format
+msgid "Exported %1 covers out of %2 (%3 skipped)"
+msgstr "Exportado %1 capa(s) de %2 (%3 pulado)"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -2081,11 +2119,11 @@ msgstr "Favoritos"
 msgid "Favourite tracks"
 msgstr "Faixas preferidas"
 
-#: ../bin/src/ui_albumcovermanager.h:155
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "Fetch Missing Covers"
 msgstr "Buscar as capas que faltam"
 
-#: ../bin/src/ui_albumcovermanager.h:150
+#: ../bin/src/ui_albumcovermanager.h:216
 msgid "Fetch automatically"
 msgstr "Buscar automaticamente"
 
@@ -2109,19 +2147,19 @@ msgstr "Extensão de arquivo"
 msgid "File formats"
 msgstr "Formatos de arquivo"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Nome de arquivo"
 
-#: playlist/playlist.cpp:1227
+#: playlist/playlist.cpp:1229
 msgid "File name (without path)"
 msgstr "Nome do arquivo (sem pasta)"
 
-#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Tamanho do arquivo"
 
-#: playlist/playlist.cpp:1229 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1231 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2199,7 +2237,7 @@ msgstr "Esquecer um dispositivo irá removê-lo desta lista e o Clementine terá
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:119
+#: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:117
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
@@ -2262,7 +2300,7 @@ msgstr "Geral"
 msgid "General settings"
 msgstr "Configurações gerais"
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:66
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Genre"
@@ -2308,7 +2346,7 @@ msgstr "Ir até a aba lista de reprodução anterior"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:413
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:453
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2370,7 +2408,7 @@ msgstr "Organizar por Gênero/Álbum"
 msgid "Group by Genre/Artist/Album"
 msgstr "Organizar por Gênero/Artista/Álbum"
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr "Agrupamento"
@@ -2636,7 +2674,7 @@ msgstr "Capa grande de álbum"
 msgid "Large sidebar"
 msgstr "Barra lateral grande"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1222
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Última reprodução"
@@ -2719,7 +2757,7 @@ msgstr "Deixe em branco por padrão. Exemplos: \"/dev/dsp\", \"front\", etc."
 msgid "Left"
 msgstr "Esquerda"
 
-#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Duração"
@@ -2753,7 +2791,7 @@ msgstr "Ouvir músicas Grooveshark com base no que você ouviu anteriormente"
 msgid "Live"
 msgstr "Ao vivo"
 
-#: ../bin/src/ui_albumcovermanager.h:151
+#: ../bin/src/ui_albumcovermanager.h:217
 msgid "Load"
 msgstr "Carregar"
 
@@ -2773,7 +2811,7 @@ msgstr "Carregar capa do disco"
 msgid "Load cover from disk..."
 msgstr "Carregar capa do disco..."
 
-#: playlist/playlistcontainer.cpp:279
+#: playlist/playlistcontainer.cpp:286
 msgid "Load playlist"
 msgstr "Carregar lista de reprodução"
 
@@ -2994,7 +3032,7 @@ msgstr "Saída Mono"
 msgid "Months"
 msgstr "Meses"
 
-#: playlist/playlist.cpp:1235
+#: playlist/playlist.cpp:1237
 msgid "Mood"
 msgstr "Modo"
 
@@ -3178,7 +3216,7 @@ msgstr "Sem imagem de fundo"
 msgid "No long blocks"
 msgstr "Sem blocos longos"
 
-#: playlist/playlistcontainer.cpp:389
+#: playlist/playlistcontainer.cpp:396
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nenhum resultado encontrado. Limpe a caixa de busca para ver a lista de reprodução completa novamente."
@@ -3373,6 +3411,10 @@ msgstr "Tags originais"
 msgid "Other options"
 msgstr "Outras opções"
 
+#: ../bin/src/ui_albumcoverexport.h:203
+msgid "Output"
+msgstr "Saída"
+
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
 msgstr "Dispositivo de saída"
@@ -3385,9 +3427,17 @@ msgstr "Opções de Saída"
 msgid "Output plugin"
 msgstr "Plugin de saída"
 
+#: ../bin/src/ui_albumcoverexport.h:209
+msgid "Overwrite all"
+msgstr "Substituir tudo"
+
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "Sobrescrever arquivos existentes"
+
+#: ../bin/src/ui_albumcoverexport.h:210
+msgid "Overwrite smaller ones only"
+msgstr "Substituir apenas os menores"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3427,10 +3477,14 @@ msgstr "Pausar reprodução"
 msgid "Paused"
 msgstr "Pausado"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr "Artista"
+
+#: ../bin/src/ui_albumcoverexport.h:215
+msgid "Pixel"
+msgstr "Pixel"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
@@ -3451,7 +3505,7 @@ msgstr "Reproduzir Artista ou Tag"
 msgid "Play artist radio..."
 msgstr "Reproduzir rádio do artista..."
 
-#: playlist/playlist.cpp:1218 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1220 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Número de reproduções"
 
@@ -3488,8 +3542,8 @@ msgstr "Reproduzir"
 msgid "Player options"
 msgstr "Opções do player"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
-#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:280 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:412 playlist/playlisttabbar.cpp:298
 msgid "Playlist"
 msgstr "Lista de Reprodução"
 
@@ -3704,11 +3758,11 @@ msgstr "Classificar a música atual com 4 estrelas"
 msgid "Rate the current song 5 stars"
 msgstr "Classificar a música atual com 5 estrelas"
 
-#: playlist/playlist.cpp:1217 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "Avaliação"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:199
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:215
 msgid "Really cancel?"
 msgstr "Deseja realmente cancelar?"
 
@@ -3778,6 +3832,10 @@ msgstr "Remover dos favoritos"
 msgid "Remove from playlist"
 msgstr "Remover da lista de reprodução"
 
+#: playlist/playlistlistcontainer.cpp:309
+msgid "Remove playlists"
+msgstr "Remover listas de reprodução"
+
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
 msgstr "Removendo músicas de minha música"
@@ -3795,11 +3853,11 @@ msgstr "Renomear a lista de reprodução \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Renomear lista de reprodução Grooveshark"
 
-#: playlist/playlisttabbar.cpp:128
+#: playlist/playlisttabbar.cpp:132
 msgid "Rename playlist"
 msgstr "Renomear lista de reprodução"
 
-#: playlist/playlisttabbar.cpp:48
+#: playlist/playlisttabbar.cpp:50
 msgid "Rename playlist..."
 msgstr "Renomear lista de reprodução..."
 
@@ -3905,7 +3963,7 @@ msgstr "Remover o dispositivo com segurança"
 msgid "Safely remove the device after copying"
 msgstr "Remover o dispositivo com segurança após copiar"
 
-#: playlist/playlist.cpp:1225 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1227 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Taxa de amostragem"
 
@@ -3929,11 +3987,11 @@ msgstr "Gravar capa para o disco..."
 msgid "Save image"
 msgstr "Salvar imagem"
 
-#: playlist/playlistcontainer.cpp:316
+#: playlist/playlistcontainer.cpp:323
 msgid "Save playlist"
 msgstr "Salvar lista de reprodução"
 
-#: playlist/playlisttabbar.cpp:49 ../bin/src/ui_mainwindow.h:700
+#: playlist/playlisttabbar.cpp:51 ../bin/src/ui_mainwindow.h:700
 msgid "Save playlist..."
 msgstr "Salvar lista de reprodução..."
 
@@ -3965,7 +4023,11 @@ msgstr "Gravando faixas"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Perfil evolutivo taxa de amostragem (SSR)"
 
-#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:673
+#: ../bin/src/ui_albumcoverexport.h:212
+msgid "Scale size"
+msgstr "Tamanho de escala"
+
+#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Pontuação"
 
@@ -4271,6 +4333,14 @@ msgstr "Conectando..."
 msgid "Similar artists"
 msgstr "Artistas similares"
 
+#: ../bin/src/ui_albumcoverexport.h:211
+msgid "Size"
+msgstr "Tamanho"
+
+#: ../bin/src/ui_albumcoverexport.h:213
+msgid "Size:"
+msgstr "Tamanho:"
+
 #: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "Ska"
@@ -4279,7 +4349,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Pular para a música anterior da lista"
 
-#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "Número de pulos"
 
@@ -4347,7 +4417,7 @@ msgstr "Organizar músicas por"
 msgid "Sorting"
 msgstr "Organizando"
 
-#: playlist/playlist.cpp:1234
+#: playlist/playlist.cpp:1236
 msgid "Source"
 msgstr "Fonte"
 
@@ -4560,7 +4630,7 @@ msgstr "A capa do álbum da música atual"
 msgid "The directory %1 is not valid"
 msgstr "O diretório %1 não é válido"
 
-#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
+#: playlist/playlistmanager.cpp:156 playlist/playlistmanager.cpp:174
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "A lista de reprodução '%1' está vazia ou não pode ser carregada."
@@ -4699,7 +4769,7 @@ msgstr "Tempo limite"
 msgid "Timezone"
 msgstr "Fuso horário"
 
-#: playlist/playlist.cpp:1204 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4747,6 +4817,10 @@ msgstr "Muitos redirecionamentos"
 msgid "Top tracks"
 msgstr "Faixas Top."
 
+#: ../bin/src/ui_albumcovermanager.h:221
+msgid "Total albums:"
+msgstr "Total de albuns:"
+
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
 msgstr "Total de bytes transferido"
@@ -4755,7 +4829,7 @@ msgstr "Total de bytes transferido"
 msgid "Total network requests made"
 msgstr "Total de requisições de rede feitas"
 
-#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "Faixa"
@@ -4816,7 +4890,7 @@ msgstr "Não foi possível baixar %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:420 playlist/playlistmanager.cpp:423
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4988,7 +5062,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de bits variável"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:435 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Vários artistas"
 
@@ -4997,7 +5071,7 @@ msgstr "Vários artistas"
 msgid "Version %1"
 msgstr "Versão %1"
 
-#: ../bin/src/ui_albumcovermanager.h:154
+#: ../bin/src/ui_albumcovermanager.h:220
 msgid "View"
 msgstr "Exibir"
 
@@ -5127,6 +5201,10 @@ msgstr "Windows Media 64k"
 msgid "Windows Media audio"
 msgstr "Áudio do Windows Media"
 
+#: ../bin/src/ui_albumcovermanager.h:222
+msgid "Without cover:"
+msgstr "Sem capas:"
+
 #: library/libraryview.cpp:530
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
@@ -5145,7 +5223,7 @@ msgstr "Escrever todas as estatísticas de músicas em arquivos de canções"
 msgid "Wrong username or password."
 msgstr "Nome de usuário ou senha incorreta."
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -5165,14 +5243,15 @@ msgstr "Anos"
 msgid "Yesterday"
 msgstr "Ontem"
 
-#: playlist/playlistlistcontainer.cpp:296
-#, qt-format
-msgid "You are about to delete %1 playlists, are you sure?"
-msgstr "Você está prestes a apagar %1 listas, tem certeza?"
-
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
 msgstr "Você fará o download dos seguintes álbuns"
+
+#: playlist/playlistlistcontainer.cpp:310
+#, qt-format
+msgid ""
+"You are about to remove %1 playlists from your favorites, are you sure?"
+msgstr "Você está prestes a apagar %1 listas de seus favoritos, tem certeza?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5470,3 +5549,7 @@ msgstr "parar"
 #, qt-format
 msgid "track %1"
 msgstr "faixa %1"
+
+#: ../bin/src/ui_albumcoverexport.h:214
+msgid "x"
+msgstr "x"

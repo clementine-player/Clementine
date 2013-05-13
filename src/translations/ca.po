@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-01 20:40+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
+"PO-Revision-Date: 2013-05-11 23:39+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ca\n"
@@ -78,7 +78,7 @@ msgstr "%1 a %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 llistes de reproducció (%2)"
 
-#: playlist/playlistmanager.cpp:326
+#: playlist/playlistmanager.cpp:341
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 seleccionades de"
@@ -103,12 +103,12 @@ msgstr "%1 cançons trobades"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 cançons trobades (mostrant %2)"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 temes"
 
-#: ui/albumcovermanager.cpp:419
+#: ui/albumcovermanager.cpp:459
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 transferit"
@@ -225,6 +225,10 @@ msgstr "(diferents a les diverses cançons)"
 msgid "...and all the Amarok contributors"
 msgstr "…i tots els que han contribuït amb l’Amarok"
 
+#: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
+msgid "0"
+msgstr "0"
+
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
 msgstr "0:00:00"
@@ -237,7 +241,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 msgid "1 track"
 msgstr "1 pista"
 
@@ -285,7 +289,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Això guardarà les valoracions i estadístiques en etiquetes que s’escriuran en els fitxers de la vostra col·lecció.</p><p>Això no és necessari si el paràmetre «Guarda les valoracions i estadístiques en etiquetes de fitxer» sempre ha estat activat.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -346,7 +350,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "LLOEM L'HIPNOGRIPAU"
 
-#: ui/albumcoversearcher.cpp:166
+#: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
 msgid "Abort"
 msgstr "Interromp"
 
@@ -530,7 +534,7 @@ msgstr "Afegeix a les llistes de reproducció de Grooveshark"
 msgid "Add to another playlist"
 msgstr "Afegeix a una altra llista de reproducció"
 
-#: ../bin/src/ui_albumcovermanager.h:152
+#: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
 msgstr "Afegeix a la llista de reproducció"
 
@@ -587,7 +591,7 @@ msgstr "Després de"
 msgid "After copying..."
 msgstr "Despres de copiar..."
 
-#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -600,7 +604,7 @@ msgstr "Àlbum"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Àlbum (volum ideal per a totes les pistes)"
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -614,11 +618,11 @@ msgstr "Portada de l'àlbum"
 msgid "Album info on jamendo.com..."
 msgstr "Informació de l’àlbum en jamendo.com…"
 
-#: ui/albumcovermanager.cpp:122
+#: ui/albumcovermanager.cpp:134
 msgid "Albums with covers"
 msgstr "Àlbums amb carátules"
 
-#: ui/albumcovermanager.cpp:123
+#: ui/albumcovermanager.cpp:135
 msgid "Albums without covers"
 msgstr "Àlbums sense caràtules"
 
@@ -630,11 +634,11 @@ msgstr "Tots els fitxers (*)"
 msgid "All Glory to the Hypnotoad!"
 msgstr "Lloem l'Hipnogripau!"
 
-#: ui/albumcovermanager.cpp:121
+#: ui/albumcovermanager.cpp:133
 msgid "All albums"
 msgstr "Tots els àlbums"
 
-#: ui/albumcovermanager.cpp:246
+#: ui/albumcovermanager.cpp:265
 msgid "All artists"
 msgstr "Tots els artistes"
 
@@ -753,7 +757,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Esteu segur que voleu escriure les estadístiques de les cançons en tots els fitxers de la vostra col·lecció?"
 
-#: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -825,7 +829,7 @@ msgstr "Mida d'imatge mitja"
 msgid "BBC Podcasts"
 msgstr "Podcasts de la BBC"
 
-#: playlist/playlist.cpp:1223 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1225 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -883,7 +887,7 @@ msgstr "Millor"
 msgid "Biography from %1"
 msgstr "Biografia de %1"
 
-#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Taxa de bits"
 
@@ -1141,7 +1145,7 @@ msgstr "Premeu «Inicia sessió» i s’obrirà un navegador. Una vegada que aca
 msgid "Close"
 msgstr "Tanca"
 
-#: playlist/playlisttabbar.cpp:47
+#: playlist/playlisttabbar.cpp:49
 msgid "Close playlist"
 msgstr "Tanca la llista de reproducció"
 
@@ -1153,7 +1157,7 @@ msgstr "Tanca la visualització"
 msgid "Closing this window will cancel the download."
 msgstr "Si tanqueu aquesta finestra, es cancel·larà la descàrrega."
 
-#: ui/albumcovermanager.cpp:200
+#: ui/albumcovermanager.cpp:216
 msgid "Closing this window will stop searching for album covers."
 msgstr "Tancant aquesta finestra es deixaràn de buscar les caràtules dels albums."
 
@@ -1173,7 +1177,7 @@ msgstr "Colors"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Llista separada per comes de classe:nivell, el nivell és 0-3"
 
-#: playlist/playlist.cpp:1233 smartplaylists/searchterm.cpp:288
+#: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
 #: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Comentari"
@@ -1186,7 +1190,7 @@ msgstr "Completa les etiquetes automàticament"
 msgid "Complete tags automatically..."
 msgstr "Completa les etiquetes automàticament..."
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
@@ -1325,7 +1329,7 @@ msgstr "No s'ha pogut carregar l'estació de ràdio de last.fm"
 msgid "Couldn't open output file %1"
 msgstr "No es va poder obrir el fitxer de sortida %1"
 
-#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
@@ -1477,11 +1481,11 @@ msgid ""
 "recover your database"
 msgstr "S’ha detectat un dany en la base de dades. Consulteu https://code.google.com/p/clementine-player/wiki/DatabaseCorruption per obtenir instruccions per recuperar la vostra base de dades"
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Data de creació"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1232 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Data de modificació"
 
@@ -1547,10 +1551,6 @@ msgstr "Esborra del disc..."
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
 msgstr "Esborra els episodis escoltats"
-
-#: playlist/playlistlistcontainer.cpp:295
-msgid "Delete playlists"
-msgstr "Eliminar les llistes de reproducció"
 
 #: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
@@ -1642,7 +1642,7 @@ msgstr "Desactiva la generació de barres d’ànim"
 msgid "Disabled"
 msgstr "Deshabilitat"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:63
 #: ../bin/src/ui_edittagdialog.h:685
 msgid "Disc"
 msgstr "Disc"
@@ -1668,6 +1668,10 @@ msgstr "Escaneja de nou tota la col·lecció"
 msgid "Do not convert any music"
 msgstr "No converteixis cap musica"
 
+#: ../bin/src/ui_albumcoverexport.h:208
+msgid "Do not overwrite"
+msgstr "No ho sobreescriguis"
+
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "No repetir"
@@ -1680,7 +1684,7 @@ msgstr "No ho mostreu en Artistes diversos"
 msgid "Don't shuffle"
 msgstr "No remenar"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:202
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:218
 msgid "Don't stop!"
 msgstr "No aturar!"
 
@@ -1858,7 +1862,11 @@ msgstr "Introduïu un URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Introduïu l'URL per descarregar una imatge de portada des d'Internet"
 
-#: playlist/playlisttabbar.cpp:128
+#: ../bin/src/ui_albumcoverexport.h:204
+msgid "Enter a filename for exported covers (no extension):"
+msgstr "Introduïu un nom de fitxer per les caràtules exportades (sense extensió):"
+
+#: playlist/playlisttabbar.cpp:132
 msgid "Enter a new name for this playlist"
 msgstr "Introduïu un nom per aquesta llista de reproducció"
 
@@ -1881,7 +1889,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Introduïu termes de cerca per trobar podcasts en gpodder.net"
 
 #: ../bin/src/ui_libraryfilterwidget.h:96
-#: ../bin/src/ui_albumcovermanager.h:153
+#: ../bin/src/ui_albumcovermanager.h:219
 msgid "Enter search terms here"
 msgstr "Introduïu els termes de la cerca"
 
@@ -1990,6 +1998,10 @@ msgstr "Cada hora"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Excepte entre pistes del mateix àlbum o del mateix full CUE"
 
+#: ../bin/src/ui_albumcoverexport.h:207
+msgid "Existing covers"
+msgstr "Caràtules existents"
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
 msgstr "Expandeix"
@@ -1998,6 +2010,31 @@ msgstr "Expandeix"
 #, qt-format
 msgid "Expires on %1"
 msgstr "Caduca el %1"
+
+#: ../bin/src/ui_albumcovermanager.h:226
+msgid "Export Covers"
+msgstr "Exporta les caràtules"
+
+#: ../bin/src/ui_albumcoverexport.h:202
+msgid "Export covers"
+msgstr "Exporta les caràtules"
+
+#: ../bin/src/ui_albumcoverexport.h:205
+msgid "Export downloaded covers"
+msgstr "Exporta les caràtules baixades"
+
+#: ../bin/src/ui_albumcoverexport.h:206
+msgid "Export embedded covers"
+msgstr "Exporta les caràtules incrustades"
+
+#: ui/albumcovermanager.cpp:794
+msgid "Export finished"
+msgstr "Ha finalitzat l’exportació"
+
+#: ui/albumcovermanager.cpp:779
+#, qt-format
+msgid "Exported %1 covers out of %2 (%3 skipped)"
+msgstr "S’han exportat %1 caràtules de %2 (s’han omès %3)"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -2077,11 +2114,11 @@ msgstr "Preferits"
 msgid "Favourite tracks"
 msgstr "Cançons favorites"
 
-#: ../bin/src/ui_albumcovermanager.h:155
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "Fetch Missing Covers"
 msgstr "Recull les caràtules que falten"
 
-#: ../bin/src/ui_albumcovermanager.h:150
+#: ../bin/src/ui_albumcovermanager.h:216
 msgid "Fetch automatically"
 msgstr "Recull automàticament"
 
@@ -2105,19 +2142,19 @@ msgstr "Extensió del fitxer"
 msgid "File formats"
 msgstr "Format dels fitxers"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Nom del fitxer"
 
-#: playlist/playlist.cpp:1227
+#: playlist/playlist.cpp:1229
 msgid "File name (without path)"
 msgstr "Nom del fitxer (sense la ruta)"
 
-#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Mida del fitxer"
 
-#: playlist/playlist.cpp:1229 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1231 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2195,7 +2232,7 @@ msgstr "Oblidar un dispositiu l'eliminarà de la llista i Clementine haurà de t
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:119
+#: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:117
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
@@ -2258,7 +2295,7 @@ msgstr "General"
 msgid "General settings"
 msgstr "Arranjaments generals"
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:66
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Genre"
@@ -2304,7 +2341,7 @@ msgstr "Vés a la pestanya de l'anterior llista de reproducció"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:413
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:453
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2366,7 +2403,7 @@ msgstr "Agrupar per Gènere/Àlbum"
 msgid "Group by Genre/Artist/Album"
 msgstr "Agrupar per Gènere/Artista/Àlbum"
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr "Agrupació"
@@ -2632,7 +2669,7 @@ msgstr "Caràtula gran de l'àlbum"
 msgid "Large sidebar"
 msgstr "Barra lateral gran"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1222
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Últim reproduït"
@@ -2715,7 +2752,7 @@ msgstr "Deixar-ho en blanc per assignar el valor per defecte. Exemples : \"/dev/
 msgid "Left"
 msgstr "Esquerra"
 
-#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Durada"
@@ -2749,7 +2786,7 @@ msgstr "Escoltar cançons de Grooveshark basant-se en allò que s'ha reproduït 
 msgid "Live"
 msgstr "En directe"
 
-#: ../bin/src/ui_albumcovermanager.h:151
+#: ../bin/src/ui_albumcovermanager.h:217
 msgid "Load"
 msgstr "Carregar"
 
@@ -2769,7 +2806,7 @@ msgstr "Carrega la portada des del disc dur"
 msgid "Load cover from disk..."
 msgstr "Carrega la caratula del disc..."
 
-#: playlist/playlistcontainer.cpp:279
+#: playlist/playlistcontainer.cpp:286
 msgid "Load playlist"
 msgstr "Carrega la llista de reproducció"
 
@@ -2990,7 +3027,7 @@ msgstr "Reproducció monofònica"
 msgid "Months"
 msgstr "Mesos"
 
-#: playlist/playlist.cpp:1235
+#: playlist/playlist.cpp:1237
 msgid "Mood"
 msgstr "Estat d'ànim"
 
@@ -3174,7 +3211,7 @@ msgstr "Sense imatge de fons"
 msgid "No long blocks"
 msgstr "No utilitzis blocs llargs"
 
-#: playlist/playlistcontainer.cpp:389
+#: playlist/playlistcontainer.cpp:396
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "No s'ha trobat coincidencies. Netejeu el quadre de cerca per mostrar la llista de reproducció completa de nou."
@@ -3369,6 +3406,10 @@ msgstr "Etiquetes originals"
 msgid "Other options"
 msgstr "Altres opcions"
 
+#: ../bin/src/ui_albumcoverexport.h:203
+msgid "Output"
+msgstr "Sortida"
+
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
 msgstr "Perifèric de sortida"
@@ -3381,9 +3422,17 @@ msgstr "Opcions de sortida"
 msgid "Output plugin"
 msgstr "Connector de sortida"
 
+#: ../bin/src/ui_albumcoverexport.h:209
+msgid "Overwrite all"
+msgstr "Sobreescriu-ho tot"
+
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "Sobreescriu els fitxers existents"
+
+#: ../bin/src/ui_albumcoverexport.h:210
+msgid "Overwrite smaller ones only"
+msgstr "Sobreescriu només les més petites"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3423,10 +3472,14 @@ msgstr "Pausa la reproducció"
 msgid "Paused"
 msgstr "En pausa"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr "Intèrpret"
+
+#: ../bin/src/ui_albumcoverexport.h:215
+msgid "Pixel"
+msgstr "Píxel"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
@@ -3447,7 +3500,7 @@ msgstr "Reprodueix Artista o Etiqueta"
 msgid "Play artist radio..."
 msgstr "Reprodueix la ràdio de l’artista"
 
-#: playlist/playlist.cpp:1218 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1220 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Comptador de reproduccions"
 
@@ -3484,8 +3537,8 @@ msgstr "Reproducció"
 msgid "Player options"
 msgstr "Opcions del reproductor"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
-#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:280 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:412 playlist/playlisttabbar.cpp:298
 msgid "Playlist"
 msgstr "Llista de reproducció"
 
@@ -3700,11 +3753,11 @@ msgstr "Puntua la cançó actual amb 4 estrelles"
 msgid "Rate the current song 5 stars"
 msgstr "Puntua la cançó actual amb 5 estrelles"
 
-#: playlist/playlist.cpp:1217 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "Puntuació"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:199
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:215
 msgid "Really cancel?"
 msgstr "Realment voleu cancel·lar?"
 
@@ -3774,6 +3827,10 @@ msgstr "Esborreu dels favorits"
 msgid "Remove from playlist"
 msgstr "Suprimeix de la llista de reproducció"
 
+#: playlist/playlistlistcontainer.cpp:309
+msgid "Remove playlists"
+msgstr ""
+
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
 msgstr "S'estan esborrant cançons de La meva música"
@@ -3791,11 +3848,11 @@ msgstr "Reanomena la llista de reproducció \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Canvia el nom a una llista de reproducció de Grooveshark"
 
-#: playlist/playlisttabbar.cpp:128
+#: playlist/playlisttabbar.cpp:132
 msgid "Rename playlist"
 msgstr "Renombra de la llista de reproducció"
 
-#: playlist/playlisttabbar.cpp:48
+#: playlist/playlisttabbar.cpp:50
 msgid "Rename playlist..."
 msgstr "Renombra de la llista de reproducció..."
 
@@ -3839,7 +3896,7 @@ msgstr "Replay Gain"
 
 #: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Mode de l’Replay Gain"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3901,7 +3958,7 @@ msgstr "Treure el dispositiu amb seguretat"
 msgid "Safely remove the device after copying"
 msgstr "Treure el dispositiu amb seguretat després de copiar"
 
-#: playlist/playlist.cpp:1225 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1227 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Freqüència de mostreig"
 
@@ -3925,11 +3982,11 @@ msgstr "Desa la portada al disc dur..."
 msgid "Save image"
 msgstr "Desa la imatge"
 
-#: playlist/playlistcontainer.cpp:316
+#: playlist/playlistcontainer.cpp:323
 msgid "Save playlist"
 msgstr "Desa la llista de reproducció"
 
-#: playlist/playlisttabbar.cpp:49 ../bin/src/ui_mainwindow.h:700
+#: playlist/playlisttabbar.cpp:51 ../bin/src/ui_mainwindow.h:700
 msgid "Save playlist..."
 msgstr "Desa la llista de reproducció..."
 
@@ -3961,7 +4018,11 @@ msgstr "S'estan desant les pistes"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Perfil de freqüència de mostreig escalable (SSR)"
 
-#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:673
+#: ../bin/src/ui_albumcoverexport.h:212
+msgid "Scale size"
+msgstr "Mida de l’escala"
+
+#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Puntuació"
 
@@ -4267,6 +4328,14 @@ msgstr "S'està iniciant sessió..."
 msgid "Similar artists"
 msgstr "Artistes similars"
 
+#: ../bin/src/ui_albumcoverexport.h:211
+msgid "Size"
+msgstr "Mida"
+
+#: ../bin/src/ui_albumcoverexport.h:213
+msgid "Size:"
+msgstr "Mida:"
+
 #: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "Ska"
@@ -4275,7 +4344,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Salta enrere en la llista de reproducció"
 
-#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "Comptador d’omissions"
 
@@ -4343,7 +4412,7 @@ msgstr "Ordena les cançons per"
 msgid "Sorting"
 msgstr "Endreçant"
 
-#: playlist/playlist.cpp:1234
+#: playlist/playlist.cpp:1236
 msgid "Source"
 msgstr "Font"
 
@@ -4556,7 +4625,7 @@ msgstr "La portada de l'àlbum de la cançó en reproducció"
 msgid "The directory %1 is not valid"
 msgstr "El directori %1 bo es vàlid"
 
-#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
+#: playlist/playlistmanager.cpp:156 playlist/playlistmanager.cpp:174
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "La llista de reproducció '%1' esta buida o no es pot carregar."
@@ -4695,7 +4764,7 @@ msgstr "Temps d'espera"
 msgid "Timezone"
 msgstr "Zona horària"
 
-#: playlist/playlist.cpp:1204 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4743,6 +4812,10 @@ msgstr "Massa redireccions"
 msgid "Top tracks"
 msgstr "Millors cançons"
 
+#: ../bin/src/ui_albumcovermanager.h:221
+msgid "Total albums:"
+msgstr "Total d’àlbums:"
+
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
 msgstr "Bytes totals transferits"
@@ -4751,7 +4824,7 @@ msgstr "Bytes totals transferits"
 msgid "Total network requests made"
 msgstr "Total de sol·licituds de xarxa fetes"
 
-#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "Pista"
@@ -4812,7 +4885,7 @@ msgstr "No es pot descarregar %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:420 playlist/playlistmanager.cpp:423
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4984,7 +5057,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de bits variable"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:435 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Artistes diversos"
 
@@ -4993,7 +5066,7 @@ msgstr "Artistes diversos"
 msgid "Version %1"
 msgstr "Versió %1"
 
-#: ../bin/src/ui_albumcovermanager.h:154
+#: ../bin/src/ui_albumcovermanager.h:220
 msgid "View"
 msgstr "Vista"
 
@@ -5123,6 +5196,10 @@ msgstr "Windows Media 64k"
 msgid "Windows Media audio"
 msgstr "Audio Windows Media"
 
+#: ../bin/src/ui_albumcovermanager.h:222
+msgid "Without cover:"
+msgstr "Sense caràtula:"
+
 #: library/libraryview.cpp:530
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
@@ -5141,7 +5218,7 @@ msgstr "Escriu totes les estadístiques en els fitxers de les cançons"
 msgid "Wrong username or password."
 msgstr "Nom d’usuari o contrasenya incorrectes."
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -5161,14 +5238,15 @@ msgstr "Anys"
 msgid "Yesterday"
 msgstr "Ahir"
 
-#: playlist/playlistlistcontainer.cpp:296
-#, qt-format
-msgid "You are about to delete %1 playlists, are you sure?"
-msgstr "Esteu segur que voleu eliminar %1 llistes de reproducció?"
-
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
 msgstr "Sou a punt de descarregar els següents àlbums"
+
+#: playlist/playlistlistcontainer.cpp:310
+#, qt-format
+msgid ""
+"You are about to remove %1 playlists from your favorites, are you sure?"
+msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5466,3 +5544,7 @@ msgstr "atura"
 #, qt-format
 msgid "track %1"
 msgstr "peça %1"
+
+#: ../bin/src/ui_albumcoverexport.h:214
+msgid "x"
+msgstr "x"

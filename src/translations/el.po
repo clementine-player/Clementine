@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-04-29 08:51+0000\n"
-"Last-Translator: axil Pι <axilleas@archlinux.gr>\n"
+"PO-Revision-Date: 2013-05-11 23:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: el\n"
@@ -81,7 +81,7 @@ msgstr "%1 στο %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 λίστες αναπαραγωγής (%2)"
 
-#: playlist/playlistmanager.cpp:326
+#: playlist/playlistmanager.cpp:341
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 επιλεγμένα από"
@@ -106,12 +106,12 @@ msgstr "βρέθηκαν %1 τραγούδια"
 msgid "%1 songs found (showing %2)"
 msgstr "βρέθηκαν %1 τραγούδια (εμφάνιση %2)"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 κομμάτια"
 
-#: ui/albumcovermanager.cpp:419
+#: ui/albumcovermanager.cpp:459
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 μεταφέρθηκε"
@@ -228,6 +228,10 @@ msgstr "(διαφορετικό ανάμεσα σε πολλαπλά τραγο�
 msgid "...and all the Amarok contributors"
 msgstr "...και σε όλους τους συνεισφέροντες του Amarok"
 
+#: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
+msgid "0"
+msgstr "0"
+
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
 msgstr "0:00:00"
@@ -240,7 +244,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 ημέρα"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 msgid "1 track"
 msgstr "1 κομμάτι"
 
@@ -349,7 +353,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ΟΛΗ Η ΔΟΞΑ ΣΤΟΝ HYPNOTOAD"
 
-#: ui/albumcoversearcher.cpp:166
+#: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
 msgid "Abort"
 msgstr "Ματαίωση"
 
@@ -533,7 +537,7 @@ msgstr "Προσθήκη στη λίστα του "
 msgid "Add to another playlist"
 msgstr "Προσθήκη σε άλλη λίστα"
 
-#: ../bin/src/ui_albumcovermanager.h:152
+#: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
 msgstr "Προσθήκη στη λίστα"
 
@@ -590,7 +594,7 @@ msgstr "Μετά "
 msgid "After copying..."
 msgstr "Μετά την αντιγραφή..."
 
-#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -603,7 +607,7 @@ msgstr "Άλμπουμ"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Άλμπουμ (ιδανική ένταση για όλα τα κομμάτια)"
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -617,11 +621,11 @@ msgstr "Εξώφυλλο άλμπουμ"
 msgid "Album info on jamendo.com..."
 msgstr "Πληρ. άλμπουμ στο jamendo.com..."
 
-#: ui/albumcovermanager.cpp:122
+#: ui/albumcovermanager.cpp:134
 msgid "Albums with covers"
 msgstr "Άλμπουμ με εξώφυλλα"
 
-#: ui/albumcovermanager.cpp:123
+#: ui/albumcovermanager.cpp:135
 msgid "Albums without covers"
 msgstr "Άλμπουμ χωρίς εξώφυλλα"
 
@@ -633,11 +637,11 @@ msgstr "Όλα τα αρχεία (*)"
 msgid "All Glory to the Hypnotoad!"
 msgstr "Όλη η δόξα στον Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:121
+#: ui/albumcovermanager.cpp:133
 msgid "All albums"
 msgstr "Όλα τα άλμπουμ"
 
-#: ui/albumcovermanager.cpp:246
+#: ui/albumcovermanager.cpp:265
 msgid "All artists"
 msgstr "Όλοι οι καλλιτέχνες"
 
@@ -756,7 +760,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Είστε σίγουροι πως θέλετε να γράψετε τα στατιστικά των τραγουδιών στα αρχεία των τραγουδιών  για όλα τα τραγούδια στη βιβλιοθήκη σας;"
 
-#: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -828,7 +832,7 @@ msgstr "Μέσο μέγεθος εικόνας"
 msgid "BBC Podcasts"
 msgstr "BBC Podcasts"
 
-#: playlist/playlist.cpp:1223 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1225 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -886,7 +890,7 @@ msgstr "Βέλτιστος"
 msgid "Biography from %1"
 msgstr "Βιογραφία από %1"
 
-#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Ρυθμός bit"
 
@@ -1144,7 +1148,7 @@ msgstr "Κάνοντας \"κλικ\" στο πλήκτρο Είσοδος θα 
 msgid "Close"
 msgstr "Κλείσιμο"
 
-#: playlist/playlisttabbar.cpp:47
+#: playlist/playlisttabbar.cpp:49
 msgid "Close playlist"
 msgstr "Κλείσιμο της λίστας αναπαραγωγής"
 
@@ -1156,7 +1160,7 @@ msgstr "Κλείσιμο οπτικών εφέ"
 msgid "Closing this window will cancel the download."
 msgstr "Το κλείσιμο του παραθύρου θα ακυρώσει το \"κατέβασμα\"."
 
-#: ui/albumcovermanager.cpp:200
+#: ui/albumcovermanager.cpp:216
 msgid "Closing this window will stop searching for album covers."
 msgstr "Το κλείσιμο του παραθύρου θα σταματήσει την αναζήτηση για εξώφυλλα άλμπουμ."
 
@@ -1176,7 +1180,7 @@ msgstr "Χρώματα"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
-#: playlist/playlist.cpp:1233 smartplaylists/searchterm.cpp:288
+#: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
 #: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Σχόλια"
@@ -1189,7 +1193,7 @@ msgstr "Συμπλήρωση των ετικετών αυτόματα"
 msgid "Complete tags automatically..."
 msgstr "Συμπλήρωση των ετικετών αυτόματα..."
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
@@ -1328,7 +1332,7 @@ msgstr "Δεν μπόρεσε να γίνει φόρτωση του ραδιοσ
 msgid "Couldn't open output file %1"
 msgstr "Δεν μπορεί να ανοίξει το αρχείο εξόδου %1"
 
-#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
@@ -1480,11 +1484,11 @@ msgid ""
 "recover your database"
 msgstr "Εντοπίστηκε κατακερματισμός στην βάση δεδομένων. Παρακαλώ διαβάστε το https://code.google.com/p/clementine-player/wiki/DatabaseCorruption για οδηγίες ανάκτησης της βάσης δεδομένων"
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Ημερομηνία δημιουργίας"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1232 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Ημερομηνία τροποποίησης"
 
@@ -1550,10 +1554,6 @@ msgstr "Διαγραφή από τον δίσκο..."
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
 msgstr "Διαγραφή επεισοδίων που έχουν αναπαραχθεί"
-
-#: playlist/playlistlistcontainer.cpp:295
-msgid "Delete playlists"
-msgstr "Διαγραφή λιστών αναπαραγωγής"
 
 #: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
@@ -1645,7 +1645,7 @@ msgstr "Απενεργοποίηση δημιουργίας moodbar "
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:63
 #: ../bin/src/ui_edittagdialog.h:685
 msgid "Disc"
 msgstr "Δίσκος"
@@ -1671,6 +1671,10 @@ msgstr "Εκτελέστε μία πλήρη επανασάρωση της βι�
 msgid "Do not convert any music"
 msgstr "Μην μετατρέπεις την μουσική"
 
+#: ../bin/src/ui_albumcoverexport.h:208
+msgid "Do not overwrite"
+msgstr "Να μην γίνει αντικατάσταση"
+
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "Χωρίς επανάληψη"
@@ -1683,7 +1687,7 @@ msgstr "Αφαίρεση από τους διάφορους καλλιτέχνε
 msgid "Don't shuffle"
 msgstr "Χωρίς ανακάτεμα"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:202
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:218
 msgid "Don't stop!"
 msgstr "Μην σταματάς!"
 
@@ -1861,7 +1865,11 @@ msgstr "Εισάγετε ένα URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Εισάγετε μία διεύθυνση για να μεταφορτώσετε ένα εξώφυλλο από το διαδίκτυο:"
 
-#: playlist/playlisttabbar.cpp:128
+#: ../bin/src/ui_albumcoverexport.h:204
+msgid "Enter a filename for exported covers (no extension):"
+msgstr "Εισάγετε όνομα για τα εξαγώγιμα εξώφυλλα (χωρίς επέκταση):"
+
+#: playlist/playlisttabbar.cpp:132
 msgid "Enter a new name for this playlist"
 msgstr "Εισαγωγή νέου ονόματος για την λίστα αναπαραγωγής"
 
@@ -1884,7 +1892,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Εισάγετε τους όρους αναζήτησης παρακάτω για να βρείτε podcasts στο gpodder.net"
 
 #: ../bin/src/ui_libraryfilterwidget.h:96
-#: ../bin/src/ui_albumcovermanager.h:153
+#: ../bin/src/ui_albumcovermanager.h:219
 msgid "Enter search terms here"
 msgstr "Εισάγετε όρους αναζήτησης εδώ"
 
@@ -1993,6 +2001,10 @@ msgstr "Κάθε ώρα"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Εκτός μεταξύ δύο κομματιών στο ίδιο άλμπουμ ή στο ίδιο φύλλο CUE"
 
+#: ../bin/src/ui_albumcoverexport.h:207
+msgid "Existing covers"
+msgstr "Υπάρχοντα εξώφυλλα"
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
 msgstr "Επέκταση"
@@ -2001,6 +2013,31 @@ msgstr "Επέκταση"
 #, qt-format
 msgid "Expires on %1"
 msgstr "Λίγει σε %1"
+
+#: ../bin/src/ui_albumcovermanager.h:226
+msgid "Export Covers"
+msgstr "Εξαγωγή Εξώφυλλων"
+
+#: ../bin/src/ui_albumcoverexport.h:202
+msgid "Export covers"
+msgstr "Εξαγωγή εξώφυλλων"
+
+#: ../bin/src/ui_albumcoverexport.h:205
+msgid "Export downloaded covers"
+msgstr "Εξαγωγή μεταφορτωμένων εξώφυλλων"
+
+#: ../bin/src/ui_albumcoverexport.h:206
+msgid "Export embedded covers"
+msgstr "Εξαγωγή ενσωματωμένων εξώφυλλων"
+
+#: ui/albumcovermanager.cpp:794
+msgid "Export finished"
+msgstr "Η εξαγωγή ολοκληρώθηκε"
+
+#: ui/albumcovermanager.cpp:779
+#, qt-format
+msgid "Exported %1 covers out of %2 (%3 skipped)"
+msgstr "Εξαγωγή %1 εξώφυλλων από τα %2 (%3 παραλείφθηκαν)"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -2080,11 +2117,11 @@ msgstr "Αγαπημένα"
 msgid "Favourite tracks"
 msgstr "Αγαπημένα κομμάτια"
 
-#: ../bin/src/ui_albumcovermanager.h:155
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "Fetch Missing Covers"
 msgstr "Κατέβασμα εξώφυλλων που λείπουν"
 
-#: ../bin/src/ui_albumcovermanager.h:150
+#: ../bin/src/ui_albumcovermanager.h:216
 msgid "Fetch automatically"
 msgstr "Αυτόματο κατέβασμα"
 
@@ -2108,19 +2145,19 @@ msgstr "Επέκταση αρχείου"
 msgid "File formats"
 msgstr "Μορφή αρχείων"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Όνομα αρχείου"
 
-#: playlist/playlist.cpp:1227
+#: playlist/playlist.cpp:1229
 msgid "File name (without path)"
 msgstr "Όνομα αρχείου (χωρίς διαδρομή)"
 
-#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Μέγεθος αρχείου"
 
-#: playlist/playlist.cpp:1229 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1231 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2198,7 +2235,7 @@ msgstr "Το «Ξέχνα» την συσκευή θα την αφαιρέσει
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:119
+#: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:117
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
@@ -2261,7 +2298,7 @@ msgstr "Γενικά"
 msgid "General settings"
 msgstr "Γενικές ρυθμίσεις"
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:66
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Genre"
@@ -2307,7 +2344,7 @@ msgstr "Πήγαινε στην προηγούμενη πινακίδα της �
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:413
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:453
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2369,7 +2406,7 @@ msgstr "Ομαδοποίηση κατά Είδος/Άλμπουμ"
 msgid "Group by Genre/Artist/Album"
 msgstr "Ομαδοποίηση κατά Είδος/Καλλιντέχνη/Άλμπουμ"
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr "Ομαδοποίηση"
@@ -2635,7 +2672,7 @@ msgstr "Μεγάλο εξώφυλλο άλμπουμ"
 msgid "Large sidebar"
 msgstr "Μεγάλη πλευρική μπάρα"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1222
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Τελευταία εκτέλεση"
@@ -2718,7 +2755,7 @@ msgstr "Κενό για τα προεπιλεγμένα.  Π.χ. \"/dev/dsp\", \
 msgid "Left"
 msgstr "Αριστερά"
 
-#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Διάρκεια"
@@ -2752,7 +2789,7 @@ msgstr "Ακούστε τραγούδια από το Grooveshark παρόμοι
 msgid "Live"
 msgstr "Ζωντανά"
 
-#: ../bin/src/ui_albumcovermanager.h:151
+#: ../bin/src/ui_albumcovermanager.h:217
 msgid "Load"
 msgstr "Φόρτωση"
 
@@ -2772,7 +2809,7 @@ msgstr "Φόρτωση εξώφυλλου από τον δίσκο"
 msgid "Load cover from disk..."
 msgstr "Φόρτωση εξώφυλλου από τον δίσκο..."
 
-#: playlist/playlistcontainer.cpp:279
+#: playlist/playlistcontainer.cpp:286
 msgid "Load playlist"
 msgstr "Φόρτωση λίστας αναπαραγωγής"
 
@@ -2993,7 +3030,7 @@ msgstr "Αναπαραγωγή Mono"
 msgid "Months"
 msgstr "Μήνες"
 
-#: playlist/playlist.cpp:1235
+#: playlist/playlist.cpp:1237
 msgid "Mood"
 msgstr "Mood"
 
@@ -3177,7 +3214,7 @@ msgstr "Χωρίς εικόνα φόντου"
 msgid "No long blocks"
 msgstr "Όχι μακρά μπλοκς"
 
-#: playlist/playlistcontainer.cpp:389
+#: playlist/playlistcontainer.cpp:396
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Δεν βρέθηκαν. Καθαρίστε το πλαίσιο αναζήτησης να να εμφανιστεί ολόκληρη η λίστα αναπαραγωγής."
@@ -3372,6 +3409,10 @@ msgstr "Αρχικές ετικέτες"
 msgid "Other options"
 msgstr "Άλλες επιλογές"
 
+#: ../bin/src/ui_albumcoverexport.h:203
+msgid "Output"
+msgstr "Έξοδος"
+
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
 msgstr "Συσκευή εξόδου"
@@ -3384,9 +3425,17 @@ msgstr "Επιλογές εξόδου"
 msgid "Output plugin"
 msgstr "Επέκταση εξόδου"
 
+#: ../bin/src/ui_albumcoverexport.h:209
+msgid "Overwrite all"
+msgstr "Αντικατάσταση όλων"
+
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "Εγγραφή και αντικατάσταση υπαρχόντων αρχείων"
+
+#: ../bin/src/ui_albumcoverexport.h:210
+msgid "Overwrite smaller ones only"
+msgstr "Αντικατάσταση των μικρότερων μόνο"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3426,10 +3475,14 @@ msgstr "Παύση αναπαραγωγής"
 msgid "Paused"
 msgstr "Σταματημένο"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr "Εκτελεστής"
+
+#: ../bin/src/ui_albumcoverexport.h:215
+msgid "Pixel"
+msgstr "Εικονοστοιχεία"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
@@ -3450,7 +3503,7 @@ msgstr "Αναπαραγωγή καλλιτέχνη ή ετικέτας"
 msgid "Play artist radio..."
 msgstr "Αναπαραγωγή ραδιοφώνου καλλιτέχνη..."
 
-#: playlist/playlist.cpp:1218 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1220 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Μετρητής εκτελέσεων"
 
@@ -3487,8 +3540,8 @@ msgstr "Αναπαραγωγή"
 msgid "Player options"
 msgstr "Επιλογές αναπαραγωγής"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
-#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:280 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:412 playlist/playlisttabbar.cpp:298
 msgid "Playlist"
 msgstr "Λίστα"
 
@@ -3703,11 +3756,11 @@ msgstr "Βαθμολογία τρέχοντος τραγουδιού με 4 ασ
 msgid "Rate the current song 5 stars"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 5 αστέρια"
 
-#: playlist/playlist.cpp:1217 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "Βαθμολόγηση"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:199
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:215
 msgid "Really cancel?"
 msgstr "Ακύρωση στ' αλήθεια;"
 
@@ -3777,6 +3830,10 @@ msgstr "Αφαίρεση από τα αγαπημένα"
 msgid "Remove from playlist"
 msgstr "Αφαίρεση από την λίστα"
 
+#: playlist/playlistlistcontainer.cpp:309
+msgid "Remove playlists"
+msgstr ""
+
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
 msgstr "Αφαιρούνται τα τραγούδια από την Μουσική Μου"
@@ -3794,11 +3851,11 @@ msgstr "Μετονομασία της λίστας \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Μετονομασία της λίστας Grooveshark"
 
-#: playlist/playlisttabbar.cpp:128
+#: playlist/playlisttabbar.cpp:132
 msgid "Rename playlist"
 msgstr "Μετονομασία λίστας αναπαραγωγής"
 
-#: playlist/playlisttabbar.cpp:48
+#: playlist/playlisttabbar.cpp:50
 msgid "Rename playlist..."
 msgstr "Μετονομασία λίστας αναπαραγωγής..."
 
@@ -3904,7 +3961,7 @@ msgstr "Ασφαλής αφαίρεση συσκευής"
 msgid "Safely remove the device after copying"
 msgstr "Ασφαλής αφαίρεση συσκευής μετά την αντιγραφή"
 
-#: playlist/playlist.cpp:1225 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1227 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Ρυθμός δειγματοληψίας"
 
@@ -3928,11 +3985,11 @@ msgstr "Αποθ. εξώφυλλου στον δίσκο..."
 msgid "Save image"
 msgstr "Αποθήκευση εικόνας"
 
-#: playlist/playlistcontainer.cpp:316
+#: playlist/playlistcontainer.cpp:323
 msgid "Save playlist"
 msgstr "Αποθήκευση λίστας αναπαραγωγής"
 
-#: playlist/playlisttabbar.cpp:49 ../bin/src/ui_mainwindow.h:700
+#: playlist/playlisttabbar.cpp:51 ../bin/src/ui_mainwindow.h:700
 msgid "Save playlist..."
 msgstr "Αποθήκευση λίστας αναπαραγωγής..."
 
@@ -3964,7 +4021,11 @@ msgstr "Αποθήκευση κομματιών"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Προφίλ κλιμακούμενου ρυθμού δειγματοληψίας (SSR)"
 
-#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:673
+#: ../bin/src/ui_albumcoverexport.h:212
+msgid "Scale size"
+msgstr "Διαβάθμιση μεγέθους"
+
+#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Σκορ"
 
@@ -4270,6 +4331,14 @@ msgstr "Γίνεται είσοδος..."
 msgid "Similar artists"
 msgstr "Παρόμοιοι καλλιτέχνες"
 
+#: ../bin/src/ui_albumcoverexport.h:211
+msgid "Size"
+msgstr "Μέγεθος"
+
+#: ../bin/src/ui_albumcoverexport.h:213
+msgid "Size:"
+msgstr "Μέγεθος:"
+
 #: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "Ska"
@@ -4278,7 +4347,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Παράλειψη προς τα πίσω στη λίστα"
 
-#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "Μετρητής παραλήψεων"
 
@@ -4346,7 +4415,7 @@ msgstr "Ταξινόμηση τραγουδιών κατά"
 msgid "Sorting"
 msgstr "Ταξινόμηση"
 
-#: playlist/playlist.cpp:1234
+#: playlist/playlist.cpp:1236
 msgid "Source"
 msgstr "Πηγή"
 
@@ -4559,7 +4628,7 @@ msgstr "Το εξώφυλλο του άλμπουμ του τραγουδιού 
 msgid "The directory %1 is not valid"
 msgstr "Ο κατάλογος %1 δεν είναι έγκυρος"
 
-#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
+#: playlist/playlistmanager.cpp:156 playlist/playlistmanager.cpp:174
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Η λίστα αναπαραγωγής '%1' ήταν άδεια ή δεν μπόρεσε να φορτωθεί."
@@ -4698,7 +4767,7 @@ msgstr "Λήξη χρονικού ορίου"
 msgid "Timezone"
 msgstr "Ζώνη ώρας"
 
-#: playlist/playlist.cpp:1204 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4746,6 +4815,10 @@ msgstr "Πάρα πολλές ανακατευθύνσεις"
 msgid "Top tracks"
 msgstr "Κορυφαία κομμάτια"
 
+#: ../bin/src/ui_albumcovermanager.h:221
+msgid "Total albums:"
+msgstr "Συνολικά άλμπουμ:"
+
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
 msgstr "Συνολικά bytes που μεταφέρθηκαν"
@@ -4754,7 +4827,7 @@ msgstr "Συνολικά bytes που μεταφέρθηκαν"
 msgid "Total network requests made"
 msgstr "Συνολικές αιτήσεις δικτύου που πραγματοποιήθηκαν"
 
-#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "Κομμάτι"
@@ -4815,7 +4888,7 @@ msgstr "Αδυναμία \"κατεβάσματος\" του %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:420 playlist/playlistmanager.cpp:423
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4987,7 +5060,7 @@ msgid "Variable bit rate"
 msgstr "Μεταβαλλόμενος ρυθμός bit"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:435 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Διάφοροι καλλιτέχνες"
 
@@ -4996,7 +5069,7 @@ msgstr "Διάφοροι καλλιτέχνες"
 msgid "Version %1"
 msgstr "Έκδοση %1"
 
-#: ../bin/src/ui_albumcovermanager.h:154
+#: ../bin/src/ui_albumcovermanager.h:220
 msgid "View"
 msgstr "Προβολή"
 
@@ -5126,6 +5199,10 @@ msgstr "Windows Media 64k"
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
+#: ../bin/src/ui_albumcovermanager.h:222
+msgid "Without cover:"
+msgstr "Χωρίς εξώφυλλο:"
+
 #: library/libraryview.cpp:530
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
@@ -5144,7 +5221,7 @@ msgstr "Εγγραφή όλων των στατιστικών των τραγο�
 msgid "Wrong username or password."
 msgstr "Λάθος όνομα χρήστη ή συνθηματικό"
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -5164,14 +5241,15 @@ msgstr "Έτη"
 msgid "Yesterday"
 msgstr "Χθες"
 
-#: playlist/playlistlistcontainer.cpp:296
-#, qt-format
-msgid "You are about to delete %1 playlists, are you sure?"
-msgstr "Πρόκειται να διαγράψετε %1 λίστες, είστε σίγουροι;"
-
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
 msgstr "Πρόκειτε να \"κατεβάσετε\" τα παρακάτω άλμπουμ"
+
+#: playlist/playlistlistcontainer.cpp:310
+#, qt-format
+msgid ""
+"You are about to remove %1 playlists from your favorites, are you sure?"
+msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5469,3 +5547,7 @@ msgstr "διακοπή"
 #, qt-format
 msgid "track %1"
 msgstr "κομμάτι %1"
+
+#: ../bin/src/ui_albumcoverexport.h:214
+msgid "x"
+msgstr "x"

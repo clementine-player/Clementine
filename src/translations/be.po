@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-02 18:41+0000\n"
-"Last-Translator: Fiodar Maroźka <fyodormorozko95@gmail.com>\n"
+"PO-Revision-Date: 2013-05-11 23:39+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: be\n"
@@ -79,7 +79,7 @@ msgstr "%1 на %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 плэйлістоў (%2)"
 
-#: playlist/playlistmanager.cpp:326
+#: playlist/playlistmanager.cpp:341
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 абрана з"
@@ -104,12 +104,12 @@ msgstr "%1 кампазыцый знойдзена"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 кампазыцый знойдзена (паказана %2)"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 трэкаў"
 
-#: ui/albumcovermanager.cpp:419
+#: ui/albumcovermanager.cpp:459
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 перададзены"
@@ -226,6 +226,10 @@ msgstr "(розны праз некалькі кампазыцый)"
 msgid "...and all the Amarok contributors"
 msgstr "...і ўсім стваральнікам Amarok"
 
+#: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
+msgid "0"
+msgstr ""
+
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
 msgstr "0:00:00"
@@ -238,7 +242,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 дзень"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 msgid "1 track"
 msgstr "1 кампазыцыя"
 
@@ -347,7 +351,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "УСЯ СЛАВА ГІПНАЖАБЕ!"
 
-#: ui/albumcoversearcher.cpp:166
+#: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
 msgid "Abort"
 msgstr ""
 
@@ -531,7 +535,7 @@ msgstr "Дадаць у плэйлісты Grooveshark"
 msgid "Add to another playlist"
 msgstr "Дадаць у іншы плэйліст"
 
-#: ../bin/src/ui_albumcovermanager.h:152
+#: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
 msgstr "Дадаць у плэйліст"
 
@@ -588,7 +592,7 @@ msgstr "Пасьля"
 msgid "After copying..."
 msgstr "Пасьля капіяваньня..."
 
-#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -601,7 +605,7 @@ msgstr "Альбом"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (ідэальная гучнасьць для ўсіх трэкаў)"
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -615,11 +619,11 @@ msgstr "Вокладка альбому"
 msgid "Album info on jamendo.com..."
 msgstr "Інфармацыя аб альбоме на jamendo.com..."
 
-#: ui/albumcovermanager.cpp:122
+#: ui/albumcovermanager.cpp:134
 msgid "Albums with covers"
 msgstr "Альбомы з вокладкамі"
 
-#: ui/albumcovermanager.cpp:123
+#: ui/albumcovermanager.cpp:135
 msgid "Albums without covers"
 msgstr "Альбомы бяз вокладак"
 
@@ -631,11 +635,11 @@ msgstr "Усе файлы (*)"
 msgid "All Glory to the Hypnotoad!"
 msgstr "Уся слава Гіпнажабе!"
 
-#: ui/albumcovermanager.cpp:121
+#: ui/albumcovermanager.cpp:133
 msgid "All albums"
 msgstr "Усе альбомы"
 
-#: ui/albumcovermanager.cpp:246
+#: ui/albumcovermanager.cpp:265
 msgid "All artists"
 msgstr "Усе выканаўцы"
 
@@ -754,7 +758,7 @@ msgid ""
 "the songs of your library?"
 msgstr ""
 
-#: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -826,7 +830,7 @@ msgstr "Прыкладны памер выявы"
 msgid "BBC Podcasts"
 msgstr "Подкасты BBC"
 
-#: playlist/playlist.cpp:1223 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1225 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -884,7 +888,7 @@ msgstr "Найлепшая"
 msgid "Biography from %1"
 msgstr "Біяграфія з %1"
 
-#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Бітрэйт"
 
@@ -1142,7 +1146,7 @@ msgstr "Націск на кнопку рэгістрацыі адкрые бр�
 msgid "Close"
 msgstr "Зачыніць"
 
-#: playlist/playlisttabbar.cpp:47
+#: playlist/playlisttabbar.cpp:49
 msgid "Close playlist"
 msgstr "Зачыніць плэйліст"
 
@@ -1154,7 +1158,7 @@ msgstr "Зачыніць візуалізацыю"
 msgid "Closing this window will cancel the download."
 msgstr "Закрыцьцё гэтага вакна адменіць загрузку."
 
-#: ui/albumcovermanager.cpp:200
+#: ui/albumcovermanager.cpp:216
 msgid "Closing this window will stop searching for album covers."
 msgstr "Закрыцьцё гэтага вакна спыніць пошук вокладак альбомаў."
 
@@ -1174,7 +1178,7 @@ msgstr "Колеры"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Падзелены коскамі сьпіс \"кляс:узровень\", дзе ўзровень ад 0 да 3"
 
-#: playlist/playlist.cpp:1233 smartplaylists/searchterm.cpp:288
+#: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
 #: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Камэнтар"
@@ -1187,7 +1191,7 @@ msgstr "Аўтаматычна запоўніць тэгі"
 msgid "Complete tags automatically..."
 msgstr "Аўтаматычна запоўніць тэгі..."
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
@@ -1326,7 +1330,7 @@ msgstr "Немагчыма загрузіць радыёстанцыю last.fm"
 msgid "Couldn't open output file %1"
 msgstr "Немагчыма адкрыць выходны файл %1"
 
-#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
@@ -1478,11 +1482,11 @@ msgid ""
 "recover your database"
 msgstr "База дадзеных пашкоджаная. Калі ласка прачытайце https://code.google.com/p/clementine-player/wiki/DatabaseCorruption для інструкцыяў па аднаўленьню."
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Дата стварэньня"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1232 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Дата зьмены"
 
@@ -1548,10 +1552,6 @@ msgstr "Выдаліць з дыску..."
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
 msgstr "Выдаліць праслуханыя выпускі"
-
-#: playlist/playlistlistcontainer.cpp:295
-msgid "Delete playlists"
-msgstr "Выдаліць плэйлісты"
 
 #: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
@@ -1643,7 +1643,7 @@ msgstr "Выключыць генэрацыю панэлі настрою"
 msgid "Disabled"
 msgstr "Выключана"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:63
 #: ../bin/src/ui_edittagdialog.h:685
 msgid "Disc"
 msgstr "Дыск"
@@ -1669,6 +1669,10 @@ msgstr "Перасканаваць бібліятэку"
 msgid "Do not convert any music"
 msgstr "Не канвэртаваць ніякую музыку"
 
+#: ../bin/src/ui_albumcoverexport.h:208
+msgid "Do not overwrite"
+msgstr ""
+
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "Не паўтараць"
@@ -1681,7 +1685,7 @@ msgstr "Не паказваць у \"Розных выканаўцах\""
 msgid "Don't shuffle"
 msgstr "Ня зьмешваць"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:202
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:218
 msgid "Don't stop!"
 msgstr "Не спыняць!"
 
@@ -1859,7 +1863,11 @@ msgstr "Уведзьце URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Уведзьце URL для пампаваньня вокладки з Інтэрнэту"
 
-#: playlist/playlisttabbar.cpp:128
+#: ../bin/src/ui_albumcoverexport.h:204
+msgid "Enter a filename for exported covers (no extension):"
+msgstr ""
+
+#: playlist/playlisttabbar.cpp:132
 msgid "Enter a new name for this playlist"
 msgstr "Уведзьце новае імя для гэтага плэйлісту"
 
@@ -1882,7 +1890,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Уведзьце ключавыя словы для пошуку ў gpodder.net"
 
 #: ../bin/src/ui_libraryfilterwidget.h:96
-#: ../bin/src/ui_albumcovermanager.h:153
+#: ../bin/src/ui_albumcovermanager.h:219
 msgid "Enter search terms here"
 msgstr "Пошук..."
 
@@ -1991,6 +1999,10 @@ msgstr "Кожную гадзіну"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Акрамя трэкаў з аднаго й таго ж альбому ці CUE-файлу"
 
+#: ../bin/src/ui_albumcoverexport.h:207
+msgid "Existing covers"
+msgstr ""
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
 msgstr "Разгарнуць"
@@ -1999,6 +2011,31 @@ msgstr "Разгарнуць"
 #, qt-format
 msgid "Expires on %1"
 msgstr "Тэрмін дзеяньня мінае %1"
+
+#: ../bin/src/ui_albumcovermanager.h:226
+msgid "Export Covers"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:202
+msgid "Export covers"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:205
+msgid "Export downloaded covers"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:206
+msgid "Export embedded covers"
+msgstr ""
+
+#: ui/albumcovermanager.cpp:794
+msgid "Export finished"
+msgstr ""
+
+#: ui/albumcovermanager.cpp:779
+#, qt-format
+msgid "Exported %1 covers out of %2 (%3 skipped)"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -2078,11 +2115,11 @@ msgstr "Улюбёныя"
 msgid "Favourite tracks"
 msgstr "Улюбёныя трэкі"
 
-#: ../bin/src/ui_albumcovermanager.h:155
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "Fetch Missing Covers"
 msgstr "Запоўнiць пустыя вокладкi"
 
-#: ../bin/src/ui_albumcovermanager.h:150
+#: ../bin/src/ui_albumcovermanager.h:216
 msgid "Fetch automatically"
 msgstr "Выбіраць аўтаматычна"
 
@@ -2106,19 +2143,19 @@ msgstr "Пашырэньне файлу"
 msgid "File formats"
 msgstr "Фарматы файлаў"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Імя файла"
 
-#: playlist/playlist.cpp:1227
+#: playlist/playlist.cpp:1229
 msgid "File name (without path)"
 msgstr "Імя файла (без указаньня шляху)"
 
-#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Памер файлу"
 
-#: playlist/playlist.cpp:1229 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1231 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2196,7 +2233,7 @@ msgstr "Калі выбраць \"Забыць прыладу\", то яна б�
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:119
+#: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:117
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
@@ -2259,7 +2296,7 @@ msgstr "Агульныя"
 msgid "General settings"
 msgstr "Агульныя налады"
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:66
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Genre"
@@ -2305,7 +2342,7 @@ msgstr "Перайсьці да папярэдняга сьпісу прайгр
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:413
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:453
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2367,7 +2404,7 @@ msgstr "Сартаваць па Жанр/Альбом"
 msgid "Group by Genre/Artist/Album"
 msgstr "Сартаваць па Жанр/Выканаўца/Альбом"
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr ""
@@ -2633,7 +2670,7 @@ msgstr "Вялікая вокладка альбому"
 msgid "Large sidebar"
 msgstr "Шырокая бакавая панэль"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1222
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Апошняе праслуханае"
@@ -2716,7 +2753,7 @@ msgstr "Пакіньце пустым для змоўчаньня. Напрык�
 msgid "Left"
 msgstr ""
 
-#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Працягласьць"
@@ -2750,7 +2787,7 @@ msgstr "Слухаць музыку на сэрвісе Grooveshark, базую�
 msgid "Live"
 msgstr "Live"
 
-#: ../bin/src/ui_albumcovermanager.h:151
+#: ../bin/src/ui_albumcovermanager.h:217
 msgid "Load"
 msgstr "Загрузіць"
 
@@ -2770,7 +2807,7 @@ msgstr "Загрузіць вокладку з дыску"
 msgid "Load cover from disk..."
 msgstr "Загрузіць вокладку з дыску..."
 
-#: playlist/playlistcontainer.cpp:279
+#: playlist/playlistcontainer.cpp:286
 msgid "Load playlist"
 msgstr "Загрузіць плэйліст"
 
@@ -2991,7 +3028,7 @@ msgstr "Прайграваньне мона"
 msgid "Months"
 msgstr "Месяцаў"
 
-#: playlist/playlist.cpp:1235
+#: playlist/playlist.cpp:1237
 msgid "Mood"
 msgstr "Настрой"
 
@@ -3175,7 +3212,7 @@ msgstr "Няма фонавай выявы"
 msgid "No long blocks"
 msgstr "Бяз доўгіх блёкаў"
 
-#: playlist/playlistcontainer.cpp:389
+#: playlist/playlistcontainer.cpp:396
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Супадзеньняў ня знойдзена. Ачысьціце радок пошуку, каб зноў убачыць плэйліст."
@@ -3370,6 +3407,10 @@ msgstr "Першапачатковыя тэгі"
 msgid "Other options"
 msgstr "Іншыя налады"
 
+#: ../bin/src/ui_albumcoverexport.h:203
+msgid "Output"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
 msgstr ""
@@ -3382,9 +3423,17 @@ msgstr "Опцыі вываду"
 msgid "Output plugin"
 msgstr ""
 
+#: ../bin/src/ui_albumcoverexport.h:209
+msgid "Overwrite all"
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "Перазапісаць існыя файлы"
+
+#: ../bin/src/ui_albumcoverexport.h:210
+msgid "Overwrite smaller ones only"
+msgstr ""
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3424,9 +3473,13 @@ msgstr "Прыпыніць прайграваньне"
 msgid "Paused"
 msgstr "Прыпынены"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:215
+msgid "Pixel"
 msgstr ""
 
 #: widgets/fancytabwidget.cpp:672
@@ -3448,7 +3501,7 @@ msgstr "Прайграць выканаўцу ці тэг"
 msgid "Play artist radio..."
 msgstr "Прайграць радыё артыста..."
 
-#: playlist/playlist.cpp:1218 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1220 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Колькасць прайграваньняў"
 
@@ -3485,8 +3538,8 @@ msgstr "Прайграваньне"
 msgid "Player options"
 msgstr "Налады плэеру"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
-#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:280 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:412 playlist/playlisttabbar.cpp:298
 msgid "Playlist"
 msgstr "Плэйліст"
 
@@ -3701,11 +3754,11 @@ msgstr "Ацаніць бягучую кампазыцыю ў 4 зоркі"
 msgid "Rate the current song 5 stars"
 msgstr "Ацаніць бягучую кампазыцыю ў 5 зорак"
 
-#: playlist/playlist.cpp:1217 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "Рэйтынг"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:199
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:215
 msgid "Really cancel?"
 msgstr "Ці сапраўды адмяніць?"
 
@@ -3775,6 +3828,10 @@ msgstr "Прыбраць з абраных"
 msgid "Remove from playlist"
 msgstr "Прыбраць з плэйлісту"
 
+#: playlist/playlistlistcontainer.cpp:309
+msgid "Remove playlists"
+msgstr ""
+
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
 msgstr "Прыбраньне кампазыцыі з Маёй Музыкі"
@@ -3792,11 +3849,11 @@ msgstr "Пераназваць плэйліст  \\\"%1\\\""
 msgid "Rename Grooveshark playlist"
 msgstr "Пераназваць плэйліст Grooveshark"
 
-#: playlist/playlisttabbar.cpp:128
+#: playlist/playlisttabbar.cpp:132
 msgid "Rename playlist"
 msgstr "Пераназваць плэйліст"
 
-#: playlist/playlisttabbar.cpp:48
+#: playlist/playlisttabbar.cpp:50
 msgid "Rename playlist..."
 msgstr "Пераназваць плэйліст..."
 
@@ -3902,7 +3959,7 @@ msgstr "Бясьпечна выняць прыладу"
 msgid "Safely remove the device after copying"
 msgstr "Бясьпечна выняць прыладу пасьля капіяваньня"
 
-#: playlist/playlist.cpp:1225 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1227 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Чашчыня"
 
@@ -3926,11 +3983,11 @@ msgstr "Захаваць вокладку на дыск..."
 msgid "Save image"
 msgstr "Захаваць выяву"
 
-#: playlist/playlistcontainer.cpp:316
+#: playlist/playlistcontainer.cpp:323
 msgid "Save playlist"
 msgstr "Захаваць плэйліст"
 
-#: playlist/playlisttabbar.cpp:49 ../bin/src/ui_mainwindow.h:700
+#: playlist/playlisttabbar.cpp:51 ../bin/src/ui_mainwindow.h:700
 msgid "Save playlist..."
 msgstr "Захаваць плэйліст..."
 
@@ -3962,7 +4019,11 @@ msgstr "Захоўваньне трэкаў"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Профіль Scalable sampling rate (SSR)"
 
-#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:673
+#: ../bin/src/ui_albumcoverexport.h:212
+msgid "Scale size"
+msgstr ""
+
+#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Лік"
 
@@ -4268,6 +4329,14 @@ msgstr "Адбываецца ўваход..."
 msgid "Similar artists"
 msgstr "Падобныя выканаўцы"
 
+#: ../bin/src/ui_albumcoverexport.h:211
+msgid "Size"
+msgstr ""
+
+#: ../bin/src/ui_albumcoverexport.h:213
+msgid "Size:"
+msgstr ""
+
 #: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "Ska"
@@ -4276,7 +4345,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Перамясьціць назад у плэйлісьце"
 
-#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "Прапусьціць падлік"
 
@@ -4344,7 +4413,7 @@ msgstr "Сартаваць песьні па"
 msgid "Sorting"
 msgstr "Сартаваць"
 
-#: playlist/playlist.cpp:1234
+#: playlist/playlist.cpp:1236
 msgid "Source"
 msgstr "Крыніца"
 
@@ -4557,7 +4626,7 @@ msgstr "Вокладка альбому бягучае кампазыцыі"
 msgid "The directory %1 is not valid"
 msgstr "Каталёг %1 няправільны"
 
-#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
+#: playlist/playlistmanager.cpp:156 playlist/playlistmanager.cpp:174
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Плэйліст '%1' пусты ці ня можа быць загружаны."
@@ -4696,7 +4765,7 @@ msgstr "Таймаўт"
 msgid "Timezone"
 msgstr "Часавы пояс"
 
-#: playlist/playlist.cpp:1204 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4744,6 +4813,10 @@ msgstr "Занадта шмат перанакіраваньняў"
 msgid "Top tracks"
 msgstr "Самыя папулярныя"
 
+#: ../bin/src/ui_albumcovermanager.h:221
+msgid "Total albums:"
+msgstr ""
+
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
 msgstr "Перадана байтаў увогуле"
@@ -4752,7 +4825,7 @@ msgstr "Перадана байтаў увогуле"
 msgid "Total network requests made"
 msgstr "Выканана сеткавых запытаў увогуле"
 
-#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "Трэк"
@@ -4813,7 +4886,7 @@ msgstr "Немагчыма спампаваць %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:420 playlist/playlistmanager.cpp:423
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4985,7 +5058,7 @@ msgid "Variable bit rate"
 msgstr "Пераменны бітрэйт"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:435 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Розныя выканаўцы"
 
@@ -4994,7 +5067,7 @@ msgstr "Розныя выканаўцы"
 msgid "Version %1"
 msgstr "Вэрсія %1"
 
-#: ../bin/src/ui_albumcovermanager.h:154
+#: ../bin/src/ui_albumcovermanager.h:220
 msgid "View"
 msgstr "Прагляд"
 
@@ -5124,6 +5197,10 @@ msgstr "Windows Media 64k"
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
+#: ../bin/src/ui_albumcovermanager.h:222
+msgid "Without cover:"
+msgstr ""
+
 #: library/libraryview.cpp:530
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
@@ -5142,7 +5219,7 @@ msgstr ""
 msgid "Wrong username or password."
 msgstr "Няправільнае імя ці пароль."
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -5162,14 +5239,15 @@ msgstr "Годы"
 msgid "Yesterday"
 msgstr "Учора"
 
-#: playlist/playlistlistcontainer.cpp:296
-#, qt-format
-msgid "You are about to delete %1 playlists, are you sure?"
-msgstr "Вы сапраўды жадаеце выдаліць %1 плэйлістоў?"
-
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
 msgstr "Вы зьбіраецеся спампаваць наступныя альбомы"
+
+#: playlist/playlistlistcontainer.cpp:310
+#, qt-format
+msgid ""
+"You are about to remove %1 playlists from your favorites, are you sure?"
+msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5467,3 +5545,7 @@ msgstr "Спыніць"
 #, qt-format
 msgid "track %1"
 msgstr "трэк %1"
+
+#: ../bin/src/ui_albumcoverexport.h:214
+msgid "x"
+msgstr ""

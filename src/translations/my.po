@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-04-28 12:28+0000\n"
+"PO-Revision-Date: 2013-05-12 00:24+0000\n"
 "Last-Translator: Yhal Htet Aung <jumoun@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -76,7 +76,7 @@ msgstr "%1 မှအပေါ် %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 သီချင်းစာရင်းများ (%2)"
 
-#: playlist/playlistmanager.cpp:326
+#: playlist/playlistmanager.cpp:341
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 ကိုရွေးချယ်ခဲ့"
@@ -101,12 +101,12 @@ msgstr "%1 သီချင်းများရှာတွေ့"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 သီချင်းများရှာတွေ့ (%2 ပြသနေ)"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 တေးသံလမ်းကြောများ"
 
-#: ui/albumcovermanager.cpp:419
+#: ui/albumcovermanager.cpp:459
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 ကူးပြောင်း"
@@ -223,6 +223,10 @@ msgstr "(အမျိုးမျိုးသောသီချင်းမျ�
 msgid "...and all the Amarok contributors"
 msgstr "...နှင့်အမာရော့ခ်ကူညီသူများအားလံုး"
 
+#: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
+msgid "0"
+msgstr "၀"
+
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
 msgstr "၀:၀၀:၀၀"
@@ -235,7 +239,7 @@ msgstr "၀ပီအိတ်စ်"
 msgid "1 day"
 msgstr "တစ်နေ့"
 
-#: playlist/playlistmanager.cpp:332
+#: playlist/playlistmanager.cpp:347
 msgid "1 track"
 msgstr "တေးသံလမ်းကြောတစ်ခု"
 
@@ -344,7 +348,7 @@ msgstr "အေအိုင်အက်ဖ်အက်ဖ်"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "အံ့မခန်းဖွယ်အားလံုးကိုဟိုက်ဖ်နိုဖားသို့"
 
-#: ui/albumcoversearcher.cpp:166
+#: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
 msgid "Abort"
 msgstr "ဖျက်သိမ်း"
 
@@ -528,7 +532,7 @@ msgstr "ဂရုရှက်သီချင်းစာရင်းများ
 msgid "Add to another playlist"
 msgstr "သီချင်းစာရင်းနောက်တစ်ခုသို့ထည့်"
 
-#: ../bin/src/ui_albumcovermanager.h:152
+#: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
 msgstr "သီချင်းစာရင်းသို့ထည့်"
 
@@ -585,7 +589,7 @@ msgstr "ပြီးနောက်"
 msgid "After copying..."
 msgstr "ကူးယူပြီးနောက်..."
 
-#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -598,7 +602,7 @@ msgstr "အယ်လဘမ်"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "အယ်လဘမ် (တေးသံလမ်းကြောများအားလံုးအတွက်အကောင်းဆုံးအသံကျယ်ကျယ်)"
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -612,11 +616,11 @@ msgstr "အယ်လဘမ်အဖုံး"
 msgid "Album info on jamendo.com..."
 msgstr "ဂျမန်ဒို.ကွမ်းမှအယ်လဘမ်အချက်အလက်..."
 
-#: ui/albumcovermanager.cpp:122
+#: ui/albumcovermanager.cpp:134
 msgid "Albums with covers"
 msgstr "အဖုံးများနဲ့အယ်လဘမ်များ"
 
-#: ui/albumcovermanager.cpp:123
+#: ui/albumcovermanager.cpp:135
 msgid "Albums without covers"
 msgstr "အဖုံးများနဲ့အယ်လဘမ်များ"
 
@@ -628,11 +632,11 @@ msgstr "ဖိုင်များအားလံုး(*)"
 msgid "All Glory to the Hypnotoad!"
 msgstr "အံ့မခန်းဖွယ်အားလံုးကိုဟိုက်ဖ်နိုဖားသို့!"
 
-#: ui/albumcovermanager.cpp:121
+#: ui/albumcovermanager.cpp:133
 msgid "All albums"
 msgstr "အယ်လဘမ်များအားလံုး"
 
-#: ui/albumcovermanager.cpp:246
+#: ui/albumcovermanager.cpp:265
 msgid "All artists"
 msgstr "အနုပညာရှင်များအားလံုး"
 
@@ -751,7 +755,7 @@ msgid ""
 "the songs of your library?"
 msgstr "သီချင်းတိုက်သီချင်းများအားလံုးအတွက်သီချင်းကိန်းဂဏန်းအချက်အလက်များကိုသီချင်းဖိုင်အဖြစ်ရေးလိုပါသလား?"
 
-#: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -823,7 +827,7 @@ msgstr "ပျမ်းမျှပုံအရွယ်အစား"
 msgid "BBC Podcasts"
 msgstr "ဘီဘီစီပို့စ်ကဒ်များ"
 
-#: playlist/playlist.cpp:1223 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1225 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "ဘီပီအမ်"
@@ -881,7 +885,7 @@ msgstr "အကောင်းဆုံး"
 msgid "Biography from %1"
 msgstr "%1 မှအတ္ထုပ္ပတ္တိ"
 
-#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "ဘစ်နှုန်း"
 
@@ -1139,7 +1143,7 @@ msgstr "ဖွင့်ဝင်ခလုတ်ကိုနှိပ်လျှ
 msgid "Close"
 msgstr "ပိတ်"
 
-#: playlist/playlisttabbar.cpp:47
+#: playlist/playlisttabbar.cpp:49
 msgid "Close playlist"
 msgstr "သီချင်းစာရင်းပိတ်"
 
@@ -1151,7 +1155,7 @@ msgstr "ပုံဖော်ကြည့်ခြင်းပိတ်"
 msgid "Closing this window will cancel the download."
 msgstr "ယခုဝင်းဒိုးပိတ်လျှင်ကူးဆွဲပယ်ဖျက်သွားလိမ့်မည်။"
 
-#: ui/albumcovermanager.cpp:200
+#: ui/albumcovermanager.cpp:216
 msgid "Closing this window will stop searching for album covers."
 msgstr "ယခုဝင်းဒိုးပိတ်လျှင်အယ်လဘမ်အဖုံးများရှာဖွေခြင်းရပ်သွားလိမ့်မည်။"
 
@@ -1171,7 +1175,7 @@ msgstr "အရောင်များ"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "အမျိုးအစားစာရင်းခွဲခြားရန်ပုဒ်ရပ်: အမျိုးအစား, အမျိုးအစားက ၀-၃"
 
-#: playlist/playlist.cpp:1233 smartplaylists/searchterm.cpp:288
+#: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
 #: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "ထင်မြင်ချက်"
@@ -1184,7 +1188,7 @@ msgstr "အမည်များအလိုအလျောက်ဖြည့်
 msgid "Complete tags automatically..."
 msgstr "အမည်များအလိုအလျောက်ဖြည့်..."
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
@@ -1323,7 +1327,7 @@ msgstr "လက်စ်.အက်ဖ်အမ်ရေဒီယိုထုတ�
 msgid "Couldn't open output file %1"
 msgstr "ပေးပို့ဖိုင်ဖွင့်မရ %1"
 
-#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
@@ -1475,11 +1479,11 @@ msgid ""
 "recover your database"
 msgstr "အချက်အလက်အစုပျက်ဆီးနေမှုတွေ့ရှိ။ https://code.google.com/p/clementine-player/wiki/DatabaseCorruption အချက်အလက်အစုမည်သို့ပြန်ယူရန်ဤတွင်ဖတ်ရှု"
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "ရက်စွဲဖန်တီးပြီး"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1232 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "ရက်စွဲမွမ်းမံပြီး"
 
@@ -1545,10 +1549,6 @@ msgstr "ဓာတ်ပြားမှပယ်ဖျက်..."
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
 msgstr "ဖွင့်ပြီးတွဲများပယ်ဖျက်"
-
-#: playlist/playlistlistcontainer.cpp:295
-msgid "Delete playlists"
-msgstr "သီချင်းစာရင်းများပယ်ဖျက်"
 
 #: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
@@ -1640,7 +1640,7 @@ msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းတို
 msgid "Disabled"
 msgstr "မလုပ်ဆောင်စေ"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:63
 #: ../bin/src/ui_edittagdialog.h:685
 msgid "Disc"
 msgstr "ချပ်ပြားဝိုင်း"
@@ -1666,6 +1666,10 @@ msgstr "သီချင်းတိုက်အပြည့်ပြန်လည
 msgid "Do not convert any music"
 msgstr "ဂီတတစ်ခုမှမကူးပြောင်း"
 
+#: ../bin/src/ui_albumcoverexport.h:208
+msgid "Do not overwrite"
+msgstr "အစားထိုးမရေး"
+
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "မပြန်ဆို"
@@ -1678,7 +1682,7 @@ msgstr "အနုပညာရှင်များအမျိုးမျို
 msgid "Don't shuffle"
 msgstr "ကုလားဖန်မထိုး"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:202
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:218
 msgid "Don't stop!"
 msgstr "မရပ်ဆိုင်းနဲ့!"
 
@@ -1856,7 +1860,11 @@ msgstr "ယူအာအလ်ထည့်"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "အင်တာနက်မှအဖံုးများကူးဆွဲရန်ယူအာအလ်ထည့်ပါ:"
 
-#: playlist/playlisttabbar.cpp:128
+#: ../bin/src/ui_albumcoverexport.h:204
+msgid "Enter a filename for exported covers (no extension):"
+msgstr "တင်ပို့ပြီးအဖံုးများအတွက်ဖိုင်နာမည်ထည့်(နောက်ဆက်တွဲမပါ):"
+
+#: playlist/playlisttabbar.cpp:132
 msgid "Enter a new name for this playlist"
 msgstr "ဒီသီချင်းစာရင်းအတွက်နာမည်အသစ်တစ်ခုရွေး"
 
@@ -1879,7 +1887,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "ဂျီပေါ့တာ.နက်ထဲရှိပို့စ်ကဒ်များကိုရှာဖွေရန်ရှာဖွေစကားရပ်များကိုအောက်တွင်ထည့်သွင်းပါ"
 
 #: ../bin/src/ui_libraryfilterwidget.h:96
-#: ../bin/src/ui_albumcovermanager.h:153
+#: ../bin/src/ui_albumcovermanager.h:219
 msgid "Enter search terms here"
 msgstr "ရှာဖွေစကားရပ်များဒီမှာထည့်သွင်း"
 
@@ -1988,6 +1996,10 @@ msgstr "နာရီတိုင်း"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "အယ်လဘမ်တူသို့ကယူးအပြားပေါ်မှတေးသံလမ်းကြောများအကြားမှလွဲ၍"
 
+#: ../bin/src/ui_albumcoverexport.h:207
+msgid "Existing covers"
+msgstr "တည်ရှိပြီးအဖံုးများ"
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
 msgstr "ချဲ့တွင်"
@@ -1996,6 +2008,31 @@ msgstr "ချဲ့တွင်"
 #, qt-format
 msgid "Expires on %1"
 msgstr "%1 တွင်သက်တမ်းကုန်"
+
+#: ../bin/src/ui_albumcovermanager.h:226
+msgid "Export Covers"
+msgstr "အဖံုးများတင်ပို့"
+
+#: ../bin/src/ui_albumcoverexport.h:202
+msgid "Export covers"
+msgstr "အဖံုးများတင်ပို့"
+
+#: ../bin/src/ui_albumcoverexport.h:205
+msgid "Export downloaded covers"
+msgstr "ကူးဆွဲပြီးအဖံုးများတင်ပို့"
+
+#: ../bin/src/ui_albumcoverexport.h:206
+msgid "Export embedded covers"
+msgstr "အဖံုးမြှပ်များတင်ပို့"
+
+#: ui/albumcovermanager.cpp:794
+msgid "Export finished"
+msgstr "တင်ပို့ခြင်းပြီးဆံုး"
+
+#: ui/albumcovermanager.cpp:779
+#, qt-format
+msgid "Exported %1 covers out of %2 (%3 skipped)"
+msgstr "တင်ပို့ပြီး %1 အဖံုးများရရှိ %2 မှ (%3 ခုန်ကျော်)"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -2075,11 +2112,11 @@ msgstr "အနှစ်သက်ဆုံးများ"
 msgid "Favourite tracks"
 msgstr "အနှစ်သက်ဆုံးတေးသံလမ်းကြောများ"
 
-#: ../bin/src/ui_albumcovermanager.h:155
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "Fetch Missing Covers"
 msgstr "ပျောက်နေသောအဖံုးများယူဆောင်"
 
-#: ../bin/src/ui_albumcovermanager.h:150
+#: ../bin/src/ui_albumcovermanager.h:216
 msgid "Fetch automatically"
 msgstr "အလိုအလျောက်ယူဆောင်ခြင်း"
 
@@ -2103,19 +2140,19 @@ msgstr "ဖိုင်နောက်ဆက်တွဲ"
 msgid "File formats"
 msgstr "ဖိုင်ပုံစံများ"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "ဖိုင်နာမည်"
 
-#: playlist/playlist.cpp:1227
+#: playlist/playlist.cpp:1229
 msgid "File name (without path)"
 msgstr "ဖိုင်နာမည် (လမ်းကြောင်းနှင့်မဟုတ်)"
 
-#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "ဖိုင်ပမာဏ"
 
-#: playlist/playlist.cpp:1229 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1231 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2193,7 +2230,7 @@ msgstr "ပစ္စည်းကိုမေ့ပြစ်ခြင်းသည
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:119
+#: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:117
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
@@ -2256,7 +2293,7 @@ msgstr "အထွေထွေ"
 msgid "General settings"
 msgstr "အထွေထွေချိန်ညှိချက်"
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:66
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Genre"
@@ -2302,7 +2339,7 @@ msgstr "ယခင်သီချင်းစာရင်းမျက်နှာ
 msgid "Google Drive"
 msgstr "ဂူဂယ်ဒရိုက်ဗ်"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:413
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:453
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2364,7 +2401,7 @@ msgstr "အမျိုးအစား/အယ်လဘမ်အုပ်စု�
 msgid "Group by Genre/Artist/Album"
 msgstr "အမျိုးအစား/အနုပညာရှင်/အယ်လဘမ်အုပ်စုအလိုက်"
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr "အုပ်စုအလိုက်စုခြင်း"
@@ -2630,7 +2667,7 @@ msgstr "အယ်လဘမ်အဖုံးကြီး"
 msgid "Large sidebar"
 msgstr "ဘေးတိုင်ကြီး"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1222
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "နောက်ဆံုးသီချင်းဖွင့်ခဲ့သမျှ"
@@ -2713,7 +2750,7 @@ msgstr "မူလပံုစံအတွက်အလွတ်ထားရှိ
 msgid "Left"
 msgstr "ဘယ်"
 
-#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "အလျား"
@@ -2747,7 +2784,7 @@ msgstr "ယခင်နားဆင်မှုများအပေါ်မူ
 msgid "Live"
 msgstr "တိုက်ရိုက်ထုတ်လွှင့်မှု"
 
-#: ../bin/src/ui_albumcovermanager.h:151
+#: ../bin/src/ui_albumcovermanager.h:217
 msgid "Load"
 msgstr "ထည့်သွင်း"
 
@@ -2767,7 +2804,7 @@ msgstr "ဓာတ်ပြားမှအဖုံးထည့်သွင်း
 msgid "Load cover from disk..."
 msgstr "ဓာတ်ပြားမှအဖုံးထည့်သွင်း..."
 
-#: playlist/playlistcontainer.cpp:279
+#: playlist/playlistcontainer.cpp:286
 msgid "Load playlist"
 msgstr "သီချင်းစာရင်းထည့်သွင်း"
 
@@ -2988,7 +3025,7 @@ msgstr "မိုနိတစ်ခုတည်း"
 msgid "Months"
 msgstr "လများ"
 
-#: playlist/playlist.cpp:1235
+#: playlist/playlist.cpp:1237
 msgid "Mood"
 msgstr "စိတ်နေစိတ်ထား"
 
@@ -3172,7 +3209,7 @@ msgstr "နောက်ခံပုံမသံုး"
 msgid "No long blocks"
 msgstr "ဘလောက်ရှည်များမရှိ"
 
-#: playlist/playlistcontainer.cpp:389
+#: playlist/playlistcontainer.cpp:396
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "ဟပ်စပ်များရှာမတွေ့။ သီချင်းစာရင်းတစ်ခုလံုးနောက်တစ်ချိန်ပြသရန်ရှာဖွေနေရာကိုဖယ်ရှင်းပါ။ "
@@ -3367,6 +3404,10 @@ msgstr "မူရင်းအမည်များ"
 msgid "Other options"
 msgstr "အခြားရွေးပိုင်ခွင့်များ"
 
+#: ../bin/src/ui_albumcoverexport.h:203
+msgid "Output"
+msgstr "ပေးပို့"
+
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
 msgstr "ပေးပို့ပစ္စည်း"
@@ -3379,9 +3420,17 @@ msgstr "ပေးပို့ရွေးပိုင်ခွင့်မျာ
 msgid "Output plugin"
 msgstr "ပေးပို့ဖြည့်စွက်ပရိုဂရမ်"
 
+#: ../bin/src/ui_albumcoverexport.h:209
+msgid "Overwrite all"
+msgstr "အားလံုးအစားထိုးရေး"
+
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "တည်ရှိဆဲဖိုင်များထပ်မံဖြည့်သွင်း"
+
+#: ../bin/src/ui_albumcoverexport.h:210
+msgid "Overwrite smaller ones only"
+msgstr "အသေးစားများကိုသာအစားထိုးရေး"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3421,10 +3470,14 @@ msgstr "ပြန်ဖွင့်ရပ်တန့်"
 msgid "Paused"
 msgstr "ရပ်တန့်ပြီး"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr "တင်ဆင်သူ"
+
+#: ../bin/src/ui_albumcoverexport.h:215
+msgid "Pixel"
+msgstr "အစက်အပြောက်"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
@@ -3445,7 +3498,7 @@ msgstr "အနုပညာရှင်သို့အမည်ဖွင့်"
 msgid "Play artist radio..."
 msgstr "အနုပညာရှင်ရေဒီယိုဖွင့်..."
 
-#: playlist/playlist.cpp:1218 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1220 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "ဖွင့်သံအရေအတွက်"
 
@@ -3482,8 +3535,8 @@ msgstr "ပြန်ဖွင့်"
 msgid "Player options"
 msgstr "ဖွင့်စက်ရွေးပိုင်ခွင့်များ"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
-#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:280 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:412 playlist/playlisttabbar.cpp:298
 msgid "Playlist"
 msgstr "သီချင်းစာရင်း"
 
@@ -3698,11 +3751,11 @@ msgstr "လက်ရှိသီချင်း၄ကြယ်တန်ဖို
 msgid "Rate the current song 5 stars"
 msgstr "လက်ရှိသီချင်း၅ကြယ်တန်ဖိုးဖြတ်"
 
-#: playlist/playlist.cpp:1217 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "အဆင့်သတ်မှတ်ချက်များ"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:199
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:215
 msgid "Really cancel?"
 msgstr "တကယ်ပယ်ဖျက်?"
 
@@ -3772,6 +3825,10 @@ msgstr "အနှစ်သက်ဆုံးများမှဖယ်ရှာ
 msgid "Remove from playlist"
 msgstr "သီချင်းစာရင်းမှဖယ်ရှား"
 
+#: playlist/playlistlistcontainer.cpp:309
+msgid "Remove playlists"
+msgstr "သီချင်းစာရင်းများဖယ်ရှား"
+
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
 msgstr "ငါ့ဂီတမှသီချင်းများဖယ်ရှား"
@@ -3789,11 +3846,11 @@ msgstr "သီချင်းစာရင်း \"%1\" နာမည်ပြန�
 msgid "Rename Grooveshark playlist"
 msgstr "ဂရုရှက်သီချင်းစာရင်းနာမည်ပြန်ရွေး"
 
-#: playlist/playlisttabbar.cpp:128
+#: playlist/playlisttabbar.cpp:132
 msgid "Rename playlist"
 msgstr "သီချင်းစာရင်းနာမည်ပြန်ရွေး"
 
-#: playlist/playlisttabbar.cpp:48
+#: playlist/playlisttabbar.cpp:50
 msgid "Rename playlist..."
 msgstr "သီချင်းစာရင်းနာမည်ပြန်ရွေး..."
 
@@ -3899,7 +3956,7 @@ msgstr "ပစ္စည်းလုံလုံခြုံခြုံဖယ်
 msgid "Safely remove the device after copying"
 msgstr "ကူးယူပြီးနောက်ပစ္စည်းလုံလုံခြုံခြုံဖယ်ရှား"
 
-#: playlist/playlist.cpp:1225 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1227 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "နမူနာနှုန်း"
 
@@ -3923,11 +3980,11 @@ msgstr "ဓာတ်ပြားသို့အဖံုးမှတ်သား
 msgid "Save image"
 msgstr "ပုံမှတ်သား"
 
-#: playlist/playlistcontainer.cpp:316
+#: playlist/playlistcontainer.cpp:323
 msgid "Save playlist"
 msgstr "သီချင်းစာရင်းမှတ်သား"
 
-#: playlist/playlisttabbar.cpp:49 ../bin/src/ui_mainwindow.h:700
+#: playlist/playlisttabbar.cpp:51 ../bin/src/ui_mainwindow.h:700
 msgid "Save playlist..."
 msgstr "သီချင်းစာရင်းမှတ်သား..."
 
@@ -3959,7 +4016,11 @@ msgstr "တေးသံလမ်းကြောများမှတ်သား
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "သတ်မှတ်နမူနာနှုန်းအကြောင်း (အက်စ်အက်စ်အာ)"
 
-#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:673
+#: ../bin/src/ui_albumcoverexport.h:212
+msgid "Scale size"
+msgstr "အတိုင်းအတာပမာဏ"
+
+#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "ရမှတ်"
 
@@ -4265,6 +4326,14 @@ msgstr "အတွင်းသို့ဝင်..."
 msgid "Similar artists"
 msgstr "တူညီအနုပညာရှင်များအားလံုး"
 
+#: ../bin/src/ui_albumcoverexport.h:211
+msgid "Size"
+msgstr "ပမာဏ"
+
+#: ../bin/src/ui_albumcoverexport.h:213
+msgid "Size:"
+msgstr "ပမာဏ:"
+
 #: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "စကာဂီတ"
@@ -4273,7 +4342,7 @@ msgstr "စကာဂီတ"
 msgid "Skip backwards in playlist"
 msgstr "စာရင်းရှိနောက်ပြန်များခုန်ကျော်"
 
-#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "အရေအတွက်ခုန်ကျော်"
 
@@ -4341,7 +4410,7 @@ msgstr "သီချင်းများအားဖြင့်မျိုး
 msgid "Sorting"
 msgstr "မျိုးတူစုခြင်း"
 
-#: playlist/playlist.cpp:1234
+#: playlist/playlist.cpp:1236
 msgid "Source"
 msgstr "ရင်းမြစ်"
 
@@ -4554,7 +4623,7 @@ msgstr "လက်ရှိဖွင့်ဆဲသီချင်းအယ်လ
 msgid "The directory %1 is not valid"
 msgstr "%1 ယခုဖိုင်လမ်းညွှန်မမှန်"
 
-#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
+#: playlist/playlistmanager.cpp:156 playlist/playlistmanager.cpp:174
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr " '%1' သီချင်းစာရင်းသည်အလွတ်သို့မထည့်သွင်းနိုင်။"
@@ -4693,7 +4762,7 @@ msgstr "အချိန်ကုန်"
 msgid "Timezone"
 msgstr "ဒေသစံတော်ချိန်"
 
-#: playlist/playlist.cpp:1204 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4741,6 +4810,10 @@ msgstr "ဦးတည်ရာပြောင်းများများပြ
 msgid "Top tracks"
 msgstr "ထိပ်တန်းတေးသံများ"
 
+#: ../bin/src/ui_albumcovermanager.h:221
+msgid "Total albums:"
+msgstr "စုစုပေါင်းအယ်လဘမ်များ:"
+
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
 msgstr "ဘိုက်စုစုပေါင်းများကူးပြောင်းပြီး"
@@ -4749,7 +4822,7 @@ msgstr "ဘိုက်စုစုပေါင်းများကူးပြ
 msgid "Total network requests made"
 msgstr "ကွန်ရက်တောင်းခံချက်စုစုပေါင်းများပြုလုပ်ပြီး"
 
-#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "တေးသံလမ်းကြော"
@@ -4810,7 +4883,7 @@ msgstr "မကူးဆွဲနိုင် %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:420 playlist/playlistmanager.cpp:423
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4982,7 +5055,7 @@ msgid "Variable bit rate"
 msgstr "ဘစ်နှုန်းကိန်းရှင်"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:435 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုး"
 
@@ -4991,7 +5064,7 @@ msgstr "အနုပညာရှင်များအမျိုးမျို
 msgid "Version %1"
 msgstr "ပုံစံ %1"
 
-#: ../bin/src/ui_albumcovermanager.h:154
+#: ../bin/src/ui_albumcovermanager.h:220
 msgid "View"
 msgstr "ကြည့်ရှု"
 
@@ -5121,6 +5194,10 @@ msgstr "ဝင်းဒိုးမီဒီယာ၆၄ကီလို"
 msgid "Windows Media audio"
 msgstr "ဝင်းဒိုးမီဒီယာအသံ"
 
+#: ../bin/src/ui_albumcovermanager.h:222
+msgid "Without cover:"
+msgstr "အဖံုးမပါ:"
+
 #: library/libraryview.cpp:530
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
@@ -5139,7 +5216,7 @@ msgstr "သီချင်းဖိုင်များထဲသို့သီ
 msgid "Wrong username or password."
 msgstr "အသင်းဝင်အမည်နှင့်/သို့စကားဝှက်မမှန်"
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -5159,14 +5236,15 @@ msgstr "နှစ်များ"
 msgid "Yesterday"
 msgstr "မနေ့က"
 
-#: playlist/playlistlistcontainer.cpp:296
-#, qt-format
-msgid "You are about to delete %1 playlists, are you sure?"
-msgstr "%1 သီချင်းစာရင်းများပယ်ဖျက်မှာသေချာသလား?"
-
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
 msgstr "အောက်ဖော်ပြပါအယ်လဘမ်များကိုကူးဆွဲတော့မည်"
+
+#: playlist/playlistlistcontainer.cpp:310
+#, qt-format
+msgid ""
+"You are about to remove %1 playlists from your favorites, are you sure?"
+msgstr "%1 အနှစ်သက်ဆံုးများမှသီချင်းစာရင်းများဖယ်ရှားမှာသေချာသလား?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5464,3 +5542,7 @@ msgstr "ရပ်"
 #, qt-format
 msgid "track %1"
 msgstr "တေးသံလမ်းကြော %1"
+
+#: ../bin/src/ui_albumcoverexport.h:214
+msgid "x"
+msgstr "အိပ်စ်"
