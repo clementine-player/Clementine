@@ -766,11 +766,18 @@ void AlbumCoverManager::ExportCovers() {
     cover_exporter_->AddExportRequest(ItemAsSong(item));
   }
 
-  progress_bar_->setMaximum(cover_exporter_->request_count());
-  progress_bar_->show();
-  abort_progress_->show();
+  if (cover_exporter_->request_count() > 0) {
+    progress_bar_->setMaximum(cover_exporter_->request_count());
+    progress_bar_->show();
+    abort_progress_->show();
 
-  cover_exporter_->StartExporting();
+    cover_exporter_->StartExporting();
+  } else {
+    QMessageBox msg;
+    msg.setWindowTitle(tr("Export finished"));
+    msg.setText(tr("No covers to export."));
+    msg.exec();
+  }
 }
 
 void AlbumCoverManager::UpdateExportStatus(int exported, int skipped, int max) {
