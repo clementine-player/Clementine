@@ -150,7 +150,8 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 }
 
 QNetworkReply* DropboxService::FetchContentUrl(const QUrl& url) {
-  QUrl request_url(QString(kMediaEndpoint) + url.path());
+  QUrl request_url = QUrl((QString(kMediaEndpoint)));
+  request_url.setPath(request_url.path() + url.path().mid(1));
   QNetworkRequest request(request_url);
   request.setRawHeader("Authorization", GenerateAuthorisationHeader());
   return network_->post(request, QByteArray());
