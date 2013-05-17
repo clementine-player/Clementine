@@ -110,6 +110,11 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\avutil-50.dll"
   Delete "$INSTDIR\libcdio-12.dll"
   Delete "$INSTDIR\libgcc_s_dw2-1.dll"
+
+  ; libimobiledevice removal
+  Delete "$INSTDIR\libimobiledevice-1.dll"
+  Delete "$INSTDIR\libplist.dll"
+  Delete "$INSTDIR\libusbmuxd.dll"
 SectionEnd
 
 Section "Clementine" Clementine
@@ -159,7 +164,6 @@ Section "Clementine" Clementine
   File "libgsttag-0.10-0.dll"
   File "libgthread-2.0-0.dll"
   File "libid3tag.dll"
-  File "libimobiledevice-1.dll"
   File "liblastfm.dll"
   File "libmad.dll"
   File "libmms-0.dll"
@@ -178,7 +182,6 @@ Section "Clementine" Clementine
   File "libstdc++-6.dll"
   File "libtag.dll"
   File "libtasn1-3.dll"
-  File "libusbmuxd.dll"
   File "libvorbis-0.dll"
   File "libvorbisenc-2.dll"
   File "libxml2-2.dll"

@@ -26,10 +26,6 @@ if (QT_VERSION_MINOR GREATER 5)
 endif(QT_VERSION_MINOR GREATER 5)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
-if(ENABLE_IMOBILEDEVICE AND IMOBILEDEVICE_VERSION VERSION_GREATER 1.1.1)
-  set(IMOBILEDEVICE_USES_UDIDS ON)
-endif()
-
 include_directories(${CMAKE_BINARY_DIR})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
@@ -1035,25 +1031,6 @@ optional_source(HAVE_AUDIOCD
     devices/cddalister.h
 )
 
-# libimobiledevice backend and device
-optional_source(HAVE_IMOBILEDEVICE
-  INCLUDE_DIRECTORIES
-    ${IMOBILEDEVICE_INCLUDE_DIRS}
-    ${PLIST_INCLUDE_DIRS}
-    ${PLISTPP_INCLUDE_DIRS}
-  SOURCES
-    devices/afcdevice.cpp
-    devices/afcfile.cpp
-    devices/afctransfer.cpp
-    devices/ilister.cpp
-    devices/imobiledeviceconnection.cpp
-  HEADERS
-    devices/afcdevice.h
-    devices/afcfile.h
-    devices/afctransfer.h
-    devices/ilister.h
-)
-
 # mtp device
 optional_source(HAVE_LIBMTP
   INCLUDE_DIRECTORIES ${LIBMTP_INCLUDE_DIRS}
@@ -1254,17 +1231,6 @@ if(HAVE_AUDIOCD)
   target_link_libraries(clementine_lib ${CDIO_LIBRARIES})
   target_link_libraries(clementine_lib ${GSTREAMER_CDDA_LIBRARIES})
 endif(HAVE_AUDIOCD)
-
-if(HAVE_IMOBILEDEVICE)
-  target_link_libraries(clementine_lib
-    ${IMOBILEDEVICE_LIBRARIES}
-    ${PLIST_LIBRARIES}
-    ${USBMUXD_LIBRARIES}
-    gstafcsrc
-  )
-  link_directories(${IMOBILEDEVICE_LIBRARY_DIRS})
-  link_directories(${USBMUXD_LIBRARY_DIRS})
-endif(HAVE_IMOBILEDEVICE)
 
 if(HAVE_MOODBAR)
   target_link_libraries(clementine_lib gstmoodbar)

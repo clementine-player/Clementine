@@ -71,18 +71,15 @@ pkg_check_modules(GSTREAMER_APP gstreamer-app-0.10)
 pkg_check_modules(GSTREAMER_BASE gstreamer-base-0.10)
 pkg_check_modules(GSTREAMER_CDDA gstreamer-cdda-0.10)
 pkg_check_modules(GSTREAMER_TAG gstreamer-tag-0.10)
-pkg_check_modules(IMOBILEDEVICE libimobiledevice-1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(PLIST libplist)
 pkg_check_modules(QCA qca2)
 pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
-pkg_check_modules(USBMUXD libusbmuxd)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
@@ -231,13 +228,6 @@ optional_component(LIBGPOD ON "Devices: iPod classic support"
 optional_component(GIO ON "Devices: GIO device backend"
   DEPENDS "libgio" GIO_FOUND
   DEPENDS "Linux or Windows" "NOT APPLE"
-)
-
-optional_component(IMOBILEDEVICE ON "Devices: iPod Touch, iPhone, iPad support"
-  DEPENDS "libimobiledevice" IMOBILEDEVICE_FOUND
-  DEPENDS "libplist" PLIST_FOUND
-  DEPENDS "libusbmuxd" USBMUXD_FOUND
-  DEPENDS "iPod classic support" HAVE_LIBGPOD
 )
 
 optional_component(LIBMTP ON "Devices: MTP support"
@@ -449,10 +439,6 @@ option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)
   add_subdirectory(debian)
 endif(WITH_DEBIAN)
-
-if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
-  add_subdirectory(gst/afcsrc)
-endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
 
 if(HAVE_BREAKPAD)
   add_subdirectory(3rdparty/google-breakpad)

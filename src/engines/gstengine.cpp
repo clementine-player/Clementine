@@ -26,10 +26,6 @@
 #include "core/taskmanager.h"
 #include "core/utilities.h"
 
-#ifdef HAVE_IMOBILEDEVICE
-# include "gst/afcsrc/gstafcsrc.h"
-#endif
-
 #ifdef HAVE_MOODBAR
 # include "gst/moodbar/spectrum.h"
 #endif
@@ -117,10 +113,6 @@ bool GstEngine::Init() {
 
 void GstEngine::InitialiseGstreamer() {
   gst_init(NULL, NULL);
-
-#ifdef HAVE_IMOBILEDEVICE
-  afcsrc_register_static();
-#endif
 
 #ifdef HAVE_MOODBAR
   gstmoodbar_register_static();

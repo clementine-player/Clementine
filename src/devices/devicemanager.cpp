@@ -60,10 +60,6 @@
 #ifdef HAVE_GIO
 #  include "giolister.h"
 #endif
-#ifdef HAVE_IMOBILEDEVICE
-#  include "afcdevice.h"
-#  include "ilister.h"
-#endif
 #ifdef HAVE_LIBMTP
 #  include "mtpdevice.h"
 #endif
@@ -209,10 +205,6 @@ DeviceManager::DeviceManager(Application* app, QObject *parent)
 #if defined(Q_OS_WIN32)
   AddLister(new WmdmLister);
   AddDeviceClass<WmdmDevice>();
-#endif
-#ifdef HAVE_IMOBILEDEVICE
-  AddLister(new iLister);
-  AddDeviceClass<AfcDevice>();
 #endif
 
   AddDeviceClass<FilesystemDevice>();
