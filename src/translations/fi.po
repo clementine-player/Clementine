@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-12 07:15+0000\n"
+"PO-Revision-Date: 2013-05-17 17:02+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -374,7 +374,7 @@ msgstr "Salli vain ei-julkiset asiakkaat"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Tilin tiedot"
@@ -687,14 +687,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Spotifyn käyttö Clementinessä vaatii lisäosan. Haluatko ladata ja asentaa sen nyt?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "iTunes-tietokantaa laitteesta ladatessa tapahtui virhe"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "iTunes-tietokantaa laitteeseen ladatessa tapahtui virhe"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes-tietokantaa ladatessa tapahtui virhe"
@@ -908,10 +900,6 @@ msgstr "Block analyzer"
 msgid "Block type"
 msgstr ""
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Bluetoothin MAC-osoite"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "Sumennuksen määrä"
@@ -938,7 +926,7 @@ msgstr "Selaa..."
 msgid "Buffer duration"
 msgstr "Puskurin kesto"
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Puskuroidaan"
 
@@ -1166,10 +1154,6 @@ msgstr "Tämän ikkunan sulkeminen lopettaa levykansien etsimisen."
 msgid "Club"
 msgstr "Club"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Väri"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Värit"
@@ -1248,7 +1232,7 @@ msgstr "Asetukset..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr ""
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Yhdistä laite"
 
@@ -1285,10 +1269,6 @@ msgstr "Kopioi laitteelle..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Kopioi kirjastoon"
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "Kopioidaan iPod-tietokantaa"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1669,7 +1649,7 @@ msgstr "Tee kirjaston täydellinen läpikäynti"
 msgid "Do not convert any music"
 msgstr "Älä muunna mitään musiikkia"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr "Älä korvaa"
 
@@ -1738,7 +1718,7 @@ msgstr "Lataa tämä levy..."
 msgid "Download this episode"
 msgstr "Lataa tämä jakso"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Lataa..."
 
@@ -1863,7 +1843,7 @@ msgstr "Anna verkko-osoite"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Kirjoita URL-osoite kansikuvien lataamiseen Internetistä:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
@@ -1999,9 +1979,9 @@ msgstr "Joka tunti"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Älä käytä ristihäivytystä samalla levyllä tai samassa CUE-tiedostossa oleville kappaleille"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
-msgstr ""
+msgstr "Olemassa olevat kansikuvat"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
@@ -2014,25 +1994,25 @@ msgstr "Vanhenee %1"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Export Covers"
-msgstr ""
+msgstr "Vie kansikuvat"
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
-msgstr ""
+msgstr "Vie kansikuvat"
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr "Vie ladatut kansikuvat"
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr "Vie upotetut kansikuvat"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr "Vienti valmistui"
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Vietiin %1/%2 kansikuvaa (%3 ohitettu)"
@@ -2209,7 +2189,7 @@ msgstr "Flac"
 msgid "Font size"
 msgstr "Kirjasinkoko"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Lisenssisyistä Spotify-tuki on erillinen liitännäinen."
 
@@ -2467,7 +2447,7 @@ msgstr "Kuvakkeet ylhäällä"
 msgid "Identifying song"
 msgstr "Tunnistetaan kappaletta"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2865,7 +2845,7 @@ msgstr "Lataa tiedostoja tai verkko-osoitteita, korvaa samalla nykyinen soittoli
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3208,6 +3188,10 @@ msgstr "Ei visualisointia"
 msgid "No background image"
 msgstr "Ei taustakuvaa"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr "Ei kansikuvia vietäväksi."
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr ""
@@ -3407,7 +3391,7 @@ msgstr "Alkuperäiset tunnisteet"
 msgid "Other options"
 msgstr "Muut valinnat"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr ""
 
@@ -3423,7 +3407,7 @@ msgstr "Muunnoksen asetukset"
 msgid "Output plugin"
 msgstr "Äänentoistoliitännäinen"
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr "Korvaa kaikki"
 
@@ -3431,7 +3415,7 @@ msgstr "Korvaa kaikki"
 msgid "Overwrite existing files"
 msgstr "Korvaa olemassa olevat tiedostot"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr "Korvaa vain pienemmät"
 
@@ -3449,16 +3433,12 @@ msgstr "Party"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Salasana"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Salasanasuojattu"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3563,7 +3543,7 @@ msgstr "Soittolistat"
 msgid "Please close your browser and return to Clementine."
 msgstr "Sulje selain ja palaa Clementineen."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Liitännäisen tila:"
 
@@ -3602,7 +3582,7 @@ msgstr "Esivahvistus"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Asetukset"
@@ -3619,7 +3599,7 @@ msgstr "Ensisijainen tiedostonimi levykuvitukselle (pilkuin eroteltu)"
 msgid "Preferred audio format"
 msgstr "Ensisijainen äänimuoto"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Ensisijainen bittinopeus"
 
@@ -3917,7 +3897,7 @@ msgstr "Rajoita ASCII-merkkeihin"
 
 #: ../bin/src/ui_behavioursettingspage.h:189
 msgid "Resume playback on start"
-msgstr ""
+msgstr "Jatka toistoa sovelluksen käynnistyttyä"
 
 #: internet/groovesharkservice.cpp:756
 msgid "Retrieving Grooveshark My Music songs"
@@ -4019,7 +3999,7 @@ msgstr "Tallennetaan kappaleita"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr ""
 
@@ -4329,11 +4309,11 @@ msgstr "Kirjautuu sisään..."
 msgid "Similar artists"
 msgstr "Samankaltaisia esittäjiä"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr "Koko"
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr "Koko:"
 
@@ -4425,7 +4405,7 @@ msgstr "Lähteet"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4433,7 +4413,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify-kirjautumisvirhe"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Spotify-liitännäinen"
 
@@ -4729,20 +4709,20 @@ msgstr "Laitteen tulee olla yhdistettynä ja avattuna, jotta Clementine voi tark
 msgid "This device supports the following file formats:"
 msgstr "Laite tukee seuraavia tiedostomuotoja:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Laite ei tule toimimaan kunnolla"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Kyseessä on MTP-laite, mutta Clementine on käännetty ilman libmtp-tukea."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Kyseessä on iPod, mutta Clementine on käännetty ilman libgpod-tukea."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4752,7 +4732,7 @@ msgstr "Kytkit tämän laitteen tähän tietokoneeseen ensimmäistä kertaa. Cle
 msgid "This stream is for paid subscribers only"
 msgstr "Suoratoisto on tarjolla vain maksaville asiakkaille"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Tämän tyyppinen laite ei ole tuettu: %1"
@@ -4760,10 +4740,6 @@ msgstr "Tämän tyyppinen laite ei ole tuettu: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Aikakatkaisu"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Aikavyöhyke"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5018,7 +4994,7 @@ msgstr "Käytä järjestelmän oletusvärejä"
 msgid "Use the system proxy settings"
 msgstr "Käytä järjestelmän välityspalvelinasetuksia"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Käytä äänen normalisointia"
 
@@ -5037,7 +5013,7 @@ msgstr "Käyttöliittymä"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5138,10 +5114,6 @@ msgstr "Kun lista on tyhjä..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Voisit kokeilla..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "WiFi:n MAC-osoite"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5545,7 +5517,3 @@ msgstr "pysäytä"
 #, qt-format
 msgid "track %1"
 msgstr "kappale %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr ""

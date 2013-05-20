@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:39+0000\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -378,7 +378,7 @@ msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Fiók részletek"
@@ -691,14 +691,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "A Spotify használatához külön beépülő szükséges. Szeretnéd most letölteni és telepíteni?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "Hiba történt az iTunes adatbázis másolása közben az eszközről"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Hiba történt az iTunes adatbázis másolása közben az eszközre"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Hiba történt az iTunes adatbázis betöltése közben"
@@ -912,10 +904,6 @@ msgstr "Blokk"
 msgid "Block type"
 msgstr "Blokk típus"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Bluetooth MAC cím"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr ""
@@ -942,7 +930,7 @@ msgstr "Tallózás…"
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Pufferelés"
 
@@ -1170,10 +1158,6 @@ msgstr "Ezen ablak bezárása megszakítja az albumborítók keresését."
 msgid "Club"
 msgstr "Club"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Szín"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Színek"
@@ -1252,7 +1236,7 @@ msgstr "Beállítás..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Wii távvezérlő csatlakoztatása az aktiválás/deaktiválás esemény használatával"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Eszköz csatlakoztatása"
 
@@ -1289,10 +1273,6 @@ msgstr "Másolás eszközre..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Másolás a zenetárba..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "iPod adatbázis másolása"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1673,7 +1653,7 @@ msgstr "Teljes zenetár újraolvasása"
 msgid "Do not convert any music"
 msgstr "Ne konvertáljon egy számot sem"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr ""
 
@@ -1742,7 +1722,7 @@ msgstr "Album letöltése..."
 msgid "Download this episode"
 msgstr "Epizód letöltése"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Letöltés…"
 
@@ -1867,7 +1847,7 @@ msgstr "Adjon meg egy URL-t"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Albumborító letöltése az alábbi URL-ről:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
@@ -2003,7 +1983,7 @@ msgstr "Minden órában"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Kivéve az azonos albumon vagy azonos CUE fájlban lévő számok között"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr ""
 
@@ -2020,23 +2000,23 @@ msgstr "Lejár ekkor: %1"
 msgid "Export Covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2213,7 +2193,7 @@ msgstr "FLAC"
 msgid "Font size"
 msgstr "Betűméret"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Licencelési okok miatt a Spotify támogatást külön beépülőben kell telepíteni."
 
@@ -2471,7 +2451,7 @@ msgstr "Ikonok felül"
 msgid "Identifying song"
 msgstr "Zeneszám azonosítása"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2869,7 +2849,7 @@ msgstr "Fájlok/URL-ek betöltése, lejátszási lista cseréje"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3212,6 +3192,10 @@ msgstr "Kikapcsolva"
 msgid "No background image"
 msgstr "Nincs háttérkép"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Hosszú blokkok nélkül"
@@ -3411,7 +3395,7 @@ msgstr "Eredeti címkék"
 msgid "Other options"
 msgstr "Egyéb beállítások"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr ""
 
@@ -3427,7 +3411,7 @@ msgstr "Kimenet beállításai"
 msgid "Output plugin"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr ""
 
@@ -3435,7 +3419,7 @@ msgstr ""
 msgid "Overwrite existing files"
 msgstr "Létező fájlok felülírása"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr ""
 
@@ -3453,16 +3437,12 @@ msgstr "Party"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Jelszó"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Jelszó védve"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3567,7 +3547,7 @@ msgstr "Lejátszási lista"
 msgid "Please close your browser and return to Clementine."
 msgstr "Zárja be a böngészőjét, és térjen vissza a Clementine-be"
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Beépülő állapot:"
 
@@ -3606,7 +3586,7 @@ msgstr "Előerősítő"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Beállítások"
@@ -3623,7 +3603,7 @@ msgstr "Előnyben részesített albumborító fájlnevek (vesszővel tagolt)"
 msgid "Preferred audio format"
 msgstr "Előnyben részesített hangformátum"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Kedvelt bitráta"
 
@@ -4023,7 +4003,7 @@ msgstr "Számok mentése"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Skálázható mintavételezési profil (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr ""
 
@@ -4333,11 +4313,11 @@ msgstr "Belépés..."
 msgid "Similar artists"
 msgstr "Hasonló előadók"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr ""
 
@@ -4429,7 +4409,7 @@ msgstr "Forrás"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4437,7 +4417,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Hiba a Spotifyra való bejelentkezéskor"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Spotify beépülő"
 
@@ -4733,20 +4713,20 @@ msgstr "A Clementine csak az eszköz csatlakoztatása és megnyitása után kép
 msgid "This device supports the following file formats:"
 msgstr "Ez az eszköz az alábbi fájlformátumokat támogatja:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Az eszköz nem fog megfelelően működni"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Ez egy MTP eszköz, de a Clementine libmtp támogatás nélkül lett fordítva."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Ez az eszköz egy iPod, de a Clementine libgpod támogatás nélkül lett fordítva."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4756,7 +4736,7 @@ msgstr "Ez az első alkalom, hogy csatlakoztatta ezt az eszközt. A Clementine �
 msgid "This stream is for paid subscribers only"
 msgstr "Ez az adatfolyam csak előfizetőknek érhető el"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "A %1 eszköztípus nem támogatott"
@@ -4764,10 +4744,6 @@ msgstr "A %1 eszköztípus nem támogatott"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Időkorlát"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Időzóna"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5022,7 +4998,7 @@ msgstr "Rendszer alapértelmezett színkészletének használata"
 msgid "Use the system proxy settings"
 msgstr "A rendszer proxy beállításainak használata"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Hangerő normalizálása"
 
@@ -5041,7 +5017,7 @@ msgstr "Kezelőfelület"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5142,10 +5118,6 @@ msgstr "Amikor a lista üres..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Miért nem próbálja..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "WiFi MAC cím"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5549,7 +5521,3 @@ msgstr "leállítás"
 #, qt-format
 msgid "track %1"
 msgstr "%1. szám"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr ""

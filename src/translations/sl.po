@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:39+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-05-18 09:48+0000\n"
+"Last-Translator: R33D3M33R <yellllow_m@yahoo.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sl\n"
@@ -229,7 +229,7 @@ msgstr "...in vsem razvijalcem Amaroka"
 
 #: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
@@ -375,7 +375,7 @@ msgstr "Sprejmi samo odjemalce, ki niso javni"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Podrobnosti računa"
@@ -688,14 +688,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Da lahko uporabite Spotify v Clementine, potrebujete dodaten vstavek. Ga želite prejeti in namestiti zdaj?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "Pri kopiranju podatkovne zbirke iTunes iz naprave, je prišlo do napake"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Pri kopiranju podatkovne zbirke iTunes na napravo, je prišlo do napake"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Pri nalaganju podatkovne zbirke iTunes, je prišlo do napake"
@@ -909,10 +901,6 @@ msgstr "Blokovni preučevalnik"
 msgid "Block type"
 msgstr "Vrsta bloka"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Bluetooth naslov MAC"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "Raven zabrisanja"
@@ -939,7 +927,7 @@ msgstr "Brskaj ..."
 msgid "Buffer duration"
 msgstr "Trajanje medpomnilnika"
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Medpomnjenje"
 
@@ -1167,10 +1155,6 @@ msgstr "Zaprtje tega okna bo prekinilo iskanje ovitkov albumov."
 msgid "Club"
 msgstr "Klubska"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Barva"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Barve"
@@ -1249,7 +1233,7 @@ msgstr "Nastavi"
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Poveži Wii Remotes z uporabo dejanja omogoči/onemogoči"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Priklopi napravo"
 
@@ -1286,10 +1270,6 @@ msgstr "Kopiraj na napravo ..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Kopiraj v knjižnico ..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "Kopiranje podatkovne zbirke iPod"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1670,9 +1650,9 @@ msgstr "Ponovno preberi celotno knjižnico"
 msgid "Do not convert any music"
 msgstr "Ne pretvarjaj glasbe"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
-msgstr ""
+msgstr "Ne prepiši"
 
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1739,7 +1719,7 @@ msgstr "Prejmi ta album ..."
 msgid "Download this episode"
 msgstr "Prejmi to epizodo"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Prejmi ..."
 
@@ -1864,9 +1844,9 @@ msgstr "Vnesite URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Vnesite spletni naslov, da pridobite ovitek s medmrežja:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
-msgstr ""
+msgstr "Vnesite ime datoteke za izvožene ovitke (brez pripone):"
 
 #: playlist/playlisttabbar.cpp:132
 msgid "Enter a new name for this playlist"
@@ -2000,9 +1980,9 @@ msgstr "Vsako uro"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Razen med skladbami na istem albumu ali v isti predlogi CUE"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
-msgstr ""
+msgstr "Obstoječi ovitki"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
@@ -2015,28 +1995,28 @@ msgstr "Poteče %1"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Export Covers"
-msgstr ""
+msgstr "Izvozi ovitke"
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
-msgstr ""
-
-#: ../bin/src/ui_albumcoverexport.h:205
-msgid "Export downloaded covers"
-msgstr ""
+msgstr "Izvozi ovitke"
 
 #: ../bin/src/ui_albumcoverexport.h:206
+msgid "Export downloaded covers"
+msgstr "Izvozi prejete ovitke"
+
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
-msgstr ""
+msgstr "Izvozi vstavljene ovitke"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
-msgstr ""
+msgstr "Izvoz končan"
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "Izvoženih %1 od %2 ovitkov (%3 preskočenih)"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -2210,7 +2190,7 @@ msgstr "FLAC"
 msgid "Font size"
 msgstr "Velikost pisave"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Zaradi licence je podpora Spotify v ločenem vstavku."
 
@@ -2468,7 +2448,7 @@ msgstr "Ikone na vrhu"
 msgid "Identifying song"
 msgstr "Prepoznavanje skladbe"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2866,7 +2846,7 @@ msgstr "Naloži datoteke/povezave in zamenjaj trenutni seznam predvajanja"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3209,6 +3189,10 @@ msgstr "Brez preučevalnika"
 msgid "No background image"
 msgstr "Brez slike ozadja"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr "Ni ovitkov za izvoz."
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Brez dolgih blokov"
@@ -3408,9 +3392,9 @@ msgstr "Izvorne oznake"
 msgid "Other options"
 msgstr "Druge možnosti"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
-msgstr ""
+msgstr "Izhod"
 
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
@@ -3424,17 +3408,17 @@ msgstr "Možnosti izhoda"
 msgid "Output plugin"
 msgstr "Vstavek izhoda"
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
-msgstr ""
+msgstr "Prepiši vse"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "Prepiši obstoječe datoteke"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
-msgstr ""
+msgstr "Prepiši le manjše"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3450,16 +3434,12 @@ msgstr "Zabava"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Geslo"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Zaščiteno z geslom"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3481,7 +3461,7 @@ msgstr "Izvajalec"
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
-msgstr ""
+msgstr "Slikovna točka"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
@@ -3564,7 +3544,7 @@ msgstr "Seznami predvajanja"
 msgid "Please close your browser and return to Clementine."
 msgstr "Zaprite vaš brskalnik in se vrnite v Clementine."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Stanje vstavka:"
 
@@ -3603,7 +3583,7 @@ msgstr "Predojačanje"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Možnosti"
@@ -3620,7 +3600,7 @@ msgstr "Prednostna imena datotek ovitkov albumov (ločena z vejico)"
 msgid "Preferred audio format"
 msgstr "Prednostna vrsta zvoka"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Zaželena bitna hitrost"
 
@@ -3831,7 +3811,7 @@ msgstr "Odstrani iz seznama predvajanja"
 
 #: playlist/playlistlistcontainer.cpp:309
 msgid "Remove playlists"
-msgstr ""
+msgstr "Odstrani sezname predvajanja"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
@@ -4020,9 +4000,9 @@ msgstr "Shranjevanje skladb"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Profil prilagodljive vzorčne hitrosti (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
-msgstr ""
+msgstr "Umeri velikost"
 
 #: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
@@ -4330,13 +4310,13 @@ msgstr "Prijavljanje ..."
 msgid "Similar artists"
 msgstr "Podobni izvajalci"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
-msgstr ""
+msgstr "Velikost"
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
-msgstr ""
+msgstr "Velikost:"
 
 #: ui/equalizer.cpp:129
 msgid "Ska"
@@ -4426,7 +4406,7 @@ msgstr "Viri"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4434,7 +4414,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Napaka med prijavo na Spotify"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Vstavek Spotify"
 
@@ -4730,20 +4710,20 @@ msgstr "Ta naprava mora biti povezana in odprta, preden lahko Clementine ugotovi
 msgid "This device supports the following file formats:"
 msgstr "Ta naprava podpira sledeče vrste datotek:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Ta naprava ne bo delovala pravilno"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "To je naprava MTP, Clementine pa je preveden brez podpore libmtp."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "To je naprava iPod, Clementine pa je preveden brez podpore libgpod."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4753,7 +4733,7 @@ msgstr "Tokrat ste prvič priklopili to napravo. Clementine bo sedaj preiskal na
 msgid "This stream is for paid subscribers only"
 msgstr "Ta pretok je le za plačane naročnike"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Ta vrsta naprave ni podprta: %1"
@@ -4761,10 +4741,6 @@ msgstr "Ta vrsta naprave ni podprta: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Zakasnitev"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Časovni pas"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -4816,7 +4792,7 @@ msgstr "Najboljše skladbe"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
-msgstr ""
+msgstr "Skupno albumov:"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
@@ -5019,7 +4995,7 @@ msgstr "Uporabi sistemsko privzeti seznam barv"
 msgid "Use the system proxy settings"
 msgstr "Uporabi nastavitve posredniškega strežnika sistema"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Uporabi izenačevanje glasnosti"
 
@@ -5038,7 +5014,7 @@ msgstr "Uporabniški vmesnik"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5140,10 +5116,6 @@ msgstr "Ko je seznam prazen ..."
 msgid "Why not try..."
 msgstr "Zakaj ne bi poskusili ..."
 
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "WiFi naslov MAC"
-
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
 msgstr "Širok pas (WB)"
@@ -5200,7 +5172,7 @@ msgstr "Windows Media Audio"
 
 #: ../bin/src/ui_albumcovermanager.h:222
 msgid "Without cover:"
-msgstr ""
+msgstr "Brez ovitka:"
 
 #: library/libraryview.cpp:530
 msgid ""
@@ -5248,7 +5220,7 @@ msgstr "Pravkar boste prejeli naslednje albume"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "Pravkar boste izbrisali %1 seznamov predvajanja iz vaših priljubljenih, ali ste prepričani?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5546,7 +5518,3 @@ msgstr "zaustavi"
 #, qt-format
 msgid "track %1"
 msgstr "skladba %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr ""

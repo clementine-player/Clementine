@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:38+0000\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -375,7 +375,7 @@ msgstr "Chỉ chấp nhận máy khách không công khai"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Chi tiết tài khoản"
@@ -688,14 +688,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Cần có một phần mở rộng để sử dụng Spotify trong Clementine. Bạn có muốn tải nó về và cài đặt ngay không?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "Có lỗi khi chép cơ sở dữ liệu iTunes từ thiết bị"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Có lỗi khi chép cơ sở dữ liệu iTunes lên thiết bị"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Có lỗi khi nạp cơ sở dữ liệu iTunes"
@@ -909,10 +901,6 @@ msgstr "Phân tích theo các khối vuông"
 msgid "Block type"
 msgstr "Kiểu khối"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Địa chỉ MAC của Bluetooth"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr ""
@@ -939,7 +927,7 @@ msgstr "Duyệt tìm..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Đang tạo bộ đệm"
 
@@ -1167,10 +1155,6 @@ msgstr "Đóng cửa sổ này sẽ kết thúc tìm ảnh bìa."
 msgid "Club"
 msgstr "Hội"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Màu sắc"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Màu"
@@ -1249,7 +1233,7 @@ msgstr "Cấu hình..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Kết nối tay cầm Wii sử dụng thao tác kích hoạt/vô hiệu"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Kết nối thiết bị"
 
@@ -1286,10 +1270,6 @@ msgstr "Chép vào thiết bị..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Chép vào thư viện..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "Đang chép cơ sở dữ liệu của iPod"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1670,7 +1650,7 @@ msgstr "Quét toàn bộ thư viện"
 msgid "Do not convert any music"
 msgstr "Không chuyển đổi bất kì bản nhạc nào"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr ""
 
@@ -1739,7 +1719,7 @@ msgstr "Tải album này..."
 msgid "Download this episode"
 msgstr "Tải tập này"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Tải về..."
 
@@ -1864,7 +1844,7 @@ msgstr "Nhập URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Nhập một địa chỉ để tải ảnh bìa từ internet:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
@@ -2000,7 +1980,7 @@ msgstr "Mỗi giờ"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Ngoại trừ giữa các bài hát trong album tương tự hoặc trong danh sách CUE tương tự"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr ""
 
@@ -2017,23 +1997,23 @@ msgstr "Hết hạn vào %1"
 msgid "Export Covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2210,7 +2190,7 @@ msgstr "Flac"
 msgid "Font size"
 msgstr "Kích cỡ phông chữ"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Vì lí do giấy phép nên Spotify được hỗ trợ thông qua một phần mở rộng."
 
@@ -2468,7 +2448,7 @@ msgstr "Biểu tượng trên cùng"
 msgid "Identifying song"
 msgstr "Đang nhận diện bài hát"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2866,7 +2846,7 @@ msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3209,6 +3189,10 @@ msgstr "Không phân tích"
 msgid "No background image"
 msgstr "Không dùng ảnh nền"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Các khối không dài"
@@ -3408,7 +3392,7 @@ msgstr "Thẻ gốc"
 msgid "Other options"
 msgstr "Các tuỳ chọn khác"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr ""
 
@@ -3424,7 +3408,7 @@ msgstr "Tùy chọn xuất"
 msgid "Output plugin"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr ""
 
@@ -3432,7 +3416,7 @@ msgstr ""
 msgid "Overwrite existing files"
 msgstr "Ghi đè tập tin đã tồn tại"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr ""
 
@@ -3450,16 +3434,12 @@ msgstr "Party"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Mật khẩu"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Được bảo vệ bằng mật khẩu"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3564,7 +3544,7 @@ msgstr "Danh sách"
 msgid "Please close your browser and return to Clementine."
 msgstr "Hãy đóng trình duyệt và trở lại Clementine."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Trạng thái phần mở rộng:"
 
@@ -3603,7 +3583,7 @@ msgstr "Pre-amp"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Tùy chỉnh"
@@ -3620,7 +3600,7 @@ msgstr "Tìm ảnh bìa với tên tập tin có chứa các từ sau (phân cá
 msgid "Preferred audio format"
 msgstr "Định dạng âm thanh được ưu tiên"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Bitrate ưu tiên"
 
@@ -4020,7 +4000,7 @@ msgstr "Đang lưu các bài hát"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Hồ sơ tỉ lệ mẫu có thể mở rộng (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr ""
 
@@ -4330,11 +4310,11 @@ msgstr "Đang đăng nhập..."
 msgid "Similar artists"
 msgstr "Nghệ sĩ tương tự"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr ""
 
@@ -4426,7 +4406,7 @@ msgstr "Nguồn"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4434,7 +4414,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Lỗi đăng nhập Spotify"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Phần hỗ trợ Spotify"
 
@@ -4730,20 +4710,20 @@ msgstr "Thiết bị này phải được kết nối và mở trước để Cl
 msgid "This device supports the following file formats:"
 msgstr "Thiết bị này hỗ trợ các định dạng sau đây:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Thiết bị này sẽ không làm việc đúng cách"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Đây là thiết bị MTP, nhưng bạn đã biên dịch Clementine mà không có hỗ trợ libmtp."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Đây là một chiếc iPod, nhưng bạn đã biên dịch Clementine mà không có hỗ trợ libgpod."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4753,7 +4733,7 @@ msgstr "Đây là lần đầu tiên bạn kết nối thiết bị này. Clemen
 msgid "This stream is for paid subscribers only"
 msgstr "Luồng này chỉ dành cho người trả phí"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Loại thiết bị này không được hỗ trợ: %1"
@@ -4761,10 +4741,6 @@ msgstr "Loại thiết bị này không được hỗ trợ: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Thời gian chờ"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Múi giờ"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5019,7 +4995,7 @@ msgstr "Dùng thiết lập màu mặc định của hệ thống"
 msgid "Use the system proxy settings"
 msgstr "Sử dụng thiết lập proxy của hệ thống"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Sử dụng cân bằng âm lượng"
 
@@ -5038,7 +5014,7 @@ msgstr "Giao diện người dùng"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5139,10 +5115,6 @@ msgstr "Khi danh sách trống..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Tại sao không thử..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "Địa chỉ MAC của Wifi"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5546,7 +5518,3 @@ msgstr "dừng"
 #, qt-format
 msgid "track %1"
 msgstr "bài %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr ""

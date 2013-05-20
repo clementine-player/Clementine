@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:38+0000\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -374,7 +374,7 @@ msgstr "Priimti tik neviešus klientus"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Paskyros informacija"
@@ -687,14 +687,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Kad naudotumėte Spotify Clementine grotuve, jums reikia papildomo išplėtimo. Ar parsiųsti ir įdiegti jį dabar?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "Iškilo klaida kopijuojant iTunes duomenų bazę iš įrenginio"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Iškilo klaida kopijuojant iTunes duomenų bazę į įrenginį"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Iškilo klaida įkeliant iTunes duomenų bazę"
@@ -908,10 +900,6 @@ msgstr "Blokograma"
 msgid "Block type"
 msgstr "Bloko tipas"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Bluetooth MAC adresas"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "Suliejimo kiekis"
@@ -938,7 +926,7 @@ msgstr "Naršyti..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Kaupiamas buferis"
 
@@ -1166,10 +1154,6 @@ msgstr "Uždarant šį langą bus sustabdyta albumo viršelių paieška."
 msgid "Club"
 msgstr "Klubinė"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Spalva"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Spalvos"
@@ -1248,7 +1232,7 @@ msgstr "Konfigūruoti..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Prijungti Wii pultą naudojant aktyvuoti/deaktyvuoti veiksmą"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Prijungti įrenginį"
 
@@ -1285,10 +1269,6 @@ msgstr "Kopijuoti į įrenginį..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Kopijuoti į fonoteką..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "Kopijuojama „iPod“ duomenų bazė..."
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1669,7 +1649,7 @@ msgstr "Pilnai perskanuoti fonoteką"
 msgid "Do not convert any music"
 msgstr "Nekonvertuoti jokios muzikos"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr ""
 
@@ -1738,7 +1718,7 @@ msgstr "Atsisiunčiamas šis albumas"
 msgid "Download this episode"
 msgstr "Atsiųsti šį epizodą"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Atsisiųsti..."
 
@@ -1863,7 +1843,7 @@ msgstr "Įrašykite URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Įveskite URL, kad atsisiųsti viršelį iš interneto:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
@@ -1999,7 +1979,7 @@ msgstr "Kiekvieną valandą"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Išskyrus tarp takelių tame pačiame albume arba tame pačiame CUE lape"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr ""
 
@@ -2016,23 +1996,23 @@ msgstr "Baigsis galiojimas %1"
 msgid "Export Covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2209,7 +2189,7 @@ msgstr "Flac"
 msgid "Font size"
 msgstr "Šrifto dydis"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Dėl licencijavimo priežasčių Spotify palaikymas yra įjungiamas per atskirą plėtinį."
 
@@ -2467,7 +2447,7 @@ msgstr "Piktogramos viršuje"
 msgid "Identifying song"
 msgstr "Nustatoma daina"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2865,7 +2845,7 @@ msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3208,6 +3188,10 @@ msgstr "Jokio analizatoriaus"
 msgid "No background image"
 msgstr "Išjungti fono paveikslėlį"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Jokių ilgų blokų"
@@ -3407,7 +3391,7 @@ msgstr "Originalios žymės"
 msgid "Other options"
 msgstr "Kitos parinktys"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr ""
 
@@ -3423,7 +3407,7 @@ msgstr "Išvesties parinktys"
 msgid "Output plugin"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr ""
 
@@ -3431,7 +3415,7 @@ msgstr ""
 msgid "Overwrite existing files"
 msgstr "Perrašyti egzistuojančius failus"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr ""
 
@@ -3449,16 +3433,12 @@ msgstr "Vakarėlis"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Slaptažodis"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Apsaugota slaptažodžiu"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3563,7 +3543,7 @@ msgstr "Grojaraščiai"
 msgid "Please close your browser and return to Clementine."
 msgstr "Prašome uždaryti Jūsų naršyklę, kad grįžti į Clementine."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Plėtinio būklė:"
 
@@ -3602,7 +3582,7 @@ msgstr "Sustiprinti"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Nustatymai"
@@ -3619,7 +3599,7 @@ msgstr "Pageidaujamas viršelio paveikslėlio failo pavadinimas (atskirta kablel
 msgid "Preferred audio format"
 msgstr "Pageidaujamas audio formatas"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Pageidautinas pralaidumas"
 
@@ -4019,7 +3999,7 @@ msgstr "Išsaugomi takeliai"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Besikeičiantis kodavimo dažnio profilis (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr ""
 
@@ -4329,11 +4309,11 @@ msgstr "Jungiamasi..."
 msgid "Similar artists"
 msgstr "Panašūs atlikėjai"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr ""
 
@@ -4425,7 +4405,7 @@ msgstr "Šaltiniai"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4433,7 +4413,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify prisijungimo klaida"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Spotify plėtinys"
 
@@ -4729,20 +4709,20 @@ msgstr "Įrenginys privalo būti prijungtas ir atidarytas, kad Clementine matyt�
 msgid "This device supports the following file formats:"
 msgstr "Šis įrenginys palaiko šiuos formatus:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Šis įrenginys neveiks tinkamai"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Tai yra MTP įrenginys, bet jūs sukompiliavę Clementine be libmtp palaikymo."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Tai yra iPod įrenginys, bet jūs sukompiliavę Clementine be libgpod palaikymo."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4752,7 +4732,7 @@ msgstr "Tai pirmas kartas kai prijungėte šį įrenginį. Clementine dabar nusk
 msgid "This stream is for paid subscribers only"
 msgstr "Šis srautas yra tik apmokamiems prenumeratoriams"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
@@ -4760,10 +4740,6 @@ msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Pertrauka"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Laiko juosta"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5018,7 +4994,7 @@ msgstr "Naudoti sistemos numatytą spalvų rinkinį"
 msgid "Use the system proxy settings"
 msgstr "Naudoti sistemos tarpinio serverio nustatymus"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Naudoti garso normalizavimą"
 
@@ -5037,7 +5013,7 @@ msgstr "Naudotojo sąsaja"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5138,10 +5114,6 @@ msgstr "Kai sąrašas yra tuščias..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Kodėl nepabandžius..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "WiFi MAC Adresas"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5545,7 +5517,3 @@ msgstr "stabdyti"
 #, qt-format
 msgid "track %1"
 msgstr "takelis %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr ""

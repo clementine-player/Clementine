@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:38+0000\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -375,7 +375,7 @@ msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Kontuaren xehetasunak"
@@ -688,14 +688,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Plugin gehigarri bat beharrezkoa da Spotify Clementine-en erabiltzeko. Orain deskargatu eta instalatzea nahi duzu?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "Errorea gertatu da gailutik iTunes datu-basea kopiatzerakoan"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Errorea gertatu da gailura iTunes datu-basea kopiatzerakoan"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Errorea gertatu da iTunes datu-basea kargatzerakoan"
@@ -909,10 +901,6 @@ msgstr "Bloke-analizatzailea"
 msgid "Block type"
 msgstr "Bloke-mota"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Bluetooth MAC helbidea"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr ""
@@ -939,7 +927,7 @@ msgstr "Arakatu..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Bufferra betetzen"
 
@@ -1167,10 +1155,6 @@ msgstr "Leiho hau ixteak albumen azalen bilaketa geldituko du."
 msgid "Club"
 msgstr "Club-a"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Kolorea"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Koloreak"
@@ -1249,7 +1233,7 @@ msgstr "Konfiguratu..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Konektatu Wii urruneko kontrola aktibatu/desaktibatu botoia erabiliz"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Konektatu gailua"
 
@@ -1286,10 +1270,6 @@ msgstr "Kopiatu gailura..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Kopiatu bildumara..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "iPod-aren datu-basea kopiatzen"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1670,7 +1650,7 @@ msgstr "Bildumaren berreskaneo osoa egin"
 msgid "Do not convert any music"
 msgstr "Ez bihurtu musikarik"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr ""
 
@@ -1739,7 +1719,7 @@ msgstr "Deskargatu album hau..."
 msgid "Download this episode"
 msgstr "Atal hau deskargatu"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Deskargatu..."
 
@@ -1864,7 +1844,7 @@ msgstr "URL bat sartu"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Sartu URL bat Internetetik azala jaisteko:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
@@ -2000,7 +1980,7 @@ msgstr "Orduro"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Album edo CUE orri bereko pisten artean izan ezik"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr ""
 
@@ -2017,23 +1997,23 @@ msgstr "%1-(e)an iraungitzen da"
 msgid "Export Covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2210,7 +2190,7 @@ msgstr "Flac"
 msgid "Font size"
 msgstr "Letra-tipoaren tamaina"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Lizentzia arrazoiengatik Spotify-ren euskarria aparteko plugin batean dago."
 
@@ -2468,7 +2448,7 @@ msgstr "Ikonoak goian"
 msgid "Identifying song"
 msgstr "Abestia identifikatzen"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2866,7 +2846,7 @@ msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordez
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3209,6 +3189,10 @@ msgstr "Analizatzailerik ez"
 msgid "No background image"
 msgstr "Atzeko planoko irudirik ez"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Bloke luzerik ez"
@@ -3408,7 +3392,7 @@ msgstr "Jatorrizko etiketak"
 msgid "Other options"
 msgstr "Bestelako aukerak"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr ""
 
@@ -3424,7 +3408,7 @@ msgstr "Irteerako aukerak"
 msgid "Output plugin"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr ""
 
@@ -3432,7 +3416,7 @@ msgstr ""
 msgid "Overwrite existing files"
 msgstr "Existitzen diren fitxategiak gainidatzi"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr ""
 
@@ -3450,16 +3434,12 @@ msgstr "Jaia"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Pasahitza"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Pasahitza babestua"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3564,7 +3544,7 @@ msgstr "Erreprodukzio-zerrendak"
 msgid "Please close your browser and return to Clementine."
 msgstr "Mesedez, itxi nabigatzailea eta itzuli Clementine-ra."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Pluginaren egoera:"
 
@@ -3603,7 +3583,7 @@ msgstr "Aurre-anplifikadorea"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Hobespenak"
@@ -3620,7 +3600,7 @@ msgstr "Hobetsitako album-azalen fitxategi-izenak (komaz bereizita)"
 msgid "Preferred audio format"
 msgstr "Hobetsitako audio-formatua"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Hobetsitako bit-tasa"
 
@@ -4020,7 +4000,7 @@ msgstr "Pistak gordetzen"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Lagintze-tasa eskalagarriaren profila (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr ""
 
@@ -4330,11 +4310,11 @@ msgstr "Saioa hasten..."
 msgid "Similar artists"
 msgstr "Antzeko artistak"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr ""
 
@@ -4426,7 +4406,7 @@ msgstr "Iturriak"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4434,7 +4414,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify-ko saio-hasiera errorea"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Spotify plugina"
 
@@ -4730,20 +4710,20 @@ msgstr "Gailu hau konektatu eta ireki behar da zein fitxategi-formatu onartzen d
 msgid "This device supports the following file formats:"
 msgstr "Gailu honek hurrengo fitxategi-formatuak onartzen ditu:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Gailu hau ez da era egokian ibiliko"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Hau MTP gailua da, baina Clementine libmtp euskarri gabe konpilatua dago."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Hau iPod bat da, baina Clementine libgpod euskarri gabe konpilatua dago."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4753,7 +4733,7 @@ msgstr "Gailu hau konektatzen duzun lehen aldia da. Clementine-k gailua eskaneat
 msgid "This stream is for paid subscribers only"
 msgstr "Jario hau ordainpeko harpidedunentzat da bakarrik"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Gailu mota hau ez da onartzen :%1"
@@ -4761,10 +4741,6 @@ msgstr "Gailu mota hau ez da onartzen :%1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Denbora-muga"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Ordu-zona"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5019,7 +4995,7 @@ msgstr "Erabili sistemako kolore-multzo lehenetsia"
 msgid "Use the system proxy settings"
 msgstr "Erabili sistemaren proxy-ezarpenak"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Erabili bolumenaren normalizazioa"
 
@@ -5038,7 +5014,7 @@ msgstr "Erabiltzaile-interfazea"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5139,10 +5115,6 @@ msgstr "Zerrenda hutsik dagoenean..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Zergatik ez probatu..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "Wifi MAC helbidea"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5546,7 +5518,3 @@ msgstr "gelditu"
 #, qt-format
 msgid "track %1"
 msgstr "%1 pista"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr ""

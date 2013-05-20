@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:38+0000\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -387,7 +387,7 @@ msgstr "Solo aceptar clientes no públicos"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Detalles de la cuenta"
@@ -700,14 +700,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Se requiere un complemento adicional para usar Spotify en Clementine.  ¿Quiere descargarlo e instalarlo ahora?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "Se produjo un error al copiar la base de datos de iTunes del dispositivo"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Se produjo un error al copiar la base de datos de iTunes al dispositivo"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Se produjo un error al cargar la base de datos de iTunes"
@@ -921,10 +913,6 @@ msgstr "Analizador de bloques"
 msgid "Block type"
 msgstr "Tipo de bloque"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Dirección MAC Bluetooth"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "Cantidad de desenfoque"
@@ -951,7 +939,7 @@ msgstr "Examinar…"
 msgid "Buffer duration"
 msgstr "Duración del búfer"
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Guardando en caché"
 
@@ -1179,10 +1167,6 @@ msgstr "Cerrar esta ventana detendrá la búsqueda de portadas de los álbumes."
 msgid "Club"
 msgstr "Club"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Color"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Colores"
@@ -1261,7 +1245,7 @@ msgstr "Configurar…"
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Conectar Wii Remotes usando acción de activar/desactivar"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Conectar dispositivo"
 
@@ -1298,10 +1282,6 @@ msgstr "Copiar al dispositivo…"
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Copiar a la colección…"
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "Copiando la base de datos del iPod"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1682,7 +1662,7 @@ msgstr "Volver a analizar toda la colección"
 msgid "Do not convert any music"
 msgstr "No convertir ninguna música"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr "No sobreescribir"
 
@@ -1751,7 +1731,7 @@ msgstr "Descargar este álbum…"
 msgid "Download this episode"
 msgstr "Descargar este episodio"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Descargar…"
 
@@ -1876,7 +1856,7 @@ msgstr "Introduzca una URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Escriba una dirección URL para descargar una portada de Internet:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Escriba un nombre de archivo para las carátulas exportadas (sin extensión):"
 
@@ -2012,7 +1992,7 @@ msgstr "Cada hora"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Excepto entre pistas del mismo álbum, o en la misma hoja CUE"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr "Carátulas existentes"
 
@@ -2029,23 +2009,23 @@ msgstr "Caduca el %1"
 msgid "Export Covers"
 msgstr "Exportar carátulas"
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr "Exportar carátulas"
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr "Exportar carátulas descargadas"
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr "Exportar carátulas incrustadas"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr "Exportación finalizada"
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Se exportaron %1 carátulas de %2 (se omitieron %3)"
@@ -2222,7 +2202,7 @@ msgstr "Flac"
 msgid "Font size"
 msgstr "Tamaño de letra"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Por razones de licencia, para usar Spotify se necesita un complemento separado."
 
@@ -2480,7 +2460,7 @@ msgstr "Iconos en la parte superior"
 msgid "Identifying song"
 msgstr "Identificando la canción"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2878,7 +2858,7 @@ msgstr "Carga archivos/URL, reemplazando la lista de reproducción actual"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3221,6 +3201,10 @@ msgstr "Sin analizador"
 msgid "No background image"
 msgstr "Sin imagen de fondo"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr "No hay ninguna carátula que exportar."
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Sin bloques largos"
@@ -3420,7 +3404,7 @@ msgstr "Etiquetas originales"
 msgid "Other options"
 msgstr "Otras opciones"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr "Salida"
 
@@ -3436,7 +3420,7 @@ msgstr "Opciones de salida"
 msgid "Output plugin"
 msgstr "Complemento de salida"
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr "Sobreescribir todo"
 
@@ -3444,7 +3428,7 @@ msgstr "Sobreescribir todo"
 msgid "Overwrite existing files"
 msgstr "Sobreescribir archivos existentes"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr "Sobreescribir solo las más pequeñas"
 
@@ -3462,16 +3446,12 @@ msgstr "Fiesta"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Contraseña"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Protegido con contraseña"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3576,7 +3556,7 @@ msgstr "Listas repr."
 msgid "Please close your browser and return to Clementine."
 msgstr "Cierre su navegador y regrese a Clementine."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Estado del complemento:"
 
@@ -3615,7 +3595,7 @@ msgstr "Preamplificación"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Preferencias"
@@ -3632,7 +3612,7 @@ msgstr "Nombres preferidos para portadas de álbum (separados por coma)"
 msgid "Preferred audio format"
 msgstr "Formato de audio preferido"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Tasa de bits preferida"
 
@@ -3843,7 +3823,7 @@ msgstr "Eliminar de la lista de reproducción"
 
 #: playlist/playlistlistcontainer.cpp:309
 msgid "Remove playlists"
-msgstr ""
+msgstr "Eliminar listas de reproducción"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
@@ -4032,7 +4012,7 @@ msgstr "Guardando pistas"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Perfil de tasa de muestreo escalable (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr "Tamaño de escala"
 
@@ -4342,11 +4322,11 @@ msgstr "Iniciando sesión…"
 msgid "Similar artists"
 msgstr "Artistas similares"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr "Tamaño"
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr "Tamaño:"
 
@@ -4438,7 +4418,7 @@ msgstr "Orígenes"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4446,7 +4426,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Error de inicio de sesión de Spotify"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Complemento de Spotify"
 
@@ -4742,20 +4722,20 @@ msgstr "Este dispositivo ha de conectarse y abrirse antes de que Clementine pued
 msgid "This device supports the following file formats:"
 msgstr "Este dispositivo soporta los siguientes formatos de archivo:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Este dispositivo no funcionará correctamente"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Este es un dispositivo MTP, pero compiló Clementine sin soporte para libmtp."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Esto es un iPod, pero ha compilado Clementine sin soporte para libgpod."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4765,7 +4745,7 @@ msgstr "Esta es la primera vez que conecta este dispositivo.  Clementine analiza
 msgid "This stream is for paid subscribers only"
 msgstr "Este flujo es solo para Suscriptores de Paga"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Tipo de dispositivo no soportado: %1"
@@ -4773,10 +4753,6 @@ msgstr "Tipo de dispositivo no soportado: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Tiempo de espera"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Zona horaria"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5031,7 +5007,7 @@ msgstr "Utilizar el conjunto de colores del sistema"
 msgid "Use the system proxy settings"
 msgstr "Utilizar la configuración de proxy del sistema"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Usar normalización de volumen"
 
@@ -5050,7 +5026,7 @@ msgstr "Interfaz de usuario"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5151,10 +5127,6 @@ msgstr "Cuando la lista está vacía…"
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Por qué no intenta…"
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "Dirección MAC del WiFi"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5260,7 +5232,7 @@ msgstr "Está a punto de descargar los álbumes siguientes"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "¿Está seguro de que quiere eliminar %1 listas de reproducción de sus favoritos?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5558,7 +5530,3 @@ msgstr "detener"
 #, qt-format
 msgid "track %1"
 msgstr "pista %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr "x"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:39+0000\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -373,7 +373,7 @@ msgstr "Només accepta clients no públics"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Detalls del compte"
@@ -686,14 +686,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Necessitareu un connector addicional per usar Spotify en el Clementine. Voleu baixar-ho i instal·lar-ho ara?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "S'ha produït un error copiar la base de dades d'iTunes des del dispositiu"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "S'ha produït un error copiar la base de dades d'iTunes cap al dispositiu"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "S’ha produït un error en carregar la base de dades d’iTunes"
@@ -907,10 +899,6 @@ msgstr "Analitzador de blocs"
 msgid "Block type"
 msgstr "Tipus de bloc"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Bluetooth Adreça MAC"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "Quantitat de desenfoqui"
@@ -937,7 +925,7 @@ msgstr "Explora..."
 msgid "Buffer duration"
 msgstr "Durada de la memòria intermèdia"
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Emplenant la memòria intermèdia"
 
@@ -1165,10 +1153,6 @@ msgstr "Tancant aquesta finestra es deixaràn de buscar les caràtules dels albu
 msgid "Club"
 msgstr "Club"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Color"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Colors"
@@ -1247,7 +1231,7 @@ msgstr "Configura…"
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Connetar els comandaments remot Wii amb l'acció activar/desactivar"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Connecta el dispositiu"
 
@@ -1284,10 +1268,6 @@ msgstr "Còpia al dispositiu…"
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Còpia a la col·lecció…"
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "S’està copiant la base de dades de l’iPod"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1668,7 +1648,7 @@ msgstr "Escaneja de nou tota la col·lecció"
 msgid "Do not convert any music"
 msgstr "No converteixis cap musica"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr "No ho sobreescriguis"
 
@@ -1737,7 +1717,7 @@ msgstr "Descarrega aquest àlbum..."
 msgid "Download this episode"
 msgstr "Descarrega aquest episodi"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Descarrega..."
 
@@ -1862,7 +1842,7 @@ msgstr "Introduïu un URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Introduïu l'URL per descarregar una imatge de portada des d'Internet"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Introduïu un nom de fitxer per les caràtules exportades (sense extensió):"
 
@@ -1998,7 +1978,7 @@ msgstr "Cada hora"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Excepte entre pistes del mateix àlbum o del mateix full CUE"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr "Caràtules existents"
 
@@ -2015,23 +1995,23 @@ msgstr "Caduca el %1"
 msgid "Export Covers"
 msgstr "Exporta les caràtules"
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr "Exporta les caràtules"
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr "Exporta les caràtules baixades"
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr "Exporta les caràtules incrustades"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr "Ha finalitzat l’exportació"
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "S’han exportat %1 caràtules de %2 (s’han omès %3)"
@@ -2208,7 +2188,7 @@ msgstr "FLAC"
 msgid "Font size"
 msgstr "Mida de la font"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "A causa de la seva llicència, el suport per a Spotify es troba en un connector a part."
 
@@ -2466,7 +2446,7 @@ msgstr "icones a la part superior"
 msgid "Identifying song"
 msgstr "Identifica la cançó"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2864,7 +2844,7 @@ msgstr "Carregar fitxers/URLs, substituïnt l'actual llista de reproducció"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3207,6 +3187,10 @@ msgstr "Sense analitzador"
 msgid "No background image"
 msgstr "Sense imatge de fons"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr "No hi ha cap caràtula que exportar."
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "No utilitzis blocs llargs"
@@ -3406,7 +3390,7 @@ msgstr "Etiquetes originals"
 msgid "Other options"
 msgstr "Altres opcions"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr "Sortida"
 
@@ -3422,7 +3406,7 @@ msgstr "Opcions de sortida"
 msgid "Output plugin"
 msgstr "Connector de sortida"
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr "Sobreescriu-ho tot"
 
@@ -3430,7 +3414,7 @@ msgstr "Sobreescriu-ho tot"
 msgid "Overwrite existing files"
 msgstr "Sobreescriu els fitxers existents"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr "Sobreescriu només les més petites"
 
@@ -3448,16 +3432,12 @@ msgstr "Festa"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Contrasenya"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Contrasenya protegida"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3562,7 +3542,7 @@ msgstr "Llistes de reproducció"
 msgid "Please close your browser and return to Clementine."
 msgstr "Si us plau tanqueu el navegador i torneu a Clementine."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Estat del connector"
 
@@ -3601,7 +3581,7 @@ msgstr "Preamplificador"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Preferències"
@@ -3618,7 +3598,7 @@ msgstr "Noms d'arxiu preferits per a les caràtules dels àlbums (separats per c
 msgid "Preferred audio format"
 msgstr "Format d'àudio preferit"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Taxa de bits preferida"
 
@@ -3829,7 +3809,7 @@ msgstr "Suprimeix de la llista de reproducció"
 
 #: playlist/playlistlistcontainer.cpp:309
 msgid "Remove playlists"
-msgstr ""
+msgstr "Suprimeix llestes de reproducció"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
@@ -4018,7 +3998,7 @@ msgstr "S'estan desant les pistes"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Perfil de freqüència de mostreig escalable (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr "Mida de l’escala"
 
@@ -4328,11 +4308,11 @@ msgstr "S'està iniciant sessió..."
 msgid "Similar artists"
 msgstr "Artistes similars"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr "Mida"
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr "Mida:"
 
@@ -4424,7 +4404,7 @@ msgstr "Fonts"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4432,7 +4412,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Error en iniciar sessió a Spotify"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Connector d'Spotify"
 
@@ -4728,20 +4708,20 @@ msgstr "Aquest dispositiu ha de connectar-se i obrir-se abans que Clementine pug
 msgid "This device supports the following file formats:"
 msgstr "Aquest dispositiu és compatible amb els següents formats d'arxius:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Aquest dispositiu no funcionarà correctament"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Aquest és un dispositiu MTP, però heu compilat el Clementine sense suport libmtp"
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Aquest dispositiu és un iPod, però heu compilat el Clementine sense compatibilitat libgpod."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4751,7 +4731,7 @@ msgstr "Aquest es el primer cop que connectes aquest dispositiu. Clementine anal
 msgid "This stream is for paid subscribers only"
 msgstr "Aquest flux es sol per als subscriptors que paguen"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Aquest tipus de dispositiu no esta suportat: %1"
@@ -4759,10 +4739,6 @@ msgstr "Aquest tipus de dispositiu no esta suportat: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Temps d'espera"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Zona horària"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5017,7 +4993,7 @@ msgstr "Utilitza el conjunt de colors del sistema"
 msgid "Use the system proxy settings"
 msgstr "Utilitza la configuració de servidor intermediari del sistema"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Empra la normalització de volum"
 
@@ -5036,7 +5012,7 @@ msgstr "Intefície d'usuari"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5137,10 +5113,6 @@ msgstr "Quan la llista sigui buida..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Perquè no proveu..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "Adreça MAC de la WiFi"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5246,7 +5218,7 @@ msgstr "Sou a punt de descarregar els següents àlbums"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "Esteu segur que voleu suprimir %1 llistes de reproducció dels vostres favorits?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5544,7 +5516,3 @@ msgstr "atura"
 #, qt-format
 msgid "track %1"
 msgstr "peça %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr "x"

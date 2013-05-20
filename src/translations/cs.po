@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-12 10:41+0000\n"
-"Last-Translator: fri <pavelfric@seznam.cz>\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
@@ -379,7 +379,7 @@ msgstr "Přijmout pouze neveřejné klienty"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Podrobnosti o účtu"
@@ -692,14 +692,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Pro používání Spotify v Clementine je vyžadován přídavný modul. Chcete jej stáhnout a nainstalovat nyní?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "Při kopírování databáze iTunes ze zařízení nastala chyba"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Při kopírování databáze iTunes do zařízení nastala chyba"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Při nahrávání databáze iTunes nastala chyba"
@@ -913,10 +905,6 @@ msgstr "Blokový analyzátor"
 msgid "Block type"
 msgstr "Typ bloku"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "MAC adresa Bluetooth"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "Velikost rozmazání"
@@ -943,7 +931,7 @@ msgstr "Procházet…"
 msgid "Buffer duration"
 msgstr "Délka vyrovnávací paměti"
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Ukládá se do vyrovnávací paměti"
 
@@ -1171,10 +1159,6 @@ msgstr "Zavření tohoto okna zastaví hledání obalů alb."
 msgid "Club"
 msgstr "Klub"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Barva"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Barvy"
@@ -1253,7 +1237,7 @@ msgstr "Nastavit..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Připojit dálkový ovladač Wii pomocí činnosti zapnout/vypnout"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Připojit zařízení"
 
@@ -1290,10 +1274,6 @@ msgstr "Zkopírovat do zařízení..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Zkopírovat do sbírky..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "Kopíruje se databáze iPod"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1674,7 +1654,7 @@ msgstr "Znovu kompletně prohledat sbírku"
 msgid "Do not convert any music"
 msgstr "Nepřevádět žádnou hudbu"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr "Nepřepisovat"
 
@@ -1743,7 +1723,7 @@ msgstr "Stáhnout toto album..."
 msgid "Download this episode"
 msgstr "Stáhnout tento díl"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Stáhnout..."
 
@@ -1868,7 +1848,7 @@ msgstr "Zadejte adresu (URL)"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Zadejte adresu (URL) ke stažení obalu z internetu:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Zadejte souborový název pro uložené obaly (bez přípony):"
 
@@ -2004,7 +1984,7 @@ msgstr "Každou hodinu"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Kromě mezistop na tom samém albu nebo v tom samém listu CUE"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr "Stávající obaly"
 
@@ -2021,23 +2001,23 @@ msgstr "Vyprší %1"
 msgid "Export Covers"
 msgstr "Uložit obaly"
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr "Uložit obaly"
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr "Uložit stažené obaly"
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr "Uložit vložené obaly"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr "Uložení dokončeno"
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Uloženo %1 obalů z %2 (%3 přeskočeno)"
@@ -2214,7 +2194,7 @@ msgstr "FLAC"
 msgid "Font size"
 msgstr "Velikost písma"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Z licenčních důvodů je podpora pro Spotify v odděleném přídavném modulu"
 
@@ -2472,7 +2452,7 @@ msgstr "Ikony nahoře"
 msgid "Identifying song"
 msgstr "Určuje se píseň"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2870,7 +2850,7 @@ msgstr "Nahraje soubory/adresy (URL), nahradí současný seznam skladeb"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3213,6 +3193,10 @@ msgstr "Žádný analyzátor"
 msgid "No background image"
 msgstr "Žádný obrázek na pozadí"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr "Žádné obaly k uložení"
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Žádné dlouhé bloky"
@@ -3412,7 +3396,7 @@ msgstr "Původní značky"
 msgid "Other options"
 msgstr "Další volby"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr "Výstup"
 
@@ -3428,7 +3412,7 @@ msgstr "Možnosti výstupu"
 msgid "Output plugin"
 msgstr "Výstupní modul"
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr "Přepsat vše"
 
@@ -3436,7 +3420,7 @@ msgstr "Přepsat vše"
 msgid "Overwrite existing files"
 msgstr "Přepsat existující soubory"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr "Přepsat pouze menší"
 
@@ -3454,16 +3438,12 @@ msgstr "Oslava"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Heslo"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Heslo chráněno"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3568,7 +3548,7 @@ msgstr "Seznamy skladeb"
 msgid "Please close your browser and return to Clementine."
 msgstr "Zavřete, prosím, svůj prohlížeč a vraťte se do Clementine."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Stav přídavného modulu:"
 
@@ -3607,7 +3587,7 @@ msgstr "Předzesílení"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Nastavení"
@@ -3624,7 +3604,7 @@ msgstr "Upřednostňované názvy souborů s obaly alb (oddělené čárkou)"
 msgid "Preferred audio format"
 msgstr "Upřednostňovaný zvukový formát"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Upřednostňovaný datový tok"
 
@@ -4024,7 +4004,7 @@ msgstr "Ukládají se skladby"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Profil škálovatelného vzorkovacího kmitočtu"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr "Velikost měřítka"
 
@@ -4334,11 +4314,11 @@ msgstr "Přihlašuje se..."
 msgid "Similar artists"
 msgstr "Podobní umělci"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr "Velikost"
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr "Velikost:"
 
@@ -4430,7 +4410,7 @@ msgstr "Zdroje"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4438,7 +4418,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Chyba přihlášení k Spotify"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Přídavný modul Spotify"
 
@@ -4734,20 +4714,20 @@ msgstr "Pro zjištění podporovaných formátů souborů je zařízení nejdř�
 msgid "This device supports the following file formats:"
 msgstr "Toto zařízení podporuje následující formáty souborů:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Toto zařízení nebude pracovat správně"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Toto je zařízení MTP, ale Clementine byl sestaven bez podpory pro libmtp."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Toto je zařízení iPod, ale Clementine byl sestaven bez podpory pro libgpod."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4757,7 +4737,7 @@ msgstr "Toto zařízení bylo připojeno poprvé. Clementine na něm nyní hled�
 msgid "This stream is for paid subscribers only"
 msgstr "Tento proud je pouze pro předplatitele"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Tento typ zařízení není podporován: %1"
@@ -4765,10 +4745,6 @@ msgstr "Tento typ zařízení není podporován: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Časové omezení"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Časové pásmo"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5023,7 +4999,7 @@ msgstr "Použít systémovou výchozí sadu barev:"
 msgid "Use the system proxy settings"
 msgstr "Použít systémové nastavení proxy"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Použít normalizaci hlasitosti"
 
@@ -5042,7 +5018,7 @@ msgstr "Uživatelské rozhraní"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5143,10 +5119,6 @@ msgstr "Když je seznam prázdný..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Proč nezkusit"
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "MAC adresa WiFi"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5550,7 +5522,3 @@ msgstr "zastavit"
 #, qt-format
 msgid "track %1"
 msgstr "skladba %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr "x"

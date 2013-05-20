@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-12 10:35+0000\n"
-"Last-Translator: Sparkrin <rindertvonk@gmx.net>\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl\n"
@@ -377,7 +377,7 @@ msgstr "Alleen niet-publieke apparaten accepteren"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Account gegevens"
@@ -456,71 +456,71 @@ msgstr "Zoekterm toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:380
 msgid "Add song album tag"
-msgstr "‘album’-label aan nummer toevoegen"
+msgstr "Album-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:386
 msgid "Add song albumartist tag"
-msgstr "‘albumartist’-label aan nummer toevoegen"
+msgstr "Albumartiest-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:377
 msgid "Add song artist tag"
-msgstr "‘artist’-label aan nummer toevoegen"
+msgstr "Artiest-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Add song auto score"
-msgstr "Score van het nummer toevoegen"
+msgstr "Score toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:392
 msgid "Add song composer tag"
-msgstr "‘composer’-label aan nummer toevoegen"
+msgstr "Componist-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song disc tag"
-msgstr "‘disc’-label aan nummer toevoegen"
+msgstr "Schijf-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:429
 msgid "Add song filename"
-msgstr "Bestandsnaam van nummer toevoegen"
+msgstr "Bestandsnaam toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Add song genre tag"
-msgstr "‘genre’-label aan nummer toevoegen"
+msgstr "Genre-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song grouping tag"
-msgstr "Groepering van nummer toevoegen"
+msgstr "Groepering-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
-msgstr "‘length’-label aan nummer toevoegen"
+msgstr "Lengte toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
-msgstr "Uitvoerend artiest van nummer toevoegen"
+msgstr "Uitvoerend artiest-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song play count"
-msgstr "Aantal keren afgespeeld aan dit nummer toevoegen"
+msgstr "Aantal maal afgespeeld toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song rating"
-msgstr "Waardering van het nummer toevoegen"
+msgstr "Waardering toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song skip count"
-msgstr "Aantal keren overgeslagen aan dit nummer toevoegen"
+msgstr "Aantal maal overgeslagen toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:383
 msgid "Add song title tag"
-msgstr "‘title’-label aan nummer toevoegen"
+msgstr "Titel-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song track tag"
-msgstr "‘track’-label aan nummer toevoegen"
+msgstr "Nummer-label toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:389
 msgid "Add song year tag"
-msgstr "‘year’-label aan nummer toevoegen"
+msgstr "Jaar-label toevoegen"
 
 #: ../bin/src/ui_mainwindow.h:680
 msgid "Add stream..."
@@ -689,14 +689,6 @@ msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
 msgstr "Een extra plug-in is vereist om Spotify in Clementine te gebruiken. Wilt u deze nu downloaden en installeren?"
-
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "Er is een fout opgetreden tijdens het kopiëren van de iTunes-database van het apparaat"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Er is een fout opgetreden tijdens het kopiëren van de iTunes-database naar het apparaat"
 
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
@@ -911,10 +903,6 @@ msgstr "Blokweergave"
 msgid "Block type"
 msgstr "Bloktype"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Bluetooth MAC-adres"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "Vervagen"
@@ -941,7 +929,7 @@ msgstr "Bladeren…"
 msgid "Buffer duration"
 msgstr "Buffer duur"
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Bufferen"
 
@@ -1034,7 +1022,7 @@ msgstr "Kies map waarnaar podcasts gedownload worden"
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Kies de website die Clementine moet gebruiken om songteksten op te zoeken."
+msgstr "Kies de websites die Clementine mag gebruiken om songteksten op te zoeken."
 
 #: ui/equalizer.cpp:115
 msgid "Classical"
@@ -1092,7 +1080,7 @@ msgstr "Clementine kan muziek afspelen die u op Google Drive opgeslagen hebt"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr "Clementine kan muziek afspelen die u op Ubuntu One  opgeslagen hebt"
+msgstr "Clementine kan muziek afspelen die u op Ubuntu One opgeslagen hebt"
 
 #: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Clementine can show a message when the track changes."
@@ -1168,10 +1156,6 @@ msgstr "Het zoeken naar albumhoezen wordt afgebroken als u dit venster sluit."
 #: ui/equalizer.cpp:116
 msgid "Club"
 msgstr "Club"
-
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Kleur"
 
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
@@ -1251,7 +1235,7 @@ msgstr "Configureer..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Wii Remotes met activeer/deactiveer-actie verbinden"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Apparaat verbinden"
 
@@ -1288,10 +1272,6 @@ msgstr "Naar apparaat kopiëren…"
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Naar bibliotheek kopiëren…"
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "Kopiëren van de iPod-database"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1639,7 +1619,7 @@ msgstr "Notificatie permanent weergeven"
 
 #: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
-msgstr "Schakel aanmaken van stemmingsbalk uit"
+msgstr "Schakel het aanmaken van de stemmingsbalk uit"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:433
@@ -1672,7 +1652,7 @@ msgstr "De volledige database opnieuw scannen"
 msgid "Do not convert any music"
 msgstr "Geen muziek converteren"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr "Niet overschrijven"
 
@@ -1741,7 +1721,7 @@ msgstr "Dit album downloaden…"
 msgid "Download this episode"
 msgstr "Download deze aflevering"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Downloaden…"
 
@@ -1866,7 +1846,7 @@ msgstr "Voer een URL in"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Voeg een URL toe om een albumhoes van het internet te downloaden:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Geef een bestandsnaam voor de geëxporteerde albumhoezen (geen extensie)"
 
@@ -2002,7 +1982,7 @@ msgstr "Elk uur"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Behalve tussen nummers van hetzelfde album of in dezelfde CUE-sheet"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr "Bestaande albumhoezen"
 
@@ -2019,23 +1999,23 @@ msgstr "Verloopt op %1"
 msgid "Export Covers"
 msgstr "Albumhoezen Exporteren"
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr "Albumhoezen exporteren"
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr "Exporteer gedownloade albumhoezen"
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr "Exporteer albumhoezen in mediabestanden"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr "Klaar me exporteren"
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "%1 van %2 albumhoezen geëxporteerd (%3 overgeslagen)"
@@ -2212,7 +2192,7 @@ msgstr "Flac"
 msgid "Font size"
 msgstr "Tekengrootte"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Vanwege licenties is Spotify-ondersteuning alleen via een plug-in beschikbaar."
 
@@ -2470,7 +2450,7 @@ msgstr "Pictogrammen bovenaan"
 msgid "Identifying song"
 msgstr "Nummer identificeren"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2868,7 +2848,7 @@ msgstr "Bestanden/URLs laden, en vervangt de huidige afspeellijst"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3211,6 +3191,10 @@ msgstr "Geen weergave"
 msgid "No background image"
 msgstr "Geen achtergrondafbeelding"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr "Geen albumhoezen om te exporteren."
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Geen lange blokken"
@@ -3410,7 +3394,7 @@ msgstr "Originele labels"
 msgid "Other options"
 msgstr "Overige opties"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr "Output"
 
@@ -3426,7 +3410,7 @@ msgstr "Uitvoeropties"
 msgid "Output plugin"
 msgstr "Uitvoer plug-in"
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr "Alles overschrijven"
 
@@ -3434,7 +3418,7 @@ msgstr "Alles overschrijven"
 msgid "Overwrite existing files"
 msgstr "Overschrijf bestaande bestanden"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr "Overschrijf alleen kleinere"
 
@@ -3452,16 +3436,12 @@ msgstr "Party"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Wachtwoord"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Wachtwoord beveiligd"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3566,7 +3546,7 @@ msgstr "Afspeellijsten"
 msgid "Please close your browser and return to Clementine."
 msgstr "Sluit uw browser en keer terug naar Clementine."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Plug-in status:"
 
@@ -3605,7 +3585,7 @@ msgstr "Voorversterking"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Voorkeuren"
@@ -3622,7 +3602,7 @@ msgstr "Eerste keuze voor bestandsnamen van albumshoezen (gescheiden door komma'
 msgid "Preferred audio format"
 msgstr "Audioformaat-voorkeur"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Bitrate voorkeur"
 
@@ -4022,7 +4002,7 @@ msgstr "Nummers opslaan"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Schaalbare samplerateprofiel (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr "Groote schalen"
 
@@ -4221,7 +4201,7 @@ msgstr "Notificatie weergeven als ik het volume wijzig"
 
 #: ../bin/src/ui_notificationssettingspage.h:436
 msgid "Show a popup from the system tray"
-msgstr "Pop-up uit systeemvakpictogram weergeven"
+msgstr "Pop-up van systeemvak weergeven"
 
 #: ../bin/src/ui_notificationssettingspage.h:435
 msgid "Show a pretty OSD"
@@ -4332,11 +4312,11 @@ msgstr "Bezig met inloggen...."
 msgid "Similar artists"
 msgstr "Vergelijkbare artiesten"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr "Groote"
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr "Groote:"
 
@@ -4350,7 +4330,7 @@ msgstr "Terug in afspeellijst"
 
 #: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
-msgstr "Sla tellen over"
+msgstr "Aantal maal overgeslagen"
 
 #: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
@@ -4428,7 +4408,7 @@ msgstr "Bronnen"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4436,7 +4416,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify inlogfout"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Spotify plug-in"
 
@@ -4732,20 +4712,20 @@ msgstr "Dit apparaat dient verbonden te zijn en geopend vooraleer Clementine kan
 msgid "This device supports the following file formats:"
 msgstr "Dit apparaat ondsteunt de volgende bestandsformaten:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Dit apparaat zal niet correct werken"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Dit is een MTP apparaat maar u hebt Clementine gecompileerd zonder libmtp ondersteuning."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Dit is een iPod maar u hebt Clementine gecompileerd zonder libgpod ondersteuning."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4755,7 +4735,7 @@ msgstr "Dit is de eerste keer dat u dit apparaat hebt verbonden. Clementine zal 
 msgid "This stream is for paid subscribers only"
 msgstr "Deze stream is alleen voor betalende abonnees"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Dit type apparaat wordt niet ondersteund: %1"
@@ -4763,10 +4743,6 @@ msgstr "Dit type apparaat wordt niet ondersteund: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Time-out"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Tijdzone"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5021,7 +4997,7 @@ msgstr "Gebruik de standaard kleuren set"
 msgid "Use the system proxy settings"
 msgstr "Globale proxy-instellingen gebruiken"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Volume normalisatie gebruiken"
 
@@ -5040,7 +5016,7 @@ msgstr "Gebruikersinterface"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5141,10 +5117,6 @@ msgstr "Als de lijst leeg is..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Probeer eens...."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "WiFi MAC-adres"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5548,7 +5520,3 @@ msgstr "stoppen"
 #, qt-format
 msgid "track %1"
 msgstr "nummer %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr "x"

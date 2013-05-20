@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:39+0000\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -377,7 +377,7 @@ msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "계정 정보"
@@ -690,14 +690,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "클레멘타인엔서 스포티피를 이용하시려면 추가 플러그인이 있어야 합니다. 지금 설치하시겠습니까?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "장치에서 iTunes 데이터베이스를 복사하던 중 오류 발생"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "장치로 iTunes 데이터베이스를 복사하던 중 오류 발생"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes 데이터베이스를 불러오는 중 오류 발생"
@@ -911,10 +903,6 @@ msgstr "블록"
 msgid "Block type"
 msgstr "블록 형식"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "블루투스 MAC 주소"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "블러 정도"
@@ -941,7 +929,7 @@ msgstr "찾아보기..."
 msgid "Buffer duration"
 msgstr "버퍼 시간"
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "버퍼링"
 
@@ -1169,10 +1157,6 @@ msgstr "이 창을 닫으면 앨범 표지 검색이 중지됩니다."
 msgid "Club"
 msgstr "클럽"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "색상"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "색상"
@@ -1251,7 +1235,7 @@ msgstr "설정..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "사용/중지 실행으로 Wii 리모컨 연결"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "장치 연결"
 
@@ -1288,10 +1272,6 @@ msgstr "장치에 복사..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "라이브러리에 복사..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "아이팟 데이터베이스에 복사 중"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1672,7 +1652,7 @@ msgstr "전체 라이브러리 다시 읽기"
 msgid "Do not convert any music"
 msgstr "어떤 곡도 변환하지 않기"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr ""
 
@@ -1741,7 +1721,7 @@ msgstr "이 앨범 다운로드..."
 msgid "Download this episode"
 msgstr "이 에피소드 다운로드"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "다운로드..."
 
@@ -1866,7 +1846,7 @@ msgstr "URL 입력"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "인터넷에서 다운로드할 커버의 URL 주소를 입력하세요"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
@@ -2002,7 +1982,7 @@ msgstr "매 시간"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "같은 앨범이나 같은 큐 시트의 트랙 사이에선 제외"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr ""
 
@@ -2019,23 +1999,23 @@ msgstr "만료 일자: "
 msgid "Export Covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2212,7 +2192,7 @@ msgstr "Flac"
 msgid "Font size"
 msgstr "글꼴 크기"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr ""
 
@@ -2470,7 +2450,7 @@ msgstr "상단에 아이콘"
 msgid "Identifying song"
 msgstr "음악을 식별하는 "
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2868,7 +2848,7 @@ msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3211,6 +3191,10 @@ msgstr "없음"
 msgid "No background image"
 msgstr "배경 그림 없음"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr ""
@@ -3410,7 +3394,7 @@ msgstr "원본 태그"
 msgid "Other options"
 msgstr "그 외 옵션"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr ""
 
@@ -3426,7 +3410,7 @@ msgstr "저장 옵션"
 msgid "Output plugin"
 msgstr "출력 플러그인"
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr ""
 
@@ -3434,7 +3418,7 @@ msgstr ""
 msgid "Overwrite existing files"
 msgstr "기존 파일들 "
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr ""
 
@@ -3452,16 +3436,12 @@ msgstr "파티"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "비밀번호"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "보호된 비밀번호"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3566,7 +3546,7 @@ msgstr "재생목록"
 msgid "Please close your browser and return to Clementine."
 msgstr "브라우저를 닫고 클레멘타인으로 돌아오세요"
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "플러그인 상태:"
 
@@ -3605,7 +3585,7 @@ msgstr "프리-엠프"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "환경설정"
@@ -3622,7 +3602,7 @@ msgstr "선호하는 앨범 아트 파일명 (쉼표로 구분)"
 msgid "Preferred audio format"
 msgstr "선호하는 오디오 형식"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "선호하는 비트 전송률"
 
@@ -4022,7 +4002,7 @@ msgstr ""
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Scalable sampling rate profile (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr ""
 
@@ -4332,11 +4312,11 @@ msgstr "로그인..."
 msgid "Similar artists"
 msgstr "유사한 음악가"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr ""
 
@@ -4428,7 +4408,7 @@ msgstr "출처"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "스포티피"
 
@@ -4436,7 +4416,7 @@ msgstr "스포티피"
 msgid "Spotify login error"
 msgstr "스포티피 로그인 에러"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "스포티피 플러그인"
 
@@ -4732,20 +4712,20 @@ msgstr ""
 msgid "This device supports the following file formats:"
 msgstr "이 장치는 다음의 파일 형식을 지원합니다:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr ""
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4755,7 +4735,7 @@ msgstr ""
 msgid "This stream is for paid subscribers only"
 msgstr "이 스트림은 유료 subscribers만 사용할 수 있습니다"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr ""
@@ -4763,10 +4743,6 @@ msgstr ""
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "타임아웃"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "타임존"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5021,7 +4997,7 @@ msgstr "시스템 기본 색상 사용"
 msgid "Use the system proxy settings"
 msgstr "시스템 프록시 설정 사용"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "음량 표준화 사용"
 
@@ -5040,7 +5016,7 @@ msgstr "사용자 인터페이스"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5141,10 +5117,6 @@ msgstr "목록이 비었을 때..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "다음의 검색어는 어떠시나요..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "WiFi MAC "
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5547,8 +5519,4 @@ msgstr "중지"
 #: widgets/osd.cpp:116
 #, qt-format
 msgid "track %1"
-msgstr ""
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
 msgstr ""

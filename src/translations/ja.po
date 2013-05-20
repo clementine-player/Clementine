@@ -5,13 +5,13 @@
 # Translators:
 # davidsansome <me@davidsansome.com>, 2010
 # Masaki <m.sagami+sourceforge@gmail.com>, 2011-2012
-# Yoshihito YOSHINO <yy.y.ja.jp+transifex@gmail.com>, 2012
+# Yoshihito YOSHINO <yy.y.ja.jp+transifex@gmail.com>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:39+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-05-19 01:53+0000\n"
+"Last-Translator: Yoshihito YOSHINO <yy.y.ja.jp+transifex@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ja\n"
@@ -247,7 +247,7 @@ msgstr "1 トラック"
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "127.0.0.1"
-msgstr ""
+msgstr "127.0.0.1"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
@@ -373,7 +373,7 @@ msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "アカウントの詳細"
@@ -686,14 +686,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Clementine で Spotify を利用するには追加のプラグインが必要です。今すぐダウンロードしてインストールしますか?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "iTunes のデータベースをデバイスからコピー中にエラーが発生しました"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "iTunes データベースをデバイスへコピー中にエラーが発生しました"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes のデータベースを読み込み中にエラーが発生しました"
@@ -907,10 +899,6 @@ msgstr "ブロック表示"
 msgid "Block type"
 msgstr "ブロックタイプ"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "Bluetooth の MAC アドレス"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr ""
@@ -937,7 +925,7 @@ msgstr "参照..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "バッファ中"
 
@@ -1165,10 +1153,6 @@ msgstr "このウィンドウを閉じるとアルバムカバーの検索を中
 msgid "Club"
 msgstr "クラブ"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "色"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "色"
@@ -1247,7 +1231,7 @@ msgstr "設定..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "アクティブ・非アクティブの切り替えアクションを使用して Wii リモコンを接続する"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "デバイスの接続"
 
@@ -1284,10 +1268,6 @@ msgstr "デバイスへコピー..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "ライブラリへコピー..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "iPod データベースをコピーしています"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1668,7 +1648,7 @@ msgstr "ライブラリ全体を再スキャン"
 msgid "Do not convert any music"
 msgstr "すべてのミュージックを変換しない"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr ""
 
@@ -1737,7 +1717,7 @@ msgstr "このアルバムをダウンロード..."
 msgid "Download this episode"
 msgstr "このエピソードをダウンロード"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "ダウンロード..."
 
@@ -1862,7 +1842,7 @@ msgstr "URL を入力"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "インターネットからカバーアートをダウンロードする URL を入力してください:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
@@ -1998,7 +1978,7 @@ msgstr "1 時間おき"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "同じアルバムもしくはキューシートのトラック同士の場合は除外する"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr ""
 
@@ -2015,23 +1995,23 @@ msgstr ""
 msgid "Export Covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2208,7 +2188,7 @@ msgstr "Flac"
 msgid "Font size"
 msgstr "フォントサイズ"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "ライセンス上の理由で Spotify サポートは別プラグインになっています。"
 
@@ -2466,7 +2446,7 @@ msgstr "アイコンを上に配置"
 msgid "Identifying song"
 msgstr "曲の識別中"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2864,7 +2844,7 @@ msgstr "ファイル・URL を読み込んで、現在のプレイリストを�
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3207,6 +3187,10 @@ msgstr "アナライザーがありません"
 msgid "No background image"
 msgstr "背景画像なし"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr ""
@@ -3406,7 +3390,7 @@ msgstr "元のタグ"
 msgid "Other options"
 msgstr "その他のオプション"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr ""
 
@@ -3422,7 +3406,7 @@ msgstr "出力のオプション"
 msgid "Output plugin"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr ""
 
@@ -3430,7 +3414,7 @@ msgstr ""
 msgid "Overwrite existing files"
 msgstr "既存のファイルを上書きする"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr ""
 
@@ -3448,16 +3432,12 @@ msgstr "Party"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "パスワード"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "パスワード保護されています"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3562,7 +3542,7 @@ msgstr "プレイリスト"
 msgid "Please close your browser and return to Clementine."
 msgstr "ブラウザーを閉じて Clementine に戻ってください。"
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "プラグインの状態:"
 
@@ -3601,7 +3581,7 @@ msgstr "プリアンプ"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "環境設定"
@@ -3618,7 +3598,7 @@ msgstr "優先するアルバムアートのファイル名 (コンマ区切り)
 msgid "Preferred audio format"
 msgstr "優先するオーディオ形式"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "優先するビットレート"
 
@@ -4018,7 +3998,7 @@ msgstr "トラックの保存中"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr ""
 
@@ -4328,11 +4308,11 @@ msgstr "サインインしています..."
 msgid "Similar artists"
 msgstr "テイストの似たアーティスト"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr ""
 
@@ -4424,7 +4404,7 @@ msgstr "ソース"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4432,7 +4412,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify ログインエラー"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Spotify プラグイン"
 
@@ -4728,20 +4708,20 @@ msgstr "Clementine がこのデバイスのサポートするファイル形式�
 msgid "This device supports the following file formats:"
 msgstr "このデバイスは次のファイル形式をサポートしています:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "このデバイスは適切に動作しません"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "これは MTP デバイスですが、Clementine は libmtp サポートなしでコンパイルされています。"
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "これは iPod ですが、Clementine は libgpod サポートなしでコンパイルされています。"
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4751,7 +4731,7 @@ msgstr "このデバイスに初めて接続しました。Clementine はミュ�
 msgid "This stream is for paid subscribers only"
 msgstr "このストリームは有料会員専用です"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "この種類のデバイスはサポートされていません: %1"
@@ -4759,10 +4739,6 @@ msgstr "この種類のデバイスはサポートされていません: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "タイムアウト"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "タイムゾーン"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5017,7 +4993,7 @@ msgstr "システム既定の色設定を使用する"
 msgid "Use the system proxy settings"
 msgstr "システムのプロキシ設定を使用する"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "音量の正規化を使用する"
 
@@ -5036,7 +5012,7 @@ msgstr "ユーザーインターフェース"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5137,10 +5113,6 @@ msgstr "リストが空のとき..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "おすすめの検索..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "WiFi の MAC アドレス"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5544,7 +5516,3 @@ msgstr "停止"
 #, qt-format
 msgid "track %1"
 msgstr "トラック %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr ""

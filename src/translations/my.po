@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-12 00:24+0000\n"
-"Last-Translator: Yhal Htet Aung <jumoun@gmail.com>\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: my\n"
@@ -371,7 +371,7 @@ msgstr "အများသံုးအသံုးပြုသူမဟုတ်
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "စာရင်းအသေးစိတ်အကြောင်းအရာများ"
@@ -684,14 +684,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "စပေါ့တီဖိုင်ကိုကလီမန်တိုင်းတွင်အသံုးပြုရန်နောက်ထပ်ဖြည့်စွက်ပရိုဂရမ်လိုအပ်။ သင်ကူးဆွဲပြီးယခုသွင်းလိုပါသလား?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "ပစ္စည်းမှအိုင်ကျွန်းအချက်အလက်အစုသို့ကူးယူခြင်းအမှားပြ"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "အိုင်ကျွန်းအချက်အလက်အစုမှပစ္စည်းသို့ကူးယူခြင်းအမှားပြ"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "အိုင်ကျွန်းအချက်အလက်အစုထည့်သွင်းနေစဉ်အမှားပြ"
@@ -905,10 +897,6 @@ msgstr "ဘလောက်စိစစ်သူ"
 msgid "Block type"
 msgstr "ဘလောက်အမျိုးအစား"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "ဘလူးတုမက်စ်လိပ်စာ"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "မှုန်ဝါးပမာဏ"
@@ -935,7 +923,7 @@ msgstr "လျှောက်ကြည့်..."
 msgid "Buffer duration"
 msgstr "ကြားခံကြာချိန်"
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "ကြားခံ"
 
@@ -1163,10 +1151,6 @@ msgstr "ယခုဝင်းဒိုးပိတ်လျှင်အယ်လ
 msgid "Club"
 msgstr "ကလပ်"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "အရောင်"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "အရောင်များ"
@@ -1245,7 +1229,7 @@ msgstr "ပုံစံပြင်..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "သက်ဝင်လှုပ်ရှား/သက်ဝင်မလှုပ်ရှားလုပ်ဆောင်ချက်သံုး၍ဝီအဝေးထိန်းကိုချိတ်ဆက်"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "ပစ္စည်းချိတ်ဆက်"
 
@@ -1282,10 +1266,6 @@ msgstr "ပစ္စည်းသို့ကူးယူ"
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "သီချင်းတိုက်သို့ကူးယူ..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "အိုင်ပေါ့အချက်အလက်အစုကူးယူ"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1666,7 +1646,7 @@ msgstr "သီချင်းတိုက်အပြည့်ပြန်လည
 msgid "Do not convert any music"
 msgstr "ဂီတတစ်ခုမှမကူးပြောင်း"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr "အစားထိုးမရေး"
 
@@ -1735,7 +1715,7 @@ msgstr "ဒီအယ်လဘမ်ကူးဆွဲ..."
 msgid "Download this episode"
 msgstr "ဒီတွဲကူးဆွဲ"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "ကူးဆွဲ..."
 
@@ -1860,7 +1840,7 @@ msgstr "ယူအာအလ်ထည့်"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "အင်တာနက်မှအဖံုးများကူးဆွဲရန်ယူအာအလ်ထည့်ပါ:"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "တင်ပို့ပြီးအဖံုးများအတွက်ဖိုင်နာမည်ထည့်(နောက်ဆက်တွဲမပါ):"
 
@@ -1996,7 +1976,7 @@ msgstr "နာရီတိုင်း"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "အယ်လဘမ်တူသို့ကယူးအပြားပေါ်မှတေးသံလမ်းကြောများအကြားမှလွဲ၍"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr "တည်ရှိပြီးအဖံုးများ"
 
@@ -2013,23 +1993,23 @@ msgstr "%1 တွင်သက်တမ်းကုန်"
 msgid "Export Covers"
 msgstr "အဖံုးများတင်ပို့"
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr "အဖံုးများတင်ပို့"
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr "ကူးဆွဲပြီးအဖံုးများတင်ပို့"
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr "အဖံုးမြှပ်များတင်ပို့"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr "တင်ပို့ခြင်းပြီးဆံုး"
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "တင်ပို့ပြီး %1 အဖံုးများရရှိ %2 မှ (%3 ခုန်ကျော်)"
@@ -2206,7 +2186,7 @@ msgstr "အက်ဖ်အယ်အေစီ"
 msgid "Font size"
 msgstr "ဖွန်ပမာဏ"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "လိုင်စင်အကြောင်းများကြောင့်စပေါ့တီဖိုင်အထောက်အကူသည်ဖြည့်စွက်ပရိုဂရမ်တွင်ပါဝင်။"
 
@@ -2464,7 +2444,7 @@ msgstr "သင်္ကေတများကိုအပေါ်သို့"
 msgid "Identifying song"
 msgstr "သီချင်းများစစ်ရွေးနေ"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2862,7 +2842,7 @@ msgstr "ဖိုင်များ/ယူအာအလ်များထည့�
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3205,6 +3185,10 @@ msgstr "စိစစ်သူမရှိ"
 msgid "No background image"
 msgstr "နောက်ခံပုံမသံုး"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "ဘလောက်ရှည်များမရှိ"
@@ -3404,7 +3388,7 @@ msgstr "မူရင်းအမည်များ"
 msgid "Other options"
 msgstr "အခြားရွေးပိုင်ခွင့်များ"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr "ပေးပို့"
 
@@ -3420,7 +3404,7 @@ msgstr "ပေးပို့ရွေးပိုင်ခွင့်မျာ
 msgid "Output plugin"
 msgstr "ပေးပို့ဖြည့်စွက်ပရိုဂရမ်"
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr "အားလံုးအစားထိုးရေး"
 
@@ -3428,7 +3412,7 @@ msgstr "အားလံုးအစားထိုးရေး"
 msgid "Overwrite existing files"
 msgstr "တည်ရှိဆဲဖိုင်များထပ်မံဖြည့်သွင်း"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr "အသေးစားများကိုသာအစားထိုးရေး"
 
@@ -3446,16 +3430,12 @@ msgstr "အဖွဲ့"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "စကားဝှက်"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "ကာကွယ်ပြီးစကားဝှက်"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3560,7 +3540,7 @@ msgstr "သီချင်းစာရင်းများ"
 msgid "Please close your browser and return to Clementine."
 msgstr "ဘရောက်ဇာကိုပိတ်ပြီးကလီမန်တိုင်းသို့သွားပါ။"
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "ဖြည့်စွက်ပရိုဂရမ်အခြေအနေ:"
 
@@ -3599,7 +3579,7 @@ msgstr "အသံချဲ့အကြို"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "လိုလားချက်များ"
@@ -3616,7 +3596,7 @@ msgstr "နှစ်သက်သောအယ်လဘမ်အနုပညာဖ
 msgid "Preferred audio format"
 msgstr "နှစ်သက်သောအသံပုံစံ"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "နှစ်သက်သောဘစ်နှုန်း"
 
@@ -4016,7 +3996,7 @@ msgstr "တေးသံလမ်းကြောများမှတ်သား
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "သတ်မှတ်နမူနာနှုန်းအကြောင်း (အက်စ်အက်စ်အာ)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr "အတိုင်းအတာပမာဏ"
 
@@ -4326,11 +4306,11 @@ msgstr "အတွင်းသို့ဝင်..."
 msgid "Similar artists"
 msgstr "တူညီအနုပညာရှင်များအားလံုး"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr "ပမာဏ"
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr "ပမာဏ:"
 
@@ -4422,7 +4402,7 @@ msgstr "ရင်းမြစ်များ"
 msgid "Speex"
 msgstr "စဖိစ်"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "စပေါ့တီဖိုင်"
 
@@ -4430,7 +4410,7 @@ msgstr "စပေါ့တီဖိုင်"
 msgid "Spotify login error"
 msgstr "စပေါ့တီဖိုင်းဖွင့်ဝင်အမှားပြ"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "စပေါ့တီဖိုင်ဖြည့်စွက်ပရိုဂရမ်"
 
@@ -4726,20 +4706,20 @@ msgstr "မည်သည့်ပံုစံလက်ခံကြောင်း
 msgid "This device supports the following file formats:"
 msgstr "အောက်ဖော်ပြပါဖိုင်ပံုစံများကိုယခုပစ္စည်းလက်ခံ:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "ဒီပစ္စည်းသေချာစွာအလုပ်လုပ်မည်မဟုတ်"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "ယခုသည်အမ်တီပီပစ္စည်း၊ ကလီမန်တိုင်းကိုအယ်အိုင်ဘီအမ်တီပီအထောက်အကူမပါဘဲသင်အသုံးပြုထား။"
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "ယခုသည်အိုင်ပေါ့ပစ္စည်း၊ ကလီမန်တိုင်းကိုအယ်အိုင်ဘီဂျီပီအိုဒီအထောက်အကူမပါဘဲသင်အသုံးပြုထား။"
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4749,7 +4729,7 @@ msgstr "ယခုပစ္စည်းကိုပထမဆံုးအကြိ
 msgid "This stream is for paid subscribers only"
 msgstr "ယခုသီချင်းစီးကြောင်းသည်အခကြေးပေးမှာယူသူများအတွက်သာ"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "ယခုပစ္စည်းအမျိုးအစားမလက်ခံ: %1"
@@ -4757,10 +4737,6 @@ msgstr "ယခုပစ္စည်းအမျိုးအစားမလက်
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "အချိန်ကုန်"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "ဒေသစံတော်ချိန်"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5015,7 +4991,7 @@ msgstr "မူလစနစ်ပံုစံအရောင်သတ်မှတ
 msgid "Use the system proxy settings"
 msgstr "စနစ်ပရောက်ဇီချိန်ညှိချက်သံုး"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "အသံပမာဏပုံမှန်ပြုလုပ်မှုအသုံးပြု"
 
@@ -5034,7 +5010,7 @@ msgstr "အသံုးပြုသူမျက်နှာပြင်"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5135,10 +5111,6 @@ msgstr "စာရင်းအလွတ်ဖြစ်သောအခါ..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "ဘာလို့မစမ်းကြည့်..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "ဝိုင်ဖိုင်မက်စ်လိပ်စာ"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5542,7 +5514,3 @@ msgstr "ရပ်"
 #, qt-format
 msgid "track %1"
 msgstr "တေးသံလမ်းကြော %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr "အိပ်စ်"

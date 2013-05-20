@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-11 23:39+0000\n"
+"PO-Revision-Date: 2013-05-17 15:57+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -374,7 +374,7 @@ msgstr "Дапускаць толькі лякальных кліентаў"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:209
+#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Дэталі акаўнта"
@@ -687,14 +687,6 @@ msgid ""
 "like to download and install it now?"
 msgstr "Патрабуецца дадатковы плагін для выкарыстаньня Spotify у Clementine. Жадаеце спампаваць і ўсталяваць яго?"
 
-#: devices/afcdevice.cpp:63
-msgid "An error occurred copying the iTunes database from the device"
-msgstr "Адбылася памылка пры загрузке дадзеных iTunes з прылады"
-
-#: devices/afcdevice.cpp:157
-msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Адбылася памылка пры загрузке дадзеных iTunes на прыладу"
-
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Адбылася памылка пры загрузке дадзеных iTunes"
@@ -908,10 +900,6 @@ msgstr "Аналізатар блёкамі"
 msgid "Block type"
 msgstr "Тып блёка"
 
-#: devices/ilister.cpp:122
-msgid "Bluetooth MAC Address"
-msgstr "MAC адрас Bluetooth"
-
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
 msgstr "Ступень размыцьця"
@@ -938,7 +926,7 @@ msgstr "Агляд..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:900
+#: engines/gstengine.cpp:892
 msgid "Buffering"
 msgstr "Буфэрызацыя"
 
@@ -1166,10 +1154,6 @@ msgstr "Закрыцьцё гэтага вакна спыніць пошук в�
 msgid "Club"
 msgstr "Клюбны"
 
-#: devices/ilister.cpp:117
-msgid "Color"
-msgstr "Колер"
-
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Колеры"
@@ -1248,7 +1232,7 @@ msgstr "Наладзіць..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Падключыць пульт Wii, выкарыстоўваючы актывацыю/дэактывацыю"
 
-#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
+#: devices/devicemanager.cpp:331 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Падлучыць прыладу"
 
@@ -1285,10 +1269,6 @@ msgstr "Капіяваць на прыладу..."
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Капіяваць у калекцыю..."
-
-#: devices/afctransfer.cpp:50
-msgid "Copying iPod database"
-msgstr "Капіяваньне базы iPod"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1669,7 +1649,7 @@ msgstr "Перасканаваць бібліятэку"
 msgid "Do not convert any music"
 msgstr "Не канвэртаваць ніякую музыку"
 
-#: ../bin/src/ui_albumcoverexport.h:208
+#: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr ""
 
@@ -1738,7 +1718,7 @@ msgstr "Спампаваць гэты альбом..."
 msgid "Download this episode"
 msgstr "Спампаваць гэтую сэрыю"
 
-#: ../bin/src/ui_spotifysettingspage.h:216
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Download..."
 msgstr "Спампаваць..."
 
@@ -1863,7 +1843,7 @@ msgstr "Уведзьце URL"
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Уведзьце URL для пампаваньня вокладки з Інтэрнэту"
 
-#: ../bin/src/ui_albumcoverexport.h:204
+#: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
@@ -1999,7 +1979,7 @@ msgstr "Кожную гадзіну"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Акрамя трэкаў з аднаго й таго ж альбому ці CUE-файлу"
 
-#: ../bin/src/ui_albumcoverexport.h:207
+#: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
 msgstr ""
 
@@ -2016,23 +1996,23 @@ msgstr "Тэрмін дзеяньня мінае %1"
 msgid "Export Covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:202
+#: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:205
+#: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:206
+#: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:779
+#: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2209,7 +2189,7 @@ msgstr "Flac"
 msgid "Font size"
 msgstr "Памер шрыфту"
 
-#: ../bin/src/ui_spotifysettingspage.h:214
+#: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Праз ліцэнзыйныя згаджэньні падтрымка Spotify рэалізаваная ў выглядзе асобнага плагіну"
 
@@ -2467,7 +2447,7 @@ msgstr "Іконкі ўверсе"
 msgid "Identifying song"
 msgstr "Вызначэньне песьні"
 
-#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
+#: devices/devicemanager.cpp:576 devices/devicemanager.cpp:584
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2865,7 +2845,7 @@ msgstr "Загрузіць файлы/URLs, замяняючы бягучы пл
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
@@ -3208,6 +3188,10 @@ msgstr "Без аналізатару"
 msgid "No background image"
 msgstr "Няма фонавай выявы"
 
+#: ui/albumcovermanager.cpp:778
+msgid "No covers to export."
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Бяз доўгіх блёкаў"
@@ -3407,7 +3391,7 @@ msgstr "Першапачатковыя тэгі"
 msgid "Other options"
 msgstr "Іншыя налады"
 
-#: ../bin/src/ui_albumcoverexport.h:203
+#: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
 msgstr ""
 
@@ -3423,7 +3407,7 @@ msgstr "Опцыі вываду"
 msgid "Output plugin"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:209
+#: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr ""
 
@@ -3431,7 +3415,7 @@ msgstr ""
 msgid "Overwrite existing files"
 msgstr "Перазапісаць існыя файлы"
 
-#: ../bin/src/ui_albumcoverexport.h:210
+#: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
 msgstr ""
 
@@ -3449,16 +3433,12 @@ msgstr "Party"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Пароль"
-
-#: devices/ilister.cpp:119
-msgid "Password Protected"
-msgstr "Абаронена паролем"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3563,7 +3543,7 @@ msgstr "Плэйлісты"
 msgid "Please close your browser and return to Clementine."
 msgstr "Зачыніце браўзэр і вяпніцеся ў Clementine."
 
-#: ../bin/src/ui_spotifysettingspage.h:215
+#: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "Статус плагіну:"
 
@@ -3602,7 +3582,7 @@ msgstr "Прадузмацненьне"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
-#: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:116
+#: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Налады"
@@ -3619,7 +3599,7 @@ msgstr "Пераважныя імёны файлаў вокладак (разд�
 msgid "Preferred audio format"
 msgstr "Пераважны аўдыё фармат"
 
-#: ../bin/src/ui_spotifysettingspage.h:218
+#: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Preferred bitrate"
 msgstr "Пераважны бітрэйт"
 
@@ -4019,7 +3999,7 @@ msgstr "Захоўваньне трэкаў"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Профіль Scalable sampling rate (SSR)"
 
-#: ../bin/src/ui_albumcoverexport.h:212
+#: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
 msgstr ""
 
@@ -4329,11 +4309,11 @@ msgstr "Адбываецца ўваход..."
 msgid "Similar artists"
 msgstr "Падобныя выканаўцы"
 
-#: ../bin/src/ui_albumcoverexport.h:211
+#: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
 msgstr ""
 
-#: ../bin/src/ui_albumcoverexport.h:213
+#: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
 msgstr ""
 
@@ -4425,7 +4405,7 @@ msgstr "Крыніцы"
 msgid "Speex"
 msgstr "Speex"
 
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -4433,7 +4413,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Памылка логіну Spotify"
 
-#: ../bin/src/ui_spotifysettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Плагін Spotify"
 
@@ -4729,20 +4709,20 @@ msgstr "Прылада павінна быць падключаная і адч�
 msgid "This device supports the following file formats:"
 msgstr "Гэтая прылада падтрымлівае наступныя фарматы:"
 
-#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:574 devices/devicemanager.cpp:582
 msgid "This device will not work properly"
 msgstr "Гэтая прылада ня будзе працаваць правільна"
 
-#: devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:575
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Гэта MTP прылада, а вашая вэрсія Clementine скампіляваная без падтрымкі libmtp."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:583
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Гэта iPod, а вашая вэрсія Clementine скампіляваная без падтрымкі libgpod."
 
-#: devices/devicemanager.cpp:340
+#: devices/devicemanager.cpp:332
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4752,7 +4732,7 @@ msgstr "Гэта першы раз, калі вы падключылі прыл�
 msgid "This stream is for paid subscribers only"
 msgstr "Гэты струмень толькі для платных падпісантаў"
 
-#: devices/devicemanager.cpp:603
+#: devices/devicemanager.cpp:595
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Гэты тып прылады не падтрымліваецца: %1"
@@ -4760,10 +4740,6 @@ msgstr "Гэты тып прылады не падтрымліваецца: %1"
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Таймаўт"
-
-#: devices/ilister.cpp:120
-msgid "Timezone"
-msgstr "Часавы пояс"
 
 #: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -5018,7 +4994,7 @@ msgstr "Выкарыстоўвауць сыстэмныя колеры"
 msgid "Use the system proxy settings"
 msgstr "Выкарыстоўваць сыстэмныя налады проксі"
 
-#: ../bin/src/ui_spotifysettingspage.h:219
+#: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
 msgstr "Выкарыстоўваць выраўнаваньне гучнасьці"
 
@@ -5037,7 +5013,7 @@ msgstr "Інтэрфэйс"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
@@ -5138,10 +5114,6 @@ msgstr "Калі сьпіс пусты..."
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
 msgstr "Чаму б не паспрабаваць..."
-
-#: devices/ilister.cpp:121
-msgid "WiFi MAC Address"
-msgstr "MAC адрас WiFi"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5545,7 +5517,3 @@ msgstr "Спыніць"
 #, qt-format
 msgid "track %1"
 msgstr "трэк %1"
-
-#: ../bin/src/ui_albumcoverexport.h:214
-msgid "x"
-msgstr ""
