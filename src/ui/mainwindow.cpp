@@ -882,6 +882,7 @@ void MainWindow::VolumeChanged(int volume) {
 
 void MainWindow::SongChanged(const Song& song) {
   setWindowTitle(song.PrettyTitleWithArtist());
+  tray_icon_->SetProgress(0);
 
 #ifdef HAVE_LIBLASTFM
   if (ui_->action_toggle_scrobbling->isVisible())
