@@ -66,6 +66,7 @@ class PlaylistBackend : public QObject {
   PlaylistList GetAllFavoritePlaylists();
   PlaylistBackend::Playlist GetPlaylist(int id);
   PlaylistItemFuture GetPlaylistItems(int playlist);
+  QFuture<Song> GetPlaylistSongs(int playlist);
 
   void SetPlaylistOrder(const QList<int>& ids);
   void SetPlaylistUiPath(int id, const QString& path);
@@ -87,7 +88,10 @@ class PlaylistBackend : public QObject {
     QMutex mutex_;
   };
 
-  PlaylistItemPtr NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
+  QList<SqlRow> GetPlaylistRows(int playlist);
+
+  Song NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
+  PlaylistItemPtr NewPlaylistItemFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
   PlaylistItemPtr RestoreCueData(PlaylistItemPtr item, boost::shared_ptr<NewSongFromQueryState> state);
 
   enum GetPlaylistsFlags {

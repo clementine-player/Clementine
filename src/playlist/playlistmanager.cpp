@@ -30,7 +30,10 @@
 #include "playlistparsers/playlistparser.h"
 #include "smartplaylists/generator.h"
 
+#include <QFileDialog>
 #include <QFileInfo>
+#include <QFuture>
+#include <QFutureWatcher>
 #include <QtDebug>
 
 using smart_playlists::GeneratorPtr;
@@ -48,6 +51,8 @@ PlaylistManager::PlaylistManager(Application* app, QObject *parent)
   connect(app_->player(), SIGNAL(Paused()), SLOT(SetActivePaused()));
   connect(app_->player(), SIGNAL(Playing()), SLOT(SetActivePlaying()));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(SetActiveStopped()));
+
+  settings_.beginGroup(Playlist::kSettingsGroup);
 }
 
 PlaylistManager::~PlaylistManager() {
@@ -179,10 +184,65 @@ void PlaylistManager::LoadFinished(bool success) {
 }
 
 void PlaylistManager::Save(int id, const QString& filename) {
-  Q_ASSERT(playlists_.contains(id));
+  if (playlists_.contains(id)) {
+    parser_->Save(playlist(id)->GetAllSongs(), filename);
+  } else {
+    // Playlist is not in the playlist manager: probably save action was triggered
+    // from the left side bar and the playlist isn't loaded.
+    QFuture<Song> future = playlist_backend_->GetPlaylistSongs(id);
+    QFutureWatcher<Song>* watcher = new QFutureWatcher<Song>(this);
+    watcher->setFuture(future);
 
-  parser_->Save(playlist(id)->GetAllSongs(), filename);
+    NewClosure(watcher, SIGNAL(finished()),
+        this, SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString)), watcher, filename);
+  }
 }
+
+void PlaylistManager::ItemsLoadedForSavePlaylist(
+    QFutureWatcher<Song>* watcher,
+    const QString& filename) {
+
+  SongList song_list = watcher->future().results();
+  parser_->Save(song_list, filename);
+}
+
+void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
+  QString filename = settings_.value("last_save_playlist").toString();
+
+  // We want to use the playlist tab name as a default filename, but in the
+  // same directory as the last saved file.
+
+  // Strip off filename components until we find something that's a folder
+  forever {
+    QFileInfo fileinfo(filename);
+    if (filename.isEmpty() || fileinfo.isDir())
+      break;
+
+    filename = filename.section('/', 0, -2);
+  }
+
+  // Use the home directory as a fallback in case the path is empty.
+  if (filename.isEmpty())
+    filename = QDir::homePath();
+
+  // Add the suggested filename
+  filename += "/" + suggested_filename +
+              "." + parser()->default_extension();
+
+  QString default_filter = parser()->default_filter();
+
+  filename = QFileDialog::getSaveFileName(
+      NULL, tr("Save playlist"), filename,
+      parser()->filters(), &default_filter);
+
+  if (filename.isNull())
+    return;
+
+  settings_.setValue("last_save_playlist", filename);
+
+  Save(id == -1 ? current_id() : id, filename);
+}
+
 
 void PlaylistManager::Rename(int id, const QString& new_name) {
   Q_ASSERT(playlists_.contains(id));

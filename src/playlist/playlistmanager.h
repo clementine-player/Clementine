@@ -22,6 +22,7 @@
 #include <QItemSelection>
 #include <QMap>
 #include <QObject>
+#include <QSettings>
 
 #include "core/song.h"
 #include "smartplaylists/generator_fwd.h"
@@ -176,6 +177,8 @@ public slots:
            const QString& special_type = QString());
   void Load(const QString& filename);
   void Save(int id, const QString& filename);
+  // Display a file dialog to let user choose a file before saving the file
+  void SaveWithUI(int id, const QString& suggested_filename);
   void Rename(int id, const QString& new_name);
   void Favorite(int id, bool favorite);
   void Delete(int id);
@@ -216,6 +219,7 @@ private slots:
   void UpdateSummaryText();
   void SongsDiscovered(const SongList& songs);
   void LoadFinished(bool success);
+  void ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher, const QString& filename);
 
 private:
   Playlist* AddPlaylist(int id, const QString& name, const QString& special_type,
@@ -235,6 +239,8 @@ private:
   PlaylistSequence* sequence_;
   PlaylistParser* parser_;
   PlaylistContainer* playlist_container_;
+
+  QSettings settings_;
 
   // key = id
   QMap<int, Data> playlists_;

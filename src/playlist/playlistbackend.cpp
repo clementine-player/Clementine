@@ -135,7 +135,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   return p;
 }
 
-QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
+QList<SqlRow> PlaylistBackend::GetPlaylistRows(int playlist) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -157,7 +157,7 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
   q.bindValue(":playlist", playlist);
   q.exec();
   if (db_->CheckErrors(q))
-    return QFuture<PlaylistItemPtr>();
+    return QList<SqlRow>();
 
   QList<SqlRow> rows;
 
@@ -165,13 +165,30 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
     rows << SqlRow(q);
   }
 
+  return rows;
+}
+
+QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
+  QMutexLocker l(db_->Mutex());
+  QList<SqlRow> rows = GetPlaylistRows(playlist);
+
+  // it's probable that we'll have a few songs associated with the
+  // same CUE so we're caching results of parsing CUEs
+  boost::shared_ptr<NewSongFromQueryState> state_ptr(new NewSongFromQueryState());
+  return QtConcurrent::mapped(rows, boost::bind(&PlaylistBackend::NewPlaylistItemFromQuery, this, _1, state_ptr));
+}
+
+QFuture<Song> PlaylistBackend::GetPlaylistSongs(int playlist) {
+  QMutexLocker l(db_->Mutex());
+  QList<SqlRow> rows = GetPlaylistRows(playlist);
+
   // it's probable that we'll have a few songs associated with the
   // same CUE so we're caching results of parsing CUEs
   boost::shared_ptr<NewSongFromQueryState> state_ptr(new NewSongFromQueryState());
   return QtConcurrent::mapped(rows, boost::bind(&PlaylistBackend::NewSongFromQuery, this, _1, state_ptr));
 }
 
-PlaylistItemPtr PlaylistBackend::NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state) {
+PlaylistItemPtr PlaylistBackend::NewPlaylistItemFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state) {
   // The song tables get joined first, plus one each for the song ROWIDs
   const int playlist_row = (Song::kColumns.count() + 1) * kSongTableJoins;
 
@@ -182,6 +199,10 @@ PlaylistItemPtr PlaylistBackend::NewSongFromQuery(const SqlRow& row, boost::shar
   } else {
     return item;
   }
+}
+
+Song PlaylistBackend::NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state) {
+  return NewPlaylistItemFromQuery(row, state)->Metadata();
 }
 
 // If song had a CUE and the CUE still exists, the metadata from it will

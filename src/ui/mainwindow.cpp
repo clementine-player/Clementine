@@ -383,9 +383,6 @@ MainWindow::MainWindow(Application* app,
                             ui_->action_save_playlist,
                             ui_->action_next_playlist,    /* These two actions aren't associated */
                             ui_->action_previous_playlist /* to a button but to the main window */ );
-  playlist_list_->SetActions(ui_->action_new_playlist,
-                             ui_->action_load_playlist,
-                             ui_->action_save_playlist);
 
 
 #ifdef ENABLE_VISUALISATIONS
