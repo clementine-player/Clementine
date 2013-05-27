@@ -44,6 +44,11 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   // After we got some clients, start the keep alive timer
   // Default: every 10 seconds
   keep_alive_timer_->start(keep_alive_timeout_);
+  
+  // Check if we need to start the track position timer
+  if (app_->player()->engine()->state() == Engine::Playing) {
+    track_position_timer_->start(1000);
+  }
 }
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
