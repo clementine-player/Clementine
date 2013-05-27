@@ -10,6 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
 "PO-Revision-Date: 2013-05-17 15:57+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"Language-Team: Burmese (http://www.transifex.com/projects/p/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: my\n"
@@ -76,7 +77,7 @@ msgstr "%1 မှအပေါ် %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 သီချင်းစာရင်းများ (%2)"
 
-#: playlist/playlistmanager.cpp:341
+#: playlist/playlistmanager.cpp:401
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 ကိုရွေးချယ်ခဲ့"
@@ -101,7 +102,7 @@ msgstr "%1 သီချင်းများရှာတွေ့"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 သီချင်းများရှာတွေ့ (%2 ပြသနေ)"
 
-#: playlist/playlistmanager.cpp:347
+#: playlist/playlistmanager.cpp:407
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 တေးသံလမ်းကြောများ"
@@ -239,7 +240,7 @@ msgstr "၀ပီအိတ်စ်"
 msgid "1 day"
 msgstr "တစ်နေ့"
 
-#: playlist/playlistmanager.cpp:347
+#: playlist/playlistmanager.cpp:407
 msgid "1 track"
 msgstr "တေးသံလမ်းကြောတစ်ခု"
 
@@ -412,7 +413,7 @@ msgstr "သီချင်းစီးကြောင်းနောက်တစ
 msgid "Add directory..."
 msgstr "ဖိုင်လမ်းညွှန်ထည့်..."
 
-#: ui/mainwindow.cpp:1601
+#: ui/mainwindow.cpp:1599
 msgid "Add file"
 msgstr "ဖိုင်ထည့်"
 
@@ -424,7 +425,7 @@ msgstr "ဖိုင်ထည့်..."
 msgid "Add files to transcode"
 msgstr "ဖိုင်များကိုပံုစံပြောင်းလဲရန်ထည့်ပါ"
 
-#: ui/mainwindow.cpp:1629
+#: ui/mainwindow.cpp:1627
 msgid "Add folder"
 msgstr "ဖိုင်တွဲထည့်"
 
@@ -528,7 +529,7 @@ msgstr "ဂရုရှက်အနှစ်သက်ဆုံးများသ
 msgid "Add to Grooveshark playlists"
 msgstr "ဂရုရှက်သီချင်းစာရင်းများသို့ထည့်"
 
-#: ui/mainwindow.cpp:1426
+#: ui/mainwindow.cpp:1424
 msgid "Add to another playlist"
 msgstr "သီချင်းစာရင်းနောက်တစ်ခုသို့ထည့်"
 
@@ -981,7 +982,7 @@ msgstr "ပြန်ဖွင့်လိုလားချက်များပ
 msgid "Check for new episodes"
 msgstr "တွဲအသစ်များစစ်ဆေးခြင်း"
 
-#: ui/mainwindow.cpp:591
+#: ui/mainwindow.cpp:588
 msgid "Check for updates..."
 msgstr "မွမ်းမံများစစ်ဆေးခြင်း..."
 
@@ -1211,7 +1212,7 @@ msgstr "ဆပ်ဆိုးနစ်ပုံစံပြင်..."
 msgid "Configure global search..."
 msgstr "အနှံ့ရှာဖွေပုံစံပြင်..."
 
-#: ui/mainwindow.cpp:474
+#: ui/mainwindow.cpp:471
 msgid "Configure library..."
 msgstr "သီချင်းတိုက်ပုံစံပြင်..."
 
@@ -1257,12 +1258,12 @@ msgstr "ယခုပစ္စည်းမဖွင့်နိုင်သော
 msgid "Copy to clipboard"
 msgstr "အောက်ခံကတ်ပြားသို့ကူးယူ"
 
-#: library/libraryview.cpp:389 ui/mainwindow.cpp:507
+#: library/libraryview.cpp:389 ui/mainwindow.cpp:504
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "ပစ္စည်းသို့ကူးယူ"
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:504
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:501
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "သီချင်းတိုက်သို့ကူးယူ..."
@@ -1499,8 +1500,8 @@ msgstr "မူလပံုစံများ"
 msgid "Delay between visualizations"
 msgstr "ပုံဖော်ကြည့်ခြင်းများအကြားနှောင့်နှေး"
 
-#: playlist/playlistlistcontainer.cpp:75
-#: ../bin/src/ui_playlistlistcontainer.h:122
+#: playlist/playlistlistcontainer.cpp:73
+#: ../bin/src/ui_playlistlistcontainer.h:130
 msgid "Delete"
 msgstr "ပယ်ဖျက်"
 
@@ -1513,7 +1514,7 @@ msgid "Delete downloaded data"
 msgstr "ကူးဆွဲပြီးအချက်အလက်ပယ်ဖျက်"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1878 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "ဖိုင်များပယ်ဖျက်"
 
@@ -1521,7 +1522,7 @@ msgstr "ဖိုင်များပယ်ဖျက်"
 msgid "Delete from device..."
 msgstr "ပစ္စည်းမှပယ်ဖျက်..."
 
-#: library/libraryview.cpp:391 ui/mainwindow.cpp:508
+#: library/libraryview.cpp:391 ui/mainwindow.cpp:505
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "ဓာတ်ပြားမှပယ်ဖျက်..."
@@ -1546,11 +1547,11 @@ msgstr "မူရင်းဖိုင်များပယ်ဖျက်"
 msgid "Deleting files"
 msgstr "ဖိုင်များပယ်ဖျက်နေ"
 
-#: ui/mainwindow.cpp:1361
+#: ui/mainwindow.cpp:1359
 msgid "Dequeue selected tracks"
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများမစီတန်း"
 
-#: ui/mainwindow.cpp:1359
+#: ui/mainwindow.cpp:1357
 msgid "Dequeue track"
 msgstr "တေးသံလမ်းကြောမစီတန်း"
 
@@ -1768,7 +1769,7 @@ msgstr "ကျပန်းရောသမမွှေအရှင်"
 msgid "Edit smart playlist..."
 msgstr "ချက်ချာသီချင်းစာရင်းပြင်ဆင်..."
 
-#: ui/mainwindow.cpp:1394
+#: ui/mainwindow.cpp:1392
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "အမည်ပြင်ဆင် \"%1\"..."
@@ -1875,7 +1876,7 @@ msgstr "ရှာဖွေစကားရပ်များဒီမှာထည
 msgid "Enter the URL of an internet radio stream:"
 msgstr "အင်တာနက်ရေဒီယိုသီချင်းစီးကြောင်းယူအာအလ်ထည့်:"
 
-#: playlist/playlistlistcontainer.cpp:183
+#: playlist/playlistlistcontainer.cpp:171
 msgid "Enter the name of the folder"
 msgstr "ဒီဖိုင်တွဲအတွက်နာမည်အသစ်တစ်ခုရွေး"
 
@@ -1901,7 +1902,7 @@ msgstr "Equivalent to --log-levels *:3တူညီ"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1830 ui/mainwindow.cpp:1946
+#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
 msgid "Error"
 msgstr "အမှားပြ"
 
@@ -2211,7 +2212,7 @@ msgstr "ပစ္စည်းကိုမေ့ပြစ်ခြင်းသည
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
 #: ../bin/src/ui_playlistcontainer.h:143
-#: ../bin/src/ui_playlistlistcontainer.h:117
+#: ../bin/src/ui_playlistlistcontainer.h:125
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
 #: ../bin/src/ui_searchtermwidget.h:268 ../bin/src/ui_wizardfinishpage.h:83
@@ -2743,7 +2744,7 @@ msgstr "သီချင်းတိုက်"
 msgid "Library advanced grouping"
 msgstr "သီချင်းတိုက်အဆင့်မြင့်အုပ်စုဖွဲ့ခြင်း"
 
-#: ui/mainwindow.cpp:2063
+#: ui/mainwindow.cpp:2061
 msgid "Library rescan notice"
 msgstr "သီချင်းတိုက်ပြန်လည်ဖတ်ရှုအကြောင်းကြားစာ"
 
@@ -3035,7 +3036,7 @@ msgstr "အမှတ်များစီစဉ်"
 msgid "Move down"
 msgstr "အောက်သို့ရွှေ့"
 
-#: ui/mainwindow.cpp:505 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:502 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "သီချင်းတိုက်သို့ရွှေ့..."
 
@@ -3044,7 +3045,7 @@ msgstr "သီချင်းတိုက်သို့ရွှေ့..."
 msgid "Move up"
 msgstr "အပေါ်သို့ရွှေ့"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1603
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1601
 msgid "Music"
 msgstr "ဂီတ"
 
@@ -3138,13 +3139,13 @@ msgstr "သီချင်းမဖွင့်ခဲ့သမျှ"
 msgid "Never start playing"
 msgstr "သီချင်းလုံးဝစတင်မဖွင့်"
 
-#: playlist/playlistlistcontainer.cpp:74
-#: playlist/playlistlistcontainer.cpp:182
-#: ../bin/src/ui_playlistlistcontainer.h:119
+#: playlist/playlistlistcontainer.cpp:72
+#: playlist/playlistlistcontainer.cpp:170
+#: ../bin/src/ui_playlistlistcontainer.h:127
 msgid "New folder"
 msgstr "ဖိုင်တွဲအသစ်"
 
-#: ui/mainwindow.cpp:1443 ../bin/src/ui_mainwindow.h:698
+#: ui/mainwindow.cpp:1441 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
 msgstr "သီချင်းစာရင်းအသစ်"
 
@@ -3193,7 +3194,7 @@ msgstr ""
 msgid "No long blocks"
 msgstr "ဘလောက်ရှည်များမရှိ"
 
-#: playlist/playlistcontainer.cpp:396
+#: playlist/playlistcontainer.cpp:366
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "ဟပ်စပ်များရှာမတွေ့။ သီချင်းစာရင်းတစ်ခုလံုးနောက်တစ်ချိန်ပြသရန်ရှာဖွေနေရာကိုဖယ်ရှင်းပါ။ "
@@ -3207,7 +3208,7 @@ msgstr "ဘလောက်တိုများမရှိ"
 msgid "None"
 msgstr "ဘယ်တစ်ခုမျှ"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "ရွေးချယ်ပြီးသီချင်းများတစ်ခုမှပစ္စည်းသို့ကူးယူရန်မသင့်တော်"
 
@@ -3372,7 +3373,7 @@ msgstr "တေး"
 msgid "Organise Files"
 msgstr "ဖိုင်များစုစည်း"
 
-#: library/libraryview.cpp:387 ui/mainwindow.cpp:506
+#: library/libraryview.cpp:387 ui/mainwindow.cpp:503
 msgid "Organise files..."
 msgstr "ဖိုင်များစုစည်း..."
 
@@ -3437,7 +3438,7 @@ msgstr "အဖွဲ့"
 msgid "Password"
 msgstr "စကားဝှက်"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1284
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:850 ui/mainwindow.cpp:1282
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "ရပ်တန့်"
@@ -3463,8 +3464,8 @@ msgstr "အစက်အပြောက်"
 msgid "Plain sidebar"
 msgstr "ဘေးတိုင်ရိုးရိုး"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:489 ui/mainwindow.cpp:821
-#: ui/mainwindow.cpp:840 ui/mainwindow.cpp:1287 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:486 ui/mainwindow.cpp:818
+#: ui/mainwindow.cpp:837 ui/mainwindow.cpp:1285 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3515,8 +3516,9 @@ msgstr "ပြန်ဖွင့်"
 msgid "Player options"
 msgstr "ဖွင့်စက်ရွေးပိုင်ခွင့်များ"
 
-#: playlist/playlistcontainer.cpp:280 playlist/playlistmanager.cpp:79
-#: playlist/playlistmanager.cpp:412 playlist/playlisttabbar.cpp:298
+#: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:472
+#: playlist/playlisttabbar.cpp:298
 msgid "Playlist"
 msgstr "သီချင်းစာရင်း"
 
@@ -3682,12 +3684,12 @@ msgstr "ပစ္စည်းမေးမြန်းခြင်း..."
 msgid "Queue Manager"
 msgstr "စီတန်းမန်နေဂျာ"
 
-#: ui/mainwindow.cpp:1365
+#: ui/mainwindow.cpp:1363
 msgid "Queue selected tracks"
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများစီတန်း"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1363
+#: ui/mainwindow.cpp:1361
 msgid "Queue track"
 msgstr "တေးသံလမ်းကြောစီတန်း"
 
@@ -3805,7 +3807,7 @@ msgstr "အနှစ်သက်ဆုံးများမှဖယ်ရှာ
 msgid "Remove from playlist"
 msgstr "သီချင်းစာရင်းမှဖယ်ရှား"
 
-#: playlist/playlistlistcontainer.cpp:309
+#: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
 msgstr "သီချင်းစာရင်းများဖယ်ရှား"
 
@@ -3960,7 +3962,7 @@ msgstr "ဓာတ်ပြားသို့အဖံုးမှတ်သား
 msgid "Save image"
 msgstr "ပုံမှတ်သား"
 
-#: playlist/playlistcontainer.cpp:323
+#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:235
 msgid "Save playlist"
 msgstr "သီချင်းစာရင်းမှတ်သား"
 
@@ -4137,7 +4139,7 @@ msgstr "ဆာဗာအသေးစိတ်အကြောင်းအရာမ
 msgid "Service offline"
 msgstr "အောဖ့်လိုင်းဝန်ဆောင်မှု"
 
-#: ui/mainwindow.cpp:1392
+#: ui/mainwindow.cpp:1390
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 မှ \"%2\" ထိန်းညှိ..."
@@ -4205,7 +4207,7 @@ msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလ
 msgid "Show above status bar"
 msgstr "အခြေအနေပြတိုင်အပေါ်မှာပြသ"
 
-#: ui/mainwindow.cpp:462
+#: ui/mainwindow.cpp:459
 msgid "Show all songs"
 msgstr "သီချင်းများအားလံုးပြသ"
 
@@ -4225,7 +4227,7 @@ msgstr "ခွဲခြားမှုများပြသ"
 msgid "Show fullsize..."
 msgstr "အရွယ်အပြည့်ပြသ..."
 
-#: library/libraryview.cpp:399 ui/mainwindow.cpp:509
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:506
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "ဖိုင်ဘရောက်ဇာထဲမှာပြသ..."
@@ -4238,11 +4240,11 @@ msgstr "အနုပညာရှင်များအမျိုးမျို
 msgid "Show moodbar"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းပြသ"
 
-#: ui/mainwindow.cpp:463
+#: ui/mainwindow.cpp:460
 msgid "Show only duplicates"
 msgstr "ပုံတူများသာပြသ"
 
-#: ui/mainwindow.cpp:464
+#: ui/mainwindow.cpp:461
 msgid "Show only untagged"
 msgstr "အမည်မရှိများသာပြသ"
 
@@ -4463,7 +4465,7 @@ msgstr "ရပ်"
 msgid "Stop after"
 msgstr "ပြီးနောက်ရပ်"
 
-#: ui/mainwindow.cpp:491 ../bin/src/ui_mainwindow.h:655
+#: ui/mainwindow.cpp:488 ../bin/src/ui_mainwindow.h:655
 msgid "Stop after this track"
 msgstr "ဒီတေးသံလမ်းကြောပြီးနောက်ရပ်"
 
@@ -4603,7 +4605,7 @@ msgstr "လက်ရှိဖွင့်ဆဲသီချင်းအယ်လ
 msgid "The directory %1 is not valid"
 msgstr "%1 ယခုဖိုင်လမ်းညွှန်မမှန်"
 
-#: playlist/playlistmanager.cpp:156 playlist/playlistmanager.cpp:174
+#: playlist/playlistmanager.cpp:161 playlist/playlistmanager.cpp:179
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr " '%1' သီချင်းစာရင်းသည်အလွတ်သို့မထည့်သွင်းနိုင်။"
@@ -4626,7 +4628,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "ဆပ်ဆိုးနစ်ဆာဗာအစမ်းသံုးကာလပြီးဆံုး။ လိုင်စင်ကီးရယူရန်ငွေလှုပါ။ အသေးစိတ်အကြောင်းအရာများအတွက် subsonic.org သို့လည်ပတ်ပါ။"
 
-#: ui/mainwindow.cpp:2056
+#: ui/mainwindow.cpp:2054
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4661,7 +4663,7 @@ msgid ""
 "deleted:"
 msgstr "တစ်ချို့သီချင်းများပယ်ဖျက်ရန်ပြသနာတွေ့။ အောက်ဖော်ပြပါဖိုင်များမပယ်ဖျက်နိုင်: "
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1879 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "ဓာတ်ပြားမှယခုဖို်င်များအားလံုးပယ်ဖျက်မည်၊ လုပ်ဆောင်မည်လား?"
@@ -4762,7 +4764,7 @@ msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလ
 msgid "Toggle fullscreen"
 msgstr "ဖန်သားပြင်အပြည့်ဖွင့်ပိတ်လုပ်"
 
-#: ui/mainwindow.cpp:1367
+#: ui/mainwindow.cpp:1365
 msgid "Toggle queue status"
 msgstr "စီတန်းအခြေအနေဖွင့်ပိတ်လုပ်"
 
@@ -4859,7 +4861,7 @@ msgstr "မကူးဆွဲနိုင် %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:420 playlist/playlistmanager.cpp:423
+#: playlist/playlistmanager.cpp:480 playlist/playlistmanager.cpp:483
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5031,7 +5033,7 @@ msgid "Variable bit rate"
 msgstr "ဘစ်နှုန်းကိန်းရှင်"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:435 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:495 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုး"
 
@@ -5176,7 +5178,7 @@ msgid ""
 "well?"
 msgstr "အနုပညာရှင်များအမျိုးမျိုးသို့ယခုအယ်လဘမ်မှတစ်ခြားသီချင်းများကိုရွှေ့"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2059
 msgid "Would you like to run a full rescan right now?"
 msgstr "ယခုနောက်တစ်ချိန်အပြည့်ပြန်လည်ဖတ်ရှု?"
 
@@ -5212,7 +5214,7 @@ msgstr "မနေ့က"
 msgid "You are about to download the following albums"
 msgstr "အောက်ဖော်ပြပါအယ်လဘမ်များကိုကူးဆွဲတော့မည်"
 
-#: playlist/playlistlistcontainer.cpp:310
+#: playlist/playlistlistcontainer.cpp:311
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
