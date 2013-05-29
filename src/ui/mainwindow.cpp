@@ -1709,6 +1709,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
     case CommandlineOptions::Player_Next:
       app_->player()->Next();
       break;
+    case CommandlineOptions::Player_RestartOrPrevious:
+      app_->player()->RestartOrPrevious();
+      break;
 
     case CommandlineOptions::Player_None:
       break;
