@@ -151,6 +151,7 @@ void SubsonicService::ReloadSettings() {
   server_ = s.value("server").toString();
   username_ = s.value("username").toString();
   password_ = s.value("password").toString();
+  usesslv3_ = s.value("usesslv3").toBool();
 
   Login();
 }
@@ -162,7 +163,9 @@ bool SubsonicService::IsConfigured() const {
 }
 
 void SubsonicService::Login() {
-  // Forget session ID
+  // Recreate fresh network state, otherwise old HTTPS settings seem to get reused
+  network_->deleteLater();
+  network_ = new QNetworkAccessManager(this);
   network_->setCookieJar(new QNetworkCookieJar(network_));
   // Forget login state whilst waiting
   login_state_ = LoginState_Unknown;
@@ -174,10 +177,11 @@ void SubsonicService::Login() {
 }
 
 void SubsonicService::Login(
-    const QString& server, const QString& username, const QString& password) {
+    const QString& server, const QString& username, const QString& password, const bool& usesslv3) {
   server_ = server;
   username_ = username;
   password_ = password;
+  usesslv3_ = usesslv3;
   Login();
 }
 
@@ -203,6 +207,9 @@ QNetworkReply* SubsonicService::Send(const QUrl& url) {
   // certainly be self-signed.
   QSslConfiguration sslconfig = QSslConfiguration::defaultConfiguration();
   sslconfig.setPeerVerifyMode(QSslSocket::VerifyNone);
+  if (usesslv3_) {
+    sslconfig.setProtocol(QSsl::SslV3);
+  }
   request.setSslConfiguration(sslconfig);
   QNetworkReply *reply = network_->get(request);
   return reply;
@@ -237,7 +244,23 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
-    login_state_ = LoginState_BadServer;
+    switch(reply->error()) {
+      case QNetworkReply::ConnectionRefusedError:
+        login_state_ = LoginState_ConnectionRefused;
+        break;
+      case QNetworkReply::HostNotFoundError:
+        login_state_ = LoginState_HostNotFound;
+        break;
+      case QNetworkReply::TimeoutError:
+        login_state_ = LoginState_Timeout;
+        break;
+      case QNetworkReply::SslHandshakeFailedError:
+        login_state_ = LoginState_SslError;
+        break;
+      default: //Treat uncaught error types here as generic
+        login_state_ = LoginState_BadServer;
+        break;
+    }
     qLog(Error) << "Failed to connect ("
                 << Utilities::EnumToString(QNetworkReply::staticMetaObject, "NetworkError", reply->error())
                 << "):" << reply->errorString();

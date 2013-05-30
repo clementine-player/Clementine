@@ -23,6 +23,7 @@ SubsonicSettingsPage::SubsonicSettingsPage(SettingsDialog *dialog)
   ui_->login_state->AddCredentialField(ui_->server);
   ui_->login_state->AddCredentialField(ui_->username);
   ui_->login_state->AddCredentialField(ui_->password);
+  ui_->login_state->AddCredentialField(ui_->usesslv3);
   ui_->login_state->AddCredentialGroup(ui_->server_group);
 
   ui_->login_state->SetAccountTypeText(tr(
@@ -43,6 +44,7 @@ void SubsonicSettingsPage::Load()
   ui_->server->setText(s.value("server").toString());
   ui_->username->setText(s.value("username").toString());
   ui_->password->setText(s.value("password").toString());
+  ui_->usesslv3->setChecked(s.value("usesslv3").toBool());
 
   // If the settings are complete, SubsonicService will have used them already and
   // we can tell the user if they worked
@@ -59,6 +61,7 @@ void SubsonicSettingsPage::Save()
   s.setValue("server", ui_->server->text());
   s.setValue("username", ui_->username->text());
   s.setValue("password", ui_->password->text());
+  s.setValue("usesslv3", ui_->usesslv3->isChecked());
 }
 
 void SubsonicSettingsPage::LoginStateChanged(SubsonicService::LoginState newstate)
@@ -100,6 +103,26 @@ void SubsonicSettingsPage::LoginStateChanged(SubsonicService::LoginState newstat
     ui_->login_state->SetAccountTypeText(tr("An unspecified error occurred."));
     break;
 
+  case SubsonicService::LoginState_ConnectionRefused:
+    ui_->login_state->SetAccountTypeText(tr("Connection refused by server, check server URL. "
+                                            "Example: http://localhost:4040/"));
+    break;
+
+  case SubsonicService::LoginState_HostNotFound:
+    ui_->login_state->SetAccountTypeText(tr("Host not found, check server URL. "
+                                            "Example: http://localhost:4040/"));
+    break;
+
+  case SubsonicService::LoginState_Timeout:
+    ui_->login_state->SetAccountTypeText(tr("Connection timed out, check server URL. "
+                                            "Example: http://localhost:4040/"));
+    break;
+
+  case SubsonicService::LoginState_SslError:
+    ui_->login_state->SetAccountTypeText(tr("SSL handshake error, verify server configuration. "
+                                            "SSLv3 option below may workaround some issues."));
+    break;
+
   default:
     break;
   }
@@ -128,7 +151,7 @@ void SubsonicSettingsPage::ServerEditingFinished() {
 void SubsonicSettingsPage::Login()
 {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
-  service_->Login(ui_->server->text(), ui_->username->text(), ui_->password->text());
+  service_->Login(ui_->server->text(), ui_->username->text(), ui_->password->text(), ui_->usesslv3->isChecked());
 }
 
 void SubsonicSettingsPage::Logout()
