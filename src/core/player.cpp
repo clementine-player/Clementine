@@ -242,7 +242,7 @@ void Player::PlayPause() {
 }
 
 void Player::RestartOrPrevious() {
-  if (engine_->position_nanosec() < (qint64)8*1000*1000*1000)
+  if (engine_->position_nanosec() < 8*kNsecPerSec)
     return Previous();
 
   SeekTo(0);
