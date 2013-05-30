@@ -46,8 +46,9 @@ const char* CommandlineOptions::kHelpText =
     "  --volume-decrease-by      %15\n"
     "  --seek-to <seconds>       %16\n"
     "  --seek-by <seconds>       %17\n"
+    "  --restart-or-previous     %18\n"
     "\n"
-    "%18:\n"
+    "%19:\n"
     "  -a, --append              %20\n"
     "  -l, --load                %21\n"
     "  -k, --play-track <n>      %22\n"
@@ -118,6 +119,7 @@ bool CommandlineOptions::Parse() {
     {"volume-decrease-by", required_argument, 0, VolumeDecreaseBy},
     {"seek-to",     required_argument, 0, SeekTo},
     {"seek-by",     required_argument, 0, SeekBy},
+    {"restart-or-previous", no_argument, 0, RestartOrPrevious},
 
     {"append",            no_argument,       0, 'a'},
     {"load",              no_argument,       0, 'l'},
@@ -159,6 +161,7 @@ bool CommandlineOptions::Parse() {
             tr("Decrease the volume by <value> percent")).arg(
             tr("Seek the currently playing track to an absolute position"),
             tr("Seek the currently playing track by a relative amount"),
+            tr("Restart the track, or play the previous track if within 8 seconds of start."),
             tr("Playlist options"),
             tr("Append files/URLs to the playlist"),
             tr("Loads files/URLs, replacing current playlist"),
@@ -220,6 +223,10 @@ bool CommandlineOptions::Parse() {
       case SeekBy:
         seek_by_ = QString(optarg).toInt(&ok);
         if (!ok) seek_by_ = 0;
+        break;
+
+      case RestartOrPrevious:
+        player_action_ = Player_RestartOrPrevious;
         break;
 
       case 'k':

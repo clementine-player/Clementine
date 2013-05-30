@@ -241,6 +241,13 @@ void Player::PlayPause() {
   }
 }
 
+void Player::RestartOrPrevious() {
+  if (engine_->position_nanosec() < 8*kNsecPerSec)
+    return Previous();
+
+  SeekTo(0);
+}
+
 void Player::Stop() {
   engine_->Stop();
   app_->playlist_manager()->active()->set_current_row(-1);
