@@ -164,7 +164,7 @@ bool SubsonicService::IsConfigured() const {
 
 void SubsonicService::Login() {
   // Recreate fresh network state, otherwise old HTTPS settings seem to get reused
-  // This might leave stale idle connections around in background, but this shouldn't get called regularly
+  network_->deleteLater();
   network_ = new QNetworkAccessManager(this);
   network_->setCookieJar(new QNetworkCookieJar(network_));
   // Forget login state whilst waiting
