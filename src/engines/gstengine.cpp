@@ -616,7 +616,10 @@ void GstEngine::timerEvent(QTimerEvent* e) {
     const qint64 remaining = current_length - current_position;
 
     const qint64 fudge = kTimerIntervalNanosec + 100 * kNsecPerMsec; // Mmm fudge
-    const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_nanosec_ : kPreloadGapNanosec;
+    const qint64 gap = buffer_duration_nanosec_ + (
+        autocrossfade_enabled_ ?
+            fadeout_duration_nanosec_ :
+            kPreloadGapNanosec);
 
     // only if we know the length of the current stream...
     if(current_length > 0) {

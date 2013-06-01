@@ -158,9 +158,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static QUrl FixupUrl(const QUrl& url);
 
  private:
-  static const int kTimerIntervalNanosec = 1000 * kNsecPerMsec; // 1s
-  static const int kPreloadGapNanosec = 1000 * kNsecPerMsec; // 1s
-  static const int kSeekDelayNanosec = 100 * kNsecPerMsec; // 100msec
+  static const qint64 kTimerIntervalNanosec = 1000 * kNsecPerMsec; // 1s
+  static const qint64 kPreloadGapNanosec = 1000 * kNsecPerMsec; // 1s
+  static const qint64 kSeekDelayNanosec = 100 * kNsecPerMsec; // 100msec
 
   static const char* kHypnotoadPipeline;
   static const char* kEnterprisePipeline;
