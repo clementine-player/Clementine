@@ -197,7 +197,7 @@ const Engine::Scope& GstEngine::scope() {
 }
 
 void GstEngine::UpdateScope() {
-  typedef typename Engine::Scope::value_type sample_type;
+  typedef Engine::Scope::value_type sample_type;
 
   // determine the number of channels
   GstStructure* structure = gst_caps_get_structure(
