@@ -103,7 +103,7 @@ QString Chromaprinter::CreateFingerprint() {
   g_object_set(G_OBJECT(sink), "emit-signals", TRUE, NULL);
 
   // Set the filename
-  g_object_set(src, "location", filename_.toLocal8Bit().constData(), NULL);
+  g_object_set(src, "location", filename_.toUtf8().constData(), NULL);
 
   // Connect signals
   CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, this);
