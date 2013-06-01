@@ -264,7 +264,7 @@ void OutgoingDataCreator::CreateSong(
     if (!art.isNull()) {
       QImage small;
       // Check if we resize the image
-      if (art.width() > 1000) {
+      if (art.width() > 1000 || art.height() > 1000) {
         small = art.scaled(1000, 1000, Qt::KeepAspectRatio);
       } else {
         small = art;
