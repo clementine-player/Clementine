@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-26 13:27+0000\n"
-"Last-Translator: kladess <kladess@gmail.com>\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -701,7 +701,7 @@ msgstr "iTunes 데이터베이스를 불러오는 중 오류 발생"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1'에 메타데이터를 쓰던 중 오류 발생"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "지정되지 않은 에러가 발생"
 
@@ -718,7 +718,7 @@ msgstr "화난"
 msgid "Appearance"
 msgstr "외형"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "재생목록에 파일/URL 추가"
 
@@ -931,7 +931,7 @@ msgstr "찾아보기..."
 msgid "Buffer duration"
 msgstr "버퍼 시간"
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "버퍼링"
 
@@ -975,7 +975,7 @@ msgstr "단축키 바꾸기..."
 msgid "Change shuffle mode"
 msgstr "셔플 모드 "
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "언어 변경"
 
@@ -1163,7 +1163,7 @@ msgstr "클럽"
 msgid "Colors"
 msgstr "색상"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "콤마로 클래스:단계의 목록을 나눔, 단계는 0-3"
 
@@ -1245,6 +1245,17 @@ msgstr "장치 연결"
 msgid "Connecting to Spotify"
 msgstr "스포티피에 연결 중"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "콘솔"
@@ -1279,7 +1290,7 @@ msgstr "라이브러리에 복사..."
 msgid "Copyright"
 msgstr "저작권"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1483,11 +1494,11 @@ msgstr "일"
 msgid "De&fault"
 msgstr "기본값(&f)"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "4% 단위로 음량 줄이기"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "<value>% 단위로 음량 줄이기"
 
@@ -1521,7 +1532,7 @@ msgid "Delete downloaded data"
 msgstr "다운로드된 데이터 삭제"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "파일 삭제"
 
@@ -1642,7 +1653,7 @@ msgstr "불연속적인 전송"
 msgid "Display options"
 msgstr "옵션 표시"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "OSD 표시"
 
@@ -1899,17 +1910,17 @@ msgstr "전체 선택"
 msgid "Equalizer"
 msgstr "이퀄라이저"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr ""
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "오류"
 
@@ -2112,7 +2123,7 @@ msgstr "자동으로 가져오기"
 msgid "Fetch completed"
 msgstr "가져오기 완료"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "서브소닉 라이브러리 가져오기"
 
@@ -2428,6 +2439,10 @@ msgstr "높음 (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "높음 (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "시간"
@@ -2502,19 +2517,19 @@ msgstr "알림에 앨범 아트 포함"
 msgid "Include all songs"
 msgstr "모든 음악 포함"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "호환되지 않는 서브소닉 REST 프로토콜 버전입니다. 클라이언트를 업그레이드 해야만 합니다."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "호환되지 않는 서브소닉 REST 프로토콜 버전입니다. 서버를 업그레이드 해야만 합니다."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "4% 단위로 음량 올리기"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "<value>% 단위로 음량 올리기"
 
@@ -2751,7 +2766,7 @@ msgstr "라이브러리 "
 msgid "Library advanced grouping"
 msgstr "향상된 그룹 "
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "라이브러리 재탐색 알림"
 
@@ -2843,7 +2858,7 @@ msgstr "트랙 정보 불러오는중"
 msgid "Loading..."
 msgstr "여는 중..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 
@@ -2851,7 +2866,7 @@ msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3215,7 +3230,7 @@ msgstr ""
 msgid "None"
 msgstr "없음"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
@@ -3392,7 +3407,7 @@ msgstr "파일 정리 중..."
 msgid "Original tags"
 msgstr "원본 태그"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "그 외 옵션"
 
@@ -3439,7 +3454,7 @@ msgstr "파티"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3450,7 +3465,7 @@ msgstr "비밀번호"
 msgid "Pause"
 msgstr "일시중지"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "재생 일시중지"
 
@@ -3494,7 +3509,7 @@ msgstr "재생 횟수"
 msgid "Play custom radio..."
 msgstr "사용자 정의 라디오 재생..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "중지중일때 재생, 재생중일때 중지"
 
@@ -3507,7 +3522,7 @@ msgstr "이미 재생되는 곡이 없다면 재생"
 msgid "Play tag radio..."
 msgstr "태그 라디오 재생..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "재생목록 <n>번째의 곡 재생"
 
@@ -3519,7 +3534,7 @@ msgstr "재생/일시중지"
 msgid "Playback"
 msgstr "재생"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "플레이어 옵션"
 
@@ -3533,7 +3548,7 @@ msgstr "재생목록"
 msgid "Playlist finished"
 msgstr "재생목록 끝남"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "재생목록 옵션"
 
@@ -3653,7 +3668,7 @@ msgstr "이전"
 msgid "Previous track"
 msgstr "이전 트랙"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "출력 버전 정보"
 
@@ -3897,6 +3912,11 @@ msgstr "초기화"
 msgid "Reset play counts"
 msgstr "재생 횟수 초기화"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "ASCII 문자로 제한"
@@ -3936,6 +3956,12 @@ msgstr "실행"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS 프록시"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4090,11 +4116,11 @@ msgstr "뒤로 탐색"
 msgid "Seek forward"
 msgstr "앞으로 탐색"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr ""
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr ""
 
@@ -4134,11 +4160,11 @@ msgstr "시각화 선택..."
 msgid "Serial number"
 msgstr "시리얼 넘버"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "서버 URL"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "서버 자세히"
 
@@ -4151,7 +4177,7 @@ msgstr "서비스 오프라인"
 msgid "Set %1 to \"%2\"..."
 msgstr ""
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "음량을 <value> 퍼센트로 설정"
 
@@ -4327,7 +4353,7 @@ msgstr "크기:"
 msgid "Ska"
 msgstr "스카"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "재생목록에서 뒤로 넘기기"
 
@@ -4335,7 +4361,7 @@ msgstr "재생목록에서 뒤로 넘기기"
 msgid "Skip count"
 msgstr ""
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "재생목록에서 앞으로 넘기기"
 
@@ -4435,7 +4461,7 @@ msgstr "표준"
 msgid "Starred"
 msgstr "볊점"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr ""
 
@@ -4476,7 +4502,7 @@ msgstr "이후 정지"
 msgid "Stop after this track"
 msgstr "이번 트랙 이후 정지"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "재생 "
 
@@ -4492,7 +4518,7 @@ msgstr "중지됨"
 msgid "Stream"
 msgstr "스트림"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4510,7 +4536,7 @@ msgstr "구독중인 재생목록"
 msgid "Subscribers"
 msgstr "구독자"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "서브소닉"
 
@@ -4629,13 +4655,13 @@ msgstr "요청한 사이트가 존재하지 않습니다!"
 msgid "The site you requested is not an image!"
 msgstr "요청하신 사이트는 이미지가 아닙니다!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "서브소닉의 시험 기간이 끝났습니다. 라이센스 키를 얻기위한 기부를 해주세요. 자세한 사항은 subsonic.org 에서 확인하세요."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4670,16 +4696,17 @@ msgid ""
 "deleted:"
 msgstr ""
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "파일들이 디스크로 부터 삭제 될 것 입니다. 계속 진행 하시겠습니까?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "파일들이 장치로 부터 삭제 될 것 입니다. 계속 진행 하시겠습니까?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4779,7 +4806,7 @@ msgstr "대기열 상황 토글"
 msgid "Toggle scrobbling"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
@@ -4849,7 +4876,7 @@ msgstr "끄기"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(들)"
 
@@ -4932,7 +4959,7 @@ msgstr "업데이트 중 %1%..."
 msgid "Updating library"
 msgstr "라이브러리 업데이트 중"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "사용"
 
@@ -4951,6 +4978,10 @@ msgstr "리모콘 사용"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "가능하면 리플레이 게인 메타데이터를 사용"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5020,7 +5051,7 @@ msgstr "사용자 인터페이스"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5185,7 +5216,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "지금 전부 다시 검색해도 좋습니까?"
 
@@ -5193,7 +5224,7 @@ msgstr "지금 전부 다시 검색해도 좋습니까?"
 msgid "Write all songs statistics into songs' files"
 msgstr "모든 음악에 통계를 작성"
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "잘못된 사용자명 또는 비밀번호 입니다."
 
@@ -5482,7 +5513,7 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "옵션"
 

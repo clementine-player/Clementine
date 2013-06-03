@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-26 06:30+0000\n"
-"Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -697,7 +697,7 @@ msgstr "Iškilo klaida įkeliant iTunes duomenų bazę"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Klaida rašant meta duomenis į '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Įvyko nežinoma klaida."
 
@@ -714,7 +714,7 @@ msgstr "Piktas"
 msgid "Appearance"
 msgstr "Išvaizda"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Įterpti failus/URL į grojaraštį"
 
@@ -927,7 +927,7 @@ msgstr "Naršyti..."
 msgid "Buffer duration"
 msgstr "Buferio trukmė"
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Kaupiamas buferis"
 
@@ -971,7 +971,7 @@ msgstr "Keisti greituką..."
 msgid "Change shuffle mode"
 msgstr "Keisti maišymo režimą"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Keisti kalbą"
 
@@ -1159,7 +1159,7 @@ msgstr "Klubinė"
 msgid "Colors"
 msgstr "Spalvos"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Kableliais išskirtas sąrašas iš klasės:lygio, lygis yra nuo 0 iki 3"
 
@@ -1241,6 +1241,17 @@ msgstr "Prijungti įrenginį"
 msgid "Connecting to Spotify"
 msgstr "Jungiamasi prie Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Pultas"
@@ -1275,7 +1286,7 @@ msgstr "Kopijuoti į fonoteką..."
 msgid "Copyright"
 msgstr "Teisės"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1479,11 +1490,11 @@ msgstr "Dienos"
 msgid "De&fault"
 msgstr "Numatytas"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Sumažinti garsą per 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "Patildyti <value> procentais"
 
@@ -1517,7 +1528,7 @@ msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Ištrinti failus"
 
@@ -1638,7 +1649,7 @@ msgstr "Nevientisa transliacija"
 msgid "Display options"
 msgstr "Rodymo nuostatos"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Rodyti OSD"
 
@@ -1895,17 +1906,17 @@ msgstr "Visa kolekcija"
 msgid "Equalizer"
 msgstr "Glodintuvas"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Tai atitinka --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tai atitinka --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Klaida"
 
@@ -2108,7 +2119,7 @@ msgstr "Gauti automatiškai"
 msgid "Fetch completed"
 msgstr "Parsiuntimas baigtas"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "Gaunama Subsonic biblioteka"
 
@@ -2424,6 +2435,10 @@ msgstr "Aukšta (%1 kps)"
 msgid "High (1024x1024)"
 msgstr "Aukšta (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Valandos"
@@ -2498,19 +2513,19 @@ msgstr "Rodyti albumo paveikslus pranešime"
 msgid "Include all songs"
 msgstr "Įtraukti visas dainas"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Nesuderinama Subsonic REST protokolo versija. Reikia atnaujinti klientą."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Nesuderinama Subsonic REST protokolo versija. Serveris turi atsinaujinti."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Pagarsinti 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "Pagarsinti <value> procentais"
 
@@ -2747,7 +2762,7 @@ msgstr "Fonoteka"
 msgid "Library advanced grouping"
 msgstr "Sudėtingesnis fonotekos grupavimas"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Fonotekos perskanavimo žinutė"
 
@@ -2839,7 +2854,7 @@ msgstr "Užkraunama kūrinio informacija"
 msgid "Loading..."
 msgstr "Įkeliama..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 
@@ -2847,7 +2862,7 @@ msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3211,7 +3226,7 @@ msgstr "Jokių trumpų blokų"
 msgid "None"
 msgstr "Nėra"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nei viena iš pažymėtų dainų netinka kopijavimui į įrenginį"
 
@@ -3388,7 +3403,7 @@ msgstr "Tvarkomi failai"
 msgid "Original tags"
 msgstr "Originalios žymės"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Kitos parinktys"
 
@@ -3435,7 +3450,7 @@ msgstr "Vakarėlis"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3446,7 +3461,7 @@ msgstr "Slaptažodis"
 msgid "Pause"
 msgstr "Pristabdyti"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Sulaikyti grojimą"
 
@@ -3490,7 +3505,7 @@ msgstr "Grojimo skaitiklis"
 msgid "Play custom radio..."
 msgstr "Groti savitą radijo stotį..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Groti jei sustabdyta, Pristabdyti jei grojama"
 
@@ -3503,7 +3518,7 @@ msgstr "Groti jei jau kas nors negroja"
 msgid "Play tag radio..."
 msgstr "Groti pažymėtą radijo stotį..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Groti <n> takelį grojaraštyje"
 
@@ -3515,7 +3530,7 @@ msgstr "Groti/Pristabdyti"
 msgid "Playback"
 msgstr "Grojimas"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Leistuvo parinktys"
 
@@ -3529,7 +3544,7 @@ msgstr "Grojaraštis"
 msgid "Playlist finished"
 msgstr "Grojaraštis baigtas"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Grojaraščio parinktys"
 
@@ -3649,7 +3664,7 @@ msgstr "Atgal"
 msgid "Previous track"
 msgstr "Ankstesnis takelis"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Išvesti versijos informaciją"
 
@@ -3893,6 +3908,11 @@ msgstr "Atstatyti"
 msgid "Reset play counts"
 msgstr "Atstatyti perklausų skaičių"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Naudoti tik SCII simbolius"
@@ -3932,6 +3952,12 @@ msgstr "Vykdyti"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS įgaliotasis serveris"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4086,11 +4112,11 @@ msgstr "Sukti atgal"
 msgid "Seek forward"
 msgstr "Sukti į priekį"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Rasti dabar grojamą takelį pagal santykinį kiekį"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Rasti dabar grojamą takelį į absoliučiąją poziciją"
 
@@ -4130,11 +4156,11 @@ msgstr "Parinkti vaizdinius"
 msgid "Serial number"
 msgstr "Serijos numeris"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "Serverio URL"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Serverio detalės"
 
@@ -4147,7 +4173,7 @@ msgstr "Servisas nepasiekiamas"
 msgid "Set %1 to \"%2\"..."
 msgstr "Nustatyti %1 į \"%2\"..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Nustatyti garsumą iki <value> procentų"
 
@@ -4323,7 +4349,7 @@ msgstr "Dydis:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Ankstesnis kūrinys grojaraštyje"
 
@@ -4331,7 +4357,7 @@ msgstr "Ankstesnis kūrinys grojaraštyje"
 msgid "Skip count"
 msgstr "Praleisti skaičiavimą"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Kitas grojaraščio kūrinys"
 
@@ -4431,7 +4457,7 @@ msgstr "Standartinis"
 msgid "Starred"
 msgstr "Su žvaigždute"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Pradėti grajaraštį nuo dabar grojančio"
 
@@ -4472,7 +4498,7 @@ msgstr "Stabdyti po"
 msgid "Stop after this track"
 msgstr "Sustabdyti po šio takelio"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Stabdyti grojimą"
 
@@ -4488,7 +4514,7 @@ msgstr "Sustabdyta"
 msgid "Stream"
 msgstr "Srautas"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4506,7 +4532,7 @@ msgstr "Prenumeruoti grojaraščiai"
 msgid "Subscribers"
 msgstr "Prenumeratoriai"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4625,13 +4651,13 @@ msgstr "Puslapis, kurio prašėte neegzistuoja"
 msgid "The site you requested is not an image!"
 msgstr "Puslapis, kurio prašėte nėra paveikslas"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Bandomasis subsonic laikotarpis baigėsi. Paaukokite ir gaukite licenciją. Norėdami sužinoti daugiau aplankykite subsonic.org."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4666,16 +4692,17 @@ msgid ""
 "deleted:"
 msgstr "Iškilo problemų trinant dainas. Šie failai negalėjo būti ištrinti:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Šie failai bus ištrinti iš disko, ar tikrai norite tęsti?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Šie failai bus ištrinti iš įrenginio, ar tikrai norite tęsti?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4775,7 +4802,7 @@ msgstr "Perjungti eilės statusą"
 msgid "Toggle scrobbling"
 msgstr "Perjungti „scrobbling“ būseną"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Keisti ekrano pranešimų (OSD) matomumą"
 
@@ -4845,7 +4872,7 @@ msgstr "Išjungti"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL"
 
@@ -4928,7 +4955,7 @@ msgstr "Atnaujinama %1..."
 msgid "Updating library"
 msgstr "Atnaujinama biblioteka"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Naudojimas"
 
@@ -4947,6 +4974,10 @@ msgstr "Naudoti nuotolinį valdymą"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Naudoti garsumo suvienodinimo meta duodeninis jei tai yra prieinama"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5016,7 +5047,7 @@ msgstr "Naudotojo sąsaja"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5181,7 +5212,7 @@ msgid ""
 "well?"
 msgstr "Ar norėtumėte perkelti kitas dainas į šio atlikėjo albumą?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 
@@ -5189,7 +5220,7 @@ msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Netinkamas naudotojo vardas ar slaptažodis."
 
@@ -5478,7 +5509,7 @@ msgstr "seniausi pirmiausia"
 msgid "on"
 msgstr "iš"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "parinktys"
 

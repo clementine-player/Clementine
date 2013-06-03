@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -702,7 +702,7 @@ msgstr "Ett fel uppstod vid inläsning av iTunes-databasen"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ett fel uppstod när metadata skulle skrivas till '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Ett okänt fel inträffade."
 
@@ -719,7 +719,7 @@ msgstr "Arg"
 msgid "Appearance"
 msgstr "Utseende"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Lägg till filer/webbadresser till spellistan"
 
@@ -932,7 +932,7 @@ msgstr "Bläddra..."
 msgid "Buffer duration"
 msgstr "Längd på buffer"
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Buffrar"
 
@@ -976,7 +976,7 @@ msgstr "Ändra snabbtangent..."
 msgid "Change shuffle mode"
 msgstr "Ändra blandningsläge"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Ändra språket"
 
@@ -1164,7 +1164,7 @@ msgstr "Club"
 msgid "Colors"
 msgstr "Färger"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista, separerad med komma, över class:level; level är 0-3"
 
@@ -1246,6 +1246,17 @@ msgstr "Anslut enhet"
 msgid "Connecting to Spotify"
 msgstr "Ansluter till Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Konsoll"
@@ -1280,7 +1291,7 @@ msgstr "Kopiera till biblioteket..."
 msgid "Copyright"
 msgstr "Copyright"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1484,11 +1495,11 @@ msgstr "Dagar"
 msgid "De&fault"
 msgstr "S&tandard"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Sänk volymen med 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "Minska volymen med <value> procent"
 
@@ -1522,7 +1533,7 @@ msgid "Delete downloaded data"
 msgstr "Ta bort nedladdad data"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Ta bort filer"
 
@@ -1643,7 +1654,7 @@ msgstr "Icke-kontinuerlig sändning"
 msgid "Display options"
 msgstr "Visningsalternativ"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Visa on-screen-display"
 
@@ -1900,17 +1911,17 @@ msgstr "Hela samlingen"
 msgid "Equalizer"
 msgstr "Equalizer"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Motsvarar --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Motsvarar --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Fel"
 
@@ -2113,7 +2124,7 @@ msgstr "Hämta automatiskt"
 msgid "Fetch completed"
 msgstr "Hämtning klar"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2429,6 +2440,10 @@ msgstr "Hög (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Hög (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Timmar"
@@ -2503,19 +2518,19 @@ msgstr "Inkludera albumomslag i notifieringen"
 msgid "Include all songs"
 msgstr "Inkludera alla spår"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Öka volymen med 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "Öka volymen med <value> procent"
 
@@ -2752,7 +2767,7 @@ msgstr "Bibliotek"
 msgid "Library advanced grouping"
 msgstr "Avancerad bibliotekgruppering"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Notis om omsökning av biblioteket"
 
@@ -2844,7 +2859,7 @@ msgstr "Laddar låtinformation"
 msgid "Loading..."
 msgstr "Läser in..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 
@@ -2852,7 +2867,7 @@ msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3216,7 +3231,7 @@ msgstr "Inga korta block"
 msgid "None"
 msgstr "Inga"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ingen av de valda låtarna lämpar sig för kopiering till en enhet"
 
@@ -3393,7 +3408,7 @@ msgstr "Organiserar filer..."
 msgid "Original tags"
 msgstr "Ursprungliga etiketter"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Övriga flaggor"
 
@@ -3440,7 +3455,7 @@ msgstr "Party"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3451,7 +3466,7 @@ msgstr "Lösenord"
 msgid "Pause"
 msgstr "Gör paus"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Gör paus i uppspelning"
 
@@ -3495,7 +3510,7 @@ msgstr "Antal uppspelningar"
 msgid "Play custom radio..."
 msgstr "Spela upp anpassad radio..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Spela upp om stoppad, gör paus vid uppspelning"
 
@@ -3508,7 +3523,7 @@ msgstr "Spela om ingenting redan spelas"
 msgid "Play tag radio..."
 msgstr "Spela upp taggradio..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Spela upp spår nummer <n> från spellistan"
 
@@ -3520,7 +3535,7 @@ msgstr "Spela upp/gör paus"
 msgid "Playback"
 msgstr "Uppspelning"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Spelaralternativ"
 
@@ -3534,7 +3549,7 @@ msgstr "Spellista"
 msgid "Playlist finished"
 msgstr "Spellistan slutförd"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Alternativ för spellista"
 
@@ -3654,7 +3669,7 @@ msgstr "Föregående"
 msgid "Previous track"
 msgstr "Föregående spår"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Visa versionsinformation"
 
@@ -3898,6 +3913,11 @@ msgstr "Återställ"
 msgid "Reset play counts"
 msgstr "Återställ låtstatistik"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Begränsa till ASCII-tecken"
@@ -3937,6 +3957,12 @@ msgstr "Kör"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS proxy"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4091,11 +4117,11 @@ msgstr "Hoppa bakåt"
 msgid "Seek forward"
 msgstr "Hoppa framåt"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Hoppa till en relativ position i spåret som spelas för närvarande"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Hoppa till en absolut position i spåret som spelas för närvarande"
 
@@ -4135,11 +4161,11 @@ msgstr "Välj visualiseringar..."
 msgid "Serial number"
 msgstr "Serienummer"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr ""
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr ""
 
@@ -4152,7 +4178,7 @@ msgstr "Tjänst inte tillgänglig"
 msgid "Set %1 to \"%2\"..."
 msgstr "Ställ in %1 till \"%2\"..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Ställ in volymen till <värde> procent"
 
@@ -4328,7 +4354,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Gå bakåt i spellista"
 
@@ -4336,7 +4362,7 @@ msgstr "Gå bakåt i spellista"
 msgid "Skip count"
 msgstr "Antal överhoppningar"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Gå framåt i spellista"
 
@@ -4436,7 +4462,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Stjärnmärkta"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Starta spellistan som spelas för närvarande"
 
@@ -4477,7 +4503,7 @@ msgstr "Stoppa efter"
 msgid "Stop after this track"
 msgstr "Stoppa efter detta spår"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Stoppa uppspelning"
 
@@ -4493,7 +4519,7 @@ msgstr "Stoppad"
 msgid "Stream"
 msgstr "Ström"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4511,7 +4537,7 @@ msgstr "Bevakade spellistor"
 msgid "Subscribers"
 msgstr "Prenumeranter"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4630,13 +4656,13 @@ msgstr "Den webbplats du söker finns inte!"
 msgid "The site you requested is not an image!"
 msgstr "Webbplatsen du söker är inte en bild!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4671,16 +4697,17 @@ msgid ""
 "deleted:"
 msgstr "Fel uppstod vid borttagning av några låtar. Följande filer kunde inte kopieras:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Filerna kommer att tas bort från disken, är du säker på att du vill fortsätta?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Filerna kommer att tas bort från enheten, är du säker på att du vill fortsätta?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4780,7 +4807,7 @@ msgstr "Växla köstatus"
 msgid "Toggle scrobbling"
 msgstr "Växla skrobbling"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Växla synlighet för Pretty på-skärm-visning"
 
@@ -4850,7 +4877,7 @@ msgstr "Stäng av"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "Webbadress(er)"
 
@@ -4933,7 +4960,7 @@ msgstr "Uppdaterar %1%..."
 msgid "Updating library"
 msgstr "Uppdaterar biblioteket"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Användning"
 
@@ -4952,6 +4979,10 @@ msgstr "Använd fjärrstyrning"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Använd Replay Gain-metadata om det finns tillgängligt"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5021,7 +5052,7 @@ msgstr "Användargränssnitt"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5186,7 +5217,7 @@ msgid ""
 "well?"
 msgstr "Vill du flytta på 'andra låtar' i det här albumet till Blandade Artister också?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vill du köra en fullständig omsökning nu?"
 
@@ -5194,7 +5225,7 @@ msgstr "Vill du köra en fullständig omsökning nu?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Fel användarnamn eller lösenord."
 
@@ -5483,7 +5514,7 @@ msgstr "äldsta först"
 msgid "on"
 msgstr "på"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "alternativ"
 

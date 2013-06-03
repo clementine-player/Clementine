@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Afrikaans (http://www.transifex.com/projects/p/clementine/language/af/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -695,7 +695,7 @@ msgstr "'n Fout het plaasgevind tydens die laai van die iTunes-databasis"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'n Fout het plaasgevind tydens die skryf van metadata na '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr ""
 
@@ -712,7 +712,7 @@ msgstr "Kwaai"
 msgid "Appearance"
 msgstr "Voorkoms"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Voeg lêers/URLs by die afspeellys by"
 
@@ -925,7 +925,7 @@ msgstr "Gaan soek..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Buffering"
 
@@ -969,7 +969,7 @@ msgstr "Verander kortskakel"
 msgid "Change shuffle mode"
 msgstr "Verander skommel modus"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Verander die taal"
 
@@ -1157,7 +1157,7 @@ msgstr "Klub"
 msgid "Colors"
 msgstr "Kleure"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komma geskeide lys van klas:vlak, vlak is 0-3"
 
@@ -1239,6 +1239,17 @@ msgstr "Verbind toestel"
 msgid "Connecting to Spotify"
 msgstr "Verbind aan Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr ""
@@ -1273,7 +1284,7 @@ msgstr "Kopiëer na my versameling"
 msgid "Copyright"
 msgstr "Kopiereg"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1477,11 +1488,11 @@ msgstr "Dae"
 msgid "De&fault"
 msgstr "&Standaard"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Verlaag die volume met 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1515,7 +1526,7 @@ msgid "Delete downloaded data"
 msgstr "Vee afgelaaide data uit"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Skrap lêers"
 
@@ -1636,7 +1647,7 @@ msgstr "Uitsending met onderbrekings"
 msgid "Display options"
 msgstr "Vertoon keuses"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Toon skermbeeld"
 
@@ -1893,17 +1904,17 @@ msgstr "Hele versameling"
 msgid "Equalizer"
 msgstr "Grafiese effenaar"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ekwivalent aan --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ekwivalent aan --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Fout"
 
@@ -2106,7 +2117,7 @@ msgstr "Gaan haal outomaties"
 msgid "Fetch completed"
 msgstr "Klaar met haal"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2422,6 +2433,10 @@ msgstr "Hoog (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Hoog (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Ure"
@@ -2496,19 +2511,19 @@ msgstr "Sluit omslag in die kennisgewing in"
 msgid "Include all songs"
 msgstr "Sluit alle liedjies in"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Verhoog die volume met 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2745,7 +2760,7 @@ msgstr "Versameling"
 msgid "Library advanced grouping"
 msgstr "Gevorderde groeppering van versameling"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Versameling hernagaan kennisgewing"
 
@@ -2837,7 +2852,7 @@ msgstr "Snitinligting word gelaai"
 msgid "Loading..."
 msgstr "Besig om te laai..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Laai lêers/URLs en vervang huidige afspeellys"
 
@@ -2845,7 +2860,7 @@ msgstr "Laai lêers/URLs en vervang huidige afspeellys"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3209,7 +3224,7 @@ msgstr "Geen kort blokke"
 msgid "None"
 msgstr "Geen"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Geen van die gekose liedjies is geskik om na die toestel te kopiëer nie."
 
@@ -3386,7 +3401,7 @@ msgstr "Lêers word gesorteer"
 msgid "Original tags"
 msgstr "Oorspronklike etikette"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Ander keuses"
 
@@ -3433,7 +3448,7 @@ msgstr "Partytjie"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3444,7 +3459,7 @@ msgstr "Wagwoord"
 msgid "Pause"
 msgstr "Pause"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Afspeel is gepauseer"
 
@@ -3488,7 +3503,7 @@ msgstr "Afspeeltelling"
 msgid "Play custom radio..."
 msgstr "Speel ander radio..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Speel indien gepauseerd, pauseer indien speel"
 
@@ -3501,7 +3516,7 @@ msgstr "Speel as daar niks anders tans speel nie"
 msgid "Play tag radio..."
 msgstr "Speel etiket radio..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Speel die <n>de snit in die afspeellys"
 
@@ -3513,7 +3528,7 @@ msgstr "Speel/Pause"
 msgid "Playback"
 msgstr "Afspeel"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Afspeler keuses"
 
@@ -3527,7 +3542,7 @@ msgstr "Afspeellys"
 msgid "Playlist finished"
 msgstr "Afspeellys deurgewerk"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Afspeellys keuses"
 
@@ -3647,7 +3662,7 @@ msgstr "Vorige"
 msgid "Previous track"
 msgstr "Vorige snit"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Toon weergawe inligting"
 
@@ -3891,6 +3906,11 @@ msgstr "Herstel"
 msgid "Reset play counts"
 msgstr "Herstel afspeeltelling"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Beperk tot ASCII karakters"
@@ -3930,6 +3950,12 @@ msgstr ""
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS instaanbediener"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4084,11 +4110,11 @@ msgstr "Streef terugwaarts"
 msgid "Seek forward"
 msgstr "Streef vorentoe"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Streef 'n relatiewe hoeveelheid deur die huidige snit"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Streef na 'n spesifieke posisie in die huidige snit"
 
@@ -4128,11 +4154,11 @@ msgstr "Kies visualisasie..."
 msgid "Serial number"
 msgstr "Reeksnommer"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr ""
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr ""
 
@@ -4145,7 +4171,7 @@ msgstr "Diens aflyn"
 msgid "Set %1 to \"%2\"..."
 msgstr "Stel %1 na \"%2\"..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Stel die volume na <value> persent"
 
@@ -4321,7 +4347,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Spring terugwaarts in afspeellys"
 
@@ -4329,7 +4355,7 @@ msgstr "Spring terugwaarts in afspeellys"
 msgid "Skip count"
 msgstr "Aantal keer oorgeslaan"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Spring voorentoe in afspeellys"
 
@@ -4429,7 +4455,7 @@ msgstr "Standaard"
 msgid "Starred"
 msgstr "Gegradeer"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Begin die huidige afspeellys speel"
 
@@ -4470,7 +4496,7 @@ msgstr "Stop na"
 msgid "Stop after this track"
 msgstr "Stop na hierdie snit"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Hou op met afspeel"
 
@@ -4486,7 +4512,7 @@ msgstr "Afspeel is gestop"
 msgid "Stream"
 msgstr "Stroom"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4504,7 +4530,7 @@ msgstr "Ingetekende afspeellyste"
 msgid "Subscribers"
 msgstr "Teken in"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr ""
 
@@ -4623,13 +4649,13 @@ msgstr "Die blad wat jy aangevra het bestaan nie!"
 msgid "The site you requested is not an image!"
 msgstr "Die blad wat hy aangevra het is nie 'n beeld nie!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4664,16 +4690,17 @@ msgid ""
 "deleted:"
 msgstr "Daar was 'n probleem met die verwydering van sommige liedjies.  Die volgende lêers kan nie verwyder word nie:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Hierdie lêers sal vanaf die skyf verwyder word. Is jy seker jy wil voortgaan?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Hierdie lêers sal vanaf die toestel verwyder word. Is jy seker?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4773,7 +4800,7 @@ msgstr "Skakel tou-status aan/af"
 msgid "Toggle scrobbling"
 msgstr "Skakel log van geluisterde musiek aanlyn aan/af"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Skakel mooi skermbeeld aan/af"
 
@@ -4843,7 +4870,7 @@ msgstr "Skakel af"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4926,7 +4953,7 @@ msgstr "%1% word opgedateer..."
 msgid "Updating library"
 msgstr "Jou versameling word nagegaan"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Gebruik"
 
@@ -4945,6 +4972,10 @@ msgstr ""
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Gebruik afspeel-aanwins metadata as dit beskikbaar is"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5014,7 +5045,7 @@ msgstr "Gebruikerskoppelvlak"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5179,7 +5210,7 @@ msgid ""
 "well?"
 msgstr "Wil jy die ander liedjies in hierdie album ook na Verskeie Kunstenaars skuif?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Wil jy alles van voor af deursoek?"
 
@@ -5187,7 +5218,7 @@ msgstr "Wil jy alles van voor af deursoek?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr ""
 
@@ -5476,7 +5507,7 @@ msgstr "oudste eerste"
 msgid "on"
 msgstr "volgens"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "instellings"
 

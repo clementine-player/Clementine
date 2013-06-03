@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/projects/p/clementine/language/be/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -164,7 +164,7 @@ msgstr "&Іншы"
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "&Extras"
-msgstr "Пашыреньні"
+msgstr "Пашырэньні"
 
 #: ../bin/src/ui_mainwindow.h:721
 msgid "&Help"
@@ -229,7 +229,7 @@ msgstr "...і ўсім стваральнікам Amarok"
 
 #: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
@@ -249,7 +249,7 @@ msgstr "1 кампазыцыя"
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "127.0.0.1"
-msgstr ""
+msgstr "127.0.0.1"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
@@ -354,7 +354,7 @@ msgstr "УСЯ СЛАВА ГІПНАЖАБЕ!"
 
 #: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
 msgid "Abort"
-msgstr ""
+msgstr "Адмена"
 
 #: ui/about.cpp:32
 #, qt-format
@@ -697,7 +697,7 @@ msgstr "Адбылася памылка пры загрузке дадзеных
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Адбылася памылка пры запісе мэта-дадзеных в '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Адбылася невядомая памылка"
 
@@ -714,7 +714,7 @@ msgstr "Злы"
 msgid "Appearance"
 msgstr "Зьнешні выгляд"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Дадаць файлы/URLs ў плэйліст"
 
@@ -850,7 +850,7 @@ msgstr "Рэзэрвнае капіяваньне базы дадзеных"
 
 #: ../bin/src/ui_equalizer.h:173
 msgid "Balance"
-msgstr ""
+msgstr "Балянс"
 
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
@@ -925,9 +925,9 @@ msgstr "Агляд..."
 
 #: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Buffer duration"
-msgstr ""
+msgstr "Працяжнасьць буфэру"
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Буфэрызацыя"
 
@@ -971,7 +971,7 @@ msgstr "Зьмяніць камбінацыю клявішаў..."
 msgid "Change shuffle mode"
 msgstr "Зьмяніць рэжым мяшаньня"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Зьмяніць мову"
 
@@ -1159,7 +1159,7 @@ msgstr "Клюбны"
 msgid "Colors"
 msgstr "Колеры"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Падзелены коскамі сьпіс \"кляс:узровень\", дзе ўзровень ад 0 да 3"
 
@@ -1241,6 +1241,17 @@ msgstr "Падлучыць прыладу"
 msgid "Connecting to Spotify"
 msgstr "Падключэньне да Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Кансоль"
@@ -1275,7 +1286,7 @@ msgstr "Капіяваць у калекцыю..."
 msgid "Copyright"
 msgstr "Копірайт"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1479,11 +1490,11 @@ msgstr "Дзень (дня, дзён)"
 msgid "De&fault"
 msgstr "Па &змоўчаньні"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Паменьшыць гучнасьць на 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "Памяншаць гучнасьць на <value> адсоткаў"
 
@@ -1517,7 +1528,7 @@ msgid "Delete downloaded data"
 msgstr "Выдаліць спампаваныя дадзеныя"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Выдаліць файлы"
 
@@ -1638,7 +1649,7 @@ msgstr "Бесперапынная перадача"
 msgid "Display options"
 msgstr "Налады адлюстраваньня"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Паказваць экраннае апавяшчэньне"
 
@@ -1652,7 +1663,7 @@ msgstr "Не канвэртаваць ніякую музыку"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
-msgstr ""
+msgstr "Не перазапісваць"
 
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1672,7 +1683,7 @@ msgstr "Не спыняць!"
 
 #: internet/somafmservice.cpp:103
 msgid "Donate"
-msgstr ""
+msgstr "Ахвяраваць"
 
 #: devices/deviceview.cpp:115
 msgid "Double click to open"
@@ -1846,7 +1857,7 @@ msgstr "Уведзьце URL для пампаваньня вокладки з �
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
-msgstr ""
+msgstr "Уведзьце імя файла для экспартаванае вокладкі (без пашырэньня)"
 
 #: playlist/playlisttabbar.cpp:132
 msgid "Enter a new name for this playlist"
@@ -1885,7 +1896,7 @@ msgstr "Уведзьце імя тэчкі"
 
 #: ../bin/src/ui_networkremotesettingspage.h:184
 msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
+msgstr "Уведзьце гэты IP у Прыкладаньні для падлучэньня да Clementine."
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -1895,17 +1906,17 @@ msgstr "Уся калекцыя"
 msgid "Equalizer"
 msgstr "Эквалайзэр"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Аналягічна --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналягічна --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Памылка"
 
@@ -1982,7 +1993,7 @@ msgstr "Акрамя трэкаў з аднаго й таго ж альбому 
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
-msgstr ""
+msgstr "Існыя вокладкі"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
@@ -1995,15 +2006,15 @@ msgstr "Тэрмін дзеяньня мінае %1"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Export Covers"
-msgstr ""
+msgstr "Экспартаваць Вокладкі"
 
 #: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
-msgstr ""
+msgstr "Экспартаваць вокладкі"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
-msgstr ""
+msgstr "Экспартаваць спампаваныя вокладкі"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
@@ -2011,12 +2022,12 @@ msgstr ""
 
 #: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
-msgstr ""
+msgstr "Экспартаваньне скончана"
 
 #: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "Экспартавана %1 вокладак(кі) з %2 (%3 прапушчана)"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -2050,7 +2061,7 @@ msgstr "FLAC"
 
 #: ../bin/src/ui_playbacksettingspage.h:306
 msgid "Fade out on pause / fade in on resume"
-msgstr ""
+msgstr "Плаўная паўза / працяг"
 
 #: ../bin/src/ui_playbacksettingspage.h:300
 msgid "Fade out when stopping a track"
@@ -2108,7 +2119,7 @@ msgstr "Выбіраць аўтаматычна"
 msgid "Fetch completed"
 msgstr "Дадзеныя атрыманыя"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "Складаньне бібліятэкі Subsonic"
 
@@ -2388,7 +2399,7 @@ msgstr "Сартаваць па Жанр/Выканаўца/Альбом"
 #: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
-msgstr ""
+msgstr "Групаваньне"
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
@@ -2423,6 +2434,10 @@ msgstr "Высокі (%1 fps)"
 #: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
 msgstr "Высокая (1024x1024)"
+
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
 
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
@@ -2498,19 +2513,19 @@ msgstr "Уключыць вокладку ў апавяшчэньні"
 msgid "Include all songs"
 msgstr "Уключыць усе песьні"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Несумяшчальная вэрсія пратаколу Subsonic REST. Трэба абнавіць кліент."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Несумяшчальная вэрсія пратаколу Subsonic REST. Трэба абнавіць сэрвэр."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Павялічыць гучнасьць на 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "Павялічваць гучнасьць на <value> адсоткаў"
 
@@ -2732,7 +2747,7 @@ msgstr "Пакіньце пустым для змоўчаньня. Напрык�
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
-msgstr ""
+msgstr "Левы"
 
 #: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -2747,7 +2762,7 @@ msgstr "Бібліятэка"
 msgid "Library advanced grouping"
 msgstr "Пашыраная сартоўка калекцыі"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Апавяшчэньне сканіраваньня бібліятэкі"
 
@@ -2839,7 +2854,7 @@ msgstr "Загрузка інфармацыі пра трэк"
 msgid "Loading..."
 msgstr "Загрузка..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Загрузіць файлы/URLs, замяняючы бягучы плэйліст"
 
@@ -2847,7 +2862,7 @@ msgstr "Загрузіць файлы/URLs, замяняючы бягучы пл
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3127,7 +3142,7 @@ msgstr "Сеціўная проксі-служба"
 
 #: ../bin/src/ui_networkremotesettingspage.h:168
 msgid "Network Remote"
-msgstr ""
+msgstr "Сеткавае кіраваньне"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:487
 msgid "Never"
@@ -3191,7 +3206,7 @@ msgstr "Няма фонавай выявы"
 
 #: ui/albumcovermanager.cpp:778
 msgid "No covers to export."
-msgstr ""
+msgstr "Няма вокладак для экспартаваньня."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
@@ -3211,7 +3226,7 @@ msgstr "Без кароткіх блёкаў"
 msgid "None"
 msgstr "Нічога"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ніводная з абраных песень ня будзе скапіяваная на прыладу"
 
@@ -3388,7 +3403,7 @@ msgstr "Арганізацыя файлаў"
 msgid "Original tags"
 msgstr "Першапачатковыя тэгі"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Іншыя налады"
 
@@ -3398,7 +3413,7 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
-msgstr ""
+msgstr "Вывадная прылада"
 
 #: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
@@ -3406,11 +3421,11 @@ msgstr "Опцыі вываду"
 
 #: ../bin/src/ui_playbacksettingspage.h:320
 msgid "Output plugin"
-msgstr ""
+msgstr "Плагін вываду"
 
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
-msgstr ""
+msgstr "Перазапісаць усё"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
@@ -3418,7 +3433,7 @@ msgstr "Перазапісаць існыя файлы"
 
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
-msgstr ""
+msgstr "Перазапісаць толькі меньшыя:"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3435,7 +3450,7 @@ msgstr "Party"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3446,7 +3461,7 @@ msgstr "Пароль"
 msgid "Pause"
 msgstr "Прыпыніць"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Прыпыніць прайграваньне"
 
@@ -3490,7 +3505,7 @@ msgstr "Колькасць прайграваньняў"
 msgid "Play custom radio..."
 msgstr "Слухаць карыстальніцкае радыё..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Прайграць калі спынена, прыпыніць калі прайграваецца"
 
@@ -3503,7 +3518,7 @@ msgstr "Прайграць, калі яшчэ нічога не прайграв
 msgid "Play tag radio..."
 msgstr "Прайграць радыё тэга..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Прайграць <n> кампазыцыю ў плэйлісьце"
 
@@ -3515,7 +3530,7 @@ msgstr "Граць/Прыпыніць"
 msgid "Playback"
 msgstr "Прайграваньне"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Налады плэеру"
 
@@ -3529,7 +3544,7 @@ msgstr "Плэйліст"
 msgid "Playlist finished"
 msgstr "Плэйліст скончыўся"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Налады плэйлісту"
 
@@ -3649,7 +3664,7 @@ msgstr "Папярэдні"
 msgid "Previous track"
 msgstr "Папярэдні трэк"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Вывесьці інфармацыю аб вэрсіі"
 
@@ -3812,7 +3827,7 @@ msgstr "Прыбраць з плэйлісту"
 
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
-msgstr ""
+msgstr "Выдаліць плэйлісты"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
@@ -3879,7 +3894,7 @@ msgstr "Replay Gain"
 
 #: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Рэжым Replay Gain"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3893,13 +3908,18 @@ msgstr "Ськід"
 msgid "Reset play counts"
 msgstr "Ськінуць лічыльнікі прайграваньня"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Абмежаваць толькі сымбалямі ASCII"
 
 #: ../bin/src/ui_behavioursettingspage.h:189
 msgid "Resume playback on start"
-msgstr ""
+msgstr "Працягваць прайграваньне пры запуску"
 
 #: internet/groovesharkservice.cpp:756
 msgid "Retrieving Grooveshark My Music songs"
@@ -3919,7 +3939,7 @@ msgstr "Вярнуцца ў Clementine."
 
 #: ../bin/src/ui_equalizer.h:174
 msgid "Right"
-msgstr ""
+msgstr "Правы"
 
 #: ui/equalizer.cpp:127
 msgid "Rock"
@@ -3932,6 +3952,12 @@ msgstr "Запусьцiць"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS проксі"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -3979,11 +4005,11 @@ msgstr "Захаваць профіль"
 
 #: ../bin/src/ui_librarysettingspage.h:193
 msgid "Save ratings in file tags when possible"
-msgstr ""
+msgstr "Захоўваць ацэнкі ў тэгах файлаў, калі магчыма"
 
 #: ../bin/src/ui_librarysettingspage.h:197
 msgid "Save statistics in file tags when possible"
-msgstr ""
+msgstr "Захоўваць статыстыку ў тэгах файлаў, калі магчыма"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
@@ -3991,7 +4017,7 @@ msgstr "Захаваць гэты струмень ў закладцы Інтэ�
 
 #: library/library.cpp:164
 msgid "Saving songs statistics into songs files"
-msgstr ""
+msgstr "Захаваньне статыстыкі песень у файлы"
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4086,11 +4112,11 @@ msgstr "Перамотка назад"
 msgid "Seek forward"
 msgstr "Перамотка наперад"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Крыху пераматаць быгучы трэк"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Пераматаць бягучы трэк на абсалютную пазыцыю"
 
@@ -4130,11 +4156,11 @@ msgstr "Выбраць візуалізацыі..."
 msgid "Serial number"
 msgstr "Сэрыйны нумар"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "URL Сэрвэру"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Дэталі сэрвэру"
 
@@ -4147,7 +4173,7 @@ msgstr "Служба не працуе"
 msgid "Set %1 to \"%2\"..."
 msgstr "Усталяваць %1 у \"%2\"..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Усталяваць гучнасьць у <value> адсоткаў"
 
@@ -4313,17 +4339,17 @@ msgstr "Падобныя выканаўцы"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
-msgstr ""
+msgstr "Памер"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
-msgstr ""
+msgstr "Памер:"
 
 #: ui/equalizer.cpp:129
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Перамясьціць назад у плэйлісьце"
 
@@ -4331,7 +4357,7 @@ msgstr "Перамясьціць назад у плэйлісьце"
 msgid "Skip count"
 msgstr "Прапусьціць падлік"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Перамясьціць наперад ў плэйлісьце"
 
@@ -4431,7 +4457,7 @@ msgstr "Стандартны"
 msgid "Starred"
 msgstr "Ацэненыя"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Запусьціць бягучы плэйліст"
 
@@ -4472,7 +4498,7 @@ msgstr "Спыніць пасьля"
 msgid "Stop after this track"
 msgstr "Спыніць пасьля гэтага трэку"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Спыніць прайграваньне"
 
@@ -4488,7 +4514,7 @@ msgstr "Спынена"
 msgid "Stream"
 msgstr "Струмень"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4506,9 +4532,9 @@ msgstr "Плэйлісты, на якія вы падпісаныя"
 msgid "Subscribers"
 msgstr "Падпісанты"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4625,13 +4651,13 @@ msgstr "Запытаны вамі сайт не існуе!"
 msgid "The site you requested is not an image!"
 msgstr "Запытаная вамі спасылка не зьяўляецца выявай!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Скончыўся пробны пэрыяд сэрвэру Subsonic. Калі ласка заплаціце каб атрымаць ліцэнзыйны ключ. Наведайце subsonic.org для падрабязнасьцяў."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4666,16 +4692,17 @@ msgid ""
 "deleted:"
 msgstr "Падчас выдаленьня некаторых кампазыцый узьніклі праблемы. Наступныя файлы ня могуць быць выдаленыя:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Гэтыя файлы будуць выдаленыя з дыску, вы дакладна жадаеце працягнуць?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Гэтыя файлы будуць выдаленыя з прылады, вы дакладна жадаеце працягнуць?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4775,7 +4802,7 @@ msgstr "Пераключыць стан чаргі"
 msgid "Toggle scrobbling"
 msgstr "Укл/Выкл скроблінг"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Паказаць/Скрыць экраннае апавяшчэньне"
 
@@ -4810,7 +4837,7 @@ msgstr "Трэк"
 
 #: ../bin/src/ui_transcodedialog.h:202 ../bin/src/ui_mainwindow.h:694
 msgid "Transcode Music"
-msgstr "Перакадаваць Музыку"
+msgstr "Перакадаваньне Музыкі"
 
 #: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
@@ -4845,7 +4872,7 @@ msgstr "Выключыць"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URI(s)"
 
@@ -4928,7 +4955,7 @@ msgstr "Абнаўленьне %1%..."
 msgid "Updating library"
 msgstr "Абнаўленьне бібліятэкі"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Выкарыстаньне"
 
@@ -4947,6 +4974,10 @@ msgstr "Выкарыстоўваць Дыстанцыйнае Кіраваньн
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Выкарыстоўваць мэтададзеныя  Replay Gain, калі гэта магчыма"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5016,7 +5047,7 @@ msgstr "Інтэрфэйс"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5173,7 +5204,7 @@ msgstr "Windows Media audio"
 
 #: ../bin/src/ui_albumcovermanager.h:222
 msgid "Without cover:"
-msgstr ""
+msgstr "Бяз вокладкі:"
 
 #: library/libraryview.cpp:530
 msgid ""
@@ -5181,15 +5212,15 @@ msgid ""
 "well?"
 msgstr "Перасунуць іншыя песьні з гэтага альбому ў Розныя Выканаўцы?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ці жадаеце запусьціць паўторнае сканіраваньне?"
 
 #: library/librarysettingspage.cpp:151
 msgid "Write all songs statistics into songs' files"
-msgstr ""
+msgstr "Запісваць усю статыстыку песень ў іх файлы"
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Няправільнае імя ці пароль."
 
@@ -5315,7 +5346,7 @@ msgstr "Вы ня можаце слухаць радыёстанцыю Last.fm, 
 
 #: ../bin/src/ui_networkremotesettingspage.h:186
 msgid "Your IP address:"
-msgstr ""
+msgstr "Вашая IP адрэса:"
 
 #: internet/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
@@ -5478,7 +5509,7 @@ msgstr "спачатку найстарэйшыя"
 msgid "on"
 msgstr "на"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "налады"
 

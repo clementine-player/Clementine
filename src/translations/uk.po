@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-06-01 09:42+0000\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -696,7 +696,7 @@ msgstr "Виникла помилка завантаження бази дани
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Трапилася помилка під час запису метаданих до '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Сталася неочікувана помилка."
 
@@ -713,7 +713,7 @@ msgstr "Злість"
 msgid "Appearance"
 msgstr "Вигляд"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Додати файли/адреси до списку відтворення"
 
@@ -926,7 +926,7 @@ msgstr "Огляд…"
 msgid "Buffer duration"
 msgstr "Місткість буфера"
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Буферизація"
 
@@ -970,7 +970,7 @@ msgstr "Змінити комбінацію клавіш…"
 msgid "Change shuffle mode"
 msgstr "Змінити режим перемішування"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Змінити мову"
 
@@ -1158,7 +1158,7 @@ msgstr "Клубна"
 msgid "Colors"
 msgstr "Кольори"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Список, розділений комами, виду клас:рівень, рівень може бути від 0 до 3"
 
@@ -1240,6 +1240,17 @@ msgstr "З’єднати пристрій"
 msgid "Connecting to Spotify"
 msgstr "З'єднання зі Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr "Сервер відмовив у з’єднанні. Переконайтеся, що адресу сервера вказано правильно. Приклад: http://localhost:4040/"
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr "Вичерпано строк очікування на з’єднання. Переконайтеся, що адресу сервера вказано правильно. Приклад: http://localhost:4040/"
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Консоль"
@@ -1274,7 +1285,7 @@ msgstr "Скопіювати до фонотеки…"
 msgid "Copyright"
 msgstr "Копірайт"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1478,11 +1489,11 @@ msgstr "Днів"
 msgid "De&fault"
 msgstr "Ти&пово"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Зменшити гучність на 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "Зменшити гучність на <value> відсотків"
 
@@ -1516,7 +1527,7 @@ msgid "Delete downloaded data"
 msgstr "Видалити завантажені дані"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Вилучити файли"
 
@@ -1637,7 +1648,7 @@ msgstr "Переривчаста передача"
 msgid "Display options"
 msgstr "Налаштування відображення"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Показувати екранні повідомлення"
 
@@ -1894,17 +1905,17 @@ msgstr "Вся фонотека"
 msgid "Equalizer"
 msgstr "Еквалайзер"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Відповідає --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Відповідає --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Помилка"
 
@@ -2107,7 +2118,7 @@ msgstr "Отримувати автоматично"
 msgid "Fetch completed"
 msgstr "Отримання завершено"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "Отримуємо бібліотеку Subsonic"
 
@@ -2423,6 +2434,10 @@ msgstr "Висока (%1 к/с)"
 msgid "High (1024x1024)"
 msgstr "Висока (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr "Вузол не знайдено. Переконайтеся, що адресу сервера вказано правильно. Приклад: http://localhost:4040/"
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Годин"
@@ -2497,19 +2512,19 @@ msgstr "Показувати обкладинку в повідомлені"
 msgid "Include all songs"
 msgstr "Включити всі композиції"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Несумісна версія протоколу REST Subsonic. Слід оновити клієнтську частину."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Несумісна версія протоколу REST Subsonic. Слід оновити серверну частину."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Збільшити гучність на 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "Збільшити гучність на <value> відсотків"
 
@@ -2746,7 +2761,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Розширене групування фонотеки"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Повідомлення про повторне сканування фонотеки"
 
@@ -2838,7 +2853,7 @@ msgstr "Завантажую дані доріжок"
 msgid "Loading..."
 msgstr "Завантаження…"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Завантажити файли/адреси, замінюючи поточний список відтворення"
 
@@ -2846,7 +2861,7 @@ msgstr "Завантажити файли/адреси, замінюючи по�
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3210,7 +3225,7 @@ msgstr "Без коротких блоків"
 msgid "None"
 msgstr "Немає"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Жодна з вибраних композицій не придатна для копіювання на пристрій"
 
@@ -3387,7 +3402,7 @@ msgstr "Упорядкування файлів"
 msgid "Original tags"
 msgstr "Початкові мітки"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Інші налаштування"
 
@@ -3434,7 +3449,7 @@ msgstr "Вечірка"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3445,7 +3460,7 @@ msgstr "Пароль"
 msgid "Pause"
 msgstr "Призупинити"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Призупинити відтворення"
 
@@ -3489,7 +3504,7 @@ msgstr "Кількість відтворень"
 msgid "Play custom radio..."
 msgstr "Слухати іншу радіостанцію…"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Відтворити, якщо зупинено; призупинити, якщо відтворюється"
 
@@ -3502,7 +3517,7 @@ msgstr "Відтворювати, якщо зараз нічого не відт
 msgid "Play tag radio..."
 msgstr "Відтворювати радіо за міткою…"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Відтворити <n> доріжку в списку відтворення"
 
@@ -3514,7 +3529,7 @@ msgstr "Відтворити/Призупинити"
 msgid "Playback"
 msgstr "Відтворення"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Налаштування програвача"
 
@@ -3528,7 +3543,7 @@ msgstr "Список відтворення"
 msgid "Playlist finished"
 msgstr "Список відтворення завершився"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Налаштування списку відтворення"
 
@@ -3648,7 +3663,7 @@ msgstr "Попередня"
 msgid "Previous track"
 msgstr "Попередня доріжка"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Відобразити дані про версію"
 
@@ -3892,6 +3907,11 @@ msgstr "Скинути"
 msgid "Reset play counts"
 msgstr "Скинути лічильник відтворень"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr "Повторно відтворити композицію або відтворити попередню композицію, якщо було відтворено не більше 8 секунд поточної композиції."
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Обмежитись символами ASCII"
@@ -3931,6 +3951,12 @@ msgstr "Виконати"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS проксі"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr "Помилка під час спроби встановлення з’єднання SSL. Перевірте налаштування сервера. За допомогою наведеного нижче пункту використання SSLv3 можна уникнути деяких проблем."
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4085,11 +4111,11 @@ msgstr "Перемотати назад"
 msgid "Seek forward"
 msgstr "Перемотати вперед"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Трохи перемотати поточну доріжку"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотати поточну доріжку на абсолютну позицію"
 
@@ -4129,11 +4155,11 @@ msgstr "Вибрати візуалізації…"
 msgid "Serial number"
 msgstr "Серійний номер"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "Адреса сервера"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Параметри сервера"
 
@@ -4146,7 +4172,7 @@ msgstr "Служба вимкнена"
 msgid "Set %1 to \"%2\"..."
 msgstr "Встановити %1 до \"%2\"…"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Встановити гучність до <value> відсотків"
 
@@ -4322,7 +4348,7 @@ msgstr "Розмір:"
 msgid "Ska"
 msgstr "Ска"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Перескочити назад в списку композицій"
 
@@ -4330,7 +4356,7 @@ msgstr "Перескочити назад в списку композицій"
 msgid "Skip count"
 msgstr "Кількість пропусків"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Перескочити вперед у списку композицій"
 
@@ -4430,7 +4456,7 @@ msgstr "Типово"
 msgid "Starred"
 msgstr "Оцінені"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Запустити список відтворення, що відтворюється на цей час"
 
@@ -4471,7 +4497,7 @@ msgstr "Зупинити після"
 msgid "Stop after this track"
 msgstr "Зупинити після цієї доріжки"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Зупинити відтворення"
 
@@ -4487,7 +4513,7 @@ msgstr "Зупинено"
 msgid "Stream"
 msgstr "Потік"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4505,7 +4531,7 @@ msgstr "Підписки на списки відтворення"
 msgid "Subscribers"
 msgstr "Передплатники"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4624,13 +4650,13 @@ msgstr "Вказана вами адреса не існує!"
 msgid "The site you requested is not an image!"
 msgstr "Вказана вами адреса не є малюнком!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Час тестування сервера Subsonic завершено. Будь ласка, придбайте ліцензійний ключ. Відвідайте subsonic.org, щоб дізнатися більше."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4665,16 +4691,17 @@ msgid ""
 "deleted:"
 msgstr "Виникли проблеми вилучення деяких композицій.  Не вдалось вилучити такі:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Ці файли будуть вилучені з диска. Ви впевнені? Вилучити їх?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Ці файли будуть вилучені з пристрою. Ви впевнені? Вилучити їх?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr "Ці файли буде остаточно вилучено з диска. Ви справді цього хочете?"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4774,7 +4801,7 @@ msgstr "Перемикнути статус черги"
 msgid "Toggle scrobbling"
 msgstr "Змінити режим скроблінгу"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Змінити режим видимості приємних OSD"
 
@@ -4844,7 +4871,7 @@ msgstr "Вимкнути"
 msgid "URI"
 msgstr "Адреса"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "Адреса(и)"
 
@@ -4927,7 +4954,7 @@ msgstr "Оновлення %1%…"
 msgid "Updating library"
 msgstr "Оновлення фонотеки"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Використання"
 
@@ -4946,6 +4973,10 @@ msgstr "Використовувати дистанційне керування
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Використовувати метадані Replay Gain, якщо такі є"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr "Використовувати SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5015,7 +5046,7 @@ msgstr "Інтерфейс користувача"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5180,7 +5211,7 @@ msgid ""
 "well?"
 msgstr "Хочете пересунути всі ініші композиції цього альбому до розділу «Різні виконавці»?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Бажаєте зараз виконати повторне сканування фонотеки?"
 
@@ -5188,7 +5219,7 @@ msgstr "Бажаєте зараз виконати повторне сканув
 msgid "Write all songs statistics into songs' files"
 msgstr "Записати статичні дані щодо всіх композицій до файлів композицій"
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Помилкове ім’я користувача або пароль."
 
@@ -5477,7 +5508,7 @@ msgstr "спочатку найстаріші"
 msgid "on"
 msgstr "на"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "налаштування"
 

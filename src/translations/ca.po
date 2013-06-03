@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-21 11:09+0000\n"
+"PO-Revision-Date: 2013-06-02 06:21+0000\n"
 "Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -316,7 +316,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "Una llista de reproducció intel·ligent és una llista dinàmica de cançons que es troben a la seva biblioteca. Existeixen diferents tipus de llistes de reproducció intel·ligent que ofereixen diferents formes de seleccionar cançons."
+msgstr "Una llista de reproducció intel·ligent és una llista dinàmica de cançons que es troben a la vostra col·lecció. Existeixen diferents tipus de llistes de reproducció intel·ligent que ofereixen formes diferents de seleccionar cançons."
 
 #: smartplaylists/querywizardplugin.cpp:153
 msgid ""
@@ -696,7 +696,7 @@ msgstr "S’ha produït un error en carregar la base de dades d’iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "S’ha produït un error en escriure les metadades en «%1»"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "S’ha produït un error no especificat."
 
@@ -713,7 +713,7 @@ msgstr "Enfadat"
 msgid "Appearance"
 msgstr "Aparença"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Afegeix fitxers/URL a la llista de reproducció"
 
@@ -926,7 +926,7 @@ msgstr "Explora..."
 msgid "Buffer duration"
 msgstr "Durada de la memòria intermèdia"
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Emplenant la memòria intermèdia"
 
@@ -970,7 +970,7 @@ msgstr "Canvia el drecera…"
 msgid "Change shuffle mode"
 msgstr "Canvia el mode aleatori"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Canvia l’idioma"
 
@@ -1158,7 +1158,7 @@ msgstr "Club"
 msgid "Colors"
 msgstr "Colors"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Llista separada per comes de classe:nivell, el nivell és 0-3"
 
@@ -1240,6 +1240,17 @@ msgstr "Connecta el dispositiu"
 msgid "Connecting to Spotify"
 msgstr "S’està connectant amb Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr "El servidor va rebutjar la connexió, comproveu l’URL del servidor. Exemple: http://localhost:4040/"
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr "S’ha esgotat el temps d’espera de la connexió, comproveu l’URL del servidor. Exemple: http://localhost:4040/"
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Terminal"
@@ -1274,7 +1285,7 @@ msgstr "Còpia a la col·lecció…"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1285,21 +1296,21 @@ msgstr "No va ser possible la connexió a Subsonic, comproveu la URL del servido
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr "No s’ha pogut crear l’element «%1» de GStreamer. Comproveu que teniu tots els complements requerits de GStramer instal·lats"
+msgstr "No s’ha pogut crear l’element «%1» de GStreamer. Comproveu que teniu tots els connectors requerits de GStramer instal·lats"
 
 #: transcoder/transcoder.cpp:432
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr "No s’ha pogut trobar un muxer per %1. Comproveu que teniu els complements adequats de GStreamer instal·lats"
+msgstr "No s’ha pogut trobar un muxer per %1. Comproveu que teniu els connectors adequats de GStreamer instal·lats"
 
 #: transcoder/transcoder.cpp:426
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr "No s’ha pogut trobar un codificador per %1. Comproveu que teniu els complements adequats de GStreamer instal·lats"
+msgstr "No s’ha pogut trobar un codificador per %1. Comproveu que teniu els connectors adequats de GStreamer instal·lats"
 
 #: internet/lastfmservice.cpp:875
 msgid "Couldn't load the last.fm radio station"
@@ -1478,11 +1489,11 @@ msgstr "Dies"
 msgid "De&fault"
 msgstr "O&missió"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Redueix el volum un 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "Redueix el volum <value> per cent"
 
@@ -1516,7 +1527,7 @@ msgid "Delete downloaded data"
 msgstr "Esborra les dades descarregades"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Suprimeix els fitxers"
 
@@ -1637,7 +1648,7 @@ msgstr "Transmissió discontínua"
 msgid "Display options"
 msgstr "Opcions de visualització"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Mostrar la indicació-a-pantalla"
 
@@ -1876,11 +1887,11 @@ msgstr "Introduïu els termes de la cerca"
 
 #: ../bin/src/ui_addstreamdialog.h:114
 msgid "Enter the URL of an internet radio stream:"
-msgstr "Introduïu la URL d'un fluxe de radio d'Internet:"
+msgstr "Introduïu l’URL d’un flux de ràdio per Internet:"
 
 #: playlist/playlistlistcontainer.cpp:171
 msgid "Enter the name of the folder"
-msgstr "Escriviu el nom de la carpeta"
+msgstr "Introduïu el nom de la carpeta"
 
 #: ../bin/src/ui_networkremotesettingspage.h:184
 msgid "Enter this IP in the App to connect to Clementine."
@@ -1894,17 +1905,17 @@ msgstr "Tota la col·lecció"
 msgid "Equalizer"
 msgstr "Equalitzador"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalent a --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent a --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Error"
 
@@ -2107,9 +2118,9 @@ msgstr "Recull automàticament"
 msgid "Fetch completed"
 msgstr "S'han acabat d'obtenir les dades"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
-msgstr "S’està obtenint la biblioteca de Subsonic"
+msgstr "S’està recollint la col·lecció de l’Subsonic"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
@@ -2266,7 +2277,7 @@ msgstr "Aguts complets"
 
 #: ../bin/src/ui_playbacksettingspage.h:319
 msgid "GStreamer audio engine"
-msgstr "Motor d'àudio GStreamer"
+msgstr "Motor d’àudio GStreamer"
 
 #: ui/settingsdialog.cpp:133
 msgid "General"
@@ -2423,6 +2434,10 @@ msgstr "Alta (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Alta (1024 × 1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr "No s’ha trobat l’amfitrió, comproveu l’URL del servidor. Exemple: http://localhost:4040/"
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Hores"
@@ -2497,19 +2512,19 @@ msgstr "Incloure la caràtula a la notificació"
 msgid "Include all songs"
 msgstr "Inclou totes les cançons"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "La versió del protocol REST de Subsonic és incompatible. El client ha d’actualitzar-se."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "La versió del protocol REST de Subsonic és incompatible. El servidor ha d’actualitzar-se."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Incrementa el volum un 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "Augmenta el volum <value> per cent"
 
@@ -2744,15 +2759,15 @@ msgstr "Col·lecció"
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
-msgstr "Agrupació avançada de la Biblioteca"
+msgstr "Agrupació avançada de la col·lecció"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
-msgstr "Avís de reescaneig de la biblioteca"
+msgstr "Avís de reescaneig de la col·lecció"
 
 #: smartplaylists/querywizardplugin.cpp:86
 msgid "Library search"
-msgstr "Cerca a la biblioteca"
+msgstr "Cerca a la col·lecció"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
@@ -2838,7 +2853,7 @@ msgstr "S’està carregant la informació de les pistes"
 msgid "Loading..."
 msgstr "S’està carregant…"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carregar fitxers/URLs, substituïnt l'actual llista de reproducció"
 
@@ -2846,7 +2861,7 @@ msgstr "Carregar fitxers/URLs, substituïnt l'actual llista de reproducció"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2998,7 +3013,7 @@ msgstr "Model"
 
 #: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
-msgstr "Monitoritza els canvis en la biblioteca"
+msgstr "Monitoritza els canvis a la col·lecció"
 
 #: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Mono playback"
@@ -3199,7 +3214,7 @@ msgstr "No utilitzis blocs llargs"
 #: playlist/playlistcontainer.cpp:366
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "No s'ha trobat coincidencies. Netejeu el quadre de cerca per mostrar la llista de reproducció completa de nou."
+msgstr "No s’han trobat coincidències. Netegeu el quadre de cerca per mostrar de nou la llista de reproducció completa."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -3210,7 +3225,7 @@ msgstr "No utilitzis blocs curs"
 msgid "None"
 msgstr "Cap"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Cap de les cançons seleccionades són adequades per copiar-les a un dispositiu"
 
@@ -3387,7 +3402,7 @@ msgstr "Organitzant fitxers"
 msgid "Original tags"
 msgstr "Etiquetes originals"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Altres opcions"
 
@@ -3434,7 +3449,7 @@ msgstr "Festa"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3445,7 +3460,7 @@ msgstr "Contrasenya"
 msgid "Pause"
 msgstr "Pausa"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Pausa la reproducció"
 
@@ -3464,7 +3479,7 @@ msgstr "Píxel"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
-msgstr "Barra lateral plana"
+msgstr "Barra lateral senzilla"
 
 #: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:486 ui/mainwindow.cpp:818
 #: ui/mainwindow.cpp:837 ui/mainwindow.cpp:1285 ui/qtsystemtrayicon.cpp:166
@@ -3489,7 +3504,7 @@ msgstr "Comptador de reproduccions"
 msgid "Play custom radio..."
 msgstr "Reproducció de ràdio personalitzada..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Reprodueix si esta parat, pausa si esta reproduïnt"
 
@@ -3502,7 +3517,7 @@ msgstr "Reprodueix si encara no hi ha res reproduint-se"
 msgid "Play tag radio..."
 msgstr "Reproduix la radio de l'etiqueta..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Reprodueix la <n>a cançó de la llista de reproducció"
 
@@ -3514,7 +3529,7 @@ msgstr "Reprodueix/Pausa"
 msgid "Playback"
 msgstr "Reproducció"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Opcions del reproductor"
 
@@ -3528,7 +3543,7 @@ msgstr "Llista de reproducció"
 msgid "Playlist finished"
 msgstr "Llista de reproducció finalitzada"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Opcions de la llista de reproducció"
 
@@ -3648,7 +3663,7 @@ msgstr "Anterior"
 msgid "Previous track"
 msgstr "Pista anterior"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Mostra la informació de la versió"
 
@@ -3688,12 +3703,12 @@ msgstr "Gestor de la cua"
 
 #: ui/mainwindow.cpp:1363
 msgid "Queue selected tracks"
-msgstr "Ficar a la cua les pistes seleccionades"
+msgstr "Afegeix les pistes seleccionades a la cua"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1361
 msgid "Queue track"
-msgstr "Ficar a la cua la pista"
+msgstr "Afegeix la pista a la cua"
 
 #: ../bin/src/ui_playbacksettingspage.h:314
 msgid "Radio (equal loudness for all tracks)"
@@ -3892,6 +3907,11 @@ msgstr "Posa a zero"
 msgid "Reset play counts"
 msgstr "Posa a zero el comptador de reproduccions"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr "Reinicia la pista, o canvia a l’anterior si no han transcorregut 8 segons des de l’inici."
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Limitar als caràcters ASCII"
@@ -3931,6 +3951,12 @@ msgstr "Executa"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "Proxy SOCKS"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr "S’ha produït un error del protocol d’enllaç SSL, comproveu la configuració del servidor. El paràmetre de SSLv3 podria solucionar alguns errors temporalment."
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4085,11 +4111,11 @@ msgstr "Cerca enrere"
 msgid "Seek forward"
 msgstr "Cerca cap endavant"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Mou-te per la pista en reproducció a una posició relativa"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Mou-te per la pista en reproducció a una posició absoluta"
 
@@ -4129,11 +4155,11 @@ msgstr "Seleccioneu visualitzacions..."
 msgid "Serial number"
 msgstr "Número de sèrie"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "URL del servidor"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Detalls del servidor"
 
@@ -4146,7 +4172,7 @@ msgstr "Servei fora de línia"
 msgid "Set %1 to \"%2\"..."
 msgstr "Estableix %1 a «%2»…"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Estableix el volum al <value> percent"
 
@@ -4322,7 +4348,7 @@ msgstr "Mida:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Salta enrere en la llista de reproducció"
 
@@ -4330,7 +4356,7 @@ msgstr "Salta enrere en la llista de reproducció"
 msgid "Skip count"
 msgstr "Comptador d’omissions"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Salta endavant en la llista de reproducció"
 
@@ -4430,7 +4456,7 @@ msgstr "Estàndard"
 msgid "Starred"
 msgstr "Destacat"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Inicia la llista de reproducció que s'està reproduint"
 
@@ -4471,7 +4497,7 @@ msgstr "Atura desprès"
 msgid "Stop after this track"
 msgstr "Atura després d’aquesta pista"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Atura la reproducció"
 
@@ -4487,7 +4513,7 @@ msgstr "Aturat"
 msgid "Stream"
 msgstr "Flux de dades"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4505,7 +4531,7 @@ msgstr "Llestes de reproducció subscrites"
 msgid "Subscribers"
 msgstr "Subscriptors"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4605,12 +4631,12 @@ msgstr "La caràtula de l’àlbum de la cançó en reproducció"
 #: internet/magnatunedownloaddialog.cpp:90
 #, qt-format
 msgid "The directory %1 is not valid"
-msgstr "El directori %1 bo es vàlid"
+msgstr "El directori %1 no es vàlid"
 
 #: playlist/playlistmanager.cpp:161 playlist/playlistmanager.cpp:179
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "La llista de reproducció '%1' esta buida o no es pot carregar."
+msgstr "La llista de reproducció «%1» està buida o no s’ha pogut carregar."
 
 #: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
@@ -4624,13 +4650,13 @@ msgstr "L’adreça que heu sol·licitat no existeix."
 msgid "The site you requested is not an image!"
 msgstr "L’adreça que heu sol·licitat no conté cap imatge."
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Ha acabat el període de prova del servidor de Subsonic. Fareu una donació per obtenir una clau de llicència. Visiteu subsonic.org para més detalls."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4663,12 +4689,7 @@ msgstr "Hi ha hagut problemes copiant algunes cançons. Els següents fitxers no
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr "Hi ha hagut problemes borrant algunes cançons. Els següents fitxers no s'han pogut borrar:"
-
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "S’eliminaran aquests fitxers del disc, esteu segur que voleu continuar?"
+msgstr "S’han produït problemes en suprimir algunes cançons. No s’han pogut suprimir els fitxers següents:"
 
 #: devices/deviceview.cpp:389
 msgid ""
@@ -4676,9 +4697,15 @@ msgid ""
 "continue?"
 msgstr "S’eliminaran aquests fitxers del dispositiu, esteu segur que voleu continuar?"
 
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr "S’eliminaran aquests fitxers del disc permanentment. Esteu segur que voleu continuar?"
+
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
-msgstr "S'escanejaran aquestes carpetes cercant-hi música per confeccionar la vostra biblioteca"
+msgstr "S’analitzaran aquestes carpetes a la recerca de música per confeccionar la vostra col·lecció"
 
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid ""
@@ -4768,13 +4795,13 @@ msgstr "Commuta a pantalla completa"
 
 #: ui/mainwindow.cpp:1365
 msgid "Toggle queue status"
-msgstr "Intercanviar estat de la cua"
+msgstr "Commuta l’estat de la cua"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "Toggle scrobbling"
 msgstr "Commuta el scrobbling"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Canvia la visibilitat del OSD estètic"
 
@@ -4844,7 +4871,7 @@ msgstr "Atura"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4899,7 +4926,7 @@ msgstr "Actualitza tots els podcasts"
 
 #: ../bin/src/ui_mainwindow.h:706
 msgid "Update changed library folders"
-msgstr "Actualitza les carpetes de la biblioteca amb canvis"
+msgstr "Actualitza les carpetes de la col·lecció amb canvis"
 
 #: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
@@ -4927,7 +4954,7 @@ msgstr "Actualitzant %1%..."
 msgid "Updating library"
 msgstr "S’està actualitzant la col·lecció"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Forma d'ús"
 
@@ -4946,6 +4973,10 @@ msgstr "Utilitza un control remot"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Utilitza les metadades Replay Gain si estan disponibles"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr "Utilitza SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5015,7 +5046,7 @@ msgstr "Intefície d'usuari"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5180,7 +5211,7 @@ msgid ""
 "well?"
 msgstr "Voleu moure també les altres cançons d’aquest àlbum a Diversos artistes?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Voleu fer de nou un escaneig complet ara?"
 
@@ -5188,7 +5219,7 @@ msgstr "Voleu fer de nou un escaneig complet ara?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Escriu totes les estadístiques en els fitxers de les cançons"
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Nom d’usuari o contrasenya incorrectes."
 
@@ -5477,7 +5508,7 @@ msgstr "els més antics primer"
 msgid "on"
 msgstr "a"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "opcions"
 

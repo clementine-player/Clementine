@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -698,7 +698,7 @@ msgstr "مشکلی هنگام  فراخوانی پایگاه داده‌ی آی�
 msgid "An error occurred writing metadata to '%1'"
 msgstr "مشکلی در نوشتن ابرداده در '%1' پیش آمد"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "خطای ناشناخته‌ای پدید آمد."
 
@@ -715,7 +715,7 @@ msgstr "خشمگین"
 msgid "Appearance"
 msgstr "شمایل"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "پیوست پرونده/نشانی اینترنتی به لیست‌پخش"
 
@@ -928,7 +928,7 @@ msgstr "مرور..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "میان‌گیری"
 
@@ -972,7 +972,7 @@ msgstr "تغییر میانبر..."
 msgid "Change shuffle mode"
 msgstr "تغییر سبک درهم"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "تغییر زبان"
 
@@ -1160,7 +1160,7 @@ msgstr "باشگاه"
 msgid "Colors"
 msgstr "رنگ"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لیست مجزا بوسیله‌ی ویرگول از کلاس:طبقه، طبقه ۰-۳ است"
 
@@ -1242,6 +1242,17 @@ msgstr "اتصال دستگاه"
 msgid "Connecting to Spotify"
 msgstr "اتصال به اسپاتیفای"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "پیشانه"
@@ -1276,7 +1287,7 @@ msgstr "کپی‌کردن در کتابخانه..."
 msgid "Copyright"
 msgstr "کپی‌رایت"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1480,11 +1491,11 @@ msgstr "روز"
 msgid "De&fault"
 msgstr "پیش‌&فرض"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "کاهش صدا ۴٪"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "صدا را <value> درصد کاهش بده"
 
@@ -1518,7 +1529,7 @@ msgid "Delete downloaded data"
 msgstr "پاک‌کردن دانستنی‌های بارگیری شده"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
 
@@ -1639,7 +1650,7 @@ msgstr "ارسال ناپیوسته"
 msgid "Display options"
 msgstr "گزینه‌های نمایش"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "نمایش نمایش پرده‌ای"
 
@@ -1896,17 +1907,17 @@ msgstr "همه‌ی مجموعه"
 msgid "Equalizer"
 msgstr "برابرساز"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "برابر است با --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "برابر است با --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "خطا"
 
@@ -2109,7 +2120,7 @@ msgstr "واکشی خودکار"
 msgid "Fetch completed"
 msgstr "واکشی کامل شد"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "واکشی کتابخانه‌ی ساب‌سونیک"
 
@@ -2425,6 +2436,10 @@ msgstr "زیاد (%1 ف.د.ث)"
 msgid "High (1024x1024)"
 msgstr "زیاد (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "ساعت"
@@ -2499,19 +2514,19 @@ msgstr "آلبوم هنری را در آگاه‌ساز قرار بده"
 msgid "Include all songs"
 msgstr "دربر داشتن همه‌ی آهنگها"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "ویرایش پروتکل REST ناسازگار است. مشتری باید پیشرفت کند. "
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "ویرایش پروتکل REST ناسازگار است. سرور باید پیشرفت کند."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "بلندی صدا را ٪۴ بیفزا"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "افزایش بلندی <value> درصد"
 
@@ -2748,7 +2763,7 @@ msgstr "کتابخانه"
 msgid "Library advanced grouping"
 msgstr "گروه‌بندی پیشرفته‌ی کتابخانه"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "آگاه‌سازی پویش دوباره‌ی کتابخانه"
 
@@ -2840,7 +2855,7 @@ msgstr "بارگیری اطلاعات ترک‌ها"
 msgid "Loading..."
 msgstr "در حال بارگیری..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "بارگیری پرونده‌ها/نشانی‌ها، جانشانی دوباره‌ی لیست‌پخش جاری"
 
@@ -2848,7 +2863,7 @@ msgstr "بارگیری پرونده‌ها/نشانی‌ها، جانشانی د
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3212,7 +3227,7 @@ msgstr "بدون بلوک‌های کوتاه"
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های برگزیده مناسب کپی کردن در دستگاه نیستند"
 
@@ -3389,7 +3404,7 @@ msgstr "پرونده‌های سازماندهی شونده"
 msgid "Original tags"
 msgstr "برچسب‌های اصلی"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "گزینه‌های دیگر"
 
@@ -3436,7 +3451,7 @@ msgstr "مهمانی"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3447,7 +3462,7 @@ msgstr "گذرواژه"
 msgid "Pause"
 msgstr "درنگ"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "درنگ پخش"
 
@@ -3491,7 +3506,7 @@ msgstr "شمار پخش"
 msgid "Play custom radio..."
 msgstr "پخش رادیوی دلخواه..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "پخش در صورت ایست، درنگ در صورت پخش"
 
@@ -3504,7 +3519,7 @@ msgstr "آغاز به پخش می‌کند اگر چیزی در حال پخش ن
 msgid "Play tag radio..."
 msgstr "پخش رادیوی برچسب..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "ترک <n>-ام در لیست‌پخش را پخش کن"
 
@@ -3516,7 +3531,7 @@ msgstr "پخش/درنگ"
 msgid "Playback"
 msgstr "بازپخش"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "گزینه‌های پخش‌کننده"
 
@@ -3530,7 +3545,7 @@ msgstr "لیست‌پخش"
 msgid "Playlist finished"
 msgstr "لیست‌پخش پایان یافت"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "گزینه‌های لیست‌پخش"
 
@@ -3650,7 +3665,7 @@ msgstr "پیشین"
 msgid "Previous track"
 msgstr "ترک پیشین"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "اطلاعات ویرایش را چاپ کن"
 
@@ -3894,6 +3909,11 @@ msgstr "بازنشانی"
 msgid "Reset play counts"
 msgstr "بازنشانی شمار پخش"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "محدود به حروف اَسکی کن"
@@ -3933,6 +3953,12 @@ msgstr "انجام"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "پراکسی ساکس"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4087,11 +4113,11 @@ msgstr "جستجوی پس‌گرد"
 msgid "Seek forward"
 msgstr "جستجوی پیش‌گرد"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "جستجوی ترک در حال پخش بوسیله‌ی مقداری نسبی"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "جستجوی ترک در حال پخش به یک جایگاه ویژه"
 
@@ -4131,11 +4157,11 @@ msgstr "گزینش فرتورسازها..."
 msgid "Serial number"
 msgstr "شماره سریال"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "نشانی سرور"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "جزئیات سرور"
 
@@ -4148,7 +4174,7 @@ msgstr "سرویس برون‌خط"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 را برابر \"%2‌\"قرار بده..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "بلندی صدا را برابر <value> درصد قرار بده"
 
@@ -4324,7 +4350,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "پرش پس در لیست‌پخش"
 
@@ -4332,7 +4358,7 @@ msgstr "پرش پس در لیست‌پخش"
 msgid "Skip count"
 msgstr "پرش شمار"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "پرش پیش در لیست‌پخش"
 
@@ -4432,7 +4458,7 @@ msgstr "استاندارد"
 msgid "Starred"
 msgstr "ستاره‌دار"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "شروع لیست‌پخش در حال پخش"
 
@@ -4473,7 +4499,7 @@ msgstr "ایست پس از"
 msgid "Stop after this track"
 msgstr "ایست پس از این آهنگ"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "ایست پخش"
 
@@ -4489,7 +4515,7 @@ msgstr "ایست‌شده"
 msgid "Stream"
 msgstr "جریان"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4507,7 +4533,7 @@ msgstr "لیست‌پخش‌های عضو شده"
 msgid "Subscribers"
 msgstr "هموندی‌ها"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "ساب‌سونیک"
 
@@ -4626,13 +4652,13 @@ msgstr "پایگاه درخواستی وجود ندارد!"
 msgid "The site you requested is not an image!"
 msgstr "پایگاه درخواستی فرتور نیست!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "زمان آزمایشی سرور ساب‌سونیک پایان یافته است. خواهش می‌کنیم هزینه‌ای را کمک کنید تا کلید پروانه را دریافت کنید. برای راهنمایی انجام کار تارنمای subsonic.org را ببینید."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4667,16 +4693,17 @@ msgid ""
 "deleted:"
 msgstr "مشکلی در پاک کردن تعدادی از آهنگ‌ها وجود داشت. پرونده‌های زیر پاک نشدند:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "این پرونده‌ها از دیسک پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "این پرونده‌ها از دستگاه پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4776,7 +4803,7 @@ msgstr "تبدیل به وضعیت صف"
 msgid "Toggle scrobbling"
 msgstr "تبدیل به وارانی"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "تبدیل به پدیداری برای نمایش‌برصفحه‌ی زیبا"
 
@@ -4846,7 +4873,7 @@ msgstr "خاموش"
 msgid "URI"
 msgstr "نشانی"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "نشانی"
 
@@ -4929,7 +4956,7 @@ msgstr "به‌روز رسانی %1%..."
 msgid "Updating library"
 msgstr "به‌روز رسانی کتابخانه"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "کاربرد"
 
@@ -4948,6 +4975,10 @@ msgstr "استفاده از کنترل از راه دور"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "در صورت وجود، از ابرداده‌ی  Replay Gain استفاده کن"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5017,7 +5048,7 @@ msgstr "رابط کاربری"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5182,7 +5213,7 @@ msgid ""
 "well?"
 msgstr "آیا می‌خواهید آهنگ‌های دیگر در این آلبوم را به «هنرمندان گوناگون» تراببرید؟"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
 
@@ -5190,7 +5221,7 @@ msgstr "آیا مایل هستید که الان بازبینی کامل انج�
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "شناسه و گذرواژه‌ی نادرست"
 
@@ -5479,7 +5510,7 @@ msgstr "ابتدا قدیمی‌ترین"
 msgid "on"
 msgstr "در"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "گزینه‌ها"
 

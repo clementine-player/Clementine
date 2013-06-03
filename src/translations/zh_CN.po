@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -699,7 +699,7 @@ msgstr "加载 iTunes 数据库时出错"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "向 %1 写入元数据时出错"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr ""
 
@@ -716,7 +716,7 @@ msgstr "愤怒"
 msgid "Appearance"
 msgstr "外观"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "添加文件/URL 到播放列表"
 
@@ -929,7 +929,7 @@ msgstr "浏览..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "缓冲中"
 
@@ -973,7 +973,7 @@ msgstr "更改快捷键..."
 msgid "Change shuffle mode"
 msgstr "更改乱序模式"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "更改语言"
 
@@ -1161,7 +1161,7 @@ msgstr "俱乐部"
 msgid "Colors"
 msgstr "颜色"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 
@@ -1243,6 +1243,17 @@ msgstr "连接设备"
 msgid "Connecting to Spotify"
 msgstr "连接Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "终端"
@@ -1277,7 +1288,7 @@ msgstr "复制到媒体库..."
 msgid "Copyright"
 msgstr "版权所有"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1481,11 +1492,11 @@ msgstr "天"
 msgid "De&fault"
 msgstr "默认(&F)"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "音量减少百分之四"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1519,7 +1530,7 @@ msgid "Delete downloaded data"
 msgstr "删除已下载的数据"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "删除文件"
 
@@ -1640,7 +1651,7 @@ msgstr "断续传输"
 msgid "Display options"
 msgstr "显示选项"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "显示屏幕显示"
 
@@ -1897,17 +1908,17 @@ msgstr "整个集合"
 msgid "Equalizer"
 msgstr "均衡器"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr ""
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "错误"
 
@@ -2110,7 +2121,7 @@ msgstr "自动获取"
 msgid "Fetch completed"
 msgstr "读取完毕"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2426,6 +2437,10 @@ msgstr "高(%1 fps)"
 msgid "High (1024x1024)"
 msgstr "高(1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "小时"
@@ -2500,19 +2515,19 @@ msgstr "在提示中中加入专辑封面"
 msgid "Include all songs"
 msgstr "包含所有的歌曲"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "以 4% 为单位增大音量"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2749,7 +2764,7 @@ msgstr "媒体库"
 msgid "Library advanced grouping"
 msgstr "媒体库高级分组"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "重新扫描媒体库提示"
 
@@ -2841,7 +2856,7 @@ msgstr "加载音轨信息"
 msgid "Loading..."
 msgstr "正在载入..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "载入文件或URL，替换当前播放列表"
 
@@ -2849,7 +2864,7 @@ msgstr "载入文件或URL，替换当前播放列表"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3213,7 +3228,7 @@ msgstr ""
 msgid "None"
 msgstr "无"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "已选择的曲目均不适合复制到设备"
 
@@ -3390,7 +3405,7 @@ msgstr "组织文件"
 msgid "Original tags"
 msgstr "原始标签"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "其它选项"
 
@@ -3437,7 +3452,7 @@ msgstr "晚会"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3448,7 +3463,7 @@ msgstr "密码"
 msgid "Pause"
 msgstr "暂停"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "暂停播放"
 
@@ -3492,7 +3507,7 @@ msgstr "播放计数"
 msgid "Play custom radio..."
 msgstr "播放自定义广播..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "若停止则播放，若播放则停止"
 
@@ -3505,7 +3520,7 @@ msgstr "如无歌曲播放则自动播放添加的歌曲"
 msgid "Play tag radio..."
 msgstr "播放标签电台..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "播放列表中的第<n>首"
 
@@ -3517,7 +3532,7 @@ msgstr "播放/暂停"
 msgid "Playback"
 msgstr "播放"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "播放器选项"
 
@@ -3531,7 +3546,7 @@ msgstr "播放列表"
 msgid "Playlist finished"
 msgstr "已完成播放列表"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "播放列表选项"
 
@@ -3651,7 +3666,7 @@ msgstr "上一首"
 msgid "Previous track"
 msgstr "上一音轨"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "输出版本信息"
 
@@ -3895,6 +3910,11 @@ msgstr "重置"
 msgid "Reset play counts"
 msgstr "重置播放计数"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "仅使用 ASCII 字符"
@@ -3934,6 +3954,12 @@ msgstr "运行"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS 代理"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4088,11 +4114,11 @@ msgstr "快退"
 msgid "Seek forward"
 msgstr "快进"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr ""
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "在指定位置寻找目前正在播放的音轨"
 
@@ -4132,11 +4158,11 @@ msgstr "选择视觉效果..."
 msgid "Serial number"
 msgstr "序列号"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr ""
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr ""
 
@@ -4149,7 +4175,7 @@ msgstr "服务离线"
 msgid "Set %1 to \"%2\"..."
 msgstr "将 %1 设置为 %2..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "设置音量为 <value>%"
 
@@ -4325,7 +4351,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "在播放列表中后退"
 
@@ -4333,7 +4359,7 @@ msgstr "在播放列表中后退"
 msgid "Skip count"
 msgstr "跳过计数"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "在播放列表中前进"
 
@@ -4433,7 +4459,7 @@ msgstr "标准"
 msgid "Starred"
 msgstr "用星号标记"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "开始播放当前播放列表"
 
@@ -4474,7 +4500,7 @@ msgstr "后停止"
 msgid "Stop after this track"
 msgstr "在此音轨后停止"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "停止播放"
 
@@ -4490,7 +4516,7 @@ msgstr "已停止"
 msgid "Stream"
 msgstr "流媒体"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4508,7 +4534,7 @@ msgstr "订阅的播放列表"
 msgid "Subscribers"
 msgstr "订阅"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr ""
 
@@ -4627,13 +4653,13 @@ msgstr "请求的站点不存在!"
 msgid "The site you requested is not an image!"
 msgstr "您请求的站点并不是一个图片。"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4668,16 +4694,17 @@ msgid ""
 "deleted:"
 msgstr "删除歌曲出错.以下歌曲无法删除:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "将从硬盘中删除这些文件.确定删除吗?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "将从设备中删除这些文件.确定删除吗?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4777,7 +4804,7 @@ msgstr "切换队列状态"
 msgid "Toggle scrobbling"
 msgstr "切换歌曲记录"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
@@ -4847,7 +4874,7 @@ msgstr "关闭"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL"
 
@@ -4930,7 +4957,7 @@ msgstr "正在更新 %1%..."
 msgid "Updating library"
 msgstr "正在更新媒体库"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "用法"
 
@@ -4949,6 +4976,10 @@ msgstr ""
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "使用播放增益元数据(如果可用)"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5018,7 +5049,7 @@ msgstr "用户界面"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5183,7 +5214,7 @@ msgid ""
 "well?"
 msgstr "您想要把此专辑的其它歌曲移动到 群星 ？"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "您要立即做个全部重新扫描？"
 
@@ -5191,7 +5222,7 @@ msgstr "您要立即做个全部重新扫描？"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr ""
 
@@ -5480,7 +5511,7 @@ msgstr "最老优先"
 msgid "on"
 msgstr ""
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "选项"
 

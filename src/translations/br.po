@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Breton (http://www.transifex.com/projects/p/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -697,7 +697,7 @@ msgstr "Ur gudenn a zo savet en ur c'hargañ stlennvon iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ur gudenn a zo savet e-pad enskrivadur ar metaroadennoù e-barzh '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Ur gudenn dianav a zo bet."
 
@@ -714,7 +714,7 @@ msgstr "Fuloret"
 msgid "Appearance"
 msgstr "Neuz"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Ouzhpennañ restroù pe liammoù internet d'ar roll seniñ"
 
@@ -927,7 +927,7 @@ msgstr "Furchal..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "O lakaat er memor skurzer"
 
@@ -971,7 +971,7 @@ msgstr "Kemmañ ar berradenn"
 msgid "Change shuffle mode"
 msgstr "Cheñch an doare meskañ"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Kemmañ ar yezh"
 
@@ -1159,7 +1159,7 @@ msgstr "Klub"
 msgid "Colors"
 msgstr "Livioù"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listenn dispartiet gant ur virgulenn eus klas:live, live etre 0 ha 3"
 
@@ -1241,6 +1241,17 @@ msgstr "An drobarzhell a zo o kennaskañ"
 msgid "Connecting to Spotify"
 msgstr "O kennaskañ da Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Letrin"
@@ -1275,7 +1286,7 @@ msgstr "Eilañ er sonaoueg..."
 msgid "Copyright"
 msgstr "Gwirioù arzour"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1479,11 +1490,11 @@ msgstr "Deizioù"
 msgid "De&fault"
 msgstr "Dre &ziouer"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Digreskiñ an ampled eus 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "Digreskiñ an ampled eus <value> dre gant."
 
@@ -1517,7 +1528,7 @@ msgid "Delete downloaded data"
 msgstr "Diverkañ ar roadennoù pellgarget"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Diverkañ restroù"
 
@@ -1638,7 +1649,7 @@ msgstr "Treuzkas digendalc'hus"
 msgid "Display options"
 msgstr "Dibarzhioù ar skrammañ"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Diskouez ar roll war ar skramm"
 
@@ -1895,17 +1906,17 @@ msgstr "Dastumadeg hollek"
 msgid "Equalizer"
 msgstr "Kevataler"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Kenkoulz a --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Kenkoulz a --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Fazi"
 
@@ -2108,7 +2119,7 @@ msgstr "Kerc'hat ent emgefreek"
 msgid "Fetch completed"
 msgstr "Pellgargadur echu"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "O tapout sonaoueg Subsonic"
 
@@ -2424,6 +2435,10 @@ msgstr "Uhel (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Uhel (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Eurioù"
@@ -2498,19 +2513,19 @@ msgstr "Diskouez an albom er gemenadenn"
 msgid "Include all songs"
 msgstr "Ouzhpennañ an holl tonioù"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Handelv protokol REST Subsonic digenglotus. Hizivait an arval."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Handelv protokol REST Subsonic digenglotus. Ret eo d'ar servijer hizivaat."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Kreskiñ an ampled eus 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "Kreskiñ an ampled eus <value> dre gant"
 
@@ -2747,7 +2762,7 @@ msgstr "Sonaoueg"
 msgid "Library advanced grouping"
 msgstr "Strolladur ar sonaoueg kemplesoc'h"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Kemenn hizivadur ar sonaoueg"
 
@@ -2839,7 +2854,7 @@ msgstr "O kargañ titouroù ar roud"
 msgid "Loading..."
 msgstr "O kargañ..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Kargañ restroù pe liammoù internet, hag eilec'hiañ ar roll seniñ"
 
@@ -2847,7 +2862,7 @@ msgstr "Kargañ restroù pe liammoù internet, hag eilec'hiañ ar roll seniñ"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3211,7 +3226,7 @@ msgstr "Bloc'h berr ebet"
 msgid "None"
 msgstr "Hini ebet"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ton ebet eus ar reoù diuzet a oa mat evit bezañ kopiet war an drobarzhell"
 
@@ -3388,7 +3403,7 @@ msgstr "Oc'h aozañ ar restroù"
 msgid "Original tags"
 msgstr "Klavioù orin"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Dibarzhioù all"
 
@@ -3435,7 +3450,7 @@ msgstr "Fest"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3446,7 +3461,7 @@ msgstr "Ger-tremen"
 msgid "Pause"
 msgstr "Ehan"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Ehan al lenn"
 
@@ -3490,7 +3505,7 @@ msgstr "Konter selaouadennoù"
 msgid "Play custom radio..."
 msgstr "Lenn ur skingomz personelaet"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Lenn pe ehan, hervez ar stad"
 
@@ -3503,7 +3518,7 @@ msgstr "Lenn ma vez netra all o vezañ lennet"
 msgid "Play tag radio..."
 msgstr "Lenn ar skingomz gant ar c'hlav"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Seniñ an <n>vet roud eus ar roll seniñ"
 
@@ -3515,7 +3530,7 @@ msgstr "Lenn/Ehan"
 msgid "Playback"
 msgstr "Lenn sonerezh"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Dibarzhioù al lenner"
 
@@ -3529,7 +3544,7 @@ msgstr "Roll seniñ"
 msgid "Playlist finished"
 msgstr "Roll seniñ echuet"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Dibarzhioù ar roll seniñ"
 
@@ -3649,7 +3664,7 @@ msgstr "A-raok"
 msgid "Previous track"
 msgstr "Roud a-raok"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Diskouez titouroù an handelv"
 
@@ -3893,6 +3908,11 @@ msgstr "Adderaouiñ"
 msgid "Reset play counts"
 msgstr "Adderaouiñ ar konter lennadennoù"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Bevenniñ ouzh an arouezennoù ASCII"
@@ -3932,6 +3952,12 @@ msgstr "Seveniñ"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS proksi"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4086,11 +4112,11 @@ msgstr "Mont war gil"
 msgid "Seek forward"
 msgstr "Mont war-raok"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Klask ar roud lennet gant ur sammad relativel"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Klask ar roud lennet gant ul lec'hiadur absolud"
 
@@ -4130,11 +4156,11 @@ msgstr "Diuzañ heweladurioù..."
 msgid "Serial number"
 msgstr "Niver heuliad"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "URL ar servijer"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Munudoù ar servijer"
 
@@ -4147,7 +4173,7 @@ msgstr "Servij ezlinenn"
 msgid "Set %1 to \"%2\"..."
 msgstr "Termeniñ %1 d'an talvoud %2..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Termeniñ an ampled da <value> dre gant"
 
@@ -4323,7 +4349,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Mont a-drek er roll seniñ"
 
@@ -4331,7 +4357,7 @@ msgstr "Mont a-drek er roll seniñ"
 msgid "Skip count"
 msgstr "Konter tonioù lammet"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Mont dirak er roll seniñ"
 
@@ -4431,7 +4457,7 @@ msgstr "Boaz"
 msgid "Starred"
 msgstr "Karetañ"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Kregiñ ar roll seniñ"
 
@@ -4472,7 +4498,7 @@ msgstr "Paouez goude"
 msgid "Stop after this track"
 msgstr "Paouez goude ar roud-mañ"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Paouez goude vefe lennet an ton"
 
@@ -4488,7 +4514,7 @@ msgstr "Paouezet"
 msgid "Stream"
 msgstr "Lanv"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4506,7 +4532,7 @@ msgstr "Rollioù seniñ koumanantet"
 msgid "Subscribers"
 msgstr "Koumananterien"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4625,13 +4651,13 @@ msgstr "Ar lec'hienn goulennet n'eus ket dioutañ"
 msgid "The site you requested is not an image!"
 msgstr "Al lec'hienn goulennet n'eo ket ur skeudenn"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Ar mare amprouiñ evit ar servijer Subsonic a zo echuet. Roit arc'hant evit kaout un alc'hwez lañvaz mar plij. KIt war subsonic.org evit ar munudoù."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4666,16 +4692,17 @@ msgid ""
 "deleted:"
 msgstr "Ur gudenn a zo evit diverkan tonioù 'zo. Ar restroù-mañ n'int ket bet diverket :"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Ar restroù-se a vo diverket eus ho blasenn-galet, sur oc'h da gaout c'hoant kenderc'hel ?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Ar restroù-mañ a vo diverket eus an drobarzhell, sur oc'h da gaout c'hoant kenderc'hel ?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4775,7 +4802,7 @@ msgstr "Cheñch stad al listenn c'hortoz"
 msgid "Toggle scrobbling"
 msgstr "Cheñch ar scrobbling"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Gweredekaat/Diweredekaat an OSD brav"
 
@@ -4845,7 +4872,7 @@ msgstr "Lazhañ"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(où)"
 
@@ -4928,7 +4955,7 @@ msgstr "Hizivadenn %1%..."
 msgid "Updating library"
 msgstr "O hizivaat ar sonaoueg"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Implij"
 
@@ -4947,6 +4974,10 @@ msgstr "Implij Remotecontrol"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Implij metaroadenn Replay Gain ma 'z eo posubl"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5016,7 +5047,7 @@ msgstr "Etrefas implijer"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5181,7 +5212,7 @@ msgid ""
 "well?"
 msgstr "Ha c'hoant ho peus lakaat tonioù all an albom-mañ e Arzourien Liesseurt ?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "C'hoant ho peus d'ober ur c'hwilervadenn eus al levraoueg bremañ ?"
 
@@ -5189,7 +5220,7 @@ msgstr "C'hoant ho peus d'ober ur c'hwilervadenn eus al levraoueg bremañ ?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Anv-implijer pe ger-tremen fall."
 
@@ -5478,7 +5509,7 @@ msgstr "koshoc'h da gentañ"
 msgid "on"
 msgstr "war"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "dibarzhioù"
 

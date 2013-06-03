@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -698,7 +698,7 @@ msgstr "Có lỗi khi nạp cơ sở dữ liệu iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Có lỗi khi ghi thông tin vào '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Lỗi không xác định."
 
@@ -715,7 +715,7 @@ msgstr "Angry"
 msgid "Appearance"
 msgstr "Giao diện"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Thêm tập tin/URLs vào danh sách"
 
@@ -928,7 +928,7 @@ msgstr "Duyệt tìm..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Đang tạo bộ đệm"
 
@@ -972,7 +972,7 @@ msgstr "Đổi phím tắt..."
 msgid "Change shuffle mode"
 msgstr "Thay đổi chế độ phát ngẫu nhiên"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Đổi ngôn ngữ"
 
@@ -1160,7 +1160,7 @@ msgstr "Hội"
 msgid "Colors"
 msgstr "Màu"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Dấu phẩy phân cách danh sách lớp:mức độ, mức độ từ 0-3"
 
@@ -1242,6 +1242,17 @@ msgstr "Kết nối thiết bị"
 msgid "Connecting to Spotify"
 msgstr "Kết nối đến Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Console"
@@ -1276,7 +1287,7 @@ msgstr "Chép vào thư viện..."
 msgid "Copyright"
 msgstr "Bản quyền"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1480,11 +1491,11 @@ msgstr "Ngày"
 msgid "De&fault"
 msgstr "&Mặc định"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Giảm 4% âm lượng"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "Giảm <value>  phần trăm âm lượng"
 
@@ -1518,7 +1529,7 @@ msgid "Delete downloaded data"
 msgstr "Xóa dữ liệu đã tải về"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Xóa các tập tin"
 
@@ -1639,7 +1650,7 @@ msgstr "Dừng truyền tải"
 msgid "Display options"
 msgstr "Tùy chọn hiển thị"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Hiện hộp thông báo trên màn hình"
 
@@ -1896,17 +1907,17 @@ msgstr "Trọn bộ sưu tập"
 msgid "Equalizer"
 msgstr "Bộ cân chỉnh âm"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Tương đương với --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tương đương với --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Lỗi"
 
@@ -2109,7 +2120,7 @@ msgstr "Tự động tải"
 msgid "Fetch completed"
 msgstr "Đã tải xong"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "Đang tải thư viện Subsonic"
 
@@ -2425,6 +2436,10 @@ msgstr "Cao (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Cao (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Giờ"
@@ -2499,19 +2514,19 @@ msgstr "Kèm theo ảnh bìa trong thông báo"
 msgid "Include all songs"
 msgstr "Bao gồm tất cả bài hát"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Tăng 4% âm lượng"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "Tăng <value>  phần trăm âm lượng"
 
@@ -2748,7 +2763,7 @@ msgstr "Thư viện"
 msgid "Library advanced grouping"
 msgstr "Nhóm thư viện nâng cao"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Chú ý quét lại thư viện"
 
@@ -2840,7 +2855,7 @@ msgstr "Đang nạp thông tin bài hát"
 msgid "Loading..."
 msgstr "Đang nạp..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 
@@ -2848,7 +2863,7 @@ msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3212,7 +3227,7 @@ msgstr "Các khối ngắn"
 msgid "None"
 msgstr "Không"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Không bài hát nào phù hợp để chép qua thiết bị"
 
@@ -3389,7 +3404,7 @@ msgstr "Tổ chức tập tin"
 msgid "Original tags"
 msgstr "Thẻ gốc"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Các tuỳ chọn khác"
 
@@ -3436,7 +3451,7 @@ msgstr "Party"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3447,7 +3462,7 @@ msgstr "Mật khẩu"
 msgid "Pause"
 msgstr "Tạm dừng"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Tạm dừng phát"
 
@@ -3491,7 +3506,7 @@ msgstr "Số lần phát"
 msgid "Play custom radio..."
 msgstr "Phát kênh phát thanh tùy chọn..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Phát nếu như đang dừng, tạm dừng nếu như đang phát"
 
@@ -3504,7 +3519,7 @@ msgstr "Phát nhạc nếu không có bài khác đang phát"
 msgid "Play tag radio..."
 msgstr "Phát thẻ phát thanh..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Phát bài hát thứ <n> trong danh sách"
 
@@ -3516,7 +3531,7 @@ msgstr "Phát/Tạm dừng"
 msgid "Playback"
 msgstr "Phát nhạc"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Tùy chỉnh phát nhạc"
 
@@ -3530,7 +3545,7 @@ msgstr "Danh sách"
 msgid "Playlist finished"
 msgstr "Kết thúc danh sách"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Tùy chọn danh sách"
 
@@ -3650,7 +3665,7 @@ msgstr "Trước"
 msgid "Previous track"
 msgstr "Phát bài trước"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Hiển thị thông tin phiên bản"
 
@@ -3894,6 +3909,11 @@ msgstr "Thiết lập lại"
 msgid "Reset play counts"
 msgstr "Thiết lập lại bộ đếm số lần phát"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Phải dùng kí tự mã ASCII"
@@ -3933,6 +3953,12 @@ msgstr "Chạy"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS proxy"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4087,11 +4113,11 @@ msgstr "Lùi về sau"
 msgid "Seek forward"
 msgstr "Tiến về trước"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Tua đến khoảng tương đối trong bài đang phát"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Tua đến vị trí chính xác trong bài đang phát"
 
@@ -4131,11 +4157,11 @@ msgstr "Chọn hiệu ứng hình ảnh ảo..."
 msgid "Serial number"
 msgstr "Số sê-ri"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "URL máy chủ"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Chi tiết máy chủ"
 
@@ -4148,7 +4174,7 @@ msgstr "Dịch vụ ngoại tuyến"
 msgid "Set %1 to \"%2\"..."
 msgstr "Thiết lập %1 sang \"%2\"..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Đặt âm lượng ở mức <value> phần trăm"
 
@@ -4324,7 +4350,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Không cho lùi lại trong danh sách"
 
@@ -4332,7 +4358,7 @@ msgstr "Không cho lùi lại trong danh sách"
 msgid "Skip count"
 msgstr "Không đếm"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Không cho chuyển bài trong danh sách"
 
@@ -4432,7 +4458,7 @@ msgstr "Chuẩn"
 msgid "Starred"
 msgstr "Đã đánh giá"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Bắt đầu danh sách đang phát"
 
@@ -4473,7 +4499,7 @@ msgstr "Dừng lại sau khi"
 msgid "Stop after this track"
 msgstr "Dừng sau khi phát xong bài này"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Dừng lại"
 
@@ -4489,7 +4515,7 @@ msgstr "Đã dừng"
 msgid "Stream"
 msgstr "Truyền tải"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4507,7 +4533,7 @@ msgstr "Danh sách đã đăng kí"
 msgid "Subscribers"
 msgstr "Người đăng kí"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4626,13 +4652,13 @@ msgstr "Trang bạn đã yêu cầu không tồn tại!"
 msgid "The site you requested is not an image!"
 msgstr "Trang bạn đã yêu cầu không phải là một tấm ảnh!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Thời hạn dùng thử Subsonic đã hết. Hãy nộp phí để nhận giấy phép. Xem thêm chi tiết tại subsonic.org"
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4667,16 +4693,17 @@ msgid ""
 "deleted:"
 msgstr "Có vấn đề khi xóa một số bài hát. Không thể xóa các tập tin sau đây:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Các tập tin này sẽ bị xóa khỏi đĩa cứng, bạn có muốn tiếp tục?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Các tập tin này sẽ bị xóa khỏi thiết bị, bạn có muốn tiếp tục?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4776,7 +4803,7 @@ msgstr "Tắt/Bật trạng thái chờ"
 msgid "Toggle scrobbling"
 msgstr "Bật/Tắt Chuyển thông tin bài hát"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Bật/Tắt hiển thị của hộp thông báo"
 
@@ -4846,7 +4873,7 @@ msgstr "Tắt"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4929,7 +4956,7 @@ msgstr "Đang cập nhật %1%..."
 msgid "Updating library"
 msgstr "Đang cập nhật thư viện"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Cách sử dụng"
 
@@ -4948,6 +4975,10 @@ msgstr "Sử dụng điều khiển từ xa"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Sử dụng thông tin để tăng âm lượng nếu có"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5017,7 +5048,7 @@ msgstr "Giao diện người dùng"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5182,7 +5213,7 @@ msgid ""
 "well?"
 msgstr "Bạn có muốn chuyển những bài khác trong album này vào mục nhiều nghệ sĩ không?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Bạn muốn quét lại toàn bộ ngay bây giờ?"
 
@@ -5190,7 +5221,7 @@ msgstr "Bạn muốn quét lại toàn bộ ngay bây giờ?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Sai tên người dùng hoặc mật khẩu."
 
@@ -5479,7 +5510,7 @@ msgstr "cũ nhất trước"
 msgid "on"
 msgstr "vào"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "tùy chọn"
 

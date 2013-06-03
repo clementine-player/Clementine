@@ -5,12 +5,13 @@
 # Translators:
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # AzuraMeta <azura.meta@gmail.com>, 2011
+# whycaxtsr <bamse16@yahoo.com>, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,18 +33,18 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:211
 #: ../bin/src/ui_transcoderoptionswma.h:80
 msgid " kbps"
-msgstr " kbps"
+msgstr "kbps"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
 #: ../bin/src/ui_playbacksettingspage.h:305
 #: ../bin/src/ui_playbacksettingspage.h:308
 #: ../bin/src/ui_playbacksettingspage.h:328
 msgid " ms"
-msgstr " ms"
+msgstr "ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:182
 msgid " pt"
-msgstr " pct"
+msgstr "pct"
 
 #: ../bin/src/ui_notificationssettingspage.h:439
 #: ../bin/src/ui_visualisationselector.h:116
@@ -696,7 +697,7 @@ msgstr "A apărut o eroare la încărcarea bazei de date iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "A apărut o eroare la scrierea metadata '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr ""
 
@@ -713,7 +714,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Aspect"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Adaugă fișiere/URL-uri în lista de redare"
 
@@ -926,7 +927,7 @@ msgstr "Navighează..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr ""
 
@@ -970,7 +971,7 @@ msgstr "Schimbă scurtătura..."
 msgid "Change shuffle mode"
 msgstr "Schimbă modul amestecare"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Schimbă limba"
 
@@ -1101,7 +1102,7 @@ msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
-msgstr ""
+msgstr "Clementine nu a putut verifica statusul abonamentului tău pentru că sunt probleme cu conexiunea ta. Melodiile ascultate vor fi salvate și trimise la Last.fm mai târziu."
 
 #: widgets/prettyimage.cpp:201
 msgid "Clementine image viewer"
@@ -1158,7 +1159,7 @@ msgstr "Club"
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listă separată prin virgulă de clasă:nivel, nivel este 0-3"
 
@@ -1240,6 +1241,17 @@ msgstr "Conectează un dispozitiv"
 msgid "Connecting to Spotify"
 msgstr "Se conectează la Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr ""
@@ -1274,7 +1286,7 @@ msgstr "Copiază în bibliotecă..."
 msgid "Copyright"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1349,11 +1361,11 @@ msgstr "Creează o nouă listă de redare Grooveshark"
 
 #: ../bin/src/ui_playbacksettingspage.h:302
 msgid "Cross-fade when changing tracks automatically"
-msgstr ""
+msgstr "Cross-fade la schimbarea automată a pieselor"
 
 #: ../bin/src/ui_playbacksettingspage.h:301
 msgid "Cross-fade when changing tracks manually"
-msgstr ""
+msgstr "Cross-fade la schimbarea manuală a pieselor"
 
 #: ../bin/src/ui_mainwindow.h:656
 msgid "Ctrl+Alt+V"
@@ -1478,11 +1490,11 @@ msgstr "Zile"
 msgid "De&fault"
 msgstr "&Implicit"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Reduce volumul cu 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1516,7 +1528,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Șterge fișiere"
 
@@ -1637,7 +1649,7 @@ msgstr "Transmisie discontinuă"
 msgid "Display options"
 msgstr "Afișează opțiunile"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr ""
 
@@ -1696,7 +1708,7 @@ msgstr ""
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
-msgstr ""
+msgstr "Descarcă apartenență"
 
 #: ../bin/src/ui_podcastsettingspage.h:241
 msgid "Download new episodes automatically"
@@ -1894,17 +1906,17 @@ msgstr "Toată colecția"
 msgid "Equalizer"
 msgstr "Egalizator"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
-msgstr ""
+msgstr "Echivalent cu --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
-msgstr ""
+msgstr "Echivalent cu --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Eroare"
 
@@ -2053,7 +2065,7 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:300
 msgid "Fade out when stopping a track"
-msgstr ""
+msgstr "Fade out la oprirea unei piese"
 
 #: ../bin/src/ui_playbacksettingspage.h:299
 msgid "Fading"
@@ -2062,7 +2074,7 @@ msgstr ""
 #: ../bin/src/ui_playbacksettingspage.h:304
 #: ../bin/src/ui_playbacksettingspage.h:307
 msgid "Fading duration"
-msgstr ""
+msgstr "Durată fade"
 
 #: podcasts/gpoddertoptagspage.cpp:76
 msgid "Failed to fetch directory"
@@ -2105,9 +2117,9 @@ msgstr "Obține automat"
 
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 msgid "Fetch completed"
-msgstr ""
+msgstr "Descărcare completă"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2229,7 +2241,7 @@ msgstr ""
 #: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
 #: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Form"
-msgstr ""
+msgstr "Formular"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 msgid "Format"
@@ -2423,6 +2435,10 @@ msgstr "Înalt (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Înalt (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Ore"
@@ -2487,7 +2503,7 @@ msgstr "În modul dinamic, melodii noi vor fi alese și adăugate la lista de re
 
 #: internet/spotifyservice.cpp:360
 msgid "Inbox"
-msgstr ""
+msgstr "Inbox"
 
 #: ../bin/src/ui_notificationssettingspage.h:443
 msgid "Include album art in the notification"
@@ -2497,19 +2513,19 @@ msgstr "Includeți album de artă în notificare"
 msgid "Include all songs"
 msgstr "Includeți toate melodiile"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Crește volumul cu 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2746,7 +2762,7 @@ msgstr "Bibliotecă"
 msgid "Library advanced grouping"
 msgstr "Grupare avansată bibliotecă"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr ""
 
@@ -2773,11 +2789,11 @@ msgstr "Încărcare"
 
 #: ../bin/src/ui_coverfromurldialog.h:102
 msgid "Load cover from URL"
-msgstr ""
+msgstr "Încarcă copertă de la URL"
 
 #: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from URL..."
-msgstr ""
+msgstr "Încarcă copertă de la URL..."
 
 #: ui/albumcoverchoicecontroller.cpp:91
 msgid "Load cover from disk"
@@ -2838,7 +2854,7 @@ msgstr "Încărcare info melodii"
 msgid "Loading..."
 msgstr "Încărcare..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 
@@ -2846,7 +2862,7 @@ msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2870,7 +2886,7 @@ msgstr "Iubește"
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
-msgstr ""
+msgstr "Scăzut (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
@@ -2974,11 +2990,11 @@ msgstr "Rata de biți maximă"
 #: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
-msgstr ""
+msgstr "Mediu (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
-msgstr ""
+msgstr "Mediu (512x512)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:156
 msgid "Membership type"
@@ -3027,11 +3043,11 @@ msgstr "Redate cel mai mult"
 
 #: devices/giolister.cpp:159
 msgid "Mount point"
-msgstr ""
+msgstr "Punct de montură"
 
 #: devices/devicekitlister.cpp:125
 msgid "Mount points"
-msgstr ""
+msgstr "Puncte de montură"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 #: ../bin/src/ui_queuemanager.h:131 ../bin/src/ui_songinfosettingspage.h:190
@@ -3062,7 +3078,7 @@ msgstr "Mut"
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
 msgid "My Last.fm Library"
-msgstr ""
+msgstr "Biblioteca mea Last.fm"
 
 #: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
@@ -3070,11 +3086,11 @@ msgstr ""
 
 #: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:205
 msgid "My Last.fm Neighborhood"
-msgstr ""
+msgstr "Vecinătatea mea Last.fm"
 
 #: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:190
 msgid "My Last.fm Recommended Radio"
-msgstr ""
+msgstr "Recomandările mele Last.fm"
 
 #: internet/lastfmservice.cpp:197
 msgid "My Mix Radio"
@@ -3182,7 +3198,7 @@ msgstr ""
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
-msgstr ""
+msgstr "Niciun analizator"
 
 #: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
@@ -3210,7 +3226,7 @@ msgstr "Fără blocuri scurte"
 msgid "None"
 msgstr "Niciunul"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
@@ -3387,7 +3403,7 @@ msgstr "Organizare fișiere"
 msgid "Original tags"
 msgstr "Taguri originale"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Alte opțiuni"
 
@@ -3434,7 +3450,7 @@ msgstr "Petrecere"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3445,7 +3461,7 @@ msgstr "Parolă"
 msgid "Pause"
 msgstr "Pauză"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Întrerupe redarea"
 
@@ -3489,7 +3505,7 @@ msgstr "Număr ascultări"
 msgid "Play custom radio..."
 msgstr ""
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Redă dacă este oprit, întrerupe dacă se redă"
 
@@ -3502,7 +3518,7 @@ msgstr "Redă numai dacă nu se redă deja ceva"
 msgid "Play tag radio..."
 msgstr "Ascultă radio tag..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Redă melodia a  <n>a din lista de redare"
 
@@ -3514,9 +3530,9 @@ msgstr "Rulează/Pauză"
 msgid "Playback"
 msgstr "Redare"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
-msgstr ""
+msgstr "Opțiuni player"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:472
@@ -3528,7 +3544,7 @@ msgstr "Listă de redare"
 msgid "Playlist finished"
 msgstr "Listă de redare terminată"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Opțiuni listă de redare"
 
@@ -3648,9 +3664,9 @@ msgstr "Precedenta"
 msgid "Previous track"
 msgstr "Melodia precedentă"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
-msgstr ""
+msgstr "Tipărește informații versiune"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:131
 msgid "Profile"
@@ -3680,7 +3696,7 @@ msgstr "Calitate"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
-msgstr ""
+msgstr "Interoghez dispozitiv..."
 
 #: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:708
 msgid "Queue Manager"
@@ -3892,6 +3908,11 @@ msgstr "Resetare"
 msgid "Reset play counts"
 msgstr "Resetează numărul de ascultări"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr ""
@@ -3931,6 +3952,12 @@ msgstr ""
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "Proxy SOCKS"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4085,11 +4112,11 @@ msgstr ""
 msgid "Seek forward"
 msgstr ""
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr ""
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr ""
 
@@ -4129,11 +4156,11 @@ msgstr "Selectează vizualizări..."
 msgid "Serial number"
 msgstr ""
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr ""
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr ""
 
@@ -4146,7 +4173,7 @@ msgstr "Serviciu offline"
 msgid "Set %1 to \"%2\"..."
 msgstr ""
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr ""
 
@@ -4322,7 +4349,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Sare în listă înapoi"
 
@@ -4330,7 +4357,7 @@ msgstr "Sare în listă înapoi"
 msgid "Skip count"
 msgstr ""
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Sare în listă înainte"
 
@@ -4430,7 +4457,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Cu steluță"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr ""
 
@@ -4471,7 +4498,7 @@ msgstr "Oprește după"
 msgid "Stop after this track"
 msgstr "Oprește după pista aceasta"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Oprește redarea"
 
@@ -4487,7 +4514,7 @@ msgstr "Oprit"
 msgid "Stream"
 msgstr "Flux"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4505,7 +4532,7 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr ""
 
@@ -4624,13 +4651,13 @@ msgstr "Site-ul pe care l-ați solicitat nu există!"
 msgid "The site you requested is not an image!"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4665,14 +4692,15 @@ msgid ""
 "deleted:"
 msgstr ""
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr ""
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
+"continue?"
+msgstr ""
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
 msgstr ""
 
@@ -4774,7 +4802,7 @@ msgstr ""
 msgid "Toggle scrobbling"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
@@ -4844,7 +4872,7 @@ msgstr "Oprește"
 msgid "URI"
 msgstr ""
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(-uri)"
 
@@ -4927,7 +4955,7 @@ msgstr "Actualizare %1%..."
 msgid "Updating library"
 msgstr "Se actualizează biblioteca"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Utilizare"
 
@@ -4945,6 +4973,10 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
+msgstr ""
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
 msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
@@ -5015,7 +5047,7 @@ msgstr "Interfață utilizator "
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5180,7 +5212,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -5188,7 +5220,7 @@ msgstr ""
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr ""
 
@@ -5477,7 +5509,7 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "opțiuni"
 

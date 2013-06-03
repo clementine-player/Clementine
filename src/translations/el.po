@@ -10,12 +10,13 @@
 # firewalker <firew4lker@gmail.com>, 2011-2012
 # Nisok Kosin <nikos.efthimiou@gmail.com>, 2012
 # Wasilis <inactive+Wasilis@transifex.com>, 2013
+# Wasilis Mandratzis <m.wasilis@yahoo.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-06-01 15:31+0000\n"
+"Last-Translator: axil Pι <axilleas@archlinux.gr>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -700,7 +701,7 @@ msgstr "Προέκυψε σφάλμα στην φόρτωση της βάσης 
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Προέκυψε σφάλμα κατά την εγγραφή μεταδεδομένων στο '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Προκλήθηκε ένα μη διευκρινισμένο σφάλμα."
 
@@ -717,7 +718,7 @@ msgstr "Angry"
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Προσάρτηση αρχείων/URLs στην λίστα αναπαραγωγής"
 
@@ -930,7 +931,7 @@ msgstr "Αναζήτηση..."
 msgid "Buffer duration"
 msgstr "Διάρκεια του buffer"
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Αποθήκευση"
 
@@ -974,7 +975,7 @@ msgstr "Αλλαγή συντόμευσης..."
 msgid "Change shuffle mode"
 msgstr "Αλλάξτε μέθοδο ανάμιξης"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Αλλαγή γλώσσας"
 
@@ -1162,7 +1163,7 @@ msgstr "Club"
 msgid "Colors"
 msgstr "Χρώματα"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
@@ -1244,6 +1245,17 @@ msgstr "Σύνδεση συσκευής"
 msgid "Connecting to Spotify"
 msgstr "Σύνδεση στο Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr "Ο διακομιστής αρνήθηκε τη σύνδεση, ελέγξτε το URL του διακομιστή. Παράδειγμα: http://localhost:4040/"
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr "Η σύνδεση διακόπηκε, ελέγξτε το URL του διακομιστή. Παράδειγμα: http://localhost:4040/"
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Κονσόλα"
@@ -1278,7 +1290,7 @@ msgstr "Αντιγραφή στην βιβλιοθήκη..."
 msgid "Copyright"
 msgstr "Πνευματικά δικαιώματα"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1482,11 +1494,11 @@ msgstr "Ημέρες"
 msgid "De&fault"
 msgstr "Προ&επιλογή"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Μείωση της έντασης ήχου κατά 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "Μείωση του ήχου κατά <value> της εκατό"
 
@@ -1520,7 +1532,7 @@ msgid "Delete downloaded data"
 msgstr "Διαγραφή δεδομένων που έχουν \"κατέβει\""
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Διαγραφή αρχείων"
 
@@ -1641,7 +1653,7 @@ msgstr "Διακεκομμένη μετάδοση"
 msgid "Display options"
 msgstr "Επιλογές απεικόνισης"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Απεικόνιση της «απεικόνισης στην οθόνη»"
 
@@ -1898,17 +1910,17 @@ msgstr "Ολόκληρη η συλλογή"
 msgid "Equalizer"
 msgstr "Ισοσταθμιστής"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ισοδύναμο με --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ισοδύναμο με --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -2111,7 +2123,7 @@ msgstr "Αυτόματο κατέβασμα"
 msgid "Fetch completed"
 msgstr "Η ανάκτηση ολοκληρώθηκε"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "Μεταφόρτωση καταλόγου Subsonic"
 
@@ -2427,6 +2439,10 @@ msgstr "Υψηλή (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Υψηλή (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr "O Host δεν βρέθηκε, ελέγξτε το URL του διακομιστή. Παράδειγμα: http://localhost:4040/"
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Ώρες"
@@ -2501,19 +2517,19 @@ msgstr "Εμφάνιση του άλμπουμ (εικόνα) στην ειδο�
 msgid "Include all songs"
 msgstr "Συμπερίληψη όλων των τραγουδιών"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Ασύμβατη έκδοση πρωτοκόλλου REST. Η εφαρμογή πελάτη πρέπει να ενημερωθεί."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Ασύμβατη έκδοση πρωτοκόλλου REST. Ο διακομιστής πρέπει να ενημερωθεί."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Αύξηση της έντασης ήχου κατά 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "Αύξηση του ήχου κατά <value> της εκατό"
 
@@ -2750,7 +2766,7 @@ msgstr "Βιβλιοθήκη"
 msgid "Library advanced grouping"
 msgstr "Προχωρημένη ομαδοποίηση βιβλιοθήκης"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Ειδοποίηση σάρωσης βιβλιοθήκης"
 
@@ -2842,7 +2858,7 @@ msgstr "Φόρτωση πληροφοριών κομματιού"
 msgid "Loading..."
 msgstr "Φόρτωση..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας την τρέχουσα λίστα αναπαραγωγής"
 
@@ -2850,7 +2866,7 @@ msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας τη�
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3214,7 +3230,7 @@ msgstr "Όχι βραχαία μπλοκς"
 msgid "None"
 msgstr "Κανένα"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Κανένα από τα επιλεγμένα τραγούδια δεν ήταν κατάλληλο για αντιγραφή σε μία συσκευή"
 
@@ -3391,7 +3407,7 @@ msgstr "Γίνετε οργάνωση αρχείων"
 msgid "Original tags"
 msgstr "Αρχικές ετικέτες"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Άλλες επιλογές"
 
@@ -3438,7 +3454,7 @@ msgstr "Πάρτι"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3449,7 +3465,7 @@ msgstr "Συνθηματικό"
 msgid "Pause"
 msgstr "Παύση"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Παύση αναπαραγωγής"
 
@@ -3493,7 +3509,7 @@ msgstr "Μετρητής εκτελέσεων"
 msgid "Play custom radio..."
 msgstr "Αναπαραγωγή προσαρμοσμένου ραδιοφώνου..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Αναπαραγωγή αν είναι σταματημένο, αλλιώς παύση"
 
@@ -3506,7 +3522,7 @@ msgstr "Αναπαραγωγή εάν δεν παίζει κάτι άλλο"
 msgid "Play tag radio..."
 msgstr "Αναπαραγωγή ραδιοφώνου ετικετών..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Αναπαραγωγή του <n>ου κομματιού της λίστας αναπαραγωγής"
 
@@ -3518,7 +3534,7 @@ msgstr "Αναπαραγωγή/Παύση"
 msgid "Playback"
 msgstr "Αναπαραγωγή"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Επιλογές αναπαραγωγής"
 
@@ -3532,7 +3548,7 @@ msgstr "Λίστα"
 msgid "Playlist finished"
 msgstr "Η λίστα τελείωσε"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Επιλογές λίστας αναπαραγωγής"
 
@@ -3652,7 +3668,7 @@ msgstr "Προηγούμενο"
 msgid "Previous track"
 msgstr "Προηγούμενο κομμάτι"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Εκτύπωση πληροφοριών έκδοσης"
 
@@ -3896,6 +3912,11 @@ msgstr "Επαναφορά"
 msgid "Reset play counts"
 msgstr "Επαναφορά μετρητή εκτελέσεων"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr "Επανεκκίνηση του κομμάτιου, ή αναπαραγωγή του προηγούμενου κομματιού, εντός 8 δευτερολέπτων από την έναρξη."
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Περιορισμός σε χαρακτήρες ASCII"
@@ -3935,6 +3956,12 @@ msgstr "Εκτέλεση"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "Διαμεσολαβητής SOCKS"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr "Σφάλμα SSL handshake, ελέγξτε την διαμόρφωση του διακομιστή. Η SSLv3 επιλογη μπορεί να λύση κάποια θέματα."
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4089,11 +4116,11 @@ msgstr "Αναζήτηση πίσω"
 msgid "Seek forward"
 msgstr "Αναζήτηση εμπρός"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Άλμα στο τρέχον κομμάτι κατά ένα σχετικό ποσό."
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Άλμα σε σε μια καθορισμένη θέση στο τρέχον κομμάτι."
 
@@ -4133,11 +4160,11 @@ msgstr "Επιλογή οπτικών εφέ..."
 msgid "Serial number"
 msgstr "Σειριακός αριθμός"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "URL Εξυπηρετητή"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Λεπτομέρειες διακομιστή"
 
@@ -4150,7 +4177,7 @@ msgstr "Υπηρεσία εκτός σύνδεσης"
 msgid "Set %1 to \"%2\"..."
 msgstr "Δώσε %1 στο \"%2\"..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Ρύθμιση της έντασης ήχου στο <value> της εκατό"
 
@@ -4326,7 +4353,7 @@ msgstr "Μέγεθος:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Παράλειψη προς τα πίσω στη λίστα"
 
@@ -4334,7 +4361,7 @@ msgstr "Παράλειψη προς τα πίσω στη λίστα"
 msgid "Skip count"
 msgstr "Μετρητής παραλήψεων"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Παράλειψη προς τα μπροστά στη λίστα"
 
@@ -4434,7 +4461,7 @@ msgstr "Κανονικό"
 msgid "Starred"
 msgstr "Με αστέρι"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Εκκίνηση της λίστας αναπαραγωγής που παίζει τώρα"
 
@@ -4475,7 +4502,7 @@ msgstr "Στοπ μετά"
 msgid "Stop after this track"
 msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Διακοπή αναπαραγωγής"
 
@@ -4491,7 +4518,7 @@ msgstr "Σταματημένο"
 msgid "Stream"
 msgstr "Stream"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4509,7 +4536,7 @@ msgstr "Λίστες συνδρομής"
 msgid "Subscribers"
 msgstr "Συνδομητές"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4628,13 +4655,13 @@ msgstr "Η διεύθυνση που ζητήσατε δεν υπάρχει!"
 msgid "The site you requested is not an image!"
 msgstr "Η διεύθυνση που ζητήσατε δεν είναι εικόνα!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Η δοκιμαστική περίοδος του Subsonic τελείωσε. Παρακαλώ κάντε μια δωρεά για να λάβετε ένα κλειδί άδειας. Δείτε στο subsonic.org για λεπτομέρειες."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4669,16 +4696,17 @@ msgid ""
 "deleted:"
 msgstr "Υπήρξαν προβλήματα κατά την διαγραφή κάποιων τραγουδιών. Τα ακόλουθα αρχεία δεν μπόρεσαν να διαγραφούν:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Αυτά τα αρχεία θα διαγραφούν από τον δίσκο, θέλετε σίγουρα να συνεχίσετε;"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Αυτά τα αρχεία θα διαγραφούν από την συσκευή, θέλετε σίγουρα να συνεχίσετε;"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr "Αυτά τα αρχεία θα διαγραφούν για πάντα από τον δίσκο, θέλετε σίγουρα να συνεχίσετε;"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4778,7 +4806,7 @@ msgstr "Εναλλαγή της κατάστασης της λίστας ανα�
 msgid "Toggle scrobbling"
 msgstr "Εναλλαγή του scrobbling"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Εναλλαγή ορατότητας της όμορφης «απεικόνισης στην οθόνη»"
 
@@ -4848,7 +4876,7 @@ msgstr "Απενεργοποίηση"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4931,7 +4959,7 @@ msgstr "Ενημέρωση %1%..."
 msgid "Updating library"
 msgstr "Ενημέρωση λίστας"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Χρήση"
 
@@ -4950,6 +4978,10 @@ msgstr "Χρήση Τηλεχειριστηρίου"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Χρήση των μετα δεδομένων Replay Gain αν είναι διαθέσημα"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr "Χρησιμοποιήστε SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5019,7 +5051,7 @@ msgstr "Διασύνδεση χρήστη"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5184,7 +5216,7 @@ msgid ""
 "well?"
 msgstr "Θα θέλατε να μετακινήσετε και τα άλλα τραγούδια σε αυτό το άλμπουμ στο Διάφοροι Καλλιτέχνες;"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Θέλετε να εκτελέσετε μία πλήρη επανασάρωση αμέσως τώρα;"
 
@@ -5192,7 +5224,7 @@ msgstr "Θέλετε να εκτελέσετε μία πλήρη επανασά�
 msgid "Write all songs statistics into songs' files"
 msgstr "Εγγραφή όλων των στατιστικών των τραγουδιών στα αρχεία τραγουδιών"
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Λάθος όνομα χρήστη ή συνθηματικό"
 
@@ -5481,7 +5513,7 @@ msgstr "το παλαιότερο πρώτα"
 msgid "on"
 msgstr "σε"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "επιλογές"
 

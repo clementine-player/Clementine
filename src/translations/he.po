@@ -5,12 +5,13 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # matanya <matanya.moses@gmail.com>, 2012
+# ud1955 <ud1955@gmail.com>, 2013
 # Yaron Shahrabani <sh.yaron@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -212,7 +213,7 @@ msgstr "מצב ערבוב"
 
 #: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
-msgstr "&מתיחת עמודות כך שיתאימו לחלון"
+msgstr "&מתיחת עמודות בהתאמה לחלון"
 
 #: ../bin/src/ui_mainwindow.h:723
 msgid "&Tools"
@@ -309,7 +310,7 @@ msgstr "נדרש חשבון פרימיום של Spotify."
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "A client can connect only, if the correct code was entered."
-msgstr ""
+msgstr "לקוח יכול להתחבר רק אם הוזן הקוד הנכון."
 
 #: smartplaylists/wizard.cpp:78
 msgid ""
@@ -574,7 +575,7 @@ msgstr "התווסף בשלושה החודשים האחרונים"
 
 #: internet/groovesharkservice.cpp:1392
 msgid "Adding song to My Music"
-msgstr ""
+msgstr "הוספת שירים למוסיקה שלי"
 
 #: internet/groovesharkservice.cpp:1369
 msgid "Adding song to favorites"
@@ -696,9 +697,9 @@ msgstr "אירעה שגיאה בטעינת מסד הנתונים של iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "אירעה שגיאה בכתיבת המידע הנוסף לתוך '%1'"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "אירעה שגיאה לא מוגדרת"
 
 #: ui/about.cpp:78
 msgid "And:"
@@ -706,14 +707,14 @@ msgstr "וגם:"
 
 #: moodbar/moodbarrenderer.cpp:156
 msgid "Angry"
-msgstr ""
+msgstr "כָּעוּס"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "מראה"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "הוסף קבצים/כתובות לסוף רשימת ההשמעה"
 
@@ -926,13 +927,13 @@ msgstr "עיון..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "באגירה"
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "מקורות אלו מושבתים:"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
@@ -970,7 +971,7 @@ msgstr "שינוי קיצור הדרך..."
 msgid "Change shuffle mode"
 msgstr "שינוי מצב ערבוב"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "שינוי השפה"
 
@@ -978,7 +979,7 @@ msgstr "שינוי השפה"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "שינוי העדפת השמעת מונו יהיה יעיל לניגון השירים הבאים"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
@@ -1069,15 +1070,15 @@ msgstr ""
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "Clementine יאפשר נגינת מוסיקה שהעלית ל "
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr ""
+msgstr "Clementine מאפשר נגינת מוסיקה שהעלית ל Google Drive"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr ""
+msgstr "Clementine יאפשר נגינת מוסיקה שהעלית ל "
 
 #: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Clementine can show a message when the track changes."
@@ -1113,7 +1114,7 @@ msgstr "Clementine נכשל במציאת תוצאות לקובץ זה"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr ""
+msgstr "Clementine ימצא מוסיקה ב:"
 
 #: library/libraryview.cpp:349
 msgid "Click here to add some music"
@@ -1128,7 +1129,7 @@ msgstr "יש ללחוץ כאן על מנת לעבור בין הצגת הזמן �
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr ""
+msgstr "לחיצה על כפתור רישום תפתח דף בדפדפן האינטרנט. לאחר הרישום, יש לחזור Clementine."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1136,7 +1137,7 @@ msgstr "סגירה"
 
 #: playlist/playlisttabbar.cpp:49
 msgid "Close playlist"
-msgstr ""
+msgstr "סגירת רשימת השמעה"
 
 #: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
@@ -1158,7 +1159,7 @@ msgstr "קלאב"
 msgid "Colors"
 msgstr "צבעים"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "רשימה מופרדת בפסיקים של class:level,level יכול להיות 0-3 "
 
@@ -1184,7 +1185,7 @@ msgstr "מלחין"
 #: internet/searchboxwidget.cpp:42
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "הגדרת "
 
 #: internet/groovesharkservice.cpp:550
 msgid "Configure Grooveshark..."
@@ -1208,11 +1209,11 @@ msgstr "הגדרת Spotify..."
 
 #: internet/subsonicservice.cpp:93
 msgid "Configure Subsonic..."
-msgstr ""
+msgstr "הגדרת תת קולי"
 
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
-msgstr ""
+msgstr "מגדיר חיפוש "
 
 #: ui/mainwindow.cpp:471
 msgid "Configure library..."
@@ -1239,6 +1240,17 @@ msgstr "חיבור התקן"
 #: internet/spotifyservice.cpp:253
 msgid "Connecting to Spotify"
 msgstr "בהתחברות אל Spotify"
+
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
@@ -1274,11 +1286,11 @@ msgstr "העתקה לספרייה..."
 msgid "Copyright"
 msgstr "זכויות יוצרים"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "לא ניתן להתחבר ל Subsonic, נא לבדוק כתובת שרת. לדוגמא: "
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1478,11 +1490,11 @@ msgstr "ימים"
 msgid "De&fault"
 msgstr "בררת מח&דל"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "הנמכת עוצמת השמע ב־4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1505,7 +1517,7 @@ msgstr "הפסקה בין אפקטים חזותיים"
 #: playlist/playlistlistcontainer.cpp:73
 #: ../bin/src/ui_playlistlistcontainer.h:130
 msgid "Delete"
-msgstr ""
+msgstr "מחיקה"
 
 #: internet/groovesharkservice.cpp:521 internet/groovesharkservice.cpp:1289
 msgid "Delete Grooveshark playlist"
@@ -1516,7 +1528,7 @@ msgid "Delete downloaded data"
 msgstr "מחיקת מידע שהתקבל"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "מחיקת קבצים"
 
@@ -1616,7 +1628,7 @@ msgstr "משך הנטרול"
 
 #: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "מניעת יצירת סרגל האווירה"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:433
@@ -1637,7 +1649,7 @@ msgstr "תמסורת רציפה"
 msgid "Display options"
 msgstr "הגדרות תצוגה"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "הצגת חיווי מסך"
 
@@ -1817,7 +1829,7 @@ msgstr "הפעלת קיצורי מקלדת רק כאשר המיקוד הוא ע�
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr ""
+msgstr "אפשור המקורות להלן כדי לכלול אותם בתוצאות חיפוש. תוצאות יוצגו בסדר זה."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1859,7 +1871,7 @@ msgstr "יש להזין <b>אמן</b> או <b>תגית</b> כדי להתחיל �
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr ""
+msgstr "הזנה למעלה ביטויי חיפוש כדי למצוא מוסיקה במחשבך ובאינטרנט"
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
@@ -1880,7 +1892,7 @@ msgstr "כתובת תחנת הרדיו האינטרנטית:"
 
 #: playlist/playlistlistcontainer.cpp:171
 msgid "Enter the name of the folder"
-msgstr ""
+msgstr "הזנת שם התיקייה"
 
 #: ../bin/src/ui_networkremotesettingspage.h:184
 msgid "Enter this IP in the App to connect to Clementine."
@@ -1894,17 +1906,17 @@ msgstr "כל האוסף"
 msgid "Equalizer"
 msgstr "אקולייזר"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "זהה לאפשרות --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "זהה לאפשרות--log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "שגיאה"
 
@@ -2107,9 +2119,9 @@ msgstr "אחזור אוטומטי"
 msgid "Fetch completed"
 msgstr "אחזור המידע הושלם"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
-msgstr ""
+msgstr "טעינת ספרית Subsonic"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
@@ -2423,6 +2435,10 @@ msgstr "גבוה (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "גבוה (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "שעות"
@@ -2472,12 +2488,12 @@ msgstr "קובצי תמונה (‎*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.x
 #: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 days"
-msgstr ""
+msgstr "בעוד %1 ימים"
 
 #: core/utilities.cpp:148
 #, qt-format
 msgid "In %1 weeks"
-msgstr ""
+msgstr "בעוד %1 שבועות"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
@@ -2497,19 +2513,19 @@ msgstr "אומנות אלבום בתוך ההתרעה"
 msgid "Include all songs"
 msgstr "הכללת כל השירים"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
-msgstr ""
+msgstr "גרסת סותרת של פרוטוקול Subsonic REST . לקוח חייב שדרוג."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
-msgstr ""
+msgstr "גרסת סותרת של פרוטוקול Subsonic REST . שרת חייב שדרוג."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "הגברת עצמת השמע ב־4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2520,7 +2536,7 @@ msgstr "הגברת עוצמת השמע"
 #: internet/cloudfileservice.cpp:136
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "יצירת מפתחות "
 
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
@@ -2746,7 +2762,7 @@ msgstr "ספרייה"
 msgid "Library advanced grouping"
 msgstr "קיבוץ מתקדם של הספרייה"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "הודעה על סריקה מחודשת של הספרייה"
 
@@ -2838,7 +2854,7 @@ msgstr "נטען מידע אודות השירים"
 msgid "Loading..."
 msgstr "בטעינה..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "טעינת קבצים/כתובות, תוך החלפת רשימת ההשמעה הנוכחית"
 
@@ -2846,7 +2862,7 @@ msgstr "טעינת קבצים/כתובות, תוך החלפת רשימת ההש�
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3002,7 +3018,7 @@ msgstr "מעקב אחר שינויים בספרייה"
 
 #: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Mono playback"
-msgstr ""
+msgstr "השמעת מונו"
 
 #: smartplaylists/searchterm.cpp:313
 msgid "Months"
@@ -3015,11 +3031,11 @@ msgstr ""
 #: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
-msgstr ""
+msgstr "סגנון סרגל האווירה"
 
 #: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
-msgstr ""
+msgstr "סרגלי אווירה"
 
 #: library/library.cpp:74
 msgid "Most played"
@@ -3082,7 +3098,7 @@ msgstr "רדיו המיקס שלי"
 
 #: internet/groovesharkservice.cpp:606
 msgid "My Music"
-msgstr ""
+msgstr "המוסיקה שלי"
 
 #: internet/lastfmservice.cpp:202
 msgid "My Neighborhood"
@@ -3126,7 +3142,7 @@ msgstr "מתווך רשת"
 
 #: ../bin/src/ui_networkremotesettingspage.h:168
 msgid "Network Remote"
-msgstr ""
+msgstr "רשת מרוחקת"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:487
 msgid "Never"
@@ -3145,7 +3161,7 @@ msgstr "אין להתחיל להשמיע אף פעם"
 #: playlist/playlistlistcontainer.cpp:170
 #: ../bin/src/ui_playlistlistcontainer.h:127
 msgid "New folder"
-msgstr ""
+msgstr "תיקייה חדשה"
 
 #: ui/mainwindow.cpp:1441 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
@@ -3178,7 +3194,7 @@ msgstr "הרצועה הבאה"
 
 #: core/utilities.cpp:146
 msgid "Next week"
-msgstr ""
+msgstr "השבוע הבא"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
@@ -3210,7 +3226,7 @@ msgstr "ללא מקטעים קצרים"
 msgid "None"
 msgstr "אין"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "אף אחד מהשירים הנבחרים לא היה ראוי להעתקה להתקן"
 
@@ -3298,7 +3314,7 @@ msgid ""
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "קבלת חיבורים רק מלקוח בתוך טווחי ה-IP:⏎\n10.x.x.x⏎\n172.16.0.0 - 172.31.255.255⏎\n192.168.x.x"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3322,11 +3338,11 @@ msgstr "פתיחת &דיסק שמע..."
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
-msgstr ""
+msgstr "פתיחת קובץ "
 
 #: podcasts/addpodcastdialog.cpp:73
 msgid "Open OPML file..."
-msgstr ""
+msgstr "פתיחת קובץ "
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3338,7 +3354,7 @@ msgstr "פתיחת קובץ..."
 
 #: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
-msgstr ""
+msgstr "פתיחה ב "
 
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
@@ -3387,7 +3403,7 @@ msgstr "הקבצים מאורגנים"
 msgid "Original tags"
 msgstr "תגים מקוריים"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "אפשרויות נוספות"
 
@@ -3434,7 +3450,7 @@ msgstr "מסיבה"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3445,7 +3461,7 @@ msgstr "ססמה"
 msgid "Pause"
 msgstr "השהייה"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "השהיית הנגינה"
 
@@ -3489,7 +3505,7 @@ msgstr "מונה השמעות"
 msgid "Play custom radio..."
 msgstr "ניגון רדיו מותאם אישית..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "ניגון אם מושהה, השהייה אם מנגן"
 
@@ -3502,7 +3518,7 @@ msgstr "השמעה אם אין שום שמושמע כרגע"
 msgid "Play tag radio..."
 msgstr "ניגון רדיו תגית..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "נגן הרצועה ה־<n> מרשימת ההשמעה"
 
@@ -3514,7 +3530,7 @@ msgstr "ניגון/השהייה"
 msgid "Playback"
 msgstr "השמעה"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "אפשרויות נגן"
 
@@ -3528,7 +3544,7 @@ msgstr "רשימת השמעה"
 msgid "Playlist finished"
 msgstr "רשימת ההשמעה הסתיימה"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "אפשרויות רשימת ההשמעה"
 
@@ -3542,7 +3558,7 @@ msgstr "רשימות השמעה"
 
 #: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
-msgstr ""
+msgstr "נא לסגור את הדפדפן ולחזור ל Clementine"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
@@ -3648,7 +3664,7 @@ msgstr "הקודם"
 msgid "Previous track"
 msgstr "רצועה קודמת"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Print out version information"
 
@@ -3791,7 +3807,7 @@ msgstr "הסרת הפעולה"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove duplicates from playlist"
-msgstr ""
+msgstr "הסרת כפילויות מרשימת ההשמעה"
 
 #: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
@@ -3799,7 +3815,7 @@ msgstr "הסרת תיקייה"
 
 #: internet/groovesharkservice.cpp:534
 msgid "Remove from My Music"
-msgstr ""
+msgstr "הסרה מהמוסיקה שלי"
 
 #: internet/groovesharkservice.cpp:531
 msgid "Remove from favorites"
@@ -3815,11 +3831,11 @@ msgstr ""
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
-msgstr ""
+msgstr "הסרת שירים מהמוסיקה שלי"
 
 #: internet/groovesharkservice.cpp:1487
 msgid "Removing songs from favorites"
-msgstr ""
+msgstr "הסרת שירים מרשימת המועדפים"
 
 #: internet/groovesharkservice.cpp:1335
 #, qt-format
@@ -3892,6 +3908,11 @@ msgstr "איפוס"
 msgid "Reset play counts"
 msgstr "איפוס מונה ההשמעות"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "הגבלה לתווי ASCII"
@@ -3914,7 +3935,7 @@ msgstr "מתקבלות רשימות ההשמעה מ־Grooveshark"
 
 #: ../data/oauthsuccess.html:3
 msgid "Return to Clementine"
-msgstr ""
+msgstr "חזרה ל Clementine"
 
 #: ../bin/src/ui_equalizer.h:174
 msgid "Right"
@@ -3926,11 +3947,17 @@ msgstr "רוק"
 
 #: ../bin/src/ui_console.h:81
 msgid "Run"
-msgstr ""
+msgstr "הרצה"
 
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "מתווך SOCKS"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -3950,7 +3977,7 @@ msgstr "קצב דגימה"
 
 #: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "שמירת קבצי .מַצַב רוּחַ בספרית המוסיקה שלך"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -4033,7 +4060,7 @@ msgstr "חיפוש ב־Magnatune"
 
 #: internet/subsonicservice.cpp:72
 msgid "Search Subsonic"
-msgstr ""
+msgstr "חיפוש Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
@@ -4062,7 +4089,7 @@ msgstr "אפשרויות חיפוש"
 #: internet/groovesharkservice.cpp:567 internet/soundcloudservice.cpp:104
 #: internet/spotifyservice.cpp:347
 msgid "Search results"
-msgstr ""
+msgstr "תוצאות החיפוש"
 
 #: smartplaylists/querywizardplugin.cpp:152
 #: ../bin/src/ui_querysearchpage.h:120
@@ -4085,11 +4112,11 @@ msgstr "דילוג אחורה"
 msgid "Seek forward"
 msgstr "דילוג קדימה"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום יחסי"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום מוחלט"
 
@@ -4129,13 +4156,13 @@ msgstr "בחירת אפקטים חזותיים..."
 msgid "Serial number"
 msgstr "מספר סידורי"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
-msgstr ""
+msgstr "כתובת שרת"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
-msgstr ""
+msgstr "פרטי שרת"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4146,7 +4173,7 @@ msgstr "שירות לא מקוון"
 msgid "Set %1 to \"%2\"..."
 msgstr "הגדרת %1 בתור „%2“..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "הגדרת עצמת השמע ל־<value> אחוזים"
 
@@ -4183,7 +4210,7 @@ msgstr "הנפשה זוהרת על הרצועה הנוכחית"
 
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "הצגת סרגל אווירה בסרגל התקדמות הנתיב"
 
 #: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Show a native desktop notification"
@@ -4240,7 +4267,7 @@ msgstr "הצגה תחת אמנים שונים"
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
-msgstr ""
+msgstr "הצגת סרגל האווירה"
 
 #: ui/mainwindow.cpp:460
 msgid "Show only duplicates"
@@ -4252,7 +4279,7 @@ msgstr "הצגת לא מתוייגים בלבד"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
-msgstr ""
+msgstr "הצגת הצעות חיפוש"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -4268,7 +4295,7 @@ msgstr "הצגת סמל באזור הדיווחים"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr ""
+msgstr "הצגת מקורות מאופשרים ובלתי מאופשרים"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -4322,7 +4349,7 @@ msgstr ""
 msgid "Ska"
 msgstr "סקא"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "דילוג אחורה ברשימת ההשמעה"
 
@@ -4330,7 +4357,7 @@ msgstr "דילוג אחורה ברשימת ההשמעה"
 msgid "Skip count"
 msgstr "מונה דילוגים"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "דילוג קדימה ברשימת ההשמעה"
 
@@ -4430,7 +4457,7 @@ msgstr "סטנדרטי"
 msgid "Starred"
 msgstr "מסומן בכוכב"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "התחלת רשימת ההשמעה המתנגנת כעת"
 
@@ -4443,7 +4470,7 @@ msgstr "התחלת ההתמרה"
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "נא להקליד משהו בתיבת החיפוש למעלה כדי למלא את רשימת תוצאות חיפוש זה"
 
 #: transcoder/transcoder.cpp:405
 #, qt-format
@@ -4471,7 +4498,7 @@ msgstr "הפסקה אחרי"
 msgid "Stop after this track"
 msgstr "הפסקה אחרי רצועה זו"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "הפסקת הנגינה"
 
@@ -4487,7 +4514,7 @@ msgstr "בעצירה"
 msgid "Stream"
 msgstr "מדיה זורמת"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4505,13 +4532,13 @@ msgstr "מינוי על רשימות ההשמעה"
 msgid "Subscribers"
 msgstr "מנויים"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr ""
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
-msgstr ""
+msgstr "הצלחה!"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4559,7 +4586,7 @@ msgstr "השירים המסומנים בכוכב ב‏־Spotify מסונכרני
 
 #: moodbar/moodbarrenderer.cpp:159
 msgid "System colors"
-msgstr ""
+msgstr "צבעי המערכת"
 
 #: widgets/fancytabwidget.cpp:673
 msgid "Tabs on top"
@@ -4624,13 +4651,13 @@ msgstr "האתר שביקשת לא קיים!"
 msgid "The site you requested is not an image!"
 msgstr "האתר אותו ביקשת אינו תמונה!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr ""
+msgstr "תמה תקופת הניסיון לשרת Subsonic. נא תרומתך לקבלת מפתח רישיון. לפרטים, נא לבקר ב subsonic.org "
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4665,16 +4692,17 @@ msgid ""
 "deleted:"
 msgstr "אירעה תקלה במחיקת חלק מהשירים. הקבצים הבאים לא נמחקו:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "קבצים אלו ימחקו מהדיסק, האם להמשיך?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "קבצים אלו ימחקו מההתקן, האם להמשיך?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4774,13 +4802,13 @@ msgstr "החלף מצב התור"
 msgid "Toggle scrobbling"
 msgstr "החלפה לscrobbling"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "הפעלה או כיבוי נראות ההצגה היפה על המסך"
 
 #: core/utilities.cpp:142
 msgid "Tomorrow"
-msgstr ""
+msgstr "מחר"
 
 #: podcasts/podcasturlloader.cpp:116
 msgid "Too many redirects"
@@ -4788,7 +4816,7 @@ msgstr "הפניות רבות מדי"
 
 #: internet/spotifyservice.cpp:366
 msgid "Top tracks"
-msgstr ""
+msgstr "מסלול עליון"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
@@ -4844,7 +4872,7 @@ msgstr "כבה"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4887,7 +4915,7 @@ msgstr "הסרת מינוי"
 
 #: songinfo/songkickconcerts.cpp:168
 msgid "Upcoming Concerts"
-msgstr ""
+msgstr "קונצרטים צפויים"
 
 #: internet/groovesharkservice.cpp:1198
 msgid "Update Grooveshark playlist"
@@ -4927,13 +4955,13 @@ msgstr "עדכון %1%..."
 msgid "Updating library"
 msgstr "הספרייה בעדכון"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "בשימוש"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "שימוש בתג אלבום אמן כאשר זמין"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4941,11 +4969,15 @@ msgstr "השתמש בקיצורי המקלדת של גנום"
 
 #: ../bin/src/ui_networkremotesettingspage.h:169
 msgid "Use Remotecontrol"
-msgstr ""
+msgstr "שימוש ב"
 
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "שימוש במידע נוסף על הגברת ניגון חוזר אם זמין"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -4965,7 +4997,7 @@ msgstr "שימוש באימות"
 
 #: ../bin/src/ui_networkremotesettingspage.h:181
 msgid "Use authentication code"
-msgstr ""
+msgstr "שימוש בקוד אימות"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -5015,7 +5047,7 @@ msgstr "מנשק משתמש"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5110,11 +5142,11 @@ msgstr "בחיפוש אחר תמונות אלבום, Clementine יחפש קוד�
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
-msgstr ""
+msgstr "כאשר הרשימה ריקה..."
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr ""
+msgstr "מדוע לא לנסות..."
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5180,7 +5212,7 @@ msgid ""
 "well?"
 msgstr "האם ברצונך להעביר גם את שאר השירים באלבום לאמנים שונים?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 
@@ -5188,9 +5220,9 @@ msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
-msgstr ""
+msgstr "שם משתמש או סיסמא שגויים"
 
 #: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
@@ -5451,7 +5483,7 @@ msgstr "הארוך ביותר ראשון"
 #: playlist/playlistundocommands.cpp:99
 #, c-format
 msgid "move %n songs"
-msgstr ""
+msgstr "העברת %n שירים"
 
 #: smartplaylists/searchterm.cpp:298
 msgid "newest first"
@@ -5477,7 +5509,7 @@ msgstr "הישן ביותר ראשון"
 msgid "on"
 msgstr "ב־"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "אפשרויות"
 
@@ -5496,7 +5528,7 @@ msgstr "הקצר ביותר ראשון"
 
 #: playlist/playlistundocommands.cpp:138
 msgid "shuffle songs"
-msgstr ""
+msgstr "ערבול שירים"
 
 #: smartplaylists/searchterm.cpp:301
 msgid "smallest first"
@@ -5504,7 +5536,7 @@ msgstr "הקטן ביותר ראשון"
 
 #: playlist/playlistundocommands.cpp:131
 msgid "sort songs"
-msgstr ""
+msgstr "מיון שירים"
 
 #: smartplaylists/searchterm.cpp:219
 msgid "starts with"

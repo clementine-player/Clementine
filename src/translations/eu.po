@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -698,7 +698,7 @@ msgstr "Errorea gertatu da iTunes datu-basea kargatzerakoan"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Errorea gertatu da '%1'-(e)ra metadatuak idazterakoan"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Errore ezezagun bat gertatu da."
 
@@ -715,7 +715,7 @@ msgstr "Haserre"
 msgid "Appearance"
 msgstr "Itxura"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Erantsi Fitxategiak/URL-ak erreprodukzio-zerrendari"
 
@@ -928,7 +928,7 @@ msgstr "Arakatu..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Bufferra betetzen"
 
@@ -972,7 +972,7 @@ msgstr "Aldatu laster-tekla..."
 msgid "Change shuffle mode"
 msgstr "Aldatu ausazko modua"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Aldatu hizkuntza"
 
@@ -1160,7 +1160,7 @@ msgstr "Club-a"
 msgid "Colors"
 msgstr "Koloreak"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komaz banaturiko klase-zerrenda:maila, maila 0-3 da"
 
@@ -1242,6 +1242,17 @@ msgstr "Konektatu gailua"
 msgid "Connecting to Spotify"
 msgstr "Konektatu Spotify-ra"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Kontsola"
@@ -1276,7 +1287,7 @@ msgstr "Kopiatu bildumara..."
 msgid "Copyright"
 msgstr "Copyright"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1480,11 +1491,11 @@ msgstr "Egun"
 msgid "De&fault"
 msgstr "&Lehenetsia"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Bolumena % 4 jaitsi"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1518,7 +1529,7 @@ msgid "Delete downloaded data"
 msgstr "Ezabatu deskargatutako datuak"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Ezabatu fitxategiak"
 
@@ -1639,7 +1650,7 @@ msgstr "Transmisio ez-jarraitua"
 msgid "Display options"
 msgstr "Erakutsi aukerak"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Erakutsi pantailako bistaratzailea"
 
@@ -1896,17 +1907,17 @@ msgstr "Bilduma osoa"
 msgid "Equalizer"
 msgstr "Ekualizadorea"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1-en baliokidea"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3-en baliokidea"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Errorea"
 
@@ -2109,7 +2120,7 @@ msgstr "Automatikoki eskuratu"
 msgid "Fetch completed"
 msgstr "Eskuraketa eginda"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2425,6 +2436,10 @@ msgstr "Altua (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Altua (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Orduak"
@@ -2499,19 +2514,19 @@ msgstr "Jakinarazpenean albumaren azala gehitu"
 msgid "Include all songs"
 msgstr "Kanta guztiak erantsi"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Bolumena % 4 igo"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2748,7 +2763,7 @@ msgstr "Bilduma"
 msgid "Library advanced grouping"
 msgstr "Bildumaren taldekatze aurreratua"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Bildumaren berreskaneoaren abisua"
 
@@ -2840,7 +2855,7 @@ msgstr "Pisten informazioa kargatzen"
 msgid "Loading..."
 msgstr "Kargatzen..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordezkatuz"
 
@@ -2848,7 +2863,7 @@ msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordez
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3212,7 +3227,7 @@ msgstr "Bloke laburrik ez"
 msgid "None"
 msgstr "Bat ere ez"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Aukeraturiko abestietako bat ere ez zen aproposa gailu batera kopiatzeko"
 
@@ -3389,7 +3404,7 @@ msgstr "Fitxategiak antolatzen"
 msgid "Original tags"
 msgstr "Jatorrizko etiketak"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Bestelako aukerak"
 
@@ -3436,7 +3451,7 @@ msgstr "Jaia"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3447,7 +3462,7 @@ msgstr "Pasahitza"
 msgid "Pause"
 msgstr "Pausarazi"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Erreprodukzioa pausatu"
 
@@ -3491,7 +3506,7 @@ msgstr "Erreprodukzio kopurua"
 msgid "Play custom radio..."
 msgstr "Erreproduzitu irrati pertsonalizatua..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 
@@ -3504,7 +3519,7 @@ msgstr "Erreproduzitu ez badago ezer aurretik erreproduzitzen"
 msgid "Play tag radio..."
 msgstr "Erreproduzitu etiketaren irratia..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Erreproduzitu erreprodukzio-zerrendako <n>. pista"
 
@@ -3516,7 +3531,7 @@ msgstr "Erreproduzitu/Pausarazi"
 msgid "Playback"
 msgstr "Erreprodukzioa"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Erreproduzitzailearen aukerak"
 
@@ -3530,7 +3545,7 @@ msgstr "Erreprodukzio-zerrenda"
 msgid "Playlist finished"
 msgstr "Erreprodukzio-zerrenda amaituta"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Erreprodukzio-zerrendaren aukerak"
 
@@ -3650,7 +3665,7 @@ msgstr "Aurrekoa"
 msgid "Previous track"
 msgstr "Aurreko pista"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Bertsio-informazioa erakutsi"
 
@@ -3894,6 +3909,11 @@ msgstr "Berrezarri"
 msgid "Reset play counts"
 msgstr "Berrezarri erreprodukzio kopurua"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Mugatu ASCII karaktereetara"
@@ -3933,6 +3953,12 @@ msgstr "Exekutatu"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS proxy-a"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4087,11 +4113,11 @@ msgstr "Atzera egin"
 msgid "Seek forward"
 msgstr "Aurrera egin"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Oraingo pistan mugitu posizio erlatibo baten arabera"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Oraingo pistan mugitu posizio absolutu baten arabera"
 
@@ -4131,11 +4157,11 @@ msgstr "Hautatu bistaratzeak..."
 msgid "Serial number"
 msgstr "Serie-zenbakia"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr ""
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Zerbitzariaren xehetasunak"
 
@@ -4148,7 +4174,7 @@ msgstr "Zerbitzua lineaz kanpo"
 msgid "Set %1 to \"%2\"..."
 msgstr "Ezarri %1 \"%2\"-(e)ra..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Ezarri bolumena ehuneko <value>-ra"
 
@@ -4324,7 +4350,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Saltatu atzerantz erreprodukzio-zerrendan"
 
@@ -4332,7 +4358,7 @@ msgstr "Saltatu atzerantz erreprodukzio-zerrendan"
 msgid "Skip count"
 msgstr "Saltatu kontagailua"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Saltatu aurrerantz erreprodukzio-zerrendan"
 
@@ -4432,7 +4458,7 @@ msgstr "Estandarra"
 msgid "Starred"
 msgstr "Izarduna(k)"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Hasi oraingo erreprodukzio-zerrenda"
 
@@ -4473,7 +4499,7 @@ msgstr "Ondoren gelditu"
 msgid "Stop after this track"
 msgstr "Gelditu pista honen ondoren"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Gelditu erreprodukzioa"
 
@@ -4489,7 +4515,7 @@ msgstr "Geldituta"
 msgid "Stream"
 msgstr "Jarioa"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4507,7 +4533,7 @@ msgstr "Harpidetutako erreprodukzio-zerrenda"
 msgid "Subscribers"
 msgstr "Harpidetzak"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4626,13 +4652,13 @@ msgstr "Adierazitako helbidea ez da existitzen!"
 msgid "The site you requested is not an image!"
 msgstr "Adierazitako helbidea ez da irudi bat"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4667,16 +4693,17 @@ msgid ""
 "deleted:"
 msgstr "Arazoak egon dira abesti batzuk ezabatzean. Hurrengo fitxategiak ezin izan dira ezabatu:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Fitxategi hauek diskotik ezabatuko dira, jarraitu nahi duzu?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Fitxategi hauek gailutik ezabatuko dira, jarraitu nahi duzu?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4776,7 +4803,7 @@ msgstr "Txandakatu ilara-egoera"
 msgid "Toggle scrobbling"
 msgstr "Txandakatu partekatzea"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Txandakatu pantailako bistaratze itxurosoaren ikuspena"
 
@@ -4846,7 +4873,7 @@ msgstr "Itzali"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URLa(k)"
 
@@ -4929,7 +4956,7 @@ msgstr "%1 eguneratzen..."
 msgid "Updating library"
 msgstr "Bilduma eguneratzen"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Erabilera"
 
@@ -4948,6 +4975,10 @@ msgstr "Urruneko kontrola erabili"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Erabili errepikatze-irabaziaren metadatuak eskuragarri daudenean"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5017,7 +5048,7 @@ msgstr "Erabiltzaile-interfazea"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5182,7 +5213,7 @@ msgid ""
 "well?"
 msgstr "Beste abestiak ere Hainbat artistara mugitzea nahi duzu?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Berreskaneo osoa orain egitea nahi duzu?"
 
@@ -5190,7 +5221,7 @@ msgstr "Berreskaneo osoa orain egitea nahi duzu?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Erabiltzailea edo pasahitza ez da zuzena."
 
@@ -5479,7 +5510,7 @@ msgstr "zaharrenak arinago"
 msgid "on"
 msgstr "honen barruan"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "aukerak"
 

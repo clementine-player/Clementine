@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -710,7 +710,7 @@ msgstr "iTunes veritabanı yüklenirken hata oluştu"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1' dosyasına metadata yazarken hata oluştu"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Belirlenemeyen bir hata oluştu."
 
@@ -727,7 +727,7 @@ msgstr "Öfkeli"
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Çalma listesine dosya/URL ekle"
 
@@ -940,7 +940,7 @@ msgstr "Gözat..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Arabelleğe alınıyor"
 
@@ -984,7 +984,7 @@ msgstr "Kısayolu değiştir..."
 msgid "Change shuffle mode"
 msgstr "Karıştırma modunu değiştir"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Dili değiştir"
 
@@ -1172,7 +1172,7 @@ msgstr "Kulüp"
 msgid "Colors"
 msgstr "Renk"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Virgülle ayrılmış sınıf:seviye listesi, sınıf 0-3 arasında olabilir "
 
@@ -1254,6 +1254,17 @@ msgstr "Aygıtı bağla"
 msgid "Connecting to Spotify"
 msgstr "Spotify'a bağlanılıyor"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Konsol"
@@ -1288,7 +1299,7 @@ msgstr "Kütüphaneye kopyala..."
 msgid "Copyright"
 msgstr "Copyright"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1492,11 +1503,11 @@ msgstr "Gün"
 msgid "De&fault"
 msgstr "&Öntanımlı"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Ses seviyesini 4% azalt"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "<value> oranında sesi azaltın"
 
@@ -1530,7 +1541,7 @@ msgid "Delete downloaded data"
 msgstr "İndirilmiş veriyi sil"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Dosyaları sil"
 
@@ -1651,7 +1662,7 @@ msgstr "Kesikli aktarma"
 msgid "Display options"
 msgstr "Gösterim seçenekleri"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Ekran görselini göster"
 
@@ -1908,17 +1919,17 @@ msgstr "Tüm koleksiyon"
 msgid "Equalizer"
 msgstr "Ekolayzır"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1'e eşdeğer"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3'e eşdeğer"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Hata"
 
@@ -2121,7 +2132,7 @@ msgstr "Otomatik indir"
 msgid "Fetch completed"
 msgstr "Alım tamamlandı"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "Subsonic kütüphanesi eşleştiriliyor"
 
@@ -2437,6 +2448,10 @@ msgstr "Yüksek (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Yüksek (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Saat"
@@ -2511,19 +2526,19 @@ msgstr "Bildirimde albüm resimlendirmesini göster"
 msgid "Include all songs"
 msgstr "Tüm şarkıları içer"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Uyumsuz Subsonic REST protokol sürümü. İstemci yükseltilmeli."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Uyumsuz Subsonic REST protokol sürümü. Sunucu yükseltilmeli."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Ses seviyesini 4% arttır"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "<value> oranında sesi artırın"
 
@@ -2760,7 +2775,7 @@ msgstr "Kütüphane"
 msgid "Library advanced grouping"
 msgstr "Kütüphane gelişmiş gruplama"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Kütüphane yeniden tarama bildirisi"
 
@@ -2852,7 +2867,7 @@ msgstr "Parça bilgileri yükleniyor"
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 
@@ -2860,7 +2875,7 @@ msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3224,7 +3239,7 @@ msgstr "Kısa blok yok"
 msgid "None"
 msgstr "Hiçbiri"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Seçili şarkıların hiçbiri aygıta yüklemeye uygun değil"
 
@@ -3401,7 +3416,7 @@ msgstr "Dosyalar düzenleniyor"
 msgid "Original tags"
 msgstr "Özgün etiketler"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Diğer seçenekler"
 
@@ -3448,7 +3463,7 @@ msgstr "Parti"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3459,7 +3474,7 @@ msgstr "Parola"
 msgid "Pause"
 msgstr "Duraklat"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Beklet"
 
@@ -3503,7 +3518,7 @@ msgstr "Çalma sayısı"
 msgid "Play custom radio..."
 msgstr "Özel radyo çal..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 
@@ -3516,7 +3531,7 @@ msgstr "Çalan birşey yoksa çal"
 msgid "Play tag radio..."
 msgstr "Etiket radyosu çal..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Listedeki <n> numaralı parçayı çal"
 
@@ -3528,7 +3543,7 @@ msgstr "Çal/Duraklat"
 msgid "Playback"
 msgstr "Oynat"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Oynatıcı seçenekleri"
 
@@ -3542,7 +3557,7 @@ msgstr "Çalma Listesi"
 msgid "Playlist finished"
 msgstr "Parça listesi tamamlandı"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Çalma listesi seçenekleri"
 
@@ -3662,7 +3677,7 @@ msgstr "Önceki"
 msgid "Previous track"
 msgstr "Önceki parça"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Sürüm bilgisini bastır"
 
@@ -3906,6 +3921,11 @@ msgstr "Sıfırla"
 msgid "Reset play counts"
 msgstr "Çalma sayısını sıfırla"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "ASCII karakterler olarak kısıtla"
@@ -3945,6 +3965,12 @@ msgstr "Çalıştır"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS vekil sunucu"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr ""
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4099,11 +4125,11 @@ msgstr "Geriye doğru ara"
 msgid "Seek forward"
 msgstr "İleri doğru ara"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Çalan parçayı görece miktara göre ara"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Çalan parçayı kesin bir konuma göre ara"
 
@@ -4143,11 +4169,11 @@ msgstr "Görselleştirmeleri seç..."
 msgid "Serial number"
 msgstr "Seri numarası"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "Sunucu URL'si"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Sunucu ayrıntıları"
 
@@ -4160,7 +4186,7 @@ msgstr "Hizmet çevrim dışı"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1'i \"%2\" olarak ayarla"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Ses seviyesini yüzde <value> yap"
 
@@ -4336,7 +4362,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Parça listesinde geri git"
 
@@ -4344,7 +4370,7 @@ msgstr "Parça listesinde geri git"
 msgid "Skip count"
 msgstr "Atlama sayısı"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Parça listesinde ileri git"
 
@@ -4444,7 +4470,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Yıldızlı"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Çalma listesini mevcut çalınanla başlat"
 
@@ -4485,7 +4511,7 @@ msgstr "Şundan sonra durdur"
 msgid "Stop after this track"
 msgstr "Bu parçadan sonra durdur"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Duraklat"
 
@@ -4501,7 +4527,7 @@ msgstr "Durduruldu"
 msgid "Stream"
 msgstr "Akış"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4519,7 +4545,7 @@ msgstr "Abone olunan çalma listeleri"
 msgid "Subscribers"
 msgstr "Aboneler"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4638,13 +4664,13 @@ msgstr "İstediğiniz site mevcut değil!"
 msgid "The site you requested is not an image!"
 msgstr "İstediğiniz site bir resim değil!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic sunucusunun deneme süresi bitti. Lisans anahtarı almak için lütfen bağış yapın. Ayrıntılar için subsonic.org'u ziyaret edin."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4679,16 +4705,17 @@ msgid ""
 "deleted:"
 msgstr "Bazı şarkılar silinirken hata oluştu. Şu dosyalar silinemedi:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Bu dosyalar diskten silinecek, devam etmek istiyor musunuz?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Bu dosyalar aygıttan silinecek, devam etmek istiyor musunuz?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4788,7 +4815,7 @@ msgstr "Kuyruk durumunu göster/gizle"
 msgid "Toggle scrobbling"
 msgstr "Skroplamayı aç/kapa"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Şirin OSD görünürlüğünü aç/kapa"
 
@@ -4858,7 +4885,7 @@ msgstr "Kapat"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(ler)"
 
@@ -4941,7 +4968,7 @@ msgstr "%1% Güncelleniyor..."
 msgid "Updating library"
 msgstr "Kütüphane güncelleniyor"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Kullanım"
 
@@ -4960,6 +4987,10 @@ msgstr "Uzaktan Kontrolü Kullan"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Varsa Replay Gain verisini kullan"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5029,7 +5060,7 @@ msgstr "Kullanıcı arayüzü"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5194,7 +5225,7 @@ msgid ""
 "well?"
 msgstr "Bu albümdeki diğer şarkıları da Çeşitli Sanatçılar'a taşımak ister misiniz?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Şu anda tam bir yeniden tarama çalıştırmak ister misiniz?"
 
@@ -5202,7 +5233,7 @@ msgstr "Şu anda tam bir yeniden tarama çalıştırmak ister misiniz?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Yanlış kullanıcı adı veya parola."
 
@@ -5491,7 +5522,7 @@ msgstr "ilk önce en eskisi"
 msgid "on"
 msgstr "açık"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "seçenekler"
 

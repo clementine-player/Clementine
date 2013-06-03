@@ -6,7 +6,7 @@
 # Asfaloth <asfa194@gmail.com>, 2013
 # Ankorath <barolth@gmail.com>, 2013
 # Mariaki <benedikt_v@web.de>, 2013
-# Burtek Dotryw <burtekdotryw@gmail.com>, 2013
+# Bartosz Dotryw <burtekdotryw@gmail.com>, 2013
 # Christian Sturm <reezer@reezer.org>, 2011, 2012
 # Claudius Henrichs <claudius.h@gmx.de>, 2011
 # daschuer <daschuer@gmx.de>, 2012
@@ -26,13 +26,14 @@
 # Mosley <stefan@stefantiemann.de>, 2011
 # El_Zorro_Loco <the.crazy.zorro@googlemail.com>, 2011, 2012
 # Wasilis <inactive+Wasilis@transifex.com>, 2013
+# Wasilis Mandratzis <m.wasilis@yahoo.de>, 2013
 # Wilhelm Einstein <>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-06-02 00:40+0000\n"
+"Last-Translator: Wasilis Mandratzis <m.wasilis@yahoo.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -717,7 +718,7 @@ msgstr "Beim Laden der iTunes-Datenbank ist ein Fehler aufgetreten"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Beim Schreiben der Metadaten für '%1' trat ein Fehler auf"
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr "Ein unspezifizierter Fehler ist aufgetreten."
 
@@ -734,7 +735,7 @@ msgstr "Wütend"
 msgid "Appearance"
 msgstr "Erscheinungsbild"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr "Dateien/URLs an die Wiedergabeliste anhängen"
 
@@ -947,7 +948,7 @@ msgstr "Durchsuchen…"
 msgid "Buffer duration"
 msgstr "Zwischenspeicher (Buffer) Dauer"
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr "Puffern"
 
@@ -991,7 +992,7 @@ msgstr "Tastenkürzel ändern..."
 msgid "Change shuffle mode"
 msgstr "Zufallsmodus ändern"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Sprache ändern"
 
@@ -1179,7 +1180,7 @@ msgstr "Club"
 msgid "Colors"
 msgstr "Farben"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komma-getrennte Liste mit \"class:level\" (Level zwischen 0-3)"
 
@@ -1261,6 +1262,17 @@ msgstr "Gerät verbinden"
 msgid "Connecting to Spotify"
 msgstr "Verbindung mit Spotify wird aufgebaut"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr "Verbindung verweigert vom Server, Server-URL überprüfen. Beispiel: http://localhost:4040/"
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr "Zeitüberschreitung, überprüfen Sie die Server-URL. Beispiel: http://localhost:4040/"
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr "Konsole"
@@ -1295,7 +1307,7 @@ msgstr "Zur Musiksammlung kopieren..."
 msgid "Copyright"
 msgstr "Urheberrecht"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1499,11 +1511,11 @@ msgstr "Tage"
 msgid "De&fault"
 msgstr "S&tandard"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "Lautstärke um 4% verringern"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr "Lautstärke um <value> Prozent verringern"
 
@@ -1537,7 +1549,7 @@ msgid "Delete downloaded data"
 msgstr "Heruntergeladene Dateien löschen"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Dateien löschen"
 
@@ -1658,7 +1670,7 @@ msgstr "Unterbrochene Übertragung"
 msgid "Display options"
 msgstr "Anzeigeoptionen"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "OSD anzeigen"
 
@@ -1915,17 +1927,17 @@ msgstr "Gesamte Sammlung"
 msgid "Equalizer"
 msgstr "Equalizer"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Äquivalent zu --log-levels *:1"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Äquivalent zu --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Fehler"
 
@@ -2128,7 +2140,7 @@ msgstr "Cover automatisch holen"
 msgid "Fetch completed"
 msgstr "Abholen abgeschlossen"
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr "Subsonic-Bibliothek wird abgerufen"
 
@@ -2444,6 +2456,10 @@ msgstr "Hoch (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Hoch (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr "Host nicht gefunden, überprüfen Sie die Server-URL. Beispiel: http://localhost:4040/"
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Stunden"
@@ -2518,19 +2534,19 @@ msgstr "Cover in der Benachrichtigung anzeigen"
 msgid "Include all songs"
 msgstr "Alle Titel einbeziehen"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Inkompatible \"Subsonic REST protocol version\". Der Client braucht ein Upgrade."
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Inkompatible \"Subsonic REST protocol version\". Der Server braucht ein Upgrade."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "Lautstärke um 4% erhöhen"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr "Lautstärke um <value> Prozent erhöhen"
 
@@ -2767,7 +2783,7 @@ msgstr "Sammlung"
 msgid "Library advanced grouping"
 msgstr "Benutzerdefinierte Gruppierung"
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr "Hinweis beim Neueinscannen der Bibliothek"
 
@@ -2859,7 +2875,7 @@ msgstr "Lade Stückinfo"
 msgid "Loading..."
 msgstr "Wird geladen ..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Öffne Dateien/URLs und ersetze die Wiedergabeliste"
 
@@ -2867,7 +2883,7 @@ msgstr "Öffne Dateien/URLs und ersetze die Wiedergabeliste"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3231,7 +3247,7 @@ msgstr "Keine kurzen Blöcke"
 msgid "None"
 msgstr "Nichts"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Keiner der gewählten Titel war zum Kopieren auf ein Gerät geeignet."
 
@@ -3408,7 +3424,7 @@ msgstr "Dateien organisieren"
 msgid "Original tags"
 msgstr "Original Tags"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Weitere Optionen"
 
@@ -3455,7 +3471,7 @@ msgstr "Party"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3466,7 +3482,7 @@ msgstr "Passwort:"
 msgid "Pause"
 msgstr "Pause"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Wiedergabe pausieren"
 
@@ -3510,7 +3526,7 @@ msgstr "Abspielzähler"
 msgid "Play custom radio..."
 msgstr "Benutzerdefiniertes Radio abspielen..."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Wiedergeben wenn angehalten, pausieren bei Wiedergabe"
 
@@ -3523,7 +3539,7 @@ msgstr "Mit der Wiedergabe beginnen, falls gerade nichts anderes abgespielt wird
 msgid "Play tag radio..."
 msgstr "Spiele Tag-Radio..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr "Spiele Stück Nummer <n> der Wiedergabeliste"
 
@@ -3535,7 +3551,7 @@ msgstr "Abspielen/Pause"
 msgid "Playback"
 msgstr "Wiedergabe"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Player Einstellungen"
 
@@ -3549,7 +3565,7 @@ msgstr "Wiedergabeliste"
 msgid "Playlist finished"
 msgstr "Wiedergabeliste beendet"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr "Wiedergabeliste einrichten"
 
@@ -3669,7 +3685,7 @@ msgstr "Vorheriger"
 msgid "Previous track"
 msgstr "Vorheriges Stück"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Versionsinformationen anzeigen"
 
@@ -3913,6 +3929,11 @@ msgstr "Zurücksetzen"
 msgid "Reset play counts"
 msgstr "Abspielzähler zurücksetzen"
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr "Starten Sie den Titel oder den vorherigen Titel, wenn sie innerhalb von 8 Sekunden nach Beginn."
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Nur ASCII-Zeichen benutzen"
@@ -3952,6 +3973,12 @@ msgstr "Ausführen"
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS-Proxy"
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
+msgstr "SSL-Handshake Fehler, überprüfen sie die Serverkonfiguration. Die SSLv3 Option unten kann die Lösung einiger Probleme sein."
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4106,11 +4133,11 @@ msgstr "Zurückspulen"
 msgid "Seek forward"
 msgstr "Vorspulen"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Im aktuellen Stück vorspulen"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Im aktuellen Stück zu einer Position springen"
 
@@ -4150,11 +4177,11 @@ msgstr "Visualisierungen auswählen..."
 msgid "Serial number"
 msgstr "Seriennummer"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr "Server-URL"
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr "Server-Details"
 
@@ -4167,7 +4194,7 @@ msgstr "Dienst nicht verfügbar"
 msgid "Set %1 to \"%2\"..."
 msgstr "Setze %1 zu \"%2\"..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Setze Lautstärke auf <value>%"
 
@@ -4343,7 +4370,7 @@ msgstr "Größe:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "Voriges Stück in der Wiedergabeliste"
 
@@ -4351,7 +4378,7 @@ msgstr "Voriges Stück in der Wiedergabeliste"
 msgid "Skip count"
 msgstr "Sprungzähler"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "Nächstes Stück in der Wiedergabeliste"
 
@@ -4451,7 +4478,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Markiert"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Spiele das aktuelle Stück in der Wiedergabeliste ab"
 
@@ -4492,7 +4519,7 @@ msgstr "Anhalten nach"
 msgid "Stop after this track"
 msgstr "Wiedergabe nach diesem Stück beenden"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Wiedergabe anhalten"
 
@@ -4508,7 +4535,7 @@ msgstr "Angehalten"
 msgid "Stream"
 msgstr "Stream"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4526,7 +4553,7 @@ msgstr "Abonnierte Wiedergabelisten"
 msgid "Subscribers"
 msgstr "Abonnenten"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4645,13 +4672,13 @@ msgstr "Die aufgerufene Seite existiert nicht!"
 msgid "The site you requested is not an image!"
 msgstr "Die angeforderte Seite ist kein Bild!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Die Versuchsperiode für den Subsonic-Server ist abgelaufen. Bitte machen Sie eine Spende, um einen Lizenzschlüssel zu erhalten. Details finden sich auf subsonic.org."
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4686,16 +4713,17 @@ msgid ""
 "deleted:"
 msgstr "Beim Löschen einiger Titel ist ein Fehler aufgetreten. Die folgenden Dateien konnten nicht gelöscht werden:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Diese Dateien werden von der Festplatte gelöscht. Möchten Sie wirklich fortfahren?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Diese Dateien werden vom Gerät gelöscht. Möchten Sie wirklich fortfahren?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr "Diese Dateien werden von der Festplatte gelöscht. Möchten Sie wirklich fortfahren?"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4795,7 +4823,7 @@ msgstr "Einreihungsstatus ändern"
 msgid "Toggle scrobbling"
 msgstr "Scrobbeln ein- oder ausschalten"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Sichtbarkeit des Clementine-OSD anpassen"
 
@@ -4865,7 +4893,7 @@ msgstr "Ausschalten"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4948,7 +4976,7 @@ msgstr "Aktualisiere %1%..."
 msgid "Updating library"
 msgstr "Aktualisiere Musiksammlung"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Benutzung"
 
@@ -4967,6 +4995,10 @@ msgstr "Aktiviere Netzwerkfernsteuerung"
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Benutze Replay-Gain-Metadaten wenn verfügbar"
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
+msgstr "SSLv3 verwenden"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5036,7 +5068,7 @@ msgstr "Benutzeroberfläche"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5201,7 +5233,7 @@ msgid ""
 "well?"
 msgstr "Möchten Sie die anderen Titel dieses Albums ebenfalls unter \"Verschiedene Interpreten\" anzeigen?"
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr "Möchten Sie jetzt Ihre Musiksammlung erneut einlesen?"
 
@@ -5209,7 +5241,7 @@ msgstr "Möchten Sie jetzt Ihre Musiksammlung erneut einlesen?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Speichere alle Titel-Statistiken in die Titel-Dateien"
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr "Benutzername oder Passwort falsch."
 
@@ -5498,7 +5530,7 @@ msgstr "älteste zuerst"
 msgid "on"
 msgstr "am"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "Einstellungen"
 

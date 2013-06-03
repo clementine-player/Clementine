@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-05-17 15:57+0000\n"
+"PO-Revision-Date: 2013-06-01 08:37+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Irish (http://www.transifex.com/projects/p/clementine/language/ga/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -694,7 +694,7 @@ msgstr ""
 msgid "An error occurred writing metadata to '%1'"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:100
+#: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
 msgstr ""
 
@@ -711,7 +711,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Cuma"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:166
 msgid "Append files/URLs to the playlist"
 msgstr ""
 
@@ -924,7 +924,7 @@ msgstr "Siortaigh..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:892
+#: engines/gstengine.cpp:785
 msgid "Buffering"
 msgstr ""
 
@@ -968,7 +968,7 @@ msgstr "Athraigh an t-aicearra"
 msgid "Change shuffle mode"
 msgstr ""
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Athraigh an teanga"
 
@@ -1156,7 +1156,7 @@ msgstr "Club"
 msgid "Colors"
 msgstr "Dathanna"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 
@@ -1238,6 +1238,17 @@ msgstr "Nasc gléas"
 msgid "Connecting to Spotify"
 msgstr "Ag nascadh le Spotify"
 
+#: internet/subsonicsettingspage.cpp:107
+msgid ""
+"Connection refused by server, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:117
+msgid ""
+"Connection timed out, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
 msgstr ""
@@ -1272,7 +1283,7 @@ msgstr "Macasamhlaigh go leabharlann..."
 msgid "Copyright"
 msgstr "Cóipcheart"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:81
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1476,11 +1487,11 @@ msgstr "Lá"
 msgid "De&fault"
 msgstr "Réamhshocrú"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr ""
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
@@ -1514,7 +1525,7 @@ msgid "Delete downloaded data"
 msgstr "Scrios sonraí íosluchtaithe"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1876 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1879 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Scrios comhaid"
 
@@ -1635,7 +1646,7 @@ msgstr ""
 msgid "Display options"
 msgstr "Roghanna taispeána"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr ""
 
@@ -1892,17 +1903,17 @@ msgstr "An cnuasach ar fad"
 msgid "Equalizer"
 msgstr "Cothromóir"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr ""
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1828 ui/mainwindow.cpp:1944
+#: ui/mainwindow.cpp:1831 ui/mainwindow.cpp:1947
 msgid "Error"
 msgstr "Botún"
 
@@ -2105,7 +2116,7 @@ msgstr ""
 msgid "Fetch completed"
 msgstr ""
 
-#: internet/subsonicservice.cpp:218
+#: internet/subsonicservice.cpp:225
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2421,6 +2432,10 @@ msgstr "Ard (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Ard (1024x1024)"
 
+#: internet/subsonicsettingspage.cpp:112
+msgid "Host not found, check server URL. Example: http://localhost:4040/"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
 msgstr "Uair"
@@ -2495,19 +2510,19 @@ msgstr ""
 msgid "Include all songs"
 msgstr "Iniaigh gach amhrán"
 
-#: internet/subsonicsettingspage.cpp:87
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr ""
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
@@ -2744,7 +2759,7 @@ msgstr "Leabharlann"
 msgid "Library advanced grouping"
 msgstr ""
 
-#: ui/mainwindow.cpp:2061
+#: ui/mainwindow.cpp:2064
 msgid "Library rescan notice"
 msgstr ""
 
@@ -2836,7 +2851,7 @@ msgstr ""
 msgid "Loading..."
 msgstr "Ag luchtú..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid "Loads files/URLs, replacing current playlist"
 msgstr ""
 
@@ -2844,7 +2859,7 @@ msgstr ""
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
-#: ../bin/src/ui_subsonicsettingspage.h:121
+#: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -3208,7 +3223,7 @@ msgstr ""
 msgid "None"
 msgstr "Dada"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1829 ui/mainwindow.cpp:1945
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1832 ui/mainwindow.cpp:1948
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
@@ -3385,7 +3400,7 @@ msgstr "Ag eagrú comhaid"
 msgid "Original tags"
 msgstr "Clibeanna bunaidh"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 msgid "Other options"
 msgstr "Roghanna eile"
 
@@ -3432,7 +3447,7 @@ msgstr "Cóisir"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
-#: ../bin/src/ui_subsonicsettingspage.h:120
+#: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3443,7 +3458,7 @@ msgstr "Focal faire"
 msgid "Pause"
 msgstr "Cuir ar sos"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "Cuir athsheinm ar sos"
 
@@ -3487,7 +3502,7 @@ msgstr ""
 msgid "Play custom radio..."
 msgstr ""
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr ""
 
@@ -3500,7 +3515,7 @@ msgstr "Seinn mura bhfuil aon rud eile ag seinm cheana féin"
 msgid "Play tag radio..."
 msgstr ""
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:168
 msgid "Play the <n>th track in the playlist"
 msgstr ""
 
@@ -3512,7 +3527,7 @@ msgstr "Seinn/Cuir ar sos"
 msgid "Playback"
 msgstr "Athsheinm"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "Roghanna an tseinnteora"
 
@@ -3526,7 +3541,7 @@ msgstr ""
 msgid "Playlist finished"
 msgstr ""
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Playlist options"
 msgstr ""
 
@@ -3646,7 +3661,7 @@ msgstr "Roimhe"
 msgid "Previous track"
 msgstr "An rian roimhe"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Clóbhuail eolas an leagain"
 
@@ -3890,6 +3905,11 @@ msgstr "Athshocraigh"
 msgid "Reset play counts"
 msgstr ""
 
+#: core/commandlineoptions.cpp:164
+msgid ""
+"Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr ""
@@ -3928,6 +3948,12 @@ msgstr ""
 
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:122
+msgid ""
+"SSL handshake error, verify server configuration. SSLv3 option below may "
+"workaround some issues."
 msgstr ""
 
 #: devices/deviceview.cpp:202
@@ -4083,11 +4109,11 @@ msgstr "Aimsigh siar"
 msgid "Seek forward"
 msgstr "Aimsigh ar aghaidh"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
 msgstr ""
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
 msgstr ""
 
@@ -4127,11 +4153,11 @@ msgstr "Roghnaigh amharcléirithe..."
 msgid "Serial number"
 msgstr "Sraithuimhir"
 
-#: ../bin/src/ui_subsonicsettingspage.h:118
+#: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
 msgstr ""
 
-#: ../bin/src/ui_subsonicsettingspage.h:117
+#: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
 msgstr ""
 
@@ -4144,7 +4170,7 @@ msgstr ""
 msgid "Set %1 to \"%2\"..."
 msgstr "Socraigh %1 go \"%2\"..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "Socraigh an airde chuig <value> faoin gcéad"
 
@@ -4320,7 +4346,7 @@ msgstr ""
 msgid "Ska"
 msgstr ""
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr ""
 
@@ -4328,7 +4354,7 @@ msgstr ""
 msgid "Skip count"
 msgstr ""
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr ""
 
@@ -4428,7 +4454,7 @@ msgstr "Caighdeánach"
 msgid "Starred"
 msgstr "Réalt curtha leis"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr ""
 
@@ -4469,7 +4495,7 @@ msgstr "Stad i ndiaidh"
 msgid "Stop after this track"
 msgstr "Stad i ndiaidh an rian seo"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Stad an athsheinm"
 
@@ -4485,7 +4511,7 @@ msgstr "Stadtha"
 msgid "Stream"
 msgstr "Sruth"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonicsettingspage.cpp:30
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4503,7 +4529,7 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr ""
 
@@ -4622,13 +4648,13 @@ msgstr "Níl an láithreán ar iarr tú air ann!"
 msgid "The site you requested is not an image!"
 msgstr "Ní íomhá é an láithreán a iarr tú air!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:2057
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4663,16 +4689,17 @@ msgid ""
 "deleted:"
 msgstr "Tharla fadhbanna ag scriosadh cuid de na hamhráin. Níorbh fhéidir na comhaid a leanas a scriosadh:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1877 widgets/fileview.cpp:188
-msgid ""
-"These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Scriosfar na comhaid seo ón ndiosca, an bhfuil tú cinnte gur mhaith leat leanúint ar aghaidh?"
-
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Scriosfar na comhaid seo ón ngléas, an bhfuil tú cinnte gur mian leat leanúint ar aghaidh?"
+
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1880 widgets/fileview.cpp:188
+msgid ""
+"These files will be permanently deleted from disk, are you sure you want to "
+"continue?"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4772,7 +4799,7 @@ msgstr ""
 msgid "Toggle scrobbling"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
@@ -4842,7 +4869,7 @@ msgstr "Múch"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(anna)"
 
@@ -4925,7 +4952,7 @@ msgstr "Ag nuashonrú %1%..."
 msgid "Updating library"
 msgstr "Ag nuashonrú an leabharlann"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Úsáid"
 
@@ -4943,6 +4970,10 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
+msgstr ""
+
+#: ../bin/src/ui_subsonicsettingspage.h:129
+msgid "Use SSLv3"
 msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
@@ -5013,7 +5044,7 @@ msgstr "Comhéadan"
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_subsonicsettingspage.h:119
+#: ../bin/src/ui_subsonicsettingspage.h:127
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -5178,7 +5209,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2059
+#: ui/mainwindow.cpp:2062
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -5186,7 +5217,7 @@ msgstr ""
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:83
+#: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
 msgstr ""
 
@@ -5475,7 +5506,7 @@ msgstr "na cinn is sine ar dtús"
 msgid "on"
 msgstr "ar"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "roghanna"
 
