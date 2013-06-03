@@ -676,7 +676,6 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   connect(ret.get(), SIGNAL(Error(int, QString,int,int)), SLOT(HandlePipelineError(int, QString,int,int)));
   connect(ret.get(), SIGNAL(MetadataFound(int, Engine::SimpleMetaBundle)),
           SLOT(NewMetaData(int, Engine::SimpleMetaBundle)));
-  connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeBuffers()));
   connect(ret.get(), SIGNAL(BufferingStarted()), SLOT(BufferingStarted()));
   connect(ret.get(), SIGNAL(BufferingProgress(int)), SLOT(BufferingProgress(int)));
   connect(ret.get(), SIGNAL(BufferingFinished()), SLOT(BufferingFinished()));
