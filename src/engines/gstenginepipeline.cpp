@@ -55,6 +55,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     segment_start_(0),
     segment_start_received_(false),
     emit_track_ended_on_segment_start_(false),
+    emit_track_ended_on_time_discontinuity_(false),
     eq_enabled_(false),
     eq_preamp_(0),
     stereo_balance_(0.0f),
@@ -718,6 +719,14 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
     }
   }
 
+  if (instance->emit_track_ended_on_time_discontinuity_) {
+    if (GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DISCONT)) {
+      qLog(Debug) << "Buffer discontinuity - emitting EOS";
+      instance->emit_track_ended_on_time_discontinuity_ = false;
+      emit instance->EndOfStreamReached(instance->id(), true);
+    }
+  }
+
   return true;
 }
 
@@ -735,8 +744,10 @@ bool GstEnginePipeline::EventHandoffCallback(GstPad*, GstEvent* e, gpointer self
     instance->segment_start_received_ = true;
 
     if (instance->emit_track_ended_on_segment_start_) {
+      qLog(Debug) << "New segment started, EOS will signal on next buffer "
+                     "discontinuity";
       instance->emit_track_ended_on_segment_start_ = false;
-      emit instance->EndOfStreamReached(instance->id(), true);
+      instance->emit_track_ended_on_time_discontinuity_ = true;
     }
   }
 
