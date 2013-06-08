@@ -189,6 +189,7 @@ class GstEnginePipeline : public QObject {
   bool segment_start_received_;
   bool emit_track_ended_on_segment_start_;
   bool emit_track_ended_on_time_discontinuity_;
+  qint64 last_buffer_offset_;
 
   // Equalizer
   bool eq_enabled_;
