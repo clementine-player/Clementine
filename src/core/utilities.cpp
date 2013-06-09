@@ -354,7 +354,7 @@ void RevealFileInFinder(QString const& path) {
 #ifdef Q_OS_WIN
 void ShowFileInExplorer(QString const& path) {
   QProcess::execute("explorer.exe", QStringList() << "/select,"
-                                                  << QDir::toNativeSeparators(path);
+                                                  << QDir::toNativeSeparators(path));
 }
 #endif
 
