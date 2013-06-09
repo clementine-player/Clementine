@@ -46,6 +46,7 @@
 #  include <sys/statvfs.h>
 #elif defined(Q_OS_WIN32)
 #  include <windows.h>
+#  include <QProcess>
 #endif
 
 #ifdef Q_OS_LINUX
@@ -352,10 +353,8 @@ void RevealFileInFinder(QString const& path) {
 
 #ifdef Q_OS_WIN
 void ShowFileInExplorer(QString const& path) {
-  // QUrl.toLocalFile() returns the path always with forward slashes,
-  // but the explorer needs two backslashes to navigate to the file.
   QProcess::execute("explorer.exe", QStringList() << "/select,"
-                                                  << path.replace("/", "\\"));
+                                                  << QDir::toNativeSeparators(path);
 }
 #endif
 
@@ -375,6 +374,7 @@ void OpenInFileBrowser(const QList<QUrl>& urls) {
     if (dirs.contains(directory))
       continue;
     dirs.insert(directory);
+    qLog(Debug) << path;
 #ifdef Q_OS_DARWIN
     // revealing multiple files in the finder only opens one window,
     // so it also makes sense to reveal at most one per directory
