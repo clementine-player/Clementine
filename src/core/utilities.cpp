@@ -350,6 +350,15 @@ void RevealFileInFinder(QString const& path) {
 }
 #endif  // Q_OS_DARWIN
 
+#ifdef Q_OS_WIN
+void ShowFileInExplorer(QString const& path) {
+  // QUrl.toLocalFile() returns the path always with forward slashes,
+  // but the explorer needs two backslashes to navigate to the file.
+  QProcess::execute("explorer.exe", QStringList() << "/select,"
+                                                  << path.replace("/", "\\"));
+}
+#endif
+
 void OpenInFileBrowser(const QList<QUrl>& urls) {
   QSet<QString> dirs;
 
@@ -370,6 +379,8 @@ void OpenInFileBrowser(const QList<QUrl>& urls) {
     // revealing multiple files in the finder only opens one window,
     // so it also makes sense to reveal at most one per directory
     RevealFileInFinder(path);
+#elif defined(Q_OS_WIN32)
+    ShowFileInExplorer(path);
 #else
     QDesktopServices::openUrl(QUrl::fromLocalFile(directory));
 #endif
