@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-06-02 08:04+0000\n"
+"PO-Revision-Date: 2013-06-03 12:50+0000\n"
 "Last-Translator: Sparkrin <rindertvonk@gmx.net>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,12 +63,12 @@ msgstr " nummers"
 msgid "%1 albums"
 msgstr "%1 albums"
 
-#: core/utilities.cpp:107
+#: core/utilities.cpp:108
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dagen"
 
-#: core/utilities.cpp:128
+#: core/utilities.cpp:129
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 dagen geleden"
@@ -242,7 +242,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:107
+#: core/utilities.cpp:108
 msgid "1 day"
 msgstr "1 dag"
 
@@ -930,7 +930,7 @@ msgstr "Bladeren…"
 msgid "Buffer duration"
 msgstr "Buffer duur"
 
-#: engines/gstengine.cpp:785
+#: engines/gstengine.cpp:784
 msgid "Buffering"
 msgstr "Bufferen"
 
@@ -1248,12 +1248,12 @@ msgstr "Met Spotify verbinden"
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr "Verbinding gewijgerd door server, controleer de URL van de server. Bijvoorbeeld: http://localhost:4040/"
+msgstr "Verbinding geweigerd door server, controleer de URL van de server. Bijvoorbeeld: http://localhost:4040/"
 
 #: internet/subsonicsettingspage.cpp:117
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Time-out van verbinding, controleer de URL van de server. Bijvoorbeeld: http://localhost:4040/"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
@@ -1293,7 +1293,7 @@ msgstr "Copyright"
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr "Kon niet verbinden met Subsonic, controleer de URL van de server. Bijvoorbeeld: http://localhost:4040/"
+msgstr "Kon niet verbinden met Subsonic, , controleer de URL van de server. Bijvoorbeeld: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -2440,7 +2440,7 @@ msgstr "Hoog (1024x1024)"
 
 #: internet/subsonicsettingspage.cpp:112
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Host niet gevonden, controleer de URL van de server. Bijvoorbeeld: http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
@@ -2488,12 +2488,12 @@ msgstr "Afbeeldingen (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.x
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Afbeeldingen (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 #, qt-format
 msgid "In %1 days"
 msgstr "In %1 dagen"
 
-#: core/utilities.cpp:148
+#: core/utilities.cpp:149
 #, qt-format
 msgid "In %1 weeks"
 msgstr "In %1 weken"
@@ -3195,7 +3195,7 @@ msgstr "Volgende"
 msgid "Next track"
 msgstr "Volgend nummer"
 
-#: core/utilities.cpp:146
+#: core/utilities.cpp:147
 msgid "Next week"
 msgstr "Volgende week"
 
@@ -3914,7 +3914,7 @@ msgstr "Reset afspeelstatistieken"
 #: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "Herstart het afspelen van track, of speel het vorige nummer af bij 8 seconden van start."
 
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
@@ -3960,7 +3960,7 @@ msgstr "SOCKS proxy"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "Foout bij SSL handshake, controleer server instellingen. De SSLv3 optie hieronder zou sommige problemen kunnen oplossen."
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4705,7 +4705,7 @@ msgstr "Deze bestanden zullen definitief van het apparaat verwijderd worden. Wee
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Deze bestanden zullen definitief van de schijf verwijderd worden, weet u zeker dat u door wil gaan?"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4785,7 +4785,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Om Grooveshark radio te starten moet je eerst naar andere Grooveshark nummers luisteren"
 
-#: core/utilities.cpp:124 core/utilities.cpp:140
+#: core/utilities.cpp:125 core/utilities.cpp:141
 msgid "Today"
 msgstr "Vandaag"
 
@@ -4809,7 +4809,7 @@ msgstr "Zet scrobbling aan/uit"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Zichtbaarheid voor het mooie infoschermvenster aan/uit"
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:143
 msgid "Tomorrow"
 msgstr "Morgen"
 
@@ -4980,7 +4980,7 @@ msgstr "Replay Gain-metadata gebruiken, als deze beschikbaar is"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 msgid "Use SSLv3"
-msgstr ""
+msgstr "Gebruik SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5243,7 +5243,7 @@ msgstr "Jaar - Album"
 msgid "Years"
 msgstr "Jaar"
 
-#: core/utilities.cpp:126
+#: core/utilities.cpp:127
 msgid "Yesterday"
 msgstr "Gisteren"
 
