@@ -37,6 +37,7 @@ class SubsonicService : public InternetService
     LoginState_HostNotFound,
     LoginState_Timeout,
     LoginState_SslError,
+    LoginState_IncompleteCredentials,
   };
 
   enum ApiError {

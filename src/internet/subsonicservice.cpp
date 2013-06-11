@@ -173,6 +173,9 @@ void SubsonicService::Login() {
   if (IsConfigured()) {
     // Ping is enough to check credentials
     Ping();
+  } else {
+    login_state_ = LoginState_IncompleteCredentials;
+    emit LoginStateChanged(login_state_);
   }
 }
 

@@ -123,6 +123,10 @@ void SubsonicSettingsPage::LoginStateChanged(SubsonicService::LoginState newstat
                                             "SSLv3 option below may workaround some issues."));
     break;
 
+  case SubsonicService::LoginState_IncompleteCredentials:
+    ui_->login_state->SetAccountTypeText(tr("Incomplete configuration, please ensure all fields are populated."));
+    break;
+
   default:
     break;
   }
