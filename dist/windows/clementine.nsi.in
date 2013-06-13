@@ -32,7 +32,9 @@ SetCompressor /SOLID lzma
 !define MUI_ICON "clementine.ico"
 
 !define MUI_COMPONENTSPAGE_SMALLDESC
-!define MUI_FINISHPAGE_RUN $INSTDIR/clementine.exe
+!define MUI_FINISHPAGE_RUN
+!define MUI_FINISHPAGE_RUN_TEXT "Run Clementine"
+!define MUI_FINISHPAGE_RUN_FUNCTION "RunClementine"
 
 ; Installer pages
 !insertmacro MUI_PAGE_WELCOME
@@ -53,6 +55,10 @@ InstallDir "${PRODUCT_INSTALL_DIR}"
 ShowInstDetails show
 ShowUnInstDetails show
 RequestExecutionLevel admin
+
+Function RunClementine
+  ShellExecAsUser::ShellExecAsUser "" "$INSTDIR/clementine.exe"
+FunctionEnd
 
 Section "Delete old files" oldfiles
   ; Delete files from older versions
