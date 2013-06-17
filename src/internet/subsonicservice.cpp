@@ -397,6 +397,7 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
     song.set_title(reader.attributes().value("title").toString());
     song.set_album(reader.attributes().value("album").toString());
     song.set_track(reader.attributes().value("track").toString().toInt());
+    song.set_disc(reader.attributes().value("discNumber").toString().toInt());
     song.set_artist(reader.attributes().value("artist").toString());
     song.set_albumartist(album_artist);
     song.set_bitrate(reader.attributes().value("bitRate").toString().toInt());
