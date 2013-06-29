@@ -254,10 +254,18 @@ void PlaylistManager::Rename(int id, const QString& new_name) {
 }
 
 void PlaylistManager::Favorite(int id, bool favorite) {
-  Q_ASSERT(playlists_.contains(id));
 
-  playlist_backend_->FavoritePlaylist(id, favorite);
-  playlists_[id].p->set_favorite(favorite);
+  if (playlists_.contains(id)) {
+    // If playlists_ contains this playlist, its means it's opened: star or unstar it.
+    playlist_backend_->FavoritePlaylist(id, favorite);
+    playlists_[id].p->set_favorite(favorite);
+  } else {
+    Q_ASSERT(!favorite);
+    // Otherwise it means user wants to remove this playlist from the left panel,
+    // while it's not visible in the playlist tabbar either, because it has been
+    // closed: delete it.
+    playlist_backend_->RemovePlaylist(id);
+  }
   emit PlaylistFavorited(id, favorite);
 }
 
