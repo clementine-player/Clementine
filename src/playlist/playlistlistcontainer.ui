@@ -89,7 +89,7 @@
     </widget>
    </item>
    <item>
-    <widget class="AutoExpandingTreeView" name="tree">
+    <widget class="PlaylistListView" name="tree">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -129,6 +129,12 @@
    <class>AutoExpandingTreeView</class>
    <extends>QTreeView</extends>
    <header>widgets/autoexpandingtreeview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PlaylistListView</class>
+   <extends>AutoExpandingTreeView</extends>
+   <header>playlist/playlistlistview.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

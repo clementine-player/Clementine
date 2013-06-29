@@ -233,6 +233,7 @@ set(SOURCES
   playlist/playlistitem.cpp
   playlist/playlistlistcontainer.cpp
   playlist/playlistlistmodel.cpp
+  playlist/playlistlistview.cpp
   playlist/playlistmanager.cpp
   playlist/playlistsequence.cpp
   playlist/playlisttabbar.cpp
@@ -520,6 +521,7 @@ set(HEADERS
   playlist/playlistitemmimedata.h
   playlist/playlistlistcontainer.h
   playlist/playlistlistmodel.h
+  playlist/playlistlistview.h
   playlist/playlistmanager.h
   playlist/playlistsequence.h
   playlist/playlisttabbar.h
