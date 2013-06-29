@@ -233,6 +233,9 @@ void PlaylistTabBar::InsertTab(int id, int index, const QString& text, bool favo
   setTabData(index, id);
   setTabToolTip(index, text);
   FavoriteWidget* widget = new FavoriteWidget(id, favorite);
+  widget->setToolTip(tr(
+      "Click here to favorite this playlist so it will be saved and remain accessible "
+      "through the \"Playlists\" panel on the left side bar"));
   connect(widget, SIGNAL(FavoriteStateChanged(int, bool)),
                   SIGNAL(PlaylistFavorited(int, bool)));
   setTabButton(index, QTabBar::LeftSide, widget);
