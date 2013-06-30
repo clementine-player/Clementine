@@ -353,6 +353,7 @@ MainWindow::MainWindow(Application* app,
   connect(ui_->action_update_library, SIGNAL(triggered()), app_->library(), SLOT(IncrementalScan()));
   connect(ui_->action_full_library_scan, SIGNAL(triggered()), app_->library(), SLOT(FullScan()));
   connect(ui_->action_queue_manager, SIGNAL(triggered()), SLOT(ShowQueueManager()));
+  connect(ui_->action_add_files_to_transcoder, SIGNAL(triggered()), SLOT(AddFilesToTranscoder()));
 
   background_streams_->AddAction("Rain", ui_->action_rain);
   background_streams_->AddAction("Hypnotoad", ui_->action_hypnotoad);
@@ -497,6 +498,7 @@ MainWindow::MainWindow(Application* app,
   playlist_menu_->addAction(ui_->action_renumber_tracks);
   playlist_menu_->addAction(ui_->action_selection_set_value);
   playlist_menu_->addAction(ui_->action_auto_complete_tags);
+  playlist_menu_->addAction(ui_->action_add_files_to_transcoder);
   playlist_menu_->addSeparator();
   playlist_copy_to_library_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."), this, SLOT(PlaylistCopyToLibrary()));
   playlist_move_to_library_ = playlist_menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."), this, SLOT(PlaylistMoveToLibrary()));
@@ -1782,6 +1784,28 @@ void MainWindow::CheckForUpdates() {
 void MainWindow::PlaylistUndoRedoChanged(QAction *undo, QAction *redo) {
   playlist_menu_->insertAction(playlist_undoredo_, undo);
   playlist_menu_->insertAction(playlist_undoredo_, redo);
+}
+
+void MainWindow::AddFilesToTranscoder() {
+  if (!transcode_dialog_) {
+    transcode_dialog_.reset(new TranscodeDialog);
+  }
+
+  QStringList filenames;
+
+  foreach (const QModelIndex& index,
+           ui_->playlist->view()->selectionModel()->selection().indexes()) {
+    if (index.column() != 0)
+      continue;
+    int row = app_->playlist_manager()->current()->proxy()->mapToSource(index).row();
+    PlaylistItemPtr item(app_->playlist_manager()->current()->item_at(row));
+    Song song = item->Metadata();
+    filenames << song.url().toLocalFile();
+  }
+
+  transcode_dialog_->SetFilenames(filenames);
+
+  ShowTranscodeDialog();
 }
 
 void MainWindow::ShowLibraryConfig() {

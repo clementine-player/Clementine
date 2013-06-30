@@ -220,6 +220,15 @@ void TranscodeDialog::Add() {
   if (filenames.isEmpty())
     return;
 
+  SetFilenames(filenames);
+
+  last_add_dir_ = filenames[0];
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("last_add_dir", last_add_dir_);
+}
+
+void TranscodeDialog::SetFilenames(const QStringList &filenames) {
   foreach (const QString& filename, filenames) {
     QString name = filename.section('/', -1, -1);
     QString path = filename.section('/', 0, -2);
@@ -228,11 +237,6 @@ void TranscodeDialog::Add() {
         ui_->files, QStringList() << name << path);
     item->setData(0, Qt::UserRole, filename);
   }
-
-  last_add_dir_ = filenames[0];
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  s.setValue("last_add_dir", last_add_dir_);
 }
 
 void TranscodeDialog::Remove() {

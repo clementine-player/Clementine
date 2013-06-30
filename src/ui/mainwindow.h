@@ -158,6 +158,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AutoCompleteTags();
   void AutoCompleteTagsAccepted();
   void PlaylistUndoRedoChanged(QAction* undo, QAction* redo);
+  void AddFilesToTranscoder();
 
   void PlaylistCopyToLibrary();
   void PlaylistMoveToLibrary();
