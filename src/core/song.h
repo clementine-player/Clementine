@@ -44,10 +44,6 @@ class QUrl;
   struct LIBMTP_track_struct;
 #endif
 
-#if defined(Q_OS_WIN32)
-  struct IWMDMMetaData;
-#endif
-
 #ifdef HAVE_LIBLASTFM
   namespace lastfm {
     class Track;
@@ -124,11 +120,6 @@ class Song {
 #ifdef HAVE_LIBMTP
   void InitFromMTP(const LIBMTP_track_struct* track, const QString& host);
   void ToMTP(LIBMTP_track_struct* track) const;
-#endif
-
-#if defined(Q_OS_WIN32)
-  void InitFromWmdm(IWMDMMetaData* metadata);
-  void ToWmdm(IWMDMMetaData* metadata) const;
 #endif
 
   // Copies important statistics from the other song to this one, overwriting

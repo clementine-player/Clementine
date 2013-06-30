@@ -9,9 +9,6 @@
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
 
-!define WMDM_DIST_URL "http://clementine-player.googlecode.com/files/wmdmdist.exe"
-!define WMF_DIST_URL  "http://clementine-player.googlecode.com/files/wmfdist.exe"
-
 ; Set Application Capabilities info
 !define CAPABILITIES_NAME "Clementine"
 !define CAPABILITIES_LOCAL_NAME "Clementine"
@@ -909,41 +906,6 @@ Section "Uninstaller"
   WriteRegDWORD ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "VersionMinor" "${PRODUCT_VERSION_MINOR}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
-SectionEnd
-
-Section "Windows Media Device Manager"
-  GetDllVersion "$SYSDIR\mswmdm.dll" $R8 $R9
-  IntOp $R7 $R8 / 0x00010000
-  IntCmp $R7 9 end downloadwmf end  # Major version >= 9
-
-downloadwmf:
-  StrCpy $1 "wmfdist.exe"
-  NSISdl::download ${WMF_DIST_URL} "$TEMP\$1"
-  Pop $R0
-  StrCmp $R0 "success" downloadwmdm
-  MessageBox MB_OK|MB_ICONSTOP "Error while downloading $1."
-  Quit
-
-downloadwmdm:
-  StrCpy $1 "wmdmdist.exe"
-  NSISdl::download ${WMDM_DIST_URL} "$TEMP\$1"
-  Pop $R0
-  StrCmp $R0 "success" install
-  MessageBox MB_OK|MB_ICONSTOP "Error while downloading $1."
-  Quit
-
-install:
-  DetailPrint "Installing the Windows Media Format 9 redistributable"
-  ExecWait "$TEMP\wmfdist.exe /Q"
-
-  DetailPrint "Installing the Windows Media Device Manager 9 redistributable"
-  ExecWait "$TEMP\wmdmdist.exe /Q"
-
-  Delete "$TEMP\wmfdist.exe"
-  Delete "$TEMP\wmdmdist.exe"
-
-end:
-  DetailPrint "WMDM redistributable installed"
 SectionEnd
 
 Section "Uninstall"

@@ -83,7 +83,6 @@ pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
-  find_library(MSWMDM_LIBRARIES mswmdm)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 

@@ -50,10 +50,6 @@
 #ifdef Q_OS_DARWIN
 #  include "macdevicelister.h"
 #endif
-#ifdef Q_OS_WIN32
-#  include "wmdmlister.h"
-#  include "wmdmdevice.h"
-#endif
 #ifdef HAVE_LIBGPOD
 #  include "gpoddevice.h"
 #endif
@@ -201,10 +197,6 @@ DeviceManager::DeviceManager(Application* app, QObject *parent)
 #endif
 #ifdef Q_OS_DARWIN
   AddLister(new MacDeviceLister);
-#endif
-#if defined(Q_OS_WIN32)
-  AddLister(new WmdmLister);
-  AddDeviceClass<WmdmDevice>();
 #endif
 
   AddDeviceClass<FilesystemDevice>();

@@ -1045,20 +1045,6 @@ optional_source(HAVE_LIBMTP
     devices/mtploader.h
 )
 
-# Windows media lister
-optional_source(WIN32
-  SOURCES
-    devices/wmdmdevice.cpp
-    devices/wmdmlister.cpp
-    devices/wmdmloader.cpp
-    devices/wmdmprogress.cpp
-    devices/wmdmthread.cpp
-  HEADERS
-    devices/wmdmdevice.h
-    devices/wmdmlister.h
-    devices/wmdmloader.h
-)
-
 # Moodbar support
 optional_source(HAVE_MOODBAR
   SOURCES
@@ -1297,7 +1283,6 @@ endif(HAVE_STATIC_SQLITE)
 if (WIN32)
   target_link_libraries(clementine_lib
     ${ZLIB_LIBRARIES}
-    ${MSWMDM_LIBRARIES}
     ${QTSPARKLE_LIBRARIES}
     tinysvcmdns
     qtwin
