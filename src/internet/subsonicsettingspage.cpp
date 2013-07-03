@@ -127,6 +127,16 @@ void SubsonicSettingsPage::LoginStateChanged(SubsonicService::LoginState newstat
     ui_->login_state->SetAccountTypeText(tr("Incomplete configuration, please ensure all fields are populated."));
     break;
 
+  case SubsonicService::LoginState_RedirectLimitExceeded:
+    ui_->login_state->SetAccountTypeText(tr("Redirect limit exceeded, verify server configuration."));
+    break;
+
+  case SubsonicService::LoginState_RedirectNoUrl:
+    ui_->login_state->SetAccountTypeText(tr("HTTP 3xx status code received without URL, "
+                                            "verify server configuration."));
+    break;
+
+
   default:
     break;
   }
@@ -141,12 +151,8 @@ void SubsonicSettingsPage::ServerEditingFinished() {
     return;
   }
 
-  // A direct paste of the server URL will probably include the trailing index.view, so remove it
-  if (url.path().endsWith("index.view")) {
-    QString newpath = url.path();
-    newpath.chop(10);
-    url.setPath(newpath);
-  }
+  // If the user specified a /rest location, remove it since we're going to re-add it later
+  url = SubsonicService::ScrubUrl(url);
 
   ui_->server->setText(url.toString());
   qLog(Debug) << "URL fixed:" << input << "to" << url;

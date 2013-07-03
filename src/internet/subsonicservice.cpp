@@ -33,6 +33,8 @@ const char* SubsonicService::kApiClientName = "Clementine";
 const char* SubsonicService::kSongsTable = "subsonic_songs";
 const char* SubsonicService::kFtsTable = "subsonic_songs_fts";
 
+const int SubsonicService::kMaxRedirects = 10;
+
 SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   : InternetService(kServiceName, app, parent, parent),
     network_(new QNetworkAccessManager(this)),
@@ -46,7 +48,8 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
     library_filter_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
     total_song_count_(0),
-    login_state_(LoginState_OtherError) {
+    login_state_(LoginState_OtherError),
+    redirect_count_(0) {
   app_->player()->RegisterUrlHandler(url_handler_);
 
   connect(scanner_, SIGNAL(ScanFinished()),
@@ -148,7 +151,7 @@ void SubsonicService::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  server_ = s.value("server").toString();
+  UpdateServer(s.value("server").toString());
   username_ = s.value("username").toString();
   password_ = s.value("password").toString();
   usesslv3_ = s.value("usesslv3").toBool();
@@ -157,7 +160,7 @@ void SubsonicService::ReloadSettings() {
 }
 
 bool SubsonicService::IsConfigured() const {
-  return !server_.isEmpty() &&
+  return !configured_server_.isEmpty() &&
          !username_.isEmpty() &&
          !password_.isEmpty();
 }
@@ -181,7 +184,7 @@ void SubsonicService::Login() {
 
 void SubsonicService::Login(
     const QString& server, const QString& username, const QString& password, const bool& usesslv3) {
-  server_ = server;
+  UpdateServer(server);
   username_ = username;
   password_ = password;
   usesslv3_ = usesslv3;
@@ -196,12 +199,22 @@ void SubsonicService::Ping() {
 }
 
 QUrl SubsonicService::BuildRequestUrl(const QString& view) const {
-  QUrl url(server_ + "/rest/" + view + ".view");
+  QUrl url(working_server_ + "/rest/" + view + ".view");
   url.addQueryItem("v", kApiVersion);
   url.addQueryItem("c", kApiClientName);
   url.addQueryItem("u", username_);
   url.addQueryItem("p", password_);
   return url;
+}
+
+QUrl SubsonicService::ScrubUrl(const QUrl& url) {
+  QUrl return_url(url);
+  QString path = url.path();
+  int rest_location = path.lastIndexOf("/rest", -1, Qt::CaseInsensitive);
+  if (rest_location >= 0) {
+    return_url.setPath(path.left(rest_location));
+  }
+  return return_url;
 }
 
 QNetworkReply* SubsonicService::Send(const QUrl& url) {
@@ -271,8 +284,32 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
     QXmlStreamReader reader(reply);
     reader.readNextStartElement();
     QStringRef status = reader.attributes().value("status");
+    int http_status_code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if (status == "ok") {
       login_state_ = LoginState_Loggedin;
+    } else if (http_status_code >= 300 && http_status_code <= 399) {
+      // Received a redirect status code, follow up on it.
+      QUrl redirect_url =
+          reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+      if (redirect_url.isEmpty()) {
+        qLog(Debug) << "Received HTTP code " << http_status_code << ", but no URL";
+        login_state_ = LoginState_RedirectNoUrl;
+      } else {
+        redirect_count_++;
+        qLog(Debug) << "Redirect receieved to "
+                    << redirect_url.toString(QUrl::RemoveQuery)
+                    << ", current redirect count is "
+                    << redirect_count_;
+        if (redirect_count_ <= kMaxRedirects) {
+          working_server_ = ScrubUrl(redirect_url).toString(QUrl::RemoveQuery);
+          Ping();
+          // To avoid the LoginStateChanged, as it will come from the recursive request.
+          return;
+        } else {
+          // Redirect limit exceeded
+          login_state_ = LoginState_RedirectLimitExceeded;
+        }
+      }
     } else {
       reader.readNextStartElement();
       int error = reader.attributes().value("code").toString().toInt();
@@ -307,6 +344,12 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
 
 void SubsonicService::ShowConfig() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Subsonic);
+}
+
+void SubsonicService::UpdateServer(const QString& server) {
+  configured_server_ = server;
+  working_server_ = server;
+  redirect_count_ = 0;
 }
 
 

@@ -38,6 +38,8 @@ class SubsonicService : public InternetService
     LoginState_Timeout,
     LoginState_SslError,
     LoginState_IncompleteCredentials,
+    LoginState_RedirectLimitExceeded,
+    LoginState_RedirectNoUrl,
   };
 
   enum ApiError {
@@ -66,21 +68,27 @@ class SubsonicService : public InternetService
   bool IsConfigured() const;
 
   QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem *item);
-  void ShowContextMenu(const QPoint &global_pos);
+  void LazyPopulate(QStandardItem* item);
+  void ShowContextMenu(const QPoint& global_pos);
   QWidget* HeaderWidget() const;
   void ReloadSettings();
 
   void Login();
   void Login(
-      const QString &server, const QString &username, const QString &password, const bool &usesslv3);
+      const QString& server,
+      const QString& username,
+      const QString& password,
+      const bool& usesslv3);
+
   LoginState login_state() const { return login_state_; }
 
   // Subsonic API methods
   void Ping();
 
   QUrl BuildRequestUrl(const QString& view) const;
-  // Convenience function to reduce QNetworkRequest/QSslConfiguration boilerplate
+  // Scrubs the part of the path that we re-add in BuildRequestUrl().
+  static QUrl ScrubUrl(const QUrl& url);
+  // Convenience function to reduce QNetworkRequest/QSslConfiguration boilerplate.
   QNetworkReply* Send(const QUrl& url);
 
   static const char* kServiceName;
@@ -91,11 +99,15 @@ class SubsonicService : public InternetService
   static const char* kSongsTable;
   static const char* kFtsTable;
 
+  static const int kMaxRedirects;
+
  signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
  private:
   void EnsureMenuCreated();
+  // Update configured and working server state
+  void UpdateServer(const QString& server);
 
   QNetworkAccessManager* network_;
   SubsonicUrlHandler* url_handler_;
@@ -113,12 +125,15 @@ class SubsonicService : public InternetService
   int total_song_count_;
 
   // Configuration
-  QString server_;
+  // The server that shows up in the GUI (use UpdateServer() to update)
+  QString configured_server_;
   QString username_;
   QString password_;
   bool usesslv3_;
 
   LoginState login_state_;
+  QString working_server_; // The actual server, possibly post-redirect
+  int redirect_count_;
 
  private slots:
   void UpdateTotalSongCount(int count);
