@@ -110,6 +110,7 @@ QT_PLUGINS = [
     'imageformats/libqtiff.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH=[
+    '/target/plugins',
     '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
 ]
