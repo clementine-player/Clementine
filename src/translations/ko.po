@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-06-30 17:08+0000\n"
+"PO-Revision-Date: 2013-07-03 12:02+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1234,7 +1234,7 @@ msgstr "단축키 설정"
 msgid "Configure Spotify..."
 msgstr "스포티피 설정..."
 
-#: internet/subsonicservice.cpp:93
+#: internet/subsonicservice.cpp:96
 msgid "Configure Subsonic..."
 msgstr "서브소닉 설정"
 
@@ -2146,7 +2146,7 @@ msgstr "자동으로 가져오기"
 msgid "Fetch completed"
 msgstr "가져오기 완료"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
 msgstr "서브소닉 라이브러리 가져오기"
 
@@ -2419,6 +2419,11 @@ msgstr "그룹화"
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML 페이지가 어떠한 RSS 피드를 포함하지 않습니다."
+
+#: internet/subsonicsettingspage.cpp:135
+msgid ""
+"HTTP 3xx status code received without URL, verify server configuration."
+msgstr ""
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -3774,12 +3779,16 @@ msgstr "등급"
 msgid "Really cancel?"
 msgstr "정말 취소 하시겠습니까?"
 
+#: internet/subsonicsettingspage.cpp:131
+msgid "Redirect limit exceeded, verify server configuration."
+msgstr ""
+
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
 msgstr "새로고침"
 
 #: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:89
+#: internet/subsonicservice.cpp:92
 msgid "Refresh catalogue"
 msgstr "목록 새로고침"
 
@@ -4073,7 +4082,7 @@ msgstr "자멘도 검색"
 msgid "Search Magnatune"
 msgstr "Magnature 검색"
 
-#: internet/subsonicservice.cpp:72
+#: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
 msgstr "서브소닉 검색"
 
@@ -4547,7 +4556,7 @@ msgstr "구독중인 재생목록"
 msgid "Subscribers"
 msgstr "구독자"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "서브소닉"
 

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-06-30 17:53+0000\n"
-"Last-Translator: Yhal Htet Aung <jumoun@gmail.com>\n"
+"PO-Revision-Date: 2013-07-03 12:02+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/projects/p/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1227,7 +1227,7 @@ msgstr "အတိုကောက်များပုံစံပြင်"
 msgid "Configure Spotify..."
 msgstr "စပေါ့တီဖိုင်ပုံစံပြင်..."
 
-#: internet/subsonicservice.cpp:93
+#: internet/subsonicservice.cpp:96
 msgid "Configure Subsonic..."
 msgstr "ဆပ်ဆိုးနစ်ပုံစံပြင်..."
 
@@ -2139,7 +2139,7 @@ msgstr "အလိုအလျောက်ယူဆောင်ခြင်း"
 msgid "Fetch completed"
 msgstr "ယူဆောင်ခြင်းပြီးဆံုး"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
 msgstr "ဆပ်ဆိုးနစ်သီချင်းတိုက်ယူဆောင်နေ"
 
@@ -2412,6 +2412,11 @@ msgstr "အုပ်စုအလိုက်စုခြင်း"
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
 msgstr "အာအက်စ်အက်စ်ဖိဒ်တစ်ခုမှဟိတ်စ်တီအမ်အယ်စာမျက်နှာတွင်မရှိပါ"
+
+#: internet/subsonicsettingspage.cpp:135
+msgid ""
+"HTTP 3xx status code received without URL, verify server configuration."
+msgstr ""
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -3767,12 +3772,16 @@ msgstr "အဆင့်သတ်မှတ်ချက်များ"
 msgid "Really cancel?"
 msgstr "တကယ်ပယ်ဖျက်?"
 
+#: internet/subsonicsettingspage.cpp:131
+msgid "Redirect limit exceeded, verify server configuration."
+msgstr ""
+
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
 msgstr "ပြန်လည်"
 
 #: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:89
+#: internet/subsonicservice.cpp:92
 msgid "Refresh catalogue"
 msgstr "စာရင်းပြန်လည်"
 
@@ -4066,7 +4075,7 @@ msgstr "ဂျမန်တိုရှာဖွေ"
 msgid "Search Magnatune"
 msgstr "မက်နကျွန်းရှာဖွေ"
 
-#: internet/subsonicservice.cpp:72
+#: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
 msgstr "ဆပ်ဆိုးနစ်ရှာဖွေ"
 
@@ -4540,7 +4549,7 @@ msgstr "မှာယူပြီးသီချင်းစာရင်းမျ
 msgid "Subscribers"
 msgstr "မှာယူသူများ"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "ဆပ်ဆိုးနစ်"
 

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-06-30 17:08+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-07-06 11:14+0000\n"
+"Last-Translator: Lê Trường An <truongan@linuxmail.org>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -239,7 +239,7 @@ msgstr "...và tất cả cộng tác viên của Amarok"
 
 #: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
@@ -1231,7 +1231,7 @@ msgstr "Phím tắt"
 msgid "Configure Spotify..."
 msgstr "Cấu hình Spotify..."
 
-#: internet/subsonicservice.cpp:93
+#: internet/subsonicservice.cpp:96
 msgid "Configure Subsonic..."
 msgstr "Cấu hình Subsonic..."
 
@@ -1457,7 +1457,7 @@ msgstr "Ctrl+Shift+O"
 
 #: ../bin/src/ui_mainwindow.h:726
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Ctrl+Shift+T"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+T"
@@ -1691,7 +1691,7 @@ msgstr "Không chuyển đổi bất kì bản nhạc nào"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
-msgstr ""
+msgstr "Không ghi đè"
 
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -2030,11 +2030,11 @@ msgstr "Hết hạn vào %1"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Export Covers"
-msgstr ""
+msgstr "Xuất ảnh bìa"
 
 #: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
-msgstr ""
+msgstr "Xuất ảnh bìa"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
@@ -2046,7 +2046,7 @@ msgstr ""
 
 #: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
-msgstr ""
+msgstr "Đã xuất xong"
 
 #: ui/albumcovermanager.cpp:786
 #, qt-format
@@ -2143,7 +2143,7 @@ msgstr "Tự động tải"
 msgid "Fetch completed"
 msgstr "Đã tải xong"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
 msgstr "Đang tải thư viện Subsonic"
 
@@ -2416,6 +2416,11 @@ msgstr "Nhóm"
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
 msgstr "Trang HTML không chứa nguồn tin RSS"
+
+#: internet/subsonicsettingspage.cpp:135
+msgid ""
+"HTTP 3xx status code received without URL, verify server configuration."
+msgstr ""
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2763,7 +2768,7 @@ msgstr "Để trống cho mặc định. Ví dụ: \"/dev/dsp\", \"front\", ..."
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
-msgstr ""
+msgstr "Trái"
 
 #: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -3218,7 +3223,7 @@ msgstr "Không dùng ảnh nền"
 
 #: ui/albumcovermanager.cpp:778
 msgid "No covers to export."
-msgstr ""
+msgstr "Không có ảnh bìa để xuất."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
@@ -3488,7 +3493,7 @@ msgstr ""
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
-msgstr ""
+msgstr "Điểm ảnh"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
@@ -3771,12 +3776,16 @@ msgstr "Đánh giá"
 msgid "Really cancel?"
 msgstr "Thực sự hủy bỏ?"
 
+#: internet/subsonicsettingspage.cpp:131
+msgid "Redirect limit exceeded, verify server configuration."
+msgstr ""
+
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
 msgstr "Cập nhật"
 
 #: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:89
+#: internet/subsonicservice.cpp:92
 msgid "Refresh catalogue"
 msgstr "Cập nhật mục lục"
 
@@ -3839,7 +3848,7 @@ msgstr "Loại bỏ khỏi danh sách"
 
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
-msgstr ""
+msgstr "Loại bỏ danh sách"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
@@ -3951,7 +3960,7 @@ msgstr "Trở lại Clementine"
 
 #: ../bin/src/ui_equalizer.h:174
 msgid "Right"
-msgstr ""
+msgstr "Phải"
 
 #: ui/equalizer.cpp:127
 msgid "Rock"
@@ -4070,7 +4079,7 @@ msgstr "Tìm trên Jamendo"
 msgid "Search Magnatune"
 msgstr "Tìm trên Magnatune"
 
-#: internet/subsonicservice.cpp:72
+#: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
 msgstr "Tìm trên Subsonic"
 
@@ -4351,11 +4360,11 @@ msgstr "Nghệ sĩ tương tự"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
-msgstr ""
+msgstr "Kích thước"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
-msgstr ""
+msgstr "Kích thước:"
 
 #: ui/equalizer.cpp:129
 msgid "Ska"
@@ -4544,7 +4553,7 @@ msgstr "Danh sách đã đăng kí"
 msgid "Subscribers"
 msgstr "Người đăng kí"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4989,7 +4998,7 @@ msgstr "Sử dụng thông tin để tăng âm lượng nếu có"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 msgid "Use SSLv3"
-msgstr ""
+msgstr "Dùng SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5212,7 +5221,7 @@ msgstr "Âm thanh Windows Media"
 
 #: ../bin/src/ui_albumcovermanager.h:222
 msgid "Without cover:"
-msgstr ""
+msgstr "Không có ảnh bìa:"
 
 #: library/libraryview.cpp:530
 msgid ""
@@ -5260,7 +5269,7 @@ msgstr "Bạn muốn tải xuống các album sau"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "Bạn có chắc muốn loại bỏ %1 danh sách từ yêu thích?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."

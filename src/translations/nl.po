@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-06-30 17:08+0000\n"
+"PO-Revision-Date: 2013-07-03 12:02+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\nU kunt afspeellijsten aan uw favorieten toevoegen door te klikken op het ster icoon naast de naam van de afspeellijst.\n\nFavoriete afspeellijsten zullen hier opgeslagen worden."
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -434,11 +434,11 @@ msgstr "Bestand toevoegen"
 
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Bestand toevoegen voor conversie."
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Bestand(en) toevoegen voor conversie."
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "Add file..."
@@ -1144,7 +1144,7 @@ msgstr "Klik hier om muziek toe te voegen"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "Klik hier om een afspeellijst aan uw favorieten toe te voegen, hierdoor worden z bewaard en getoond in het \"Afspeellijsten\" panel in de linker zijbalk."
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1233,7 +1233,7 @@ msgstr "Sneltoetsen instellen"
 msgid "Configure Spotify..."
 msgstr "Configureer Spotify..."
 
-#: internet/subsonicservice.cpp:93
+#: internet/subsonicservice.cpp:96
 msgid "Configure Subsonic..."
 msgstr "Subsonic configureren..."
 
@@ -1459,7 +1459,7 @@ msgstr "Ctrl+Shift+O"
 
 #: ../bin/src/ui_mainwindow.h:726
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Ctrl+Shift+T"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+T"
@@ -2145,7 +2145,7 @@ msgstr "Automatisch ophalen"
 msgid "Fetch completed"
 msgstr "Ophalen voltooid"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
 msgstr "Ophalen van Subsonic bibliotheek"
 
@@ -2419,6 +2419,11 @@ msgstr "Groepering"
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML-pagina bevat geen RSS-feed"
 
+#: internet/subsonicsettingspage.cpp:135
+msgid ""
+"HTTP 3xx status code received without URL, verify server configuration."
+msgstr ""
+
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
 msgstr "HTTP-proxy"
@@ -2537,7 +2542,7 @@ msgstr "Incompatibele Subsonic REST protocol versie. Server moet upgraden. "
 
 #: internet/subsonicsettingspage.cpp:127
 msgid "Incomplete configuration, please ensure all fields are populated."
-msgstr ""
+msgstr "Configuratie incompleet, controleer dat alle velden ingevuld zijn."
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -3773,12 +3778,16 @@ msgstr "Waardering"
 msgid "Really cancel?"
 msgstr "Werkelijk annuleren?"
 
+#: internet/subsonicsettingspage.cpp:131
+msgid "Redirect limit exceeded, verify server configuration."
+msgstr ""
+
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
 msgstr "Ververs"
 
 #: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:89
+#: internet/subsonicservice.cpp:92
 msgid "Refresh catalogue"
 msgstr "Catalogus verversen"
 
@@ -4072,7 +4081,7 @@ msgstr "Jamendo doorzoeken"
 msgid "Search Magnatune"
 msgstr "Zoeken op Magnatune"
 
-#: internet/subsonicservice.cpp:72
+#: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
 msgstr "Subsonic doorzoeken"
 
@@ -4546,7 +4555,7 @@ msgstr "Geabonneerde afspeellijsten"
 msgid "Subscribers"
 msgstr "Volgers"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-06-30 17:08+0000\n"
+"PO-Revision-Date: 2013-07-03 12:02+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Georgian (http://www.transifex.com/projects/p/clementine/language/ka/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1228,7 +1228,7 @@ msgstr "მალმხმობების გამართვა"
 msgid "Configure Spotify..."
 msgstr "Spotify-ის გამართვა..."
 
-#: internet/subsonicservice.cpp:93
+#: internet/subsonicservice.cpp:96
 msgid "Configure Subsonic..."
 msgstr ""
 
@@ -2140,7 +2140,7 @@ msgstr ""
 msgid "Fetch completed"
 msgstr ""
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2412,6 +2412,11 @@ msgstr ""
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:135
+msgid ""
+"HTTP 3xx status code received without URL, verify server configuration."
 msgstr ""
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
@@ -3768,12 +3773,16 @@ msgstr ""
 msgid "Really cancel?"
 msgstr ""
 
+#: internet/subsonicsettingspage.cpp:131
+msgid "Redirect limit exceeded, verify server configuration."
+msgstr ""
+
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
 msgstr ""
 
 #: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:89
+#: internet/subsonicservice.cpp:92
 msgid "Refresh catalogue"
 msgstr ""
 
@@ -4067,7 +4076,7 @@ msgstr ""
 msgid "Search Magnatune"
 msgstr ""
 
-#: internet/subsonicservice.cpp:72
+#: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
 msgstr ""
 
@@ -4541,7 +4550,7 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr ""
 

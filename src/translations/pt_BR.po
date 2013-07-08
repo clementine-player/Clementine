@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-06-30 17:08+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-07-04 21:18+0000\n"
+"Last-Translator: salmora8 <shorterfire@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +30,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\nVocê pode favoritar a lista de reprodução clicando no ícone estrela, próximo ao nome da lista de reprodução\n\nLista de reproduções favoritadas serão salvas aqui"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -435,11 +435,11 @@ msgstr "Adicionar Arquivo"
 
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Adicionar arquivo para conversor"
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Adicionar arquivo(s) para conversor"
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "Add file..."
@@ -1145,7 +1145,7 @@ msgstr "Clique aqui para adicionar algumas músicas"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "Clique aqui para favoritar esta lista de reprodução, para ser salva e permanecer acessível no painel de \"Lista de Reprodução\" da barra lateral esquerda."
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1234,7 +1234,7 @@ msgstr "Configurar atalhos"
 msgid "Configure Spotify..."
 msgstr "Configurar Spotify..."
 
-#: internet/subsonicservice.cpp:93
+#: internet/subsonicservice.cpp:96
 msgid "Configure Subsonic..."
 msgstr "Configurar Subsonic..."
 
@@ -1460,7 +1460,7 @@ msgstr "Ctrl+Shift+O"
 
 #: ../bin/src/ui_mainwindow.h:726
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Ctrl+Shift+T"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+T"
@@ -2146,7 +2146,7 @@ msgstr "Buscar automaticamente"
 msgid "Fetch completed"
 msgstr "Atualização concluída"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
 msgstr "Buscando biblioteca Subsonic"
 
@@ -2419,6 +2419,11 @@ msgstr "Agrupamento"
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
 msgstr "A página HTML não contém nenhum RSS"
+
+#: internet/subsonicsettingspage.cpp:135
+msgid ""
+"HTTP 3xx status code received without URL, verify server configuration."
+msgstr "Código de status HTTP 3xx recebido sem URL, verificar a configuração do servidor."
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -3774,12 +3779,16 @@ msgstr "Avaliação"
 msgid "Really cancel?"
 msgstr "Deseja realmente cancelar?"
 
+#: internet/subsonicsettingspage.cpp:131
+msgid "Redirect limit exceeded, verify server configuration."
+msgstr "Limite de redirecionamento excedeu, verifique a configuração do servidor."
+
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
 msgstr "Atualizar"
 
 #: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:89
+#: internet/subsonicservice.cpp:92
 msgid "Refresh catalogue"
 msgstr "Atualizar catálogo"
 
@@ -4073,7 +4082,7 @@ msgstr "Pesquisar Jamendo"
 msgid "Search Magnatune"
 msgstr "Pesquisar Magnatune"
 
-#: internet/subsonicservice.cpp:72
+#: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
 msgstr "Pesquisa Subsonic"
 
@@ -4547,7 +4556,7 @@ msgstr "Listas de reprodução inscritas"
 msgid "Subscribers"
 msgstr "Seguidores"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 

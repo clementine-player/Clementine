@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-06-30 17:08+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-07-05 12:55+0000\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -432,11 +432,11 @@ msgstr "Dodaj datoteku"
 
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Dodaj datoteku u enkôder"
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Dodaj datoteku(e) u enkôder"
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "Add file..."
@@ -1231,7 +1231,7 @@ msgstr "Podesi prečace"
 msgid "Configure Spotify..."
 msgstr "Podesite Spotify ..."
 
-#: internet/subsonicservice.cpp:93
+#: internet/subsonicservice.cpp:96
 msgid "Configure Subsonic..."
 msgstr "Podesi Subsonic..."
 
@@ -1457,7 +1457,7 @@ msgstr "Ctrl+Shift+O"
 
 #: ../bin/src/ui_mainwindow.h:726
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Ctrl+Shift+T"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+T"
@@ -2143,7 +2143,7 @@ msgstr "Preuzmi automatski"
 msgid "Fetch completed"
 msgstr "Preuzimanje završeno"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
 msgstr "Dohvaćanje Subsonic fonoteke"
 
@@ -2416,6 +2416,11 @@ msgstr "Grupiranje"
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML stranica ne sadrži niti jedan RSS izvor"
+
+#: internet/subsonicsettingspage.cpp:135
+msgid ""
+"HTTP 3xx status code received without URL, verify server configuration."
+msgstr "HTTP 3xx status kôd je primljen bez URL-a, potvrdite podešavanje poslužitelja."
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -3771,12 +3776,16 @@ msgstr "Ocjena"
 msgid "Really cancel?"
 msgstr "Stvarno želite prekinuti?"
 
+#: internet/subsonicsettingspage.cpp:131
+msgid "Redirect limit exceeded, verify server configuration."
+msgstr "Ograničenje preusmjeravanja je premašeno, potvrdite podešavanje poslužitelja."
+
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
 msgstr "Osvježi"
 
 #: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:89
+#: internet/subsonicservice.cpp:92
 msgid "Refresh catalogue"
 msgstr "Osvježi katalog"
 
@@ -4070,7 +4079,7 @@ msgstr "Icecast Jamendo"
 msgid "Search Magnatune"
 msgstr "Pretražite Magnatune stanice"
 
-#: internet/subsonicservice.cpp:72
+#: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
 msgstr "Subsonic pretraživanje"
 
@@ -4544,7 +4553,7 @@ msgstr "Pretplaćeni popis izvođenja"
 msgid "Subscribers"
 msgstr "Pretplatnici"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 

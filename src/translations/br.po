@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-06-30 17:08+0000\n"
+"PO-Revision-Date: 2013-07-03 12:02+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Breton (http://www.transifex.com/projects/p/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -503,7 +503,7 @@ msgstr "Ouzhpennañ klav doare an ton"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "Ouzhpennañ klav rummad ar sonerezh"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
@@ -511,7 +511,7 @@ msgstr "Ouzhpennañ klav padelezh an ton"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
-msgstr ""
+msgstr "Ouzhpennañ klav soner an ton"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song play count"
@@ -1230,7 +1230,7 @@ msgstr "Kefluniañ ar Berradennoù"
 msgid "Configure Spotify..."
 msgstr "Kefluniañ Spotify"
 
-#: internet/subsonicservice.cpp:93
+#: internet/subsonicservice.cpp:96
 msgid "Configure Subsonic..."
 msgstr "Kefluniañ Subsonic..."
 
@@ -2142,7 +2142,7 @@ msgstr "Kerc'hat ent emgefreek"
 msgid "Fetch completed"
 msgstr "Pellgargadur echu"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
 msgstr "O tapout sonaoueg Subsonic"
 
@@ -2415,6 +2415,11 @@ msgstr ""
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
 msgstr "Ar pajenn HTML a oa hep lanv RSS ebet."
+
+#: internet/subsonicsettingspage.cpp:135
+msgid ""
+"HTTP 3xx status code received without URL, verify server configuration."
+msgstr ""
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -3483,7 +3488,7 @@ msgstr "Ehanet"
 #: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
-msgstr ""
+msgstr "Soner"
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
@@ -3770,12 +3775,16 @@ msgstr "Notenn"
 msgid "Really cancel?"
 msgstr "Sur oc'h da gaout c'hoant da nullañ"
 
+#: internet/subsonicsettingspage.cpp:131
+msgid "Redirect limit exceeded, verify server configuration."
+msgstr ""
+
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
 msgstr "Azbevaat"
 
 #: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:89
+#: internet/subsonicservice.cpp:92
 msgid "Refresh catalogue"
 msgstr "Hizivaat ar c'hatalog"
 
@@ -4069,7 +4078,7 @@ msgstr "Klask Jamendo"
 msgid "Search Magnatune"
 msgstr "Klask Magnatune"
 
-#: internet/subsonicservice.cpp:72
+#: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
 msgstr "Klask Subsonic"
 
@@ -4543,7 +4552,7 @@ msgstr "Rollioù seniñ koumanantet"
 msgid "Subscribers"
 msgstr "Koumananterien"
 
-#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
