@@ -1396,10 +1396,11 @@ if (APPLE)
     DEPENDS ${PROJECT_BINARY_DIR}/clementine.breakpad)
 
   if (APPLE_DEVELOPER_ID)
-    add_custom_command(TARGET clementine
-      POST_BUILD
+    add_custom_target(
+      sign
       COMMAND
       codesign -s ${APPLE_DEVELOPER_ID} -fv ${PROJECT_BINARY_DIR}/clementine.app
+      DEPENDS clementine
       VERBATIM
     )
   endif()
