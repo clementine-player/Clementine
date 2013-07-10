@@ -155,6 +155,9 @@ void NetworkRemote::AcceptConnection() {
             SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
             outgoing_data_creator_.get(),
             SLOT(SendShuffleMode(PlaylistSequence::ShuffleMode)));
+
+    connect(incoming_data_parser_.get(), SIGNAL(GetLyrics()),
+            outgoing_data_creator_.get(), SLOT(GetLyrics()));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());

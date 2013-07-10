@@ -13,8 +13,17 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistbackend.h"
+#include "songinfo/collapsibleinfopane.h"
+#include "songinfo/songinfofetcher.h"
+#include "songinfo/songinfoprovider.h"
+#include "songinfo/songinfotextview.h"
+#include "songinfo/ultimatelyricsprovider.h"
+#include "songinfo/ultimatelyricsreader.h"
 #include "remotecontrolmessages.pb.h"
 #include "remoteclient.h"
+#include <boost/scoped_ptr.hpp>
+
+typedef QList<SongInfoProvider*> ProviderList;
 
 class OutgoingDataCreator : public QObject {
     Q_OBJECT
@@ -44,6 +53,8 @@ public slots:
   void SendShuffleMode(PlaylistSequence::ShuffleMode mode);
   void UpdateTrackPosition();
   void DisconnectAllClients();
+  void GetLyrics();
+  void SendLyrics(int id, const SongInfoFetcher::Result& result);
 
 private:
   Application* app_;
@@ -55,6 +66,11 @@ private:
   QTimer* keep_alive_timer_;
   QTimer* track_position_timer_;
   int keep_alive_timeout_;
+
+  boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
+  ProviderList provider_list_;
+  QMap<int, SongInfoFetcher::Result> results_;
+  SongInfoFetcher* fetcher_;
 
   void SendDataToClients(pb::remote::Message* msg);
   void SetEngineState(pb::remote::ResponseClementineInfo* msg);

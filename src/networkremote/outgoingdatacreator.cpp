@@ -19,21 +19,23 @@
 
 #include <cmath>
 
+#include <QFuture>
+#include <QFutureWatcher>
+#include <QtConcurrentRun>
+
 #include "networkremote.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
 OutgoingDataCreator::OutgoingDataCreator(Application* app)
-  : app_(app)
+  : app_(app),
+    ultimate_reader_(new UltimateLyricsReader(this)),
+    fetcher_(new SongInfoFetcher(this))
 {
   // Create Keep Alive Timer
   keep_alive_timer_ = new QTimer(this);
   connect(keep_alive_timer_, SIGNAL(timeout()), this, SLOT(SendKeepAlive()));
   keep_alive_timeout_ = 10000;
-
-  // Create the song position timer
-  track_position_timer_ = new QTimer(this);
-  connect(track_position_timer_, SIGNAL(timeout()), this, SLOT(UpdateTrackPosition()));
 }
 
 OutgoingDataCreator::~OutgoingDataCreator() {
@@ -48,6 +50,22 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   // Check if we need to start the track position timer
   if (app_->player()->engine()->state() == Engine::Playing) {
     track_position_timer_->start(1000);
+  }
+
+  // Create the song position timer
+  track_position_timer_ = new QTimer(this);
+  connect(track_position_timer_, SIGNAL(timeout()), this, SLOT(UpdateTrackPosition()));
+
+  // Parse the ultimate lyrics xml file
+  ultimate_reader_->SetThread(this->thread());
+  provider_list_ = ultimate_reader_->Parse(":lyrics/ultimate_providers.xml");
+
+  // Set up the lyrics parser
+  connect(fetcher_, SIGNAL(ResultReady(int,SongInfoFetcher::Result)),
+          SLOT(SendLyrics(int,SongInfoFetcher::Result)));
+
+  foreach (SongInfoProvider* provider, provider_list_) {
+    fetcher_->AddProvider(provider);
   }
 }
 
@@ -427,4 +445,30 @@ void OutgoingDataCreator::DisconnectAllClients() {
   msg.set_type(pb::remote::DISCONNECT);
   msg.mutable_response_disconnect()->set_reason_disconnect(pb::remote::Server_Shutdown);
   SendDataToClients(&msg);
+}
+
+void OutgoingDataCreator::GetLyrics() {
+  fetcher_->FetchInfo(current_song_);
+}
+
+void OutgoingDataCreator::SendLyrics(int id, const SongInfoFetcher::Result& result) {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::LYRICS);
+  pb::remote::ResponseLyrics* response = msg.mutable_response_lyrics();
+
+  foreach (const CollapsibleInfoPane::Data& data, result.info_) {
+    // If the size is zero, do not send the provider
+    SongInfoTextView* editor = qobject_cast<SongInfoTextView*>(data.contents_);
+    if (editor->toPlainText().length() == 0)
+      continue;
+
+    pb::remote::Lyric* lyric = response->mutable_lyrics()->Add();
+
+    lyric->set_id(DataCommaSizeFromQString(data.id_));
+    lyric->set_title(DataCommaSizeFromQString(data.title_));
+    lyric->set_content(DataCommaSizeFromQString(editor->toPlainText()));
+  }
+  SendDataToClients(&msg);
+
+  results_.take(id);
 }

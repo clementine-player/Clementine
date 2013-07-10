@@ -14,6 +14,7 @@ enum MsgType {
   REMOVE_SONGS = 9;
   OPEN_PLAYLIST = 10;
   CLOSE_PLAYLIST = 11;
+  GET_LYRICS = 14;
   // Lastfm
   LOVE = 12;
   BAN = 13;
@@ -42,6 +43,7 @@ enum MsgType {
   UPDATE_TRACK_POSITION = 46;
   ACTIVE_PLAYLIST_CHANGED = 47;
   FIRST_DATA_SENT_COMPLETE = 48;
+  LYRICS = 49;
 }
 
 // Valid Engine states
@@ -212,9 +214,19 @@ message RequestClosePlaylist {
   optional int32 playlist_id = 1;
 }
 
+// Message containing lyrics
+message ResponseLyrics {
+  repeated Lyric lyrics = 1;
+}
+message Lyric {
+  optional string id = 1;
+  optional string title = 2;
+  optional string content = 3;
+}
+
 // The message itself
 message Message {
-  optional int32 version = 1 [default=7];
+  optional int32 version = 1 [default=8];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
@@ -239,4 +251,5 @@ message Message {
   optional ResponseUpdateTrackPosition response_update_track_position = 20;
   optional ResponseDisconnect response_disconnect = 22;
   optional ResponseActiveChanged response_active_changed = 24;
+  optional ResponseLyrics response_lyrics = 30;
 }

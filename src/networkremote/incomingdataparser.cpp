@@ -142,6 +142,8 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
                                   break;
     case pb::remote::BAN:         emit Ban();
                                   break;
+    case pb::remote::GET_LYRICS:  emit GetLyrics();
+                                  break;
     default: break;
   }
 }
