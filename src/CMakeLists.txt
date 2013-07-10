@@ -1399,7 +1399,8 @@ if (APPLE)
     add_custom_command(TARGET clementine
       POST_BUILD
       COMMAND
-      codesign -s "'${APPLE_DEVELOPER_ID}'" -fv ${PROJECT_BINARY_DIR}/clementine.app
+      codesign -s ${APPLE_DEVELOPER_ID} -fv ${PROJECT_BINARY_DIR}/clementine.app
+      VERBATIM
     )
   endif()
 
