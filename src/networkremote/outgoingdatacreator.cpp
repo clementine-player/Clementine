@@ -19,10 +19,6 @@
 
 #include <cmath>
 
-#include <QFuture>
-#include <QFutureWatcher>
-#include <QtConcurrentRun>
-
 #include "networkremote.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
@@ -520,8 +516,8 @@ void OutgoingDataCreator::SendLyrics(int id, const SongInfoFetcher::Result& resu
   foreach (const CollapsibleInfoPane::Data& data, result.info_) {
     // If the size is zero, do not send the provider
     SongInfoTextView* editor = qobject_cast<SongInfoTextView*>(data.contents_);
-    //if (editor->toPlainText().length() == 0)
-    //  continue;
+    if (editor->toPlainText().length() == 0)
+      continue;
 
     pb::remote::Lyric* lyric = response->mutable_lyrics()->Add();
 

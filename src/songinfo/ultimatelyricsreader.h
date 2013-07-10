@@ -21,10 +21,10 @@
 #include "ultimatelyricsprovider.h"
 
 #include <QObject>
-#include <QThread>
 #include <QXmlStreamReader>
 
 class QIODevice;
+class QThread;
 
 class UltimateLyricsReader : public QObject {
   Q_OBJECT

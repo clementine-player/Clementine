@@ -24,6 +24,7 @@
 #include "remoteclient.h"
 #include <boost/scoped_ptr.hpp>
 
+
 typedef QList<SongInfoProvider*> ProviderList;
 
 class OutgoingDataCreator : public QObject {
