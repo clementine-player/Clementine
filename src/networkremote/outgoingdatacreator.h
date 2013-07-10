@@ -17,6 +17,7 @@
 #include "songinfo/songinfofetcher.h"
 #include "songinfo/songinfoprovider.h"
 #include "songinfo/songinfotextview.h"
+#include "songinfo/songinfoview.h"
 #include "songinfo/ultimatelyricsprovider.h"
 #include "songinfo/ultimatelyricsreader.h"
 #include "remotecontrolmessages.pb.h"
@@ -79,6 +80,8 @@ private:
       const QImage& art,
       const int index,
       pb::remote::SongMetadata* song_metadata);
+  void CheckEnabledProviders();
+  SongInfoProvider* ProviderByName(const QString& name) const;
 };
 
 #endif // OUTGOINGDATACREATOR_H

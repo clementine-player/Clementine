@@ -67,6 +67,67 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   foreach (SongInfoProvider* provider, provider_list_) {
     fetcher_->AddProvider(provider);
   }
+
+  CheckEnabledProviders();
+}
+
+void OutgoingDataCreator::CheckEnabledProviders() {
+  QSettings s;
+  s.beginGroup(SongInfoView::kSettingsGroup);
+
+  // Put the providers in the right order
+  QList<SongInfoProvider*> ordered_providers;
+
+  QVariantList default_order;
+  default_order << "lyrics.wikia.com"
+                << "lyricstime.com"
+                << "lyricsreg.com"
+                << "lyricsmania.com"
+                << "metrolyrics.com"
+                << "azlyrics.com"
+                << "songlyrics.com"
+                << "elyrics.net"
+                << "lyricsdownload.com"
+                << "lyrics.com"
+                << "lyricsbay.com"
+                << "directlyrics.com"
+                << "loudson.gs"
+                << "teksty.org"
+                << "tekstowo.pl (Polish translations)"
+                << "vagalume.uol.com.br"
+                << "vagalume.uol.com.br (Portuguese translations)"
+                << "darklyrics.com";
+
+  QVariant saved_order = s.value("search_order", default_order);
+  foreach (const QVariant& name, saved_order.toList()) {
+    SongInfoProvider* provider = ProviderByName(name.toString());
+    if (provider)
+      ordered_providers << provider;
+  }
+
+  // Enable all the providers in the list and rank them
+  int relevance = 100;
+  foreach (SongInfoProvider* provider, ordered_providers) {
+    provider->set_enabled(true);
+    qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance--);
+  }
+
+  // Any lyric providers we don't have in ordered_providers are considered disabled
+  foreach (SongInfoProvider* provider, fetcher_->providers()) {
+    if (qobject_cast<UltimateLyricsProvider*>(provider) && !ordered_providers.contains(provider)) {
+      provider->set_enabled(false);
+    }
+  }
+}
+
+SongInfoProvider* OutgoingDataCreator::ProviderByName(const QString& name) const {
+  foreach (SongInfoProvider* provider, fetcher_->providers()) {
+    if (UltimateLyricsProvider* lyrics = qobject_cast<UltimateLyricsProvider*>(provider)) {
+      if (lyrics->name() == name)
+        return provider;
+    }
+  }
+  return NULL;
 }
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
@@ -459,8 +520,8 @@ void OutgoingDataCreator::SendLyrics(int id, const SongInfoFetcher::Result& resu
   foreach (const CollapsibleInfoPane::Data& data, result.info_) {
     // If the size is zero, do not send the provider
     SongInfoTextView* editor = qobject_cast<SongInfoTextView*>(data.contents_);
-    if (editor->toPlainText().length() == 0)
-      continue;
+    //if (editor->toPlainText().length() == 0)
+    //  continue;
 
     pb::remote::Lyric* lyric = response->mutable_lyrics()->Add();
 
