@@ -342,7 +342,7 @@ void OutgoingDataCreator::CreateSong(
     song_metadata->set_track(song.track());
     song_metadata->set_disc(song.disc());
     song_metadata->set_playcount(song.playcount());
-    song_metadata->set_is_local(song.url().isLocalFile());
+    song_metadata->set_is_local(song.url().scheme() == "file");
     song_metadata->set_filename(DataCommaSizeFromQString(song.basefilename()));
     song_metadata->set_file_size(song.filesize());
 
@@ -563,7 +563,7 @@ void OutgoingDataCreator::SendSongs(const pb::remote::RequestDownloadSongs &requ
 void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
                                          int song_no, int song_count) {
   // Only local files!!!
-  if (!song.url().isLocalFile())
+  if (!(song.url().scheme() == "file"))
     return;
 
   // Calculate the number of chunks
