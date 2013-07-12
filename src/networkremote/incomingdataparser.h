@@ -56,7 +56,7 @@ private:
   void SetShuffleMode(const pb::remote::Shuffle& shuffle);
   void InsertUrls(const pb::remote::Message& msg);
   void RemoveSongs(const pb::remote::Message& msg);
-  void ClientConnect(RemoteClient* client, const pb::remote::Message& msg);
+  void ClientConnect(const pb::remote::Message& msg);
   void SendPlaylists(const pb::remote::Message& msg);
   void OpenPlaylist(const pb::remote::Message& msg);
   void ClosePlaylist(const pb::remote::Message& msg);

@@ -35,8 +35,6 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
 
   // Connect to the slot IncomingData when receiving data
   connect(client, SIGNAL(readyRead()), this, SLOT(IncomingData()));
-  //connect(client, SIGNAL(disconnected()),
-  //        client, SLOT(deleteLater()));
 
   // Check if we use auth code
   QSettings s;

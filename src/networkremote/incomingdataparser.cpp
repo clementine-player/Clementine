@@ -97,7 +97,7 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
 
   // Now check what's to do
   switch (msg.type()) {
-    case pb::remote::CONNECT:     ClientConnect(client, msg);
+    case pb::remote::CONNECT:     ClientConnect(msg);
                                   break;
     case pb::remote::DISCONNECT:  close_connection_ = true;
                                   break;
@@ -240,7 +240,7 @@ void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
   emit RemoveSongs(songs);
 }
 
-void IncomingDataParser::ClientConnect(RemoteClient* client, const pb::remote::Message& msg) {
+void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {
 
   // Always sned the Clementine infos
   emit SendClementineInfo();
