@@ -15,6 +15,7 @@ enum MsgType {
   OPEN_PLAYLIST = 10;
   CLOSE_PLAYLIST = 11;
   GET_LYRICS = 14;
+  DOWNLOAD_SONGS = 15;
   // Lastfm
   LOVE = 12;
   BAN = 13;
@@ -44,6 +45,7 @@ enum MsgType {
   ACTIVE_PLAYLIST_CHANGED = 47;
   FIRST_DATA_SENT_COMPLETE = 48;
   LYRICS = 49;
+  SONG_FILE_CHUNK = 50;
 }
 
 // Valid Engine states
@@ -70,6 +72,9 @@ message SongMetadata {
   optional string pretty_length = 12;
   optional bytes art = 13;
   optional int32 length = 14;
+  optional bool is_local = 15;
+  optional string filename = 16;
+  optional int32 file_size = 17;
 }
 
 // Playlist informations
@@ -167,6 +172,7 @@ message ResponseUpdateTrackPosition {
 message RequestConnect {
   optional int32 auth_code = 1;
   optional bool send_playlist_songs = 2;
+  optional bool downloader = 3;
 }
 
 // Respone, why the connection was closed
@@ -174,6 +180,7 @@ enum ReasonDisconnect {
   Server_Shutdown = 1;
   Wrong_Auth_Code = 2;
   Not_Authenticated = 3;
+  Download_Forbidden = 4;
 }
 message ResponseDisconnect {
   optional ReasonDisconnect reason_disconnect = 1;
@@ -224,9 +231,30 @@ message Lyric {
   optional string content = 3;
 }
 
+// Message request for downloading songs
+enum DownloadItem {
+  CurrentItem = 1;
+  ItemAlbum = 2;
+  APlaylist = 3;
+}
+message RequestDownloadSongs {
+  optional DownloadItem download_item = 1;
+  optional int32 playlist_id = 2;
+}
+
+message ResponseSongFileChunk {
+  optional int32 chunk_number = 1;
+  optional int32 chunk_count = 2;
+  optional int32 file_number = 3;
+  optional int32 file_count = 4;
+  optional SongMetadata song_metadata = 6; // only sent with first chunk!
+  optional bytes data = 7;
+  optional int32 size = 8;
+}
+
 // The message itself
 message Message {
-  optional int32 version = 1 [default=8];
+  optional int32 version = 1 [default=9];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
@@ -239,6 +267,7 @@ message Message {
   optional RequestRemoveSongs request_remove_songs = 26;
   optional RequestOpenPlaylist request_open_playlist = 28;
   optional RequestClosePlaylist request_close_playlist = 29;
+  optional RequestDownloadSongs request_download_songs = 31;
   
   optional Repeat repeat = 13;
   optional Shuffle shuffle = 14;
@@ -252,4 +281,5 @@ message Message {
   optional ResponseDisconnect response_disconnect = 22;
   optional ResponseActiveChanged response_active_changed = 24;
   optional ResponseLyrics response_lyrics = 30;
+  optional ResponseSongFileChunk response_song_file_chunk = 32;
 }

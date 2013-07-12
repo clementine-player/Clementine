@@ -24,7 +24,6 @@
 #include "remoteclient.h"
 #include <boost/scoped_ptr.hpp>
 
-
 typedef QList<SongInfoProvider*> ProviderList;
 
 class OutgoingDataCreator : public QObject {
@@ -32,6 +31,8 @@ class OutgoingDataCreator : public QObject {
 public:
   OutgoingDataCreator(Application* app);
   ~OutgoingDataCreator();
+
+  static const quint32 kFileChunkSize;
 
   void SetClients(QList<RemoteClient*>* clients);
 
@@ -57,6 +58,7 @@ public slots:
   void DisconnectAllClients();
   void GetLyrics();
   void SendLyrics(int id, const SongInfoFetcher::Result& result);
+  void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
 
 private:
   Application* app_;
@@ -83,6 +85,9 @@ private:
       pb::remote::SongMetadata* song_metadata);
   void CheckEnabledProviders();
   SongInfoProvider* ProviderByName(const QString& name) const;
+  void SendSingleSong(RemoteClient* client, const Song& song, int song_no, int song_count);
+  void SendAlbum(RemoteClient* client, const Song& song);
+  void SendPlaylist(RemoteClient* client, int playlist_id);
 };
 
 #endif // OUTGOINGDATACREATOR_H

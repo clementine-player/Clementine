@@ -93,9 +93,11 @@ bool IncomingDataParser::close_connection() {
 void IncomingDataParser::Parse(const pb::remote::Message& msg) {
   close_connection_  = false;
 
+  RemoteClient* client = qobject_cast<RemoteClient*>(sender());
+
   // Now check what's to do
   switch (msg.type()) {
-    case pb::remote::CONNECT:     ClientConnect(msg);
+    case pb::remote::CONNECT:     ClientConnect(client, msg);
                                   break;
     case pb::remote::DISCONNECT:  close_connection_ = true;
                                   break;
@@ -143,6 +145,9 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
     case pb::remote::BAN:         emit Ban();
                                   break;
     case pb::remote::GET_LYRICS:  emit GetLyrics();
+                                  break;
+    case pb::remote::DOWNLOAD_SONGS:
+                                  emit SendSongs(msg.request_download_songs(), client);
                                   break;
     default: break;
   }
@@ -235,7 +240,8 @@ void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
   emit RemoveSongs(songs);
 }
 
-void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {
+void IncomingDataParser::ClientConnect(RemoteClient* client, const pb::remote::Message& msg) {
+
   // Always sned the Clementine infos
   emit SendClementineInfo();
 

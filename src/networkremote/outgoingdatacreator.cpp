@@ -22,6 +22,9 @@
 #include "networkremote.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
+#include "library/librarybackend.h"
+
+const quint32 OutgoingDataCreator::kFileChunkSize = 100000; // in Bytes
 
 OutgoingDataCreator::OutgoingDataCreator(Application* app)
   : app_(app),
@@ -137,12 +140,17 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
 
   RemoteClient* client;
   foreach(client, *clients_) {
+    // Do not send data to downloaders
+    if (client->isDownloader())
+      continue;
+
     // Check if the client is still active
     if (client->State() == QTcpSocket::ConnectedState) {
       client->SendData(msg);
     } else {
       clients_->removeAt(clients_->indexOf(client));
       delete client;
+      qDebug() << "Client deleted";
     }
   }
 }
@@ -334,6 +342,9 @@ void OutgoingDataCreator::CreateSong(
     song_metadata->set_track(song.track());
     song_metadata->set_disc(song.disc());
     song_metadata->set_playcount(song.playcount());
+    song_metadata->set_is_local(song.url().isLocalFile());
+    song_metadata->set_filename(DataCommaSizeFromQString(song.basefilename()));
+    song_metadata->set_file_size(song.filesize());
 
     // Append coverart
     if (!art.isNull()) {
@@ -528,4 +539,86 @@ void OutgoingDataCreator::SendLyrics(int id, const SongInfoFetcher::Result& resu
   SendDataToClients(&msg);
 
   results_.take(id);
+}
+
+void OutgoingDataCreator::SendSongs(const pb::remote::RequestDownloadSongs &request,
+                                    RemoteClient* client) {
+  switch (request.download_item()) {
+  case pb::remote::CurrentItem:
+    SendSingleSong(client, current_song_, 1, 1);
+    break;
+  case pb::remote::ItemAlbum:
+    SendAlbum(client, current_song_);
+    break;
+  case pb::remote::APlaylist:
+    SendPlaylist(client, request.playlist_id());
+    break;
+  default:
+    break;
+  }
+
+  client->DisconnectClient(pb::remote::Server_Shutdown);
+}
+
+void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
+                                         int song_no, int song_count) {
+  // Only local files!!!
+  if (!song.url().isLocalFile())
+    return;
+
+  // Calculate the number of chunks
+  int chunk_count  = qRound((song.filesize() / kFileChunkSize) + 0.5);
+  int chunk_number = 1;
+
+  // Open the file
+  QFile file(song.url().toLocalFile());
+  file.open(QIODevice::ReadOnly);
+
+  while (!file.atEnd()) {
+    QByteArray data = file.read(kFileChunkSize);
+
+    pb::remote::Message msg;
+    msg.set_type(pb::remote::SONG_FILE_CHUNK);
+
+    pb::remote::ResponseSongFileChunk* chunk = msg.mutable_response_song_file_chunk();
+    chunk->set_chunk_count(chunk_count);
+    chunk->set_chunk_number(chunk_number);
+    chunk->set_file_count(song_count);
+    chunk->set_file_number(song_no);
+    chunk->set_size(file.size());
+    chunk->set_data(data.constData(), data.size());
+    if (chunk_number == 1) {
+      int i = app_->playlist_manager()->active()->current_row();
+      CreateSong(
+        song, song.image(), i,
+        msg.mutable_response_song_file_chunk()->mutable_song_metadata());
+    }
+
+    msg.set_version(msg.default_instance().version());
+    client->SendData(&msg);
+
+    chunk_number++;
+  }
+  file.close();
+}
+
+void OutgoingDataCreator::SendAlbum(RemoteClient *client, const Song &song) {
+  SongList album = app_->library_backend()->GetSongsByAlbum(song.album());
+
+  foreach (Song s, album) {
+    SendSingleSong(client, s, album.indexOf(s)+1, album.size());
+  }
+}
+
+void OutgoingDataCreator::SendPlaylist(RemoteClient *client, int playlist_id) {
+  Playlist* playlist = app_->playlist_manager()->playlist(playlist_id);
+  if(!playlist) {
+    qLog(Info) << "Could not find playlist with id = " << playlist_id;
+    return;
+  }
+  SongList song_list = playlist->GetAllSongs();
+
+  foreach (Song s, song_list) {
+    SendSingleSong(client, s, song_list.indexOf(s)+1, song_list.size());
+  }
 }

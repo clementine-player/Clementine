@@ -25,6 +25,7 @@
 
 RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
   : app_(app),
+    downloader_(false),
     client_(client)
 {
   // Open the buffer
@@ -34,6 +35,8 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
 
   // Connect to the slot IncomingData when receiving data
   connect(client, SIGNAL(readyRead()), this, SLOT(IncomingData()));
+  //connect(client, SIGNAL(disconnected()),
+  //        client, SLOT(deleteLater()));
 
   // Check if we use auth code
   QSettings s;
@@ -41,6 +44,7 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
   s.beginGroup(NetworkRemote::kSettingsGroup);
   use_auth_code_ = s.value("use_auth_code", false).toBool();
   auth_code_     = s.value("auth_code", 0).toInt();
+  allow_downloads_ = s.value("allow_downloads", false).toBool();
 
   s.endGroup();
 
@@ -50,6 +54,11 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
 
 
 RemoteClient::~RemoteClient() {
+  delete client_;
+}
+
+void RemoteClient::setDownloader(bool downloader) {
+  downloader_ = downloader;
 }
 
 void RemoteClient::IncomingData() {
@@ -105,6 +114,24 @@ void RemoteClient::ParseMessage(const QByteArray &data) {
     }
   }
 
+  // Check if downloads are allowed
+  if (msg.type() == pb::remote::DOWNLOAD_SONGS && !allow_downloads_) {
+    DisconnectClient(pb::remote::Download_Forbidden);
+    return;
+  }
+
+  if (msg.type() == pb::remote::DISCONNECT) {
+    client_->flush();
+    client_->close();
+    qDebug() << "Client disconnected";
+    return;
+  }
+
+  if (msg.type() == pb::remote::DOWNLOAD_SONGS) {
+    qDebug() << "Downloader";
+    setDownloader(true);
+  }
+
   // Check if the client has sent the correct auth code
   if (!authenticated_) {
     DisconnectClient(pb::remote::Not_Authenticated);
@@ -132,19 +159,25 @@ void RemoteClient::DisconnectClient(pb::remote::ReasonDisconnect reason) {
 
 // Sends data to client without check if authenticated
 void RemoteClient::SendDataToClient(pb::remote::Message *msg) {
-  // Serialize the message
-  std::string data = msg->SerializeAsString();
-
   // Check if we are still connected
   if (client_->state() == QTcpSocket::ConnectedState) {
+    // Serialize the message
+    std::string data = msg->SerializeAsString();
+
     // write the length of the data first
     QDataStream s(client_);
     s << qint32(data.length());
-    s.writeRawData(data.data(), data.length());
+    if (downloader_) {
+      // Don't use QDataSteam for large files
+      client_->write(data.data(), data.length());
+    } else {
+      s.writeRawData(data.data(), data.length());
+    }
 
     // Do NOT flush data here! If the client is already disconnected, it
     // causes a SIGPIPE termination!!!
   } else {
+    qDebug() << "Closed";
     client_->close();
   }
 }
