@@ -556,8 +556,6 @@ void OutgoingDataCreator::SendSongs(const pb::remote::RequestDownloadSongs &requ
   default:
     break;
   }
-
-  client->DisconnectClient(pb::remote::Server_Shutdown);
 }
 
 void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
@@ -574,8 +572,10 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
   QFile file(song.url().toLocalFile());
   file.open(QIODevice::ReadOnly);
 
+  QByteArray data;
+
   while (!file.atEnd()) {
-    QByteArray data = file.read(kFileChunkSize);
+    data = file.read(kFileChunkSize);
 
     pb::remote::Message msg;
     msg.set_type(pb::remote::SONG_FILE_CHUNK);
@@ -586,7 +586,7 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
     chunk->set_file_count(song_count);
     chunk->set_file_number(song_no);
     chunk->set_size(file.size());
-    chunk->set_data(data.constData(), data.size());
+    chunk->set_data(data.data(), data.size());
     if (chunk_number == 1) {
       int i = app_->playlist_manager()->active()->current_row();
       CreateSong(
@@ -596,9 +596,11 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
 
     msg.set_version(msg.default_instance().version());
     client->SendData(&msg);
+    data.clear();
 
     chunk_number++;
   }
+
   file.close();
 }
 

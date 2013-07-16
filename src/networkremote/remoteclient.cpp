@@ -112,6 +112,11 @@ void RemoteClient::ParseMessage(const QByteArray &data) {
     }
   }
 
+  if (msg.type() == pb::remote::CONNECT) {
+    setDownloader(msg.request_connect().downloader());
+    qDebug() << "Downloader" << downloader_;
+  }
+
   // Check if downloads are allowed
   if (msg.type() == pb::remote::DOWNLOAD_SONGS && !allow_downloads_) {
     DisconnectClient(pb::remote::Download_Forbidden);
@@ -119,15 +124,10 @@ void RemoteClient::ParseMessage(const QByteArray &data) {
   }
 
   if (msg.type() == pb::remote::DISCONNECT) {
-    client_->flush();
-    client_->close();
+    qDebug() << client_->state();
+    client_->abort();
     qDebug() << "Client disconnected";
     return;
-  }
-
-  if (msg.type() == pb::remote::DOWNLOAD_SONGS) {
-    qDebug() << "Downloader";
-    setDownloader(true);
   }
 
   // Check if the client has sent the correct auth code
