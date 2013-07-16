@@ -66,6 +66,7 @@ GSTREAMER_PLUGINS=[
     'libgstmpegaudioparse.so',
     'libgstmusepack.so',
     'libgstogg.so',
+    'libgstopus.so',
     'libgstqtdemux.so',
     'libgstreplaygain.so',
     'libgstspeex.so',
