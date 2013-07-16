@@ -167,7 +167,7 @@ void RemoteClient::SendDataToClient(pb::remote::Message *msg) {
     s << qint32(data.length());
     if (downloader_) {
       // Don't use QDataSteam for large files
-      client_->write(data.data(), data.length());;
+      client_->write(data.data(), data.length());
     } else {
       s.writeRawData(data.data(), data.length());
     }
