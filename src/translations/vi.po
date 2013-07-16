@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-06 11:14+0000\n"
+"PO-Revision-Date: 2013-07-14 05:33+0000\n"
 "Last-Translator: Lê Trường An <truongan@linuxmail.org>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -257,7 +257,7 @@ msgstr "1 ngày"
 msgid "1 track"
 msgstr "1 bài"
 
-#: ../bin/src/ui_networkremotesettingspage.h:187
+#: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
@@ -278,7 +278,7 @@ msgstr "50 bài ngẫu nhiên"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Nâng cấp lên tài khoản cao cấp ngay</a>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:204
 msgid ""
 "<a "
 "href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Get"
@@ -318,7 +318,7 @@ msgstr "Cần có tài khoản Grooveshark Anywhere."
 msgid "A Spotify Premium account is required."
 msgstr "Cần có tài khoản cao cấp của Spotify."
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Máy khách được kết nối chỉ khi nhập đúng mã."
 
@@ -379,7 +379,7 @@ msgstr "Giới thiệu Clementine..."
 msgid "About Qt..."
 msgstr "Giới thiệu Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:177
+#: ../bin/src/ui_networkremotesettingspage.h:189
 msgid "Accept non public clients only"
 msgstr "Chỉ chấp nhận máy khách không công khai"
 
@@ -432,11 +432,11 @@ msgstr "Thêm tập tin"
 
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Thêm tập tin vào bộ chuyển mã"
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Thêm (các) tập tin vào bộ chuyển mã"
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "Add file..."
@@ -678,6 +678,14 @@ msgstr "Tất cả những người dịch"
 #: library/library.cpp:84
 msgid "All tracks"
 msgstr "Tất cả bài hát"
+
+#: ../bin/src/ui_networkremotesettingspage.h:196
+msgid "Allow a client to download music from this computer."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:198
+msgid "Allow downloads"
+msgstr "Cho phép tải về"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
@@ -1269,12 +1277,12 @@ msgstr "Kết nối đến Spotify"
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "Kết nối bị máy chủ từ chối, kiểm tra URL máy chủ. Ví dụ: http://localhost:4040/"
 
 #: internet/subsonicsettingspage.cpp:117
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Hết thời gian kết nối, kiểm tra URL máy chủ. Ví dụ: http://localhost:4040/"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:693
 msgid "Console"
@@ -1711,7 +1719,7 @@ msgstr "Không dừng lại!"
 
 #: internet/somafmservice.cpp:103
 msgid "Donate"
-msgstr ""
+msgstr "Quyên góp"
 
 #: devices/deviceview.cpp:115
 msgid "Double click to open"
@@ -1918,9 +1926,9 @@ msgstr "Nhập địa chỉ của kênh phát thanh trên internet:"
 msgid "Enter the name of the folder"
 msgstr "Nhập tên thư mục"
 
-#: ../bin/src/ui_networkremotesettingspage.h:184
+#: ../bin/src/ui_networkremotesettingspage.h:200
 msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
+msgstr "Nhập IP này vào ứng dụng để kết nối đến Clementine."
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -2454,7 +2462,7 @@ msgstr "Cao (1024x1024)"
 
 #: internet/subsonicsettingspage.cpp:112
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Không tìm thấy máy chủ, kiểm tra lại URL. Ví dụ: http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
@@ -2540,7 +2548,7 @@ msgstr ""
 
 #: internet/subsonicsettingspage.cpp:127
 msgid "Incomplete configuration, please ensure all fields are populated."
-msgstr ""
+msgstr "Chưa cấu hình xong, hãy điền vào tất cả các trường."
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -3157,7 +3165,7 @@ msgstr "Mạng"
 msgid "Network Proxy"
 msgstr "Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:168
+#: ../bin/src/ui_networkremotesettingspage.h:180
 msgid "Network Remote"
 msgstr "Điều khiển qua mạng"
 
@@ -3325,7 +3333,7 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:172
+#: ../bin/src/ui_networkremotesettingspage.h:184
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3606,7 +3614,7 @@ msgid "Popup duration"
 msgstr "Thời gian xuất hiện"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:170
+#: ../bin/src/ui_networkremotesettingspage.h:182
 msgid "Port"
 msgstr "Cổng"
 
@@ -4026,11 +4034,11 @@ msgstr "Lưu thiết lập"
 
 #: ../bin/src/ui_librarysettingspage.h:193
 msgid "Save ratings in file tags when possible"
-msgstr ""
+msgstr "Lưu đánh giá vào tập tin khi có thể"
 
 #: ../bin/src/ui_librarysettingspage.h:197
 msgid "Save statistics in file tags when possible"
-msgstr ""
+msgstr "Lưu thống kê vào tập tin khi có thể"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
@@ -4988,7 +4996,7 @@ msgstr "Dùng thẻ Nghệ sĩ của album khi có thể"
 msgid "Use Gnome's shortcut keys"
 msgstr "Sử dụng phím tắt của Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:169
+#: ../bin/src/ui_networkremotesettingspage.h:181
 msgid "Use Remotecontrol"
 msgstr "Sử dụng điều khiển từ xa"
 
@@ -5016,7 +5024,7 @@ msgstr "Tùy chọn tin nhắn thông báo"
 msgid "Use authentication"
 msgstr "Sử dụng xác thực"
 
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:193
 msgid "Use authentication code"
 msgstr "Mã xác thực người dùng"
 
@@ -5235,7 +5243,7 @@ msgstr "Bạn muốn quét lại toàn bộ ngay bây giờ?"
 
 #: library/librarysettingspage.cpp:151
 msgid "Write all songs statistics into songs' files"
-msgstr ""
+msgstr "Ghi tất cả thống kê của các bài hát vào các tập tin"
 
 #: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
@@ -5361,7 +5369,7 @@ msgid ""
 " subscriber."
 msgstr "Bạn không thể nghe đài phát thanh Last.fm vì bạn không phải là thành viên trả phí của Last.fm."
 
-#: ../bin/src/ui_networkremotesettingspage.h:186
+#: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Your IP address:"
 msgstr "Địa chỉ IP của bạn:"
 

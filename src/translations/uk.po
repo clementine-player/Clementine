@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-03 12:02+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-07-12 12:55+0000\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -255,7 +255,7 @@ msgstr "1 день"
 msgid "1 track"
 msgstr "1 доріжка"
 
-#: ../bin/src/ui_networkremotesettingspage.h:187
+#: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
@@ -276,7 +276,7 @@ msgstr "50 випадкових доріжок"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Оновитися до Premium зараз</a>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:204
 msgid ""
 "<a "
 "href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Get"
@@ -316,7 +316,7 @@ msgstr "Потрібен обліковий запис Grooveshark Anywhere."
 msgid "A Spotify Premium account is required."
 msgstr "Потрібен обліковий запис Spotify Premium."
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Клієнтське з’єднання стане можливим лише після введення належного коду."
 
@@ -377,7 +377,7 @@ msgstr "Про Clementine…"
 msgid "About Qt..."
 msgstr "Про Qt…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:177
+#: ../bin/src/ui_networkremotesettingspage.h:189
 msgid "Accept non public clients only"
 msgstr "Не підтримувати зв’язок з відкритими клієнтами"
 
@@ -676,6 +676,14 @@ msgstr "Всім перекладачам"
 #: library/library.cpp:84
 msgid "All tracks"
 msgstr "Всі доріжки"
+
+#: ../bin/src/ui_networkremotesettingspage.h:196
+msgid "Allow a client to download music from this computer."
+msgstr "Дозволити клієнту отримувати музику з цього комп’ютера."
+
+#: ../bin/src/ui_networkremotesettingspage.h:198
+msgid "Allow downloads"
+msgstr "Дозволити отримання"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
@@ -1916,7 +1924,7 @@ msgstr "Введіть адресу радіо-потоку:"
 msgid "Enter the name of the folder"
 msgstr "Вкажіть назву теки"
 
-#: ../bin/src/ui_networkremotesettingspage.h:184
+#: ../bin/src/ui_networkremotesettingspage.h:200
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Вкажіть цю IP-адресу у програмі для встановлення з’єднання з Clementine."
 
@@ -2418,7 +2426,7 @@ msgstr "HTML сторінка не містить жодних RSS стрічо�
 #: internet/subsonicsettingspage.cpp:135
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr ""
+msgstr "Отримано код стану HTTP 3xx без адреси. Перевірте налаштування сервера."
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -3155,7 +3163,7 @@ msgstr "Мережа"
 msgid "Network Proxy"
 msgstr "Проксі мережі"
 
-#: ../bin/src/ui_networkremotesettingspage.h:168
+#: ../bin/src/ui_networkremotesettingspage.h:180
 msgid "Network Remote"
 msgstr "Дистанційне керування з мережі"
 
@@ -3323,7 +3331,7 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:172
+#: ../bin/src/ui_networkremotesettingspage.h:184
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3604,7 +3612,7 @@ msgid "Popup duration"
 msgstr "Тривалість виринаючого повідомлення"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:170
+#: ../bin/src/ui_networkremotesettingspage.h:182
 msgid "Port"
 msgstr "Порт"
 
@@ -3776,7 +3784,7 @@ msgstr "Дійсно скасувати?"
 
 #: internet/subsonicsettingspage.cpp:131
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "Досягнено максимальної кількості переспрямовувань, перевірте налаштування сервера."
 
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
@@ -4986,7 +4994,7 @@ msgstr "Використовувати мітку виконавця альбо�
 msgid "Use Gnome's shortcut keys"
 msgstr "Використовувати комбінації клавіш Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:169
+#: ../bin/src/ui_networkremotesettingspage.h:181
 msgid "Use Remotecontrol"
 msgstr "Використовувати дистанційне керування"
 
@@ -5014,7 +5022,7 @@ msgstr "Використати власне повідомлення для сп
 msgid "Use authentication"
 msgstr "Використовувати автентифікацію"
 
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:193
 msgid "Use authentication code"
 msgstr "Використовувати код розпізнавання"
 
@@ -5359,7 +5367,7 @@ msgid ""
 " subscriber."
 msgstr "Ви не зможете прослуховувати радіостанції Last.fm, якщо ви не передплатник Last.fm."
 
-#: ../bin/src/ui_networkremotesettingspage.h:186
+#: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Your IP address:"
 msgstr "Ваша IP-адреса:"
 

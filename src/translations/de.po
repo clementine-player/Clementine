@@ -25,6 +25,7 @@
 # Robin Cornelio Thomas <rc.thomas90@gmail.com>, 2012
 # Mosley <stefan@stefantiemann.de>, 2011
 # El_Zorro_Loco <the.crazy.zorro@googlemail.com>, 2011, 2012
+# Vulgrim <y.ggdrassil.42@googlemail.com>, 2013
 # Wasilis <inactive+Wasilis@transifex.com>, 2013
 # Wasilis Mandratzis <m.wasilis@yahoo.de>, 2013
 # Wilhelm Einstein <>, 2012
@@ -32,7 +33,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-03 12:02+0000\n"
+"PO-Revision-Date: 2013-07-12 12:44+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +48,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\nSie können Playlists zu ihren Favoriten hinzufügen, indem sie den Stern neben dem Namen der Playlist anklicken\n\nFavorisierte Playlists werden hier gespeichert"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -63,7 +64,7 @@ msgstr "Tage"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:211
 #: ../bin/src/ui_transcoderoptionswma.h:80
 msgid " kbps"
-msgstr " Kb/s"
+msgstr "Kb/s"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
 #: ../bin/src/ui_playbacksettingspage.h:305
@@ -277,7 +278,7 @@ msgstr "1 Tag"
 msgid "1 track"
 msgstr "1 Stück"
 
-#: ../bin/src/ui_networkremotesettingspage.h:187
+#: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
@@ -298,7 +299,7 @@ msgstr "50 zufällige Stücke"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Jetzt auf Premium erweitern</a>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:204
 msgid ""
 "<a "
 "href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Get"
@@ -338,7 +339,7 @@ msgstr "Ein Grooveshark-Anywhere-Konto wird benötigt."
 msgid "A Spotify Premium account is required."
 msgstr "Ein Spotify-Premium-Konto ist erforderlich."
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Ein Client kann sich nur verbinden, falls der korrekte Code eingegeben wurde."
 
@@ -399,7 +400,7 @@ msgstr "Über Clementine..."
 msgid "About Qt..."
 msgstr "Über Qt…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:177
+#: ../bin/src/ui_networkremotesettingspage.h:189
 msgid "Accept non public clients only"
 msgstr "Akzeptiere nur private Clients"
 
@@ -452,11 +453,11 @@ msgstr "Datei hinzufügen"
 
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Datei zum Transcoder hinzufügen"
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Datei(en) zum Transcoder hinzufügen"
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "Add file..."
@@ -698,6 +699,14 @@ msgstr "Alle Übersetzer"
 #: library/library.cpp:84
 msgid "All tracks"
 msgstr "Alle Stücke"
+
+#: ../bin/src/ui_networkremotesettingspage.h:196
+msgid "Allow a client to download music from this computer."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:198
+msgid "Allow downloads"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
@@ -1162,7 +1171,7 @@ msgstr "Klicken Sie hier um das zu ändern"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "Hier klicken um diese Playlist zu speichern und unterm dem Reiter \"Playlists\" auf dem Panel auf der linken Seitenleiste zugänglich zu machen"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1477,7 +1486,7 @@ msgstr "Ctrl+Shift+O"
 
 #: ../bin/src/ui_mainwindow.h:726
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Strg + Shift + T"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+T"
@@ -1938,7 +1947,7 @@ msgstr "Geben Sie die URL eines Internetradios ein:"
 msgid "Enter the name of the folder"
 msgstr "Geben Sie den Namen des Ordners ein"
 
-#: ../bin/src/ui_networkremotesettingspage.h:184
+#: ../bin/src/ui_networkremotesettingspage.h:200
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Gib diese IP in der App ein um dich mit Clementine zu verbinden."
 
@@ -2440,7 +2449,7 @@ msgstr "Die angegebene HTML-Seite enthält keine RSS-Feeds"
 #: internet/subsonicsettingspage.cpp:135
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr ""
+msgstr "HTTP 3xx status code ohne URL erhalten, überprüfen Sie bitte die Server Einstellungen"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -3177,7 +3186,7 @@ msgstr "Netzwerk"
 msgid "Network Proxy"
 msgstr "Netzwerk-Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:168
+#: ../bin/src/ui_networkremotesettingspage.h:180
 msgid "Network Remote"
 msgstr "Netzwerk Fernsteuerung"
 
@@ -3345,7 +3354,7 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:172
+#: ../bin/src/ui_networkremotesettingspage.h:184
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3626,7 +3635,7 @@ msgid "Popup duration"
 msgstr "Anzeigedauer:"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:170
+#: ../bin/src/ui_networkremotesettingspage.h:182
 msgid "Port"
 msgstr "Port"
 
@@ -3798,7 +3807,7 @@ msgstr "Wirklich abbrechen?"
 
 #: internet/subsonicsettingspage.cpp:131
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "Das \"Redirect Limit\" wurde überschritten, bitte überprüfen Sie die Server Einstellungen"
 
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
@@ -5008,7 +5017,7 @@ msgstr "Wenn verfügbar Album-Interpret benutzen"
 msgid "Use Gnome's shortcut keys"
 msgstr "Gnome-Tastenkürzel verwenden"
 
-#: ../bin/src/ui_networkremotesettingspage.h:169
+#: ../bin/src/ui_networkremotesettingspage.h:181
 msgid "Use Remotecontrol"
 msgstr "Aktiviere Netzwerkfernsteuerung"
 
@@ -5036,7 +5045,7 @@ msgstr "Einen benutzerdefinierten Text für Benachrichtigungen benutzen"
 msgid "Use authentication"
 msgstr "Authentifizierung verwenden"
 
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:193
 msgid "Use authentication code"
 msgstr "Authentifizierungs-Code benutzen"
 
@@ -5381,7 +5390,7 @@ msgid ""
 " subscriber."
 msgstr "Sie werden kein Last.fm-Radio abspielen können, da sie kein Last.fm-Abonnent sind."
 
-#: ../bin/src/ui_networkremotesettingspage.h:186
+#: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Your IP address:"
 msgstr "Deine IP:"
 
