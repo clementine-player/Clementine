@@ -141,8 +141,13 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
   RemoteClient* client;
   foreach(client, *clients_) {
     // Do not send data to downloaders
-    if (client->isDownloader())
+    if (client->isDownloader()) {
+      if (client->State() != QTcpSocket::ConnectedState) {
+        clients_->removeAt(clients_->indexOf(client));
+        delete client;
+      }
       continue;
+    }
 
     // Check if the client is still active
     if (client->State() == QTcpSocket::ConnectedState) {
@@ -150,7 +155,6 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     } else {
       clients_->removeAt(clients_->indexOf(client));
       delete client;
-      qDebug() << "Client deleted";
     }
   }
 }
@@ -573,20 +577,24 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
   file.open(QIODevice::ReadOnly);
 
   QByteArray data;
+  pb::remote::Message msg;
+  pb::remote::ResponseSongFileChunk* chunk = msg.mutable_response_song_file_chunk();
+  msg.set_type(pb::remote::SONG_FILE_CHUNK);
 
   while (!file.atEnd()) {
+    // Read file chunk
     data = file.read(kFileChunkSize);
 
-    pb::remote::Message msg;
-    msg.set_type(pb::remote::SONG_FILE_CHUNK);
-
-    pb::remote::ResponseSongFileChunk* chunk = msg.mutable_response_song_file_chunk();
+    // Set chunk data
     chunk->set_chunk_count(chunk_count);
     chunk->set_chunk_number(chunk_number);
     chunk->set_file_count(song_count);
     chunk->set_file_number(song_no);
     chunk->set_size(file.size());
     chunk->set_data(data.data(), data.size());
+
+    // On the first chunk send the metadata, so the client knows
+    // what file it receives.
     if (chunk_number == 1) {
       int i = app_->playlist_manager()->active()->current_row();
       CreateSong(
@@ -594,8 +602,12 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
         msg.mutable_response_song_file_chunk()->mutable_song_metadata());
     }
 
+    // Send data directly to the client
     msg.set_version(msg.default_instance().version());
     client->SendData(&msg);
+
+    // Clear working data
+    chunk->Clear();
     data.clear();
 
     chunk_number++;
