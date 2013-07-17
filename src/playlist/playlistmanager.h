@@ -25,11 +25,11 @@
 #include <QSettings>
 
 #include "core/song.h"
+#include "playlist.h"
 #include "smartplaylists/generator_fwd.h"
 
 class Application;
 class LibraryBackend;
-class Playlist;
 class PlaylistBackend;
 class PlaylistContainer;
 class PlaylistParser;
@@ -162,6 +162,7 @@ public:
   QItemSelection active_selection() const { return selection(active_id()); }
 
   QString GetPlaylistName(int index) const { return playlists_[index].name; }
+  bool IsPlaylistFavorite(int index) const { return playlists_[index].p->is_favorite(); }
 
   void Init(LibraryBackend* library_backend, PlaylistBackend* playlist_backend,
             PlaylistSequence* sequence, PlaylistContainer* playlist_container);

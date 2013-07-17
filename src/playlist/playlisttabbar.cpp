@@ -94,7 +94,7 @@ void PlaylistTabBar::mouseReleaseEvent(QMouseEvent* e) {
   if (e->button() == Qt::MidButton) {
     // Update menu index
     menu_index_ = tabAt(e->pos());
-    Close();
+    Close(false);
   }
 
   QTabBar::mouseReleaseEvent(e);
@@ -151,13 +151,26 @@ void PlaylistTabBar::HideEditor() {
   manager_->SetCurrentPlaylist(manager_->current()->id());
 }
 
-void PlaylistTabBar::Close() {
+void PlaylistTabBar::Close(bool ask_for_delete) {
   if (menu_index_ == -1)
     return;
 
+  const int playlist_id = tabData(menu_index_).toInt();
+
+  if (ask_for_delete && !manager_->IsPlaylistFavorite(playlist_id)) {
+    if (QMessageBox::question(this,
+          tr("Remove playlist"),
+          tr("You are about to remove a playlist which is not part of your favorite playlists: "
+             "the playlist will be deleted (this action cannot be undone). \n"
+             "Are you sure you want to continue?"),
+          QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes) {
+        return;
+      }
+  }
+
   // Just hide the tab from the UI - don't delete it completely (it can still
   // be resurrected from the Playlists tab).
-  emit Close(tabData(menu_index_).toInt());
+  emit Close(playlist_id);
 
   // Select the nearest tab.
   if (menu_index_ > 1) {

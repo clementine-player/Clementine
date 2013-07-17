@@ -15,7 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "playlist.h"
 #include "playlistbackend.h"
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
@@ -34,6 +33,7 @@
 #include <QFileInfo>
 #include <QFuture>
 #include <QFutureWatcher>
+#include <QMessageBox>
 #include <QtDebug>
 
 using smart_playlists::GeneratorPtr;
@@ -293,7 +293,6 @@ bool PlaylistManager::Close(int id) {
   emit PlaylistClosed(id);
 
   if (!data.p->is_favorite()) {
-    // TODO: should we warn the user this action cannot be undone?
     playlist_backend_->RemovePlaylist(id);
     emit PlaylistDeleted(id);
   }
