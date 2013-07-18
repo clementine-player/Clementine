@@ -5,6 +5,8 @@
 #include <QImage>
 #include <QList>
 #include <QTimer>
+#include <QMap>
+#include <QQueue>
 
 #include "core/player.h"
 #include "core/application.h"
@@ -25,6 +27,12 @@
 #include <boost/scoped_ptr.hpp>
 
 typedef QList<SongInfoProvider*> ProviderList;
+
+struct DownloadItem {
+  Song song;
+  int song_no;
+  int song_count;
+};
 
 class OutgoingDataCreator : public QObject {
     Q_OBJECT
@@ -59,6 +67,7 @@ public slots:
   void GetLyrics();
   void SendLyrics(int id, const SongInfoFetcher::Result& result);
   void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
+  void SendNextSong(RemoteClient* client);
 
 private:
   Application* app_;
@@ -70,6 +79,7 @@ private:
   QTimer* keep_alive_timer_;
   QTimer* track_position_timer_;
   int keep_alive_timeout_;
+  QMap<RemoteClient*, QQueue<DownloadItem>* > download_queue_;
 
   boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
   ProviderList provider_list_;

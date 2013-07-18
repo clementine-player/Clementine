@@ -144,6 +144,8 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     if (client->isDownloader()) {
       if (client->State() != QTcpSocket::ConnectedState) {
         clients_->removeAt(clients_->indexOf(client));
+        delete download_queue_.value(client);
+        download_queue_.remove(client);
         delete client;
       }
       continue;
@@ -547,9 +549,20 @@ void OutgoingDataCreator::SendLyrics(int id, const SongInfoFetcher::Result& resu
 
 void OutgoingDataCreator::SendSongs(const pb::remote::RequestDownloadSongs &request,
                                     RemoteClient* client) {
+
+  if (!download_queue_.contains(client)) {
+    download_queue_.insert(client, new QQueue<DownloadItem>());
+  }
+
+  DownloadItem item;
+
   switch (request.download_item()) {
   case pb::remote::CurrentItem:
-    SendSingleSong(client, current_song_, 1, 1);
+    item.song = current_song_;
+    item.song_no = 1;
+    item.song_count = 1;
+    download_queue_.value(client)->append(item);
+
     break;
   case pb::remote::ItemAlbum:
     SendAlbum(client, current_song_);
@@ -560,6 +573,19 @@ void OutgoingDataCreator::SendSongs(const pb::remote::RequestDownloadSongs &requ
   default:
     break;
   }
+
+  // Send first file
+  SendNextSong(client);
+}
+
+void OutgoingDataCreator::SendNextSong(RemoteClient *client) {
+  if (!download_queue_.contains(client))
+    return;
+
+  // Get the item and send the single song
+  DownloadItem item;
+  item = download_queue_.value(client)->dequeue();
+  SendSingleSong(client, item.song, item.song_no, item.song_count);
 }
 
 void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
@@ -620,7 +646,11 @@ void OutgoingDataCreator::SendAlbum(RemoteClient *client, const Song &song) {
   SongList album = app_->library_backend()->GetSongsByAlbum(song.album());
 
   foreach (Song s, album) {
-    SendSingleSong(client, s, album.indexOf(s)+1, album.size());
+    DownloadItem item;
+    item.song = s;
+    item.song_no = album.indexOf(s)+1;
+    item.song_count = album.size();
+    download_queue_.value(client)->append(item);
   }
 }
 
@@ -633,6 +663,10 @@ void OutgoingDataCreator::SendPlaylist(RemoteClient *client, int playlist_id) {
   SongList song_list = playlist->GetAllSongs();
 
   foreach (Song s, song_list) {
-    SendSingleSong(client, s, song_list.indexOf(s)+1, song_list.size());
+    DownloadItem item;
+    item.song = s;
+    item.song_no = song_list.indexOf(s)+1;
+    item.song_count = song_list.size();
+    download_queue_.value(client)->append(item);
   }
 }

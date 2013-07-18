@@ -163,6 +163,10 @@ void NetworkRemote::AcceptConnection() {
             SIGNAL(SendSongs(pb::remote::RequestDownloadSongs,RemoteClient*)),
             outgoing_data_creator_.get(),
             SLOT(SendSongs(pb::remote::RequestDownloadSongs,RemoteClient*)));
+    connect(incoming_data_parser_.get(),
+            SIGNAL(SendNextSong(RemoteClient*)),
+            outgoing_data_creator_.get(),
+            SLOT(SendNextSong(RemoteClient*)));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
