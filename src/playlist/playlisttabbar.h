@@ -76,7 +76,7 @@ private slots:
   void Rename();
   void RenameInline();
   void HideEditor();
-  void Close();
+  void Close(bool ask_for_delete = true);
   void CloseFromTabIndex(int index);
   // Used when playlist's favorite flag isn't changed from the favorite widget
   // (e.g. from the playlistlistcontainer): will update the favorite widget
