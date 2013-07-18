@@ -145,8 +145,7 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
       if (client->State() != QTcpSocket::ConnectedState) {
         clients_->removeAt(clients_->indexOf(client));
         if (download_queue_.contains(client)) {
-          delete download_queue_.value(client);
-          download_queue_.remove(client);
+          delete download_queue_.take(client);
         }
         delete client;
       }
@@ -582,6 +581,9 @@ void OutgoingDataCreator::SendSongs(const pb::remote::RequestDownloadSongs &requ
 
 void OutgoingDataCreator::SendNextSong(RemoteClient *client) {
   if (!download_queue_.contains(client))
+    return;
+
+  if (download_queue_.value(client)->isEmpty())
     return;
 
   // Get the item and send the single song
