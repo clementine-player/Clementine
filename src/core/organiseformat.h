@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ORGANISEFORMAT_H
-#define ORGANISEFORMAT_H
+#ifndef SRC_CORE_ORGANISEFORMAT_H_
+#define SRC_CORE_ORGANISEFORMAT_H_
 
 #include <QSyntaxHighlighter>
 #include <QValidator>
@@ -24,7 +24,7 @@
 #include "core/song.h"
 
 class OrganiseFormat {
-public:
+ public:
   OrganiseFormat(const QString& format = QString());
 
   static const char* kTagPattern;
@@ -48,13 +48,13 @@ public:
 
 
   class Validator : public QValidator {
-  public:
-    Validator(QObject* parent = 0);
+   public:
+    explicit Validator(QObject* parent = 0);
     QValidator::State validate(QString& format, int& pos) const;
   };
 
   class SyntaxHighlighter : public QSyntaxHighlighter {
-  public:
+   public:
     static const QRgb kValidTagColorLight;
     static const QRgb kInvalidTagColorLight;
     static const QRgb kBlockColorLight;
@@ -62,14 +62,15 @@ public:
     static const QRgb kInvalidTagColorDark;
     static const QRgb kBlockColorDark;
 
-    SyntaxHighlighter(QObject* parent = 0);
-    SyntaxHighlighter(QTextEdit* parent);
-    SyntaxHighlighter(QTextDocument* parent);
+    explicit SyntaxHighlighter(QObject* parent = 0);
+    explicit SyntaxHighlighter(QTextEdit* parent);
+    explicit SyntaxHighlighter(QTextDocument* parent);
     void highlightBlock(const QString& format);
   };
 
-private:
-  QString ParseBlock(QString block, const Song& song, bool* any_empty = NULL) const;
+ private:
+  QString ParseBlock(
+      QString block, const Song& song, bool* any_empty = NULL) const;
   QString TagValue(const QString& tag, const Song& song) const;
 
   QString format_;
@@ -78,4 +79,4 @@ private:
   bool replace_the_;
 };
 
-#endif // ORGANISEFORMAT_H
+#endif  // SRC_CORE_ORGANISEFORMAT_H_
