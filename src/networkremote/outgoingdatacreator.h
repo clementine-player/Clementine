@@ -32,6 +32,11 @@ struct DownloadItem {
   Song song;
   int song_no;
   int song_count;
+  DownloadItem(Song s, int no, int count) {
+    song = s;
+    song_no = no;
+    song_count = count;
+  }
 };
 
 class OutgoingDataCreator : public QObject {
@@ -79,7 +84,7 @@ private:
   QTimer* keep_alive_timer_;
   QTimer* track_position_timer_;
   int keep_alive_timeout_;
-  QMap<RemoteClient*, QQueue<DownloadItem>* > download_queue_;
+  QMap<RemoteClient*, QQueue<DownloadItem> > download_queue_;
 
   boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
   ProviderList provider_list_;
