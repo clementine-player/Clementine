@@ -29,14 +29,13 @@
 typedef QList<SongInfoProvider*> ProviderList;
 
 struct DownloadItem {
-  Song song;
-  int song_no;
-  int song_count;
-  DownloadItem(Song s, int no, int count) {
-    song = s;
-    song_no = no;
-    song_count = count;
-  }
+  Song song_;
+  int song_no_;
+  int song_count_;
+  DownloadItem(Song s, int no, int count) :
+    song_(s),
+    song_no_(no),
+    song_count_(count) { }
 };
 
 class OutgoingDataCreator : public QObject {

@@ -582,7 +582,7 @@ void OutgoingDataCreator::SendNextSong(RemoteClient *client) {
 
   // Get the item and send the single song
   DownloadItem item = download_queue_[client].dequeue();
-  SendSingleSong(client, item.song, item.song_no, item.song_count);
+  SendSingleSong(client, item.song_, item.song_no_, item.song_count_);
 }
 
 void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
