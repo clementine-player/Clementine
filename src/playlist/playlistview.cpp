@@ -258,6 +258,10 @@ void PlaylistView::setModel(QAbstractItemModel *m) {
                this, SLOT(InvalidateCachedCurrentPixmap()));
     disconnect(model(), SIGNAL(layoutAboutToBeChanged()),
                this, SLOT(RatingHoverOut()));
+    // When changing the model, always invalidate the current pixmap.
+    // If a remote client uses "stop after", without invaliding the stop
+    // mark would not appear.
+    InvalidateCachedCurrentPixmap();
   }
 
   QTreeView::setModel(m);

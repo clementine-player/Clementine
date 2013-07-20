@@ -254,6 +254,10 @@ void Player::Stop() {
   current_item_.reset();
 }
 
+void Player::StopAfterCurrent() {
+  app_->playlist_manager()->active()->StopAfter(app_->playlist_manager()->active()->current_row());
+}
+
 void Player::Previous() {
   PreviousItem(Engine::Manual);  
 }

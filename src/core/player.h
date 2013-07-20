@@ -142,6 +142,7 @@ public slots:
   void Mute();
   void Pause();
   void Stop();
+  void StopAfterCurrent();
   void Play();
   void ShowOSD();
   void TogglePrettyOSD();

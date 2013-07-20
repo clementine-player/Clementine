@@ -33,6 +33,7 @@ signals:
   void PlayPause();
   void Pause();
   void Stop();
+  void StopAfterCurrent();
   void Next();
   void Previous();
   void SetVolume(int volume);

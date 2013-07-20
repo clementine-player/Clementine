@@ -43,6 +43,8 @@ IncomingDataParser::IncomingDataParser(Application* app)
           app_->player(), SLOT(Pause()));
   connect(this, SIGNAL(Stop()),
           app_->player(), SLOT(Stop()));
+  connect(this, SIGNAL(StopAfterCurrent()),
+          app_->player(), SLOT(StopAfterCurrent()));
   connect(this, SIGNAL(Next()),
           app_->player(), SLOT(Next()));
   connect(this, SIGNAL(Previous()),
@@ -114,6 +116,8 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
     case pb::remote::PAUSE:       emit Pause();
                                   break;
     case pb::remote::STOP:        emit Stop();
+                                  break;
+    case pb::remote::STOP_AFTER:  emit StopAfterCurrent();
                                   break;
     case pb::remote::NEXT:        emit Next();
                                   break;
