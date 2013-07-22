@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-12 12:44+0000\n"
+"PO-Revision-Date: 2013-07-18 03:03+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +93,7 @@ msgstr "%1 pada %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 daftar main (%2)"
 
-#: playlist/playlistmanager.cpp:409
+#: playlist/playlistmanager.cpp:408
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 terpilih dari"
@@ -118,7 +118,7 @@ msgstr "%1 songs found"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 lagu ditemukan (menunjukkan %2)"
 
-#: playlist/playlistmanager.cpp:415
+#: playlist/playlistmanager.cpp:414
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 lagu"
@@ -256,7 +256,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 Hari"
 
-#: playlist/playlistmanager.cpp:415
+#: playlist/playlistmanager.cpp:414
 msgid "1 track"
 msgstr "1 lagu"
 
@@ -684,11 +684,11 @@ msgstr "Semua lagu"
 
 #: ../bin/src/ui_networkremotesettingspage.h:196
 msgid "Allow a client to download music from this computer."
-msgstr ""
+msgstr "Izinkan klien mengunduh musik dari komputer ini."
 
 #: ../bin/src/ui_networkremotesettingspage.h:198
 msgid "Allow downloads"
-msgstr ""
+msgstr "Izinkan unduhan"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
@@ -1149,7 +1149,7 @@ msgstr "Clementine akan mencari musik di:"
 msgid "Click here to add some music"
 msgstr "Klik di sini untuk menambahkan musik"
 
-#: playlist/playlisttabbar.cpp:237
+#: playlist/playlisttabbar.cpp:250
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1892,7 +1892,7 @@ msgstr "Masukkan URL untuk mengunduh sampul dari Internet:"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
-msgstr ""
+msgstr "Masukkan nama berkas untuk eksport sampul (tanpa ekstensi):"
 
 #: playlist/playlisttabbar.cpp:132
 msgid "Enter a new name for this playlist"
@@ -2028,7 +2028,7 @@ msgstr "Kecuali antara trek pada album yang sama atau di lembar CUE yang sama"
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
-msgstr ""
+msgstr "Sampul yang sudah tersedia"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
@@ -2041,15 +2041,15 @@ msgstr "Kadaluarsa pada %1"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Export Covers"
-msgstr ""
+msgstr "Eksport Sampul"
 
 #: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
-msgstr ""
+msgstr "Eksport sampul"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
-msgstr ""
+msgstr "Eksport unduhan sampul"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
@@ -2057,7 +2057,7 @@ msgstr ""
 
 #: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
-msgstr ""
+msgstr "Eksport selesai"
 
 #: ui/albumcovermanager.cpp:786
 #, qt-format
@@ -3453,7 +3453,7 @@ msgstr "Pengaya keluaran"
 
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
-msgstr ""
+msgstr "Tulis ulang semua"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
@@ -3461,7 +3461,7 @@ msgstr "Timpa file yang sudah ada"
 
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
-msgstr ""
+msgstr "Hanya tulis ulang yang lebih kecil"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3563,8 +3563,8 @@ msgid "Player options"
 msgstr "Pilihan pemutar"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:480
-#: playlist/playlisttabbar.cpp:301
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
+#: playlist/playlisttabbar.cpp:314
 msgid "Playlist"
 msgstr "Daftar lagu"
 
@@ -3857,9 +3857,13 @@ msgstr "Buang dari favorit"
 msgid "Remove from playlist"
 msgstr "Hapus dari playlist"
 
+#: playlist/playlisttabbar.cpp:162
+msgid "Remove playlist"
+msgstr ""
+
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
-msgstr ""
+msgstr "Buang daftar lagu"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
@@ -3926,7 +3930,7 @@ msgstr "Penguatan Putar Ulang"
 
 #: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Mode Penguatan Ulang"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -4734,7 +4738,7 @@ msgstr "Berkas-berkas berikut akan dihapus dari perangkat, Anda yakin ingin mela
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Berkas-berkas ini akan terhapus secara permanen, Anda yakin ingin melanjutkan?"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4923,7 +4927,7 @@ msgstr "Tidak dapat mengunduh %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:488 playlist/playlistmanager.cpp:491
+#: playlist/playlistmanager.cpp:487 playlist/playlistmanager.cpp:490
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5099,7 +5103,7 @@ msgid "Variable bit rate"
 msgstr "Variabel laju bit"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:502 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Berbagai artis"
 
@@ -5280,6 +5284,12 @@ msgstr "Anda akan mendownload album-album berikut"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
+msgstr "Anda akan membuang daftar lagu %1 dari favorit, Anda yakin?"
+
+#: playlist/playlisttabbar.cpp:163
+msgid ""
+"You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
+"Are you sure you want to continue?"
 msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:172

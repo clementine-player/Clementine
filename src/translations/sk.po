@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-12 14:50+0000\n"
+"PO-Revision-Date: 2013-07-18 21:58+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,7 +88,7 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 playlistov (%2)"
 
-#: playlist/playlistmanager.cpp:409
+#: playlist/playlistmanager.cpp:408
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 vybratých z"
@@ -113,7 +113,7 @@ msgstr "nájdených %1 piesní"
 msgid "%1 songs found (showing %2)"
 msgstr "nájdených %1 piesní (zobrazuje sa %2)"
 
-#: playlist/playlistmanager.cpp:415
+#: playlist/playlistmanager.cpp:414
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladieb"
@@ -251,7 +251,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 deň"
 
-#: playlist/playlistmanager.cpp:415
+#: playlist/playlistmanager.cpp:414
 msgid "1 track"
 msgstr "1 skladba"
 
@@ -1144,7 +1144,7 @@ msgstr "Clementine bude hľadať hudbu na:"
 msgid "Click here to add some music"
 msgstr "Kliknite sem aby ste pridali nejakú hudbu"
 
-#: playlist/playlisttabbar.cpp:237
+#: playlist/playlisttabbar.cpp:250
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -3558,8 +3558,8 @@ msgid "Player options"
 msgstr "Možnosti prehrávača"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:480
-#: playlist/playlisttabbar.cpp:301
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
+#: playlist/playlisttabbar.cpp:314
 msgid "Playlist"
 msgstr "Playlist"
 
@@ -3851,6 +3851,10 @@ msgstr "Odstrániť z obľúbených"
 #: internet/groovesharkservice.cpp:528 ../bin/src/ui_mainwindow.h:696
 msgid "Remove from playlist"
 msgstr "Odstrániť z playlistu"
+
+#: playlist/playlisttabbar.cpp:162
+msgid "Remove playlist"
+msgstr "Odstrániť playlist"
 
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
@@ -4918,7 +4922,7 @@ msgstr "Nedá sa stiahnuť %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:488 playlist/playlistmanager.cpp:491
+#: playlist/playlistmanager.cpp:487 playlist/playlistmanager.cpp:490
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5094,7 +5098,7 @@ msgid "Variable bit rate"
 msgstr "Premenlivý dátový tok"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:502 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Rôzni interpréti"
 
@@ -5276,6 +5280,12 @@ msgstr "Chystáte sa stiahnuť nasledujúce albumy"
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Chystáte sa odstrániť %1 playlistov z vašich obľúbených, ste si istí?"
+
+#: playlist/playlisttabbar.cpp:163
+msgid ""
+"You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
+"Are you sure you want to continue?"
+msgstr "Chystáte sa odstrániť playlist, ktorý nie je súčasťou vašich obľúbených playlistov: playlist bude nenávratne vymazaný (tento krok sa nedá vrátiť späť). Ste si istý, že chcete pokračovať?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."

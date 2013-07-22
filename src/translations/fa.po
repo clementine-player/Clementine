@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-12 12:44+0000\n"
+"PO-Revision-Date: 2013-07-18 03:03+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,7 +90,7 @@ msgstr "%1 در %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 لیست‌پخش (%2)"
 
-#: playlist/playlistmanager.cpp:409
+#: playlist/playlistmanager.cpp:408
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 گزیده از"
@@ -115,7 +115,7 @@ msgstr "%1 آهنگ پیدا شد"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 آهنگ پیدا شد (نمایش %2)"
 
-#: playlist/playlistmanager.cpp:415
+#: playlist/playlistmanager.cpp:414
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 ترک"
@@ -253,7 +253,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "۱ روز"
 
-#: playlist/playlistmanager.cpp:415
+#: playlist/playlistmanager.cpp:414
 msgid "1 track"
 msgstr "۱ ترک"
 
@@ -1146,7 +1146,7 @@ msgstr "پوشه‌ای که کلمنتاین در آن به دنبال آهنگ
 msgid "Click here to add some music"
 msgstr "برای افزودن آهنگ‌ها، اینجا را بفشارید"
 
-#: playlist/playlisttabbar.cpp:237
+#: playlist/playlisttabbar.cpp:250
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -3560,8 +3560,8 @@ msgid "Player options"
 msgstr "گزینه‌های پخش‌کننده"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:480
-#: playlist/playlisttabbar.cpp:301
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
+#: playlist/playlisttabbar.cpp:314
 msgid "Playlist"
 msgstr "لیست‌پخش"
 
@@ -3853,6 +3853,10 @@ msgstr "پاک‌کردن از دلخواه"
 #: internet/groovesharkservice.cpp:528 ../bin/src/ui_mainwindow.h:696
 msgid "Remove from playlist"
 msgstr "از لیست‌پخش پاک کن"
+
+#: playlist/playlisttabbar.cpp:162
+msgid "Remove playlist"
+msgstr ""
 
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
@@ -4920,7 +4924,7 @@ msgstr "ناکام در باگیری %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:488 playlist/playlistmanager.cpp:491
+#: playlist/playlistmanager.cpp:487 playlist/playlistmanager.cpp:490
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5096,7 +5100,7 @@ msgid "Variable bit rate"
 msgstr "آهنگ ضرب متغیر"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:502 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "هنرمندان گوناگون"
 
@@ -5277,6 +5281,12 @@ msgstr "هم‌اکنون آلبوم‌های زیر بارگیری خواهند
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
+msgstr ""
+
+#: playlist/playlisttabbar.cpp:163
+msgid ""
+"You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
+"Are you sure you want to continue?"
 msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:172
