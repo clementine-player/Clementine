@@ -16,7 +16,7 @@ enum MsgType {
   CLOSE_PLAYLIST = 11;
   GET_LYRICS = 14;
   DOWNLOAD_SONGS = 15;
-  SEND_NEXT_SONG = 16;
+  SONG_OFFER_RESPONSE = 16;
   // Lastfm
   LOVE = 12;
   BAN = 13;
@@ -254,6 +254,10 @@ message ResponseSongFileChunk {
   optional int32 size = 8;
 }
 
+message ResponseSongOffer {
+  optional bool accepted = 1; // true = client wants to download item
+}
+
 // The message itself
 message Message {
   optional int32 version = 1 [default=9];
@@ -284,4 +288,5 @@ message Message {
   optional ResponseActiveChanged response_active_changed = 24;
   optional ResponseLyrics response_lyrics = 30;
   optional ResponseSongFileChunk response_song_file_chunk = 32;
+  optional ResponseSongOffer response_song_offer = 33;
 }

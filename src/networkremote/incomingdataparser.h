@@ -46,7 +46,7 @@ signals:
   void RemoveSongs(const QList<int>& indices);
   void SeekTo(int seconds);
   void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
-  void SendNextSong(RemoteClient* client);
+  void ResponseSongOffer(RemoteClient* client, bool accepted);
 
 private:
   Application* app_;

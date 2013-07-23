@@ -153,8 +153,9 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
     case pb::remote::DOWNLOAD_SONGS:
                                   emit SendSongs(msg.request_download_songs(), client);
                                   break;
-    case pb::remote::SEND_NEXT_SONG:
-                                  emit SendNextSong(client);
+    case pb::remote::SONG_OFFER_RESPONSE:
+                                  emit ResponseSongOffer(client,
+                                                         msg.response_song_offer().accepted());
                                   break;
     default: break;
   }

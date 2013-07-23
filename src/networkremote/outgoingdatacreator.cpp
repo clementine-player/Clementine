@@ -570,10 +570,37 @@ void OutgoingDataCreator::SendSongs(const pb::remote::RequestDownloadSongs &requ
   }
 
   // Send first file
-  SendNextSong(client);
+  OfferNextSong(client);
 }
 
-void OutgoingDataCreator::SendNextSong(RemoteClient *client) {
+void OutgoingDataCreator::OfferNextSong(RemoteClient *client) {
+  if (!download_queue_.contains(client))
+    return;
+
+  if (download_queue_.value(client).isEmpty())
+    return;
+
+  // Get the item and send the single song
+  DownloadItem item = download_queue_[client].head();
+
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::SONG_FILE_CHUNK);
+  pb::remote::ResponseSongFileChunk* chunk = msg.mutable_response_song_file_chunk();
+
+  // Song offer is chunk no 0
+  chunk->set_chunk_count(0);
+  chunk->set_chunk_number(0);
+  chunk->set_file_count(item.song_count_);
+  chunk->set_file_number(item.song_no_);
+
+  CreateSong(item.song_, item.song_.image(), -1,
+             chunk->mutable_song_metadata());
+
+  msg.set_version(msg.default_instance().version());
+  client->SendData(&msg);
+}
+
+void OutgoingDataCreator::ResponseSongOffer(RemoteClient *client, bool accepted) {
   if (!download_queue_.contains(client))
     return;
 
@@ -582,7 +609,11 @@ void OutgoingDataCreator::SendNextSong(RemoteClient *client) {
 
   // Get the item and send the single song
   DownloadItem item = download_queue_[client].dequeue();
-  SendSingleSong(client, item.song_, item.song_no_, item.song_count_);
+  if (accepted)
+    SendSingleSong(client, item.song_, item.song_no_, item.song_count_);
+
+  // And offer the next song
+  OfferNextSong(client);
 }
 
 void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,

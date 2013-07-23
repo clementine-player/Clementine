@@ -71,7 +71,7 @@ public slots:
   void GetLyrics();
   void SendLyrics(int id, const SongInfoFetcher::Result& result);
   void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
-  void SendNextSong(RemoteClient* client);
+  void ResponseSongOffer(RemoteClient* client, bool accepted);
 
 private:
   Application* app_;
@@ -102,6 +102,7 @@ private:
   void SendSingleSong(RemoteClient* client, const Song& song, int song_no, int song_count);
   void SendAlbum(RemoteClient* client, const Song& song);
   void SendPlaylist(RemoteClient* client, int playlist_id);
+  void OfferNextSong(RemoteClient* client);
 };
 
 #endif // OUTGOINGDATACREATOR_H
