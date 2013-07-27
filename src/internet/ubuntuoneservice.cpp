@@ -77,6 +77,9 @@ QByteArray UbuntuOneService::GenerateAuthorisationHeader() {
 void UbuntuOneService::AuthenticationFinished(
     UbuntuOneAuthenticator* authenticator) {
   authenticator->deleteLater();
+  if (!authenticator->success()) {
+    return;
+  }
 
   consumer_key_ = authenticator->consumer_key();
   consumer_secret_ = authenticator->consumer_secret();

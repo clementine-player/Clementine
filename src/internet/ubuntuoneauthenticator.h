@@ -12,6 +12,7 @@ class UbuntuOneAuthenticator : public QObject {
   explicit UbuntuOneAuthenticator(QObject* parent = 0);
   void StartAuthorisation(const QString& email, const QString& password);
 
+  bool success() const { return success_; }
   QString consumer_key() const { return consumer_key_; }
   QString consumer_secret() const { return consumer_secret_; }
   QString token() const { return token_; }
@@ -36,6 +37,8 @@ class UbuntuOneAuthenticator : public QObject {
 
  private:
   NetworkAccessManager* network_;
+
+  bool success_;
 
   QString consumer_key_;
   QString consumer_secret_;

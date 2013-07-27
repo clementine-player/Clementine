@@ -17,7 +17,7 @@
    <iconset resource="../../data/data.qrc">
     <normaloff>:/providers/ubuntuone.png</normaloff>:/providers/ubuntuone.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
@@ -32,19 +32,23 @@
     <widget class="LoginStateWidget" name="login_state" native="true"/>
    </item>
    <item>
-    <widget class="QWidget" name="login_container" native="true">
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="leftMargin">
-       <number>28</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+    <widget class="QGroupBox" name="login_container">
+     <property name="title">
+      <string>Account details</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Ubuntu One username</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLineEdit" name="username"/>
+        </item>
         <item>
          <widget class="QPushButton" name="login_button">
           <property name="text">
@@ -52,31 +56,31 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLineEdit" name="username">
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="password">
-           <property name="echoMode">
-            <enum>QLineEdit::Password</enum>
-           </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Ubuntu One password</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="password">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>&lt;a href=&quot;https://one.ubuntu.com/auth/login&quot;&gt;Create a new account or reset your password&lt;/a&gt;</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -89,7 +93,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>357</height>
+       <height>40</height>
       </size>
      </property>
     </spacer>
@@ -104,6 +108,11 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>username</tabstop>
+  <tabstop>password</tabstop>
+  <tabstop>login_button</tabstop>
+ </tabstops>
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>
