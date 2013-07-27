@@ -37,7 +37,7 @@ class FavoriteWidget : public QWidget {
 
  protected:
   void paintEvent(QPaintEvent* e);
-  void mousePressEvent(QMouseEvent* e);
+  void mouseReleaseEvent(QMouseEvent* e);
 
  private:
   static const int kStarSize;

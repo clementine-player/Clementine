@@ -60,7 +60,7 @@ void FavoriteWidget::paintEvent(QPaintEvent* e) {
   }
 }
 
-void FavoriteWidget::mousePressEvent(QMouseEvent* e) {
+void FavoriteWidget::mouseReleaseEvent(QMouseEvent* e) {
   favorite_ = !favorite_;
   update();
   emit FavoriteStateChanged(tab_index_, favorite_);
