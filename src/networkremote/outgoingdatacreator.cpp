@@ -577,24 +577,27 @@ void OutgoingDataCreator::OfferNextSong(RemoteClient *client) {
   if (!download_queue_.contains(client))
     return;
 
-  if (download_queue_.value(client).isEmpty())
-    return;
-
-  // Get the item and send the single song
-  DownloadItem item = download_queue_[client].head();
-
   pb::remote::Message msg;
-  msg.set_type(pb::remote::SONG_FILE_CHUNK);
-  pb::remote::ResponseSongFileChunk* chunk = msg.mutable_response_song_file_chunk();
 
-  // Song offer is chunk no 0
-  chunk->set_chunk_count(0);
-  chunk->set_chunk_number(0);
-  chunk->set_file_count(item.song_count_);
-  chunk->set_file_number(item.song_no_);
+  if (download_queue_.value(client).isEmpty()) {
+    // We sent all songs, tell the client the queue is empty
+    msg.set_type(pb::remote::DOWNLOAD_QUEUE_EMPTY);
+  } else {
+    // Get the item and send the single song
+    DownloadItem item = download_queue_[client].head();
 
-  CreateSong(item.song_, item.song_.image(), -1,
-             chunk->mutable_song_metadata());
+    msg.set_type(pb::remote::SONG_FILE_CHUNK);
+    pb::remote::ResponseSongFileChunk* chunk = msg.mutable_response_song_file_chunk();
+
+    // Song offer is chunk no 0
+    chunk->set_chunk_count(0);
+    chunk->set_chunk_number(0);
+    chunk->set_file_count(item.song_count_);
+    chunk->set_file_number(item.song_no_);
+
+    CreateSong(item.song_, item.song_.image(), -1,
+               chunk->mutable_song_metadata());
+  }
 
   msg.set_version(msg.default_instance().version());
   client->SendData(&msg);
@@ -671,6 +674,10 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
 }
 
 void OutgoingDataCreator::SendAlbum(RemoteClient *client, const Song &song) {
+  // No streams!
+  if (song.url().scheme() != "file")
+    return;
+
   SongList album = app_->library_backend()->GetSongsByAlbum(song.album());
 
   foreach (Song s, album) {
@@ -687,8 +694,19 @@ void OutgoingDataCreator::SendPlaylist(RemoteClient *client, int playlist_id) {
   }
   SongList song_list = playlist->GetAllSongs();
 
+  // Count the local songs
+  int count = 0;
   foreach (Song s, song_list) {
-    DownloadItem item(s, song_list.indexOf(s)+1, song_list.size());
-    download_queue_[client].append(item);
+    if (s.url().scheme() == "file") {
+      count++;
+    }
+  }
+
+  foreach (Song s, song_list) {
+    // Only local files!
+    if (s.url().scheme() == "file") {
+      DownloadItem item(s, song_list.indexOf(s)+1, count);
+      download_queue_[client].append(item);
+    }
   }
 }
