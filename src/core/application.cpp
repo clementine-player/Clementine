@@ -157,6 +157,14 @@ void Application::AddError(const QString& message) {
   emit ErrorAdded(message);
 }
 
+QString Application::language_without_region() const {
+  const int underscore = language_name_.indexOf('_');
+  if (underscore != -1) {
+    return language_name_.left(underscore);
+  }
+  return language_name_;
+}
+
 LibraryBackend* Application::library_backend() const {
   return library()->backend();
 }

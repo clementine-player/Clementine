@@ -89,11 +89,7 @@ void NetworkRemoteSettingsPage::Load() {
   ui_->ip_address->setText(ip_addresses);
 
   // Get the right play store badge for this language.
-  QString language = dialog()->app()->language_name();
-  const int underscore = language.indexOf('_');
-  if (underscore != -1) {
-    language = language.left(underscore);
-  }
+  QString language = dialog()->app()->language_without_region();
 
   QString badge_filename = ":/playstore/" + language + "_generic_rgb_wo_45.png";
   if (!QFile::exists(badge_filename)) {

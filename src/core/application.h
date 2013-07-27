@@ -55,7 +55,9 @@ public:
   Application(QObject* parent = NULL);
   ~Application();
 
-  QString language_name() const { return language_name_; }
+  const QString& language_name() const { return language_name_; }
+  // Same as language_name, but remove the region code at the end if there is one
+  QString language_without_region() const;
   void set_language_name(const QString& name) { language_name_ = name; }
 
   TagReaderClient* tag_reader_client() const { return tag_reader_client_; }
