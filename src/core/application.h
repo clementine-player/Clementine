@@ -55,6 +55,9 @@ public:
   Application(QObject* parent = NULL);
   ~Application();
 
+  QString language_name() const { return language_name_; }
+  void set_language_name(const QString& name) { language_name_ = name; }
+
   TagReaderClient* tag_reader_client() const { return tag_reader_client_; }
   Database* database() const { return database_; }
   AlbumCoverLoader* album_cover_loader() const { return album_cover_loader_; }
@@ -95,6 +98,8 @@ signals:
   void SettingsDialogRequested(SettingsDialog::Page page);
 
 private:
+  QString language_name_;
+
   TagReaderClient* tag_reader_client_;
   Database* database_;
   AlbumCoverLoader* album_cover_loader_;

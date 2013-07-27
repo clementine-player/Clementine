@@ -21,9 +21,13 @@
 #include "networkremote/networkremote.h"
 #include "networkremote/networkremotehelper.h"
 
+#include <QDesktopServices>
 #include <QSettings>
 #include <QHostInfo>
 #include <QNetworkInterface>
+
+const char* NetworkRemoteSettingsPage::kPlayStoreUrl =
+    "https://play.google.com/store/apps/details?id=de.qspool.clementineremote";
 
 NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
@@ -31,34 +35,34 @@ NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
 {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("ipodtouchicon"));
+
+  ui_->play_store->installEventFilter(this);
 }
 
 NetworkRemoteSettingsPage::~NetworkRemoteSettingsPage() {
   delete ui_;
 }
 
+bool NetworkRemoteSettingsPage::eventFilter(QObject* object, QEvent* event) {
+  if (object == ui_->play_store &&
+      event->type() == QEvent::MouseButtonRelease) {
+    QDesktopServices::openUrl(QUrl(kPlayStoreUrl));
+    return true;
+  }
+
+  return SettingsPage::eventFilter(object, event);
+}
+
 void NetworkRemoteSettingsPage::Load() {
   QSettings s;
-  int port;
 
   s.beginGroup(NetworkRemote::kSettingsGroup);
 
-  port = s.value("port").toInt();
-  if (port == 0) {
-      ui_->remote_port->setValue(NetworkRemote::kDefaultServerPort);
-  }
-  else {
-      ui_->remote_port->setValue(s.value("port").toInt());
-  }
-
   ui_->use_remote->setChecked(s.value("use_remote").toBool());
-  if (s.contains("only_non_public_ip")) {
-    ui_->only_non_public_ip->setChecked(s.value("only_non_public_ip").toBool());
-  } else {
-    // Default yes
-    ui_->only_non_public_ip->setChecked(true);
-    s.setValue("only_non_public_ip", true);
-  }
+  ui_->remote_port->setValue(
+      s.value("port", NetworkRemote::kDefaultServerPort).toInt());
+  ui_->only_non_public_ip->setChecked(
+      s.value("only_non_public_ip", true).toBool());
 
   // Auth Code, 5 digits
   ui_->use_auth_code->setChecked(s.value("use_auth_code", false).toBool());
@@ -67,9 +71,6 @@ void NetworkRemoteSettingsPage::Load() {
   ui_->allow_downloads->setChecked(s.value("allow_downloads", false).toBool());
 
   s.endGroup();
-
-  QPixmap android_qr_code(":clementine_remote_qr.png");
-  ui_->android_app_qr->setPixmap(android_qr_code);
 
   // Get local ip addresses
   QString ip_addresses;
@@ -80,12 +81,26 @@ void NetworkRemoteSettingsPage::Load() {
         !address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8"))) {
       qLog(Debug) << "IP:" << address.toString();
       if (!ip_addresses.isEmpty()) {
-        ip_addresses.append("; ");
+        ip_addresses.append(", ");
       }
       ip_addresses.append(address.toString());
     }
   }
   ui_->ip_address->setText(ip_addresses);
+
+  // Get the right play store badge for this language.
+  QString language = dialog()->app()->language_name();
+  const int underscore = language.indexOf('_');
+  if (underscore != -1) {
+    language = language.left(underscore);
+  }
+
+  QString badge_filename = ":/playstore/" + language + "_generic_rgb_wo_45.png";
+  if (!QFile::exists(badge_filename)) {
+    badge_filename = ":/playstore/en_generic_rgb_wo_45.png";
+  }
+
+  ui_->play_store->setPixmap(QPixmap(badge_filename));
 }
 
 void NetworkRemoteSettingsPage::Save() {

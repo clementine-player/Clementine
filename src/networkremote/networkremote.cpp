@@ -183,8 +183,10 @@ void NetworkRemote::AcceptConnection() {
 
 bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
   return
+      // Localhost v4
+      address.isInSubnet(QHostAddress::parseSubnet("127.0.0.0/8")) ||
       // Link Local v4
-      address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8")) ||
+      address.isInSubnet(QHostAddress::parseSubnet("169.254.1.0/16")) ||
       // Link Local v6
       address.isInSubnet(QHostAddress::parseSubnet("::1/128")) ||
       address.isInSubnet(QHostAddress::parseSubnet("fe80::/10")) ||
@@ -196,7 +198,7 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
       address.isInSubnet(QHostAddress::parseSubnet("fc00::/7"));
 }
 
-void NetworkRemote::CreateRemoteClient(QTcpSocket *client_socket) {
+void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
   if (client_socket) {
     // Add the client to the list
     RemoteClient* client = new RemoteClient(app_, client_socket);

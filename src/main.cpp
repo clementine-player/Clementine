@@ -110,7 +110,7 @@ using boost::scoped_ptr;
 #endif
 
 void LoadTranslation(const QString& prefix, const QString& path,
-                     const QString& override_language = QString()) {
+                     const QString& language) {
 #if QT_VERSION < 0x040700
   // QTranslator::load will try to open and read "clementine" if it exists,
   // without checking if it's a file first.
@@ -119,19 +119,6 @@ void LoadTranslation(const QString& prefix, const QString& path,
   if (maybe_clementine_directory.exists() && !maybe_clementine_directory.isFile())
     return;
 #endif
-
-#if QT_VERSION >= 0x040800
-  QString system_language = QLocale::system().uiLanguages().empty() ?
-      QLocale::system().name() : QLocale::system().uiLanguages().first();
-  // uiLanguages returns strings with "-" as separators for language/region;
-  // however QTranslator needs "_" separators
-  system_language.replace("-", "_");
-#else
-  QString system_language = QLocale::system().name();
-#endif
-
-  QString language = override_language.isEmpty() ?
-                     system_language : override_language;
 
   QTranslator* t = new PoTranslator;
   if (t->load(prefix + "_" + language, path))
@@ -389,12 +376,15 @@ int main(int argc, char *argv[]) {
         QSslCertificate::fromPath(":/grooveshark-valicert-ca.pem", QSsl::Pem));
 
   // Has the user forced a different language?
-  QString language = options.language();
-  if (language.isEmpty()) {
+  QString override_language = options.language();
+  if (override_language.isEmpty()) {
     QSettings s;
     s.beginGroup("General");
-    language = s.value("language").toString();
+    override_language = s.value("language").toString();
   }
+
+  const QString language = override_language.isEmpty() ?
+                           Utilities::SystemLanguageName() : override_language;
 
   // Translations
   LoadTranslation("qt", QLibraryInfo::location(QLibraryInfo::TranslationsPath), language);
@@ -417,6 +407,7 @@ int main(int argc, char *argv[]) {
   QtConcurrent::run(&ParseAProto);
 
   Application app;
+  app.set_language_name(language);
 
   Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
   Echonest::Config::instance()->setNetworkAccessManager(new NetworkAccessManager);

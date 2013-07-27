@@ -32,7 +32,12 @@ public:
   void Load();
   void Save();
 
+protected:
+  bool eventFilter(QObject* object, QEvent* event);
+
 private:
+  static const char* kPlayStoreUrl;
+
   Ui_NetworkRemoteSettingsPage* ui_;
 };
 

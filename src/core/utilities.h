@@ -138,6 +138,8 @@ namespace Utilities {
 
   // Returns true if this machine has a battery.
   bool IsLaptop();
+
+  QString SystemLanguageName();
 }
 
 class ScopedWCharArray {

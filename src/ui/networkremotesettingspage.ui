@@ -6,217 +6,170 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>475</width>
-    <height>300</height>
+    <width>884</width>
+    <height>587</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Network Remote</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QCheckBox" name="use_remote">
      <property name="text">
-      <string>Use Remotecontrol</string>
+      <string>Use a network remote control</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="use_remote_container" native="true">
+    <widget class="QGroupBox" name="use_remote_container_2">
      <property name="enabled">
       <bool>false</bool>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_5">
-      <property name="leftMargin">
-       <number>24</number>
-      </property>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <widget class="QLabel" name="label_remote_port">
-          <property name="minimumSize">
-           <size>
-            <width>171</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="text">
-           <string>Port</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="remote_port">
-          <property name="maximum">
-           <number>65535</number>
-          </property>
-          <property name="value">
-           <number>8080</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
+     <property name="title">
+      <string>Settings</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_remote_port">
+        <property name="minimumSize">
+         <size>
+          <width>171</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="text">
+         <string>Port</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
       </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QCheckBox" name="only_non_public_ip">
-          <property name="toolTip">
-           <string>Only accept connections from clients within the ip ranges:
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="remote_port">
+        <property name="maximum">
+         <number>65535</number>
+        </property>
+        <property name="value">
+         <number>8080</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QCheckBox" name="only_non_public_ip">
+        <property name="toolTip">
+         <string>Only accept connections from clients within the ip ranges:
 10.x.x.x
 172.16.0.0 - 172.31.255.255
 192.168.x.x</string>
-          </property>
-          <property name="text">
-           <string>Accept non public clients only</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+        </property>
+        <property name="text">
+         <string>Only allow connections from the local network</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QCheckBox" name="use_auth_code">
-          <property name="toolTip">
-           <string>A client can connect only, if the correct code was entered.</string>
-          </property>
-          <property name="text">
-           <string>Use authentication code</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="auth_code">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="suffix">
-           <string/>
-          </property>
-          <property name="maximum">
-           <number>99999</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="use_auth_code">
+        <property name="toolTip">
+         <string>A client can connect only, if the correct code was entered.</string>
+        </property>
+        <property name="text">
+         <string>Require authentication code</string>
+        </property>
+       </widget>
       </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="QCheckBox" name="allow_downloads">
-          <property name="toolTip">
-           <string>Allow a client to download music from this computer.</string>
-          </property>
-          <property name="text">
-           <string>Allow downloads</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="auth_code">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix">
+         <string/>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
       </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="toolTip">
-           <string>Enter this IP in the App to connect to Clementine.</string>
-          </property>
-          <property name="text">
-           <string>Your IP address:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="ip_address">
-          <property name="text">
-           <string>127.0.0.1</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item row="3" column="0" colspan="2">
+       <widget class="QCheckBox" name="allow_downloads">
+        <property name="toolTip">
+         <string>Allow a client to download music from this computer.</string>
+        </property>
+        <property name="text">
+         <string>Allow downloads</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="toolTip">
+         <string>Enter this IP in the App to connect to Clementine.</string>
+        </property>
+        <property name="text">
+         <string>Your IP address:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="ip_address">
+        <property name="text">
+         <string>127.0.0.1</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <pointsize>15</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Download the Android app</string>
      </property>
-     <property name="text">
-      <string>&lt;a href=&quot;https://play.google.com/store/apps/details?id=de.qspool.clementineremote&quot;&gt;Get the Android App now!&lt;/a&gt;</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::RichText</enum>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="openExternalLinks">
-      <bool>true</bool>
-     </property>
-     <property name="textInteractionFlags">
-      <set>Qt::LinksAccessibleByMouse</set>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="play_store">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="android_app_qr">
+        <property name="pixmap">
+         <pixmap resource="../../data/data.qrc">:/clementine_remote_qr.png</pixmap>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="android_app_qr">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <spacer name="verticalSpacer_5">
+    <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>36</height>
+       <height>98</height>
       </size>
      </property>
     </spacer>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections>
-  <connection>
-   <sender>use_remote</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>use_remote_container</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>199</x>
-     <y>19</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>60</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>use_auth_code</sender>
    <signal>toggled(bool)</signal>
@@ -230,6 +183,22 @@
     <hint type="destinationlabel">
      <x>351</x>
      <y>125</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>use_remote</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>use_remote_container_2</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>57</x>
+     <y>43</y>
     </hint>
    </hints>
   </connection>
