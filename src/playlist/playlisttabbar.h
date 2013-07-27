@@ -34,6 +34,7 @@ public:
   PlaylistTabBar(QWidget *parent = 0);
 
   static const int kDragHoverTimeout = 500;
+  static const char* kSettingsGroup;
 
   void SetActions(QAction* new_playlist, QAction* load_playlist);
   void SetManager(PlaylistManager* manager);
@@ -76,7 +77,7 @@ private slots:
   void Rename();
   void RenameInline();
   void HideEditor();
-  void Close(bool ask_for_delete = true);
+  void Close();
   void CloseFromTabIndex(int index);
   // Used when playlist's favorite flag isn't changed from the favorite widget
   // (e.g. from the playlistlistcontainer): will update the favorite widget

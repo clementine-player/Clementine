@@ -19,6 +19,7 @@
 #include "mainwindow.h"
 #include "ui_behavioursettingspage.h"
 #include "playlist/playlist.h"
+#include "playlist/playlisttabbar.h"
 
 #include <QDir>
 
@@ -124,6 +125,10 @@ void BehaviourSettingsPage::Load() {
   s.beginGroup(Playlist::kSettingsGroup);
   ui_->b_grey_out_deleted_->setChecked(s.value("greyoutdeleted", false).toBool());
   s.endGroup();
+
+  s.beginGroup(PlaylistTabBar::kSettingsGroup);
+  ui_->b_warm_close_playlist_->setChecked(s.value("warm_close_playlist", true).toBool());
+  s.endGroup();
 }
 
 void BehaviourSettingsPage::Save() {
@@ -158,6 +163,10 @@ void BehaviourSettingsPage::Save() {
 
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
+  s.endGroup();
+
+  s.beginGroup(PlaylistTabBar::kSettingsGroup);
+  s.setValue("warm_close_playlist", ui_->b_warm_close_playlist_->isChecked());
   s.endGroup();
 }
 

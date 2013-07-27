@@ -33,6 +33,8 @@
 #include <QPushButton>
 #include <QToolTip>
 
+const char* PlaylistTabBar::kSettingsGroup = "PlaylistTabBar";
+
 PlaylistTabBar::PlaylistTabBar(QWidget *parent)
   : QTabBar(parent),
     manager_(NULL),
@@ -94,7 +96,7 @@ void PlaylistTabBar::mouseReleaseEvent(QMouseEvent* e) {
   if (e->button() == Qt::MidButton) {
     // Update menu index
     menu_index_ = tabAt(e->pos());
-    Close(false);
+    Close();
   }
 
   QTabBar::mouseReleaseEvent(e);
@@ -151,11 +153,16 @@ void PlaylistTabBar::HideEditor() {
   manager_->SetCurrentPlaylist(manager_->current()->id());
 }
 
-void PlaylistTabBar::Close(bool ask_for_delete) {
+void PlaylistTabBar::Close() {
   if (menu_index_ == -1)
     return;
 
   const int playlist_id = tabData(menu_index_).toInt();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  const bool ask_for_delete = s.value("warm_close_playlist", true).toBool();
 
   if (ask_for_delete && !manager_->IsPlaylistFavorite(playlist_id)) {
     if (QMessageBox::question(this,
