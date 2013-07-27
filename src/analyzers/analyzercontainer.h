@@ -37,9 +37,13 @@ public:
   static const char* kSettingsGroup;
   static const char* kSettingsFramerate;
 
+signals:
+  void WheelEvent(int delta);
+
 protected:
   void mouseReleaseEvent(QMouseEvent *);
   void mouseDoubleClickEvent(QMouseEvent *);
+  void wheelEvent(QWheelEvent* e);
 
 private slots:
   void ChangeAnalyzer(int id);

@@ -634,6 +634,7 @@ MainWindow::MainWindow(Application* app,
   // Analyzer
   ui_->analyzer->SetEngine(app_->player()->engine());
   ui_->analyzer->SetActions(ui_->action_visualisations);
+  connect(ui_->analyzer, SIGNAL(WheelEvent(int)), SLOT(VolumeWheelEvent(int)));
 
   // Equalizer
   qLog(Debug) << "Creating equalizer";
