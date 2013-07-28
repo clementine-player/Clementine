@@ -162,7 +162,7 @@ void PlaylistTabBar::Close() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  const bool ask_for_delete = s.value("warm_close_playlist", true).toBool();
+  const bool ask_for_delete = s.value("warn_close_playlist", true).toBool();
 
   if (ask_for_delete && !manager_->IsPlaylistFavorite(playlist_id)) {
     if (QMessageBox::question(this,

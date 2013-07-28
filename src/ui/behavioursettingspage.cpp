@@ -127,7 +127,7 @@ void BehaviourSettingsPage::Load() {
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
-  ui_->b_warm_close_playlist_->setChecked(s.value("warm_close_playlist", true).toBool());
+  ui_->b_warn_close_playlist_->setChecked(s.value("warn_close_playlist", true).toBool());
   s.endGroup();
 }
 
@@ -166,7 +166,7 @@ void BehaviourSettingsPage::Save() {
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
-  s.setValue("warm_close_playlist", ui_->b_warm_close_playlist_->isChecked());
+  s.setValue("warn_close_playlist", ui_->b_warn_close_playlist_->isChecked());
   s.endGroup();
 }
 
