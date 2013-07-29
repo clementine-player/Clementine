@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-18 03:03+0000\n"
+"PO-Revision-Date: 2013-07-28 15:09+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -257,7 +257,7 @@ msgstr "۱ روز"
 msgid "1 track"
 msgstr "۱ ترک"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:201
 msgid "127.0.0.1"
 msgstr ""
 
@@ -278,12 +278,11 @@ msgstr "۵۰ ترک تصادفی"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">هم‌اکنون به اکانت برتر پیشرفت بده</a>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:204
+#: ../bin/src/ui_ubuntuonesettingspage.h:133
 msgid ""
-"<a "
-"href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Get"
-" the Android App now!</a>"
-msgstr "<a href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">کاربری اندروید را هم‌اکنون دریافت کنید!</a>"
+"<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
+"your password</a>"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -318,7 +317,7 @@ msgstr "نیاز به اکانت «گرووشارک همه‌جا» دارد."
 msgid "A Spotify Premium account is required."
 msgstr "نیاز به اکانت برتر اسپاتیفای دارد."
 
-#: ../bin/src/ui_networkremotesettingspage.h:191
+#: ../bin/src/ui_networkremotesettingspage.h:189
 msgid "A client can connect only, if the correct code was entered."
 msgstr "یک مشتری می‌تواند بپیوندد تنها زمانی که کد درست وارد شود."
 
@@ -379,14 +378,11 @@ msgstr "درباره‌ی کلمنتاین..."
 msgid "About Qt..."
 msgstr "درباره‌ی کیو‌ت..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:189
-msgid "Accept non public clients only"
-msgstr "تنها پذیرش مهمان‌های غیرعمومی "
-
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_ubuntuonesettingspage.h:129
 msgid "Account details"
 msgstr "ویژگی‌های اکانت"
 
@@ -426,7 +422,7 @@ msgstr "افزودن جریان دیگر..."
 msgid "Add directory..."
 msgstr "افزودن پوشه..."
 
-#: ui/mainwindow.cpp:1601
+#: ui/mainwindow.cpp:1602
 msgid "Add file"
 msgstr "افزودن پرونده"
 
@@ -446,7 +442,7 @@ msgstr "افزودن پرونده..."
 msgid "Add files to transcode"
 msgstr "افزودن پرونده‌ها به تراکد"
 
-#: ui/mainwindow.cpp:1629
+#: ui/mainwindow.cpp:1630
 msgid "Add folder"
 msgstr "افزودن پوشه"
 
@@ -550,7 +546,7 @@ msgstr "افزودن به دلخواه گرووشارک"
 msgid "Add to Grooveshark playlists"
 msgstr "افزودن به لیست‌پخش‌های گرووشارک"
 
-#: ui/mainwindow.cpp:1426
+#: ui/mainwindow.cpp:1427
 msgid "Add to another playlist"
 msgstr "افزودن به لیست‌پخش دیگر"
 
@@ -558,7 +554,7 @@ msgstr "افزودن به لیست‌پخش دیگر"
 msgid "Add to playlist"
 msgstr "افزودن به لیست‌پخش"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:220
 msgid "Add to the queue"
 msgstr "افزودن به صف"
 
@@ -679,11 +675,11 @@ msgstr "همه‌ی برگردانان"
 msgid "All tracks"
 msgstr "همه‌ی ترک‌ها"
 
-#: ../bin/src/ui_networkremotesettingspage.h:196
+#: ../bin/src/ui_networkremotesettingspage.h:194
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:198
+#: ../bin/src/ui_networkremotesettingspage.h:196
 msgid "Allow downloads"
 msgstr ""
 
@@ -695,16 +691,16 @@ msgstr "کدگذاری میانه/کنار"
 msgid "Alongside the originals"
 msgstr "در کنار اصلی‌ها"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:203
 msgid "Always hide the main window"
 msgstr "پنجره اصلی را همواره بپنهان"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always show the main window"
 msgstr "پنجره اصلی را همواره بنمایان"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:212
+#: ../bin/src/ui_behavioursettingspage.h:226
 msgid "Always start playing"
 msgstr "همواره آغاز به پخش می‌کند"
 
@@ -750,7 +746,7 @@ msgstr "پیوست پرونده/نشانی اینترنتی به لیست‌پخ
 msgid "Append to current playlist"
 msgstr "پیوست به لیست‌پخش جاری"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Append to the playlist"
 msgstr "پیوست به لیست‌پخش"
 
@@ -809,7 +805,7 @@ msgstr "گونه‌ی آوا"
 
 #: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
-#: internet/lastfmsettingspage.cpp:84
+#: internet/lastfmsettingspage.cpp:84 internet/ubuntuonesettingspage.cpp:75
 msgid "Authentication failed"
 msgstr "ناکامی در شناسایی"
 
@@ -894,7 +890,7 @@ msgstr "آبی ابتدایی"
 msgid "Basic audio type"
 msgstr "گونه‌ی ابتدایی آوا"
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:191
 msgid "Behavior"
 msgstr "رفتار"
 
@@ -1102,7 +1098,7 @@ msgstr "کلمنتاین می‌تواند آهنگ‌های را پخش کند 
 msgid "Clementine can play music that you have uploaded to Google Drive"
 msgstr "کلمنتاین می‌تواند آهنگ‌های را پخش کند که شما در درایو گوگل بارگذاشته‌اید"
 
-#: ../bin/src/ui_ubuntuonesettingspage.h:111
+#: ../bin/src/ui_ubuntuonesettingspage.h:128
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
 msgstr "کلمنتاین می‌تواند آهنگ‌های را پخش کند که شما در ابونتو وان بارگذاشته‌اید"
 
@@ -1146,7 +1142,7 @@ msgstr "پوشه‌ای که کلمنتاین در آن به دنبال آهنگ
 msgid "Click here to add some music"
 msgstr "برای افزودن آهنگ‌ها، اینجا را بفشارید"
 
-#: playlist/playlisttabbar.cpp:250
+#: playlist/playlisttabbar.cpp:257
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1167,7 +1163,7 @@ msgstr "با فشردن دکمه‌ی لاگین یک مرورگر گشوده م
 msgid "Close"
 msgstr "بستن"
 
-#: playlist/playlisttabbar.cpp:49
+#: playlist/playlisttabbar.cpp:51
 msgid "Close playlist"
 msgstr "بستن لیست‌پخش"
 
@@ -1564,7 +1560,7 @@ msgid "Delete downloaded data"
 msgstr "پاک‌کردن دانستنی‌های بارگیری شده"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1903 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1904 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
 
@@ -1597,11 +1593,11 @@ msgstr "پاک کردن اصل پرونده‌ها"
 msgid "Deleting files"
 msgstr "پاک کردن پرونده‌ها"
 
-#: ui/mainwindow.cpp:1361
+#: ui/mainwindow.cpp:1362
 msgid "Dequeue selected tracks"
 msgstr "صف‌بندی دوباره‌ی ترک‌های برگزیده"
 
-#: ui/mainwindow.cpp:1359
+#: ui/mainwindow.cpp:1360
 msgid "Dequeue track"
 msgstr "صف‌بندی دوباره‌ی ترک"
 
@@ -1725,7 +1721,7 @@ msgstr ""
 msgid "Double click to open"
 msgstr "برای گشودن دو بار کلیک کنید"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:214
 msgid "Double clicking a song will..."
 msgstr "دو بار کلیک یک آهنگ باعث..."
 
@@ -1753,6 +1749,10 @@ msgstr "بارگیری خودکار داستان‌های تازه"
 #: podcasts/podcastservice.cpp:187
 msgid "Download queued"
 msgstr "صف بارگیری"
+
+#: ../bin/src/ui_networkremotesettingspage.h:202
+msgid "Download the Android app"
+msgstr ""
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -1815,7 +1815,7 @@ msgstr "درهم‌ریختن تصادفی دینامیک"
 msgid "Edit smart playlist..."
 msgstr "ویرایش لیست‌پخش هوشمند..."
 
-#: ui/mainwindow.cpp:1394
+#: ui/mainwindow.cpp:1395
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "ویرایش برچسب \"%1\"..."
@@ -1891,7 +1891,7 @@ msgstr "برای بارگیری جلد از اینترنت، یک نشانی ا�
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:132
+#: playlist/playlisttabbar.cpp:134
 msgid "Enter a new name for this playlist"
 msgstr "نامی برای این لیست‌پخش وارد کنید"
 
@@ -1926,7 +1926,7 @@ msgstr "نشانی اینترنتی یک ایستگاه رادیویی اینت�
 msgid "Enter the name of the folder"
 msgstr "نام پوشه را وارد کنید"
 
-#: ../bin/src/ui_networkremotesettingspage.h:200
+#: ../bin/src/ui_networkremotesettingspage.h:198
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr ""
 
@@ -1948,7 +1948,7 @@ msgstr "برابر است با --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1855 ui/mainwindow.cpp:1971
+#: ui/mainwindow.cpp:1856 ui/mainwindow.cpp:1972
 msgid "Error"
 msgstr "خطا"
 
@@ -2360,7 +2360,7 @@ msgstr "درایو گوگل"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 از %2 جلدها دریافت شد (%3 ناموفق)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "Grey out non existent songs in my playlists"
 msgstr "آهنگ‌های ناموجود لیست‌پخش‌های من را خاکستری کن"
 
@@ -2663,7 +2663,7 @@ msgstr "دکمه‌ها را %1 ثانیه نگه دار..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "دکمه‌ها را %1 ثانیه نگه دار..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Keep running in the background when the window is closed"
 msgstr "پخش را در پس‌زمینه ادامه بده زمانی که پنجره بسته می‌شود"
 
@@ -2675,7 +2675,7 @@ msgstr "اصل پرونده‌ها را نگه دار"
 msgid "Kittens"
 msgstr "توله گربه‌ها"
 
-#: ../bin/src/ui_behavioursettingspage.h:179
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Language"
 msgstr "زبان"
 
@@ -2791,7 +2791,7 @@ msgstr "کتابخانه"
 msgid "Library advanced grouping"
 msgstr "گروه‌بندی پیشرفته‌ی کتابخانه"
 
-#: ui/mainwindow.cpp:2088
+#: ui/mainwindow.cpp:2089
 msgid "Library rescan notice"
 msgstr "آگاه‌سازی پویش دوباره‌ی کتابخانه"
 
@@ -2890,7 +2890,7 @@ msgstr "بارگیری پرونده‌ها/نشانی‌ها، جانشانی د
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
-#: ../bin/src/ui_ubuntuonesettingspage.h:112
+#: ../bin/src/ui_ubuntuonesettingspage.h:131
 #: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "ورود به سیستم"
@@ -3088,7 +3088,7 @@ msgstr "جابه‌جایی به کتابخانه..."
 msgid "Move up"
 msgstr "بالا بردن"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1603
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1604
 msgid "Music"
 msgstr "آهنگ"
 
@@ -3165,7 +3165,7 @@ msgstr "شبکه"
 msgid "Network Proxy"
 msgstr "پیشکار پراکسی"
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:177
 msgid "Network Remote"
 msgstr "کنترل از راه دور شبکه "
 
@@ -3177,8 +3177,8 @@ msgstr "هرگز"
 msgid "Never played"
 msgstr "هرگز پخش‌نشده"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Never start playing"
 msgstr "هرگز آغاز به پخش نمی‌کند"
 
@@ -3188,7 +3188,7 @@ msgstr "هرگز آغاز به پخش نمی‌کند"
 msgid "New folder"
 msgstr "پوشه‌ی تازه"
 
-#: ui/mainwindow.cpp:1443 ../bin/src/ui_mainwindow.h:702
+#: ui/mainwindow.cpp:1444 ../bin/src/ui_mainwindow.h:702
 msgid "New playlist"
 msgstr "لیست‌پخش تازه"
 
@@ -3251,7 +3251,7 @@ msgstr "بدون بلوک‌های کوتاه"
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1856 ui/mainwindow.cpp:1972
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1857 ui/mainwindow.cpp:1973
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های برگزیده مناسب کپی کردن در دستگاه نیستند"
 
@@ -3333,13 +3333,17 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:184
+#: ../bin/src/ui_networkremotesettingspage.h:182
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
 msgstr "اجازه دسترسی به آی پی هایی ار بازه: \n 10.x.x.x \n172.16.0.0 - 172.31.255.255\n192.168.x.x"
+
+#: ../bin/src/ui_networkremotesettingspage.h:187
+msgid "Only allow connections from the local network"
+msgstr ""
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3383,7 +3387,7 @@ msgstr "گشوده در درایو گوگل"
 
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
-#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:203
+#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:219
 msgid "Open in new playlist"
 msgstr "گشودن در لیست‌پخش تازه شود"
 
@@ -3481,7 +3485,7 @@ msgstr "مهمانی"
 msgid "Password"
 msgstr "گذرواژه"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:852 ui/mainwindow.cpp:1284
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1285
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "درنگ"
@@ -3507,8 +3511,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "میله‌کنار ساده"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:820
-#: ui/mainwindow.cpp:839 ui/mainwindow.cpp:1287 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:821
+#: ui/mainwindow.cpp:840 ui/mainwindow.cpp:1288 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:651
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3534,8 +3538,8 @@ msgstr "پخش رادیوی دلخواه..."
 msgid "Play if stopped, pause if playing"
 msgstr "پخش در صورت ایست، درنگ در صورت پخش"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:211
+#: ../bin/src/ui_behavioursettingspage.h:225
 msgid "Play if there is nothing already playing"
 msgstr "آغاز به پخش می‌کند اگر چیزی در حال پخش نیست"
 
@@ -3561,7 +3565,7 @@ msgstr "گزینه‌های پخش‌کننده"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
-#: playlist/playlisttabbar.cpp:314
+#: playlist/playlisttabbar.cpp:321
 msgid "Playlist"
 msgstr "لیست‌پخش"
 
@@ -3614,7 +3618,7 @@ msgid "Popup duration"
 msgstr "پنجرک"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:182
+#: ../bin/src/ui_networkremotesettingspage.h:180
 msgid "Port"
 msgstr "درگاه"
 
@@ -3727,12 +3731,12 @@ msgstr "جستجوی دستگاه..."
 msgid "Queue Manager"
 msgstr "مدیر به‌خط کردن"
 
-#: ui/mainwindow.cpp:1365
+#: ui/mainwindow.cpp:1366
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن ترک‌های گزیده"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1363
+#: ui/mainwindow.cpp:1364
 msgid "Queue track"
 msgstr "به‌خط کردن ترک"
 
@@ -3821,7 +3825,7 @@ msgstr "رگه"
 msgid "Remember Wii remote swing"
 msgstr "دورکنترل تابی Wii را به‌یاد بیاور"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Remember from last time"
 msgstr "از بار پایانی به‌یاد بیاور"
 
@@ -3854,7 +3858,7 @@ msgstr "پاک‌کردن از دلخواه"
 msgid "Remove from playlist"
 msgstr "از لیست‌پخش پاک کن"
 
-#: playlist/playlisttabbar.cpp:162
+#: playlist/playlisttabbar.cpp:169
 msgid "Remove playlist"
 msgstr ""
 
@@ -3879,11 +3883,11 @@ msgstr "نام‌گردانی لیست‌پخش «%1»"
 msgid "Rename Grooveshark playlist"
 msgstr "نام‌گردانی لیست‌پخش گرووشارک"
 
-#: playlist/playlisttabbar.cpp:132
+#: playlist/playlisttabbar.cpp:134
 msgid "Rename playlist"
 msgstr "لیست‌پخش را دوباره نامگذاری کن"
 
-#: playlist/playlisttabbar.cpp:50
+#: playlist/playlisttabbar.cpp:52
 msgid "Rename playlist..."
 msgstr "لیست‌پخش را دوباره نامگذاری کن..."
 
@@ -3913,7 +3917,7 @@ msgstr "تکرار ترک"
 msgid "Replace current playlist"
 msgstr "دوباره جانشانی لیست‌پخش جاری"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:218
 msgid "Replace the playlist"
 msgstr "دوباره جانشانی لیست‌پخش شود"
 
@@ -3933,6 +3937,10 @@ msgstr ""
 msgid "Repopulate"
 msgstr "ساکن شدن دوباره"
 
+#: ../bin/src/ui_networkremotesettingspage.h:191
+msgid "Require authentication code"
+msgstr ""
+
 #: widgets/lineedit.cpp:51
 msgid "Reset"
 msgstr "بازنشانی"
@@ -3950,7 +3958,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "محدود به حروف اَسکی کن"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:205
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4028,7 +4036,7 @@ msgstr "ذخیره‌ی فرتور"
 msgid "Save playlist"
 msgstr "ذخیره‌ی لیست‌پخش"
 
-#: playlist/playlisttabbar.cpp:51 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "ذخیره‌ی لیست‌پخش..."
 
@@ -4201,7 +4209,7 @@ msgstr "جزئیات سرور"
 msgid "Service offline"
 msgstr "سرویس برون‌خط"
 
-#: ui/mainwindow.cpp:1392
+#: ui/mainwindow.cpp:1393
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 را برابر \"%2‌\"قرار بده..."
@@ -4213,6 +4221,10 @@ msgstr "بلندی صدا را برابر <value> درصد قرار بده"
 #: ../bin/src/ui_mainwindow.h:673
 msgid "Set value for all selected tracks..."
 msgstr "این مقدار را برای همه‌ی ترک‌های گزیده قرار بده..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:179
+msgid "Settings"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4322,7 +4334,7 @@ msgstr "نمایش دکمه‌های «عشق» و «تحریم»"
 msgid "Show the scrobble button in the main window"
 msgstr "نمایش  دکمه‌ی واکشی در پنجره اصلی"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:192
 msgid "Show tray icon"
 msgstr "نمایش آیکون سینی"
 
@@ -4690,7 +4702,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "زمان آزمایشی سرور ساب‌سونیک پایان یافته است. خواهش می‌کنیم هزینه‌ای را کمک کنید تا کلید پروانه را دریافت کنید. برای راهنمایی انجام کار تارنمای subsonic.org را ببینید."
 
-#: ui/mainwindow.cpp:2081
+#: ui/mainwindow.cpp:2082
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4731,7 +4743,7 @@ msgid ""
 "continue?"
 msgstr "این پرونده‌ها از دستگاه پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1904 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1905 widgets/fileview.cpp:188
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4827,7 +4839,7 @@ msgstr "تبدیل به OSD زیبا"
 msgid "Toggle fullscreen"
 msgstr "تبدیل به تمام‌صفحه"
 
-#: ui/mainwindow.cpp:1367
+#: ui/mainwindow.cpp:1368
 msgid "Toggle queue status"
 msgstr "تبدیل به وضعیت صف"
 
@@ -4909,9 +4921,17 @@ msgstr "نشانی"
 msgid "URL(s)"
 msgstr "نشانی"
 
-#: ../bin/src/ui_ubuntuonesettingspage.h:110
+#: ../bin/src/ui_ubuntuonesettingspage.h:127
 msgid "Ubuntu One"
 msgstr "اوبونتو وان"
+
+#: ../bin/src/ui_ubuntuonesettingspage.h:132
+msgid "Ubuntu One password"
+msgstr ""
+
+#: ../bin/src/ui_ubuntuonesettingspage.h:130
+msgid "Ubuntu One username"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -5000,10 +5020,6 @@ msgstr "بکاربردن برچسب «هنرمند آلبوم» زمانی که 
 msgid "Use Gnome's shortcut keys"
 msgstr "بکار بردن کلیدهای میان‌بر گنوم"
 
-#: ../bin/src/ui_networkremotesettingspage.h:181
-msgid "Use Remotecontrol"
-msgstr "استفاده از کنترل از راه دور"
-
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "در صورت وجود، از ابرداده‌ی  Replay Gain استفاده کن"
@@ -5024,13 +5040,13 @@ msgstr "بکاربردن یک دسته دلخواه رنگ"
 msgid "Use a custom message for notifications"
 msgstr "بکار بردن پیام پیشنهادی برای آگاه‌سازی‌ها"
 
+#: ../bin/src/ui_networkremotesettingspage.h:178
+msgid "Use a network remote control"
+msgstr ""
+
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "بکار بردن سندیت"
-
-#: ../bin/src/ui_networkremotesettingspage.h:193
-msgid "Use authentication code"
-msgstr "بکاربردن کد شناسایی"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -5048,7 +5064,7 @@ msgstr "بکاربردن آگاه‌سازی برای گزارش وضعیت دو
 msgid "Use temporal noise shaping"
 msgstr "بکاربردن شکل زمانی پارازیت"
 
-#: ../bin/src/ui_behavioursettingspage.h:182
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Use the system default"
 msgstr "بکاربردن پیش‌نشان‌های سیستم"
 
@@ -5086,7 +5102,7 @@ msgstr "رابط کاربری"
 msgid "Username"
 msgstr "شناسه"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "Using the menu to add a song will..."
 msgstr "بکاربردن منو برای افزودن آهنگ..."
 
@@ -5147,6 +5163,10 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
+#: ../bin/src/ui_behavioursettingspage.h:194
+msgid "Warn me when closing a playlist tab"
+msgstr ""
+
 #: core/song.cpp:337
 msgid "Wav"
 msgstr "Wav"
@@ -5159,7 +5179,7 @@ msgstr "تارنما"
 msgid "Weeks"
 msgstr "هفته"
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "When Clementine starts"
 msgstr "زمانی که کلمنتاین شروع می‌شود"
 
@@ -5241,7 +5261,7 @@ msgid ""
 "well?"
 msgstr "آیا می‌خواهید آهنگ‌های دیگر در این آلبوم را به «هنرمندان گوناگون» تراببرید؟"
 
-#: ui/mainwindow.cpp:2086
+#: ui/mainwindow.cpp:2087
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
 
@@ -5283,7 +5303,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:163
+#: playlist/playlisttabbar.cpp:170
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5369,7 +5389,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "نیاز است که تنظیم‌های سیستم را راه‌اندازی کنید و   \"<span style=\" font-style:italic;\">Enable access for assistive devices</span>\" را پویا کنید تا بتوانید از میان‌برهای سراسری در کلمنتاین استفاده کنید."
 
-#: ../bin/src/ui_behavioursettingspage.h:184
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "You will need to restart Clementine if you change the language."
 msgstr "اگر زبان را تغییر دهید باید کلمنتاین را دوباره بارگذاری کنید."
 
@@ -5379,7 +5399,7 @@ msgid ""
 " subscriber."
 msgstr "شما نمی‌توانید ایستگاه رادیویی لست‌‌اف‌ام را پخش کنید زیرا شما عضو لست‌‌اف‌ام نیستید."
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:200
 msgid "Your IP address:"
 msgstr ""
 
@@ -5409,7 +5429,7 @@ msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "سیستم شما دارای OpenGL نیست، فرتورگری‌ها در دسترس نیستند."
 
 #: internet/groovesharksettingspage.cpp:107
-#: internet/spotifysettingspage.cpp:154
+#: internet/spotifysettingspage.cpp:154 internet/ubuntuonesettingspage.cpp:76
 msgid "Your username or password was incorrect."
 msgstr "شناسه یا گذرواژه نادرست است."
 
@@ -5547,6 +5567,10 @@ msgstr "در"
 #: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "گزینه‌ها"
+
+#: ../bin/src/ui_networkremotesettingspage.h:203
+msgid "or scan the QR code!"
+msgstr ""
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

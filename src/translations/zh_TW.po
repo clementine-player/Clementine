@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-18 03:03+0000\n"
+"PO-Revision-Date: 2013-07-28 15:09+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -255,7 +255,7 @@ msgstr "1 天"
 msgid "1 track"
 msgstr "1 歌曲"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:201
 msgid "127.0.0.1"
 msgstr ""
 
@@ -276,11 +276,10 @@ msgstr "50 隨機歌曲"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">現在就升級至進階</a>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:204
+#: ../bin/src/ui_ubuntuonesettingspage.h:133
 msgid ""
-"<a "
-"href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Get"
-" the Android App now!</a>"
+"<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
+"your password</a>"
 msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:195
@@ -316,7 +315,7 @@ msgstr "必須為Grooveshark Anywhere會員。"
 msgid "A Spotify Premium account is required."
 msgstr "必須為 Spotify 的高級帳戶。"
 
-#: ../bin/src/ui_networkremotesettingspage.h:191
+#: ../bin/src/ui_networkremotesettingspage.h:189
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -377,14 +376,11 @@ msgstr "關於 Clementine..."
 msgid "About Qt..."
 msgstr "關於 Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:189
-msgid "Accept non public clients only"
-msgstr ""
-
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_ubuntuonesettingspage.h:129
 msgid "Account details"
 msgstr "帳戶詳情"
 
@@ -424,7 +420,7 @@ msgstr "加入其它的網路串流"
 msgid "Add directory..."
 msgstr "加入目錄..."
 
-#: ui/mainwindow.cpp:1601
+#: ui/mainwindow.cpp:1602
 msgid "Add file"
 msgstr "加入檔案"
 
@@ -444,7 +440,7 @@ msgstr "加入檔案..."
 msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
-#: ui/mainwindow.cpp:1629
+#: ui/mainwindow.cpp:1630
 msgid "Add folder"
 msgstr "加入資料夾"
 
@@ -548,7 +544,7 @@ msgstr "加入到 Grooveshark 最愛"
 msgid "Add to Grooveshark playlists"
 msgstr "加入到 Grooveshark 播放清單"
 
-#: ui/mainwindow.cpp:1426
+#: ui/mainwindow.cpp:1427
 msgid "Add to another playlist"
 msgstr "加入到其他播放清單"
 
@@ -556,7 +552,7 @@ msgstr "加入到其他播放清單"
 msgid "Add to playlist"
 msgstr "加入播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:220
 msgid "Add to the queue"
 msgstr "加入到佇列中"
 
@@ -677,11 +673,11 @@ msgstr "所有翻譯者"
 msgid "All tracks"
 msgstr "所有曲目"
 
-#: ../bin/src/ui_networkremotesettingspage.h:196
+#: ../bin/src/ui_networkremotesettingspage.h:194
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:198
+#: ../bin/src/ui_networkremotesettingspage.h:196
 msgid "Allow downloads"
 msgstr ""
 
@@ -693,16 +689,16 @@ msgstr "允許 M/S (Mid/Side) 編碼技術"
 msgid "Alongside the originals"
 msgstr "與原本的一起"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:203
 msgid "Always hide the main window"
 msgstr "總是隱藏主要視窗"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always show the main window"
 msgstr "總是顯示主要視窗"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:212
+#: ../bin/src/ui_behavioursettingspage.h:226
 msgid "Always start playing"
 msgstr "總是開始播放"
 
@@ -748,7 +744,7 @@ msgstr "附加檔案或網址到播放清單"
 msgid "Append to current playlist"
 msgstr "附加到目前的播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Append to the playlist"
 msgstr "附加到播放清單"
 
@@ -807,7 +803,7 @@ msgstr "音頻格式"
 
 #: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
-#: internet/lastfmsettingspage.cpp:84
+#: internet/lastfmsettingspage.cpp:84 internet/ubuntuonesettingspage.cpp:75
 msgid "Authentication failed"
 msgstr "認證失敗"
 
@@ -892,7 +888,7 @@ msgstr "基本的藍色"
 msgid "Basic audio type"
 msgstr "基本音訊類型"
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:191
 msgid "Behavior"
 msgstr "行為"
 
@@ -1100,7 +1096,7 @@ msgstr ""
 msgid "Clementine can play music that you have uploaded to Google Drive"
 msgstr ""
 
-#: ../bin/src/ui_ubuntuonesettingspage.h:111
+#: ../bin/src/ui_ubuntuonesettingspage.h:128
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
 msgstr ""
 
@@ -1144,7 +1140,7 @@ msgstr ""
 msgid "Click here to add some music"
 msgstr "點擊此處加入一些音樂"
 
-#: playlist/playlisttabbar.cpp:250
+#: playlist/playlisttabbar.cpp:257
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1165,7 +1161,7 @@ msgstr ""
 msgid "Close"
 msgstr "關閉"
 
-#: playlist/playlisttabbar.cpp:49
+#: playlist/playlisttabbar.cpp:51
 msgid "Close playlist"
 msgstr ""
 
@@ -1562,7 +1558,7 @@ msgid "Delete downloaded data"
 msgstr "刪除下載的資料"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1903 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1904 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "刪除檔案"
 
@@ -1595,11 +1591,11 @@ msgstr "刪除原本的檔案"
 msgid "Deleting files"
 msgstr "檔案刪除中"
 
-#: ui/mainwindow.cpp:1361
+#: ui/mainwindow.cpp:1362
 msgid "Dequeue selected tracks"
 msgstr "將選取的歌曲移出佇列中"
 
-#: ui/mainwindow.cpp:1359
+#: ui/mainwindow.cpp:1360
 msgid "Dequeue track"
 msgstr "將歌曲移出佇列中"
 
@@ -1723,7 +1719,7 @@ msgstr ""
 msgid "Double click to open"
 msgstr "雙擊打開"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:214
 msgid "Double clicking a song will..."
 msgstr "雙擊一首歌曲將..."
 
@@ -1750,6 +1746,10 @@ msgstr "自動下載新的片斷內容"
 
 #: podcasts/podcastservice.cpp:187
 msgid "Download queued"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:202
+msgid "Download the Android app"
 msgstr ""
 
 #: internet/magnatuneservice.cpp:276
@@ -1813,7 +1813,7 @@ msgstr "動態隨機混合"
 msgid "Edit smart playlist..."
 msgstr "編輯智慧型播放清單..."
 
-#: ui/mainwindow.cpp:1394
+#: ui/mainwindow.cpp:1395
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "編輯標籤「%1」..."
@@ -1889,7 +1889,7 @@ msgstr "輸入網址，從網路中取得封面"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:132
+#: playlist/playlisttabbar.cpp:134
 msgid "Enter a new name for this playlist"
 msgstr "為這個播放清單輸入新的名稱"
 
@@ -1924,7 +1924,7 @@ msgstr "輸入網路廣播串流的網址(URL)："
 msgid "Enter the name of the folder"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:200
+#: ../bin/src/ui_networkremotesettingspage.h:198
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr ""
 
@@ -1946,7 +1946,7 @@ msgstr ""
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1855 ui/mainwindow.cpp:1971
+#: ui/mainwindow.cpp:1856 ui/mainwindow.cpp:1972
 msgid "Error"
 msgstr "錯誤"
 
@@ -2358,7 +2358,7 @@ msgstr ""
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "獲得 %1 涵蓋了 %2 ( %3 失敗 )"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "Grey out non existent songs in my playlists"
 msgstr "用灰色顯示在我播放清單有,但不存在的歌曲"
 
@@ -2661,7 +2661,7 @@ msgstr "按住按鈕 %1 秒..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "按住按鈕 %1 秒..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Keep running in the background when the window is closed"
 msgstr "當視窗關閉時,保持在背景運轉"
 
@@ -2673,7 +2673,7 @@ msgstr "保留原本的檔案"
 msgid "Kittens"
 msgstr "小貓"
 
-#: ../bin/src/ui_behavioursettingspage.h:179
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Language"
 msgstr "語言"
 
@@ -2789,7 +2789,7 @@ msgstr "音樂庫"
 msgid "Library advanced grouping"
 msgstr "音樂庫進階的歸類"
 
-#: ui/mainwindow.cpp:2088
+#: ui/mainwindow.cpp:2089
 msgid "Library rescan notice"
 msgstr "音樂庫重新掃描提示"
 
@@ -2888,7 +2888,7 @@ msgstr "載入檔案/網址，取代目前的播放清單"
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
-#: ../bin/src/ui_ubuntuonesettingspage.h:112
+#: ../bin/src/ui_ubuntuonesettingspage.h:131
 #: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "登錄"
@@ -3086,7 +3086,7 @@ msgstr "移到音樂庫..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1603
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1604
 msgid "Music"
 msgstr "音樂"
 
@@ -3163,7 +3163,7 @@ msgstr "網路"
 msgid "Network Proxy"
 msgstr "網路代理伺服器"
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:177
 msgid "Network Remote"
 msgstr ""
 
@@ -3175,8 +3175,8 @@ msgstr "從未"
 msgid "Never played"
 msgstr "從未播放"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Never start playing"
 msgstr "永不開始播放"
 
@@ -3186,7 +3186,7 @@ msgstr "永不開始播放"
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1443 ../bin/src/ui_mainwindow.h:702
+#: ui/mainwindow.cpp:1444 ../bin/src/ui_mainwindow.h:702
 msgid "New playlist"
 msgstr "新增播放清單"
 
@@ -3249,7 +3249,7 @@ msgstr "無短區塊"
 msgid "None"
 msgstr "沒有"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1856 ui/mainwindow.cpp:1972
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1857 ui/mainwindow.cpp:1973
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "所選歌曲沒有適合複製到裝置的"
 
@@ -3331,12 +3331,16 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:184
+#: ../bin/src/ui_networkremotesettingspage.h:182
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:187
+msgid "Only allow connections from the local network"
 msgstr ""
 
 #: ../bin/src/ui_querysortpage.h:142
@@ -3381,7 +3385,7 @@ msgstr ""
 
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
-#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:203
+#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:219
 msgid "Open in new playlist"
 msgstr "開啟在新的播放清單"
 
@@ -3479,7 +3483,7 @@ msgstr "派對"
 msgid "Password"
 msgstr "密碼"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:852 ui/mainwindow.cpp:1284
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1285
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "暫停"
@@ -3505,8 +3509,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "樸素的側邊欄"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:820
-#: ui/mainwindow.cpp:839 ui/mainwindow.cpp:1287 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:821
+#: ui/mainwindow.cpp:840 ui/mainwindow.cpp:1288 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:651
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3532,8 +3536,8 @@ msgstr "播放自定義電台"
 msgid "Play if stopped, pause if playing"
 msgstr "停止的話就開始播放，播放中的就暫停"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:211
+#: ../bin/src/ui_behavioursettingspage.h:225
 msgid "Play if there is nothing already playing"
 msgstr "播放如果沒有歌曲是正在播放中"
 
@@ -3559,7 +3563,7 @@ msgstr "播放器選項"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
-#: playlist/playlisttabbar.cpp:314
+#: playlist/playlisttabbar.cpp:321
 msgid "Playlist"
 msgstr "播放清單"
 
@@ -3612,7 +3616,7 @@ msgid "Popup duration"
 msgstr "彈出持續時間"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:182
+#: ../bin/src/ui_networkremotesettingspage.h:180
 msgid "Port"
 msgstr "連接埠"
 
@@ -3725,12 +3729,12 @@ msgstr "查詢裝置..."
 msgid "Queue Manager"
 msgstr "佇列管理員"
 
-#: ui/mainwindow.cpp:1365
+#: ui/mainwindow.cpp:1366
 msgid "Queue selected tracks"
 msgstr "將選取的歌曲加入佇列中"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1363
+#: ui/mainwindow.cpp:1364
 msgid "Queue track"
 msgstr "將歌曲加入佇列中"
 
@@ -3819,7 +3823,7 @@ msgstr "雷鬼"
 msgid "Remember Wii remote swing"
 msgstr "記住Wii遙控器揮動"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Remember from last time"
 msgstr "記得上一次的狀態"
 
@@ -3852,7 +3856,7 @@ msgstr "從我的最愛中刪除"
 msgid "Remove from playlist"
 msgstr "從播放清單移除"
 
-#: playlist/playlisttabbar.cpp:162
+#: playlist/playlisttabbar.cpp:169
 msgid "Remove playlist"
 msgstr ""
 
@@ -3877,11 +3881,11 @@ msgstr ""
 msgid "Rename Grooveshark playlist"
 msgstr "重命名 Grooveshark 播放清單"
 
-#: playlist/playlisttabbar.cpp:132
+#: playlist/playlisttabbar.cpp:134
 msgid "Rename playlist"
 msgstr "變更播放清單名稱"
 
-#: playlist/playlisttabbar.cpp:50
+#: playlist/playlisttabbar.cpp:52
 msgid "Rename playlist..."
 msgstr "重新命名播放清單"
 
@@ -3911,7 +3915,7 @@ msgstr "循環播放單曲"
 msgid "Replace current playlist"
 msgstr "取代目前播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:218
 msgid "Replace the playlist"
 msgstr "取代播放清單"
 
@@ -3931,6 +3935,10 @@ msgstr ""
 msgid "Repopulate"
 msgstr "重新填充"
 
+#: ../bin/src/ui_networkremotesettingspage.h:191
+msgid "Require authentication code"
+msgstr ""
+
 #: widgets/lineedit.cpp:51
 msgid "Reset"
 msgstr "重置"
@@ -3948,7 +3956,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "限制為 ASCII 字符"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:205
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4026,7 +4034,7 @@ msgstr "儲存圖片"
 msgid "Save playlist"
 msgstr "儲存播放清單"
 
-#: playlist/playlisttabbar.cpp:51 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "儲存播放清單"
 
@@ -4199,7 +4207,7 @@ msgstr ""
 msgid "Service offline"
 msgstr "服務離線"
 
-#: ui/mainwindow.cpp:1392
+#: ui/mainwindow.cpp:1393
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "設定 %1 到「%2」..."
@@ -4211,6 +4219,10 @@ msgstr "設定音量到百分之<value>"
 #: ../bin/src/ui_mainwindow.h:673
 msgid "Set value for all selected tracks..."
 msgstr "為所有選擇的歌曲設定音量..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:179
+msgid "Settings"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4320,7 +4332,7 @@ msgstr "顯示 [喜愛] 和 [禁止] 按鈕"
 msgid "Show the scrobble button in the main window"
 msgstr "在主視窗顯示 scrobble 的按鈕"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:192
 msgid "Show tray icon"
 msgstr "顯示工作列圖示"
 
@@ -4688,7 +4700,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2081
+#: ui/mainwindow.cpp:2082
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4729,7 +4741,7 @@ msgid ""
 "continue?"
 msgstr ""
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1904 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1905 widgets/fileview.cpp:188
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4825,7 +4837,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr "切換全螢幕模式"
 
-#: ui/mainwindow.cpp:1367
+#: ui/mainwindow.cpp:1368
 msgid "Toggle queue status"
 msgstr "切換佇列狀態"
 
@@ -4907,8 +4919,16 @@ msgstr ""
 msgid "URL(s)"
 msgstr ""
 
-#: ../bin/src/ui_ubuntuonesettingspage.h:110
+#: ../bin/src/ui_ubuntuonesettingspage.h:127
 msgid "Ubuntu One"
+msgstr ""
+
+#: ../bin/src/ui_ubuntuonesettingspage.h:132
+msgid "Ubuntu One password"
+msgstr ""
+
+#: ../bin/src/ui_ubuntuonesettingspage.h:130
+msgid "Ubuntu One username"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
@@ -4998,10 +5018,6 @@ msgstr "當有可以用時，使用專輯演出者標籤"
 msgid "Use Gnome's shortcut keys"
 msgstr "使用 Gnome 的快速鍵"
 
-#: ../bin/src/ui_networkremotesettingspage.h:181
-msgid "Use Remotecontrol"
-msgstr ""
-
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "使用回放增益元數據，如果它是可獲得的"
@@ -5022,13 +5038,13 @@ msgstr "使用自訂顏色組合"
 msgid "Use a custom message for notifications"
 msgstr "使用自訂訊息的通知"
 
+#: ../bin/src/ui_networkremotesettingspage.h:178
+msgid "Use a network remote control"
+msgstr ""
+
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "使用認證"
-
-#: ../bin/src/ui_networkremotesettingspage.h:193
-msgid "Use authentication code"
-msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -5046,7 +5062,7 @@ msgstr "使用通知信息以報告 Wii 遙控器的狀態"
 msgid "Use temporal noise shaping"
 msgstr "使用時域雜訊重整"
 
-#: ../bin/src/ui_behavioursettingspage.h:182
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Use the system default"
 msgstr "使用系統預設"
 
@@ -5084,7 +5100,7 @@ msgstr "使用者介面"
 msgid "Username"
 msgstr "使用者名稱"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "Using the menu to add a song will..."
 msgstr "使用選單加入的歌曲將..."
 
@@ -5145,6 +5161,10 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
+#: ../bin/src/ui_behavioursettingspage.h:194
+msgid "Warn me when closing a playlist tab"
+msgstr ""
+
 #: core/song.cpp:337
 msgid "Wav"
 msgstr "Wav"
@@ -5157,7 +5177,7 @@ msgstr "網站"
 msgid "Weeks"
 msgstr "星期"
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "When Clementine starts"
 msgstr "當 Clementine 啟動"
 
@@ -5239,7 +5259,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2086
+#: ui/mainwindow.cpp:2087
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -5281,7 +5301,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:163
+#: playlist/playlisttabbar.cpp:170
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5367,7 +5387,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:184
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "You will need to restart Clementine if you change the language."
 msgstr "您將需要重新啟動 Clementine ，如果您變更了本程式使用者介面所用的語言。"
 
@@ -5377,7 +5397,7 @@ msgid ""
 " subscriber."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:200
 msgid "Your IP address:"
 msgstr ""
 
@@ -5407,7 +5427,7 @@ msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr ""
 
 #: internet/groovesharksettingspage.cpp:107
-#: internet/spotifysettingspage.cpp:154
+#: internet/spotifysettingspage.cpp:154 internet/ubuntuonesettingspage.cpp:76
 msgid "Your username or password was incorrect."
 msgstr ""
 
@@ -5545,6 +5565,10 @@ msgstr ""
 #: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "選項"
+
+#: ../bin/src/ui_networkremotesettingspage.h:203
+msgid "or scan the QR code!"
+msgstr ""
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

@@ -33,7 +33,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-18 03:03+0000\n"
+"PO-Revision-Date: 2013-07-28 15:09+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -278,7 +278,7 @@ msgstr "1 Tag"
 msgid "1 track"
 msgstr "1 Stück"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:201
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
@@ -299,12 +299,11 @@ msgstr "50 zufällige Stücke"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Jetzt auf Premium erweitern</a>"
 
-#: ../bin/src/ui_networkremotesettingspage.h:204
+#: ../bin/src/ui_ubuntuonesettingspage.h:133
 msgid ""
-"<a "
-"href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Get"
-" the Android App now!</a>"
-msgstr "<a href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Lade die Android App jetzt herunter!</a>"
+"<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
+"your password</a>"
+msgstr "<a href=\"https://one.ubuntu.com/auth/login\">Ein neues Konto erstellen oder Ihr Passwort zurücksetzen</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -339,7 +338,7 @@ msgstr "Ein Grooveshark-Anywhere-Konto wird benötigt."
 msgid "A Spotify Premium account is required."
 msgstr "Ein Spotify-Premium-Konto ist erforderlich."
 
-#: ../bin/src/ui_networkremotesettingspage.h:191
+#: ../bin/src/ui_networkremotesettingspage.h:189
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Ein Client kann sich nur verbinden, falls der korrekte Code eingegeben wurde."
 
@@ -400,14 +399,11 @@ msgstr "Über Clementine..."
 msgid "About Qt..."
 msgstr "Über Qt…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:189
-msgid "Accept non public clients only"
-msgstr "Akzeptiere nur private Clients"
-
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_ubuntuonesettingspage.h:129
 msgid "Account details"
 msgstr "Benutzerkonto"
 
@@ -447,7 +443,7 @@ msgstr "Einen weiteren Stream hinzufügen"
 msgid "Add directory..."
 msgstr "Verzeichnis hinzufügen..."
 
-#: ui/mainwindow.cpp:1601
+#: ui/mainwindow.cpp:1602
 msgid "Add file"
 msgstr "Datei hinzufügen"
 
@@ -467,7 +463,7 @@ msgstr "Datei hinzufügen..."
 msgid "Add files to transcode"
 msgstr "Zu konvertierende Dateien hinzufügen"
 
-#: ui/mainwindow.cpp:1629
+#: ui/mainwindow.cpp:1630
 msgid "Add folder"
 msgstr "Ordner hinzufügen"
 
@@ -571,7 +567,7 @@ msgstr "Zu Grooveshark-Favoriten hinzufügen"
 msgid "Add to Grooveshark playlists"
 msgstr "Zu Grooveshark-Wiedergabelisten hinzufügen"
 
-#: ui/mainwindow.cpp:1426
+#: ui/mainwindow.cpp:1427
 msgid "Add to another playlist"
 msgstr "Zu anderer Wiedergabeliste hinzufügen"
 
@@ -579,7 +575,7 @@ msgstr "Zu anderer Wiedergabeliste hinzufügen"
 msgid "Add to playlist"
 msgstr "Zur Wiedergabeliste hinzufügen"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:220
 msgid "Add to the queue"
 msgstr "In die Warteschlange einreihen"
 
@@ -700,13 +696,13 @@ msgstr "Alle Übersetzer"
 msgid "All tracks"
 msgstr "Alle Stücke"
 
-#: ../bin/src/ui_networkremotesettingspage.h:196
+#: ../bin/src/ui_networkremotesettingspage.h:194
 msgid "Allow a client to download music from this computer."
-msgstr ""
+msgstr "Clients erlauben, Musik von diesem Computer herunterzuladen."
 
-#: ../bin/src/ui_networkremotesettingspage.h:198
+#: ../bin/src/ui_networkremotesettingspage.h:196
 msgid "Allow downloads"
-msgstr ""
+msgstr "Downloads erlauben"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
@@ -716,16 +712,16 @@ msgstr "Mid/Side Encoding zulassen"
 msgid "Alongside the originals"
 msgstr "Zu den Originalen"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:203
 msgid "Always hide the main window"
 msgstr "Clementine immer verstecken"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always show the main window"
 msgstr "Clementine immer anzeigen"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:212
+#: ../bin/src/ui_behavioursettingspage.h:226
 msgid "Always start playing"
 msgstr "Immer mit der Wiedergabe beginnen"
 
@@ -771,7 +767,7 @@ msgstr "Dateien/URLs an die Wiedergabeliste anhängen"
 msgid "Append to current playlist"
 msgstr "Zur aktuellen Wiedergabeliste hinzufügen"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Append to the playlist"
 msgstr "Zur Wiedergabeliste hinzufügen"
 
@@ -830,7 +826,7 @@ msgstr "Audioformat"
 
 #: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
-#: internet/lastfmsettingspage.cpp:84
+#: internet/lastfmsettingspage.cpp:84 internet/ubuntuonesettingspage.cpp:75
 msgid "Authentication failed"
 msgstr "Authentifizierung fehlgeschlagen"
 
@@ -915,7 +911,7 @@ msgstr "Standardblau"
 msgid "Basic audio type"
 msgstr "Normales Streaming-Format:"
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:191
 msgid "Behavior"
 msgstr "Verhalten"
 
@@ -1123,7 +1119,7 @@ msgstr "Clementine kann Musik abspielen, die Sie auf Dropbox hochgeladen haben"
 msgid "Clementine can play music that you have uploaded to Google Drive"
 msgstr "Clementine kann Musik abspielen, die Sie auf Google Drive hochgeladen haben."
 
-#: ../bin/src/ui_ubuntuonesettingspage.h:111
+#: ../bin/src/ui_ubuntuonesettingspage.h:128
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
 msgstr "Clementine kann Musik abspielen, die Sie auf Ubuntu One hochgeladen haben"
 
@@ -1167,7 +1163,7 @@ msgstr "Clementine wird Musik finden in:"
 msgid "Click here to add some music"
 msgstr "Klicken Sie hier um das zu ändern"
 
-#: playlist/playlisttabbar.cpp:250
+#: playlist/playlisttabbar.cpp:257
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1188,7 +1184,7 @@ msgstr "Durch Klicken auf die Schaltfläche wird ein Webbrowser geöffnet. Bitte
 msgid "Close"
 msgstr "Schließen"
 
-#: playlist/playlisttabbar.cpp:49
+#: playlist/playlisttabbar.cpp:51
 msgid "Close playlist"
 msgstr "Wiedergabeliste schließen"
 
@@ -1585,7 +1581,7 @@ msgid "Delete downloaded data"
 msgstr "Heruntergeladene Dateien löschen"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1903 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1904 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Dateien löschen"
 
@@ -1618,11 +1614,11 @@ msgstr "Originale löschen"
 msgid "Deleting files"
 msgstr "Dateien werden gelöscht"
 
-#: ui/mainwindow.cpp:1361
+#: ui/mainwindow.cpp:1362
 msgid "Dequeue selected tracks"
 msgstr "Stücke aus der Warteschlange nehmen"
 
-#: ui/mainwindow.cpp:1359
+#: ui/mainwindow.cpp:1360
 msgid "Dequeue track"
 msgstr "Stück aus der Warteschlange nehmen"
 
@@ -1746,7 +1742,7 @@ msgstr "Spende"
 msgid "Double click to open"
 msgstr "Zum Öffnen doppelklicken"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:214
 msgid "Double clicking a song will..."
 msgstr "Beim Doppelklick auf einen Titel diesen..."
 
@@ -1774,6 +1770,10 @@ msgstr "Neue Episoden automatisch herunterladen"
 #: podcasts/podcastservice.cpp:187
 msgid "Download queued"
 msgstr "Download an die Warteschlange angehängt"
+
+#: ../bin/src/ui_networkremotesettingspage.h:202
+msgid "Download the Android app"
+msgstr "Die Android App herunterladen"
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -1836,7 +1836,7 @@ msgstr "Dynamischer Zufallsmix"
 msgid "Edit smart playlist..."
 msgstr "Intelligente Wiedergabelist bearbeiten..."
 
-#: ui/mainwindow.cpp:1394
+#: ui/mainwindow.cpp:1395
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "%1 bearbeiten"
@@ -1912,7 +1912,7 @@ msgstr "URL eingeben um Cover aus dem Internet zu laden"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Dateiname für exportierte Cover eingeben (ohne Dateierweiterung):"
 
-#: playlist/playlisttabbar.cpp:132
+#: playlist/playlisttabbar.cpp:134
 msgid "Enter a new name for this playlist"
 msgstr "Neuer Name für diese Wiedergabeliste"
 
@@ -1947,7 +1947,7 @@ msgstr "Geben Sie die URL eines Internetradios ein:"
 msgid "Enter the name of the folder"
 msgstr "Geben Sie den Namen des Ordners ein"
 
-#: ../bin/src/ui_networkremotesettingspage.h:200
+#: ../bin/src/ui_networkremotesettingspage.h:198
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Gib diese IP in der App ein um dich mit Clementine zu verbinden."
 
@@ -1969,7 +1969,7 @@ msgstr "Äquivalent zu --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1855 ui/mainwindow.cpp:1971
+#: ui/mainwindow.cpp:1856 ui/mainwindow.cpp:1972
 msgid "Error"
 msgstr "Fehler"
 
@@ -2381,7 +2381,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 Cover von %2 wurden gefunden (%3 fehlgeschlagen)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "Grey out non existent songs in my playlists"
 msgstr "Nicht gefundene Titel in meinen Wiedergabelisten ausgrauen"
 
@@ -2684,7 +2684,7 @@ msgstr "Knöpfe für %1 Sekunde halten..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Knöpfe für %1 Sekunden halten..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Keep running in the background when the window is closed"
 msgstr "Im Hintergrund weiterlaufen, wenn das Fenster geschlossen wurde"
 
@@ -2696,7 +2696,7 @@ msgstr "Originale behalten"
 msgid "Kittens"
 msgstr "Kätzchen"
 
-#: ../bin/src/ui_behavioursettingspage.h:179
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Language"
 msgstr "Sprache"
 
@@ -2812,7 +2812,7 @@ msgstr "Sammlung"
 msgid "Library advanced grouping"
 msgstr "Benutzerdefinierte Gruppierung"
 
-#: ui/mainwindow.cpp:2088
+#: ui/mainwindow.cpp:2089
 msgid "Library rescan notice"
 msgstr "Hinweis beim Neueinscannen der Bibliothek"
 
@@ -2911,7 +2911,7 @@ msgstr "Öffne Dateien/URLs und ersetze die Wiedergabeliste"
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
-#: ../bin/src/ui_ubuntuonesettingspage.h:112
+#: ../bin/src/ui_ubuntuonesettingspage.h:131
 #: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Anmelden"
@@ -3109,7 +3109,7 @@ msgstr "Zur Musiksammlung verschieben..."
 msgid "Move up"
 msgstr "Nach oben"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1603
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1604
 msgid "Music"
 msgstr "Musik"
 
@@ -3186,7 +3186,7 @@ msgstr "Netzwerk"
 msgid "Network Proxy"
 msgstr "Netzwerk-Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:177
 msgid "Network Remote"
 msgstr "Netzwerk Fernsteuerung"
 
@@ -3198,8 +3198,8 @@ msgstr "Niemals"
 msgid "Never played"
 msgstr "Nie gespielt"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Never start playing"
 msgstr "Nie mit der Wiedergabe beginnen"
 
@@ -3209,7 +3209,7 @@ msgstr "Nie mit der Wiedergabe beginnen"
 msgid "New folder"
 msgstr "Neuer Ordner"
 
-#: ui/mainwindow.cpp:1443 ../bin/src/ui_mainwindow.h:702
+#: ui/mainwindow.cpp:1444 ../bin/src/ui_mainwindow.h:702
 msgid "New playlist"
 msgstr "Neue Wiedergabeliste"
 
@@ -3272,7 +3272,7 @@ msgstr "Keine kurzen Blöcke"
 msgid "None"
 msgstr "Nichts"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1856 ui/mainwindow.cpp:1972
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1857 ui/mainwindow.cpp:1973
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Keiner der gewählten Titel war zum Kopieren auf ein Gerät geeignet."
 
@@ -3354,13 +3354,17 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:184
+#: ../bin/src/ui_networkremotesettingspage.h:182
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
 msgstr "Akzeptiere nur Verbindungen der folgenden IP Bereiche:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
+
+#: ../bin/src/ui_networkremotesettingspage.h:187
+msgid "Only allow connections from the local network"
+msgstr "Nur Verbindungen aus dem lokalen Netzwerk"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3404,7 +3408,7 @@ msgstr "In Google Drive öffnen"
 
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
-#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:203
+#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:219
 msgid "Open in new playlist"
 msgstr "In einer neuen Wiedergabeliste öffnen"
 
@@ -3502,7 +3506,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Passwort:"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:852 ui/mainwindow.cpp:1284
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:853 ui/mainwindow.cpp:1285
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pause"
@@ -3528,8 +3532,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Einfache Seitenleiste"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:820
-#: ui/mainwindow.cpp:839 ui/mainwindow.cpp:1287 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:821
+#: ui/mainwindow.cpp:840 ui/mainwindow.cpp:1288 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:651
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3555,8 +3559,8 @@ msgstr "Benutzerdefiniertes Radio abspielen..."
 msgid "Play if stopped, pause if playing"
 msgstr "Wiedergeben wenn angehalten, pausieren bei Wiedergabe"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:211
+#: ../bin/src/ui_behavioursettingspage.h:225
 msgid "Play if there is nothing already playing"
 msgstr "Mit der Wiedergabe beginnen, falls gerade nichts anderes abgespielt wird"
 
@@ -3582,7 +3586,7 @@ msgstr "Player Einstellungen"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
-#: playlist/playlisttabbar.cpp:314
+#: playlist/playlisttabbar.cpp:321
 msgid "Playlist"
 msgstr "Wiedergabeliste"
 
@@ -3635,7 +3639,7 @@ msgid "Popup duration"
 msgstr "Anzeigedauer:"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:182
+#: ../bin/src/ui_networkremotesettingspage.h:180
 msgid "Port"
 msgstr "Port"
 
@@ -3748,12 +3752,12 @@ msgstr "Gerät wird abgefragt..."
 msgid "Queue Manager"
 msgstr "Warteschlangenverwaltung"
 
-#: ui/mainwindow.cpp:1365
+#: ui/mainwindow.cpp:1366
 msgid "Queue selected tracks"
 msgstr "Stücke in die Warteschlange einreihen"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1363
+#: ui/mainwindow.cpp:1364
 msgid "Queue track"
 msgstr "Stück in die Warteschlange einreihen"
 
@@ -3842,7 +3846,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Bewegung der Wii-Fernbedienung merken"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Remember from last time"
 msgstr "Clementine starten wie es beendet wurde"
 
@@ -3875,9 +3879,9 @@ msgstr "Von Favoriten entfernen"
 msgid "Remove from playlist"
 msgstr "Aus der Wiedergabeliste entfernen"
 
-#: playlist/playlisttabbar.cpp:162
+#: playlist/playlisttabbar.cpp:169
 msgid "Remove playlist"
-msgstr ""
+msgstr "Wiedergabeliste entfernen"
 
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
@@ -3900,11 +3904,11 @@ msgstr "Die Wiedergabeliste \"%1\" umbenennen"
 msgid "Rename Grooveshark playlist"
 msgstr "Grooveshark-Wiedergabeliste umbenennen"
 
-#: playlist/playlisttabbar.cpp:132
+#: playlist/playlisttabbar.cpp:134
 msgid "Rename playlist"
 msgstr "Wiedergabeliste umbenennen"
 
-#: playlist/playlisttabbar.cpp:50
+#: playlist/playlisttabbar.cpp:52
 msgid "Rename playlist..."
 msgstr "Wiedergabeliste umbenennen..."
 
@@ -3934,7 +3938,7 @@ msgstr "Stück wiederholen"
 msgid "Replace current playlist"
 msgstr "Wiedergabeliste ersetzen"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:218
 msgid "Replace the playlist"
 msgstr "Die Wiedergabeliste ersetzen lassen"
 
@@ -3954,6 +3958,10 @@ msgstr "Raplay Gain Modus"
 msgid "Repopulate"
 msgstr "Neu bestücken"
 
+#: ../bin/src/ui_networkremotesettingspage.h:191
+msgid "Require authentication code"
+msgstr "Authentifizierungs-Code erzwingen"
+
 #: widgets/lineedit.cpp:51
 msgid "Reset"
 msgstr "Zurücksetzen"
@@ -3971,7 +3979,7 @@ msgstr "Starten Sie den Titel oder den vorherigen Titel, wenn sie innerhalb von 
 msgid "Restrict to ASCII characters"
 msgstr "Nur ASCII-Zeichen benutzen"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:205
 msgid "Resume playback on start"
 msgstr "Wiedergabe beim Start fortsetzten"
 
@@ -4049,7 +4057,7 @@ msgstr "Bild speichern"
 msgid "Save playlist"
 msgstr "Wiedergabeliste speichern"
 
-#: playlist/playlisttabbar.cpp:51 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "Wiedergabeliste speichern..."
 
@@ -4083,7 +4091,7 @@ msgstr "Scalable-Sampling-Rate-Profil (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
-msgstr "Maßstabsgröße"
+msgstr "Bildgröße anpassen"
 
 #: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
@@ -4222,7 +4230,7 @@ msgstr "Server-Details"
 msgid "Service offline"
 msgstr "Dienst nicht verfügbar"
 
-#: ui/mainwindow.cpp:1392
+#: ui/mainwindow.cpp:1393
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Setze %1 zu \"%2\"..."
@@ -4234,6 +4242,10 @@ msgstr "Setze Lautstärke auf <value>%"
 #: ../bin/src/ui_mainwindow.h:673
 msgid "Set value for all selected tracks..."
 msgstr "Wert für ausgewählte Stücke benutzen..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:179
+msgid "Settings"
+msgstr "Einstellungen"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4343,7 +4355,7 @@ msgstr "\"Lieben\"- und \"Bannen\"-Knöpfe anzeigen"
 msgid "Show the scrobble button in the main window"
 msgstr "Das Scrobble-Zeichen im Hauptfenster zeigen"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:192
 msgid "Show tray icon"
 msgstr "Clementine im Benachrichtigungsfeld anzeigen"
 
@@ -4711,7 +4723,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Die Versuchsperiode für den Subsonic-Server ist abgelaufen. Bitte machen Sie eine Spende, um einen Lizenzschlüssel zu erhalten. Details finden sich auf subsonic.org."
 
-#: ui/mainwindow.cpp:2081
+#: ui/mainwindow.cpp:2082
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4752,7 +4764,7 @@ msgid ""
 "continue?"
 msgstr "Diese Dateien werden vom Gerät gelöscht. Möchten Sie wirklich fortfahren?"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1904 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1905 widgets/fileview.cpp:188
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4848,7 +4860,7 @@ msgstr "Clementine-OSD anzeigen"
 msgid "Toggle fullscreen"
 msgstr "Vollbild an/aus"
 
-#: ui/mainwindow.cpp:1367
+#: ui/mainwindow.cpp:1368
 msgid "Toggle queue status"
 msgstr "Einreihungsstatus ändern"
 
@@ -4930,9 +4942,17 @@ msgstr "URI"
 msgid "URL(s)"
 msgstr "URL(s)"
 
-#: ../bin/src/ui_ubuntuonesettingspage.h:110
+#: ../bin/src/ui_ubuntuonesettingspage.h:127
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
+
+#: ../bin/src/ui_ubuntuonesettingspage.h:132
+msgid "Ubuntu One password"
+msgstr "Ubuntu One passwort"
+
+#: ../bin/src/ui_ubuntuonesettingspage.h:130
+msgid "Ubuntu One username"
+msgstr "Ubuntu One benutzername"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -5021,10 +5041,6 @@ msgstr "Wenn verfügbar Album-Interpret benutzen"
 msgid "Use Gnome's shortcut keys"
 msgstr "Gnome-Tastenkürzel verwenden"
 
-#: ../bin/src/ui_networkremotesettingspage.h:181
-msgid "Use Remotecontrol"
-msgstr "Aktiviere Netzwerkfernsteuerung"
-
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Benutze Replay-Gain-Metadaten wenn verfügbar"
@@ -5045,13 +5061,13 @@ msgstr "Ein benutzerdefiniertes Farbschema verwenden"
 msgid "Use a custom message for notifications"
 msgstr "Einen benutzerdefinierten Text für Benachrichtigungen benutzen"
 
+#: ../bin/src/ui_networkremotesettingspage.h:178
+msgid "Use a network remote control"
+msgstr "Eine Netzwerk Fernsteuerung verwenden"
+
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "Authentifizierung verwenden"
-
-#: ../bin/src/ui_networkremotesettingspage.h:193
-msgid "Use authentication code"
-msgstr "Authentifizierungs-Code benutzen"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -5069,7 +5085,7 @@ msgstr "Benachrichtigungen zum Anzeigen des Status der Wii-Fernbedienung benutze
 msgid "Use temporal noise shaping"
 msgstr "\"Temporal Noise-Shaping\" verwenden"
 
-#: ../bin/src/ui_behavioursettingspage.h:182
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Use the system default"
 msgstr "Standardeinstellungen des Systems benutzen"
 
@@ -5107,7 +5123,7 @@ msgstr "Benutzeroberfläche"
 msgid "Username"
 msgstr "Benutzername:"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "Using the menu to add a song will..."
 msgstr "Beim Hinzufügen eines Titels über das Kontextmenü..."
 
@@ -5168,6 +5184,10 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
+#: ../bin/src/ui_behavioursettingspage.h:194
+msgid "Warn me when closing a playlist tab"
+msgstr ""
+
 #: core/song.cpp:337
 msgid "Wav"
 msgstr "WAV"
@@ -5180,7 +5200,7 @@ msgstr "Internetseite"
 msgid "Weeks"
 msgstr "Wochen"
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "When Clementine starts"
 msgstr "Beim Programmstart"
 
@@ -5262,7 +5282,7 @@ msgid ""
 "well?"
 msgstr "Möchten Sie die anderen Titel dieses Albums ebenfalls unter \"Verschiedene Interpreten\" anzeigen?"
 
-#: ui/mainwindow.cpp:2086
+#: ui/mainwindow.cpp:2087
 msgid "Would you like to run a full rescan right now?"
 msgstr "Möchten Sie jetzt Ihre Musiksammlung erneut einlesen?"
 
@@ -5304,11 +5324,11 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Wollen Sie %1 Wiedergabelisten löschen?"
 
-#: playlist/playlisttabbar.cpp:163
+#: playlist/playlisttabbar.cpp:170
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "Sie entfernen eine nicht favorisierte Wiedergabeliste. Die Wiedergabeliste wird gelöscht (Diese Aktion kann nicht rückgängig gemacht werden).\nMöchten Sie wirklich fortfahren?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5390,7 +5410,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Öffnen Sie die Systemeinstellungen und aktivieren Sie \"<span style=\" font-style:italic;\">Zugriff für Hilfsgeräte aktivieren</span>\" in \"Bedienhilfen\" um Clementines Tastenkürzel zu benutzen."
 
-#: ../bin/src/ui_behavioursettingspage.h:184
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Sie müssen Clementine nach dem Ändern der Sprache neustarten."
 
@@ -5400,7 +5420,7 @@ msgid ""
 " subscriber."
 msgstr "Sie werden kein Last.fm-Radio abspielen können, da sie kein Last.fm-Abonnent sind."
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:200
 msgid "Your IP address:"
 msgstr "Deine IP:"
 
@@ -5430,7 +5450,7 @@ msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Ihr System enthält keine Unterstützung für OpenGL, Visualisierungen sind deshalb nicht verfügbar."
 
 #: internet/groovesharksettingspage.cpp:107
-#: internet/spotifysettingspage.cpp:154
+#: internet/spotifysettingspage.cpp:154 internet/ubuntuonesettingspage.cpp:76
 msgid "Your username or password was incorrect."
 msgstr "Ihr Benutzername und/oder Passwort sind ungültig."
 
@@ -5568,6 +5588,10 @@ msgstr "am"
 #: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "Einstellungen"
+
+#: ../bin/src/ui_networkremotesettingspage.h:203
+msgid "or scan the QR code!"
+msgstr "oder den QR code einscannen!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
