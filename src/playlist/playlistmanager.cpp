@@ -462,6 +462,19 @@ void PlaylistManager::SongChangeRequestProcessed(const QUrl& url, bool valid) {
   }
 }
 
+void PlaylistManager::InsertUrls(int id, const QList<QUrl> &urls, int pos,
+                                 bool play_now, bool enqueue) {
+  Q_ASSERT(playlists_.contains(id));
+
+  playlists_[id].p->InsertUrls(urls, pos, play_now, enqueue);
+}
+
+void PlaylistManager::RemoveItemsWithoutUndo(int id, const QList<int> &indices) {
+  Q_ASSERT(playlists_.contains(id));
+
+  playlists_[id].p->RemoveItemsWithoutUndo(indices);
+}
+
 void PlaylistManager::InvalidateDeletedSongs() {
   foreach(Playlist* playlist, GetAllPlaylists()) {
     playlist->InvalidateDeletedSongs();

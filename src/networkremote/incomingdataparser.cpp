@@ -66,12 +66,12 @@ IncomingDataParser::IncomingDataParser(Application* app)
   connect(this, SIGNAL(SetShuffleMode(PlaylistSequence::ShuffleMode)),
           app_->playlist_manager()->sequence(),
           SLOT(SetShuffleMode(PlaylistSequence::ShuffleMode)));
-  connect(this, SIGNAL(InsertUrls(const QList<QUrl>&, int, bool, bool)),
-          app_->playlist_manager()->active(),
-          SLOT(InsertUrls(const QList<QUrl>&, int, bool, bool)));
-  connect(this, SIGNAL(RemoveSongs(const QList<int>&)),
-          app_->playlist_manager()->active(),
-          SLOT(RemoveItemsWithoutUndo(const QList<int>&)));
+  connect(this, SIGNAL(InsertUrls(int, const QList<QUrl>&, int, bool, bool)),
+          app_->playlist_manager(),
+          SLOT(InsertUrls(int, const QList<QUrl>&, int, bool, bool)));
+  connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)),
+          app_->playlist_manager(),
+          SLOT(RemoveItemsWithoutUndo(int, const QList<int>&)));
   connect(this, SIGNAL(Open(int)),
           app_->playlist_manager(), SLOT(Open(int)));
   connect(this, SIGNAL(Close(int)),
@@ -217,11 +217,6 @@ void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
 void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   const pb::remote::RequestInsertUrls& request = msg.request_insert_urls();
 
-  // Check if we need to change the playlist
-  if (request.playlist_id() != app_->playlist_manager()->active_id()) {
-    emit SetActivePlaylist(request.playlist_id());
-  }
-
   // Extract urls
   QList<QUrl> urls;
   for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
@@ -229,23 +224,19 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   }
 
   // Insert the urls
-  emit InsertUrls(urls, request.position(), request.play_now(), request.enqueue());
+  emit InsertUrls(request.playlist_id(), urls, request.position(),
+                  request.play_now(), request.enqueue());
 }
 
 void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
   const pb::remote::RequestRemoveSongs& request = msg.request_remove_songs();
-
-  // Check if we need to change the playlist
-  if (request.playlist_id() != app_->playlist_manager()->active_id()) {
-    emit SetActivePlaylist(request.playlist_id());
-  }
 
   // Extract urls
   QList<int> songs;
   std::copy(request.songs().begin(), request.songs().end(), songs.begin());
 
   // Insert the urls
-  emit RemoveSongs(songs);
+  emit RemoveSongs(request.playlist_id(), songs);
 }
 
 void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {

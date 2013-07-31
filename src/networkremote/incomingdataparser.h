@@ -42,8 +42,8 @@ signals:
   void ShuffleCurrent();
   void SetRepeatMode(PlaylistSequence::RepeatMode mode);
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
-  void InsertUrls(const QList<QUrl>& urls, int pos, bool play_now, bool enqueue);
-  void RemoveSongs(const QList<int>& indices);
+  void InsertUrls(int id, const QList<QUrl>& urls, int pos, bool play_now, bool enqueue);
+  void RemoveSongs(int id, const QList<int>& indices);
   void SeekTo(int seconds);
   void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
   void ResponseSongOffer(RemoteClient* client, bool accepted);

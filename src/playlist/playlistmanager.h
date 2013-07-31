@@ -211,6 +211,10 @@ public slots:
 
   void SongChangeRequestProcessed(const QUrl& url, bool valid);
 
+  void InsertUrls(int id, const QList<QUrl>& urls, int pos = -1, bool play_now = false, bool enqueue = false);
+  // Removes items with given indices from the playlist. This operation is not undoable.
+  void RemoveItemsWithoutUndo(int id, const QList<int>& indices);
+
 private slots:
   void SetActivePlaying();
   void SetActivePaused();
