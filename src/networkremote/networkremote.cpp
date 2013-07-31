@@ -22,10 +22,10 @@
 #include "networkremote/zeroconf.h"
 #include "playlist/playlistmanager.h"
 
-
 #include <QDataStream>
 #include <QSettings>
 #include <QHostInfo>
+#include <QNetworkProxy>
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
 const quint16 NetworkRemote::kDefaultServerPort = 5500;
@@ -85,6 +85,9 @@ void NetworkRemote::StartServer() {
   }
 
   qLog(Info) << "Starting network remote";
+
+  server_->setProxy(QNetworkProxy::NoProxy);
+  server_ipv6_->setProxy(QNetworkProxy::NoProxy);
 
   server_->listen(QHostAddress::Any, port_);
   server_ipv6_->listen(QHostAddress::AnyIPv6, port_);
