@@ -212,7 +212,7 @@ QString MakeTempDir(const QString template_name) {
   return path;
 }
 
-QString GetTempFileName() {
+QString GetTemporaryFileName() {
   QString file;
   {
     QTemporaryFile tempfile;

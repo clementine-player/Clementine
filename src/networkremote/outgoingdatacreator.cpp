@@ -715,7 +715,7 @@ void OutgoingDataCreator::SendPlaylist(RemoteClient *client, int playlist_id) {
 
 void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
   // Get a temporary file name
-  QString temp_file_name = Utilities::GetTempFileName();
+  QString temp_file_name = Utilities::GetTemporaryFileName();
 
   // Attach this file to the database
   Database::AttachedDatabase adb(temp_file_name, "", true);
