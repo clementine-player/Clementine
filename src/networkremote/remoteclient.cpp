@@ -144,9 +144,6 @@ void RemoteClient::DisconnectClient(pb::remote::ReasonDisconnect reason) {
   pb::remote::Message msg;
   msg.set_type(pb::remote::DISCONNECT);
 
-  // Send the default version
-  msg.set_version(msg.default_instance().version());
-
   msg.mutable_response_disconnect()->set_reason_disconnect(reason);
   SendDataToClient(&msg);
 
@@ -157,6 +154,9 @@ void RemoteClient::DisconnectClient(pb::remote::ReasonDisconnect reason) {
 
 // Sends data to client without check if authenticated
 void RemoteClient::SendDataToClient(pb::remote::Message *msg) {
+  // Set the default version
+  msg->set_version(msg->default_instance().version());
+
   // Check if we are still connected
   if (client_->state() == QTcpSocket::ConnectedState) {
     // Serialize the message

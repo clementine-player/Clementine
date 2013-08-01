@@ -135,9 +135,6 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     return;
   }
 
-  // Send the default version
-  msg->set_version(msg->default_instance().version());
-
   RemoteClient* client;
   foreach(client, *clients_) {
     // Do not send data to downloaders
@@ -595,11 +592,10 @@ void OutgoingDataCreator::OfferNextSong(RemoteClient *client) {
     chunk->set_file_count(item.song_count_);
     chunk->set_file_number(item.song_no_);
 
-    CreateSong(item.song_, item.song_.image(), -1,
+    CreateSong(item.song_, QImage() , -1,
                chunk->mutable_song_metadata());
   }
 
-  msg.set_version(msg.default_instance().version());
   client->SendData(&msg);
 }
 
@@ -638,6 +634,8 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
   pb::remote::ResponseSongFileChunk* chunk = msg.mutable_response_song_file_chunk();
   msg.set_type(pb::remote::SONG_FILE_CHUNK);
 
+  QImage null_image;
+
   while (!file.atEnd()) {
     // Read file chunk
     data = file.read(kFileChunkSize);
@@ -655,12 +653,11 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
     if (chunk_number == 1) {
       int i = app_->playlist_manager()->active()->current_row();
       CreateSong(
-        song, song.image(), i,
+        song, null_image, i,
         msg.mutable_response_song_file_chunk()->mutable_song_metadata());
     }
 
     // Send data directly to the client
-    msg.set_version(msg.default_instance().version());
     client->SendData(&msg);
 
     // Clear working data
