@@ -212,6 +212,17 @@ QString MakeTempDir(const QString template_name) {
   return path;
 }
 
+QString GetTempFileName() {
+  QString file;
+  {
+    QTemporaryFile tempfile;
+    tempfile.open();
+    file = tempfile.fileName();
+  }
+
+  return file;
+}
+
 void RemoveRecursive(const QString& path) {
   QDir dir(path);
   foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden))

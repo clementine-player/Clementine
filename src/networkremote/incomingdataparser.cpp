@@ -99,64 +99,87 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
 
   // Now check what's to do
   switch (msg.type()) {
-    case pb::remote::CONNECT:     ClientConnect(msg);
-                                  break;
-    case pb::remote::DISCONNECT:  close_connection_ = true;
-                                  break;
-    case pb::remote::REQUEST_PLAYLISTS:       SendPlaylists(msg);
-                                              break;
-    case pb::remote::REQUEST_PLAYLIST_SONGS:  GetPlaylistSongs(msg);
-                                              break;
-    case pb::remote::SET_VOLUME:  emit SetVolume(msg.request_set_volume().volume());
-                                  break;
-    case pb::remote::PLAY:        emit Play();
-                                  break;
-    case pb::remote::PLAYPAUSE:   emit PlayPause();
-                                  break;
-    case pb::remote::PAUSE:       emit Pause();
-                                  break;
-    case pb::remote::STOP:        emit Stop();
-                                  break;
-    case pb::remote::STOP_AFTER:  emit StopAfterCurrent();
-                                  break;
-    case pb::remote::NEXT:        emit Next();
-                                  break;
-    case pb::remote::PREVIOUS:    emit Previous();
-                                  break;
-    case pb::remote::CHANGE_SONG: ChangeSong(msg);
-                                  break;
-    case pb::remote::SHUFFLE_PLAYLIST:        emit ShuffleCurrent();
-                                              break;
-    case pb::remote::REPEAT:      SetRepeatMode(msg.repeat());
-                                  break;
-    case pb::remote::SHUFFLE:     SetShuffleMode(msg.shuffle());
-                                  break;
+    case pb::remote::CONNECT:
+      ClientConnect(msg);
+      break;
+    case pb::remote::DISCONNECT:
+      close_connection_ = true;
+      break;
+    case pb::remote::REQUEST_PLAYLISTS:
+      SendPlaylists(msg);
+      break;
+    case pb::remote::REQUEST_PLAYLIST_SONGS:
+      GetPlaylistSongs(msg);
+      break;
+    case pb::remote::SET_VOLUME:
+      emit SetVolume(msg.request_set_volume().volume());
+      break;
+    case pb::remote::PLAY:
+      emit Play();
+      break;
+    case pb::remote::PLAYPAUSE:
+      emit PlayPause();
+      break;
+    case pb::remote::PAUSE:
+      emit Pause();
+      break;
+    case pb::remote::STOP:
+      emit Stop();
+      break;
+    case pb::remote::STOP_AFTER:
+      emit StopAfterCurrent();
+      break;
+    case pb::remote::NEXT:
+      emit Next();
+      break;
+    case pb::remote::PREVIOUS:
+      emit Previous();
+      break;
+    case pb::remote::CHANGE_SONG:
+      ChangeSong(msg);
+      break;
+    case pb::remote::SHUFFLE_PLAYLIST:
+      emit ShuffleCurrent();
+      break;
+    case pb::remote::REPEAT:
+      SetRepeatMode(msg.repeat());
+      break;
+    case pb::remote::SHUFFLE:
+      SetShuffleMode(msg.shuffle());
+      break;
     case pb::remote::SET_TRACK_POSITION:
-                                  emit SeekTo(msg.request_set_track_position().position());
-                                  break;
-    case pb::remote::INSERT_URLS: InsertUrls(msg);
-                                  break;
-    case pb::remote::REMOVE_SONGS:RemoveSongs(msg);
-                                  break;
+      emit SeekTo(msg.request_set_track_position().position());
+      break;
+    case pb::remote::INSERT_URLS:
+      InsertUrls(msg);
+      break;
+    case pb::remote::REMOVE_SONGS:
+      RemoveSongs(msg);
+      break;
     case pb::remote::OPEN_PLAYLIST:
-                                  OpenPlaylist(msg);
-                                  break;
+      OpenPlaylist(msg);
+      break;
     case pb::remote::CLOSE_PLAYLIST:
-                                  ClosePlaylist(msg);
-                                  break;
-    case pb::remote::LOVE:        emit Love();
-                                  break;
-    case pb::remote::BAN:         emit Ban();
-                                  break;
-    case pb::remote::GET_LYRICS:  emit GetLyrics();
-                                  break;
+      ClosePlaylist(msg);
+      break;
+    case pb::remote::LOVE:
+      emit Love();
+      break;
+    case pb::remote::BAN:
+      emit Ban();
+      break;
+    case pb::remote::GET_LYRICS:
+      emit GetLyrics();
+      break;
     case pb::remote::DOWNLOAD_SONGS:
-                                  emit SendSongs(msg.request_download_songs(), client);
-                                  break;
+      emit SendSongs(msg.request_download_songs(), client);
+      break;
     case pb::remote::SONG_OFFER_RESPONSE:
-                                  emit ResponseSongOffer(client,
-                                                         msg.response_song_offer().accepted());
-                                  break;
+      emit ResponseSongOffer(client, msg.response_song_offer().accepted());
+      break;
+    case pb::remote::GET_LIBRARY:
+      emit SendLibrary(client);
+      break;
     default: break;
   }
 }
@@ -180,37 +203,37 @@ void IncomingDataParser::ChangeSong(const pb::remote::Message& msg) {
 
 void IncomingDataParser::SetRepeatMode(const pb::remote::Repeat& repeat) {
   switch (repeat.repeat_mode()) {
-  case pb::remote::Repeat_Off:
-       emit SetRepeatMode(PlaylistSequence::Repeat_Off);
-       break;
-  case pb::remote::Repeat_Track:
-       emit SetRepeatMode(PlaylistSequence::Repeat_Track);
-       break;
-  case pb::remote::Repeat_Album:
-       emit SetRepeatMode(PlaylistSequence::Repeat_Album);
-       break;
-  case pb::remote::Repeat_Playlist:
-       emit SetRepeatMode(PlaylistSequence::Repeat_Playlist);
-       break;
-  default: break;
+    case pb::remote::Repeat_Off:
+      emit SetRepeatMode(PlaylistSequence::Repeat_Off);
+      break;
+    case pb::remote::Repeat_Track:
+      emit SetRepeatMode(PlaylistSequence::Repeat_Track);
+      break;
+    case pb::remote::Repeat_Album:
+      emit SetRepeatMode(PlaylistSequence::Repeat_Album);
+      break;
+    case pb::remote::Repeat_Playlist:
+      emit SetRepeatMode(PlaylistSequence::Repeat_Playlist);
+      break;
+    default: break;
   }
 }
 
 void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
   switch (shuffle.shuffle_mode()) {
-  case pb::remote::Shuffle_Off:
-       emit SetShuffleMode(PlaylistSequence::Shuffle_Off);
-       break;
-  case pb::remote::Shuffle_All:
-       emit SetShuffleMode(PlaylistSequence::Shuffle_All);
-       break;
-  case pb::remote::Shuffle_InsideAlbum:
-       emit SetShuffleMode(PlaylistSequence::Shuffle_InsideAlbum);
-       break;
-  case pb::remote::Shuffle_Albums:
-       emit SetShuffleMode(PlaylistSequence::Shuffle_Albums);
-       break;
-  default: break;
+    case pb::remote::Shuffle_Off:
+      emit SetShuffleMode(PlaylistSequence::Shuffle_Off);
+      break;
+    case pb::remote::Shuffle_All:
+      emit SetShuffleMode(PlaylistSequence::Shuffle_All);
+      break;
+    case pb::remote::Shuffle_InsideAlbum:
+      emit SetShuffleMode(PlaylistSequence::Shuffle_InsideAlbum);
+      break;
+    case pb::remote::Shuffle_Albums:
+      emit SetShuffleMode(PlaylistSequence::Shuffle_Albums);
+      break;
+    default: break;
   }
 }
 

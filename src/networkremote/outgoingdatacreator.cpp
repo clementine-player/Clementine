@@ -22,7 +22,12 @@
 #include "networkremote.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
+#include "core/utilities.h"
 #include "library/librarybackend.h"
+
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include "core/database.h"
 
 const quint32 OutgoingDataCreator::kFileChunkSize = 100000; // in Bytes
 
@@ -706,4 +711,59 @@ void OutgoingDataCreator::SendPlaylist(RemoteClient *client, int playlist_id) {
       download_queue_[client].append(item);
     }
   }
+}
+
+void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
+  // Get a temporary file name
+  QString temp_file_name = Utilities::GetTempFileName();
+
+  // Attach this file to the database
+  Database::AttachedDatabase adb(temp_file_name, "", true);
+  app_->database()->AttachDatabase("songs_export", adb);
+  QSqlDatabase db(app_->database()->Connect());
+
+  // Copy the content of the song table to this temporary database
+  QSqlQuery q(QString("create table songs_export.songs as SELECT * FROM songs;"), db);
+  q.exec();
+
+  if (app_->database()->CheckErrors(q)) return;
+
+  // Detach the database
+  app_->database()->DetachDatabase("songs_export");
+
+  // Open the file
+  QFile file(temp_file_name);
+  file.open(QIODevice::ReadOnly);
+
+  QByteArray data;
+  pb::remote::Message msg;
+  pb::remote::ResponseLibraryChunk* chunk = msg.mutable_response_library_chunk();
+  msg.set_type(pb::remote::LIBRARY_CHUNK);
+
+  // Calculate the number of chunks
+  int chunk_count  = qRound((file.size() / kFileChunkSize) + 0.5);
+  int chunk_number = 1;
+
+  while (!file.atEnd()) {
+    // Read file chunk
+    data = file.read(kFileChunkSize);
+
+    // Set chunk data
+    chunk->set_chunk_count(chunk_count);
+    chunk->set_chunk_number(chunk_number);
+    chunk->set_size(file.size());
+    chunk->set_data(data.data(), data.size());
+
+    // Send data directly to the client
+    client->SendData(&msg);
+
+    // Clear working data
+    chunk->Clear();
+    data.clear();
+
+    chunk_number++;
+  }
+
+  // Remove temporary file
+  file.remove();
 }

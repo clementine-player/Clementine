@@ -328,7 +328,7 @@ Database::Database(Application* app, QObject* parent, const QString& database_na
       Utilities::GetConfigPath(Utilities::Path_Root));
 
   attached_databases_["jamendo"] = AttachedDatabase(
-        directory_ + "/jamendo.db", ":/schema/jamendo.sql");
+        directory_ + "/jamendo.db", ":/schema/jamendo.sql", false);
 
   QMutexLocker l(&mutex_);
   Connect();
@@ -410,6 +410,9 @@ QSqlDatabase Database::Connect() {
   // We might have to initialise the schema in some attached databases now, if
   // they were deleted and don't match up with the main schema version.
   foreach (const QString& key, attached_databases_.keys()) {
+    if (attached_databases_[key].is_temporary_ &&
+        attached_databases_[key].schema_.isEmpty())
+      continue;
     // Find out if there are any tables in this database
     QSqlQuery q(QString("SELECT ROWID FROM %1.sqlite_master"
                         " WHERE type='table'").arg(key), db);
@@ -477,6 +480,27 @@ void Database::RecreateAttachedDb(const QString& database_name) {
   foreach (const QString& name, QSqlDatabase::connectionNames()) {
     QSqlDatabase::removeDatabase(name);
   }
+}
+
+void Database::AttachDatabase(const QString& database_name,
+                              const AttachedDatabase& database) {
+  attached_databases_[database_name] = database;
+}
+
+void Database::DetachDatabase(const QString& database_name) {
+  QMutexLocker l(&mutex_);
+  {
+    QSqlDatabase db(Connect());
+
+    QSqlQuery q("DETACH DATABASE :alias", db);
+    q.bindValue(":alias", database_name);
+    if (!q.exec()) {
+      qLog(Warning) << "Failed to detach database" << database_name;
+      return;
+    }
+  }
+
+  attached_databases_.remove(database_name);
 }
 
 void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {

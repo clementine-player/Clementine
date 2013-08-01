@@ -21,6 +21,7 @@ enum MsgType {
   LOVE = 12;
   BAN = 13;
   STOP_AFTER = 17;
+  GET_LIBRARY = 18;
 
   // Messages send by both
   DISCONNECT = 2;
@@ -49,6 +50,7 @@ enum MsgType {
   LYRICS = 49;
   SONG_FILE_CHUNK = 50;
   DOWNLOAD_QUEUE_EMPTY = 51;
+  LIBRARY_CHUNK = 52;
 }
 
 // Valid Engine states
@@ -255,6 +257,13 @@ message ResponseSongFileChunk {
   optional int32 size = 8;
 }
 
+message ResponseLibraryChunk {
+  optional int32 chunk_number = 1;
+  optional int32 chunk_count = 2;
+  optional bytes data = 3;
+  optional int32 size = 4;
+}
+
 message ResponseSongOffer {
   optional bool accepted = 1; // true = client wants to download item
 }
@@ -290,4 +299,5 @@ message Message {
   optional ResponseLyrics response_lyrics = 30;
   optional ResponseSongFileChunk response_song_file_chunk = 32;
   optional ResponseSongOffer response_song_offer = 33;
+  optional ResponseLibraryChunk response_library_chunk = 34;
 }

@@ -46,6 +46,16 @@ class Database : public QObject {
   Database(Application* app, QObject* parent = 0,
            const QString& database_name = QString());
 
+  struct AttachedDatabase {
+    AttachedDatabase() {}
+    AttachedDatabase(const QString& filename, const QString& schema, bool is_temporary)
+      : filename_(filename), schema_(schema), is_temporary_(is_temporary) {}
+
+    QString filename_;
+    QString schema_;
+    bool is_temporary_;
+  };
+
   static const int kSchemaVersion;
   static const char* kDatabaseFilename;
   static const char* kMagicAllSongsTables;
@@ -62,6 +72,9 @@ class Database : public QObject {
 
   int startup_schema_version() const { return startup_schema_version_; }
   int current_schema_version() const { return kSchemaVersion; }
+
+  void AttachDatabase(const QString& database_name, const AttachedDatabase& database);
+  void DetachDatabase(const QString& database_name);
 
  signals:
   void Error(const QString& message);
@@ -86,15 +99,6 @@ class Database : public QObject {
   bool IntegrityCheck(QSqlDatabase db);
   void BackupFile(const QString& filename);
   bool OpenDatabase(const QString& filename, sqlite3** connection) const;
-
-  struct AttachedDatabase {
-    AttachedDatabase() {}
-    AttachedDatabase(const QString& filename, const QString& schema)
-      : filename_(filename), schema_(schema) {}
-
-    QString filename_;
-    QString schema_;
-  };
 
   Application* app_;
 
