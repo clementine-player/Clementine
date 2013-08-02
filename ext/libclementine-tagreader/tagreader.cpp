@@ -946,7 +946,7 @@ float TagReader::ConvertPOPMRating(const int POPM_rating) {
     return 0.40; // 2 stars
   } else if (POPM_rating < 0xC0) {
     return 0.60; // 3 stars
-  } else if (POPM_rating < 0xFF) {
+  } else if (POPM_rating < 0xFC) { // some players store 5 stars as 0xFC
     return 0.80; // 4 stars
   }
   return 1.0; // 5 stars
