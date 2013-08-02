@@ -958,8 +958,10 @@ int TagReader::ConvertToPOPMRating(const float rating) {
   } else if (rating < 0.40) {
     return 0x01;
   } else if (rating < 0.60) {
-    return 0x80;
+    return 0x40;
   } else if (rating < 0.80) {
+    return 0x80;
+  } else if (rating < 1.0) {
     return 0xC0;
   }
   return 0xFF;
