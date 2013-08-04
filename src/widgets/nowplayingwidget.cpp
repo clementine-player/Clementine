@@ -388,7 +388,7 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
     album_cover_choice_controller_->show_cover_action()->setEnabled(!art_is_not_set);
   }
 
-  bask_in_his_glory_action_->setVisible(hypnotoad_);
+  bask_in_his_glory_action_->setVisible(static_cast<bool>(hypnotoad_));
 
   // show the menu
   menu_->popup(mapToGlobal(e->pos()));

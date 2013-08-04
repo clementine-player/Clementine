@@ -34,6 +34,7 @@ public:
   PlaylistTabBar(QWidget *parent = 0);
 
   static const int kDragHoverTimeout = 500;
+  static const char* kSettingsGroup;
 
   void SetActions(QAction* new_playlist, QAction* load_playlist);
   void SetManager(PlaylistManager* manager);
@@ -50,7 +51,7 @@ public:
   void set_text_by_id(int id, const QString& text);
 
   void RemoveTab(int id);
-  void InsertTab(int id, int index, const QString& text);
+  void InsertTab(int id, int index, const QString& text, bool favorite);
 
 signals:
   void CurrentIdChanged(int id);
@@ -58,6 +59,7 @@ signals:
   void Close(int id);
   void Save(int id);
   void PlaylistOrderChanged(const QList<int>& ids);
+  void PlaylistFavorited(int id, bool favorite);
 
 protected:
   void contextMenuEvent(QContextMenuEvent* e);
@@ -77,6 +79,9 @@ private slots:
   void HideEditor();
   void Close();
   void CloseFromTabIndex(int index);
+  // Used when playlist's favorite flag isn't changed from the favorite widget
+  // (e.g. from the playlistlistcontainer): will update the favorite widget
+  void PlaylistFavoritedSlot(int id, bool favorite);
   void TabMoved();
   void Save();
 

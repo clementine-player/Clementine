@@ -15,6 +15,7 @@ message SongMetadata {
     WAV = 10;
     TRUEAUDIO = 11;
     CDDA = 12;
+    OGGOPUS = 13;
     STREAM = 99;
   }
 
@@ -48,6 +49,8 @@ message SongMetadata {
   optional string art_automatic = 28;
   optional Type type = 29;
   optional string etag = 30;
+  optional string performer = 31;
+  optional string grouping = 32;
 }
 
 message ReadFileRequest {
@@ -95,6 +98,24 @@ message ReadCloudFileResponse {
   optional SongMetadata metadata = 1;
 }
 
+message SaveSongStatisticsToFileRequest {
+  optional string filename = 1;
+  optional SongMetadata metadata = 2;
+}
+
+message SaveSongStatisticsToFileResponse {
+  optional bool success = 1;
+}
+
+message SaveSongRatingToFileRequest {
+  optional string filename = 1;
+  optional SongMetadata metadata = 2;
+}
+
+message SaveSongRatingToFileResponse {
+  optional bool success = 1;
+}
+
 message Message {
   optional int32 id = 1;
 
@@ -112,4 +133,10 @@ message Message {
 
   optional ReadCloudFileRequest read_cloud_file_request = 10;
   optional ReadCloudFileResponse read_cloud_file_response = 11;
+  
+  optional SaveSongStatisticsToFileRequest save_song_statistics_to_file_request = 12;
+  optional SaveSongStatisticsToFileResponse save_song_statistics_to_file_response = 13;
+  
+  optional SaveSongRatingToFileRequest save_song_rating_to_file_request = 14;
+  optional SaveSongRatingToFileResponse save_song_rating_to_file_response = 15;
 }

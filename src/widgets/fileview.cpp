@@ -31,7 +31,8 @@
 
 const char* FileView::kFileFilter = "*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma "
                                     "*.mp4 *.spx *.wav *.m3u *.m3u8 *.pls *.xspf "
-                                    "*.asx *.asxini *.cue *.ape *.wv *.mka";
+                                    "*.asx *.asxini *.cue *.ape *.wv *.mka *.opus "
+                                    "*.oga *.mka";
 
 FileView::FileView(QWidget* parent)
     : QWidget(parent),
@@ -183,8 +184,8 @@ void FileView::Delete(const QStringList& filenames) {
   if (filenames.isEmpty())
     return;
 
-  if (QMessageBox::question(this, tr("Delete files"),
-        tr("These files will be deleted from disk, are you sure you want to continue?"),
+  if (QMessageBox::warning(this, tr("Delete files"),
+        tr("These files will be permanently deleted from disk, are you sure you want to continue?"),
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 

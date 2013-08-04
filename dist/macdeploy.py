@@ -66,6 +66,7 @@ GSTREAMER_PLUGINS=[
     'libgstmpegaudioparse.so',
     'libgstmusepack.so',
     'libgstogg.so',
+    'libgstopus.so',
     'libgstqtdemux.so',
     'libgstreplaygain.so',
     'libgstspeex.so',
@@ -110,6 +111,7 @@ QT_PLUGINS = [
     'imageformats/libqtiff.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH=[
+    '/target/plugins',
     '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
 ]
@@ -177,8 +179,6 @@ def GetBrokenLibraries(binary):
       continue
     if os.path.basename(binary) in line:
       continue
-    if 'libiconv' in line:
-      broken_libs['libs'].append(line)
     elif re.match(r'^\s*/System/', line):
       continue  # System framework
     elif re.match(r'^\s*/usr/lib/', line):
@@ -326,8 +326,6 @@ def FixInstallPath(library_path, library, new_path):
   commands.append(args)
 
 def FindSystemLibrary(library_name):
-  if 'iconv' in library_name:
-    return None
   for path in ['/lib', '/usr/lib']:
     full_path = os.path.join(path, library_name)
     if os.path.exists(full_path):

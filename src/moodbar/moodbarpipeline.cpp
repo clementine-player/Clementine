@@ -23,6 +23,7 @@
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
+#include "core/utilities.h"
 
 bool MoodbarPipeline::sIsAvailable = false;
 
@@ -73,6 +74,8 @@ GstElement* MoodbarPipeline::CreateElement(const QString& factory_name) {
 
 void MoodbarPipeline::Start() {
   Q_ASSERT(QThread::currentThread() != qApp->thread());
+
+  Utilities::SetThreadIOPriority(Utilities::IOPRIO_CLASS_IDLE);
 
   if (pipeline_) {
     return;
@@ -133,7 +136,8 @@ void MoodbarPipeline::ReportError(GstMessage* msg) {
 
 void MoodbarPipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
   MoodbarPipeline* self = reinterpret_cast<MoodbarPipeline*>(data);
-  GstPad* const audiopad = gst_element_get_pad(self->convert_element_, "sink");
+  GstPad* const audiopad = gst_element_get_static_pad(
+      self->convert_element_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Warning) << "audiopad is already linked, unlinking old pad";
@@ -146,7 +150,7 @@ void MoodbarPipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
 
 GstFlowReturn MoodbarPipeline::NewBufferCallback(GstAppSink* app_sink, gpointer data) {
   MoodbarPipeline* self = reinterpret_cast<MoodbarPipeline*>(data);
-  
+
   GstBuffer* buffer = gst_app_sink_pull_buffer(app_sink);
   self->data_.append(reinterpret_cast<const char*>(buffer->data), buffer->size);
   gst_buffer_unref(buffer);
@@ -161,7 +165,7 @@ GstBusSyncReply MoodbarPipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpoin
     case GST_MESSAGE_EOS:
       self->Stop(true);
       break;
-      
+
     case GST_MESSAGE_ERROR:
       self->ReportError(msg);
       self->Stop(false);

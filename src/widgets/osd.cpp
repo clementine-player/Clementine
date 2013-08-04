@@ -306,6 +306,10 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
     return song.PrettyYear();
   } else if (variable == "%composer%") {
     return song.composer();
+  } else if (variable == "%performer%") {
+    return song.performer();
+  } else if (variable == "%grouping%") {
+    return song.grouping();
   } else if (variable == "%length%") {
     return song.PrettyLength();
   } else if (variable == "%disc%") {
@@ -320,6 +324,10 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
     return return_value.setNum(song.skipcount());
   } else if (variable == "%filename%") {
     return song.basefilename();
+  } else if (variable == "%rating%") {
+    return song.PrettyRating();
+  } else if (variable == "%score%") {
+    return QString::number(song.score());
   } else if (variable == "%newline%") {
     // We need different strings depending on notification type
     switch (behaviour_) {

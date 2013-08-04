@@ -19,9 +19,15 @@
 #include "mainwindow.h"
 #include "ui_behavioursettingspage.h"
 #include "playlist/playlist.h"
+#include "playlist/playlisttabbar.h"
 
 #include <QDir>
 
+namespace {
+bool LocaleAwareCompare(const QString& a, const QString& b) {
+  return a.localeAwareCompare(b) < 0;
+}
+}  // namespace
 
 BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
@@ -55,8 +61,14 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
       continue;
 
     QString code = lang_re.cap(1);
-    QString name = QString("%1 (%2)").arg(
-        QLocale::languageToString(QLocale(code).language()), code);
+    QString language_name = QLocale::languageToString(QLocale(code).language());
+#if QT_VERSION >= 0x040800
+    QString native_name = QLocale(code).nativeLanguageName();
+    if (!native_name.isEmpty()) {
+      language_name = native_name;
+    }
+#endif
+    QString name = QString("%1 (%2)").arg(language_name, code);
 
     language_map_[name] = code;
   }
@@ -65,7 +77,7 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
 
   // Sort the names and show them in the UI
   QStringList names = language_map_.keys();
-  qStableSort(names);
+  qStableSort(names.begin(), names.end(), LocaleAwareCompare);
   ui_->language->addItems(names);
 
 #ifdef Q_OS_DARWIN
@@ -99,6 +111,7 @@ void BehaviourSettingsPage::Load() {
     case MainWindow::Startup_AlwaysShow: ui_->b_always_show_->setChecked(true); break;
     case MainWindow::Startup_Remember:   ui_->b_remember_->setChecked(true);    break;
   }
+  ui_->resume_after_start_->setChecked(s.value("resume_playback_after_start", false).toBool());
   s.endGroup();
 
   s.beginGroup("General");
@@ -111,6 +124,10 @@ void BehaviourSettingsPage::Load() {
 
   s.beginGroup(Playlist::kSettingsGroup);
   ui_->b_grey_out_deleted_->setChecked(s.value("greyoutdeleted", false).toBool());
+  s.endGroup();
+
+  s.beginGroup(PlaylistTabBar::kSettingsGroup);
+  ui_->b_warn_close_playlist_->setChecked(s.value("warn_close_playlist", true).toBool());
   s.endGroup();
 }
 
@@ -136,6 +153,7 @@ void BehaviourSettingsPage::Save() {
   s.setValue("doubleclick_addmode", doubleclick_addmode);
   s.setValue("doubleclick_playmode", doubleclick_playmode);
   s.setValue("menu_playmode", menu_playmode);
+  s.setValue("resume_playback_after_start", ui_->resume_after_start_->isChecked());
   s.endGroup();
 
   s.beginGroup("General");
@@ -145,6 +163,10 @@ void BehaviourSettingsPage::Save() {
 
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
+  s.endGroup();
+
+  s.beginGroup(PlaylistTabBar::kSettingsGroup);
+  s.setValue("warn_close_playlist", ui_->b_warn_close_playlist_->isChecked());
   s.endGroup();
 }
 

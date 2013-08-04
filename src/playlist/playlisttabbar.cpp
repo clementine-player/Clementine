@@ -24,12 +24,16 @@
 #include "internet/internetmimedata.h"
 #include "ui/iconloader.h"
 #include "widgets/renametablineedit.h"
+#include "widgets/favoritewidget.h"
 
 #include <QContextMenuEvent>
+#include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
-#include <QInputDialog>
+#include <QPushButton>
 #include <QToolTip>
+
+const char* PlaylistTabBar::kSettingsGroup = "PlaylistTabBar";
 
 PlaylistTabBar::PlaylistTabBar(QWidget *parent)
   : QTabBar(parent),
@@ -69,6 +73,8 @@ void PlaylistTabBar::SetActions(
 
 void PlaylistTabBar::SetManager(PlaylistManager *manager) {
   manager_ = manager;
+  connect(manager_, SIGNAL(PlaylistFavorited(int, bool)),
+      SLOT(PlaylistFavoritedSlot(int, bool)));
 }
 
 void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
@@ -151,14 +157,35 @@ void PlaylistTabBar::Close() {
   if (menu_index_ == -1)
     return;
 
+  const int playlist_id = tabData(menu_index_).toInt();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  const bool ask_for_delete = s.value("warn_close_playlist", true).toBool();
+
+  if (ask_for_delete && !manager_->IsPlaylistFavorite(playlist_id)) {
+    if (QMessageBox::question(this,
+          tr("Remove playlist"),
+          tr("You are about to remove a playlist which is not part of your favorite playlists: "
+             "the playlist will be deleted (this action cannot be undone). \n"
+             "Are you sure you want to continue?"),
+          QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes) {
+        return;
+      }
+  }
+
   // Just hide the tab from the UI - don't delete it completely (it can still
   // be resurrected from the Playlists tab).
-  emit Close(tabData(menu_index_).toInt());
+  emit Close(playlist_id);
 
   // Select the nearest tab.
   if (menu_index_ > 1) {
     setCurrentIndex(menu_index_ - 1);
   }
+
+  // Update playlist tab order/visibility
+  TabMoved();
 }
 
 void PlaylistTabBar::CloseFromTabIndex(int index) {
@@ -220,15 +247,25 @@ void PlaylistTabBar::CurrentIndexChanged(int index) {
     emit CurrentIdChanged(tabData(index).toInt());
 }
 
-void PlaylistTabBar::InsertTab(int id, int index, const QString& text) {
+void PlaylistTabBar::InsertTab(int id, int index, const QString& text, bool favorite) {
   suppress_current_changed_ = true;
   insertTab(index, text);
   setTabData(index, id);
   setTabToolTip(index, text);
+  FavoriteWidget* widget = new FavoriteWidget(id, favorite);
+  widget->setToolTip(tr(
+      "Click here to favorite this playlist so it will be saved and remain accessible "
+      "through the \"Playlists\" panel on the left side bar"));
+  connect(widget, SIGNAL(FavoriteStateChanged(int, bool)),
+                  SIGNAL(PlaylistFavorited(int, bool)));
+  setTabButton(index, QTabBar::LeftSide, widget);
   suppress_current_changed_ = false;
 
   if (currentIndex() == index)
     emit CurrentIdChanged(id);
+
+  // Update playlist tab order/visibility
+  TabMoved();
 }
 
 void PlaylistTabBar::TabMoved() {
@@ -314,5 +351,13 @@ bool PlaylistTabBar::event(QEvent* e) {
     }
     default:
       return QTabBar::event(e);
+  }
+}
+
+void PlaylistTabBar::PlaylistFavoritedSlot(int id, bool favorite) {
+  const int index = index_of(id);
+  FavoriteWidget* favorite_widget = qobject_cast<FavoriteWidget*>(tabButton(index, QTabBar::LeftSide));
+  if (favorite_widget) {
+    favorite_widget->SetFavorite(favorite);
   }
 }

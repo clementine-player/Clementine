@@ -49,8 +49,9 @@ void GoogleDriveSettingsPage::Load() {
   s.beginGroup(GoogleDriveService::kSettingsGroup);
 
   const QString user_email = s.value("user_email").toString();
+  const QString refresh_token = s.value("refresh_token").toString();
 
-  if (!user_email.isEmpty()) {
+  if (!user_email.isEmpty() && !refresh_token.isEmpty()) {
     ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, user_email);
   }
 }

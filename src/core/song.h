@@ -44,10 +44,6 @@ class QUrl;
   struct LIBMTP_track_struct;
 #endif
 
-#if defined(Q_OS_WIN32)
-  struct IWMDMMetaData;
-#endif
-
 #ifdef HAVE_LIBLASTFM
   namespace lastfm {
     class Track;
@@ -94,6 +90,7 @@ class Song {
     Type_Wav = 10,
     Type_TrueAudio = 11,
     Type_Cdda = 12,
+    Type_OggOpus = 13,
 
     Type_Stream = 99,
   };
@@ -123,11 +120,6 @@ class Song {
 #ifdef HAVE_LIBMTP
   void InitFromMTP(const LIBMTP_track_struct* track, const QString& host);
   void ToMTP(LIBMTP_track_struct* track) const;
-#endif
-
-#if defined(Q_OS_WIN32)
-  void InitFromWmdm(IWMDMMetaData* metadata);
-  void ToWmdm(IWMDMMetaData* metadata) const;
 #endif
 
   // Copies important statistics from the other song to this one, overwriting
@@ -160,6 +152,8 @@ class Song {
   // compilations, but you do for normal albums:
   const QString& playlist_albumartist() const;
   const QString& composer() const;
+  const QString& performer() const;
+  const QString& grouping() const;
   int track() const;
   int disc() const;
   float bpm() const;
@@ -172,6 +166,7 @@ class Song {
   int skipcount() const;
   int lastplayed() const;
   int score() const;
+  int album_id() const;
 
   const QString& cue_path() const;
   bool has_cue() const;
@@ -214,6 +209,7 @@ class Song {
   const QImage& image() const;
 
   // Pretty accessors
+  QString PrettyRating() const;
   QString PrettyTitle() const;
   QString PrettyTitleWithArtist() const;
   QString PrettyLength() const;
@@ -232,6 +228,8 @@ class Song {
   void set_artist(const QString& v);
   void set_albumartist(const QString& v);
   void set_composer(const QString& v);
+  void set_performer(const QString& v);
+  void set_grouping(const QString& v);
   void set_track(int v);
   void set_disc(int v);
   void set_bpm(float v);
@@ -241,6 +239,7 @@ class Song {
   void set_comment(const QString& v);
   void set_compilation(bool v);
   void set_sampler(bool v);
+  void set_album_id(int v);
   void set_beginning_nanosec(qint64 v);
   void set_end_nanosec(qint64 v);
   void set_length_nanosec(qint64 v);

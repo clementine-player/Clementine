@@ -415,7 +415,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_music">
@@ -857,6 +857,20 @@
   <action name="action_remove_duplicates">
    <property name="text">
     <string>Remove duplicates from playlist</string>
+   </property>
+  </action>
+  <action name="action_add_files_to_transcoder">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Add file(s) to transcoder</string>
+   </property>
+   <property name="toolTip">
+    <string>Add file to transcoder</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+T</string>
    </property>
   </action>
  </widget>

@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -22,13 +22,16 @@
 
 #include "EpisodeAction_p.h"
 
-#include <qjson/parser.h>
+#include <parser.h>
 
 using namespace mygpo;
 
+static qulonglong c_maxlonglong = (2^64)-1;
+
 EpisodeActionPrivate::EpisodeActionPrivate( EpisodeAction* qq, const QVariant& variant, QObject* parent ) : QObject( parent ), q( qq )
 {
-    parse( variant );
+    bool valid = parse( variant );
+    qq->setProperty("valid", QVariant( valid ) );
 }
 
 EpisodeActionPrivate::EpisodeActionPrivate( EpisodeAction* qq, const QUrl& podcastUrl, const QUrl& episodeUrl, const QString& deviceName, EpisodeAction::ActionType action, qulonglong timestamp, qulonglong started, qulonglong position, qulonglong total, QObject* parent )
@@ -147,6 +150,11 @@ bool EpisodeActionPrivate::parseActionType( const QString& data )
         m_action = EpisodeAction::New;
         return true;
     }
+    else if ( data.compare( QLatin1String( "flattr" ) ) == 0 )
+    {
+        m_action = EpisodeAction::Flattr;
+        return true;
+    }
     else
     {
         return false;
@@ -218,6 +226,18 @@ EpisodeAction::EpisodeAction( const QVariant& variant, QObject* parent ): QObjec
 
 EpisodeAction::EpisodeAction( const QUrl& podcastUrl, const QUrl& episodeUrl, const QString& deviceName, EpisodeAction::ActionType action, qulonglong timestamp, qulonglong started, qulonglong position, qulonglong total, QObject* parent )
     : QObject( parent ), d( new EpisodeActionPrivate( this, podcastUrl, episodeUrl, deviceName, action, timestamp, started, position, total ) )
+{
+
+}
+
+EpisodeAction::EpisodeAction(const QUrl& podcastUrl, const QUrl& episodeUrl, const QString& deviceName, EpisodeAction::ActionType action, qulonglong timestamp, qulonglong position, QObject* parent)
+    : QObject( parent ), d( new EpisodeActionPrivate( this, podcastUrl, episodeUrl, deviceName, action, timestamp, c_maxlonglong, position, c_maxlonglong ) )
+{
+
+}
+
+EpisodeAction::EpisodeAction(const QUrl& podcastUrl, const QUrl& episodeUrl, const QString& deviceName, EpisodeAction::ActionType action, qulonglong timestamp, QObject* parent)
+    : QObject( parent ), d( new EpisodeActionPrivate( this, podcastUrl, episodeUrl, deviceName, action, timestamp, c_maxlonglong, c_maxlonglong, c_maxlonglong ) )
 {
 
 }

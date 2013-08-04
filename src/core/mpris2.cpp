@@ -344,6 +344,9 @@ void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
     AddMetadata("mpris:artUrl", art_uri, &last_metadata_);
   }
 
+  AddMetadata("year", song.year(), &last_metadata_);
+  AddMetadata("bitrate", song.bitrate(), &last_metadata_);
+
   EmitNotification("Metadata", last_metadata_);
 }
 

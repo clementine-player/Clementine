@@ -40,11 +40,6 @@
 
 #include <id3v1genres.h>
 
-#ifdef Q_OS_WIN32
-# include <mswmdm.h>
-# include <QUuid>
-#endif // Q_OS_WIN32
-
 #ifdef HAVE_LIBGPOD
 # include <gpod/itdb.h>
 #endif
@@ -73,7 +68,8 @@ const QStringList Song::kColumns = QStringList()
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
     << "effective_compilation" << "skipcount" << "score" << "beginning" << "length"
-    << "cue_path" << "unavailable" << "effective_albumartist" << "etag";
+    << "cue_path" << "unavailable" << "effective_albumartist" << "etag"
+    << "performer" << "grouping";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Utilities::Prepend(":", Song::kColumns).join(", ");
@@ -82,7 +78,7 @@ const QString Song::kUpdateSpec = Utilities::Updateify(Song::kColumns).join(", "
 
 const QStringList Song::kFtsColumns = QStringList()
     << "ftstitle" << "ftsalbum" << "ftsartist" << "ftsalbumartist"
-    << "ftscomposer" << "ftsgenre" << "ftscomment";
+    << "ftscomposer" << "ftsperformer" << "ftsgrouping" << "ftsgenre" << "ftscomment";
 
 const QString Song::kFtsColumnSpec = Song::kFtsColumns.join(", ");
 const QString Song::kFtsBindSpec = Utilities::Prepend(":", Song::kFtsColumns).join(", ");
@@ -103,6 +99,8 @@ struct Song::Private : public QSharedData {
   QString artist_;
   QString albumartist_;
   QString composer_;
+  QString performer_;
+  QString grouping_;
   int track_;
   int disc_;
   float bpm_;
@@ -113,6 +111,13 @@ struct Song::Private : public QSharedData {
   bool sampler_;                // From the library scanner
   bool forced_compilation_on_;  // Set by the user
   bool forced_compilation_off_; // Set by the user
+
+  // A unique album ID 
+  // Used to distinguish between albums from providers that have multiple
+  // versions of a given album with the same title (e.g. Spotify).
+  // This is never persisted, it is only stored temporarily for global search
+  // results.
+  int album_id_;
 
   float rating_;
   int playcount_;
@@ -177,6 +182,7 @@ Song::Private::Private()
     sampler_(false),
     forced_compilation_on_(false),
     forced_compilation_off_(false),
+    album_id_(-1),
     rating_(-1.0),
     playcount_(0),
     skipcount_(0),
@@ -226,6 +232,8 @@ const QString& Song::albumartist() const { return d->albumartist_; }
 const QString& Song::effective_albumartist() const { return d->albumartist_.isEmpty() ? d->artist_ : d->albumartist_; }
 const QString& Song::playlist_albumartist() const { return is_compilation() ? d->albumartist_ : effective_albumartist(); }
 const QString& Song::composer() const { return d->composer_; }
+const QString& Song::performer() const { return d->performer_; }
+const QString& Song::grouping() const { return d->grouping_; }
 int Song::track() const { return d->track_; }
 int Song::disc() const { return d->disc_; }
 float Song::bpm() const { return d->bpm_; }
@@ -243,6 +251,7 @@ int Song::lastplayed() const { return d->lastplayed_; }
 int Song::score() const { return d->score_; }
 const QString& Song::cue_path() const { return d->cue_path_; }
 bool Song::has_cue() const { return !d->cue_path_.isEmpty(); }
+int Song::album_id() const { return d->album_id_; }
 qint64 Song::beginning_nanosec() const { return d->beginning_; }
 qint64 Song::end_nanosec() const { return d->end_; }
 qint64 Song::length_nanosec() const { return d->end_ - d->beginning_; }
@@ -272,6 +281,8 @@ void Song::set_album(const QString& v) { d->album_ = v; }
 void Song::set_artist(const QString& v) { d->artist_ = v; }
 void Song::set_albumartist(const QString& v) { d->albumartist_ = v; }
 void Song::set_composer(const QString& v) { d->composer_ = v; }
+void Song::set_performer(const QString& v) { d->performer_ = v; }
+void Song::set_grouping(const QString& v) { d->grouping_ = v; }
 void Song::set_track(int v) { d->track_ = v; }
 void Song::set_disc(int v) { d->disc_ = v; }
 void Song::set_bpm(float v) { d->bpm_ = v; }
@@ -280,6 +291,7 @@ void Song::set_genre(const QString& v) { d->genre_ = v; }
 void Song::set_comment(const QString& v) { d->comment_ = v; }
 void Song::set_compilation(bool v) { d->compilation_ = v; }
 void Song::set_sampler(bool v) { d->sampler_ = v; }
+void Song::set_album_id(int v) { d->album_id_ = v; }
 void Song::set_beginning_nanosec(qint64 v) { d->beginning_ = qMax(0ll, v); }
 void Song::set_end_nanosec(qint64 v) { d->end_ = v; }
 void Song::set_length_nanosec(qint64 v) { d->end_ = d->beginning_ + v; }
@@ -320,6 +332,7 @@ QString Song::TextForFiletype(FileType type) {
     case Song::Type_OggFlac:   return QObject::tr("Ogg Flac");
     case Song::Type_OggSpeex:  return QObject::tr("Ogg Speex");
     case Song::Type_OggVorbis: return QObject::tr("Ogg Vorbis");
+    case Song::Type_OggOpus:   return QObject::tr("Ogg Opus");
     case Song::Type_Aiff:      return QObject::tr("AIFF");
     case Song::Type_Wav:       return QObject::tr("Wav");
     case Song::Type_TrueAudio: return QObject::tr("TrueAudio");
@@ -385,6 +398,8 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->artist_ = QStringFromStdString(pb.artist());
   d->albumartist_ = QStringFromStdString(pb.albumartist());
   d->composer_ = QStringFromStdString(pb.composer());
+  d->performer_ = QStringFromStdString(pb.performer());
+  d->grouping_ = QStringFromStdString(pb.grouping());
   d->track_ = pb.track();
   d->disc_ = pb.disc();
   d->bpm_ = pb.bpm();
@@ -426,6 +441,8 @@ void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
   pb->set_artist(DataCommaSizeFromQString(d->artist_));
   pb->set_albumartist(DataCommaSizeFromQString(d->albumartist_));
   pb->set_composer(DataCommaSizeFromQString(d->composer_));
+  pb->set_performer(DataCommaSizeFromQString(d->performer_));
+  pb->set_grouping(DataCommaSizeFromQString(d->grouping_));
   pb->set_track(d->track_);
   pb->set_disc(d->disc_);
   pb->set_bpm(d->bpm_);
@@ -512,6 +529,10 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->unavailable_ = q.value(col + 35).toBool();
 
   // effective_albumartist = 36
+  // etag = 37
+
+  d->performer_ = tostr(col + 38);
+  d->grouping_ = tostr(col + 39);
 
   #undef tostr
   #undef toint
@@ -530,7 +551,7 @@ void Song::InitFromFilePartial(const QString& filename) {
   QString suffix = info.suffix().toLower();
   if (suffix == "mp3" || suffix == "ogg" || suffix == "flac" || suffix == "mpc"
       || suffix == "m4a" || suffix == "aac" || suffix == "wma" || suffix == "mp4"
-      || suffix == "spx" || suffix == "wav") {
+      || suffix == "spx" || suffix == "wav" || suffix == "opus") {
     d->valid_ = true;
   } else {
     d->valid_ = false;
@@ -560,6 +581,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->artist_ = QString::fromUtf8(track->artist);
     d->albumartist_ = QString::fromUtf8(track->albumartist);
     d->composer_ = QString::fromUtf8(track->composer);
+    d->grouping_ = QString::fromUtf8(track->grouping);
     d->track_ = track->track_nr;
     d->disc_ = track->cd_nr;
     d->bpm_ = track->BPM;
@@ -597,6 +619,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->artist = strdup(d->artist_.toUtf8().constData());
     track->albumartist = strdup(d->albumartist_.toUtf8().constData());
     track->composer = strdup(d->composer_.toUtf8().constData());
+    track->grouping = strdup(d->grouping_.toUtf8().constData());
     track->track_nr = d->track_;
     track->cd_nr = d->disc_;
     track->BPM = d->bpm_;
@@ -698,233 +721,6 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   }
 #endif
 
-#if defined(Q_OS_WIN32)
-  static void AddWmdmItem(IWMDMMetaData* metadata, const wchar_t* name,
-                          const QVariant& value) {
-    switch (value.type()) {
-      case QVariant::Int:
-      case QVariant::UInt: {
-        DWORD data = value.toUInt();
-        metadata->AddItem(WMDM_TYPE_DWORD, name, (BYTE*)&data, sizeof(data));
-        break;
-      }
-      case QVariant::String: {
-        ScopedWCharArray data(value.toString());
-        metadata->AddItem(WMDM_TYPE_STRING, name, (BYTE*)data.get(), data.bytes());
-        break;
-      }
-      case QVariant::ByteArray: {
-        QByteArray data = value.toByteArray();
-        metadata->AddItem(WMDM_TYPE_BINARY, name, (BYTE*)data.constData(), data.size());
-        break;
-      }
-      case QVariant::Bool: {
-        int data = value.toBool();
-        metadata->AddItem(WMDM_TYPE_BOOL, name, (BYTE*)&data, sizeof(data));
-        break;
-      }
-      case QVariant::LongLong:
-      case QVariant::ULongLong: {
-        quint64 data = value.toULongLong();
-        metadata->AddItem(WMDM_TYPE_QWORD, name, (BYTE*)&data, sizeof(data));
-        break;
-      }
-      default:
-        qLog(Warning) << "Type" << value.type() << "not handled";
-        Q_ASSERT(0);
-        break;
-    }
-  }
-
-  static QVariant ReadWmdmValue(int type, uchar* data, uint length) {
-    switch (type) {
-    case WMDM_TYPE_DWORD:
-      return QVariant::fromValue(uint(*reinterpret_cast<DWORD*>(data)));
-    case WMDM_TYPE_WORD:
-      return QVariant::fromValue(uint(*reinterpret_cast<WORD*>(data)));
-    case WMDM_TYPE_QWORD:
-      return QVariant::fromValue(qulonglong(*reinterpret_cast<quint64*>(data)));
-    case WMDM_TYPE_STRING:
-      return QString::fromWCharArray(reinterpret_cast<wchar_t*>(data), length/2);
-    case WMDM_TYPE_BINARY:
-      return QByteArray(reinterpret_cast<char*>(data), length);
-    case WMDM_TYPE_BOOL:
-      return bool(*reinterpret_cast<int*>(data));
-    case WMDM_TYPE_GUID:
-      return QUuid(*reinterpret_cast<GUID*>(data)).toString();
-    }
-    return QVariant();
-  }
-
-  void Song::InitFromWmdm(IWMDMMetaData* metadata) {
-    bool non_consumable = false;
-    int format = 0;
-
-    // How much metadata is there?
-    uint count = 0;
-    metadata->GetItemCount(&count);
-
-    for (int i=0 ; i<count ; ++i) {
-      // Get this metadata item
-      wchar_t* name = NULL;
-      WMDM_TAG_DATATYPE type;
-      BYTE* value = NULL;
-      uint length = 0;
-
-      metadata->QueryByIndex(i, &name, &type, &value, &length);
-
-      QVariant item_value = ReadWmdmValue(type, value, length);
-
-      // Store it in the song if it's something we recognise
-      if (wcscmp(name, g_wszWMDMTitle) == 0)
-        d->title_ = item_value.toString();
-
-      else if (wcscmp(name, g_wszWMDMAuthor) == 0)
-        d->artist_ = item_value.toString();
-
-      else if (wcscmp(name, g_wszWMDMDescription) == 0)
-        d->comment_ = item_value.toString();
-
-      else if (wcscmp(name, g_wszWMDMAlbumTitle) == 0)
-        d->album_ = item_value.toString();
-
-      else if (wcscmp(name, g_wszWMDMTrack) == 0)
-        d->track_ = item_value.toInt();
-
-      else if (wcscmp(name, g_wszWMDMGenre) == 0)
-        d->genre_ = item_value.toString();
-
-      else if (wcscmp(name, g_wszWMDMYear) == 0)
-        d->year_ = item_value.toInt();
-
-      else if (wcscmp(name, g_wszWMDMComposer) == 0)
-        d->composer_ = item_value.toString();
-
-      else if (wcscmp(name, g_wszWMDMBitrate) == 0)
-        d->bitrate_ = item_value.toInt();
-
-      else if (wcscmp(name, g_wszWMDMFileName) == 0)
-        d->url_ = QUrl::fromLocalFile(item_value.toString());
-
-      else if (wcscmp(name, g_wszWMDMDuration) == 0)
-        set_length_nanosec(item_value.toULongLong() * 1e2);
-
-      else if (wcscmp(name, L"WMDM/FileSize") == 0)
-        d->filesize_ = item_value.toULongLong();
-
-      else if (wcscmp(name, L"WMDM/NonConsumable") == 0)
-        non_consumable = item_value.toBool();
-
-      else if (wcscmp(name, L"WMDM/FormatCode") == 0)
-        format = item_value.toInt();
-
-      CoTaskMemFree(name);
-      CoTaskMemFree(value);
-    }
-
-    // Decide if this is music or not
-    if (count == 0 || non_consumable)
-      return;
-
-    switch (format) {
-    case WMDM_FORMATCODE_AIFF:
-      d->filetype_ = Song::Type_Aiff;
-      break;
-
-    case WMDM_FORMATCODE_WAVE:
-      d->filetype_ = Song::Type_Wav;
-      break;
-
-    case WMDM_FORMATCODE_MP2:
-    case WMDM_FORMATCODE_MP3:
-    case WMDM_FORMATCODE_MPEG:
-      d->filetype_ = Song::Type_Mpeg;
-      break;
-
-    case WMDM_FORMATCODE_WMA:
-    case WMDM_FORMATCODE_ASF:
-      d->filetype_ = Song::Type_Asf;
-      break;
-
-    case WMDM_FORMATCODE_OGG:
-      d->filetype_ = Song::Type_OggVorbis;
-      break;
-
-    case WMDM_FORMATCODE_AAC:
-    case WMDM_FORMATCODE_MP4:
-      d->filetype_ = Song::Type_Mp4;
-      break;
-
-    case WMDM_FORMATCODE_FLAC:
-      d->filetype_ = Song::Type_Flac;
-      break;
-
-    case WMDM_FORMATCODE_AUDIBLE:
-    case WMDM_FORMATCODE_UNDEFINEDAUDIO:
-      d->filetype_ = Song::Type_Unknown;
-      break;
-
-    case WMDM_FORMATCODE_UNDEFINED:
-      // WMDM doesn't know what type of file it is, so we start guessing - first
-      // check if any of the music metadata fields were defined.  If they were,
-      // there's a fairly good chance the file was music.
-      if (!d->title_.isEmpty() || !d->artist_.isEmpty() ||
-          !d->album_.isEmpty() || !d->comment_.isEmpty() ||
-          !d->genre_.isEmpty() || d->track_ != -1 || d->year_ != -1 ||
-          length_nanosec() != -1) {
-        d->filetype_ = Song::Type_Unknown;
-        break;
-      }
-
-      // Make a final guess based on the file extension
-      {
-        QString ext = d->url_.path().section('.', -1, -1).toLower();
-        if (ext == "mp3" || ext == "wma" || ext == "flac" || ext == "ogg" ||
-            ext == "spx" || ext == "mp4" || ext == "aac" || ext == "m4a")
-          break;
-      }
-      return;
-
-    default:
-      return; // It's not music
-    }
-
-    d->valid_ = true;
-    d->mtime_ = 0;
-    d->ctime_ = 0;
-  }
-
-  void Song::ToWmdm(IWMDMMetaData* metadata) const {
-    AddWmdmItem(metadata, g_wszWMDMTitle, d->title_);
-    AddWmdmItem(metadata, g_wszWMDMAuthor, d->artist_);
-    AddWmdmItem(metadata, g_wszWMDMDescription, d->comment_);
-    AddWmdmItem(metadata, g_wszWMDMAlbumTitle, d->album_);
-    AddWmdmItem(metadata, g_wszWMDMTrack, d->track_);
-    AddWmdmItem(metadata, g_wszWMDMGenre, d->genre_);
-    AddWmdmItem(metadata, g_wszWMDMYear, QString::number(d->year_));
-    AddWmdmItem(metadata, g_wszWMDMComposer, d->composer_);
-    AddWmdmItem(metadata, g_wszWMDMBitrate, d->bitrate_);
-    AddWmdmItem(metadata, g_wszWMDMFileName, d->basefilename_);
-    AddWmdmItem(metadata, g_wszWMDMDuration, qint64(length_nanosec() / 1e2));
-    AddWmdmItem(metadata, L"WMDM/FileSize", d->filesize_);
-
-    WMDM_FORMATCODE format;
-    switch (d->filetype_) {
-      case Type_Aiff:      format = WMDM_FORMATCODE_AIFF; break;
-      case Type_Wav:       format = WMDM_FORMATCODE_WAVE; break;
-      case Type_Mpeg:      format = WMDM_FORMATCODE_MP3;  break;
-      case Type_Asf:       format = WMDM_FORMATCODE_ASF;  break;
-      case Type_OggFlac:
-      case Type_OggSpeex:
-      case Type_OggVorbis: format = WMDM_FORMATCODE_OGG;  break;
-      case Type_Mp4:       format = WMDM_FORMATCODE_MP4;  break;
-      case Type_Flac:      format = WMDM_FORMATCODE_FLAC; break;
-      default:             format = WMDM_FORMATCODE_UNDEFINEDAUDIO; break;
-    }
-    AddWmdmItem(metadata, L"WMDM/FormatCode", format);
-  }
-#endif // Q_OS_WIN32
-
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   if (d->init_from_file_ || d->url_.scheme() == "file") {
     // This Song was already loaded using taglib. Our tags are probably better
@@ -1001,6 +797,9 @@ void Song::BindToQuery(QSqlQuery *query) const {
 
   query->bindValue(":etag", strval(d->etag_));
 
+  query->bindValue(":performer", strval(d->performer_));
+  query->bindValue(":grouping", strval(d->grouping_));
+
   #undef intval
   #undef notnullintval
   #undef strval
@@ -1012,6 +811,8 @@ void Song::BindToFtsQuery(QSqlQuery *query) const {
   query->bindValue(":ftsartist", d->artist_);
   query->bindValue(":ftsalbumartist", d->albumartist_);
   query->bindValue(":ftscomposer", d->composer_);
+  query->bindValue(":ftsperformer", d->performer_);
+  query->bindValue(":ftsgrouping", d->grouping_);
   query->bindValue(":ftsgenre", d->genre_);
   query->bindValue(":ftscomment", d->comment_);
 }
@@ -1037,6 +838,16 @@ void Song::ToLastFM(lastfm::Track* track, bool prefer_album_artist) const {
   }
 }
 #endif // HAVE_LIBLASTFM
+
+QString Song::PrettyRating() const {
+  float rating = d->rating_;
+
+  if (rating == -1.0f)
+    return "0";
+
+  return QString::number(static_cast<int>(rating * 100));
+}
+
 
 QString Song::PrettyTitle() const {
   QString title(d->title_);
@@ -1093,6 +904,8 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->artist_ == other.d->artist_ &&
          d->albumartist_ == other.d->albumartist_ &&
          d->composer_ == other.d->composer_ &&
+         d->performer_ == other.d->performer_ &&
+         d->grouping_ == other.d->grouping_ &&
          d->track_ == other.d->track_ &&
          d->disc_ == other.d->disc_ &&
          qFuzzyCompare(d->bpm_, other.d->bpm_) &&

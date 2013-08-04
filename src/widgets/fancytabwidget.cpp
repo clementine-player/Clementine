@@ -304,6 +304,24 @@ void FancyTabBar::paintEvent(QPaintEvent *event)
         paintTab(&p, currentIndex());
 }
 
+bool FancyTab::event(QEvent* event)
+{
+  if (event->type() == QEvent::ToolTip) {
+    QFontMetrics metrics (font());
+    int text_width = metrics.width(text);
+
+    if (text_width > sizeHint().width()) {
+      // The text is elided: show the tooltip
+      QHelpEvent* he = static_cast<QHelpEvent*>(event);
+      QToolTip::showText(he->globalPos(), text);
+    } else {
+      QToolTip::hideText();
+    }
+    return true;
+  }
+  return QWidget::event(event);
+}
+
 void FancyTab::enterEvent(QEvent*)
 {
     fadeIn();
@@ -364,6 +382,7 @@ void FancyTabBar::addTab(const QIcon& icon, const QString& label) {
   FancyTab *tab = new FancyTab(this);
   tab->icon = icon;
   tab->text = label;
+  tab->setToolTip(label);
   m_tabs.append(tab);
   qobject_cast<QVBoxLayout*>(layout())->insertWidget(layout()->count()-1, tab);
 }
@@ -710,10 +729,7 @@ void FancyTabWidget::MakeTabBar(QTabBar::Shape shape, bool text, bool icons,
     else if (text)
       tab_id = bar->addTab(label);
 
-    // Adds tooltips only in Tabs mode or IconOnlyTabs mode
-    // TODO in tab mode, show only if not elided, complicated since this doesn't inherit from QTabWidget
-    if (shape == QTabBar::RoundedNorth && ((!text && icons) || (text && !icons)))
-      bar->setTabToolTip(tab_id, item.tab_label_);
+    bar->setTabToolTip(tab_id, item.tab_label_);
   }
 
   bar->setCurrentIndex(stack_->currentIndex());

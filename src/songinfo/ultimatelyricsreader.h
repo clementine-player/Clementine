@@ -24,6 +24,7 @@
 #include <QXmlStreamReader>
 
 class QIODevice;
+class QThread;
 
 class UltimateLyricsReader : public QObject {
   Q_OBJECT
@@ -34,10 +35,14 @@ public:
   QList<SongInfoProvider*> Parse(const QString& filename) const;
   QList<SongInfoProvider*> ParseDevice(QIODevice* device) const;
 
+  void SetThread(QThread* thread);
+
 private:
   SongInfoProvider* ParseProvider(QXmlStreamReader* reader) const;
   UltimateLyricsProvider::Rule ParseRule(QXmlStreamReader* reader) const;
   QString ParseInvalidIndicator(QXmlStreamReader* reader) const;
+
+  QThread* thread_;
 };
 
 #endif // ULTIMATELYRICSREADER_H

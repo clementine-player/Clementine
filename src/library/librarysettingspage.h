@@ -40,6 +40,7 @@ public:
 private slots:
   void Add();
   void Remove();
+  void WriteAllSongsStatisticsToFiles();
 
   void CurrentRowChanged(const QModelIndex& index);
 

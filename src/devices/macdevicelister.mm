@@ -497,8 +497,9 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
           (device.vendor_id == 0x088e && device.product_id == 0x5036) ||
           // Blacklist eLicenser
           (device.vendor_id == 0x0819 && device.product_id == 0x0101) ||
-          // Skip HID devices and hubs.
+          // Skip HID devices, printers and hubs.
           interface_class == kUSBHIDInterfaceClass ||
+          interface_class == kUSBPrintingInterfaceClass ||
           interface_class == kUSBHubClass) {
         continue;
       }

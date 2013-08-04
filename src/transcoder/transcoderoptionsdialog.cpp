@@ -21,6 +21,7 @@
 #include "transcoderoptionsmp3.h"
 #include "transcoderoptionsspeex.h"
 #include "transcoderoptionsvorbis.h"
+#include "transcoderoptionsopus.h"
 #include "transcoderoptionswma.h"
 #include "ui_transcoderoptionsdialog.h"
 
@@ -37,6 +38,7 @@ TranscoderOptionsDialog::TranscoderOptionsDialog(Song::FileType type, QWidget* p
     case Song::Type_Mp4:       options_ = new TranscoderOptionsAAC(this);    break;
     case Song::Type_Mpeg:      options_ = new TranscoderOptionsMP3(this);    break;
     case Song::Type_OggVorbis: options_ = new TranscoderOptionsVorbis(this); break;
+    case Song::Type_OggOpus:   options_ = new TranscoderOptionsOpus(this);   break;
     case Song::Type_OggSpeex:  options_ = new TranscoderOptionsSpeex(this);  break;
     case Song::Type_Asf:       options_ = new TranscoderOptionsWma(this);    break;
     default:

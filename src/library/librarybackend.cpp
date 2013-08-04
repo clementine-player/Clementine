@@ -20,6 +20,7 @@
 #include "sqlrow.h"
 #include "core/database.h"
 #include "core/scopedtransaction.h"
+#include "core/tagreaderclient.h"
 #include "smartplaylists/search.h"
 
 #include <QCoreApplication>
@@ -30,13 +31,17 @@
 #include <QVariant>
 #include <QtDebug>
 
+const char* LibraryBackend::kSettingsGroup = "LibraryBackend";
+
 const char* LibraryBackend::kNewScoreSql =
     "case when playcount <= 0 then (%1 * 100 + score) / 2"
     "     else (score * (playcount + skipcount) + %1 * 100) / (playcount + skipcount + 1)"
     " end";
 
 LibraryBackend::LibraryBackend(QObject *parent)
-  : LibraryBackendInterface(parent)
+  : LibraryBackendInterface(parent),
+    save_statistics_in_file_(false),
+    save_ratings_in_file_(false)
 {
 }
 
@@ -48,6 +53,7 @@ void LibraryBackend::Init(Database* db, const QString& songs_table,
   dirs_table_ = dirs_table;
   subdirs_table_ = subdirs_table;
   fts_table_ = fts_table;
+  ReloadSettings();
 }
 
 void LibraryBackend::LoadDirectoriesAsync() {
@@ -959,6 +965,13 @@ SongList LibraryBackend::FindSongs(const smart_playlists::Search& search) {
   return ret;
 }
 
+SongList LibraryBackend::GetAllSongs() {
+  // Get all the songs!
+  return FindSongs(smart_playlists::Search(
+      smart_playlists::Search::Type_All, smart_playlists::Search::TermList(),
+      smart_playlists::Search::Sort_FieldAsc, smart_playlists::SearchTerm::Field_Artist, -1));
+}
+
 void LibraryBackend::IncrementPlayCount(int id) {
   if (id == -1)
     return;
@@ -1036,7 +1049,7 @@ void LibraryBackend::UpdateSongRating(int id, float rating) {
     return;
 
   Song new_song = GetSongById(id, db);
-  emit SongsStatisticsChanged(SongList() << new_song);
+  emit SongsRatingChanged(SongList() << new_song);
 }
 
 void LibraryBackend::DeleteAll() {
@@ -1059,4 +1072,43 @@ void LibraryBackend::DeleteAll() {
   }
 
   emit DatabaseReset();
+}
+
+void LibraryBackend::ReloadSettingsAsync() {
+  QMetaObject::invokeMethod(this, "ReloadSettings", Qt::QueuedConnection);
+}
+
+void LibraryBackend::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  // Statistics
+  {
+    bool save_statistics_in_file = s.value("save_statistics_in_file", false).toBool();
+    // Compare with previous value to know if we should connect, disconnect or nothing
+    if (save_statistics_in_file_ && !save_statistics_in_file) {
+      disconnect(this, SIGNAL(SongsStatisticsChanged(SongList)),
+          TagReaderClient::Instance(), SLOT(UpdateSongsStatistics(SongList)));
+    } else if (!save_statistics_in_file_ && save_statistics_in_file) {
+      connect(this, SIGNAL(SongsStatisticsChanged(SongList)),
+          TagReaderClient::Instance(), SLOT(UpdateSongsStatistics(SongList)));
+    }
+    // Save old value
+    save_statistics_in_file_ = save_statistics_in_file;
+  }
+
+  // Rating
+  {
+    bool save_ratings_in_file = s.value("save_ratings_in_file", false).toBool();
+    // Compare with previous value to know if we should connect, disconnect or nothing
+    if (save_ratings_in_file_ && !save_ratings_in_file) {
+      disconnect(this, SIGNAL(SongsRatingChanged(SongList)),
+          TagReaderClient::Instance(), SLOT(UpdateSongsRating(SongList)));
+    } else if (!save_ratings_in_file_ && save_ratings_in_file) {
+      connect(this, SIGNAL(SongsRatingChanged(SongList)),
+          TagReaderClient::Instance(), SLOT(UpdateSongsRating(SongList)));
+    }
+    // Save old value
+    save_ratings_in_file_ = save_ratings_in_file;
+  }
 }

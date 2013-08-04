@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -20,7 +20,7 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#include <qjson/parser.h>
+#include <parser.h>
 
 #include "AddRemoveResult.h"
 #include "AddRemoveResult_p.h"

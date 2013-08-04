@@ -46,6 +46,7 @@ class CommandlineOptions {
     Player_Stop = 4,
     Player_Previous = 5,
     Player_Next = 6,
+    Player_RestartOrPrevious = 7,
   };
 
   bool Parse();
@@ -82,6 +83,9 @@ class CommandlineOptions {
     LogLevels,
     Version,
     Crash,
+    VolumeIncreaseBy,
+    VolumeDecreaseBy,
+    RestartOrPrevious
   };
 
   QString tr(const char* source_text);

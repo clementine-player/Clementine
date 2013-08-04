@@ -37,6 +37,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");
   qRegisterMetaType<Engine::State>("Engine::State");
+  qRegisterMetaType<Engine::TrackChangeFlags>("Engine::TrackChangeFlags");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
   qRegisterMetaType<Geolocator::LatLng>("Geolocator::LatLng");
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
@@ -48,6 +49,8 @@ void RegisterMetaTypes() {
   qRegisterMetaType<PodcastList>("PodcastList");
   qRegisterMetaType<QList<CoverSearchResult> >("QList<CoverSearchResult>");
   qRegisterMetaType<QList<PlaylistItemPtr> >("QList<PlaylistItemPtr>");
+  qRegisterMetaType<PlaylistSequence::RepeatMode>("PlaylistSequence::RepeatMode");
+  qRegisterMetaType<PlaylistSequence::ShuffleMode>("PlaylistSequence::ShuffleMode");
   qRegisterMetaType<QList<PodcastEpisode> >("QList<PodcastEpisode>");
   qRegisterMetaType<QList<Podcast> >("QList<Podcast>");
   qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");
@@ -67,6 +70,7 @@ void RegisterMetaTypes() {
   qRegisterMetaTypeStreamOperators<SomaFMService::Stream>("SomaFMService::Stream");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
+  qRegisterMetaType<QList<QUrl> >("QList<QUrl>");
 
 #ifdef HAVE_DBUS
   qDBusRegisterMetaType<QImage>();

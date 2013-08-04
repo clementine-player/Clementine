@@ -37,7 +37,7 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 42;
+const int Database::kSchemaVersion = 46;
 const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;
@@ -328,7 +328,7 @@ Database::Database(Application* app, QObject* parent, const QString& database_na
       Utilities::GetConfigPath(Utilities::Path_Root));
 
   attached_databases_["jamendo"] = AttachedDatabase(
-        directory_ + "/jamendo.db", ":/schema/jamendo.sql");
+        directory_ + "/jamendo.db", ":/schema/jamendo.sql", false);
 
   QMutexLocker l(&mutex_);
   Connect();
@@ -369,12 +369,16 @@ QSqlDatabase Database::Connect() {
   // Find Sqlite3 functions in the Qt plugin.
   StaticInit();
 
-  QSqlQuery set_fts_tokenizer("SELECT fts3_tokenizer(:name, :pointer)", db);
-  set_fts_tokenizer.bindValue(":name", "unicode");
-  set_fts_tokenizer.bindValue(":pointer", QByteArray(
-      reinterpret_cast<const char*>(&sFTSTokenizer), sizeof(&sFTSTokenizer)));
-  if (!set_fts_tokenizer.exec()) {
-    qLog(Warning) << "Couldn't register FTS3 tokenizer";
+  {
+    QSqlQuery set_fts_tokenizer("SELECT fts3_tokenizer(:name, :pointer)", db);
+    set_fts_tokenizer.bindValue(":name", "unicode");
+    set_fts_tokenizer.bindValue(":pointer", QByteArray(
+        reinterpret_cast<const char*>(&sFTSTokenizer), sizeof(&sFTSTokenizer)));
+    if (!set_fts_tokenizer.exec()) {
+      qLog(Warning) << "Couldn't register FTS3 tokenizer";
+    }
+    // Implicit invocation of ~QSqlQuery() when leaving the scope
+    // to release any remaining database locks!
   }
 
   if (db.tables().count() == 0) {
@@ -406,13 +410,15 @@ QSqlDatabase Database::Connect() {
   // We might have to initialise the schema in some attached databases now, if
   // they were deleted and don't match up with the main schema version.
   foreach (const QString& key, attached_databases_.keys()) {
+    if (attached_databases_[key].is_temporary_ &&
+        attached_databases_[key].schema_.isEmpty())
+      continue;
     // Find out if there are any tables in this database
     QSqlQuery q(QString("SELECT ROWID FROM %1.sqlite_master"
                         " WHERE type='table'").arg(key), db);
     if (!q.exec() || !q.next()) {
-      ScopedTransaction t(&db);
-      ExecFromFile(attached_databases_[key].schema_, db, 0);
-      t.Commit();
+      q.finish();
+      ExecSchemaCommandsFromFile(db, attached_databases_[key].schema_, 0);
     }
   }
 
@@ -421,10 +427,14 @@ QSqlDatabase Database::Connect() {
 
 void Database::UpdateMainSchema(QSqlDatabase* db) {
   // Get the database's schema version
-  QSqlQuery q("SELECT version FROM schema_version", *db);
   int schema_version = 0;
-  if (q.next())
-    schema_version = q.value(0).toInt();
+  {
+    QSqlQuery q("SELECT version FROM schema_version", *db);
+    if (q.next())
+      schema_version = q.value(0).toInt();
+    // Implicit invocation of ~QSqlQuery() when leaving the scope
+    // to release any remaining database locks!
+  }
 
   startup_schema_version_ = schema_version;
 
@@ -472,19 +482,39 @@ void Database::RecreateAttachedDb(const QString& database_name) {
   }
 }
 
+void Database::AttachDatabase(const QString& database_name,
+                              const AttachedDatabase& database) {
+  attached_databases_[database_name] = database;
+}
+
+void Database::DetachDatabase(const QString& database_name) {
+  QMutexLocker l(&mutex_);
+  {
+    QSqlDatabase db(Connect());
+
+    QSqlQuery q("DETACH DATABASE :alias", db);
+    q.bindValue(":alias", database_name);
+    if (!q.exec()) {
+      qLog(Warning) << "Failed to detach database" << database_name;
+      return;
+    }
+  }
+
+  attached_databases_.remove(database_name);
+}
+
 void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
   QString filename;
   if (version == 0)
     filename = ":/schema/schema.sql";
   else
     filename = QString(":/schema/schema-%1.sql").arg(version);
-  
-  ScopedTransaction t(&db);
-  
+
   if (version == 31) {
     // This version used to do a bad job of converting filenames in the songs
     // table to file:// URLs.  Now we do it properly here instead.
-    
+    ScopedTransaction t(&db);
+
     UrlEncodeFilenameColumn("songs", db);
     UrlEncodeFilenameColumn("playlist_items", db);
 
@@ -493,30 +523,32 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
         UrlEncodeFilenameColumn(table, db);
       }
     }
+    qLog(Debug) << "Applying database schema update" << version
+                << "from" << filename;
+    ExecSchemaCommandsFromFile(db, filename, version - 1, true);
+    t.Commit();
+  } else {
+    qLog(Debug) << "Applying database schema update" << version
+                << "from" << filename;
+    ExecSchemaCommandsFromFile(db, filename, version - 1);
   }
-  
-  qLog(Debug) << "Applying database schema update" << version
-              << "from" << filename;
-  ExecFromFile(filename, db, version - 1);
-  t.Commit();
 }
 
 void Database::UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db) {
   QSqlQuery select(QString("SELECT ROWID, filename FROM %1").arg(table), db);
   QSqlQuery update(QString("UPDATE %1 SET filename=:filename WHERE ROWID=:id").arg(table), db);
-  
   select.exec();
   if (CheckErrors(select)) return;
   while (select.next()) {
     const int rowid = select.value(0).toInt();
     const QString filename = select.value(1).toString();
-    
+
     if (filename.isEmpty() || filename.contains("://")) {
       continue;
     }
-    
+
     const QUrl url = QUrl::fromLocalFile(filename);
-    
+
     update.bindValue(":filename", url.toEncoded());
     update.bindValue(":id", rowid);
     update.exec();
@@ -524,30 +556,60 @@ void Database::UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db) {
   }
 }
 
-void Database::ExecFromFile(const QString &filename, QSqlDatabase &db,
-                            int schema_version) {
+void Database::ExecSchemaCommandsFromFile(QSqlDatabase& db,
+                                          const QString& filename,
+                                          int schema_version,
+                                          bool in_transaction) {
   // Open and read the database schema
   QFile schema_file(filename);
   if (!schema_file.open(QIODevice::ReadOnly))
     qFatal("Couldn't open schema file %s", filename.toUtf8().constData());
-  ExecCommands(QString::fromUtf8(schema_file.readAll()), db, schema_version);
+  ExecSchemaCommands(db,
+                     QString::fromUtf8(schema_file.readAll()),
+                     schema_version,
+                     in_transaction);
 }
 
-void Database::ExecCommands(const QString& schema, QSqlDatabase& db,
-                            int schema_version) {
+void Database::ExecSchemaCommands(QSqlDatabase& db,
+                                  const QString& schema,
+                                  int schema_version,
+                                  bool in_transaction) {
   // Run each command
-  QStringList commands(schema.split(";\n\n"));
+  const QStringList commands(schema.split(QRegExp("; *\n\n")));
 
   // We don't want this list to reflect possible DB schema changes
   // so we initialize it before executing any statements.
-  QStringList tables = SongsTables(db, schema_version);
+  // If no outer transaction is provided the song tables need to
+  // be queried before beginning an inner transaction! Otherwise
+  // DROP TABLE commands on song tables may fail due to database
+  // locks.
+  const QStringList song_tables(SongsTables(db, schema_version));
 
+  if (!in_transaction) {
+    ScopedTransaction inner_transaction(&db);
+    ExecSongTablesCommands(db, song_tables, commands);
+    inner_transaction.Commit();
+  } else {
+    ExecSongTablesCommands(db, song_tables, commands);
+  }
+}
+
+void Database::ExecSongTablesCommands(QSqlDatabase& db,
+                                      const QStringList& song_tables,
+                                      const QStringList& commands) {
   foreach (const QString& command, commands) {
     // There are now lots of "songs" tables that need to have the same schema:
     // songs, magnatune_songs, and device_*_songs.  We allow a magic value
     // in the schema files to update all songs tables at once.
     if (command.contains(kMagicAllSongsTables)) {
-      foreach (const QString& table, tables) {
+      foreach (const QString& table, song_tables) {
+        // Another horrible hack: device songs tables don't have matching _fts
+        // tables, so if this command tries to touch one, ignore it.
+        if (table.startsWith("device_") &&
+            command.contains(QString(kMagicAllSongsTables) + "_fts")) {
+          continue;
+        }
+
         qLog(Info) << "Updating" << table << "for" << kMagicAllSongsTables;
         QString new_command(command);
         new_command.replace(kMagicAllSongsTables, table);

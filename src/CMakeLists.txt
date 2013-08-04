@@ -1,6 +1,6 @@
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare -Wno-deprecated-declarations --std=c++0x -U__STRICT_ANSI__")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare -Wno-deprecated-declarations -Wno-unused-local-typedefs -Wno-unused-private-field -Wno-unknown-warning-option --std=c++0x -U__STRICT_ANSI__")
 
 option(BUILD_WERROR "Build with -Werror" ON)
 
@@ -25,10 +25,6 @@ if (QT_VERSION_MINOR GREATER 5)
   endif(QT_VERSION_MINOR GREATER 7)
 endif(QT_VERSION_MINOR GREATER 5)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
-
-if(ENABLE_IMOBILEDEVICE AND IMOBILEDEVICE_VERSION VERSION_GREATER 1.1.1)
-  set(IMOBILEDEVICE_USES_UDIDS ON)
-endif()
 
 include_directories(${CMAKE_BINARY_DIR})
 include_directories(${GLIB_INCLUDE_DIRS})
@@ -62,6 +58,8 @@ endif(HAVE_BREAKPAD)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-remote)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-remote)
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
@@ -112,10 +110,12 @@ set(SOURCES
   core/urlhandler.cpp
   core/utilities.cpp
 
+  covers/albumcoverexporter.cpp
   covers/albumcoverfetcher.cpp
   covers/albumcoverfetchersearch.cpp
   covers/albumcoverloader.cpp
   covers/amazoncoverprovider.cpp
+  covers/coverexportrunnable.cpp
   covers/coverprovider.cpp
   covers/coverproviders.cpp
   covers/coversearchstatistics.cpp
@@ -192,6 +192,9 @@ set(SOURCES
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
   internet/soundcloudservice.cpp
+  internet/subsonicservice.cpp
+  internet/subsonicsettingspage.cpp
+  internet/subsonicurlhandler.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -212,6 +215,13 @@ set(SOURCES
   musicbrainz/musicbrainzclient.cpp
   musicbrainz/tagfetcher.cpp
 
+  networkremote/incomingdataparser.cpp
+  networkremote/networkremote.cpp
+  networkremote/networkremotehelper.cpp
+  networkremote/outgoingdatacreator.cpp
+  networkremote/remoteclient.cpp
+  networkremote/zeroconf.cpp
+
   playlist/dynamicplaylistcontrols.cpp
   playlist/playlist.cpp
   playlist/playlistbackend.cpp
@@ -223,6 +233,7 @@ set(SOURCES
   playlist/playlistitem.cpp
   playlist/playlistlistcontainer.cpp
   playlist/playlistlistmodel.cpp
+  playlist/playlistlistview.cpp
   playlist/playlistmanager.cpp
   playlist/playlistsequence.cpp
   playlist/playlisttabbar.cpp
@@ -240,6 +251,7 @@ set(SOURCES
   playlistparsers/parserbase.cpp
   playlistparsers/playlistparser.cpp
   playlistparsers/plsparser.cpp
+  playlistparsers/wplparser.cpp
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
 
@@ -299,6 +311,7 @@ set(SOURCES
   transcoder/transcoderoptionsdialog.cpp
   transcoder/transcoderoptionsflac.cpp
   transcoder/transcoderoptionsmp3.cpp
+  transcoder/transcoderoptionsopus.cpp
   transcoder/transcoderoptionsspeex.cpp
   transcoder/transcoderoptionsvorbis.cpp
   transcoder/transcoderoptionswma.cpp
@@ -307,6 +320,7 @@ set(SOURCES
   ui/about.cpp
   ui/addstreamdialog.cpp
   ui/albumcoverchoicecontroller.cpp
+  ui/albumcoverexport.cpp
   ui/albumcovermanager.cpp
   ui/albumcovermanagerlist.cpp
   ui/albumcoversearcher.cpp
@@ -323,6 +337,7 @@ set(SOURCES
   ui/iconloader.cpp
   ui/mainwindow.cpp
   ui/networkproxysettingspage.cpp
+  ui/networkremotesettingspage.cpp
   ui/notificationssettingspage.cpp
   ui/organisedialog.cpp
   ui/organiseerrordialog.cpp
@@ -344,6 +359,7 @@ set(SOURCES
   widgets/equalizerslider.cpp
   widgets/errordialog.cpp
   widgets/fancytabwidget.cpp
+  widgets/favoritewidget.cpp
   widgets/fileview.cpp
   widgets/fileviewlist.cpp
   widgets/forcescrollperpixel.cpp
@@ -401,10 +417,12 @@ set(HEADERS
   core/taskmanager.h
   core/urlhandler.h
 
+  covers/albumcoverexporter.h
   covers/albumcoverfetcher.h
   covers/albumcoverfetchersearch.h
   covers/albumcoverloader.h
   covers/amazoncoverprovider.h
+  covers/coverexportrunnable.h
   covers/coverprovider.h
   covers/coverproviders.h
   covers/coversearchstatisticsdialog.h
@@ -467,6 +485,9 @@ set(HEADERS
   internet/somafmservice.h
   internet/somafmurlhandler.h
   internet/soundcloudservice.h
+  internet/subsonicservice.h
+  internet/subsonicsettingspage.h
+  internet/subsonicurlhandler.h
 
   library/groupbydialog.h
   library/library.h
@@ -482,6 +503,12 @@ set(HEADERS
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
   musicbrainz/tagfetcher.h
+  
+  networkremote/networkremotehelper.h
+  networkremote/networkremote.h
+  networkremote/incomingdataparser.h
+  networkremote/outgoingdatacreator.h
+  networkremote/remoteclient.h
 
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h
@@ -493,6 +520,7 @@ set(HEADERS
   playlist/playlistitemmimedata.h
   playlist/playlistlistcontainer.h
   playlist/playlistlistmodel.h
+  playlist/playlistlistview.h
   playlist/playlistmanager.h
   playlist/playlistsequence.h
   playlist/playlisttabbar.h
@@ -565,6 +593,7 @@ set(HEADERS
   ui/about.h
   ui/addstreamdialog.h
   ui/albumcoverchoicecontroller.h
+  ui/albumcoverexport.h
   ui/albumcovermanager.h
   ui/albumcovermanagerlist.h
   ui/albumcoversearcher.h
@@ -579,6 +608,7 @@ set(HEADERS
   ui/globalshortcutssettingspage.h
   ui/mainwindow.h
   ui/networkproxysettingspage.h
+  ui/networkremotesettingspage.h
   ui/notificationssettingspage.h
   ui/organisedialog.h
   ui/organiseerrordialog.h
@@ -599,6 +629,7 @@ set(HEADERS
   widgets/equalizerslider.h
   widgets/errordialog.h
   widgets/fancytabwidget.h
+  widgets/favoritewidget.h
   widgets/fileview.h
   widgets/fileviewlist.h
   widgets/freespacebar.h
@@ -642,6 +673,7 @@ set(UI
   internet/magnatunesettingspage.ui
   internet/searchboxwidget.ui
   internet/spotifysettingspage.ui
+  internet/subsonicsettingspage.ui
 
   library/groupbydialog.ui
   library/libraryfilterwidget.ui
@@ -676,6 +708,7 @@ set(UI
   transcoder/transcoderoptionsdialog.ui
   transcoder/transcoderoptionsflac.ui
   transcoder/transcoderoptionsmp3.ui
+  transcoder/transcoderoptionsopus.ui
   transcoder/transcoderoptionsspeex.ui
   transcoder/transcoderoptionsvorbis.ui
   transcoder/transcoderoptionswma.ui
@@ -683,6 +716,7 @@ set(UI
 
   ui/about.ui
   ui/addstreamdialog.ui
+  ui/albumcoverexport.ui
   ui/albumcovermanager.ui
   ui/albumcoversearcher.ui
   ui/appearancesettingspage.ui
@@ -696,6 +730,7 @@ set(UI
   ui/globalshortcutssettingspage.ui
   ui/mainwindow.ui
   ui/networkproxysettingspage.ui
+  ui/networkremotesettingspage.ui
   ui/notificationssettingspage.ui
   ui/organisedialog.ui
   ui/organiseerrordialog.ui
@@ -827,6 +862,7 @@ optional_source(APPLE
     core/mac_startup.mm
     core/scoped_nsautorelease_pool.mm
     devices/macdevicelister.mm
+    networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp
     ui/macsystemtrayicon.mm
@@ -839,7 +875,13 @@ optional_source(APPLE
 )
 
 # Platform specific - Windows
-optional_source(WIN32 SOURCES widgets/osd_win.cpp)
+optional_source(WIN32
+  SOURCES
+    networkremote/tinysvcmdns.cpp
+    widgets/osd_win.cpp
+  INCLUDE_DIRECTORIES
+    ${CMAKE_SOURCE_DIR}/3rdparty/tinysvcmdns
+)
 
 # Platform specific - X11
 optional_source(LINUX SOURCES widgets/osd_x11.cpp)
@@ -890,6 +932,34 @@ if(HAVE_DBUS)
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
 
+  # org.freedesktop.Avahi.Server interface
+  add_custom_command(
+      OUTPUT
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h
+      COMMAND ${QT_DBUSXML2CPP_EXECUTABLE}
+      dbus/org.freedesktop.Avahi.Server.xml
+      -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver
+      -i dbus/metatypes.h
+      DEPENDS dbus/org.freedesktop.Avahi.Server.xml
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h)
+  list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp)
+
+  # org.freedesktop.Avahi.EntryGroup interface
+  add_custom_command(
+      OUTPUT
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h
+      COMMAND ${QT_DBUSXML2CPP_EXECUTABLE}
+      dbus/org.freedesktop.Avahi.EntryGroup.xml
+      -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup
+      -i dbus/metatypes.h
+      DEPENDS dbus/org.freedesktop.Avahi.EntryGroup.xml
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h)
+  list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp)
+
   # DeviceKit DBUS interfaces
   if(HAVE_DEVICEKIT)
     qt4_add_dbus_interface(SOURCES
@@ -913,6 +983,7 @@ optional_source(HAVE_DBUS
     core/mpris.cpp
     core/mpris1.cpp
     core/mpris2.cpp
+    networkremote/avahi.cpp
     ui/dbusscreensaver.cpp
   HEADERS
     core/mpris.h
@@ -964,25 +1035,6 @@ optional_source(HAVE_AUDIOCD
     devices/cddalister.h
 )
 
-# libimobiledevice backend and device
-optional_source(HAVE_IMOBILEDEVICE
-  INCLUDE_DIRECTORIES
-    ${IMOBILEDEVICE_INCLUDE_DIRS}
-    ${PLIST_INCLUDE_DIRS}
-    ${PLISTPP_INCLUDE_DIRS}
-  SOURCES
-    devices/afcdevice.cpp
-    devices/afcfile.cpp
-    devices/afctransfer.cpp
-    devices/ilister.cpp
-    devices/imobiledeviceconnection.cpp
-  HEADERS
-    devices/afcdevice.h
-    devices/afcfile.h
-    devices/afctransfer.h
-    devices/ilister.h
-)
-
 # mtp device
 optional_source(HAVE_LIBMTP
   INCLUDE_DIRECTORIES ${LIBMTP_INCLUDE_DIRS}
@@ -993,20 +1045,6 @@ optional_source(HAVE_LIBMTP
   HEADERS
     devices/mtpdevice.h
     devices/mtploader.h
-)
-
-# Windows media lister
-optional_source(WIN32
-  SOURCES
-    devices/wmdmdevice.cpp
-    devices/wmdmlister.cpp
-    devices/wmdmloader.cpp
-    devices/wmdmprogress.cpp
-    devices/wmdmthread.cpp
-  HEADERS
-    devices/wmdmdevice.h
-    devices/wmdmlister.h
-    devices/wmdmloader.h
 )
 
 # Moodbar support
@@ -1084,6 +1122,20 @@ optional_source(HAVE_SKYDRIVE
     internet/skydriveurlhandler.h
 )
 
+# Box support
+optional_source(HAVE_BOX
+  SOURCES
+    internet/boxservice.cpp
+    internet/boxsettingspage.cpp
+    internet/boxurlhandler.cpp
+  HEADERS
+    internet/boxservice.h
+    internet/boxsettingspage.h
+    internet/boxurlhandler.h
+  UI
+    internet/boxsettingspage.ui
+)
+
 # Hack to add Clementine to the Unity system tray whitelist
 optional_source(LINUX
   SOURCES core/ubuntuunityhack.cpp
@@ -1145,6 +1197,7 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   libclementine-common
   libclementine-tagreader
+  libclementine-remote
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
   ${MYGPOQT_LIBRARIES}
@@ -1186,17 +1239,6 @@ if(HAVE_AUDIOCD)
   target_link_libraries(clementine_lib ${CDIO_LIBRARIES})
   target_link_libraries(clementine_lib ${GSTREAMER_CDDA_LIBRARIES})
 endif(HAVE_AUDIOCD)
-
-if(HAVE_IMOBILEDEVICE)
-  target_link_libraries(clementine_lib
-    ${IMOBILEDEVICE_LIBRARIES}
-    ${PLIST_LIBRARIES}
-    ${USBMUXD_LIBRARIES}
-    gstafcsrc
-  )
-  link_directories(${IMOBILEDEVICE_LIBRARY_DIRS})
-  link_directories(${USBMUXD_LIBRARY_DIRS})
-endif(HAVE_IMOBILEDEVICE)
 
 if(HAVE_MOODBAR)
   target_link_libraries(clementine_lib gstmoodbar)
@@ -1254,8 +1296,8 @@ endif(HAVE_STATIC_SQLITE)
 if (WIN32)
   target_link_libraries(clementine_lib
     ${ZLIB_LIBRARIES}
-    ${MSWMDM_LIBRARIES}
     ${QTSPARKLE_LIBRARIES}
+    tinysvcmdns
     qtwin
   )
 endif (WIN32)
@@ -1369,10 +1411,12 @@ if (APPLE)
     DEPENDS ${PROJECT_BINARY_DIR}/clementine.breakpad)
 
   if (APPLE_DEVELOPER_ID)
-    add_custom_command(TARGET clementine
-      POST_BUILD
+    add_custom_target(
+      sign
       COMMAND
-      codesign -s "${APPLE_DEVELOPER_ID}" -fv ${PROJECT_BINARY_DIR}/clementine.app
+      codesign -s ${APPLE_DEVELOPER_ID} -fv ${PROJECT_BINARY_DIR}/clementine.app
+      DEPENDS clementine
+      VERBATIM
     )
   endif()
 

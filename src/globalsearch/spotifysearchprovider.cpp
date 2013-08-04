@@ -28,6 +28,11 @@
 #include "internet/spotifyservice.h"
 #include "playlist/songmimedata.h"
 
+namespace {
+const int kSearchSongLimit = 5;
+const int kSearchAlbumLimit = 20;
+}
+
 SpotifySearchProvider::SpotifySearchProvider(Application* app, QObject* parent)
   : SearchProvider(app, parent),
     server_(NULL),
@@ -78,7 +83,7 @@ void SpotifySearchProvider::SearchAsync(int id, const QString& query) {
   state.tokens_ = TokenizeQuery(query);
 
   const QString query_string = state.tokens_.join(" ");
-  s->Search(query_string, 5, 5);
+  s->Search(query_string, kSearchSongLimit, kSearchAlbumLimit);
   queries_[query_string] = state;
 }
 
@@ -107,6 +112,10 @@ void SpotifySearchProvider::SearchFinishedSlot(const pb::spotify::SearchResponse
     for (int j=0; j < album.track_size() ; ++j) {
       Result result(this);
       SpotifyService::SongFromProtobuf(album.track(j), &result.metadata_);
+
+      // Just use the album index as an id.
+      result.metadata_.set_album_id(i);
+
       ret << result;
     }
   }

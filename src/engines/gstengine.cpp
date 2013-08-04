@@ -26,10 +26,6 @@
 #include "core/taskmanager.h"
 #include "core/utilities.h"
 
-#ifdef HAVE_IMOBILEDEVICE
-# include "gst/afcsrc/gstafcsrc.h"
-#endif
-
 #ifdef HAVE_MOODBAR
 # include "gst/moodbar/spectrum.h"
 #endif
@@ -74,9 +70,9 @@ GstEngine::GstEngine(TaskManager* task_manager)
   : Engine::Base(),
     task_manager_(task_manager),
     buffering_task_id_(-1),
-    delayq_(g_queue_new()),
-    current_sample_(0),
+    latest_buffer_(NULL),
     equalizer_enabled_(false),
+    stereo_balance_(0.0f),
     rg_enabled_(false),
     rg_mode_(0),
     rg_preamp_(0.0),
@@ -85,7 +81,9 @@ GstEngine::GstEngine(TaskManager* task_manager)
     mono_playback_(false),
     seek_timer_(new QTimer(this)),
     timer_id_(-1),
-    next_element_id_(0)
+    next_element_id_(0),
+    is_fading_out_to_pause_(false),
+    has_faded_out_(false)
 {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelayNanosec / kNsecPerMsec);
@@ -99,10 +97,6 @@ GstEngine::~GstEngine() {
 
   current_pipeline_.reset();
 
-  // Destroy scope delay queue
-  ClearScopeBuffers();
-  g_queue_free(delayq_);
-
   // Save configuration
   gst_deinit();
 }
@@ -114,10 +108,6 @@ bool GstEngine::Init() {
 
 void GstEngine::InitialiseGstreamer() {
   gst_init(NULL, NULL);
-
-#ifdef HAVE_IMOBILEDEVICE
-  afcsrc_register_static();
-#endif
 
 #ifdef HAVE_MOODBAR
   gstmoodbar_register_static();
@@ -192,97 +182,44 @@ void GstEngine::AddBufferToScope(GstBuffer* buf, int pipeline_id) {
     return;
   }
 
-  g_queue_push_tail(delayq_, buf);
+  if (latest_buffer_ != NULL) {
+    gst_buffer_unref(latest_buffer_);
+  }
+  latest_buffer_ = buf;
 }
 
 const Engine::Scope& GstEngine::scope() {
-  UpdateScope();
-
-  if (current_sample_ >= kScopeSize) {
-    // ok, we have a full buffer now, so give it to the scope
-    for (int i=0; i< kScopeSize; i++)
-      scope_[i] = current_scope_[i];
-    current_sample_ = 0;
+  if (latest_buffer_ != NULL) {
+    UpdateScope();
   }
 
   return scope_;
 }
 
 void GstEngine::UpdateScope() {
-  typedef int16_t sampletype;
-
-  // prune the scope and get the current pos of the audio device
-  const quint64 pos = PruneScope();
-  const quint64 segment_start = current_pipeline_->segment_start();
-
-  // head of the delay queue is the most delayed, so we work with that one
-  GstBuffer *buf = reinterpret_cast<GstBuffer *>( g_queue_peek_head(delayq_) );
-  if (!buf)
-    return;
-
-  // start time for this buffer
-  quint64 stime = GST_BUFFER_TIMESTAMP(buf) - segment_start;
-  // duration of the buffer...
-  quint64 dur = GST_BUFFER_DURATION(buf);
-  // therefore we can calculate the end time for the buffer
-  quint64 etime = stime + dur;
+  typedef Engine::Scope::value_type sample_type;
 
   // determine the number of channels
-  GstStructure* structure = gst_caps_get_structure ( GST_BUFFER_CAPS( buf ), 0);
+  GstStructure* structure = gst_caps_get_structure(
+      GST_BUFFER_CAPS(latest_buffer_), 0);
   int channels = 2;
-  gst_structure_get_int (structure, "channels", &channels);
+  gst_structure_get_int(structure, "channels", &channels);
 
   // scope does not support >2 channels
   if (channels > 2)
     return;
 
-  // if the audio device is playing this buffer now
-  if (pos <= stime || pos >= etime)
-    return;
+  const sample_type* source = reinterpret_cast<sample_type*>(
+      GST_BUFFER_DATA(latest_buffer_));
+  sample_type* dest = scope_.data();
+  const int bytes = qMin(
+        static_cast<Engine::Scope::size_type>(GST_BUFFER_SIZE(latest_buffer_)),
+        scope_.size() * sizeof(sample_type));
 
-  // calculate the number of samples in the buffer
-  int sz = GST_BUFFER_SIZE(buf) / sizeof(sampletype);
-  // number of frames is the number of samples in each channel (frames like in the alsa sense)
-  int frames = sz / channels;
+  memcpy(dest, source, bytes);
 
-  // find the offset into the buffer to the sample closest to where the audio device is playing
-  // it is the (time into the buffer cooresponding to the audio device pos) / (the sample rate)
-  // sample rate = duration of the buffer / number of frames in the buffer
-  // then we multiply by the number of channels to find the offset of the left channel sample
-  // of the frame in the buffer
-  int off = channels * (pos - stime) / (dur / frames);
-
-  // note that we are assuming 32 bit samples, but this should probably be generalized...
-  sampletype* data = reinterpret_cast<sampletype *>(GST_BUFFER_DATA(buf));
-  if (off >= sz) // better be...
-    return;
-
-  int i = off; // starting at offset
-
-  // loop while we fill the current buffer.  If we need another buffer and one is available,
-  // get it and keep filling.  If there are no more buffers available (not too likely)
-  // then leave everything in this state and wait until the next time the scope updates
-  while (buf && current_sample_ < kScopeSize && i < sz) {
-    for (int j = 0; j < channels && current_sample_ < kScopeSize; j++) {
-      current_scope_[current_sample_ ++] = data[i + j];
-    }
-    i+=channels; // advance to the next frame
-
-    if (i >= sz - 1) {
-      // here we are out of samples in the current buffer, so we get another one
-      buf = reinterpret_cast<GstBuffer *>( g_queue_pop_head(delayq_) );
-      gst_buffer_unref(buf);
-      buf = reinterpret_cast<GstBuffer *>( g_queue_peek_head(delayq_) );
-      if (buf) {
-        stime = GST_BUFFER_TIMESTAMP(buf);
-        dur = GST_BUFFER_DURATION(buf);
-        etime = stime + dur;
-        i = 0;
-        sz = GST_BUFFER_SIZE(buf) / sizeof(sampletype);
-        data = reinterpret_cast<sampletype *>(GST_BUFFER_DATA(buf));
-      }
-    }
-  }
+  gst_buffer_unref(latest_buffer_);
+  latest_buffer_ = NULL;
 }
 
 void GstEngine::StartPreloading(const QUrl& url, bool force_stop_at_end,
@@ -349,6 +286,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
   SetVolume(volume_);
   SetEqualizerEnabled(equalizer_enabled_);
   SetEqualizerParameters(equalizer_preamp_, equalizer_gains_);
+  SetStereoBalance(stereo_balance_);
 
   // Maybe fade in this track
   if (crossfade)
@@ -358,15 +296,34 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
 }
 
 void GstEngine::StartFadeout() {
+  if (is_fading_out_to_pause_)
+    return;
+
   fadeout_pipeline_ = current_pipeline_;
   disconnect(fadeout_pipeline_.get(), 0, 0, 0);
   fadeout_pipeline_->RemoveAllBufferConsumers();
-  ClearScopeBuffers();
 
   fadeout_pipeline_->StartFader(fadeout_duration_nanosec_, QTimeLine::Backward);
   connect(fadeout_pipeline_.get(), SIGNAL(FaderFinished()), SLOT(FadeoutFinished()));
 }
 
+void GstEngine::StartFadeoutPause() {
+  fadeout_pause_pipeline_ = current_pipeline_;
+  disconnect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+
+  fadeout_pause_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
+                                      QTimeLine::Backward,
+                                      QTimeLine::EaseInOutCurve,
+                                      false);
+  if (fadeout_pipeline_ && fadeout_pipeline_->state() == GST_STATE_PLAYING) {
+    fadeout_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
+                                  QTimeLine::Backward,
+                                  QTimeLine::LinearCurve,
+                                  false);
+  }
+  connect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()), SLOT(FadeoutPauseFinished()));
+  is_fading_out_to_pause_ = true;
+}
 
 bool GstEngine::Play(quint64 offset_nanosec) {
   EnsureInitialised();
@@ -379,6 +336,10 @@ bool GstEngine::Play(quint64 offset_nanosec) {
         PlayFutureWatcherArg(offset_nanosec, current_pipeline_->id()), this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(PlayDone()));
+
+  if (is_fading_out_to_pause_) {
+    current_pipeline_->SetState(GST_STATE_PAUSED);
+  }
 
   return true;
 }
@@ -413,8 +374,6 @@ void GstEngine::PlayDone() {
 
   StartTimers();
 
-  current_sample_ = 0;
-
   // initial offset
   if(offset_nanosec != 0 || beginning_nanosec_ != 0) {
     Seek(offset_nanosec);
@@ -445,15 +404,46 @@ void GstEngine::FadeoutFinished() {
   emit FadeoutFinishedSignal();
 }
 
+void GstEngine::FadeoutPauseFinished() {
+  fadeout_pause_pipeline_->SetState(GST_STATE_PAUSED);
+  current_pipeline_->SetState(GST_STATE_PAUSED);
+  emit StateChanged(Engine::Paused);
+  StopTimers();
+
+  is_fading_out_to_pause_ = false;
+  has_faded_out_ = true;
+  fadeout_pause_pipeline_.reset();
+  fadeout_pipeline_.reset();
+
+  emit FadeoutFinishedSignal();
+}
+
 void GstEngine::Pause() {
   if (!current_pipeline_ || current_pipeline_->is_buffering())
     return;
 
-  if ( current_pipeline_->state() == GST_STATE_PLAYING ) {
-    current_pipeline_->SetState(GST_STATE_PAUSED);
-    emit StateChanged(Engine::Paused);
+  // Check if we started a fade out. If it isn't finished yet and the user
+  // pressed play, we inverse the fader and resume the playback.
+  if (is_fading_out_to_pause_) {
+    disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+    current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
+                                  QTimeLine::Forward,
+                                  QTimeLine::EaseInOutCurve,
+                                  false);
+    is_fading_out_to_pause_ = false;
+    has_faded_out_ = false;
+    emit StateChanged(Engine::Playing);
+    return;
+  }
 
-    StopTimers();
+  if ( current_pipeline_->state() == GST_STATE_PLAYING ) {
+    if (fadeout_pause_enabled_) {
+      StartFadeoutPause();
+    } else {
+      current_pipeline_->SetState(GST_STATE_PAUSED);
+      emit StateChanged(Engine::Paused);
+      StopTimers();
+    }
   }
 }
 
@@ -463,6 +453,19 @@ void GstEngine::Unpause() {
 
   if ( current_pipeline_->state() == GST_STATE_PAUSED ) {
     current_pipeline_->SetState(GST_STATE_PLAYING);
+
+    // Check if we faded out last time. If yes, fade in no matter what the
+    // settings say. If we pause with fadeout, deactivate fadeout and resume
+    // playback, the player would be muted if not faded in.
+    if (has_faded_out_) {
+      disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+      current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
+                                          QTimeLine::Forward,
+                                          QTimeLine::EaseInOutCurve,
+                                          false);
+      has_faded_out_ = false;
+    }
+
     emit StateChanged(Engine::Playing);
 
     StartTimers();
@@ -489,10 +492,9 @@ void GstEngine::SeekNow() {
   if (!current_pipeline_)
     return;
 
-  if (current_pipeline_->Seek(seek_pos_))
-    ClearScopeBuffers();
-  else
+  if (!current_pipeline_->Seek(seek_pos_)) {
     qLog(Warning) << "Seek failed";
+  }
 }
 
 void GstEngine::SetEqualizerEnabled(bool enabled) {
@@ -509,6 +511,13 @@ void GstEngine::SetEqualizerParameters(int preamp, const QList<int>& band_gains)
 
   if (current_pipeline_)
     current_pipeline_->SetEqualizerParams(preamp, band_gains);
+}
+
+void GstEngine::SetStereoBalance(float value) {
+  stereo_balance_ = value;
+
+  if (current_pipeline_)
+    current_pipeline_->SetStereoBalance(value);
 }
 
 void GstEngine::SetVolumeSW( uint percent ) {
@@ -533,11 +542,6 @@ void GstEngine::timerEvent(QTimerEvent* e) {
   if (e->timerId() != timer_id_)
     return;
 
-  // keep the scope from building while we are not visible
-  // this is why the timer must run as long as we are playing, and not just when
-  // we are fading
-  PruneScope();
-
   if (current_pipeline_) {
     const qint64 current_position = position_nanosec();
     const qint64 current_length = length_nanosec();
@@ -545,7 +549,10 @@ void GstEngine::timerEvent(QTimerEvent* e) {
     const qint64 remaining = current_length - current_position;
 
     const qint64 fudge = kTimerIntervalNanosec + 100 * kNsecPerMsec; // Mmm fudge
-    const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_nanosec_ : kPreloadGapNanosec;
+    const qint64 gap = buffer_duration_nanosec_ + (
+        autocrossfade_enabled_ ?
+            fadeout_duration_nanosec_ :
+            kPreloadGapNanosec);
 
     // only if we know the length of the current stream...
     if(current_length > 0) {
@@ -592,7 +599,6 @@ void GstEngine::EndOfStreamReached(int pipeline_id, bool has_next_track) {
     current_pipeline_.reset();
     BufferingFinished();
   }
-  ClearScopeBuffers();
   emit TrackEnded();
 }
 
@@ -670,7 +676,6 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   connect(ret.get(), SIGNAL(Error(int, QString,int,int)), SLOT(HandlePipelineError(int, QString,int,int)));
   connect(ret.get(), SIGNAL(MetadataFound(int, Engine::SimpleMetaBundle)),
           SLOT(NewMetaData(int, Engine::SimpleMetaBundle)));
-  connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeBuffers()));
   connect(ret.get(), SIGNAL(BufferingStarted()), SLOT(BufferingStarted()));
   connect(ret.get(), SIGNAL(BufferingProgress(int)), SLOT(BufferingProgress(int)));
   connect(ret.get(), SIGNAL(BufferingFinished()), SLOT(BufferingFinished()));
@@ -696,48 +701,6 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url,
     ret.reset();
 
   return ret;
-}
-
-qint64 GstEngine::PruneScope() {
-  if (!current_pipeline_)
-    return 0;
-
-  // get the position playing in the audio device
-  const qint64 pos = current_pipeline_->position();
-  const qint64 segment_start = current_pipeline_->segment_start();
-
-  GstBuffer *buf = 0;
-  quint64 etime = 0;
-
-  // free up the buffers that the audio device has advanced past already
-  do {
-    // most delayed buffers are at the head of the queue
-    buf = reinterpret_cast<GstBuffer *>( g_queue_peek_head(delayq_) );
-    if (buf) {
-      // the start time of the buffer
-      quint64 stime = GST_BUFFER_TIMESTAMP(buf) - segment_start;
-      // the duration of the buffer
-      quint64 dur = GST_BUFFER_DURATION(buf);
-      // therefore we can calculate the end time of the buffer
-      etime = stime + dur;
-
-      // purge this buffer if the pos is past the end time of the buffer
-      if (pos > qint64(etime)) {
-        g_queue_pop_head(delayq_);
-        gst_buffer_unref(buf);
-      }
-    }
-  } while (buf && pos > qint64(etime));
-
-  return pos;
-}
-
-void GstEngine::ClearScopeBuffers() {
-  // just free them all
-  while (g_queue_get_length(delayq_)) {
-    GstBuffer* buf = reinterpret_cast<GstBuffer *>( g_queue_pop_head(delayq_) );
-    gst_buffer_unref(buf);
-  }
 }
 
 bool GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString &name) {

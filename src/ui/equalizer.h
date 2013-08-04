@@ -52,10 +52,12 @@ class Equalizer : public QDialog {
   int preamp_value() const;
   QList<int> gain_values() const;
   Params current_params() const;
+  float stereo_balance() const;
 
  signals:
   void EnabledChanged(bool enabled);
   void ParametersChanged(int preamp, const QList<int>& band_gains);
+  void StereoBalanceChanged(float balance);
 
  protected:
   void closeEvent(QCloseEvent *);
@@ -67,6 +69,7 @@ class Equalizer : public QDialog {
   void SavePreset();
   void DelPreset();
   void Save();
+  void StereoSliderChanged(int value);
 
  private:
   EqualizerSlider* AddSlider(const QString& label);

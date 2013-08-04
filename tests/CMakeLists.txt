@@ -60,7 +60,7 @@ set(TESTUTILS-SOURCES
   test_utils.cpp
   testobjectdecorators.cpp
 
-  ${CMAKE_SOURCE_DIR}/ext/clementine-tagreader/fmpsparser.cpp
+  ${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader/fmpsparser.cpp
 )
 
 set(TESTUTILS-MOC-HEADERS
@@ -143,6 +143,7 @@ add_test_file(utilities_test.cpp false)
 #add_test_file(xspfparser_test.cpp false)
 add_test_file(closure_test.cpp false)
 add_test_file(concurrentrun_test.cpp false)
+add_test_file(zeroconf_test.cpp false)
 
 #if(LINUX AND HAVE_DBUS)
 #  add_test_file(mpris1_test.cpp true)

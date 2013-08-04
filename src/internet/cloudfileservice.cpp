@@ -45,6 +45,7 @@ CloudFileService::CloudFileService(
   library_sort_model_->setSourceModel(library_model_);
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
+  library_sort_model_->setSortLocaleAware(true);
   library_sort_model_->sort(0);
 
   app->global_search()->AddProvider(new LibrarySearchProvider(
@@ -176,6 +177,7 @@ bool CloudFileService::IsSupportedMimeType(const QString& mime_type) const {
          mime_type == "audio/mpeg" ||
          mime_type == "audio/mp4" ||
          mime_type == "audio/flac" ||
+         mime_type == "audio/x-flac" ||
          mime_type == "application/ogg" ||
          mime_type == "application/x-flac" ||
          mime_type == "audio/x-ms-wma";

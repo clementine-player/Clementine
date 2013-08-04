@@ -39,8 +39,6 @@ public:
   ~PlaylistListContainer();
 
   void SetApplication(Application* app);
-  void SetActions(QAction* new_playlist, QAction* load_playlist,
-                  QAction* save_playlist);
 
 protected:
   void showEvent(QShowEvent* e);
@@ -50,15 +48,18 @@ private slots:
   // From the UI
   void NewFolderClicked();
   void DeleteClicked();
-  void ViewIndexSelected(const QModelIndex& index);
+  void ItemDoubleClicked(const QModelIndex& index);
 
   // From the model
   void PlaylistPathChanged(int id, const QString& new_path);
 
   // From the PlaylistManager
-  void PlaylistAdded(int id, const QString& name);
   void PlaylistRenamed(int id, const QString& new_name);
-  void PlaylistDeleted(int id);
+  // Add playlist if favorite == true
+  void AddPlaylist(int id, const QString& name, bool favorite);
+  void RemovePlaylist(int id);
+  void SavePlaylist();
+  void PlaylistFavoriteStateChanged(int id, bool favorite);
   void CurrentChanged(Playlist* new_playlist);
   void ActiveChanged(Playlist* new_playlist);
 
@@ -76,15 +77,12 @@ private:
 
   void UpdateActiveIcon(int id, const QIcon& icon);
 
-private:
   Application* app_;
   Ui_PlaylistListContainer* ui_;
   QMenu* menu_;
 
   QAction* action_new_folder_;
-  QAction* action_new_playlist_;
   QAction* action_remove_;
-  QAction* action_load_playlist_;
   QAction* action_save_playlist_;
 
   PlaylistListModel* model_;

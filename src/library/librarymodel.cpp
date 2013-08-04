@@ -101,7 +101,8 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
 
   connect(backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
   connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
-  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
+  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsSlightlyChanged(SongList)));
+  connect(backend_, SIGNAL(SongsRatingChanged(SongList)), SLOT(SongsSlightlyChanged(SongList)));
   connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
   connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(TotalSongCountUpdatedSlot(int)));
 
@@ -180,6 +181,8 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
           case GroupBy_Album:       key = song.album(); break;
           case GroupBy_Artist:      key = song.artist(); break;
           case GroupBy_Composer:    key = song.composer(); break;
+          case GroupBy_Performer:   key = song.performer(); break;
+          case GroupBy_Grouping:    key = song.grouping(); break;
           case GroupBy_Genre:       key = song.genre(); break;
           case GroupBy_AlbumArtist: key = song.effective_albumartist(); break;
           case GroupBy_Year:
@@ -217,7 +220,7 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
   }
 }
 
-void LibraryModel::SongsStatisticsChanged(const SongList& songs) {
+void LibraryModel::SongsSlightlyChanged(const SongList& songs) {
   // This is called if there was a minor change to the songs that will not
   // normally require the library to be restructured.  We can just update our
   // internal cache of Song objects without worrying about resetting the model.
@@ -256,6 +259,8 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
   case GroupBy_Album:
   case GroupBy_Artist:
   case GroupBy_Composer:
+  case GroupBy_Performer:
+  case GroupBy_Grouping:
   case GroupBy_Genre:
   case GroupBy_AlbumArtist:
   case GroupBy_FileType: {
@@ -289,6 +294,8 @@ QString LibraryModel::DividerDisplayText(GroupBy type, const QString& key) const
   case GroupBy_Album:
   case GroupBy_Artist:
   case GroupBy_Composer:
+  case GroupBy_Performer:
+  case GroupBy_Grouping:
   case GroupBy_Genre:
   case GroupBy_AlbumArtist:
   case GroupBy_FileType:
@@ -714,6 +721,12 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
   case GroupBy_Composer:
     q->SetColumnSpec("DISTINCT composer");
     break;
+  case GroupBy_Performer:
+    q->SetColumnSpec("DISTINCT performer");
+    break;
+  case GroupBy_Grouping:
+    q->SetColumnSpec("DISTINCT grouping");
+    break;
   case GroupBy_YearAlbum:
     q->SetColumnSpec("DISTINCT year, album");
     break;
@@ -761,6 +774,12 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q)
     break;
   case GroupBy_Composer:
     q->AddWhere("composer", item->key);
+    break;
+  case GroupBy_Performer:
+    q->AddWhere("performer", item->key);
+    break;
+  case GroupBy_Grouping:
+    q->AddWhere("grouping", item->key);
     break;
   case GroupBy_Genre:
     q->AddWhere("genre", item->key);
@@ -829,6 +848,8 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
     break;
 
   case GroupBy_Composer:
+  case GroupBy_Performer:
+  case GroupBy_Grouping:
   case GroupBy_Genre:
   case GroupBy_Album:
   case GroupBy_AlbumArtist:
@@ -883,6 +904,8 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
     break;
 
   case GroupBy_Composer:                      item->key = s.composer();
+  case GroupBy_Performer:                     item->key = s.performer();
+  case GroupBy_Grouping:                      item->key = s.grouping();
   case GroupBy_Genre: if (item->key.isNull()) item->key = s.genre();
   case GroupBy_Album: if (item->key.isNull()) item->key = s.album();
   case GroupBy_AlbumArtist: if (item->key.isNull()) item->key = s.effective_albumartist();

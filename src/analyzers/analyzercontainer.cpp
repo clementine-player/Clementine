@@ -123,7 +123,11 @@ void AnalyzerContainer::mouseDoubleClickEvent(QMouseEvent *) {
     visualisation_action_->trigger();
 }
 
-void AnalyzerContainer::SetEngine(EngineBase *engine) {
+void AnalyzerContainer::wheelEvent(QWheelEvent* e) {
+  emit WheelEvent(e->delta());
+}
+
+void AnalyzerContainer::SetEngine(EngineBase* engine) {
   if (current_analyzer_)
     current_analyzer_->set_engine(engine);
   engine_ = engine;

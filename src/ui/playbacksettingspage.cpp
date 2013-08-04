@@ -74,6 +74,8 @@ void PlaybackSettingsPage::Load() {
   ui_->fading_auto->setChecked(s.value("AutoCrossfadeEnabled", false).toBool());
   ui_->fading_duration->setValue(s.value("FadeoutDuration", 2000).toInt());
   ui_->fading_samealbum->setChecked(s.value("NoCrossfadeSameAlbum", true).toBool());
+  ui_->fadeout_pause->setChecked(s.value("FadeoutPauseEnabled", false).toBool());
+  ui_->fading_pause_duration->setValue(s.value("FadeoutPauseDuration", 250).toInt());
   s.endGroup();
 
   s.beginGroup(GstEngine::kSettingsGroup);
@@ -108,6 +110,8 @@ void PlaybackSettingsPage::Save() {
   s.setValue("CrossfadeEnabled", ui_->fading_cross->isChecked());
   s.setValue("AutoCrossfadeEnabled", ui_->fading_auto->isChecked());
   s.setValue("NoCrossfadeSameAlbum", ui_->fading_samealbum->isChecked());
+  s.setValue("FadeoutPauseEnabled", ui_->fadeout_pause->isChecked());
+  s.setValue("FadeoutPauseDuration", ui_->fading_pause_duration->value());
   s.endGroup();
 
   s.beginGroup(GstEngine::kSettingsGroup);

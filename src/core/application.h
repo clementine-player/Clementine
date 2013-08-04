@@ -36,6 +36,8 @@ class LibraryBackend;
 class LibraryModel;
 class MoodbarController;
 class MoodbarLoader;
+class NetworkRemote;
+class NetworkRemoteHelper;
 class Player;
 class PlaylistBackend;
 class PodcastDownloader;
@@ -52,6 +54,11 @@ class Application : public QObject {
 public:
   Application(QObject* parent = NULL);
   ~Application();
+
+  const QString& language_name() const { return language_name_; }
+  // Same as language_name, but remove the region code at the end if there is one
+  QString language_without_region() const;
+  void set_language_name(const QString& name) { language_name_ = name; }
 
   TagReaderClient* tag_reader_client() const { return tag_reader_client_; }
   Database* database() const { return database_; }
@@ -73,6 +80,8 @@ public:
   GPodderSync* gpodder_sync() const { return gpodder_sync_; }
   MoodbarLoader* moodbar_loader() const { return moodbar_loader_; }
   MoodbarController* moodbar_controller() const { return moodbar_controller_; }
+  NetworkRemote* network_remote() const { return network_remote_; }
+  NetworkRemoteHelper* network_remote_helper() const { return network_remote_helper_; }
 
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
@@ -91,6 +100,8 @@ signals:
   void SettingsDialogRequested(SettingsDialog::Page page);
 
 private:
+  QString language_name_;
+
   TagReaderClient* tag_reader_client_;
   Database* database_;
   AlbumCoverLoader* album_cover_loader_;
@@ -111,6 +122,8 @@ private:
   GPodderSync* gpodder_sync_;
   MoodbarLoader* moodbar_loader_;
   MoodbarController* moodbar_controller_;
+  NetworkRemote* network_remote_;
+  NetworkRemoteHelper* network_remote_helper_;
 
   QList<QObject*> objects_in_threads_;
   QList<QThread*> threads_;

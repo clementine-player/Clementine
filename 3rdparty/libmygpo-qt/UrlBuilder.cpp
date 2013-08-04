@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -22,6 +22,7 @@
 
 
 #include "UrlBuilder.h"
+#include "Config.h"
 
 #include <QString>
 #include <QStringBuilder>
@@ -29,7 +30,7 @@
 
 using namespace mygpo;
 
-const QString UrlBuilder::s_server = QLatin1String( "http://gpodder.net" );
+const QString UrlBuilder::s_server = Config::instance()->mygpoBaseUrl().toString();
 const QString UrlBuilder::s_api2 = QLatin1String( "/api/2" );
 const QString UrlBuilder::s_api1 = QLatin1String( "/api/1" );
 

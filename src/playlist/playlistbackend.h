@@ -39,12 +39,14 @@ class PlaylistBackend : public QObject {
   struct Playlist {
     Playlist()
       : id(-1),
+        favorite(false),
         last_played(0) {
     }
 
     int id;
     QString name;
     QString ui_path;
+    bool favorite;
     int last_played;
     QString dynamic_type;
     QString dynamic_backend;
@@ -59,10 +61,12 @@ class PlaylistBackend : public QObject {
 
   static const int kSongTableJoins;
 
-  PlaylistList GetAllOpenPlaylists();
   PlaylistList GetAllPlaylists();
+  PlaylistList GetAllOpenPlaylists();
+  PlaylistList GetAllFavoritePlaylists();
   PlaylistBackend::Playlist GetPlaylist(int id);
   PlaylistItemFuture GetPlaylistItems(int playlist);
+  QFuture<Song> GetPlaylistSongs(int playlist);
 
   void SetPlaylistOrder(const QList<int>& ids);
   void SetPlaylistUiPath(int id, const QString& path);
@@ -71,6 +75,7 @@ class PlaylistBackend : public QObject {
   void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
                          int last_played, smart_playlists::GeneratorPtr dynamic);
   void RenamePlaylist(int id, const QString& new_name);
+  void FavoritePlaylist(int id, bool is_favorite);
   void RemovePlaylist(int id);
 
  public slots:
@@ -83,10 +88,18 @@ class PlaylistBackend : public QObject {
     QMutex mutex_;
   };
 
-  PlaylistItemPtr NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
+  QList<SqlRow> GetPlaylistRows(int playlist);
+
+  Song NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
+  PlaylistItemPtr NewPlaylistItemFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
   PlaylistItemPtr RestoreCueData(PlaylistItemPtr item, boost::shared_ptr<NewSongFromQueryState> state);
 
-  PlaylistList GetPlaylists(bool open_in_ui);
+  enum GetPlaylistsFlags {
+    GetPlaylists_OpenInUi = 1,
+    GetPlaylists_Favorite = 2,
+    GetPlaylists_All = GetPlaylists_OpenInUi | GetPlaylists_Favorite
+  };
+  PlaylistList GetPlaylists(GetPlaylistsFlags flags);
 
   Application* app_;
   Database* db_;

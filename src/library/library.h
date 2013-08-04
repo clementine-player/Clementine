@@ -49,6 +49,8 @@ class Library : public QObject {
 
   QString full_rescan_reason(int schema_version) const { return full_rescan_revisions_.value(schema_version, QString()); }
 
+  void WriteAllSongsStatisticsToFiles();
+
  public slots:
   void ReloadSettings();
 

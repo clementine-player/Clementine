@@ -25,8 +25,8 @@ using namespace std;
 using namespace Chromaprint;
 
 FFTLib::FFTLib(int frame_size, double *window)
-	: m_frame_size(frame_size),
-	  m_window(window)
+	: m_window(window),
+	  m_frame_size(frame_size)
 {
 	m_input = (double *)fftw_malloc(sizeof(double) * frame_size);
 	m_output = (double *)fftw_malloc(sizeof(double) * frame_size);

@@ -55,8 +55,11 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     segment_start_(0),
     segment_start_received_(false),
     emit_track_ended_on_segment_start_(false),
+    emit_track_ended_on_time_discontinuity_(false),
+    last_buffer_offset_(0),
     eq_enabled_(false),
     eq_preamp_(0),
+    stereo_balance_(0.0f),
     rg_enabled_(false),
     rg_mode_(0),
     rg_preamp_(0.0),
@@ -84,6 +87,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     rglimiter_(NULL),
     audioconvert2_(NULL),
     equalizer_(NULL),
+    stereo_panorama_(NULL),
     volume_(NULL),
     audioscale_(NULL),
     audiosink_(NULL)
@@ -243,13 +247,14 @@ bool GstEnginePipeline::Init() {
   audio_queue       = engine_->CreateElement("queue",            audiobin_);
   equalizer_preamp_ = engine_->CreateElement("volume",           audiobin_);
   equalizer_        = engine_->CreateElement("equalizer-nbands", audiobin_);
+  stereo_panorama_  = engine_->CreateElement("audiopanorama",    audiobin_);
   volume_           = engine_->CreateElement("volume",           audiobin_);
   audioscale_       = engine_->CreateElement("audioresample",    audiobin_);
   convert           = engine_->CreateElement("audioconvert",     audiobin_);
 
   if (!queue_ || !audioconvert_ || !tee || !probe_queue || !probe_converter ||
       !probe_sink || !audio_queue || !equalizer_preamp_ || !equalizer_ ||
-      !volume_ || !audioscale_ || !convert) {
+      !stereo_panorama_ || !volume_ || !audioscale_ || !convert) {
     return false;
   }
 
@@ -279,20 +284,20 @@ bool GstEnginePipeline::Init() {
 
   // Create a pad on the outside of the audiobin and connect it to the pad of
   // the first element.
-  GstPad* pad = gst_element_get_pad(queue_, "sink");
+  GstPad* pad = gst_element_get_static_pad(queue_, "sink");
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
   gst_object_unref(pad);
 
   // Add a data probe on the src pad of the audioconvert element for our scope.
   // We do it here because we want pre-equalized and pre-volume samples
   // so that our visualization are not be affected by them.
-  pad = gst_element_get_pad(event_probe, "src");
+  pad = gst_element_get_static_pad(event_probe, "src");
   gst_pad_add_event_probe(pad, G_CALLBACK(EventHandoffCallback), this);
   gst_object_unref(pad);
 
   // Configure the fakesink properly
   g_object_set(G_OBJECT(probe_sink), "sync", TRUE, NULL);
-  
+
   // Set the equalizer bands
   g_object_set(G_OBJECT(equalizer_), "num-bands", 10, NULL);
 
@@ -310,6 +315,9 @@ bool GstEnginePipeline::Init() {
     g_object_unref(G_OBJECT(band));
   }
 
+  // Set the stereo balance.
+  g_object_set(G_OBJECT(stereo_panorama_), "panorama", stereo_balance_, NULL);
+
   // Set the buffer duration.  We set this on this queue instead of the
   // decode bin (in ReplaceDecodeBin()) because setting it on the decode bin
   // only affects network sources.
@@ -325,7 +333,7 @@ bool GstEnginePipeline::Init() {
   }
 
   gst_element_link(queue_, audioconvert_);
-  
+
   // Create the caps to put in each path in the tee.  The scope path gets 16-bit
   // ints and the audiosink path gets float32.
   GstCaps* caps16 = gst_caps_new_simple ("audio/x-raw-int",
@@ -346,8 +354,8 @@ bool GstEnginePipeline::Init() {
   gst_caps_unref(caps32);
 
   // Link the outputs of tee to the queues on each path.
-  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_pad(probe_queue, "sink"));
-  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_pad(audio_queue, "sink"));
+  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_static_pad(probe_queue, "sink"));
+  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_static_pad(audio_queue, "sink"));
 
   // Link replaygain elements if enabled.
   if (rg_enabled_) {
@@ -356,11 +364,11 @@ bool GstEnginePipeline::Init() {
 
   // Link everything else.
   gst_element_link(probe_queue, probe_converter);
-  gst_element_link_many(audio_queue, equalizer_preamp_, equalizer_, volume_,
-                        audioscale_, convert, audiosink_, NULL);
+  gst_element_link_many(audio_queue, equalizer_preamp_, equalizer_, stereo_panorama_,
+                        volume_, audioscale_, convert, audiosink_, NULL);
 
   // Add probes and handlers.
-  gst_pad_add_buffer_probe(gst_element_get_pad(probe_converter, "src"), G_CALLBACK(HandoffCallback), this);
+  gst_pad_add_buffer_probe(gst_element_get_static_pad(probe_converter, "src"), G_CALLBACK(HandoffCallback), this);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
 
@@ -647,7 +655,7 @@ void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
 
 void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
-  GstPad* const audiopad = gst_element_get_pad(instance->audiobin_, "sink");
+  GstPad* const audiopad = gst_element_get_static_pad(instance->audiobin_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Warning) << instance->id() << "audiopad is already linked, unlinking old pad";
@@ -700,7 +708,6 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
           // GstEngine will try to seek to the start of the new section, but
           // we're already there so ignore it.
           instance->ignore_next_seek_ = true;
-
           emit instance->EndOfStreamReached(instance->id(), true);
         } else {
           // We have a next song but we can't cheat, so move to it normally.
@@ -712,6 +719,17 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
       }
     }
   }
+
+  if (instance->emit_track_ended_on_time_discontinuity_) {
+    if (GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DISCONT) ||
+        GST_BUFFER_OFFSET(buf) < instance->last_buffer_offset_) {
+      qLog(Debug) << "Buffer discontinuity - emitting EOS";
+      instance->emit_track_ended_on_time_discontinuity_ = false;
+      emit instance->EndOfStreamReached(instance->id(), true);
+    }
+  }
+
+  instance->last_buffer_offset_ = GST_BUFFER_OFFSET(buf);
 
   return true;
 }
@@ -730,8 +748,10 @@ bool GstEnginePipeline::EventHandoffCallback(GstPad*, GstEvent* e, gpointer self
     instance->segment_start_received_ = true;
 
     if (instance->emit_track_ended_on_segment_start_) {
+      qLog(Debug) << "New segment started, EOS will signal on next buffer "
+                     "discontinuity";
       instance->emit_track_ended_on_segment_start_ = false;
-      emit instance->EndOfStreamReached(instance->id(), true);
+      instance->emit_track_ended_on_time_discontinuity_ = true;
     }
   }
 
@@ -879,6 +899,11 @@ void GstEnginePipeline::SetEqualizerParams(int preamp, const QList<int>& band_ga
   UpdateEqualizer();
 }
 
+void GstEnginePipeline::SetStereoBalance(float value) {
+  stereo_balance_ = value;
+  UpdateStereoBalance();
+}
+
 void GstEnginePipeline::UpdateEqualizer() {
   // Update band gains
   for (int i=0 ; i<kEqBandCount ; ++i) {
@@ -901,6 +926,12 @@ void GstEnginePipeline::UpdateEqualizer() {
   g_object_set(G_OBJECT(equalizer_preamp_), "volume", preamp, NULL);
 }
 
+void GstEnginePipeline::UpdateStereoBalance() {
+  if (stereo_panorama_) {
+    g_object_set(G_OBJECT(stereo_panorama_), "panorama", stereo_balance_, NULL);
+  }
+}
+
 void GstEnginePipeline::SetVolume(int percent) {
   volume_percent_ = percent;
   UpdateVolume();
@@ -918,14 +949,23 @@ void GstEnginePipeline::UpdateVolume() {
 
 void GstEnginePipeline::StartFader(qint64 duration_nanosec,
                                    QTimeLine::Direction direction,
-                                   QTimeLine::CurveShape shape) {
+                                   QTimeLine::CurveShape shape,
+                                   bool use_fudge_timer) {
   const int duration_msec = duration_nanosec / kNsecPerMsec;
 
   // If there's already another fader running then start from the same time
   // that one was already at.
   int start_time = direction == QTimeLine::Forward ? 0 : duration_msec;
-  if (fader_ && fader_->state() == QTimeLine::Running)
-    start_time = fader_->currentTime();
+  if (fader_ && fader_->state() == QTimeLine::Running) {
+    if (duration_msec == fader_->duration()) {
+      start_time = fader_->currentTime();
+    } else {
+      // Calculate the position in the new fader with the same value from
+      // the old fader, so no volume jumps appear
+      qreal time = qreal(duration_msec) * (qreal(fader_->currentTime()) / qreal(fader_->duration()));
+      start_time = qRound(time);
+    }
+  }
 
   fader_.reset(new QTimeLine(duration_msec, this));
   connect(fader_.get(), SIGNAL(valueChanged(qreal)), SLOT(SetVolumeModifier(qreal)));
@@ -936,6 +976,7 @@ void GstEnginePipeline::StartFader(qint64 duration_nanosec,
   fader_->resume();
 
   fader_fudge_timer_.stop();
+  use_fudge_timer_ = use_fudge_timer;
 
   SetVolumeModifier(fader_->currentValue());
 }
@@ -946,7 +987,15 @@ void GstEnginePipeline::FaderTimelineFinished() {
   // Wait a little while longer before emitting the finished signal (and
   // probably distroying the pipeline) to account for delays in the audio
   // server/driver.
-  fader_fudge_timer_.start(kFaderFudgeMsec, this);
+  if (use_fudge_timer_) {
+    fader_fudge_timer_.start(kFaderFudgeMsec, this);
+  } else {
+    // Even here we cannot emit the signal directly, as it result in a
+    // stutter when resuming playback. So use a quest small time, so you
+    // won't notice the difference when resuming playback
+    // (You get here when the pause fading is active)
+    fader_fudge_timer_.start(250, this);
+  }
 }
 
 void GstEnginePipeline::timerEvent(QTimerEvent* e) {

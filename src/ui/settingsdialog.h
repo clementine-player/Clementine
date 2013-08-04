@@ -24,6 +24,7 @@
 #include "config.h"
 #include "widgets/osd.h"
 
+class QAbstractButton;
 class QScrollArea;
 class QTreeWidgetItem;
 
@@ -63,6 +64,7 @@ public:
     Page_GlobalShortcuts,
     Page_GlobalSearch,
     Page_Appearance,
+    Page_NetworkRemote,
     Page_Notifications,
     Page_Library,
     Page_Lastfm,
@@ -75,11 +77,13 @@ public:
     Page_Transcoding,
     Page_Remote,
     Page_Wiimotedev,
+    Page_Subsonic,
     Page_Podcasts,
     Page_GoogleDrive,
     Page_UbuntuOne,
     Page_Dropbox,
     Page_Skydrive,
+    Page_Box,
   };
 
   enum Role {
@@ -115,6 +119,7 @@ signals:
 
 private slots:
   void CurrentItemChanged(QTreeWidgetItem* item);
+  void DialogButtonClicked(QAbstractButton* button);
 
 private:
   struct PageData {
@@ -125,6 +130,8 @@ private:
 
   QTreeWidgetItem* AddCategory(const QString& name);
   void AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent = NULL);
+
+  void Save();
 
 private:
   Application* app_;

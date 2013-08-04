@@ -57,7 +57,6 @@ void AcoustidClient::Start(int id, const QString& fingerprint, int duration_msec
   QNetworkRequest req(url);
 
   QNetworkReply* reply = network_->get(req);
-  connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(RequestFinished(QNetworkReply*, int)), reply, id);
   requests_[id] = reply;

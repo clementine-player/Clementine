@@ -378,6 +378,22 @@
     <string>Add song composer tag</string>
    </property>
   </action>
+  <action name="action_performer">
+   <property name="text">
+    <string notr="true">%performer%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song performer tag</string>
+   </property>
+  </action>
+  <action name="action_grouping">
+   <property name="text">
+    <string notr="true">%grouping%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song grouping tag</string>
+   </property>
+  </action>
   <action name="action_disc">
    <property name="text">
     <string notr="true">%disc%</string>
@@ -424,6 +440,22 @@
    </property>
    <property name="toolTip">
     <string>Add song skip count</string>
+   </property>
+  </action>
+  <action name="action_rating">
+   <property name="text">
+    <string notr="true">%rating%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song rating</string>
+   </property>
+  </action>
+  <action name="action_score">
+   <property name="text">
+    <string notr="true">%score%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song auto score</string>
    </property>
   </action>
   <action name="action_newline">

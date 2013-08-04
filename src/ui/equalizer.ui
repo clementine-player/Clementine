@@ -81,6 +81,75 @@
      <layout class="QHBoxLayout" name="horizontalLayout_2"/>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="slider_label_layout">
+     <item>
+      <widget class="QLabel">
+       <property name="text">
+        <string>Left</string>
+       </property>
+       <property name="alignment">
+        <enum>Qt::AlignLeft | Qt::AlignBottom</enum>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel">
+       <property name="text">
+        <string>Balance</string>
+       </property>
+       <property name="alignment">
+        <enum>Qt::AlignCenter</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel">
+       <property name="text">
+        <string>Right</string>
+       </property>
+       <property name="alignment">
+        <enum>Qt::AlignRight | Qt::AlignBottom</enum>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QSlider" name="balance_slider">
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="minimum">
+      <number>-100</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksBelow</enum>
+     </property>
+     <property name="tickInterval">
+      <number>10</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
+     <property name="pageStep">
+      <number>100</number>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>

@@ -103,7 +103,7 @@ QString Chromaprinter::CreateFingerprint() {
   g_object_set(G_OBJECT(sink), "emit-signals", TRUE, NULL);
 
   // Set the filename
-  g_object_set(src, "location", filename_.toLocal8Bit().constData(), NULL);
+  g_object_set(src, "location", filename_.toUtf8().constData(), NULL);
 
   // Connect signals
   CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, this);
@@ -155,6 +155,7 @@ QString Chromaprinter::CreateFingerprint() {
   gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(sink), &callbacks, this, NULL);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
   g_source_remove(bus_callback_id);
+  gst_element_set_state(pipeline_, GST_STATE_NULL);
   gst_object_unref(pipeline_);
 
   return fingerprint;
@@ -162,7 +163,8 @@ QString Chromaprinter::CreateFingerprint() {
 
 void Chromaprinter::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data) {
   Chromaprinter* instance = reinterpret_cast<Chromaprinter*>(data);
-  GstPad* const audiopad = gst_element_get_pad(instance->convert_element_, "sink");
+  GstPad* const audiopad = gst_element_get_static_pad(
+      instance->convert_element_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Warning) << "audiopad is already linked, unlinking old pad";

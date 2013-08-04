@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>509</width>
-    <height>395</height>
+    <height>452</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,6 +91,50 @@
          <string>Monitor the library for changes</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="save_ratings_in_file">
+        <property name="text">
+         <string>Save ratings in file tags when possible</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="save_statistics_in_file">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not checked, Clementine will  try to save your ratings and other statistics only in a separate database and don't modify your files.&lt;/p&gt;&lt;p&gt;If checked, it will save statistics both in database and directly into the file each time they changed.&lt;/p&gt;&lt;p&gt;Please note it might not work for every format and, as there is no standard for doing so, other music players might not be able to read them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>Save statistics in file tags when possible</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QPushButton" name="sync_stats_button">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will write songs' ratings and statistics into files tags for all your library's songs.&lt;/p&gt;&lt;p&gt;This is not needed if the &amp;quot;Save ratings and statistics in file tags&amp;quot; option has always been activated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>Synchronize statistics to files now</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QLabel" name="label_2">

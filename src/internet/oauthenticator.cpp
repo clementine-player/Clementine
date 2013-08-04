@@ -139,7 +139,6 @@ void OAuthenticator::RefreshAuthorisation(
     params.append(QString("%1=%2").arg(p.first, QString(QUrl::toPercentEncoding(p.second))));
   }
   QString post_data = params.join("&");
-  qLog(Debug) << "Refresh post data:" << post_data;
 
   QNetworkRequest request(url);
   request.setHeader(QNetworkRequest::ContentTypeHeader,
@@ -152,7 +151,7 @@ void OAuthenticator::RefreshAuthorisation(
 void OAuthenticator::SetExpiryTime(int expires_in_seconds) {
   // Set the expiry time with two minutes' grace.
   expiry_time_ = QDateTime::currentDateTime().addSecs(expires_in_seconds - 120);
-  qLog(Debug) << "Current Google Drive token expires at:" << expiry_time_;
+  qLog(Debug) << "Current oauth access token expires at:" << expiry_time_;
 }
 
 void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
@@ -162,6 +161,9 @@ void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
 
   QVariantMap result = parser.parse(reply, &ok).toMap();
   access_token_ = result["access_token"].toString();
+  if (result.contains("refresh_token")) {
+    refresh_token_ = result["refresh_token"].toString();
+  }
   SetExpiryTime(result["expires_in"].toInt());
   emit Finished();
 }

@@ -50,6 +50,8 @@ public:
     Field_LastPlayed,
     Field_Comment,
     Field_Filepath,
+    Field_Performer,
+    Field_Grouping,
 
     FieldCount
   };
@@ -77,6 +79,8 @@ public:
 
     // For numeric dates (e.g. not in the last X days)
     Op_NumericDateNot = 10,
+
+    // Next value = 11
   };
 
   enum Type {

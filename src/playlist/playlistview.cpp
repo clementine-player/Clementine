@@ -46,17 +46,16 @@
 # include "moodbar/moodbaritemdelegate.h"
 #endif
 
-const int PlaylistView::kStateVersion = 5;
+const int PlaylistView::kStateVersion = 6;
 const int PlaylistView::kGlowIntensitySteps = 24;
-const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
+const int PlaylistView::kAutoscrollGraceTimeout = 30; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
 const int PlaylistView::kDropIndicatorGradientWidth = 5;
-// Opacity value used by all background images but the default clementine one
-// (because it is already opaque and load through the mainwindow.css file)
-const qreal PlaylistView::kBackgroundOpacity = 0.4;
-
 const char* PlaylistView::kSettingBackgroundImageType = "playlistview_background_type";
 const char* PlaylistView::kSettingBackgroundImageFilename = "playlistview_background_image_file";
+
+const int PlaylistView::kDefaultBlurRadius = 0;
+const int PlaylistView::kDefaultOpacityLevel = 40;
 
 
 PlaylistProxyStyle::PlaylistProxyStyle(QStyle* base)
@@ -193,6 +192,10 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Genre));
   setItemDelegateForColumn(Playlist::Column_Composer,
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Composer));
+  setItemDelegateForColumn(Playlist::Column_Performer,
+      new TagCompletionItemDelegate(this, backend, Playlist::Column_Performer));
+  setItemDelegateForColumn(Playlist::Column_Grouping,
+      new TagCompletionItemDelegate(this, backend, Playlist::Column_Grouping));
   setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Filesize, new SizeItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Filetype, new FileTypeItemDelegate(this));
@@ -208,7 +211,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
 #ifdef HAVE_MOODBAR
   setItemDelegateForColumn(Playlist::Column_Mood, new MoodbarItemDelegate(app_, this, this));
 #endif
-  
+
   if (app_ && app_->player()) {
     setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, app_->player()));
   } else {
@@ -255,6 +258,10 @@ void PlaylistView::setModel(QAbstractItemModel *m) {
                this, SLOT(InvalidateCachedCurrentPixmap()));
     disconnect(model(), SIGNAL(layoutAboutToBeChanged()),
                this, SLOT(RatingHoverOut()));
+    // When changing the model, always invalidate the current pixmap.
+    // If a remote client uses "stop after", without invaliding the stop
+    // mark would not appear.
+    InvalidateCachedCurrentPixmap();
   }
 
   QTreeView::setModel(m);
@@ -287,6 +294,8 @@ void PlaylistView::LoadGeometry() {
       header_->HideSection(Playlist::Column_DateModified);
       header_->HideSection(Playlist::Column_AlbumArtist);
       header_->HideSection(Playlist::Column_Composer);
+      header_->HideSection(Playlist::Column_Performer);
+      header_->HideSection(Playlist::Column_Grouping);
       header_->HideSection(Playlist::Column_Rating);
       header_->HideSection(Playlist::Column_PlayCount);
       header_->HideSection(Playlist::Column_SkipCount);
@@ -303,7 +312,7 @@ void PlaylistView::LoadGeometry() {
   // Clementine.  Hide them again here
   const int state_version = settings.value("state_version", 0).toInt();
   upgrading_from_version_ = state_version;
-  
+
   if (state_version < 1) {
     header_->HideSection(Playlist::Column_Rating);
     header_->HideSection(Playlist::Column_PlayCount);
@@ -318,6 +327,10 @@ void PlaylistView::LoadGeometry() {
   }
   if (state_version < 5) {
     header_->HideSection(Playlist::Column_Mood);
+  }
+  if (state_version < 6) {
+    header_->HideSection(Playlist::Column_Performer);
+    header_->HideSection(Playlist::Column_Grouping);
   }
 
   // Make sure at least one column is visible
@@ -766,7 +779,7 @@ void PlaylistView::scrollContentsBy(int dx, int dy) {
 }
 
 void PlaylistView::InhibitAutoscrollTimeout() {
-  // For 1 minute after the user clicks on or scrolls the playlist we promise
+  // For 30 seconds after the user clicks on or scrolls the playlist we promise
   // not to automatically scroll the view to keep up with a track change.
   inhibit_autoscroll_ = false;
 }
@@ -839,10 +852,15 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       if (height() != last_height_ || width() != last_width_
           || force_background_redraw_) {
 
-        cached_scaled_background_image_ = QPixmap::fromImage(background_image_.scaled(
-            width(), height(),
-            Qt::KeepAspectRatioByExpanding,
-            Qt::SmoothTransformation));
+        if (background_image_.isNull()) {
+          cached_scaled_background_image_ = QPixmap();
+        } else {
+          cached_scaled_background_image_ = QPixmap::fromImage(
+              background_image_.scaled(
+                  width(), height(),
+                  Qt::KeepAspectRatioByExpanding,
+                  Qt::SmoothTransformation));
+        }
 
         last_height_ = height();
         last_width_  = width();
@@ -885,7 +903,7 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
     drawTree(&p, event->region());
     return;
   }
-  
+
   const int first_column = header_->logicalIndex(0);
 
   // Find the y position of the drop indicator
@@ -1019,19 +1037,22 @@ void PlaylistView::ReloadSettings() {
     }
   }
   QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
-  int blur_radius = s.value("blur_radius").toInt();
+  int blur_radius = s.value("blur_radius", kDefaultBlurRadius).toInt();
+  int opacity_level = s.value("opacity_level", kDefaultOpacityLevel).toInt();
   // Check if background properties have changed.
   // We change properties only if they have actually changed, to avoid to call
   // set_background_image when it is not needed, as this will cause the fading
   // animation to start again. This also avoid to do useless
   // "force_background_redraw".
   if (background_image_filename != background_image_filename_ ||
-      background_type != background_image_type_ || 
-      blur_radius_ != blur_radius) {
+      background_type != background_image_type_ ||
+      blur_radius_ != blur_radius ||
+      opacity_level_ != opacity_level) {
     // Store background properties
     background_image_type_ = background_type;
     background_image_filename_ = background_image_filename;
     blur_radius_ = blur_radius;
+    opacity_level_ = opacity_level;
     if (background_image_type_ == Custom) {
       set_background_image(QImage(background_image_filename));
     } else if (background_image_type_ == AlbumCover) {
@@ -1190,25 +1211,28 @@ void PlaylistView::set_background_image(const QImage& image) {
   // Save previous image, for fading
   previous_background_image_ = cached_scaled_background_image_;
 
-  if (image.format() != QImage::Format_ARGB32)
-    background_image_ = image.convertToFormat(QImage::Format_ARGB32);
-  else
+  if (image.isNull() || image.format() == QImage::Format_ARGB32) {
     background_image_ = image;
-
-  // Apply opacity filter
-  uchar* bits = background_image_.bits();
-  for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
-    bits[i+3] = kBackgroundOpacity * 255;
+  } else {
+    background_image_ = image.convertToFormat(QImage::Format_ARGB32);
   }
 
-  if (blur_radius_ != 0) {
-    QImage blurred(background_image_.size(), QImage::Format_ARGB32_Premultiplied);
-    blurred.fill(Qt::transparent);
-    QPainter blur_painter(&blurred);
-    qt_blurImage(&blur_painter, background_image_, blur_radius_, false, true);
-    blur_painter.end();
+  if (!background_image_.isNull()) {
+    // Apply opacity filter
+    uchar* bits = background_image_.bits();
+    for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
+      bits[i+3] = (opacity_level_ / 100.0) * 255;
+    }
 
-    background_image_ = blurred;
+    if (blur_radius_ != 0) {
+      QImage blurred(background_image_.size(), QImage::Format_ARGB32_Premultiplied);
+      blurred.fill(Qt::transparent);
+      QPainter blur_painter(&blurred);
+      qt_blurImage(&blur_painter, background_image_, blur_radius_, true, false);
+      blur_painter.end();
+
+      background_image_ = blurred;
+    }
   }
 
   if (isVisible()) {

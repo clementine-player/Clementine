@@ -48,27 +48,41 @@ PlaylistBackend::PlaylistBackend(Application* app, QObject* parent)
 {
 }
 
-PlaylistBackend::PlaylistList PlaylistBackend::GetAllOpenPlaylists() {
-  return GetPlaylists(true);
-}
-
 PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
-  return GetPlaylists(false);
+  return GetPlaylists(GetPlaylists_All);
 }
 
-PlaylistBackend::PlaylistList PlaylistBackend::GetPlaylists(bool open_in_ui) {
+PlaylistBackend::PlaylistList PlaylistBackend::GetAllOpenPlaylists() {
+  return GetPlaylists(GetPlaylists_OpenInUi);
+}
+
+PlaylistBackend::PlaylistList PlaylistBackend::GetAllFavoritePlaylists() {
+  return GetPlaylists(GetPlaylists_Favorite);
+}
+
+PlaylistBackend::PlaylistList PlaylistBackend::GetPlaylists(GetPlaylistsFlags flags) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   PlaylistList ret;
 
-  const QString open_in_ui_condition = open_in_ui ? "WHERE ui_order != -1" : "";
+  QStringList condition_list;
+  if (flags & GetPlaylists_OpenInUi) {
+    condition_list << "ui_order != -1";
+  }
+  if (flags & GetPlaylists_Favorite) {
+    condition_list << "is_favorite != 0";
+  }
+  QString condition;
+  if (!condition_list.isEmpty()) {
+    condition = " WHERE " + condition_list.join(" OR ");
+  }
 
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
               "       dynamic_playlist_data, dynamic_playlist_backend,"
-              "       special_type, ui_path"
+              "       special_type, ui_path, is_favorite"
               " FROM playlists"
-              " " + open_in_ui_condition +
+              " " + condition +
               " ORDER BY ui_order", db);
   q.exec();
   if (db_->CheckErrors(q))
@@ -84,6 +98,7 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetPlaylists(bool open_in_ui) {
     p.dynamic_backend = q.value(5).toString();
     p.special_type = q.value(6).toString();
     p.ui_path = q.value(7).toString();
+    p.favorite = q.value(8).toBool();
     ret << p;
   }
 
@@ -96,7 +111,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
 
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
               "       dynamic_playlist_data, dynamic_playlist_backend,"
-              "       special_type"
+              "       special_type, ui_path, is_favorite"
               " FROM playlists"
               " WHERE ROWID=:id", db);
   q.bindValue(":id", id);
@@ -114,11 +129,13 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   p.dynamic_data = q.value(4).toByteArray();
   p.dynamic_backend = q.value(5).toString();
   p.special_type = q.value(6).toString();
+  p.ui_path = q.value(7).toString();
+  p.favorite = q.value(8).toBool();
 
   return p;
 }
 
-QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
+QList<SqlRow> PlaylistBackend::GetPlaylistRows(int playlist) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -140,7 +157,7 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
   q.bindValue(":playlist", playlist);
   q.exec();
   if (db_->CheckErrors(q))
-    return QFuture<PlaylistItemPtr>();
+    return QList<SqlRow>();
 
   QList<SqlRow> rows;
 
@@ -148,13 +165,30 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
     rows << SqlRow(q);
   }
 
+  return rows;
+}
+
+QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
+  QMutexLocker l(db_->Mutex());
+  QList<SqlRow> rows = GetPlaylistRows(playlist);
+
+  // it's probable that we'll have a few songs associated with the
+  // same CUE so we're caching results of parsing CUEs
+  boost::shared_ptr<NewSongFromQueryState> state_ptr(new NewSongFromQueryState());
+  return QtConcurrent::mapped(rows, boost::bind(&PlaylistBackend::NewPlaylistItemFromQuery, this, _1, state_ptr));
+}
+
+QFuture<Song> PlaylistBackend::GetPlaylistSongs(int playlist) {
+  QMutexLocker l(db_->Mutex());
+  QList<SqlRow> rows = GetPlaylistRows(playlist);
+
   // it's probable that we'll have a few songs associated with the
   // same CUE so we're caching results of parsing CUEs
   boost::shared_ptr<NewSongFromQueryState> state_ptr(new NewSongFromQueryState());
   return QtConcurrent::mapped(rows, boost::bind(&PlaylistBackend::NewSongFromQuery, this, _1, state_ptr));
 }
 
-PlaylistItemPtr PlaylistBackend::NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state) {
+PlaylistItemPtr PlaylistBackend::NewPlaylistItemFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state) {
   // The song tables get joined first, plus one each for the song ROWIDs
   const int playlist_row = (Song::kColumns.count() + 1) * kSongTableJoins;
 
@@ -165,6 +199,10 @@ PlaylistItemPtr PlaylistBackend::NewSongFromQuery(const SqlRow& row, boost::shar
   } else {
     return item;
   }
+}
+
+Song PlaylistBackend::NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state) {
+  return NewPlaylistItemFromQuery(row, state)->Metadata();
 }
 
 // If song had a CUE and the CUE still exists, the metadata from it will
@@ -325,6 +363,17 @@ void PlaylistBackend::RenamePlaylist(int id, const QString &new_name) {
   QSqlDatabase db(db_->Connect());
   QSqlQuery q("UPDATE playlists SET name=:name WHERE ROWID=:id", db);
   q.bindValue(":name", new_name);
+  q.bindValue(":id", id);
+
+  q.exec();
+  db_->CheckErrors(q);
+}
+
+void PlaylistBackend::FavoritePlaylist(int id, bool is_favorite) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+  QSqlQuery q("UPDATE playlists SET is_favorite=:is_favorite WHERE ROWID=:id", db);
+  q.bindValue(":is_favorite", is_favorite ? 1 : 0);
   q.bindValue(":id", id);
 
   q.exec();

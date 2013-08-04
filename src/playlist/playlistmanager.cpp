@@ -15,7 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "playlist.h"
 #include "playlistbackend.h"
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
@@ -30,7 +29,11 @@
 #include "playlistparsers/playlistparser.h"
 #include "smartplaylists/generator.h"
 
+#include <QFileDialog>
 #include <QFileInfo>
+#include <QFuture>
+#include <QFutureWatcher>
+#include <QMessageBox>
 #include <QtDebug>
 
 using smart_playlists::GeneratorPtr;
@@ -48,6 +51,8 @@ PlaylistManager::PlaylistManager(Application* app, QObject *parent)
   connect(app_->player(), SIGNAL(Paused()), SLOT(SetActivePaused()));
   connect(app_->player(), SIGNAL(Playing()), SLOT(SetActivePlaying()));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(SetActiveStopped()));
+
+  settings_.beginGroup(Playlist::kSettingsGroup);
 }
 
 PlaylistManager::~PlaylistManager() {
@@ -68,9 +73,10 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
 
   connect(library_backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
   connect(library_backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsDiscovered(SongList)));
+  connect(library_backend_, SIGNAL(SongsRatingChanged(SongList)), SLOT(SongsDiscovered(SongList)));
 
   foreach (const PlaylistBackend::Playlist& p, playlist_backend->GetAllOpenPlaylists()) {
-    AddPlaylist(p.id, p.name, p.special_type, p.ui_path);
+    AddPlaylist(p.id, p.name, p.special_type, p.ui_path, p.favorite);
   }
 
   // If no playlist exists then make a new one
@@ -97,9 +103,10 @@ QItemSelection PlaylistManager::selection(int id) const {
 
 Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
                                        const QString& special_type,
-                                       const QString& ui_path) {
+                                       const QString& ui_path,
+                                       bool favorite) {
   Playlist* ret = new Playlist(playlist_backend_, app_->task_manager(),
-                               library_backend_, id, special_type);
+                               library_backend_, id, special_type, favorite);
   ret->set_sequence(sequence_);
   ret->set_ui_path(ui_path);
 
@@ -114,7 +121,7 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
 
   playlists_[id] = Data(ret, name);
 
-  emit PlaylistAdded(id, name);
+  emit PlaylistAdded(id, name, favorite);
 
   if (current_ == -1) {
     SetCurrentPlaylist(id);
@@ -136,7 +143,7 @@ void PlaylistManager::New(const QString& name, const SongList& songs,
   if (id == -1)
     qFatal("Couldn't create playlist");
 
-  Playlist* playlist = AddPlaylist(id, name, special_type, QString());
+  Playlist* playlist = AddPlaylist(id, name, special_type, QString(), false);
   playlist->InsertSongsOrLibraryItems(songs);
 
   SetCurrentPlaylist(id);
@@ -177,10 +184,65 @@ void PlaylistManager::LoadFinished(bool success) {
 }
 
 void PlaylistManager::Save(int id, const QString& filename) {
-  Q_ASSERT(playlists_.contains(id));
+  if (playlists_.contains(id)) {
+    parser_->Save(playlist(id)->GetAllSongs(), filename);
+  } else {
+    // Playlist is not in the playlist manager: probably save action was triggered
+    // from the left side bar and the playlist isn't loaded.
+    QFuture<Song> future = playlist_backend_->GetPlaylistSongs(id);
+    QFutureWatcher<Song>* watcher = new QFutureWatcher<Song>(this);
+    watcher->setFuture(future);
 
-  parser_->Save(playlist(id)->GetAllSongs(), filename);
+    NewClosure(watcher, SIGNAL(finished()),
+        this, SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString)), watcher, filename);
+  }
 }
+
+void PlaylistManager::ItemsLoadedForSavePlaylist(
+    QFutureWatcher<Song>* watcher,
+    const QString& filename) {
+
+  SongList song_list = watcher->future().results();
+  parser_->Save(song_list, filename);
+}
+
+void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
+  QString filename = settings_.value("last_save_playlist").toString();
+
+  // We want to use the playlist tab name as a default filename, but in the
+  // same directory as the last saved file.
+
+  // Strip off filename components until we find something that's a folder
+  forever {
+    QFileInfo fileinfo(filename);
+    if (filename.isEmpty() || fileinfo.isDir())
+      break;
+
+    filename = filename.section('/', 0, -2);
+  }
+
+  // Use the home directory as a fallback in case the path is empty.
+  if (filename.isEmpty())
+    filename = QDir::homePath();
+
+  // Add the suggested filename
+  filename += "/" + suggested_filename +
+              "." + parser()->default_extension();
+
+  QString default_filter = parser()->default_filter();
+
+  filename = QFileDialog::getSaveFileName(
+      NULL, tr("Save playlist"), filename,
+      parser()->filters(), &default_filter);
+
+  if (filename.isNull())
+    return;
+
+  settings_.setValue("last_save_playlist", filename);
+
+  Save(id == -1 ? current_id() : id, filename);
+}
+
 
 void PlaylistManager::Rename(int id, const QString& new_name) {
   Q_ASSERT(playlists_.contains(id));
@@ -189,6 +251,22 @@ void PlaylistManager::Rename(int id, const QString& new_name) {
   playlists_[id].name = new_name;
 
   emit PlaylistRenamed(id, new_name);
+}
+
+void PlaylistManager::Favorite(int id, bool favorite) {
+
+  if (playlists_.contains(id)) {
+    // If playlists_ contains this playlist, its means it's opened: star or unstar it.
+    playlist_backend_->FavoritePlaylist(id, favorite);
+    playlists_[id].p->set_favorite(favorite);
+  } else {
+    Q_ASSERT(!favorite);
+    // Otherwise it means user wants to remove this playlist from the left panel,
+    // while it's not visible in the playlist tabbar either, because it has been
+    // closed: delete it.
+    playlist_backend_->RemovePlaylist(id);
+  }
+  emit PlaylistFavorited(id, favorite);
 }
 
 bool PlaylistManager::Close(int id) {
@@ -212,9 +290,14 @@ bool PlaylistManager::Close(int id) {
     SetCurrentPlaylist(next_id);
 
   Data data = playlists_.take(id);
+  emit PlaylistClosed(id);
+
+  if (!data.p->is_favorite()) {
+    playlist_backend_->RemovePlaylist(id);
+    emit PlaylistDeleted(id);
+  }
   delete data.p;
 
-  emit PlaylistClosed(id);
   return true;
 }
 
@@ -250,6 +333,16 @@ void PlaylistManager::SetActivePlaylist(int id) {
   emit ActiveChanged(active());
 
   sequence_->SetUsingDynamicPlaylist(active()->is_dynamic());
+}
+
+void PlaylistManager::SetActiveToCurrent() {
+  // Check if we need to update the active playlist.
+  // By calling SetActiveToCurrent, the playlist manager emits the signal
+  // "ActiveChanged". This signal causes the network remote module to
+  // send all playlists to the clients, even no change happend.
+  if (current_id() != active_id()) {
+    SetActivePlaylist(current_id());
+  }
 }
 
 void PlaylistManager::ClearCurrent() {
@@ -369,6 +462,19 @@ void PlaylistManager::SongChangeRequestProcessed(const QUrl& url, bool valid) {
   }
 }
 
+void PlaylistManager::InsertUrls(int id, const QList<QUrl> &urls, int pos,
+                                 bool play_now, bool enqueue) {
+  Q_ASSERT(playlists_.contains(id));
+
+  playlists_[id].p->InsertUrls(urls, pos, play_now, enqueue);
+}
+
+void PlaylistManager::RemoveItemsWithoutUndo(int id, const QList<int> &indices) {
+  Q_ASSERT(playlists_.contains(id));
+
+  playlists_[id].p->RemoveItemsWithoutUndo(indices);
+}
+
 void PlaylistManager::InvalidateDeletedSongs() {
   foreach(Playlist* playlist, GetAllPlaylists()) {
     playlist->InvalidateDeletedSongs();
@@ -428,10 +534,14 @@ void PlaylistManager::Open(int id) {
     return;
   }
 
-  AddPlaylist(p.id, p.name, p.special_type, p.ui_path);
+  AddPlaylist(p.id, p.name, p.special_type, p.ui_path, p.favorite);
 }
 
 void PlaylistManager::SetCurrentOrOpen(int id) {
   Open(id);
   SetCurrentPlaylist(id);
+}
+
+bool PlaylistManager::IsPlaylistOpen(int id) {
+  return playlists_.contains(id);
 }

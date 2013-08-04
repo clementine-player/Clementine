@@ -38,6 +38,7 @@ void TranscoderSettingsPage::Load() {
   ui_->transcoding_speex->Load();
   ui_->transcoding_vorbis->Load();
   ui_->transcoding_wma->Load();
+  ui_->transcoding_opus->Load();
 }
 
 void TranscoderSettingsPage::Save() {
@@ -47,4 +48,5 @@ void TranscoderSettingsPage::Save() {
   ui_->transcoding_speex->Save();
   ui_->transcoding_vorbis->Save();
   ui_->transcoding_wma->Save();
+  ui_->transcoding_opus->Load();
 }

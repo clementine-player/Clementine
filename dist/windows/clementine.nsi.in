@@ -9,9 +9,6 @@
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
 
-!define WMDM_DIST_URL "http://clementine-player.googlecode.com/files/wmdmdist.exe"
-!define WMF_DIST_URL  "http://clementine-player.googlecode.com/files/wmfdist.exe"
-
 ; Set Application Capabilities info
 !define CAPABILITIES_NAME "Clementine"
 !define CAPABILITIES_LOCAL_NAME "Clementine"
@@ -32,7 +29,9 @@ SetCompressor /SOLID lzma
 !define MUI_ICON "clementine.ico"
 
 !define MUI_COMPONENTSPAGE_SMALLDESC
-!define MUI_FINISHPAGE_RUN $INSTDIR/clementine.exe
+!define MUI_FINISHPAGE_RUN
+!define MUI_FINISHPAGE_RUN_TEXT "Run Clementine"
+!define MUI_FINISHPAGE_RUN_FUNCTION "RunClementine"
 
 ; Installer pages
 !insertmacro MUI_PAGE_WELCOME
@@ -53,6 +52,10 @@ InstallDir "${PRODUCT_INSTALL_DIR}"
 ShowInstDetails show
 ShowUnInstDetails show
 RequestExecutionLevel admin
+
+Function RunClementine
+  ShellExecAsUser::ShellExecAsUser "" "$INSTDIR/clementine.exe"
+FunctionEnd
 
 Section "Delete old files" oldfiles
   ; Delete files from older versions
@@ -110,6 +113,11 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\avutil-50.dll"
   Delete "$INSTDIR\libcdio-12.dll"
   Delete "$INSTDIR\libgcc_s_dw2-1.dll"
+
+  ; libimobiledevice removal
+  Delete "$INSTDIR\libimobiledevice-1.dll"
+  Delete "$INSTDIR\libplist.dll"
+  Delete "$INSTDIR\libusbmuxd.dll"
 SectionEnd
 
 Section "Clementine" Clementine
@@ -159,7 +167,6 @@ Section "Clementine" Clementine
   File "libgsttag-0.10-0.dll"
   File "libgthread-2.0-0.dll"
   File "libid3tag.dll"
-  File "libimobiledevice-1.dll"
   File "liblastfm.dll"
   File "libmad.dll"
   File "libmms-0.dll"
@@ -178,7 +185,6 @@ Section "Clementine" Clementine
   File "libstdc++-6.dll"
   File "libtag.dll"
   File "libtasn1-3.dll"
-  File "libusbmuxd.dll"
   File "libvorbis-0.dll"
   File "libvorbisenc-2.dll"
   File "libxml2-2.dll"
@@ -902,41 +908,6 @@ Section "Uninstaller"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 SectionEnd
 
-Section "Windows Media Device Manager"
-  GetDllVersion "$SYSDIR\mswmdm.dll" $R8 $R9
-  IntOp $R7 $R8 / 0x00010000
-  IntCmp $R7 9 end downloadwmf end  # Major version >= 9
-
-downloadwmf:
-  StrCpy $1 "wmfdist.exe"
-  NSISdl::download ${WMF_DIST_URL} "$TEMP\$1"
-  Pop $R0
-  StrCmp $R0 "success" downloadwmdm
-  MessageBox MB_OK|MB_ICONSTOP "Error while downloading $1."
-  Quit
-
-downloadwmdm:
-  StrCpy $1 "wmdmdist.exe"
-  NSISdl::download ${WMDM_DIST_URL} "$TEMP\$1"
-  Pop $R0
-  StrCmp $R0 "success" install
-  MessageBox MB_OK|MB_ICONSTOP "Error while downloading $1."
-  Quit
-
-install:
-  DetailPrint "Installing the Windows Media Format 9 redistributable"
-  ExecWait "$TEMP\wmfdist.exe /Q"
-
-  DetailPrint "Installing the Windows Media Device Manager 9 redistributable"
-  ExecWait "$TEMP\wmdmdist.exe /Q"
-
-  Delete "$TEMP\wmfdist.exe"
-  Delete "$TEMP\wmdmdist.exe"
-
-end:
-  DetailPrint "WMDM redistributable installed"
-SectionEnd
-
 Section "Uninstall"
   ; Kill clementine.exe if it's running
   ; This calling convention is retarded...
@@ -962,23 +933,23 @@ Section "Uninstall"
   completed:
   
   ; Delete all the files
-  Delete "$INSTDIR\avcodec-52.dll"
-  Delete "$INSTDIR\avformat-52.dll"
-  Delete "$INSTDIR\avutil-50.dll"
+  Delete "$INSTDIR\avcodec-53.dll"
+  Delete "$INSTDIR\avformat-53.dll"
+  Delete "$INSTDIR\avutil-51.dll"
   Delete "$INSTDIR\clementine.ico"
   Delete "$INSTDIR\clementine.exe"
   Delete "$INSTDIR\clementine-tagreader.exe"
   Delete "$INSTDIR\clementine-spotifyblob.exe"
   Delete "$INSTDIR\glew32.dll"
   Delete "$INSTDIR\intl.dll"
-  Delete "$INSTDIR\libcdio-12.dll"
+  Delete "$INSTDIR\libcdio-14.dll"
   Delete "$INSTDIR\libeay32.dll"
   Delete "$INSTDIR\libexpat-1.dll"
   Delete "$INSTDIR\libfaac.dll"
   Delete "$INSTDIR\libfaad.dll"
   Delete "$INSTDIR\libfftw3-3.dll"
   Delete "$INSTDIR\libFLAC.dll"
-  Delete "$INSTDIR\libgcc_s_dw2-1.dll"
+  Delete "$INSTDIR\libgcc_s_sjlj-1.dll"
   Delete "$INSTDIR\libgcrypt-11.dll"
   Delete "$INSTDIR\libgdk_pixbuf-2.0-0.dll"
   Delete "$INSTDIR\libgio-2.0-0.dll"
@@ -1022,6 +993,7 @@ Section "Uninstall"
   Delete "$INSTDIR\libsoup-2.4-1.dll"
   Delete "$INSTDIR\libspeex-1.dll"
   Delete "$INSTDIR\libspotify.dll"
+  Delete "$INSTDIR\libstdc++-6.dll"
   Delete "$INSTDIR\libtag.dll"
   Delete "$INSTDIR\libtasn1-3.dll"
   Delete "$INSTDIR\libusbmuxd.dll"

@@ -25,7 +25,8 @@ static const char* kOAuthHeaderPrefix = "OAuth realm=\"\", ";
 
 UbuntuOneAuthenticator::UbuntuOneAuthenticator(QObject* parent)
   : QObject(parent),
-    network_(new NetworkAccessManager(this)) {
+    network_(new NetworkAccessManager(this)),
+    success_(false) {
 }
 
 void UbuntuOneAuthenticator::StartAuthorisation(
@@ -65,6 +66,7 @@ void UbuntuOneAuthenticator::AuthorisationFinished(QNetworkReply* reply) {
   QVariant json = parser.parse(data, &ok);
   if (!ok) {
     qLog(Error) << "Failed to authenticate to Ubuntu One:" << parser.errorString();
+    emit Finished();
     return;
   }
 
@@ -135,5 +137,6 @@ void UbuntuOneAuthenticator::CopySSOTokens() {
 void UbuntuOneAuthenticator::CopySSOTokensFinished(QNetworkReply* reply) {
   reply->deleteLater();
   qLog(Debug) << reply->readAll();
+  success_ = true;
   emit Finished();
 }

@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -22,10 +22,6 @@
 
 #ifndef LIBMYGPO_QT_APIREQUEST_H
 #define LIBMYGPO_QT_APIREQUEST_H
-
-#define MYGPO_MAJOR_VERSION 1
-#define MYGPO_MINOR_VERSION 0
-#define MYGPO_PATCH_VERSION 5
 
 #include "mygpo_export.h"
 #include "AddRemoveResult.h"
@@ -60,9 +56,9 @@ public:
     ApiRequest( const QString& username, const QString& password, QNetworkAccessManager* nam );
     ApiRequest( QNetworkAccessManager* nam );
     ~ApiRequest( );
-    
+
     //SIMPLE API
-    
+
     /**
      * Returns the OPML Result for the Simple API Call "Downloading Podcast Toplists"
      * @param count The number of Podcasts that should be returned - will be set to to 100 if > 100 or < 1
@@ -87,7 +83,7 @@ public:
      *
      */
     QNetworkReply* suggestionsOpml( uint count );
-    
+
     QNetworkReply* downloadSubscriptionsOpml( const QString& username, const QString& device );
 
     /**
@@ -114,7 +110,7 @@ public:
      *
      */
     QNetworkReply* suggestionsTxt( uint count );
-    
+
     QNetworkReply* downloadSubscriptionsTxt( const QString& username, const QString& device );
 
     /**
@@ -394,6 +390,8 @@ public:
     AddRemoveResultPtr uploadEpisodeActions( const QString& username, const QList<EpisodeActionPtr>& episodeActions );
 
     DeviceSyncResultPtr deviceSynchronizationStatus( const QString& username );
+
+    DeviceSyncResultPtr setDeviceSynchronizationStatus( const QString& username, const QList<QStringList>& synchronize, const QList<QString>& stopSynchronize );
 
 private:
     ApiRequestPrivate* const d;

@@ -30,6 +30,8 @@
 #include "globalsearch/globalsearch.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
+#include "networkremote/networkremote.h"
+#include "networkremote/networkremotehelper.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
 #include "podcasts/gpoddersync.h"
@@ -63,7 +65,9 @@ Application::Application(QObject* parent)
     podcast_downloader_(NULL),
     gpodder_sync_(NULL),
     moodbar_loader_(NULL),
-    moodbar_controller_(NULL)
+    moodbar_controller_(NULL),
+    network_remote_(NULL),
+    network_remote_helper_(NULL)
 {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
@@ -99,6 +103,16 @@ Application::Application(QObject* parent)
   moodbar_loader_ = new MoodbarLoader(this, this);
   moodbar_controller_ = new MoodbarController(this, this);
 #endif
+
+  // Network Remote
+  network_remote_ = new NetworkRemote(this);
+  MoveToNewThread(network_remote_);
+
+  // This must be before libraray_->Init();
+  // In the constructor the helper waits for the signal PlaylistManagerInitialized
+  // to start the remote. Without the playlist manager clementine can
+  // crash when a client connects before the manager is initialized!
+  network_remote_helper_ = new NetworkRemoteHelper(this);
 
   library_->Init();
 
@@ -141,6 +155,14 @@ void Application::MoveToThread(QObject* object, QThread* thread) {
 
 void Application::AddError(const QString& message) {
   emit ErrorAdded(message);
+}
+
+QString Application::language_without_region() const {
+  const int underscore = language_name_.indexOf('_');
+  if (underscore != -1) {
+    return language_name_.left(underscore);
+  }
+  return language_name_;
 }
 
 LibraryBackend* Application::library_backend() const {

@@ -101,7 +101,9 @@ private:
 
   QModelIndex MapToMergedModel(const QModelIndex& index) const;
 
-  void SetListened(const QModelIndexList& indexes, bool listened);
+  void SetListened(const QModelIndexList& episode_indexes,
+                   const QModelIndexList& podcast_indexes,
+                   bool listened);
   
   void LazyLoadRoot();
 
@@ -130,6 +132,7 @@ private:
   QAction* set_listened_action_;
   QStandardItem* root_;
 
+  QModelIndexList explicitly_selected_podcasts_;
   QModelIndexList selected_podcasts_;
   QModelIndexList selected_episodes_;
 

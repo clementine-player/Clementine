@@ -9,16 +9,22 @@
 #include "internet/ubuntuoneauthenticator.h"
 #include "internet/ubuntuoneservice.h"
 
+#include <QMessageBox>
+
 UbuntuOneSettingsPage::UbuntuOneSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),
       ui_(new Ui::UbuntuOneSettingsPage),
       service_(dialog()->app()->internet_model()->Service<UbuntuOneService>()),
       authenticated_(false) {
   ui_->setupUi(this);
-  ui_->login_state->AddCredentialGroup(ui_->login_container);
-  connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));
 
-  dialog()->installEventFilter(this);
+  ui_->login_state->AddCredentialField(ui_->username);
+  ui_->login_state->AddCredentialField(ui_->password);
+  ui_->login_state->AddCredentialGroup(ui_->login_container);
+
+  connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
+  connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(LoginClicked()));
+  connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));
 }
 
 void UbuntuOneSettingsPage::Load() {
@@ -33,18 +39,12 @@ void UbuntuOneSettingsPage::Load() {
 }
 
 void UbuntuOneSettingsPage::Save() {
-  QSettings s;
-  s.beginGroup(UbuntuOneService::kSettingsGroup);
-
-  if (authenticated_) {
-    s.setValue("user_email", ui_->username->text());
-  }
 }
 
 void UbuntuOneSettingsPage::LoginClicked() {
-  ui_->login_button->setEnabled(false);
-  QString username = ui_->username->text();
-  QString password = ui_->password->text();
+  const QString username = ui_->username->text();
+  const QString password = ui_->password->text();
+  ui_->password->clear();
 
   UbuntuOneAuthenticator* authenticator = new UbuntuOneAuthenticator;
   authenticator->StartAuthorisation(username, password);
@@ -53,22 +53,34 @@ void UbuntuOneSettingsPage::LoginClicked() {
   NewClosure(authenticator, SIGNAL(Finished()),
              service_, SLOT(AuthenticationFinished(UbuntuOneAuthenticator*)),
              authenticator);
+
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
 }
 
 void UbuntuOneSettingsPage::LogoutClicked() {
+  QSettings s;
+  s.beginGroup(UbuntuOneService::kSettingsGroup);
+  s.remove("user_email");
+  s.remove("consumer_key");
+  s.remove("consumer_secret");
+  s.remove("token");
+  s.remove("token_secret");
 
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
 }
 
 void UbuntuOneSettingsPage::Connected(UbuntuOneAuthenticator* authenticator) {
-  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, ui_->username->text());
-  authenticated_ = true;
-}
-
-bool UbuntuOneSettingsPage::eventFilter(QObject* object, QEvent* event) {
-  if (object == dialog() && event->type() == QEvent::Enter) {
-    ui_->login_button->setEnabled(true);
-    return false;
+  if (!authenticator->success()) {
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
+    QMessageBox::warning(this, tr("Authentication failed"),
+                         tr("Your username or password was incorrect."));
+    return;
   }
 
-  return SettingsPage::eventFilter(object, event);
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, ui_->username->text());
+  authenticated_ = true;
+
+  QSettings s;
+  s.beginGroup(UbuntuOneService::kSettingsGroup);
+  s.setValue("user_email", ui_->username->text());
 }

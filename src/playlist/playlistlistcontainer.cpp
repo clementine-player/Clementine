@@ -59,10 +59,8 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
     ui_(new Ui_PlaylistListContainer),
     menu_(NULL),
     action_new_folder_(new QAction(this)),
-    action_new_playlist_(NULL),
     action_remove_(new QAction(this)),
-    action_load_playlist_(NULL),
-    action_save_playlist_(NULL),
+    action_save_playlist_(new QAction(this)),
     model_(new PlaylistListModel(this)),
     proxy_(new PlaylistListSortFilterModel(this)),
     loaded_icons_(false),
@@ -73,12 +71,15 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
 
   action_new_folder_->setText(tr("New folder"));
   action_remove_->setText(tr("Delete"));
+  action_save_playlist_->setText(tr("Save playlist"));
 
   ui_->new_folder->setDefaultAction(action_new_folder_);
   ui_->remove->setDefaultAction(action_remove_);
+  ui_->save_playlist->setDefaultAction(action_save_playlist_);
 
   connect(action_new_folder_, SIGNAL(triggered()), SLOT(NewFolderClicked()));
   connect(action_remove_, SIGNAL(triggered()), SLOT(DeleteClicked()));
+  connect(action_save_playlist_, SIGNAL(triggered()), SLOT(SavePlaylist()));
   connect(model_, SIGNAL(PlaylistPathChanged(int,QString)),
           SLOT(PlaylistPathChanged(int,QString)));
 
@@ -87,9 +88,8 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
   proxy_->sort(0);
   ui_->tree->setModel(proxy_);
 
-  connect(ui_->tree->selectionModel(),
-          SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-          SLOT(ViewIndexSelected(QModelIndex)));
+  connect(ui_->tree, SIGNAL(doubleClicked(QModelIndex)),
+                     SLOT(ItemDoubleClicked(QModelIndex)));
 
   model_->invisibleRootItem()->setData(PlaylistListModel::Type_Folder, PlaylistListModel::Role_Type);
 }
@@ -107,6 +107,7 @@ void PlaylistListContainer::showEvent(QShowEvent* e) {
 
   action_new_folder_->setIcon(IconLoader::Load("folder-new"));
   action_remove_->setIcon(IconLoader::Load("edit-delete"));
+  action_save_playlist_->setIcon(IconLoader::Load("document-save"));
 
   model_->SetIcons(IconLoader::Load("view-media-playlist"),
                    IconLoader::Load("folder"));
@@ -138,10 +139,10 @@ void PlaylistListContainer::SetApplication(Application* app) {
   PlaylistManager* manager = app_->playlist_manager();
   Player* player = app_->player();
 
-  connect(manager, SIGNAL(PlaylistAdded(int,QString)),
-          SLOT(PlaylistAdded(int,QString)));
-  connect(manager, SIGNAL(PlaylistDeleted(int)),
-          SLOT(PlaylistDeleted(int)));
+  connect(manager, SIGNAL(PlaylistAdded(int,QString,bool)),
+          SLOT(AddPlaylist(int,QString,bool)));
+  connect(manager, SIGNAL(PlaylistFavorited(int,bool)),
+          SLOT(PlaylistFavoriteStateChanged(int,bool)));
   connect(manager, SIGNAL(PlaylistRenamed(int,QString)),
           SLOT(PlaylistRenamed(int,QString)));
   connect(manager, SIGNAL(CurrentChanged(Playlist*)),
@@ -158,24 +159,11 @@ void PlaylistListContainer::SetApplication(Application* app) {
 
   // Get all playlists, even ones that are hidden in the UI.
   foreach (const PlaylistBackend::Playlist& p,
-           app->playlist_backend()->GetAllPlaylists()) {
+           app->playlist_backend()->GetAllFavoritePlaylists()) {
     QStandardItem* playlist_item = model_->NewPlaylist(p.name, p.id);
     QStandardItem* parent_folder = model_->FolderByPath(p.ui_path);
     parent_folder->appendRow(playlist_item);
   }
-}
-
-void PlaylistListContainer::SetActions(QAction* new_playlist,
-                                       QAction* load_playlist,
-                                       QAction* save_playlist) {
-  // Set the actions on the buttons in the toolbar.
-  ui_->new_playlist->setDefaultAction(new_playlist);
-  ui_->load_playlist->setDefaultAction(load_playlist);
-  ui_->save_playlist->setDefaultAction(save_playlist);
-
-  action_new_playlist_ = new_playlist;
-  action_load_playlist_ = load_playlist;
-  action_save_playlist_ = save_playlist;
 }
 
 void PlaylistListContainer::NewFolderClicked() {
@@ -190,7 +178,11 @@ void PlaylistListContainer::NewFolderClicked() {
   model_->invisibleRootItem()->appendRow(model_->NewFolder(name));
 }
 
-void PlaylistListContainer::PlaylistAdded(int id, const QString& name) {
+void PlaylistListContainer::AddPlaylist(int id, const QString& name, bool favorite) {
+  if (!favorite) {
+    return;
+  }
+
   if (model_->PlaylistById(id)) {
     // We know about this playlist already - it was probably one of the open
     // ones that was loaded on startup.
@@ -213,7 +205,7 @@ void PlaylistListContainer::PlaylistRenamed(int id, const QString& new_name) {
   item->setText(new_name);
 }
 
-void PlaylistListContainer::PlaylistDeleted(int id) {
+void PlaylistListContainer::RemovePlaylist(int id) {
   QStandardItem* item = model_->PlaylistById(id);
   if (item) {
     QStandardItem* parent = item->parent();
@@ -221,6 +213,28 @@ void PlaylistListContainer::PlaylistDeleted(int id) {
       parent = model_->invisibleRootItem();
     }
     parent->removeRow(item->row());
+  }
+}
+
+void PlaylistListContainer::SavePlaylist() {
+  const QModelIndex& current_index = proxy_->mapToSource(ui_->tree->currentIndex());
+
+  // Is it a playlist?
+  if (current_index.data(PlaylistListModel::Role_Type).toInt() ==
+      PlaylistListModel::Type_Playlist) {
+    const int playlist_id = current_index.data(PlaylistListModel::Role_PlaylistId).toInt();
+    QStandardItem* item = model_->PlaylistById(playlist_id);
+    QString playlist_name = item ? item->text() : tr("Playlist");
+    app_->playlist_manager()->SaveWithUI(playlist_id, playlist_name);
+  }
+}
+
+void PlaylistListContainer::PlaylistFavoriteStateChanged(int id, bool favorite) {
+  if (favorite) {
+    const QString& name = app_->playlist_manager()->GetPlaylistName(id);
+    AddPlaylist(id, name, favorite);
+  } else {
+    RemovePlaylist(id);
   }
 }
 
@@ -254,9 +268,10 @@ void PlaylistListContainer::CurrentChanged(Playlist* new_playlist) {
 void PlaylistListContainer::PlaylistPathChanged(int id, const QString& new_path) {
   // Update the path in the database
   app_->playlist_backend()->SetPlaylistUiPath(id, new_path);
+  app_->playlist_manager()->playlist(id)->set_ui_path(new_path);
 }
 
-void PlaylistListContainer::ViewIndexSelected(const QModelIndex& proxy_index) {
+void PlaylistListContainer::ItemDoubleClicked(const QModelIndex& proxy_index) {
   const QModelIndex& index = proxy_->mapToSource(proxy_index);
 
   // Is it a playlist?
@@ -289,11 +304,11 @@ void PlaylistListContainer::DeleteClicked() {
     }
   }
 
-  // Make sure the user really wants to delete all these playlists.
+  // Make sure the user really wants to unfavorite all these playlists.
   if (ids.count() > 1) {
     const int button =
-        QMessageBox::question(this, tr("Delete playlists"),
-                              tr("You are about to delete %1 playlists, are you sure?").arg(ids.count()),
+        QMessageBox::question(this, tr("Remove playlists"),
+                              tr("You are about to remove %1 playlists from your favorites, are you sure?").arg(ids.count()),
                               QMessageBox::Yes, QMessageBox::Cancel);
 
     if (button != QMessageBox::Yes) {
@@ -301,9 +316,9 @@ void PlaylistListContainer::DeleteClicked() {
     }
   }
 
-  // Delete the playlists
+  // Unfavorite the playlists
   foreach (int id, ids) {
-    app_->playlist_manager()->Delete(id);
+    app_->playlist_manager()->Favorite(id, false);
   }
 
   // Delete the top-level folders.
@@ -332,11 +347,9 @@ void PlaylistListContainer::RecursivelyFindPlaylists(
 void PlaylistListContainer::contextMenuEvent(QContextMenuEvent* e) {
   if (!menu_) {
     menu_ = new QMenu(this);
-    menu_->addAction(action_new_playlist_);
     menu_->addAction(action_new_folder_);
     menu_->addAction(action_remove_);
     menu_->addSeparator();
-    menu_->addAction(action_load_playlist_);
     menu_->addAction(action_save_playlist_);
   }
   menu_->popup(e->globalPos());

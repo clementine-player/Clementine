@@ -31,8 +31,8 @@ class AmazonCoverProvider : public CoverProvider {
 public:
   AmazonCoverProvider(QObject* parent = NULL);
 
-  static const char* kAccessKey;
-  static const char* kSecretAccessKey;
+  static const char* kAccessKeyB64;
+  static const char* kSecretAccessKeyB64;
   static const char* kUrl;
   static const char* kAssociateTag;
 

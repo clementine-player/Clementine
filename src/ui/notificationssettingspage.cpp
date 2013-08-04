@@ -48,6 +48,8 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
   menu->addAction(ui_->action_albumartist);
   menu->addAction(ui_->action_year);
   menu->addAction(ui_->action_composer);
+  menu->addAction(ui_->action_performer);
+  menu->addAction(ui_->action_grouping);
   menu->addAction(ui_->action_length);
   menu->addAction(ui_->action_disc);
   menu->addAction(ui_->action_track);
@@ -55,6 +57,8 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
   menu->addAction(ui_->action_playcount);
   menu->addAction(ui_->action_skipcount);
   menu->addAction(ui_->action_filename);
+  menu->addAction(ui_->action_rating);
+  menu->addAction(ui_->action_score);
   menu->addSeparator();
   menu->addAction(ui_->action_newline);
   ui_->notifications_exp_chooser1->setMenu(menu);

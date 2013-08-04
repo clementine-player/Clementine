@@ -222,21 +222,15 @@ void SongLoader::AudioCDTagsLoaded(const QString& artist, const QString& album,
   emit LoadFinished(true);
 }
 
-SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
-                                         bool ignore_playlists) {
+SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   qLog(Debug) << "Loading local file" << filename;
 
   // First check to see if it's a directory - if so we can load all the songs
   // inside right away.
   if (QFileInfo(filename).isDir()) {
-    if (!block) {
-      ConcurrentRun::Run<void>(&thread_pool_,
-          boost::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
-      return WillLoadAsync;
-    } else {
-      LoadLocalDirectory(filename);
-      return Success;
-    }
+    ConcurrentRun::Run<void>(&thread_pool_,
+        boost::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
+    return WillLoadAsync;
   }
 
   // It's a local file, so check if it looks like a playlist.
@@ -254,22 +248,12 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
   }
 
   if (parser) {
-    if (ignore_playlists) {
-      qLog(Debug) << "Skipping" << parser->name() << "playlist while loading directory";
-      return Success;
-    }
-
     qLog(Debug) << "Parsing using" << parser->name();
 
     // It's a playlist!
-    if (!block) {
-      ConcurrentRun::Run<void>(&thread_pool_,
-          boost::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
-      return WillLoadAsync;
-    } else {
-      LoadPlaylist(parser, filename);
-      return Success;
-    }
+    ConcurrentRun::Run<void>(&thread_pool_,
+        boost::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
+    return WillLoadAsync;
   }
 
   // Not a playlist, so just assume it's a song
@@ -292,28 +276,43 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
   } else {
     QString matching_cue = filename.section('.', 0, -2) + ".cue";
 
-    // it's a cue - create virtual tracks
-    if(QFile::exists(matching_cue)) {
+    if (QFile::exists(matching_cue)) {
+      // it's a cue - create virtual tracks
       QFile cue(matching_cue);
       cue.open(QIODevice::ReadOnly);
 
       song_list = cue_parser_->Load(&cue, matching_cue, QDir(filename.section('/', 0, -2)));
-
-    // it's a normal media file
     } else {
-      Song song;
-      TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
+      // it's a normal media file, load it asynchronously.
+      TagReaderReply* reply = TagReaderClient::Instance()->ReadFile(filename);
+      NewClosure(reply, SIGNAL(Finished(bool)),
+                 this, SLOT(LocalFileLoaded(TagReaderReply*)),
+                 reply);
 
-      song_list << song;
-
+      return WillLoadAsync;
     }
   }
+
   foreach (const Song& song, song_list) {
-    if (song.is_valid())
+    if (song.is_valid()) {
       songs_ << song;
+    }
   }
 
   return Success;
+}
+
+void SongLoader::LocalFileLoaded(TagReaderReply* reply) {
+  reply->deleteLater();
+
+  Song song;
+  song.InitFromProtobuf(reply->message().read_file_response().metadata());
+
+  if (song.is_valid()) {
+    songs_ << song;
+  }
+
+  emit LoadFinished(true);
 }
 
 void SongLoader::EffectiveSongsLoad() {
@@ -481,7 +480,7 @@ SongLoader::Result SongLoader::LoadRemote() {
   gst_bus_add_watch(bus, BusCallback, this);
 
   // Add a probe to the sink so we can capture the data if it's a playlist
-  GstPad* pad = gst_element_get_pad(fakesink, "sink");
+  GstPad* pad = gst_element_get_static_pad(fakesink, "sink");
   gst_pad_add_buffer_probe(pad, G_CALLBACK(DataReady), this);
   gst_object_unref(pad);
 
@@ -583,7 +582,8 @@ void SongLoader::ErrorMessageReceived(GstMessage* msg) {
   free(debugs);
 
   if (state_ == WaitingForType &&
-      message_str == "Could not determine type of stream.") {
+      message_str == gst_error_get_message(
+          GST_STREAM_ERROR, GST_STREAM_ERROR_TYPE_NOT_FOUND)) {
     // Don't give up - assume it's a playlist and see if one of our parsers can
     // read it.
     state_ = WaitingForMagic;

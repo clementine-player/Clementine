@@ -210,7 +210,8 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
                                     parts[2].toInt());
         }
       } else if (name == "enclosure") {
-        if (reader->attributes().value("type").toString().startsWith("audio/")) {
+        const QString type = reader->attributes().value("type").toString();
+        if (type.startsWith("audio/") || type.startsWith("x-audio/")) {
           episode.set_url(QUrl::fromEncoded(reader->attributes().value("url").toString().toAscii()));
         }
         Utilities::ConsumeCurrentElement(reader);

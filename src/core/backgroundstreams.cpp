@@ -41,8 +41,7 @@ void BackgroundStreams::LoadStreams() {
     s.setArrayIndex(i);
     AddStream(s.value("name").toString(),
               s.value("url").toUrl(),
-              s.value("volume").toInt(),
-              s.value("enabled").toBool());
+              s.value("volume").toInt());
   }
 
   SaveStreams();
@@ -60,24 +59,23 @@ void BackgroundStreams::SaveStreams() {
     s.setValue("name", stream->name);
     s.setValue("url", stream->url);
     s.setValue("volume", stream->volume);
-    s.setValue("enabled", stream->id != -1);
   }
   s.endArray();
 }
 
 void BackgroundStreams::AddStream(const QString& name,
                                   const QUrl& url,
-                                  int volume,
-                                  bool enabled) {
+                                  int volume) {
+  if (streams_.contains(name)) {
+    return;
+  }
+
   Stream* s = new Stream;
   s->name = name;
   s->url = url;
   s->volume = volume;
   s->id = -1;
   streams_[name] = s;
-  if (enabled) {
-    PlayStream(s);
-  }
 }
 
 void BackgroundStreams::EnableStream(const QString& name, bool enable) {

@@ -49,8 +49,7 @@ class BackgroundStreams : public QObject {
     QAction* action;
   };
 
-  void AddStream(
-      const QString& name, const QUrl& url, int volume = 50, bool enabled = false);
+  void AddStream(const QString& name, const QUrl& url, int volume = 50);
   void PlayStream(Stream* stream);
   void StopStream(Stream* stream);
 

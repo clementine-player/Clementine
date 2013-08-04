@@ -18,14 +18,16 @@
 #include "somafmsearchprovider.h"
 #include "internet/somafmservice.h"
 
-SomaFMSearchProvider::SomaFMSearchProvider(SomaFMService* service, Application* app, QObject* parent)
+SomaFMSearchProvider::SomaFMSearchProvider(
+    SomaFMServiceBase* service, Application* app, QObject* parent)
   : SimpleSearchProvider(app, parent),
     service_(service)
 {
-  Init("SomaFM", "somafm", QIcon(":/providers/somafm.png"), CanGiveSuggestions);
+  Init(service->name(), service->url_scheme(), service->icon(), CanGiveSuggestions);
   set_result_limit(3);
   set_max_suggestion_count(3);
-  icon_ = ScaleAndPad(QImage(":/providers/somafm.png"));
+  icon_ = ScaleAndPad(
+      service->icon().pixmap(service->icon().availableSizes()[0]).toImage());
 
   connect(service, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
 
@@ -44,7 +46,7 @@ void SomaFMSearchProvider::RecreateItems() {
 
   foreach (const SomaFMService::Stream& stream, service_->Streams()) {
     Item item;
-    item.metadata_ = stream.ToSong();
+    item.metadata_ = stream.ToSong(service_->name());
     item.keyword_ = stream.title_;
     items << item;
   }

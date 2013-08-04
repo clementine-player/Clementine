@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2011 Stefan Derkits <stefan@derkits.at>                    *
+* Copyright (c) 2011 - 2013 Stefan Derkits <stefan@derkits.at>             *
 *                                                                          *
 * This library is free software; you can redistribute it and/or            *
 * modify it under the terms of the GNU Lesser General Public               *
@@ -20,7 +20,7 @@
 
 #include "DeviceSyncResult_p.h"
 
-#include <qjson/parser.h>
+#include <parser.h>
 
 using namespace mygpo;
 

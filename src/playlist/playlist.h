@@ -80,6 +80,7 @@ class Playlist : public QAbstractListModel {
            LibraryBackend* library,
            int id,
            const QString& special_type = QString(),
+           bool favorite = false,
            QObject* parent = 0);
   ~Playlist();
 
@@ -116,6 +117,9 @@ class Playlist : public QAbstractListModel {
 
     Column_Source,
     Column_Mood,
+
+    Column_Performer,
+    Column_Grouping,
 
     ColumnCount
   };
@@ -172,6 +176,8 @@ class Playlist : public QAbstractListModel {
   int id() const { return id_; }
   const QString& ui_path() const { return ui_path_; }
   void set_ui_path(const QString& path) { ui_path_ = path; }
+  bool is_favorite() const { return favorite_; }
+  void set_favorite(bool favorite) { favorite_ = favorite; }
 
   int current_row() const;
   int last_played_row() const;
@@ -181,7 +187,7 @@ class Playlist : public QAbstractListModel {
   const QModelIndex current_index() const;
 
   bool stop_after_current() const;
-  bool is_dynamic() const { return dynamic_playlist_; }
+  bool is_dynamic() const { return static_cast<bool>(dynamic_playlist_); }
   int dynamic_history_length() const;
 
   QString special_type() const { return special_type_; }
@@ -219,11 +225,8 @@ class Playlist : public QAbstractListModel {
   void InsertSongs              (const SongList& items,             int pos = -1, bool play_now = false, bool enqueue = false);
   void InsertSongsOrLibraryItems(const SongList& items,             int pos = -1, bool play_now = false, bool enqueue = false);
   void InsertSmartPlaylist      (smart_playlists::GeneratorPtr gen, int pos = -1, bool play_now = false, bool enqueue = false);
-  void InsertUrls               (const QList<QUrl>& urls,           int pos = -1, bool play_now = false, bool enqueue = false);
   void InsertInternetItems      (InternetService* service,
                                  const SongList& songs,             int pos = -1, bool play_now = false, bool enqueue = false);
-  // Removes items with given indices from the playlist. This operation is not undoable.
-  void RemoveItemsWithoutUndo   (const QList<int>& indices);
   void ReshuffleIndices();
   
   // If this playlist contains the current item, this method will apply the "valid" flag on it.
@@ -293,6 +296,10 @@ class Playlist : public QAbstractListModel {
 
   void SetColumnAlignment(const ColumnAlignmentMap& alignment);
 
+  void InsertUrls(const QList<QUrl>& urls, int pos = -1, bool play_now = false, bool enqueue = false);
+  // Removes items with given indices from the playlist. This operation is not undoable.
+  void RemoveItemsWithoutUndo(const QList<int>& indices);
+
  signals:
   void RestoreFinished();
   void CurrentSongChanged(const Song& metadata);
@@ -360,6 +367,7 @@ class Playlist : public QAbstractListModel {
   LibraryBackend* library_;
   int id_;
   QString ui_path_;
+  bool favorite_;
 
   PlaylistItemList items_;
   QList<int> virtual_items_; // Contains the indices into items_ in the order

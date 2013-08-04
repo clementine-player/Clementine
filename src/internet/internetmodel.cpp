@@ -29,7 +29,9 @@
 #include "internetservice.h"
 #include "savedradio.h"
 #include "somafmservice.h"
+#include "groovesharkservice.h"
 #include "soundcloudservice.h"
+#include "subsonicservice.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
@@ -53,6 +55,9 @@
 #endif
 #ifdef HAVE_SKYDRIVE
   #include "skydriveservice.h"
+#endif
+#ifdef HAVE_BOX
+  #include "boxservice.h"
 #endif
 
 using smart_playlists::Generator;
@@ -86,6 +91,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new JazzRadioService(app, this));
   AddService(new MagnatuneService(app, this));
   AddService(new PodcastService(app, this));
+  AddService(new RadioGFMService(app, this));
   AddService(new RockRadioService(app, this));
   AddService(new SavedRadio(app, this));
   AddService(new SkyFmService(app, this));
@@ -94,6 +100,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(app, this));
 #endif
+  AddService(new SubsonicService(app, this));
 #ifdef HAVE_UBUNTU_ONE
   AddService(new UbuntuOneService(app, this));
 #endif
@@ -102,6 +109,9 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_SKYDRIVE
   AddService(new SkydriveService(app, this));
+#endif
+#ifdef HAVE_BOX
+  AddService(new BoxService(app, this));
 #endif
 }
 

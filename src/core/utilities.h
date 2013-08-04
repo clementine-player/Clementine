@@ -49,6 +49,7 @@ namespace Utilities {
   quint64 FileSystemFreeSpace(const QString& path);
 
   QString MakeTempDir(const QString template_name = QString());
+  QString GetTemporaryFileName();
   void RemoveRecursive(const QString& path);
   bool CopyRecursive(const QString& source, const QString& destination);
   bool Copy(QIODevice* source, QIODevice* destination);
@@ -149,6 +150,8 @@ namespace Utilities {
 
   // Returns true if this machine has a battery.
   bool IsLaptop();
+
+  QString SystemLanguageName();
 }
 
 class ScopedWCharArray {

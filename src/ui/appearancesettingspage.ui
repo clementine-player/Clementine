@@ -90,42 +90,30 @@
      <property name="title">
       <string>Background image</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <widget class="QRadioButton" name="use_default_background">
-          <property name="text">
-           <string>Default background image</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QRadioButton" name="use_default_background">
+        <property name="text">
+         <string>Default background image</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="QRadioButton" name="use_album_cover_background">
-          <property name="toolTip">
-           <string>The album cover of the currently playing song</string>
-          </property>
-          <property name="text">
-           <string>Album cover</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QRadioButton" name="use_album_cover_background">
+        <property name="toolTip">
+         <string>The album cover of the currently playing song</string>
+        </property>
+        <property name="text">
+         <string>Album cover</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
-        <item>
-         <widget class="QRadioButton" name="use_no_background">
-          <property name="text">
-           <string>No background image</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QRadioButton" name="use_no_background">
+        <property name="text">
+         <string>No background image</string>
+        </property>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -156,37 +144,24 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
          <widget class="QLabel" name="select_background_blur_label">
           <property name="enabled">
            <bool>true</bool>
           </property>
           <property name="text">
-           <string>Select blur radius:</string>
+           <string>Blur amount</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="background_blur_radius_label">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string>0px</string>
-          </property>
-         </widget>
-        </item>
-        <item>
+        <item row="0" column="1">
          <widget class="QSlider" name="blur_slider">
           <property name="minimum">
            <number>0</number>
           </property>
           <property name="maximum">
            <number>10</number>
-          </property>
-          <property name="value">
-           <number>0</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -196,6 +171,49 @@
           </property>
           <property name="tickInterval">
            <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="background_blur_radius_label">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>0px</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="select_opacity_level_label">
+          <property name="text">
+           <string>Opacity</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSlider" name="opacity_slider">
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="singleStep">
+           <number>10</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBelow</enum>
+          </property>
+          <property name="tickInterval">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="background_opacity_label">
+          <property name="text">
+           <string>40%</string>
           </property>
          </widget>
         </item>

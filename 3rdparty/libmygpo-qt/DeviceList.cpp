@@ -22,7 +22,7 @@
 
 #include "DeviceList_p.h"
 
-#include <qjson/parser.h>
+#include <parser.h>
 
 using namespace mygpo;
 

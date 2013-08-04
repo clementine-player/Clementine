@@ -64,7 +64,7 @@ protected:
   bool eventFilter(QObject* o, QEvent* e);
 };
 
-class FancyTab : public QWidget{
+class FancyTab : public QWidget {
     Q_OBJECT
 
     Q_PROPERTY(float fader READ fader WRITE setFader)
@@ -82,6 +82,7 @@ public:
     QString text;
 
 protected:
+    bool event(QEvent *);
     void enterEvent(QEvent *);
     void leaveEvent(QEvent *);
 

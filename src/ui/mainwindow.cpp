@@ -36,6 +36,7 @@
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
 #include "core/taskmanager.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
@@ -191,6 +192,8 @@ MainWindow::MainWindow(Application* app,
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
     was_maximized_(false),
+    saved_playback_position_(0),
+    saved_playback_state_(Engine::Empty),
     doubleclick_addmode_(AddBehaviour_Append),
     doubleclick_playmode_(PlayBehaviour_IfStopped),
     menu_playmode_(PlayBehaviour_IfStopped)
@@ -257,6 +260,7 @@ MainWindow::MainWindow(Application* app,
   library_sort_model_->setSourceModel(app_->library()->model());
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
+  library_sort_model_->setSortLocaleAware(true);
   library_sort_model_->sort(0);
 
   connect(ui_->playlist, SIGNAL(ViewSelectionModelChanged()), SLOT(PlaylistViewSelectionModelChanged()));
@@ -349,6 +353,7 @@ MainWindow::MainWindow(Application* app,
   connect(ui_->action_update_library, SIGNAL(triggered()), app_->library(), SLOT(IncrementalScan()));
   connect(ui_->action_full_library_scan, SIGNAL(triggered()), app_->library(), SLOT(FullScan()));
   connect(ui_->action_queue_manager, SIGNAL(triggered()), SLOT(ShowQueueManager()));
+  connect(ui_->action_add_files_to_transcoder, SIGNAL(triggered()), SLOT(AddFilesToTranscoder()));
 
   background_streams_->AddAction("Rain", ui_->action_rain);
   background_streams_->AddAction("Hypnotoad", ui_->action_hypnotoad);
@@ -379,9 +384,6 @@ MainWindow::MainWindow(Application* app,
                             ui_->action_save_playlist,
                             ui_->action_next_playlist,    /* These two actions aren't associated */
                             ui_->action_previous_playlist /* to a button but to the main window */ );
-  playlist_list_->SetActions(ui_->action_new_playlist,
-                             ui_->action_load_playlist,
-                             ui_->action_save_playlist);
 
 
 #ifdef ENABLE_VISUALISATIONS
@@ -496,6 +498,7 @@ MainWindow::MainWindow(Application* app,
   playlist_menu_->addAction(ui_->action_renumber_tracks);
   playlist_menu_->addAction(ui_->action_selection_set_value);
   playlist_menu_->addAction(ui_->action_auto_complete_tags);
+  playlist_menu_->addAction(ui_->action_add_files_to_transcoder);
   playlist_menu_->addSeparator();
   playlist_copy_to_library_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."), this, SLOT(PlaylistCopyToLibrary()));
   playlist_move_to_library_ = playlist_menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."), this, SLOT(PlaylistMoveToLibrary()));
@@ -631,6 +634,7 @@ MainWindow::MainWindow(Application* app,
   // Analyzer
   ui_->analyzer->SetEngine(app_->player()->engine());
   ui_->analyzer->SetActions(ui_->action_visualisations);
+  connect(ui_->analyzer, SIGNAL(WheelEvent(int)), SLOT(VolumeWheelEvent(int)));
 
   // Equalizer
   qLog(Debug) << "Creating equalizer";
@@ -638,9 +642,12 @@ MainWindow::MainWindow(Application* app,
           app_->player()->engine(), SLOT(SetEqualizerParameters(int,QList<int>)));
   connect(equalizer_.get(), SIGNAL(EnabledChanged(bool)),
           app_->player()->engine(), SLOT(SetEqualizerEnabled(bool)));
+  connect(equalizer_.get(), SIGNAL(StereoBalanceChanged(float)),
+          app_->player()->engine(), SLOT(SetStereoBalance(float)));
   app_->player()->engine()->SetEqualizerEnabled(equalizer_->is_enabled());
   app_->player()->engine()->SetEqualizerParameters(
       equalizer_->preamp_value(), equalizer_->gain_values());
+  app_->player()->engine()->SetStereoBalance(equalizer_->stereo_balance());
 
   // Statusbar widgets
   ui_->playlist_summary->setMinimumWidth(QFontMetrics(font()).width("WW selected of WW tracks - [ WW:WW ]"));
@@ -751,6 +758,8 @@ MainWindow::MainWindow(Application* app,
 #endif
 
   CheckFullRescanRevisions();
+
+  LoadPlaybackStatus();
 
   qLog(Debug) << "Started";
 }
@@ -876,6 +885,7 @@ void MainWindow::VolumeChanged(int volume) {
 
 void MainWindow::SongChanged(const Song& song) {
   setWindowTitle(song.PrettyTitleWithArtist());
+  tray_icon_->SetProgress(0);
 
 #ifdef HAVE_LIBLASTFM
   if (ui_->action_toggle_scrobbling->isVisible())
@@ -894,7 +904,13 @@ void MainWindow::TrackSkipped(PlaylistItemPtr item) {
     const qint64 length = app_->player()->engine()->length_nanosec();
     const float percentage = (length == 0 ? 1 : float(position) / length);
 
-    app_->library_backend()->IncrementSkipCountAsync(song.id(), percentage);
+    const qint64 seconds_left = (length - position) / kNsecPerSec;
+    const qint64 seconds_total = length / kNsecPerSec;
+
+    if (((0.05 * seconds_total > 60 && percentage < 0.98) || percentage < 0.95) &&
+        seconds_left > 5) { // Never count the skip if under 5 seconds left
+      app_->library_backend()->IncrementSkipCountAsync(song.id(), percentage);
+    }
   }
 }
 
@@ -953,6 +969,45 @@ void MainWindow::SaveGeometry() {
   settings_.setValue("splitter_state", ui_->splitter->saveState());
   settings_.setValue("current_tab", ui_->tabs->current_index());
   settings_.setValue("tab_mode", ui_->tabs->mode());
+}
+
+void MainWindow::SavePlaybackStatus() {
+  QSettings settings;
+  settings.beginGroup(MainWindow::kSettingsGroup);
+  settings.setValue("playback_state", app_->player()->GetState());
+  if (app_->player()->GetState() == Engine::Playing ||
+          app_->player()->GetState() == Engine::Paused) {
+    settings.setValue("playback_position", app_->player()->engine()->position_nanosec() / kNsecPerSec);
+  } else {
+    settings.setValue("playback_position", 0);
+  }
+}
+
+void MainWindow::LoadPlaybackStatus() {
+  QSettings settings;
+  settings.beginGroup(MainWindow::kSettingsGroup);
+  bool resume_playback = settings.value("resume_playback_after_start", false).toBool();
+  saved_playback_state_ = static_cast<Engine::State>
+          (settings.value("playback_state", Engine::Empty).toInt());
+  saved_playback_position_ = settings.value("playback_position", 0).toDouble();
+  if (!resume_playback ||
+        saved_playback_state_ == Engine::Empty ||
+        saved_playback_state_ == Engine::Idle) {
+    return;
+  }
+
+  QTimer::singleShot(100, this, SLOT(ResumePlayback()));
+}
+
+void MainWindow::ResumePlayback() {
+  qLog(Debug) << "Resuming playback";
+  app_->player()->Play();
+
+  app_->player()->SeekTo(saved_playback_position_);
+
+  if (saved_playback_state_ == Engine::Paused) {
+    app_->player()->Pause();
+  }
 }
 
 void MainWindow::PlayIndex(const QModelIndex& index) {
@@ -1657,6 +1712,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
     case CommandlineOptions::Player_Next:
       app_->player()->Next();
       break;
+    case CommandlineOptions::Player_RestartOrPrevious:
+      app_->player()->RestartOrPrevious();
+      break;
 
     case CommandlineOptions::Player_None:
       break;
@@ -1727,6 +1785,28 @@ void MainWindow::CheckForUpdates() {
 void MainWindow::PlaylistUndoRedoChanged(QAction *undo, QAction *redo) {
   playlist_menu_->insertAction(playlist_undoredo_, undo);
   playlist_menu_->insertAction(playlist_undoredo_, redo);
+}
+
+void MainWindow::AddFilesToTranscoder() {
+  if (!transcode_dialog_) {
+    transcode_dialog_.reset(new TranscodeDialog);
+  }
+
+  QStringList filenames;
+
+  foreach (const QModelIndex& index,
+           ui_->playlist->view()->selectionModel()->selection().indexes()) {
+    if (index.column() != 0)
+      continue;
+    int row = app_->playlist_manager()->current()->proxy()->mapToSource(index).row();
+    PlaylistItemPtr item(app_->playlist_manager()->current()->item_at(row));
+    Song song = item->Metadata();
+    filenames << song.url().toLocalFile();
+  }
+
+  transcode_dialog_->SetFilenames(filenames);
+
+  ShowTranscodeDialog();
 }
 
 void MainWindow::ShowLibraryConfig() {
@@ -1821,8 +1901,8 @@ void MainWindow::PlaylistOrganiseSelected(bool copy) {
 void MainWindow::PlaylistDelete() {
   // Note: copied from LibraryView::Delete
 
-  if (QMessageBox::question(this, tr("Delete files"),
-        tr("These files will be deleted from disk, are you sure you want to continue?"),
+  if (QMessageBox::warning(this, tr("Delete files"),
+        tr("These files will be permanently deleted from disk, are you sure you want to continue?"),
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
@@ -2090,6 +2170,7 @@ bool MainWindow::winEvent(MSG* msg, long*) {
 #endif // Q_OS_WIN32
 
 void MainWindow::Exit() {
+  SavePlaybackStatus();
   if(app_->player()->engine()->is_fadeout_enabled()) {
     // To shut down the application when fadeout will be finished
     connect(app_->player()->engine(), SIGNAL(FadeoutFinishedSignal()), qApp, SLOT(quit()));
@@ -2237,6 +2318,7 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
     fake.Init("Title", "Artist", "Album", 123);
     fake.set_genre("Classical");
     fake.set_composer("Anonymous");
+    fake.set_performer("Anonymous");
     fake.set_track(1);
     fake.set_disc(1);
     fake.set_year(2011);
@@ -2267,4 +2349,19 @@ void MainWindow::DoGlobalSearch(const QString& query) {
 void MainWindow::ShowConsole() {
   Console* console = new Console(app_, this);
   console->show();
+}
+
+void MainWindow::keyPressEvent(QKeyEvent* event) {
+  if(event->key() == Qt::Key_Space) {
+    app_->player()->PlayPause();
+    event->accept();
+  } else if(event->key() == Qt::Key_Left) {
+    ui_->track_slider->Seek(-1);
+    event->accept();
+  } else if(event->key() == Qt::Key_Right) {
+    ui_->track_slider->Seek(1);
+    event->accept();
+  } else {
+    QMainWindow::keyPressEvent(event);
+  }
 }

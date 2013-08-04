@@ -26,10 +26,13 @@
 #include <QStringList>
 #include <QXmlStreamReader>
 
-const char* AmazonCoverProvider::kAccessKey = "AKIAJ4QO3GQTSM3A43BQ";
-const char* AmazonCoverProvider::kSecretAccessKey = "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";
+// Amazon has a web crawler that looks for access keys in public source code,
+// so we apply some sophisticated encryption to these keys.
+const char* AmazonCoverProvider::kAccessKeyB64 = "QUtJQUlRSDI2UlZNNlVaNFdBNlE=";
+const char* AmazonCoverProvider::kSecretAccessKeyB64 =
+    "ZTQ2UGczM0JRNytDajd4MWR6eFNvODVFd2tpdi9FbGVCcUZjMkVmMQ==";
 const char* AmazonCoverProvider::kUrl = "http://ecs.amazonaws.com/onca/xml";
-const char* AmazonCoverProvider::kAssociateTag = "clementine-20";
+const char* AmazonCoverProvider::kAssociateTag = "clemmusiplay-20";
 
 AmazonCoverProvider::AmazonCoverProvider(QObject* parent)
   : CoverProvider("Amazon", parent),
@@ -40,7 +43,7 @@ AmazonCoverProvider::AmazonCoverProvider(QObject* parent)
 bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& album, int id) {
   // Must be sorted by parameter name
   Utilities::ArgList args = Utilities::ArgList()
-      << Utilities::Arg("AWSAccessKeyId", kAccessKey)
+      << Utilities::Arg("AWSAccessKeyId", QByteArray::fromBase64(kAccessKeyB64))
       << Utilities::Arg("AssociateTag", kAssociateTag)
       << Utilities::Arg("Keywords", artist + " " + album)
       << Utilities::Arg("Operation", "ItemSearch")
@@ -60,7 +63,8 @@ bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& albu
 
   const QByteArray data_to_sign = QString("GET\n%1\n%2\n%3").arg(
         url.host(), url.path(), query_items).toAscii();
-  const QByteArray signature(Utilities::HmacSha256(kSecretAccessKey, data_to_sign));
+  const QByteArray signature(Utilities::HmacSha256(
+        QByteArray::fromBase64(kSecretAccessKeyB64), data_to_sign));
 
   // Add the signature to the request
   encoded_args << Utilities::EncodedArg

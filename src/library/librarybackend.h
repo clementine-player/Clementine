@@ -103,6 +103,8 @@ class LibraryBackend : public LibraryBackendInterface {
   Q_OBJECT
 
  public:
+  static const char* kSettingsGroup;
+
   Q_INVOKABLE LibraryBackend(QObject* parent = 0);
   void Init(Database* db, const QString& songs_table,
             const QString& dirs_table, const QString& subdirs_table,
@@ -155,6 +157,7 @@ class LibraryBackend : public LibraryBackendInterface {
   bool ExecQuery(LibraryQuery* q);
   SongList ExecLibraryQuery(LibraryQuery* query);
   SongList FindSongs(const smart_playlists::Search& search);
+  SongList GetAllSongs();
 
   void IncrementPlayCountAsync(int id);
   void IncrementSkipCountAsync(int id, float progress);
@@ -162,6 +165,8 @@ class LibraryBackend : public LibraryBackendInterface {
   void UpdateSongRatingAsync(int id, float rating);
 
   void DeleteAll();
+
+  void ReloadSettingsAsync();
 
  public slots:
   void LoadDirectories();
@@ -178,6 +183,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void IncrementSkipCount(int id, float progress);
   void ResetStatistics(int id);
   void UpdateSongRating(int id, float rating);
+  void ReloadSettings();
 
  signals:
   void DirectoryDiscovered(const Directory& dir, const SubdirectoryList& subdirs);
@@ -186,6 +192,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
   void SongsStatisticsChanged(const SongList& songs);
+  void SongsRatingChanged(const SongList& songs);
   void DatabaseReset();
 
   void TotalSongCountUpdated(int total);
@@ -220,6 +227,8 @@ class LibraryBackend : public LibraryBackendInterface {
   QString dirs_table_;
   QString subdirs_table_;
   QString fts_table_;
+  bool save_statistics_in_file_;
+  bool save_ratings_in_file_;
 };
 
 #endif // LIBRARYBACKEND_H

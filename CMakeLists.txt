@@ -62,31 +62,28 @@ find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(FFTW3)
 
-pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
-pkg_check_modules(QJSON REQUIRED QJson)
+pkg_check_modules(CDIO libcdio)
+pkg_check_modules(CHROMAPRINT libchromaprint)
+pkg_check_modules(GIO gio-2.0)
+pkg_check_modules(GLIB glib-2.0)
+pkg_check_modules(GOBJECT gobject-2.0)
 pkg_check_modules(GSTREAMER gstreamer-0.10)
-pkg_check_modules(GSTREAMER_BASE gstreamer-base-0.10)
 pkg_check_modules(GSTREAMER_APP gstreamer-app-0.10)
+pkg_check_modules(GSTREAMER_BASE gstreamer-base-0.10)
 pkg_check_modules(GSTREAMER_CDDA gstreamer-cdda-0.10)
 pkg_check_modules(GSTREAMER_TAG gstreamer-tag-0.10)
-pkg_check_modules(GLIB glib-2.0)
-pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(GOBJECT gobject-2.0)
-pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
-pkg_check_modules(GIO gio-2.0)
-pkg_check_modules(IMOBILEDEVICE libimobiledevice-1.0)
-pkg_check_modules(PLIST libplist)
-pkg_check_modules(USBMUXD libusbmuxd)
-pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
-pkg_check_modules(SPOTIFY libspotify>=12.1.45)
-pkg_check_modules(CDIO libcdio)
+pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
+pkg_check_modules(LIBMTP libmtp>=1.0)
+pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
+pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(QCA qca2)
-pkg_check_modules(CHROMAPRINT libchromaprint)
+pkg_check_modules(QJSON REQUIRED QJson)
+pkg_check_modules(SPOTIFY libspotify>=12.1.45)
+pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
-  find_library(MSWMDM_LIBRARIES mswmdm)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 
@@ -111,6 +108,13 @@ if (USE_BUILTIN_TAGLIB AND
   set(TAGLIB_LIBRARIES tag)
   add_subdirectory(3rdparty/taglib)
 endif()
+
+set(CMAKE_REQUIRED_INCLUDES "${TAGLIB_INCLUDE_DIRS}")
+set(CMAKE_REQUIRED_LIBRARIES "${TAGLIB_LIBRARIES}")
+check_cxx_source_compiles("#include <opusfile.h>
+    int main() { char *s; TagLib::Ogg::Opus::File opusfile(s); return 0;}" TAGLIB_HAS_OPUS)
+set(CMAKE_REQUIRED_INCLUDES)
+set(CMAKE_REQUIRED_LIBRARIES)
 
 if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)
@@ -211,6 +215,11 @@ optional_component(SKYDRIVE ON "Skydrive support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
+optional_component(BOX ON "Box support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
+
 optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )
@@ -222,13 +231,6 @@ optional_component(LIBGPOD ON "Devices: iPod classic support"
 optional_component(GIO ON "Devices: GIO device backend"
   DEPENDS "libgio" GIO_FOUND
   DEPENDS "Linux or Windows" "NOT APPLE"
-)
-
-optional_component(IMOBILEDEVICE ON "Devices: iPod Touch, iPhone, iPad support"
-  DEPENDS "libimobiledevice" IMOBILEDEVICE_FOUND
-  DEPENDS "libplist" PLIST_FOUND
-  DEPENDS "libusbmuxd" USBMUXD_FOUND
-  DEPENDS "iPod classic support" HAVE_LIBGPOD
 )
 
 optional_component(LIBMTP ON "Devices: MTP support"
@@ -408,10 +410,16 @@ if(NOT CHROMAPRINT_FOUND)
   endif(WIN32)
 endif(NOT CHROMAPRINT_FOUND)
 
-# We have to use our own libmygpo-qt for now
-add_subdirectory(3rdparty/libmygpo-qt)
-set(MYGPOQT_LIBRARIES mygpo-qt)
-set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+# Use the system libmygpo-qt if a recent enough version was found
+if(LIBMYGPO_QT_FOUND)
+  set(MYGPOQT_LIBRARIES ${LIBMYGPO_QT_LIBRARIES})
+  set(MYGPOQT_INCLUDE_DIRS ${LIBMYGPO_QT_INCLUDE_DIRS})
+else()
+  add_definitions(-DMYGPO_EXPORT=)
+  add_subdirectory(3rdparty/libmygpo-qt)
+  set(MYGPOQT_LIBRARIES mygpo-qt)
+  set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+endif()
 
 # Qocoa
 add_subdirectory(3rdparty/qocoa)
@@ -420,6 +428,7 @@ add_subdirectory(3rdparty/qocoa)
 add_subdirectory(src)
 if (WIN32)
   add_subdirectory(3rdparty/qtwin)
+  add_subdirectory(3rdparty/tinysvcmdns)
 endif (WIN32)
 add_subdirectory(tests)
 add_subdirectory(dist)
@@ -427,15 +436,12 @@ add_subdirectory(tools/ultimate_lyrics_parser)
 add_subdirectory(ext/libclementine-common)
 add_subdirectory(ext/libclementine-tagreader)
 add_subdirectory(ext/clementine-tagreader)
+add_subdirectory(ext/libclementine-remote)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)
   add_subdirectory(debian)
 endif(WITH_DEBIAN)
-
-if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
-  add_subdirectory(gst/afcsrc)
-endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
 
 if(HAVE_BREAKPAD)
   set(CRASHREPORTING_HOSTNAME crashes.clementine-player.org

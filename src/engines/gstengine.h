@@ -105,6 +105,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   /** Set equalizer preamp and gains, range -100..100. Gains are 10 values. */
   void SetEqualizerParameters(int preamp, const QList<int>& bandGains);
 
+  /** Set Stereo balance, range -1.0f..1.0f */
+  void SetStereoBalance(float value);
+
   void ReloadSettings();
 
   void AddBufferConsumer(BufferConsumer* consumer);
@@ -118,9 +121,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void EndOfStreamReached(int pipeline_id, bool has_next_track);
   void HandlePipelineError(int pipeline_id, const QString& message, int domain, int error_code);
   void NewMetaData(int pipeline_id, const Engine::SimpleMetaBundle& bundle);
-  void ClearScopeBuffers();
   void AddBufferToScope(GstBuffer* buf, int pipeline_id);
   void FadeoutFinished();
+  void FadeoutPauseFinished();
   void SeekNow();
   void BackgroundStreamFinished();
   void BackgroundStreamPlayDone();
@@ -138,6 +141,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   PluginDetailsList GetPluginList(const QString& classname) const;
 
   void StartFadeout();
+  void StartFadeoutPause();
 
   void StartTimers();
   void StopTimers();
@@ -146,16 +150,15 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   boost::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url, qint64 end_nanosec);
 
   void UpdateScope();
-  qint64 PruneScope();
 
   int AddBackgroundStream(boost::shared_ptr<GstEnginePipeline> pipeline);
 
   static QUrl FixupUrl(const QUrl& url);
 
  private:
-  static const int kTimerIntervalNanosec = 1000 * kNsecPerMsec; // 1s
-  static const int kPreloadGapNanosec = 1000 * kNsecPerMsec; // 1s
-  static const int kSeekDelayNanosec = 100 * kNsecPerMsec; // 100msec
+  static const qint64 kTimerIntervalNanosec = 1000 * kNsecPerMsec; // 1s
+  static const qint64 kPreloadGapNanosec = 2000 * kNsecPerMsec; // 2s
+  static const qint64 kSeekDelayNanosec = 100 * kNsecPerMsec; // 100msec
 
   static const char* kHypnotoadPipeline;
   static const char* kEnterprisePipeline;
@@ -170,17 +173,17 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   boost::shared_ptr<GstEnginePipeline> current_pipeline_;
   boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
+  boost::shared_ptr<GstEnginePipeline> fadeout_pause_pipeline_;
   QUrl preloaded_url_;
 
   QList<BufferConsumer*> buffer_consumers_;
 
-  GQueue* delayq_;
-  float current_scope_[kScopeSize];
-  int current_sample_;
+  GstBuffer* latest_buffer_;
 
   bool equalizer_enabled_;
   int equalizer_preamp_;
   QList<int> equalizer_gains_;
+  float stereo_balance_;
 
   bool rg_enabled_;
   int rg_mode_;
@@ -203,6 +206,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int next_element_id_;
 
   QHash<int, boost::shared_ptr<GstEnginePipeline> > background_streams_;
+
+  bool is_fading_out_to_pause_;
+  bool has_faded_out_;
 };
 
 

@@ -24,8 +24,13 @@
 #include <QXmlStreamReader>
 
 UltimateLyricsReader::UltimateLyricsReader(QObject* parent)
-  : QObject(parent)
+  : QObject(parent),
+    thread_(qApp->thread())
 {
+}
+
+void UltimateLyricsReader::SetThread(QThread *thread) {
+  thread_ = thread;
 }
 
 QList<SongInfoProvider*> UltimateLyricsReader::Parse(const QString& filename) const {
@@ -48,7 +53,7 @@ QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(QIODevice* device) co
     if (reader.name() == "provider") {
       SongInfoProvider* provider = ParseProvider(&reader);
       if (provider) {
-        provider->moveToThread(qApp->thread());
+        provider->moveToThread(thread_);
         ret << provider;
       }
     }

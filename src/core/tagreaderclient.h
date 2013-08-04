@@ -43,6 +43,8 @@ public:
 
   ReplyType* ReadFile(const QString& filename);
   ReplyType* SaveFile(const QString& filename, const Song& metadata);
+  ReplyType* UpdateSongStatistics(const Song& metadata);
+  ReplyType* UpdateSongRating(const Song& metadata);
   ReplyType* IsMediaFile(const QString& filename);
   ReplyType* LoadEmbeddedArt(const QString& filename);
   ReplyType* ReadCloudFile(const QUrl& download_url,
@@ -56,11 +58,17 @@ public:
   // be called from the TagReaderClient's thread.
   void ReadFileBlocking(const QString& filename, Song* song);
   bool SaveFileBlocking(const QString& filename, const Song& metadata);
+  bool UpdateSongStatisticsBlocking(const Song& metadata);
+  bool UpdateSongRatingBlocking(const Song& metadata);
   bool IsMediaFileBlocking(const QString& filename);
   QImage LoadEmbeddedArtBlocking(const QString& filename);
 
   // TODO: Make this not a singleton
   static TagReaderClient* Instance() { return sInstance; }
+
+public slots:
+  void UpdateSongsStatistics(const SongList& songs);
+  void UpdateSongsRating(const SongList& songs);
 
 private slots:
   void WorkerFailedToStart();

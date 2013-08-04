@@ -59,6 +59,7 @@ public slots:
   // If there's currently a song playing, pause it, otherwise play the track
   // that was playing last, or the first one on the playlist
   virtual void PlayPause() = 0;
+  virtual void RestartOrPrevious() = 0;
 
   // Skips this track.  Might load more of the current radio station.
   virtual void Next() = 0;
@@ -126,6 +127,7 @@ public slots:
 
   void PlayAt(int i, Engine::TrackChangeFlags change, bool reshuffle);
   void PlayPause();
+  void RestartOrPrevious();
   void Next();
   void Previous();
   void SetVolume(int value);
@@ -140,6 +142,7 @@ public slots:
   void Mute();
   void Pause();
   void Stop();
+  void StopAfterCurrent();
   void Play();
   void ShowOSD();
   void TogglePrettyOSD();

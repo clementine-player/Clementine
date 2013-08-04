@@ -17,14 +17,15 @@
 
 #include "equalizer.h"
 #include "ui_equalizer.h"
-#include "widgets/equalizerslider.h"
-#include "ui/iconloader.h"
 
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QSettings>
 #include <QShortcut>
 #include <QtDebug>
+
+#include "ui/iconloader.h"
+#include "widgets/equalizerslider.h"
 
 // We probably don't need to translate these, right?
 const char* Equalizer::kGainText[] = {
@@ -62,6 +63,7 @@ Equalizer::Equalizer(QWidget *parent)
   connect(ui_->preset, SIGNAL(currentIndexChanged(int)), SLOT(PresetChanged(int)));
   connect(ui_->preset_save, SIGNAL(clicked()), SLOT(SavePreset()));
   connect(ui_->preset_del, SIGNAL(clicked()), SLOT(DelPreset()));
+  connect(ui_->balance_slider, SIGNAL(valueChanged(int)), SLOT(StereoSliderChanged(int)));
 
   QShortcut* close = new QShortcut(QKeySequence::Close, this);
   connect(close, SIGNAL(activated()), SLOT(close()));
@@ -100,6 +102,10 @@ void Equalizer::ReloadSettings() {
   // Enabled?
   ui_->enable->setChecked(s.value("enabled", false).toBool());
   ui_->slider_container->setEnabled(ui_->enable->isChecked());
+
+  int stereo_balance = s.value("stereo_balance", 0).toInt();
+  ui_->balance_slider->setValue(stereo_balance);
+  StereoSliderChanged(stereo_balance);
 
   PresetChanged(selected_preset);
 }
@@ -232,6 +238,11 @@ Equalizer::Params Equalizer::current_params() const {
   return ret;
 }
 
+float Equalizer::stereo_balance() const {
+  return qBound(
+      -1.0f, ui_->balance_slider->value() / 100.0f, 1.0f);
+}
+
 void Equalizer::ParametersChanged() {
   if (loading_)
     return;
@@ -259,6 +270,8 @@ void Equalizer::Save() {
 
   // Enabled?
   s.setValue("enabled", ui_->enable->isChecked());
+
+  s.setValue("stereo_balance", ui_->balance_slider->value());
 }
 
 void Equalizer::closeEvent(QCloseEvent* e) {
@@ -298,6 +311,11 @@ bool Equalizer::Params::operator ==(const Equalizer::Params& other) const {
 
 bool Equalizer::Params::operator !=(const Equalizer::Params& other) const {
   return ! (*this == other);
+}
+
+void Equalizer::StereoSliderChanged(int value) {
+  emit StereoBalanceChanged(stereo_balance());
+  Save();
 }
 
 QDataStream &operator<<(QDataStream& s, const Equalizer::Params& p) {

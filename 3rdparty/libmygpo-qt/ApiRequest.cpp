@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -391,6 +391,16 @@ DeviceSyncResultPtr ApiRequestPrivate::deviceSynchronizationStatus ( const QStri
     return result;
 }
 
+DeviceSyncResultPtr ApiRequestPrivate::setDeviceSynchronizationStatus(const QString& username, const QList< QStringList >& synchronize, const QList< QString >& stopSynchronize )
+{
+    QString requestUrl = UrlBuilder::getDeviceSynchronizationStatusUrl( username );
+    QNetworkReply* reply;
+    QByteArray data = JsonCreator::deviceSynchronizationListsToJSON( synchronize, stopSynchronize );
+    reply = m_requestHandler.postRequest( data, requestUrl );
+    DeviceSyncResultPtr result( new DeviceSyncResult( reply ) );
+    return result;
+}
+
 ApiRequest::ApiRequest( const QString& username, const QString& password, QNetworkAccessManager* nam ) : d( new ApiRequestPrivate( username, password, nam ) )
 {
 }
@@ -597,4 +607,9 @@ DeviceListPtr ApiRequest::listDevices( const QString& username )
 DeviceSyncResultPtr ApiRequest::deviceSynchronizationStatus ( const QString& username )
 {
     return d->deviceSynchronizationStatus( username );
+}
+
+DeviceSyncResultPtr ApiRequest::setDeviceSynchronizationStatus(const QString& username, const QList<QStringList>& synchronize, const QList<QString>& stopSynchronize )
+{
+    return d->setDeviceSynchronizationStatus( username, synchronize, stopSynchronize );
 }

@@ -42,11 +42,14 @@ CREATE TABLE jamendo.songs (
   unavailable INTEGER DEFAULT 0,
 
   effective_albumartist TEXT,
-  etag TEXT
+  etag TEXT,
+
+  performer TEXT,
+  grouping TEXT
 );
 
 CREATE VIRTUAL TABLE jamendo.songs_fts USING fts3(
-  ftstitle, ftsalbum, ftsartist, ftsalbumartist, ftscomposer, ftsgenre, ftscomment,
+  ftstitle, ftsalbum, ftsartist, ftsalbumartist, ftscomposer, ftsperformer, ftsgrouping, ftsgenre, ftscomment,
   tokenize=unicode
 );
 

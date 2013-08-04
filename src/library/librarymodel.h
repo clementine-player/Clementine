@@ -80,6 +80,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     GroupBy_Genre = 6,
     GroupBy_AlbumArtist = 7,
     GroupBy_FileType = 8,
+    GroupBy_Performer = 9,
+    GroupBy_Grouping = 10,
   };
 
   struct Grouping {
@@ -181,7 +183,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // From LibraryBackend
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
-  void SongsStatisticsChanged(const SongList& songs);
+  void SongsSlightlyChanged(const SongList& songs);
   void TotalSongCountUpdatedSlot(int count);
 
   // Called after ResetAsync

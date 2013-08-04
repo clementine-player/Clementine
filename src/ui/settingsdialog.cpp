@@ -23,6 +23,7 @@
 #include "iconloader.h"
 #include "playbacksettingspage.h"
 #include "networkproxysettingspage.h"
+#include "networkremotesettingspage.h"
 #include "notificationssettingspage.h"
 #include "mainwindow.h"
 #include "settingsdialog.h"
@@ -37,6 +38,7 @@
 #include "internet/digitallyimportedsettingspage.h"
 #include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
+#include "internet/subsonicsettingspage.h"
 #include "internet/ubuntuonesettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
@@ -72,6 +74,11 @@
 #  include "internet/dropboxsettingspage.h"
 #endif
 
+#ifdef HAVE_BOX
+#  include "internet/boxsettingspage.h"
+#endif
+
+#include <QAbstractButton>
 #include <QDesktopWidget>
 #include <QPainter>
 #include <QPushButton>
@@ -130,6 +137,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_Library, new LibrarySettingsPage(this), general);
   AddPage(Page_Proxy, new NetworkProxySettingsPage(this), general);
   AddPage(Page_Transcoding, new TranscoderSettingsPage(this), general);
+  AddPage(Page_NetworkRemote, new NetworkRemoteSettingsPage(this), general);
 
 #ifdef HAVE_WIIMOTEDEV
   AddPage(Page_Wiimotedev, new WiimoteSettingsPage(this), general);
@@ -164,6 +172,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_Dropbox, new DropboxSettingsPage(this), providers);
 #endif
 
+#ifdef HAVE_BOX
+  AddPage(Page_Box, new BoxSettingsPage(this), providers);
+#endif
+
 #ifdef HAVE_SPOTIFY
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
 #endif
@@ -171,6 +183,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
   AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
   AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
+  AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
   AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
 
   // List box
@@ -241,12 +254,14 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page, QTreeWidgetItem* paren
   pages_[id] = data;
 }
 
-void SettingsDialog::accept() {
-  // Save settings
+void SettingsDialog::Save() {
   foreach (const PageData& data, pages_.values()) {
     data.page_->Save();
   }
+}
 
+void SettingsDialog::accept() {
+  Save();
   QDialog::accept();
 }
 
@@ -257,6 +272,13 @@ void SettingsDialog::reject() {
   }
 
   QDialog::reject();
+}
+
+void SettingsDialog::DialogButtonClicked(QAbstractButton* button) {
+  // While we only connect Apply at the moment, this might change in the future
+  if (ui_->buttonBox->button(QDialogButtonBox::Apply) == button) {
+    Save();
+  }
 }
 
 void SettingsDialog::showEvent(QShowEvent* e) {
