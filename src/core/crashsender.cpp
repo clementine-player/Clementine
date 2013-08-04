@@ -80,7 +80,10 @@ bool CrashSender::Start() {
   QByteArray data = Utilities::UrlEncode(args).toAscii();
 
   // POST the metadata.
-  QNetworkReply* reply = network_->post(QNetworkRequest(QUrl(kUploadURL)), data);
+  QNetworkRequest request((QUrl(kUploadURL)));
+  request.setHeader(QNetworkRequest::ContentTypeHeader,
+                    "application/x-www-form-urlencoded");
+  QNetworkReply* reply = network_->post(request, data);
   connect(reply, SIGNAL(finished()), SLOT(RedirectFinished()));
 
   return true;
