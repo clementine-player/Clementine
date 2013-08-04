@@ -115,9 +115,19 @@ class Dumper(object):
 
     # Run dump_syms
     with self.impl.DebugSymbolsFilename(binary_filename) as symbol_filename:
-      stdout = subprocess.check_output(
-          [self.dump_syms_binary, symbol_filename],
-          stderr=subprocess.PIPE)
+      symbol_directory = os.path.dirname(symbol_filename)
+      handle = subprocess.Popen(
+          [self.dump_syms_binary, symbol_filename, symbol_directory],
+          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+      stdout, stderr = handle.communicate()
+      if handle.returncode != 0:
+        if ("Failed to open debug ELF file" in stderr or
+            "does not contain a .gnu_debuglink section" in stderr):
+          logging.warning("Skipping file with missing debug symbols: '%s'",
+                          binary_filename)
+          return
+        raise Exception("dump_syms failed for %s\nstdout: %s\nstderr: %s" % (
+            binary_filename, stdout, stderr))
 
     # The first line of the output contains the hash.
     first_line = stdout[0:stdout.find("\n")]

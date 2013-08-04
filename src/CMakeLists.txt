@@ -1308,6 +1308,8 @@ target_link_libraries(clementine
   clementine_lib
 )
 
+separate_debug_symbols(clementine)
+
 # macdeploy.py relies on the blob being built first.
 if(HAVE_SPOTIFY_BLOB)
   add_dependencies(clementine clementine-spotifyblob)

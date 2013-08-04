@@ -1,4 +1,8 @@
 if (HAVE_BREAKPAD)
+  if (NOT CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+    message(SEND_ERROR "You must set CMAKE_BUILD_TYPE to RelWithDebInfo when using Breakpad")
+  endif()
+
   add_custom_target(breakpad_symbols
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND python
