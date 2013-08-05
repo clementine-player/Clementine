@@ -38,8 +38,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-07-29 08:51+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -308,7 +308,7 @@ msgstr "<a href=\"http://www.di.fm/premium/\">Mettre à jour vers la version Pre
 msgid ""
 "<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
 "your password</a>"
-msgstr ""
+msgstr "<a href=\"https://one.ubuntu.com/auth/login\">Créer un nouveau compte ou réinitialiser votre mot de passe</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -892,7 +892,7 @@ msgstr "Image d'arrière-plan"
 msgid "Background opacity"
 msgstr "Opacité de l'arrière-plan"
 
-#: core/database.cpp:710
+#: core/database.cpp:734
 msgid "Backing up database"
 msgstr "Sauvegarde de la base de données"
 
@@ -1525,7 +1525,7 @@ msgstr "Chemin DBus"
 msgid "Dance"
 msgstr "Danse"
 
-#: core/database.cpp:664
+#: core/database.cpp:688
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1778,7 +1778,7 @@ msgstr "Téléchargement en file"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr ""
+msgstr "Télécharger l'application Android"
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -2605,7 +2605,7 @@ msgstr "Insérer..."
 msgid "Installed"
 msgstr "Installé"
 
-#: core/database.cpp:649
+#: core/database.cpp:673
 msgid "Integrity check"
 msgstr "Vérification de l'intégrité"
 
@@ -3369,7 +3369,7 @@ msgstr "Accepter seulement les connexions de clients dont l'IP est dans les bloc
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "Autoriser uniquement les connexions depuis le réseau local"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3590,7 +3590,7 @@ msgid "Player options"
 msgstr "Options du lecteur"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
 #: playlist/playlisttabbar.cpp:321
 msgid "Playlist"
 msgstr "Liste de lecture"
@@ -3965,7 +3965,7 @@ msgstr "Repeupler"
 
 #: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "Require authentication code"
-msgstr ""
+msgstr "Exiger un code d'authentification"
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
@@ -4250,7 +4250,7 @@ msgstr "Définir une valeur pour toutes les pistes sélectionnées..."
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4953,11 +4953,11 @@ msgstr "Ubuntu One"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:132
 msgid "Ubuntu One password"
-msgstr ""
+msgstr "Mot de passe Ubuntu One"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:130
 msgid "Ubuntu One username"
-msgstr ""
+msgstr "Nom d'utilisateur Ubuntu One"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4970,7 +4970,7 @@ msgstr "Impossible de télécharger %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:487 playlist/playlistmanager.cpp:490
+#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5068,7 +5068,7 @@ msgstr "Utiliser un message personnalisé pour les notifications"
 
 #: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Use a network remote control"
-msgstr ""
+msgstr "Utiliser le contrôle à distance"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -5142,7 +5142,7 @@ msgid "Variable bit rate"
 msgstr "Débit variable"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:502 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Compilations d'artistes"
 
@@ -5191,7 +5191,7 @@ msgstr "WMA"
 
 #: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "M'avertir lors de la fermeture d'un onglet de liste de lecture"
 
 #: core/song.cpp:337
 msgid "Wav"
@@ -5333,7 +5333,7 @@ msgstr "Vous allez supprimer %1 listes de lectures de vos favoris. Êtes-vous s�
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr "Vous êtes sur le point de supprimer une liste de lecture qui ne fait pas partie de vos favoris : cette liste de lecture va être supprimée (cette action ne peut être annulée).\nÊtes-vous sur de vouloir continuer ?"
+msgstr "Vous êtes sur le point de fermer une liste de lecture qui ne fait pas partie de vos favoris : cette liste de lecture va être supprimée (cette action ne peut être annulée).\nÊtes-vous sur de vouloir continuer ?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5596,7 +5596,7 @@ msgstr "options"
 
 #: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "ou scanner le code QR !"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

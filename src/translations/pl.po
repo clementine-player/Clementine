@@ -10,12 +10,13 @@
 # Michał Ziąbkowski <mziab@o2.pl>, 2010
 # Patryk Wychowaniec <patryk1303@gmail.com>, 2011
 # Patryk Wychowaniec <>, 2012
+# predek <predek00@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-08-04 14:52+0000\n"
+"Last-Translator: predek <predek00@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/clementine/language/pl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -284,7 +285,7 @@ msgstr "<a href=\"http://www.di.fm/premium/\">Ulepsz do konta premium</a>"
 msgid ""
 "<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
 "your password</a>"
-msgstr ""
+msgstr "<a href=\"https://one.ubuntu.com/auth/login\">Stwórz nowe konto lub zresetuj swoje hasło</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -868,7 +869,7 @@ msgstr "Obrazek tła"
 msgid "Background opacity"
 msgstr "Nieprzezroczystość tła"
 
-#: core/database.cpp:710
+#: core/database.cpp:734
 msgid "Backing up database"
 msgstr "Tworzenie kopii zapasowej bazy danych"
 
@@ -1501,7 +1502,7 @@ msgstr "Ścieżka DBus"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:664
+#: core/database.cpp:688
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1754,7 +1755,7 @@ msgstr "Pobieranie w kolejce"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr ""
+msgstr "Pobierz aplikację na Androida"
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -2581,7 +2582,7 @@ msgstr "Wstaw..."
 msgid "Installed"
 msgstr "Zainstalowano"
 
-#: core/database.cpp:649
+#: core/database.cpp:673
 msgid "Integrity check"
 msgstr "Sprawdzanie integralności"
 
@@ -3345,7 +3346,7 @@ msgstr "Zezwalaj tylko na połączenia z następujących zakresów IP:\n10.x.x.x
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "Zezwalaj tylko na połączenia z sieci lokalnej"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3566,7 +3567,7 @@ msgid "Player options"
 msgstr "Opcje odtwarzacza"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
 #: playlist/playlisttabbar.cpp:321
 msgid "Playlist"
 msgstr "Lista odtwarzania"
@@ -3941,7 +3942,7 @@ msgstr "Stwórz ponownie"
 
 #: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "Require authentication code"
-msgstr ""
+msgstr "Wymagaj kodu uwierzytelniającego"
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
@@ -4226,7 +4227,7 @@ msgstr "Ustaw wartość dla wszystkich zaznaczonych utworów..."
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Settings"
-msgstr ""
+msgstr "Ustawienia"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4946,7 +4947,7 @@ msgstr "Nie udało się pobrać %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:487 playlist/playlistmanager.cpp:490
+#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5044,7 +5045,7 @@ msgstr "Użyj niestandardowej wiadomości dla powiadomień"
 
 #: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Use a network remote control"
-msgstr ""
+msgstr "Użyj zdalnego sterowania"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -5118,7 +5119,7 @@ msgid "Variable bit rate"
 msgstr "Zmienny bitrate"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:502 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Różni wykonawcy"
 
@@ -5167,7 +5168,7 @@ msgstr "WMA"
 
 #: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "Ostrzeż mnie kiedy zamknę zakładkę listy odtwarzania"
 
 #: core/song.cpp:337
 msgid "Wav"
@@ -5572,7 +5573,7 @@ msgstr "opcje"
 
 #: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "lub zeskanuj kod QR!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

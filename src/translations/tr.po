@@ -19,13 +19,14 @@
 # apshalasha <apshalasha@gmail.com>, 2013
 # Ömer Faruk Uzun  <farukuzun@mail.com>, 2012
 # zeugma <sunder67@hotmail.com>, 2012
+# volkangezer <volkangezer@gmail.com>, 2013
 # yusufbesir1 <yusufbesir1@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-07-30 20:58+0000\n"
+"Last-Translator: volkangezer <volkangezer@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,7 +40,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\nÇalma listelerini bir çalma listesi adının anındaki yıldız simgesi ile beğenilenlere ekleyebilirsiniz\n\nBeğenilen çalma listeleri buraya kaydedilecek"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -251,7 +252,7 @@ msgstr "...ve tüm Amarok katkıcılarına"
 
 #: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
@@ -294,7 +295,7 @@ msgstr "<a href=\"http://www.di.fm/premium/\">Şimdi Premium üyeliğine geçin<
 msgid ""
 "<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
 "your password</a>"
-msgstr ""
+msgstr "<a href=\"https://one.ubuntu.com/auth/login\">Bir yeni hesap oluştur veya parolayı sıfırla</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -304,7 +305,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Eğer işaretli değilse, Clementine beğenilerinizi ve diğer istatistikleri, sadece ayrı bir veritabanında saklayıp dosyalarınızı değiştirmeyecektir.</p><p>İşaretli ise, istatistikler hem veritabanına hem de her dosya değişiminde doğrudan dosyalara kaydedilecektir.</p><p>Lütfen, bu işlem için bir standart olmadığından ve bu işlem her biçim için çalışmayabileceğinden, diğer müzik oynatıcılar okuyamayabilir.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -312,7 +313,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Bu şarkının beğenilerini ve isatistiklerini, tüm kütüphanenizin şarkılarındaki dosya etiketlerine yazacaktır.</p><p>Eğer &quot;Beğeni ve istatistikleri dosya etiketinde sakla&quot; seçeneği her zaman etkin ise, gerekli değildir.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -440,11 +441,11 @@ msgstr "Dosya ekle"
 
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Dosyayı dönüştürücüye ekle"
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Dosyayı/dosyaları dönüştürücüye ekle"
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "Add file..."
@@ -520,7 +521,7 @@ msgstr "Şarkı uzunluğu etiketi ekle"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
-msgstr ""
+msgstr "Şarkıyı söyleyen etiketi ekle"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song play count"
@@ -689,11 +690,11 @@ msgstr "Tüm parçalar"
 
 #: ../bin/src/ui_networkremotesettingspage.h:194
 msgid "Allow a client to download music from this computer."
-msgstr ""
+msgstr "Bir istemciye bu bilgisayardan müzik indirmesine izin ver."
 
 #: ../bin/src/ui_networkremotesettingspage.h:196
 msgid "Allow downloads"
-msgstr ""
+msgstr "İndirmelere izin ver"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
@@ -783,7 +784,7 @@ msgstr "Bu şarkının istatistik bilgisini sıfırlamak istiyor musunuz?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "Şarkıların istatistiklerini, kütüphanenizdeki tüm şarkıların kendi dosyalarına yazmak istediğinizden emin misiniz?"
 
 #: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -878,13 +879,13 @@ msgstr "Arkaplan resmi"
 msgid "Background opacity"
 msgstr "Artalan saydamlığı"
 
-#: core/database.cpp:710
+#: core/database.cpp:734
 msgid "Backing up database"
 msgstr "Veritabanını yedekliyor"
 
 #: ../bin/src/ui_equalizer.h:173
 msgid "Balance"
-msgstr ""
+msgstr "Denge"
 
 #: ../bin/src/ui_mainwindow.h:663
 msgid "Ban"
@@ -959,7 +960,7 @@ msgstr "Gözat..."
 
 #: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Buffer duration"
-msgstr ""
+msgstr "Önbellek süresi"
 
 #: engines/gstengine.cpp:784
 msgid "Buffering"
@@ -1158,7 +1159,7 @@ msgstr "Parça eklemek için buraya tıklayın"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "Bu çalma listesini beğenmek için buraya tıkladığınızda, kenar çubuğundaki \"Çalma Listeleri\" panelinde erişilebilir olacaktır."
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1285,12 +1286,12 @@ msgstr "Spotify'a bağlanılıyor"
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "Bağlantı sunucu tarafından reddedildi, sunucu adresini denetleyin. Örnek: http://localhost:4040/"
 
 #: internet/subsonicsettingspage.cpp:117
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Bağlantı zaman aşımına uğradı, sunucu adresini denetleyin. Örnek: http://localhost:4040/"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:693
 msgid "Console"
@@ -1473,7 +1474,7 @@ msgstr "Ctrl+Shift+O"
 
 #: ../bin/src/ui_mainwindow.h:726
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Ctrl+Shift+T"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+T"
@@ -1511,7 +1512,7 @@ msgstr "DBus yolu"
 msgid "Dance"
 msgstr "Dans"
 
-#: core/database.cpp:664
+#: core/database.cpp:688
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1707,7 +1708,7 @@ msgstr "Hiç bir müziği dönüştürme"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
-msgstr ""
+msgstr "Üzerine yazma"
 
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1727,7 +1728,7 @@ msgstr "Durma!"
 
 #: internet/somafmservice.cpp:103
 msgid "Donate"
-msgstr ""
+msgstr "Bağış Yap"
 
 #: devices/deviceview.cpp:115
 msgid "Double click to open"
@@ -1764,7 +1765,7 @@ msgstr "Sıradakileri indir"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr ""
+msgstr "Android uygulamasını indir"
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -1901,7 +1902,7 @@ msgstr "Kapağı Internet'ten indirmek için URL girin:"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
-msgstr ""
+msgstr "Dışa aktarılan kapaklar için bir dosya adı girin (uzantı yok):"
 
 #: playlist/playlisttabbar.cpp:134
 msgid "Enter a new name for this playlist"
@@ -2037,7 +2038,7 @@ msgstr "Aynı albümde veya aynı CUE dosyasında bulunan parçalar hariç"
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
-msgstr ""
+msgstr "Mevcut kapaklar"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
@@ -2050,28 +2051,28 @@ msgstr "Bitiş tarihi %1"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Export Covers"
-msgstr ""
+msgstr "Kapakları Aktar"
 
 #: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
-msgstr ""
+msgstr "Kapakları aktar"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
-msgstr ""
+msgstr "İndirilen kapakları aktar"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
-msgstr ""
+msgstr "Gömülü kapakları aktar"
 
 #: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
-msgstr ""
+msgstr "Biteni aktar"
 
 #: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "%2 kapağın %1 tanesi aktarıldı (%3 atlandı)"
 
 #: ../bin/src/ui_mainwindow.h:679
 msgid "F1"
@@ -2105,7 +2106,7 @@ msgstr "FLAC"
 
 #: ../bin/src/ui_playbacksettingspage.h:306
 msgid "Fade out on pause / fade in on resume"
-msgstr ""
+msgstr "Bekletmede sesi yavaşça kıs / devam ettiğinde aç"
 
 #: ../bin/src/ui_playbacksettingspage.h:300
 msgid "Fade out when stopping a track"
@@ -2149,7 +2150,7 @@ msgstr "Favoriler"
 
 #: library/library.cpp:77
 msgid "Favourite tracks"
-msgstr "Favori parçalar"
+msgstr "Beğenilen parçalar"
 
 #: ../bin/src/ui_albumcovermanager.h:225
 msgid "Fetch Missing Covers"
@@ -2440,7 +2441,7 @@ msgstr "HTML sayfası herhangi bir RSS beslemesi içermiyor"
 #: internet/subsonicsettingspage.cpp:135
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr ""
+msgstr "HTTP 3xx durum kodu adressiz alındı, sunucu yapılandırmasını doğrulayın."
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2474,7 +2475,7 @@ msgstr "Yüksek (1024x1024)"
 
 #: internet/subsonicsettingspage.cpp:112
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Sunucu bulunamadı, sunucu adresini denetleyin. Örnek: http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
@@ -2560,7 +2561,7 @@ msgstr "Uyumsuz Subsonic REST protokol sürümü. Sunucu yükseltilmeli."
 
 #: internet/subsonicsettingspage.cpp:127
 msgid "Incomplete configuration, please ensure all fields are populated."
-msgstr ""
+msgstr "Tamamlanmamış yapılandırma, lütfen tüm alanların dolduğundan emin olun"
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -2591,7 +2592,7 @@ msgstr "Ekle..."
 msgid "Installed"
 msgstr "Kuruldu"
 
-#: core/database.cpp:649
+#: core/database.cpp:673
 msgid "Integrity check"
 msgstr "Bütünlük doğrulaması"
 
@@ -2788,7 +2789,7 @@ msgstr "Öntanımlıların kullanılması için boş bırakın. Örnekler: \"/de
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
-msgstr ""
+msgstr "So"
 
 #: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -3243,7 +3244,7 @@ msgstr "Arkaplan resmi yok"
 
 #: ui/albumcovermanager.cpp:778
 msgid "No covers to export."
-msgstr ""
+msgstr "Aktarılacak kapak yok."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
@@ -3355,7 +3356,7 @@ msgstr "Sadece bu IP aralıklarındaki istemcilerden bağlantı kabul et:\\n 10.
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "Sadece yerel ağdan bağlantılara izin ver"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3450,11 +3451,11 @@ msgstr "Diğer seçenekler"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
-msgstr ""
+msgstr "Çıktı"
 
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
-msgstr ""
+msgstr "Çıktı aygıtı"
 
 #: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
@@ -3462,11 +3463,11 @@ msgstr "Çıktı seçenekleri"
 
 #: ../bin/src/ui_playbacksettingspage.h:320
 msgid "Output plugin"
-msgstr ""
+msgstr "Çıktı eklentisi"
 
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
-msgstr ""
+msgstr "Tümünün üzerine yaz"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
@@ -3474,7 +3475,7 @@ msgstr "Mevcut dosyaların üzerine yaz"
 
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
-msgstr ""
+msgstr "Sadece daha küçük olanların üzerine yaz"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3517,7 +3518,7 @@ msgstr "Sanatçı"
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
-msgstr ""
+msgstr "Piksel"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
@@ -3576,7 +3577,7 @@ msgid "Player options"
 msgstr "Oynatıcı seçenekleri"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
 #: playlist/playlisttabbar.cpp:321
 msgid "Playlist"
 msgstr "Çalma Listesi"
@@ -3802,7 +3803,7 @@ msgstr "Gerçekten iptal edeyim mi?"
 
 #: internet/subsonicsettingspage.cpp:131
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "Yönlendirme limiti aşıldı, sunucu yapılandırmasını doğrulayın."
 
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
@@ -3872,11 +3873,11 @@ msgstr "Çalma listesinden kaldır"
 
 #: playlist/playlisttabbar.cpp:169
 msgid "Remove playlist"
-msgstr ""
+msgstr "Çalma listesini kaldır"
 
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
-msgstr ""
+msgstr "Çalma listesini kaldır"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
@@ -3943,7 +3944,7 @@ msgstr "Replay Gain"
 
 #: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Yeniden Oynatma Kazanç kipi"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3951,7 +3952,7 @@ msgstr "Yeniden doldur"
 
 #: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "Require authentication code"
-msgstr ""
+msgstr "Doğrulama kodu iste"
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
@@ -3964,7 +3965,7 @@ msgstr "Çalma sayısını sıfırla"
 #: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "Eğer başlangıçtan en fazla 8 saniye geçmişse parçayı yeniden başlat veya önceki parçayı çal."
 
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
@@ -3992,7 +3993,7 @@ msgstr "Clementine'e Geri Dön"
 
 #: ../bin/src/ui_equalizer.h:174
 msgid "Right"
-msgstr ""
+msgstr "Sağ"
 
 #: ui/equalizer.cpp:127
 msgid "Rock"
@@ -4010,7 +4011,7 @@ msgstr "SOCKS vekil sunucu"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "SSL anlaşma hatası, sunucu yapılandırmasını doğrulayın. SSLv3 seçeneği bazı durumlarda sorunu çözebilir."
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4058,11 +4059,11 @@ msgstr "Ayarı kaydet"
 
 #: ../bin/src/ui_librarysettingspage.h:193
 msgid "Save ratings in file tags when possible"
-msgstr ""
+msgstr "Mümkün olduğunda beğenileri dosya etiketlerine kaydet"
 
 #: ../bin/src/ui_librarysettingspage.h:197
 msgid "Save statistics in file tags when possible"
-msgstr ""
+msgstr "Mümkün olduğunda istatistikleri dosya etiketlerine kaydet"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
@@ -4070,7 +4071,7 @@ msgstr "Bu akışı Internet sekmesine kaydet"
 
 #: library/library.cpp:164
 msgid "Saving songs statistics into songs files"
-msgstr ""
+msgstr "Şarkı istatistikleri şarkı dosyalarına kaydediliyor"
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4082,7 +4083,7 @@ msgstr "Ölçeklenebilir örnekleme oranı profili (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
-msgstr ""
+msgstr "ÖLçek boyutu"
 
 #: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
@@ -4236,7 +4237,7 @@ msgstr "Seçili tüm parçalar için değeri ayarla..."
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Settings"
-msgstr ""
+msgstr "Ayarlar"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4396,11 +4397,11 @@ msgstr "Benzer sanatçılar"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
-msgstr ""
+msgstr "Boyut"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
-msgstr ""
+msgstr "Boyut:"
 
 #: ui/equalizer.cpp:129
 msgid "Ska"
@@ -4627,7 +4628,7 @@ msgstr "Desteklenen biçimler"
 
 #: ../bin/src/ui_librarysettingspage.h:201
 msgid "Synchronize statistics to files now"
-msgstr ""
+msgstr "İstatistikleri dosyalara şimdi eşleştir"
 
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
@@ -4759,7 +4760,7 @@ msgstr "Bu dosyalar aygıttan silinecek, devam etmek istiyor musunuz?"
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Bu dosyalar diskten kalıcı olarak silinecek, devam etmek istiyor musunuz?"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4877,7 +4878,7 @@ msgstr "En çok dinlenen parçalar"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
-msgstr ""
+msgstr "Toplam albüm:"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
@@ -4939,11 +4940,11 @@ msgstr "Ubuntu One"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:132
 msgid "Ubuntu One password"
-msgstr ""
+msgstr "Ubuntu One parolası"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:130
 msgid "Ubuntu One username"
-msgstr ""
+msgstr "Ubuntu One kullanıcı adı"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4956,7 +4957,7 @@ msgstr "%1 indirilemedi (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:487 playlist/playlistmanager.cpp:490
+#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5038,7 +5039,7 @@ msgstr "Varsa Replay Gain verisini kullan"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 msgid "Use SSLv3"
-msgstr ""
+msgstr "SSLv3 kullan"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5054,7 +5055,7 @@ msgstr "Bildirimler için özel bir mesaj kullan"
 
 #: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Use a network remote control"
-msgstr ""
+msgstr "Bir ağ uzak denetimi kullan"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -5128,7 +5129,7 @@ msgid "Variable bit rate"
 msgstr "Değişken bit oranı"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:502 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Çeşitli sanatçılar"
 
@@ -5177,7 +5178,7 @@ msgstr "WMA"
 
 #: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "Bir çalma listesi sekmesini kapatırken beni uyar"
 
 #: core/song.cpp:337
 msgid "Wav"
@@ -5265,7 +5266,7 @@ msgstr "Windows Media audio"
 
 #: ../bin/src/ui_albumcovermanager.h:222
 msgid "Without cover:"
-msgstr ""
+msgstr "Kapak resmi olmayan:"
 
 #: library/libraryview.cpp:530
 msgid ""
@@ -5279,7 +5280,7 @@ msgstr "Şu anda tam bir yeniden tarama çalıştırmak ister misiniz?"
 
 #: library/librarysettingspage.cpp:151
 msgid "Write all songs statistics into songs' files"
-msgstr ""
+msgstr "Tüm şarkı istatistiklerini şarkı dosyalarına yaz"
 
 #: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
@@ -5313,13 +5314,13 @@ msgstr "Aşağıdaki albümleri indirmek üzeresiniz"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "Beğenilenlerinizden %1 oynatma listesini kaldırmak üzeresiniz. Emin misiniz?"
 
 #: playlist/playlisttabbar.cpp:170
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "Beğenilen çalma listelerinizin bir parçası olmayan bir çalma listesini kaldırmak üzeresiniz: çalma listesi silinecektir (bu işlem geri alınamaz).\nDevam etmek istediğinizden emin misiniz?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5582,7 +5583,7 @@ msgstr "seçenekler"
 
 #: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "veya QR kodunu tara!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

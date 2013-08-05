@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-08-03 07:10+0000\n"
+"Last-Translator: Yhal Htet Aung <jumoun@gmail.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/projects/p/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -278,7 +278,7 @@ msgstr "<a href=\"http://www.di.fm/premium/\">အရစ်ကျစနစ်သ�
 msgid ""
 "<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
 "your password</a>"
-msgstr ""
+msgstr "<a href=\"https://one.ubuntu.com/auth/login\">စာရင်းအသစ်တစ်ခုဖန်တီး(သို့)စကားဝှက်ပြန်ပြောင်း</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -862,7 +862,7 @@ msgstr "နောက်ခံပုံ"
 msgid "Background opacity"
 msgstr "နောက်ခံအလင်းပိတ်"
 
-#: core/database.cpp:710
+#: core/database.cpp:734
 msgid "Backing up database"
 msgstr "အချက်အလက်အစုအရန်မှတ်သိမ်း"
 
@@ -1495,7 +1495,7 @@ msgstr "ဒီဘတ်စ်လမ်းကြောင်း"
 msgid "Dance"
 msgstr "အက"
 
-#: core/database.cpp:664
+#: core/database.cpp:688
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1748,7 +1748,7 @@ msgstr "စီတန်းပြီးကူးဆွဲ"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr ""
+msgstr "စက်ရုပ်အပ်များကူးဆွဲ"
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -2575,7 +2575,7 @@ msgstr "ထည့်သွင်း..."
 msgid "Installed"
 msgstr "သွင်းပြီး"
 
-#: core/database.cpp:649
+#: core/database.cpp:673
 msgid "Integrity check"
 msgstr "ခိုင်မြဲမှုစစ်ဆေး"
 
@@ -3339,7 +3339,7 @@ msgstr "အိုင်ပီအတွင်းရှိအသံုးပြု
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "ကွန်ယက်တွင်းရှိဆက်သွယ်ချက်များကိုသာခွင့်ပြု"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3560,7 +3560,7 @@ msgid "Player options"
 msgstr "ဖွင့်စက်ရွေးပိုင်ခွင့်များ"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
 #: playlist/playlisttabbar.cpp:321
 msgid "Playlist"
 msgstr "သီချင်းစာရင်း"
@@ -3935,7 +3935,7 @@ msgstr "ပြန်လည်ရွှေ့ပြောင်း"
 
 #: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "Require authentication code"
-msgstr ""
+msgstr "အထောက်အထားစစ်ဆေးခြင်းကုဒ်လိုအပ်"
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
@@ -4220,7 +4220,7 @@ msgstr "ရွေးချယ်တေးသံလမ်းကြောမျာ
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Settings"
-msgstr ""
+msgstr "ချိန်ညှိချက်"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4631,7 +4631,7 @@ msgstr "စနစ်အရောင်များ"
 
 #: widgets/fancytabwidget.cpp:673
 msgid "Tabs on top"
-msgstr "ကွင်းများကိုအပေါ်သို့"
+msgstr "မျက်နှာစာများကိုအပေါ်သို့"
 
 #: ../bin/src/ui_lastfmstationdialog.h:97
 msgid "Tag"
@@ -4923,11 +4923,11 @@ msgstr "ဦးဘွန်တူးဝမ်း"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:132
 msgid "Ubuntu One password"
-msgstr ""
+msgstr "ဦးဘွန်တူးဝမ်းစကားဝှက်"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:130
 msgid "Ubuntu One username"
-msgstr ""
+msgstr "ဦးဘွန်တူးဝမ်းအသုံးပြုသူနာမည်"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4940,7 +4940,7 @@ msgstr "မကူးဆွဲနိုင် %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:487 playlist/playlistmanager.cpp:490
+#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5038,7 +5038,7 @@ msgstr "သတိပေးချက်များအတွက်စိတ်က
 
 #: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Use a network remote control"
-msgstr ""
+msgstr "ကွန်ရက်အဝေးထိန်းတစ်ခုအသုံးပြု"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -5112,7 +5112,7 @@ msgid "Variable bit rate"
 msgstr "ဘစ်နှုန်းကိန်းရှင်"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:502 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုး"
 
@@ -5161,7 +5161,7 @@ msgstr "တပလူအမ်အေ"
 
 #: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "သီချင်းစာရင်းမျက်နှာစာကိုပိတ်နေတုန်းသတိပေး"
 
 #: core/song.cpp:337
 msgid "Wav"
@@ -5566,7 +5566,7 @@ msgstr "ရွေးပိုင်ခွင့်များ"
 
 #: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "(သို့)ကျုအာကုဒ်ကိုဖတ်"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

@@ -9,6 +9,7 @@
 # Andy Dufrane <>, 2012
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # drmx <dronmax@gmail.com>, 2013
+# Just a baka <justabaka@gmail.com>, 2013
 # Just a baka <justabaka@gmail.com>, 2012
 # Валерий Третьяк <karlsson169@gmail.com>, 2012
 # SvetlanaK <kolyadas89@gmail.com>, 2011
@@ -27,8 +28,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-07-31 10:31+0000\n"
+"Last-Translator: Just a baka <justabaka@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -443,11 +444,11 @@ msgstr "Добавить файл"
 
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Добавить файл для перекодирования"
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Добавить файлы для перекодирования"
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "Add file..."
@@ -696,7 +697,7 @@ msgstr ""
 
 #: ../bin/src/ui_networkremotesettingspage.h:196
 msgid "Allow downloads"
-msgstr ""
+msgstr "Разрешить загрузки"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
@@ -881,7 +882,7 @@ msgstr "Фоновое изображение"
 msgid "Background opacity"
 msgstr "Прозрачность фона"
 
-#: core/database.cpp:710
+#: core/database.cpp:734
 msgid "Backing up database"
 msgstr "Резервное копирование базы данных"
 
@@ -1288,12 +1289,12 @@ msgstr "Подключение к Spotify"
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "Соединение отвергнуто сервером, проверьте адрес сервера. Пример: http://localhost:4040/"
 
 #: internet/subsonicsettingspage.cpp:117
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Превышено время ожидания при установке соединения, проверьте адрес сервера. Пример: http://localhost:4040/"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:693
 msgid "Console"
@@ -1476,7 +1477,7 @@ msgstr "Ctrl+Shift+O"
 
 #: ../bin/src/ui_mainwindow.h:726
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Ctrl+Shift+T"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+T"
@@ -1514,7 +1515,7 @@ msgstr "DBus path"
 msgid "Dance"
 msgstr "Танцевальный"
 
-#: core/database.cpp:664
+#: core/database.cpp:688
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2477,7 +2478,7 @@ msgstr "Высокое (1024x1024)"
 
 #: internet/subsonicsettingspage.cpp:112
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Сервер не найден, проверьте адрес сервера. Пример: http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
@@ -2594,7 +2595,7 @@ msgstr "Вставить..."
 msgid "Installed"
 msgstr "Установлено"
 
-#: core/database.cpp:649
+#: core/database.cpp:673
 msgid "Integrity check"
 msgstr "Проверка целостности"
 
@@ -3246,7 +3247,7 @@ msgstr "Нет фонового изображения"
 
 #: ui/albumcovermanager.cpp:778
 msgid "No covers to export."
-msgstr ""
+msgstr "Нет обложек для экспорта."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
@@ -3579,7 +3580,7 @@ msgid "Player options"
 msgstr "Настройки проигрывателя"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
 #: playlist/playlisttabbar.cpp:321
 msgid "Playlist"
 msgstr "Список воспроизведения"
@@ -3875,7 +3876,7 @@ msgstr "Удалить из списка воспроизведения"
 
 #: playlist/playlisttabbar.cpp:169
 msgid "Remove playlist"
-msgstr ""
+msgstr "Удалить список воспроизведения"
 
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
@@ -3954,7 +3955,7 @@ msgstr "Перезаполнить"
 
 #: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "Require authentication code"
-msgstr ""
+msgstr "Требовать код аутентификации."
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
@@ -4013,7 +4014,7 @@ msgstr "SOCKS прокси"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "Ошибка установки SSL-соединения, проверьте настройки соединения. В некоторых случаях может помочь включение SSLv3."
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4239,7 +4240,7 @@ msgstr "Установить значение для всех выделенны
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4942,11 +4943,11 @@ msgstr "Ubuntu One"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:132
 msgid "Ubuntu One password"
-msgstr ""
+msgstr "Пароль Ubuntu One"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:130
 msgid "Ubuntu One username"
-msgstr ""
+msgstr "Имя пользователя Ubuntu One"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4959,7 +4960,7 @@ msgstr "Невозможно загрузить %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:487 playlist/playlistmanager.cpp:490
+#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5041,7 +5042,7 @@ msgstr "По возможности использовать метаданны�
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 msgid "Use SSLv3"
-msgstr ""
+msgstr "Использовать SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5131,7 +5132,7 @@ msgid "Variable bit rate"
 msgstr "Переменный битрейт"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:502 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Разные исполнители"
 
@@ -5180,7 +5181,7 @@ msgstr "WMA"
 
 #: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "Предупреждать при закрытии вкладки списка воспроизведения"
 
 #: core/song.cpp:337
 msgid "Wav"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-29 00:13+0000\n"
+"PO-Revision-Date: 2013-07-30 17:01+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -865,7 +865,7 @@ msgstr "Imatge de fons"
 msgid "Background opacity"
 msgstr "Opacitat del fons"
 
-#: core/database.cpp:710
+#: core/database.cpp:734
 msgid "Backing up database"
 msgstr "S’està fent una còpia de seguretat de la base de dades"
 
@@ -1032,7 +1032,7 @@ msgstr "Tria de la llista"
 
 #: smartplaylists/querywizardplugin.cpp:155
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr "Elegir com ordenar la llista de reproducció i quantes cançons contindrà."
+msgstr "Trieu com ordenar la llista de reproducció i quantes cançons contindrà."
 
 #: podcasts/podcastsettingspage.cpp:132
 msgid "Choose podcast download directory"
@@ -1041,7 +1041,7 @@ msgstr "Escolliu el directori de baixada dels podcasts"
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Trieu els llocs web que voleu que el Clementine usi per buscar lletres de cançons."
+msgstr "Trieu els llocs web que voleu que el Clementine usi per cercar lletres de cançons."
 
 #: ui/equalizer.cpp:115
 msgid "Classical"
@@ -1498,7 +1498,7 @@ msgstr "Ruta DBus"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:664
+#: core/database.cpp:688
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2495,7 +2495,7 @@ msgstr "Si continueu, aquest dispositiu funcionarà lentament i les cançons que
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr "Si coneixeu la URL d’un podcast, escriviu-la a continuació i feu clic a Vés-hi."
+msgstr "Si coneixeu l’URL d’un podcast, escriviu-ho a continuació i feu clic a Vés-hi."
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
@@ -2578,7 +2578,7 @@ msgstr "Insereix…"
 msgid "Installed"
 msgstr "Instal·lat"
 
-#: core/database.cpp:649
+#: core/database.cpp:673
 msgid "Integrity check"
 msgstr "Comprovació d’integritat"
 
@@ -2636,11 +2636,11 @@ msgstr "Les Millors Cançons de Jamendo"
 
 #: internet/jamendoservice.cpp:103
 msgid "Jamendo Top Tracks of the Month"
-msgstr "Les Millors Cançons del Mes de Jamendo"
+msgstr "Les millors cançons del mes al Jamendo"
 
 #: internet/jamendoservice.cpp:105
 msgid "Jamendo Top Tracks of the Week"
-msgstr "Les millors cançons de la setmana de Jamendo"
+msgstr "Les millors cançons de la setmana al Jamendo"
 
 #: internet/jamendoservice.cpp:171
 msgid "Jamendo database"
@@ -2664,11 +2664,11 @@ msgstr "Pressioni els botons per %1 segons..."
 
 #: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Keep running in the background when the window is closed"
-msgstr "Mantingues l'aplicació executant-se en segon pla quan tanqui la finestra"
+msgstr "Mantingues l’aplicació executant-se en segon pla quan tanqueu la finestra"
 
 #: ../bin/src/ui_organisedialog.h:193
 msgid "Keep the original files"
-msgstr "Manté els fitxers originals"
+msgstr "Mantingues els fitxers originals"
 
 #: ../bin/src/ui_mainwindow.h:692
 msgid "Kittens"
@@ -2771,7 +2771,7 @@ msgstr "Cançons menys preferides"
 
 #: ../bin/src/ui_playbacksettingspage.h:326
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "Deixar-ho en blanc per assignar el valor per defecte. Exemples : \"/dev/dsp\", \"front\", etc."
+msgstr "Deixeu-ho buit per assignar el valor predeterminat. Exemples: «/dev/dsp», «front»,…"
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
@@ -3563,7 +3563,7 @@ msgid "Player options"
 msgstr "Opcions del reproductor"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:479
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
 #: playlist/playlisttabbar.cpp:321
 msgid "Playlist"
 msgstr "Llista de reproducció"
@@ -4943,7 +4943,7 @@ msgstr "No es pot baixar %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:487 playlist/playlistmanager.cpp:490
+#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5065,7 +5065,7 @@ msgstr "Usa el modelatge de soroll temporal"
 
 #: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Use the system default"
-msgstr "Utilitza el sistema per defecte"
+msgstr "Utilitza el valor per defecte del sistema"
 
 #: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
@@ -5103,7 +5103,7 @@ msgstr "﻿Nom d’usuari"
 
 #: ../bin/src/ui_behavioursettingspage.h:207
 msgid "Using the menu to add a song will..."
-msgstr "En emrar el menu per afegir una cançó..."
+msgstr "En emprar el menú per afegir una cançó…"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:173
@@ -5115,7 +5115,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de bits variable"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:502 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Artistes diversos"
 
