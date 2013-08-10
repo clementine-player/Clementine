@@ -176,8 +176,7 @@ void PlaylistTabBar::Close() {
            "Are you sure you want to continue?"));
     confirmation_box.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
 
-    QCheckBox dont_prompt_again(QObject::tr("Warn me when closing a playlist tab"),
-                                &confirmation_box);
+    QCheckBox dont_prompt_again(tr("Warn me when closing a playlist tab"), &confirmation_box);
     dont_prompt_again.setChecked(ask_for_delete);
     dont_prompt_again.blockSignals(true);
     dont_prompt_again.setToolTip(
