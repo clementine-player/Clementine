@@ -26,6 +26,7 @@
 #include "widgets/renametablineedit.h"
 #include "widgets/favoritewidget.h"
 
+#include <QCheckBox>
 #include <QContextMenuEvent>
 #include <QInputDialog>
 #include <QMenu>
@@ -165,14 +166,32 @@ void PlaylistTabBar::Close() {
   const bool ask_for_delete = s.value("warn_close_playlist", true).toBool();
 
   if (ask_for_delete && !manager_->IsPlaylistFavorite(playlist_id)) {
-    if (QMessageBox::question(this,
-          tr("Remove playlist"),
-          tr("You are about to remove a playlist which is not part of your favorite playlists: "
-             "the playlist will be deleted (this action cannot be undone). \n"
-             "Are you sure you want to continue?"),
-          QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes) {
-        return;
-      }
+    QMessageBox confirmation_box;
+    confirmation_box.setWindowIcon(QIcon(":/icon.png"));
+    confirmation_box.setWindowTitle(tr("Remove playlist"));
+    confirmation_box.setIcon(QMessageBox::Question);
+    confirmation_box.setText(
+        tr("You are about to remove a playlist which is not part of your favorite playlists: "
+           "the playlist will be deleted (this action cannot be undone). \n"
+           "Are you sure you want to continue?"));
+    confirmation_box.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+
+    QCheckBox dont_prompt_again(QObject::tr("Warn me when closing a playlist tab"),
+                                &confirmation_box);
+    dont_prompt_again.setChecked(ask_for_delete);
+    dont_prompt_again.blockSignals(true);
+    dont_prompt_again.setToolTip(
+        tr("This option can be changed in the \"Behavior\" preferences"));
+    confirmation_box.addButton(&dont_prompt_again, QMessageBox::ActionRole);
+
+    if (confirmation_box.exec() != QMessageBox::Yes) {
+      return;
+    }
+
+    // If user changed the pref, save the new one
+    if (dont_prompt_again.isChecked() != ask_for_delete) {
+      s.setValue("warn_close_playlist", dont_prompt_again.isChecked());
+    }
   }
 
   // Just hide the tab from the UI - don't delete it completely (it can still
