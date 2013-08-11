@@ -28,6 +28,8 @@
 
 #include <QCheckBox>
 #include <QContextMenuEvent>
+#include <QDialogButtonBox>
+#include <QGridLayout>
 #include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
@@ -181,7 +183,20 @@ void PlaylistTabBar::Close() {
     dont_prompt_again.blockSignals(true);
     dont_prompt_again.setToolTip(
         tr("This option can be changed in the \"Behavior\" preferences"));
-    confirmation_box.addButton(&dont_prompt_again, QMessageBox::ActionRole);
+
+    QGridLayout* grid = qobject_cast<QGridLayout*>(confirmation_box.layout());
+    QDialogButtonBox* buttons = confirmation_box.findChild<QDialogButtonBox*>();
+    if (grid && buttons) {
+        const int index = grid->indexOf(buttons);
+        int row, column, row_span, column_span = 0;
+        grid->getItemPosition(index, &row, &column, &row_span, &column_span);
+        QLayoutItem* buttonsItem = grid->takeAt(index);
+        grid->addWidget(&dont_prompt_again, row, column, row_span, column_span,
+                        Qt::AlignLeft | Qt::AlignTop);
+        grid->addItem(buttonsItem, ++row, column, row_span, column_span);
+    } else {
+      confirmation_box.addButton(&dont_prompt_again, QMessageBox::ActionRole);
+    }
 
     if (confirmation_box.exec() != QMessageBox::Yes) {
       return;
@@ -193,8 +208,10 @@ void PlaylistTabBar::Close() {
     }
   }
 
-  // Just hide the tab from the UI - don't delete it completely (it can still
-  // be resurrected from the Playlists tab).
+  // Close the playlist. If the playlist is not a favorite playlist, it will be
+  // deleted, as it will not be visible after being closed. Otherwise, the tab
+  // is closed but the playlist still exists and can be resurrected from the
+  // "Playlists" tab.
   emit Close(playlist_id);
 
   // Select the nearest tab.
