@@ -54,7 +54,7 @@ ShowUnInstDetails show
 RequestExecutionLevel admin
 
 Function RunClementine
-  ShellExecAsUser::ShellExecAsUser "" "$INSTDIR/clementine.exe"
+  ShellExecAsUser::ShellExecAsUser "" "$INSTDIR/clementine.exe" ""
 FunctionEnd
 
 Section "Delete old files" oldfiles
