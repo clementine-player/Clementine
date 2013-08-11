@@ -50,11 +50,6 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   // After we got some clients, start the keep alive timer
   // Default: every 10 seconds
   keep_alive_timer_->start(keep_alive_timeout_);
-  
-  // Check if we need to start the track position timer
-  if (app_->player()->engine()->state() == Engine::Playing) {
-    track_position_timer_->start(1000);
-  }
 
   // Create the song position timer
   track_position_timer_ = new QTimer(this);
@@ -288,6 +283,12 @@ void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
 
   // then the current volume
   VolumeChanged(app_->player()->GetVolume());
+
+  // Check if we need to start the track position timer
+  if (!track_position_timer_->isActive() &&
+      app_->player()->engine()->state() == Engine::Playing) {
+    track_position_timer_->start(1000);
+  }
 
   // And the current track position
   UpdateTrackPosition();
