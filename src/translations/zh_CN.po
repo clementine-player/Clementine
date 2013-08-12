@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
+"PO-Revision-Date: 2013-08-10 19:08+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1143,7 +1143,7 @@ msgstr "Clementine 将在这些地方搜索音乐："
 msgid "Click here to add some music"
 msgstr "点击此处添加一些音乐"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1164,7 +1164,7 @@ msgstr "点击登录按钮将会打开网络浏览器。 登录之后将回到 C
 msgid "Close"
 msgstr "关闭"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "关闭播放列表"
 
@@ -1892,7 +1892,7 @@ msgstr "输入 URL 以便从网络下载封面："
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "输入播放列表的新名称"
 
@@ -3566,7 +3566,7 @@ msgstr "播放器选项"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "播放列表"
 
@@ -3859,7 +3859,7 @@ msgstr "从最喜爱的中删除"
 msgid "Remove from playlist"
 msgstr "从播放列表中移除"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr ""
 
@@ -3884,11 +3884,11 @@ msgstr "重命名 \"%1\" 播放列表"
 msgid "Rename Grooveshark playlist"
 msgstr "重命名 Grooveshark 播放列表"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "重命名播放列表"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "重命名播放列表..."
 
@@ -4037,7 +4037,7 @@ msgstr "保存图像"
 msgid "Save playlist"
 msgstr "保存播放列表"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "保存播放列表"
 
@@ -4803,6 +4803,10 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "这是您第一次连接该设备.Clementine将扫描设备上的音乐文件-这需要花费一些时间."
 
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr ""
+
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "该流媒体只有付费用户才能收听"
@@ -5164,7 +5168,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5304,7 +5308,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"

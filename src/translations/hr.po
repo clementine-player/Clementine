@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-03 22:28+0000\n"
+"PO-Revision-Date: 2013-08-11 09:28+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1142,11 +1142,11 @@ msgstr "Clementine će potražiti glazbu u:"
 msgid "Click here to add some music"
 msgstr "Kliknite ovdje kako biste dodali glazbu!"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr "Kliknite ovdje za dodavanje ovog popis izvođenja u omiljeno, popis izvođenja će biti spremljen i dostupan kroz \"Popis izvođenja\" panel na lijevoj bočnoj traci"
+msgstr "Kliknite ovdje za dodavanje ovog popis izvođenja u omiljeno, popis izvođenja će biti spremljen i dostupan kroz \"Popis izvođenja\" okvir na lijevoj bočnoj traci"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1163,7 +1163,7 @@ msgstr "Klikom na tipku prijave otvorit će se web preglednik.   Nakon prijave v
 msgid "Close"
 msgstr "Zatvori"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "Zatvori popis izvođenja"
 
@@ -1891,7 +1891,7 @@ msgstr "Upišite URL da bi mogli preuzeti omot sa interneta:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Upišite naziv za izvezene omote (bez vrste datoteke):"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "Upišite novi naziv za popis izvođenja"
 
@@ -3565,7 +3565,7 @@ msgstr "Mogućnosti preglednika"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Popis izvođenja"
 
@@ -3858,7 +3858,7 @@ msgstr "Ukloni iz omiljenih"
 msgid "Remove from playlist"
 msgstr "Uklonite iz popisa izvođenja"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr "Ukloni popis izvođenja"
 
@@ -3883,11 +3883,11 @@ msgstr "Promijeni naziv \"%1\" popisa izvođenja"
 msgid "Rename Grooveshark playlist"
 msgstr "Promijeni naziv Grooveshark popisa izvođenja"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "Preimenujte popis izvođenja"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "Preimenujte popis izvođenja..."
 
@@ -4036,7 +4036,7 @@ msgstr "Preuzmi sliku"
 msgid "Save playlist"
 msgstr "Spremite popis izvođenja"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "Spremite popis izvođenja..."
 
@@ -4802,6 +4802,10 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Ovo je prvi put da ste spojeni na ovaj uređaj. Clementine će sada pretražiti ima li glazbenih datoteka na uređaju - Ovo može potrajati neko vrijeme."
 
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr "Ova mogućnost se može promijeniti u \"Ponašanje\" osobitostima"
+
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Ovaj stream je samo za pretplaćene korisnike"
@@ -5163,7 +5167,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr "Upozori me pri zatvaranju kartice popisa izvođenja"
 
@@ -5303,7 +5307,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Uklonit ćete  %1 popisa izvođenja iz omiljenih, sigurno želite nastaviti?"
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"

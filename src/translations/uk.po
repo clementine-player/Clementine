@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 19:56+0000\n"
+"PO-Revision-Date: 2013-08-10 19:09+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1140,7 +1140,7 @@ msgstr "Clementine шукатиме музику у:"
 msgid "Click here to add some music"
 msgstr "Клацніть тут, щоб додати музику"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1161,7 +1161,7 @@ msgstr "Після натискання кнопки входу буде від�
 msgid "Close"
 msgstr "Закрити"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "Закрити список відтворення"
 
@@ -1889,7 +1889,7 @@ msgstr "Введіть посилання для завантаження обк
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Вкажіть назву файла для експортованих обкладинок (без суфікса назви):"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "Введіть нову назву для цього списку відтворення"
 
@@ -3563,7 +3563,7 @@ msgstr "Налаштування програвача"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Список відтворення"
 
@@ -3856,7 +3856,7 @@ msgstr "Вилучити з улюблених"
 msgid "Remove from playlist"
 msgstr "Вилучити зі списку відтворення"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr "Вилучення списку відтворення"
 
@@ -3881,11 +3881,11 @@ msgstr "Перейменувати список відтворення \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Перейменувати список відтворення Grooveshark"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "Перейменувати список відтворення"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "Перейменувати список відтворення…"
 
@@ -4034,7 +4034,7 @@ msgstr "Зберегти зображення"
 msgid "Save playlist"
 msgstr "Зберегти список відтворення"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "Зберегти список відтворення…"
 
@@ -4800,6 +4800,10 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Під час першого під’єднання пристрою, Clementine скануватиме його, щоб знайти музичні файли — це може зайняти деякий час."
 
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr "Значення цього параметра можна змінити на сторінці «Поведінка» налаштувань програми."
+
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Цей потік лише для платних передплатників"
@@ -5161,7 +5165,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr "Попереджати про закриття вкладки списку відтворення"
 
@@ -5301,7 +5305,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Ви маєте намір вилучити %1 списків відтворення зі списку улюблених. Ви впевнені у цьому?"
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-29 22:43+0000\n"
+"PO-Revision-Date: 2013-08-10 20:55+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1140,7 +1140,7 @@ msgstr "Clementine bude hľadať hudbu na:"
 msgid "Click here to add some music"
 msgstr "Kliknite sem aby ste pridali nejakú hudbu"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1161,7 +1161,7 @@ msgstr "Kliknutie na tlačítko Prihlásiť otvorí internetový prehliadač.\nP
 msgid "Close"
 msgstr "Zatvoriť"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "Zatvoriť playlist"
 
@@ -1889,7 +1889,7 @@ msgstr "Zadajte URL adresu na stiahnutie obalu z internetu:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Zadajte názov súboru pre exportované obaly (bez prípony):"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "Zadajte nový názov pre tento playlist"
 
@@ -3563,7 +3563,7 @@ msgstr "Možnosti prehrávača"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Playlist"
 
@@ -3856,7 +3856,7 @@ msgstr "Odstrániť z obľúbených"
 msgid "Remove from playlist"
 msgstr "Odstrániť z playlistu"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr "Odstrániť playlist"
 
@@ -3881,11 +3881,11 @@ msgstr "Premenovať playlist \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Premenovať Grooveshark playlist"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "Premenovať playlist"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "Premenovať playlist..."
 
@@ -4034,7 +4034,7 @@ msgstr "Uložiť obrázok"
 msgid "Save playlist"
 msgstr "Uložiť playlist"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "Uložiť playlist..."
 
@@ -4800,6 +4800,10 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Prvý krát ste pripojili toto zariadenie. Clementine teraz prehľadá zariadenie aby našlo hudobné súbory - môže to zabrať nejaký čas."
 
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr "Táto možnosť sa dá zmeniť v nastaveniach, v časti Správanie"
+
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Tento stream je len pre platiacich predplatiteľov"
@@ -5161,7 +5165,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovať ma pri zatvorení karty s playlistom"
 
@@ -5301,7 +5305,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Chystáte sa odstrániť %1 playlistov z vašich obľúbených, ste si istí?"
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
+"PO-Revision-Date: 2013-08-10 19:07+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/clementine/language/nb/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1140,7 +1140,7 @@ msgstr "Clementine leter etter musikk i:"
 msgid "Click here to add some music"
 msgstr "Klikk her for å legge til musikk"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1161,7 +1161,7 @@ msgstr "Når du trykker Login-knappen vil du bli sendt til en nettleser. Du går
 msgid "Close"
 msgstr "Lukk"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "Lukk spillelista"
 
@@ -1889,7 +1889,7 @@ msgstr "Skriv inn en URL for å laste ned albumgrafikk fra internett:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Skriv inn et filnavn for eksportert albumgrafikk (uten filetternavn):"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "Gi denne spillelista et nytt navn"
 
@@ -3563,7 +3563,7 @@ msgstr "Innstillinger for avspiller"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Spilleliste"
 
@@ -3856,7 +3856,7 @@ msgstr "Fjern fra favoritter"
 msgid "Remove from playlist"
 msgstr "Fjern fra spillelisten"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr ""
 
@@ -3881,11 +3881,11 @@ msgstr "Gi nytt navn til spillelista \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Gi nytt navn til Grooveshark-spilleliste"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "Gi nytt navn til spillelista"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "Gi nytt navn til spillelista..."
 
@@ -4034,7 +4034,7 @@ msgstr "Lagre bilde"
 msgid "Save playlist"
 msgstr "Lagre spillelista"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "Lagre spillelista..."
 
@@ -4800,6 +4800,10 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Det er første gang du kobler til denne enheten.  Clementine ser nå gjennom enheten for å finne musikkfiler. Dette kan ta noe tid."
 
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr ""
+
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Denne tjenesten er kun for betalende kunder"
@@ -5161,7 +5165,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5301,7 +5305,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Du sletter nå %1 spillelister fra favorittene dine, er du sikker?"
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"

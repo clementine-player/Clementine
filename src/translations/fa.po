@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
+"PO-Revision-Date: 2013-08-10 19:08+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1142,7 +1142,7 @@ msgstr "پوشه‌ای که کلمنتاین در آن به دنبال آهنگ
 msgid "Click here to add some music"
 msgstr "برای افزودن آهنگ‌ها، اینجا را بفشارید"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1163,7 +1163,7 @@ msgstr "با فشردن دکمه‌ی لاگین یک مرورگر گشوده م
 msgid "Close"
 msgstr "بستن"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "بستن لیست‌پخش"
 
@@ -1891,7 +1891,7 @@ msgstr "برای بارگیری جلد از اینترنت، یک نشانی ا�
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "نامی برای این لیست‌پخش وارد کنید"
 
@@ -3565,7 +3565,7 @@ msgstr "گزینه‌های پخش‌کننده"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "لیست‌پخش"
 
@@ -3858,7 +3858,7 @@ msgstr "پاک‌کردن از دلخواه"
 msgid "Remove from playlist"
 msgstr "از لیست‌پخش پاک کن"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr ""
 
@@ -3883,11 +3883,11 @@ msgstr "نام‌گردانی لیست‌پخش «%1»"
 msgid "Rename Grooveshark playlist"
 msgstr "نام‌گردانی لیست‌پخش گرووشارک"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "لیست‌پخش را دوباره نامگذاری کن"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "لیست‌پخش را دوباره نامگذاری کن..."
 
@@ -4036,7 +4036,7 @@ msgstr "ذخیره‌ی فرتور"
 msgid "Save playlist"
 msgstr "ذخیره‌ی لیست‌پخش"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "ذخیره‌ی لیست‌پخش..."
 
@@ -4802,6 +4802,10 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "این اولین باری است که این دستگاه را وصل کرده‌اید. کلمنتاین حالا دستگاه را برای یافتن پرونده‌های آهنگ جستجو می‌کند - این کار ممکن است کمی طول بکشد."
 
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr ""
+
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "این جریان تنها برای مشترکان پولی است"
@@ -5163,7 +5167,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5303,7 +5307,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"

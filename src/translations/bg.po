@@ -6,6 +6,7 @@
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # albertvision <avbincco@gmail.com>, 2012
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# cybercop <cybercop_montana@abv.bg>, 2013
 # svetlisashkov <svetlisashkov@yahoo.com>, 2012
 # mandarinki <this.mail.sucks@mail.bg>, 2011
 # Valentin Laskov <laskov@festa.bg>, 2012
@@ -13,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
+"PO-Revision-Date: 2013-08-10 19:07+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/clementine/language/bg/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1143,7 +1144,7 @@ msgstr "Clementine ще намери музика в:"
 msgid "Click here to add some music"
 msgstr "Цъкнете тук за да добавите музика"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1164,7 +1165,7 @@ msgstr ""
 msgid "Close"
 msgstr "Затваряне"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "Затвори плейлиста"
 
@@ -1892,7 +1893,7 @@ msgstr "Въведете URL за да свалите обложката от In
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "Въведете ново име за този списък с песни"
 
@@ -3168,7 +3169,7 @@ msgstr "Мрежов сървър-посредник"
 
 #: ../bin/src/ui_networkremotesettingspage.h:177
 msgid "Network Remote"
-msgstr ""
+msgstr "Дистанционно управление"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:487
 msgid "Never"
@@ -3566,7 +3567,7 @@ msgstr "Настройки на плеър"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Списък с песни"
 
@@ -3859,7 +3860,7 @@ msgstr "Премахване от любими"
 msgid "Remove from playlist"
 msgstr "Премахване от списъка с песни"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr ""
 
@@ -3884,11 +3885,11 @@ msgstr "Преименуване на \"%1\" списък с песни"
 msgid "Rename Grooveshark playlist"
 msgstr "Преименуване на Grooveshark списък с песни"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "Преименуване на списъка с песни"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "Преименуване на списъка с песни..."
 
@@ -4037,7 +4038,7 @@ msgstr "Запазване на изображение"
 msgid "Save playlist"
 msgstr "Запазване на списъка с песни"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "Запазване на списъка с песни..."
 
@@ -4803,6 +4804,10 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Това е първият път,когато мушкате това устройство. Clementine сега ще сканира това устройство за да намери музикални файлове - това може да отнеме известно време."
 
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr ""
+
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Този поток е само за платени регистрации."
@@ -5164,7 +5169,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5304,7 +5309,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5539,7 +5544,7 @@ msgstr "първо най-дългите"
 #: playlist/playlistundocommands.cpp:99
 #, c-format
 msgid "move %n songs"
-msgstr ""
+msgstr "премести %n песни"
 
 #: smartplaylists/searchterm.cpp:298
 msgid "newest first"

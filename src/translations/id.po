@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-28 15:09+0000\n"
+"PO-Revision-Date: 2013-08-10 19:08+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1145,7 +1145,7 @@ msgstr "Clementine akan mencari musik di:"
 msgid "Click here to add some music"
 msgstr "Klik di sini untuk menambahkan musik"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1166,7 +1166,7 @@ msgstr "Mengklik tombol Masuk akan membuka browser web.  Anda harus kembali ke C
 msgid "Close"
 msgstr "Tutup"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "Tutup daftar lagu"
 
@@ -1894,7 +1894,7 @@ msgstr "Masukkan URL untuk mengunduh sampul dari Internet:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Masukkan nama berkas untuk eksport sampul (tanpa ekstensi):"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "Masukkan nama baru untuk daftar lagu ini"
 
@@ -3568,7 +3568,7 @@ msgstr "Pilihan pemutar"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Daftar lagu"
 
@@ -3861,7 +3861,7 @@ msgstr "Buang dari favorit"
 msgid "Remove from playlist"
 msgstr "Hapus dari playlist"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr ""
 
@@ -3886,11 +3886,11 @@ msgstr "Ubah nama daftar lagu \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Ubah nama daftar lagu Grooveshark"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "Ganti nama playlist"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "Ubah nama daftar lagu..."
 
@@ -4039,7 +4039,7 @@ msgstr "Simpan gambar"
 msgid "Save playlist"
 msgstr "Simpan playlist"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "Simpan playlist..."
 
@@ -4805,6 +4805,10 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Ini adalah pertama kalinya Anda telah menghubungkan perangkat ini. Clementine sekarang akan memindai perangkat untuk mencari file musik - ini mungkin memakan waktu."
 
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr ""
+
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Stream ini hanya untuk pelanggan berbayar"
@@ -5166,7 +5170,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5306,7 +5310,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Anda akan membuang daftar lagu %1 dari favorit, Anda yakin?"
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"

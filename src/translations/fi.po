@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-29 07:53+0000\n"
+"PO-Revision-Date: 2013-08-11 10:32+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1141,7 +1141,7 @@ msgstr "Clementine etsii musiikkia kohteista:"
 msgid "Click here to add some music"
 msgstr "Napsauta tästä lisätäksesi musiikkia"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1162,7 +1162,7 @@ msgstr "Kirjaudu-painikkeen napsauttaminen avaa selaimen.  Palaa Clementineen, k
 msgid "Close"
 msgstr "Sulje"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "Sulje soittolista"
 
@@ -1890,7 +1890,7 @@ msgstr "Kirjoita URL-osoite kansikuvien lataamiseen Internetistä:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "Anna uusi nimi tälle soittolistalle"
 
@@ -3564,7 +3564,7 @@ msgstr "Soittimen asetukset"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Soittolista"
 
@@ -3857,7 +3857,7 @@ msgstr "Poista suosikeista"
 msgid "Remove from playlist"
 msgstr "Poista soittolistalta"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr "Poista soittolista"
 
@@ -3882,11 +3882,11 @@ msgstr "Nimeä soittolista \"%1\" uudelleen"
 msgid "Rename Grooveshark playlist"
 msgstr "Nimeä uudelleen Grooveshark-soittolista"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "Nimeä soittolista uudelleen"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "Nimeä soittolista uudelleen..."
 
@@ -3963,7 +3963,7 @@ msgstr "Jatka toistoa sovelluksen käynnistyttyä"
 
 #: internet/groovesharkservice.cpp:756
 msgid "Retrieving Grooveshark My Music songs"
-msgstr ""
+msgstr "Noudetaan Grooveshark My Music -kappaleita"
 
 #: internet/groovesharkservice.cpp:724
 msgid "Retrieving Grooveshark favorites songs"
@@ -4035,7 +4035,7 @@ msgstr "Tallenna kuva"
 msgid "Save playlist"
 msgstr "Tallenna soittolista"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "Tallenna soittolista..."
 
@@ -4801,6 +4801,10 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Kytkit tämän laitteen tähän tietokoneeseen ensimmäistä kertaa. Clementine etsii musiikkitiedostoja laitteesta - tämä saattaa kestää hetken."
 
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr "Tämän valinnan voi vaihtaa asetuksien kohdasta \"Toiminta\"."
+
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Suoratoisto on tarjolla vain maksaville asiakkaille"
@@ -5162,7 +5166,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr "Varoita suljettaessa soittolistan sisältävää välilehteä"
 
@@ -5302,7 +5306,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Haluatko varmasti poistaa %1 soittolistaa suosikeistasi?"
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"

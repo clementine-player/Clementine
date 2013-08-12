@@ -23,13 +23,14 @@
 # Stanislav Hanzhin <hanzhin.stas@gmail.com>, 2012
 # Vyacheslav Blinov <blinov.vyacheslav@gmail.com>, 2012
 # Владимир Пахомчик <v.pahomchik@gmail.com>, 2012
+# splitfire <split7fire@yandex.ru>, 2013
 # Павел Малеев <rolland39@gmail.com>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-07-31 10:31+0000\n"
-"Last-Translator: Just a baka <justabaka@gmail.com>\n"
+"PO-Revision-Date: 2013-08-10 19:07+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +60,7 @@ msgstr "дней"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:211
 #: ../bin/src/ui_transcoderoptionswma.h:80
 msgid " kbps"
-msgstr " Кбит/с"
+msgstr "кбит/с"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
 #: ../bin/src/ui_playbacksettingspage.h:305
@@ -298,7 +299,7 @@ msgstr "<a href=\"http://www.di.fm/premium/\">Обновить до версии
 msgid ""
 "<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
 "your password</a>"
-msgstr ""
+msgstr "<a href=\"https://one.ubuntu.com/auth/login\">Создать новую учетную запись или сбросить Ваш пароль</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -693,7 +694,7 @@ msgstr "Все композиции"
 
 #: ../bin/src/ui_networkremotesettingspage.h:194
 msgid "Allow a client to download music from this computer."
-msgstr ""
+msgstr "Позволяет клиенту скачивать музыку с этого компьютера."
 
 #: ../bin/src/ui_networkremotesettingspage.h:196
 msgid "Allow downloads"
@@ -1158,11 +1159,11 @@ msgstr "Clementine будет искать здесь:"
 msgid "Click here to add some music"
 msgstr "Щелкните здесь, чтобы добавить музыку"
 
-#: playlist/playlisttabbar.cpp:257
+#: playlist/playlisttabbar.cpp:292
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "Нажмите здесь, чтобы добавить этот плей-лист в избранное, т. о. он будет сохранен и останется доступным в панели \"Плей-листы\" на левой боковой панели"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1179,7 +1180,7 @@ msgstr "Нажатие на кнопку входа откроет браузе�
 msgid "Close"
 msgstr "Закрыть"
 
-#: playlist/playlisttabbar.cpp:51
+#: playlist/playlisttabbar.cpp:54
 msgid "Close playlist"
 msgstr "Закрыть список воспроизведения"
 
@@ -1768,7 +1769,7 @@ msgstr "Загрузка добавлена в очередь"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr ""
+msgstr "Загрузить приложение для Android"
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -1907,7 +1908,7 @@ msgstr "Введите ссылку для скачивания обложки �
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Введите имя файла для экспортируемых обложек (без расширения)"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
 msgstr "Введите новое имя для этого списка воспроизведения"
 
@@ -2444,7 +2445,7 @@ msgstr "HTML-страница не содержит RSS-подписок"
 #: internet/subsonicsettingspage.cpp:135
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr ""
+msgstr "Код состояния HTTP 3xx получен без URL, проверьте настройку сервера."
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2564,7 +2565,7 @@ msgstr "Несовместимая версия протокола Subsonic REST
 
 #: internet/subsonicsettingspage.cpp:127
 msgid "Incomplete configuration, please ensure all fields are populated."
-msgstr ""
+msgstr "Неполная конфигурация, пожалуйста, убедитесь, что все поля заполнены."
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -3359,7 +3360,7 @@ msgstr "Разрешать подключение с IP адресов из ди
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "Разрешать соединения только из локальной сети"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3581,7 +3582,7 @@ msgstr "Настройки проигрывателя"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:321
+#: playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Список воспроизведения"
 
@@ -3806,7 +3807,7 @@ msgstr "Действительно отменить?"
 
 #: internet/subsonicsettingspage.cpp:131
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "Превышен предел перенаправлений, проверьте настройку сервера."
 
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
@@ -3874,7 +3875,7 @@ msgstr "Удалить из избранных"
 msgid "Remove from playlist"
 msgstr "Удалить из списка воспроизведения"
 
-#: playlist/playlisttabbar.cpp:169
+#: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
 msgstr "Удалить список воспроизведения"
 
@@ -3899,11 +3900,11 @@ msgstr "Переименовать список воспроизведения \
 msgid "Rename Grooveshark playlist"
 msgstr "Переименовать список воспроизведения Grooveshark"
 
-#: playlist/playlisttabbar.cpp:134
+#: playlist/playlisttabbar.cpp:137
 msgid "Rename playlist"
 msgstr "Переименовать список воспроизведения"
 
-#: playlist/playlisttabbar.cpp:52
+#: playlist/playlisttabbar.cpp:55
 msgid "Rename playlist..."
 msgstr "Переименовать список воспроизведения..."
 
@@ -3968,7 +3969,7 @@ msgstr "Сбросить счётчики воспроизведения"
 #: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "Перезапустить композицию, или воспроизвести предыдущую, если не прошло 8 секунд от начала."
 
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
@@ -4052,7 +4053,7 @@ msgstr "Сохранить изображение"
 msgid "Save playlist"
 msgstr "Сохранить список воспроизведения"
 
-#: playlist/playlisttabbar.cpp:53 ../bin/src/ui_mainwindow.h:704
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
 msgstr "Сохранить список воспроизведения..."
 
@@ -4763,7 +4764,7 @@ msgstr "Эти файлы будут удалены с устройства. В�
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Эти файлы будут окончательно удалены с диска, Вы действительно хотите продолжить?"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4817,6 +4818,10 @@ msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
 msgstr "Это устройство подключено впервые. Clementine выполнит поиск музыкальных файлов на устройстве. Это может занять некоторое время"
+
+#: playlist/playlisttabbar.cpp:185
+msgid "This option can be changed in the \"Behavior\" preferences"
+msgstr ""
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -5058,7 +5063,7 @@ msgstr "Использовать собственное сообщение дл�
 
 #: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Use a network remote control"
-msgstr ""
+msgstr "Использовать сетевое дистанционное управление"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -5179,7 +5184,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr "Предупреждать при закрытии вкладки списка воспроизведения"
 
@@ -5319,11 +5324,11 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Вы собираетесь удалить %1 списков воспроизведения из списка любимых, уверены?"
 
-#: playlist/playlisttabbar.cpp:170
+#: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "Вы собираетесь удалить плей-лист, который не является частью Ваших избранных плей-листов: плей-лист будет удален (это действие не может быть отменено). ⏎\nВы действительно хотите продолжить?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5586,7 +5591,7 @@ msgstr "настройки"
 
 #: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "или сканируйте QR-код!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
