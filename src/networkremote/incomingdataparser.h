@@ -48,6 +48,7 @@ signals:
   void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
   void ResponseSongOffer(RemoteClient* client, bool accepted);
   void SendLibrary(RemoteClient* client);
+  void RateCurrentSong(int);
 
 private:
   Application* app_;
@@ -63,6 +64,7 @@ private:
   void SendPlaylists(const pb::remote::Message& msg);
   void OpenPlaylist(const pb::remote::Message& msg);
   void ClosePlaylist(const pb::remote::Message& msg);
+  void RateSong(const pb::remote::Message& msg);
 };
 
 #endif // INCOMINGDATAPARSER_H

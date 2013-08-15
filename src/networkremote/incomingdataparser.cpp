@@ -77,6 +77,9 @@ IncomingDataParser::IncomingDataParser(Application* app)
   connect(this, SIGNAL(Close(int)),
           app_->playlist_manager(), SLOT(Close(int)));
 
+  connect(this, SIGNAL(RateCurrentSong(int)),
+          app_->playlist_manager(), SLOT(RateCurrentSong(int)));
+
 #ifdef HAVE_LIBLASTFM
   connect(this, SIGNAL(Love()),
           InternetModel::Service<LastFMService>(), SLOT(Love()));
@@ -179,6 +182,9 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
       break;
     case pb::remote::GET_LIBRARY:
       emit SendLibrary(client);
+      break;
+    case pb::remote::RATE_SONG:
+      RateSong(msg);
       break;
     default: break;
   }
@@ -291,4 +297,14 @@ void IncomingDataParser::OpenPlaylist(const pb::remote::Message &msg) {
 
 void IncomingDataParser::ClosePlaylist(const pb::remote::Message &msg) {
   emit Close(msg.request_close_playlist().playlist_id());
+}
+
+void IncomingDataParser::RateSong(const pb::remote::Message &msg) {
+  int rating = msg.request_rate_song().rating();
+
+  // Rating is from 0 to 5
+  if (rating > 5) rating = 5;
+  if (rating < 0) rating = 0;
+
+  emit RateCurrentSong(rating);
 }

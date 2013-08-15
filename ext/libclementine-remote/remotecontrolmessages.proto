@@ -22,6 +22,7 @@ enum MsgType {
   BAN = 13;
   STOP_AFTER = 17;
   GET_LIBRARY = 18;
+  RATE_SONG = 19;
 
   // Messages send by both
   DISCONNECT = 2;
@@ -268,9 +269,13 @@ message ResponseSongOffer {
   optional bool accepted = 1; // true = client wants to download item
 }
 
+message RequestRateSong {
+  optional int32 rating = 1; // 0 to 5
+}
+
 // The message itself
 message Message {
-  optional int32 version = 1 [default=9];
+  optional int32 version = 1 [default=10];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
@@ -284,6 +289,7 @@ message Message {
   optional RequestOpenPlaylist request_open_playlist = 28;
   optional RequestClosePlaylist request_close_playlist = 29;
   optional RequestDownloadSongs request_download_songs = 31;
+  optional RequestRateSong request_rate_song = 35;
   
   optional Repeat repeat = 13;
   optional Shuffle shuffle = 14;
