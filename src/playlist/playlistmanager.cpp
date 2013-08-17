@@ -147,6 +147,11 @@ void PlaylistManager::New(const QString& name, const SongList& songs,
   playlist->InsertSongsOrLibraryItems(songs);
 
   SetCurrentPlaylist(id);
+
+  // If the name is just "Playlist", append the id
+  if (name == tr("Playlist")) {
+    Rename(id, QString("%1 %2").arg(name).arg(id));
+  }
 }
 
 void PlaylistManager::Load(const QString& filename) {
