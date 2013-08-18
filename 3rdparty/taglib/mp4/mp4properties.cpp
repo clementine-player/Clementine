@@ -23,10 +23,6 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <tdebug.h>
 #include <tstring.h>
 #include "mp4file.h"
@@ -96,8 +92,8 @@ MP4::Properties::Properties(File *file, MP4::Atoms *atoms, ReadStyle style)
       debug("MP4: Atom 'trak.mdia.mdhd' is smaller than expected");
       return;
     }
-    long long unit = data.mid(28, 8).toLongLong();
-    long long length = data.mid(36, 8).toLongLong();
+    const long long unit   = data.toLongLong(28U);
+    const long long length = data.toLongLong(36U);
     d->length = unit ? int(length / unit) : 0;
   }
   else {
@@ -105,8 +101,8 @@ MP4::Properties::Properties(File *file, MP4::Atoms *atoms, ReadStyle style)
       debug("MP4: Atom 'trak.mdia.mdhd' is smaller than expected");
       return;
     }
-    unsigned int unit = data.mid(20, 4).toUInt();
-    unsigned int length = data.mid(24, 4).toUInt();
+    const unsigned int unit   = data.toUInt(20U);
+    const unsigned int length = data.toUInt(24U);
     d->length = unit ? length / unit : 0;
   }
 
@@ -118,11 +114,11 @@ MP4::Properties::Properties(File *file, MP4::Atoms *atoms, ReadStyle style)
   file->seek(atom->offset);
   data = file->readBlock(atom->length);
   if(data.mid(20, 4) == "mp4a") {
-    d->channels = data.mid(40, 2).toShort();
-    d->bitsPerSample = data.mid(42, 2).toShort();
-    d->sampleRate = data.mid(46, 4).toUInt();
+    d->channels      = data.toShort(40U);
+    d->bitsPerSample = data.toShort(42U);
+    d->sampleRate    = data.toUInt(46U);
     if(data.mid(56, 4) == "esds" && data[64] == 0x03) {
-      long pos = 65;
+      uint pos = 65;
       if(data.mid(pos, 3) == "\x80\x80\x80") {
         pos += 3;
       }
@@ -133,16 +129,16 @@ MP4::Properties::Properties(File *file, MP4::Atoms *atoms, ReadStyle style)
           pos += 3;
         }
         pos += 10;
-        d->bitrate = (data.mid(pos, 4).toUInt() + 500) / 1000;
+        d->bitrate = (data.toUInt(pos) + 500) / 1000;
       }
     }
   }
   else if (data.mid(20, 4) == "alac") {
     if (atom->length == 88 && data.mid(56, 4) == "alac") {
       d->bitsPerSample = data.at(69);
-      d->channels = data.at(73);
-      d->bitrate = data.mid(80, 4).toUInt() / 1000;
-      d->sampleRate = data.mid(84, 4).toUInt();
+      d->channels   = data.at(73);
+      d->bitrate    = data.toUInt(80U) / 1000;
+      d->sampleRate = data.toUInt(84U);
     }
   }
 

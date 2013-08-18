@@ -115,8 +115,8 @@
 namespace Unicode {
 
 typedef unsigned long	UTF32;	/* at least 32 bits */
-typedef unsigned short	UTF16;	/* at least 16 bits */
-typedef unsigned char	UTF8;	/* typically 8 bits */
+typedef wchar_t	      UTF16;	/* TagLib assumes that wchar_t is sufficient for UTF-16. */
+typedef unsigned char	UTF8;	  /* typically 8 bits */
 typedef unsigned char	Boolean; /* 0 or 1 */
 
 typedef enum {

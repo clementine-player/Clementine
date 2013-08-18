@@ -23,10 +23,6 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <tdebug.h>
 #include <tstring.h>
 #include "mp4atom.h"
@@ -52,10 +48,10 @@ MP4::Atom::Atom(File *file)
     return;
   }
 
-  length = header.mid(0, 4).toUInt();
+  length = header.toUInt();
 
   if (length == 1) {
-    long long longLength = file->readBlock(8).toLongLong();
+    const long long longLength = file->readBlock(8).toLongLong();
     if (longLength >= 8 && longLength <= 0xFFFFFFFF) {
         // The atom has a 64-bit length, but it's actually a 32-bit value
         length = (long)longLength;

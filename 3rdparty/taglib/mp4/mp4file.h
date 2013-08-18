@@ -49,27 +49,25 @@ namespace TagLib {
     {
     public:
       /*!
-       * Contructs a MP4 file from \a file.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.
+       * Constructs an MP4 file from \a file.  If \a readProperties is true the
+       * file's audio properties will also be read.
        *
-       * \note In the current implementation, both \a readProperties and
-       * \a propertiesStyle are ignored.
+       * \note In the current implementation, \a propertiesStyle is ignored.
        */
-      File(FileName file, bool readProperties = true, Properties::ReadStyle audioPropertiesStyle = Properties::Average);
+      File(FileName file, bool readProperties = true, 
+           Properties::ReadStyle audioPropertiesStyle = Properties::Average);
 
       /*!
-       * Contructs a MP4 file from \a file.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.
-       *
-       * \note In the current implementation, both \a readProperties and
-       * \a propertiesStyle are ignored.
+       * Constructs an MP4 file from \a stream.  If \a readProperties is true the
+       * file's audio properties will also be read.
        *
        * \note TagLib will *not* take ownership of the stream, the caller is
        * responsible for deleting it after the File object.
+       *
+       * \note In the current implementation, \a propertiesStyle is ignored.
        */
-      File(IOStream *stream, bool readProperties = true, Properties::ReadStyle audioPropertiesStyle = Properties::Average);
+      File(IOStream *stream, bool readProperties = true, 
+           Properties::ReadStyle audioPropertiesStyle = Properties::Average);
 
       /*!
        * Destroys this instance of the File.
@@ -87,6 +85,22 @@ namespace TagLib {
        * destroyed.
        */
       Tag *tag() const;
+
+      /*!
+       * Implements the unified property interface -- export function.
+       */
+      PropertyMap properties() const;
+
+      /*!
+       * Removes unsupported properties. Forwards to the actual Tag's
+       * removeUnsupportedProperties() function.
+       */
+      void removeUnsupportedProperties(const StringList &properties);
+
+      /*!
+       * Implements the unified property interface -- import function.
+       */
+      PropertyMap setProperties(const PropertyMap &);
 
       /*!
        * Returns the MP4 audio properties for this file.

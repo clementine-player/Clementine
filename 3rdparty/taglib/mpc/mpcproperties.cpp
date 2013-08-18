@@ -207,7 +207,7 @@ void MPC::Properties::readSV8(File *file)
       d->sampleFrames = readSize(data.mid(pos), pos);
       ulong begSilence = readSize(data.mid(pos), pos);
 
-      std::bitset<16> flags(TAGLIB_CONSTRUCT_BITSET(data.mid(pos, 2).toUShort(true)));
+      std::bitset<16> flags(TAGLIB_CONSTRUCT_BITSET(data.toUShort(pos, true)));
       pos += 2;
 
       d->sampleRate = sftable[flags[15] * 4 + flags[14] * 2 + flags[13]];
@@ -228,10 +228,10 @@ void MPC::Properties::readSV8(File *file)
 
       int replayGainVersion = data[0];
       if(replayGainVersion == 1) {
-        d->trackGain = data.mid(1, 2).toUInt(true);
-        d->trackPeak = data.mid(3, 2).toUInt(true);
-        d->albumGain = data.mid(5, 2).toUInt(true);
-        d->albumPeak = data.mid(7, 2).toUInt(true);
+        d->trackGain = data.toShort(1, true);
+        d->trackPeak = data.toShort(3, true);
+        d->albumGain = data.toShort(5, true);
+        d->albumPeak = data.toShort(7, true);
       }
     }
 
@@ -252,18 +252,18 @@ void MPC::Properties::readSV7(const ByteVector &data)
     if(d->version < 7)
       return;
 
-    d->totalFrames = data.mid(4, 4).toUInt(false);
+    d->totalFrames = data.toUInt(4, false);
 
-    std::bitset<32> flags(TAGLIB_CONSTRUCT_BITSET(data.mid(8, 4).toUInt(false)));
+    std::bitset<32> flags(TAGLIB_CONSTRUCT_BITSET(data.toUInt(8, false)));
     d->sampleRate = sftable[flags[17] * 2 + flags[16]];
     d->channels = 2;
 
-    uint gapless = data.mid(5, 4).toUInt(false);
+    uint gapless = data.toUInt(5, false);
 
-    d->trackGain = data.mid(14,2).toShort(false);
-    d->trackPeak = data.mid(12,2).toUInt(false);
-    d->albumGain = data.mid(18,2).toShort(false);
-    d->albumPeak = data.mid(16,2).toUInt(false);
+    d->trackGain = data.toShort(14, false);
+    d->trackPeak = data.toShort(12, false);
+    d->albumGain = data.toShort(18, false);
+    d->albumPeak = data.toShort(16, false);
 
     // convert gain info
     if(d->trackGain != 0) {
@@ -293,7 +293,7 @@ void MPC::Properties::readSV7(const ByteVector &data)
       d->sampleFrames = d->totalFrames * 1152 - 576;
   }
   else {
-    uint headerData = data.mid(0, 4).toUInt(false);
+    uint headerData = data.toUInt(0, false);
 
     d->bitrate = (headerData >> 23) & 0x01ff;
     d->version = (headerData >> 11) & 0x03ff;
@@ -301,9 +301,9 @@ void MPC::Properties::readSV7(const ByteVector &data)
     d->channels = 2;
 
     if(d->version >= 5)
-      d->totalFrames = data.mid(4, 4).toUInt(false);
+      d->totalFrames = data.toUInt(4, false);
     else
-      d->totalFrames = data.mid(6, 2).toUInt(false);
+      d->totalFrames = data.toUShort(6, false);
 
     d->sampleFrames = d->totalFrames * 1152 - 576;
   }

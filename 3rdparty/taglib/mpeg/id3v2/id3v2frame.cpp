@@ -44,6 +44,7 @@
 #include "frames/urllinkframe.h"
 #include "frames/unsynchronizedlyricsframe.h"
 #include "frames/commentsframe.h"
+#include "frames/uniquefileidentifierframe.h"
 #include "frames/unknownframe.h"
 
 using namespace TagLib;
@@ -120,16 +121,20 @@ Frame *Frame::createTextualFrame(const String &key, const StringList &values) //
       TextIdentificationFrame *frame = new TextIdentificationFrame(frameID, String::UTF8);
       frame->setText(values);
       return frame;
-    } else if(values.size() == 1){  // URL frame (not WXXX); support only one value
+    } else if((frameID[0] == 'W') && (values.size() == 1)){  // URL frame (not WXXX); support only one value
         UrlLinkFrame* frame = new UrlLinkFrame(frameID);
         frame->setUrl(values.front());
         return frame;
     }
   }
+  if(key == "MUSICBRAINZ_TRACKID" && values.size() == 1) {
+    UniqueFileIdentifierFrame *frame = new UniqueFileIdentifierFrame("http://musicbrainz.org", values.front().data(String::UTF8));
+    return frame;
+  }
   // now we check if it's one of the "special" cases:
   // -LYRICS: depending on the number of values, use USLT or TXXX (with description=LYRICS)
   if((key == "LYRICS" || key.startsWith(lyricsPrefix)) && values.size() == 1){
-    UnsynchronizedLyricsFrame *frame = new UnsynchronizedLyricsFrame();
+    UnsynchronizedLyricsFrame *frame = new UnsynchronizedLyricsFrame(String::UTF8);
     frame->setDescription(key == "LYRICS" ? key : key.substr(lyricsPrefix.size()));
     frame->setText(values.front());
     return frame;
@@ -144,12 +149,14 @@ Frame *Frame::createTextualFrame(const String &key, const StringList &values) //
   // -COMMENT: depending on the number of values, use COMM or TXXX (with description=COMMENT)
   if((key == "COMMENT" || key.startsWith(commentPrefix)) && values.size() == 1){
     CommentsFrame *frame = new CommentsFrame(String::UTF8);
-    frame->setDescription(key == "COMMENT" ? key : key.substr(commentPrefix.size()));
+    if (key != "COMMENT"){
+      frame->setDescription(key.substr(commentPrefix.size()));
+    }
     frame->setText(values.front());
     return frame;
   }
   // if non of the above cases apply, we use a TXXX frame with the key as description
-  return new UserTextIdentificationFrame(key, values, String::UTF8);
+  return new UserTextIdentificationFrame(keyToTXXX(key), values, String::UTF8);
 }
 
 Frame::~Frame()
@@ -348,7 +355,7 @@ static const char *frameTranslation[][2] = {
   { "TLAN", "LANGUAGE" },
   { "TLEN", "LENGTH" },
   //{ "TMCL", "MUSICIANCREDITS" }, handled separately
-  { "TMED", "MEDIATYPE" },
+  { "TMED", "MEDIA" },
   { "TMOO", "MOOD" },
   { "TOAL", "ORIGINALALBUM" },
   { "TOFN", "ORIGINALFILENAME" },
@@ -361,7 +368,7 @@ static const char *frameTranslation[][2] = {
   { "TPE4", "REMIXER" }, // could also be ARRANGER
   { "TPOS", "DISCNUMBER" },
   { "TPRO", "PRODUCEDNOTICE" },
-  { "TPUB", "PUBLISHER" },
+  { "TPUB", "LABEL" },
   { "TRCK", "TRACKNUMBER" },
   { "TRSN", "RADIOSTATION" },
   { "TRSO", "RADIOSTATIONOWNER" },
@@ -385,12 +392,36 @@ static const char *frameTranslation[][2] = {
   //{ "USLT", "LYRICS" }, handled specially
 };
 
+static const TagLib::uint txxxFrameTranslationSize = 7;
+static const char *txxxFrameTranslation[][2] = {
+  { "MusicBrainz Album Id", "MUSICBRAINZ_ALBUMID" },
+  { "MusicBrainz Artist Id", "MUSICBRAINZ_ARTISTID" },
+  { "MusicBrainz Album Artist Id", "MUSICBRAINZ_ALBUMARTISTID" },
+  { "MusicBrainz Release Group Id", "MUSICBRAINZ_RELEASEGROUPID" },
+  { "MusicBrainz Work Id", "MUSICBRAINZ_WORKID" },
+  { "Acoustid Id", "ACOUSTID_ID" },
+  { "Acoustid Fingerprint", "ACOUSTID_FINGERPRINT" },
+  { "MusicIP PUID", "MUSICIP_PUID" },
+};
+
 Map<ByteVector, String> &idMap()
 {
   static Map<ByteVector, String> m;
   if(m.isEmpty())
     for(size_t i = 0; i < frameTranslationSize; ++i)
       m[frameTranslation[i][0]] = frameTranslation[i][1];
+  return m;
+}
+
+Map<String, String> &txxxMap()
+{
+  static Map<String, String> m;
+  if(m.isEmpty()) {
+    for(size_t i = 0; i < txxxFrameTranslationSize; ++i) {
+      String key = String(txxxFrameTranslation[i][0]).upper();
+      m[key] = txxxFrameTranslation[i][1];
+    }
+  }
   return m;
 }
 
@@ -433,6 +464,26 @@ ByteVector Frame::keyToFrameID(const String &s)
   return ByteVector::null;
 }
 
+String Frame::txxxToKey(const String &description)
+{
+  Map<String, String> &m = txxxMap();
+  String d = description.upper();
+  if(m.contains(d))
+    return m[d];
+  return d;
+}
+
+String Frame::keyToTXXX(const String &s)
+{
+  static Map<String, String> m;
+  if(m.isEmpty())
+    for(size_t i = 0; i < txxxFrameTranslationSize; ++i)
+      m[txxxFrameTranslation[i][1]] = txxxFrameTranslation[i][0];
+  if(m.contains(s.upper()))
+    return m[s];
+  return s;
+}
+
 PropertyMap Frame::asProperties() const
 {
   if(dynamic_cast< const UnknownFrame *>(this)) {
@@ -454,6 +505,8 @@ PropertyMap Frame::asProperties() const
     return dynamic_cast< const CommentsFrame* >(this)->asProperties();
   else if(id == "USLT")
     return dynamic_cast< const UnsynchronizedLyricsFrame* >(this)->asProperties();
+  else if(id == "UFID")
+    return dynamic_cast< const UniqueFileIdentifierFrame* >(this)->asProperties();
   PropertyMap m;
   m.unsupportedData().append(id);
   return m;
@@ -589,7 +642,7 @@ void Frame::Header::setData(const ByteVector &data, uint version)
       return;
     }
 
-    d->frameSize = data.mid(3, 3).toUInt();
+    d->frameSize = data.toUInt(3, 3, true);
 
     break;
   }
@@ -617,7 +670,7 @@ void Frame::Header::setData(const ByteVector &data, uint version)
     // Set the size -- the frame size is the four bytes starting at byte four in
     // the frame header (structure 4)
 
-    d->frameSize = data.mid(4, 4).toUInt();
+    d->frameSize = data.toUInt(4U);
 
     { // read the first byte of flags
       std::bitset<8> flags(data[8]);
@@ -664,7 +717,7 @@ void Frame::Header::setData(const ByteVector &data, uint version)
     // iTunes writes v2.4 tags with v2.3-like frame sizes
     if(d->frameSize > 127) {
       if(!isValidFrameID(data.mid(d->frameSize + 10, 4))) {
-        unsigned int uintSize = data.mid(4, 4).toUInt();
+        unsigned int uintSize = data.toUInt(4U);
         if(isValidFrameID(data.mid(uintSize + 10, 4))) {
           d->frameSize = uintSize;
         }

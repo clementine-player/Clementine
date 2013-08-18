@@ -23,12 +23,9 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <tdebug.h>
 #include <tbytevectorlist.h>
+#include <tpropertymap.h>
 #include <tstring.h>
 #include "asffile.h"
 #include "asftag.h"
@@ -186,7 +183,8 @@ ByteVector ASF::File::FilePropertiesObject::guid()
 void ASF::File::FilePropertiesObject::parse(ASF::File *file, uint size)
 {
   BaseObject::parse(file, size);
-  file->d->properties->setLength((int)(data.mid(40, 8).toLongLong(false) / 10000000L - data.mid(56, 8).toLongLong(false) / 1000L));
+  file->d->properties->setLength(
+    (int)(data.toLongLong(40, false) / 10000000L - data.toLongLong(56, false) / 1000L));
 }
 
 ByteVector ASF::File::StreamPropertiesObject::guid()
@@ -197,9 +195,9 @@ ByteVector ASF::File::StreamPropertiesObject::guid()
 void ASF::File::StreamPropertiesObject::parse(ASF::File *file, uint size)
 {
   BaseObject::parse(file, size);
-  file->d->properties->setChannels(data.mid(56, 2).toShort(false));
-  file->d->properties->setSampleRate(data.mid(58, 4).toUInt(false));
-  file->d->properties->setBitrate(data.mid(62, 4).toUInt(false) * 8 / 1000);
+  file->d->properties->setChannels(data.toShort(56, false));
+  file->d->properties->setSampleRate(data.toUInt(58, false));
+  file->d->properties->setBitrate(data.toUInt(62, false) * 8 / 1000);
 }
 
 ByteVector ASF::File::ContentDescriptionObject::guid()
@@ -372,14 +370,16 @@ ASF::File::File(FileName file, bool readProperties, Properties::ReadStyle proper
   : TagLib::File(file)
 {
   d = new FilePrivate;
-  read(readProperties, propertiesStyle);
+  if(isOpen())
+    read(readProperties, propertiesStyle);
 }
 
 ASF::File::File(IOStream *stream, bool readProperties, Properties::ReadStyle propertiesStyle)
   : TagLib::File(stream)
 {
   d = new FilePrivate;
-  read(readProperties, propertiesStyle);
+  if(isOpen())
+    read(readProperties, propertiesStyle);
 }
 
 ASF::File::~File()
@@ -399,6 +399,21 @@ ASF::File::~File()
 ASF::Tag *ASF::File::tag() const
 {
   return d->tag;
+}
+
+PropertyMap ASF::File::properties() const
+{
+  return d->tag->properties();
+}
+
+void ASF::File::removeUnsupportedProperties(const StringList &properties)
+{
+  d->tag->removeUnsupportedProperties(properties);
+}
+
+PropertyMap ASF::File::setProperties(const PropertyMap &properties)
+{
+  return d->tag->setProperties(properties);
 }
 
 ASF::Properties *ASF::File::audioProperties() const

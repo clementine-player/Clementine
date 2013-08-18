@@ -99,13 +99,24 @@ Frame *FrameFactory::createFrame(const ByteVector &origData, Header *tagHeader) 
   // A quick sanity check -- make sure that the frameID is 4 uppercase Latin1
   // characters.  Also make sure that there is data in the frame.
 
-  if(!frameID.size() == (version < 3 ? 3 : 4) ||
+  if(frameID.size() != (version < 3 ? 3 : 4) ||
      header->frameSize() <= uint(header->dataLengthIndicator() ? 4 : 0) ||
      header->frameSize() > data.size())
   {
     delete header;
     return 0;
   }
+
+#ifndef NO_ITUNES_HACKS
+  if(version == 3 && frameID.size() == 4 && frameID[3] == '\0') {
+    // iTunes v2.3 tags store v2.2 frames - convert now
+    frameID = frameID.mid(0, 3);
+    header->setFrameID(frameID);
+    header->setVersion(2);
+    updateFrame(header);
+    header->setVersion(3);
+  }
+#endif
 
   for(ByteVector::ConstIterator it = frameID.begin(); it != frameID.end(); it++) {
     if( (*it < 'A' || *it > 'Z') && (*it < '0' || *it > '9') ) {
@@ -125,7 +136,7 @@ Frame *FrameFactory::createFrame(const ByteVector &origData, Header *tagHeader) 
   // TagLib doesn't mess with encrypted frames, so just treat them
   // as unknown frames.
 
-#if HAVE_ZLIB == 0
+#if !defined(HAVE_ZLIB) || HAVE_ZLIB == 0
   if(header->compression()) {
     debug("Compressed frames are currently not supported.");
     return new UnknownFrame(data, header);

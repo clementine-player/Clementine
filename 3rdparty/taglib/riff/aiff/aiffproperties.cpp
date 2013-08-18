@@ -39,7 +39,7 @@
 
 #define UnsignedToFloat(u) (((double)((long)(u - 2147483647L - 1))) + 2147483648.0)
 
-static double ConvertFromIeeeExtended(unsigned char *bytes)
+static double ConvertFromIeeeExtended(const TagLib::uchar *bytes)
 {
   double f;
   int expon;
@@ -150,10 +150,10 @@ TagLib::uint RIFF::AIFF::Properties::sampleFrames() const
 
 void RIFF::AIFF::Properties::read(const ByteVector &data)
 {
-  d->channels       = data.mid(0, 2).toShort();
-  d->sampleFrames   = data.mid(2, 4).toUInt();
-  d->sampleWidth    = data.mid(6, 2).toShort();
-  double sampleRate = ConvertFromIeeeExtended(reinterpret_cast<unsigned char *>(data.mid(8, 10).data()));
+  d->channels       = data.toShort(0U);
+  d->sampleFrames   = data.toUInt(2U);
+  d->sampleWidth    = data.toShort(6U);
+  double sampleRate = ConvertFromIeeeExtended(reinterpret_cast<const uchar *>(data.data() + 8));
   d->sampleRate     = (int)sampleRate;
   d->bitrate        = (int)((sampleRate * d->sampleWidth * d->channels) / 1000.0);
   d->length         = d->sampleRate > 0 ? d->sampleFrames / d->sampleRate : 0;

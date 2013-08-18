@@ -45,7 +45,8 @@ IT::File::File(FileName file, bool readProperties,
   Mod::FileBase(file),
   d(new FilePrivate(propertiesStyle))
 {
-  read(readProperties);
+  if(isOpen())
+    read(readProperties);
 }
 
 IT::File::File(IOStream *stream, bool readProperties,
@@ -53,7 +54,8 @@ IT::File::File(IOStream *stream, bool readProperties,
   Mod::FileBase(stream),
   d(new FilePrivate(propertiesStyle))
 {
-  read(readProperties);
+  if(isOpen())
+    read(readProperties);
 }
 
 IT::File::~File()

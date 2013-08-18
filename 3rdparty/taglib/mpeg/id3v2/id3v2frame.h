@@ -274,6 +274,15 @@ namespace TagLib {
        */
       static String frameIDToKey(const ByteVector &);
 
+      /*!
+       * Returns an appropriate TXXX frame description for the given free-form tag key.
+       */
+      static String keyToTXXX(const String &);
+
+      /*!
+       * Returns a free-form tag name for the given ID3 frame description.
+       */
+      static String txxxToKey(const String &);
 
       /*!
        * This helper function splits the PropertyMap \a original into three ProperytMaps

@@ -23,12 +23,9 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <taglib.h>
 #include <tdebug.h>
+#include "trefcounter.h"
 #include "asfattribute.h"
 #include "asffile.h"
 #include "asfpicture.h"
@@ -149,7 +146,7 @@ void ASF::Picture::parse(const ByteVector& bytes)
     return;
   int pos = 0;
   d->type = (Type)bytes[0]; ++pos;
-  uint dataLen = bytes.mid(pos, 4).toUInt(false); pos+=4;
+  const uint dataLen = bytes.toUInt(pos, false); pos+=4;
 
   const ByteVector nullStringTerminator(2, 0);
 

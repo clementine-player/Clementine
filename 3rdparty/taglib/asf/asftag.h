@@ -176,6 +176,10 @@ namespace TagLib {
        */
       void addAttribute(const String &name, const Attribute &attribute);
 
+      PropertyMap properties() const;
+      void removeUnsupportedProperties(const StringList& properties);
+      PropertyMap setProperties(const PropertyMap &properties);
+
     private:
 
       class TagPrivate;

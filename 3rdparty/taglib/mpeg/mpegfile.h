@@ -71,9 +71,10 @@ namespace TagLib {
       };
 
       /*!
-       * Contructs an MPEG file from \a file.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.
+       * Constructs an MPEG file from \a file.  If \a readProperties is true the
+       * file's audio properties will also be read.
+       *
+       * \note In the current implementation, \a propertiesStyle is ignored.
        *
        * \deprecated This constructor will be dropped in favor of the one below
        * in a future version.
@@ -82,28 +83,31 @@ namespace TagLib {
            Properties::ReadStyle propertiesStyle = Properties::Average);
 
       /*!
-       * Contructs an MPEG file from \a file.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.  The frames will be created using
+       * Constructs an MPEG file from \a file.  If \a readProperties is true the
+       * file's audio properties will also be read.
+       *
+       * If this file contains and ID3v2 tag the frames will be created using
        * \a frameFactory.
        *
-       * \deprecated This constructor will be dropped in favor of the one below
-       * in a future version.
+       * \note In the current implementation, \a propertiesStyle is ignored.
        */
+      // BIC: merge with the above constructor
       File(FileName file, ID3v2::FrameFactory *frameFactory,
            bool readProperties = true,
            Properties::ReadStyle propertiesStyle = Properties::Average);
 
       /*!
-       * Contructs an MPEG file from \a stream.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.  The frames will be created using
-       * \a frameFactory.
+       * Constructs an MPEG file from \a stream.  If \a readProperties is true the
+       * file's audio properties will also be read.
        *
        * \note TagLib will *not* take ownership of the stream, the caller is
        * responsible for deleting it after the File object.
+       *
+       * If this file contains and ID3v2 tag the frames will be created using
+       * \a frameFactory.
+       *
+       * \note In the current implementation, \a propertiesStyle is ignored.
        */
-      // BIC: merge with the above constructor
       File(IOStream *stream, ID3v2::FrameFactory *frameFactory,
            bool readProperties = true,
            Properties::ReadStyle propertiesStyle = Properties::Average);
@@ -133,7 +137,7 @@ namespace TagLib {
       virtual Tag *tag() const;
 
       /*!
-       * Implements the unified property interface -- export function.
+       * Implements the reading part of the unified property interface.
        * If the file contains more than one tag, only the
        * first one (in the order ID3v2, APE, ID3v1) will be converted to the
        * PropertyMap.
@@ -143,9 +147,12 @@ namespace TagLib {
       void removeUnsupportedProperties(const StringList &properties);
 
       /*!
-       * Implements the unified tag dictionary interface -- import function.
-       * As with the export, only one tag is taken into account. If the file
-       * has no tag at all, ID3v2 will be created.
+       * Implements the writing part of the unified tag dictionary interface.
+       * In order to avoid problems with deprecated tag formats, this method
+       * always creates an ID3v2 tag if necessary.
+       * If an ID3v1 tag  exists, it will be updated as well, within the
+       * limitations of that format.
+       * The returned PropertyMap refers to the ID3v2 tag only.
        */
       PropertyMap setProperties(const PropertyMap &);
 
@@ -211,41 +218,77 @@ namespace TagLib {
       bool save(int tags, bool stripOthers, int id3v2Version);
 
       /*!
+       * Save the file.  This will attempt to save all of the tag types that are
+       * specified by OR-ing together TagTypes values.  The save() method above
+       * uses AllTags.  This returns true if saving was successful.
+       *
+       * If \a stripOthers is true this strips all tags not included in the mask,
+       * but does not modify them in memory, so later calls to save() which make
+       * use of these tags will remain valid.  This also strips empty tags.
+       *
+       * The \a id3v2Version parameter specifies the version of the saved
+       * ID3v2 tag. It can be either 4 or 3.
+       *
+       * If \a duplicateTags is true and at least one tag -- ID3v1 or ID3v2 --
+       * exists this will duplicate its content into the other tag.
+       */
+      // BIC: combine with the above method
+      bool save(int tags, bool stripOthers, int id3v2Version, bool duplicateTags);
+
+      /*!
        * Returns a pointer to the ID3v2 tag of the file.
        *
-       * A tag will always be returned, regardless of whether there is a
-       * tag in the file or not. Use ID3v2::Tag::isEmpty() to check if
-       * the tag contains no data.
+       * If \a create is false (the default) this may return a null pointer
+       * if there is no valid ID3v2 tag.  If \a create is true it will create
+       * an ID3v2 tag if one does not exist and returns a valid pointer.
+       *
+       * \note This may return a valid pointer regardless of whether or not the 
+       * file on disk has an ID3v2 tag.  Use hasID3v2Tag() to check if the file 
+       * on disk actually has an ID3v2 tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
        * deleted by the user.  It will be deleted when the file (object) is
        * destroyed.
+       *
+       * \see hasID3v2Tag()
        */
       ID3v2::Tag *ID3v2Tag(bool create = false);
 
       /*!
        * Returns a pointer to the ID3v1 tag of the file.
        *
-       * A tag will always be returned, regardless of whether there is a
-       * tag in the file or not. Use Tag::isEmpty() to check if
-       * the tag contains no data.
+       * If \a create is false (the default) this may return a null pointer
+       * if there is no valid ID3v1 tag.  If \a create is true it will create
+       * an ID3v1 tag if one does not exist and returns a valid pointer.
+       *
+       * \note This may return a valid pointer regardless of whether or not the 
+       * file on disk has an ID3v1 tag.  Use hasID3v1Tag() to check if the file 
+       * on disk actually has an ID3v1 tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
        * deleted by the user.  It will be deleted when the file (object) is
        * destroyed.
+       *
+       * \see hasID3v1Tag()
        */
       ID3v1::Tag *ID3v1Tag(bool create = false);
 
       /*!
        * Returns a pointer to the APE tag of the file.
        *
-       * If \a create is false (the default) this will return a null pointer
+       * If \a create is false (the default) this may return a null pointer
        * if there is no valid APE tag.  If \a create is true it will create
-       * an APE tag if one does not exist.
+       * an APE tag if one does not exist and returns a valid pointer.
+       *
+       * \note This may return a valid pointer regardless of whether or not the 
+       * file on disk has an APE tag.  Use hasAPETag() to check if the file 
+       * on disk actually has an APE tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
        * deleted by the user.  It will be deleted when the file (object) is
        * destroyed.
+       *
+       * \see hasAPETag()
        */
       APE::Tag *APETag(bool create = false);
 
@@ -300,6 +343,27 @@ namespace TagLib {
        * Returns the position in the file of the last MPEG frame.
        */
       long lastFrameOffset();
+
+      /*!
+       * Returns whether or not the file on disk actually has an ID3v1 tag.
+       *
+       * \see ID3v1Tag()
+       */
+      bool hasID3v1Tag() const;
+
+      /*!
+       * Returns whether or not the file on disk actually has an ID3v2 tag.
+       *
+       * \see ID3v2Tag()
+       */
+      bool hasID3v2Tag() const;
+
+      /*!
+       * Returns whether or not the file on disk actually has an APE tag.
+       *
+       * \see APETag()
+       */
+      bool hasAPETag() const;
 
     private:
       File(const File &);

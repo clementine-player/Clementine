@@ -63,20 +63,22 @@ namespace TagLib {
     {
     public:
       /*!
-       * Contructs a Vorbis file from \a file.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.
+       * Constructs a Vorbis file from \a file.  If \a readProperties is true the
+       * file's audio properties will also be read.
+       *
+       * \note In the current implementation, \a propertiesStyle is ignored.
        */
       File(FileName file, bool readProperties = true,
            Properties::ReadStyle propertiesStyle = Properties::Average);
 
       /*!
-       * Contructs a Vorbis file from \a file.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.
+       * Constructs a Vorbis file from \a stream.  If \a readProperties is true the
+       * file's audio properties will also be read.
        *
        * \note TagLib will *not* take ownership of the stream, the caller is
        * responsible for deleting it after the File object.
+       *
+       * \note In the current implementation, \a propertiesStyle is ignored.
        */
       File(IOStream *stream, bool readProperties = true,
            Properties::ReadStyle propertiesStyle = Properties::Average);

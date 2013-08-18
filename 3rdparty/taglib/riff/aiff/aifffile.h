@@ -58,20 +58,22 @@ namespace TagLib {
       {
       public:
         /*!
-         * Contructs an AIFF file from \a file.  If \a readProperties is true the
-         * file's audio properties will also be read using \a propertiesStyle.  If
-         * false, \a propertiesStyle is ignored.
+         * Constructs an AIFF file from \a file.  If \a readProperties is true the
+         * file's audio properties will also be read.
+         *
+         * \note In the current implementation, \a propertiesStyle is ignored.
          */
         File(FileName file, bool readProperties = true,
              Properties::ReadStyle propertiesStyle = Properties::Average);
 
         /*!
-         * Contructs an AIFF file from \a file.  If \a readProperties is true the
-         * file's audio properties will also be read using \a propertiesStyle.  If
-         * false, \a propertiesStyle is ignored.
+         * Constructs an AIFF file from \a stream.  If \a readProperties is true the
+         * file's audio properties will also be read.
          *
          * \note TagLib will *not* take ownership of the stream, the caller is
          * responsible for deleting it after the File object.
+         *
+         * \note In the current implementation, \a propertiesStyle is ignored.
          */
         File(IOStream *stream, bool readProperties = true,
              Properties::ReadStyle propertiesStyle = Properties::Average);
@@ -83,6 +85,12 @@ namespace TagLib {
 
         /*!
          * Returns the Tag for this file.
+         *
+         * \note This always returns a valid pointer regardless of whether or not 
+         * the file on disk has an ID3v2 tag.  Use hasID3v2Tag() to check if the file 
+         * on disk actually has an ID3v2 tag.
+         *
+         * \see hasID3v2Tag()
          */
         virtual ID3v2::Tag *tag() const;
 
@@ -91,6 +99,8 @@ namespace TagLib {
          * This method forwards to ID3v2::Tag::properties().
          */
         PropertyMap properties() const;
+
+        void removeUnsupportedProperties(const StringList &properties);
 
         /*!
          * Implements the unified property interface -- import function.
@@ -108,6 +118,13 @@ namespace TagLib {
          * Saves the file.
          */
         virtual bool save();
+
+        /*!
+         * Returns whether or not the file on disk actually has an ID3v2 tag.
+         *
+         * \see ID3v2Tag()
+         */
+        bool hasID3v2Tag() const;
 
       private:
         File(const File &);

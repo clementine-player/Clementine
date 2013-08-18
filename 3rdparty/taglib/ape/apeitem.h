@@ -97,7 +97,7 @@ namespace TagLib {
 
       /*!
        * Returns the binary value.
-       * If the item type is not \a Binary, the returned contents are undefined
+       * If the item type is not \a Binary, always returns an empty ByteVector.
        */
       ByteVector binaryData() const;
 
@@ -152,8 +152,9 @@ namespace TagLib {
       int size() const;
 
       /*!
-       * Returns the value as a single string. In case of multiple strings,
-       * the first is returned.
+       * Returns the value as a single string.  In case of multiple strings,
+       * the first is returned.  If the data type is not \a Text, always returns 
+       * an empty String.
        */
       String toString() const;
 
@@ -163,7 +164,8 @@ namespace TagLib {
 #endif
 
       /*!
-       * Returns the list of text values.
+       * Returns the list of text values.  If the data type is not \a Text, always 
+       * returns an empty StringList.
        */
       StringList values() const;
 

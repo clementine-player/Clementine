@@ -80,12 +80,14 @@ namespace TagLib {
 
     /*!
      * Exports the tags of the file as dictionary mapping (human readable) tag
-     * names (Strings) to StringLists of tag values. Calls the according specialization
-     * in the File subclasses.
+     * names (uppercase Strings) to StringLists of tag values. Calls the according
+     * specialization in the File subclasses.
      * For each metadata object of the file that could not be parsed into the PropertyMap
      * format, the returend map's unsupportedData() list will contain one entry identifying
      * that object (e.g. the frame type for ID3v2 tags). Use removeUnsupportedProperties()
      * to remove (a subset of) them.
+     * For files that contain more than one tag (e.g. an MP3 with both an ID3v2 and an ID3v2
+     * tag) only the most "modern" one will be exported (ID3v2 in this case).
      * BIC: Will be made virtual in future releases.
      */
     PropertyMap properties() const;
@@ -105,9 +107,15 @@ namespace TagLib {
      * If some value(s) could not be written imported to the specific metadata format,
      * the returned PropertyMap will contain those value(s). Otherwise it will be empty,
      * indicating that no problems occured.
+     * With file types that support several tag formats (for instance, MP3 files can have
+     * ID3v1, ID3v2, and APEv2 tags), this function will create the most appropriate one
+     * (ID3v2 for MP3 files). Older formats will be updated as well, if they exist, but won't
+     * be taken into account for the return value of this function.
+     * See the documentation of the subclass implementations for detailed descriptions.
      * BIC: will become pure virtual in the future
      */
     PropertyMap setProperties(const PropertyMap &properties);
+    
     /*!
      * Returns a pointer to this file's audio properties.  This should be
      * reimplemented in the concrete subclasses.  If no audio properties were
@@ -205,7 +213,7 @@ namespace TagLib {
     bool isOpen() const;
 
     /*!
-     * Returns true if the file is open and readble.
+     * Returns true if the file is open and readable.
      */
     bool isValid() const;
 

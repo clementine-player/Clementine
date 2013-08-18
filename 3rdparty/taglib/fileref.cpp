@@ -27,13 +27,10 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <tfile.h>
 #include <tstring.h>
 #include <tdebug.h>
+#include "trefcounter.h"
 
 #include "fileref.h"
 #include "asffile.h"
@@ -45,6 +42,7 @@
 #include "mp4file.h"
 #include "wavpackfile.h"
 #include "speexfile.h"
+#include "opusfile.h"
 #include "trueaudiofile.h"
 #include "aifffile.h"
 #include "wavfile.h"
@@ -217,21 +215,28 @@ File *FileRef::create(FileName fileName, bool readAudioProperties,
 
   // Ok, this is really dumb for now, but it works for testing.
 
-  String s;
-
+  String ext;
+  {
 #ifdef _WIN32
-  s = (wcslen((const wchar_t *) fileName) > 0) ? String((const wchar_t *) fileName) : String((const char *) fileName);
+
+    String s = fileName.toString();
+
 #else
-  s = fileName;
-#endif
+
+    String s = fileName;
+
+ #endif
+
+    const int pos = s.rfind(".");
+    if(pos != -1)
+      ext = s.substr(pos + 1).upper();
+  }
 
   // If this list is updated, the method defaultFileExtensions() should also be
   // updated.  However at some point that list should be created at the same time
   // that a default file type resolver is created.
 
-  int pos = s.rfind(".");
-  if(pos != -1) {
-    String ext = s.substr(pos + 1).upper();
+  if(!ext.isEmpty()) {
     if(ext == "MP3")
       return new MPEG::File(fileName, readAudioProperties, audioPropertiesStyle);
     if(ext == "OGG")
@@ -252,6 +257,8 @@ File *FileRef::create(FileName fileName, bool readAudioProperties,
       return new WavPack::File(fileName, readAudioProperties, audioPropertiesStyle);
     if(ext == "SPX")
       return new Ogg::Speex::File(fileName, readAudioProperties, audioPropertiesStyle);
+    if(ext == "OPUS")
+      return new Ogg::Opus::File(fileName, readAudioProperties, audioPropertiesStyle);
     if(ext == "TTA")
       return new TrueAudio::File(fileName, readAudioProperties, audioPropertiesStyle);
     if(ext == "M4A" || ext == "M4R" || ext == "M4B" || ext == "M4P" || ext == "MP4" || ext == "3G2")

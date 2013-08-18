@@ -359,7 +359,8 @@ XM::File::File(FileName file, bool readProperties,
   Mod::FileBase(file),
   d(new FilePrivate(propertiesStyle))
 {
-  read(readProperties);
+  if(isOpen())
+    read(readProperties);
 }
 
 XM::File::File(IOStream *stream, bool readProperties,
@@ -367,7 +368,8 @@ XM::File::File(IOStream *stream, bool readProperties,
   Mod::FileBase(stream),
   d(new FilePrivate(propertiesStyle))
 {
-  read(readProperties);
+  if(isOpen())
+    read(readProperties);
 }
 
 XM::File::~File()
@@ -443,7 +445,7 @@ bool XM::File::save()
       return false;
 
     uint len = std::min(22UL, instrumentHeaderSize - 4U);
-    if(i > lines.size())
+    if(i >= lines.size())
       writeString(String::null, len);
     else
       writeString(lines[i], len);

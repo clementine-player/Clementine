@@ -177,19 +177,19 @@ void APE::Footer::parse(const ByteVector &data)
 
   // Read the version number
 
-  d->version = data.mid(8, 4).toUInt(false);
+  d->version = data.toUInt(8, false);
 
   // Read the tag size
 
-  d->tagSize = data.mid(12, 4).toUInt(false);
+  d->tagSize = data.toUInt(12, false);
 
   // Read the item count
 
-  d->itemCount = data.mid(16, 4).toUInt(false);
+  d->itemCount = data.toUInt(16, false);
 
   // Read the flags
 
-  std::bitset<32> flags(TAGLIB_CONSTRUCT_BITSET(data.mid(20, 4).toUInt(false)));
+  std::bitset<32> flags(TAGLIB_CONSTRUCT_BITSET(data.toUInt(20, false)));
 
   d->headerPresent = flags[31];
   d->footerPresent = !flags[30];

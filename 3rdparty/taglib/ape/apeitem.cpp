@@ -125,6 +125,7 @@ void APE::Item::setBinaryData(const ByteVector &value)
 {
   d->type = Binary;
   d->value = value;
+  d->text.clear();
 }
 
 ByteVector APE::Item::value() const
@@ -137,31 +138,35 @@ ByteVector APE::Item::value() const
 
 void APE::Item::setKey(const String &key)
 {
-    d->key = key;
+  d->key = key;
 }
 
 void APE::Item::setValue(const String &value)
 {
-    d->type = Text;
-    d->text = value;
+  d->type = Text;
+  d->text = value;
+  d->value.clear();
 }
 
 void APE::Item::setValues(const StringList &value)
 {
-    d->type = Text;
-    d->text = value;
+  d->type = Text;
+  d->text = value;
+  d->value.clear();
 }
 
 void APE::Item::appendValue(const String &value)
 {
-    d->type = Text;
-    d->text.append(value);
+  d->type = Text;
+  d->text.append(value);
+  d->value.clear();
 }
 
 void APE::Item::appendValues(const StringList &values)
 {
-    d->type = Text;
-    d->text.append(values);
+  d->type = Text;
+  d->text.append(values);
+  d->value.clear();
 }
 
 int APE::Item::size() const
@@ -200,7 +205,10 @@ StringList APE::Item::values() const
 
 String APE::Item::toString() const
 {
-  return isEmpty() ? String::null : d->text.front();
+  if(d->type == Text && !isEmpty())
+    return d->text.front();
+  else
+    return String::null;
 }
 
 bool APE::Item::isEmpty() const
@@ -229,18 +237,20 @@ void APE::Item::parse(const ByteVector &data)
     return;
   }
 
-  uint valueLength  = data.mid(0, 4).toUInt(false);
-  uint flags        = data.mid(4, 4).toUInt(false);
+  const uint valueLength  = data.toUInt(0, false);
+  const uint flags        = data.toUInt(4, false);
 
   d->key = String(data.mid(8), String::UTF8);
 
-  d->value = data.mid(8 + d->key.size() + 1, valueLength);
+  const ByteVector value = data.mid(8 + d->key.size() + 1, valueLength);
 
   setReadOnly(flags & 1);
   setType(ItemTypes((flags >> 1) & 3));
 
-  if(Text == d->type)
-    d->text = StringList(ByteVectorList::split(d->value, '\0'), String::UTF8);
+  if(Text == d->type) 
+    d->text = StringList(ByteVectorList::split(value, '\0'), String::UTF8);
+  else
+    d->value = value;
 }
 
 ByteVector APE::Item::render() const

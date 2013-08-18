@@ -67,9 +67,10 @@ namespace TagLib {
     {
     public:
       /*!
-       * Contructs a FLAC file from \a file.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.
+       * Constructs a FLAC file from \a file.  If \a readProperties is true the
+       * file's audio properties will also be read.
+       *
+       * \note In the current implementation, \a propertiesStyle is ignored.
        *
        * \deprecated This constructor will be dropped in favor of the one below
        * in a future version.
@@ -78,12 +79,13 @@ namespace TagLib {
            Properties::ReadStyle propertiesStyle = Properties::Average);
 
       /*!
-       * Contructs a FLAC file from \a file.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.
+       * Constructs an APE file from \a file.  If \a readProperties is true the
+       * file's audio properties will also be read.
        *
        * If this file contains and ID3v2 tag the frames will be created using
        * \a frameFactory.
+       *
+       * \note In the current implementation, \a propertiesStyle is ignored.
        */
       // BIC: merge with the above constructor
       File(FileName file, ID3v2::FrameFactory *frameFactory,
@@ -91,15 +93,16 @@ namespace TagLib {
            Properties::ReadStyle propertiesStyle = Properties::Average);
 
       /*!
-       * Contructs a FLAC file from \a file.  If \a readProperties is true the
-       * file's audio properties will also be read using \a propertiesStyle.  If
-       * false, \a propertiesStyle is ignored.
+       * Constructs a FLAC file from \a stream.  If \a readProperties is true the
+       * file's audio properties will also be read.
+       *
+       * \note TagLib will *not* take ownership of the stream, the caller is
+       * responsible for deleting it after the File object.
        *
        * If this file contains and ID3v2 tag the frames will be created using
        * \a frameFactory.
        *
-       * \note TagLib will *not* take ownership of the stream, the caller is
-       * responsible for deleting it after the File object.
+       * \note In the current implementation, \a propertiesStyle is ignored.
        */
       // BIC: merge with the above constructor
       File(IOStream *stream, ID3v2::FrameFactory *frameFactory,
@@ -133,8 +136,10 @@ namespace TagLib {
 
       /*!
        * Implements the unified property interface -- import function.
-       * As with the export, only one tag is taken into account. If the file
-       * has no tag at all, a XiphComment will be created.
+       * This always creates a Xiph comment, if none exists. The return value
+       * relates to the Xiph comment only.
+       * Ignores any changes to ID3v1 or ID3v2 comments since they are not allowed
+       * in the FLAC specification.
        */
       PropertyMap setProperties(const PropertyMap &);
 
@@ -156,39 +161,57 @@ namespace TagLib {
       /*!
        * Returns a pointer to the ID3v2 tag of the file.
        *
-       * If \a create is false (the default) this will return a null pointer
+       * If \a create is false (the default) this returns a null pointer
        * if there is no valid ID3v2 tag.  If \a create is true it will create
-       * an ID3v2 tag if one does not exist.
+       * an ID3v2 tag if one does not exist and returns a valid pointer.
        *
-       * \note The Tag <b>is still</b> owned by the FLAC::File and should not be
+       * \note This may return a valid pointer regardless of whether or not the 
+       * file on disk has an ID3v2 tag.  Use hasID3v2Tag() to check if the file 
+       * on disk actually has an ID3v2 tag.
+       *
+       * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
        * deleted by the user.  It will be deleted when the file (object) is
        * destroyed.
+       *
+       * \see hasID3v2Tag()
        */
       ID3v2::Tag *ID3v2Tag(bool create = false);
 
       /*!
        * Returns a pointer to the ID3v1 tag of the file.
        *
-       * If \a create is false (the default) this will return a null pointer
-       * if there is no valid ID3v1 tag.  If \a create is true it will create
-       * an ID3v1 tag if one does not exist.
+       * If \a create is false (the default) this returns a null pointer
+       * if there is no valid APE tag.  If \a create is true it will create
+       * an APE tag if one does not exist and returns a valid pointer.
        *
-       * \note The Tag <b>is still</b> owned by the FLAC::File and should not be
+       * \note This may return a valid pointer regardless of whether or not the 
+       * file on disk has an ID3v1 tag.  Use hasID3v1Tag() to check if the file 
+       * on disk actually has an ID3v1 tag.
+       *
+       * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
        * deleted by the user.  It will be deleted when the file (object) is
        * destroyed.
+       *
+       * \see hasID3v1Tag()
        */
       ID3v1::Tag *ID3v1Tag(bool create = false);
 
       /*!
        * Returns a pointer to the XiphComment for the file.
        *
-       * If \a create is false (the default) this will return a null pointer
+       * If \a create is false (the default) this returns a null pointer
        * if there is no valid XiphComment.  If \a create is true it will create
-       * a XiphComment if one does not exist.
+       * a XiphComment if one does not exist and returns a valid pointer.
        *
+       * \note This may return a valid pointer regardless of whether or not the 
+       * file on disk has a XiphComment.  Use hasXiphComment() to check if the 
+       * file on disk actually has a XiphComment.
+       * 
        * \note The Tag <b>is still</b> owned by the FLAC::File and should not be
        * deleted by the user.  It will be deleted when the file (object) is
        * destroyed.
+       *
+       * \see hasXiphComment()
        */
       Ogg::XiphComment *xiphComment(bool create = false);
 
@@ -240,6 +263,27 @@ namespace TagLib {
        * \note The file will be saved only after calling save().
        */
       void addPicture(Picture *picture);
+
+      /*!
+       * Returns whether or not the file on disk actually has a XiphComment.
+       *
+       * \see xiphComment()
+       */
+      bool hasXiphComment() const;
+
+      /*!
+       * Returns whether or not the file on disk actually has an ID3v1 tag.
+       *
+       * \see ID3v1Tag()
+       */
+      bool hasID3v1Tag() const;
+
+      /*!
+       * Returns whether or not the file on disk actually has an ID3v2 tag.
+       *
+       * \see ID3v2Tag()
+       */
+      bool hasID3v2Tag() const;
 
     private:
       File(const File &);

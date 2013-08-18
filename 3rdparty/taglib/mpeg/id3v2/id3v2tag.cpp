@@ -23,6 +23,10 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <tfile.h>
 
 #include "id3v2tag.h"
@@ -379,10 +383,12 @@ void ID3v2::Tag::removeUnsupportedProperties(const StringList &properties)
       for(FrameList::ConstIterator fit = l.begin(); fit != l.end(); fit++)
         if (dynamic_cast<const UnknownFrame *>(*fit) != 0)
           removeFrame(*fit);
-    } else if(it->size() == 4){
+    }
+    else if(it->size() == 4){
       ByteVector id = it->data(String::Latin1);
       removeFrames(id);
-    } else {
+    }
+    else {
       ByteVector id = it->substr(0,4).data(String::Latin1);
       if(it->size() <= 5)
         continue; // invalid specification
@@ -396,6 +402,8 @@ void ID3v2::Tag::removeUnsupportedProperties(const StringList &properties)
         frame = CommentsFrame::findByDescription(this, description);
       else if(id == "USLT")
         frame = UnsynchronizedLyricsFrame::findByDescription(this, description);
+      else if(id == "UFID")
+        frame = UniqueFileIdentifierFrame::findByOwner(this, description);
       if(frame)
         removeFrame(frame);
     }

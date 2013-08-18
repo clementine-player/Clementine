@@ -67,6 +67,10 @@ namespace TagLib {
 
         ItemListMap &itemListMap();
 
+        PropertyMap properties() const;
+        void removeUnsupportedProperties(const StringList& properties);
+        PropertyMap setProperties(const PropertyMap &properties);
+
     private:
         AtomDataList parseData2(Atom *atom, TagLib::File *file, int expectedFlags = -1, bool freeForm = false);
         TagLib::ByteVectorList parseData(Atom *atom, TagLib::File *file, int expectedFlags = -1, bool freeForm = false);
@@ -100,6 +104,8 @@ namespace TagLib {
 
         void saveNew(TagLib::ByteVector &data);
         void saveExisting(TagLib::ByteVector &data, AtomList &path);
+
+        void addItem(const String &name, const Item &value);
 
         class TagPrivate;
         TagPrivate *d;

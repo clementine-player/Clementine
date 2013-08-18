@@ -23,12 +23,9 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <tdebug.h>
 #include <tstring.h>
+#include <tpropertymap.h>
 #include "mp4atom.h"
 #include "mp4tag.h"
 #include "mp4file.h"
@@ -67,14 +64,16 @@ MP4::File::File(FileName file, bool readProperties, AudioProperties::ReadStyle a
     : TagLib::File(file)
 {
   d = new FilePrivate;
-  read(readProperties, audioPropertiesStyle);
+  if(isOpen())
+    read(readProperties, audioPropertiesStyle);
 }
 
 MP4::File::File(IOStream *stream, bool readProperties, AudioProperties::ReadStyle audioPropertiesStyle)
     : TagLib::File(stream)
 {
   d = new FilePrivate;
-  read(readProperties, audioPropertiesStyle);
+  if(isOpen())
+    read(readProperties, audioPropertiesStyle);
 }
 
 MP4::File::~File()
@@ -86,6 +85,21 @@ MP4::Tag *
 MP4::File::tag() const
 {
   return d->tag;
+}
+
+PropertyMap MP4::File::properties() const
+{
+  return d->tag->properties();
+}
+
+void MP4::File::removeUnsupportedProperties(const StringList &properties)
+{
+  d->tag->removeUnsupportedProperties(properties);
+}
+
+PropertyMap MP4::File::setProperties(const PropertyMap &properties)
+{
+  return d->tag->setProperties(properties);
 }
 
 MP4::Properties *

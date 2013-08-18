@@ -26,8 +26,10 @@
 #ifndef TAGLIB_H
 #define TAGLIB_H
 
+#include "taglib_config.h"
+
 #define TAGLIB_MAJOR_VERSION 1
-#define TAGLIB_MINOR_VERSION 7
+#define TAGLIB_MINOR_VERSION 8
 #define TAGLIB_PATCH_VERSION 0
 
 #if defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ > 1))
@@ -44,23 +46,6 @@
 
 #include <string>
 
-#ifdef __APPLE__
-#  include <libkern/OSAtomic.h>
-#  define TAGLIB_ATOMIC_MAC
-#elif defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)
-#  define NOMINMAX
-#  include <windows.h>
-#  define TAGLIB_ATOMIC_WIN
-#elif defined (__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 401)    \
-      && (defined(__i386__) || defined(__i486__) || defined(__i586__) || \
-          defined(__i686__) || defined(__x86_64) || defined(__ia64)) \
-      && !defined(__INTEL_COMPILER)
-#  define TAGLIB_ATOMIC_GCC
-#elif defined(__ia64) && defined(__INTEL_COMPILER)
-#  include <ia64intrin.h>
-#  define TAGLIB_ATOMIC_GCC
-#endif
-
 //! A namespace for all TagLib related classes and functions
 
 /*!
@@ -75,10 +60,13 @@ namespace TagLib {
 
   class String;
 
-  typedef wchar_t wchar;
-  typedef unsigned char  uchar;
-  typedef unsigned short ushort;
-  typedef unsigned int   uint;
+  typedef wchar_t            wchar;   // Assumed to be sufficient to store a UTF-16 char.
+  typedef unsigned char      uchar;
+  typedef unsigned short     ushort;
+  typedef unsigned int       uint;
+  typedef unsigned long long ulonglong;
+
+  // long/ulong can be either 32-bit or 64-bit wide.
   typedef unsigned long  ulong;
 
   /*!
@@ -86,50 +74,6 @@ namespace TagLib {
    * so I'm providing something here that should be constant.
    */
   typedef std::basic_string<wchar> wstring;
-
-#ifndef DO_NOT_DOCUMENT // Tell Doxygen to skip this class.
-  /*!
-   * \internal
-   * This is just used as a base class for shared classes in TagLib.
-   *
-   * \warning This <b>is not</b> part of the TagLib public API!
-   */
-
-  class RefCounter
-  {
-  public:
-    RefCounter() : refCount(1) {}
-
-#ifdef TAGLIB_ATOMIC_MAC
-    void ref() { OSAtomicIncrement32Barrier(const_cast<int32_t*>(&refCount)); }
-    bool deref() { return ! OSAtomicDecrement32Barrier(const_cast<int32_t*>(&refCount)); }
-    int32_t count() { return refCount; }
-  private:
-    volatile int32_t refCount;
-#elif defined(TAGLIB_ATOMIC_WIN)
-    void ref() { InterlockedIncrement(&refCount); }
-    bool deref() { return ! InterlockedDecrement(&refCount); }
-    long count() { return refCount; }
-  private:
-    volatile long refCount;
-#elif defined(TAGLIB_ATOMIC_GCC)
-    void ref() { __sync_add_and_fetch(&refCount, 1); }
-    bool deref() { return ! __sync_sub_and_fetch(&refCount, 1); }
-    int count() { return refCount; }
-  private:
-    volatile int refCount;
-#else
-    void ref() { refCount++; }
-    bool deref() { return ! --refCount; }
-    int count() { return refCount; }
-  private:
-    uint refCount;
-#endif
-
-  };
-
-#endif // DO_NOT_DOCUMENT
-
 }
 
 /*!
@@ -143,7 +87,7 @@ namespace TagLib {
  * - A clean, high level, C++ API to handling audio meta data.
  * - Format specific APIs for advanced API users.
  * - ID3v1, ID3v2, APE, FLAC, Xiph, iTunes-style MP4 and WMA tag formats.
- * - MP3, MPC, FLAC, MP4, ASF, AIFF, WAV, TrueAudio, WavPack, Ogg FLAC, Ogg Vorbis and Speex file formats.
+ * - MP3, MPC, FLAC, MP4, ASF, AIFF, WAV, TrueAudio, WavPack, Ogg FLAC, Ogg Vorbis, Speex and Opus file formats.
  * - Basic audio file properties such as length, sample rate, etc.
  * - Long term binary and source compatibility.
  * - Extensible design, notably the ability to add other formats or extend current formats as a library user.

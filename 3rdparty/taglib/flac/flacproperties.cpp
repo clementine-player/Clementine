@@ -124,7 +124,7 @@ void FLAC::Properties::read()
     return;
   }
 
-  int pos = 0;
+  uint pos = 0;
 
   // Minimum block size (in samples)
   pos += 2;
@@ -138,7 +138,7 @@ void FLAC::Properties::read()
   // Maximum frame size (in bytes)
   pos += 3;
 
-  uint flags = d->data.mid(pos, 4).toUInt(true);
+  uint flags = d->data.toUInt(pos, true);
   pos += 4;
 
   d->sampleRate = flags >> 12;
@@ -149,7 +149,7 @@ void FLAC::Properties::read()
   // stream length in samples. (Audio files measured in days)
 
   unsigned long long hi = flags & 0xf;
-  unsigned long long lo = d->data.mid(pos, 4).toUInt(true);
+  unsigned long long lo = d->data.toUInt(pos, true);
   pos += 4;
 
   d->sampleFrames = (hi << 32) | lo;

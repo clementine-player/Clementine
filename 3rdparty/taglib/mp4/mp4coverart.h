@@ -42,10 +42,11 @@ namespace TagLib {
        * This describes the image type.
        */
       enum Format {
-        JPEG = TypeJPEG,
-        PNG  = TypePNG,
-        BMP  = TypeBMP,
-        GIF  = TypeGIF
+        JPEG    = TypeJPEG,
+        PNG     = TypePNG,
+        BMP     = TypeBMP,
+        GIF     = TypeGIF,
+        Unknown = TypeImplicit,
       };
 
       CoverArt(Format format, const ByteVector &data);

@@ -47,7 +47,8 @@ S3M::File::File(FileName file, bool readProperties,
   Mod::FileBase(file),
   d(new FilePrivate(propertiesStyle))
 {
-  read(readProperties);
+  if(isOpen())
+    read(readProperties);
 }
 
 S3M::File::File(IOStream *stream, bool readProperties,
@@ -55,7 +56,8 @@ S3M::File::File(IOStream *stream, bool readProperties,
   Mod::FileBase(stream),
   d(new FilePrivate(propertiesStyle))
 {
-  read(readProperties);
+  if(isOpen())
+    read(readProperties);
 }
 
 S3M::File::~File()

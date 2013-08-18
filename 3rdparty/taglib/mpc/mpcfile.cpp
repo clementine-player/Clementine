@@ -39,7 +39,7 @@ using namespace TagLib;
 
 namespace
 {
-  enum { MPCAPEIndex, MPCID3v1Index };
+  enum { MPCAPEIndex = 0, MPCID3v1Index = 1 };
 }
 
 class MPC::File::FilePrivate
@@ -94,14 +94,16 @@ MPC::File::File(FileName file, bool readProperties,
                 Properties::ReadStyle propertiesStyle) : TagLib::File(file)
 {
   d = new FilePrivate;
-  read(readProperties, propertiesStyle);
+  if(isOpen())
+    read(readProperties, propertiesStyle);
 }
 
 MPC::File::File(IOStream *stream, bool readProperties,
                 Properties::ReadStyle propertiesStyle) : TagLib::File(stream)
 {
   d = new FilePrivate;
-  read(readProperties, propertiesStyle);
+  if(isOpen())
+    read(readProperties, propertiesStyle);
 }
 
 MPC::File::~File()
@@ -133,14 +135,10 @@ void MPC::File::removeUnsupportedProperties(const StringList &properties)
 
 PropertyMap MPC::File::setProperties(const PropertyMap &properties)
 {
-  if(d->hasAPE)
-    return d->tag.access<APE::Tag>(MPCAPEIndex, false)->setProperties(properties);
-  else if(d->hasID3v1)
-    return d->tag.access<ID3v1::Tag>(MPCID3v1Index, false)->setProperties(properties);
-  else
-    return d->tag.access<APE::Tag>(APE, true)->setProperties(properties);
+  if(d->hasID3v1)
+    d->tag.access<APE::Tag>(MPCID3v1Index, false)->setProperties(properties);
+  return d->tag.access<APE::Tag>(MPCAPEIndex, true)->setProperties(properties);
 }
-
 
 MPC::Properties *MPC::File::audioProperties() const
 {
@@ -258,6 +256,15 @@ void MPC::File::remove(int tags)
   strip(tags);
 }
 
+bool MPC::File::hasID3v1Tag() const
+{
+  return d->hasID3v1;
+}
+
+bool MPC::File::hasAPETag() const
+{
+  return d->hasAPE;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // private members

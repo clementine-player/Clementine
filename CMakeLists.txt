@@ -105,15 +105,16 @@ if (USE_BUILTIN_TAGLIB AND
   set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
   set(TAGLIB_LIBRARY_DIRS "")
   set(TAGLIB_LIBRARIES tag)
+  set(TAGLIB_HAS_OPUS ON)
   add_subdirectory(3rdparty/taglib)
+else()
+  set(CMAKE_REQUIRED_INCLUDES "${TAGLIB_INCLUDE_DIRS}")
+  set(CMAKE_REQUIRED_LIBRARIES "${TAGLIB_LIBRARIES}")
+  check_cxx_source_compiles("#include <opusfile.h>
+      int main() { char *s; TagLib::Ogg::Opus::File opusfile(s); return 0;}" TAGLIB_HAS_OPUS)
+  set(CMAKE_REQUIRED_INCLUDES)
+  set(CMAKE_REQUIRED_LIBRARIES)
 endif()
-
-set(CMAKE_REQUIRED_INCLUDES "${TAGLIB_INCLUDE_DIRS}")
-set(CMAKE_REQUIRED_LIBRARIES "${TAGLIB_LIBRARIES}")
-check_cxx_source_compiles("#include <opusfile.h>
-    int main() { char *s; TagLib::Ogg::Opus::File opusfile(s); return 0;}" TAGLIB_HAS_OPUS)
-set(CMAKE_REQUIRED_INCLUDES)
-set(CMAKE_REQUIRED_LIBRARIES)
 
 if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)

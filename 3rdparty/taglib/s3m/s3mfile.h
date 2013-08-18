@@ -36,18 +36,22 @@ namespace TagLib {
     class TAGLIB_EXPORT File : public Mod::FileBase {
       public:
         /*!
-         * Contructs a ScreamTracker III file from \a file. If \a readProperties
-         * is true the file's audio properties will also be read using
-         * \a propertiesStyle. If false, \a propertiesStyle is ignored.
+         * Constructs a ScreamTracker III from \a file.
+         *
+         * \note In the current implementation, both \a readProperties and
+         * \a propertiesStyle are ignored.  The audio properties are always
+         * read.
          */
         File(FileName file, bool readProperties = true,
              AudioProperties::ReadStyle propertiesStyle =
              AudioProperties::Average);
 
         /*!
-         * Contructs a ScreamTracker III file from \a stream. If \a readProperties
-         * is true the file's audio properties will also be read using
-         * \a propertiesStyle. If false, \a propertiesStyle is ignored.
+         * Constructs a ScreamTracker III file from \a stream.
+         *
+         * \note In the current implementation, both \a readProperties and
+         * \a propertiesStyle are ignored.  The audio properties are always
+         * read.
          *
          * \note TagLib will *not* take ownership of the stream, the caller is
          * responsible for deleting it after the File object.

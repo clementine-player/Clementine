@@ -340,7 +340,7 @@ void Ogg::XiphComment::parse(const ByteVector &data)
 
   uint pos = 0;
 
-  uint vendorLength = data.mid(0, 4).toUInt(false);
+  const uint vendorLength = data.toUInt(0, false);
   pos += 4;
 
   d->vendorID = String(data.mid(pos, vendorLength), String::UTF8);
@@ -348,7 +348,7 @@ void Ogg::XiphComment::parse(const ByteVector &data)
 
   // Next the number of fields in the comment vector.
 
-  uint commentFields = data.mid(pos, 4).toUInt(false);
+  const uint commentFields = data.toUInt(pos, false);
   pos += 4;
 
   if(commentFields > (data.size() - 8) / 4) {
@@ -360,7 +360,7 @@ void Ogg::XiphComment::parse(const ByteVector &data)
     // Each comment field is in the format "KEY=value" in a UTF8 string and has
     // 4 bytes before the text starts that gives the length.
 
-    uint commentLength = data.mid(pos, 4).toUInt(false);
+    const uint commentLength = data.toUInt(pos, false);
     pos += 4;
 
     String comment = String(data.mid(pos, commentLength), String::UTF8);
