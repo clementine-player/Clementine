@@ -104,19 +104,19 @@ void MoodbarRenderer::Render(const ColorVector& colors, QPainter* p, const QRect
     int g = 0;
     int b = 0;
 
-    uint start = x       * colors.size() / rect.width();
-    uint end   = (x + 1) * colors.size() / rect.width();
+    int start = x       * colors.size() / rect.width();
+    int end   = (x + 1) * colors.size() / rect.width();
 
     if (start == end)
       end = qMin(start + 1, colors.size() - 1);
 
-    for (uint j=start; j<end; j++) {
+    for (int j=start; j<end; j++) {
       r += colors[j].red();
       g += colors[j].green();
       b += colors[j].blue();
     }
 
-    const uint n = end - start;
+    const int n = end - start;
     screen_colors.append(QColor(r/n, g/n, b/n));
   }
 
