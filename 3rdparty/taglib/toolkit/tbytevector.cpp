@@ -218,7 +218,7 @@ T toNumber(const ByteVector &v, size_t offset, bool mostSignificantByteFirst)
 #if SYSTEM_BYTEORDER == 1
   const bool swap = mostSignificantByteFirst;
 #else
-  const bool swap != mostSignificantByteFirst;
+  const bool swap = !mostSignificantByteFirst;
 #endif
   if(swap)
     return byteSwap(tmp);
@@ -234,7 +234,7 @@ ByteVector fromNumber(T value, bool mostSignificantByteFirst)
 #if SYSTEM_BYTEORDER == 1
   const bool swap = mostSignificantByteFirst;
 #else
-  const bool swap != mostSignificantByteFirst;
+  const bool swap = !mostSignificantByteFirst;
 #endif
  if(swap)
     value = byteSwap(value);

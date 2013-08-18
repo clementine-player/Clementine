@@ -1,0 +1,22 @@
+diff --git a/3rdparty/taglib/toolkit/tbytevector.cpp b/3rdparty/taglib/toolkit/tbytevector.cpp
+index ddc3d4f..f36758f 100644
+--- a/3rdparty/taglib/toolkit/tbytevector.cpp
++++ b/3rdparty/taglib/toolkit/tbytevector.cpp
+@@ -218,7 +218,7 @@ T toNumber(const ByteVector &v, size_t offset, bool mostSignificantByteFirst)
+ #if SYSTEM_BYTEORDER == 1
+   const bool swap = mostSignificantByteFirst;
+ #else
+-  const bool swap != mostSignificantByteFirst;
++  const bool swap = !mostSignificantByteFirst;
+ #endif
+   if(swap)
+     return byteSwap(tmp);
+@@ -234,7 +234,7 @@ ByteVector fromNumber(T value, bool mostSignificantByteFirst)
+ #if SYSTEM_BYTEORDER == 1
+   const bool swap = mostSignificantByteFirst;
+ #else
+-  const bool swap != mostSignificantByteFirst;
++  const bool swap = !mostSignificantByteFirst;
+ #endif
+  if(swap)
+     value = byteSwap(value);
