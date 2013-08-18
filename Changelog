@@ -3,7 +3,9 @@ Version 1.2:
     * Add support for indexing and playing music from Box, Dropbox, Skydrive,
       and Ubuntu One.
     * Add support for Subsonic.
-    * Remote control support.
+    * Remote control support for Android.
+    * Add a Playlist tab to the sidebar.  Starred playlists are saved in here
+      when their tabs are closed.
 
   Other features:
     * Add configurable blur & opacity to album art when used as a playlist
@@ -14,8 +16,31 @@ Version 1.2:
     * Sort providers by user preference.
     * Add year and bitrate to MPRIS2 messages.
     * Add "not equals" operator to fields in the smart playlist wizard.
+    * Add an option to write ratings, play count and scores to files.
+    * Add options to show the rating and score on the OSD.
+    * Add support for POPM tags.
+    * Add support for FMPS tags in Ogg, FLAC, MP4 and ASF files.
+    * Compile the bundled Taglib with ASF, MP4 and Opus support.
+    * Make it possible to cancel cover searches.
+    * Add an option to resume playback on startup.
+    * Add support for Performer and Grouping tags.
+    * Add Radio GFM.
+    * Add an Apply button to the settings dialog.
+    * Make it possible to mark all episodes of a podcast as new/listened.
+    * Add an option for fading in/out on pause/unpause.
+    * Add stereo balance slider to the equalizer.
+    * Add a --restart-or-previous commandline flag.
+    * Allow files to be transcoded directly from the playlist.
+
+  Removed features:
+    * Removed iDevice support - it doesn't work well with modern devices and
+      libgpod isn't being updated to support them.
+    * (Windows) Removed support for WMDM devices.  This was very fragile to
+      cross-compile and was buggy and untested.
+    * (Mac OS X) Removed support for 10.6.  OS X 10.7 or later is now required.
 
   Bugfixes:
+    * Fix gapless playback!
     * Detect corrupt FLAC files when parsing tags.
     * Load tags from local files asynchronously.
     * Show more than 5 album results at a time from Spotify.
@@ -38,10 +63,28 @@ Version 1.2:
     * Fix radio playlists in non-English locales.
     * Fix cursor following playback.
     * Hide moodbar playlist column by default.
+    * Use native language names in the language selector where available.
+    * Only show a tooltip on sidebar tabs when needed.
+    * Never start playing a background stream (like Hypnotoad) on startup.
+    * Run the moodbar generation at a lower CPU and IO priority.
+    * Pressing space with the seekbar focused now toggles play/pause.
+    * Update tray icon progress immediately on track change.
+    * Don't replace song metadata with blank m3u EXTINF metadata.
+    * Fix a bug when fingerprinting files with non-ascii characters.
+    * Fix occasional freezing analyzers.
+    * Make wheel events on the analyzer change the volume.
+    * (Mac OS X and Windows) Highlight the actual file in Finder or Explorer
+      when using "Show file in browser".
+    * (Windows) Run Clementine with normal user privileges after installation.
+    * (Windows) Fix a "Error loading http://audio/mpegurl" error on first start.
+    * (Mac OS X) Don't probe stupid printers when scanning for music devices.
+    * (Mac OS X) Show a better error message when using an old version of OS X.
 
   Build system changes:
     * Add continous builds for Fedora Core 18, Ubuntu 12.10 and Ubuntu 13.04.
+    * (Linux) Use the system's version of libmygpo-qt if available.
     * (Mac OS X and Windows) Upgrade to Qt 4.8.3.
+    * (Mac OS X) Sign release .dmgs.
 
 
 
