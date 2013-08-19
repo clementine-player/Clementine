@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-10 19:08+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-08-17 05:44+0000\n"
+"Last-Translator: Yhal Htet Aung <jumoun@gmail.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/projects/p/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -86,7 +86,7 @@ msgstr "%1 မှအပေါ် %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 သီချင်းစာရင်းများ (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 ကိုရွေးချယ်ခဲ့"
@@ -111,7 +111,7 @@ msgstr "%1 သီချင်းများရှာတွေ့"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 သီချင်းများရှာတွေ့ (%2 ပြသနေ)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 တေးသံလမ်းကြောများ"
@@ -249,7 +249,7 @@ msgstr "၀ပီအိတ်စ်"
 msgid "1 day"
 msgstr "တစ်နေ့"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 msgid "1 track"
 msgstr "တေးသံလမ်းကြောတစ်ခု"
 
@@ -3560,8 +3560,8 @@ msgid "Player options"
 msgstr "ဖွင့်စက်ရွေးပိုင်ခွင့်များ"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:356
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
+#: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "သီချင်းစာရင်း"
 
@@ -4028,7 +4028,7 @@ msgstr "ဓာတ်ပြားသို့အဖံုးမှတ်သား
 msgid "Save image"
 msgstr "ပုံမှတ်သား"
 
-#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:235
+#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:240
 msgid "Save playlist"
 msgstr "သီချင်းစာရင်းမှတ်သား"
 
@@ -4675,7 +4675,7 @@ msgstr "လက်ရှိဖွင့်ဆဲသီချင်းအယ်လ
 msgid "The directory %1 is not valid"
 msgstr "%1 ယခုဖိုင်လမ်းညွှန်မမှန်"
 
-#: playlist/playlistmanager.cpp:161 playlist/playlistmanager.cpp:179
+#: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr " '%1' သီချင်းစာရင်းသည်အလွတ်သို့မထည့်သွင်းနိုင်။"
@@ -4800,7 +4800,7 @@ msgstr "ယခုပစ္စည်းကိုပထမဆံုးအကြိ
 
 #: playlist/playlisttabbar.cpp:185
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "ယခုရွေးပိုင်ခွင့်ကိုလုပ်ဆောင်ပုံလိုလားချက်များတွင်ပြန်ပြောင်းနိုင်"
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -4944,7 +4944,7 @@ msgstr "မကူးဆွဲနိုင် %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
+#: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5116,7 +5116,7 @@ msgid "Variable bit rate"
 msgstr "ဘစ်နှုန်းကိန်းရှင်"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုး"
 

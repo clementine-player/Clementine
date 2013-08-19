@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-10 19:07+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-08-12 10:18+0000\n"
+"Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/clementine/language/pt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -91,7 +91,7 @@ msgstr "%1 em %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reprodução (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 selected of"
 msgstr "selecionada(s) %1 de"
@@ -116,7 +116,7 @@ msgstr "%1 faixas encontradas"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 faixas encontradas (a exibir %2)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 faixas"
@@ -254,7 +254,7 @@ msgstr "0 px."
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 msgid "1 track"
 msgstr "1 faixa"
 
@@ -3565,8 +3565,8 @@ msgid "Player options"
 msgstr "Opções do reprodutor"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:356
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
+#: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Lista de reprodução"
 
@@ -4033,7 +4033,7 @@ msgstr "Gravar capa de álbum no disco..."
 msgid "Save image"
 msgstr "Gravar imagem"
 
-#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:235
+#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:240
 msgid "Save playlist"
 msgstr "Gravar lista de reprodução"
 
@@ -4680,7 +4680,7 @@ msgstr "A capa de álbum da faixa em reprodução"
 msgid "The directory %1 is not valid"
 msgstr "O diretório %1 é inválido"
 
-#: playlist/playlistmanager.cpp:161 playlist/playlistmanager.cpp:179
+#: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "A lista de reprodução \"%1\" está vazia ou não pôde ser carregada"
@@ -4805,7 +4805,7 @@ msgstr "Esta é a primeira vez que liga este dispositivo. O Clementine vai anali
 
 #: playlist/playlisttabbar.cpp:185
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "Esta opção pode ser alterada nas preferências"
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -4949,7 +4949,7 @@ msgstr "Incapaz de transferir %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
+#: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5121,7 +5121,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de dados variável"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Vários artistas"
 
