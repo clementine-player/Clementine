@@ -6,6 +6,7 @@
 # Andre Mata Ludji <>, 2012
 # Nurissalam Nurissalam <elwarosesceince@gmail.com>, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# chocolateshirt <tydushikari@gmail.com>, 2013
 # nix.Lilium <nix.lilium@gmail.com>, 2012
 # operamaniac <rizkiaulia.r@gmail.com>, 2013
 # tjung <tjung.steven@gmail.com>, 2012-2013
@@ -15,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-10 19:08+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-08-17 15:05+0000\n"
+"Last-Translator: chocolateshirt <tydushikari@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -93,7 +94,7 @@ msgstr "%1 pada %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 daftar main (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 terpilih dari"
@@ -118,7 +119,7 @@ msgstr "%1 songs found"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 lagu ditemukan (menunjukkan %2)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 lagu"
@@ -256,7 +257,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 Hari"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 msgid "1 track"
 msgstr "1 lagu"
 
@@ -2465,7 +2466,7 @@ msgstr "Tinggi (1024x1024)"
 
 #: internet/subsonicsettingspage.cpp:112
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Tidk bisa menemukan host, periksa kembali URL server. Contoh: http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
@@ -3567,8 +3568,8 @@ msgid "Player options"
 msgstr "Pilihan pemutar"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:356
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
+#: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Daftar lagu"
 
@@ -3863,7 +3864,7 @@ msgstr "Hapus dari playlist"
 
 #: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
-msgstr ""
+msgstr "Menghapus daftar putar"
 
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
@@ -4035,7 +4036,7 @@ msgstr "Simpan sampul ke media penyimpan..."
 msgid "Save image"
 msgstr "Simpan gambar"
 
-#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:235
+#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:240
 msgid "Save playlist"
 msgstr "Simpan playlist"
 
@@ -4682,7 +4683,7 @@ msgstr "Sampul album dari lagu yang sedang dimainkan"
 msgid "The directory %1 is not valid"
 msgstr "Direktori %1 tidak sah"
 
-#: playlist/playlistmanager.cpp:161 playlist/playlistmanager.cpp:179
+#: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Daftar lagu '%1' kosong atau tidak dapat dimuat"
@@ -4934,11 +4935,11 @@ msgstr "Ubuntu One"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:132
 msgid "Ubuntu One password"
-msgstr ""
+msgstr "Password Ubuntu One"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:130
 msgid "Ubuntu One username"
-msgstr ""
+msgstr "Username Ubuntu One"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4951,7 +4952,7 @@ msgstr "Tidak dapat mengunduh %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
+#: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5123,7 +5124,7 @@ msgid "Variable bit rate"
 msgstr "Variabel laju bit"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Berbagai artis"
 

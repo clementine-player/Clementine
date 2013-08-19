@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-12 02:51+0000\n"
+"PO-Revision-Date: 2013-08-13 15:48+0000\n"
 "Last-Translator: rcpp <rcappellano@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,7 +94,7 @@ msgstr "%1 de %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reprodução (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 selecionado(s) de"
@@ -119,7 +119,7 @@ msgstr "%1 músicas encontradas"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 músicas encontradas (Exibindo %2)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 faixas"
@@ -257,7 +257,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 msgid "1 track"
 msgstr "1 faixa"
 
@@ -1005,7 +1005,7 @@ msgstr "Alterar idioma"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr "Alterar a saída mono terá efeito apenas nas próximas músicas."
+msgstr "Alterar a saída mono terá efeito para as próximas músicas a serem tocadas"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
@@ -3568,8 +3568,8 @@ msgid "Player options"
 msgstr "Opções do player"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:356
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
+#: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Lista de Reprodução"
 
@@ -4036,7 +4036,7 @@ msgstr "Gravar capa para o disco..."
 msgid "Save image"
 msgstr "Salvar imagem"
 
-#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:235
+#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:240
 msgid "Save playlist"
 msgstr "Salvar lista de reprodução"
 
@@ -4683,7 +4683,7 @@ msgstr "A capa do álbum da música atual"
 msgid "The directory %1 is not valid"
 msgstr "O diretório %1 não é válido"
 
-#: playlist/playlistmanager.cpp:161 playlist/playlistmanager.cpp:179
+#: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "A lista de reprodução '%1' está vazia ou não pode ser carregada."
@@ -4808,7 +4808,7 @@ msgstr "Esta é a primeira vez que você conecta este dispositivo. O Clementine 
 
 #: playlist/playlisttabbar.cpp:185
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "Essa opção pode ser alterada nas preferências de \"Comportamento\""
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -4952,7 +4952,7 @@ msgstr "Não foi possível baixar %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
+#: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5124,7 +5124,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de bits variável"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Vários artistas"
 
@@ -5203,7 +5203,7 @@ msgstr "Quando a lista está vazia..."
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr "Porque não tentar..."
+msgstr "Por que não tentar..."
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5395,7 +5395,7 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr "Você precisa acessar as Preferências de Sistema e habilitar a opção \"<span style=\" font-style:italic;\">Ativar acesso por dispositivos assistidos</span>\" para utilizar os atalhos globais no Clementine."
+msgstr "Você precisa acessar as Preferências de Sistema e habilitar a opção \"<span style=\" font-style:italic;\">Ativar acesso para dispositivos assistivos</span>\" para utilizar os atalhos globais no Clementine."
 
 #: ../bin/src/ui_behavioursettingspage.h:200
 msgid "You will need to restart Clementine if you change the language."

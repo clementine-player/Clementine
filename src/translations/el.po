@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-10 19:07+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-08-18 16:12+0000\n"
+"Last-Translator: firewalker <firew4lker@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -93,7 +93,7 @@ msgstr "%1 στο %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 λίστες αναπαραγωγής (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 επιλεγμένα από"
@@ -118,7 +118,7 @@ msgstr "βρέθηκαν %1 τραγούδια"
 msgid "%1 songs found (showing %2)"
 msgstr "βρέθηκαν %1 τραγούδια (εμφάνιση %2)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 κομμάτια"
@@ -256,7 +256,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 ημέρα"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 msgid "1 track"
 msgstr "1 κομμάτι"
 
@@ -3567,8 +3567,8 @@ msgid "Player options"
 msgstr "Επιλογές αναπαραγωγής"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:356
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
+#: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Λίστα"
 
@@ -4035,7 +4035,7 @@ msgstr "Αποθ. εξώφυλλου στον δίσκο..."
 msgid "Save image"
 msgstr "Αποθήκευση εικόνας"
 
-#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:235
+#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:240
 msgid "Save playlist"
 msgstr "Αποθήκευση λίστας αναπαραγωγής"
 
@@ -4682,7 +4682,7 @@ msgstr "Το εξώφυλλο του άλμπουμ του τραγουδιού 
 msgid "The directory %1 is not valid"
 msgstr "Ο κατάλογος %1 δεν είναι έγκυρος"
 
-#: playlist/playlistmanager.cpp:161 playlist/playlistmanager.cpp:179
+#: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Η λίστα αναπαραγωγής '%1' ήταν άδεια ή δεν μπόρεσε να φορτωθεί."
@@ -4807,7 +4807,7 @@ msgstr "Αυτή είναι η πρώτη φορά που συνδέετε αυ�
 
 #: playlist/playlisttabbar.cpp:185
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "Η επιλογή αυτή μπορεί να αλλάξει από τις προτιμήσεις \"Συμπεριφορά\""
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -4951,7 +4951,7 @@ msgstr "Αδυναμία \"κατεβάσματος\" του %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
+#: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5123,7 +5123,7 @@ msgid "Variable bit rate"
 msgstr "Μεταβαλλόμενος ρυθμός bit"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Διάφοροι καλλιτέχνες"
 
@@ -5172,7 +5172,7 @@ msgstr "WMA"
 
 #: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "Προειδοποίηση κατά το κλείσιμο μίας λίστας αναπαραγωγής"
 
 #: core/song.cpp:337
 msgid "Wav"

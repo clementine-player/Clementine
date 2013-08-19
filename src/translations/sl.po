@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-10 19:08+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-08-14 22:26+0000\n"
+"Last-Translator: R33D3M33R <andrejm@ubuntu.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -92,7 +92,7 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 seznamov predvajanja (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 selected of"
 msgstr "izbran %1 od"
@@ -117,7 +117,7 @@ msgstr "najdenih %1 skladb"
 msgid "%1 songs found (showing %2)"
 msgstr "najdenih %1 skladb (prikazanih %2)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladb"
@@ -255,7 +255,7 @@ msgstr "0 px"
 msgid "1 day"
 msgstr "1 dan"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:419
 msgid "1 track"
 msgstr "1 skladba"
 
@@ -3566,8 +3566,8 @@ msgid "Player options"
 msgstr "Možnosti predvajalnika"
 
 #: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:492
-#: playlist/playlisttabbar.cpp:356
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
+#: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:356
 msgid "Playlist"
 msgstr "Seznam predvajanja"
 
@@ -4034,7 +4034,7 @@ msgstr "Shrani ovitek na disk ..."
 msgid "Save image"
 msgstr "Shrani sliko"
 
-#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:235
+#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:240
 msgid "Save playlist"
 msgstr "Shrani seznam predvajanja"
 
@@ -4681,7 +4681,7 @@ msgstr "Ovitek albuma skladbe, ki se trenutno predvaja"
 msgid "The directory %1 is not valid"
 msgstr "Mapa %1 ni veljavna"
 
-#: playlist/playlistmanager.cpp:161 playlist/playlistmanager.cpp:179
+#: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Seznam predvajanja '%1' je prazen ali pa ga ni bilo mogoče naložiti."
@@ -4806,7 +4806,7 @@ msgstr "Tokrat ste prvič priklopili to napravo. Clementine bo sedaj preiskal na
 
 #: playlist/playlisttabbar.cpp:185
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "To možnost lahko spremenite v \"Obnašanje\""
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -4950,7 +4950,7 @@ msgstr "Ni bilo mogoče prejeti %1 (%2)"
 
 #: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:500 playlist/playlistmanager.cpp:503
+#: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -5122,7 +5122,7 @@ msgid "Variable bit rate"
 msgstr "Spremenljiva bitna hitrost"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
-#: playlist/playlistmanager.cpp:515 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Različni izvajalci"
 
