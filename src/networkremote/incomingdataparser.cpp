@@ -300,11 +300,7 @@ void IncomingDataParser::ClosePlaylist(const pb::remote::Message &msg) {
 }
 
 void IncomingDataParser::RateSong(const pb::remote::Message &msg) {
-  int rating = msg.request_rate_song().rating();
-
-  // Rating is from 0 to 5
-  if (rating > 5) rating = 5;
-  if (rating < 0) rating = 0;
+  int rating = qBound(0, msg.request_rate_song().rating(), 5);
 
   emit RateCurrentSong(rating);
 }
