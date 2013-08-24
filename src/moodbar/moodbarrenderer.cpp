@@ -116,7 +116,7 @@ void MoodbarRenderer::Render(const ColorVector& colors, QPainter* p, const QRect
       b += colors[j].blue();
     }
 
-    const int n = end - start;
+    const int n = qMax(1, end - start);
     screen_colors.append(QColor(r/n, g/n, b/n));
   }
 
