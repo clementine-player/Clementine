@@ -52,8 +52,8 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
 
 
 RemoteClient::~RemoteClient() {
-  client_->abort();
-  delete client_;
+  client_->close();
+  client_->waitForDisconnected(2000);
 }
 
 void RemoteClient::setDownloader(bool downloader) {
