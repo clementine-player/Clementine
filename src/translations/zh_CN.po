@@ -5,16 +5,20 @@
 # Translators:
 # Aron Xu <aronxu@gnome.org>, 2011
 # bingmou <bingmou2004@gmail.com>, 2012
+# bingmou <bingmou2004@gmail.com>, 2012
+# xaojan <cxiaojian@gmail.com>, 2012
+# walking <waling@mail.i2p>, 2013
 # xaojan <cxiaojian@gmail.com>, 2012
 # Xinkai Chen <yeled.nova@gmail.com>, 2012
 # Xinkai Chen <yeled.nova@gmail.com>, 2012
+# zhangmin <zm1990s@gmail.com>, 2013
 # zhangmin <zm1990s@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-10 19:08+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-08-19 13:09+0000\n"
+"Last-Translator: xtoaster <zhazhenzhong@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,7 +32,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\n您可以通过点击播放列表名称旁的星标来收藏播放列表\n\n收藏的播放列表将被保存至此"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -240,7 +244,7 @@ msgstr "...和所有 Amarok 的贡献者"
 
 #: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
@@ -248,7 +252,7 @@ msgstr "0:00:00"
 
 #: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
-msgstr ""
+msgstr "0px"
 
 #: core/utilities.cpp:108
 msgid "1 day"
@@ -256,11 +260,11 @@ msgstr "1 天"
 
 #: playlist/playlistmanager.cpp:419
 msgid "1 track"
-msgstr "1 条音轨"
+msgstr "1 个曲目"
 
 #: ../bin/src/ui_networkremotesettingspage.h:201
 msgid "127.0.0.1"
-msgstr ""
+msgstr "127.0.0.1"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
@@ -269,11 +273,11 @@ msgstr "128k MP3"
 
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
-msgstr ""
+msgstr "40%"
 
 #: library/library.cpp:60
 msgid "50 random tracks"
-msgstr "50 个随机音轨"
+msgstr "50 个随机曲目"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -283,7 +287,7 @@ msgstr "<a href=\"http://www.di.fm/premium/\">立即升级至豪华版</a>"
 msgid ""
 "<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
 "your password</a>"
-msgstr ""
+msgstr "<a href=\"https://one.ubuntu.com/auth/login\">创建新账户或重置您的密码</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -293,7 +297,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>如果未勾选, Clementine 将尽量在外部数据库中保存您的内容评级及其它统计信息，并不会修改您的文件。</p><p>如果勾选，程序在每次信息更新时会将统计信息保存至数据库并同时直接写入文件。</p><p>注意，因为缺少标准可循，这并不对所以格式都有效，其它播放器也不一定都能读取这些信息。</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -301,14 +305,14 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>这会将每首歌曲的评级和统计信息写入您所有歌曲库中歌曲的文件标记中。</p><p>如果 &quot;保存评级和统计到文件标记中&quot; 选项始终开启，本操作没有必要执行。</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
+msgstr "<p>变量标记以%开头，例如: %artist %album %title </p>\n\n<p>如果您用花括号\"{}\"将含有标记的部分文本括起来，此部分在标记内容为空时将自动隐藏。</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -316,11 +320,11 @@ msgstr "需要一个 Grooveshark Anywhere 帐户。"
 
 #: internet/spotifysettingspage.cpp:162
 msgid "A Spotify Premium account is required."
-msgstr "需要一个Spotify的付费账户."
+msgstr "需要一个 Spotify 的付费账户。"
 
 #: ../bin/src/ui_networkremotesettingspage.h:189
 msgid "A client can connect only, if the correct code was entered."
-msgstr ""
+msgstr "只有在输入正确代码后，客户端才能连接。"
 
 #: smartplaylists/wizard.cpp:78
 msgid ""
@@ -360,11 +364,11 @@ msgstr "AIFF"
 
 #: widgets/nowplayingwidget.cpp:119
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr ""
+msgstr "ALL GLORY TO THE HYPNOTOAD"
 
 #: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
 msgid "Abort"
-msgstr ""
+msgstr "中止"
 
 #: ui/about.cpp:32
 #, qt-format
@@ -429,11 +433,11 @@ msgstr "添加文件"
 
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "添加文件至转码器"
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "添加文件至转码器"
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "Add file..."
@@ -481,7 +485,7 @@ msgstr "添加歌曲艺术家标签"
 
 #: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Add song auto score"
-msgstr ""
+msgstr "添加歌曲自动评分"
 
 #: ../bin/src/ui_notificationssettingspage.h:392
 msgid "Add song composer tag"
@@ -501,7 +505,7 @@ msgstr "添加歌曲流派标签"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "添加歌曲分组标签"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
@@ -509,7 +513,7 @@ msgstr "添加歌曲长度标签"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
-msgstr ""
+msgstr "添加歌曲表演者标签"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song play count"
@@ -517,7 +521,7 @@ msgstr "统计音乐播放次数"
 
 #: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song rating"
-msgstr ""
+msgstr "添加歌曲评级"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song skip count"
@@ -529,7 +533,7 @@ msgstr "添加歌曲标题标签"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song track tag"
-msgstr "添加歌曲音轨序号标签"
+msgstr "添加歌曲曲目标签"
 
 #: ../bin/src/ui_notificationssettingspage.h:389
 msgid "Add song year tag"
@@ -541,7 +545,7 @@ msgstr "添加流媒体..."
 
 #: internet/groovesharkservice.cpp:1085
 msgid "Add to Grooveshark favorites"
-msgstr "添加到 Grooveshark 最爱"
+msgstr "添加到 Grooveshark 收藏夹"
 
 #: internet/groovesharkservice.cpp:1097
 msgid "Add to Grooveshark playlists"
@@ -594,7 +598,7 @@ msgstr "添加到我的音乐"
 
 #: internet/groovesharkservice.cpp:1369
 msgid "Adding song to favorites"
-msgstr "添加歌曲到最喜爱的"
+msgstr "添加歌曲到收藏夹"
 
 #: library/libraryfilterwidget.cpp:116
 msgid "Advanced grouping..."
@@ -619,7 +623,7 @@ msgstr "专辑"
 
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Album (ideal loudness for all tracks)"
-msgstr "专辑(所有音轨采用一个合适的音量)"
+msgstr "专辑(所有曲目采用合适音量)"
 
 #: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
@@ -674,19 +678,19 @@ msgstr "所有翻译人员"
 
 #: library/library.cpp:84
 msgid "All tracks"
-msgstr "全部音轨"
+msgstr "全部曲目"
 
 #: ../bin/src/ui_networkremotesettingspage.h:194
 msgid "Allow a client to download music from this computer."
-msgstr ""
+msgstr "允许客户端从本机下载音乐。"
 
 #: ../bin/src/ui_networkremotesettingspage.h:196
 msgid "Allow downloads"
-msgstr ""
+msgstr "允许下载"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
-msgstr ""
+msgstr "允许 M/S 编码 (和差编码)"
 
 #: ../bin/src/ui_transcodedialog.h:215
 msgid "Alongside the originals"
@@ -709,7 +713,7 @@ msgstr "总是开始播放"
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr "Clementine需要安装额外的插件才能使用Spotify.现在就下载并安装吗?"
+msgstr "Clementine 需要安装额外的插件才能使用 Spotify。现在就下载并安装吗?"
 
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
@@ -718,11 +722,11 @@ msgstr "加载 iTunes 数据库时出错"
 #: ui/edittagdialog.cpp:663
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
-msgstr "向 %1 写入元数据时出错"
+msgstr "向 '%1' 写入元数据时出错"
 
 #: internet/subsonicsettingspage.cpp:103
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "出现了意外错误。"
 
 #: ui/about.cpp:78
 msgid "And:"
@@ -772,7 +776,7 @@ msgstr "您确定要重置此曲目的统计信息吗？"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "您确定要将媒体库中所有歌曲的统计信息写入相应的歌曲文件?"
 
 #: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -873,7 +877,7 @@ msgstr "备份数据库"
 
 #: ../bin/src/ui_equalizer.h:173
 msgid "Balance"
-msgstr ""
+msgstr "均衡"
 
 #: ../bin/src/ui_mainwindow.h:663
 msgid "Ban"
@@ -926,11 +930,11 @@ msgstr "屏蔽类型"
 
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
-msgstr ""
+msgstr "模糊量"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Body"
-msgstr ""
+msgstr "通知正文"
 
 #: analyzers/boomanalyzer.cpp:8
 msgid "Boom analyzer"
@@ -948,7 +952,7 @@ msgstr "浏览..."
 
 #: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Buffer duration"
-msgstr ""
+msgstr "缓冲时长"
 
 #: engines/gstengine.cpp:784
 msgid "Buffering"
@@ -1002,7 +1006,7 @@ msgstr "更改语言"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "单声道回放设置的改变将在下首歌曲播放时生效"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
@@ -1089,11 +1093,11 @@ msgstr "Clementine 可自动将要复制到设备的文件转换为它可以播�
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr ""
+msgstr "Clementine 可以播放你上传到 Box 云存储的音乐"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "Clementine 可以播放你上传到 Dropbox 的音乐"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
@@ -1101,24 +1105,24 @@ msgstr "Clementine 可以播放你上传到Google云存储的音乐"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:128
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr ""
+msgstr "Clementine 可以播放你上传到 Ubuntu One 中的音乐"
 
 #: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Clementine can show a message when the track changes."
-msgstr "Clementine 可在音轨发生变化时显示一条消息。"
+msgstr "Clementine 可在曲目发生变化时显示提示。"
 
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr "Clementine 能够同步您在不同计算机和播客程序订阅的博客。  <a href=\"https://gpodder.net/register/\">创建新帐户</a>."
+msgstr "Clementine 能够同步您在不同计算机和播客程序订阅的博客。<a href=\"https://gpodder.net/register/\">创建新帐户</a>。"
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr "Clementine无法加载projectM可视化效果.请确定您已正确安装了Clementine."
+msgstr "Clementine 无法加载 projectM 可视化效果。请确定您已正确安装了 Clementine。"
 
 #: internet/lastfmsettingspage.cpp:110
 msgid ""
@@ -1147,7 +1151,7 @@ msgstr "点击此处添加一些音乐"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "点此收藏播放列表，列表将被保存并可稍候通过左侧边栏的“播放列表”面板访问"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1158,7 +1162,7 @@ msgstr "单击切换剩余时间和总计时间模式"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "点击登录按钮将会打开网络浏览器。 登录之后将回到 Clementine"
+msgstr "点击登录按钮将会打开网络浏览器。 登录之后将回到 Clementine。"
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1174,11 +1178,11 @@ msgstr "关闭视觉效果"
 
 #: internet/magnatunedownloaddialog.cpp:280
 msgid "Closing this window will cancel the download."
-msgstr "关闭此窗口将取消下载"
+msgstr "关闭此窗口将取消下载。"
 
 #: ui/albumcovermanager.cpp:216
 msgid "Closing this window will stop searching for album covers."
-msgstr "关闭此窗口将停止寻找专辑封面"
+msgstr "关闭此窗口将停止寻找专辑封面。"
 
 #: ui/equalizer.cpp:116
 msgid "Club"
@@ -1190,7 +1194,7 @@ msgstr "颜色"
 
 #: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
-msgstr ""
+msgstr "class:level 列表用逗号分隔，level 范围 0-3"
 
 #: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
 #: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
@@ -1214,7 +1218,7 @@ msgstr "作曲"
 #: internet/searchboxwidget.cpp:42
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "配置 %1 ..."
 
 #: internet/groovesharkservice.cpp:550
 msgid "Configure Grooveshark..."
@@ -1238,7 +1242,7 @@ msgstr "配置Spotify..."
 
 #: internet/subsonicservice.cpp:96
 msgid "Configure Subsonic..."
-msgstr ""
+msgstr "配置 Subsonic..."
 
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
@@ -1274,12 +1278,12 @@ msgstr "连接Spotify"
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "连接被服务器拒绝，请检查服务器链接。例如: http://localhost:4040/"
 
 #: internet/subsonicsettingspage.cpp:117
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "连接超时，请检查服务器链接。例如: http://localhost:4040/"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:693
 msgid "Console"
@@ -1319,14 +1323,14 @@ msgstr "版权所有"
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "无法连接至 Subsonic，请检查服务器链接。例如: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr "无法创建GStreamer元素 \"%1\" - 请确认您已安装了所需GStreamer插件。"
+msgstr "无法创建GStreamer元素 \"%1\" - 请确认您已安装了所需GStreamer插件"
 
 #: transcoder/transcoder.cpp:432
 #, qt-format
@@ -1340,7 +1344,7 @@ msgstr "无法为%1找到混音器，请检查是否安装了正确的Gstreamer�
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr "无法找到适合 %1 的解码器，请确认您正确安装了GStreamer插件。"
+msgstr "无法找到适合 %1 的解码器，请确认您正确安装了GStreamer插件"
 
 #: internet/lastfmservice.cpp:875
 msgid "Couldn't load the last.fm radio station"
@@ -1525,11 +1529,11 @@ msgstr "默认(&F)"
 
 #: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
-msgstr "音量减少百分之四"
+msgstr "音量减少 4%"
 
 #: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
-msgstr ""
+msgstr "降低音量 <value> %"
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
@@ -1596,11 +1600,11 @@ msgstr "删除文件"
 
 #: ui/mainwindow.cpp:1362
 msgid "Dequeue selected tracks"
-msgstr "移除选定音轨"
+msgstr "移除选定曲目"
 
 #: ui/mainwindow.cpp:1360
 msgid "Dequeue track"
-msgstr "移除音轨"
+msgstr "移除曲目"
 
 #: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
@@ -1661,7 +1665,7 @@ msgstr "关闭时长"
 
 #: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "禁止生成心情指示条"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:433
@@ -1696,7 +1700,7 @@ msgstr "不转换任何曲目"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
-msgstr ""
+msgstr "不要覆盖"
 
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1716,7 +1720,7 @@ msgstr "不要停止！"
 
 #: internet/somafmservice.cpp:103
 msgid "Donate"
-msgstr ""
+msgstr "捐助"
 
 #: devices/deviceview.cpp:115
 msgid "Double click to open"
@@ -1753,7 +1757,7 @@ msgstr "下载队列"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr ""
+msgstr "下载 Android 应用"
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -1831,16 +1835,16 @@ msgstr "编辑标签"
 
 #: ../bin/src/ui_edittagdialog.h:662
 msgid "Edit track information"
-msgstr "编辑歌曲信息"
+msgstr "编辑曲目信息"
 
 #: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:670
 msgid "Edit track information..."
-msgstr "编辑音轨信息..."
+msgstr "编辑曲目信息..."
 
 #: library/libraryview.cpp:397
 msgid "Edit tracks information..."
-msgstr "编辑音轨信息..."
+msgstr "编辑曲目信息..."
 
 #: internet/savedradio.cpp:101
 msgid "Edit..."
@@ -1862,7 +1866,7 @@ msgstr "仅当 Clementine 在焦点时启用快捷键"
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr ""
+msgstr "在搜索结果中启用以下来源。结果将按以下顺序显示。"
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1890,7 +1894,7 @@ msgstr "输入 URL 以便从网络下载封面："
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
-msgstr ""
+msgstr "输入导出封面的文件名(不含扩展名):"
 
 #: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
@@ -1899,7 +1903,7 @@ msgstr "输入播放列表的新名称"
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "输入一个 <b>艺人</b> 或 <b>标签</b> 来开始收听 Last.fm 电台."
+msgstr "输入一个 <b>艺人</b> 或 <b>标签</b> 来开始收听 Last.fm 电台。"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
@@ -1929,7 +1933,7 @@ msgstr "输入文件夹名字"
 
 #: ../bin/src/ui_networkremotesettingspage.h:198
 msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
+msgstr "在应用中输入此 IP 来连接上 Clementine。"
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -1941,11 +1945,11 @@ msgstr "均衡器"
 
 #: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
-msgstr ""
+msgstr "相当于 --log-levels *:1"
 
 #: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
-msgstr ""
+msgstr "相当于 --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
@@ -2026,7 +2030,7 @@ msgstr "同一专辑歌曲或者同一CUE sheet不淡出"
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
-msgstr ""
+msgstr "现有封面"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
@@ -2039,28 +2043,28 @@ msgstr "于%1过期"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Export Covers"
-msgstr ""
+msgstr "导出封面"
 
 #: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
-msgstr ""
+msgstr "导出封面"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
-msgstr ""
+msgstr "导出下载的封面"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
-msgstr ""
+msgstr "导出内嵌封面"
 
 #: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
-msgstr ""
+msgstr "导出完成"
 
 #: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "已导出 %1 个封面，共 %2 个(跳过 %3 个)"
 
 #: ../bin/src/ui_mainwindow.h:679
 msgid "F1"
@@ -2094,11 +2098,11 @@ msgstr "FLAC"
 
 #: ../bin/src/ui_playbacksettingspage.h:306
 msgid "Fade out on pause / fade in on resume"
-msgstr ""
+msgstr "暂停时淡出/恢复时淡入"
 
 #: ../bin/src/ui_playbacksettingspage.h:300
 msgid "Fade out when stopping a track"
-msgstr "当停止一个音轨时淡出"
+msgstr "停止播放曲目时淡出"
 
 #: ../bin/src/ui_playbacksettingspage.h:299
 msgid "Fading"
@@ -2134,11 +2138,11 @@ msgstr "快速"
 
 #: internet/groovesharkservice.cpp:615
 msgid "Favorites"
-msgstr "喜爱"
+msgstr "收藏夹"
 
 #: library/library.cpp:77
 msgid "Favourite tracks"
-msgstr "最喜爱的音轨"
+msgstr "收藏的曲目"
 
 #: ../bin/src/ui_albumcovermanager.h:225
 msgid "Fetch Missing Covers"
@@ -2154,7 +2158,7 @@ msgstr "读取完毕"
 
 #: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
-msgstr ""
+msgstr "正在获取 Subsonic 曲目库"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
@@ -2200,7 +2204,7 @@ msgstr "要转换的文件"
 
 #: smartplaylists/querywizardplugin.cpp:90
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "在你的媒体库里查找符合条件的歌曲"
+msgstr "在你的媒体库里查找符合条件的歌曲。"
 
 #: musicbrainz/tagfetcher.cpp:55
 msgid "Fingerprinting song"
@@ -2224,7 +2228,7 @@ msgstr "字号"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr ""
+msgstr "由于许可证原因 Spotify 支持位于单独的插件中。"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
@@ -2239,7 +2243,7 @@ msgstr "忘记设备"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "忘记设备将从列表删除该设备.如果下次您再次插入该设备,Clementine将重新扫描所有歌曲."
+msgstr "忘记设备将从列表删除该设备.如果下次您再次插入该设备,Clementine将重新扫描所有歌曲。"
 
 #: ../bin/src/ui_searchproviderstatuswidget.h:94
 #: ../bin/src/ui_suggestionwidget.h:70 ../bin/src/ui_icecastfilterwidget.h:74
@@ -2283,7 +2287,7 @@ msgstr "好友"
 
 #: moodbar/moodbarrenderer.cpp:157
 msgid "Frozen"
-msgstr ""
+msgstr "冻结"
 
 #: ui/equalizer.cpp:118
 msgid "Full Bass"
@@ -2291,7 +2295,7 @@ msgstr "重低音"
 
 #: ui/equalizer.cpp:120
 msgid "Full Bass + Treble"
-msgstr ""
+msgstr "低音饱满 + 高音清丽"
 
 #: ui/equalizer.cpp:119
 msgid "Full Treble"
@@ -2359,7 +2363,7 @@ msgstr "Google云存储"
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
-msgstr "获取了 %2 个封面中的 %1 个(失败 %3 个)"
+msgstr "获取了 %1 个封面，共 %2 个(失败 %3 个)"
 
 #: ../bin/src/ui_behavioursettingspage.h:206
 msgid "Grey out non existent songs in my playlists"
@@ -2387,7 +2391,7 @@ msgstr "Grooveshark 歌曲地址"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
-msgstr "媒体库分组"
+msgstr "媒体库分组..."
 
 #: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
@@ -2420,7 +2424,7 @@ msgstr "按流派/艺人/专辑分组"
 #: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
-msgstr ""
+msgstr "分组"
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
@@ -2429,7 +2433,7 @@ msgstr "HTML页面没有包含任何 RSS 种子"
 #: internet/subsonicsettingspage.cpp:135
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr ""
+msgstr "未获得 URL 返回 HTTP 3xx 状态代码, 请检查服务器配置。"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2463,7 +2467,7 @@ msgstr "高(1024x1024)"
 
 #: internet/subsonicsettingspage.cpp:112
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "主机未找到，请检查服务器链接。例如: http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
@@ -2493,11 +2497,11 @@ msgstr "识别曲目"
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
-msgstr "如果您选择继续,设备运行将会变慢并且复制歌曲工作可能无法正常进行."
+msgstr "如果您选择继续,设备运行将会变慢并且复制歌曲工作可能无法正常进行。"
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr "如果您知道播客地址，请在下面填入地址并且点击 Go"
+msgstr "如果您知道播客地址，请在下面填入地址并且点击 Go。"
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
@@ -2519,13 +2523,13 @@ msgstr "在 %1 天内"
 #: core/utilities.cpp:149
 #, qt-format
 msgid "In %1 weeks"
-msgstr ""
+msgstr "%1 周内"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "在动态模式中, 每次歌曲播放完之后会被选择并添加新歌曲到播放列表.使用动态模式将忽略您的播放列表大小设定值."
+msgstr "在动态模式中, 每次歌曲播放完之后会被选择并添加新歌曲到播放列表.使用动态模式将忽略您的播放列表大小设定值。"
 
 #: internet/spotifyservice.cpp:360
 msgid "Inbox"
@@ -2541,15 +2545,15 @@ msgstr "包含所有的歌曲"
 
 #: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
-msgstr ""
+msgstr "Subsonic REST 协议版本不兼容。客户端需更新。"
 
 #: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
-msgstr ""
+msgstr "Subsonic REST 协议版本不兼容。服务端需更新。"
 
 #: internet/subsonicsettingspage.cpp:127
 msgid "Incomplete configuration, please ensure all fields are populated."
-msgstr ""
+msgstr "配置不完整，请确认所有字段都已填好。"
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -2557,7 +2561,7 @@ msgstr "以 4% 为单位增大音量"
 
 #: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
-msgstr ""
+msgstr "提升音量 <value>%"
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2566,7 +2570,7 @@ msgstr "增大音量"
 #: internet/cloudfileservice.cpp:136
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "正在索引 %1"
 
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
@@ -2650,19 +2654,19 @@ msgstr "Jamendo 数据库"
 
 #: ../bin/src/ui_mainwindow.h:700
 msgid "Jump to the currently playing track"
-msgstr "跳转到当前播放的音轨"
+msgstr "跳转到当前播放的曲目"
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:72
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr ""
+msgstr "保持按钮 %1 秒..."
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr ""
+msgstr "保持按钮 %1 秒..."
 
 #: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Keep running in the background when the window is closed"
@@ -2769,15 +2773,15 @@ msgstr "Last.fm 维基"
 
 #: library/library.cpp:87
 msgid "Least favourite tracks"
-msgstr "最不喜欢的歌曲"
+msgstr "最不喜欢的曲目"
 
 #: ../bin/src/ui_playbacksettingspage.h:326
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "空白为默认,例如: \"/dev/dsp\", \"front\"等."
+msgstr "空白为默认，例如: \"/dev/dsp\"，\"front\" 等。"
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
-msgstr ""
+msgstr "左"
 
 #: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -2868,11 +2872,11 @@ msgstr "正在载入媒体流"
 
 #: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:233
 msgid "Loading tracks"
-msgstr "正在载入音轨"
+msgstr "正在载入曲目"
 
 #: playlist/songloaderinserter.cpp:139
 msgid "Loading tracks info"
-msgstr "加载音轨信息"
+msgstr "正在加载曲目信息"
 
 #: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
@@ -2902,7 +2906,7 @@ msgstr "登录失败"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
-msgstr ""
+msgstr "长期预测 (LTP)"
 
 #: ../bin/src/ui_mainwindow.h:661
 msgid "Love"
@@ -2920,7 +2924,7 @@ msgstr "低(256x256)"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
-msgstr ""
+msgstr "低复杂度 (LC)"
 
 #: ../bin/src/ui_songinfosettingspage.h:187
 msgid "Lyrics"
@@ -2973,7 +2977,7 @@ msgstr "就这样吧！"
 
 #: internet/spotifyservice.cpp:533
 msgid "Make playlist available offline"
-msgstr ""
+msgstr "播放列表离线可用"
 
 #: internet/lastfmservice.cpp:444
 msgid "Malformed response"
@@ -3057,11 +3061,11 @@ msgstr "心情"
 #: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
-msgstr "心情条风格"
+msgstr "心情指示条风格"
 
 #: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
-msgstr ""
+msgstr "心情指示条"
 
 #: library/library.cpp:74
 msgid "Most played"
@@ -3168,7 +3172,7 @@ msgstr "网络代理"
 
 #: ../bin/src/ui_networkremotesettingspage.h:177
 msgid "Network Remote"
-msgstr ""
+msgstr "网络远程"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:487
 msgid "Never"
@@ -3203,11 +3207,11 @@ msgstr "新曲目"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
-msgstr "新音轨会被自动添加。"
+msgstr "新曲目会被自动添加。"
 
 #: library/library.cpp:80
 msgid "Newest tracks"
-msgstr "最新音轨"
+msgstr "最新曲目"
 
 #: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
 msgid "Next"
@@ -3216,7 +3220,7 @@ msgstr "下一首"
 #: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:655
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
-msgstr "下一音轨"
+msgstr "下一个曲目"
 
 #: core/utilities.cpp:147
 msgid "Next week"
@@ -3232,11 +3236,11 @@ msgstr "无背景图片"
 
 #: ui/albumcovermanager.cpp:778
 msgid "No covers to export."
-msgstr ""
+msgstr "无封面可供导出。"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
-msgstr ""
+msgstr "无长块"
 
 #: playlist/playlistcontainer.cpp:366
 msgid ""
@@ -3245,7 +3249,7 @@ msgstr "无匹配。清空搜索框以重新显示整个播放列表。"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
-msgstr ""
+msgstr "无短块"
 
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:154
@@ -3262,7 +3266,7 @@ msgstr "正常"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
-msgstr ""
+msgstr "普通块类型"
 
 #: playlist/playlistsequence.cpp:170
 msgid "Not available while using a dynamic playlist"
@@ -3340,11 +3344,11 @@ msgid ""
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "只接受来自以下 IP 段的客户端连接:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "只允许来自本地网络的连接"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3352,7 +3356,7 @@ msgstr "只显示第一个"
 
 #: ../bin/src/ui_appearancesettingspage.h:290
 msgid "Opacity"
-msgstr ""
+msgstr "不透明度"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
@@ -3364,7 +3368,7 @@ msgstr "在浏览器中打开%1"
 
 #: ../bin/src/ui_mainwindow.h:687
 msgid "Open &audio CD..."
-msgstr "打开音频CD"
+msgstr "打开音频CD..."
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
@@ -3439,11 +3443,11 @@ msgstr "其它选项"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
-msgstr ""
+msgstr "输出"
 
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
-msgstr ""
+msgstr "输出设备"
 
 #: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
@@ -3451,11 +3455,11 @@ msgstr "输出选项"
 
 #: ../bin/src/ui_playbacksettingspage.h:320
 msgid "Output plugin"
-msgstr ""
+msgstr "输出插件"
 
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
-msgstr ""
+msgstr "覆盖全部"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
@@ -3463,7 +3467,7 @@ msgstr "覆盖已存在的文件"
 
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
-msgstr ""
+msgstr "只覆盖体积较小的文件"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3502,11 +3506,11 @@ msgstr "已暂停"
 #: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
-msgstr ""
+msgstr "表演者"
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
-msgstr ""
+msgstr "像素"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
@@ -3588,7 +3592,7 @@ msgstr "播放列表"
 
 #: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
-msgstr "请关闭你的浏览器，回到 Clementine"
+msgstr "请关闭你的浏览器，回到 Clementine。"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
@@ -3692,7 +3696,7 @@ msgstr "上一首"
 #: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:649
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
-msgstr "上一音轨"
+msgstr "上一个曲目"
 
 #: core/commandlineoptions.cpp:176
 msgid "Print out version information"
@@ -3743,7 +3747,7 @@ msgstr "加入队列"
 
 #: ../bin/src/ui_playbacksettingspage.h:314
 msgid "Radio (equal loudness for all tracks)"
-msgstr "电台(所有音轨采用相同的音量)"
+msgstr "电台(所有曲目采用相同的音量)"
 
 #: internet/groovesharkservice.cpp:593
 msgid "Radios"
@@ -3791,7 +3795,7 @@ msgstr "确实取消？"
 
 #: internet/subsonicsettingspage.cpp:131
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "重定向次数超过限制，请验证客户端配置。"
 
 #: internet/groovesharkservice.cpp:547
 msgid "Refresh"
@@ -3828,7 +3832,7 @@ msgstr "记住 Wii遥控器 节奏"
 
 #: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Remember from last time"
-msgstr ""
+msgstr "记住上次设置"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_transcodedialog.h:208 internet/lastfmservice.cpp:115
@@ -3853,7 +3857,7 @@ msgstr "从我的音乐中移出"
 
 #: internet/groovesharkservice.cpp:531
 msgid "Remove from favorites"
-msgstr "从最喜爱的中删除"
+msgstr "从收藏夹的中删除"
 
 #: internet/groovesharkservice.cpp:528 ../bin/src/ui_mainwindow.h:696
 msgid "Remove from playlist"
@@ -3861,11 +3865,11 @@ msgstr "从播放列表中移除"
 
 #: playlist/playlisttabbar.cpp:173
 msgid "Remove playlist"
-msgstr ""
+msgstr "删除播放列表"
 
 #: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
-msgstr ""
+msgstr "删除播放列表"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
@@ -3873,7 +3877,7 @@ msgstr "正在从我的音乐中移出"
 
 #: internet/groovesharkservice.cpp:1487
 msgid "Removing songs from favorites"
-msgstr "正在从我的最爱中移出"
+msgstr "正在从收藏夹中删除歌曲"
 
 #: internet/groovesharkservice.cpp:1335
 #, qt-format
@@ -3894,7 +3898,7 @@ msgstr "重命名播放列表..."
 
 #: ../bin/src/ui_mainwindow.h:672
 msgid "Renumber tracks in this order..."
-msgstr "以此顺序为音轨重新编号..."
+msgstr "以此顺序为曲目重新编号..."
 
 #: playlist/playlistsequence.cpp:174 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat"
@@ -3932,15 +3936,15 @@ msgstr "回放增益"
 
 #: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "回放增益模式"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
-msgstr ""
+msgstr "重现加入队列"
 
 #: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "Require authentication code"
-msgstr ""
+msgstr "需要验证码"
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
@@ -3953,7 +3957,7 @@ msgstr "重置播放计数"
 #: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "重播当前曲目，如果曲目开播不足8秒钟则播放上一曲。"
 
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
@@ -3961,15 +3965,15 @@ msgstr "仅使用 ASCII 字符"
 
 #: ../bin/src/ui_behavioursettingspage.h:205
 msgid "Resume playback on start"
-msgstr ""
+msgstr "启动时恢复播放"
 
 #: internet/groovesharkservice.cpp:756
 msgid "Retrieving Grooveshark My Music songs"
-msgstr ""
+msgstr "正在获取 Grooveshark 我的音乐中的歌曲"
 
 #: internet/groovesharkservice.cpp:724
 msgid "Retrieving Grooveshark favorites songs"
-msgstr "正在检索 Grooveshark 的喜爱歌曲"
+msgstr "正在获取 Grooveshark 收藏夹中的歌曲"
 
 #: internet/groovesharkservice.cpp:661
 msgid "Retrieving Grooveshark playlists"
@@ -3981,7 +3985,7 @@ msgstr "回到Clementine"
 
 #: ../bin/src/ui_equalizer.h:174
 msgid "Right"
-msgstr ""
+msgstr "右"
 
 #: ui/equalizer.cpp:127
 msgid "Rock"
@@ -3999,7 +4003,7 @@ msgstr "SOCKS 代理"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "SSL 握手出错，请验证服务器配置。下面的 SSLv3 选项可能解决一些问题。"
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4019,7 +4023,7 @@ msgstr "采样率"
 
 #: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "保存 .mood 文件至您的音乐库"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -4039,7 +4043,7 @@ msgstr "保存播放列表"
 
 #: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:704
 msgid "Save playlist..."
-msgstr "保存播放列表"
+msgstr "保存播放列表..."
 
 #: ui/equalizer.cpp:178 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
@@ -4047,11 +4051,11 @@ msgstr "保存预设"
 
 #: ../bin/src/ui_librarysettingspage.h:193
 msgid "Save ratings in file tags when possible"
-msgstr ""
+msgstr "如果可能，保存评级信息至文件标记中"
 
 #: ../bin/src/ui_librarysettingspage.h:197
 msgid "Save statistics in file tags when possible"
-msgstr ""
+msgstr "如果可能，保存统计信息至文件标记中"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
@@ -4059,19 +4063,19 @@ msgstr "在网络标签中收藏此媒体流"
 
 #: library/library.cpp:164
 msgid "Saving songs statistics into songs files"
-msgstr ""
+msgstr "正在保存统计信息至歌曲文件"
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
-msgstr "正在保存音轨"
+msgstr "正在保存曲目"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
-msgstr ""
+msgstr "可变采样频率 (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
-msgstr ""
+msgstr "缩放"
 
 #: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
@@ -4102,7 +4106,7 @@ msgstr "搜索 Magnatune"
 
 #: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
-msgstr ""
+msgstr "搜索 Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
@@ -4156,11 +4160,11 @@ msgstr "快进"
 
 #: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track by a relative amount"
-msgstr ""
+msgstr "当前播放的曲目以相对步长快进/快退"
 
 #: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track to an absolute position"
-msgstr "在指定位置寻找目前正在播放的音轨"
+msgstr "当前播放的曲目快进/快退至指定时间点"
 
 #: visualisations/visualisationselector.cpp:40
 msgid "Select All"
@@ -4200,11 +4204,11 @@ msgstr "序列号"
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
-msgstr ""
+msgstr "服务器 URL"
 
 #: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
-msgstr ""
+msgstr "服务器详情"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4221,11 +4225,11 @@ msgstr "设置音量为 <value>%"
 
 #: ../bin/src/ui_mainwindow.h:673
 msgid "Set value for all selected tracks..."
-msgstr "为全部选中的音轨设置值..."
+msgstr "为全部选中的曲目设置值..."
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4252,11 +4256,11 @@ msgstr "显示 OSD"
 
 #: ../bin/src/ui_playbacksettingspage.h:298
 msgid "Show a glowing animation on the current track"
-msgstr ""
+msgstr "当前曲目显示发光动画"
 
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
-msgstr "在音轨进度条上显示心情条"
+msgstr "在音轨进度条上显示心情指示条"
 
 #: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Show a native desktop notification"
@@ -4313,7 +4317,7 @@ msgstr "在群星中显示"
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
-msgstr "显示心情条"
+msgstr "显示心情指示条"
 
 #: ui/mainwindow.cpp:461
 msgid "Show only duplicates"
@@ -4341,7 +4345,7 @@ msgstr "显示托盘图标"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr ""
+msgstr "显示来源启用/禁用状态"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -4365,7 +4369,7 @@ msgstr "随机播放列表"
 
 #: widgets/osd.cpp:275 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
-msgstr "此专辑的音轨乱序播放"
+msgstr "此专辑的曲目乱序播放"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
@@ -4385,11 +4389,11 @@ msgstr "相似艺人"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
-msgstr ""
+msgstr "大小:"
 
 #: ui/equalizer.cpp:129
 msgid "Ska"
@@ -4516,7 +4520,7 @@ msgstr "开始转换"
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "请在上方搜索栏中输入一些词条，来充实搜索结果列表"
 
 #: transcoder/transcoder.cpp:405
 #, qt-format
@@ -4542,7 +4546,7 @@ msgstr "后停止"
 
 #: ui/mainwindow.cpp:489 ../bin/src/ui_mainwindow.h:659
 msgid "Stop after this track"
-msgstr "在此音轨后停止"
+msgstr "在此曲目后停止"
 
 #: core/commandlineoptions.cpp:154
 msgid "Stop playback"
@@ -4550,7 +4554,7 @@ msgstr "停止播放"
 
 #: core/globalshortcuts.cpp:49
 msgid "Stop playing after current track"
-msgstr "播放完此音轨后停止"
+msgstr "播放完此曲目后停止"
 
 #: widgets/osd.cpp:166
 msgid "Stopped"
@@ -4564,7 +4568,7 @@ msgstr "流媒体"
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr ""
+msgstr "在30天试用期过后，从 Subsonic 服务器播放流媒体，需要有效的服务器许可。"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
@@ -4580,7 +4584,7 @@ msgstr "订阅"
 
 #: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4616,7 +4620,7 @@ msgstr "支持的格式"
 
 #: ../bin/src/ui_librarysettingspage.h:201
 msgid "Synchronize statistics to files now"
-msgstr ""
+msgstr "立即同步统计数据至文件"
 
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
@@ -4628,7 +4632,7 @@ msgstr "同步 Spotify 播放列表"
 
 #: internet/spotifyservice.cpp:565
 msgid "Syncing Spotify starred tracks"
-msgstr "同步 Spotify 星号标记的音轨"
+msgstr "同步 Spotify 星号标记的曲目"
 
 #: moodbar/moodbarrenderer.cpp:159
 msgid "System colors"
@@ -4648,7 +4652,7 @@ msgstr "标签提取程序"
 
 #: internet/lastfmservice.cpp:212
 msgid "Tag radio"
-msgstr ""
+msgstr "标签电台 (Tag Radio)"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
@@ -4669,7 +4673,7 @@ msgstr "感谢"
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "命令\"%1\"无法执行."
+msgstr "命令\"%1\"无法执行。"
 
 #: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
@@ -4683,7 +4687,7 @@ msgstr "文件夹 %1 无效"
 #: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "播放列表 '%1' 为空或者无法加载"
+msgstr "播放列表 '%1' 为空或者无法加载。"
 
 #: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
@@ -4695,13 +4699,13 @@ msgstr "请求的站点不存在!"
 
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
-msgstr "您请求的站点并不是一个图片。"
+msgstr "您请求的站点并不是一个图片!"
 
 #: internet/subsonicsettingspage.cpp:98
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr ""
+msgstr "Subsonic 服务器的试用期已过。请捐助来获得许可文件。详情请访问 subsonic.org 。"
 
 #: ui/mainwindow.cpp:2082
 msgid ""
@@ -4730,13 +4734,13 @@ msgstr "在解析 iTunes 商店的回馈信息出现了问题"
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr "复制歌曲出错.以下歌曲无法复制:"
+msgstr "复制歌曲出错。以下歌曲无法复制:"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr "删除歌曲出错.以下歌曲无法删除:"
+msgstr "删除歌曲出错。以下歌曲无法删除:"
 
 #: devices/deviceview.cpp:389
 msgid ""
@@ -4748,7 +4752,7 @@ msgstr "将从设备中删除这些文件.确定删除吗?"
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "这些文件将从磁盘中永久性删除，您确定要继续吗?"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4758,7 +4762,7 @@ msgstr "这些文件夹将被扫描然后收录进您的媒体库"
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr ""
+msgstr "这些设置将用于“音乐转码”对话框，及向设备中复制音乐前的格式转换。"
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
@@ -4795,17 +4799,17 @@ msgstr "这个一部 MTP 设备，但是您可以通过 Clementine 来编辑而�
 
 #: devices/devicemanager.cpp:575
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr "这是IPOD设备,但Clementine编译时未包含libgpod支持."
+msgstr "这是 iPod 设备，但 Clementine 编译时未包含 libgpod 支持。"
 
 #: devices/devicemanager.cpp:324
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "这是您第一次连接该设备.Clementine将扫描设备上的音乐文件-这需要花费一些时间."
+msgstr "这是您第一次连接该设备。Clementine 将扫描设备上的音乐文件-这需要花费一些时间。"
 
 #: playlist/playlisttabbar.cpp:185
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "这些选项可以在“行为”设置中修改"
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -4830,7 +4834,7 @@ msgstr "标题"
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
-msgstr "在开始收听 Grooveshark 电台之前，您需要收听几首 Grooveshark 的歌曲。"
+msgstr "在开始收听 Grooveshark 电台之前，您需要收听几首 Grooveshark 的歌曲"
 
 #: core/utilities.cpp:125 core/utilities.cpp:141
 msgid "Today"
@@ -4854,7 +4858,7 @@ msgstr "切换歌曲记录"
 
 #: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
-msgstr ""
+msgstr "切换 OSD 可见性"
 
 #: core/utilities.cpp:143
 msgid "Tomorrow"
@@ -4866,28 +4870,28 @@ msgstr "太多的重定向"
 
 #: internet/spotifyservice.cpp:366
 msgid "Top tracks"
-msgstr ""
+msgstr "热门曲目"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
-msgstr ""
+msgstr "专辑总数:"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
-msgstr ""
+msgstr "已传输字节总数"
 
 #: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total network requests made"
-msgstr ""
+msgstr "已发出网络连接总数"
 
 #: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
-msgstr "音轨"
+msgstr "曲目"
 
 #: ../bin/src/ui_transcodedialog.h:202 ../bin/src/ui_mainwindow.h:698
 msgid "Transcode Music"
-msgstr "转换音乐"
+msgstr "音乐转码"
 
 #: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
@@ -4900,7 +4904,7 @@ msgstr "转码"
 #: transcoder/transcoder.cpp:312
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr "正在使用 %2 线程来转码 %1 个文件"
+msgstr "正在转码 %1 个文件，占用线程 %2 个"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
@@ -4932,11 +4936,11 @@ msgstr ""
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:132
 msgid "Ubuntu One password"
-msgstr ""
+msgstr "Ubuntu One 密码"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:130
 msgid "Ubuntu One username"
-msgstr ""
+msgstr "Ubuntu One 用户名"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4973,7 +4977,7 @@ msgstr "取消订阅"
 
 #: songinfo/songkickconcerts.cpp:168
 msgid "Upcoming Concerts"
-msgstr ""
+msgstr "近期音乐会"
 
 #: internet/groovesharkservice.cpp:1198
 msgid "Update Grooveshark playlist"
@@ -5019,7 +5023,7 @@ msgstr "用法"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "使用专辑艺术家标记(如果可用)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -5031,7 +5035,7 @@ msgstr "使用播放增益元数据(如果可用)"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 msgid "Use SSLv3"
-msgstr ""
+msgstr "使用 SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5047,7 +5051,7 @@ msgstr "自定义提示信息"
 
 #: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Use a network remote control"
-msgstr ""
+msgstr "使用网络远程控制"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -5170,7 +5174,7 @@ msgstr "WMA"
 
 #: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "关闭播放列表标签时，提示我"
 
 #: core/song.cpp:337
 msgid "Wav"
@@ -5192,11 +5196,11 @@ msgstr "Clementine 启动时"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "当查找专辑封面时,Clementine将首先查找包含这些关键词的图片.\n如果未能匹配,Clementine将使用目录下最大的图片."
+msgstr "当查找专辑封面时,Clementine将首先查找包含这些关键词的图片。\n如果未能匹配,Clementine将使用目录下最大的图片。"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
-msgstr "列表为空的时候"
+msgstr "列表为空的时候..."
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
@@ -5258,13 +5262,13 @@ msgstr "Windows Media 音频"
 
 #: ../bin/src/ui_albumcovermanager.h:222
 msgid "Without cover:"
-msgstr ""
+msgstr "无封面:"
 
 #: library/libraryview.cpp:530
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr "您想要把此专辑的其它歌曲移动到 群星 ？"
+msgstr "您想要把此专辑的其它歌曲移动到 群星?"
 
 #: ui/mainwindow.cpp:2087
 msgid "Would you like to run a full rescan right now?"
@@ -5272,11 +5276,11 @@ msgstr "您要立即做个全部重新扫描？"
 
 #: library/librarysettingspage.cpp:151
 msgid "Write all songs statistics into songs' files"
-msgstr ""
+msgstr "所有统计信息写入至歌曲文件"
 
 #: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
-msgstr ""
+msgstr "用户名密码错误。"
 
 #: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
@@ -5306,13 +5310,13 @@ msgstr "您即将下载以下专辑"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "您正试图从收藏夹中删除播放列表 %1 ，确定要这样做吗?"
 
 #: playlist/playlisttabbar.cpp:176
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "您正试图删除未收藏的播放列表: 此播放列表将被真正删除 (此操作无法撤销)。\n您确定要继续吗?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5341,25 +5345,25 @@ msgstr "您无需注册即可免费收听音乐，但是高级会员可以收听
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr "您无需注册帐户即可收听 Magnatune 的音乐。  订购会员即可移除每个音轨结尾的内容。"
+msgstr "您无需注册帐户即可收听 Magnatune 的音乐。  订购会员即可移除每个曲目结尾的内容。"
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
-msgstr "在聆听音乐的同时,您也可以同时后台收听其它流媒体."
+msgstr "在聆听音乐的同时,您也可以同时后台收听其它流媒体。"
 
 #: internet/lastfmsettingspage.cpp:148
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr "您可以免费提交收听的音乐,但是只有 <span style=\" font-\r\nweight:600;\">付费用户</span>才可以使用Clementine收听Last.fm提供的流媒体."
+msgstr "您可以免费提交收听的音乐信息(scrobbling)，但<span style=\" font-weight:600;\">付费用户</span>才能使用 Clementine 收听 Last.fm 提供的流媒体。"
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr "您可以使用Wii遥控器来控制 Clementine。  <a href=\"http://www.clementine-player.org/wiimote\">参见 Clementine Wiki</a> for more information.\n"
+msgstr "您可以使用Wii遥控器来控制 Clementine。<a href=\"http://www.clementine-player.org/wiimote\">参见 Clementine Wiki</a> for more information。\n"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
@@ -5371,7 +5375,7 @@ msgstr "您没有Spotify付费账户。"
 
 #: internet/digitallyimportedclient.cpp:89
 msgid "You do not have an active subscription"
-msgstr ""
+msgstr "您没有活动订阅"
 
 #: internet/spotifyservice.cpp:170
 msgid ""
@@ -5385,7 +5389,7 @@ msgstr "您已经登出了 Spotify，请重新输入您的密码。"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
-msgstr "您喜爱这个音轨"
+msgstr "您喜爱这个曲目"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
@@ -5406,7 +5410,7 @@ msgstr "因不是Last.fm的订阅者，您将不能播放Last.fm电台。"
 
 #: ../bin/src/ui_networkremotesettingspage.h:200
 msgid "Your IP address:"
-msgstr ""
+msgstr "您的 IP 地址:"
 
 #: internet/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
@@ -5543,7 +5547,7 @@ msgstr "最长优先"
 #: playlist/playlistundocommands.cpp:99
 #, c-format
 msgid "move %n songs"
-msgstr ""
+msgstr "移动 %n 首歌"
 
 #: smartplaylists/searchterm.cpp:298
 msgid "newest first"
@@ -5559,7 +5563,7 @@ msgstr "不在最后"
 
 #: smartplaylists/searchterm.cpp:208
 msgid "not on"
-msgstr ""
+msgstr "除日期"
 
 #: smartplaylists/searchterm.cpp:298
 msgid "oldest first"
@@ -5567,7 +5571,7 @@ msgstr "最老优先"
 
 #: smartplaylists/searchterm.cpp:207
 msgid "on"
-msgstr ""
+msgstr "于日期"
 
 #: core/commandlineoptions.cpp:150
 msgid "options"
@@ -5575,7 +5579,7 @@ msgstr "选项"
 
 #: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "或扫描 OR 码!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
@@ -5584,7 +5588,7 @@ msgstr "按回车键"
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
 #, c-format
 msgid "remove %n songs"
-msgstr "移除 %n 歌"
+msgstr "移除 %n 首歌"
 
 #: smartplaylists/searchterm.cpp:299
 msgid "shortest first"
@@ -5613,4 +5617,4 @@ msgstr "停止"
 #: widgets/osd.cpp:116
 #, qt-format
 msgid "track %1"
-msgstr "音轨 %1"
+msgstr "曲目 %1"
