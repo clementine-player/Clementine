@@ -311,6 +311,7 @@ class GroovesharkService : public InternetService {
 
   static const int kSongSearchLimit;
   static const int kSongSimpleSearchLimit;
+  static const int kAlbumSearchLimit;
   static const int kSearchDelayMsec;
 
   static const char* kApiKey;
