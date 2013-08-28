@@ -167,7 +167,8 @@ void PlaylistTabBar::Close() {
 
   const bool ask_for_delete = s.value("warn_close_playlist", true).toBool();
 
-  if (ask_for_delete && !manager_->IsPlaylistFavorite(playlist_id)) {
+  if (ask_for_delete && !manager_->IsPlaylistFavorite(playlist_id) &&
+      !manager_->playlist(playlist_id)->GetAllSongs().empty()) {
     QMessageBox confirmation_box;
     confirmation_box.setWindowIcon(QIcon(":/icon.png"));
     confirmation_box.setWindowTitle(tr("Remove playlist"));
