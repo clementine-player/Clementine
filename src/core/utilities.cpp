@@ -128,7 +128,7 @@ QString Ago(int seconds_since_epoch, const QLocale& locale) {
   if (days_ago <= 7)
     return tr("%1 days ago").arg(days_ago);
 
-  return then.date().toString(locale.dateFormat());
+  return then.date().toString(locale.dateFormat(QLocale::ShortFormat));
 }
 
 QString PrettyFutureDate(const QDate& date) {
