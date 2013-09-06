@@ -81,17 +81,6 @@ MoodbarLoader::Result MoodbarLoader::Load(
   if (url.scheme() != "file") {
     return CannotLoad;
   }
-#ifdef Q_OS_WIN32
-  // Clementine will crash when trying to generate the moodbar for wma files on
-  // Windows. See issue 3682. Deactivate moodbar generation for these files for now
-  {
-    const QString extension = QFileInfo(url.toLocalFile()).suffix();
-    if (extension.compare("wma", Qt::CaseInsensitive) == 0 ||
-        extension.compare("asf", Qt::CaseInsensitive) == 0) {
-      return CannotLoad;
-    }
-  }
-#endif // Q_OS_WIN32
 
   // Are we in the middle of loading this moodbar already?
   if (requests_.contains(url)) {
