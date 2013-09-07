@@ -74,9 +74,12 @@ namespace Echonest{
 
         virtual const char* what() const throw ();
     private:
+        QByteArray createWhatData() const throw();
+
         ErrorType type;
         QString extraText;
         QNetworkReply::NetworkError nError;
+        QByteArray whatData;
     };
 
     class ConfigPrivate;

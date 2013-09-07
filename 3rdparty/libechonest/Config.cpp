@@ -45,34 +45,21 @@ QUrl Echonest::baseGetQuery(const QByteArray& type, const QByteArray& method)
 Echonest::ParseError::ParseError(Echonest::ErrorType error): exception()
 {
     type = error;
+    whatData = createWhatData();
 }
 
 Echonest::ParseError::ParseError(Echonest::ErrorType error, const QString& text): exception()
 {
     type =  error;
     extraText = text;
+    whatData = createWhatData();
 }
 
-
-Echonest::ParseError::~ParseError() throw()
-{}
-
-Echonest::ErrorType Echonest::ParseError::errorType() const throw()
+QByteArray Echonest::ParseError::createWhatData() const throw()
 {
-    return type;
-}
-
-void Echonest::ParseError::setNetworkError( QNetworkReply::NetworkError error ) throw()
-{
-    nError = error;
-}
-
-const char* Echonest::ParseError::what() const throw()
-{
-
-    // If we have specific error text, return that first
+    // If we have specific error text, use that first
     if( !extraText.isEmpty() )
-        return extraText.toLatin1().constData();
+        return extraText.toLatin1();
 
     switch( type )
     {
@@ -99,7 +86,26 @@ const char* Echonest::ParseError::what() const throw()
         case UnknownParseError:
             return "Unknown Parse Error";
     }
-    return "";
+    return QByteArray();
+}
+
+
+Echonest::ParseError::~ParseError() throw()
+{}
+
+Echonest::ErrorType Echonest::ParseError::errorType() const throw()
+{
+    return type;
+}
+
+void Echonest::ParseError::setNetworkError( QNetworkReply::NetworkError error ) throw()
+{
+    nError = error;
+}
+
+const char* Echonest::ParseError::what() const throw()
+{
+    return whatData.constData();
 }
 
 
