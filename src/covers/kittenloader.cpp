@@ -10,7 +10,7 @@
 const char* KittenLoader::kFlickrKittenUrl =
     "http://api.flickr.com/services/rest/"
     "?method=flickr.photos.search"
-    "&api_key=b60e59d549d314c98ddb1dc06008a2c4"
+    "&api_key=808b52887b3cc7fe098abd62f6ed1745"
     "&tags=kitten"
     "&sort=random"
     "&safe_search=1"
@@ -50,7 +50,6 @@ quint64 KittenLoader::LoadKitten(const AlbumCoverLoaderOptions& options) {
 void KittenLoader::FetchMoreKittens() {
   QNetworkRequest req = QNetworkRequest(QUrl(kFlickrKittenUrl));
   QNetworkReply* reply = network_->get(req);
-  connect(reply, SIGNAL(finished()), SLOT(KittensRetrieved()));
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(KittensRetrieved(QNetworkReply*)), reply);
 }
