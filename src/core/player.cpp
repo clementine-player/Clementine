@@ -580,7 +580,7 @@ void Player::UnregisterUrlHandler(UrlHandler* handler) {
              this, SLOT(HandleLoadResult(UrlHandler::LoadResult)));
 }
 
-const UrlHandler* Player::HandlerForUrl(const QUrl& url) const {
+UrlHandler* Player::HandlerForUrl(const QUrl& url) const {
   QMap<QString, UrlHandler*>::const_iterator it = url_handlers_.constFind(url.scheme());
   if (it == url_handlers_.constEnd()) {
     return NULL;

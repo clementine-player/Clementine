@@ -311,6 +311,8 @@ set(SOURCES
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
 
+  streaming/streamserver.cpp
+
   transcoder/transcodedialog.cpp
   transcoder/transcoder.cpp
   transcoder/transcoderoptionsaac.cpp
@@ -594,6 +596,8 @@ set(HEADERS
   songinfo/songplaystats.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
+
+  streaming/streamserver.h
 
   transcoder/transcodedialog.h
   transcoder/transcoder.h
