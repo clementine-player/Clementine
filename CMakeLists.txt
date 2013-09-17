@@ -322,6 +322,22 @@ if(STATIC_SQLITE)
   message(STATUS "Building static qsqlite plugin")
   add_subdirectory(3rdparty/qsqlite)
   include_directories("3rdparty/qsqlite")
+else()
+  if (NOT I_HATE_MY_USERS)
+    message(FATAL_ERROR "No, really, Clementine needs sqlite to be linked "
+        "statically.  If it's not, Clementine won't be able to resolve the "
+        "functions it needs to register full text search support.  Search will "
+        "be really slow and users will be unhappy.  If you're packaging "
+        "Clementine for a distributiou and you really hate your users and want "
+      "them to have a bad time please rerun cmake with -DI_HATE_MY_USERS=ON")
+  else()
+    if (NOT MY_USERS_WILL_SUFFER_BECAUSE_OF_ME)
+      message(FATAL_ERROR "So you really hate your users and you want to "
+          "create a crippled package that doesn't work properly?  Please send "
+          "an email to clementine-player@googlegroups.com and help us "
+          "understand why.")
+    endif()
+  endif()
 endif(STATIC_SQLITE)
 
 # When/if upstream accepts our patches then these options can be used to link
