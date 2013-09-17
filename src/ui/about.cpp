@@ -80,11 +80,9 @@ QString About::MakeHtml() const {
   ret += QString("<br /><a href=\"http://www.smitelli.com/?page=blog&p=54\">Scott Smitelli</a>");
   ret += QString("<br /><a href=\"http://hyperboleandahalf.blogspot.com\">Allie Brosh</a></p>");
 
-#ifdef HAVE_SPOTIFY
   ret += "<p>This product uses Music by Spotify but is not endorsed, certified "
          "or otherwise approved in any way by Spotify. Spotify is the registered "
          "trade mark of the Spotify Group.</p>";
-#endif // HAVE_SPOTIFY
 
   return ret;
 }

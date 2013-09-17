@@ -30,10 +30,8 @@
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
 #include "internet/internetmodel.h"
+#include "internet/spotifyservice.h"
 
-#ifdef HAVE_SPOTIFY
-# include "internet/spotifyservice.h"
-#endif
 
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
@@ -173,28 +171,24 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     return TryLoadResult(true, false, QImage());
   } else if (filename.toLower().startsWith("spotify://image/")) {
     // HACK: we should add generic image URL handlers
-    #ifdef HAVE_SPOTIFY
-      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+    SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
-      if (!connected_spotify_) {
-        connect(spotify, SIGNAL(ImageLoaded(QString,QImage)),
-                SLOT(SpotifyImageLoaded(QString,QImage)));
-        connected_spotify_ = true;
-      }
+    if (!connected_spotify_) {
+      connect(spotify, SIGNAL(ImageLoaded(QString,QImage)),
+              SLOT(SpotifyImageLoaded(QString,QImage)));
+      connected_spotify_ = true;
+    }
 
-      QString id = QUrl(filename).path();
-      if (id.startsWith('/')) {
-        id.remove(0, 1);
-      }
-      remote_spotify_tasks_.insert(id, task);
+    QString id = QUrl(filename).path();
+    if (id.startsWith('/')) {
+      id.remove(0, 1);
+    }
+    remote_spotify_tasks_.insert(id, task);
 
-      // Need to schedule this in the spotify service's thread
-      QMetaObject::invokeMethod(spotify, "LoadImage", Qt::QueuedConnection,
-                                Q_ARG(QString, id));
-      return TryLoadResult(true, false, QImage());
-    #else
-      return TryLoadResult(false, false, QImage());
-    #endif
+    // Need to schedule this in the spotify service's thread
+    QMetaObject::invokeMethod(spotify, "LoadImage", Qt::QueuedConnection,
+                              Q_ARG(QString, id));
+    return TryLoadResult(true, false, QImage());
   }
 
   QImage image(filename);

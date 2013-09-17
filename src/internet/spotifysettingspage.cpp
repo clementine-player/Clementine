@@ -73,12 +73,7 @@ void SpotifySettingsPage::BlobStateChanged() {
 
   ui_->account_group->setEnabled(installed);
   ui_->blob_status->setText(installed ? tr("Installed") : tr("Not installed"));
-
-#ifdef HAVE_SPOTIFY_DOWNLOADER
   ui_->download_blob->setEnabled(!installed);
-#else
-  ui_->download_blob->hide();
-#endif
 }
 
 void SpotifySettingsPage::DownloadBlob() {

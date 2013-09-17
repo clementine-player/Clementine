@@ -29,11 +29,9 @@
 #include "core/signalchecker.h"
 #include "core/utilities.h"
 #include "internet/internetmodel.h"
+#include "internet/spotifyserver.h"
+#include "internet/spotifyservice.h"
 
-#ifdef HAVE_SPOTIFY
-#  include "internet/spotifyserver.h"
-#  include "internet/spotifyservice.h"
-#endif
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
 const int GstEnginePipeline::kFaderFudgeMsec = 2000;
@@ -144,34 +142,29 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   GstElement* new_bin = NULL;
 
   if (url.scheme() == "spotify") {
-    #ifdef HAVE_SPOTIFY
-      new_bin = gst_bin_new("spotify_bin");
+    new_bin = gst_bin_new("spotify_bin");
 
-      // Create elements
-      GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
-      GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
-      if (!src || !gdp)
-        return false;
-
-      // Pick a port number
-      const int port = Utilities::PickUnusedPort();
-      g_object_set(G_OBJECT(src), "host", "127.0.0.1", NULL);
-      g_object_set(G_OBJECT(src), "port", port, NULL);
-
-      // Link the elements
-      gst_element_link(src, gdp);
-
-      // Add a ghost pad
-      GstPad* pad = gst_element_get_static_pad(gdp, "src");
-      gst_element_add_pad(GST_ELEMENT(new_bin), gst_ghost_pad_new("src", pad));
-      gst_object_unref(GST_OBJECT(pad));
-
-      // Tell spotify to start sending data to us.
-      InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(url.toString(), port);
-    #else // HAVE_SPOTIFY
-      qLog(Error) << "Tried to play a spotify:// url, but spotify support is not compiled in";
+    // Create elements
+    GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
+    GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
+    if (!src || !gdp)
       return false;
-    #endif
+
+    // Pick a port number
+    const int port = Utilities::PickUnusedPort();
+    g_object_set(G_OBJECT(src), "host", "127.0.0.1", NULL);
+    g_object_set(G_OBJECT(src), "port", port, NULL);
+
+    // Link the elements
+    gst_element_link(src, gdp);
+
+    // Add a ghost pad
+    GstPad* pad = gst_element_get_static_pad(gdp, "src");
+    gst_element_add_pad(GST_ELEMENT(new_bin), gst_ghost_pad_new("src", pad));
+    gst_object_unref(GST_OBJECT(pad));
+
+    // Tell spotify to start sending data to us.
+    InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(url.toString(), port);
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(), NULL);
