@@ -303,7 +303,8 @@ void Database::StaticInit() {
       !_sqlite3_backup_finish ||
       !_sqlite3_backup_pagecount ||
       !_sqlite3_backup_remaining) {
-    qLog(Error) << "Couldn't resolve sqlite symbols";
+    qLog(Fatal) << "Couldn't resolve sqlite symbols.  Please compile "
+                   "Clementine with -DSTATIC_SQLITE=ON.";
     sLoadedSqliteSymbols = false;
   } else {
     sLoadedSqliteSymbols = true;

@@ -40,6 +40,7 @@ namespace logging {
   };
 
   enum Level {
+    Level_Fatal = -1,
     Level_Error = 0,
     Level_Warning,
     Level_Info,

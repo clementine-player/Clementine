@@ -158,6 +158,7 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
     case Level_Info:    level_name = " INFO  "; break;
     case Level_Warning: level_name = " WARN  "; break;
     case Level_Error:   level_name = " ERROR "; break;
+    case Level_Fatal:   level_name = " FATAL "; break;
   }
 
   // Check the settings to see if we're meant to show or hide this message.
@@ -175,7 +176,12 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
     function_line += ":" + QString::number(line);
   }
 
-  QDebug ret(QtDebugMsg);
+  QtMsgType type = QtDebugMsg;
+  if (level == Level_Fatal) {
+    type = QtFatalMsg;
+  }
+
+  QDebug ret(type);
   ret.nospace() << kMessageHandlerMagic
       << QDateTime::currentDateTime().toString("hh:mm:ss.zzz").toAscii().constData()
       << level_name << function_line.leftJustified(32).toAscii().constData();
