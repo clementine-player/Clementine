@@ -2,7 +2,6 @@
 #include "config.h"
 #include "internetmodel.h"
 #include "searchboxwidget.h"
-#include "spotifyblobdownloader.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
 #include "core/application.h"
@@ -31,6 +30,9 @@
 #include <QSettings>
 #include <QVariant>
 
+#ifdef HAVE_SPOTIFY_DOWNLOADER
+#include "spotifyblobdownloader.h"
+#endif
 
 Q_DECLARE_METATYPE(QStandardItem*);
 
@@ -290,9 +292,11 @@ void SpotifyService::StartBlobProcess() {
       app_->task_manager()->SetTaskFinished(login_task_id_);
     }
 
-    if (SpotifyBlobDownloader::Prompt()) {
-      InstallBlob();
-    }
+    #ifdef HAVE_SPOTIFY_DOWNLOADER
+      if (SpotifyBlobDownloader::Prompt()) {
+        InstallBlob();
+      }
+    #endif
 
     return;
   }
@@ -317,12 +321,14 @@ bool SpotifyService::IsBlobInstalled() const {
 }
 
 void SpotifyService::InstallBlob() {
+#ifdef HAVE_SPOTIFY_DOWNLOADER
   // The downloader deletes itself when it finishes
   SpotifyBlobDownloader* downloader = new SpotifyBlobDownloader(
         local_blob_version_, QFileInfo(local_blob_path_).path(), this);
   connect(downloader, SIGNAL(Finished()), SLOT(BlobDownloadFinished()));
   connect(downloader, SIGNAL(Finished()), SIGNAL(BlobStateChanged()));
   downloader->Start();
+#endif  // HAVE_SPOTIFY_DOWNLOADER
 }
 
 void SpotifyService::BlobDownloadFinished() {

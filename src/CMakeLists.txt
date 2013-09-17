@@ -10,8 +10,6 @@ if(BUILD_WERROR)
   endif (LINUX)
 endif(BUILD_WERROR)
 
-link_directories(${QCA_LIBRARY_DIRS})
-
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(../3rdparty/gmock/gtest/include)
 if(WIN32)
@@ -40,7 +38,6 @@ include_directories(${ECHONEST_INCLUDE_DIRS})
 include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
 include_directories(${MYGPOQT_INCLUDE_DIRS})
-include_directories(${QCA_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -198,7 +195,6 @@ set(SOURCES
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
   internet/soundcloudservice.cpp
-  internet/spotifyblobdownloader.cpp
   internet/spotifyserver.cpp
   internet/spotifyservice.cpp
   internet/spotifysettingspage.cpp
@@ -396,7 +392,6 @@ set(SOURCES
   widgets/tracksliderpopup.cpp
   widgets/tracksliderslider.cpp
   widgets/widgetfadehelper.cpp
-
 )
 
 set(HEADERS
@@ -498,7 +493,6 @@ set(HEADERS
   internet/somafmservice.h
   internet/somafmurlhandler.h
   internet/soundcloudservice.h
-  internet/spotifyblobdownloader.h
   internet/spotifyserver.h
   internet/spotifyservice.h
   internet/spotifysettingspage.h
@@ -837,6 +831,16 @@ optional_source(HAVE_LIBLASTFM
   UI
     internet/lastfmsettingspage.ui
     internet/lastfmstationdialog.ui
+)
+
+
+optional_source(HAVE_SPOTIFY_DOWNLOADER
+  SOURCES
+    internet/spotifyblobdownloader.cpp
+  HEADERS
+    internet/spotifyblobdownloader.h
+  INCLUDE_DIRECTORIES
+    ${QCA_INCLUDE_DIRS}
 )
 
 # Platform specific - OS X
@@ -1186,7 +1190,6 @@ target_link_libraries(clementine_lib
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
-  ${QCA_LIBRARIES}
   z
   Qocoa
 )
@@ -1234,6 +1237,13 @@ if(HAVE_BREAKPAD)
         "-framework Breakpad")
   endif (LINUX)
 endif(HAVE_BREAKPAD)
+
+if(HAVE_SPOTIFY_DOWNLOADER)
+  target_link_libraries(clementine_lib
+    ${QCA_LIBRARIES}
+  )
+  link_directories(${QCA_LIBRARY_DIRS})
+endif(HAVE_SPOTIFY_DOWNLOADER)
 
 if (APPLE)
   target_link_libraries(clementine_lib
