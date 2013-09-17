@@ -63,6 +63,7 @@
 #include <QTextCodec>
 #include <QTranslator>
 #include <QtConcurrentRun>
+#include <QtCrypto>
 #include <QtDebug>
 
 #include <glib-object.h>
@@ -74,9 +75,6 @@ using boost::scoped_ptr;
 
 #include <echonest/Config.h>
 
-#ifdef HAVE_SPOTIFY_DOWNLOADER
-  #include <QtCrypto>
-#endif
 
 #ifdef Q_OS_DARWIN
   #include <sys/resource.h>
@@ -358,9 +356,7 @@ int main(int argc, char *argv[]) {
   }
 #endif
 
-#ifdef HAVE_SPOTIFY_DOWNLOADER
   QCA::Initializer qca_initializer;
-#endif
 
   // Resources
   Q_INIT_RESOURCE(data);

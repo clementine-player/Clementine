@@ -76,7 +76,7 @@ pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(QCA qca2)
+pkg_check_modules(QCA REQUIRED qca2)
 pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
@@ -254,24 +254,9 @@ optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
-optional_component(SPOTIFY ON "Spotify support: core code"
-  DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
-)
-
 optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
   DEPENDS "libspotify" SPOTIFY_FOUND
-  DEPENDS "Spotify support: core code" HAVE_SPOTIFY
-)
-
-set(NEED_SPOTIFY_DOWNLOADER OFF)
-if(HAVE_SPOTIFY AND NOT HAVE_SPOTIFY_BLOB)
-  set(NEED_SPOTIFY_DOWNLOADER ON)
-endif()
-
-optional_component(SPOTIFY_DOWNLOADER
-  ${NEED_SPOTIFY_DOWNLOADER} "Spotify support: blob downloader"
-  DEPENDS "qca2" QCA_FOUND
 )
 
 optional_component(MOODBAR ON "Moodbar support"
@@ -450,6 +435,7 @@ add_subdirectory(ext/libclementine-common)
 add_subdirectory(ext/libclementine-tagreader)
 add_subdirectory(ext/clementine-tagreader)
 add_subdirectory(ext/libclementine-remote)
+add_subdirectory(ext/libclementine-spotifyblob)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)
@@ -459,10 +445,6 @@ endif(WITH_DEBIAN)
 if(HAVE_BREAKPAD)
   add_subdirectory(3rdparty/google-breakpad)
 endif(HAVE_BREAKPAD)
-
-if(HAVE_SPOTIFY)
-  add_subdirectory(ext/libclementine-spotifyblob)
-endif(HAVE_SPOTIFY)
 
 if(HAVE_SPOTIFY_BLOB)
   add_subdirectory(ext/clementine-spotifyblob)

@@ -10,6 +10,8 @@ if(BUILD_WERROR)
   endif (LINUX)
 endif(BUILD_WERROR)
 
+link_directories(${QCA_LIBRARY_DIRS})
+
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(../3rdparty/gmock/gtest/include)
 if(WIN32)
@@ -38,6 +40,7 @@ include_directories(${ECHONEST_INCLUDE_DIRS})
 include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
 include_directories(${MYGPOQT_INCLUDE_DIRS})
+include_directories(${QCA_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -60,6 +63,8 @@ include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-remote)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-remote)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob)
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
@@ -155,6 +160,7 @@ set(SOURCES
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
   globalsearch/soundcloudsearchprovider.cpp
+  globalsearch/spotifysearchprovider.cpp
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
@@ -183,8 +189,8 @@ set(SOURCES
   internet/localredirectserver.cpp
   internet/magnatunedownloaddialog.cpp
   internet/magnatuneplaylistitem.cpp
-  internet/magnatunesettingspage.cpp
   internet/magnatuneservice.cpp
+  internet/magnatunesettingspage.cpp
   internet/magnatuneurlhandler.cpp
   internet/oauthenticator.cpp
   internet/savedradio.cpp
@@ -192,6 +198,10 @@ set(SOURCES
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
   internet/soundcloudservice.cpp
+  internet/spotifyblobdownloader.cpp
+  internet/spotifyserver.cpp
+  internet/spotifyservice.cpp
+  internet/spotifysettingspage.cpp
   internet/subsonicservice.cpp
   internet/subsonicsettingspage.cpp
   internet/subsonicurlhandler.cpp
@@ -386,6 +396,7 @@ set(SOURCES
   widgets/tracksliderpopup.cpp
   widgets/tracksliderslider.cpp
   widgets/widgetfadehelper.cpp
+
 )
 
 set(HEADERS
@@ -454,6 +465,7 @@ set(HEADERS
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
   globalsearch/soundcloudsearchprovider.h
+  globalsearch/spotifysearchprovider.h
   globalsearch/suggestionwidget.h
 
   internet/cloudfileservice.h
@@ -478,14 +490,18 @@ set(HEADERS
   internet/jamendoservice.h
   internet/localredirectserver.h
   internet/magnatunedownloaddialog.h
-  internet/magnatunesettingspage.h
   internet/magnatuneservice.h
+  internet/magnatunesettingspage.h
   internet/oauthenticator.h
   internet/savedradio.h
   internet/searchboxwidget.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
   internet/soundcloudservice.h
+  internet/spotifyblobdownloader.h
+  internet/spotifyserver.h
+  internet/spotifyservice.h
+  internet/spotifysettingspage.h
   internet/subsonicservice.h
   internet/subsonicsettingspage.h
   internet/subsonicurlhandler.h
@@ -823,32 +839,6 @@ optional_source(HAVE_LIBLASTFM
     internet/lastfmstationdialog.ui
 )
 
-# Spotify
-optional_source(HAVE_SPOTIFY
-  SOURCES
-    globalsearch/spotifysearchprovider.cpp
-    internet/spotifyserver.cpp
-    internet/spotifyservice.cpp
-    internet/spotifysettingspage.cpp
-  HEADERS
-    globalsearch/spotifysearchprovider.h
-    internet/spotifyserver.h
-    internet/spotifyservice.h
-    internet/spotifysettingspage.h
-  INCLUDE_DIRECTORIES
-    ${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob
-    ${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob
-)
-
-optional_source(HAVE_SPOTIFY_DOWNLOADER
-  SOURCES
-    internet/spotifyblobdownloader.cpp
-  HEADERS
-    internet/spotifyblobdownloader.h
-  INCLUDE_DIRECTORIES
-    ${QCA_INCLUDE_DIRS}
-)
-
 # Platform specific - OS X
 optional_source(APPLE
   INCLUDE_DIRECTORIES
@@ -1175,6 +1165,7 @@ add_dependencies(clementine_lib pot)
 
 
 target_link_libraries(clementine_lib
+  clementine-spotifyblob-messages
   libclementine-common
   libclementine-tagreader
   libclementine-remote
@@ -1195,6 +1186,7 @@ target_link_libraries(clementine_lib
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
+  ${QCA_LIBRARIES}
   z
   Qocoa
 )
@@ -1242,19 +1234,6 @@ if(HAVE_BREAKPAD)
         "-framework Breakpad")
   endif (LINUX)
 endif(HAVE_BREAKPAD)
-
-if(HAVE_SPOTIFY)
-  target_link_libraries(clementine_lib
-    clementine-spotifyblob-messages
-  )
-endif(HAVE_SPOTIFY)
-
-if(HAVE_SPOTIFY_DOWNLOADER)
-  target_link_libraries(clementine_lib
-    ${QCA_LIBRARIES}
-  )
-  link_directories(${QCA_LIBRARY_DIRS})
-endif(HAVE_SPOTIFY_DOWNLOADER)
 
 if (APPLE)
   target_link_libraries(clementine_lib

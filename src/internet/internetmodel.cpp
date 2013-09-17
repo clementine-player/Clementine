@@ -23,14 +23,14 @@
 #include "digitallyimportedservicebase.h"
 #include "groovesharkservice.h"
 #include "icecastservice.h"
-#include "jamendoservice.h"
-#include "magnatuneservice.h"
 #include "internetmimedata.h"
 #include "internetservice.h"
+#include "jamendoservice.h"
+#include "magnatuneservice.h"
 #include "savedradio.h"
 #include "somafmservice.h"
-#include "groovesharkservice.h"
 #include "soundcloudservice.h"
+#include "spotifyservice.h"
 #include "subsonicservice.h"
 #include "core/closure.h"
 #include "core/logging.h"
@@ -40,9 +40,6 @@
 
 #ifdef HAVE_LIBLASTFM
   #include "lastfmservice.h"
-#endif
-#ifdef HAVE_SPOTIFY
-  #include "spotifyservice.h"
 #endif
 #ifdef HAVE_GOOGLE_DRIVE
   #include "googledriveservice.h"
@@ -97,9 +94,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new SkyFmService(app, this));
   AddService(new SomaFMService(app, this));
   AddService(new SoundCloudService(app, this));
-#ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(app, this));
-#endif
   AddService(new SubsonicService(app, this));
 #ifdef HAVE_UBUNTU_ONE
   AddService(new UbuntuOneService(app, this));

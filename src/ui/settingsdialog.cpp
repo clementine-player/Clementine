@@ -38,6 +38,7 @@
 #include "internet/digitallyimportedsettingspage.h"
 #include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
+#include "internet/spotifysettingspage.h"
 #include "internet/subsonicsettingspage.h"
 #include "internet/ubuntuonesettingspage.h"
 #include "library/librarysettingspage.h"
@@ -58,9 +59,6 @@
 # include "wiimotedev/wiimotesettingspage.h"
 #endif
 
-#ifdef HAVE_SPOTIFY
-# include "internet/spotifysettingspage.h"
-#endif
 
 #ifdef HAVE_GOOGLE_DRIVE
 # include "internet/googledrivesettingspage.h"
@@ -176,10 +174,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_Box, new BoxSettingsPage(this), providers);
 #endif
 
-#ifdef HAVE_SPOTIFY
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
-#endif
-
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
   AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
   AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
