@@ -76,7 +76,7 @@ pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(QCA REQUIRED qca2)
+pkg_check_modules(QCA qca2)
 pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
@@ -270,6 +270,12 @@ optional_component(SPARKLE ON "Sparkle integration"
 
 optional_component(VISUALISATIONS ON "Visualisations")
 
+if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_FOUND)
+  message(FATAL_ERROR "Either QCA must be available or the non-GPL Spotify "
+          "code must be compiled in")
+elif(QCA_FOUND)
+  set(HAVE_SPOTIFY_DOWNLOADER ON)
+endif()
 
 # Find DBus if it's enabled
 if (HAVE_DBUS)
