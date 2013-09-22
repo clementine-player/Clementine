@@ -53,7 +53,8 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
 
 RemoteClient::~RemoteClient() {
   client_->close();
-  client_->waitForDisconnected(2000);
+  if (client_->state() == QAbstractSocket::ConnectedState)
+    client_->waitForDisconnected(2000);
 }
 
 void RemoteClient::setDownloader(bool downloader) {

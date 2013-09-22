@@ -77,8 +77,8 @@ IncomingDataParser::IncomingDataParser(Application* app)
   connect(this, SIGNAL(Close(int)),
           app_->playlist_manager(), SLOT(Close(int)));
 
-  connect(this, SIGNAL(RateCurrentSong(int)),
-          app_->playlist_manager(), SLOT(RateCurrentSong(int)));
+  connect(this, SIGNAL(RateCurrentSong(double)),
+          app_->playlist_manager(), SLOT(RateCurrentSong(double)));
 
 #ifdef HAVE_LIBLASTFM
   connect(this, SIGNAL(Love()),
@@ -300,7 +300,6 @@ void IncomingDataParser::ClosePlaylist(const pb::remote::Message &msg) {
 }
 
 void IncomingDataParser::RateSong(const pb::remote::Message &msg) {
-  int rating = qBound(0, msg.request_rate_song().rating(), 5);
-
+  double rating = (double) msg.request_rate_song().rating();
   emit RateCurrentSong(rating);
 }

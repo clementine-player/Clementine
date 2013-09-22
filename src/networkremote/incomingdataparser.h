@@ -48,7 +48,7 @@ signals:
   void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
   void ResponseSongOffer(RemoteClient* client, bool accepted);
   void SendLibrary(RemoteClient* client);
-  void RateCurrentSong(int);
+  void RateCurrentSong(double);
 
 private:
   Application* app_;

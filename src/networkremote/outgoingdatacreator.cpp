@@ -353,6 +353,7 @@ void OutgoingDataCreator::CreateSong(
     song_metadata->set_is_local(song.url().scheme() == "file");
     song_metadata->set_filename(DataCommaSizeFromQString(song.basefilename()));
     song_metadata->set_file_size(song.filesize());
+    song_metadata->set_rating(song.rating());
 
     // Append coverart
     if (!art.isNull()) {
