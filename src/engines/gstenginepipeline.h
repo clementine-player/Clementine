@@ -126,8 +126,8 @@ class GstEnginePipeline : public QObject {
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage*, gpointer);
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
   static void NewPadCallback(GstElement*, GstPad*, gpointer);
-  static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
-  static bool EventHandoffCallback(GstPad*, GstEvent*, gpointer);
+  static GstPadProbeReturn HandoffCallback(GstPad*, GstPadProbeInfo*, gpointer);
+  static GstPadProbeReturn EventHandoffCallback(GstPad*, GstPadProbeInfo*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
   static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec *pspec, gpointer);
   static void TaskEnterCallback(GstTask*, GThread*, gpointer);

@@ -100,8 +100,7 @@ static GstStaticPadTemplate src_factory
 			       )
 			     );
 
-GST_BOILERPLATE (GstMoodbar, gst_moodbar, GstElement,
-    GST_TYPE_ELEMENT);
+G_DEFINE_TYPE(GstMoodbar, gst_moodbar, GST_TYPE_ELEMENT);
 
 static void gst_moodbar_set_property (GObject *object, guint prop_id,
     const GValue *value, GParamSpec *pspec);
@@ -109,9 +108,11 @@ static void gst_moodbar_get_property (GObject *object, guint prop_id,
     GValue *value, GParamSpec *pspec);
 
 static gboolean gst_moodbar_set_sink_caps (GstPad *pad, GstCaps *caps);
-static gboolean gst_moodbar_sink_event (GstPad *pad, GstEvent *event);
+static gboolean gst_moodbar_sink_event (
+    GstPad *pad, GstObject *parent, GstEvent *event);
 
-static GstFlowReturn gst_moodbar_chain (GstPad *pad, GstBuffer *buf);
+static GstFlowReturn gst_moodbar_chain (
+    GstPad *pad, GstObject *object, GstBuffer *buf);
 static GstStateChangeReturn gst_moodbar_change_state (GstElement *element,
     GstStateChange transition);
 
@@ -143,26 +144,6 @@ static const guint bark_bands[24]
 /* GObject boilerplate stuff                                   */
 /***************************************************************/
 
-
-static void
-gst_moodbar_base_init (gpointer gclass)
-{
-  static GstElementDetails element_details = 
-    {
-      "Moodbar analyzer",
-      "Filter/Converter/Moodbar",
-      "Convert a spectrum into a stream of (uchar) rgb triples representing its \"mood\"",
-      "Joe Rabinoff <bobqwatson@yahoo.com>"
-    };
-  GstElementClass *element_class = GST_ELEMENT_CLASS (gclass);
-
-  gst_element_class_add_pad_template (element_class,
-      gst_static_pad_template_get (&src_factory));
-  gst_element_class_add_pad_template (element_class,
-      gst_static_pad_template_get (&sink_factory));
-  gst_element_class_set_details (element_class, &element_details);
-}
-
 /* initialize the plugin's class */
 static void
 gst_moodbar_class_init (GstMoodbarClass * klass)
@@ -178,16 +159,28 @@ gst_moodbar_class_init (GstMoodbarClass * klass)
 
   g_object_class_install_property (gobject_class, ARG_HEIGHT,
       g_param_spec_int ("height", "Image height", 
-	  "The height of the resulting raw image",
-	  1, G_MAXINT32, HEIGHT_DEFAULT, G_PARAM_READWRITE));
+          "The height of the resulting raw image",
+          1, G_MAXINT32, HEIGHT_DEFAULT, G_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class, ARG_MAX_WIDTH,
       g_param_spec_int ("max-width", "Image maximum width", 
-	  "The maximum width of the resulting raw image, or 0 for no rescaling",
-	  0, G_MAXINT32, MAX_WIDTH_DEFAULT, G_PARAM_READWRITE));
+          "The maximum width of the resulting raw image, or 0 for no rescaling",
+          0, G_MAXINT32, MAX_WIDTH_DEFAULT, G_PARAM_READWRITE));
 
   gstelement_class->change_state 
     = GST_DEBUG_FUNCPTR (gst_moodbar_change_state);
+
+  gst_element_class_add_pad_template (gstelement_class,
+      gst_static_pad_template_get (&src_factory));
+  gst_element_class_add_pad_template (gstelement_class,
+      gst_static_pad_template_get (&sink_factory));
+
+  gst_element_class_set_static_metadata(
+      gstelement_class,
+      "Moodbar analyzer",
+      "Filter/Converter/Moodbar",
+      "Convert a spectrum into a stream of (uchar) rgb triples representing its \"mood\"",
+      "Joe Rabinoff <bobqwatson@yahoo.com>");
 }
 
 /* initialize the new element
@@ -196,19 +189,17 @@ gst_moodbar_class_init (GstMoodbarClass * klass)
  * initialize structure
  */
 static void
-gst_moodbar_init (GstMoodbar *mood, GstMoodbarClass *gclass)
+gst_moodbar_init (GstMoodbar *mood)
 {
   GstElementClass *klass = GST_ELEMENT_GET_CLASS (mood);
 
   mood->sinkpad =
       gst_pad_new_from_template 
           (gst_element_class_get_pad_template (klass, "sink"), "sink");
-  gst_pad_set_setcaps_function (mood->sinkpad, 
-				GST_DEBUG_FUNCPTR (gst_moodbar_set_sink_caps));
   gst_pad_set_event_function (mood->sinkpad,
-			      GST_DEBUG_FUNCPTR (gst_moodbar_sink_event));
+      GST_DEBUG_FUNCPTR (gst_moodbar_sink_event));
   gst_pad_set_chain_function (mood->sinkpad, 
-			      GST_DEBUG_FUNCPTR (gst_moodbar_chain));
+      GST_DEBUG_FUNCPTR (gst_moodbar_chain));
 
   mood->srcpad =
       gst_pad_new_from_template 
@@ -222,7 +213,7 @@ gst_moodbar_init (GstMoodbar *mood, GstMoodbarClass *gclass)
   mood->rate = 0;
   mood->size = 0;
   mood->barkband_table = NULL;
-  
+
   /* These are allocated when we change to PAUSED */
   mood->r = NULL;
   mood->g = NULL;
@@ -240,7 +231,7 @@ static void gst_moodbar_set_property (GObject *object, guint prop_id,
 {
   GstMoodbar *mood = GST_MOODBAR (object);
 
-  switch (prop_id) 
+  switch (prop_id)
     {
     case ARG_HEIGHT:
       mood->height = (guint) g_value_get_int (value);
@@ -252,7 +243,7 @@ static void gst_moodbar_set_property (GObject *object, guint prop_id,
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
     }
-  
+
 }
 
 
@@ -352,16 +343,19 @@ gst_moodbar_set_sink_caps (GstPad *pad, GstCaps *caps)
 
 
 static gboolean
-gst_moodbar_sink_event (GstPad *pad, GstEvent *event)
+gst_moodbar_sink_event (GstPad *pad, GstObject *parent, GstEvent *event)
 {
-  GstMoodbar *mood;
+  GstMoodbar *mood = GST_MOODBAR(parent);
   gboolean res = TRUE;
 
-  mood = GST_MOODBAR (gst_pad_get_parent (pad));
-
-  if (GST_EVENT_TYPE (event) == GST_EVENT_EOS)
+  if (GST_EVENT_TYPE (event) == GST_EVENT_EOS) {
     gst_moodbar_finish (mood);
-  
+  } else if (GST_EVENT_TYPE(event) == GST_EVENT_CAPS) {
+    GstCaps* caps = NULL;
+    gst_event_parse_caps(event, &caps);
+    gst_moodbar_set_sink_caps(pad, caps);
+  }
+
   res = gst_pad_push_event (mood->srcpad, event);
   gst_object_unref (mood);
 
@@ -397,7 +391,8 @@ gst_moodbar_change_state (GstElement *element, GstStateChange transition)
       break;
     }
 
-  res = parent_class->change_state (element, transition);
+  res = GST_ELEMENT_CLASS(gst_moodbar_parent_class)
+      ->change_state (element, transition);
 
   switch (transition) 
     {
@@ -457,27 +452,31 @@ allocate_another_frame (GstMoodbar *mood)
  * once we receive an EOS signal.
  */
 static GstFlowReturn
-gst_moodbar_chain (GstPad *pad, GstBuffer *buf)
+gst_moodbar_chain (GstPad *pad, GstObject *parent, GstBuffer *buf)
 {
-  GstMoodbar *mood = GST_MOODBAR (gst_pad_get_parent (pad));
+  GstMoodbar *mood = GST_MOODBAR (parent);
   guint i;
   gdouble amplitudes[24], rgb[3] = {0.f, 0.f, 0.f};
   gdouble *out, real, imag;
   guint numfreqs = NUMFREQS (mood);
 
-  if (GST_BUFFER_SIZE (buf) != numfreqs * sizeof (gdouble) * 2)
+  GstMapInfo map;
+  gst_buffer_map(buf, &map, GST_MAP_READ);
+
+  if (map.size != numfreqs * sizeof (gdouble) * 2)
     {
+      gst_buffer_unmap(buf, &map);
       gst_object_unref (mood);
       return GST_FLOW_ERROR;
     }
 
-  out = (gdouble *) GST_BUFFER_DATA (buf);
+  out = (gdouble *) map.data;
 
   if (!allocate_another_frame (mood))
     return GST_FLOW_ERROR;
 
   /* Calculate total amplitudes for the different bark bands */
-  
+
   for (i = 0; i < 24; ++i)
     amplitudes[i] = 0.f;
 
@@ -501,6 +500,7 @@ gst_moodbar_chain (GstPad *pad, GstBuffer *buf)
   mood->g[mood->numframes] = rgb[1];
   mood->b[mood->numframes] = rgb[2];
 
+  gst_buffer_unmap (buf, &map);
   gst_buffer_unref (buf);
   gst_object_unref (mood);
 
@@ -624,9 +624,12 @@ gst_moodbar_finish (GstMoodbar *mood)
             (output_width * mood->height * 3 * sizeof (guchar));
   if (!buf)
     return;
+
+  GstMapInfo map;
+  gst_buffer_map(buf, &map, GST_MAP_READ);
   /* Don't set the timestamp, duration, etc. since it's irrelevant */
-  GST_BUFFER_OFFSET (buf) = 0;
-  data = (guchar *) GST_BUFFER_DATA (buf);
+  map.memory->offset = 0;
+  data = (guchar *) map.data;
 
   gdouble r, g, b;
   guint i, j, n;
@@ -634,40 +637,43 @@ gst_moodbar_finish (GstMoodbar *mood)
   for (line = 0; line < mood->height; ++line)
     {
       for (i = 0; i < output_width; ++i)
-	{
-	  r = 0.f;  g = 0.f;  b = 0.f;
-	  start = i * mood->numframes / output_width;
-	  end = (i + 1) * mood->numframes / output_width;
-	  if ( start == end )
-	    end = start + 1;
+        {
+          r = 0.f;  g = 0.f;  b = 0.f;
+          start = i * mood->numframes / output_width;
+          end = (i + 1) * mood->numframes / output_width;
+          if ( start == end )
+            end = start + 1;
 
-	  for( j = start; j < end; j++ )
-	    {
-	      r += mood->r[j] * 255.f;
-	      g += mood->g[j] * 255.f;
-	      b += mood->b[j] * 255.f;
-	    }
+          for( j = start; j < end; j++ )
+            {
+              r += mood->r[j] * 255.f;
+              g += mood->g[j] * 255.f;
+              b += mood->b[j] * 255.f;
+            }
 
-	  n = end - start;
+          n = end - start;
 
-    *(data++) = (guchar) (r / ((gdouble) n));
-    *(data++) = (guchar) (g / ((gdouble) n));
-    *(data++) = (guchar) (b / ((gdouble) n));
-	}
+          *(data++) = (guchar) (r / ((gdouble) n));
+          *(data++) = (guchar) (g / ((gdouble) n));
+          *(data++) = (guchar) (b / ((gdouble) n));
+        }
     }
 
   { /* Now we (finally) know the width of the image we're pushing */
-    GstCaps *caps = gst_caps_copy (gst_pad_get_caps (mood->srcpad));
+    GstCaps *caps = gst_caps_copy (gst_pad_get_current_caps (mood->srcpad));
     gboolean res;
     gst_caps_set_simple (caps, "width", G_TYPE_INT, output_width, NULL);
     gst_caps_set_simple (caps, "height", G_TYPE_INT, mood->height, NULL);
     res = gst_pad_set_caps (mood->srcpad, caps);
+    /*
     if (res)
       gst_buffer_set_caps (buf, caps);
+    */
     gst_caps_unref (caps);
     if (!res)
       return;
   }
 
   gst_pad_push (mood->srcpad, buf);
+  gst_buffer_unmap(buf, &map);
 }

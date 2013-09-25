@@ -140,7 +140,9 @@
 
 #include <cmath>
 
+#ifdef HAVE_AUDIOCD
 #include <gst/cdda/gstcddabasesrc.h>
+#endif
 
 using boost::shared_ptr;
 using boost::scoped_ptr;

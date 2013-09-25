@@ -70,7 +70,7 @@ QString Chromaprinter::CreateFingerprint() {
 
   pipeline_ = gst_pipeline_new("pipeline");
   GstElement* src      = CreateElement("filesrc", pipeline_);
-  GstElement* decode   = CreateElement("decodebin2", pipeline_);
+  GstElement* decode   = CreateElement("decodebin", pipeline_);
   GstElement* convert  = CreateElement("audioconvert", pipeline_);
   GstElement* resample = CreateElement("audioresample", pipeline_);
   GstElement* sink     = CreateElement("appsink", pipeline_);
@@ -85,10 +85,10 @@ QString Chromaprinter::CreateFingerprint() {
   gst_element_link_many(src, decode, NULL);
   gst_element_link_many(convert, resample, NULL);
 
-  // Chromaprint expects mono floats at a sample rate of 11025Hz.
+  // Chromaprint expects mono 16-bit ints at a sample rate of 11025Hz.
   GstCaps* caps = gst_caps_new_simple(
-      "audio/x-raw-int",
-      "width", G_TYPE_INT, 16,
+      "audio/x-raw",
+      "format", G_TYPE_STRING, "S16LE",
       "channels", G_TYPE_INT, kDecodeChannels,
       "rate", G_TYPE_INT, kDecodeRate,
       NULL);
@@ -97,7 +97,7 @@ QString Chromaprinter::CreateFingerprint() {
 
   GstAppSinkCallbacks callbacks;
   memset(&callbacks, 0, sizeof(callbacks));
-  callbacks.new_buffer = NewBufferCallback;
+  callbacks.new_sample = NewBufferCallback;
   gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(sink), &callbacks, this, NULL);
   g_object_set(G_OBJECT(sink), "sync", FALSE, NULL);
   g_object_set(G_OBJECT(sink), "emit-signals", TRUE, NULL);
@@ -106,8 +106,9 @@ QString Chromaprinter::CreateFingerprint() {
   g_object_set(src, "location", filename_.toUtf8().constData(), NULL);
 
   // Connect signals
-  CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, this);
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
+  CHECKED_GCONNECT(decode, "pad-added", &NewPadCallback, this);
+  gst_bus_set_sync_handler(
+      gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this, NULL);
   guint bus_callback_id = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
 
   QTime time;
@@ -151,9 +152,10 @@ QString Chromaprinter::CreateFingerprint() {
   qLog(Debug) << "Decode time:" << decode_time << "Codegen time:" << codegen_time;
 
   // Cleanup
-  callbacks.new_buffer = NULL;
+  callbacks.new_sample = NULL;
   gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(sink), &callbacks, this, NULL);
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
+  gst_bus_set_sync_handler(
+      gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL, NULL);
   g_source_remove(bus_callback_id);
   gst_element_set_state(pipeline_, GST_STATE_NULL);
   gst_object_unref(pipeline_);
@@ -161,7 +163,7 @@ QString Chromaprinter::CreateFingerprint() {
   return fingerprint;
 }
 
-void Chromaprinter::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data) {
+void Chromaprinter::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
   Chromaprinter* instance = reinterpret_cast<Chromaprinter*>(data);
   GstPad* const audiopad = gst_element_get_static_pad(
       instance->convert_element_, "sink");
@@ -228,13 +230,16 @@ GstFlowReturn Chromaprinter::NewBufferCallback(GstAppSink* app_sink, gpointer se
     return GST_FLOW_OK;
   }
 
-  GstBuffer* buffer = gst_app_sink_pull_buffer(app_sink);
-  me->buffer_.write(reinterpret_cast<const char*>(buffer->data), buffer->size);
+  GstSample* sample = gst_app_sink_pull_sample(app_sink);
+  GstBuffer* buffer = gst_sample_get_buffer(sample);
+  GstMapInfo map;
+  gst_buffer_map(buffer, &map, GST_MAP_READ);
+  me->buffer_.write(reinterpret_cast<const char*>(map.data), map.size);
+  gst_buffer_unmap(buffer, &map);
   gst_buffer_unref(buffer);
 
   gint64 pos = 0;
-  GstFormat format = GST_FORMAT_TIME;
-  gboolean ret = gst_element_query_position(me->pipeline_, &format, &pos);
+  gboolean ret = gst_element_query_position(me->pipeline_, GST_FORMAT_TIME, &pos);
   if (ret && pos > 30 * kNsecPerSec) {
     me->finishing_ = true;
     g_main_loop_quit(me->event_loop_);

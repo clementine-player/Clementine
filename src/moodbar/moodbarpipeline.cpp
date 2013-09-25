@@ -108,12 +108,13 @@ void MoodbarPipeline::Start() {
 
   // Connect signals
   CHECKED_GCONNECT(decodebin, "pad-added", &NewPadCallback, this);
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
+  gst_bus_set_sync_handler(
+      gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this, NULL);
 
   // Set appsink callbacks
   GstAppSinkCallbacks callbacks;
   memset(&callbacks, 0, sizeof(callbacks));
-  callbacks.new_buffer = NewBufferCallback;
+  callbacks.new_sample = NewBufferCallback;
 
   gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(appsink), &callbacks, this, NULL);
 
@@ -151,8 +152,12 @@ void MoodbarPipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
 GstFlowReturn MoodbarPipeline::NewBufferCallback(GstAppSink* app_sink, gpointer data) {
   MoodbarPipeline* self = reinterpret_cast<MoodbarPipeline*>(data);
 
-  GstBuffer* buffer = gst_app_sink_pull_buffer(app_sink);
-  self->data_.append(reinterpret_cast<const char*>(buffer->data), buffer->size);
+  GstSample* sample = gst_app_sink_pull_sample(app_sink);
+  GstBuffer* buffer = gst_sample_get_buffer(sample);
+  GstMapInfo map;
+  gst_buffer_map(buffer, &map, GST_MAP_READ);
+  self->data_.append(reinterpret_cast<const char*>(map.data), map.size);
+  gst_buffer_unmap(buffer, &map);
   gst_buffer_unref(buffer);
 
   return GST_FLOW_OK;
@@ -187,7 +192,8 @@ void MoodbarPipeline::Cleanup() {
   Q_ASSERT(QThread::currentThread() != qApp->thread());
 
   if (pipeline_) {
-    gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
+    gst_bus_set_sync_handler(
+        gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL, NULL);
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(pipeline_);
     pipeline_ = NULL;

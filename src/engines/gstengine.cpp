@@ -200,24 +200,28 @@ void GstEngine::UpdateScope() {
   typedef Engine::Scope::value_type sample_type;
 
   // determine the number of channels
+  /*
   GstStructure* structure = gst_caps_get_structure(
       GST_BUFFER_CAPS(latest_buffer_), 0);
+  */
   int channels = 2;
-  gst_structure_get_int(structure, "channels", &channels);
+  //gst_structure_get_int(structure, "channels", &channels);
 
   // scope does not support >2 channels
   if (channels > 2)
     return;
 
-  const sample_type* source = reinterpret_cast<sample_type*>(
-      GST_BUFFER_DATA(latest_buffer_));
+  GstMapInfo map;
+  gst_buffer_map(latest_buffer_, &map, GST_MAP_READ);
+  const sample_type* source = reinterpret_cast<sample_type*>(map.data);
   sample_type* dest = scope_.data();
   const int bytes = qMin(
-        static_cast<Engine::Scope::size_type>(GST_BUFFER_SIZE(latest_buffer_)),
+        static_cast<Engine::Scope::size_type>(map.size),
         scope_.size() * sizeof(sample_type));
 
   memcpy(dest, source, bytes);
 
+  gst_buffer_unmap(latest_buffer_, &map);
   gst_buffer_unref(latest_buffer_);
   latest_buffer_ = NULL;
 }
@@ -636,19 +640,21 @@ GstEngine::PluginDetailsList
 
   PluginDetailsList ret;
 
-  GstRegistry* registry = gst_registry_get_default();
+  GstRegistry* registry = gst_registry_get();
   GList* const features =
       gst_registry_get_feature_list(registry, GST_TYPE_ELEMENT_FACTORY);
 
   GList* p = features;
   while (p) {
     GstElementFactory* factory = GST_ELEMENT_FACTORY(p->data);
-    if (QString(factory->details.klass).contains(classname)) {
+    if (QString(gst_element_factory_get_klass(factory)).contains(classname)) {
       PluginDetails details;
-      details.name = QString::fromUtf8(GST_PLUGIN_FEATURE_NAME(p->data));
-      details.long_name = QString::fromUtf8(factory->details.longname);
-      details.description = QString::fromUtf8(factory->details.description);
-      details.author = QString::fromUtf8(factory->details.author);
+      details.name = QString::fromUtf8(GST_OBJECT_NAME(p->data));
+      details.long_name =
+          QString::fromUtf8(gst_element_factory_get_longname(factory));
+      details.description =
+          QString::fromUtf8(gst_element_factory_get_description(factory));
+      details.author = QString::fromUtf8(gst_element_factory_get_author(factory));
       ret << details;
     }
     p = g_list_next(p);

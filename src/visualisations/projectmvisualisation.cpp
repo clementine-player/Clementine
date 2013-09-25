@@ -162,11 +162,15 @@ void ProjectMVisualisation::SetDuration(int seconds) {
 }
 
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
-  const int samples_per_channel = GST_BUFFER_SIZE(buffer) / sizeof(short) / 2;
-  const short* data = reinterpret_cast<short*>(GST_BUFFER_DATA(buffer));
+  GstMapInfo map;
+  gst_buffer_map(buffer, &map, GST_MAP_READ);
+  const int samples_per_channel = map.size / sizeof(short) / 2;
+  const short* data = reinterpret_cast<short*>(map.data);
 
   if (projectm_)
     projectm_->pcm()->addPCM16Data(data, samples_per_channel);
+
+  gst_buffer_unmap(buffer, &map);
   gst_buffer_unref(buffer);
 }
 
