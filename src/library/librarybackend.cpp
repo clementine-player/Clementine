@@ -190,7 +190,7 @@ void LibraryBackend::UpdateTotalSongCount() {
 }
 
 void LibraryBackend::AddDirectory(const QString& path) {
-  QString canonical_path = QFileInfo(path).canonicalFilePath();
+  QString canonical_path = path; //QFileInfo(path).canonicalFilePath();
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());

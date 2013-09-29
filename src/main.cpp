@@ -225,6 +225,18 @@ void ParseAProto() {
   message.ParseFromArray(data.constData(), data.size());
 }
 
+void CheckPortable() {
+  QFile f(QApplication::applicationDirPath() + QDir::separator() + "data");
+  qLog(Debug) << f.fileName();
+  if (f.exists()) {
+    // We are portable. Set the bool and change the qsettings path
+    Application::kIsPortable = true;
+
+    QSettings::setDefaultFormat(QSettings::IniFormat);
+    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, f.fileName());
+  }
+}
+
 int main(int argc, char *argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
@@ -305,6 +317,8 @@ int main(int argc, char *argv[]) {
   IncreaseFDLimit();
 
   QtSingleApplication a(argc, argv);
+
+  CheckPortable();
 
   // A bug in Qt means the wheel_scroll_lines setting gets ignored and replaced
   // with the default value of 3 in QApplicationPrivate::initialize.

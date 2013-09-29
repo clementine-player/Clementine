@@ -68,7 +68,14 @@ void LibrarySettingsPage::Add() {
   path = QFileDialog::getExistingDirectory(this, tr("Add directory..."), path);
 
   if (!path.isNull()) {
-    dialog()->library_directory_model()->AddDirectory(path);
+    if (Application::kIsPortable) {
+      QDir appPath(QCoreApplication::applicationDirPath());
+      QString relativePath = appPath.relativeFilePath(path);
+      qLog(Debug) << "Relative Path" << relativePath;
+      dialog()->library_directory_model()->AddDirectory(relativePath);
+    } else {
+      dialog()->library_directory_model()->AddDirectory(path);
+    }
   }
 
   settings.setValue("last_path", path);

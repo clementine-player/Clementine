@@ -19,6 +19,7 @@
 
 #include <algorithm>
 
+#include <QCoreApplication>
 #include <QFile>
 #include <QFileInfo>
 #include <QLatin1Literal>
@@ -258,8 +259,15 @@ qint64 Song::length_nanosec() const { return d->end_ - d->beginning_; }
 int Song::bitrate() const { return d->bitrate_; }
 int Song::samplerate() const { return d->samplerate_; }
 int Song::directory_id() const { return d->directory_id_; }
-const QUrl& Song::url() const { return d->url_; }
-const QString& Song::basefilename() const { return d->basefilename_; }
+const QUrl& Song::url() const {
+  QUrl base = QUrl::fromLocalFile(QCoreApplication::applicationDirPath());
+  qLog(Debug) << "Url" << d->url_.toLocalFile();
+  qLog(Debug) << "base" << base.toString();
+  qLog(Debug) << "absolute" << base.resolved(d->url_).toString();
+  QUrl res = base.resolved(d->url_);
+  return d->url_;
+}
+const QString& Song::basefilename() const {  return d->basefilename_; }
 uint Song::mtime() const { return d->mtime_; }
 uint Song::ctime() const { return d->ctime_; }
 int Song::filesize() const { return d->filesize_; }
