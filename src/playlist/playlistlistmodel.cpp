@@ -65,22 +65,28 @@ void PlaylistListModel::AddRowMappings(const QModelIndex& begin,
   for (int i=begin.row() ; i<=end.row() ; ++i) {
     const QModelIndex index = begin.sibling(i, 0);
     QStandardItem* item = itemFromIndex(index);
+    AddRowItem(item, parent_path);
+  }
+}
 
-    switch (index.data(Role_Type).toInt()) {
-    case Type_Playlist: {
-      const int id = index.data(Role_PlaylistId).toInt();
-
-      playlists_by_id_[id] = item;
-      if (dropping_rows_) {
-        emit PlaylistPathChanged(id, parent_path);
-      }
-
-      break;
+void PlaylistListModel::AddRowItem(QStandardItem* item, const QString& parent_path) {
+  switch (item->data(Role_Type).toInt()) {
+  case Type_Playlist: {
+    const int id = item->data(Role_PlaylistId).toInt();
+    playlists_by_id_[id] = item;
+    if (dropping_rows_) {
+      emit PlaylistPathChanged(id, parent_path);
     }
 
-    case Type_Folder:
-      break;
+    break;
+  }
+
+  case Type_Folder:
+    for (int j=0; j<item->rowCount(); ++j) {
+      QStandardItem* child_item = item->child(j);
+      AddRowItem(child_item, parent_path);
     }
+    break;
   }
 }
 
