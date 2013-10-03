@@ -620,6 +620,27 @@ QString SystemLanguageName() {
   return system_language;
 }
 
+bool UrlOnSameDriveAsClementine(const QUrl &url) {
+  if (url.scheme() != "file")
+    return false;
+
+#ifdef Q_OS_WIN
+  QUrl appUrl = QUrl::fromLocalFile(QCoreApplication::applicationDirPath());
+  if (url.toLocalFile().left(1) == appUrl.toLocalFile().left(1))
+    return true;
+  else
+    return false;
+#else
+  // Non windows systems have always a / in the path
+  return true;
+#endif
+}
+
+QUrl GetRelativePathToClementineBin(const QUrl& url) {
+  QDir appPath(QCoreApplication::applicationDirPath());
+  return QUrl::fromLocalFile(appPath.relativeFilePath(url.toLocalFile()));
+}
+
 }  // namespace Utilities
 
 
