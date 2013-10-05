@@ -268,7 +268,11 @@ void PlaylistListContainer::CurrentChanged(Playlist* new_playlist) {
 void PlaylistListContainer::PlaylistPathChanged(int id, const QString& new_path) {
   // Update the path in the database
   app_->playlist_backend()->SetPlaylistUiPath(id, new_path);
-  app_->playlist_manager()->playlist(id)->set_ui_path(new_path);
+  Playlist* playlist = app_->playlist_manager()->playlist(id);
+  // Check the playlist exists (if it's not opened it's not in the manager)
+  if (playlist) {
+    playlist->set_ui_path(new_path);
+  }
 }
 
 void PlaylistListContainer::ItemDoubleClicked(const QModelIndex& proxy_index) {

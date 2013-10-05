@@ -61,6 +61,7 @@ private slots:
 
 private:
   void AddRowMappings(const QModelIndex& begin, const QModelIndex& end);
+  void AddRowItem(QStandardItem* item, const QString& parent_path);
   void UpdatePathsRecursive(const QModelIndex& parent);
 
 private:
