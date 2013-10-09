@@ -1,14 +1,15 @@
 ;!define PRODUCT_NAME "Clementine"
-!define PRODUCT_NAME "Clementine Portable"
+!define PRODUCT_NAME "Clementine-Portable"
 !define PRODUCT_PUBLISHER "Clementine"
-!define PRODUCT_VERSION_MAJOR 
-!define PRODUCT_VERSION_MINOR 
-!define PRODUCT_DISPLAY_VERSION ""
-!define PRODUCT_DISPLAY_VERSION_SHORT ""
+!define PRODUCT_VERSION_MAJOR 1
+!define PRODUCT_VERSION_MINOR 2
+!define PRODUCT_DISPLAY_VERSION "1.2 p"
+!define PRODUCT_DISPLAY_VERSION_SHORT "1.2 p"
 !define PRODUCT_WEB_SITE "http://www.clementine-player.org/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
-!define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
+;!define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
+!define PRODUCT_INSTALL_DIR "C:\Clementine"
 
 ; Set Application Capabilities info
 !define CAPABILITIES_NAME "Clementine"
@@ -48,7 +49,7 @@ SetCompressor /SOLID lzma
 !insertmacro MUI_LANGUAGE "English"
 
 Name "${PRODUCT_NAME}"
-OutFile "${PRODUCT_NAME}Setup-.exe"
+OutFile "${PRODUCT_NAME}Setup-1.2.0p.exe"
 InstallDir "${PRODUCT_INSTALL_DIR}"
 ShowInstDetails show
 ShowUnInstDetails show

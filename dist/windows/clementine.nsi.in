@@ -207,9 +207,9 @@ Section "Clementine" Clementine
 @PORTABLE@ CreateDirectory $INSTDIR\data
 
   ; Check the OS.  If Vista or newer, use Default Programs
-  nsisos::osversion
-  StrCpy $R0 $0
-  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
+@NORMAL@  nsisos::osversion
+@NORMAL@  StrCpy $R0 $0
+@NORMAL@  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
 
 @NORMAL@  HasDefaultPrograms:
 @NORMAL@    ; Register Clementine with Default Programs
@@ -1654,9 +1654,9 @@ Section "Uninstall"
 @NORMAL@  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
 
   ; Check the OS.  If Vista or newer, use Default Programs
-  nsisos::osversion
-  StrCpy $R0 $0
-  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
+@NORMAL@  nsisos::osversion
+@NORMAL@  StrCpy $R0 $0
+@NORMAL@  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
 
 @NORMAL@  HasDefaultPrograms:
     ; Unregister from Default Programs
