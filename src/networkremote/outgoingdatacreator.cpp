@@ -535,7 +535,7 @@ void OutgoingDataCreator::SendLyrics(int id, const SongInfoFetcher::Result& resu
 
   foreach (const CollapsibleInfoPane::Data& data, result.info_) {
     // If the size is zero, do not send the provider
-    SongInfoTextView* editor = qobject_cast<SongInfoTextView*>(data.contents_);
+    UltimateLyricsLyric* editor = qobject_cast<UltimateLyricsLyric*>(data.content_object_);
     if (editor->toPlainText().length() == 0)
       continue;
 
