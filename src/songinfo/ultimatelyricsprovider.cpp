@@ -16,12 +16,15 @@
 */
 
 #include "songinfotextview.h"
+#include "ultimatelyricslyric.h"
 #include "ultimatelyricsprovider.h"
 #include "core/logging.h"
 #include "core/network.h"
 
+#include <QCoreApplication>
 #include <QNetworkReply>
 #include <QTextCodec>
+#include <QThread>
 
 #include <boost/scoped_ptr.hpp>
 
@@ -137,9 +140,15 @@ void UltimateLyricsProvider::LyricsFetched() {
     data.type_ = CollapsibleInfoPane::Data::Type_Lyrics;
     data.relevance_ = relevance();
 
-    SongInfoTextView* editor = new SongInfoTextView;
-    editor->SetHtml(lyrics);
-    data.contents_ = editor;
+    if (QThread::currentThread() == QCoreApplication::instance()->thread()) {
+      SongInfoTextView* editor = new SongInfoTextView;
+      editor->SetHtml(lyrics);
+      data.contents_ = editor;
+    } else {
+      UltimateLyricsLyric* editor = new UltimateLyricsLyric;
+      editor->SetHtml(lyrics);
+      data.content_object_ = editor;
+    }
 
     emit InfoReady(id, data);
   }

@@ -49,6 +49,7 @@ public:
     int relevance_;
 
     QWidget* contents_;
+    QObject* content_object_;
   };
 
   CollapsibleInfoPane(const Data& data, QWidget* parent = 0);
