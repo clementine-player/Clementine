@@ -238,6 +238,8 @@ void CheckPortable() {
 }
 
 int main(int argc, char *argv[]) {
+  CheckPortable();
+
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
   }
@@ -317,8 +319,6 @@ int main(int argc, char *argv[]) {
   IncreaseFDLimit();
 
   QtSingleApplication a(argc, argv);
-
-  CheckPortable();
 
   // A bug in Qt means the wheel_scroll_lines setting gets ignored and replaced
   // with the default value of 3 in QApplicationPrivate::initialize.

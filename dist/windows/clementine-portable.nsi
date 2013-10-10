@@ -207,9 +207,9 @@ Section "Clementine" Clementine
  CreateDirectory $INSTDIR\data
 
   ; Check the OS.  If Vista or newer, use Default Programs
-  nsisos::osversion
-  StrCpy $R0 $0
-  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
+;  nsisos::osversion
+;  StrCpy $R0 $0
+;  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
 
 ;  HasDefaultPrograms:
 ;    ; Register Clementine with Default Programs
@@ -1654,9 +1654,9 @@ Section "Uninstall"
 ;  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
 
   ; Check the OS.  If Vista or newer, use Default Programs
-  nsisos::osversion
-  StrCpy $R0 $0
-  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
+;  nsisos::osversion
+;  StrCpy $R0 $0
+;  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
 
 ;  HasDefaultPrograms:
     ; Unregister from Default Programs
