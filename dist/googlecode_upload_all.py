@@ -24,6 +24,7 @@ LABELS = {
   "dmg":      ["Type-Package", "OpSys-OSX", "Distro-Lion", "Arch-x86-64"],
   32:         ["Arch-i386"],
   64:         ["Arch-x86-64"],
+  "lucid":    ["Distro-Ubuntu"],
   "precise":  ["Distro-Ubuntu"],
   "quantal":  ["Distro-Ubuntu"],
   "raring":   ["Distro-Ubuntu"],
@@ -51,6 +52,7 @@ RPM_ARCH = {
 }
 
 DESCRIPTIONS = {
+  ("deb", "lucid"):     "for Ubuntu Lucid (10.04)",
   ("deb", "precise"):   "for Ubuntu Precise (12.04)",
   ("deb", "quantal"):   "for Ubuntu Quantal (12.10)",
   ("deb", "raring"):    "for Ubuntu Raring  (13.04)",
@@ -64,6 +66,8 @@ DESCRIPTIONS = {
 }
 
 RELEASES = [
+  ("deb", "lucid", 32),
+  ("deb", "lucid", 64),
   ("deb", "precise", 32),
   ("deb", "precise", 64),
   ("deb", "quantal", 32),
