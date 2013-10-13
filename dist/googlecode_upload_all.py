@@ -226,7 +226,6 @@ def main():
     return 1
 
   print
-  return 0
 
   # Upload everything
   for release in RELEASES:
