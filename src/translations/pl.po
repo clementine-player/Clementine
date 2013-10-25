@@ -8,7 +8,6 @@
 # Kacper . <mattrick@jabster.pl>, 2012
 # Michał G <saperr.pmi@gmail.com>, 2011
 # Michał Ziąbkowski <mziab@o2.pl>, 2010
-# M T <michtrz@gmail.com>, 2013
 # Patryk Wychowaniec <patryk1303@gmail.com>, 2011
 # Patryk Wychowaniec <>, 2012
 # predek <predek00@gmail.com>, 2013
@@ -16,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-09-24 12:31+0000\n"
-"Last-Translator: M T <michtrz@gmail.com>\n"
+"PO-Revision-Date: 2013-08-22 12:02+0000\n"
+"Last-Translator: predek <predek00@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/clementine/language/pl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -870,7 +869,7 @@ msgstr "Obrazek tła"
 msgid "Background opacity"
 msgstr "Nieprzezroczystość tła"
 
-#: core/database.cpp:735
+#: core/database.cpp:734
 msgid "Backing up database"
 msgstr "Tworzenie kopii zapasowej bazy danych"
 
@@ -1503,7 +1502,7 @@ msgstr "Ścieżka DBus"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:689
+#: core/database.cpp:688
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2304,7 +2303,7 @@ msgstr "Pełne soprany"
 msgid "GStreamer audio engine"
 msgstr "Silnik dźwiękowy GStreamer"
 
-#: ui/settingsdialog.cpp:131
+#: ui/settingsdialog.cpp:133
 msgid "General"
 msgstr "Ogólne"
 
@@ -2583,7 +2582,7 @@ msgstr "Wstaw..."
 msgid "Installed"
 msgstr "Zainstalowano"
 
-#: core/database.cpp:674
+#: core/database.cpp:673
 msgid "Integrity check"
 msgstr "Sprawdzanie integralności"
 
@@ -2591,7 +2590,7 @@ msgstr "Sprawdzanie integralności"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "Usługi internetowe"
 
@@ -2929,7 +2928,7 @@ msgstr "Profil niskiej złożoności (LC)"
 msgid "Lyrics"
 msgstr "Teksty utworów"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:136
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Tekst z %1"
@@ -3866,7 +3865,7 @@ msgstr "Usuń z listy odtwarzania"
 msgid "Remove playlist"
 msgstr "Usuń listę odtwrzania"
 
-#: playlist/playlistlistcontainer.cpp:314
+#: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
 msgstr "Usuń listy odtwarzania"
 
@@ -4808,7 +4807,7 @@ msgstr "Pierwszy raz podłączyłeś to urządzenie. Clementine przeskanuje je t
 
 #: playlist/playlisttabbar.cpp:186
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr "Opcja ta może zostać zmieniona w preferencjach \"Trybu\""
+msgstr ""
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -5097,7 +5096,7 @@ msgstr "Użyto"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Użytkownik %1 nie posiada konta Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:145
+#: ui/settingsdialog.cpp:147
 msgid "User interface"
 msgstr "Interfejs użytkownika"
 
@@ -5305,7 +5304,7 @@ msgstr "Wczoraj"
 msgid "You are about to download the following albums"
 msgstr "Zaraz pobierzesz następujące albumy"
 
-#: playlist/playlistlistcontainer.cpp:315
+#: playlist/playlistlistcontainer.cpp:311
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
@@ -5529,9 +5528,9 @@ msgstr "większy niż"
 msgid "in the last"
 msgstr "w ostatnich"
 
+#: playlist/playlistview.cpp:206 ui/edittagdialog.cpp:460
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62 playlist/playlistview.cpp:206
-#: ui/edittagdialog.cpp:460
+#: internet/spotifysettingspage.cpp:62
 msgid "kbps"
 msgstr "kbps"
 

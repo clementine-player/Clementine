@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-10-10 19:15+0000\n"
+"PO-Revision-Date: 2013-08-29 11:48+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -865,7 +865,7 @@ msgstr "Taustakuva"
 msgid "Background opacity"
 msgstr "Taustan läpinäkyvyys"
 
-#: core/database.cpp:735
+#: core/database.cpp:734
 msgid "Backing up database"
 msgstr "Varmuuskopioidaan tietokantaa"
 
@@ -1049,7 +1049,7 @@ msgstr "Classical"
 
 #: ../bin/src/ui_podcastsettingspage.h:243
 msgid "Cleaning up"
-msgstr "Siivoaminen"
+msgstr "Siivotaan"
 
 #: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
@@ -1498,7 +1498,7 @@ msgstr "DBus-polku"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:689
+#: core/database.cpp:688
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1535,7 +1535,7 @@ msgstr "Vähennä äänenvoimakkuutta"
 
 #: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
-msgstr "Oletustaustakuva"
+msgstr "Oletus taustakuva"
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
@@ -1659,7 +1659,7 @@ msgstr "Kytke kesto pois päältä"
 
 #: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
-msgstr "Poista mielialan luominen käytöstä"
+msgstr "Poista moodbar käytöstä"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:433
@@ -1735,7 +1735,7 @@ msgstr "Latauskansio"
 
 #: ../bin/src/ui_podcastsettingspage.h:240
 msgid "Download episodes to"
-msgstr "Lataa jaksot sijaintiin"
+msgstr "Lataa jaksot kohteeseen"
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
@@ -2299,7 +2299,7 @@ msgstr "Täysi diskantti"
 msgid "GStreamer audio engine"
 msgstr "GStreamer-äänijärjestelmä"
 
-#: ui/settingsdialog.cpp:131
+#: ui/settingsdialog.cpp:133
 msgid "General"
 msgstr "Yleiset"
 
@@ -2578,7 +2578,7 @@ msgstr "Lisää..."
 msgid "Installed"
 msgstr "Asennettu"
 
-#: core/database.cpp:674
+#: core/database.cpp:673
 msgid "Integrity check"
 msgstr "Eheystarkistus"
 
@@ -2586,7 +2586,7 @@ msgstr "Eheystarkistus"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "Palvelutarjoajat"
 
@@ -2924,7 +2924,7 @@ msgstr ""
 msgid "Lyrics"
 msgstr "Sanoitukset"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:136
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Sanoitukset tarjoaa %1"
@@ -3050,7 +3050,7 @@ msgstr "Kuukautta"
 
 #: playlist/playlist.cpp:1237
 msgid "Mood"
-msgstr "Mieliala"
+msgstr "Mood"
 
 #: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
@@ -3378,7 +3378,7 @@ msgstr "Avaa laite"
 
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Open file..."
-msgstr "Avaa tiedosto..."
+msgstr "Avaa tiedosto ..."
 
 #: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
@@ -3861,7 +3861,7 @@ msgstr "Poista soittolistalta"
 msgid "Remove playlist"
 msgstr "Poista soittolista"
 
-#: playlist/playlistlistcontainer.cpp:314
+#: playlist/playlistlistcontainer.cpp:310
 msgid "Remove playlists"
 msgstr "Poista soittolistat"
 
@@ -4254,7 +4254,7 @@ msgstr "Korosta soiva kappale hohtavalla animaatiolla"
 
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
-msgstr "Näytä mieliala kappaleen edistysmispalkissa"
+msgstr "Näytä moodbar kappaleen edistysmispalkissa"
 
 #: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Show a native desktop notification"
@@ -4995,7 +4995,7 @@ msgstr "Päivitä tämä podcast"
 
 #: ../bin/src/ui_podcastsettingspage.h:227
 msgid "Updating"
-msgstr "Päivittäminen"
+msgstr "Päivitetään"
 
 #: library/librarywatcher.cpp:92
 #, qt-format
@@ -5092,7 +5092,7 @@ msgstr "Käytetty"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Käyttäjällä %1 ei ole Grooveshark Anywhere -tiliä"
 
-#: ui/settingsdialog.cpp:145
+#: ui/settingsdialog.cpp:147
 msgid "User interface"
 msgstr "Käyttöliittymä"
 
@@ -5300,7 +5300,7 @@ msgstr "Eilen"
 msgid "You are about to download the following albums"
 msgstr "Olet aikeissa ladata seuraavat levyt"
 
-#: playlist/playlistlistcontainer.cpp:315
+#: playlist/playlistlistcontainer.cpp:311
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
@@ -5524,9 +5524,9 @@ msgstr "enemmän kuin"
 msgid "in the last"
 msgstr "viimeisenä"
 
+#: playlist/playlistview.cpp:206 ui/edittagdialog.cpp:460
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62 playlist/playlistview.cpp:206
-#: ui/edittagdialog.cpp:460
+#: internet/spotifysettingspage.cpp:62
 msgid "kbps"
 msgstr "kb/s"
 
