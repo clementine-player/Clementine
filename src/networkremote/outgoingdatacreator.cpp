@@ -721,12 +721,12 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
 
   // Attach this file to the database
   Database::AttachedDatabase adb(temp_file_name, "", true);
-  app_->database()->AttachDatabase("songs_export", adb);
   QSqlDatabase db(app_->database()->Connect());
+
+  app_->database()->AttachDatabaseOnDbConnection("songs_export", adb, db);
 
   // Copy the content of the song table to this temporary database
   QSqlQuery q(QString("create table songs_export.songs as SELECT * FROM songs;"), db);
-  q.exec();
 
   if (app_->database()->CheckErrors(q)) return;
 

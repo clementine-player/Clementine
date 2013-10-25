@@ -74,6 +74,9 @@ class Database : public QObject {
   int current_schema_version() const { return kSchemaVersion; }
 
   void AttachDatabase(const QString& database_name, const AttachedDatabase& database);
+  void AttachDatabaseOnDbConnection(const QString& database_name,
+                                    const AttachedDatabase& database,
+                                    QSqlDatabase& db);
   void DetachDatabase(const QString& database_name);
 
  signals:

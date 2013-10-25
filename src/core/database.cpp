@@ -488,6 +488,20 @@ void Database::AttachDatabase(const QString& database_name,
   attached_databases_[database_name] = database;
 }
 
+void Database::AttachDatabaseOnDbConnection(const QString &database_name,
+                                            const AttachedDatabase &database,
+                                            QSqlDatabase& db) {
+  AttachDatabase(database_name, database);
+
+  // Attach the db
+  QSqlQuery q("ATTACH DATABASE :filename AS :alias", db);
+  q.bindValue(":filename", database.filename_);
+  q.bindValue(":alias", database_name);
+  if (!q.exec()) {
+    qFatal("Couldn't attach external database '%s'", database_name.toAscii().constData());
+  }
+}
+
 void Database::DetachDatabase(const QString& database_name) {
   QMutexLocker l(&mutex_);
   {
