@@ -37,6 +37,7 @@
 #include <QWidget>
 #include <QXmlStreamReader>
 
+#include "core/application.h"
 #include "core/logging.h"
 #include "timeconstants.h"
 
@@ -298,6 +299,9 @@ QString ColorToRgba(const QColor& c) {
 QString GetConfigPath(ConfigPath config) {
   switch (config) {
     case Path_Root: {
+      if (Application::kIsPortable) {
+        return QString("%1/data").arg(QCoreApplication::applicationDirPath());
+      }
       #ifdef Q_OS_DARWIN
         return mac::GetApplicationSupportPath() + "/" + QCoreApplication::organizationName();
       #else
@@ -307,6 +311,9 @@ QString GetConfigPath(ConfigPath config) {
     break;
 
     case Path_CacheRoot: {
+      if (Application::kIsPortable) {
+        return GetConfigPath(Path_Root) + "/cache";
+      }
       #if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
         char* xdg = getenv("XDG_CACHE_HOME");
         if (!xdg || !*xdg) {
@@ -611,6 +618,27 @@ QString SystemLanguageName() {
 #endif
 
   return system_language;
+}
+
+bool UrlOnSameDriveAsClementine(const QUrl &url) {
+  if (url.scheme() != "file")
+    return false;
+
+#ifdef Q_OS_WIN
+  QUrl appUrl = QUrl::fromLocalFile(QCoreApplication::applicationDirPath());
+  if (url.toLocalFile().left(1) == appUrl.toLocalFile().left(1))
+    return true;
+  else
+    return false;
+#else
+  // Non windows systems have always a / in the path
+  return true;
+#endif
+}
+
+QUrl GetRelativePathToClementineBin(const QUrl& url) {
+  QDir appPath(QCoreApplication::applicationDirPath());
+  return QUrl::fromLocalFile(appPath.relativeFilePath(url.toLocalFile()));
 }
 
 }  // namespace Utilities

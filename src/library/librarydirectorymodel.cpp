@@ -17,6 +17,7 @@
 
 #include "librarydirectorymodel.h"
 #include "librarybackend.h"
+#include "core/application.h"
 #include "core/filesystemmusicstorage.h"
 #include "core/musicstorage.h"
 #include "core/utilities.h"
@@ -35,7 +36,14 @@ LibraryDirectoryModel::~LibraryDirectoryModel() {
 }
 
 void LibraryDirectoryModel::DirectoryDiscovered(const Directory &dir) {
-  QStandardItem* item = new QStandardItem(dir.path);
+  QStandardItem* item;
+  if (Application::kIsPortable
+   && Utilities::UrlOnSameDriveAsClementine(QUrl::fromLocalFile(dir.path))) {
+    item = new QStandardItem(Utilities::GetRelativePathToClementineBin(
+                                  QUrl::fromLocalFile(dir.path)).toLocalFile());
+  } else {
+    item = new QStandardItem(dir.path);
+  }
   item->setData(dir.id, kIdRole);
   item->setIcon(dir_icon_);
   storage_ << boost::shared_ptr<MusicStorage>(new FilesystemMusicStorage(dir.path));

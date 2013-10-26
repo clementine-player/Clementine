@@ -225,6 +225,18 @@ void ParseAProto() {
   message.ParseFromArray(data.constData(), data.size());
 }
 
+void CheckPortable() {
+  QFile f(QApplication::applicationDirPath() + QDir::separator() + "data");
+  qLog(Debug) << f.fileName();
+  if (f.exists()) {
+    // We are portable. Set the bool and change the qsettings path
+    Application::kIsPortable = true;
+
+    QSettings::setDefaultFormat(QSettings::IniFormat);
+    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, f.fileName());
+  }
+}
+
 int main(int argc, char *argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
@@ -243,11 +255,6 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("clementine-player.org");
 
-#ifdef Q_OS_DARWIN
-  // Must happen after QCoreApplication::setOrganizationName().
-  setenv("XDG_CONFIG_HOME", Utilities::GetConfigPath(Utilities::Path_Root).toLocal8Bit().constData(), 1);
-#endif
-
   // This makes us show up nicely in gnome-volume-control
 #if !GLIB_CHECK_VERSION(2, 36, 0)
   g_type_init();  // Deprecated in glib 2.36.0
@@ -255,12 +262,6 @@ int main(int argc, char *argv[]) {
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
 
   RegisterMetaTypes();
-
-#ifdef HAVE_LIBLASTFM
-  lastfm::ws::ApiKey = LastFMService::kApiKey;
-  lastfm::ws::SharedSecret = LastFMService::kSecret;
-  lastfm::setNetworkAccessManager(new NetworkAccessManager);
-#endif
 
   CommandlineOptions options(argc, argv);
 
@@ -270,6 +271,7 @@ int main(int argc, char *argv[]) {
     // This MUST be done before parsing the commandline options so QTextCodec
     // gets the right system locale for filenames.
     QtSingleCoreApplication a(argc, argv);
+    CheckPortable();
     crash_reporting.SetApplicationPath(a.applicationFilePath());
 
     // Parse commandline options - need to do this before starting the
@@ -287,6 +289,17 @@ int main(int argc, char *argv[]) {
       // Couldn't send the message so start anyway
     }
   }
+
+#ifdef Q_OS_DARWIN
+  // Must happen after QCoreApplication::setOrganizationName().
+  setenv("XDG_CONFIG_HOME", Utilities::GetConfigPath(Utilities::Path_Root).toLocal8Bit().constData(), 1);
+#endif
+
+#ifdef HAVE_LIBLASTFM
+  lastfm::ws::ApiKey = LastFMService::kApiKey;
+  lastfm::ws::SharedSecret = LastFMService::kSecret;
+  lastfm::setNetworkAccessManager(new NetworkAccessManager);
+#endif
 
   // Initialise logging
   logging::Init();

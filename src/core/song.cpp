@@ -19,6 +19,8 @@
 
 #include <algorithm>
 
+#include <QCoreApplication>
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QLatin1Literal>
@@ -48,6 +50,7 @@
 # include <libmtp.h>
 #endif
 
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/messagehandler.h"
 #include "core/mpris_common.h"
@@ -314,7 +317,16 @@ void Song::set_score(int v) { d->score_ = qBound(0, v, 100); }
 void Song::set_cue_path(const QString& v) { d->cue_path_ = v; }
 void Song::set_unavailable(bool v) { d->unavailable_ = v; }
 void Song::set_etag(const QString& etag) { d->etag_ = etag; }
-void Song::set_url(const QUrl& v) { d->url_ = v; }
+
+void Song::set_url(const QUrl& v) {
+  if (Application::kIsPortable) {
+    QUrl base = QUrl::fromLocalFile(QCoreApplication::applicationDirPath() + "/");
+    d->url_ = base.resolved(v);
+  } else {
+    d->url_ = v;
+  }
+}
+
 void Song::set_basefilename(const QString& v) { d->basefilename_ = v; }
 void Song::set_directory_id(int v) { d->directory_id_ = v; }
 
@@ -414,7 +426,7 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   set_length_nanosec(pb.length_nanosec());
   d->bitrate_ = pb.bitrate();
   d->samplerate_ = pb.samplerate();
-  d->url_ = QUrl::fromEncoded(QByteArray(pb.url().data(), pb.url().size()));
+  set_url(QUrl::fromEncoded(QByteArray(pb.url().data(), pb.url().size())));
   d->basefilename_ = QStringFromStdString(pb.basefilename());
   d->mtime_ = pb.mtime();
   d->ctime_ = pb.ctime();
@@ -496,7 +508,7 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->samplerate_ = toint(col + 14);
 
   d->directory_id_ = toint(col + 15);
-  d->url_ = QUrl::fromEncoded(tobytearray(col + 16));
+  set_url(QUrl::fromEncoded(tobytearray(col + 16)));
   d->basefilename_ = QFileInfo(d->url_.toLocalFile()).fileName();
   d->mtime_ = toint(col + 17);
   d->ctime_ = toint(col + 18);
@@ -541,7 +553,7 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
 }
 
 void Song::InitFromFilePartial(const QString& filename) {
-  d->url_ = QUrl::fromLocalFile(filename);
+  set_url(QUrl::fromLocalFile(filename));
   // We currently rely on filename suffix to know if it's a music file or not.
   // TODO: I know this is not satisfying, but currently, we rely on TagLib
   // which seems to have the behavior (filename checks). Someday, it would be
@@ -605,9 +617,9 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     filename.replace(':', '/');
 
     if (prefix.contains("://")) {
-      d->url_ = QUrl(prefix + filename);
+      set_url(QUrl(prefix + filename));
     } else {
-      d->url_ = QUrl::fromLocalFile(prefix + filename);
+      set_url(QUrl::fromLocalFile(prefix + filename));
     }
 
     d->basefilename_ = QFileInfo(filename).fileName();
@@ -766,7 +778,14 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":samplerate", intval(d->samplerate_));
 
   query->bindValue(":directory", notnullintval(d->directory_id_));
-  query->bindValue(":filename", d->url_.toEncoded());
+
+  if (Application::kIsPortable
+   && Utilities::UrlOnSameDriveAsClementine(d->url_)) {
+    query->bindValue(":filename", Utilities::GetRelativePathToClementineBin(d->url_));
+  } else {
+    query->bindValue(":filename", d->url_);
+  }
+
   query->bindValue(":mtime", notnullintval(d->mtime_));
   query->bindValue(":ctime", notnullintval(d->ctime_));
   query->bindValue(":filesize", notnullintval(d->filesize_));

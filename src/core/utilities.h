@@ -104,6 +104,12 @@ namespace Utilities {
   QStringList Prepend(const QString& text, const QStringList& list);
   QStringList Updateify(const QStringList& list);
 
+  // Check if two urls are on the same drive (mainly for windows)
+  bool UrlOnSameDriveAsClementine(const QUrl& url);
+
+  // Get relative path to clementine binary
+  QUrl GetRelativePathToClementineBin(const QUrl& url);
+
 
   enum ConfigPath {
     Path_Root,

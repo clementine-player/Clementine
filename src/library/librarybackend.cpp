@@ -18,9 +18,11 @@
 #include "librarybackend.h"
 #include "libraryquery.h"
 #include "sqlrow.h"
+#include "core/application.h"
 #include "core/database.h"
 #include "core/scopedtransaction.h"
 #include "core/tagreaderclient.h"
+#include "core/utilities.h"
 #include "smartplaylists/search.h"
 
 #include <QCoreApplication>
@@ -191,13 +193,20 @@ void LibraryBackend::UpdateTotalSongCount() {
 
 void LibraryBackend::AddDirectory(const QString& path) {
   QString canonical_path = QFileInfo(path).canonicalFilePath();
+  QString db_path = canonical_path;
+
+  if (Application::kIsPortable
+   && Utilities::UrlOnSameDriveAsClementine(QUrl::fromLocalFile(canonical_path))) {
+    db_path = Utilities::GetRelativePathToClementineBin(QUrl::fromLocalFile(db_path)).toLocalFile();
+    qLog(Debug) << "db_path" << db_path;
+  }
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("INSERT INTO %1 (path, subdirs)"
                       " VALUES (:path, 1)").arg(dirs_table_), db);
-  q.bindValue(":path", canonical_path);
+  q.bindValue(":path", db_path);
   q.exec();
   if (db_->CheckErrors(q)) return;
 

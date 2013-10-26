@@ -1,15 +1,15 @@
-@NORMAL@!define PRODUCT_NAME "Clementine"
-@PORTABLE@!define PRODUCT_NAME "Clementine-Portable"
+;!define PRODUCT_NAME "Clementine"
+!define PRODUCT_NAME "Clementine-Portable"
 !define PRODUCT_PUBLISHER "Clementine"
-!define PRODUCT_VERSION_MAJOR @CLEMENTINE_VERSION_MAJOR@
-!define PRODUCT_VERSION_MINOR @CLEMENTINE_VERSION_MINOR@
-!define PRODUCT_DISPLAY_VERSION "@CLEMENTINE_VERSION_DISPLAY@"
-!define PRODUCT_DISPLAY_VERSION_SHORT "@CLEMENTINE_VERSION_DISPLAY@"
+!define PRODUCT_VERSION_MAJOR 1
+!define PRODUCT_VERSION_MINOR 2
+!define PRODUCT_DISPLAY_VERSION "1.2 p"
+!define PRODUCT_DISPLAY_VERSION_SHORT "1.2 p"
 !define PRODUCT_WEB_SITE "http://www.clementine-player.org/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
-@NORMAL@!define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
-@PORTABLE@!define PRODUCT_INSTALL_DIR "C:\Clementine"
+;!define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
+!define PRODUCT_INSTALL_DIR "C:\Clementine"
 
 ; Set Application Capabilities info
 !define CAPABILITIES_NAME "Clementine"
@@ -49,12 +49,12 @@ SetCompressor /SOLID lzma
 !insertmacro MUI_LANGUAGE "English"
 
 Name "${PRODUCT_NAME}"
-OutFile "${PRODUCT_NAME}Setup-@CLEMENTINE_VERSION_SPARKLE@.exe"
+OutFile "${PRODUCT_NAME}Setup-1.2.0p.exe"
 InstallDir "${PRODUCT_INSTALL_DIR}"
 ShowInstDetails show
 ShowUnInstDetails show
-@NORMAL@RequestExecutionLevel admin
-@PORTABLE@RequestExecutionLevel user
+;RequestExecutionLevel admin
+RequestExecutionLevel user
 
 Function RunClementine
   ShellExecAsUser::ShellExecAsUser "" "$INSTDIR/clementine.exe" ""
@@ -204,59 +204,59 @@ Section "Clementine" Clementine
   File "zlib1.dll"
 
   ; Create data folder to enable portable mode
-@PORTABLE@ CreateDirectory $INSTDIR\data
+ CreateDirectory $INSTDIR\data
 
   ; Check the OS.  If Vista or newer, use Default Programs
-@NORMAL@  nsisos::osversion
-@NORMAL@  StrCpy $R0 $0
-@NORMAL@  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
+;  nsisos::osversion
+;  StrCpy $R0 $0
+;  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
 
-@NORMAL@  HasDefaultPrograms:
-@NORMAL@    ; Register Clementine with Default Programs
-@NORMAL@    Var /GLOBAL AppIcon
-@NORMAL@    Var /GLOBAL AppExe
-@NORMAL@    StrCpy $AppExe "$INSTDIR\clementine.exe"
-@NORMAL@    StrCpy $AppIcon "$INSTDIR\clementine.ico"
-@NORMAL@
-@NORMAL@    ${RegisterCapabilities}
-@NORMAL@
-@NORMAL@    ${RegisterMediaType} ".mp3" $AppExe $AppIcon "MP3 Audio File"
-@NORMAL@    ${RegisterMediaType} ".flac" $AppExe $AppIcon "FLAC Audio File"
-@NORMAL@    ${RegisterMediaType} ".ogg" $AppExe $AppIcon "OGG Audio File"
-@NORMAL@    ${RegisterMediaType} ".spx" $AppExe $AppIcon "OGG Speex Audio File"
-@NORMAL@    ${RegisterMediaType} ".m4a" $AppExe $AppIcon "MP4 Audio File"
-@NORMAL@    ${RegisterMediaType} ".aac" $AppExe $AppIcon "AAC Audio File"
-@NORMAL@    ${RegisterMediaType} ".wma" $AppExe $AppIcon "WMA Audio File"
-@NORMAL@    ${RegisterMediaType} ".wav" $AppExe $AppIcon "WAV Audio File"
-@NORMAL@
-@NORMAL@    ${RegisterMediaType} ".pls" $AppExe $AppIcon "PLS Audio File"
-@NORMAL@    ${RegisterMediaType} ".m3u" $AppExe $AppIcon "M3U Audio File"
-@NORMAL@    ${RegisterMediaType} ".xspf" $AppExe $AppIcon "XSPF Audio File"
-@NORMAL@    ${RegisterMediaType} ".asx" $AppExe $AppIcon "Windows Media Audio/Video playlist"
-@NORMAL@
-@NORMAL@    ${RegisterMimeType} "audio/mp3" "mp3" "{cd3afa76-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    ${RegisterMimeType} "audio/mp4" "m4a" "{cd3afa7c-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    ${RegisterMimeType} "audio/x-ms-wma" "wma" "{cd3afa84-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    ${RegisterMimeType} "audio/wav" "wav" "{cd3afa7b-b84f-48f0-9393-7edc34128127}"
-@NORMAL@
-@NORMAL@    ${RegisterMimeType} "audio/mpegurl" "m3u" "{cd3afa78-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    ${RegisterMimeType} "application/x-wmplayer" "asx" "{cd3afa96-b84f-48f0-9393-7edc34128127}"
-@NORMAL@    Goto done
-@NORMAL@  NoDefaultPrograms:
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".mp3" "MP3 Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".flac" "FLAC Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".ogg" "OGG Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".spx" "OGG Speex Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".m4a" "MP4 Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".aac" "AAC Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".wma" "WMA Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".wav" "WAV Audio File"
-@NORMAL@
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".pls" "PLS Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".m3u" "M3U Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".xspf" "XSPF Audio File"
-@NORMAL@    ${registerExtension} "$INSTDIR\clementine.exe" ".asx" "Windows Media Audio/Video playlist"
-@NORMAL@  done:
+;  HasDefaultPrograms:
+;    ; Register Clementine with Default Programs
+;    Var /GLOBAL AppIcon
+;    Var /GLOBAL AppExe
+;    StrCpy $AppExe "$INSTDIR\clementine.exe"
+;    StrCpy $AppIcon "$INSTDIR\clementine.ico"
+;
+;    ${RegisterCapabilities}
+;
+;    ${RegisterMediaType} ".mp3" $AppExe $AppIcon "MP3 Audio File"
+;    ${RegisterMediaType} ".flac" $AppExe $AppIcon "FLAC Audio File"
+;    ${RegisterMediaType} ".ogg" $AppExe $AppIcon "OGG Audio File"
+;    ${RegisterMediaType} ".spx" $AppExe $AppIcon "OGG Speex Audio File"
+;    ${RegisterMediaType} ".m4a" $AppExe $AppIcon "MP4 Audio File"
+;    ${RegisterMediaType} ".aac" $AppExe $AppIcon "AAC Audio File"
+;    ${RegisterMediaType} ".wma" $AppExe $AppIcon "WMA Audio File"
+;    ${RegisterMediaType} ".wav" $AppExe $AppIcon "WAV Audio File"
+;
+;    ${RegisterMediaType} ".pls" $AppExe $AppIcon "PLS Audio File"
+;    ${RegisterMediaType} ".m3u" $AppExe $AppIcon "M3U Audio File"
+;    ${RegisterMediaType} ".xspf" $AppExe $AppIcon "XSPF Audio File"
+;    ${RegisterMediaType} ".asx" $AppExe $AppIcon "Windows Media Audio/Video playlist"
+;
+;    ${RegisterMimeType} "audio/mp3" "mp3" "{cd3afa76-b84f-48f0-9393-7edc34128127}"
+;    ${RegisterMimeType} "audio/mp4" "m4a" "{cd3afa7c-b84f-48f0-9393-7edc34128127}"
+;    ${RegisterMimeType} "audio/x-ms-wma" "wma" "{cd3afa84-b84f-48f0-9393-7edc34128127}"
+;    ${RegisterMimeType} "audio/wav" "wav" "{cd3afa7b-b84f-48f0-9393-7edc34128127}"
+;
+;    ${RegisterMimeType} "audio/mpegurl" "m3u" "{cd3afa78-b84f-48f0-9393-7edc34128127}"
+;    ${RegisterMimeType} "application/x-wmplayer" "asx" "{cd3afa96-b84f-48f0-9393-7edc34128127}"
+;    Goto done
+;  NoDefaultPrograms:
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".mp3" "MP3 Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".flac" "FLAC Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".ogg" "OGG Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".spx" "OGG Speex Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".m4a" "MP4 Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".aac" "AAC Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".wma" "WMA Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".wav" "WAV Audio File"
+;
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".pls" "PLS Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".m3u" "M3U Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".xspf" "XSPF Audio File"
+;    ${registerExtension} "$INSTDIR\clementine.exe" ".asx" "Windows Media Audio/Video playlist"
+;  done:
 SectionEnd
 
 Section "Qt image format plugins" imageformats
@@ -891,27 +891,27 @@ Section "projectM presets" projectm-presets
   File "/oname=Zylot - Wisps.milk" "../../3rdparty/libprojectm/presets/Zylot - Wisps.milk"
 SectionEnd
 
-@NORMAL@Section "Start menu items" startmenu
-@NORMAL@  ; Create Start Menu folders and shortcuts.
-@NORMAL@  SetShellVarContext all
-@NORMAL@
-@NORMAL@  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-@NORMAL@  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\clementine.exe"
-@NORMAL@  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
-@NORMAL@SectionEnd
+;Section "Start menu items" startmenu
+;  ; Create Start Menu folders and shortcuts.
+;  SetShellVarContext all
+;
+;  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
+;  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\clementine.exe"
+;  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+;SectionEnd
 
 Section "Uninstaller"
   ; Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
-@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "${PRODUCT_NAME}"
-@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
-@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\clementine.ico"
-@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_DISPLAY_VERSION}"
-@NORMAL@  WriteRegDWORD ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "VersionMajor" "${PRODUCT_VERSION_MAJOR}"
-@NORMAL@  WriteRegDWORD ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "VersionMinor" "${PRODUCT_VERSION_MINOR}"
-@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
-@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
+;  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "${PRODUCT_NAME}"
+;  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
+;  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\clementine.ico"
+;  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_DISPLAY_VERSION}"
+;  WriteRegDWORD ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "VersionMajor" "${PRODUCT_VERSION_MAJOR}"
+;  WriteRegDWORD ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "VersionMinor" "${PRODUCT_VERSION_MINOR}"
+;  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
+;  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 SectionEnd
 
 Section "Uninstall"
@@ -1646,36 +1646,36 @@ Section "Uninstall"
   ; Remove the Shortcuts
   SetShellVarContext all
 
-@NORMAL@  Delete "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
-@NORMAL@  Delete "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk"
-@NORMAL@  RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
+;  Delete "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
+;  Delete "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk"
+;  RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
   
   ; Remove the entry from 'installed programs list'
-@NORMAL@  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
+;  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
 
   ; Check the OS.  If Vista or newer, use Default Programs
-@NORMAL@  nsisos::osversion
-@NORMAL@  StrCpy $R0 $0
-@NORMAL@  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
+;  nsisos::osversion
+;  StrCpy $R0 $0
+;  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
 
-@NORMAL@  HasDefaultPrograms:
+;  HasDefaultPrograms:
     ; Unregister from Default Programs
-@NORMAL@    ${UnRegisterCapabilities}
-@NORMAL@    Goto done
-@NORMAL@  NoDefaultPrograms:
+;    ${UnRegisterCapabilities}
+;    Goto done
+;  NoDefaultPrograms:
     ; Remove file associations
-@NORMAL@    ${unregisterExtension} ".mp3" "MP3 Audio File"
-@NORMAL@    ${unregisterExtension} ".flac" "FLAC Audio File"
-@NORMAL@    ${unregisterExtension} ".ogg" "OGG Audio File"
-@NORMAL@    ${unregisterExtension} ".spx" "OGG Speex Audio File"
-@NORMAL@    ${unregisterExtension} ".mp4" "MP4 Audio File"
-@NORMAL@    ${unregisterExtension} ".aac" "AAC Audio File"
-@NORMAL@    ${unregisterExtension} ".wma" "WMA Audio File"
-@NORMAL@    ${unregisterExtension} ".wav" "WAV Audio File"
-@NORMAL@
-@NORMAL@    ${unregisterExtension} ".pls" "PLS Audio File"
-@NORMAL@    ${unregisterExtension} ".m3u" "M3U Audio File"
-@NORMAL@    ${unregisterExtension} ".xspf" "XSPF Audio File"
-@NORMAL@    ${unregisterExtension} ".asx" "Windows Media Audio/Video playlist"
-@NORMAL@  done:
+;    ${unregisterExtension} ".mp3" "MP3 Audio File"
+;    ${unregisterExtension} ".flac" "FLAC Audio File"
+;    ${unregisterExtension} ".ogg" "OGG Audio File"
+;    ${unregisterExtension} ".spx" "OGG Speex Audio File"
+;    ${unregisterExtension} ".mp4" "MP4 Audio File"
+;    ${unregisterExtension} ".aac" "AAC Audio File"
+;    ${unregisterExtension} ".wma" "WMA Audio File"
+;    ${unregisterExtension} ".wav" "WAV Audio File"
+;
+;    ${unregisterExtension} ".pls" "PLS Audio File"
+;    ${unregisterExtension} ".m3u" "M3U Audio File"
+;    ${unregisterExtension} ".xspf" "XSPF Audio File"
+;    ${unregisterExtension} ".asx" "Windows Media Audio/Video playlist"
+;  done:
 SectionEnd

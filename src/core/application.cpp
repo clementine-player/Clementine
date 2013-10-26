@@ -44,6 +44,8 @@
 # include "moodbar/moodbarloader.h"
 #endif
 
+bool Application::kIsPortable = false;
+
 Application::Application(QObject* parent)
   : QObject(parent),
     tag_reader_client_(NULL),
