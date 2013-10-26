@@ -4,10 +4,10 @@
 set(CLEMENTINE_VERSION_MAJOR 1)
 set(CLEMENTINE_VERSION_MINOR 2)
 set(CLEMENTINE_VERSION_PATCH 0)
-set(CLEMENTINE_VERSION_PRERELEASE p)
+#set(CLEMENTINE_VERSION_PRERELEASE p)
 
 # This should be set to OFF in a release branch
-# set(INCLUDE_GIT_REVISION ON)
+ set(INCLUDE_GIT_REVISION ON)
 
 # Rules about version number comparison on different platforms:
 #   Debian:
