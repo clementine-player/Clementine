@@ -79,12 +79,12 @@ msgstr " písně"
 msgid "%1 albums"
 msgstr "%1 alb"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dnů"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr "před %1 dny"
@@ -258,7 +258,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0 px"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 msgid "1 day"
 msgstr "1 den"
 
@@ -362,7 +362,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:336
+#: core/song.cpp:348
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -875,7 +875,7 @@ msgstr "Obrázek na pozadí"
 msgid "Background opacity"
 msgstr "Neprůhlednost pozadí"
 
-#: core/database.cpp:735
+#: core/database.cpp:749
 msgid "Backing up database"
 msgstr "Záloha databáze"
 
@@ -970,7 +970,7 @@ msgstr "Ale tyto zdroje jsou zakázány:"
 msgid "Buttons"
 msgstr "Tlačítka"
 
-#: core/song.cpp:339
+#: core/song.cpp:351
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1508,7 +1508,7 @@ msgstr "Cesta k DBus"
 msgid "Dance"
 msgstr "Taneční hudba"
 
-#: core/database.cpp:689
+#: core/database.cpp:703
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2222,7 +2222,7 @@ msgstr "Dokončit"
 msgid "First level"
 msgstr "První úroveň"
 
-#: core/song.cpp:328
+#: core/song.cpp:340
 msgid "Flac"
 msgstr "FLAC"
 
@@ -2519,12 +2519,12 @@ msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "In %1 days"
 msgstr "Za %1 dny(ů)"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:150
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Za %1 týdny(ů)"
@@ -2588,7 +2588,7 @@ msgstr "Vložit..."
 msgid "Installed"
 msgstr "Nainstalován"
 
-#: core/database.cpp:674
+#: core/database.cpp:688
 msgid "Integrity check"
 msgstr "Ověření celistvosti"
 
@@ -2939,7 +2939,7 @@ msgstr "Texty písní"
 msgid "Lyrics from %1"
 msgstr "Texty písní z %1"
 
-#: core/song.cpp:331 ../bin/src/ui_transcodersettingspage.h:175
+#: core/song.cpp:343 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2951,11 +2951,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:329
+#: core/song.cpp:341
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:330
+#: core/song.cpp:342
 msgid "MPC"
 msgstr "MPC"
 
@@ -3226,7 +3226,7 @@ msgstr "Další"
 msgid "Next track"
 msgstr "Další skladba"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 msgid "Next week"
 msgstr "Příští týden"
 
@@ -3325,19 +3325,19 @@ msgstr "Právě se přehrává"
 msgid "OSD Preview"
 msgstr "Náhled OSD"
 
-#: core/song.cpp:332
+#: core/song.cpp:344
 msgid "Ogg Flac"
 msgstr "Ogg FLAC"
 
-#: core/song.cpp:335
+#: core/song.cpp:347
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:333
+#: core/song.cpp:345
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:334 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:346 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -4564,7 +4564,7 @@ msgstr "Zastavit po současné skladbě"
 msgid "Stopped"
 msgstr "Zastaveno"
 
-#: core/song.cpp:341
+#: core/song.cpp:353
 msgid "Stream"
 msgstr "Proud"
 
@@ -4840,7 +4840,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Abyste začali poslouchat rádio Grooveshark, měli byste si nejprve poslechnout několik jiných písní Grooveshark"
 
-#: core/utilities.cpp:125 core/utilities.cpp:141
+#: core/utilities.cpp:126 core/utilities.cpp:142
 msgid "Today"
 msgstr "Dnes"
 
@@ -4864,7 +4864,7 @@ msgstr "Přepnout odesílání informací o přehrávání"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Přepnout viditelnost hezkých oznámení na obrazovce (OSD)"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 msgid "Tomorrow"
 msgstr "Zítra"
 
@@ -4914,7 +4914,7 @@ msgstr "Převádí se %1 souborů s %2 procesy"
 msgid "Transcoding options"
 msgstr "Volby překódování"
 
-#: core/song.cpp:338
+#: core/song.cpp:350
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4955,7 +4955,7 @@ msgstr "Ultra široké pásmo"
 msgid "Unable to download %1 (%2)"
 msgstr "Nepodařilo se stáhnout %1 (%2)"
 
-#: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: core/song.cpp:357 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
@@ -5180,7 +5180,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovat při zavření karty se seznamem skladeb"
 
-#: core/song.cpp:337
+#: core/song.cpp:349
 msgid "Wav"
 msgstr "WAV"
 
@@ -5260,7 +5260,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:327
+#: core/song.cpp:339
 msgid "Windows Media audio"
 msgstr "Windows Media Audio"
 
@@ -5302,7 +5302,7 @@ msgstr "Rok - Album"
 msgid "Years"
 msgstr "Roky"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 msgid "Yesterday"
 msgstr "Včera"
 

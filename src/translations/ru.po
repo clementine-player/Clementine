@@ -14,7 +14,7 @@
 # Валерий Третьяк <karlsson169@gmail.com>, 2012
 # SvetlanaK <kolyadas89@gmail.com>, 2011
 # Brodyaga20 <inactive+Brodyaga20@transifex.com>, 2012
-# DmitryKX <ksquirrel.iv@gmail.com>, 2013
+# Dmitry <linuxsquirrel.dev@gmail.com>, 2013
 # Alexander Vysotskiy <loki13gm@gmail.com>, 2012
 # Nikita Putko <admi136@mail.ru>, 2011
 # Nikolay Parukhin <parukhin@gmail.com>, 2013
@@ -31,7 +31,7 @@ msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
 "PO-Revision-Date: 2013-09-08 09:06+0000\n"
-"Last-Translator: DmitryKX <ksquirrel.iv@gmail.com>\n"
+"Last-Translator: Dmitry <linuxsquirrel.dev@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -88,12 +88,12 @@ msgstr " композиции"
 msgid "%1 albums"
 msgstr "%1 альбом(ов)"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 #, qt-format
 msgid "%1 days"
 msgstr "%1 дней"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 дней назад"
@@ -267,7 +267,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 msgid "1 day"
 msgstr "1 день"
 
@@ -371,7 +371,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64к"
 
-#: core/song.cpp:336
+#: core/song.cpp:348
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -884,7 +884,7 @@ msgstr "Фоновое изображение"
 msgid "Background opacity"
 msgstr "Прозрачность фона"
 
-#: core/database.cpp:734
+#: core/database.cpp:749
 msgid "Backing up database"
 msgstr "Резервное копирование базы данных"
 
@@ -979,7 +979,7 @@ msgstr "Эти источники отключены:"
 msgid "Buttons"
 msgstr "Клавиши"
 
-#: core/song.cpp:339
+#: core/song.cpp:351
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1517,7 +1517,7 @@ msgstr "DBus path"
 msgid "Dance"
 msgstr "Танцевальный"
 
-#: core/database.cpp:688
+#: core/database.cpp:703
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2231,7 +2231,7 @@ msgstr "Готово"
 msgid "First level"
 msgstr "Первый уровень"
 
-#: core/song.cpp:328
+#: core/song.cpp:340
 msgid "Flac"
 msgstr "FLAC"
 
@@ -2318,7 +2318,7 @@ msgstr "Full Treble"
 msgid "GStreamer audio engine"
 msgstr "Движок аудио GStreamer"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:131
 msgid "General"
 msgstr "Общие"
 
@@ -2528,12 +2528,12 @@ msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "In %1 days"
 msgstr "В течение %1 дней"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:150
 #, qt-format
 msgid "In %1 weeks"
 msgstr "В течение %1 недель"
@@ -2597,7 +2597,7 @@ msgstr "Вставить..."
 msgid "Installed"
 msgstr "Установлено"
 
-#: core/database.cpp:673
+#: core/database.cpp:688
 msgid "Integrity check"
 msgstr "Проверка целостности"
 
@@ -2605,7 +2605,7 @@ msgstr "Проверка целостности"
 msgid "Internet"
 msgstr "Интернет"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:153
 msgid "Internet providers"
 msgstr "Интернет провайдеры"
 
@@ -2943,12 +2943,12 @@ msgstr "Профиль низкой сложности (LC)"
 msgid "Lyrics"
 msgstr "Текст песни"
 
-#: songinfo/ultimatelyricsprovider.cpp:136
+#: songinfo/ultimatelyricsprovider.cpp:139
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Текст песни с %1"
 
-#: core/song.cpp:331 ../bin/src/ui_transcodersettingspage.h:175
+#: core/song.cpp:343 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2960,11 +2960,11 @@ msgstr "MP3 256к"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:329
+#: core/song.cpp:341
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:330
+#: core/song.cpp:342
 msgid "MPC"
 msgstr "MPC"
 
@@ -3235,7 +3235,7 @@ msgstr "Дальше"
 msgid "Next track"
 msgstr "Следующая композиция"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 msgid "Next week"
 msgstr "На следующей неделе"
 
@@ -3334,19 +3334,19 @@ msgstr "Сейчас проигрывается"
 msgid "OSD Preview"
 msgstr "Предпросмотр OSD"
 
-#: core/song.cpp:332
+#: core/song.cpp:344
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:335
+#: core/song.cpp:347
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:333
+#: core/song.cpp:345
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:334 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:346 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3880,7 +3880,7 @@ msgstr "Удалить из списка воспроизведения"
 msgid "Remove playlist"
 msgstr "Удалить список воспроизведения"
 
-#: playlist/playlistlistcontainer.cpp:310
+#: playlist/playlistlistcontainer.cpp:314
 msgid "Remove playlists"
 msgstr "Удалить списки воспроизведения"
 
@@ -4573,7 +4573,7 @@ msgstr "Остановить воспроизведение после теку�
 msgid "Stopped"
 msgstr "Остановлено"
 
-#: core/song.cpp:341
+#: core/song.cpp:353
 msgid "Stream"
 msgstr "Поток"
 
@@ -4849,7 +4849,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Для включения радио Grooveshark требуется прослушать несколько композиций на Grooveshark"
 
-#: core/utilities.cpp:125 core/utilities.cpp:141
+#: core/utilities.cpp:126 core/utilities.cpp:142
 msgid "Today"
 msgstr "Сегодня"
 
@@ -4873,7 +4873,7 @@ msgstr "Вкл/выкл скробблинг"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Переключить видимость OSD"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 msgid "Tomorrow"
 msgstr "Завтра"
 
@@ -4923,7 +4923,7 @@ msgstr "Перекодировано %1 файлов используя %2 по�
 msgid "Transcoding options"
 msgstr "Настройки перекодирования"
 
-#: core/song.cpp:338
+#: core/song.cpp:350
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4964,7 +4964,7 @@ msgstr "Ультраширокая полоса пропускания (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Невозможно загрузить %1 (%2)"
 
-#: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: core/song.cpp:357 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
@@ -5111,7 +5111,7 @@ msgstr "Использовано"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "У пользователь %1 нет учетной записи Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:145
 msgid "User interface"
 msgstr "Пользовательский интерфейс"
 
@@ -5189,7 +5189,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Предупреждать при закрытии вкладки списка воспроизведения"
 
-#: core/song.cpp:337
+#: core/song.cpp:349
 msgid "Wav"
 msgstr "Wav"
 
@@ -5269,7 +5269,7 @@ msgstr "Windows Media 40к"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64к"
 
-#: core/song.cpp:327
+#: core/song.cpp:339
 msgid "Windows Media audio"
 msgstr "Windows Media"
 
@@ -5311,7 +5311,7 @@ msgstr "Год - Альбом"
 msgid "Years"
 msgstr "Годы"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 msgid "Yesterday"
 msgstr "Вчера"
 
@@ -5319,7 +5319,7 @@ msgstr "Вчера"
 msgid "You are about to download the following albums"
 msgstr "Вы собираетесь скачать следующие альбомы"
 
-#: playlist/playlistlistcontainer.cpp:311
+#: playlist/playlistlistcontainer.cpp:315
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
@@ -5543,9 +5543,9 @@ msgstr "больше чем"
 msgid "in the last"
 msgstr "в последние"
 
-#: playlist/playlistview.cpp:206 ui/edittagdialog.cpp:460
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62
+#: internet/spotifysettingspage.cpp:62 playlist/playlistview.cpp:206
+#: ui/edittagdialog.cpp:460
 msgid "kbps"
 msgstr "кбит/с"
 

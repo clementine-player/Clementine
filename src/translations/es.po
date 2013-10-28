@@ -15,6 +15,7 @@
 # Fernando Torres <free.thought.ae@gmail.com>, 2012
 # legion1978 <legion1978@gmail.com>, 2012
 # LeonimuZ <leontaveras@gmail.com>, 2011
+# davidsansome <me@davidsansome.com>, 2013
 # aldraia <nus.gentoo@gmail.com>, 2012
 # Ricardo Andrés <blurmuse@gmail.com>, 2012
 # Robin Cornelio Thomas <rc.thomas90@gmail.com>, 2012
@@ -25,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-11 12:55+0000\n"
+"PO-Revision-Date: 2013-10-27 05:13+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,12 +84,12 @@ msgstr " canciones"
 msgid "%1 albums"
 msgstr "%1 álbumes"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 #, qt-format
 msgid "%1 days"
 msgstr "%1 días"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr "hace %1 días"
@@ -244,7 +245,7 @@ msgstr "&Herramientas"
 
 #: ui/edittagdialog.cpp:48
 msgid "(different across multiple songs)"
-msgstr "(diferentes a través de múltiples canciones)"
+msgstr "(diferentes a través de las canciones)"
 
 #: ui/about.cpp:77
 msgid "...and all the Amarok contributors"
@@ -262,7 +263,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 msgid "1 day"
 msgstr "1 día"
 
@@ -277,11 +278,11 @@ msgstr "127.0.0.1"
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
-msgstr "128k MP3"
+msgstr "MP3 a 128k"
 
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
-msgstr "40%"
+msgstr "40 %"
 
 #: library/library.cpp:60
 msgid "50 random tracks"
@@ -295,7 +296,7 @@ msgstr "<a href=\"http://www.di.fm/premium/\">Actualizar a Premium ahora</a>"
 msgid ""
 "<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
 "your password</a>"
-msgstr "<a href=\"https://one.ubuntu.com/auth/login\">Crear una cuenta nueva o restablecer su contraseña</a>"
+msgstr "<a href=\"https://one.ubuntu.com/auth/login\">Cree una cuenta nueva o restablezca su contraseña</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -366,7 +367,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:336
+#: core/song.cpp:348
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -525,7 +526,7 @@ msgstr "Añadir etiqueta de intérprete de la canción"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song play count"
-msgstr "Añadir contador de reproducción de la canción"
+msgstr "Añadir conteo de reproducciones de la canción"
 
 #: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song rating"
@@ -533,7 +534,7 @@ msgstr "Añadir valoración de canción"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song skip count"
-msgstr "Añadir contador de omisiones de canciones"
+msgstr "Añadir conteo de omisiones de la canción"
 
 #: ../bin/src/ui_notificationssettingspage.h:383
 msgid "Add song title tag"
@@ -573,7 +574,7 @@ msgstr "Añadir a la cola"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
-msgstr "Añadir acción wiimotedev"
+msgstr "Añadir acción de wiimotedev"
 
 #: ../bin/src/ui_transcodedialog.h:207
 msgid "Add..."
@@ -798,7 +799,7 @@ msgstr "Artista"
 
 #: ui/mainwindow.cpp:242
 msgid "Artist info"
-msgstr "Info. artista"
+msgstr "Inf. artista"
 
 #: internet/lastfmservice.cpp:208
 msgid "Artist radio"
@@ -879,7 +880,7 @@ msgstr "Imagen de fondo"
 msgid "Background opacity"
 msgstr "Opacidad del fondo"
 
-#: core/database.cpp:735
+#: core/database.cpp:749
 msgid "Backing up database"
 msgstr "Respaldando la base de datos"
 
@@ -974,7 +975,7 @@ msgstr "Pero estas fuentes están desactivadas:"
 msgid "Buttons"
 msgstr "Botones"
 
-#: core/song.cpp:339
+#: core/song.cpp:351
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1512,7 +1513,7 @@ msgstr "Ruta de DBus"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:689
+#: core/database.cpp:703
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1537,7 +1538,7 @@ msgstr "Pre&determinado"
 
 #: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
-msgstr "Disminuir el volumen en 4%"
+msgstr "Disminuir el volumen en 4 %"
 
 #: core/commandlineoptions.cpp:161
 msgid "Decrease the volume by <value> percent"
@@ -1831,7 +1832,7 @@ msgstr "Editar lista de reproducción inteligente…"
 #: ui/mainwindow.cpp:1396
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "Editar etiqueta «%1»…"
+msgstr "Editar la etiqueta «%1»…"
 
 #: ../bin/src/ui_mainwindow.h:673
 msgid "Edit tag..."
@@ -2226,7 +2227,7 @@ msgstr "Finalizar"
 msgid "First level"
 msgstr "Primer nivel"
 
-#: core/song.cpp:328
+#: core/song.cpp:340
 msgid "Flac"
 msgstr "Flac"
 
@@ -2523,12 +2524,12 @@ msgstr "Imágenes (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imágenes (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "In %1 days"
 msgstr "En %1 días"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:150
 #, qt-format
 msgid "In %1 weeks"
 msgstr "En %1 semanas"
@@ -2565,7 +2566,7 @@ msgstr "La configuración está incompleta. Asegúrese de que ha rellenado todos
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
-msgstr "Incrementar el volumen en 4%"
+msgstr "Incrementar el volumen en 4 %"
 
 #: core/commandlineoptions.cpp:160
 msgid "Increase the volume by <value> percent"
@@ -2592,7 +2593,7 @@ msgstr "Insertar…"
 msgid "Installed"
 msgstr "Instalado"
 
-#: core/database.cpp:674
+#: core/database.cpp:688
 msgid "Integrity check"
 msgstr "Comprobación de integridad"
 
@@ -2667,14 +2668,14 @@ msgstr "Saltar a la pista en reproducción"
 #: wiimotedev/wiimoteshortcutgrabber.cpp:72
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr "Presionar los botones por %1 segundo…"
+msgstr "Oprima los botones por %1 segundo…"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr "Presionar los botones por %1 segundos…"
+msgstr "Oprima los botones por %1 segundos…"
 
 #: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Keep running in the background when the window is closed"
@@ -2943,7 +2944,7 @@ msgstr "Letras"
 msgid "Lyrics from %1"
 msgstr "Letra de %1"
 
-#: core/song.cpp:331 ../bin/src/ui_transcodersettingspage.h:175
+#: core/song.cpp:343 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2955,11 +2956,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:329
+#: core/song.cpp:341
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:330
+#: core/song.cpp:342
 msgid "MPC"
 msgstr "MPC"
 
@@ -3230,7 +3231,7 @@ msgstr "Siguiente"
 msgid "Next track"
 msgstr "Pista siguiente"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 msgid "Next week"
 msgstr "Próxima semana"
 
@@ -3329,19 +3330,19 @@ msgstr "En reproducción"
 msgid "OSD Preview"
 msgstr "Previsualización del OSD"
 
-#: core/song.cpp:332
+#: core/song.cpp:344
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:335
+#: core/song.cpp:347
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:333
+#: core/song.cpp:345
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:334 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:346 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3596,7 +3597,7 @@ msgstr "Tipo de lista de reproducción"
 
 #: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:237
 msgid "Playlists"
-msgstr "Listas repr."
+msgstr "Listas rep."
 
 #: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
@@ -4449,7 +4450,7 @@ msgstr "Información de la canción"
 
 #: ui/mainwindow.cpp:241
 msgid "Song info"
-msgstr "Info. canción"
+msgstr "Inf. canción"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
@@ -4568,7 +4569,7 @@ msgstr "Detener la reproducción después de la pista actual"
 msgid "Stopped"
 msgstr "Detenido"
 
-#: core/song.cpp:341
+#: core/song.cpp:353
 msgid "Stream"
 msgstr "Transmisión"
 
@@ -4601,7 +4602,7 @@ msgstr "Exitoso"
 #: transcoder/transcoder.cpp:200
 #, qt-format
 msgid "Successfully written %1"
-msgstr "%1 se ha escrito con éxito"
+msgstr "%1 se ha escrito correctamente"
 
 #: ui/trackselectiondialog.cpp:171
 msgid "Suggested tags"
@@ -4695,7 +4696,7 @@ msgstr "La carpeta %1 no es válida"
 #: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "La lista de reproducción «%1» estaba vacía o no se pudo cargar."
+msgstr "La lista de reproducción «%1» está vacía o no se pudo cargar."
 
 #: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
@@ -4844,7 +4845,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Para iniciar la radio de Grooveshark, debe primero escuchar algunas canciones de Grooveshark."
 
-#: core/utilities.cpp:125 core/utilities.cpp:141
+#: core/utilities.cpp:126 core/utilities.cpp:142
 msgid "Today"
 msgstr "Hoy"
 
@@ -4868,7 +4869,7 @@ msgstr "Activar o desactivar scrobbling"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Cambiar visibilidad del OSD estético"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 msgid "Tomorrow"
 msgstr "Mañana"
 
@@ -4918,7 +4919,7 @@ msgstr "Convirtiendo %1 archivos usando %2 procesos"
 msgid "Transcoding options"
 msgstr "Opciones de conversión"
 
-#: core/song.cpp:338
+#: core/song.cpp:350
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4957,9 +4958,9 @@ msgstr "Banda ultraancha (UWB)"
 #: internet/magnatunedownloaddialog.cpp:144
 #, qt-format
 msgid "Unable to download %1 (%2)"
-msgstr "Imposible descargar %1 (%2)"
+msgstr "No se puede descargar %1 (%2)"
 
-#: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: core/song.cpp:357 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
@@ -5165,7 +5166,7 @@ msgstr "Detección de actividad de voz"
 #: widgets/osd.cpp:180
 #, qt-format
 msgid "Volume %1%"
-msgstr "Volumen %1%"
+msgstr "Volumen al %1%"
 
 #: ../bin/src/ui_transcodersettingspage.h:176
 msgid "Vorbis"
@@ -5184,7 +5185,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisarme antes de cerrar una pestaña de lista de reproducción"
 
-#: core/song.cpp:337
+#: core/song.cpp:349
 msgid "Wav"
 msgstr "Wav"
 
@@ -5264,7 +5265,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:327
+#: core/song.cpp:339
 msgid "Windows Media audio"
 msgstr "Audio de Windows Media"
 
@@ -5306,7 +5307,7 @@ msgstr "Año–álbum"
 msgid "Years"
 msgstr "Años"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 msgid "Yesterday"
 msgstr "Ayer"
 
@@ -5404,7 +5405,7 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr "Necesita ejecutar Preferencias del sistema y activar \"<span style=\"font-style: italic;\">Activar acceso para dispositivos de asistencia</span>\" para utilizar los atajos de teclado globales en Clementine."
+msgstr "Necesita ejecutar Preferencias del sistema y activar «<span style=\"font-style: italic;\">Activar acceso para dispositivos de asistencia</span>» para utilizar los atajos de teclado globales en Clementine."
 
 #: ../bin/src/ui_behavioursettingspage.h:200
 msgid "You will need to restart Clementine if you change the language."
@@ -5439,7 +5440,7 @@ msgstr "Sus flujos de radio"
 #: songinfo/lastfmtrackinfoprovider.cpp:88
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr "Sus scrobbles: %1"
+msgstr "Sus envíos: %1"
 
 #: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."

@@ -6,12 +6,13 @@
 # Adolfo Jayme Barrientos <fitoschido@ubuntu.com>, 2012-2013
 # Adolfo Jayme Barrientos <fitoschido@ubuntu.com>, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# davidsansome <me@davidsansome.com>, 2013
 # Roger Pueyo Centelles <transifex@rogerpueyo.com>, 2011-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-09-09 01:17+0000\n"
+"PO-Revision-Date: 2013-10-27 05:55+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -69,12 +70,12 @@ msgstr " cançons"
 msgid "%1 albums"
 msgstr "%1 àlbums"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dies"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr "fa %1 dies"
@@ -133,7 +134,7 @@ msgstr "%1 mòdul Wiimotedev"
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 other listeners"
-msgstr "%L1 altres oients"
+msgstr "%L1 oients més"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:92
 #, qt-format
@@ -248,7 +249,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 msgid "1 day"
 msgstr "1 dia"
 
@@ -352,7 +353,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:336
+#: core/song.cpp:348
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -711,7 +712,7 @@ msgstr "Necessitareu un connector addicional per usar Spotify en el Clementine. 
 
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
-msgstr "S’ha produït un error en carregar la base de dades d’iTunes"
+msgstr "S’ha produït un error en carregar la base de dades de l’iTunes"
 
 #: ui/edittagdialog.cpp:663
 #, qt-format
@@ -784,7 +785,7 @@ msgstr "Artista"
 
 #: ui/mainwindow.cpp:242
 msgid "Artist info"
-msgstr "Inf. artista"
+msgstr "Inf. artista"
 
 #: internet/lastfmservice.cpp:208
 msgid "Artist radio"
@@ -865,7 +866,7 @@ msgstr "Imatge de fons"
 msgid "Background opacity"
 msgstr "Opacitat del fons"
 
-#: core/database.cpp:734
+#: core/database.cpp:749
 msgid "Backing up database"
 msgstr "S’està fent una còpia de seguretat de la base de dades"
 
@@ -924,7 +925,7 @@ msgstr "Tipus de bloc"
 
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
-msgstr "Quantitat de desenfoqui"
+msgstr "Quantitat de difuminació"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Body"
@@ -960,7 +961,7 @@ msgstr "Però aquests orígens estan desactivats:"
 msgid "Buttons"
 msgstr "Botons"
 
-#: core/song.cpp:339
+#: core/song.cpp:351
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1049,7 +1050,7 @@ msgstr "Clàssica"
 
 #: ../bin/src/ui_podcastsettingspage.h:243
 msgid "Cleaning up"
-msgstr "S‘està netejant"
+msgstr "S’està netejant"
 
 #: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
@@ -1110,7 +1111,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr "Clementine pot sincronitzar la vostra llista de subscripcions amb vostres altres ordinadors i aplicacions de podcasts. <a href=\"https://gpodder.net/register/\">Crea un compte</a>."
+msgstr "Clementine pot sincronitzar la vostra llista de subscripcions amb els vostres altres ordinadors i aplicacions de podcasts. <a href=\"https://gpodder.net/register/\">Creeu un compte</a>."
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
@@ -1498,12 +1499,12 @@ msgstr "Camí del DBus"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:688
+#: core/database.cpp:703
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
-msgstr "S’ha detectat un dany en la base de dades. Consulteu https://code.google.com/p/clementine-player/wiki/DatabaseCorruption per obtenir instruccions per recuperar la vostra base de dades"
+msgstr "S’ha detectat un dany en la base de dades. Consulteu https://code.google.com/p/clementine-player/wiki/DatabaseCorruption per obtenir instruccions per recuperar la base de dades"
 
 #: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
@@ -2212,7 +2213,7 @@ msgstr "Finalitzat"
 msgid "First level"
 msgstr "Primer nivell"
 
-#: core/song.cpp:328
+#: core/song.cpp:340
 msgid "Flac"
 msgstr "FLAC"
 
@@ -2299,7 +2300,7 @@ msgstr "Aguts complets"
 msgid "GStreamer audio engine"
 msgstr "Motor d’àudio GStreamer"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:131
 msgid "General"
 msgstr "General"
 
@@ -2457,7 +2458,7 @@ msgstr "Alta (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
-msgstr "Alta (1024 × 1024)"
+msgstr "Alta (1024 × 1024)"
 
 #: internet/subsonicsettingspage.cpp:112
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2509,12 +2510,12 @@ msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "In %1 days"
 msgstr "D’aquí a %1 dies"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:150
 #, qt-format
 msgid "In %1 weeks"
 msgstr "D’aquí a %1 setmanes"
@@ -2578,7 +2579,7 @@ msgstr "Insereix…"
 msgid "Installed"
 msgstr "Instal·lat"
 
-#: core/database.cpp:673
+#: core/database.cpp:688
 msgid "Integrity check"
 msgstr "Comprovació d’integritat"
 
@@ -2586,7 +2587,7 @@ msgstr "Comprovació d’integritat"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:153
 msgid "Internet providers"
 msgstr "Proveïdors d’Internet"
 
@@ -2771,7 +2772,7 @@ msgstr "Cançons menys preferides"
 
 #: ../bin/src/ui_playbacksettingspage.h:326
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "Deixeu-ho buit per assignar el valor predeterminat. Exemples: «/dev/dsp», «front»,…"
+msgstr "Deixeu-ho buit per assignar el valor predeterminat. Exemples: «/dev/dsp», «front», …"
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
@@ -2914,7 +2915,7 @@ msgstr "Baixa (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
-msgstr "Baixa (256 × 256)"
+msgstr "Baixa (256 × 256)"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
@@ -2924,12 +2925,12 @@ msgstr "Perfil de baixa complexitat (LC)"
 msgid "Lyrics"
 msgstr "Llletres"
 
-#: songinfo/ultimatelyricsprovider.cpp:136
+#: songinfo/ultimatelyricsprovider.cpp:139
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Lletres des de %1"
 
-#: core/song.cpp:331 ../bin/src/ui_transcodersettingspage.h:175
+#: core/song.cpp:343 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2941,11 +2942,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:329
+#: core/song.cpp:341
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:330
+#: core/song.cpp:342
 msgid "MPC"
 msgstr "MPC"
 
@@ -3018,7 +3019,7 @@ msgstr "Mitja (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
-msgstr "Mitja (512 × 512)"
+msgstr "Mitja (512 × 512)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:156
 msgid "Membership type"
@@ -3216,7 +3217,7 @@ msgstr "Següent"
 msgid "Next track"
 msgstr "Pista següent"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 msgid "Next week"
 msgstr "La setmana vinent"
 
@@ -3297,7 +3298,7 @@ msgstr "No heu iniciat la sessió"
 
 #: devices/deviceview.cpp:111
 msgid "Not mounted - double click to mount"
-msgstr "No s’ha muntat – feu doble clic per muntar-ho"
+msgstr "No s’ha muntat, feu doble clic per muntar-ho"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Notification type"
@@ -3315,19 +3316,19 @@ msgstr "Ara en reproducció"
 msgid "OSD Preview"
 msgstr "Vista prèvia OSD"
 
-#: core/song.cpp:332
+#: core/song.cpp:344
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:335
+#: core/song.cpp:347
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:333
+#: core/song.cpp:345
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:334 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:346 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3671,7 +3672,7 @@ msgstr "Pulsa una tecla"
 #: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
-msgstr "Pressionar una combinació de tecles per utilitzar el %1..."
+msgstr "Premeu una combinació de tecles per utilitzar amb %1…"
 
 #: ../bin/src/ui_notificationssettingspage.h:451
 msgid "Pretty OSD options"
@@ -3861,7 +3862,7 @@ msgstr "Suprimeix de la llista de reproducció"
 msgid "Remove playlist"
 msgstr "Esborra la llista de reproducció"
 
-#: playlist/playlistlistcontainer.cpp:310
+#: playlist/playlistlistcontainer.cpp:314
 msgid "Remove playlists"
 msgstr "Suprimeix llestes de reproducció"
 
@@ -4233,7 +4234,7 @@ msgstr "Drecera"
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
-msgstr "Drecera per «%1»"
+msgstr "Drecera per a «%1»"
 
 #: wiimotedev/wiimotesettingspage.cpp:124
 #, qt-format
@@ -4339,7 +4340,7 @@ msgstr "Mostrar la icona a la safata"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr "Mostra quina orígens estan activats i desactivats"
+msgstr "Mostra quins orígens estan activats i desactivats"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -4435,7 +4436,7 @@ msgstr "Informació de la cançó"
 
 #: ui/mainwindow.cpp:241
 msgid "Song info"
-msgstr "Inf. cançó"
+msgstr "Inf. cançó"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
@@ -4519,7 +4520,7 @@ msgstr "Comenceu a escriure quelcom al quadre de cerca de dalt per omplir-ne la 
 #: transcoder/transcoder.cpp:405
 #, qt-format
 msgid "Starting %1"
-msgstr "Començarà %1"
+msgstr "S’està començant %1"
 
 #: internet/magnatunedownloaddialog.cpp:120
 msgid "Starting..."
@@ -4554,7 +4555,7 @@ msgstr "Atura la reproducció després de la pista actual"
 msgid "Stopped"
 msgstr "Aturat"
 
-#: core/song.cpp:341
+#: core/song.cpp:353
 msgid "Stream"
 msgstr "Flux de dades"
 
@@ -4562,11 +4563,11 @@ msgstr "Flux de dades"
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr "Per fer «streaming» des d’un servidor de Subsonic es requereix una llicència de servidor vàlida, una vegada transcorreguts 30 dies."
+msgstr "Per la transmissió de dades des d’un servidor de Subsonic es requereix una llicència de servidor vàlida, una vegada que transcorrin 30 dies."
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
-msgstr "Membresía para streaming"
+msgstr "Membresía per transmetre dades"
 
 #: internet/groovesharkservice.cpp:629
 msgid "Subscribed playlists"
@@ -4606,11 +4607,11 @@ msgstr "Molt alta (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:120
 msgid "Super high (2048x2048)"
-msgstr "Molt alta (2048 × 2048)"
+msgstr "Molt alta (2048×2048)"
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
-msgstr "Formats suportats"
+msgstr "Formats compatibles"
 
 #: ../bin/src/ui_librarysettingspage.h:201
 msgid "Synchronize statistics to files now"
@@ -4705,7 +4706,7 @@ msgstr "Ha acabat el període de prova del servidor de Subsonic. Fareu una donac
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "La versió de Clementine a la que us acabeu d’actualitzar necessita tornar a analitzar tota la col·lecció degut a que incorpora les següents característiques noves:"
+msgstr "La versió de Clementine a la que us acabeu d’actualitzar necessita tornar a analitzar tota la col·lecció perquè incorpora les següents funcions noves:"
 
 #: library/libraryview.cpp:529
 msgid "There are other songs in this album"
@@ -4740,7 +4741,7 @@ msgstr "S’han produït problemes en suprimir algunes cançons. No s’han pogu
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr "S’eliminaran aquests fitxers del dispositiu, esteu segur que voleu continuar?"
+msgstr "Se suprimiran aquests fitxers del dispositiu, esteu segur que voleu continuar?"
 
 #: library/libraryview.cpp:609 ui/mainwindow.cpp:1906 widgets/fileview.cpp:188
 msgid ""
@@ -4776,11 +4777,11 @@ msgstr "Aquest àlbum no està disponible en el format demanat"
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "Aquest dispositiu ha de connectar-se i obrir-se abans que Clementine pugui veure amb quins formats de fitxer és compatible."
+msgstr "Aquest dispositiu ha de connectar-se i obrir-se abans que el Clementine pugui veure quins formats de fitxers admet."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
-msgstr "Aquest dispositiu és compatible amb els següents formats d’fitxer:"
+msgstr "Aquest dispositiu és compatible amb els següents formats de fitxers:"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:574
 msgid "This device will not work properly"
@@ -4789,7 +4790,7 @@ msgstr "Aquest dispositiu no funcionarà correctament"
 #: devices/devicemanager.cpp:567
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr "Aquest és un dispositiu MTP, però heu compilat el Clementine sense suport libmtp"
+msgstr "Aquest és un dispositiu MTP, però s’ha compilat el Clementine sense compatibilitat amb libmtp."
 
 #: devices/devicemanager.cpp:575
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
@@ -4812,7 +4813,7 @@ msgstr "Aquest flux es sol per als subscriptors que paguen"
 #: devices/devicemanager.cpp:587
 #, qt-format
 msgid "This type of device is not supported: %1"
-msgstr "Aquest tipus de dispositiu no esta suportat: %1"
+msgstr "Aquest tipus de dispositiu no és compatible: %1"
 
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
@@ -4830,7 +4831,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Per iniciar la ràdio de Grooveshark, hauríeu de reproduir abans unes quantes cançons de Grooveshark"
 
-#: core/utilities.cpp:125 core/utilities.cpp:141
+#: core/utilities.cpp:126 core/utilities.cpp:142
 msgid "Today"
 msgstr "Avui"
 
@@ -4848,13 +4849,13 @@ msgstr "Commuta l’estat de la cua"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "Toggle scrobbling"
-msgstr "Commuta el scrobbling"
+msgstr "Commuta el «scrobbling»"
 
 #: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Canvia la visibilitat del OSD estètic"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 msgid "Tomorrow"
 msgstr "Demà"
 
@@ -4904,7 +4905,7 @@ msgstr "S’estan convertint %1 fitxers emprant %2 fils"
 msgid "Transcoding options"
 msgstr "Opcions de conversió"
 
-#: core/song.cpp:338
+#: core/song.cpp:350
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4945,7 +4946,7 @@ msgstr "Banda ultra ampla (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "No es pot baixar %1 (%2)"
 
-#: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: core/song.cpp:357 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
@@ -5092,7 +5093,7 @@ msgstr "Usat"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L’usuari %1 no té un compte Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:145
 msgid "User interface"
 msgstr "Interfície d’usuari"
 
@@ -5170,7 +5171,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisa’m abans de tancar una pestanya de llista de reproducció"
 
-#: core/song.cpp:337
+#: core/song.cpp:349
 msgid "Wav"
 msgstr "Wav"
 
@@ -5250,7 +5251,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:327
+#: core/song.cpp:339
 msgid "Windows Media audio"
 msgstr "Audio Windows Media"
 
@@ -5292,7 +5293,7 @@ msgstr "Any - Àlbum"
 msgid "Years"
 msgstr "Anys"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 msgid "Yesterday"
 msgstr "Ahir"
 
@@ -5300,7 +5301,7 @@ msgstr "Ahir"
 msgid "You are about to download the following albums"
 msgstr "Sou a punt de baixar els següents àlbums"
 
-#: playlist/playlistlistcontainer.cpp:311
+#: playlist/playlistlistcontainer.cpp:315
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
@@ -5400,7 +5401,7 @@ msgstr "Si canvieu l'idioma haureu de reiniciar el Clementine."
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
-msgstr "No podreu reproduir estacions de radi de Last.fm, tret que sigueu un subscriptor."
+msgstr "No podreu reproduir estacions de ràdio del Last.fm, tret que sigueu un subscriptor."
 
 #: ../bin/src/ui_networkremotesettingspage.h:200
 msgid "Your IP address:"
@@ -5524,9 +5525,9 @@ msgstr "més gran que"
 msgid "in the last"
 msgstr "en el últims"
 
-#: playlist/playlistview.cpp:206 ui/edittagdialog.cpp:460
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62
+#: internet/spotifysettingspage.cpp:62 playlist/playlistview.cpp:206
+#: ui/edittagdialog.cpp:460
 msgid "kbps"
 msgstr "kbps"
 

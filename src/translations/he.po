@@ -70,12 +70,12 @@ msgstr " שירים"
 msgid "%1 albums"
 msgstr "%1 אלבומים"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 #, qt-format
 msgid "%1 days"
 msgstr "%1 ימים"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr "לפני %1 ימים"
@@ -249,7 +249,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr ""
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 msgid "1 day"
 msgstr "יום אחד"
 
@@ -353,7 +353,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:336
+#: core/song.cpp:348
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -866,7 +866,7 @@ msgstr "תמונת רקע"
 msgid "Background opacity"
 msgstr "שקיפות הרקע"
 
-#: core/database.cpp:735
+#: core/database.cpp:749
 msgid "Backing up database"
 msgstr "מסד הנתונים מגובה"
 
@@ -961,7 +961,7 @@ msgstr "מקורות אלו מושבתים:"
 msgid "Buttons"
 msgstr "לחצנים"
 
-#: core/song.cpp:339
+#: core/song.cpp:351
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1499,7 +1499,7 @@ msgstr "נתיב DBus"
 msgid "Dance"
 msgstr "דאנס"
 
-#: core/database.cpp:689
+#: core/database.cpp:703
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2213,7 +2213,7 @@ msgstr "סיום"
 msgid "First level"
 msgstr "רמה ראשונה"
 
-#: core/song.cpp:328
+#: core/song.cpp:340
 msgid "Flac"
 msgstr "Flac"
 
@@ -2510,12 +2510,12 @@ msgstr "קובצי תמונה (‎*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.p
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "קובצי תמונה (‎*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "In %1 days"
 msgstr "בעוד %1 ימים"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:150
 #, qt-format
 msgid "In %1 weeks"
 msgstr "בעוד %1 שבועות"
@@ -2579,7 +2579,7 @@ msgstr "הוספה..."
 msgid "Installed"
 msgstr "הותקן"
 
-#: core/database.cpp:674
+#: core/database.cpp:688
 msgid "Integrity check"
 msgstr "בדיקת שלמות"
 
@@ -2930,7 +2930,7 @@ msgstr "מילות השיר"
 msgid "Lyrics from %1"
 msgstr "מילות השיר מתוך %1"
 
-#: core/song.cpp:331 ../bin/src/ui_transcodersettingspage.h:175
+#: core/song.cpp:343 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2942,11 +2942,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:329
+#: core/song.cpp:341
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:330
+#: core/song.cpp:342
 msgid "MPC"
 msgstr "MPC"
 
@@ -3217,7 +3217,7 @@ msgstr "הבא"
 msgid "Next track"
 msgstr "הרצועה הבאה"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 msgid "Next week"
 msgstr "השבוע הבא"
 
@@ -3316,19 +3316,19 @@ msgstr "מתנגן עכשיו"
 msgid "OSD Preview"
 msgstr "תצוגה מקדימה של חיווי המסך"
 
-#: core/song.cpp:332
+#: core/song.cpp:344
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:335
+#: core/song.cpp:347
 msgid "Ogg Opus"
 msgstr ""
 
-#: core/song.cpp:333
+#: core/song.cpp:345
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:334 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:346 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -4555,7 +4555,7 @@ msgstr "הפסקת הנגינה אחרי הרצועה הנוכחית"
 msgid "Stopped"
 msgstr "בעצירה"
 
-#: core/song.cpp:341
+#: core/song.cpp:353
 msgid "Stream"
 msgstr "מדיה זורמת"
 
@@ -4831,7 +4831,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "על מנת להאזין לרדיו Grooveshark, עליך להאזין קודם למספר שירים אחרים מ־Grooveshark"
 
-#: core/utilities.cpp:125 core/utilities.cpp:141
+#: core/utilities.cpp:126 core/utilities.cpp:142
 msgid "Today"
 msgstr "היום"
 
@@ -4855,7 +4855,7 @@ msgstr "החלפה לscrobbling"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "הפעלה או כיבוי נראות ההצגה היפה על המסך"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 msgid "Tomorrow"
 msgstr "מחר"
 
@@ -4905,7 +4905,7 @@ msgstr "התחלת המרת %1 קבצים בעזרת %2 תהליכים"
 msgid "Transcoding options"
 msgstr "אפשרויות המרה"
 
-#: core/song.cpp:338
+#: core/song.cpp:350
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4946,7 +4946,7 @@ msgstr "Ultra wide band (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "לא ניתן להוריד %1 (%2)"
 
-#: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: core/song.cpp:357 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
@@ -5171,7 +5171,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
-#: core/song.cpp:337
+#: core/song.cpp:349
 msgid "Wav"
 msgstr "Wav"
 
@@ -5251,7 +5251,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:327
+#: core/song.cpp:339
 msgid "Windows Media audio"
 msgstr "שמע של Windows Media"
 
@@ -5293,7 +5293,7 @@ msgstr "שינוי - אלבום"
 msgid "Years"
 msgstr "שנים"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 msgid "Yesterday"
 msgstr "אתמול"
 

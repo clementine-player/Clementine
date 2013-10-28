@@ -8,6 +8,7 @@
 # Kacper . <mattrick@jabster.pl>, 2012
 # Michał G <saperr.pmi@gmail.com>, 2011
 # Michał Ziąbkowski <mziab@o2.pl>, 2010
+# M T <michtrz@gmail.com>, 2013
 # Patryk Wychowaniec <patryk1303@gmail.com>, 2011
 # Patryk Wychowaniec <>, 2012
 # predek <predek00@gmail.com>, 2013
@@ -15,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-22 12:02+0000\n"
-"Last-Translator: predek <predek00@gmail.com>\n"
+"PO-Revision-Date: 2013-09-24 12:31+0000\n"
+"Last-Translator: M T <michtrz@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/clementine/language/pl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -73,12 +74,12 @@ msgstr " utwory"
 msgid "%1 albums"
 msgstr "%1 albumów"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dni"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 dni temu"
@@ -252,7 +253,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 msgid "1 day"
 msgstr "1 dzień"
 
@@ -356,7 +357,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:336
+#: core/song.cpp:348
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -869,7 +870,7 @@ msgstr "Obrazek tła"
 msgid "Background opacity"
 msgstr "Nieprzezroczystość tła"
 
-#: core/database.cpp:734
+#: core/database.cpp:749
 msgid "Backing up database"
 msgstr "Tworzenie kopii zapasowej bazy danych"
 
@@ -964,7 +965,7 @@ msgstr "Lecz ominie poniższe źródła:"
 msgid "Buttons"
 msgstr "Przyciski"
 
-#: core/song.cpp:339
+#: core/song.cpp:351
 msgid "CDDA"
 msgstr "CD-Audio"
 
@@ -1502,7 +1503,7 @@ msgstr "Ścieżka DBus"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:688
+#: core/database.cpp:703
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2216,7 +2217,7 @@ msgstr "Koniec"
 msgid "First level"
 msgstr "Pierwszy poziom"
 
-#: core/song.cpp:328
+#: core/song.cpp:340
 msgid "Flac"
 msgstr "Flac"
 
@@ -2303,7 +2304,7 @@ msgstr "Pełne soprany"
 msgid "GStreamer audio engine"
 msgstr "Silnik dźwiękowy GStreamer"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:131
 msgid "General"
 msgstr "Ogólne"
 
@@ -2513,12 +2514,12 @@ msgstr "Obrazy (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrazy (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "In %1 days"
 msgstr "W ciągu następnych %1 dni"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:150
 #, qt-format
 msgid "In %1 weeks"
 msgstr "W ciągu następnych %1 tygodni"
@@ -2582,7 +2583,7 @@ msgstr "Wstaw..."
 msgid "Installed"
 msgstr "Zainstalowano"
 
-#: core/database.cpp:673
+#: core/database.cpp:688
 msgid "Integrity check"
 msgstr "Sprawdzanie integralności"
 
@@ -2590,7 +2591,7 @@ msgstr "Sprawdzanie integralności"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:153
 msgid "Internet providers"
 msgstr "Usługi internetowe"
 
@@ -2928,12 +2929,12 @@ msgstr "Profil niskiej złożoności (LC)"
 msgid "Lyrics"
 msgstr "Teksty utworów"
 
-#: songinfo/ultimatelyricsprovider.cpp:136
+#: songinfo/ultimatelyricsprovider.cpp:139
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Tekst z %1"
 
-#: core/song.cpp:331 ../bin/src/ui_transcodersettingspage.h:175
+#: core/song.cpp:343 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2945,11 +2946,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:329
+#: core/song.cpp:341
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:330
+#: core/song.cpp:342
 msgid "MPC"
 msgstr "MPC"
 
@@ -3220,7 +3221,7 @@ msgstr "Dalej"
 msgid "Next track"
 msgstr "Następny utwór"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:148
 msgid "Next week"
 msgstr "W następnym tygodniu"
 
@@ -3319,19 +3320,19 @@ msgstr "Teraz odtwarzane"
 msgid "OSD Preview"
 msgstr "Podgląd OSD"
 
-#: core/song.cpp:332
+#: core/song.cpp:344
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:335
+#: core/song.cpp:347
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:333
+#: core/song.cpp:345
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:334 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:346 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3865,7 +3866,7 @@ msgstr "Usuń z listy odtwarzania"
 msgid "Remove playlist"
 msgstr "Usuń listę odtwrzania"
 
-#: playlist/playlistlistcontainer.cpp:310
+#: playlist/playlistlistcontainer.cpp:314
 msgid "Remove playlists"
 msgstr "Usuń listy odtwarzania"
 
@@ -4558,7 +4559,7 @@ msgstr "Zatrzymaj odtwarzanie po obecnej ścieżce"
 msgid "Stopped"
 msgstr "Zatrzymano"
 
-#: core/song.cpp:341
+#: core/song.cpp:353
 msgid "Stream"
 msgstr "Strumień"
 
@@ -4807,7 +4808,7 @@ msgstr "Pierwszy raz podłączyłeś to urządzenie. Clementine przeskanuje je t
 
 #: playlist/playlisttabbar.cpp:186
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "Opcja ta może zostać zmieniona w preferencjach \"Trybu\""
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -4834,7 +4835,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Aby utworzyć radio w serwisie Grooveshark, musisz najpierw przesłuchać kilka piosenek"
 
-#: core/utilities.cpp:125 core/utilities.cpp:141
+#: core/utilities.cpp:126 core/utilities.cpp:142
 msgid "Today"
 msgstr "Dzisiaj"
 
@@ -4858,7 +4859,7 @@ msgstr "Włącz scroblowanie"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Przełącz wyświetlanie ładnego menu ekranowego"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:144
 msgid "Tomorrow"
 msgstr "Jutro"
 
@@ -4908,7 +4909,7 @@ msgstr "Transkodowanie %1 plików za pomocą %2 wątków"
 msgid "Transcoding options"
 msgstr "Opcje konwersji"
 
-#: core/song.cpp:338
+#: core/song.cpp:350
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4949,7 +4950,7 @@ msgstr "Bardzo szerokie pasmo (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Nie udało się pobrać %1 (%2)"
 
-#: core/song.cpp:345 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: core/song.cpp:357 library/librarymodel.cpp:308 library/librarymodel.cpp:313
 #: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
@@ -5096,7 +5097,7 @@ msgstr "Użyto"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Użytkownik %1 nie posiada konta Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:145
 msgid "User interface"
 msgstr "Interfejs użytkownika"
 
@@ -5174,7 +5175,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Ostrzeż mnie kiedy zamknę zakładkę listy odtwarzania"
 
-#: core/song.cpp:337
+#: core/song.cpp:349
 msgid "Wav"
 msgstr "Wav"
 
@@ -5254,7 +5255,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:327
+#: core/song.cpp:339
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -5296,7 +5297,7 @@ msgstr "Rok - Album"
 msgid "Years"
 msgstr "Lat"
 
-#: core/utilities.cpp:127
+#: core/utilities.cpp:128
 msgid "Yesterday"
 msgstr "Wczoraj"
 
@@ -5304,7 +5305,7 @@ msgstr "Wczoraj"
 msgid "You are about to download the following albums"
 msgstr "Zaraz pobierzesz następujące albumy"
 
-#: playlist/playlistlistcontainer.cpp:311
+#: playlist/playlistlistcontainer.cpp:315
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
@@ -5528,9 +5529,9 @@ msgstr "większy niż"
 msgid "in the last"
 msgstr "w ostatnich"
 
-#: playlist/playlistview.cpp:206 ui/edittagdialog.cpp:460
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62
+#: internet/spotifysettingspage.cpp:62 playlist/playlistview.cpp:206
+#: ui/edittagdialog.cpp:460
 msgid "kbps"
 msgstr "kbps"
 
