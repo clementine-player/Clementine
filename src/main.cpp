@@ -55,11 +55,13 @@
 #include "qtsinglecoreapplication.h"
 
 #include <QDir>
+#include <QFont>
 #include <QLibraryInfo>
 #include <QNetworkProxyFactory>
 #include <QSslSocket>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSysInfo>
 #include <QTextCodec>
 #include <QTranslator>
 #include <QtConcurrentRun>
@@ -248,6 +250,12 @@ int main(int argc, char *argv[]) {
   // Do Mac specific startup to get media keys working.
   // This must go before QApplication initialisation.
   mac::MacMain();
+
+  if (!QSysInfo::MacintoshVersion > QSysInfo::MV_10_8) {
+    // Work around 10.9 issue.
+    // https://bugreports.qt-project.org/browse/QTBUG-32789
+    QFont::insertSubstitution(".Lucida Grande UI", "Lucida Grande");
+  }
 #endif
 
   QCoreApplication::setApplicationName("Clementine");
