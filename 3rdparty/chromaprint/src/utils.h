@@ -28,6 +28,7 @@
 #include <math.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <algorithm>
 #include <limits>
 #include <iterator>
 
