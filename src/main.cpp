@@ -239,7 +239,7 @@ int main(int argc, char *argv[]) {
   // This must go before QApplication initialisation.
   mac::MacMain();
 
-  if (!QSysInfo::MacintoshVersion > QSysInfo::MV_10_8) {
+  if (QSysInfo::MacintoshVersion > QSysInfo::MV_10_8) {
     // Work around 10.9 issue.
     // https://bugreports.qt-project.org/browse/QTBUG-32789
     QFont::insertSubstitution(".Lucida Grande UI", "Lucida Grande");
