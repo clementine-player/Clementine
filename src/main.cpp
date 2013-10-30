@@ -263,6 +263,14 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("clementine-player.org");
 
+  // This makes us show up nicely in gnome-volume-control
+#if !GLIB_CHECK_VERSION(2, 36, 0)
+  g_type_init();  // Deprecated in glib 2.36.0
+#endif
+  g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
+
+  RegisterMetaTypes();
+
   CommandlineOptions options(argc, argv);
 
   {
@@ -289,15 +297,6 @@ int main(int argc, char *argv[]) {
       // Couldn't send the message so start anyway
     }
   }
-
-  // This makes us show up nicely in gnome-volume-control
-#if !GLIB_CHECK_VERSION(2, 36, 0)
-  g_type_init();  // Deprecated in glib 2.36.0
-#endif
-  g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
-
-  RegisterMetaTypes();
-
 
 #ifdef Q_OS_DARWIN
   // Must happen after QCoreApplication::setOrganizationName().
