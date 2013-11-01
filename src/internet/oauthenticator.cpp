@@ -36,7 +36,7 @@ void OAuthenticator::StartAuthorisation(
   if (redirect_style_ == RedirectStyle::REMOTE) {
     const int port = server->url().port();
     redirect_url = QUrl(
-        QString("http://data.clementine-player.org/skydrive?port=%1").arg(port));
+        QString("https://clementine-data.appspot.com/skydrive?port=%1").arg(port));
   } else {
     redirect_url = server->url();
   }
