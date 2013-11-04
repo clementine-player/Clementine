@@ -6,6 +6,7 @@
 # TraN <chris.sv88@gmail.com>, 2013
 # Daniel Sandman <revoltism@gmail.com>, 2012
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# kristian <kristianm24@gmail.com>, 2013
 # kristian <kristianm24@gmail.com>, 2012
 # Rasmus Eneman <pie.or.paj@gmail.com>, 2013
 # Rasmus Eneman <pie.or.paj@gmail.com>, 2012
@@ -15,9 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-08-10 19:08+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-11-03 12:26+0000\n"
+"Last-Translator: kristian <kristianm24@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +31,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\nDu kan göra spellistor till favoriter genom att klicka på stjärnikonen intill ett namn på en spellista\n\nFavoriserade spellistor kommer att sparas här"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -243,7 +243,7 @@ msgstr "... och alla Amarok-bidragsgivare"
 
 #: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
@@ -286,7 +286,7 @@ msgstr "<a href=\"http://www.di.fm/premium/\">Uppgradera till Premium nu</a>"
 msgid ""
 "<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
 "your password</a>"
-msgstr ""
+msgstr "<a href=\"https://one.ubuntu.com/auth/login\">Skapa ett nytt konto eller återställ ditt lösenord</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -296,7 +296,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Om omarkerad, kommer Clementine att försöka spara dina betyg och annan statistik endast till en separat databas och dina filer lämnas oändrade.</p><p>Om markerad,kommer statistiken att sparas både i databasen och i filerna varje gång den ändras.</p><p>Notera att detta kanske inte fungerar för alla format för att ett standardsystem för att göra detta inte existerar, andra musikspelare kan kanske inte läsa dom.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -304,7 +304,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Detta kommer att skriva låtbetyg och statistik till filetiketter i hela ditt musikbibliotek.</p><p>Detta är inte nödvändigt om &quot;Spara betyg och statistik i filetiketter&quot; alltid är aktiverat.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -432,11 +432,11 @@ msgstr "Lägg till fil"
 
 #: ../bin/src/ui_mainwindow.h:723
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Lägg till fil till transkodaren"
 
 #: ../bin/src/ui_mainwindow.h:721
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Lägg till fil(er) till transkodaren"
 
 #: ../bin/src/ui_mainwindow.h:681
 msgid "Add file..."
@@ -484,7 +484,7 @@ msgstr "Lägg till etikett för låtens artist"
 
 #: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Add song auto score"
-msgstr ""
+msgstr "Lägg till poäng för musik automatiskt"
 
 #: ../bin/src/ui_notificationssettingspage.h:392
 msgid "Add song composer tag"
@@ -504,7 +504,7 @@ msgstr "Lägg till etikett för genre"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "Lägg till låtgrupperings etikett"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
@@ -512,7 +512,7 @@ msgstr "Lägg till etikett för låtens längd"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
-msgstr ""
+msgstr "Lägg till artist etikett"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song play count"
@@ -520,7 +520,7 @@ msgstr "Lägg till antal uppspelningar"
 
 #: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song rating"
-msgstr ""
+msgstr "Lägg till låtbetyg"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song skip count"
@@ -681,11 +681,11 @@ msgstr "Alla spår"
 
 #: ../bin/src/ui_networkremotesettingspage.h:194
 msgid "Allow a client to download music from this computer."
-msgstr ""
+msgstr "Tillåt en klient att ladda ner musik från denna dator."
 
 #: ../bin/src/ui_networkremotesettingspage.h:196
 msgid "Allow downloads"
-msgstr ""
+msgstr "Tillåt nedladdningar"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
@@ -775,7 +775,7 @@ msgstr "Är du säker på att du vill återställa den här låtens statistik?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "Är du säker på att du vill skriva låtstatistik till låtfilerna på alla låtar i ditt musikbibliotek?"
 
 #: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -929,7 +929,7 @@ msgstr "Blocktyp"
 
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
-msgstr ""
+msgstr "Grumlighet"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Body"
@@ -1150,7 +1150,7 @@ msgstr "Klicka här för att lägga till musik"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "Klicka här för att favorisera denna spellista så att den sparas och förblir tillgänglig från \"Spellistor\" på den vänstra sidbalken"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1277,12 +1277,12 @@ msgstr "Ansluter till Spotify"
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "Uppkoppling vägrad av servern, Kontrollera serverns URL. Exempel:http://localhost:4040/"
 
 #: internet/subsonicsettingspage.cpp:117
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Uppkopplingen har avbrutits, kontrollera serverns URL. Exempel: http://localhost:4040/"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:692
 msgid "Console"
@@ -1465,7 +1465,7 @@ msgstr "Ctrl+Shift+O"
 
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Ctrl+Shift+T"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Ctrl+T"
@@ -1699,7 +1699,7 @@ msgstr "Konvertera inte någon musik"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
-msgstr ""
+msgstr "Skriv ej över"
 
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1756,7 +1756,7 @@ msgstr "Nedladdning köad"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr ""
+msgstr "Ladda ner Android appen"
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -1893,7 +1893,7 @@ msgstr "Ange en URL för att ladda ner ett omslag från Internet:"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
-msgstr ""
+msgstr "Ange ett filnamn för exporterade omslag (utan ändelse):"
 
 #: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
@@ -2029,7 +2029,7 @@ msgstr "Förutom mellan spår på samma album eller i samma CUE-fil"
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
-msgstr ""
+msgstr "Existerande omslag"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
@@ -2042,28 +2042,28 @@ msgstr "Går ut den %1"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Export Covers"
-msgstr ""
+msgstr "Exportera Omslag"
 
 #: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
-msgstr ""
+msgstr "Exportera omslag"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
-msgstr ""
+msgstr "Exportera nedladdade omslag"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
-msgstr ""
+msgstr "Exportera inbäddade omslag"
 
 #: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
 msgid "Export finished"
-msgstr ""
+msgstr "Exporteringen är färdig"
 
 #: ui/albumcovermanager.cpp:786
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "Exporterat %1 omslag av %2 (%3 överhoppade)"
 
 #: ../bin/src/ui_mainwindow.h:678
 msgid "F1"
@@ -2097,7 +2097,7 @@ msgstr "FLAC"
 
 #: ../bin/src/ui_playbacksettingspage.h:306
 msgid "Fade out on pause / fade in on resume"
-msgstr ""
+msgstr "Tona ut vid pausning / tona in vid återupptagning"
 
 #: ../bin/src/ui_playbacksettingspage.h:300
 msgid "Fade out when stopping a track"
@@ -2157,7 +2157,7 @@ msgstr "Hämtning klar"
 
 #: internet/subsonicservice.cpp:241
 msgid "Fetching Subsonic library"
-msgstr ""
+msgstr "Hämtar bibliotek från Subsonic"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
@@ -2423,7 +2423,7 @@ msgstr "Gruppera efter genre/artist/album"
 #: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
-msgstr ""
+msgstr "Gruppera"
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
@@ -2432,7 +2432,7 @@ msgstr "HTML-sida inehöll inget RSS-flöde"
 #: internet/subsonicsettingspage.cpp:135
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr ""
+msgstr "HTTP 3xx statuskod mottagen utan URL, verifiera serverkonfiguration."
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2466,7 +2466,7 @@ msgstr "Hög (1024x1024)"
 
 #: internet/subsonicsettingspage.cpp:112
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "Hittade ingen värd, Kontrollera serverns URL. Exempel: http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
@@ -2544,15 +2544,15 @@ msgstr "Inkludera alla spår"
 
 #: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
-msgstr ""
+msgstr "Okompatibelt Subsonic REST protokoll. Klienten måste uppgraderas."
 
 #: internet/subsonicsettingspage.cpp:94
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
-msgstr ""
+msgstr "Okompatibel Subsonic REST protokollsversion. Servern måste uppgraderas."
 
 #: internet/subsonicsettingspage.cpp:127
 msgid "Incomplete configuration, please ensure all fields are populated."
-msgstr ""
+msgstr "Ej komplett konfiguration, var vänlig och kontrollera att alla fält är ifyllda."
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -2780,7 +2780,7 @@ msgstr "Lämna tomt för standardvärdet. Exempel: \"/dev/dsp\", \"front\", etc.
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
-msgstr ""
+msgstr "Vänster"
 
 #: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -3171,7 +3171,7 @@ msgstr "Nätverksproxy"
 
 #: ../bin/src/ui_networkremotesettingspage.h:177
 msgid "Network Remote"
-msgstr ""
+msgstr "Fjärrstyr över nätverk"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:487
 msgid "Never"
@@ -3235,7 +3235,7 @@ msgstr "Ingen bagrundsbild"
 
 #: ui/albumcovermanager.cpp:778
 msgid "No covers to export."
-msgstr ""
+msgstr "Inga omslag att exportera."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
@@ -3347,7 +3347,7 @@ msgstr "Acceptera endast anslutningar från klienter inom dessa ip ranges:⏎ 10
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "Tillåt endast uppkopplingar från det lokala nätverket"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3442,11 +3442,11 @@ msgstr "Övriga flaggor"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
-msgstr ""
+msgstr "Utgång"
 
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
-msgstr ""
+msgstr "Utgångsenhet"
 
 #: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
@@ -3454,11 +3454,11 @@ msgstr "Utdataalternativ"
 
 #: ../bin/src/ui_playbacksettingspage.h:320
 msgid "Output plugin"
-msgstr ""
+msgstr "Utgångsinstick"
 
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
-msgstr ""
+msgstr "Skriv över alla"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
@@ -3466,7 +3466,7 @@ msgstr "Skriv över befintliga filer"
 
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
-msgstr ""
+msgstr "Skriv endast över mindre"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3505,11 +3505,11 @@ msgstr "Pausad"
 #: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
-msgstr ""
+msgstr "Artist"
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
-msgstr ""
+msgstr "Pixel"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
@@ -3589,7 +3589,7 @@ msgstr "Spellistetyp"
 msgid "Playlists"
 msgstr "Spellistor"
 
-#: ../data/oauthsuccess.html:36
+#: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
 msgstr "Var god och stäng din webbläsare och återgå till Clementine."
 
@@ -3794,7 +3794,7 @@ msgstr "Verkligen avbryta?"
 
 #: internet/subsonicsettingspage.cpp:131
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "Gränsen för omdirigering överskriden, verifiera serverkonfiguration."
 
 #: internet/groovesharkservice.cpp:549
 msgid "Refresh"
@@ -3864,11 +3864,11 @@ msgstr "Ta bort från spellistan"
 
 #: playlist/playlisttabbar.cpp:174
 msgid "Remove playlist"
-msgstr ""
+msgstr "Ta bort spellista"
 
 #: playlist/playlistlistcontainer.cpp:314
 msgid "Remove playlists"
-msgstr ""
+msgstr "Ta bort spellistor"
 
 #: internet/groovesharkservice.cpp:1539
 msgid "Removing songs from My Music"
@@ -3935,7 +3935,7 @@ msgstr "Replay Gain"
 
 #: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Replay Gain läge"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3943,7 +3943,7 @@ msgstr "Fyll i igen"
 
 #: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "Require authentication code"
-msgstr ""
+msgstr "Kräv autentiseringskod"
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
@@ -3956,7 +3956,7 @@ msgstr "Återställ låtstatistik"
 #: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "Starta om spåret, eller spela föregående spår om inom 8 sekunder sedan start."
 
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
@@ -3978,13 +3978,13 @@ msgstr "Hämta favoritlåtar från Grooveshark"
 msgid "Retrieving Grooveshark playlists"
 msgstr "Hämta spellistor från Grooveshark"
 
-#: ../data/oauthsuccess.html:3
+#: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
 msgstr "Återgå till Clementine"
 
 #: ../bin/src/ui_equalizer.h:174
 msgid "Right"
-msgstr ""
+msgstr "Höger"
 
 #: ui/equalizer.cpp:127
 msgid "Rock"
@@ -4002,7 +4002,7 @@ msgstr "SOCKS proxy"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "SSL handslaget misslyckades, verifiera serverkonfigurationen. SSLv3 alternativet nedan kan lösa vissa problem."
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
@@ -4050,11 +4050,11 @@ msgstr "Spara förinställning"
 
 #: ../bin/src/ui_librarysettingspage.h:193
 msgid "Save ratings in file tags when possible"
-msgstr ""
+msgstr "Spara betyg i låtetiketter om möjligt"
 
 #: ../bin/src/ui_librarysettingspage.h:197
 msgid "Save statistics in file tags when possible"
-msgstr ""
+msgstr "Spara statistik i filetiketter om möjligt"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
@@ -4062,7 +4062,7 @@ msgstr "Spara denna ström i Internet-filken"
 
 #: library/library.cpp:164
 msgid "Saving songs statistics into songs files"
-msgstr ""
+msgstr "Spara låtstatistik till låtfiler"
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4074,7 +4074,7 @@ msgstr "Skalbar samplingsfrekvensprofil (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
-msgstr ""
+msgstr "Skalnings storlek"
 
 #: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
@@ -4203,11 +4203,11 @@ msgstr "Serienummer"
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
-msgstr ""
+msgstr "Server URL"
 
 #: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
-msgstr ""
+msgstr "Serverdetaljer"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4228,7 +4228,7 @@ msgstr "Ställ in värde för alla valda spår..."
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -4388,11 +4388,11 @@ msgstr "Liknande artister"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
-msgstr ""
+msgstr "Storlek"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
-msgstr ""
+msgstr "Storlek:"
 
 #: ui/equalizer.cpp:129
 msgid "Ska"
@@ -4567,7 +4567,7 @@ msgstr "Ström"
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr ""
+msgstr "För att streama från Subsonics servrar krävs en giltig licens efter en testperiod på 30 dagar. "
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
@@ -4585,7 +4585,7 @@ msgstr "Prenumeranter"
 msgid "Subsonic"
 msgstr "Subsonic"
 
-#: ../data/oauthsuccess.html:34
+#: ../data/oauthsuccess.html:36
 msgid "Success!"
 msgstr "Lyckades!"
 
@@ -4619,7 +4619,7 @@ msgstr "Stödda format"
 
 #: ../bin/src/ui_librarysettingspage.h:201
 msgid "Synchronize statistics to files now"
-msgstr ""
+msgstr "Synkronisera statistik till filerna nu"
 
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
@@ -4704,7 +4704,7 @@ msgstr "Webbplatsen du söker är inte en bild!"
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr ""
+msgstr "Testperioden för Subsonics server är över. Var vänlig och donera för att få en licensnyckel. Besök subsonic.org  för mer detaljer."
 
 #: ui/mainwindow.cpp:2083
 msgid ""
@@ -4751,7 +4751,7 @@ msgstr "Filerna kommer att tas bort från enheten, är du säker på att du vill
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Dessa filer tas permanent bort från disken, är du säker på att du vill fortsätta?"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
@@ -4808,7 +4808,7 @@ msgstr "Detta är första gången du ansluter denna enhet. Clementine kommer nu 
 
 #: playlist/playlisttabbar.cpp:186
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "Detta alternativ kan ändras i \"Beteende\"  i Inställningar"
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -4873,7 +4873,7 @@ msgstr "Topp låtar"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
-msgstr ""
+msgstr "Album totalt:"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
@@ -4935,11 +4935,11 @@ msgstr "Ubuntu One"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:132
 msgid "Ubuntu One password"
-msgstr ""
+msgstr "Ubuntu One lösenord"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:130
 msgid "Ubuntu One username"
-msgstr ""
+msgstr "Ubuntu One användarnamn"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -5034,7 +5034,7 @@ msgstr "Använd Replay Gain-metadata om det finns tillgängligt"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 msgid "Use SSLv3"
-msgstr ""
+msgstr "Använd SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5050,7 +5050,7 @@ msgstr "Använd ett eget meddelande för notifieringar"
 
 #: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Use a network remote control"
-msgstr ""
+msgstr "Använd en nätverks fjärrkontroll"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -5173,7 +5173,7 @@ msgstr "WMA"
 
 #: playlist/playlisttabbar.cpp:182 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "Varna mig när jag stänger en spellistsflik"
 
 #: core/song.cpp:349
 msgid "Wav"
@@ -5261,7 +5261,7 @@ msgstr "Windows Media-ljud"
 
 #: ../bin/src/ui_albumcovermanager.h:222
 msgid "Without cover:"
-msgstr ""
+msgstr "Utan omslag:"
 
 #: library/libraryview.cpp:530
 msgid ""
@@ -5275,7 +5275,7 @@ msgstr "Vill du köra en fullständig omsökning nu?"
 
 #: library/librarysettingspage.cpp:151
 msgid "Write all songs statistics into songs' files"
-msgstr ""
+msgstr "Skriv all låtstatistik till låtfilerna"
 
 #: internet/subsonicsettingspage.cpp:86
 msgid "Wrong username or password."
@@ -5309,13 +5309,13 @@ msgstr "Du är på väg att hämta de följande albumen"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "Du är på väg att ta bort %1 spellista från dina favoriter, är du säker?"
 
 #: playlist/playlisttabbar.cpp:177
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "Du är på väg att ta bort en spellista som inte är en av dina favoriserade spellistor:denna spellista kommer att förstöras (denna åtgärd kan inte ångras).\nÄr du säker på att du vill fortsätta?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5578,7 +5578,7 @@ msgstr "alternativ"
 
 #: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "eller scanna QR koden!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
