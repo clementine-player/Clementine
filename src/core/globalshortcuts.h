@@ -18,21 +18,22 @@
 #ifndef GLOBALSHORTCUTS_H
 #define GLOBALSHORTCUTS_H
 
-#include <QObject>
 #include <QKeySequence>
 #include <QMap>
 #include <QSettings>
+#include <QWidget>
 
 class QAction;
+class QShortcut;
 
 class GlobalShortcutBackend;
 class QSignalMapper;
 
-class GlobalShortcuts : public QObject {
+class GlobalShortcuts : public QWidget {
   Q_OBJECT
 
 public:
-  GlobalShortcuts(QObject* parent = 0);
+  GlobalShortcuts(QWidget* parent = 0);
 
   static const char* kSettingsGroup;
 
@@ -40,6 +41,7 @@ public:
     QString id;
     QKeySequence default_key;
     QAction* action;
+    QShortcut* shortcut;
   };
 
   QMap<QString, Shortcut> shortcuts() const { return shortcuts_; }

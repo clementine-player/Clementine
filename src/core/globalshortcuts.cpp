@@ -22,9 +22,10 @@
 
 #include "mac_startup.h"
 
-#include <QtDebug>
 #include <QAction>
+#include <QShortcut>
 #include <QSignalMapper>
+#include <QtDebug>
 
 #ifdef QT_DBUS_LIB
 #  include <QtDBus>
@@ -32,8 +33,8 @@
 
 const char* GlobalShortcuts::kSettingsGroup = "Shortcuts";
 
-GlobalShortcuts::GlobalShortcuts(QObject *parent)
-  : QObject(parent),
+GlobalShortcuts::GlobalShortcuts(QWidget *parent)
+  : QWidget(parent),
     gnome_backend_(NULL),
     system_backend_(NULL),
     use_gnome_(false),
@@ -101,10 +102,16 @@ GlobalShortcuts::Shortcut GlobalShortcuts::AddShortcut(const QString& id, const 
                                                        const QKeySequence& default_key) {
   Shortcut shortcut;
   shortcut.action = new QAction(name, this);
-  shortcut.action->setShortcut(QKeySequence::fromString(
-      settings_.value(id, default_key.toString()).toString()));
+  QKeySequence key_sequence = QKeySequence::fromString(
+      settings_.value(id, default_key.toString()).toString());
+  shortcut.action->setShortcut(key_sequence);
   shortcut.id = id;
   shortcut.default_key = default_key;
+
+  // Create application wide QShortcut to hide keyevents mapped to global
+  // shortcuts from widgets.
+  shortcut.shortcut = new QShortcut(key_sequence, this);
+  shortcut.shortcut->setContext(Qt::ApplicationShortcut);
 
   shortcuts_[id] = shortcut;
 

@@ -29,6 +29,7 @@
 #include <QProcess>
 #include <QPushButton>
 #include <QSettings>
+#include <QShortcut>
 #include <QtDebug>
 
 GlobalShortcutsSettingsPage::GlobalShortcutsSettingsPage(SettingsDialog* dialog)
@@ -116,6 +117,7 @@ void GlobalShortcutsSettingsPage::SetShortcut(const QString& id, const QKeySeque
 void GlobalShortcutsSettingsPage::Save() {
   foreach (const Shortcut& s, shortcuts_.values()) {
     s.s.action->setShortcut(s.key);
+    s.s.shortcut->setKey(s.key);
     settings_.setValue(s.s.id, s.key.toString());
   }
 
