@@ -543,6 +543,10 @@ void Mpris2::ActivatePlaylist(const QDBusObjectPath& playlist_id) {
   if (!ok) {
     return;
   }
+  if (!app_->playlist_manager()->IsPlaylistOpen(p)) {
+    qLog(Error) << "Playlist isn't opened!";
+    return;
+  }
   app_->playlist_manager()->SetActivePlaylist(p);
   app_->player()->Next();
 }
