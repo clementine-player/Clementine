@@ -171,17 +171,6 @@ QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
 
 bool Playlist::column_is_editable(Playlist::Column column) {
   switch (column) {
-    case Column_Title:
-    case Column_Artist:
-    case Column_Album:
-    case Column_AlbumArtist:
-    case Column_Composer:
-    case Column_Performer:
-    case Column_Grouping:
-    case Column_Track:
-    case Column_Disc:
-    case Column_Year:
-    case Column_Genre:
     case Column_Score:
     case Column_Comment:
       return true;
