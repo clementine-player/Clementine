@@ -202,10 +202,12 @@ private slots:
   void ShuffleModeChanged();
   void RepeatModeChanged();
   void PlaylistChanged(Playlist* playlist);
+  void PlaylistCollectionChanged(Playlist* playlist);
 
 private:
   void EmitNotification(const QString& name);
   void EmitNotification(const QString& name, const QVariant& val);
+  void EmitNotification(const QString& name, const QVariant& val, const QString& mprisEntity);
 
   QString PlaybackStatus(Engine::State state) const;
 
