@@ -52,7 +52,7 @@ if(NOT USE_SYSTEM_GMOCK)
   set(GMOCK_LIBRARIES gmock gtest)
 endif(NOT USE_SYSTEM_GMOCK)
 
-add_definitions(-DGTEST_USE_OWN_TR1_TUPLE=0)
+add_definitions(-DGTEST_USE_OWN_TR1_TUPLE=1)
 
 set(TESTUTILS-SOURCES
   mock_networkaccessmanager.cpp
