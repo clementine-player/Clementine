@@ -581,9 +581,7 @@ void Mpris2::PlaylistChanged(Playlist* playlist) {
   emit PlaylistChanged(mpris_playlist);
 }
 
-void Mpris2::PlaylistCollectionChanged(Playlist* playlist){
-  
-  qLog(Debug) << "Playlist collection changed (" << playlist->id() << ")";
+void Mpris2::PlaylistCollectionChanged(Playlist* playlist) {
   EmitNotification("PlaylistCount", "", "org.mpris.MediaPlayer2.Playlists");
 }
 
