@@ -158,12 +158,12 @@ class CallbackClosure : public ClosureBase {
   CallbackClosure(
       QObject* sender,
       const char* signal,
-      std::function<void()> callback);
+      boost::function<void()> callback);
 
   virtual void Invoke();
 
  private:
-  std::function<void()> callback_;
+  boost::function<void()> callback_;
 };
 
 }  // namespace _detail
@@ -194,13 +194,13 @@ _detail::ClosureBase* NewClosure(
 _detail::ClosureBase* NewClosure(
     QObject* sender,
     const char* signal,
-    std::function<void()> callback);
+    boost::function<void()> callback);
 
 template <typename... Args>
 _detail::ClosureBase* NewClosure(
     QObject* sender,
     const char* signal,
-    std::function<void(Args...)> callback,
+    boost::function<void(Args...)> callback,
     const Args&... args) {
   return NewClosure(sender, signal, boost::bind(callback, args...));
 }
