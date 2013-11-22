@@ -25,6 +25,8 @@
 
 #include <boost/scope_exit.hpp>
 
+#include <sqlite3.h>
+
 #include <QCoreApplication>
 #include <QDir>
 #include <QLibrary>
@@ -85,25 +87,6 @@ struct sqlite3_tokenizer_cursor {
   sqlite3_tokenizer *pTokenizer;       /* Tokenizer for this cursor. */
   /* Tokenizer implementations will typically add additional fields */
 };
-
-int (*Database::_sqlite3_value_type) (sqlite3_value*) = NULL;
-sqlite_int64 (*Database::_sqlite3_value_int64) (sqlite3_value*) = NULL;
-const uchar* (*Database::_sqlite3_value_text) (sqlite3_value*) = NULL;
-void (*Database::_sqlite3_result_int64) (sqlite3_context*, sqlite_int64) = NULL;
-void* (*Database::_sqlite3_user_data) (sqlite3_context*) = NULL;
-
-int (*Database::_sqlite3_open) (const char*, sqlite3**) = NULL;
-const char* (*Database::_sqlite3_errmsg) (sqlite3*) = NULL;
-int (*Database::_sqlite3_close) (sqlite3*) = NULL;
-sqlite3_backup* (*Database::_sqlite3_backup_init) (
-    sqlite3*, const char*, sqlite3*, const char*) = NULL;
-int (*Database::_sqlite3_backup_step) (sqlite3_backup*, int) = NULL;
-int (*Database::_sqlite3_backup_finish) (sqlite3_backup*) = NULL;
-int (*Database::_sqlite3_backup_pagecount) (sqlite3_backup*) = NULL;
-int (*Database::_sqlite3_backup_remaining) (sqlite3_backup*) = NULL;
-
-bool Database::sStaticInitDone = false;
-bool Database::sLoadedSqliteSymbols = false;
 
 sqlite3_tokenizer_module* Database::sFTSTokenizer = NULL;
 
@@ -218,11 +201,6 @@ int Database::FTSNext(
 
 
 void Database::StaticInit() {
-  if (sStaticInitDone) {
-    return;
-  }
-  sStaticInitDone = true;
-
   sFTSTokenizer = new sqlite3_tokenizer_module;
   sFTSTokenizer->iVersion = 0;
   sFTSTokenizer->xCreate = &Database::FTSCreate;
@@ -230,86 +208,7 @@ void Database::StaticInit() {
   sFTSTokenizer->xOpen = &Database::FTSOpen;
   sFTSTokenizer->xNext = &Database::FTSNext;
   sFTSTokenizer->xClose = &Database::FTSClose;
-
-#ifdef HAVE_STATIC_SQLITE
-  // We statically link libqsqlite.dll on windows and mac so these symbols are already
-  // available
-  _sqlite3_value_type = sqlite3_value_type;
-  _sqlite3_value_int64 = sqlite3_value_int64;
-  _sqlite3_value_text = sqlite3_value_text;
-  _sqlite3_result_int64 = sqlite3_result_int64;
-  _sqlite3_user_data = sqlite3_user_data;
-
-  _sqlite3_open = sqlite3_open;
-  _sqlite3_errmsg = sqlite3_errmsg;
-  _sqlite3_close = sqlite3_close;
-  _sqlite3_backup_init = sqlite3_backup_init;
-  _sqlite3_backup_step = sqlite3_backup_step;
-  _sqlite3_backup_finish = sqlite3_backup_finish;
-  _sqlite3_backup_pagecount = sqlite3_backup_pagecount;
-  _sqlite3_backup_remaining = sqlite3_backup_remaining;
-
-  sLoadedSqliteSymbols = true;
   return;
-#else // HAVE_STATIC_SQLITE
-  QString plugin_path = QLibraryInfo::location(QLibraryInfo::PluginsPath) +
-                        "/sqldrivers/libqsqlite";
-
-  QLibrary library(plugin_path);
-  if (!library.load()) {
-    qLog(Error) << "QLibrary::load() failed for " << plugin_path;
-    return;
-  }
-
-  _sqlite3_value_type = reinterpret_cast<int (*) (sqlite3_value*)>(
-      library.resolve("sqlite3_value_type"));
-  _sqlite3_value_int64 = reinterpret_cast<sqlite_int64 (*) (sqlite3_value*)>(
-      library.resolve("sqlite3_value_int64"));
-  _sqlite3_value_text = reinterpret_cast<const uchar* (*) (sqlite3_value*)>(
-      library.resolve("sqlite3_value_text"));
-  _sqlite3_result_int64 = reinterpret_cast<void (*) (sqlite3_context*, sqlite_int64)>(
-      library.resolve("sqlite3_result_int64"));
-  _sqlite3_user_data = reinterpret_cast<void* (*) (sqlite3_context*)>(
-      library.resolve("sqlite3_user_data"));
-
-  _sqlite3_open = reinterpret_cast<int (*) (const char*, sqlite3**)>(
-      library.resolve("sqlite3_open"));
-  _sqlite3_errmsg = reinterpret_cast<const char* (*) (sqlite3*)>(
-      library.resolve("sqlite3_errmsg"));
-  _sqlite3_close = reinterpret_cast<int (*) (sqlite3*)>(
-      library.resolve("sqlite3_close"));
-  _sqlite3_backup_init = reinterpret_cast<
-      sqlite3_backup* (*) (sqlite3*, const char*, sqlite3*, const char*)>(
-          library.resolve("sqlite3_backup_init"));
-  _sqlite3_backup_step = reinterpret_cast<int (*) (sqlite3_backup*, int)>(
-      library.resolve("sqlite3_backup_step"));
-  _sqlite3_backup_finish = reinterpret_cast<int (*) (sqlite3_backup*)>(
-      library.resolve("sqlite3_backup_finish"));
-  _sqlite3_backup_pagecount = reinterpret_cast<int (*) (sqlite3_backup*)>(
-      library.resolve("sqlite3_backup_pagecount"));
-  _sqlite3_backup_remaining = reinterpret_cast<int (*) (sqlite3_backup*)>(
-      library.resolve("sqlite3_backup_remaining"));
-
-  if (!_sqlite3_value_type ||
-      !_sqlite3_value_int64 ||
-      !_sqlite3_value_text ||
-      !_sqlite3_result_int64 ||
-      !_sqlite3_user_data ||
-      !_sqlite3_open ||
-      !_sqlite3_errmsg ||
-      !_sqlite3_close ||
-      !_sqlite3_backup_init ||
-      !_sqlite3_backup_step ||
-      !_sqlite3_backup_finish ||
-      !_sqlite3_backup_pagecount ||
-      !_sqlite3_backup_remaining) {
-    qLog(Fatal) << "Couldn't resolve sqlite symbols.  Please compile "
-                   "Clementine with -DSTATIC_SQLITE=ON.";
-    sLoadedSqliteSymbols = false;
-  } else {
-    sLoadedSqliteSymbols = true;
-  }
-#endif
 }
 
 Database::Database(Application* app, QObject* parent, const QString& database_name)
@@ -727,10 +626,10 @@ void Database::DoBackup() {
 }
 
 bool Database::OpenDatabase(const QString& filename, sqlite3** connection) const {
-  int ret = _sqlite3_open(filename.toUtf8(), connection);
+  int ret = sqlite3_open(filename.toUtf8(), connection);
   if (ret != 0) {
     if (*connection) {
-      const char* error_message = _sqlite3_errmsg(*connection);
+      const char* error_message = sqlite3_errmsg(*connection);
       qLog(Error) << "Failed to open database for backup:"
                   << filename
                   << error_message;
@@ -753,8 +652,8 @@ void Database::BackupFile(const QString& filename) {
 
   BOOST_SCOPE_EXIT((source_connection)(dest_connection)(task_id)(app_)) {
     // Harmless to call sqlite3_close() with a NULL pointer.
-    _sqlite3_close(source_connection);
-    _sqlite3_close(dest_connection);
+    sqlite3_close(source_connection);
+    sqlite3_close(dest_connection);
     app_->task_manager()->SetTaskFinished(task_id);
   } BOOST_SCOPE_EXIT_END
 
@@ -768,26 +667,26 @@ void Database::BackupFile(const QString& filename) {
     return;
   }
 
-  sqlite3_backup* backup = _sqlite3_backup_init(
+  sqlite3_backup* backup = sqlite3_backup_init(
       dest_connection, "main",
       source_connection, "main");
   if (!backup) {
-    const char* error_message = _sqlite3_errmsg(dest_connection);
+    const char* error_message = sqlite3_errmsg(dest_connection);
     qLog(Error) << "Failed to start database backup:" << error_message;
     return;
   }
 
   int ret = SQLITE_OK;
   do {
-    ret = _sqlite3_backup_step(backup, 16);
-    const int page_count = _sqlite3_backup_pagecount(backup);
+    ret = sqlite3_backup_step(backup, 16);
+    const int page_count = sqlite3_backup_pagecount(backup);
     app_->task_manager()->SetTaskProgress(
-        task_id, page_count - _sqlite3_backup_remaining(backup), page_count);
+        task_id, page_count - sqlite3_backup_remaining(backup), page_count);
   } while (ret == SQLITE_OK);
 
   if (ret != SQLITE_DONE) {
     qLog(Error) << "Database backup failed";
   }
 
-  _sqlite3_backup_finish(backup);
+  sqlite3_backup_finish(backup);
 }

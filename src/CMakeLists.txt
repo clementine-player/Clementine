@@ -1192,6 +1192,7 @@ target_link_libraries(clementine_lib
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
+  ${SQLITE_LIBRARIES}
   z
   Qocoa
 )
@@ -1265,11 +1266,8 @@ else (APPLE)
   target_link_libraries(clementine_lib ${QXT_LIBRARIES})
 endif (APPLE)
 
-# Link against the qsqlite plugin on windows and mac
-if(HAVE_STATIC_SQLITE)
-  set(3RDPARTY_SQLITE_LIBRARY qsqlite)
-  target_link_libraries(clementine_lib qsqlite)
-endif(HAVE_STATIC_SQLITE)
+set(3RDPARTY_SQLITE_LIBRARY qsqlite)
+target_link_libraries(clementine_lib qsqlite)
 
 if (WIN32)
   target_link_libraries(clementine_lib

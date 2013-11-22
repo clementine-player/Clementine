@@ -304,31 +304,14 @@ if(ENABLE_VISUALISATIONS)
   endif(USE_SYSTEM_PROJECTM)
 endif(ENABLE_VISUALISATIONS)
 
-# We compile our own qsqlite3 by default now, because in Qt 4.7 the symbols we
-# need from it are private.
-option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
 
-set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
-if(STATIC_SQLITE)
-  message(STATUS "Building static qsqlite plugin")
-  add_subdirectory(3rdparty/qsqlite)
-  include_directories("3rdparty/qsqlite")
-else()
-  if (NOT I_HATE_MY_USERS)
-    message(FATAL_ERROR "No, really, Clementine needs sqlite to be linked "
-        "statically.  If it's not, Clementine won't be able to resolve the "
-        "functions it needs to register full text search support.  Search will "
-        "be really slow and users will be unhappy.  If you're packaging "
-        "Clementine for a distribution and you really hate your users and want "
-        "them to have a bad time please rerun cmake with -DI_HATE_MY_USERS=ON")
-  else()
-    if (NOT MY_USERS_WILL_SUFFER_BECAUSE_OF_ME)
-      message(FATAL_ERROR "So you really hate your users and you want to "
-          "create a crippled package that doesn't work properly?  Please send "
-          "an email to the devs and help us understand why.")
-    endif()
-  endif()
-endif(STATIC_SQLITE)
+# Build our copy of QSqlLiteDriver.
+# We do this because we can't guarantee that the driver shipped with Qt exposes the
+# raw sqlite3_ functions required for FTS support. This way we know that those symbols
+# exist at compile-time and that our code links to the same sqlite library as the
+# Qt driver.
+add_subdirectory(3rdparty/qsqlite)
+include_directories("3rdparty/qsqlite")
 
 # When/if upstream accepts our patches then these options can be used to link
 # to system installed qtsingleapplication instead.

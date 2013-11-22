@@ -106,10 +106,8 @@ using boost::scoped_ptr;
 #endif
 
 // Load sqlite plugin on windows and mac.
-#ifdef HAVE_STATIC_SQLITE
-# include <QtPlugin>
-  Q_IMPORT_PLUGIN(qsqlite)
-#endif
+#include <QtPlugin>
+Q_IMPORT_PLUGIN(qsqlite)
 
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& language) {
