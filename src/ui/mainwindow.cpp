@@ -1393,7 +1393,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
     ui_->action_selection_set_value->setText(tr("Set %1 to \"%2\"...")
              .arg(column_name.toLower()).arg(column_value));
-    ui_->action_edit_value->setText(tr("Edit \"%1\"...").arg(column_name));
+    ui_->action_edit_value->setText(tr("Edit tag \"%1\"...").arg(column_name));
 
     // Is it a library item?
     PlaylistItemPtr item = app_->playlist_manager()->current()->item_at(source_index.row());

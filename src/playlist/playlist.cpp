@@ -171,12 +171,17 @@ QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
 
 bool Playlist::column_is_editable(Playlist::Column column) {
   switch (column) {
-    // For a long time, we had Column_Artist, etc. here, to allow inline editing
-    // of tags. This was a pretty good idea, but now we have a dedicated tag
-    // dialog editor, I'm not sure it is very useful. It was probably faster to
-    // edit tags this way, but I'm afraid lot of people may inadvertently modify
-    // their tags because of this. Still allow inline editing of score and
-    // comment, because they sound less critical to me.
+    case Column_Title:
+    case Column_Artist:
+    case Column_Album:
+    case Column_AlbumArtist:
+    case Column_Composer:
+    case Column_Performer:
+    case Column_Grouping:
+    case Column_Track:
+    case Column_Disc:
+    case Column_Year:
+    case Column_Genre:
     case Column_Score:
     case Column_Comment:
       return true;
