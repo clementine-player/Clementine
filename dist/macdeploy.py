@@ -108,7 +108,6 @@ QT_PLUGINS = [
     'imageformats/libqjpeg.dylib',
     'imageformats/libqmng.dylib',
     'imageformats/libqsvg.dylib',
-    'imageformats/libqtiff.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH=[
     '/target/plugins',
