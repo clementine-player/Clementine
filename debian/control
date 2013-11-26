@@ -33,14 +33,15 @@ Build-Depends: debhelper (>= 7),
                libqca2-dev,
                libchromaprint-dev | libfftw3-dev,
                libfftw3-dev,
-               libsparsehash-dev
+               libsparsehash-dev,
+               libsqlite3-dev
 Standards-Version: 3.8.1
 Homepage: http://www.clementine-player.org/
 
 Package: clementine
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
-         libqt4-sql-sqlite,
+         libsqlite3-0,
          gstreamer0.10-plugins-base,
          gstreamer0.10-plugins-good,
          gstreamer0.10-alsa | gstreamer0.10-audiosink,
