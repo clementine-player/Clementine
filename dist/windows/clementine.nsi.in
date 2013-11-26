@@ -110,6 +110,9 @@ Section "Delete old files" oldfiles
   ; 1.1
   Delete "$INSTDIR\libprotobuf-lite-7.dll"
 
+  ; 1.2
+  Delete "$INSTDIR\libprotobuf-7.dll"
+
   ; mingw-w64
   Delete "$INSTDIR\avcodec-52.dll"
   Delete "$INSTDIR\avformat-52.dll"
@@ -180,7 +183,7 @@ Section "Clementine" Clementine
   File "liborc-test-0.4-0.dll"
   File "libplist.dll"
   File "libpng14-14.dll"
-  File "libprotobuf-7.dll"
+  File "libprotobuf-8.dll"
   File "libqjson.dll"
   File "libsoup-2.4-1.dll"
   File "libspeex-1.dll"
