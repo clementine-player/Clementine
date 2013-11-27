@@ -144,6 +144,7 @@ add_test_file(utilities_test.cpp false)
 add_test_file(closure_test.cpp false)
 add_test_file(concurrentrun_test.cpp false)
 add_test_file(zeroconf_test.cpp false)
+add_test_file(sqlite_test.cpp false)
 
 #if(LINUX AND HAVE_DBUS)
 #  add_test_file(mpris1_test.cpp true)
