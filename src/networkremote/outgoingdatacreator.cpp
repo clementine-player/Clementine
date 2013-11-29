@@ -628,10 +628,6 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
   if (!(song.url().scheme() == "file"))
     return;
 
-  // Calculate the number of chunks
-  int chunk_count  = qRound((song.filesize() / kFileChunkSize) + 0.5);
-  int chunk_number = 1;
-
   // Open the file
   QFile file(song.url().toLocalFile());
   file.open(QIODevice::ReadOnly);
@@ -642,6 +638,10 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
   msg.set_type(pb::remote::SONG_FILE_CHUNK);
 
   QImage null_image;
+
+  // Calculate the number of chunks
+  int chunk_count  = qRound((file.size() / kFileChunkSize) + 0.5);
+  int chunk_number = 1;
 
   while (!file.atEnd()) {
     // Read file chunk
