@@ -121,6 +121,11 @@ void ProjectMVisualisation::InitProjectM() {
   preset_model_ = new ProjectMPresetModel(this, this);
   Load();
 
+  // Start at a random preset.
+  if (projectm_->getPlaylistSize() > 0) {
+    projectm_->selectPreset(qrand() % projectm_->getPlaylistSize(), true);
+  }
+
   if (font_path.isNull()) {
     qWarning("ProjectM presets could not be found, search path was:\n  %s",
              paths.join("\n  ").toLocal8Bit().constData());
