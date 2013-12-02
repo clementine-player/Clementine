@@ -47,6 +47,7 @@ public:
   ProjectMPresetModel* preset_model() const { return preset_model_; }
 
   Mode mode() const { return mode_; }
+  int duration() const { return duration_; }
 
   // BufferConsumer
   void ConsumeBuffer(GstBuffer *buffer, int);

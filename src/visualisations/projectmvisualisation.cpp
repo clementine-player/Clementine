@@ -159,6 +159,8 @@ void ProjectMVisualisation::SetDuration(int seconds) {
 
   if (projectm_)
     projectm_->changePresetDuration(duration_);
+
+  Save();
 }
 
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
@@ -200,7 +202,9 @@ void ProjectMVisualisation::Load() {
   QSettings s;
   s.beginGroup(VisualisationContainer::kSettingsGroup);
   mode_ = Mode(s.value("mode", 0).toInt());
+  duration_ = s.value("duration", duration_).toInt();
 
+  projectm_->changePresetDuration(duration_);
   projectm_->clearPlaylist();
   switch (mode_) {
     case Random:
@@ -233,6 +237,7 @@ void ProjectMVisualisation::Save() {
   s.beginGroup(VisualisationContainer::kSettingsGroup);
   s.setValue("preset_paths", paths);
   s.setValue("mode", mode_);
+  s.setValue("duration", duration_);
 }
 
 void ProjectMVisualisation::SetMode(Mode mode) {
