@@ -62,9 +62,10 @@ private slots:
   void LyricsFetched();
 
 private:
-  void ApplyExtractRule(const Rule& rule, QString* content) const;
+  bool ApplyExtractRule(const Rule& rule, QString* content) const;
   void ApplyExcludeRule(const Rule& rule, QString* content) const;
 
+  static QString ExtractUrl(const QString& source, const Rule& rule);
   static QString ExtractXmlTag(const QString& source, const QString& tag);
   static QString Extract(const QString& source, const QString& begin, const QString& end);
   static QString ExcludeXmlTag(const QString& source, const QString& tag);
@@ -93,6 +94,7 @@ private:
 
   Song metadata_;
   int redirect_count_;
+  bool url_hop_;
 };
 
 #endif // ULTIMATELYRICSPROVIDER_H

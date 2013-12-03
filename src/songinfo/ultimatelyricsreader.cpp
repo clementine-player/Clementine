@@ -110,6 +110,8 @@ UltimateLyricsProvider::Rule UltimateLyricsReader::ParseRule(QXmlStreamReader* r
         QXmlStreamAttributes attr = reader->attributes();
         if (attr.hasAttribute("tag"))
           ret << UltimateLyricsProvider::RuleItem(attr.value("tag").toString(), QString());
+        else if (attr.hasAttribute("url"))
+          ret << UltimateLyricsProvider::RuleItem(attr.value("url").toString(), QString());
         else if (attr.hasAttribute("begin"))
           ret << UltimateLyricsProvider::RuleItem(attr.value("begin").toString(),
                                                   attr.value("end").toString());

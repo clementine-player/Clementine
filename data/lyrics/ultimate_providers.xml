@@ -17,7 +17,7 @@
     </extract>
     <extract>
       <item begin="&lt;h3&gt;&lt;a name=&quot;{track}&quot;&gt;{track}. {Title2}&lt;/a&gt;&lt;/h3&gt;&lt;br /&gt;" end="&lt;div class=&quot;thanks&quot;&gt;"/>
-      </extract>
+    </extract>
     <invalidIndicator value="The page you requested was not found on DarkLyrics.com."/>
   </provider>
   <provider name="directlyrics.com" title="{artist} - {title} lyrics" charset="iso-8859-1" url="http://www.directlyrics.com/{artist}-{title}-lyrics.html">
@@ -42,6 +42,14 @@
       <item tag="&lt;em&gt;"/>
     </exclude>
     <invalidIndicator value="Page not Found"/>
+  </provider>
+  <provider name="Encyclopaedia Metallum" title="{title Lyrics - {artist}" charset="utf-8" url="http://www.metal-archives.com/search/ajax-advanced/searching/songs/?songTitle={title}&amp;bandName={artist}&amp;ExactBandMatch=1">
+    <extract>
+      <item url="http://www.metal-archives.com/release/ajax-view-lyrics/id/{id}"/>
+      <item begin="id=\&quot;lyricsLink_" end="&quot;"/>
+    </extract>
+    <invalidIndicator value="&quot;iTotalRecords&quot;: 0"/>
+    <invalidIndicator value="lyrics not available"/>
   </provider>
   <provider name="letras.mus.br" title="" charset="iso-8859-1" url="http://letras.terra.com.br/winamp.php?musica={title}&amp;artista={artist}">
     <urlFormat replace="_@,;&amp;\/&quot;" with="_"/>
