@@ -249,7 +249,8 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   // Extract urls
   QList<QUrl> urls;
   for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
-    urls << QUrl(QString::fromStdString(*it));
+    std::string s = *it;
+    urls << QUrl(QStringFromStdString(s));
   }
 
   // Insert the urls
