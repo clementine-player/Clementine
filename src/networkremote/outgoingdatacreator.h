@@ -85,6 +85,7 @@ private:
   QTimer* track_position_timer_;
   int keep_alive_timeout_;
   QMap<RemoteClient*, QQueue<DownloadItem> > download_queue_;
+  int last_track_position_;
 
   boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
   ProviderList provider_list_;

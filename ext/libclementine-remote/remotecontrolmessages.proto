@@ -276,7 +276,7 @@ message RequestRateSong {
 
 // The message itself
 message Message {
-  optional int32 version = 1 [default=12];
+  optional int32 version = 1 [default=13];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
