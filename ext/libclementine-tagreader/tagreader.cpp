@@ -795,7 +795,7 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
     // TODO: Take into account that there might be multiple picture tags, look for
     // front cover, ...
     if (map.contains("METADATA_BLOCK_PICTURE")) {
-      QByteArray data(QByteArray::fromBase64(map["METADATA_BLOCK_PICTURE"].toString().toCString()));
+      QByteArray data(QByteArray::fromBase64(map["METADATA_BLOCK_PICTURE"].front().toCString()));
       TagLib::ByteVector tdata(data.data(), data.size());
       TagLib::FLAC::Picture p(tdata);
       return QByteArray(p.data().data(), p.data().size());
