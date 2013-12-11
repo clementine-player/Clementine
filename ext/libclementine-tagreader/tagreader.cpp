@@ -792,9 +792,15 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
     // Other than the below mentioned non-standard COVERART, METADATA_BLOCK_PICTURE
     // is the proposed tag for cover pictures.
     // (see http://wiki.xiph.org/VorbisComment#METADATA_BLOCK_PICTURE)
-    // TODO: Take into account that there might be multiple picture tags, look for
-    // front cover, ...
     if (map.contains("METADATA_BLOCK_PICTURE")) {
+      for (auto picture_tag: map["METADATA_BLOCK_PICTURE"]) {
+        QByteArray data(QByteArray::fromBase64(picture_tag.toCString()));
+        TagLib::ByteVector tdata(data.data(), data.size());
+        TagLib::FLAC::Picture p(tdata);
+        if (p.type() == TagLib::FLAC::Picture::FrontCover)
+          return QByteArray(p.data().data(), p.data().size());
+      }
+      // If there was no specific front cover, just take the first picture
       QByteArray data(QByteArray::fromBase64(map["METADATA_BLOCK_PICTURE"].front().toCString()));
       TagLib::ByteVector tdata(data.data(), data.size());
       TagLib::FLAC::Picture p(tdata);
