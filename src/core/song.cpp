@@ -508,7 +508,7 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->samplerate_ = toint(col + 14);
 
   d->directory_id_ = toint(col + 15);
-  set_url(QUrl::fromEncoded(tobytearray(col + 16)));
+  set_url(QUrl::fromEncoded(tostr(col + 16).toUtf8()));
   d->basefilename_ = QFileInfo(d->url_.toLocalFile()).fileName();
   d->mtime_ = toint(col + 17);
   d->ctime_ = toint(col + 18);
