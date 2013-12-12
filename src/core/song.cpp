@@ -485,7 +485,6 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->init_from_file_ = reliable_metadata;
 
   #define tostr(n)      (q.value(n).isNull() ? QString::null : q.value(n).toString())
-  #define tobytearray(n)(q.value(n).isNull() ? QByteArray()  : q.value(n).toByteArray())
   #define toint(n)      (q.value(n).isNull() ? -1 : q.value(n).toInt())
   #define tolonglong(n) (q.value(n).isNull() ? -1 : q.value(n).toLongLong())
   #define tofloat(n)    (q.value(n).isNull() ? -1 : q.value(n).toDouble())
@@ -508,7 +507,7 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->samplerate_ = toint(col + 14);
 
   d->directory_id_ = toint(col + 15);
-  set_url(QUrl::fromEncoded(tobytearray(col + 16)));
+  set_url(QUrl::fromEncoded(tostr(col + 16).toUtf8()));
   d->basefilename_ = QFileInfo(d->url_.toLocalFile()).fileName();
   d->mtime_ = toint(col + 17);
   d->ctime_ = toint(col + 18);
