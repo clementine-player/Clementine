@@ -1401,34 +1401,10 @@ if (APPLE)
 
   if (APPLE_DEVELOPER_ID)
     add_custom_target(
-      sign_libraries
-      COMMAND
-      codesign -f --preserve-metadata=identifier,entitlements,resource-rules,requirements -s ${APPLE_DEVELOPER_ID} ${PROJECT_BINARY_DIR}/clementine.app/Contents/Frameworks/*.dylib
-      DEPENDS clementine)
-
-    add_custom_target(
-      sign_frameworks
-      COMMAND
-      codesign -f --preserve-metadata=identifier,entitlements,resource-rules,requirements -s ${APPLE_DEVELOPER_ID} ${PROJECT_BINARY_DIR}/clementine.app/Contents/Frameworks/*.framework
-      DEPENDS clementine)
-
-    add_custom_target(
-      sign_plugins
-      COMMAND
-      codesign -f --preserve-metadata=identifier,entitlements,resource-rules,requirements -s ${APPLE_DEVELOPER_ID} ${PROJECT_BINARY_DIR}/clementine.app/Contents/PlugIns/{accessible,codecs,gstreamer,iconengines,imageformats,gio-modules}/*
-      DEPENDS clementine)
-
-    add_custom_target(
-      sign_helpers
-      COMMAND
-      codesign -f --preserve-metadata=identifier,entitlements,resource-rules,requirements -s ${APPLE_DEVELOPER_ID} ${PROJECT_BINARY_DIR}/clementine.app/Contents/PlugIns/{clementine-spotifyblob,clementine-tagreader,gst-plugin-scanner}
-      DEPENDS clementine)
-
-    add_custom_target(
       sign
       COMMAND
-      codesign --preserve-metadata=identifier,entitlements,resource-rules,requirements -s ${APPLE_DEVELOPER_ID} -fv ${PROJECT_BINARY_DIR}/clementine.app
-      DEPENDS sign_libraries sign_frameworks sign_plugins sign_helpers
+      codesign --deep --preserve-metadata=identifier,entitlements,resource-rules,requirements -s ${APPLE_DEVELOPER_ID} -fv ${PROJECT_BINARY_DIR}/clementine.app
+      DEPENDS clementine
       VERBATIM
     )
   endif()
