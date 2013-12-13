@@ -878,23 +878,25 @@ bool TagReader::ReadCloudFile(const QUrl& download_url,
         stream,
         true,
         TagLib::AudioProperties::Accurate));
-  } else if (mime_type == "application/ogg" ||
-             mime_type == "audio/ogg") {
-    tag.reset(new TagLib::Ogg::Vorbis::File(
-        stream,
-        true,
-        TagLib::AudioProperties::Accurate));
-  }
+  } 
 #ifdef TAGLIB_HAS_OPUS
-  else if (mime_type == "application/opus" ||
-           mime_type == "audio/opus") {
+  else if ((mime_type == "application/opus" ||
+            mime_type == "audio/opus" ||
+            mime_type == "application/ogg" ||
+            mime_type == "audio/ogg") && title.endsWith(".opus")) {
     tag.reset(new TagLib::Ogg::Opus::File(
         stream,
         true,
         TagLib::AudioProperties::Accurate));
   }
 #endif
-  else if (mime_type == "application/x-flac" ||
+  else if (mime_type == "application/ogg" ||
+           mime_type == "audio/ogg") {
+    tag.reset(new TagLib::Ogg::Vorbis::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "application/x-flac" ||
            mime_type == "audio/flac" ||
            mime_type == "audio/x-flac") {
     tag.reset(new TagLib::FLAC::File(
