@@ -190,6 +190,9 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
           case GroupBy_YearAlbum:
             key = PrettyYearAlbum(qMax(0, song.year()), song.album()); break;
           case GroupBy_FileType:    key = song.filetype(); break;
+	  case GroupBy_Bitrate:     
+	    qLog(Error) << "GroupBy_Bitrate"; 
+	    break;
           case GroupBy_None:
             qLog(Error) << "GroupBy_None";
             break;
@@ -280,6 +283,9 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
   case GroupBy_YearAlbum:
     return SortTextForYear(item->metadata.year());
 
+  case GroupBy_Bitrate:
+    return QString();
+
   case GroupBy_None:
     return QString();
   }
@@ -312,6 +318,10 @@ QString LibraryModel::DividerDisplayText(GroupBy type, const QString& key) const
     if (key == "0000")
       return tr("Unknown");
     return QString::number(key.toInt()); // To remove leading 0s
+
+  case GroupBy_Bitrate:
+    // fallthrough
+    ;
 
   case GroupBy_None:
     // fallthrough
@@ -739,6 +749,9 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
   case GroupBy_AlbumArtist:
     q->SetColumnSpec("DISTINCT effective_albumartist");
     break;
+  case GroupBy_Bitrate:
+    q->SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
+    break;
   case GroupBy_None:
     q->SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
     break;
@@ -795,6 +808,9 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q)
     break;
   case GroupBy_FileType:
     q->AddWhere("filetype", item->metadata.filetype());
+    break;
+  case GroupBy_Bitrate:
+    qLog(Error) << "Unknown GroupBy type" << type << "used in filter";
     break;
   case GroupBy_None:
     qLog(Error) << "Unknown GroupBy type" << type << "used in filter";
@@ -863,6 +879,13 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
     item->key = item->metadata.TextForFiletype();
     break;
 
+  case GroupBy_Bitrate:
+    item->metadata.InitFromQuery(row, true);
+    item->key = item->metadata.title();
+    item->display_text = item->metadata.TitleWithCompilationArtist();
+    item->sort_text = SortTextForSong(item->metadata);
+    break;
+
   case GroupBy_None:
     item->metadata.InitFromQuery(row, true);
     item->key = item->metadata.title();
@@ -916,6 +939,13 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
   case GroupBy_FileType:
     item->metadata.set_filetype(s.filetype());
     item->key = s.TextForFiletype();
+    break;
+
+  case GroupBy_Bitrate:
+    item->metadata = s;
+    item->key = s.title();
+    item->display_text = s.TitleWithCompilationArtist();
+    item->sort_text = SortTextForSong(s);
     break;
 
   case GroupBy_None:
