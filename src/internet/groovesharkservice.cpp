@@ -1651,10 +1651,11 @@ QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
   QVariantList::iterator it;
   for (it = errors.begin(); it != errors.end(); ++it) {
     QVariantMap error = (*it).toMap();
-    qLog(Error) << "Grooveshark error: " << error["message"].toString();
+    qLog(Error) << "Grooveshark error: (" << error["code"].toInt() <<") " << error["message"].toString();
     switch (error["code"].toInt()) {
       case 100: // User auth required
       case 102: // User premium required
+      case 300: // Session required
         // These errors can happen if session_id is obsolete (e.g. we haven't use
         // it for more than two weeks): force the user to login again
         Logout(); 
