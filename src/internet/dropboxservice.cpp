@@ -136,6 +136,12 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
       continue;
     }
 
+    // Workaround: Since Dropbox doesn't recognize Opus files and thus treats them
+    // as application/octet-stream, we overwrite the mime type here
+    if (metadata["mime_type"].toString() == "application/octet-stream" && 
+        url.toString().endsWith(".opus"))
+      metadata["mime_type"] = GuessMimeTypeForFile(url.toString());
+
     if (ShouldIndexFile(url, metadata["mime_type"].toString())) {
       QNetworkReply* reply = FetchContentUrl(url);
       NewClosure(reply, SIGNAL(finished()),
