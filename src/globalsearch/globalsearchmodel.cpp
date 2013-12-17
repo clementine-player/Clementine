@@ -145,8 +145,14 @@ QStandardItem* GlobalSearchModel::BuildContainers(
     sort_text = display_text;
     break;
 
+  case LibraryModel::GroupBy_Bitrate:
+    display_text = QString(s.bitrate(), 1);
+    sort_text = display_text;
+    break;
+
   case LibraryModel::GroupBy_None:
     return parent;
+
   }
 
   // Find a container for this level
