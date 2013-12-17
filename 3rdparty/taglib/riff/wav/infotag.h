@@ -120,6 +120,18 @@ namespace TagLib {
 
       virtual bool isEmpty() const;
 
+      /*!
+       * Returns a copy of the internal fields of the tag.  The returned map directly 
+       * reflects the contents of the "INFO" chunk.
+       *
+       * \note Modifying this map does not affect the tag's internal data.
+       * Use setFieldText() and removeField() instead.
+       *
+       * \see setFieldText()
+       * \see removeField()
+       */
+      FieldListMap fieldListMap() const;
+
       /*
        * Gets the value of the field with the ID \a id.
        */

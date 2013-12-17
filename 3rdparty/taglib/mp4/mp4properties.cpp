@@ -34,7 +34,7 @@ using namespace TagLib;
 class MP4::Properties::PropertiesPrivate
 {
 public:
-  PropertiesPrivate() : length(0), bitrate(0), sampleRate(0), channels(0), bitsPerSample(0), encrypted(false) {}
+  PropertiesPrivate() : length(0), bitrate(0), sampleRate(0), channels(0), bitsPerSample(0), encrypted(false), codec(MP4::Properties::Unknown) {}
 
   int length;
   int bitrate;
@@ -42,6 +42,7 @@ public:
   int channels;
   int bitsPerSample;
   bool encrypted;
+  Codec codec;
 };
 
 MP4::Properties::Properties(File *file, MP4::Atoms *atoms, ReadStyle style)
@@ -114,6 +115,7 @@ MP4::Properties::Properties(File *file, MP4::Atoms *atoms, ReadStyle style)
   file->seek(atom->offset);
   data = file->readBlock(atom->length);
   if(data.mid(20, 4) == "mp4a") {
+    d->codec         = AAC;
     d->channels      = data.toShort(40U);
     d->bitsPerSample = data.toShort(42U);
     d->sampleRate    = data.toUInt(46U);
@@ -135,10 +137,11 @@ MP4::Properties::Properties(File *file, MP4::Atoms *atoms, ReadStyle style)
   }
   else if (data.mid(20, 4) == "alac") {
     if (atom->length == 88 && data.mid(56, 4) == "alac") {
+      d->codec         = ALAC;
       d->bitsPerSample = data.at(69);
-      d->channels   = data.at(73);
-      d->bitrate    = data.toUInt(80U) / 1000;
-      d->sampleRate = data.toUInt(84U);
+      d->channels      = data.at(73);
+      d->bitrate       = data.toUInt(80U) / 1000;
+      d->sampleRate    = data.toUInt(84U);
     }
   }
 
@@ -187,5 +190,10 @@ bool
 MP4::Properties::isEncrypted() const
 {
   return d->encrypted;
+}
+
+MP4::Properties::Codec MP4::Properties::codec() const
+{
+  return d->codec;
 }
 
