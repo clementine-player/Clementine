@@ -1403,7 +1403,7 @@ if (APPLE)
     add_custom_target(
       sign
       COMMAND
-      codesign --deep --preserve-metadata=identifier,entitlements,resource-rules,requirements -s ${APPLE_DEVELOPER_ID} -fv ${PROJECT_BINARY_DIR}/clementine.app
+      ${PROJECT_SOURCE_DIR}/dist/codesign.py ${APPLE_DEVELOPER_ID} ${PROJECT_BINARY_DIR}/clementine.app
       DEPENDS clementine
       VERBATIM
     )
