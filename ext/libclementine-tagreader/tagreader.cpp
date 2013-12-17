@@ -132,7 +132,7 @@ void TagReader::ReadFile(const QString& filename,
   TagLib::Tag* tag = fileref->tag();
   if (tag) {
     Decode(tag->title(), NULL, song->mutable_title());
-    Decode(tag->artist(), NULL, song->mutable_artist());
+    Decode(tag->artist(), NULL, song->mutable_artist()); // TPE1
     Decode(tag->album(), NULL, song->mutable_album());
     Decode(tag->genre(), NULL, song->mutable_genre());
     song->set_year(tag->year());
@@ -166,8 +166,7 @@ void TagReader::ReadFile(const QString& filename,
       if (!map["TIT1"].isEmpty()) // content group
         Decode(map["TIT1"].front()->toString(), NULL, song->mutable_grouping());
 
-      if (!map["TPE1"].isEmpty()) // ID3v2: lead performer/soloist
-        Decode(map["TPE1"].front()->toString(), NULL, song->mutable_performer());
+      // Skip TPE1 (which is the artist) here because we already fetched it
 
       if (!map["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
         Decode(map["TPE2"].front()->toString(), NULL, song->mutable_albumartist());
@@ -537,7 +536,7 @@ bool TagReader::SaveFile(const QString& filename,
     return false;
 
   fileref->tag()->setTitle(StdStringToTaglibString(song.title()));
-  fileref->tag()->setArtist(StdStringToTaglibString(song.artist()));
+  fileref->tag()->setArtist(StdStringToTaglibString(song.artist())); // TPE1
   fileref->tag()->setAlbum(StdStringToTaglibString(song.album()));
   fileref->tag()->setGenre(StdStringToTaglibString(song.genre()));
   fileref->tag()->setComment(StdStringToTaglibString(song.comment()));
@@ -550,7 +549,7 @@ bool TagReader::SaveFile(const QString& filename,
     SetTextFrame("TBPM", song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm()), tag);
     SetTextFrame("TCOM", song.composer(), tag);
     SetTextFrame("TIT1", song.grouping(), tag);
-    SetTextFrame("TPE1", song.performer(), tag);
+    // Skip TPE1 (which is the artist) here because we already set it
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);
   } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
