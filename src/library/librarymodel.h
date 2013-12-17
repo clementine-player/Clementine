@@ -160,6 +160,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   static QString SortText(QString text);
   static QString SortTextForArtist(QString artist);
   static QString SortTextForYear(int year);
+  static QString SortTextForBitrate(int bitrate);
   static QString SortTextForSong(const Song& song);
 
  signals:
