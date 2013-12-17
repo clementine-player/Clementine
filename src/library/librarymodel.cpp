@@ -190,6 +190,7 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
           case GroupBy_YearAlbum:
             key = PrettyYearAlbum(qMax(0, song.year()), song.album()); break;
           case GroupBy_FileType:    key = song.filetype(); break;
+	  case GroupBy_Bitrate:     key = song.bitrate(); break;
           case GroupBy_None:
             qLog(Error) << "GroupBy_None";
             break;
@@ -280,6 +281,9 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
   case GroupBy_YearAlbum:
     return SortTextForYear(item->metadata.year());
 
+  case GroupBy_Bitrate:
+    return SortTextForBitrate(item->metadata.bitrate());
+
   case GroupBy_None:
     return QString();
   }
@@ -310,6 +314,11 @@ QString LibraryModel::DividerDisplayText(GroupBy type, const QString& key) const
 
   case GroupBy_Year:
     if (key == "0000")
+      return tr("Unknown");
+    return QString::number(key.toInt()); // To remove leading 0s
+
+  case GroupBy_Bitrate:
+    if (key == "000")
       return tr("Unknown");
     return QString::number(key.toInt()); // To remove leading 0s
 
@@ -739,6 +748,9 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
   case GroupBy_AlbumArtist:
     q->SetColumnSpec("DISTINCT effective_albumartist");
     break;
+  case GroupBy_Bitrate:
+    q->SetColumnSpec("DISTINCT bitrate");
+    break;
   case GroupBy_None:
     q->SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
     break;
@@ -796,6 +808,9 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q)
   case GroupBy_FileType:
     q->AddWhere("filetype", item->metadata.filetype());
     break;
+  case GroupBy_Bitrate:
+    q->AddWhere("bitrate", item->key);
+    break;
   case GroupBy_None:
     qLog(Error) << "Unknown GroupBy type" << type << "used in filter";
     break;
@@ -825,6 +840,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
                                          int container_level) {
   LibraryItem* item = InitItem(type, signal, parent, container_level);
   int year = 0;
+  int bitrate = 0;
 
   switch (type) {
   case GroupBy_Artist:
@@ -863,6 +879,12 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
     item->key = item->metadata.TextForFiletype();
     break;
 
+  case GroupBy_Bitrate:
+    bitrate = qMax(0, row.value(0).toInt());
+    item->key = QString::number(bitrate);
+    item->sort_text = SortTextForBitrate(bitrate) + " ";
+    break;
+
   case GroupBy_None:
     item->metadata.InitFromQuery(row, true);
     item->key = item->metadata.title();
@@ -881,6 +903,7 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
                                    int container_level) {
   LibraryItem* item = InitItem(type, signal, parent, container_level);
   int year = 0;
+  int bitrate = 0;
 
   switch (type) {
   case GroupBy_Artist:
@@ -916,6 +939,12 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
   case GroupBy_FileType:
     item->metadata.set_filetype(s.filetype());
     item->key = s.TextForFiletype();
+    break;
+
+  case GroupBy_Bitrate:
+    bitrate = qMax(0, s.bitrate());
+    item->key = QString::number(bitrate);
+    item->sort_text = SortTextForBitrate(bitrate) + " ";
     break;
 
   case GroupBy_None:
@@ -1003,6 +1032,12 @@ QString LibraryModel::SortTextForYear(int year) {
   QString str = QString::number(year);
   return QString("0").repeated(qMax(0, 4 - str.length())) + str;
 }
+
+QString LibraryModel::SortTextForBitrate(int bitrate) {
+  QString str = QString::number(bitrate);
+  return QString("0").repeated(qMax(0, 3 - str.length())) + str;
+}
+
 
 QString LibraryModel::SortTextForSong(const Song& song) {
   QString ret = QString::number(qMax(0, song.disc()) * 1000 + qMax(0, song.track()));
