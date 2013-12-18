@@ -143,17 +143,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n zlyhalo"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n dokončených"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n zostávajúcich"
 
@@ -978,7 +978,7 @@ msgstr "Zmeniť obal albumu"
 msgid "Change font size..."
 msgstr "Zmeniť veľkosť písma..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Zmeniť režim opakovania"
 
@@ -986,7 +986,7 @@ msgstr "Zmeniť režim opakovania"
 msgid "Change shortcut..."
 msgstr "Zmeniť skratku..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Zmeniť režim zamiešavania"
 
@@ -1110,7 +1110,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine môže synchronizovať váš zoznam predplatných s vašimi ďalšími počítačmi a programami pre podcasty. <a href=\"https://gpodder.net/register/\">Vytvoriť účet</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1527,7 +1527,7 @@ msgstr "Znížiť hlasitosť o 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Znížiť hlasitosť o <value>%"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Znížiť hlasitosť"
 
@@ -1723,7 +1723,7 @@ msgid "Double clicking a song will..."
 msgstr "Dvojklik na pieseň..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Stiahnuť %n častí"
 
@@ -1860,7 +1860,7 @@ msgid ""
 "displayed in this order."
 msgstr "Povoľte zdroje nižšie, aby boli zahrnuté do výsledkov vyhľadávania. Výsledky budú zobrazené v tomto poradí."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Povoliť/zakázať Last.fm skroblovanie"
 
@@ -2555,7 +2555,7 @@ msgstr "Zvýšiť hlasitosť o 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Znížiť hlasitosť o <value>%"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Zvýšiť hlasitosť"
 
@@ -2922,7 +2922,7 @@ msgstr "Nízko-komplexný profil (LC)"
 msgid "Lyrics"
 msgstr "Texty piesní"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Texty z %1"
@@ -3026,7 +3026,7 @@ msgstr "Typ členstva"
 msgid "Minimum bitrate"
 msgstr "Minimálny dátový tok"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Chýbajú projectM predvoľby"
 
@@ -3093,7 +3093,7 @@ msgstr "Hudba"
 msgid "Music Library"
 msgstr "Hudobná zbierka"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Stlmiť"
@@ -3209,7 +3209,7 @@ msgstr "Najnovšie skladby"
 msgid "Next"
 msgstr "Ďalšia"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Nasledujúca skladba"
@@ -3482,7 +3482,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pozastaviť"
@@ -3508,7 +3508,7 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Obyčajný bočný panel"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3548,7 +3548,7 @@ msgstr "Hrať rádio tagu..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Hrať <n>. skladbu v playliste"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Hrať/Pozastaviť"
 
@@ -3685,7 +3685,7 @@ msgstr "Ukážka"
 msgid "Previous"
 msgstr "Predchádzajúca"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Predchádzajúca skladba"
@@ -3753,27 +3753,27 @@ msgstr "Dážď"
 msgid "Random visualization"
 msgstr "Náhodná vizualizácia"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 0 hviezdičkami"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Ohodnotiť aktuálnu pieseň 1 hviezdičkou"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 2 hviezdičkami"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 3 hviezdičkami"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 4 hviezdičkami"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 5 hviezdičkami"
 
@@ -4142,11 +4142,11 @@ msgstr "Hľadanie na Grooveshak"
 msgid "Second level"
 msgstr "Druhá úroveň"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Posunúť vzad"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Posunúť vpred"
 
@@ -4227,7 +4227,7 @@ msgstr "Nastavenia"
 msgid "Shortcut"
 msgstr "Skratka"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4242,7 +4242,7 @@ msgstr "Skratka pre %1 už existuje"
 msgid "Show"
 msgstr "Zobraziť"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Zobraziť OSD"
 
@@ -4339,7 +4339,7 @@ msgstr "Zobrazovať tray ikonu"
 msgid "Show which sources are enabled and disabled"
 msgstr "Zobraziť, ktoré zdroje sú povolené, a ktoré zakázané"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Zobraziť/Skryť"
 
@@ -4527,7 +4527,7 @@ msgstr "Začína sa ..."
 msgid "Stations"
 msgstr "Stanice"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Zastaviť"
@@ -4544,7 +4544,7 @@ msgstr "Zastaviť po tejto skladbe"
 msgid "Stop playback"
 msgstr "Zastaviť prehrávanie"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Zastaviť prehrávanie po aktuálnej skladbe"
 
@@ -4662,7 +4662,7 @@ msgstr "Textové možnosti"
 msgid "Thanks to"
 msgstr "Poďakovanie"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Príkaz \"%1\" nemohol začať."
@@ -4832,7 +4832,7 @@ msgstr "Pred spustením Grooveshark rádia, by ste si mali najprv vypočuť niek
 msgid "Today"
 msgstr "Dnes"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Prepnúť Krásne OSD"
 
@@ -5443,7 +5443,7 @@ msgid "Zero"
 msgstr "Vynulovať"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridať %n piesní"
 
@@ -5537,7 +5537,7 @@ msgid "longest first"
 msgstr "najprv najdlhšie"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "presunúť %n piesní"
 
@@ -5578,7 +5578,7 @@ msgid "press enter"
 msgstr "stlačte Enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "odstrániť %n piesní"
 

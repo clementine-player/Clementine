@@ -148,17 +148,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 실패함"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n 끝냄"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 남음"
 
@@ -983,7 +983,7 @@ msgstr "커버 아트 바꾸기"
 msgid "Change font size..."
 msgstr "글꼴 크기 바꾸기..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "반복 모드 "
 
@@ -991,7 +991,7 @@ msgstr "반복 모드 "
 msgid "Change shortcut..."
 msgstr "단축키 바꾸기..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "셔플 모드 "
 
@@ -1115,7 +1115,7 @@ msgid ""
 "an account</a>."
 msgstr "클레멘타인은 당신의 다른 컴퓨터와 팟케스트 어플리케이션과 당신의 구독 목록을 동기화 할 수 있습니다. <a href=\"https://gpodder.net/register/\">계정을 만드세요</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1532,7 +1532,7 @@ msgstr "4% 단위로 음량 줄이기"
 msgid "Decrease the volume by <value> percent"
 msgstr "<value>% 단위로 음량 줄이기"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "음량 줄이기"
 
@@ -1728,7 +1728,7 @@ msgid "Double clicking a song will..."
 msgstr "노래를 더블클릭하면..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "에피소드 %n 다운로드"
 
@@ -1865,7 +1865,7 @@ msgid ""
 "displayed in this order."
 msgstr "검색 결과에 아래의 소스들을 포함시킵니다. 검색 결과는 다음의 순서대로 표시됩니다."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm 스크로블 켜기/끄기"
 
@@ -2560,7 +2560,7 @@ msgstr "4% 단위로 음량 올리기"
 msgid "Increase the volume by <value> percent"
 msgstr "<value>% 단위로 음량 올리기"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "음량 올리기"
 
@@ -2927,7 +2927,7 @@ msgstr ""
 msgid "Lyrics"
 msgstr "가사"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "%1 의 가사"
@@ -3031,7 +3031,7 @@ msgstr "멤버쉽 유형"
 msgid "Minimum bitrate"
 msgstr "최저 비트 전송률"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr ""
 
@@ -3098,7 +3098,7 @@ msgstr "음악"
 msgid "Music Library"
 msgstr "음악 라이브러리"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "음소거"
@@ -3214,7 +3214,7 @@ msgstr "새로운 트랙"
 msgid "Next"
 msgstr "다음"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "다음 트랙"
@@ -3487,7 +3487,7 @@ msgstr "파티"
 msgid "Password"
 msgstr "비밀번호"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "일시중지"
@@ -3513,7 +3513,7 @@ msgstr "픽셀"
 msgid "Plain sidebar"
 msgstr "일반 사이드바"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3553,7 +3553,7 @@ msgstr "태그 라디오 재생..."
 msgid "Play the <n>th track in the playlist"
 msgstr "재생목록 <n>번째의 곡 재생"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "재생/일시중지"
 
@@ -3690,7 +3690,7 @@ msgstr "미리보기"
 msgid "Previous"
 msgstr "이전"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "이전 트랙"
@@ -3758,27 +3758,27 @@ msgstr "빗소리"
 msgid "Random visualization"
 msgstr "랜덤 시각화"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "현재 음악에 별점 0점 평가"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "현재 음악에 별점 1점 평가"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "현재 음악에 별점 2점 평가"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "현재 음악에 별점 3점 평가"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "현재 음악에 별점 4점 평가"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "현재 음악에 별점 5점 평가"
 
@@ -4147,11 +4147,11 @@ msgstr "그루브샤크에서 검색"
 msgid "Second level"
 msgstr ""
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "뒤로 탐색"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "앞으로 탐색"
 
@@ -4232,7 +4232,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "단축키"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4247,7 +4247,7 @@ msgstr "%1위한 단축키가 이미 존재합니다."
 msgid "Show"
 msgstr "보기"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "OSD 보기"
 
@@ -4344,7 +4344,7 @@ msgstr "트레이 아이콘 보기"
 msgid "Show which sources are enabled and disabled"
 msgstr "출처의 사용가능 여부 보기"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "보기/숨기기"
 
@@ -4532,7 +4532,7 @@ msgstr "시작중..."
 msgid "Stations"
 msgstr "방송국"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "중지"
@@ -4549,7 +4549,7 @@ msgstr "이번 트랙 이후 정지"
 msgid "Stop playback"
 msgstr "재생 "
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr ""
 
@@ -4667,7 +4667,7 @@ msgstr "문자 옵션"
 msgid "Thanks to"
 msgstr "감사합니다"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr ""
@@ -4837,7 +4837,7 @@ msgstr "Grooveshark 라디오를 시청하시려면, 먼저 Grooveshark에서 �
 msgid "Today"
 msgstr "오늘"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "예쁜 OSD 토글"
 
@@ -5448,7 +5448,7 @@ msgid "Zero"
 msgstr "제로"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n 곡 추가"
 
@@ -5542,7 +5542,7 @@ msgid "longest first"
 msgstr ""
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "%n 곡 이동"
 
@@ -5583,7 +5583,7 @@ msgid "press enter"
 msgstr "엔터를 누르세요"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n 곡 제거"
 

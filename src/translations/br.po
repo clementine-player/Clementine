@@ -144,17 +144,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n c'hwitet"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n echuet"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n a chom"
 
@@ -979,7 +979,7 @@ msgstr "Kemmañ golo an albom"
 msgid "Change font size..."
 msgstr "Kemmañ ment ar font..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Cheñch an doare adlenn"
 
@@ -987,7 +987,7 @@ msgstr "Cheñch an doare adlenn"
 msgid "Change shortcut..."
 msgstr "Kemmañ ar berradenn"
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Cheñch an doare meskañ"
 
@@ -1111,7 +1111,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine a c'hell gourbediñ ho koumanantoù podkastoù gant urzhiataerioù ha poelladoù all. <a href=\"https://gpodder.net/register/\">Krouiñ ur gont</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1528,7 +1528,7 @@ msgstr "Digreskiñ an ampled eus 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Digreskiñ an ampled eus <value> dre gant."
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Digreskiñ an ampled"
 
@@ -1724,7 +1724,7 @@ msgid "Double clicking a song will..."
 msgstr "Daouglikañ war un ton..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Pellgargañ %n pennad"
 
@@ -1861,7 +1861,7 @@ msgid ""
 "displayed in this order."
 msgstr "Gweredekaat ar mammennoù dindan evit lakaat anezho e disoc'h an enklask. An disoc'h a vo diskouezet en urzh-mañ."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "(Di)gweredekaat scrobbling Last.fm"
 
@@ -2556,7 +2556,7 @@ msgstr "Kreskiñ an ampled eus 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Kreskiñ an ampled eus <value> dre gant"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Kreskiñ an ampled"
 
@@ -2923,7 +2923,7 @@ msgstr "Aelad e Luzierezh Gwan (ALG)"
 msgid "Lyrics"
 msgstr "Komzoù"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Komzoù eus %1"
@@ -3027,7 +3027,7 @@ msgstr "Doare emezeladur"
 msgid "Minimum bitrate"
 msgstr "Fonnder izelañ"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Ragarventennoù projectM a vank"
 
@@ -3094,7 +3094,7 @@ msgstr "Sonerezh"
 msgid "Music Library"
 msgstr "Sonaoueg"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Mut"
@@ -3210,7 +3210,7 @@ msgstr "Roudoù nevesañ"
 msgid "Next"
 msgstr "Da-heul"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Roud o tont"
@@ -3483,7 +3483,7 @@ msgstr "Fest"
 msgid "Password"
 msgstr "Ger-tremen"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Ehan"
@@ -3509,7 +3509,7 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Bareen gostez simpl"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3549,7 +3549,7 @@ msgstr "Lenn ar skingomz gant ar c'hlav"
 msgid "Play the <n>th track in the playlist"
 msgstr "Seniñ an <n>vet roud eus ar roll seniñ"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Lenn/Ehan"
 
@@ -3686,7 +3686,7 @@ msgstr "Rakwel"
 msgid "Previous"
 msgstr "A-raok"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Roud a-raok"
@@ -3754,27 +3754,27 @@ msgstr "Glav"
 msgid "Random visualization"
 msgstr "Heweladur dargouezhek"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Lakaat 0 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Lakaat 1 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Lakaat 2 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Lakaat 3 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Lakaat 4 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Lakaat 5 steredenn evit an ton lennet"
 
@@ -4143,11 +4143,11 @@ msgstr "O klask war Grooveshark"
 msgid "Second level"
 msgstr "EIl live"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Mont war gil"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Mont war-raok"
 
@@ -4228,7 +4228,7 @@ msgstr "Gwellvezioù"
 msgid "Shortcut"
 msgstr "Berradenn"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4243,7 +4243,7 @@ msgstr "Berradenn evit %1 a zo dija anezhañ"
 msgid "Show"
 msgstr "Diskouez"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Diskouez OSD"
 
@@ -4340,7 +4340,7 @@ msgstr "Diskouez an ikon er zonenn kemenadennoù"
 msgid "Show which sources are enabled and disabled"
 msgstr "Diskouez peseurt mamenn a zo gweredekaet ha pe re a zo diweredekaet."
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "DIskouez/Kuzhañ"
 
@@ -4528,7 +4528,7 @@ msgstr "O kregiñ..."
 msgid "Stations"
 msgstr "Savlec'hioù"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Paouez"
@@ -4545,7 +4545,7 @@ msgstr "Paouez goude ar roud-mañ"
 msgid "Stop playback"
 msgstr "Paouez goude vefe lennet an ton"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Paouez goude ar roud lennet"
 
@@ -4663,7 +4663,7 @@ msgstr "Dibarzhioù an testenn"
 msgid "Thanks to"
 msgstr "Trugarez da"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "An urzh \"%1\" ne c'hell ket bezañ kroget."
@@ -4833,7 +4833,7 @@ msgstr "Evit kregiñ ur skingomz Grooveshark, gwelloc'h vefe deoc'h selaou ouzh 
 msgid "Today"
 msgstr "Hiziv"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Gweredekaat/Diweredekaat an OSD brav"
 
@@ -5444,7 +5444,7 @@ msgid "Zero"
 msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "ouzhpennañ %n ton"
 
@@ -5538,7 +5538,7 @@ msgid "longest first"
 msgstr "hirañ araok"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "diblasañ %n ton"
 
@@ -5579,7 +5579,7 @@ msgid "press enter"
 msgstr "pouezit war Enankañ"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "Tennañ %n ton"
 

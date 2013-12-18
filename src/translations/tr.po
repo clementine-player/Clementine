@@ -24,7 +24,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2013-11-27 11:30+0000\n"
+"PO-Revision-Date: 2013-12-09 02:28+0000\n"
 "Last-Translator: volkangezer <volkangezer@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -158,17 +158,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n kaldı"
 
@@ -371,7 +371,7 @@ msgstr "AIFF"
 
 #: widgets/nowplayingwidget.cpp:119
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr "ALL GLORY TO THE HYPNOTOAD"
+msgstr "TÜM ŞEREF HYPNOTOAD'A GİTSİN"
 
 #: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
 msgid "Abort"
@@ -660,7 +660,7 @@ msgstr "Tüm Dosyalar (*)"
 
 #: ../bin/src/ui_mainwindow.h:689
 msgid "All Glory to the Hypnotoad!"
-msgstr "All Glory to the Hypnotoad!"
+msgstr "Tüm şeref Hypnotoad'a gitsin!"
 
 #: ui/albumcovermanager.cpp:133
 msgid "All albums"
@@ -847,7 +847,7 @@ msgstr "Mevcut"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 msgid "Average bitrate"
-msgstr "Ortalama bithızı"
+msgstr "Ortalama bit oranı"
 
 #: covers/coversearchstatisticsdialog.cpp:70
 msgid "Average image size"
@@ -993,17 +993,17 @@ msgstr "Kapak resmini değiştir"
 msgid "Change font size..."
 msgstr "Yazı boyutunu değiştir..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
-msgstr "Tekrar modunu değiştir"
+msgstr "Tekrar kipin değiştir"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "Kısayolu değiştir..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
-msgstr "Karıştırma modunu değiştir"
+msgstr "Karıştırma kipini değiştir"
 
 #: core/commandlineoptions.cpp:172
 msgid "Change the language"
@@ -1125,7 +1125,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine, diğer bilgisayarlar ve podcast uygulamaları ile abonelik listesini senkronize edebilirsiniz. <a href=\"https://gpodder.net/register/\"> bir hesap oluşturun </ a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1169,7 +1169,7 @@ msgstr "Toplam zaman ve kalan zaman arasında seçim yapmak için tıklayın"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "Oturum Aç düğmesini tıklayınca yeni internet sayfası açılır.Oturum açtıktan sonra Clementine' e geri dönmelisiniz"
+msgstr "Oturum Aç düğmesini tıklayınca yeni internet sayfası açılır. Oturum açtıktan sonra Clementine'e geri dönmelisiniz"
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1298,7 +1298,7 @@ msgstr "Konsol"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
-msgstr "Sabit bithızı"
+msgstr "Sabit bit oranı"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Convert all music"
@@ -1542,7 +1542,7 @@ msgstr "Ses seviyesini 4% azalt"
 msgid "Decrease the volume by <value> percent"
 msgstr "<value> oranında sesi azaltın"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Sesi azalt"
 
@@ -1738,7 +1738,7 @@ msgid "Double clicking a song will..."
 msgstr "Bir şarkıyı çift tıklamak..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "%n bölüm indir"
 
@@ -1875,21 +1875,21 @@ msgid ""
 "displayed in this order."
 msgstr "Arama sonuçlarına dahil etmek için aşağıdaki kaynakları aktifleştirin.  Sonuçlar bu sırayla gösterilecektir."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm skroplamayı aç/kapa"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
-msgstr "Karmaşa çözümleniyor"
+msgstr "Kodlama karmaşıklığı"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:197
 msgid "Encoding engine quality"
-msgstr "Motor kalitesi çözümleniyor"
+msgstr "Kodlama motor kalitesi"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:224
 msgid "Encoding mode"
-msgstr "Çözümleme modu"
+msgstr "Kodlama kipi"
 
 #: ../bin/src/ui_addpodcastbyurl.h:76
 msgid "Enter a URL"
@@ -2136,7 +2136,7 @@ msgstr "Podcastların yüklenmesi başarısız oldu"
 
 #: podcasts/podcasturlloader.cpp:167
 msgid "Failed to parse the XML for this RSS feed"
-msgstr "Bu RSS beslemesinin XML çözümlemesi başarısız oldu"
+msgstr "Bu RSS beslemesinin XML ayıklaması başarısız oldu"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:82
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
@@ -2239,7 +2239,7 @@ msgstr "Lisans sebepleri dolayısıyla Spotify desteği ayrı bir eklentidir."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
-msgstr "Mono çözümlemeye zorla"
+msgstr "Mono kodlamaya zorla"
 
 #: devices/deviceview.cpp:204 devices/deviceview.cpp:310
 #: devices/deviceview.cpp:314
@@ -2286,7 +2286,7 @@ msgstr "Kare oranı"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:236
 msgid "Frames per buffer"
-msgstr "Tambon başına kare"
+msgstr "Tampon başına kare"
 
 #: internet/lastfmservice.cpp:224
 msgid "Friends"
@@ -2536,7 +2536,7 @@ msgstr "%1 haftada"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "Dinamik modda yeni şarkılar seçilerek, her şarkı bittiğinde çalma listesine eklenecektir."
+msgstr "Dinamik kipte yeni şarkılar seçilerek, her şarkı bittiğinde çalma listesine eklenecektir."
 
 #: internet/spotifyservice.cpp:360
 msgid "Inbox"
@@ -2570,7 +2570,7 @@ msgstr "Ses seviyesini 4% arttır"
 msgid "Increase the volume by <value> percent"
 msgstr "<value> oranında sesi artırın"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Sesi arttır"
 
@@ -2937,7 +2937,7 @@ msgstr "Düşük karmaşıklık profili (LC)"
 msgid "Lyrics"
 msgstr "Şarkı sözleri"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "%1 sitesinden şarkı sözleri"
@@ -2980,7 +2980,7 @@ msgstr "Ana profil (MAIN)"
 
 #: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:690
 msgid "Make it so!"
-msgstr "Make it so!"
+msgstr "Yap gitsin!"
 
 #: internet/spotifyservice.cpp:533
 msgid "Make playlist available offline"
@@ -3041,7 +3041,7 @@ msgstr "Üyelik türü"
 msgid "Minimum bitrate"
 msgstr "Minimum bit oranı"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Eksik projectM ayarları"
 
@@ -3108,7 +3108,7 @@ msgstr "Müzik"
 msgid "Music Library"
 msgstr "Müzik Kütüphanesi"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Sessiz"
@@ -3179,7 +3179,7 @@ msgstr "Vekil Sunucu"
 
 #: ../bin/src/ui_networkremotesettingspage.h:177
 msgid "Network Remote"
-msgstr "Uzak ağ"
+msgstr "Ağ Denetimi"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:487
 msgid "Never"
@@ -3224,7 +3224,7 @@ msgstr "En yeni parçalar"
 msgid "Next"
 msgstr "İleri"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Sonraki parça"
@@ -3414,11 +3414,11 @@ msgstr "İşlem başarısız"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 msgid "Optimize for bitrate"
-msgstr "Bit oranı için optimize et"
+msgstr "Bit oranı için eniyileştir"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
 msgid "Optimize for quality"
-msgstr "Kalite için optimize et"
+msgstr "Kalite için eniyileştir"
 
 #: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
@@ -3497,7 +3497,7 @@ msgstr "Parti"
 msgid "Password"
 msgstr "Parola"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Duraklat"
@@ -3523,7 +3523,7 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Düz kenar çubuğu"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3553,7 +3553,7 @@ msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 #: ../bin/src/ui_behavioursettingspage.h:211
 #: ../bin/src/ui_behavioursettingspage.h:225
 msgid "Play if there is nothing already playing"
-msgstr "Çalan birşey yoksa çal"
+msgstr "Çalan bir şey yoksa çal"
 
 #: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
@@ -3563,7 +3563,7 @@ msgstr "Etiket radyosu çal..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Listedeki <n> numaralı parçayı çal"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Çal/Duraklat"
 
@@ -3700,7 +3700,7 @@ msgstr "Önizleme"
 msgid "Previous"
 msgstr "Önceki"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Önceki parça"
@@ -3768,27 +3768,27 @@ msgstr "Yağmur"
 msgid "Random visualization"
 msgstr "Karışık görseller"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Geçerli şarkıyı 0 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Geçerli şarkıyı 1 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Geçerli şarkıyı 2 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Geçerli şarkıyı 3 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Geçerli şarkıyı 4 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Geçerli şarkıyı 5 yıldızla oyla"
 
@@ -4121,7 +4121,7 @@ msgstr "Albüm kapaklarını ara..."
 
 #: ../bin/src/ui_globalsearchview.h:208
 msgid "Search for anything"
-msgstr "Herhangi birşey ara"
+msgstr "Herhangi bir şey ara"
 
 #: ../bin/src/ui_gpoddersearchpage.h:76
 msgid "Search gpodder.net"
@@ -4157,11 +4157,11 @@ msgstr "Grooveshark'da Ara"
 msgid "Second level"
 msgstr "İkinci seviye"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Geriye doğru ara"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "İleri doğru ara"
 
@@ -4242,7 +4242,7 @@ msgstr "Ayarlar"
 msgid "Shortcut"
 msgstr "Kısayol"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4257,7 +4257,7 @@ msgstr "%1 için kısayol zaten tanımlı"
 msgid "Show"
 msgstr "Göster"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "OSD göster"
 
@@ -4275,7 +4275,7 @@ msgstr "Masaüstü bildirimi göster"
 
 #: ../bin/src/ui_notificationssettingspage.h:442
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr "Tekrarla/karıştır modunu değiştirdiğimde bir bildirim göster"
+msgstr "Tekrarla/Karıştır kipini değiştirdiğimde bir bildirim göster"
 
 #: ../bin/src/ui_notificationssettingspage.h:441
 msgid "Show a notification when I change the volume"
@@ -4354,7 +4354,7 @@ msgstr "Sistem çekmecesi simgesini göster"
 msgid "Show which sources are enabled and disabled"
 msgstr "Hangi kaynakların aktif ya da pasif olduğunu göster"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Göster/Gizle"
 
@@ -4508,7 +4508,7 @@ msgstr "Spotify eklentisi kurulu değil"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
-msgstr "Standard"
+msgstr "Standart"
 
 #: internet/spotifyservice.cpp:354
 msgid "Starred"
@@ -4542,7 +4542,7 @@ msgstr "Başlatılıyor..."
 msgid "Stations"
 msgstr "İstasyonlar"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Durdur"
@@ -4559,7 +4559,7 @@ msgstr "Bu parçadan sonra durdur"
 msgid "Stop playback"
 msgstr "Duraklat"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Bu parçadan sonra durdur"
 
@@ -4677,7 +4677,7 @@ msgstr "Metin seçenekleri"
 msgid "Thanks to"
 msgstr "Teşekkürler"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "\"%1\" komutu başlatılamadı."
@@ -4735,7 +4735,7 @@ msgstr "Magnatude servisinden veri alınırken hata oluştu"
 
 #: podcasts/itunessearchpage.cpp:76
 msgid "There was a problem parsing the response from the iTunes Store"
-msgstr "iTunes Store'dan gelen yanıtı çözümlemede bir sorun oluştu"
+msgstr "iTunes Store'dan gelen yanıtı ayıklamada bir sorun oluştu"
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
@@ -4847,7 +4847,7 @@ msgstr "Grooveshark radyosu dinleyebilmeniz için öncelikle birkaç tane Groove
 msgid "Today"
 msgstr "Bugün"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Şirin OSD'yi Aç/Kapa"
 
@@ -5066,7 +5066,7 @@ msgstr "Kimlik denetimi kullan"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
-msgstr "Bir oranı kontrolü yönetimini kullan"
+msgstr "Bi oranı kontrolü yönetimini kullan"
 
 #: ../bin/src/ui_wizardfinishpage.h:85
 msgid "Use dynamic mode"
@@ -5082,7 +5082,7 @@ msgstr "Temporal noise shaping kullan"
 
 #: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Use the system default"
-msgstr "Sistem öntanımlıyı kullan"
+msgstr "Sistem öntanımlısını kullan"
 
 #: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
@@ -5458,7 +5458,7 @@ msgid "Zero"
 msgstr "Sıfır"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
@@ -5552,7 +5552,7 @@ msgid "longest first"
 msgstr "ilk önce en uzunu"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "%n şarkıyı taşı"
 
@@ -5593,7 +5593,7 @@ msgid "press enter"
 msgstr "enter'a basın"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 

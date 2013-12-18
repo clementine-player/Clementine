@@ -144,17 +144,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n fallou"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n restante"
 
@@ -979,7 +979,7 @@ msgstr "Cambiar a portada"
 msgid "Change font size..."
 msgstr "Cambiar o tamaño da letra…"
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Cambiar o modo de repetición"
 
@@ -987,7 +987,7 @@ msgstr "Cambiar o modo de repetición"
 msgid "Change shortcut..."
 msgstr "Cambiar combinación de teclas"
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Cambiar o modo aleatorio"
 
@@ -1111,7 +1111,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine pode sincronizar as súas listas de subscrición con resto dos seus computadores e outros aplicativos de podcast. <a href=\"https://gpodder.net/register/\">Cree unha conta</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1528,7 +1528,7 @@ msgstr "Diminuír o volume nun 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Diminuír o volume nun <value> por cento"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Diminuír o volume"
 
@@ -1724,7 +1724,7 @@ msgid "Double clicking a song will..."
 msgstr "Ao premer dúas veces unha canción…"
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Descargar %n episodios…"
 
@@ -1861,7 +1861,7 @@ msgid ""
 "displayed in this order."
 msgstr "Activar as seguintes orixes para incluílas nos resultados das buscas. Os resultados amosaranse na orde indicada."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Activar a sincronización con Last.fm."
 
@@ -2556,7 +2556,7 @@ msgstr "Incrementar o volume ao 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Incrementar o volume nun <value> por cento"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Incrementar o volume"
 
@@ -2923,7 +2923,7 @@ msgstr "Perfil de pouca complexidade (LC)"
 msgid "Lyrics"
 msgstr "Letras"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Letra de %1"
@@ -3027,7 +3027,7 @@ msgstr "Tipo de asociación"
 msgid "Minimum bitrate"
 msgstr "Taxa de bits mínima"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Predefinicións de Missing projectM"
 
@@ -3094,7 +3094,7 @@ msgstr "Música"
 msgid "Music Library"
 msgstr "Colección de música"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Silencio"
@@ -3210,7 +3210,7 @@ msgstr "Últimas pistas"
 msgid "Next"
 msgstr "Próximo"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Seguinte pista"
@@ -3483,7 +3483,7 @@ msgstr "Festa"
 msgid "Password"
 msgstr "Contrasinal"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pausa"
@@ -3509,7 +3509,7 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Barra lateral simple"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3549,7 +3549,7 @@ msgstr "Reproducir a radio dunha etiqueta…"
 msgid "Play the <n>th track in the playlist"
 msgstr "Reproducir a <n>ª pista da lista"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Reproducir/Pausa"
 
@@ -3686,7 +3686,7 @@ msgstr "Vista previa"
 msgid "Previous"
 msgstr "Anterior"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Pista anterior"
@@ -3754,27 +3754,27 @@ msgstr "Chuvia"
 msgid "Random visualization"
 msgstr "Visualización aleatoria"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Califica a canción actual 0 estrelas"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Califica a canción actual 1 estrela"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Califica a canción actual 2 estrelas"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Califica a canción actual 3 estrelas"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Califica a canción actual 4 estrelas"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Califica a canción actual 5 estrelas"
 
@@ -4143,11 +4143,11 @@ msgstr "Buscando en Grooveshark…"
 msgid "Second level"
 msgstr "Segundo nível"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Atrasar"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Avanzar"
 
@@ -4228,7 +4228,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Atallo"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4243,7 +4243,7 @@ msgstr "Atallo para %1 xa existe"
 msgid "Show"
 msgstr "Mostrar"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Mostrar OSD"
 
@@ -4340,7 +4340,7 @@ msgstr "Amosar unha icona na área de notificación."
 msgid "Show which sources are enabled and disabled"
 msgstr "Indicar que orixes están activas e cales están inactivas."
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Amosar/agochar"
 
@@ -4528,7 +4528,7 @@ msgstr "Iniciando…"
 msgid "Stations"
 msgstr "Emisoras"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Deter"
@@ -4545,7 +4545,7 @@ msgstr "Deter a reprodución despois da pista actual"
 msgid "Stop playback"
 msgstr "Deter"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Deter despois da pista actual"
 
@@ -4663,7 +4663,7 @@ msgstr "Opcións do texto"
 msgid "Thanks to"
 msgstr "Agradecimentos a"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "O \"%1\" comando non pode ser iniciado"
@@ -4833,7 +4833,7 @@ msgstr "Para iniciar a radio de Grooveshark, antes debería escoitar máis canci
 msgid "Today"
 msgstr "Hoxe"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Alternar o OSD xeitoso"
 
@@ -5444,7 +5444,7 @@ msgid "Zero"
 msgstr "Cero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "engadir %n cancións"
 
@@ -5538,7 +5538,7 @@ msgid "longest first"
 msgstr "primeiro o máis longo"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "mover %n cancións"
 
@@ -5579,7 +5579,7 @@ msgid "press enter"
 msgstr "prema Intro"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "retirar %n cancións"
 

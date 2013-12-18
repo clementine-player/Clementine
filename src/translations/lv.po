@@ -144,17 +144,17 @@ msgid "%filename%"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n neizdevās"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n pabeigti"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n atlicis"
 
@@ -979,7 +979,7 @@ msgstr "Mainīt vāka attēlu"
 msgid "Change font size..."
 msgstr "Mainīt fontu izmēru..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Mainīt atkārtošanas režīmu"
 
@@ -987,7 +987,7 @@ msgstr "Mainīt atkārtošanas režīmu"
 msgid "Change shortcut..."
 msgstr "Mainīt īsceļu..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Mainīt jaukšanas režīmu"
 
@@ -1111,7 +1111,7 @@ msgid ""
 "an account</a>."
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1528,7 +1528,7 @@ msgstr "Samazināt skaļumu par 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Samazināt skaļumu par <value>%"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Samazināt skaļumu"
 
@@ -1724,7 +1724,7 @@ msgid "Double clicking a song will..."
 msgstr "Dubultklikšķis uz dziesmas..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Lejuplādēt %n sērijas"
 
@@ -1861,7 +1861,7 @@ msgid ""
 "displayed in this order."
 msgstr ""
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Ieslēgt/izslēgt Last.fm skroblēšanu"
 
@@ -2556,7 +2556,7 @@ msgstr "Palielināt skaļumu par 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Palielināt skaļumu par <value>%"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Palielināt skaļumu"
 
@@ -2923,7 +2923,7 @@ msgstr "Zemas sarežģītības profils (LC)"
 msgid "Lyrics"
 msgstr "Dziesmas vārdi"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Dziesmas vārdi no %1"
@@ -3027,7 +3027,7 @@ msgstr "Dalības tips"
 msgid "Minimum bitrate"
 msgstr "Minimālais bitreits"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Pazuduši projectM preseti"
 
@@ -3094,7 +3094,7 @@ msgstr ""
 msgid "Music Library"
 msgstr "Mūzikas bibliotēka"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Klusums"
@@ -3210,7 +3210,7 @@ msgstr "Jaunākās dziesmas"
 msgid "Next"
 msgstr "Uz priekšu"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Nākamā"
@@ -3483,7 +3483,7 @@ msgstr "Ballīte"
 msgid "Password"
 msgstr "Parole"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pauze"
@@ -3509,7 +3509,7 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Parasta sānjosla"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3549,7 +3549,7 @@ msgstr "Atskaņot birku radio..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Atskaņot <n> dziesmu no dziesmu listes"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Atskaņot/Pauzēt"
 
@@ -3686,7 +3686,7 @@ msgstr "Priekšskatīt"
 msgid "Previous"
 msgstr "Iepriekšējais"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Iepriekšējā"
@@ -3754,27 +3754,27 @@ msgstr "Lietus"
 msgid "Random visualization"
 msgstr "Nejauša vizualizācija"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Novērtēt dziesmu ar 0 zvaigznēm"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Novērtēt ar 1 zvaigzni"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Novērtēt ar 2 zvaigznēm"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Novērtēt ar 3 zvaigznēm"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Novērtēt ar 4 zvaigznēm"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Novērtēt ar 5 zvaigznēm"
 
@@ -4143,11 +4143,11 @@ msgstr ""
 msgid "Second level"
 msgstr "Otrais līmenis"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Patīt atpakaļ"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Patīt uz priekšu"
 
@@ -4228,7 +4228,7 @@ msgstr "Iestatījumi"
 msgid "Shortcut"
 msgstr "Īsceļš"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4243,7 +4243,7 @@ msgstr "Īsceļš priekš %1 jau eksistē"
 msgid "Show"
 msgstr "Parādit"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Parādīt paziņojumu"
 
@@ -4340,7 +4340,7 @@ msgstr "Rādīt paneļa ikonu"
 msgid "Show which sources are enabled and disabled"
 msgstr ""
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Rādīt/slēpt"
 
@@ -4528,7 +4528,7 @@ msgstr "Palaiž..."
 msgid "Stations"
 msgstr "Stacijas"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Apturēt"
@@ -4545,7 +4545,7 @@ msgstr "Apturēt pēc šīs dziesmas"
 msgid "Stop playback"
 msgstr "Apturēt atskaņošanu"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Apturēt atskaņošanu pēc šīs dziesmas"
 
@@ -4663,7 +4663,7 @@ msgstr ""
 msgid "Thanks to"
 msgstr "Pateicoties"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Nevar startēt \"%1\" komandu"
@@ -4833,7 +4833,7 @@ msgstr ""
 msgid "Today"
 msgstr "Šodien"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr ""
 
@@ -5444,7 +5444,7 @@ msgid "Zero"
 msgstr "Nulle"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pievienot %n dziesmas"
 
@@ -5538,7 +5538,7 @@ msgid "longest first"
 msgstr "garākais vispirms"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr ""
 
@@ -5579,7 +5579,7 @@ msgid "press enter"
 msgstr "piespiediet enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "aizvākt %n dziesmas"
 

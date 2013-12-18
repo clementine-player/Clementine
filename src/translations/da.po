@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
+# Sappe, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Runkeldunk <generallangsohm@gmail.com>, 2012
 # Jens E. Jensen <jens.e.jensen@gmail.com>, 2012
@@ -13,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2013-11-26 18:48+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-12-12 16:12+0000\n"
+"Last-Translator: Sappe\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/clementine/language/da/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -147,17 +148,17 @@ msgid "%filename%"
 msgstr "%filnavn%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n fejlede"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n færdige"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n tilbage"
 
@@ -240,7 +241,7 @@ msgstr "...og alle Amarok-bidragsyderne"
 
 #: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
@@ -269,7 +270,7 @@ msgstr "128k MP3"
 
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
-msgstr ""
+msgstr "40%"
 
 #: library/library.cpp:60
 msgid "50 random tracks"
@@ -938,7 +939,7 @@ msgstr "Boom-analyzer"
 
 #: ../bin/src/ui_boxsettingspage.h:103
 msgid "Box"
-msgstr ""
+msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
@@ -982,7 +983,7 @@ msgstr "Skift omslag"
 msgid "Change font size..."
 msgstr "Skift størrelse på skrifttype"
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Ændr gentagelsestilstand"
 
@@ -990,7 +991,7 @@ msgstr "Ændr gentagelsestilstand"
 msgid "Change shortcut..."
 msgstr "Ændrer smutvej..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Ændr blandingstilstand"
 
@@ -1089,7 +1090,7 @@ msgstr "Clementine kan automatisk konvertere musikken du kopierer til denne enhe
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr ""
+msgstr "Clementine kan afspille musik du har uploadet til Box"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
@@ -1114,7 +1115,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine kan synkronisere dine abonnementslister med dine andre computere og podcast klienter.  <a href=\"https://gpodder.net/register/\">Opret en konto</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1462,7 +1463,7 @@ msgstr "Ctrl+Shift+O"
 
 #: ../bin/src/ui_mainwindow.h:725
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Ctrl+Shift+T"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Ctrl+T"
@@ -1531,7 +1532,7 @@ msgstr "Sænk lydstyrken med 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Nedsæt lydstyrken med <value> procent"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Dæmp lydstyrke"
 
@@ -1716,7 +1717,7 @@ msgstr "Stop ikke"
 
 #: internet/somafmservice.cpp:103
 msgid "Donate"
-msgstr ""
+msgstr "Bidrag"
 
 #: devices/deviceview.cpp:115
 msgid "Double click to open"
@@ -1727,7 +1728,7 @@ msgid "Double clicking a song will..."
 msgstr "Når jeg dobbeltklikker på en sang..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Hent %n episoder"
 
@@ -1753,7 +1754,7 @@ msgstr "Hent filer i downloadkø"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr ""
+msgstr "Hent Android app'en"
 
 #: internet/magnatuneservice.cpp:276
 msgid "Download this album"
@@ -1864,7 +1865,7 @@ msgid ""
 "displayed in this order."
 msgstr "Aktiver kilder nedenfor til at medtage dem i søgeresultaterne.  Resultaterne vil blive vist i denne rækkefølge."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Aktiver/deaktiver Last.fm scrobbling"
 
@@ -1929,7 +1930,7 @@ msgstr "Indtast foldernavn"
 
 #: ../bin/src/ui_networkremotesettingspage.h:198
 msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
+msgstr "Indtast denne IP i app'en for at forbinde til Clementine."
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -2420,7 +2421,7 @@ msgstr "Gruppér efter genre/kunstner/album"
 #: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
-msgstr ""
+msgstr "Gruppering "
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
@@ -2559,7 +2560,7 @@ msgstr "Forøg lydstyrken med 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Skru op for lyden med <value> procent"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Forøg lydstyrke"
 
@@ -2777,7 +2778,7 @@ msgstr "Lad stå blank for standard. Eksempler: \"/dev/dsp\", \"front\", osv."
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
-msgstr ""
+msgstr "Venstre"
 
 #: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
@@ -2926,7 +2927,7 @@ msgstr "Low complexity-profil (LC)"
 msgid "Lyrics"
 msgstr "Sangtekster"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Sangtekster fra %1"
@@ -3030,7 +3031,7 @@ msgstr "Medlemskabstype"
 msgid "Minimum bitrate"
 msgstr "Minimal bitrate"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Manglende projectM-forvalg"
 
@@ -3097,7 +3098,7 @@ msgstr "Musik"
 msgid "Music Library"
 msgstr "Musikbibliotek"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Slå lyden fra"
@@ -3213,7 +3214,7 @@ msgstr "Nyeste spor"
 msgid "Next"
 msgstr "Næste"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Næste spor"
@@ -3344,7 +3345,7 @@ msgstr "Accepter kun forbindelser fra klienter med IP'erne:⏎ 10.x.x.x⏎ 172.1
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "Tillad kun forbindelser fra det lokale netværk"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3352,7 +3353,7 @@ msgstr "Vis kun den første"
 
 #: ../bin/src/ui_appearancesettingspage.h:290
 msgid "Opacity"
-msgstr ""
+msgstr "Uigennemsigtighed"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:546 internet/icecastservice.cpp:296
@@ -3455,7 +3456,7 @@ msgstr ""
 
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
-msgstr ""
+msgstr "Overskriv alt"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
@@ -3486,7 +3487,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Kodeord"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pause"
@@ -3502,17 +3503,17 @@ msgstr "På pause"
 #: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
-msgstr ""
+msgstr "Kunstner"
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
-msgstr ""
+msgstr "Pixel"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
 msgstr "Simpelt sidepanel"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3552,7 +3553,7 @@ msgstr "Spil mærkeradio..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Afspil det <n>. spor i spillelisten"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Afspil/Pause"
 
@@ -3689,7 +3690,7 @@ msgstr "Forhåndsvisning"
 msgid "Previous"
 msgstr "Forrige"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Forrige spor"
@@ -3757,27 +3758,27 @@ msgstr "Regn"
 msgid "Random visualization"
 msgstr "Tilfældig visualisering"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Giv 0 stjerner til denne sang"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Giv 1 stjerne til denne sang"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Giv 2 stjerner til denne sang"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Giv 3 stjerner til denne sang"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Giv 4 stjerner til denne sang"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Giv 5 stjerner til denne sang"
 
@@ -3861,11 +3862,11 @@ msgstr "Fjern fra spilleliste"
 
 #: playlist/playlisttabbar.cpp:174
 msgid "Remove playlist"
-msgstr ""
+msgstr "Fjern spilleliste"
 
 #: playlist/playlistlistcontainer.cpp:314
 msgid "Remove playlists"
-msgstr ""
+msgstr "Fjern spillelister"
 
 #: internet/groovesharkservice.cpp:1539
 msgid "Removing songs from My Music"
@@ -3940,7 +3941,7 @@ msgstr "Genudfyld"
 
 #: ../bin/src/ui_networkremotesettingspage.h:191
 msgid "Require authentication code"
-msgstr ""
+msgstr "Forlang autentificeringskode"
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
@@ -3981,7 +3982,7 @@ msgstr "Retur til Clementine"
 
 #: ../bin/src/ui_equalizer.h:174
 msgid "Right"
-msgstr ""
+msgstr "Højre"
 
 #: ui/equalizer.cpp:127
 msgid "Rock"
@@ -4071,7 +4072,7 @@ msgstr "Skalerbar samplingsfrekvens-profil (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
-msgstr ""
+msgstr "Skaler størrelse"
 
 #: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
@@ -4146,11 +4147,11 @@ msgstr "Søg på Grooveshark"
 msgid "Second level"
 msgstr "Andet niveau"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Spol tilbage"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Spol frem"
 
@@ -4225,13 +4226,13 @@ msgstr "Sæt værdi på alle valgte spor..."
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Settings"
-msgstr ""
+msgstr "Indstillinger"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "Genvejstast"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4246,7 +4247,7 @@ msgstr "Der findes allerede en genvejstast for %1"
 msgid "Show"
 msgstr "Vis"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Vis OSD"
 
@@ -4343,7 +4344,7 @@ msgstr "Vis statusikon"
 msgid "Show which sources are enabled and disabled"
 msgstr "Vis hvilke kilder der er aktiveret og deaktiveret"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Vis/skjul"
 
@@ -4385,11 +4386,11 @@ msgstr "Lignende kunstnere"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
-msgstr ""
+msgstr "Størrelse"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
-msgstr ""
+msgstr "Størrelse:"
 
 #: ui/equalizer.cpp:129
 msgid "Ska"
@@ -4531,7 +4532,7 @@ msgstr "Starter…"
 msgid "Stations"
 msgstr "Kanaler"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Stop"
@@ -4548,7 +4549,7 @@ msgstr "Stop efter dette spor"
 msgid "Stop playback"
 msgstr "Stop afspilning"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Stop afspilning efter nuværende spor"
 
@@ -4616,7 +4617,7 @@ msgstr "Understøttede formater"
 
 #: ../bin/src/ui_librarysettingspage.h:201
 msgid "Synchronize statistics to files now"
-msgstr ""
+msgstr "Synkroniser statistik til filer nu"
 
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
@@ -4666,7 +4667,7 @@ msgstr "Tekst indstillinger"
 msgid "Thanks to"
 msgstr "Tak til"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Kunne ikke starte kommandoen \\\"%1\\\""
@@ -4836,7 +4837,7 @@ msgstr "For at starte Grooveshark radio, skal du først lytte til et par andre G
 msgid "Today"
 msgstr "Idag"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Slå pæn OSD til/fra"
 
@@ -4932,11 +4933,11 @@ msgstr "Ubuntu One"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:132
 msgid "Ubuntu One password"
-msgstr ""
+msgstr "Ubuntu One kode"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:130
 msgid "Ubuntu One username"
-msgstr ""
+msgstr "Ubuntu One brugernavn"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -5031,7 +5032,7 @@ msgstr "Brug Replay Gain-metadata hvis tilgængelig"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 msgid "Use SSLv3"
-msgstr ""
+msgstr "Brug SSLv3"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5047,7 +5048,7 @@ msgstr "Brug en selvvalgt meddelelse til beskeder"
 
 #: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Use a network remote control"
-msgstr ""
+msgstr "Brug en netværksfjernbetjening"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -5170,7 +5171,7 @@ msgstr "WMA"
 
 #: playlist/playlisttabbar.cpp:182 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "Advar ved nedlukning af en spillelistes fane"
 
 #: core/song.cpp:349
 msgid "Wav"
@@ -5447,7 +5448,7 @@ msgid "Zero"
 msgstr "Nul"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "tilføj %n sange"
 
@@ -5541,7 +5542,7 @@ msgid "longest first"
 msgstr "længste først"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "flyt %n sange"
 
@@ -5575,14 +5576,14 @@ msgstr "indstillinger"
 
 #: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "eller skan QR koden!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
 msgstr "tast retur"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "fjern %n sange"
 

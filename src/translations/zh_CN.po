@@ -150,17 +150,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 失败"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n 完成"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 剩余"
 
@@ -985,7 +985,7 @@ msgstr "更改封面"
 msgid "Change font size..."
 msgstr "更改字号..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "改变重复模式"
 
@@ -993,7 +993,7 @@ msgstr "改变重复模式"
 msgid "Change shortcut..."
 msgstr "更改快捷键..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "更改乱序模式"
 
@@ -1117,7 +1117,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine 能够同步您在不同计算机和播客程序订阅的博客。<a href=\"https://gpodder.net/register/\">创建新帐户</a>。"
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1534,7 +1534,7 @@ msgstr "音量减少 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "降低音量 <value> %"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "降低音量"
 
@@ -1730,7 +1730,7 @@ msgid "Double clicking a song will..."
 msgstr "双击歌曲将..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "已经下载了 %n 个节目"
 
@@ -1867,7 +1867,7 @@ msgid ""
 "displayed in this order."
 msgstr "在搜索结果中启用以下来源。结果将按以下顺序显示。"
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "启用/禁用 Last.fm 的音乐记录"
 
@@ -2562,7 +2562,7 @@ msgstr "以 4% 为单位增大音量"
 msgid "Increase the volume by <value> percent"
 msgstr "提升音量 <value>%"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "增大音量"
 
@@ -2929,7 +2929,7 @@ msgstr "低复杂度 (LC)"
 msgid "Lyrics"
 msgstr "歌词"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "歌词来自 %1"
@@ -3033,7 +3033,7 @@ msgstr "会员类型"
 msgid "Minimum bitrate"
 msgstr "最小位速率"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "projectM 设置缺失"
 
@@ -3100,7 +3100,7 @@ msgstr "音乐"
 msgid "Music Library"
 msgstr "媒体库"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "静音"
@@ -3216,7 +3216,7 @@ msgstr "最新曲目"
 msgid "Next"
 msgstr "下一首"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "下一个曲目"
@@ -3489,7 +3489,7 @@ msgstr "晚会"
 msgid "Password"
 msgstr "密码"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "暂停"
@@ -3515,7 +3515,7 @@ msgstr "像素"
 msgid "Plain sidebar"
 msgstr "普通侧边栏"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3555,7 +3555,7 @@ msgstr "播放标签电台..."
 msgid "Play the <n>th track in the playlist"
 msgstr "播放列表中的第<n>首"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "播放/暂停"
 
@@ -3692,7 +3692,7 @@ msgstr "预览"
 msgid "Previous"
 msgstr "上一首"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "上一个曲目"
@@ -3760,27 +3760,27 @@ msgstr "雨声"
 msgid "Random visualization"
 msgstr "随机视觉效果"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "给当前曲目评级为零星"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "给当前曲目评级为一星"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "给当前曲目评级为两星"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "给当前曲目评级为三星"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "给当前曲目评级为四星"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "给当前曲目评级为五星"
 
@@ -4149,11 +4149,11 @@ msgstr "在 Grooveshark 搜索"
 msgid "Second level"
 msgstr "第二阶段"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "快退"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "快进"
 
@@ -4234,7 +4234,7 @@ msgstr "设置"
 msgid "Shortcut"
 msgstr "快捷键"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4249,7 +4249,7 @@ msgstr "已存在 %1 的快捷键"
 msgid "Show"
 msgstr "显示"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "显示 OSD"
 
@@ -4346,7 +4346,7 @@ msgstr "显示托盘图标"
 msgid "Show which sources are enabled and disabled"
 msgstr "显示来源启用/禁用状态"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "显示/隐藏"
 
@@ -4534,7 +4534,7 @@ msgstr "正在开始..."
 msgid "Stations"
 msgstr "工作站"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "停止"
@@ -4551,7 +4551,7 @@ msgstr "在此曲目后停止"
 msgid "Stop playback"
 msgstr "停止播放"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "播放完此曲目后停止"
 
@@ -4669,7 +4669,7 @@ msgstr "文本设置"
 msgid "Thanks to"
 msgstr "感谢"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "命令\"%1\"无法执行。"
@@ -4839,7 +4839,7 @@ msgstr "在开始收听 Grooveshark 电台之前，您需要收听几首 Grooves
 msgid "Today"
 msgstr "今日"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "切换漂亮的 OSD"
 
@@ -5450,7 +5450,7 @@ msgid "Zero"
 msgstr "00"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "添加 %n 首曲目"
 
@@ -5544,7 +5544,7 @@ msgid "longest first"
 msgstr "最长优先"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "移动 %n 首歌"
 
@@ -5585,7 +5585,7 @@ msgid "press enter"
 msgstr "按回车键"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "移除 %n 首歌"
 

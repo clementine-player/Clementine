@@ -144,17 +144,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 曲失敗しました"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n が完了しました"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 曲残っています"
 
@@ -979,7 +979,7 @@ msgstr "カバーアートの変更"
 msgid "Change font size..."
 msgstr "フォントサイズの変更..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "リピートモードの変更"
 
@@ -987,7 +987,7 @@ msgstr "リピートモードの変更"
 msgid "Change shortcut..."
 msgstr "ショートカットの変更..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "シャッフルモードの変更"
 
@@ -1111,7 +1111,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine は購読リストを他のコンピューターやポッドキャストアプリケーションと同期できます。  <a href=\"https://gpodder.net/register/\">アカウントを作成する</a>。"
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1528,7 +1528,7 @@ msgstr "音量を 4% 下げます"
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "音量を下げる"
 
@@ -1724,7 +1724,7 @@ msgid "Double clicking a song will..."
 msgstr "曲をダブルクリックした際の動作..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "%n 個のエピソードをダウンロード"
 
@@ -1861,7 +1861,7 @@ msgid ""
 "displayed in this order."
 msgstr "下のソースを有効にすると検索結果に含まれます。結果はこの並び順で表示されます。"
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm の scrobbling を有効・無効にする"
 
@@ -2556,7 +2556,7 @@ msgstr "音量を 4% 上げます"
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "音量を上げる"
 
@@ -2923,7 +2923,7 @@ msgstr ""
 msgid "Lyrics"
 msgstr "歌詞"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "%1 からの歌詞"
@@ -3027,7 +3027,7 @@ msgstr "メンバーシップの種類"
 msgid "Minimum bitrate"
 msgstr "最低ビットレート"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "projectM プリセットがありません"
 
@@ -3094,7 +3094,7 @@ msgstr "ミュージック"
 msgid "Music Library"
 msgstr "ミュージックライブラリ"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "ミュート"
@@ -3210,7 +3210,7 @@ msgstr "最新のトラック"
 msgid "Next"
 msgstr "次へ"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "次のトラック"
@@ -3483,7 +3483,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "パスワード"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "一時停止"
@@ -3509,7 +3509,7 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "プレーンサイドバー"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3549,7 +3549,7 @@ msgstr "タグラジオの再生..."
 msgid "Play the <n>th track in the playlist"
 msgstr "プレイリストの <n> 番目のトラックを再生する"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "再生・一時停止"
 
@@ -3686,7 +3686,7 @@ msgstr "プレビュー"
 msgid "Previous"
 msgstr "前へ"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "前のトラック"
@@ -3754,27 +3754,27 @@ msgstr "Rain"
 msgid "Random visualization"
 msgstr "ランダムなビジュアライゼーション"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "現在の曲を星 0 つと評価します"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "現在の曲を星 1 つと評価します"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "現在の曲を星 2 つと評価します"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "現在の曲を星 3 つと評価します"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "現在の曲を星 4 つと評価します"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "現在の曲を星 5 つと評価します"
 
@@ -4143,11 +4143,11 @@ msgstr "Grooveshark を検索中"
 msgid "Second level"
 msgstr "第 2 階層"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "後方へシーク"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "前方へシーク"
 
@@ -4228,7 +4228,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "ショートカット"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4243,7 +4243,7 @@ msgstr "%1 のショートカットは既に存在します"
 msgid "Show"
 msgstr "表示"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "OSD の表示"
 
@@ -4340,7 +4340,7 @@ msgstr "トレイアイコンを表示する"
 msgid "Show which sources are enabled and disabled"
 msgstr "有効および無効になっているソースを表示"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "表示・非表示の切り替え"
 
@@ -4528,7 +4528,7 @@ msgstr "開始しています..."
 msgid "Stations"
 msgstr "局"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "停止"
@@ -4545,7 +4545,7 @@ msgstr "このトラックで停止"
 msgid "Stop playback"
 msgstr "再生の停止"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "現在のトラックで停止"
 
@@ -4663,7 +4663,7 @@ msgstr "文字のオプション"
 msgid "Thanks to"
 msgstr "謝辞"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "コマンド \"%1\" は開始できませんでした。"
@@ -4833,7 +4833,7 @@ msgstr "Grooveshark のラジオを開始するには、まず始めに他の Gr
 msgid "Today"
 msgstr "今日"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Pretty OSD の切り替え"
 
@@ -5444,7 +5444,7 @@ msgid "Zero"
 msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n 曲の追加"
 
@@ -5538,7 +5538,7 @@ msgid "longest first"
 msgstr "長い順"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "%n 曲の移動"
 
@@ -5579,7 +5579,7 @@ msgid "press enter"
 msgstr "enter を押してください"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n 曲の削除"
 

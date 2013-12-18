@@ -148,17 +148,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n απέτυχε"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n ολοκληρώθηκε"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n απομένει"
 
@@ -983,7 +983,7 @@ msgstr "Αλλαγή εξώφυλλου καλλιτέχνη"
 msgid "Change font size..."
 msgstr "Αλλαγή μεγέθους γραμματοσειράς..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Αλλάξτε μέθοδο επανάληψης"
 
@@ -991,7 +991,7 @@ msgstr "Αλλάξτε μέθοδο επανάληψης"
 msgid "Change shortcut..."
 msgstr "Αλλαγή συντόμευσης..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Αλλάξτε μέθοδο ανάμιξης"
 
@@ -1115,7 +1115,7 @@ msgid ""
 "an account</a>."
 msgstr "Ο Clementine μπορεί να συγχρονίσει τις συνδρομές σας με άλλους υπολογιστές και εφαρμογές podcast.  <a href=\"https://gpodder.net/register/\">Create an account</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1532,7 +1532,7 @@ msgstr "Μείωση της έντασης ήχου κατά 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Μείωση του ήχου κατά <value> της εκατό"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Μείωση έντασης"
 
@@ -1728,7 +1728,7 @@ msgid "Double clicking a song will..."
 msgstr "Διπλό \"κλικ\" σε ένα τραγούδι θα..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Λήψη %n επεισοδίων"
 
@@ -1865,7 +1865,7 @@ msgid ""
 "displayed in this order."
 msgstr "Ενεργοποιήστε τις παρακάτω πηγές για να τις συμπεριλάβετε στα αποτελέσματα.   Τα αποτελέσματα θα εμφανιστούν με αυτή την σειρά."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Ενεργοποίηση/απενεργοποίηση του Last.fm scrobbling"
 
@@ -2560,7 +2560,7 @@ msgstr "Αύξηση της έντασης ήχου κατά 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Αύξηση του ήχου κατά <value> της εκατό"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Αύξηση έντασης"
 
@@ -2927,7 +2927,7 @@ msgstr "Προφίλ χαμηλής πολυπλοκότητας (LC)"
 msgid "Lyrics"
 msgstr "Στίχοι"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Στίχοι από %1"
@@ -3031,7 +3031,7 @@ msgstr "Τύπος συνδρομής"
 msgid "Minimum bitrate"
 msgstr "Ελάχιστος ρυθμός bit"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Απόντες projectM προεπιλογές"
 
@@ -3098,7 +3098,7 @@ msgstr "Μουσική"
 msgid "Music Library"
 msgstr "Μουσική βιβλιοθήκη"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Σίγαση"
@@ -3214,7 +3214,7 @@ msgstr "Νεότερα κομμάτια"
 msgid "Next"
 msgstr "Επόμενο"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Επόμενο κομμάτι"
@@ -3487,7 +3487,7 @@ msgstr "Πάρτι"
 msgid "Password"
 msgstr "Συνθηματικό"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Παύση"
@@ -3513,7 +3513,7 @@ msgstr "Εικονοστοιχεία"
 msgid "Plain sidebar"
 msgstr "Απλή πλευρική μπάρα"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3553,7 +3553,7 @@ msgstr "Αναπαραγωγή ραδιοφώνου ετικετών..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Αναπαραγωγή του <n>ου κομματιού της λίστας αναπαραγωγής"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Αναπαραγωγή/Παύση"
 
@@ -3690,7 +3690,7 @@ msgstr "Προεπισκόπηση"
 msgid "Previous"
 msgstr "Προηγούμενο"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Προηγούμενο κομμάτι"
@@ -3758,27 +3758,27 @@ msgstr "Βροχή"
 msgid "Random visualization"
 msgstr "Τυχαίο οπτικό εφέ"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 0 αστέρια"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 1 αστέρια"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 2 αστέρια"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 3 αστέρια"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 4 αστέρια"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 5 αστέρια"
 
@@ -4147,11 +4147,11 @@ msgstr "Αναζήτηση στο Grooveshark"
 msgid "Second level"
 msgstr "Δεύτερο επίπεδο"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Αναζήτηση πίσω"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Αναζήτηση εμπρός"
 
@@ -4232,7 +4232,7 @@ msgstr "Ρυθμίσεις"
 msgid "Shortcut"
 msgstr "Συντόμευση"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4247,7 +4247,7 @@ msgstr "Η συντόμευση για το %1 υπάρχει"
 msgid "Show"
 msgstr "Εμφάνιση"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Εμφάνιση OSD"
 
@@ -4344,7 +4344,7 @@ msgstr "Εμφάνιση εικονιδίου συστήματος"
 msgid "Show which sources are enabled and disabled"
 msgstr "Εμφάνιση πηγών που είναι ενεργοποιημένες και απενεργοποιημένες"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Εμφάνιση/Απόκρυψη"
 
@@ -4532,7 +4532,7 @@ msgstr "Εκκίνηση..."
 msgid "Stations"
 msgstr "Σταθμοί"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Σταμάτημα"
@@ -4549,7 +4549,7 @@ msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
 msgid "Stop playback"
 msgstr "Διακοπή αναπαραγωγής"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Παύση αναπαραγωγής μετά το τρέχον κομμάτι"
 
@@ -4667,7 +4667,7 @@ msgstr "Επιλογές κειμένου"
 msgid "Thanks to"
 msgstr "Ευχαριστίες σε"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Η εντολή \"%1\" δεν μπόρεσε να ξεκινήσει"
@@ -4837,7 +4837,7 @@ msgstr "Για να ακούσετε το ραδιόφωνο Grooveshark, θα �
 msgid "Today"
 msgstr "Σήμερα"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Εναλλαγή Όμορφου OSD"
 
@@ -5448,7 +5448,7 @@ msgid "Zero"
 msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "προσθήκη %n τραγουδιών"
 
@@ -5542,7 +5542,7 @@ msgid "longest first"
 msgstr "το μακρύτερο πρώτα"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "μετακίνηση %n τραγουδιών"
 
@@ -5583,7 +5583,7 @@ msgid "press enter"
 msgstr "πιέστε enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "αφαίρεση %n τραγουδιών"
 

@@ -6,12 +6,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2012-2013
 # Jaergenoth <jstuomisto@gmail.com>, 2013
+# Jaergenoth <jstuomisto@gmail.com>, 2013
 # Moonwrist <moonwrist@moonwrist.org>, 2011, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2013-11-26 19:23+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"PO-Revision-Date: 2013-12-05 09:30+0000\n"
+"Last-Translator: Jaergenoth <jstuomisto@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -144,17 +145,17 @@ msgid "%filename%"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n epäonnistui"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n valmistui"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n jäljellä"
 
@@ -290,7 +291,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Jos ei valittuna, Clementine yrittää tallentaa arvosanasi sekä muut tiedot erilliseen tietokantaan muokkaamatta tiedostojasi.</p><p>Jos valittuna, Clementine tallentaa tiedot sekä tietokantaan että tiedostoihisi joka kerta kun tiedot muuttuvat.</p><p>Huomaa, että tämä ei välttämättä toimi kaikkien formaattien kanssa, ja koska asiasta ei ole olemassa standardeja, muut soittimet eivät ehkä osaa lukea niitä.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -298,7 +299,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Tämä kirjoittaa kappaleiden arvosanat ja tilastot suoraan tiedostoihisi.</p><p>Tätä ei tarvita jos &quot;Tallenna arvostelut ja tilastot tiedostojen tageihin&quot; on valittuna.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -498,7 +499,7 @@ msgstr "Lisää tunniste kappaleen kategoria"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "Lisää tunniste kappaleen ryhmitys"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
@@ -506,7 +507,7 @@ msgstr "Lisää tunniste kappaleen kesto"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
-msgstr ""
+msgstr "Lisää tunniste kappaleen esittäjä"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song play count"
@@ -599,7 +600,7 @@ msgstr "Kirjaston tarkempi järjestely..."
 
 #: ../bin/src/ui_podcastsettingspage.h:247
 msgid "After "
-msgstr ""
+msgstr "Jälkeen"
 
 #: ../bin/src/ui_organisedialog.h:190
 msgid "After copying..."
@@ -769,7 +770,7 @@ msgstr "Haluatko varmasti nollata tämän kappaleen tilastotiedot?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "Oletko varma että haluat kirjoittaa kaikkien kirjastosi kappleiden tilastot suoraan kirjastosi tiedostoihin?"
 
 #: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -809,7 +810,7 @@ msgstr "Tunnistautuminen epäonnistui"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Author"
-msgstr ""
+msgstr "Tekijä"
 
 #: ui/about.cpp:65
 msgid "Authors"
@@ -919,7 +920,7 @@ msgstr "Block analyzer"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Block type"
-msgstr ""
+msgstr "Lohkotyyppi"
 
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
@@ -979,7 +980,7 @@ msgstr "Vaihda kansikuvaa"
 msgid "Change font size..."
 msgstr "Vaihda kirjasinkokoa..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Vaihda toiston tilaa"
 
@@ -987,7 +988,7 @@ msgstr "Vaihda toiston tilaa"
 msgid "Change shortcut..."
 msgstr "Vaihda pikanäppäin..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Vaihda sekoituksen tilaa"
 
@@ -1111,7 +1112,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine voi synkronoida tilauksesi muiden tietokoneiden ja podcast-sovellusten kanssa.  <a href=\"https://gpodder.net/register/\">Luo tunnus</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1257,7 +1258,7 @@ msgstr "Asetukset..."
 
 #: ../bin/src/ui_wiimotesettingspage.h:186
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr ""
+msgstr "Yhdistä Wii Remote käyttämällä aktivoi/deaktivoi toimintoa"
 
 #: devices/devicemanager.cpp:323 devices/devicemanager.cpp:327
 msgid "Connect device"
@@ -1528,7 +1529,7 @@ msgstr "Vähennä ääntä - 4 %"
 msgid "Decrease the volume by <value> percent"
 msgstr "Vähennä äänenvoimakkuutta <value> prosentilla"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Vähennä äänenvoimakkuutta"
 
@@ -1724,7 +1725,7 @@ msgid "Double clicking a song will..."
 msgstr "Kappaleen kaksoisnapsautus..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Poista %n jaksoa"
 
@@ -1861,7 +1862,7 @@ msgid ""
 "displayed in this order."
 msgstr "Kytke lähteitä päälle, jos haluat niiden näkyvän hakutuloksissa.  Tulokset näytetään tässä järjestyksessä."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Päälle / pois Last.fm scrobbling"
 
@@ -1887,7 +1888,7 @@ msgstr "Kirjoita URL-osoite kansikuvien lataamiseen Internetistä:"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
-msgstr ""
+msgstr "Syötä tiedostonimi kansille (ei tiedostopäätettä):"
 
 #: playlist/playlisttabbar.cpp:137
 msgid "Enter a new name for this playlist"
@@ -2556,7 +2557,7 @@ msgstr "Lisää ääntä - 4 %"
 msgid "Increase the volume by <value> percent"
 msgstr "Lisää äänenvoimakkuutta <value> prosentilla"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Lisää äänenvoimakkuutta"
 
@@ -2899,7 +2900,7 @@ msgstr "Kirjautuminen epäonnistui"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
-msgstr ""
+msgstr "Long term prediction -profiili (LTP)"
 
 #: ../bin/src/ui_mainwindow.h:660
 msgid "Love"
@@ -2917,13 +2918,13 @@ msgstr "Matala (256x256)"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
-msgstr ""
+msgstr "Low complexity -profiili (LC)"
 
 #: ../bin/src/ui_songinfosettingspage.h:187
 msgid "Lyrics"
 msgstr "Sanoitukset"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Sanoitukset tarjoaa %1"
@@ -3027,7 +3028,7 @@ msgstr "Jäsenyyden tyyppi"
 msgid "Minimum bitrate"
 msgstr "Pienin bittinopeus"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Puuttuvat projectM-asetukset"
 
@@ -3094,7 +3095,7 @@ msgstr "Musiikki"
 msgid "Music Library"
 msgstr "Musiikkikirjasto"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Vaimenna"
@@ -3105,7 +3106,7 @@ msgstr "Last.fm-kirjastoni"
 
 #: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
-msgstr ""
+msgstr "Last.fm Mix -radio"
 
 #: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:205
 msgid "My Last.fm Neighborhood"
@@ -3113,7 +3114,7 @@ msgstr "Oma Last.fm-naapurusto"
 
 #: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:190
 msgid "My Last.fm Recommended Radio"
-msgstr ""
+msgstr "Last.fm:n suositellut"
 
 #: internet/lastfmservice.cpp:197
 msgid "My Mix Radio"
@@ -3210,7 +3211,7 @@ msgstr "Uusimmat kappaleet"
 msgid "Next"
 msgstr "Seuraava"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Seuraava kappale"
@@ -3233,7 +3234,7 @@ msgstr "Ei kansikuvia vietäväksi."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
-msgstr ""
+msgstr "Ei pitkiä lohkoja"
 
 #: playlist/playlistcontainer.cpp:366
 msgid ""
@@ -3242,7 +3243,7 @@ msgstr "Ei osumia haulle. Tyhjennä hakukenttä näyttääksesi koko soittolista
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
-msgstr ""
+msgstr "Ei lyhyitä lohkoja"
 
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:154
@@ -3259,7 +3260,7 @@ msgstr "Normaali"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
-msgstr ""
+msgstr "Normaalilohkotyyppi"
 
 #: playlist/playlistsequence.cpp:170
 msgid "Not available while using a dynamic playlist"
@@ -3436,7 +3437,7 @@ msgstr "Muut valinnat"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
-msgstr ""
+msgstr "Ulostulo"
 
 #: ../bin/src/ui_playbacksettingspage.h:325
 msgid "Output device"
@@ -3483,7 +3484,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Salasana"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Keskeytä"
@@ -3499,17 +3500,17 @@ msgstr "Keskeytetty"
 #: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
-msgstr ""
+msgstr "Esittäjä"
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
-msgstr ""
+msgstr "Pikseli"
 
 #: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
 msgstr "Pelkistetty sivupalkki"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3530,7 +3531,7 @@ msgstr "Soittokertoja"
 
 #: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
-msgstr ""
+msgstr "Toista omaa radiota..."
 
 #: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
@@ -3549,7 +3550,7 @@ msgstr "Toista tunnisteradio..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Soita soittolistan <n>. kappale"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Toista/Keskeytä"
 
@@ -3686,7 +3687,7 @@ msgstr "Esikatselu"
 msgid "Previous"
 msgstr "Edellinen"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Edellinen kappale"
@@ -3754,27 +3755,27 @@ msgstr "Sadetta"
 msgid "Random visualization"
 msgstr "Satunnainen visualisointi"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Arvostele nykyinen kappale 0:n arvoiseksi"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Arvostele nykyinen kappale 1:n arvoiseksi"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Arvostele nykyinen kappale 2:n arvoiseksi"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Arvostele nykyinen kappale 3:n arvoiseksi"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Arvostele nykyinen kappale 4:n arvoiseksi"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Arvostele nykyinen kappale 5:n arvoiseksi"
 
@@ -3950,7 +3951,7 @@ msgstr "Nollaa soittokerrat"
 #: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "Toista kappale uudelleen, tai toista edellinen kappale, jos alle 8 sekunnin päästä alusta."
 
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
@@ -4064,11 +4065,11 @@ msgstr "Tallennetaan kappaleita"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
-msgstr ""
+msgstr "Scalable sampling rate -profiili (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
-msgstr ""
+msgstr "Skaalaa koko"
 
 #: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
@@ -4143,11 +4144,11 @@ msgstr "Etsitään Groovesharkista"
 msgid "Second level"
 msgstr "Toinen taso"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Siirry taaksepäin"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Siirry eteenpäin"
 
@@ -4228,7 +4229,7 @@ msgstr "Asetukset"
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4243,7 +4244,7 @@ msgstr "Pikanäppäin toiminnolle %1 on jo olemassa"
 msgid "Show"
 msgstr "Näytä"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Näytä kappaletiedot näytöllä"
 
@@ -4340,7 +4341,7 @@ msgstr "Näytä ilmoitusalueen kuvake"
 msgid "Show which sources are enabled and disabled"
 msgstr "Näytä mitkä lähteet ovat käytössä ja pois käytöstä"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Näytä/piilota"
 
@@ -4528,7 +4529,7 @@ msgstr "Aloittaa ..."
 msgid "Stations"
 msgstr "Asemat"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Pysäytä"
@@ -4545,7 +4546,7 @@ msgstr "Pysäytä toistettavan kappaleen jälkeen"
 msgid "Stop playback"
 msgstr "Pysäytä toisto"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Lopeta soitto nykyisen kappaleen jälkeen"
 
@@ -4663,7 +4664,7 @@ msgstr "Tekstivalinnat"
 msgid "Thanks to"
 msgstr "Kiitokset"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "\"%1\"-komentoa ei voitu suorittaa."
@@ -4833,7 +4834,7 @@ msgstr "Ennen kuin alat käyttää Grooveshark-radiota, sinun tulisi kuunnella v
 msgid "Today"
 msgstr "Tänään"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Kuvaruutunäyttö päälle / pois"
 
@@ -5444,7 +5445,7 @@ msgid "Zero"
 msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "lisää %n kappaletta"
 
@@ -5538,7 +5539,7 @@ msgid "longest first"
 msgstr "pisin ensin"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "siirrä %n kappaletta"
 
@@ -5579,7 +5580,7 @@ msgid "press enter"
 msgstr "paina enter näppäintä"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "poista %n kappaletta"
 

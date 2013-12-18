@@ -143,17 +143,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n onsuksesvol"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n voltooi"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n oorblywend"
 
@@ -978,7 +978,7 @@ msgstr "Verander omslag"
 msgid "Change font size..."
 msgstr "Verander lettergrootte"
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Verander herhalingsmodus"
 
@@ -986,7 +986,7 @@ msgstr "Verander herhalingsmodus"
 msgid "Change shortcut..."
 msgstr "Verander kortskakel"
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Verander skommel modus"
 
@@ -1110,7 +1110,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine kan jou lidmaatskappe sinkroniseer tussen jou rekenaars. <a href=\"https://gpodder.net/register/\">Skep 'n rekening hier</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1527,7 +1527,7 @@ msgstr "Verlaag die volume met 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Verlaag die volume met <value>%"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Verlaag die volume"
 
@@ -1723,7 +1723,7 @@ msgid "Double clicking a song will..."
 msgstr "Dubbelkliek op 'n liedjie sal..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Laai %n episodes af"
 
@@ -1860,7 +1860,7 @@ msgid ""
 "displayed in this order."
 msgstr "Skakel 'n bron hier onder aan om dit in te sluit in die soektog. Resultate sal in hierdie volgorde vertoon word."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Skakel die opteken van geluisterde musiek op Last.fm aan/af"
 
@@ -2555,7 +2555,7 @@ msgstr "Verhoog die volume met 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Verhoog die volume met <value>%"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Verhoog die volume"
 
@@ -2922,7 +2922,7 @@ msgstr "Lae kompleksitietsprofiel (LC)"
 msgid "Lyrics"
 msgstr "Lirieke"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Lirieke vanaf %1"
@@ -3026,7 +3026,7 @@ msgstr "Lidmaatskapstipe"
 msgid "Minimum bitrate"
 msgstr "Minimum bistempo"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "projectM voorinstellings word vermis"
 
@@ -3093,7 +3093,7 @@ msgstr "Musiek"
 msgid "Music Library"
 msgstr "Musiekversameling"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Maak stil"
@@ -3209,7 +3209,7 @@ msgstr "Nuutste snitte"
 msgid "Next"
 msgstr "Volgende"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Volgende snit"
@@ -3482,7 +3482,7 @@ msgstr "Partytjie"
 msgid "Password"
 msgstr "Wagwoord"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pause"
@@ -3508,7 +3508,7 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Gewone sykieslys"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3548,7 +3548,7 @@ msgstr "Speel etiket radio..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Speel die <n>de snit in die afspeellys"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Speel/Pause"
 
@@ -3685,7 +3685,7 @@ msgstr "Voorskou"
 msgid "Previous"
 msgstr "Vorige"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Vorige snit"
@@ -3753,27 +3753,27 @@ msgstr "Rëen"
 msgid "Random visualization"
 msgstr "Willekeurige visualisasie"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Gee die huidige liedjie 0 sterre"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Gee die huidige liedjie 1 ster"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Gee die huidige liedjie 2 sterre"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Gee die huidige liedjie 3 sterre"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Gee die huidige liedjie 4 sterre"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Gee die huidige liedjie 5 sterre"
 
@@ -4142,11 +4142,11 @@ msgstr "Grooveshark word deursoek"
 msgid "Second level"
 msgstr "Tweede vlak"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Streef terugwaarts"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Streef vorentoe"
 
@@ -4227,7 +4227,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Kortskakel"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4242,7 +4242,7 @@ msgstr "Kortskakel vir %1 bestaan reeds"
 msgid "Show"
 msgstr "Wys"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Wys skermbeeld"
 
@@ -4339,7 +4339,7 @@ msgstr "Wys in stelselbalk"
 msgid "Show which sources are enabled and disabled"
 msgstr "Wys watter bronne is aan- en afgeskakel"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Wys/Steek weg"
 
@@ -4527,7 +4527,7 @@ msgstr "In aanvang..."
 msgid "Stations"
 msgstr "Stasies"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Stop"
@@ -4544,7 +4544,7 @@ msgstr "Stop na hierdie snit"
 msgid "Stop playback"
 msgstr "Hou op met afspeel"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Hou op afspeel na die huidige snit"
 
@@ -4662,7 +4662,7 @@ msgstr "Teksinstellings"
 msgid "Thanks to"
 msgstr "Dank aan"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Die \"%1\" bevel kan nie begin word nie."
@@ -4832,7 +4832,7 @@ msgstr "Om Grooveshark radio te begin moet jy eers na 'n paar ander Grooveshark 
 msgid "Today"
 msgstr "Vandag"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Skakel mooi skermbeeld aan/af"
 
@@ -5443,7 +5443,7 @@ msgid "Zero"
 msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "voeg %n liedjies by"
 
@@ -5537,7 +5537,7 @@ msgid "longest first"
 msgstr "langste eerste"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "skuif %n liedjies"
 
@@ -5578,7 +5578,7 @@ msgid "press enter"
 msgstr "druk Enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "verwyder %n liedjies"
 

@@ -148,17 +148,17 @@ msgid "%filename%"
 msgstr "%fájlnév%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n meghiúsult"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n befejezve"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n hátralévő"
 
@@ -983,7 +983,7 @@ msgstr "Albumborító módosítása"
 msgid "Change font size..."
 msgstr "Betűméret megváltoztatása..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Ismétlési mód megváltoztatása"
 
@@ -991,7 +991,7 @@ msgstr "Ismétlési mód megváltoztatása"
 msgid "Change shortcut..."
 msgstr "Billentyűparancs módosítása..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Véletlenszerű lejátszási mód megváltoztatása"
 
@@ -1115,7 +1115,7 @@ msgid ""
 "an account</a>."
 msgstr "A Clementine képes szinkronizálni feliratkozásait más számítógépekkel és podcast alkalmazásokkal.  <a href=\"https://gpodder.net/register/\">Készítsen egy felhasználót</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1532,7 +1532,7 @@ msgstr "Hangerő csökkentése 4%-kal"
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Hangerő csökkentése"
 
@@ -1728,7 +1728,7 @@ msgid "Double clicking a song will..."
 msgstr "Dupla kattintásra egy számon..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "%n epizód letöltése"
 
@@ -1865,7 +1865,7 @@ msgid ""
 "displayed in this order."
 msgstr "Engedélyezze a forrásokat, hogy bevegye őket a keresési eredmények közé. Az eredmények ebben a sorrendben fognak megjelenni."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm scrobbling engedélyezése/tiltása"
 
@@ -2560,7 +2560,7 @@ msgstr "Hangerő növelése 4%-kal"
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Hangerő növelése"
 
@@ -2927,7 +2927,7 @@ msgstr "Alacsony komplexitású profil (LC)"
 msgid "Lyrics"
 msgstr "Dalszövegek"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "%1"
@@ -3031,7 +3031,7 @@ msgstr "Tagság típusa"
 msgid "Minimum bitrate"
 msgstr "Minimális bitráta"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Hiányzó projectM beállítások"
 
@@ -3098,7 +3098,7 @@ msgstr "Zene"
 msgid "Music Library"
 msgstr "Zenetár"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Némítás"
@@ -3214,7 +3214,7 @@ msgstr "Legújabb számok"
 msgid "Next"
 msgstr "Következő"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Következő szám"
@@ -3487,7 +3487,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Jelszó"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Szünet"
@@ -3513,7 +3513,7 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Egyszerű oldalsáv"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3553,7 +3553,7 @@ msgstr "Címke rádió lejátszása..."
 msgid "Play the <n>th track in the playlist"
 msgstr "A(z) <n>. szám lejátszása a listában"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Lejátszás/Szünet"
 
@@ -3690,7 +3690,7 @@ msgstr "Előnézet"
 msgid "Previous"
 msgstr "Előző"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Előző szám"
@@ -3758,27 +3758,27 @@ msgstr "Eső"
 msgid "Random visualization"
 msgstr "Véletlenszerű megjelenítés"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "A most játszott szám értékelése 0 csillaggal"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "A most játszott szám értékelése 1 csillaggal"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "A most játszott szám értékelése 2 csillaggal"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "A most játszott szám értékelése 3 csillaggal"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "A most játszott szám értékelése 4 csillaggal"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "A most játszott szám értékelése 5 csillaggal"
 
@@ -4147,11 +4147,11 @@ msgstr "Keresés Groovesharkon"
 msgid "Second level"
 msgstr "Második szinten"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Léptetés hátra"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Léptetés előre"
 
@@ -4232,7 +4232,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Billentyűparancs"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4247,7 +4247,7 @@ msgstr "%1 billentyűparancsa már létezik"
 msgid "Show"
 msgstr "Megjelenítés"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "OSD megjelenítése"
 
@@ -4344,7 +4344,7 @@ msgstr "Tálcaikon megjelenítése"
 msgid "Show which sources are enabled and disabled"
 msgstr "Mutassa melyik forrás van engedélyezve vagy letiltva"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Megjelenítés/Elrejtés"
 
@@ -4532,7 +4532,7 @@ msgstr "Indítás…"
 msgid "Stations"
 msgstr "Állomások"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Leállít"
@@ -4549,7 +4549,7 @@ msgstr "Leállítás az aktuális szám után"
 msgid "Stop playback"
 msgstr "Lejátszás leállítása"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Leállítás az aktuális szám után"
 
@@ -4667,7 +4667,7 @@ msgstr "Szövegopciók"
 msgid "Thanks to"
 msgstr "Köszönet"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "A \"%1\" parancs nem végrehajtható."
@@ -4837,7 +4837,7 @@ msgstr "A Grooveshark rádió elindításához előbb meg kell hallgatnia néhá
 msgid "Today"
 msgstr "Ma"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "OSD ki-bekapcsolása"
 
@@ -5448,7 +5448,7 @@ msgid "Zero"
 msgstr "Nulla"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n szám felvétele"
 
@@ -5542,7 +5542,7 @@ msgid "longest first"
 msgstr "hosszabb először"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "%n szám mozgatása"
 
@@ -5583,7 +5583,7 @@ msgid "press enter"
 msgstr "nyomja meg az entert"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n szám eltávolítása"
 

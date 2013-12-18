@@ -145,17 +145,17 @@ msgid "%filename%"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n završeno"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n preostalo"
 
@@ -980,7 +980,7 @@ msgstr "Promijenite omot albuma"
 msgid "Change font size..."
 msgstr "Promijeni veličinu slova..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Promjenu načina ponavljanja"
 
@@ -988,7 +988,7 @@ msgstr "Promjenu načina ponavljanja"
 msgid "Change shortcut..."
 msgstr "Promijeni prečac..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Promijenite naizmjenični mod"
 
@@ -1112,7 +1112,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine može uskladiti vaš popis pretplate sa vašim ostalim računalima i podcast aplikacijama.  <a href=\"https://gpodder.net/register/\">Napravite račun</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1529,7 +1529,7 @@ msgstr "Smanji glasnoću zvuka za 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Smanji glanoću zvuka za <value> posto"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Smanji glasnoću zvuka"
 
@@ -1725,7 +1725,7 @@ msgid "Double clicking a song will..."
 msgstr "Dvostrukim klikom pjesma će..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Preuzeto %n nastavaka"
 
@@ -1862,7 +1862,7 @@ msgid ""
 "displayed in this order."
 msgstr "Omogućite izvore ispod da bi ih uključili u rezultate pretraživanja.  Rezultati će biti prikazani ovim redosljedom."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Omogući/Onemogući Last.fm scrobblanje"
 
@@ -2557,7 +2557,7 @@ msgstr "Pojačaj glasnoću zvuka za 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Povećaj glanoću zvuka za <value> posto"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Pojačaj glasnoću zvuka"
 
@@ -2924,7 +2924,7 @@ msgstr "Profil niske složenosti (NS)"
 msgid "Lyrics"
 msgstr "Tekstovi pjesama"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Tekstovi pjesama sa %1"
@@ -3028,7 +3028,7 @@ msgstr "Vrsta članstva"
 msgid "Minimum bitrate"
 msgstr "Minimalna brzina prijenosa"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Nedostaju projectM predložci"
 
@@ -3095,7 +3095,7 @@ msgstr "Glazba"
 msgid "Music Library"
 msgstr "Fonoteka"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Utišaj"
@@ -3211,7 +3211,7 @@ msgstr "Najnovija pjesma"
 msgid "Next"
 msgstr "Sljedeća pjesma"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Sljedeća pjesma"
@@ -3484,7 +3484,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Lozinka"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pauziraj reprodukciju"
@@ -3510,7 +3510,7 @@ msgstr "Piksela"
 msgid "Plain sidebar"
 msgstr "Jednostavna bočna traka"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3550,7 +3550,7 @@ msgstr "Reproduciraj odabrani radio..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Reproduciraj <n> pjesmu iz popisa izvođenja"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Pokreni reprodukciju/Pauziraj"
 
@@ -3687,7 +3687,7 @@ msgstr "Prikaz"
 msgid "Previous"
 msgstr "Prijašnja pjesma"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Prijašnja pjesma"
@@ -3755,27 +3755,27 @@ msgstr "Kiša"
 msgid "Random visualization"
 msgstr "Naizmjenična vizualizacija"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Ocjenite trenutnu pjesmu sa 0 zvijezdica"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Ocjenite trenutnu pjesmu sa 1 zvijezdicom"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Ocjenite trenutnu pjesmu sa 2 zvijezdice"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Ocjenite trenutnu pjesmu sa 3 zvijezdice"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Ocjenite trenutnu pjesmu sa 4 zvijezdice"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Ocjenite trenutnu pjesmu sa 5 zvijezdica"
 
@@ -4144,11 +4144,11 @@ msgstr "Pretraživanje Groovesharka"
 msgid "Second level"
 msgstr "Druga razina"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Traži unatrag"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Traži unaprijed"
 
@@ -4229,7 +4229,7 @@ msgstr "Postavke"
 msgid "Shortcut"
 msgstr "Prečac"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4244,7 +4244,7 @@ msgstr "Prečac za %1 već postoji"
 msgid "Show"
 msgstr "Prikaži"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Prikaži OSD"
 
@@ -4341,7 +4341,7 @@ msgstr "Prikaži ikonu u traci sustava"
 msgid "Show which sources are enabled and disabled"
 msgstr "Prikaži omogućene i onemogućene izvore"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Prikaži/Sakrij"
 
@@ -4529,7 +4529,7 @@ msgstr "Započinjem..."
 msgid "Stations"
 msgstr "Stanice"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Zaustavi reprodukciju"
@@ -4546,7 +4546,7 @@ msgstr "Zaustavi reprodukciju nakon ove pjesme"
 msgid "Stop playback"
 msgstr "Zaustavi reprodukciju"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Zaustavi reprodukciju nakon trenutne pjesme"
 
@@ -4664,7 +4664,7 @@ msgstr "Mogućnosti teksta"
 msgid "Thanks to"
 msgstr "Zahvaljujemo"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "\"%1\" naredba se ne može pokrenuti."
@@ -4834,7 +4834,7 @@ msgstr "Za pokretanje Grooveshark radija, Prvo biste trebali poslušati nekoliko
 msgid "Today"
 msgstr "Danas"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Uključi/Isključi ljepši OSD"
 
@@ -5445,7 +5445,7 @@ msgid "Zero"
 msgstr "Nula"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodajte %n pjesama"
 
@@ -5539,7 +5539,7 @@ msgid "longest first"
 msgstr "najduži prvi"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "premjesti %n pjesama"
 
@@ -5580,7 +5580,7 @@ msgid "press enter"
 msgstr "pritisnite tipku ENTER"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "premjesti %n pjesama"
 

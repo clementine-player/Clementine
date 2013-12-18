@@ -144,17 +144,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n з памылкай"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершана"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n засталося"
 
@@ -979,7 +979,7 @@ msgstr "Абярыце вокладку"
 msgid "Change font size..."
 msgstr "Зьмяніць памер шрыфту..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Зьмяніць рэжым паўтарэньня"
 
@@ -987,7 +987,7 @@ msgstr "Зьмяніць рэжым паўтарэньня"
 msgid "Change shortcut..."
 msgstr "Зьмяніць камбінацыю клявішаў..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Зьмяніць рэжым мяшаньня"
 
@@ -1111,7 +1111,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine можа сынхранізаваць вашыя падпіскі з іншымі кампутарамі й прылажэньнямі. <a href=\"https://gpodder.net/register/\">Create an account</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1528,7 +1528,7 @@ msgstr "Паменьшыць гучнасьць на 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Памяншаць гучнасьць на <value> адсоткаў"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Паменьшыць гучнасьць"
 
@@ -1724,7 +1724,7 @@ msgid "Double clicking a song will..."
 msgstr "Двайны клік на песьні"
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Спампаваць %n сэрыяў"
 
@@ -1861,7 +1861,7 @@ msgid ""
 "displayed in this order."
 msgstr "Уключыць пералічаныя ніжэй крыніцы, каб уключыць іх у вынікі пошуку. Вынікі будуць адлюстраваныя ў гэтым парадку."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Уключыць/выключыць скроблінг Last.fm"
 
@@ -2556,7 +2556,7 @@ msgstr "Павялічыць гучнасьць на 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Павялічваць гучнасьць на <value> адсоткаў"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Павялічыць гучнасьць"
 
@@ -2923,7 +2923,7 @@ msgstr "Профіль нізкай складанасьці (LC)"
 msgid "Lyrics"
 msgstr "Тэксты песень"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Тэкст песьні з %1"
@@ -3027,7 +3027,7 @@ msgstr "Тып падпіскі"
 msgid "Minimum bitrate"
 msgstr "Мінімальны бітрэйт"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Прапушчаныя ўсталёўкі projectM"
 
@@ -3094,7 +3094,7 @@ msgstr "Музыка"
 msgid "Music Library"
 msgstr "Музычная Бібліятэка"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Бязгучна"
@@ -3210,7 +3210,7 @@ msgstr "Новыя трэкі"
 msgid "Next"
 msgstr "Далей"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Наступны трэк"
@@ -3483,7 +3483,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Пароль"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Прыпыніць"
@@ -3509,7 +3509,7 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Нармальная бакавая панэль"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3549,7 +3549,7 @@ msgstr "Прайграць радыё тэга..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Прайграць <n> кампазыцыю ў плэйлісьце"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Граць/Прыпыніць"
 
@@ -3686,7 +3686,7 @@ msgstr "Перадагляд"
 msgid "Previous"
 msgstr "Папярэдні"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Папярэдні трэк"
@@ -3754,27 +3754,27 @@ msgstr "Дождж"
 msgid "Random visualization"
 msgstr "Выпадковая візуалізацыя"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Ацаніць бягучую кампазыцыю ў 0 зорак"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Ацаніць бягучую кампазыцыю ў 1 зорку"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Ацаніць бягучую кампазыцыю ў 2 зоркі"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Ацаніць бягучую кампазыцыю ў 3 зоркі"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Ацаніць бягучую кампазыцыю ў 4 зоркі"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Ацаніць бягучую кампазыцыю ў 5 зорак"
 
@@ -4143,11 +4143,11 @@ msgstr "Пошук на Grooveshark"
 msgid "Second level"
 msgstr "Другі ўзровень"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Перамотка назад"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Перамотка наперад"
 
@@ -4228,7 +4228,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Камбінацыя клявішаў"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4243,7 +4243,7 @@ msgstr "Камбінацыя клявішаў для %1 ужо існуе"
 msgid "Show"
 msgstr "Паказаць"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Паказваць OSD"
 
@@ -4340,7 +4340,7 @@ msgstr "Паказаць значок у латку"
 msgid "Show which sources are enabled and disabled"
 msgstr "Паказаць якія крыніцы ўключаны і адключаны"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Паказаць/Схаваць"
 
@@ -4528,7 +4528,7 @@ msgstr "Запуск..."
 msgid "Stations"
 msgstr "Станцыі"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Спыніць"
@@ -4545,7 +4545,7 @@ msgstr "Спыніць пасьля гэтага трэку"
 msgid "Stop playback"
 msgstr "Спыніць прайграваньне"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Спыніць прайграваньне пасьля бягучага трэку"
 
@@ -4663,7 +4663,7 @@ msgstr "Уласьцівасьці тэксту"
 msgid "Thanks to"
 msgstr "Дзякуй"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Каманда \"%1\" ня можа быць выкананая."
@@ -4833,7 +4833,7 @@ msgstr "Каб уключыць радыё Grooveshark, трэба спачат�
 msgid "Today"
 msgstr "Сёньня"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Уключыць"
 
@@ -5444,7 +5444,7 @@ msgid "Zero"
 msgstr "Па-змоўчаньні"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "дадаць %n кампазыцыяў"
 
@@ -5538,7 +5538,7 @@ msgid "longest first"
 msgstr "спачатку найдаўжэйшыя"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "перасунуць %n кампазыцый"
 
@@ -5579,7 +5579,7 @@ msgid "press enter"
 msgstr "націсьніце \"enter\""
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "выдаліць %n кампазыцый"
 

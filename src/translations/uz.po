@@ -142,17 +142,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n muvaffaqiyatsiz tugadi"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n tugadi"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n qoldi"
 
@@ -977,7 +977,7 @@ msgstr "Albom rasmini o'zgartirish"
 msgid "Change font size..."
 msgstr "Shrift o'lchamini o'zgartirish..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Takrorlash usulini o'zgartirish"
 
@@ -985,7 +985,7 @@ msgstr "Takrorlash usulini o'zgartirish"
 msgid "Change shortcut..."
 msgstr "Tugmalar birikmasini o'zgartirish..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Tasodifiy usulini o'zgartirish"
 
@@ -1109,7 +1109,7 @@ msgid ""
 "an account</a>."
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1526,7 +1526,7 @@ msgstr "Ovoz balandligini 4%'ga kamaytirish"
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Ovoz balandligini kamaytirish"
 
@@ -1722,7 +1722,7 @@ msgid "Double clicking a song will..."
 msgstr "Qo'shiqni ikki marta bosganda..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "%n epizodlarni yuklab olish"
 
@@ -1859,7 +1859,7 @@ msgid ""
 "displayed in this order."
 msgstr ""
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm scrobblingni yoqish/o'chirish"
 
@@ -2554,7 +2554,7 @@ msgstr ""
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr ""
 
@@ -2921,7 +2921,7 @@ msgstr ""
 msgid "Lyrics"
 msgstr "Qo'shiq matnlari"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "%1'dan qo'shiq matnlari"
@@ -3025,7 +3025,7 @@ msgstr ""
 msgid "Minimum bitrate"
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr ""
 
@@ -3092,7 +3092,7 @@ msgstr "Musiqa"
 msgid "Music Library"
 msgstr ""
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr ""
@@ -3208,7 +3208,7 @@ msgstr ""
 msgid "Next"
 msgstr "Keyingi"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Keyingi trek"
@@ -3481,7 +3481,7 @@ msgstr ""
 msgid "Password"
 msgstr "Maxfiy so'z"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr ""
@@ -3507,7 +3507,7 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr ""
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3547,7 +3547,7 @@ msgstr ""
 msgid "Play the <n>th track in the playlist"
 msgstr ""
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr ""
 
@@ -3684,7 +3684,7 @@ msgstr "Ko'rib chiqish"
 msgid "Previous"
 msgstr "Oldingi"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Oldingi trek"
@@ -3752,27 +3752,27 @@ msgstr ""
 msgid "Random visualization"
 msgstr ""
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Joriy qo'shiqni baholash 0 yulduz"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Joriy qo'shiqni baholash 1 yulduz"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Joriy qo'shiqni baholash 2 yulduz"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Joriy qo'shiqni baholash 3 yulduz"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Joriy qo'shiqni baholash 4 yulduz"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Joriy qo'shiqni baholash 5 yulduz"
 
@@ -4141,11 +4141,11 @@ msgstr "Grooveshark'da qidirilmodqa"
 msgid "Second level"
 msgstr ""
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr ""
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr ""
 
@@ -4226,7 +4226,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Tugmalar birikmasi"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4241,7 +4241,7 @@ msgstr "%1 uchun tugmalar birikmasi mavjud"
 msgid "Show"
 msgstr "Ko'rsatish"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "OSD ko'rsatish"
 
@@ -4338,7 +4338,7 @@ msgstr "Trey nishonchasini ko'rsatish"
 msgid "Show which sources are enabled and disabled"
 msgstr ""
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Ko'rsatish/Yashirish"
 
@@ -4526,7 +4526,7 @@ msgstr ""
 msgid "Stations"
 msgstr "Stansiyalar"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr ""
@@ -4543,7 +4543,7 @@ msgstr ""
 msgid "Stop playback"
 msgstr ""
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr ""
 
@@ -4661,7 +4661,7 @@ msgstr ""
 msgid "Thanks to"
 msgstr "Tashakkurlar"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr ""
@@ -4831,7 +4831,7 @@ msgstr ""
 msgid "Today"
 msgstr "Bugun"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr ""
 
@@ -5442,7 +5442,7 @@ msgid "Zero"
 msgstr "Andoza"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n qo'shiqni qo'shish"
 
@@ -5536,7 +5536,7 @@ msgid "longest first"
 msgstr "uzunidan boshlab"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr ""
 
@@ -5577,7 +5577,7 @@ msgid "press enter"
 msgstr "Enter bosing"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n qo'shiqni o'chirish"
 

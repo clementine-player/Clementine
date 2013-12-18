@@ -145,17 +145,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n thất bại"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n kết thúc"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "Còn lại %n"
 
@@ -980,7 +980,7 @@ msgstr "Đổi ảnh bìa"
 msgid "Change font size..."
 msgstr "Đổi kích cỡ phông chữ..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Thay đổi chế độ lặp lại"
 
@@ -988,7 +988,7 @@ msgstr "Thay đổi chế độ lặp lại"
 msgid "Change shortcut..."
 msgstr "Đổi phím tắt..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Thay đổi chế độ phát ngẫu nhiên"
 
@@ -1112,7 +1112,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine có thể đồng bộ danh sách đăng kí của bạn với máy tính khác và ứng dụng podcast khác.  <a href=\"https://gpodder.net/register/\">Tạo tài khoản</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1529,7 +1529,7 @@ msgstr "Giảm 4% âm lượng"
 msgid "Decrease the volume by <value> percent"
 msgstr "Giảm <value>  phần trăm âm lượng"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Giảm âm lượng"
 
@@ -1725,7 +1725,7 @@ msgid "Double clicking a song will..."
 msgstr "Nhấn đúp chuột vào một bài hát sẽ..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Tải về %n tập"
 
@@ -1862,7 +1862,7 @@ msgid ""
 "displayed in this order."
 msgstr "Bật những nguồn tương ứng để tìm nhạc.  Kết quả được hiển thị theo thứ tự này."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Bật/Tắt Chuyển thông tin bài hát đến Last.fm"
 
@@ -2557,7 +2557,7 @@ msgstr "Tăng 4% âm lượng"
 msgid "Increase the volume by <value> percent"
 msgstr "Tăng <value>  phần trăm âm lượng"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Tăng âm lượng"
 
@@ -2924,7 +2924,7 @@ msgstr "Hồ sơ ít phức tạp (LC)"
 msgid "Lyrics"
 msgstr "Lời bài hát"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Lời bài hát từ %1"
@@ -3028,7 +3028,7 @@ msgstr "Kiểu thành viên"
 msgid "Minimum bitrate"
 msgstr "Bitrate tối thiểu"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Thiếu thiết đặt projectM"
 
@@ -3095,7 +3095,7 @@ msgstr "Nhạc"
 msgid "Music Library"
 msgstr "Thư viện nhạc"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Tắt âm"
@@ -3211,7 +3211,7 @@ msgstr "Những bài mới nhất"
 msgid "Next"
 msgstr "Tiếp theo"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Phát bài tiếp theo"
@@ -3484,7 +3484,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Tạm dừng"
@@ -3510,7 +3510,7 @@ msgstr "Điểm ảnh"
 msgid "Plain sidebar"
 msgstr "Thanh bên đơn giản"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3550,7 +3550,7 @@ msgstr "Phát thẻ phát thanh..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Phát bài hát thứ <n> trong danh sách"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Phát/Tạm dừng"
 
@@ -3687,7 +3687,7 @@ msgstr "Xem trước"
 msgid "Previous"
 msgstr "Trước"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Phát bài trước"
@@ -3755,27 +3755,27 @@ msgstr "Rain"
 msgid "Random visualization"
 msgstr "Hiệu ứng hình ảnh ảo ngẫu nhiên"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Đánh giá 0 sao cho bài hiện tại"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Đánh giá 1 sao cho bài hiện tại"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Đánh giá 2 sao cho bài hiện tại"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Đánh giá 3 sao cho bài hiện tại"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Đánh giá 4 sao cho bài hiện tại"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Đánh giá 5 sao cho bài hiện tại"
 
@@ -4144,11 +4144,11 @@ msgstr "Đang tìm trên Grooveshark"
 msgid "Second level"
 msgstr "Mức độ hai"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Lùi về sau"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Tiến về trước"
 
@@ -4229,7 +4229,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Phím tắt"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4244,7 +4244,7 @@ msgstr "Đã có phím tắt để %1"
 msgid "Show"
 msgstr "Hiển thị"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Hiện hộp thông báo"
 
@@ -4341,7 +4341,7 @@ msgstr "Hiện biểu tượng dưới khay hệ thống"
 msgid "Show which sources are enabled and disabled"
 msgstr "Hiện những nguồn đã được bật và tắt"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Hiện/Ẩn"
 
@@ -4529,7 +4529,7 @@ msgstr "Đang bắt đầu..."
 msgid "Stations"
 msgstr "Đài"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Dừng"
@@ -4546,7 +4546,7 @@ msgstr "Dừng sau khi phát xong bài này"
 msgid "Stop playback"
 msgstr "Dừng lại"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Dừng khi phát xong bài hiện tại"
 
@@ -4664,7 +4664,7 @@ msgstr "Tùy chỉnh văn bản"
 msgid "Thanks to"
 msgstr "Xin gửi lời cám ơn đến"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Không thể bắt đầu lệnh \"%1\"."
@@ -4834,7 +4834,7 @@ msgstr "Để mở kênh phát thanh Grooveshark, bạn nên nghe vài bài hát
 msgid "Today"
 msgstr "Hôm nay"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Bật/Tắt hộp thông báo"
 
@@ -5445,7 +5445,7 @@ msgid "Zero"
 msgstr "Không"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "và %n bài hát"
 
@@ -5539,7 +5539,7 @@ msgid "longest first"
 msgstr "dài nhất trước"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "di chuyển %n bài hát"
 
@@ -5580,7 +5580,7 @@ msgid "press enter"
 msgstr "nhấn enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "loại bỏ %n bài hát"
 

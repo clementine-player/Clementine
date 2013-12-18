@@ -141,17 +141,17 @@ msgid "%filename%"
 msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n ဖွင့်မရ"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n ပြီးဆံုး"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n လက်ကျန်"
 
@@ -976,7 +976,7 @@ msgstr "အနုပညာအဖုံးပြောင်းလဲ"
 msgid "Change font size..."
 msgstr "ဖွန်အရွယ်ပြောင်းလဲ"
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "ပြန်ဆိုစနစ်ပြောင်းလဲ"
 
@@ -984,7 +984,7 @@ msgstr "ပြန်ဆိုစနစ်ပြောင်းလဲ"
 msgid "Change shortcut..."
 msgstr "အတိုကောက်ပြောင်းလဲ..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "ကုလားဖန်ထိုးစနစ်ပြောင်းလဲ"
 
@@ -1108,7 +1108,7 @@ msgid ""
 "an account</a>."
 msgstr "ကလီမန်တိုင်းသည်မှာယူခြင်းစာရင်းရှိတစ်ခြားကွန်ပျုတာများနှင့်ပို့စ်ကဒ်လုပ်ငန်းသုံးပရိုဂရမ်များနှင့်တစ်သားတည်းလုပ်ဆောင်နိုင်။<a href=\"https://gpodder.net/register/\">စာရင်းဖန်တီးပါ</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1525,7 +1525,7 @@ msgstr "အသံပမာဏ၄%ခန့်လျှော့ချ"
 msgid "Decrease the volume by <value> percent"
 msgstr "အသံပမာဏ <value> ရာခိုင်နှုန်းခန့်လျှော့ချ"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "အသံပမာဏလျှော့ချ"
 
@@ -1721,7 +1721,7 @@ msgid "Double clicking a song will..."
 msgstr "ကလစ်နှစ်ခါနှိပ်ခြင်းဖြင့်သီချင်းဟာ..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "တွဲများ %n ကူးဆွဲ"
 
@@ -1858,7 +1858,7 @@ msgid ""
 "displayed in this order."
 msgstr "ရှာဖွေရလဒ်များတွင်ပါဝင်စေရန်အောက်ရှိရင်းမြစ်များကိုလုပ်ဆောက်စေ။ ရလဒ်များအစဉ်အလိုက်ပြသလိမ့်မည်။"
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "လက်စ်.အက်ဖ်အမ်အလိုအလျောက်သီချင်းနာမည်ပေးပို့ခြင်းလုပ်ဆောင်စေ/မလုပ်ဆောင်စေ"
 
@@ -2553,7 +2553,7 @@ msgstr "အသံပမာဏ၄%ခန့်တိုးမြင့်"
 msgid "Increase the volume by <value> percent"
 msgstr "အသံပမာဏ <value> ရာခိုင်နှုန်းခန့်တိုးမြင့်"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "အသံပမာဏတိုးမြင့်"
 
@@ -2920,7 +2920,7 @@ msgstr "ရှုပ်ထွေးမှုအနည်းဆံုးအကြ
 msgid "Lyrics"
 msgstr "သီချင်းစာသားများ"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "%1 မှသီချင်းစာသားများ"
@@ -3024,7 +3024,7 @@ msgstr "အသင်းဝင်အမျိုးအစား"
 msgid "Minimum bitrate"
 msgstr "အနည်းဆုံးဘစ်နှုန်း"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "ပရောဂျက်အမ်ကြိုတင်ထိန်းညှိများလိုနေ"
 
@@ -3091,7 +3091,7 @@ msgstr "ဂီတ"
 msgid "Music Library"
 msgstr "ဂီတတိုက်"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "အသံအုပ်"
@@ -3207,7 +3207,7 @@ msgstr "တေးသံလမ်းကြောအသစ်ဆုံးမျာ
 msgid "Next"
 msgstr "နောက်တစ်ခု"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "နောက်တေးသံလမ်းကြော"
@@ -3480,7 +3480,7 @@ msgstr "အဖွဲ့"
 msgid "Password"
 msgstr "စကားဝှက်"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "ရပ်တန့်"
@@ -3506,7 +3506,7 @@ msgstr "အစက်အပြောက်"
 msgid "Plain sidebar"
 msgstr "ဘေးတိုင်ရိုးရိုး"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3546,7 +3546,7 @@ msgstr "အမည်ရေဒီယိုဖွင့်..."
 msgid "Play the <n>th track in the playlist"
 msgstr "သီချင်းစာရင်းတွင်တေးသံလမ်းကြော <n> စတင်ဖွင့်"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "ဖွင့်/ရပ်တန့်"
 
@@ -3683,7 +3683,7 @@ msgstr "ကြိုတင်ကြည့်ရှု"
 msgid "Previous"
 msgstr "ယခင်"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "ယခင်တေးသံလမ်းကြော"
@@ -3751,27 +3751,27 @@ msgstr "မိုး"
 msgid "Random visualization"
 msgstr "ကျပန်းပုံဖော်ကြည့်ခြင်း"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "လက်ရှိသီချင်း၀ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "လက်ရှိသီချင်း၁ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "လက်ရှိသီချင်း၂ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "လက်ရှိသီချင်း၃ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "လက်ရှိသီချင်း၄ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "လက်ရှိသီချင်း၅ကြယ်တန်ဖိုးဖြတ်"
 
@@ -4140,11 +4140,11 @@ msgstr "ဂရုရှက်တွင်ရှာဖွေခြင်း"
 msgid "Second level"
 msgstr "ဒုတိယအဆင့်"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "နောက်ပြန်ရှာဖွေ"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "ရှေ့သို့ရှာဖွေ"
 
@@ -4225,7 +4225,7 @@ msgstr "ချိန်ညှိချက်"
 msgid "Shortcut"
 msgstr "အတိုကောက်"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4240,7 +4240,7 @@ msgstr "%1 အတွက်အတိုကောက်တည်ရှိပြီ
 msgid "Show"
 msgstr "ပြသ"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ပြသ"
 
@@ -4337,7 +4337,7 @@ msgstr "စနစ်သင်္ကေတပြသ"
 msgid "Show which sources are enabled and disabled"
 msgstr "မည်သည့်ရင်းမြစ်များလုပ်ဆောင်စေမလုပ်ဆောင်စေပြသ"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "ပြသ/ဖုံးကွယ်"
 
@@ -4525,7 +4525,7 @@ msgstr "စတင်နေ..."
 msgid "Stations"
 msgstr "ထုတ်လွှင့်မှုဌာနများ"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "ရပ်"
@@ -4542,7 +4542,7 @@ msgstr "ဒီတေးသံလမ်းကြောပြီးနောက်
 msgid "Stop playback"
 msgstr "ပြန်ဖွင့်ရပ်"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "လက်ရှိတေးသံလမ်းကြောပြီးနောက်သီချင်းဖွင့်ခြင်းရပ်"
 
@@ -4660,7 +4660,7 @@ msgstr "စာသားရွေးပိုင်ခွင့်များ"
 msgid "Thanks to"
 msgstr "သို့ကျေးဇူးတင်ခြင်း"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "\"%1\" ညွှန်ကြားခြင်းမစတင်နိုင်။"
@@ -4830,7 +4830,7 @@ msgstr "ဂရုရှက်ရေဒီယိုမဖွင့်မီတစ
 msgid "Today"
 msgstr "ယနေ့"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှဖွင့်ပိတ်လုပ်"
 
@@ -5441,7 +5441,7 @@ msgid "Zero"
 msgstr "သုည"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n သီချင်းများထည့်သွင်း"
 
@@ -5535,7 +5535,7 @@ msgid "longest first"
 msgstr "အရှည်ဆုံးဦးစားပေး"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "သီချင်းများ %n ရွှေ့"
 
@@ -5576,7 +5576,7 @@ msgid "press enter"
 msgstr "ဝင်ရောက်ကီးခေါက်"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n သီချင်းများဖယ်ရှား"
 

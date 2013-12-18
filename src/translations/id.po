@@ -149,17 +149,17 @@ msgid "%filename%"
 msgstr "nama %berkas"
 
 #: transcoder/transcodedialog.cpp:202
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n gagal"
 
 #: transcoder/transcodedialog.cpp:197
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n telah selesai"
 
 #: transcoder/transcodedialog.cpp:192
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n yang tersisa"
 
@@ -984,7 +984,7 @@ msgstr "Ganti cover"
 msgid "Change font size..."
 msgstr "Ganti ukuran huruf..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:62
 msgid "Change repeat mode"
 msgstr "Ubah mode ulang"
 
@@ -992,7 +992,7 @@ msgstr "Ubah mode ulang"
 msgid "Change shortcut..."
 msgstr "Ubah shortcut..."
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:61
 msgid "Change shuffle mode"
 msgstr "Ubah mode pengacakan"
 
@@ -1116,7 +1116,7 @@ msgid ""
 "an account</a>."
 msgstr "Clementine dapat menyinkronkan daftar langganan Anda dengan komputer lain dan aplikasi podcast.  <a href=\"https://gpodder.net/register/\">Buat akun</a>."
 
-#: visualisations/projectmvisualisation.cpp:128
+#: visualisations/projectmvisualisation.cpp:133
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -1533,7 +1533,7 @@ msgstr "Kurangi volume 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Kurangi volume <value> persen"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Kurangi volume"
 
@@ -1729,7 +1729,7 @@ msgid "Double clicking a song will..."
 msgstr "Klik ganda lagu akan ..."
 
 #: podcasts/podcastservice.cpp:350
-#, c-format
+#, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Memuat %n episode"
 
@@ -1866,7 +1866,7 @@ msgid ""
 "displayed in this order."
 msgstr "Aktifkasi sumber di bawah ini untuk memasukkan mereka dalam hasil pencarian.  Hasil akan ditampilkan dalam urutan ini."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:63
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Aktifkan/Nonaktifkan Last.fm scrobbling"
 
@@ -2561,7 +2561,7 @@ msgstr "Naikkan volume menjadi 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Naikkan volume <value> persen"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Naikkan volume"
 
@@ -2928,7 +2928,7 @@ msgstr "Profil kompleksitas rendah (LC)"
 msgid "Lyrics"
 msgstr "Lirik"
 
-#: songinfo/ultimatelyricsprovider.cpp:139
+#: songinfo/ultimatelyricsprovider.cpp:156
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Lirik dari %1"
@@ -3032,7 +3032,7 @@ msgstr "Tipe keanggotaan"
 msgid "Minimum bitrate"
 msgstr "Laju bit minimum"
 
-#: visualisations/projectmvisualisation.cpp:127
+#: visualisations/projectmvisualisation.cpp:132
 msgid "Missing projectM presets"
 msgstr "Kehilangan pengaturan projectM"
 
@@ -3099,7 +3099,7 @@ msgstr "Musik"
 msgid "Music Library"
 msgstr "Pustaka Musik"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Bisu"
@@ -3215,7 +3215,7 @@ msgstr "Trek terbaru"
 msgid "Next"
 msgstr "Berikut"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Trek berikutnya"
@@ -3488,7 +3488,7 @@ msgstr "Pesta"
 msgid "Password"
 msgstr "Kata sandi"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Jeda"
@@ -3514,7 +3514,7 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Bilah samping polos"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
 #: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -3554,7 +3554,7 @@ msgstr "Putar label radio..."
 msgid "Play the <n>th track in the playlist"
 msgstr "Putar trek ke <n> dalam daftar lagu"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "Putar/Jeda"
 
@@ -3691,7 +3691,7 @@ msgstr "Pratinjau"
 msgid "Previous"
 msgstr "Sebelumnya"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Trek sebelumnya"
@@ -3759,27 +3759,27 @@ msgstr "Hujan"
 msgid "Random visualization"
 msgstr "Visualisasi acak"
 
-#: core/globalshortcuts.cpp:64
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "Nilai lagu saat ini 0 bintang"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "Nilai lagu saat ini 1 bintang"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "Nilai lagu saat ini 2 bintang"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "Nilai lagu saat ini 3 bintang"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "Nilai lagu saat ini 4 bintang"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "Nilai lagu saat ini 5 bintang"
 
@@ -4148,11 +4148,11 @@ msgstr "Mencari di Grooveshark"
 msgid "Second level"
 msgstr "Tingkat kedua"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "Mencari mundur"
 
-#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "Mencari maju"
 
@@ -4233,7 +4233,7 @@ msgstr "Pengaturan"
 msgid "Shortcut"
 msgstr "Jalan pintas"
 
-#: ui/globalshortcutssettingspage.cpp:133
+#: ui/globalshortcutssettingspage.cpp:135
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
@@ -4248,7 +4248,7 @@ msgstr "Jalan pintas untuk %1 yang sudah ada"
 msgid "Show"
 msgstr "Tunjukkan"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "Tunjukkan OSD"
 
@@ -4345,7 +4345,7 @@ msgstr "Tampilkan ikon tray"
 msgid "Show which sources are enabled and disabled"
 msgstr "Tampilkan sumber yang diaktifkan dan dinonaktifkan"
 
-#: core/globalshortcuts.cpp:57
+#: core/globalshortcuts.cpp:58
 msgid "Show/Hide"
 msgstr "Tampilkan/Sembunyikan"
 
@@ -4533,7 +4533,7 @@ msgstr "Memulai..."
 msgid "Stations"
 msgstr "Stasiun-stasiun"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Berhenti"
@@ -4550,7 +4550,7 @@ msgstr "Berhenti setelah trek ini"
 msgid "Stop playback"
 msgstr "Hentikan pemutaran"
 
-#: core/globalshortcuts.cpp:49
+#: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Hentikan putaran setelah trek yang ini"
 
@@ -4668,7 +4668,7 @@ msgstr "Pilihan teks"
 msgid "Thanks to"
 msgstr "Terima kasih kepada"
 
-#: ui/globalshortcutssettingspage.cpp:175
+#: ui/globalshortcutssettingspage.cpp:177
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Perintah \"%1\" tidak dapat dimulai"
@@ -4838,7 +4838,7 @@ msgstr "Untuk memulai radio Grooveshark, Anda harus terlebih dahulu mendengarkan
 msgid "Today"
 msgstr "Hari Ini"
 
-#: core/globalshortcuts.cpp:59
+#: core/globalshortcuts.cpp:60
 msgid "Toggle Pretty OSD"
 msgstr "Aktifkan Pretty OSD"
 
@@ -5449,7 +5449,7 @@ msgid "Zero"
 msgstr "Nol"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "tambahkan %n lagu"
 
@@ -5543,7 +5543,7 @@ msgid "longest first"
 msgstr "pertama terpanjang"
 
 #: playlist/playlistundocommands.cpp:99
-#, c-format
+#, c-format, qt-plural-format
 msgid "move %n songs"
 msgstr "pindah %n lagu"
 
@@ -5584,7 +5584,7 @@ msgid "press enter"
 msgstr "tekan enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "hapus %n lagu"
 
