@@ -17,8 +17,8 @@ static const char* kServiceName = "Skydrive";
 static const char* kServiceId = "skydrive";
 static const char* kSettingsGroup = "Skydrive";
 
-static const char* kClientId = "00000000400E7C78";
-static const char* kClientSecret = "B0KLZjEgC5SpW0KknrsBFwlaKmGThaAk";
+static const char* kClientId = "0000000040111F16";
+static const char* kClientSecret = "w2ClguSX0jG56cBl1CeUniypTBRjXt2Z";
 
 static const char* kOAuthEndpoint =
     "https://login.live.com/oauth20_authorize.srf";
