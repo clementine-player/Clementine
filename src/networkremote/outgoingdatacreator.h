@@ -62,6 +62,7 @@ public slots:
   void PlaylistRenamed(int id, const QString& new_name);
   void ActiveChanged(Playlist*);
   void CurrentSongChanged(const Song& song, const QString& uri, const QImage& img);
+  void SendSongMetadata();
   void StateChanged(Engine::State);
   void SendKeepAlive();
   void SendRepeatMode(PlaylistSequence::RepeatMode mode);
@@ -73,6 +74,8 @@ public slots:
   void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
   void ResponseSongOffer(RemoteClient* client, bool accepted);
   void SendLibrary(RemoteClient* client);
+  void EnableKittens(bool aww);
+  void SendKitten(const QImage& kitten);
 
 private:
   Application* app_;
@@ -86,6 +89,7 @@ private:
   int keep_alive_timeout_;
   QMap<RemoteClient*, QQueue<DownloadItem> > download_queue_;
   int last_track_position_;
+  bool aww_;
 
   boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
   ProviderList provider_list_;

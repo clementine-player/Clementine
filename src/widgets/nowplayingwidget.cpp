@@ -23,6 +23,7 @@
 #include "covers/currentartloader.h"
 #include "covers/kittenloader.h"
 #include "library/librarybackend.h"
+#include "networkremote/networkremote.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/iconloader.h"
 
@@ -423,6 +424,7 @@ void NowPlayingWidget::EnableKittens(bool aww) {
     kittens_ = new KittenLoader(this);
     app_->MoveToNewThread(kittens_);
     connect(kittens_, SIGNAL(ImageLoaded(quint64,QImage)), SLOT(KittenLoaded(quint64,QImage)));
+    connect(kittens_, SIGNAL(ImageLoaded(quint64,QImage)), app_->network_remote(), SLOT(SendKitten(quint64,QImage)));
   }
 
   aww_ = aww;
