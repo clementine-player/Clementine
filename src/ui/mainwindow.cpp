@@ -58,6 +58,7 @@
 #include "library/libraryfilterwidget.h"
 #include "library/libraryviewcontainer.h"
 #include "musicbrainz/tagfetcher.h"
+#include "networkremote/networkremote.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistlistcontainer.h"
@@ -670,6 +671,7 @@ MainWindow::MainWindow(Application* app,
           SLOT(NowPlayingWidgetPositionChanged(bool)));
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(AllHail(bool)));
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(EnableKittens(bool)));
+  connect(ui_->action_kittens, SIGNAL(toggled(bool)), app_->network_remote(), SLOT(EnableKittens(bool)));
   // Hide the console
   //connect(ui_->action_console, SIGNAL(triggered()), SLOT(ShowConsole()));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());

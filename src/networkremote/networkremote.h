@@ -26,6 +26,8 @@ public slots:
   void StartServer();
   void ReloadSettings();
   void AcceptConnection();
+  void EnableKittens(bool aww);
+  void SendKitten(quint64 id, const QImage& kitten);
 
 private:
   boost::scoped_ptr<QTcpServer> server_;

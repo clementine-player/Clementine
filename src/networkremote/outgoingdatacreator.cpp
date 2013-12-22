@@ -33,6 +33,7 @@ const quint32 OutgoingDataCreator::kFileChunkSize = 100000; // in Bytes
 
 OutgoingDataCreator::OutgoingDataCreator(Application* app)
   : app_(app),
+    aww_(false),
     ultimate_reader_(new UltimateLyricsReader(this)),
     fetcher_(new SongInfoFetcher(this))
 {
@@ -314,21 +315,26 @@ void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
 void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& uri, const QImage& img) {
   current_song_  = song;
   current_uri_   = uri;
-  current_image_ = img;
 
-  if (!clients_->empty()) {
-    // Create the message
-    pb::remote::Message msg;
-    msg.set_type(pb::remote::CURRENT_METAINFO);
-
-    // If there is no song, create an empty node, otherwise fill it with data
-    int i = app_->playlist_manager()->active()->current_row();
-    CreateSong(
-        current_song_, img, i,
-        msg.mutable_response_current_metadata()->mutable_song_metadata());
-
-    SendDataToClients(&msg);
+  if (!aww_) {
+    current_image_ = img;
   }
+
+  SendSongMetadata();
+}
+
+void OutgoingDataCreator::SendSongMetadata() {
+  // Create the message
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::CURRENT_METAINFO);
+
+  // If there is no song, create an empty node, otherwise fill it with data
+  int i = app_->playlist_manager()->active()->current_row();
+  CreateSong(
+      current_song_, current_image_, i,
+      msg.mutable_response_current_metadata()->mutable_song_metadata());
+
+  SendDataToClients(&msg);
 }
 
 void OutgoingDataCreator::CreateSong(
@@ -774,3 +780,15 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
   // Remove temporary file
   file.remove();
 }
+
+void OutgoingDataCreator::EnableKittens(bool aww) {
+  aww_ = aww;
+}
+
+void OutgoingDataCreator::SendKitten(const QImage& kitten) {
+  if (aww_) {
+    current_image_ = kitten;
+    SendSongMetadata();
+  }
+}
+
