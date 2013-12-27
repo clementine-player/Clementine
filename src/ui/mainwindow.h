@@ -67,6 +67,7 @@ class InternetItem;
 class InternetModel;
 class InternetViewContainer;
 class Remote;
+class RipCD;
 class Song;
 class SongInfoBase;
 class SongInfoView;
@@ -79,6 +80,7 @@ class VisualisationContainer;
 class WiimotedevShortcuts;
 class Windows7ThumbBar;
 class Ui_MainWindow;
+
 
 class QSortFilterProxyModel;
 
@@ -211,6 +213,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFolder();
   void AddStream();
   void AddStreamAccepted();
+  void OpenRipCD();
   void AddCDTracks();
   void AddPodcast();
 
@@ -287,6 +290,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
   FileView* file_view_;
+  boost::scoped_ptr<RipCD> rip_cd_;
   PlaylistListContainer* playlist_list_;
   InternetViewContainer* internet_view_;
   DeviceView* device_view_;

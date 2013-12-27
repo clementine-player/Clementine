@@ -350,6 +350,7 @@ set(SOURCES
   ui/organiseerrordialog.cpp
   ui/playbacksettingspage.cpp
   ui/qtsystemtrayicon.cpp
+  ui/ripcd.cpp
   ui/screensaver.cpp
   ui/settingsdialog.cpp
   ui/settingspage.cpp
@@ -627,6 +628,7 @@ set(HEADERS
   ui/organiseerrordialog.h
   ui/playbacksettingspage.h
   ui/qtsystemtrayicon.h
+  ui/ripcd.h
   ui/settingsdialog.h
   ui/settingspage.h
   ui/standarditemiconloader.h
@@ -748,6 +750,7 @@ set(UI
   ui/organisedialog.ui
   ui/organiseerrordialog.ui
   ui/playbacksettingspage.ui
+  ui/ripcd.ui
   ui/settingsdialog.ui
   ui/trackselectiondialog.ui
 

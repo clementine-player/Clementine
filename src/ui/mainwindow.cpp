@@ -85,6 +85,7 @@
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
 #include "ui/qtsystemtrayicon.h"
+#include "ui/ripcd.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "ui/trackselectiondialog.h"
@@ -343,6 +344,7 @@ MainWindow::MainWindow(Application* app,
   connect(ui_->action_shuffle, SIGNAL(triggered()), app_->playlist_manager(), SLOT(ShuffleCurrent()));
   connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_open_cd, SIGNAL(triggered()), SLOT(AddCDTracks()));
+  connect(ui_->action_rip_audio_cd, SIGNAL(triggered()), SLOT(OpenRipCD()));
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
   connect(ui_->action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
@@ -1658,6 +1660,13 @@ void MainWindow::AddStreamAccepted() {
   MimeData* data = new MimeData;
   data->setUrls(QList<QUrl>() << add_stream_dialog_->url());
   AddToPlaylist(data);
+}
+
+void MainWindow::OpenRipCD() {
+	if (!rip_cd_) {
+		rip_cd_.reset(new RipCD);
+	  }
+	rip_cd_->show();
 }
 
 void MainWindow::AddCDTracks() {
