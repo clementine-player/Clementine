@@ -150,9 +150,6 @@ void SongInfoBase::Update(const Song& metadata) {
   QTimer::singleShot(0, fader_, SLOT(StartBlur()));
 }
 
-void SongInfoBase::ImageResultReady(int id, const QUrl& url) {
-}
-
 void SongInfoBase::InfoResultReady (int id, const CollapsibleInfoPane::Data& data) {
 }
 

@@ -21,7 +21,6 @@
 #include "collapsibleinfopane.h"
 #include "songinfobase.h"
 #include "songinfofetcher.h"
-#include "widgets/prettyimageview.h"
 
 class PrettyImageView;
 
@@ -39,8 +38,6 @@ public:
 protected:
   virtual void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
   bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
-  
-  PrettyImageView* image_view;
 
 protected slots:
   void ResultReady(int id, const SongInfoFetcher::Result& result);

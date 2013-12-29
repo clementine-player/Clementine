@@ -63,7 +63,6 @@ protected:
   void CollapseSections();
 
 protected slots:
-  virtual void ImageResultReady(int id, const QUrl& url);
   virtual void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
   virtual void ResultReady(int id, const SongInfoFetcher::Result& result);
 
