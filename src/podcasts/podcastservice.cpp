@@ -139,7 +139,7 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
 void PodcastService::UpdatePodcastText(QStandardItem* item, int unlistened_count) const {
   const Podcast podcast = item->data(Role_Podcast).value<Podcast>();
 
-  QString title = podcast.title();
+  QString title = podcast.title().simplified();
   QFont font;
 
   if (unlistened_count > 0) {
@@ -159,7 +159,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
                                        int percent) {
   const PodcastEpisode episode = item->data(Role_Episode).value<PodcastEpisode>();
 
-  QString title = episode.title();
+  QString title = episode.title().simplified();
   QString tooltip;
   QFont font;
   QIcon icon;
@@ -237,7 +237,7 @@ QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
 
 QStandardItem* PodcastService::CreatePodcastEpisodeItem(const PodcastEpisode& episode) {
   QStandardItem* item = new QStandardItem;
-  item->setText(episode.title());
+  item->setText(episode.title().simplified());
   item->setData(Type_Episode, InternetModel::Role_Type);
   item->setData(QVariant::fromValue(episode), Role_Episode);
   item->setData(InternetModel::PlayBehaviour_UseSongLoader, InternetModel::Role_PlayBehaviour);
