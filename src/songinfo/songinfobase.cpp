@@ -214,10 +214,6 @@ void SongInfoBase::ReloadSettings() {
 
     QMetaObject::invokeMethod(contents, "ReloadSettings");
   }
-
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  fetcher_->set_timeout(s.value("timeout", SongInfoFetcher::kDefaultTimeoutDuration).toInt());
 }
 
 void SongInfoBase::ConnectWidget(QWidget* widget) {
