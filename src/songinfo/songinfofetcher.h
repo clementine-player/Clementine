@@ -50,6 +50,7 @@ public:
   QList<SongInfoProvider*> providers() const { return providers_; }
 
 signals:
+  void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
   void ResultReady(int id, const SongInfoFetcher::Result& result);
 
 private slots:
@@ -72,3 +73,4 @@ private:
 };
 
 #endif // SONGINFOFETCHER_H
+

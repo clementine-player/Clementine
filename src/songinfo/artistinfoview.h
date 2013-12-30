@@ -36,6 +36,7 @@ public:
   ~ArtistInfoView();
 
 protected:
+  virtual void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
   bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
 
 protected slots:
@@ -43,3 +44,4 @@ protected slots:
 };
 
 #endif // ARTISTINFOVIEW_H
+

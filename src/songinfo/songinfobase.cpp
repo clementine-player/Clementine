@@ -64,6 +64,8 @@ SongInfoBase::SongInfoBase(QWidget* parent)
 
   connect(fetcher_, SIGNAL(ResultReady(int,SongInfoFetcher::Result)),
           SLOT(ResultReady(int,SongInfoFetcher::Result)));
+  connect(fetcher_, SIGNAL(InfoResultReady(int,CollapsibleInfoPane::Data)),
+          SLOT(InfoResultReady(int,CollapsibleInfoPane::Data)));
 }
 
 void SongInfoBase::Clear() {
@@ -142,7 +144,11 @@ void SongInfoBase::Update(const Song& metadata) {
 
   // Do this after the new pane has been shown otherwise it'll just grab a
   // black rectangle.
+  Clear ();
   QTimer::singleShot(0, fader_, SLOT(StartBlur()));
+}
+
+void SongInfoBase::InfoResultReady (int id, const CollapsibleInfoPane::Data& data) {
 }
 
 void SongInfoBase::ResultReady(int id, const SongInfoFetcher::Result& result) {
@@ -225,3 +231,4 @@ void SongInfoBase::ConnectWidget(QWidget* widget) {
     connect(widget, SIGNAL(DoGlobalSearch(QString)), SIGNAL(DoGlobalSearch(QString)));
   }
 }
+

@@ -76,17 +76,15 @@ bool SongInfoView::NeedsUpdate(const Song& old_metadata, const Song& new_metadat
          old_metadata.artist() != new_metadata.artist();
 }
 
-void SongInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) {
+void SongInfoView::InfoResultReady (int id, const CollapsibleInfoPane::Data& data) {
   if (id != current_request_id_)
     return;
-
-  Clear();
-
-  foreach (const CollapsibleInfoPane::Data& data, result.info_) {
-    AddSection(new CollapsibleInfoPane(data, this));
-  }
-
+  
+  AddSection (new CollapsibleInfoPane(data, this));
   CollapseSections();
+}
+
+void SongInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) {
 }
 
 void SongInfoView::ReloadSettings() {
@@ -170,3 +168,4 @@ QList<const UltimateLyricsProvider*> SongInfoView::lyric_providers() const {
   qSort(ret.begin(), ret.end(), CompareLyricProviders);
   return ret;
 }
+
