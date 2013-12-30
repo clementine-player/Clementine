@@ -63,6 +63,10 @@ AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
   unset_cover_ = new QAction(IconLoader::Load("list-remove"), tr("Unset cover"), this);
   show_cover_ = new QAction(IconLoader::Load("zoom-in"), tr("Show fullsize..."), this);
 
+  search_cover_auto_ = new QAction(IconLoader::Load("find"), tr("Search automatically"), this);
+  search_cover_auto_->setCheckable(true);
+  search_cover_auto_->setChecked(false);
+
   separator_ = new QAction(this);
   separator_->setSeparator(true);
 }
@@ -77,6 +81,9 @@ void AlbumCoverChoiceController::SetApplication(Application* app) {
   cover_fetcher_ = new AlbumCoverFetcher(app_->cover_providers(), this);
   cover_searcher_ = new AlbumCoverSearcher(QIcon(":/nocover.png"), app, this);
   cover_searcher_->Init(cover_fetcher_);
+
+  connect(cover_fetcher_, SIGNAL(AlbumCoverFetched(quint64,QImage,CoverSearchStatistics)),
+          this, SLOT(AlbumCoverFetched(quint64,QImage,CoverSearchStatistics)));
 }
 
 QList<QAction*> AlbumCoverChoiceController::GetAllActions() {
@@ -202,6 +209,27 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
 
   dialog->resize(label->pixmap()->size());
   dialog->show();
+}
+
+void AlbumCoverChoiceController::SearchCoverAutomatically(const Song& song) {
+  qint64 id = cover_fetcher_->FetchAlbumCover(song.artist(), song.album());
+  cover_fetching_tasks_[id] = song;
+}
+
+void AlbumCoverChoiceController::AlbumCoverFetched(quint64 id,
+                                                   const QImage &image,
+                                                   const CoverSearchStatistics &statistics) {
+  Song song;
+  if (cover_fetching_tasks_.contains(id)) {
+    song = cover_fetching_tasks_.take(id);
+  }
+
+  if (!image.isNull()) {
+    QString cover = SaveCoverInCache(song.artist(), song.album(), image);
+    SaveCover(&song, cover);
+  }
+
+  emit AutomaticCoverSearchDone();
 }
 
 void AlbumCoverChoiceController::SaveCover(Song* song, const QString &cover) {

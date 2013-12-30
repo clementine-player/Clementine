@@ -99,8 +99,11 @@ private slots:
   void SearchForCover();
   void UnsetCover();
   void ShowCover();
+  void SearchCoverAutomatically();
 
   void Bask();
+
+  void AutomaticCoverSearchDone();
 
 private:
   void CreateModeAction(Mode mode, const QString& text, QActionGroup* group,
@@ -110,6 +113,7 @@ private:
   void DrawContents(QPainter* p);
   void SetImage(const QImage& image);
   void ScaleCover();
+  bool GetCoverAutomatically();
 
 private:
   Application* app_;
@@ -143,6 +147,9 @@ private:
   QAction* bask_in_his_glory_action_;
   boost::scoped_ptr<QMovie> hypnotoad_;
   boost::scoped_ptr<FullscreenHypnotoad> big_hypnotoad_;
+
+  boost::scoped_ptr<QMovie> spinner_animation_;
+  bool downloading_covers_;
 
   bool aww_;
   KittenLoader* kittens_;
