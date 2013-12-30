@@ -62,10 +62,6 @@ void SongInfoFetcher::ImageReady(int id, const QUrl& url) {
   if (!results_.contains(id))
     return;
   results_[id].images_ << url;
-  
-  if (!waiting_for_.contains(id))
-    return;
-  emit ImageResultReady (id, url);
 }
 
 void SongInfoFetcher::InfoReady(int id, const CollapsibleInfoPane::Data& data) {

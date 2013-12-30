@@ -66,8 +66,6 @@ SongInfoBase::SongInfoBase(QWidget* parent)
           SLOT(ResultReady(int,SongInfoFetcher::Result)));
   connect(fetcher_, SIGNAL(InfoResultReady(int,CollapsibleInfoPane::Data)),
           SLOT(InfoResultReady(int,CollapsibleInfoPane::Data)));
-  connect(fetcher_, SIGNAL(ImageResultReady(int,QUrl)),
-          SLOT(ImageResultReady(int,QUrl)));
 }
 
 void SongInfoBase::Clear() {
