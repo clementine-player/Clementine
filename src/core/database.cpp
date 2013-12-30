@@ -575,7 +575,6 @@ bool Database::CheckErrors(const QSqlQuery& query) {
     qLog(Error) << "faulty query: " << query.lastQuery();
     qLog(Error) << "bound values: " << query.boundValues();
 
-    app_->AddError("LibraryBackend: " + last_error.text());
     return true;
   }
 

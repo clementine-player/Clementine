@@ -23,12 +23,14 @@
 #include "internet/internetservice.h"
 
 #include <QScopedPointer>
+#include <boost/scoped_ptr.hpp>
 
 class AddPodcastDialog;
 class Podcast;
 class PodcastBackend;
 class PodcastEpisode;
 class StandardItemIconLoader;
+class OrganiseDialog;
 
 class QSortFilterProxyModel;
 
@@ -86,6 +88,8 @@ private slots:
                                int percent);
 
   void CurrentSongChanged(const Song& metadata);
+  
+  void CopyToDeviceSlot();
 
 private:
   void EnsureAddPodcastDialogCreated();
@@ -130,7 +134,9 @@ private:
   QAction* delete_downloaded_action_;
   QAction* set_new_action_;
   QAction* set_listened_action_;
+  QAction* copy_to_device_;
   QStandardItem* root_;
+  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
 
   QModelIndexList explicitly_selected_podcasts_;
   QModelIndexList selected_podcasts_;

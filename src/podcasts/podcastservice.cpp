@@ -29,6 +29,11 @@
 #include "library/libraryview.h"
 #include "ui/iconloader.h"
 #include "ui/standarditemiconloader.h"
+#include "ui/organisedialog.h"
+#include "ui/organiseerrordialog.h"
+#include "devices/devicemanager.h"
+#include "devices/devicestatefiltermodel.h"
+#include "devices/deviceview.h"
 
 #include <QMenu>
 #include <QSortFilterProxyModel>
@@ -54,7 +59,8 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
     model_(new PodcastServiceModel(this)),
     proxy_(new PodcastSortProxyModel(this)),
     context_menu_(NULL),
-    root_(NULL)
+    root_(NULL),
+    organise_dialog_(new OrganiseDialog(app_->task_manager()))
 {
   icon_loader_->SetModel(model_);
   proxy_->setSourceModel(model_);
@@ -110,6 +116,31 @@ QStandardItem* PodcastService::CreateRootItem() {
   root_ = new QStandardItem(QIcon(":providers/podcast16.png"), tr("Podcasts"));
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
+}
+
+void PodcastService::CopyToDeviceSlot() {
+  QList<QUrl> url_list;
+  QList<PodcastEpisode> episodes;
+
+  foreach (const QModelIndex& index, selected_episodes_) {
+    episodes << index.data(Role_Episode).value<PodcastEpisode>();
+  }
+  
+  foreach (const QModelIndex& podcast, explicitly_selected_podcasts_) {
+    for (int i=0 ; i<podcast.model()->rowCount(podcast) ; ++i) {
+      const QModelIndex& index = podcast.child(i, 0);
+      episodes << index.data(Role_Episode).value<PodcastEpisode>();
+    }
+  }
+
+  foreach (const PodcastEpisode& episode, episodes) {
+    if(!episode.local_url().isEmpty())
+	url_list.append(episode.local_url());
+  }
+  organise_dialog_->SetDestinationModel(app_->device_manager()->connected_devices_model(), true);
+  organise_dialog_->SetCopy(true);
+  if (organise_dialog_->SetUrls(url_list))
+    organise_dialog_->show();
 }
 
 void PodcastService::LazyPopulate(QStandardItem* parent) {
@@ -273,6 +304,9 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
     delete_downloaded_action_ = context_menu_->addAction(
           IconLoader::Load("edit-delete"), tr("Delete downloaded data"),
           this, SLOT(DeleteDownloadedData()));
+    copy_to_device_ = context_menu_->addAction(
+	  IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Copy to device..."), 
+          this, SLOT(CopyToDeviceSlot()));
     remove_selected_action_ = context_menu_->addAction(
           IconLoader::Load("list-remove"), tr("Unsubscribe"),
           this, SLOT(RemoveSelectedPodcast()));
@@ -287,6 +321,11 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
     context_menu_->addAction(
           IconLoader::Load("configure"), tr("Configure podcasts..."),
           this, SLOT(ShowConfig()));
+
+    copy_to_device_->setDisabled(app_->device_manager()->connected_devices_model()->rowCount() == 0);
+    connect(app_->device_manager()->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
+            copy_to_device_, SLOT(setDisabled(bool)));
+
   }
 
   selected_episodes_.clear();
