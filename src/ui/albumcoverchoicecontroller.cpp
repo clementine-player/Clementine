@@ -18,6 +18,7 @@
 
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/albumcoverloader.h"
 #include "covers/currentartloader.h"
@@ -29,7 +30,6 @@
 #include "ui/iconloader.h"
 
 #include <QAction>
-#include <QCryptographicHash>
 #include <QDialog>
 #include <QDragEnterEvent>
 #include <QFileDialog>
@@ -247,11 +247,7 @@ QString AlbumCoverChoiceController::SaveCoverInCache(
     const QString& artist, const QString& album, const QImage& image) {
 
   // Hash the artist and album into a filename for the image
-  QCryptographicHash hash(QCryptographicHash::Sha1);
-  hash.addData(artist.toLower().toUtf8().constData());
-  hash.addData(album.toLower().toUtf8().constData());
-
-  QString filename(hash.result().toHex() + ".jpg");
+  QString filename(Utilities::Sha1CoverHash(artist, album).toHex() + ".jpg");
   QString path(AlbumCoverLoader::ImageCacheDir() + "/" + filename);
 
   // Make sure this directory exists first
