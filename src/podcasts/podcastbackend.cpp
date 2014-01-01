@@ -313,3 +313,26 @@ PodcastEpisodeList PodcastBackend::GetOldDownloadedEpisodes(const QDateTime& max
 
   return ret;
 }
+
+PodcastEpisodeList PodcastBackend::GetNewDownloadedEpisodes() {
+  PodcastEpisodeList ret;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+              " FROM podcast_episodes"
+              " WHERE downloaded = 'true'"
+              "   AND listened = 'false'", db);
+  q.exec();
+  if (db_->CheckErrors(q))
+    return ret;
+
+  while (q.next()) {
+    PodcastEpisode episode;
+    episode.InitFromQuery(q);
+    ret << episode;
+  }
+
+  return ret;
+}

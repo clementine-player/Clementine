@@ -119,27 +119,35 @@ QStandardItem* PodcastService::CreateRootItem() {
 }
 
 void PodcastService::CopyToDeviceSlot() {
-  QList<QUrl> url_list;
   QList<PodcastEpisode> episodes;
-
+  QList<Song> songs;
+  PodcastEpisode episode_tmp;
+  Podcast podcast;
   foreach (const QModelIndex& index, selected_episodes_) {
-    episodes << index.data(Role_Episode).value<PodcastEpisode>();
+    episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
+    if (episode_tmp.downloaded())
+      episodes << episode_tmp;
   }
   
   foreach (const QModelIndex& podcast, explicitly_selected_podcasts_) {
     for (int i=0 ; i<podcast.model()->rowCount(podcast) ; ++i) {
       const QModelIndex& index = podcast.child(i, 0);
-      episodes << index.data(Role_Episode).value<PodcastEpisode>();
+      episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
+      if (episode_tmp.downloaded())
+	episodes << episode_tmp;
     }
   }
+  if(selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty()) {
+	  episodes <<  backend_->GetNewDownloadedEpisodes();     
+    }
 
   foreach (const PodcastEpisode& episode, episodes) {
-    if(!episode.local_url().isEmpty())
-	url_list.append(episode.local_url());
+    podcast = backend_->GetSubscriptionById(episode.podcast_database_id());
+    songs.append(episode.ToSong(podcast));
   }
   organise_dialog_->SetDestinationModel(app_->device_manager()->connected_devices_model(), true);
   organise_dialog_->SetCopy(true);
-  if (organise_dialog_->SetUrls(url_list))
+  if (organise_dialog_->SetSongs(songs))
     organise_dialog_->show();
 }
 
