@@ -138,8 +138,8 @@ void PodcastService::CopyToDeviceSlot() {
     }
   }
   if(selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty()) {
-	  episodes <<  backend_->GetNewDownloadedEpisodes();     
-    }
+    episodes << backend_->GetNewDownloadedEpisodes();
+  }
 
   foreach (const PodcastEpisode& episode, episodes) {
     podcast = backend_->GetSubscriptionById(episode.podcast_database_id());
