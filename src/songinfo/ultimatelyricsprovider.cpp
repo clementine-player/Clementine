@@ -141,7 +141,7 @@ void UltimateLyricsProvider::LyricsFetched() {
         ApplyExcludeRule(rule, &lyrics);
       }
 
-      if (!content.isEmpty()) {
+      if (!content.isEmpty() and HTMLHasAlphaNumeric(content)) {
         lyrics = content;
         break;
       }
@@ -150,7 +150,7 @@ void UltimateLyricsProvider::LyricsFetched() {
     lyrics = original_content;
   }
 
-  if (!lyrics.isEmpty()) {
+  if (!lyrics.isEmpty() and HTMLHasAlphaNumeric(lyrics)) {
     CollapsibleInfoPane::Data data;
     data.id_ = "ultimatelyrics/" + name_;
     data.title_ = tr("Lyrics from %1").arg(name_);
@@ -316,4 +316,23 @@ QString UltimateLyricsProvider::NoSpace(const QString& text) {
   QString ret(text);
   ret.remove(' ');
   return ret;
+}
+
+// tells whether a html block has alphanumeric characters (skipping tags)
+// TODO: handle special characters (e.g. &reg; &aacute;)
+bool UltimateLyricsProvider::HTMLHasAlphaNumeric(const QString& html) {
+  bool has_alphanumeric = false;
+  for (int i = 0; i < html.size(); )
+    if (html[i] == QChar('<')) {
+      while (i < html.size() and html[i] != QChar('>'))
+        i ++;
+    } else {
+      if (isalnum(html[i].toAscii())) {
+        has_alphanumeric = true;
+        break;
+      }
+      i ++;
+    }
+    
+  return has_alphanumeric;
 }
