@@ -41,7 +41,6 @@ public:
   OrganiseDialog(TaskManager* task_manager, QWidget* parent = 0);
   ~OrganiseDialog();
 
-  static const int kNumberOfPreviews;
   static const char* kDefaultFormat;
   static const char* kSettingsGroup;
 

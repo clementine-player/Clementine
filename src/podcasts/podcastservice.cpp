@@ -128,7 +128,7 @@ void PodcastService::CopyToDeviceSlot() {
     if (episode_tmp.downloaded())
       episodes << episode_tmp;
   }
-  
+
   foreach (const QModelIndex& podcast, explicitly_selected_podcasts_) {
     for (int i=0 ; i<podcast.model()->rowCount(podcast) ; ++i) {
       const QModelIndex& index = podcast.child(i, 0);
@@ -313,7 +313,7 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
           IconLoader::Load("edit-delete"), tr("Delete downloaded data"),
           this, SLOT(DeleteDownloadedData()));
     copy_to_device_ = context_menu_->addAction(
-	  IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Copy to device..."), 
+	  IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Copy to device..."),
           this, SLOT(CopyToDeviceSlot()));
     remove_selected_action_ = context_menu_->addAction(
           IconLoader::Load("list-remove"), tr("Unsubscribe"),

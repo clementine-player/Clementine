@@ -88,7 +88,7 @@ private slots:
                                int percent);
 
   void CurrentSongChanged(const Song& metadata);
-  
+
   void CopyToDeviceSlot();
 
 private:
