@@ -32,7 +32,6 @@
 #include <QSignalMapper>
 #include <QtDebug>
 
-const int OrganiseDialog::kNumberOfPreviews = 10;
 const char* OrganiseDialog::kDefaultFormat =
     "%artist/%album{ (Disc %disc)}/{%track - }%title.%extension";
 const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
@@ -119,8 +118,7 @@ int OrganiseDialog::SetSongs(const SongList& songs) {
       total_size_ += song.filesize();
     filenames_ << song.url().toLocalFile();
 
-    if (preview_songs_.count() < kNumberOfPreviews)
-      preview_songs_ << song;
+    preview_songs_ << song;
   }
 
   ui_->free_space->set_additional_bytes(total_size_);
@@ -147,7 +145,7 @@ int OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_siz
   preview_songs_.clear();
 
   // Load some of the songs to show in the preview
-  const int n = qMin(filenames_.count(), kNumberOfPreviews);
+  const int n = filenames_.count();
   for (int i=0 ; i<n ; ++i) {
     LoadPreviewSongs(filenames_[i]);
   }
@@ -161,8 +159,6 @@ int OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_siz
 }
 
 void OrganiseDialog::LoadPreviewSongs(const QString& filename) {
-  if (preview_songs_.count() >= kNumberOfPreviews)
-    return;
 
   if (QFileInfo(filename).isDir()) {
     QDir dir(filename);
