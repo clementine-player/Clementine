@@ -73,6 +73,7 @@ private:
   static QString FirstChar(const QString& text);
   static QString TitleCase(const QString& text);
   static QString NoSpace(const QString& text);
+  static bool HTMLHasAlphaNumeric(const QString& html);
 
   void ReplaceField(const QString& tag, const QString& value, QString* text) const;
   void ReplaceFields(const Song& metadata, QString* text) const;
