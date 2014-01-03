@@ -174,7 +174,9 @@ Song PodcastEpisode::ToSong(const Podcast& podcast) const {
   if (podcast.is_valid()) {
     ret.set_album(podcast.title().simplified());
     ret.set_art_automatic(podcast.ImageUrlLarge().toString());
-  }
 
+    if (author().isNull() || author().isEmpty())
+      ret.set_artist(podcast.title().simplified());
+  }
   return ret;
 }
