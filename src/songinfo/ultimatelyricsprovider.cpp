@@ -321,18 +321,15 @@ QString UltimateLyricsProvider::NoSpace(const QString& text) {
 // tells whether a html block has alphanumeric characters (skipping tags)
 // TODO: handle special characters (e.g. &reg; &aacute;)
 bool UltimateLyricsProvider::HTMLHasAlphaNumeric(const QString& html) {
-  bool has_alphanumeric = false;
-  for (int i = 0; i < html.size(); )
-    if (html[i] == QChar('<')) {
-      while (i < html.size() and html[i] != QChar('>'))
-        i ++;
-    } else {
-      if (isalnum(html[i].toAscii())) {
-        has_alphanumeric = true;
-        break;
-      }
-      i ++;
-    }
-    
-  return has_alphanumeric;
+  bool in_tag = false;
+  foreach (const QChar& c, html) {
+    if (!in_tag and c.isLetterOrNumber())
+      return true;
+    else if (c == QChar('<'))
+      in_tag = true;
+    else if (c == QChar('>'))
+      in_tag = false;
+  }
+  qLog(Debug) << html;
+  return false;
 }
