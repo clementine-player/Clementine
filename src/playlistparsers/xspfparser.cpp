@@ -104,6 +104,8 @@ return_song:
 
 void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) const {
   QXmlStreamWriter writer(device);
+  writer.setAutoFormatting(true);
+  writer.setAutoFormattingIndent(2);
   writer.writeStartDocument();
   StreamElement playlist("playlist", &writer);
   writer.writeAttribute("version", "1");
