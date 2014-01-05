@@ -115,8 +115,8 @@ void Equalizer::LoadDefaultPresets() {
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Classical"),          Params(0, 0, 0, 0, 0, 0, -40, -40, -40, -50));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Club"),               Params(0, 0, 20, 30, 30, 30, 20, 0, 0, 0));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Dance"),              Params(50, 35, 10, 0, 0, -30, -40, -40, 0, 0));
+  // Dubstep equalizer created by Devyn Collier Johnson
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Dubstep"),            Params(0, 36, 85, 58, 30, 0, 36, 60, 96, 62, 0));
-  //Dubstep equalizer created by Devyn Collier Johnson
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Full Bass"),          Params(70, 70, 70, 40, 20, -45, -50, -55, -55, -55));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Full Treble"),        Params(-50, -50, -50, -25, 15, 55, 80, 80, 80, 85));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Full Bass + Treble"), Params(35, 30, 0, -40, -25, 10, 45, 55, 60, 60));
