@@ -134,6 +134,7 @@ set(SOURCES
   devices/deviceproperties.cpp
   devices/devicestatefiltermodel.cpp
   devices/deviceview.cpp
+  devices/deviceviewcontainer.cpp
   devices/filesystemdevice.cpp
 
   engines/enginebase.cpp
@@ -446,6 +447,7 @@ set(HEADERS
   devices/deviceproperties.h
   devices/devicestatefiltermodel.h
   devices/deviceview.h
+  devices/deviceviewcontainer.h
   devices/filesystemdevice.h
 
   engines/enginebase.h
@@ -672,6 +674,7 @@ set(UI
   covers/coversearchstatisticsdialog.ui
 
   devices/deviceproperties.ui
+  devices/deviceviewcontainer.ui
 
   globalsearch/globalsearchsettingspage.ui
   globalsearch/globalsearchview.ui
