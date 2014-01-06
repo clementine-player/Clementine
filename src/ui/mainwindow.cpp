@@ -690,6 +690,12 @@ MainWindow::MainWindow(Application* app,
   app_->playlist_manager()->Init(app_->library_backend(), app_->playlist_backend(),
                                  ui_->playlist_sequence, ui_->playlist);
 
+  // Connect the playlist signal "StopAfterToggled with the
+  // StopAfterToggle OSD slot. This must be done after the playlist
+  // has been initialized.
+  connect(app_->playlist_manager()->current(), SIGNAL(StopAfterToggled(bool)),
+	  osd_, SLOT(StopAfterToggle(bool)));
+
   // We need to connect these global shortcuts here after the playlist have been initialized
   connect(global_shortcuts_, SIGNAL(CycleShuffleMode()), app_->playlist_manager()->sequence(), SLOT(CycleShuffleMode()));
   connect(global_shortcuts_, SIGNAL(CycleRepeatMode()), app_->playlist_manager()->sequence(), SLOT(CycleRepeatMode()));
