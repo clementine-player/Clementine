@@ -167,13 +167,8 @@ void OSD::Stopped() {
 }
 
 void OSD::StopAfterToggle(bool stop) {
-  if (stop) {
-    ShowMessage(QCoreApplication::applicationName(),
-                tr("Stop playing after track: On"));
-  } else {
-    ShowMessage(QCoreApplication::applicationName(),
-                tr("Stop playing after track: Off"));
-  }
+  ShowMessage(QCoreApplication::applicationName(), 
+              tr("Stop playing after track: %1").arg(stop ? tr("On") : tr("Off")));
 }
 
 void OSD::PlaylistFinished() {

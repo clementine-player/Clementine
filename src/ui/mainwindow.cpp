@@ -690,9 +690,7 @@ MainWindow::MainWindow(Application* app,
   app_->playlist_manager()->Init(app_->library_backend(), app_->playlist_backend(),
                                  ui_->playlist_sequence, ui_->playlist);
 
-  // Connect the playlist signal "StopAfterToggled with the
-  // StopAfterToggle OSD slot. This must be done after the playlist
-  // has been initialized.
+  // This connection must be done after the playlist has been initialized.
   connect(app_->playlist_manager()->current(), SIGNAL(StopAfterToggled(bool)),
 	  osd_, SLOT(StopAfterToggle(bool)));
 

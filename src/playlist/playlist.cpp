@@ -1524,7 +1524,7 @@ void Playlist::StopAfter(int row) {
   else
     stop_after_ = index(row, 0);
 
-  // stop_after_.isValid() == true when there there is a stop placed
+  // stop_after_.isValid() == true when there is a stop placed
   // somewhere on the playlist. Emit a StopAfterToggled signal that
   // reflects this.
   emit StopAfterToggled(stop_after_.isValid());
