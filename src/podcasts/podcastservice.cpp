@@ -119,17 +119,41 @@ QStandardItem* PodcastService::CreateRootItem() {
 }
 
 void PodcastService::CopyToDeviceSlot() {
-  QList<PodcastEpisode> episodes;
+  if(selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty()) {
+    CopyToDeviceSlot(backend_->GetNewDownloadedEpisodes());
+  }
+  else {
+    CopyToDeviceSlot(selected_episodes_, explicitly_selected_podcasts_);
+  }
+}
+
+void PodcastService::CopyToDeviceSlot(const PodcastEpisodeList& episodes_list) {
   QList<Song> songs;
-  PodcastEpisode episode_tmp;
   Podcast podcast;
-  foreach (const QModelIndex& index, selected_episodes_) {
+  foreach (const PodcastEpisode& episode, episodes_list) {
+    podcast = backend_->GetSubscriptionById(episode.podcast_database_id());
+    songs.append(episode.ToSong(podcast));
+  }
+
+  organise_dialog_->SetDestinationModel(app_->device_manager()->connected_devices_model(), true);
+  organise_dialog_->SetCopy(true);
+  if (organise_dialog_->SetSongs(songs))
+    organise_dialog_->show();
+}
+
+void PodcastService::CopyToDeviceSlot(const QModelIndexList& episode_indexes,
+				      const QModelIndexList& podcast_indexes) {
+  PodcastEpisode episode_tmp;
+  QList<Song> songs;
+  PodcastEpisodeList episodes;
+  Podcast podcast;
+  foreach (const QModelIndex& index, episode_indexes) {
     episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
     if (episode_tmp.downloaded())
       episodes << episode_tmp;
   }
 
-  foreach (const QModelIndex& podcast, explicitly_selected_podcasts_) {
+  foreach (const QModelIndex& podcast, podcast_indexes) {
     for (int i=0 ; i<podcast.model()->rowCount(podcast) ; ++i) {
       const QModelIndex& index = podcast.child(i, 0);
       episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
@@ -137,18 +161,15 @@ void PodcastService::CopyToDeviceSlot() {
 	episodes << episode_tmp;
     }
   }
-  if(selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty()) {
-    episodes << backend_->GetNewDownloadedEpisodes();
-  }
-
   foreach (const PodcastEpisode& episode, episodes) {
     podcast = backend_->GetSubscriptionById(episode.podcast_database_id());
     songs.append(episode.ToSong(podcast));
   }
-  organise_dialog_->SetDestinationModel(app_->device_manager()->connected_devices_model(), true);
-  organise_dialog_->SetCopy(true);
-  if (organise_dialog_->SetSongs(songs))
-    organise_dialog_->show();
+
+   organise_dialog_->SetDestinationModel(app_->device_manager()->connected_devices_model(), true);
+   organise_dialog_->SetCopy(true);
+   if (organise_dialog_->SetSongs(songs))
+     organise_dialog_->show();
 }
 
 void PodcastService::LazyPopulate(QStandardItem* parent) {
@@ -393,6 +414,11 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
     delete_downloaded_action_->setEnabled(episodes);
   }
 
+  if (explicitly_selected_podcasts_.isEmpty() && selected_episodes_.isEmpty()) {
+    PodcastEpisodeList epis = backend_->GetNewDownloadedEpisodes();
+    set_listened_action_->setEnabled(!epis.isEmpty());
+  }
+
   if (selected_episodes_.count() > 1) {
     download_selected_action_->setText(tr("Download %n episodes", "", selected_episodes_.count()));
   } else {
@@ -573,7 +599,24 @@ void PodcastService::SetNew() {
 }
 
 void PodcastService::SetListened() {
-  SetListened(selected_episodes_, explicitly_selected_podcasts_, true);
+  if(selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty())
+    SetListened(backend_->GetNewDownloadedEpisodes(), true);
+  else
+    SetListened(selected_episodes_, explicitly_selected_podcasts_, true);
+}
+
+void PodcastService::SetListened(PodcastEpisodeList episodes_list,
+				 bool listened) {
+  QDateTime current_date_time = QDateTime::currentDateTime();
+  for (int i=0 ; i<episodes_list.count() ; ++i) {
+    PodcastEpisode* episode = &episodes_list[i];
+    episode->set_listened(listened);
+    if (listened) {
+      episode->set_listened_date(current_date_time);
+    }
+  }
+
+  backend_->UpdateEpisodes(episodes_list);
 }
 
 void PodcastService::SetListened(const QModelIndexList& episode_indexes,

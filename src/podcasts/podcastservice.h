@@ -90,6 +90,9 @@ private slots:
   void CurrentSongChanged(const Song& metadata);
 
   void CopyToDeviceSlot();
+  void CopyToDeviceSlot(const PodcastEpisodeList& episodes_list);
+  void CopyToDeviceSlot(const QModelIndexList& episode_indexes,
+			const QModelIndexList& podcast_indexes);
 
 private:
   void EnsureAddPodcastDialogCreated();
@@ -108,7 +111,9 @@ private:
   void SetListened(const QModelIndexList& episode_indexes,
                    const QModelIndexList& podcast_indexes,
                    bool listened);
-  
+  void SetListened(PodcastEpisodeList episodes_list,
+		   bool listened);
+
   void LazyLoadRoot();
 
 private:

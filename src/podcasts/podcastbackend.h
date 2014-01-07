@@ -60,6 +60,7 @@ public:
   // it involves a full search of the table.
   PodcastEpisodeList GetOldDownloadedEpisodes(const QDateTime& max_listened_date);
   PodcastEpisodeList GetNewDownloadedEpisodes();
+
   // Adds episodes to the database.  Every episode must have a valid
   // podcast_database_id set already.
   void AddEpisodes(PodcastEpisodeList* episodes);
