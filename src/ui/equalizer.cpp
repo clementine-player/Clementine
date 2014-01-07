@@ -125,6 +125,8 @@ void Equalizer::LoadDefaultPresets() {
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Live"),               Params(-25, 0, 20, 25, 30, 30, 20, 15, 15, 10));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Party"),              Params(35, 35, 0, 0, 0, 0, 0, 0, 35, 35));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Pop"),                Params(-10, 25, 35, 40, 25, -5, -15, -15, -10, -10));
+  // Psychedelic equalizer created by Devyn Collier Johnson
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Psychedelic"),        Params(100, 100, 0, 40, 0, 67, 79, 0, 30, -100, 37));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Reggae"),             Params(0, 0, -5, -30, 0, -35, -35, 0, 0, 0));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Rock"),               Params(40, 25, -30, -40, -20, 20, 45, 55, 55, 55));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Soft"),               Params(25, 10, -5, -15, -5, 20, 45, 50, 55, 60));
