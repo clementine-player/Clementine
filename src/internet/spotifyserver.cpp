@@ -99,12 +99,12 @@ void SpotifyServer::SetPlaybackSettings(pb::spotify::Bitrate bitrate, bool volum
 
 void SpotifyServer::MessageArrived(const pb::spotify::Message& message) {
   if (message.has_login_response()) {
-    const pb::spotify::LoginResponse& response = message.login_response();
+    const auto& response = message.login_response();
     logged_in_ = response.success();
 
     if (response.success()) {
       // Send any messages that were queued before the client logged in
-      foreach (const pb::spotify::Message& message, queued_messages_) {
+      for (const pb::spotify::Message& message : queued_messages_) {
         SendOrQueueMessage(message);
       }
       queued_messages_.clear();
