@@ -243,7 +243,7 @@ MainWindow::MainWindow(Application* app,
   ui_->tabs->AddTab(artist_info_view_, IconLoader::Load("x-clementine-artist"), tr("Artist info"));
 
   // Add the now playing widget to the fancy tab widget
-  ui_->tabs->AddBottomWidget(ui_->now_playing);
+  ui_->playlist->DoNothings(ui_->status_bar);
 
   ui_->tabs->SetBackgroundPixmap(QPixmap(":/sidebar_background.png"));
 
@@ -664,17 +664,14 @@ MainWindow::MainWindow(Application* app,
 
   // Now playing widget
   qLog(Debug) << "Creating now playing widget";
-  ui_->now_playing->set_ideal_height(ui_->status_bar->sizeHint().height() +
-                                     ui_->player_controls->sizeHint().height());
+  ui_->now_playing->set_ideal_height(ui_->playback_controls->height() -
+                                          ui_->track_slider->height());
   connect(app_->player(), SIGNAL(Stopped()), ui_->now_playing, SLOT(Stopped()));
-  connect(ui_->now_playing, SIGNAL(ShowAboveStatusBarChanged(bool)),
-          SLOT(NowPlayingWidgetPositionChanged(bool)));
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(AllHail(bool)));
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(EnableKittens(bool)));
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), app_->network_remote(), SLOT(EnableKittens(bool)));
   // Hide the console
   //connect(ui_->action_console, SIGNAL(triggered()), SLOT(ShowConsole()));
-  NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Load theme
   // This is tricky: we need to save the default/system palette now, before
@@ -1823,17 +1820,6 @@ void MainWindow::TaskCountChanged(int count) {
   } else {
     ui_->status_bar_stack->setCurrentWidget(ui_->multi_loading_indicator);
   }
-}
-
-void MainWindow::NowPlayingWidgetPositionChanged(bool above_status_bar) {
-  if (above_status_bar) {
-    ui_->status_bar->setParent(ui_->centralWidget);
-  } else {
-    ui_->status_bar->setParent(ui_->player_controls_container);
-  }
-
-  ui_->status_bar->parentWidget()->layout()->addWidget(ui_->status_bar);
-  ui_->status_bar->show();
 }
 
 void MainWindow::CopyFilesToLibrary(const QList<QUrl>& urls) {

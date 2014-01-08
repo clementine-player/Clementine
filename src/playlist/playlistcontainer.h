@@ -21,6 +21,8 @@
 #include <QWidget>
 #include <QSettings>
 
+#include "ui_playlistcontainer.h"
+
 class Ui_PlaylistContainer;
 
 class LineEditInterface;
@@ -49,6 +51,10 @@ public:
   PlaylistView* view() const;
 
   bool eventFilter(QObject *objectWatched, QEvent *event);
+  
+  void DoNothings(QWidget *widget) {
+    ui_->horizontalLayout->addWidget(widget);
+  }
 
 signals:
   void TabChanged(int id);

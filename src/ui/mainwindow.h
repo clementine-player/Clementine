@@ -218,8 +218,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void CheckForUpdates();
 
-  void NowPlayingWidgetPositionChanged(bool above_status_bar);
-
   void SongSaveComplete(TagReaderReply* reply,
                         const QPersistentModelIndex& index);
 

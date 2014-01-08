@@ -64,7 +64,6 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
-    above_statusbar_action_(NULL),
     visible_(false),
     small_ideal_height_(0),
     show_hide_animation_(new QTimeLine(500, this)),
@@ -118,11 +117,6 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
 
   menu_->addActions(actions);
   menu_->addSeparator();
-  above_statusbar_action_ = menu_->addAction(tr("Show above status bar"));
-
-  above_statusbar_action_->setCheckable(true);
-  connect(above_statusbar_action_, SIGNAL(toggled(bool)), SLOT(ShowAboveStatusBar(bool)));
-  above_statusbar_action_->setChecked(s.value("above_status_bar", false).toBool());
 
   bask_in_his_glory_action_ = menu_->addAction(tr("ALL GLORY TO THE HYPNOTOAD"));
   bask_in_his_glory_action_->setVisible(false);
@@ -207,9 +201,8 @@ void NowPlayingWidget::UpdateDetailsText() {
 
   switch (mode_) {
     case SmallSongDetails:
-      details_->setTextWidth(-1);
+      details_->setTextWidth(width() - cover_loader_options_.desired_height_);
       details_->setDefaultStyleSheet("");
-      html += "<p>";
       break;
 
     case LargeSongDetails:
@@ -218,12 +211,12 @@ void NowPlayingWidget::UpdateDetailsText() {
           "  font-size: small;"
           "  color: white;"
           "}");
-      html += "<p align=center>";
       break;
   }
 
   // TODO: Make this configurable
-  html += QString("<i>%1</i><br/>%2<br/>%3").arg(
+  html += "<p align = \"center\">";
+  html += QString("<h2>%1</h2><h4>%2 - %3</h4>").arg(
       Qt::escape(metadata_.PrettyTitle()), Qt::escape(metadata_.artist()),
       Qt::escape(metadata_.album()));
 
@@ -385,7 +378,7 @@ void NowPlayingWidget::SetMode(int mode) {
 }
 
 void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
-  if (visible_ && mode_ == LargeSongDetails && e->oldSize() != e->size()) {
+  if (visible_ && e->oldSize() != e->size()) {
     UpdateHeight();
     UpdateDetailsText();
   }
@@ -413,18 +406,6 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
 
   // show the menu
   menu_->popup(mapToGlobal(e->pos()));
-}
-
-void NowPlayingWidget::ShowAboveStatusBar(bool above) {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  s.setValue("above_status_bar", above);
-
-  emit ShowAboveStatusBarChanged(above);
-}
-
-bool NowPlayingWidget::show_above_status_bar() const {
-  return above_statusbar_action_->isChecked();
 }
 
 void NowPlayingWidget::AllHail(bool hypnotoad) {
