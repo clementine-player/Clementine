@@ -433,6 +433,6 @@ bool PlaylistContainer::eventFilter(QObject *objectWatched, QEvent *event) {
   return QWidget::eventFilter(objectWatched, event);
 }
 
-void PlaylistContainer::AddWidgetToBottomBar(QWidget *widget) {
+void PlaylistContainer::AddBottomWidget(QWidget *widget) {
   ui_->horizontalLayout->addWidget(widget);
 }
