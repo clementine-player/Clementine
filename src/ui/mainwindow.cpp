@@ -243,7 +243,7 @@ MainWindow::MainWindow(Application* app,
   ui_->tabs->AddTab(artist_info_view_, IconLoader::Load("x-clementine-artist"), tr("Artist info"));
 
   // Add the now playing widget to the fancy tab widget
-  ui_->playlist->DoNothings(ui_->status_bar);
+  ui_->playlist->AddWidgetToBottomBar(ui_->status_bar);
 
   ui_->tabs->SetBackgroundPixmap(QPixmap(":/sidebar_background.png"));
 

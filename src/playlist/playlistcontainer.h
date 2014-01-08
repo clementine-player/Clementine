@@ -52,9 +52,7 @@ public:
 
   bool eventFilter(QObject *objectWatched, QEvent *event);
   
-  void DoNothings(QWidget *widget) {
-    ui_->horizontalLayout->addWidget(widget);
-  }
+  void AddWidgetToBottomBar(QWidget *widget);
 
 signals:
   void TabChanged(int id);
