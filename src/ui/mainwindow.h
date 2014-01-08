@@ -134,6 +134,10 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Activate();
   bool LoadUrl(const QString& url);
 
+ signals:
+  // Signals that stop playing after track was toggled.
+  void StopAfterToggled(bool stop);
+
  private slots:
   void FilePathChanged(const QString& path);
   

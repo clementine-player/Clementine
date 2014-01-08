@@ -690,6 +690,10 @@ MainWindow::MainWindow(Application* app,
   app_->playlist_manager()->Init(app_->library_backend(), app_->playlist_backend(),
                                  ui_->playlist_sequence, ui_->playlist);
 
+  // This connection must be done after the playlists have been initialized.
+  connect(this, SIGNAL(StopAfterToggled(bool)),
+	  osd_, SLOT(StopAfterToggle(bool)));
+
   // We need to connect these global shortcuts here after the playlist have been initialized
   connect(global_shortcuts_, SIGNAL(CycleShuffleMode()), app_->playlist_manager()->sequence(), SLOT(CycleShuffleMode()));
   connect(global_shortcuts_, SIGNAL(CycleRepeatMode()), app_->playlist_manager()->sequence(), SLOT(CycleRepeatMode()));
@@ -1059,6 +1063,7 @@ void MainWindow::ToggleShowHide() {
 
 void MainWindow::StopAfterCurrent() {
   app_->playlist_manager()->current()->StopAfter(app_->playlist_manager()->current()->current_row());
+  emit StopAfterToggled(app_->playlist_manager()->current()->stop_after_current());
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
