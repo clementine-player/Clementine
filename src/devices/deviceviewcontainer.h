@@ -1,47 +1,46 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
-
+   Copyright 2012, David Sansome <me@davidsansome.com>
+   
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-
+   
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-
+   
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ARTISTINFOVIEW_H
-#define ARTISTINFOVIEW_H
+#ifndef DEVICEVIEWCONTAINER_H
+#define DEVICEVIEWCONTAINER_H
 
-#include "collapsibleinfopane.h"
-#include "songinfobase.h"
-#include "songinfofetcher.h"
+#include <QWidget>
 
-class PrettyImageView;
+namespace Ui {
+  class DeviceViewContainer;
+}
 
-class QScrollArea;
-class QTimeLine;
-class QVBoxLayout;
+class DeviceView;
 
-class ArtistInfoView : public SongInfoBase {
+class DeviceViewContainer : public QWidget {
   Q_OBJECT
+  
+ public:
+  explicit DeviceViewContainer(QWidget* parent = 0);
+  ~DeviceViewContainer();
 
-public:
-  ArtistInfoView(QWidget* parent = 0);
-  ~ArtistInfoView();
+  DeviceView* view() const;
 
-protected:
-  virtual void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
-  bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
-
-protected slots:
-  void ResultReady(int id, const SongInfoFetcher::Result& result);
+ protected:
+  void showEvent(QShowEvent*);
+  
+ private:
+  Ui::DeviceViewContainer* ui_;
+  bool loaded_icons_;
 };
 
-#endif // ARTISTINFOVIEW_H
-
+#endif // DEVICEVIEWCONTAINER_H

@@ -106,6 +106,7 @@ class Song {
   void InitFromProtobuf(const pb::tagreader::SongMetadata& pb);
   void InitFromQuery(const SqlRow& query, bool reliable_metadata, int col = 0);
   void InitFromFilePartial(const QString& filename); // Just store the filename: incomplete but fast
+  void InitArtManual(); // Check if there is already a art in the cache and store the filename in art_manual
 #ifdef HAVE_LIBLASTFM
   void InitFromLastFM(const lastfm::Track& track);
 #endif

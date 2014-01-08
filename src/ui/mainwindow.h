@@ -44,6 +44,7 @@ class CoverProviders;
 class Database;
 class DeviceManager;
 class DeviceView;
+class DeviceViewContainer;
 class EditTagDialog;
 class Equalizer;
 class ErrorDialog;
@@ -293,6 +294,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<RipCD> rip_cd_;
   PlaylistListContainer* playlist_list_;
   InternetViewContainer* internet_view_;
+  DeviceViewContainer* device_view_container_;
   DeviceView* device_view_;
   SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;

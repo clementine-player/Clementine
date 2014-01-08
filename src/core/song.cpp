@@ -442,6 +442,8 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   if (pb.has_rating()) {
     d->rating_ = pb.rating();
   }
+
+  InitArtManual();
 }
 
 void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
@@ -545,6 +547,8 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->performer_ = tostr(col + 38);
   d->grouping_ = tostr(col + 39);
 
+  InitArtManual();
+
   #undef tostr
   #undef toint
   #undef tolonglong
@@ -566,6 +570,17 @@ void Song::InitFromFilePartial(const QString& filename) {
     d->valid_ = true;
   } else {
     d->valid_ = false;
+  }
+}
+
+void Song::InitArtManual() {
+  // If we don't have an art, check if we have one in the cache
+  if (d->art_manual_.isEmpty() && d->art_automatic_.isEmpty()) {
+    QString filename(Utilities::Sha1CoverHash(d->artist_, d->album_).toHex() + ".jpg");
+    QString path(AlbumCoverLoader::ImageCacheDir() + "/" + filename);
+    if (QFile::exists(path)) {
+      d->art_manual_ = path;
+    }
   }
 }
 

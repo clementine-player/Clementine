@@ -43,7 +43,8 @@ protected:
   bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
 
 protected slots:
-  void ResultReady(int id, const SongInfoFetcher::Result& result);
+  virtual void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
+  virtual void ResultReady(int id, const SongInfoFetcher::Result& result);
 
 private:
   SongInfoProvider* ProviderByName(const QString& name) const;
@@ -56,3 +57,4 @@ private:
 };
 
 #endif // SONGINFOVIEW_H
+

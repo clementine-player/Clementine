@@ -27,6 +27,7 @@ class AlbumCoverFetcher;
 class AlbumCoverSearcher;
 class Application;
 class CoverFromURLDialog;
+class CoverSearchStatistics;
 class QFileDialog;
 class Song;
 
@@ -52,6 +53,7 @@ class AlbumCoverChoiceController : public QWidget {
   QAction* search_for_cover_action() const { return search_for_cover_; }
   QAction* unset_cover_action() const { return unset_cover_; }
   QAction* show_cover_action() const { return show_cover_; }
+  QAction* search_cover_auto_action() const { return search_cover_auto_; }
 
   // Returns QAction* for every operation implemented by this controller.
   // The list contains QAction* for:
@@ -91,6 +93,9 @@ class AlbumCoverChoiceController : public QWidget {
   // Shows the cover of given song in it's original size.
   void ShowCover(const Song& song);
 
+  // Search for covers automatically
+  void SearchCoverAutomatically(const Song& song);
+
   // Saves the chosen cover as manual cover path of this song in library.
   void SaveCover(Song* song, const QString& cover);
 
@@ -102,6 +107,13 @@ class AlbumCoverChoiceController : public QWidget {
   QString SaveCoverInCache(const QString& artist, const QString& album, const QImage& image);
 
   static bool CanAcceptDrag(const QDragEnterEvent* e);
+
+signals:
+  void AutomaticCoverSearchDone();
+
+private slots:
+  void AlbumCoverFetched(quint64 id, const QImage& image,
+                         const CoverSearchStatistics& statistics);
 
 private:
   QString GetInitialPathForFileDialog(const Song& song,
@@ -124,6 +136,9 @@ private:
   QAction* search_for_cover_;
   QAction* unset_cover_;
   QAction* show_cover_;
+  QAction* search_cover_auto_;
+
+  QMap<quint64, Song> cover_fetching_tasks_;
 };
 
 #endif // ALBUMCOVERCHOICECONTROLLER_H

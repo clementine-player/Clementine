@@ -123,6 +123,7 @@ return_song:
 void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&) const {
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
+  writer.setAutoFormattingIndent(2);
   writer.writeStartDocument();
   {
     StreamElement asx("asx", &writer);

@@ -68,6 +68,10 @@ void SongInfoFetcher::InfoReady(int id, const CollapsibleInfoPane::Data& data) {
   if (!results_.contains(id))
     return;
   results_[id].info_ << data;
+  
+  if (!waiting_for_.contains(id))
+    return;
+  emit InfoResultReady (id, data);
 }
 
 void SongInfoFetcher::ProviderFinished(int id) {
@@ -107,3 +111,4 @@ void SongInfoFetcher::Timeout(int id) {
   // Remove the timer
   delete timeout_timers_.take(id);
 }
+

@@ -156,8 +156,8 @@ void PodcastEpisode::BindToQuery(QSqlQuery* query) const {
 Song PodcastEpisode::ToSong(const Podcast& podcast) const {
   Song ret;
   ret.set_valid(true);
-  ret.set_title(title());
-  ret.set_artist(author());
+  ret.set_title(title().simplified());
+  ret.set_artist(author().simplified());
   ret.set_length_nanosec(kNsecPerSec * duration_secs());
   ret.set_year(publication_date().date().year());
   ret.set_comment(description());
@@ -172,7 +172,7 @@ Song PodcastEpisode::ToSong(const Podcast& podcast) const {
 
   // Use information from the podcast if it's set
   if (podcast.is_valid()) {
-    ret.set_album(podcast.title());
+    ret.set_album(podcast.title().simplified());
     ret.set_art_automatic(podcast.ImageUrlLarge().toString());
   }
 

@@ -41,6 +41,7 @@
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
 #include "devices/deviceview.h"
+#include "devices/deviceviewcontainer.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearch.h"
@@ -173,7 +174,8 @@ MainWindow::MainWindow(Application* app,
     file_view_(new FileView(this)),
     playlist_list_(new PlaylistListContainer(this)),
     internet_view_(new InternetViewContainer(this)),
-    device_view_(new DeviceView(this)),
+    device_view_container_(new DeviceViewContainer(this)),
+    device_view_(device_view_container_->view()),
     song_info_view_(new SongInfoView(this)),
     artist_info_view_(new ArtistInfoView(this)),
     settings_dialog_(NULL),
@@ -238,7 +240,7 @@ MainWindow::MainWindow(Application* app,
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
   ui_->tabs->AddTab(playlist_list_, IconLoader::Load("view-media-playlist"), tr("Playlists"));
   ui_->tabs->AddTab(internet_view_, IconLoader::Load("applications-internet"), tr("Internet"));
-  ui_->tabs->AddTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
+  ui_->tabs->AddTab(device_view_container_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
   ui_->tabs->AddSpacer();
   ui_->tabs->AddTab(song_info_view_, IconLoader::Load("view-media-lyrics"), tr("Song info"));
   ui_->tabs->AddTab(artist_info_view_, IconLoader::Load("x-clementine-artist"), tr("Artist info"));
