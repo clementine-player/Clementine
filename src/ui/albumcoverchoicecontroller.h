@@ -27,9 +27,10 @@ class AlbumCoverFetcher;
 class AlbumCoverSearcher;
 class Application;
 class CoverFromURLDialog;
-class CoverSearchStatistics;
 class QFileDialog;
 class Song;
+
+struct CoverSearchStatistics;
 
 // Controller for the common album cover related menu options.
 class AlbumCoverChoiceController : public QWidget {
