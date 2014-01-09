@@ -1062,8 +1062,8 @@ void MainWindow::ToggleShowHide() {
 }
 
 void MainWindow::StopAfterCurrent() {
-  app_->playlist_manager()->current()->StopAfter(app_->playlist_manager()->current()->current_row());
-  emit StopAfterToggled(app_->playlist_manager()->current()->stop_after_current());
+  app_->playlist_manager()->active()->StopAfter(app_->playlist_manager()->active()->current_row());
+  emit StopAfterToggled(app_->playlist_manager()->active()->stop_after_current());
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
