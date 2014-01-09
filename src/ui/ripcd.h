@@ -14,6 +14,7 @@
 #include <QThread>
 #include <cdio/cdio.h>
 #include "ui_ripcd.h"
+#include "transcoder/transcoder.h"
 
 class RipCD : public QDialog
 {
@@ -24,7 +25,10 @@ public:
 	RipCD(QWidget* parent = 0);
 
 private:
-
+	Transcoder* transcoder_;
+	  int queued_;
+	  int finished_success_;
+	  int finished_failed_;
 	Ui::RipCD ui_;
 	CdIo_t *p_cdio;
 	void write_WAV_header(FILE *stream,int32_t i_bytecount);
@@ -32,6 +36,7 @@ private:
 private slots:
 	void clickedRipButton();
 	void toThreadClickedRipButton();
+	void AllJobsComplete();
 };
 
 #endif // RIPCD_H

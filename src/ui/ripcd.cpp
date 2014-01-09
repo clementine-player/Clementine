@@ -22,11 +22,13 @@
 
 
 RipCD::RipCD(QWidget* parent)
-: QDialog(parent)
+: QDialog(parent),
+  transcoder_(new Transcoder(this))
 {
 	// Init
 	ui_.setupUi(this);
 	connect(ui_.ripButton,SIGNAL(clicked()),this,SLOT(clickedRipButton()));
+	connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
 	setWindowTitle(tr("Rip CD"));
 
 
@@ -50,7 +52,7 @@ RipCD::RipCD(QWidget* parent)
 }
 
 void RipCD::clickedRipButton() {
-		QtConcurrent::run(this,&RipCD::toThreadClickedRipButton);
+	QtConcurrent::run(this,&RipCD::toThreadClickedRipButton);
 }
 
 void RipCD::toThreadClickedRipButton() {
@@ -76,18 +78,13 @@ void RipCD::toThreadClickedRipButton() {
 
 		}
 		fclose(fp);
-
-		// TODO Handle this properly
-		// having a little trouble on wav files, works fine on mp3 and ogg
-		// also need to find a way to convert wav to mp3/ogg, perhaps using gstreamer?
-		TagLib::FileRef f(QString(source_directory + "track" + QString::number(i) + ".wav").toUtf8().constData());
-		f.tag()->setArtist("Queen");
-		f.save();
-
+		TranscoderPreset preset(Transcoder::PresetForFileType(Song::Type_Mpeg));
+		transcoder_->AddJob(QString(source_directory + "track" + QString::number(i) + ".wav").toUtf8().constData(), preset);
+		//
 		free(p_readbuf);
 		p_readbuf = NULL;
 	}
-
+	transcoder_->Start();
 }
 
 void RipCD::put_num(long int num, FILE *stream, int bytes) {
@@ -120,3 +117,11 @@ void RipCD::write_WAV_header(FILE *stream,int32_t i_bytecount) {
 
 }
 
+void RipCD::AllJobsComplete() {
+	qDebug() << "All Jobs Complete emmited";
+	// TODO Handle this properly
+	// having a little trouble on wav files, works fine on mp3
+	TagLib::FileRef f(QString("/tmp/track" + QString::number(1) + ".mp3").toUtf8().constData());
+	f.tag()->setArtist("Queen");
+	f.save();
+}
