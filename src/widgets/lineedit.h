@@ -111,7 +111,7 @@ protected:
   void resizeEvent(QResizeEvent*);
 
 private:
-  bool is_rtl() const { return is_rtl_; };
+  bool is_rtl() const { return is_rtl_; }
   void set_rtl(bool rtl) { is_rtl_ = rtl; }
 
 signals:
