@@ -150,7 +150,7 @@ void LineEdit::set_text(const QString& text) {
 
   // For some reason Qt will detect any text with LTR at the end as LTR, so instead
   // compare only the first character
-  if (text.length()) {
+  if (!text.isEmpty()) {
     set_rtl(QString(text.at(0)).isRightToLeft());
   }
 }
