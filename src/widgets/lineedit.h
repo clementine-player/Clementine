@@ -69,6 +69,9 @@ public:
   qreal font_point_size() const { return font_point_size_; }
   void set_font_point_size(qreal size) { font_point_size_ = size; }
 
+  bool is_rtl() const { return is_rtl_; };
+  void set_rtl(bool rtl) { is_rtl_ = rtl; }
+
 protected:
   void Paint(QPaintDevice* device);
   void Resize();
@@ -86,6 +89,7 @@ protected:
   int extra_right_padding_;
   bool draw_hint_;
   qreal font_point_size_;
+  bool is_rtl_;
 };
 
 class LineEdit : public QLineEdit,
@@ -95,6 +99,7 @@ class LineEdit : public QLineEdit,
   Q_PROPERTY(qreal font_point_size READ font_point_size WRITE set_font_point_size);
   Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
   Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button);
+  Q_PROPERTY(bool is_rtl READ is_rtl WRITE set_rtl);
 
 public:
   LineEdit(QWidget* parent = 0);
@@ -102,7 +107,7 @@ public:
   // ExtendedEditor
   void set_focus() { QLineEdit::setFocus(); }
   QString text() const { return QLineEdit::text(); }
-  void set_text(const QString& text) { QLineEdit::setText(text); }
+  void set_text(const QString& text);
   void set_enabled(bool enabled) { QLineEdit::setEnabled(enabled); }
 
 protected:
