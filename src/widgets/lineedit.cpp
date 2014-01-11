@@ -151,7 +151,9 @@ void LineEdit::set_text(const QString& text) {
 
   // For some reason Qt will detect any text with LTR at the end as LTR, so instead
   // compare only the first character
-  set_rtl(QString(1, text.at(0)).isRightToLeft());
+  if (text.length()) {
+    set_rtl(QString(text.at(0)).isRightToLeft());
+  }
 }
 
 void LineEdit::paintEvent(QPaintEvent* e) {
