@@ -509,6 +509,7 @@ MainWindow::MainWindow(Application* app,
   playlist_copy_to_device_ = playlist_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Copy to device..."), this, SLOT(PlaylistCopyToDevice()));
   playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
   playlist_open_in_browser_ = playlist_menu_->addAction(IconLoader::Load("document-open-folder"), tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
+  playlist_show_in_library_ = playlist_menu_->addAction(IconLoader::Load("edit-find"), tr("Show in library..."), this, SLOT(ShowInLibrary()));
   playlist_menu_->addSeparator();
   playlistitem_actions_separator_ = playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
@@ -1360,6 +1361,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   ui_->action_edit_value->setVisible(editable);
   ui_->action_remove_from_playlist->setEnabled(!selection.isEmpty());
 
+  playlist_show_in_library_->setVisible(false);
   playlist_copy_to_library_->setVisible(false);
   playlist_move_to_library_->setVisible(false);
   playlist_organise_->setVisible(false);
@@ -1408,6 +1410,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     PlaylistItemPtr item = app_->playlist_manager()->current()->item_at(source_index.row());
     if (item->IsLocalLibraryItem() && item->Metadata().id() != -1) {
       playlist_organise_->setVisible(editable);
+      playlist_show_in_library_->setVisible(editable);
     } else {
       playlist_copy_to_library_->setVisible(editable);
       playlist_move_to_library_->setVisible(editable);
@@ -1674,6 +1677,22 @@ void MainWindow::AddCDTracks() {
   data->open_in_new_playlist_ = true;
   data->setData(Playlist::kCddaMimeType, QByteArray());
   AddToPlaylist(data);
+}
+
+void MainWindow::ShowInLibrary() {
+  // Show the first valid selected track artist/album in LibraryView
+  QModelIndexList proxy_indexes = ui_->playlist->view()->selectionModel()->selectedRows();
+  SongList songs;
+
+  foreach (const QModelIndex& proxy_index, proxy_indexes) {
+    QModelIndex index = app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
+    if (app_->playlist_manager()->current()->item_at(index.row())->IsLocalLibraryItem()) {
+      songs << app_->playlist_manager()->current()->item_at(index.row())->Metadata();
+      break;
+    }
+  }
+  QString search = "artist:"+songs[0].artist()+" album:"+songs[0].album();
+  library_view_->filter()->ShowInLibrary(search);
 }
 
 void MainWindow::PlaylistRemoveCurrent() {
