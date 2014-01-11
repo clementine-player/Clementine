@@ -19,6 +19,7 @@
 #define RIPCD_H
 
 #include <QDialog>
+#include <QCheckBox>
 #include <QThread>
 #include <cdio/cdio.h>
 #include "ui_ripcd.h"
@@ -38,11 +39,15 @@ private:
 	  int queued_;
 	  int finished_success_;
 	  int finished_failed_;
+	  track_t i_tracks;
 	Ui::RipCD ui_;
 	CdIo_t *p_cdio;
 	void write_WAV_header(FILE *stream,int32_t i_bytecount);
 	void put_num(long int num, FILE *stream, int bytes);
 	void toThreadClickedRipButton();
+
+	QList<QCheckBox*> checkboxes_;
+	QList<QString> generated_files_;
 
 signals:
 	void RippingComplete();
@@ -51,6 +56,7 @@ private slots:
 	void clickedRipButton();
 	void JobComplete(const QString& filename, bool success);
 	void AllJobsComplete();
+	void AppendOutput(const QString &filename);
 };
 
 #endif // RIPCD_H
