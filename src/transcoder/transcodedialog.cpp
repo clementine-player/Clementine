@@ -20,6 +20,7 @@
 #include "transcoderoptionsdialog.h"
 #include "ui_transcodedialog.h"
 #include "ui_transcodelogdialog.h"
+#include "ui/iconloader.h"
 #include "ui/mainwindow.h"
 #include "widgets/fileview.h"
 
@@ -95,6 +96,12 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   cancel_button_->hide();
   ui_->progress_group->hide();
 
+  // Add a destination.
+  QIcon icon = IconLoader::Load("folder");
+  QVariant data = QVariant::fromValue(QDir::homePath());
+  QString text = TrimPath(data.toString());
+  ui_->destination->addItem(icon, text, data);
+
   // Connect stuff
   connect(ui_->add, SIGNAL(clicked()), SLOT(Add()));
   connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));
@@ -103,6 +110,8 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
   connect(ui_->details, SIGNAL(clicked()), log_dialog_, SLOT(show()));
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
+  connect(ui_->destination, SIGNAL(activated(int)),
+          SLOT(SetDestination(int)));
 
   connect(transcoder_, SIGNAL(JobComplete(QString,bool)), SLOT(JobComplete(QString,bool)));
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
@@ -138,7 +147,8 @@ void TranscodeDialog::Start() {
   // Add jobs to the transcoder
   for (int i=0 ; i<file_model->rowCount() ; ++i) {
     QString filename = file_model->index(i, 0).data(Qt::UserRole).toString();
-    transcoder_->AddJob(filename, preset);
+    QString outfilename = SetOutputFileName(filename, preset);
+    transcoder_->AddJob(filename, preset, outfilename);
   }
 
   // Set up the progressbar
@@ -263,5 +273,40 @@ void TranscodeDialog::Options() {
   TranscoderOptionsDialog dialog(preset.type_, this);
   if (dialog.is_valid()) {
     dialog.exec();
+  }
+}
+
+void TranscodeDialog::SetDestination(int index) {
+  if (!ui_->destination->itemData(index).isNull()) {
+    QString dir = QFileDialog::getExistingDirectory(
+        this, tr("Choose folder"),
+        ui_->destination->itemData(index).toString());
+    // Do not update the QComboBox if the user canceled the dialog.
+    if (!dir.isEmpty()) {
+      QVariant data = QVariant::fromValue(dir);
+      QString text = TrimPath(dir);
+      ui_->destination->setItemText(index, text);
+      ui_->destination->setItemData(index, data);
+    }
+  }
+}
+
+// Returns the rightmost non-empty part of 'path'.
+QString TranscodeDialog::TrimPath(const QString& path) {
+  return path.section('/', -1, -1, QString::SectionSkipEmpty);
+}
+
+QString TranscodeDialog::SetOutputFileName(const QString& input,
+                                           const TranscoderPreset &preset) {
+  QString path = ui_->destination->itemData(
+      ui_->destination->currentIndex()).toString();
+  if (path.isEmpty()) {
+    // Keep the original path.
+    return input.section('.', 0, -2) + '.' + preset.extension_;
+  }
+  else {
+    QString file_name = TrimPath(input);
+    file_name = file_name.section('.', 0, -2);
+    return path + '/' + file_name + '.' + preset.extension_;
   }
 }

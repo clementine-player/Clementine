@@ -25,6 +25,8 @@ class Transcoder;
 class Ui_TranscodeDialog;
 class Ui_TranscodeLogDialog;
 
+struct TranscoderPreset;
+
 class TranscodeDialog : public QDialog {
   Q_OBJECT
 
@@ -49,11 +51,15 @@ class TranscodeDialog : public QDialog {
   void LogLine(const QString& message);
   void AllJobsComplete();
   void Options();
+  void SetDestination(int index);
 
  private:
   void SetWorking(bool working);
   void UpdateStatusText();
   void UpdateProgress();
+  QString TrimPath(const QString& path);
+  QString SetOutputFileName(const QString& input,
+                            const TranscoderPreset& preset);
 
  private:
   Ui_TranscodeDialog* ui_;
