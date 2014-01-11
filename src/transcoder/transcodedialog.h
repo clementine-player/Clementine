@@ -36,6 +36,7 @@ class TranscodeDialog : public QDialog {
 
   static const char* kSettingsGroup;
   static const int kProgressInterval;
+  static const int kMaxDestinationItems;
 
   void SetFilenames(const QStringList& filenames);
 
@@ -51,15 +52,15 @@ class TranscodeDialog : public QDialog {
   void LogLine(const QString& message);
   void AllJobsComplete();
   void Options();
-  void SetDestination(int index);
+  void AddDestination();
 
  private:
   void SetWorking(bool working);
   void UpdateStatusText();
   void UpdateProgress();
-  QString TrimPath(const QString& path);
-  QString SetOutputFileName(const QString& input,
-                            const TranscoderPreset& preset);
+  QString TrimPath(const QString& path) const;
+  QString GetOutputFileName(const QString& input,
+                            const TranscoderPreset& preset) const;
 
  private:
   Ui_TranscodeDialog* ui_;

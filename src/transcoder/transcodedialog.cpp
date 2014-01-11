@@ -36,6 +36,7 @@
 
 const char* TranscodeDialog::kSettingsGroup = "Transcoder";
 const int TranscodeDialog::kProgressInterval = 500;
+const int TranscodeDialog::kMaxDestinationItems = 10;
 
 static bool ComparePresetsByName(const TranscoderPreset& left,
                                  const TranscoderPreset& right) {
@@ -96,12 +97,6 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   cancel_button_->hide();
   ui_->progress_group->hide();
 
-  // Add a destination.
-  QIcon icon = IconLoader::Load("folder");
-  QVariant data = QVariant::fromValue(QDir::homePath());
-  QString text = TrimPath(data.toString());
-  ui_->destination->addItem(icon, text, data);
-
   // Connect stuff
   connect(ui_->add, SIGNAL(clicked()), SLOT(Add()));
   connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));
@@ -110,8 +105,8 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
   connect(ui_->details, SIGNAL(clicked()), log_dialog_, SLOT(show()));
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
-  connect(ui_->destination, SIGNAL(activated(int)),
-          SLOT(SetDestination(int)));
+  connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
+
 
   connect(transcoder_, SIGNAL(JobComplete(QString,bool)), SLOT(JobComplete(QString,bool)));
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
@@ -147,7 +142,7 @@ void TranscodeDialog::Start() {
   // Add jobs to the transcoder
   for (int i=0 ; i<file_model->rowCount() ; ++i) {
     QString filename = file_model->index(i, 0).data(Qt::UserRole).toString();
-    QString outfilename = SetOutputFileName(filename, preset);
+    QString outfilename = GetOutputFileName(filename, preset);
     transcoder_->AddJob(filename, preset, outfilename);
   }
 
@@ -276,35 +271,47 @@ void TranscodeDialog::Options() {
   }
 }
 
-void TranscodeDialog::SetDestination(int index) {
-  if (!ui_->destination->itemData(index).isNull()) {
-    QString dir = QFileDialog::getExistingDirectory(
-        this, tr("Choose folder"),
-        ui_->destination->itemData(index).toString());
-    // Do not update the QComboBox if the user canceled the dialog.
-    if (!dir.isEmpty()) {
-      QVariant data = QVariant::fromValue(dir);
-      QString text = TrimPath(dir);
-      ui_->destination->setItemText(index, text);
-      ui_->destination->setItemData(index, data);
+// Adds a folder to the destination box.
+void TranscodeDialog::AddDestination() {
+  int index = ui_->destination->currentIndex();
+  QString initial_dir = (!ui_->destination->itemData(index).isNull() ?
+                           ui_->destination->itemData(index).toString() :
+                           QDir::homePath());
+  QString dir = QFileDialog::getExistingDirectory(
+      this, tr("Add folder"), initial_dir);
+
+  if (!dir.isEmpty()) {
+    // Keep only a finite number of items in the box.
+    while (ui_->destination->count() >= kMaxDestinationItems) {
+      ui_->destination->removeItem(1); // The oldest folder item.
+    }
+
+    QIcon icon = IconLoader::Load("folder");
+    QVariant data = QVariant::fromValue(dir);
+    // Do not insert duplicates.
+    int duplicate_index = ui_->destination->findData(data);
+    if (duplicate_index == -1) {
+      ui_->destination->addItem(icon, dir, data);
+      ui_->destination->setCurrentIndex(ui_->destination->count() - 1);
+    } else {
+      ui_->destination->setCurrentIndex(duplicate_index);
     }
   }
 }
 
 // Returns the rightmost non-empty part of 'path'.
-QString TranscodeDialog::TrimPath(const QString& path) {
+QString TranscodeDialog::TrimPath(const QString& path) const {
   return path.section('/', -1, -1, QString::SectionSkipEmpty);
 }
 
-QString TranscodeDialog::SetOutputFileName(const QString& input,
-                                           const TranscoderPreset &preset) {
+QString TranscodeDialog::GetOutputFileName(const QString& input,
+                                           const TranscoderPreset &preset) const {
   QString path = ui_->destination->itemData(
       ui_->destination->currentIndex()).toString();
   if (path.isEmpty()) {
     // Keep the original path.
     return input.section('.', 0, -2) + '.' + preset.extension_;
-  }
-  else {
+  } else {
     QString file_name = TrimPath(input);
     file_name = file_name.section('.', 0, -2);
     return path + '/' + file_name + '.' + preset.extension_;
