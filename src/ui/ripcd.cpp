@@ -1,6 +1,8 @@
 #include "ripcd.h"
 #include "config.h"
 #include "ui_ripcd.h"
+#include "transcoder/transcoder.h"
+#include <QSettings>
 #include <QCheckBox>
 #include <QFrame>
 #include <QLineEdit>
@@ -20,15 +22,25 @@
 #include <tstring.h>
 #include <tstringlist.h>
 
+// winspool.h defines this :(
+#ifdef AddJob
+#  undef AddJob
+#endif
 
 RipCD::RipCD(QWidget* parent)
 : QDialog(parent),
-  transcoder_(new Transcoder(this))
+  transcoder_(new Transcoder(this)),
+  queued_(0),
+	finished_success_(0),
+	finished_failed_(0)
 {
 	// Init
 	ui_.setupUi(this);
 	connect(ui_.ripButton,SIGNAL(clicked()),this,SLOT(clickedRipButton()));
+
+	connect(transcoder_, SIGNAL(JobComplete(QString,bool)), SLOT(JobComplete(QString,bool)));
 	connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
+	connect(this, SIGNAL(RippingComplete()), SLOT(threadedTranscoding()));
 	setWindowTitle(tr("Rip CD"));
 
 
@@ -53,6 +65,7 @@ RipCD::RipCD(QWidget* parent)
 
 void RipCD::clickedRipButton() {
 	QtConcurrent::run(this,&RipCD::toThreadClickedRipButton);
+
 }
 
 void RipCD::toThreadClickedRipButton() {
@@ -62,6 +75,7 @@ void RipCD::toThreadClickedRipButton() {
 		qDebug() << "Going for track " << i;
 		lsn_t i_first_lsn = cdio_get_track_lsn(p_cdio,i);
 		lsn_t i_last_lsn = cdio_get_track_last_lsn(p_cdio,i);
+//		lsn_t i_last_lsn = i_first_lsn+300; // debug
 
 		lsn_t i_cursor;
 		int16_t *p_readbuf = (int16_t *)calloc(CDIO_CD_FRAMESIZE_RAW,1);
@@ -78,13 +92,23 @@ void RipCD::toThreadClickedRipButton() {
 
 		}
 		fclose(fp);
-		TranscoderPreset preset(Transcoder::PresetForFileType(Song::Type_Mpeg));
-		transcoder_->AddJob(QString(source_directory + "track" + QString::number(i) + ".wav").toUtf8().constData(), preset);
-		//
 		free(p_readbuf);
 		p_readbuf = NULL;
 	}
+	emit(RippingComplete());
+}
+
+void RipCD::threadedTranscoding() {
+	QString source_directory = "/tmp/";
+	track_t i_tracks = cdio_get_num_tracks(p_cdio);
+
+		TranscoderPreset preset(Transcoder::PresetForFileType(Song::Type_OggVorbis));
+	for(int i=1; i <= i_tracks; i++) {
+			transcoder_->AddJob(QString(source_directory + "track" + QString::number(i) + ".wav").toUtf8().constData(), preset);
+		}
+	qDebug() << "Total jobs: " << transcoder_->QueuedJobsCount();
 	transcoder_->Start();
+
 }
 
 void RipCD::put_num(long int num, FILE *stream, int bytes) {
@@ -121,7 +145,11 @@ void RipCD::AllJobsComplete() {
 	qDebug() << "All Jobs Complete emmited";
 	// TODO Handle this properly
 	// having a little trouble on wav files, works fine on mp3
-	TagLib::FileRef f(QString("/tmp/track" + QString::number(1) + ".mp3").toUtf8().constData());
+	TagLib::FileRef f(QString("/tmp/track" + QString::number(1) + ".ogg").toUtf8().constData());
 	f.tag()->setArtist("Queen");
 	f.save();
+}
+
+void RipCD::JobComplete(const QString& filename, bool success) {
+  qDebug() << "Completed";
 }
