@@ -128,11 +128,11 @@ void ExtendedEditor::Resize() {
   const int frame_width = widget_->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   const int y = (widget_->rect().height() - sz.height()) / 2;
 
+  clear_button_->move(frame_width, y);
+
   if (!is_rtl_) {
-    clear_button_->move(frame_width, y);
     reset_button_->move(widget_->width() - frame_width - sz.width() - extra_right_padding_, y);
   } else {
-    clear_button_->move(frame_width, y);
     reset_button_->move((has_clear_button() ? sz.width() + 4 : 0) + frame_width, y);
   }
 }
