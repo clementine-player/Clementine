@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>517</width>
-    <height>33</height>
+    <height>17</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,6 +32,12 @@
    </item>
    <item>
     <widget class="TrackSliderSlider" name="slider">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>17</height>
+      </size>
+     </property>
      <property name="singleStep">
       <number>10</number>
      </property>

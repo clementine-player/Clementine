@@ -62,12 +62,8 @@ public:
   void SetApplication(Application* app);
 
   void set_ideal_height(int height);
-  bool show_above_status_bar() const;
 
   QSize sizeHint() const;
-
-signals:
-  void ShowAboveStatusBarChanged(bool above);
 
 public slots:
   void Stopped();
@@ -83,7 +79,6 @@ protected:
 
 private slots:
   void SetMode(int mode);
-  void ShowAboveStatusBar(bool above);
 
   void AlbumArtLoaded(const Song& metadata, const QString& uri, const QImage& image);
   void KittenLoaded(quint64 id, const QImage& image);
@@ -122,8 +117,6 @@ private:
   Mode mode_;
 
   QMenu* menu_;
-
-  QAction* above_statusbar_action_;
 
   bool visible_;
   int small_ideal_height_;
