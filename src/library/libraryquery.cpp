@@ -48,10 +48,23 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
       token.remove(')');
       token.remove('"');
 
-      if (token.contains(':'))
-        query += "fts" + token + "* ";
-      else
+      if (token.contains(':')) {
+        // Only prefix fts if the token is a valid column name.
+        if (Song::kFtsColumns.contains("fts" + token.section(':', 0, 0),
+                                       Qt::CaseInsensitive)) {
+          // Account for multiple colons.
+          QString columntoken = token.section(
+              ':', 0, 0, QString::SectionIncludeTrailingSep);
+          QString subtoken = token.section(':', 1, -1);
+          subtoken.replace(":", " ");
+          query += "fts" + columntoken + subtoken + "* ";
+        } else {
+          token.replace(':', 1, ' ');
+          query += token + "* ";
+        }
+      } else {
         query += token + "* ";
+      }
     }
 
     where_clauses_ << "fts.%fts_table_noprefix MATCH ?";
