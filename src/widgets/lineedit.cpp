@@ -98,6 +98,13 @@ void ExtendedEditor::UpdateButtonGeometry() {
   widget_->setMinimumSize(width, height);
 }
 
+void ExtendedEditor::set_rtl(bool rtl) {
+  if (rtl != is_rtl_) {
+    is_rtl_ = rtl;
+    UpdateButtonGeometry();
+  }
+}
+
 void ExtendedEditor::Paint(QPaintDevice* device) {
   if (!widget_->hasFocus() && is_empty() && !hint_.isEmpty()) {
     clear_button_->hide();
@@ -141,13 +148,6 @@ LineEdit::LineEdit(QWidget* parent)
 {
   connect(reset_button_, SIGNAL(clicked()), SIGNAL(Reset()));
   connect(this, SIGNAL(textChanged(QString)), SLOT(text_changed(QString)));
-}
-
-void LineEdit::set_rtl(bool rtl) {
-  if (rtl != is_rtl_) {
-    is_rtl_ = rtl;
-    UpdateButtonGeometry();
-  }
 }
 
 void LineEdit::text_changed(const QString& text) {
