@@ -171,6 +171,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlaylistOrganiseSelected(bool copy);
   void PlaylistDelete();
   void PlaylistOpenInBrowser();
+  void ShowInLibrary();
 
   void ChangeLibraryQueryMode(QAction* action);
 
@@ -329,6 +330,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_stop_after_;
   QAction* playlist_undoredo_;
   QAction* playlist_organise_;
+  QAction* playlist_show_in_library_;
   QAction* playlist_copy_to_library_;
   QAction* playlist_move_to_library_;
   QAction* playlist_copy_to_device_;
