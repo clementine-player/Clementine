@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>601</width>
-    <height>439</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>390</y>
+     <y>450</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -36,7 +36,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>137</y>
+     <y>197</y>
      <width>571</width>
      <height>101</height>
     </rect>
@@ -110,7 +110,7 @@
      <x>10</x>
      <y>10</y>
      <width>571</width>
-     <height>121</height>
+     <height>171</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
@@ -164,13 +164,93 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>250</y>
+     <y>410</y>
      <width>98</width>
      <height>27</height>
     </rect>
    </property>
    <property name="text">
     <string>&amp;Rip</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>310</y>
+     <width>461</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <widget class="QComboBox" name="format">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="options">
+      <property name="text">
+       <string>Options...</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>310</y>
+     <width>90</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Audio format</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>350</y>
+     <width>79</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Destination</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="destination">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>350</y>
+     <width>461</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Alongside the originals</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QProgressBar" name="progress_bar">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>410</y>
+     <width>455</width>
+     <height>25</height>
+    </rect>
    </property>
   </widget>
  </widget>
