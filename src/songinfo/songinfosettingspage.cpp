@@ -59,8 +59,6 @@ void SongInfoSettingsPage::Load() {
   s.beginGroup(SongInfoTextView::kSettingsGroup);
   ui_->song_info_font_size->setValue(
       s.value("font_size", SongInfoTextView::kDefaultFontSize).toReal());
-  ui_->song_info_timeout->setValue(
-      s.value("timeout", SongInfoFetcher::kDefaultTimeoutDuration).toInt());
   s.endGroup();
 
   QList<const UltimateLyricsProvider*> providers = dialog()->song_info_view()->lyric_providers();
@@ -80,7 +78,6 @@ void SongInfoSettingsPage::Save() {
 
   s.beginGroup(SongInfoTextView::kSettingsGroup);
   s.setValue("font_size", ui_->song_info_font_preview->font().pointSizeF());
-  s.setValue("timeout", ui_->song_info_timeout->value());
   s.endGroup();
 
   s.beginGroup(SongInfoView::kSettingsGroup);

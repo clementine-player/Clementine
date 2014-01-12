@@ -29,5 +29,6 @@ namespace mac {
 
 QKeySequence KeySequenceFromNSEvent(NSEvent* event);
 void DumpDictionary(CFDictionaryRef dict);
+float GetDevicePixelRatio(QWidget* widget);
 
 }

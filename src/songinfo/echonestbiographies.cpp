@@ -89,18 +89,24 @@ void EchoNestBiographies::RequestFinished() {
       data.icon_ = site_icons_[canonical_site];
 
     SongInfoTextView* editor = new SongInfoTextView;
+    QString text;
+    // Add a link to the bio webpage at the top if we have one
+    if (!bio.url().isEmpty()) {
+      text += "<p><a href=\"" + bio.url().toEncoded() + "\">" +
+              tr("Open in your browser") +
+              "</a></p>";
+    }
+
+    text += bio.text();
     if (bio.site() == "last.fm") {
       // Echonest lost formatting and it seems there is currently no plans on Echonest side for changing this.
       // But with last.fm, we can guess newlines: "  " corresponds to a newline
       // (this seems to be because on last.fm' website, extra blank is inserted
       // before <br /> tag, and this blank is kept).
       // This is tricky, but this make the display nicer for last.fm biographies.
-      QString copy(bio.text());
-      copy.replace("  ","<p>");
-      editor->SetHtml(copy);
-    } else {
-      editor->SetHtml(bio.text());
+      text.replace("  ","<p>");
     }
+    editor->SetHtml(text);
     data.contents_ = editor;
 
     emit InfoReady(request->id_, data);

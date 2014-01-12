@@ -1679,7 +1679,12 @@ Song GroovesharkService::ExtractSong(const QVariantMap& result_song) {
   Song song;
   if (!result_song.isEmpty()) {
     int song_id = result_song["SongID"].toInt();
-    QString song_name = result_song["SongName"].toString();
+    QString song_name;
+    if (result_song.contains("SongName")) {
+      song_name = result_song["SongName"].toString();
+    } else {
+      song_name = result_song["Name"].toString();
+    }
     int artist_id = result_song["ArtistID"].toInt();
     QString artist_name = result_song["ArtistName"].toString();
     int album_id = result_song["AlbumID"].toInt();

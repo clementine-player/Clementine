@@ -72,6 +72,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
     details_(new QTextDocument(this)),
     previous_track_opacity_(0.0),
     bask_in_his_glory_action_(NULL),
+    downloading_covers_(false),
     aww_(false),
     kittens_(NULL),
     pending_kitten_(0)
@@ -80,6 +81,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   QSettings s;
   s.beginGroup(kSettingsGroup);
   mode_ = Mode(s.value("mode", SmallSongDetails).toInt());
+  album_cover_choice_controller_->search_cover_auto_action()->setChecked(s.value("search_for_cover_auto", false).toBool());
 
   // Accept drops for setting album art
   setAcceptDrops(true);
@@ -96,6 +98,9 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
 
   QList<QAction*> actions = album_cover_choice_controller_->GetAllActions();
 
+  // Here we add the search automatically action, too!
+  actions.append(album_cover_choice_controller_->search_cover_auto_action());
+
   connect(album_cover_choice_controller_->cover_from_file_action(),
           SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
   connect(album_cover_choice_controller_->cover_to_file_action(),
@@ -108,6 +113,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
           SIGNAL(triggered()), this, SLOT(UnsetCover()));
   connect(album_cover_choice_controller_->show_cover_action(),
           SIGNAL(triggered()), this, SLOT(ShowCover()));
+  connect(album_cover_choice_controller_->search_cover_auto_action(),
+          SIGNAL(triggered()), this, SLOT(SearchCoverAutomatically()));
 
   menu_->addActions(actions);
   menu_->addSeparator();
@@ -129,6 +136,9 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   fade_animation_->setDirection(QTimeLine::Backward); // 1.0 -> 0.0
 
   UpdateHeight();
+
+  connect(album_cover_choice_controller_, SIGNAL(AutomaticCoverSearchDone()),
+          this, SLOT(AutomaticCoverSearchDone()));
 }
 
 NowPlayingWidget::~NowPlayingWidget() {
@@ -233,9 +243,10 @@ void NowPlayingWidget::KittenLoaded(quint64 id, const QImage& image) {
   }
 }
 
-void NowPlayingWidget::AlbumArtLoaded(const Song& metadata, const QString&,
+void NowPlayingWidget::AlbumArtLoaded(const Song& metadata, const QString& uri,
                                       const QImage& image) {
   metadata_ = metadata;
+  downloading_covers_ = false;
 
   if (aww_) {
     pending_kitten_ = kittens_->LoadKitten(app_->current_art_loader()->options());
@@ -243,6 +254,9 @@ void NowPlayingWidget::AlbumArtLoaded(const Song& metadata, const QString&,
   }
 
   SetImage(image);
+
+  // Search for cover automatically?
+  GetCoverAutomatically();
 }
 
 void NowPlayingWidget::SetImage(const QImage& image) {
@@ -301,6 +315,9 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
     } else {
       // Draw the cover
       p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_, cover_);
+      if (downloading_covers_) {
+        p->drawPixmap(small_ideal_height_ - 18, 6, 16, 16, spinner_animation_->currentPixmap());
+      }
     }
 
     // Draw the details
@@ -321,6 +338,9 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
       p->drawPixmap(x_offset, kTopBorder, total_size, total_size, hypnotoad_->currentPixmap());
     } else {
       p->drawPixmap(x_offset, kTopBorder, total_size, total_size, cover_);
+      if (downloading_covers_) {
+        p->drawPixmap(total_size - 31, 40, 16, 16, spinner_animation_->currentPixmap());
+      }
     }
 
     // Work out how high the text is going to be
@@ -454,6 +474,15 @@ void NowPlayingWidget::ShowCover() {
   album_cover_choice_controller_->ShowCover(metadata_);
 }
 
+void NowPlayingWidget::SearchCoverAutomatically() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("search_for_cover_auto", album_cover_choice_controller_->search_cover_auto_action()->isChecked());
+
+  // Search for cover automatically?
+  GetCoverAutomatically();
+}
+
 void NowPlayingWidget::Bask() {
   big_hypnotoad_.reset(new FullscreenHypnotoad);
   big_hypnotoad_->showFullScreen();
@@ -471,4 +500,32 @@ void NowPlayingWidget::dropEvent(QDropEvent* e) {
   album_cover_choice_controller_->SaveCover(&metadata_, e);
 
   QWidget::dropEvent(e);
+}
+
+bool NowPlayingWidget::GetCoverAutomatically() {
+  // Search for cover automatically?
+  bool search =  album_cover_choice_controller_->search_cover_auto_action()->isChecked() &&
+      !metadata_.has_manually_unset_cover() &&
+      metadata_.art_automatic().isEmpty() &&
+      metadata_.art_manual().isEmpty();
+
+  if (search) {
+    qLog(Debug) << "GetCoverAutomatically";
+    downloading_covers_ = true;
+    album_cover_choice_controller_->SearchCoverAutomatically(metadata_);
+
+    // Show a spinner animation
+    spinner_animation_.reset(new QMovie(":/spinner.gif", QByteArray(), this));
+    connect(spinner_animation_.get(), SIGNAL(updated(const QRect&)), SLOT(update()));
+    spinner_animation_->start();
+    update();
+  }
+
+  return search;
+}
+
+void NowPlayingWidget::AutomaticCoverSearchDone() {
+  downloading_covers_ = false;
+  spinner_animation_.reset();
+  update();
 }

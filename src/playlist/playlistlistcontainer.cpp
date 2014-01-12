@@ -101,6 +101,7 @@ PlaylistListContainer::~PlaylistListContainer() {
 void PlaylistListContainer::showEvent(QShowEvent* e) {
   // Loading icons is expensive so only do it when the view is first opened
   if (loaded_icons_) {
+    QWidget::showEvent(e);
     return;
   }
   loaded_icons_ = true;

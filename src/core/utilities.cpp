@@ -25,6 +25,7 @@
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QDir>
+#include <QFile>
 #include <QIODevice>
 #include <QMetaEnum>
 #include <QMouseEvent>
@@ -453,6 +454,31 @@ QByteArray Sha256(const QByteArray& data) {
   SHA256_Final(reinterpret_cast<u_int8_t*>(ret.data()), &context);
 
   return ret;
+}
+
+// File must not be open and will be closed afterwards!
+QByteArray Md5File(QFile &file) {
+  file.open(QIODevice::ReadOnly);
+  QCryptographicHash hash(QCryptographicHash::Md5);
+  QByteArray data;
+
+  while(!file.atEnd()) {
+    data = file.read(1000000); // 1 mib
+    hash.addData(data.data(), data.length());
+    data.clear();
+  }
+
+  file.close();
+
+  return hash.result();
+}
+
+QByteArray Sha1CoverHash(const QString& artist, const QString& album) {
+  QCryptographicHash hash(QCryptographicHash::Sha1);
+  hash.addData(artist.toLower().toUtf8().constData());
+  hash.addData(album.toLower().toUtf8().constData());
+
+  return hash.result();
 }
 
 QString PrettySize(const QSize& size) {

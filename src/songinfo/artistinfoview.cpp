@@ -48,12 +48,18 @@ bool ArtistInfoView::NeedsUpdate(const Song& old_metadata, const Song& new_metad
 
   return old_metadata.artist() != new_metadata.artist();
 }
-
+  
+void ArtistInfoView::InfoResultReady (int id, const CollapsibleInfoPane::Data& data) {
+  if (id != current_request_id_)
+    return;
+  
+  AddSection (new CollapsibleInfoPane(data, this));
+  CollapseSections();
+}
+  
 void ArtistInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) {
   if (id != current_request_id_)
     return;
-
-  Clear();
 
   if (!result.images_.isEmpty()) {
     // Image view goes at the top
@@ -64,10 +70,6 @@ void ArtistInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) 
       image_view->AddImage(url);
     }
   }
-
-  foreach (const CollapsibleInfoPane::Data& data, result.info_) {
-    AddSection(new CollapsibleInfoPane(data, this));
-  }
-
   CollapseSections();
 }
+

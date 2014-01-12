@@ -641,6 +641,11 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
 
   // Open the file
   QFile file(song.url().toLocalFile());
+
+  // Get md5 for file
+  QByteArray md5 = Utilities::Md5File(file).toHex();
+  qLog(Debug) << "md5 for file" << song.url().toLocalFile() << "=" << md5;
+
   file.open(QIODevice::ReadOnly);
 
   QByteArray data;
@@ -665,6 +670,7 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
     chunk->set_file_number(song_no);
     chunk->set_size(file.size());
     chunk->set_data(data.data(), data.size());
+    chunk->set_file_hash(md5.data(), md5.size());
 
     // On the first chunk send the metadata, so the client knows
     // what file it receives.
@@ -746,6 +752,11 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
 
   // Open the file
   QFile file(temp_file_name);
+
+  // Get the md5 hash
+  QByteArray md5 = Utilities::Md5File(file).toHex();
+  qLog(Debug) << "Library md5" << md5;
+
   file.open(QIODevice::ReadOnly);
 
   QByteArray data;
@@ -766,6 +777,7 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
     chunk->set_chunk_number(chunk_number);
     chunk->set_size(file.size());
     chunk->set_data(data.data(), data.size());
+    chunk->set_file_hash(md5.data(), md5.size());
 
     // Send data directly to the client
     client->SendData(&msg);

@@ -98,7 +98,7 @@
      <property name="title">
       <string>Output options</string>
      </property>
-     <layout class="QFormLayout" name="formLayout">
+     <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
@@ -107,25 +107,21 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QComboBox" name="format">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="options">
-          <property name="text">
-           <string>Options...</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QComboBox" name="format">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="options">
+        <property name="text">
+         <string>Options...</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
@@ -136,11 +132,27 @@
       </item>
       <item row="1" column="1">
        <widget class="QComboBox" name="destination">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <item>
          <property name="text">
           <string>Alongside the originals</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="select">
+        <property name="text">
+         <string>Select...</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -196,7 +208,6 @@
   <tabstop>add</tabstop>
   <tabstop>remove</tabstop>
   <tabstop>format</tabstop>
-  <tabstop>destination</tabstop>
   <tabstop>button_box</tabstop>
  </tabstops>
  <resources/>
