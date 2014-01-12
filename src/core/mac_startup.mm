@@ -451,4 +451,12 @@ void EnableFullScreen(const QWidget& main_window) {
   [window setCollectionBehavior: kFullScreenPrimary];
 }
 
+float GetDevicePixelRatio(QWidget* widget) {
+  NSView* view = reinterpret_cast<NSView*>(widget->winId());
+  if ([[view window] respondsToSelector: @selector(backingScaleFactor)]) {
+    return [[view window] backingScaleFactor];
+  }
+  return 1.0f;
+}
+
 }  // namespace mac

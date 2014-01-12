@@ -56,6 +56,7 @@ class LibraryFilterWidget : public QWidget {
   void SetDelayBehaviour(DelayBehaviour behaviour) { delay_behaviour_ = behaviour; }
   void SetAgeFilterEnabled(bool enabled);
   void SetGroupByEnabled(bool enabled);
+  void ShowInLibrary(const QString& search);
 
   QMenu* menu() const { return library_menu_; }
   void AddMenuAction(QAction* action);

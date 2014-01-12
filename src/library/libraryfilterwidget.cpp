@@ -212,6 +212,10 @@ void LibraryFilterWidget::SetQueryMode(QueryOptions::QueryMode query_mode) {
   model_->SetFilterQueryMode(query_mode);
 }
 
+void LibraryFilterWidget::ShowInLibrary(const QString& search) {
+  ui_->filter->setText(search);
+}
+
 void LibraryFilterWidget::SetAgeFilterEnabled(bool enabled) {
   filter_age_menu_->setEnabled(enabled);
 }
