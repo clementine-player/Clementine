@@ -81,18 +81,21 @@ void ExtendedEditor::set_reset_button(bool visible) {
 
 void ExtendedEditor::UpdateButtonGeometry() {
   const int frame_width = widget_->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-  const int left = frame_width + 1 + (
+  int left = frame_width + 1 + (
         has_clear_button() ? clear_button_->sizeHint().width() : 0);
-  const int right = frame_width + 1 + (
+  int right = frame_width + 1 + (
         has_reset_button() ? reset_button_->sizeHint().width() : 0);
-
+  if (is_rtl()) {
+    qSwap(left, right);
+  }
   widget_->setStyleSheet(
       QString("QLineEdit { padding-left: %1px; padding-right: %2px; }")
         .arg(left).arg(right));
 
   QSize msz = widget_->minimumSizeHint();
-  widget_->setMinimumSize(msz.width() + (clear_button_->sizeHint().width() + frame_width + 1) * 2 + extra_right_padding_,
-                          qMax(msz.height(), clear_button_->sizeHint().height() + frame_width * 2 + 2));
+  int width = msz.width() + (clear_button_->sizeHint().width() + frame_width + 1) * 2 + extra_right_padding_;
+  int height = qMax(msz.height(), clear_button_->sizeHint().height() + frame_width * 2 + 2);
+  widget_->setMinimumSize(width, height);
 }
 
 void ExtendedEditor::Paint(QPaintDevice* device) {
@@ -128,12 +131,7 @@ void ExtendedEditor::Resize() {
   const int y = (widget_->rect().height() - sz.height()) / 2;
 
   clear_button_->move(frame_width, y);
-
-  if (!is_rtl_) {
-    reset_button_->move(widget_->width() - frame_width - sz.width() - extra_right_padding_, y);
-  } else {
-    reset_button_->move((has_clear_button() ? sz.width() + 4 : 0) + frame_width, y);
-  }
+  reset_button_->move(widget_->width() - frame_width - sz.width() - extra_right_padding_, y);
 }
 
 
@@ -145,6 +143,13 @@ LineEdit::LineEdit(QWidget* parent)
   connect(this, SIGNAL(textChanged(QString)), SLOT(text_changed(QString)));
 }
 
+void LineEdit::set_rtl(bool rtl) {
+  if (rtl != is_rtl_) {
+    is_rtl_ = rtl;
+    UpdateButtonGeometry();
+  }
+}
+
 void LineEdit::text_changed(const QString& text) {
   if (text.isEmpty()) {
     // Consider empty string as LTR
@@ -154,7 +159,6 @@ void LineEdit::text_changed(const QString& text) {
     // compare only the first character
     set_rtl(QString(text.at(0)).isRightToLeft());
   }
-  Resize();
 }
 
 void LineEdit::paintEvent(QPaintEvent* e) {

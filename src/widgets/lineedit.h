@@ -72,8 +72,11 @@ public:
 protected:
   void Paint(QPaintDevice* device);
   void Resize();
-
-private:
+  // Change the value of the "right to left" (direction) property.
+  // Will recompute whatever is needed (UpdateButtonGeometry, ...) if the value
+  // changed.
+  void set_rtl(bool rtl);
+  bool is_rtl() const { return is_rtl_; }
   void UpdateButtonGeometry();
 
 protected:
@@ -109,10 +112,6 @@ public:
 protected:
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
-
-private:
-  bool is_rtl() const { return is_rtl_; }
-  void set_rtl(bool rtl) { is_rtl_ = rtl; }
 
 private slots:
   void text_changed(const QString& text);
