@@ -61,6 +61,7 @@ class RipCD: public QDialog {
 	QString TrimPath(const QString& path) const;
 	QString GetOutputFileName(const QString& input,
 														const TranscoderPreset& preset) const;
+	QString ParseFileFormatString(const QString& file_format, int trackNo) const;
 
 
 

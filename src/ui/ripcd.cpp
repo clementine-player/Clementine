@@ -187,8 +187,7 @@ void RipCD::toThreadClickedRipButton() {
 		lsn_t i_cursor;
 		int16_t *p_readbuf = (int16_t *) calloc(CDIO_CD_FRAMESIZE_RAW, 1);
 
-		QString filename = source_directory + "track"
-				+ QString("0%1").arg(i).right(2) + ".wav";
+		QString filename = source_directory + ParseFileFormatString(ui_->format_filename->text(),i);
 		FILE *fp = fopen(filename.toUtf8().constData(), "w");
 		write_WAV_header(fp,
 				(i_last_lsn - i_first_lsn + 1) * CDIO_CD_FRAMESIZE_RAW);
@@ -235,6 +234,17 @@ QString RipCD::GetOutputFileName(const QString& input,
 		file_name = file_name.section('.', 0, -2);
 		return path + '/' + file_name + '.' + preset.extension_;
 	}
+}
+
+QString RipCD::ParseFileFormatString(const QString& file_format, int trackNo) const {
+	QString to_return = file_format;
+	to_return.replace(QString("%artist%"),ui_->artistLineEdit->text());
+	to_return.replace(QString("%album%"),ui_->albumLineEdit->text());
+	to_return.replace(QString("%genre%"),ui_->genreLineEdit->text());
+	to_return.replace(QString("%year%"),ui_->yearLineEdit->text());
+	to_return.replace(QString("%tracknum%"),QString::number(trackNo));
+	to_return.replace(QString("%track%"),track_names_.value(trackNo - 1)->text());
+	return to_return;
 }
 
 void RipCD::UpdateProgress() {

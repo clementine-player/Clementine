@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>601</width>
-    <height>500</height>
+    <height>575</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>450</y>
+     <y>530</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -159,7 +159,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>410</y>
+     <y>480</y>
      <width>98</width>
      <height>27</height>
     </rect>
@@ -172,7 +172,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>410</y>
+     <y>480</y>
      <width>455</width>
      <height>25</height>
     </rect>
@@ -182,23 +182,23 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>300</y>
+     <y>320</y>
      <width>571</width>
-     <height>96</height>
+     <height>131</height>
     </rect>
    </property>
    <property name="title">
     <string>Output options</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="1" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>Audio format</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
+    <item row="1" column="1">
      <widget class="QComboBox" name="format">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -208,21 +208,21 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="2">
+    <item row="1" column="2">
      <widget class="QPushButton" name="options">
       <property name="text">
        <string>Options...</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
+    <item row="2" column="0">
      <widget class="QLabel" name="label_2">
       <property name="text">
        <string>Destination</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="2" column="1">
      <widget class="QComboBox" name="destination">
       <property name="enabled">
        <bool>true</bool>
@@ -240,10 +240,24 @@
       </item>
      </widget>
     </item>
-    <item row="1" column="2">
+    <item row="2" column="2">
      <widget class="QPushButton" name="select">
       <property name="text">
        <string>Select...</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>File Format</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <widget class="QLineEdit" name="format_filename">
+      <property name="text">
+       <string>%tracknum% - %artist% - %track%</string>
       </property>
      </widget>
     </item>
