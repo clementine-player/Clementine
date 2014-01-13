@@ -187,7 +187,7 @@ void RipCD::toThreadClickedRipButton() {
 		lsn_t i_cursor;
 		int16_t *p_readbuf = (int16_t *) calloc(CDIO_CD_FRAMESIZE_RAW, 1);
 
-		QString filename = source_directory + ParseFileFormatString(ui_->format_filename->text(),i);
+		QString filename = source_directory + ParseFileFormatString(ui_->format_filename->text(),i) + ".wav";
 		FILE *fp = fopen(filename.toUtf8().constData(), "w");
 		write_WAV_header(fp,
 				(i_last_lsn - i_first_lsn + 1) * CDIO_CD_FRAMESIZE_RAW);
