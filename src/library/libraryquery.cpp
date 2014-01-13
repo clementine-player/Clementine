@@ -39,9 +39,11 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     // expected with sqlite's FTS3:
     //  1) Append * to all tokens.
     //  2) Prefix "fts" to column names.
+    //  3) Remove colons which don't correspond to column names.
 
     // Split on whitespace
-    QStringList tokens(options.filter().split(QRegExp("\\s+")));
+    QStringList tokens(options.filter().split(
+        QRegExp("\\s+"), QString::SkipEmptyParts));
     QString query;
     foreach (QString token, tokens) {
       token.remove('(');
@@ -57,9 +59,11 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
               ':', 0, 0, QString::SectionIncludeTrailingSep);
           QString subtoken = token.section(':', 1, -1);
           subtoken.replace(":", " ");
+          subtoken = subtoken.trimmed();
           query += "fts" + columntoken + subtoken + "* ";
         } else {
-          token.replace(':', 1, ' ');
+          token.replace(":", " ");
+          token = token.trimmed();
           query += token + "* ";
         }
       } else {
