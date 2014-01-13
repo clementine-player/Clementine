@@ -16,7 +16,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -60,14 +60,14 @@
      </widget>
     </item>
     <item row="0" column="0">
-     <widget class="QLabel" name="title_label">
+     <widget class="QLabel" name="album_label">
       <property name="text">
-       <string>Title</string>
+       <string>Album</string>
       </property>
      </widget>
     </item>
     <item row="0" column="1" colspan="6">
-     <widget class="QLineEdit" name="titleLineEdit"/>
+     <widget class="QLineEdit" name="albumLineEdit"/>
     </item>
     <item row="2" column="6">
      <widget class="QLineEdit" name="discLineEdit">
@@ -117,7 +117,7 @@
     <item row="0" column="0">
      <widget class="QTableWidget" name="tableWidget">
       <property name="columnCount">
-       <number>5</number>
+       <number>4</number>
       </property>
       <attribute name="horizontalHeaderVisible">
        <bool>true</bool>
@@ -148,11 +148,6 @@
       </column>
       <column>
        <property name="text">
-        <string>Artist</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
         <string>Duration</string>
        </property>
       </column>
@@ -173,76 +168,6 @@
     <string>&amp;Rip</string>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>310</y>
-     <width>461</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_3">
-    <item>
-     <widget class="QComboBox" name="format">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="options">
-      <property name="text">
-       <string>Options...</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>310</y>
-     <width>90</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Audio format</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>350</y>
-     <width>79</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Destination</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="destination">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>350</y>
-     <width>461</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>Alongside the originals</string>
-    </property>
-   </item>
-  </widget>
   <widget class="QProgressBar" name="progress_bar">
    <property name="geometry">
     <rect>
@@ -253,11 +178,82 @@
     </rect>
    </property>
   </widget>
+  <widget class="QGroupBox" name="output_group">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>571</width>
+     <height>96</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Output options</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Audio format</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QComboBox" name="format">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="options">
+      <property name="text">
+       <string>Options...</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Destination</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="destination">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <item>
+       <property name="text">
+        <string>Alongside the originals</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="select">
+      <property name="text">
+       <string>Select...</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>accepted()</signal>
    <receiver>RipCD</receiver>
    <slot>accept()</slot>
@@ -273,7 +269,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
    <receiver>RipCD</receiver>
    <slot>reject()</slot>
