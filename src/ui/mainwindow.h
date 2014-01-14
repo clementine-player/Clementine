@@ -148,6 +148,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlaylistPlay();
   void PlaylistStopAfter();
   void PlaylistQueue();
+  void PlaylistSkip();
   void PlaylistRemoveCurrent();
   void PlaylistEditFinished(const QModelIndex& index);
   void EditTracks();
@@ -329,6 +330,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_delete_;
   QAction* playlist_open_in_browser_;
   QAction* playlist_queue_;
+  QAction* playlist_skip_;
   QAction* playlist_add_to_another_;
   QList<QAction*> playlistitem_actions_;
   QAction* playlistitem_actions_separator_;

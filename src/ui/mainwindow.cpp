@@ -491,6 +491,9 @@ MainWindow::MainWindow(Application* app,
   playlist_queue_ = playlist_menu_->addAction("", this, SLOT(PlaylistQueue()));
   playlist_queue_->setShortcut(QKeySequence("Ctrl+D"));
   ui_->playlist->addAction(playlist_queue_);
+  playlist_skip_ = playlist_menu_->addAction(tr("Skip track"), this, SLOT(PlaylistSkip()));
+  ui_->playlist->addAction(playlist_skip_);
+
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_undoredo_ = playlist_menu_->addSeparator();
@@ -1955,6 +1958,16 @@ void MainWindow::PlaylistQueue() {
   }
 
   app_->playlist_manager()->current()->queue()->ToggleTracks(indexes);
+}
+
+void MainWindow::PlaylistSkip() {
+  QModelIndexList indexes;
+  foreach (const QModelIndex& proxy_index,
+           ui_->playlist->view()->selectionModel()->selectedRows()) {
+    indexes << app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
+  }
+
+  app_->playlist_manager()->current()->queue()->SkipTracks(indexes);
 }
 
 void MainWindow::PlaylistCopyToDevice() {
