@@ -15,12 +15,13 @@
  along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef RIPCD_H
-#define RIPCD_H
+#ifndef SRC_UI_RIPCD_H_
+#define SRC_UI_RIPCD_H_
 
 #include <QDialog>
 #include <QCheckBox>
 #include <QThread>
+#include <QFile>
 #include <cdio/cdio.h>
 #include "ui_ripcd.h"
 
@@ -30,55 +31,51 @@ class Transcoder;
 struct TranscoderPreset;
 
 class RipCD: public QDialog {
-	Q_OBJECT
-//	QThread thread;
+  Q_OBJECT
 
  public:
-	RipCD(QWidget* parent = 0);
-	static const char* kSettingsGroup;
-	static const int kProgressInterval;
-	static const int kMaxDestinationItems;
+  explicit RipCD(QWidget* parent = 0);
+  static const char* kSettingsGroup;
+  static const int kProgressInterval;
+  static const int kMaxDestinationItems;
 
  private:
-	Transcoder* transcoder_;
-	int queued_;
-	int finished_success_;
-	int finished_failed_;
-	track_t i_tracks;
-	Ui_RipCD* ui_;
-	CdIo_t *p_cdio;
-	QList<QCheckBox*> checkboxes_;
-	QList<QString> generated_files_;
-	QList<int> tracks_to_rip_;
-	QList<QLineEdit*> track_names_;
-	QString last_add_dir_;
-	QPushButton* cancel_button_;
+  Transcoder* transcoder_;
+  int queued_;
+  int finished_success_;
+  int finished_failed_;
+  track_t i_tracks;
+  Ui_RipCD* ui_;
+  CdIo_t *p_cdio_;
+  QList<QCheckBox*> checkboxes_;
+  QList<QString> generated_files_;
+  QList<int> tracks_to_rip_;
+  QList<QLineEdit*> track_names_;
+  QString last_add_dir_;
+  QPushButton* cancel_button_;
 
-	void write_WAV_header(FILE *stream, int32_t i_bytecount);
-	void put_num(long int num, FILE *stream, int bytes);
-	int nTracksToRip();
-	void toThreadClickedRipButton();
-	QString TrimPath(const QString& path) const;
-	QString GetOutputFileName(const QString& input,
-														const TranscoderPreset& preset) const;
-	QString ParseFileFormatString(const QString& file_format, int trackNo) const;
-
-
+  void WriteWAVHeader(FILE *stream, int32_t i_bytecount);
+  void PutNum(int64_t num, FILE *stream, int bytes);
+  int NumTracksToRip();
+  void ThreadClickedRipButton();
+  QString TrimPath(const QString& path) const;
+  QString GetOutputFileName(const QString& input,
+      const TranscoderPreset& preset) const;
+  QString ParseFileFormatString(const QString& file_format, int trackNo) const;
 
  signals:
-	void RippingComplete();
-	void signalUpdateProgress();
-
+  void RippingComplete();
+  void SignalUpdateProgress();
  private slots:
-	void UpdateProgress();
-	void threadedTranscoding();
-	void clickedRipButton();
-	void JobComplete(const QString& filename, bool success);
-	void AllJobsComplete();
-	void AppendOutput(const QString &filename);
-	void Options();
-	void AddDestination();
-	void Cancel();
+  void UpdateProgress();
+  void ThreadedTranscoding();
+  void ClickedRipButton();
+  void JobComplete(const QString& filename, bool success);
+  void AllJobsComplete();
+  void AppendOutput(const QString &filename);
+  void Options();
+  void AddDestination();
+  void Cancel();
 };
 
-#endif // RIPCD_H
+#endif  // SRC_UI_RIPCD_H_
