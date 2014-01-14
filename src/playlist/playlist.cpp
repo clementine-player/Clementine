@@ -442,8 +442,9 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
     ++i;
 
     // Advance i until we find any track that is in the filter
-    while (i < virtual_items_.count() && !FilterContainsVirtualIndex(i))
-      ++i;
+    while ((i < virtual_items_.count() && !FilterContainsVirtualIndex(i)) || queue_->SkipSourceRow(i)) {
+          ++i;
+    }
     return i;
   }
 

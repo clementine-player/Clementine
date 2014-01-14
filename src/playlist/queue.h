@@ -34,11 +34,13 @@ public:
   bool is_empty() const;
   int PositionOf(const QModelIndex& source_index) const;
   bool ContainsSourceRow(int source_row) const;
+  bool SkipSourceRow(int source_row) const;
   int PeekNext() const;
 
   // Modify the queue
   int TakeNext();
   void ToggleTracks(const QModelIndexList& source_indexes);
+  void SkipTracks(const QModelIndexList& source_indexes);
   void Clear();
   void Move(const QList<int>& proxy_rows, int pos);
   void MoveUp(int row);
@@ -69,6 +71,8 @@ private slots:
 
 private:
   QList<QPersistentModelIndex> source_indexes_;
+  QList<QPersistentModelIndex> skipped_indexes_;
+
 };
 
 #endif // QUEUE_H
