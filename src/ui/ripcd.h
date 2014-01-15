@@ -35,18 +35,18 @@ class RipCD: public QDialog {
 
  public:
   explicit RipCD(QWidget* parent = 0);
+
+ private:
   static const char* kSettingsGroup;
   static const int kProgressInterval;
   static const int kMaxDestinationItems;
-
- private:
   Transcoder* transcoder_;
   int queued_;
   int finished_success_;
   int finished_failed_;
   track_t i_tracks;
   Ui_RipCD* ui_;
-  CdIo_t *p_cdio_;
+  CdIo_t *cdio_;
   QList<QCheckBox*> checkboxes_;
   QList<QString> generated_files_;
   QList<int> tracks_to_rip_;
@@ -54,14 +54,14 @@ class RipCD: public QDialog {
   QString last_add_dir_;
   QPushButton* cancel_button_;
 
-  void WriteWAVHeader(FILE *stream, int32_t i_bytecount);
-  void PutNum(int64_t num, FILE *stream, int bytes);
+  void WriteWAVHeader(QFile* stream, int32_t i_bytecount);
+  void PutNum(int64_t num, QFile* stream, int bytes);
   int NumTracksToRip();
   void ThreadClickedRipButton();
   QString TrimPath(const QString& path) const;
   QString GetOutputFileName(const QString& input,
       const TranscoderPreset& preset) const;
-  QString ParseFileFormatString(const QString& file_format, int trackNo) const;
+  QString ParseFileFormatString(const QString& file_format, int track_no) const;
 
  signals:
   void RippingComplete();
@@ -72,7 +72,7 @@ class RipCD: public QDialog {
   void ClickedRipButton();
   void JobComplete(const QString& filename, bool success);
   void AllJobsComplete();
-  void AppendOutput(const QString &filename);
+  void AppendOutput(const QString& filename);
   void Options();
   void AddDestination();
   void Cancel();

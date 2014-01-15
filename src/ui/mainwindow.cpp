@@ -1674,8 +1674,8 @@ void MainWindow::AddStreamAccepted() {
 
 void MainWindow::OpenRipCD() {
 	if (!rip_cd_) {
-		rip_cd_.reset(new RipCD);
-	  }
+      rip_cd_.reset(new RipCD);
+    }
 	rip_cd_->show();
 }
 
