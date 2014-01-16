@@ -24,6 +24,7 @@
 
 #include <QSettings>
 #include <QCheckBox>
+#include <QDataStream>
 #include <QFileDialog>
 #include <QFrame>
 #include <QLineEdit>
@@ -161,32 +162,22 @@ RipCD::RipCD(QWidget* parent) :
  *                | Marks the beginning of the data section.
  * 41-44 | File size (data) | Size of the data section.
  */
-void RipCD::WriteWAVHeader(QFile *stream, int32_t i_bytecount) {
-  stream->write(kWavHeaderRiffMarker);    /* 0-3 */
-  PutNum(i_bytecount + 44 - 8, stream, 4); /*  4-7 */
-  stream->write(kWavFileTypeFormatChunk); /*  8-15 */
-  PutNum(16, stream, 4); /* 16-19 */
-  PutNum(1, stream, 2); /* 20-21 */
-  PutNum(2, stream, 2); /* 22-23 */
-  PutNum(44100, stream, 4); /* 24-27 */
-  PutNum(44100 * 2 * 2, stream, 4); /* 28-31 */
-  PutNum(4, stream, 2); /* 32-33 */
-  PutNum(16, stream, 2); /* 34-35 */
-  stream->write(kWavDataString); /* 36-39 */
-  PutNum(i_bytecount, stream, 4); /* 40-43 */
-}
-
-void RipCD::PutNum(int64_t num, QFile *stream, int bytes) {
-  unsigned int i;
-    unsigned char c;
-
-    for (i = 0; bytes--; i++) {
-      c = (num >> (i << 3)) & 0xff;
-      if (stream->write(reinterpret_cast<char*>(&c), sizeof(c)) == -1) {
-        perror("Could not write to output.");
-        exit(1);
-      }
-    }
+void RipCD::WriteWAVHeader(QFile &stream, int32_t i_bytecount) {
+  QDataStream data_stream(&stream);
+    data_stream.setByteOrder(QDataStream::LittleEndian);
+    stream.write(kWavHeaderRiffMarker);    /* 0-3 */
+    data_stream << qint32(i_bytecount + 44 - 8);
+    //PutNum(i_bytecount + 44 - 8, stream, 4); /*  4-7 */
+    stream.write(kWavFileTypeFormatChunk); /*  8-15 */
+    data_stream << (qint32)16; /* 16-19 */
+    data_stream << (qint16)1; /* 20-21 */
+    data_stream << (qint16)2; /* 22-23 */
+    data_stream << (qint32)44100; /* 24-27 */
+    data_stream << (qint32)(44100 * 2 * 2); /* 28-31 */
+    data_stream << (qint16)4; /* 32-33 */
+    data_stream << (qint16)16; /* 34-35 */
+    stream.write(kWavDataString); /* 36-39 */
+    data_stream << (qint32)i_bytecount; /* 40-43 */
 }
 
 int RipCD::NumTracksToRip() {
@@ -218,29 +209,26 @@ void RipCD::ThreadClickedRipButton() {
 
     QString filename = source_directory
         + ParseFileFormatString(ui_->format_filename->text(), i) + ".wav";
-    QFile* destination_file = new QFile(filename);
-    destination_file->open(QIODevice::WriteOnly);
+    QFile destination_file(filename);
+    destination_file.open(QIODevice::WriteOnly);
 
     lsn_t i_first_lsn = cdio_get_track_lsn(cdio_, i);
     lsn_t i_last_lsn = cdio_get_track_last_lsn(cdio_, i);
     WriteWAVHeader(destination_file,
             (i_last_lsn - i_first_lsn + 1) * CDIO_CD_FRAMESIZE_RAW);
 
-    QByteArray *buffered_input_bytes = new QByteArray();
-    buffered_input_bytes->resize(CDIO_CD_FRAMESIZE_RAW);
+    QByteArray buffered_input_bytes(CDIO_CD_FRAMESIZE_RAW,'\0');
     for (lsn_t i_cursor = i_first_lsn; i_cursor <= i_last_lsn; i_cursor++) {
-      cdio_read_audio_sector(cdio_, buffered_input_bytes->data(), i_cursor);
-      if (!buffered_input_bytes->data()) {
+      if(cdio_read_audio_sector(cdio_, buffered_input_bytes.data(), i_cursor) == DRIVER_OP_SUCCESS) {
+        destination_file.write(buffered_input_bytes.data(), buffered_input_bytes.size());
+      } else {
         qDebug() << "Read error. Stopping.";
         break;
-      } else {
-        destination_file->write(buffered_input_bytes->data(), CDIO_CD_FRAMESIZE_RAW);
       }
     }
     finished_success_++;
     emit(SignalUpdateProgress());
-    destination_file->close();
-    delete buffered_input_bytes;
+    destination_file.close();
     TranscoderPreset preset =
         ui_->format->itemData(ui_->format->currentIndex())
         .value<TranscoderPreset>();
