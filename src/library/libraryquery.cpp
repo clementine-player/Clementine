@@ -49,6 +49,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
       token.remove('(');
       token.remove(')');
       token.remove('"');
+      token.replace('-', ' ');
 
       if (token.contains(':')) {
         // Only prefix fts if the token is a valid column name.
