@@ -1313,6 +1313,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   int streams = 0;
   int in_queue = 0;
   int not_in_queue = 0;
+  int in_skipped = 0;
+  int not_in_skipped = 0;
   foreach (const QModelIndex& index, selection) {
     if (index.column() != 0)
       continue;
@@ -1332,6 +1334,12 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
       not_in_queue ++;
     else
       in_queue ++;
+
+    if(item->GetToSkip()) {
+      in_skipped++;
+    } else {
+      not_in_skipped++;
+    }
   }
 
   int all = not_in_queue + in_queue;
@@ -1366,10 +1374,18 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     playlist_queue_->setText(tr("Dequeue track"));
   else if (in_queue > 1 && not_in_queue == 0)
     playlist_queue_->setText(tr("Dequeue selected tracks"));
+  else if (in_skipped == 1 && not_in_skipped == 0)
+    playlist_skip_->setText(tr("Unskip track"));
+  else if (in_skipped > 1 && not_in_skipped == 0)
+    playlist_skip_->setText(tr("Unskip selected tracks"));
   else if (in_queue == 0 && not_in_queue == 1)
     playlist_queue_->setText(tr("Queue track"));
   else if (in_queue == 0 && not_in_queue > 1)
     playlist_queue_->setText(tr("Queue selected tracks"));
+  else if (in_skipped == 0 && not_in_skipped == 1)
+    playlist_skip_->setText(tr("Skip track"));
+  else if (in_skipped == 0 && not_in_skipped > 1)
+    playlist_skip_->setText(tr("Skip selected tracks"));
   else
     playlist_queue_->setText(tr("Toggle queue status"));
 
@@ -1967,7 +1983,7 @@ void MainWindow::PlaylistSkip() {
     indexes << app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
   }
 
-  app_->playlist_manager()->current()->queue()->SkipTracks(indexes);
+  app_->playlist_manager()->current()->SkipTracks(indexes);
 }
 
 void MainWindow::PlaylistCopyToDevice() {

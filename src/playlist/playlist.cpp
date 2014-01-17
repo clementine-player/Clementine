@@ -441,8 +441,9 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
   if (!album_only) {
     ++i;
 
-    // Advance i until we find any track that is in the filter
-    while ((i < virtual_items_.count() && !FilterContainsVirtualIndex(i)) || queue_->SkipSourceRow(i)) {
+    // Advance i until we find any track that is in the filter, skipping
+    // the selected to be skipped
+    while ((i < virtual_items_.count() && !FilterContainsVirtualIndex(i)) || items_[virtual_items_[i]]->GetToSkip()) {
           ++i;
     }
     return i;
@@ -2016,4 +2017,11 @@ bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {
 
 void Playlist::SetColumnAlignment(const ColumnAlignmentMap& alignment) {
   column_alignments_ = alignment;
+}
+
+void Playlist::SkipTracks(const QModelIndexList &source_indexes) {
+  foreach (const QModelIndex& source_index, source_indexes) {
+    PlaylistItemPtr track_to_skip = item_at(source_index.row());
+    track_to_skip->SetToSkip(!((track_to_skip)->GetToSkip()));
+  }
 }

@@ -33,7 +33,7 @@ class SqlRow;
 class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
  public:
   PlaylistItem(const QString& type)
-    : type_(type) {}
+    : to_skip_(false), type_(type) {}
   virtual ~PlaylistItem();
 
   static PlaylistItem* NewFromType(const QString& type);
@@ -91,8 +91,12 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   // invalid so you might want to check that its id is not equal to -1
   // before actually using it.
   virtual bool IsLocalLibraryItem() const { return false; }
+  void SetToSkip(bool val);
+  bool GetToSkip() const;
 
  protected:
+  bool to_skip_;
+
   enum DatabaseColumn {
     Column_LibraryId,
     Column_InternetService,
