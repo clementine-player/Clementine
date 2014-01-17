@@ -119,6 +119,7 @@ void ExtendedEditor::Paint(QPaintDevice* device) {
     }
   } else {
     clear_button_->setVisible(has_clear_button_);
+    Resize();
   }
 }
 
@@ -142,19 +143,16 @@ LineEdit::LineEdit(QWidget* parent)
     ExtendedEditor(this)
 {
   connect(reset_button_, SIGNAL(clicked()), SIGNAL(Reset()));
-  connect(this, SIGNAL(textChanged(QString)), SLOT(text_changed(QString)));
 }
 
-void LineEdit::text_changed(const QString& text) {
-  if (text.isEmpty()) {
-    // Consider empty string as LTR
-    set_rtl(false);
-  } else {
-    // For some reason Qt will detect any text with LTR at the end as LTR, so instead
-    // compare only the first character
+void LineEdit::set_text(const QString& text) {
+  QLineEdit::setText(text);
+
+  // For some reason Qt will detect any text with LTR at the end as LTR, so instead
+  // compare only the first character
+  if (!text.isEmpty()) {
     set_rtl(QString(text.at(0)).isRightToLeft());
   }
-  Resize();
 }
 
 void LineEdit::paintEvent(QPaintEvent* e) {

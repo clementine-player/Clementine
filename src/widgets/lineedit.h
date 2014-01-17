@@ -103,7 +103,7 @@ public:
   // ExtendedEditor
   void set_focus() { QLineEdit::setFocus(); }
   QString text() const { return QLineEdit::text(); }
-  void set_text(const QString& text) { QLineEdit::setText(text); }
+  void set_text(const QString& text);
   void set_enabled(bool enabled) { QLineEdit::setEnabled(enabled); }
 
 protected:
@@ -113,9 +113,6 @@ protected:
 private:
   bool is_rtl() const { return is_rtl_; }
   void set_rtl(bool rtl) { is_rtl_ = rtl; }
-
-private slots:
-  void text_changed(const QString& text);
 
 signals:
   void Reset();
