@@ -38,7 +38,7 @@ TrackSlider::TrackSlider(QWidget* parent)
 {
   ui_->setupUi(this);
 
-  QFont font("Comic Sans MS");
+  QFont font("Courier");
   ui_->elapsed->setFont(font);
   ui_->remaining->setFont(font);
 
