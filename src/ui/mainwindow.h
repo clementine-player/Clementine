@@ -252,7 +252,7 @@ signals:
 
   void ShowCoverManager();
 #ifdef HAVE_LIBLASTFM
-  void ScrobbleSubmitted();
+  void CachedToScrobble();
   void ScrobbleError(int value);
 #endif
   void ShowAboutDialog();

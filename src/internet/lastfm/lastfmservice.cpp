@@ -80,7 +80,6 @@ const char* LastFMService::kAuthLoginUrl =
 
 LastFMService::LastFMService(Application* app, QObject* parent)
     : Scrobbler(parent),
-      already_scrobbled_(false),
       scrobbling_enabled_(false),
       connection_problems_(false),
       app_(app),
@@ -326,7 +325,7 @@ void LastFMService::ScrobblerStatus(int value) {
   switch (value) {
     case 2:
     case 3:
-      emit ScrobbleSubmitted();
+      emit CachedToScrobble();
       break;
 
     default:
@@ -373,7 +372,7 @@ void LastFMService::NowPlaying(const Song& song) {
 
   lastfm::MutableTrack mtrack(TrackFromSong(song));
   mtrack.stamp();
-  already_scrobbled_ = false;
+  already_cached_to_scrobble_ = false;
   last_track_ = mtrack;
 
 #ifndef HAVE_LIBLASTFM1
@@ -393,19 +392,27 @@ void LastFMService::NowPlaying(const Song& song) {
   scrobbler_->nowPlaying(mtrack);
 }
 
+void LastFMService::CacheSong(int scrobble_point) {
+  if (!InitScrobbler()) return;
+
+  if (!already_cached_to_scrobble_ && scrobble_point) {
+    qLog(Info) << "Caching song to scrobble at" << scrobble_point;
+    scrobbler_->cache(last_track_);
+    already_cached_to_scrobble_ = true;
+  }
+  emit CachedToScrobble();
+}
+
 void LastFMService::Scrobble() {
   if (!InitScrobbler()) return;
 
   lastfm::compat::ScrobbleCache cache(lastfm::ws::Username);
   qLog(Debug) << "There are" << cache.tracks().count()
-              << "tracks in the last.fm cache.";
-  scrobbler_->cache(last_track_);
+              << "tracks in the last.fm cache before submit request.";
 
   // Let's mark a track as cached, useful when the connection is down
   emit ScrobbleError(30);
-  scrobbler_->submit();
-
-  already_scrobbled_ = true;
+  if (!cache.tracks().isEmpty()) scrobbler_->submit();
 }
 
 void LastFMService::Love() {
@@ -414,12 +421,6 @@ void LastFMService::Love() {
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.love();
   last_track_ = mtrack;
-
-  if (already_scrobbled_) {
-    // The love only takes effect when the song is scrobbled, but we've already
-    // scrobbled this one so we have to do it again.
-    Scrobble();
-  }
 }
 
 void LastFMService::Ban() {
@@ -429,6 +430,7 @@ void LastFMService::Ban() {
   mtrack.ban();
   last_track_ = mtrack;
 
+  CacheSong(0);
   Scrobble();
   app_->player()->Next();
 }
