@@ -491,7 +491,7 @@ MainWindow::MainWindow(Application* app,
   playlist_queue_ = playlist_menu_->addAction("", this, SLOT(PlaylistQueue()));
   playlist_queue_->setShortcut(QKeySequence("Ctrl+D"));
   ui_->playlist->addAction(playlist_queue_);
-  playlist_skip_ = playlist_menu_->addAction(tr("Skip track"), this, SLOT(PlaylistSkip()));
+  playlist_skip_ = playlist_menu_->addAction("", this, SLOT(PlaylistSkip()));
   ui_->playlist->addAction(playlist_skip_);
 
   playlist_menu_->addSeparator();
@@ -1374,20 +1374,23 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     playlist_queue_->setText(tr("Dequeue track"));
   else if (in_queue > 1 && not_in_queue == 0)
     playlist_queue_->setText(tr("Dequeue selected tracks"));
-  else if (in_skipped == 1 && not_in_skipped == 0)
-    playlist_skip_->setText(tr("Unskip track"));
-  else if (in_skipped > 1 && not_in_skipped == 0)
-    playlist_skip_->setText(tr("Unskip selected tracks"));
   else if (in_queue == 0 && not_in_queue == 1)
     playlist_queue_->setText(tr("Queue track"));
   else if (in_queue == 0 && not_in_queue > 1)
     playlist_queue_->setText(tr("Queue selected tracks"));
-  else if (in_skipped == 0 && not_in_skipped == 1)
-    playlist_skip_->setText(tr("Skip track"));
-  else if (in_skipped == 0 && not_in_skipped > 1)
-    playlist_skip_->setText(tr("Skip selected tracks"));
   else
     playlist_queue_->setText(tr("Toggle queue status"));
+
+  if (in_skipped == 1 && not_in_skipped == 0)
+    playlist_skip_->setText(tr("Unskip track"));
+  else if (in_skipped > 1 && not_in_skipped == 0)
+    playlist_skip_->setText(tr("Unskip selected tracks"));
+  else if (in_skipped == 0 && not_in_skipped == 1)
+      playlist_skip_->setText(tr("Skip track"));
+    else if (in_skipped == 0 && not_in_skipped > 1)
+      playlist_skip_->setText(tr("Skip selected tracks"));
+
+
 
   if (not_in_queue == 0)
     playlist_queue_->setIcon(IconLoader::Load("go-previous"));

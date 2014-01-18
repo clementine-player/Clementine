@@ -443,7 +443,7 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
 
     // Advance i until we find any track that is in the filter, skipping
     // the selected to be skipped
-    while ((i < virtual_items_.count() && !FilterContainsVirtualIndex(i)) || items_[virtual_items_[i]]->GetToSkip()) {
+    while (i < virtual_items_.count() && (!FilterContainsVirtualIndex(i) || item_at(virtual_items_[i])->GetToSkip())) {
           ++i;
     }
     return i;
@@ -484,7 +484,7 @@ int Playlist::PreviousVirtualIndex(int i, bool ignore_repeat_track) const {
     --i;
 
     // Decrement i until we find any track that is in the filter
-    while (i>=0 && !FilterContainsVirtualIndex(i))
+    while (i>=0 && (!FilterContainsVirtualIndex(i) || item_at(virtual_items_[i])->GetToSkip()))
       --i;
     return i;
   }
