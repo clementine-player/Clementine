@@ -106,8 +106,7 @@ void OrganiseDialog::SetDestinationModel(QAbstractItemModel *model, bool devices
 
 int OrganiseDialog::SetSongs(const SongList& songs) {
   total_size_ = 0;
-  filenames_.clear();
-  preview_songs_.clear();
+  songs_.clear();
 
   foreach (const Song& song, songs) {
     if (song.url().scheme() != "file") {
@@ -116,65 +115,43 @@ int OrganiseDialog::SetSongs(const SongList& songs) {
 
     if (song.filesize() > 0)
       total_size_ += song.filesize();
-    filenames_ << song.url().toLocalFile();
 
-    preview_songs_ << song;
+    songs_ << song;
   }
 
   ui_->free_space->set_additional_bytes(total_size_);
   UpdatePreviews();
 
-  return filenames_.count();
+  return songs_.count();
 }
 
 int OrganiseDialog::SetUrls(const QList<QUrl> &urls, quint64 total_size) {
-  QStringList filenames;
+  SongList songs;
+  Song song;
 
   // Only add file:// URLs
   foreach (const QUrl& url, urls) {
     if (url.scheme() != "file")
       continue;
-    filenames << url.toLocalFile();
+    TagReaderClient::Instance()->ReadFileBlocking(url.toLocalFile(), &song);
+    if (song.is_valid())
+      songs << song;
   }
 
-  return SetFilenames(filenames, total_size);
+  return SetSongs(songs);
 }
 
 int OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_size) {
-  filenames_ = filenames;
-  preview_songs_.clear();
+  SongList songs;
+  Song song;
 
   // Load some of the songs to show in the preview
-  const int n = filenames_.count();
-  for (int i=0 ; i<n ; ++i) {
-    LoadPreviewSongs(filenames_[i]);
+  foreach (const QString& filename, filenames) {
+    TagReaderClient::Instance()->ReadFileBlocking(song.basefilename(), &song);
+    if (song.is_valid())
+      songs << song;
   }
-
-  ui_->free_space->set_additional_bytes(total_size);
-  total_size_ = total_size;
-
-  UpdatePreviews();
-
-  return filenames_.count();
-}
-
-void OrganiseDialog::LoadPreviewSongs(const QString& filename) {
-
-  if (QFileInfo(filename).isDir()) {
-    QDir dir(filename);
-    QStringList entries = dir.entryList(
-        QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Readable);
-    foreach (const QString& entry, entries) {
-      LoadPreviewSongs(filename + "/" + entry);
-    }
-    return;
-  }
-
-  Song song;
-  TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
-
-  if (song.is_valid())
-    preview_songs_ << song;
+  return SetSongs(songs);
 }
 
 void OrganiseDialog::SetCopy(bool copy) {
@@ -220,7 +197,7 @@ void OrganiseDialog::UpdatePreviews() {
   const bool format_valid = !has_local_destination || format_.IsValid();
 
   // Are we gonna enable the ok button?
-  bool ok = format_valid && !filenames_.isEmpty();
+  bool ok = format_valid && !songs_.isEmpty();
   if (capacity != 0 && total_size_ > free)
     ok = false;
 
@@ -233,7 +210,7 @@ void OrganiseDialog::UpdatePreviews() {
   ui_->preview_group->setVisible(has_local_destination);
   ui_->naming_group->setVisible(has_local_destination);
   if (has_local_destination) {
-    foreach (const Song& song, preview_songs_) {
+    foreach (const Song& song, songs_) {
       QString filename = storage->LocalPath() + "/" +
                          format_.GetFilenameForSong(song);
       ui_->preview->addItem(QDir::toNativeSeparators(filename));
@@ -301,7 +278,7 @@ void OrganiseDialog::accept() {
   const bool copy = ui_->aftercopying->currentIndex() == 0;
   Organise* organise = new Organise(
       task_manager_, storage, format_, copy, ui_->overwrite->isChecked(),
-      filenames_, ui_->eject_after->isChecked());
+      songs_, ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)), SLOT(OrganiseFinished(QStringList)));
   organise->Start();
 

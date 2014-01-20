@@ -64,7 +64,6 @@ private slots:
   void Reset();
 
   void InsertTag(const QString& tag);
-  void LoadPreviewSongs(const QString& filename);
   void UpdatePreviews();
 
   void OrganiseFinished(const QStringList& files_with_errors);
@@ -75,8 +74,7 @@ private:
 
   OrganiseFormat format_;
 
-  QStringList filenames_;
-  SongList preview_songs_;
+  SongList songs_;
   quint64 total_size_;
 
   boost::scoped_ptr<OrganiseErrorDialog> error_dialog_;

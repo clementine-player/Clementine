@@ -37,7 +37,7 @@ public:
   Organise(TaskManager* task_manager,
            boost::shared_ptr<MusicStorage> destination,
            const OrganiseFormat& format, bool copy, bool overwrite,
-           const QStringList& files, bool eject_after);
+           const SongList& songs, bool eject_after);
 
   static const int kBatchSize;
   static const int kTranscodeProgressInterval;
@@ -63,10 +63,10 @@ private:
 
 private:
   struct Task {
-    explicit Task(const QString& filename = QString())
-      : filename_(filename), transcode_progress_(0.0) {}
+    explicit Task(const Song& song = Song())
+      : song_(song), transcode_progress_(0.0) {}
 
-    QString filename_;
+    Song song_;
 
     float transcode_progress_;
     QString transcoded_filename_;
