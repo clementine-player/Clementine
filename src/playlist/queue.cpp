@@ -48,17 +48,6 @@ bool Queue::ContainsSourceRow(int source_row) const {
   return false;
 }
 
-bool Queue::SkipSourceRow(int source_row) const {
-  qDebug() << "Entrou aqui";
-  qDebug() << source_row;
-  for (int i=0 ; i<skipped_indexes_.count() ; ++i) {
-      qDebug() << skipped_indexes_[i].row();
-      if (skipped_indexes_[i].row() == source_row)
-        return true;
-    }
-    return false;
-}
-
 QModelIndex Queue::mapToSource(const QModelIndex& proxy_index) const {
   if (!proxy_index.isValid())
     return QModelIndex();
@@ -162,26 +151,6 @@ void Queue::ToggleTracks(const QModelIndexList &source_indexes) {
       const int row = source_indexes_.count();
       beginInsertRows(QModelIndex(), row, row);
       source_indexes_ << QPersistentModelIndex(source_index);
-      endInsertRows();
-    }
-  }
-}
-
-void Queue::SkipTracks(const QModelIndexList &source_indexes) {
-  qDebug() << "Enqueuing";
-  foreach (const QModelIndex& source_index, source_indexes) {
-    QModelIndex proxy_index = mapFromSource(source_index);
-    if (proxy_index.isValid()) {
-      // Dequeue the track
-      const int row = proxy_index.row();
-      beginRemoveRows(QModelIndex(), row, row);
-      skipped_indexes_.removeAt(row);
-      endRemoveRows();
-    } else {
-      // Enqueue the track
-      const int row = source_indexes_.count();
-      beginInsertRows(QModelIndex(), row, row);
-      skipped_indexes_ << QPersistentModelIndex(source_index);
       endInsertRows();
     }
   }

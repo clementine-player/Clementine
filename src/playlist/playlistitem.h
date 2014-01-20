@@ -33,7 +33,8 @@ class SqlRow;
 class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
  public:
   PlaylistItem(const QString& type)
-    : to_skip_(false), type_(type) {}
+    : to_skip_(false),
+      type_(type) {}
   virtual ~PlaylistItem();
 
   static PlaylistItem* NewFromType(const QString& type);

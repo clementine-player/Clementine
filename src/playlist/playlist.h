@@ -356,6 +356,7 @@ class Playlist : public QAbstractListModel {
   void ItemReloadComplete();
   void ItemsLoaded();
   void SongInsertVetoListenerDestroyed();
+
  private:
   bool is_loading_;
   PlaylistFilter* proxy_;

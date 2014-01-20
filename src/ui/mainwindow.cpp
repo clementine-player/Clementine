@@ -1386,9 +1386,9 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   else if (in_skipped > 1 && not_in_skipped == 0)
     playlist_skip_->setText(tr("Unskip selected tracks"));
   else if (in_skipped == 0 && not_in_skipped == 1)
-      playlist_skip_->setText(tr("Skip track"));
-    else if (in_skipped == 0 && not_in_skipped > 1)
-      playlist_skip_->setText(tr("Skip selected tracks"));
+    playlist_skip_->setText(tr("Skip track"));
+  else if (in_skipped == 0 && not_in_skipped > 1)
+    playlist_skip_->setText(tr("Skip selected tracks"));
 
 
 
