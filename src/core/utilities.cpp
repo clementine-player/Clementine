@@ -457,9 +457,9 @@ QByteArray Sha256(const QByteArray& data) {
 }
 
 // File must not be open and will be closed afterwards!
-QByteArray Md5File(QFile &file) {
+QByteArray Sha1File(QFile &file) {
   file.open(QIODevice::ReadOnly);
-  QCryptographicHash hash(QCryptographicHash::Md5);
+  QCryptographicHash hash(QCryptographicHash::Sha1);
   QByteArray data;
 
   while(!file.atEnd()) {

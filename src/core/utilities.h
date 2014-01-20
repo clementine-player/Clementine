@@ -67,7 +67,7 @@ namespace Utilities {
   QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
   QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
   QByteArray Sha256(const QByteArray& data);
-  QByteArray Md5File(QFile& file);
+  QByteArray Sha1File(QFile& file);
   QByteArray Sha1CoverHash(const QString& artist, const QString& album);
 
 

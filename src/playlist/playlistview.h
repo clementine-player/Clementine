@@ -134,6 +134,7 @@ class PlaylistView : public QTreeView {
   void dropEvent(QDropEvent *event);
   void resizeEvent(QResizeEvent* event);
   bool eventFilter(QObject* object, QEvent* event);
+  void focusInEvent(QFocusEvent* event);
 
   // QAbstractScrollArea
   void scrollContentsBy(int dx, int dy);

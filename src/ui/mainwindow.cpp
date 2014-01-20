@@ -1700,7 +1700,10 @@ void MainWindow::ShowInLibrary() {
       break;
     }
   }
-  QString search = "artist:"+songs[0].artist()+" album:"+songs[0].album();
+  QString search;
+  if (!songs.isEmpty()) {
+    search = "artist:" + songs.first().artist() + " album:" + songs.first().album();
+  }
   library_view_->filter()->ShowInLibrary(search);
 }
 

@@ -797,7 +797,7 @@ void Song::BindToQuery(QSqlQuery *query) const {
    && Utilities::UrlOnSameDriveAsClementine(d->url_)) {
     query->bindValue(":filename", Utilities::GetRelativePathToClementineBin(d->url_));
   } else {
-    query->bindValue(":filename", d->url_);
+    query->bindValue(":filename", d->url_.toEncoded());
   }
 
   query->bindValue(":mtime", notnullintval(d->mtime_));

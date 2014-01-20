@@ -138,7 +138,7 @@ void UltimateLyricsProvider::LyricsFetched() {
 
       // Apply exclude rules
       foreach (const Rule& rule, exclude_rules_) {
-        ApplyExcludeRule(rule, &lyrics);
+        ApplyExcludeRule(rule, &content);
       }
 
       if (!content.isEmpty() and HTMLHasAlphaNumeric(content)) {
