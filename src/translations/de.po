@@ -36,8 +36,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-01-12 10:48+0000\n"
-"Last-Translator: Asfaloth <asfa194@gmail.com>\n"
+"PO-Revision-Date: 2014-01-13 15:27+0000\n"
+"Last-Translator: to_ba\n"
 "Language-Team: German (http://www.transifex.com/projects/p/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -323,7 +323,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr "<html><head/><body><p>Das wird Bewertungen und Statistiken aller Titel ihrer Datenbank in die Tags der Titel-Dateien schreiben.</p><p>Das ist nicht nötig, wenn die Option &quot;Speichere alle Bewertungen und Statistiken in Titel-Tags&quot; immer aktiviert war.</p></body></html>"
+msgstr "<html><head/><body><p>Das wird Bewertungen und Statistiken aller Titel ihrer Bibliothek in die Tags der Lieddateien schreiben.</p><p>Das ist nicht nötig, wenn die Option &quot;Speichere alle Bewertungen und Statistiken in Titel-Tags&quot; immer aktiviert war.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -349,7 +349,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "Eine intelligente Wiedergabeliste ist eine Liste von Titeln, die aus Ihrer Musiksammlung stammen. Es gibt mehrere Arten von intelligenten Wiedergabelisten, die unterschiedliche Möglichkeiten bieten, eine Auswahl von Titeln zu treffen."
+msgstr "Eine intelligente Wiedergabeliste ist eine Liste von Titeln, die aus Ihrer Bibliothek stammen. Es gibt mehrere Arten von intelligenten Wiedergabelisten, die unterschiedliche Möglichkeiten bieten, eine Auswahl von Titeln zu treffen."
 
 #: smartplaylists/querywizardplugin.cpp:153
 msgid ""
@@ -794,7 +794,7 @@ msgstr "Wollen Sie die Statistiken dieses Titels wirklich zurücksetzen?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr "Sind Sie sicher, dass Sie alle Titel-Statistiken aller Titel der Datenbank in die Dateien der Titel schreiben wollen?"
+msgstr "Sind Sie sicher, dass Sie, für alle Lieder Ihrer Bibliothek, die Liedstatistiken in die Lieddatei schreiben wollen?"
 
 #: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -850,7 +850,7 @@ msgstr "Automatisches Aktualisieren"
 
 #: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
-msgstr "Sofern einem Künstler nur ein Album zugeordnet ist, dieses bei Klick auf den Künstler automatisch ausklappen"
+msgstr "Im Bibliotheksbaum automatisch Einzelkategorien öffnen"
 
 #: widgets/freespacebar.cpp:45
 msgid "Available"
@@ -1270,7 +1270,7 @@ msgstr "Globale Suche konfigurieren …"
 
 #: ui/mainwindow.cpp:475
 msgid "Configure library..."
-msgstr "Musiksammlung einrichten …"
+msgstr "Bibliothek einrichten …"
 
 #: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:288
 msgid "Configure podcasts..."
@@ -1333,7 +1333,7 @@ msgstr "Auf das Gerät kopieren …"
 #: devices/deviceview.cpp:218 ui/mainwindow.cpp:506
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
-msgstr "Zur Musiksammlung kopieren …"
+msgstr "Zur Bibliothek kopieren …"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1712,7 +1712,7 @@ msgstr "OSD anzeigen"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "Do a full library rescan"
-msgstr "Musiksammlung erneut einlesen"
+msgstr "Bibliothek erneut einlesen"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
@@ -2228,7 +2228,7 @@ msgstr "Zu konvertierende Dateien"
 
 #: smartplaylists/querywizardplugin.cpp:90
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Titel in Ihrer Musiksammlung finden, die den Kriterien entsprechen."
+msgstr "Titel in Ihrer Bibliothek finden, die den Kriterien entsprechen."
 
 #: musicbrainz/tagfetcher.cpp:55
 msgid "Fingerprinting song"
@@ -2416,7 +2416,7 @@ msgstr "Grooveshark-URL des Titels"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
-msgstr "Gruppieren nach …"
+msgstr "Bibliothek gruppieren nach …"
 
 #: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
@@ -2743,7 +2743,7 @@ msgstr "Benutzerdefiniertes Radio auf Last.fm: %1"
 #: internet/lastfmservice.cpp:722
 #, qt-format
 msgid "Last.fm Library - %1"
-msgstr "Last.fm-Sammlung - %1"
+msgstr "Last.fm-Bibliothek - %1"
 
 #: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:257
 #: internet/lastfmservice.cpp:260
@@ -2815,19 +2815,19 @@ msgstr "Länge"
 
 #: ui/mainwindow.cpp:228 ui/mainwindow.cpp:238
 msgid "Library"
-msgstr "Sammlung"
+msgstr "Bibliothek"
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
-msgstr "Benutzerdefinierte Gruppierung"
+msgstr "Benutzerdefinierte Gruppierung der Bibliothek"
 
 #: ui/mainwindow.cpp:2121
 msgid "Library rescan notice"
-msgstr "Hinweis beim Neueinscannen der Bibliothek"
+msgstr "Hinweis beim erneuten durchsuchen der Bibliothek"
 
 #: smartplaylists/querywizardplugin.cpp:86
 msgid "Library search"
-msgstr "Musiksammlung durchsuchen"
+msgstr "Bibliothek durchsuchen"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
@@ -3069,7 +3069,7 @@ msgstr "Modell"
 
 #: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
-msgstr "Musiksammlung auf Änderungen hin überwachen"
+msgstr "Bibliothek auf Änderungen überwachen"
 
 #: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Mono playback"
@@ -3111,7 +3111,7 @@ msgstr "Nach unten"
 
 #: ui/mainwindow.cpp:507 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
-msgstr "Zur Musiksammlung verschieben …"
+msgstr "Zur Bibliothek verschieben …"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:148
 #: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:161
@@ -3124,7 +3124,7 @@ msgstr "Musik"
 
 #: ../bin/src/ui_librarysettingspage.h:186
 msgid "Music Library"
-msgstr "Musiksammlung"
+msgstr "Musikbibliothek"
 
 #: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
 #: wiimotedev/wiimotesettingspage.cpp:105
@@ -3133,7 +3133,7 @@ msgstr "Stumm"
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
 msgid "My Last.fm Library"
-msgstr "Meine Last.fm-Musiksammlung"
+msgstr "Meine Last.fm-Bibliothek"
 
 #: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
@@ -4060,7 +4060,7 @@ msgstr "Abtastrate"
 
 #: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
-msgstr ".mood-Datei in Ihrer Musiksammlung speichern"
+msgstr ".mood-Datei in Ihrer Bibliothek speichern"
 
 #: ui/albumcoverchoicecontroller.cpp:121
 msgid "Save album cover"
@@ -4241,7 +4241,7 @@ msgstr "Visualisierungen auswählen …"
 
 #: ../bin/src/ui_transcodedialog.h:219
 msgid "Select..."
-msgstr "Auswählen..."
+msgstr "Auswählen …"
 
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
@@ -4341,7 +4341,7 @@ msgstr "Alle Titel anzeigen"
 
 #: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show cover art in library"
-msgstr "Cover in Musiksammlung zeigen"
+msgstr "Titelbilder in der Bibliothek anzeigen"
 
 #: ../bin/src/ui_librarysettingspage.h:210
 msgid "Show dividers"
@@ -4358,7 +4358,7 @@ msgstr "Im Dateibrowser anzeigen …"
 
 #: ui/mainwindow.cpp:512
 msgid "Show in library..."
-msgstr "In Sammlung anzeigen"
+msgstr "In Bibliothek anzeigen …"
 
 #: library/libraryview.cpp:403
 msgid "Show in various artists"
@@ -4765,7 +4765,7 @@ msgstr "Die Versuchsperiode für den Subsonic-Server ist abgelaufen. Bitte mache
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "Die Clementine-Version, auf die Sie gerade aktualisiert haben, erfordert eine komplette Aktualisierung Ihrer Musiksammlung, damit die folgenden neuen Funktionen genutzt werden können:"
+msgstr "Die Clementine-Version, auf die Sie gerade aktualisiert haben, erfordert eine komplette Aktualisierung Ihrer Bibliothek, damit die folgenden neuen Funktionen genutzt werden können:"
 
 #: library/libraryview.cpp:529
 msgid "There are other songs in this album"
@@ -4810,7 +4810,7 @@ msgstr "Diese Dateien werden von der Festplatte gelöscht. Möchten Sie wirklich
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Diese Ordner werden für Ihre Musiksammlung durchsucht:"
+msgstr "Diese Ordner werden durchsucht, um Ihre Bibliothek zu erstellen"
 
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid ""
@@ -5039,11 +5039,11 @@ msgstr "Alle Podcasts aktualisieren"
 
 #: ../bin/src/ui_mainwindow.h:709
 msgid "Update changed library folders"
-msgstr "Musiksammlung aktualisieren"
+msgstr "Geänderte Bibliotheksordner aktualisieren"
 
 #: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
-msgstr "Musiksammlung beim Programmstart aktualisieren"
+msgstr "Bibliothek beim Programmstart aktualisieren"
 
 #: podcasts/podcastservice.cpp:268
 msgid "Update this podcast"
@@ -5065,7 +5065,7 @@ msgstr "%1% aktualisieren …"
 
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
-msgstr "Aktualisiere Musiksammlung"
+msgstr "Bibliothek aktualisieren"
 
 #: core/commandlineoptions.cpp:150
 msgid "Usage"
@@ -5383,7 +5383,7 @@ msgstr "Sie sind angemeldet."
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
-msgstr "Sie können hier einstellen, wie Ihre Musiksammlung sortiert wird."
+msgstr "Sie können hier einstellen, wie Ihre Bibliothek sortiert wird."
 
 #: internet/digitallyimportedsettingspage.cpp:46
 msgid ""
@@ -5472,7 +5472,7 @@ msgstr "Ihre Magnatune-Anmeldedaten sind falsch"
 
 #: library/libraryview.cpp:343
 msgid "Your library is empty!"
-msgstr "Ihre Musiksammlung ist leer!"
+msgstr "Ihre Bibliothek ist leer!"
 
 #: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
 msgid "Your radio streams"
