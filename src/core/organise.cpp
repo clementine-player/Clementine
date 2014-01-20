@@ -124,18 +124,6 @@ void Organise::ProcessSomeFiles() {
 
     Task task = tasks_pending_.takeFirst();
     qLog(Info) << "Processing" << task.song_.url().toLocalFile();
-    // Is it a directory?
-    if (QFileInfo(task.song_.url().toLocalFile()).isDir()) {
-      QDir dir(task.song_.url().toLocalFile());
-      foreach (const QString& entry, dir.entryList(
-          QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Readable)) {
-	Song song_tmp;
-	TagReaderClient::Instance()->ReadFileBlocking(task.song_.url().toLocalFile() + "/" + entry, &song_tmp);
-        tasks_pending_ << Task(song_tmp);
-        task_count_ ++;
-      }
-      continue;
-    }
 
     //Use a Song instead of a tag reader
     Song song = task.song_;
