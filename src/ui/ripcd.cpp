@@ -21,6 +21,7 @@
 #include "transcoder/transcoder.h"
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
+#include "core/logging.h"
 
 #include <QSettings>
 #include <QCheckBox>
@@ -70,11 +71,7 @@ RipCD::RipCD(QWidget* parent) :
     queued_(0),
     finished_success_(0),
     finished_failed_(0),
-    ui_(new Ui_RipCD()),
-    checkboxes_(QList<QCheckBox*>()),
-    generated_files_(QList<QString>()),
-    tracks_to_rip_(QList<int>()),
-    track_names_(QList<QLineEdit*>())
+    ui_(new Ui_RipCD)
 {
   // Init
   ui_->setupUi(this);
@@ -100,8 +97,8 @@ RipCD::RipCD(QWidget* parent) :
   ui_->tableWidget->setRowCount(i_tracks);
 
   for (int i = 1; i <= i_tracks; i++) {
-    QCheckBox *checkbox_i = new QCheckBox(tr(""), ui_->tableWidget);
-    checkbox_i->click();
+    QCheckBox *checkbox_i = new QCheckBox(ui_->tableWidget);
+    checkbox_i->setCheckState(Qt::Checked);
     checkboxes_.append(checkbox_i);
     ui_->tableWidget->setCellWidget(i - 1, kCheckboxColumn, checkbox_i);
     ui_->tableWidget->setCellWidget(i - 1, kTrackNumberColumn, new QLabel(QString::number(i)));
@@ -162,22 +159,22 @@ RipCD::RipCD(QWidget* parent) :
  *                | Marks the beginning of the data section.
  * 41-44 | File size (data) | Size of the data section.
  */
-void RipCD::WriteWAVHeader(QFile &stream, int32_t i_bytecount) {
-  QDataStream data_stream(&stream);
-    data_stream.setByteOrder(QDataStream::LittleEndian);
-    stream.write(kWavHeaderRiffMarker);    /* 0-3 */
-    data_stream << qint32(i_bytecount + 44 - 8);
-    //PutNum(i_bytecount + 44 - 8, stream, 4); /*  4-7 */
-    stream.write(kWavFileTypeFormatChunk); /*  8-15 */
-    data_stream << (qint32)16; /* 16-19 */
-    data_stream << (qint16)1; /* 20-21 */
-    data_stream << (qint16)2; /* 22-23 */
-    data_stream << (qint32)44100; /* 24-27 */
-    data_stream << (qint32)(44100 * 2 * 2); /* 28-31 */
-    data_stream << (qint16)4; /* 32-33 */
-    data_stream << (qint16)16; /* 34-35 */
-    stream.write(kWavDataString); /* 36-39 */
-    data_stream << (qint32)i_bytecount; /* 40-43 */
+void RipCD::WriteWAVHeader(QFile *stream, int32_t i_bytecount) {
+  QDataStream data_stream(stream);
+  data_stream.setByteOrder(QDataStream::LittleEndian);
+  // sizeof() - 1 to avoid including "\0" in the file too
+  data_stream.writeRawData(kWavHeaderRiffMarker,sizeof(kWavHeaderRiffMarker)-1);    /* 0-3 */
+  data_stream << qint32(i_bytecount + 44 - 8); /* 4-7 */
+  data_stream.writeRawData(kWavFileTypeFormatChunk,sizeof(kWavFileTypeFormatChunk)-1); /*  8-15 */
+  data_stream << (qint32)16; /* 16-19 */
+  data_stream << (qint16)1; /* 20-21 */
+  data_stream << (qint16)2; /* 22-23 */
+  data_stream << (qint32)44100; /* 24-27 */
+  data_stream << (qint32)(44100 * 2 * 2); /* 28-31 */
+  data_stream << (qint16)4; /* 32-33 */
+  data_stream << (qint16)16; /* 34-35 */
+  data_stream.writeRawData(kWavDataString,sizeof(kWavDataString)-1); /* 36-39 */
+  data_stream << (qint32)i_bytecount; /* 40-43 */
 }
 
 int RipCD::NumTracksToRip() {
@@ -191,6 +188,7 @@ int RipCD::NumTracksToRip() {
 }
 
 void RipCD::ThreadClickedRipButton() {
+
   QString source_directory = QDir::tempPath() + "/";
 
   finished_success_ = 0;
@@ -209,8 +207,8 @@ void RipCD::ThreadClickedRipButton() {
 
     QString filename = source_directory
         + ParseFileFormatString(ui_->format_filename->text(), i) + ".wav";
-    QFile destination_file(filename);
-    destination_file.open(QIODevice::WriteOnly);
+    QFile *destination_file = new QFile(filename);
+    destination_file->open(QIODevice::WriteOnly);
 
     lsn_t i_first_lsn = cdio_get_track_lsn(cdio_, i);
     lsn_t i_last_lsn = cdio_get_track_last_lsn(cdio_, i);
@@ -220,15 +218,14 @@ void RipCD::ThreadClickedRipButton() {
     QByteArray buffered_input_bytes(CDIO_CD_FRAMESIZE_RAW,'\0');
     for (lsn_t i_cursor = i_first_lsn; i_cursor <= i_last_lsn; i_cursor++) {
       if(cdio_read_audio_sector(cdio_, buffered_input_bytes.data(), i_cursor) == DRIVER_OP_SUCCESS) {
-        destination_file.write(buffered_input_bytes.data(), buffered_input_bytes.size());
+        destination_file->write(buffered_input_bytes.data(), buffered_input_bytes.size());
       } else {
-        qDebug() << "Read error. Stopping.";
+        qLog(Error) << "CD read error";
         break;
       }
     }
     finished_success_++;
     emit(SignalUpdateProgress());
-    destination_file.close();
     TranscoderPreset preset =
         ui_->format->itemData(ui_->format->currentIndex())
         .value<TranscoderPreset>();

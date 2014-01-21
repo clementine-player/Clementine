@@ -54,7 +54,7 @@ class RipCD: public QDialog {
   QString last_add_dir_;
   QPushButton* cancel_button_;
 
-  void WriteWAVHeader(QFile& stream, int32_t i_bytecount);
+  void WriteWAVHeader(QFile *stream, int32_t i_bytecount);
   int NumTracksToRip();
   void ThreadClickedRipButton();
   QString TrimPath(const QString& path) const;
