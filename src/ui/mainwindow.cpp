@@ -1676,7 +1676,12 @@ void MainWindow::OpenRipCD() {
 	if (!rip_cd_) {
       rip_cd_.reset(new RipCD);
     }
-	rip_cd_->show();
+	if(rip_cd_->CDIOIsValid()) {
+	  rip_cd_->show();
+	} else {
+	  QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"), tr("Failed reading CD drive"));
+	  cdio_fail.exec();
+	}
 }
 
 void MainWindow::AddCDTracks() {

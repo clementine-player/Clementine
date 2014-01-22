@@ -73,7 +73,8 @@ RipCD::RipCD(QWidget* parent) :
     finished_failed_(0),
     ui_(new Ui_RipCD)
 {
-  // Init
+
+    // Init
   ui_->setupUi(this);
   cancel_button_ = ui_->button_box->button(QDialogButtonBox::Cancel);
 
@@ -93,19 +94,26 @@ RipCD::RipCD(QWidget* parent) :
   setWindowTitle(tr("Rip CD"));
 
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
-  i_tracks = cdio_get_num_tracks(cdio_);
-  ui_->tableWidget->setRowCount(i_tracks);
-
-  for (int i = 1; i <= i_tracks; i++) {
-    QCheckBox *checkbox_i = new QCheckBox(ui_->tableWidget);
-    checkbox_i->setCheckState(Qt::Checked);
-    checkboxes_.append(checkbox_i);
-    ui_->tableWidget->setCellWidget(i - 1, kCheckboxColumn, checkbox_i);
-    ui_->tableWidget->setCellWidget(i - 1, kTrackNumberColumn, new QLabel(QString::number(i)));
-    QString track_title = QString("Track %1").arg(i);
-    QLineEdit *line_edit_track_title_i = new QLineEdit(track_title,ui_->tableWidget);
-    track_names_.append(line_edit_track_title_i);
-    ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn, line_edit_track_title_i);
+  if(!cdio_) {
+    qLog(Error) << "Failed to read CD drive";
+    return;
+  } else {
+    i_tracks = cdio_get_num_tracks(cdio_);
+    ui_->tableWidget->setRowCount(i_tracks);
+    for (int i = 1; i <= i_tracks; i++) {
+      QCheckBox *checkbox_i = new QCheckBox(ui_->tableWidget);
+      checkbox_i->setCheckState(Qt::Checked);
+      checkboxes_.append(checkbox_i);
+      ui_->tableWidget->setCellWidget(i - 1, kCheckboxColumn, checkbox_i);
+      ui_->tableWidget->setCellWidget(i - 1, kTrackNumberColumn,
+          new QLabel(QString::number(i)));
+      QString track_title = QString("Track %1").arg(i);
+      QLineEdit *line_edit_track_title_i = new QLineEdit(track_title,
+          ui_->tableWidget);
+      track_names_.append(line_edit_track_title_i);
+      ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn,
+          line_edit_track_title_i);
+    }
   }
   // Get presets
   QList <TranscoderPreset> presets = Transcoder::GetAllPresets();
@@ -133,6 +141,11 @@ RipCD::RipCD(QWidget* parent) :
   ui_->progress_bar->setValue(0);
   ui_->progress_bar->setMaximum(100);
 }
+
+RipCD::~RipCD() {
+  delete ui_;
+}
+
 
 /*
  * WAV Header documentation
@@ -368,4 +381,8 @@ void RipCD::AddDestination() {
 
 void RipCD::Cancel() {
   transcoder_->Cancel();
+}
+
+bool RipCD::CDIOIsValid() const {
+  return (cdio_);
 }
