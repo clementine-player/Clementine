@@ -298,7 +298,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
   FileView* file_view_;
-  boost::scoped_ptr<RipCD> rip_cd_;
+  #ifdef HAVE_AUDIOCD
+    boost::scoped_ptr<RipCD> rip_cd_;
+  #endif
   PlaylistListContainer* playlist_list_;
   InternetViewContainer* internet_view_;
   DeviceViewContainer* device_view_container_;
