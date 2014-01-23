@@ -297,7 +297,7 @@ void Transcoder::AddJob(const QString& input,
   // Never overwrite existing files
   if (QFile::exists(job.output)) {
     for (int i=0 ; ; ++i) {
-      QString new_filename = QString("%1.%2").arg(job.output).arg(i);
+      QString new_filename = QString("%1.%2.%3").arg(job.output.section('.',0,-2)).arg(i).arg(preset.extension_);
       if (!QFile::exists(new_filename)) {
         job.output = new_filename;
         break;
@@ -331,8 +331,10 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
   }
 
   Job job = queued_jobs_.takeFirst();
-  if (StartJob(job))
+  if (StartJob(job)) {
+  	emit(JobOutputName(job.output));
     return StartedSuccessfully;
+  }
 
   emit JobComplete(job.input, false);
   return FailedToStart;
