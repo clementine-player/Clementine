@@ -122,6 +122,9 @@ void PodcastService::CopyToDeviceSlot() {
   if(selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty()) {
     CopyToDeviceSlot(backend_->GetNewDownloadedEpisodes());
   }
+  else if(selected_episodes_.isEmpty() && !explicitly_selected_podcasts_.isEmpty()) {
+    CopyToDeviceSlot(explicitly_selected_podcasts_);
+  }
   else {
     CopyToDeviceSlot(selected_episodes_, explicitly_selected_podcasts_);
   }
@@ -171,6 +174,30 @@ void PodcastService::CopyToDeviceSlot(const QModelIndexList& episode_indexes,
    if (organise_dialog_->SetSongs(songs))
      organise_dialog_->show();
 }
+void PodcastService::CopyToDeviceSlot(const QModelIndexList& podcast_indexes) {
+  PodcastEpisode episode_tmp;
+  QList<Song> songs;
+  PodcastEpisodeList episodes;
+  Podcast podcast;
+    foreach (const QModelIndex& podcast, podcast_indexes) {
+    for (int i=0 ; i<podcast.model()->rowCount(podcast) ; ++i) {
+      const QModelIndex& index = podcast.child(i, 0);
+      episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
+      if (episode_tmp.downloaded() && !episode_tmp.listened())
+	episodes << episode_tmp;
+    }
+  }
+  foreach (const PodcastEpisode& episode, episodes) {
+    podcast = backend_->GetSubscriptionById(episode.podcast_database_id());
+    songs.append(episode.ToSong(podcast));
+  }
+
+   organise_dialog_->SetDestinationModel(app_->device_manager()->connected_devices_model(), true);
+   organise_dialog_->SetCopy(true);
+   if (organise_dialog_->SetSongs(songs))
+     organise_dialog_->show();
+}
+
 
 void PodcastService::LazyPopulate(QStandardItem* parent) {
   switch (parent->data(InternetModel::Role_Type).toInt()) {

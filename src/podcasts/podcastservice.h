@@ -93,6 +93,7 @@ private slots:
   void CopyToDeviceSlot(const PodcastEpisodeList& episodes_list);
   void CopyToDeviceSlot(const QModelIndexList& episode_indexes,
 			const QModelIndexList& podcast_indexes);
+  void CopyToDeviceSlot(const QModelIndexList& podcast_indexes);
 
 private:
   void EnsureAddPodcastDialogCreated();
