@@ -219,7 +219,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFolder();
   void AddStream();
   void AddStreamAccepted();
-  void OpenRipCD();
+  #ifdef HAVE_AUDIOCD
+    void OpenRipCD();
+  #endif
   void AddCDTracks();
   void AddPodcast();
 
