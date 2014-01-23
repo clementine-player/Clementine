@@ -1027,9 +1027,13 @@ optional_source(HAVE_AUDIOCD
   SOURCES
     devices/cddadevice.cpp
     devices/cddalister.cpp
+    ui/ripcd.cpp
   HEADERS
     devices/cddadevice.h
     devices/cddalister.h
+    ui/ripcd.h
+  UI
+    ui/ripcd.ui
 )
 
 # mtp device
