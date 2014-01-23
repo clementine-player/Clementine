@@ -1678,8 +1678,9 @@ void MainWindow::AddStreamAccepted() {
   AddToPlaylist(data);
 }
 
-#ifdef HAVE_AUDIOCD
-  void MainWindow::OpenRipCD() {
+
+void MainWindow::OpenRipCD() {
+  #ifdef HAVE_AUDIOCD
     if (!rip_cd_) {
       rip_cd_.reset(new RipCD);
     }
@@ -1689,8 +1690,9 @@ void MainWindow::AddStreamAccepted() {
       QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"), tr("Failed reading CD drive"));
       cdio_fail.exec();
     }
-  }
-#endif
+  #endif
+}
+
 
 void MainWindow::AddCDTracks() {
   MimeData* data = new MimeData;
