@@ -1678,17 +1678,19 @@ void MainWindow::AddStreamAccepted() {
   AddToPlaylist(data);
 }
 
-void MainWindow::OpenRipCD() {
-	if (!rip_cd_) {
+#ifdef HAVE_AUDIOCD
+  void MainWindow::OpenRipCD() {
+    if (!rip_cd_) {
       rip_cd_.reset(new RipCD);
     }
-	if(rip_cd_->CDIOIsValid()) {
-	  rip_cd_->show();
-	} else {
-	  QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"), tr("Failed reading CD drive"));
-	  cdio_fail.exec();
-	}
-}
+    if(rip_cd_->CDIOIsValid()) {
+      rip_cd_->show();
+    } else {
+      QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"), tr("Failed reading CD drive"));
+      cdio_fail.exec();
+    }
+  }
+#endif
 
 void MainWindow::AddCDTracks() {
   MimeData* data = new MimeData;
