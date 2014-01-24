@@ -96,11 +96,9 @@ find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 # distros.  If the user seems to want Drive support (ie. they have sparsehash
 # installed and haven't disabled drive), and has an old taglib, compile our
 # internal one and use that instead.
-option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old for Google Drive support, compile our builtin version instead" ON)
-if (USE_BUILTIN_TAGLIB AND
-    (NOT "${ENABLE_GOOGLE_DRIVE}" STREQUAL "OFF") AND
-    SPARSEHASH_INCLUDE_DIRS AND
-    TAGLIB_VERSION VERSION_LESS 1.8)
+option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old, compile our builtin version instead" ON)
+if (USE_BUILTIN_TAGLIB AND TAGLIB_VERSION VERSION_LESS 1.8)
+  message(STATUS "Using builtin taglib because your system's version is too old")
   set(TAGLIB_VERSION 1.9.1)
   set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
   set(TAGLIB_LIBRARY_DIRS "")
