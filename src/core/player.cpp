@@ -69,7 +69,7 @@ void Player::Init() {
   connect(engine_.get(), SIGNAL(TrackAboutToEnd()), SLOT(TrackAboutToEnd()));
   connect(engine_.get(), SIGNAL(TrackEnded()), SLOT(TrackEnded()));
   connect(engine_.get(), SIGNAL(MetaData(Engine::SimpleMetaBundle)),
-                   SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
+                         SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
 
   engine_->SetVolume(settings_.value("volume", 50).toInt());
 
