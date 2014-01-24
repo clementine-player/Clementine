@@ -119,10 +119,10 @@ QStandardItem* PodcastService::CreateRootItem() {
 }
 
 void PodcastService::CopyToDeviceSlot() {
-  if(selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty()) {
+  if (selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty()) {
     CopyToDeviceSlot(backend_->GetNewDownloadedEpisodes());
   }
-  else if(selected_episodes_.isEmpty() && !explicitly_selected_podcasts_.isEmpty()) {
+  else if (selected_episodes_.isEmpty() && !explicitly_selected_podcasts_.isEmpty()) {
     CopyToDeviceSlot(explicitly_selected_podcasts_);
   }
   else {
@@ -626,7 +626,7 @@ void PodcastService::SetNew() {
 }
 
 void PodcastService::SetListened() {
-  if(selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty())
+  if (selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty())
     SetListened(backend_->GetNewDownloadedEpisodes(), true);
   else
     SetListened(selected_episodes_, explicitly_selected_podcasts_, true);
