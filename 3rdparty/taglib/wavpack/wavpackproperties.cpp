@@ -126,8 +126,9 @@ TagLib::uint WavPack::Properties::sampleFrames() const
 // private members
 ////////////////////////////////////////////////////////////////////////////////
 
-static const unsigned int sample_rates[] = { 6000, 8000, 9600, 11025, 12000,
-    16000, 22050, 24000, 32000, 44100, 48000, 64000, 88200, 96000, 192000 };
+static const unsigned int sample_rates[] = { 
+   6000,  8000,  9600, 11025, 12000, 16000,  22050, 24000, 
+  32000, 44100, 48000, 64000, 88200, 96000, 192000,     0 };
 
 #define BYTES_STORED    3
 #define MONO_FLAG       4

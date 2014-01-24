@@ -188,7 +188,7 @@ QString CloudFileService::GuessMimeTypeForFile(const QString& filename) const {
     return "audio/mpeg";
   } else if (filename.endsWith(".m4a")) {
     return "audio/mpeg";
-  } else if (filename.endsWith(".ogg")) {
+  } else if (filename.endsWith(".ogg") || filename.endsWith(".opus")) {
     return "application/ogg";
   } else if (filename.endsWith(".flac")) {
     return "application/x-flac";

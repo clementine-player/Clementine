@@ -413,17 +413,8 @@ void FLAC::File::scan()
   d->blocks.append(new UnknownMetadataBlock(blockType, d->streamInfoData));
   nextBlockOffset += length + 4;
 
-  int blockCount = 0;
-
   // Search through the remaining metadata
   while(!isLastBlock) {
-
-    if (++blockCount > 1024) {
-      debug("FLAC::File::scan() -- FLAC stream has more than 1024 metadata "
-            "blocks, probably corrupt.");
-      setValid(false);
-      return;
-    }
 
     header = readBlock(4);
     blockType = header[0] & 0x7f;

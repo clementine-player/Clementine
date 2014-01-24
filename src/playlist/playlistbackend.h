@@ -78,6 +78,8 @@ class PlaylistBackend : public QObject {
   void FavoritePlaylist(int id, bool is_favorite);
   void RemovePlaylist(int id);
 
+  Application* app() const { return app_; }
+
  public slots:
   void SavePlaylist(int playlist, const PlaylistItemList& items,
                     int last_played, smart_playlists::GeneratorPtr dynamic);

@@ -44,6 +44,7 @@ class CoverProviders;
 class Database;
 class DeviceManager;
 class DeviceView;
+class DeviceViewContainer;
 class EditTagDialog;
 class Equalizer;
 class ErrorDialog;
@@ -67,6 +68,7 @@ class InternetItem;
 class InternetModel;
 class InternetViewContainer;
 class Remote;
+class RipCD;
 class Song;
 class SongInfoBase;
 class SongInfoView;
@@ -79,6 +81,7 @@ class VisualisationContainer;
 class WiimotedevShortcuts;
 class Windows7ThumbBar;
 class Ui_MainWindow;
+
 
 class QSortFilterProxyModel;
 
@@ -133,6 +136,10 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Activate();
   bool LoadUrl(const QString& url);
 
+ signals:
+  // Signals that stop playing after track was toggled.
+  void StopAfterToggled(bool stop);
+
  private slots:
   void FilePathChanged(const QString& path);
   
@@ -166,6 +173,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlaylistOrganiseSelected(bool copy);
   void PlaylistDelete();
   void PlaylistOpenInBrowser();
+  void ShowInLibrary();
 
   void ChangeLibraryQueryMode(QAction* action);
 
@@ -211,6 +219,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFolder();
   void AddStream();
   void AddStreamAccepted();
+  void OpenRipCD();
   void AddCDTracks();
   void AddPodcast();
 
@@ -287,8 +296,12 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
   FileView* file_view_;
+  #ifdef HAVE_AUDIOCD
+    boost::scoped_ptr<RipCD> rip_cd_;
+  #endif
   PlaylistListContainer* playlist_list_;
   InternetViewContainer* internet_view_;
+  DeviceViewContainer* device_view_container_;
   DeviceView* device_view_;
   SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;
@@ -323,6 +336,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_stop_after_;
   QAction* playlist_undoredo_;
   QAction* playlist_organise_;
+  QAction* playlist_show_in_library_;
   QAction* playlist_copy_to_library_;
   QAction* playlist_move_to_library_;
   QAction* playlist_copy_to_device_;

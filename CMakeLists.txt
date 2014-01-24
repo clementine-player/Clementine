@@ -96,12 +96,10 @@ find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 # distros.  If the user seems to want Drive support (ie. they have sparsehash
 # installed and haven't disabled drive), and has an old taglib, compile our
 # internal one and use that instead.
-option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old for Google Drive support, compile our builtin version instead" ON)
-if (USE_BUILTIN_TAGLIB AND
-    (NOT "${ENABLE_GOOGLE_DRIVE}" STREQUAL "OFF") AND
-    SPARSEHASH_INCLUDE_DIRS AND
-    TAGLIB_VERSION VERSION_LESS 1.8)
-  set(TAGLIB_VERSION 1.8)
+option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old, compile our builtin version instead" ON)
+if (USE_BUILTIN_TAGLIB AND TAGLIB_VERSION VERSION_LESS 1.8)
+  message(STATUS "Using builtin taglib because your system's version is too old")
+  set(TAGLIB_VERSION 1.9.1)
   set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
   set(TAGLIB_LIBRARY_DIRS "")
   set(TAGLIB_LIBRARIES tag)
@@ -158,6 +156,10 @@ include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
 include_directories(${QJSON_INCLUDE_DIRS})
 include_directories(${GSTREAMER_INCLUDE_DIRS})
+include_directories(${GSTREAMER_APP_INCLUDE_DIRS})
+include_directories(${GSTREAMER_BASE_INCLUDE_DIRS})
+include_directories(${GSTREAMER_CDDA_INCLUDE_DIRS})
+include_directories(${GSTREAMER_TAG_INCLUDE_DIRS})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
@@ -273,7 +275,7 @@ optional_component(VISUALISATIONS ON "Visualisations")
 if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_FOUND)
   message(FATAL_ERROR "Either QCA must be available or the non-GPL Spotify "
           "code must be compiled in")
-elif(QCA_FOUND)
+elseif(QCA_FOUND)
   set(HAVE_SPOTIFY_DOWNLOADER ON)
 endif()
 
@@ -304,31 +306,14 @@ if(ENABLE_VISUALISATIONS)
   endif(USE_SYSTEM_PROJECTM)
 endif(ENABLE_VISUALISATIONS)
 
-# We compile our own qsqlite3 by default now, because in Qt 4.7 the symbols we
-# need from it are private.
-option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
 
-set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
-if(STATIC_SQLITE)
-  message(STATUS "Building static qsqlite plugin")
-  add_subdirectory(3rdparty/qsqlite)
-  include_directories("3rdparty/qsqlite")
-else()
-  if (NOT I_HATE_MY_USERS)
-    message(FATAL_ERROR "No, really, Clementine needs sqlite to be linked "
-        "statically.  If it's not, Clementine won't be able to resolve the "
-        "functions it needs to register full text search support.  Search will "
-        "be really slow and users will be unhappy.  If you're packaging "
-        "Clementine for a distribution and you really hate your users and want "
-        "them to have a bad time please rerun cmake with -DI_HATE_MY_USERS=ON")
-  else()
-    if (NOT MY_USERS_WILL_SUFFER_BECAUSE_OF_ME)
-      message(FATAL_ERROR "So you really hate your users and you want to "
-          "create a crippled package that doesn't work properly?  Please send "
-          "an email to the devs and help us understand why.")
-    endif()
-  endif()
-endif(STATIC_SQLITE)
+# Build our copy of QSqlLiteDriver.
+# We do this because we can't guarantee that the driver shipped with Qt exposes the
+# raw sqlite3_ functions required for FTS support. This way we know that those symbols
+# exist at compile-time and that our code links to the same sqlite library as the
+# Qt driver.
+add_subdirectory(3rdparty/qsqlite)
+include_directories("3rdparty/qsqlite")
 
 # When/if upstream accepts our patches then these options can be used to link
 # to system installed qtsingleapplication instead.

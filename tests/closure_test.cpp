@@ -5,6 +5,8 @@
 #include <QSharedPointer>
 #include <QSignalSpy>
 
+#include <boost/function.hpp>
+
 #include "config.h"
 #include "core/closure.h"
 #include "test_utils.h"
@@ -92,7 +94,7 @@ TEST(ClosureTest, ClosureWorksWithStandardFunctions) {
   bool called = false;
   int question = 42;
   int answer = 0;
-  std::tr1::function<void(bool*,int,int*)> callback(&Foo);
+  boost::function<void(bool*,int,int*)> callback(&Foo);
   NewClosure(
       &sender, SIGNAL(Emitted()),
       callback, &called, question, &answer);

@@ -54,6 +54,7 @@ VisualisationSelector::~VisualisationSelector() {
 
 void VisualisationSelector::showEvent(QShowEvent *) {
   if (!ui_->list->model()) {
+    ui_->delay->setValue(vis_->duration());
     ui_->list->setModel(vis_->preset_model());
     connect(ui_->list->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             vis_->preset_model(), SLOT(SetImmediatePreset(QModelIndex)));

@@ -1,6 +1,7 @@
 #include "dropboxservice.h"
 
 #include <QFileInfo>
+#include <QTimer>
 
 #include <qjson/parser.h>
 
@@ -27,6 +28,8 @@ static const char* kMediaEndpoint =
     "https://api.dropbox.com/1/media/dropbox/";
 static const char* kDeltaEndpoint =
     "https://api.dropbox.com/1/delta";
+static const char* kLongPollEndpoint =
+    "https://api-notify.dropbox.com/1/longpoll_delta";
 
 }  // namespace
 
@@ -136,6 +139,12 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
       continue;
     }
 
+    // Workaround: Since Dropbox doesn't recognize Opus files and thus treats them
+    // as application/octet-stream, we overwrite the mime type here
+    if (metadata["mime_type"].toString() == "application/octet-stream" && 
+        url.toString().endsWith(".opus"))
+      metadata["mime_type"] = GuessMimeTypeForFile(url.toString());
+
     if (ShouldIndexFile(url, metadata["mime_type"].toString())) {
       QNetworkReply* reply = FetchContentUrl(url);
       NewClosure(reply, SIGNAL(finished()),
@@ -146,6 +155,41 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 
   if (response.contains("has_more") && response["has_more"].toBool()) {
     RequestFileList();
+  } else {
+    // Long-poll wait for changes.
+    LongPollDelta();
+  }
+}
+
+void DropboxService::LongPollDelta() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  QUrl request_url = QUrl(QString(kLongPollEndpoint));
+  if (s.contains("cursor")) {
+    request_url.addQueryItem("cursor", s.value("cursor").toString());
+  }
+  QNetworkRequest request(request_url);
+  request.setRawHeader("Authorization", GenerateAuthorisationHeader());
+  QNetworkReply* reply = network_->get(request);
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(LongPollFinished(QNetworkReply*)), reply);
+}
+
+void DropboxService::LongPollFinished(QNetworkReply* reply) {
+  reply->deleteLater();
+  QJson::Parser parser;
+  QVariantMap response = parser.parse(reply).toMap();
+  if (response["changes"].toBool()) {
+    // New changes, we should request deltas again.
+    qLog(Debug) << "Detected new dropbox changes; fetching...";
+    RequestFileList();
+  } else {
+    bool ok = false;
+    int backoff_secs = response["backoff"].toInt(&ok);
+    backoff_secs = ok ? backoff_secs : 0;
+
+    QTimer::singleShot(backoff_secs * 1000, this, SLOT(LongPollDelta()));
   }
 }
 

@@ -392,7 +392,7 @@ static const char *frameTranslation[][2] = {
   //{ "USLT", "LYRICS" }, handled specially
 };
 
-static const TagLib::uint txxxFrameTranslationSize = 7;
+static const TagLib::uint txxxFrameTranslationSize = 8;
 static const char *txxxFrameTranslation[][2] = {
   { "MusicBrainz Album Id", "MUSICBRAINZ_ALBUMID" },
   { "MusicBrainz Artist Id", "MUSICBRAINZ_ARTISTID" },

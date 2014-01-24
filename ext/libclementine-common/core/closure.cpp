@@ -33,7 +33,7 @@ ClosureBase::~ClosureBase() {
 CallbackClosure::CallbackClosure(
     QObject* sender,
     const char* signal,
-    std::tr1::function<void()> callback)
+    boost::function<void()> callback)
   : ClosureBase(new ObjectHelper(sender, signal, this)),
     callback_(callback) {
 }
@@ -67,7 +67,7 @@ void Unpack(QList<QGenericArgument>*) {}
 _detail::ClosureBase* NewClosure(
     QObject* sender,
     const char* signal,
-    std::tr1::function<void()> callback) {
+    boost::function<void()> callback) {
   return new _detail::CallbackClosure(
       sender, signal, callback);
 }

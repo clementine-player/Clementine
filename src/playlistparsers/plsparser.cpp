@@ -46,7 +46,7 @@ SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const 
       // Use the title and length we've already loaded if any
       if (!songs[n].title().isEmpty())
         song.set_title(songs[n].title());
-      if (!songs[n].length_nanosec() != -1)
+      if (songs[n].length_nanosec() != -1)
         song.set_length_nanosec(songs[n].length_nanosec());
 
       songs[n] = song;

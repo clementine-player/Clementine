@@ -192,6 +192,9 @@ void Chromaprinter::ReportError(GstMessage* msg) {
 
 gboolean Chromaprinter::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
   Chromaprinter* instance = reinterpret_cast<Chromaprinter*>(data);
+  if (instance->finishing_) {
+    return GST_BUS_DROP;
+  }
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_ERROR:
@@ -207,6 +210,9 @@ gboolean Chromaprinter::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
 
 GstBusSyncReply Chromaprinter::BusCallbackSync(GstBus*, GstMessage* msg, gpointer data) {
   Chromaprinter* instance = reinterpret_cast<Chromaprinter*>(data);
+  if (instance->finishing_) {
+    return GST_BUS_PASS;
+  }
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:

@@ -81,6 +81,8 @@ void WplParser::ParseSeq(const QDir& dir, QXmlStreamReader* reader,
 void WplParser::Save(const SongList& songs, QIODevice* device,
                      const QDir& dir) const {
   QXmlStreamWriter writer(device);
+  writer.setAutoFormatting(true);
+  writer.setAutoFormattingIndent(2);
   writer.writeProcessingInstruction("wpl", "version=\"1.0\"");
 
   StreamElement smil("smil", &writer);

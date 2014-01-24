@@ -25,6 +25,7 @@
 #include "songloaderinserter.h"
 #include "songmimedata.h"
 #include "songplaylistitem.h"
+#include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/modelfuturewatcher.h"
@@ -761,7 +762,8 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
       }
     }
   } else if (data->hasFormat(kCddaMimeType)) {
-    SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, library_);
+    SongLoaderInserter* inserter = new SongLoaderInserter(
+        task_manager_, library_, backend_->app()->player());
     connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
     inserter->LoadAudioCD(this, row, play_now, enqueue_now);
   } else if (data->hasUrls()) {
@@ -773,7 +775,8 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
 }
 
 void Playlist::InsertUrls(const QList<QUrl> &urls, int pos, bool play_now, bool enqueue) {
-  SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, library_);
+  SongLoaderInserter* inserter = new SongLoaderInserter(
+      task_manager_, library_, backend_->app()->player());
   connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
 
   inserter->Load(this, pos, play_now, enqueue, urls);

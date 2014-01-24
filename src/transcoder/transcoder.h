@@ -75,6 +75,7 @@ class Transcoder : public QObject {
   void JobComplete(const QString& filename, bool success);
   void LogLine(const QString& message);
   void AllJobsComplete();
+  void JobOutputName(const QString& filename);
 
  protected:
   bool event(QEvent* e);

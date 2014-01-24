@@ -71,6 +71,7 @@ class OSD : public QObject {
 
   void Paused();
   void Stopped();
+  void StopAfterToggle(bool stop);
   void PlaylistFinished();
   void VolumeChanged(int value);
   void MagnatuneDownloadFinished(const QStringList& albums);

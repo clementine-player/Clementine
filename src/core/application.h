@@ -52,6 +52,8 @@ class Application : public QObject {
   Q_OBJECT
 
 public:
+  static bool kIsPortable;
+
   Application(QObject* parent = NULL);
   ~Application();
 

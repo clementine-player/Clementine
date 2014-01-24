@@ -15,8 +15,9 @@ BuildRequires:  cmake gstreamer-devel gstreamer-plugins-base-devel
 BuildRequires:  libimobiledevice-devel libplist-devel usbmuxd-devel
 BuildRequires:  libmtp-devel protobuf-devel protobuf-compiler libcdio-devel
 BuildRequires:  qjson-devel qca2-devel fftw-devel sparsehash-devel
+BuildRequires:  sqlite-devel
 
-Requires:       libgpod protobuf-lite libcdio qjson qca-ossl
+Requires:       libgpod protobuf-lite libcdio qjson qca-ossl sqlite
 
 # GStreamer codec dependencies
 Requires:       gstreamer-plugins-ugly

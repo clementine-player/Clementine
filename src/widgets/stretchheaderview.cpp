@@ -24,7 +24,7 @@
 #include <cmath>
 #include <numeric>
 
-const int StretchHeaderView::kMinimumColumnWidth = 10;
+const int StretchHeaderView::kMinimumColumnWidth = 20;
 const int StretchHeaderView::kMagicNumber = 0x502c950f;
 
 StretchHeaderView::StretchHeaderView(Qt::Orientation orientation, QWidget* parent)
@@ -33,6 +33,7 @@ StretchHeaderView::StretchHeaderView(Qt::Orientation orientation, QWidget* paren
     in_mouse_move_event_(false)
 {
   connect(this, SIGNAL(sectionResized(int,int,int)), SLOT(SectionResized(int,int,int)));
+  setMinimumSectionSize(kMinimumColumnWidth);
 }
 
 void StretchHeaderView::setModel(QAbstractItemModel* model) {
@@ -90,7 +91,6 @@ void StretchHeaderView::UpdateWidths(const QList<int>& sections) {
       hideSection(i);
     else if (pixels != 0 && isSectionHidden(i)) {
       showSection(i);
-      AssertMinimalColumnWidth(i);
     }
 
     if (pixels != 0)
@@ -145,7 +145,6 @@ void StretchHeaderView::SetSectionHidden(int logical, bool hidden) {
     HideSection(logical);
   } else {
     ShowSection(logical);
-    AssertMinimalColumnWidth(logical);
   }
 }
 
@@ -223,13 +222,6 @@ void StretchHeaderView::SetColumnWidth(int logical, ColumnWidthType width) {
     if (!isSectionHidden(i) && i != logical)
       other_columns << i;
   NormaliseWidths(other_columns);
-}
-
-// makes sure the column will apear no matter what
-void StretchHeaderView::AssertMinimalColumnWidth(int logical) {
-  if (sectionSize(logical) < kMinimumColumnWidth) {
-    resizeSection(logical, kMinimumColumnWidth);
-  }
 }
 
 bool StretchHeaderView::RestoreState(const QByteArray& data) {

@@ -121,6 +121,11 @@ void ProjectMVisualisation::InitProjectM() {
   preset_model_ = new ProjectMPresetModel(this, this);
   Load();
 
+  // Start at a random preset.
+  if (projectm_->getPlaylistSize() > 0) {
+    projectm_->selectPreset(qrand() % projectm_->getPlaylistSize(), true);
+  }
+
   if (font_path.isNull()) {
     qWarning("ProjectM presets could not be found, search path was:\n  %s",
              paths.join("\n  ").toLocal8Bit().constData());
@@ -159,6 +164,8 @@ void ProjectMVisualisation::SetDuration(int seconds) {
 
   if (projectm_)
     projectm_->changePresetDuration(duration_);
+
+  Save();
 }
 
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
@@ -204,7 +211,9 @@ void ProjectMVisualisation::Load() {
   QSettings s;
   s.beginGroup(VisualisationContainer::kSettingsGroup);
   mode_ = Mode(s.value("mode", 0).toInt());
+  duration_ = s.value("duration", duration_).toInt();
 
+  projectm_->changePresetDuration(duration_);
   projectm_->clearPlaylist();
   switch (mode_) {
     case Random:
@@ -237,6 +246,7 @@ void ProjectMVisualisation::Save() {
   s.beginGroup(VisualisationContainer::kSettingsGroup);
   s.setValue("preset_paths", paths);
   s.setValue("mode", mode_);
+  s.setValue("duration", duration_);
 }
 
 void ProjectMVisualisation::SetMode(Mode mode) {

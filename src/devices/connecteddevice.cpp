@@ -67,9 +67,9 @@ ConnectedDevice::~ConnectedDevice() {
 
 void ConnectedDevice::InitBackendDirectory(
     const QString& mount_point, bool first_time, bool rewrite_path) {
-  if (first_time)
+  if (first_time || backend_->GetAllDirectories().isEmpty()) {
     backend_->AddDirectory(mount_point);
-  else {
+  } else {
     if (rewrite_path) {
       // This is a bit of a hack.  The device might not be mounted at the same
       // path each time, so if it's different we have to munge all the paths in

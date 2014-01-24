@@ -24,9 +24,11 @@ LABELS = {
   "dmg":      ["Type-Package", "OpSys-OSX", "Distro-Lion", "Arch-x86-64"],
   32:         ["Arch-i386"],
   64:         ["Arch-x86-64"],
+  "lucid":    ["Distro-Ubuntu"],
   "precise":  ["Distro-Ubuntu"],
   "quantal":  ["Distro-Ubuntu"],
   "raring":   ["Distro-Ubuntu"],
+  "saucy":    ["Distro-Ubuntu"],
   "squeeze":  ["Distro-Debian"],
   "wheezy":   ["Distro-Debian"],
 }
@@ -51,9 +53,11 @@ RPM_ARCH = {
 }
 
 DESCRIPTIONS = {
+  ("deb", "lucid"):     "for Ubuntu Lucid (10.04)",
   ("deb", "precise"):   "for Ubuntu Precise (12.04)",
   ("deb", "quantal"):   "for Ubuntu Quantal (12.10)",
-  ("deb", "raring"):    "for Ubuntu Raring  (13.04)",
+  ("deb", "raring"):    "for Ubuntu Raring (13.04)",
+  ("deb", "saucy"):     "for Ubuntu Saucy (13.10)",
   ("deb", "squeeze"):   "for Debian Squeeze",
   ("deb", "wheezy"):    "for Debian Wheezy",
   ("rpm", "fc18"):      "for Fedora 18",
@@ -64,12 +68,16 @@ DESCRIPTIONS = {
 }
 
 RELEASES = [
+  ("deb", "lucid", 32),
+  ("deb", "lucid", 64),
   ("deb", "precise", 32),
   ("deb", "precise", 64),
   ("deb", "quantal", 32),
   ("deb", "quantal", 64),
   ("deb", "raring", 32),
   ("deb", "raring", 64),
+  ("deb", "saucy", 32),
+  ("deb", "saucy", 64),
   ("deb", "squeeze", 32),
   ("deb", "squeeze", 64),
   ("deb", "wheezy", 32),
@@ -226,7 +234,6 @@ def main():
     return 1
 
   print
-  return 0
 
   # Upload everything
   for release in RELEASES:

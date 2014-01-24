@@ -33,6 +33,7 @@ const quint32 OutgoingDataCreator::kFileChunkSize = 100000; // in Bytes
 
 OutgoingDataCreator::OutgoingDataCreator(Application* app)
   : app_(app),
+    aww_(false),
     ultimate_reader_(new UltimateLyricsReader(this)),
     fetcher_(new SongInfoFetcher(this))
 {
@@ -314,21 +315,26 @@ void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
 void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& uri, const QImage& img) {
   current_song_  = song;
   current_uri_   = uri;
-  current_image_ = img;
 
-  if (!clients_->empty()) {
-    // Create the message
-    pb::remote::Message msg;
-    msg.set_type(pb::remote::CURRENT_METAINFO);
-
-    // If there is no song, create an empty node, otherwise fill it with data
-    int i = app_->playlist_manager()->active()->current_row();
-    CreateSong(
-        current_song_, img, i,
-        msg.mutable_response_current_metadata()->mutable_song_metadata());
-
-    SendDataToClients(&msg);
+  if (!aww_) {
+    current_image_ = img;
   }
+
+  SendSongMetadata();
+}
+
+void OutgoingDataCreator::SendSongMetadata() {
+  // Create the message
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::CURRENT_METAINFO);
+
+  // If there is no song, create an empty node, otherwise fill it with data
+  int i = app_->playlist_manager()->active()->current_row();
+  CreateSong(
+      current_song_, current_image_, i,
+      msg.mutable_response_current_metadata()->mutable_song_metadata());
+
+  SendDataToClients(&msg);
 }
 
 void OutgoingDataCreator::CreateSong(
@@ -509,10 +515,15 @@ void OutgoingDataCreator::UpdateTrackPosition() {
   pb::remote::Message msg;
   msg.set_type(pb::remote::UPDATE_TRACK_POSITION);
 
-  const int position = std::floor(
+  int position = std::floor(
     float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
 
+  if (app_->player()->engine()->position_nanosec() > current_song_.length_nanosec())
+    position = last_track_position_;
+
   msg.mutable_response_update_track_position()->set_position(position);
+
+  last_track_position_ = position;
 
   SendDataToClients(&msg);
 }
@@ -535,7 +546,7 @@ void OutgoingDataCreator::SendLyrics(int id, const SongInfoFetcher::Result& resu
 
   foreach (const CollapsibleInfoPane::Data& data, result.info_) {
     // If the size is zero, do not send the provider
-    SongInfoTextView* editor = qobject_cast<SongInfoTextView*>(data.contents_);
+    UltimateLyricsLyric* editor = qobject_cast<UltimateLyricsLyric*>(data.content_object_);
     if (editor->toPlainText().length() == 0)
       continue;
 
@@ -628,12 +639,13 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
   if (!(song.url().scheme() == "file"))
     return;
 
-  // Calculate the number of chunks
-  int chunk_count  = qRound((song.filesize() / kFileChunkSize) + 0.5);
-  int chunk_number = 1;
-
   // Open the file
   QFile file(song.url().toLocalFile());
+
+  // Get sha1 for file
+  QByteArray sha1 = Utilities::Sha1File(file).toHex();
+  qLog(Debug) << "sha1 for file" << song.url().toLocalFile() << "=" << sha1;
+
   file.open(QIODevice::ReadOnly);
 
   QByteArray data;
@@ -642,6 +654,10 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
   msg.set_type(pb::remote::SONG_FILE_CHUNK);
 
   QImage null_image;
+
+  // Calculate the number of chunks
+  int chunk_count  = qRound((file.size() / kFileChunkSize) + 0.5);
+  int chunk_number = 1;
 
   while (!file.atEnd()) {
     // Read file chunk
@@ -654,6 +670,7 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
     chunk->set_file_number(song_no);
     chunk->set_size(file.size());
     chunk->set_data(data.data(), data.size());
+    chunk->set_file_hash(sha1.data(), sha1.size());
 
     // On the first chunk send the metadata, so the client knows
     // what file it receives.
@@ -721,12 +738,12 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
 
   // Attach this file to the database
   Database::AttachedDatabase adb(temp_file_name, "", true);
-  app_->database()->AttachDatabase("songs_export", adb);
   QSqlDatabase db(app_->database()->Connect());
 
+  app_->database()->AttachDatabaseOnDbConnection("songs_export", adb, db);
+
   // Copy the content of the song table to this temporary database
-  QSqlQuery q(QString("create table songs_export.songs as SELECT * FROM songs;"), db);
-  q.exec();
+  QSqlQuery q(QString("create table songs_export.songs as SELECT * FROM songs where unavailable = 0;"), db);
 
   if (app_->database()->CheckErrors(q)) return;
 
@@ -735,6 +752,11 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
 
   // Open the file
   QFile file(temp_file_name);
+
+  // Get the sha1 hash
+  QByteArray sha1 = Utilities::Sha1File(file).toHex();
+  qLog(Debug) << "Library sha1" << sha1;
+
   file.open(QIODevice::ReadOnly);
 
   QByteArray data;
@@ -755,6 +777,7 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
     chunk->set_chunk_number(chunk_number);
     chunk->set_size(file.size());
     chunk->set_data(data.data(), data.size());
+    chunk->set_file_hash(sha1.data(), sha1.size());
 
     // Send data directly to the client
     client->SendData(&msg);
@@ -769,3 +792,15 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
   // Remove temporary file
   file.remove();
 }
+
+void OutgoingDataCreator::EnableKittens(bool aww) {
+  aww_ = aww;
+}
+
+void OutgoingDataCreator::SendKitten(const QImage& kitten) {
+  if (aww_) {
+    current_image_ = kitten;
+    SendSongMetadata();
+  }
+}
+

@@ -249,7 +249,8 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   // Extract urls
   QList<QUrl> urls;
   for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
-    urls << QUrl(QString::fromStdString(*it));
+    std::string s = *it;
+    urls << QUrl(QStringFromStdString(s));
   }
 
   // Insert the urls
@@ -258,14 +259,16 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
 }
 
 void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
-  const pb::remote::RequestRemoveSongs& request = msg.request_remove_songs();
+    const pb::remote::RequestRemoveSongs& request = msg.request_remove_songs();
 
-  // Extract urls
-  QList<int> songs;
-  std::copy(request.songs().begin(), request.songs().end(), songs.begin());
+    // Extract urls
+    QList<int> songs;
+    for (int i = 0; i<request.songs().size();i++) {
+        songs.append(request.songs(i));
+    }
 
-  // Insert the urls
-  emit RemoveSongs(request.playlist_id(), songs);
+    // Insert the urls
+    emit RemoveSongs(request.playlist_id(), songs);
 }
 
 void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {

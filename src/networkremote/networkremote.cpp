@@ -217,3 +217,13 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
             incoming_data_parser_.get(), SLOT(Parse(pb::remote::Message)));
   }
 }
+
+void NetworkRemote::EnableKittens(bool aww) {
+  if (outgoing_data_creator_.get())
+    outgoing_data_creator_->EnableKittens(aww);
+}
+
+void NetworkRemote::SendKitten(quint64 id, const QImage &kitten) {
+  if (outgoing_data_creator_.get())
+    outgoing_data_creator_->SendKitten(kitten);
+}

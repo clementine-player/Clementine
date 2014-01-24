@@ -33,16 +33,17 @@
 #include "config.h"
 #include "core/concurrentrun.h"
 #include "core/logging.h"
-#include "core/song.h"
+#include "core/player.h"
 #include "core/signalchecker.h"
+#include "core/song.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "internet/fixlastfm.h"
 #include "internet/internetmodel.h"
 #include "library/librarybackend.h"
 #include "library/sqlrow.h"
-#include "playlistparsers/parserbase.h"
 #include "playlistparsers/cueparser.h"
+#include "playlistparsers/parserbase.h"
 #include "playlistparsers/playlistparser.h"
 #include "podcasts/podcastparser.h"
 #include "podcasts/podcastservice.h"
@@ -52,7 +53,9 @@
 QSet<QString> SongLoader::sRawUriSchemes;
 const int SongLoader::kDefaultTimeout = 5000;
 
-SongLoader::SongLoader(LibraryBackendInterface* library, QObject *parent)
+SongLoader::SongLoader(LibraryBackendInterface* library,
+                       const Player* player,
+                       QObject *parent)
   : QObject(parent),
     timeout_timer_(new QTimer(this)),
     playlist_parser_(new PlaylistParser(library, this)),
@@ -63,7 +66,8 @@ SongLoader::SongLoader(LibraryBackendInterface* library, QObject *parent)
     success_(false),
     parser_(NULL),
     is_podcast_(false),
-    library_(library)
+    library_(library),
+    player_(player)
 {
   if (sRawUriSchemes.isEmpty()) {
     sRawUriSchemes << "udp" << "mms" << "mmsh" << "mmst" << "mmsu" << "rtsp"
@@ -91,9 +95,10 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
     return LoadLocal(url_.toLocalFile());
   }
 
-  if (sRawUriSchemes.contains(url_.scheme())) {
-    // The URI scheme indicates that it can't possibly be a playlist, so add
-    // it as a raw stream.
+  if (sRawUriSchemes.contains(url_.scheme()) ||
+      player_->HandlerForUrl(url) != nullptr) {
+    // The URI scheme indicates that it can't possibly be a playlist, or we have
+    // a custom handler for the URL, so add it as a raw stream.
     AddAsRawStream();
     return Success;
   }

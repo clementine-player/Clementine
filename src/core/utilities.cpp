@@ -25,6 +25,7 @@
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QDir>
+#include <QFile>
 #include <QIODevice>
 #include <QMetaEnum>
 #include <QMouseEvent>
@@ -37,6 +38,7 @@
 #include <QWidget>
 #include <QXmlStreamReader>
 
+#include "core/application.h"
 #include "core/logging.h"
 #include "timeconstants.h"
 
@@ -298,6 +300,9 @@ QString ColorToRgba(const QColor& c) {
 QString GetConfigPath(ConfigPath config) {
   switch (config) {
     case Path_Root: {
+      if (Application::kIsPortable) {
+        return QString("%1/data").arg(QCoreApplication::applicationDirPath());
+      }
       #ifdef Q_OS_DARWIN
         return mac::GetApplicationSupportPath() + "/" + QCoreApplication::organizationName();
       #else
@@ -307,6 +312,9 @@ QString GetConfigPath(ConfigPath config) {
     break;
 
     case Path_CacheRoot: {
+      if (Application::kIsPortable) {
+        return GetConfigPath(Path_Root) + "/cache";
+      }
       #if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
         char* xdg = getenv("XDG_CACHE_HOME");
         if (!xdg || !*xdg) {
@@ -446,6 +454,31 @@ QByteArray Sha256(const QByteArray& data) {
   SHA256_Final(reinterpret_cast<u_int8_t*>(ret.data()), &context);
 
   return ret;
+}
+
+// File must not be open and will be closed afterwards!
+QByteArray Sha1File(QFile &file) {
+  file.open(QIODevice::ReadOnly);
+  QCryptographicHash hash(QCryptographicHash::Sha1);
+  QByteArray data;
+
+  while(!file.atEnd()) {
+    data = file.read(1000000); // 1 mib
+    hash.addData(data.data(), data.length());
+    data.clear();
+  }
+
+  file.close();
+
+  return hash.result();
+}
+
+QByteArray Sha1CoverHash(const QString& artist, const QString& album) {
+  QCryptographicHash hash(QCryptographicHash::Sha1);
+  hash.addData(artist.toLower().toUtf8().constData());
+  hash.addData(album.toLower().toUtf8().constData());
+
+  return hash.result();
 }
 
 QString PrettySize(const QSize& size) {
@@ -611,6 +644,27 @@ QString SystemLanguageName() {
 #endif
 
   return system_language;
+}
+
+bool UrlOnSameDriveAsClementine(const QUrl &url) {
+  if (url.scheme() != "file")
+    return false;
+
+#ifdef Q_OS_WIN
+  QUrl appUrl = QUrl::fromLocalFile(QCoreApplication::applicationDirPath());
+  if (url.toLocalFile().left(1) == appUrl.toLocalFile().left(1))
+    return true;
+  else
+    return false;
+#else
+  // Non windows systems have always a / in the path
+  return true;
+#endif
+}
+
+QUrl GetRelativePathToClementineBin(const QUrl& url) {
+  QDir appPath(QCoreApplication::applicationDirPath());
+  return QUrl::fromLocalFile(appPath.relativeFilePath(url.toLocalFile()));
 }
 
 }  // namespace Utilities

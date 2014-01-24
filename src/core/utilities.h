@@ -19,6 +19,7 @@
 #define UTILITIES_H
 
 #include <QColor>
+#include <QFile>
 #include <QLocale>
 #include <QCryptographicHash>
 #include <QSize>
@@ -66,6 +67,8 @@ namespace Utilities {
   QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
   QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
   QByteArray Sha256(const QByteArray& data);
+  QByteArray Sha1File(QFile& file);
+  QByteArray Sha1CoverHash(const QString& artist, const QString& album);
 
 
   // Picks an unused ephemeral port number.  Doesn't hold the port open so
@@ -103,6 +106,12 @@ namespace Utilities {
 
   QStringList Prepend(const QString& text, const QStringList& list);
   QStringList Updateify(const QStringList& list);
+
+  // Check if two urls are on the same drive (mainly for windows)
+  bool UrlOnSameDriveAsClementine(const QUrl& url);
+
+  // Get relative path to clementine binary
+  QUrl GetRelativePathToClementineBin(const QUrl& url);
 
 
   enum ConfigPath {

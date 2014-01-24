@@ -40,9 +40,7 @@ public:
     QList<CollapsibleInfoPane::Data> info_;
   };
 
-  static const int kDefaultTimeoutDuration = 2500; // msec
-
-  void set_timeout(int msec) { timeout_duration_ = msec; }
+  static const int kDefaultTimeoutDuration = 25000; // msec
 
   void AddProvider(SongInfoProvider* provider);
   int FetchInfo(const Song& metadata);
@@ -50,6 +48,7 @@ public:
   QList<SongInfoProvider*> providers() const { return providers_; }
 
 signals:
+  void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
   void ResultReady(int id, const SongInfoFetcher::Result& result);
 
 private slots:
@@ -72,3 +71,4 @@ private:
 };
 
 #endif // SONGINFOFETCHER_H
+

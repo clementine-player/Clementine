@@ -257,6 +257,7 @@ message ResponseSongFileChunk {
   optional SongMetadata song_metadata = 6; // only sent with first chunk!
   optional bytes data = 7;
   optional int32 size = 8;
+  optional bytes file_hash = 9;
 }
 
 message ResponseLibraryChunk {
@@ -264,6 +265,7 @@ message ResponseLibraryChunk {
   optional int32 chunk_count = 2;
   optional bytes data = 3;
   optional int32 size = 4;
+  optional bytes file_hash = 5;
 }
 
 message ResponseSongOffer {
@@ -276,7 +278,7 @@ message RequestRateSong {
 
 // The message itself
 message Message {
-  optional int32 version = 1 [default=11];
+  optional int32 version = 1 [default=14];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;

@@ -104,6 +104,7 @@ Mpris2::Mpris2(Application* app, Mpris1* mpris1, QObject* parent)
   connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
   connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)), SLOT(PlaylistChanged(Playlist*)));
+  connect(app_->playlist_manager(), SIGNAL(CurrentChanged(Playlist*)), SLOT(PlaylistCollectionChanged(Playlist*)));
 }
 
 // when PlaylistManager gets it ready, we connect PlaylistSequence with this
@@ -136,12 +137,16 @@ void Mpris2::RepeatModeChanged() {
 }
 
 void Mpris2::EmitNotification(const QString& name, const QVariant& val) {
+  EmitNotification(name, val, "org.mpris.MediaPlayer2.Player");
+}
+
+void Mpris2::EmitNotification(const QString& name, const QVariant& val, const QString& mprisEntity) {
   QDBusMessage msg = QDBusMessage::createSignal(
         kMprisObjectPath, kFreedesktopPath, "PropertiesChanged");
   QVariantMap map;
   map.insert(name, val);
   QVariantList args = QVariantList()
-                      << "org.mpris.MediaPlayer2.Player"
+                      << mprisEntity
                       << map
                       << QStringList();
   msg.setArguments(args);
@@ -543,6 +548,10 @@ void Mpris2::ActivatePlaylist(const QDBusObjectPath& playlist_id) {
   if (!ok) {
     return;
   }
+  if (!app_->playlist_manager()->IsPlaylistOpen(p)) {
+    qLog(Error) << "Playlist isn't opened!";
+    return;
+  }
   app_->playlist_manager()->SetActivePlaylist(p);
   app_->player()->Next();
 }
@@ -570,6 +579,10 @@ void Mpris2::PlaylistChanged(Playlist* playlist) {
   mpris_playlist.id = MakePlaylistPath(playlist->id());
   mpris_playlist.name = app_->playlist_manager()->GetPlaylistName(playlist->id());
   emit PlaylistChanged(mpris_playlist);
+}
+
+void Mpris2::PlaylistCollectionChanged(Playlist* playlist) {
+  EmitNotification("PlaylistCount", "", "org.mpris.MediaPlayer2.Playlists");
 }
 
 } // namespace mpris

@@ -72,7 +72,7 @@ void BoxService::EnsureConnected() {
 
 void BoxService::Connect() {
   OAuthenticator* oauth = new OAuthenticator(
-      kClientId, kClientSecret, OAuthenticator::RedirectStyle::LOCALHOST, this);
+      kClientId, kClientSecret, OAuthenticator::RedirectStyle::REMOTE, this);
   if (!refresh_token().isEmpty()) {
     oauth->RefreshAuthorisation(
         kOAuthTokenEndpoint, refresh_token());

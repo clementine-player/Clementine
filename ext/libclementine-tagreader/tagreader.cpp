@@ -132,7 +132,7 @@ void TagReader::ReadFile(const QString& filename,
   TagLib::Tag* tag = fileref->tag();
   if (tag) {
     Decode(tag->title(), NULL, song->mutable_title());
-    Decode(tag->artist(), NULL, song->mutable_artist());
+    Decode(tag->artist(), NULL, song->mutable_artist()); // TPE1
     Decode(tag->album(), NULL, song->mutable_album());
     Decode(tag->genre(), NULL, song->mutable_genre());
     song->set_year(tag->year());
@@ -166,8 +166,7 @@ void TagReader::ReadFile(const QString& filename,
       if (!map["TIT1"].isEmpty()) // content group
         Decode(map["TIT1"].front()->toString(), NULL, song->mutable_grouping());
 
-      if (!map["TPE1"].isEmpty()) // ID3v2: lead performer/soloist
-        Decode(map["TPE1"].front()->toString(), NULL, song->mutable_performer());
+      // Skip TPE1 (which is the artist) here because we already fetched it
 
       if (!map["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
         Decode(map["TPE2"].front()->toString(), NULL, song->mutable_albumartist());
@@ -452,6 +451,9 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
   if (!map["COVERART"].isEmpty())
     song->set_art_automatic(kEmbeddedCover);
 
+  if (!map["METADATA_BLOCK_PICTURE"].isEmpty())
+    song->set_art_automatic(kEmbeddedCover);
+
   if (!map["FMPS_RATING"].isEmpty() && song->rating() <= 0)
     song->set_rating(TStringToQString( map["FMPS_RATING"].front() ).trimmed().toFloat());
 
@@ -534,7 +536,7 @@ bool TagReader::SaveFile(const QString& filename,
     return false;
 
   fileref->tag()->setTitle(StdStringToTaglibString(song.title()));
-  fileref->tag()->setArtist(StdStringToTaglibString(song.artist()));
+  fileref->tag()->setArtist(StdStringToTaglibString(song.artist())); // TPE1
   fileref->tag()->setAlbum(StdStringToTaglibString(song.album()));
   fileref->tag()->setGenre(StdStringToTaglibString(song.genre()));
   fileref->tag()->setComment(StdStringToTaglibString(song.comment()));
@@ -547,7 +549,7 @@ bool TagReader::SaveFile(const QString& filename,
     SetTextFrame("TBPM", song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm()), tag);
     SetTextFrame("TCOM", song.composer(), tag);
     SetTextFrame("TIT1", song.grouping(), tag);
-    SetTextFrame("TPE1", song.performer(), tag);
+    // Skip TPE1 (which is the artist) here because we already set it
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);
   } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
@@ -786,6 +788,25 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
   if (xiph_comment) {
     TagLib::Ogg::FieldListMap map = xiph_comment->fieldListMap();
 
+    // Other than the below mentioned non-standard COVERART, METADATA_BLOCK_PICTURE
+    // is the proposed tag for cover pictures.
+    // (see http://wiki.xiph.org/VorbisComment#METADATA_BLOCK_PICTURE)
+    if (map.contains("METADATA_BLOCK_PICTURE")) {
+      TagLib::StringList pict_list = map["METADATA_BLOCK_PICTURE"];
+      for(std::list<TagLib::String>::iterator it = pict_list.begin(); it != pict_list.end(); ++it) {
+        QByteArray data(QByteArray::fromBase64(it->toCString()));
+        TagLib::ByteVector tdata(data.data(), data.size());
+        TagLib::FLAC::Picture p(tdata);
+        if (p.type() == TagLib::FLAC::Picture::FrontCover)
+          return QByteArray(p.data().data(), p.data().size());
+      }
+      // If there was no specific front cover, just take the first picture
+      QByteArray data(QByteArray::fromBase64(map["METADATA_BLOCK_PICTURE"].front().toCString()));
+      TagLib::ByteVector tdata(data.data(), data.size());
+      TagLib::FLAC::Picture p(tdata);
+      return QByteArray(p.data().data(), p.data().size());
+    }
+
     // Ogg lacks a definitive standard for embedding cover art, but it seems
     // b64 encoding a field called COVERART is the general convention
     if (!map.contains("COVERART"))
@@ -856,23 +877,25 @@ bool TagReader::ReadCloudFile(const QUrl& download_url,
         stream,
         true,
         TagLib::AudioProperties::Accurate));
-  } else if (mime_type == "application/ogg" ||
-             mime_type == "audio/ogg") {
-    tag.reset(new TagLib::Ogg::Vorbis::File(
-        stream,
-        true,
-        TagLib::AudioProperties::Accurate));
-  }
+  } 
 #ifdef TAGLIB_HAS_OPUS
-  else if (mime_type == "application/opus" ||
-           mime_type == "audio/opus") {
+  else if ((mime_type == "application/opus" ||
+            mime_type == "audio/opus" ||
+            mime_type == "application/ogg" ||
+            mime_type == "audio/ogg") && title.endsWith(".opus")) {
     tag.reset(new TagLib::Ogg::Opus::File(
         stream,
         true,
         TagLib::AudioProperties::Accurate));
   }
 #endif
-  else if (mime_type == "application/x-flac" ||
+  else if (mime_type == "application/ogg" ||
+           mime_type == "audio/ogg") {
+    tag.reset(new TagLib::Ogg::Vorbis::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "application/x-flac" ||
            mime_type == "audio/flac" ||
            mime_type == "audio/x-flac") {
     tag.reset(new TagLib::FLAC::File(

@@ -55,11 +55,13 @@
 #include "qtsinglecoreapplication.h"
 
 #include <QDir>
+#include <QFont>
 #include <QLibraryInfo>
 #include <QNetworkProxyFactory>
 #include <QSslSocket>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSysInfo>
 #include <QTextCodec>
 #include <QTranslator>
 #include <QtConcurrentRun>
@@ -104,10 +106,8 @@ using boost::scoped_ptr;
 #endif
 
 // Load sqlite plugin on windows and mac.
-#ifdef HAVE_STATIC_SQLITE
-# include <QtPlugin>
-  Q_IMPORT_PLUGIN(qsqlite)
-#endif
+#include <QtPlugin>
+Q_IMPORT_PLUGIN(qsqlite)
 
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& language) {
@@ -225,6 +225,18 @@ void ParseAProto() {
   message.ParseFromArray(data.constData(), data.size());
 }
 
+void CheckPortable() {
+  QFile f(QApplication::applicationDirPath() + QDir::separator() + "data");
+  qLog(Debug) << f.fileName();
+  if (f.exists()) {
+    // We are portable. Set the bool and change the qsettings path
+    Application::kIsPortable = true;
+
+    QSettings::setDefaultFormat(QSettings::IniFormat);
+    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, f.fileName());
+  }
+}
+
 int main(int argc, char *argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
@@ -236,17 +248,18 @@ int main(int argc, char *argv[]) {
   // Do Mac specific startup to get media keys working.
   // This must go before QApplication initialisation.
   mac::MacMain();
+
+  if (QSysInfo::MacintoshVersion > QSysInfo::MV_10_8) {
+    // Work around 10.9 issue.
+    // https://bugreports.qt-project.org/browse/QTBUG-32789
+    QFont::insertSubstitution(".Lucida Grande UI", "Lucida Grande");
+  }
 #endif
 
   QCoreApplication::setApplicationName("Clementine");
   QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_DISPLAY);
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("clementine-player.org");
-
-#ifdef Q_OS_DARWIN
-  // Must happen after QCoreApplication::setOrganizationName().
-  setenv("XDG_CONFIG_HOME", Utilities::GetConfigPath(Utilities::Path_Root).toLocal8Bit().constData(), 1);
-#endif
 
   // This makes us show up nicely in gnome-volume-control
 #if !GLIB_CHECK_VERSION(2, 36, 0)
@@ -256,12 +269,6 @@ int main(int argc, char *argv[]) {
 
   RegisterMetaTypes();
 
-#ifdef HAVE_LIBLASTFM
-  lastfm::ws::ApiKey = LastFMService::kApiKey;
-  lastfm::ws::SharedSecret = LastFMService::kSecret;
-  lastfm::setNetworkAccessManager(new NetworkAccessManager);
-#endif
-
   CommandlineOptions options(argc, argv);
 
   {
@@ -270,6 +277,7 @@ int main(int argc, char *argv[]) {
     // This MUST be done before parsing the commandline options so QTextCodec
     // gets the right system locale for filenames.
     QtSingleCoreApplication a(argc, argv);
+    CheckPortable();
     crash_reporting.SetApplicationPath(a.applicationFilePath());
 
     // Parse commandline options - need to do this before starting the
@@ -287,6 +295,17 @@ int main(int argc, char *argv[]) {
       // Couldn't send the message so start anyway
     }
   }
+
+#ifdef Q_OS_DARWIN
+  // Must happen after QCoreApplication::setOrganizationName().
+  setenv("XDG_CONFIG_HOME", Utilities::GetConfigPath(Utilities::Path_Root).toLocal8Bit().constData(), 1);
+#endif
+
+#ifdef HAVE_LIBLASTFM
+  lastfm::ws::ApiKey = LastFMService::kApiKey;
+  lastfm::ws::SharedSecret = LastFMService::kSecret;
+  lastfm::setNetworkAccessManager(new NetworkAccessManager);
+#endif
 
   // Initialise logging
   logging::Init();
