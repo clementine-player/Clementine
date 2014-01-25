@@ -111,7 +111,7 @@ private:
   void SetListened(const QModelIndexList& episode_indexes,
                    const QModelIndexList& podcast_indexes,
                    bool listened);
-  void SetListened(PodcastEpisodeList episodes_list,
+  void SetListened(const PodcastEpisodeList& episodes_list,
 		   bool listened);
 
   void LazyLoadRoot();
