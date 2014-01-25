@@ -85,7 +85,7 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
   // Build the insert menu
   QMenu* tag_menu = new QMenu(this);
   QSignalMapper* tag_mapper = new QSignalMapper(this);
-  foreach (const QString& title, tag_titles) {
+  for (const QString& title : tag_titles) {
     QAction* action = tag_menu->addAction(title, tag_mapper, SLOT(map()));
     tag_mapper->setMapping(action, tags[title]);
   }
@@ -108,10 +108,10 @@ int OrganiseDialog::SetSongs(const SongList& songs) {
   total_size_ = 0;
   songs_.clear();
 
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     if (song.url().scheme() != "file") {
       continue;
-    };
+    }
 
     if (song.filesize() > 0)
       total_size_ += song.filesize();
@@ -130,7 +130,7 @@ int OrganiseDialog::SetUrls(const QList<QUrl> &urls, quint64 total_size) {
   Song song;
 
   // Only add file:// URLs
-  foreach (const QUrl& url, urls) {
+  for (const QUrl& url : urls) {
     if (url.scheme() != "file")
       continue;
     TagReaderClient::Instance()->ReadFileBlocking(url.toLocalFile(), &song);
@@ -146,7 +146,7 @@ int OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_siz
   Song song;
 
   // Load some of the songs to show in the preview
-  foreach (const QString& filename, filenames) {
+  for (const QString& filename : filenames) {
     TagReaderClient::Instance()->ReadFileBlocking(song.basefilename(), &song);
     if (song.is_valid())
       songs << song;
@@ -210,7 +210,7 @@ void OrganiseDialog::UpdatePreviews() {
   ui_->preview_group->setVisible(has_local_destination);
   ui_->naming_group->setVisible(has_local_destination);
   if (has_local_destination) {
-    foreach (const Song& song, songs_) {
+    for (const Song& song : songs_) {
       QString filename = storage->LocalPath() + "/" +
                          format_.GetFilenameForSong(song);
       ui_->preview->addItem(QDir::toNativeSeparators(filename));

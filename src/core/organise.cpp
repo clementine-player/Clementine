@@ -53,7 +53,7 @@ Organise::Organise(TaskManager* task_manager,
 {
   original_thread_ = thread();
 
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     tasks_pending_ << Task(song);
   }
 }
@@ -67,7 +67,7 @@ void Organise::Start() {
 
   thread_ = new QThread;
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));
-  connect(transcoder_, SIGNAL(JobComplete(QString,bool)), SLOT(FileTranscoded(QString,bool)));
+  connect(transcoder_, SIGNAL(JobComplete(QString, bool)), SLOT(FileTranscoded(QString, bool)));
 
   moveToThread(thread_);
   thread_->start();
@@ -79,7 +79,7 @@ void Organise::ProcessSomeFiles() {
 
     if (!destination_->StartCopy(&supported_filetypes_)) {
       // Failed to start - mark everything as failed :(
-      foreach (const Task& task, tasks_pending_)
+      for (const Task& task : tasks_pending_)
         files_with_errors_ << task.song_.url().toLocalFile();
       tasks_pending_.clear();
     }
@@ -116,7 +116,7 @@ void Organise::ProcessSomeFiles() {
   }
 
   // We process files in batches so we can be cancelled part-way through.
-  for (int i=0 ; i<kBatchSize ; ++i) {
+  for (int i = 0; i < kBatchSize; ++i) {
     SetSongProgress(0);
 
     if (tasks_pending_.isEmpty())
@@ -125,7 +125,7 @@ void Organise::ProcessSomeFiles() {
     Task task = tasks_pending_.takeFirst();
     qLog(Info) << "Processing" << task.song_.url().toLocalFile();
 
-    //Use a Song instead of a tag reader
+    // Use a Song instead of a tag reader
     Song song = task.song_;
     if (!song.is_valid())
       continue;
@@ -228,7 +228,7 @@ Song::FileType Organise::CheckTranscode(Song::FileType original_type) const {
 void Organise::SetSongProgress(float progress, bool transcoded) {
   const int max = transcoded ? 50 : 100;
   current_copy_progress_ = (transcoded ? 50 : 0) +
-                           qBound(0, int(progress * max), max-1);
+                           qBound(0, static_cast<int>(progress * max), max-1);
   UpdateProgress();
 }
 
@@ -237,7 +237,7 @@ void Organise::UpdateProgress() {
 
   // Update transcoding progress
   QMap<QString, float> transcode_progress = transcoder_->GetProgress();
-  foreach (const QString& filename, transcode_progress.keys()) {
+  for (const QString& filename : transcode_progress.keys()) {
     if (!tasks_transcoding_.contains(filename))
       continue;
     tasks_transcoding_[filename].transcode_progress_ = transcode_progress[filename];
@@ -248,11 +248,11 @@ void Organise::UpdateProgress() {
   // only need to be copied total 100.
   int progress = tasks_complete_ * 100;
 
-  foreach (const Task& task, tasks_pending_) {
-    progress += qBound(0, int(task.transcode_progress_ * 50), 50);
+  for (const Task& task : tasks_pending_) {
+    progress += qBound(0, static_cast<int>(task.transcode_progress_ * 50), 50);
   }
-  foreach (const Task& task, tasks_transcoding_.values()) {
-    progress += qBound(0, int(task.transcode_progress_ * 50), 50);
+  for (const Task& task : tasks_transcoding_.values()) {
+    progress += qBound(0, static_cast<int>(task.transcode_progress_ * 50), 50);
   }
 
   // Add the progress of the track that's currently copying
