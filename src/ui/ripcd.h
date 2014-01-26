@@ -80,6 +80,9 @@ class RipCD: public QDialog {
   void Options();
   void AddDestination();
   void Cancel();
+  void SelectAll();
+  void SelectNone();
+  void InvertSelection();
 };
 
 #endif  // SRC_UI_RIPCD_H_

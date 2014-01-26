@@ -40,7 +40,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>197</y>
+     <y>210</y>
      <width>571</width>
      <height>101</height>
     </rect>
@@ -267,9 +267,58 @@
     </property>
    </widget>
   </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>180</y>
+     <width>571</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="select_all_button">
+      <property name="text">
+       <string>Select All</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="select_none_button">
+      <property name="text">
+       <string>Select None</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="invert_selection_button">
+      <property name="text">
+       <string>Invert Selection</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>tableWidget</tabstop>
+  <tabstop>select_all_button</tabstop>
+  <tabstop>select_none_button</tabstop>
+  <tabstop>invert_selection_button</tabstop>
   <tabstop>albumLineEdit</tabstop>
   <tabstop>artistLineEdit</tabstop>
   <tabstop>genreLineEdit</tabstop>

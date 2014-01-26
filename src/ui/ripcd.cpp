@@ -87,6 +87,10 @@ RipCD::RipCD(QWidget* parent) :
   cancel_button_->hide();
   ui_->progress_group->hide();
 
+  connect(ui_->select_all_button, SIGNAL(clicked()), SLOT(SelectAll()));
+  connect(ui_->select_none_button, SIGNAL(clicked()), SLOT(SelectNone()));
+  connect(ui_->invert_selection_button, SIGNAL(clicked()),
+          SLOT(InvertSelection()));
   connect(rip_button_, SIGNAL(clicked()), SLOT(ClickedRipButton()));
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
@@ -406,4 +410,26 @@ void RipCD::SetWorking(bool working) {
   cancel_button_->setVisible(working);
   close_button_->setVisible(!working);
   ui_->progress_group->setVisible(true);
+}
+
+void RipCD::SelectAll() {
+  foreach (QCheckBox* checkbox, checkboxes_) {
+    checkbox->setCheckState(Qt::Checked);
+  }
+}
+
+void RipCD::SelectNone() {
+  foreach (QCheckBox* checkbox, checkboxes_) {
+    checkbox->setCheckState(Qt::Unchecked);
+  }
+}
+
+void RipCD::InvertSelection() {
+  foreach (QCheckBox* checkbox, checkboxes_) {
+    if (checkbox->isChecked()) {
+    checkbox->setCheckState(Qt::Unchecked);
+    } else {
+    checkbox->setCheckState(Qt::Checked);
+    }
+  }
 }
