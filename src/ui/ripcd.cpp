@@ -414,6 +414,8 @@ void RipCD::SetWorking(bool working) {
   rip_button_->setVisible(!working);
   cancel_button_->setVisible(working);
   close_button_->setVisible(!working);
+  ui_->input_group->setEnabled(!working);
+  ui_->output_group->setEnabled(!working);
   ui_->progress_group->setVisible(true);
 }
 
