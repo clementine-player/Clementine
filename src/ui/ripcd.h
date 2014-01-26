@@ -66,6 +66,7 @@ class RipCD: public QDialog {
       const TranscoderPreset& preset) const;
   QString ParseFileFormatString(const QString& file_format, int track_no) const;
   void SetWorking(bool working);
+  void AddDestinationDirectory(QString dir);
 
  signals:
   void RippingComplete();

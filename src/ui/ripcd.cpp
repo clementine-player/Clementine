@@ -106,6 +106,7 @@ RipCD::RipCD(QWidget* parent) :
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
 
   setWindowTitle(tr("Rip CD"));
+  AddDestinationDirectory(QDir::homePath());
 
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   if(!cdio_) {
@@ -380,19 +381,23 @@ void RipCD::AddDestination() {
   if (!dir.isEmpty()) {
     // Keep only a finite number of items in the box.
     while (ui_->destination->count() >= kMaxDestinationItems) {
-      ui_->destination->removeItem(1);  // The oldest folder item.
+      ui_->destination->removeItem(0);  // The oldest item.
     }
+    AddDestinationDirectory(dir);
+  }
+}
 
-    QIcon icon = IconLoader::Load("folder");
-    QVariant data = QVariant::fromValue(dir);
-    // Do not insert duplicates.
-    int duplicate_index = ui_->destination->findData(data);
-    if (duplicate_index == -1) {
-      ui_->destination->addItem(icon, dir, data);
-      ui_->destination->setCurrentIndex(ui_->destination->count() - 1);
-    } else {
-      ui_->destination->setCurrentIndex(duplicate_index);
-    }
+// Adds a directory to the 'destination' combo box.
+void RipCD::AddDestinationDirectory(QString dir) {
+  QIcon icon = IconLoader::Load("folder");
+  QVariant data = QVariant::fromValue(dir);
+  // Do not insert duplicates.
+  int duplicate_index = ui_->destination->findData(data);
+  if (duplicate_index == -1) {
+    ui_->destination->addItem(icon, dir, data);
+    ui_->destination->setCurrentIndex(ui_->destination->count() - 1);
+  } else {
+    ui_->destination->setCurrentIndex(duplicate_index);
   }
 }
 
