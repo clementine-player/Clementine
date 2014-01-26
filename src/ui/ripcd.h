@@ -55,6 +55,8 @@ class RipCD: public QDialog {
   QList<QLineEdit*> track_names_;
   QString last_add_dir_;
   QPushButton* cancel_button_;
+  QPushButton* close_button_;
+  QPushButton* rip_button_;
 
   void WriteWAVHeader(QFile *stream, int32_t i_bytecount);
   int NumTracksToRip();
@@ -63,6 +65,7 @@ class RipCD: public QDialog {
   QString GetOutputFileName(const QString& input,
       const TranscoderPreset& preset) const;
   QString ParseFileFormatString(const QString& file_format, int track_no) const;
+  void SetWorking(bool working);
 
  signals:
   void RippingComplete();

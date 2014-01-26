@@ -76,10 +76,20 @@ RipCD::RipCD(QWidget* parent) :
 
     // Init
   ui_->setupUi(this);
-  cancel_button_ = ui_->button_box->button(QDialogButtonBox::Cancel);
 
-  connect(ui_->ripButton, SIGNAL(clicked()), this, SLOT(ClickedRipButton()));
+  // Add a rip button
+  rip_button_ = ui_->button_box->addButton(
+      tr("Start ripping"), QDialogButtonBox::ActionRole);
+  cancel_button_ = ui_->button_box->button(QDialogButtonBox::Cancel);
+  close_button_ = ui_->button_box->button(QDialogButtonBox::Close);
+
+  // Hide elements
+  cancel_button_->hide();
+  ui_->progress_group->hide();
+
+  connect(rip_button_, SIGNAL(clicked()), SLOT(ClickedRipButton()));
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
+  connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
 
   connect(transcoder_, SIGNAL(JobComplete(QString, bool)), SLOT(JobComplete(QString, bool)));
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
@@ -303,6 +313,7 @@ void RipCD::ThreadedTranscoding() {
 }
 
 void RipCD::ClickedRipButton() {
+  SetWorking(true);
   QtConcurrent::run(this, &RipCD::ThreadClickedRipButton);
 }
 
@@ -333,6 +344,8 @@ void RipCD::AllJobsComplete() {
   // Resets lists
   generated_files_.clear();
   tracks_to_rip_.clear();
+
+  SetWorking(false);
 }
 
 void RipCD::AppendOutput(const QString& filename) {
@@ -381,8 +394,16 @@ void RipCD::AddDestination() {
 
 void RipCD::Cancel() {
   transcoder_->Cancel();
+  SetWorking(false);
 }
 
 bool RipCD::CDIOIsValid() const {
   return (cdio_);
+}
+
+void RipCD::SetWorking(bool working) {
+  rip_button_->setVisible(!working);
+  cancel_button_->setVisible(working);
+  close_button_->setVisible(!working);
+  ui_->progress_group->setVisible(true);
 }
