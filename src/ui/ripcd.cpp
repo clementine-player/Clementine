@@ -77,6 +77,14 @@ RipCD::RipCD(QWidget* parent) :
     // Init
   ui_->setupUi(this);
 
+  // Set column widths in the QTableWidget.
+  ui_->tableWidget->horizontalHeader()->setResizeMode(
+      kCheckboxColumn, QHeaderView::ResizeToContents);
+  ui_->tableWidget->horizontalHeader()->setResizeMode(
+      kTrackNumberColumn, QHeaderView::ResizeToContents);
+  ui_->tableWidget->horizontalHeader()->setResizeMode(
+      kTrackTitleColumn, QHeaderView::Stretch);
+
   // Add a rip button
   rip_button_ = ui_->button_box->addButton(
       tr("Start ripping"), QDialogButtonBox::ActionRole);
