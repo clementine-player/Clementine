@@ -13,7 +13,7 @@ using boost::scoped_ptr;
 
 namespace {
 
-static const char* kServiceName = "Skydrive";
+static const char* kServiceName = "OneDrive";
 static const char* kServiceId = "skydrive";
 static const char* kSettingsGroup = "Skydrive";
 
