@@ -33,13 +33,15 @@
 class CueParser;
 class LibraryBackendInterface;
 class ParserBase;
+class Player;
 class PlaylistParser;
 class PodcastParser;
 
 class SongLoader : public QObject {
   Q_OBJECT
 public:
-  SongLoader(LibraryBackendInterface* library, QObject* parent = 0);
+  SongLoader(LibraryBackendInterface* library, const Player* player,
+             QObject* parent = 0);
   ~SongLoader();
 
   enum Result {
@@ -130,6 +132,7 @@ private:
   bool is_podcast_;
   QByteArray buffer_;
   LibraryBackendInterface* library_;
+  const Player* player_;
 
   boost::shared_ptr<GstElement> pipeline_;
 

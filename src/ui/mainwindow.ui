@@ -424,6 +424,7 @@
     </property>
     <addaction name="action_open_media"/>
     <addaction name="action_open_cd"/>
+    <addaction name="action_rip_audio_cd"/>
     <addaction name="action_add_podcast"/>
     <addaction name="separator"/>
     <addaction name="action_previous_track"/>
@@ -474,9 +475,6 @@
     <addaction name="action_hypnotoad"/>
     <addaction name="action_enterprise"/>
     <addaction name="action_kittens"/>
-    <!-- Hide the console
-    <addaction name="action_console"/>
-    -->
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menu_tools">
@@ -873,6 +871,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+T</string>
+   </property>
+  </action>
+  <action name="action_rip_audio_cd">
+   <property name="text">
+    <string>Rip audio CD...</string>
    </property>
   </action>
  </widget>

@@ -86,6 +86,7 @@ protected:
   int extra_right_padding_;
   bool draw_hint_;
   qreal font_point_size_;
+  bool is_rtl_;
 };
 
 class LineEdit : public QLineEdit,
@@ -108,6 +109,13 @@ public:
 protected:
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
+
+private:
+  bool is_rtl() const { return is_rtl_; }
+  void set_rtl(bool rtl) { is_rtl_ = rtl; }
+
+private slots:
+  void text_changed(const QString& text);
 
 signals:
   void Reset();

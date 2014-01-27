@@ -51,7 +51,7 @@ public:
 protected:
   void SetUp() {
     library_.reset(new MockLibraryBackend);
-    loader_.reset(new SongLoader(library_.get()));
+    loader_.reset(new SongLoader(library_.get(), nullptr));
     loader_->set_timeout(20000);
 
     // the thing we return is not really important

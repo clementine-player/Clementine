@@ -86,6 +86,9 @@
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
 #include "ui/qtsystemtrayicon.h"
+#ifdef HAVE_AUDIOCD
+#include "ui/ripcd.h"
+#endif
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "ui/trackselectiondialog.h"
@@ -345,6 +348,11 @@ MainWindow::MainWindow(Application* app,
   connect(ui_->action_shuffle, SIGNAL(triggered()), app_->playlist_manager(), SLOT(ShuffleCurrent()));
   connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_open_cd, SIGNAL(triggered()), SLOT(AddCDTracks()));
+  #ifdef HAVE_AUDIOCD
+    connect(ui_->action_rip_audio_cd, SIGNAL(triggered()), SLOT(OpenRipCD()));
+  #else
+    ui_->action_rip_audio_cd->setVisible(false);
+  #endif
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
   connect(ui_->action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
@@ -509,6 +517,7 @@ MainWindow::MainWindow(Application* app,
   playlist_copy_to_device_ = playlist_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Copy to device..."), this, SLOT(PlaylistCopyToDevice()));
   playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
   playlist_open_in_browser_ = playlist_menu_->addAction(IconLoader::Load("document-open-folder"), tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
+  playlist_show_in_library_ = playlist_menu_->addAction(IconLoader::Load("edit-find"), tr("Show in library..."), this, SLOT(ShowInLibrary()));
   playlist_menu_->addSeparator();
   playlistitem_actions_separator_ = playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
@@ -689,6 +698,10 @@ MainWindow::MainWindow(Application* app,
   // Load playlists
   app_->playlist_manager()->Init(app_->library_backend(), app_->playlist_backend(),
                                  ui_->playlist_sequence, ui_->playlist);
+
+  // This connection must be done after the playlists have been initialized.
+  connect(this, SIGNAL(StopAfterToggled(bool)),
+	  osd_, SLOT(StopAfterToggle(bool)));
 
   // We need to connect these global shortcuts here after the playlist have been initialized
   connect(global_shortcuts_, SIGNAL(CycleShuffleMode()), app_->playlist_manager()->sequence(), SLOT(CycleShuffleMode()));
@@ -1058,7 +1071,8 @@ void MainWindow::ToggleShowHide() {
 }
 
 void MainWindow::StopAfterCurrent() {
-  app_->playlist_manager()->current()->StopAfter(app_->playlist_manager()->current()->current_row());
+  app_->playlist_manager()->active()->StopAfter(app_->playlist_manager()->active()->current_row());
+  emit StopAfterToggled(app_->playlist_manager()->active()->stop_after_current());
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
@@ -1355,6 +1369,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   ui_->action_edit_value->setVisible(editable);
   ui_->action_remove_from_playlist->setEnabled(!selection.isEmpty());
 
+  playlist_show_in_library_->setVisible(false);
   playlist_copy_to_library_->setVisible(false);
   playlist_move_to_library_->setVisible(false);
   playlist_organise_->setVisible(false);
@@ -1403,6 +1418,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     PlaylistItemPtr item = app_->playlist_manager()->current()->item_at(source_index.row());
     if (item->IsLocalLibraryItem() && item->Metadata().id() != -1) {
       playlist_organise_->setVisible(editable);
+      playlist_show_in_library_->setVisible(editable);
     } else {
       playlist_copy_to_library_->setVisible(editable);
       playlist_move_to_library_->setVisible(editable);
@@ -1662,6 +1678,22 @@ void MainWindow::AddStreamAccepted() {
   AddToPlaylist(data);
 }
 
+
+void MainWindow::OpenRipCD() {
+  #ifdef HAVE_AUDIOCD
+    if (!rip_cd_) {
+      rip_cd_.reset(new RipCD);
+    }
+    if(rip_cd_->CDIOIsValid()) {
+      rip_cd_->show();
+    } else {
+      QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"), tr("Failed reading CD drive"));
+      cdio_fail.exec();
+    }
+  #endif
+}
+
+
 void MainWindow::AddCDTracks() {
   MimeData* data = new MimeData;
   // We are putting empty data, but we specify cdda mimetype to indicate that
@@ -1669,6 +1701,25 @@ void MainWindow::AddCDTracks() {
   data->open_in_new_playlist_ = true;
   data->setData(Playlist::kCddaMimeType, QByteArray());
   AddToPlaylist(data);
+}
+
+void MainWindow::ShowInLibrary() {
+  // Show the first valid selected track artist/album in LibraryView
+  QModelIndexList proxy_indexes = ui_->playlist->view()->selectionModel()->selectedRows();
+  SongList songs;
+
+  foreach (const QModelIndex& proxy_index, proxy_indexes) {
+    QModelIndex index = app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
+    if (app_->playlist_manager()->current()->item_at(index.row())->IsLocalLibraryItem()) {
+      songs << app_->playlist_manager()->current()->item_at(index.row())->Metadata();
+      break;
+    }
+  }
+  QString search;
+  if (!songs.isEmpty()) {
+    search = "artist:" + songs.first().artist() + " album:" + songs.first().album();
+  }
+  library_view_->filter()->ShowInLibrary(search);
 }
 
 void MainWindow::PlaylistRemoveCurrent() {

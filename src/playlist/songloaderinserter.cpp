@@ -23,8 +23,9 @@
 #include "core/songloader.h"
 #include "core/taskmanager.h"
 
-SongLoaderInserter::SongLoaderInserter(
-    TaskManager* task_manager, LibraryBackendInterface* library)
+SongLoaderInserter::SongLoaderInserter(TaskManager* task_manager,
+                                       LibraryBackendInterface* library,
+                                       const Player* player)
     : task_manager_(task_manager),
       destination_(NULL),
       row_(-1),
@@ -32,7 +33,8 @@ SongLoaderInserter::SongLoaderInserter(
       enqueue_(false),
       async_load_id_(0),
       async_progress_(0),
-      library_(library) {
+      library_(library),
+      player_(player) {
 }
 
 SongLoaderInserter::~SongLoaderInserter() {
@@ -53,7 +55,7 @@ void SongLoaderInserter::Load(Playlist *destination,
           destination, SLOT(UpdateItems(const SongList&)));
 
   foreach (const QUrl& url, urls) {
-    SongLoader* loader = new SongLoader(library_, this);
+    SongLoader* loader = new SongLoader(library_, player_, this);
 
     // we're connecting this before we're even sure if this is an async load
     // to avoid race conditions (signal emission before we're listening to it)
@@ -92,7 +94,7 @@ void SongLoaderInserter::LoadAudioCD(Playlist *destination,
   play_now_ = play_now;
   enqueue_ = enqueue;
 
-  SongLoader *loader = new SongLoader(library_, this);
+  SongLoader* loader = new SongLoader(library_, player_, this);
   connect(loader, SIGNAL(LoadFinished(bool)), SLOT(AudioCDTagsLoaded(bool)));
   qLog(Info) << "Loading audio CD...";
   SongLoader::Result ret = loader->LoadAudioCD();

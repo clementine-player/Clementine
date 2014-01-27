@@ -71,11 +71,6 @@ protected:
   void resizeEvent(QResizeEvent* event);
 
 private:
-  // If the width of the given column is less than a sensible threshold, resize
-  // it to make it bigger.  Workaround for a QHeaderView oddity that means a
-  // column can be visible but with a width of 0.
-  void AssertMinimalColumnWidth(int logical);
-
   // Scales column_widths_ values so the total is 1.0.
   void NormaliseWidths(const QList<int>& sections = QList<int>());
 

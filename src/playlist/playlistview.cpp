@@ -1254,3 +1254,24 @@ void PlaylistView::FadePreviousBackgroundImage(qreal value) {
 void PlaylistView::PlayerStopped() {
   CurrentSongChanged(Song(), QString(), QImage());
 }
+
+void PlaylistView::focusInEvent(QFocusEvent* event) {
+  QTreeView::focusInEvent(event);
+
+  if (event->reason() == Qt::TabFocusReason ||
+      event->reason() == Qt::BacktabFocusReason) {
+    // If there's a current item but no selection it probably means the list was
+    // filtered, and the selected item does not match the filter.  If there's
+    // only 1 item in the view it is now impossible to select that item without
+    // using the mouse.
+    const QModelIndex& current = selectionModel()->currentIndex();
+    if (current.isValid() &&
+        selectionModel()->selectedIndexes().isEmpty()) {
+      QItemSelection new_selection(
+          current.sibling(current.row(), 0),
+          current.sibling(current.row(),
+                          current.model()->columnCount(current.parent()) - 1));
+      selectionModel()->select(new_selection, QItemSelectionModel::Select);
+    }
+  }
+}

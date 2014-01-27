@@ -16,13 +16,6 @@
 */
 
 #include "playlistdelegates.h"
-#include "queue.h"
-#include "core/logging.h"
-#include "core/player.h"
-#include "core/utilities.h"
-#include "library/librarybackend.h"
-#include "widgets/trackslider.h"
-#include "ui/iconloader.h"
 
 #include <QDateTime>
 #include <QDir>
@@ -38,6 +31,18 @@
 #include <QToolTip>
 #include <QWhatsThis>
 #include <QtConcurrentRun>
+
+#include "queue.h"
+#include "core/logging.h"
+#include "core/player.h"
+#include "core/utilities.h"
+#include "library/librarybackend.h"
+#include "widgets/trackslider.h"
+#include "ui/iconloader.h"
+
+#ifdef Q_OS_DARWIN
+#include "core/mac_utilities.h"
+#endif  // Q_OS_DARWIN
 
 const int   QueuedItemDelegate::kQueueBoxBorder = 1;
 const int   QueuedItemDelegate::kQueueBoxCornerRadius = 3;
@@ -492,8 +497,14 @@ void SongSourceDelegate::paint(
   const QUrl& url = index.data().toUrl();
   QPixmap pixmap = LookupPixmap(url, option_copy.decorationSize);
 
+  float device_pixel_ratio = 1.0f;
+#ifdef Q_OS_DARWIN
+  QWidget* parent_widget = reinterpret_cast<QWidget*>(parent());
+  device_pixel_ratio = mac::GetDevicePixelRatio(parent_widget);
+#endif
+
   // Draw the pixmap in the middle of the rectangle
-  QRect draw_rect(QPoint(0, 0), option_copy.decorationSize);
+  QRect draw_rect(QPoint(0, 0), option_copy.decorationSize / device_pixel_ratio);
   draw_rect.moveCenter(option_copy.rect.center());
 
   painter->drawPixmap(draw_rect, pixmap);

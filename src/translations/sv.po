@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2013-12-02 17:37+0000\n"
-"Last-Translator: kristian <kristianm24@gmail.com>\n"
+"PO-Revision-Date: 2014-01-27 02:54+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -49,14 +49,13 @@ msgstr " dagar"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_songinfosettingspage.h:186
 #: ../bin/src/ui_playbacksettingspage.h:305
 #: ../bin/src/ui_playbacksettingspage.h:308
 #: ../bin/src/ui_playbacksettingspage.h:328
 msgid " ms"
 msgstr " ms"
 
-#: ../bin/src/ui_songinfosettingspage.h:182
+#: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pt"
 
@@ -69,17 +68,17 @@ msgstr " sekunder"
 msgid " songs"
 msgstr " låtar"
 
-#: widgets/osd.cpp:188
+#: widgets/osd.cpp:193
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 album"
 
-#: core/utilities.cpp:109
+#: core/utilities.cpp:110
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dagar"
 
-#: core/utilities.cpp:130
+#: core/utilities.cpp:131
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 dagar sedan"
@@ -129,8 +128,8 @@ msgstr "%1 spår"
 msgid "%1 transferred"
 msgstr "%1 överfört"
 
-#: widgets/osd.cpp:238 widgets/osd.cpp:243 widgets/osd.cpp:248
-#: widgets/osd.cpp:253 widgets/osd.cpp:258 widgets/osd.cpp:263
+#: widgets/osd.cpp:243 widgets/osd.cpp:248 widgets/osd.cpp:253
+#: widgets/osd.cpp:258 widgets/osd.cpp:263 widgets/osd.cpp:268
 #, qt-format
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev-modul"
@@ -149,17 +148,17 @@ msgstr "%L1 totala uppspelningar"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:207
 #, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n misslyckades"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:202
 #, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n färdig"
 
-#: transcoder/transcodedialog.cpp:192
+#: transcoder/transcodedialog.cpp:197
 #, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n återstår"
@@ -176,11 +175,11 @@ msgstr "&Centrera"
 msgid "&Custom"
 msgstr "A&npassad"
 
-#: ../bin/src/ui_mainwindow.h:730
+#: ../bin/src/ui_mainwindow.h:735
 msgid "&Extras"
 msgstr "Extrafunktioner"
 
-#: ../bin/src/ui_mainwindow.h:729
+#: ../bin/src/ui_mainwindow.h:734
 msgid "&Help"
 msgstr "Hjälp"
 
@@ -197,7 +196,7 @@ msgstr "Dölj..."
 msgid "&Left"
 msgstr "&Vänster"
 
-#: ../bin/src/ui_mainwindow.h:727
+#: ../bin/src/ui_mainwindow.h:732
 msgid "&Music"
 msgstr "Musik"
 
@@ -205,15 +204,15 @@ msgstr "Musik"
 msgid "&None"
 msgstr "I&nga"
 
-#: ../bin/src/ui_mainwindow.h:728
+#: ../bin/src/ui_mainwindow.h:733
 msgid "&Playlist"
 msgstr "Spellista"
 
-#: ../bin/src/ui_mainwindow.h:656
+#: ../bin/src/ui_mainwindow.h:660
 msgid "&Quit"
 msgstr "A&vsluta"
 
-#: ../bin/src/ui_mainwindow.h:694
+#: ../bin/src/ui_mainwindow.h:698
 msgid "&Repeat mode"
 msgstr "Upprepningsläge"
 
@@ -221,7 +220,7 @@ msgstr "Upprepningsläge"
 msgid "&Right"
 msgstr "&Höger"
 
-#: ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:697
 msgid "&Shuffle mode"
 msgstr "Blandningsläge"
 
@@ -229,7 +228,7 @@ msgstr "Blandningsläge"
 msgid "&Stretch columns to fit window"
 msgstr "Justera kolumner så de passar fönstret"
 
-#: ../bin/src/ui_mainwindow.h:731
+#: ../bin/src/ui_mainwindow.h:736
 msgid "&Tools"
 msgstr "Verktyg"
 
@@ -253,7 +252,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:109
+#: core/utilities.cpp:110
 msgid "1 day"
 msgstr "1 dag"
 
@@ -361,7 +360,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:119
+#: widgets/nowplayingwidget.cpp:127
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ÄRAD VARE HYPNOTOAD"
 
@@ -374,11 +373,11 @@ msgstr "Avbryt"
 msgid "About %1"
 msgstr "Om %1"
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:681
 msgid "About Clementine..."
 msgstr "Om Clementine..."
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:716
 msgid "About Qt..."
 msgstr "Om Qt..."
 
@@ -426,31 +425,31 @@ msgstr "Lägg till en annan ström..."
 msgid "Add directory..."
 msgstr "Lägg till katalog..."
 
-#: ui/mainwindow.cpp:1603
+#: ui/mainwindow.cpp:1623
 msgid "Add file"
 msgstr "Lägg till fil"
 
-#: ../bin/src/ui_mainwindow.h:723
+#: ../bin/src/ui_mainwindow.h:727
 msgid "Add file to transcoder"
 msgstr "Lägg till fil till transkodaren"
 
-#: ../bin/src/ui_mainwindow.h:721
+#: ../bin/src/ui_mainwindow.h:725
 msgid "Add file(s) to transcoder"
 msgstr "Lägg till fil(er) till transkodaren"
 
-#: ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Add file..."
 msgstr "Lägg till fil..."
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:219
 msgid "Add files to transcode"
 msgstr "Lägg till filer för omkodning"
 
-#: ui/mainwindow.cpp:1631
+#: transcoder/transcodedialog.cpp:281 ui/mainwindow.cpp:1651 ui/ripcd.cpp:386
 msgid "Add folder"
 msgstr "Lägg till mapp"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:702
 msgid "Add folder..."
 msgstr "Lägg till mapp..."
 
@@ -462,7 +461,7 @@ msgstr "Lägg till mapp..."
 msgid "Add podcast"
 msgstr "Lägg till podsändning"
 
-#: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:719
+#: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:723
 msgid "Add podcast..."
 msgstr "Lägg till podsändning..."
 
@@ -538,7 +537,7 @@ msgstr "Lägg till etikett för spårnummer"
 msgid "Add song year tag"
 msgstr "Lägg till etikett för år"
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:687
 msgid "Add stream..."
 msgstr "Lägg till ström..."
 
@@ -550,7 +549,7 @@ msgstr "Lägg till i Grooveshark-favoriter"
 msgid "Add to Grooveshark playlists"
 msgstr "Lägg till i Grooveshark-spellistor"
 
-#: ui/mainwindow.cpp:1428
+#: ui/mainwindow.cpp:1448
 msgid "Add to another playlist"
 msgstr "Lägg till i en annan spellista"
 
@@ -566,7 +565,7 @@ msgstr "Lägg till kön"
 msgid "Add wiimotedev action"
 msgstr "Lägg till Wiimotedev-åtgärd"
 
-#: ../bin/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_transcodedialog.h:209
 msgid "Add..."
 msgstr "Lägg till..."
 
@@ -611,12 +610,12 @@ msgstr "Efter "
 msgid "After copying..."
 msgstr "Efter kopiering..."
 
-#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
+#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
-#: ../bin/src/ui_trackselectiondialog.h:209
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
 msgid "Album"
 msgstr "Album"
 
@@ -624,9 +623,9 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (lämplig ljudstyrka för alla spår)"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
-#: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:688
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:58
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
+#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
 msgstr "Albumartist"
 
@@ -646,11 +645,11 @@ msgstr "Album med omslag"
 msgid "Albums without covers"
 msgstr "Album utan omslag"
 
-#: ui/mainwindow.cpp:155
+#: ui/mainwindow.cpp:160
 msgid "All Files (*)"
 msgstr "Alla filer (*)"
 
-#: ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_mainwindow.h:693
 msgid "All Glory to the Hypnotoad!"
 msgstr "All Glory to the Hypnotoad!"
 
@@ -691,7 +690,7 @@ msgstr "Tillåt nedladdningar"
 msgid "Allow mid/side encoding"
 msgstr "Tillåt mellan-/sidokodning"
 
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Alongside the originals"
 msgstr "Tillsammans med originalen"
 
@@ -735,7 +734,7 @@ msgstr "Och:"
 msgid "Angry"
 msgstr "Arg"
 
-#: ../bin/src/ui_songinfosettingspage.h:180
+#: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Utseende"
@@ -758,7 +757,7 @@ msgstr "Lägg till i spellistan"
 msgid "Apply compression to prevent clipping"
 msgstr "Tillämpa komprimering för att förhindra distorsion"
 
-#: ui/equalizer.cpp:197
+#: ui/equalizer.cpp:201
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Är du säker på att du vill ta bort förinställningen \"%1\"?"
@@ -777,17 +776,17 @@ msgid ""
 "the songs of your library?"
 msgstr "Är du säker på att du vill skriva låtstatistik till låtfilerna på alla låtar i ditt musikbibliotek?"
 
-#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
 #: ../bin/src/ui_trackselectiondialog.h:210
-#: ../bin/src/ui_lastfmstationdialog.h:96
+#: ../bin/src/ui_lastfmstationdialog.h:96 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "Artist"
 
-#: ui/mainwindow.cpp:242
+#: ui/mainwindow.cpp:248
 msgid "Artist info"
 msgstr "Artistinfo"
 
@@ -803,7 +802,7 @@ msgstr "Artist-taggar"
 msgid "Artist's initial"
 msgstr "Artistens initialer"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Ljudformat"
 
@@ -849,7 +848,7 @@ msgstr "Genomsnittlig bildstorlek"
 msgid "BBC Podcasts"
 msgstr "BBC podsändningar"
 
-#: playlist/playlist.cpp:1225 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1228 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -878,7 +877,7 @@ msgstr "Säkerhetskopiera databasen"
 msgid "Balance"
 msgstr "Balans"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:666
 msgid "Ban"
 msgstr "Blockera"
 
@@ -907,11 +906,13 @@ msgstr "Bästa"
 msgid "Biography from %1"
 msgstr "Biografi från %1"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1229 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Bithastighet"
 
-#: ui/organisedialog.cpp:69 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:137
+#: ../bin/src/ui_groupbydialog.h:151 ../bin/src/ui_groupbydialog.h:165
+#: ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -1011,7 +1012,7 @@ msgstr "Byte från/till Monoljud börjar gälla från nästa låt"
 msgid "Check for new episodes"
 msgstr "Kolla efter nya avsnitt"
 
-#: ui/mainwindow.cpp:590
+#: ui/mainwindow.cpp:602
 msgid "Check for updates..."
 msgstr "Leta efter uppdateringar..."
 
@@ -1043,7 +1044,7 @@ msgstr "Välj hur spellistan ska sorteras och hur många låtar den ska innehål
 msgid "Choose podcast download directory"
 msgstr "Välj nedladdningsmapp för podsändningar"
 
-#: ../bin/src/ui_songinfosettingspage.h:188
+#: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr "Välj webbplatserna du vill att Clementine ska använda vid sökning efter låttexter."
@@ -1056,16 +1057,16 @@ msgstr "Klassisk"
 msgid "Cleaning up"
 msgstr "Rensar upp"
 
-#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
+#: transcoder/transcodedialog.cpp:62 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Rensa"
 
-#: ../bin/src/ui_mainwindow.h:664 ../bin/src/ui_mainwindow.h:666
+#: ../bin/src/ui_mainwindow.h:668 ../bin/src/ui_mainwindow.h:670
 msgid "Clear playlist"
 msgstr "Rensa spellistan"
 
-#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:647
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:651
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1156,8 +1157,8 @@ msgstr "Klicka här för att favorisera denna spellista så att den sparas och f
 msgid "Click to toggle between remaining time and total time"
 msgstr "Klicka för att växla mellan återstående tid och total tid"
 
-#: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
+#: ../bin/src/ui_googledrivesettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1195,7 +1196,7 @@ msgstr "Färger"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista, separerad med komma, över class:level; level är 0-3"
 
-#: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
+#: playlist/playlist.cpp:1238 smartplaylists/searchterm.cpp:288
 #: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Kommentar"
@@ -1204,13 +1205,13 @@ msgstr "Kommentar"
 msgid "Complete tags automatically"
 msgstr "Fyll i etiketter automatiskt"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:720
 msgid "Complete tags automatically..."
 msgstr "Fyll i etiketter automatiskt..."
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:59
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:689
+#: playlist/playlist.cpp:1218 ui/organisedialog.cpp:59
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
+#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
 msgstr "Kompositör"
 
@@ -1247,7 +1248,7 @@ msgstr "Konfigurera Subsonic..."
 msgid "Configure global search..."
 msgstr "Ställ in Global sökning..."
 
-#: ui/mainwindow.cpp:472
+#: ui/mainwindow.cpp:483
 msgid "Configure library..."
 msgstr "Konfigurera biblioteket..."
 
@@ -1284,7 +1285,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Uppkopplingen har avbrutits, kontrollera serverns URL. Exempel: http://localhost:4040/"
 
-#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:696
 msgid "Console"
 msgstr "Konsoll"
 
@@ -1304,12 +1305,12 @@ msgstr "Konvertera all musik som enheten inte kan spela upp"
 msgid "Copy to clipboard"
 msgstr "Kopiera till klippbordet"
 
-#: library/libraryview.cpp:389 ui/mainwindow.cpp:506
+#: library/libraryview.cpp:389 ui/mainwindow.cpp:517
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiera till enhet..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:503
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:514
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Kopiera till biblioteket..."
@@ -1331,14 +1332,14 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Kunde inte skapa GStreamer-elementet \"%1\" - kontrollera att du har alla GStreamer-insticken som krävs installerade"
 
-#: transcoder/transcoder.cpp:432
+#: transcoder/transcoder.cpp:434
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Kunde inte hitta en muxer för %1, kontrollera att du har de korrekta GStreamer-insticken installerade"
 
-#: transcoder/transcoder.cpp:426
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1355,7 +1356,7 @@ msgid "Couldn't open output file %1"
 msgstr "Kunde inte öppna utdatafilen %1"
 
 #: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
-#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:691
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "Omslagshanterare"
@@ -1399,11 +1400,11 @@ msgstr "Korstona vid automatiskt byte av spår"
 msgid "Cross-fade when changing tracks manually"
 msgstr "Korstona vid manuellt byte av spår"
 
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:663
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
 
-#: ../bin/src/ui_mainwindow.h:663
+#: ../bin/src/ui_mainwindow.h:667
 msgid "Ctrl+B"
 msgstr "Ctrl+B"
 
@@ -1411,63 +1412,63 @@ msgstr "Ctrl+B"
 msgid "Ctrl+Down"
 msgstr "Ctrl+Down"
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
-#: ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
-#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:668
+#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:672
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:665
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: ../bin/src/ui_mainwindow.h:714
+#: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:706
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_mainwindow.h:680
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: ../bin/src/ui_mainwindow.h:657
+#: ../bin/src/ui_mainwindow.h:661
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#: ../bin/src/ui_mainwindow.h:706
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
-#: ../bin/src/ui_mainwindow.h:725
+#: ../bin/src/ui_mainwindow.h:729
 msgid "Ctrl+Shift+T"
 msgstr "Ctrl+Shift+T"
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:721
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
@@ -1510,11 +1511,11 @@ msgid ""
 "recover your database"
 msgstr "Databas-korruption upptäckt. Läs https://code.google.com/p/clementine-player/wiki/DatabaseCorruption för instruktioner om hur du återställer din databas"
 
-#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1236 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Datum skapad"
 
-#: playlist/playlist.cpp:1232 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1235 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Datum ändrad"
 
@@ -1564,7 +1565,7 @@ msgid "Delete downloaded data"
 msgstr "Ta bort nedladdad data"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1905 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1960 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Ta bort filer"
 
@@ -1572,7 +1573,7 @@ msgstr "Ta bort filer"
 msgid "Delete from device..."
 msgstr "Ta bort från enhet..."
 
-#: library/libraryview.cpp:391 ui/mainwindow.cpp:507
+#: library/libraryview.cpp:391 ui/mainwindow.cpp:518
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Ta bort från disk..."
@@ -1581,7 +1582,7 @@ msgstr "Ta bort från disk..."
 msgid "Delete played episodes"
 msgstr "Ta bort uppspelade avsnitt"
 
-#: ui/equalizer.cpp:196 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:200 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Ta bort förinställning"
 
@@ -1597,19 +1598,20 @@ msgstr "Ta bort originalfilerna"
 msgid "Deleting files"
 msgstr "Tar bort filer"
 
-#: ui/mainwindow.cpp:1363
+#: ui/mainwindow.cpp:1382
 msgid "Dequeue selected tracks"
 msgstr "Avköa valda spår"
 
-#: ui/mainwindow.cpp:1361
+#: ui/mainwindow.cpp:1380
 msgid "Dequeue track"
 msgstr "Avköa spår"
 
-#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_transcodedialog.h:214 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Mål"
 
-#: ../bin/src/ui_transcodedialog.h:218
+#: ../bin/src/ui_transcodedialog.h:221
 msgid "Details..."
 msgstr "Detaljer..."
 
@@ -1629,9 +1631,13 @@ msgstr "Enhetsnamn"
 msgid "Device properties..."
 msgstr "Enhetsinställningar..."
 
-#: ui/mainwindow.cpp:239
+#: ui/mainwindow.cpp:245
 msgid "Devices"
 msgstr "Enheter"
+
+#: ../bin/src/ui_ripcd.h:300
+msgid "Dialog"
+msgstr ""
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1654,7 +1660,7 @@ msgid "Direct internet connection"
 msgstr "Direkt Internetanslutning"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
-#: ../bin/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:207
 msgid "Directory"
 msgstr "Katalog"
 
@@ -1671,8 +1677,8 @@ msgstr "Inaktivera moodbar-generering"
 msgid "Disabled"
 msgstr "Inaktiverat"
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:63
-#: ../bin/src/ui_edittagdialog.h:685
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:63
+#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Skiva"
 
@@ -1689,7 +1695,7 @@ msgstr "Visningsalternativ"
 msgid "Display the on-screen-display"
 msgstr "Visa on-screen-display"
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:719
 msgid "Do a full library rescan"
 msgstr "Gör en fullständig omsökning av biblioteket"
 
@@ -1701,7 +1707,7 @@ msgstr "Konvertera inte någon musik"
 msgid "Do not overwrite"
 msgstr "Skriv ej över"
 
-#: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
+#: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "Upprepa inte"
 
@@ -1709,7 +1715,7 @@ msgstr "Upprepa inte"
 msgid "Don't show in various artists"
 msgstr "Visa inte i diverse artister"
 
-#: widgets/osd.cpp:273 ../bin/src/ui_playlistsequence.h:107
+#: widgets/osd.cpp:278 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Blanda inte"
 
@@ -1807,6 +1813,14 @@ msgstr "Dra för att ändra position"
 msgid "Dropbox"
 msgstr "Dropbox"
 
+#: ui/equalizer.cpp:119
+msgid "Dubstep"
+msgstr ""
+
+#: ../bin/src/ui_ripcd.h:309
+msgid "Duration"
+msgstr ""
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
 msgstr "Dynamisk läge är på"
@@ -1819,12 +1833,12 @@ msgstr "Dynamisk slumpmässig blandning"
 msgid "Edit smart playlist..."
 msgstr "Redigera smart spellista..."
 
-#: ui/mainwindow.cpp:1396
+#: ui/mainwindow.cpp:1415
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Redigera etikett \"%1\"..."
 
-#: ../bin/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Edit tag..."
 msgstr "Redigera tagg..."
 
@@ -1837,7 +1851,7 @@ msgid "Edit track information"
 msgstr "Redigera spårinformation"
 
 #: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Edit track information..."
 msgstr "Redigera spårinformation..."
 
@@ -1926,7 +1940,7 @@ msgstr "Ange söktermer här"
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Skriv in webbadressen till en radiostation på Internet:"
 
-#: playlist/playlistlistcontainer.cpp:171
+#: playlist/playlistlistcontainer.cpp:172
 msgid "Enter the name of the folder"
 msgstr "Ange katalogens namn"
 
@@ -1938,7 +1952,7 @@ msgstr "Ange detta IP-nummer i Appen för att ansluta till Clementine."
 msgid "Entire collection"
 msgstr "Hela samlingen"
 
-#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:700
 msgid "Equalizer"
 msgstr "Equalizer"
 
@@ -1952,7 +1966,7 @@ msgstr "Motsvarar --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1017
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1857 ui/mainwindow.cpp:1973
+#: ui/mainwindow.cpp:1690 ui/mainwindow.cpp:1912 ui/mainwindow.cpp:2028
 msgid "Error"
 msgstr "Fel"
 
@@ -1972,7 +1986,7 @@ msgstr "Fel vid borttagning av låtar"
 msgid "Error downloading Spotify plugin"
 msgstr "Fel vid hämtning av Spotify-insticket"
 
-#: playlist/songloaderinserter.cpp:71 playlist/songloaderinserter.cpp:133
+#: playlist/songloaderinserter.cpp:73 playlist/songloaderinserter.cpp:135
 #, qt-format
 msgid "Error loading %1"
 msgstr "Fel vid insläsning av %1"
@@ -1982,12 +1996,12 @@ msgstr "Fel vid insläsning av %1"
 msgid "Error loading di.fm playlist"
 msgstr "Fel vid laddning av di.fm spellista"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Fel vid bearbetning av %1: %2"
 
-#: playlist/songloaderinserter.cpp:100
+#: playlist/songloaderinserter.cpp:102
 msgid "Error while loading audio CD"
 msgstr "Fel vid läsning av ljud-CD"
 
@@ -2065,27 +2079,27 @@ msgstr "Exporteringen är färdig"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Exporterat %1 omslag av %2 (%3 överhoppade)"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:682
 msgid "F1"
 msgstr "F1"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:678
 msgid "F2"
 msgstr "F2"
 
-#: ../bin/src/ui_mainwindow.h:649
+#: ../bin/src/ui_mainwindow.h:653
 msgid "F5"
 msgstr "F5"
 
-#: ../bin/src/ui_mainwindow.h:651
+#: ../bin/src/ui_mainwindow.h:655
 msgid "F6"
 msgstr "F6"
 
-#: ../bin/src/ui_mainwindow.h:653
+#: ../bin/src/ui_mainwindow.h:657
 msgid "F7"
 msgstr "F7"
 
-#: ../bin/src/ui_mainwindow.h:655
+#: ../bin/src/ui_mainwindow.h:659
 msgid "F8"
 msgstr "F8"
 
@@ -2111,6 +2125,10 @@ msgstr "Toning"
 #: ../bin/src/ui_playbacksettingspage.h:307
 msgid "Fading duration"
 msgstr "Toningslängd"
+
+#: ui/mainwindow.cpp:1690
+msgid "Failed reading CD drive"
+msgstr ""
 
 #: podcasts/gpoddertoptagspage.cpp:76
 msgid "Failed to fetch directory"
@@ -2163,6 +2181,10 @@ msgstr "Hämtar bibliotek från Subsonic"
 msgid "Fetching cover error"
 msgstr "Fel vid hämtning av omslag"
 
+#: ../bin/src/ui_ripcd.h:320
+msgid "File Format"
+msgstr ""
+
 #: ui/organisedialog.cpp:71
 msgid "File extension"
 msgstr "Filändelse"
@@ -2171,33 +2193,33 @@ msgstr "Filändelse"
 msgid "File formats"
 msgstr "Filformat"
 
-#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Filnamn"
 
-#: playlist/playlist.cpp:1229
+#: playlist/playlist.cpp:1232
 msgid "File name (without path)"
 msgstr "Filnamn (utan sökväg)"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Filstorlek"
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
+#: playlist/playlist.cpp:1234 ../bin/src/ui_groupbydialog.h:133
+#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
 msgstr "Filtyp"
 
-#: ../bin/src/ui_transcodedialog.h:206
+#: ../bin/src/ui_transcodedialog.h:208
 msgid "Filename"
 msgstr "Filnamn"
 
-#: ui/mainwindow.cpp:236
+#: ui/mainwindow.cpp:242
 msgid "Files"
 msgstr "Filer"
 
-#: ../bin/src/ui_transcodedialog.h:203
+#: ../bin/src/ui_transcodedialog.h:205
 msgid "Files to transcode"
 msgstr "Filer som skall omkodas"
 
@@ -2221,7 +2243,7 @@ msgstr "Första nivån"
 msgid "Flac"
 msgstr "FLAC"
 
-#: ../bin/src/ui_songinfosettingspage.h:181
+#: ../bin/src/ui_songinfosettingspage.h:156
 msgid "Font size"
 msgstr "Typsnittsstorlek"
 
@@ -2244,6 +2266,7 @@ msgid ""
 "to rescan all the songs again next time you connect it."
 msgstr "En enhet tas bort från listan om den glöms och Clementine kommer att behöva söka av alla låtar igen nästa gång du ansluter den."
 
+#: ../bin/src/ui_deviceviewcontainer.h:98
 #: ../bin/src/ui_searchproviderstatuswidget.h:94
 #: ../bin/src/ui_suggestionwidget.h:70 ../bin/src/ui_icecastfilterwidget.h:74
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
@@ -2288,15 +2311,15 @@ msgstr "Vänner"
 msgid "Frozen"
 msgstr "Frusen"
 
-#: ui/equalizer.cpp:118
+#: ui/equalizer.cpp:120
 msgid "Full Bass"
 msgstr "Full bas"
 
-#: ui/equalizer.cpp:120
+#: ui/equalizer.cpp:122
 msgid "Full Bass + Treble"
 msgstr "Full bas + diskant"
 
-#: ui/equalizer.cpp:119
+#: ui/equalizer.cpp:121
 msgid "Full Treble"
 msgstr "Full diskant"
 
@@ -2312,9 +2335,10 @@ msgstr "Allmänt"
 msgid "General settings"
 msgstr "Allmänna inställningar"
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:66
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:66
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Genre"
 
@@ -2346,11 +2370,11 @@ msgstr "Ge den ett namn:"
 msgid "Go"
 msgstr "Starta"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Go to next playlist tab"
 msgstr "Gå till nästa spellisteflik"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:712
 msgid "Go to previous playlist tab"
 msgstr "Gå till föregående spellisteflik"
 
@@ -2420,7 +2444,7 @@ msgstr "Gruppera efter genre/album"
 msgid "Group by Genre/Artist/Album"
 msgstr "Gruppera efter genre/artist/album"
 
-#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1220 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr "Gruppera"
@@ -2514,12 +2538,12 @@ msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:146
+#: core/utilities.cpp:147
 #, qt-format
 msgid "In %1 days"
 msgstr "Om %1 dagar"
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Om %1 veckor"
@@ -2575,6 +2599,10 @@ msgstr "Indexerar %1"
 msgid "Information"
 msgstr "Information"
 
+#: ../bin/src/ui_ripcd.h:301
+msgid "Input options"
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:203
 msgid "Insert..."
 msgstr "Infoga..."
@@ -2587,7 +2615,7 @@ msgstr "Installerad"
 msgid "Integrity check"
 msgstr "Integritetskontroll"
 
-#: ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:244
 msgid "Internet"
 msgstr "Internet"
 
@@ -2627,6 +2655,10 @@ msgstr "Felaktig sessionsnyckel"
 msgid "Invalid username and/or password"
 msgstr "Fel användarnamn och/eller lösenord"
 
+#: ../bin/src/ui_ripcd.h:312
+msgid "Invert Selection"
+msgstr ""
+
 #: internet/jamendoservice.cpp:127
 msgid "Jamendo"
 msgstr "Jamendo"
@@ -2651,7 +2683,7 @@ msgstr "Jamendos favoritspår för veckan"
 msgid "Jamendo database"
 msgstr "Jamendos databas"
 
-#: ../bin/src/ui_mainwindow.h:699
+#: ../bin/src/ui_mainwindow.h:703
 msgid "Jump to the currently playing track"
 msgstr "Hoppa till spåret som spelas just nu"
 
@@ -2675,7 +2707,7 @@ msgstr "Fortsätt köra i bakgrunden när fönstret är stängt"
 msgid "Keep the original files"
 msgstr "Behåll originalfilerna"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:695
 msgid "Kittens"
 msgstr "Kittens"
 
@@ -2683,15 +2715,15 @@ msgstr "Kittens"
 msgid "Language"
 msgstr "Språk"
 
-#: ui/equalizer.cpp:121
+#: ui/equalizer.cpp:123
 msgid "Laptop/Headphones"
 msgstr "Laptop/hörlurar"
 
-#: ui/equalizer.cpp:122
+#: ui/equalizer.cpp:124
 msgid "Large Hall"
 msgstr "Stor hall"
 
-#: widgets/nowplayingwidget.cpp:91
+#: widgets/nowplayingwidget.cpp:94
 msgid "Large album cover"
 msgstr "Stort albumomslag"
 
@@ -2699,7 +2731,7 @@ msgstr "Stort albumomslag"
 msgid "Large sidebar"
 msgstr "Stor sidopanel"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1222
+#: library/library.cpp:71 playlist/playlist.cpp:1225
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Senast spelad"
@@ -2782,12 +2814,12 @@ msgstr "Lämna tomt för standardvärdet. Exempel: \"/dev/dsp\", \"front\", etc.
 msgid "Left"
 msgstr "Vänster"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Speltid"
 
-#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:235
+#: ui/mainwindow.cpp:231 ui/mainwindow.cpp:241
 msgid "Library"
 msgstr "Bibliotek"
 
@@ -2795,7 +2827,7 @@ msgstr "Bibliotek"
 msgid "Library advanced grouping"
 msgstr "Avancerad bibliotekgruppering"
 
-#: ui/mainwindow.cpp:2090
+#: ui/mainwindow.cpp:2145
 msgid "Library rescan notice"
 msgstr "Notis om omsökning av biblioteket"
 
@@ -2812,7 +2844,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Lyssna på Groovesharklåtar som baseras efter vad du tidigare lyssnat på."
 
-#: ui/equalizer.cpp:123
+#: ui/equalizer.cpp:125
 msgid "Live"
 msgstr "Live"
 
@@ -2828,7 +2860,7 @@ msgstr "Ladda omslag från URL"
 msgid "Load cover from URL..."
 msgstr "Ladda omslag från URL..."
 
-#: ui/albumcoverchoicecontroller.cpp:91
+#: ui/albumcoverchoicecontroller.cpp:98
 msgid "Load cover from disk"
 msgstr "Ladda omslag från hårddisk"
 
@@ -2840,7 +2872,7 @@ msgstr "Läs in omslagsbild från disk..."
 msgid "Load playlist"
 msgstr "Läs in spellista"
 
-#: ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Load playlist..."
 msgstr "Läs in spellista..."
 
@@ -2869,11 +2901,11 @@ msgstr "Laddar låtar"
 msgid "Loading stream"
 msgstr "Läser in ström"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:233
+#: playlist/songloaderinserter.cpp:81 ui/edittagdialog.cpp:233
 msgid "Loading tracks"
 msgstr "Läser in spår"
 
-#: playlist/songloaderinserter.cpp:139
+#: playlist/songloaderinserter.cpp:141
 msgid "Loading tracks info"
 msgstr "Laddar låtinformation"
 
@@ -2892,10 +2924,10 @@ msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:131
-#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Inloggning"
 
@@ -2907,7 +2939,7 @@ msgstr "Misslyckad inloggning"
 msgid "Long term prediction profile (LTP)"
 msgstr "Långsiktig förutsägelseprofil (LTP)"
 
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:664
 msgid "Love"
 msgstr "Älska"
 
@@ -2925,7 +2957,7 @@ msgstr "Låg (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Låg komplexitetprofil (LC)"
 
-#: ../bin/src/ui_songinfosettingspage.h:187
+#: ../bin/src/ui_songinfosettingspage.h:159
 msgid "Lyrics"
 msgstr "Låttexter"
 
@@ -2962,7 +2994,7 @@ msgstr "Magnatune"
 msgid "Magnatune Download"
 msgstr "Magnatude-hämtning"
 
-#: widgets/osd.cpp:190
+#: widgets/osd.cpp:195
 msgid "Magnatune download finished"
 msgstr "Magnatude-hämtning slutförd"
 
@@ -2970,7 +3002,7 @@ msgstr "Magnatude-hämtning slutförd"
 msgid "Main profile (MAIN)"
 msgstr "Huvudprofil (MAIN)"
 
-#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:690
+#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:694
 msgid "Make it so!"
 msgstr "Gör så!"
 
@@ -3053,7 +3085,7 @@ msgstr "Mono uppspeling"
 msgid "Months"
 msgstr "Månader"
 
-#: playlist/playlist.cpp:1237
+#: playlist/playlist.cpp:1240
 msgid "Mood"
 msgstr "Stämning"
 
@@ -3079,20 +3111,20 @@ msgid "Mount points"
 msgstr "Monteringspunkter"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:149
-#: ../bin/src/ui_queuemanager.h:131 ../bin/src/ui_songinfosettingspage.h:190
+#: ../bin/src/ui_queuemanager.h:131 ../bin/src/ui_songinfosettingspage.h:162
 msgid "Move down"
 msgstr "Flytta nedåt"
 
-#: ui/mainwindow.cpp:504 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:515 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "Flytta till biblioteket..."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:148
-#: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
+#: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:161
 msgid "Move up"
 msgstr "Flytta uppåt"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1605
+#: transcoder/transcodedialog.cpp:221 ui/mainwindow.cpp:1625
 msgid "Music"
 msgstr "Musik"
 
@@ -3100,7 +3132,7 @@ msgstr "Musik"
 msgid "Music Library"
 msgstr "Musikbibliotek"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:717
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Tyst"
@@ -3142,7 +3174,7 @@ msgid "My Recommendations"
 msgstr "Mina rekommendationer"
 
 #: internet/groovesharkservice.cpp:1245 internet/groovesharkservice.cpp:1338
-#: ui/equalizer.cpp:178 ../bin/src/ui_deviceproperties.h:369
+#: ui/equalizer.cpp:182 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -3161,10 +3193,6 @@ msgstr "Snävt band (NB)"
 msgid "Neighbors"
 msgstr "Grannar"
 
-#: ../bin/src/ui_songinfosettingspage.h:184
-msgid "Network"
-msgstr "Nätverk"
-
 #: ../bin/src/ui_networkproxysettingspage.h:157
 msgid "Network Proxy"
 msgstr "Nätverksproxy"
@@ -3173,7 +3201,7 @@ msgstr "Nätverksproxy"
 msgid "Network Remote"
 msgstr "Fjärrstyr över nätverk"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:487
+#: playlist/playlistdelegates.cpp:304 ui/edittagdialog.cpp:487
 msgid "Never"
 msgstr "Aldrig"
 
@@ -3187,12 +3215,12 @@ msgid "Never start playing"
 msgstr "Starta aldrig uppspelning"
 
 #: playlist/playlistlistcontainer.cpp:72
-#: playlist/playlistlistcontainer.cpp:170
+#: playlist/playlistlistcontainer.cpp:171
 #: ../bin/src/ui_playlistlistcontainer.h:128
 msgid "New folder"
 msgstr "Ny mapp"
 
-#: ui/mainwindow.cpp:1445 ../bin/src/ui_mainwindow.h:701
+#: ui/mainwindow.cpp:1465 ../bin/src/ui_mainwindow.h:705
 msgid "New playlist"
 msgstr "Ny spellista"
 
@@ -3216,12 +3244,12 @@ msgstr "Nyaste spåren"
 msgid "Next"
 msgstr "Nästa"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:658
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Nästa spår"
 
-#: core/utilities.cpp:148
+#: core/utilities.cpp:149
 msgid "Next week"
 msgstr "Nästa vecka"
 
@@ -3250,12 +3278,12 @@ msgstr "Inga träffar hittades. Töm sökrutan för att visa hela spellistan ige
 msgid "No short blocks"
 msgstr "Inga korta block"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:141
-#: ../bin/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
+#: ../bin/src/ui_groupbydialog.h:156
 msgid "None"
 msgstr "Inga"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1858 ui/mainwindow.cpp:1974
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1913 ui/mainwindow.cpp:2029
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ingen av de valda låtarna lämpar sig för kopiering till en enhet"
 
@@ -3320,6 +3348,10 @@ msgstr "Spelas just nu"
 msgid "OSD Preview"
 msgstr "Förhandsvisning av notifiering"
 
+#: widgets/osd.cpp:171
+msgid "Off"
+msgstr ""
+
 #: core/song.cpp:344
 msgid "Ogg Flac"
 msgstr "Ogg FLAC"
@@ -3336,6 +3368,10 @@ msgstr "Ogg Speex"
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
+
+#: widgets/osd.cpp:171
+msgid "On"
+msgstr ""
 
 #: ../bin/src/ui_networkremotesettingspage.h:182
 msgid ""
@@ -3365,7 +3401,7 @@ msgstr "Opacitet"
 msgid "Open %1 in browser"
 msgstr "Öppna %1 i webbläsare"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Open &audio CD..."
 msgstr "Öppna &ljud-CD..."
 
@@ -3381,7 +3417,7 @@ msgstr "Öppna OPML fil..."
 msgid "Open device"
 msgstr "Öppna enhet"
 
-#: ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:689
 msgid "Open file..."
 msgstr "Öppna fil..."
 
@@ -3394,6 +3430,10 @@ msgstr "Öppna i Google Drive"
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:219
 msgid "Open in new playlist"
 msgstr "Öppna i ny spellista"
+
+#: songinfo/echonestbiographies.cpp:96
+msgid "Open in your browser"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:169
 #: ../bin/src/ui_globalshortcutssettingspage.h:171
@@ -3412,7 +3452,7 @@ msgstr "Optimera för bithastighet"
 msgid "Optimize for quality"
 msgstr "Optimera för kvalitet"
 
-#: ../bin/src/ui_transcodedialog.h:211
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Alternativ..."
 
@@ -3424,7 +3464,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organisera filer"
 
-#: library/libraryview.cpp:387 ui/mainwindow.cpp:505
+#: library/libraryview.cpp:387 ui/mainwindow.cpp:516
 msgid "Organise files..."
 msgstr "Organisera filer..."
 
@@ -3448,7 +3488,7 @@ msgstr "Utgång"
 msgid "Output device"
 msgstr "Utgångsenhet"
 
-#: ../bin/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_ripcd.h:318
 msgid "Output options"
 msgstr "Utdataalternativ"
 
@@ -3476,7 +3516,7 @@ msgstr "Ägare"
 msgid "Parsing Jamendo catalogue"
 msgstr "Sorterar Jamendos katalog"
 
-#: ui/equalizer.cpp:124
+#: ui/equalizer.cpp:126
 msgid "Party"
 msgstr "Party"
 
@@ -3489,7 +3529,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Lösenord"
 
-#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:854 ui/mainwindow.cpp:1286
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:871 ui/mainwindow.cpp:1304
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Gör paus"
@@ -3502,7 +3542,7 @@ msgstr "Gör paus i uppspelning"
 msgid "Paused"
 msgstr "Pausad"
 
-#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1219 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr "Artist"
@@ -3515,9 +3555,9 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Vanlig sidorad"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:487 ui/mainwindow.cpp:822
-#: ui/mainwindow.cpp:841 ui/mainwindow.cpp:1289 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:498 ui/mainwindow.cpp:839
+#: ui/mainwindow.cpp:858 ui/mainwindow.cpp:1307 ui/qtsystemtrayicon.cpp:166
+#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
 msgstr "Spela upp"
@@ -3530,7 +3570,7 @@ msgstr "Spela upp artist eller tagg"
 msgid "Play artist radio..."
 msgstr "Spela upp artistradio..."
 
-#: playlist/playlist.cpp:1220 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Antal uppspelningar"
 
@@ -3567,13 +3607,13 @@ msgstr "Uppspelning"
 msgid "Player options"
 msgstr "Spelaralternativ"
 
-#: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:227
+#: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
 #: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:357
 msgid "Playlist"
 msgstr "Spellista"
 
-#: widgets/osd.cpp:173
+#: widgets/osd.cpp:178
 msgid "Playlist finished"
 msgstr "Spellistan slutförd"
 
@@ -3585,7 +3625,7 @@ msgstr "Alternativ för spellista"
 msgid "Playlist type"
 msgstr "Spellistetyp"
 
-#: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:237
+#: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:243
 msgid "Playlists"
 msgstr "Spellistor"
 
@@ -3601,7 +3641,7 @@ msgstr "Instickstatus:"
 msgid "Podcasts"
 msgstr "Podsändning"
 
-#: ui/equalizer.cpp:125
+#: ui/equalizer.cpp:127
 msgid "Pop"
 msgstr "Pop"
 
@@ -3637,7 +3677,7 @@ msgstr "Förförstärkare"
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:679
 msgid "Preferences..."
 msgstr "Inställningar..."
 
@@ -3682,7 +3722,7 @@ msgstr "Tryck en tangentkombination till att använda för %1"
 msgid "Pretty OSD options"
 msgstr "Alternativ för Skön notifiering"
 
-#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:446
 #: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
@@ -3692,7 +3732,7 @@ msgstr "Förhandsvisning"
 msgid "Previous"
 msgstr "Föregående"
 
-#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Föregående spår"
@@ -3706,9 +3746,13 @@ msgid "Profile"
 msgstr "Profil"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcd.h:324
 msgid "Progress"
 msgstr "Förlopp"
+
+#: ui/equalizer.cpp:129
+msgid "Psychedelic"
+msgstr ""
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 #: wiimotedev/wiimotesettingspage.cpp:227
@@ -3731,16 +3775,16 @@ msgstr "Kvalitet"
 msgid "Querying device..."
 msgstr "Förfrågar enhet..."
 
-#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:711
+#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:715
 msgid "Queue Manager"
 msgstr "Köhanterare"
 
-#: ui/mainwindow.cpp:1367
+#: ui/mainwindow.cpp:1386
 msgid "Queue selected tracks"
 msgstr "Kölägg valda spår"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1365
+#: ui/mainwindow.cpp:1384
 msgid "Queue track"
 msgstr "Kölägg spår"
 
@@ -3752,7 +3796,7 @@ msgstr "Radio (likvärdig ljudstyrka för alla spår)"
 msgid "Radios"
 msgstr "Radio"
 
-#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:688
+#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:692
 msgid "Rain"
 msgstr "Regn"
 
@@ -3784,7 +3828,7 @@ msgstr "Betygsätt den aktuella låten 4 stjärnor"
 msgid "Rate the current song 5 stars"
 msgstr "Betygsätt den aktuella låten 5 stjärnor"
 
-#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1222 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "Betyg"
 
@@ -3821,7 +3865,7 @@ msgstr "Uppdatera kanallistan"
 msgid "Refresh streams"
 msgstr "Uppdatera strömmar"
 
-#: ui/equalizer.cpp:126
+#: ui/equalizer.cpp:130
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -3834,7 +3878,7 @@ msgid "Remember from last time"
 msgstr "Kom ihåg från förra gången"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_transcodedialog.h:208 internet/lastfmservice.cpp:115
+#: ../bin/src/ui_transcodedialog.h:210 internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Ta bort"
 
@@ -3842,7 +3886,7 @@ msgstr "Ta bort"
 msgid "Remove action"
 msgstr "Ta bort åtgärd"
 
-#: ../bin/src/ui_mainwindow.h:720
+#: ../bin/src/ui_mainwindow.h:724
 msgid "Remove duplicates from playlist"
 msgstr "Ta bort dubbletter från spellistan"
 
@@ -3858,7 +3902,7 @@ msgstr "Ta bort från Min Musik"
 msgid "Remove from favorites"
 msgstr "Ta bort från favoriter"
 
-#: internet/groovesharkservice.cpp:530 ../bin/src/ui_mainwindow.h:695
+#: internet/groovesharkservice.cpp:530 ../bin/src/ui_mainwindow.h:699
 msgid "Remove from playlist"
 msgstr "Ta bort från spellistan"
 
@@ -3866,7 +3910,7 @@ msgstr "Ta bort från spellistan"
 msgid "Remove playlist"
 msgstr "Ta bort spellista"
 
-#: playlist/playlistlistcontainer.cpp:314
+#: playlist/playlistlistcontainer.cpp:315
 msgid "Remove playlists"
 msgstr "Ta bort spellistor"
 
@@ -3895,7 +3939,7 @@ msgstr "Döp om spellista"
 msgid "Rename playlist..."
 msgstr "Döp om spellistan..."
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:675
 msgid "Renumber tracks in this order..."
 msgstr "Omnumrera spår i denna ordning..."
 
@@ -3903,15 +3947,15 @@ msgstr "Omnumrera spår i denna ordning..."
 msgid "Repeat"
 msgstr "Upprepa"
 
-#: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:293 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
 msgstr "Upprepa album"
 
-#: widgets/osd.cpp:289 ../bin/src/ui_playlistsequence.h:106
+#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
 msgstr "Upprepa spellista"
 
-#: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:292 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
 msgstr "Upprepa spår"
 
@@ -3945,7 +3989,7 @@ msgstr "Fyll i igen"
 msgid "Require authentication code"
 msgstr "Kräv autentiseringskod"
 
-#: widgets/lineedit.cpp:51
+#: widgets/lineedit.cpp:52
 msgid "Reset"
 msgstr "Återställ"
 
@@ -3986,7 +4030,19 @@ msgstr "Återgå till Clementine"
 msgid "Right"
 msgstr "Höger"
 
-#: ui/equalizer.cpp:127
+#: ../bin/src/ui_ripcd.h:303
+msgid "Rip"
+msgstr ""
+
+#: ui/ripcd.cpp:116
+msgid "Rip CD"
+msgstr ""
+
+#: ../bin/src/ui_mainwindow.h:730
+msgid "Rip audio CD..."
+msgstr ""
+
+#: ui/equalizer.cpp:131
 msgid "Rock"
 msgstr "Rock"
 
@@ -4012,7 +4068,7 @@ msgstr "Säker borttagning av enhet"
 msgid "Safely remove the device after copying"
 msgstr "Säker borttagning av enheten efter kopiering"
 
-#: playlist/playlist.cpp:1227 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Samplingsfrekvens"
 
@@ -4024,7 +4080,7 @@ msgstr "Samplingsfrekvens"
 msgid "Save .mood files in your music library"
 msgstr "Spara .stämningsfiler i ditt musikbibliotek"
 
-#: ui/albumcoverchoicecontroller.cpp:114
+#: ui/albumcoverchoicecontroller.cpp:121
 msgid "Save album cover"
 msgstr "Spara skivomslag"
 
@@ -4040,11 +4096,11 @@ msgstr "Spara bild"
 msgid "Save playlist"
 msgstr "Spara spellista"
 
-#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:703
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "Spara spellistan..."
 
-#: ui/equalizer.cpp:178 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:182 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Spara förinställning"
 
@@ -4076,7 +4132,7 @@ msgstr "Skalbar samplingsfrekvensprofil (SSR)"
 msgid "Scale size"
 msgstr "Skalnings storlek"
 
-#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Poäng"
 
@@ -4085,7 +4141,7 @@ msgid "Scrobble tracks that I listen to"
 msgstr "Skrobbla låtar som jag lyssnar på"
 
 #: ui/albumcoversearcher.cpp:173 ui/albumcoversearcher.cpp:190
-#: ui/mainwindow.cpp:234 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
 #: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
@@ -4106,6 +4162,10 @@ msgstr "Sök i Magnatune"
 #: internet/subsonicservice.cpp:75
 msgid "Search Subsonic"
 msgstr "Sök Subsonic"
+
+#: ui/albumcoverchoicecontroller.cpp:66
+msgid "Search automatically"
+msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
@@ -4145,7 +4205,7 @@ msgstr "Söktermer"
 msgid "Searching on Grooveshark"
 msgstr "Söker på Grooveshark"
 
-#: ../bin/src/ui_groupbydialog.h:138
+#: ../bin/src/ui_groupbydialog.h:139
 msgid "Second level"
 msgstr "Andra nivån"
 
@@ -4165,11 +4225,11 @@ msgstr "Hoppa till en relativ position i spåret som spelas för närvarande"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Hoppa till en absolut position i spåret som spelas för närvarande"
 
-#: visualisations/visualisationselector.cpp:40
+#: visualisations/visualisationselector.cpp:40 ../bin/src/ui_ripcd.h:310
 msgid "Select All"
 msgstr "Välj alla"
 
-#: visualisations/visualisationselector.cpp:42
+#: visualisations/visualisationselector.cpp:42 ../bin/src/ui_ripcd.h:311
 msgid "Select None"
 msgstr "Välj ingen"
 
@@ -4197,6 +4257,10 @@ msgstr "Välj visualiseringar"
 msgid "Select visualizations..."
 msgstr "Välj visualiseringar..."
 
+#: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
+msgid "Select..."
+msgstr ""
+
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "Serienummer"
@@ -4213,7 +4277,7 @@ msgstr "Serverdetaljer"
 msgid "Service offline"
 msgstr "Tjänst inte tillgänglig"
 
-#: ui/mainwindow.cpp:1394
+#: ui/mainwindow.cpp:1413
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Ställ in %1 till \"%2\"..."
@@ -4222,7 +4286,7 @@ msgstr "Ställ in %1 till \"%2\"..."
 msgid "Set the volume to <value> percent"
 msgstr "Ställ in volymen till <värde> procent"
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:676
 msgid "Set value for all selected tracks..."
 msgstr "Ställ in värde för alla valda spår..."
 
@@ -4281,11 +4345,11 @@ msgstr "Visa en popup från notifieringsytan"
 msgid "Show a pretty OSD"
 msgstr "Visa en skön notifiering"
 
-#: widgets/nowplayingwidget.cpp:113
+#: widgets/nowplayingwidget.cpp:121
 msgid "Show above status bar"
 msgstr "Visa ovanför statusraden"
 
-#: ui/mainwindow.cpp:460
+#: ui/mainwindow.cpp:471
 msgid "Show all songs"
 msgstr "Visa alla låtar"
 
@@ -4305,10 +4369,14 @@ msgstr "Visa avdelare"
 msgid "Show fullsize..."
 msgstr "Visa full storlek..."
 
-#: library/libraryview.cpp:399 ui/mainwindow.cpp:508
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:519
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Visa i filhanterare..."
+
+#: ui/mainwindow.cpp:520
+msgid "Show in library..."
+msgstr ""
 
 #: library/libraryview.cpp:403
 msgid "Show in various artists"
@@ -4318,11 +4386,11 @@ msgstr "Visa i diverse artister"
 msgid "Show moodbar"
 msgstr "Visa stämningsdiagram"
 
-#: ui/mainwindow.cpp:461
+#: ui/mainwindow.cpp:472
 msgid "Show only duplicates"
 msgstr "Visa endast dubbletter"
 
-#: ui/mainwindow.cpp:462
+#: ui/mainwindow.cpp:473
 msgid "Show only untagged"
 msgstr "Visa otaggade endast"
 
@@ -4354,19 +4422,19 @@ msgstr "Visa/dölj"
 msgid "Shuffle"
 msgstr "Blanda"
 
-#: widgets/osd.cpp:276 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:281 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
 msgstr "Blanda album"
 
-#: widgets/osd.cpp:274 ../bin/src/ui_playlistsequence.h:109
+#: widgets/osd.cpp:279 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
 msgstr "Blanda allt"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Shuffle playlist"
 msgstr "Blanda spellistan"
 
-#: widgets/osd.cpp:275 ../bin/src/ui_playlistsequence.h:108
+#: widgets/osd.cpp:280 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
 msgstr "Blanda låtar i detta album"
 
@@ -4394,7 +4462,7 @@ msgstr "Storlek"
 msgid "Size:"
 msgstr "Storlek:"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:133
 msgid "Ska"
 msgstr "Ska"
 
@@ -4402,7 +4470,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Gå bakåt i spellista"
 
-#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "Antal överhoppningar"
 
@@ -4410,7 +4478,7 @@ msgstr "Antal överhoppningar"
 msgid "Skip forwards in playlist"
 msgstr "Gå framåt i spellista"
 
-#: widgets/nowplayingwidget.cpp:90
+#: widgets/nowplayingwidget.cpp:93
 msgid "Small album cover"
 msgstr "Liten omslagsbild"
 
@@ -4422,23 +4490,23 @@ msgstr "Liten sidopanel"
 msgid "Smart playlist"
 msgstr "Smart spellista"
 
-#: library/librarymodel.cpp:1172
+#: library/librarymodel.cpp:1207
 msgid "Smart playlists"
 msgstr "Smarta spellistor"
 
-#: ui/equalizer.cpp:128
+#: ui/equalizer.cpp:132
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:130
+#: ui/equalizer.cpp:134
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
-#: ../bin/src/ui_songinfosettingspage.h:179
+#: ../bin/src/ui_songinfosettingspage.h:154
 msgid "Song Information"
 msgstr "Låtinformation"
 
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:247
 msgid "Song info"
 msgstr "Låtinfo"
 
@@ -4470,7 +4538,7 @@ msgstr "Ordna låtar efter"
 msgid "Sorting"
 msgstr "Sortering"
 
-#: playlist/playlist.cpp:1236
+#: playlist/playlist.cpp:1239
 msgid "Source"
 msgstr "Källa"
 
@@ -4506,11 +4574,15 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Stjärnmärkta"
 
+#: ui/ripcd.cpp:90
+msgid "Start ripping"
+msgstr ""
+
 #: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Starta spellistan som spelas för närvarande"
 
-#: transcoder/transcodedialog.cpp:88
+#: transcoder/transcodedialog.cpp:90
 msgid "Start transcoding"
 msgstr "Starta omkodning"
 
@@ -4521,7 +4593,7 @@ msgid ""
 "list"
 msgstr "Skriv nånting i sökrutan ovan för att få sökresultat i denna lista"
 
-#: transcoder/transcoder.cpp:405
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "Startar %1"
@@ -4534,7 +4606,7 @@ msgstr "Startar..."
 msgid "Stations"
 msgstr "Stationer"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:656
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Stoppa"
@@ -4543,7 +4615,7 @@ msgstr "Stoppa"
 msgid "Stop after"
 msgstr "Stoppa efter"
 
-#: ui/mainwindow.cpp:489 ../bin/src/ui_mainwindow.h:658
+#: ui/mainwindow.cpp:500 ../bin/src/ui_mainwindow.h:662
 msgid "Stop after this track"
 msgstr "Stoppa efter detta spår"
 
@@ -4554,6 +4626,11 @@ msgstr "Stoppa uppspelning"
 #: core/globalshortcuts.cpp:50
 msgid "Stop playing after current track"
 msgstr "Sluta spela efter aktuellt spår"
+
+#: widgets/osd.cpp:171
+#, qt-format
+msgid "Stop playing after track: %1"
+msgstr ""
 
 #: widgets/osd.cpp:166
 msgid "Stopped"
@@ -4657,7 +4734,7 @@ msgstr "Taggradio"
 msgid "Target bitrate"
 msgstr "Önskad bithastighet"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:135
 msgid "Techno"
 msgstr "Techno"
 
@@ -4706,7 +4783,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Testperioden för Subsonics server är över. Var vänlig och donera för att få en licensnyckel. Besök subsonic.org  för mer detaljer."
 
-#: ui/mainwindow.cpp:2083
+#: ui/mainwindow.cpp:2138
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4747,7 +4824,7 @@ msgid ""
 "continue?"
 msgstr "Filerna kommer att tas bort från enheten, är du säker på att du vill fortsätta?"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1906 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1961 widgets/fileview.cpp:188
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4763,7 +4840,7 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "Dessa inställningar används i dialogrutan \"Omkoda musik\", och vid konvertering av musik innan den kopieras till en bärbar enhet."
 
-#: ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:153
 msgid "Third level"
 msgstr "Tredje nivån"
 
@@ -4819,13 +4896,10 @@ msgstr "Denna ström är endast för betalkunder"
 msgid "This type of device is not supported: %1"
 msgstr "Denna typ av enhet är inte stödd: %1"
 
-#: ../bin/src/ui_songinfosettingspage.h:185
-msgid "Timeout"
-msgstr "Tidsgräns överskriden"
-
-#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "Titel"
 
@@ -4835,7 +4909,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "För att starta Groovesharkradio bör du först ha lyssnat på några låtar från Grooveshark."
 
-#: core/utilities.cpp:126 core/utilities.cpp:142
+#: core/utilities.cpp:127 core/utilities.cpp:143
 msgid "Today"
 msgstr "Idag"
 
@@ -4847,11 +4921,11 @@ msgstr "Växla Pretty OSD"
 msgid "Toggle fullscreen"
 msgstr "Växla fullskärm"
 
-#: ui/mainwindow.cpp:1369
+#: ui/mainwindow.cpp:1388
 msgid "Toggle queue status"
 msgstr "Växla köstatus"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:722
 msgid "Toggle scrobbling"
 msgstr "Växla skrobbling"
 
@@ -4859,7 +4933,7 @@ msgstr "Växla skrobbling"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Växla synlighet för Pretty på-skärm-visning"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 msgid "Tomorrow"
 msgstr "Imorgon"
 
@@ -4883,12 +4957,13 @@ msgstr "Totalt antal byte överfört"
 msgid "Total network requests made"
 msgstr "Totalt antal nätverksbegäran"
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
+#: ../bin/src/ui_ripcd.h:305
 msgid "Track"
 msgstr "Spår"
 
-#: ../bin/src/ui_transcodedialog.h:202 ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:701
 msgid "Transcode Music"
 msgstr "Omkoda musik"
 
@@ -4950,11 +5025,11 @@ msgstr "Ultrabredband (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Det går inte att hämta %1 (%2)"
 
-#: core/song.cpp:357 library/librarymodel.cpp:308 library/librarymodel.cpp:313
-#: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:505 playlist/playlistmanager.cpp:508
-#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
-#: ui/edittagdialog.cpp:465
+#: core/song.cpp:357 library/librarymodel.cpp:312 library/librarymodel.cpp:317
+#: library/librarymodel.cpp:322 library/librarymodel.cpp:999
+#: playlist/playlistdelegates.cpp:314 playlist/playlistmanager.cpp:505
+#: playlist/playlistmanager.cpp:508 ui/albumcoverchoicecontroller.cpp:117
+#: ui/edittagdialog.cpp:424 ui/edittagdialog.cpp:465
 msgid "Unknown"
 msgstr "Okänt"
 
@@ -4986,7 +5061,7 @@ msgstr "Uppdatera Groovesharkspellista "
 msgid "Update all podcasts"
 msgstr "Uppdatera alla podsändningar"
 
-#: ../bin/src/ui_mainwindow.h:709
+#: ../bin/src/ui_mainwindow.h:713
 msgid "Update changed library folders"
 msgstr "Uppdatera ändrade bibliotekskataloger"
 
@@ -5123,7 +5198,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Variabel bithastighet"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:242
 #: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Diverse artister"
@@ -5141,7 +5216,7 @@ msgstr "Visa"
 msgid "Visualization mode"
 msgstr "Visualiseringsläge"
 
-#: ../bin/src/ui_mainwindow.h:710 ui/dbusscreensaver.cpp:35
+#: ../bin/src/ui_mainwindow.h:714 ui/dbusscreensaver.cpp:35
 msgid "Visualizations"
 msgstr "Visualiseringar"
 
@@ -5153,7 +5228,7 @@ msgstr "Inställningar för visualiseringar"
 msgid "Voice activity detection"
 msgstr "Avkänning av röstaktivitet"
 
-#: widgets/osd.cpp:180
+#: widgets/osd.cpp:185
 #, qt-format
 msgid "Volume %1%"
 msgstr "Volym %1%"
@@ -5209,32 +5284,32 @@ msgstr "Försök med..."
 msgid "Wide band (WB)"
 msgstr "Bredband (WB)"
 
-#: widgets/osd.cpp:239
+#: widgets/osd.cpp:244
 #, qt-format
 msgid "Wii Remote %1: actived"
 msgstr "Wii-kontroll %1: aktiverad"
 
-#: widgets/osd.cpp:249
+#: widgets/osd.cpp:254
 #, qt-format
 msgid "Wii Remote %1: connected"
 msgstr "Wii-kontroll %1: ansluten"
 
-#: widgets/osd.cpp:264
+#: widgets/osd.cpp:269
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
 msgstr "Wii-kontroll %1: kritisk batterinivå (%2%) "
 
-#: widgets/osd.cpp:244
+#: widgets/osd.cpp:249
 #, qt-format
 msgid "Wii Remote %1: disactived"
 msgstr "Wii-kontroll %1: inaktiverad"
 
-#: widgets/osd.cpp:254
+#: widgets/osd.cpp:259
 #, qt-format
 msgid "Wii Remote %1: disconnected"
 msgstr "Wii-kontroll %1: frånkopplad"
 
-#: widgets/osd.cpp:259
+#: widgets/osd.cpp:264
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "Wii-kontroll %1: låg batterinivå (%2%)"
@@ -5269,7 +5344,7 @@ msgid ""
 "well?"
 msgstr "Vill du flytta på 'andra låtar' i det här albumet till Blandade Artister också?"
 
-#: ui/mainwindow.cpp:2088
+#: ui/mainwindow.cpp:2143
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vill du köra en fullständig omsökning nu?"
 
@@ -5281,15 +5356,15 @@ msgstr "Skriv all låtstatistik till låtfilerna"
 msgid "Wrong username or password."
 msgstr "Fel användarnamn eller lösenord."
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:687
-#: ../bin/src/ui_trackselectiondialog.h:212
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:65
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "År"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:162
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:150
+#: ../bin/src/ui_groupbydialog.h:164
 msgid "Year - Album"
 msgstr "År - Album"
 
@@ -5297,7 +5372,7 @@ msgstr "År - Album"
 msgid "Years"
 msgstr "År"
 
-#: core/utilities.cpp:128
+#: core/utilities.cpp:129
 msgid "Yesterday"
 msgstr "Igår"
 
@@ -5305,7 +5380,7 @@ msgstr "Igår"
 msgid "You are about to download the following albums"
 msgstr "Du är på väg att hämta de följande albumen"
 
-#: playlist/playlistlistcontainer.cpp:315
+#: playlist/playlistlistcontainer.cpp:316
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
@@ -5445,7 +5520,7 @@ msgstr "Ditt användarnamn eller lösenord var felaktigt"
 msgid "Z-A"
 msgstr "Ö-A"
 
-#: ui/equalizer.cpp:132
+#: ui/equalizer.cpp:136
 msgid "Zero"
 msgstr "Noll"
 
@@ -5524,6 +5599,10 @@ msgstr "gpodder.net katalog"
 #: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr "som är större än"
+
+#: ../bin/src/ui_deviceviewcontainer.h:99
+msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
+msgstr ""
 
 #: smartplaylists/searchterm.cpp:209
 msgid "in the last"
@@ -5609,7 +5688,7 @@ msgstr "Sortera låtar"
 msgid "starts with"
 msgstr "som börjar med"
 
-#: playlist/playlistdelegates.cpp:180
+#: playlist/playlistdelegates.cpp:185
 msgid "stop"
 msgstr "stoppa"
 

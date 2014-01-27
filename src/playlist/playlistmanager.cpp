@@ -156,7 +156,7 @@ void PlaylistManager::New(const QString& name, const SongList& songs,
 
 void PlaylistManager::Load(const QString& filename) {
   QUrl url = QUrl::fromLocalFile(filename);
-  SongLoader* loader = new SongLoader(library_backend_, this);
+  SongLoader* loader = new SongLoader(library_backend_, app_->player(), this);
   connect(loader, SIGNAL(LoadFinished(bool)), SLOT(LoadFinished(bool)));
   SongLoader::Result result = loader->Load(url);
   QFileInfo info(filename);

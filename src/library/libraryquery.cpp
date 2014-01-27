@@ -39,19 +39,37 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     // expected with sqlite's FTS3:
     //  1) Append * to all tokens.
     //  2) Prefix "fts" to column names.
+    //  3) Remove colons which don't correspond to column names.
 
     // Split on whitespace
-    QStringList tokens(options.filter().split(QRegExp("\\s+")));
+    QStringList tokens(options.filter().split(
+        QRegExp("\\s+"), QString::SkipEmptyParts));
     QString query;
     foreach (QString token, tokens) {
       token.remove('(');
       token.remove(')');
       token.remove('"');
+      token.replace('-', ' ');
 
-      if (token.contains(':'))
-        query += "fts" + token + "* ";
-      else
+      if (token.contains(':')) {
+        // Only prefix fts if the token is a valid column name.
+        if (Song::kFtsColumns.contains("fts" + token.section(':', 0, 0),
+                                       Qt::CaseInsensitive)) {
+          // Account for multiple colons.
+          QString columntoken = token.section(
+              ':', 0, 0, QString::SectionIncludeTrailingSep);
+          QString subtoken = token.section(':', 1, -1);
+          subtoken.replace(":", " ");
+          subtoken = subtoken.trimmed();
+          query += "fts" + columntoken + subtoken + "* ";
+        } else {
+          token.replace(":", " ");
+          token = token.trimmed();
+          query += token + "* ";
+        }
+      } else {
         query += token + "* ";
+      }
     }
 
     where_clauses_ << "fts.%fts_table_noprefix MATCH ?";
