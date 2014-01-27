@@ -89,9 +89,9 @@ private slots:
 
   void CurrentSongChanged(const Song& metadata);
 
-  void CopyToDeviceSlot();
-  void CopyToDeviceSlot(const PodcastEpisodeList& episodes_list);
-  void CopyToDeviceSlot(const QModelIndexList& episode_indexes,
+  void CopyToDevice();
+  void CopyToDevice(const PodcastEpisodeList& episodes_list);
+  void CopyToDevice(const QModelIndexList& episode_indexes,
 			const QModelIndexList& podcast_indexes);
 
 private:

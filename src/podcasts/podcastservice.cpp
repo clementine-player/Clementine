@@ -118,15 +118,15 @@ QStandardItem* PodcastService::CreateRootItem() {
   return root_;
 }
 
-void PodcastService::CopyToDeviceSlot() {
+void PodcastService::CopyToDevice() {
   if (selected_episodes_.isEmpty() && explicitly_selected_podcasts_.isEmpty()) {
-    CopyToDeviceSlot(backend_->GetNewDownloadedEpisodes());
+    CopyToDevice(backend_->GetNewDownloadedEpisodes());
   } else {
-    CopyToDeviceSlot(selected_episodes_, explicitly_selected_podcasts_);
+    CopyToDevice(selected_episodes_, explicitly_selected_podcasts_);
   }
 }
 
-void PodcastService::CopyToDeviceSlot(const PodcastEpisodeList& episodes_list) {
+void PodcastService::CopyToDevice(const PodcastEpisodeList& episodes_list) {
   QList<Song> songs;
   Podcast podcast;
   for (const auto& episode : episodes_list) {
@@ -140,7 +140,7 @@ void PodcastService::CopyToDeviceSlot(const PodcastEpisodeList& episodes_list) {
     organise_dialog_->show();
 }
 
-void PodcastService::CopyToDeviceSlot(const QModelIndexList& episode_indexes,
+void PodcastService::CopyToDevice(const QModelIndexList& episode_indexes,
                                       const QModelIndexList& podcast_indexes) {
   PodcastEpisode episode_tmp;
   QList<Song> songs;
@@ -334,7 +334,7 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
           this, SLOT(DeleteDownloadedData()));
     copy_to_device_ = context_menu_->addAction(
           IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Copy to device..."),
-          this, SLOT(CopyToDeviceSlot()));
+          this, SLOT(CopyToDevice()));
     remove_selected_action_ = context_menu_->addAction(
           IconLoader::Load("list-remove"), tr("Unsubscribe"),
           this, SLOT(RemoveSelectedPodcast()));
