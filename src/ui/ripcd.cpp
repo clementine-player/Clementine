@@ -76,10 +76,32 @@ RipCD::RipCD(QWidget* parent) :
 
     // Init
   ui_->setupUi(this);
-  cancel_button_ = ui_->button_box->button(QDialogButtonBox::Cancel);
 
-  connect(ui_->ripButton, SIGNAL(clicked()), this, SLOT(ClickedRipButton()));
+  // Set column widths in the QTableWidget.
+  ui_->tableWidget->horizontalHeader()->setResizeMode(
+      kCheckboxColumn, QHeaderView::ResizeToContents);
+  ui_->tableWidget->horizontalHeader()->setResizeMode(
+      kTrackNumberColumn, QHeaderView::ResizeToContents);
+  ui_->tableWidget->horizontalHeader()->setResizeMode(
+      kTrackTitleColumn, QHeaderView::Stretch);
+
+  // Add a rip button
+  rip_button_ = ui_->button_box->addButton(
+      tr("Start ripping"), QDialogButtonBox::ActionRole);
+  cancel_button_ = ui_->button_box->button(QDialogButtonBox::Cancel);
+  close_button_ = ui_->button_box->button(QDialogButtonBox::Close);
+
+  // Hide elements
+  cancel_button_->hide();
+  ui_->progress_group->hide();
+
+  connect(ui_->select_all_button, SIGNAL(clicked()), SLOT(SelectAll()));
+  connect(ui_->select_none_button, SIGNAL(clicked()), SLOT(SelectNone()));
+  connect(ui_->invert_selection_button, SIGNAL(clicked()),
+          SLOT(InvertSelection()));
+  connect(rip_button_, SIGNAL(clicked()), SLOT(ClickedRipButton()));
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
+  connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
 
   connect(transcoder_, SIGNAL(JobComplete(QString, bool)), SLOT(JobComplete(QString, bool)));
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
@@ -92,6 +114,7 @@ RipCD::RipCD(QWidget* parent) :
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
 
   setWindowTitle(tr("Rip CD"));
+  AddDestinationDirectory(QDir::homePath());
 
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   if(!cdio_) {
@@ -303,6 +326,7 @@ void RipCD::ThreadedTranscoding() {
 }
 
 void RipCD::ClickedRipButton() {
+  SetWorking(true);
   QtConcurrent::run(this, &RipCD::ThreadClickedRipButton);
 }
 
@@ -333,6 +357,8 @@ void RipCD::AllJobsComplete() {
   // Resets lists
   generated_files_.clear();
   tracks_to_rip_.clear();
+
+  SetWorking(false);
 }
 
 void RipCD::AppendOutput(const QString& filename) {
@@ -363,26 +389,62 @@ void RipCD::AddDestination() {
   if (!dir.isEmpty()) {
     // Keep only a finite number of items in the box.
     while (ui_->destination->count() >= kMaxDestinationItems) {
-      ui_->destination->removeItem(1);  // The oldest folder item.
+      ui_->destination->removeItem(0);  // The oldest item.
     }
+    AddDestinationDirectory(dir);
+  }
+}
 
-    QIcon icon = IconLoader::Load("folder");
-    QVariant data = QVariant::fromValue(dir);
-    // Do not insert duplicates.
-    int duplicate_index = ui_->destination->findData(data);
-    if (duplicate_index == -1) {
-      ui_->destination->addItem(icon, dir, data);
-      ui_->destination->setCurrentIndex(ui_->destination->count() - 1);
-    } else {
-      ui_->destination->setCurrentIndex(duplicate_index);
-    }
+// Adds a directory to the 'destination' combo box.
+void RipCD::AddDestinationDirectory(QString dir) {
+  QIcon icon = IconLoader::Load("folder");
+  QVariant data = QVariant::fromValue(dir);
+  // Do not insert duplicates.
+  int duplicate_index = ui_->destination->findData(data);
+  if (duplicate_index == -1) {
+    ui_->destination->addItem(icon, dir, data);
+    ui_->destination->setCurrentIndex(ui_->destination->count() - 1);
+  } else {
+    ui_->destination->setCurrentIndex(duplicate_index);
   }
 }
 
 void RipCD::Cancel() {
   transcoder_->Cancel();
+  SetWorking(false);
 }
 
 bool RipCD::CDIOIsValid() const {
   return (cdio_);
+}
+
+void RipCD::SetWorking(bool working) {
+  rip_button_->setVisible(!working);
+  cancel_button_->setVisible(working);
+  close_button_->setVisible(!working);
+  ui_->input_group->setEnabled(!working);
+  ui_->output_group->setEnabled(!working);
+  ui_->progress_group->setVisible(true);
+}
+
+void RipCD::SelectAll() {
+  foreach (QCheckBox* checkbox, checkboxes_) {
+    checkbox->setCheckState(Qt::Checked);
+  }
+}
+
+void RipCD::SelectNone() {
+  foreach (QCheckBox* checkbox, checkboxes_) {
+    checkbox->setCheckState(Qt::Unchecked);
+  }
+}
+
+void RipCD::InvertSelection() {
+  foreach (QCheckBox* checkbox, checkboxes_) {
+    if (checkbox->isChecked()) {
+    checkbox->setCheckState(Qt::Unchecked);
+    } else {
+    checkbox->setCheckState(Qt::Checked);
+    }
+  }
 }
