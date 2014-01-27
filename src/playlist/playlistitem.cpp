@@ -123,9 +123,9 @@ QColor PlaylistItem::GetCurrentForegroundColor() const {
 bool PlaylistItem::HasCurrentForegroundColor() const {
   return !foreground_colors_.isEmpty();
 }
-void PlaylistItem::SetToSkip(bool val) {
-  to_skip_ = val;
+void PlaylistItem::SetShouldSkip(bool val) {
+  should_skip_ = val;
 }
-bool PlaylistItem::GetToSkip() const {
-  return to_skip_;
+bool PlaylistItem::GetShouldSkip() const {
+  return should_skip_;
 }

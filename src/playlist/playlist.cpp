@@ -342,6 +342,14 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
       }
       return QVariant();
 
+    case Qt::FontRole:
+      if (items_[index.row()]->GetShouldSkip()) {
+        QFont track_font;
+        track_font.setStrikeOut(true);
+        return track_font;
+      }
+      return QVariant();
+
     default:
       return QVariant();
   }
@@ -443,8 +451,9 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
 
     // Advance i until we find any track that is in the filter, skipping
     // the selected to be skipped
-    while (i < virtual_items_.count() && (!FilterContainsVirtualIndex(i) || item_at(virtual_items_[i])->GetToSkip())) {
-          ++i;
+    while (i < virtual_items_.count() &&
+        (!FilterContainsVirtualIndex(i) || item_at(virtual_items_[i])->GetShouldSkip())) {
+      ++i;
     }
     return i;
   }
@@ -452,7 +461,7 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
   // We need to advance i until we get something else on the same album
   Song last_song = current_item_metadata();
   for (int j=i+1 ; j<virtual_items_.count(); ++j) {
-    if (item_at(virtual_items_[j])->GetToSkip()) {
+    if (item_at(virtual_items_[j])->GetShouldSkip()) {
       continue;
     }
     Song this_song = item_at(virtual_items_[j])->Metadata();
@@ -487,7 +496,7 @@ int Playlist::PreviousVirtualIndex(int i, bool ignore_repeat_track) const {
     --i;
 
     // Decrement i until we find any track that is in the filter
-    while (i>=0 && (!FilterContainsVirtualIndex(i) || item_at(virtual_items_[i])->GetToSkip()))
+    while (i>=0 && (!FilterContainsVirtualIndex(i) || item_at(virtual_items_[i])->GetShouldSkip()))
       --i;
     return i;
   }
@@ -495,7 +504,7 @@ int Playlist::PreviousVirtualIndex(int i, bool ignore_repeat_track) const {
   // We need to decrement i until we get something else on the same album
   Song last_song = current_item_metadata();
   for (int j=i-1 ; j>=0; --j) {
-    if (item_at(virtual_items_[j])->GetToSkip()) {
+    if (item_at(virtual_items_[j])->GetShouldSkip()) {
       continue;
     }
     Song this_song = item_at(virtual_items_[j])->Metadata();
@@ -2028,13 +2037,6 @@ void Playlist::SetColumnAlignment(const ColumnAlignmentMap& alignment) {
 void Playlist::SkipTracks(const QModelIndexList &source_indexes) {
   foreach (const QModelIndex& source_index, source_indexes) {
     PlaylistItemPtr track_to_skip = item_at(source_index.row());
-    track_to_skip->SetToSkip(!((track_to_skip)->GetToSkip()));
-    // gray out the song if it's now to be skipped;
-    // otherwise undo the gray color
-    if (track_to_skip->GetToSkip()) {
-      track_to_skip->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
-    } else {
-      track_to_skip->RemoveForegroundColor(kInvalidSongPriority);
-    }
+    track_to_skip->SetShouldSkip(!((track_to_skip)->GetShouldSkip()));
   }
 }

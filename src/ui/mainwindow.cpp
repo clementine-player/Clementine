@@ -1335,7 +1335,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     else
       in_queue ++;
 
-    if(item->GetToSkip()) {
+    if(item->GetShouldSkip()) {
       in_skipped++;
     } else {
       not_in_skipped++;
@@ -1389,8 +1389,6 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     playlist_skip_->setText(tr("Skip track"));
   else if (in_skipped == 0 && not_in_skipped > 1)
     playlist_skip_->setText(tr("Skip selected tracks"));
-
-
 
   if (not_in_queue == 0)
     playlist_queue_->setIcon(IconLoader::Load("go-previous"));
