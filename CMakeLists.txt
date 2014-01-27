@@ -16,6 +16,10 @@ if (CMAKE_CXX_COMPILER MATCHES ".*clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-uninitialized")
 endif ()
 
+if (APPLE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++")
+endif ()
+
 set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
 check_cxx_source_compiles(
     "#include <unordered_map>
