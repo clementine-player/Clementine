@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-01-12 07:50+0000\n"
+"PO-Revision-Date: 2014-01-27 05:53+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -168,11 +168,11 @@ msgstr "По &центру"
 msgid "&Custom"
 msgstr "&Нетипово"
 
-#: ../bin/src/ui_mainwindow.h:730
+#: ../bin/src/ui_mainwindow.h:735
 msgid "&Extras"
 msgstr "Додатково"
 
-#: ../bin/src/ui_mainwindow.h:729
+#: ../bin/src/ui_mainwindow.h:734
 msgid "&Help"
 msgstr "&Довідка"
 
@@ -189,7 +189,7 @@ msgstr "Приховати…"
 msgid "&Left"
 msgstr "&Ліворуч"
 
-#: ../bin/src/ui_mainwindow.h:727
+#: ../bin/src/ui_mainwindow.h:732
 msgid "&Music"
 msgstr "Музика"
 
@@ -197,15 +197,15 @@ msgstr "Музика"
 msgid "&None"
 msgstr "&Немає"
 
-#: ../bin/src/ui_mainwindow.h:728
+#: ../bin/src/ui_mainwindow.h:733
 msgid "&Playlist"
 msgstr "Список відтворення"
 
-#: ../bin/src/ui_mainwindow.h:656
+#: ../bin/src/ui_mainwindow.h:660
 msgid "&Quit"
 msgstr "Ви&йти"
 
-#: ../bin/src/ui_mainwindow.h:694
+#: ../bin/src/ui_mainwindow.h:698
 msgid "&Repeat mode"
 msgstr "Режим повтору"
 
@@ -213,7 +213,7 @@ msgstr "Режим повтору"
 msgid "&Right"
 msgstr "&Праворуч"
 
-#: ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:697
 msgid "&Shuffle mode"
 msgstr "Режим перемішування"
 
@@ -221,7 +221,7 @@ msgstr "Режим перемішування"
 msgid "&Stretch columns to fit window"
 msgstr "Розтягнути стовпчики відповідно вмісту вікна"
 
-#: ../bin/src/ui_mainwindow.h:731
+#: ../bin/src/ui_mainwindow.h:736
 msgid "&Tools"
 msgstr "&Інструменти"
 
@@ -366,11 +366,11 @@ msgstr "Перервати"
 msgid "About %1"
 msgstr "Про %1"
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:681
 msgid "About Clementine..."
 msgstr "Про Clementine…"
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:716
 msgid "About Qt..."
 msgstr "Про Qt…"
 
@@ -418,19 +418,19 @@ msgstr "Додати інший потік…"
 msgid "Add directory..."
 msgstr "Додати теку…"
 
-#: ui/mainwindow.cpp:1615
+#: ui/mainwindow.cpp:1623
 msgid "Add file"
 msgstr "Додати файл"
 
-#: ../bin/src/ui_mainwindow.h:723
+#: ../bin/src/ui_mainwindow.h:727
 msgid "Add file to transcoder"
 msgstr "Додати файл для перекодування"
 
-#: ../bin/src/ui_mainwindow.h:721
+#: ../bin/src/ui_mainwindow.h:725
 msgid "Add file(s) to transcoder"
 msgstr "Додати файли для перекодування"
 
-#: ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Add file..."
 msgstr "Додати файл…"
 
@@ -438,11 +438,11 @@ msgstr "Додати файл…"
 msgid "Add files to transcode"
 msgstr "Додати файли для перекодування"
 
-#: transcoder/transcodedialog.cpp:281 ui/mainwindow.cpp:1643
+#: transcoder/transcodedialog.cpp:281 ui/mainwindow.cpp:1651 ui/ripcd.cpp:386
 msgid "Add folder"
 msgstr "Додати теку"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:702
 msgid "Add folder..."
 msgstr "Додати теку…"
 
@@ -454,7 +454,7 @@ msgstr "Додати нову теку…"
 msgid "Add podcast"
 msgstr "Додати подкаст"
 
-#: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:719
+#: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:723
 msgid "Add podcast..."
 msgstr "Додати подкаст..."
 
@@ -530,7 +530,7 @@ msgstr "Додати мітку номеру доріжки"
 msgid "Add song year tag"
 msgstr "Додати мітку року пісні"
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:687
 msgid "Add stream..."
 msgstr "Додати потік…"
 
@@ -542,7 +542,7 @@ msgstr "Додати до улюблених на Grooveshark"
 msgid "Add to Grooveshark playlists"
 msgstr "Додати до списків відтворення Grooveshark"
 
-#: ui/mainwindow.cpp:1440
+#: ui/mainwindow.cpp:1448
 msgid "Add to another playlist"
 msgstr "Додати до іншого списку відтворення"
 
@@ -603,12 +603,12 @@ msgstr "Після "
 msgid "After copying..."
 msgstr "Після копіювання…"
 
-#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
-#: ../bin/src/ui_trackselectiondialog.h:209
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
 msgid "Album"
 msgstr "Альбом"
 
@@ -616,7 +616,7 @@ msgstr "Альбом"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (ідеальна гучність для всіх композицій)"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -638,11 +638,11 @@ msgstr "Альбоми з обкладинками"
 msgid "Albums without covers"
 msgstr "Альбоми без обкладинок"
 
-#: ui/mainwindow.cpp:157
+#: ui/mainwindow.cpp:160
 msgid "All Files (*)"
 msgstr "Всі файли (*)"
 
-#: ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_mainwindow.h:693
 msgid "All Glory to the Hypnotoad!"
 msgstr "Вся слава Гіпножабі!"
 
@@ -769,17 +769,17 @@ msgid ""
 "the songs of your library?"
 msgstr "Ви справді хочете записати статистичні дані до всіх файлів композицій у вашій бібліотеці?"
 
-#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
 #: ../bin/src/ui_trackselectiondialog.h:210
-#: ../bin/src/ui_lastfmstationdialog.h:96
+#: ../bin/src/ui_lastfmstationdialog.h:96 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "Виконавець"
 
-#: ui/mainwindow.cpp:245
+#: ui/mainwindow.cpp:248
 msgid "Artist info"
 msgstr "Про виконавця"
 
@@ -795,7 +795,7 @@ msgstr "Мітки виконавця"
 msgid "Artist's initial"
 msgstr "Ініціали виконавця"
 
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Аудіо-формат"
 
@@ -841,7 +841,7 @@ msgstr "Середній розмір малюнку"
 msgid "BBC Podcasts"
 msgstr "Подкасти BBC"
 
-#: playlist/playlist.cpp:1225 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1228 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "Бітів за хвилину"
@@ -870,7 +870,7 @@ msgstr "Створення резервної копії бази даних"
 msgid "Balance"
 msgstr "Баланс"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:666
 msgid "Ban"
 msgstr "Додати до заборонених"
 
@@ -899,7 +899,7 @@ msgstr "Найкраще"
 msgid "Biography from %1"
 msgstr "Біографія з %1"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1229 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Бітова швидкість"
 
@@ -1005,7 +1005,7 @@ msgstr "Зміни, внесені до параметрів монофоніч�
 msgid "Check for new episodes"
 msgstr "Перевіряти наявність нових випусків"
 
-#: ui/mainwindow.cpp:594
+#: ui/mainwindow.cpp:602
 msgid "Check for updates..."
 msgstr "Перевірити оновлення…"
 
@@ -1055,11 +1055,11 @@ msgstr "Вичищаю"
 msgid "Clear"
 msgstr "Очистити"
 
-#: ../bin/src/ui_mainwindow.h:664 ../bin/src/ui_mainwindow.h:666
+#: ../bin/src/ui_mainwindow.h:668 ../bin/src/ui_mainwindow.h:670
 msgid "Clear playlist"
 msgstr "Очистити список відтворення"
 
-#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:647
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:651
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1150,8 +1150,8 @@ msgstr "Натисніть тут, щоб зробити цей список в�
 msgid "Click to toggle between remaining time and total time"
 msgstr "Клацніть аби перемкнутися між часом, що залишився, та загальним"
 
-#: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
+#: ../bin/src/ui_googledrivesettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1189,7 +1189,7 @@ msgstr "Кольори"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Список, розділений комами, виду клас:рівень, рівень може бути від 0 до 3"
 
-#: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
+#: playlist/playlist.cpp:1238 smartplaylists/searchterm.cpp:288
 #: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Коментар"
@@ -1198,11 +1198,11 @@ msgstr "Коментар"
 msgid "Complete tags automatically"
 msgstr "Заповнити мітки автоматично"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:720
 msgid "Complete tags automatically..."
 msgstr "Заповнити мітки автоматично…"
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1218 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
@@ -1241,7 +1241,7 @@ msgstr "Налаштувати Subsonic…"
 msgid "Configure global search..."
 msgstr "Налаштувати загальні правила пошуку…"
 
-#: ui/mainwindow.cpp:475
+#: ui/mainwindow.cpp:483
 msgid "Configure library..."
 msgstr "Налаштувати фонотеку"
 
@@ -1278,7 +1278,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Вичерпано строк очікування на з’єднання. Переконайтеся, що адресу сервера вказано правильно. Приклад: http://localhost:4040/"
 
-#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:696
 msgid "Console"
 msgstr "Консоль"
 
@@ -1298,12 +1298,12 @@ msgstr "Конвертувати всю музику, яку не може ві�
 msgid "Copy to clipboard"
 msgstr "Копіювати до буфера"
 
-#: library/libraryview.cpp:389 ui/mainwindow.cpp:509
+#: library/libraryview.cpp:389 ui/mainwindow.cpp:517
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Копіювати до пристрою…"
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:506
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:514
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Скопіювати до фонотеки…"
@@ -1325,14 +1325,14 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Не вдалось створити елемент GStreamer \"%1\" - переконайтесь, що всі потрібні для GStreamer модулі встановлені"
 
-#: transcoder/transcoder.cpp:432
+#: transcoder/transcoder.cpp:434
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Не вдалось знайти ущільнювач для %1, перевірте чи правильно встановлений модуль GStreamer"
 
-#: transcoder/transcoder.cpp:426
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1349,7 +1349,7 @@ msgid "Couldn't open output file %1"
 msgstr "Не вдалось відкрити вихідний файл %1"
 
 #: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
-#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:691
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "Менеджер обкладинок"
@@ -1393,11 +1393,11 @@ msgstr "Перехресне згасання під час автоматичн
 msgid "Cross-fade when changing tracks manually"
 msgstr "Перехресне згасання під час ручної зміни доріжок"
 
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:663
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
 
-#: ../bin/src/ui_mainwindow.h:663
+#: ../bin/src/ui_mainwindow.h:667
 msgid "Ctrl+B"
 msgstr "Ctrl+B"
 
@@ -1405,63 +1405,63 @@ msgstr "Ctrl+B"
 msgid "Ctrl+Down"
 msgstr "Ctrl+Вниз"
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
-#: ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
-#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:668
+#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:672
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:665
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: ../bin/src/ui_mainwindow.h:714
+#: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:706
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_mainwindow.h:680
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: ../bin/src/ui_mainwindow.h:657
+#: ../bin/src/ui_mainwindow.h:661
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#: ../bin/src/ui_mainwindow.h:706
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
-#: ../bin/src/ui_mainwindow.h:725
+#: ../bin/src/ui_mainwindow.h:729
 msgid "Ctrl+Shift+T"
 msgstr "Ctrl+Shift+T"
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:721
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
@@ -1504,11 +1504,11 @@ msgid ""
 "recover your database"
 msgstr "Виявлено пошкодження бази даних. Будь ласка, ознайомтеся з даними на сторінці https://code.google.com/p/clementine-player/wiki/DatabaseCorruption , щоб дізнатися більше про способи відновлення вашої бази даних."
 
-#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1236 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Дата створення"
 
-#: playlist/playlist.cpp:1232 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1235 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Дата зміни"
 
@@ -1558,7 +1558,7 @@ msgid "Delete downloaded data"
 msgstr "Видалити завантажені дані"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1936 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1960 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Вилучити файли"
 
@@ -1566,7 +1566,7 @@ msgstr "Вилучити файли"
 msgid "Delete from device..."
 msgstr "Вилучити з пристрою…"
 
-#: library/libraryview.cpp:391 ui/mainwindow.cpp:510
+#: library/libraryview.cpp:391 ui/mainwindow.cpp:518
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Вилучити з диска…"
@@ -1591,15 +1591,16 @@ msgstr "Вилучити оригінальні файли"
 msgid "Deleting files"
 msgstr "Вилучення файлів"
 
-#: ui/mainwindow.cpp:1374
+#: ui/mainwindow.cpp:1382
 msgid "Dequeue selected tracks"
 msgstr "Вилучити з черги вибрані доріжки"
 
-#: ui/mainwindow.cpp:1372
+#: ui/mainwindow.cpp:1380
 msgid "Dequeue track"
 msgstr "Вилучити з черги доріжки"
 
 #: ../bin/src/ui_transcodedialog.h:214 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Призначення"
 
@@ -1623,9 +1624,13 @@ msgstr "Назва пристрою"
 msgid "Device properties..."
 msgstr "Налаштування пристрою…"
 
-#: ui/mainwindow.cpp:242
+#: ui/mainwindow.cpp:245
 msgid "Devices"
 msgstr "Пристрої"
+
+#: ../bin/src/ui_ripcd.h:300
+msgid "Dialog"
+msgstr "Діалогове вікно"
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1665,8 +1670,8 @@ msgstr "Вимкнути створення смужок настрою"
 msgid "Disabled"
 msgstr "Вимкнено"
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:63
-#: ../bin/src/ui_edittagdialog.h:685
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:63
+#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Диск"
 
@@ -1683,7 +1688,7 @@ msgstr "Налаштування відображення"
 msgid "Display the on-screen-display"
 msgstr "Показувати екранні повідомлення"
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:719
 msgid "Do a full library rescan"
 msgstr "Повторити повне сканування фонотеки"
 
@@ -1805,6 +1810,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Дабстеп"
 
+#: ../bin/src/ui_ripcd.h:309
+msgid "Duration"
+msgstr "Тривалість"
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
 msgstr "Динамічний режим увімкнено"
@@ -1817,12 +1826,12 @@ msgstr "Динамічний випадковий мікс"
 msgid "Edit smart playlist..."
 msgstr "Редагувати розумний список відтворення…"
 
-#: ui/mainwindow.cpp:1407
+#: ui/mainwindow.cpp:1415
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Змінити «%1»…"
 
-#: ../bin/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Edit tag..."
 msgstr "Редагувати мітку…"
 
@@ -1835,7 +1844,7 @@ msgid "Edit track information"
 msgstr "Редагувати дані доріжки"
 
 #: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Edit track information..."
 msgstr "Редагувати дані про доріжку…"
 
@@ -1936,7 +1945,7 @@ msgstr "Вкажіть цю IP-адресу у програмі для вста�
 msgid "Entire collection"
 msgstr "Вся фонотека"
 
-#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:700
 msgid "Equalizer"
 msgstr "Еквалайзер"
 
@@ -1950,7 +1959,7 @@ msgstr "Відповідає --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1017
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1888 ui/mainwindow.cpp:2004
+#: ui/mainwindow.cpp:1690 ui/mainwindow.cpp:1912 ui/mainwindow.cpp:2028
 msgid "Error"
 msgstr "Помилка"
 
@@ -1970,7 +1979,7 @@ msgstr "Помилка вилучення композицій"
 msgid "Error downloading Spotify plugin"
 msgstr "Помилка завантаження модуля Spotify"
 
-#: playlist/songloaderinserter.cpp:71 playlist/songloaderinserter.cpp:133
+#: playlist/songloaderinserter.cpp:73 playlist/songloaderinserter.cpp:135
 #, qt-format
 msgid "Error loading %1"
 msgstr "Помилка завантаження %1"
@@ -1980,12 +1989,12 @@ msgstr "Помилка завантаження %1"
 msgid "Error loading di.fm playlist"
 msgstr "Помилка завантаження списку відтворення di.fm"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Помилка обробляння %1: %2"
 
-#: playlist/songloaderinserter.cpp:100
+#: playlist/songloaderinserter.cpp:102
 msgid "Error while loading audio CD"
 msgstr "Помилка завантаження аудіо CD"
 
@@ -2063,27 +2072,27 @@ msgstr "Експортування завершено"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Експортовано %1 обкладинок з %2 (%3 пропущено)"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:682
 msgid "F1"
 msgstr "F1"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:678
 msgid "F2"
 msgstr "F2"
 
-#: ../bin/src/ui_mainwindow.h:649
+#: ../bin/src/ui_mainwindow.h:653
 msgid "F5"
 msgstr "F5"
 
-#: ../bin/src/ui_mainwindow.h:651
+#: ../bin/src/ui_mainwindow.h:655
 msgid "F6"
 msgstr "F6"
 
-#: ../bin/src/ui_mainwindow.h:653
+#: ../bin/src/ui_mainwindow.h:657
 msgid "F7"
 msgstr "F7"
 
-#: ../bin/src/ui_mainwindow.h:655
+#: ../bin/src/ui_mainwindow.h:659
 msgid "F8"
 msgstr "F8"
 
@@ -2109,6 +2118,10 @@ msgstr "Згасання"
 #: ../bin/src/ui_playbacksettingspage.h:307
 msgid "Fading duration"
 msgstr "Тривалість згасання"
+
+#: ui/mainwindow.cpp:1690
+msgid "Failed reading CD drive"
+msgstr "Не вдалося виконати читання з простою читання компакт-дисків"
 
 #: podcasts/gpoddertoptagspage.cpp:76
 msgid "Failed to fetch directory"
@@ -2161,6 +2174,10 @@ msgstr "Отримуємо бібліотеку Subsonic"
 msgid "Fetching cover error"
 msgstr "Не вдалося отримати обкладинку"
 
+#: ../bin/src/ui_ripcd.h:320
+msgid "File Format"
+msgstr "Формат файлів"
+
 #: ui/organisedialog.cpp:71
 msgid "File extension"
 msgstr "Розширення файлу"
@@ -2169,19 +2186,19 @@ msgstr "Розширення файлу"
 msgid "File formats"
 msgstr "Формати файлів"
 
-#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Назва файлу"
 
-#: playlist/playlist.cpp:1229
+#: playlist/playlist.cpp:1232
 msgid "File name (without path)"
 msgstr "Назва файлу (без шляху)"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Розмір файлу"
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1234 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2191,7 +2208,7 @@ msgstr "Тип файлу"
 msgid "Filename"
 msgstr "Назва файлу"
 
-#: ui/mainwindow.cpp:239
+#: ui/mainwindow.cpp:242
 msgid "Files"
 msgstr "Файли"
 
@@ -2311,9 +2328,10 @@ msgstr "Загальне"
 msgid "General settings"
 msgstr "Загальні налаштування"
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:66
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Жанр"
 
@@ -2345,11 +2363,11 @@ msgstr "Дати назву:"
 msgid "Go"
 msgstr "Вперед"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Go to next playlist tab"
 msgstr "До наступної вкладки списку відтворення"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:712
 msgid "Go to previous playlist tab"
 msgstr "До попередньої вкладки списку відтворення"
 
@@ -2419,7 +2437,7 @@ msgstr "Групувати за жанром/альбомом"
 msgid "Group by Genre/Artist/Album"
 msgstr "Групувати за жанром/Виконавцем/альбомом"
 
-#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1220 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr "Групування"
@@ -2574,6 +2592,10 @@ msgstr "Індексуємо %1"
 msgid "Information"
 msgstr "Інформація"
 
+#: ../bin/src/ui_ripcd.h:301
+msgid "Input options"
+msgstr "Налаштування вхідних даних"
+
 #: ../bin/src/ui_organisedialog.h:203
 msgid "Insert..."
 msgstr "Вставити…"
@@ -2586,7 +2608,7 @@ msgstr "Встановлено"
 msgid "Integrity check"
 msgstr "Перевірка цілісності даних"
 
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:244
 msgid "Internet"
 msgstr "Інтернет"
 
@@ -2626,6 +2648,10 @@ msgstr "Неправильний ключ сеансу"
 msgid "Invalid username and/or password"
 msgstr "Некоректне ім’я користувача і/або пароль"
 
+#: ../bin/src/ui_ripcd.h:312
+msgid "Invert Selection"
+msgstr "Інвертувати позначення"
+
 #: internet/jamendoservice.cpp:127
 msgid "Jamendo"
 msgstr "Jamendo"
@@ -2650,7 +2676,7 @@ msgstr "Найпопулярніші композиції тижня в Jamendo"
 msgid "Jamendo database"
 msgstr "База даних Jamendo"
 
-#: ../bin/src/ui_mainwindow.h:699
+#: ../bin/src/ui_mainwindow.h:703
 msgid "Jump to the currently playing track"
 msgstr "Перейти до відтворюваної доріжки"
 
@@ -2674,7 +2700,7 @@ msgstr "Продовжувати виконання у фоні коли вік�
 msgid "Keep the original files"
 msgstr "Зберегти оригінальні файли"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:695
 msgid "Kittens"
 msgstr "Кошенята"
 
@@ -2698,7 +2724,7 @@ msgstr "Велика обкладинка альбому"
 msgid "Large sidebar"
 msgstr "Велика бічна панель"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1222
+#: library/library.cpp:71 playlist/playlist.cpp:1225
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Востаннє відтворено"
@@ -2781,12 +2807,12 @@ msgstr "Типово, залишити порожнім.  Наприклад: \"
 msgid "Left"
 msgstr "Ліворуч"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:68
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Тривалість"
 
-#: ui/mainwindow.cpp:228 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:231 ui/mainwindow.cpp:241
 msgid "Library"
 msgstr "Фонотека"
 
@@ -2794,7 +2820,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Розширене групування фонотеки"
 
-#: ui/mainwindow.cpp:2121
+#: ui/mainwindow.cpp:2145
 msgid "Library rescan notice"
 msgstr "Повідомлення про повторне сканування фонотеки"
 
@@ -2839,7 +2865,7 @@ msgstr "Завантажити обкладинку з диска"
 msgid "Load playlist"
 msgstr "Завантажити список відтворення"
 
-#: ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Load playlist..."
 msgstr "Завантажити список відтворення…"
 
@@ -2868,11 +2894,11 @@ msgstr "Завантаження пісень"
 msgid "Loading stream"
 msgstr "Завантаження потоку"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:233
+#: playlist/songloaderinserter.cpp:81 ui/edittagdialog.cpp:233
 msgid "Loading tracks"
 msgstr "Завантаження доріжок"
 
-#: playlist/songloaderinserter.cpp:139
+#: playlist/songloaderinserter.cpp:141
 msgid "Loading tracks info"
 msgstr "Завантажую дані доріжок"
 
@@ -2891,10 +2917,10 @@ msgstr "Завантажити файли/адреси, замінюючи по�
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:131
-#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Увійти"
 
@@ -2906,7 +2932,7 @@ msgstr "Не вдалося увійти"
 msgid "Long term prediction profile (LTP)"
 msgstr "Профіль довготривалого передбачення (LTP)"
 
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:664
 msgid "Love"
 msgstr "Додати до улюблених"
 
@@ -2969,7 +2995,7 @@ msgstr "Завантаження з Magnatune завершено"
 msgid "Main profile (MAIN)"
 msgstr "Основний профіль (MAIN)"
 
-#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:690
+#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:694
 msgid "Make it so!"
 msgstr "Гаразд!"
 
@@ -3052,7 +3078,7 @@ msgstr "Відтворення у режимі моно"
 msgid "Months"
 msgstr "Місяців"
 
-#: playlist/playlist.cpp:1237
+#: playlist/playlist.cpp:1240
 msgid "Mood"
 msgstr "Настрій"
 
@@ -3082,7 +3108,7 @@ msgstr "Точки монтування"
 msgid "Move down"
 msgstr "Перемістити вниз"
 
-#: ui/mainwindow.cpp:507 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:515 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "Перемістити до фонотеки…"
 
@@ -3091,7 +3117,7 @@ msgstr "Перемістити до фонотеки…"
 msgid "Move up"
 msgstr "Перемістити вгору"
 
-#: transcoder/transcodedialog.cpp:221 ui/mainwindow.cpp:1617
+#: transcoder/transcodedialog.cpp:221 ui/mainwindow.cpp:1625
 msgid "Music"
 msgstr "Музика"
 
@@ -3099,7 +3125,7 @@ msgstr "Музика"
 msgid "Music Library"
 msgstr "Фонотека"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:717
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Вимкнути звук"
@@ -3187,7 +3213,7 @@ msgstr "Ніколи не починати відтворення"
 msgid "New folder"
 msgstr "Нова тека"
 
-#: ui/mainwindow.cpp:1457 ../bin/src/ui_mainwindow.h:701
+#: ui/mainwindow.cpp:1465 ../bin/src/ui_mainwindow.h:705
 msgid "New playlist"
 msgstr "Новий список відтворення"
 
@@ -3211,7 +3237,7 @@ msgstr "Найновіші доріжки"
 msgid "Next"
 msgstr "Наступна"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:658
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Наступна доріжка"
@@ -3250,7 +3276,7 @@ msgstr "Без коротких блоків"
 msgid "None"
 msgstr "Немає"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1889 ui/mainwindow.cpp:2005
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1913 ui/mainwindow.cpp:2029
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Жодна з вибраних композицій не придатна для копіювання на пристрій"
 
@@ -3368,7 +3394,7 @@ msgstr "Непрозорість"
 msgid "Open %1 in browser"
 msgstr "Відкрити %1 у переглядачі"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Open &audio CD..."
 msgstr "Відкрити &аудіо CD…"
 
@@ -3384,7 +3410,7 @@ msgstr "Відкрити файл OPML…"
 msgid "Open device"
 msgstr "Відкрити пристрій"
 
-#: ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:689
 msgid "Open file..."
 msgstr "Відкрити файл…"
 
@@ -3419,7 +3445,7 @@ msgstr "Оптимізувати для бітової швидкості"
 msgid "Optimize for quality"
 msgstr "Оптимізувати для якості"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Налаштування…"
 
@@ -3431,7 +3457,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Упорядкування файлів"
 
-#: library/libraryview.cpp:387 ui/mainwindow.cpp:508
+#: library/libraryview.cpp:387 ui/mainwindow.cpp:516
 msgid "Organise files..."
 msgstr "Упорядкування файлів…"
 
@@ -3455,7 +3481,7 @@ msgstr "Результат"
 msgid "Output device"
 msgstr "Пристрій відтворення"
 
-#: ../bin/src/ui_transcodedialog.h:211
+#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_ripcd.h:318
 msgid "Output options"
 msgstr "Налаштування виведення"
 
@@ -3496,7 +3522,7 @@ msgstr "Вечірка"
 msgid "Password"
 msgstr "Пароль"
 
-#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:863 ui/mainwindow.cpp:1296
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:871 ui/mainwindow.cpp:1304
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Призупинити"
@@ -3509,7 +3535,7 @@ msgstr "Призупинити відтворення"
 msgid "Paused"
 msgstr "Призупинено"
 
-#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1219 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr "Виконавець"
@@ -3522,9 +3548,9 @@ msgstr "Піксель"
 msgid "Plain sidebar"
 msgstr "Звичайна бічна панель"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:490 ui/mainwindow.cpp:831
-#: ui/mainwindow.cpp:850 ui/mainwindow.cpp:1299 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:498 ui/mainwindow.cpp:839
+#: ui/mainwindow.cpp:858 ui/mainwindow.cpp:1307 ui/qtsystemtrayicon.cpp:166
+#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
 msgstr "Відтворити"
@@ -3537,7 +3563,7 @@ msgstr "Відтворити «Виконавця» або «Мітку»"
 msgid "Play artist radio..."
 msgstr "Відтворити радіо виконавця…"
 
-#: playlist/playlist.cpp:1220 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Кількість відтворень"
 
@@ -3592,7 +3618,7 @@ msgstr "Налаштування списку відтворення"
 msgid "Playlist type"
 msgstr "Тип списку відтворення"
 
-#: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:240
+#: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:243
 msgid "Playlists"
 msgstr "Списки відтворення"
 
@@ -3644,7 +3670,7 @@ msgstr "Підсилення"
 msgid "Preferences"
 msgstr "Параметри"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:679
 msgid "Preferences..."
 msgstr "Параметри…"
 
@@ -3699,7 +3725,7 @@ msgstr "Перегляд"
 msgid "Previous"
 msgstr "Попередня"
 
-#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Попередня доріжка"
@@ -3713,7 +3739,7 @@ msgid "Profile"
 msgstr "Профіль"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcd.h:324
 msgid "Progress"
 msgstr "Поступ"
 
@@ -3742,16 +3768,16 @@ msgstr "Якість"
 msgid "Querying device..."
 msgstr "Опитування пристрою…"
 
-#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:711
+#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:715
 msgid "Queue Manager"
 msgstr "Керування чергою"
 
-#: ui/mainwindow.cpp:1378
+#: ui/mainwindow.cpp:1386
 msgid "Queue selected tracks"
 msgstr "Поставити в чергу вибрані доріжки"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1376
+#: ui/mainwindow.cpp:1384
 msgid "Queue track"
 msgstr "Поставити в чергу доріжки"
 
@@ -3763,7 +3789,7 @@ msgstr "Радіо (однакова гучність всіх композиц�
 msgid "Radios"
 msgstr "Радіо"
 
-#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:688
+#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:692
 msgid "Rain"
 msgstr "Дощ"
 
@@ -3795,7 +3821,7 @@ msgstr "Поставити поточній композиції чотири з
 msgid "Rate the current song 5 stars"
 msgstr "Поставити поточній композиції п’ять зірочок"
 
-#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1222 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "Оцінка"
 
@@ -3853,7 +3879,7 @@ msgstr "Вилучити"
 msgid "Remove action"
 msgstr "Вилучити дію"
 
-#: ../bin/src/ui_mainwindow.h:720
+#: ../bin/src/ui_mainwindow.h:724
 msgid "Remove duplicates from playlist"
 msgstr "Вилучити повтори зі списку відтворення"
 
@@ -3869,7 +3895,7 @@ msgstr "Вилучити з теки Моя музика"
 msgid "Remove from favorites"
 msgstr "Вилучити з улюблених"
 
-#: internet/groovesharkservice.cpp:530 ../bin/src/ui_mainwindow.h:695
+#: internet/groovesharkservice.cpp:530 ../bin/src/ui_mainwindow.h:699
 msgid "Remove from playlist"
 msgstr "Вилучити зі списку відтворення"
 
@@ -3906,7 +3932,7 @@ msgstr "Перейменувати список відтворення"
 msgid "Rename playlist..."
 msgstr "Перейменувати список відтворення…"
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:675
 msgid "Renumber tracks in this order..."
 msgstr "Пронумерувати доріжки в такому порядку…"
 
@@ -3997,6 +4023,18 @@ msgstr "Повернутися до Clementine"
 msgid "Right"
 msgstr "Праворуч"
 
+#: ../bin/src/ui_ripcd.h:303
+msgid "Rip"
+msgstr "Оцифрувати"
+
+#: ui/ripcd.cpp:116
+msgid "Rip CD"
+msgstr "Оцифрувати КД"
+
+#: ../bin/src/ui_mainwindow.h:730
+msgid "Rip audio CD..."
+msgstr "Оцифрувати звуковий КД…"
+
 #: ui/equalizer.cpp:131
 msgid "Rock"
 msgstr "Рок"
@@ -4023,7 +4061,7 @@ msgstr "Безпечно вилучити пристрій"
 msgid "Safely remove the device after copying"
 msgstr "Безпечне вилучення пристрою після копіювання"
 
-#: playlist/playlist.cpp:1227 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Частота вибірки"
 
@@ -4051,7 +4089,7 @@ msgstr "Зберегти зображення"
 msgid "Save playlist"
 msgstr "Зберегти список відтворення"
 
-#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:703
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "Зберегти список відтворення…"
 
@@ -4087,7 +4125,7 @@ msgstr "Профіль масштабованої частоти вибірки 
 msgid "Scale size"
 msgstr "Масштабований розмір"
 
-#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Рахунок"
 
@@ -4096,7 +4134,7 @@ msgid "Scrobble tracks that I listen to"
 msgstr "Скробблити доріжки, які я слухаю"
 
 #: ui/albumcoversearcher.cpp:173 ui/albumcoversearcher.cpp:190
-#: ui/mainwindow.cpp:237 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
 #: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
@@ -4180,11 +4218,11 @@ msgstr "Трохи перемотати поточну доріжку"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотати поточну доріжку на абсолютну позицію"
 
-#: visualisations/visualisationselector.cpp:40
+#: visualisations/visualisationselector.cpp:40 ../bin/src/ui_ripcd.h:310
 msgid "Select All"
 msgstr "Вибрати все"
 
-#: visualisations/visualisationselector.cpp:42
+#: visualisations/visualisationselector.cpp:42 ../bin/src/ui_ripcd.h:311
 msgid "Select None"
 msgstr "Скасувати вибір"
 
@@ -4212,7 +4250,7 @@ msgstr "Вибрати візуалізації"
 msgid "Select visualizations..."
 msgstr "Вибрати візуалізації…"
 
-#: ../bin/src/ui_transcodedialog.h:219
+#: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
 msgstr "Вибрати…"
 
@@ -4232,7 +4270,7 @@ msgstr "Параметри сервера"
 msgid "Service offline"
 msgstr "Служба вимкнена"
 
-#: ui/mainwindow.cpp:1405
+#: ui/mainwindow.cpp:1413
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Встановити %1 до \"%2\"…"
@@ -4241,7 +4279,7 @@ msgstr "Встановити %1 до \"%2\"…"
 msgid "Set the volume to <value> percent"
 msgstr "Встановити гучність до <value> відсотків"
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:676
 msgid "Set value for all selected tracks..."
 msgstr "Встановити значення для всіх вибраних доріжок…"
 
@@ -4304,7 +4342,7 @@ msgstr "Показувати приємні повідомлення OSD"
 msgid "Show above status bar"
 msgstr "Показати вище, в рядку стану"
 
-#: ui/mainwindow.cpp:463
+#: ui/mainwindow.cpp:471
 msgid "Show all songs"
 msgstr "Показати всі композиції"
 
@@ -4324,12 +4362,12 @@ msgstr "Показати розділювачі"
 msgid "Show fullsize..."
 msgstr "Показати на повний розмір…"
 
-#: library/libraryview.cpp:399 ui/mainwindow.cpp:511
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:519
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Показати в оглядачі файлів…"
 
-#: ui/mainwindow.cpp:512
+#: ui/mainwindow.cpp:520
 msgid "Show in library..."
 msgstr "Показати у фонотеці…"
 
@@ -4341,11 +4379,11 @@ msgstr "Показувати в різних виконавцях"
 msgid "Show moodbar"
 msgstr "Показувати смужку настрою"
 
-#: ui/mainwindow.cpp:464
+#: ui/mainwindow.cpp:472
 msgid "Show only duplicates"
 msgstr "Показати тільки дублікати"
 
-#: ui/mainwindow.cpp:465
+#: ui/mainwindow.cpp:473
 msgid "Show only untagged"
 msgstr "Показати тільки без міток"
 
@@ -4385,7 +4423,7 @@ msgstr "Перемішати альбоми"
 msgid "Shuffle all"
 msgstr "Перемішати все"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Shuffle playlist"
 msgstr "Перемішати список відтворення"
 
@@ -4425,7 +4463,7 @@ msgstr "Ска"
 msgid "Skip backwards in playlist"
 msgstr "Перескочити назад в списку композицій"
 
-#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "Кількість пропусків"
 
@@ -4461,7 +4499,7 @@ msgstr "Легкий рок"
 msgid "Song Information"
 msgstr "Про композицію"
 
-#: ui/mainwindow.cpp:244
+#: ui/mainwindow.cpp:247
 msgid "Song info"
 msgstr "Про композицію"
 
@@ -4493,7 +4531,7 @@ msgstr "Сортувати композиції за"
 msgid "Sorting"
 msgstr "Сортування"
 
-#: playlist/playlist.cpp:1236
+#: playlist/playlist.cpp:1239
 msgid "Source"
 msgstr "Джерело"
 
@@ -4529,6 +4567,10 @@ msgstr "Типово"
 msgid "Starred"
 msgstr "Оцінені"
 
+#: ui/ripcd.cpp:90
+msgid "Start ripping"
+msgstr "Почати оцифрування"
+
 #: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Запустити список відтворення, що відтворюється на цей час"
@@ -4544,7 +4586,7 @@ msgid ""
 "list"
 msgstr "Введіть щось у полі пошуку, розташованому вище, щоб побачити на цій панелі список результатів пошуку"
 
-#: transcoder/transcoder.cpp:405
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "Запуск %1"
@@ -4557,7 +4599,7 @@ msgstr "Запуск…"
 msgid "Stations"
 msgstr "Станції"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:656
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Зупинити"
@@ -4566,7 +4608,7 @@ msgstr "Зупинити"
 msgid "Stop after"
 msgstr "Зупинити після"
 
-#: ui/mainwindow.cpp:492 ../bin/src/ui_mainwindow.h:658
+#: ui/mainwindow.cpp:500 ../bin/src/ui_mainwindow.h:662
 msgid "Stop after this track"
 msgstr "Зупинити після цієї доріжки"
 
@@ -4734,7 +4776,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Час тестування сервера Subsonic завершено. Будь ласка, придбайте ліцензійний ключ. Відвідайте subsonic.org, щоб дізнатися більше."
 
-#: ui/mainwindow.cpp:2114
+#: ui/mainwindow.cpp:2138
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4775,7 +4817,7 @@ msgid ""
 "continue?"
 msgstr "Ці файли будуть вилучені з пристрою. Ви впевнені? Вилучити їх?"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1937 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1961 widgets/fileview.cpp:188
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4847,9 +4889,10 @@ msgstr "Цей потік лише для платних передплатни�
 msgid "This type of device is not supported: %1"
 msgstr "Цей тип пристрою не підтримується: %1"
 
-#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "Назва"
 
@@ -4871,11 +4914,11 @@ msgstr "Змінити режим приємних OSD"
 msgid "Toggle fullscreen"
 msgstr "Повноекранний режим"
 
-#: ui/mainwindow.cpp:1380
+#: ui/mainwindow.cpp:1388
 msgid "Toggle queue status"
 msgstr "Перемикнути статус черги"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:722
 msgid "Toggle scrobbling"
 msgstr "Змінити режим скроблінгу"
 
@@ -4907,12 +4950,13 @@ msgstr "Всього передано байтів"
 msgid "Total network requests made"
 msgstr "Всього зроблено запитів до мережі"
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
+#: ../bin/src/ui_ripcd.h:305
 msgid "Track"
 msgstr "Доріжка"
 
-#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:701
 msgid "Transcode Music"
 msgstr "Перекодування музики"
 
@@ -5010,7 +5054,7 @@ msgstr "Оновити список відтворення на Grooveshark"
 msgid "Update all podcasts"
 msgstr "Оновити всі подкасти"
 
-#: ../bin/src/ui_mainwindow.h:709
+#: ../bin/src/ui_mainwindow.h:713
 msgid "Update changed library folders"
 msgstr "Оновити змінені теки у фонотеці"
 
@@ -5165,7 +5209,7 @@ msgstr "Перегляд"
 msgid "Visualization mode"
 msgstr "Режим візуалізації"
 
-#: ../bin/src/ui_mainwindow.h:710 ui/dbusscreensaver.cpp:35
+#: ../bin/src/ui_mainwindow.h:714 ui/dbusscreensaver.cpp:35
 msgid "Visualizations"
 msgstr "Візуалізації"
 
@@ -5293,7 +5337,7 @@ msgid ""
 "well?"
 msgstr "Хочете пересунути всі ініші композиції цього альбому до розділу «Різні виконавці»?"
 
-#: ui/mainwindow.cpp:2119
+#: ui/mainwindow.cpp:2143
 msgid "Would you like to run a full rescan right now?"
 msgstr "Бажаєте зараз виконати повторне сканування фонотеки?"
 
@@ -5305,10 +5349,10 @@ msgstr "Записати статичні дані щодо всіх компо�
 msgid "Wrong username or password."
 msgstr "Помилкове ім’я користувача або пароль."
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
-#: ../bin/src/ui_trackselectiondialog.h:212
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "Рік"
 
