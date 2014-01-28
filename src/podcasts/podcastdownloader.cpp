@@ -20,6 +20,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "library/librarydirectorymodel.h"
@@ -125,9 +126,13 @@ void PodcastDownloader::DeleteEpisode(const PodcastEpisode& episode) {
 }
 
 void PodcastDownloader::FinishAndDelete(Task* task) {
+  Podcast podcast =
+    backend_->GetSubscriptionById(task->episode.podcast_database_id());
+  Song song = task->episode.ToSong(podcast);
   downloading_episode_ids_.remove(task->episode.database_id());
   emit ProgressChanged(task->episode, Finished, 0);
-
+  //I didn't ecountered even a single podcast with corect metadata
+  TagReaderClient::Instance()->SaveFileBlocking(task->file->fileName(), song);
   delete task;
 
   NextTask();
