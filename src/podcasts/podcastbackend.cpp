@@ -141,7 +141,7 @@ void PodcastBackend::UpdateEpisodes(const PodcastEpisodeList& episodes) {
               "     local_url = :local_url"
               " WHERE ROWID = :id", db);
 
-  for (const auto& episode : episodes) {
+  for (const PodcastEpisode& episode : episodes) {
     q.bindValue(":listened", episode.listened());
     q.bindValue(":listened_date", episode.listened_date().toTime_t());
     q.bindValue(":downloaded", episode.downloaded());

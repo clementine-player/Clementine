@@ -18,14 +18,13 @@
 #ifndef ORGANISEDIALOG_H
 #define ORGANISEDIALOG_H
 
+#include <memory>
 #include <QDialog>
 #include <QMap>
 #include <QUrl>
 
 #include "core/organiseformat.h"
 #include "core/song.h"
-
-#include <boost/scoped_ptr.hpp>
 
 class LibraryWatcher;
 class OrganiseErrorDialog;
@@ -77,7 +76,7 @@ private:
   SongList songs_;
   quint64 total_size_;
 
-  boost::scoped_ptr<OrganiseErrorDialog> error_dialog_;
+  std::unique_ptr<OrganiseErrorDialog> error_dialog_;
 
   bool resized_by_user_;
 };

@@ -69,8 +69,8 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
 
   connect(backend_, SIGNAL(SubscriptionAdded(Podcast)), SLOT(SubscriptionAdded(Podcast)));
   connect(backend_, SIGNAL(SubscriptionRemoved(Podcast)), SLOT(SubscriptionRemoved(Podcast)));
-  connect(backend_, SIGNAL(EpisodesAdded(QList<PodcastEpisode>)), SLOT(EpisodesAdded(QList<PodcastEpisode>)));
-  connect(backend_, SIGNAL(EpisodesUpdated(QList<PodcastEpisode>)), SLOT(EpisodesUpdated(QList<PodcastEpisode>)));
+  connect(backend_, SIGNAL(EpisodesAdded(PodcastEpisodeList)), SLOT(EpisodesAdded(PodcastEpisodeList)));
+  connect(backend_, SIGNAL(EpisodesUpdated(PodcastEpisodeList)), SLOT(EpisodesUpdated(PodcastEpisodeList)));
 
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
 }
@@ -127,9 +127,9 @@ void PodcastService::CopyToDevice() {
 }
 
 void PodcastService::CopyToDevice(const PodcastEpisodeList& episodes_list) {
-  QList<Song> songs;
+  SongList songs;
   Podcast podcast;
-  for (const auto& episode : episodes_list) {
+  for (const PodcastEpisode& episode : episodes_list) {
     podcast = backend_->GetSubscriptionById(episode.podcast_database_id());
     songs.append(episode.ToSong(podcast));
   }
@@ -143,16 +143,16 @@ void PodcastService::CopyToDevice(const PodcastEpisodeList& episodes_list) {
 void PodcastService::CopyToDevice(const QModelIndexList& episode_indexes,
                                       const QModelIndexList& podcast_indexes) {
   PodcastEpisode episode_tmp;
-  QList<Song> songs;
+  SongList  songs;
   PodcastEpisodeList episodes;
   Podcast podcast;
-  for (const auto& index : episode_indexes) {
+  for (const QModelIndex& index : episode_indexes) {
     episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
     if (episode_tmp.downloaded())
       episodes << episode_tmp;
   }
 
-  for (const auto& podcast : podcast_indexes) {
+  for (const QModelIndex& podcast : podcast_indexes) {
     for (int i = 0; i < podcast.model()->rowCount(podcast); ++i) {
       const QModelIndex& index = podcast.child(i, 0);
       episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
@@ -160,7 +160,7 @@ void PodcastService::CopyToDevice(const QModelIndexList& episode_indexes,
         episodes << episode_tmp;
     }
   }
-  for (const auto& episode : episodes) {
+  for (const PodcastEpisode& episode : episodes) {
     podcast = backend_->GetSubscriptionById(episode.podcast_database_id());
     songs.append(episode.ToSong(podcast));
   }
@@ -190,7 +190,7 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
     default_icon_ = QIcon(":providers/podcast16.png");
   }
 
-  for (const auto& podcast : backend_->GetAllSubscriptions()) {
+  for (const Podcast& podcast : backend_->GetAllSubscriptions()) {
     parent->appendRow(CreatePodcastItem(podcast));
   }
 }
@@ -270,7 +270,7 @@ QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
 
   // Add the episodes in this podcast and gather aggregate stats.
   int unlistened_count = 0;
-  for (const auto& episode : backend_->GetEpisodes(podcast.database_id())) {
+  for (const PodcastEpisode& episode : backend_->GetEpisodes(podcast.database_id())) {
     if (!episode.listened()) {
       unlistened_count++;
     }
@@ -360,7 +360,7 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   explicitly_selected_podcasts_.clear();
   QSet<int> podcast_ids;
 
-  for (const auto& index : model()->selected_indexes()) {
+  for (const QModelIndex& index : model()->selected_indexes()) {
     switch (index.data(InternetModel::Role_Type).toInt()) {
     case Type_Podcast: {
       const int id = index.data(Role_Podcast).value<Podcast>().database_id();
@@ -431,14 +431,14 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
 }
 
 void PodcastService::UpdateSelectedPodcast() {
-  for (const auto& index : selected_podcasts_) {
+  for (const QModelIndex& index : selected_podcasts_) {
     app_->podcast_updater()->UpdatePodcastNow(
           index.data(Role_Podcast).value<Podcast>());
   }
 }
 
 void PodcastService::RemoveSelectedPodcast() {
-  for (const auto& index : selected_podcasts_) {
+  for (const QModelIndex& index : selected_podcasts_) {
     backend_->Unsubscribe(index.data(Role_Podcast).value<Podcast>());
   }
 }
@@ -494,10 +494,10 @@ void PodcastService::SubscriptionRemoved(const Podcast& podcast) {
   }
 }
 
-void PodcastService::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
+void PodcastService::EpisodesAdded(const PodcastEpisodeList& episodes) {
   QSet<int> seen_podcast_ids;
 
-  for (const auto& episode : episodes) {
+  for (const PodcastEpisode& episode : episodes) {
     const int database_id = episode.podcast_database_id();
     QStandardItem* parent = podcasts_by_database_id_[database_id];
     if (!parent)
@@ -508,7 +508,7 @@ void PodcastService::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
     if (!seen_podcast_ids.contains(database_id)) {
       // Update the unlistened count text once for each podcast
       int unlistened_count = 0;
-      for (const auto& episode : backend_->GetEpisodes(database_id)) {
+      for (const PodcastEpisode& episode : backend_->GetEpisodes(database_id)) {
         if (!episode.listened()) {
           unlistened_count++;
         }
@@ -520,10 +520,10 @@ void PodcastService::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
   }
 }
 
-void PodcastService::EpisodesUpdated(const QList<PodcastEpisode>& episodes) {
+void PodcastService::EpisodesUpdated(const PodcastEpisodeList& episodes) {
   QSet<int> seen_podcast_ids;
 
-  for (const auto& episode : episodes) {
+  for (const PodcastEpisode& episode : episodes) {
     const int podcast_database_id = episode.podcast_database_id();
     QStandardItem* item = episodes_by_database_id_[episode.database_id()];
     QStandardItem* parent = podcasts_by_database_id_[podcast_database_id];
@@ -538,7 +538,7 @@ void PodcastService::EpisodesUpdated(const QList<PodcastEpisode>& episodes) {
     if (!seen_podcast_ids.contains(podcast_database_id)) {
       // Update the unlistened count text once for each podcast
       int unlistened_count = 0;
-      for (const auto& episode : backend_->GetEpisodes(podcast_database_id)) {
+      for (const PodcastEpisode& episode : backend_->GetEpisodes(podcast_database_id)) {
         if (!episode.listened()) {
           unlistened_count++;
         }
@@ -551,14 +551,14 @@ void PodcastService::EpisodesUpdated(const QList<PodcastEpisode>& episodes) {
 }
 
 void PodcastService::DownloadSelectedEpisode() {
-  for (const auto& index : selected_episodes_) {
+  for (const QModelIndex& index : selected_episodes_) {
     app_->podcast_downloader()->DownloadEpisode(
           index.data(Role_Episode).value<PodcastEpisode>());
   }
 }
 
 void PodcastService::DeleteDownloadedData() {
-  for (const auto& index : selected_episodes_) {
+  for (const QModelIndex& index : selected_episodes_) {
     app_->podcast_downloader()->DeleteEpisode(
           index.data(Role_Episode).value<PodcastEpisode>());
   }
@@ -607,7 +607,7 @@ void PodcastService::SetListened(const PodcastEpisodeList& episodes_list,
                                  bool listened) {
   PodcastEpisodeList episodes;
   QDateTime current_date_time = QDateTime::currentDateTime();
-  for (auto episode : episodes_list) {
+  for (PodcastEpisode episode : episodes_list) {
     episode.set_listened(listened);
     if (listened) {
       episode.set_listened_date(current_date_time);
@@ -624,7 +624,7 @@ void PodcastService::SetListened(const QModelIndexList& episode_indexes,
   PodcastEpisodeList episodes;
 
   // Get all the episodes from the indexes.
-  for (auto& index : episode_indexes) {
+  for (const QModelIndex& index : episode_indexes) {
     episodes << index.data(Role_Episode).value<PodcastEpisode>();
   }
 

@@ -56,8 +56,8 @@ PodcastDownloader::PodcastDownloader(Application* app, QObject* parent)
     last_progress_signal_(0),
     auto_delete_timer_(new QTimer(this))
 {
-  connect(backend_, SIGNAL(EpisodesAdded(QList<PodcastEpisode>)),
-          SLOT(EpisodesAdded(QList<PodcastEpisode>)));
+  connect(backend_, SIGNAL(EpisodesAdded(PodcastEpisodeList)),
+          SLOT(EpisodesAdded(PodcastEpisodeList)));
   connect(backend_, SIGNAL(SubscriptionAdded(Podcast)),
           SLOT(SubscriptionAdded(Podcast)));
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
@@ -282,9 +282,9 @@ void PodcastDownloader::SubscriptionAdded(const Podcast& podcast) {
   EpisodesAdded(podcast.episodes());
 }
 
-void PodcastDownloader::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
+void PodcastDownloader::EpisodesAdded(const PodcastEpisodeList& episodes) {
   if (auto_download_) {
-    for (const auto& episode : episodes) {
+    for (const PodcastEpisode& episode : episodes) {
       DownloadEpisode(episode);
     }
   }
@@ -307,7 +307,7 @@ void PodcastDownloader::AutoDelete() {
              << (delete_after_secs_ / kSecsPerDay)
              << "days ago";
 
-  for (const auto& episode : old_episodes) {
+  for (const PodcastEpisode& episode : old_episodes) {
     DeleteEpisode(episode);
   }
 }

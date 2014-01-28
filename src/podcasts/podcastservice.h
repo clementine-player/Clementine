@@ -22,8 +22,8 @@
 #include "internet/internetmodel.h"
 #include "internet/internetservice.h"
 
+#include <memory>
 #include <QScopedPointer>
-#include <boost/scoped_ptr.hpp>
 
 class AddPodcastDialog;
 class OrganiseDialog;
@@ -80,8 +80,8 @@ private slots:
 
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
-  void EpisodesAdded(const QList<PodcastEpisode>& episodes);
-  void EpisodesUpdated(const QList<PodcastEpisode>& episodes);
+  void EpisodesAdded(const PodcastEpisodeList& episodes);
+  void EpisodesUpdated(const PodcastEpisodeList& episodes);
 
   void DownloadProgressChanged(const PodcastEpisode& episode,
                                PodcastDownloader::State state,
@@ -141,7 +141,7 @@ private:
   QAction* set_listened_action_;
   QAction* copy_to_device_;
   QStandardItem* root_;
-  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
+  std::unique_ptr<OrganiseDialog> organise_dialog_;
 
   QModelIndexList explicitly_selected_podcasts_;
   QModelIndexList selected_podcasts_;

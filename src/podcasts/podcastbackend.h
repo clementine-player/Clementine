@@ -74,10 +74,10 @@ signals:
   void SubscriptionRemoved(const Podcast& podcast);
 
   // Emitted when episodes are added to a subscription that *already exists*.
-  void EpisodesAdded(const QList<PodcastEpisode>& episodes);
+  void EpisodesAdded(const PodcastEpisodeList& episodes);
 
   // Emitted when existing episodes are updated.
-  void EpisodesUpdated(const QList<PodcastEpisode>& episodes);
+  void EpisodesUpdated(const PodcastEpisodeList& episodes);
 
 private:
   // Adds each episode to the database, setting their IDs after inserting each

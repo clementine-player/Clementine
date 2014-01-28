@@ -53,7 +53,7 @@ Organise::Organise(TaskManager* task_manager,
 {
   original_thread_ = thread();
 
-  for (const auto& song : songs) {
+  for (const Song& song : songs) {
     tasks_pending_ << Task(song);
   }
 }
@@ -79,7 +79,7 @@ void Organise::ProcessSomeFiles() {
 
     if (!destination_->StartCopy(&supported_filetypes_)) {
       // Failed to start - mark everything as failed :(
-      for (const auto& task : tasks_pending_)
+      for (const Task& task : tasks_pending_)
         files_with_errors_ << task.song_.url().toLocalFile();
       tasks_pending_.clear();
     }
@@ -237,7 +237,7 @@ void Organise::UpdateProgress() {
 
   // Update transcoding progress
   QMap<QString, float> transcode_progress = transcoder_->GetProgress();
-  for (const auto& filename : transcode_progress.keys()) {
+  for (const QString& filename : transcode_progress.keys()) {
     if (!tasks_transcoding_.contains(filename))
       continue;
     tasks_transcoding_[filename].transcode_progress_ = transcode_progress[filename];
@@ -248,10 +248,10 @@ void Organise::UpdateProgress() {
   // only need to be copied total 100.
   int progress = tasks_complete_ * 100;
 
-  for (const auto& task : tasks_pending_) {
+  for (const Task& task : tasks_pending_) {
     progress += qBound(0, static_cast<int>(task.transcode_progress_ * 50), 50);
   }
-  for (const auto& task : tasks_transcoding_.values()) {
+  for (const Task& task : tasks_transcoding_.values()) {
     progress += qBound(0, static_cast<int>(task.transcode_progress_ * 50), 50);
   }
 
