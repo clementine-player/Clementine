@@ -129,8 +129,10 @@ void PodcastDownloader::FinishAndDelete(Task* task) {
   Podcast podcast =
     backend_->GetSubscriptionById(task->episode.podcast_database_id());
   Song song = task->episode.ToSong(podcast);
+
   downloading_episode_ids_.remove(task->episode.database_id());
   emit ProgressChanged(task->episode, Finished, 0);
+
   // I didn't ecountered even a single podcast with a corect metadata
   TagReaderClient::Instance()->SaveFileBlocking(task->file->fileName(), song);
   delete task;
