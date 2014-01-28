@@ -144,17 +144,17 @@ QString PodcastDownloader::FilenameForEpisode(const QString& directory,
                                               const PodcastEpisode& episode) const {
   const QString file_extension = QFileInfo(episode.url().path()).suffix();
   int count = 0;
-  
+
   // The file name contains the publication date and episode title
   QString base_filename = 
       episode.publication_date().date().toString(Qt::ISODate) + "-" +
       SanitiseFilenameComponent(episode.title());
-  
+
   // Add numbers on to the end of the filename until we find one that doesn't
   // exist.
   forever {
     QString filename;
-    
+
     if (count == 0) {
       filename = QString("%1/%2.%3").arg(
             directory, base_filename, file_extension);
@@ -162,12 +162,12 @@ QString PodcastDownloader::FilenameForEpisode(const QString& directory,
       filename = QString("%1/%2 (%3).%4").arg(
             directory, base_filename, QString::number(count), file_extension);
     }
-    
+
     if (!QFile::exists(filename)) {
       return filename;
     }
-    
-    count ++;
+
+    count++;
   }
 }
 
@@ -204,8 +204,8 @@ void PodcastDownloader::StartDownloading(Task* task) {
   RedirectFollower* reply = new RedirectFollower(network_->get(req));
   connect(reply, SIGNAL(readyRead()), SLOT(ReplyReadyRead()));
   connect(reply, SIGNAL(finished()), SLOT(ReplyFinished()));
-  connect(reply, SIGNAL(downloadProgress(qint64,qint64)),
-          SLOT(ReplyDownloadProgress(qint64,qint64)));
+  connect(reply, SIGNAL(downloadProgress(qint64, qint64)),
+          SLOT(ReplyDownloadProgress(qint64, qint64)));
 
   emit ProgressChanged(task->episode, Downloading, 0);
 }
@@ -242,7 +242,7 @@ void PodcastDownloader::ReplyDownloadProgress(qint64 received, qint64 total) {
   last_progress_signal_ = current_time;
 
   emit ProgressChanged(current_task_->episode, Downloading,
-                       float(received) / total * 100);
+                       static_cast<float>(received) / total * 100);
 }
 
 void PodcastDownloader::ReplyFinished() {
@@ -284,7 +284,7 @@ void PodcastDownloader::SubscriptionAdded(const Podcast& podcast) {
 
 void PodcastDownloader::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
   if (auto_download_) {
-    foreach (const PodcastEpisode& episode, episodes) {
+    for (const auto& episode : episodes) {
       DownloadEpisode(episode);
     }
   }
@@ -307,7 +307,7 @@ void PodcastDownloader::AutoDelete() {
              << (delete_after_secs_ / kSecsPerDay)
              << "days ago";
 
-  foreach (const PodcastEpisode& episode, old_episodes) {
+  for (const auto& episode : old_episodes) {
     DeleteEpisode(episode);
   }
 }
