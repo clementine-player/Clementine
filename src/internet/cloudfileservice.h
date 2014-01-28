@@ -3,6 +3,8 @@
 
 #include "internetservice.h"
 
+#include <memory>
+
 #include <QMenu>
 
 #include "core/tagreaderclient.h"
@@ -61,8 +63,8 @@ class CloudFileService : public InternetService {
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;
 
-  boost::scoped_ptr<QMenu> context_menu_;
-  boost::scoped_ptr<AlbumCoverManager> cover_manager_;
+  std::unique_ptr<QMenu> context_menu_;
+  std::unique_ptr<AlbumCoverManager> cover_manager_;
   PlaylistManager* playlist_manager_;
   TaskManager* task_manager_;
 
