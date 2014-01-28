@@ -51,10 +51,10 @@ QUrl PodcastUrlLoader::FixPodcastUrl(const QString& url_text) {
   // Thanks gpodder!
   QuickPrefixList quick_prefixes = QuickPrefixList()
       << QuickPrefix("fb:", "http://feeds.feedburner.com/%1")
-      << QuickPrefix("yt:", "http://www.youtube.com/rss/user/%1/videos.rss")
-      << QuickPrefix("sc:", "http://soundcloud.com/%1")
+      << QuickPrefix("yt:", "https://www.youtube.com/rss/user/%1/videos.rss")
+      << QuickPrefix("sc:", "https://soundcloud.com/%1")
       << QuickPrefix("fm4od:", "http://onapp1.orf.at/webcam/fm4/fod/%1.xspf")
-      << QuickPrefix("ytpl:", "http://gdata.youtube.com/feeds/api/playlists/%1");
+      << QuickPrefix("ytpl:", "https://gdata.youtube.com/feeds/api/playlists/%1");
 
   // Check if it matches one of the quick prefixes.
   for (QuickPrefixList::const_iterator it = quick_prefixes.constBegin() ;

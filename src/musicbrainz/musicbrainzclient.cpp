@@ -27,8 +27,8 @@
 #include "core/network.h"
 #include "core/utilities.h"
 
-const char* MusicBrainzClient::kTrackUrl = "http://musicbrainz.org/ws/2/recording/";
-const char* MusicBrainzClient::kDiscUrl = "http://musicbrainz.org/ws/2/discid/";
+const char* MusicBrainzClient::kTrackUrl = "https://musicbrainz.org/ws/2/recording/";
+const char* MusicBrainzClient::kDiscUrl = "https://musicbrainz.org/ws/2/discid/";
 const char* MusicBrainzClient::kDateRegex = "^[12]\\d{3}";
 const int MusicBrainzClient::kDefaultTimeout = 5000; // msec
 

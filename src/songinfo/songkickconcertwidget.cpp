@@ -90,7 +90,7 @@ void SongKickConcertWidget::Init(const QString& title, const QString& url,
 void SongKickConcertWidget::SetMap(const QString& lat, const QString& lng,
                                    const QString& venue_name) {
   static const char* kStaticMapUrl =
-      "http://maps.googleapis.com/maps/api/staticmap"
+      "https://maps.googleapis.com/maps/api/staticmap"
       "?key=AIzaSyDDJqmLOeE1mY_EBONhnQmdXbKtasgCtqg"
       "&sensor=false"
       "&size=%1x%2"
