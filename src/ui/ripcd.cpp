@@ -121,9 +121,9 @@ RipCD::RipCD(QWidget* parent) :
     qLog(Error) << "Failed to read CD drive";
     return;
   } else {
-    i_tracks = cdio_get_num_tracks(cdio_);
-    ui_->tableWidget->setRowCount(i_tracks);
-    for (int i = 1; i <= i_tracks; i++) {
+    i_tracks_ = cdio_get_num_tracks(cdio_);
+    ui_->tableWidget->setRowCount(i_tracks_);
+    for (int i = 1; i <= i_tracks_; i++) {
       QCheckBox *checkbox_i = new QCheckBox(ui_->tableWidget);
       checkbox_i->setCheckState(Qt::Checked);
       checkboxes_.append(checkbox_i);
@@ -235,7 +235,7 @@ void RipCD::ThreadClickedRipButton() {
   emit(SignalUpdateProgress());
 
 
-  for (int i = 1; i <= i_tracks; i++) {
+  for (int i = 1; i <= i_tracks_; i++) {
     if (!checkboxes_.value(i - 1)->isChecked()) {
       continue;
     }

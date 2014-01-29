@@ -46,7 +46,7 @@ class RipCD: public QDialog {
   int queued_;
   int finished_success_;
   int finished_failed_;
-  track_t i_tracks;
+  track_t i_tracks_;
   Ui_RipCD* ui_;
   CdIo_t *cdio_;
   QList<QCheckBox*> checkboxes_;
