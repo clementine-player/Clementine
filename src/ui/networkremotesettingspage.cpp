@@ -79,7 +79,6 @@ void NetworkRemoteSettingsPage::Load() {
     // TODO: Add ipv6 support to tinysvcmdns.
     if (address.protocol() == QAbstractSocket::IPv4Protocol &&
         !address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8"))) {
-      qLog(Debug) << "IP:" << address.toString();
       if (!ip_addresses.isEmpty()) {
         ip_addresses.append(", ");
       }
