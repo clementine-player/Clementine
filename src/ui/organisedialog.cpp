@@ -147,7 +147,7 @@ int OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_siz
 
   // Load some of the songs to show in the preview
   for (const QString& filename : filenames) {
-    TagReaderClient::Instance()->ReadFileBlocking(song.basefilename(), &song);
+    TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
     if (song.is_valid())
       songs << song;
   }
