@@ -56,16 +56,14 @@ struct sqlite3_tokenizer_module {
   int (*xCreate)(
     int argc,                           /* Size of argv array */
     const char *const*argv,             /* Tokenizer argument strings */
-    sqlite3_tokenizer **ppTokenizer     /* OUT: Created tokenizer */
-  );
+    sqlite3_tokenizer **ppTokenizer);   /* OUT: Created tokenizer */
 
   int (*xDestroy)(sqlite3_tokenizer *pTokenizer);
 
   int (*xOpen)(
     sqlite3_tokenizer *pTokenizer,       /* Tokenizer object */
     const char *pInput, int nBytes,      /* Input buffer */
-    sqlite3_tokenizer_cursor **ppCursor  /* OUT: Created tokenizer cursor */
-  );
+    sqlite3_tokenizer_cursor **ppCursor);/* OUT: Created tokenizer cursor */
 
   int (*xClose)(sqlite3_tokenizer_cursor *pCursor);
 
@@ -74,8 +72,7 @@ struct sqlite3_tokenizer_module {
     const char **ppToken, int *pnBytes,  /* OUT: Normalized text for token */
     int *piStartOffset,  /* OUT: Byte offset of token in input buffer */
     int *piEndOffset,    /* OUT: Byte offset of end of token in input buffer */
-    int *piPosition      /* OUT: Number of tokens returned before this one */
-  );
+    int *piPosition);    /* OUT: Number of tokens returned before this one */
 };
 
 struct sqlite3_tokenizer {
@@ -221,7 +218,7 @@ Database::Database(Application* app, QObject* parent, const QString& database_na
 {
   {
     QMutexLocker l(&sNextConnectionIdMutex);
-    connection_id_ = sNextConnectionId ++;
+    connection_id_ = sNextConnectionId++;
   }
 
   directory_ = QDir::toNativeSeparators(
@@ -288,7 +285,7 @@ QSqlDatabase Database::Connect() {
   }
 
   // Attach external databases
-  foreach (const QString& key, attached_databases_.keys()) {
+  for (const QString& key : attached_databases_.keys()) {
     QString filename = attached_databases_[key].filename_;
 
     if (!injected_database_name_.isNull())
@@ -303,13 +300,13 @@ QSqlDatabase Database::Connect() {
     }
   }
 
-  if(startup_schema_version_ == -1) {
+  if (startup_schema_version_ == -1) {
     UpdateMainSchema(&db);
   }
 
   // We might have to initialise the schema in some attached databases now, if
   // they were deleted and don't match up with the main schema version.
-  foreach (const QString& key, attached_databases_.keys()) {
+  for (const QString& key : attached_databases_.keys()) {
     if (attached_databases_[key].is_temporary_ &&
         attached_databases_[key].schema_.isEmpty())
       continue;
@@ -344,7 +341,7 @@ void Database::UpdateMainSchema(QSqlDatabase* db) {
   }
   if (schema_version < kSchemaVersion) {
     // Update the schema
-    for (int v=schema_version+1 ; v<= kSchemaVersion ; ++v) {
+    for (int v = schema_version+1; v <= kSchemaVersion; ++v) {
       UpdateDatabaseSchema(v, *db);
     }
   }
@@ -377,7 +374,7 @@ void Database::RecreateAttachedDb(const QString& database_name) {
   // We can't just re-attach the database now because it needs to be done for
   // each thread.  Close all the database connections, so each thread will
   // re-attach it when they next connect.
-  foreach (const QString& name, QSqlDatabase::connectionNames()) {
+  for (const QString& name : QSqlDatabase::connectionNames()) {
     QSqlDatabase::removeDatabase(name);
   }
 }
@@ -432,7 +429,7 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
     UrlEncodeFilenameColumn("songs", db);
     UrlEncodeFilenameColumn("playlist_items", db);
 
-    foreach (const QString& table, db.tables()) {
+    for (const QString& table : db.tables()) {
       if (table.startsWith("device_") && table.endsWith("_songs")) {
         UrlEncodeFilenameColumn(table, db);
       }
@@ -511,12 +508,12 @@ void Database::ExecSchemaCommands(QSqlDatabase& db,
 void Database::ExecSongTablesCommands(QSqlDatabase& db,
                                       const QStringList& song_tables,
                                       const QStringList& commands) {
-  foreach (const QString& command, commands) {
+  for (const QString& command : commands) {
     // There are now lots of "songs" tables that need to have the same schema:
     // songs, magnatune_songs, and device_*_songs.  We allow a magic value
     // in the schema files to update all songs tables at once.
     if (command.contains(kMagicAllSongsTables)) {
-      foreach (const QString& table, song_tables) {
+      for (const QString& table : song_tables) {
         // Another horrible hack: device songs tables don't have matching _fts
         // tables, so if this command tries to touch one, ignore it.
         if (table.startsWith("device_") &&
@@ -543,17 +540,17 @@ QStringList Database::SongsTables(QSqlDatabase& db, int schema_version) const {
   QStringList ret;
 
   // look for the tables in the main db
-  foreach (const QString& table, db.tables()) {
+  for (const QString& table : db.tables()) {
     if (table == "songs" || table.endsWith("_songs"))
       ret << table;
   }
 
   // look for the tables in attached dbs
-  foreach (const QString& key, attached_databases_.keys()) {
+  for (const QString& key : attached_databases_.keys()) {
     QSqlQuery q(QString("SELECT NAME FROM %1.sqlite_master"
                         " WHERE type='table' AND name='songs' OR name LIKE '%songs'").arg(key), db);
     if (q.exec()) {
-      while(q.next()) {
+      while (q.next()) {
         QString tab_name = key + "." + q.value(0).toString();
         ret << tab_name;
       }
@@ -575,7 +572,6 @@ bool Database::CheckErrors(const QSqlQuery& query) {
     qLog(Error) << "faulty query: " << query.lastQuery();
     qLog(Error) << "bound values: " << query.boundValues();
 
-    app_->AddError("LibraryBackend: " + last_error.text());
     return true;
   }
 

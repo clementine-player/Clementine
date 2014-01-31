@@ -59,6 +59,7 @@ public:
   // last listened to before the given QDateTime.  This query is NOT indexed so
   // it involves a full search of the table.
   PodcastEpisodeList GetOldDownloadedEpisodes(const QDateTime& max_listened_date);
+  PodcastEpisodeList GetNewDownloadedEpisodes();
 
   // Adds episodes to the database.  Every episode must have a valid
   // podcast_database_id set already.
@@ -73,10 +74,10 @@ signals:
   void SubscriptionRemoved(const Podcast& podcast);
 
   // Emitted when episodes are added to a subscription that *already exists*.
-  void EpisodesAdded(const QList<PodcastEpisode>& episodes);
+  void EpisodesAdded(const PodcastEpisodeList& episodes);
 
   // Emitted when existing episodes are updated.
-  void EpisodesUpdated(const QList<PodcastEpisode>& episodes);
+  void EpisodesUpdated(const PodcastEpisodeList& episodes);
 
 private:
   // Adds each episode to the database, setting their IDs after inserting each

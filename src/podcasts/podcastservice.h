@@ -22,9 +22,11 @@
 #include "internet/internetmodel.h"
 #include "internet/internetservice.h"
 
+#include <memory>
 #include <QScopedPointer>
 
 class AddPodcastDialog;
+class OrganiseDialog;
 class Podcast;
 class PodcastBackend;
 class PodcastEpisode;
@@ -78,14 +80,19 @@ private slots:
 
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
-  void EpisodesAdded(const QList<PodcastEpisode>& episodes);
-  void EpisodesUpdated(const QList<PodcastEpisode>& episodes);
+  void EpisodesAdded(const PodcastEpisodeList& episodes);
+  void EpisodesUpdated(const PodcastEpisodeList& episodes);
 
   void DownloadProgressChanged(const PodcastEpisode& episode,
                                PodcastDownloader::State state,
                                int percent);
 
   void CurrentSongChanged(const Song& metadata);
+
+  void CopyToDevice();
+  void CopyToDevice(const PodcastEpisodeList& episodes_list);
+  void CopyToDevice(const QModelIndexList& episode_indexes,
+			const QModelIndexList& podcast_indexes);
 
 private:
   void EnsureAddPodcastDialogCreated();
@@ -104,7 +111,9 @@ private:
   void SetListened(const QModelIndexList& episode_indexes,
                    const QModelIndexList& podcast_indexes,
                    bool listened);
-  
+  void SetListened(const PodcastEpisodeList& episodes_list,
+		   bool listened);
+
   void LazyLoadRoot();
 
 private:
@@ -130,7 +139,9 @@ private:
   QAction* delete_downloaded_action_;
   QAction* set_new_action_;
   QAction* set_listened_action_;
+  QAction* copy_to_device_;
   QStandardItem* root_;
+  std::unique_ptr<OrganiseDialog> organise_dialog_;
 
   QModelIndexList explicitly_selected_podcasts_;
   QModelIndexList selected_podcasts_;
