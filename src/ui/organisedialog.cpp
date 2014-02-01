@@ -231,7 +231,7 @@ void OrganiseDialog::Reset() {
   ui_->replace_ascii->setChecked(false);
   ui_->replace_spaces->setChecked(false);
   ui_->replace_the->setChecked(false);
-  ui_->overwrite->setChecked(true);
+  ui_->overwrite->setChecked(false);
   ui_->eject_after->setChecked(false);
 }
 
@@ -244,7 +244,7 @@ void OrganiseDialog::showEvent(QShowEvent*) {
   ui_->replace_ascii->setChecked(s.value("replace_ascii", false).toBool());
   ui_->replace_spaces->setChecked(s.value("replace_spaces", false).toBool());
   ui_->replace_the->setChecked(s.value("replace_the", false).toBool());
-  ui_->overwrite->setChecked(s.value("overwrite", true).toBool());
+  ui_->overwrite->setChecked(s.value("overwrite", false).toBool());
   ui_->eject_after->setChecked(s.value("eject_after", false).toBool());
 
   QString destination = s.value("destination").toString();
