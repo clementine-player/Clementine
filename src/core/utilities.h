@@ -113,6 +113,9 @@ namespace Utilities {
   // Get relative path to clementine binary
   QUrl GetRelativePathToClementineBin(const QUrl& url);
 
+  // Get the path without the filename extension
+  QString PathWithoutFilenameExtension(const QString& filename);
+  QString FiddleFileExtension(const QString& filename, const QString& new_extension);
 
   enum ConfigPath {
     Path_Root,

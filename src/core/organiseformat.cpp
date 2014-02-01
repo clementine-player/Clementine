@@ -18,10 +18,12 @@
 #include "core/organiseformat.h"
 
 #include <QApplication>
+#include <QFileInfo>
 #include <QPalette>
 #include <QUrl>
 
 #include "core/timeconstants.h"
+#include "core/utilities.h"
 
 const char* OrganiseFormat::kTagPattern = "\\%([a-zA-Z]*)";
 const char* OrganiseFormat::kBlockPattern = "\\{([^{}]+)\\}";
@@ -72,6 +74,14 @@ bool OrganiseFormat::IsValid() const {
 
 QString OrganiseFormat::GetFilenameForSong(const Song &song) const {
   QString filename = ParseBlock(format_, song);
+
+  if (QFileInfo(filename).completeBaseName().isEmpty()) {
+    // Avoid having empty filenames, or filenames with extension only: in this
+    // case, keep the original filename.
+    // We remove the extension from "filename" if it exists, as song.basefilename()
+    // also contains the extension.
+    filename = Utilities::PathWithoutFilenameExtension(filename) + song.basefilename();
+  }
 
   if (replace_spaces_)
     filename.replace(QRegExp("\\s"), "_");
