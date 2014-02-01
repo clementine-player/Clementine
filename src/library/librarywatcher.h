@@ -57,6 +57,7 @@ class LibraryWatcher : public QObject {
   void NewOrUpdatedSongs(const SongList& songs);
   void SongsMTimeUpdated(const SongList& songs);
   void SongsDeleted(const SongList& songs);
+  void SongsReadded(const SongList& songs, bool unavailable = false);
   void SubdirsDiscovered(const SubdirectoryList& subdirs);
   void SubdirsMTimeUpdated(const SubdirectoryList& subdirs);
   void CompilationsNeedUpdating();
@@ -99,6 +100,7 @@ class LibraryWatcher : public QObject {
     bool ignores_mtime() const { return ignores_mtime_; }
 
     SongList deleted_songs;
+    SongList readded_songs;
     SongList new_songs;
     SongList touched_songs;
     SubdirectoryList new_subdirs;
@@ -160,7 +162,7 @@ class LibraryWatcher : public QObject {
   void UpdateNonCueAssociatedSong(const QString& file, const Song& matching_song,
                                   const QString& image, bool cue_deleted,
                                   ScanTransaction* t)  ;
-  // Updates a new song with some metadata taken from it's equivalent old 
+  // Updates a new song with some metadata taken from it's equivalent old
   // song (for example rating and score).
   void PreserveUserSetData(const QString& file, const QString& image,
                            const Song& matching_song, Song* out, ScanTransaction* t);
@@ -178,12 +180,12 @@ class LibraryWatcher : public QObject {
   FileSystemWatcherInterface* fs_watcher_;
   QHash<QString, Directory> subdir_mapping_;
 
-  /* A list of words use to try to identify the (likely) best image 
+  /* A list of words use to try to identify the (likely) best image
    * found in an directory to use as cover artwork.
    * e.g. using ["front", "cover"] would identify front.jpg and
    * exclude back.jpg.
    */
-  QStringList best_image_filters_; 
+  QStringList best_image_filters_;
 
   bool stop_requested_;
   bool scan_on_startup_;

@@ -174,7 +174,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void AddOrUpdateSongs(const SongList& songs);
   void UpdateMTimesOnly(const SongList& songs);
   void DeleteSongs(const SongList& songs);
-  void MarkSongsUnavailable(const SongList& songs);
+  void MarkSongsUnavailable(const SongList& songs, bool unavailable = true);
   void AddOrUpdateSubdirs(const SubdirectoryList& subdirs);
   void UpdateCompilations();
   void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);

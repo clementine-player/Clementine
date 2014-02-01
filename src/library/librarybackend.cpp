@@ -445,12 +445,13 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
   UpdateTotalSongCountAsync();
 }
 
-void LibraryBackend::MarkSongsUnavailable(const SongList &songs) {
+void LibraryBackend::MarkSongsUnavailable(const SongList& songs, bool unavailable) {
+    qLog(Debug) << int(unavailable) << " mark unavailable";
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery remove(QString("UPDATE %1 SET unavailable = 1 WHERE ROWID = :id")
-                   .arg(songs_table_), db);
+  QSqlQuery remove(QString("UPDATE %1 SET unavailable = %2 WHERE ROWID = :id")
+                   .arg(songs_table_).arg(int(unavailable)), db);
 
   ScopedTransaction transaction(&db);
   foreach (const Song& song, songs) {
