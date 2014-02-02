@@ -22,9 +22,11 @@
 #include "core/musicstorage.h"
 #include "core/organise.h"
 #include "core/tagreaderclient.h"
+#include "core/utilities.h"
 
 #include <QDir>
 #include <QFileInfo>
+#include <QHash>
 #include <QMenu>
 #include <QPushButton>
 #include <QResizeEvent>
@@ -162,6 +164,29 @@ void OrganiseDialog::InsertTag(const QString &tag) {
   ui_->naming->insertPlainText("%" + tag);
 }
 
+Organise::NewSongInfoList OrganiseDialog::ComputeNewSongsFilenames(
+    const SongList& songs, const OrganiseFormat& format) {
+
+  // Check if we will have multiple files with the same name.
+  // If so, they will erase each other if the overwrite flag is set.
+  // Better to rename them: e.g. foo.bar -> foo(2).bar
+  QHash<QString, int> filenames;
+  Organise::NewSongInfoList new_songs_info;
+
+  for (const Song& song : songs) {
+    QString new_filename = format.GetFilenameForSong(song);
+    if (filenames.contains(new_filename)) {
+      QString song_number = QString::number(++filenames[new_filename]);
+      new_filename =
+          Utilities::PathWithoutFilenameExtension(new_filename) +
+          "(" + song_number + ")." + QFileInfo(new_filename).suffix();
+    }
+    filenames.insert(new_filename, 1);
+    new_songs_info << Organise::NewSongInfo(song, new_filename);
+  }
+  return new_songs_info;
+}
+
 void OrganiseDialog::UpdatePreviews() {
   const QModelIndex destination = ui_->destination->model()->index(
       ui_->destination->currentIndex(), 0);
@@ -205,14 +230,16 @@ void OrganiseDialog::UpdatePreviews() {
   if (!format_valid)
     return;
 
+  new_songs_info_ = ComputeNewSongsFilenames(songs_, format_);
+
   // Update the previews
   ui_->preview->clear();
   ui_->preview_group->setVisible(has_local_destination);
   ui_->naming_group->setVisible(has_local_destination);
   if (has_local_destination) {
-    for (const Song& song : songs_) {
+    for (const Organise::NewSongInfo& song_info : new_songs_info_) {
       QString filename = storage->LocalPath() + "/" +
-                         format_.GetFilenameForSong(song);
+                         song_info.new_filename_;
       ui_->preview->addItem(QDir::toNativeSeparators(filename));
     }
   }
@@ -278,7 +305,7 @@ void OrganiseDialog::accept() {
   const bool copy = ui_->aftercopying->currentIndex() == 0;
   Organise* organise = new Organise(
       task_manager_, storage, format_, copy, ui_->overwrite->isChecked(),
-      songs_, ui_->eject_after->isChecked());
+      new_songs_info_, ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)), SLOT(OrganiseFinished(QStringList)));
   organise->Start();
 

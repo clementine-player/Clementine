@@ -23,6 +23,9 @@
 #include <QMap>
 #include <QUrl>
 
+#include "gtest/gtest_prod.h"
+
+#include "core/organise.h"
 #include "core/organiseformat.h"
 #include "core/song.h"
 
@@ -68,17 +71,24 @@ private slots:
   void OrganiseFinished(const QStringList& files_with_errors);
 
 private:
+  static Organise::NewSongInfoList ComputeNewSongsFilenames(
+      const SongList& songs,
+      const OrganiseFormat& format);
+
   Ui_OrganiseDialog* ui_;
   TaskManager* task_manager_;
 
   OrganiseFormat format_;
 
   SongList songs_;
+  Organise::NewSongInfoList new_songs_info_;
   quint64 total_size_;
 
   std::unique_ptr<OrganiseErrorDialog> error_dialog_;
 
   bool resized_by_user_;
+
+  FRIEND_TEST(OrganiseDialogTest, ComputeNewSongsFilenamesTest);
 };
 
 #endif // ORGANISEDIALOG_H

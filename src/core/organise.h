@@ -34,10 +34,19 @@ class Organise : public QObject {
   Q_OBJECT
 
 public:
+
+  struct NewSongInfo {
+    NewSongInfo(const Song& song = Song(), const QString& new_filename = QString())
+      : song_(song), new_filename_(new_filename) {}
+    Song song_;
+    QString new_filename_;
+  };
+  typedef QList<NewSongInfo> NewSongInfoList;
+
   Organise(TaskManager* task_manager,
            boost::shared_ptr<MusicStorage> destination,
            const OrganiseFormat& format, bool copy, bool overwrite,
-           const SongList& songs, bool eject_after);
+           const NewSongInfoList& songs, bool eject_after);
 
   static const int kBatchSize;
   static const int kTranscodeProgressInterval;
@@ -61,10 +70,10 @@ private:
 
 private:
   struct Task {
-    explicit Task(const Song& song = Song())
-      : song_(song), transcode_progress_(0.0) {}
+    explicit Task(const NewSongInfo& song_info = NewSongInfo())
+      : song_info_(song_info), transcode_progress_(0.0) {}
 
-    Song song_;
+    NewSongInfo song_info_;
 
     float transcode_progress_;
     QString transcoded_filename_;

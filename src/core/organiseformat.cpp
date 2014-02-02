@@ -161,8 +161,7 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
       QString::number(song.length_nanosec() / kNsecPerSec);
   else if (tag == "bitrate")     value = QString::number(song.bitrate());
   else if (tag == "samplerate")  value = QString::number(song.samplerate());
-  else if (tag == "extension")   value =
-      song.url().toLocalFile().section('.', -1, -1);
+  else if (tag == "extension")   value = QFileInfo(song.url().toLocalFile()).suffix();
   else if (tag == "artistinitial") {
     value = song.effective_albumartist().trimmed();
     if (replace_the_ && !value.isEmpty())
