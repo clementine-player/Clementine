@@ -92,6 +92,8 @@
 #error Define BYTE_ORDER to be equal to either LITTLE_ENDIAN or BIG_ENDIAN
 #endif
 
+namespace clementine_sha2 {
+
 /*
  * Define the followingsha2_* types to types of the correct length on
  * the native archtecture.   Most BSD systems and Linux define u_intXX_t
@@ -1066,3 +1068,4 @@ char* SHA384_Data(const sha2_byte* data, size_t len, char digest[SHA384_DIGEST_S
 	return SHA384_End(&context, digest);
 }
 
+}  // namespace clementine_sha2
