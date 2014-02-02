@@ -254,6 +254,10 @@ void RipCD::ThreadClickedRipButton() {
 
     QByteArray buffered_input_bytes(CDIO_CD_FRAMESIZE_RAW,'\0');
     for (lsn_t i_cursor = i_first_lsn; i_cursor <= i_last_lsn; i_cursor++) {
+      if (cancel_requested_) {
+        qLog(Debug) << "CD ripping canceled.";
+        return;
+      }
       if(cdio_read_audio_sector(cdio_, buffered_input_bytes.data(), i_cursor) == DRIVER_OP_SUCCESS) {
         destination_file->write(buffered_input_bytes.data(), buffered_input_bytes.size());
       } else {
@@ -328,6 +332,7 @@ void RipCD::ThreadedTranscoding() {
 
 void RipCD::ClickedRipButton() {
   SetWorking(true);
+  cancel_requested_ = false;
   QtConcurrent::run(this, &RipCD::ThreadClickedRipButton);
 }
 
@@ -413,6 +418,7 @@ void RipCD::AddDestinationDirectory(QString dir) {
 }
 
 void RipCD::Cancel() {
+  cancel_requested_ = true;
   transcoder_->Cancel();
   RemoveTemporaryDirectory();
   SetWorking(false);
