@@ -18,10 +18,12 @@
 #include "core/organiseformat.h"
 
 #include <QApplication>
+#include <QFileInfo>
 #include <QPalette>
 #include <QUrl>
 
 #include "core/timeconstants.h"
+#include "core/utilities.h"
 
 const char* OrganiseFormat::kTagPattern = "\\%([a-zA-Z]*)";
 const char* OrganiseFormat::kBlockPattern = "\\{([^{}]+)\\}";
@@ -72,6 +74,14 @@ bool OrganiseFormat::IsValid() const {
 
 QString OrganiseFormat::GetFilenameForSong(const Song &song) const {
   QString filename = ParseBlock(format_, song);
+
+  if (QFileInfo(filename).completeBaseName().isEmpty()) {
+    // Avoid having empty filenames, or filenames with extension only: in this
+    // case, keep the original filename.
+    // We remove the extension from "filename" if it exists, as song.basefilename()
+    // also contains the extension.
+    filename = Utilities::PathWithoutFilenameExtension(filename) + song.basefilename();
+  }
 
   if (replace_spaces_)
     filename.replace(QRegExp("\\s"), "_");
@@ -151,8 +161,7 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
       QString::number(song.length_nanosec() / kNsecPerSec);
   else if (tag == "bitrate")     value = QString::number(song.bitrate());
   else if (tag == "samplerate")  value = QString::number(song.samplerate());
-  else if (tag == "extension")   value =
-      song.url().toLocalFile().section('.', -1, -1);
+  else if (tag == "extension")   value = QFileInfo(song.url().toLocalFile()).suffix();
   else if (tag == "artistinitial") {
     value = song.effective_albumartist().trimmed();
     if (replace_the_ && !value.isEmpty())

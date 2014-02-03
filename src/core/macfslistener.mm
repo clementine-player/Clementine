@@ -25,24 +25,17 @@
 #include "core/scoped_nsobject.h"
 
 MacFSListener::MacFSListener(QObject* parent)
-    : FileSystemWatcherInterface(parent),
-      run_loop_(NULL),
-      stream_(NULL) {
+    : FileSystemWatcherInterface(parent), run_loop_(NULL), stream_(NULL) {
   update_timer_.setSingleShot(true);
   update_timer_.setInterval(2000);
   connect(&update_timer_, SIGNAL(timeout()), SLOT(UpdateStream()));
 }
 
-void MacFSListener::Init() {
-  run_loop_ = CFRunLoopGetCurrent();
-}
+void MacFSListener::Init() { run_loop_ = CFRunLoopGetCurrent(); }
 
 void MacFSListener::EventStreamCallback(
-    ConstFSEventStreamRef stream,
-    void* user_data,
-    size_t num_events,
-    void* event_paths,
-    const FSEventStreamEventFlags event_flags[],
+    ConstFSEventStreamRef stream, void* user_data, size_t num_events,
+    void* event_paths, const FSEventStreamEventFlags event_flags[],
     const FSEventStreamEventId event_ids[]) {
   MacFSListener* me = reinterpret_cast<MacFSListener*>(user_data);
   char** paths = reinterpret_cast<char**>(event_paths);
@@ -73,9 +66,7 @@ void MacFSListener::Clear() {
   UpdateStreamAsync();
 }
 
-void MacFSListener::UpdateStreamAsync() {
-  update_timer_.start();
-}
+void MacFSListener::UpdateStreamAsync() { update_timer_.start(); }
 
 void MacFSListener::UpdateStream() {
   if (stream_) {
@@ -91,10 +82,10 @@ void MacFSListener::UpdateStream() {
 
   scoped_nsobject<NSMutableArray> array([[NSMutableArray alloc] init]);
 
-  foreach (const QString& path, paths_) {
+  for (const QString& path : paths_) {
     scoped_nsobject<NSString> string(
-        [[NSString alloc] initWithUTF8String: path.toUtf8().constData()]);
-    [array addObject: string.get()];
+        [[NSString alloc] initWithUTF8String:path.toUtf8().constData()]);
+    [array addObject:string.get()];
   }
 
   FSEventStreamContext context;
@@ -102,14 +93,10 @@ void MacFSListener::UpdateStream() {
   context.info = this;
   CFAbsoluteTime latency = 1.0;
 
-  stream_ = FSEventStreamCreate(
-      NULL,
-      &EventStreamCallback,
-      &context,  // Copied
-      reinterpret_cast<CFArrayRef>(array.get()),
-      kFSEventStreamEventIdSinceNow,
-      latency,
-      kFSEventStreamCreateFlagNone);
+  stream_ = FSEventStreamCreate(NULL, &EventStreamCallback, &context,  // Copied
+                                reinterpret_cast<CFArrayRef>(array.get()),
+                                kFSEventStreamEventIdSinceNow, latency,
+                                kFSEventStreamCreateFlagNone);
 
   FSEventStreamScheduleWithRunLoop(stream_, run_loop_, kCFRunLoopDefaultMode);
   FSEventStreamStart(stream_);

@@ -30,9 +30,9 @@ using std::mem_fun;
 namespace {
 
 static const char* kReleaseSearchUrl =
-    "http://musicbrainz.org/ws/2/release/";
+    "https://musicbrainz.org/ws/2/release/";
 static const char* kAlbumCoverUrl =
-    "http://coverartarchive.org/release/%1/front";
+    "https://coverartarchive.org/release/%1/front";
 }  // namespace
 
 

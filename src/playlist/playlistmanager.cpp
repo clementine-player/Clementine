@@ -156,7 +156,7 @@ void PlaylistManager::New(const QString& name, const SongList& songs,
 
 void PlaylistManager::Load(const QString& filename) {
   QUrl url = QUrl::fromLocalFile(filename);
-  SongLoader* loader = new SongLoader(library_backend_, this);
+  SongLoader* loader = new SongLoader(library_backend_, app_->player(), this);
   connect(loader, SIGNAL(LoadFinished(bool)), SLOT(LoadFinished(bool)));
   SongLoader::Result result = loader->Load(url);
   QFileInfo info(filename);
@@ -237,7 +237,7 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
   QString default_filter = parser()->default_filter();
 
   filename = QFileDialog::getSaveFileName(
-      NULL, tr("Save playlist"), filename,
+      NULL, tr("Save playlist", "Title of the playlist save dialog."), filename,
       parser()->filters(), &default_filter);
 
   if (filename.isNull())

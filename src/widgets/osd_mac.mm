@@ -27,59 +27,60 @@
 #include "core/scoped_nsautorelease_pool.h"
 #include "core/scoped_nsobject.h"
 
-@interface GrowlInterface :NSObject <GrowlApplicationBridgeDelegate> {
+@interface GrowlInterface : NSObject<GrowlApplicationBridgeDelegate> {
 }
--(void) SendGrowlAlert:(NSString*)message title:(NSString*)title image:(NSData*)image;
--(void) ClickCallback;  // Called when user clicks on notification.
+- (void)SendGrowlAlert:(NSString*)message
+                 title:(NSString*)title
+                 image:(NSData*)image;
+- (void)ClickCallback;  // Called when user clicks on notification.
 @end
-
 
 @implementation GrowlInterface
 
--(id) init {
+- (id)init {
   if ((self = [super init])) {
     [GrowlApplicationBridge setGrowlDelegate:self];
   }
   return self;
 }
 
--(void) dealloc {
+- (void)dealloc {
   [super dealloc];
 }
 
--(NSDictionary*) registrationDictionaryForGrowl {
-  NSArray* array = [NSArray arrayWithObjects:@"next_track", nil];  // Valid notification names.
-  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
-      [NSNumber numberWithInt:1],
-      @"TicketVersion",
-      array,
-      @"AllNotifications",
-      array,
-      @"DefaultNotifications",
-      @"com.davidsansome.clementine",
-      @"ApplicationId",
-      nil];
+- (NSDictionary*)registrationDictionaryForGrowl {
+  NSArray* array = [NSArray
+      arrayWithObjects:@"next_track", nil];  // Valid notification names.
+  NSDictionary* dict = [NSDictionary
+      dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:1], @"TicketVersion",
+                                   array, @"AllNotifications", array,
+                                   @"DefaultNotifications",
+                                   @"com.davidsansome.clementine",
+                                   @"ApplicationId", nil];
   return dict;
 }
 
--(void) growlNotificationWasClicked:(id)clickContext {
+- (void)growlNotificationWasClicked:(id)clickContext {
   if (clickContext) {
     [self ClickCallback];
   }
   return;
 }
 
--(void) SendGrowlAlert:(NSString*)message title:(NSString*)title image:(NSData*)image {
-  [GrowlApplicationBridge notifyWithTitle:title
-                          description:message
-                          notificationName:@"next_track"
-                          iconData:image
-                          priority:0
-                          isSticky:NO
-                          clickContext:@"click_callback"];  // String sent to our callback.
+- (void)SendGrowlAlert:(NSString*)message
+                 title:(NSString*)title
+                 image:(NSData*)image {
+  [GrowlApplicationBridge
+       notifyWithTitle:title
+           description:message
+      notificationName:@"next_track"
+              iconData:image
+              priority:0
+              isSticky:NO
+          clickContext:@"click_callback"];  // String sent to our callback.
 }
 
--(void) ClickCallback {
+- (void)ClickCallback {
   qDebug() << "Growl notification clicked!";
   return;
 }
@@ -92,16 +93,15 @@ class OSD::GrowlNotificationWrapper {
     growl_interface_ = [[GrowlInterface alloc] init];
   }
 
-  ~GrowlNotificationWrapper() {
-    [growl_interface_ release];
-  }
+  ~GrowlNotificationWrapper() { [growl_interface_ release]; }
 
-  void ShowMessage(const QString& summary,
-                   const QString& message,
+  void ShowMessage(const QString& summary, const QString& message,
                    const QImage& image) {
 
-    NSString* mac_message = [[NSString alloc] initWithUTF8String:message.toUtf8().constData()];
-    NSString* mac_summary = [[NSString alloc] initWithUTF8String:summary.toUtf8().constData()];
+    NSString* mac_message =
+        [[NSString alloc] initWithUTF8String:message.toUtf8().constData()];
+    NSString* mac_summary =
+        [[NSString alloc] initWithUTF8String:summary.toUtf8().constData()];
 
     NSData* image_data = nil;
     // Growl expects raw TIFF data.
@@ -110,12 +110,13 @@ class OSD::GrowlNotificationWrapper {
       QByteArray tiff_data;
       QBuffer tiff(&tiff_data);
       image.save(&tiff, "TIFF");
-      image_data = [NSData dataWithBytes:tiff_data.constData() length:tiff_data.size()];
+      image_data =
+          [NSData dataWithBytes:tiff_data.constData() length:tiff_data.size()];
     }
 
     [growl_interface_ SendGrowlAlert:mac_message
-                      title:mac_summary
-                      image:image_data];
+                               title:mac_summary
+                               image:image_data];
 
     [mac_message release];
     [mac_summary release];
@@ -126,17 +127,11 @@ class OSD::GrowlNotificationWrapper {
   ScopedNSAutoreleasePool pool_;
 };
 
-void OSD::Init() {
-  wrapper_ = new GrowlNotificationWrapper;
-}
+void OSD::Init() { wrapper_ = new GrowlNotificationWrapper; }
 
-bool OSD::SupportsNativeNotifications() {
-  return true;
-}
+bool OSD::SupportsNativeNotifications() { return true; }
 
-bool OSD::SupportsTrayPopups() {
-  return false;
-}
+bool OSD::SupportsTrayPopups() { return false; }
 
 namespace {
 
@@ -150,12 +145,11 @@ void SendNotificationCenterMessage(NSString* title, NSString* subtitle) {
 
   Class user_notification_class = NSClassFromString(@"NSUserNotification");
   id notification = [[user_notification_class alloc] init];
-  [notification setTitle: title];
-  [notification setSubtitle: subtitle];
+  [notification setTitle:title];
+  [notification setSubtitle:subtitle];
 
-  [notification_center deliverNotification: notification];
+  [notification_center deliverNotification:notification];
 }
-
 }
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,

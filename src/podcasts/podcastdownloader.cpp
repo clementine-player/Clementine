@@ -20,6 +20,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "library/librarydirectorymodel.h"
@@ -55,8 +56,8 @@ PodcastDownloader::PodcastDownloader(Application* app, QObject* parent)
     last_progress_signal_(0),
     auto_delete_timer_(new QTimer(this))
 {
-  connect(backend_, SIGNAL(EpisodesAdded(QList<PodcastEpisode>)),
-          SLOT(EpisodesAdded(QList<PodcastEpisode>)));
+  connect(backend_, SIGNAL(EpisodesAdded(PodcastEpisodeList)),
+          SLOT(EpisodesAdded(PodcastEpisodeList)));
   connect(backend_, SIGNAL(SubscriptionAdded(Podcast)),
           SLOT(SubscriptionAdded(Podcast)));
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
@@ -125,9 +126,15 @@ void PodcastDownloader::DeleteEpisode(const PodcastEpisode& episode) {
 }
 
 void PodcastDownloader::FinishAndDelete(Task* task) {
+  Podcast podcast =
+    backend_->GetSubscriptionById(task->episode.podcast_database_id());
+  Song song = task->episode.ToSong(podcast);
+
   downloading_episode_ids_.remove(task->episode.database_id());
   emit ProgressChanged(task->episode, Finished, 0);
 
+  // I didn't ecountered even a single podcast with a corect metadata
+  TagReaderClient::Instance()->SaveFileBlocking(task->file->fileName(), song);
   delete task;
 
   NextTask();
@@ -137,17 +144,17 @@ QString PodcastDownloader::FilenameForEpisode(const QString& directory,
                                               const PodcastEpisode& episode) const {
   const QString file_extension = QFileInfo(episode.url().path()).suffix();
   int count = 0;
-  
+
   // The file name contains the publication date and episode title
   QString base_filename = 
       episode.publication_date().date().toString(Qt::ISODate) + "-" +
       SanitiseFilenameComponent(episode.title());
-  
+
   // Add numbers on to the end of the filename until we find one that doesn't
   // exist.
   forever {
     QString filename;
-    
+
     if (count == 0) {
       filename = QString("%1/%2.%3").arg(
             directory, base_filename, file_extension);
@@ -155,12 +162,12 @@ QString PodcastDownloader::FilenameForEpisode(const QString& directory,
       filename = QString("%1/%2 (%3).%4").arg(
             directory, base_filename, QString::number(count), file_extension);
     }
-    
+
     if (!QFile::exists(filename)) {
       return filename;
     }
-    
-    count ++;
+
+    count++;
   }
 }
 
@@ -197,8 +204,8 @@ void PodcastDownloader::StartDownloading(Task* task) {
   RedirectFollower* reply = new RedirectFollower(network_->get(req));
   connect(reply, SIGNAL(readyRead()), SLOT(ReplyReadyRead()));
   connect(reply, SIGNAL(finished()), SLOT(ReplyFinished()));
-  connect(reply, SIGNAL(downloadProgress(qint64,qint64)),
-          SLOT(ReplyDownloadProgress(qint64,qint64)));
+  connect(reply, SIGNAL(downloadProgress(qint64, qint64)),
+          SLOT(ReplyDownloadProgress(qint64, qint64)));
 
   emit ProgressChanged(task->episode, Downloading, 0);
 }
@@ -235,7 +242,7 @@ void PodcastDownloader::ReplyDownloadProgress(qint64 received, qint64 total) {
   last_progress_signal_ = current_time;
 
   emit ProgressChanged(current_task_->episode, Downloading,
-                       float(received) / total * 100);
+                       static_cast<float>(received) / total * 100);
 }
 
 void PodcastDownloader::ReplyFinished() {
@@ -275,9 +282,9 @@ void PodcastDownloader::SubscriptionAdded(const Podcast& podcast) {
   EpisodesAdded(podcast.episodes());
 }
 
-void PodcastDownloader::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
+void PodcastDownloader::EpisodesAdded(const PodcastEpisodeList& episodes) {
   if (auto_download_) {
-    foreach (const PodcastEpisode& episode, episodes) {
+    for (const PodcastEpisode& episode : episodes) {
       DownloadEpisode(episode);
     }
   }
@@ -300,7 +307,7 @@ void PodcastDownloader::AutoDelete() {
              << (delete_after_secs_ / kSecsPerDay)
              << "days ago";
 
-  foreach (const PodcastEpisode& episode, old_episodes) {
+  for (const PodcastEpisode& episode : old_episodes) {
     DeleteEpisode(episode);
   }
 }

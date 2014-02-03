@@ -445,13 +445,15 @@ QByteArray HmacSha1(const QByteArray& key, const QByteArray& data) {
 }
 
 QByteArray Sha256(const QByteArray& data) {
-  SHA256_CTX context;
-  SHA256_Init(&context);
-  SHA256_Update(&context, reinterpret_cast<const u_int8_t*>(data.constData()),
-                data.length());
+  clementine_sha2::SHA256_CTX context;
+  clementine_sha2::SHA256_Init(&context);
+  clementine_sha2::SHA256_Update(
+      &context, reinterpret_cast<const u_int8_t*>(data.constData()),
+      data.length());
 
-  QByteArray ret(SHA256_DIGEST_LENGTH, '\0');
-  SHA256_Final(reinterpret_cast<u_int8_t*>(ret.data()), &context);
+  QByteArray ret(clementine_sha2::SHA256_DIGEST_LENGTH, '\0');
+  clementine_sha2::SHA256_Final(
+      reinterpret_cast<u_int8_t*>(ret.data()), &context);
 
   return ret;
 }
@@ -665,6 +667,16 @@ bool UrlOnSameDriveAsClementine(const QUrl &url) {
 QUrl GetRelativePathToClementineBin(const QUrl& url) {
   QDir appPath(QCoreApplication::applicationDirPath());
   return QUrl::fromLocalFile(appPath.relativeFilePath(url.toLocalFile()));
+}
+
+QString PathWithoutFilenameExtension(const QString& filename) {
+  if (filename.section('/', -1, -1).contains('.'))
+    return filename.section('.', 0, -2);
+  return filename;
+}
+
+QString FiddleFileExtension(const QString& filename, const QString& new_extension) {
+  return PathWithoutFilenameExtension(filename) + "." + new_extension;
 }
 
 }  // namespace Utilities

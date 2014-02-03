@@ -18,14 +18,16 @@
 #ifndef ORGANISEDIALOG_H
 #define ORGANISEDIALOG_H
 
+#include <memory>
 #include <QDialog>
 #include <QMap>
 #include <QUrl>
 
+#include "gtest/gtest_prod.h"
+
+#include "core/organise.h"
 #include "core/organiseformat.h"
 #include "core/song.h"
-
-#include <boost/scoped_ptr.hpp>
 
 class LibraryWatcher;
 class OrganiseErrorDialog;
@@ -41,7 +43,6 @@ public:
   OrganiseDialog(TaskManager* task_manager, QWidget* parent = 0);
   ~OrganiseDialog();
 
-  static const int kNumberOfPreviews;
   static const char* kDefaultFormat;
   static const char* kSettingsGroup;
 
@@ -65,24 +66,29 @@ private slots:
   void Reset();
 
   void InsertTag(const QString& tag);
-  void LoadPreviewSongs(const QString& filename);
   void UpdatePreviews();
 
   void OrganiseFinished(const QStringList& files_with_errors);
 
 private:
+  static Organise::NewSongInfoList ComputeNewSongsFilenames(
+      const SongList& songs,
+      const OrganiseFormat& format);
+
   Ui_OrganiseDialog* ui_;
   TaskManager* task_manager_;
 
   OrganiseFormat format_;
 
-  QStringList filenames_;
-  SongList preview_songs_;
+  SongList songs_;
+  Organise::NewSongInfoList new_songs_info_;
   quint64 total_size_;
 
-  boost::scoped_ptr<OrganiseErrorDialog> error_dialog_;
+  std::unique_ptr<OrganiseErrorDialog> error_dialog_;
 
   bool resized_by_user_;
+
+  FRIEND_TEST(OrganiseDialogTest, ComputeNewSongsFilenamesTest);
 };
 
 #endif // ORGANISEDIALOG_H

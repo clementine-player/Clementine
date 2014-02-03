@@ -38,21 +38,23 @@
 class MacGlobalShortcutBackendPrivate : boost::noncopyable {
  public:
   explicit MacGlobalShortcutBackendPrivate(MacGlobalShortcutBackend* backend)
-      : global_monitor_(nil),
-        local_monitor_(nil),
-        backend_(backend) {
-  }
+      : global_monitor_(nil), local_monitor_(nil), backend_(backend) {}
 
   bool Register() {
-    global_monitor_ = [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
-        handler:^(NSEvent* event) {
-      HandleKeyEvent(event);
-    }];
-    local_monitor_ = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
-        handler:^(NSEvent* event) {
-      // Filter event if we handle it as a global shortcut.
-      return HandleKeyEvent(event) ? nil : event;
-    }];
+    global_monitor_ =
+        [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
+                                               handler:^(NSEvent* event) {
+                                                   HandleKeyEvent(event);
+                                               }];
+    local_monitor_ =
+        [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
+                                              handler:^(NSEvent* event) {
+                                                  // Filter event if we handle
+                                                  // it as a global shortcut.
+                                                  return HandleKeyEvent(event)
+                                                             ? nil
+                                                             : event;
+                                              }];
     return true;
   }
 
@@ -67,26 +69,24 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
     return backend_->KeyPressed(sequence);
   }
 
-
   id global_monitor_;
   id local_monitor_;
   MacGlobalShortcutBackend* backend_;
 };
 
 MacGlobalShortcutBackend::MacGlobalShortcutBackend(GlobalShortcuts* parent)
-  : GlobalShortcutBackend(parent),
-    p_(new MacGlobalShortcutBackendPrivate(this)) {
-}
+    : GlobalShortcutBackend(parent),
+      p_(new MacGlobalShortcutBackendPrivate(this)) {}
 
-MacGlobalShortcutBackend::~MacGlobalShortcutBackend() {
-}
+MacGlobalShortcutBackend::~MacGlobalShortcutBackend() {}
 
 bool MacGlobalShortcutBackend::DoRegister() {
   // Always enable media keys.
   mac::SetShortcutHandler(this);
 
   if (AXAPIEnabled()) {
-    foreach (const GlobalShortcuts::Shortcut& shortcut, manager_->shortcuts().values()) {
+    for (const GlobalShortcuts::Shortcut& shortcut :
+         manager_->shortcuts().values()) {
       shortcuts_[shortcut.action->shortcut()] = shortcut.action;
     }
     return p_->Register();
@@ -134,8 +134,10 @@ void MacGlobalShortcutBackend::ShowAccessibilityDialog() {
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
       NSPreferencePanesDirectory, NSSystemDomainMask, YES);
   if ([paths count] == 1) {
-    NSURL* prefpane_url = [NSURL fileURLWithPath:
-        [[paths objectAtIndex:0] stringByAppendingPathComponent:@"UniversalAccessPref.prefPane"]];
+    NSURL* prefpane_url =
+        [NSURL fileURLWithPath:[[paths objectAtIndex:0]
+                                   stringByAppendingPathComponent:
+                                       @"UniversalAccessPref.prefPane"]];
     [[NSWorkspace sharedWorkspace] openURL:prefpane_url];
   }
 }

@@ -31,7 +31,7 @@
 
 const char* SongkickConcerts::kSongkickArtistBucket = "id:songkick";
 const char* SongkickConcerts::kSongkickArtistCalendarUrl =
-    "http://api.songkick.com/api/3.0/artists/%1/calendar.json?"
+    "https://api.songkick.com/api/3.0/artists/%1/calendar.json?"
     "per_page=5&"
     "apikey=8rgKfy1WU6IlJFfN";
 

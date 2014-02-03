@@ -62,7 +62,7 @@ void PodcastBackend::Subscribe(Podcast* podcast) {
 
   // Update the IDs of any episodes.
   PodcastEpisodeList* episodes = podcast->mutable_episodes();
-  for (PodcastEpisodeList::iterator it = episodes->begin() ; it != episodes->end() ; ++it) {
+  for (auto it = episodes->begin() ; it != episodes->end() ; ++it) {
     it->set_podcast_database_id(database_id);
   }
 
@@ -107,7 +107,7 @@ void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes, QSqlDatabase* db)
   QSqlQuery q("INSERT INTO podcast_episodes (" + PodcastEpisode::kColumnSpec + ")"
               " VALUES (" + PodcastEpisode::kBindSpec + ")", *db);
 
-  for (PodcastEpisodeList::iterator it = episodes->begin() ; it != episodes->end() ; ++it) {
+  for (auto it = episodes->begin() ; it != episodes->end() ; ++it) {
     it->BindToQuery(&q);
     q.exec();
     if (db_->CheckErrors(q))
@@ -141,7 +141,7 @@ void PodcastBackend::UpdateEpisodes(const PodcastEpisodeList& episodes) {
               "     local_url = :local_url"
               " WHERE ROWID = :id", db);
 
-  foreach (const PodcastEpisode& episode, episodes) {
+  for (const PodcastEpisode& episode : episodes) {
     q.bindValue(":listened", episode.listened());
     q.bindValue(":listened_date", episode.listened_date().toTime_t());
     q.bindValue(":downloaded", episode.downloaded());
@@ -301,6 +301,29 @@ PodcastEpisodeList PodcastBackend::GetOldDownloadedEpisodes(const QDateTime& max
               " WHERE downloaded = 'true'"
               "   AND listened_date <= :max_listened_date", db);
   q.bindValue(":max_listened_date", max_listened_date.toTime_t());
+  q.exec();
+  if (db_->CheckErrors(q))
+    return ret;
+
+  while (q.next()) {
+    PodcastEpisode episode;
+    episode.InitFromQuery(q);
+    ret << episode;
+  }
+
+  return ret;
+}
+
+PodcastEpisodeList PodcastBackend::GetNewDownloadedEpisodes() {
+  PodcastEpisodeList ret;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+              " FROM podcast_episodes"
+              " WHERE downloaded = 'true'"
+              "   AND listened = 'false'", db);
   q.exec();
   if (db_->CheckErrors(q))
     return ret;

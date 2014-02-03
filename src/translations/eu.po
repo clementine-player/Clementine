@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-01-12 07:48+0000\n"
+"PO-Revision-Date: 2014-01-27 02:54+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,11 +170,11 @@ msgstr "&Zentratu"
 msgid "&Custom"
 msgstr "&Pertsonalizatua"
 
-#: ../bin/src/ui_mainwindow.h:730
+#: ../bin/src/ui_mainwindow.h:735
 msgid "&Extras"
 msgstr "&Gehigarriak"
 
-#: ../bin/src/ui_mainwindow.h:729
+#: ../bin/src/ui_mainwindow.h:734
 msgid "&Help"
 msgstr "&Laguntza"
 
@@ -191,7 +191,7 @@ msgstr "&Ezkutatu..."
 msgid "&Left"
 msgstr "Ez&kerrera"
 
-#: ../bin/src/ui_mainwindow.h:727
+#: ../bin/src/ui_mainwindow.h:732
 msgid "&Music"
 msgstr "&Musika"
 
@@ -199,15 +199,15 @@ msgstr "&Musika"
 msgid "&None"
 msgstr "&Bat ere ez"
 
-#: ../bin/src/ui_mainwindow.h:728
+#: ../bin/src/ui_mainwindow.h:733
 msgid "&Playlist"
 msgstr "&Erreprodukzio-zerrenda"
 
-#: ../bin/src/ui_mainwindow.h:656
+#: ../bin/src/ui_mainwindow.h:660
 msgid "&Quit"
 msgstr "&Itxi"
 
-#: ../bin/src/ui_mainwindow.h:694
+#: ../bin/src/ui_mainwindow.h:698
 msgid "&Repeat mode"
 msgstr "E&rrepikatze-modua"
 
@@ -215,7 +215,7 @@ msgstr "E&rrepikatze-modua"
 msgid "&Right"
 msgstr "E&skuinera"
 
-#: ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:697
 msgid "&Shuffle mode"
 msgstr "Au&sazko modua"
 
@@ -223,7 +223,7 @@ msgstr "Au&sazko modua"
 msgid "&Stretch columns to fit window"
 msgstr "&Tiratu zutabeak leihoan egokitzeko"
 
-#: ../bin/src/ui_mainwindow.h:731
+#: ../bin/src/ui_mainwindow.h:736
 msgid "&Tools"
 msgstr "&Tresnak"
 
@@ -368,11 +368,11 @@ msgstr ""
 msgid "About %1"
 msgstr "%1-(r)i buruz"
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:681
 msgid "About Clementine..."
 msgstr "Clementine-ri buruz..."
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:716
 msgid "About Qt..."
 msgstr "Qt-ri buruz..."
 
@@ -420,19 +420,19 @@ msgstr "Gehitu beste jario bat..."
 msgid "Add directory..."
 msgstr "Gehitu direktorioa..."
 
-#: ui/mainwindow.cpp:1615
+#: ui/mainwindow.cpp:1623
 msgid "Add file"
 msgstr "Gehitu fitxategia"
 
-#: ../bin/src/ui_mainwindow.h:723
+#: ../bin/src/ui_mainwindow.h:727
 msgid "Add file to transcoder"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:721
+#: ../bin/src/ui_mainwindow.h:725
 msgid "Add file(s) to transcoder"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Add file..."
 msgstr "Gehitu fitxategia..."
 
@@ -440,11 +440,11 @@ msgstr "Gehitu fitxategia..."
 msgid "Add files to transcode"
 msgstr "Gehitu transkodetzeko fitxategiak"
 
-#: transcoder/transcodedialog.cpp:281 ui/mainwindow.cpp:1643
+#: transcoder/transcodedialog.cpp:281 ui/mainwindow.cpp:1651 ui/ripcd.cpp:386
 msgid "Add folder"
 msgstr "Gehitu karpeta"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:702
 msgid "Add folder..."
 msgstr "Gehitu karpeta..."
 
@@ -456,7 +456,7 @@ msgstr "Gehitu karpeta berria..."
 msgid "Add podcast"
 msgstr "Podcast-a gehitu"
 
-#: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:719
+#: podcasts/podcastservice.cpp:316 ../bin/src/ui_mainwindow.h:723
 msgid "Add podcast..."
 msgstr "Podcast-a gehitu..."
 
@@ -532,7 +532,7 @@ msgstr "Gehitu pista etiketa kantari"
 msgid "Add song year tag"
 msgstr "Gehitu urtea etiketa kantari"
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:687
 msgid "Add stream..."
 msgstr "Gehitu jarioa..."
 
@@ -544,7 +544,7 @@ msgstr "Gehitu Grooveshark-eko gogokoenetara"
 msgid "Add to Grooveshark playlists"
 msgstr "Gehitu Grooveshark-eko erreprodukzio-zerrendetara"
 
-#: ui/mainwindow.cpp:1440
+#: ui/mainwindow.cpp:1448
 msgid "Add to another playlist"
 msgstr "Gehitu beste erreprodukzio-zerrenda batera"
 
@@ -605,12 +605,12 @@ msgstr "Ondoren"
 msgid "After copying..."
 msgstr "Kopiatu ondoren..."
 
-#: playlist/playlist.cpp:1208 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
-#: ../bin/src/ui_trackselectiondialog.h:209
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
 msgid "Album"
 msgstr "Albuma"
 
@@ -618,7 +618,7 @@ msgstr "Albuma"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albuma (pista guztientzako bolumen ideala)"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -640,11 +640,11 @@ msgstr "Azaldun albumak"
 msgid "Albums without covers"
 msgstr "Azal gabeko albumak"
 
-#: ui/mainwindow.cpp:157
+#: ui/mainwindow.cpp:160
 msgid "All Files (*)"
 msgstr "Fitxategi guztiak (*)"
 
-#: ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_mainwindow.h:693
 msgid "All Glory to the Hypnotoad!"
 msgstr "Loria osoa Hipnoapoarentzat!"
 
@@ -771,17 +771,17 @@ msgid ""
 "the songs of your library?"
 msgstr ""
 
-#: playlist/playlist.cpp:1207 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:57
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
 #: ../bin/src/ui_trackselectiondialog.h:210
-#: ../bin/src/ui_lastfmstationdialog.h:96
+#: ../bin/src/ui_lastfmstationdialog.h:96 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "Artista"
 
-#: ui/mainwindow.cpp:245
+#: ui/mainwindow.cpp:248
 msgid "Artist info"
 msgstr "Artis. infor."
 
@@ -793,11 +793,11 @@ msgstr "Artistaren irratia"
 msgid "Artist tags"
 msgstr "Artistaren etiketak"
 
-#: ui/organisedialog.cpp:57
+#: ui/organisedialog.cpp:58
 msgid "Artist's initial"
 msgstr "Artistaren inizialak"
 
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Audio formatua"
 
@@ -843,7 +843,7 @@ msgstr "Batez besteko irudi-tamaina"
 msgid "BBC Podcasts"
 msgstr "BBC-ko podcast-ak"
 
-#: playlist/playlist.cpp:1225 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1228 ui/organisedialog.cpp:65
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -864,7 +864,7 @@ msgstr "Atzeko planoko irudia"
 msgid "Background opacity"
 msgstr "Atzeko planoko opakotasuna"
 
-#: core/database.cpp:648
+#: core/database.cpp:644
 msgid "Backing up database"
 msgstr "Datu-basearen babeskopia burutzen"
 
@@ -872,7 +872,7 @@ msgstr "Datu-basearen babeskopia burutzen"
 msgid "Balance"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:666
 msgid "Ban"
 msgstr "Galarazi"
 
@@ -901,11 +901,11 @@ msgstr "Onena"
 msgid "Biography from %1"
 msgstr "%1-ko biografia"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1229 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Bit-tasa"
 
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:137
+#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:137
 #: ../bin/src/ui_groupbydialog.h:151 ../bin/src/ui_groupbydialog.h:165
 #: ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
@@ -1007,7 +1007,7 @@ msgstr "Mono erreprodukzioa hurrengo erreprodukzioetan izango da erabilgarri"
 msgid "Check for new episodes"
 msgstr "Atal berriak bilatu"
 
-#: ui/mainwindow.cpp:594
+#: ui/mainwindow.cpp:602
 msgid "Check for updates..."
 msgstr "Eguneraketak bilatu..."
 
@@ -1057,11 +1057,11 @@ msgstr "Garbiketa"
 msgid "Clear"
 msgstr "Garbitu"
 
-#: ../bin/src/ui_mainwindow.h:664 ../bin/src/ui_mainwindow.h:666
+#: ../bin/src/ui_mainwindow.h:668 ../bin/src/ui_mainwindow.h:670
 msgid "Clear playlist"
 msgstr "Erreprodukzio-zerrenda garbitu"
 
-#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:647
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:651
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1152,8 +1152,8 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr "Egin klik geratzen den denbora eta denbora osoaren artean txandakatzeko"
 
-#: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
+#: ../bin/src/ui_googledrivesettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1191,8 +1191,8 @@ msgstr "Koloreak"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komaz banaturiko klase-zerrenda:maila, maila 0-3 da"
 
-#: playlist/playlist.cpp:1235 smartplaylists/searchterm.cpp:288
-#: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
+#: playlist/playlist.cpp:1238 smartplaylists/searchterm.cpp:288
+#: ui/organisedialog.cpp:68 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Iruzkina"
 
@@ -1200,11 +1200,11 @@ msgstr "Iruzkina"
 msgid "Complete tags automatically"
 msgstr "Bete etiketak automatikoki"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:720
 msgid "Complete tags automatically..."
 msgstr "Bete etiketak automatikoki..."
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1218 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
@@ -1243,11 +1243,11 @@ msgstr "Subsonic konfiguratu"
 msgid "Configure global search..."
 msgstr "Bilaketa globala konfiguratu..."
 
-#: ui/mainwindow.cpp:475
+#: ui/mainwindow.cpp:483
 msgid "Configure library..."
 msgstr "Konfiguratu bilduma..."
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:288
+#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:350
 msgid "Configure podcasts..."
 msgstr "Podcast-ak konfiguratu"
 
@@ -1280,7 +1280,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr ""
 
-#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:696
 msgid "Console"
 msgstr "Kontsola"
 
@@ -1300,12 +1300,12 @@ msgstr "Gailuak erreproduzitu ezin dezakeen musika bihurtu"
 msgid "Copy to clipboard"
 msgstr "Kopiatu arbelean"
 
-#: library/libraryview.cpp:389 ui/mainwindow.cpp:509
-#: widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:389 podcasts/podcastservice.cpp:336
+#: ui/mainwindow.cpp:517 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiatu gailura..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:506
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:514
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Kopiatu bildumara..."
@@ -1327,14 +1327,14 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Ezin izan da GStreamer \"%1\" elementua sortu - beharrezko GStreamer plugin guztiak instalatuta dauden begiratu"
 
-#: transcoder/transcoder.cpp:432
+#: transcoder/transcoder.cpp:434
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Ezin izan da %1-(r)entzako multiplexadorea aurkitu, begiratu GStreamer plugin egokiak instalatuta dauden"
 
-#: transcoder/transcoder.cpp:426
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1351,7 +1351,7 @@ msgid "Couldn't open output file %1"
 msgstr "Ezin izan da %1 irteera-fitxategia ireki"
 
 #: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
-#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:691
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "Azal-kudeatzailea"
@@ -1395,11 +1395,11 @@ msgstr "Iraungi automatikoki kantak aldatzen direnean"
 msgid "Cross-fade when changing tracks manually"
 msgstr "Iraungi eskuz kantak aldatzen direnean"
 
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:663
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
 
-#: ../bin/src/ui_mainwindow.h:663
+#: ../bin/src/ui_mainwindow.h:667
 msgid "Ctrl+B"
 msgstr "Ctrl+B"
 
@@ -1407,63 +1407,63 @@ msgstr "Ctrl+B"
 msgid "Ctrl+Down"
 msgstr "Ctrl+Behera"
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
-#: ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
-#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:668
+#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:672
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:665
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: ../bin/src/ui_mainwindow.h:714
+#: ../bin/src/ui_mainwindow.h:718
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:706
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_mainwindow.h:680
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: ../bin/src/ui_mainwindow.h:657
+#: ../bin/src/ui_mainwindow.h:661
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Maius+A"
 
-#: ../bin/src/ui_mainwindow.h:706
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Maius+O"
 
-#: ../bin/src/ui_mainwindow.h:725
+#: ../bin/src/ui_mainwindow.h:729
 msgid "Ctrl+Shift+T"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:721
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
@@ -1499,18 +1499,18 @@ msgstr "DBus bide-izena"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:602
+#: core/database.cpp:598
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
 msgstr "Datu-basea usteldurik dago. Datu-basea nola berreskuratu daitekeen jakiteko, irakurri mesedez https://code.google.com/p/clementine-player/wiki/DatabaseCorruption."
 
-#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1236 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Sorrera-data"
 
-#: playlist/playlist.cpp:1232 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1235 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Aldatze-data"
 
@@ -1555,12 +1555,12 @@ msgstr "Ezabatu"
 msgid "Delete Grooveshark playlist"
 msgstr "Ezabatu Grooveshark-eko erreprodukzio-zerrenda"
 
-#: podcasts/podcastservice.cpp:274
+#: podcasts/podcastservice.cpp:333
 msgid "Delete downloaded data"
 msgstr "Ezabatu deskargatutako datuak"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1936 widgets/fileview.cpp:187
+#: ui/mainwindow.cpp:1960 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Ezabatu fitxategiak"
 
@@ -1568,7 +1568,7 @@ msgstr "Ezabatu fitxategiak"
 msgid "Delete from device..."
 msgstr "Ezabatu gailutik..."
 
-#: library/libraryview.cpp:391 ui/mainwindow.cpp:510
+#: library/libraryview.cpp:391 ui/mainwindow.cpp:518
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Ezabatu diskotik..."
@@ -1593,15 +1593,16 @@ msgstr "Ezabatu jatorrizko fitxategiak"
 msgid "Deleting files"
 msgstr "Fitxategiak ezabatzen"
 
-#: ui/mainwindow.cpp:1374
+#: ui/mainwindow.cpp:1382
 msgid "Dequeue selected tracks"
 msgstr "Atera aukeraturiko pistak ilaratik"
 
-#: ui/mainwindow.cpp:1372
+#: ui/mainwindow.cpp:1380
 msgid "Dequeue track"
 msgstr "Atera pista ilaratik"
 
 #: ../bin/src/ui_transcodedialog.h:214 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Helmuga"
 
@@ -1625,9 +1626,13 @@ msgstr "Gailuaren izena"
 msgid "Device properties..."
 msgstr "Gailuaren propietateak..."
 
-#: ui/mainwindow.cpp:242
+#: ui/mainwindow.cpp:245
 msgid "Devices"
 msgstr "Gailuak"
+
+#: ../bin/src/ui_ripcd.h:300
+msgid "Dialog"
+msgstr ""
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1667,8 +1672,8 @@ msgstr "Aldarte-barren sortzea desgaitu"
 msgid "Disabled"
 msgstr "Desgaituta"
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:63
-#: ../bin/src/ui_edittagdialog.h:685
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:64
+#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Diska"
 
@@ -1685,7 +1690,7 @@ msgstr "Erakutsi aukerak"
 msgid "Display the on-screen-display"
 msgstr "Erakutsi pantailako bistaratzailea"
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:719
 msgid "Do a full library rescan"
 msgstr "Bildumaren berreskaneo osoa egin"
 
@@ -1725,7 +1730,7 @@ msgstr "Klik bikoitza irekitzeko"
 msgid "Double clicking a song will..."
 msgstr "Abesti batean klik bikoitza eginez gero..."
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:421
 #, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "%n atal deskargatu"
@@ -1746,7 +1751,7 @@ msgstr "Deskargarako bazkidetza"
 msgid "Download new episodes automatically"
 msgstr "Atal berriak automatikoki deskargatu"
 
-#: podcasts/podcastservice.cpp:187
+#: podcasts/podcastservice.cpp:246
 msgid "Download queued"
 msgstr "Deskarga zerrendaren zain"
 
@@ -1762,7 +1767,7 @@ msgstr "Deskargatu album hau"
 msgid "Download this album..."
 msgstr "Deskargatu album hau..."
 
-#: podcasts/podcastservice.cpp:352
+#: podcasts/podcastservice.cpp:423
 msgid "Download this episode"
 msgstr "Atal hau deskargatu"
 
@@ -1770,7 +1775,7 @@ msgstr "Atal hau deskargatu"
 msgid "Download..."
 msgstr "Deskargatu..."
 
-#: podcasts/podcastservice.cpp:195
+#: podcasts/podcastservice.cpp:254
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Deskargatzen (%%1)..."
@@ -1807,6 +1812,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr ""
 
+#: ../bin/src/ui_ripcd.h:309
+msgid "Duration"
+msgstr ""
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
 msgstr "Modu dinamikoa aktibaturik"
@@ -1819,12 +1828,12 @@ msgstr "Ausazko nahasketa dinamikoa"
 msgid "Edit smart playlist..."
 msgstr "Editatu erreprodukzio-zerrenda adimenduna..."
 
-#: ui/mainwindow.cpp:1407
+#: ui/mainwindow.cpp:1415
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Edit tag..."
 msgstr "Editatu etiketa..."
 
@@ -1837,7 +1846,7 @@ msgid "Edit track information"
 msgstr "Editatu pistaren informazioa"
 
 #: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Edit track information..."
 msgstr "Editatu pistaren informazioa..."
 
@@ -1938,7 +1947,7 @@ msgstr ""
 msgid "Entire collection"
 msgstr "Bilduma osoa"
 
-#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:700
 msgid "Equalizer"
 msgstr "Ekualizadorea"
 
@@ -1952,7 +1961,7 @@ msgstr "--log-levels *:3-en baliokidea"
 
 #: internet/groovesharkservice.cpp:1017
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1888 ui/mainwindow.cpp:2004
+#: ui/mainwindow.cpp:1690 ui/mainwindow.cpp:1912 ui/mainwindow.cpp:2028
 msgid "Error"
 msgstr "Errorea"
 
@@ -1972,7 +1981,7 @@ msgstr "Errorea abestiak ezabatzean"
 msgid "Error downloading Spotify plugin"
 msgstr "Errorea Spotify plugin-a deskargatzean"
 
-#: playlist/songloaderinserter.cpp:71 playlist/songloaderinserter.cpp:133
+#: playlist/songloaderinserter.cpp:73 playlist/songloaderinserter.cpp:135
 #, qt-format
 msgid "Error loading %1"
 msgstr "Errorea %1 kargatzean"
@@ -1982,12 +1991,12 @@ msgstr "Errorea %1 kargatzean"
 msgid "Error loading di.fm playlist"
 msgstr "Errorea di.fm erreprodukzio-zerrenda kargatzean"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Errorea %1 prozesatzean: %2"
 
-#: playlist/songloaderinserter.cpp:100
+#: playlist/songloaderinserter.cpp:102
 msgid "Error while loading audio CD"
 msgstr "Errorea audio CDa kargatzean"
 
@@ -2065,27 +2074,27 @@ msgstr ""
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:682
 msgid "F1"
 msgstr "F1"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:678
 msgid "F2"
 msgstr "F2"
 
-#: ../bin/src/ui_mainwindow.h:649
+#: ../bin/src/ui_mainwindow.h:653
 msgid "F5"
 msgstr "F5"
 
-#: ../bin/src/ui_mainwindow.h:651
+#: ../bin/src/ui_mainwindow.h:655
 msgid "F6"
 msgstr "F6"
 
-#: ../bin/src/ui_mainwindow.h:653
+#: ../bin/src/ui_mainwindow.h:657
 msgid "F7"
 msgstr "F7"
 
-#: ../bin/src/ui_mainwindow.h:655
+#: ../bin/src/ui_mainwindow.h:659
 msgid "F8"
 msgstr "F8"
 
@@ -2111,6 +2120,10 @@ msgstr "Iraungitzea"
 #: ../bin/src/ui_playbacksettingspage.h:307
 msgid "Fading duration"
 msgstr "Iraungitzearen iraupena"
+
+#: ui/mainwindow.cpp:1690
+msgid "Failed reading CD drive"
+msgstr ""
 
 #: podcasts/gpoddertoptagspage.cpp:76
 msgid "Failed to fetch directory"
@@ -2163,7 +2176,11 @@ msgstr ""
 msgid "Fetching cover error"
 msgstr "Errorea azalak eskuratzean"
 
-#: ui/organisedialog.cpp:71
+#: ../bin/src/ui_ripcd.h:320
+msgid "File Format"
+msgstr ""
+
+#: ui/organisedialog.cpp:72
 msgid "File extension"
 msgstr "Fitxategi-luzapena"
 
@@ -2171,19 +2188,19 @@ msgstr "Fitxategi-luzapena"
 msgid "File formats"
 msgstr "Fitxategi-formatuak"
 
-#: playlist/playlist.cpp:1228 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Fitxategi-izena"
 
-#: playlist/playlist.cpp:1229
+#: playlist/playlist.cpp:1232
 msgid "File name (without path)"
 msgstr "Fitx.-izena (bidea gabe)"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Fitxategi-tamaina"
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1234 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2193,7 +2210,7 @@ msgstr "Fitxategi-mota"
 msgid "Filename"
 msgstr "Fitxategi-izena"
 
-#: ui/mainwindow.cpp:239
+#: ui/mainwindow.cpp:242
 msgid "Files"
 msgstr "Fitxategiak"
 
@@ -2313,9 +2330,10 @@ msgstr "Orokorra"
 msgid "General settings"
 msgstr "Ezarpen orokorrak"
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:67
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Generoa"
 
@@ -2347,11 +2365,11 @@ msgstr "Izendatu:"
 msgid "Go"
 msgstr "Joan"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Go to next playlist tab"
 msgstr "Hurrengo erreprodukzio-zerrendara joan"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:712
 msgid "Go to previous playlist tab"
 msgstr "Aurreko erreprodukzio-zerrendara joan"
 
@@ -2421,7 +2439,7 @@ msgstr "Taldekatu genero/albumaren arabera"
 msgid "Group by Genre/Artist/Album"
 msgstr "Taldekatu generoa/artista/albumaren arabera"
 
-#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1220 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr ""
@@ -2576,6 +2594,10 @@ msgstr "Indexatzen: %1"
 msgid "Information"
 msgstr "Informazioa"
 
+#: ../bin/src/ui_ripcd.h:301
+msgid "Input options"
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:203
 msgid "Insert..."
 msgstr "Txertatu"
@@ -2584,11 +2606,11 @@ msgstr "Txertatu"
 msgid "Installed"
 msgstr "Instalatuta"
 
-#: core/database.cpp:587
+#: core/database.cpp:583
 msgid "Integrity check"
 msgstr "Osotasunaren egiaztapena"
 
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:244
 msgid "Internet"
 msgstr "Internet"
 
@@ -2628,6 +2650,10 @@ msgstr "Sesio-gako baliogabea"
 msgid "Invalid username and/or password"
 msgstr "Erabiltzaile-izen edota pasahitz baliogabea"
 
+#: ../bin/src/ui_ripcd.h:312
+msgid "Invert Selection"
+msgstr ""
+
 #: internet/jamendoservice.cpp:127
 msgid "Jamendo"
 msgstr "Jamendo"
@@ -2652,7 +2678,7 @@ msgstr "Jamendo-ko asteko kantarik onenak"
 msgid "Jamendo database"
 msgstr "Jamendo datu-basea"
 
-#: ../bin/src/ui_mainwindow.h:699
+#: ../bin/src/ui_mainwindow.h:703
 msgid "Jump to the currently playing track"
 msgstr "Erreproduzitzen ari den pistara jauzi egin"
 
@@ -2676,7 +2702,7 @@ msgstr "Jarraitu atzealdean exekutatzen leihoa ixten denean"
 msgid "Keep the original files"
 msgstr "Jatorrizko fitxategiak mantendu"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:695
 msgid "Kittens"
 msgstr "Katakumeak"
 
@@ -2700,7 +2726,7 @@ msgstr "Albumeko azal handia"
 msgid "Large sidebar"
 msgstr "Albo-barra handia"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1222
+#: library/library.cpp:71 playlist/playlist.cpp:1225
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Erreproduzitutako azkena"
@@ -2783,12 +2809,12 @@ msgstr "Hutsik utzi lehenetsirako. Adibideak: \"/dev/dsp\", \"front\", e.a."
 msgid "Left"
 msgstr ""
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:69
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Iraupena"
 
-#: ui/mainwindow.cpp:228 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:231 ui/mainwindow.cpp:241
 msgid "Library"
 msgstr "Bilduma"
 
@@ -2796,7 +2822,7 @@ msgstr "Bilduma"
 msgid "Library advanced grouping"
 msgstr "Bildumaren taldekatze aurreratua"
 
-#: ui/mainwindow.cpp:2121
+#: ui/mainwindow.cpp:2145
 msgid "Library rescan notice"
 msgstr "Bildumaren berreskaneoaren abisua"
 
@@ -2841,7 +2867,7 @@ msgstr "Kargatu azala diskotik..."
 msgid "Load playlist"
 msgstr "Kargatu erreprodukzio-zerrenda"
 
-#: ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Load playlist..."
 msgstr "Kargatu erreprodukzio-zerrenda..."
 
@@ -2870,11 +2896,11 @@ msgstr "Abestiak kargatzen"
 msgid "Loading stream"
 msgstr "Jarioa kargatzen"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:233
+#: playlist/songloaderinserter.cpp:81 ui/edittagdialog.cpp:233
 msgid "Loading tracks"
 msgstr "Pistak kargatzen"
 
-#: playlist/songloaderinserter.cpp:139
+#: playlist/songloaderinserter.cpp:141
 msgid "Loading tracks info"
 msgstr "Pisten informazioa kargatzen"
 
@@ -2893,10 +2919,10 @@ msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordez
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:131
-#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Saio-hasiera"
 
@@ -2908,7 +2934,7 @@ msgstr "Saio hasieraren huts egitea"
 msgid "Long term prediction profile (LTP)"
 msgstr "Epe luzerako predikzio profila (LTP)"
 
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:664
 msgid "Love"
 msgstr "Oso gustukoa"
 
@@ -2971,7 +2997,7 @@ msgstr "Magnatune deskarga eginda"
 msgid "Main profile (MAIN)"
 msgstr "Profil nagusia (MAIN)"
 
-#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:690
+#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:694
 msgid "Make it so!"
 msgstr "Egin ezazu!"
 
@@ -2996,11 +3022,11 @@ msgstr "Eskuz"
 msgid "Manufacturer"
 msgstr "Fabrikatzailea"
 
-#: podcasts/podcastservice.cpp:284
+#: podcasts/podcastservice.cpp:346
 msgid "Mark as listened"
 msgstr "Entzunda bezala markatu"
 
-#: podcasts/podcastservice.cpp:282
+#: podcasts/podcastservice.cpp:344
 msgid "Mark as new"
 msgstr "Berri bezala markatu"
 
@@ -3054,7 +3080,7 @@ msgstr "Mono erreprodukzioa"
 msgid "Months"
 msgstr "Hilabete"
 
-#: playlist/playlist.cpp:1237
+#: playlist/playlist.cpp:1240
 msgid "Mood"
 msgstr "Aldarte"
 
@@ -3084,7 +3110,7 @@ msgstr "Muntatze-puntuak"
 msgid "Move down"
 msgstr "Eraman behera"
 
-#: ui/mainwindow.cpp:507 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:515 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "Eraman bildumara..."
 
@@ -3093,7 +3119,7 @@ msgstr "Eraman bildumara..."
 msgid "Move up"
 msgstr "Eraman gora"
 
-#: transcoder/transcodedialog.cpp:221 ui/mainwindow.cpp:1617
+#: transcoder/transcodedialog.cpp:221 ui/mainwindow.cpp:1625
 msgid "Music"
 msgstr "Musika"
 
@@ -3101,7 +3127,7 @@ msgstr "Musika"
 msgid "Music Library"
 msgstr "Musika-bilduma"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:713
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:717
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Mututu"
@@ -3189,7 +3215,7 @@ msgstr "Inoiz ez hasi erreproduzitzen"
 msgid "New folder"
 msgstr "Karpeta berria"
 
-#: ui/mainwindow.cpp:1457 ../bin/src/ui_mainwindow.h:701
+#: ui/mainwindow.cpp:1465 ../bin/src/ui_mainwindow.h:705
 msgid "New playlist"
 msgstr "Erreprodukzio-zerrenda berria"
 
@@ -3213,7 +3239,7 @@ msgstr "Pista berrienak"
 msgid "Next"
 msgstr "Hurrengoa"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:654
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:658
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Hurrengo pista"
@@ -3252,7 +3278,7 @@ msgstr "Bloke laburrik ez"
 msgid "None"
 msgstr "Bat ere ez"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1889 ui/mainwindow.cpp:2005
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1913 ui/mainwindow.cpp:2029
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Aukeraturiko abestietako bat ere ez zen aproposa gailu batera kopiatzeko"
 
@@ -3370,7 +3396,7 @@ msgstr ""
 msgid "Open %1 in browser"
 msgstr "%1 nabigatzailean ireki"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Open &audio CD..."
 msgstr "Ireki &audio CDa..."
 
@@ -3386,7 +3412,7 @@ msgstr "OPML fitxategia ireki"
 msgid "Open device"
 msgstr "Ireki gailua"
 
-#: ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:689
 msgid "Open file..."
 msgstr "Ireki fitxategia..."
 
@@ -3421,7 +3447,7 @@ msgstr "Bit-tasarako optimizatu"
 msgid "Optimize for quality"
 msgstr "Kalitaterako optimizatu"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Aukerak..."
 
@@ -3433,11 +3459,11 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Antolatu fitxategiak"
 
-#: library/libraryview.cpp:387 ui/mainwindow.cpp:508
+#: library/libraryview.cpp:387 ui/mainwindow.cpp:516
 msgid "Organise files..."
 msgstr "Antolatu fitxategiak..."
 
-#: core/organise.cpp:65
+#: core/organise.cpp:66
 msgid "Organising files"
 msgstr "Fitxategiak antolatzen"
 
@@ -3457,7 +3483,7 @@ msgstr ""
 msgid "Output device"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:211
+#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_ripcd.h:318
 msgid "Output options"
 msgstr "Irteerako aukerak"
 
@@ -3498,7 +3524,7 @@ msgstr "Jaia"
 msgid "Password"
 msgstr "Pasahitza"
 
-#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:863 ui/mainwindow.cpp:1296
+#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:871 ui/mainwindow.cpp:1304
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pausarazi"
@@ -3511,7 +3537,7 @@ msgstr "Erreprodukzioa pausatu"
 msgid "Paused"
 msgstr "Pausatua"
 
-#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1219 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr ""
@@ -3524,9 +3550,9 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Albo-barra sinplea"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:490 ui/mainwindow.cpp:831
-#: ui/mainwindow.cpp:850 ui/mainwindow.cpp:1299 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:650
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:498 ui/mainwindow.cpp:839
+#: ui/mainwindow.cpp:858 ui/mainwindow.cpp:1307 ui/qtsystemtrayicon.cpp:166
+#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:654
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
 msgstr "Erreproduzitu"
@@ -3539,7 +3565,7 @@ msgstr "Erreproduzitu artista edo etiketa"
 msgid "Play artist radio..."
 msgstr "Erreproduzitu artistaren irratia..."
 
-#: playlist/playlist.cpp:1220 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Erreprodukzio kopurua"
 
@@ -3594,7 +3620,7 @@ msgstr "Erreprodukzio-zerrendaren aukerak"
 msgid "Playlist type"
 msgstr "Erreprodukzio-zerrenda mota"
 
-#: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:240
+#: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:243
 msgid "Playlists"
 msgstr "Erreprodukzio-zerrendak"
 
@@ -3606,7 +3632,7 @@ msgstr "Mesedez, itxi nabigatzailea eta itzuli Clementine-ra."
 msgid "Plugin status:"
 msgstr "Pluginaren egoera:"
 
-#: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:116 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcast-ak"
 
@@ -3646,7 +3672,7 @@ msgstr "Aurre-anplifikadorea"
 msgid "Preferences"
 msgstr "Hobespenak"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:679
 msgid "Preferences..."
 msgstr "Hobespenak..."
 
@@ -3701,7 +3727,7 @@ msgstr "Aurrebista"
 msgid "Previous"
 msgstr "Aurrekoa"
 
-#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:648
+#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:652
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Aurreko pista"
@@ -3715,7 +3741,7 @@ msgid "Profile"
 msgstr "Profila"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
-#: ../bin/src/ui_transcodedialog.h:220
+#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcd.h:324
 msgid "Progress"
 msgstr "Aurrerapena"
 
@@ -3744,16 +3770,16 @@ msgstr "Kalitatea"
 msgid "Querying device..."
 msgstr "Gailua galdekatzen..."
 
-#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:711
+#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:715
 msgid "Queue Manager"
 msgstr "Ilara-kudeatzailea"
 
-#: ui/mainwindow.cpp:1378
+#: ui/mainwindow.cpp:1386
 msgid "Queue selected tracks"
 msgstr "Aukeraturiko pistak ilaran jarri"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1376
+#: ui/mainwindow.cpp:1384
 msgid "Queue track"
 msgstr "Pista ilaran jarri"
 
@@ -3765,7 +3791,7 @@ msgstr "Irratia (ozentasun berdina pista denentzat)"
 msgid "Radios"
 msgstr "Irratiak"
 
-#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:688
+#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:692
 msgid "Rain"
 msgstr "Euria"
 
@@ -3797,7 +3823,7 @@ msgstr "Oraingo kantari 4 izarretako balioa eman"
 msgid "Rate the current song 5 stars"
 msgstr "Oraingo kantari 5 izarretako balioa eman"
 
-#: playlist/playlist.cpp:1219 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1222 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "Balioztatzea"
 
@@ -3855,7 +3881,7 @@ msgstr "Kendu"
 msgid "Remove action"
 msgstr "Kendu ekintza"
 
-#: ../bin/src/ui_mainwindow.h:720
+#: ../bin/src/ui_mainwindow.h:724
 msgid "Remove duplicates from playlist"
 msgstr "Abesti bikoiztuak kendu erreprodukzio-zerrendatik "
 
@@ -3871,7 +3897,7 @@ msgstr "Nire Musikatik kendu"
 msgid "Remove from favorites"
 msgstr "Kendu gogokoenetatik"
 
-#: internet/groovesharkservice.cpp:530 ../bin/src/ui_mainwindow.h:695
+#: internet/groovesharkservice.cpp:530 ../bin/src/ui_mainwindow.h:699
 msgid "Remove from playlist"
 msgstr "Kendu erreprodukzio-zerrendatik"
 
@@ -3908,7 +3934,7 @@ msgstr "Berrizendatu erreprodukzio-zerrenda"
 msgid "Rename playlist..."
 msgstr "Berrizendatu erreprodukzio-zerrenda..."
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:675
 msgid "Renumber tracks in this order..."
 msgstr "Zenbakitu berriro pistak ordena honetan..."
 
@@ -3999,6 +4025,18 @@ msgstr "Clementine-ra itzuli"
 msgid "Right"
 msgstr ""
 
+#: ../bin/src/ui_ripcd.h:303
+msgid "Rip"
+msgstr ""
+
+#: ui/ripcd.cpp:116
+msgid "Rip CD"
+msgstr ""
+
+#: ../bin/src/ui_mainwindow.h:730
+msgid "Rip audio CD..."
+msgstr ""
+
 #: ui/equalizer.cpp:131
 msgid "Rock"
 msgstr "Rock"
@@ -4025,11 +4063,11 @@ msgstr "Kendu gailua arriskurik gabe"
 msgid "Safely remove the device after copying"
 msgstr "Kopiatu ondoren kendu gailua arriskurik gabe"
 
-#: playlist/playlist.cpp:1227 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Lagintze-tasa"
 
-#: ui/organisedialog.cpp:70
+#: ui/organisedialog.cpp:71
 msgid "Samplerate"
 msgstr "Lagintze-tasa"
 
@@ -4053,7 +4091,7 @@ msgstr "Gorde irudia"
 msgid "Save playlist"
 msgstr "Gorde erreprodukzio-zerrenda"
 
-#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:703
+#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "Gorde erreprodukzio-zerrenda..."
 
@@ -4089,7 +4127,7 @@ msgstr "Lagintze-tasa eskalagarriaren profila (SSR)"
 msgid "Scale size"
 msgstr ""
 
-#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Puntuazioa"
 
@@ -4098,7 +4136,7 @@ msgid "Scrobble tracks that I listen to"
 msgstr "Entzuten ditudan pistak partekatu"
 
 #: ui/albumcoversearcher.cpp:173 ui/albumcoversearcher.cpp:190
-#: ui/mainwindow.cpp:237 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
 #: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
@@ -4182,11 +4220,11 @@ msgstr "Oraingo pistan mugitu posizio erlatibo baten arabera"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Oraingo pistan mugitu posizio absolutu baten arabera"
 
-#: visualisations/visualisationselector.cpp:40
+#: visualisations/visualisationselector.cpp:40 ../bin/src/ui_ripcd.h:310
 msgid "Select All"
 msgstr "Hautatu dena"
 
-#: visualisations/visualisationselector.cpp:42
+#: visualisations/visualisationselector.cpp:42 ../bin/src/ui_ripcd.h:311
 msgid "Select None"
 msgstr "Ez hautatu ezer"
 
@@ -4214,7 +4252,7 @@ msgstr "Hautatu bistaratzeak"
 msgid "Select visualizations..."
 msgstr "Hautatu bistaratzeak..."
 
-#: ../bin/src/ui_transcodedialog.h:219
+#: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
 msgstr ""
 
@@ -4234,7 +4272,7 @@ msgstr "Zerbitzariaren xehetasunak"
 msgid "Service offline"
 msgstr "Zerbitzua lineaz kanpo"
 
-#: ui/mainwindow.cpp:1405
+#: ui/mainwindow.cpp:1413
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Ezarri %1 \"%2\"-(e)ra..."
@@ -4243,7 +4281,7 @@ msgstr "Ezarri %1 \"%2\"-(e)ra..."
 msgid "Set the volume to <value> percent"
 msgstr "Ezarri bolumena ehuneko <value>-ra"
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:676
 msgid "Set value for all selected tracks..."
 msgstr "Ezarri balioa aukeratutako pista guztiei..."
 
@@ -4306,7 +4344,7 @@ msgstr "Erakutsi OSD itxurosoa"
 msgid "Show above status bar"
 msgstr "Erakutsi egoera-barraren gainean"
 
-#: ui/mainwindow.cpp:463
+#: ui/mainwindow.cpp:471
 msgid "Show all songs"
 msgstr "Erakutsi abesti guztiak"
 
@@ -4326,12 +4364,12 @@ msgstr "Erakutsi zatitzaileak"
 msgid "Show fullsize..."
 msgstr "Erakutsi tamaina osoan..."
 
-#: library/libraryview.cpp:399 ui/mainwindow.cpp:511
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:519
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Erakutsi fitxategi arakatzailean..."
 
-#: ui/mainwindow.cpp:512
+#: ui/mainwindow.cpp:520
 msgid "Show in library..."
 msgstr ""
 
@@ -4343,11 +4381,11 @@ msgstr "Erakutsi hainbat artista"
 msgid "Show moodbar"
 msgstr "Aldarte-barra erakutsi"
 
-#: ui/mainwindow.cpp:464
+#: ui/mainwindow.cpp:472
 msgid "Show only duplicates"
 msgstr "Erakutsi bakarrik errepikapenak"
 
-#: ui/mainwindow.cpp:465
+#: ui/mainwindow.cpp:473
 msgid "Show only untagged"
 msgstr "Erakutsi etiketa gabeak bakarrik"
 
@@ -4387,7 +4425,7 @@ msgstr "Albumak nahastu"
 msgid "Shuffle all"
 msgstr "Dena nahastu"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Shuffle playlist"
 msgstr "Erreprodukzio-zerrenda nahastu"
 
@@ -4427,7 +4465,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Saltatu atzerantz erreprodukzio-zerrendan"
 
-#: playlist/playlist.cpp:1221 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "Saltatu kontagailua"
 
@@ -4463,7 +4501,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Abestiaren informazioa"
 
-#: ui/mainwindow.cpp:244
+#: ui/mainwindow.cpp:247
 msgid "Song info"
 msgstr "Abes. infor."
 
@@ -4495,7 +4533,7 @@ msgstr "Ordenatu abestiak honen arabera"
 msgid "Sorting"
 msgstr "Ordenatzen"
 
-#: playlist/playlist.cpp:1236
+#: playlist/playlist.cpp:1239
 msgid "Source"
 msgstr "Iturria"
 
@@ -4531,6 +4569,10 @@ msgstr "Estandarra"
 msgid "Starred"
 msgstr "Izarduna(k)"
 
+#: ui/ripcd.cpp:90
+msgid "Start ripping"
+msgstr ""
+
 #: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "Hasi oraingo erreprodukzio-zerrenda"
@@ -4546,7 +4588,7 @@ msgid ""
 "list"
 msgstr "Hasi idazten aurreko bilaketa eremuan emaitzak jaso ahal izateko"
 
-#: transcoder/transcoder.cpp:405
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 hasten"
@@ -4559,7 +4601,7 @@ msgstr "Hasten..."
 msgid "Stations"
 msgstr "Irratiak"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:652
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:656
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Gelditu"
@@ -4568,7 +4610,7 @@ msgstr "Gelditu"
 msgid "Stop after"
 msgstr "Ondoren gelditu"
 
-#: ui/mainwindow.cpp:492 ../bin/src/ui_mainwindow.h:658
+#: ui/mainwindow.cpp:500 ../bin/src/ui_mainwindow.h:662
 msgid "Stop after this track"
 msgstr "Gelditu pista honen ondoren"
 
@@ -4736,7 +4778,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2114
+#: ui/mainwindow.cpp:2138
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4777,7 +4819,7 @@ msgid ""
 "continue?"
 msgstr "Fitxategi hauek gailutik ezabatuko dira, jarraitu nahi duzu?"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1937 widgets/fileview.cpp:188
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1961 widgets/fileview.cpp:188
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4849,9 +4891,10 @@ msgstr "Jario hau ordainpeko harpidedunentzat da bakarrik"
 msgid "This type of device is not supported: %1"
 msgstr "Gailu mota hau ez da onartzen :%1"
 
-#: playlist/playlist.cpp:1206 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "Izenburua"
 
@@ -4873,11 +4916,11 @@ msgstr "Txandakatu OSD itxurosoa"
 msgid "Toggle fullscreen"
 msgstr "Txandakatu pantaila-osoa"
 
-#: ui/mainwindow.cpp:1380
+#: ui/mainwindow.cpp:1388
 msgid "Toggle queue status"
 msgstr "Txandakatu ilara-egoera"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:722
 msgid "Toggle scrobbling"
 msgstr "Txandakatu partekatzea"
 
@@ -4909,12 +4952,13 @@ msgstr "Transferituriko byte-ak guztira"
 msgid "Total network requests made"
 msgstr "Eginiko sareko eskaerak guztira"
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:63
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
+#: ../bin/src/ui_ripcd.h:305
 msgid "Track"
 msgstr "Pista"
 
-#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:701
 msgid "Transcode Music"
 msgstr "Transkodetu musika"
 
@@ -4996,7 +5040,7 @@ msgstr "Errore ezezaguna"
 msgid "Unset cover"
 msgstr "Ezarri gabeko azala"
 
-#: podcasts/addpodcastdialog.cpp:61 podcasts/podcastservice.cpp:277
+#: podcasts/addpodcastdialog.cpp:61 podcasts/podcastservice.cpp:339
 msgid "Unsubscribe"
 msgstr "Harpidetza kendu"
 
@@ -5008,11 +5052,11 @@ msgstr "Hurrengo Kontzertuak"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark erreprodukzio-zerrenda eguneratu"
 
-#: podcasts/podcastservice.cpp:260
+#: podcasts/podcastservice.cpp:319
 msgid "Update all podcasts"
 msgstr "Eguneratu podcast guztiak"
 
-#: ../bin/src/ui_mainwindow.h:709
+#: ../bin/src/ui_mainwindow.h:713
 msgid "Update changed library folders"
 msgstr "Eguneratu bildumako aldatutako karpetak"
 
@@ -5020,7 +5064,7 @@ msgstr "Eguneratu bildumako aldatutako karpetak"
 msgid "Update the library when Clementine starts"
 msgstr "Eguneratu bilduma Clementine abiaraztean"
 
-#: podcasts/podcastservice.cpp:268
+#: podcasts/podcastservice.cpp:327
 msgid "Update this podcast"
 msgstr "Podcast hau eguneratu"
 
@@ -5167,7 +5211,7 @@ msgstr "Ikusi"
 msgid "Visualization mode"
 msgstr "Bistaratze-modua"
 
-#: ../bin/src/ui_mainwindow.h:710 ui/dbusscreensaver.cpp:35
+#: ../bin/src/ui_mainwindow.h:714 ui/dbusscreensaver.cpp:35
 msgid "Visualizations"
 msgstr "Bistaratzeak"
 
@@ -5295,7 +5339,7 @@ msgid ""
 "well?"
 msgstr "Beste abestiak ere Hainbat artistara mugitzea nahi duzu?"
 
-#: ui/mainwindow.cpp:2119
+#: ui/mainwindow.cpp:2143
 msgid "Would you like to run a full rescan right now?"
 msgstr "Berreskaneo osoa orain egitea nahi duzu?"
 
@@ -5307,10 +5351,10 @@ msgstr ""
 msgid "Wrong username or password."
 msgstr "Erabiltzailea edo pasahitza ez da zuzena."
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:66
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
-#: ../bin/src/ui_trackselectiondialog.h:212
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "Urtea"
 
