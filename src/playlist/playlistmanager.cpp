@@ -237,7 +237,7 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
   QString default_filter = parser()->default_filter();
 
   filename = QFileDialog::getSaveFileName(
-      NULL, tr("Save playlist"), filename,
+      NULL, tr("Save playlist", "Title of the playlist save dialog."), filename,
       parser()->filters(), &default_filter);
 
   if (filename.isNull())

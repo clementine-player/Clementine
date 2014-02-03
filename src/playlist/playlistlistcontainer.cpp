@@ -71,7 +71,7 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
 
   action_new_folder_->setText(tr("New folder"));
   action_remove_->setText(tr("Delete"));
-  action_save_playlist_->setText(tr("Save playlist"));
+  action_save_playlist_->setText(tr("Save playlist", "Save playlist menu action."));
 
   ui_->new_folder->setDefaultAction(action_new_folder_);
   ui_->remove->setDefaultAction(action_remove_);
