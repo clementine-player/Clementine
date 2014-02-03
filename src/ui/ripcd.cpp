@@ -454,6 +454,7 @@ void RipCD::InvertSelection() {
 }
 
 void RipCD::RemoveTemporaryDirectory() {
-  Utilities::RemoveRecursive(temporary_directory_);
+  if (!temporary_directory_.isEmpty())
+    Utilities::RemoveRecursive(temporary_directory_);
   temporary_directory_.clear();
 }
