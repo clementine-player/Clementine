@@ -44,7 +44,7 @@ SearchProviderStatusWidget::SearchProviderStatusWidget(
   if (enabled && logged_in) {
     ui_->disabled_group->hide();
   } else {
-    const QString disabled_text = tr("Disabled");
+    const QString disabled_text = tr("Disabled", "Refers to search provider's status.");
     const QString not_logged_in_text = tr("Not logged in");
     const int disabled_width = fontMetrics().width("    ") + qMax(
           fontMetrics().width(disabled_text),
