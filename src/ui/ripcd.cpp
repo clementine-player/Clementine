@@ -22,6 +22,7 @@
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
 #include "core/logging.h"
+#include "core/utilities.h"
 
 #include <QSettings>
 #include <QCheckBox>
@@ -225,7 +226,7 @@ int RipCD::NumTracksToRip() {
 
 void RipCD::ThreadClickedRipButton() {
 
-  QString source_directory = QDir::tempPath() + "/";
+  temporary_directory_ = Utilities::MakeTempDir() + "/";
 
   finished_success_ = 0;
   finished_failed_ = 0;
@@ -241,7 +242,7 @@ void RipCD::ThreadClickedRipButton() {
     }
     tracks_to_rip_.append(i);
 
-    QString filename = source_directory
+    QString filename = temporary_directory_
         + ParseFileFormatString(ui_->format_filename->text(), i) + ".wav";
     QFile *destination_file = new QFile(filename);
     destination_file->open(QIODevice::WriteOnly);
@@ -336,6 +337,8 @@ void RipCD::JobComplete(const QString& filename, bool success) {
 }
 
 void RipCD::AllJobsComplete() {
+  RemoveTemporaryDirectory();
+
   // having a little trouble on wav files, works fine on ogg-vorbis
   qSort(generated_files_);
 
@@ -411,6 +414,7 @@ void RipCD::AddDestinationDirectory(QString dir) {
 
 void RipCD::Cancel() {
   transcoder_->Cancel();
+  RemoveTemporaryDirectory();
   SetWorking(false);
 }
 
@@ -447,4 +451,9 @@ void RipCD::InvertSelection() {
     checkbox->setCheckState(Qt::Checked);
     }
   }
+}
+
+void RipCD::RemoveTemporaryDirectory() {
+  Utilities::RemoveRecursive(temporary_directory_);
+  temporary_directory_.clear();
 }

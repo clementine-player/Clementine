@@ -57,6 +57,7 @@ class RipCD: public QDialog {
   QPushButton* cancel_button_;
   QPushButton* close_button_;
   QPushButton* rip_button_;
+  QString temporary_directory_;
 
   void WriteWAVHeader(QFile *stream, int32_t i_bytecount);
   int NumTracksToRip();
@@ -67,6 +68,7 @@ class RipCD: public QDialog {
   QString ParseFileFormatString(const QString& file_format, int track_no) const;
   void SetWorking(bool working);
   void AddDestinationDirectory(QString dir);
+  void RemoveTemporaryDirectory();
 
  signals:
   void RippingComplete();
