@@ -67,7 +67,7 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
   tags[tr("Genre")] = "genre";
   tags[tr("Comment")] = "comment";
   tags[tr("Length")] = "length";
-  tags[tr("Bitrate")] = "bitrate";
+  tags[tr("Bitrate", "Refers to bitrate in file organise dialog.")] = "bitrate";
   tags[tr("Samplerate")] = "samplerate";
   tags[tr("File extension")] = "extension";
 
