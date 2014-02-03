@@ -459,7 +459,7 @@ msgstr "Προσθήκη νέου φακέλου..."
 msgid "Add podcast"
 msgstr "Προσθήκη podcast"
 
-#: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:723
+#: podcasts/podcastservice.cpp:316 ../bin/src/ui_mainwindow.h:723
 msgid "Add podcast..."
 msgstr "Προσθήκη podcast..."
 
@@ -608,7 +608,7 @@ msgstr "Μετά "
 msgid "After copying..."
 msgstr "Μετά την αντιγραφή..."
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -621,7 +621,7 @@ msgstr "Άλμπουμ"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Άλμπουμ (ιδανική ένταση για όλα τα κομμάτια)"
 
-#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -774,7 +774,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Είστε σίγουροι πως θέλετε να γράψετε τα στατιστικά των τραγουδιών στα αρχεία των τραγουδιών  για όλα τα τραγούδια στη βιβλιοθήκη σας;"
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:57
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -796,7 +796,7 @@ msgstr "Ραδιόφωνο καλλιτέχνη"
 msgid "Artist tags"
 msgstr "Ετικέτες Καλλιτέχνη"
 
-#: ui/organisedialog.cpp:57
+#: ui/organisedialog.cpp:58
 msgid "Artist's initial"
 msgstr "Αρχικά του καλλιτέχνη"
 
@@ -846,7 +846,7 @@ msgstr "Μέσο μέγεθος εικόνας"
 msgid "BBC Podcasts"
 msgstr "BBC Podcasts"
 
-#: playlist/playlist.cpp:1228 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1228 ui/organisedialog.cpp:65
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -867,7 +867,7 @@ msgstr "Εικόνα φόντου"
 msgid "Background opacity"
 msgstr "Διαφάνεια φόντου"
 
-#: core/database.cpp:648
+#: core/database.cpp:644
 msgid "Backing up database"
 msgstr "Αντίγραφο ασφαλείας της βάσης δεδομένων"
 
@@ -908,7 +908,7 @@ msgstr "Βιογραφία από %1"
 msgid "Bit rate"
 msgstr "Ρυθμός bit"
 
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:137
+#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:137
 #: ../bin/src/ui_groupbydialog.h:151 ../bin/src/ui_groupbydialog.h:165
 #: ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
@@ -1195,7 +1195,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
 #: playlist/playlist.cpp:1238 smartplaylists/searchterm.cpp:288
-#: ui/organisedialog.cpp:67 ../bin/src/ui_edittagdialog.h:694
+#: ui/organisedialog.cpp:68 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Σχόλια"
 
@@ -1207,7 +1207,7 @@ msgstr "Συμπλήρωση των ετικετών αυτόματα"
 msgid "Complete tags automatically..."
 msgstr "Συμπλήρωση των ετικετών αυτόματα..."
 
-#: playlist/playlist.cpp:1218 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1218 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
@@ -1250,7 +1250,7 @@ msgstr "Ρύθμιση καθολικής αναζήτησης..."
 msgid "Configure library..."
 msgstr "Παραμετροποίηση της βιβλιοθήκης"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:288
+#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:350
 msgid "Configure podcasts..."
 msgstr "Ρύθμιση των podcasts..."
 
@@ -1303,8 +1303,8 @@ msgstr "Μετατροπή κάθε μουσικής που η συσκευή δ
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
 
-#: library/libraryview.cpp:389 ui/mainwindow.cpp:517
-#: widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:389 podcasts/podcastservice.cpp:336
+#: ui/mainwindow.cpp:517 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Αντιγραφή στην συσκευή..."
 
@@ -1502,7 +1502,7 @@ msgstr "Διαδρομή του DBus"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:602
+#: core/database.cpp:598
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1558,7 +1558,7 @@ msgstr "Διαγραφή"
 msgid "Delete Grooveshark playlist"
 msgstr "Διαγραφή της λίστας αναπαραγωγής "
 
-#: podcasts/podcastservice.cpp:274
+#: podcasts/podcastservice.cpp:333
 msgid "Delete downloaded data"
 msgstr "Διαγραφή δεδομένων που έχουν \"κατέβει\""
 
@@ -1675,7 +1675,7 @@ msgstr "Απενεργοποίηση δημιουργίας moodbar "
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Δίσκος"
@@ -1733,7 +1733,7 @@ msgstr "Διπλό «κλικ» για άνοιγμα"
 msgid "Double clicking a song will..."
 msgstr "Διπλό \"κλικ\" σε ένα τραγούδι θα..."
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:421
 #, c-format, qt-plural-format
 msgid "Download %n episodes"
 msgstr "Λήψη %n επεισοδίων"
@@ -1754,7 +1754,7 @@ msgstr "\"Κατέβασμα\" συνδρομής"
 msgid "Download new episodes automatically"
 msgstr "Αυτόματη λήψη νέων επεισοδίων"
 
-#: podcasts/podcastservice.cpp:187
+#: podcasts/podcastservice.cpp:246
 msgid "Download queued"
 msgstr "Η λήψη μπήκε στην αναμονή"
 
@@ -1770,7 +1770,7 @@ msgstr "Λήψη αυτού του άλμπουμ"
 msgid "Download this album..."
 msgstr "Μεταφόρτωση αυτού του άλμπουμ..."
 
-#: podcasts/podcastservice.cpp:352
+#: podcasts/podcastservice.cpp:423
 msgid "Download this episode"
 msgstr "Λήψη αυτού του επεισοδίου"
 
@@ -1778,7 +1778,7 @@ msgstr "Λήψη αυτού του επεισοδίου"
 msgid "Download..."
 msgstr "Λήψη..."
 
-#: podcasts/podcastservice.cpp:195
+#: podcasts/podcastservice.cpp:254
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Λήψη του (%1%)..."
@@ -2183,7 +2183,7 @@ msgstr "Σφάλμα στο κατέβασμα του εξώφυλλου"
 msgid "File Format"
 msgstr ""
 
-#: ui/organisedialog.cpp:71
+#: ui/organisedialog.cpp:72
 msgid "File extension"
 msgstr "Επέκταση αρχείου"
 
@@ -2333,7 +2333,7 @@ msgstr "Γενικά"
 msgid "General settings"
 msgstr "Γενικές ρυθμίσεις"
 
-#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:67
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 #: ../bin/src/ui_ripcd.h:317
@@ -2442,7 +2442,7 @@ msgstr "Ομαδοποίηση κατά Είδος/Άλμπουμ"
 msgid "Group by Genre/Artist/Album"
 msgstr "Ομαδοποίηση κατά Είδος/Καλλιντέχνη/Άλμπουμ"
 
-#: playlist/playlist.cpp:1220 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1220 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr "Ομαδοποίηση"
@@ -2609,7 +2609,7 @@ msgstr "Εισαγωγή..."
 msgid "Installed"
 msgstr "Εγκατεστημένο"
 
-#: core/database.cpp:587
+#: core/database.cpp:583
 msgid "Integrity check"
 msgstr "έλεγχος ακεραιότητας"
 
@@ -2812,7 +2812,7 @@ msgstr "Κενό για τα προεπιλεγμένα.  Π.χ. \"/dev/dsp\", \
 msgid "Left"
 msgstr "Αριστερά"
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:69
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Διάρκεια"
@@ -3025,11 +3025,11 @@ msgstr "Χειροκίνητα"
 msgid "Manufacturer"
 msgstr "Κατασκευαστής"
 
-#: podcasts/podcastservice.cpp:284
+#: podcasts/podcastservice.cpp:346
 msgid "Mark as listened"
 msgstr "Επισήμανση ως έχει ακουστεί"
 
-#: podcasts/podcastservice.cpp:282
+#: podcasts/podcastservice.cpp:344
 msgid "Mark as new"
 msgstr "Επισήμανση ως νέο"
 
@@ -3466,7 +3466,7 @@ msgstr "Οργάνωση Αρχείων"
 msgid "Organise files..."
 msgstr "Οργάνωση αρχείων..."
 
-#: core/organise.cpp:65
+#: core/organise.cpp:66
 msgid "Organising files"
 msgstr "Γίνετε οργάνωση αρχείων"
 
@@ -3540,7 +3540,7 @@ msgstr "Παύση αναπαραγωγής"
 msgid "Paused"
 msgstr "Σταματημένο"
 
-#: playlist/playlist.cpp:1219 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1219 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr "Εκτελεστής"
@@ -3635,7 +3635,7 @@ msgstr "Παρακαλώ κλείστε τον περιηγητή σας και 
 msgid "Plugin status:"
 msgstr "Κατάσταση πρόσθετου:"
 
-#: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:116 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcasts"
 
@@ -4070,7 +4070,7 @@ msgstr "Ασφαλής αφαίρεση συσκευής μετά την αντ�
 msgid "Sample rate"
 msgstr "Ρυθμός δειγματοληψίας"
 
-#: ui/organisedialog.cpp:70
+#: ui/organisedialog.cpp:71
 msgid "Samplerate"
 msgstr "Δειγματοληψία"
 
@@ -4894,7 +4894,7 @@ msgstr "Η ροή (stream) αυτή είναι μόνο για συνδρομη�
 msgid "This type of device is not supported: %1"
 msgstr "Αυτού του τύπου η συσκευή δεν υποστηρίζετε %1"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -4955,7 +4955,7 @@ msgstr "Συνολικά bytes που μεταφέρθηκαν"
 msgid "Total network requests made"
 msgstr "Συνολικές αιτήσεις δικτύου που πραγματοποιήθηκαν"
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:63
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -5043,7 +5043,7 @@ msgstr "Άγνωστο σφάλμα"
 msgid "Unset cover"
 msgstr "Αφαίρεση εξώφυλλου"
 
-#: podcasts/addpodcastdialog.cpp:61 podcasts/podcastservice.cpp:277
+#: podcasts/addpodcastdialog.cpp:61 podcasts/podcastservice.cpp:339
 msgid "Unsubscribe"
 msgstr "Ακύρωση συνδρομής"
 
@@ -5055,7 +5055,7 @@ msgstr "Προσεχής Συναυλίες"
 msgid "Update Grooveshark playlist"
 msgstr "Ενημέρωση λίστας αναπαραγωγής του Grooveshark"
 
-#: podcasts/podcastservice.cpp:260
+#: podcasts/podcastservice.cpp:319
 msgid "Update all podcasts"
 msgstr "Ενημέρωση όλων των podcasts"
 
@@ -5067,7 +5067,7 @@ msgstr "Ενημέρωση φακέλων βιβλιοθήκης που άλλα
 msgid "Update the library when Clementine starts"
 msgstr "Ενημέρωση της βιβλιοθήκης κατά την εκκίνηση του Clementine"
 
-#: podcasts/podcastservice.cpp:268
+#: podcasts/podcastservice.cpp:327
 msgid "Update this podcast"
 msgstr "Ενημέρωσε αυτό το podcast"
 
@@ -5354,7 +5354,7 @@ msgstr "Εγγραφή όλων των στατιστικών των τραγο�
 msgid "Wrong username or password."
 msgstr "Λάθος όνομα χρήστη ή συνθηματικό"
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:66
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
