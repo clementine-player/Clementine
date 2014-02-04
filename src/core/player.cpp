@@ -31,7 +31,7 @@
 #  include "internet/lastfmservice.h"
 #endif
 
-#include <QtDebug>
+#include <QSortFilterProxyModel>
 #include <QtConcurrentRun>
 
 #include <boost/bind.hpp>
@@ -46,6 +46,7 @@ Player::Player(Application* app, QObject* parent)
     engine_(new GstEngine(app_->task_manager())),
     stream_change_type_(Engine::First),
     last_state_(Engine::Empty),
+    nb_errors_received_(0),
     volume_before_mute_(50)
 {
   settings_.beginGroup("Player");
@@ -159,10 +160,28 @@ void Player::NextInternal(Engine::TrackChangeFlags change) {
 }
 
 void Player::NextItem(Engine::TrackChangeFlags change) {
+  Playlist* active_playlist = app_->playlist_manager()->active();
+
+  // If we received too many errors in auto change, with repeat enabled, we stop
+  if (change == Engine::Auto) {
+    const PlaylistSequence::RepeatMode repeat_mode =
+        active_playlist->sequence()->repeat_mode();
+    if (repeat_mode != PlaylistSequence::Repeat_Off) {
+      if ((repeat_mode == PlaylistSequence::Repeat_Track && nb_errors_received_ >= 3) ||
+          (nb_errors_received_ >= app_->playlist_manager()->active()->proxy()->rowCount())) {
+        // We received too many "Error" state changes: probably looping over a
+        // playlist which contains only unavailable elements: stop now.
+        nb_errors_received_ = 0;
+        Stop();
+        return;
+      }
+    }
+  }
+
   // Manual track changes override "Repeat track"
   const bool ignore_repeat_track = change & Engine::Manual;
 
-  int i = app_->playlist_manager()->active()->next_row(ignore_repeat_track);
+  int i = active_playlist->next_row(ignore_repeat_track);
   if (i == -1) {
     app_->playlist_manager()->active()->set_current_row(i);
     emit PlaylistFinished();
@@ -226,6 +245,7 @@ void Player::PlayPause() {
   }
 
   case Engine::Empty:
+  case Engine::Error:
   case Engine::Idle: {
     app_->playlist_manager()->SetActivePlaylist(app_->playlist_manager()->current_id());
     if (app_->playlist_manager()->active()->rowCount() == 0)
@@ -276,9 +296,16 @@ void Player::PreviousItem(Engine::TrackChangeFlags change) {
 }
 
 void Player::EngineStateChanged(Engine::State state) {
+  if (Engine::Error == state) {
+    nb_errors_received_++;
+  } else {
+    nb_errors_received_ = 0;
+  }
+
   switch (state) {
     case Engine::Paused: emit Paused(); break;
     case Engine::Playing: emit Playing(); break;
+    case Engine::Error:
     case Engine::Empty:
     case Engine::Idle: emit Stopped(); break;
   }

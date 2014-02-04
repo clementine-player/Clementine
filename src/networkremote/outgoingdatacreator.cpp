@@ -178,6 +178,7 @@ void OutgoingDataCreator::SetEngineState(pb::remote::ResponseClementineInfo* msg
   switch(app_->player()->GetState()) {
     case Engine::Idle:    msg->set_state(pb::remote::Idle);
                           break;
+    case Engine::Error:
     case Engine::Empty:   msg->set_state(pb::remote::Empty);
                           break;
     case Engine::Playing: msg->set_state(pb::remote::Playing);

@@ -15,11 +15,12 @@ namespace Engine
      * Playing when playing,
      * Paused when paused
      * Idle when you still have a URL loaded (ie you have not been told to stop())
-     * Empty when you have been told to stop(), or an error occurred and you stopped yourself
+     * Empty when you have been told to stop(),
+     * Error when an error occurred and you stopped yourself
      *
      * It is vital to be Idle just after the track has ended!
      */
-    enum State { Empty, Idle, Playing, Paused };
+    enum State { Empty, Idle, Playing, Paused, Error };
 
     enum TrackChangeType {
       // One of:

@@ -41,7 +41,6 @@
 #include <QRegExp>
 #include <QFile>
 #include <QSettings>
-#include <QtDebug>
 #include <QCoreApplication>
 #include <QTimeLine>
 #include <QDir>
@@ -574,7 +573,7 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
   current_pipeline_.reset();
 
   BufferingFinished();
-  emit StateChanged(Engine::Empty);
+  emit StateChanged(Engine::Error);
   // unable to play media stream with this url
   emit InvalidSongRequested(url_);
 

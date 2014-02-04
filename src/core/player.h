@@ -179,6 +179,7 @@ public slots:
   boost::scoped_ptr<EngineBase> engine_;
   Engine::TrackChangeFlags stream_change_type_;
   Engine::State last_state_;
+  int nb_errors_received_;
 
   QMap<QString, UrlHandler*> url_handlers_;
 
