@@ -36,7 +36,8 @@ class RipCD: public QDialog {
  public:
   explicit RipCD(QWidget* parent = 0);
   ~RipCD();
-  bool CDIOIsValid() const;
+  bool CheckCDIOIsValid();
+  void BuildTrackListTable();
 
  private:
   static const char* kSettingsGroup;

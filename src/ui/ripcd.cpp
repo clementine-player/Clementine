@@ -117,28 +117,6 @@ RipCD::RipCD(QWidget* parent) :
   setWindowTitle(tr("Rip CD"));
   AddDestinationDirectory(QDir::homePath());
 
-  cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
-  if(!cdio_) {
-    qLog(Error) << "Failed to read CD drive";
-    return;
-  } else {
-    i_tracks_ = cdio_get_num_tracks(cdio_);
-    ui_->tableWidget->setRowCount(i_tracks_);
-    for (int i = 1; i <= i_tracks_; i++) {
-      QCheckBox *checkbox_i = new QCheckBox(ui_->tableWidget);
-      checkbox_i->setCheckState(Qt::Checked);
-      checkboxes_.append(checkbox_i);
-      ui_->tableWidget->setCellWidget(i - 1, kCheckboxColumn, checkbox_i);
-      ui_->tableWidget->setCellWidget(i - 1, kTrackNumberColumn,
-          new QLabel(QString::number(i)));
-      QString track_title = QString("Track %1").arg(i);
-      QLineEdit *line_edit_track_title_i = new QLineEdit(track_title,
-          ui_->tableWidget);
-      track_names_.append(line_edit_track_title_i);
-      ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn,
-          line_edit_track_title_i);
-    }
-  }
   // Get presets
   QList <TranscoderPreset> presets = Transcoder::GetAllPresets();
   qSort(presets.begin(), presets.end(), ComparePresetsByName);
@@ -418,7 +396,8 @@ void RipCD::Cancel() {
   SetWorking(false);
 }
 
-bool RipCD::CDIOIsValid() const {
+bool RipCD::CheckCDIOIsValid() {
+  cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   return (cdio_);
 }
 
@@ -457,4 +436,24 @@ void RipCD::RemoveTemporaryDirectory() {
   if (!temporary_directory_.isEmpty())
     Utilities::RemoveRecursive(temporary_directory_);
   temporary_directory_.clear();
+}
+
+void RipCD::BuildTrackListTable() {
+  ui_->tableWidget->clear();
+  i_tracks_ = cdio_get_num_tracks(cdio_);
+  ui_->tableWidget->setRowCount(i_tracks_);
+  for (int i = 1; i <= i_tracks_; i++) {
+    QCheckBox *checkbox_i = new QCheckBox(ui_->tableWidget);
+    checkbox_i->setCheckState(Qt::Checked);
+    checkboxes_.append(checkbox_i);
+    ui_->tableWidget->setCellWidget(i - 1, kCheckboxColumn, checkbox_i);
+    ui_->tableWidget->setCellWidget(i - 1, kTrackNumberColumn,
+        new QLabel(QString::number(i)));
+    QString track_title = QString("Track %1").arg(i);
+    QLineEdit *line_edit_track_title_i = new QLineEdit(track_title,
+        ui_->tableWidget);
+    track_names_.append(line_edit_track_title_i);
+    ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn,
+        line_edit_track_title_i);
+  }
 }
