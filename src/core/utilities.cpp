@@ -440,12 +440,12 @@ QByteArray Sha256(const QByteArray& data) {
   clementine_sha2::SHA256_CTX context;
   clementine_sha2::SHA256_Init(&context);
   clementine_sha2::SHA256_Update(
-      &context, reinterpret_cast<const u_int8_t*>(data.constData()),
+      &context, reinterpret_cast<const quint8*>(data.constData()),
       data.length());
 
   QByteArray ret(clementine_sha2::SHA256_DIGEST_LENGTH, '\0');
   clementine_sha2::SHA256_Final(
-      reinterpret_cast<u_int8_t*>(ret.data()), &context);
+      reinterpret_cast<quint8*>(ret.data()), &context);
 
   return ret;
 }
