@@ -1222,7 +1222,7 @@ QString Playlist::column_name(Column column) {
     case Column_Rating:       return tr("Rating");
     case Column_PlayCount:    return tr("Play count");
     case Column_SkipCount:    return tr("Skip count");
-    case Column_LastPlayed:   return tr("Last played");
+    case Column_LastPlayed:   return tr("Last played", "A playlist's tag.");
     case Column_Score:        return tr("Score");
 
     case Column_BPM:          return tr("BPM");
