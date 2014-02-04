@@ -213,7 +213,6 @@ void RipCD::ThreadClickedRipButton() {
   // Set up progress bar
   emit(SignalUpdateProgress());
 
-
   for (int i = 1; i <= i_tracks_; i++) {
     if (!checkboxes_.value(i - 1)->isChecked()) {
       continue;
@@ -391,6 +390,7 @@ void RipCD::AddDestinationDirectory(QString dir) {
 }
 
 void RipCD::Cancel() {
+  ui_->progress_bar->setValue(0);
   transcoder_->Cancel();
   RemoveTemporaryDirectory();
   SetWorking(false);
