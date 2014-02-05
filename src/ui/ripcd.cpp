@@ -30,6 +30,7 @@
 #include <QFileDialog>
 #include <QFrame>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QtDebug>
 #include <QtConcurrentRun>
 #include <cdio/cdio.h>
@@ -75,6 +76,7 @@ RipCD::RipCD(QWidget* parent) :
     ui_(new Ui_RipCD)
 {
 
+  cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
     // Init
   ui_->setupUi(this);
 
@@ -146,6 +148,7 @@ RipCD::RipCD(QWidget* parent) :
 
 RipCD::~RipCD() {
   delete ui_;
+  cdio_destroy(cdio_);
 }
 
 
@@ -203,22 +206,19 @@ int RipCD::NumTracksToRip() {
 }
 
 void RipCD::ThreadClickedRipButton() {
-
   temporary_directory_ = Utilities::MakeTempDir() + "/";
-
   finished_success_ = 0;
   finished_failed_ = 0;
   ui_->progress_bar->setMaximum(NumTracksToRip() * 2 * 100);
 
   // Set up progress bar
   emit(SignalUpdateProgress());
-
+  tracks_to_rip_.clear();
   for (int i = 1; i <= i_tracks_; i++) {
     if (!checkboxes_.value(i - 1)->isChecked()) {
       continue;
     }
     tracks_to_rip_.append(i);
-
     QString filename = temporary_directory_
         + ParseFileFormatString(ui_->format_filename->text(), i) + ".wav";
     QFile *destination_file = new QFile(filename);
@@ -304,6 +304,16 @@ void RipCD::ThreadedTranscoding() {
 }
 
 void RipCD::ClickedRipButton() {
+  if((cdio_) && cdio_get_media_changed(cdio_)) {
+    QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"), tr("Media has changed. Reloading"));
+    cdio_fail.exec();
+    if(CheckCDIOIsValid()) {
+      BuildTrackListTable();
+    } else {
+      ui_->tableWidget->clear();
+    }
+    return;
+  }
   SetWorking(true);
   QtConcurrent::run(this, &RipCD::ThreadClickedRipButton);
 }
@@ -397,6 +407,9 @@ void RipCD::Cancel() {
 }
 
 bool RipCD::CheckCDIOIsValid() {
+  if((cdio_)) {
+    cdio_destroy(cdio_);
+  }
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   return (cdio_);
 }
@@ -440,6 +453,8 @@ void RipCD::RemoveTemporaryDirectory() {
 
 void RipCD::BuildTrackListTable() {
   ui_->tableWidget->clear();
+  checkboxes_.clear();
+  track_names_.clear();
   i_tracks_ = cdio_get_num_tracks(cdio_);
   ui_->tableWidget->setRowCount(i_tracks_);
   for (int i = 1; i <= i_tracks_; i++) {
@@ -456,4 +471,8 @@ void RipCD::BuildTrackListTable() {
     ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn,
         line_edit_track_title_i);
   }
+}
+
+void RipCD::showEvent(QShowEvent *event) {
+  BuildTrackListTable();
 }

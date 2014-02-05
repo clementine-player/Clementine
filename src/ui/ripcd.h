@@ -38,6 +38,8 @@ class RipCD: public QDialog {
   ~RipCD();
   bool CheckCDIOIsValid();
   void BuildTrackListTable();
+ protected:
+  void showEvent(QShowEvent *event);
 
  private:
   static const char* kSettingsGroup;

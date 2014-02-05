@@ -1685,7 +1685,6 @@ void MainWindow::OpenRipCD() {
       rip_cd_.reset(new RipCD);
     }
     if(rip_cd_->CheckCDIOIsValid()) {
-      rip_cd_->BuildTrackListTable();
       rip_cd_->show();
     } else {
       QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"), tr("Failed reading CD drive"));
