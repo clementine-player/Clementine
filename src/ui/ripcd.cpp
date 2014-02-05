@@ -310,7 +310,7 @@ void RipCD::ClickedRipButton() {
     if(CheckCDIOIsValid()) {
       BuildTrackListTable();
     } else {
-      ui_->tableWidget->clear();
+      ui_->tableWidget->clearContents();
     }
     return;
   }
@@ -452,7 +452,6 @@ void RipCD::RemoveTemporaryDirectory() {
 }
 
 void RipCD::BuildTrackListTable() {
-  ui_->tableWidget->clear();
   checkboxes_.clear();
   track_names_.clear();
   i_tracks_ = cdio_get_num_tracks(cdio_);
