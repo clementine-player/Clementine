@@ -240,23 +240,23 @@ QList<TranscoderPreset> Transcoder::GetAllPresets() {
 TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
   switch (type) {
     case Song::Type_Flac:
-      return TranscoderPreset(type, "Flac",       "flac", "audio/x-flac");
+      return TranscoderPreset(type, tr("Flac"),       "flac", "audio/x-flac");
     case Song::Type_Mp4:
-      return TranscoderPreset(type, "M4A AAC",    "mp4",  "audio/mpeg, mpegversion=(int)4", "audio/mp4");
+      return TranscoderPreset(type, tr("M4A AAC"),    "mp4",  "audio/mpeg, mpegversion=(int)4", "audio/mp4");
     case Song::Type_Mpeg:
-      return TranscoderPreset(type, "MP3",        "mp3",  "audio/mpeg, mpegversion=(int)1, layer=(int)3");
+      return TranscoderPreset(type, tr("MP3"),        "mp3",  "audio/mpeg, mpegversion=(int)1, layer=(int)3");
     case Song::Type_OggVorbis:
-      return TranscoderPreset(type, "Ogg Vorbis", "ogg",  "audio/x-vorbis", "application/ogg");
+      return TranscoderPreset(type, tr("Ogg Vorbis"), "ogg",  "audio/x-vorbis", "application/ogg");
     case Song::Type_OggFlac:
-      return TranscoderPreset(type, "Ogg Flac",   "ogg",  "audio/x-flac",   "application/ogg");
+      return TranscoderPreset(type, tr("Ogg Flac"),   "ogg",  "audio/x-flac",   "application/ogg");
     case Song::Type_OggSpeex:
-      return TranscoderPreset(type, "Ogg Speex",  "spx",  "audio/x-speex",  "application/ogg");
+      return TranscoderPreset(type, tr("Ogg Speex"),  "spx",  "audio/x-speex",  "application/ogg");
     case Song::Type_OggOpus:
-      return TranscoderPreset(type, "Ogg Opus",  "opus",  "audio/x-opus",  "application/ogg");
+      return TranscoderPreset(type, tr("Ogg Opus"),  "opus",  "audio/x-opus",  "application/ogg");
     case Song::Type_Asf:
-      return TranscoderPreset(type, "Windows Media audio", "wma", "audio/x-wma", "video/x-ms-asf");
+      return TranscoderPreset(type, tr("Windows Media audio"), "wma", "audio/x-wma", "video/x-ms-asf");
     case Song::Type_Wav:
-      return TranscoderPreset(type, "Wav",        "wav",  QString(),        "audio/x-wav");
+      return TranscoderPreset(type, tr("Wav"),        "wav",  QString(),        "audio/x-wav");
     default:
       qLog(Warning) << "Unsupported format in PresetForFileType:" << type;
       return TranscoderPreset();
