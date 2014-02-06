@@ -446,7 +446,6 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
 }
 
 void LibraryBackend::MarkSongsUnavailable(const SongList& songs, bool unavailable) {
-    qLog(Debug) << int(unavailable) << " mark unavailable";
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
