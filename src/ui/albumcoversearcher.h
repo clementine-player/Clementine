@@ -18,14 +18,12 @@
 #ifndef ALBUMCOVERSEARCHER_H
 #define ALBUMCOVERSEARCHER_H
 
-#include "covers/albumcoverfetcher.h"
-#include "covers/albumcoverloaderoptions.h"
-
 #include <QDialog>
 #include <QIcon>
 #include <QStyledItemDelegate>
 
-#include <boost/shared_ptr.hpp>
+#include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloaderoptions.h"
 
 class AlbumCoverLoader;
 class Application;
@@ -34,7 +32,6 @@ class Ui_AlbumCoverSearcher;
 class QModelIndex;
 class QStandardItem;
 class QStandardItemModel;
-
 
 class SizeOverlayDelegate : public QStyledItemDelegate {
 public:

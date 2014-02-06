@@ -18,12 +18,13 @@
 #ifndef QUERYWIZARDPLUGIN_H
 #define QUERYWIZARDPLUGIN_H
 
-#include "search.h"
 #include "wizardplugin.h"
+
+#include <memory>
 
 #include <QWizard>
 
-#include <boost/scoped_ptr.hpp>
+#include "search.h"
 
 class Ui_SmartPlaylistQuerySearchPage;
 class Ui_SmartPlaylistQuerySortPage;
@@ -70,7 +71,7 @@ private:
   Search MakeSearch() const;
 
   SearchPage* search_page_;
-  boost::scoped_ptr<Ui_SmartPlaylistQuerySortPage> sort_ui_;
+  std::unique_ptr<Ui_SmartPlaylistQuerySortPage> sort_ui_;
 
   int previous_scrollarea_max_;
 };

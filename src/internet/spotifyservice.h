@@ -8,8 +8,6 @@
 #include <QProcess>
 #include <QTimer>
 
-#include <boost/shared_ptr.hpp>
-
 class Playlist;
 class SearchBoxWidget;
 class SpotifyServer;

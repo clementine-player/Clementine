@@ -18,11 +18,11 @@
 #ifndef ORGANISE_H
 #define ORGANISE_H
 
+#include <memory>
+
 #include <QBasicTimer>
 #include <QObject>
 #include <QTemporaryFile>
-
-#include <boost/shared_ptr.hpp>
 
 #include "organiseformat.h"
 #include "transcoder/transcoder.h"
@@ -44,7 +44,7 @@ public:
   typedef QList<NewSongInfo> NewSongInfoList;
 
   Organise(TaskManager* task_manager,
-           boost::shared_ptr<MusicStorage> destination,
+           std::shared_ptr<MusicStorage> destination,
            const OrganiseFormat& format, bool copy, bool overwrite,
            const NewSongInfoList& songs, bool eject_after);
 
@@ -85,7 +85,7 @@ private:
   QThread* original_thread_;
   TaskManager* task_manager_;
   Transcoder* transcoder_;
-  boost::shared_ptr<MusicStorage> destination_;
+  std::shared_ptr<MusicStorage> destination_;
   QList<Song::FileType> supported_filetypes_;
 
   const OrganiseFormat format_;

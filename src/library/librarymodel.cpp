@@ -16,6 +16,18 @@
 */
 
 #include "librarymodel.h"
+
+#include <functional>
+
+#include <QFuture>
+#include <QFutureWatcher>
+#include <QMetaEnum>
+#include <QPixmapCache>
+#include <QSettings>
+#include <QStringList>
+#include <QUrl>
+#include <QtConcurrentRun>
+
 #include "librarybackend.h"
 #include "libraryitem.h"
 #include "librarydirectorymodel.h"
@@ -32,16 +44,8 @@
 #include "smartplaylists/querygenerator.h"
 #include "ui/iconloader.h"
 
-#include <QFuture>
-#include <QFutureWatcher>
-#include <QMetaEnum>
-#include <QPixmapCache>
-#include <QSettings>
-#include <QStringList>
-#include <QUrl>
-#include <QtConcurrentRun>
-
-#include <boost/bind.hpp>
+using std::placeholders::_1;
+using std::placeholders::_2;
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
@@ -1114,7 +1118,7 @@ void LibraryModel::GetChildSongs(LibraryItem* item, QList<QUrl>* urls,
       const_cast<LibraryModel*>(this)->LazyPopulate(item);
 
       QList<LibraryItem*> children = item->children;
-      qSort(children.begin(), children.end(), boost::bind(
+      qSort(children.begin(), children.end(), std::bind(
           &LibraryModel::CompareItems, this, _1, _2));
 
       foreach (LibraryItem* child, children)

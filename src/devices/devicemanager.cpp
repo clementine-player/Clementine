@@ -17,7 +17,7 @@
 
 #include "devicemanager.h"
 
-#include <boost/bind.hpp>
+#include <memory>
 
 #include <QApplication>
 #include <QDir>
@@ -60,7 +60,7 @@
 #  include "mtpdevice.h"
 #endif
 
-using boost::bind;
+using std::bind;
 
 const int DeviceManager::kDeviceIconSize = 32;
 const int DeviceManager::kDeviceIconOverlaySize = 16;
@@ -311,7 +311,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
         const_cast<DeviceManager*>(this)->Connect(index.row());
       if (!info.device_)
         return QVariant();
-      return QVariant::fromValue<boost::shared_ptr<MusicStorage> >(info.device_);
+      return QVariant::fromValue<std::shared_ptr<MusicStorage>>(info.device_);
 
     case MusicStorage::Role_StorageForceConnect:
       if (!info.device_) {
@@ -319,7 +319,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
             !info.BestBackend()->lister_->DeviceNeedsMount(info.BestBackend()->unique_id_)) {
 
           if (info.BestBackend()->lister_->AskForScan(info.BestBackend()->unique_id_)) {
-            boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
+            std::unique_ptr<QMessageBox> dialog(new QMessageBox(
                 QMessageBox::Information, tr("Connect device"),
                 tr("This is the first time you have connected this device.  Clementine will now scan the device to find music files - this may take some time."),
                 QMessageBox::Cancel));
@@ -336,7 +336,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       }
       if (!info.device_)
         return QVariant();
-      return QVariant::fromValue<boost::shared_ptr<MusicStorage> >(info.device_);
+      return QVariant::fromValue<std::shared_ptr<MusicStorage>>(info.device_);
 
     case Role_MountPath: {
       if (!info.device_)
@@ -520,12 +520,12 @@ void DeviceManager::PhysicalDeviceChanged(const QString &id) {
   // TODO
 }
 
-boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
+std::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   DeviceInfo& info = devices_[row];
   if (info.device_) // Already connected
     return info.device_;
 
-  boost::shared_ptr<ConnectedDevice> ret;
+  std::shared_ptr<ConnectedDevice> ret;
 
   if (!info.BestBackend()->lister_) // Not physically connected
     return ret;
@@ -612,7 +612,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   return ret;
 }
 
-boost::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(int row) const {
+std::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(int row) const {
   return devices_[row].device_;
 }
 

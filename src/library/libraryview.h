@@ -18,13 +18,13 @@
 #ifndef LIBRARYVIEW_H
 #define LIBRARYVIEW_H
 
-#include "core/song.h"
-#include "ui/edittagdialog.h"
-#include "widgets/autoexpandingtreeview.h"
+#include <memory>
 
 #include <QStyledItemDelegate>
 
-#include <boost/scoped_ptr.hpp>
+#include "core/song.h"
+#include "ui/edittagdialog.h"
+#include "widgets/autoexpandingtreeview.h"
 
 class Application;
 class LibraryFilterWidget;
@@ -140,8 +140,8 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* edit_smart_playlist_;
   QAction* delete_smart_playlist_;
 
-  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
-  boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
+  std::unique_ptr<OrganiseDialog> organise_dialog_;
+  std::unique_ptr<EditTagDialog> edit_tag_dialog_;
 
   bool is_in_keyboard_search_;
 

@@ -1,7 +1,6 @@
 #include "skydriveservice.h"
 
-#include <boost/scoped_ptr.hpp>
-using boost::scoped_ptr;
+#include <memory>
 
 #include <qjson/parser.h>
 
@@ -158,7 +157,7 @@ QUrl SkydriveService::GetStreamingUrlFromSongId(const QString& file_id) {
   QUrl url(QString(kSkydriveBase) + file_id);
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
-  scoped_ptr<QNetworkReply> reply(network_->get(request));
+  std::unique_ptr<QNetworkReply> reply(network_->get(request));
   WaitForSignal(reply.get(), SIGNAL(finished()));
 
   QJson::Parser parser;

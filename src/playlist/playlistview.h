@@ -18,13 +18,13 @@
 #ifndef PLAYLISTVIEW_H
 #define PLAYLISTVIEW_H
 
-#include "playlist.h"
+#include <memory>
 
 #include <QBasicTimer>
 #include <QProxyStyle>
 #include <QTreeView>
 
-#include <boost/scoped_ptr.hpp>
+#include "playlist.h"
 
 class QCleanlooksStyle;
 
@@ -52,7 +52,7 @@ public:
                      QPainter* painter, const QWidget* widget) const;
 
 private:
-  boost::scoped_ptr<QCleanlooksStyle> cleanlooks_;
+  std::unique_ptr<QCleanlooksStyle> cleanlooks_;
 };
 
 

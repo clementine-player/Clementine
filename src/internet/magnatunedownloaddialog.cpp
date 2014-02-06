@@ -16,13 +16,8 @@
 */
 
 #include "magnatunedownloaddialog.h"
-#include "magnatuneservice.h"
-#include "internetmodel.h"
-#include "ui_magnatunedownloaddialog.h"
-#include "core/logging.h"
-#include "core/network.h"
-#include "core/utilities.h"
-#include "widgets/progressitemdelegate.h"
+
+#include <memory>
 
 #include <QCloseEvent>
 #include <QDir>
@@ -34,6 +29,14 @@
 #include <QSet>
 #include <QSettings>
 #include <QXmlStreamReader>
+
+#include "magnatuneservice.h"
+#include "internetmodel.h"
+#include "ui_magnatunedownloaddialog.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "core/utilities.h"
+#include "widgets/progressitemdelegate.h"
 
 MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
                                                  QWidget *parent)
@@ -275,7 +278,7 @@ QString MagnatuneDownloadDialog::GetOutputFilename() {
 
 void MagnatuneDownloadDialog::closeEvent(QCloseEvent* e) {
   if (current_reply_ && current_reply_->isRunning()) {
-    boost::scoped_ptr<QMessageBox> message_box(new QMessageBox(
+    std::unique_ptr<QMessageBox> message_box(new QMessageBox(
         QMessageBox::Question, tr("Really cancel?"),
         tr("Closing this window will cancel the download."),
         QMessageBox::Abort, this));

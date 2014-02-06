@@ -16,6 +16,17 @@
 */
 
 #include "playlistbackend.h"
+
+#include <memory>
+#include <functional>
+
+#include <QFile>
+#include <QHash>
+#include <QMutexLocker>
+#include <QSqlQuery>
+#include <QtConcurrentMap>
+#include <QtDebug>
+
 #include "core/application.h"
 #include "core/database.h"
 #include "core/scopedtransaction.h"
@@ -26,18 +37,10 @@
 #include "playlistparsers/cueparser.h"
 #include "smartplaylists/generator.h"
 
-#include <QFile>
-#include <QHash>
-#include <QMutexLocker>
-#include <QSqlQuery>
-#include <QtConcurrentMap>
-#include <QtDebug>
-
-#include <boost/bind.hpp>
+using std::placeholders::_1;
+using std::shared_ptr;
 
 using smart_playlists::GeneratorPtr;
-
-using boost::shared_ptr;
 
 const int PlaylistBackend::kSongTableJoins = 4;
 
@@ -174,8 +177,10 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
 
   // it's probable that we'll have a few songs associated with the
   // same CUE so we're caching results of parsing CUEs
-  boost::shared_ptr<NewSongFromQueryState> state_ptr(new NewSongFromQueryState());
-  return QtConcurrent::mapped(rows, boost::bind(&PlaylistBackend::NewPlaylistItemFromQuery, this, _1, state_ptr));
+  std::shared_ptr<NewSongFromQueryState> state_ptr(new NewSongFromQueryState());
+  return QtConcurrent::mapped(
+      rows, std::bind(
+          &PlaylistBackend::NewPlaylistItemFromQuery, this, _1, state_ptr));
 }
 
 QFuture<Song> PlaylistBackend::GetPlaylistSongs(int playlist) {
@@ -184,11 +189,12 @@ QFuture<Song> PlaylistBackend::GetPlaylistSongs(int playlist) {
 
   // it's probable that we'll have a few songs associated with the
   // same CUE so we're caching results of parsing CUEs
-  boost::shared_ptr<NewSongFromQueryState> state_ptr(new NewSongFromQueryState());
-  return QtConcurrent::mapped(rows, boost::bind(&PlaylistBackend::NewSongFromQuery, this, _1, state_ptr));
+  std::shared_ptr<NewSongFromQueryState> state_ptr(new NewSongFromQueryState());
+  return QtConcurrent::mapped(rows, std::bind(&PlaylistBackend::NewSongFromQuery, this, _1, state_ptr));
 }
 
-PlaylistItemPtr PlaylistBackend::NewPlaylistItemFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state) {
+PlaylistItemPtr PlaylistBackend::NewPlaylistItemFromQuery(
+    const SqlRow& row, std::shared_ptr<NewSongFromQueryState> state) {
   // The song tables get joined first, plus one each for the song ROWIDs
   const int playlist_row = (Song::kColumns.count() + 1) * kSongTableJoins;
 
@@ -201,13 +207,15 @@ PlaylistItemPtr PlaylistBackend::NewPlaylistItemFromQuery(const SqlRow& row, boo
   }
 }
 
-Song PlaylistBackend::NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state) {
+Song PlaylistBackend::NewSongFromQuery(
+    const SqlRow& row, std::shared_ptr<NewSongFromQueryState> state) {
   return NewPlaylistItemFromQuery(row, state)->Metadata();
 }
 
 // If song had a CUE and the CUE still exists, the metadata from it will
 // be applied here.
-PlaylistItemPtr PlaylistBackend::RestoreCueData(PlaylistItemPtr item, boost::shared_ptr<NewSongFromQueryState> state) {
+PlaylistItemPtr PlaylistBackend::RestoreCueData(
+    PlaylistItemPtr item, std::shared_ptr<NewSongFromQueryState> state) {
   // we need library to run a CueParser; also, this method applies only to
   // file-type PlaylistItems
   if(item->type() != "File") {

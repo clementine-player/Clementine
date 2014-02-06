@@ -19,7 +19,7 @@
 
 #include <stdlib.h>
 
-#include <boost/scoped_array.hpp>
+#include <memory>
 
 #include <QApplication>
 #include <QDateTime>
@@ -267,7 +267,7 @@ bool Copy(QIODevice* source, QIODevice* destination) {
     return false;
 
   const qint64 bytes = source->size();
-  boost::scoped_array<char> data(new char[bytes]);
+  std::unique_ptr<char[]> data(new char[bytes]);
   qint64 pos = 0;
 
   qint64 bytes_read;

@@ -15,11 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "deviceview.h"
+
+#include <memory>
+
+#include <QApplication>
+#include <QContextMenuEvent>
+#include <QMenu>
+#include <QMessageBox>
+#include <QPainter>
+#include <QPushButton>
+#include <QSortFilterProxyModel>
+
 #include "connecteddevice.h"
 #include "devicelister.h"
 #include "devicemanager.h"
 #include "deviceproperties.h"
-#include "deviceview.h"
 #include "core/application.h"
 #include "core/deletefiles.h"
 #include "core/mergedproxymodel.h"
@@ -30,16 +41,6 @@
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
-
-#include <QApplication>
-#include <QContextMenuEvent>
-#include <QMenu>
-#include <QMessageBox>
-#include <QPainter>
-#include <QPushButton>
-#include <QSortFilterProxyModel>
-
-#include <boost/shared_ptr.hpp>
 
 const int DeviceItemDelegate::kIconPadding = 6;
 
@@ -238,7 +239,8 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
 
     bool is_filesystem_device = false;
     if (parent_device_index.isValid()) {
-      boost::shared_ptr<ConnectedDevice> device = app_->device_manager()->GetConnectedDevice(parent_device_index.row());
+      std::shared_ptr<ConnectedDevice> device =
+          app_->device_manager()->GetConnectedDevice(parent_device_index.row());
       if (device && !device->LocalPath().isEmpty())
         is_filesystem_device = true;
     }
@@ -281,7 +283,8 @@ void DeviceView::Connect() {
 }
 
 void DeviceView::DeviceConnected(int row) {
-  boost::shared_ptr<ConnectedDevice> device = app_->device_manager()->GetConnectedDevice(row);
+  std::shared_ptr<ConnectedDevice> device =
+      app_->device_manager()->GetConnectedDevice(row);
   if (!device)
     return;
 
@@ -306,7 +309,7 @@ void DeviceView::Forget() {
   QString unique_id = app_->device_manager()->data(device_idx, DeviceManager::Role_UniqueId).toString();
   if (app_->device_manager()->GetLister(device_idx.row()) &&
       app_->device_manager()->GetLister(device_idx.row())->AskForScan(unique_id)) {
-    boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
+    std::unique_ptr<QMessageBox> dialog(new QMessageBox(
         QMessageBox::Question, tr("Forget device"),
         tr("Forgetting a device will remove it from this list and Clementine will have to rescan all the songs again next time you connect it."),
         QMessageBox::Cancel, this));
@@ -390,8 +393,8 @@ void DeviceView::Delete() {
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
-  boost::shared_ptr<MusicStorage> storage =
-      device_index.data(MusicStorage::Role_Storage).value<boost::shared_ptr<MusicStorage> >();
+  std::shared_ptr<MusicStorage> storage =
+      device_index.data(MusicStorage::Role_Storage).value<std::shared_ptr<MusicStorage>>();
 
   DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
   connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));

@@ -46,7 +46,7 @@ void LibraryDirectoryModel::DirectoryDiscovered(const Directory &dir) {
   }
   item->setData(dir.id, kIdRole);
   item->setIcon(dir_icon_);
-  storage_ << boost::shared_ptr<MusicStorage>(new FilesystemMusicStorage(dir.path));
+  storage_ << std::shared_ptr<MusicStorage>(new FilesystemMusicStorage(dir.path));
   appendRow(item);
 }
 

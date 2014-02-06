@@ -56,7 +56,7 @@
 }
 @end
 
-class MacSystemTrayIconPrivate : boost::noncopyable {
+class MacSystemTrayIconPrivate {
  public:
   MacSystemTrayIconPrivate() {
     dock_menu_ = [[NSMenu alloc] initWithTitle:@"DockMenu"];
@@ -159,6 +159,8 @@ class MacSystemTrayIconPrivate : boost::noncopyable {
   NSMenuItem* now_playing_;
   NSMenuItem* now_playing_artist_;
   NSMenuItem* now_playing_title_;
+
+  Q_DISABLE_COPY(MacSystemTrayIconPrivate);
 };
 
 MacSystemTrayIcon::MacSystemTrayIcon(QObject* parent)

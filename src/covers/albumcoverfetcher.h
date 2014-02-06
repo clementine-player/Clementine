@@ -29,8 +29,6 @@
 #include <QQueue>
 #include <QUrl>
 
-#include <boost/scoped_ptr.hpp>
-
 class QNetworkReply;
 class QString;
 

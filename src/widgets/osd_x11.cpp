@@ -15,18 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "osd.h"
-#include "core/logging.h"
+
+#include <memory>
 
 #include <QtDebug>
+
+#include "config.h"
+#include "core/logging.h"
 
 #ifdef HAVE_DBUS
 #include "dbus/notification.h"
 #include <QCoreApplication>
 #include <QTextDocument>
-
-using boost::scoped_ptr;
 
 QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image) {
   if (image.isNull()) {
@@ -142,7 +143,7 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
 
 #ifdef HAVE_DBUS
 void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
-  scoped_ptr<QDBusPendingCallWatcher> w(watcher);
+  std::unique_ptr<QDBusPendingCallWatcher> w(watcher);
 
   QDBusPendingReply<uint> reply = *watcher;
   if (reply.isError()) {

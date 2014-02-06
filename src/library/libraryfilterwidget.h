@@ -18,9 +18,9 @@
 #ifndef LIBRARYFILTERWIDGET_H
 #define LIBRARYFILTERWIDGET_H
 
-#include <QWidget>
+#include <memory>
 
-#include <boost/scoped_ptr.hpp>
+#include <QWidget>
 
 #include "librarymodel.h"
 
@@ -92,7 +92,7 @@ class LibraryFilterWidget : public QWidget {
   Ui_LibraryFilterWidget* ui_;
   LibraryModel* model_;
 
-  boost::scoped_ptr<GroupByDialog> group_by_dialog_;
+  std::unique_ptr<GroupByDialog> group_by_dialog_;
   SettingsDialog* settings_dialog_;
 
   QMenu* filter_age_menu_;

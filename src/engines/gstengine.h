@@ -22,6 +22,8 @@
 #ifndef AMAROK_GSTENGINE_H
 #define AMAROK_GSTENGINE_H
 
+#include <memory>
+
 #include "bufferconsumer.h"
 #include "enginebase.h"
 #include "core/boundfuturewatcher.h"
@@ -35,7 +37,6 @@
 #include <QTimerEvent>
 
 #include <gst/gst.h>
-#include <boost/shared_ptr.hpp>
 
 class QTimer;
 class QTimerEvent;
@@ -146,12 +147,13 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void StartTimers();
   void StopTimers();
 
-  boost::shared_ptr<GstEnginePipeline> CreatePipeline();
-  boost::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url, qint64 end_nanosec);
+  std::shared_ptr<GstEnginePipeline> CreatePipeline();
+  std::shared_ptr<GstEnginePipeline> CreatePipeline(
+      const QUrl& url, qint64 end_nanosec);
 
   void UpdateScope();
 
-  int AddBackgroundStream(boost::shared_ptr<GstEnginePipeline> pipeline);
+  int AddBackgroundStream(std::shared_ptr<GstEnginePipeline> pipeline);
 
   static QUrl FixupUrl(const QUrl& url);
 
@@ -171,9 +173,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   QString sink_;
   QString device_;
 
-  boost::shared_ptr<GstEnginePipeline> current_pipeline_;
-  boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
-  boost::shared_ptr<GstEnginePipeline> fadeout_pause_pipeline_;
+  std::shared_ptr<GstEnginePipeline> current_pipeline_;
+  std::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
+  std::shared_ptr<GstEnginePipeline> fadeout_pause_pipeline_;
   QUrl preloaded_url_;
 
   QList<BufferConsumer*> buffer_consumers_;
@@ -205,7 +207,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int timer_id_;
   int next_element_id_;
 
-  QHash<int, boost::shared_ptr<GstEnginePipeline> > background_streams_;
+  QHash<int, std::shared_ptr<GstEnginePipeline> > background_streams_;
 
   bool is_fading_out_to_pause_;
   bool has_faded_out_;

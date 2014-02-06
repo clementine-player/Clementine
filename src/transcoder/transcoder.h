@@ -18,15 +18,14 @@
 #ifndef TRANSCODER_H
 #define TRANSCODER_H
 
+#include <memory>
+
 #include <gst/gst.h>
 
 #include <QObject>
 #include <QStringList>
 #include <QEvent>
 #include <QMetaType>
-
-#include <boost/shared_ptr.hpp>
-#include <boost/scoped_ptr.hpp>
 
 #include "core/song.h"
 
@@ -139,7 +138,7 @@ class Transcoder : public QObject {
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg, gpointer data);
 
  private:
-  typedef QList<boost::shared_ptr<JobState> > JobStateList;
+  typedef QList<std::shared_ptr<JobState> > JobStateList;
 
   int max_threads_;
   QList<Job> queued_jobs_;

@@ -211,7 +211,7 @@ void AlbumCoverManager::showEvent(QShowEvent *) {
 
 void AlbumCoverManager::closeEvent(QCloseEvent* e) {
   if (!cover_fetching_tasks_.isEmpty()) {
-    boost::scoped_ptr<QMessageBox> message_box(new QMessageBox(
+    std::unique_ptr<QMessageBox> message_box(new QMessageBox(
         QMessageBox::Question, tr("Really cancel?"),
         tr("Closing this window will stop searching for album covers."),
         QMessageBox::Abort, this));

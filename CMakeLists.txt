@@ -20,24 +20,6 @@ if (APPLE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++")
 endif ()
 
-set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
-check_cxx_source_compiles(
-    "#include <unordered_map>
-     int main() {
-       std::unordered_map<int, int> m;
-       return 0;
-     }
-    "
-    USE_STD_UNORDERED_MAP)
-check_cxx_source_compiles(
-    "int main() {
-       [](){}();
-     }
-    "
-    HAVE_LAMBDAS)
-unset(CMAKE_REQUIRED_FLAGS)
-
-
 if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)

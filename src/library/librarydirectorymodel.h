@@ -18,10 +18,10 @@
 #ifndef LIBRARYDIRECTORYMODEL_H
 #define LIBRARYDIRECTORYMODEL_H
 
+#include <memory>
+
 #include <QIcon>
 #include <QStandardItemModel>
-
-#include <boost/shared_ptr.hpp>
 
 #include "directory.h"
 
@@ -51,7 +51,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
 
   QIcon dir_icon_;
   LibraryBackend* backend_;
-  QList<boost::shared_ptr<MusicStorage> > storage_;
+  QList<std::shared_ptr<MusicStorage> > storage_;
 };
 
 #endif // LIBRARYDIRECTORYMODEL_H

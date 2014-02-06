@@ -20,6 +20,11 @@
 
 #include <QDialog>
 
+#include <memory>
+
+using std::placeholders::_1;
+using std::placeholders::_2;
+
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/member.hpp>
 #include <boost/multi_index/ordered_index.hpp>

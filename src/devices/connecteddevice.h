@@ -18,14 +18,14 @@
 #ifndef CONNECTEDDEVICE_H
 #define CONNECTEDDEVICE_H
 
-#include "core/musicstorage.h"
-#include "core/song.h"
+#include <memory>
 
 #include <QObject>
 #include <QStringList>
 #include <QUrl>
 
-#include <boost/enable_shared_from_this.hpp>
+#include "core/musicstorage.h"
+#include "core/song.h"
 
 class Application;
 class Database;
@@ -35,7 +35,7 @@ class LibraryBackend;
 class LibraryModel;
 
 class ConnectedDevice : public QObject, public virtual MusicStorage,
-                        public boost::enable_shared_from_this<ConnectedDevice> {
+                        public std::enable_shared_from_this<ConnectedDevice> {
   Q_OBJECT
 
 public:

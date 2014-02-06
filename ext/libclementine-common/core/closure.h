@@ -19,22 +19,18 @@
 #define CLOSURE_H
 
 #include <functional>
+#include <memory>
 
 #include <QMetaMethod>
 #include <QObject>
 #include <QSharedPointer>
-
-#include <boost/bind.hpp>
-#include <boost/function.hpp>
-#include <boost/noncopyable.hpp>
-#include <boost/scoped_ptr.hpp>
 
 namespace _detail {
 
 class ObjectHelper;
 
 // Interface for ObjectHelper to call on signal emission.
-class ClosureBase : boost::noncopyable {
+class ClosureBase {
  public:
   virtual ~ClosureBase();
   virtual void Invoke() = 0;
@@ -45,6 +41,9 @@ class ClosureBase : boost::noncopyable {
  protected:
   explicit ClosureBase(ObjectHelper*);
   ObjectHelper* helper_;
+
+ private:
+  Q_DISABLE_COPY(ClosureBase);
 };
 
 // QObject helper as templated QObjects do not work.
@@ -62,7 +61,7 @@ class ObjectHelper : public QObject {
   void Invoked();
 
  private:
-  boost::scoped_ptr<ClosureBase> closure_;
+  std::unique_ptr<ClosureBase> closure_;
   Q_DISABLE_COPY(ObjectHelper);
 };
 
@@ -92,8 +91,8 @@ class Closure : public ClosureBase {
       const char* slot,
       const Args&... args)
    :  ClosureBase(new ObjectHelper(sender, signal, this)),
-      // boost::bind is the easiest way to store an argument list.
-      function_(boost::bind(&Closure<Args...>::Call, this, args...)),
+      // std::bind is the easiest way to store an argument list.
+      function_(std::bind(&Closure<Args...>::Call, this, args...)),
       receiver_(receiver) {
     const QMetaObject* meta_receiver = receiver->metaObject();
     QByteArray normalised_slot = QMetaObject::normalizedSignature(slot + 1);
@@ -126,7 +125,7 @@ class Closure : public ClosureBase {
         arg_list.size() > 9 ? arg_list[9] : QGenericArgument());
   }
 
-  boost::function<void()> function_;
+  std::function<void()> function_;
   QObject* receiver_;
   QMetaMethod slot_;
 };
@@ -158,12 +157,12 @@ class CallbackClosure : public ClosureBase {
   CallbackClosure(
       QObject* sender,
       const char* signal,
-      boost::function<void()> callback);
+      std::function<void()> callback);
 
   virtual void Invoke();
 
  private:
-  boost::function<void()> callback_;
+  std::function<void()> callback_;
 };
 
 }  // namespace _detail
@@ -194,15 +193,15 @@ _detail::ClosureBase* NewClosure(
 _detail::ClosureBase* NewClosure(
     QObject* sender,
     const char* signal,
-    boost::function<void()> callback);
+    std::function<void()> callback);
 
 template <typename... Args>
 _detail::ClosureBase* NewClosure(
     QObject* sender,
     const char* signal,
-    boost::function<void(Args...)> callback,
+    std::function<void(Args...)> callback,
     const Args&... args) {
-  return NewClosure(sender, signal, boost::bind(callback, args...));
+  return NewClosure(sender, signal, std::bind(callback, args...));
 }
 
 template <typename... Args>
@@ -211,7 +210,7 @@ _detail::ClosureBase* NewClosure(
     const char* signal,
     void (*callback)(Args...),
     const Args&... args) {
-  return NewClosure(sender, signal, boost::bind(callback, args...));
+  return NewClosure(sender, signal, std::bind(callback, args...));
 }
 
 template <typename T, typename Unused, typename... Args>
@@ -220,7 +219,7 @@ _detail::ClosureBase* NewClosure(
     const char* signal,
     T* receiver, Unused (T::*callback)(Args...),
     const Args&... args) {
-  return NewClosure(sender, signal, boost::bind(callback, receiver, args...));
+  return NewClosure(sender, signal, std::bind(callback, receiver, args...));
 }
 
 

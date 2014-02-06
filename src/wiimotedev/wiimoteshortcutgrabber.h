@@ -18,10 +18,10 @@
 #ifndef WIIMOTESHORTCUTGRABBER_H
 #define WIIMOTESHORTCUTGRABBER_H
 
+#include <memory>
+
 #include <QDialog>
 #include <QTimeLine>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "wiimotesettingspage.h"
 #include "dbus/wiimotedev.h"
@@ -47,7 +47,7 @@ private:
 
   Ui_WiimoteShortcutGrabber* ui_;
   WiimoteSettingsPage* config_;
-  boost::scoped_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
+  std::unique_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
   quint32 wiimotedev_device_;
   quint64 wiimotedev_buttons_;
 

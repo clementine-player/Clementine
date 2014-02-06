@@ -1,6 +1,8 @@
 #ifndef OUTGOINGDATACREATOR_H
 #define OUTGOINGDATACREATOR_H
 
+#include <memory>
+
 #include <QTcpSocket>
 #include <QImage>
 #include <QList>
@@ -24,7 +26,6 @@
 #include "songinfo/ultimatelyricsreader.h"
 #include "remotecontrolmessages.pb.h"
 #include "remoteclient.h"
-#include <boost/scoped_ptr.hpp>
 
 typedef QList<SongInfoProvider*> ProviderList;
 
@@ -91,7 +92,7 @@ private:
   int last_track_position_;
   bool aww_;
 
-  boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
+  std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
   ProviderList provider_list_;
   QMap<int, SongInfoFetcher::Result> results_;
   SongInfoFetcher* fetcher_;

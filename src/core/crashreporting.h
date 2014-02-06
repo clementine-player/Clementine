@@ -18,9 +18,9 @@
 #ifndef CRASHREPORTING_H
 #define CRASHREPORTING_H
 
-#include <QObject>
+#include <memory>
 
-#include <boost/scoped_ptr.hpp>
+#include <QObject>
 
 class QFile;
 class QNetworkAccessManager;
@@ -64,7 +64,7 @@ private:
   static const char* kSendCrashReportOption;
   static char* sPath;
 
-  boost::scoped_ptr<google_breakpad::ExceptionHandler> handler_;
+  std::unique_ptr<google_breakpad::ExceptionHandler> handler_;
 };
 
 

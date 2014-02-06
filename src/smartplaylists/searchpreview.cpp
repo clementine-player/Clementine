@@ -15,13 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "querygenerator.h"
 #include "searchpreview.h"
 #include "ui_searchpreview.h"
-#include "playlist/playlist.h"
+
+#include <memory>
 
 #include <QFutureWatcher>
 #include <QtConcurrentRun>
+
+#include "querygenerator.h"
+#include "playlist/playlist.h"
 
 namespace smart_playlists {
 
@@ -94,7 +97,7 @@ PlaylistItemList DoRunSearch(GeneratorPtr gen) {
 void SearchPreview::RunSearch(const Search& search) {
   generator_.reset(new QueryGenerator);
   generator_->set_library(backend_);
-  boost::dynamic_pointer_cast<QueryGenerator>(generator_)->Load(search);
+  std::dynamic_pointer_cast<QueryGenerator>(generator_)->Load(search);
 
   ui_->busy_container->show();
   ui_->count_label->hide();
@@ -109,7 +112,7 @@ void SearchPreview::SearchFinished() {
   FutureWatcher* watcher = static_cast<FutureWatcher*>(sender());
   watcher->deleteLater();
 
-  last_search_ = boost::dynamic_pointer_cast<QueryGenerator>(generator_)->search();
+  last_search_ = std::dynamic_pointer_cast<QueryGenerator>(generator_)->search();
   generator_.reset();
 
   if (pending_search_.is_valid() && pending_search_ != last_search_) {

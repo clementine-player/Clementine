@@ -18,9 +18,9 @@
 #ifndef ECHONESTIMAGES_H
 #define ECHONESTIMAGES_H
 
-#include "songinfoprovider.h"
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
+#include "songinfoprovider.h"
 
 class QNetworkReply;
 
@@ -35,7 +35,7 @@ private slots:
 
 private:
   struct Request;
-  typedef boost::shared_ptr<Request> RequestPtr;
+  typedef std::shared_ptr<Request> RequestPtr;
 
   QMap<QNetworkReply*, RequestPtr> requests_;
 };

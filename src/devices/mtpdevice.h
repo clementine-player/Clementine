@@ -18,12 +18,12 @@
 #ifndef MTPDEVICE_H
 #define MTPDEVICE_H
 
-#include "connecteddevice.h"
+#include <memory>
 
 #include <QMutex>
 #include <QWaitCondition>
 
-#include <boost/scoped_ptr.hpp>
+#include "connecteddevice.h"
 
 struct LIBMTP_mtpdevice_struct;
 
@@ -74,7 +74,7 @@ private:
   SongList songs_to_add_;
   SongList songs_to_remove_;
 
-  boost::scoped_ptr<MtpConnection> connection_;
+  std::unique_ptr<MtpConnection> connection_;
 };
 
 #endif // MTPDEVICE_H

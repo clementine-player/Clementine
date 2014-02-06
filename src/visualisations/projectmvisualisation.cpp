@@ -48,15 +48,13 @@
 
 ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
   : QGraphicsScene(parent),
-    projectm_(NULL),
-    preset_model_(NULL),
+    preset_model_(nullptr),
     mode_(Random),
     duration_(15),
-    texture_size_(512)
-{
+    texture_size_(512) {
   connect(this, SIGNAL(sceneRectChanged(QRectF)), SLOT(SceneRectChanged(QRectF)));
 
-  for (int i=0 ; i<TOTAL_RATING_TYPES ; ++i)
+  for (int i = 0; i < TOTAL_RATING_TYPES; ++i)
     default_rating_list_.push_back(3);
 }
 

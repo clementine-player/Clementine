@@ -19,23 +19,14 @@
  *   51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307, USA.          *
  ***************************************************************************/
 
-#include "config.h"
 #include "gstengine.h"
-#include "gstenginepipeline.h"
-#include "core/logging.h"
-#include "core/taskmanager.h"
-#include "core/utilities.h"
-
-#ifdef HAVE_MOODBAR
-# include "gst/moodbar/spectrum.h"
-#endif
 
 #include <math.h>
 #include <unistd.h>
-#include <vector>
-#include <iostream>
 
-#include <boost/bind.hpp>
+#include <iostream>
+#include <memory>
+#include <vector>
 
 #include <QTimer>
 #include <QRegExp>
@@ -48,9 +39,18 @@
 
 #include <gst/gst.h>
 
+#include "config.h"
+#include "gstenginepipeline.h"
+#include "core/logging.h"
+#include "core/taskmanager.h"
+#include "core/utilities.h"
 
+#ifdef HAVE_MOODBAR
+# include "gst/moodbar/spectrum.h"
+#endif
+
+using std::shared_ptr;
 using std::vector;
-using boost::shared_ptr;
 
 const char* GstEngine::kSettingsGroup = "GstEngine";
 const char* GstEngine::kAutoSink = "autoaudiosink";

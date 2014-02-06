@@ -32,8 +32,6 @@
 #include "playlist/playlistmanager.h"
 #include "smartplaylists/generator_fwd.h"
 
-#include <boost/scoped_ptr.hpp>
-
 class Application;
 class AlbumCoverLoader;
 class LibraryDirectoryModel;

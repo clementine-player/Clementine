@@ -15,17 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "mtploader.h"
+
+#include <libmtp.h>
+
 #include "connecteddevice.h"
 #include "mtpconnection.h"
-#include "mtploader.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "library/librarybackend.h"
 
-#include <libmtp.h>
-
-MtpLoader::MtpLoader(const QUrl& url, TaskManager* task_manager,
-                     LibraryBackend* backend, boost::shared_ptr<ConnectedDevice> device)
+MtpLoader::MtpLoader(
+    const QUrl& url, TaskManager* task_manager,
+    LibraryBackend* backend, std::shared_ptr<ConnectedDevice> device)
   : QObject(NULL),
     device_(device),
     url_(url),

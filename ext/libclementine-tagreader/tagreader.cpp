@@ -17,6 +17,8 @@
 
 #include "tagreader.h"
 
+#include <memory>
+
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QFileInfo>
@@ -51,14 +53,10 @@
 
 #include <sys/stat.h>
 
-#include <boost/scoped_ptr.hpp>
-
 #include "fmpsparser.h"
 #include "core/logging.h"
 #include "core/messagehandler.h"
 #include "core/timeconstants.h"
-
-using boost::scoped_ptr;
 
 // Taglib added support for FLAC pictures in 1.7.0
 #if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
@@ -123,7 +121,7 @@ void TagReader::ReadFile(const QString& filename,
   song->set_mtime(info.lastModified().toTime_t());
   song->set_ctime(info.created().toTime_t());
 
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
+  std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
   if(fileref->isNull()) {
     qLog(Info) << "TagLib hasn't been able to read " << filename << " file";
     return;
@@ -530,7 +528,7 @@ bool TagReader::SaveFile(const QString& filename,
 
   qLog(Debug) << "Saving tags to" << filename;
 
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
+  std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
 
   if (!fileref || fileref->isNull()) // The file probably doesn't exist
     return false;
@@ -591,7 +589,7 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
 
   qLog(Debug) << "Saving song statistics tags to" << filename;
 
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
+  std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
 
   if (!fileref || fileref->isNull()) // The file probably doesn't exist
     return false;
@@ -647,7 +645,7 @@ bool TagReader::SaveSongRatingToFile(const QString& filename,
 
   qLog(Debug) << "Saving song rating tags to" << filename;
 
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
+  std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
 
   if (!fileref || fileref->isNull()) // The file probably doesn't exist
     return false;
@@ -749,7 +747,7 @@ void TagReader::SetTextFrame(const char* id, const std::string& value,
 bool TagReader::IsMediaFile(const QString& filename) const {
   qLog(Debug) << "Checking for valid file" << filename;
 
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
+  std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
   return !fileref->isNull() && fileref->tag();
 }
 
@@ -865,7 +863,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url,
   CloudStream* stream = new CloudStream(
       download_url, title, size, authorisation_header, network_);
   stream->Precache();
-  scoped_ptr<TagLib::File> tag;
+  std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {
     tag.reset(new TagLib::MPEG::File(
         stream,  // Takes ownership.

@@ -18,19 +18,19 @@
 #ifndef PLAYLISTITEM_H
 #define PLAYLISTITEM_H
 
+#include <memory>
+
 #include <QMap>
 #include <QMetaType>
 #include <QStandardItem>
 #include <QUrl>
-
-#include <boost/enable_shared_from_this.hpp>
 
 #include "core/song.h"
 
 class QAction;
 class SqlRow;
 
-class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
+class PlaylistItem : public std::enable_shared_from_this<PlaylistItem> {
  public:
   PlaylistItem(const QString& type)
     : type_(type) {}
@@ -109,7 +109,7 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   QMap<short, QColor> background_colors_;
   QMap<short, QColor> foreground_colors_;
 };
-typedef boost::shared_ptr<PlaylistItem> PlaylistItemPtr;
+typedef std::shared_ptr<PlaylistItem> PlaylistItemPtr;
 typedef QList<PlaylistItemPtr> PlaylistItemList;
 
 Q_DECLARE_METATYPE(PlaylistItemPtr)

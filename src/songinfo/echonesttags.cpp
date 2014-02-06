@@ -16,22 +16,23 @@
 */
 
 #include "echonesttags.h"
-#include "tagwidget.h"
-#include "core/logging.h"
+
+#include <memory>
 
 #include <echonest/Artist.h>
 
-#include <boost/scoped_ptr.hpp>
+#include "tagwidget.h"
+#include "core/logging.h"
 
 struct EchoNestTags::Request {
   Request(int id) : id_(id), artist_(new Echonest::Artist) {}
 
   int id_;
-  boost::scoped_ptr<Echonest::Artist> artist_;
+  std::unique_ptr<Echonest::Artist> artist_;
 };
 
 void EchoNestTags::FetchInfo(int id, const Song& metadata) {
-  boost::shared_ptr<Request> request(new Request(id));
+  std::shared_ptr<Request> request(new Request(id));
   request->artist_->setName(metadata.artist());
 
   QNetworkReply* reply = request->artist_->fetchTerms();
@@ -65,7 +66,7 @@ void EchoNestTags::RequestFinished() {
 
     widget->SetIcon(data.icon_);
 
-    foreach (const Echonest::Term& term, request->artist_->terms()) {
+    for (const Echonest::Term& term : request->artist_->terms()) {
       widget->AddTag(term.name());
       if (widget->count() >= 10)
         break;

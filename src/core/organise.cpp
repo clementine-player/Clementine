@@ -15,12 +15,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "musicstorage.h"
 #include "organise.h"
-#include "taskmanager.h"
-#include "core/logging.h"
-#include "core/tagreaderclient.h"
-#include "core/utilities.h"
+
+#include <functional>
 
 #include <QDir>
 #include <QFileInfo>
@@ -28,13 +25,19 @@
 #include <QThread>
 #include <QUrl>
 
-#include <boost/bind.hpp>
+#include "musicstorage.h"
+#include "taskmanager.h"
+#include "core/logging.h"
+#include "core/tagreaderclient.h"
+#include "core/utilities.h"
+
+using std::placeholders::_1;
 
 const int Organise::kBatchSize = 10;
 const int Organise::kTranscodeProgressInterval = 500;
 
 Organise::Organise(TaskManager* task_manager,
-                   boost::shared_ptr<MusicStorage> destination,
+                   std::shared_ptr<MusicStorage> destination,
                    const OrganiseFormat &format, bool copy, bool overwrite,
                    const NewSongInfoList& songs_info, bool eject_after)
                      : thread_(NULL),
@@ -177,8 +180,8 @@ void Organise::ProcessSomeFiles() {
     job.metadata_ = song;
     job.overwrite_ = overwrite_;
     job.remove_original_ = !copy_;
-    job.progress_ = boost::bind(&Organise::SetSongProgress,
-                                this, _1, !task.transcoded_filename_.isEmpty());
+    job.progress_ = std::bind(&Organise::SetSongProgress,
+                              this, _1, !task.transcoded_filename_.isEmpty());
 
     if (!destination_->CopyToStorage(job)) {
       files_with_errors_ << task.song_info_.song_.basefilename();

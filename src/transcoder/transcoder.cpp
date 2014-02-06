@@ -17,6 +17,8 @@
 
 #include "transcoder.h"
 
+#include <memory>
+
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
@@ -24,12 +26,10 @@
 #include <QThread>
 #include <QtDebug>
 
-#include <boost/bind.hpp>
-
 #include "core/logging.h"
 #include "core/signalchecker.h"
 
-using boost::shared_ptr;
+using std::shared_ptr;
 
 int Transcoder::JobFinishedEvent::sEventType = -1;
 
@@ -543,7 +543,7 @@ void Transcoder::Cancel() {
 QMap<QString, float> Transcoder::GetProgress() const {
   QMap<QString, float> ret;
 
-  foreach (boost::shared_ptr<JobState> state, current_jobs_) {
+  for (const auto& state : current_jobs_) {
     if (!state->pipeline_)
       continue;
 

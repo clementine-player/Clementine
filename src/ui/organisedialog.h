@@ -19,6 +19,7 @@
 #define ORGANISEDIALOG_H
 
 #include <memory>
+
 #include <QDialog>
 #include <QMap>
 #include <QUrl>

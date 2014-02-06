@@ -17,7 +17,7 @@
 
 #include "groovesharkservice.h"
 
-#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 #include <QApplication>
 #include <QClipboard>
@@ -1286,8 +1286,8 @@ void GroovesharkService::DeletePlaylist(int playlist_id) {
   if (!playlists_.contains(playlist_id)) {
     return;
   }
-  
-  boost::scoped_ptr<QMessageBox> confirmation_dialog(new QMessageBox(
+
+  std::unique_ptr<QMessageBox> confirmation_dialog(new QMessageBox(
       QMessageBox::Question, tr("Delete Grooveshark playlist"),
       tr("Are you sure you want to delete this playlist?"),
       QMessageBox::Yes | QMessageBox::Cancel));

@@ -18,10 +18,10 @@
 #ifndef GLOBALSHORTCUTSSETTINGSPAGE_H
 #define GLOBALSHORTCUTSSETTINGSPAGE_H
 
+#include <memory>
+
 #include <QMap>
 #include <QSettings>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "core/globalshortcuts.h"
 #include "ui/settingspage.h"
@@ -64,7 +64,7 @@ private:
   Ui_GlobalShortcutsSettingsPage* ui_;
 
   bool initialised_;
-  boost::scoped_ptr<GlobalShortcutGrabber> grabber_;
+  std::unique_ptr<GlobalShortcutGrabber> grabber_;
 
   QSettings settings_;
   QMap<QString, Shortcut> shortcuts_;

@@ -17,6 +17,33 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+#include <cmath>
+#include <memory>
+
+#include <QCloseEvent>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileSystemModel>
+#include <QLinearGradient>
+#include <QMenu>
+#include <QMessageBox>
+#include <QSettings>
+#include <QShortcut>
+#include <QSignalMapper>
+#include <QSortFilterProxyModel>
+#include <QStatusBar>
+#include <QtDebug>
+#include <QTimer>
+#include <QUndoStack>
+
+#ifdef Q_OS_WIN32
+# include <qtsparkle/Updater>
+#endif
+
+#include <gst/cdda/gstcddabasesrc.h>
+
+
 #include "core/appearance.h"
 #include "core/application.h"
 #include "core/backgroundstreams.h"
@@ -122,34 +149,6 @@
 # include "moodbar/moodbarproxystyle.h"
 #endif
 
-#include <QCloseEvent>
-#include <QDir>
-#include <QFileDialog>
-#include <QFileSystemModel>
-#include <QLinearGradient>
-#include <QMenu>
-#include <QMessageBox>
-#include <QSettings>
-#include <QShortcut>
-#include <QSignalMapper>
-#include <QSortFilterProxyModel>
-#include <QStatusBar>
-#include <QtDebug>
-#include <QTimer>
-#include <QUndoStack>
-
-#ifdef Q_OS_WIN32
-# include <qtsparkle/Updater>
-#endif
-
-
-#include <cmath>
-
-#include <gst/cdda/gstcddabasesrc.h>
-
-using boost::shared_ptr;
-using boost::scoped_ptr;
-
 #ifdef Q_OS_DARWIN
 // Non exported mac-specific function.
 void qt_mac_set_dock_menu(QMenu*);
@@ -180,18 +179,8 @@ MainWindow::MainWindow(Application* app,
     device_view_(device_view_container_->view()),
     song_info_view_(new SongInfoView(this)),
     artist_info_view_(new ArtistInfoView(this)),
-    settings_dialog_(NULL),
-    cover_manager_(NULL),
     equalizer_(new Equalizer),
-    error_dialog_(NULL),
     organise_dialog_(new OrganiseDialog(app_->task_manager())),
-    queue_manager_(NULL),
-#ifdef ENABLE_VISUALISATIONS
-    visualisation_(NULL),
-#endif
-#ifdef HAVE_WIIMOTEDEV
-    wiimotedev_shortcuts_(NULL),
-#endif
     playlist_menu_(new QMenu(this)),
     playlist_add_to_another_(NULL),
     playlistitem_actions_separator_(NULL),
@@ -1962,7 +1951,7 @@ void MainWindow::PlaylistDelete() {
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
-  boost::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
+  std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
 
   // Get selected songs
   SongList selected_songs;

@@ -51,8 +51,6 @@
 
 #include <QtDebug>
 
-using boost::shared_ptr;
-
 const char* MagnatuneService::kServiceName = "Magnatune";
 const char* MagnatuneService::kSettingsGroup = "Magnatune";
 const char* MagnatuneService::kSongsTable = "magnatune_songs";

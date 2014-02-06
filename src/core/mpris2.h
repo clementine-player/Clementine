@@ -24,8 +24,6 @@
 #include <QObject>
 #include <QtDBus>
 
-#include <boost/scoped_ptr.hpp>
-
 class Application;
 class MainWindow;
 class Playlist;

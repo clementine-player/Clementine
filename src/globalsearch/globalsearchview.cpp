@@ -1,25 +1,33 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#include "globalsearchview.h"
+
+#include <QMenu>
+#include <QSortFilterProxyModel>
+#include <QStandardItem>
+#include <QTimer>
+
+#include <functional>
 
 #include "globalsearch.h"
 #include "globalsearchitemdelegate.h"
 #include "globalsearchmodel.h"
 #include "globalsearchsortmodel.h"
-#include "globalsearchview.h"
 #include "searchprovider.h"
 #include "searchproviderstatuswidget.h"
 #include "suggestionwidget.h"
@@ -32,12 +40,8 @@
 #include "library/librarymodel.h"
 #include "library/groupbydialog.h"
 
-#include <boost/bind.hpp>
-
-#include <QMenu>
-#include <QSortFilterProxyModel>
-#include <QStandardItem>
-#include <QTimer>
+using std::placeholders::_1;
+using std::placeholders::_2;
 
 const int GlobalSearchView::kSwapModelsTimeoutMsec = 250;
 const int GlobalSearchView::kMaxSuggestions = 10;
@@ -176,14 +180,14 @@ namespace {
 
 void GlobalSearchView::ReloadSettings() {
   QSettings s;
-  
+
   // Library settings
   s.beginGroup(LibraryView::kSettingsGroup);
   const bool pretty = s.value("pretty_covers", true).toBool();
   front_model_->set_use_pretty_covers(pretty);
   back_model_->set_use_pretty_covers(pretty);
   s.endGroup();
-  
+
   // Global search settings
   s.beginGroup(GlobalSearch::kSettingsGroup);
   const QStringList provider_order =
@@ -197,11 +201,11 @@ void GlobalSearchView::ReloadSettings() {
       LibraryModel::GroupBy(s.value("group_by2", int(LibraryModel::GroupBy_Album)).toInt()),
       LibraryModel::GroupBy(s.value("group_by3", int(LibraryModel::GroupBy_None)).toInt())));
   s.endGroup();
-  
+
   // Delete any old status widgets
   qDeleteAll(provider_status_widgets_);
   provider_status_widgets_.clear();
-  
+
   // Toggle visibility of the providers group
   ui_->providers_group->setVisible(show_providers_);
 
@@ -209,27 +213,27 @@ void GlobalSearchView::ReloadSettings() {
     // Sort the list of providers
     QList<SearchProvider*> providers = engine_->providers();
     qSort(providers.begin(), providers.end(),
-          boost::bind(&CompareProvider, boost::cref(provider_order), _1, _2));
-  
+          std::bind(&CompareProvider, std::cref(provider_order), _1, _2));
+
     bool any_disabled = false;
-  
+
     foreach (SearchProvider* provider, providers) {
       QWidget* parent = ui_->enabled_list;
       if (!engine_->is_provider_usable(provider)) {
         parent = ui_->disabled_list;
         any_disabled = true;
       }
-  
+
       SearchProviderStatusWidget* widget =
           new SearchProviderStatusWidget(warning_icon_, engine_, provider);
-  
+
       parent->layout()->addWidget(widget);
       provider_status_widgets_ << widget;
     }
-  
+
     ui_->disabled_label->setVisible(any_disabled);
   }
-  
+
   ui_->suggestions_group->setVisible(show_suggestions_);
   if (!show_suggestions_) {
     update_suggestions_timer_->stop();
