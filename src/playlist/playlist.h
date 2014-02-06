@@ -21,8 +21,6 @@
 #include <QAbstractItemModel>
 #include <QList>
 
-#include <boost/shared_ptr.hpp>
-
 #include "playlistitem.h"
 #include "playlistsequence.h"
 #include "core/tagreaderclient.h"

@@ -18,12 +18,12 @@
 #ifndef DEVICEKITLISTER_H
 #define DEVICEKITLISTER_H
 
-#include "devicelister.h"
+#include <memory>
 
 #include <QMutex>
 #include <QStringList>
 
-#include <boost/scoped_ptr.hpp>
+#include "devicelister.h"
 
 class OrgFreedesktopUDisksInterface;
 
@@ -88,7 +88,7 @@ private:
   T LockAndGetDeviceInfo(const QString& id, T DeviceData::*field);
 
 private:
-  boost::scoped_ptr<OrgFreedesktopUDisksInterface> interface_;
+  std::unique_ptr<OrgFreedesktopUDisksInterface> interface_;
 
   QMutex mutex_;
   QMap<QString, DeviceData> device_data_;

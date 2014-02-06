@@ -15,15 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcovermanager.h"
 #include "albumcovermanagerlist.h"
-#include "library/librarybackend.h"
-#include "playlist/songmimedata.h"
 
-#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 #include <QDropEvent>
 #include <QUrl>
+
+#include "albumcovermanager.h"
+#include "library/librarybackend.h"
+#include "playlist/songmimedata.h"
 
 AlbumCoverManagerList::AlbumCoverManagerList(QWidget *parent)
   : QListWidget(parent),
@@ -48,7 +49,7 @@ QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items) 
   }
 
   // Get the QAbstractItemModel data so the picture works
-  boost::scoped_ptr<QMimeData> orig_data(QListWidget::mimeData(items));
+  std::unique_ptr<QMimeData> orig_data(QListWidget::mimeData(items));
 
   SongMimeData* mime_data = new SongMimeData;
   mime_data->backend = manager_->backend();

@@ -18,7 +18,7 @@
 #ifndef DIGITALLYIMPORTEDSERVICEBASE_H
 #define DIGITALLYIMPORTEDSERVICEBASE_H
 
-#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 #include "digitallyimportedclient.h"
 #include "internetservice.h"
@@ -104,7 +104,7 @@ private:
 
   QStandardItem* root_;
 
-  boost::scoped_ptr<QMenu> context_menu_;
+  std::unique_ptr<QMenu> context_menu_;
   QStandardItem* context_item_;
 
   CachedList<DigitallyImportedClient::Channel> saved_channels_;

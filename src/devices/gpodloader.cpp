@@ -27,8 +27,9 @@
 #include <QDir>
 #include <QtDebug>
 
-GPodLoader::GPodLoader(const QString& mount_point, TaskManager* task_manager,
-                       LibraryBackend* backend, boost::shared_ptr<ConnectedDevice> device)
+GPodLoader::GPodLoader(
+    const QString& mount_point, TaskManager* task_manager,
+    LibraryBackend* backend, std::shared_ptr<ConnectedDevice> device)
   : QObject(NULL),
     device_(device),
     mount_point_(mount_point),

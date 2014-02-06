@@ -18,10 +18,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <memory>
+
 #include <QObject>
 #include <QSettings>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "config.h"
 #include "core/song.h"
@@ -176,7 +176,7 @@ public slots:
 
   PlaylistItemPtr current_item_;
 
-  boost::scoped_ptr<EngineBase> engine_;
+  std::unique_ptr<EngineBase> engine_;
   Engine::TrackChangeFlags stream_change_type_;
   Engine::State last_state_;
 

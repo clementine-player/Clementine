@@ -16,18 +16,19 @@
 */
 
 #include "echonestbiographies.h"
-#include "songinfotextview.h"
-#include "core/logging.h"
+
+#include <memory>
 
 #include <echonest/Artist.h>
 
-#include <boost/scoped_ptr.hpp>
+#include "songinfotextview.h"
+#include "core/logging.h"
 
 struct EchoNestBiographies::Request {
   Request(int id) : id_(id), artist_(new Echonest::Artist) {}
 
   int id_;
-  boost::scoped_ptr<Echonest::Artist> artist_;
+  std::unique_ptr<Echonest::Artist> artist_;
 };
 
 EchoNestBiographies::EchoNestBiographies() {
@@ -46,7 +47,7 @@ EchoNestBiographies::EchoNestBiographies() {
 }
 
 void EchoNestBiographies::FetchInfo(int id, const Song& metadata) {
-  boost::shared_ptr<Request> request(new Request(id));
+  std::shared_ptr<Request> request(new Request(id));
   request->artist_->setName(metadata.artist());
 
   QNetworkReply* reply = request->artist_->fetchBiographies();
@@ -70,7 +71,7 @@ void EchoNestBiographies::RequestFinished() {
 
   QSet<QString> already_seen;
 
-  foreach (const Echonest::Biography& bio, request->artist_->biographies()) {
+  for (const Echonest::Biography& bio : request->artist_->biographies()) {
     QString canonical_site = bio.site().toLower();
     canonical_site.replace(QRegExp("[^a-z]"),"");
 

@@ -18,9 +18,7 @@
 #include "spotifysearchprovider.h"
 
 #include <ctime>
-
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/random/uniform_int.hpp>
+#include <random>
 
 #include "core/logging.h"
 #include "internet/internetmodel.h"
@@ -219,8 +217,8 @@ QStringList SpotifySearchProvider::GetSuggestions(int count) {
 
   QStringList all_suggestions = suggestions_.toList();
 
-  boost::mt19937 gen(std::time(0));
-  boost::uniform_int<> random(0, all_suggestions.size() - 1);
+  std::mt19937 gen(std::time(0));
+  std::uniform_int_distribution<> random(0, all_suggestions.size() - 1);
 
   QSet<QString> candidates;
 

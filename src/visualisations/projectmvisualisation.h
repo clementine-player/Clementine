@@ -18,11 +18,11 @@
 #ifndef PROJECTMVISUALISATION_H
 #define PROJECTMVISUALISATION_H
 
+#include <memory>
+
 #include <QGraphicsScene>
 #include <QBasicTimer>
 #include <QSet>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "engines/bufferconsumer.h"
 
@@ -77,12 +77,12 @@ private:
   int IndexOfPreset(const QString& path) const;
 
 private:
-  boost::scoped_ptr<projectM> projectm_;
+  std::unique_ptr<projectM> projectm_;
   ProjectMPresetModel* preset_model_;
   Mode mode_;
   int duration_;
 
-  boost::scoped_ptr<QTemporaryFile> temporary_font_;
+  std::unique_ptr<QTemporaryFile> temporary_font_;
 
   std::vector<int> default_rating_list_;
 

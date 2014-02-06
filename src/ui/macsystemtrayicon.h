@@ -18,14 +18,13 @@
 #ifndef MACSYSTEMTRAYICON_H
 #define MACSYSTEMTRAYICON_H
 
-#include "systemtrayicon.h"
+#include <memory>
 
-#include <boost/noncopyable.hpp>
-#include <boost/scoped_ptr.hpp>
+#include "systemtrayicon.h"
 
 class MacSystemTrayIconPrivate;
 
-class MacSystemTrayIcon : public SystemTrayIcon, boost::noncopyable {
+class MacSystemTrayIcon : public SystemTrayIcon {
   Q_OBJECT
 
 public:
@@ -52,8 +51,8 @@ protected:
 private:
   QPixmap orange_icon_;
   QPixmap grey_icon_;
-
-  boost::scoped_ptr<MacSystemTrayIconPrivate> p_;
+  std::unique_ptr<MacSystemTrayIconPrivate> p_;
+  Q_DISABLE_COPY(MacSystemTrayIcon);
 };
 
 #endif // MACSYSTEMTRAYICON_H

@@ -18,8 +18,9 @@
 #ifndef WIIMOTEDEV_SHORTCUTS_H
 #define WIIMOTEDEV_SHORTCUTS_H
 
+#include <memory>
+
 #include <QWidget>
-#include <boost/scoped_ptr.hpp>
 
 #include "dbus/wiimotedev.h"
 #include "core/player.h"
@@ -77,7 +78,7 @@ private:
   quint32 wiimotedev_device_;
   bool wiimotedev_enable_;
   bool wiimotedev_focus_;
-  boost::scoped_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
+  std::unique_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
   bool wiimotedev_notification_;
 
   QHash <quint64, quint32> actions_;

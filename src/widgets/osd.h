@@ -18,6 +18,8 @@
 #ifndef OSD_H
 #define OSD_H
 
+#include <memory>
+
 #include <QDateTime>
 #include <QImage>
 #include <QObject>
@@ -36,7 +38,6 @@ class QDBusPendingCallWatcher;
 
 #ifdef HAVE_DBUS
 # include <QDBusArgument>
-# include <boost/scoped_ptr.hpp>
 
   QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
@@ -136,7 +137,7 @@ class OSD : public QObject {
 #endif  // Q_OS_DARWIN
 
 #ifdef HAVE_DBUS
-  boost::scoped_ptr<OrgFreedesktopNotificationsInterface> interface_;
+  std::unique_ptr<OrgFreedesktopNotificationsInterface> interface_;
   uint notification_id_;
   QDateTime last_notification_time_;
 #endif

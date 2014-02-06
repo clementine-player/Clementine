@@ -17,7 +17,7 @@
 
 #include "moodbarloader.h"
 
-#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 #include <QCoreApplication>
 #include <QDir>
@@ -101,7 +101,7 @@ MoodbarLoader::Result MoodbarLoader::Load(
   }
 
   // Maybe it exists in the cache?
-  boost::scoped_ptr<QIODevice> cache_device(cache_->data(url));
+  std::unique_ptr<QIODevice> cache_device(cache_->data(url));
   if (cache_device) {
     qLog(Info) << "Loading cached moodbar data for" << filename;
     *data = cache_device->readAll();

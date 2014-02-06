@@ -18,9 +18,9 @@
 #ifndef SAVEDRADIO_H
 #define SAVEDRADIO_H
 
-#include "internetservice.h"
+#include <memory>
 
-#include <boost/scoped_ptr.hpp>
+#include "internetservice.h"
 
 class QMenu;
 
@@ -83,7 +83,7 @@ class SavedRadio : public InternetService {
 
   StreamList streams_;
 
-  boost::scoped_ptr<AddStreamDialog> edit_dialog_;
+  std::unique_ptr<AddStreamDialog> edit_dialog_;
 };
 
 #endif // SAVEDRADIO_H

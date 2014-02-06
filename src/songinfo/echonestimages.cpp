@@ -16,21 +16,22 @@
 */
 
 #include "echonestimages.h"
-#include "core/logging.h"
+
+#include <memory>
 
 #include <echonest/Artist.h>
 
-#include <boost/scoped_ptr.hpp>
+#include "core/logging.h"
 
 struct EchoNestImages::Request {
   Request(int id) : id_(id), artist_(new Echonest::Artist) {}
 
   int id_;
-  boost::scoped_ptr<Echonest::Artist> artist_;
+  std::unique_ptr<Echonest::Artist> artist_;
 };
 
 void EchoNestImages::FetchInfo(int id, const Song& metadata) {
-  boost::shared_ptr<Request> request(new Request(id));
+  std::shared_ptr<Request> request(new Request(id));
   request->artist_->setName(metadata.artist());
 
   QNetworkReply* reply = request->artist_->fetchImages();

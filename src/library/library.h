@@ -21,8 +21,6 @@
 #include <QHash>
 #include <QObject>
 
-#include <boost/scoped_ptr.hpp>
-
 class Application;
 class Database;
 class LibraryBackend;

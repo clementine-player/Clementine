@@ -36,7 +36,6 @@ WiimotedevShortcuts::WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* par
   wiimotedev_device_(1),
   wiimotedev_enable_(true),
   wiimotedev_focus_(false),
-  wiimotedev_iface_(NULL),
   wiimotedev_notification_(true)
 {
   connect(this, SIGNAL(WiiremoteActived(int)), osd_, SLOT(WiiremoteActived(int)));

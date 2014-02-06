@@ -18,9 +18,9 @@
 #ifndef SONGINFOVIEW_H
 #define SONGINFOVIEW_H
 
-#include "songinfobase.h"
+#include <memory>
 
-#include <boost/scoped_ptr.hpp>
+#include "songinfobase.h"
 
 class UltimateLyricsProvider;
 class UltimateLyricsReader;
@@ -52,7 +52,7 @@ private slots:
   void UltimateLyricsParsed();
 
 private:
-  boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
+  std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
 };
 
 #endif // SONGINFOVIEW_H

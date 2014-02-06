@@ -18,14 +18,14 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#include <memory>
+
 #include <QColor>
 #include <QLocale>
 #include <QCryptographicHash>
 #include <QSize>
 #include <QString>
 #include <QUrl>
-
-#include <boost/scoped_array.hpp>
 
 class QIODevice;
 class QMouseEvent;
@@ -159,7 +159,7 @@ private:
   Q_DISABLE_COPY(ScopedWCharArray);
 
   int chars_;
-  boost::scoped_array<wchar_t> data_;
+  std::unique_ptr<wchar_t[]> data_;
 };
 
 #endif // UTILITIES_H

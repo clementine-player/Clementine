@@ -18,12 +18,12 @@
 #ifndef NOWPLAYINGWIDGET_H
 #define NOWPLAYINGWIDGET_H
 
-#include "core/song.h"
-#include "covers/albumcoverloaderoptions.h"
+#include <memory>
 
 #include <QWidget>
 
-#include <boost/scoped_ptr.hpp>
+#include "core/song.h"
+#include "covers/albumcoverloaderoptions.h"
 
 class AlbumCoverChoiceController;
 class Application;
@@ -141,8 +141,8 @@ private:
 
   static const char* kHypnotoadPath;
   QAction* bask_in_his_glory_action_;
-  boost::scoped_ptr<QMovie> hypnotoad_;
-  boost::scoped_ptr<FullscreenHypnotoad> big_hypnotoad_;
+  std::unique_ptr<QMovie> hypnotoad_;
+  std::unique_ptr<FullscreenHypnotoad> big_hypnotoad_;
 
   bool aww_;
   KittenLoader* kittens_;

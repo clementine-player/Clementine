@@ -26,8 +26,6 @@
 #include <QTextCodec>
 #include <QThread>
 
-#include <boost/scoped_ptr.hpp>
-
 const int UltimateLyricsProvider::kRedirectLimit = 5;
 
 

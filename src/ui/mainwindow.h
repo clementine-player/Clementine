@@ -18,7 +18,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 #include <QMainWindow>
 #include <QSettings>
@@ -278,8 +278,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Application* app_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
-  boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
-  boost::scoped_ptr<About> about_dialog_;
+  std::unique_ptr<EditTagDialog> edit_tag_dialog_;
+  std::unique_ptr<About> about_dialog_;
 
   GlobalShortcuts* global_shortcuts_;
   Remote* remote_;
@@ -293,25 +293,25 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;
 
-  boost::scoped_ptr<SettingsDialog> settings_dialog_;
-  boost::scoped_ptr<AddStreamDialog> add_stream_dialog_;
-  boost::scoped_ptr<AlbumCoverManager> cover_manager_;
-  boost::scoped_ptr<Equalizer> equalizer_;
-  boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
-  boost::scoped_ptr<ErrorDialog> error_dialog_;
-  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
-  boost::scoped_ptr<QueueManager> queue_manager_;
+  std::unique_ptr<SettingsDialog> settings_dialog_;
+  std::unique_ptr<AddStreamDialog> add_stream_dialog_;
+  std::unique_ptr<AlbumCoverManager> cover_manager_;
+  std::unique_ptr<Equalizer> equalizer_;
+  std::unique_ptr<TranscodeDialog> transcode_dialog_;
+  std::unique_ptr<ErrorDialog> error_dialog_;
+  std::unique_ptr<OrganiseDialog> organise_dialog_;
+  std::unique_ptr<QueueManager> queue_manager_;
 
-  boost::scoped_ptr<TagFetcher> tag_fetcher_;
-  boost::scoped_ptr<TrackSelectionDialog> track_selection_dialog_;
+  std::unique_ptr<TagFetcher> tag_fetcher_;
+  std::unique_ptr<TrackSelectionDialog> track_selection_dialog_;
   PlaylistItemList autocomplete_tag_items_;
 
 #ifdef ENABLE_VISUALISATIONS
-  boost::scoped_ptr<VisualisationContainer> visualisation_;
+  std::unique_ptr<VisualisationContainer> visualisation_;
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
-  boost::scoped_ptr<WiimotedevShortcuts> wiimotedev_shortcuts_;
+  std::unique_ptr<WiimotedevShortcuts> wiimotedev_shortcuts_;
 #endif
 
   QAction* library_show_all_;

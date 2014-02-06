@@ -27,8 +27,6 @@
 
 #include <vector>
 
-#include <boost/noncopyable.hpp>
-
 #include <QList>
 #include <QObject>
 #include <QUrl>
@@ -39,7 +37,7 @@ namespace Engine {
 
 typedef std::vector<int16_t> Scope;
 
-class Base : public QObject, boost::noncopyable {
+class Base : public QObject {
   Q_OBJECT
 
  public:
@@ -153,6 +151,7 @@ class Base : public QObject, boost::noncopyable {
 
  private:
   bool about_to_end_emitted_;
+  Q_DISABLE_COPY(Base);
 };
 
 

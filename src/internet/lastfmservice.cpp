@@ -32,8 +32,6 @@
 
 #include "lastfmservice.h"
 
-#include <boost/scoped_ptr.hpp>
-
 #include <QMenu>
 #include <QSettings>
 
@@ -61,7 +59,6 @@
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
-using boost::scoped_ptr;
 using lastfm::XmlQuery;
 
 uint qHash(const lastfm::Track& track) {

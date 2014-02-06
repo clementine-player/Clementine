@@ -55,7 +55,7 @@ public:
 
   SearchPreview* preview_;
 
-  boost::scoped_ptr<Ui_SmartPlaylistQuerySearchPage> ui_;
+  std::unique_ptr<Ui_SmartPlaylistQuerySearchPage> ui_;
 };
 
 class QueryWizardPlugin::SortPage : public QWizardPage {
@@ -161,8 +161,8 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
 }
 
 void QueryWizardPlugin::SetGenerator(GeneratorPtr g) {
-  boost::shared_ptr<QueryGenerator> gen =
-      boost::dynamic_pointer_cast<QueryGenerator>(g);
+  std::shared_ptr<QueryGenerator> gen =
+      std::dynamic_pointer_cast<QueryGenerator>(g);
   if (!gen)
     return;
   Search search = gen->search();
@@ -198,10 +198,10 @@ void QueryWizardPlugin::SetGenerator(GeneratorPtr g) {
 }
 
 GeneratorPtr QueryWizardPlugin::CreateGenerator() const {
-  boost::shared_ptr<QueryGenerator> gen(new QueryGenerator);
+  std::shared_ptr<QueryGenerator> gen(new QueryGenerator);
   gen->Load(MakeSearch());
 
-  return boost::static_pointer_cast<Generator>(gen);
+  return std::static_pointer_cast<Generator>(gen);
 }
 
 void QueryWizardPlugin::UpdateSortOrder() {

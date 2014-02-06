@@ -18,6 +18,8 @@
 #ifndef LASTFMSERVICE_H
 #define LASTFMSERVICE_H
 
+#include <memory>
+
 namespace lastfm {
 class RadioStation;
 class Track;
@@ -39,8 +41,6 @@ uint qHash(const lastfm::Track& track);
 #include <QMap>
 #include <QMenu>
 #include <QQueue>
-
-#include <boost/scoped_ptr.hpp>
 
 class LastFMUrlHandler;
 
@@ -198,9 +198,9 @@ class LastFMService : public InternetService {
   QQueue<lastfm::Track> playlist_;
   bool already_scrobbled_;
 
-  boost::scoped_ptr<LastFMStationDialog> station_dialog_;
+  std::unique_ptr<LastFMStationDialog> station_dialog_;
 
-  boost::scoped_ptr<QMenu> context_menu_;
+  std::unique_ptr<QMenu> context_menu_;
   QAction* remove_action_;
   QAction* add_artist_action_;
   QAction* add_tag_action_;

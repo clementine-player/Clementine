@@ -20,14 +20,13 @@
 
 #include "playlist/playlistitem.h"
 
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 class LibraryBackend;
 
 namespace smart_playlists {
 
-class Generator : public QObject, public boost::enable_shared_from_this<Generator> {
+class Generator : public QObject, public std::enable_shared_from_this<Generator> {
   Q_OBJECT
 
 public:
@@ -38,7 +37,7 @@ public:
   static const int kDefaultDynamicFuture;
 
   // Creates a new Generator of the given type
-  static boost::shared_ptr<Generator> Create(const QString& type);
+  static std::shared_ptr<Generator> Create(const QString& type);
 
   // Should be called before Load on a new Generator
   void set_library(LibraryBackend* backend) { backend_ = backend; }

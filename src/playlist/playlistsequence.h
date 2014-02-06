@@ -18,11 +18,11 @@
 #ifndef PLAYLISTSEQUENCE_H
 #define PLAYLISTSEQUENCE_H
 
+#include <memory>
+
 #include <QWidget>
 
 #include "core/settingsprovider.h"
-
-#include <boost/scoped_ptr.hpp>
 
 class QMenu;
 
@@ -79,7 +79,7 @@ class PlaylistSequence : public QWidget {
 
  private:
   Ui_PlaylistSequence* ui_;
-  boost::scoped_ptr<SettingsProvider> settings_;
+  std::unique_ptr<SettingsProvider> settings_;
 
   QMenu* repeat_menu_;
   QMenu* shuffle_menu_;

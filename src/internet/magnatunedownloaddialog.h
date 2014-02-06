@@ -18,11 +18,11 @@
 #ifndef MAGNATUNEDOWNLOADDIALOG_H
 #define MAGNATUNEDOWNLOADDIALOG_H
 
+#include <memory>
+
 #include <QDialog>
 #include <QNetworkReply>
 #include <QStringList>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "core/song.h"
 
@@ -71,7 +71,7 @@ private:
 
   QNetworkAccessManager* network_;
   QNetworkReply* current_reply_;
-  boost::scoped_ptr<QFile> download_file_;
+  std::unique_ptr<QFile> download_file_;
 
   int next_row_;
 };

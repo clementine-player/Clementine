@@ -41,11 +41,11 @@ const int GstEnginePipeline::kEqBandFrequencies[] = {
   60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000};
 
 int GstEnginePipeline::sId = 1;
-GstElementDeleter* GstEnginePipeline::sElementDeleter = NULL;
+GstElementDeleter* GstEnginePipeline::sElementDeleter = nullptr;
 
 
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
-  : QObject(NULL),
+  : QObject(nullptr),
     engine_(engine),
     id_(sId++),
     valid_(false),
@@ -75,20 +75,19 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     pending_seek_nanosec_(-1),
     volume_percent_(100),
     volume_modifier_(1.0),
-    fader_(NULL),
-    pipeline_(NULL),
-    uridecodebin_(NULL),
-    audiobin_(NULL),
-    queue_(NULL),
-    audioconvert_(NULL),
-    rgvolume_(NULL),
-    rglimiter_(NULL),
-    audioconvert2_(NULL),
-    equalizer_(NULL),
-    stereo_panorama_(NULL),
-    volume_(NULL),
-    audioscale_(NULL),
-    audiosink_(NULL)
+    pipeline_(nullptr),
+    uridecodebin_(nullptr),
+    audiobin_(nullptr),
+    queue_(nullptr),
+    audioconvert_(nullptr),
+    rgvolume_(nullptr),
+    rglimiter_(nullptr),
+    audioconvert2_(nullptr),
+    equalizer_(nullptr),
+    stereo_panorama_(nullptr),
+    volume_(nullptr),
+    audioscale_(nullptr),
+    audiosink_(nullptr)
 {
   if (!sElementDeleter) {
     sElementDeleter = new GstElementDeleter;

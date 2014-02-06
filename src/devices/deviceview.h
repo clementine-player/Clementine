@@ -18,6 +18,8 @@
 #ifndef DEVICEVIEW_H
 #define DEVICEVIEW_H
 
+#include <memory>
+
 #include "core/song.h"
 #include "library/libraryview.h"
 #include "widgets/autoexpandingtreeview.h"
@@ -88,8 +90,8 @@ private:
   MergedProxyModel* merged_model_;
   QSortFilterProxyModel* sort_model_;
 
-  boost::scoped_ptr<DeviceProperties> properties_dialog_;
-  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
+  std::unique_ptr<DeviceProperties> properties_dialog_;
+  std::unique_ptr<OrganiseDialog> organise_dialog_;
 
   QMenu* device_menu_;
   QAction* eject_action_;

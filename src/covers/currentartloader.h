@@ -18,12 +18,12 @@
 #ifndef CURRENTARTLOADER_H
 #define CURRENTARTLOADER_H
 
-#include "core/song.h"
-#include "covers/albumcoverloaderoptions.h"
+#include <memory>
 
 #include <QObject>
 
-#include <boost/scoped_ptr.hpp>
+#include "core/song.h"
+#include "covers/albumcoverloaderoptions.h"
 
 class Application;
 
@@ -56,8 +56,8 @@ private:
 
   QString temp_file_pattern_;
 
-  boost::scoped_ptr<QTemporaryFile> temp_art_;
-  boost::scoped_ptr<QTemporaryFile> temp_art_thumbnail_;
+  std::unique_ptr<QTemporaryFile> temp_art_;
+  std::unique_ptr<QTemporaryFile> temp_art_thumbnail_;
   quint64 id_;
 
   Song last_song_;

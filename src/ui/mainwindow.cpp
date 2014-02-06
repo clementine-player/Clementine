@@ -174,18 +174,8 @@ MainWindow::MainWindow(Application* app,
     device_view_(new DeviceView(this)),
     song_info_view_(new SongInfoView(this)),
     artist_info_view_(new ArtistInfoView(this)),
-    settings_dialog_(NULL),
-    cover_manager_(NULL),
     equalizer_(new Equalizer),
-    error_dialog_(NULL),
     organise_dialog_(new OrganiseDialog(app_->task_manager())),
-    queue_manager_(NULL),
-#ifdef ENABLE_VISUALISATIONS
-    visualisation_(NULL),
-#endif
-#ifdef HAVE_WIIMOTEDEV
-    wiimotedev_shortcuts_(NULL),
-#endif
     playlist_menu_(new QMenu(this)),
     playlist_add_to_another_(NULL),
     playlistitem_actions_separator_(NULL),
