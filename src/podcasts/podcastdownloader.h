@@ -71,7 +71,7 @@ private slots:
   void ReloadSettings();
 
   void SubscriptionAdded(const Podcast& podcast);
-  void EpisodesAdded(const QList<PodcastEpisode>& episodes);
+  void EpisodesAdded(const PodcastEpisodeList& episodes);
 
   void ReplyReadyRead();
   void ReplyFinished();
