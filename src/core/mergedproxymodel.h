@@ -18,25 +18,13 @@
 #ifndef MERGEDPROXYMODEL_H
 #define MERGEDPROXYMODEL_H
 
+#include <memory>
+
 #include <QAbstractProxyModel>
 
-using std::placeholders::_1;
-using std::placeholders::_2;
-
-#include <boost/multi_index_container.hpp>
-#include <boost/multi_index/member.hpp>
-#include <boost/multi_index/ordered_index.hpp>
-#include <boost/multi_index/hashed_index.hpp>
-
-using boost::multi_index::multi_index_container;
-using boost::multi_index::indexed_by;
-using boost::multi_index::hashed_unique;
-using boost::multi_index::ordered_unique;
-using boost::multi_index::tag;
-using boost::multi_index::member;
-using boost::multi_index::identity;
-
 std::size_t hash_value(const QModelIndex& index);
+
+class MergedProxyModelPrivate;
 
 class MergedProxyModel : public QAbstractProxyModel {
   Q_OBJECT
@@ -105,30 +93,13 @@ class MergedProxyModel : public QAbstractProxyModel {
   void DeleteAllMappings();
   bool IsKnownModel(const QAbstractItemModel* model) const;
 
-  struct Mapping {
-    Mapping(const QModelIndex& _source_index)
-      : source_index(_source_index) {}
 
-    QModelIndex source_index;
-  };
-
-  struct tag_by_source {};
-  struct tag_by_pointer {};
-  typedef multi_index_container<
-    Mapping*,
-    indexed_by<
-      hashed_unique<tag<tag_by_source>,
-        member<Mapping, QModelIndex, &Mapping::source_index> >,
-      ordered_unique<tag<tag_by_pointer>,
-        identity<Mapping*> >
-    >
-  > MappingContainer;
-
-  MappingContainer mappings_;
   QMap<QAbstractItemModel*, QPersistentModelIndex> merge_points_;
   QAbstractItemModel* resetting_model_;
 
   QMap<QAbstractItemModel*, QModelIndex> old_merge_points_;
+
+  std::unique_ptr<MergedProxyModelPrivate> p_;
 };
 
 #endif // MERGEDPROXYMODEL_H

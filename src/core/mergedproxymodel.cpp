@@ -22,14 +22,61 @@
 
 #include <limits>
 
+// boost::multi_index still relies on these being in the global namespace.
+using std::placeholders::_1;
+using std::placeholders::_2;
+
+#include <boost/multi_index_container.hpp>
+#include <boost/multi_index/member.hpp>
+#include <boost/multi_index/hashed_index.hpp>
+#include <boost/multi_index/ordered_index.hpp>
+
+using boost::multi_index::hashed_unique;
+using boost::multi_index::identity;
+using boost::multi_index::indexed_by;
+using boost::multi_index::member;
+using boost::multi_index::multi_index_container;
+using boost::multi_index::ordered_unique;
+using boost::multi_index::tag;
+
 std::size_t hash_value(const QModelIndex& index) {
   return qHash(index);
 }
 
+namespace {
+
+struct Mapping {
+  Mapping(const QModelIndex& _source_index)
+    : source_index(_source_index) {}
+
+  QModelIndex source_index;
+};
+
+struct tag_by_source {};
+struct tag_by_pointer {};
+
+}  // namespace
+
+class MergedProxyModelPrivate {
+ private:
+  typedef multi_index_container<
+    Mapping*,
+    indexed_by<
+      hashed_unique<tag<tag_by_source>,
+        member<Mapping, QModelIndex, &Mapping::source_index> >,
+      ordered_unique<tag<tag_by_pointer>,
+        identity<Mapping*> >
+    >
+  > MappingContainer;
+
+ public:
+  MappingContainer mappings_;
+};
+
 MergedProxyModel::MergedProxyModel(QObject* parent)
   : QAbstractProxyModel(parent),
-    resetting_model_(nullptr)
-{
+    resetting_model_(nullptr),
+    p_(new MergedProxyModelPrivate) {
 }
 
 MergedProxyModel::~MergedProxyModel() {
@@ -37,10 +84,8 @@ MergedProxyModel::~MergedProxyModel() {
 }
 
 void MergedProxyModel::DeleteAllMappings() {
-  MappingContainer::index<tag_by_pointer>::type::iterator begin =
-      mappings_.get<tag_by_pointer>().begin();
-  MappingContainer::index<tag_by_pointer>::type::iterator end =
-      mappings_.get<tag_by_pointer>().end();
+  const auto& begin = p_->mappings_.get<tag_by_pointer>().begin();
+  const auto& end = p_->mappings_.get<tag_by_pointer>().end();
   qDeleteAll(begin, end);
 }
 
@@ -88,14 +133,12 @@ void MergedProxyModel::RemoveSubModel(const QModelIndex &source_parent) {
   resetting_model_ = nullptr;
 
   // Delete all the mappings that reference the submodel
-  MappingContainer::index<tag_by_pointer>::type::iterator it =
-      mappings_.get<tag_by_pointer>().begin();
-  MappingContainer::index<tag_by_pointer>::type::iterator end =
-      mappings_.get<tag_by_pointer>().end();
+  auto it = p_->mappings_.get<tag_by_pointer>().begin();
+  auto end = p_->mappings_.get<tag_by_pointer>().end();
   while (it != end) {
     if ((*it)->source_index.model() == submodel) {
       delete *it;
-      it = mappings_.get<tag_by_pointer>().erase(it);
+      it = p_->mappings_.get<tag_by_pointer>().erase(it);
     } else {
       ++it;
     }
@@ -145,7 +188,7 @@ void MergedProxyModel::SourceModelReset() {
   DeleteAllMappings();
 
   // Clear the containers
-  mappings_.clear();
+  p_->mappings_.clear();
   merge_points_.clear();
 
   // Reset the proxy
@@ -170,14 +213,12 @@ void MergedProxyModel::SubModelReset() {
   resetting_model_ = nullptr;
 
   // Delete all the mappings that reference the submodel
-  MappingContainer::index<tag_by_pointer>::type::iterator it =
-      mappings_.get<tag_by_pointer>().begin();
-  MappingContainer::index<tag_by_pointer>::type::iterator end =
-      mappings_.get<tag_by_pointer>().end();
+  auto it = p_->mappings_.get<tag_by_pointer>().begin();
+  auto end = p_->mappings_.get<tag_by_pointer>().end();
   while (it != end) {
     if ((*it)->source_index.model() == submodel) {
       delete *it;
-      it = mappings_.get<tag_by_pointer>().erase(it);
+      it = p_->mappings_.get<tag_by_pointer>().erase(it);
     } else {
       ++it;
     }
@@ -227,8 +268,8 @@ QModelIndex MergedProxyModel::mapToSource(const QModelIndex& proxy_index) const 
     return QModelIndex();
 
   Mapping* mapping = static_cast<Mapping*>(proxy_index.internalPointer());
-  if (mappings_.get<tag_by_pointer>().find(mapping) ==
-      mappings_.get<tag_by_pointer>().end())
+  if (p_->mappings_.get<tag_by_pointer>().find(mapping) ==
+      p_->mappings_.get<tag_by_pointer>().end())
     return QModelIndex();
   if (mapping->source_index.model() == resetting_model_)
     return QModelIndex();
@@ -243,14 +284,14 @@ QModelIndex MergedProxyModel::mapFromSource(const QModelIndex& source_index) con
     return QModelIndex();
 
   // Add a mapping if we don't have one already
-  MappingContainer::index<tag_by_source>::type::iterator it =
-      mappings_.get<tag_by_source>().find(source_index);
+  const auto& it =
+      p_->mappings_.get<tag_by_source>().find(source_index);
   Mapping* mapping;
-  if (it != mappings_.get<tag_by_source>().end()) {
+  if (it != p_->mappings_.get<tag_by_source>().end()) {
     mapping = *it;
   } else {
     mapping = new Mapping(source_index);
-    const_cast<MergedProxyModel*>(this)->mappings_.insert(mapping);
+    const_cast<MergedProxyModel*>(this)->p_->mappings_.insert(mapping);
   }
 
   return createIndex(source_index.row(), source_index.column(), mapping);
