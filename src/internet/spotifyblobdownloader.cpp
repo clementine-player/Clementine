@@ -15,8 +15,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "spotifyblobdownloader.h"
+
+#include "config.h"
 #include "spotifyservice.h"
 #include "core/logging.h"
 #include "core/network.h"
@@ -31,6 +32,10 @@
 #ifdef HAVE_QCA
   #include <QtCrypto>
 #endif // HAVE_QCA
+
+#ifdef Q_OS_UNIX
+  #include <unistd.h>
+#endif
 
 const char* SpotifyBlobDownloader::kSignatureSuffix = ".sha1";
 
