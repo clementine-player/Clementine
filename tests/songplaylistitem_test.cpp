@@ -15,11 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include "playlist/songplaylistitem.h"
 #include "test_utils.h"
 
 #include <gtest/gtest.h>
-#include <boost/scoped_ptr.hpp>
 
 #include <QTemporaryFile>
 #include <QFileInfo>
@@ -30,7 +31,7 @@ namespace {
 class SongPlaylistItemTest : public ::testing::TestWithParam<const char*> {
  protected:
   SongPlaylistItemTest() : temp_file_(GetParam()) {}
-  
+
   void SetUp() {
     // SongPlaylistItem::Url() checks if the file exists, so we need a real file
     temp_file_.open();
@@ -49,7 +50,7 @@ class SongPlaylistItemTest : public ::testing::TestWithParam<const char*> {
   Song song_;
   QTemporaryFile temp_file_;
   QString absolute_file_name_;
-  boost::scoped_ptr<SongPlaylistItem> item_;
+  std::unique_ptr<SongPlaylistItem> item_;
 };
 
 INSTANTIATE_TEST_CASE_P(RealFiles, SongPlaylistItemTest, testing::Values(

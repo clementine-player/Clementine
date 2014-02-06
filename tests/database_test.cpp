@@ -15,12 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
 #include "core/database.h"
-
-#include <boost/scoped_ptr.hpp>
 
 #include <QtDebug>
 #include <QSqlQuery>
@@ -32,7 +32,7 @@ class DatabaseTest : public ::testing::Test {
     database_.reset(new MemoryDatabase);
   }
 
-  boost::scoped_ptr<Database> database_;
+  std::unique_ptr<Database> database_;
 };
 
 TEST_F(DatabaseTest, DatabaseInitialises) {

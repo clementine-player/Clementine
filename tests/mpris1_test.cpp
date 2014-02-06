@@ -15,6 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include "core/encoding.h"
 #include "core/mpris1.h"
 #include "core/song.h"
@@ -64,14 +66,14 @@ protected:
   MockPlayer player_;
   MockPlaylistManager playlists_;
 
-  boost::scoped_ptr<PlaylistSequence> sequence_;
+  std::unique_ptr<PlaylistSequence> sequence_;
 };
 
 TEST_F(Mpris1BasicTest, CreatesDBusService) {
   EXPECT_FALSE(QDBusConnection::sessionBus().interface()->
                isServiceRegistered(service_name()));
 
-  boost::scoped_ptr<mpris::Mpris1> mpris(
+  std::unique_ptr<mpris::Mpris1> mpris(
       new mpris::Mpris1(&player_, NULL, NULL, service_name()));
   EXPECT_TRUE(QDBusConnection::sessionBus().interface()->
               isServiceRegistered(service_name()));
@@ -90,7 +92,7 @@ protected:
     mpris_.reset(new mpris::Mpris1(&player_, NULL, NULL, service_name()));
   }
 
-  boost::scoped_ptr<mpris::Mpris1> mpris_;
+  std::unique_ptr<mpris::Mpris1> mpris_;
 };
 
 TEST_F(Mpris1Test, CorrectNameAndVersion) {

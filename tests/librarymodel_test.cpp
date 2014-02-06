@@ -15,6 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
@@ -70,10 +72,10 @@ class LibraryModelTest : public ::testing::Test {
     return AddSong(song);
   }
 
-  boost::shared_ptr<Database> database_;
-  boost::scoped_ptr<LibraryBackend> backend_;
-  boost::scoped_ptr<LibraryModel> model_;
-  boost::scoped_ptr<QSortFilterProxyModel> model_sorted_;
+  std::shared_ptr<Database> database_;
+  std::unique_ptr<LibraryBackend> backend_;
+  std::unique_ptr<LibraryModel> model_;
+  std::unique_ptr<QSortFilterProxyModel> model_sorted_;
 
   bool added_dir_;
 };

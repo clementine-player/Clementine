@@ -15,13 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "test_utils.h"
-#include "gmock/gmock-matchers.h"
-#include "gtest/gtest.h"
-#include "mock_librarybackend.h"
-
-#include "core/songloader.h"
-#include "engines/gstengine.h"
+#include <memory>
 
 #include <QBuffer>
 #include <QDir>
@@ -29,8 +23,15 @@
 #include <QSignalSpy>
 #include <QtDebug>
 
-#include <boost/scoped_ptr.hpp>
 #include <cstdlib>
+
+#include "test_utils.h"
+#include "gmock/gmock-matchers.h"
+#include "gtest/gtest.h"
+#include "mock_librarybackend.h"
+
+#include "core/songloader.h"
+#include "engines/gstengine.h"
 
 using ::testing::_;
 using ::testing::Return;
@@ -63,8 +64,8 @@ protected:
   static const char* kRemoteUrl;
   static GstEngine* sGstEngine;
 
-  boost::scoped_ptr<SongLoader> loader_;
-  boost::scoped_ptr<MockLibraryBackend> library_;
+  std::unique_ptr<SongLoader> loader_;
+  std::unique_ptr<MockLibraryBackend> library_;
 };
 
 const char* SongLoaderTest::kRemoteUrl = "http://remotetestdata.clementine-player.org";

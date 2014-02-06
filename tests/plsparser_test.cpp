@@ -15,6 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
@@ -27,9 +29,7 @@
 #include <QUrl>
 #include <QtDebug>
 
-#include <boost/shared_ptr.hpp>
-
-using boost::shared_ptr;
+using std::shared_ptr;
 
 class PLSParserTest : public ::testing::Test {
 protected:
