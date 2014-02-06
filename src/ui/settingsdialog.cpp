@@ -118,7 +118,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
     app_(app),
     model_(app_->library_model()->directory_model()),
     gst_engine_(qobject_cast<GstEngine*>(app_->player()->engine())),
-    song_info_view_(NULL),
+    song_info_view_(nullptr),
     streams_(streams),
     global_search_(app_->global_search()),
     appearance_(app_->appearance()),

@@ -79,7 +79,7 @@ void DigitallyImportedUrlHandler::LoadPlaylistFinished(QIODevice* device) {
   CancelTask();
 
   // Try to parse the playlist
-  PlaylistParser parser(NULL);
+  PlaylistParser parser(nullptr);
   QList<Song> songs = parser.LoadFromDevice(device);
 
   qLog(Info) << "Loading station finished, got" << songs.count() << "songs";

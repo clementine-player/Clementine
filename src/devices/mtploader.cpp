@@ -28,7 +28,7 @@
 MtpLoader::MtpLoader(
     const QUrl& url, TaskManager* task_manager,
     LibraryBackend* backend, std::shared_ptr<ConnectedDevice> device)
-  : QObject(NULL),
+  : QObject(nullptr),
     device_(device),
     url_(url),
     task_manager_(task_manager),
@@ -61,7 +61,8 @@ bool MtpLoader::TryLoad() {
 
   // Load the list of songs on the device
   SongList songs;
-  LIBMTP_track_t* tracks = LIBMTP_Get_Tracklisting_With_Callback(dev.device(), NULL, NULL);
+  LIBMTP_track_t* tracks = LIBMTP_Get_Tracklisting_With_Callback(
+      dev.device(), nullptr, nullptr);
   while (tracks) {
     LIBMTP_track_t* track = tracks;
 

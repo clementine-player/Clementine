@@ -37,7 +37,7 @@ MtpDevice::MtpDevice(const QUrl& url, DeviceLister* lister,
                      int database_id, bool first_time)
   : ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
     loader_thread_(new QThread(this)),
-    loader_(NULL)
+    loader_(nullptr)
 {
   if (!sInitialisedLibMTP) {
     LIBMTP_Init();
@@ -67,7 +67,7 @@ void MtpDevice::Init() {
 
 void MtpDevice::LoadFinished() {
   loader_->deleteLater();
-  loader_ = NULL;
+  loader_ = nullptr;
   db_busy_.unlock();
 }
 
@@ -147,7 +147,7 @@ void MtpDevice::FinishCopy(bool success) {
 }
 
 void MtpDevice::StartDelete() {
-  StartCopy(NULL);
+  StartCopy(nullptr);
 }
 
 bool MtpDevice::DeleteFromStorage(const DeleteJob& job) {
@@ -187,7 +187,7 @@ bool MtpDevice::GetSupportedFiletypes(QList<Song::FileType>* ret) {
 }
 
 bool MtpDevice::GetSupportedFiletypes(QList<Song::FileType>* ret, LIBMTP_mtpdevice_t* device) {
-  uint16_t* list = NULL;
+  uint16_t* list = nullptr;
   uint16_t length = 0;
 
   if (LIBMTP_Get_Supported_Filetypes(device, &list, &length)

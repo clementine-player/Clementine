@@ -66,7 +66,7 @@ SongLoader::SongLoader(LibraryBackendInterface* library,
     timeout_(kDefaultTimeout),
     state_(WaitingForType),
     success_(false),
-    parser_(NULL),
+    parser_(nullptr),
     is_podcast_(false),
     library_(library),
     player_(player)
@@ -129,8 +129,8 @@ SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
 SongLoader::Result SongLoader::LoadAudioCD() {
 #ifdef HAVE_AUDIOCD
   // Create gstreamer cdda element
-  GstElement* cdda = gst_element_make_from_uri (GST_URI_SRC, "cdda://", NULL);
-  if (cdda == NULL) {
+  GstElement* cdda = gst_element_make_from_uri (GST_URI_SRC, "cdda://", nullptr);
+  if (cdda == nullptr) {
     qLog(Error) << "Error while creating CDDA GstElement";
     return Error;
   }
@@ -180,9 +180,9 @@ SongLoader::Result SongLoader::LoadAudioCD() {
   GstMessage *msg = gst_bus_timed_pop_filtered (GST_ELEMENT_BUS (pipe),
                     GST_CLOCK_TIME_NONE,
                     GST_MESSAGE_TAG);
-  GstTagList *tags = NULL;
+  GstTagList *tags = nullptr;
   gst_message_parse_tag (msg, &tags);
-  char *string_mb = NULL;
+  char *string_mb = nullptr;
   if (gst_tag_list_get_string (tags, GST_TAG_CDDA_MUSICBRAINZ_DISCID, &string_mb)) {
     QString musicbrainz_discid(string_mb);
     qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
@@ -463,22 +463,22 @@ SongLoader::Result SongLoader::LoadRemote() {
 
   // Create the pipeline - it gets unreffed if it goes out of scope
   std::shared_ptr<GstElement> pipeline(
-      gst_pipeline_new(NULL), std::bind(&gst_object_unref, _1));
+      gst_pipeline_new(nullptr), std::bind(&gst_object_unref, _1));
 
   // Create the source element automatically based on the URL
   GstElement* source = gst_element_make_from_uri(
-      GST_URI_SRC, url_.toEncoded().constData(), NULL);
+      GST_URI_SRC, url_.toEncoded().constData(), nullptr);
   if (!source) {
     qLog(Warning) << "Couldn't create gstreamer source element for" << url_.toString();
     return Error;
   }
 
   // Create the other elements and link them up
-  GstElement* typefind = gst_element_factory_make("typefind", NULL);
-  GstElement* fakesink = gst_element_factory_make("fakesink", NULL);
+  GstElement* typefind = gst_element_factory_make("typefind", nullptr);
+  GstElement* fakesink = gst_element_factory_make("fakesink", nullptr);
 
-  gst_bin_add_many(GST_BIN(pipeline.get()), source, typefind, fakesink, NULL);
-  gst_element_link_many(source, typefind, fakesink, NULL);
+  gst_bin_add_many(GST_BIN(pipeline.get()), source, typefind, fakesink, nullptr);
+  gst_element_link_many(source, typefind, fakesink, nullptr);
 
   // Connect callbacks
   GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline.get()));
@@ -650,7 +650,7 @@ void SongLoader::MagicReady() {
     if (parser_->name() == "ASX/INI" && url_.scheme() == "http") {
       // This is actually a weird MS-WMSP stream. Changing the protocol to MMS from
       // HTTP makes it playable.
-      parser_ = NULL;
+      parser_ = nullptr;
       url_.setScheme("mms");
       StopTypefindAsync(true);
     }

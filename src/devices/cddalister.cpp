@@ -105,7 +105,7 @@ void CddaLister::Init() {
     qLog(Debug) << "No CD devices found";
     return;
   }
-  for (; *devices != NULL; ++devices) {
+  for (; *devices != nullptr; ++devices) {
     QString device(*devices);
     QFileInfo device_info(device);
     if (device_info.isSymLink()) {

@@ -35,8 +35,8 @@ static const int kDecodeChannels = 1;
 
 Chromaprinter::Chromaprinter(const QString& filename)
   : filename_(filename),
-    event_loop_(NULL),
-    convert_element_(NULL),
+    event_loop_(nullptr),
+    convert_element_(nullptr),
     finishing_(false) {
 }
 
@@ -82,8 +82,8 @@ QString Chromaprinter::CreateFingerprint() {
   convert_element_ = convert;
 
   // Connect the elements
-  gst_element_link_many(src, decode, NULL);
-  gst_element_link_many(convert, resample, NULL);
+  gst_element_link_many(src, decode, nullptr);
+  gst_element_link_many(convert, resample, nullptr);
 
   // Chromaprint expects mono floats at a sample rate of 11025Hz.
   GstCaps* caps = gst_caps_new_simple(
@@ -91,19 +91,19 @@ QString Chromaprinter::CreateFingerprint() {
       "width", G_TYPE_INT, 16,
       "channels", G_TYPE_INT, kDecodeChannels,
       "rate", G_TYPE_INT, kDecodeRate,
-      NULL);
+      nullptr);
   gst_element_link_filtered(resample, sink, caps);
   gst_caps_unref(caps);
 
   GstAppSinkCallbacks callbacks;
   memset(&callbacks, 0, sizeof(callbacks));
   callbacks.new_buffer = NewBufferCallback;
-  gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(sink), &callbacks, this, NULL);
-  g_object_set(G_OBJECT(sink), "sync", FALSE, NULL);
-  g_object_set(G_OBJECT(sink), "emit-signals", TRUE, NULL);
+  gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(sink), &callbacks, this, nullptr);
+  g_object_set(G_OBJECT(sink), "sync", FALSE, nullptr);
+  g_object_set(G_OBJECT(sink), "emit-signals", TRUE, nullptr);
 
   // Set the filename
-  g_object_set(src, "location", filename_.toUtf8().constData(), NULL);
+  g_object_set(src, "location", filename_.toUtf8().constData(), nullptr);
 
   // Connect signals
   CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, this);
@@ -130,12 +130,12 @@ QString Chromaprinter::CreateFingerprint() {
   chromaprint_feed(chromaprint, reinterpret_cast<void*>(data.data()), data.size() / 2);
   chromaprint_finish(chromaprint);
 
-  void* fprint = NULL;
+  void* fprint = nullptr;
   int size = 0;
   int ret = chromaprint_get_raw_fingerprint(chromaprint, &fprint, &size);
   QByteArray fingerprint;
   if (ret == 1) {
-    void* encoded = NULL;
+    void* encoded = nullptr;
     int encoded_size = 0;
     chromaprint_encode_fingerprint(
         fprint, size, CHROMAPRINT_ALGORITHM_DEFAULT, &encoded, &encoded_size, 1);
@@ -151,9 +151,11 @@ QString Chromaprinter::CreateFingerprint() {
   qLog(Debug) << "Decode time:" << decode_time << "Codegen time:" << codegen_time;
 
   // Cleanup
-  callbacks.new_buffer = NULL;
-  gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(sink), &callbacks, this, NULL);
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
+  callbacks.new_buffer = nullptr;
+  gst_app_sink_set_callbacks(
+      reinterpret_cast<GstAppSink*>(sink), &callbacks, this, nullptr);
+  gst_bus_set_sync_handler(
+      gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), nullptr, nullptr);
   g_source_remove(bus_callback_id);
   gst_element_set_state(pipeline_, GST_STATE_NULL);
   gst_object_unref(pipeline_);

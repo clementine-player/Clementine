@@ -145,7 +145,7 @@ SongInfoProvider* SongInfoView::ProviderByName(const QString& name) const {
         return provider;
     }
   }
-  return NULL;
+  return nullptr;
 }
 
 namespace {

@@ -431,7 +431,7 @@ FilterTree* FilterParser::createSearchTermTreeNode(
   }
   // here comes a mess :/
   // well, not that much of a mess, but so many options -_-
-  SearchTermComparator* cmp = NULL;
+  SearchTermComparator* cmp = nullptr;
   if (prefix == "!=" || prefix == "<>") {
     cmp = new NeComparator(search);
   } else if (!col.isEmpty() && columns_.contains(col) &&

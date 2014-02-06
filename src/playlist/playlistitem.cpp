@@ -48,7 +48,7 @@ PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
     return new InternetPlaylistItem("Internet");
 
   qLog(Warning) << "Invalid PlaylistItem type:" << type;
-  return NULL;
+  return nullptr;
 }
 
 PlaylistItem* PlaylistItem::NewFromSongsTable(const QString& table, const Song& song) {
@@ -60,7 +60,7 @@ PlaylistItem* PlaylistItem::NewFromSongsTable(const QString& table, const Song& 
     return new JamendoPlaylistItem(song);
 
   qLog(Warning) << "Invalid PlaylistItem songs table:" << table;
-  return NULL;
+  return nullptr;
 }
 
 void PlaylistItem::BindToQuery(QSqlQuery* query) const {

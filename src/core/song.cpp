@@ -717,7 +717,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->composer = strdup(d->composer_.toUtf8().constData());
     track->genre = strdup(d->genre_.toUtf8().constData());
     track->title = strdup(d->title_.toUtf8().constData());
-    track->date = NULL;
+    track->date = nullptr;
 
     track->filename = strdup(d->basefilename_.toUtf8().constData());
 

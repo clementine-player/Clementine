@@ -4,7 +4,7 @@
 
 AnalyzerBase::AnalyzerBase(QWidget* parent)
     : QGLWidget(parent),
-      engine_(NULL) {
+      engine_(nullptr) {
 }
 
 void AnalyzerBase::set_engine(Engine::Base* engine) {

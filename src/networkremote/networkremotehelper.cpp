@@ -20,7 +20,7 @@
 #include "networkremote.h"
 #include "networkremotehelper.h"
 
-NetworkRemoteHelper* NetworkRemoteHelper::sInstance = NULL;
+NetworkRemoteHelper* NetworkRemoteHelper::sInstance = nullptr;
 
 NetworkRemoteHelper::NetworkRemoteHelper(Application* app)
   : app_(app)
@@ -56,7 +56,7 @@ void NetworkRemoteHelper::ReloadSettings() {
 NetworkRemoteHelper* NetworkRemoteHelper::Instance() {
   if (!sInstance) {
     // normally he shouldn't go here. Only for safety
-    return NULL;
+    return nullptr;
   }
   return sInstance;
 }

@@ -46,15 +46,15 @@ const char* AlbumCoverChoiceController::kSaveImageFileFilter =
 const char* AlbumCoverChoiceController::kAllFilesFilter =
   QT_TR_NOOP("All files (*)");
 
-QSet<QString>* AlbumCoverChoiceController::sImageExtensions = NULL;
+QSet<QString>* AlbumCoverChoiceController::sImageExtensions = nullptr;
 
 AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
   : QWidget(parent),
-    app_(NULL),
-    cover_searcher_(NULL),
-    cover_fetcher_(NULL),
-    save_file_dialog_(NULL),
-    cover_from_url_dialog_(NULL)
+    app_(nullptr),
+    cover_searcher_(nullptr),
+    cover_fetcher_(nullptr),
+    save_file_dialog_(nullptr),
+    cover_from_url_dialog_(nullptr)
 {
   cover_from_file_ = new QAction(IconLoader::Load("document-open"), tr("Load cover from disk..."), this);
   cover_to_file_ = new QAction(IconLoader::Load("document-save"), tr("Save cover to disk..."), this);

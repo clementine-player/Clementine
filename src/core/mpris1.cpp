@@ -41,9 +41,9 @@ Mpris1::Mpris1(Application* app, QObject* parent,
                const QString& dbus_service_name)
   : QObject(parent),
     dbus_service_name_(dbus_service_name),
-    root_(NULL),
-    player_(NULL),
-    tracklist_(NULL)
+    root_(nullptr),
+    player_(nullptr),
+    tracklist_(nullptr)
 {
   qDBusRegisterMetaType<DBusStatus>();
   qDBusRegisterMetaType<Version>();

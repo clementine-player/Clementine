@@ -41,10 +41,10 @@ using smart_playlists::GeneratorPtr;
 PlaylistManager::PlaylistManager(Application* app, QObject *parent)
   : PlaylistManagerInterface(app, parent),
     app_(app),
-    playlist_backend_(NULL),
-    library_backend_(NULL),
-    sequence_(NULL),
-    parser_(NULL),
+    playlist_backend_(nullptr),
+    library_backend_(nullptr),
+    sequence_(nullptr),
+    parser_(nullptr),
     current_(-1),
     active_(-1)
 {
@@ -237,7 +237,7 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
   QString default_filter = parser()->default_filter();
 
   filename = QFileDialog::getSaveFileName(
-      NULL, tr("Save playlist", "Title of the playlist save dialog."), filename,
+      nullptr, tr("Save playlist", "Title of the playlist save dialog."), filename,
       parser()->filters(), &default_filter);
 
   if (filename.isNull())

@@ -73,7 +73,7 @@ void GPodderSearchPage::SearchFailed(mygpo::PodcastListPtr list) {
   model()->clear();
 
   if (QMessageBox::warning(
-        NULL, tr("Failed to fetch podcasts"),
+        nullptr, tr("Failed to fetch podcasts"),
         tr("There was a problem communicating with gpodder.net"),
         QMessageBox::Retry | QMessageBox::Close,
         QMessageBox::Retry) != QMessageBox::Retry) {

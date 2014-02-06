@@ -66,7 +66,7 @@ SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_SmartPlaylistSearchTermWidget),
     library_(library),
-    overlay_(NULL),
+    overlay_(nullptr),
     animation_(new QPropertyAnimation(this, "overlay_opacity", this)),
     active_(true),
     initialized_(false),
@@ -142,14 +142,14 @@ void SearchTermWidget::FieldChanged(int index) {
   }
 
   // Show the correct value editor
-  QWidget* page = NULL;
+  QWidget* page = nullptr;
   switch (type) {
     case SearchTerm::Type_Time:    page = ui_->page_time;   break;
     case SearchTerm::Type_Number:  page = ui_->page_number; break;
     case SearchTerm::Type_Date:    page = ui_->page_date;   break;
     case SearchTerm::Type_Rating:  page = ui_->page_rating; break;
     case SearchTerm::Type_Text:    page = ui_->page_text;   break;
-    case SearchTerm::Type_Invalid: page = NULL;             break;
+    case SearchTerm::Type_Invalid: page = nullptr;          break;
   }
   ui_->value_stack->setCurrentWidget(page);
 
@@ -164,7 +164,7 @@ void SearchTermWidget::FieldChanged(int index) {
     break;
 
   default:
-    ui_->value_text->setCompleter(NULL);
+    ui_->value_text->setCompleter(nullptr);
   }
 
   emit Changed();
@@ -174,7 +174,7 @@ void SearchTermWidget::OpChanged(int index) {
   // We need to change the page only in the following case
   if ((ui_->value_stack->currentWidget() == ui_->page_date) || (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
       (ui_->value_stack->currentWidget() == ui_->page_date_relative)) {
-      QWidget* page = NULL;
+      QWidget* page = nullptr;
       if (index == 4 || index == 5) {
         page = ui_->page_date_numeric;
       } else if (index == 6) {
@@ -190,7 +190,7 @@ void SearchTermWidget::OpChanged(int index) {
 void SearchTermWidget::SetActive(bool active) {
   active_ = active;
   delete overlay_;
-  overlay_ = NULL;
+  overlay_ = nullptr;
 
   if (!active) {
     overlay_ = new Overlay(this);

@@ -33,8 +33,8 @@ const int kSearchAlbumLimit = 20;
 
 SpotifySearchProvider::SpotifySearchProvider(Application* app, QObject* parent)
   : SearchProvider(app, parent),
-    server_(NULL),
-    service_(NULL)
+    server_(nullptr),
+    service_(nullptr)
 {
   Init("Spotify", "spotify", QIcon(":icons/32x32/spotify.png"),
        WantsDelayedQueries | WantsSerialisedArtQueries | ArtIsProbablyRemote |
@@ -49,7 +49,7 @@ SpotifyServer* SpotifySearchProvider::server() {
     service_ = InternetModel::Service<SpotifyService>();
 
   if (service_->login_state() != SpotifyService::LoginState_LoggedIn)
-    return NULL;
+    return nullptr;
 
   server_ = service_->server();
   connect(server_, SIGNAL(SearchResults(pb::spotify::SearchResponse)),
@@ -66,7 +66,7 @@ SpotifyServer* SpotifySearchProvider::server() {
 }
 
 void SpotifySearchProvider::ServerDestroyed() {
-  server_ = NULL;
+  server_ = nullptr;
 }
 
 void SpotifySearchProvider::SearchAsync(int id, const QString& query) {

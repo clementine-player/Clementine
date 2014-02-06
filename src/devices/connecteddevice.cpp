@@ -39,8 +39,8 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
     unique_id_(unique_id),
     database_id_(database_id),
     manager_(manager),
-    backend_(NULL),
-    model_(NULL),
+    backend_(nullptr),
+    model_(nullptr),
     song_count_(0)
 {
   qLog(Info) << "connected" << url << unique_id << first_time;

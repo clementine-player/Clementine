@@ -137,7 +137,7 @@ void IncreaseFDLimit() {
   // getrlimit() lies about the hard limit so we have to check sysctl.
   int max_fd = 0;
   size_t len = sizeof(max_fd);
-  sysctlbyname("kern.maxfilesperproc", &max_fd, &len, NULL, 0);
+  sysctlbyname("kern.maxfilesperproc", &max_fd, &len, nullptr, 0);
 
   limit.rlim_cur = max_fd;
   int ret = setrlimit(RLIMIT_NOFILE, &limit);
@@ -309,14 +309,14 @@ int main(int argc, char *argv[]) {
   // Initialise logging
   logging::Init();
   logging::SetLevels(options.log_levels());
-  g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), NULL);
+  g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), nullptr);
 
   // Output the version, so when people attach log output to bug reports they
   // don't have to tell us which version they're using.
   qLog(Info) << "Clementine" << CLEMENTINE_VERSION_DISPLAY;
 
   // Seed the random number generators.
-  time_t t = time(NULL);
+  time_t t = time(nullptr);
   srand(t);
   qsrand(t);
 

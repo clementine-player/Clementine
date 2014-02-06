@@ -536,7 +536,7 @@ void EditTagDialog::ResetField() {
 Song* EditTagDialog::GetFirstSelected() {
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
   if (sel.isEmpty())
-    return NULL;
+    return nullptr;
   return &data_[sel.first().row()].original_;
 }
 

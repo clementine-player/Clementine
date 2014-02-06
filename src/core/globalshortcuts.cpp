@@ -35,8 +35,8 @@ const char* GlobalShortcuts::kSettingsGroup = "Shortcuts";
 
 GlobalShortcuts::GlobalShortcuts(QWidget *parent)
   : QWidget(parent),
-    gnome_backend_(NULL),
-    system_backend_(NULL),
+    gnome_backend_(nullptr),
+    system_backend_(nullptr),
     use_gnome_(false),
     rating_signals_mapper_(new QSignalMapper(this))
 {

@@ -52,7 +52,7 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
     app_(app),
     engine_(app_->global_search()),
     ui_(new Ui_GlobalSearchView),
-    context_menu_(NULL),
+    context_menu_(nullptr),
     last_search_id_(0),
     front_model_(new GlobalSearchModel(engine_, this)),
     back_model_(new GlobalSearchModel(engine_, this)),
@@ -358,7 +358,7 @@ void GlobalSearchView::ArtLoaded(int id, const QPixmap& pixmap) {
 
 MimeData* GlobalSearchView::SelectedMimeData() {
   if (!ui_->results->selectionModel())
-    return NULL;
+    return nullptr;
 
   // Get all selected model indexes
   QModelIndexList indexes = ui_->results->selectionModel()->selectedRows();
@@ -377,7 +377,7 @@ MimeData* GlobalSearchView::SelectedMimeData() {
 
   // Still got nothing?  Give up.
   if (indexes.isEmpty()) {
-    return NULL;
+    return nullptr;
   }
 
   // Get items for these indexes

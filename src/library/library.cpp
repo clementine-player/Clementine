@@ -37,10 +37,10 @@ const char* Library::kFtsTable = "songs_fts";
 Library::Library(Application* app, QObject *parent)
   : QObject(parent),
     app_(app),
-    backend_(NULL),
-    model_(NULL),
-    watcher_(NULL),
-    watcher_thread_(NULL)
+    backend_(nullptr),
+    model_(nullptr),
+    watcher_(nullptr),
+    watcher_thread_(nullptr)
 {
   backend_ = new LibraryBackend;
   backend()->moveToThread(app->database()->thread());

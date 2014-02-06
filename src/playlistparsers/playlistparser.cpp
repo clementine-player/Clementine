@@ -89,7 +89,7 @@ ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
     if (p->file_extensions().contains(suffix))
       return p;
   }
-  return NULL;
+  return nullptr;
 }
 
 ParserBase* PlaylistParser::ParserForMagic(const QByteArray& data,
@@ -99,7 +99,7 @@ ParserBase* PlaylistParser::ParserForMagic(const QByteArray& data,
         p->TryMagic(data))
       return p;
   }
-  return NULL;
+  return nullptr;
 }
 
 SongList PlaylistParser::LoadFromFile(const QString& filename) const {

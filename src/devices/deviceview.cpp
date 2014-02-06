@@ -146,12 +146,12 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
 
 DeviceView::DeviceView(QWidget* parent)
   : AutoExpandingTreeView(parent),
-    app_(NULL),
-    merged_model_(NULL),
-    sort_model_(NULL),
+    app_(nullptr),
+    merged_model_(nullptr),
+    sort_model_(nullptr),
     properties_dialog_(new DeviceProperties),
-    device_menu_(NULL),
-    library_menu_(NULL)
+    device_menu_(nullptr),
+    library_menu_(nullptr)
 {
   setItemDelegate(new DeviceItemDelegate(this));
   SetExpandOnReset(false);
@@ -167,7 +167,7 @@ DeviceView::~DeviceView() {
 }
 
 void DeviceView::SetApplication(Application* app) {
-  Q_ASSERT(app_ == NULL);
+  Q_ASSERT(app_ == nullptr);
   app_ = app;
 
   connect(app_->device_manager(), SIGNAL(DeviceConnected(int)), SLOT(DeviceConnected(int)));

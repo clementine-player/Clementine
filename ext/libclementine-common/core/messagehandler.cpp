@@ -27,9 +27,9 @@
 
 _MessageHandlerBase::_MessageHandlerBase(QIODevice* device, QObject* parent)
   : QObject(parent),
-    device_(NULL),
-    flush_abstract_socket_(NULL),
-    flush_local_socket_(NULL),
+    device_(nullptr),
+    flush_abstract_socket_(nullptr),
+    flush_local_socket_(nullptr),
     reading_protobuf_(false),
     expected_length_(0),
     is_device_closed_(false) {

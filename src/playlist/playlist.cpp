@@ -114,7 +114,7 @@ Playlist::Playlist(PlaylistBackend* backend,
     scrobble_point_(-1),
     lastfm_status_(LastFM_New),
     have_incremented_playcount_(false),
-    playlist_sequence_(NULL),
+    playlist_sequence_(nullptr),
     ignore_sorting_(false),
     undo_stack_(new QUndoStack(this)),
     special_type_(special_type)
@@ -718,7 +718,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
 
     // Get the list of rows that were moved
     QList<int> source_rows;
-    Playlist* source_playlist = NULL;
+    Playlist* source_playlist = nullptr;
     qint64 pid = 0;
     qint64 own_pid = QCoreApplication::applicationPid();
 
@@ -1116,7 +1116,7 @@ void Playlist::UpdateItems(const SongList& songs) {
 
 QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
   if (indexes.isEmpty())
-    return NULL;
+    return nullptr;
   
   // We only want one index per row, but we can't just take column 0 because
   // the user might have hidden it.
@@ -1377,7 +1377,7 @@ void Playlist::ItemsLoaded() {
     GeneratorPtr gen = Generator::Create(p.dynamic_type);
     if (gen) {
       // Hack: can't think of a better way to get the right backend
-      LibraryBackend* backend = NULL;
+      LibraryBackend* backend = nullptr;
       if (p.dynamic_backend == library_->songs_table())
         backend = library_;
       else if (p.dynamic_backend == MagnatuneService::kSongsTable)

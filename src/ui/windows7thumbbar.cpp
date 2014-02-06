@@ -37,7 +37,7 @@ Windows7ThumbBar::Windows7ThumbBar(QWidget* widget)
   : QObject(widget),
     widget_(widget),
     button_created_message_id_(0),
-    taskbar_list_(NULL)
+    taskbar_list_(nullptr)
 {
 }
 
@@ -93,13 +93,13 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
     if (taskbar_list_) {
       qLog(Debug) << "Releasing old taskbar list";
       reinterpret_cast<ITaskbarList3*>(taskbar_list_)->Release();
-      taskbar_list_ = NULL;
+      taskbar_list_ = nullptr;
     }
 
     // Copied from win7 SDK shobjidl.h
     static const GUID CLSID_ITaskbarList ={ 0x56FDF344,0xFD6D,0x11d0,{0x95,0x8A,0x00,0x60,0x97,0xC9,0xA0,0x90}};
     // Create the taskbar list
-    hr = CoCreateInstance(CLSID_ITaskbarList, NULL, CLSCTX_ALL,
+    hr = CoCreateInstance(CLSID_ITaskbarList, nullptr, CLSCTX_ALL,
                          IID_ITaskbarList3, (void**) &taskbar_list_);
     if (hr != S_OK) {
       qLog(Warning) << "Error creating the ITaskbarList3 interface" << hex << DWORD (hr);
@@ -111,7 +111,7 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
     if (hr != S_OK) {
       qLog(Warning) << "Error initialising taskbar list" << hex << DWORD (hr);
       taskbar_list->Release();
-      taskbar_list_ = NULL;
+      taskbar_list_ = nullptr;
       return;
     }
 

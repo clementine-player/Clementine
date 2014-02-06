@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
   logging::Init();
 
-  gst_init(NULL, NULL);
+  gst_init(nullptr, nullptr);
 
   const QStringList arguments(a.arguments());
 

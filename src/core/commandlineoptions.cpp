@@ -138,7 +138,7 @@ bool CommandlineOptions::Parse() {
   // Parse the arguments
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oyg:", kOptions, NULL);
+    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oyg:", kOptions, nullptr);
 
     // End of the options
     if (c == -1)

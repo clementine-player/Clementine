@@ -33,7 +33,7 @@
 LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_LibraryFilterWidget),
-    model_(NULL),
+    model_(nullptr),
     group_by_dialog_(new GroupByDialog),
     filter_delay_(new QTimer(this)),
     filter_applies_to_model_(true),

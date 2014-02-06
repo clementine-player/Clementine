@@ -40,14 +40,14 @@ const int PlaylistContainer::kFilterDelayPlaylistSizeThreshold = 5000;
 PlaylistContainer::PlaylistContainer(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_PlaylistContainer),
-    manager_(NULL),
-    undo_(NULL),
-    redo_(NULL),
-    playlist_(NULL),
+    manager_(nullptr),
+    undo_(nullptr),
+    redo_(nullptr),
+    playlist_(nullptr),
     starting_up_(true),
     tab_bar_visible_(false),
     tab_bar_animation_(new QTimeLine(500, this)),
-    no_matches_label_(NULL),
+    no_matches_label_(nullptr),
     filter_timer_(new QTimer(this))
 {
   ui_->setupUi(this);

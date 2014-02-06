@@ -129,10 +129,10 @@ void TagReader::ReadFile(const QString& filename,
 
   TagLib::Tag* tag = fileref->tag();
   if (tag) {
-    Decode(tag->title(), NULL, song->mutable_title());
-    Decode(tag->artist(), NULL, song->mutable_artist()); // TPE1
-    Decode(tag->album(), NULL, song->mutable_album());
-    Decode(tag->genre(), NULL, song->mutable_genre());
+    Decode(tag->title(), nullptr, song->mutable_title());
+    Decode(tag->artist(), nullptr, song->mutable_artist()); // TPE1
+    Decode(tag->album(), nullptr, song->mutable_album());
+    Decode(tag->genre(), nullptr, song->mutable_genre());
     song->set_year(tag->year());
     song->set_track(tag->track());
     song->set_valid(true);
@@ -145,7 +145,7 @@ void TagReader::ReadFile(const QString& filename,
   // apart, so we keep specific behavior for some formats by adding another
   // "else if" block below.
   if (TagLib::Ogg::XiphComment* tag = dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
-    ParseOggTag(tag->fieldListMap(), NULL, &disc, &compilation, song);
+    ParseOggTag(tag->fieldListMap(), nullptr, &disc, &compilation, song);
   }
 
   if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
@@ -159,15 +159,15 @@ void TagReader::ReadFile(const QString& filename,
         song->set_bpm(TStringToQString(map["TBPM"].front()->toString()).trimmed().toFloat());
 
       if (!map["TCOM"].isEmpty())
-        Decode(map["TCOM"].front()->toString(), NULL, song->mutable_composer());
+        Decode(map["TCOM"].front()->toString(), nullptr, song->mutable_composer());
 
       if (!map["TIT1"].isEmpty()) // content group
-        Decode(map["TIT1"].front()->toString(), NULL, song->mutable_grouping());
+        Decode(map["TIT1"].front()->toString(), nullptr, song->mutable_grouping());
 
       // Skip TPE1 (which is the artist) here because we already fetched it
 
       if (!map["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
-        Decode(map["TPE2"].front()->toString(), NULL, song->mutable_albumartist());
+        Decode(map["TPE2"].front()->toString(), nullptr, song->mutable_albumartist());
 
       if (!map["TCMP"].isEmpty())
         compilation = TStringToQString(map["TCMP"].front()->toString()).trimmed();
@@ -181,7 +181,7 @@ void TagReader::ReadFile(const QString& filename,
             dynamic_cast<const TagLib::ID3v2::CommentsFrame*>(map["COMM"][i]);
 
         if (frame && TStringToQString(frame->description()) != "iTunNORM") {
-          Decode(frame->text(), NULL, song->mutable_comment());
+          Decode(frame->text(), nullptr, song->mutable_comment());
           break;
         }
       }
@@ -218,14 +218,14 @@ void TagReader::ReadFile(const QString& filename,
     }
   } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if ( file->xiphComment() ) {
-      ParseOggTag(file->xiphComment()->fieldListMap(), NULL, &disc, &compilation, song);
+      ParseOggTag(file->xiphComment()->fieldListMap(), nullptr, &disc, &compilation, song);
 #ifdef TAGLIB_HAS_FLAC_PICTURELIST
       if (!file->pictureList().isEmpty()) {
         song->set_art_automatic(kEmbeddedCover);
       }
 #endif
     }
-    Decode(tag->comment(), NULL, song->mutable_comment());
+    Decode(tag->comment(), nullptr, song->mutable_comment());
   } else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
     if (file->tag()) {
       TagLib::MP4::Tag* mp4_tag = file->tag();
@@ -236,7 +236,7 @@ void TagReader::ReadFile(const QString& filename,
       if (it != items.end()) {
         TagLib::StringList album_artists = it->second.toStringList();
         if (!album_artists.isEmpty()) {
-          Decode(album_artists.front(), NULL, song->mutable_albumartist());
+          Decode(album_artists.front(), nullptr, song->mutable_albumartist());
         }
       }
 
@@ -269,12 +269,12 @@ void TagReader::ReadFile(const QString& filename,
       }
 
       if(items.contains("\251wrt")) {
-        Decode(items["\251wrt"].toStringList().toString(", "), NULL, song->mutable_composer());
+        Decode(items["\251wrt"].toStringList().toString(", "), nullptr, song->mutable_composer());
       }
       if(items.contains("\251grp")) {
-        Decode(items["\251grp"].toStringList().toString(" "), NULL, song->mutable_grouping());
+        Decode(items["\251grp"].toStringList().toString(" "), nullptr, song->mutable_grouping());
       }
-      Decode(mp4_tag->comment(), NULL, song->mutable_comment());
+      Decode(mp4_tag->comment(), nullptr, song->mutable_comment());
     }
   }
 #ifdef TAGLIB_WITH_ASF
@@ -310,7 +310,7 @@ void TagReader::ReadFile(const QString& filename,
   }
 #endif
   else if (tag) {
-    Decode(tag->comment(), NULL, song->mutable_comment());
+    Decode(tag->comment(), nullptr, song->mutable_comment());
   }
 
   if (!disc.isEmpty()) {
@@ -575,7 +575,7 @@ bool TagReader::SaveFile(const QString& filename,
   if (ret) {
     // Linux: inotify doesn't seem to notice the change to the file unless we
     // change the timestamps as well. (this is what touch does)
-    utimensat(0, QFile::encodeName(filename).constData(), NULL, 0);
+    utimensat(0, QFile::encodeName(filename).constData(), nullptr, 0);
   }
   #endif  // Q_OS_LINUX
 
@@ -632,7 +632,7 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
   if (ret) {
     // Linux: inotify doesn't seem to notice the change to the file unless we
     // change the timestamps as well. (this is what touch does)
-    utimensat(0, QFile::encodeName(filename).constData(), NULL, 0);
+    utimensat(0, QFile::encodeName(filename).constData(), nullptr, 0);
   }
   #endif  // Q_OS_LINUX
   return ret;
@@ -685,7 +685,7 @@ bool TagReader::SaveSongRatingToFile(const QString& filename,
   if (ret) {
     // Linux: inotify doesn't seem to notice the change to the file unless we
     // change the timestamps as well. (this is what touch does)
-    utimensat(0, QFile::encodeName(filename).constData(), NULL, 0);
+    utimensat(0, QFile::encodeName(filename).constData(), nullptr, 0);
   }
   #endif  // Q_OS_LINUX
   return ret;
@@ -944,7 +944,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url,
 #endif // HAVE_GOOGLE_DRIVE
 
 TagLib::ID3v2::PopularimeterFrame* TagReader::GetPOPMFrameFromTag(TagLib::ID3v2::Tag* tag) {
-  TagLib::ID3v2::PopularimeterFrame* frame = NULL;
+  TagLib::ID3v2::PopularimeterFrame* frame = nullptr;
 
   const TagLib::ID3v2::FrameListMap& map = tag->frameListMap();
   if (!map["POPM"].isEmpty()) {

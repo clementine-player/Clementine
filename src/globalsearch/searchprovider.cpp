@@ -126,7 +126,7 @@ void SearchProvider::LoadArtAsync(int id, const Result& result) {
 }
 
 MimeData* SearchProvider::LoadTracks(const ResultList& results) {
-  MimeData* mime_data = NULL;
+  MimeData* mime_data = nullptr;
 
   if (mime_data_contains_urls_only()) {
     mime_data = new MimeData;

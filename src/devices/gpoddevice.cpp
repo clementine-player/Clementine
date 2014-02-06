@@ -37,8 +37,8 @@ GPodDevice::GPodDevice(
     int database_id, bool first_time)
       : ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
         loader_thread_(new QThread(this)),
-        loader_(NULL),
-        db_(NULL)
+        loader_(nullptr),
+        db_(nullptr)
 {
 }
 
@@ -66,7 +66,7 @@ void GPodDevice::LoadFinished(Itdb_iTunesDB* db) {
   db_wait_cond_.wakeAll();
 
   loader_->deleteLater();
-  loader_ = NULL;
+  loader_ = nullptr;
 }
 
 bool GPodDevice::StartCopy(QList<Song::FileType>* supported_filetypes) {
@@ -113,7 +113,7 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
   Itdb_Track* track = AddTrackToITunesDb(job.metadata_);
 
   // Copy the file
-  GError* error = NULL;
+  GError* error = nullptr;
   itdb_cp_track_to_ipod(track, QDir::toNativeSeparators(job.source_)
                         .toLocal8Bit().constData(), &error);
   if (error) {
@@ -139,7 +139,7 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
 void GPodDevice::WriteDatabase(bool success) {
   if (success) {
     // Write the itunes database
-    GError* error = NULL;
+    GError* error = nullptr;
     itdb_write(db_, &error);
     if (error) {
       qLog(Error) << "writing database failed:" << error->message;
@@ -167,7 +167,7 @@ void GPodDevice::FinishCopy(bool success) {
 }
 
 void GPodDevice::StartDelete() {
-  StartCopy(NULL);
+  StartCopy(nullptr);
 }
 
 bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& relative_to) {
@@ -178,8 +178,8 @@ bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& rel
   ipod_filename.replace('/', ':');
 
   // Find the track in the itdb, identify it by its filename
-  Itdb_Track* track = NULL;
-  for (GList* tracks = db_->tracks ; tracks != NULL ; tracks = tracks->next) {
+  Itdb_Track* track = nullptr;
+  for (GList* tracks = db_->tracks ; tracks != nullptr ; tracks = tracks->next) {
     Itdb_Track* t = static_cast<Itdb_Track*>(tracks->data);
 
     if (t->ipod_path == ipod_filename) {
@@ -188,13 +188,13 @@ bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& rel
     }
   }
 
-  if (track == NULL) {
+  if (track == nullptr) {
     qLog(Warning) << "Couldn't find song" << path << "in iTunesDB";
     return false;
   }
 
   // Remove the track from all playlists
-  for (GList* playlists = db_->playlists ; playlists != NULL ; playlists = playlists->next) {
+  for (GList* playlists = db_->playlists ; playlists != nullptr ; playlists = playlists->next) {
     Itdb_Playlist* playlist = static_cast<Itdb_Playlist*>(playlists->data);
 
     if (itdb_playlist_contains_track(playlist, track)) {

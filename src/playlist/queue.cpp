@@ -269,7 +269,7 @@ bool Queue::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, 
   } else if (data->hasFormat(Playlist::kRowsMimetype)) {
     // Dragged from the playlist
 
-    Playlist* playlist = NULL;
+    Playlist* playlist = nullptr;
     QList<int> source_rows;
     QDataStream stream(data->data(Playlist::kRowsMimetype));
     stream.readRawData(reinterpret_cast<char*>(&playlist), sizeof(playlist));

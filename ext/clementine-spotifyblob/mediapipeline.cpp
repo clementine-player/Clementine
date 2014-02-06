@@ -28,8 +28,8 @@ MediaPipeline::MediaPipeline(int port, quint64 length_msec)
   : port_(port),
     length_msec_(length_msec),
     accepting_data_(true),
-    pipeline_(NULL),
-    appsrc_(NULL),
+    pipeline_(nullptr),
+    appsrc_(nullptr),
     byte_rate_(1),
     offset_bytes_(0)
 {
@@ -49,15 +49,15 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
   pipeline_ = gst_pipeline_new("pipeline");
 
   // Create elements
-  appsrc_ = GST_APP_SRC(gst_element_factory_make("appsrc", NULL));
-  GstElement* gdppay = gst_element_factory_make("gdppay", NULL);
-  tcpsink_ = gst_element_factory_make("tcpclientsink", NULL);
+  appsrc_ = GST_APP_SRC(gst_element_factory_make("appsrc", nullptr));
+  GstElement* gdppay = gst_element_factory_make("gdppay", nullptr);
+  tcpsink_ = gst_element_factory_make("tcpclientsink", nullptr);
 
   if (!pipeline_ || !appsrc_ || !tcpsink_) {
-    if (pipeline_) { gst_object_unref(GST_OBJECT(pipeline_)); pipeline_ = NULL; }
-    if (appsrc_)   { gst_object_unref(GST_OBJECT(appsrc_));   appsrc_ = NULL;   }
+    if (pipeline_) { gst_object_unref(GST_OBJECT(pipeline_)); pipeline_ = nullptr; }
+    if (appsrc_)   { gst_object_unref(GST_OBJECT(appsrc_));   appsrc_ = nullptr;   }
     if (gdppay)    { gst_object_unref(GST_OBJECT(gdppay)); }
-    if (tcpsink_)  { gst_object_unref(GST_OBJECT(tcpsink_));  tcpsink_ = NULL;  }
+    if (tcpsink_)  { gst_object_unref(GST_OBJECT(tcpsink_));  tcpsink_ = nullptr;  }
     return false;
   }
 
@@ -65,22 +65,22 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
   gst_bin_add(GST_BIN(pipeline_), GST_ELEMENT(appsrc_));
   gst_bin_add(GST_BIN(pipeline_), gdppay);
   gst_bin_add(GST_BIN(pipeline_), tcpsink_);
-  gst_element_link_many(GST_ELEMENT(appsrc_), gdppay, tcpsink_, NULL);
+  gst_element_link_many(GST_ELEMENT(appsrc_), gdppay, tcpsink_, nullptr);
 
   // Set the sink's port
-  g_object_set(G_OBJECT(tcpsink_), "host", "127.0.0.1", NULL);
-  g_object_set(G_OBJECT(tcpsink_), "port", port_, NULL);
+  g_object_set(G_OBJECT(tcpsink_), "host", "127.0.0.1", nullptr);
+  g_object_set(G_OBJECT(tcpsink_), "port", port_, nullptr);
 
   // Try to send 5 seconds of audio in advance to initially fill Clementine's
   // buffer.
-  g_object_set(G_OBJECT(tcpsink_), "ts-offset", qint64(-5 * kNsecPerSec), NULL);
+  g_object_set(G_OBJECT(tcpsink_), "ts-offset", qint64(-5 * kNsecPerSec), nullptr);
 
   // We know the time of each buffer
-  g_object_set(G_OBJECT(appsrc_), "format", GST_FORMAT_TIME, NULL);
+  g_object_set(G_OBJECT(appsrc_), "format", GST_FORMAT_TIME, nullptr);
 
   // Spotify only pushes data to us every 100ms, so keep the appsrc half full
   // to prevent tiny stalls.
-  g_object_set(G_OBJECT(appsrc_), "min-percent", 50, NULL);
+  g_object_set(G_OBJECT(appsrc_), "min-percent", 50, nullptr);
 
   // Set callbacks for when to start/stop pushing data
   GstAppSrcCallbacks callbacks;
@@ -88,7 +88,7 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
   callbacks.need_data = NeedDataCallback;
   callbacks.seek_data = SeekDataCallback;
 
-  gst_app_src_set_callbacks(appsrc_, &callbacks, this, NULL);
+  gst_app_src_set_callbacks(appsrc_, &callbacks, this, nullptr);
 
 #if Q_BYTE_ORDER == Q_BIG_ENDIAN
   const int endianness = G_BIG_ENDIAN;
@@ -104,7 +104,7 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
                                       "depth", G_TYPE_INT, 16,
                                       "rate", G_TYPE_INT, sample_rate,
                                       "channels", G_TYPE_INT, channels,
-                                      NULL);
+                                      nullptr);
 
   gst_app_src_set_caps(appsrc_, caps);
   gst_caps_unref(caps);

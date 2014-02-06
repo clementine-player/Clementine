@@ -55,9 +55,9 @@ public:
 
 PlaylistListContainer::PlaylistListContainer(QWidget* parent)
   : QWidget(parent),
-    app_(NULL),
+    app_(nullptr),
     ui_(new Ui_PlaylistListContainer),
-    menu_(NULL),
+    menu_(nullptr),
     action_new_folder_(new QAction(this)),
     action_remove_(new QAction(this)),
     action_save_playlist_(new QAction(this)),

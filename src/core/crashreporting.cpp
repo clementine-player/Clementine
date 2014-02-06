@@ -38,13 +38,13 @@
 
 const char* CrashSender::kUploadURL = "http://crashes.clementine-player.org/getuploadurl";
 const char* CrashReporting::kSendCrashReportOption = "--send-crash-report";
-char* CrashReporting::sPath = NULL;
+char* CrashReporting::sPath = nullptr;
 
 #if defined(HAVE_BREAKPAD) and defined(Q_OS_LINUX)
 
 CrashReporting::CrashReporting()
   : handler_(new google_breakpad::ExceptionHandler(
-        QDir::tempPath().toLocal8Bit().constData(), NULL,
+        QDir::tempPath().toLocal8Bit().constData(), nullptr,
         CrashReporting::Handler, this, true)) {
 }
 
@@ -90,7 +90,7 @@ bool CrashReporting::Handler(const char* dump_path,
   if (sPath) {
     // We know the path to clementine, so exec it again to prompt the user to
     // upload the report.
-    const char* argv[] = {sPath, kSendCrashReportOption, dump_path, minidump_id, NULL};
+    const char* argv[] = {sPath, kSendCrashReportOption, dump_path, minidump_id, nullptr};
 
     sys_execv(sPath, argv);
   }
@@ -102,7 +102,7 @@ CrashSender::CrashSender(const QString& path)
   : network_(new QNetworkAccessManager(this)),
     path_(path),
     file_(new QFile(path_, this)),
-    progress_(NULL) {
+    progress_(nullptr) {
 }
 
 bool CrashSender::Start() {

@@ -57,10 +57,10 @@ typedef QPair<QString, QString> Param;
 
 SoundCloudService::SoundCloudService(Application* app, InternetModel *parent)
   : InternetService(kServiceName, app, parent, parent),
-    root_(NULL),
-    search_(NULL),
+    root_(nullptr),
+    search_(nullptr),
     network_(new NetworkAccessManager(this)),
-    context_menu_(NULL),
+    context_menu_(nullptr),
     search_box_(new SearchBoxWidget(this)),
     search_delay_(new QTimer(this)),
     next_pending_search_id_(0) {

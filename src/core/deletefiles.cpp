@@ -29,7 +29,7 @@ const int DeleteFiles::kBatchSize = 50;
 
 DeleteFiles::DeleteFiles(TaskManager* task_manager,
                          std::shared_ptr<MusicStorage> storage)
-  : thread_(NULL),
+  : thread_(nullptr),
     task_manager_(task_manager),
     storage_(storage),
     started_(false),

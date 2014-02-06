@@ -24,7 +24,7 @@
 GlobalSearchModel::GlobalSearchModel(GlobalSearch* engine, QObject* parent)
   : QStandardItemModel(parent),
     engine_(engine),
-    proxy_(NULL),
+    proxy_(nullptr),
     use_pretty_covers_(true),
     artist_icon_(":/icons/22x22/x-clementine-artist.png"),
     album_icon_(":/icons/22x22/x-clementine-album.png")

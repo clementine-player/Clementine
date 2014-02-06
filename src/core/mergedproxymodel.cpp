@@ -28,7 +28,7 @@ std::size_t hash_value(const QModelIndex& index) {
 
 MergedProxyModel::MergedProxyModel(QObject* parent)
   : QAbstractProxyModel(parent),
-    resetting_model_(NULL)
+    resetting_model_(nullptr)
 {
 }
 
@@ -85,7 +85,7 @@ void MergedProxyModel::RemoveSubModel(const QModelIndex &source_parent) {
   resetting_model_ = submodel;
   beginRemoveRows(proxy_parent, 0, std::numeric_limits<int>::max() - 1);
   endRemoveRows();
-  resetting_model_ = NULL;
+  resetting_model_ = nullptr;
 
   // Delete all the mappings that reference the submodel
   MappingContainer::index<tag_by_pointer>::type::iterator it =
@@ -167,7 +167,7 @@ void MergedProxyModel::SubModelReset() {
   resetting_model_ = submodel;
   beginRemoveRows(proxy_parent, 0, std::numeric_limits<int>::max() - 1);
   endRemoveRows();
-  resetting_model_ = NULL;
+  resetting_model_ = nullptr;
 
   // Delete all the mappings that reference the submodel
   MappingContainer::index<tag_by_pointer>::type::iterator it =
@@ -449,7 +449,7 @@ QAbstractItemModel* MergedProxyModel::GetModel(const QModelIndex& source_index) 
     if (submodel == const_model)
       return submodel;
   }
-  return NULL;
+  return nullptr;
 }
 
 void MergedProxyModel::DataChanged(const QModelIndex& top_left, const QModelIndex& bottom_right) {

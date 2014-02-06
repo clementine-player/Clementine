@@ -38,10 +38,10 @@ const int SpotifyClient::kWaveHeaderSize = 44;
 
 
 SpotifyClient::SpotifyClient(QObject* parent)
-  : AbstractMessageHandler<pb::spotify::Message>(NULL, parent),
+  : AbstractMessageHandler<pb::spotify::Message>(nullptr, parent),
     api_key_(QByteArray::fromBase64(kSpotifyApiKey)),
     protocol_socket_(new QTcpSocket(this)),
-    session_(NULL),
+    session_(nullptr),
     events_timer_(new QTimer(this)) {
   SetDevice(protocol_socket_);
 
@@ -328,7 +328,7 @@ void SpotifyClient::Login(const pb::spotify::LoginRequest& req) {
                      req.username().c_str(),
                      req.password().c_str(),
                      true,   // Remember the password.
-                     NULL);
+                     nullptr);
   }
 }
 
@@ -389,7 +389,7 @@ void SpotifyClient::SendPlaylistList() {
 
   sp_playlistcontainer* container = sp_session_playlistcontainer(session_);
   if (!container) {
-    qLog(Warning) << "sp_session_playlistcontainer returned NULL";
+    qLog(Warning) << "sp_session_playlistcontainer returned nullptr";
     return;
   }
 
@@ -432,7 +432,7 @@ void SpotifyClient::SendPlaylistList() {
 }
 
 sp_playlist* SpotifyClient::GetPlaylist(pb::spotify::PlaylistType type, int user_index) {
-  sp_playlist* playlist = NULL;
+  sp_playlist* playlist = nullptr;
   switch (type) {
     case pb::spotify::Inbox:
       playlist = sp_session_inbox_create(session_);
@@ -499,7 +499,7 @@ void SpotifyClient::PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* u
 
   // Find this playlist's pending load object
   int pending_load_index = -1;
-  PendingLoadPlaylist* pending_load = NULL;
+  PendingLoadPlaylist* pending_load = nullptr;
   for (int i=0 ; i<me->pending_load_playlists_.count() ; ++i) {
     if (me->pending_load_playlists_[i].playlist_ == pl) {
       pending_load_index = i;
@@ -710,7 +710,7 @@ void SpotifyClient::OfflineStatusUpdatedCallback(sp_session* session) {
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
   sp_playlistcontainer* container = sp_session_playlistcontainer(session);
   if (!container) {
-    qLog(Warning) << "sp_session_playlistcontainer returned NULL";
+    qLog(Warning) << "sp_session_playlistcontainer returned nullptr";
     return;
   }
 
@@ -884,7 +884,7 @@ void SpotifyClient::TryImageAgain(sp_image* image) {
 
   // Find the pending request for this image
   int index = -1;
-  PendingImageRequest* req = NULL;
+  PendingImageRequest* req = nullptr;
   for (int i=0 ; i<pending_image_requests_.count() ; ++i) {
     if (pending_image_requests_[i].image_ == image) {
       index = i;
@@ -975,7 +975,7 @@ void SpotifyClient::BrowseToplist(const pb::spotify::BrowseToplistRequest& req) 
       session_,
       SP_TOPLIST_TYPE_TRACKS,  // TODO: Support albums and artists.
       SP_TOPLIST_REGION_EVERYWHERE,  // TODO: Support other regions.
-      NULL,
+      nullptr,
       &ToplistBrowseComplete,
       this);
   pending_toplist_browses_[browse] = req;

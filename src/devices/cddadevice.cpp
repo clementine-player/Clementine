@@ -29,8 +29,8 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
     Application* app,
     int database_id, bool first_time)
       : ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
-        cdda_(NULL),
-        cdio_(NULL)
+        cdda_(nullptr),
+        cdio_(nullptr)
 {
 }
 
@@ -43,12 +43,12 @@ void CddaDevice::Init() {
   QMutexLocker locker(&mutex_init_);
   song_count_ = 0; // Reset song count, in case it was already set
   cdio_ = cdio_open (url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
-  if (cdio_ == NULL) {
+  if (cdio_ == nullptr) {
     return;
   }
   // Create gstreamer cdda element
-  cdda_ = gst_element_make_from_uri (GST_URI_SRC, "cdda://", NULL);
-  if (cdda_ == NULL) {
+  cdda_ = gst_element_make_from_uri (GST_URI_SRC, "cdda://", nullptr);
+  if (cdda_ == nullptr) {
     model_->Reset();
     return;
   }
@@ -106,9 +106,9 @@ void CddaDevice::Init() {
   GstMessage *msg = gst_bus_timed_pop_filtered (GST_ELEMENT_BUS (pipe),
                     GST_CLOCK_TIME_NONE,
                     GST_MESSAGE_TAG);
-  GstTagList *tags = NULL;
+  GstTagList *tags = nullptr;
   gst_message_parse_tag (msg, &tags);
-  char *string_mb = NULL;
+  char *string_mb = nullptr;
   if (gst_tag_list_get_string (tags, GST_TAG_CDDA_MUSICBRAINZ_DISCID, &string_mb)) {
     QString musicbrainz_discid(string_mb);
     qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;

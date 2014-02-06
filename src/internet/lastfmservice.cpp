@@ -86,19 +86,19 @@ const int LastFMService::kFriendsCacheDurationSecs = 60 * 60 * 24; // 1 day
 LastFMService::LastFMService(Application* app, InternetModel* parent)
   : InternetService(kServiceName, app, parent, parent),
     url_handler_(new LastFMUrlHandler(this, this)),
-    scrobbler_(NULL),
+    scrobbler_(nullptr),
     already_scrobbled_(false),
     station_dialog_(new LastFMStationDialog),
     context_menu_(new QMenu),
     initial_tune_(false),
     tune_task_id_(0),
     scrobbling_enabled_(false),
-    root_item_(NULL),
-    artist_list_(NULL),
-    tag_list_(NULL),
-    custom_list_(NULL),
-    friends_list_(NULL),
-    neighbours_list_(NULL),
+    root_item_(nullptr),
+    artist_list_(nullptr),
+    tag_list_(nullptr),
+    custom_list_(nullptr),
+    friends_list_(nullptr),
+    neighbours_list_(nullptr),
     friend_names_(kSettingsGroup, "friend_names", kFriendsCacheDurationSecs),
     connection_problems_(false)
 {
@@ -330,7 +330,7 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
 
   // Invalidate the scrobbler - it will get recreated later
   delete scrobbler_;
-  scrobbler_ = NULL;
+  scrobbler_ = nullptr;
 
   emit AuthenticationComplete(true, QString());
 }

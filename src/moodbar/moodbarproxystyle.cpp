@@ -44,9 +44,9 @@ MoodbarProxyStyle::MoodbarProxyStyle(Application* app, QSlider* slider)
     fade_timeline_(new QTimeLine(1000, this)),
     moodbar_colors_dirty_(true),
     moodbar_pixmap_dirty_(true),
-    context_menu_(NULL),
-    show_moodbar_action_(NULL),
-    style_action_group_(NULL)
+    context_menu_(nullptr),
+    show_moodbar_action_(nullptr),
+    style_action_group_(nullptr)
 {
   slider->setStyle(this);
   slider->installEventFilter(this);

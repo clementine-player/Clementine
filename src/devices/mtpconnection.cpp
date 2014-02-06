@@ -22,7 +22,7 @@
 #include <QtDebug>
 
 MtpConnection::MtpConnection(const QUrl& url)
-  : device_(NULL)
+  : device_(nullptr)
 {
   QString hostname = url.host();
   // Parse the URL
@@ -53,14 +53,14 @@ MtpConnection::MtpConnection(const QUrl& url)
 
   // Get a list of devices from libmtp and figure out which one is ours
   int count = 0;
-  LIBMTP_raw_device_t* raw_devices = NULL;
+  LIBMTP_raw_device_t* raw_devices = nullptr;
   LIBMTP_error_number_t err = LIBMTP_Detect_Raw_Devices(&raw_devices, &count);
   if (err != LIBMTP_ERROR_NONE) {
     qLog(Warning) << "MTP error:" << err;
     return;
   }
 
-  LIBMTP_raw_device_t* raw_device = NULL;
+  LIBMTP_raw_device_t* raw_device = nullptr;
   for (int i=0 ; i<count ; ++i) {
     if (raw_devices[i].bus_location == bus_location &&
         raw_devices[i].devnum == device_num) {

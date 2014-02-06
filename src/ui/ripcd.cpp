@@ -117,7 +117,7 @@ RipCD::RipCD(QWidget* parent) :
   setWindowTitle(tr("Rip CD"));
   AddDestinationDirectory(QDir::homePath());
 
-  cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
+  cdio_ = cdio_open(nullptr, DRIVER_UNKNOWN);
   if(!cdio_) {
     qLog(Error) << "Failed to read CD drive";
     return;

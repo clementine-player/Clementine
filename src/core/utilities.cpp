@@ -175,7 +175,7 @@ quint64 FileSystemCapacity(const QString& path) {
 #elif defined(Q_OS_WIN32)
   _ULARGE_INTEGER ret;
   if (GetDiskFreeSpaceEx(QDir::toNativeSeparators(path).toLocal8Bit().constData(),
-                         NULL, &ret, NULL) != 0)
+                         nullptr, &ret, nullptr) != 0)
     return ret.QuadPart;
 #endif
 
@@ -190,7 +190,7 @@ quint64 FileSystemFreeSpace(const QString& path) {
 #elif defined(Q_OS_WIN32)
   _ULARGE_INTEGER ret;
   if (GetDiskFreeSpaceEx(QDir::toNativeSeparators(path).toLocal8Bit().constData(),
-                         &ret, NULL, NULL) != 0)
+                         &ret, nullptr, nullptr) != 0)
     return ret.QuadPart;
 #endif
 

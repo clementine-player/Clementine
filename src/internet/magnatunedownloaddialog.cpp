@@ -44,7 +44,7 @@ MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
     ui_(new Ui_MagnatuneDownloadDialog),
     service_(service),
     network_(new NetworkAccessManager(this)),
-    current_reply_(NULL),
+    current_reply_(nullptr),
     next_row_(0)
 {
   ui_->setupUi(this);
@@ -230,7 +230,7 @@ void MagnatuneDownloadDialog::ShowError(const QString &message) {
 }
 
 void MagnatuneDownloadDialog::AllFinished(bool error) {
-  current_reply_ = NULL;
+  current_reply_ = nullptr;
 
   if (error)
     ui_->button_box->button(QDialogButtonBox::Ok)->show();

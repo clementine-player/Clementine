@@ -49,8 +49,8 @@ const char* LibraryWatcher::kSettingsGroup = "LibraryWatcher";
 
 LibraryWatcher::LibraryWatcher(QObject* parent)
   : QObject(parent),
-    backend_(NULL),
-    task_manager_(NULL),
+    backend_(nullptr),
+    task_manager_(nullptr),
     fs_watcher_(FileSystemWatcherInterface::Create(this)),
     stop_requested_(false),
     scan_on_startup_(true),

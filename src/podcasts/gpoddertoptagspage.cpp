@@ -73,7 +73,7 @@ void GPodderTopTagsPage::TagListFailed(mygpo::TagListPtr list) {
   done_initial_load_ = false;
 
   if (QMessageBox::warning(
-        NULL, tr("Failed to fetch directory"),
+        nullptr, tr("Failed to fetch directory"),
         tr("There was a problem communicating with gpodder.net"),
         QMessageBox::Retry | QMessageBox::Close,
         QMessageBox::Retry) != QMessageBox::Retry) {

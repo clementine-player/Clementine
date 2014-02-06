@@ -37,14 +37,14 @@
 namespace logging {
 
 static Level sDefaultLevel = Level_Debug;
-static QMap<QString, Level>* sClassLevels = NULL;
-static QIODevice* sNullDevice = NULL;
+static QMap<QString, Level>* sClassLevels = nullptr;
+static QIODevice* sNullDevice = nullptr;
 
 const char* kDefaultLogLevels = "GstEnginePipeline:2,*:3";
 
 static const char* kMessageHandlerMagic = "__logging_message__";
 static const int kMessageHandlerMagicLength = strlen(kMessageHandlerMagic);
-static QtMsgHandler sOriginalMessageHandler = NULL;
+static QtMsgHandler sOriginalMessageHandler = nullptr;
 
 
 void GLog(const char* domain, int level, const char* message, void* user_data) {
@@ -152,7 +152,7 @@ QString ParsePrettyFunction(const char * pretty_function) {
 
 QDebug CreateLogger(Level level, const QString& class_name, int line) {
   // Map the level to a string
-  const char* level_name = NULL;
+  const char* level_name = nullptr;
   switch (level) {
     case Level_Debug:   level_name = " DEBUG "; break;
     case Level_Info:    level_name = " INFO  "; break;
@@ -193,8 +193,8 @@ QString CXXDemangle(const QString& mangled_function) {
   int status;
   char* demangled_function = abi::__cxa_demangle(
       mangled_function.toAscii().constData(),
-      NULL,
-      NULL,
+      nullptr,
+      nullptr,
       &status);
   if (status == 0) {
     QString ret = QString::fromAscii(demangled_function);

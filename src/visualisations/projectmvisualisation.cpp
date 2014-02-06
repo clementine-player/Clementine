@@ -127,7 +127,7 @@ void ProjectMVisualisation::InitProjectM() {
   if (font_path.isNull()) {
     qWarning("ProjectM presets could not be found, search path was:\n  %s",
              paths.join("\n  ").toLocal8Bit().constData());
-    QMessageBox::warning(NULL, tr("Missing projectM presets"),
+    QMessageBox::warning(nullptr, tr("Missing projectM presets"),
         tr("Clementine could not load any projectM visualisations.  Check that you have installed Clementine properly."));
   }
 }

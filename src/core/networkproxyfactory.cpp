@@ -8,7 +8,7 @@
 
 #include <stdlib.h>
 
-NetworkProxyFactory* NetworkProxyFactory::sInstance = NULL;
+NetworkProxyFactory* NetworkProxyFactory::sInstance = nullptr;
 const char* NetworkProxyFactory::kSettingsGroup = "Proxy";
 
 NetworkProxyFactory::NetworkProxyFactory()

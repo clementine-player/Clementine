@@ -190,7 +190,7 @@ void GLAnalyzer3::resizeGL( int w, int h )
 
     // Get current timestamp.
     timeval tv;
-    gettimeofday( &tv, NULL );
+    gettimeofday( &tv, nullptr );
     show.timeStamp = (double)tv.tv_sec + (double)tv.tv_usec/1000000.0;
 }
 
@@ -203,7 +203,7 @@ void GLAnalyzer3::analyze( const Scope &s )
 {
     // compute the dTime since the last call
     timeval tv;
-    gettimeofday( &tv, NULL );
+    gettimeofday( &tv, nullptr );
     double currentTime = (double)tv.tv_sec + (double)tv.tv_usec/1000000.0;
     show.dT = currentTime - show.timeStamp;
     show.timeStamp = currentTime;

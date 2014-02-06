@@ -49,7 +49,7 @@ PrettyImage::PrettyImage(const QUrl& url, QNetworkAccessManager* network,
     network_(network),
     state_(State_WaitingForLazyLoad),
     url_(url),
-    menu_(NULL)
+    menu_(nullptr)
 {
   setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 

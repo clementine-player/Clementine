@@ -50,11 +50,11 @@ const int VisualisationContainer::kDefaultTextureSize = 512;
 VisualisationContainer::VisualisationContainer(QWidget *parent)
   : QGraphicsView(parent),
     initialised_(false),
-    engine_(NULL),
+    engine_(nullptr),
     vis_(new ProjectMVisualisation(this)),
     overlay_(new VisualisationOverlay),
     selector_(new VisualisationSelector(this)),
-    overlay_proxy_(NULL),
+    overlay_proxy_(nullptr),
     menu_(new QMenu(this)),
     fps_(kDefaultFps),
     size_(kDefaultTextureSize)

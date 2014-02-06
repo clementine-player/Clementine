@@ -62,8 +62,8 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
     app_(app),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     cover_fetcher_(new AlbumCoverFetcher(app_->cover_providers(), this, network)),
-    cover_searcher_(NULL),
-    cover_export_(NULL),
+    cover_searcher_(nullptr),
+    cover_export_(nullptr),
     cover_exporter_(new AlbumCoverExporter(this)),
     artist_icon_(IconLoader::Load("x-clementine-artist")),
     all_artists_icon_(IconLoader::Load("x-clementine-album")),
@@ -700,7 +700,7 @@ SongList AlbumCoverManager::GetSongsInAlbums(const QModelIndexList& indexes) con
 SongMimeData* AlbumCoverManager::GetMimeDataForAlbums(const QModelIndexList& indexes) const {
   SongList songs = GetSongsInAlbums(indexes);
   if (songs.isEmpty())
-    return NULL;
+    return nullptr;
 
   SongMimeData* data = new SongMimeData;
   data->backend = library_backend_;

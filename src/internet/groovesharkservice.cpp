@@ -87,29 +87,29 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel *parent)
   : InternetService(kServiceName, app, parent, parent),
     url_handler_(new GroovesharkUrlHandler(this, this)),
     next_pending_search_id_(0),
-    root_(NULL),
-    search_(NULL),
-    popular_month_(NULL),
-    popular_today_(NULL),
-    stations_(NULL),
-    grooveshark_radio_(NULL),
-    favorites_(NULL),
-    library_(NULL),
-    playlists_parent_(NULL),
-    subscribed_playlists_parent_(NULL),
+    root_(nullptr),
+    search_(nullptr),
+    popular_month_(nullptr),
+    popular_today_(nullptr),
+    stations_(nullptr),
+    grooveshark_radio_(nullptr),
+    favorites_(nullptr),
+    library_(nullptr),
+    playlists_parent_(nullptr),
+    subscribed_playlists_parent_(nullptr),
     network_(new NetworkAccessManager(this)),
-    context_menu_(NULL),
-    create_playlist_(NULL),
-    delete_playlist_(NULL),
-    rename_playlist_(NULL),
-    remove_from_playlist_(NULL),
-    remove_from_favorites_(NULL),
-    remove_from_library_(NULL),
-    get_url_to_share_song_(NULL),
-    get_url_to_share_playlist_(NULL),
+    context_menu_(nullptr),
+    create_playlist_(nullptr),
+    delete_playlist_(nullptr),
+    rename_playlist_(nullptr),
+    remove_from_playlist_(nullptr),
+    remove_from_favorites_(nullptr),
+    remove_from_library_(nullptr),
+    get_url_to_share_song_(nullptr),
+    get_url_to_share_playlist_(nullptr),
     search_box_(new SearchBoxWidget(this)),
     search_delay_(new QTimer(this)),
-    last_search_reply_(NULL),
+    last_search_reply_(nullptr),
     api_key_(QByteArray::fromBase64(kApiSecret)),
     login_state_(LoginState_OtherError),
     task_popular_id_(0),
@@ -170,7 +170,7 @@ void GroovesharkService::ShowConfig() {
 QWidget* GroovesharkService::HeaderWidget() const {
   if (IsLoggedIn())
     return search_box_;
-  return NULL;
+  return nullptr;
 }
 
 void GroovesharkService::Search(const QString& text, bool now) {
@@ -405,7 +405,7 @@ void GroovesharkService::Authenticated(QNetworkReply* reply) {
     login_state_ = LoginState_NoPremium;
   }
   if (!error.isEmpty()) {
-    QMessageBox::warning(NULL, tr("Grooveshark login error"), error, QMessageBox::Close);
+    QMessageBox::warning(nullptr, tr("Grooveshark login error"), error, QMessageBox::Close);
     ResetSessionId();
     emit LoginFinished(false);
     return;
@@ -430,17 +430,17 @@ void GroovesharkService::RemoveItems() {
   root_->removeRows(0, root_->rowCount());
   // 'search', 'favorites', 'popular', ... items were root's children, and have
   // been deleted: we should update these now invalid pointers
-  search_ = NULL;
-  popular_month_ = NULL;
-  popular_today_ = NULL;
-  library_ = NULL;
-  favorites_ = NULL;
-  subscribed_playlists_parent_ = NULL;
-  stations_ = NULL;
-  grooveshark_radio_ = NULL;
-  playlists_parent_ = NULL;
+  search_ = nullptr;
+  popular_month_ = nullptr;
+  popular_today_ = nullptr;
+  library_ = nullptr;
+  favorites_ = nullptr;
+  subscribed_playlists_parent_ = nullptr;
+  stations_ = nullptr;
+  grooveshark_radio_ = nullptr;
+  playlists_parent_ = nullptr;
   playlists_.clear();
-  subscribed_playlists_parent_ = NULL;
+  subscribed_playlists_parent_ = nullptr;
   subscribed_playlists_.clear();
   pending_retrieve_playlists_.clear();
 }
@@ -1014,7 +1014,7 @@ GeneratorPtr GroovesharkService::CreateGenerator(QStandardItem* item) {
 
   if (item == grooveshark_radio_) {
     if (last_artists_ids_.isEmpty()) {
-      QMessageBox::warning(NULL, tr("Error"),
+      QMessageBox::warning(nullptr, tr("Error"),
         tr("To start Grooveshark radio, you should first listen to a few other Grooveshark songs"));
       return ret;
     }
@@ -1240,7 +1240,7 @@ void GroovesharkService::RefreshPlaylist(int playlist_id) {
 }
 
 void GroovesharkService::CreateNewPlaylist() {
-  QString name = QInputDialog::getText(NULL,
+  QString name = QInputDialog::getText(nullptr,
                                        tr("Create a new Grooveshark playlist"),
                                        tr("Name"),
                                        QLineEdit::Normal);
@@ -1333,7 +1333,7 @@ void GroovesharkService::RenamePlaylist(int playlist_id) {
     return;
   }
   const QString& old_name = playlists_[playlist_id].name_;
-  QString new_name = QInputDialog::getText(NULL,
+  QString new_name = QInputDialog::getText(nullptr,
                                        tr("Rename \"%1\" playlist").arg(old_name),
                                        tr("Name"),
                                        QLineEdit::Normal,

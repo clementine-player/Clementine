@@ -40,7 +40,7 @@ Organise::Organise(TaskManager* task_manager,
                    std::shared_ptr<MusicStorage> destination,
                    const OrganiseFormat &format, bool copy, bool overwrite,
                    const NewSongInfoList& songs_info, bool eject_after)
-                     : thread_(NULL),
+                     : thread_(nullptr),
                        task_manager_(task_manager),
                        transcoder_(new Transcoder(this)),
                        destination_(destination),

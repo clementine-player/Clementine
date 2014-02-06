@@ -85,7 +85,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
                                                  const QString& mime_type,
                                                  GstElement* bin) {
   if (mime_type.isEmpty())
-    return NULL;
+    return nullptr;
 
   // HACK: Force ffmux_mp4 because it doesn't set any useful src caps
   if (mime_type == "audio/mp4") {
@@ -141,7 +141,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   gst_caps_unref(target_caps);
 
   if (suitable_elements_.isEmpty())
-    return NULL;
+    return nullptr;
 
   // Sort by rank
   qSort(suitable_elements_);
@@ -165,11 +165,11 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
     GstElement* id3v2 = CreateElement("id3v2mux", mp3bin);
 
     if (!lame || !xing || !id3v2) {
-      return NULL;
+      return nullptr;
     }
 
     // Link the elements together
-    gst_element_link_many(lame, xing, id3v2, NULL);
+    gst_element_link_many(lame, xing, id3v2, nullptr);
 
     // Link the bin's ghost pads to the elements on each end
     GstPad* pad = gst_element_get_static_pad(lame, "sink");
@@ -439,15 +439,15 @@ bool Transcoder::StartJob(const Job &job) {
   // Join them together
   gst_element_link(src, decode);
   if (codec && muxer)
-    gst_element_link_many(convert, resample, codec, muxer, sink, NULL);
+    gst_element_link_many(convert, resample, codec, muxer, sink, nullptr);
   else if (codec)
-    gst_element_link_many(convert, resample, codec, sink, NULL);
+    gst_element_link_many(convert, resample, codec, sink, nullptr);
   else if (muxer)
-    gst_element_link_many(convert, resample, muxer, sink, NULL);
+    gst_element_link_many(convert, resample, muxer, sink, nullptr);
 
   // Set properties
-  g_object_set(src, "location", job.input.toUtf8().constData(), NULL);
-  g_object_set(sink, "location", job.output.toUtf8().constData(), NULL);
+  g_object_set(src, "location", job.input.toUtf8().constData(), nullptr);
+  g_object_set(sink, "location", job.output.toUtf8().constData(), nullptr);
 
   // Set callbacks
   state->convert_element_ = convert;
@@ -496,7 +496,7 @@ bool Transcoder::event(QEvent* e) {
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
     gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(
-        finished_event->state_->pipeline_)), NULL, NULL);
+        finished_event->state_->pipeline_)), nullptr, nullptr);
     g_source_remove(finished_event->state_->bus_callback_id_);
 
     // Remove it from the list - this will also destroy the GStreamer pipeline
@@ -526,13 +526,13 @@ void Transcoder::Cancel() {
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
     gst_bus_set_sync_handler(gst_pipeline_get_bus(
-        GST_PIPELINE(state->pipeline_)), NULL, NULL);
+        GST_PIPELINE(state->pipeline_)), nullptr, nullptr);
     g_source_remove(state->bus_callback_id_);
 
     // Stop the pipeline
     if (gst_element_set_state(state->pipeline_, GST_STATE_NULL) == GST_STATE_CHANGE_ASYNC) {
       // Wait for it to finish stopping...
-      gst_element_get_state(state->pipeline_, NULL, NULL, GST_CLOCK_TIME_NONE);
+      gst_element_get_state(state->pipeline_, nullptr, nullptr, GST_CLOCK_TIME_NONE);
     }
 
     // Remove the job, this destroys the GStreamer pipeline too
@@ -578,11 +578,11 @@ void Transcoder::SetElementProperties(const QString& name, GObject* object) {
     LogLine(QString("Setting %1 property: %2 = %3").arg(name, property->name, value.toString()));
 
     switch (property->value_type) {
-      case G_TYPE_DOUBLE:  g_object_set(object, property->name, value.toDouble(), NULL); break;
-      case G_TYPE_FLOAT:   g_object_set(object, property->name, value.toFloat(), NULL);  break;
-      case G_TYPE_BOOLEAN: g_object_set(object, property->name, value.toInt(), NULL);    break;
+      case G_TYPE_DOUBLE:  g_object_set(object, property->name, value.toDouble(), nullptr); break;
+      case G_TYPE_FLOAT:   g_object_set(object, property->name, value.toFloat(), nullptr);  break;
+      case G_TYPE_BOOLEAN: g_object_set(object, property->name, value.toInt(), nullptr);    break;
       case G_TYPE_INT:
-      default:             g_object_set(object, property->name, value.toInt(), NULL);    break;
+      default:             g_object_set(object, property->name, value.toInt(), nullptr);    break;
     }
   }
 

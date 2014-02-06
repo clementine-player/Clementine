@@ -85,7 +85,7 @@ QByteArray UbuntuOneAuthenticator::GenerateAuthorisationHeader(
     const QString& token,
     const QString& token_secret) {
   typedef QPair<QString, QString> Param;
-  QString timestamp = QString::number(time(NULL));
+  QString timestamp = QString::number(time(nullptr));
   QList<Param> parameters;
   parameters << Param("oauth_nonce", QString::number(qrand()))
              << Param("oauth_timestamp", timestamp)

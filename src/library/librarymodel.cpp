@@ -174,7 +174,7 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
       // Special case: if the song is a compilation and the current GroupBy
       // level is Artists, then we want the Various Artists node :(
       if (IsArtistGroupBy(type) && song.is_compilation()) {
-        if (container->compilation_artist_node_ == NULL)
+        if (container->compilation_artist_node_ == nullptr)
           CreateCompilationArtistNode(true, container);
         container = container->compilation_artist_node_;
       } else {
@@ -242,7 +242,7 @@ LibraryItem* LibraryModel::CreateCompilationArtistNode(bool signal, LibraryItem*
 
   parent->compilation_artist_node_ =
       new LibraryItem(LibraryItem::Type_Container, parent);
-  parent->compilation_artist_node_->compilation_artist_node_ = NULL;
+  parent->compilation_artist_node_->compilation_artist_node_ = nullptr;
   parent->compilation_artist_node_->key = tr("Various artists");
   parent->compilation_artist_node_->sort_text = " various";
   parent->compilation_artist_node_->container_level = parent->container_level + 1;
@@ -378,7 +378,7 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
 
       // Special case the Various Artists node
       if (IsCompilationArtistNode(node))
-        node->parent->compilation_artist_node_ = NULL;
+        node->parent->compilation_artist_node_ = nullptr;
       else
         container_nodes_[node->container_level].remove(node->key);
 
@@ -702,10 +702,10 @@ void LibraryModel::BeginReset() {
   container_nodes_[2].clear();
   divider_nodes_.clear();
   pending_art_.clear();
-  smart_playlist_node_ = NULL;
+  smart_playlist_node_ = nullptr;
 
   root_ = new LibraryItem(this);
-  root_->compilation_artist_node_ = NULL;
+  root_->compilation_artist_node_ = nullptr;
   root_->lazy_loaded = false;
 
   // Smart playlists?
@@ -833,7 +833,7 @@ LibraryItem* LibraryModel::InitItem(GroupBy type, bool signal, LibraryItem *pare
 
   // Initialise the item depending on what type it's meant to be
   LibraryItem* item = new LibraryItem(item_type, parent);
-  item->compilation_artist_node_ = NULL;
+  item->compilation_artist_node_ = nullptr;
   item->container_level = container_level;
   return item;
 }
@@ -1072,13 +1072,13 @@ QStringList LibraryModel::mimeTypes() const {
 
 QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
   if (indexes.isEmpty())
-    return NULL;
+    return nullptr;
 
   // Special case: a smart playlist was dragged
   if (IndexToItem(indexes.first())->type == LibraryItem::Type_SmartPlaylist) {
     GeneratorPtr generator = CreateGenerator(indexes.first());
     if (!generator)
-      return NULL;
+      return nullptr;
 
     GeneratorMimeData* data = new GeneratorMimeData(generator);
     data->setData(kSmartPlaylistsMimeType, QByteArray());
@@ -1248,7 +1248,7 @@ void LibraryModel::CreateSmartPlaylists() {
 
 void LibraryModel::ItemFromSmartPlaylist(const QSettings& s, bool notify) const {
   LibraryItem* item = new LibraryItem(LibraryItem::Type_SmartPlaylist,
-                                      notify ? NULL : smart_playlist_node_);
+                                      notify ? nullptr : smart_playlist_node_);
   item->display_text = tr(qPrintable(s.value("name").toString()));
   item->sort_text = item->display_text;
   item->key = s.value("type").toString();

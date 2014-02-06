@@ -32,8 +32,8 @@ const char* SavedRadio::kSettingsGroup = "SavedRadio";
 
 SavedRadio::SavedRadio(Application* app, InternetModel* parent)
   : InternetService(kServiceName, app, parent, parent),
-    context_menu_(NULL),
-    root_(NULL)
+    context_menu_(nullptr),
+    root_(nullptr)
 {
   LoadStreams();
 

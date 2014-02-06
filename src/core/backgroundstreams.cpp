@@ -158,7 +158,7 @@ void BackgroundStreams::StreamActionDestroyed() {
 
   foreach (Stream* stream, streams_.values()) {
     if (stream->action == action) {
-      stream->action = NULL;
+      stream->action = nullptr;
     }
   }
 }

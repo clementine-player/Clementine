@@ -119,7 +119,7 @@ void MoodbarItemDelegate::StartLoadingData(const QUrl& url, Data* data) {
 
   // Load a mood file for this song and generate some colors from it
   QByteArray bytes;
-  MoodbarPipeline* pipeline = NULL;
+  MoodbarPipeline* pipeline = nullptr;
   switch (app_->moodbar_loader()->Load(url, &bytes, &pipeline)) {
   case MoodbarLoader::CannotLoad:
     data->state_ = Data::State_CannotLoad;

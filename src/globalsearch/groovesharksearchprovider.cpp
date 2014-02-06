@@ -26,7 +26,7 @@
 
 GroovesharkSearchProvider::GroovesharkSearchProvider(Application* app, QObject* parent)
     : SearchProvider(app, parent),
-      service_(NULL)
+      service_(nullptr)
 {
 }
 

@@ -32,12 +32,12 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
   : SystemTrayIcon(parent),
     tray_(new QSystemTrayIcon(this)),
     menu_(new QMenu),
-    action_play_pause_(NULL),
-    action_stop_(NULL),
-    action_stop_after_this_track_(NULL),
-    action_mute_(NULL),
-    action_love_(NULL),
-    action_ban_(NULL)
+    action_play_pause_(nullptr),
+    action_stop_(nullptr),
+    action_stop_after_this_track_(nullptr),
+    action_mute_(nullptr),
+    action_love_(nullptr),
+    action_ban_(nullptr)
 {
   QIcon theme_icon      = IconLoader::Load("clementine-panel");
   QIcon theme_icon_grey = IconLoader::Load("clementine-panel-grey");
@@ -238,7 +238,7 @@ void QtSystemTrayIcon::SetNowPlaying(const Song& song, const QString& image_path
   return;
 #endif
 
-  int columns = image_path == NULL ? 1 : 2;
+  int columns = image_path == nullptr ? 1 : 2;
 
   QString clone = pattern_;
 

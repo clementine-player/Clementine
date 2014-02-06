@@ -35,7 +35,7 @@ MoodbarController::MoodbarController(Application* app, QObject* parent)
 
 void MoodbarController::CurrentSongChanged(const Song& song) {
   QByteArray data;
-  MoodbarPipeline* pipeline = NULL;
+  MoodbarPipeline* pipeline = nullptr;
   const MoodbarLoader::Result result =
       app_->moodbar_loader()->Load(song.url(), &data, &pipeline);
 

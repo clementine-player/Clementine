@@ -69,7 +69,7 @@ GstEngine::GstEngine(TaskManager* task_manager)
   : Engine::Base(),
     task_manager_(task_manager),
     buffering_task_id_(-1),
-    latest_buffer_(NULL),
+    latest_buffer_(nullptr),
     equalizer_enabled_(false),
     stereo_balance_(0.0f),
     rg_enabled_(false),
@@ -106,7 +106,7 @@ bool GstEngine::Init() {
 }
 
 void GstEngine::InitialiseGstreamer() {
-  gst_init(NULL, NULL);
+  gst_init(nullptr, nullptr);
 
 #ifdef HAVE_MOODBAR
   gstmoodbar_register_static();
@@ -181,14 +181,14 @@ void GstEngine::AddBufferToScope(GstBuffer* buf, int pipeline_id) {
     return;
   }
 
-  if (latest_buffer_ != NULL) {
+  if (latest_buffer_ != nullptr) {
     gst_buffer_unref(latest_buffer_);
   }
   latest_buffer_ = buf;
 }
 
 const Engine::Scope& GstEngine::scope() {
-  if (latest_buffer_ != NULL) {
+  if (latest_buffer_ != nullptr) {
     UpdateScope();
   }
 
@@ -218,7 +218,7 @@ void GstEngine::UpdateScope() {
   memcpy(dest, source, bytes);
 
   gst_buffer_unref(latest_buffer_);
-  latest_buffer_ = NULL;
+  latest_buffer_ = nullptr;
 }
 
 void GstEngine::StartPreloading(const QUrl& url, bool force_stop_at_end,
@@ -619,7 +619,7 @@ GstElement* GstEngine::CreateElement(const QString& factoryName, GstElement* bin
     emit Error(QString("GStreamer could not create the element: %1.  "
                        "Please make sure that you have installed all necessary GStreamer plugins (e.g. OGG and MP3)").arg( factoryName ) );
     gst_object_unref(GST_OBJECT(bin));
-    return NULL;
+    return nullptr;
   }
 
   if (bin)

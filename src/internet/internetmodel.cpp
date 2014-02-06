@@ -61,7 +61,7 @@ using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
 using smart_playlists::GeneratorPtr;
 
-QMap<QString, InternetService*>* InternetModel::sServices = NULL;
+QMap<QString, InternetService*>* InternetModel::sServices = nullptr;
 
 InternetModel::InternetModel(Application* app, QObject* parent)
   : QStandardItemModel(parent),
@@ -162,7 +162,7 @@ void InternetModel::ServiceDeleted() {
 InternetService* InternetModel::ServiceByName(const QString& name) {
   if (sServices->contains(name))
     return sServices->value(name);
-  return NULL;
+  return nullptr;
 }
 
 InternetService* InternetModel::ServiceForItem(const QStandardItem* item) const {
@@ -178,7 +178,7 @@ InternetService* InternetModel::ServiceForIndex(const QModelIndex& index) const 
     }
     current_index = current_index.parent();
   }
-  return NULL;
+  return nullptr;
 }
 
 Qt::ItemFlags InternetModel::flags(const QModelIndex& index) const {
@@ -230,7 +230,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
       indexes[0].data(Role_PlayBehaviour).toInt() ==
           PlayBehaviour_DoubleClickAction) {
     InternetModel::ServiceForIndex(indexes[0])->ItemDoubleClicked(itemFromIndex(indexes[0]));
-    return NULL;
+    return nullptr;
   }
 
   if (indexes.count() == 1 &&
@@ -238,7 +238,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
     GeneratorPtr generator =
         InternetModel::ServiceForIndex(indexes[0])->CreateGenerator(itemFromIndex(indexes[0]));
     if (!generator)
-      return NULL;
+      return nullptr;
     GeneratorMimeData* data = new GeneratorMimeData(generator);
     data->setData(LibraryModel::kSmartPlaylistsMimeType, QByteArray());
     data->name_for_new_playlist_ = this->data(indexes.first()).toString();
@@ -271,7 +271,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
   }
 
   if (urls.isEmpty())
-    return NULL;
+    return nullptr;
 
   InternetMimeData* data = new InternetMimeData(this);
   data->setUrls(urls);

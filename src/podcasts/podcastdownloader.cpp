@@ -37,7 +37,7 @@ const char* PodcastDownloader::kSettingsGroup = "Podcasts";
 const int PodcastDownloader::kAutoDeleteCheckIntervalMsec = 15 * 60 * kMsecPerSec; // 15 minutes
 
 struct PodcastDownloader::Task {
-  Task() : file(NULL) {}
+  Task() : file(nullptr) {}
   ~Task() { delete file; }
 
   PodcastEpisode episode;
@@ -52,7 +52,7 @@ PodcastDownloader::PodcastDownloader(Application* app, QObject* parent)
     disallowed_filename_characters_("[^a-zA-Z0-9_~ -]"),
     auto_download_(false),
     delete_after_secs_(0),
-    current_task_(NULL),
+    current_task_(nullptr),
     last_progress_signal_(0),
     auto_delete_timer_(new QTimer(this))
 {
@@ -211,7 +211,7 @@ void PodcastDownloader::StartDownloading(Task* task) {
 }
 
 void PodcastDownloader::NextTask() {
-  current_task_ = NULL;
+  current_task_ = nullptr;
 
   if (!queued_tasks_.isEmpty()) {
     StartDownloading(queued_tasks_.dequeue());

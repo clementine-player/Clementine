@@ -28,7 +28,7 @@
 
 AlbumCoverManagerList::AlbumCoverManagerList(QWidget *parent)
   : QListWidget(parent),
-    manager_(NULL)
+    manager_(nullptr)
 {
 }
 
@@ -40,7 +40,7 @@ QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items) 
   }
 
   if (songs.isEmpty())
-    return NULL;
+    return nullptr;
 
   // Get URLs from the songs
   QList<QUrl> urls;

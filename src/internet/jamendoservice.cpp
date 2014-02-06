@@ -73,12 +73,12 @@ const int JamendoService::kApproxDatabaseSize = 300000;
 JamendoService::JamendoService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
-      context_menu_(NULL),
-      library_backend_(NULL),
-      library_filter_(NULL),
-      library_model_(NULL),
+      context_menu_(nullptr),
+      library_backend_(nullptr),
+      library_filter_(nullptr),
+      library_model_(nullptr),
       library_sort_model_(new QSortFilterProxyModel(this)),
-      search_provider_(NULL),
+      search_provider_(nullptr),
       load_database_task_id_(0),
       total_song_count_(0),
       accepted_download_(false) {

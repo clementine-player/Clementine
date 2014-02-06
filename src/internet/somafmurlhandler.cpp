@@ -76,7 +76,7 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
   }
 
   // Parse the playlist
-  PlaylistParser parser(NULL);
+  PlaylistParser parser(nullptr);
   QList<Song> songs = parser.LoadFromDevice(reply);
 
   qLog(Info) << "Loading station finished, got" << songs.count() << "songs";

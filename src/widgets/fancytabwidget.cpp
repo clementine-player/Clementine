@@ -503,13 +503,13 @@ private:
 FancyTabWidget::FancyTabWidget(QWidget* parent)
   : QWidget(parent),
     mode_(Mode_None),
-    tab_bar_(NULL),
+    tab_bar_(nullptr),
     stack_(new QStackedLayout),
     side_widget_(new QWidget),
     side_layout_(new QVBoxLayout),
     top_layout_(new QVBoxLayout),
     use_background_(false),
-    menu_(NULL),
+    menu_(nullptr),
     proxy_style_(new FancyTabProxyStyle)
 {
   side_layout_->setSpacing(0);
@@ -605,7 +605,7 @@ void FancyTabWidget::AddBottomWidget(QWidget* widget) {
 void FancyTabWidget::SetMode(Mode mode) {
   // Remove previous tab bar
   delete tab_bar_;
-  tab_bar_ = NULL;
+  tab_bar_ = nullptr;
 
   use_background_ = false;
 

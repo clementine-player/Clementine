@@ -28,10 +28,10 @@
 bool MoodbarPipeline::sIsAvailable = false;
 
 MoodbarPipeline::MoodbarPipeline(const QUrl& local_filename)
-  : QObject(NULL),
+  : QObject(nullptr),
     local_filename_(local_filename),
-    pipeline_(NULL),
-    convert_element_(NULL),
+    pipeline_(nullptr),
+    convert_element_(nullptr),
     success_(false)
 {
 }
@@ -61,7 +61,7 @@ bool MoodbarPipeline::IsAvailable() {
 }
 
 GstElement* MoodbarPipeline::CreateElement(const QString& factory_name) {
-  GstElement* ret = gst_element_factory_make(factory_name.toAscii().constData(), NULL);
+  GstElement* ret = gst_element_factory_make(factory_name.toAscii().constData(), nullptr);
 
   if (ret) {
     gst_bin_add(GST_BIN(pipeline_), ret);
@@ -90,21 +90,21 @@ void MoodbarPipeline::Start() {
   GstElement* appsink      = CreateElement("appsink");
 
   if (!decodebin || !convert_element_ || !fftwspectrum || !moodbar || !appsink) {
-    pipeline_ = NULL;
+    pipeline_ = nullptr;
     emit Finished(false);
     return;
   }
 
   // Join them together
-  gst_element_link_many(convert_element_, fftwspectrum, moodbar, appsink, NULL);
+  gst_element_link_many(convert_element_, fftwspectrum, moodbar, appsink, nullptr);
 
   // Set properties
-  g_object_set(decodebin, "uri", local_filename_.toEncoded().constData(), NULL);
+  g_object_set(decodebin, "uri", local_filename_.toEncoded().constData(), nullptr);
   g_object_set(fftwspectrum, "def-size", 2048,
                              "def-step", 1024,
-                             "hiquality", true, NULL);
+                             "hiquality", true, nullptr);
   g_object_set(moodbar, "height", 1,
-                        "max-width", 1000, NULL);
+                        "max-width", 1000, nullptr);
 
   // Connect signals
   CHECKED_GCONNECT(decodebin, "pad-added", &NewPadCallback, this);
@@ -115,7 +115,7 @@ void MoodbarPipeline::Start() {
   memset(&callbacks, 0, sizeof(callbacks));
   callbacks.new_buffer = NewBufferCallback;
 
-  gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(appsink), &callbacks, this, NULL);
+  gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(appsink), &callbacks, this, nullptr);
 
   // Start playing
   gst_element_set_state(pipeline_, GST_STATE_PLAYING);
@@ -187,9 +187,10 @@ void MoodbarPipeline::Cleanup() {
   Q_ASSERT(QThread::currentThread() != qApp->thread());
 
   if (pipeline_) {
-    gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
+    gst_bus_set_sync_handler(
+        gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), nullptr,nullptr);
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(pipeline_);
-    pipeline_ = NULL;
+    pipeline_ = nullptr;
   }
 }

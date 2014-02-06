@@ -165,11 +165,11 @@ bool LibraryItemDelegate::helpEvent(QHelpEvent *event, QAbstractItemView *view,
 
 LibraryView::LibraryView(QWidget* parent)
   : AutoExpandingTreeView(parent),
-    app_(NULL),
-    filter_(NULL),
+    app_(nullptr),
+    filter_(nullptr),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
-    context_menu_(NULL),
+    context_menu_(nullptr),
     is_in_keyboard_search_(false)
 {
   setItemDelegate(new LibraryItemDelegate(this));
@@ -296,7 +296,7 @@ void LibraryView::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   SetAutoOpen(s.value("auto_open", true).toBool());
-  if (app_ != NULL) {
+  if (app_ != nullptr) {
     app_->library_model()->set_pretty_covers(s.value("pretty_covers", true).toBool());
     app_->library_model()->set_show_dividers(s.value("show_dividers", true).toBool());
   }

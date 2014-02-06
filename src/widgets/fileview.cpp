@@ -37,9 +37,9 @@ const char* FileView::kFileFilter = "*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma 
 FileView::FileView(QWidget* parent)
     : QWidget(parent),
       ui_(new Ui_FileView),
-      model_(NULL),
+      model_(nullptr),
       undo_stack_(new QUndoStack(this)),
-      task_manager_(NULL),
+      task_manager_(nullptr),
       storage_(new FilesystemMusicStorage("/"))
 {
   ui_->setupUi(this);

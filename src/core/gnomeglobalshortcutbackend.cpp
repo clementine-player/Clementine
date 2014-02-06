@@ -39,7 +39,7 @@ const char* GnomeGlobalShortcutBackend::kGsdInterface = "org.gnome.SettingsDaemo
 
 GnomeGlobalShortcutBackend::GnomeGlobalShortcutBackend(GlobalShortcuts* parent)
   : GlobalShortcutBackend(parent),
-    interface_(NULL),
+    interface_(nullptr),
     is_connected_(false)
 {
 }

@@ -25,7 +25,7 @@ CloudFileService::CloudFileService(
     const QIcon& icon,
     SettingsDialog::Page settings_page)
   : InternetService(service_name, app, parent, parent),
-    root_(NULL),
+    root_(nullptr),
     network_(new NetworkAccessManager(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     playlist_manager_(app->playlist_manager()),

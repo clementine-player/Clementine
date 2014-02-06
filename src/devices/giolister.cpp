@@ -58,7 +58,7 @@ bool GioLister::DeviceInfo::is_suitable() const {
 template <typename T, typename F>
 void OperationFinished(F f, GObject *object, GAsyncResult *result) {
   T* obj = reinterpret_cast<T*>(object);
-  GError* error = NULL;
+  GError* error = nullptr;
 
   f(obj, result, &error);
 
@@ -371,8 +371,8 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   // Do a sanity check to make sure the root is actually this mount - when a
   // device is unmounted GIO sends a changed signal before the removed signal,
   // and we end up reading information about the / filesystem by mistake.
-  GError* error = NULL;
-  GMount* actual_mount = g_file_find_enclosing_mount(root, NULL, &error);
+  GError* error = nullptr;
+  GMount* actual_mount = g_file_find_enclosing_mount(root, nullptr, &error);
   if (error || !actual_mount) {
     g_error_free(error);
     invalid_enclosing_mount = true;
@@ -381,10 +381,10 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   }
 
   // Query the filesystem info for size, free space, and type
-  error = NULL;
+  error = nullptr;
   GFileInfo* info = g_file_query_filesystem_info(root,
       G_FILE_ATTRIBUTE_FILESYSTEM_SIZE "," G_FILE_ATTRIBUTE_FILESYSTEM_FREE ","
-      G_FILE_ATTRIBUTE_FILESYSTEM_TYPE, NULL, &error);
+      G_FILE_ATTRIBUTE_FILESYSTEM_TYPE, nullptr, &error);
   if (error) {
     qLog(Warning) << error->message;
     g_error_free(error);
@@ -401,9 +401,9 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   // Query the file's info for a filesystem ID
   // Only afc devices (that I know of) give reliably unique IDs
   if (filesystem_type == "afc") {
-    error = NULL;
+    error = nullptr;
     info = g_file_query_info(root, G_FILE_ATTRIBUTE_ID_FILESYSTEM,
-                             G_FILE_QUERY_INFO_NONE, NULL, &error);
+                             G_FILE_QUERY_INFO_NONE, nullptr, &error);
     if (error) {
       qLog(Warning) << error->message;
       g_error_free(error);
@@ -489,10 +489,10 @@ void GioLister::UnmountDevice(const QString &id) {
       g_volume_eject_with_operation(
           info.volume,
           G_MOUNT_UNMOUNT_NONE,
-          NULL,
-          NULL,
+          nullptr,
+          nullptr,
           (GAsyncReadyCallback) VolumeEjectFinished,
-          NULL);
+          nullptr);
       g_object_unref(info.volume);
       return;
     }
@@ -502,18 +502,18 @@ void GioLister::UnmountDevice(const QString &id) {
     g_mount_eject_with_operation(
         info.mount,
         G_MOUNT_UNMOUNT_NONE,
-        NULL,
-        NULL,
+        nullptr,
+        nullptr,
         (GAsyncReadyCallback) MountEjectFinished,
-        NULL);
+        nullptr);
   } else if (g_mount_can_unmount(info.mount)) {
     g_mount_unmount_with_operation(
         info.mount,
         G_MOUNT_UNMOUNT_NONE,
-        NULL,
-        NULL,
+        nullptr,
+        nullptr,
         (GAsyncReadyCallback) MountUnmountFinished,
-        NULL);
+        nullptr);
   }
 }
 
@@ -527,9 +527,9 @@ void GioLister::UpdateDeviceFreeSpace(const QString& id) {
 
     GFile* root = g_mount_get_root(device_info.mount);
 
-    GError* error = NULL;
+    GError* error = nullptr;
     GFileInfo* info = g_file_query_filesystem_info(
-        root, G_FILE_ATTRIBUTE_FILESYSTEM_FREE, NULL, &error);
+        root, G_FILE_ATTRIBUTE_FILESYSTEM_FREE, nullptr, &error);
     if (error) {
       qLog(Warning) << error->message;
       g_error_free(error);
@@ -571,7 +571,7 @@ void GioLister::DoMountDevice(const QString& id, int request_id) {
     return;
   }
 
-  g_volume_mount(info.volume, G_MOUNT_MOUNT_NONE, NULL, NULL,
-                 VolumeMountFinished, NULL);
+  g_volume_mount(info.volume, G_MOUNT_MOUNT_NONE, nullptr, nullptr,
+                 VolumeMountFinished, nullptr);
   emit DeviceMounted(id, request_id, true);
 }

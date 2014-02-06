@@ -48,11 +48,11 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
     group_framerate_(new QActionGroup(this)),
     mapper_(new QSignalMapper(this)),
     mapper_framerate_(new QSignalMapper(this)),
-    visualisation_action_(NULL),
+    visualisation_action_(nullptr),
     double_click_timer_(new QTimer(this)),
     ignore_next_click_(false),
-    current_analyzer_(NULL),
-    engine_(NULL)
+    current_analyzer_(nullptr),
+    engine_(nullptr)
 {
   QHBoxLayout* layout = new QHBoxLayout(this);
   setLayout(layout);
@@ -135,7 +135,7 @@ void AnalyzerContainer::SetEngine(EngineBase* engine) {
 
 void AnalyzerContainer::DisableAnalyzer() {
   delete current_analyzer_;
-  current_analyzer_ = NULL;
+  current_analyzer_ = nullptr;
 
   Save();
 }

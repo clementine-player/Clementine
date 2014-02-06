@@ -31,7 +31,7 @@ const char* TrackSlider::kSettingsGroup = "MainWindow";
 TrackSlider::TrackSlider(QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_TrackSlider),
-    moodbar_style_(NULL),
+    moodbar_style_(nullptr),
     setting_value_(false),
     show_remaining_time_(true),
     slider_maximum_value_(0)

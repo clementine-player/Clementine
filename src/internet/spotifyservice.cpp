@@ -43,15 +43,15 @@ const int SpotifyService::kSearchDelayMsec = 400;
 
 SpotifyService::SpotifyService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
-      server_(NULL),
-      blob_process_(NULL),
-      root_(NULL),
-      search_(NULL),
-      starred_(NULL),
-      inbox_(NULL),
-      toplist_(NULL),
+      server_(nullptr),
+      blob_process_(nullptr),
+      root_(nullptr),
+      search_(nullptr),
+      starred_(nullptr),
+      inbox_(nullptr),
+      toplist_(nullptr),
       login_task_id_(0),
-      context_menu_(NULL),
+      context_menu_(nullptr),
       search_box_(new SearchBoxWidget(this)),
       search_delay_(new QTimer(this)),
       login_state_(LoginState_OtherError),
@@ -181,7 +181,7 @@ void SpotifyService::LoginCompleted(bool success, const QString& error,
     }
 
     if (show_error_dialog) {
-      QMessageBox::warning(NULL, tr("Spotify login error"), error_copy, QMessageBox::Close);
+      QMessageBox::warning(nullptr, tr("Spotify login error"), error_copy, QMessageBox::Close);
     }
   } else {
     login_state_ = LoginState_LoggedIn;
@@ -197,7 +197,7 @@ void SpotifyService::LoginCompleted(bool success, const QString& error,
 void SpotifyService::BlobProcessError(QProcess::ProcessError error) {
   qLog(Error) << "Spotify blob process failed:" << error;
   blob_process_->deleteLater();
-  blob_process_ = NULL;
+  blob_process_ = nullptr;
 
   if (login_task_id_) {
     app_->task_manager()->SetTaskFinished(login_task_id_);
@@ -449,7 +449,7 @@ QStandardItem* SpotifyService::PlaylistBySpotifyIndex(int index) const {
       return item;
     }
   }
-  return NULL;
+  return nullptr;
 }
 
 void SpotifyService::UserPlaylistLoaded(const pb::spotify::LoadPlaylistResponse& response) {
@@ -515,7 +515,7 @@ PlaylistItem::Options SpotifyService::playlistitem_options() const {
 QWidget* SpotifyService::HeaderWidget() const {
   if (IsLoggedIn())
     return search_box_;
-  return NULL;
+  return nullptr;
 }
 
 void SpotifyService::EnsureMenuCreated() {
@@ -719,8 +719,8 @@ void SpotifyService::ShowConfig() {
 void SpotifyService::Logout() {
   delete server_;
   delete blob_process_;
-  server_ = NULL;
-  blob_process_ = NULL;
+  server_ = nullptr;
+  blob_process_ = nullptr;
 
   login_state_ = LoginState_OtherError;
 

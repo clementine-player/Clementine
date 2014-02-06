@@ -99,9 +99,9 @@ void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element, const QStyleOpt
 
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
-    app_(NULL),
+    app_(nullptr),
     style_(new PlaylistProxyStyle(style())),
-    playlist_(NULL),
+    playlist_(nullptr),
     header_(new PlaylistHeader(Qt::Horizontal, this, this)),
     setting_initial_header_layout_(false),
     upgrading_from_qheaderview_(false),
@@ -116,7 +116,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     glow_enabled_(true),
     currently_glowing_(false),
     glow_intensity_step_(0),
-    rating_delegate_(NULL),
+    rating_delegate_(nullptr),
     inhibit_autoscroll_timer_(new QTimer(this)),
     inhibit_autoscroll_(false),
     currently_autoscrolling_(false),
@@ -982,7 +982,7 @@ void PlaylistView::dropEvent(QDropEvent *event) {
 }
 
 void PlaylistView::PlaylistDestroyed() {
-  playlist_ = NULL;
+  playlist_ = nullptr;
   // We'll get a SetPlaylist() soon
 }
 

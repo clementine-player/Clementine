@@ -26,7 +26,7 @@
 #include <QTimer>
 
 SpotifyServer::SpotifyServer(QObject* parent)
-  : AbstractMessageHandler<pb::spotify::Message>(NULL, parent),
+  : AbstractMessageHandler<pb::spotify::Message>(nullptr, parent),
     server_(new QTcpServer(this)),
     logged_in_(false)
 {

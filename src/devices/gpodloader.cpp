@@ -30,7 +30,7 @@
 GPodLoader::GPodLoader(
     const QString& mount_point, TaskManager* task_manager,
     LibraryBackend* backend, std::shared_ptr<ConnectedDevice> device)
-  : QObject(NULL),
+  : QObject(nullptr),
     device_(device),
     mount_point_(mount_point),
     type_(Song::Type_Unknown),
@@ -48,7 +48,7 @@ void GPodLoader::LoadDatabase() {
   emit TaskStarted(task_id);
 
   // Load the iTunes database
-  GError* error = NULL;
+  GError* error = nullptr;
   Itdb_iTunesDB* db = itdb_parse(
       QDir::toNativeSeparators(mount_point_).toLocal8Bit(), &error);
 
@@ -71,7 +71,7 @@ void GPodLoader::LoadDatabase() {
       ? QDir::fromNativeSeparators(mount_point_) : path_prefix_;
 
   SongList songs;
-  for (GList* tracks = db->tracks ; tracks != NULL ; tracks = tracks->next) {
+  for (GList* tracks = db->tracks ; tracks != nullptr ; tracks = tracks->next) {
     Itdb_Track* track = static_cast<Itdb_Track*>(tracks->data);
 
     Song song;

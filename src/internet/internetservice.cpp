@@ -31,10 +31,10 @@ InternetService::InternetService(const QString& name, Application* app,
     app_(app),
     model_(model),
     name_(name),
-    append_to_playlist_(NULL),
-    replace_playlist_(NULL),
-    open_in_new_playlist_(NULL),
-    separator_(NULL)
+    append_to_playlist_(nullptr),
+    replace_playlist_(nullptr),
+    open_in_new_playlist_(nullptr),
+    separator_(nullptr)
 {
 }
 

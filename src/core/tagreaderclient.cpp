@@ -26,7 +26,7 @@
 
 
 const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
-TagReaderClient* TagReaderClient::sInstance = NULL;
+TagReaderClient* TagReaderClient::sInstance = nullptr;
 
 TagReaderClient::TagReaderClient(QObject* parent)
   : QObject(parent),

@@ -28,7 +28,7 @@
 TranscoderOptionsDialog::TranscoderOptionsDialog(Song::FileType type, QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_TranscoderOptionsDialog),
-    options_(NULL)
+    options_(nullptr)
 {
   ui_->setupUi(this);
 

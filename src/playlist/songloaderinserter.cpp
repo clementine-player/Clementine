@@ -27,7 +27,7 @@ SongLoaderInserter::SongLoaderInserter(TaskManager* task_manager,
                                        LibraryBackendInterface* library,
                                        const Player* player)
     : task_manager_(task_manager),
-      destination_(NULL),
+      destination_(nullptr),
       row_(-1),
       play_now_(true),
       enqueue_(false),
@@ -107,7 +107,7 @@ void SongLoaderInserter::LoadAudioCD(Playlist *destination,
 }
 
 void SongLoaderInserter::DestinationDestroyed() {
-  destination_ = NULL;
+  destination_ = nullptr;
 }
 
 void SongLoaderInserter::AudioCDTagsLoaded(bool success) {

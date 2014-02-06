@@ -55,7 +55,7 @@ SpotifyBlobDownloader::~SpotifyBlobDownloader() {
 }
 
 bool SpotifyBlobDownloader::Prompt() {
-  QMessageBox::StandardButton ret = QMessageBox::question(NULL,
+  QMessageBox::StandardButton ret = QMessageBox::question(nullptr,
       tr("Spotify plugin not installed"),
       tr("An additional plugin is required to use Spotify in Clementine.  Would you like to download and install it now?"),
       QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
@@ -212,7 +212,7 @@ void SpotifyBlobDownloader::ShowError(const QString& message) {
   }
 
   qLog(Warning) << message;
-  QMessageBox::warning(NULL, tr("Error downloading Spotify plugin"), message,
+  QMessageBox::warning(nullptr, tr("Error downloading Spotify plugin"), message,
                        QMessageBox::Close);
   deleteLater();
 }

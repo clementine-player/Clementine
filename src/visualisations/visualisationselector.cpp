@@ -32,7 +32,7 @@
 VisualisationSelector::VisualisationSelector(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_VisualisationSelector),
-    vis_(NULL)
+    vis_(nullptr)
 {
   ui_->setupUi(this);
 

@@ -96,7 +96,7 @@ AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon,
     app_(app),
     model_(new QStandardItemModel(this)),
     no_cover_icon_(no_cover_icon),
-    fetcher_(NULL),
+    fetcher_(nullptr),
     id_(0)
 {
   setWindowModality(Qt::WindowModal);

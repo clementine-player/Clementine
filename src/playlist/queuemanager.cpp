@@ -29,8 +29,8 @@
 QueueManager::QueueManager(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_QueueManager),
-    playlists_(NULL),
-    current_playlist_(NULL)
+    playlists_(nullptr),
+    current_playlist_(nullptr)
 {
   ui_->setupUi(this);
   ui_->list->setItemDelegate(new QueuedItemDelegate(this, 0));
@@ -150,6 +150,6 @@ void QueueManager::UpdateButtonState() {
 }
 
 void QueueManager::PlaylistDestroyed() {
-  current_playlist_ = NULL;
+  current_playlist_ = nullptr;
   // We'll get another CurrentPlaylistChanged() soon
 }

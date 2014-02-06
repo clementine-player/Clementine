@@ -200,7 +200,7 @@ QStringList IcecastModel::mimeTypes() const {
 
 QMimeData* IcecastModel::mimeData(const QModelIndexList& indexes) const {
   if (indexes.isEmpty())
-    return NULL;
+    return nullptr;
 
   SongMimeData* data = new SongMimeData;
   QList<QUrl> urls;
@@ -216,7 +216,7 @@ QMimeData* IcecastModel::mimeData(const QModelIndexList& indexes) const {
 
   if (data->songs.isEmpty()) {
     delete data;
-    return NULL;
+    return nullptr;
   }
 
   data->setUrls(urls);

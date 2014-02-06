@@ -109,7 +109,7 @@ void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device& 
 
   QStringList unique_ids = dev.unique_id_.split(',');
   foreach (const QString& id, unique_ids) {
-    backends_ << Backend(NULL, id);
+    backends_ << Backend(nullptr, id);
   }
 }
 
@@ -149,7 +149,7 @@ void DeviceManager::DeviceInfo::LoadIcon(const QVariantList& icons, const QStrin
 
 const DeviceManager::DeviceInfo::Backend* DeviceManager::DeviceInfo::BestBackend() const {
   int best_priority = -1;
-  const Backend* ret = NULL;
+  const Backend* ret = nullptr;
 
   for (int i=0 ; i<backends_.count() ; ++i) {
     if (backends_[i].lister_ && backends_[i].lister_->priority() > best_priority) {
@@ -470,7 +470,7 @@ void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
     // Keep the structure around, but just "disconnect" it
     for (int backend_index = 0 ; backend_index < info.backends_.count() ; ++backend_index) {
       if (info.backends_[backend_index].unique_id_ == id) {
-        info.backends_[backend_index].lister_ = NULL;
+        info.backends_[backend_index].lister_ = nullptr;
         break;
       }
     }
@@ -563,7 +563,7 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     // was "ipod" or "mtp" then the user compiled out support and the device
     // won't work properly.
     if (url.scheme() == "mtp" || url.scheme() == "gphoto2") {
-      if (QMessageBox::critical(NULL, tr("This device will not work properly"),
+      if (QMessageBox::critical(nullptr, tr("This device will not work properly"),
           tr("This is an MTP device, but you compiled Clementine without libmtp support.") + "  " +
           tr("If you continue, this device will work slowly and songs copied to it may not work."),
           QMessageBox::Abort, QMessageBox::Ignore) == QMessageBox::Abort)
@@ -571,7 +571,7 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     }
 
     if (url.scheme() == "ipod") {
-      if (QMessageBox::critical(NULL, tr("This device will not work properly"),
+      if (QMessageBox::critical(nullptr, tr("This device will not work properly"),
           tr("This is an iPod, but you compiled Clementine without libgpod support.") + "  " +
           tr("If you continue, this device will work slowly and songs copied to it may not work."),
           QMessageBox::Abort, QMessageBox::Ignore) == QMessageBox::Abort)

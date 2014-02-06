@@ -48,7 +48,7 @@ Analyzer::Base::Base( QWidget *parent, uint scopeSize )
         : QWidget( parent )
         , m_timeout( 40 ) // msec
         , m_fht( new FHT(scopeSize) )
-        , m_engine(NULL)
+        , m_engine(nullptr)
         , m_lastScope(512)
         , new_frame_(false)
         , is_playing_(false)

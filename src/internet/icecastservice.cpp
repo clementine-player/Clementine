@@ -52,9 +52,9 @@ const char* IcecastService::kHomepage = "http://dir.xiph.org/";
 IcecastService::IcecastService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
-      context_menu_(NULL),
-      backend_(NULL),
-      model_(NULL),
+      context_menu_(nullptr),
+      backend_(nullptr),
+      model_(nullptr),
       filter_(new IcecastFilterWidget(0)),
       load_directory_task_id_(0)
 {

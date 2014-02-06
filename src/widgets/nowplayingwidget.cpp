@@ -60,21 +60,21 @@ const int NowPlayingWidget::kTopBorder = 4;
 
 NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   : QWidget(parent),
-    app_(NULL),
+    app_(nullptr),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
-    above_statusbar_action_(NULL),
+    above_statusbar_action_(nullptr),
     visible_(false),
     small_ideal_height_(0),
     show_hide_animation_(new QTimeLine(500, this)),
     fade_animation_(new QTimeLine(1000, this)),
     details_(new QTextDocument(this)),
     previous_track_opacity_(0.0),
-    bask_in_his_glory_action_(NULL),
+    bask_in_his_glory_action_(nullptr),
     downloading_covers_(false),
     aww_(false),
-    kittens_(NULL),
+    kittens_(nullptr),
     pending_kitten_(0)
 {
   // Load settings

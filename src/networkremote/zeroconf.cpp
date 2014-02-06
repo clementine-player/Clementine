@@ -16,7 +16,7 @@
 
 #include <QTextCodec>
 
-Zeroconf* Zeroconf::sInstance = NULL;
+Zeroconf* Zeroconf::sInstance = nullptr;
 
 Zeroconf::~Zeroconf() {
 
@@ -42,7 +42,7 @@ QByteArray Zeroconf::TruncateName(const QString& name) {
   QTextCodec* codec = QTextCodec::codecForName("UTF-8");
   QByteArray truncated_utf8;
   foreach (QChar c, name) {
-    QByteArray rendered = codec->fromUnicode(&c, 1, NULL);
+    QByteArray rendered = codec->fromUnicode(&c, 1, nullptr);
     if (truncated_utf8.size() + rendered.size() >= 63) {
       break;
     }

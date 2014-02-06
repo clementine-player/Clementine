@@ -74,7 +74,7 @@ public:
 
 QueryWizardPlugin::QueryWizardPlugin(Application* app, LibraryBackend* library, QObject* parent)
   : WizardPlugin(app, library, parent),
-    search_page_(NULL),
+    search_page_(nullptr),
     previous_scrollarea_max_(0)
 {
 }

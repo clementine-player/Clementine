@@ -29,7 +29,7 @@
 #endif
 
 DeviceLister::DeviceLister()
-  : thread_(NULL)
+  : thread_(nullptr)
 {
 }
 

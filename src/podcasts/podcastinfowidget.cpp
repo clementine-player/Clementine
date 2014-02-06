@@ -23,7 +23,7 @@
 PodcastInfoWidget::PodcastInfoWidget(QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_PodcastInfoWidget),
-    app_(NULL),
+    app_(nullptr),
     image_id_(0)
 {
   ui_->setupUi(this);
@@ -56,7 +56,7 @@ void PodcastInfoWidget::SetApplication(Application* app) {
 
 namespace {
   template <typename T>
-  void SetText(const QString& value, T* label, QLabel* buddy_label = NULL) {
+  void SetText(const QString& value, T* label, QLabel* buddy_label = nullptr) {
     const bool visible = !value.isEmpty();
 
     label->setVisible(visible);

@@ -127,7 +127,7 @@ SongInfoProvider* OutgoingDataCreator::ProviderByName(const QString& name) const
         return provider;
     }
   }
-  return NULL;
+  return nullptr;
 }
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {

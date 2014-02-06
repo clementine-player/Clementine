@@ -29,7 +29,7 @@
 
 TagFetcher::TagFetcher(QObject* parent)
   : QObject(parent),
-    fingerprint_watcher_(NULL),
+    fingerprint_watcher_(nullptr),
     acoustid_client_(new AcoustidClient(this)),
     musicbrainz_client_(new MusicBrainzClient(this))
 {
@@ -61,7 +61,7 @@ void TagFetcher::Cancel() {
     fingerprint_watcher_->cancel();
 
     delete fingerprint_watcher_;
-    fingerprint_watcher_ = NULL;
+    fingerprint_watcher_ = nullptr;
   }
 
   acoustid_client_->CancelAll();

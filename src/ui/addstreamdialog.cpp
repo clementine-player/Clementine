@@ -30,7 +30,7 @@ const char* AddStreamDialog::kSettingsGroup = "AddStreamDialog";
 AddStreamDialog::AddStreamDialog(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_AddStreamDialog),
-    saved_radio_(NULL)
+    saved_radio_(nullptr)
 {
   ui_->setupUi(this);
 

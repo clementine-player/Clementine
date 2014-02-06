@@ -133,7 +133,7 @@ QByteArray DropboxAuthenticator::GenerateAuthorisationHeader(
   QList<Param> params;
   params << Param("oauth_consumer_key", kAppKey)
          << Param("oauth_signature_method", "PLAINTEXT")
-         << Param("oauth_timestamp", QString::number(time(NULL)))
+         << Param("oauth_timestamp", QString::number(time(nullptr)))
          << Param("oauth_nonce", QString::number(qrand()))
          << Param("oauth_signature", signature);
   if (!token.isNull()) {

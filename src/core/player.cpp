@@ -43,7 +43,7 @@ using std::shared_ptr;
 Player::Player(Application* app, QObject* parent)
   : PlayerInterface(parent),
     app_(app),
-    lastfm_(NULL),
+    lastfm_(nullptr),
     engine_(new GstEngine(app_->task_manager())),
     stream_change_type_(Engine::First),
     last_state_(Engine::Empty),
@@ -611,7 +611,7 @@ void Player::UnregisterUrlHandler(UrlHandler* handler) {
 const UrlHandler* Player::HandlerForUrl(const QUrl& url) const {
   QMap<QString, UrlHandler*>::const_iterator it = url_handlers_.constFind(url.scheme());
   if (it == url_handlers_.constEnd()) {
-    return NULL;
+    return nullptr;
   }
   return *it;
 }

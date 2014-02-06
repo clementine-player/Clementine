@@ -34,7 +34,7 @@ SongInfoBase::SongInfoBase(QWidget* parent)
     current_request_id_(-1),
     scroll_area_(new QScrollArea),
     container_(new QVBoxLayout),
-    section_container_(NULL),
+    section_container_(nullptr),
     fader_(new WidgetFadeHelper(this, 1000)),
     dirty_(false)
 {

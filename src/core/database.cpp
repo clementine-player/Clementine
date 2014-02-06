@@ -85,7 +85,7 @@ struct sqlite3_tokenizer_cursor {
   /* Tokenizer implementations will typically add additional fields */
 };
 
-sqlite3_tokenizer_module* Database::sFTSTokenizer = NULL;
+sqlite3_tokenizer_module* Database::sFTSTokenizer = nullptr;
 
 
 int Database::FTSCreate(int argc, const char* const* argv, sqlite3_tokenizer** tokenizer) {
@@ -643,11 +643,11 @@ void Database::BackupFile(const QString& filename) {
   QString dest_filename = QString("%1.bak").arg(filename);
   const int task_id = app_->task_manager()->StartTask(tr("Backing up database"));
 
-  sqlite3* source_connection = NULL;
-  sqlite3* dest_connection = NULL;
+  sqlite3* source_connection = nullptr;
+  sqlite3* dest_connection = nullptr;
 
   BOOST_SCOPE_EXIT((source_connection)(dest_connection)(task_id)(app_)) {
-    // Harmless to call sqlite3_close() with a NULL pointer.
+    // Harmless to call sqlite3_close() with a nullptr pointer.
     sqlite3_close(source_connection);
     sqlite3_close(dest_connection);
     app_->task_manager()->SetTaskFinished(task_id);

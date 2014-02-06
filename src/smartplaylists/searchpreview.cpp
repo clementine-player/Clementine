@@ -34,7 +34,7 @@ typedef QFutureWatcher<PlaylistItemList> FutureWatcher;
 SearchPreview::SearchPreview(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_SmartPlaylistSearchPreview),
-    model_(NULL)
+    model_(nullptr)
 {
   ui_->setupUi(this);
 
@@ -59,7 +59,7 @@ void SearchPreview::set_application(Application* app) {
 void SearchPreview::set_library(LibraryBackend* backend) {
   backend_ = backend;
 
-  model_ = new Playlist(NULL, NULL, backend_, -1, QString(), false, this);
+  model_ = new Playlist(nullptr, NULL, backend_, -1, QString(), false, this);
   ui_->tree->setModel(model_);
   ui_->tree->SetPlaylist(model_);
   ui_->tree->SetItemDelegates(backend_);

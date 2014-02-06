@@ -169,7 +169,7 @@ MainWindow::MainWindow(Application* app,
     tray_icon_(tray_icon),
     osd_(osd),
     global_shortcuts_(new GlobalShortcuts(this)),
-    remote_(NULL),
+    remote_(nullptr),
     global_search_view_(new GlobalSearchView(app_, this)),
     library_view_(new LibraryViewContainer(this)),
     file_view_(new FileView(this)),
@@ -182,8 +182,8 @@ MainWindow::MainWindow(Application* app,
     equalizer_(new Equalizer),
     organise_dialog_(new OrganiseDialog(app_->task_manager())),
     playlist_menu_(new QMenu(this)),
-    playlist_add_to_another_(NULL),
-    playlistitem_actions_separator_(NULL),
+    playlist_add_to_another_(nullptr),
+    playlistitem_actions_separator_(nullptr),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
     was_maximized_(false),
@@ -582,7 +582,7 @@ MainWindow::MainWindow(Application* app,
       << ui_->action_play_pause
       << ui_->action_stop
       << ui_->action_next_track
-      << NULL // spacer
+      << nullptr // spacer
       << ui_->action_love
       << ui_->action_ban);
 
@@ -1428,7 +1428,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   }
 
   //if it isn't the first time we right click, we need to remove the menu previously created
-  if (playlist_add_to_another_ != NULL) {
+  if (playlist_add_to_another_ != nullptr) {
     playlist_menu_->removeAction(playlist_add_to_another_);
     delete playlist_add_to_another_;
   }

@@ -254,7 +254,7 @@ void GlobalSearch::AlbumArtLoaded(quint64 id, const QImage& image) {
     return;
   int orig_id = cover_loader_tasks_.take(id);
 
-  HandleLoadedArt(orig_id, image, NULL);
+  HandleLoadedArt(orig_id, image, nullptr);
 }
 
 void GlobalSearch::HandleLoadedArt(int id, const QImage& image, SearchProvider* provider) {
@@ -283,7 +283,7 @@ MimeData* GlobalSearch::LoadTracks(const SearchProvider::ResultList& results) {
   // possible to combine different providers.  Just take the results from a
   // single provider.
   if (results.isEmpty()) {
-    return NULL;
+    return nullptr;
   }
 
   SearchProvider* first_provider = results[0].provider_;

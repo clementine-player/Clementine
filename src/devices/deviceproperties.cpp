@@ -35,7 +35,7 @@
 DeviceProperties::DeviceProperties(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_DeviceProperties),
-    manager_(NULL),
+    manager_(nullptr),
     updating_formats_(false)
 {
   ui_->setupUi(this);

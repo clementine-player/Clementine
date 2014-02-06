@@ -48,28 +48,28 @@ bool Application::kIsPortable = false;
 
 Application::Application(QObject* parent)
   : QObject(parent),
-    tag_reader_client_(NULL),
-    database_(NULL),
-    album_cover_loader_(NULL),
-    playlist_backend_(NULL),
-    podcast_backend_(NULL),
-    appearance_(NULL),
-    cover_providers_(NULL),
-    task_manager_(NULL),
-    player_(NULL),
-    playlist_manager_(NULL),
-    current_art_loader_(NULL),
-    global_search_(NULL),
-    internet_model_(NULL),
-    library_(NULL),
-    device_manager_(NULL),
-    podcast_updater_(NULL),
-    podcast_downloader_(NULL),
-    gpodder_sync_(NULL),
-    moodbar_loader_(NULL),
-    moodbar_controller_(NULL),
-    network_remote_(NULL),
-    network_remote_helper_(NULL)
+    tag_reader_client_(nullptr),
+    database_(nullptr),
+    album_cover_loader_(nullptr),
+    playlist_backend_(nullptr),
+    podcast_backend_(nullptr),
+    appearance_(nullptr),
+    cover_providers_(nullptr),
+    task_manager_(nullptr),
+    player_(nullptr),
+    playlist_manager_(nullptr),
+    current_art_loader_(nullptr),
+    global_search_(nullptr),
+    internet_model_(nullptr),
+    library_(nullptr),
+    device_manager_(nullptr),
+    podcast_updater_(nullptr),
+    podcast_downloader_(nullptr),
+    gpodder_sync_(nullptr),
+    moodbar_loader_(nullptr),
+    moodbar_controller_(nullptr),
+    network_remote_(nullptr),
+    network_remote_helper_(nullptr)
 {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
@@ -125,7 +125,7 @@ Application::~Application() {
   // It's important that the device manager is deleted before the database.
   // Deleting the database deletes all objects that have been created in its
   // thread, including some device library backends.
-  delete device_manager_; device_manager_ = NULL;
+  delete device_manager_; device_manager_ = nullptr;
 
   foreach (QObject* object, objects_in_threads_) {
     object->deleteLater();
@@ -150,7 +150,7 @@ void Application::MoveToNewThread(QObject* object) {
 }
 
 void Application::MoveToThread(QObject* object, QThread* thread) {
-  object->setParent(NULL);
+  object->setParent(nullptr);
   object->moveToThread(thread);
   objects_in_threads_ << object;
 }

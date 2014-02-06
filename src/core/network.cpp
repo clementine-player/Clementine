@@ -27,7 +27,7 @@
 #include "utilities.h"
 
 QMutex ThreadSafeNetworkDiskCache::sMutex;
-QNetworkDiskCache* ThreadSafeNetworkDiskCache::sCache = NULL;
+QNetworkDiskCache* ThreadSafeNetworkDiskCache::sCache = nullptr;
 
 
 ThreadSafeNetworkDiskCache::ThreadSafeNetworkDiskCache(QObject* parent) {
@@ -169,7 +169,7 @@ void NetworkTimeouts::timerEvent(QTimerEvent* e) {
 
 
 RedirectFollower::RedirectFollower(QNetworkReply* first_reply, int max_redirects)
-  : QObject(NULL),
+  : QObject(nullptr),
     current_reply_(first_reply),
     redirects_remaining_(max_redirects) {
   ConnectReply(first_reply);

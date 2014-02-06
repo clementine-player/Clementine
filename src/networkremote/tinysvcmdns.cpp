@@ -75,7 +75,7 @@ void TinySVCMDNS::PublishInternal(
   // Some pointless text, so tinymDNS publishes the service correctly.
   const char* txt[] = {
     "cat=nyan",
-    NULL
+    nullptr
   };
   
   foreach(mdnsd* mdnsd, mdnsd_) {
@@ -84,7 +84,7 @@ void TinySVCMDNS::PublishInternal(
         name.constData(),
         QString(type + ".local").toUtf8().constData(),
         port,
-        NULL,
+        nullptr,
         txt);
   }
 }

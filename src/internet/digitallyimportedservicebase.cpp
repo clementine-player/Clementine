@@ -56,7 +56,7 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
     url_handler_(new DigitallyImportedUrlHandler(app, this)),
     basic_audio_type_(1),
     premium_audio_type_(2),
-    root_(NULL),
+    root_(nullptr),
     saved_channels_(kSettingsGroup, api_service_name, kStreamsCacheDurationSecs),
     api_client_(new DigitallyImportedClient(api_service_name, this))
 {

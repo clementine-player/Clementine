@@ -32,9 +32,9 @@ const int InternetViewContainer::kAnimationDuration = 500;
 InternetViewContainer::InternetViewContainer(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_InternetViewContainer),
-    app_(NULL),
-    current_service_(NULL),
-    current_header_(NULL)
+    app_(nullptr),
+    current_service_(nullptr),
+    current_header_(nullptr)
 {
   ui_->setupUi(this);
 
@@ -96,8 +96,8 @@ void InternetViewContainer::Collapsed(const QModelIndex& index) {
   if (app_->internet_model()->merged_model()->mapToSource(index).model() == app_->internet_model()
       && index.data(InternetModel::Role_Type) == InternetModel::Type_Service)  {
     SetHeaderVisible(current_header_, false);
-    current_service_ = NULL;
-    current_header_ = NULL;
+    current_service_ = nullptr;
+    current_header_ = nullptr;
   }
 }
 
@@ -133,7 +133,7 @@ void InternetViewContainer::FocusOnFilter(QKeyEvent* event) {
 
 void InternetViewContainer::SetHeaderHeight(int height) {
   QTimeLine* animation = qobject_cast<QTimeLine*>(sender());
-  QWidget* header = NULL;
+  QWidget* header = nullptr;
   foreach (QWidget* h, headers_.keys()) {
     if (headers_[h].animation_ == animation) {
       header = h;

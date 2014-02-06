@@ -26,7 +26,7 @@ StandardItemIconLoader::StandardItemIconLoader(AlbumCoverLoader* cover_loader,
                                                QObject* parent)
   : QObject(parent),
     cover_loader_(cover_loader),
-    model_(NULL)
+    model_(nullptr)
 {
   cover_options_.desired_height_ = 16;
 

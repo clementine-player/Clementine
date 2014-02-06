@@ -44,7 +44,7 @@ const char* PodcastService::kSettingsGroup = "Podcasts";
 
 class PodcastSortProxyModel : public QSortFilterProxyModel {
 public:
-  PodcastSortProxyModel(QObject* parent = NULL);
+  PodcastSortProxyModel(QObject* parent = nullptr);
 
 protected:
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
@@ -58,8 +58,8 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
     backend_(app->podcast_backend()),
     model_(new PodcastServiceModel(this)),
     proxy_(new PodcastSortProxyModel(this)),
-    context_menu_(NULL),
-    root_(NULL),
+    context_menu_(nullptr),
+    root_(nullptr),
     organise_dialog_(new OrganiseDialog(app_->task_manager()))
 {
   icon_loader_->SetModel(model_);

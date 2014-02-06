@@ -40,7 +40,7 @@ const char* PlaylistTabBar::kSettingsGroup = "PlaylistTabBar";
 
 PlaylistTabBar::PlaylistTabBar(QWidget *parent)
   : QTabBar(parent),
-    manager_(NULL),
+    manager_(nullptr),
     menu_(new QMenu(this)),
     menu_index_(-1),
     suppress_current_changed_(false),
