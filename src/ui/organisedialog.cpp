@@ -15,13 +15,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "iconloader.h"
 #include "organisedialog.h"
-#include "organiseerrordialog.h"
 #include "ui_organisedialog.h"
-#include "core/musicstorage.h"
-#include "core/organise.h"
-#include "core/tagreaderclient.h"
+
+#include <memory>
 
 #include <QDir>
 #include <QFileInfo>
@@ -31,6 +28,12 @@
 #include <QSettings>
 #include <QSignalMapper>
 #include <QtDebug>
+
+#include "iconloader.h"
+#include "organiseerrordialog.h"
+#include "core/musicstorage.h"
+#include "core/organise.h"
+#include "core/tagreaderclient.h"
 
 const int OrganiseDialog::kNumberOfPreviews = 10;
 const char* OrganiseDialog::kDefaultFormat =
@@ -192,12 +195,12 @@ void OrganiseDialog::InsertTag(const QString &tag) {
 void OrganiseDialog::UpdatePreviews() {
   const QModelIndex destination = ui_->destination->model()->index(
       ui_->destination->currentIndex(), 0);
-  boost::shared_ptr<MusicStorage> storage;
+  std::shared_ptr<MusicStorage> storage;
   bool has_local_destination = false;
 
   if (destination.isValid()) {
     storage = destination.data(MusicStorage::Role_Storage)
-              .value<boost::shared_ptr<MusicStorage> >();
+              .value<std::shared_ptr<MusicStorage>>();
     if (storage) {
       has_local_destination = !storage->LocalPath().isEmpty();
     }
@@ -294,9 +297,9 @@ void OrganiseDialog::accept() {
 
   const QModelIndex destination = ui_->destination->model()->index(
       ui_->destination->currentIndex(), 0);
-  boost::shared_ptr<MusicStorage> storage =
+  std::shared_ptr<MusicStorage> storage =
       destination.data(MusicStorage::Role_StorageForceConnect)
-      .value<boost::shared_ptr<MusicStorage> >();
+      .value<std::shared_ptr<MusicStorage>>();
 
   if (!storage)
     return;

@@ -15,8 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "player.h"
+
+#include <memory>
+
+#include <QtDebug>
+#include <QtConcurrentRun>
+
+#include "config.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/urlhandler.h"
@@ -31,13 +37,7 @@
 #  include "internet/lastfmservice.h"
 #endif
 
-#include <QtDebug>
-#include <QtConcurrentRun>
-
-#include <boost/bind.hpp>
-
-using boost::shared_ptr;
-
+using std::shared_ptr;
 
 Player::Player(Application* app, QObject* parent)
   : PlayerInterface(parent),

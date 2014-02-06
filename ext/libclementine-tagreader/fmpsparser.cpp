@@ -17,10 +17,13 @@
 
 #include "fmpsparser.h"
 
+#include <functional>
+
 #include <QStringList>
 #include <QtDebug>
 
-#include <boost/bind.hpp>
+using std::placeholders::_1;
+using std::placeholders::_2;
 
 FMPSParser::FMPSParser() :
   // The float regex ends with (?:$|(?=::|;;)) to ensure it matches all the way
@@ -105,12 +108,14 @@ int FMPSParser::ParseValueRef(const QStringRef& data, QVariant* ret) const {
 
 // Parses an inner list - a list of values
 int FMPSParser::ParseListRef(const QStringRef& data, QVariantList* ret) const {
-  return ParseContainer<':'>(data, boost::bind(&FMPSParser::ParseValueRef, this, _1, _2), ret);
+  return ParseContainer<':'>(
+      data, std::bind(&FMPSParser::ParseValueRef, this, _1, _2), ret);
 }
 
 // Parses an outer list - a list of lists
 int FMPSParser::ParseListListRef(const QStringRef& data, Result* ret) const {
-  return ParseContainer<';'>(data, boost::bind(&FMPSParser::ParseListRef, this, _1, _2), ret);
+  return ParseContainer<';'>(
+      data, std::bind(&FMPSParser::ParseListRef, this, _1, _2), ret);
 }
 
 // Convenience functions that take QStrings instead of QStringRefs.  Use the

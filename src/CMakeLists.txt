@@ -25,6 +25,7 @@ if (QT_VERSION_MINOR GREATER 5)
   endif(QT_VERSION_MINOR GREATER 7)
 endif(QT_VERSION_MINOR GREATER 5)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+add_definitions(-DBOOST_BIND_NO_PLACEHOLDERS)
 
 include_directories(${CMAKE_BINARY_DIR})
 include_directories(${GLIB_INCLUDE_DIRS})

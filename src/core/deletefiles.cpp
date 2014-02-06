@@ -16,18 +16,19 @@
 */
 
 #include "deletefiles.h"
-#include "musicstorage.h"
-#include "taskmanager.h"
 
 #include <QStringList>
 #include <QTimer>
 #include <QThread>
 #include <QUrl>
 
+#include "musicstorage.h"
+#include "taskmanager.h"
+
 const int DeleteFiles::kBatchSize = 50;
 
 DeleteFiles::DeleteFiles(TaskManager* task_manager,
-                         boost::shared_ptr<MusicStorage> storage)
+                         std::shared_ptr<MusicStorage> storage)
   : thread_(NULL),
     task_manager_(task_manager),
     storage_(storage),

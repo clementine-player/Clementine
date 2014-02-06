@@ -17,7 +17,8 @@
 
 #include "songloader.h"
 
-#include <boost/bind.hpp>
+#include <functional>
+#include <memory>
 
 #include <QBuffer>
 #include <QDirIterator>
@@ -48,6 +49,7 @@
 #include "podcasts/podcastservice.h"
 #include "podcasts/podcasturlloader.h"
 
+using std::placeholders::_1;
 
 QSet<QString> SongLoader::sRawUriSchemes;
 const int SongLoader::kDefaultTimeout = 5000;
@@ -229,7 +231,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   // inside right away.
   if (QFileInfo(filename).isDir()) {
     ConcurrentRun::Run<void>(&thread_pool_,
-        boost::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
+        std::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
     return WillLoadAsync;
   }
 
@@ -252,7 +254,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
 
     // It's a playlist!
     ConcurrentRun::Run<void>(&thread_pool_,
-        boost::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
+        std::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
     return WillLoadAsync;
   }
 
@@ -455,8 +457,8 @@ SongLoader::Result SongLoader::LoadRemote() {
   // rest of the file, parse the playlist and return success.
 
   // Create the pipeline - it gets unreffed if it goes out of scope
-  boost::shared_ptr<GstElement> pipeline(
-      gst_pipeline_new(NULL), boost::bind(&gst_object_unref, _1));
+  std::shared_ptr<GstElement> pipeline(
+      gst_pipeline_new(NULL), std::bind(&gst_object_unref, _1));
 
   // Create the source element automatically based on the URL
   GstElement* source = gst_element_make_from_uri(

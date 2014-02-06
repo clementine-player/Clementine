@@ -17,6 +17,33 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+#include <cmath>
+#include <memory>
+
+#include <QCloseEvent>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileSystemModel>
+#include <QLinearGradient>
+#include <QMenu>
+#include <QMessageBox>
+#include <QSettings>
+#include <QShortcut>
+#include <QSignalMapper>
+#include <QSortFilterProxyModel>
+#include <QStatusBar>
+#include <QtDebug>
+#include <QTimer>
+#include <QUndoStack>
+
+#ifdef Q_OS_WIN32
+# include <qtsparkle/Updater>
+#endif
+
+#include <gst/cdda/gstcddabasesrc.h>
+
+
 #include "core/appearance.h"
 #include "core/application.h"
 #include "core/backgroundstreams.h"
@@ -117,34 +144,6 @@
 # include "moodbar/moodbarcontroller.h"
 # include "moodbar/moodbarproxystyle.h"
 #endif
-
-#include <QCloseEvent>
-#include <QDir>
-#include <QFileDialog>
-#include <QFileSystemModel>
-#include <QLinearGradient>
-#include <QMenu>
-#include <QMessageBox>
-#include <QSettings>
-#include <QShortcut>
-#include <QSignalMapper>
-#include <QSortFilterProxyModel>
-#include <QStatusBar>
-#include <QtDebug>
-#include <QTimer>
-#include <QUndoStack>
-
-#ifdef Q_OS_WIN32
-# include <qtsparkle/Updater>
-#endif
-
-
-#include <cmath>
-
-#include <gst/cdda/gstcddabasesrc.h>
-
-using boost::shared_ptr;
-using boost::scoped_ptr;
 
 #ifdef Q_OS_DARWIN
 // Non exported mac-specific function.
@@ -1909,7 +1908,7 @@ void MainWindow::PlaylistDelete() {
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
-  boost::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
+  std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
 
   // Get selected songs
   SongList selected_songs;

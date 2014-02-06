@@ -18,8 +18,7 @@
 #ifndef CONCURRENTRUN_H
 #define CONCURRENTRUN_H
 
-#include <boost/bind.hpp>
-#include <boost/function.hpp>
+#include <functional>
 
 #include <QFuture>
 #include <QRunnable>
@@ -69,9 +68,9 @@ class ThreadFunctorBase : public QFutureInterface<ReturnType>, public QRunnable 
 template <typename ReturnType, typename... Args>
 class ThreadFunctor : public ThreadFunctorBase<ReturnType> {
  public:
-  ThreadFunctor(boost::function<ReturnType (Args...)> function,
+  ThreadFunctor(std::function<ReturnType (Args...)> function,
                 Args... args)
-      : function_(boost::bind(function, args...)) {
+      : function_(std::bind(function, args...)) {
   }
 
   virtual void run() {
@@ -80,16 +79,16 @@ class ThreadFunctor : public ThreadFunctorBase<ReturnType> {
   }
 
  private:
-  boost::function<ReturnType()> function_;
+  std::function<ReturnType()> function_;
 };
 
 // Partial specialisation for void return type.
 template <typename... Args>
 class ThreadFunctor <void, Args...> : public ThreadFunctorBase<void> {
  public:
-  ThreadFunctor(boost::function<void (Args...)> function,
+  ThreadFunctor(std::function<void (Args...)> function,
                 Args... args)
-      : function_(boost::bind(function, args...)) {
+      : function_(std::bind(function, args...)) {
   }
 
   virtual void run() {
@@ -98,7 +97,7 @@ class ThreadFunctor <void, Args...> : public ThreadFunctorBase<void> {
   }
 
  private:
-  boost::function<void()> function_;
+  std::function<void()> function_;
 };
 
 
@@ -111,7 +110,7 @@ namespace ConcurrentRun {
   template <typename ReturnType>
   QFuture<ReturnType> Run(
       QThreadPool* threadpool,
-      boost::function<ReturnType ()> function) {
+      std::function<ReturnType ()> function) {
     return (new ThreadFunctor<ReturnType>(function))->Start(threadpool);
   }
 
@@ -119,7 +118,7 @@ namespace ConcurrentRun {
   template <typename ReturnType, typename... Args>
   QFuture<ReturnType> Run(
       QThreadPool* threadpool,
-      boost::function<ReturnType (Args...)> function,
+      std::function<ReturnType (Args...)> function,
       const Args&... args) {
     return (new ThreadFunctor<ReturnType, Args...>(
         function, args...))->Start(threadpool);
@@ -132,7 +131,7 @@ namespace ConcurrentRun {
       ReturnType (*function) (Args...),
       const Args&... args) {
     return Run(
-        threadpool, boost::function<ReturnType (Args...)>(function), args...);
+        threadpool, std::function<ReturnType (Args...)>(function), args...);
   }
 }
 

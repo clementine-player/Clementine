@@ -20,10 +20,10 @@
 
 #include "song.h"
 
-#include <QMetaType>
+#include <functional>
+#include <memory>
 
-#include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
+#include <QMetaType>
 
 class MusicStorage {
 public:
@@ -44,7 +44,7 @@ public:
     Transcode_Unsupported = 3,
   };
 
-  typedef boost::function<void (float progress)> ProgressFunction;
+  typedef std::function<void (float progress)> ProgressFunction;
 
   struct CopyJob {
     QString source_;
@@ -77,6 +77,6 @@ public:
 };
 
 Q_DECLARE_METATYPE(MusicStorage*);
-Q_DECLARE_METATYPE(boost::shared_ptr<MusicStorage>);
+Q_DECLARE_METATYPE(std::shared_ptr<MusicStorage>);
 
 #endif // MUSICSTORAGE_H

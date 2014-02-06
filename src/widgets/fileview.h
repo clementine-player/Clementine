@@ -18,12 +18,12 @@
 #ifndef FILEVIEW_H
 #define FILEVIEW_H
 
+#include <memory>
+
 #include <QWidget>
 #include <QUndoCommand>
 #include <QUrl>
 #include <QModelIndex>
-
-#include <boost/shared_ptr.hpp>
 
 #include "core/song.h"
 
@@ -102,7 +102,7 @@ class FileView : public QWidget {
   QUndoStack* undo_stack_;
 
   TaskManager* task_manager_;
-  boost::shared_ptr<MusicStorage> storage_;
+  std::shared_ptr<MusicStorage> storage_;
 
   QString lazy_set_path_;
 

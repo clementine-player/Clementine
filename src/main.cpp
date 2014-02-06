@@ -15,6 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN32
@@ -22,6 +24,19 @@
 #  include <windows.h>
 #  include <iostream>
 #endif // Q_OS_WIN32
+
+#include <QDir>
+#include <QFont>
+#include <QLibraryInfo>
+#include <QNetworkProxyFactory>
+#include <QSslSocket>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSysInfo>
+#include <QTextCodec>
+#include <QTranslator>
+#include <QtConcurrentRun>
+#include <QtDebug>
 
 #include "config.h"
 #include "core/application.h"
@@ -54,25 +69,9 @@
 #include "qtsingleapplication.h"
 #include "qtsinglecoreapplication.h"
 
-#include <QDir>
-#include <QFont>
-#include <QLibraryInfo>
-#include <QNetworkProxyFactory>
-#include <QSslSocket>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSysInfo>
-#include <QTextCodec>
-#include <QTranslator>
-#include <QtConcurrentRun>
-#include <QtDebug>
-
 #include <glib-object.h>
 #include <glib.h>
 #include <gst/gst.h>
-
-#include <boost/scoped_ptr.hpp>
-using boost::scoped_ptr;
 
 #include <echonest/Config.h>
 
@@ -438,7 +437,7 @@ int main(int argc, char *argv[]) {
 #endif // Q_OS_LINUX
 
   // Create the tray icon and OSD
-  scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
+  std::unique_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
   OSD osd(tray_icon.get(), &app);
 
 #ifdef HAVE_DBUS

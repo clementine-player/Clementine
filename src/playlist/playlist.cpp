@@ -16,6 +16,25 @@
 */
 
 #include "playlist.h"
+
+#include <algorithm>
+#include <functional>
+#include <memory>
+#include <unordered_map>
+
+#include <QApplication>
+#include <QBuffer>
+#include <QCoreApplication>
+#include <QDirIterator>
+#include <QFileInfo>
+#include <QLinkedList>
+#include <QMimeData>
+#include <QMutableListIterator>
+#include <QSortFilterProxyModel>
+#include <QUndoStack>
+#include <QtConcurrentRun>
+#include <QtDebug>
+
 #include "playlistbackend.h"
 #include "playlistfilter.h"
 #include "playlistitemmimedata.h"
@@ -48,35 +67,14 @@
 #include "smartplaylists/generatorinserter.h"
 #include "smartplaylists/generatormimedata.h"
 
-#include <QApplication>
-#include <QBuffer>
-#include <QCoreApplication>
-#include <QDirIterator>
-#include <QFileInfo>
-#include <QLinkedList>
-#include <QMimeData>
-#include <QMutableListIterator>
-#include <QSortFilterProxyModel>
-#include <QUndoStack>
-#include <QtConcurrentRun>
-#include <QtDebug>
-
-#include <algorithm>
-#include <boost/bind.hpp>
-
-#ifdef USE_STD_UNORDERED_MAP
-  #include <unordered_map>
-  using std::unordered_map;
-#else
-  #include <tr1/unordered_map>
-  using std::tr1::unordered_map;
-#endif
+using std::placeholders::_1;
+using std::placeholders::_2;
+using std::shared_ptr;
+using std::unordered_map;
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorInserter;
 using smart_playlists::GeneratorPtr;
-
-using boost::shared_ptr;
 
 const char* Playlist::kCddaMimeType = "x-content/audio-cdda";
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
@@ -1264,7 +1262,7 @@ void Playlist::sort(int column, Qt::SortOrder order) {
     begin += current_item_index_.row() + 1;
 
   qStableSort(begin, new_items.end(),
-              boost::bind(&Playlist::CompareItems, column, order, _1, _2));
+              std::bind(&Playlist::CompareItems, column, order, _1, _2));
 
   undo_stack_->push(new PlaylistUndoCommands::SortItems(this, column, order, new_items));
 }
@@ -1811,8 +1809,8 @@ void Playlist::ReshuffleIndices() {
 
     // Sort the virtual items
     std::stable_sort(begin, end,
-                     boost::bind(AlbumShuffleComparator, album_key_positions,
-                                 album_keys, _1, _2));
+                     std::bind(AlbumShuffleComparator, album_key_positions,
+                               album_keys, _1, _2));
 
     break;
   }

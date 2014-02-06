@@ -90,9 +90,9 @@ class PlaylistBackend : public QObject {
 
   QList<SqlRow> GetPlaylistRows(int playlist);
 
-  Song NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
-  PlaylistItemPtr NewPlaylistItemFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
-  PlaylistItemPtr RestoreCueData(PlaylistItemPtr item, boost::shared_ptr<NewSongFromQueryState> state);
+  Song NewSongFromQuery(const SqlRow& row, std::shared_ptr<NewSongFromQueryState> state);
+  PlaylistItemPtr NewPlaylistItemFromQuery(const SqlRow& row, std::shared_ptr<NewSongFromQueryState> state);
+  PlaylistItemPtr RestoreCueData(PlaylistItemPtr item, std::shared_ptr<NewSongFromQueryState> state);
 
   enum GetPlaylistsFlags {
     GetPlaylists_OpenInUi = 1,

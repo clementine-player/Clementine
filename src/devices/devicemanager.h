@@ -19,13 +19,14 @@
 #define DEVICEMANAGER_H
 
 #include "devicedatabasebackend.h"
-#include "library/librarymodel.h"
+
+#include <memory>
 
 #include <QAbstractListModel>
 #include <QIcon>
 #include <QThreadPool>
 
-#include <boost/shared_ptr.hpp>
+#include "library/librarymodel.h"
 
 class Application;
 class ConnectedDevice;
@@ -72,13 +73,13 @@ public:
   // Get info about devices
   int GetDatabaseId(int row) const;
   DeviceLister* GetLister(int row) const;
-  boost::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
+  std::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
 
   int FindDeviceById(const QString& id) const;
   int FindDeviceByUrl(const QList<QUrl>& url) const;
 
   // Actions on devices
-  boost::shared_ptr<ConnectedDevice> Connect(int row);
+  std::shared_ptr<ConnectedDevice> Connect(int row);
   void Disconnect(int row);
   void Forget(int row);
   void UnmountAsync(int row);
@@ -143,7 +144,7 @@ private:
 
 
     int database_id_; // -1 if not remembered in the database
-    boost::shared_ptr<ConnectedDevice> device_; // NULL if not connected to clementine
+    std::shared_ptr<ConnectedDevice> device_; // NULL if not connected to clementine
     QList<Backend> backends_;
 
     QString friendly_name_;

@@ -15,10 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "libraryview.h"
+
+#include <QPainter>
+#include <QContextMenuEvent>
+#include <QHelpEvent>
+#include <QMenu>
+#include <QMessageBox>
+#include <QSet>
+#include <QSettings>
+#include <QSortFilterProxyModel>
+#include <QToolTip>
+#include <QWhatsThis>
+
 #include "librarydirectorymodel.h"
 #include "libraryfilterwidget.h"
 #include "librarymodel.h"
-#include "libraryview.h"
 #include "libraryitem.h"
 #include "librarybackend.h"
 #include "core/application.h"
@@ -33,17 +45,6 @@
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
-
-#include <QPainter>
-#include <QContextMenuEvent>
-#include <QHelpEvent>
-#include <QMenu>
-#include <QMessageBox>
-#include <QSet>
-#include <QSettings>
-#include <QSortFilterProxyModel>
-#include <QToolTip>
-#include <QWhatsThis>
 
 using smart_playlists::Wizard;
 
@@ -613,9 +614,9 @@ void LibraryView::Delete() {
   // We can cheat and always take the storage of the first directory, since
   // they'll all be FilesystemMusicStorage in a library and deleting doesn't
   // check the actual directory.
-  boost::shared_ptr<MusicStorage> storage =
+  std::shared_ptr<MusicStorage> storage =
       app_->library_model()->directory_model()->index(0, 0).data(MusicStorage::Role_Storage)
-      .value<boost::shared_ptr<MusicStorage> >();
+      .value<std::shared_ptr<MusicStorage>>();
 
   DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
   connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));

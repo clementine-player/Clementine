@@ -17,15 +17,19 @@
 
 #include "config.h"
 
+#include <memory>
+
 #include <QFile>
 #include <QStringList>
 #include <QtDebug>
 
-#include <boost/bind.hpp>
-
 #include "giolister.h"
 #include "core/logging.h"
 #include "core/signalchecker.h"
+
+using std::placeholders::_1;
+using std::placeholders::_2;
+using std::placeholders::_3;
 
 QString GioLister::DeviceInfo::unique_id() const {
   if (mount)
@@ -65,7 +69,7 @@ void OperationFinished(F f, GObject *object, GAsyncResult *result) {
 }
 
 void GioLister::VolumeMountFinished(GObject* object, GAsyncResult* result, gpointer) {
-  OperationFinished<GVolume>(boost::bind(
+  OperationFinished<GVolume>(std::bind(
       g_volume_mount_finish, _1, _2, _3), object, result);
 }
 
@@ -456,17 +460,17 @@ QString GioLister::FindUniqueIdByVolume(GVolume* volume) const {
 }
 
 void GioLister::VolumeEjectFinished(GObject *object, GAsyncResult *result, gpointer) {
-  OperationFinished<GVolume>(boost::bind(
+  OperationFinished<GVolume>(std::bind(
       g_volume_eject_with_operation_finish, _1, _2, _3), object, result);
 }
 
 void GioLister::MountEjectFinished(GObject *object, GAsyncResult *result, gpointer) {
-  OperationFinished<GMount>(boost::bind(
+  OperationFinished<GMount>(std::bind(
       g_mount_eject_with_operation_finish, _1, _2, _3), object, result);
 }
 
 void GioLister::MountUnmountFinished(GObject *object, GAsyncResult *result, gpointer) {
-  OperationFinished<GMount>(boost::bind(
+  OperationFinished<GMount>(std::bind(
       g_mount_unmount_with_operation_finish, _1, _2, _3), object, result);
 }
 

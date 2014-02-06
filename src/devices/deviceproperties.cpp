@@ -15,20 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "connecteddevice.h"
-#include "devicelister.h"
-#include "devicemanager.h"
 #include "deviceproperties.h"
-#include "ui_deviceproperties.h"
-#include "core/utilities.h"
-#include "transcoder/transcoder.h"
-#include "ui/iconloader.h"
+
+#include <functional>
+#include <memory>
 
 #include <QFutureWatcher>
 #include <QScrollBar>
 #include <QtConcurrentRun>
 
-#include <boost/bind.hpp>
+#include "connecteddevice.h"
+#include "devicelister.h"
+#include "devicemanager.h"
+#include "ui_deviceproperties.h"
+#include "core/utilities.h"
+#include "transcoder/transcoder.h"
+#include "ui/iconloader.h"
 
 DeviceProperties::DeviceProperties(QWidget *parent)
   : QDialog(parent),
@@ -178,7 +180,7 @@ void DeviceProperties::UpdateHardwareInfo() {
 void DeviceProperties::UpdateFormats() {
   QString id = index_.data(DeviceManager::Role_UniqueId).toString();
   DeviceLister* lister = manager_->GetLister(index_.row());
-  boost::shared_ptr<ConnectedDevice> device =
+  std::shared_ptr<ConnectedDevice> device =
       manager_->GetConnectedDevice(index_.row());
 
   // Transcode mode
@@ -219,7 +221,7 @@ void DeviceProperties::UpdateFormats() {
     // blocks, so do it in the background.
     supported_formats_.clear();
 
-    QFuture<bool> future = QtConcurrent::run(boost::bind(
+    QFuture<bool> future = QtConcurrent::run(std::bind(
         &ConnectedDevice::GetSupportedFiletypes, device, &supported_formats_));
     QFutureWatcher<bool>* watcher = new QFutureWatcher<bool>(this);
     watcher->setFuture(future);

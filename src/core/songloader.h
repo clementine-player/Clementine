@@ -18,6 +18,10 @@
 #ifndef SONGLOADER_H
 #define SONGLOADER_H
 
+#include <memory>
+
+#include <gst/gst.h>
+
 #include <QObject>
 #include <QThreadPool>
 #include <QUrl>
@@ -25,10 +29,6 @@
 #include "song.h"
 #include "core/tagreaderclient.h"
 #include "musicbrainz/musicbrainzclient.h"
-
-#include <boost/shared_ptr.hpp>
-
-#include <gst/gst.h>
 
 class CueParser;
 class LibraryBackendInterface;
@@ -131,7 +131,7 @@ private:
   QByteArray buffer_;
   LibraryBackendInterface* library_;
 
-  boost::shared_ptr<GstElement> pipeline_;
+  std::shared_ptr<GstElement> pipeline_;
 
   QThreadPool thread_pool_;
 };
