@@ -84,6 +84,8 @@ class Playlist : public QAbstractListModel {
            QObject* parent = 0);
   ~Playlist();
 
+  void SkipTracks(const QModelIndexList &source_indexes);
+
   // Always add new columns to the end of this enum - the values are persisted
   enum Column {
     Column_Title = 0,
