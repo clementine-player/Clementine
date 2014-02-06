@@ -52,6 +52,7 @@
 #endif
 
 #ifdef Q_OS_LINUX
+#  include <unistd.h>
 #  include <sys/syscall.h>
 #endif
 #ifdef Q_OS_DARWIN
