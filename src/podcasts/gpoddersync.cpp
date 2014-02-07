@@ -379,7 +379,7 @@ void GPodderSync::DoInitialSync() {
   // Send our complete list of subscriptions
   queued_remove_subscriptions_.clear();
   queued_add_subscriptions_.clear();
-  for(const Podcast & podcast : backend_->GetAllSubscriptions()) {
+  for (const Podcast& podcast : backend_->GetAllSubscriptions()) {
     queued_add_subscriptions_.insert(podcast.url());
   }
 
