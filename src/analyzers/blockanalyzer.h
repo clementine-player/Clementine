@@ -44,11 +44,11 @@ class BlockAnalyzer : public Analyzer::Base {
   QPixmap* bar() { return &m_barPixmap; }
 
   uint m_columns, m_rows;  // number of rows and columns of blocks
-  uint m_y;  // y-offset from top of widget
+  uint m_y;                // y-offset from top of widget
   QPixmap m_barPixmap;
   QPixmap m_topBarPixmap;
   QPixmap m_background;
-  Scope m_scope;  // so we don't create a vector every frame
+  Scope m_scope;               // so we don't create a vector every frame
   std::vector<float> m_store;  // current bar heights
   std::vector<float> m_yscale;
 

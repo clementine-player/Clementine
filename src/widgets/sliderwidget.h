@@ -66,7 +66,7 @@ signals:
   bool m_outside;
   int m_prevValue;
 
-  Slider(const Slider&);  // undefined
+  Slider(const Slider&);             // undefined
   Slider& operator=(const Slider&);  // undefined
 };
 
@@ -87,7 +87,7 @@ class PrettySlider : public Slider {
   virtual void mousePressEvent(QMouseEvent*);
 
  private:
-  PrettySlider(const PrettySlider&);  // undefined
+  PrettySlider(const PrettySlider&);             // undefined
   PrettySlider& operator=(const PrettySlider&);  // undefined
 
   SliderMode m_mode;
@@ -115,7 +115,7 @@ class VolumeSlider : public Slider {
  private:
   void generateGradient();
 
-  VolumeSlider(const VolumeSlider&);  // undefined
+  VolumeSlider(const VolumeSlider&);             // undefined
   VolumeSlider& operator=(const VolumeSlider&);  // undefined
 
   ////////////////////////////////////////////////////////////////
