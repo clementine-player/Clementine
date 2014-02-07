@@ -39,7 +39,7 @@ class SearchTermWidget;
 class QueryWizardPlugin : public WizardPlugin {
   Q_OBJECT
 
-public:
+ public:
   QueryWizardPlugin(Application* app, LibraryBackend* library, QObject* parent);
   ~QueryWizardPlugin();
 
@@ -52,7 +52,7 @@ public:
   void SetGenerator(GeneratorPtr);
   GeneratorPtr CreateGenerator() const;
 
-private slots:
+ private slots:
   void AddSearchTerm();
   void RemoveSearchTerm();
 
@@ -64,7 +64,7 @@ private slots:
 
   void MoveTermListToBottom(int min, int max);
 
-private:
+ private:
   class SearchPage;
   class SortPage;
 
@@ -76,6 +76,6 @@ private:
   int previous_scrollarea_max_;
 };
 
-} // namespace smart_playlists
+}  // namespace smart_playlists
 
-#endif // QUERYWIZARDPLUGIN_H
+#endif  // QUERYWIZARDPLUGIN_H

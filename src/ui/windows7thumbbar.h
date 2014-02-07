@@ -22,13 +22,13 @@
 #include <QWidget>
 
 #ifndef Q_OS_WIN32
-  typedef void MSG;
-#endif // Q_OS_WIN32
+typedef void MSG;
+#endif  // Q_OS_WIN32
 
 class Windows7ThumbBar : public QObject {
   Q_OBJECT
 
-public:
+ public:
   // Creates a list of buttons in the taskbar icon for this window.  Does
   // nothing and is safe to use on other operating systems too.
   Windows7ThumbBar(QWidget* widget = 0);
@@ -43,10 +43,10 @@ public:
   // Call this from the parent's winEvent() function.
   void HandleWinEvent(MSG* msg);
 
-private slots:
+ private slots:
   void ActionChanged();
 
-private:
+ private:
   QWidget* widget_;
   QList<QAction*> actions_;
 
@@ -56,4 +56,4 @@ private:
   void* taskbar_list_;
 };
 
-#endif // WINDOWS7THUMBBAR_H
+#endif  // WINDOWS7THUMBBAR_H

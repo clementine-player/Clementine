@@ -48,4 +48,4 @@ class CoverFromURLDialog : public QDialog {
   QImage last_image_;
 };
 
-#endif // COVERFROMURLDIALOG_H
+#endif  // COVERFROMURLDIALOG_H

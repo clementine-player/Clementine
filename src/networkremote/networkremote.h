@@ -13,15 +13,15 @@
 #include "remoteclient.h"
 
 class NetworkRemote : public QObject {
-    Q_OBJECT
-public:
+  Q_OBJECT
+ public:
   static const char* kSettingsGroup;
   static const quint16 kDefaultServerPort;
 
   explicit NetworkRemote(Application* app, QObject* parent = 0);
   ~NetworkRemote();
 
-public slots:
+ public slots:
   void SetupServer();
   void StartServer();
   void ReloadSettings();
@@ -29,7 +29,7 @@ public slots:
   void EnableKittens(bool aww);
   void SendKitten(quint64 id, const QImage& kitten);
 
-private:
+ private:
   std::unique_ptr<QTcpServer> server_;
   std::unique_ptr<QTcpServer> server_ipv6_;
   std::unique_ptr<IncomingDataParser> incoming_data_parser_;
@@ -49,4 +49,4 @@ private:
   bool IpIsPrivate(const QHostAddress& address);
 };
 
-#endif // NETWORKREMOTE_H
+#endif  // NETWORKREMOTE_H

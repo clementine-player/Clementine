@@ -25,17 +25,17 @@ class Ui_ErrorDialog;
 class ErrorDialog : public QDialog {
   Q_OBJECT
 
-public:
+ public:
   ErrorDialog(QWidget* parent = 0);
   ~ErrorDialog();
 
-public slots:
+ public slots:
   void ShowMessage(const QString& message);
 
-protected:
-  void hideEvent(QHideEvent *);
+ protected:
+  void hideEvent(QHideEvent*);
 
-private:
+ private:
   void UpdateContent();
 
   Ui_ErrorDialog* ui_;
@@ -43,4 +43,4 @@ private:
   QStringList current_messages_;
 };
 
-#endif // ERRORDIALOG_H
+#endif  // ERRORDIALOG_H

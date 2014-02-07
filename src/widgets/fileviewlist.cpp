@@ -26,20 +26,19 @@
 #include <QtDebug>
 
 FileViewList::FileViewList(QWidget* parent)
-    : QListView(parent),
-      menu_(new QMenu(this))
-{
-  menu_->addAction(IconLoader::Load("media-playback-start"), tr("Append to current playlist"),
-                   this, SLOT(AddToPlaylistSlot()));
-  menu_->addAction(IconLoader::Load("media-playback-start"), tr("Replace current playlist"),
-                   this, SLOT(LoadSlot()));
+    : QListView(parent), menu_(new QMenu(this)) {
+  menu_->addAction(IconLoader::Load("media-playback-start"),
+                   tr("Append to current playlist"), this,
+                   SLOT(AddToPlaylistSlot()));
+  menu_->addAction(IconLoader::Load("media-playback-start"),
+                   tr("Replace current playlist"), this, SLOT(LoadSlot()));
   menu_->addAction(IconLoader::Load("document-new"), tr("Open in new playlist"),
                    this, SLOT(OpenInNewPlaylistSlot()));
   menu_->addSeparator();
   menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."),
                    this, SLOT(CopyToLibrarySlot()));
-  menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."),
-                   this, SLOT(MoveToLibrarySlot()));
+  menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."), this,
+                   SLOT(MoveToLibrarySlot()));
   menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"),
                    tr("Copy to device..."), this, SLOT(CopyToDeviceSlot()));
   menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."),
@@ -47,9 +46,9 @@ FileViewList::FileViewList(QWidget* parent)
 
   menu_->addSeparator();
   menu_->addAction(IconLoader::Load("edit-rename"),
-    tr("Edit track information..."), this, SLOT(EditTagsSlot()));
+                   tr("Edit track information..."), this, SLOT(EditTagsSlot()));
   menu_->addAction(IconLoader::Load("document-open-folder"),
-    tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
+                   tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
 
   setAttribute(Qt::WA_MacShowFocusRect, false);
 }
@@ -63,10 +62,11 @@ void FileViewList::contextMenuEvent(QContextMenuEvent* e) {
 
 QList<QUrl> FileViewList::UrlListFromSelection() const {
   QList<QUrl> urls;
-  foreach (const QModelIndex& index, menu_selection_.indexes()) {
+  foreach(const QModelIndex & index, menu_selection_.indexes()) {
     if (index.column() == 0)
-      urls << QUrl::fromLocalFile(
-          static_cast<QFileSystemModel*>(model())->fileInfo(index).canonicalFilePath());
+      urls << QUrl::fromLocalFile(static_cast<QFileSystemModel*>(model())
+                                      ->fileInfo(index)
+                                      .canonicalFilePath());
   }
   return urls;
 }
@@ -77,11 +77,12 @@ MimeData* FileViewList::MimeDataFromSelection() const {
 
   QList<QString> filenames = FilenamesFromSelection();
   // if just one folder selected - use it's path as the new playlist's name
-  if(filenames.size() == 1 && QFileInfo(filenames.first()).isDir()) {
+  if (filenames.size() == 1 && QFileInfo(filenames.first()).isDir()) {
     data->name_for_new_playlist_ = filenames.first();
-  // otherwise, use the current root path
+    // otherwise, use the current root path
   } else {
-    data->name_for_new_playlist_ = static_cast<QFileSystemModel*>(model())->rootPath();
+    data->name_for_new_playlist_ =
+        static_cast<QFileSystemModel*>(model())->rootPath();
   }
 
   return data;
@@ -89,7 +90,7 @@ MimeData* FileViewList::MimeDataFromSelection() const {
 
 QStringList FileViewList::FilenamesFromSelection() const {
   QStringList filenames;
-  foreach (const QModelIndex& index, menu_selection_.indexes()) {
+  foreach(const QModelIndex & index, menu_selection_.indexes()) {
     if (index.column() == 0)
       filenames << static_cast<QFileSystemModel*>(model())->filePath(index);
   }
@@ -124,20 +125,16 @@ void FileViewList::CopyToDeviceSlot() {
   emit CopyToDevice(UrlListFromSelection());
 }
 
-void FileViewList::DeleteSlot() {
-  emit Delete(FilenamesFromSelection());
-}
+void FileViewList::DeleteSlot() { emit Delete(FilenamesFromSelection()); }
 
-void FileViewList::EditTagsSlot() {
-  emit EditTags(UrlListFromSelection());
-}
+void FileViewList::EditTagsSlot() { emit EditTags(UrlListFromSelection()); }
 
 void FileViewList::mousePressEvent(QMouseEvent* e) {
   QListView::mousePressEvent(e);
 
-  //enqueue to playlist with middleClick
+  // enqueue to playlist with middleClick
   if (e->button() == Qt::MidButton) {
-    //we need to update the menu selection
+    // we need to update the menu selection
     menu_selection_ = selectionModel()->selection();
 
     MimeData* data = new MimeData;

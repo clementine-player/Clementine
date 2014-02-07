@@ -28,7 +28,7 @@ class MacDeviceLister : public DeviceLister {
   virtual QString MakeFriendlyName(const QString& id);
   virtual QList<QUrl> MakeDeviceUrls(const QString& id);
 
-  virtual void UnmountDevice(const QString &id);
+  virtual void UnmountDevice(const QString& id);
   virtual void UpdateDeviceFreeSpace(const QString& id);
 
   struct MTPDevice {
@@ -57,8 +57,8 @@ class MacDeviceLister : public DeviceLister {
   static void USBDeviceAddedCallback(void* refcon, io_iterator_t it);
   static void USBDeviceRemovedCallback(void* refcon, io_iterator_t it);
 
-  static void DiskUnmountCallback(
-      DADiskRef disk, DADissenterRef dissenter, void* context);
+  static void DiskUnmountCallback(DADiskRef disk, DADissenterRef dissenter,
+                                  void* context);
 
   void FoundMTPDevice(const MTPDevice& device, const QString& serial);
   void RemovedMTPDevice(const QString& serial);
@@ -81,9 +81,9 @@ class MacDeviceLister : public DeviceLister {
 };
 
 uint qHash(const MacDeviceLister::MTPDevice& device);
-inline bool operator==(const MacDeviceLister::MTPDevice& a, const MacDeviceLister::MTPDevice& b) {
-  return (a.vendor_id == b.vendor_id) &&
-         (a.product_id == b.product_id);
+inline bool operator==(const MacDeviceLister::MTPDevice& a,
+                       const MacDeviceLister::MTPDevice& b) {
+  return (a.vendor_id == b.vendor_id) && (a.product_id == b.product_id);
 }
 
 #endif

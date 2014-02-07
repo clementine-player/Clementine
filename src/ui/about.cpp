@@ -24,14 +24,13 @@
 
 const char* About::kUrl = "http://www.clementine-player.org/";
 
-About::About(QWidget *parent)
-  : QDialog(parent)
-{
+About::About(QWidget* parent) : QDialog(parent) {
   ui_.setupUi(this);
 
   setWindowTitle(tr("About %1").arg(QCoreApplication::applicationName()));
   ui_.title->setText(QCoreApplication::applicationName());
-  ui_.version->setText(tr("Version %1").arg(QCoreApplication::applicationVersion()));
+  ui_.version->setText(
+      tr("Version %1").arg(QCoreApplication::applicationVersion()));
 
   QFont title_font;
   title_font.setBold(true);
@@ -44,7 +43,8 @@ About::About(QWidget *parent)
            << Person("Arnaud Bienner", "arnaud.bienner@gmail.com");
   thanks_to_ << Person("Mark Kretschmann", "kretschmann@kde.org")
              << Person("Max Howell", "max.howell@methylblue.com")
-             << Person(QString::fromUtf8("Bartłomiej Burdukiewicz"), "dev.strikeu@gmail.com")
+             << Person(QString::fromUtf8("Bartłomiej Burdukiewicz"),
+                       "dev.strikeu@gmail.com")
              << Person("Jakub Stachowski", "qbast@go2.pl")
              << Person("Paul Cifarelli", "paul@cifarelli.net")
              << Person("Felipe Rivera", "liebremx@users.sourceforge.net")
@@ -57,32 +57,41 @@ About::About(QWidget *parent)
 
   ui_.content->setHtml(MakeHtml());
 
-  ui_.buttonBox->button(QDialogButtonBox::Close)->setShortcut(QKeySequence::Close);
+  ui_.buttonBox->button(QDialogButtonBox::Close)
+      ->setShortcut(QKeySequence::Close);
 }
 
 QString About::MakeHtml() const {
-  QString ret = QString("<p><a href=\"%1\">%2</a></p>"
-                        "<p><b>%3:</b>").arg(kUrl, kUrl, tr("Authors"));
+  QString ret = QString(
+                    "<p><a href=\"%1\">%2</a></p>"
+                    "<p><b>%3:</b>").arg(kUrl, kUrl, tr("Authors"));
 
-  foreach (const Person& person, authors_)
-    ret += "<br />" + MakeHtml(person);
+  foreach(const Person & person, authors_)
+  ret += "<br />" + MakeHtml(person);
 
   ret += QString("</p><p><b>%3:</b>").arg(tr("Thanks to"));
 
-  foreach (const Person& person, thanks_to_)
-    ret += "<br />" + MakeHtml(person);
-  ret += QString("<br />" + tr("All the translators") + " &lt;<a href=\"https://www.transifex.net/projects/p/clementine\">"
-                 "https://www.transifex.net/projects/p/clementine</a>&gt;");
+  foreach(const Person & person, thanks_to_)
+  ret += "<br />" + MakeHtml(person);
+  ret += QString(
+      "<br />" + tr("All the translators") +
+      " &lt;<a href=\"https://www.transifex.net/projects/p/clementine\">"
+      "https://www.transifex.net/projects/p/clementine</a>&gt;");
 
   ret += QString("<br />%1</p>").arg(tr("...and all the Amarok contributors"));
   ret += QString("<p><b>%1</b>").arg(tr("And:"));
   ret += QString("<br /><a href=\"http://rainymood.com\">Rainy Mood</a>");
-  ret += QString("<br /><a href=\"http://www.smitelli.com/?page=blog&p=54\">Scott Smitelli</a>");
-  ret += QString("<br /><a href=\"http://hyperboleandahalf.blogspot.com\">Allie Brosh</a></p>");
+  ret += QString(
+      "<br /><a href=\"http://www.smitelli.com/?page=blog&p=54\">Scott "
+      "Smitelli</a>");
+  ret += QString(
+      "<br /><a href=\"http://hyperboleandahalf.blogspot.com\">Allie "
+      "Brosh</a></p>");
 
-  ret += "<p>This product uses Music by Spotify but is not endorsed, certified "
-         "or otherwise approved in any way by Spotify. Spotify is the registered "
-         "trade mark of the Spotify Group.</p>";
+  ret +=
+      "<p>This product uses Music by Spotify but is not endorsed, certified "
+      "or otherwise approved in any way by Spotify. Spotify is the registered "
+      "trade mark of the Spotify Group.</p>";
 
   return ret;
 }

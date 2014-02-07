@@ -29,7 +29,7 @@
 class _MessageReplyBase : public QObject {
   Q_OBJECT
 
-public:
+ public:
   _MessageReplyBase(QObject* parent = 0);
 
   virtual int id() const = 0;
@@ -46,19 +46,18 @@ public:
 signals:
   void Finished(bool success);
 
-protected:
+ protected:
   bool finished_;
   bool success_;
 
   QSemaphore semaphore_;
 };
 
-
 // A reply future class that is returned immediately for requests that will
 // occur in the background.  Similar to QNetworkReply.
 template <typename MessageType>
 class MessageReply : public _MessageReplyBase {
-public:
+ public:
   MessageReply(const MessageType& request_message, QObject* parent = 0);
 
   int id() const { return request_message_.id(); }
@@ -67,21 +66,19 @@ public:
 
   void SetReply(const MessageType& message);
 
-private:
+ private:
   MessageType request_message_;
   MessageType reply_message_;
 };
 
-
-template<typename MessageType>
+template <typename MessageType>
 MessageReply<MessageType>::MessageReply(const MessageType& request_message,
                                         QObject* parent)
-  : _MessageReplyBase(parent)
-{
+    : _MessageReplyBase(parent) {
   request_message_.MergeFrom(request_message);
 }
 
-template<typename MessageType>
+template <typename MessageType>
 void MessageReply<MessageType>::SetReply(const MessageType& message) {
   Q_ASSERT(!finished_);
 
@@ -94,4 +91,4 @@ void MessageReply<MessageType>::SetReply(const MessageType& message) {
   semaphore_.release();
 }
 
-#endif // MESSAGEREPLY_H
+#endif  // MESSAGEREPLY_H

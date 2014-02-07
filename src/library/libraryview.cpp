@@ -50,12 +50,12 @@ using smart_playlists::Wizard;
 
 const char* LibraryView::kSettingsGroup = "LibraryView";
 
-LibraryItemDelegate::LibraryItemDelegate(QObject *parent)
-  : QStyledItemDelegate(parent)
-{
-}
+LibraryItemDelegate::LibraryItemDelegate(QObject* parent)
+    : QStyledItemDelegate(parent) {}
 
-void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opt, const QModelIndex &index) const {
+void LibraryItemDelegate::paint(QPainter* painter,
+                                const QStyleOptionViewItem& opt,
+                                const QModelIndex& index) const {
   const bool is_divider = index.data(LibraryModel::Role_IsDivider).toBool();
 
   if (is_divider) {
@@ -113,19 +113,17 @@ void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
   }
 }
 
-bool LibraryItemDelegate::helpEvent(QHelpEvent *event, QAbstractItemView *view,
-                                     const QStyleOptionViewItem &option,
-                                     const QModelIndex &index) {
+bool LibraryItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view,
+                                    const QStyleOptionViewItem& option,
+                                    const QModelIndex& index) {
   Q_UNUSED(option);
 
-  if (!event || !view)
-    return false;
+  if (!event || !view) return false;
 
-  QHelpEvent *he = static_cast<QHelpEvent*>(event);
+  QHelpEvent* he = static_cast<QHelpEvent*>(event);
   QString text = displayText(index.data(), QLocale::system());
 
-  if (text.isEmpty() || !he)
-    return false;
+  if (text.isEmpty() || !he) return false;
 
   switch (event->type()) {
     case QEvent::ToolTip: {
@@ -164,14 +162,13 @@ bool LibraryItemDelegate::helpEvent(QHelpEvent *event, QAbstractItemView *view,
 }
 
 LibraryView::LibraryView(QWidget* parent)
-  : AutoExpandingTreeView(parent),
-    app_(nullptr),
-    filter_(nullptr),
-    total_song_count_(-1),
-    nomusic_(":nomusic.png"),
-    context_menu_(nullptr),
-    is_in_keyboard_search_(false)
-{
+    : AutoExpandingTreeView(parent),
+      app_(nullptr),
+      filter_(nullptr),
+      total_song_count_(-1),
+      nomusic_(":nomusic.png"),
+      context_menu_(nullptr),
+      is_in_keyboard_search_(false) {
   setItemDelegate(new LibraryItemDelegate(this));
   setAttribute(Qt::WA_MacShowFocusRect, false);
   setHeaderHidden(true);
@@ -183,15 +180,14 @@ LibraryView::LibraryView(QWidget* parent)
   setStyleSheet("QTreeView::item{padding-top:1px;}");
 }
 
-LibraryView::~LibraryView() {
-}
+LibraryView::~LibraryView() {}
 
 void LibraryView::SaveFocus() {
   QModelIndex current = currentIndex();
   QVariant type = model()->data(current, LibraryModel::Role_Type);
   if (!type.isValid() || !(type.toInt() == LibraryItem::Type_Song ||
-       type.toInt() == LibraryItem::Type_Container ||
-       type.toInt() == LibraryItem::Type_Divider)) {
+                           type.toInt() == LibraryItem::Type_Container ||
+                           type.toInt() == LibraryItem::Type_Divider)) {
     return;
   }
 
@@ -201,8 +197,8 @@ void LibraryView::SaveFocus() {
 
   switch (type.toInt()) {
     case LibraryItem::Type_Song: {
-      QModelIndex index = qobject_cast<QSortFilterProxyModel*>(model())
-          ->mapToSource(current);
+      QModelIndex index =
+          qobject_cast<QSortFilterProxyModel*>(model())->mapToSource(current);
       SongList songs = app_->library_model()->GetChildSongs(index);
       if (!songs.isEmpty()) {
         last_selected_song_ = songs.last();
@@ -212,7 +208,8 @@ void LibraryView::SaveFocus() {
 
     case LibraryItem::Type_Container:
     case LibraryItem::Type_Divider: {
-      QString text = model()->data(current, LibraryModel::Role_SortText).toString();
+      QString text =
+          model()->data(current, LibraryModel::Role_SortText).toString();
       last_selected_container_ = text;
       break;
     }
@@ -228,7 +225,7 @@ void LibraryView::SaveContainerPath(const QModelIndex& child) {
   QModelIndex current = model()->parent(child);
   QVariant type = model()->data(current, LibraryModel::Role_Type);
   if (!type.isValid() || !(type.toInt() == LibraryItem::Type_Container ||
-       type.toInt() == LibraryItem::Type_Divider)) {
+                           type.toInt() == LibraryItem::Type_Divider)) {
     return;
   }
 
@@ -238,7 +235,8 @@ void LibraryView::SaveContainerPath(const QModelIndex& child) {
 }
 
 void LibraryView::RestoreFocus() {
-  if (last_selected_container_.isEmpty() && last_selected_song_.url().isEmpty()) {
+  if (last_selected_container_.isEmpty() &&
+      last_selected_song_.url().isEmpty()) {
     return;
   }
   RestoreLevelFocus();
@@ -256,9 +254,9 @@ bool LibraryView::RestoreLevelFocus(const QModelIndex& parent) {
       case LibraryItem::Type_Song:
         if (!last_selected_song_.url().isEmpty()) {
           QModelIndex index = qobject_cast<QSortFilterProxyModel*>(model())
-                              ->mapToSource(current);
+                                  ->mapToSource(current);
           SongList songs = app_->library_model()->GetChildSongs(index);
-          foreach (const Song& song, songs) {
+          foreach(const Song & song, songs) {
             if (song == last_selected_song_) {
               setCurrentIndex(current);
               return true;
@@ -269,14 +267,17 @@ bool LibraryView::RestoreLevelFocus(const QModelIndex& parent) {
 
       case LibraryItem::Type_Container:
       case LibraryItem::Type_Divider: {
-        QString text = model()->data(current, LibraryModel::Role_SortText).toString();
-        if (!last_selected_container_.isEmpty() && last_selected_container_ == text) {
+        QString text =
+            model()->data(current, LibraryModel::Role_SortText).toString();
+        if (!last_selected_container_.isEmpty() &&
+            last_selected_container_ == text) {
           emit expand(current);
           setCurrentIndex(current);
           return true;
         } else if (last_selected_path_.contains(text)) {
           emit expand(current);
-          // If a selected container or song were not found, we've got into a wrong subtree
+          // If a selected container or song were not found, we've got into a
+          // wrong subtree
           //  (happens with "unknown" all the time)
           if (!RestoreLevelFocus(current)) {
             emit collapse(current);
@@ -297,8 +298,10 @@ void LibraryView::ReloadSettings() {
 
   SetAutoOpen(s.value("auto_open", true).toBool());
   if (app_ != nullptr) {
-    app_->library_model()->set_pretty_covers(s.value("pretty_covers", true).toBool());
-    app_->library_model()->set_show_dividers(s.value("show_dividers", true).toBool());
+    app_->library_model()->set_pretty_covers(
+        s.value("pretty_covers", true).toBool());
+    app_->library_model()->set_show_dividers(
+        s.value("show_dividers", true).toBool());
   }
 }
 
@@ -307,15 +310,12 @@ void LibraryView::SetApplication(Application* app) {
   ReloadSettings();
 }
 
-void LibraryView::SetFilter(LibraryFilterWidget* filter) {
-  filter_ = filter;
-}
+void LibraryView::SetFilter(LibraryFilterWidget* filter) { filter_ = filter; }
 
 void LibraryView::TotalSongCountUpdated(int count) {
   bool old = total_song_count_;
   total_song_count_ = count;
-  if (old != total_song_count_)
-    update();
+  if (old != total_song_count_) update();
 
   if (total_song_count_ == 0)
     setCursor(Qt::PointingHandCursor);
@@ -340,7 +340,8 @@ void LibraryView::paintEvent(QPaintEvent* event) {
 
     QFontMetrics metrics(bold_font);
 
-    QRect title_rect(0, image_rect.bottom() + 20, rect.width(), metrics.height());
+    QRect title_rect(0, image_rect.bottom() + 20, rect.width(),
+                     metrics.height());
     p.drawText(title_rect, Qt::AlignHCenter, tr("Your library is empty!"));
 
     // Draw the other text
@@ -361,47 +362,60 @@ void LibraryView::mouseReleaseEvent(QMouseEvent* e) {
   }
 }
 
-void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
-  if(!context_menu_) {
+void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
+  if (!context_menu_) {
     context_menu_ = new QMenu(this);
-    add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+    add_to_playlist_ = context_menu_->addAction(
+        IconLoader::Load("media-playback-start"),
         tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
     load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-        tr("Replace current playlist"), this, SLOT(Load()));
-    open_in_new_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
-        tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
+                                     tr("Replace current playlist"), this,
+                                     SLOT(Load()));
+    open_in_new_playlist_ = context_menu_->addAction(
+        IconLoader::Load("document-new"), tr("Open in new playlist"), this,
+        SLOT(OpenInNewPlaylist()));
 
     context_menu_->addSeparator();
-    add_to_playlist_enqueue_ = context_menu_->addAction(IconLoader::Load("go-next"),
-        tr("Queue track"), this, SLOT(AddToPlaylistEnqueue()));
+    add_to_playlist_enqueue_ =
+        context_menu_->addAction(IconLoader::Load("go-next"), tr("Queue track"),
+                                 this, SLOT(AddToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
-    new_smart_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
-        tr("New smart playlist..."), this, SLOT(NewSmartPlaylist()));
-    edit_smart_playlist_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
-        tr("Edit smart playlist..."), this, SLOT(EditSmartPlaylist()));
-    delete_smart_playlist_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
-        tr("Delete smart playlist"), this, SLOT(DeleteSmartPlaylist()));
+    new_smart_playlist_ = context_menu_->addAction(
+        IconLoader::Load("document-new"), tr("New smart playlist..."), this,
+        SLOT(NewSmartPlaylist()));
+    edit_smart_playlist_ = context_menu_->addAction(
+        IconLoader::Load("edit-rename"), tr("Edit smart playlist..."), this,
+        SLOT(EditSmartPlaylist()));
+    delete_smart_playlist_ = context_menu_->addAction(
+        IconLoader::Load("edit-delete"), tr("Delete smart playlist"), this,
+        SLOT(DeleteSmartPlaylist()));
 
     context_menu_->addSeparator();
     organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
-        tr("Organise files..."), this, SLOT(Organise()));
-    copy_to_device_ = context_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"),
+                                         tr("Organise files..."), this,
+                                         SLOT(Organise()));
+    copy_to_device_ = context_menu_->addAction(
+        IconLoader::Load("multimedia-player-ipod-mini-blue"),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
     delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
-        tr("Delete from disk..."), this, SLOT(Delete()));
+                                       tr("Delete from disk..."), this,
+                                       SLOT(Delete()));
 
     context_menu_->addSeparator();
     edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
-      tr("Edit track information..."), this, SLOT(EditTracks()));
+                                           tr("Edit track information..."),
+                                           this, SLOT(EditTracks()));
     edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
-      tr("Edit tracks information..."), this, SLOT(EditTracks()));
-    show_in_browser_ = context_menu_->addAction(IconLoader::Load("document-open-folder"),
-      tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
+                                            tr("Edit tracks information..."),
+                                            this, SLOT(EditTracks()));
+    show_in_browser_ = context_menu_->addAction(
+        IconLoader::Load("document-open-folder"), tr("Show in file browser..."),
+        this, SLOT(ShowInBrowser()));
 
     context_menu_->addSeparator();
-    show_in_various_ = context_menu_->addAction(
-        tr("Show in various artists"), this, SLOT(ShowInVarious()));
+    show_in_various_ = context_menu_->addAction(tr("Show in various artists"),
+                                                this, SLOT(ShowInVarious()));
     no_show_in_various_ = context_menu_->addAction(
         tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
 
@@ -409,21 +423,23 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
 
     context_menu_->addMenu(filter_->menu());
 
-    copy_to_device_->setDisabled(app_->device_manager()->connected_devices_model()->rowCount() == 0);
-    connect(app_->device_manager()->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
-            copy_to_device_, SLOT(setDisabled(bool)));
+    copy_to_device_->setDisabled(
+        app_->device_manager()->connected_devices_model()->rowCount() == 0);
+    connect(app_->device_manager()->connected_devices_model(),
+            SIGNAL(IsEmptyChanged(bool)), copy_to_device_,
+            SLOT(setDisabled(bool)));
   }
 
   context_menu_index_ = indexAt(e->pos());
-  if (!context_menu_index_.isValid())
-    return;
+  if (!context_menu_index_.isValid()) return;
 
   context_menu_index_ = qobject_cast<QSortFilterProxyModel*>(model())
-                        ->mapToSource(context_menu_index_);
+                            ->mapToSource(context_menu_index_);
 
   QModelIndexList selected_indexes =
-      qobject_cast<QSortFilterProxyModel*>(model())->mapSelectionToSource(
-          selectionModel()->selection()).indexes();
+      qobject_cast<QSortFilterProxyModel*>(model())
+          ->mapSelectionToSource(selectionModel()->selection())
+          .indexes();
 
   // number of smart playlists selected
   int smart_playlists = 0;
@@ -434,27 +450,34 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   // number of editable non smart playlists selected
   int regular_editable = 0;
 
-  foreach(const QModelIndex& index, selected_indexes) {
-    int type = app_->library_model()->data(index, LibraryModel::Role_Type).toInt();
+  foreach(const QModelIndex & index, selected_indexes) {
+    int type =
+        app_->library_model()->data(index, LibraryModel::Role_Type).toInt();
 
-    if(type == LibraryItem::Type_SmartPlaylist) {
+    if (type == LibraryItem::Type_SmartPlaylist) {
       smart_playlists++;
-    } else if(type == LibraryItem::Type_PlaylistContainer) {
+    } else if (type == LibraryItem::Type_PlaylistContainer) {
       smart_playlists_header++;
     } else {
       regular_elements++;
     }
 
-    if(app_->library_model()->data(index, LibraryModel::Role_Editable).toBool()) {
+    if (app_->library_model()
+            ->data(index, LibraryModel::Role_Editable)
+            .toBool()) {
       regular_editable++;
     }
   }
 
   // TODO: check if custom plugin actions should be enabled / visible
-  const int songs_selected     = smart_playlists + smart_playlists_header + regular_elements;
-  const bool regular_elements_only = songs_selected == regular_elements && regular_elements > 0;
-  const bool smart_playlists_only = songs_selected == smart_playlists + smart_playlists_header;
-  const bool only_smart_playlist_selected = smart_playlists == 1 && songs_selected == 1;
+  const int songs_selected =
+      smart_playlists + smart_playlists_header + regular_elements;
+  const bool regular_elements_only =
+      songs_selected == regular_elements && regular_elements > 0;
+  const bool smart_playlists_only =
+      songs_selected == smart_playlists + smart_playlists_header;
+  const bool only_smart_playlist_selected =
+      smart_playlists == 1 && songs_selected == 1;
 
   // in all modes
   load_->setEnabled(songs_selected);
@@ -493,52 +516,51 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   context_menu_->popup(e->globalPos());
 }
 
-void LibraryView::ShowInVarious() {
-  ShowInVarious(true);
-}
+void LibraryView::ShowInVarious() { ShowInVarious(true); }
 
-void LibraryView::NoShowInVarious() {
-  ShowInVarious(false);
-}
+void LibraryView::NoShowInVarious() { ShowInVarious(false); }
 
 void LibraryView::ShowInVarious(bool on) {
-  if (!context_menu_index_.isValid())
-    return;
+  if (!context_menu_index_.isValid()) return;
 
-  // Map is from album name -> all artists sharing that album name, built from each selected
-  // song. We put through "Various Artists" changes one album at a time, to make sure the old album
-  // node gets removed (due to all children removed), before the new one gets added
+  // Map is from album name -> all artists sharing that album name, built from
+  // each selected
+  // song. We put through "Various Artists" changes one album at a time, to make
+  // sure the old album
+  // node gets removed (due to all children removed), before the new one gets
+  // added
   QMultiMap<QString, QString> albums;
-  foreach (const Song& song, GetSelectedSongs()) {
+  foreach(const Song & song, GetSelectedSongs()) {
     if (albums.find(song.album(), song.artist()) == albums.end())
-      albums.insert( song.album(), song.artist() );
+      albums.insert(song.album(), song.artist());
   }
 
-  // If we have only one album and we are putting it into Various Artists, check to see
-  // if there are other Artists in this album and prompt the user if they'd like them moved, too
-  if(on && albums.keys().count() == 1) {
+  // If we have only one album and we are putting it into Various Artists, check
+  // to see
+  // if there are other Artists in this album and prompt the user if they'd like
+  // them moved, too
+  if (on && albums.keys().count() == 1) {
     const QString album = albums.keys().first();
     QList<Song> all_of_album = app_->library_backend()->GetSongsByAlbum(album);
     QSet<QString> other_artists;
-    foreach (const Song& s, all_of_album) {
-      if(!albums.contains(album, s.artist()) && !other_artists.contains(s.artist())) {
+    foreach(const Song & s, all_of_album) {
+      if (!albums.contains(album, s.artist()) &&
+          !other_artists.contains(s.artist())) {
         other_artists.insert(s.artist());
       }
     }
     if (other_artists.count() > 0) {
-      if (QMessageBox::question(this,
-              tr("There are other songs in this album"),
-              tr("Would you like to move the other songs in this album to Various Artists as well?"),
-              QMessageBox::Yes | QMessageBox::No,
-              QMessageBox::Yes) == QMessageBox::Yes) {
-        foreach (const QString& s, other_artists) {
-          albums.insert(album, s);
-        }
+      if (QMessageBox::question(this, tr("There are other songs in this album"),
+                                tr("Would you like to move the other songs in "
+                                   "this album to Various Artists as well?"),
+                                QMessageBox::Yes | QMessageBox::No,
+                                QMessageBox::Yes) == QMessageBox::Yes) {
+        foreach(const QString & s, other_artists) { albums.insert(album, s); }
       }
     }
   }
 
-  foreach (const QString& album, QSet<QString>::fromList(albums.keys())) {
+  foreach(const QString & album, QSet<QString>::fromList(albums.keys())) {
     app_->library_backend()->ForceCompilation(album, albums.values(album), on);
   }
 }
@@ -586,8 +608,9 @@ void LibraryView::scrollTo(const QModelIndex& index, ScrollHint hint) {
 
 SongList LibraryView::GetSelectedSongs() const {
   QModelIndexList selected_indexes =
-      qobject_cast<QSortFilterProxyModel*>(model())->mapSelectionToSource(
-          selectionModel()->selection()).indexes();
+      qobject_cast<QSortFilterProxyModel*>(model())
+          ->mapSelectionToSource(selectionModel()->selection())
+          .indexes();
   return app_->library_model()->GetChildSongs(selected_indexes);
 }
 
@@ -595,36 +618,44 @@ void LibraryView::Organise() {
   if (!organise_dialog_)
     organise_dialog_.reset(new OrganiseDialog(app_->task_manager()));
 
-  organise_dialog_->SetDestinationModel(app_->library_model()->directory_model());
+  organise_dialog_->SetDestinationModel(
+      app_->library_model()->directory_model());
   organise_dialog_->SetCopy(false);
   if (organise_dialog_->SetSongs(GetSelectedSongs()))
     organise_dialog_->show();
   else {
-    QMessageBox::warning(this, tr("Error"),
+    QMessageBox::warning(
+        this, tr("Error"),
         tr("None of the selected songs were suitable for copying to a device"));
   }
 }
 
 void LibraryView::Delete() {
   if (QMessageBox::warning(this, tr("Delete files"),
-        tr("These files will be permanently deleted from disk, are you sure you want to continue?"),
-        QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
+                           tr("These files will be permanently deleted from "
+                              "disk, are you sure you want to continue?"),
+                           QMessageBox::Yes,
+                           QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
   // We can cheat and always take the storage of the first directory, since
   // they'll all be FilesystemMusicStorage in a library and deleting doesn't
   // check the actual directory.
   std::shared_ptr<MusicStorage> storage =
-      app_->library_model()->directory_model()->index(0, 0).data(MusicStorage::Role_Storage)
-      .value<std::shared_ptr<MusicStorage>>();
+      app_->library_model()
+          ->directory_model()
+          ->index(0, 0)
+          .data(MusicStorage::Role_Storage)
+          .value<std::shared_ptr<MusicStorage>>();
 
   DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
-  connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
+  connect(delete_files, SIGNAL(Finished(SongList)),
+          SLOT(DeleteFinished(SongList)));
   delete_files->Start(GetSelectedSongs());
 }
 
 void LibraryView::EditTracks() {
-  if(!edit_tag_dialog_) {
+  if (!edit_tag_dialog_) {
     edit_tag_dialog_.reset(new EditTagDialog(app_, this));
   }
   edit_tag_dialog_->SetSongs(GetSelectedSongs());
@@ -635,15 +666,15 @@ void LibraryView::CopyToDevice() {
   if (!organise_dialog_)
     organise_dialog_.reset(new OrganiseDialog(app_->task_manager()));
 
-  organise_dialog_->SetDestinationModel(app_->device_manager()->connected_devices_model(), true);
+  organise_dialog_->SetDestinationModel(
+      app_->device_manager()->connected_devices_model(), true);
   organise_dialog_->SetCopy(true);
   organise_dialog_->SetSongs(GetSelectedSongs());
   organise_dialog_->show();
 }
 
 void LibraryView::DeleteFinished(const SongList& songs_with_errors) {
-  if (songs_with_errors.isEmpty())
-    return;
+  if (songs_with_errors.isEmpty()) return;
 
   OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
@@ -653,7 +684,7 @@ void LibraryView::DeleteFinished(const SongList& songs_with_errors) {
 void LibraryView::FilterReturnPressed() {
   if (!currentIndex().isValid()) {
     // Pick the first thing that isn't a divider
-    for (int row=0 ; row<model()->rowCount() ; ++row) {
+    for (int row = 0; row < model()->rowCount(); ++row) {
       QModelIndex idx(model()->index(row, 0));
       if (idx.data(LibraryModel::Role_Type) != LibraryItem::Type_Divider) {
         setCurrentIndex(idx);
@@ -662,8 +693,7 @@ void LibraryView::FilterReturnPressed() {
     }
   }
 
-  if (!currentIndex().isValid())
-    return;
+  if (!currentIndex().isValid()) return;
 
   emit doubleClicked(currentIndex());
 }
@@ -682,7 +712,8 @@ void LibraryView::EditSmartPlaylist() {
   connect(wizard, SIGNAL(accepted()), SLOT(EditSmartPlaylistFinished()));
 
   wizard->show();
-  wizard->SetGenerator(app_->library_model()->CreateGenerator(context_menu_index_));
+  wizard->SetGenerator(
+      app_->library_model()->CreateGenerator(context_menu_index_));
 }
 
 void LibraryView::DeleteSmartPlaylist() {
@@ -696,14 +727,13 @@ void LibraryView::NewSmartPlaylistFinished() {
 
 void LibraryView::EditSmartPlaylistFinished() {
   const Wizard* wizard = qobject_cast<Wizard*>(sender());
-  app_->library_model()->UpdateGenerator(context_menu_index_, wizard->CreateGenerator());
+  app_->library_model()->UpdateGenerator(context_menu_index_,
+                                         wizard->CreateGenerator());
 }
 
 void LibraryView::ShowInBrowser() {
   QList<QUrl> urls;
-  foreach (const Song& song, GetSelectedSongs()) {
-    urls << song.url();
-  }
+  foreach(const Song & song, GetSelectedSongs()) { urls << song.url(); }
 
   Utilities::OpenInFileBrowser(urls);
 }

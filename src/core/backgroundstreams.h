@@ -29,7 +29,7 @@ class BackgroundStreams : public QObject {
 
   void AddAction(const QString& name, QAction* action);
 
- signals:
+signals:
   void StreamStarted(const QString& name);
   void StreamStopped(const QString& name);
 

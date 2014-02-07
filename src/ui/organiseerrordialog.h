@@ -27,20 +27,17 @@ class Ui_OrganiseErrorDialog;
 class OrganiseErrorDialog : public QDialog {
   Q_OBJECT
 
-public:
+ public:
   OrganiseErrorDialog(QWidget* parent = 0);
   ~OrganiseErrorDialog();
 
-  enum OperationType {
-    Type_Copy,
-    Type_Delete,
-  };
+  enum OperationType { Type_Copy, Type_Delete, };
 
   void Show(OperationType type, const SongList& songs_with_errors);
   void Show(OperationType type, const QStringList& files_with_errors);
 
-private:
+ private:
   Ui_OrganiseErrorDialog* ui_;
 };
 
-#endif // ORGANISEERRORDIALOG_H
+#endif  // ORGANISEERRORDIALOG_H

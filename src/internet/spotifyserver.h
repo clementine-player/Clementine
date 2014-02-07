@@ -24,14 +24,13 @@
 #include <QImage>
 #include <QObject>
 
-
 class QTcpServer;
 class QTcpSocket;
 
 class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   Q_OBJECT
 
-public:
+ public:
   SpotifyServer(QObject* parent = 0);
 
   void Init();
@@ -48,12 +47,13 @@ public:
   void Search(const QString& text, int limit, int limit_album = 0);
   void LoadImage(const QString& id);
   void AlbumBrowse(const QString& uri);
-  void SetPlaybackSettings(pb::spotify::Bitrate bitrate, bool volume_normalisation);
+  void SetPlaybackSettings(pb::spotify::Bitrate bitrate,
+                           bool volume_normalisation);
   void LoadToplist();
 
   int server_port() const;
 
-public slots:
+ public slots:
   void StartPlayback(const QString& uri, quint16 port);
   void Seek(qint64 offset_bytes);
 
@@ -72,13 +72,13 @@ signals:
   void AlbumBrowseResults(const pb::spotify::BrowseAlbumResponse& response);
   void ToplistBrowseResults(const pb::spotify::BrowseToplistResponse& response);
 
-protected:
+ protected:
   void MessageArrived(const pb::spotify::Message& message);
 
-private slots:
+ private slots:
   void NewConnection();
 
-private:
+ private:
   void LoadPlaylist(pb::spotify::PlaylistType type, int index = -1);
   void SyncPlaylist(pb::spotify::PlaylistType type, int index, bool offline);
   void SendOrQueueMessage(const pb::spotify::Message& message);
@@ -90,4 +90,4 @@ private:
   QList<pb::spotify::Message> queued_messages_;
 };
 
-#endif // SPOTIFYSERVER_H
+#endif  // SPOTIFYSERVER_H

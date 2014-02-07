@@ -32,16 +32,12 @@
 #include "internet/internetmodel.h"
 #include "internet/spotifyservice.h"
 
-
-
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
-  : QObject(parent),
-    stop_requested_(false),
-    next_id_(1),
-    network_(new NetworkAccessManager(this)),
-    connected_spotify_(false)
-{
-}
+    : QObject(parent),
+      stop_requested_(false),
+      next_id_(1),
+      network_(new NetworkAccessManager(this)),
+      connected_spotify_(false) {}
 
 QString AlbumCoverLoader::ImageCacheDir() {
   return Utilities::GetConfigPath(Utilities::Path_AlbumCovers);
@@ -49,7 +45,7 @@ QString AlbumCoverLoader::ImageCacheDir() {
 
 void AlbumCoverLoader::CancelTask(quint64 id) {
   QMutexLocker l(&mutex_);
-  for (QQueue<Task>::iterator it = tasks_.begin() ; it != tasks_.end() ; ++it) {
+  for (QQueue<Task>::iterator it = tasks_.begin(); it != tasks_.end(); ++it) {
     if (it->id == id) {
       tasks_.erase(it);
       break;
@@ -59,7 +55,7 @@ void AlbumCoverLoader::CancelTask(quint64 id) {
 
 void AlbumCoverLoader::CancelTasks(const QSet<quint64>& ids) {
   QMutexLocker l(&mutex_);
-  for (QQueue<Task>::iterator it = tasks_.begin() ; it != tasks_.end() ; ) {
+  for (QQueue<Task>::iterator it = tasks_.begin(); it != tasks_.end();) {
     if (ids.contains(it->id)) {
       it = tasks_.erase(it);
     } else {
@@ -83,7 +79,7 @@ quint64 AlbumCoverLoader::LoadImageAsync(const AlbumCoverLoaderOptions& options,
 
   {
     QMutexLocker l(&mutex_);
-    task.id = next_id_ ++;
+    task.id = next_id_++;
     tasks_.enqueue(task);
   }
 
@@ -98,8 +94,7 @@ void AlbumCoverLoader::ProcessTasks() {
     Task task;
     {
       QMutexLocker l(&mutex_);
-      if (tasks_.isEmpty())
-        return;
+      if (tasks_.isEmpty()) return;
       task = tasks_.dequeue();
     }
 
@@ -107,7 +102,7 @@ void AlbumCoverLoader::ProcessTasks() {
   }
 }
 
-void AlbumCoverLoader::ProcessTask(Task *task) {
+void AlbumCoverLoader::ProcessTask(Task* task) {
   TryLoadResult result = TryLoadImage(*task);
   if (result.started_async) {
     // The image is being loaded from a remote URL, we'll carry on later
@@ -142,12 +137,17 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     const Task& task) {
   // An image embedded in the song itself takes priority
   if (!task.embedded_image.isNull())
-    return TryLoadResult(false, true, ScaleAndPad(task.options, task.embedded_image));
+    return TryLoadResult(false, true,
+                         ScaleAndPad(task.options, task.embedded_image));
 
   QString filename;
   switch (task.state) {
-    case State_TryingAuto:   filename = task.art_automatic; break;
-    case State_TryingManual: filename = task.art_manual;    break;
+    case State_TryingAuto:
+      filename = task.art_automatic;
+      break;
+    case State_TryingManual:
+      filename = task.art_manual;
+      break;
   }
 
   if (filename == Song::kManuallyUnsetCover)
@@ -155,10 +155,12 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
 
   if (filename == Song::kEmbeddedCover && !task.song_filename.isEmpty()) {
     const QImage taglib_image =
-        TagReaderClient::Instance()->LoadEmbeddedArtBlocking(task.song_filename);
+        TagReaderClient::Instance()->LoadEmbeddedArtBlocking(
+            task.song_filename);
 
     if (!taglib_image.isNull())
-      return TryLoadResult(false, true, ScaleAndPad(task.options, taglib_image));
+      return TryLoadResult(false, true,
+                           ScaleAndPad(task.options, taglib_image));
   }
 
   if (filename.toLower().startsWith("http://")) {
@@ -174,8 +176,8 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
     if (!connected_spotify_) {
-      connect(spotify, SIGNAL(ImageLoaded(QString,QImage)),
-              SLOT(SpotifyImageLoaded(QString,QImage)));
+      connect(spotify, SIGNAL(ImageLoaded(QString, QImage)),
+              SLOT(SpotifyImageLoaded(QString, QImage)));
       connected_spotify_ = true;
     }
 
@@ -192,13 +194,14 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   }
 
   QImage image(filename);
-  return TryLoadResult(false, !image.isNull(),
-                       image.isNull() ? task.options.default_output_image_: image);
+  return TryLoadResult(
+      false, !image.isNull(),
+      image.isNull() ? task.options.default_output_image_ : image);
 }
 
-void AlbumCoverLoader::SpotifyImageLoaded(const QString& id, const QImage& image) {
-  if (!remote_spotify_tasks_.contains(id))
-    return;
+void AlbumCoverLoader::SpotifyImageLoaded(const QString& id,
+                                          const QImage& image) {
+  if (!remote_spotify_tasks_.contains(id)) return;
 
   Task task = remote_spotify_tasks_.take(id);
   QImage scaled = ScaleAndPad(task.options, image);
@@ -212,7 +215,8 @@ void AlbumCoverLoader::RemoteFetchFinished(QNetworkReply* reply) {
   Task task = remote_tasks_.take(reply);
 
   // Handle redirects.
-  QVariant redirect = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+  QVariant redirect =
+      reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
   if (redirect.isValid()) {
     if (++task.redirects > kMaxRedirects) {
       return;  // Give up.
@@ -243,8 +247,7 @@ void AlbumCoverLoader::RemoteFetchFinished(QNetworkReply* reply) {
 
 QImage AlbumCoverLoader::ScaleAndPad(const AlbumCoverLoaderOptions& options,
                                      const QImage& image) {
-  if (image.isNull())
-    return image;
+  if (image.isNull()) return image;
 
   // Scale the image down
   QImage copy;
@@ -255,8 +258,7 @@ QImage AlbumCoverLoader::ScaleAndPad(const AlbumCoverLoaderOptions& options,
     copy = image;
   }
 
-  if (!options.pad_output_image_)
-    return copy;
+  if (!options.pad_output_image_) return copy;
 
   // Pad the image to height_ x height_
   QImage padded_image(options.desired_height_, options.desired_height_,
@@ -265,8 +267,7 @@ QImage AlbumCoverLoader::ScaleAndPad(const AlbumCoverLoaderOptions& options,
 
   QPainter p(&padded_image);
   p.drawImage((options.desired_height_ - copy.width()) / 2,
-              (options.desired_height_ - copy.height()) / 2,
-              copy);
+              (options.desired_height_ - copy.height()) / 2, copy);
   p.end();
 
   return padded_image;
@@ -276,14 +277,12 @@ QPixmap AlbumCoverLoader::TryLoadPixmap(const QString& automatic,
                                         const QString& manual,
                                         const QString& filename) {
   QPixmap ret;
-  if (manual == Song::kManuallyUnsetCover)
-    return ret;
-  if (!manual.isEmpty())
-    ret.load(manual);
+  if (manual == Song::kManuallyUnsetCover) return ret;
+  if (!manual.isEmpty()) ret.load(manual);
   if (ret.isNull()) {
     if (automatic == Song::kEmbeddedCover && !filename.isNull())
       ret = QPixmap::fromImage(
-            TagReaderClient::Instance()->LoadEmbeddedArtBlocking(filename));
+          TagReaderClient::Instance()->LoadEmbeddedArtBlocking(filename));
     else if (!automatic.isEmpty())
       ret.load(automatic);
   }
@@ -291,8 +290,7 @@ QPixmap AlbumCoverLoader::TryLoadPixmap(const QString& automatic,
 }
 
 quint64 AlbumCoverLoader::LoadImageAsync(const AlbumCoverLoaderOptions& options,
-                                         const Song &song) {
-  return LoadImageAsync(options,
-                        song.art_automatic(), song.art_manual(),
+                                         const Song& song) {
+  return LoadImageAsync(options, song.art_automatic(), song.art_manual(),
                         song.url().toLocalFile(), song.image());
 }

@@ -33,24 +33,25 @@ class QTemporaryFile;
 class CurrentArtLoader : public QObject {
   Q_OBJECT
 
-public:
+ public:
   CurrentArtLoader(Application* app, QObject* parent = 0);
   ~CurrentArtLoader();
 
   const AlbumCoverLoaderOptions& options() const { return options_; }
   const Song& last_song() const { return last_song_; }
 
-public slots:
+ public slots:
   void LoadArt(const Song& song);
 
 signals:
   void ArtLoaded(const Song& song, const QString& uri, const QImage& image);
-  void ThumbnailLoaded(const Song& song, const QString& uri, const QImage& image);
+  void ThumbnailLoaded(const Song& song, const QString& uri,
+                       const QImage& image);
 
-private slots:
+ private slots:
   void TempArtLoaded(quint64 id, const QImage& image);
 
-private:
+ private:
   Application* app_;
   AlbumCoverLoaderOptions options_;
 
@@ -63,4 +64,4 @@ private:
   Song last_song_;
 };
 
-#endif // CURRENTARTLOADER_H
+#endif  // CURRENTARTLOADER_H

@@ -39,16 +39,12 @@ class PodcastParser;
 
 class SongLoader : public QObject {
   Q_OBJECT
-public:
+ public:
   SongLoader(LibraryBackendInterface* library, const Player* player,
              QObject* parent = 0);
   ~SongLoader();
 
-  enum Result {
-    Success,
-    Error,
-    WillLoadAsync,
-  };
+  enum Result { Success, Error, WillLoadAsync, };
 
   static const int kDefaultTimeout;
 
@@ -74,20 +70,15 @@ public:
 signals:
   void LoadFinished(bool success);
 
-private slots:
+ private slots:
   void Timeout();
   void StopTypefind();
   void AudioCDTagsLoaded(const QString& artist, const QString& album,
                          const MusicBrainzClient::ResultList& results);
   void LocalFileLoaded(TagReaderReply* reply);
 
-private:
-  enum State {
-    WaitingForType,
-    WaitingForMagic,
-    WaitingForData,
-    Finished,
-  };
+ private:
+  enum State { WaitingForType, WaitingForMagic, WaitingForData, Finished, };
 
   Result LoadLocal(const QString& filename);
   Result LoadLocalPartial(const QString& filename);
@@ -101,7 +92,8 @@ private:
   Result LoadRemote();
 
   // GStreamer callbacks
-  static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps, void* self);
+  static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps,
+                        void* self);
   static gboolean DataReady(GstPad*, GstBuffer* buf, void* self);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage*, gpointer);
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
@@ -112,7 +104,7 @@ private:
   void MagicReady();
   bool IsPipelinePlaying();
 
-private:
+ private:
   static QSet<QString> sRawUriSchemes;
 
   QUrl url_;
@@ -139,4 +131,4 @@ private:
   QThreadPool thread_pool_;
 };
 
-#endif // SONGLOADER_H
+#endif  // SONGLOADER_H

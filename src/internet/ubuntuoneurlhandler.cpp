@@ -2,12 +2,9 @@
 
 #include "ubuntuoneservice.h"
 
-UbuntuOneUrlHandler::UbuntuOneUrlHandler(
-    UbuntuOneService* service,
-    QObject* parent)
-  : UrlHandler(parent),
-    service_(service) {
-}
+UbuntuOneUrlHandler::UbuntuOneUrlHandler(UbuntuOneService* service,
+                                         QObject* parent)
+    : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult UbuntuOneUrlHandler::StartLoading(const QUrl& url) {
   QString file_id = url.path();

@@ -30,18 +30,14 @@ const char* NetworkRemoteSettingsPage::kPlayStoreUrl =
     "https://play.google.com/store/apps/details?id=de.qspool.clementineremote";
 
 NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_NetworkRemoteSettingsPage)
-{
+    : SettingsPage(dialog), ui_(new Ui_NetworkRemoteSettingsPage) {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("ipodtouchicon"));
 
   ui_->play_store->installEventFilter(this);
 }
 
-NetworkRemoteSettingsPage::~NetworkRemoteSettingsPage() {
-  delete ui_;
-}
+NetworkRemoteSettingsPage::~NetworkRemoteSettingsPage() { delete ui_; }
 
 bool NetworkRemoteSettingsPage::eventFilter(QObject* object, QEvent* event) {
   if (object == ui_->play_store &&
@@ -75,7 +71,7 @@ void NetworkRemoteSettingsPage::Load() {
   // Get local ip addresses
   QString ip_addresses;
   QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
-  foreach (const QHostAddress& address, addresses) {
+  foreach(const QHostAddress & address, addresses) {
     // TODO: Add ipv6 support to tinysvcmdns.
     if (address.protocol() == QAbstractSocket::IPv4Protocol &&
         !address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8"))) {

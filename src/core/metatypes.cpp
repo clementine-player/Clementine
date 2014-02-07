@@ -32,7 +32,8 @@ void RegisterMetaTypes() {
   qRegisterMetaType<const char*>("const char*");
   qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
   qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
-  qRegisterMetaType<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
+  qRegisterMetaType<DigitallyImportedClient::Channel>(
+      "DigitallyImportedClient::Channel");
   qRegisterMetaType<Directory>("Directory");
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");
@@ -49,8 +50,10 @@ void RegisterMetaTypes() {
   qRegisterMetaType<PodcastList>("PodcastList");
   qRegisterMetaType<QList<CoverSearchResult> >("QList<CoverSearchResult>");
   qRegisterMetaType<QList<PlaylistItemPtr> >("QList<PlaylistItemPtr>");
-  qRegisterMetaType<PlaylistSequence::RepeatMode>("PlaylistSequence::RepeatMode");
-  qRegisterMetaType<PlaylistSequence::ShuffleMode>("PlaylistSequence::ShuffleMode");
+  qRegisterMetaType<PlaylistSequence::RepeatMode>(
+      "PlaylistSequence::RepeatMode");
+  qRegisterMetaType<PlaylistSequence::ShuffleMode>(
+      "PlaylistSequence::ShuffleMode");
   qRegisterMetaType<QList<PodcastEpisode> >("QList<PodcastEpisode>");
   qRegisterMetaType<QList<Podcast> >("QList<Podcast>");
   qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");
@@ -60,14 +63,17 @@ void RegisterMetaTypes() {
   qRegisterMetaType<QNetworkReply**>("QNetworkReply**");
   qRegisterMetaType<SearchProvider::ResultList>("SearchProvider::ResultList");
   qRegisterMetaType<SearchProvider::Result>("SearchProvider::Result");
-  qRegisterMetaType<smart_playlists::GeneratorPtr>("smart_playlists::GeneratorPtr");
+  qRegisterMetaType<smart_playlists::GeneratorPtr>(
+      "smart_playlists::GeneratorPtr");
   qRegisterMetaType<SomaFMService::Stream>("SomaFMService::Stream");
   qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<Song>("Song");
-  qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
+  qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>(
+      "DigitallyImportedClient::Channel");
   qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
   qRegisterMetaTypeStreamOperators<QMap<int, int> >("ColumnAlignmentMap");
-  qRegisterMetaTypeStreamOperators<SomaFMService::Stream>("SomaFMService::Stream");
+  qRegisterMetaTypeStreamOperators<SomaFMService::Stream>(
+      "SomaFMService::Stream");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<QList<QUrl> >("QList<QUrl>");

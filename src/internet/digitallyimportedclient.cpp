@@ -35,20 +35,22 @@ const char* DigitallyImportedClient::kAuthUrl =
     "http://api.audioaddict.com/v1/%1/members/authenticate";
 
 const char* DigitallyImportedClient::kChannelListUrl =
-    "http://api.v2.audioaddict.com/v1/%1/mobile/batch_update?asset_group_key=mobile_icons&stream_set_key=";
+    "http://api.v2.audioaddict.com/v1/%1/mobile/"
+    "batch_update?asset_group_key=mobile_icons&stream_set_key=";
 
+DigitallyImportedClient::DigitallyImportedClient(const QString& service_name,
+                                                 QObject* parent)
+    : QObject(parent),
+      network_(new NetworkAccessManager(this)),
+      service_name_(service_name) {}
 
-DigitallyImportedClient::DigitallyImportedClient(const QString& service_name, QObject* parent)
-  : QObject(parent),
-    network_(new NetworkAccessManager(this)),
-    service_name_(service_name)
-{
-}
-
-void DigitallyImportedClient::SetAuthorisationHeader(QNetworkRequest* req) const {
+void DigitallyImportedClient::SetAuthorisationHeader(QNetworkRequest* req)
+    const {
   req->setRawHeader("Authorization",
-                    "Basic " + QString("%1:%2").arg(kApiUsername, kApiPassword)
-                       .toAscii().toBase64());
+                    "Basic " + QString("%1:%2")
+                                   .arg(kApiUsername, kApiPassword)
+                                   .toAscii()
+                                   .toBase64());
 }
 
 QNetworkReply* DigitallyImportedClient::Auth(const QString& username,
@@ -57,18 +59,19 @@ QNetworkReply* DigitallyImportedClient::Auth(const QString& username,
   SetAuthorisationHeader(&req);
 
   QByteArray postdata = "username=" + QUrl::toPercentEncoding(username) +
-                       "&password=" + QUrl::toPercentEncoding(password);
+                        "&password=" + QUrl::toPercentEncoding(password);
 
   return network_->post(req, postdata);
 }
 
-DigitallyImportedClient::AuthReply
-DigitallyImportedClient::ParseAuthReply(QNetworkReply* reply) const {
+DigitallyImportedClient::AuthReply DigitallyImportedClient::ParseAuthReply(
+    QNetworkReply* reply) const {
   AuthReply ret;
   ret.success_ = false;
   ret.error_reason_ = tr("Unknown error");
 
-  const int http_status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+  const int http_status =
+      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
   if (http_status == 403) {
     ret.error_reason_ = reply->readAll();
     return ret;
@@ -83,15 +86,15 @@ DigitallyImportedClient::ParseAuthReply(QNetworkReply* reply) const {
     return ret;
   }
 
-  QVariantList subscriptions = data.value("subscriptions", QVariantList()).toList();
+  QVariantList subscriptions =
+      data.value("subscriptions", QVariantList()).toList();
   if (subscriptions.isEmpty() ||
       subscriptions[0].toMap().value("status").toString() != "active") {
     ret.error_reason_ = tr("You do not have an active subscription");
     return ret;
   }
 
-  if (!data.contains("first_name") ||
-      !data.contains("last_name") ||
+  if (!data.contains("first_name") || !data.contains("last_name") ||
       !subscriptions[0].toMap().contains("expires_on") ||
       !data.contains("listen_key"))
     return ret;
@@ -99,40 +102,40 @@ DigitallyImportedClient::ParseAuthReply(QNetworkReply* reply) const {
   ret.success_ = true;
   ret.first_name_ = data["first_name"].toString();
   ret.last_name_ = data["last_name"].toString();
-  ret.expires_ = QDateTime::fromString(subscriptions[0].toMap()["expires_on"].toString(), Qt::ISODate);
+  ret.expires_ = QDateTime::fromString(
+      subscriptions[0].toMap()["expires_on"].toString(), Qt::ISODate);
   ret.listen_hash_ = data["listen_key"].toString();
   return ret;
 }
 
 QNetworkReply* DigitallyImportedClient::GetChannelList() {
-  //QNetworkRequest req(QUrl(QString(kChannelListUrl)));
+  // QNetworkRequest req(QUrl(QString(kChannelListUrl)));
   QNetworkRequest req(QUrl(QString(kChannelListUrl).arg(service_name_)));
   SetAuthorisationHeader(&req);
 
   return network_->get(req);
 }
 
-DigitallyImportedClient::ChannelList
-DigitallyImportedClient::ParseChannelList(QNetworkReply* reply) const {
+DigitallyImportedClient::ChannelList DigitallyImportedClient::ParseChannelList(
+    QNetworkReply* reply) const {
   ChannelList ret;
 
   QJson::Parser parser;
   QVariantMap data = parser.parse(reply).toMap();
 
-  if (!data.contains("channel_filters"))
-    return ret;
+  if (!data.contains("channel_filters")) return ret;
 
   QVariantList filters = data["channel_filters"].toList();
 
-  foreach (const QVariant& filter, filters) {
+  foreach(const QVariant & filter, filters) {
     // Find the filter called "All"
     QVariantMap filter_map = filter.toMap();
-    if (filter_map.value("name", QString()).toString() != "All")
-      continue;
+    if (filter_map.value("name", QString()).toString() != "All") continue;
 
     // Add all its stations to the result
-    QVariantList channels = filter_map.value("channels", QVariantList()).toList();
-    foreach (const QVariant& channel_var, channels) {
+    QVariantList channels =
+        filter_map.value("channels", QVariantList()).toList();
+    foreach(const QVariant & channel_var, channels) {
       QVariantMap channel_map = channel_var.toMap();
 
       Channel channel;
@@ -150,20 +153,16 @@ DigitallyImportedClient::ParseChannelList(QNetworkReply* reply) const {
   return ret;
 }
 
-QDataStream& operator<<(QDataStream& out, const DigitallyImportedClient::Channel& channel) {
-  out << channel.art_url_
-      << channel.director_
-      << channel.description_
-      << channel.name_
-      << channel.key_;
+QDataStream& operator<<(QDataStream& out,
+                        const DigitallyImportedClient::Channel& channel) {
+  out << channel.art_url_ << channel.director_ << channel.description_
+      << channel.name_ << channel.key_;
   return out;
 }
 
-QDataStream& operator>>(QDataStream& in, DigitallyImportedClient::Channel& channel) {
-  in >> channel.art_url_
-     >> channel.director_
-     >> channel.description_
-     >> channel.name_
-     >> channel.key_;
+QDataStream& operator>>(QDataStream& in,
+                        DigitallyImportedClient::Channel& channel) {
+  in >> channel.art_url_ >> channel.director_ >> channel.description_ >>
+      channel.name_ >> channel.key_;
   return in;
 }

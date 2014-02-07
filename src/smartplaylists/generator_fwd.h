@@ -26,6 +26,6 @@ class Generator;
 
 typedef std::shared_ptr<Generator> GeneratorPtr;
 
-} // namespace
+}  // namespace
 
-#endif // PLAYLISTGENERATOR_FWD_H
+#endif  // PLAYLISTGENERATOR_FWD_H

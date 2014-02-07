@@ -29,7 +29,7 @@ class Ui_BoxSettingsPage;
 class BoxSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   BoxSettingsPage(SettingsDialog* parent = 0);
   ~BoxSettingsPage();
 
@@ -39,15 +39,15 @@ public:
   // QObject
   bool eventFilter(QObject* object, QEvent* event);
 
-private slots:
+ private slots:
   void LoginClicked();
   void LogoutClicked();
   void Connected();
 
-private:
+ private:
   Ui_BoxSettingsPage* ui_;
 
   BoxService* service_;
 };
 
-#endif // BOXSETTINGSPAGE_H
+#endif  // BOXSETTINGSPAGE_H

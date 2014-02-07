@@ -27,26 +27,26 @@ class QDBusPendingCallWatcher;
 class GnomeGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
 
-public:
+ public:
   GnomeGlobalShortcutBackend(GlobalShortcuts* parent);
 
   static const char* kGsdService;
   static const char* kGsdPath;
   static const char* kGsdInterface;
 
-protected:
+ protected:
   bool RegisterInNewThread() const { return true; }
   bool DoRegister();
   void DoUnregister();
 
-private slots:
+ private slots:
   void RegisterFinished(QDBusPendingCallWatcher* watcher);
 
   void GnomeMediaKeyPressed(const QString& application, const QString& key);
 
-private:
+ private:
   OrgGnomeSettingsDaemonMediaKeysInterface* interface_;
   bool is_connected_;
 };
 
-#endif // GNOMEGLOBALSHORTCUTBACKEND_H
+#endif  // GNOMEGLOBALSHORTCUTBACKEND_H

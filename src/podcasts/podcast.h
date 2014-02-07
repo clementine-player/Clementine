@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -26,11 +26,11 @@
 #include <QVariantMap>
 
 namespace mygpo {
-  class Podcast;
+class Podcast;
 }
 
 class Podcast {
-public:
+ public:
   Podcast();
   Podcast(const Podcast& other);
   ~Podcast();
@@ -82,8 +82,12 @@ public:
 
   // Small images are suitable for 16x16 icons in lists.  Large images are
   // used in detailed information displays.
-  const QUrl& ImageUrlLarge() const { return image_url_large().isValid() ? image_url_large() : image_url_small(); }
-  const QUrl& ImageUrlSmall() const { return image_url_small().isValid() ? image_url_small() : image_url_large(); }
+  const QUrl& ImageUrlLarge() const {
+    return image_url_large().isValid() ? image_url_large() : image_url_small();
+  }
+  const QUrl& ImageUrlSmall() const {
+    return image_url_small().isValid() ? image_url_small() : image_url_large();
+  }
 
   // These are stored in a different database table, and aren't loaded or
   // persisted by InitFromQuery or BindToQuery.
@@ -92,9 +96,9 @@ public:
   void set_episodes(const PodcastEpisodeList& v);
   void add_episode(const PodcastEpisode& episode);
 
-  Podcast& operator =(const Podcast& other);
+  Podcast& operator=(const Podcast& other);
 
-private:
+ private:
   struct Private;
   QSharedDataPointer<Private> d;
 };
@@ -103,4 +107,4 @@ Q_DECLARE_METATYPE(Podcast)
 typedef QList<Podcast> PodcastList;
 Q_DECLARE_METATYPE(QList<Podcast>)
 
-#endif // PODCAST_H
+#endif  // PODCAST_H

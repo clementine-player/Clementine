@@ -22,17 +22,11 @@
 
 namespace smart_playlists {
 
-QueryGenerator::QueryGenerator()
-  : dynamic_(false),
-    current_pos_(0)
-{
-}
+QueryGenerator::QueryGenerator() : dynamic_(false), current_pos_(0) {}
 
-QueryGenerator::QueryGenerator(const QString& name, const Search& search, bool dynamic)
-  : search_(search),
-    dynamic_(dynamic),
-    current_pos_(0)
-{
+QueryGenerator::QueryGenerator(const QString& name, const Search& search,
+                               bool dynamic)
+    : search_(search), dynamic_(dynamic), current_pos_(0) {
   set_name(name);
 }
 
@@ -77,9 +71,9 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
 
   SongList songs = backend_->FindSongs(search_copy);
   PlaylistItemList items;
-  foreach (const Song& song, songs) {
+  foreach(const Song & song, songs) {
     items << PlaylistItemPtr(PlaylistItem::NewFromSongsTable(
-                               backend_->songs_table(), song));
+                 backend_->songs_table(), song));
     previous_ids_ << song.id();
 
     if (previous_ids_.count() > GetDynamicFuture() + GetDynamicHistory())
@@ -88,4 +82,4 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
   return items;
 }
 
-} // namespace
+}  // namespace

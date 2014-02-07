@@ -25,7 +25,7 @@ class Ui_DynamicPlaylistControls;
 class DynamicPlaylistControls : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   DynamicPlaylistControls(QWidget* parent = 0);
   ~DynamicPlaylistControls();
 
@@ -34,8 +34,8 @@ signals:
   void Repopulate();
   void TurnOff();
 
-private:
+ private:
   Ui_DynamicPlaylistControls* ui_;
 };
 
-#endif // DYNAMICPLAYLISTCONTROLS_H
+#endif  // DYNAMICPLAYLISTCONTROLS_H

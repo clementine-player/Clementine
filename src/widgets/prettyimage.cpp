@@ -36,8 +36,8 @@
 
 const int PrettyImage::kTotalHeight = 200;
 const int PrettyImage::kReflectionHeight = 40;
-const int PrettyImage::kImageHeight = PrettyImage::kTotalHeight -
-                                      PrettyImage::kReflectionHeight;
+const int PrettyImage::kImageHeight =
+    PrettyImage::kTotalHeight - PrettyImage::kReflectionHeight;
 
 const int PrettyImage::kMaxImageWidth = 300;
 
@@ -45,20 +45,18 @@ const char* PrettyImage::kSettingsGroup = "PrettyImageView";
 
 PrettyImage::PrettyImage(const QUrl& url, QNetworkAccessManager* network,
                          QWidget* parent)
-  : QWidget(parent),
-    network_(network),
-    state_(State_WaitingForLazyLoad),
-    url_(url),
-    menu_(nullptr)
-{
+    : QWidget(parent),
+      network_(network),
+      state_(State_WaitingForLazyLoad),
+      url_(url),
+      menu_(nullptr) {
   setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
   LazyLoad();
 }
 
 void PrettyImage::LazyLoad() {
-  if (state_ != State_WaitingForLazyLoad)
-    return;
+  if (state_ != State_WaitingForLazyLoad) return;
 
   // Start fetching the image
   QNetworkReply* reply = network_->get(QNetworkRequest(url_));
@@ -67,8 +65,7 @@ void PrettyImage::LazyLoad() {
 }
 
 QSize PrettyImage::image_size() const {
-  if (state_ != State_Finished)
-    return QSize(kImageHeight * 1.6, kImageHeight);
+  if (state_ != State_Finished) return QSize(kImageHeight * 1.6, kImageHeight);
 
   QSize ret = image_.size();
   ret.scale(kMaxImageWidth, kImageHeight, Qt::KeepAspectRatio);
@@ -90,8 +87,9 @@ void PrettyImage::ImageFetched() {
     state_ = State_CreatingThumbnail;
     image_ = image;
 
-    QFuture<QImage> future = QtConcurrent::run(image_, &QImage::scaled,
-        image_size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QFuture<QImage> future =
+        QtConcurrent::run(image_, &QImage::scaled, image_size(),
+                          Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     QFutureWatcher<QImage>* watcher = new QFutureWatcher<QImage>(this);
     watcher->setFuture(future);
@@ -100,9 +98,9 @@ void PrettyImage::ImageFetched() {
 }
 
 void PrettyImage::ImageScaled() {
-  QFutureWatcher<QImage>* watcher = reinterpret_cast<QFutureWatcher<QImage>*>(sender());
-  if (!watcher)
-    return;
+  QFutureWatcher<QImage>* watcher =
+      reinterpret_cast<QFutureWatcher<QImage>*>(sender());
+  if (!watcher) return;
   watcher->deleteLater();
 
   thumbnail_ = QPixmap::fromImage(watcher->result());
@@ -113,7 +111,7 @@ void PrettyImage::ImageScaled() {
   emit Loaded();
 }
 
-void PrettyImage::paintEvent(QPaintEvent* ) {
+void PrettyImage::paintEvent(QPaintEvent*) {
   // Draw at the bottom of our area
   QRect image_rect(QPoint(0, 0), image_size());
   image_rect.moveBottom(kImageHeight);
@@ -129,7 +127,8 @@ void PrettyImage::paintEvent(QPaintEvent* ) {
   reflection_rect.moveTop(image_rect.bottom());
 
   // Create the reflected pixmap
-  QImage reflection(reflection_rect.size(), QImage::Format_ARGB32_Premultiplied);
+  QImage reflection(reflection_rect.size(),
+                    QImage::Format_ARGB32_Premultiplied);
   reflection.fill(palette().color(QPalette::Base).rgba());
   QPainter reflection_painter(&reflection);
 
@@ -150,7 +149,8 @@ void PrettyImage::paintEvent(QPaintEvent* ) {
   fade_gradient.setColorAt(0.0, QColor(0, 0, 0, 0));
   fade_gradient.setColorAt(1.0, QColor(0, 0, 0, 128));
 
-  reflection_painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+  reflection_painter.setCompositionMode(
+      QPainter::CompositionMode_DestinationIn);
   reflection_painter.fillRect(fade_rect, fade_gradient);
 
   reflection_painter.end();
@@ -161,29 +161,28 @@ void PrettyImage::paintEvent(QPaintEvent* ) {
 
 void PrettyImage::DrawThumbnail(QPainter* p, const QRect& rect) {
   switch (state_) {
-  case State_WaitingForLazyLoad:
-  case State_Fetching:
-  case State_CreatingThumbnail:
-    p->setPen(palette().color(QPalette::Disabled, QPalette::Text));
-    p->drawText(rect, Qt::AlignHCenter | Qt::AlignBottom, tr("Loading..."));
-    break;
+    case State_WaitingForLazyLoad:
+    case State_Fetching:
+    case State_CreatingThumbnail:
+      p->setPen(palette().color(QPalette::Disabled, QPalette::Text));
+      p->drawText(rect, Qt::AlignHCenter | Qt::AlignBottom, tr("Loading..."));
+      break;
 
-  case State_Finished:
-    p->drawPixmap(rect, thumbnail_);
-    break;
+    case State_Finished:
+      p->drawPixmap(rect, thumbnail_);
+      break;
   }
 }
 
 void PrettyImage::contextMenuEvent(QContextMenuEvent* e) {
-  if (e->pos().y() >= kImageHeight)
-    return;
+  if (e->pos().y() >= kImageHeight) return;
 
   if (!menu_) {
     menu_ = new QMenu(this);
-    menu_->addAction(IconLoader::Load("zoom-in"), tr("Show fullsize..."),
-                     this, SLOT(ShowFullsize()));
-    menu_->addAction(IconLoader::Load("document-save"), tr("Save image") + "...",
-                     this, SLOT(SaveAs()));
+    menu_->addAction(IconLoader::Load("zoom-in"), tr("Show fullsize..."), this,
+                     SLOT(ShowFullsize()));
+    menu_->addAction(IconLoader::Load("document-save"),
+                     tr("Save image") + "...", this, SLOT(SaveAs()));
   }
 
   menu_->popup(e->globalPos());
@@ -214,8 +213,7 @@ void PrettyImage::ShowFullsize() {
 void PrettyImage::SaveAs() {
   QString filename = QFileInfo(url_.path()).fileName();
 
-  if (filename.isEmpty())
-    filename = "artwork.jpg";
+  if (filename.isEmpty()) filename = "artwork.jpg";
 
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -230,8 +228,7 @@ void PrettyImage::SaveAs() {
   }
 
   filename = QFileDialog::getSaveFileName(this, tr("Save image"), path);
-  if (filename.isEmpty())
-    return;
+  if (filename.isEmpty()) return;
 
   image_.save(filename);
 

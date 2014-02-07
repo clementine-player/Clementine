@@ -33,7 +33,7 @@ class QNetworkReply;
 
 class IcecastService : public InternetService {
   Q_OBJECT
-public:
+ public:
   IcecastService(Application* app, InternetModel* parent);
   ~IcecastService();
 
@@ -41,10 +41,7 @@ public:
   static const char* kDirectoryUrl;
   static const char* kHomepage;
 
-  enum ItemType {
-    Type_Stream = 3000,
-    Type_Genre,
-  };
+  enum ItemType { Type_Stream = 3000, Type_Genre, };
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
@@ -53,14 +50,13 @@ public:
 
   QWidget* HeaderWidget() const;
 
-private slots:
+ private slots:
   void LoadDirectory();
   void Homepage();
   void DownloadDirectoryFinished(QNetworkReply* reply);
-  void ParseDirectoryFinished(
-      QFuture<IcecastBackend::StationList> future);
+  void ParseDirectoryFinished(QFuture<IcecastBackend::StationList> future);
 
-private:
+ private:
   void RequestDirectory(const QUrl& url);
   void EnsureMenuCreated();
   IcecastBackend::StationList ParseDirectory(QIODevice* device) const;

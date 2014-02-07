@@ -28,18 +28,17 @@ class Application;
 class InternetService;
 class MimeData;
 
-
 class SearchProvider : public QObject {
   Q_OBJECT
 
-public:
+ public:
   SearchProvider(Application* app, QObject* parent = 0);
 
   static const int kArtHeight;
 
   struct Result {
     Result(SearchProvider* provider = 0)
-      : provider_(provider), group_automatically_(true) {}
+        : provider_(provider), group_automatically_(true) {}
 
     // This must be set by the provider using the constructor.
     SearchProvider* provider_;
@@ -108,14 +107,18 @@ public:
 
   Hints hints() const { return hints_; }
   bool wants_delayed_queries() const { return hints() & WantsDelayedQueries; }
-  bool wants_serialised_art() const { return hints() & WantsSerialisedArtQueries; }
+  bool wants_serialised_art() const {
+    return hints() & WantsSerialisedArtQueries;
+  }
   bool art_is_probably_remote() const { return hints() & ArtIsProbablyRemote; }
   bool art_is_in_song_metadata() const { return hints() & ArtIsInSongMetadata; }
   bool can_show_config() const { return hints() & CanShowConfig; }
   bool can_give_suggestions() const { return hints() & CanGiveSuggestions; }
   bool is_disabled_by_default() const { return hints() & DisabledByDefault; }
   bool is_enabled_by_default() const { return !is_disabled_by_default(); }
-  bool mime_data_contains_urls_only() const { return hints() & MimeDataContainsUrlsOnly; }
+  bool mime_data_contains_urls_only() const {
+    return hints() & MimeDataContainsUrlsOnly;
+  }
 
   // Starts a search.  Must emit ResultsAvailable zero or more times and then
   // SearchFinished exactly once, using this ID.
@@ -138,7 +141,7 @@ public:
   // If provider needs user login to search and play songs, this method should
   // be reimplemented
   virtual bool IsLoggedIn() { return true; }
-  virtual void ShowConfig() { } // Remember to set the CanShowConfig hint
+  virtual void ShowConfig() {}  // Remember to set the CanShowConfig hint
   // Returns the Internet service in charge of this provider, or NULL if there
   // is none
   virtual InternetService* internet_service() { return NULL; }
@@ -151,7 +154,7 @@ signals:
 
   void ArtLoaded(int id, const QImage& image);
 
-protected:
+ protected:
   // These functions treat queries in the same way as LibraryQuery.  They're
   // useful for figuring out whether you got a result because it matched in
   // the song title or the artist/album name.
@@ -165,9 +168,7 @@ protected:
   struct PendingState {
     PendingState() : orig_id_(-1) {}
     PendingState(int orig_id, QStringList tokens)
-        : orig_id_(orig_id),
-          tokens_(tokens) {
-    }
+        : orig_id_(orig_id), tokens_(tokens) {}
     int orig_id_;
     QStringList tokens_;
 
@@ -180,10 +181,10 @@ protected:
     }
   };
 
-protected:
+ protected:
   Application* app_;
 
-private:
+ private:
   QString name_;
   QString id_;
   QIcon icon_;
@@ -194,20 +195,19 @@ Q_DECLARE_METATYPE(SearchProvider::Result)
 Q_DECLARE_METATYPE(SearchProvider::ResultList)
 Q_DECLARE_OPERATORS_FOR_FLAGS(SearchProvider::Hints)
 
-
 class BlockingSearchProvider : public SearchProvider {
   Q_OBJECT
 
-public:
+ public:
   BlockingSearchProvider(Application* app, QObject* parent = 0);
 
   void SearchAsync(int id, const QString& query);
   virtual ResultList Search(int id, const QString& query) = 0;
 
-private slots:
+ private slots:
   void BlockingSearchFinished();
 };
 
 Q_DECLARE_METATYPE(SearchProvider*)
 
-#endif // SEARCHPROVIDER_H
+#endif  // SEARCHPROVIDER_H

@@ -23,13 +23,11 @@
 #include "widgets/prettyimageview.h"
 
 #ifdef HAVE_LIBLASTFM
-  #include "echonestsimilarartists.h"
-  #include "echonesttags.h"
+#include "echonestsimilarartists.h"
+#include "echonesttags.h"
 #endif
 
-ArtistInfoView::ArtistInfoView(QWidget *parent)
-  : SongInfoBase(parent)
-{
+ArtistInfoView::ArtistInfoView(QWidget* parent) : SongInfoBase(parent) {
   fetcher_->AddProvider(new EchoNestBiographies);
   fetcher_->AddProvider(new EchoNestImages);
   fetcher_->AddProvider(new SongkickConcerts);
@@ -39,37 +37,33 @@ ArtistInfoView::ArtistInfoView(QWidget *parent)
 #endif
 }
 
-ArtistInfoView::~ArtistInfoView() {
-}
+ArtistInfoView::~ArtistInfoView() {}
 
-bool ArtistInfoView::NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const {
-  if (new_metadata.artist().isEmpty())
-    return false;
+bool ArtistInfoView::NeedsUpdate(const Song& old_metadata,
+                                 const Song& new_metadata) const {
+  if (new_metadata.artist().isEmpty()) return false;
 
   return old_metadata.artist() != new_metadata.artist();
 }
-  
-void ArtistInfoView::InfoResultReady (int id, const CollapsibleInfoPane::Data& data) {
-  if (id != current_request_id_)
-    return;
-  
-  AddSection (new CollapsibleInfoPane(data, this));
+
+void ArtistInfoView::InfoResultReady(int id,
+                                     const CollapsibleInfoPane::Data& data) {
+  if (id != current_request_id_) return;
+
+  AddSection(new CollapsibleInfoPane(data, this));
   CollapseSections();
 }
-  
-void ArtistInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) {
-  if (id != current_request_id_)
-    return;
+
+void ArtistInfoView::ResultReady(int id,
+                                 const SongInfoFetcher::Result& result) {
+  if (id != current_request_id_) return;
 
   if (!result.images_.isEmpty()) {
     // Image view goes at the top
     PrettyImageView* image_view = new PrettyImageView(network_, this);
     AddWidget(image_view);
 
-    foreach (const QUrl& url, result.images_) {
-      image_view->AddImage(url);
-    }
+    foreach(const QUrl & url, result.images_) { image_view->AddImage(url); }
   }
   CollapseSections();
 }
-

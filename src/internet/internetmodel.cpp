@@ -39,22 +39,22 @@
 #include "smartplaylists/generatormimedata.h"
 
 #ifdef HAVE_LIBLASTFM
-  #include "lastfmservice.h"
+#include "lastfmservice.h"
 #endif
 #ifdef HAVE_GOOGLE_DRIVE
-  #include "googledriveservice.h"
+#include "googledriveservice.h"
 #endif
 #ifdef HAVE_UBUNTU_ONE
-  #include "ubuntuoneservice.h"
+#include "ubuntuoneservice.h"
 #endif
 #ifdef HAVE_DROPBOX
-  #include "dropboxservice.h"
+#include "dropboxservice.h"
 #endif
 #ifdef HAVE_SKYDRIVE
-  #include "skydriveservice.h"
+#include "skydriveservice.h"
 #endif
 #ifdef HAVE_BOX
-  #include "boxservice.h"
+#include "boxservice.h"
 #endif
 
 using smart_playlists::Generator;
@@ -64,10 +64,9 @@ using smart_playlists::GeneratorPtr;
 QMap<QString, InternetService*>* InternetModel::sServices = nullptr;
 
 InternetModel::InternetModel(Application* app, QObject* parent)
-  : QStandardItemModel(parent),
-    app_(app),
-    merged_model_(new MergedProxyModel(this))
-{
+    : QStandardItemModel(parent),
+      app_(app),
+      merged_model_(new MergedProxyModel(this)) {
   if (!sServices) {
     sServices = new QMap<QString, InternetService*>;
   }
@@ -110,10 +109,11 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 }
 
-void InternetModel::AddService(InternetService *service) {
+void InternetModel::AddService(InternetService* service) {
   QStandardItem* root = service->CreateRootItem();
   if (!root) {
-    qLog(Warning) << "Internet service" << service->name() << "did not return a root item";
+    qLog(Warning) << "Internet service" << service->name()
+                  << "did not return a root item";
     return;
   }
 
@@ -125,22 +125,25 @@ void InternetModel::AddService(InternetService *service) {
   sServices->insert(service->name(), service);
 
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
-  connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
-  connect(service, SIGNAL(AddToPlaylistSignal(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
-  connect(service, SIGNAL(ScrollToIndex(QModelIndex)), SIGNAL(ScrollToIndex(QModelIndex)));
+  connect(service, SIGNAL(StreamMetadataFound(QUrl, Song)),
+          SIGNAL(StreamMetadataFound(QUrl, Song)));
+  connect(service, SIGNAL(AddToPlaylistSignal(QMimeData*)),
+          SIGNAL(AddToPlaylist(QMimeData*)));
+  connect(service, SIGNAL(ScrollToIndex(QModelIndex)),
+          SIGNAL(ScrollToIndex(QModelIndex)));
   connect(service, SIGNAL(destroyed()), SLOT(ServiceDeleted()));
 
   service->ReloadSettings();
 }
 
 void InternetModel::RemoveService(InternetService* service) {
-  if (!sServices->contains(service->name()))
-    return;
+  if (!sServices->contains(service->name())) return;
 
   // Find and remove the root item that this service created
-  for (int i=0 ; i<invisibleRootItem()->rowCount() ; ++i) {
+  for (int i = 0; i < invisibleRootItem()->rowCount(); ++i) {
     QStandardItem* item = invisibleRootItem()->child(i);
-    if (!item || item->data(Role_Service).value<InternetService*>() == service) {
+    if (!item ||
+        item->data(Role_Service).value<InternetService*>() == service) {
       invisibleRootItem()->removeRow(i);
       break;
     }
@@ -155,24 +158,25 @@ void InternetModel::RemoveService(InternetService* service) {
 
 void InternetModel::ServiceDeleted() {
   InternetService* service = qobject_cast<InternetService*>(sender());
-  if (service)
-    RemoveService(service);
+  if (service) RemoveService(service);
 }
 
 InternetService* InternetModel::ServiceByName(const QString& name) {
-  if (sServices->contains(name))
-    return sServices->value(name);
+  if (sServices->contains(name)) return sServices->value(name);
   return nullptr;
 }
 
-InternetService* InternetModel::ServiceForItem(const QStandardItem* item) const {
+InternetService* InternetModel::ServiceForItem(const QStandardItem* item)
+    const {
   return ServiceForIndex(indexFromItem(item));
 }
 
-InternetService* InternetModel::ServiceForIndex(const QModelIndex& index) const {
+InternetService* InternetModel::ServiceForIndex(const QModelIndex& index)
+    const {
   QModelIndex current_index = index;
   while (current_index.isValid()) {
-    InternetService* service = current_index.data(Role_Service).value<InternetService*>();
+    InternetService* service =
+        current_index.data(Role_Service).value<InternetService*>();
     if (service) {
       return service;
     }
@@ -182,9 +186,8 @@ InternetService* InternetModel::ServiceForIndex(const QModelIndex& index) const 
 }
 
 Qt::ItemFlags InternetModel::flags(const QModelIndex& index) const {
-  Qt::ItemFlags flags = Qt::ItemIsSelectable |
-                        Qt::ItemIsEnabled |
-                        Qt::ItemIsDropEnabled;
+  Qt::ItemFlags flags =
+      Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDropEnabled;
   if (IsPlayable(index)) {
     flags |= Qt::ItemIsDragEnabled;
   }
@@ -192,8 +195,7 @@ Qt::ItemFlags InternetModel::flags(const QModelIndex& index) const {
 }
 
 bool InternetModel::hasChildren(const QModelIndex& parent) const {
-  if (parent.data(Role_CanLazyLoad).toBool())
-    return true;
+  if (parent.data(Role_CanLazyLoad).toBool()) return true;
   return QStandardItemModel::hasChildren(parent);
 }
 
@@ -212,8 +214,7 @@ int InternetModel::rowCount(const QModelIndex& parent) const {
 
 bool InternetModel::IsPlayable(const QModelIndex& index) const {
   QVariant behaviour = index.data(Role_PlayBehaviour);
-  if (!behaviour.isValid())
-    return false;
+  if (!behaviour.isValid()) return false;
 
   PlayBehaviour pb = PlayBehaviour(behaviour.toInt());
   return (pb == PlayBehaviour_MultipleItems || pb == PlayBehaviour_SingleItem ||
@@ -226,19 +227,18 @@ QStringList InternetModel::mimeTypes() const {
 
 QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
   // Special case for when the user double clicked on a special item.
-  if (indexes.count() == 1 &&
-      indexes[0].data(Role_PlayBehaviour).toInt() ==
-          PlayBehaviour_DoubleClickAction) {
-    InternetModel::ServiceForIndex(indexes[0])->ItemDoubleClicked(itemFromIndex(indexes[0]));
+  if (indexes.count() == 1 && indexes[0].data(Role_PlayBehaviour).toInt() ==
+                                  PlayBehaviour_DoubleClickAction) {
+    InternetModel::ServiceForIndex(indexes[0])
+        ->ItemDoubleClicked(itemFromIndex(indexes[0]));
     return nullptr;
   }
 
   if (indexes.count() == 1 &&
       indexes[0].data(Role_Type).toInt() == Type_SmartPlaylist) {
-    GeneratorPtr generator =
-        InternetModel::ServiceForIndex(indexes[0])->CreateGenerator(itemFromIndex(indexes[0]));
-    if (!generator)
-      return nullptr;
+    GeneratorPtr generator = InternetModel::ServiceForIndex(indexes[0])
+                                 ->CreateGenerator(itemFromIndex(indexes[0]));
+    if (!generator) return nullptr;
     GeneratorMimeData* data = new GeneratorMimeData(generator);
     data->setData(LibraryModel::kSmartPlaylistsMimeType, QByteArray());
     data->name_for_new_playlist_ = this->data(indexes.first()).toString();
@@ -249,9 +249,8 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
   QModelIndexList new_indexes;
 
   QModelIndex last_valid_index;
-  foreach (const QModelIndex& index, indexes) {
-    if (!IsPlayable(index))
-      continue;
+  foreach(const QModelIndex & index, indexes) {
+    if (!IsPlayable(index)) continue;
 
     last_valid_index = index;
     if (index.data(Role_PlayBehaviour).toInt() == PlayBehaviour_MultipleItems) {
@@ -270,18 +269,20 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
     }
   }
 
-  if (urls.isEmpty())
-    return nullptr;
+  if (urls.isEmpty()) return nullptr;
 
   InternetMimeData* data = new InternetMimeData(this);
   data->setUrls(urls);
   data->indexes = new_indexes;
-  data->name_for_new_playlist_ = InternetModel::ServiceForIndex(last_valid_index)->name();
+  data->name_for_new_playlist_ =
+      InternetModel::ServiceForIndex(last_valid_index)->name();
 
   return data;
 }
 
-bool InternetModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) {
+bool InternetModel::dropMimeData(const QMimeData* data, Qt::DropAction action,
+                                 int row, int column,
+                                 const QModelIndex& parent) {
   if (action == Qt::IgnoreAction) {
     return false;
   }
@@ -292,23 +293,22 @@ bool InternetModel::dropMimeData(const QMimeData* data, Qt::DropAction action, i
   return true;
 }
 
-void InternetModel::ShowContextMenu(const QModelIndexList& selected_merged_model_indexes,
-                                    const QModelIndex& current_merged_model_index,
-                                    const QPoint& global_pos) {
+void InternetModel::ShowContextMenu(
+    const QModelIndexList& selected_merged_model_indexes,
+    const QModelIndex& current_merged_model_index, const QPoint& global_pos) {
   current_index_ = merged_model_->mapToSource(current_merged_model_index);
 
   selected_indexes_.clear();
-  foreach (const QModelIndex& index, selected_merged_model_indexes) {
+  foreach(const QModelIndex & index, selected_merged_model_indexes) {
     selected_indexes_ << merged_model_->mapToSource(index);
   }
 
   InternetService* service = ServiceForIndex(current_merged_model_index);
-  if (service)
-    service->ShowContextMenu(global_pos);
+  if (service) service->ShowContextMenu(global_pos);
 }
 
 void InternetModel::ReloadSettings() {
-  foreach (InternetService* service, sServices->values()) {
+  foreach(InternetService * service, sServices->values()) {
     service->ReloadSettings();
   }
 }

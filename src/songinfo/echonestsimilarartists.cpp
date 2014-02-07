@@ -38,8 +38,7 @@ void EchoNestSimilarArtists::FetchInfo(int id, const Song& metadata) {
 
 void EchoNestSimilarArtists::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !requests_.contains(reply))
-    return;
+  if (!reply || !requests_.contains(reply)) return;
   reply->deleteLater();
 
   int id = requests_.take(reply);
@@ -47,8 +46,10 @@ void EchoNestSimilarArtists::RequestFinished() {
   Echonest::Artists artists;
   try {
     artists = Echonest::Artist::parseSimilar(reply);
-  } catch (Echonest::ParseError e) {
-    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
+  }
+  catch (Echonest::ParseError e) {
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType()
+                  << e.what();
   }
 
   if (!artists.isEmpty()) {
@@ -63,10 +64,9 @@ void EchoNestSimilarArtists::RequestFinished() {
 
     widget->SetIcon(QIcon(":/icons/22x22/x-clementine-artist.png"));
 
-    foreach (const Echonest::Artist& artist, artists) {
+    foreach(const Echonest::Artist & artist, artists) {
       widget->AddTag(artist.name());
-      if (widget->count() >= 10)
-        break;
+      if (widget->count() >= 10) break;
     }
 
     emit InfoReady(id, data);

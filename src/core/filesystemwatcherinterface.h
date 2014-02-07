@@ -31,7 +31,7 @@ class FileSystemWatcherInterface : public QObject {
 
   static FileSystemWatcherInterface* Create(QObject* parent = 0);
 
- signals:
+signals:
   void PathChanged(const QString& path);
 };
 

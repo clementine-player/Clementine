@@ -29,13 +29,10 @@
 
 #include "core/song.h"
 
-
 struct TranscoderPreset {
   TranscoderPreset() : type_(Song::Type_Unknown) {}
-  TranscoderPreset(Song::FileType type,
-                   const QString& name,
-                   const QString& extension,
-                   const QString& codec_mimetype,
+  TranscoderPreset(Song::FileType type, const QString& name,
+                   const QString& extension, const QString& codec_mimetype,
                    const QString& muxer_mimetype_ = QString());
 
   Song::FileType type_;
@@ -45,7 +42,6 @@ struct TranscoderPreset {
   QString muxer_mimetype_;
 };
 Q_DECLARE_METATYPE(TranscoderPreset);
-
 
 class Transcoder : public QObject {
   Q_OBJECT
@@ -70,7 +66,7 @@ class Transcoder : public QObject {
   void Start();
   void Cancel();
 
- signals:
+signals:
   void JobComplete(const QString& filename, bool success);
   void LogLine(const QString& message);
   void AllJobsComplete();
@@ -91,8 +87,11 @@ class Transcoder : public QObject {
   // job's thread.
   struct JobState {
     JobState(const Job& job, Transcoder* parent)
-      : job_(job), parent_(parent), pipeline_(NULL), convert_element_(NULL),
-        bus_callback_id_(0) {}
+        : job_(job),
+          parent_(parent),
+          pipeline_(NULL),
+          convert_element_(NULL),
+          bus_callback_id_(0) {}
     ~JobState();
 
     void PostFinished(bool success);
@@ -135,7 +134,8 @@ class Transcoder : public QObject {
 
   static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
-  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg, gpointer data);
+  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
+                                         gpointer data);
 
  private:
   typedef QList<std::shared_ptr<JobState> > JobStateList;
@@ -145,4 +145,4 @@ class Transcoder : public QObject {
   JobStateList current_jobs_;
 };
 
-#endif // TRANSCODER_H
+#endif  // TRANSCODER_H

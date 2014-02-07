@@ -39,14 +39,13 @@
 #include "widgets/progressitemdelegate.h"
 
 MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
-                                                 QWidget *parent)
-  : QDialog(parent),
-    ui_(new Ui_MagnatuneDownloadDialog),
-    service_(service),
-    network_(new NetworkAccessManager(this)),
-    current_reply_(nullptr),
-    next_row_(0)
-{
+                                                 QWidget* parent)
+    : QDialog(parent),
+      ui_(new Ui_MagnatuneDownloadDialog),
+      service_(service),
+      network_(new NetworkAccessManager(this)),
+      current_reply_(nullptr),
+      next_row_(0) {
   ui_->setupUi(this);
   ui_->albums->header()->setResizeMode(QHeaderView::ResizeToContents);
   ui_->albums->header()->setResizeMode(1, QHeaderView::Fixed);
@@ -71,7 +70,7 @@ void MagnatuneDownloadDialog::Show(const SongList& songs) {
   ui_->albums->clear();
 
   QSet<QString> sku_codes;
-  foreach (const Song& song, songs) {
+  foreach(const Song & song, songs) {
     if (!sku_codes.contains(song.comment())) {
       sku_codes.insert(song.comment());
 
@@ -101,7 +100,7 @@ void MagnatuneDownloadDialog::accept() {
   ui_->options->setEnabled(false);
 
   // Reset all the progress bars
-  for (int i=0 ; i<ui_->albums->topLevelItemCount() ; ++i) {
+  for (int i = 0; i < ui_->albums->topLevelItemCount(); ++i) {
     ui_->albums->topLevelItem(i)->setData(1, Qt::DisplayRole, QVariant());
   }
 
@@ -130,7 +129,8 @@ void MagnatuneDownloadDialog::DownloadNext() {
 
   current_reply_ = network_->get(QNetworkRequest(url));
 
-  connect(current_reply_, SIGNAL(error(QNetworkReply::NetworkError)), SLOT(Error(QNetworkReply::NetworkError)));
+  connect(current_reply_, SIGNAL(error(QNetworkReply::NetworkError)),
+          SLOT(Error(QNetworkReply::NetworkError)));
   connect(current_reply_, SIGNAL(finished()), SLOT(MetadataFinished()));
 }
 
@@ -144,8 +144,8 @@ void MagnatuneDownloadDialog::Error(QNetworkReply::NetworkError e) {
   QMetaEnum error_enum = QNetworkReply::staticMetaObject.enumerator(
       QNetworkReply::staticMetaObject.indexOfEnumerator("NetworkError"));
 
-  QString message = tr("Unable to download %1 (%2)")
-                        .arg(url.toString()).arg(error_enum.valueToKey(e));
+  QString message = tr("Unable to download %1 (%2)").arg(url.toString()).arg(
+      error_enum.valueToKey(e));
   ShowError(message);
 }
 
@@ -165,11 +165,21 @@ void MagnatuneDownloadDialog::MetadataFinished() {
   // Work out what format we want
   QString type;
   switch (ui_->format->currentIndex()) {
-    case MagnatuneService::Format_Ogg:     type = "URL_OGGZIP";    break;
-    case MagnatuneService::Format_Flac:    type = "URL_FLACZIP";   break;
-    case MagnatuneService::Format_Wav:     type = "URL_WAVZIP";    break;
-    case MagnatuneService::Format_MP3_VBR: type = "URL_VBRZIP";    break;
-    case MagnatuneService::Format_MP3_128: type = "URL_128KMP3ZIP"; break;
+    case MagnatuneService::Format_Ogg:
+      type = "URL_OGGZIP";
+      break;
+    case MagnatuneService::Format_Flac:
+      type = "URL_FLACZIP";
+      break;
+    case MagnatuneService::Format_Wav:
+      type = "URL_WAVZIP";
+      break;
+    case MagnatuneService::Format_MP3_VBR:
+      type = "URL_VBRZIP";
+      break;
+    case MagnatuneService::Format_MP3_128:
+      type = "URL_128KMP3ZIP";
+      break;
   }
 
   // Parse the XML (lol) to find the URL
@@ -191,9 +201,11 @@ void MagnatuneDownloadDialog::MetadataFinished() {
   // Start the actual download
   current_reply_ = network_->get(QNetworkRequest(url));
 
-  connect(current_reply_, SIGNAL(error(QNetworkReply::NetworkError)), SLOT(Error(QNetworkReply::NetworkError)));
+  connect(current_reply_, SIGNAL(error(QNetworkReply::NetworkError)),
+          SLOT(Error(QNetworkReply::NetworkError)));
   connect(current_reply_, SIGNAL(finished()), SLOT(DownloadFinished()));
-  connect(current_reply_, SIGNAL(downloadProgress(qint64,qint64)), SLOT(DownloadProgress(qint64,qint64)));
+  connect(current_reply_, SIGNAL(downloadProgress(qint64, qint64)),
+          SLOT(DownloadProgress(qint64, qint64)));
   connect(current_reply_, SIGNAL(readyRead()), SLOT(DownloadReadyRead()));
 
   // Close any open file
@@ -210,7 +222,7 @@ void MagnatuneDownloadDialog::MetadataFinished() {
 void MagnatuneDownloadDialog::DownloadFinished() {
   current_reply_->deleteLater();
 
-  next_row_ ++;
+  next_row_++;
   DownloadNext();
 }
 
@@ -224,7 +236,7 @@ void MagnatuneDownloadDialog::DownloadReadyRead() {
   download_file_->write(reply->readAll());
 }
 
-void MagnatuneDownloadDialog::ShowError(const QString &message) {
+void MagnatuneDownloadDialog::ShowError(const QString& message) {
   QMessageBox::critical(this, tr("Error"), message, QMessageBox::Close);
   AllFinished(true);
 }
@@ -232,8 +244,7 @@ void MagnatuneDownloadDialog::ShowError(const QString &message) {
 void MagnatuneDownloadDialog::AllFinished(bool error) {
   current_reply_ = nullptr;
 
-  if (error)
-    ui_->button_box->button(QDialogButtonBox::Ok)->show();
+  if (error) ui_->button_box->button(QDialogButtonBox::Ok)->show();
   ui_->button_box->button(QDialogButtonBox::Close)->show();
   ui_->button_box->button(QDialogButtonBox::Cancel)->hide();
   ui_->options->setEnabled(true);
@@ -243,7 +254,7 @@ void MagnatuneDownloadDialog::AllFinished(bool error) {
 
   if (!error) {
     QStringList albums;
-    for (int i=0 ; i<ui_->albums->topLevelItemCount() ; ++i) {
+    for (int i = 0; i < ui_->albums->topLevelItemCount(); ++i) {
       albums << ui_->albums->topLevelItem(i)->text(0);
     }
     emit Finished(albums);
@@ -266,11 +277,21 @@ QString MagnatuneDownloadDialog::GetOutputFilename() {
   QString extension;
 
   switch (MagnatuneService::PreferredFormat(ui_->format->currentIndex())) {
-    case MagnatuneService::Format_Ogg:     extension = "ogg";  break;
-    case MagnatuneService::Format_Flac:    extension = "flac"; break;
-    case MagnatuneService::Format_Wav:     extension = "wav";  break;
-    case MagnatuneService::Format_MP3_VBR: extension = "vbr";  break;
-    case MagnatuneService::Format_MP3_128: extension = "mp3";  break;
+    case MagnatuneService::Format_Ogg:
+      extension = "ogg";
+      break;
+    case MagnatuneService::Format_Flac:
+      extension = "flac";
+      break;
+    case MagnatuneService::Format_Wav:
+      extension = "wav";
+      break;
+    case MagnatuneService::Format_MP3_VBR:
+      extension = "vbr";
+      break;
+    case MagnatuneService::Format_MP3_128:
+      extension = "mp3";
+      break;
   }
 
   return QString("%1/%2-%3.zip").arg(ui_->directory->text(), album, extension);
@@ -278,10 +299,10 @@ QString MagnatuneDownloadDialog::GetOutputFilename() {
 
 void MagnatuneDownloadDialog::closeEvent(QCloseEvent* e) {
   if (current_reply_ && current_reply_->isRunning()) {
-    std::unique_ptr<QMessageBox> message_box(new QMessageBox(
-        QMessageBox::Question, tr("Really cancel?"),
-        tr("Closing this window will cancel the download."),
-        QMessageBox::Abort, this));
+    std::unique_ptr<QMessageBox> message_box(
+        new QMessageBox(QMessageBox::Question, tr("Really cancel?"),
+                        tr("Closing this window will cancel the download."),
+                        QMessageBox::Abort, this));
     message_box->addButton(tr("Don't stop!"), QMessageBox::AcceptRole);
 
     if (message_box->exec() != QMessageBox::Abort) {

@@ -52,10 +52,7 @@ class ClosureBase {
 class ObjectHelper : public QObject {
   Q_OBJECT
  public:
-  ObjectHelper(
-      QObject* parent,
-      const char* signal,
-      ClosureBase* closure);
+  ObjectHelper(QObject* parent, const char* signal, ClosureBase* closure);
 
  private slots:
   void Invoked();
@@ -76,7 +73,8 @@ void Unpack(QList<QGenericArgument>* list, const Arg& arg) {
 }
 
 template <typename Head, typename... Tail>
-void Unpack(QList<QGenericArgument>* list, const Head& head, const Tail&... tail) {
+void Unpack(QList<QGenericArgument>* list, const Head& head,
+            const Tail&... tail) {
   Unpack(list, head);
   Unpack(list, tail...);
 }
@@ -84,45 +82,39 @@ void Unpack(QList<QGenericArgument>* list, const Head& head, const Tail&... tail
 template <typename... Args>
 class Closure : public ClosureBase {
  public:
-  Closure(
-      QObject* sender,
-      const char* signal,
-      QObject* receiver,
-      const char* slot,
-      const Args&... args)
-   :  ClosureBase(new ObjectHelper(sender, signal, this)),
-      // std::bind is the easiest way to store an argument list.
-      function_(std::bind(&Closure<Args...>::Call, this, args...)),
-      receiver_(receiver) {
+  Closure(QObject* sender, const char* signal, QObject* receiver,
+          const char* slot, const Args&... args)
+      : ClosureBase(new ObjectHelper(sender, signal, this)),
+        // std::bind is the easiest way to store an argument list.
+        function_(std::bind(&Closure<Args...>::Call, this, args...)),
+        receiver_(receiver) {
     const QMetaObject* meta_receiver = receiver->metaObject();
     QByteArray normalised_slot = QMetaObject::normalizedSignature(slot + 1);
     const int index = meta_receiver->indexOfSlot(normalised_slot.constData());
     Q_ASSERT(index != -1);
     slot_ = meta_receiver->method(index);
-    QObject::connect(receiver_, SIGNAL(destroyed()), helper_, SLOT(deleteLater()));
+    QObject::connect(receiver_, SIGNAL(destroyed()), helper_,
+                     SLOT(deleteLater()));
   }
 
-  virtual void Invoke() {
-    function_();
-  }
+  virtual void Invoke() { function_(); }
 
  private:
   void Call(const Args&... args) {
     QList<QGenericArgument> arg_list;
     Unpack(&arg_list, args...);
 
-    slot_.invoke(
-        receiver_,
-        arg_list.size() > 0 ? arg_list[0] : QGenericArgument(),
-        arg_list.size() > 1 ? arg_list[1] : QGenericArgument(),
-        arg_list.size() > 2 ? arg_list[2] : QGenericArgument(),
-        arg_list.size() > 3 ? arg_list[3] : QGenericArgument(),
-        arg_list.size() > 4 ? arg_list[4] : QGenericArgument(),
-        arg_list.size() > 5 ? arg_list[5] : QGenericArgument(),
-        arg_list.size() > 6 ? arg_list[6] : QGenericArgument(),
-        arg_list.size() > 7 ? arg_list[7] : QGenericArgument(),
-        arg_list.size() > 8 ? arg_list[8] : QGenericArgument(),
-        arg_list.size() > 9 ? arg_list[9] : QGenericArgument());
+    slot_.invoke(receiver_,
+                 arg_list.size() > 0 ? arg_list[0] : QGenericArgument(),
+                 arg_list.size() > 1 ? arg_list[1] : QGenericArgument(),
+                 arg_list.size() > 2 ? arg_list[2] : QGenericArgument(),
+                 arg_list.size() > 3 ? arg_list[3] : QGenericArgument(),
+                 arg_list.size() > 4 ? arg_list[4] : QGenericArgument(),
+                 arg_list.size() > 5 ? arg_list[5] : QGenericArgument(),
+                 arg_list.size() > 6 ? arg_list[6] : QGenericArgument(),
+                 arg_list.size() > 7 ? arg_list[7] : QGenericArgument(),
+                 arg_list.size() > 8 ? arg_list[8] : QGenericArgument(),
+                 arg_list.size() > 9 ? arg_list[9] : QGenericArgument());
   }
 
   std::function<void()> function_;
@@ -133,20 +125,10 @@ class Closure : public ClosureBase {
 template <typename T, typename... Args>
 class SharedClosure : public Closure<Args...> {
  public:
-  SharedClosure(
-      QSharedPointer<T> sender,
-      const char* signal,
-      QObject* receiver,
-      const char* slot,
-      const Args&... args)
-    : Closure<Args...>(
-        sender.data(),
-        signal,
-        receiver,
-        slot,
-        args...),
-      data_(sender) {
-  }
+  SharedClosure(QSharedPointer<T> sender, const char* signal, QObject* receiver,
+                const char* slot, const Args&... args)
+      : Closure<Args...>(sender.data(), signal, receiver, slot, args...),
+        data_(sender) {}
 
  private:
   QSharedPointer<T> data_;
@@ -154,10 +136,8 @@ class SharedClosure : public Closure<Args...> {
 
 class CallbackClosure : public ClosureBase {
  public:
-  CallbackClosure(
-      QObject* sender,
-      const char* signal,
-      std::function<void()> callback);
+  CallbackClosure(QObject* sender, const char* signal,
+                  std::function<void()> callback);
 
   virtual void Invoke();
 
@@ -168,60 +148,44 @@ class CallbackClosure : public ClosureBase {
 }  // namespace _detail
 
 template <typename... Args>
-_detail::ClosureBase* NewClosure(
-    QObject* sender,
-    const char* signal,
-    QObject* receiver,
-    const char* slot,
-    const Args&... args) {
-  return new _detail::Closure<Args...>(
-      sender, signal, receiver, slot, args...);
+_detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
+                                 QObject* receiver, const char* slot,
+                                 const Args&... args) {
+  return new _detail::Closure<Args...>(sender, signal, receiver, slot, args...);
 }
 
 // QSharedPointer variant
 template <typename T, typename... Args>
-_detail::ClosureBase* NewClosure(
-    QSharedPointer<T> sender,
-    const char* signal,
-    QObject* receiver,
-    const char* slot,
-    const Args&... args) {
-  return new _detail::SharedClosure<T, Args...>(
-      sender, signal, receiver, slot, args...);
+_detail::ClosureBase* NewClosure(QSharedPointer<T> sender, const char* signal,
+                                 QObject* receiver, const char* slot,
+                                 const Args&... args) {
+  return new _detail::SharedClosure<T, Args...>(sender, signal, receiver, slot,
+                                                args...);
 }
 
-_detail::ClosureBase* NewClosure(
-    QObject* sender,
-    const char* signal,
-    std::function<void()> callback);
+_detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
+                                 std::function<void()> callback);
 
 template <typename... Args>
-_detail::ClosureBase* NewClosure(
-    QObject* sender,
-    const char* signal,
-    std::function<void(Args...)> callback,
-    const Args&... args) {
+_detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
+                                 std::function<void(Args...)> callback,
+                                 const Args&... args) {
   return NewClosure(sender, signal, std::bind(callback, args...));
 }
 
 template <typename... Args>
-_detail::ClosureBase* NewClosure(
-    QObject* sender,
-    const char* signal,
-    void (*callback)(Args...),
-    const Args&... args) {
+_detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
+                                 void (*callback)(Args...),
+                                 const Args&... args) {
   return NewClosure(sender, signal, std::bind(callback, args...));
 }
 
 template <typename T, typename Unused, typename... Args>
-_detail::ClosureBase* NewClosure(
-    QObject* sender,
-    const char* signal,
-    T* receiver, Unused (T::*callback)(Args...),
-    const Args&... args) {
+_detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
+                                 T* receiver, Unused (T::*callback)(Args...),
+                                 const Args&... args) {
   return NewClosure(sender, signal, std::bind(callback, receiver, args...));
 }
-
 
 void DoAfter(QObject* receiver, const char* slot, int msec);
 void DoInAMinuteOrSo(QObject* receiver, const char* slot);

@@ -29,27 +29,27 @@ class Ui_DeviceProperties;
 class DeviceProperties : public QDialog {
   Q_OBJECT
 
-public:
+ public:
   DeviceProperties(QWidget* parent = 0);
   ~DeviceProperties();
 
   void SetDeviceManager(DeviceManager* manager);
   void ShowDevice(int row);
 
-public slots:
+ public slots:
   void accept();
 
-private:
+ private:
   void UpdateHardwareInfo();
   void AddHardwareInfo(int row, const QString& key, const QString& value);
   void UpdateFormats();
 
-private slots:
+ private slots:
   void ModelChanged();
   void OpenDevice();
   void UpdateFormatsFinished();
 
-private:
+ private:
   Ui_DeviceProperties* ui_;
 
   DeviceManager* manager_;
@@ -59,4 +59,4 @@ private:
   QList<Song::FileType> supported_formats_;
 };
 
-#endif // DEVICEPROPERTIES_H
+#endif  // DEVICEPROPERTIES_H

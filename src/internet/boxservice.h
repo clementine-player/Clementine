@@ -24,15 +24,15 @@ class BoxService : public CloudFileService {
   void Connect();
   void ForgetCredentials();
 
- signals:
+signals:
   void Connected();
 
  private slots:
   void ConnectFinished(OAuthenticator* oauth);
   void FetchUserInfoFinished(QNetworkReply* reply);
   void FetchFolderItemsFinished(QNetworkReply* reply, const int folder_id);
-  void RedirectFollowed(
-      QNetworkReply* reply, const Song& song, const QString& mime_type);
+  void RedirectFollowed(QNetworkReply* reply, const Song& song,
+                        const QString& mime_type);
   void InitialiseEventsFinished(QNetworkReply* reply);
   void FetchEventsFinished(QNetworkReply* reply);
 

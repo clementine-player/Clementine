@@ -28,18 +28,14 @@ class Database;
 class IcecastBackend : public QObject {
   Q_OBJECT
 
-public:
+ public:
   IcecastBackend(QObject* parent = 0);
   void Init(Database* db);
 
   static const char* kTableName;
 
   struct Station {
-    Station()
-      : bitrate(0),
-        channels(0),
-        samplerate(0) {
-    }
+    Station() : bitrate(0), channels(0), samplerate(0) {}
 
     QString name;
     QUrl url;
@@ -65,8 +61,8 @@ public:
 signals:
   void DatabaseReset();
 
-private:
+ private:
   Database* db_;
 };
 
-#endif // ICECASTBACKEND_H
+#endif  // ICECASTBACKEND_H

@@ -33,14 +33,16 @@ class MtpLoader;
 class MtpDevice : public ConnectedDevice {
   Q_OBJECT
 
-public:
+ public:
   Q_INVOKABLE MtpDevice(const QUrl& url, DeviceLister* lister,
                         const QString& unique_id, DeviceManager* manager,
-                        Application* app,
-                        int database_id, bool first_time);
+                        Application* app, int database_id, bool first_time);
   ~MtpDevice();
 
-  static QStringList url_schemes() { return QStringList() << "mtp" << "gphoto2"; }
+  static QStringList url_schemes() {
+    return QStringList() << "mtp"
+                         << "gphoto2";
+  }
 
   void Init();
 
@@ -56,15 +58,16 @@ public:
   bool DeleteFromStorage(const DeleteJob& job);
   void FinishDelete(bool success);
 
-private slots:
+ private slots:
   void LoadFinished();
 
-private:
-  bool GetSupportedFiletypes(QList<Song::FileType>* ret, LIBMTP_mtpdevice_struct* device);
+ private:
+  bool GetSupportedFiletypes(QList<Song::FileType>* ret,
+                             LIBMTP_mtpdevice_struct* device);
   int GetFreeSpace(LIBMTP_mtpdevice_struct* device);
   int GetCapacity(LIBMTP_mtpdevice_struct* device);
 
-private:
+ private:
   static bool sInitialisedLibMTP;
 
   QThread* loader_thread_;
@@ -77,4 +80,4 @@ private:
   std::unique_ptr<MtpConnection> connection_;
 };
 
-#endif // MTPDEVICE_H
+#endif  // MTPDEVICE_H

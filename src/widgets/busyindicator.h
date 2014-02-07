@@ -46,4 +46,4 @@ class BusyIndicator : public QWidget {
   QLabel* label_;
 };
 
-#endif // BUSYINDICATOR_H
+#endif  // BUSYINDICATOR_H

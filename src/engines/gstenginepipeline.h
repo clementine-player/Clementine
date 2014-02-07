@@ -78,7 +78,8 @@ class GstEnginePipeline : public QObject {
 
   // If this is set then it will be loaded automatically when playback finishes
   // for gapless playback
-  void SetNextUrl(const QUrl& url, qint64 beginning_nanosec, qint64 end_nanosec);
+  void SetNextUrl(const QUrl& url, qint64 beginning_nanosec,
+                  qint64 end_nanosec);
   bool has_next_valid_url() const { return next_url_.isValid(); }
 
   // Get information about the music playback
@@ -106,12 +107,13 @@ class GstEnginePipeline : public QObject {
  public slots:
   void SetVolumeModifier(qreal mod);
 
- signals:
+signals:
   void EndOfStreamReached(int pipeline_id, bool has_next_track);
   void MetadataFound(int pipeline_id, const Engine::SimpleMetaBundle& bundle);
   // This indicates an error, delegated from GStreamer, in the pipeline.
   // The message, domain and error_code are related to GStreamer's GError.
-  void Error(int pipeline_id, const QString& message, int domain, int error_code);
+  void Error(int pipeline_id, const QString& message, int domain,
+             int error_code);
   void FaderFinished();
 
   void BufferingStarted();
@@ -119,7 +121,7 @@ class GstEnginePipeline : public QObject {
   void BufferingFinished();
 
  protected:
-  void timerEvent(QTimerEvent *);
+  void timerEvent(QTimerEvent*);
 
  private:
   // Static callbacks.  The GstEnginePipeline instance is passed in the last
@@ -130,7 +132,8 @@ class GstEnginePipeline : public QObject {
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static bool EventHandoffCallback(GstPad*, GstEvent*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
-  static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec *pspec, gpointer);
+  static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec* pspec,
+                                  gpointer);
   static void TaskEnterCallback(GstTask*, GThread*, gpointer);
 
   void TagMessageReceived(GstMessage*);
@@ -283,4 +286,4 @@ class GstEnginePipeline : public QObject {
   QThreadPool set_state_threadpool_;
 };
 
-#endif // GSTENGINEPIPELINE_H
+#endif  // GSTENGINEPIPELINE_H

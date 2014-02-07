@@ -32,7 +32,7 @@ class QSignalMapper;
 class IcecastFilterWidget : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   IcecastFilterWidget(QWidget* parent = 0);
   ~IcecastFilterWidget();
 
@@ -42,16 +42,17 @@ public:
 
   QMenu* menu() const { return menu_; }
 
-public slots:
+ public slots:
   void FocusOnFilter(QKeyEvent* e);
 
-private slots:
+ private slots:
   void SortModeChanged(int mode);
 
-private:
-  void AddAction(QActionGroup* group, QAction* action, IcecastModel::SortMode mode);
+ private:
+  void AddAction(QActionGroup* group, QAction* action,
+                 IcecastModel::SortMode mode);
 
-private:
+ private:
   Ui_IcecastFilterWidget* ui_;
   IcecastModel* model_;
   QMenu* menu_;
@@ -59,4 +60,4 @@ private:
   QSignalMapper* sort_mode_mapper_;
 };
 
-#endif // ICECASTFILTERWIDGET_H
+#endif  // ICECASTFILTERWIDGET_H

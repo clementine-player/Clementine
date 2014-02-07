@@ -31,14 +31,12 @@ namespace smart_playlists {
 typedef QFuture<PlaylistItemList> Future;
 typedef QFutureWatcher<PlaylistItemList> FutureWatcher;
 
-SearchPreview::SearchPreview(QWidget *parent)
-  : QWidget(parent),
-    ui_(new Ui_SmartPlaylistSearchPreview),
-    model_(nullptr)
-{
+SearchPreview::SearchPreview(QWidget* parent)
+    : QWidget(parent), ui_(new Ui_SmartPlaylistSearchPreview), model_(nullptr) {
   ui_->setupUi(this);
 
-  // Prevent editing songs and saving settings (like header columns and geometry)
+  // Prevent editing songs and saving settings (like header columns and
+  // geometry)
   ui_->tree->setEditTriggers(QAbstractItemView::NoEditTriggers);
   ui_->tree->SetReadOnlySettings(true);
 
@@ -48,9 +46,7 @@ SearchPreview::SearchPreview(QWidget *parent)
   ui_->busy_container->hide();
 }
 
-SearchPreview::~SearchPreview() {
-  delete ui_;
-}
+SearchPreview::~SearchPreview() { delete ui_; }
 
 void SearchPreview::set_application(Application* app) {
   ui_->tree->SetApplication(app);
@@ -90,9 +86,7 @@ void SearchPreview::showEvent(QShowEvent* e) {
   QWidget::showEvent(e);
 }
 
-PlaylistItemList DoRunSearch(GeneratorPtr gen) {
-  return gen->Generate();
-}
+PlaylistItemList DoRunSearch(GeneratorPtr gen) { return gen->Generate(); }
 
 void SearchPreview::RunSearch(const Search& search) {
   generator_.reset(new QueryGenerator);
@@ -112,7 +106,8 @@ void SearchPreview::SearchFinished() {
   FutureWatcher* watcher = static_cast<FutureWatcher*>(sender());
   watcher->deleteLater();
 
-  last_search_ = std::dynamic_pointer_cast<QueryGenerator>(generator_)->search();
+  last_search_ =
+      std::dynamic_pointer_cast<QueryGenerator>(generator_)->search();
   generator_.reset();
 
   if (pending_search_.is_valid() && pending_search_ != last_search_) {
@@ -131,7 +126,8 @@ void SearchPreview::SearchFinished() {
 
   if (displayed_items.count() < all_items.count()) {
     ui_->count_label->setText(tr("%1 songs found (showing %2)")
-        .arg(all_items.count()).arg(displayed_items.count()));
+                                  .arg(all_items.count())
+                                  .arg(displayed_items.count()));
   } else {
     ui_->count_label->setText(tr("%1 songs found").arg(all_items.count()));
   }
@@ -140,4 +136,4 @@ void SearchPreview::SearchFinished() {
   ui_->count_label->show();
 }
 
-} // namespace
+}  // namespace

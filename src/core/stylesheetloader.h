@@ -45,4 +45,4 @@ class StyleSheetLoader : public QObject {
   QMap<QWidget*, QString> filenames_;
 };
 
-#endif // STYLESHEETLOADER_H
+#endif  // STYLESHEETLOADER_H

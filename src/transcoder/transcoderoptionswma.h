@@ -23,17 +23,17 @@
 class Ui_TranscoderOptionsWma;
 
 class TranscoderOptionsWma : public TranscoderOptionsInterface {
-public:
+ public:
   TranscoderOptionsWma(QWidget* parent = 0);
   ~TranscoderOptionsWma();
 
   void Load();
   void Save();
 
-private:
+ private:
   static const char* kSettingsGroup;
 
   Ui_TranscoderOptionsWma* ui_;
 };
 
-#endif // TRANSCODEROPTIONSWMA_H
+#endif  // TRANSCODEROPTIONSWMA_H

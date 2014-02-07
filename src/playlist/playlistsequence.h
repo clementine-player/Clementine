@@ -32,7 +32,7 @@ class PlaylistSequence : public QWidget {
   Q_OBJECT
 
  public:
-  PlaylistSequence(QWidget *parent = 0, SettingsProvider* settings = 0);
+  PlaylistSequence(QWidget* parent = 0, SettingsProvider* settings = 0);
   ~PlaylistSequence();
 
   enum RepeatMode {
@@ -63,7 +63,7 @@ class PlaylistSequence : public QWidget {
   void CycleRepeatMode();
   void SetUsingDynamicPlaylist(bool dynamic);
 
- signals:
+signals:
   void RepeatModeChanged(PlaylistSequence::RepeatMode mode);
   void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
 
@@ -90,4 +90,4 @@ class PlaylistSequence : public QWidget {
   bool dynamic_;
 };
 
-#endif // PLAYLISTSEQUENCE_H
+#endif  // PLAYLISTSEQUENCE_H

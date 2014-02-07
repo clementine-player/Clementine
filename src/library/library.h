@@ -45,7 +45,9 @@ class Library : public QObject {
   LibraryBackend* backend() const { return backend_; }
   LibraryModel* model() const { return model_; }
 
-  QString full_rescan_reason(int schema_version) const { return full_rescan_revisions_.value(schema_version, QString()); }
+  QString full_rescan_reason(int schema_version) const {
+    return full_rescan_revisions_.value(schema_version, QString());
+  }
 
   void WriteAllSongsStatisticsToFiles();
 
@@ -68,7 +70,8 @@ class Library : public QObject {
   LibraryWatcher* watcher_;
   QThread* watcher_thread_;
 
-  // DB schema versions which should trigger a full library rescan (each of those with
+  // DB schema versions which should trigger a full library rescan (each of
+  // those with
   // a short reason why).
   QHash<int, QString> full_rescan_revisions_;
 };

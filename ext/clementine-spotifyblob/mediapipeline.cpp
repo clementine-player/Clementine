@@ -25,15 +25,13 @@
 #include <cstring>
 
 MediaPipeline::MediaPipeline(int port, quint64 length_msec)
-  : port_(port),
-    length_msec_(length_msec),
-    accepting_data_(true),
-    pipeline_(nullptr),
-    appsrc_(nullptr),
-    byte_rate_(1),
-    offset_bytes_(0)
-{
-}
+    : port_(port),
+      length_msec_(length_msec),
+      accepting_data_(true),
+      pipeline_(nullptr),
+      appsrc_(nullptr),
+      byte_rate_(1),
+      offset_bytes_(0) {}
 
 MediaPipeline::~MediaPipeline() {
   if (pipeline_) {
@@ -43,8 +41,7 @@ MediaPipeline::~MediaPipeline() {
 }
 
 bool MediaPipeline::Init(int sample_rate, int channels) {
-  if (is_initialised())
-    return false;
+  if (is_initialised()) return false;
 
   pipeline_ = gst_pipeline_new("pipeline");
 
@@ -54,10 +51,21 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
   tcpsink_ = gst_element_factory_make("tcpclientsink", nullptr);
 
   if (!pipeline_ || !appsrc_ || !tcpsink_) {
-    if (pipeline_) { gst_object_unref(GST_OBJECT(pipeline_)); pipeline_ = nullptr; }
-    if (appsrc_)   { gst_object_unref(GST_OBJECT(appsrc_));   appsrc_ = nullptr;   }
-    if (gdppay)    { gst_object_unref(GST_OBJECT(gdppay)); }
-    if (tcpsink_)  { gst_object_unref(GST_OBJECT(tcpsink_));  tcpsink_ = nullptr;  }
+    if (pipeline_) {
+      gst_object_unref(GST_OBJECT(pipeline_));
+      pipeline_ = nullptr;
+    }
+    if (appsrc_) {
+      gst_object_unref(GST_OBJECT(appsrc_));
+      appsrc_ = nullptr;
+    }
+    if (gdppay) {
+      gst_object_unref(GST_OBJECT(gdppay));
+    }
+    if (tcpsink_) {
+      gst_object_unref(GST_OBJECT(tcpsink_));
+      tcpsink_ = nullptr;
+    }
     return false;
   }
 
@@ -73,7 +81,8 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
 
   // Try to send 5 seconds of audio in advance to initially fill Clementine's
   // buffer.
-  g_object_set(G_OBJECT(tcpsink_), "ts-offset", qint64(-5 * kNsecPerSec), nullptr);
+  g_object_set(G_OBJECT(tcpsink_), "ts-offset", qint64(-5 * kNsecPerSec),
+               nullptr);
 
   // We know the time of each buffer
   g_object_set(G_OBJECT(appsrc_), "format", GST_FORMAT_TIME, nullptr);
@@ -97,14 +106,11 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
 #endif
 
   // Set caps
-  GstCaps* caps = gst_caps_new_simple("audio/x-raw-int",
-                                      "endianness", G_TYPE_INT, endianness,
-                                      "signed", G_TYPE_BOOLEAN, TRUE,
-                                      "width", G_TYPE_INT, 16,
-                                      "depth", G_TYPE_INT, 16,
-                                      "rate", G_TYPE_INT, sample_rate,
-                                      "channels", G_TYPE_INT, channels,
-                                      nullptr);
+  GstCaps* caps = gst_caps_new_simple(
+      "audio/x-raw-int", "endianness", G_TYPE_INT, endianness, "signed",
+      G_TYPE_BOOLEAN, TRUE, "width", G_TYPE_INT, 16, "depth", G_TYPE_INT, 16,
+      "rate", G_TYPE_INT, sample_rate, "channels", G_TYPE_INT, channels,
+      nullptr);
 
   gst_app_src_set_caps(appsrc_, caps);
   gst_caps_unref(caps);
@@ -115,12 +121,12 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
   gst_app_src_set_size(appsrc_, bytes);
 
   // Ready to go
-  return gst_element_set_state(pipeline_, GST_STATE_PLAYING) != GST_STATE_CHANGE_FAILURE;
+  return gst_element_set_state(pipeline_, GST_STATE_PLAYING) !=
+         GST_STATE_CHANGE_FAILURE;
 }
 
 void MediaPipeline::WriteData(const char* data, qint64 length) {
-  if (!is_initialised())
-    return;
+  if (!is_initialised()) return;
 
   GstBuffer* buffer = gst_buffer_new_and_alloc(length);
 
@@ -137,8 +143,7 @@ void MediaPipeline::WriteData(const char* data, qint64 length) {
 }
 
 void MediaPipeline::EndStream() {
-  if (!is_initialised())
-    return;
+  if (!is_initialised()) return;
 
   gst_app_src_end_of_stream(appsrc_);
 }
@@ -153,8 +158,9 @@ void MediaPipeline::EnoughDataCallback(GstAppSrc* src, void* data) {
   me->accepting_data_ = false;
 }
 
-gboolean MediaPipeline::SeekDataCallback(GstAppSrc* src, guint64 offset, void * data) {
-  //MediaPipeline* me = reinterpret_cast<MediaPipeline*>(data);
+gboolean MediaPipeline::SeekDataCallback(GstAppSrc* src, guint64 offset,
+                                         void* data) {
+  // MediaPipeline* me = reinterpret_cast<MediaPipeline*>(data);
 
   qLog(Debug) << "Gstreamer wants seek to" << offset;
   return false;

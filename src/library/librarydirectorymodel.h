@@ -39,7 +39,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
   void AddDirectory(const QString& path);
   void RemoveDirectory(const QModelIndex& index);
 
-  QVariant data(const QModelIndex &index, int role) const;
+  QVariant data(const QModelIndex& index, int role) const;
 
  private slots:
   // To be called by the backend
@@ -54,4 +54,4 @@ class LibraryDirectoryModel : public QStandardItemModel {
   QList<std::shared_ptr<MusicStorage> > storage_;
 };
 
-#endif // LIBRARYDIRECTORYMODEL_H
+#endif  // LIBRARYDIRECTORYMODEL_H

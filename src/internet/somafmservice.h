@@ -32,20 +32,14 @@ class QMenu;
 class SomaFMServiceBase : public InternetService {
   Q_OBJECT
 
-public:
-  SomaFMServiceBase(
-      Application* app,
-      InternetModel* parent,
-      const QString& name,
-      const QUrl& channel_list_url,
-      const QUrl& homepage_url,
-      const QUrl& donate_page_url,
-      const QIcon& icon);
+ public:
+  SomaFMServiceBase(Application* app, InternetModel* parent,
+                    const QString& name, const QUrl& channel_list_url,
+                    const QUrl& homepage_url, const QUrl& donate_page_url,
+                    const QIcon& icon);
   ~SomaFMServiceBase();
 
-  enum ItemType {
-    Type_Stream = 2000,
-  };
+  enum ItemType { Type_Stream = 2000, };
 
   struct Stream {
     QString title_;
@@ -76,7 +70,7 @@ public:
 signals:
   void StreamsChanged();
 
-private slots:
+ private slots:
   void ForceRefreshStreams();
   void RefreshStreams();
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
@@ -84,11 +78,11 @@ private slots:
   void Homepage();
   void Donate();
 
-private:
+ private:
   void ReadChannel(QXmlStreamReader& reader, StreamList* ret);
   void PopulateStreams();
 
-private:
+ private:
   const QString url_scheme_;
   SomaFMUrlHandler* url_handler_;
 
@@ -120,4 +114,4 @@ QDataStream& operator<<(QDataStream& out, const SomaFMService::Stream& stream);
 QDataStream& operator>>(QDataStream& in, SomaFMService::Stream& stream);
 Q_DECLARE_METATYPE(SomaFMService::Stream)
 
-#endif // SOMAFMSERVICE_H
+#endif  // SOMAFMSERVICE_H

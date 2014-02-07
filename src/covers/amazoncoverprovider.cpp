@@ -35,12 +35,11 @@ const char* AmazonCoverProvider::kUrl = "http://ecs.amazonaws.com/onca/xml";
 const char* AmazonCoverProvider::kAssociateTag = "clemmusiplay-20";
 
 AmazonCoverProvider::AmazonCoverProvider(QObject* parent)
-  : CoverProvider("Amazon", parent),
-    network_(new NetworkAccessManager(this))
-{
-}
+    : CoverProvider("Amazon", parent),
+      network_(new NetworkAccessManager(this)) {}
 
-bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& album, int id) {
+bool AmazonCoverProvider::StartSearch(const QString& artist,
+                                      const QString& album, int id) {
   typedef QPair<QString, QString> Arg;
   typedef QList<Arg> ArgList;
 
@@ -48,22 +47,22 @@ bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& albu
   typedef QList<EncodedArg> EncodedArgList;
 
   // Must be sorted by parameter name
-  ArgList args = ArgList()
-      << Arg("AWSAccessKeyId", QByteArray::fromBase64(kAccessKeyB64))
-      << Arg("AssociateTag", kAssociateTag)
-      << Arg("Keywords", artist + " " + album)
-      << Arg("Operation", "ItemSearch")
-      << Arg("ResponseGroup", "Images")
-      << Arg("SearchIndex", "All")
-      << Arg("Service", "AWSECommerceService")
-      << Arg("Timestamp", QDateTime::currentDateTime().toString("yyyy-MM-ddThh:mm:ss.zzzZ"))
-      << Arg("Version", "2009-11-01");
+  ArgList args =
+      ArgList() << Arg("AWSAccessKeyId", QByteArray::fromBase64(kAccessKeyB64))
+                << Arg("AssociateTag", kAssociateTag)
+                << Arg("Keywords", artist + " " + album)
+                << Arg("Operation", "ItemSearch")
+                << Arg("ResponseGroup", "Images") << Arg("SearchIndex", "All")
+                << Arg("Service", "AWSECommerceService")
+                << Arg("Timestamp", QDateTime::currentDateTime().toString(
+                                        "yyyy-MM-ddThh:mm:ss.zzzZ"))
+                << Arg("Version", "2009-11-01");
 
   EncodedArgList encoded_args;
   QStringList query_items;
 
   // Encode the arguments
-  foreach (const Arg& arg, args) {
+  foreach(const Arg & arg, args) {
     EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
                            QUrl::toPercentEncoding(arg.second));
     encoded_args << encoded_arg;
@@ -73,19 +72,21 @@ bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& albu
   // Sign the request
   QUrl url(kUrl);
 
-  const QByteArray data_to_sign = QString("GET\n%1\n%2\n%3").arg(
-        url.host(), url.path(), query_items.join("&")).toAscii();
+  const QByteArray data_to_sign =
+      QString("GET\n%1\n%2\n%3")
+          .arg(url.host(), url.path(), query_items.join("&"))
+          .toAscii();
   const QByteArray signature(Utilities::HmacSha256(
-        QByteArray::fromBase64(kSecretAccessKeyB64), data_to_sign));
+      QByteArray::fromBase64(kSecretAccessKeyB64), data_to_sign));
 
   // Add the signature to the request
-  encoded_args << EncodedArg("Signature", QUrl::toPercentEncoding(signature.toBase64()));
+  encoded_args << EncodedArg("Signature",
+                             QUrl::toPercentEncoding(signature.toBase64()));
   url.setEncodedQueryItems(encoded_args);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(QueryFinished(QNetworkReply*, int)),
-             reply, id);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(QueryFinished(QNetworkReply*, int)), reply, id);
 
   return true;
 }
@@ -107,44 +108,46 @@ void AmazonCoverProvider::QueryFinished(QNetworkReply* reply, int id) {
   emit SearchFinished(id, results);
 }
 
-void AmazonCoverProvider::ReadItem(QXmlStreamReader* reader, CoverSearchResults* results) {
+void AmazonCoverProvider::ReadItem(QXmlStreamReader* reader,
+                                   CoverSearchResults* results) {
   while (!reader->atEnd()) {
     switch (reader->readNext()) {
-    case QXmlStreamReader::StartElement:
-      if (reader->name() == "LargeImage") {
-        ReadLargeImage(reader, results);
-      } else {
-        reader->skipCurrentElement();
-      }
-      break;
+      case QXmlStreamReader::StartElement:
+        if (reader->name() == "LargeImage") {
+          ReadLargeImage(reader, results);
+        } else {
+          reader->skipCurrentElement();
+        }
+        break;
 
-    case QXmlStreamReader::EndElement:
-      return;
+      case QXmlStreamReader::EndElement:
+        return;
 
-    default:
-      break;
+      default:
+        break;
     }
   }
 }
 
-void AmazonCoverProvider::ReadLargeImage(QXmlStreamReader* reader, CoverSearchResults* results) {
+void AmazonCoverProvider::ReadLargeImage(QXmlStreamReader* reader,
+                                         CoverSearchResults* results) {
   while (!reader->atEnd()) {
     switch (reader->readNext()) {
-    case QXmlStreamReader::StartElement:
-      if (reader->name() == "URL") {
-        CoverSearchResult result;
-        result.image_url = QUrl(reader->readElementText());
-        results->append(result);
-      } else {
-        reader->skipCurrentElement();
-      }
-      break;
+      case QXmlStreamReader::StartElement:
+        if (reader->name() == "URL") {
+          CoverSearchResult result;
+          result.image_url = QUrl(reader->readElementText());
+          results->append(result);
+        } else {
+          reader->skipCurrentElement();
+        }
+        break;
 
-    case QXmlStreamReader::EndElement:
-      return;
+      case QXmlStreamReader::EndElement:
+        return;
 
-    default:
-      break;
+      default:
+        break;
     }
   }
 }

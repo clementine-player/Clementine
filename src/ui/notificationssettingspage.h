@@ -25,18 +25,18 @@ class Ui_NotificationsSettingsPage;
 class NotificationsSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   NotificationsSettingsPage(SettingsDialog* dialog);
   ~NotificationsSettingsPage();
 
   void Load();
   void Save();
 
-protected:
+ protected:
   void hideEvent(QHideEvent*);
   void showEvent(QShowEvent*);
 
-private slots:
+ private slots:
   void NotificationTypeChanged();
   void NotificationCustomTextChanged(bool enabled);
   void PrepareNotificationPreview();
@@ -52,9 +52,9 @@ private slots:
 
   void UpdatePopupVisible();
 
-private:
+ private:
   Ui_NotificationsSettingsPage* ui_;
   OSDPretty* pretty_popup_;
 };
 
-#endif // NOTIFICATIONSSETTINGSPAGE_H
+#endif  // NOTIFICATIONSSETTINGSPAGE_H

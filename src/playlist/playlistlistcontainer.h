@@ -34,17 +34,17 @@ class Ui_PlaylistListContainer;
 class PlaylistListContainer : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   PlaylistListContainer(QWidget* parent = 0);
   ~PlaylistListContainer();
 
   void SetApplication(Application* app);
 
-protected:
+ protected:
   void showEvent(QShowEvent* e);
   void contextMenuEvent(QContextMenuEvent* e);
 
-private slots:
+ private slots:
   // From the UI
   void NewFolderClicked();
   void DeleteClicked();
@@ -68,12 +68,13 @@ private slots:
   void ActivePaused();
   void ActiveStopped();
 
-private:
+ private:
   QStandardItem* ItemForPlaylist(const QString& name, int id);
   QStandardItem* ItemForFolder(const QString& name) const;
   void RecursivelySetIcons(QStandardItem* parent) const;
 
-  void RecursivelyFindPlaylists(const QModelIndex& parent, QSet<int>* ids) const;
+  void RecursivelyFindPlaylists(const QModelIndex& parent,
+                                QSet<int>* ids) const;
 
   void UpdateActiveIcon(int id, const QIcon& icon);
 
@@ -94,4 +95,4 @@ private:
   int active_playlist_id_;
 };
 
-#endif // PLAYLISTLISTCONTAINER_H
+#endif  // PLAYLISTLISTCONTAINER_H

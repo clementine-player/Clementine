@@ -27,15 +27,15 @@ class QNetworkReply;
 class EchoNestBiographies : public SongInfoProvider {
   Q_OBJECT
 
-public:
+ public:
   EchoNestBiographies();
 
   void FetchInfo(int id, const Song& metadata);
 
-private slots:
+ private slots:
   void RequestFinished();
 
-private:
+ private:
   QMap<QString, int> site_relevance_;
   QMap<QString, QIcon> site_icons_;
 
@@ -45,4 +45,4 @@ private:
   QMap<QNetworkReply*, RequestPtr> requests_;
 };
 
-#endif // ECHONESTBIOGRAPHIES_H
+#endif  // ECHONESTBIOGRAPHIES_H

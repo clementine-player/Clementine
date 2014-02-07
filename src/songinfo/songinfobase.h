@@ -37,12 +37,12 @@ class QVBoxLayout;
 class SongInfoBase : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   SongInfoBase(QWidget* parent = 0);
 
   static const char* kSettingsGroup;
 
-public slots:
+ public slots:
   void SongChanged(const Song& metadata);
   void SongFinished();
   virtual void ReloadSettings();
@@ -51,34 +51,37 @@ signals:
   void ShowSettingsDialog();
   void DoGlobalSearch(const QString& query);
 
-protected:
+ protected:
   void showEvent(QShowEvent* e);
 
   virtual void Update(const Song& metadata);
-  virtual bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const { return true; }
+  virtual bool NeedsUpdate(const Song& old_metadata,
+                           const Song& new_metadata) const {
+    return true;
+  }
 
   void AddWidget(QWidget* widget);
   void AddSection(CollapsibleInfoPane* section);
   void Clear();
   void CollapseSections();
 
-protected slots:
-  virtual void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
+ protected slots:
+  virtual void InfoResultReady(int id, const CollapsibleInfoPane::Data& data);
   virtual void ResultReady(int id, const SongInfoFetcher::Result& result);
 
-protected:
+ protected:
   QNetworkAccessManager* network_;
   SongInfoFetcher* fetcher_;
   int current_request_id_;
 
-private:
+ private:
   void MaybeUpdate(const Song& metadata);
   void ConnectWidget(QWidget* widget);
 
-private slots:
+ private slots:
   void SectionToggled(bool value);
 
-private:
+ private:
   QScrollArea* scroll_area_;
 
   QVBoxLayout* container_;
@@ -94,5 +97,4 @@ private:
   bool dirty_;
 };
 
-#endif // SONGINFOBASE_H
-
+#endif  // SONGINFOBASE_H

@@ -18,23 +18,22 @@
 #include "coversearchstatistics.h"
 
 CoverSearchStatistics::CoverSearchStatistics()
-  : network_requests_made_(0),
-    bytes_transferred_(0),
-    chosen_images_(0),
-    missing_images_(0),
-    chosen_width_(0),
-    chosen_height_(0)
-{
-}
+    : network_requests_made_(0),
+      bytes_transferred_(0),
+      chosen_images_(0),
+      missing_images_(0),
+      chosen_width_(0),
+      chosen_height_(0) {}
 
-CoverSearchStatistics& CoverSearchStatistics::operator +=(const CoverSearchStatistics& other) {
+CoverSearchStatistics& CoverSearchStatistics::operator+=(
+    const CoverSearchStatistics& other) {
   network_requests_made_ += other.network_requests_made_;
   bytes_transferred_ += other.bytes_transferred_;
 
-  foreach (const QString& key, other.chosen_images_by_provider_.keys()) {
+  foreach(const QString & key, other.chosen_images_by_provider_.keys()) {
     chosen_images_by_provider_[key] += other.chosen_images_by_provider_[key];
   }
-  foreach (const QString& key, other.total_images_by_provider_.keys()) {
+  foreach(const QString & key, other.total_images_by_provider_.keys()) {
     total_images_by_provider_[key] += other.total_images_by_provider_[key];
   }
 

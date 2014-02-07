@@ -23,35 +23,37 @@
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 
-LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend, QObject* parent)
-  : QStandardItemModel(parent),
-    dir_icon_(IconLoader::Load("document-open-folder")),
-    backend_(backend)
-{
-  connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), SLOT(DirectoryDiscovered(Directory)));
-  connect(backend_, SIGNAL(DirectoryDeleted(Directory)), SLOT(DirectoryDeleted(Directory)));
+LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend,
+                                             QObject* parent)
+    : QStandardItemModel(parent),
+      dir_icon_(IconLoader::Load("document-open-folder")),
+      backend_(backend) {
+  connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)),
+          SLOT(DirectoryDiscovered(Directory)));
+  connect(backend_, SIGNAL(DirectoryDeleted(Directory)),
+          SLOT(DirectoryDeleted(Directory)));
 }
 
-LibraryDirectoryModel::~LibraryDirectoryModel() {
-}
+LibraryDirectoryModel::~LibraryDirectoryModel() {}
 
-void LibraryDirectoryModel::DirectoryDiscovered(const Directory &dir) {
+void LibraryDirectoryModel::DirectoryDiscovered(const Directory& dir) {
   QStandardItem* item;
-  if (Application::kIsPortable
-   && Utilities::UrlOnSameDriveAsClementine(QUrl::fromLocalFile(dir.path))) {
+  if (Application::kIsPortable &&
+      Utilities::UrlOnSameDriveAsClementine(QUrl::fromLocalFile(dir.path))) {
     item = new QStandardItem(Utilities::GetRelativePathToClementineBin(
-                                  QUrl::fromLocalFile(dir.path)).toLocalFile());
+                                 QUrl::fromLocalFile(dir.path)).toLocalFile());
   } else {
     item = new QStandardItem(dir.path);
   }
   item->setData(dir.id, kIdRole);
   item->setIcon(dir_icon_);
-  storage_ << std::shared_ptr<MusicStorage>(new FilesystemMusicStorage(dir.path));
+  storage_ << std::shared_ptr<MusicStorage>(
+                  new FilesystemMusicStorage(dir.path));
   appendRow(item);
 }
 
-void LibraryDirectoryModel::DirectoryDeleted(const Directory &dir) {
-  for (int i=0 ; i<rowCount() ; ++i) {
+void LibraryDirectoryModel::DirectoryDeleted(const Directory& dir) {
+  for (int i = 0; i < rowCount(); ++i) {
     if (item(i, 0)->data(kIdRole).toInt() == dir.id) {
       removeRow(i);
       storage_.removeAt(i);
@@ -61,15 +63,13 @@ void LibraryDirectoryModel::DirectoryDeleted(const Directory &dir) {
 }
 
 void LibraryDirectoryModel::AddDirectory(const QString& path) {
-  if (!backend_)
-    return;
+  if (!backend_) return;
 
   backend_->AddDirectory(path);
 }
 
 void LibraryDirectoryModel::RemoveDirectory(const QModelIndex& index) {
-  if (!backend_ || !index.isValid())
-    return;
+  if (!backend_ || !index.isValid()) return;
 
   Directory dir;
   dir.path = index.data().toString();
@@ -78,19 +78,21 @@ void LibraryDirectoryModel::RemoveDirectory(const QModelIndex& index) {
   backend_->RemoveDirectory(dir);
 }
 
-QVariant LibraryDirectoryModel::data(const QModelIndex &index, int role) const {
+QVariant LibraryDirectoryModel::data(const QModelIndex& index, int role) const {
   switch (role) {
-  case MusicStorage::Role_Storage:
-  case MusicStorage::Role_StorageForceConnect:
-    return QVariant::fromValue(storage_[index.row()]);
+    case MusicStorage::Role_Storage:
+    case MusicStorage::Role_StorageForceConnect:
+      return QVariant::fromValue(storage_[index.row()]);
 
-  case MusicStorage::Role_FreeSpace:
-    return Utilities::FileSystemFreeSpace(data(index, Qt::DisplayRole).toString());
+    case MusicStorage::Role_FreeSpace:
+      return Utilities::FileSystemFreeSpace(
+          data(index, Qt::DisplayRole).toString());
 
-  case MusicStorage::Role_Capacity:
-    return Utilities::FileSystemCapacity(data(index, Qt::DisplayRole).toString());
+    case MusicStorage::Role_Capacity:
+      return Utilities::FileSystemCapacity(
+          data(index, Qt::DisplayRole).toString());
 
-  default:
-    return QStandardItemModel::data(index, role);
+    default:
+      return QStandardItemModel::data(index, role);
   }
 }

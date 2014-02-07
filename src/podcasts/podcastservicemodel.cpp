@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -20,23 +20,21 @@
 #include "playlist/songmimedata.h"
 
 PodcastServiceModel::PodcastServiceModel(QObject* parent)
-  : QStandardItemModel(parent)
-{
-}
+    : QStandardItemModel(parent) {}
 
 QMimeData* PodcastServiceModel::mimeData(const QModelIndexList& indexes) const {
   SongMimeData* data = new SongMimeData;
   QList<QUrl> urls;
 
-  foreach (const QModelIndex& index, indexes) {
+  foreach(const QModelIndex & index, indexes) {
     switch (index.data(InternetModel::Role_Type).toInt()) {
-    case PodcastService::Type_Episode:
-      MimeDataForEpisode(index, data, &urls);
-      break;
+      case PodcastService::Type_Episode:
+        MimeDataForEpisode(index, data, &urls);
+        break;
 
-    case PodcastService::Type_Podcast:
-      MimeDataForPodcast(index, data, &urls);
-      break;
+      case PodcastService::Type_Podcast:
+        MimeDataForPodcast(index, data, &urls);
+        break;
     }
   }
 
@@ -45,10 +43,10 @@ QMimeData* PodcastServiceModel::mimeData(const QModelIndexList& indexes) const {
 }
 
 void PodcastServiceModel::MimeDataForEpisode(const QModelIndex& index,
-                                             SongMimeData* data, QList<QUrl>* urls) const {
+                                             SongMimeData* data,
+                                             QList<QUrl>* urls) const {
   QVariant episode_variant = index.data(PodcastService::Role_Episode);
-  if (!episode_variant.isValid())
-    return;
+  if (!episode_variant.isValid()) return;
 
   PodcastEpisode episode(episode_variant.value<PodcastEpisode>());
 
@@ -66,7 +64,8 @@ void PodcastServiceModel::MimeDataForEpisode(const QModelIndex& index,
 }
 
 void PodcastServiceModel::MimeDataForPodcast(const QModelIndex& index,
-                                             SongMimeData* data, QList<QUrl>* urls) const {
+                                             SongMimeData* data,
+                                             QList<QUrl>* urls) const {
   // Get the podcast
   Podcast podcast;
   QVariant podcast_variant = index.data(PodcastService::Role_Podcast);
@@ -76,10 +75,10 @@ void PodcastServiceModel::MimeDataForPodcast(const QModelIndex& index,
 
   // Add each child episode
   const int children = index.model()->rowCount(index);
-  for (int i=0 ; i<children ; ++i) {
-    QVariant episode_variant = index.child(i, 0).data(PodcastService::Role_Episode);
-    if (!episode_variant.isValid())
-      continue;
+  for (int i = 0; i < children; ++i) {
+    QVariant episode_variant =
+        index.child(i, 0).data(PodcastService::Role_Episode);
+    if (!episode_variant.isValid()) continue;
 
     PodcastEpisode episode(episode_variant.value<PodcastEpisode>());
     Song song = episode.ToSong(podcast);

@@ -80,20 +80,23 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   Engine::State state() const;
   const Engine::Scope& scope();
 
-  PluginDetailsList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
-  static bool DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString& name);
+  PluginDetailsList GetOutputsList() const {
+    return GetPluginList("Sink/Audio");
+  }
+  static bool DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(
+      const QString& name);
 
   GstElement* CreateElement(const QString& factoryName, GstElement* bin = 0);
 
   // BufferConsumer
-  void ConsumeBuffer(GstBuffer *buffer, int pipeline_id);
+  void ConsumeBuffer(GstBuffer* buffer, int pipeline_id);
 
  public slots:
   void StartPreloading(const QUrl& url, bool force_stop_at_end,
                        qint64 beginning_nanosec, qint64 end_nanosec);
   bool Load(const QUrl&, Engine::TrackChangeFlags change,
-            bool force_stop_at_end,
-            quint64 beginning_nanosec, qint64 end_nanosec);
+            bool force_stop_at_end, quint64 beginning_nanosec,
+            qint64 end_nanosec);
   bool Play(quint64 offset_nanosec);
   void Stop();
   void Pause();
@@ -120,7 +123,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
  private slots:
   void EndOfStreamReached(int pipeline_id, bool has_next_track);
-  void HandlePipelineError(int pipeline_id, const QString& message, int domain, int error_code);
+  void HandlePipelineError(int pipeline_id, const QString& message, int domain,
+                           int error_code);
   void NewMetaData(int pipeline_id, const Engine::SimpleMetaBundle& bundle);
   void AddBufferToScope(GstBuffer* buf, int pipeline_id);
   void FadeoutFinished();
@@ -136,7 +140,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
  private:
   typedef QPair<quint64, int> PlayFutureWatcherArg;
-  typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg> PlayFutureWatcher;
+  typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg>
+      PlayFutureWatcher;
 
   static void SetEnv(const char* key, const QString& value);
   PluginDetailsList GetPluginList(const QString& classname) const;
@@ -148,8 +153,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void StopTimers();
 
   std::shared_ptr<GstEnginePipeline> CreatePipeline();
-  std::shared_ptr<GstEnginePipeline> CreatePipeline(
-      const QUrl& url, qint64 end_nanosec);
+  std::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url,
+                                                    qint64 end_nanosec);
 
   void UpdateScope();
 
@@ -158,9 +163,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static QUrl FixupUrl(const QUrl& url);
 
  private:
-  static const qint64 kTimerIntervalNanosec = 1000 * kNsecPerMsec; // 1s
-  static const qint64 kPreloadGapNanosec = 2000 * kNsecPerMsec; // 2s
-  static const qint64 kSeekDelayNanosec = 100 * kNsecPerMsec; // 100msec
+  static const qint64 kTimerIntervalNanosec = 1000 * kNsecPerMsec;  // 1s
+  static const qint64 kPreloadGapNanosec = 2000 * kNsecPerMsec;     // 2s
+  static const qint64 kSeekDelayNanosec = 100 * kNsecPerMsec;       // 100msec
 
   static const char* kHypnotoadPipeline;
   static const char* kEnterprisePipeline;
@@ -212,6 +217,5 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   bool is_fading_out_to_pause_;
   bool has_faded_out_;
 };
-
 
 #endif /*AMAROK_GSTENGINE_H*/

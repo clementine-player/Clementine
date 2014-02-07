@@ -9,17 +9,14 @@
 
 const char* BackgroundStreams::kSettingsGroup = "BackgroundStreams";
 const char* BackgroundStreams::kHypnotoadUrl = "hypnotoad:///";
-const char* BackgroundStreams::kRainUrl = "http://data.clementine-player.org/rainymood";
+const char* BackgroundStreams::kRainUrl =
+    "http://data.clementine-player.org/rainymood";
 const char* BackgroundStreams::kEnterpriseUrl = "enterprise:///";
 
 BackgroundStreams::BackgroundStreams(EngineBase* engine, QObject* parent)
-    : QObject(parent),
-      engine_(engine) {
-}
+    : QObject(parent), engine_(engine) {}
 
-BackgroundStreams::~BackgroundStreams() {
-  SaveStreams();
-}
+BackgroundStreams::~BackgroundStreams() { SaveStreams(); }
 
 void BackgroundStreams::LoadStreams() {
   QSettings s;
@@ -39,8 +36,7 @@ void BackgroundStreams::LoadStreams() {
   int size = s.beginReadArray("streams");
   for (int i = 0; i < size; ++i) {
     s.setArrayIndex(i);
-    AddStream(s.value("name").toString(),
-              s.value("url").toUrl(),
+    AddStream(s.value("name").toString(), s.value("url").toUrl(),
               s.value("volume").toInt());
   }
 
@@ -63,8 +59,7 @@ void BackgroundStreams::SaveStreams() {
   s.endArray();
 }
 
-void BackgroundStreams::AddStream(const QString& name,
-                                  const QUrl& url,
+void BackgroundStreams::AddStream(const QString& name, const QUrl& url,
                                   int volume) {
   if (streams_.contains(name)) {
     return;
@@ -134,7 +129,8 @@ bool BackgroundStreams::IsPlaying(const QString& name) const {
 
 void BackgroundStreams::AddAction(const QString& name, QAction* action) {
   if (!streams_.contains(name)) {
-    qLog(Error) << "Tried to add action for stream" << name << "which doesn't exist";
+    qLog(Error) << "Tried to add action for stream" << name
+                << "which doesn't exist";
     return;
   }
 
@@ -156,7 +152,7 @@ void BackgroundStreams::StreamActionDestroyed() {
     return;
   }
 
-  foreach (Stream* stream, streams_.values()) {
+  foreach(Stream * stream, streams_.values()) {
     if (stream->action == action) {
       stream->action = nullptr;
     }
@@ -169,7 +165,7 @@ void BackgroundStreams::StreamActionToggled(bool checked) {
     return;
   }
 
-  foreach (Stream* stream, streams_.values()) {
+  foreach(Stream * stream, streams_.values()) {
     if (stream->action == action) {
       EnableStream(stream->name, checked);
     }

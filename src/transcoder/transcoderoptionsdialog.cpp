@@ -25,22 +25,34 @@
 #include "transcoderoptionswma.h"
 #include "ui_transcoderoptionsdialog.h"
 
-TranscoderOptionsDialog::TranscoderOptionsDialog(Song::FileType type, QWidget* parent)
-  : QDialog(parent),
-    ui_(new Ui_TranscoderOptionsDialog),
-    options_(nullptr)
-{
+TranscoderOptionsDialog::TranscoderOptionsDialog(Song::FileType type,
+                                                 QWidget* parent)
+    : QDialog(parent), ui_(new Ui_TranscoderOptionsDialog), options_(nullptr) {
   ui_->setupUi(this);
 
   switch (type) {
     case Song::Type_Flac:
-    case Song::Type_OggFlac:   options_ = new TranscoderOptionsFlac(this);   break;
-    case Song::Type_Mp4:       options_ = new TranscoderOptionsAAC(this);    break;
-    case Song::Type_Mpeg:      options_ = new TranscoderOptionsMP3(this);    break;
-    case Song::Type_OggVorbis: options_ = new TranscoderOptionsVorbis(this); break;
-    case Song::Type_OggOpus:   options_ = new TranscoderOptionsOpus(this);   break;
-    case Song::Type_OggSpeex:  options_ = new TranscoderOptionsSpeex(this);  break;
-    case Song::Type_Asf:       options_ = new TranscoderOptionsWma(this);    break;
+    case Song::Type_OggFlac:
+      options_ = new TranscoderOptionsFlac(this);
+      break;
+    case Song::Type_Mp4:
+      options_ = new TranscoderOptionsAAC(this);
+      break;
+    case Song::Type_Mpeg:
+      options_ = new TranscoderOptionsMP3(this);
+      break;
+    case Song::Type_OggVorbis:
+      options_ = new TranscoderOptionsVorbis(this);
+      break;
+    case Song::Type_OggOpus:
+      options_ = new TranscoderOptionsOpus(this);
+      break;
+    case Song::Type_OggSpeex:
+      options_ = new TranscoderOptionsSpeex(this);
+      break;
+    case Song::Type_Asf:
+      options_ = new TranscoderOptionsWma(this);
+      break;
     default:
       break;
   }
@@ -53,9 +65,7 @@ TranscoderOptionsDialog::TranscoderOptionsDialog(Song::FileType type, QWidget* p
   }
 }
 
-TranscoderOptionsDialog::~TranscoderOptionsDialog() {
-  delete ui_;
-}
+TranscoderOptionsDialog::~TranscoderOptionsDialog() { delete ui_; }
 
 void TranscoderOptionsDialog::showEvent(QShowEvent* e) {
   if (options_) {
@@ -69,4 +79,3 @@ void TranscoderOptionsDialog::accept() {
   }
   QDialog::accept();
 }
-

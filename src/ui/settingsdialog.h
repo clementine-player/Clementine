@@ -39,22 +39,22 @@ class Ui_SettingsDialog;
 
 class GstEngine;
 
-
 class SettingsItemDelegate : public QStyledItemDelegate {
-public:
+ public:
   SettingsItemDelegate(QObject* parent);
 
-  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  QSize sizeHint(const QStyleOptionViewItem& option,
+                 const QModelIndex& index) const;
   void paint(QPainter* painter, const QStyleOptionViewItem& option,
              const QModelIndex& index) const;
 };
 
-
 class SettingsDialog : public QDialog {
   Q_OBJECT
 
-public:
-  SettingsDialog(Application* app, BackgroundStreams* streams, QWidget* parent = 0);
+ public:
+  SettingsDialog(Application* app, BackgroundStreams* streams,
+                 QWidget* parent = 0);
   ~SettingsDialog();
 
   enum Page {
@@ -86,11 +86,11 @@ public:
     Page_Box,
   };
 
-  enum Role {
-    Role_IsSeparator = Qt::UserRole
-  };
+  enum Role { Role_IsSeparator = Qt::UserRole };
 
-  void SetGlobalShortcutManager(GlobalShortcuts* manager) { manager_ = manager; }
+  void SetGlobalShortcutManager(GlobalShortcuts* manager) {
+    manager_ = manager;
+  }
   void SetSongInfoView(SongInfoView* view) { song_info_view_ = view; }
 
   bool is_loading_settings() const { return loading_settings_; }
@@ -117,11 +117,11 @@ signals:
   void NotificationPreview(OSD::Behaviour, QString, QString);
   void SetWiimotedevInterfaceActived(bool);
 
-private slots:
+ private slots:
   void CurrentItemChanged(QTreeWidgetItem* item);
   void DialogButtonClicked(QAbstractButton* button);
 
-private:
+ private:
   struct PageData {
     QTreeWidgetItem* item_;
     QScrollArea* scroll_area_;
@@ -133,7 +133,7 @@ private:
 
   void Save();
 
-private:
+ private:
   Application* app_;
   LibraryDirectoryModel* model_;
   GlobalShortcuts* manager_;
@@ -149,4 +149,4 @@ private:
   QMap<Page, PageData> pages_;
 };
 
-#endif // SETTINGSDIALOG_H
+#endif  // SETTINGSDIALOG_H

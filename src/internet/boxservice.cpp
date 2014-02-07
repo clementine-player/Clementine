@@ -17,37 +17,25 @@ namespace {
 static const char* kClientId = "gbswb9wp7gjyldc3qrw68h2rk68jaf4h";
 static const char* kClientSecret = "pZ6cUCQz5X0xaWoPVbCDg6GpmfTtz73s";
 
-static const char* kOAuthEndpoint =
-    "https://api.box.com/oauth2/authorize";
-static const char* kOAuthTokenEndpoint =
-    "https://api.box.com/oauth2/token";
+static const char* kOAuthEndpoint = "https://api.box.com/oauth2/authorize";
+static const char* kOAuthTokenEndpoint = "https://api.box.com/oauth2/token";
 
-static const char* kUserInfo =
-    "https://api.box.com/2.0/users/me";
-static const char* kFolderItems =
-    "https://api.box.com/2.0/folders/%1/items";
+static const char* kUserInfo = "https://api.box.com/2.0/users/me";
+static const char* kFolderItems = "https://api.box.com/2.0/folders/%1/items";
 static const int kRootFolderId = 0;
 
-static const char* kFileContent =
-    "https://api.box.com/2.0/files/%1/content";
+static const char* kFileContent = "https://api.box.com/2.0/files/%1/content";
 
-static const char* kEvents =
-    "https://api.box.com/2.0/events";
-
+static const char* kEvents = "https://api.box.com/2.0/events";
 }
 
 BoxService::BoxService(Application* app, InternetModel* parent)
-    : CloudFileService(
-        app, parent,
-        kServiceName, kSettingsGroup,
-        QIcon(":/providers/box.png"),
-        SettingsDialog::Page_Box) {
+    : CloudFileService(app, parent, kServiceName, kSettingsGroup,
+                       QIcon(":/providers/box.png"), SettingsDialog::Page_Box) {
   app->player()->RegisterUrlHandler(new BoxUrlHandler(this, this));
 }
 
-bool BoxService::has_credentials() const {
-  return !refresh_token().isEmpty();
-}
+bool BoxService::has_credentials() const { return !refresh_token().isEmpty(); }
 
 QString BoxService::refresh_token() const {
   QSettings s;
@@ -58,7 +46,7 @@ QString BoxService::refresh_token() const {
 
 bool BoxService::is_authenticated() const {
   return !access_token_.isEmpty() &&
-      QDateTime::currentDateTime().secsTo(expiry_time_) > 0;
+         QDateTime::currentDateTime().secsTo(expiry_time_) > 0;
 }
 
 void BoxService::EnsureConnected() {
@@ -74,17 +62,14 @@ void BoxService::Connect() {
   OAuthenticator* oauth = new OAuthenticator(
       kClientId, kClientSecret, OAuthenticator::RedirectStyle::REMOTE, this);
   if (!refresh_token().isEmpty()) {
-    oauth->RefreshAuthorisation(
-        kOAuthTokenEndpoint, refresh_token());
+    oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token());
   } else {
-    oauth->StartAuthorisation(
-        kOAuthEndpoint,
-        kOAuthTokenEndpoint,
-        QString::null);
+    oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint,
+                              QString::null);
   }
 
-  NewClosure(oauth, SIGNAL(Finished()),
-             this, SLOT(ConnectFinished(OAuthenticator*)), oauth);
+  NewClosure(oauth, SIGNAL(Finished()), this,
+             SLOT(ConnectFinished(OAuthenticator*)), oauth);
 }
 
 void BoxService::ConnectFinished(OAuthenticator* oauth) {
@@ -103,8 +88,8 @@ void BoxService::ConnectFinished(OAuthenticator* oauth) {
     AddAuthorizationHeader(&request);
 
     QNetworkReply* reply = network_->get(request);
-    NewClosure(reply, SIGNAL(finished()),
-               this, SLOT(FetchUserInfoFinished(QNetworkReply*)), reply);
+    NewClosure(reply, SIGNAL(finished()), this,
+               SLOT(FetchUserInfoFinished(QNetworkReply*)), reply);
   } else {
     emit Connected();
   }
@@ -112,8 +97,8 @@ void BoxService::ConnectFinished(OAuthenticator* oauth) {
 }
 
 void BoxService::AddAuthorizationHeader(QNetworkRequest* request) const {
-  request->setRawHeader(
-      "Authorization", QString("Bearer %1").arg(access_token_).toUtf8());
+  request->setRawHeader("Authorization",
+                        QString("Bearer %1").arg(access_token_).toUtf8());
 }
 
 void BoxService::FetchUserInfoFinished(QNetworkReply* reply) {
@@ -161,8 +146,8 @@ void BoxService::InitialiseEventsCursor() {
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(InitialiseEventsFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(InitialiseEventsFinished(QNetworkReply*)), reply);
 }
 
 void BoxService::InitialiseEventsFinished(QNetworkReply* reply) {
@@ -176,7 +161,8 @@ void BoxService::InitialiseEventsFinished(QNetworkReply* reply) {
   }
 }
 
-void BoxService::FetchRecursiveFolderItems(const int folder_id, const int offset) {
+void BoxService::FetchRecursiveFolderItems(const int folder_id,
+                                           const int offset) {
   QUrl url(QString(kFolderItems).arg(folder_id));
   QStringList fields;
   fields << "etag"
@@ -191,13 +177,13 @@ void BoxService::FetchRecursiveFolderItems(const int folder_id, const int offset
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(FetchFolderItemsFinished(QNetworkReply*, int)),
-             reply, folder_id);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(FetchFolderItemsFinished(QNetworkReply*, int)), reply,
+             folder_id);
 }
 
-void BoxService::FetchFolderItemsFinished(
-    QNetworkReply* reply, const int folder_id) {
+void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
+                                          const int folder_id) {
   reply->deleteLater();
 
   QByteArray data = reply->readAll();
@@ -213,7 +199,7 @@ void BoxService::FetchFolderItemsFinished(
     FetchRecursiveFolderItems(folder_id, offset + entries.size());
   }
 
-  foreach (const QVariant& e, entries) {
+  foreach(const QVariant & e, entries) {
     QVariantMap entry = e.toMap();
     if (entry["type"].toString() == "folder") {
       FetchRecursiveFolderItems(entry["id"].toInt());
@@ -238,9 +224,9 @@ void BoxService::MaybeAddFileEntry(const QVariantMap& entry) {
 
   // This is actually a redirect. Follow it now.
   QNetworkReply* reply = FetchContentUrlForFile(entry["id"].toString());
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(RedirectFollowed(QNetworkReply*, Song, QString)),
-             reply, song, mime_type);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RedirectFollowed(QNetworkReply*, Song, QString)), reply, song,
+             mime_type);
 }
 
 QNetworkReply* BoxService::FetchContentUrlForFile(const QString& file_id) {
@@ -251,20 +237,18 @@ QNetworkReply* BoxService::FetchContentUrlForFile(const QString& file_id) {
   return reply;
 }
 
-void BoxService::RedirectFollowed(
-    QNetworkReply* reply, const Song& song, const QString& mime_type) {
+void BoxService::RedirectFollowed(QNetworkReply* reply, const Song& song,
+                                  const QString& mime_type) {
   reply->deleteLater();
-  QVariant redirect = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+  QVariant redirect =
+      reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
   if (!redirect.isValid()) {
     return;
   }
 
   QUrl real_url = redirect.toUrl();
-  MaybeAddFileToDatabase(
-      song,
-      mime_type,
-      real_url,
-      QString("Bearer %1").arg(access_token_));
+  MaybeAddFileToDatabase(song, mime_type, real_url,
+                         QString("Bearer %1").arg(access_token_));
 }
 
 void BoxService::UpdateFilesFromCursor(const QString& cursor) {
@@ -274,8 +258,8 @@ void BoxService::UpdateFilesFromCursor(const QString& cursor) {
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(FetchEventsFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(FetchEventsFinished(QNetworkReply*)), reply);
 }
 
 void BoxService::FetchEventsFinished(QNetworkReply* reply) {
@@ -289,7 +273,7 @@ void BoxService::FetchEventsFinished(QNetworkReply* reply) {
   s.setValue("cursor", response["next_stream_position"]);
 
   QVariantList entries = response["entries"].toList();
-  foreach (const QVariant& e, entries) {
+  foreach(const QVariant & e, entries) {
     QVariantMap event = e.toMap();
     QString type = event["event_type"].toString();
     QVariantMap source = event["source"].toMap();

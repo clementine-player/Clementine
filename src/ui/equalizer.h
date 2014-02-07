@@ -29,7 +29,7 @@ class Equalizer : public QDialog {
   Q_OBJECT
 
  public:
-  Equalizer(QWidget *parent = 0);
+  Equalizer(QWidget* parent = 0);
   ~Equalizer();
 
   static const int kBands = 10;
@@ -41,8 +41,8 @@ class Equalizer : public QDialog {
     Params(int g0, int g1, int g2, int g3, int g4, int g5, int g6, int g7,
            int g8, int g9, int pre = 0);
 
-    bool operator ==(const Params& other) const;
-    bool operator !=(const Params& other) const;
+    bool operator==(const Params& other) const;
+    bool operator!=(const Params& other) const;
 
     int preamp;
     int gain[kBands];
@@ -54,13 +54,13 @@ class Equalizer : public QDialog {
   Params current_params() const;
   float stereo_balance() const;
 
- signals:
+signals:
   void EnabledChanged(bool enabled);
   void ParametersChanged(int preamp, const QList<int>& band_gains);
   void StereoBalanceChanged(float balance);
 
  protected:
-  void closeEvent(QCloseEvent *);
+  void closeEvent(QCloseEvent*);
 
  private slots:
   void ParametersChanged();
@@ -91,7 +91,7 @@ class Equalizer : public QDialog {
 };
 Q_DECLARE_METATYPE(Equalizer::Params);
 
-QDataStream &operator<<(QDataStream& s, const Equalizer::Params& p);
-QDataStream &operator>>(QDataStream& s, Equalizer::Params& p);
+QDataStream& operator<<(QDataStream& s, const Equalizer::Params& p);
+QDataStream& operator>>(QDataStream& s, Equalizer::Params& p);
 
-#endif // EQUALIZER_H
+#endif  // EQUALIZER_H

@@ -29,7 +29,7 @@ class IcecastBackend;
 class IcecastModel : public SimpleTreeModel<IcecastItem> {
   Q_OBJECT
 
-public:
+ public:
   IcecastModel(IcecastBackend* backend, QObject* parent = 0);
   ~IcecastModel();
 
@@ -40,39 +40,38 @@ public:
     SortMode_StationAlphabetical = 2,
   };
 
-  enum Role {
-    Role_IsDivider = LibraryModel::Role_IsDivider,
-  };
+  enum Role { Role_IsDivider = LibraryModel::Role_IsDivider, };
 
   IcecastBackend* backend() const { return backend_; }
 
   Song GetSong(const QModelIndex& index) const;
 
   // QAbstractItemModel
-  QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
   Qt::ItemFlags flags(const QModelIndex& index) const;
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;
 
-public slots:
+ public slots:
   void Init();
   void Reset();
 
   void SetFilterText(const QString& filter);
   void SetSortMode(SortMode mode);
 
-protected:
+ protected:
   void LazyPopulate(IcecastItem* parent);
 
-private:
+ private:
   QVariant data(const IcecastItem* item, int role) const;
-  void PopulateGenre(IcecastItem* parent, const QString& genre, bool create_dividers);
+  void PopulateGenre(IcecastItem* parent, const QString& genre,
+                     bool create_dividers);
   void AddGenres(const QStringList& genres, bool create_dividers);
 
   static QChar DividerKey(const QString& text);
   static QString DividerDisplayText(const QChar& key);
 
-private:
+ private:
   IcecastBackend* backend_;
 
   QString filter_;
@@ -82,4 +81,4 @@ private:
   QIcon station_icon_;
 };
 
-#endif // ICECASTMODEL_H
+#endif  // ICECASTMODEL_H

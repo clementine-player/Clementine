@@ -48,25 +48,24 @@ const int GlobalSearchView::kMaxSuggestions = 10;
 const int GlobalSearchView::kUpdateSuggestionsTimeoutMsec = 60 * kMsecPerSec;
 
 GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
-  : QWidget(parent),
-    app_(app),
-    engine_(app_->global_search()),
-    ui_(new Ui_GlobalSearchView),
-    context_menu_(nullptr),
-    last_search_id_(0),
-    front_model_(new GlobalSearchModel(engine_, this)),
-    back_model_(new GlobalSearchModel(engine_, this)),
-    current_model_(front_model_),
-    front_proxy_(new GlobalSearchSortModel(this)),
-    back_proxy_(new GlobalSearchSortModel(this)),
-    current_proxy_(front_proxy_),
-    swap_models_timer_(new QTimer(this)),
-    update_suggestions_timer_(new QTimer(this)),
-    search_icon_(IconLoader::Load("search")),
-    warning_icon_(IconLoader::Load("dialog-warning")),
-    show_providers_(true),
-    show_suggestions_(true)
-{
+    : QWidget(parent),
+      app_(app),
+      engine_(app_->global_search()),
+      ui_(new Ui_GlobalSearchView),
+      context_menu_(nullptr),
+      last_search_id_(0),
+      front_model_(new GlobalSearchModel(engine_, this)),
+      back_model_(new GlobalSearchModel(engine_, this)),
+      current_model_(front_model_),
+      front_proxy_(new GlobalSearchSortModel(this)),
+      back_proxy_(new GlobalSearchSortModel(this)),
+      current_proxy_(front_proxy_),
+      swap_models_timer_(new QTimer(this)),
+      update_suggestions_timer_(new QTimer(this)),
+      search_icon_(IconLoader::Load("search")),
+      warning_icon_(IconLoader::Load("dialog-warning")),
+      show_providers_(true),
+      show_suggestions_(true) {
   ui_->setupUi(this);
 
   front_model_->set_proxy(front_proxy_);
@@ -78,11 +77,14 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   ui_->settings->setIcon(IconLoader::Load("configure"));
 
   // Must be a queued connection to ensure the GlobalSearch handles it first.
-  connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()), Qt::QueuedConnection);
+  connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()),
+          Qt::QueuedConnection);
 
   connect(ui_->search, SIGNAL(textChanged(QString)), SLOT(TextEdited(QString)));
-  connect(ui_->results, SIGNAL(AddToPlaylistSignal(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
-  connect(ui_->results, SIGNAL(FocusOnFilterSignal(QKeyEvent*)), SLOT(FocusOnFilter(QKeyEvent*)));
+  connect(ui_->results, SIGNAL(AddToPlaylistSignal(QMimeData*)),
+          SIGNAL(AddToPlaylist(QMimeData*)));
+  connect(ui_->results, SIGNAL(FocusOnFilterSignal(QKeyEvent*)),
+          SLOT(FocusOnFilter(QKeyEvent*)));
 
   // Set the appearance of the results list
   ui_->results->setItemDelegate(new GlobalSearchItemDelegate(this));
@@ -101,15 +103,17 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
 
   // Set the colour of the help text to the disabled text colour
   QPalette help_palette = ui_->help_text->palette();
-  const QColor help_color = help_palette.color(QPalette::Disabled, QPalette::Text);
+  const QColor help_color =
+      help_palette.color(QPalette::Disabled, QPalette::Text);
   help_palette.setColor(QPalette::Normal, QPalette::Text, help_color);
   help_palette.setColor(QPalette::Inactive, QPalette::Text, help_color);
   ui_->help_text->setPalette(help_palette);
 
   // Create suggestion widgets
-  for (int i=0 ; i<kMaxSuggestions ; ++i) {
+  for (int i = 0; i < kMaxSuggestions; ++i) {
     SuggestionWidget* widget = new SuggestionWidget(search_icon_);
-    connect(widget, SIGNAL(SuggestionClicked(QString)), SLOT(StartSearch(QString)));
+    connect(widget, SIGNAL(SuggestionClicked(QString)),
+            SLOT(StartSearch(QString)));
     suggestions_layout->addWidget(widget);
     suggestion_widgets_ << widget;
   }
@@ -133,7 +137,8 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   connect(swap_models_timer_, SIGNAL(timeout()), SLOT(SwapModels()));
 
   update_suggestions_timer_->setInterval(kUpdateSuggestionsTimeoutMsec);
-  connect(update_suggestions_timer_, SIGNAL(timeout()), SLOT(UpdateSuggestions()));
+  connect(update_suggestions_timer_, SIGNAL(timeout()),
+          SLOT(UpdateSuggestions()));
 
   // Add actions to the settings menu
   group_by_actions_ = LibraryFilterWidget::CreateGroupByActions(this);
@@ -141,41 +146,41 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   settings_menu->addActions(group_by_actions_->actions());
   settings_menu->addSeparator();
   settings_menu->addAction(IconLoader::Load("configure"),
-      tr("Configure global search..."), this, SLOT(OpenSettingsDialog()));
+                           tr("Configure global search..."), this,
+                           SLOT(OpenSettingsDialog()));
   ui_->settings->setMenu(settings_menu);
 
-  connect(group_by_actions_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
+  connect(group_by_actions_, SIGNAL(triggered(QAction*)),
+          SLOT(GroupByClicked(QAction*)));
 
   // These have to be queued connections because they may get emitted before
   // our call to Search() (or whatever) returns and we add the ID to the map.
-  connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
-          SLOT(AddResults(int,SearchProvider::ResultList)),
+  connect(engine_, SIGNAL(ResultsAvailable(int, SearchProvider::ResultList)),
+          SLOT(AddResults(int, SearchProvider::ResultList)),
           Qt::QueuedConnection);
-  connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)),
-          Qt::QueuedConnection);
+  connect(engine_, SIGNAL(ArtLoaded(int, QPixmap)),
+          SLOT(ArtLoaded(int, QPixmap)), Qt::QueuedConnection);
 }
 
-GlobalSearchView::~GlobalSearchView() {
-  delete ui_;
-}
+GlobalSearchView::~GlobalSearchView() { delete ui_; }
 
 namespace {
-  bool CompareProvider(const QStringList& provider_order,
-                       SearchProvider* left, SearchProvider* right) {
-    const int left_index = provider_order.indexOf(left->id());
-    const int right_index = provider_order.indexOf(right->id());
-    if (left_index == -1 && right_index == -1) {
-      // None are in our provider list: compare name instead
-      return left->name() < right->name();
-    } else if (left_index == -1) {
-      // Left provider not in provider list
-      return false;
-    } else if (right_index == -1) {
-      // Right provider not in provider list
-      return true;
-    }
-    return left_index < right_index;
+bool CompareProvider(const QStringList& provider_order, SearchProvider* left,
+                     SearchProvider* right) {
+  const int left_index = provider_order.indexOf(left->id());
+  const int right_index = provider_order.indexOf(right->id());
+  if (left_index == -1 && right_index == -1) {
+    // None are in our provider list: compare name instead
+    return left->name() < right->name();
+  } else if (left_index == -1) {
+    // Left provider not in provider list
+    return false;
+  } else if (right_index == -1) {
+    // Right provider not in provider list
+    return true;
   }
+  return left_index < right_index;
+}
 }
 
 void GlobalSearchView::ReloadSettings() {
@@ -197,9 +202,12 @@ void GlobalSearchView::ReloadSettings() {
   show_providers_ = s.value("show_providers", true).toBool();
   show_suggestions_ = s.value("show_suggestions", true).toBool();
   SetGroupBy(LibraryModel::Grouping(
-      LibraryModel::GroupBy(s.value("group_by1", int(LibraryModel::GroupBy_Artist)).toInt()),
-      LibraryModel::GroupBy(s.value("group_by2", int(LibraryModel::GroupBy_Album)).toInt()),
-      LibraryModel::GroupBy(s.value("group_by3", int(LibraryModel::GroupBy_None)).toInt())));
+      LibraryModel::GroupBy(
+          s.value("group_by1", int(LibraryModel::GroupBy_Artist)).toInt()),
+      LibraryModel::GroupBy(
+          s.value("group_by2", int(LibraryModel::GroupBy_Album)).toInt()),
+      LibraryModel::GroupBy(
+          s.value("group_by3", int(LibraryModel::GroupBy_None)).toInt())));
   s.endGroup();
 
   // Delete any old status widgets
@@ -217,7 +225,7 @@ void GlobalSearchView::ReloadSettings() {
 
     bool any_disabled = false;
 
-    foreach (SearchProvider* provider, providers) {
+    foreach(SearchProvider * provider, providers) {
       QWidget* parent = ui_->enabled_list;
       if (!engine_->is_provider_usable(provider)) {
         parent = ui_->disabled_list;
@@ -243,12 +251,12 @@ void GlobalSearchView::ReloadSettings() {
 void GlobalSearchView::UpdateSuggestions() {
   const QStringList suggestions = engine_->GetSuggestions(kMaxSuggestions);
 
-  for (int i=0 ; i<suggestions.count() ; ++i) {
+  for (int i = 0; i < suggestions.count(); ++i) {
     suggestion_widgets_[i]->SetText(suggestions[i]);
     suggestion_widgets_[i]->show();
   }
 
-  for (int i=suggestions.count() ; i<kMaxSuggestions ; ++i) {
+  for (int i = suggestions.count(); i < kMaxSuggestions; ++i) {
     suggestion_widgets_[i]->hide();
   }
 }
@@ -281,9 +289,9 @@ void GlobalSearchView::TextEdited(const QString& text) {
   }
 }
 
-void GlobalSearchView::AddResults(int id, const SearchProvider::ResultList& results) {
-  if (id != last_search_id_ || results.isEmpty())
-    return;
+void GlobalSearchView::AddResults(int id,
+                                  const SearchProvider::ResultList& results) {
+  if (id != last_search_id_ || results.isEmpty()) return;
 
   current_model_->AddResults(results);
 }
@@ -320,7 +328,7 @@ void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
 
   // Is this an album?
   const LibraryModel::GroupBy container_type = LibraryModel::GroupBy(
-        proxy_index.data(LibraryModel::Role_ContainerType).toInt());
+      proxy_index.data(LibraryModel::Role_ContainerType).toInt());
   if (container_type != LibraryModel::GroupBy_Album &&
       container_type != LibraryModel::GroupBy_AlbumArtist &&
       container_type != LibraryModel::GroupBy_YearAlbum) {
@@ -339,7 +347,8 @@ void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
 
   // Get the track's Result
   const SearchProvider::Result result =
-      item->data(GlobalSearchModel::Role_Result).value<SearchProvider::Result>();
+      item->data(GlobalSearchModel::Role_Result)
+          .value<SearchProvider::Result>();
 
   // Load the art.
   int id = engine_->LoadArtAsync(result);
@@ -347,8 +356,7 @@ void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
 }
 
 void GlobalSearchView::ArtLoaded(int id, const QPixmap& pixmap) {
-  if (!art_requests_.contains(id))
-    return;
+  if (!art_requests_.contains(id)) return;
   QModelIndex index = art_requests_.take(id);
 
   if (!pixmap.isNull()) {
@@ -357,15 +365,14 @@ void GlobalSearchView::ArtLoaded(int id, const QPixmap& pixmap) {
 }
 
 MimeData* GlobalSearchView::SelectedMimeData() {
-  if (!ui_->results->selectionModel())
-    return nullptr;
+  if (!ui_->results->selectionModel()) return nullptr;
 
   // Get all selected model indexes
   QModelIndexList indexes = ui_->results->selectionModel()->selectedRows();
   if (indexes.isEmpty()) {
     // There's nothing selected - take the first thing in the model that isn't
     // a divider.
-    for (int i=0 ; i<front_proxy_->rowCount() ; ++i) {
+    for (int i = 0; i < front_proxy_->rowCount(); ++i) {
       QModelIndex index = front_proxy_->index(i, 0);
       if (!index.data(LibraryModel::Role_IsDivider).toBool()) {
         indexes << index;
@@ -382,7 +389,7 @@ MimeData* GlobalSearchView::SelectedMimeData() {
 
   // Get items for these indexes
   QList<QStandardItem*> items;
-  foreach (const QModelIndex& index, indexes) {
+  foreach(const QModelIndex & index, indexes) {
     items << (front_model_->itemFromIndex(front_proxy_->mapToSource(index)));
   }
 
@@ -395,7 +402,8 @@ bool GlobalSearchView::eventFilter(QObject* object, QEvent* event) {
     if (SearchKeyEvent(static_cast<QKeyEvent*>(event))) {
       return true;
     }
-  } else if (object == ui_->results_stack && event->type() == QEvent::ContextMenu) {
+  } else if (object == ui_->results_stack &&
+             event->type() == QEvent::ContextMenu) {
     if (ResultsContextMenuEvent(static_cast<QContextMenuEvent*>(event))) {
       return true;
     }
@@ -406,24 +414,24 @@ bool GlobalSearchView::eventFilter(QObject* object, QEvent* event) {
 
 bool GlobalSearchView::SearchKeyEvent(QKeyEvent* event) {
   switch (event->key()) {
-  case Qt::Key_Up:
-    ui_->results->UpAndFocus();
-    break;
+    case Qt::Key_Up:
+      ui_->results->UpAndFocus();
+      break;
 
-  case Qt::Key_Down:
-    ui_->results->DownAndFocus();
-    break;
+    case Qt::Key_Down:
+      ui_->results->DownAndFocus();
+      break;
 
-  case Qt::Key_Escape:
-    ui_->search->clear();
-    break;
+    case Qt::Key_Escape:
+      ui_->search->clear();
+      break;
 
-  case Qt::Key_Return:
-    AddSelectedToPlaylist();
-    break;
+    case Qt::Key_Return:
+      AddSelectedToPlaylist();
+      break;
 
-  default:
-    return false;
+    default:
+      return false;
   }
 
   event->accept();
@@ -433,28 +441,37 @@ bool GlobalSearchView::SearchKeyEvent(QKeyEvent* event) {
 bool GlobalSearchView::ResultsContextMenuEvent(QContextMenuEvent* event) {
   if (!context_menu_) {
     context_menu_ = new QMenu(this);
-    context_actions_ << context_menu_->addAction(IconLoader::Load("media-playback-start"),
-        tr("Append to current playlist"), this, SLOT(AddSelectedToPlaylist()));
-    context_actions_ << context_menu_->addAction(IconLoader::Load("media-playback-start"),
-        tr("Replace current playlist"), this, SLOT(LoadSelected()));
-    context_actions_ << context_menu_->addAction(IconLoader::Load("document-new"),
-        tr("Open in new playlist"), this, SLOT(OpenSelectedInNewPlaylist()));
+    context_actions_ << context_menu_->addAction(
+                            IconLoader::Load("media-playback-start"),
+                            tr("Append to current playlist"), this,
+                            SLOT(AddSelectedToPlaylist()));
+    context_actions_ << context_menu_->addAction(
+                            IconLoader::Load("media-playback-start"),
+                            tr("Replace current playlist"), this,
+                            SLOT(LoadSelected()));
+    context_actions_ << context_menu_->addAction(
+                            IconLoader::Load("document-new"),
+                            tr("Open in new playlist"), this,
+                            SLOT(OpenSelectedInNewPlaylist()));
 
     context_menu_->addSeparator();
-    context_actions_ << context_menu_->addAction(IconLoader::Load("go-next"),
-        tr("Queue track"), this, SLOT(AddSelectedToPlaylistEnqueue()));
+    context_actions_ << context_menu_->addAction(
+                            IconLoader::Load("go-next"), tr("Queue track"),
+                            this, SLOT(AddSelectedToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
-    context_menu_->addMenu(tr("Group by"))->addActions(group_by_actions_->actions());
+    context_menu_->addMenu(tr("Group by"))
+        ->addActions(group_by_actions_->actions());
     context_menu_->addAction(IconLoader::Load("configure"),
-        tr("Configure global search..."), this, SLOT(OpenSettingsDialog()));
+                             tr("Configure global search..."), this,
+                             SLOT(OpenSettingsDialog()));
   }
 
   const bool enable_context_actions =
       ui_->results->selectionModel() &&
       ui_->results->selectionModel()->hasSelection();
 
-  foreach (QAction* action, context_actions_) {
+  foreach(QAction * action, context_actions_) {
     action->setEnabled(enable_context_actions);
   }
 
@@ -469,8 +486,7 @@ void GlobalSearchView::AddSelectedToPlaylist() {
 
 void GlobalSearchView::LoadSelected() {
   MimeData* data = SelectedMimeData();
-  if (!data)
-    return;
+  if (!data) return;
 
   data->clear_first_ = true;
   emit AddToPlaylist(data);
@@ -478,8 +494,7 @@ void GlobalSearchView::LoadSelected() {
 
 void GlobalSearchView::AddSelectedToPlaylistEnqueue() {
   MimeData* data = SelectedMimeData();
-  if (!data)
-    return;
+  if (!data) return;
 
   data->enqueue_now_ = true;
   emit AddToPlaylist(data);
@@ -487,8 +502,7 @@ void GlobalSearchView::AddSelectedToPlaylistEnqueue() {
 
 void GlobalSearchView::OpenSelectedInNewPlaylist() {
   MimeData* data = SelectedMimeData();
-  if (!data)
-    return;
+  if (!data) return;
 
   data->open_in_new_playlist_ = true;
   emit AddToPlaylist(data);
@@ -551,9 +565,8 @@ void GlobalSearchView::SetGroupBy(const LibraryModel::Grouping& g) {
   s.setValue("group_by3", int(g.third));
 
   // Make sure the correct action is checked.
-  foreach (QAction* action, group_by_actions_->actions()) {
-    if (action->property("group_by").isNull())
-      continue;
+  foreach(QAction * action, group_by_actions_->actions()) {
+    if (action->property("group_by").isNull()) continue;
 
     if (g == action->property("group_by").value<LibraryModel::Grouping>()) {
       action->setChecked(true);

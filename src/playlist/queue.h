@@ -25,7 +25,7 @@
 class Queue : public QAbstractProxyModel {
   Q_OBJECT
 
-public:
+ public:
   Queue(QObject* parent = 0);
 
   static const char* kRowsMimetype;
@@ -51,24 +51,27 @@ public:
   QModelIndex mapToSource(const QModelIndex& proxy_index) const;
 
   // QAbstractItemModel
-  QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-  QModelIndex parent(const QModelIndex &child) const;
-  int rowCount(const QModelIndex &parent = QModelIndex()) const;
-  int columnCount(const QModelIndex &parent = QModelIndex()) const;
+  QModelIndex index(int row, int column,
+                    const QModelIndex& parent = QModelIndex()) const;
+  QModelIndex parent(const QModelIndex& child) const;
+  int rowCount(const QModelIndex& parent = QModelIndex()) const;
+  int columnCount(const QModelIndex& parent = QModelIndex()) const;
   QVariant data(const QModelIndex& proxy_index, int role) const;
   QVariant headerData(int section, Qt::Orientation orientation, int role) const;
   QStringList mimeTypes() const;
   Qt::DropActions supportedDropActions() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;
-  bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
-  Qt::ItemFlags flags(const QModelIndex &index) const;
+  bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row,
+                    int column, const QModelIndex& parent);
+  Qt::ItemFlags flags(const QModelIndex& index) const;
 
-private slots:
-  void SourceDataChanged(const QModelIndex& top_left, const QModelIndex& bottom_right);
+ private slots:
+  void SourceDataChanged(const QModelIndex& top_left,
+                         const QModelIndex& bottom_right);
   void SourceLayoutChanged();
 
-private:
+ private:
   QList<QPersistentModelIndex> source_indexes_;
 };
 
-#endif // QUEUE_H
+#endif  // QUEUE_H

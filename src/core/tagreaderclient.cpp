@@ -24,24 +24,20 @@
 #include <QThread>
 #include <QUrl>
 
-
 const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
 TagReaderClient* TagReaderClient::sInstance = nullptr;
 
 TagReaderClient::TagReaderClient(QObject* parent)
-  : QObject(parent),
-    worker_pool_(new WorkerPool<HandlerType>(this))
-{
+    : QObject(parent), worker_pool_(new WorkerPool<HandlerType>(this)) {
   sInstance = this;
 
   worker_pool_->SetExecutableName(kWorkerExecutableName);
   worker_pool_->SetWorkerCount(QThread::idealThreadCount());
-  connect(worker_pool_, SIGNAL(WorkerFailedToStart()), SLOT(WorkerFailedToStart()));
+  connect(worker_pool_, SIGNAL(WorkerFailedToStart()),
+          SLOT(WorkerFailedToStart()));
 }
 
-void TagReaderClient::Start() {
-  worker_pool_->Start();
-}
+void TagReaderClient::Start() { worker_pool_->Start(); }
 
 void TagReaderClient::WorkerFailedToStart() {
   qLog(Error) << "The" << kWorkerExecutableName << "executable was not found"
@@ -58,7 +54,8 @@ TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {
   return worker_pool_->SendMessageWithReply(&message);
 }
 
-TagReaderReply* TagReaderClient::SaveFile(const QString& filename, const Song& metadata) {
+TagReaderReply* TagReaderClient::SaveFile(const QString& filename,
+                                          const Song& metadata) {
   pb::tagreader::Message message;
   pb::tagreader::SaveFileRequest* req = message.mutable_save_file_request();
 
@@ -80,7 +77,7 @@ TagReaderReply* TagReaderClient::UpdateSongStatistics(const Song& metadata) {
 }
 
 void TagReaderClient::UpdateSongsStatistics(const SongList& songs) {
-  foreach (const Song& song, songs) {
+  foreach(const Song & song, songs) {
     TagReaderReply* reply = UpdateSongStatistics(song);
     connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
   }
@@ -98,7 +95,7 @@ TagReaderReply* TagReaderClient::UpdateSongRating(const Song& metadata) {
 }
 
 void TagReaderClient::UpdateSongsRating(const SongList& songs) {
-  foreach (const Song& song, songs) {
+  foreach(const Song & song, songs) {
     TagReaderReply* reply = UpdateSongRating(song);
     connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
   }
@@ -106,7 +103,8 @@ void TagReaderClient::UpdateSongsRating(const SongList& songs) {
 
 TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
   pb::tagreader::Message message;
-  pb::tagreader::IsMediaFileRequest* req = message.mutable_is_media_file_request();
+  pb::tagreader::IsMediaFileRequest* req =
+      message.mutable_is_media_file_request();
 
   req->set_filename(DataCommaSizeFromQString(filename));
 
@@ -115,18 +113,17 @@ TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
 
 TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
   pb::tagreader::Message message;
-  pb::tagreader::LoadEmbeddedArtRequest* req = message.mutable_load_embedded_art_request();
+  pb::tagreader::LoadEmbeddedArtRequest* req =
+      message.mutable_load_embedded_art_request();
 
   req->set_filename(DataCommaSizeFromQString(filename));
 
   return worker_pool_->SendMessageWithReply(&message);
 }
 
-TagReaderReply* TagReaderClient::ReadCloudFile(const QUrl& download_url,
-                                               const QString& title,
-                                               int size,
-                                               const QString& mime_type,
-                                               const QString& authorisation_header) {
+TagReaderReply* TagReaderClient::ReadCloudFile(
+    const QUrl& download_url, const QString& title, int size,
+    const QString& mime_type, const QString& authorisation_header) {
   pb::tagreader::Message message;
   pb::tagreader::ReadCloudFileRequest* req =
       message.mutable_read_cloud_file_request();
@@ -151,7 +148,8 @@ void TagReaderClient::ReadFileBlocking(const QString& filename, Song* song) {
   reply->deleteLater();
 }
 
-bool TagReaderClient::SaveFileBlocking(const QString& filename, const Song& metadata) {
+bool TagReaderClient::SaveFileBlocking(const QString& filename,
+                                       const Song& metadata) {
   Q_ASSERT(QThread::currentThread() != thread());
 
   bool ret = false;

@@ -36,16 +36,14 @@ const QRgb FreeSpaceBar::kColorBar1 = qRgb(250, 148, 76);
 const QRgb FreeSpaceBar::kColorBar2 = qRgb(214, 102, 24);
 const QRgb FreeSpaceBar::kColorBorder = qRgb(174, 168, 162);
 
-
-FreeSpaceBar::FreeSpaceBar(QWidget *parent)
-  : QWidget(parent),
-    free_(100),
-    additional_(0),
-    total_(100),
-    free_text_(tr("Available")),
-    additional_text_(tr("New songs")),
-    used_text_(tr("Used"))
-{
+FreeSpaceBar::FreeSpaceBar(QWidget* parent)
+    : QWidget(parent),
+      free_(100),
+      additional_(0),
+      total_(100),
+      free_text_(tr("Available")),
+      additional_text_(tr("New songs")),
+      used_text_(tr("Used")) {
   setMinimumHeight(sizeHint().height());
 }
 
@@ -66,7 +64,8 @@ void FreeSpaceBar::paintEvent(QPaintEvent*) {
 
   // Draw the reflection
   // Create the reflected pixmap
-  QImage reflection(reflection_rect.size(), QImage::Format_ARGB32_Premultiplied);
+  QImage reflection(reflection_rect.size(),
+                    QImage::Format_ARGB32_Premultiplied);
   reflection.fill(palette().color(QPalette::Background).rgba());
   QPainter p(&reflection);
 
@@ -80,7 +79,8 @@ void FreeSpaceBar::paintEvent(QPaintEvent*) {
   DrawBar(&p, QRect(QPoint(0, 0), reflection.size()));
 
   // Make it fade out towards the bottom
-  QLinearGradient fade_gradient(reflection.rect().topLeft(), reflection.rect().bottomLeft());
+  QLinearGradient fade_gradient(reflection.rect().topLeft(),
+                                reflection.rect().bottomLeft());
   fade_gradient.setColorAt(0.0, QColor(0, 0, 0, 0));
   fade_gradient.setColorAt(1.0, QColor(0, 0, 0, 128));
 
@@ -125,10 +125,11 @@ void FreeSpaceBar::DrawBar(QPainter* p, const QRect& r) {
   if (additional_) {
     QRect additional_rect(bar_rect);
     additional_rect.setLeft(bar_rect.right());
-    additional_rect.setWidth(float(r.width()) * (
-        float(qMin(free_, additional_)) / total_) + 1);
+    additional_rect.setWidth(
+        float(r.width()) * (float(qMin(free_, additional_)) / total_) + 1);
 
-    QLinearGradient additional_gradient(additional_rect.topLeft(), additional_rect.bottomLeft());
+    QLinearGradient additional_gradient(additional_rect.topLeft(),
+                                        additional_rect.bottomLeft());
     additional_gradient.setColorAt(0, kColorAdd1);
     additional_gradient.setColorAt(1, kColorAdd2);
 
@@ -148,7 +149,7 @@ void FreeSpaceBar::DrawBar(QPainter* p, const QRect& r) {
   p->setOpacity(0.35);
   p->setRenderHint(QPainter::Antialiasing, false);
   p->setPen(QPen(palette().color(QPalette::Light), 1.0));
-  for (int x = r.left() + kMarkerSpacing ; x < r.right() ; x += kMarkerSpacing) {
+  for (int x = r.left() + kMarkerSpacing; x < r.right(); x += kMarkerSpacing) {
     p->drawLine(x, r.top() + 2, x, r.bottom() - 2);
   }
 
@@ -170,26 +171,30 @@ void FreeSpaceBar::DrawText(QPainter* p, const QRect& r) {
   labels << Label(TextForSize(free_text_, free_ - additional_), kColorBg2);
 
   int text_width = 0;
-  foreach (const Label& label, labels)
-    text_width += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing + small_metrics.width(label.text);
+  foreach(const Label & label, labels)
+  text_width += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing +
+                small_metrics.width(label.text);
 
   // Draw the text
   int x = (r.width() - text_width) / 2;
 
   p->setRenderHint(QPainter::Antialiasing, false);
-  foreach (const Label& label, labels) {
+  foreach(const Label & label, labels) {
     const bool light = palette().color(QPalette::Base).value() > 128;
 
-    QRect box(x, r.top() + (r.height() - kLabelBoxSize)/2, kLabelBoxSize, kLabelBoxSize);
+    QRect box(x, r.top() + (r.height() - kLabelBoxSize) / 2, kLabelBoxSize,
+              kLabelBoxSize);
     p->setPen(label.color.darker());
     p->setBrush(label.color);
     p->drawRect(box);
 
-    QRect text(x + kLabelBoxSize + kLabelBoxPadding, r.top(), small_metrics.width(label.text), r.height());
+    QRect text(x + kLabelBoxSize + kLabelBoxPadding, r.top(),
+               small_metrics.width(label.text), r.height());
     p->setPen(light ? label.color.darker() : label.color);
     p->drawText(text, Qt::AlignCenter, label.text);
 
-    x += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing + small_metrics.width(label.text);
+    x += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing +
+         small_metrics.width(label.text);
   }
 }
 
@@ -202,7 +207,6 @@ QString FreeSpaceBar::TextForSize(const QString& prefix, qint64 size) const {
   else
     ret = "0 MB";
 
-  if (!prefix.isEmpty())
-    ret.prepend(prefix + " ");
+  if (!prefix.isEmpty()) ret.prepend(prefix + " ");
   return ret;
 }

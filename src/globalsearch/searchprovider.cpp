@@ -26,13 +26,8 @@
 
 const int SearchProvider::kArtHeight = 32;
 
-
 SearchProvider::SearchProvider(Application* app, QObject* parent)
-  : QObject(parent),
-    app_(app),
-    hints_(0)
-{
-}
+    : QObject(parent), app_(app), hints_(0) {}
 
 void SearchProvider::Init(const QString& name, const QString& id,
                           const QIcon& icon, Hints hints) {
@@ -45,7 +40,7 @@ void SearchProvider::Init(const QString& name, const QString& id,
 QStringList SearchProvider::TokenizeQuery(const QString& query) {
   QStringList tokens(query.split(QRegExp("\\s+")));
 
-  for (QStringList::iterator it = tokens.begin() ; it != tokens.end() ; ++it) {
+  for (QStringList::iterator it = tokens.begin(); it != tokens.end(); ++it) {
     (*it).remove('(');
     (*it).remove(')');
     (*it).remove('"');
@@ -60,7 +55,7 @@ QStringList SearchProvider::TokenizeQuery(const QString& query) {
 }
 
 bool SearchProvider::Matches(const QStringList& tokens, const QString& string) {
-  foreach (const QString& token, tokens) {
+  foreach(const QString & token, tokens) {
     if (!string.contains(token, Qt::CaseInsensitive)) {
       return false;
     }
@@ -69,13 +64,13 @@ bool SearchProvider::Matches(const QStringList& tokens, const QString& string) {
   return true;
 }
 
-BlockingSearchProvider::BlockingSearchProvider(Application* app, QObject* parent)
-  : SearchProvider(app, parent) {
-}
+BlockingSearchProvider::BlockingSearchProvider(Application* app,
+                                               QObject* parent)
+    : SearchProvider(app, parent) {}
 
 void BlockingSearchProvider::SearchAsync(int id, const QString& query) {
-  QFuture<ResultList> future = QtConcurrent::run(
-      this, &BlockingSearchProvider::Search, id, query);
+  QFuture<ResultList> future =
+      QtConcurrent::run(this, &BlockingSearchProvider::Search, id, query);
 
   BoundFutureWatcher<ResultList, int>* watcher =
       new BoundFutureWatcher<ResultList, int>(id);
@@ -94,21 +89,19 @@ void BlockingSearchProvider::BlockingSearchFinished() {
 }
 
 QImage SearchProvider::ScaleAndPad(const QImage& image) {
-  if (image.isNull())
-    return QImage();
+  if (image.isNull()) return QImage();
 
   const QSize target_size = QSize(kArtHeight, kArtHeight);
 
-  if (image.size() == target_size)
-    return image;
+  if (image.size() == target_size) return image;
 
   // Scale the image down
   QImage copy;
-  copy = image.scaled(target_size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  copy =
+      image.scaled(target_size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
   // Pad the image to kHeight x kHeight
-  if (copy.size() == target_size)
-    return copy;
+  if (copy.size() == target_size) return copy;
 
   QImage padded_image(kArtHeight, kArtHeight, QImage::Format_ARGB32);
   padded_image.fill(0);
@@ -132,12 +125,11 @@ MimeData* SearchProvider::LoadTracks(const ResultList& results) {
     mime_data = new MimeData;
   } else {
     SongList songs;
-    foreach (const Result& result, results) {
-      songs << result.metadata_;
-    }
+    foreach(const Result & result, results) { songs << result.metadata_; }
 
     if (internet_service()) {
-      InternetSongMimeData* internet_song_mime_data = new InternetSongMimeData(internet_service());
+      InternetSongMimeData* internet_song_mime_data =
+          new InternetSongMimeData(internet_service());
       internet_song_mime_data->songs = songs;
       mime_data = internet_song_mime_data;
     } else {
@@ -148,9 +140,7 @@ MimeData* SearchProvider::LoadTracks(const ResultList& results) {
   }
 
   QList<QUrl> urls;
-  foreach (const Result& result, results) {
-    urls << result.metadata_.url();
-  }
+  foreach(const Result & result, results) { urls << result.metadata_.url(); }
   mime_data->setUrls(urls);
 
   return mime_data;

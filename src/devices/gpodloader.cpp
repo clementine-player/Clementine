@@ -27,21 +27,19 @@
 #include <QDir>
 #include <QtDebug>
 
-GPodLoader::GPodLoader(
-    const QString& mount_point, TaskManager* task_manager,
-    LibraryBackend* backend, std::shared_ptr<ConnectedDevice> device)
-  : QObject(nullptr),
-    device_(device),
-    mount_point_(mount_point),
-    type_(Song::Type_Unknown),
-    task_manager_(task_manager),
-    backend_(backend)
-{
+GPodLoader::GPodLoader(const QString& mount_point, TaskManager* task_manager,
+                       LibraryBackend* backend,
+                       std::shared_ptr<ConnectedDevice> device)
+    : QObject(nullptr),
+      device_(device),
+      mount_point_(mount_point),
+      type_(Song::Type_Unknown),
+      task_manager_(task_manager),
+      backend_(backend) {
   original_thread_ = thread();
 }
 
-GPodLoader::~GPodLoader() {
-}
+GPodLoader::~GPodLoader() {}
 
 void GPodLoader::LoadDatabase() {
   int task_id = task_manager_->StartTask(tr("Loading iPod database"));
@@ -49,8 +47,8 @@ void GPodLoader::LoadDatabase() {
 
   // Load the iTunes database
   GError* error = nullptr;
-  Itdb_iTunesDB* db = itdb_parse(
-      QDir::toNativeSeparators(mount_point_).toLocal8Bit(), &error);
+  Itdb_iTunesDB* db =
+      itdb_parse(QDir::toNativeSeparators(mount_point_).toLocal8Bit(), &error);
 
   // Check for errors
   if (!db) {
@@ -68,18 +66,18 @@ void GPodLoader::LoadDatabase() {
 
   // Convert all the tracks from libgpod structs into Song classes
   const QString prefix = path_prefix_.isEmpty()
-      ? QDir::fromNativeSeparators(mount_point_) : path_prefix_;
+                             ? QDir::fromNativeSeparators(mount_point_)
+                             : path_prefix_;
 
   SongList songs;
-  for (GList* tracks = db->tracks ; tracks != nullptr ; tracks = tracks->next) {
+  for (GList* tracks = db->tracks; tracks != nullptr; tracks = tracks->next) {
     Itdb_Track* track = static_cast<Itdb_Track*>(tracks->data);
 
     Song song;
     song.InitFromItdb(track, prefix);
     song.set_directory_id(1);
 
-    if (type_ != Song::Type_Unknown)
-      song.set_filetype(type_);
+    if (type_ != Song::Type_Unknown) song.set_filetype(type_);
     songs << song;
   }
 

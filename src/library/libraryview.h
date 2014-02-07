@@ -32,18 +32,21 @@ class OrganiseDialog;
 
 class QMimeData;
 
-namespace smart_playlists { class Wizard; }
+namespace smart_playlists {
+class Wizard;
+}
 
 class LibraryItemDelegate : public QStyledItemDelegate {
   Q_OBJECT
 
-public:
+ public:
   LibraryItemDelegate(QObject* parent);
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option,
+             const QModelIndex& index) const;
 
-public slots:
-  bool helpEvent(QHelpEvent *event, QAbstractItemView *view,
-                 const QStyleOptionViewItem &option, const QModelIndex &index);
+ public slots:
+  bool helpEvent(QHelpEvent* event, QAbstractItemView* view,
+                 const QStyleOptionViewItem& option, const QModelIndex& index);
 };
 
 class LibraryView : public AutoExpandingTreeView {
@@ -64,7 +67,7 @@ class LibraryView : public AutoExpandingTreeView {
   void SetFilter(LibraryFilterWidget* filter);
 
   // QTreeView
-  void keyboardSearch(const QString &search);
+  void keyboardSearch(const QString& search);
   void scrollTo(const QModelIndex& index, ScrollHint hint = EnsureVisible);
 
  public slots:
@@ -76,7 +79,7 @@ class LibraryView : public AutoExpandingTreeView {
   void SaveFocus();
   void RestoreFocus();
 
- signals:
+signals:
   void ShowConfigDialog();
 
  protected:
@@ -151,4 +154,4 @@ class LibraryView : public AutoExpandingTreeView {
   QSet<QString> last_selected_path_;
 };
 
-#endif // LIBRARYVIEW_H
+#endif  // LIBRARYVIEW_H

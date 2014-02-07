@@ -24,17 +24,15 @@
 #include "covers/albumcoverloader.h"
 #include "internet/soundcloudservice.h"
 
-SoundCloudSearchProvider::SoundCloudSearchProvider(Application* app, QObject* parent)
-    : SearchProvider(app, parent),
-      service_(nullptr)
-{
-}
+SoundCloudSearchProvider::SoundCloudSearchProvider(Application* app,
+                                                   QObject* parent)
+    : SearchProvider(app, parent), service_(nullptr) {}
 
 void SoundCloudSearchProvider::Init(SoundCloudService* service) {
   service_ = service;
-  SearchProvider::Init("SoundCloud", "soundcloud",
-                       QIcon(":providers/soundcloud.png"),
-                       WantsDelayedQueries | ArtIsProbablyRemote | CanShowConfig);
+  SearchProvider::Init(
+      "SoundCloud", "soundcloud", QIcon(":providers/soundcloud.png"),
+      WantsDelayedQueries | ArtIsProbablyRemote | CanShowConfig);
 
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
@@ -43,14 +41,14 @@ void SoundCloudSearchProvider::Init(SoundCloudService* service) {
   cover_loader_options_.pad_output_image_ = true;
   cover_loader_options_.scale_output_image_ = true;
 
-  connect(app_->album_cover_loader(),
-          SIGNAL(ImageLoaded(quint64, QImage)),
+  connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
           SLOT(AlbumArtLoaded(quint64, QImage)));
 }
 
 void SoundCloudSearchProvider::SearchAsync(int id, const QString& query) {
   const int service_id = service_->SimpleSearch(query);
-  pending_searches_[service_id] = PendingState(id, TokenizeQuery(query));;
+  pending_searches_[service_id] = PendingState(id, TokenizeQuery(query));
+  ;
 }
 
 void SoundCloudSearchProvider::SearchDone(int id, const SongList& songs) {
@@ -59,7 +57,7 @@ void SoundCloudSearchProvider::SearchDone(int id, const SongList& songs) {
   const int global_search_id = state.orig_id_;
 
   ResultList ret;
-  foreach (const Song& song, songs) {
+  foreach(const Song & song, songs) {
     Result result(this);
     result.metadata_ = song;
 
@@ -78,7 +76,7 @@ void SoundCloudSearchProvider::MaybeSearchFinished(int id) {
 
 void SoundCloudSearchProvider::LoadArtAsync(int id, const Result& result) {
   quint64 loader_id = app_->album_cover_loader()->LoadImageAsync(
-        cover_loader_options_, result.metadata_);
+      cover_loader_options_, result.metadata_);
   cover_loader_tasks_[loader_id] = id;
 }
 

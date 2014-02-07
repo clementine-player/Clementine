@@ -24,17 +24,15 @@
 #include "covers/albumcoverloader.h"
 #include "internet/groovesharkservice.h"
 
-GroovesharkSearchProvider::GroovesharkSearchProvider(Application* app, QObject* parent)
-    : SearchProvider(app, parent),
-      service_(nullptr)
-{
-}
+GroovesharkSearchProvider::GroovesharkSearchProvider(Application* app,
+                                                     QObject* parent)
+    : SearchProvider(app, parent), service_(nullptr) {}
 
 void GroovesharkSearchProvider::Init(GroovesharkService* service) {
   service_ = service;
-  SearchProvider::Init("Grooveshark", "grooveshark",
-                       QIcon(":providers/grooveshark.png"),
-                       WantsDelayedQueries | ArtIsProbablyRemote | CanShowConfig);
+  SearchProvider::Init(
+      "Grooveshark", "grooveshark", QIcon(":providers/grooveshark.png"),
+      WantsDelayedQueries | ArtIsProbablyRemote | CanShowConfig);
 
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
@@ -47,14 +45,14 @@ void GroovesharkSearchProvider::Init(GroovesharkService* service) {
   cover_loader_options_.pad_output_image_ = true;
   cover_loader_options_.scale_output_image_ = true;
 
-  connect(app_->album_cover_loader(),
-          SIGNAL(ImageLoaded(quint64, QImage)),
+  connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
           SLOT(AlbumArtLoaded(quint64, QImage)));
 }
 
 void GroovesharkSearchProvider::SearchAsync(int id, const QString& query) {
   const int service_id = service_->SimpleSearch(query);
-  pending_searches_[service_id] = PendingState(id, TokenizeQuery(query));;
+  pending_searches_[service_id] = PendingState(id, TokenizeQuery(query));
+  ;
 
   const int album_id = service_->SearchAlbums(query);
   pending_searches_[album_id] = PendingState(id, TokenizeQuery(query));
@@ -66,7 +64,7 @@ void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   const int global_search_id = state.orig_id_;
 
   ResultList ret;
-  foreach (const Song& song, songs) {
+  foreach(const Song & song, songs) {
     Result result(this);
     result.metadata_ = song;
 
@@ -77,7 +75,8 @@ void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   MaybeSearchFinished(global_search_id);
 }
 
-void GroovesharkSearchProvider::AlbumSearchResult(int id, const QList<quint64>& albums_ids) {
+void GroovesharkSearchProvider::AlbumSearchResult(
+    int id, const QList<quint64>& albums_ids) {
   // Map back to the original id.
   const PendingState state = pending_searches_.take(id);
   const int global_search_id = state.orig_id_;
@@ -85,10 +84,9 @@ void GroovesharkSearchProvider::AlbumSearchResult(int id, const QList<quint64>& 
     MaybeSearchFinished(global_search_id);
     return;
   }
-  foreach (const quint64 album_id, albums_ids) {
+  foreach(const quint64 album_id, albums_ids) {
     pending_searches_[album_id] = PendingState(global_search_id, QStringList());
   }
-
 }
 
 void GroovesharkSearchProvider::MaybeSearchFinished(int id) {
@@ -97,14 +95,14 @@ void GroovesharkSearchProvider::MaybeSearchFinished(int id) {
   }
 }
 
-
 void GroovesharkSearchProvider::LoadArtAsync(int id, const Result& result) {
   quint64 loader_id = app_->album_cover_loader()->LoadImageAsync(
-        cover_loader_options_, result.metadata_);
+      cover_loader_options_, result.metadata_);
   cover_loader_tasks_[loader_id] = id;
 }
 
-void GroovesharkSearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) {
+void GroovesharkSearchProvider::AlbumArtLoaded(quint64 id,
+                                               const QImage& image) {
   if (!cover_loader_tasks_.contains(id)) {
     return;
   }
@@ -116,15 +114,14 @@ bool GroovesharkSearchProvider::IsLoggedIn() {
   return (service_ && service_->IsLoggedIn());
 }
 
-void GroovesharkSearchProvider::ShowConfig() {
-  service_->ShowConfig();
-}
+void GroovesharkSearchProvider::ShowConfig() { service_->ShowConfig(); }
 
-void GroovesharkSearchProvider::AlbumSongsLoaded(quint64 id, const SongList& songs) {
+void GroovesharkSearchProvider::AlbumSongsLoaded(quint64 id,
+                                                 const SongList& songs) {
   const PendingState state = pending_searches_.take(id);
   const int global_search_id = state.orig_id_;
   ResultList ret;
-  foreach (const Song& s, songs) {
+  foreach(const Song & s, songs) {
     Result result(this);
     result.metadata_ = s;
     ret << result;

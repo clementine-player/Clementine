@@ -35,15 +35,16 @@
 #include "core/utilities.h"
 
 MoodbarLoader::MoodbarLoader(Application* app, QObject* parent)
-  : QObject(parent),
-    cache_(new QNetworkDiskCache(this)),
-    thread_(new QThread(this)),
-    kMaxActiveRequests(qMax(1, QThread::idealThreadCount() / 2)),
-    save_alongside_originals_(false),
-    disable_moodbar_calculation_(false)
-{
-  cache_->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
-  cache_->setMaximumCacheSize(60 * 1024 * 1024); // 60MB - enough for 20,000 moodbars
+    : QObject(parent),
+      cache_(new QNetworkDiskCache(this)),
+      thread_(new QThread(this)),
+      kMaxActiveRequests(qMax(1, QThread::idealThreadCount() / 2)),
+      save_alongside_originals_(false),
+      disable_moodbar_calculation_(false) {
+  cache_->setCacheDirectory(
+      Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
+  cache_->setMaximumCacheSize(60 * 1024 *
+                              1024);  // 60MB - enough for 20,000 moodbars
 
   connect(app, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
   ReloadSettings();
@@ -57,7 +58,8 @@ MoodbarLoader::~MoodbarLoader() {
 void MoodbarLoader::ReloadSettings() {
   QSettings s;
   s.beginGroup("Moodbar");
-  save_alongside_originals_ = s.value("save_alongside_originals", false).toBool();
+  save_alongside_originals_ =
+      s.value("save_alongside_originals", false).toBool();
 
   disable_moodbar_calculation_ = !s.value("calculate", true).toBool();
   MaybeTakeNextRequest();
@@ -76,8 +78,8 @@ QStringList MoodbarLoader::MoodFilenames(const QString& song_filename) {
                        << dir_path + "/" + mood_filename;
 }
 
-MoodbarLoader::Result MoodbarLoader::Load(
-        const QUrl& url, QByteArray* data, MoodbarPipeline** async_pipeline) {
+MoodbarLoader::Result MoodbarLoader::Load(const QUrl& url, QByteArray* data,
+                                          MoodbarPipeline** async_pipeline) {
   if (url.scheme() != "file") {
     return CannotLoad;
   }
@@ -91,7 +93,7 @@ MoodbarLoader::Result MoodbarLoader::Load(
   // Check if a mood file exists for this file already
   const QString filename(url.toLocalFile());
 
-  foreach (const QString& possible_mood_file, MoodFilenames(filename)) {
+  foreach(const QString & possible_mood_file, MoodFilenames(filename)) {
     QFile f(possible_mood_file);
     if (f.open(QIODevice::ReadOnly)) {
       qLog(Info) << "Loading moodbar data from" << possible_mood_file;
@@ -110,15 +112,13 @@ MoodbarLoader::Result MoodbarLoader::Load(
     }
   }
 
-  if (!thread_->isRunning())
-    thread_->start(QThread::IdlePriority);
+  if (!thread_->isRunning()) thread_->start(QThread::IdlePriority);
 
   // There was no existing file, analyze the audio file and create one.
   MoodbarPipeline* pipeline = new MoodbarPipeline(url);
   pipeline->moveToThread(thread_);
-  NewClosure(pipeline, SIGNAL(Finished(bool)),
-     this, SLOT(RequestFinished(MoodbarPipeline*,QUrl)),
-     pipeline, url);
+  NewClosure(pipeline, SIGNAL(Finished(bool)), this,
+             SLOT(RequestFinished(MoodbarPipeline*, QUrl)), pipeline, url);
 
   requests_[url] = pipeline;
   queued_requests_ << url;
@@ -140,7 +140,6 @@ void MoodbarLoader::MaybeTakeNextRequest() {
   const QUrl url = queued_requests_.takeFirst();
   active_requests_ << url;
 
-
   qLog(Info) << "Creating moodbar data for" << url.toLocalFile();
   QMetaObject::invokeMethod(requests_[url], "Start", Qt::QueuedConnection);
 }
@@ -149,7 +148,8 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
   Q_ASSERT(QThread::currentThread() == qApp->thread());
 
   if (request->success()) {
-    qLog(Info) << "Moodbar data generated successfully for" << url.toLocalFile();
+    qLog(Info) << "Moodbar data generated successfully for"
+               << url.toLocalFile();
 
     // Save the data in the cache
     QNetworkCacheMetaData metadata;

@@ -27,14 +27,13 @@ class QNetworkAccessManager;
 class QProgressDialog;
 
 namespace google_breakpad {
-  class ExceptionHandler;
+class ExceptionHandler;
 }
-
 
 // Wraps google_breakpad::ExceptionHandler - while an instance of this class
 // is alive crashes will be handled.
 class CrashReporting {
-public:
+ public:
   CrashReporting();
   ~CrashReporting();
 
@@ -48,17 +47,15 @@ public:
   // --send-crash-report when a crash happens.
   static void SetApplicationPath(const QString& path);
 
-private:
+ private:
   // Prints the message to stdout without using libc.
   static void Print(const char* message);
 
   // Breakpad callback.
-  static bool Handler(const char* dump_path,
-                      const char* minidump_id,
-                      void* context,
-                      bool succeeded);
+  static bool Handler(const char* dump_path, const char* minidump_id,
+                      void* context, bool succeeded);
 
-private:
+ private:
   Q_DISABLE_COPY(CrashReporting);
 
   static const char* kSendCrashReportOption;
@@ -67,24 +64,23 @@ private:
   std::unique_ptr<google_breakpad::ExceptionHandler> handler_;
 };
 
-
 // Asks the user if he wants to send a crash report, and displays a progress
 // dialog while uploading it if he does.
 class CrashSender : public QObject {
   Q_OBJECT
 
-public:
+ public:
   CrashSender(const QString& path);
 
   // Returns false if the user doesn't want to send the crash report (caller
   // should exit), or true if he does (caller should start the Qt event loop).
   bool Start();
 
-private slots:
+ private slots:
   void RedirectFinished();
   void UploadProgress(qint64 bytes);
 
-private:
+ private:
   static const char* kUploadURL;
 
   QNetworkAccessManager* network_;
@@ -94,4 +90,4 @@ private:
   QProgressDialog* progress_;
 };
 
-#endif // CRASHREPORTING_H
+#endif  // CRASHREPORTING_H

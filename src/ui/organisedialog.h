@@ -40,7 +40,7 @@ class QAbstractItemModel;
 class OrganiseDialog : public QDialog {
   Q_OBJECT
 
-public:
+ public:
   OrganiseDialog(TaskManager* task_manager, QWidget* parent = 0);
   ~OrganiseDialog();
 
@@ -56,14 +56,14 @@ public:
   int SetFilenames(const QStringList& filenames, quint64 total_size = 0);
   void SetCopy(bool copy);
 
-public slots:
+ public slots:
   void accept();
 
-protected:
+ protected:
   void showEvent(QShowEvent*);
   void resizeEvent(QResizeEvent*);
 
-private slots:
+ private slots:
   void Reset();
 
   void InsertTag(const QString& tag);
@@ -71,10 +71,9 @@ private slots:
 
   void OrganiseFinished(const QStringList& files_with_errors);
 
-private:
+ private:
   static Organise::NewSongInfoList ComputeNewSongsFilenames(
-      const SongList& songs,
-      const OrganiseFormat& format);
+      const SongList& songs, const OrganiseFormat& format);
 
   Ui_OrganiseDialog* ui_;
   TaskManager* task_manager_;
@@ -92,4 +91,4 @@ private:
   FRIEND_TEST(OrganiseDialogTest, ComputeNewSongsFilenamesTest);
 };
 
-#endif // ORGANISEDIALOG_H
+#endif  // ORGANISEDIALOG_H

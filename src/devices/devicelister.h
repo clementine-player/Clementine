@@ -27,7 +27,7 @@ class DeviceManager;
 class DeviceLister : public QObject {
   Q_OBJECT
 
-public:
+ public:
   DeviceLister();
   virtual ~DeviceLister();
 
@@ -39,7 +39,8 @@ public:
   // taken from the one with the highest priority.
   virtual int priority() const { return 100; }
 
-  // Query information about the devices that are available.  Must be thread-safe.
+  // Query information about the devices that are available.  Must be
+  // thread-safe.
   virtual QStringList DeviceUniqueIDs() = 0;
   virtual QVariantList DeviceIcons(const QString& id) = 0;
   virtual QString DeviceManufacturer(const QString& id) = 0;
@@ -63,7 +64,7 @@ public:
   // Do whatever needs to be done to safely remove the device.
   virtual void UnmountDevice(const QString& id) = 0;
 
-public slots:
+ public slots:
   virtual void UpdateDeviceFreeSpace(const QString& id) = 0;
   virtual void ShutDown() {}
 
@@ -73,7 +74,7 @@ signals:
   void DeviceChanged(const QString& id);
   void DeviceMounted(const QString& id, int request_id, bool success);
 
-protected:
+ protected:
   virtual void Init() = 0;
   QUrl MakeUrlFromLocalPath(const QString& path) const;
   bool IsIpod(const QString& path) const;
@@ -81,12 +82,12 @@ protected:
   QStringList GuessIconForPath(const QString& path);
   QStringList GuessIconForModel(const QString& vendor, const QString& model);
 
-protected:
+ protected:
   QThread* thread_;
   int next_mount_request_id_;
 
-private slots:
+ private slots:
   void ThreadStarted();
 };
 
-#endif // DEVICELISTER_H
+#endif  // DEVICELISTER_H

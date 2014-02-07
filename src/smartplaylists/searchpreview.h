@@ -33,8 +33,8 @@ namespace smart_playlists {
 class SearchPreview : public QWidget {
   Q_OBJECT
 
-public:
-  SearchPreview(QWidget *parent = 0);
+ public:
+  SearchPreview(QWidget* parent = 0);
   ~SearchPreview();
 
   void set_application(Application* app);
@@ -42,16 +42,16 @@ public:
 
   void Update(const Search& search);
 
-protected:
+ protected:
   void showEvent(QShowEvent*);
 
-private:
+ private:
   void RunSearch(const Search& search);
 
-private slots:
+ private slots:
   void SearchFinished();
 
-private:
+ private:
   Ui_SmartPlaylistSearchPreview* ui_;
   QList<SearchTerm::Field> fields_;
 
@@ -63,6 +63,6 @@ private:
   GeneratorPtr generator_;
 };
 
-} // namespace
+}  // namespace
 
-#endif // SMARTPLAYLISTSEARCHPREVIEW_H
+#endif  // SMARTPLAYLISTSEARCHPREVIEW_H

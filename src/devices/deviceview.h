@@ -35,29 +35,29 @@ class LibraryModel;
 class MergedProxyModel;
 
 class DeviceItemDelegate : public LibraryItemDelegate {
-public:
+ public:
   DeviceItemDelegate(QObject* parent);
 
   static const int kIconPadding;
 
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option,
+             const QModelIndex& index) const;
 };
-
 
 class DeviceView : public AutoExpandingTreeView {
   Q_OBJECT
 
-public:
+ public:
   DeviceView(QWidget* parent = 0);
   ~DeviceView();
 
   void SetApplication(Application* app);
 
-protected:
-  void contextMenuEvent(QContextMenuEvent *);
-  void mouseDoubleClickEvent(QMouseEvent *event);
+ protected:
+  void contextMenuEvent(QContextMenuEvent*);
+  void mouseDoubleClickEvent(QMouseEvent* event);
 
-private slots:
+ private slots:
   // Device menu actions
   void Connect();
   void Unmount();
@@ -79,13 +79,13 @@ private slots:
   // AutoExpandingTreeView
   bool CanRecursivelyExpand(const QModelIndex& index) const;
 
-private:
+ private:
   QModelIndex MapToDevice(const QModelIndex& merged_model_index) const;
   QModelIndex MapToLibrary(const QModelIndex& merged_model_index) const;
   QModelIndex FindParentDevice(const QModelIndex& merged_model_index) const;
   SongList GetSelectedSongs() const;
 
-private:
+ private:
   Application* app_;
   MergedProxyModel* merged_model_;
   QSortFilterProxyModel* sort_model_;
@@ -108,4 +108,4 @@ private:
   QModelIndex menu_index_;
 };
 
-#endif // DEVICEVIEW_H
+#endif  // DEVICEVIEW_H

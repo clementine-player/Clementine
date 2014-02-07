@@ -10,10 +10,8 @@ QString GetUserDataDirectory() {
   NSAutoreleasePool* pool = [NSAutoreleasePool alloc];
   [pool init];
 
-  NSArray* paths = NSSearchPathForDirectoriesInDomains(
-      NSCachesDirectory,
-      NSUserDomainMask,
-      YES);
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
+                                                       NSUserDomainMask, YES);
   QString ret;
   if ([paths count] > 0) {
     NSString* user_path = [paths objectAtIndex:0];
@@ -28,9 +26,7 @@ QString GetUserDataDirectory() {
 QString GetSettingsDirectory() {
   NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
-      NSApplicationSupportDirectory,
-      NSUserDomainMask,
-      YES);
+      NSApplicationSupportDirectory, NSUserDomainMask, YES);
   NSString* ret;
   if ([paths count] > 0) {
     ret = [paths objectAtIndex:0];
@@ -40,15 +36,13 @@ QString GetSettingsDirectory() {
   ret = [ret stringByAppendingString:@"/Clementine/spotify-settings"];
 
   NSFileManager* file_manager = [NSFileManager defaultManager];
-  [file_manager createDirectoryAtPath:
-      ret
-      withIntermediateDirectories:YES
-      attributes:nil
-      error:nil];
+  [file_manager createDirectoryAtPath:ret
+          withIntermediateDirectories:YES
+                           attributes:nil
+                                error:nil];
 
   QString path = QString::fromUtf8([ret UTF8String]);
   [pool drain];
   return path;
 }
-
 }

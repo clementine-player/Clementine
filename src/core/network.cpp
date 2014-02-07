@@ -29,12 +29,12 @@
 QMutex ThreadSafeNetworkDiskCache::sMutex;
 QNetworkDiskCache* ThreadSafeNetworkDiskCache::sCache = nullptr;
 
-
 ThreadSafeNetworkDiskCache::ThreadSafeNetworkDiskCache(QObject* parent) {
   QMutexLocker l(&sMutex);
   if (!sCache) {
     sCache = new QNetworkDiskCache;
-    sCache->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_NetworkCache));
+    sCache->setCacheDirectory(
+        Utilities::GetConfigPath(Utilities::Path_NetworkCache));
   }
 }
 
@@ -58,7 +58,8 @@ QNetworkCacheMetaData ThreadSafeNetworkDiskCache::metaData(const QUrl& url) {
   return sCache->metaData(url);
 }
 
-QIODevice* ThreadSafeNetworkDiskCache::prepare(const QNetworkCacheMetaData& metaData) {
+QIODevice* ThreadSafeNetworkDiskCache::prepare(
+    const QNetworkCacheMetaData& metaData) {
   QMutexLocker l(&sMutex);
   return sCache->prepare(metaData);
 }
@@ -68,7 +69,8 @@ bool ThreadSafeNetworkDiskCache::remove(const QUrl& url) {
   return sCache->remove(url);
 }
 
-void ThreadSafeNetworkDiskCache::updateMetaData(const QNetworkCacheMetaData& metaData) {
+void ThreadSafeNetworkDiskCache::updateMetaData(
+    const QNetworkCacheMetaData& metaData) {
   QMutexLocker l(&sMutex);
   sCache->updateMetaData(metaData);
 }
@@ -78,18 +80,17 @@ void ThreadSafeNetworkDiskCache::clear() {
   sCache->clear();
 }
 
-
 NetworkAccessManager::NetworkAccessManager(QObject* parent)
-  : QNetworkAccessManager(parent)
-{
+    : QNetworkAccessManager(parent) {
   setCache(new ThreadSafeNetworkDiskCache(this));
 }
 
 QNetworkReply* NetworkAccessManager::createRequest(
     Operation op, const QNetworkRequest& request, QIODevice* outgoingData) {
-  QByteArray user_agent = QString("%1 %2").arg(
-      QCoreApplication::applicationName(),
-      QCoreApplication::applicationVersion()).toUtf8();
+  QByteArray user_agent = QString("%1 %2")
+                              .arg(QCoreApplication::applicationName(),
+                                   QCoreApplication::applicationVersion())
+                              .toUtf8();
 
   if (request.hasRawHeader("User-Agent")) {
     // Append the existing user-agent set by a client library (such as
@@ -107,8 +108,8 @@ QNetworkReply* NetworkAccessManager::createRequest(
   }
 
   // Prefer the cache unless the caller has changed the setting already
-  if (request.attribute(QNetworkRequest::CacheLoadControlAttribute).toInt()
-      == QNetworkRequest::PreferNetwork) {
+  if (request.attribute(QNetworkRequest::CacheLoadControlAttribute).toInt() ==
+      QNetworkRequest::PreferNetwork) {
     new_request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                              QNetworkRequest::PreferCache);
   }
@@ -116,14 +117,11 @@ QNetworkReply* NetworkAccessManager::createRequest(
   return QNetworkAccessManager::createRequest(op, new_request, outgoingData);
 }
 
-
 NetworkTimeouts::NetworkTimeouts(int timeout_msec, QObject* parent)
-  : timeout_msec_(timeout_msec) {
-}
+    : timeout_msec_(timeout_msec) {}
 
 void NetworkTimeouts::AddReply(QNetworkReply* reply) {
-  if (timers_.contains(reply))
-    return;
+  if (timers_.contains(reply)) return;
 
   connect(reply, SIGNAL(destroyed()), SLOT(ReplyFinished()));
   connect(reply, SIGNAL(finished()), SLOT(ReplyFinished()));
@@ -167,25 +165,29 @@ void NetworkTimeouts::timerEvent(QTimerEvent* e) {
   }
 }
 
-
-RedirectFollower::RedirectFollower(QNetworkReply* first_reply, int max_redirects)
-  : QObject(nullptr),
-    current_reply_(first_reply),
-    redirects_remaining_(max_redirects) {
+RedirectFollower::RedirectFollower(QNetworkReply* first_reply,
+                                   int max_redirects)
+    : QObject(nullptr),
+      current_reply_(first_reply),
+      redirects_remaining_(max_redirects) {
   ConnectReply(first_reply);
 }
 
 void RedirectFollower::ConnectReply(QNetworkReply* reply) {
   connect(reply, SIGNAL(readyRead()), SLOT(ReadyRead()));
-  connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), SIGNAL(error(QNetworkReply::NetworkError)));
-  connect(reply, SIGNAL(downloadProgress(qint64,qint64)), SIGNAL(downloadProgress(qint64,qint64)));
-  connect(reply, SIGNAL(uploadProgress(qint64,qint64)), SIGNAL(uploadProgress(qint64,qint64)));
+  connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
+          SIGNAL(error(QNetworkReply::NetworkError)));
+  connect(reply, SIGNAL(downloadProgress(qint64, qint64)),
+          SIGNAL(downloadProgress(qint64, qint64)));
+  connect(reply, SIGNAL(uploadProgress(qint64, qint64)),
+          SIGNAL(uploadProgress(qint64, qint64)));
   connect(reply, SIGNAL(finished()), SLOT(ReplyFinished()));
 }
 
 void RedirectFollower::ReadyRead() {
   // Don't re-emit this signal for redirect replies.
-  if (current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute).isValid()) {
+  if (current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute)
+          .isValid()) {
     return;
   }
 
@@ -195,14 +197,16 @@ void RedirectFollower::ReadyRead() {
 void RedirectFollower::ReplyFinished() {
   current_reply_->deleteLater();
 
-  if (current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute).isValid()) {
+  if (current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute)
+          .isValid()) {
     if (redirects_remaining_-- == 0) {
       emit finished();
       return;
     }
 
     const QUrl next_url = current_reply_->url().resolved(
-          current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
+        current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute)
+            .toUrl());
 
     QNetworkRequest req(current_reply_->request());
     req.setUrl(next_url);

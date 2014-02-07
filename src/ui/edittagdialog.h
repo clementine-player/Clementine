@@ -42,14 +42,15 @@ class QPushButton;
 class EditTagDialog : public QDialog {
   Q_OBJECT
 
-public:
+ public:
   EditTagDialog(Application* app, QWidget* parent = 0);
   ~EditTagDialog();
 
   static const char* kHintText;
   static const char* kSettingsGroup;
 
-  void SetSongs(const SongList& songs, const PlaylistItemList& items = PlaylistItemList());
+  void SetSongs(const SongList& songs,
+                const PlaylistItemList& items = PlaylistItemList());
 
   PlaylistItemList playlist_items() const { return playlist_items_; }
 
@@ -58,12 +59,12 @@ public:
 signals:
   void Error(const QString& message);
 
-protected:
+ protected:
   bool eventFilter(QObject* o, QEvent* e);
   void showEvent(QShowEvent*);
   void hideEvent(QHideEvent*);
 
-private slots:
+ private slots:
   void SetSongsFinished();
   void AcceptFinished();
 
@@ -88,13 +89,17 @@ private slots:
   void PreviousSong();
   void NextSong();
 
-private:
+ private:
   struct Data {
     Data(const Song& song = Song()) : original_(song), current_(song) {}
 
     static QVariant value(const Song& song, const QString& id);
-    QVariant original_value(const QString& id) const { return value(original_, id); }
-    QVariant current_value(const QString& id) const { return value(current_, id); }
+    QVariant original_value(const QString& id) const {
+      return value(original_, id);
+    }
+    QVariant current_value(const QString& id) const {
+      return value(current_, id);
+    }
 
     void set_value(const QString& id, const QVariant& value);
 
@@ -105,7 +110,7 @@ private:
   struct FieldData {
     FieldData(QLabel* label = NULL, QWidget* editor = NULL,
               const QString& id = QString())
-      : label_(label), editor_(editor), id_(id) {}
+        : label_(label), editor_(editor), id_(id) {}
 
     QLabel* label_;
     QWidget* editor_;
@@ -133,7 +138,7 @@ private:
   QList<Data> LoadData(const SongList& songs) const;
   void SaveData(const QList<Data>& data);
 
-private:
+ private:
   Ui_EditTagDialog* ui_;
 
   Application* app_;
@@ -164,4 +169,4 @@ private:
   TrackSelectionDialog* results_dialog_;
 };
 
-#endif // EDITTAGDIALOG_H
+#endif  // EDITTAGDIALOG_H

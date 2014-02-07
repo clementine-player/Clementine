@@ -34,11 +34,11 @@ class WplParser : public XMLParser {
                 const QDir& dir) const;
   void Save(const SongList& songs, QIODevice* device, const QDir& dir) const;
 
-private:
+ private:
   void ParseSeq(const QDir& dir, QXmlStreamReader* reader,
                 SongList* songs) const;
   void WriteMeta(const QString& name, const QString& content,
                  QXmlStreamWriter* writer) const;
 };
 
-#endif // WPLPARSER_H
+#endif  // WPLPARSER_H

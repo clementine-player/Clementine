@@ -57,33 +57,34 @@ const char* MagnatuneService::kSongsTable = "magnatune_songs";
 const char* MagnatuneService::kFtsTable = "magnatune_songs_fts";
 
 const char* MagnatuneService::kHomepage = "http://magnatune.com";
-const char* MagnatuneService::kDatabaseUrl = "http://magnatune.com/info/song_info_xml.gz";
+const char* MagnatuneService::kDatabaseUrl =
+    "http://magnatune.com/info/song_info_xml.gz";
 const char* MagnatuneService::kStreamingHostname = "streaming.magnatune.com";
 const char* MagnatuneService::kDownloadHostname = "download.magnatune.com";
 
 const char* MagnatuneService::kPartnerId = "clementine";
-const char* MagnatuneService::kDownloadUrl = "http://download.magnatune.com/buy/membership_free_dl_xml";
+const char* MagnatuneService::kDownloadUrl =
+    "http://download.magnatune.com/buy/membership_free_dl_xml";
 
 MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
-  : InternetService(kServiceName, app, parent, parent),
-    url_handler_(new MagnatuneUrlHandler(this, this)),
-    context_menu_(nullptr),
-    root_(nullptr),
-    library_backend_(nullptr),
-    library_model_(nullptr),
-    library_filter_(nullptr),
-    library_sort_model_(new QSortFilterProxyModel(this)),
-    load_database_task_id_(0),
-    membership_(Membership_None),
-    format_(Format_Ogg),
-    total_song_count_(0),
-    network_(new NetworkAccessManager(this))
-{
+    : InternetService(kServiceName, app, parent, parent),
+      url_handler_(new MagnatuneUrlHandler(this, this)),
+      context_menu_(nullptr),
+      root_(nullptr),
+      library_backend_(nullptr),
+      library_model_(nullptr),
+      library_filter_(nullptr),
+      library_sort_model_(new QSortFilterProxyModel(this)),
+      load_database_task_id_(0),
+      membership_(Membership_None),
+      format_(Format_Ogg),
+      total_song_count_(0),
+      network_(new NetworkAccessManager(this)) {
   // Create the library backend in the database thread
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
-  library_backend_->Init(app_->database(), kSongsTable,
-                         QString::null, QString::null, kFtsTable);
+  library_backend_->Init(app_->database(), kSongsTable, QString::null,
+                         QString::null, kFtsTable);
   library_model_ = new LibraryModel(library_backend_, app_, this);
 
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
@@ -97,16 +98,11 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
 
   app_->player()->RegisterUrlHandler(url_handler_);
   app_->global_search()->AddProvider(new LibrarySearchProvider(
-      library_backend_,
-      tr("Magnatune"),
-      "magnatune",
-      QIcon(":/providers/magnatune.png"),
-      true, app_, this));
+      library_backend_, tr("Magnatune"), "magnatune",
+      QIcon(":/providers/magnatune.png"), true, app_, this));
 }
 
-MagnatuneService::~MagnatuneService() {
-  delete context_menu_;
-}
+MagnatuneService::~MagnatuneService() { delete context_menu_; }
 
 void MagnatuneService::ReloadSettings() {
   QSettings s;
@@ -150,10 +146,10 @@ void MagnatuneService::ReloadDatabase() {
 
   QNetworkReply* reply = network_->get(request);
   connect(reply, SIGNAL(finished()), SLOT(ReloadDatabaseFinished()));
-  
+
   if (!load_database_task_id_)
-    load_database_task_id_ = app_->task_manager()->StartTask(
-        tr("Downloading Magnatune catalogue"));
+    load_database_task_id_ =
+        app_->task_manager()->StartTask(tr("Downloading Magnatune catalogue"));
 }
 
 void MagnatuneService::ReloadDatabaseFinished() {
@@ -168,8 +164,7 @@ void MagnatuneService::ReloadDatabaseFinished() {
     return;
   }
 
-  if (root_->hasChildren())
-    root_->removeRows(0, root_->rowCount());
+  if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
 
   // The XML file is compressed
   QtIOCompressor gzip(reply);
@@ -205,22 +200,22 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
   while (!reader.atEnd()) {
     reader.readNext();
 
-    if (reader.tokenType() == QXmlStreamReader::EndElement)
-      break;
+    if (reader.tokenType() == QXmlStreamReader::EndElement) break;
 
     if (reader.tokenType() == QXmlStreamReader::StartElement) {
       QStringRef name = reader.name();
       QString value = ReadElementText(reader);
 
-      if (name == "artist")          song.set_artist(value);
-      if (name == "albumname")       song.set_album(value);
-      if (name == "trackname")       song.set_title(value);
-      if (name == "tracknum")        song.set_track(value.toInt());
-      if (name == "year")            song.set_year(value.toInt());
+      if (name == "artist") song.set_artist(value);
+      if (name == "albumname") song.set_album(value);
+      if (name == "trackname") song.set_title(value);
+      if (name == "tracknum") song.set_track(value.toInt());
+      if (name == "year") song.set_year(value.toInt());
       if (name == "magnatunegenres") song.set_genre(value.section(',', 0, 0));
-      if (name == "seconds")         song.set_length_nanosec(value.toInt() * kNsecPerSec);
-      if (name == "cover_small")     song.set_art_automatic(value);
-      if (name == "albumsku")        song.set_comment(value);
+      if (name == "seconds")
+        song.set_length_nanosec(value.toInt() * kNsecPerSec);
+      if (name == "cover_small") song.set_art_automatic(value);
+      if (name == "albumsku") song.set_comment(value);
       if (name == "url") {
         QUrl url;
         // Magnatune's URLs are already encoded
@@ -249,33 +244,43 @@ QString MagnatuneService::ReadElementText(QXmlStreamReader& reader) {
   QString ret;
   while (!reader.atEnd()) {
     switch (reader.readNext()) {
-      case QXmlStreamReader::StartElement: level++; break;
-      case QXmlStreamReader::EndElement:   level--; break;
+      case QXmlStreamReader::StartElement:
+        level++;
+        break;
+      case QXmlStreamReader::EndElement:
+        level--;
+        break;
       case QXmlStreamReader::Characters:
         ret += reader.text().toString().trimmed();
         break;
-      default: break;
+      default:
+        break;
     }
 
-    if (level == 0)
-      break;
+    if (level == 0) break;
   }
   return ret;
 }
 
 void MagnatuneService::EnsureMenuCreated() {
-  if (context_menu_)
-    return;
+  if (context_menu_) return;
 
   context_menu_ = new QMenu;
 
   context_menu_->addActions(GetPlaylistActions());
-  download_ = context_menu_->addAction(
-      IconLoader::Load("download"), tr("Download this album"), this, SLOT(Download()));
+  download_ = context_menu_->addAction(IconLoader::Load("download"),
+                                       tr("Download this album"), this,
+                                       SLOT(Download()));
   context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download"), tr("Open %1 in browser").arg("magnatune.com"), this, SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
-  QAction* config_action = context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Magnatune..."), this, SLOT(ShowConfig()));
+  context_menu_->addAction(IconLoader::Load("download"),
+                           tr("Open %1 in browser").arg("magnatune.com"), this,
+                           SLOT(Homepage()));
+  context_menu_->addAction(IconLoader::Load("view-refresh"),
+                           tr("Refresh catalogue"), this,
+                           SLOT(ReloadDatabase()));
+  QAction* config_action = context_menu_->addAction(
+      IconLoader::Load("configure"), tr("Configure Magnatune..."), this,
+      SLOT(ShowConfig()));
 
   library_filter_ = new LibraryFilterWidget(0);
   library_filter_->SetSettingsGroup(kSettingsGroup);
@@ -308,9 +313,9 @@ QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
   QUrl ret(url);
   ret.setScheme("http");
 
-  switch(membership_) {
+  switch (membership_) {
     case Membership_None:
-      return ret; // Use the URL as-is
+      return ret;  // Use the URL as-is
 
     // Otherwise add the hostname
     case Membership_Streaming:
@@ -338,14 +343,16 @@ void MagnatuneService::ShowConfig() {
 }
 
 void MagnatuneService::Download() {
-  QModelIndex index = library_sort_model_->mapToSource(model()->current_index());
+  QModelIndex index =
+      library_sort_model_->mapToSource(model()->current_index());
   SongList songs = library_model_->GetChildSongs(index);
 
   MagnatuneDownloadDialog* dialog = new MagnatuneDownloadDialog(this, 0);
   dialog->setAttribute(Qt::WA_DeleteOnClose);
   dialog->Show(songs);
 
-  connect(dialog, SIGNAL(Finished(QStringList)), SIGNAL(DownloadFinished(QStringList)));
+  connect(dialog, SIGNAL(Finished(QStringList)),
+          SIGNAL(DownloadFinished(QStringList)));
 }
 
 QWidget* MagnatuneService::HeaderWidget() const {

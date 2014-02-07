@@ -27,22 +27,23 @@
 
 const char* PlaylistSequence::kSettingsGroup = "PlaylistSequence";
 
-PlaylistSequence::PlaylistSequence(QWidget *parent, SettingsProvider *settings)
-  : QWidget(parent),
-    ui_(new Ui_PlaylistSequence),
-    settings_(settings ? settings : new DefaultSettingsProvider),
-    repeat_menu_(new QMenu(this)),
-    shuffle_menu_(new QMenu(this)),
-    loading_(false),
-    repeat_mode_(Repeat_Off),
-    shuffle_mode_(Shuffle_Off),
-    dynamic_(false)
-{
+PlaylistSequence::PlaylistSequence(QWidget* parent, SettingsProvider* settings)
+    : QWidget(parent),
+      ui_(new Ui_PlaylistSequence),
+      settings_(settings ? settings : new DefaultSettingsProvider),
+      repeat_menu_(new QMenu(this)),
+      shuffle_menu_(new QMenu(this)),
+      loading_(false),
+      repeat_mode_(Repeat_Off),
+      shuffle_mode_(Shuffle_Off),
+      dynamic_(false) {
   ui_->setupUi(this);
 
   // Icons
-  ui_->repeat->setIcon(AddDesaturatedIcon(IconLoader::Load("media-playlist-repeat")));
-  ui_->shuffle->setIcon(AddDesaturatedIcon(IconLoader::Load("media-playlist-shuffle")));
+  ui_->repeat->setIcon(
+      AddDesaturatedIcon(IconLoader::Load("media-playlist-repeat")));
+  ui_->shuffle->setIcon(
+      AddDesaturatedIcon(IconLoader::Load("media-playlist-shuffle")));
 
   settings_->set_group(kSettingsGroup);
 
@@ -62,20 +63,22 @@ PlaylistSequence::PlaylistSequence(QWidget *parent, SettingsProvider *settings)
   shuffle_menu_->addActions(shuffle_group->actions());
   ui_->shuffle->setMenu(shuffle_menu_);
 
-  connect(repeat_group, SIGNAL(triggered(QAction*)), SLOT(RepeatActionTriggered(QAction*)));
-  connect(shuffle_group, SIGNAL(triggered(QAction*)), SLOT(ShuffleActionTriggered(QAction*)));
+  connect(repeat_group, SIGNAL(triggered(QAction*)),
+          SLOT(RepeatActionTriggered(QAction*)));
+  connect(shuffle_group, SIGNAL(triggered(QAction*)),
+          SLOT(ShuffleActionTriggered(QAction*)));
 
   Load();
 }
 
-PlaylistSequence::~PlaylistSequence() {
-  delete ui_;
-}
+PlaylistSequence::~PlaylistSequence() { delete ui_; }
 
 void PlaylistSequence::Load() {
-  loading_ = true; // Stops these setter functions calling Save()
-  SetShuffleMode(ShuffleMode(settings_->value("shuffle_mode", Shuffle_Off).toInt()));
-  SetRepeatMode(RepeatMode(settings_->value("repeat_mode", Repeat_Off).toInt()));
+  loading_ = true;  // Stops these setter functions calling Save()
+  SetShuffleMode(
+      ShuffleMode(settings_->value("shuffle_mode", Shuffle_Off).toInt()));
+  SetRepeatMode(
+      RepeatMode(settings_->value("repeat_mode", Repeat_Off).toInt()));
   loading_ = false;
 }
 
@@ -88,7 +91,7 @@ void PlaylistSequence::Save() {
 
 QIcon PlaylistSequence::AddDesaturatedIcon(const QIcon& icon) {
   QIcon ret;
-  foreach (const QSize& size, icon.availableSizes()) {
+  foreach(const QSize & size, icon.availableSizes()) {
     QPixmap on(icon.pixmap(size));
     QPixmap off(DesaturatedPixmap(on));
 
@@ -112,8 +115,8 @@ QPixmap PlaylistSequence::DesaturatedPixmap(const QPixmap& pixmap) {
 
 void PlaylistSequence::RepeatActionTriggered(QAction* action) {
   RepeatMode mode = Repeat_Off;
-  if (action == ui_->action_repeat_track)    mode = Repeat_Track;
-  if (action == ui_->action_repeat_album)    mode = Repeat_Album;
+  if (action == ui_->action_repeat_track) mode = Repeat_Track;
+  if (action == ui_->action_repeat_album) mode = Repeat_Album;
   if (action == ui_->action_repeat_playlist) mode = Repeat_Playlist;
 
   SetRepeatMode(mode);
@@ -121,9 +124,9 @@ void PlaylistSequence::RepeatActionTriggered(QAction* action) {
 
 void PlaylistSequence::ShuffleActionTriggered(QAction* action) {
   ShuffleMode mode = Shuffle_Off;
-  if (action == ui_->action_shuffle_all)          mode = Shuffle_All;
+  if (action == ui_->action_shuffle_all) mode = Shuffle_All;
   if (action == ui_->action_shuffle_inside_album) mode = Shuffle_InsideAlbum;
-  if (action == ui_->action_shuffle_albums)       mode = Shuffle_Albums;
+  if (action == ui_->action_shuffle_albums) mode = Shuffle_Albums;
 
   SetShuffleMode(mode);
 }
@@ -131,11 +134,19 @@ void PlaylistSequence::ShuffleActionTriggered(QAction* action) {
 void PlaylistSequence::SetRepeatMode(RepeatMode mode) {
   ui_->repeat->setChecked(mode != Repeat_Off);
 
-  switch(mode) {
-    case Repeat_Off:      ui_->action_repeat_off->setChecked(true);      break;
-    case Repeat_Track:    ui_->action_repeat_track->setChecked(true);    break;
-    case Repeat_Album:    ui_->action_repeat_album->setChecked(true);    break;
-    case Repeat_Playlist: ui_->action_repeat_playlist->setChecked(true); break;
+  switch (mode) {
+    case Repeat_Off:
+      ui_->action_repeat_off->setChecked(true);
+      break;
+    case Repeat_Track:
+      ui_->action_repeat_track->setChecked(true);
+      break;
+    case Repeat_Album:
+      ui_->action_repeat_album->setChecked(true);
+      break;
+    case Repeat_Playlist:
+      ui_->action_repeat_playlist->setChecked(true);
+      break;
   }
 
   if (mode != repeat_mode_) {
@@ -150,12 +161,19 @@ void PlaylistSequence::SetShuffleMode(ShuffleMode mode) {
   ui_->shuffle->setChecked(mode != Shuffle_Off);
 
   switch (mode) {
-    case Shuffle_Off:         ui_->action_shuffle_off->setChecked(true);          break;
-    case Shuffle_All:         ui_->action_shuffle_all->setChecked(true);          break;
-    case Shuffle_InsideAlbum: ui_->action_shuffle_inside_album->setChecked(true); break;
-    case Shuffle_Albums:      ui_->action_shuffle_albums->setChecked(true);       break;
+    case Shuffle_Off:
+      ui_->action_shuffle_off->setChecked(true);
+      break;
+    case Shuffle_All:
+      ui_->action_shuffle_all->setChecked(true);
+      break;
+    case Shuffle_InsideAlbum:
+      ui_->action_shuffle_inside_album->setChecked(true);
+      break;
+    case Shuffle_Albums:
+      ui_->action_shuffle_albums->setChecked(true);
+      break;
   }
-
 
   if (mode != shuffle_mode_) {
     shuffle_mode_ = mode;
@@ -167,7 +185,8 @@ void PlaylistSequence::SetShuffleMode(ShuffleMode mode) {
 
 void PlaylistSequence::SetUsingDynamicPlaylist(bool dynamic) {
   dynamic_ = dynamic;
-  const QString not_available(tr("Not available while using a dynamic playlist"));
+  const QString not_available(
+      tr("Not available while using a dynamic playlist"));
 
   setEnabled(!dynamic);
   ui_->shuffle->setToolTip(dynamic ? not_available : tr("Shuffle"));
@@ -182,29 +201,43 @@ PlaylistSequence::RepeatMode PlaylistSequence::repeat_mode() const {
   return dynamic_ ? Repeat_Off : repeat_mode_;
 }
 
-//called from global shortcut
+// called from global shortcut
 void PlaylistSequence::CycleShuffleMode() {
   ShuffleMode mode = Shuffle_Off;
-  //we cycle through the shuffle modes
+  // we cycle through the shuffle modes
   switch (shuffle_mode()) {
-    case Shuffle_Off:         mode = Shuffle_All;           break;
-    case Shuffle_All:         mode = Shuffle_InsideAlbum;   break;
-    case Shuffle_InsideAlbum: mode = Shuffle_Albums;        break;
-    case Shuffle_Albums: break;
+    case Shuffle_Off:
+      mode = Shuffle_All;
+      break;
+    case Shuffle_All:
+      mode = Shuffle_InsideAlbum;
+      break;
+    case Shuffle_InsideAlbum:
+      mode = Shuffle_Albums;
+      break;
+    case Shuffle_Albums:
+      break;
   }
 
   SetShuffleMode(mode);
 }
 
-//called from global shortcut
+// called from global shortcut
 void PlaylistSequence::CycleRepeatMode() {
   RepeatMode mode = Repeat_Off;
-  //we cycle through the repeat modes
+  // we cycle through the repeat modes
   switch (repeat_mode()) {
-    case Repeat_Off:      mode = Repeat_Track;   break;
-    case Repeat_Track:    mode = Repeat_Album;   break;
-    case Repeat_Album:    mode = Repeat_Playlist; break;
-    case Repeat_Playlist: break;
+    case Repeat_Off:
+      mode = Repeat_Track;
+      break;
+    case Repeat_Track:
+      mode = Repeat_Album;
+      break;
+    case Repeat_Album:
+      mode = Repeat_Playlist;
+      break;
+    case Repeat_Playlist:
+      break;
   }
 
   SetRepeatMode(mode);

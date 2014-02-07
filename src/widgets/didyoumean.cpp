@@ -27,12 +27,12 @@
 const int DidYouMean::kPadding = 3;
 
 DidYouMean::DidYouMean(QWidget* buddy, QWidget* parent)
-  : QWidget(parent, Qt::ToolTip),
-    buddy_(buddy),
-    close_(new QToolButton(this)),
-    normal_font_(font()),
-    correction_font_(font()),
-    press_enter_font_(font()) {
+    : QWidget(parent, Qt::ToolTip),
+      buddy_(buddy),
+      close_(new QToolButton(this)),
+      normal_font_(font()),
+      correction_font_(font()),
+      press_enter_font_(font()) {
   // Close icon
   close_->setToolTip(tr("Close"));
   close_->setIcon(QIcon(":/trolltech/styles/macstyle/images/closedock-16.png"));
@@ -82,7 +82,7 @@ bool DidYouMean::eventFilter(QObject* object, QEvent* event) {
         case Qt::Key_Return:
         case Qt::Key_Enter:
           emit Accepted(correction_);
-          // fallthrough
+        // fallthrough
         case Qt::Key_Escape:
           hide();
           return true;
@@ -105,9 +105,7 @@ bool DidYouMean::eventFilter(QObject* object, QEvent* event) {
   return QObject::eventFilter(object, event);
 }
 
-void DidYouMean::showEvent(QShowEvent*) {
-  UpdateGeometry();
-}
+void DidYouMean::showEvent(QShowEvent*) { UpdateGeometry(); }
 
 void DidYouMean::UpdateGeometry() {
   const int text_height = fontMetrics().height();
@@ -118,10 +116,8 @@ void DidYouMean::UpdateGeometry() {
   // size(close button), so the "Did you mean" widget is always fully displayed
 
   resize(QSize(did_you_mean_size_ +
-                 QFontMetrics(correction_font_).width(correction_ + "  ") +
-                 press_enter_size_ +
-                 kPadding * 6 +
-                 close_->width(),
+                   QFontMetrics(correction_font_).width(correction_ + "  ") +
+                   press_enter_size_ + kPadding * 6 + close_->width(),
                height));
 
   close_->move(kPadding, kPadding);
@@ -133,17 +129,15 @@ void DidYouMean::paintEvent(QPaintEvent*) {
 
   // Draw the background
   QColor bg(palette().color(QPalette::Inactive, QPalette::ToolTipBase));
-  p.fillRect(0, 0, width()-1, height()-1, bg);
+  p.fillRect(0, 0, width() - 1, height() - 1, bg);
 
   // Border
   p.setPen(Qt::black);
-  p.drawRect(0, 0, width()-1, height()-1);
+  p.drawRect(0, 0, width() - 1, height() - 1);
 
   // Text rectangle
-  QRect text_rect(kPadding + close_->width() + kPadding,
-                  kPadding,
-                  rect().width() - kPadding,
-                  rect().height() - kPadding);
+  QRect text_rect(kPadding + close_->width() + kPadding, kPadding,
+                  rect().width() - kPadding, rect().height() - kPadding);
 
   // Text
   p.setFont(normal_font_);
@@ -152,7 +146,8 @@ void DidYouMean::paintEvent(QPaintEvent*) {
 
   p.setFont(correction_font_);
   p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, correction_);
-  text_rect.setLeft(text_rect.left() + p.fontMetrics().width(correction_ + "  "));
+  text_rect.setLeft(text_rect.left() +
+                    p.fontMetrics().width(correction_ + "  "));
 
   p.setPen(palette().color(QPalette::Disabled, QPalette::Text));
   p.setFont(press_enter_font_);

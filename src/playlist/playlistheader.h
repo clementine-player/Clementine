@@ -36,7 +36,7 @@ class PlaylistHeader : public StretchHeaderView {
   void contextMenuEvent(QContextMenuEvent* e);
   void enterEvent(QEvent*);
 
- signals:
+signals:
   void SectionVisibilityChanged(int logical, bool visible);
   void MouseEntered();
 
@@ -63,4 +63,4 @@ class PlaylistHeader : public StretchHeaderView {
   QSignalMapper* show_mapper_;
 };
 
-#endif // PLAYLISTHEADER_H
+#endif  // PLAYLISTHEADER_H

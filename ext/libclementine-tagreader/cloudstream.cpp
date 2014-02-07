@@ -28,13 +28,13 @@
 #include "core/logging.h"
 
 namespace {
-  static const int kTaglibPrefixCacheBytes = 64 * 1024;  // Should be enough.
-  static const int kTaglibSuffixCacheBytes = 8 * 1024;
+static const int kTaglibPrefixCacheBytes = 64 * 1024;  // Should be enough.
+static const int kTaglibSuffixCacheBytes = 8 * 1024;
 }
 
-CloudStream::CloudStream(
-    const QUrl& url, const QString& filename, const long length,
-    const QString& auth, QNetworkAccessManager* network)
+CloudStream::CloudStream(const QUrl& url, const QString& filename,
+                         const long length, const QString& auth,
+                         QNetworkAccessManager* network)
     : url_(url),
       filename_(filename),
       encoded_filename_(filename_.toUtf8()),
@@ -43,12 +43,9 @@ CloudStream::CloudStream(
       cursor_(0),
       network_(network),
       cache_(length),
-      num_requests_(0) {
-}
+      num_requests_(0) {}
 
-TagLib::FileName CloudStream::name() const {
-  return encoded_filename_.data();
-}
+TagLib::FileName CloudStream::name() const { return encoded_filename_.data(); }
 
 bool CloudStream::CheckCache(int start, int end) {
   for (int i = start; i <= end; ++i) {
@@ -113,8 +110,8 @@ TagLib::ByteVector CloudStream::readBlock(ulong length) {
   if (!auth_.isEmpty()) {
     request.setRawHeader("Authorization", auth_.toUtf8());
   }
-  request.setRawHeader(
-      "Range", QString("bytes=%1-%2").arg(start).arg(end).toUtf8());
+  request.setRawHeader("Range",
+                       QString("bytes=%1-%2").arg(start).arg(end).toUtf8());
   request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                        QNetworkRequest::AlwaysNetwork);
   // The Ubuntu One server applies the byte range to the gzipped data, rather
@@ -124,7 +121,8 @@ TagLib::ByteVector CloudStream::readBlock(ulong length) {
   }
 
   QNetworkReply* reply = network_->get(request);
-  connect(reply, SIGNAL(sslErrors(QList<QSslError>)), SLOT(SSLErrors(QList<QSslError>)));
+  connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
+          SLOT(SSLErrors(QList<QSslError>)));
   ++num_requests_;
 
   QEventLoop loop;
@@ -163,9 +161,7 @@ bool CloudStream::readOnly() const {
   return true;
 }
 
-bool CloudStream::isOpen() const {
-  return true;
-}
+bool CloudStream::isOpen() const { return true; }
 
 void CloudStream::seek(long offset, TagLib::IOStream::Position p) {
   switch (p) {
@@ -184,24 +180,18 @@ void CloudStream::seek(long offset, TagLib::IOStream::Position p) {
   }
 }
 
-void CloudStream::clear() {
-  cursor_ = 0;
-}
+void CloudStream::clear() { cursor_ = 0; }
 
-long CloudStream::tell() const {
-  return cursor_;
-}
+long CloudStream::tell() const { return cursor_; }
 
-long CloudStream::length() {
-  return length_;
-}
+long CloudStream::length() { return length_; }
 
 void CloudStream::truncate(long) {
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
 void CloudStream::SSLErrors(const QList<QSslError>& errors) {
-  foreach (const QSslError& error, errors) {
+  foreach(const QSslError & error, errors) {
     qLog(Debug) << error.error() << error.errorString();
     qLog(Debug) << error.certificate();
   }

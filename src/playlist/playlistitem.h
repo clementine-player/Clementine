@@ -32,12 +32,12 @@ class SqlRow;
 
 class PlaylistItem : public std::enable_shared_from_this<PlaylistItem> {
  public:
-  PlaylistItem(const QString& type)
-    : type_(type) {}
+  PlaylistItem(const QString& type) : type_(type) {}
   virtual ~PlaylistItem();
 
   static PlaylistItem* NewFromType(const QString& type);
-  static PlaylistItem* NewFromSongsTable(const QString& table, const Song& song);
+  static PlaylistItem* NewFromSongsTable(const QString& table,
+                                         const Song& song);
 
   enum Option {
     Default = 0x00,
@@ -93,13 +93,11 @@ class PlaylistItem : public std::enable_shared_from_this<PlaylistItem> {
   virtual bool IsLocalLibraryItem() const { return false; }
 
  protected:
-  enum DatabaseColumn {
-    Column_LibraryId,
-    Column_InternetService,
-  };
+  enum DatabaseColumn { Column_LibraryId, Column_InternetService, };
 
   virtual QVariant DatabaseValue(DatabaseColumn) const {
-    return QVariant(QVariant::String); }
+    return QVariant(QVariant::String);
+  }
   virtual Song DatabaseSongMetadata() const { return Song(); }
 
   QString type_;
@@ -116,4 +114,4 @@ Q_DECLARE_METATYPE(PlaylistItemPtr)
 Q_DECLARE_METATYPE(QList<PlaylistItemPtr>)
 Q_DECLARE_OPERATORS_FOR_FLAGS(PlaylistItem::Options)
 
-#endif // PLAYLISTITEM_H
+#endif  // PLAYLISTITEM_H

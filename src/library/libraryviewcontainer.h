@@ -27,7 +27,7 @@ class Ui_LibraryViewContainer;
 class LibraryViewContainer : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   LibraryViewContainer(QWidget* parent = 0);
   ~LibraryViewContainer();
 
@@ -36,8 +36,8 @@ public:
 
   void ReloadSettings();
 
-private:
+ private:
   Ui_LibraryViewContainer* ui_;
 };
 
-#endif // LIBRARYVIEWCONTAINER_H
+#endif  // LIBRARYVIEWCONTAINER_H

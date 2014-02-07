@@ -25,19 +25,18 @@
 using std::placeholders::_1;
 using std::placeholders::_2;
 
-FMPSParser::FMPSParser() :
-  // The float regex ends with (?:$|(?=::|;;)) to ensure it matches all the way
-  // up to the end of the value.  Without it, it would match a string that
-  // starts with a number, like "123abc".
-  float_re_("\\s*([+-]?\\d+(?:\\.\\d+)?)\\s*(?:$|(?=::|;;))"),
+FMPSParser::FMPSParser()
+    :  // The float regex ends with (?:$|(?=::|;;)) to ensure it matches all the
+       // way
+      // up to the end of the value.  Without it, it would match a string that
+      // starts with a number, like "123abc".
+      float_re_("\\s*([+-]?\\d+(?:\\.\\d+)?)\\s*(?:$|(?=::|;;))"),
 
-  // Matches any character except unescaped slashes, colons and semicolons.
-  string_re_("((?:[^\\\\;:]|(?:\\\\[\\\\:;]))+)(?:$|(?=::|;;))"),
+      // Matches any character except unescaped slashes, colons and semicolons.
+      string_re_("((?:[^\\\\;:]|(?:\\\\[\\\\:;]))+)(?:$|(?=::|;;))"),
 
-  // Used for replacing escaped characters.
-  escape_re_("\\\\([\\\\:;])")
-{
-}
+      // Used for replacing escaped characters.
+      escape_re_("\\\\([\\\\:;])") {}
 
 // Parses a list of things (of type T) that are separated by two consecutive
 // Separator characters.  Each individual thing is parsed by the F function.
@@ -59,16 +58,16 @@ static int ParseContainer(const QStringRef& data, F f, QList<T>* ret) {
   int pos = 0;
   while (pos < data.length()) {
     const int len = data.length() - pos;
-    int matched_len = f(QStringRef(data.string(), data.position() + pos, len), &value);
-    if (matched_len == -1 || matched_len > len)
-      break;
+    int matched_len =
+        f(QStringRef(data.string(), data.position() + pos, len), &value);
+    if (matched_len == -1 || matched_len > len) break;
 
     ret->append(value);
     pos += matched_len;
 
     // Expect two separators in a row
-    if (pos + 2 <= data.length() && data.at(pos)   == Separator
-                                 && data.at(pos+1) == Separator) {
+    if (pos + 2 <= data.length() && data.at(pos) == Separator &&
+        data.at(pos + 1) == Separator) {
       pos += 2;
     } else {
       break;

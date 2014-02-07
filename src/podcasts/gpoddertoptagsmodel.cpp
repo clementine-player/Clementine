@@ -24,16 +24,12 @@
 
 #include <QMessageBox>
 
-GPodderTopTagsModel::GPodderTopTagsModel(mygpo::ApiRequest* api, Application* app,
-                                         QObject* parent)
-  : PodcastDiscoveryModel(app, parent),
-    api_(api)
-{
-}
+GPodderTopTagsModel::GPodderTopTagsModel(mygpo::ApiRequest* api,
+                                         Application* app, QObject* parent)
+    : PodcastDiscoveryModel(app, parent), api_(api) {}
 
 bool GPodderTopTagsModel::hasChildren(const QModelIndex& parent) const {
-  if (parent.isValid() &&
-      parent.data(Role_Type).toInt() == Type_Folder) {
+  if (parent.isValid() && parent.data(Role_Type).toInt() == Type_Folder) {
     return true;
   }
 
@@ -41,8 +37,7 @@ bool GPodderTopTagsModel::hasChildren(const QModelIndex& parent) const {
 }
 
 bool GPodderTopTagsModel::canFetchMore(const QModelIndex& parent) const {
-  if (parent.isValid() &&
-      parent.data(Role_Type).toInt() == Type_Folder &&
+  if (parent.isValid() && parent.data(Role_Type).toInt() == Type_Folder &&
       parent.data(Role_HasLazyLoaded).toBool() == false) {
     return true;
   }
@@ -51,8 +46,7 @@ bool GPodderTopTagsModel::canFetchMore(const QModelIndex& parent) const {
 }
 
 void GPodderTopTagsModel::fetchMore(const QModelIndex& parent) {
-  if (!parent.isValid() ||
-      parent.data(Role_Type).toInt() != Type_Folder ||
+  if (!parent.isValid() || parent.data(Role_Type).toInt() != Type_Folder ||
       parent.data(Role_HasLazyLoaded).toBool()) {
     return;
   }
@@ -61,32 +55,31 @@ void GPodderTopTagsModel::fetchMore(const QModelIndex& parent) {
   // Create a little Loading... item.
   itemFromIndex(parent)->appendRow(CreateLoadingIndicator());
 
-  mygpo::PodcastListPtr list(
-      api_->podcastsOfTag(GPodderTopTagsPage::kMaxTagCount, parent.data().toString()));
+  mygpo::PodcastListPtr list(api_->podcastsOfTag(
+      GPodderTopTagsPage::kMaxTagCount, parent.data().toString()));
 
-  NewClosure(list, SIGNAL(finished()),
-             this, SLOT(PodcastsOfTagFinished(QModelIndex,mygpo::PodcastList*)),
+  NewClosure(list, SIGNAL(finished()), this,
+             SLOT(PodcastsOfTagFinished(QModelIndex, mygpo::PodcastList*)),
              parent, list.data());
-  NewClosure(list, SIGNAL(parseError()),
-             this, SLOT(PodcastsOfTagFailed(QModelIndex,mygpo::PodcastList*)),
+  NewClosure(list, SIGNAL(parseError()), this,
+             SLOT(PodcastsOfTagFailed(QModelIndex, mygpo::PodcastList*)),
              parent, list.data());
-  NewClosure(list, SIGNAL(requestError(QNetworkReply::NetworkError)),
-             this, SLOT(PodcastsOfTagFailed(QModelIndex,mygpo::PodcastList*)),
+  NewClosure(list, SIGNAL(requestError(QNetworkReply::NetworkError)), this,
+             SLOT(PodcastsOfTagFailed(QModelIndex, mygpo::PodcastList*)),
              parent, list.data());
 }
 
 void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
                                                 mygpo::PodcastList* list) {
   QStandardItem* parent_item = itemFromIndex(parent);
-  if (!parent_item)
-    return;
+  if (!parent_item) return;
 
   // Remove the Loading... item.
   while (parent_item->hasChildren()) {
     parent_item->removeRow(0);
   }
 
-  foreach (mygpo::PodcastPtr gpo_podcast, list->list()) {
+  foreach(mygpo::PodcastPtr gpo_podcast, list->list()) {
     Podcast podcast;
     podcast.InitFromGpo(gpo_podcast.data());
 
@@ -97,8 +90,7 @@ void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
 void GPodderTopTagsModel::PodcastsOfTagFailed(const QModelIndex& parent,
                                               mygpo::PodcastList* list) {
   QStandardItem* parent_item = itemFromIndex(parent);
-  if (!parent_item)
-    return;
+  if (!parent_item) return;
 
   // Remove the Loading... item.
   while (parent_item->hasChildren()) {
@@ -106,10 +98,10 @@ void GPodderTopTagsModel::PodcastsOfTagFailed(const QModelIndex& parent,
   }
 
   if (QMessageBox::warning(
-        nullptr, tr("Failed to fetch podcasts"),
-        tr("There was a problem communicating with gpodder.net"),
-        QMessageBox::Retry | QMessageBox::Close,
-        QMessageBox::Retry) != QMessageBox::Retry) {
+          nullptr, tr("Failed to fetch podcasts"),
+          tr("There was a problem communicating with gpodder.net"),
+          QMessageBox::Retry | QMessageBox::Close,
+          QMessageBox::Retry) != QMessageBox::Retry) {
     return;
   }
 

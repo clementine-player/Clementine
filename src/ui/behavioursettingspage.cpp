@@ -30,12 +30,11 @@ bool LocaleAwareCompare(const QString& a, const QString& b) {
 }  // namespace
 
 BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_BehaviourSettingsPage)
-{
+    : SettingsPage(dialog), ui_(new Ui_BehaviourSettingsPage) {
   ui_->setupUi(this);
 
-  connect(ui_->b_show_tray_icon_, SIGNAL(toggled(bool)), SLOT(ShowTrayIconToggled(bool)));
+  connect(ui_->b_show_tray_icon_, SIGNAL(toggled(bool)),
+          SLOT(ShowTrayIconToggled(bool)));
 
   ui_->doubleclick_addmode->setItemData(0, MainWindow::AddBehaviour_Append);
   ui_->doubleclick_addmode->setItemData(1, MainWindow::AddBehaviour_Load);
@@ -43,7 +42,8 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   ui_->doubleclick_addmode->setItemData(3, MainWindow::AddBehaviour_Enqueue);
 
   ui_->doubleclick_playmode->setItemData(0, MainWindow::PlayBehaviour_Never);
-  ui_->doubleclick_playmode->setItemData(1, MainWindow::PlayBehaviour_IfStopped);
+  ui_->doubleclick_playmode->setItemData(1,
+                                         MainWindow::PlayBehaviour_IfStopped);
   ui_->doubleclick_playmode->setItemData(2, MainWindow::PlayBehaviour_Always);
 
   ui_->menu_playmode->setItemData(0, MainWindow::PlayBehaviour_Never);
@@ -55,10 +55,9 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   QDir dir(":/translations/");
   QStringList codes(dir.entryList(QStringList() << "*.qm"));
   QRegExp lang_re("^clementine_(.*).qm$");
-  foreach (const QString& filename, codes) {
+  foreach(const QString & filename, codes) {
     // The regex captures the "ru" from "clementine_ru.qm"
-    if (!lang_re.exactMatch(filename))
-      continue;
+    if (!lang_re.exactMatch(filename)) continue;
 
     QString code = lang_re.cap(1);
     QString language_name = QLocale::languageToString(QLocale(code).language());
@@ -86,32 +85,39 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
 #endif
 }
 
-BehaviourSettingsPage::~BehaviourSettingsPage() {
-  delete ui_;
-}
+BehaviourSettingsPage::~BehaviourSettingsPage() { delete ui_; }
 
 void BehaviourSettingsPage::Load() {
   QSettings s;
 
   s.beginGroup(MainWindow::kSettingsGroup);
   ui_->b_show_tray_icon_->setChecked(s.value("showtray", true).toBool());
-  ui_->b_keep_running_->setChecked(s.value("keeprunning",
-      ui_->b_show_tray_icon_->isChecked()).toBool());
+  ui_->b_keep_running_->setChecked(
+      s.value("keeprunning", ui_->b_show_tray_icon_->isChecked()).toBool());
   ui_->doubleclick_addmode->setCurrentIndex(ui_->doubleclick_addmode->findData(
       s.value("doubleclick_addmode", MainWindow::AddBehaviour_Append).toInt()));
-  ui_->doubleclick_playmode->setCurrentIndex(ui_->doubleclick_playmode->findData(
-      s.value("doubleclick_playmode", MainWindow::PlayBehaviour_IfStopped).toInt()));
+  ui_->doubleclick_playmode->setCurrentIndex(
+      ui_->doubleclick_playmode->findData(
+          s.value("doubleclick_playmode", MainWindow::PlayBehaviour_IfStopped)
+              .toInt()));
   ui_->menu_playmode->setCurrentIndex(ui_->menu_playmode->findData(
       s.value("menu_playmode", MainWindow::PlayBehaviour_IfStopped).toInt()));
 
   MainWindow::StartupBehaviour behaviour = MainWindow::StartupBehaviour(
       s.value("startupbehaviour", MainWindow::Startup_Remember).toInt());
   switch (behaviour) {
-    case MainWindow::Startup_AlwaysHide: ui_->b_always_hide_->setChecked(true); break;
-    case MainWindow::Startup_AlwaysShow: ui_->b_always_show_->setChecked(true); break;
-    case MainWindow::Startup_Remember:   ui_->b_remember_->setChecked(true);    break;
+    case MainWindow::Startup_AlwaysHide:
+      ui_->b_always_hide_->setChecked(true);
+      break;
+    case MainWindow::Startup_AlwaysShow:
+      ui_->b_always_show_->setChecked(true);
+      break;
+    case MainWindow::Startup_Remember:
+      ui_->b_remember_->setChecked(true);
+      break;
   }
-  ui_->resume_after_start_->setChecked(s.value("resume_playback_after_start", false).toBool());
+  ui_->resume_after_start_->setChecked(
+      s.value("resume_playback_after_start", false).toBool());
   s.endGroup();
 
   s.beginGroup("General");
@@ -123,11 +129,13 @@ void BehaviourSettingsPage::Load() {
   s.endGroup();
 
   s.beginGroup(Playlist::kSettingsGroup);
-  ui_->b_grey_out_deleted_->setChecked(s.value("greyoutdeleted", false).toBool());
+  ui_->b_grey_out_deleted_->setChecked(
+      s.value("greyoutdeleted", false).toBool());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
-  ui_->b_warn_close_playlist_->setChecked(s.value("warn_close_playlist", true).toBool());
+  ui_->b_warn_close_playlist_->setChecked(
+      s.value("warn_close_playlist", true).toBool());
   s.endGroup();
 }
 
@@ -135,16 +143,22 @@ void BehaviourSettingsPage::Save() {
   QSettings s;
 
   MainWindow::StartupBehaviour behaviour = MainWindow::Startup_Remember;
-  if (ui_->b_always_hide_->isChecked()) behaviour = MainWindow::Startup_AlwaysHide;
-  if (ui_->b_always_show_->isChecked()) behaviour = MainWindow::Startup_AlwaysShow;
-  if (ui_->b_remember_->isChecked())    behaviour = MainWindow::Startup_Remember;
+  if (ui_->b_always_hide_->isChecked())
+    behaviour = MainWindow::Startup_AlwaysHide;
+  if (ui_->b_always_show_->isChecked())
+    behaviour = MainWindow::Startup_AlwaysShow;
+  if (ui_->b_remember_->isChecked()) behaviour = MainWindow::Startup_Remember;
 
   MainWindow::AddBehaviour doubleclick_addmode = MainWindow::AddBehaviour(
-    ui_->doubleclick_addmode->itemData(ui_->doubleclick_addmode->currentIndex()).toInt());
+      ui_->doubleclick_addmode->itemData(
+                                    ui_->doubleclick_addmode->currentIndex())
+          .toInt());
   MainWindow::PlayBehaviour doubleclick_playmode = MainWindow::PlayBehaviour(
-    ui_->doubleclick_playmode->itemData(ui_->doubleclick_playmode->currentIndex()).toInt());
+      ui_->doubleclick_playmode->itemData(
+                                     ui_->doubleclick_playmode->currentIndex())
+          .toInt());
   MainWindow::PlayBehaviour menu_playmode = MainWindow::PlayBehaviour(
-    ui_->menu_playmode->itemData(ui_->menu_playmode->currentIndex()).toInt());
+      ui_->menu_playmode->itemData(ui_->menu_playmode->currentIndex()).toInt());
 
   s.beginGroup(MainWindow::kSettingsGroup);
   s.setValue("showtray", ui_->b_show_tray_icon_->isChecked());
@@ -153,12 +167,14 @@ void BehaviourSettingsPage::Save() {
   s.setValue("doubleclick_addmode", doubleclick_addmode);
   s.setValue("doubleclick_playmode", doubleclick_playmode);
   s.setValue("menu_playmode", menu_playmode);
-  s.setValue("resume_playback_after_start", ui_->resume_after_start_->isChecked());
+  s.setValue("resume_playback_after_start",
+             ui_->resume_after_start_->isChecked());
   s.endGroup();
 
   s.beginGroup("General");
-  s.setValue("language", language_map_.contains(ui_->language->currentText()) ?
-             language_map_[ui_->language->currentText()] : QString());
+  s.setValue("language", language_map_.contains(ui_->language->currentText())
+                             ? language_map_[ui_->language->currentText()]
+                             : QString());
   s.endGroup();
 
   s.beginGroup(Playlist::kSettingsGroup);

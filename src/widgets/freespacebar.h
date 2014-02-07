@@ -23,7 +23,7 @@
 class FreeSpaceBar : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   FreeSpaceBar(QWidget* parent = 0);
 
   static const int kBarHeight;
@@ -41,20 +41,38 @@ public:
   static const QRgb kColorBar2;
   static const QRgb kColorBorder;
 
-  void set_free_bytes(qint64 bytes) { free_ = bytes; update(); }
-  void set_additional_bytes(qint64 bytes) { additional_ = bytes; update(); }
-  void set_total_bytes(qint64 bytes) { total_ = bytes; update(); }
+  void set_free_bytes(qint64 bytes) {
+    free_ = bytes;
+    update();
+  }
+  void set_additional_bytes(qint64 bytes) {
+    additional_ = bytes;
+    update();
+  }
+  void set_total_bytes(qint64 bytes) {
+    total_ = bytes;
+    update();
+  }
 
-  void set_free_text(const QString& text) { free_text_ = text; update(); }
-  void set_additional_text(const QString& text) { additional_text_ = text; update(); }
-  void set_used_text(const QString& text) { used_text_ = text; update(); }
+  void set_free_text(const QString& text) {
+    free_text_ = text;
+    update();
+  }
+  void set_additional_text(const QString& text) {
+    additional_text_ = text;
+    update();
+  }
+  void set_used_text(const QString& text) {
+    used_text_ = text;
+    update();
+  }
 
   QSize sizeHint() const;
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
 
-private:
+ private:
   struct Label {
     Label(const QString& t, const QColor& c) : text(t), color(c) {}
 
@@ -67,7 +85,7 @@ private:
   void DrawBar(QPainter* p, const QRect& r);
   void DrawText(QPainter* p, const QRect& r);
 
-private:
+ private:
   qint64 free_;
   qint64 additional_;
   qint64 total_;
@@ -77,4 +95,4 @@ private:
   QString used_text_;
 };
 
-#endif // FREESPACEBAR_H
+#endif  // FREESPACEBAR_H

@@ -28,12 +28,11 @@ class LibraryBackendInterface;
 class SongMimeData : public MimeData {
   Q_OBJECT
 
-public:
-  SongMimeData()
-    : backend(NULL) {}
+ public:
+  SongMimeData() : backend(NULL) {}
 
   LibraryBackendInterface* backend;
   SongList songs;
 };
 
-#endif // SONGMIMEDATA_H
+#endif  // SONGMIMEDATA_H

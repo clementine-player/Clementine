@@ -30,7 +30,7 @@ class TaskManager;
 class DeleteFiles : public QObject {
   Q_OBJECT
 
-public:
+ public:
   DeleteFiles(TaskManager* task_manager, std::shared_ptr<MusicStorage> storage);
   ~DeleteFiles();
 
@@ -42,10 +42,10 @@ public:
 signals:
   void Finished(const SongList& songs_with_errors);
 
-private slots:
+ private slots:
   void ProcessSomeFiles();
 
-private:
+ private:
   QThread* thread_;
   QThread* original_thread_;
   TaskManager* task_manager_;
@@ -61,4 +61,4 @@ private:
   SongList songs_with_errors_;
 };
 
-#endif // DELETEFILES_H
+#endif  // DELETEFILES_H

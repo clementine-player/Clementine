@@ -23,14 +23,13 @@
 #include <QAction>
 #include <QtDebug>
 
-QxtGlobalShortcutBackend::QxtGlobalShortcutBackend(GlobalShortcuts *parent)
-  : GlobalShortcutBackend(parent)
-{
-}
+QxtGlobalShortcutBackend::QxtGlobalShortcutBackend(GlobalShortcuts* parent)
+    : GlobalShortcutBackend(parent) {}
 
 bool QxtGlobalShortcutBackend::DoRegister() {
   qLog(Debug) << "registering";
-  foreach (const GlobalShortcuts::Shortcut& shortcut, manager_->shortcuts().values()) {
+  foreach(const GlobalShortcuts::Shortcut & shortcut,
+          manager_->shortcuts().values()) {
     AddShortcut(shortcut.action);
   }
 
@@ -38,8 +37,7 @@ bool QxtGlobalShortcutBackend::DoRegister() {
 }
 
 void QxtGlobalShortcutBackend::AddShortcut(QAction* action) {
-  if (action->shortcut().isEmpty())
-    return;
+  if (action->shortcut().isEmpty()) return;
 
   QxtGlobalShortcut* shortcut = new QxtGlobalShortcut(action->shortcut(), this);
   connect(shortcut, SIGNAL(activated()), action, SLOT(trigger()));

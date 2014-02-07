@@ -28,15 +28,13 @@ namespace smart_playlists {
 typedef QFuture<PlaylistItemList> Future;
 typedef QFutureWatcher<PlaylistItemList> FutureWatcher;
 
-GeneratorInserter::GeneratorInserter(
-    TaskManager* task_manager, LibraryBackend* library, QObject* parent)
-  : QObject(parent),
-    task_manager_(task_manager),
-    library_(library),
-    task_id_(-1),
-    is_dynamic_(false)
-{
-}
+GeneratorInserter::GeneratorInserter(TaskManager* task_manager,
+                                     LibraryBackend* library, QObject* parent)
+    : QObject(parent),
+      task_manager_(task_manager),
+      library_(library),
+      task_id_(-1),
+      is_dynamic_(false) {}
 
 static PlaylistItemList Generate(GeneratorPtr generator, int dynamic_count) {
   if (dynamic_count) {
@@ -46,9 +44,9 @@ static PlaylistItemList Generate(GeneratorPtr generator, int dynamic_count) {
   }
 }
 
-void GeneratorInserter::Load(
-    Playlist* destination, int row, bool play_now, bool enqueue,
-    GeneratorPtr generator, int dynamic_count) {
+void GeneratorInserter::Load(Playlist* destination, int row, bool play_now,
+                             bool enqueue, GeneratorPtr generator,
+                             int dynamic_count) {
   task_id_ = task_manager_->StartTask(tr("Loading smart playlist"));
 
   destination_ = destination;
@@ -85,4 +83,4 @@ void GeneratorInserter::Finished() {
   deleteLater();
 }
 
-} // namespace
+}  // namespace

@@ -43,8 +43,12 @@ class LibraryWatcher : public QObject {
   static const char* kSettingsGroup;
 
   void set_backend(LibraryBackend* backend) { backend_ = backend; }
-  void set_task_manager(TaskManager* task_manager) { task_manager_ = task_manager; }
-  void set_device_name(const QString& device_name) { device_name_ = device_name; }
+  void set_task_manager(TaskManager* task_manager) {
+    task_manager_ = task_manager;
+  }
+  void set_device_name(const QString& device_name) {
+    device_name_ = device_name;
+  }
 
   void IncrementalScanAsync();
   void FullScanAsync();
@@ -53,7 +57,7 @@ class LibraryWatcher : public QObject {
 
   void Stop() { stop_requested_ = true; }
 
- signals:
+signals:
   void NewOrUpdatedSongs(const SongList& songs);
   void SongsMTimeUpdated(const SongList& songs);
   void SongsDeleted(const SongList& songs);
@@ -82,8 +86,8 @@ class LibraryWatcher : public QObject {
   // LibraryBackend::FindSongsInDirectory.
   class ScanTransaction {
    public:
-    ScanTransaction(LibraryWatcher* watcher, int dir,
-                    bool incremental, bool ignores_mtime = false);
+    ScanTransaction(LibraryWatcher* watcher, int dir, bool incremental,
+                    bool ignores_mtime = false);
     ~ScanTransaction();
 
     SongList FindSongsInSubdirectory(const QString& path);
@@ -108,7 +112,7 @@ class LibraryWatcher : public QObject {
 
    private:
     ScanTransaction(const ScanTransaction&) {}
-    ScanTransaction& operator =(const ScanTransaction&) { return *this; }
+    ScanTransaction& operator=(const ScanTransaction&) { return *this; }
 
     int task_id_;
     int progress_;
@@ -142,12 +146,14 @@ class LibraryWatcher : public QObject {
                         ScanTransaction* t, bool force_noincremental = false);
 
  private:
-  static bool FindSongByPath(const SongList& list, const QString& path, Song* out);
-  inline static QString NoExtensionPart( const QString &fileName );
-  inline static QString ExtensionPart( const QString &fileName );
-  inline static QString DirectoryPart( const QString &fileName );
+  static bool FindSongByPath(const SongList& list, const QString& path,
+                             Song* out);
+  inline static QString NoExtensionPart(const QString& fileName);
+  inline static QString ExtensionPart(const QString& fileName);
+  inline static QString DirectoryPart(const QString& fileName);
   QString PickBestImage(const QStringList& images);
-  QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
+  QString ImageForSong(const QString& path,
+                       QMap<QString, QStringList>& album_art);
   void AddWatch(const Directory& dir, const QString& path);
   uint GetMtimeForCue(const QString& cue_path);
   void PerformScan(bool incremental, bool ignore_mtimes);
@@ -155,22 +161,26 @@ class LibraryWatcher : public QObject {
   // Updates the sections of a cue associated and altered (according to mtime)
   // media file during a scan.
   void UpdateCueAssociatedSongs(const QString& file, const QString& path,
-                                const QString& matching_cue, const QString& image,
-                                ScanTransaction* t);
+                                const QString& matching_cue,
+                                const QString& image, ScanTransaction* t);
   // Updates a single non-cue associated and altered (according to mtime) song
   // during a scan.
-  void UpdateNonCueAssociatedSong(const QString& file, const Song& matching_song,
+  void UpdateNonCueAssociatedSong(const QString& file,
+                                  const Song& matching_song,
                                   const QString& image, bool cue_deleted,
-                                  ScanTransaction* t)  ;
+                                  ScanTransaction* t);
   // Updates a new song with some metadata taken from it's equivalent old
   // song (for example rating and score).
   void PreserveUserSetData(const QString& file, const QString& image,
-                           const Song& matching_song, Song* out, ScanTransaction* t);
-  // Scans a single media file that's present on the disk but not yet in the library.
+                           const Song& matching_song, Song* out,
+                           ScanTransaction* t);
+  // Scans a single media file that's present on the disk but not yet in the
+  // library.
   // It may result in a multiple files added to the library when the media file
   // has many sections (like a CUE related media file).
   SongList ScanNewFile(const QString& file, const QString& path,
-                       const QString& matching_cue, QSet<QString>* cues_processed);
+                       const QString& matching_cue,
+                       QSet<QString>* cues_processed);
 
  private:
   LibraryBackend* backend_;
@@ -193,7 +203,8 @@ class LibraryWatcher : public QObject {
 
   QMap<int, Directory> watched_dirs_;
   QTimer* rescan_timer_;
-  QMap<int, QStringList> rescan_queue_; // dir id -> list of subdirs to be scanned
+  QMap<int, QStringList>
+      rescan_queue_;  // dir id -> list of subdirs to be scanned
   bool rescan_paused_;
 
   int total_watches_;
@@ -203,15 +214,17 @@ class LibraryWatcher : public QObject {
   static QStringList sValidImages;
 };
 
-inline QString LibraryWatcher::NoExtensionPart( const QString &fileName ) {
-  return fileName.contains( '.' ) ? fileName.section( '.', 0, -2 ) : "";
+inline QString LibraryWatcher::NoExtensionPart(const QString& fileName) {
+  return fileName.contains('.') ? fileName.section('.', 0, -2) : "";
 }
 // Thanks Amarok
-inline QString LibraryWatcher::ExtensionPart( const QString &fileName ) {
-  return fileName.contains( '.' ) ? fileName.mid( fileName.lastIndexOf('.') + 1 ).toLower() : "";
+inline QString LibraryWatcher::ExtensionPart(const QString& fileName) {
+  return fileName.contains('.')
+             ? fileName.mid(fileName.lastIndexOf('.') + 1).toLower()
+             : "";
 }
-inline QString LibraryWatcher::DirectoryPart( const QString &fileName ) {
-  return fileName.section( '/', 0, -2 );
+inline QString LibraryWatcher::DirectoryPart(const QString& fileName) {
+  return fileName.section('/', 0, -2);
 }
 
-#endif // LIBRARYWATCHER_H
+#endif  // LIBRARYWATCHER_H

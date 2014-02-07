@@ -17,11 +17,7 @@
 
 #include "taskmanager.h"
 
-TaskManager::TaskManager(QObject *parent)
-  : QObject(parent),
-    next_task_id_(1)
-{
-}
+TaskManager::TaskManager(QObject* parent) : QObject(parent), next_task_id_(1) {}
 
 int TaskManager::StartTask(const QString& name) {
   Task t;
@@ -32,7 +28,7 @@ int TaskManager::StartTask(const QString& name) {
 
   {
     QMutexLocker l(&mutex_);
-    t.id = next_task_id_ ++;
+    t.id = next_task_id_++;
     tasks_[t.id] = t;
   }
 
@@ -54,8 +50,7 @@ QList<TaskManager::Task> TaskManager::GetTasks() {
 void TaskManager::SetTaskBlocksLibraryScans(int id) {
   {
     QMutexLocker l(&mutex_);
-    if (!tasks_.contains(id))
-      return;
+    if (!tasks_.contains(id)) return;
 
     Task& t = tasks_[id];
     t.blocks_library_scans = true;
@@ -68,13 +63,11 @@ void TaskManager::SetTaskBlocksLibraryScans(int id) {
 void TaskManager::SetTaskProgress(int id, int progress, int max) {
   {
     QMutexLocker l(&mutex_);
-    if (!tasks_.contains(id))
-      return;
+    if (!tasks_.contains(id)) return;
 
     Task& t = tasks_[id];
     t.progress = progress;
-    if (max)
-      t.progress_max = max;
+    if (max) t.progress_max = max;
   }
 
   emit TasksChanged();
@@ -83,13 +76,11 @@ void TaskManager::SetTaskProgress(int id, int progress, int max) {
 void TaskManager::IncreaseTaskProgress(int id, int progress, int max) {
   {
     QMutexLocker l(&mutex_);
-    if (!tasks_.contains(id))
-      return;
+    if (!tasks_.contains(id)) return;
 
     Task& t = tasks_[id];
     t.progress += progress;
-    if (max)
-      t.progress_max = max;
+    if (max) t.progress_max = max;
   }
 
   emit TasksChanged();
@@ -100,12 +91,11 @@ void TaskManager::SetTaskFinished(int id) {
 
   {
     QMutexLocker l(&mutex_);
-    if (!tasks_.contains(id))
-      return;
+    if (!tasks_.contains(id)) return;
 
     if (tasks_[id].blocks_library_scans) {
       resume_library_watchers = true;
-      foreach (const Task& task, tasks_.values()) {
+      foreach(const Task & task, tasks_.values()) {
         if (task.id != id && task.blocks_library_scans) {
           resume_library_watchers = false;
           break;
@@ -117,15 +107,13 @@ void TaskManager::SetTaskFinished(int id) {
   }
 
   emit TasksChanged();
-  if (resume_library_watchers)
-    emit ResumeLibraryWatchers();
+  if (resume_library_watchers) emit ResumeLibraryWatchers();
 }
 
 int TaskManager::GetTaskProgress(int id) {
   {
     QMutexLocker l(&mutex_);
-    if (!tasks_.contains(id))
-      return 0;
+    if (!tasks_.contains(id)) return 0;
     return tasks_[id].progress;
   }
 }

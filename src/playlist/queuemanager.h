@@ -29,13 +29,13 @@ class QModelIndex;
 class QueueManager : public QDialog {
   Q_OBJECT
 
-public:
+ public:
   QueueManager(QWidget* parent = 0);
   ~QueueManager();
 
   void SetPlaylistManager(PlaylistManager* manager);
 
-private slots:
+ private slots:
   void CurrentPlaylistChanged(Playlist* playlist);
   void PlaylistDestroyed();
   void UpdateButtonState();
@@ -45,11 +45,11 @@ private slots:
   void Remove();
   void Clear();
 
-private:
+ private:
   Ui_QueueManager* ui_;
 
   PlaylistManager* playlists_;
   Playlist* current_playlist_;
 };
 
-#endif // QUEUEMANAGER_H
+#endif  // QUEUEMANAGER_H

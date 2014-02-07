@@ -37,10 +37,10 @@ class SystemTrayIcon;
 class QDBusPendingCallWatcher;
 
 #ifdef HAVE_DBUS
-# include <QDBusArgument>
+#include <QDBusArgument>
 
-  QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
-  const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
+QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image);
+const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 #endif
 
 class OSD : public QObject {
@@ -52,12 +52,7 @@ class OSD : public QObject {
 
   static const char* kSettingsGroup;
 
-  enum Behaviour {
-    Disabled = 0,
-    Native,
-    TrayPopup,
-    Pretty,
-  };
+  enum Behaviour { Disabled = 0, Native, TrayPopup, Pretty, };
 
   // Implemented in the OS-specific files
   static bool SupportsNativeNotifications();
@@ -90,25 +85,25 @@ class OSD : public QObject {
   void WiiremoteCriticalBattery(int id, int live);
 #endif
 
-  void ShowPreview(const Behaviour type, const QString& line1, const QString& line2, const Song& song);
+  void ShowPreview(const Behaviour type, const QString& line1,
+                   const QString& line2, const Song& song);
 
  private:
-  void ShowMessage(const QString& summary,
-                   const QString& message = QString(),
+  void ShowMessage(const QString& summary, const QString& message = QString(),
                    const QString& icon = QString(),
                    const QImage& image = QImage());
 
   // These are implemented in the OS-specific files
   void Init();
-  void ShowMessageNative(const QString& summary,
-                         const QString& message,
+  void ShowMessageNative(const QString& summary, const QString& message,
                          const QString& icon = QString(),
                          const QImage& image = QImage());
   QString ReplaceVariable(const QString& variable, const Song& song);
 
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);
-  void AlbumArtLoaded(const Song& song, const QString& uri, const QImage& image);
+  void AlbumArtLoaded(const Song& song, const QString& uri,
+                      const QImage& image);
 
  private:
   SystemTrayIcon* tray_icon_;
@@ -144,4 +139,4 @@ class OSD : public QObject {
 #endif
 };
 
-#endif // OSD_H
+#endif  // OSD_H

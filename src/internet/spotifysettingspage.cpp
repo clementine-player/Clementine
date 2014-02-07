@@ -32,11 +32,10 @@
 #include <QtDebug>
 
 SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_SpotifySettingsPage),
-    service_(InternetModel::Service<SpotifyService>()),
-    validated_(false)
-{
+    : SettingsPage(dialog),
+      ui_(new Ui_SpotifySettingsPage),
+      service_(InternetModel::Service<SpotifyService>()),
+      validated_(false) {
   ui_->setupUi(this);
 
   setWindowIcon(QIcon(":/icons/48x48/spotify.png"));
@@ -64,9 +63,7 @@ SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
   BlobStateChanged();
 }
 
-SpotifySettingsPage::~SpotifySettingsPage() {
-  delete ui_;
-}
+SpotifySettingsPage::~SpotifySettingsPage() { delete ui_; }
 
 void SpotifySettingsPage::BlobStateChanged() {
   const bool installed = service_->IsBlobInstalled();
@@ -81,9 +78,7 @@ void SpotifySettingsPage::BlobStateChanged() {
 #endif
 }
 
-void SpotifySettingsPage::DownloadBlob() {
-  service_->InstallBlob();
-}
+void SpotifySettingsPage::DownloadBlob() { service_->InstallBlob(); }
 
 void SpotifySettingsPage::Login() {
   if (!service_->IsBlobInstalled()) {
@@ -124,7 +119,8 @@ void SpotifySettingsPage::Save() {
   s.setValue("username", ui_->username->text());
   s.setValue("password", ui_->password->text());
 
-  s.setValue("bitrate", ui_->bitrate->itemData(ui_->bitrate->currentIndex()).toInt());
+  s.setValue("bitrate",
+             ui_->bitrate->itemData(ui_->bitrate->currentIndex()).toInt());
   s.setValue("volume_normalisation", ui_->volume_normalisation->isChecked());
 }
 
@@ -139,28 +135,33 @@ void SpotifySettingsPage::UpdateLoginState() {
   const bool logged_in =
       service_->login_state() == SpotifyService::LoginState_LoggedIn;
 
-  ui_->login_state->SetLoggedIn(logged_in ? LoginStateWidget::LoggedIn
-                                          : LoginStateWidget::LoggedOut,
-                                ui_->username->text());
+  ui_->login_state->SetLoggedIn(
+      logged_in ? LoginStateWidget::LoggedIn : LoginStateWidget::LoggedOut,
+      ui_->username->text());
   ui_->login_state->SetAccountTypeVisible(!logged_in);
 
   switch (service_->login_state()) {
-  case SpotifyService::LoginState_NoPremium:
-    ui_->login_state->SetAccountTypeText(tr("You do not have a Spotify Premium account."));
-    break;
+    case SpotifyService::LoginState_NoPremium:
+      ui_->login_state->SetAccountTypeText(
+          tr("You do not have a Spotify Premium account."));
+      break;
 
-  case SpotifyService::LoginState_Banned:
-  case SpotifyService::LoginState_BadCredentials:
-    ui_->login_state->SetAccountTypeText(tr("Your username or password was incorrect."));
-    break;
+    case SpotifyService::LoginState_Banned:
+    case SpotifyService::LoginState_BadCredentials:
+      ui_->login_state->SetAccountTypeText(
+          tr("Your username or password was incorrect."));
+      break;
 
-  case SpotifyService::LoginState_ReloginFailed:
-    ui_->login_state->SetAccountTypeText(tr("You have been logged out of Spotify, please re-enter your password."));
-    break;
+    case SpotifyService::LoginState_ReloginFailed:
+      ui_->login_state->SetAccountTypeText(
+          tr("You have been logged out of Spotify, please re-enter your "
+             "password."));
+      break;
 
-  default:
-    ui_->login_state->SetAccountTypeText(tr("A Spotify Premium account is required."));
-    break;
+    default:
+      ui_->login_state->SetAccountTypeText(
+          tr("A Spotify Premium account is required."));
+      break;
   }
 }
 

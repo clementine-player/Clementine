@@ -24,17 +24,17 @@ class QProcess;
 
 class UbuntuUnityHack : public QObject {
   Q_OBJECT
-public:
+ public:
   UbuntuUnityHack(QObject* parent = NULL);
 
-private slots:
+ private slots:
   void GetFinished(int exit_code);
   void GetError();
 
-private:
+ private:
   static const char* kGSettingsFileName;
   static const char* kUnityPanel;
   static const char* kUnitySystrayWhitelist;
 };
 
-#endif // UBUNTUUNITYHACK_H
+#endif  // UBUNTUUNITYHACK_H

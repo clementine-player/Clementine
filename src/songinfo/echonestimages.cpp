@@ -41,19 +41,20 @@ void EchoNestImages::FetchInfo(int id, const Song& metadata) {
 
 void EchoNestImages::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !requests_.contains(reply))
-    return;
+  if (!reply || !requests_.contains(reply)) return;
   reply->deleteLater();
 
   RequestPtr request = requests_.take(reply);
 
   try {
     request->artist_->parseProfile(reply);
-  } catch (Echonest::ParseError e) {
-    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
+  }
+  catch (Echonest::ParseError e) {
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType()
+                  << e.what();
   }
 
-  foreach (const Echonest::ArtistImage& image, request->artist_->images()) {
+  foreach(const Echonest::ArtistImage & image, request->artist_->images()) {
     emit ImageReady(request->id_, image.url());
   }
 

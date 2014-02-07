@@ -34,6 +34,7 @@ class DefaultComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return element.contains(search_term_);
   }
+
  private:
   QString search_term_;
 };
@@ -44,6 +45,7 @@ class EqComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return search_term_ == element;
   }
+
  private:
   QString search_term_;
 };
@@ -54,6 +56,7 @@ class NeComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return search_term_ != element;
   }
+
  private:
   QString search_term_;
 };
@@ -64,6 +67,7 @@ class LexicalGtComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return element > search_term_;
   }
+
  private:
   QString search_term_;
 };
@@ -74,6 +78,7 @@ class LexicalGeComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return element >= search_term_;
   }
+
  private:
   QString search_term_;
 };
@@ -84,6 +89,7 @@ class LexicalLtComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return element < search_term_;
   }
+
  private:
   QString search_term_;
 };
@@ -94,6 +100,7 @@ class LexicalLeComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return element <= search_term_;
   }
+
  private:
   QString search_term_;
 };
@@ -104,6 +111,7 @@ class GtComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return element.toInt() > search_term_;
   }
+
  private:
   int search_term_;
 };
@@ -114,6 +122,7 @@ class GeComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return element.toInt() >= search_term_;
   }
+
  private:
   int search_term_;
 };
@@ -124,6 +133,7 @@ class LtComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return element.toInt() < search_term_;
   }
+
  private:
   int search_term_;
 };
@@ -134,6 +144,7 @@ class LeComparator : public SearchTermComparator {
   virtual bool Matches(const QString& element) const {
     return element.toInt() <= search_term_;
   }
+
  private:
   int search_term_;
 };
@@ -149,10 +160,11 @@ class DropTailComparatorDecorator : public SearchTermComparator {
 
   virtual bool Matches(const QString& element) const {
     if (element.length() > 9)
-      return cmp_->Matches(element.left(element.length()-9));
+      return cmp_->Matches(element.left(element.length() - 9));
     else
       return cmp_->Matches(element);
   }
+
  private:
   QScopedPointer<SearchTermComparator> cmp_;
 };
@@ -164,6 +176,7 @@ class RatingComparatorDecorator : public SearchTermComparator {
     return cmp_->Matches(
         QString::number(static_cast<int>(element.toDouble() * 10.0 + 0.5)));
   }
+
  private:
   QScopedPointer<SearchTermComparator> cmp_;
 };
@@ -171,32 +184,39 @@ class RatingComparatorDecorator : public SearchTermComparator {
 // filter that applies a SearchTermComparator to all fields of a playlist entry
 class FilterTerm : public FilterTree {
  public:
-  explicit FilterTerm(SearchTermComparator* comparator, const QList<int>& columns) : cmp_(comparator), columns_(columns) {}
+  explicit FilterTerm(SearchTermComparator* comparator,
+                      const QList<int>& columns)
+      : cmp_(comparator), columns_(columns) {}
 
-  virtual bool accept(int row, const QModelIndex& parent, const QAbstractItemModel* const model) const {
-    foreach (int i, columns_) {
+  virtual bool accept(int row, const QModelIndex& parent,
+                      const QAbstractItemModel* const model) const {
+    foreach(int i, columns_) {
       QModelIndex idx(model->index(row, i, parent));
-      if (cmp_->Matches(idx.data().toString().toLower()))
-        return true;
+      if (cmp_->Matches(idx.data().toString().toLower())) return true;
     }
     return false;
   }
   virtual FilterType type() { return Term; }
+
  private:
   QScopedPointer<SearchTermComparator> cmp_;
   QList<int> columns_;
 };
 
-// filter that applies a SearchTermComparator to one specific field of a playlist entry
+// filter that applies a SearchTermComparator to one specific field of a
+// playlist entry
 class FilterColumnTerm : public FilterTree {
  public:
-  FilterColumnTerm(int column, SearchTermComparator* comparator) : col(column), cmp_(comparator) {}
+  FilterColumnTerm(int column, SearchTermComparator* comparator)
+      : col(column), cmp_(comparator) {}
 
-  virtual bool accept(int row, const QModelIndex& parent, const QAbstractItemModel* const model) const {
+  virtual bool accept(int row, const QModelIndex& parent,
+                      const QAbstractItemModel* const model) const {
     QModelIndex idx(model->index(row, col, parent));
     return cmp_->Matches(idx.data().toString().toLower());
   }
   virtual FilterType type() { return Column; }
+
  private:
   int col;
   QScopedPointer<SearchTermComparator> cmp_;
@@ -206,26 +226,29 @@ class NotFilter : public FilterTree {
  public:
   explicit NotFilter(const FilterTree* inv) : child_(inv) {}
 
-  virtual bool accept(int row, const QModelIndex& parent, const QAbstractItemModel* const model) const {
+  virtual bool accept(int row, const QModelIndex& parent,
+                      const QAbstractItemModel* const model) const {
     return !child_->accept(row, parent, model);
   }
   virtual FilterType type() { return Not; }
+
  private:
   QScopedPointer<const FilterTree> child_;
 };
 
-class OrFilter : public FilterTree  {
+class OrFilter : public FilterTree {
  public:
   ~OrFilter() { qDeleteAll(children_); }
   virtual void add(FilterTree* child) { children_.append(child); }
-  virtual bool accept(int row, const QModelIndex& parent, const QAbstractItemModel* const model) const {
-    foreach (FilterTree* child, children_) {
-      if (child->accept(row, parent, model))
-        return true;
+  virtual bool accept(int row, const QModelIndex& parent,
+                      const QAbstractItemModel* const model) const {
+    foreach(FilterTree * child, children_) {
+      if (child->accept(row, parent, model)) return true;
     }
     return false;
   }
   FilterType type() { return Or; }
+
  private:
   QList<FilterTree*> children_;
 };
@@ -234,22 +257,25 @@ class AndFilter : public FilterTree {
  public:
   virtual ~AndFilter() { qDeleteAll(children_); }
   virtual void add(FilterTree* child) { children_.append(child); }
-  virtual bool accept(int row, const QModelIndex& parent, const QAbstractItemModel* const model) const {
-    foreach (FilterTree* child, children_) {
-      if (!child->accept(row, parent, model))
-        return false;
+  virtual bool accept(int row, const QModelIndex& parent,
+                      const QAbstractItemModel* const model) const {
+    foreach(FilterTree * child, children_) {
+      if (!child->accept(row, parent, model)) return false;
     }
     return true;
   }
   FilterType type() { return And; }
+
  private:
   QList<FilterTree*> children_;
 };
 
-FilterParser::FilterParser(const QString& filter, const QMap<QString, int>& columns, const QSet<int>& numerical_cols)
-    : filterstring_(filter), columns_(columns), numerical_columns_(numerical_cols)
-{
-}
+FilterParser::FilterParser(const QString& filter,
+                           const QMap<QString, int>& columns,
+                           const QSet<int>& numerical_cols)
+    : filterstring_(filter),
+      columns_(columns),
+      numerical_columns_(numerical_cols) {}
 
 FilterTree* FilterParser::parse() {
   iter_ = filterstring_.constBegin();
@@ -265,8 +291,7 @@ void FilterParser::advance() {
 
 FilterTree* FilterParser::parseOrGroup() {
   advance();
-  if (iter_ == end_)
-    return new NopFilter;
+  if (iter_ == end_) return new NopFilter;
 
   OrFilter* group = new OrFilter;
   group->add(parseAndGroup());
@@ -280,15 +305,13 @@ FilterTree* FilterParser::parseOrGroup() {
 
 FilterTree* FilterParser::parseAndGroup() {
   advance();
-  if (iter_ == end_)
-    return new NopFilter;
+  if (iter_ == end_) return new NopFilter;
 
   AndFilter* group = new AndFilter();
   do {
     group->add(parseSearchExpression());
     advance();
-    if (iter_ != end_ && *iter_ == QChar(')'))
-      break;
+    if (iter_ != end_ && *iter_ == QChar(')')) break;
     if (checkOr(false)) {
       break;
     }
@@ -308,7 +331,8 @@ bool FilterParser::checkAnd() {
         if (iter_ != end_ && *iter_ == QChar('D')) {
           buf_ += *iter_;
           iter_++;
-          if (iter_ != end_ && (iter_->isSpace() || *iter_ == QChar('-') || *iter_ == '(')) {
+          if (iter_ != end_ &&
+              (iter_->isSpace() || *iter_ == QChar('-') || *iter_ == '(')) {
             advance();
             buf_.clear();
             return true;
@@ -337,7 +361,8 @@ bool FilterParser::checkOr(bool step_over) {
         if (iter_ != end_ && *iter_ == 'R') {
           buf_ += *iter_;
           iter_++;
-          if (iter_ != end_ && (iter_->isSpace() || *iter_ == '-' || *iter_ == '(')) {
+          if (iter_ != end_ &&
+              (iter_->isSpace() || *iter_ == '-' || *iter_ == '(')) {
             if (step_over) {
               buf_.clear();
               advance();
@@ -353,8 +378,7 @@ bool FilterParser::checkOr(bool step_over) {
 
 FilterTree* FilterParser::parseSearchExpression() {
   advance();
-  if (iter_ == end_)
-    return new NopFilter;
+  if (iter_ == end_) return new NopFilter;
   if (*iter_ == '(') {
     iter_++;
     advance();
@@ -369,8 +393,7 @@ FilterTree* FilterParser::parseSearchExpression() {
   } else if (*iter_ == '-') {
     ++iter_;
     FilterTree* tree = parseSearchExpression();
-    if (tree->type() != FilterTree::Nop)
-      return new NotFilter(tree);
+    if (tree->type() != FilterTree::Nop) return new NotFilter(tree);
     return tree;
   } else {
     return parseSearchTerm();
@@ -395,17 +418,14 @@ FilterTree* FilterParser::parseSearchTerm() {
         col = buf_.toLower();
         buf_.clear();
         prefix.clear();  // prefix isn't allowed here - let's ignore it
-      } else if (iter_->isSpace() ||
-                  *iter_ == '(' ||
-                  *iter_ == ')' ||
-                  *iter_ == '-') {
-          break;
+      } else if (iter_->isSpace() || *iter_ == '(' || *iter_ == ')' ||
+                 *iter_ == '-') {
+        break;
       } else if (buf_.isEmpty()) {
         // we don't know whether there is a column part in this search term
         // thus we assume the latter and just try and read a prefix
-        if (prefix.isEmpty() &&
-            (*iter_ == '>' || *iter_ == '<' || *iter_ == '=' ||
-             *iter_ == '!')) {
+        if (prefix.isEmpty() && (*iter_ == '>' || *iter_ == '<' ||
+                                 *iter_ == '=' || *iter_ == '!')) {
           prefix += *iter_;
         } else if (prefix != "=" && *iter_ == '=') {
           prefix += *iter_;
@@ -481,8 +501,7 @@ FilterTree* FilterParser::createSearchTermTreeNode(
       cmp = new RatingComparatorDecorator(cmp);
     }
     return new FilterColumnTerm(columns_[col], cmp);
-  }
-  else {
+  } else {
     return new FilterTerm(cmp, columns_.values());
   }
 }
@@ -504,7 +523,7 @@ int FilterParser::parseTime(const QString& time_str) const {
   int seconds = 0;
   int accum = 0;
   int colon_count = 0;
-  foreach (const QChar& c, time_str) {
+  foreach(const QChar & c, time_str) {
     if (c.isDigit()) {
       accum = accum * 10 + c.digitValue();
     } else if (c == ':') {

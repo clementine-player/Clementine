@@ -27,11 +27,9 @@
 #include <QXmlStreamReader>
 
 XSPFParser::XSPFParser(LibraryBackendInterface* library, QObject* parent)
-    : XMLParser(library, parent)
-{
-}
+    : XMLParser(library, parent) {}
 
-SongList XSPFParser::Load(QIODevice *device, const QString& playlist_path,
+SongList XSPFParser::Load(QIODevice* device, const QString& playlist_path,
                           const QDir& dir) const {
   SongList ret;
 
@@ -102,7 +100,8 @@ return_song:
   return song;
 }
 
-void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) const {
+void XSPFParser::Save(const SongList& songs, QIODevice* device,
+                      const QDir&) const {
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
@@ -112,7 +111,7 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) con
   writer.writeDefaultNamespace("http://xspf.org/ns/0/");
 
   StreamElement tracklist("trackList", &writer);
-  foreach (const Song& song, songs) {
+  foreach(const Song & song, songs) {
     StreamElement track("track", &writer);
     writer.writeTextElement("location", song.url().toString());
     writer.writeTextElement("title", song.title());
@@ -123,10 +122,12 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) con
       writer.writeTextElement("album", song.album());
     }
     if (song.length_nanosec() != -1) {
-      writer.writeTextElement("duration", QString::number(song.length_nanosec() / kNsecPerMsec));
+      writer.writeTextElement(
+          "duration", QString::number(song.length_nanosec() / kNsecPerMsec));
     }
 
-    QString art = song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
+    QString art =
+        song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
       // Convert local files to URLs.
@@ -139,6 +140,6 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) con
   writer.writeEndDocument();
 }
 
-bool XSPFParser::TryMagic(const QByteArray &data) const {
+bool XSPFParser::TryMagic(const QByteArray& data) const {
   return data.contains("<playlist") && data.contains("<trackList");
 }

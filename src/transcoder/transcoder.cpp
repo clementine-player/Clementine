@@ -33,37 +33,30 @@ using std::shared_ptr;
 
 int Transcoder::JobFinishedEvent::sEventType = -1;
 
+TranscoderPreset::TranscoderPreset(Song::FileType type, const QString& name,
+                                   const QString& extension,
+                                   const QString& codec_mimetype,
+                                   const QString& muxer_mimetype)
+    : type_(type),
+      name_(name),
+      extension_(extension),
+      codec_mimetype_(codec_mimetype),
+      muxer_mimetype_(muxer_mimetype) {}
 
-TranscoderPreset::TranscoderPreset(
-    Song::FileType type,
-    const QString& name,
-    const QString& extension,
-    const QString& codec_mimetype,
-    const QString& muxer_mimetype)
-      : type_(type),
-        name_(name),
-        extension_(extension),
-        codec_mimetype_(codec_mimetype),
-        muxer_mimetype_(muxer_mimetype)
-{
-}
-
-
-GstElement* Transcoder::CreateElement(const QString &factory_name,
-                                      GstElement *bin,
-                                      const QString &name) {
+GstElement* Transcoder::CreateElement(const QString& factory_name,
+                                      GstElement* bin, const QString& name) {
   GstElement* ret = gst_element_factory_make(
       factory_name.toAscii().constData(),
-      name.isNull() ? factory_name.toAscii().constData() : name.toAscii().constData());
+      name.isNull() ? factory_name.toAscii().constData()
+                    : name.toAscii().constData());
 
-  if (ret && bin)
-    gst_bin_add(GST_BIN(bin), ret);
+  if (ret && bin) gst_bin_add(GST_BIN(bin), ret);
 
   if (!ret) {
     emit LogLine(
         tr("Could not create the GStreamer element \"%1\" -"
            " make sure you have all the required GStreamer plugins installed")
-        .arg(factory_name));
+            .arg(factory_name));
   } else {
     SetElementProperties(factory_name, G_OBJECT(ret));
   }
@@ -73,9 +66,11 @@ GstElement* Transcoder::CreateElement(const QString &factory_name,
 
 struct SuitableElement {
   SuitableElement(const QString& name = QString(), int rank = 0)
-    : name_(name), rank_(rank) {}
+      : name_(name), rank_(rank) {}
 
-  bool operator <(const SuitableElement& other) const { return rank_ < other.rank_; }
+  bool operator<(const SuitableElement& other) const {
+    return rank_ < other.rank_;
+  }
 
   QString name_;
   int rank_;
@@ -84,8 +79,7 @@ struct SuitableElement {
 GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
                                                  const QString& mime_type,
                                                  GstElement* bin) {
-  if (mime_type.isEmpty())
-    return nullptr;
+  if (mime_type.isEmpty()) return nullptr;
 
   // HACK: Force ffmux_mp4 because it doesn't set any useful src caps
   if (mime_type == "audio/mp4") {
@@ -104,18 +98,18 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   GList* const features =
       gst_registry_get_feature_list(registry, GST_TYPE_ELEMENT_FACTORY);
 
-  for (GList* p = features ; p ; p = g_list_next(p)) {
+  for (GList* p = features; p; p = g_list_next(p)) {
     GstElementFactory* factory = GST_ELEMENT_FACTORY(p->data);
 
     // Is this the right type of plugin?
     if (QString(factory->details.klass).contains(element_type)) {
       const GList* const templates =
           gst_element_factory_get_static_pad_templates(factory);
-      for (const GList* p = templates ; p ; p = g_list_next(p)) {
+      for (const GList* p = templates; p; p = g_list_next(p)) {
         // Only interested in source pads
-        GstStaticPadTemplate* pad_template = reinterpret_cast<GstStaticPadTemplate*>(p->data);
-        if (pad_template->direction != GST_PAD_SRC)
-          continue;
+        GstStaticPadTemplate* pad_template =
+            reinterpret_cast<GstStaticPadTemplate*>(p->data);
+        if (pad_template->direction != GST_PAD_SRC) continue;
 
         // Does this pad support the mime type we want?
         GstCaps* caps = gst_static_pad_template_get_caps(pad_template);
@@ -127,7 +121,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
             QString name = GST_PLUGIN_FEATURE_NAME(factory);
 
             if (name.startsWith("ffmux") || name.startsWith("ffenc"))
-              rank = -1; // ffmpeg usually sucks
+              rank = -1;  // ffmpeg usually sucks
 
             suitable_elements_ << SuitableElement(name, rank);
           }
@@ -140,8 +134,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   gst_plugin_feature_list_free(features);
   gst_caps_unref(target_caps);
 
-  if (suitable_elements_.isEmpty())
-    return nullptr;
+  if (suitable_elements_.isEmpty()) return nullptr;
 
   // Sort by rank
   qSort(suitable_elements_);
@@ -151,7 +144,8 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
 
   if (best.name_ == "lamemp3enc") {
     // Special case: we need to add xingmux and id3v2mux to the pipeline when
-    // using lamemp3enc because it doesn't write the VBR or ID3v2 headers itself.
+    // using lamemp3enc because it doesn't write the VBR or ID3v2 headers
+    // itself.
 
     LogLine("Adding xingmux and id3v2mux to the pipeline");
 
@@ -160,8 +154,8 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
     gst_bin_add(GST_BIN(bin), mp3bin);
 
     // Create the elements
-    GstElement* lame  = CreateElement("lamemp3enc", mp3bin);
-    GstElement* xing  = CreateElement("xingmux", mp3bin);
+    GstElement* lame = CreateElement("lamemp3enc", mp3bin);
+    GstElement* xing = CreateElement("xingmux", mp3bin);
     GstElement* id3v2 = CreateElement("id3v2mux", mp3bin);
 
     if (!lame || !xing || !id3v2) {
@@ -186,28 +180,21 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   }
 }
 
-
-Transcoder::JobFinishedEvent::JobFinishedEvent(JobState *state, bool success)
-  : QEvent(QEvent::Type(sEventType)),
-    state_(state),
-    success_(success)
-{
-}
+Transcoder::JobFinishedEvent::JobFinishedEvent(JobState* state, bool success)
+    : QEvent(QEvent::Type(sEventType)), state_(state), success_(success) {}
 
 void Transcoder::JobState::PostFinished(bool success) {
   if (success) {
-    emit parent_->LogLine(
-        tr("Successfully written %1").arg(QDir::toNativeSeparators(job_.output)));
+    emit parent_->LogLine(tr("Successfully written %1")
+                              .arg(QDir::toNativeSeparators(job_.output)));
   }
 
-  QCoreApplication::postEvent(parent_, new Transcoder::JobFinishedEvent(this, success));
+  QCoreApplication::postEvent(parent_,
+                              new Transcoder::JobFinishedEvent(this, success));
 }
 
-
 Transcoder::Transcoder(QObject* parent)
-  : QObject(parent),
-    max_threads_(QThread::idealThreadCount())
-{
+    : QObject(parent), max_threads_(QThread::idealThreadCount()) {
   if (JobFinishedEvent::sEventType == -1)
     JobFinishedEvent::sEventType = QEvent::registerEventType();
 
@@ -216,7 +203,7 @@ Transcoder::Transcoder(QObject* parent)
   s.beginGroup("Transcoder/lamemp3enc");
 
   if (s.value("target").isNull()) {
-    s.setValue("target", 1); // 1 == bitrate
+    s.setValue("target", 1);  // 1 == bitrate
   }
   if (s.value("cbr").isNull()) {
     s.setValue("cbr", true);
@@ -240,23 +227,30 @@ QList<TranscoderPreset> Transcoder::GetAllPresets() {
 TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
   switch (type) {
     case Song::Type_Flac:
-      return TranscoderPreset(type, tr("Flac"),       "flac", "audio/x-flac");
+      return TranscoderPreset(type, tr("Flac"), "flac", "audio/x-flac");
     case Song::Type_Mp4:
-      return TranscoderPreset(type, tr("M4A AAC"),    "mp4",  "audio/mpeg, mpegversion=(int)4", "audio/mp4");
+      return TranscoderPreset(type, tr("M4A AAC"), "mp4",
+                              "audio/mpeg, mpegversion=(int)4", "audio/mp4");
     case Song::Type_Mpeg:
-      return TranscoderPreset(type, tr("MP3"),        "mp3",  "audio/mpeg, mpegversion=(int)1, layer=(int)3");
+      return TranscoderPreset(type, tr("MP3"), "mp3",
+                              "audio/mpeg, mpegversion=(int)1, layer=(int)3");
     case Song::Type_OggVorbis:
-      return TranscoderPreset(type, tr("Ogg Vorbis"), "ogg",  "audio/x-vorbis", "application/ogg");
+      return TranscoderPreset(type, tr("Ogg Vorbis"), "ogg", "audio/x-vorbis",
+                              "application/ogg");
     case Song::Type_OggFlac:
-      return TranscoderPreset(type, tr("Ogg Flac"),   "ogg",  "audio/x-flac",   "application/ogg");
+      return TranscoderPreset(type, tr("Ogg Flac"), "ogg", "audio/x-flac",
+                              "application/ogg");
     case Song::Type_OggSpeex:
-      return TranscoderPreset(type, tr("Ogg Speex"),  "spx",  "audio/x-speex",  "application/ogg");
+      return TranscoderPreset(type, tr("Ogg Speex"), "spx", "audio/x-speex",
+                              "application/ogg");
     case Song::Type_OggOpus:
-      return TranscoderPreset(type, tr("Ogg Opus"),  "opus",  "audio/x-opus",  "application/ogg");
+      return TranscoderPreset(type, tr("Ogg Opus"), "opus", "audio/x-opus",
+                              "application/ogg");
     case Song::Type_Asf:
-      return TranscoderPreset(type, tr("Windows Media audio"), "wma", "audio/x-wma", "video/x-ms-asf");
+      return TranscoderPreset(type, tr("Windows Media audio"), "wma",
+                              "audio/x-wma", "video/x-ms-asf");
     case Song::Type_Wav:
-      return TranscoderPreset(type, tr("Wav"),        "wav",  QString(),        "audio/x-wav");
+      return TranscoderPreset(type, tr("Wav"), "wav", QString(), "audio/x-wav");
     default:
       qLog(Warning) << "Unsupported format in PresetForFileType:" << type;
       return TranscoderPreset();
@@ -264,24 +258,21 @@ TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
 }
 
 Song::FileType Transcoder::PickBestFormat(QList<Song::FileType> supported) {
-  if (supported.isEmpty())
-    return Song::Type_Unknown;
+  if (supported.isEmpty()) return Song::Type_Unknown;
 
   QList<Song::FileType> best_formats;
   best_formats << Song::Type_Mpeg;
   best_formats << Song::Type_OggVorbis;
   best_formats << Song::Type_Asf;
 
-  foreach (Song::FileType type, best_formats) {
-    if (supported.isEmpty() || supported.contains(type))
-      return type;
+  foreach(Song::FileType type, best_formats) {
+    if (supported.isEmpty() || supported.contains(type)) return type;
   }
 
   return supported[0];
 }
 
-void Transcoder::AddJob(const QString& input,
-                        const TranscoderPreset& preset,
+void Transcoder::AddJob(const QString& input, const TranscoderPreset& preset,
                         const QString& output) {
   Job job;
   job.input = input;
@@ -296,8 +287,10 @@ void Transcoder::AddJob(const QString& input,
 
   // Never overwrite existing files
   if (QFile::exists(job.output)) {
-    for (int i=0 ; ; ++i) {
-      QString new_filename = QString("%1.%2.%3").arg(job.output.section('.',0,-2)).arg(i).arg(preset.extension_);
+    for (int i = 0;; ++i) {
+      QString new_filename =
+          QString("%1.%2.%3").arg(job.output.section('.', 0, -2)).arg(i).arg(
+              preset.extension_);
       if (!QFile::exists(new_filename)) {
         job.output = new_filename;
         break;
@@ -310,18 +303,17 @@ void Transcoder::AddJob(const QString& input,
 
 void Transcoder::Start() {
   emit LogLine(tr("Transcoding %1 files using %2 threads")
-               .arg(queued_jobs_.count()).arg(max_threads()));
+                   .arg(queued_jobs_.count())
+                   .arg(max_threads()));
 
   forever {
     StartJobStatus status = MaybeStartNextJob();
-    if (status == AllThreadsBusy || status == NoMoreJobs)
-      break;
+    if (status == AllThreadsBusy || status == NoMoreJobs) break;
   }
 }
 
 Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
-  if (current_jobs_.count() >= max_threads())
-    return AllThreadsBusy;
+  if (current_jobs_.count() >= max_threads()) return AllThreadsBusy;
   if (queued_jobs_.isEmpty()) {
     if (current_jobs_.isEmpty()) {
       emit AllJobsComplete();
@@ -332,7 +324,7 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
 
   Job job = queued_jobs_.takeFirst();
   if (StartJob(job)) {
-  	emit(JobOutputName(job.output));
+    emit(JobOutputName(job.output));
     return StartedSuccessfully;
   }
 
@@ -340,10 +332,11 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
   return FailedToStart;
 }
 
-void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data) {
+void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gboolean,
+                                gpointer data) {
   JobState* state = reinterpret_cast<JobState*>(data);
-  GstPad* const audiopad = gst_element_get_static_pad(
-      state->convert_element_, "sink");
+  GstPad* const audiopad =
+      gst_element_get_static_pad(state->convert_element_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Debug) << "audiopad is already linked, unlinking old pad";
@@ -369,7 +362,8 @@ gboolean Transcoder::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
   return GST_BUS_DROP;
 }
 
-GstBusSyncReply Transcoder::BusCallbackSync(GstBus*, GstMessage* msg, gpointer data) {
+GstBusSyncReply Transcoder::BusCallbackSync(GstBus*, GstMessage* msg,
+                                            gpointer data) {
   JobState* state = reinterpret_cast<JobState*>(data);
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
@@ -397,11 +391,11 @@ void Transcoder::JobState::ReportError(GstMessage* msg) {
   g_error_free(error);
   free(debugs);
 
-  emit parent_->LogLine(
-      tr("Error processing %1: %2").arg(QDir::toNativeSeparators(job_.input), message));
+  emit parent_->LogLine(tr("Error processing %1: %2").arg(
+      QDir::toNativeSeparators(job_.input), message));
 }
 
-bool Transcoder::StartJob(const Job &job) {
+bool Transcoder::StartJob(const Job& job) {
   shared_ptr<JobState> state(new JobState(job, this));
 
   emit LogLine(tr("Starting %1").arg(QDir::toNativeSeparators(job.input)));
@@ -413,26 +407,27 @@ bool Transcoder::StartJob(const Job &job) {
   if (!state->pipeline_) return false;
 
   // Create all the elements
-  GstElement* src      = CreateElement("filesrc", state->pipeline_);
-  GstElement* decode   = CreateElement("decodebin2", state->pipeline_);
-  GstElement* convert  = CreateElement("audioconvert", state->pipeline_);
+  GstElement* src = CreateElement("filesrc", state->pipeline_);
+  GstElement* decode = CreateElement("decodebin2", state->pipeline_);
+  GstElement* convert = CreateElement("audioconvert", state->pipeline_);
   GstElement* resample = CreateElement("audioresample", state->pipeline_);
-  GstElement* codec    = CreateElementForMimeType("Codec/Encoder/Audio", job.preset.codec_mimetype_, state->pipeline_);
-  GstElement* muxer    = CreateElementForMimeType("Codec/Muxer", job.preset.muxer_mimetype_, state->pipeline_);
-  GstElement* sink     = CreateElement("filesink", state->pipeline_);
+  GstElement* codec = CreateElementForMimeType(
+      "Codec/Encoder/Audio", job.preset.codec_mimetype_, state->pipeline_);
+  GstElement* muxer = CreateElementForMimeType(
+      "Codec/Muxer", job.preset.muxer_mimetype_, state->pipeline_);
+  GstElement* sink = CreateElement("filesink", state->pipeline_);
 
-  if (!src || !decode || !convert || !sink)
-    return false;
+  if (!src || !decode || !convert || !sink) return false;
 
   if (!codec && !job.preset.codec_mimetype_.isEmpty()) {
-    LogLine(tr("Couldn't find an encoder for %1, check you have the correct GStreamer plugins installed"
-               ).arg(job.preset.codec_mimetype_));
+    LogLine(tr("Couldn't find an encoder for %1, check you have the correct "
+               "GStreamer plugins installed").arg(job.preset.codec_mimetype_));
     return false;
   }
 
   if (!muxer && !job.preset.muxer_mimetype_.isEmpty()) {
-    LogLine(tr("Couldn't find a muxer for %1, check you have the correct GStreamer plugins installed"
-               ).arg(job.preset.muxer_mimetype_));
+    LogLine(tr("Couldn't find a muxer for %1, check you have the correct "
+               "GStreamer plugins installed").arg(job.preset.muxer_mimetype_));
     return false;
   }
 
@@ -453,8 +448,11 @@ bool Transcoder::StartJob(const Job &job) {
   state->convert_element_ = convert;
 
   CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, state.get());
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)), BusCallbackSync, state.get());
-  state->bus_callback_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)), BusCallback, state.get());
+  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
+                           BusCallbackSync, state.get());
+  state->bus_callback_id_ =
+      gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
+                        BusCallback, state.get());
 
   // Start the pipeline
   gst_element_set_state(state->pipeline_, GST_STATE_PLAYING);
@@ -481,8 +479,7 @@ bool Transcoder::event(QEvent* e) {
     // Find this job in the list
     JobStateList::iterator it = current_jobs_.begin();
     while (it != current_jobs_.end()) {
-      if (it->get() == finished_event->state_)
-        break;
+      if (it->get() == finished_event->state_) break;
       ++it;
     }
     if (it == current_jobs_.end()) {
@@ -495,8 +492,9 @@ bool Transcoder::event(QEvent* e) {
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
-    gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(
-        finished_event->state_->pipeline_)), nullptr, nullptr);
+    gst_bus_set_sync_handler(
+        gst_pipeline_get_bus(GST_PIPELINE(finished_event->state_->pipeline_)),
+        nullptr, nullptr);
     g_source_remove(finished_event->state_->bus_callback_id_);
 
     // Remove it from the list - this will also destroy the GStreamer pipeline
@@ -525,14 +523,16 @@ void Transcoder::Cancel() {
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
-    gst_bus_set_sync_handler(gst_pipeline_get_bus(
-        GST_PIPELINE(state->pipeline_)), nullptr, nullptr);
+    gst_bus_set_sync_handler(
+        gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)), nullptr, nullptr);
     g_source_remove(state->bus_callback_id_);
 
     // Stop the pipeline
-    if (gst_element_set_state(state->pipeline_, GST_STATE_NULL) == GST_STATE_CHANGE_ASYNC) {
+    if (gst_element_set_state(state->pipeline_, GST_STATE_NULL) ==
+        GST_STATE_CHANGE_ASYNC) {
       // Wait for it to finish stopping...
-      gst_element_get_state(state->pipeline_, nullptr, nullptr, GST_CLOCK_TIME_NONE);
+      gst_element_get_state(state->pipeline_, nullptr, nullptr,
+                            GST_CLOCK_TIME_NONE);
     }
 
     // Remove the job, this destroys the GStreamer pipeline too
@@ -544,8 +544,7 @@ QMap<QString, float> Transcoder::GetProgress() const {
   QMap<QString, float> ret;
 
   for (const auto& state : current_jobs_) {
-    if (!state->pipeline_)
-      continue;
+    if (!state->pipeline_) continue;
 
     gint64 position = 0;
     gint64 duration = 0;
@@ -566,23 +565,31 @@ void Transcoder::SetElementProperties(const QString& name, GObject* object) {
 
   guint properties_count = 0;
   GParamSpec** properties = g_object_class_list_properties(
-        G_OBJECT_GET_CLASS(object), &properties_count);
+      G_OBJECT_GET_CLASS(object), &properties_count);
 
-  for (int i=0 ; i<properties_count ; ++i) {
+  for (int i = 0; i < properties_count; ++i) {
     GParamSpec* property = properties[i];
 
     const QVariant value = s.value(property->name);
-    if (value.isNull())
-      continue;
+    if (value.isNull()) continue;
 
-    LogLine(QString("Setting %1 property: %2 = %3").arg(name, property->name, value.toString()));
+    LogLine(QString("Setting %1 property: %2 = %3")
+                .arg(name, property->name, value.toString()));
 
     switch (property->value_type) {
-      case G_TYPE_DOUBLE:  g_object_set(object, property->name, value.toDouble(), nullptr); break;
-      case G_TYPE_FLOAT:   g_object_set(object, property->name, value.toFloat(), nullptr);  break;
-      case G_TYPE_BOOLEAN: g_object_set(object, property->name, value.toInt(), nullptr);    break;
+      case G_TYPE_DOUBLE:
+        g_object_set(object, property->name, value.toDouble(), nullptr);
+        break;
+      case G_TYPE_FLOAT:
+        g_object_set(object, property->name, value.toFloat(), nullptr);
+        break;
+      case G_TYPE_BOOLEAN:
+        g_object_set(object, property->name, value.toInt(), nullptr);
+        break;
       case G_TYPE_INT:
-      default:             g_object_set(object, property->name, value.toInt(), nullptr);    break;
+      default:
+        g_object_set(object, property->name, value.toInt(), nullptr);
+        break;
     }
   }
 

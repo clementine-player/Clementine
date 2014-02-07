@@ -28,16 +28,15 @@
 const char* SongInfoBase::kSettingsGroup = "SongInfo";
 
 SongInfoBase::SongInfoBase(QWidget* parent)
-  : QWidget(parent),
-    network_(new NetworkAccessManager(this)),
-    fetcher_(new SongInfoFetcher(this)),
-    current_request_id_(-1),
-    scroll_area_(new QScrollArea),
-    container_(new QVBoxLayout),
-    section_container_(nullptr),
-    fader_(new WidgetFadeHelper(this, 1000)),
-    dirty_(false)
-{
+    : QWidget(parent),
+      network_(new NetworkAccessManager(this)),
+      fetcher_(new SongInfoFetcher(this)),
+      current_request_id_(-1),
+      scroll_area_(new QScrollArea),
+      container_(new QVBoxLayout),
+      section_container_(nullptr),
+      fader_(new WidgetFadeHelper(this, 1000)),
+      dirty_(false) {
   // Add the top-level scroll area
   setLayout(new QVBoxLayout);
   layout()->setContentsMargins(0, 0, 0, 0);
@@ -62,10 +61,10 @@ SongInfoBase::SongInfoBase(QWidget* parent)
   stylesheet.open(QIODevice::ReadOnly);
   setStyleSheet(QString::fromAscii(stylesheet.readAll()));
 
-  connect(fetcher_, SIGNAL(ResultReady(int,SongInfoFetcher::Result)),
-          SLOT(ResultReady(int,SongInfoFetcher::Result)));
-  connect(fetcher_, SIGNAL(InfoResultReady(int,CollapsibleInfoPane::Data)),
-          SLOT(InfoResultReady(int,CollapsibleInfoPane::Data)));
+  connect(fetcher_, SIGNAL(ResultReady(int, SongInfoFetcher::Result)),
+          SLOT(ResultReady(int, SongInfoFetcher::Result)));
+  connect(fetcher_, SIGNAL(InfoResultReady(int, CollapsibleInfoPane::Data)),
+          SLOT(InfoResultReady(int, CollapsibleInfoPane::Data)));
 }
 
 void SongInfoBase::Clear() {
@@ -81,21 +80,22 @@ void SongInfoBase::Clear() {
   section_container_->setLayout(new QVBoxLayout);
   section_container_->layout()->setContentsMargins(0, 0, 0, 0);
   section_container_->layout()->setSpacing(1);
-  section_container_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+  section_container_->setSizePolicy(QSizePolicy::Expanding,
+                                    QSizePolicy::Minimum);
   container_->insertWidget(0, section_container_);
 }
 
 void SongInfoBase::AddSection(CollapsibleInfoPane* section) {
   int index = 0;
-  for ( ; index<sections_.count() ; ++index) {
-    if (section->data() < sections_[index]->data())
-      break;
+  for (; index < sections_.count(); ++index) {
+    if (section->data() < sections_[index]->data()) break;
   }
 
   ConnectWidget(section->data().contents_);
 
   sections_.insert(index, section);
-  qobject_cast<QVBoxLayout*>(section_container_->layout())->insertWidget(index, section);
+  qobject_cast<QVBoxLayout*>(section_container_->layout())
+      ->insertWidget(index, section);
   section->show();
 }
 
@@ -116,9 +116,7 @@ void SongInfoBase::SongChanged(const Song& metadata) {
   }
 }
 
-void SongInfoBase::SongFinished() {
-  dirty_ = false;
-}
+void SongInfoBase::SongFinished() { dirty_ = false; }
 
 void SongInfoBase::showEvent(QShowEvent* e) {
   if (dirty_) {
@@ -144,15 +142,15 @@ void SongInfoBase::Update(const Song& metadata) {
 
   // Do this after the new pane has been shown otherwise it'll just grab a
   // black rectangle.
-  Clear ();
+  Clear();
   QTimer::singleShot(0, fader_, SLOT(StartBlur()));
 }
 
-void SongInfoBase::InfoResultReady (int id, const CollapsibleInfoPane::Data& data) {
-}
+void SongInfoBase::InfoResultReady(int id,
+                                   const CollapsibleInfoPane::Data& data) {}
 
 void SongInfoBase::ResultReady(int id, const SongInfoFetcher::Result& result) {
-  foreach (const CollapsibleInfoPane::Data& data, result.info_) {
+  foreach(const CollapsibleInfoPane::Data & data, result.info_) {
     delete data.contents_;
   }
 }
@@ -171,7 +169,7 @@ void SongInfoBase::CollapseSections() {
 
   QMap<CollapsibleInfoPane::Data::Type, CollapsibleInfoPane*> types_;
   QSet<CollapsibleInfoPane::Data::Type> has_user_preference_;
-  foreach (CollapsibleInfoPane* pane, sections_) {
+  foreach(CollapsibleInfoPane * pane, sections_) {
     const CollapsibleInfoPane::Data::Type type = pane->data().type_;
     types_.insertMulti(type, pane);
 
@@ -184,22 +182,21 @@ void SongInfoBase::CollapseSections() {
     }
   }
 
-  foreach (CollapsibleInfoPane::Data::Type type, types_.keys()) {
+  foreach(CollapsibleInfoPane::Data::Type type, types_.keys()) {
     if (!has_user_preference_.contains(type)) {
       // Expand the first one
       types_.values(type).last()->Expand();
     }
   }
 
-  foreach (CollapsibleInfoPane* pane, sections_) {
+  foreach(CollapsibleInfoPane * pane, sections_) {
     connect(pane, SIGNAL(Toggled(bool)), SLOT(SectionToggled(bool)));
   }
 }
 
 void SongInfoBase::SectionToggled(bool value) {
   CollapsibleInfoPane* pane = qobject_cast<CollapsibleInfoPane*>(sender());
-  if (!pane || !sections_.contains(pane))
-    return;
+  if (!pane || !sections_.contains(pane)) return;
 
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -207,10 +204,9 @@ void SongInfoBase::SectionToggled(bool value) {
 }
 
 void SongInfoBase::ReloadSettings() {
-  foreach (CollapsibleInfoPane* pane, sections_) {
+  foreach(CollapsibleInfoPane * pane, sections_) {
     QWidget* contents = pane->data().contents_;
-    if (!contents)
-      continue;
+    if (!contents) continue;
 
     QMetaObject::invokeMethod(contents, "ReloadSettings");
   }
@@ -224,7 +220,7 @@ void SongInfoBase::ConnectWidget(QWidget* widget) {
   }
 
   if (m->indexOfSignal("DoGlobalSearch(QString)") != -1) {
-    connect(widget, SIGNAL(DoGlobalSearch(QString)), SIGNAL(DoGlobalSearch(QString)));
+    connect(widget, SIGNAL(DoGlobalSearch(QString)),
+            SIGNAL(DoGlobalSearch(QString)));
   }
 }
-

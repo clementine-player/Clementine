@@ -31,15 +31,17 @@ int main(int argc, char** argv) {
   QStringList args(a.arguments());
 
   if (args.count() != 2) {
-    std::cerr << "This program is used internally by Clementine to parse tags in music files\n"
-                 "without exposing the whole application to crashes caused by malformed\n"
+    std::cerr << "This program is used internally by Clementine to parse tags "
+                 "in music files\n"
+                 "without exposing the whole application to crashes caused by "
+                 "malformed\n"
                  "files.  It is not meant to be run on its own.\n";
     return 1;
   }
 
   // Seed random number generator
   timeval time;
-  gettimeofday(&time,nullptr);
+  gettimeofday(&time, nullptr);
   qsrand((time.tv_sec * 1000) + (time.tv_usec / 1000));
 
   logging::Init();

@@ -20,13 +20,13 @@
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN32
-#  define _WIN32_WINNT 0x0600
-#  include <windows.h>
-#  include <iostream>
+#define _WIN32_WINNT 0x0600
+#include <windows.h>
+#include <iostream>
 #endif  // Q_OS_WIN32
 
 #ifdef Q_OS_UNIX
-#  include <unistd.h>
+#include <unistd.h>
 #endif  // Q_OS_UNIX
 
 #include <QDir>
@@ -80,32 +80,32 @@
 #include <echonest/Config.h>
 
 #ifdef HAVE_SPOTIFY_DOWNLOADER
-  #include <QtCrypto>
+#include <QtCrypto>
 #endif
 
 #ifdef Q_OS_DARWIN
-  #include <sys/resource.h>
-  #include <sys/sysctl.h>
+#include <sys/resource.h>
+#include <sys/sysctl.h>
 #endif
 
 #ifdef HAVE_LIBLASTFM
-  #include "internet/lastfmservice.h"
+#include "internet/lastfmservice.h"
 #else
-  class LastFMService;
+class LastFMService;
 #endif
 
 #ifdef HAVE_DBUS
-  #include "core/mpris.h"
-  #include "core/mpris2.h"
-  #include <QDBusArgument>
-  #include <QImage>
+#include "core/mpris.h"
+#include "core/mpris2.h"
+#include <QDBusArgument>
+#include <QImage>
 
-  QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
-  const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
+QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image);
+const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 #endif
 
 #ifdef Q_OS_WIN32
-# include <qtsparkle/Updater>
+#include <qtsparkle/Updater>
 #endif
 
 // Load sqlite plugin on windows and mac.
@@ -119,7 +119,8 @@ void LoadTranslation(const QString& prefix, const QString& path,
   // without checking if it's a file first.
   // This was fixed in Qt 4.7
   QFileInfo maybe_clementine_directory(path + "/clementine");
-  if (maybe_clementine_directory.exists() && !maybe_clementine_directory.isFile())
+  if (maybe_clementine_directory.exists() &&
+      !maybe_clementine_directory.isFile())
     return;
 #endif
 
@@ -133,7 +134,8 @@ void LoadTranslation(const QString& prefix, const QString& path,
 
 void IncreaseFDLimit() {
 #ifdef Q_OS_DARWIN
-  // Bump the soft limit for the number of file descriptors from the default of 256 to
+  // Bump the soft limit for the number of file descriptors from the default of
+  // 256 to
   // the maximum (usually 10240).
   struct rlimit limit;
   getrlimit(RLIMIT_NOFILE, &limit);
@@ -152,7 +154,7 @@ void IncreaseFDLimit() {
 #endif
 }
 
-void SetEnv(const char *key, const QString &value) {
+void SetEnv(const char* key, const QString& value) {
 #ifdef Q_OS_WIN32
   putenv(QString("%1=%2").arg(key, value).toLocal8Bit().constData());
 #else
@@ -167,20 +169,22 @@ void SetGstreamerEnvironment() {
   QString plugin_path;
   QString registry_filename;
 
-  // On windows and mac we bundle the gstreamer plugins with clementine
+// On windows and mac we bundle the gstreamer plugins with clementine
 #if defined(Q_OS_DARWIN)
-  scanner_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gst-plugin-scanner";
-  plugin_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
+  scanner_path =
+      QCoreApplication::applicationDirPath() + "/../PlugIns/gst-plugin-scanner";
+  plugin_path =
+      QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
 #elif defined(Q_OS_WIN32)
   plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
 #endif
 
 #if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
-  registry_filename = Utilities::GetConfigPath(Utilities::Path_GstreamerRegistry);
+  registry_filename =
+      Utilities::GetConfigPath(Utilities::Path_GstreamerRegistry);
 #endif
 
-  if (!scanner_path.isEmpty())
-    SetEnv("GST_PLUGIN_SCANNER", scanner_path);
+  if (!scanner_path.isEmpty()) SetEnv("GST_PLUGIN_SCANNER", scanner_path);
 
   if (!plugin_path.isEmpty()) {
     SetEnv("GST_PLUGIN_PATH", plugin_path);
@@ -194,13 +198,13 @@ void SetGstreamerEnvironment() {
 
 #ifdef Q_OS_DARWIN
   SetEnv("GIO_EXTRA_MODULES",
-      QCoreApplication::applicationDirPath() + "/../PlugIns/gio-modules");
+         QCoreApplication::applicationDirPath() + "/../PlugIns/gio-modules");
 #endif
 }
 
 #ifdef HAVE_GIO
-# undef signals // Clashes with GIO, and not needed in this file
-# include <gio/gio.h>
+#undef signals  // Clashes with GIO, and not needed in this file
+#include <gio/gio.h>
 
 void ScanGIOModulePath() {
   QString gio_module_path;
@@ -219,11 +223,11 @@ void ScanGIOModulePath() {
 
 void ParseAProto() {
   const QByteArray data = QByteArray::fromHex(
-        "08001a8b010a8801b2014566696c653a2f2f2f453a2f4d7573696b2f28414c42554d2"
-        "9253230476f74616e25323050726f6a6563742532302d253230416d6269656e742532"
-        "304c6f756e67652e6d786dba012a28414c42554d2920476f74616e2050726f6a65637"
-        "4202d20416d6269656e74204c6f756e67652e6d786dc001c7a7efd104c801bad685e4"
-        "04d001eeca32");
+      "08001a8b010a8801b2014566696c653a2f2f2f453a2f4d7573696b2f28414c42554d2"
+      "9253230476f74616e25323050726f6a6563742532302d253230416d6269656e742532"
+      "304c6f756e67652e6d786dba012a28414c42554d2920476f74616e2050726f6a65637"
+      "4202d20416d6269656e74204c6f756e67652e6d786dc001c7a7efd104c801bad685e4"
+      "04d001eeca32");
   pb::tagreader::Message message;
   message.ParseFromArray(data.constData(), data.size());
 }
@@ -236,11 +240,12 @@ void CheckPortable() {
     Application::kIsPortable = true;
 
     QSettings::setDefaultFormat(QSettings::IniFormat);
-    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, f.fileName());
+    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope,
+                       f.fileName());
   }
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
   }
@@ -264,7 +269,7 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("clementine-player.org");
 
-  // This makes us show up nicely in gnome-volume-control
+// This makes us show up nicely in gnome-volume-control
 #if !GLIB_CHECK_VERSION(2, 36, 0)
   g_type_init();  // Deprecated in glib 2.36.0
 #endif
@@ -285,12 +290,12 @@ int main(int argc, char *argv[]) {
 
     // Parse commandline options - need to do this before starting the
     // full QApplication so it works without an X server
-    if (!options.Parse())
-      return 1;
+    if (!options.Parse()) return 1;
 
     if (a.isRunning()) {
       if (options.is_empty()) {
-        qLog(Info) << "Clementine is already running - activating existing window";
+        qLog(Info)
+            << "Clementine is already running - activating existing window";
       }
       if (a.sendMessage(options.Serialize(), 5000)) {
         return 0;
@@ -301,7 +306,10 @@ int main(int argc, char *argv[]) {
 
 #ifdef Q_OS_DARWIN
   // Must happen after QCoreApplication::setOrganizationName().
-  setenv("XDG_CONFIG_HOME", Utilities::GetConfigPath(Utilities::Path_Root).toLocal8Bit().constData(), 1);
+  setenv(
+      "XDG_CONFIG_HOME",
+      Utilities::GetConfigPath(Utilities::Path_Root).toLocal8Bit().constData(),
+      1);
 #endif
 
 #ifdef HAVE_LIBLASTFM
@@ -313,7 +321,8 @@ int main(int argc, char *argv[]) {
   // Initialise logging
   logging::Init();
   logging::SetLevels(options.log_levels());
-  g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), nullptr);
+  g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog),
+                            nullptr);
 
   // Output the version, so when people attach log output to bug reports they
   // don't have to tell us which version they're using.
@@ -334,8 +343,8 @@ int main(int argc, char *argv[]) {
     QSettings qt_settings(QSettings::UserScope, "Trolltech");
     qt_settings.beginGroup("Qt");
     QApplication::setWheelScrollLines(
-          qt_settings.value("wheelScrollLines",
-                            QApplication::wheelScrollLines()).toInt());
+        qt_settings.value("wheelScrollLines", QApplication::wheelScrollLines())
+            .toInt());
   }
 
 #ifdef Q_OS_DARWIN
@@ -362,9 +371,9 @@ int main(int argc, char *argv[]) {
 
   SetGstreamerEnvironment();
 
-  // Set the permissions on the config file on Unix - it can contain passwords
-  // for internet services so it's important that other users can't read it.
-  // On Windows these are stored in the registry instead.
+// Set the permissions on the config file on Unix - it can contain passwords
+// for internet services so it's important that other users can't read it.
+// On Windows these are stored in the registry instead.
 #ifdef Q_OS_UNIX
   {
     QSettings s;
@@ -395,7 +404,7 @@ int main(int argc, char *argv[]) {
   // that CA to the default list used by QSslSocket, so it always works in
   // Clementine.
   QSslSocket::addDefaultCaCertificates(
-        QSslCertificate::fromPath(":/grooveshark-valicert-ca.pem", QSsl::Pem));
+      QSslCertificate::fromPath(":/grooveshark-valicert-ca.pem", QSsl::Pem));
 
   // Has the user forced a different language?
   QString override_language = options.language();
@@ -405,11 +414,13 @@ int main(int argc, char *argv[]) {
     override_language = s.value("language").toString();
   }
 
-  const QString language = override_language.isEmpty() ?
-                           Utilities::SystemLanguageName() : override_language;
+  const QString language = override_language.isEmpty()
+                               ? Utilities::SystemLanguageName()
+                               : override_language;
 
   // Translations
-  LoadTranslation("qt", QLibraryInfo::location(QLibraryInfo::TranslationsPath), language);
+  LoadTranslation("qt", QLibraryInfo::location(QLibraryInfo::TranslationsPath),
+                  language);
   LoadTranslation("clementine", ":/translations", language);
   LoadTranslation("clementine", a.applicationDirPath(), language);
   LoadTranslation("clementine", QDir::currentPath(), language);
@@ -432,7 +443,8 @@ int main(int argc, char *argv[]) {
   app.set_language_name(language);
 
   Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
-  Echonest::Config::instance()->setNetworkAccessManager(new NetworkAccessManager);
+  Echonest::Config::instance()->setNetworkAccessManager(
+      new NetworkAccessManager);
 
   // Network proxy
   QNetworkProxyFactory::setApplicationProxyFactory(
@@ -449,10 +461,11 @@ int main(int argc, char *argv[]) {
   // whitelisted applications.  Clementine will override this setting and insert
   // itself into the list of whitelisted apps.
   UbuntuUnityHack hack;
-#endif // Q_OS_LINUX
+#endif  // Q_OS_LINUX
 
   // Create the tray icon and OSD
-  std::unique_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
+  std::unique_ptr<SystemTrayIcon> tray_icon(
+      SystemTrayIcon::CreateSystemTrayIcon());
   OSD osd(tray_icon.get(), &app);
 
 #ifdef HAVE_DBUS
@@ -470,7 +483,8 @@ int main(int argc, char *argv[]) {
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif
-  QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
+  QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w,
+                   SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);
 
   int ret = a.exec();

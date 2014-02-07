@@ -23,7 +23,7 @@
 class SongInfoTextView : public QTextBrowser {
   Q_OBJECT
 
-public:
+ public:
   SongInfoTextView(QWidget* parent = 0);
 
   static const qreal kDefaultFontSize;
@@ -34,22 +34,22 @@ public:
 
   QSize sizeHint() const;
 
-public slots:
+ public slots:
   void ReloadSettings();
   void SetHtml(const QString& html);
 
 signals:
   void ShowSettingsDialog();
 
-protected:
+ protected:
   void resizeEvent(QResizeEvent* e);
   void wheelEvent(QWheelEvent* e);
   void contextMenuEvent(QContextMenuEvent* e);
   QVariant loadResource(int type, const QUrl& name);
 
-private:
+ private:
   int last_width_;
   bool recursion_filter_;
 };
 
-#endif // SONGINFOTEXTVIEW_H
+#endif  // SONGINFOTEXTVIEW_H

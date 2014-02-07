@@ -37,21 +37,20 @@ class QSqlQuery;
 class QUrl;
 
 #ifdef HAVE_LIBGPOD
-  struct _Itdb_Track;
+struct _Itdb_Track;
 #endif
 
 #ifdef HAVE_LIBMTP
-  struct LIBMTP_track_struct;
+struct LIBMTP_track_struct;
 #endif
 
 #ifdef HAVE_LIBLASTFM
-  namespace lastfm {
-    class Track;
-  }
+namespace lastfm {
+class Track;
+}
 #endif
 
 class SqlRow;
-
 
 class Song {
  public:
@@ -91,7 +90,6 @@ class Song {
     Type_TrueAudio = 11,
     Type_Cdda = 12,
     Type_OggOpus = 13,
-
     Type_Stream = 99,
   };
   static QString TextForFiletype(FileType type);
@@ -101,12 +99,16 @@ class Song {
   static void SortSongsListAlphabetically(QList<Song>* songs);
 
   // Constructors
-  void Init(const QString& title, const QString& artist, const QString& album, qint64 length_nanosec);
-  void Init(const QString& title, const QString& artist, const QString& album, qint64 beginning, qint64 end);
+  void Init(const QString& title, const QString& artist, const QString& album,
+            qint64 length_nanosec);
+  void Init(const QString& title, const QString& artist, const QString& album,
+            qint64 beginning, qint64 end);
   void InitFromProtobuf(const pb::tagreader::SongMetadata& pb);
   void InitFromQuery(const SqlRow& query, bool reliable_metadata, int col = 0);
-  void InitFromFilePartial(const QString& filename); // Just store the filename: incomplete but fast
-  void InitArtManual(); // Check if there is already a art in the cache and store the filename in art_manual
+  void InitFromFilePartial(
+      const QString& filename);  // Just store the filename: incomplete but fast
+  void InitArtManual();  // Check if there is already a art in the cache and
+                         // store the filename in art_manual
 #ifdef HAVE_LIBLASTFM
   void InitFromLastFM(const lastfm::Track& track);
 #endif
@@ -149,7 +151,8 @@ class Song {
   const QString& artist() const;
   const QString& albumartist() const;
   const QString& effective_albumartist() const;
-  // Playlist views are special because you don't want to fill in album artists automatically for
+  // Playlist views are special because you don't want to fill in album artists
+  // automatically for
   // compilations, but you do for normal albums:
   const QString& playlist_albumartist() const;
   const QString& composer() const;
@@ -296,4 +299,4 @@ uint qHash(const Song& song);
 // Hash function using field checked in IsSimilar function
 uint HashSimilar(const Song& song);
 
-#endif // SONG_H
+#endif  // SONG_H

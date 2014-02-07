@@ -23,17 +23,17 @@
 class Ui_TranscoderOptionsVorbis;
 
 class TranscoderOptionsVorbis : public TranscoderOptionsInterface {
-public:
+ public:
   TranscoderOptionsVorbis(QWidget* parent = 0);
   ~TranscoderOptionsVorbis();
 
   void Load();
   void Save();
 
-private:
+ private:
   static const char* kSettingsGroup;
 
   Ui_TranscoderOptionsVorbis* ui_;
 };
 
-#endif // TRANSCODEROPTIONSVORBIS_H
+#endif  // TRANSCODEROPTIONSVORBIS_H

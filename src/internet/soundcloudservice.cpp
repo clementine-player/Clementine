@@ -42,7 +42,8 @@
 #include "globalsearch/soundcloudsearchprovider.h"
 #include "ui/iconloader.h"
 
-const char* SoundCloudService::kApiClientId = "2add0f709fcfae1fd7a198ec7573d2d4";
+const char* SoundCloudService::kApiClientId =
+    "2add0f709fcfae1fd7a198ec7573d2d4";
 
 const char* SoundCloudService::kServiceName = "SoundCloud";
 const char* SoundCloudService::kSettingsGroup = "SoundCloud";
@@ -55,36 +56,35 @@ const int SoundCloudService::kSongSimpleSearchLimit = 10;
 
 typedef QPair<QString, QString> Param;
 
-SoundCloudService::SoundCloudService(Application* app, InternetModel *parent)
-  : InternetService(kServiceName, app, parent, parent),
-    root_(nullptr),
-    search_(nullptr),
-    network_(new NetworkAccessManager(this)),
-    context_menu_(nullptr),
-    search_box_(new SearchBoxWidget(this)),
-    search_delay_(new QTimer(this)),
-    next_pending_search_id_(0) {
+SoundCloudService::SoundCloudService(Application* app, InternetModel* parent)
+    : InternetService(kServiceName, app, parent, parent),
+      root_(nullptr),
+      search_(nullptr),
+      network_(new NetworkAccessManager(this)),
+      context_menu_(nullptr),
+      search_box_(new SearchBoxWidget(this)),
+      search_delay_(new QTimer(this)),
+      next_pending_search_id_(0) {
 
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);
   connect(search_delay_, SIGNAL(timeout()), SLOT(DoSearch()));
 
-  SoundCloudSearchProvider* search_provider = new SoundCloudSearchProvider(app_, this);
+  SoundCloudSearchProvider* search_provider =
+      new SoundCloudSearchProvider(app_, this);
   search_provider->Init(this);
   app_->global_search()->AddProvider(search_provider);
 
   connect(search_box_, SIGNAL(TextChanged(QString)), SLOT(Search(QString)));
 }
 
-
-SoundCloudService::~SoundCloudService() {
-}
+SoundCloudService::~SoundCloudService() {}
 
 QStandardItem* SoundCloudService::CreateRootItem() {
   root_ = new QStandardItem(QIcon(":providers/soundcloud.png"), kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   root_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
-                           InternetModel::Role_PlayBehaviour);
+                 InternetModel::Role_PlayBehaviour);
   return root_;
 }
 
@@ -100,18 +100,17 @@ void SoundCloudService::LazyPopulate(QStandardItem* item) {
 }
 
 void SoundCloudService::EnsureItemsCreated() {
-  search_ = new QStandardItem(IconLoader::Load("edit-find"),
-                              tr("Search results"));
-  search_->setToolTip(tr("Start typing something on the search box above to "
-                         "fill this search results list"));
+  search_ =
+      new QStandardItem(IconLoader::Load("edit-find"), tr("Search results"));
+  search_->setToolTip(
+      tr("Start typing something on the search box above to "
+         "fill this search results list"));
   search_->setData(InternetModel::PlayBehaviour_MultipleItems,
                    InternetModel::Role_PlayBehaviour);
   root_->appendRow(search_);
 }
 
-QWidget* SoundCloudService::HeaderWidget() const {
-  return search_box_;
-}
+QWidget* SoundCloudService::HeaderWidget() const { return search_box_; }
 
 void SoundCloudService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
@@ -140,12 +139,11 @@ void SoundCloudService::DoSearch() {
   ClearSearchResults();
 
   QList<Param> parameters;
-  parameters  << Param("q", pending_search_);
+  parameters << Param("q", pending_search_);
   QNetworkReply* reply = CreateRequest("tracks", parameters);
   const int id = next_pending_search_id_++;
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(SearchFinished(QNetworkReply*,int)),
-             reply, id);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(SearchFinished(QNetworkReply*, int)), reply, id);
 }
 
 void SoundCloudService::SearchFinished(QNetworkReply* reply, int task_id) {
@@ -153,7 +151,7 @@ void SoundCloudService::SearchFinished(QNetworkReply* reply, int task_id) {
 
   SongList songs = ExtractSongs(ExtractResult(reply));
   // Fill results list
-  foreach (const Song& song, songs) {
+  foreach(const Song & song, songs) {
     QStandardItem* child = CreateSongItem(song);
     search_->appendRow(child);
   }
@@ -163,18 +161,16 @@ void SoundCloudService::SearchFinished(QNetworkReply* reply, int task_id) {
 }
 
 void SoundCloudService::ClearSearchResults() {
-  if (search_)
-    search_->removeRows(0, search_->rowCount());
+  if (search_) search_->removeRows(0, search_->rowCount());
 }
 
 int SoundCloudService::SimpleSearch(const QString& text) {
   QList<Param> parameters;
-  parameters  << Param("q", text);
+  parameters << Param("q", text);
   QNetworkReply* reply = CreateRequest("tracks", parameters);
   const int id = next_pending_search_id_++;
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(SimpleSearchFinished(QNetworkReply*,int)),
-             reply, id);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(SimpleSearchFinished(QNetworkReply*, int)), reply, id);
   return id;
 }
 
@@ -186,7 +182,7 @@ void SoundCloudService::SimpleSearchFinished(QNetworkReply* reply, int id) {
 }
 
 void SoundCloudService::EnsureMenuCreated() {
-  if(!context_menu_) {
+  if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
     context_menu_->addSeparator();
@@ -198,20 +194,19 @@ void SoundCloudService::EnsureMenuCreated() {
 
 void SoundCloudService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
-  
+
   context_menu_->popup(global_pos);
 }
 
-QNetworkReply* SoundCloudService::CreateRequest(
-    const QString& ressource_name,
-    const QList<Param>& params) {
+QNetworkReply* SoundCloudService::CreateRequest(const QString& ressource_name,
+                                                const QList<Param>& params) {
 
   QUrl url(kUrl);
 
   url.setPath(ressource_name);
 
   url.addQueryItem("client_id", kApiClientId);
-  foreach(const Param& param, params) {
+  foreach(const Param & param, params) {
     url.addQueryItem(param.first, param.second);
   }
 
@@ -219,7 +214,7 @@ QNetworkReply* SoundCloudService::CreateRequest(
 
   QNetworkRequest req(url);
   req.setRawHeader("Accept", "application/json");
-  QNetworkReply *reply = network_->get(req);
+  QNetworkReply* reply = network_->get(req);
   return reply;
 }
 
@@ -237,7 +232,7 @@ SongList SoundCloudService::ExtractSongs(const QVariant& result) {
   SongList songs;
 
   QVariantList q_variant_list = result.toList();
-  foreach(const QVariant& q, q_variant_list) {
+  foreach(const QVariant & q, q_variant_list) {
     Song song = ExtractSong(q.toMap());
     if (song.is_valid()) {
       songs << song;

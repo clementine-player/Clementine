@@ -41,22 +41,22 @@
 #include <QDBusConnection>
 #include <QtConcurrentRun>
 
-QDBusArgument& operator<< (QDBusArgument& arg, const MprisPlaylist& playlist) {
+QDBusArgument& operator<<(QDBusArgument& arg, const MprisPlaylist& playlist) {
   arg.beginStructure();
   arg << playlist.id << playlist.name << playlist.icon;
   arg.endStructure();
   return arg;
 }
 
-const QDBusArgument& operator>> (
-    const QDBusArgument& arg, MprisPlaylist& playlist) {
+const QDBusArgument& operator>>(const QDBusArgument& arg,
+                                MprisPlaylist& playlist) {
   arg.beginStructure();
   arg >> playlist.id >> playlist.name >> playlist.icon;
   arg.endStructure();
   return arg;
 }
 
-QDBusArgument& operator<< (QDBusArgument& arg, const MaybePlaylist& playlist) {
+QDBusArgument& operator<<(QDBusArgument& arg, const MaybePlaylist& playlist) {
   arg.beginStructure();
   arg << playlist.valid;
   arg << playlist.playlist;
@@ -64,8 +64,8 @@ QDBusArgument& operator<< (QDBusArgument& arg, const MaybePlaylist& playlist) {
   return arg;
 }
 
-const QDBusArgument& operator>> (
-    const QDBusArgument& arg, MaybePlaylist& playlist) {
+const QDBusArgument& operator>>(const QDBusArgument& arg,
+                                MaybePlaylist& playlist) {
   arg.beginStructure();
   arg >> playlist.valid >> playlist.playlist;
   arg.endStructure();
@@ -79,121 +79,115 @@ const char* Mpris2::kServiceName = "org.mpris.MediaPlayer2.clementine";
 const char* Mpris2::kFreedesktopPath = "org.freedesktop.DBus.Properties";
 
 Mpris2::Mpris2(Application* app, Mpris1* mpris1, QObject* parent)
-  : QObject(parent),
-    app_(app),
-    mpris1_(mpris1)
-{
+    : QObject(parent), app_(app), mpris1_(mpris1) {
   new Mpris2Root(this);
   new Mpris2TrackList(this);
   new Mpris2Player(this);
   new Mpris2Playlists(this);
 
   if (!QDBusConnection::sessionBus().registerService(kServiceName)) {
-    qLog(Warning) << "Failed to register" << QString(kServiceName) << "on the session bus";
+    qLog(Warning) << "Failed to register" << QString(kServiceName)
+                  << "on the session bus";
     return;
   }
 
   QDBusConnection::sessionBus().registerObject(kMprisObjectPath, this);
 
-  connect(app_->current_art_loader(), SIGNAL(ArtLoaded(Song,QString,QImage)), SLOT(ArtLoaded(Song,QString)));
+  connect(app_->current_art_loader(), SIGNAL(ArtLoaded(Song, QString, QImage)),
+          SLOT(ArtLoaded(Song, QString)));
 
-  connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
+  connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)),
+          SLOT(EngineStateChanged(Engine::State)));
   connect(app_->player(), SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged()));
   connect(app_->player(), SIGNAL(Seeked(qlonglong)), SIGNAL(Seeked(qlonglong)));
 
-  connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
-  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
-  connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)), SLOT(PlaylistChanged(Playlist*)));
-  connect(app_->playlist_manager(), SIGNAL(CurrentChanged(Playlist*)), SLOT(PlaylistCollectionChanged(Playlist*)));
+  connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()),
+          SLOT(PlaylistManagerInitialized()));
+  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
+          SLOT(CurrentSongChanged(Song)));
+  connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)),
+          SLOT(PlaylistChanged(Playlist*)));
+  connect(app_->playlist_manager(), SIGNAL(CurrentChanged(Playlist*)),
+          SLOT(PlaylistCollectionChanged(Playlist*)));
 }
 
 // when PlaylistManager gets it ready, we connect PlaylistSequence with this
 void Mpris2::PlaylistManagerInitialized() {
-  connect(app_->playlist_manager()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
+  connect(app_->playlist_manager()->sequence(),
+          SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
           SLOT(ShuffleModeChanged()));
-  connect(app_->playlist_manager()->sequence(), SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
+  connect(app_->playlist_manager()->sequence(),
+          SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
           SLOT(RepeatModeChanged()));
 }
 
 void Mpris2::EngineStateChanged(Engine::State newState) {
-  if(newState != Engine::Playing && newState != Engine::Paused) {
-    last_metadata_= QVariantMap();
+  if (newState != Engine::Playing && newState != Engine::Paused) {
+    last_metadata_ = QVariantMap();
     EmitNotification("Metadata");
   }
 
   EmitNotification("PlaybackStatus", PlaybackStatus(newState));
 }
 
-void Mpris2::VolumeChanged() {
-  EmitNotification("Volume");
-}
+void Mpris2::VolumeChanged() { EmitNotification("Volume"); }
 
-void Mpris2::ShuffleModeChanged() {
-  EmitNotification("Shuffle");
-}
+void Mpris2::ShuffleModeChanged() { EmitNotification("Shuffle"); }
 
-void Mpris2::RepeatModeChanged() {
-  EmitNotification("LoopStatus");
-}
+void Mpris2::RepeatModeChanged() { EmitNotification("LoopStatus"); }
 
 void Mpris2::EmitNotification(const QString& name, const QVariant& val) {
   EmitNotification(name, val, "org.mpris.MediaPlayer2.Player");
 }
 
-void Mpris2::EmitNotification(const QString& name, const QVariant& val, const QString& mprisEntity) {
+void Mpris2::EmitNotification(const QString& name, const QVariant& val,
+                              const QString& mprisEntity) {
   QDBusMessage msg = QDBusMessage::createSignal(
-        kMprisObjectPath, kFreedesktopPath, "PropertiesChanged");
+      kMprisObjectPath, kFreedesktopPath, "PropertiesChanged");
   QVariantMap map;
   map.insert(name, val);
-  QVariantList args = QVariantList()
-                      << mprisEntity
-                      << map
-                      << QStringList();
+  QVariantList args = QVariantList() << mprisEntity << map << QStringList();
   msg.setArguments(args);
   QDBusConnection::sessionBus().send(msg);
 }
 
 void Mpris2::EmitNotification(const QString& name) {
   QVariant value;
-  if      (name == "PlaybackStatus")  value = PlaybackStatus();
-  else if (name == "LoopStatus")      value = LoopStatus();
-  else if (name == "Shuffle")         value = Shuffle();
-  else if (name == "Metadata")        value = Metadata();
-  else if (name == "Volume")          value = Volume();
-  else if (name == "Position")        value = Position();
+  if (name == "PlaybackStatus")
+    value = PlaybackStatus();
+  else if (name == "LoopStatus")
+    value = LoopStatus();
+  else if (name == "Shuffle")
+    value = Shuffle();
+  else if (name == "Metadata")
+    value = Metadata();
+  else if (name == "Volume")
+    value = Volume();
+  else if (name == "Position")
+    value = Position();
 
-  if (value.isValid())
-    EmitNotification(name, value);
+  if (value.isValid()) EmitNotification(name, value);
 }
 
 //------------------Root Interface--------------------------//
 
-bool Mpris2::CanQuit() const {
-  return true;
-}
+bool Mpris2::CanQuit() const { return true; }
 
-bool Mpris2::CanRaise() const {
-  return true;
-}
+bool Mpris2::CanRaise() const { return true; }
 
-bool Mpris2::HasTrackList() const {
-  return true;
-}
+bool Mpris2::HasTrackList() const { return true; }
 
-QString Mpris2::Identity() const {
-  return QCoreApplication::applicationName();
-}
+QString Mpris2::Identity() const { return QCoreApplication::applicationName(); }
 
 QString Mpris2::DesktopEntryAbsolutePath() const {
   QStringList xdg_data_dirs = QString(getenv("XDG_DATA_DIRS")).split(":");
   xdg_data_dirs.append("/usr/local/share/");
   xdg_data_dirs.append("/usr/share/");
 
-  foreach (const QString& directory, xdg_data_dirs) {
-    QString path = QString("%1/applications/%2.desktop").
-                   arg(directory, QApplication::applicationName().toLower());
-    if (QFile::exists(path))
-      return path;
+  foreach(const QString & directory, xdg_data_dirs) {
+    QString path = QString("%1/applications/%2.desktop").arg(
+        directory, QApplication::applicationName().toLower());
+    if (QFile::exists(path)) return path;
   }
   return QString();
 }
@@ -203,52 +197,46 @@ QString Mpris2::DesktopEntry() const {
 }
 
 QStringList Mpris2::SupportedUriSchemes() const {
-  static QStringList res = QStringList()
-                           << "file"
-                           << "http"
-                           << "cdda"
-                           << "smb"
-                           << "sftp";
+  static QStringList res = QStringList() << "file"
+                                         << "http"
+                                         << "cdda"
+                                         << "smb"
+                                         << "sftp";
   return res;
 }
 
 QStringList Mpris2::SupportedMimeTypes() const {
-  static QStringList res = QStringList()
-                           << "application/ogg"
-                           << "application/x-ogg"
-                           << "application/x-ogm-audio"
-                           << "audio/aac"
-                           << "audio/mp4"
-                           << "audio/mpeg"
-                           << "audio/mpegurl"
-                           << "audio/ogg"
-                           << "audio/vnd.rn-realaudio"
-                           << "audio/vorbis"
-                           << "audio/x-flac"
-                           << "audio/x-mp3"
-                           << "audio/x-mpeg"
-                           << "audio/x-mpegurl"
-                           << "audio/x-ms-wma"
-                           << "audio/x-musepack"
-                           << "audio/x-oggflac"
-                           << "audio/x-pn-realaudio"
-                           << "audio/x-scpls"
-                           << "audio/x-speex"
-                           << "audio/x-vorbis"
-                           << "audio/x-vorbis+ogg"
-                           << "audio/x-wav"
-                           << "video/x-ms-asf"
-                           << "x-content/audio-player";
+  static QStringList res = QStringList() << "application/ogg"
+                                         << "application/x-ogg"
+                                         << "application/x-ogm-audio"
+                                         << "audio/aac"
+                                         << "audio/mp4"
+                                         << "audio/mpeg"
+                                         << "audio/mpegurl"
+                                         << "audio/ogg"
+                                         << "audio/vnd.rn-realaudio"
+                                         << "audio/vorbis"
+                                         << "audio/x-flac"
+                                         << "audio/x-mp3"
+                                         << "audio/x-mpeg"
+                                         << "audio/x-mpegurl"
+                                         << "audio/x-ms-wma"
+                                         << "audio/x-musepack"
+                                         << "audio/x-oggflac"
+                                         << "audio/x-pn-realaudio"
+                                         << "audio/x-scpls"
+                                         << "audio/x-speex"
+                                         << "audio/x-vorbis"
+                                         << "audio/x-vorbis+ogg"
+                                         << "audio/x-wav"
+                                         << "video/x-ms-asf"
+                                         << "x-content/audio-player";
   return res;
 }
 
-void Mpris2::Raise() {
-  emit RaiseMainWindow();
-}
+void Mpris2::Raise() { emit RaiseMainWindow(); }
 
-void Mpris2::Quit() {
-  qApp->quit();
-}
+void Mpris2::Quit() { qApp->quit(); }
 
 QString Mpris2::PlaybackStatus() const {
   return PlaybackStatus(app_->player()->GetState());
@@ -256,9 +244,12 @@ QString Mpris2::PlaybackStatus() const {
 
 QString Mpris2::PlaybackStatus(Engine::State state) const {
   switch (state) {
-    case Engine::Playing: return "Playing";
-    case Engine::Paused:  return "Paused";
-    default:              return "Stopped";
+    case Engine::Playing:
+      return "Playing";
+    case Engine::Paused:
+      return "Paused";
+    default:
+      return "Stopped";
   }
 }
 
@@ -266,12 +257,15 @@ QString Mpris2::LoopStatus() const {
   if (!app_->playlist_manager()->sequence()) {
     return "None";
   }
-  
+
   switch (app_->playlist_manager()->sequence()->repeat_mode()) {
     case PlaylistSequence::Repeat_Album:
-    case PlaylistSequence::Repeat_Playlist: return "Playlist";
-    case PlaylistSequence::Repeat_Track:    return "Track";
-    default:                                return "None";
+    case PlaylistSequence::Repeat_Playlist:
+      return "Playlist";
+    case PlaylistSequence::Repeat_Track:
+      return "Track";
+    default:
+      return "None";
   }
 }
 
@@ -289,12 +283,10 @@ void Mpris2::SetLoopStatus(const QString& value) {
   app_->playlist_manager()->active()->sequence()->SetRepeatMode(mode);
 }
 
-double Mpris2::Rate() const {
-  return 1.0;
-}
+double Mpris2::Rate() const { return 1.0; }
 
 void Mpris2::SetRate(double rate) {
-  if(rate == 0) {
+  if (rate == 0) {
     if (mpris1_->player()) {
       mpris1_->player()->Pause();
     }
@@ -315,24 +307,20 @@ void Mpris2::SetShuffle(bool value) {
   }
 }
 
-QVariantMap Mpris2::Metadata() const {
-  return last_metadata_;
-}
+QVariantMap Mpris2::Metadata() const { return last_metadata_; }
 
 QString Mpris2::current_track_id() const {
   if (!mpris1_->tracklist()) {
     return QString();
   }
 
-  return QString("/org/mpris/MediaPlayer2/Track/%1").arg(
-        QString::number(mpris1_->tracklist()->GetCurrentTrack()));
+  return QString("/org/mpris/MediaPlayer2/Track/%1")
+      .arg(QString::number(mpris1_->tracklist()->GetCurrentTrack()));
 }
 
 // We send Metadata change notification as soon as the process of
 // changing song starts...
-void Mpris2::CurrentSongChanged(const Song& song) {
-  ArtLoaded(song, "");
-}
+void Mpris2::CurrentSongChanged(const Song& song) { ArtLoaded(song, ""); }
 
 // ... and we add the cover information later, when it's available.
 void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
@@ -363,21 +351,15 @@ double Mpris2::Volume() const {
   }
 }
 
-void Mpris2::SetVolume(double value) {
-  app_->player()->SetVolume(value * 100);
-}
+void Mpris2::SetVolume(double value) { app_->player()->SetVolume(value * 100); }
 
 qlonglong Mpris2::Position() const {
   return app_->player()->engine()->position_nanosec() / kNsecPerUsec;
 }
 
-double Mpris2::MaximumRate() const {
-  return 1.0;
-}
+double Mpris2::MaximumRate() const { return 1.0; }
 
-double Mpris2::MinimumRate() const {
-  return 1.0;
-}
+double Mpris2::MinimumRate() const { return 1.0; }
 
 bool Mpris2::CanGoNext() const {
   if (mpris1_->player()) {
@@ -395,17 +377,14 @@ bool Mpris2::CanGoPrevious() const {
   }
 }
 
-bool Mpris2::CanPlay() const {
-  return mpris1_->player()->GetCaps() & CAN_PLAY;
-}
+bool Mpris2::CanPlay() const { return mpris1_->player()->GetCaps() & CAN_PLAY; }
 
 // This one's a bit different than MPRIS 1 - we want this to be true even when
 // the song is already paused or stopped.
 bool Mpris2::CanPause() const {
   if (mpris1_->player()) {
-    return mpris1_->player()->GetCaps() & CAN_PAUSE
-        || PlaybackStatus() == "Paused"
-        || PlaybackStatus() == "Stopped";
+    return mpris1_->player()->GetCaps() & CAN_PAUSE ||
+           PlaybackStatus() == "Paused" || PlaybackStatus() == "Stopped";
   } else {
     return true;
   }
@@ -419,24 +398,22 @@ bool Mpris2::CanSeek() const {
   }
 }
 
-bool Mpris2::CanControl() const {
-  return true;
-}
+bool Mpris2::CanControl() const { return true; }
 
 void Mpris2::Next() {
-  if(CanGoNext()) {
+  if (CanGoNext()) {
     app_->player()->Next();
   }
 }
 
 void Mpris2::Previous() {
-  if(CanGoPrevious()) {
+  if (CanGoPrevious()) {
     app_->player()->Previous();
   }
 }
 
 void Mpris2::Pause() {
-  if(CanPause() && app_->player()->GetState() != Engine::Paused) {
+  if (CanPause() && app_->player()->GetState() != Engine::Paused) {
     app_->player()->Pause();
   }
 }
@@ -447,20 +424,19 @@ void Mpris2::PlayPause() {
   }
 }
 
-void Mpris2::Stop() {
-  app_->player()->Stop();
-}
+void Mpris2::Stop() { app_->player()->Stop(); }
 
 void Mpris2::Play() {
-  if(CanPlay()) {
+  if (CanPlay()) {
     app_->player()->Play();
   }
 }
 
 void Mpris2::Seek(qlonglong offset) {
-  if(CanSeek()) {
-    app_->player()->SeekTo(app_->player()->engine()->position_nanosec() / kNsecPerSec +
-                    offset / kUsecPerSec);
+  if (CanSeek()) {
+    app_->player()->SeekTo(app_->player()->engine()->position_nanosec() /
+                               kNsecPerSec +
+                           offset / kUsecPerSec);
   }
 }
 
@@ -468,7 +444,8 @@ void Mpris2::SetPosition(const QDBusObjectPath& trackId, qlonglong offset) {
   if (CanSeek() && trackId.path() == current_track_id() && offset >= 0) {
     offset *= kNsecPerUsec;
 
-    if(offset < app_->player()->GetCurrentItem()->Metadata().length_nanosec()) {
+    if (offset <
+        app_->player()->GetCurrentItem()->Metadata().length_nanosec()) {
       app_->player()->SeekTo(offset / kNsecPerSec);
     }
   }
@@ -481,46 +458,42 @@ void Mpris2::OpenUri(const QString& uri) {
 }
 
 TrackIds Mpris2::Tracks() const {
-  //TODO
+  // TODO
   return TrackIds();
 }
 
-bool Mpris2::CanEditTracks() const {
-  return false;
-}
+bool Mpris2::CanEditTracks() const { return false; }
 
-TrackMetadata Mpris2::GetTracksMetadata(const TrackIds &tracks) const {
-  //TODO
+TrackMetadata Mpris2::GetTracksMetadata(const TrackIds& tracks) const {
+  // TODO
   return TrackMetadata();
 }
 
-void Mpris2::AddTrack(const QString &uri, const QDBusObjectPath &afterTrack, bool setAsCurrent) {
-  //TODO
+void Mpris2::AddTrack(const QString& uri, const QDBusObjectPath& afterTrack,
+                      bool setAsCurrent) {
+  // TODO
 }
 
-void Mpris2::RemoveTrack(const QDBusObjectPath &trackId) {
-  //TODO
+void Mpris2::RemoveTrack(const QDBusObjectPath& trackId) {
+  // TODO
 }
 
-void Mpris2::GoTo(const QDBusObjectPath &trackId) {
-  //TODO
+void Mpris2::GoTo(const QDBusObjectPath& trackId) {
+  // TODO
 }
 
 quint32 Mpris2::PlaylistCount() const {
   return app_->playlist_manager()->GetAllPlaylists().size();
 }
 
-QStringList Mpris2::Orderings() const {
-  return QStringList() << "User";
-}
+QStringList Mpris2::Orderings() const { return QStringList() << "User"; }
 
 namespace {
 
 QDBusObjectPath MakePlaylistPath(int id) {
-  return QDBusObjectPath(QString(
-      "/org/mpris/MediaPlayer2/Playlists/%1").arg(id));
+  return QDBusObjectPath(
+      QString("/org/mpris/MediaPlayer2/Playlists/%1").arg(id));
 }
-
 }
 
 MaybePlaylist Mpris2::ActivePlaylist() const {
@@ -557,10 +530,11 @@ void Mpris2::ActivatePlaylist(const QDBusObjectPath& playlist_id) {
 }
 
 // TODO: Support sort orders.
-MprisPlaylistList Mpris2::GetPlaylists(
-    quint32 index, quint32 max_count, const QString& order, bool reverse_order) {
+MprisPlaylistList Mpris2::GetPlaylists(quint32 index, quint32 max_count,
+                                       const QString& order,
+                                       bool reverse_order) {
   MprisPlaylistList ret;
-  foreach (Playlist* p, app_->playlist_manager()->GetAllPlaylists()) {
+  foreach(Playlist * p, app_->playlist_manager()->GetAllPlaylists()) {
     MprisPlaylist mpris_playlist;
     mpris_playlist.id = MakePlaylistPath(p->id());
     mpris_playlist.name = app_->playlist_manager()->GetPlaylistName(p->id());
@@ -577,7 +551,8 @@ MprisPlaylistList Mpris2::GetPlaylists(
 void Mpris2::PlaylistChanged(Playlist* playlist) {
   MprisPlaylist mpris_playlist;
   mpris_playlist.id = MakePlaylistPath(playlist->id());
-  mpris_playlist.name = app_->playlist_manager()->GetPlaylistName(playlist->id());
+  mpris_playlist.name =
+      app_->playlist_manager()->GetPlaylistName(playlist->id());
   emit PlaylistChanged(mpris_playlist);
 }
 
@@ -585,4 +560,4 @@ void Mpris2::PlaylistCollectionChanged(Playlist* playlist) {
   EmitNotification("PlaylistCount", "", "org.mpris.MediaPlayer2.Playlists");
 }
 
-} // namespace mpris
+}  // namespace mpris

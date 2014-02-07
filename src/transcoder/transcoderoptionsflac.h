@@ -23,17 +23,17 @@
 class Ui_TranscoderOptionsFlac;
 
 class TranscoderOptionsFlac : public TranscoderOptionsInterface {
-public:
+ public:
   TranscoderOptionsFlac(QWidget* parent = 0);
   ~TranscoderOptionsFlac();
 
   void Load();
   void Save();
 
-private:
+ private:
   static const char* kSettingsGroup;
 
   Ui_TranscoderOptionsFlac* ui_;
 };
 
-#endif // TRANSCODEROPTIONSFLAC_H
+#endif  // TRANSCODEROPTIONSFLAC_H

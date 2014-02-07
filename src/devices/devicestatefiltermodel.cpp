@@ -17,19 +17,20 @@
 
 #include "devicestatefiltermodel.h"
 
-DeviceStateFilterModel::DeviceStateFilterModel(QObject *parent,
+DeviceStateFilterModel::DeviceStateFilterModel(QObject* parent,
                                                DeviceManager::State state)
-  : QSortFilterProxyModel(parent),
-    state_(state)
-{
-  connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)), SLOT(ProxyRowCountChanged()));
-  connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(ProxyRowCountChanged()));
+    : QSortFilterProxyModel(parent), state_(state) {
+  connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)),
+          SLOT(ProxyRowCountChanged()));
+  connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)),
+          SLOT(ProxyRowCountChanged()));
   connect(this, SIGNAL(modelReset()), SLOT(ProxyRowCountChanged()));
 }
 
-bool DeviceStateFilterModel::filterAcceptsRow(int row, const QModelIndex&) const {
-  return sourceModel()->index(row, 0).data(DeviceManager::Role_State).toInt()
-      != state_;
+bool DeviceStateFilterModel::filterAcceptsRow(int row,
+                                              const QModelIndex&) const {
+  return sourceModel()->index(row, 0).data(DeviceManager::Role_State).toInt() !=
+         state_;
 }
 
 void DeviceStateFilterModel::ProxyRowCountChanged() {

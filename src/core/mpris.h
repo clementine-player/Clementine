@@ -30,17 +30,17 @@ class Mpris2;
 class Mpris : public QObject {
   Q_OBJECT
 
-public:
+ public:
   Mpris(Application* app, QObject* parent = 0);
 
 signals:
   void RaiseMainWindow();
 
-private:
+ private:
   Mpris1* mpris1_;
   Mpris2* mpris2_;
 };
 
-} // namespace mpris
+}  // namespace mpris
 
-#endif // MPRIS_H
+#endif  // MPRIS_H

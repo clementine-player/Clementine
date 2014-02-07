@@ -38,7 +38,7 @@ class GroupByDialog : public QDialog {
   void LibraryGroupingChanged(const LibraryModel::Grouping& g);
   void accept();
 
- signals:
+signals:
   void Accepted(const LibraryModel::Grouping& g);
 
  private slots:
@@ -49,4 +49,4 @@ class GroupByDialog : public QDialog {
   std::unique_ptr<GroupByDialogPrivate> p_;
 };
 
-#endif // GROUPBYDIALOG_H
+#endif  // GROUPBYDIALOG_H

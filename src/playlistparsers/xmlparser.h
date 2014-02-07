@@ -32,13 +32,12 @@ class XMLParser : public ParserBase {
 
   class StreamElement {
    public:
-    StreamElement(const QString& name, QXmlStreamWriter* stream) : stream_(stream) {
+    StreamElement(const QString& name, QXmlStreamWriter* stream)
+        : stream_(stream) {
       stream->writeStartElement(name);
     }
 
-    ~StreamElement() {
-      stream_->writeEndElement();
-    }
+    ~StreamElement() { stream_->writeEndElement(); }
 
    private:
     QXmlStreamWriter* stream_;

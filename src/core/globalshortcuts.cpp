@@ -28,28 +28,32 @@
 #include <QtDebug>
 
 #ifdef QT_DBUS_LIB
-#  include <QtDBus>
+#include <QtDBus>
 #endif
 
 const char* GlobalShortcuts::kSettingsGroup = "Shortcuts";
 
-GlobalShortcuts::GlobalShortcuts(QWidget *parent)
-  : QWidget(parent),
-    gnome_backend_(nullptr),
-    system_backend_(nullptr),
-    use_gnome_(false),
-    rating_signals_mapper_(new QSignalMapper(this))
-{
+GlobalShortcuts::GlobalShortcuts(QWidget* parent)
+    : QWidget(parent),
+      gnome_backend_(nullptr),
+      system_backend_(nullptr),
+      use_gnome_(false),
+      rating_signals_mapper_(new QSignalMapper(this)) {
   settings_.beginGroup(kSettingsGroup);
 
   // Create actions
   AddShortcut("play", tr("Play"), SIGNAL(Play()));
   AddShortcut("pause", tr("Pause"), SIGNAL(Pause()));
-  AddShortcut("play_pause", tr("Play/Pause"), SIGNAL(PlayPause()), QKeySequence(Qt::Key_MediaPlay));
-  AddShortcut("stop", tr("Stop"), SIGNAL(Stop()), QKeySequence(Qt::Key_MediaStop));
-  AddShortcut("stop_after", tr("Stop playing after current track"), SIGNAL(StopAfter()));
-  AddShortcut("next_track", tr("Next track"), SIGNAL(Next()), QKeySequence(Qt::Key_MediaNext));
-  AddShortcut("prev_track", tr("Previous track"), SIGNAL(Previous()), QKeySequence(Qt::Key_MediaPrevious));
+  AddShortcut("play_pause", tr("Play/Pause"), SIGNAL(PlayPause()),
+              QKeySequence(Qt::Key_MediaPlay));
+  AddShortcut("stop", tr("Stop"), SIGNAL(Stop()),
+              QKeySequence(Qt::Key_MediaStop));
+  AddShortcut("stop_after", tr("Stop playing after current track"),
+              SIGNAL(StopAfter()));
+  AddShortcut("next_track", tr("Next track"), SIGNAL(Next()),
+              QKeySequence(Qt::Key_MediaNext));
+  AddShortcut("prev_track", tr("Previous track"), SIGNAL(Previous()),
+              QKeySequence(Qt::Key_MediaPrevious));
   AddShortcut("inc_volume", tr("Increase volume"), SIGNAL(IncVolume()));
   AddShortcut("dec_volume", tr("Decrease volume"), SIGNAL(DecVolume()));
   AddShortcut("mute", tr("Mute"), SIGNAL(Mute()));
@@ -57,19 +61,32 @@ GlobalShortcuts::GlobalShortcuts(QWidget *parent)
   AddShortcut("seek_backward", tr("Seek backward"), SIGNAL(SeekBackward()));
   AddShortcut("show_hide", tr("Show/Hide"), SIGNAL(ShowHide()));
   AddShortcut("show_osd", tr("Show OSD"), SIGNAL(ShowOSD()));
-  AddShortcut("toggle_pretty_osd", tr("Toggle Pretty OSD"), SIGNAL(TogglePrettyOSD())); // Toggling possible only for pretty OSD
-  AddShortcut("shuffle_mode", tr("Change shuffle mode"), SIGNAL(CycleShuffleMode()));
-  AddShortcut("repeat_mode", tr("Change repeat mode"), SIGNAL(CycleRepeatMode()));
-  AddShortcut("toggle_last_fm_scrobbling", tr("Enable/disable Last.fm scrobbling"), SIGNAL(ToggleScrobbling()));
+  AddShortcut(
+      "toggle_pretty_osd", tr("Toggle Pretty OSD"),
+      SIGNAL(TogglePrettyOSD()));  // Toggling possible only for pretty OSD
+  AddShortcut("shuffle_mode", tr("Change shuffle mode"),
+              SIGNAL(CycleShuffleMode()));
+  AddShortcut("repeat_mode", tr("Change repeat mode"),
+              SIGNAL(CycleRepeatMode()));
+  AddShortcut("toggle_last_fm_scrobbling",
+              tr("Enable/disable Last.fm scrobbling"),
+              SIGNAL(ToggleScrobbling()));
 
-  AddRatingShortcut("rate_zero_star", tr("Rate the current song 0 stars"), rating_signals_mapper_, 0);
-  AddRatingShortcut("rate_one_star", tr("Rate the current song 1 star"), rating_signals_mapper_, 1);
-  AddRatingShortcut("rate_two_star", tr("Rate the current song 2 stars"), rating_signals_mapper_, 2);
-  AddRatingShortcut("rate_three_star", tr("Rate the current song 3 stars"), rating_signals_mapper_, 3);
-  AddRatingShortcut("rate_four_star", tr("Rate the current song 4 stars"), rating_signals_mapper_, 4);
-  AddRatingShortcut("rate_five_star", tr("Rate the current song 5 stars"), rating_signals_mapper_, 5);
+  AddRatingShortcut("rate_zero_star", tr("Rate the current song 0 stars"),
+                    rating_signals_mapper_, 0);
+  AddRatingShortcut("rate_one_star", tr("Rate the current song 1 star"),
+                    rating_signals_mapper_, 1);
+  AddRatingShortcut("rate_two_star", tr("Rate the current song 2 stars"),
+                    rating_signals_mapper_, 2);
+  AddRatingShortcut("rate_three_star", tr("Rate the current song 3 stars"),
+                    rating_signals_mapper_, 3);
+  AddRatingShortcut("rate_four_star", tr("Rate the current song 4 stars"),
+                    rating_signals_mapper_, 4);
+  AddRatingShortcut("rate_five_star", tr("Rate the current song 5 stars"),
+                    rating_signals_mapper_, 5);
 
-  connect(rating_signals_mapper_, SIGNAL(mapped(int)), SIGNAL(RateCurrentSong(int)));
+  connect(rating_signals_mapper_, SIGNAL(mapped(int)),
+          SIGNAL(RateCurrentSong(int)));
 
   // Create backends - these do the actual shortcut registration
   gnome_backend_ = new GnomeGlobalShortcutBackend(this);
@@ -98,8 +115,8 @@ void GlobalShortcuts::AddRatingShortcut(const QString& id, const QString& name,
   mapper->setMapping(shortcut.action, rating);
 }
 
-GlobalShortcuts::Shortcut GlobalShortcuts::AddShortcut(const QString& id, const QString& name,
-                                                       const QKeySequence& default_key) {
+GlobalShortcuts::Shortcut GlobalShortcuts::AddShortcut(
+    const QString& id, const QString& name, const QKeySequence& default_key) {
   Shortcut shortcut;
   shortcut.action = new QAction(name, this);
   QKeySequence key_sequence = QKeySequence::fromString(
@@ -122,7 +139,7 @@ bool GlobalShortcuts::IsGsdAvailable() const {
 #ifdef QT_DBUS_LIB
   return QDBusConnection::sessionBus().interface()->isServiceRegistered(
       GnomeGlobalShortcutBackend::kGsdService);
-#else // QT_DBUS_LIB
+#else  // QT_DBUS_LIB
   return false;
 #endif
 }
@@ -137,21 +154,19 @@ void GlobalShortcuts::ReloadSettings() {
 }
 
 void GlobalShortcuts::Unregister() {
-  if (gnome_backend_->is_active())
-    gnome_backend_->Unregister();
-  if (system_backend_->is_active())
-    system_backend_->Unregister();
+  if (gnome_backend_->is_active()) gnome_backend_->Unregister();
+  if (system_backend_->is_active()) system_backend_->Unregister();
 }
 
 void GlobalShortcuts::Register() {
-  if (use_gnome_ && gnome_backend_->Register())
-    return;
+  if (use_gnome_ && gnome_backend_->Register()) return;
   system_backend_->Register();
 }
 
 bool GlobalShortcuts::IsMacAccessibilityEnabled() const {
 #ifdef Q_OS_MAC
-  return static_cast<MacGlobalShortcutBackend*>(system_backend_)->IsAccessibilityEnabled();
+  return static_cast<MacGlobalShortcutBackend*>(system_backend_)
+      ->IsAccessibilityEnabled();
 #else
   return true;
 #endif
@@ -159,6 +174,7 @@ bool GlobalShortcuts::IsMacAccessibilityEnabled() const {
 
 void GlobalShortcuts::ShowMacAccessibilityDialog() {
 #ifdef Q_OS_MAC
-  static_cast<MacGlobalShortcutBackend*>(system_backend_)->ShowAccessibilityDialog();
+  static_cast<MacGlobalShortcutBackend*>(system_backend_)
+      ->ShowAccessibilityDialog();
 #endif
 }

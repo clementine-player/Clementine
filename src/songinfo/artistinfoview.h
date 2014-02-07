@@ -31,17 +31,16 @@ class QVBoxLayout;
 class ArtistInfoView : public SongInfoBase {
   Q_OBJECT
 
-public:
+ public:
   ArtistInfoView(QWidget* parent = 0);
   ~ArtistInfoView();
 
-protected:
-  virtual void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
+ protected:
+  virtual void InfoResultReady(int id, const CollapsibleInfoPane::Data& data);
   bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
 
-protected slots:
+ protected slots:
   void ResultReady(int id, const SongInfoFetcher::Result& result);
 };
 
-#endif // ARTISTINFOVIEW_H
-
+#endif  // ARTISTINFOVIEW_H

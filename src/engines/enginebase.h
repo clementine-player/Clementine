@@ -15,9 +15,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Copyright: (C) 2003 Mark Kretschmann
+// Copyright: (C) 2003 Mark Kretschmann
 //           (C) 2004 Max Howell, <max.howell@methylblue.com>
-//License:   See COPYING
+// License:   See COPYING
 
 #ifndef AMAROK_ENGINEBASE_H
 #define AMAROK_ENGINEBASE_H
@@ -63,8 +63,8 @@ class Base : public QObject {
   // Subclasses should respect given markers (beginning and end) which are
   // in miliseconds.
   virtual bool Load(const QUrl& url, TrackChangeFlags change,
-                    bool force_stop_at_end,
-                    quint64 beginning_nanosec, qint64 end_nanosec);
+                    bool force_stop_at_end, quint64 beginning_nanosec,
+                    qint64 end_nanosec);
   // Sets new values for the beginning and end markers of the currently playing
   // song.
   // This doesn't change the state of engine or the stream's current position.
@@ -73,19 +73,19 @@ class Base : public QObject {
     end_nanosec_ = end_nanosec;
   }
 
-  // Plays a media stream represented with the URL 'u' from the given 'beginning'
+  // Plays a media stream represented with the URL 'u' from the given
+  // 'beginning'
   // to the given 'end' (usually from 0 to a song's length). Both markers
   // should be passed in nanoseconds. 'end' can be negative, indicating that the
   // real length of 'u' stream is unknown.
-  bool Play(const QUrl& u, TrackChangeFlags c,
-            bool force_stop_at_end,
+  bool Play(const QUrl& u, TrackChangeFlags c, bool force_stop_at_end,
             quint64 beginning_nanosec, qint64 end_nanosec);
 
   void SetVolume(uint value);
 
   // Simple accessors
   inline uint volume() const { return volume_; }
-  virtual const Scope &scope() { return scope_; }
+  virtual const Scope& scope() { return scope_; }
   bool is_fadeout_enabled() const { return fadeout_enabled_; }
   bool is_crossfade_enabled() const { return crossfade_enabled_; }
   bool is_autocrossfade_enabled() const { return autocrossfade_enabled_; }
@@ -98,10 +98,11 @@ class Base : public QObject {
   virtual void ReloadSettings();
 
   virtual void SetEqualizerEnabled(bool) {}
-  virtual void SetEqualizerParameters(int preamp, const QList<int>& bandGains) {}
+  virtual void SetEqualizerParameters(int preamp, const QList<int>& bandGains) {
+  }
   virtual void SetStereoBalance(float value) {}
 
- signals:
+signals:
   // Emitted when crossfading is enabled and the track is crossfade_duration_
   // away from finishing
   void TrackAboutToEnd();
@@ -115,13 +116,14 @@ class Base : public QObject {
 
   // Emitted when Engine was unable to play a song with the given QUrl.
   void InvalidSongRequested(const QUrl&);
-  // Emitted when Engine successfully started playing a song with the 
+  // Emitted when Engine successfully started playing a song with the
   // given QUrl.
   void ValidSongRequested(const QUrl&);
 
   void MetaData(const Engine::SimpleMetaBundle&);
 
-  // Signals that the engine's state has changed (a stream was stopped for example).
+  // Signals that the engine's state has changed (a stream was stopped for
+  // example).
   // Always use the state from event, because it's not guaranteed that immediate
   // subsequent call to state() won't return a stale value.
   void StateChanged(Engine::State);
@@ -129,8 +131,8 @@ class Base : public QObject {
  protected:
   Base();
 
-  virtual void SetVolumeSW( uint percent ) = 0;
-  static uint MakeVolumeLogarithmic( uint volume );
+  virtual void SetVolumeSW(uint percent) = 0;
+  static uint MakeVolumeLogarithmic(uint volume);
   void EmitAboutToEnd();
 
  protected:
@@ -154,7 +156,6 @@ class Base : public QObject {
   Q_DISABLE_COPY(Base);
 };
 
-
 struct SimpleMetaBundle {
   QString title;
   QString artist;
@@ -168,6 +169,6 @@ struct SimpleMetaBundle {
   QString tracknr;
 };
 
-} // namespace
+}  // namespace
 
 #endif

@@ -33,7 +33,7 @@ class TaskManager;
 class GPodLoader : public QObject {
   Q_OBJECT
 
-public:
+ public:
   GPodLoader(const QString& mount_point, TaskManager* task_manager,
              LibraryBackend* backend, std::shared_ptr<ConnectedDevice> device);
   ~GPodLoader();
@@ -41,7 +41,7 @@ public:
   void set_music_path_prefix(const QString& prefix) { path_prefix_ = prefix; }
   void set_song_type(Song::FileType type) { type_ = type; }
 
-public slots:
+ public slots:
   void LoadDatabase();
 
 signals:
@@ -49,7 +49,7 @@ signals:
   void TaskStarted(int task_id);
   void LoadFinished(Itdb_iTunesDB* db);
 
-private:
+ private:
   std::shared_ptr<ConnectedDevice> device_;
   QThread* original_thread_;
 
@@ -60,4 +60,4 @@ private:
   LibraryBackend* backend_;
 };
 
-#endif // GPODLOADER_H
+#endif  // GPODLOADER_H

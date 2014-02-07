@@ -27,17 +27,17 @@ class EqualizerSlider : public QWidget {
   Q_OBJECT
 
  public:
-  EqualizerSlider(const QString& label, QWidget *parent = 0);
+  EqualizerSlider(const QString& label, QWidget* parent = 0);
   ~EqualizerSlider();
 
   int value() const;
   void set_value(int value);
 
- signals:
+signals:
   void ValueChanged(int value);
 
  private:
   Ui_EqualizerSlider* ui_;
 };
 
-#endif // EQUALISERSLIDER_H
+#endif  // EQUALISERSLIDER_H

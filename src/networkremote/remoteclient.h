@@ -9,8 +9,8 @@
 #include "remotecontrolmessages.pb.h"
 
 class RemoteClient : public QObject {
-    Q_OBJECT
-public:
+  Q_OBJECT
+ public:
   RemoteClient(Application* app, QTcpSocket* client);
   ~RemoteClient();
 
@@ -21,13 +21,13 @@ public:
   bool isDownloader() { return downloader_; }
   void DisconnectClient(pb::remote::ReasonDisconnect reason);
 
-private slots:
+ private slots:
   void IncomingData();
 
 signals:
   void Parse(const pb::remote::Message& msg);
 
-private:
+ private:
   void ParseMessage(const QByteArray& data);
 
   // Sends data to client without check if authenticated
@@ -47,4 +47,4 @@ private:
   QBuffer buffer_;
 };
 
-#endif // REMOTECLIENT_H
+#endif  // REMOTECLIENT_H

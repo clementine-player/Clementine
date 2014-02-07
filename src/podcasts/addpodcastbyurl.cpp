@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -26,17 +26,14 @@
 #include <QMessageBox>
 
 AddPodcastByUrl::AddPodcastByUrl(Application* app, QWidget* parent)
-  : AddPodcastPage(app, parent),
-    ui_(new Ui_AddPodcastByUrl),
-    loader_(new PodcastUrlLoader(this))
-{
+    : AddPodcastPage(app, parent),
+      ui_(new Ui_AddPodcastByUrl),
+      loader_(new PodcastUrlLoader(this)) {
   ui_->setupUi(this);
   connect(ui_->go, SIGNAL(clicked()), SLOT(GoClicked()));
 }
 
-AddPodcastByUrl::~AddPodcastByUrl() {
-  delete ui_;
-}
+AddPodcastByUrl::~AddPodcastByUrl() { delete ui_; }
 
 void AddPodcastByUrl::SetUrlAndGo(const QUrl& url) {
   ui_->url->setText(url.toString());
@@ -56,9 +53,8 @@ void AddPodcastByUrl::GoClicked() {
   PodcastUrlLoaderReply* reply = loader_->Load(ui_->url->text());
   ui_->url->setText(reply->url().toString());
 
-  NewClosure(reply, SIGNAL(Finished(bool)),
-             this, SLOT(RequestFinished(PodcastUrlLoaderReply*)),
-             reply);
+  NewClosure(reply, SIGNAL(Finished(bool)), this,
+             SLOT(RequestFinished(PodcastUrlLoaderReply*)), reply);
 }
 
 void AddPodcastByUrl::RequestFinished(PodcastUrlLoaderReply* reply) {
@@ -73,15 +69,16 @@ void AddPodcastByUrl::RequestFinished(PodcastUrlLoaderReply* reply) {
   }
 
   switch (reply->result_type()) {
-  case PodcastUrlLoaderReply::Type_Podcast:
-    foreach (const Podcast& podcast, reply->podcast_results()) {
-      model()->appendRow(model()->CreatePodcastItem(podcast));
-    }
-    break;
+    case PodcastUrlLoaderReply::Type_Podcast:
+      foreach(const Podcast & podcast, reply->podcast_results()) {
+        model()->appendRow(model()->CreatePodcastItem(podcast));
+      }
+      break;
 
-  case PodcastUrlLoaderReply::Type_Opml:
-    model()->CreateOpmlContainerItems(reply->opml_results(), model()->invisibleRootItem());
-    break;
+    case PodcastUrlLoaderReply::Type_Opml:
+      model()->CreateOpmlContainerItems(reply->opml_results(),
+                                        model()->invisibleRootItem());
+      break;
   }
 }
 
@@ -92,8 +89,9 @@ void AddPodcastByUrl::Show() {
   }
 
   const QClipboard* clipboard = QApplication::clipboard();
-  foreach (const QString& contents, QStringList() << clipboard->text(QClipboard::Clipboard)
-                                                  << clipboard->text(QClipboard::Selection)) {
+  foreach(const QString & contents,
+          QStringList() << clipboard->text(QClipboard::Clipboard)
+                        << clipboard->text(QClipboard::Selection)) {
     if (contents.contains("://")) {
       ui_->url->setText(contents);
       return;

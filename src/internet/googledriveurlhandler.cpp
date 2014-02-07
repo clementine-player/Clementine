@@ -2,12 +2,9 @@
 
 #include "googledriveservice.h"
 
-GoogleDriveUrlHandler::GoogleDriveUrlHandler(
-    GoogleDriveService* service,
-    QObject* parent)
-  : UrlHandler(parent),
-    service_(service) {
-}
+GoogleDriveUrlHandler::GoogleDriveUrlHandler(GoogleDriveService* service,
+                                             QObject* parent)
+    : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult GoogleDriveUrlHandler::StartLoading(const QUrl& url) {
   QString file_id = url.path();

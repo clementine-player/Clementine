@@ -28,30 +28,21 @@
 #include <QSettings>
 #include <QTemporaryFile>
 
-SomaFMUrlHandler::SomaFMUrlHandler(Application* app,
-                                   SomaFMServiceBase* service,
+SomaFMUrlHandler::SomaFMUrlHandler(Application* app, SomaFMServiceBase* service,
                                    QObject* parent)
-  : UrlHandler(parent),
-    app_(app),
-    service_(service),
-    task_id_(0)
-{
-}
+    : UrlHandler(parent), app_(app), service_(service), task_id_(0) {}
 
-QString SomaFMUrlHandler::scheme() const {
-  return service_->url_scheme();
-}
+QString SomaFMUrlHandler::scheme() const { return service_->url_scheme(); }
 
-QIcon SomaFMUrlHandler::icon() const {
-  return service_->icon();
-}
+QIcon SomaFMUrlHandler::icon() const { return service_->icon(); }
 
 UrlHandler::LoadResult SomaFMUrlHandler::StartLoading(const QUrl& url) {
   QUrl playlist_url = url;
   playlist_url.setScheme("http");
 
   // Load the playlist
-  QNetworkReply* reply = service_->network()->get(QNetworkRequest(playlist_url));
+  QNetworkReply* reply =
+      service_->network()->get(QNetworkRequest(playlist_url));
   connect(reply, SIGNAL(finished()), SLOT(LoadPlaylistFinished()));
 
   if (!task_id_)
@@ -88,6 +79,6 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
     return;
   }
 
-  emit AsyncLoadComplete(LoadResult(original_url, LoadResult::TrackAvailable,
-                                    songs[0].url()));
+  emit AsyncLoadComplete(
+      LoadResult(original_url, LoadResult::TrackAvailable, songs[0].url()));
 }

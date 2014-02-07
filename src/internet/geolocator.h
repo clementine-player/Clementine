@@ -47,7 +47,7 @@ class Geolocator : public QObject {
     int lng_e6_;
   };
 
- signals:
+signals:
   void Finished(Geolocator::LatLng latlng);
 
  private slots:

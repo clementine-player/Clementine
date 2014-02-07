@@ -50,7 +50,7 @@ class FileView : public QWidget {
   void showEvent(QShowEvent*);
   void keyPressEvent(QKeyEvent* e);
 
- signals:
+signals:
   void PathChanged(const QString& path);
 
   void AddToPlaylist(QMimeData* data);
@@ -109,4 +109,4 @@ class FileView : public QWidget {
   QStringList filter_list_;
 };
 
-#endif // FILEVIEW_H
+#endif  // FILEVIEW_H

@@ -82,17 +82,14 @@ class WiimotedevShortcuts;
 class Windows7ThumbBar;
 class Ui_MainWindow;
 
-
 class QSortFilterProxyModel;
 
 class MainWindow : public QMainWindow, public PlatformInterface {
   Q_OBJECT
 
  public:
-  MainWindow(Application* app,
-             SystemTrayIcon* tray_icon,
-             OSD* osd,
-             QWidget *parent = 0);
+  MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
+             QWidget* parent = 0);
   ~MainWindow();
 
   static const char* kSettingsGroup;
@@ -136,13 +133,13 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Activate();
   bool LoadUrl(const QString& url);
 
- signals:
+signals:
   // Signals that stop playing after track was toggled.
   void StopAfterToggled(bool stop);
 
  private slots:
   void FilePathChanged(const QString& path);
-  
+
   void MediaStopped();
   void MediaPaused();
   void MediaPlaying();
@@ -197,7 +194,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Seeked(qlonglong microseconds);
   void UpdateTrackPosition();
 
-  //Handle visibility of LastFM icons
+  // Handle visibility of LastFM icons
   void LastFMButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
   void SetToggleScrobblingIcon(bool value);
@@ -261,7 +258,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void Exit();
 
-  void HandleNotificationPreview(OSD::Behaviour type, QString line1, QString line2);
+  void HandleNotificationPreview(OSD::Behaviour type, QString line1,
+                                 QString line2);
 
   void ScrollToInternetIndex(const QModelIndex& index);
   void FocusGlobalSearchField();
@@ -277,7 +275,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void CheckFullRescanRevisions();
 
-  //creates the icon by painting the full one depending on the current position
+  // creates the icon by painting the full one depending on the current position
   QPixmap CreateOverlayedIcon(int position, int scrobble_point);
 
  private:
@@ -296,9 +294,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
   FileView* file_view_;
-  #ifdef HAVE_AUDIOCD
-    std::unique_ptr<RipCD> rip_cd_;
-  #endif
+#ifdef HAVE_AUDIOCD
+  std::unique_ptr<RipCD> rip_cd_;
+#endif
   PlaylistListContainer* playlist_list_;
   InternetViewContainer* internet_view_;
   DeviceViewContainer* device_view_container_;
@@ -363,4 +361,4 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   BackgroundStreams* background_streams_;
 };
 
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

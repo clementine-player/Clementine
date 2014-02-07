@@ -51,8 +51,10 @@ class CueParser : public ParserBase {
 
   bool TryMagic(const QByteArray& data) const;
 
-  SongList Load(QIODevice* device, const QString& playlist_path = "", const QDir& dir = QDir()) const;
-  void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir()) const;
+  SongList Load(QIODevice* device, const QString& playlist_path = "",
+                const QDir& dir = QDir()) const;
+  void Save(const SongList& songs, QIODevice* device,
+            const QDir& dir = QDir()) const;
 
  private:
   // A single TRACK entry in .cue file.
@@ -72,12 +74,16 @@ class CueParser : public ParserBase {
     QString genre;
     QString date;
 
-    QString PrettyArtist() const { return artist.isEmpty() ? album_artist : artist; }
-    QString PrettyComposer() const { return composer.isEmpty() ? album_composer : composer; }
+    QString PrettyArtist() const {
+      return artist.isEmpty() ? album_artist : artist;
+    }
+    QString PrettyComposer() const {
+      return composer.isEmpty() ? album_composer : composer;
+    }
 
     CueEntry(QString& file, QString& index, QString& title, QString& artist,
-             QString& album_artist, QString& album, QString& composer, QString& album_composer,
-             QString& genre, QString& date) {
+             QString& album_artist, QString& album, QString& composer,
+             QString& album_composer, QString& genre, QString& date) {
       this->file = file;
       this->index = index;
       this->title = title;
@@ -91,7 +97,8 @@ class CueParser : public ParserBase {
     }
   };
 
-  bool UpdateSong(const CueEntry& entry, const QString& next_index, Song* song) const;
+  bool UpdateSong(const CueEntry& entry, const QString& next_index,
+                  Song* song) const;
   bool UpdateLastSong(const CueEntry& entry, Song* song) const;
 
   QStringList SplitCueLine(const QString& line) const;

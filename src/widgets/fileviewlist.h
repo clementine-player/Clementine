@@ -31,7 +31,7 @@ class FileViewList : public QListView {
 
   void mousePressEvent(QMouseEvent* e);
 
- signals:
+signals:
   void AddToPlaylist(QMimeData* data);
   void CopyToLibrary(const QList<QUrl>& urls);
   void MoveToLibrary(const QList<QUrl>& urls);
@@ -62,4 +62,4 @@ class FileViewList : public QListView {
   QItemSelection menu_selection_;
 };
 
-#endif // FILEVIEWLIST_H
+#endif  // FILEVIEWLIST_H

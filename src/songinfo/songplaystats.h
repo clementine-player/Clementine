@@ -24,7 +24,7 @@
 class SongPlayStats : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   SongPlayStats(QWidget* parent = 0);
 
   static const int kIconSize;
@@ -36,10 +36,10 @@ public:
 
   QSize sizeHint() const;
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
 
-private:
+ private:
   struct Item {
     Item(const QIcon& icon, const QString& text) : icon_(icon), text_(text) {}
     QIcon icon_;
@@ -49,4 +49,4 @@ private:
   QList<Item> items_;
 };
 
-#endif // SONGPLAYSTATS_H
+#endif  // SONGPLAYSTATS_H

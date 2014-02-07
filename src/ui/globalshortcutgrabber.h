@@ -39,9 +39,9 @@ class GlobalShortcutGrabber : public QDialog {
   QKeySequence GetKey(const QString& name);
 
  protected:
-  bool event(QEvent *);
-  void showEvent(QShowEvent *);
-  void hideEvent(QHideEvent *);
+  bool event(QEvent*);
+  void showEvent(QShowEvent*);
+  void hideEvent(QHideEvent*);
   void grabKeyboard();
   void releaseKeyboard();
 
@@ -59,4 +59,4 @@ class GlobalShortcutGrabber : public QDialog {
   MacMonitorWrapper* wrapper_;
 };
 
-#endif // GLOBALSHORTCUTGRABBER_H
+#endif  // GLOBALSHORTCUTGRABBER_H

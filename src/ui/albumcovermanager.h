@@ -47,10 +47,8 @@ class QProgressBar;
 class AlbumCoverManager : public QMainWindow {
   Q_OBJECT
  public:
-  AlbumCoverManager(Application* app,
-                    LibraryBackend* library_backend,
-                    QWidget* parent = 0,
-                    QNetworkAccessManager* network = 0);
+  AlbumCoverManager(Application* app, LibraryBackend* library_backend,
+                    QWidget* parent = 0, QNetworkAccessManager* network = 0);
   ~AlbumCoverManager();
 
   static const char* kSettingsGroup;
@@ -68,15 +66,15 @@ class AlbumCoverManager : public QMainWindow {
   SongList GetSongsInAlbums(const QModelIndexList& indexes) const;
   SongMimeData* GetMimeDataForAlbums(const QModelIndexList& indexes) const;
 
- signals:
+signals:
   void AddToPlaylist(QMimeData* data);
 
  protected:
-  void showEvent(QShowEvent *);
-  void closeEvent(QCloseEvent *);
+  void showEvent(QShowEvent*);
+  void closeEvent(QCloseEvent*);
 
   // For the album view context menu events
-  bool eventFilter(QObject *obj, QEvent *event);
+  bool eventFilter(QObject* obj, QEvent* event);
 
  private slots:
   void ArtistChanged(QListWidgetItem* current);
@@ -107,11 +105,7 @@ class AlbumCoverManager : public QMainWindow {
   void UpdateExportStatus(int exported, int bad, int count);
 
  private:
-  enum ArtistItemType {
-    All_Artists,
-    Various_Artists,
-    Specific_Artist,
-  };
+  enum ArtistItemType { All_Artists, Various_Artists, Specific_Artist, };
 
   enum Role {
     Role_ArtistName = Qt::UserRole + 1,
@@ -121,15 +115,12 @@ class AlbumCoverManager : public QMainWindow {
     Role_FirstUrl,
   };
 
-  enum HideCovers {
-    Hide_None,
-    Hide_WithCovers,
-    Hide_WithoutCovers,
-  };
+  enum HideCovers { Hide_None, Hide_WithCovers, Hide_WithoutCovers, };
 
-  QString InitialPathForOpenCoverDialog(const QString& path_automatic, const QString& first_file_name) const;
+  QString InitialPathForOpenCoverDialog(const QString& path_automatic,
+                                        const QString& first_file_name) const;
 
-  // Returns the selected element in form of a Song ready to be used 
+  // Returns the selected element in form of a Song ready to be used
   // by AlbumCoverChoiceController or invalid song if there's nothing
   // or multiple elements selected.
   Song GetSingleSelectionAsSong();
@@ -141,7 +132,8 @@ class AlbumCoverManager : public QMainWindow {
   Song ItemAsSong(QListWidgetItem* item);
 
   void UpdateStatusText();
-  bool ShouldHide(const QListWidgetItem& item, const QString& filter, HideCovers hide) const;
+  bool ShouldHide(const QListWidgetItem& item, const QString& filter,
+                  HideCovers hide) const;
   void SaveAndSetCover(QListWidgetItem* item, const QImage& image);
 
  private:
@@ -184,4 +176,4 @@ class AlbumCoverManager : public QMainWindow {
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithFilter);
 };
 
-#endif // ALBUMCOVERMANAGER_H
+#endif  // ALBUMCOVERMANAGER_H

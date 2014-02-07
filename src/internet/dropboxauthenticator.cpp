@@ -32,20 +32,18 @@ static const char* kAccountInfoEndpoint =
 }  // namespace
 
 DropboxAuthenticator::DropboxAuthenticator(QObject* parent)
-    : QObject(parent),
-      network_(new NetworkAccessManager(this)) {
-}
+    : QObject(parent), network_(new NetworkAccessManager(this)) {}
 
 void DropboxAuthenticator::StartAuthorisation() {
   QUrl url(kRequestTokenEndpoint);
-  QByteArray authorisation_header = GenerateAuthorisationHeader(
-      QString::null, QString::null);
+  QByteArray authorisation_header =
+      GenerateAuthorisationHeader(QString::null, QString::null);
   QNetworkRequest request(url);
   request.setRawHeader("Authorization", authorisation_header);
 
   QNetworkReply* reply = network_->post(request, QByteArray());
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(RequestTokenFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RequestTokenFinished(QNetworkReply*)), reply);
 }
 
 namespace {
@@ -54,7 +52,7 @@ namespace {
 QMap<QString, QString> ParseParamList(const QString& params) {
   QMap<QString, QString> ret;
   QStringList components = params.split("&");
-  foreach (const QString& component, components) {
+  foreach(const QString & component, components) {
     QStringList pairs = component.split("=");
     if (pairs.size() != 2) {
       continue;
@@ -63,7 +61,6 @@ QMap<QString, QString> ParseParamList(const QString& params) {
   }
   return ret;
 }
-
 }
 
 void DropboxAuthenticator::RequestTokenFinished(QNetworkReply* reply) {
@@ -79,8 +76,8 @@ void DropboxAuthenticator::Authorise() {
   LocalRedirectServer* server = new LocalRedirectServer(this);
   server->Listen();
 
-  NewClosure(server, SIGNAL(Finished()),
-             this, SLOT(RedirectArrived(LocalRedirectServer*)), server);
+  NewClosure(server, SIGNAL(Finished()), this,
+             SLOT(RedirectArrived(LocalRedirectServer*)), server);
 
   QUrl url(kAuthoriseEndpoint);
   url.addQueryItem("oauth_token", token_);
@@ -100,13 +97,13 @@ void DropboxAuthenticator::RedirectArrived(LocalRedirectServer* server) {
 void DropboxAuthenticator::RequestAccessToken() {
   QUrl url(kAccessTokenEndpoint);
   QNetworkRequest request(url);
-  QByteArray authorisation_header = GenerateAuthorisationHeader(
-      token_, secret_);
+  QByteArray authorisation_header =
+      GenerateAuthorisationHeader(token_, secret_);
   request.setRawHeader("Authorization", authorisation_header);
 
   QNetworkReply* reply = network_->post(request, QByteArray());
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(RequestAccessTokenFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RequestAccessTokenFinished(QNetworkReply*)), reply);
 }
 
 void DropboxAuthenticator::RequestAccessTokenFinished(QNetworkReply* reply) {
@@ -125,11 +122,10 @@ QByteArray DropboxAuthenticator::GenerateAuthorisationHeader() {
 }
 
 QByteArray DropboxAuthenticator::GenerateAuthorisationHeader(
-    const QString& token,
-    const QString& token_secret) {
+    const QString& token, const QString& token_secret) {
   typedef QPair<QString, QString> Param;
-  QByteArray signature = QUrl::toPercentEncoding(
-      QString("%1&%2").arg(kAppSecret, token_secret));
+  QByteArray signature =
+      QUrl::toPercentEncoding(QString("%1&%2").arg(kAppSecret, token_secret));
   QList<Param> params;
   params << Param("oauth_consumer_key", kAppKey)
          << Param("oauth_signature_method", "PLAINTEXT")
@@ -140,7 +136,7 @@ QByteArray DropboxAuthenticator::GenerateAuthorisationHeader(
     params << Param("oauth_token", token);
   }
   QStringList encoded_params;
-  foreach (const Param& p, params) {
+  foreach(const Param & p, params) {
     encoded_params << QString("%1=\"%2\"").arg(p.first, p.second);
   }
   QString authorisation_header = QString("OAuth ") + encoded_params.join(", ");
@@ -153,11 +149,12 @@ void DropboxAuthenticator::RequestAccountInformation() {
   request.setRawHeader("Authorization", GenerateAuthorisationHeader());
   qLog(Debug) << Q_FUNC_INFO << url << request.rawHeader("Authorization");
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(RequestAccountInformationFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RequestAccountInformationFinished(QNetworkReply*)), reply);
 }
 
-void DropboxAuthenticator::RequestAccountInformationFinished(QNetworkReply* reply) {
+void DropboxAuthenticator::RequestAccountInformationFinished(
+    QNetworkReply* reply) {
   reply->deleteLater();
   QJson::Parser parser;
   QVariantMap response = parser.parse(reply).toMap();

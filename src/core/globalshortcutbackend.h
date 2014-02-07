@@ -25,7 +25,7 @@ class GlobalShortcuts;
 class GlobalShortcutBackend : public QObject {
   Q_OBJECT
 
-public:
+ public:
   GlobalShortcutBackend(GlobalShortcuts* parent = 0);
   virtual ~GlobalShortcutBackend() {}
 
@@ -37,7 +37,7 @@ public:
 signals:
   void RegisterFinished(bool success);
 
-protected:
+ protected:
   virtual bool DoRegister() = 0;
   virtual void DoUnregister() = 0;
 
@@ -45,4 +45,4 @@ protected:
   bool active_;
 };
 
-#endif // GLOBALSHORTCUTBACKEND_H
+#endif  // GLOBALSHORTCUTBACKEND_H

@@ -36,7 +36,6 @@ class RadioLoadingIndicator;
 class RatingItemDelegate;
 class QTimeLine;
 
-
 // This proxy style works around a bug/feature introduced in Qt 4.7's QGtkStyle
 // that uses Gtk to paint row backgrounds, ignoring any custom brush or palette
 // the caller set in the QStyleOption.  That breaks our currently playing track
@@ -44,27 +43,21 @@ class QTimeLine;
 // This proxy style uses QCleanlooksStyle to paint the affected elements.
 // This class is used by the global search view as well.
 class PlaylistProxyStyle : public QProxyStyle {
-public:
+ public:
   PlaylistProxyStyle(QStyle* base);
   void drawControl(ControlElement element, const QStyleOption* option,
                    QPainter* painter, const QWidget* widget) const;
   void drawPrimitive(PrimitiveElement element, const QStyleOption* option,
                      QPainter* painter, const QWidget* widget) const;
 
-private:
+ private:
   std::unique_ptr<QCleanlooksStyle> cleanlooks_;
 };
-
 
 class PlaylistView : public QTreeView {
   Q_OBJECT
  public:
-  enum BackgroundImageType {
-    Default,
-    None,
-    Custom,
-    AlbumCover
-  };
+  enum BackgroundImageType { Default, None, Custom, AlbumCover };
 
   PlaylistView(QWidget* parent = 0);
 
@@ -86,12 +79,15 @@ class PlaylistView : public QTreeView {
   void SetReadOnlySettings(bool read_only) { read_only_settings_ = read_only; }
 
   Playlist* playlist() const { return playlist_; }
-  BackgroundImageType background_image_type() const { return background_image_type_; }
+  BackgroundImageType background_image_type() const {
+    return background_image_type_;
+  }
   Qt::Alignment column_alignment(int section) const;
 
   // QTreeView
   void drawTree(QPainter* painter, const QRegion& region) const;
-  void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void drawRow(QPainter* painter, const QStyleOptionViewItem& option,
+               const QModelIndex& index) const;
   void setModel(QAbstractItemModel* model);
 
  public slots:
@@ -105,15 +101,16 @@ class PlaylistView : public QTreeView {
   void SetColumnAlignment(int section, Qt::Alignment alignment);
 
   void CopyCurrentSongToClipboard() const;
-  void CurrentSongChanged(const Song& new_song, const QString& uri, const QImage& cover_art);
+  void CurrentSongChanged(const Song& new_song, const QString& uri,
+                          const QImage& cover_art);
   void PlayerStopped();
 
- signals:
+signals:
   void PlayItem(const QModelIndex& index);
   void PlayPause();
   void RightClicked(const QPoint& global_pos, const QModelIndex& index);
   void SeekTrack(int gap);
-  void FocusOnFilterSignal(QKeyEvent *event);
+  void FocusOnFilterSignal(QKeyEvent* event);
   void BackgroundPropertyChanged();
   void ColumnAlignmentChanged(const ColumnAlignmentMap& alignment);
 
@@ -127,11 +124,11 @@ class PlaylistView : public QTreeView {
   void mouseMoveEvent(QMouseEvent* event);
   void mousePressEvent(QMouseEvent* event);
   void leaveEvent(QEvent*);
-  void paintEvent(QPaintEvent *event);
-  void dragMoveEvent(QDragMoveEvent *event);
-  void dragEnterEvent(QDragEnterEvent *event);
-  void dragLeaveEvent(QDragLeaveEvent *event);
-  void dropEvent(QDropEvent *event);
+  void paintEvent(QPaintEvent* event);
+  void dragMoveEvent(QDragMoveEvent* event);
+  void dragEnterEvent(QDragEnterEvent* event);
+  void dragLeaveEvent(QDragLeaveEvent* event);
+  void dropEvent(QDropEvent* event);
   void resizeEvent(QResizeEvent* event);
   bool eventFilter(QObject* object, QEvent* event);
   void focusInEvent(QFocusEvent* event);
@@ -165,8 +162,12 @@ class PlaylistView : public QTreeView {
   void UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
                                     const QModelIndex& index);
 
-  void set_background_image_type(BackgroundImageType bg) { background_image_type_ = bg; emit BackgroundPropertyChanged(); }
-  // Save image as the background_image_ after applying some modifications (opacity, ...).
+  void set_background_image_type(BackgroundImageType bg) {
+    background_image_type_ = bg;
+    emit BackgroundPropertyChanged();
+  }
+  // Save image as the background_image_ after applying some modifications
+  // (opacity, ...).
   // Should be used instead of modifying background_image_ directly
   void set_background_image(const QImage& image);
 
@@ -226,7 +227,7 @@ class PlaylistView : public QTreeView {
   bool inhibit_autoscroll_;
   bool currently_autoscrolling_;
 
-  int row_height_; // Used to invalidate the currenttrack_bar pixmaps
+  int row_height_;  // Used to invalidate the currenttrack_bar pixmaps
   QList<QPixmap> currenttrack_bar_left_;
   QList<QPixmap> currenttrack_bar_mid_;
   QList<QPixmap> currenttrack_bar_right_;
@@ -247,4 +248,4 @@ class PlaylistView : public QTreeView {
   ColumnAlignmentMap column_alignment_;
 };
 
-#endif // PLAYLISTVIEW_H
+#endif  // PLAYLISTVIEW_H

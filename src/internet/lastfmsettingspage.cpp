@@ -28,19 +28,20 @@
 #include <QSettings>
 
 LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    service_(static_cast<LastFMService*>(InternetModel::ServiceByName("Last.fm"))),
-    ui_(new Ui_LastFMSettingsPage),
-    waiting_for_auth_(false)
-{
+    : SettingsPage(dialog),
+      service_(
+          static_cast<LastFMService*>(InternetModel::ServiceByName("Last.fm"))),
+      ui_(new Ui_LastFMSettingsPage),
+      waiting_for_auth_(false) {
   ui_->setupUi(this);
 
   // Icons
   setWindowIcon(QIcon(":/last.fm/as.png"));
 
-  connect(service_, SIGNAL(AuthenticationComplete(bool,QString)),
-          SLOT(AuthenticationComplete(bool,QString)));
-  connect(service_, SIGNAL(UpdatedSubscriberStatus(bool)), SLOT(UpdatedSubscriberStatus(bool)));
+  connect(service_, SIGNAL(AuthenticationComplete(bool, QString)),
+          SLOT(AuthenticationComplete(bool, QString)));
+  connect(service_, SIGNAL(UpdatedSubscriberStatus(bool)),
+          SLOT(UpdatedSubscriberStatus(bool)));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
   connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
@@ -53,9 +54,7 @@ LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
   resize(sizeHint());
 }
 
-LastFMSettingsPage::~LastFMSettingsPage() {
-  delete ui_;
-}
+LastFMSettingsPage::~LastFMSettingsPage() { delete ui_; }
 
 void LastFMSettingsPage::Login() {
   waiting_for_auth_ = true;
@@ -66,8 +65,7 @@ void LastFMSettingsPage::Login() {
 
 void LastFMSettingsPage::AuthenticationComplete(bool success,
                                                 const QString& message) {
-  if (!waiting_for_auth_)
-    return; // Wasn't us that was waiting for auth
+  if (!waiting_for_auth_) return;  // Wasn't us that was waiting for auth
 
   waiting_for_auth_ = false;
 
@@ -107,12 +105,14 @@ void LastFMSettingsPage::UpdatedSubscriberStatus(bool is_subscriber) {
   if (!is_subscriber) {
     if (service_->HasConnectionProblems()) {
       ui_->login_state->SetAccountTypeText(
-        tr("Clementine couldn't fetch your subscription status since there are problems "
-           "with your connection. Played tracks will be cached and sent later to Last.fm."));
+          tr("Clementine couldn't fetch your subscription status since there "
+             "are problems "
+             "with your connection. Played tracks will be cached and sent "
+             "later to Last.fm."));
     } else {
       ui_->login_state->SetAccountTypeText(
-        tr("You will not be able to play Last.fm radio stations "
-           "as you are not a Last.fm subscriber."));
+          tr("You will not be able to play Last.fm radio stations "
+             "as you are not a Last.fm subscriber."));
     }
   }
 }
@@ -138,9 +138,9 @@ void LastFMSettingsPage::Logout() {
 }
 
 void LastFMSettingsPage::RefreshControls(bool authenticated) {
-  ui_->login_state->SetLoggedIn(authenticated ? LoginStateWidget::LoggedIn
-                                              : LoginStateWidget::LoggedOut,
-                                lastfm::ws::Username);
+  ui_->login_state->SetLoggedIn(
+      authenticated ? LoginStateWidget::LoggedIn : LoginStateWidget::LoggedOut,
+      lastfm::ws::Username);
   ui_->login_state->SetAccountTypeVisible(!authenticated);
 
   if (!authenticated) {

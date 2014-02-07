@@ -30,7 +30,7 @@ class QMenu;
 class SearchBoxWidget : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   SearchBoxWidget(InternetService* service);
   ~SearchBoxWidget();
 
@@ -39,17 +39,17 @@ public:
 signals:
   void TextChanged(const QString& text);
 
-public slots:
+ public slots:
   void FocusOnFilter(QKeyEvent* e);
 
-protected:
+ protected:
   void keyReleaseEvent(QKeyEvent* e);
 
-private:
+ private:
   InternetService* service_;
   Ui_SearchBoxWidget* ui_;
   QMenu* menu_;
   DidYouMean* did_you_mean_;
 };
 
-#endif // SEARCHBOXWIDGET_H
+#endif  // SEARCHBOXWIDGET_H

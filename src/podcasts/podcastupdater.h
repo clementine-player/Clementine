@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -33,27 +33,27 @@ class QTimer;
 class PodcastUpdater : public QObject {
   Q_OBJECT
 
-public:
+ public:
   PodcastUpdater(Application* app, QObject* parent = 0);
 
   static const char* kSettingsGroup;
 
-public slots:
+ public slots:
   void UpdateAllPodcastsNow();
   void UpdatePodcastNow(const Podcast& podcast);
 
-private slots:
+ private slots:
   void ReloadSettings();
 
   void SubscriptionAdded(const Podcast& podcast);
   void PodcastLoaded(PodcastUrlLoaderReply* reply, const Podcast& podcast,
                      bool one_of_many);
 
-private:
+ private:
   void RestartTimer();
   void SaveSettings();
 
-private:
+ private:
   Application* app_;
 
   QDateTime last_full_update_;
@@ -64,4 +64,4 @@ private:
   int pending_replies_;
 };
 
-#endif // PODCASTUPDATER_H
+#endif  // PODCASTUPDATER_H

@@ -30,11 +30,10 @@
 #include <QtDebug>
 
 GroovesharkSettingsPage::GroovesharkSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_GroovesharkSettingsPage),
-    service_(InternetModel::Service<GroovesharkService>()),
-    validated_(false)
-{
+    : SettingsPage(dialog),
+      ui_(new Ui_GroovesharkSettingsPage),
+      service_(InternetModel::Service<GroovesharkService>()),
+      validated_(false) {
   ui_->setupUi(this);
 
   setWindowIcon(QIcon(":/providers/grooveshark.png"));
@@ -50,9 +49,7 @@ GroovesharkSettingsPage::GroovesharkSettingsPage(SettingsDialog* dialog)
   ui_->login_state->AddCredentialGroup(ui_->account_group);
 }
 
-GroovesharkSettingsPage::~GroovesharkSettingsPage() {
-  delete ui_;
-}
+GroovesharkSettingsPage::~GroovesharkSettingsPage() { delete ui_; }
 
 void GroovesharkSettingsPage::Login() {
   if (service_->IsLoggedIn()) {
@@ -93,23 +90,26 @@ void GroovesharkSettingsPage::LoginFinished(bool success) {
 void GroovesharkSettingsPage::UpdateLoginState() {
   const bool logged_in = service_->IsLoggedIn();
 
-  ui_->login_state->SetLoggedIn(logged_in ? LoginStateWidget::LoggedIn
-                                          : LoginStateWidget::LoggedOut,
-                                ui_->username->text());
+  ui_->login_state->SetLoggedIn(
+      logged_in ? LoginStateWidget::LoggedIn : LoginStateWidget::LoggedOut,
+      ui_->username->text());
   ui_->login_state->SetAccountTypeVisible(!logged_in);
 
   switch (service_->login_state()) {
-  case GroovesharkService::LoginState_NoPremium:
-    ui_->login_state->SetAccountTypeText(tr("You do not have a Grooveshark Anywhere account."));
-    break;
+    case GroovesharkService::LoginState_NoPremium:
+      ui_->login_state->SetAccountTypeText(
+          tr("You do not have a Grooveshark Anywhere account."));
+      break;
 
-  case GroovesharkService::LoginState_AuthFailed:
-    ui_->login_state->SetAccountTypeText(tr("Your username or password was incorrect."));
-    break;
+    case GroovesharkService::LoginState_AuthFailed:
+      ui_->login_state->SetAccountTypeText(
+          tr("Your username or password was incorrect."));
+      break;
 
-  default:
-    ui_->login_state->SetAccountTypeText(tr("A Grooveshark Anywhere account is required."));
-    break;
+    default:
+      ui_->login_state->SetAccountTypeText(
+          tr("A Grooveshark Anywhere account is required."));
+      break;
   }
 }
 

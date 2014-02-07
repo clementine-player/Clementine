@@ -29,19 +29,15 @@ class DigitallyImportedUrlHandler;
 
 class QNetworkAccessManager;
 
-
 class DigitallyImportedServiceBase : public InternetService {
   Q_OBJECT
   friend class DigitallyImportedUrlHandler;
 
-public:
-  DigitallyImportedServiceBase(const QString& name,
-                               const QString& description,
-                               const QUrl& homepage_url,
-                               const QIcon& icon,
+ public:
+  DigitallyImportedServiceBase(const QString& name, const QString& description,
+                               const QUrl& homepage_url, const QIcon& icon,
                                const QString& api_service_name,
-                               Application* app,
-                               InternetModel* model,
+                               Application* app, InternetModel* model,
                                QObject* parent = NULL);
   ~DigitallyImportedServiceBase();
 
@@ -66,25 +62,25 @@ public:
   void SongFromChannel(const DigitallyImportedClient::Channel& channel,
                        Song* song) const;
 
-public slots:
+ public slots:
   void ShowSettingsDialog();
 
 signals:
   void StreamsChanged();
 
-private slots:
+ private slots:
   void LoadPlaylistFinished(QNetworkReply* reply);
   void Homepage();
   void ForceRefreshStreams();
   void RefreshStreams();
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
 
-private:
+ private:
   void PopulateStreams();
 
   void LoadStation(const QString& key);
 
-private:
+ private:
   // Set by subclasses through the constructor
   QUrl homepage_url_;
   QIcon icon_;
@@ -113,23 +109,26 @@ private:
 };
 
 class DigitallyImportedService : public DigitallyImportedServiceBase {
-public:
-  DigitallyImportedService(Application* app, InternetModel* model, QObject* parent = NULL);
+ public:
+  DigitallyImportedService(Application* app, InternetModel* model,
+                           QObject* parent = NULL);
 };
 
 class SkyFmService : public DigitallyImportedServiceBase {
-public:
+ public:
   SkyFmService(Application* app, InternetModel* model, QObject* parent = NULL);
 };
 
 class JazzRadioService : public DigitallyImportedServiceBase {
-public:
-  JazzRadioService(Application* app, InternetModel* model, QObject* parent = NULL);
+ public:
+  JazzRadioService(Application* app, InternetModel* model,
+                   QObject* parent = NULL);
 };
 
 class RockRadioService : public DigitallyImportedServiceBase {
-public:
-  RockRadioService(Application* app, InternetModel* model, QObject* parent = NULL);
+ public:
+  RockRadioService(Application* app, InternetModel* model,
+                   QObject* parent = NULL);
 };
 
-#endif // DIGITALLYIMPORTEDSERVICEBASE_H
+#endif  // DIGITALLYIMPORTEDSERVICEBASE_H

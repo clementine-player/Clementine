@@ -24,7 +24,7 @@ class FavoriteWidget : public QWidget {
   Q_OBJECT
 
  public:
-  FavoriteWidget(int tab_id, bool favorite = false, QWidget *parent = 0);
+  FavoriteWidget(int tab_id, bool favorite = false, QWidget* parent = 0);
 
   // Change the value if different from the current one and then update display
   // and emit FavoriteStateChanged signal
@@ -32,7 +32,7 @@ class FavoriteWidget : public QWidget {
 
   QSize sizeHint() const;
 
- signals:
+signals:
   void FavoriteStateChanged(int, bool);
 
  protected:

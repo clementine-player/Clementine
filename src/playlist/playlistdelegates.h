@@ -31,15 +31,17 @@
 class Player;
 
 class QueuedItemDelegate : public QStyledItemDelegate {
-public:
-  QueuedItemDelegate(QObject* parent, int indicator_column = Playlist::Column_Title);
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  void DrawBox(QPainter* painter, const QRect& line_rect,
-               const QFont& font, const QString& text, int width = -1) const;
+ public:
+  QueuedItemDelegate(QObject* parent,
+                     int indicator_column = Playlist::Column_Title);
+  void paint(QPainter* painter, const QStyleOptionViewItem& option,
+             const QModelIndex& index) const;
+  void DrawBox(QPainter* painter, const QRect& line_rect, const QFont& font,
+               const QString& text, int width = -1) const;
 
   int queue_indicator_size(const QModelIndex& index) const;
 
-private:
+ private:
   static const int kQueueBoxBorder;
   static const int kQueueBoxCornerRadius;
   static const int kQueueBoxLength;
@@ -55,17 +57,20 @@ class PlaylistDelegateBase : public QueuedItemDelegate {
   Q_OBJECT
  public:
   PlaylistDelegateBase(QObject* parent, const QString& suffix = QString());
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option,
+             const QModelIndex& index) const;
   QString displayText(const QVariant& value, const QLocale& locale) const;
-  QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+  QSize sizeHint(const QStyleOptionViewItem& option,
+                 const QModelIndex& index) const;
 
-  QStyleOptionViewItemV4 Adjusted(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  QStyleOptionViewItemV4 Adjusted(const QStyleOptionViewItem& option,
+                                  const QModelIndex& index) const;
 
   static const int kMinHeight;
 
  public slots:
-  bool helpEvent(QHelpEvent *event, QAbstractItemView *view,
-                 const QStyleOptionViewItem &option, const QModelIndex &index);
+  bool helpEvent(QHelpEvent* event, QAbstractItemView* view,
+                 const QStyleOptionViewItem& option, const QModelIndex& index);
 
  protected:
   QTreeView* view_;
@@ -91,7 +96,7 @@ class DateItemDelegate : public PlaylistDelegateBase {
 };
 
 class LastPlayedItemDelegate : public PlaylistDelegateBase {
-public:
+ public:
   LastPlayedItemDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}
   QString displayText(const QVariant& value, const QLocale& locale) const;
 };
@@ -106,29 +111,31 @@ class TextItemDelegate : public PlaylistDelegateBase {
  public:
   TextItemDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}
   QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
-      const QModelIndex& index) const;
+                        const QModelIndex& index) const;
 };
 
 class RatingItemDelegate : public PlaylistDelegateBase {
-public:
+ public:
   RatingItemDelegate(QObject* parent);
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option,
+             const QModelIndex& index) const;
+  QSize sizeHint(const QStyleOptionViewItem& option,
+                 const QModelIndex& index) const;
   QString displayText(const QVariant& value, const QLocale& locale) const;
 
   void set_mouse_over(const QModelIndex& index,
                       const QModelIndexList& selected_indexes,
                       const QPoint& pos) {
-      mouse_over_index_ = index;
-      selected_indexes_ = selected_indexes;
-      mouse_over_pos_ = pos;
+    mouse_over_index_ = index;
+    selected_indexes_ = selected_indexes;
+    mouse_over_pos_ = pos;
   }
 
   void set_mouse_out() { mouse_over_index_ = QModelIndex(); }
   bool is_mouse_over() const { return mouse_over_index_.isValid(); }
   QModelIndex mouse_over_index() const { return mouse_over_index_; }
 
-private:
+ private:
   RatingPainter painter_;
 
   QModelIndex mouse_over_index_;
@@ -137,34 +144,35 @@ private:
 };
 
 class TagCompletionModel : public QStringListModel {
-public:
+ public:
   TagCompletionModel(LibraryBackend* backend, Playlist::Column column);
 
-private:
+ private:
   static QString database_column(Playlist::Column column);
 };
 
 class TagCompleter : public QCompleter {
   Q_OBJECT
 
-public:
+ public:
   TagCompleter(LibraryBackend* backend, Playlist::Column column,
                QLineEdit* editor);
 
-private slots:
+ private slots:
   void ModelReady();
 
-private:
+ private:
   QLineEdit* editor_;
 };
 
 class TagCompletionItemDelegate : public PlaylistDelegateBase {
  public:
-  TagCompletionItemDelegate(QObject* parent, LibraryBackend* backend, Playlist::Column column) :
-    PlaylistDelegateBase(parent), backend_(backend), column_(column) {};
+  TagCompletionItemDelegate(QObject* parent, LibraryBackend* backend,
+                            Playlist::Column column)
+      : PlaylistDelegateBase(parent), backend_(backend), column_(column) {};
 
   QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
-      const QModelIndex& index) const;
+                        const QModelIndex& index) const;
 
  private:
   LibraryBackend* backend_;
@@ -181,7 +189,8 @@ class SongSourceDelegate : public PlaylistDelegateBase {
  public:
   SongSourceDelegate(QObject* parent, Player* player);
   QString displayText(const QVariant& value, const QLocale& locale) const;
-  void paint(QPainter* paint, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void paint(QPainter* paint, const QStyleOptionViewItem& option,
+             const QModelIndex& index) const;
 
  private:
   QPixmap LookupPixmap(const QUrl& url, const QSize& size) const;
@@ -190,4 +199,4 @@ class SongSourceDelegate : public PlaylistDelegateBase {
   mutable QPixmapCache cache_;
 };
 
-#endif // PLAYLISTDELEGATES_H
+#endif  // PLAYLISTDELEGATES_H

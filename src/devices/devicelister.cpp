@@ -28,10 +28,7 @@
 #include <gpod/itdb.h>
 #endif
 
-DeviceLister::DeviceLister()
-  : thread_(nullptr)
-{
-}
+DeviceLister::DeviceLister() : thread_(nullptr) {}
 
 DeviceLister::~DeviceLister() {
   if (thread_) {
@@ -48,9 +45,7 @@ void DeviceLister::Start() {
   thread_->start();
 }
 
-void DeviceLister::ThreadStarted() {
-  Init();
-}
+void DeviceLister::ThreadStarted() { Init(); }
 
 namespace {
 
@@ -155,7 +150,6 @@ QString GetIpodModel(Itdb_IpodModel model) {
 }
 
 #endif
-
 }
 
 QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) const {
@@ -204,7 +198,8 @@ QStringList DeviceLister::GuessIconForPath(const QString& path) {
   return ret;
 }
 
-QStringList DeviceLister::GuessIconForModel(const QString& vendor, const QString& model) {
+QStringList DeviceLister::GuessIconForModel(const QString& vendor,
+                                            const QString& model) {
   QStringList ret;
   if (vendor.startsWith("Google") && model.contains("Nexus")) {
     ret << "phone-google-nexus-one";
@@ -213,7 +208,7 @@ QStringList DeviceLister::GuessIconForModel(const QString& vendor, const QString
 }
 
 int DeviceLister::MountDevice(const QString& id) {
-  const int ret = next_mount_request_id_ ++;
+  const int ret = next_mount_request_id_++;
   emit DeviceMounted(id, ret, true);
   return ret;
 }

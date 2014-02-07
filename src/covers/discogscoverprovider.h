@@ -24,14 +24,10 @@
 class QNetworkAccessManager;
 
 // This struct represents a single search-for-cover request. It identifies
-// and describes the request. 
+// and describes the request.
 struct DiscogsCoverSearchContext {
-  enum State {
-    State_Init,
-    State_MastersRequested,
-    State_ReleasesRequested
-  };
-  
+  enum State { State_Init, State_MastersRequested, State_ReleasesRequested };
+
   // the unique request identifier
   int id;
 
@@ -48,7 +44,7 @@ Q_DECLARE_METATYPE(DiscogsCoverSearchContext)
 class DiscogsCoverProvider : public CoverProvider {
   Q_OBJECT
 
-public:
+ public:
   DiscogsCoverProvider(QObject* parent = NULL);
 
   static const char* kSearchUrl;
@@ -56,10 +52,10 @@ public:
   bool StartSearch(const QString& artist, const QString& album, int id);
   void CancelSearch(int id);
 
-private slots:
+ private slots:
   void HandleSearchReply(QNetworkReply* reply, int id);
 
-private:
+ private:
   QNetworkAccessManager* network_;
   QHash<int, DiscogsCoverSearchContext*> pending_requests_;
 
@@ -67,4 +63,4 @@ private:
   void EndSearch(DiscogsCoverSearchContext* ctx);
 };
 
-#endif // DISCOGSCOVERPROVIDER_H
+#endif  // DISCOGSCOVERPROVIDER_H

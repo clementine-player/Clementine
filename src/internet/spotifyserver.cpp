@@ -26,10 +26,9 @@
 #include <QTimer>
 
 SpotifyServer::SpotifyServer(QObject* parent)
-  : AbstractMessageHandler<pb::spotify::Message>(nullptr, parent),
-    server_(new QTcpServer(this)),
-    logged_in_(false)
-{
+    : AbstractMessageHandler<pb::spotify::Message>(nullptr, parent),
+      server_(new QTcpServer(this)),
+      logged_in_(false) {
   connect(server_, SIGNAL(newConnection()), SLOT(NewConnection()));
 }
 
@@ -39,9 +38,7 @@ void SpotifyServer::Init() {
   }
 }
 
-int SpotifyServer::server_port() const {
-  return server_->serverPort();
-}
+int SpotifyServer::server_port() const { return server_->serverPort(); }
 
 void SpotifyServer::NewConnection() {
   QTcpSocket* socket = server_->nextPendingConnection();
@@ -50,7 +47,7 @@ void SpotifyServer::NewConnection() {
   qLog(Info) << "Connection from port" << socket->peerPort();
 
   // Send any login messages that were queued before the client connected
-  foreach (const pb::spotify::Message& message, queued_login_messages_) {
+  foreach(const pb::spotify::Message & message, queued_login_messages_) {
     SendOrQueueMessage(message);
   }
   queued_login_messages_.clear();
@@ -73,7 +70,8 @@ void SpotifyServer::SendOrQueueMessage(const pb::spotify::Message& message) {
 }
 
 void SpotifyServer::Login(const QString& username, const QString& password,
-                          pb::spotify::Bitrate bitrate, bool volume_normalisation) {
+                          pb::spotify::Bitrate bitrate,
+                          bool volume_normalisation) {
   pb::spotify::Message message;
 
   pb::spotify::LoginRequest* request = message.mutable_login_request();
@@ -82,15 +80,18 @@ void SpotifyServer::Login(const QString& username, const QString& password,
     request->set_password(DataCommaSizeFromQString(password));
   }
   request->mutable_playback_settings()->set_bitrate(bitrate);
-  request->mutable_playback_settings()->set_volume_normalisation(volume_normalisation);
+  request->mutable_playback_settings()->set_volume_normalisation(
+      volume_normalisation);
 
   SendOrQueueMessage(message);
 }
 
-void SpotifyServer::SetPlaybackSettings(pb::spotify::Bitrate bitrate, bool volume_normalisation) {
+void SpotifyServer::SetPlaybackSettings(pb::spotify::Bitrate bitrate,
+                                        bool volume_normalisation) {
   pb::spotify::Message message;
 
-  pb::spotify::PlaybackSettings* request = message.mutable_set_playback_settings_request();
+  pb::spotify::PlaybackSettings* request =
+      message.mutable_set_playback_settings_request();
   request->set_bitrate(bitrate);
   request->set_volume_normalisation(volume_normalisation);
 
@@ -104,18 +105,20 @@ void SpotifyServer::MessageArrived(const pb::spotify::Message& message) {
 
     if (response.success()) {
       // Send any messages that were queued before the client logged in
-      foreach (const pb::spotify::Message& message, queued_messages_) {
+      foreach(const pb::spotify::Message & message, queued_messages_) {
         SendOrQueueMessage(message);
       }
       queued_messages_.clear();
     }
 
-    emit LoginCompleted(response.success(), QStringFromStdString(response.error()),
+    emit LoginCompleted(response.success(),
+                        QStringFromStdString(response.error()),
                         response.error_code());
   } else if (message.has_playlists_updated()) {
     emit PlaylistsUpdated(message.playlists_updated());
   } else if (message.has_load_playlist_response()) {
-    const pb::spotify::LoadPlaylistResponse& response = message.load_playlist_response();
+    const pb::spotify::LoadPlaylistResponse& response =
+        message.load_playlist_response();
 
     switch (response.request().type()) {
       case pb::spotify::Inbox:
@@ -139,8 +142,9 @@ void SpotifyServer::MessageArrived(const pb::spotify::Message& message) {
     const QString id = QStringFromStdString(response.id());
 
     if (response.has_data()) {
-      emit ImageLoaded(id, QImage::fromData(QByteArray(
-          response.data().data(), response.data().size())));
+      emit ImageLoaded(
+          id, QImage::fromData(
+                  QByteArray(response.data().data(), response.data().size())));
     } else {
       emit ImageLoaded(id, QImage());
     }
@@ -155,7 +159,8 @@ void SpotifyServer::MessageArrived(const pb::spotify::Message& message) {
 
 void SpotifyServer::LoadPlaylist(pb::spotify::PlaylistType type, int index) {
   pb::spotify::Message message;
-  pb::spotify::LoadPlaylistRequest* req = message.mutable_load_playlist_request();
+  pb::spotify::LoadPlaylistRequest* req =
+      message.mutable_load_playlist_request();
 
   req->set_type(type);
   if (index != -1) {
@@ -165,10 +170,11 @@ void SpotifyServer::LoadPlaylist(pb::spotify::PlaylistType type, int index) {
   SendOrQueueMessage(message);
 }
 
-void SpotifyServer::SyncPlaylist(
-    pb::spotify::PlaylistType type, int index, bool offline) {
+void SpotifyServer::SyncPlaylist(pb::spotify::PlaylistType type, int index,
+                                 bool offline) {
   pb::spotify::Message message;
-  pb::spotify::SyncPlaylistRequest* req = message.mutable_sync_playlist_request();
+  pb::spotify::SyncPlaylistRequest* req =
+      message.mutable_sync_playlist_request();
   req->mutable_request()->set_type(type);
   if (index != -1) {
     req->mutable_request()->set_user_playlist_index(index);
@@ -178,9 +184,7 @@ void SpotifyServer::SyncPlaylist(
   SendOrQueueMessage(message);
 }
 
-void SpotifyServer::SyncInbox() {
-  SyncPlaylist(pb::spotify::Inbox, -1, true);
-}
+void SpotifyServer::SyncInbox() { SyncPlaylist(pb::spotify::Inbox, -1, true); }
 
 void SpotifyServer::SyncStarred() {
   SyncPlaylist(pb::spotify::Starred, -1, true);
@@ -191,13 +195,9 @@ void SpotifyServer::SyncUserPlaylist(int index) {
   SyncPlaylist(pb::spotify::UserPlaylist, index, true);
 }
 
-void SpotifyServer::LoadInbox() {
-  LoadPlaylist(pb::spotify::Inbox);
-}
+void SpotifyServer::LoadInbox() { LoadPlaylist(pb::spotify::Inbox); }
 
-void SpotifyServer::LoadStarred() {
-  LoadPlaylist(pb::spotify::Starred);
-}
+void SpotifyServer::LoadStarred() { LoadPlaylist(pb::spotify::Starred); }
 
 void SpotifyServer::LoadUserPlaylist(int index) {
   Q_ASSERT(index >= 0);
@@ -208,10 +208,9 @@ void SpotifyServer::StartPlaybackLater(const QString& uri, quint16 port) {
   QTimer* timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), timer, SLOT(deleteLater()));
 
-  timer->start(100); // lol
-  NewClosure(timer, SIGNAL(timeout()),
-             this, SLOT(StartPlayback(QString,quint16)),
-             uri, port);
+  timer->start(100);  // lol
+  NewClosure(timer, SIGNAL(timeout()), this,
+             SLOT(StartPlayback(QString, quint16)), uri, port);
 }
 
 void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
@@ -259,7 +258,8 @@ void SpotifyServer::AlbumBrowse(const QString& uri) {
 
 void SpotifyServer::LoadToplist() {
   pb::spotify::Message message;
-  pb::spotify::BrowseToplistRequest* req = message.mutable_browse_toplist_request();
+  pb::spotify::BrowseToplistRequest* req =
+      message.mutable_browse_toplist_request();
   req->set_type(pb::spotify::BrowseToplistRequest::Tracks);
   req->set_region(pb::spotify::BrowseToplistRequest::Everywhere);
 

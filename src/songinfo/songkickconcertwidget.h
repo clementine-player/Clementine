@@ -28,33 +28,33 @@ class QNetworkReply;
 
 class SongKickConcertWidget : public QWidget {
   Q_OBJECT
-  
-public:
+
+ public:
   SongKickConcertWidget(QWidget* parent = 0);
   ~SongKickConcertWidget();
 
   static const int kStaticMapWidth;
   static const int kStaticMapHeight;
 
-  void Init(const QString& title, const QString& url,
-            const QString& date, const QString& location);
+  void Init(const QString& title, const QString& url, const QString& date,
+            const QString& location);
   void SetMap(const QString& lat, const QString& lng,
               const QString& venue_name);
 
   // QObject
   bool eventFilter(QObject* object, QEvent* event);
 
-public slots:
+ public slots:
   void ReloadSettings();
 
-private slots:
+ private slots:
   void MapLoaded(QNetworkReply* reply);
-  
-private:
+
+ private:
   Ui_SongKickConcertWidget* ui_;
   QNetworkAccessManager* network_;
 
   QUrl map_url_;
 };
 
-#endif // SONGKICKCONCERTWIDGET_H
+#endif  // SONGKICKCONCERTWIDGET_H

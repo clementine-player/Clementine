@@ -27,7 +27,7 @@ class MacSystemTrayIconPrivate;
 class MacSystemTrayIcon : public SystemTrayIcon {
   Q_OBJECT
 
-public:
+ public:
   MacSystemTrayIcon(QObject* parent = 0);
   ~MacSystemTrayIcon();
 
@@ -38,21 +38,21 @@ public:
   void SetNowPlaying(const Song& song, const QString& image_path);
   void ClearNowPlaying();
 
-private:
+ private:
   void SetupMenuItem(QAction* action);
 
-private slots:
+ private slots:
   void ActionChanged();
 
-protected:
+ protected:
   // SystemTrayIcon
   void UpdateIcon();
 
-private:
+ private:
   QPixmap orange_icon_;
   QPixmap grey_icon_;
   std::unique_ptr<MacSystemTrayIconPrivate> p_;
   Q_DISABLE_COPY(MacSystemTrayIcon);
 };
 
-#endif // MACSYSTEMTRAYICON_H
+#endif  // MACSYSTEMTRAYICON_H

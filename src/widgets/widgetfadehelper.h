@@ -25,24 +25,24 @@ class QTimeLine;
 class WidgetFadeHelper : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   WidgetFadeHelper(QWidget* parent, int msec = 500);
 
-public slots:
+ public slots:
   void StartBlur();
   void StartFade();
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
   bool eventFilter(QObject* obj, QEvent* event);
 
-private slots:
+ private slots:
   void FadeFinished();
 
-private:
+ private:
   void CaptureParent();
 
-private:
+ private:
   static const int kLoadingPadding;
   static const int kLoadingBorderRadius;
 
@@ -54,4 +54,4 @@ private:
   QPixmap blurred_pixmap_;
 };
 
-#endif // WIDGETFADEHELPER_H
+#endif  // WIDGETFADEHELPER_H

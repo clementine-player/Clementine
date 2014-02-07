@@ -19,44 +19,41 @@
 #include "ui_coversearchstatisticsdialog.h"
 #include "core/utilities.h"
 
-CoverSearchStatisticsDialog::CoverSearchStatisticsDialog(QWidget *parent)
-  : QDialog(parent),
-    ui_(new Ui_CoverSearchStatisticsDialog)
-{
+CoverSearchStatisticsDialog::CoverSearchStatisticsDialog(QWidget* parent)
+    : QDialog(parent), ui_(new Ui_CoverSearchStatisticsDialog) {
   ui_->setupUi(this);
   details_layout_ = new QVBoxLayout(ui_->details);
   details_layout_->setSpacing(0);
 
   setStyleSheet(
-    "#details {"
-    "  background-color: palette(base);"
-    "}"
-    "#details QLabel[type=\"label\"] {"
-    "  border: 2px solid transparent;"
-    "  border-right: 2px solid palette(midlight);"
-    "  margin-right: 10px;"
-    "}"
-    "#details QLabel[type=\"value\"] {"
-    "  font-weight: bold;"
-    "  max-width: 100px;"
-    "}"
-  );
+      "#details {"
+      "  background-color: palette(base);"
+      "}"
+      "#details QLabel[type=\"label\"] {"
+      "  border: 2px solid transparent;"
+      "  border-right: 2px solid palette(midlight);"
+      "  margin-right: 10px;"
+      "}"
+      "#details QLabel[type=\"value\"] {"
+      "  font-weight: bold;"
+      "  max-width: 100px;"
+      "}");
 }
 
-CoverSearchStatisticsDialog::~CoverSearchStatisticsDialog() {
-  delete ui_;
-}
+CoverSearchStatisticsDialog::~CoverSearchStatisticsDialog() { delete ui_; }
 
-void CoverSearchStatisticsDialog::Show(const CoverSearchStatistics& statistics) {
+void CoverSearchStatisticsDialog::Show(
+    const CoverSearchStatistics& statistics) {
   QStringList providers(statistics.total_images_by_provider_.keys());
   qSort(providers);
 
-  ui_->summary->setText(tr("Got %1 covers out of %2 (%3 failed)")
-                        .arg(statistics.chosen_images_)
-                        .arg(statistics.chosen_images_ + statistics.missing_images_)
-                        .arg(statistics.missing_images_));
+  ui_->summary->setText(
+      tr("Got %1 covers out of %2 (%3 failed)")
+          .arg(statistics.chosen_images_)
+          .arg(statistics.chosen_images_ + statistics.missing_images_)
+          .arg(statistics.missing_images_));
 
-  foreach (const QString& provider, providers) {
+  foreach(const QString & provider, providers) {
     AddLine(tr("Covers from %1").arg(provider),
             QString::number(statistics.chosen_images_by_provider_[provider]));
   }
@@ -70,15 +67,16 @@ void CoverSearchStatisticsDialog::Show(const CoverSearchStatistics& statistics) 
   AddLine(tr("Average image size"), statistics.AverageDimensions());
   AddLine(tr("Total bytes transferred"),
           statistics.bytes_transferred_
-            ? Utilities::PrettySize(statistics.bytes_transferred_)
-            : "0 bytes");
+              ? Utilities::PrettySize(statistics.bytes_transferred_)
+              : "0 bytes");
 
   details_layout_->addStretch();
 
   show();
 }
 
-void CoverSearchStatisticsDialog::AddLine(const QString& label, const QString& value) {
+void CoverSearchStatisticsDialog::AddLine(const QString& label,
+                                          const QString& value) {
   QLabel* label1 = new QLabel(label);
   QLabel* label2 = new QLabel(value);
 

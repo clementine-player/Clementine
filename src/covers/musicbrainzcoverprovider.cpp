@@ -29,44 +29,36 @@ using std::mem_fun;
 
 namespace {
 
-static const char* kReleaseSearchUrl =
-    "https://musicbrainz.org/ws/2/release/";
+static const char* kReleaseSearchUrl = "https://musicbrainz.org/ws/2/release/";
 static const char* kAlbumCoverUrl =
     "https://coverartarchive.org/release/%1/front";
 }  // namespace
 
-
 MusicbrainzCoverProvider::MusicbrainzCoverProvider(QObject* parent)
     : CoverProvider("MusicBrainz", parent),
-      network_(new NetworkAccessManager(this)) {
-}
+      network_(new NetworkAccessManager(this)) {}
 
-bool MusicbrainzCoverProvider::StartSearch(
-    const QString& artist, const QString& album, int id) {
+bool MusicbrainzCoverProvider::StartSearch(const QString& artist,
+                                           const QString& album, int id) {
   // Find release information.
   QUrl url(kReleaseSearchUrl);
   QString query = QString("release:\"%1\" AND artist:\"%2\"")
-      .arg(album.trimmed().replace('"', "\\\""))
-      .arg(artist.trimmed().replace('"', "\\\""));
+                      .arg(album.trimmed().replace('"', "\\\""))
+                      .arg(artist.trimmed().replace('"', "\\\""));
   url.addQueryItem("query", query);
   url.addQueryItem("limit", "5");
   QNetworkRequest request(url);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(
-      reply,
-      SIGNAL(finished()),
-      this,
-      SLOT(ReleaseSearchFinished(QNetworkReply*, int)),
-      reply,
-      id);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(ReleaseSearchFinished(QNetworkReply*, int)), reply, id);
 
   cover_names_[id] = QString("%1 - %2").arg(artist, album);
   return true;
 }
 
-void MusicbrainzCoverProvider::ReleaseSearchFinished(
-    QNetworkReply* reply, int id) {
+void MusicbrainzCoverProvider::ReleaseSearchFinished(QNetworkReply* reply,
+                                                     int id) {
   reply->deleteLater();
 
   QList<QString> releases;
@@ -74,8 +66,7 @@ void MusicbrainzCoverProvider::ReleaseSearchFinished(
   QXmlStreamReader reader(reply);
   while (!reader.atEnd()) {
     QXmlStreamReader::TokenType type = reader.readNext();
-    if (type == QXmlStreamReader::StartElement &&
-        reader.name() == "release") {
+    if (type == QXmlStreamReader::StartElement && reader.name() == "release") {
       QStringRef release_id = reader.attributes().value("id");
       if (!release_id.isEmpty()) {
         releases.append(release_id.toString());
@@ -83,30 +74,26 @@ void MusicbrainzCoverProvider::ReleaseSearchFinished(
     }
   }
 
-  foreach (const QString& release_id, releases) {
+  foreach(const QString & release_id, releases) {
     QUrl url(QString(kAlbumCoverUrl).arg(release_id));
     QNetworkReply* reply = network_->head(QNetworkRequest(url));
     image_checks_.insert(id, reply);
-    NewClosure(
-        reply,
-        SIGNAL(finished()),
-        this,
-        SLOT(ImageCheckFinished(int)),
-        id);
+    NewClosure(reply, SIGNAL(finished()), this, SLOT(ImageCheckFinished(int)),
+               id);
   }
 }
 
 void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
   QList<QNetworkReply*> replies = image_checks_.values(id);
-  int finished_count = std::count_if(
-      replies.constBegin(), replies.constEnd(),
-      mem_fun(&QNetworkReply::isFinished));
+  int finished_count = std::count_if(replies.constBegin(), replies.constEnd(),
+                                     mem_fun(&QNetworkReply::isFinished));
   if (finished_count == replies.size()) {
     QString cover_name = cover_names_.take(id);
     QList<CoverSearchResult> results;
-    foreach (QNetworkReply* reply, replies) {
+    foreach(QNetworkReply * reply, replies) {
       reply->deleteLater();
-      if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() < 400) {
+      if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <
+          400) {
         CoverSearchResult result;
         result.description = cover_name;
         result.image_url = reply->url();
@@ -120,7 +107,7 @@ void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
 
 void MusicbrainzCoverProvider::CancelSearch(int id) {
   QList<QNetworkReply*> replies = image_checks_.values(id);
-  foreach (QNetworkReply* reply, replies) {
+  foreach(QNetworkReply * reply, replies) {
     reply->abort();
     reply->deleteLater();
   }

@@ -29,11 +29,7 @@ class LastFMStationDialog : public QDialog {
   LastFMStationDialog(QWidget* parent = 0);
   ~LastFMStationDialog();
 
-  enum Type {
-    Artist,
-    Tag,
-    Custom,
-  };
+  enum Type { Artist, Tag, Custom, };
 
   void SetType(Type type);
   QString content() const;
@@ -42,4 +38,4 @@ class LastFMStationDialog : public QDialog {
   Ui_LastFMStationDialog* ui_;
 };
 
-#endif // LASTFMSTATIONDIALOG_H
+#endif  // LASTFMSTATIONDIALOG_H

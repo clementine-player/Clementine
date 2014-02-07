@@ -41,22 +41,17 @@ class QNetworkAccessManager;
 class PodcastDownloader : public QObject {
   Q_OBJECT
 
-public:
+ public:
   PodcastDownloader(Application* app, QObject* parent = 0);
 
-  enum State {
-    NotDownloading,
-    Queued,
-    Downloading,
-    Finished
-  };
+  enum State { NotDownloading, Queued, Downloading, Finished };
 
   static const char* kSettingsGroup;
   static const int kAutoDeleteCheckIntervalMsec;
 
   QString DefaultDownloadDir() const;
 
-public slots:
+ public slots:
   // Adds the episode to the download queue
   void DownloadEpisode(const PodcastEpisode& episode);
 
@@ -67,7 +62,7 @@ signals:
   void ProgressChanged(const PodcastEpisode& episode,
                        PodcastDownloader::State state, int percent);
 
-private slots:
+ private slots:
   void ReloadSettings();
 
   void SubscriptionAdded(const Podcast& podcast);
@@ -79,7 +74,7 @@ private slots:
 
   void AutoDelete();
 
-private:
+ private:
   struct Task;
 
   void StartDownloading(Task* task);
@@ -90,7 +85,7 @@ private:
                              const PodcastEpisode& episode) const;
   QString SanitiseFilenameComponent(const QString& text) const;
 
-private:
+ private:
   Application* app_;
   PodcastBackend* backend_;
   QNetworkAccessManager* network_;
@@ -110,4 +105,4 @@ private:
   QTimer* auto_delete_timer_;
 };
 
-#endif // PODCASTDOWNLOADER_H
+#endif  // PODCASTDOWNLOADER_H

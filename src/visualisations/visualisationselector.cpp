@@ -24,22 +24,19 @@
 #include <QPushButton>
 
 #ifdef USE_SYSTEM_PROJECTM
-#  include <libprojectM/projectM.hpp>
+#include <libprojectM/projectM.hpp>
 #else
-#  include "projectM.hpp"
+#include "projectM.hpp"
 #endif
 
-VisualisationSelector::VisualisationSelector(QWidget *parent)
-  : QDialog(parent),
-    ui_(new Ui_VisualisationSelector),
-    vis_(nullptr)
-{
+VisualisationSelector::VisualisationSelector(QWidget* parent)
+    : QDialog(parent), ui_(new Ui_VisualisationSelector), vis_(nullptr) {
   ui_->setupUi(this);
 
   select_all_ =
       ui_->buttonBox->addButton(tr("Select All"), QDialogButtonBox::ActionRole);
-  select_none_ =
-      ui_->buttonBox->addButton(tr("Select None"), QDialogButtonBox::ActionRole);
+  select_none_ = ui_->buttonBox->addButton(tr("Select None"),
+                                           QDialogButtonBox::ActionRole);
   connect(select_all_, SIGNAL(clicked()), SLOT(SelectAll()));
   connect(select_none_, SIGNAL(clicked()), SLOT(SelectNone()));
   select_all_->setEnabled(false);
@@ -48,17 +45,17 @@ VisualisationSelector::VisualisationSelector(QWidget *parent)
   connect(ui_->mode, SIGNAL(currentIndexChanged(int)), SLOT(ModeChanged(int)));
 }
 
-VisualisationSelector::~VisualisationSelector() {
-  delete ui_;
-}
+VisualisationSelector::~VisualisationSelector() { delete ui_; }
 
-void VisualisationSelector::showEvent(QShowEvent *) {
+void VisualisationSelector::showEvent(QShowEvent*) {
   if (!ui_->list->model()) {
     ui_->delay->setValue(vis_->duration());
     ui_->list->setModel(vis_->preset_model());
-    connect(ui_->list->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+    connect(ui_->list->selectionModel(),
+            SIGNAL(currentChanged(QModelIndex, QModelIndex)),
             vis_->preset_model(), SLOT(SetImmediatePreset(QModelIndex)));
-    connect(ui_->delay, SIGNAL(valueChanged(int)), vis_, SLOT(SetDuration(int)));
+    connect(ui_->delay, SIGNAL(valueChanged(int)), vis_,
+            SLOT(SetDuration(int)));
 
     ui_->mode->setCurrentIndex(vis_->mode());
   }
@@ -66,9 +63,7 @@ void VisualisationSelector::showEvent(QShowEvent *) {
   vis_->Lock(true);
 }
 
-void VisualisationSelector::hideEvent(QHideEvent *) {
-  vis_->Lock(false);
-}
+void VisualisationSelector::hideEvent(QHideEvent*) { vis_->Lock(false); }
 
 void VisualisationSelector::ModeChanged(int mode) {
   bool enabled = mode == 1;
@@ -79,10 +74,6 @@ void VisualisationSelector::ModeChanged(int mode) {
   vis_->SetMode(ProjectMVisualisation::Mode(mode));
 }
 
-void VisualisationSelector::SelectAll() {
-  vis_->preset_model()->SelectAll();
-}
+void VisualisationSelector::SelectAll() { vis_->preset_model()->SelectAll(); }
 
-void VisualisationSelector::SelectNone() {
-  vis_->preset_model()->SelectNone();
-}
+void VisualisationSelector::SelectNone() { vis_->preset_model()->SelectNone(); }

@@ -34,21 +34,21 @@ class DeviceManager;
 class LibraryBackend;
 class LibraryModel;
 
-class ConnectedDevice : public QObject, public virtual MusicStorage,
+class ConnectedDevice : public QObject,
+                        public virtual MusicStorage,
                         public std::enable_shared_from_this<ConnectedDevice> {
   Q_OBJECT
 
-public:
+ public:
   ConnectedDevice(const QUrl& url, DeviceLister* lister,
                   const QString& unique_id, DeviceManager* manager,
-                  Application* app,
-                  int database_id, bool first_time);
+                  Application* app, int database_id, bool first_time);
   ~ConnectedDevice();
 
   virtual void Init() = 0;
   // For some devices (e.g. CD devices) we don't have callbacks to be notified
   // when something change: we can call this method to refresh device's state
-  virtual void Refresh() { }
+  virtual void Refresh() {}
 
   virtual TranscodeMode GetTranscodeMode() const;
   virtual Song::FileType GetTranscodeFormat() const;
@@ -68,10 +68,11 @@ signals:
   void TaskStarted(int id);
   void SongCountUpdated(int count);
 
-protected:
-  void InitBackendDirectory(const QString& mount_point, bool first_time, bool rewrite_path = true);
+ protected:
+  void InitBackendDirectory(const QString& mount_point, bool first_time,
+                            bool rewrite_path = true);
 
-protected:
+ protected:
   Application* app_;
 
   QUrl url_;
@@ -86,8 +87,8 @@ protected:
 
   int song_count_;
 
-private slots:
+ private slots:
   void BackendTotalSongCountUpdated(int count);
 };
 
-#endif // CONNECTEDDEVICE_H
+#endif  // CONNECTEDDEVICE_H

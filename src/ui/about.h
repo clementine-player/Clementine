@@ -30,9 +30,10 @@ class About : public QDialog {
   static const char* kUrl;
 
   struct Person {
-    Person(const QString& n, const QString& e = QString()) : name(n), email(e) {}
+    Person(const QString& n, const QString& e = QString())
+        : name(n), email(e) {}
 
-    bool operator <(const Person& other) const { return name < other.name; }
+    bool operator<(const Person& other) const { return name < other.name; }
 
     QString name;
     QString email;
@@ -49,4 +50,4 @@ class About : public QDialog {
   QList<Person> thanks_to_;
 };
 
-#endif // ABOUT_H
+#endif  // ABOUT_H

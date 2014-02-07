@@ -30,7 +30,7 @@ class Ui_DropboxSettingsPage;
 class DropboxSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   DropboxSettingsPage(SettingsDialog* parent = 0);
   ~DropboxSettingsPage();
 
@@ -40,15 +40,15 @@ public:
   // QObject
   bool eventFilter(QObject* object, QEvent* event);
 
-private slots:
+ private slots:
   void LoginClicked();
   void LogoutClicked();
   void Connected(DropboxAuthenticator* authenticator);
 
-private:
+ private:
   Ui_DropboxSettingsPage* ui_;
 
   DropboxService* service_;
 };
 
-#endif // DROPBOXSETTINGSPAGE_H
+#endif  // DROPBOXSETTINGSPAGE_H

@@ -46,7 +46,6 @@ class OrganiseFormat {
   bool IsValid() const;
   QString GetFilenameForSong(const Song& song) const;
 
-
   class Validator : public QValidator {
    public:
     explicit Validator(QObject* parent = 0);
@@ -69,8 +68,8 @@ class OrganiseFormat {
   };
 
  private:
-  QString ParseBlock(
-      QString block, const Song& song, bool* any_empty = NULL) const;
+  QString ParseBlock(QString block, const Song& song,
+                     bool* any_empty = NULL) const;
   QString TagValue(const QString& tag, const Song& song) const;
 
   QString format_;

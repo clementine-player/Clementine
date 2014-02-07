@@ -20,19 +20,18 @@
 
 IcecastSearchProvider::IcecastSearchProvider(IcecastBackend* backend,
                                              Application* app, QObject* parent)
-  : BlockingSearchProvider(app, parent),
-    backend_(backend)
-{
-  Init("Icecast", "icecast", QIcon(":last.fm/icon_radio.png"), DisabledByDefault);
+    : BlockingSearchProvider(app, parent), backend_(backend) {
+  Init("Icecast", "icecast", QIcon(":last.fm/icon_radio.png"),
+       DisabledByDefault);
 }
 
-SearchProvider::ResultList IcecastSearchProvider::Search(int id, const QString& query) {
+SearchProvider::ResultList IcecastSearchProvider::Search(int id,
+                                                         const QString& query) {
   IcecastBackend::StationList stations = backend_->GetStations(query);
   ResultList ret;
 
-  foreach (const IcecastBackend::Station& station, stations) {
-    if (ret.count() > 3)
-      break;
+  foreach(const IcecastBackend::Station & station, stations) {
+    if (ret.count() > 3) break;
 
     Result result(this);
     result.group_automatically_ = false;

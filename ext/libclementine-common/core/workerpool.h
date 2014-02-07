@@ -32,13 +32,12 @@
 #include "core/closure.h"
 #include "core/logging.h"
 
-
 // Base class containing signals and slots - required because moc doesn't do
 // templated objects.
 class _WorkerPoolBase : public QObject {
   Q_OBJECT
 
-public:
+ public:
   _WorkerPoolBase(QObject* parent = 0);
 
 signals:
@@ -46,13 +45,12 @@ signals:
   // worker wasn't found, or couldn't be executed.
   void WorkerFailedToStart();
 
-protected slots:
+ protected slots:
   virtual void DoStart() {}
   virtual void NewConnection() {}
   virtual void ProcessError(QProcess::ProcessError) {}
   virtual void SendQueuedMessages() {}
 };
-
 
 // Manages a pool of one or more external processes.  A local socket server is
 // started for each process, and the address is passed to the process as
@@ -61,7 +59,7 @@ protected slots:
 // Instances of HandlerType are created in the WorkerPool's thread.
 template <typename HandlerType>
 class WorkerPool : public _WorkerPoolBase {
-public:
+ public:
   WorkerPool(QObject* parent = 0);
   ~WorkerPool();
 
@@ -90,7 +88,7 @@ public:
   // worker.  Can be called from any thread.
   ReplyType* SendMessageWithReply(MessageType* message);
 
-protected:
+ protected:
   // These are all reimplemented slots, they are called on the WorkerPool's
   // thread.
   void DoStart();
@@ -98,10 +96,13 @@ protected:
   void ProcessError(QProcess::ProcessError error);
   void SendQueuedMessages();
 
-private:
+ private:
   struct Worker {
-    Worker() : local_server_(NULL), local_socket_(NULL), process_(NULL),
-               handler_(NULL) {}
+    Worker()
+        : local_server_(NULL),
+          local_socket_(NULL),
+          process_(NULL),
+          handler_(NULL) {}
 
     QLocalServer* local_server_;
     QLocalSocket* local_socket_;
@@ -114,8 +115,8 @@ private:
 
   template <typename T>
   Worker* FindWorker(T Worker::*member, T value) {
-    for (typename QList<Worker>::iterator it = workers_.begin() ;
-         it != workers_.end() ; ++it) {
+    for (typename QList<Worker>::iterator it = workers_.begin();
+         it != workers_.end(); ++it) {
       if ((*it).*member == value) {
         return &(*it);
       }
@@ -140,7 +141,7 @@ private:
   // my thread.
   HandlerType* NextHandler() const;
 
-private:
+ private:
   QString local_server_name_;
   QString executable_name_;
   QString executable_path_;
@@ -155,26 +156,21 @@ private:
   QQueue<ReplyType*> message_queue_;
 };
 
-
 template <typename HandlerType>
 WorkerPool<HandlerType>::WorkerPool(QObject* parent)
-  : _WorkerPoolBase(parent),
-    next_worker_(0),
-    next_id_(0)
-{
+    : _WorkerPoolBase(parent), next_worker_(0), next_id_(0) {
   worker_count_ = qBound(1, QThread::idealThreadCount() / 2, 2);
   local_server_name_ = qApp->applicationName().toLower();
 
-  if (local_server_name_.isEmpty())
-    local_server_name_ = "workerpool";
+  if (local_server_name_.isEmpty()) local_server_name_ = "workerpool";
 }
 
 template <typename HandlerType>
 WorkerPool<HandlerType>::~WorkerPool() {
-  foreach (const Worker& worker, workers_) {
+  foreach(const Worker & worker, workers_) {
     if (worker.local_socket_ && worker.process_) {
-      disconnect(worker.process_, SIGNAL(error(QProcess::ProcessError)),
-                 this, SLOT(ProcessError(QProcess::ProcessError)));
+      disconnect(worker.process_, SIGNAL(error(QProcess::ProcessError)), this,
+                 SLOT(ProcessError(QProcess::ProcessError)));
 
       // The worker is connected.  Close his socket and wait for him to exit.
       qLog(Debug) << "Closing worker socket";
@@ -192,9 +188,7 @@ WorkerPool<HandlerType>::~WorkerPool() {
     }
   }
 
-  foreach (ReplyType* reply, message_queue_) {
-    reply->Abort();
-  }
+  foreach(ReplyType * reply, message_queue_) { reply->Abort(); }
 }
 
 template <typename HandlerType>
@@ -204,13 +198,15 @@ void WorkerPool<HandlerType>::SetWorkerCount(int count) {
 }
 
 template <typename HandlerType>
-void WorkerPool<HandlerType>::SetLocalServerName(const QString& local_server_name) {
+void WorkerPool<HandlerType>::SetLocalServerName(
+    const QString& local_server_name) {
   Q_ASSERT(workers_.isEmpty());
   local_server_name_ = local_server_name;
 }
 
 template <typename HandlerType>
-void WorkerPool<HandlerType>::SetExecutableName(const QString& executable_name) {
+void WorkerPool<HandlerType>::SetExecutableName(
+    const QString& executable_name) {
   Q_ASSERT(workers_.isEmpty());
   executable_name_ = executable_name;
 }
@@ -235,7 +231,7 @@ void WorkerPool<HandlerType>::DoStart() {
   search_path << qApp->applicationDirPath() + "/../PlugIns";
 #endif
 
-  foreach (const QString& path_prefix, search_path) {
+  foreach(const QString & path_prefix, search_path) {
     const QString executable_path = path_prefix + "/" + executable_name_;
     if (QFile::exists(executable_path)) {
       executable_path_ = executable_path;
@@ -244,7 +240,7 @@ void WorkerPool<HandlerType>::DoStart() {
   }
 
   // Start all the workers
-  for (int i=0 ; i<worker_count_ ; ++i) {
+  for (int i = 0; i < worker_count_; ++i) {
     Worker worker;
     StartOneWorker(&worker);
 
@@ -264,14 +260,16 @@ void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
   worker->local_server_ = new QLocalServer(this);
   worker->process_ = new QProcess(this);
 
-  connect(worker->local_server_, SIGNAL(newConnection()), SLOT(NewConnection()));
+  connect(worker->local_server_, SIGNAL(newConnection()),
+          SLOT(NewConnection()));
   connect(worker->process_, SIGNAL(error(QProcess::ProcessError)),
           SLOT(ProcessError(QProcess::ProcessError)));
 
   // Create a server, find an unused name and start listening
   forever {
     const int unique_number = qrand() ^ ((int)(quint64(this) & 0xFFFFFFFF));
-    const QString name = QString("%1_%2").arg(local_server_name_).arg(unique_number);
+    const QString name =
+        QString("%1_%2").arg(local_server_name_).arg(unique_number);
 
     if (worker->local_server_->listen(name)) {
       break;
@@ -284,7 +282,8 @@ void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
   // Start the process
   worker->process_->setProcessChannelMode(QProcess::ForwardedChannels);
   worker->process_->start(executable_path_,
-                          QStringList() << worker->local_server_->fullServerName());
+                          QStringList()
+                              << worker->local_server_->fullServerName());
 }
 
 template <typename HandlerType>
@@ -295,10 +294,10 @@ void WorkerPool<HandlerType>::NewConnection() {
 
   // Find the worker with this server.
   Worker* worker = FindWorker(&Worker::local_server_, server);
-  if (!worker)
-    return;
+  if (!worker) return;
 
-  qLog(Debug) << "Worker" << worker << "connected to" << server->fullServerName();
+  qLog(Debug) << "Worker" << worker << "connected to"
+              << server->fullServerName();
 
   // Accept the connection.
   worker->local_socket_ = server->nextPendingConnection();
@@ -322,29 +321,29 @@ void WorkerPool<HandlerType>::ProcessError(QProcess::ProcessError error) {
 
   // Find the worker with this process.
   Worker* worker = FindWorker(&Worker::process_, process);
-  if (!worker)
-    return;
+  if (!worker) return;
 
   switch (error) {
-  case QProcess::FailedToStart:
-    // Failed to start errors are bad - it usually means the worker isn't
-    // installed.  Don't restart the process, but tell our owner, who will
-    // probably want to do something fatal.
-    qLog(Error) << "Worker failed to start";
-    emit WorkerFailedToStart();
-    break;
+    case QProcess::FailedToStart:
+      // Failed to start errors are bad - it usually means the worker isn't
+      // installed.  Don't restart the process, but tell our owner, who will
+      // probably want to do something fatal.
+      qLog(Error) << "Worker failed to start";
+      emit WorkerFailedToStart();
+      break;
 
-  default:
-    // On any other error we just restart the process.
-    qLog(Debug) << "Worker" << worker << "failed with error" << error << "- restarting";
-    StartOneWorker(worker);
-    break;
+    default:
+      // On any other error we just restart the process.
+      qLog(Debug) << "Worker" << worker << "failed with error" << error
+                  << "- restarting";
+      StartOneWorker(worker);
+      break;
   }
 }
 
 template <typename HandlerType>
-typename WorkerPool<HandlerType>::ReplyType*
-WorkerPool<HandlerType>::NewReply(MessageType* message) {
+typename WorkerPool<HandlerType>::ReplyType* WorkerPool<HandlerType>::NewReply(
+    MessageType* message) {
   const int id = next_id_.fetchAndAddOrdered(1);
   message->set_id(id);
 
@@ -390,7 +389,7 @@ void WorkerPool<HandlerType>::SendQueuedMessages() {
 
 template <typename HandlerType>
 HandlerType* WorkerPool<HandlerType>::NextHandler() const {
-  for (int i=0 ; i<workers_.count() ; ++i) {
+  for (int i = 0; i < workers_.count(); ++i) {
     const int worker_index = (next_worker_ + i) % workers_.count();
 
     if (workers_[worker_index].handler_ &&
@@ -403,4 +402,4 @@ HandlerType* WorkerPool<HandlerType>::NextHandler() const {
   return NULL;
 }
 
-#endif // WORKERPOOL_H
+#endif  // WORKERPOOL_H

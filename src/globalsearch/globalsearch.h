@@ -31,7 +31,7 @@ class UrlSearchProvider;
 class GlobalSearch : public QObject {
   Q_OBJECT
 
-public:
+ public:
   GlobalSearch(Application* app, QObject* parent = 0);
 
   static const int kDelayedSearchTimeoutMs;
@@ -53,14 +53,15 @@ public:
   void CancelSearch(int id);
   void CancelArt(int id);
 
-  bool FindCachedPixmap(const SearchProvider::Result& result, QPixmap* pixmap) const;
+  bool FindCachedPixmap(const SearchProvider::Result& result,
+                        QPixmap* pixmap) const;
 
   // "enabled" is the user preference.  "usable" is enabled AND logged in.
   QList<SearchProvider*> providers() const;
   bool is_provider_enabled(const SearchProvider* provider) const;
   bool is_provider_usable(SearchProvider* provider) const;
 
-public slots:
+ public slots:
   void ReloadSettings();
 
 signals:
@@ -74,10 +75,10 @@ signals:
   void ProviderRemoved(const SearchProvider* provider);
   void ProviderToggled(const SearchProvider* provider, bool enabled);
 
-protected:
+ protected:
   void timerEvent(QTimerEvent* e);
 
-private slots:
+ private slots:
   void ResultsAvailableSlot(int id, SearchProvider::ResultList results);
   void SearchFinishedSlot(int id);
 
@@ -86,7 +87,7 @@ private slots:
 
   void ProviderDestroyedSlot(QObject* object);
 
-private:
+ private:
   void ConnectProvider(SearchProvider* provider);
   void HandleLoadedArt(int id, const QImage& image, SearchProvider* provider);
   void TakeNextQueuedArt(SearchProvider* provider);
@@ -94,7 +95,7 @@ private:
 
   void SaveProvidersSettings();
 
-private:
+ private:
   struct DelayedSearch {
     int id_;
     QString query_;
@@ -131,4 +132,4 @@ private:
   UrlSearchProvider* url_provider_;
 };
 
-#endif // GLOBALSEARCH_H
+#endif  // GLOBALSEARCH_H

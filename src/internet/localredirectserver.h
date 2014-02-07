@@ -22,8 +22,7 @@ class LocalRedirectServer : public QObject {
   // Returns the URL requested by the OAuth redirect.
   const QUrl& request_url() const { return request_url_; }
 
-
- signals:
+signals:
   void Finished();
 
  private slots:

@@ -42,16 +42,17 @@ void EchoNestTags::FetchInfo(int id, const Song& metadata) {
 
 void EchoNestTags::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !requests_.contains(reply))
-    return;
+  if (!reply || !requests_.contains(reply)) return;
   reply->deleteLater();
 
   RequestPtr request = requests_.take(reply);
 
   try {
     request->artist_->parseProfile(reply);
-  } catch (Echonest::ParseError e) {
-    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
+  }
+  catch (Echonest::ParseError e) {
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType()
+                  << e.what();
   }
 
   if (!request->artist_->terms().isEmpty()) {
@@ -68,8 +69,7 @@ void EchoNestTags::RequestFinished() {
 
     for (const Echonest::Term& term : request->artist_->terms()) {
       widget->AddTag(term.name());
-      if (widget->count() >= 10)
-        break;
+      if (widget->count() >= 10) break;
     }
 
     emit InfoReady(request->id_, data);
@@ -77,4 +77,3 @@ void EchoNestTags::RequestFinished() {
 
   emit Finished(request->id_);
 }
-

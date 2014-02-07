@@ -30,8 +30,8 @@ class QMenu;
 class PlaylistTabBar : public QTabBar {
   Q_OBJECT
 
-public:
-  PlaylistTabBar(QWidget *parent = 0);
+ public:
+  PlaylistTabBar(QWidget* parent = 0);
 
   static const int kDragHoverTimeout = 500;
   static const char* kSettingsGroup;
@@ -61,7 +61,7 @@ signals:
   void PlaylistOrderChanged(const QList<int>& ids);
   void PlaylistFavorited(int id, bool favorite);
 
-protected:
+ protected:
   void contextMenuEvent(QContextMenuEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
   void mouseDoubleClickEvent(QMouseEvent* e);
@@ -72,7 +72,7 @@ protected:
   void timerEvent(QTimerEvent* e);
   bool event(QEvent* e);
 
-private slots:
+ private slots:
   void CurrentIndexChanged(int index);
   void Rename();
   void RenameInline();
@@ -85,7 +85,7 @@ private slots:
   void TabMoved();
   void Save();
 
-private:
+ private:
   PlaylistManager* manager_;
 
   QMenu* menu_;
@@ -104,4 +104,4 @@ private:
   RenameTabLineEdit* rename_editor_;
 };
 
-#endif // PLAYLISTTABBAR_H
+#endif  // PLAYLISTTABBAR_H

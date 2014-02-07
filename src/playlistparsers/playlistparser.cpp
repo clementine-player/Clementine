@@ -29,9 +29,9 @@
 
 const int PlaylistParser::kMagicSize = 512;
 
-PlaylistParser::PlaylistParser(LibraryBackendInterface* library, QObject *parent)
-  : QObject(parent)
-{
+PlaylistParser::PlaylistParser(LibraryBackendInterface* library,
+                               QObject* parent)
+    : QObject(parent) {
   default_parser_ = new XSPFParser(library, this);
   parsers_ << new M3UParser(library, this);
   parsers_ << default_parser_;
@@ -45,9 +45,7 @@ PlaylistParser::PlaylistParser(LibraryBackendInterface* library, QObject *parent
 QStringList PlaylistParser::file_extensions() const {
   QStringList ret;
 
-  foreach (ParserBase* parser, parsers_) {
-    ret << parser->file_extensions();
-  }
+  foreach(ParserBase * parser, parsers_) { ret << parser->file_extensions(); }
 
   qStableSort(ret);
   return ret;
@@ -56,7 +54,7 @@ QStringList PlaylistParser::file_extensions() const {
 QString PlaylistParser::filters() const {
   QStringList filters;
   QStringList all_extensions;
-  foreach (ParserBase* parser, parsers_) {
+  foreach(ParserBase * parser, parsers_) {
     filters << FilterForParser(parser, &all_extensions);
   }
 
@@ -65,13 +63,13 @@ QString PlaylistParser::filters() const {
   return filters.join(";;");
 }
 
-QString PlaylistParser::FilterForParser(const ParserBase *parser, QStringList *all_extensions) const {
+QString PlaylistParser::FilterForParser(const ParserBase* parser,
+                                        QStringList* all_extensions) const {
   QStringList extensions;
-  foreach (const QString& extension, parser->file_extensions())
-    extensions << "*." + extension;
+  foreach(const QString & extension, parser->file_extensions())
+  extensions << "*." + extension;
 
-  if (all_extensions)
-    *all_extensions << extensions;
+  if (all_extensions) *all_extensions << extensions;
 
   return tr("%1 playlists (%2)").arg(parser->name(), extensions.join(" "));
 }
@@ -85,16 +83,15 @@ QString PlaylistParser::default_filter() const {
 }
 
 ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
-  foreach (ParserBase* p, parsers_) {
-    if (p->file_extensions().contains(suffix))
-      return p;
+  foreach(ParserBase * p, parsers_) {
+    if (p->file_extensions().contains(suffix)) return p;
   }
   return nullptr;
 }
 
 ParserBase* PlaylistParser::ParserForMagic(const QByteArray& data,
                                            const QString& mime_type) const {
-  foreach (ParserBase* p, parsers_) {
+  foreach(ParserBase * p, parsers_) {
     if ((!mime_type.isEmpty() && mime_type == p->mime_type()) ||
         p->TryMagic(data))
       return p;
@@ -131,7 +128,8 @@ SongList PlaylistParser::LoadFromDevice(QIODevice* device,
   return parser->Load(device, path_hint, dir_hint);
 }
 
-void PlaylistParser::Save(const SongList& songs, const QString& filename) const {
+void PlaylistParser::Save(const SongList& songs,
+                          const QString& filename) const {
   QFileInfo info(filename);
 
   // Find a parser that supports this file extension

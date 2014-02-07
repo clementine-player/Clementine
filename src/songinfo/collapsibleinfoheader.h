@@ -27,7 +27,7 @@ class CollapsibleInfoHeader : public QWidget {
   Q_OBJECT
   Q_PROPERTY(float opacity READ opacity WRITE set_opacity);
 
-public:
+ public:
   CollapsibleInfoHeader(QWidget* parent = 0);
 
   static const int kHeight;
@@ -41,7 +41,7 @@ public:
   float opacity() const { return opacity_; }
   void set_opacity(float opacity);
 
-public slots:
+ public slots:
   void SetExpanded(bool expanded);
   void SetTitle(const QString& title);
   void SetIcon(const QIcon& icon);
@@ -51,13 +51,13 @@ signals:
   void Collapsed();
   void ExpandedToggled(bool expanded);
 
-protected:
+ protected:
   void enterEvent(QEvent*);
   void leaveEvent(QEvent*);
   void paintEvent(QPaintEvent* e);
   void mouseReleaseEvent(QMouseEvent*);
 
-private:
+ private:
   bool expanded_;
   bool hovering_;
   QString title_;
@@ -67,4 +67,4 @@ private:
   float opacity_;
 };
 
-#endif // COLLAPSIBLEINFOHEADER_H
+#endif  // COLLAPSIBLEINFOHEADER_H

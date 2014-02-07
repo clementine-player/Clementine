@@ -32,9 +32,9 @@ class Ui_GlobalShortcutsSettingsPage;
 class GlobalShortcutGrabber;
 
 class GlobalShortcutsSettingsPage : public SettingsPage {
- Q_OBJECT
+  Q_OBJECT
 
-public:
+ public:
   GlobalShortcutsSettingsPage(SettingsDialog* dialog);
   ~GlobalShortcutsSettingsPage();
 
@@ -43,7 +43,7 @@ public:
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void ItemClicked(QTreeWidgetItem*);
   void NoneClicked();
   void DefaultClicked();
@@ -51,7 +51,7 @@ private slots:
 
   void OpenGnomeKeybindingProperties();
 
-private:
+ private:
   struct Shortcut {
     GlobalShortcuts::Shortcut s;
     QKeySequence key;
@@ -60,7 +60,7 @@ private:
 
   void SetShortcut(const QString& id, const QKeySequence& key);
 
-private:
+ private:
   Ui_GlobalShortcutsSettingsPage* ui_;
 
   bool initialised_;
@@ -72,4 +72,4 @@ private:
   QString current_id_;
 };
 
-#endif // GLOBALSHORTCUTSSETTINGSPAGE_H
+#endif  // GLOBALSHORTCUTSSETTINGSPAGE_H

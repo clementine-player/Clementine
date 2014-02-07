@@ -25,20 +25,20 @@ class Ui_PlaybackSettingsPage;
 class PlaybackSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   PlaybackSettingsPage(SettingsDialog* dialog);
   ~PlaybackSettingsPage();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void GstPluginChanged(int index);
   void FadingOptionsChanged();
   void RgPreampChanged(int value);
 
-private:
+ private:
   Ui_PlaybackSettingsPage* ui_;
 };
 
-#endif // PLAYBACKSETTINGSPAGE_H
+#endif  // PLAYBACKSETTINGSPAGE_H

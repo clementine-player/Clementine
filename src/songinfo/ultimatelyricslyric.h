@@ -24,10 +24,10 @@
 class UltimateLyricsLyric : public QTextDocument {
   Q_OBJECT
 
-public:
+ public:
   UltimateLyricsLyric(QObject* parent = 0);
 
   void SetHtml(const QString& html);
 };
 
-#endif // ULTIMATELYRICSLYRIC_H
+#endif  // ULTIMATELYRICSLYRIC_H

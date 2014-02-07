@@ -23,14 +23,14 @@
 class LineTextEdit : public QTextEdit {
   Q_OBJECT
 
-public:
+ public:
   LineTextEdit(QWidget* parent = 0);
 
   QSize sizeHint() const;
   QSize minimumSizeHint() const;
 
-protected:
+ protected:
   void keyPressEvent(QKeyEvent* e);
 };
 
-#endif // LINETEXTEDIT_H
+#endif  // LINETEXTEDIT_H

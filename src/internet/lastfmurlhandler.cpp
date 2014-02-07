@@ -19,13 +19,10 @@
 #include "lastfmurlhandler.h"
 
 LastFMUrlHandler::LastFMUrlHandler(LastFMService* service, QObject* parent)
-  : UrlHandler(parent),
-    service_(service) {
-}
+    : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult LastFMUrlHandler::StartLoading(const QUrl& url) {
-  if (!service_->IsAuthenticated())
-    return LoadResult();
+  if (!service_->IsAuthenticated()) return LoadResult();
 
   service_->Tune(url);
   return LoadResult(url, LoadResult::WillLoadAsynchronously);
@@ -36,7 +33,8 @@ void LastFMUrlHandler::TunerTrackAvailable() {
 }
 
 void LastFMUrlHandler::TunerError() {
-  emit AsyncLoadComplete(LoadResult(service_->last_url_, LoadResult::NoMoreTracks));
+  emit AsyncLoadComplete(
+      LoadResult(service_->last_url_, LoadResult::NoMoreTracks));
 }
 
 UrlHandler::LoadResult LastFMUrlHandler::LoadNext(const QUrl& url) {

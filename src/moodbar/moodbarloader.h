@@ -31,7 +31,7 @@ class MoodbarPipeline;
 class MoodbarLoader : public QObject {
   Q_OBJECT
 
-public:
+ public:
   MoodbarLoader(Application* app, QObject* parent = 0);
   ~MoodbarLoader();
 
@@ -48,18 +48,19 @@ public:
     WillLoadAsync
   };
 
-  Result Load(const QUrl& url, QByteArray* data, MoodbarPipeline** async_pipeline);
+  Result Load(const QUrl& url, QByteArray* data,
+              MoodbarPipeline** async_pipeline);
 
-private slots:
+ private slots:
   void ReloadSettings();
 
   void RequestFinished(MoodbarPipeline* request, const QUrl& filename);
   void MaybeTakeNextRequest();
 
-private:
+ private:
   static QStringList MoodFilenames(const QString& song_filename);
 
-private:
+ private:
   QNetworkDiskCache* cache_;
   QThread* thread_;
 
@@ -73,4 +74,4 @@ private:
   bool disable_moodbar_calculation_;
 };
 
-#endif // MOODBARLOADER_H
+#endif  // MOODBARLOADER_H

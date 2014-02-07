@@ -23,20 +23,20 @@
 class ElidedLabel : public QLabel {
   Q_OBJECT
 
-public:
+ public:
   ElidedLabel(QWidget* parent = 0);
 
-public slots:
+ public slots:
   void SetText(const QString& text);
 
-protected:
+ protected:
   void resizeEvent(QResizeEvent* e);
 
-private:
+ private:
   void UpdateText();
 
-private:
+ private:
   QString text_;
 };
 
-#endif // ELIDEDLABEL_H
+#endif  // ELIDEDLABEL_H

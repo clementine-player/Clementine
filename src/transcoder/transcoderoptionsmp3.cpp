@@ -23,22 +23,21 @@
 const char* TranscoderOptionsMP3::kSettingsGroup = "Transcoder/lamemp3enc";
 
 TranscoderOptionsMP3::TranscoderOptionsMP3(QWidget* parent)
-  : TranscoderOptionsInterface(parent),
-    ui_(new Ui_TranscoderOptionsMP3)
-{
+    : TranscoderOptionsInterface(parent), ui_(new Ui_TranscoderOptionsMP3) {
   ui_->setupUi(this);
 
-  connect(ui_->quality_slider, SIGNAL(valueChanged(int)), SLOT(QualitySliderChanged(int)));
-  connect(ui_->quality_spinbox, SIGNAL(valueChanged(double)), SLOT(QualitySpinboxChanged(double)));
+  connect(ui_->quality_slider, SIGNAL(valueChanged(int)),
+          SLOT(QualitySliderChanged(int)));
+  connect(ui_->quality_spinbox, SIGNAL(valueChanged(double)),
+          SLOT(QualitySpinboxChanged(double)));
 }
 
-TranscoderOptionsMP3::~TranscoderOptionsMP3() {
-  delete ui_;
-}
+TranscoderOptionsMP3::~TranscoderOptionsMP3() { delete ui_; }
 
 void TranscoderOptionsMP3::Load() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);;
+  s.beginGroup(kSettingsGroup);
+  ;
 
   if (s.value("target", 1).toInt() == 0) {
     ui_->target_quality->setChecked(true);
@@ -49,7 +48,8 @@ void TranscoderOptionsMP3::Load() {
   ui_->quality_spinbox->setValue(s.value("quality", 4.0).toFloat());
   ui_->bitrate_slider->setValue(s.value("bitrate", 128).toInt());
   ui_->cbr->setChecked(s.value("cbr", true).toBool());
-  ui_->encoding_engine_quality->setCurrentIndex(s.value("encoding-engine-quality", 1).toInt());
+  ui_->encoding_engine_quality->setCurrentIndex(
+      s.value("encoding-engine-quality", 1).toInt());
   ui_->mono->setChecked(s.value("mono", false).toBool());
 }
 
@@ -61,7 +61,8 @@ void TranscoderOptionsMP3::Save() {
   s.setValue("quality", ui_->quality_spinbox->value());
   s.setValue("bitrate", ui_->bitrate_slider->value());
   s.setValue("cbr", ui_->cbr->isChecked());
-  s.setValue("encoding-engine-quality", ui_->encoding_engine_quality->currentIndex());
+  s.setValue("encoding-engine-quality",
+             ui_->encoding_engine_quality->currentIndex());
   s.setValue("mono", ui_->mono->isChecked());
 }
 

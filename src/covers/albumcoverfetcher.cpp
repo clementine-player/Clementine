@@ -23,15 +23,14 @@
 
 const int AlbumCoverFetcher::kMaxConcurrentRequests = 5;
 
-
 AlbumCoverFetcher::AlbumCoverFetcher(CoverProviders* cover_providers,
-                                     QObject* parent, QNetworkAccessManager* network)
+                                     QObject* parent,
+                                     QNetworkAccessManager* network)
     : QObject(parent),
       cover_providers_(cover_providers),
       network_(network ? network : new NetworkAccessManager(this)),
       next_id_(0),
-      request_starter_(new QTimer(this))
-{
+      request_starter_(new QTimer(this)) {
   request_starter_->setInterval(1000);
   connect(request_starter_, SIGNAL(timeout()), SLOT(StartRequests()));
 }
@@ -42,7 +41,7 @@ quint64 AlbumCoverFetcher::FetchAlbumCover(const QString& artist,
   request.artist = artist;
   request.album = album;
   request.search = false;
-  request.id = next_id_ ++;
+  request.id = next_id_++;
 
   AddRequest(request);
   return request.id;
@@ -54,7 +53,7 @@ quint64 AlbumCoverFetcher::SearchForCovers(const QString& artist,
   request.artist = artist;
   request.album = album;
   request.search = true;
-  request.id = next_id_ ++;
+  request.id = next_id_++;
 
   AddRequest(request);
   return request.id;
@@ -63,17 +62,15 @@ quint64 AlbumCoverFetcher::SearchForCovers(const QString& artist,
 void AlbumCoverFetcher::AddRequest(const CoverSearchRequest& req) {
   queued_requests_.enqueue(req);
 
-  if (!request_starter_->isActive())
-    request_starter_->start();
+  if (!request_starter_->isActive()) request_starter_->start();
 
-  if (active_requests_.size() < kMaxConcurrentRequests)
-    StartRequests();
+  if (active_requests_.size() < kMaxConcurrentRequests) StartRequests();
 }
 
 void AlbumCoverFetcher::Clear() {
   queued_requests_.clear();
 
-  foreach (AlbumCoverFetcherSearch* search, active_requests_.values()) {
+  foreach(AlbumCoverFetcherSearch * search, active_requests_.values()) {
     search->Cancel();
     search->deleteLater();
   }
@@ -91,34 +88,35 @@ void AlbumCoverFetcher::StartRequests() {
 
     CoverSearchRequest request = queued_requests_.dequeue();
 
-    // search objects are this fetcher's children so worst case scenario - they get 
+    // search objects are this fetcher's children so worst case scenario - they
+    // get
     // deleted with it
-    AlbumCoverFetcherSearch* search = new AlbumCoverFetcherSearch(
-          request, network_, this);
+    AlbumCoverFetcherSearch* search =
+        new AlbumCoverFetcherSearch(request, network_, this);
     active_requests_.insert(request.id, search);
 
     connect(search, SIGNAL(SearchFinished(quint64, CoverSearchResults)),
-                    SLOT(SingleSearchFinished(quint64, CoverSearchResults)));
+            SLOT(SingleSearchFinished(quint64, CoverSearchResults)));
     connect(search, SIGNAL(AlbumCoverFetched(quint64, const QImage&)),
-                    SLOT(SingleCoverFetched(quint64, const QImage&)));
+            SLOT(SingleCoverFetched(quint64, const QImage&)));
 
     search->Start(cover_providers_);
   }
 }
 
-void AlbumCoverFetcher::SingleSearchFinished(quint64 request_id, CoverSearchResults results) {
+void AlbumCoverFetcher::SingleSearchFinished(quint64 request_id,
+                                             CoverSearchResults results) {
   AlbumCoverFetcherSearch* search = active_requests_.take(request_id);
-  if (!search)
-    return;
+  if (!search) return;
 
   search->deleteLater();
   emit SearchFinished(request_id, results, search->statistics());
 }
 
-void AlbumCoverFetcher::SingleCoverFetched(quint64 request_id, const QImage& image) {
+void AlbumCoverFetcher::SingleCoverFetched(quint64 request_id,
+                                           const QImage& image) {
   AlbumCoverFetcherSearch* search = active_requests_.take(request_id);
-  if (!search)
-    return;
+  if (!search) return;
 
   search->deleteLater();
   emit AlbumCoverFetched(request_id, image, search->statistics());

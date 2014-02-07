@@ -51,23 +51,20 @@ struct tag_group_by {};
 class GroupByDialogPrivate {
  private:
   typedef multi_index_container<
-    Mapping,
-    indexed_by<
-      ordered_unique<tag<tag_index>,
-        member<Mapping, int, &Mapping::combo_box_index> >,
-      ordered_unique<tag<tag_group_by>,
-        member<Mapping, LibraryModel::GroupBy, &Mapping::group_by> >
-    >
-  > MappingContainer;
+      Mapping,
+      indexed_by<
+          ordered_unique<tag<tag_index>,
+                         member<Mapping, int, &Mapping::combo_box_index> >,
+          ordered_unique<tag<tag_group_by>,
+                         member<Mapping, LibraryModel::GroupBy,
+                                &Mapping::group_by> > > > MappingContainer;
 
  public:
   MappingContainer mapping_;
 };
 
-GroupByDialog::GroupByDialog(QWidget *parent)
-  : QDialog(parent),
-    ui_(new Ui_GroupByDialog),
-    p_(new GroupByDialogPrivate) {
+GroupByDialog::GroupByDialog(QWidget* parent)
+    : QDialog(parent), ui_(new Ui_GroupByDialog), p_(new GroupByDialogPrivate) {
   ui_->setupUi(this);
   Reset();
 
@@ -93,21 +90,26 @@ GroupByDialog::GroupByDialog(QWidget *parent)
 GroupByDialog::~GroupByDialog() {}
 
 void GroupByDialog::Reset() {
-  ui_->first->setCurrentIndex(2); // Artist
-  ui_->second->setCurrentIndex(1); // Album
-  ui_->third->setCurrentIndex(0); // None
+  ui_->first->setCurrentIndex(2);   // Artist
+  ui_->second->setCurrentIndex(1);  // Album
+  ui_->third->setCurrentIndex(0);   // None
 }
 
 void GroupByDialog::accept() {
   emit Accepted(LibraryModel::Grouping(
       p_->mapping_.get<tag_index>().find(ui_->first->currentIndex())->group_by,
       p_->mapping_.get<tag_index>().find(ui_->second->currentIndex())->group_by,
-      p_->mapping_.get<tag_index>().find(ui_->third->currentIndex())->group_by));
+      p_->mapping_.get<tag_index>()
+          .find(ui_->third->currentIndex())
+          ->group_by));
   QDialog::accept();
 }
 
 void GroupByDialog::LibraryGroupingChanged(const LibraryModel::Grouping& g) {
-  ui_->first->setCurrentIndex(p_->mapping_.get<tag_group_by>().find(g[0])->combo_box_index);
-  ui_->second->setCurrentIndex(p_->mapping_.get<tag_group_by>().find(g[1])->combo_box_index);
-  ui_->third->setCurrentIndex(p_->mapping_.get<tag_group_by>().find(g[2])->combo_box_index);
+  ui_->first->setCurrentIndex(
+      p_->mapping_.get<tag_group_by>().find(g[0])->combo_box_index);
+  ui_->second->setCurrentIndex(
+      p_->mapping_.get<tag_group_by>().find(g[1])->combo_box_index);
+  ui_->third->setCurrentIndex(
+      p_->mapping_.get<tag_group_by>().find(g[2])->combo_box_index);
 }

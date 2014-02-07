@@ -31,19 +31,13 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
-
-PlaylistItem::~PlaylistItem() {
-}
+PlaylistItem::~PlaylistItem() {}
 
 PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
-  if (type == "Library")
-    return new LibraryPlaylistItem(type);
-  if (type == "Magnatune")
-    return new MagnatunePlaylistItem(type);
-  if (type == "Jamendo")
-    return new JamendoPlaylistItem(type);
-  if (type == "Stream" || type == "File")
-    return new SongPlaylistItem(type);
+  if (type == "Library") return new LibraryPlaylistItem(type);
+  if (type == "Magnatune") return new MagnatunePlaylistItem(type);
+  if (type == "Jamendo") return new JamendoPlaylistItem(type);
+  if (type == "Stream" || type == "File") return new SongPlaylistItem(type);
   if (type == "Internet" || type == "Radio")
     return new InternetPlaylistItem("Internet");
 
@@ -51,9 +45,9 @@ PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
   return nullptr;
 }
 
-PlaylistItem* PlaylistItem::NewFromSongsTable(const QString& table, const Song& song) {
-  if (table == Library::kSongsTable)
-    return new LibraryPlaylistItem(song);
+PlaylistItem* PlaylistItem::NewFromSongsTable(const QString& table,
+                                              const Song& song) {
+  if (table == Library::kSongsTable) return new LibraryPlaylistItem(song);
   if (table == MagnatuneService::kSongsTable)
     return new MagnatunePlaylistItem(song);
   if (table == JamendoService::kSongsTable)
@@ -76,13 +70,9 @@ void PlaylistItem::SetTemporaryMetadata(const Song& metadata) {
   temp_metadata_.set_filetype(Song::Type_Stream);
 }
 
-void PlaylistItem::ClearTemporaryMetadata() {
-  temp_metadata_ = Song();
-}
+void PlaylistItem::ClearTemporaryMetadata() { temp_metadata_ = Song(); }
 
-static void ReloadPlaylistItem(PlaylistItemPtr item) {
-  item->Reload();
-}
+static void ReloadPlaylistItem(PlaylistItemPtr item) { item->Reload(); }
 
 QFuture<void> PlaylistItem::BackgroundReload() {
   return QtConcurrent::run(ReloadPlaylistItem, shared_from_this());
@@ -99,8 +89,8 @@ void PlaylistItem::RemoveBackgroundColor(short priority) {
 }
 QColor PlaylistItem::GetCurrentBackgroundColor() const {
   return background_colors_.isEmpty()
-      ? QColor()
-      : background_colors_[background_colors_.keys().last()];
+             ? QColor()
+             : background_colors_[background_colors_.keys().last()];
 }
 bool PlaylistItem::HasCurrentBackgroundColor() const {
   return !background_colors_.isEmpty();
@@ -117,8 +107,8 @@ void PlaylistItem::RemoveForegroundColor(short priority) {
 }
 QColor PlaylistItem::GetCurrentForegroundColor() const {
   return foreground_colors_.isEmpty()
-      ? QColor()
-      : foreground_colors_[foreground_colors_.keys().last()];
+             ? QColor()
+             : foreground_colors_[foreground_colors_.keys().last()];
 }
 bool PlaylistItem::HasCurrentForegroundColor() const {
   return !foreground_colors_.isEmpty();

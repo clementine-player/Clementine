@@ -81,4 +81,4 @@ class TranscodeDialog : public QDialog {
   int finished_failed_;
 };
 
-#endif // TRANSCODEDIALOG_H
+#endif  // TRANSCODEDIALOG_H

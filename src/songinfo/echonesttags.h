@@ -27,17 +27,17 @@ class QNetworkReply;
 class EchoNestTags : public SongInfoProvider {
   Q_OBJECT
 
-public:
+ public:
   void FetchInfo(int id, const Song& metadata);
 
-private slots:
+ private slots:
   void RequestFinished();
 
-private:
+ private:
   struct Request;
   typedef std::shared_ptr<Request> RequestPtr;
 
   QMap<QNetworkReply*, RequestPtr> requests_;
 };
 
-#endif // ECHONESTTAGS_H
+#endif  // ECHONESTTAGS_H

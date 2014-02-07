@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -42,7 +42,7 @@ class QTimer;
 class GPodderSync : public QObject {
   Q_OBJECT
 
-public:
+ public:
   GPodderSync(Application* app, QObject* parent = 0);
   ~GPodderSync();
 
@@ -65,13 +65,13 @@ public:
   // Clears any saved username and password from QSettings.
   void Logout();
 
-public slots:
+ public slots:
   void GetUpdatesNow();
 
-private slots:
+ private slots:
   void ReloadSettings();
-  void LoginFinished(QNetworkReply* reply,
-                     const QString& username, const QString& password);
+  void LoginFinished(QNetworkReply* reply, const QString& username,
+                     const QString& password);
 
   void DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply);
   void DeviceUpdatesFailed(mygpo::DeviceUpdatesPtr reply);
@@ -90,13 +90,13 @@ private slots:
                          const QList<QUrl>& affected_urls);
   void AddRemoveFailed(mygpo::AddRemoveResultPtr reply);
 
-private:
+ private:
   void LoadQueue();
   void SaveQueue();
 
   void DoInitialSync();
 
-private:
+ private:
   Application* app_;
   QNetworkAccessManager* network_;
   QScopedPointer<mygpo::ApiRequest> api_;
@@ -115,4 +115,4 @@ private:
   bool flushing_queue_;
 };
 
-#endif // GPODDERSYNC_H
+#endif  // GPODDERSYNC_H

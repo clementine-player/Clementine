@@ -30,14 +30,13 @@ class QNetworkAccessManager;
 class QNetworkReply;
 class QNetworkRequest;
 
-
 namespace google_drive {
 
 class Client;
 
 // Holds the metadata for a file on Google Drive.
 class File {
-public:
+ public:
   File(const QVariantMap& data = QVariantMap()) : data_(data) {}
 
   static const char* kFolderMimeType;
@@ -72,57 +71,55 @@ public:
   bool is_restricted() const { return has_label("restricted"); }
   bool is_viewed() const { return has_label("viewed"); }
 
-private:
+ private:
   QVariantMap data_;
 };
 
 typedef QList<File> FileList;
 
-
 class ConnectResponse : public QObject {
   Q_OBJECT
   friend class Client;
 
-public:
+ public:
   const QString& refresh_token() const { return refresh_token_; }
   const QString& user_email() const { return user_email_; }
 
 signals:
   void Finished();
 
-private:
+ private:
   ConnectResponse(QObject* parent);
   QString refresh_token_;
   QString user_email_;
 };
 
-
 class GetFileResponse : public QObject {
   Q_OBJECT
   friend class Client;
 
-public:
+ public:
   const QString& file_id() const { return file_id_; }
   const File& file() const { return file_; }
 
 signals:
   void Finished();
 
-private:
+ private:
   GetFileResponse(const QString& file_id, QObject* parent);
   QString file_id_;
   File file_;
 };
 
-
 class ListChangesResponse : public QObject {
   Q_OBJECT
   friend class Client;
+
  public:
   const QString& cursor() const { return cursor_; }
   const QString& next_cursor() const { return next_cursor_; }
 
- signals:
+signals:
   void FilesFound(const QList<google_drive::File>& files);
   void FilesDeleted(const QList<QUrl>& files);
   void Finished();
@@ -133,11 +130,10 @@ class ListChangesResponse : public QObject {
   QString next_cursor_;
 };
 
-
 class Client : public QObject {
   Q_OBJECT
 
-public:
+ public:
   Client(QObject* parent = 0);
 
   bool is_authenticated() const;
@@ -149,28 +145,27 @@ public:
   GetFileResponse* GetFile(const QString& file_id);
   ListChangesResponse* ListChanges(const QString& cursor);
 
-
 signals:
   void Authenticated();
 
-private slots:
+ private slots:
   void ConnectFinished(ConnectResponse* response, OAuthenticator* oauth);
   void FetchUserInfoFinished(ConnectResponse* response, QNetworkReply* reply);
   void GetFileFinished(GetFileResponse* response, QNetworkReply* reply);
   void ListChangesFinished(ListChangesResponse* response, QNetworkReply* reply);
 
-private:
+ private:
   void AddAuthorizationHeader(QNetworkRequest* request) const;
   void MakeListChangesRequest(ListChangesResponse* response,
                               const QString& page_token = QString());
 
-private:
+ private:
   QNetworkAccessManager* network_;
 
   QString access_token_;
   QDateTime expiry_time_;
 };
 
-} // namespace
+}  // namespace
 
-#endif // GOOGLEDRIVECLIENT_H
+#endif  // GOOGLEDRIVECLIENT_H

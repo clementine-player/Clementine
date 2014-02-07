@@ -28,13 +28,15 @@ class AddStreamDialog : public QDialog {
   Q_OBJECT
 
  public:
-  AddStreamDialog(QWidget *parent = 0);
+  AddStreamDialog(QWidget* parent = 0);
   ~AddStreamDialog();
 
   void set_url(const QUrl& url);
   void set_name(const QString& name);
   void set_save_visible(bool visible);
-  void set_add_on_accept(SavedRadio* saved_radio) { saved_radio_ = saved_radio; }
+  void set_add_on_accept(SavedRadio* saved_radio) {
+    saved_radio_ = saved_radio;
+  }
 
   QUrl url() const;
   QString name() const;
@@ -42,7 +44,7 @@ class AddStreamDialog : public QDialog {
   void accept();
 
  protected:
-  void showEvent(QShowEvent *);
+  void showEvent(QShowEvent*);
 
  private slots:
   void TextChanged(const QString& text);
@@ -55,4 +57,4 @@ class AddStreamDialog : public QDialog {
   SavedRadio* saved_radio_;
 };
 
-#endif // ADDSTREAMDIALOG_H
+#endif  // ADDSTREAMDIALOG_H

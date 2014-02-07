@@ -25,9 +25,7 @@
 #include <QSettings>
 
 GlobalSearchSettingsPage::GlobalSearchSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui::GlobalSearchSettingsPage)
-{
+    : SettingsPage(dialog), ui_(new Ui::GlobalSearchSettingsPage) {
   ui_->setupUi(this);
 
   ui_->sources->header()->setResizeMode(0, QHeaderView::Stretch);
@@ -38,12 +36,12 @@ GlobalSearchSettingsPage::GlobalSearchSettingsPage(SettingsDialog* dialog)
   connect(ui_->up, SIGNAL(clicked()), SLOT(MoveUp()));
   connect(ui_->down, SIGNAL(clicked()), SLOT(MoveDown()));
   connect(ui_->configure, SIGNAL(clicked()), SLOT(ConfigureProvider()));
-  connect(ui_->sources, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+  connect(ui_->sources,
+          SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
           SLOT(CurrentProviderChanged(QTreeWidgetItem*)));
 }
 
-GlobalSearchSettingsPage::~GlobalSearchSettingsPage() {
-}
+GlobalSearchSettingsPage::~GlobalSearchSettingsPage() {}
 
 static bool CompareProviderId(SearchProvider* left, SearchProvider* right) {
   return left->id() < right->id();
@@ -62,10 +60,12 @@ void GlobalSearchSettingsPage::Load() {
 
   // Add the ones in the configured list first
   ui_->sources->clear();
-  foreach (const QString& id, s.value("provider_order", QStringList() << "library").toStringList()) {
+  foreach(
+      const QString & id,
+      s.value("provider_order", QStringList() << "library").toStringList()) {
     // Find a matching provider for this id
     for (QList<SearchProvider*>::iterator it = providers.begin();
-         it != providers.end() ; ++it) {
+         it != providers.end(); ++it) {
       if ((*it)->id() == id) {
         AddProviderItem(engine, *it);
         providers.erase(it);
@@ -75,7 +75,7 @@ void GlobalSearchSettingsPage::Load() {
   }
 
   // Now add any others that are remaining
-  foreach (SearchProvider* provider, providers) {
+  foreach(SearchProvider * provider, providers) {
     AddProviderItem(engine, provider);
   }
 
@@ -98,18 +98,18 @@ void GlobalSearchSettingsPage::AddProviderItem(GlobalSearch* engine,
 void GlobalSearchSettingsPage::UpdateLoggedInState(GlobalSearch* engine,
                                                    QTreeWidgetItem* item,
                                                    bool set_checked_state) {
-  SearchProvider* provider = item->data(0, Qt::UserRole).value<SearchProvider*>();
+  SearchProvider* provider =
+      item->data(0, Qt::UserRole).value<SearchProvider*>();
 
   const bool enabled = engine->is_provider_enabled(provider);
   const bool logged_in = provider->IsLoggedIn();
 
-  Qt::CheckState check_state = logged_in && enabled ? Qt::Checked : Qt::Unchecked;
+  Qt::CheckState check_state =
+      logged_in && enabled ? Qt::Checked : Qt::Unchecked;
   Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
-  if (logged_in)
-    flags |= Qt::ItemIsUserCheckable;
+  if (logged_in) flags |= Qt::ItemIsUserCheckable;
 
-  if (set_checked_state)
-    item->setData(0, Qt::CheckStateRole, check_state);
+  if (set_checked_state) item->setData(0, Qt::CheckStateRole, check_state);
   item->setFlags(flags);
 
   if (logged_in) {
@@ -127,16 +127,17 @@ void GlobalSearchSettingsPage::Save() {
 
   QStringList provider_order;
 
-  for (int i=0 ; i<ui_->sources->invisibleRootItem()->childCount() ; ++i) {
+  for (int i = 0; i < ui_->sources->invisibleRootItem()->childCount(); ++i) {
     const QTreeWidgetItem* item = ui_->sources->invisibleRootItem()->child(i);
-    const SearchProvider* provider = item->data(0, Qt::UserRole).value<SearchProvider*>();
+    const SearchProvider* provider =
+        item->data(0, Qt::UserRole).value<SearchProvider*>();
 
     provider_order << provider->id();
 
     // Only save the enabled state for this provider if it's logged in.
     if (item->flags() & Qt::ItemIsUserCheckable) {
       s.setValue("enabled_" + provider->id(),
-          item->data(0, Qt::CheckStateRole).toInt() == Qt::Checked);
+                 item->data(0, Qt::CheckStateRole).toInt() == Qt::Checked);
     }
   }
 
@@ -145,26 +146,20 @@ void GlobalSearchSettingsPage::Save() {
   s.setValue("show_suggestions", ui_->show_suggestions->isChecked());
 }
 
-void GlobalSearchSettingsPage::MoveUp() {
-  MoveCurrentItem(-1);
-}
+void GlobalSearchSettingsPage::MoveUp() { MoveCurrentItem(-1); }
 
-void GlobalSearchSettingsPage::MoveDown() {
-  MoveCurrentItem(+1);
-}
+void GlobalSearchSettingsPage::MoveDown() { MoveCurrentItem(+1); }
 
 void GlobalSearchSettingsPage::MoveCurrentItem(int d) {
   QTreeWidgetItem* item = ui_->sources->currentItem();
-  if (!item)
-    return;
+  if (!item) return;
 
   QTreeWidgetItem* root = ui_->sources->invisibleRootItem();
 
   const int row = root->indexOfChild(item);
   const int new_row = qBound(0, row + d, root->childCount());
 
-  if (row == new_row)
-    return;
+  if (row == new_row) return;
 
   root->removeChild(item);
   root->insertChild(new_row, item);
@@ -174,19 +169,19 @@ void GlobalSearchSettingsPage::MoveCurrentItem(int d) {
 
 void GlobalSearchSettingsPage::ConfigureProvider() {
   QTreeWidgetItem* item = ui_->sources->currentItem();
-  if (!item)
-    return;
+  if (!item) return;
 
-  SearchProvider* provider = item->data(0, Qt::UserRole).value<SearchProvider*>();
+  SearchProvider* provider =
+      item->data(0, Qt::UserRole).value<SearchProvider*>();
   provider->ShowConfig();
 }
 
 void GlobalSearchSettingsPage::CurrentProviderChanged(QTreeWidgetItem* item) {
-  if (!item)
-    return;
+  if (!item) return;
 
   QTreeWidgetItem* root = ui_->sources->invisibleRootItem();
-  SearchProvider* provider = item->data(0, Qt::UserRole).value<SearchProvider*>();
+  SearchProvider* provider =
+      item->data(0, Qt::UserRole).value<SearchProvider*>();
   const int row = root->indexOfChild(item);
 
   ui_->up->setEnabled(row != 0);
@@ -199,9 +194,8 @@ void GlobalSearchSettingsPage::showEvent(QShowEvent* e) {
 
   // Update the logged-in state of each item when we come back to this page in
   // the dialog.
-  for (int i = 0 ; i < ui_->sources->invisibleRootItem()->childCount() ; ++i) {
+  for (int i = 0; i < ui_->sources->invisibleRootItem()->childCount(); ++i) {
     UpdateLoggedInState(dialog()->global_search(),
-                        ui_->sources->invisibleRootItem()->child(i),
-                        false);
+                        ui_->sources->invisibleRootItem()->child(i), false);
   }
 }

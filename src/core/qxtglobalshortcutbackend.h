@@ -23,16 +23,16 @@
 class QxtGlobalShortcut;
 
 class QxtGlobalShortcutBackend : public GlobalShortcutBackend {
-public:
+ public:
   QxtGlobalShortcutBackend(GlobalShortcuts* parent = 0);
 
-protected:
+ protected:
   bool DoRegister();
   void DoUnregister();
 
-private:
+ private:
   void AddShortcut(QAction* action);
   QList<QxtGlobalShortcut*> shortcuts_;
 };
 
-#endif // QXTGLOBALSHORTCUTBACKEND_H
+#endif  // QXTGLOBALSHORTCUTBACKEND_H

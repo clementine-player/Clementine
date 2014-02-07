@@ -41,7 +41,7 @@ class QTimeLine;
 class NowPlayingWidget : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   NowPlayingWidget(QWidget* parent = 0);
   ~NowPlayingWidget();
 
@@ -54,10 +54,7 @@ public:
   static const int kTopBorder;
 
   // Values are saved in QSettings
-  enum Mode {
-    SmallSongDetails = 0,
-    LargeSongDetails = 1,
-  };
+  enum Mode { SmallSongDetails = 0, LargeSongDetails = 1, };
 
   void SetApplication(Application* app);
 
@@ -69,23 +66,24 @@ public:
 signals:
   void ShowAboveStatusBarChanged(bool above);
 
-public slots:
+ public slots:
   void Stopped();
   void AllHail(bool hypnotoad);
   void EnableKittens(bool aww);
 
-protected:
+ protected:
   void paintEvent(QPaintEvent* e);
   void resizeEvent(QResizeEvent*);
   void contextMenuEvent(QContextMenuEvent* e);
   void dragEnterEvent(QDragEnterEvent* e);
   void dropEvent(QDropEvent* e);
 
-private slots:
+ private slots:
   void SetMode(int mode);
   void ShowAboveStatusBar(bool above);
 
-  void AlbumArtLoaded(const Song& metadata, const QString& uri, const QImage& image);
+  void AlbumArtLoaded(const Song& metadata, const QString& uri,
+                      const QImage& image);
   void KittenLoaded(quint64 id, const QImage& image);
 
   void SetVisible(bool visible);
@@ -105,7 +103,7 @@ private slots:
 
   void AutomaticCoverSearchDone();
 
-private:
+ private:
   void CreateModeAction(Mode mode, const QString& text, QActionGroup* group,
                         QSignalMapper* mapper);
   void UpdateDetailsText();
@@ -115,7 +113,7 @@ private:
   void ScaleCover();
   bool GetCoverAutomatically();
 
-private:
+ private:
   Application* app_;
   AlbumCoverChoiceController* album_cover_choice_controller_;
 
@@ -156,4 +154,4 @@ private:
   quint64 pending_kitten_;
 };
 
-#endif // NOWPLAYINGWIDGET_H
+#endif  // NOWPLAYINGWIDGET_H

@@ -24,7 +24,7 @@ class GroovesharkService;
 
 class GroovesharkRadio : public smart_playlists::Generator {
 
-public:
+ public:
   // Start Grooveshark radio for a particular type of music
   GroovesharkRadio(GroovesharkService* service, int tag_id);
   // Start Grooveshark radio based on last artists and songs you listen to
@@ -37,7 +37,7 @@ public:
   PlaylistItemList GenerateMore(int count) { return Generate(); }
   bool is_dynamic() const { return true; }
 
-private:
+ private:
   GroovesharkService* service_;
   int tag_id_;
   // Boolean to specify if we should use tag. If not, we will used autoplay
@@ -47,5 +47,5 @@ private:
   bool first_time_;
   QVariantMap autoplay_state_;
 };
- 
-#endif // GROOVESHARKRADIO_H
+
+#endif  // GROOVESHARKRADIO_H

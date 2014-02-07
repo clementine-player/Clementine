@@ -28,27 +28,27 @@ class QNetworkReply;
 class DigitallyImportedSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   DigitallyImportedSettingsPage(SettingsDialog* dialog);
   ~DigitallyImportedSettingsPage();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void Login();
   void Logout();
 
   void LoginFinished(QNetworkReply* reply);
 
-private:
+ private:
   void UpdateLoginState(const QString& listen_hash, const QString& name,
                         const QDateTime& expires);
 
-private:
+ private:
   Ui_DigitallyImportedSettingsPage* ui_;
 
   DigitallyImportedClient* client_;
 };
 
-#endif // DIGITALLYIMPORTEDSETTINGSPAGE_H
+#endif  // DIGITALLYIMPORTEDSETTINGSPAGE_H

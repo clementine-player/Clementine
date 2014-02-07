@@ -33,18 +33,17 @@ class TaskManager;
 class Organise : public QObject {
   Q_OBJECT
 
-public:
-
+ public:
   struct NewSongInfo {
-    NewSongInfo(const Song& song = Song(), const QString& new_filename = QString())
-      : song_(song), new_filename_(new_filename) {}
+    NewSongInfo(const Song& song = Song(),
+                const QString& new_filename = QString())
+        : song_(song), new_filename_(new_filename) {}
     Song song_;
     QString new_filename_;
   };
   typedef QList<NewSongInfo> NewSongInfoList;
 
-  Organise(TaskManager* task_manager,
-           std::shared_ptr<MusicStorage> destination,
+  Organise(TaskManager* task_manager, std::shared_ptr<MusicStorage> destination,
            const OrganiseFormat& format, bool copy, bool overwrite,
            const NewSongInfoList& songs, bool eject_after);
 
@@ -56,22 +55,22 @@ public:
 signals:
   void Finished(const QStringList& files_with_errors);
 
-protected:
+ protected:
   void timerEvent(QTimerEvent* e);
 
-private slots:
+ private slots:
   void ProcessSomeFiles();
   void FileTranscoded(const QString& filename, bool success);
 
-private:
+ private:
   void SetSongProgress(float progress, bool transcoded = false);
   void UpdateProgress();
   Song::FileType CheckTranscode(Song::FileType original_type) const;
 
-private:
+ private:
   struct Task {
     explicit Task(const NewSongInfo& song_info = NewSongInfo())
-      : song_info_(song_info), transcode_progress_(0.0) {}
+        : song_info_(song_info), transcode_progress_(0.0) {}
 
     NewSongInfo song_info_;
 
@@ -110,4 +109,4 @@ private:
   QStringList files_with_errors_;
 };
 
-#endif // ORGANISE_H
+#endif  // ORGANISE_H

@@ -27,12 +27,11 @@
 
 const char* IcecastFilterWidget::kSettingsGroup = "Icecast";
 
-IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
-  : QWidget(parent),
-    ui_(new Ui_IcecastFilterWidget),
-    menu_(new QMenu(tr("Display options"), this)),
-    sort_mode_mapper_(new QSignalMapper(this))
-{
+IcecastFilterWidget::IcecastFilterWidget(QWidget* parent)
+    : QWidget(parent),
+      ui_(new Ui_IcecastFilterWidget),
+      menu_(new QMenu(tr("Display options"), this)),
+      sort_mode_mapper_(new QSignalMapper(this)) {
   ui_->setupUi(this);
 
   // Icons
@@ -40,9 +39,12 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
 
   // Options actions
   QActionGroup* group = new QActionGroup(this);
-  AddAction(group, ui_->action_sort_genre_popularity, IcecastModel::SortMode_GenreByPopularity);
-  AddAction(group, ui_->action_sort_genre_alphabetically, IcecastModel::SortMode_GenreAlphabetical);
-  AddAction(group, ui_->action_sort_station, IcecastModel::SortMode_StationAlphabetical);
+  AddAction(group, ui_->action_sort_genre_popularity,
+            IcecastModel::SortMode_GenreByPopularity);
+  AddAction(group, ui_->action_sort_genre_alphabetically,
+            IcecastModel::SortMode_GenreAlphabetical);
+  AddAction(group, ui_->action_sort_station,
+            IcecastModel::SortMode_StationAlphabetical);
 
   // Options menu
   menu_->setIcon(ui_->options->icon());
@@ -52,31 +54,30 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
   connect(sort_mode_mapper_, SIGNAL(mapped(int)), SLOT(SortModeChanged(int)));
 }
 
-void IcecastFilterWidget::AddAction(
-    QActionGroup* group, QAction* action, IcecastModel::SortMode mode) {
+void IcecastFilterWidget::AddAction(QActionGroup* group, QAction* action,
+                                    IcecastModel::SortMode mode) {
   group->addAction(action);
   sort_mode_mapper_->setMapping(action, mode);
   connect(action, SIGNAL(triggered()), sort_mode_mapper_, SLOT(map()));
 }
 
-IcecastFilterWidget::~IcecastFilterWidget() {
-  delete ui_;
-}
+IcecastFilterWidget::~IcecastFilterWidget() { delete ui_; }
 
-void IcecastFilterWidget::FocusOnFilter(QKeyEvent *event) {
+void IcecastFilterWidget::FocusOnFilter(QKeyEvent* event) {
   ui_->filter->setFocus(Qt::OtherFocusReason);
   QApplication::sendEvent(ui_->filter, event);
 }
 
 void IcecastFilterWidget::SetIcecastModel(IcecastModel* model) {
   model_ = model;
-  connect(ui_->filter, SIGNAL(textChanged(QString)),
-          model_, SLOT(SetFilterText(QString)));
+  connect(ui_->filter, SIGNAL(textChanged(QString)), model_,
+          SLOT(SetFilterText(QString)));
 
   // Load settings
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  switch (s.value("sort_by", IcecastModel::SortMode_GenreByPopularity).toInt()) {
+  switch (
+      s.value("sort_by", IcecastModel::SortMode_GenreByPopularity).toInt()) {
     case IcecastModel::SortMode_GenreByPopularity:
       ui_->action_sort_genre_popularity->trigger();
       break;

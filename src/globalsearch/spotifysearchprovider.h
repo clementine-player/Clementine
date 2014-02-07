@@ -24,11 +24,10 @@
 class SpotifyServer;
 class SpotifyService;
 
-
 class SpotifySearchProvider : public SearchProvider {
   Q_OBJECT
 
-public:
+ public:
   SpotifySearchProvider(Application* app, QObject* parent = 0);
 
   void SearchAsync(int id, const QString& query);
@@ -38,21 +37,21 @@ public:
   bool IsLoggedIn();
   void ShowConfig();
 
-private slots:
+ private slots:
   void ServerDestroyed();
   void SearchFinishedSlot(const pb::spotify::SearchResponse& response);
   void ArtLoadedSlot(const QString& id, const QImage& image);
   void SuggestionsLoaded(const pb::spotify::LoadPlaylistResponse& response);
   void SuggestionsLoaded(const pb::spotify::BrowseToplistResponse& response);
 
-private:
+ private:
   SpotifyServer* server();
 
   void LoadSuggestions();
   void AddSuggestionFromTrack(const pb::spotify::Track& track);
   void AddSuggestionFromAlbum(const pb::spotify::Album& album);
 
-private:
+ private:
   SpotifyServer* server_;
   SpotifyService* service_;
 
@@ -63,4 +62,4 @@ private:
   QSet<QString> suggestions_;
 };
 
-#endif // SPOTIFYSEARCHPROVIDER_H
+#endif  // SPOTIFYSEARCHPROVIDER_H

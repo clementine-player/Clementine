@@ -72,4 +72,4 @@ class InternetViewContainer : public QWidget {
   QMap<QWidget*, HeaderData> headers_;
 };
 
-#endif // INTERNETVIEWCONTAINER_H
+#endif  // INTERNETVIEWCONTAINER_H

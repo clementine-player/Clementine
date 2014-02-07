@@ -36,7 +36,7 @@ class AlbumCoverFetcherSearch;
 class CoverProviders;
 
 // This class represents a single search-for-cover request. It identifies
-// and describes the request. 
+// and describes the request.
 struct CoverSearchRequest {
   // an unique (for one AlbumCoverFetcher) request identifier
   quint64 id;
@@ -50,7 +50,8 @@ struct CoverSearchRequest {
   bool search;
 };
 
-// This structure represents a single result of some album's cover search request.
+// This structure represents a single result of some album's cover search
+// request.
 // It contains an URL that leads to a found cover plus its description (usually
 // the "artist - album" string).
 struct CoverSearchResult {
@@ -66,12 +67,10 @@ struct CoverSearchResult {
 };
 Q_DECLARE_METATYPE(CoverSearchResult);
 
-
 // This is a complete result of a single search request (a list of results, each
 // describing one image, actually).
 typedef QList<CoverSearchResult> CoverSearchResults;
 Q_DECLARE_METATYPE(QList<CoverSearchResult>);
-
 
 // This class searches for album covers for a given query or artist/album and
 // returns URLs. It's NOT thread-safe.
@@ -79,8 +78,8 @@ class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverFetcher(CoverProviders* cover_providers,
-                    QObject* parent = 0, QNetworkAccessManager* network = 0);
+  AlbumCoverFetcher(CoverProviders* cover_providers, QObject* parent = 0,
+                    QNetworkAccessManager* network = 0);
   virtual ~AlbumCoverFetcher() {}
 
   static const int kMaxConcurrentRequests;
@@ -90,7 +89,7 @@ class AlbumCoverFetcher : public QObject {
 
   void Clear();
 
- signals:
+signals:
   void AlbumCoverFetched(quint64, const QImage& cover,
                          const CoverSearchStatistics& statistics);
   void SearchFinished(quint64, const CoverSearchResults& results,

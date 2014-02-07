@@ -25,28 +25,28 @@ class QToolButton;
 class DidYouMean : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   DidYouMean(QWidget* buddy, QWidget* parent);
 
   static const int kPadding;
 
-public slots:
+ public slots:
   void SetCorrection(const QString& correction);
   void Show(const QString& correction);
 
 signals:
   void Accepted(const QString& correction);
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
   void showEvent(QShowEvent*);
   void mouseReleaseEvent(QMouseEvent* e);
   bool eventFilter(QObject* object, QEvent* event);
 
-private:
+ private:
   void UpdateGeometry();
 
-private:
+ private:
   QWidget* buddy_;
   QString correction_;
 
@@ -65,4 +65,4 @@ private:
   int press_enter_size_;
 };
 
-#endif // DIDYOUMEAN_H
+#endif  // DIDYOUMEAN_H

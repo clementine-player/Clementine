@@ -43,38 +43,40 @@
 #include <math.h>
 
 #ifdef HAVE_MOODBAR
-# include "moodbar/moodbaritemdelegate.h"
+#include "moodbar/moodbaritemdelegate.h"
 #endif
 
 const int PlaylistView::kStateVersion = 6;
 const int PlaylistView::kGlowIntensitySteps = 24;
-const int PlaylistView::kAutoscrollGraceTimeout = 30; // seconds
+const int PlaylistView::kAutoscrollGraceTimeout = 30;  // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
 const int PlaylistView::kDropIndicatorGradientWidth = 5;
-const char* PlaylistView::kSettingBackgroundImageType = "playlistview_background_type";
-const char* PlaylistView::kSettingBackgroundImageFilename = "playlistview_background_image_file";
+const char* PlaylistView::kSettingBackgroundImageType =
+    "playlistview_background_type";
+const char* PlaylistView::kSettingBackgroundImageFilename =
+    "playlistview_background_image_file";
 
 const int PlaylistView::kDefaultBlurRadius = 0;
 const int PlaylistView::kDefaultOpacityLevel = 40;
 
-
 PlaylistProxyStyle::PlaylistProxyStyle(QStyle* base)
-  : QProxyStyle(base),
-    cleanlooks_(new QCleanlooksStyle){
-}
+    : QProxyStyle(base), cleanlooks_(new QCleanlooksStyle) {}
 
-void PlaylistProxyStyle::drawControl(
-    ControlElement element, const QStyleOption* option, QPainter* painter,
-    const QWidget* widget) const {
+void PlaylistProxyStyle::drawControl(ControlElement element,
+                                     const QStyleOption* option,
+                                     QPainter* painter,
+                                     const QWidget* widget) const {
   if (element == CE_Header) {
-    const QStyleOptionHeader* header_option = qstyleoption_cast<const QStyleOptionHeader*>(option);
+    const QStyleOptionHeader* header_option =
+        qstyleoption_cast<const QStyleOptionHeader*>(option);
     const QRect& rect = header_option->rect;
     const QString& text = header_option->text;
     const QFontMetrics& font_metrics = header_option->fontMetrics;
 
     // spaces added to make transition less abrupt
     if (rect.width() < font_metrics.width(text + "  ")) {
-      const Playlist::Column column = static_cast<Playlist::Column>(header_option->section);
+      const Playlist::Column column =
+          static_cast<Playlist::Column>(header_option->section);
       QStyleOptionHeader new_option(*header_option);
       new_option.text = Playlist::abbreviated_column_name(column);
       QProxyStyle::drawControl(element, &new_option, painter, widget);
@@ -88,7 +90,10 @@ void PlaylistProxyStyle::drawControl(
     QProxyStyle::drawControl(element, option, painter, widget);
 }
 
-void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const {
+void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element,
+                                       const QStyleOption* option,
+                                       QPainter* painter,
+                                       const QWidget* widget) const {
   if (element == QStyle::PE_PanelItemViewRow ||
       element == QStyle::PE_PanelItemViewItem)
     cleanlooks_->drawPrimitive(element, option, painter, widget);
@@ -96,57 +101,62 @@ void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element, const QStyleOpt
     QProxyStyle::drawPrimitive(element, option, painter, widget);
 }
 
-
-PlaylistView::PlaylistView(QWidget *parent)
-  : QTreeView(parent),
-    app_(nullptr),
-    style_(new PlaylistProxyStyle(style())),
-    playlist_(nullptr),
-    header_(new PlaylistHeader(Qt::Horizontal, this, this)),
-    setting_initial_header_layout_(false),
-    upgrading_from_qheaderview_(false),
-    read_only_settings_(true),
-    upgrading_from_version_(-1),
-    background_image_type_(Default),
-    previous_background_image_opacity_(0.0),
-    fade_animation_(new QTimeLine(1000, this)),
-    last_height_(-1),
-    last_width_(-1),
-    force_background_redraw_(false),
-    glow_enabled_(true),
-    currently_glowing_(false),
-    glow_intensity_step_(0),
-    rating_delegate_(nullptr),
-    inhibit_autoscroll_timer_(new QTimer(this)),
-    inhibit_autoscroll_(false),
-    currently_autoscrolling_(false),
-    row_height_(-1),
-    currenttrack_play_(":currenttrack_play.png"),
-    currenttrack_pause_(":currenttrack_pause.png"),
-    cached_current_row_row_(-1),
-    drop_indicator_row_(-1),
-    drag_over_(false),
-    dynamic_controls_(new DynamicPlaylistControls(this))
-{
+PlaylistView::PlaylistView(QWidget* parent)
+    : QTreeView(parent),
+      app_(nullptr),
+      style_(new PlaylistProxyStyle(style())),
+      playlist_(nullptr),
+      header_(new PlaylistHeader(Qt::Horizontal, this, this)),
+      setting_initial_header_layout_(false),
+      upgrading_from_qheaderview_(false),
+      read_only_settings_(true),
+      upgrading_from_version_(-1),
+      background_image_type_(Default),
+      previous_background_image_opacity_(0.0),
+      fade_animation_(new QTimeLine(1000, this)),
+      last_height_(-1),
+      last_width_(-1),
+      force_background_redraw_(false),
+      glow_enabled_(true),
+      currently_glowing_(false),
+      glow_intensity_step_(0),
+      rating_delegate_(nullptr),
+      inhibit_autoscroll_timer_(new QTimer(this)),
+      inhibit_autoscroll_(false),
+      currently_autoscrolling_(false),
+      row_height_(-1),
+      currenttrack_play_(":currenttrack_play.png"),
+      currenttrack_pause_(":currenttrack_pause.png"),
+      cached_current_row_row_(-1),
+      drop_indicator_row_(-1),
+      drag_over_(false),
+      dynamic_controls_(new DynamicPlaylistControls(this)) {
   setHeader(header_);
   header_->setMovable(true);
   setStyle(style_);
   setMouseTracking(true);
 
-  connect(header_, SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
-  connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
-  connect(header_, SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)), SLOT(SaveGeometry()));
-  connect(header_, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(SaveGeometry()));
-  connect(header_, SIGNAL(sectionResized(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
-  connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
-  connect(header_, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header_, SIGNAL(sectionResized(int, int, int)), SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(sectionMoved(int, int, int)), SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)),
+          SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(SectionVisibilityChanged(int, bool)),
+          SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(sectionResized(int, int, int)),
+          SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header_, SIGNAL(sectionMoved(int, int, int)),
+          SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header_, SIGNAL(SectionVisibilityChanged(int, bool)),
+          SLOT(InvalidateCachedCurrentPixmap()));
   connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(SaveSettings()));
-  connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(StretchChanged(bool)));
+  connect(header_, SIGNAL(StretchEnabledChanged(bool)),
+          SLOT(StretchChanged(bool)));
   connect(header_, SIGNAL(MouseEntered()), SLOT(RatingHoverOut()));
 
   inhibit_autoscroll_timer_->setInterval(kAutoscrollGraceTimeout * 1000);
   inhibit_autoscroll_timer_->setSingleShot(true);
-  connect(inhibit_autoscroll_timer_, SIGNAL(timeout()), SLOT(InhibitAutoscrollTimeout()));
+  connect(inhibit_autoscroll_timer_, SIGNAL(timeout()),
+          SLOT(InhibitAutoscrollTimeout()));
 
   horizontalScrollBar()->installEventFilter(this);
   verticalScrollBar()->installEventFilter(this);
@@ -161,11 +171,12 @@ PlaylistView::PlaylistView(QWidget *parent)
   setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 #endif
   // For fading
-  connect(fade_animation_, SIGNAL(valueChanged(qreal)), SLOT(FadePreviousBackgroundImage(qreal)));
-  fade_animation_->setDirection(QTimeLine::Backward); // 1.0 -> 0.0
+  connect(fade_animation_, SIGNAL(valueChanged(qreal)),
+          SLOT(FadePreviousBackgroundImage(qreal)));
+  fade_animation_->setDirection(QTimeLine::Backward);  // 1.0 -> 0.0
 }
 
-void PlaylistView::SetApplication(Application *app) {
+void PlaylistView::SetApplication(Application* app) {
   Q_ASSERT(app);
   app_ = app;
   connect(app_->current_art_loader(),
@@ -182,38 +193,57 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
 
   setItemDelegate(new PlaylistDelegateBase(this));
   setItemDelegateForColumn(Playlist::Column_Title, new TextItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_Album,
+  setItemDelegateForColumn(
+      Playlist::Column_Album,
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Album));
-  setItemDelegateForColumn(Playlist::Column_Artist,
+  setItemDelegateForColumn(
+      Playlist::Column_Artist,
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Artist));
   setItemDelegateForColumn(Playlist::Column_AlbumArtist,
-      new TagCompletionItemDelegate(this, backend, Playlist::Column_AlbumArtist));
-  setItemDelegateForColumn(Playlist::Column_Genre,
+                           new TagCompletionItemDelegate(
+                               this, backend, Playlist::Column_AlbumArtist));
+  setItemDelegateForColumn(
+      Playlist::Column_Genre,
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Genre));
-  setItemDelegateForColumn(Playlist::Column_Composer,
+  setItemDelegateForColumn(
+      Playlist::Column_Composer,
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Composer));
-  setItemDelegateForColumn(Playlist::Column_Performer,
+  setItemDelegateForColumn(
+      Playlist::Column_Performer,
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Performer));
-  setItemDelegateForColumn(Playlist::Column_Grouping,
+  setItemDelegateForColumn(
+      Playlist::Column_Grouping,
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Grouping));
-  setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_Filesize, new SizeItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_Filetype, new FileTypeItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_DateCreated, new DateItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_DateModified, new DateItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_BPM, new PlaylistDelegateBase(this, tr("bpm")));
-  setItemDelegateForColumn(Playlist::Column_Samplerate, new PlaylistDelegateBase(this, ("Hz")));
-  setItemDelegateForColumn(Playlist::Column_Bitrate, new PlaylistDelegateBase(this, tr("kbps")));
-  setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Length,
+                           new LengthItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Filesize,
+                           new SizeItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Filetype,
+                           new FileTypeItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_DateCreated,
+                           new DateItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_DateModified,
+                           new DateItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_BPM,
+                           new PlaylistDelegateBase(this, tr("bpm")));
+  setItemDelegateForColumn(Playlist::Column_Samplerate,
+                           new PlaylistDelegateBase(this, ("Hz")));
+  setItemDelegateForColumn(Playlist::Column_Bitrate,
+                           new PlaylistDelegateBase(this, tr("kbps")));
+  setItemDelegateForColumn(Playlist::Column_Filename,
+                           new NativeSeparatorsDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Rating, rating_delegate_);
-  setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_LastPlayed,
+                           new LastPlayedItemDelegate(this));
 
 #ifdef HAVE_MOODBAR
-  setItemDelegateForColumn(Playlist::Column_Mood, new MoodbarItemDelegate(app_, this, this));
+  setItemDelegateForColumn(Playlist::Column_Mood,
+                           new MoodbarItemDelegate(app_, this, this));
 #endif
 
   if (app_ && app_->player()) {
-    setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, app_->player()));
+    setItemDelegateForColumn(Playlist::Column_Source,
+                             new SongSourceDelegate(this, app_->player()));
   } else {
     header_->HideSection(Playlist::Column_Source);
   }
@@ -221,18 +251,18 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
 
 void PlaylistView::SetPlaylist(Playlist* playlist) {
   if (playlist_) {
-    disconnect(playlist_, SIGNAL(CurrentSongChanged(Song)),
-               this, SLOT(MaybeAutoscroll()));
-    disconnect(playlist_, SIGNAL(DynamicModeChanged(bool)),
-               this, SLOT(DynamicModeChanged(bool)));
+    disconnect(playlist_, SIGNAL(CurrentSongChanged(Song)), this,
+               SLOT(MaybeAutoscroll()));
+    disconnect(playlist_, SIGNAL(DynamicModeChanged(bool)), this,
+               SLOT(DynamicModeChanged(bool)));
     disconnect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
 
-    disconnect(dynamic_controls_, SIGNAL(Expand()),
-               playlist_, SLOT(ExpandDynamicPlaylist()));
-    disconnect(dynamic_controls_, SIGNAL(Repopulate()),
-               playlist_, SLOT(RepopulateDynamicPlaylist()));
-    disconnect(dynamic_controls_, SIGNAL(TurnOff()),
-               playlist_, SLOT(TurnOffDynamicPlaylist()));
+    disconnect(dynamic_controls_, SIGNAL(Expand()), playlist_,
+               SLOT(ExpandDynamicPlaylist()));
+    disconnect(dynamic_controls_, SIGNAL(Repopulate()), playlist_,
+               SLOT(RepopulateDynamicPlaylist()));
+    disconnect(dynamic_controls_, SIGNAL(TurnOff()), playlist_,
+               SLOT(TurnOffDynamicPlaylist()));
   }
 
   playlist_ = playlist;
@@ -245,19 +275,23 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
   connect(playlist_, SIGNAL(RestoreFinished()), SLOT(JumpToLastPlayedTrack()));
 
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
-  connect(playlist_, SIGNAL(DynamicModeChanged(bool)), SLOT(DynamicModeChanged(bool)));
+  connect(playlist_, SIGNAL(DynamicModeChanged(bool)),
+          SLOT(DynamicModeChanged(bool)));
   connect(playlist_, SIGNAL(destroyed()), SLOT(PlaylistDestroyed()));
-  connect(dynamic_controls_, SIGNAL(Expand()), playlist_, SLOT(ExpandDynamicPlaylist()));
-  connect(dynamic_controls_, SIGNAL(Repopulate()), playlist_, SLOT(RepopulateDynamicPlaylist()));
-  connect(dynamic_controls_, SIGNAL(TurnOff()), playlist_, SLOT(TurnOffDynamicPlaylist()));
+  connect(dynamic_controls_, SIGNAL(Expand()), playlist_,
+          SLOT(ExpandDynamicPlaylist()));
+  connect(dynamic_controls_, SIGNAL(Repopulate()), playlist_,
+          SLOT(RepopulateDynamicPlaylist()));
+  connect(dynamic_controls_, SIGNAL(TurnOff()), playlist_,
+          SLOT(TurnOffDynamicPlaylist()));
 }
 
-void PlaylistView::setModel(QAbstractItemModel *m) {
+void PlaylistView::setModel(QAbstractItemModel* m) {
   if (model()) {
-    disconnect(model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-               this, SLOT(InvalidateCachedCurrentPixmap()));
-    disconnect(model(), SIGNAL(layoutAboutToBeChanged()),
-               this, SLOT(RatingHoverOut()));
+    disconnect(model(), SIGNAL(dataChanged(QModelIndex, QModelIndex)), this,
+               SLOT(InvalidateCachedCurrentPixmap()));
+    disconnect(model(), SIGNAL(layoutAboutToBeChanged()), this,
+               SLOT(RatingHoverOut()));
     // When changing the model, always invalidate the current pixmap.
     // If a remote client uses "stop after", without invaliding the stop
     // mark would not appear.
@@ -266,10 +300,10 @@ void PlaylistView::setModel(QAbstractItemModel *m) {
 
   QTreeView::setModel(m);
 
-  connect(model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-          this, SLOT(InvalidateCachedCurrentPixmap()));
-  connect(model(), SIGNAL(layoutAboutToBeChanged()),
-          this, SLOT(RatingHoverOut()));
+  connect(model(), SIGNAL(dataChanged(QModelIndex, QModelIndex)), this,
+          SLOT(InvalidateCachedCurrentPixmap()));
+  connect(model(), SIGNAL(layoutAboutToBeChanged()), this,
+          SLOT(RatingHoverOut()));
 }
 
 void PlaylistView::LoadGeometry() {
@@ -335,7 +369,7 @@ void PlaylistView::LoadGeometry() {
 
   // Make sure at least one column is visible
   bool all_hidden = true;
-  for (int i=0 ; i<header_->count() ; ++i) {
+  for (int i = 0; i < header_->count(); ++i) {
     if (!header_->isSectionHidden(i) && header_->sectionSize(i) > 0) {
       all_hidden = false;
       break;
@@ -347,8 +381,7 @@ void PlaylistView::LoadGeometry() {
 }
 
 void PlaylistView::SaveGeometry() {
-  if (read_only_settings_)
-    return;
+  if (read_only_settings_) return;
 
   QSettings settings;
   settings.beginGroup(Playlist::kSettingsGroup);
@@ -375,11 +408,11 @@ QList<QPixmap> PlaylistView::LoadBarPixmap(const QString& filename) {
 
   // Animation steps
   QList<QPixmap> ret;
-  for(int i=0 ; i<kGlowIntensitySteps ; ++i) {
+  for (int i = 0; i < kGlowIntensitySteps; ++i) {
     QImage step(image.copy());
     p.begin(&step);
     p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
-    p.setOpacity(0.4 - 0.6 * sin(float(i)/kGlowIntensitySteps * (M_PI/2)));
+    p.setOpacity(0.4 - 0.6 * sin(float(i) / kGlowIntensitySteps * (M_PI / 2)));
     p.fillRect(step.rect(), Qt::white);
     p.end();
     ret << QPixmap::fromImage(step);
@@ -394,7 +427,9 @@ void PlaylistView::drawTree(QPainter* painter, const QRegion& region) const {
   const_cast<PlaylistView*>(this)->current_paint_region_ = QRegion();
 }
 
-void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+void PlaylistView::drawRow(QPainter* painter,
+                           const QStyleOptionViewItem& option,
+                           const QModelIndex& index) const {
   QStyleOptionViewItemV4 opt(option);
 
   bool is_current = index.data(Playlist::Role_IsCurrent).toBool();
@@ -406,7 +441,7 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
 
     int step = glow_intensity_step_;
     if (step >= kGlowIntensitySteps)
-      step = 2*(kGlowIntensitySteps-1) - step + 1;
+      step = 2 * (kGlowIntensitySteps - 1) - step + 1;
 
     int row_height = opt.rect.height();
     if (row_height != row_height_) {
@@ -425,7 +460,9 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
 
     // Draw the bar
     painter->drawPixmap(opt.rect.topLeft(), currenttrack_bar_left_[step]);
-    painter->drawPixmap(opt.rect.topRight() - currenttrack_bar_right_[0].rect().topRight(), currenttrack_bar_right_[step]);
+    painter->drawPixmap(
+        opt.rect.topRight() - currenttrack_bar_right_[0].rect().topRight(),
+        currenttrack_bar_right_[step]);
     painter->drawPixmap(middle, currenttrack_bar_mid_[step]);
 
     // Draw the play icon
@@ -435,11 +472,12 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
                         is_paused ? currenttrack_pause_ : currenttrack_play_);
 
     // Set the font
-    opt.palette.setColor(QPalette::Text, QApplication::palette().color(QPalette::HighlightedText));
+    opt.palette.setColor(QPalette::Text, QApplication::palette().color(
+                                             QPalette::HighlightedText));
     opt.palette.setColor(QPalette::Highlight, Qt::transparent);
     opt.palette.setColor(QPalette::AlternateBase, Qt::transparent);
     opt.font.setItalic(true);
-    opt.decorationSize = QSize(20,20);
+    opt.decorationSize = QSize(20, 20);
 
     // Draw the actual row data on top.  We cache this, because it's fairly
     // expensive (1-2ms), and we do it many times per second.
@@ -457,7 +495,8 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
       painter->drawPixmap(opt.rect, cached_current_row_);
     } else {
       if (whole_region) {
-        const_cast<PlaylistView*>(this)->UpdateCachedCurrentRowPixmap(opt, index);
+        const_cast<PlaylistView*>(this)
+            ->UpdateCachedCurrentRowPixmap(opt, index);
         painter->drawPixmap(opt.rect, cached_current_row_);
       } else {
         QTreeView::drawRow(painter, opt, index);
@@ -487,8 +526,7 @@ void PlaylistView::InvalidateCachedCurrentPixmap() {
 
 void PlaylistView::timerEvent(QTimerEvent* event) {
   QTreeView::timerEvent(event);
-  if (event->timerId() == glow_timer_.timerId())
-    GlowIntensityChanged();
+  if (event->timerId() == glow_timer_.timerId()) GlowIntensityChanged();
 }
 
 void PlaylistView::GlowIntensityChanged() {
@@ -509,9 +547,7 @@ void PlaylistView::StartGlowing() {
     glow_timer_.start(1500 / kGlowIntensitySteps, this);
 }
 
-void PlaylistView::hideEvent(QHideEvent*) {
-  glow_timer_.stop();
-}
+void PlaylistView::hideEvent(QHideEvent*) { glow_timer_.stop(); }
 
 void PlaylistView::showEvent(QShowEvent*) {
   if (currently_glowing_ && glow_enabled_)
@@ -519,7 +555,8 @@ void PlaylistView::showEvent(QShowEvent*) {
   MaybeAutoscroll();
 }
 
-bool CompareSelectionRanges(const QItemSelectionRange& a, const QItemSelectionRange& b) {
+bool CompareSelectionRanges(const QItemSelectionRange& a,
+                            const QItemSelectionRange& b) {
   return b.bottom() < a.bottom();
 }
 
@@ -536,26 +573,28 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
 #endif
   } else if (event == QKeySequence::Copy) {
     CopyCurrentSongToClipboard();
-  } else if (event->key() == Qt::Key_Enter ||
-             event->key() == Qt::Key_Return) {
-    if (currentIndex().isValid())
-      emit PlayItem(currentIndex());
+  } else if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
+    if (currentIndex().isValid()) emit PlayItem(currentIndex());
     event->accept();
-  } else if(event->modifiers() != Qt::ControlModifier //Ctrl+Space selects the item
-      && event->key() == Qt::Key_Space) {
+  } else if (event->modifiers() !=
+                 Qt::ControlModifier  // Ctrl+Space selects the item
+             &&
+             event->key() == Qt::Key_Space) {
     emit PlayPause();
     event->accept();
-  } else if(event->key() == Qt::Key_Left) {
+  } else if (event->key() == Qt::Key_Left) {
     emit SeekTrack(-1);
     event->accept();
-  } else if(event->key() == Qt::Key_Right) {
+  } else if (event->key() == Qt::Key_Right) {
     emit SeekTrack(1);
     event->accept();
-  } else if(event->modifiers() == Qt::NoModifier // No modifier keys currently pressed...
-      // ... and key pressed is something related to text
-      && ( (event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z)
-        || event->key() == Qt::Key_Backspace
-        || event->key() == Qt::Key_Escape)) {
+  } else if (event->modifiers() ==
+                 Qt::NoModifier  // No modifier keys currently pressed...
+                 // ... and key pressed is something related to text
+             &&
+             ((event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z) ||
+              event->key() == Qt::Key_Backspace ||
+              event->key() == Qt::Key_Escape)) {
     emit FocusOnFilterSignal(event);
     event->accept();
   } else {
@@ -583,7 +622,7 @@ void PlaylistView::RemoveSelected() {
   // Store the last selected row, which is the first in the list
   int last_row = selection.first().bottom();
 
-  foreach (const QItemSelectionRange& range, selection) {
+  foreach(const QItemSelectionRange & range, selection) {
     rows_removed += range.height();
     model()->removeRows(range.top(), range.height(), range.parent());
   }
@@ -592,31 +631,35 @@ void PlaylistView::RemoveSelected() {
   // Index of the first column for the row to select
   QModelIndex new_index = model()->index(new_row, 0);
 
-  // Select the new current item, we want always the item after the last selected
+  // Select the new current item, we want always the item after the last
+  // selected
   if (new_index.isValid()) {
     // Update visual selection with the entire row
-    selectionModel()->select(QItemSelection(new_index, model()->index(new_row, model()->columnCount()-1)),
-                                            QItemSelectionModel::Select);
+    selectionModel()->select(
+        QItemSelection(new_index,
+                       model()->index(new_row, model()->columnCount() - 1)),
+        QItemSelectionModel::Select);
     // Update keyboard selected row, if it's not the first row
     if (new_row != 0)
-      keyPressEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_Down, Qt::NoModifier));
+      keyPressEvent(
+          new QKeyEvent(QEvent::KeyPress, Qt::Key_Down, Qt::NoModifier));
   } else {
     // We're removing the last item, select the new last row
-    selectionModel()->select(QItemSelection(model()->index(model()->rowCount()-1, 0),
-                             model()->index(model()->rowCount()-1, model()->columnCount()-1)),
-                             QItemSelectionModel::Select);
+    selectionModel()->select(
+        QItemSelection(model()->index(model()->rowCount() - 1, 0),
+                       model()->index(model()->rowCount() - 1,
+                                      model()->columnCount() - 1)),
+        QItemSelectionModel::Select);
   }
 }
 
 QList<int> PlaylistView::GetEditableColumns() {
   QList<int> columns;
   QHeaderView* h = header();
-  for (int col=0; col<h->count(); col++) {
-    if (h->isSectionHidden(col))
-      continue;
+  for (int col = 0; col < h->count(); col++) {
+    if (h->isSectionHidden(col)) continue;
     QModelIndex index = model()->index(0, col);
-    if (index.flags() & Qt::ItemIsEditable)
-      columns << h->visualIndex(col);
+    if (index.flags() & Qt::ItemIsEditable) columns << h->visualIndex(col);
   }
   qSort(columns);
   return columns;
@@ -627,10 +670,10 @@ QModelIndex PlaylistView::NextEditableIndex(const QModelIndex& current) {
   QHeaderView* h = header();
   int index = columns.indexOf(h->visualIndex(current.column()));
 
-  if(index+1 >= columns.size())
-    return model()->index(current.row()+1, h->logicalIndex(columns.first()));
+  if (index + 1 >= columns.size())
+    return model()->index(current.row() + 1, h->logicalIndex(columns.first()));
 
-  return model()->index(current.row(), h->logicalIndex(columns[index+1]));
+  return model()->index(current.row(), h->logicalIndex(columns[index + 1]));
 }
 
 QModelIndex PlaylistView::PrevEditableIndex(const QModelIndex& current) {
@@ -638,13 +681,14 @@ QModelIndex PlaylistView::PrevEditableIndex(const QModelIndex& current) {
   QHeaderView* h = header();
   int index = columns.indexOf(h->visualIndex(current.column()));
 
-  if(index-1 < 0)
-    return model()->index(current.row()-1, h->logicalIndex(columns.last()));
+  if (index - 1 < 0)
+    return model()->index(current.row() - 1, h->logicalIndex(columns.last()));
 
-  return model()->index(current.row(), h->logicalIndex(columns[index-1]));
+  return model()->index(current.row(), h->logicalIndex(columns[index - 1]));
 }
 
-void PlaylistView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) {
+void PlaylistView::closeEditor(QWidget* editor,
+                               QAbstractItemDelegate::EndEditHint hint) {
   if (hint == QAbstractItemDelegate::NoHint) {
     QTreeView::closeEditor(editor, QAbstractItemDelegate::SubmitModelCache);
   } else if (hint == QAbstractItemDelegate::EditNextItem ||
@@ -698,7 +742,7 @@ void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
 
   update(index);
   update(old_index);
-  foreach (const QModelIndex& index, selectedIndexes()) {
+  foreach(const QModelIndex & index, selectedIndexes()) {
     if (index.column() == Playlist::Column_Rating) {
       update(index);
     }
@@ -720,7 +764,7 @@ void PlaylistView::RatingHoverOut() {
   setCursor(QCursor());
 
   update(old_index);
-  foreach (const QModelIndex& index, selectedIndexes()) {
+  foreach(const QModelIndex & index, selectedIndexes()) {
     if (index.column() == Playlist::Column_Rating) {
       update(index);
     }
@@ -741,14 +785,15 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
   if (event->button() == Qt::LeftButton && index.isValid() &&
       index.data(Playlist::Role_CanSetRating).toBool()) {
     // Calculate which star was clicked
-    double new_rating = RatingPainter::RatingForPos(
-        event->pos(), visualRect(index));
+    double new_rating =
+        RatingPainter::RatingForPos(event->pos(), visualRect(index));
 
     if (selectedIndexes().contains(index)) {
       // Update all the selected items
-      foreach (const QModelIndex& index, selectedIndexes()) {
+      foreach(const QModelIndex & index, selectedIndexes()) {
         if (index.data(Playlist::Role_CanSetRating).toBool()) {
-          playlist_->RateSong(playlist_->proxy()->mapToSource(index), new_rating);
+          playlist_->RateSong(playlist_->proxy()->mapToSource(index),
+                              new_rating);
         }
       }
     } else {
@@ -785,23 +830,21 @@ void PlaylistView::InhibitAutoscrollTimeout() {
 }
 
 void PlaylistView::MaybeAutoscroll() {
-  if (!inhibit_autoscroll_)
-    JumpToCurrentlyPlayingTrack();
+  if (!inhibit_autoscroll_) JumpToCurrentlyPlayingTrack();
 }
 
 void PlaylistView::JumpToCurrentlyPlayingTrack() {
   Q_ASSERT(playlist_);
 
-  // Usage of the "Jump to the currently playing track" action shall enable autoscroll
+  // Usage of the "Jump to the currently playing track" action shall enable
+  // autoscroll
   inhibit_autoscroll_ = false;
 
-  if (playlist_->current_row() == -1)
-    return;
+  if (playlist_->current_row() == -1) return;
 
   QModelIndex current = playlist_->proxy()->mapFromSource(
       playlist_->index(playlist_->current_row(), 0));
-  if (!current.isValid())
-    return;
+  if (!current.isValid()) return;
 
   currently_autoscrolling_ = true;
 
@@ -814,13 +857,11 @@ void PlaylistView::JumpToCurrentlyPlayingTrack() {
 void PlaylistView::JumpToLastPlayedTrack() {
   Q_ASSERT(playlist_);
 
-  if (playlist_->last_played_row() == -1)
-    return;
+  if (playlist_->last_played_row() == -1) return;
 
   QModelIndex last_played = playlist_->proxy()->mapFromSource(
       playlist_->index(playlist_->last_played_row(), 0));
-  if (!last_played.isValid())
-    return;
+  if (!last_played.isValid()) return;
 
   // Select last played song
   last_current_item_ = last_played;
@@ -844,26 +885,26 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
   // dragLeaveEvent, dropEvent and scrollContentsBy.
 
   // Draw background
-  if (background_image_type_ == Custom || background_image_type_ == AlbumCover) {
+  if (background_image_type_ == Custom ||
+      background_image_type_ == AlbumCover) {
     if (!background_image_.isNull() || !previous_background_image_.isNull()) {
       QPainter background_painter(viewport());
 
       // Check if we should recompute the background image
-      if (height() != last_height_ || width() != last_width_
-          || force_background_redraw_) {
+      if (height() != last_height_ || width() != last_width_ ||
+          force_background_redraw_) {
 
         if (background_image_.isNull()) {
           cached_scaled_background_image_ = QPixmap();
         } else {
-          cached_scaled_background_image_ = QPixmap::fromImage(
-              background_image_.scaled(
-                  width(), height(),
-                  Qt::KeepAspectRatioByExpanding,
+          cached_scaled_background_image_ =
+              QPixmap::fromImage(background_image_.scaled(
+                  width(), height(), Qt::KeepAspectRatioByExpanding,
                   Qt::SmoothTransformation));
         }
 
         last_height_ = height();
-        last_width_  = width();
+        last_width_ = width();
         force_background_redraw_ = false;
       }
 
@@ -871,18 +912,21 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       if (!cached_scaled_background_image_.isNull()) {
         // Set opactiy only if needed, as this deactivate hardware acceleration
         if (!qFuzzyCompare(previous_background_image_opacity_, qreal(0.0))) {
-          background_painter.setOpacity(1.0 - previous_background_image_opacity_);
+          background_painter.setOpacity(1.0 -
+                                        previous_background_image_opacity_);
         }
-        background_painter.drawPixmap((width() - cached_scaled_background_image_.width()) / 2,
-                                      (height() - cached_scaled_background_image_.height()) / 2,
-                                      cached_scaled_background_image_);
+        background_painter.drawPixmap(
+            (width() - cached_scaled_background_image_.width()) / 2,
+            (height() - cached_scaled_background_image_.height()) / 2,
+            cached_scaled_background_image_);
       }
       // Draw the previous background image if we're fading
       if (!previous_background_image_.isNull()) {
         background_painter.setOpacity(previous_background_image_opacity_);
-        background_painter.drawPixmap((width() - previous_background_image_.width()) / 2,
-                                      (height() - previous_background_image_.height()) / 2,
-                                      previous_background_image_);
+        background_painter.drawPixmap(
+            (width() - previous_background_image_.width()) / 2,
+            (height() - previous_background_image_.height()) / 2,
+            previous_background_image_);
       }
     }
   }
@@ -911,7 +955,7 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
   int drop_pos = -1;
   switch (dropIndicatorPosition()) {
     case QAbstractItemView::OnItem:
-      return; // Don't draw anything
+      return;  // Don't draw anything
 
     case QAbstractItemView::AboveItem:
       drop_pos = visualRect(drop_index).top();
@@ -925,8 +969,8 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       if (model()->rowCount() == 0)
         drop_pos = 1;
       else
-        drop_pos = 1 + visualRect(
-              model()->index(model()->rowCount() - 1, first_column)).bottom();
+        drop_pos = 1 + visualRect(model()->index(model()->rowCount() - 1,
+                                                 first_column)).bottom();
       break;
   }
 
@@ -944,37 +988,35 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
   gradient.setColorAt(1.0, shadow_fadeout_color);
   QPen gradient_pen(QBrush(gradient), kDropIndicatorGradientWidth * 2);
   p.setPen(gradient_pen);
-  p.drawLine(QPoint(0, drop_pos),
-             QPoint(width(), drop_pos));
+  p.drawLine(QPoint(0, drop_pos), QPoint(width(), drop_pos));
 
   // Now draw the line on top
   QPen line_pen(line_color, kDropIndicatorWidth);
   p.setPen(line_pen);
-  p.drawLine(QPoint(0, drop_pos),
-             QPoint(width(), drop_pos));
+  p.drawLine(QPoint(0, drop_pos), QPoint(width(), drop_pos));
 }
 
-void PlaylistView::dragMoveEvent(QDragMoveEvent *event) {
+void PlaylistView::dragMoveEvent(QDragMoveEvent* event) {
   QTreeView::dragMoveEvent(event);
 
   QModelIndex index(indexAt(event->pos()));
   drop_indicator_row_ = index.isValid() ? index.row() : 0;
 }
 
-void PlaylistView::dragEnterEvent(QDragEnterEvent *event) {
+void PlaylistView::dragEnterEvent(QDragEnterEvent* event) {
   QTreeView::dragEnterEvent(event);
   cached_tree_ = QPixmap();
   drag_over_ = true;
 }
 
-void PlaylistView::dragLeaveEvent(QDragLeaveEvent *event) {
+void PlaylistView::dragLeaveEvent(QDragLeaveEvent* event) {
   QTreeView::dragLeaveEvent(event);
   cached_tree_ = QPixmap();
   drag_over_ = false;
   drop_indicator_row_ = -1;
 }
 
-void PlaylistView::dropEvent(QDropEvent *event) {
+void PlaylistView::dropEvent(QDropEvent* event) {
   QTreeView::dropEvent(event);
   cached_tree_ = QPixmap();
   drop_indicator_row_ = -1;
@@ -996,10 +1038,8 @@ void PlaylistView::ReloadSettings() {
     upgrading_from_qheaderview_ = false;
   }
 
-  if (currently_glowing_ && glow_enabled_ && isVisible())
-    StartGlowing();
-  if (!glow_enabled_)
-    StopGlowing();
+  if (currently_glowing_ && glow_enabled_ && isVisible()) StartGlowing();
+  if (!glow_enabled_) StopGlowing();
 
   if (setting_initial_header_layout_) {
     header_->SetColumnWidth(Playlist::Column_Length, 0.06);
@@ -1022,13 +1062,15 @@ void PlaylistView::ReloadSettings() {
   emit ColumnAlignmentChanged(column_alignment_);
 
   // Background:
-  QVariant q_playlistview_background_type = s.value(kSettingBackgroundImageType);
+  QVariant q_playlistview_background_type =
+      s.value(kSettingBackgroundImageType);
   BackgroundImageType background_type(Default);
   // bg_enabled should also be checked for backward compatibility (in releases
   // <= 1.0, there was just a boolean to activate/deactivate the background)
   QVariant bg_enabled = s.value("bg_enabled");
   if (q_playlistview_background_type.isValid()) {
-    background_type = static_cast<BackgroundImageType>(q_playlistview_background_type.toInt());
+    background_type = static_cast<BackgroundImageType>(
+        q_playlistview_background_type.toInt());
   } else if (bg_enabled.isValid()) {
     if (bg_enabled.toBool()) {
       background_type = Default;
@@ -1036,7 +1078,8 @@ void PlaylistView::ReloadSettings() {
       background_type = None;
     }
   }
-  QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
+  QString background_image_filename =
+      s.value(kSettingBackgroundImageFilename).toString();
   int blur_radius = s.value("blur_radius", kDefaultBlurRadius).toInt();
   int opacity_level = s.value("opacity_level", kDefaultOpacityLevel).toInt();
   // Check if background properties have changed.
@@ -1046,8 +1089,7 @@ void PlaylistView::ReloadSettings() {
   // "force_background_redraw".
   if (background_image_filename != background_image_filename_ ||
       background_type != background_image_type_ ||
-      blur_radius_ != blur_radius ||
-      opacity_level_ != opacity_level) {
+      blur_radius_ != blur_radius || opacity_level_ != opacity_level) {
     // Store background properties
     background_image_type_ = background_type;
     background_image_filename_ = background_image_filename;
@@ -1066,15 +1108,15 @@ void PlaylistView::ReloadSettings() {
       cached_scaled_background_image_ = QPixmap();
       previous_background_image_ = QPixmap();
     }
-    setProperty("default_background_enabled", background_image_type_ == Default);
+    setProperty("default_background_enabled",
+                background_image_type_ == Default);
     emit BackgroundPropertyChanged();
     force_background_redraw_ = true;
   }
 }
 
 void PlaylistView::SaveSettings() {
-  if (read_only_settings_)
-    return;
+  if (read_only_settings_) return;
 
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
@@ -1084,7 +1126,8 @@ void PlaylistView::SaveSettings() {
 }
 
 void PlaylistView::StretchChanged(bool stretch) {
-  setHorizontalScrollBarPolicy(stretch ? Qt::ScrollBarAlwaysOff : Qt::ScrollBarAsNeeded);
+  setHorizontalScrollBarPolicy(stretch ? Qt::ScrollBarAlwaysOff
+                                       : Qt::ScrollBarAsNeeded);
   SaveGeometry();
 }
 
@@ -1127,31 +1170,29 @@ void PlaylistView::rowsInserted(const QModelIndex& parent, int start, int end) {
   if (at_end) {
     // If the rows were inserted at the end of the playlist then let's scroll
     // the view so the user can see.
-    scrollTo(model()->index(start, 0, parent), QAbstractItemView::PositionAtTop);
+    scrollTo(model()->index(start, 0, parent),
+             QAbstractItemView::PositionAtTop);
   }
 }
 
 ColumnAlignmentMap PlaylistView::DefaultColumnAlignment() {
   ColumnAlignmentMap ret;
 
-  ret[Playlist::Column_Length] =
-  ret[Playlist::Column_Track] =
-  ret[Playlist::Column_Disc] =
-  ret[Playlist::Column_Year] =
-  ret[Playlist::Column_BPM] =
-  ret[Playlist::Column_Bitrate] =
-  ret[Playlist::Column_Samplerate] =
-  ret[Playlist::Column_Filesize] =
-  ret[Playlist::Column_PlayCount] =
-  ret[Playlist::Column_SkipCount] = (Qt::AlignRight | Qt::AlignVCenter);
-  ret[Playlist::Column_Score]     = (Qt::AlignCenter);
+  ret[Playlist::Column_Length] = ret[Playlist::Column_Track] =
+      ret[Playlist::Column_Disc] = ret[Playlist::Column_Year] =
+          ret[Playlist::Column_BPM] = ret[Playlist::Column_Bitrate] =
+              ret[Playlist::Column_Samplerate] =
+                  ret[Playlist::Column_Filesize] =
+                      ret[Playlist::Column_PlayCount] =
+                          ret[Playlist::Column_SkipCount] =
+                              (Qt::AlignRight | Qt::AlignVCenter);
+  ret[Playlist::Column_Score] = (Qt::AlignCenter);
 
   return ret;
 }
 
 void PlaylistView::SetColumnAlignment(int section, Qt::Alignment alignment) {
-  if (section < 0)
-    return;
+  if (section < 0) return;
 
   column_alignment_[section] = alignment;
   emit ColumnAlignmentChanged(column_alignment_);
@@ -1166,21 +1207,23 @@ void PlaylistView::CopyCurrentSongToClipboard() const {
   // Get the display text of all visible columns.
   QStringList columns;
 
-  for (int i=0 ; i<header()->count() ; ++i) {
+  for (int i = 0; i < header()->count(); ++i) {
     if (header()->isSectionHidden(i)) {
       continue;
     }
 
-    const QVariant data = model()->data(
-          currentIndex().sibling(currentIndex().row(), i));
+    const QVariant data =
+        model()->data(currentIndex().sibling(currentIndex().row(), i));
     if (data.type() == QVariant::String) {
       columns << data.toString();
     }
   }
 
   // Get the song's URL
-  const QUrl url = model()->data(currentIndex().sibling(
-      currentIndex().row(), Playlist::Column_Filename)).toUrl();
+  const QUrl url = model()
+                       ->data(currentIndex().sibling(currentIndex().row(),
+                                                     Playlist::Column_Filename))
+                       .toUrl();
 
   QMimeData* mime_data = new QMimeData;
   mime_data->setUrls(QList<QUrl>() << url);
@@ -1189,11 +1232,9 @@ void PlaylistView::CopyCurrentSongToClipboard() const {
   QApplication::clipboard()->setMimeData(mime_data);
 }
 
-void PlaylistView::CurrentSongChanged(const Song& song,
-                                      const QString& uri,
+void PlaylistView::CurrentSongChanged(const Song& song, const QString& uri,
                                       const QImage& song_art) {
-  if (current_song_cover_art_ == song_art)
-    return;
+  if (current_song_cover_art_ == song_art) return;
 
   current_song_cover_art_ = song_art;
   if (background_image_type_ == AlbumCover) {
@@ -1220,12 +1261,15 @@ void PlaylistView::set_background_image(const QImage& image) {
   if (!background_image_.isNull()) {
     // Apply opacity filter
     uchar* bits = background_image_.bits();
-    for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
-      bits[i+3] = (opacity_level_ / 100.0) * 255;
+    for (int i = 0;
+         i < background_image_.height() * background_image_.bytesPerLine();
+         i += 4) {
+      bits[i + 3] = (opacity_level_ / 100.0) * 255;
     }
 
     if (blur_radius_ != 0) {
-      QImage blurred(background_image_.size(), QImage::Format_ARGB32_Premultiplied);
+      QImage blurred(background_image_.size(),
+                     QImage::Format_ARGB32_Premultiplied);
       blurred.fill(Qt::transparent);
       QPainter blur_painter(&blurred);
       qt_blurImage(&blur_painter, background_image_, blur_radius_, true, false);
@@ -1265,8 +1309,7 @@ void PlaylistView::focusInEvent(QFocusEvent* event) {
     // only 1 item in the view it is now impossible to select that item without
     // using the mouse.
     const QModelIndex& current = selectionModel()->currentIndex();
-    if (current.isValid() &&
-        selectionModel()->selectedIndexes().isEmpty()) {
+    if (current.isValid() && selectionModel()->selectedIndexes().isEmpty()) {
       QItemSelection new_selection(
           current.sibling(current.row(), 0),
           current.sibling(current.row(),

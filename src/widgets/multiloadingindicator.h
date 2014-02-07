@@ -26,7 +26,7 @@ class TaskManager;
 class MultiLoadingIndicator : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   MultiLoadingIndicator(QWidget* parent = 0);
 
   static const int kVerticalPadding;
@@ -40,17 +40,17 @@ public:
 signals:
   void TaskCountChange(int tasks);
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
 
-private slots:
+ private slots:
   void UpdateText();
 
-private:
+ private:
   TaskManager* task_manager_;
 
   BusyIndicator* spinner_;
   QString text_;
 };
 
-#endif // MULTILOADINGINDICATOR_H
+#endif  // MULTILOADINGINDICATOR_H

@@ -37,7 +37,7 @@ class AcoustidClient : public QObject {
   // IDs are provided by the caller when a request is started and included in
   // the Finished signal - they have no meaning to AcoustidClient.
 
-public:
+ public:
   AcoustidClient(QObject* parent = 0);
 
   // Network requests will be aborted after this interval.
@@ -58,10 +58,10 @@ public:
 signals:
   void Finished(int id, const QString& mbid);
 
-private slots:
+ private slots:
   void RequestFinished(QNetworkReply* reply, int id);
 
-private:
+ private:
   static const char* kClientId;
   static const char* kUrl;
   static const int kDefaultTimeout;
@@ -71,4 +71,4 @@ private:
   QMap<int, QNetworkReply*> requests_;
 };
 
-#endif // ACOUSTIDCLIENT_H
+#endif  // ACOUSTIDCLIENT_H

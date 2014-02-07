@@ -24,14 +24,9 @@
 
 const char* IcecastBackend::kTableName = "icecast_stations";
 
-IcecastBackend::IcecastBackend(QObject* parent)
-  : QObject(parent)
-{
-}
+IcecastBackend::IcecastBackend(QObject* parent) : QObject(parent) {}
 
-void IcecastBackend::Init(Database* db) {
-  db_ = db;
-}
+void IcecastBackend::Init(Database* db) { db_ = db; }
 
 QStringList IcecastBackend::GetGenresAlphabetical(const QString& filter) {
   QStringList ret;
@@ -41,7 +36,7 @@ QStringList IcecastBackend::GetGenresAlphabetical(const QString& filter) {
   QString where = filter.isEmpty() ? "" : "WHERE name LIKE :filter";
 
   QString sql = QString("SELECT DISTINCT genre FROM %1 %2 ORDER BY genre")
-      .arg(kTableName, where);
+                    .arg(kTableName, where);
 
   QSqlQuery q(sql, db);
   if (!filter.isEmpty()) {
@@ -64,10 +59,11 @@ QStringList IcecastBackend::GetGenresByPopularity(const QString& filter) {
 
   QString where = filter.isEmpty() ? "" : "WHERE name LIKE :filter";
 
-  QString sql = QString("SELECT genre, COUNT(*) AS count FROM %1 "
-                        " %2"
-                        " GROUP BY genre"
-                        " ORDER BY count DESC").arg(kTableName, where);
+  QString sql = QString(
+                    "SELECT genre, COUNT(*) AS count FROM %1 "
+                    " %2"
+                    " GROUP BY genre"
+                    " ORDER BY count DESC").arg(kTableName, where);
   QSqlQuery q(sql, db);
   if (!filter.isEmpty()) {
     q.bindValue(":filter", QString("%" + filter + "%"));
@@ -100,30 +96,29 @@ IcecastBackend::StationList IcecastBackend::GetStations(const QString& filter,
     bound_items << "%" + filter + "%";
   }
 
-  QString sql = QString("SELECT name, url, mime_type, bitrate, channels,"
-                        "       samplerate, genre"
-                        " FROM %1").arg(kTableName);
+  QString sql = QString(
+                    "SELECT name, url, mime_type, bitrate, channels,"
+                    "       samplerate, genre"
+                    " FROM %1").arg(kTableName);
 
   if (!where_clauses.isEmpty()) {
     sql += " WHERE " + where_clauses.join(" AND ");
   }
   QSqlQuery q(sql, db);
-  foreach (const QString& value, bound_items) {
-    q.addBindValue(value);
-  }
+  foreach(const QString & value, bound_items) { q.addBindValue(value); }
 
   q.exec();
   if (db_->CheckErrors(q)) return ret;
 
   while (q.next()) {
     Station station;
-    station.name       = q.value(0).toString();
-    station.url        = QUrl(q.value(1).toString());
-    station.mime_type  = q.value(2).toString();
-    station.bitrate    = q.value(3).toInt();
-    station.channels   = q.value(4).toInt();
+    station.name = q.value(0).toString();
+    station.url = QUrl(q.value(1).toString());
+    station.mime_type = q.value(2).toString();
+    station.bitrate = q.value(3).toInt();
+    station.channels = q.value(4).toInt();
     station.samplerate = q.value(5).toInt();
-    station.genre      = q.value(6).toString();
+    station.genre = q.value(6).toString();
     ret << station;
   }
   return ret;
@@ -148,14 +143,16 @@ void IcecastBackend::ClearAndAddStations(const StationList& stations) {
     q.exec();
     if (db_->CheckErrors(q)) return;
 
-    q = QSqlQuery(QString("INSERT INTO %1 (name, url, mime_type, bitrate,"
-                          "                channels, samplerate, genre)"
-                          " VALUES (:name, :url, :mime_type, :bitrate,"
-                          "         :channels, :samplerate, :genre)")
-                  .arg(kTableName), db);
+    q = QSqlQuery(
+        QString(
+            "INSERT INTO %1 (name, url, mime_type, bitrate,"
+            "                channels, samplerate, genre)"
+            " VALUES (:name, :url, :mime_type, :bitrate,"
+            "         :channels, :samplerate, :genre)").arg(kTableName),
+        db);
 
     // Add these ones
-    foreach (const Station& station, stations) {
+    foreach(const Station & station, stations) {
       q.bindValue(":name", station.name);
       q.bindValue(":url", station.url);
       q.bindValue(":mime_type", station.mime_type);

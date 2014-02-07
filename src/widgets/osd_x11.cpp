@@ -29,7 +29,7 @@
 #include <QCoreApplication>
 #include <QTextDocument>
 
-QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image) {
+QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image) {
   if (image.isNull()) {
     // Sometimes this gets called with a null QImage for no obvious reason.
     arg.beginStructure();
@@ -47,8 +47,8 @@ QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image) {
   // ABGR -> GBAR
   QImage i(scaled.size(), scaled.format());
   for (int y = 0; y < i.height(); ++y) {
-    QRgb* p = (QRgb*) scaled.scanLine(y);
-    QRgb* q = (QRgb*) i.scanLine(y);
+    QRgb* p = (QRgb*)scaled.scanLine(y);
+    QRgb* q = (QRgb*)i.scanLine(y);
     QRgb* end = p + scaled.width();
     while (p < end) {
       *q = qRgba(qGreen(*p), qBlue(*p), qAlpha(*p), qRed(*p));
@@ -71,12 +71,12 @@ QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image) {
   return arg;
 }
 
-const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image) {
+const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image) {
   // This is needed to link but shouldn't be called.
   Q_ASSERT(0);
   return arg;
 }
-#endif // HAVE_DBUS
+#endif  // HAVE_DBUS
 
 void OSD::Init() {
 #ifdef HAVE_DBUS
@@ -84,12 +84,11 @@ void OSD::Init() {
 
   interface_.reset(new OrgFreedesktopNotificationsInterface(
       OrgFreedesktopNotificationsInterface::staticInterfaceName(),
-      "/org/freedesktop/Notifications",
-      QDBusConnection::sessionBus()));
+      "/org/freedesktop/Notifications", QDBusConnection::sessionBus()));
   if (!interface_->isValid()) {
     qLog(Warning) << "Error connecting to notifications service.";
   }
-#endif // HAVE_DBUS
+#endif  // HAVE_DBUS
 }
 
 bool OSD::SupportsNativeNotifications() {
@@ -100,15 +99,12 @@ bool OSD::SupportsNativeNotifications() {
 #endif
 }
 
-bool OSD::SupportsTrayPopups() {
-  return true;
-}
+bool OSD::SupportsTrayPopups() { return true; }
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QString& icon, const QImage& image) {
 #ifdef HAVE_DBUS
-  if (!interface_)
-    return;
+  if (!interface_) return;
 
   QVariantMap hints;
   if (!image.isNull()) {
@@ -116,29 +112,23 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
   }
 
   int id = 0;
-  if (last_notification_time_.secsTo(QDateTime::currentDateTime()) * 1000
-      < timeout_msec_) {
+  if (last_notification_time_.secsTo(QDateTime::currentDateTime()) * 1000 <
+      timeout_msec_) {
     // Reuse the existing popup if it's still open.  The reason we don't always
     // reuse the popup is because the notification daemon on KDE4 won't re-show
     // the bubble if it's already gone to the tray.  See issue #118
     id = notification_id_;
   }
 
-  QDBusPendingReply<uint> reply = interface_->Notify(
-      QCoreApplication::applicationName(),
-      id,
-      icon,
-      summary,
-      message,
-      QStringList(),
-      hints,
-      timeout_msec_);
+  QDBusPendingReply<uint> reply =
+      interface_->Notify(QCoreApplication::applicationName(), id, icon, summary,
+                         message, QStringList(), hints, timeout_msec_);
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
   connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-      SLOT(CallFinished(QDBusPendingCallWatcher*)));
-#else // HAVE_DBUS
+          SLOT(CallFinished(QDBusPendingCallWatcher*)));
+#else   // HAVE_DBUS
   qLog(Warning) << "not implemented";
-#endif // HAVE_DBUS
+#endif  // HAVE_DBUS
 }
 
 #ifdef HAVE_DBUS

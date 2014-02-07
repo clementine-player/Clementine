@@ -25,21 +25,21 @@ class Ui_TranscoderOptionsMP3;
 class TranscoderOptionsMP3 : public TranscoderOptionsInterface {
   Q_OBJECT
 
-public:
+ public:
   TranscoderOptionsMP3(QWidget* parent = 0);
   ~TranscoderOptionsMP3();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void QualitySliderChanged(int value);
   void QualitySpinboxChanged(double value);
 
-private:
+ private:
   static const char* kSettingsGroup;
 
   Ui_TranscoderOptionsMP3* ui_;
 };
 
-#endif // TRANSCODEROPTIONSMP3_H
+#endif  // TRANSCODEROPTIONSMP3_H

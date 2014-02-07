@@ -61,7 +61,7 @@ class SystemTrayIcon : public QObject {
   virtual void LastFMButtonBanStateChanged(bool value) {}
   virtual void MuteButtonStateChanged(bool value) {}
 
- signals:
+signals:
   void ChangeVolume(int delta);
   void SeekForward();
   void SeekBackward();
@@ -84,4 +84,4 @@ class SystemTrayIcon : public QObject {
   QPixmap current_state_icon_;
 };
 
-#endif // SYSTEMTRAYICON_H
+#endif  // SYSTEMTRAYICON_H

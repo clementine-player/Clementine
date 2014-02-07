@@ -31,7 +31,7 @@ class QProcess;
 class TagReaderClient : public QObject {
   Q_OBJECT
 
-public:
+ public:
   TagReaderClient(QObject* parent = 0);
 
   typedef AbstractMessageHandler<pb::tagreader::Message> HandlerType;
@@ -47,10 +47,8 @@ public:
   ReplyType* UpdateSongRating(const Song& metadata);
   ReplyType* IsMediaFile(const QString& filename);
   ReplyType* LoadEmbeddedArt(const QString& filename);
-  ReplyType* ReadCloudFile(const QUrl& download_url,
-                           const QString& title,
-                           int size,
-                           const QString& mime_type,
+  ReplyType* ReadCloudFile(const QUrl& download_url, const QString& title,
+                           int size, const QString& mime_type,
                            const QString& authorisation_header);
 
   // Convenience functions that call the above functions and wait for a
@@ -66,14 +64,14 @@ public:
   // TODO: Make this not a singleton
   static TagReaderClient* Instance() { return sInstance; }
 
-public slots:
+ public slots:
   void UpdateSongsStatistics(const SongList& songs);
   void UpdateSongsRating(const SongList& songs);
 
-private slots:
+ private slots:
   void WorkerFailedToStart();
 
-private:
+ private:
   static TagReaderClient* sInstance;
 
   WorkerPool<HandlerType>* worker_pool_;
@@ -82,4 +80,4 @@ private:
 
 typedef TagReaderClient::ReplyType TagReaderReply;
 
-#endif // TAGREADERCLIENT_H
+#endif  // TAGREADERCLIENT_H

@@ -23,17 +23,17 @@
 class Ui_TranscoderOptionsSpeex;
 
 class TranscoderOptionsSpeex : public TranscoderOptionsInterface {
-public:
+ public:
   TranscoderOptionsSpeex(QWidget* parent = 0);
   ~TranscoderOptionsSpeex();
 
   void Load();
   void Save();
 
-private:
+ private:
   static const char* kSettingsGroup;
 
   Ui_TranscoderOptionsSpeex* ui_;
 };
 
-#endif // TRANSCODEROPTIONSSPEEX_H
+#endif  // TRANSCODEROPTIONSSPEEX_H

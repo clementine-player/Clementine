@@ -23,14 +23,14 @@
 class ClickableLabel : public QLabel {
   Q_OBJECT
 
-public:
+ public:
   ClickableLabel(QWidget* parent = 0);
 
 signals:
   void Clicked();
 
-protected:
+ protected:
   void mousePressEvent(QMouseEvent* event);
 };
 
-#endif // CLICKABLELABEL_H
+#endif  // CLICKABLELABEL_H

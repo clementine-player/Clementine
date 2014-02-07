@@ -24,9 +24,10 @@
 namespace smart_playlists {
 
 class QueryGenerator : public Generator {
-public:
+ public:
   QueryGenerator();
-  QueryGenerator(const QString& name, const Search& search, bool dynamic = false);
+  QueryGenerator(const QString& name, const Search& search,
+                 bool dynamic = false);
 
   QString type() const { return "Query"; }
 
@@ -40,9 +41,9 @@ public:
   void set_dynamic(bool dynamic) { dynamic_ = dynamic; }
 
   Search search() const { return search_; }
-  int GetDynamicFuture () { return search_.limit_; }
+  int GetDynamicFuture() { return search_.limit_; }
 
-private:
+ private:
   Search search_;
   bool dynamic_;
 
@@ -50,6 +51,6 @@ private:
   int current_pos_;
 };
 
-} // namespace
+}  // namespace
 
-#endif // QUERYPLAYLISTGENERATOR_H
+#endif  // QUERYPLAYLISTGENERATOR_H

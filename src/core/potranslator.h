@@ -26,11 +26,12 @@
 
 class PoTranslator : public QTranslator {
  public:
-  QString translate(const char* context, const char* source_text, const char* disambiguation = 0) const {
+  QString translate(const char* context, const char* source_text,
+                    const char* disambiguation = 0) const {
     QString ret = QTranslator::translate(context, source_text, disambiguation);
     if (!ret.isEmpty()) return ret;
     return QTranslator::translate(NULL, source_text, disambiguation);
   }
 };
 
-#endif // POTRANSLATOR_H
+#endif  // POTRANSLATOR_H

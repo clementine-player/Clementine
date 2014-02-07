@@ -6,18 +6,12 @@
 class PlaylistListModel : public QStandardItemModel {
   Q_OBJECT
 
-public:
+ public:
   PlaylistListModel(QObject* parent = 0);
 
-  enum Types {
-    Type_Folder,
-    Type_Playlist
-  };
+  enum Types { Type_Folder, Type_Playlist };
 
-  enum Roles {
-    Role_Type = Qt::UserRole,
-    Role_PlaylistId
-  };
+  enum Roles { Role_Type = Qt::UserRole, Role_PlaylistId };
 
   bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row,
                     int column, const QModelIndex& parent);
@@ -54,17 +48,17 @@ signals:
   void PlaylistPathChanged(int id, const QString& new_path);
   void PlaylistRenamed(int id, const QString& new_name);
 
-private slots:
+ private slots:
   void RowsChanged(const QModelIndex& begin, const QModelIndex& end);
   void RowsAboutToBeRemoved(const QModelIndex& parent, int start, int end);
   void RowsInserted(const QModelIndex& parent, int start, int end);
 
-private:
+ private:
   void AddRowMappings(const QModelIndex& begin, const QModelIndex& end);
   void AddRowItem(QStandardItem* item, const QString& parent_path);
   void UpdatePathsRecursive(const QModelIndex& parent);
 
-private:
+ private:
   bool dropping_rows_;
 
   QIcon playlist_icon_;
@@ -74,4 +68,4 @@ private:
   QMap<QString, QStandardItem*> folders_by_path_;
 };
 
-#endif // PLAYLISTLISTMODEL_H
+#endif  // PLAYLISTLISTMODEL_H

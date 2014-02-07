@@ -9,12 +9,9 @@ template <typename T, typename D>
 class BoundFutureWatcher : public QFutureWatcher<T>, boost::noncopyable {
  public:
   BoundFutureWatcher(const D& data, QObject* parent = 0)
-      : QFutureWatcher<T>(parent),
-        data_(data) {
-  }
+      : QFutureWatcher<T>(parent), data_(data) {}
 
-  ~BoundFutureWatcher() {
-  }
+  ~BoundFutureWatcher() {}
 
   const D& data() const { return data_; }
 

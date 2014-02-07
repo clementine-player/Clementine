@@ -34,7 +34,7 @@ class QStandardItem;
 class QStandardItemModel;
 
 class SizeOverlayDelegate : public QStyledItemDelegate {
-public:
+ public:
   static const int kMargin;
   static const int kPaddingX;
   static const int kPaddingY;
@@ -49,20 +49,20 @@ public:
              const QModelIndex& index) const;
 };
 
-
 // This is a dialog that lets the user search for album covers
 class AlbumCoverSearcher : public QDialog {
   Q_OBJECT
 
-public:
-  AlbumCoverSearcher(const QIcon& no_cover_icon, Application* app, QWidget* parent);
+ public:
+  AlbumCoverSearcher(const QIcon& no_cover_icon, Application* app,
+                     QWidget* parent);
   ~AlbumCoverSearcher();
 
   enum Role {
     Role_ImageURL = Qt::UserRole + 1,
     Role_ImageRequestId,
     Role_ImageFetchFinished,
-    Role_ImageDimensions, // width * height
+    Role_ImageDimensions,  // width * height
     Role_ImageSize,
   };
 
@@ -70,17 +70,17 @@ public:
 
   QImage Exec(const QString& artist, const QString& album);
 
-protected:
-  void keyPressEvent(QKeyEvent *);
+ protected:
+  void keyPressEvent(QKeyEvent*);
 
-private slots:
+ private slots:
   void Search();
   void SearchFinished(quint64 id, const CoverSearchResults& results);
   void ImageLoaded(quint64 id, const QImage& image);
 
   void CoverDoubleClicked(const QModelIndex& index);
 
-private:
+ private:
   Ui_AlbumCoverSearcher* ui_;
 
   Application* app_;
@@ -94,4 +94,4 @@ private:
   QMap<quint64, QStandardItem*> cover_loading_tasks_;
 };
 
-#endif // ALBUMCOVERSEARCHER_H
+#endif  // ALBUMCOVERSEARCHER_H

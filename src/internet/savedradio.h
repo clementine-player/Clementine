@@ -33,16 +33,14 @@ class SavedRadio : public InternetService {
   SavedRadio(Application* app, InternetModel* parent);
   ~SavedRadio();
 
-  enum ItemType {
-    Type_Stream = 2000,
-  };
+  enum ItemType { Type_Stream = 2000, };
 
   struct Stream {
     Stream(const QUrl& url, const QString& name = QString())
-      : url_(url), name_(name) {}
+        : url_(url), name_(name) {}
 
     // For QList::contains
-    bool operator ==(const Stream& other) const { return url_ == other.url_; }
+    bool operator==(const Stream& other) const { return url_ == other.url_; }
 
     QUrl url_;
     QString name_;
@@ -61,7 +59,7 @@ class SavedRadio : public InternetService {
 
   StreamList Streams() const { return streams_; }
 
- signals:
+signals:
   void ShowAddStreamDialog();
   void StreamsChanged();
 
@@ -86,4 +84,4 @@ class SavedRadio : public InternetService {
   std::unique_ptr<AddStreamDialog> edit_dialog_;
 };
 
-#endif // SAVEDRADIO_H
+#endif  // SAVEDRADIO_H

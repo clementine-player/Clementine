@@ -35,20 +35,20 @@ class QLabel;
 class PlaylistContainer : public QWidget {
   Q_OBJECT
 
-public:
-  PlaylistContainer(QWidget *parent = 0);
+ public:
+  PlaylistContainer(QWidget* parent = 0);
   ~PlaylistContainer();
 
   static const char* kSettingsGroup;
 
   void SetActions(QAction* new_playlist, QAction* load_playlist,
-                  QAction* save_playlist,
-                  QAction* next_playlist, QAction* previous_playlist);
+                  QAction* save_playlist, QAction* next_playlist,
+                  QAction* previous_playlist);
   void SetManager(PlaylistManager* manager);
 
   PlaylistView* view() const;
 
-  bool eventFilter(QObject *objectWatched, QEvent *event);
+  bool eventFilter(QObject* objectWatched, QEvent* event);
 
 signals:
   void TabChanged(int id);
@@ -57,11 +57,11 @@ signals:
   void UndoRedoActionsChanged(QAction* undo, QAction* redo);
   void ViewSelectionModelChanged();
 
-protected:
+ protected:
   // QWidget
-  void resizeEvent(QResizeEvent *);
+  void resizeEvent(QResizeEvent*);
 
-private slots:
+ private slots:
   void NewPlaylist();
   void LoadPlaylist();
   void SavePlaylist() { SavePlaylist(-1); }
@@ -86,15 +86,15 @@ private slots:
   void SelectionChanged();
   void MaybeUpdateFilter();
   void UpdateFilter();
-  void FocusOnFilter(QKeyEvent *event);
+  void FocusOnFilter(QKeyEvent* event);
 
   void UpdateNoMatchesLabel();
 
-private:
+ private:
   void UpdateActiveIcon(const QIcon& icon);
   void RepositionNoMatchesLabel(bool force = false);
 
-private:
+ private:
   static const int kFilterDelayMs;
   static const int kFilterDelayPlaylistSizeThreshold;
 
@@ -116,4 +116,4 @@ private:
   QTimer* filter_timer_;
 };
 
-#endif // PLAYLISTCONTAINER_H
+#endif  // PLAYLISTCONTAINER_H

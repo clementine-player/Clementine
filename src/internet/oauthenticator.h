@@ -20,18 +20,12 @@ class OAuthenticator : public QObject {
     REMOTE = 1,
   };
 
-  OAuthenticator(
-      const QString& client_id,
-      const QString& client_secret,
-      RedirectStyle redirect,
-      QObject* parent = 0);
-  void StartAuthorisation(
-      const QString& oauth_endpoint,
-      const QString& token_endpoint,
-      const QString& scope);
-  void RefreshAuthorisation(
-      const QString& token_endpoint,
-      const QString& refresh_token);
+  OAuthenticator(const QString& client_id, const QString& client_secret,
+                 RedirectStyle redirect, QObject* parent = 0);
+  void StartAuthorisation(const QString& oauth_endpoint,
+                          const QString& token_endpoint, const QString& scope);
+  void RefreshAuthorisation(const QString& token_endpoint,
+                            const QString& refresh_token);
 
   // Token to use now.
   const QString& access_token() const { return access_token_; }
@@ -41,7 +35,7 @@ class OAuthenticator : public QObject {
 
   const QDateTime& expiry_time() const { return expiry_time_; }
 
- signals:
+signals:
   void Finished();
 
  private slots:

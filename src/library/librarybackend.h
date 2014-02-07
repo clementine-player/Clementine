@@ -28,12 +28,14 @@
 
 class Database;
 
-namespace smart_playlists { class Search; }
+namespace smart_playlists {
+class Search;
+}
 
 class LibraryBackendInterface : public QObject {
   Q_OBJECT
 
-public:
+ public:
   LibraryBackendInterface(QObject* parent = 0) : QObject(parent) {}
   virtual ~LibraryBackendInterface() {}
 
@@ -42,9 +44,11 @@ public:
     Album(const QString& _artist, const QString& _album_name,
           const QString& _art_automatic, const QString& _art_manual,
           const QUrl& _first_url)
-            : artist(_artist), album_name(_album_name),
-              art_automatic(_art_automatic), art_manual(_art_manual),
-              first_url(_first_url) {}
+        : artist(_artist),
+          album_name(_album_name),
+          art_automatic(_art_automatic),
+          art_manual(_art_manual),
+          first_url(_first_url) {}
 
     QString artist;
     QString album_name;
@@ -66,31 +70,43 @@ public:
   virtual SongList FindSongsInDirectory(int id) = 0;
   virtual SubdirectoryList SubdirsInDirectory(int id) = 0;
   virtual DirectoryList GetAllDirectories() = 0;
-  virtual void ChangeDirPath(int id, const QString& old_path, const QString& new_path) = 0;
+  virtual void ChangeDirPath(int id, const QString& old_path,
+                             const QString& new_path) = 0;
 
-  virtual QStringList GetAllArtists(const QueryOptions& opt = QueryOptions()) = 0;
-  virtual QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions()) = 0;
-  virtual SongList GetSongsByAlbum(const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
-  virtual SongList GetSongs(
-      const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
+  virtual QStringList GetAllArtists(
+      const QueryOptions& opt = QueryOptions()) = 0;
+  virtual QStringList GetAllArtistsWithAlbums(
+      const QueryOptions& opt = QueryOptions()) = 0;
+  virtual SongList GetSongsByAlbum(
+      const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
+  virtual SongList GetSongs(const QString& artist, const QString& album,
+                            const QueryOptions& opt = QueryOptions()) = 0;
 
-  virtual SongList GetCompilationSongs(const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
+  virtual SongList GetCompilationSongs(
+      const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
 
   virtual AlbumList GetAllAlbums(const QueryOptions& opt = QueryOptions()) = 0;
-  virtual AlbumList GetAlbumsByArtist(const QString& artist, const QueryOptions& opt = QueryOptions()) = 0;
-  virtual AlbumList GetCompilationAlbums(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual AlbumList GetAlbumsByArtist(
+      const QString& artist, const QueryOptions& opt = QueryOptions()) = 0;
+  virtual AlbumList GetCompilationAlbums(
+      const QueryOptions& opt = QueryOptions()) = 0;
 
-  virtual void UpdateManualAlbumArtAsync(const QString& artist, const QString& album, const QString& art) = 0;
+  virtual void UpdateManualAlbumArtAsync(const QString& artist,
+                                         const QString& album,
+                                         const QString& art) = 0;
   virtual Album GetAlbumArt(const QString& artist, const QString& album) = 0;
 
   virtual Song GetSongById(int id) = 0;
 
-  // Returns all sections of a song with the given filename. If there's just one section
+  // Returns all sections of a song with the given filename. If there's just one
+  // section
   // the resulting list will have it's size equal to 1.
   virtual SongList GetSongsByUrl(const QUrl& url) = 0;
-  // Returns a section of a song with the given filename and beginning. If the section
+  // Returns a section of a song with the given filename and beginning. If the
+  // section
   // is not present in library, returns invalid song.
-  // Using default beginning value is suitable when searching for single-section songs.
+  // Using default beginning value is suitable when searching for single-section
+  // songs.
   virtual Song GetSongByUrl(const QUrl& url, qint64 beginning = 0) = 0;
 
   virtual void AddDirectory(const QString& path) = 0;
@@ -106,9 +122,8 @@ class LibraryBackend : public LibraryBackendInterface {
   static const char* kSettingsGroup;
 
   Q_INVOKABLE LibraryBackend(QObject* parent = 0);
-  void Init(Database* db, const QString& songs_table,
-            const QString& dirs_table, const QString& subdirs_table,
-            const QString& fts_table);
+  void Init(Database* db, const QString& songs_table, const QString& dirs_table,
+            const QString& subdirs_table, const QString& fts_table);
 
   Database* db() const { return db_; }
 
@@ -127,19 +142,25 @@ class LibraryBackend : public LibraryBackendInterface {
   DirectoryList GetAllDirectories();
   void ChangeDirPath(int id, const QString& old_path, const QString& new_path);
 
-  QStringList GetAll(const QString& column, const QueryOptions& opt = QueryOptions());
+  QStringList GetAll(const QString& column,
+                     const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions());
-  SongList GetSongsByAlbum(const QString& album, const QueryOptions& opt = QueryOptions());
-  SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions());
+  SongList GetSongsByAlbum(const QString& album,
+                           const QueryOptions& opt = QueryOptions());
+  SongList GetSongs(const QString& artist, const QString& album,
+                    const QueryOptions& opt = QueryOptions());
 
-  SongList GetCompilationSongs(const QString& album, const QueryOptions& opt = QueryOptions());
+  SongList GetCompilationSongs(const QString& album,
+                               const QueryOptions& opt = QueryOptions());
 
   AlbumList GetAllAlbums(const QueryOptions& opt = QueryOptions());
-  AlbumList GetAlbumsByArtist(const QString& artist, const QueryOptions& opt = QueryOptions());
+  AlbumList GetAlbumsByArtist(const QString& artist,
+                              const QueryOptions& opt = QueryOptions());
   AlbumList GetCompilationAlbums(const QueryOptions& opt = QueryOptions());
 
-  void UpdateManualAlbumArtAsync(const QString& artist, const QString& album, const QString& art);
+  void UpdateManualAlbumArtAsync(const QString& artist, const QString& album,
+                                 const QString& art);
   Album GetAlbumArt(const QString& artist, const QString& album);
 
   Song GetSongById(int id);
@@ -177,16 +198,19 @@ class LibraryBackend : public LibraryBackendInterface {
   void MarkSongsUnavailable(const SongList& songs, bool unavailable = true);
   void AddOrUpdateSubdirs(const SubdirectoryList& subdirs);
   void UpdateCompilations();
-  void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
-  void ForceCompilation(const QString& album, const QList<QString>& artists, bool on);
+  void UpdateManualAlbumArt(const QString& artist, const QString& album,
+                            const QString& art);
+  void ForceCompilation(const QString& album, const QList<QString>& artists,
+                        bool on);
   void IncrementPlayCount(int id);
   void IncrementSkipCount(int id, float progress);
   void ResetStatistics(int id);
   void UpdateSongRating(int id, float rating);
   void ReloadSettings();
 
- signals:
-  void DirectoryDiscovered(const Directory& dir, const SubdirectoryList& subdirs);
+signals:
+  void DirectoryDiscovered(const Directory& dir,
+                           const SubdirectoryList& subdirs);
   void DirectoryDeleted(const Directory& dir);
 
   void SongsDiscovered(const SongList& songs);
@@ -206,7 +230,6 @@ class LibraryBackend : public LibraryBackendInterface {
 
     bool has_samplers;
     bool has_not_samplers;
-
   };
 
   static const char* kNewScoreSql;
@@ -231,4 +254,4 @@ class LibraryBackend : public LibraryBackendInterface {
   bool save_ratings_in_file_;
 };
 
-#endif // LIBRARYBACKEND_H
+#endif  // LIBRARYBACKEND_H

@@ -21,11 +21,11 @@
 #include <QSortFilterProxyModel>
 
 class GlobalSearchSortModel : public QSortFilterProxyModel {
-public:
+ public:
   GlobalSearchSortModel(QObject* parent = 0);
 
-protected:
+ protected:
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
 };
 
-#endif // GLOBALSEARCHSORTMODEL_H
+#endif  // GLOBALSEARCHSORTMODEL_H

@@ -37,16 +37,16 @@ class MusicBrainzClient : public QObject {
   // IDs are provided by the caller when a request is started and included in
   // the Finished signal - they have no meaning to MusicBrainzClient.
 
-public:
+ public:
   MusicBrainzClient(QObject* parent = 0);
 
   struct Result {
     Result() : duration_msec_(0), track_(0), year_(-1) {}
 
-    bool operator <(const Result& other) const {
-      #define cmp(field) \
-        if (field < other.field) return true; \
-        if (field > other.field) return false;
+    bool operator<(const Result& other) const {
+#define cmp(field)                      \
+  if (field < other.field) return true; \
+  if (field > other.field) return false;
 
       cmp(track_);
       cmp(year_);
@@ -54,16 +54,13 @@ public:
       cmp(artist_);
       return false;
 
-      #undef cmp
+#undef cmp
     }
 
-    bool operator ==(const Result& other) const {
-      return title_ == other.title_ &&
-             artist_ == other.artist_ &&
-             album_ == other.album_ &&
-             duration_msec_ == other.duration_msec_ &&
-             track_ == other.track_ &&
-             year_ == other.year_;
+    bool operator==(const Result& other) const {
+      return title_ == other.title_ && artist_ == other.artist_ &&
+             album_ == other.album_ && duration_msec_ == other.duration_msec_ &&
+             track_ == other.track_ && year_ == other.year_;
     }
 
     QString title_;
@@ -74,7 +71,6 @@ public:
     int year_;
   };
   typedef QList<Result> ResultList;
-
 
   // Starts a request and returns immediately.  Finished() will be emitted
   // later with the same ID.
@@ -96,11 +92,11 @@ signals:
   void Finished(const QString& artist, const QString album,
                 const MusicBrainzClient::ResultList& result);
 
-private slots:
+ private slots:
   void RequestFinished(QNetworkReply* reply, int id);
   void DiscIdRequestFinished(QNetworkReply* reply);
 
-private:
+ private:
   struct Release {
     Release() : track_(0), year_(0) {}
 
@@ -122,7 +118,7 @@ private:
   static Release ParseRelease(QXmlStreamReader* reader);
   static ResultList UniqueResults(const ResultList& results);
 
-private:
+ private:
   static const char* kTrackUrl;
   static const char* kDiscUrl;
   static const char* kDateRegex;
@@ -134,12 +130,8 @@ private:
 };
 
 inline uint qHash(const MusicBrainzClient::Result& result) {
-  return qHash(result.album_) ^
-         qHash(result.artist_) ^
-         result.duration_msec_ ^
-         qHash(result.title_) ^
-         result.track_ ^
-         result.year_;
+  return qHash(result.album_) ^ qHash(result.artist_) ^ result.duration_msec_ ^
+         qHash(result.title_) ^ result.track_ ^ result.year_;
 }
 
-#endif // MUSICBRAINZCLIENT_H
+#endif  // MUSICBRAINZCLIENT_H

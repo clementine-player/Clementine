@@ -28,7 +28,7 @@ class QTimeLine;
 class VisualisationOverlay : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   VisualisationOverlay(QWidget* parent = 0);
   ~VisualisationOverlay();
 
@@ -37,25 +37,25 @@ public:
 
   QGraphicsProxyWidget* title(QGraphicsProxyWidget* proxy) const;
 
-  void SetActions(QAction* previous, QAction* play_pause,
-                  QAction* stop, QAction* next);
+  void SetActions(QAction* previous, QAction* play_pause, QAction* stop,
+                  QAction* next);
   void SetSongTitle(const QString& title);
 
-public slots:
+ public slots:
   void SetVisible(bool visible);
 
 signals:
   void OpacityChanged(qreal value);
   void ShowPopupMenu(const QPoint& pos);
 
-protected:
+ protected:
   // QWidget
-  void timerEvent(QTimerEvent *);
+  void timerEvent(QTimerEvent*);
 
-private slots:
+ private slots:
   void ShowSettingsMenu();
 
-private:
+ private:
   Ui_VisualisationOverlay* ui_;
 
   QTimeLine* fade_timeline_;
@@ -63,4 +63,4 @@ private:
   bool visible_;
 };
 
-#endif // VISUALISATIONOVERLAY_H
+#endif  // VISUALISATIONOVERLAY_H

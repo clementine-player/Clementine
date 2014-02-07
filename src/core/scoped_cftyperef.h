@@ -17,41 +17,29 @@
 // caller must own the object it gives to ScopedCFTypeRef<>, and relinquishes
 // an ownership claim to that object.  ScopedCFTypeRef<> does not call
 // CFRetain().
-template<typename CFT>
+template <typename CFT>
 class ScopedCFTypeRef {
  public:
   typedef CFT element_type;
 
-  explicit ScopedCFTypeRef(CFT object = NULL)
-      : object_(object) {
-  }
+  explicit ScopedCFTypeRef(CFT object = NULL) : object_(object) {}
 
   ~ScopedCFTypeRef() {
-    if (object_)
-      CFRelease(object_);
+    if (object_) CFRelease(object_);
   }
 
   void reset(CFT object = NULL) {
-    if (object_)
-      CFRelease(object_);
+    if (object_) CFRelease(object_);
     object_ = object;
   }
 
-  bool operator==(CFT that) const {
-    return object_ == that;
-  }
+  bool operator==(CFT that) const { return object_ == that; }
 
-  bool operator!=(CFT that) const {
-    return object_ != that;
-  }
+  bool operator!=(CFT that) const { return object_ != that; }
 
-  operator CFT() const {
-    return object_;
-  }
+  operator CFT() const { return object_; }
 
-  CFT get() const {
-    return object_;
-  }
+  CFT get() const { return object_; }
 
   void swap(ScopedCFTypeRef& that) {
     CFT temp = that.object_;

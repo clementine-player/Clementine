@@ -29,7 +29,7 @@ class Ui_GoogleDriveSettingsPage;
 class GoogleDriveSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   GoogleDriveSettingsPage(SettingsDialog* parent = 0);
   ~GoogleDriveSettingsPage();
 
@@ -39,15 +39,15 @@ public:
   // QObject
   bool eventFilter(QObject* object, QEvent* event);
 
-private slots:
+ private slots:
   void LoginClicked();
   void LogoutClicked();
   void Connected();
 
-private:
+ private:
   Ui_GoogleDriveSettingsPage* ui_;
 
   GoogleDriveService* service_;
 };
 
-#endif // GOOGLEDRIVESETTINGSPAGE_H
+#endif  // GOOGLEDRIVESETTINGSPAGE_H

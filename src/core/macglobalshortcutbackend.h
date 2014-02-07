@@ -31,7 +31,7 @@ class QAction;
 class MacGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
 
-public:
+ public:
   MacGlobalShortcutBackend(GlobalShortcuts* parent);
   virtual ~MacGlobalShortcutBackend();
 
@@ -40,11 +40,11 @@ public:
 
   void MacMediaKeyPressed(int key);
 
-protected:
+ protected:
   bool DoRegister();
   void DoUnregister();
 
-private:
+ private:
   bool KeyPressed(const QKeySequence& sequence);
 
   QMap<QKeySequence, QAction*> shortcuts_;
@@ -53,4 +53,4 @@ private:
   std::unique_ptr<MacGlobalShortcutBackendPrivate> p_;
 };
 
-#endif // MACGLOBALSHORTCUTBACKEND_H
+#endif  // MACGLOBALSHORTCUTBACKEND_H

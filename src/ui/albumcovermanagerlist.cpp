@@ -26,27 +26,22 @@
 #include "library/librarybackend.h"
 #include "playlist/songmimedata.h"
 
-AlbumCoverManagerList::AlbumCoverManagerList(QWidget *parent)
-  : QListWidget(parent),
-    manager_(nullptr)
-{
-}
+AlbumCoverManagerList::AlbumCoverManagerList(QWidget* parent)
+    : QListWidget(parent), manager_(nullptr) {}
 
-QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items) const {
+QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items)
+    const {
   // Get songs
   SongList songs;
-  foreach (QListWidgetItem* item, items) {
+  foreach(QListWidgetItem * item, items) {
     songs << manager_->GetSongsInAlbum(indexFromItem(item));
   }
 
-  if (songs.isEmpty())
-    return nullptr;
+  if (songs.isEmpty()) return nullptr;
 
   // Get URLs from the songs
   QList<QUrl> urls;
-  foreach (const Song& song, songs) {
-    urls << song.url();
-  }
+  foreach(const Song & song, songs) { urls << song.url(); }
 
   // Get the QAbstractItemModel data so the picture works
   std::unique_ptr<QMimeData> orig_data(QListWidget::mimeData(items));
@@ -55,7 +50,8 @@ QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items) 
   mime_data->backend = manager_->backend();
   mime_data->songs = songs;
   mime_data->setUrls(urls);
-  mime_data->setData(orig_data->formats()[0], orig_data->data(orig_data->formats()[0]));
+  mime_data->setData(orig_data->formats()[0],
+                     orig_data->data(orig_data->formats()[0]));
   return mime_data;
 }
 

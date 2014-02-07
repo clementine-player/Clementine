@@ -32,12 +32,10 @@ const int TrackSliderPopup::kPointWidth = 4;
 const int TrackSliderPopup::kBorderRadius = 4;
 const qreal TrackSliderPopup::kBlurRadius = 20.0;
 
-
 TrackSliderPopup::TrackSliderPopup(QWidget* parent)
-  : QWidget(parent),
-    font_metrics_(fontMetrics()),
-    small_font_metrics_(fontMetrics())
-{
+    : QWidget(parent),
+      font_metrics_(fontMetrics()),
+      small_font_metrics_(fontMetrics()) {
   setAttribute(Qt::WA_TransparentForMouseEvents);
   setMouseTracking(true);
 
@@ -69,8 +67,8 @@ void TrackSliderPopup::paintEvent(QPaintEvent*) {
 }
 
 void TrackSliderPopup::UpdatePixmap() {
-  const int text_width = qMax(font_metrics_.width(text_),
-                              small_font_metrics_.width(small_text_));
+  const int text_width =
+      qMax(font_metrics_.width(text_), small_font_metrics_.width(small_text_));
   const QRect text_rect1(kBlurRadius + kTextMargin, kBlurRadius + kTextMargin,
                          text_width + 2, font_metrics_.height());
   const QRect text_rect2(kBlurRadius + kTextMargin, text_rect1.bottom(),
@@ -84,14 +82,15 @@ void TrackSliderPopup::UpdatePixmap() {
                           bubble_bottom - kBlurRadius);
 
   if (background_cache_.size() != total_rect.size()) {
-    const QColor highlight(palette().color(QPalette::Active, QPalette::Highlight));
+    const QColor highlight(
+        palette().color(QPalette::Active, QPalette::Highlight));
     const QColor bg_color_1(highlight.lighter(110));
     const QColor bg_color_2(highlight.darker(120));
 
     QPolygon pointy;
-    pointy << QPoint(total_rect.width()/2 - kPointWidth, bubble_bottom)
-           << QPoint(total_rect.width()/2, total_rect.bottom() - kBlurRadius)
-           << QPoint(total_rect.width()/2 + kPointWidth, bubble_bottom);
+    pointy << QPoint(total_rect.width() / 2 - kPointWidth, bubble_bottom)
+           << QPoint(total_rect.width() / 2, total_rect.bottom() - kBlurRadius)
+           << QPoint(total_rect.width() / 2 + kPointWidth, bubble_bottom);
 
     QPolygon inner_pointy;
     inner_pointy << QPoint(pointy[0].x() + 1, pointy[0].y() - 1)
@@ -138,8 +137,8 @@ void TrackSliderPopup::UpdatePixmap() {
 
     // Inner bubble
     p.setBrush(bg_color_1);
-    p.drawRoundedRect(bubble_rect.adjusted(1, 1, -1, -1),
-                      kBorderRadius, kBorderRadius);
+    p.drawRoundedRect(bubble_rect.adjusted(1, 1, -1, -1), kBorderRadius,
+                      kBorderRadius);
 
     // Inner pointy
     p.drawPolygon(inner_pointy);

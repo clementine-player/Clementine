@@ -28,12 +28,11 @@
 const int VisualisationOverlay::kFadeDuration = 500;
 const int VisualisationOverlay::kFadeTimeout = 5000;
 
-VisualisationOverlay::VisualisationOverlay(QWidget *parent)
-  : QWidget(parent),
-    ui_(new Ui_VisualisationOverlay),
-    fade_timeline_(new QTimeLine(kFadeDuration, this)),
-    visible_(false)
-{
+VisualisationOverlay::VisualisationOverlay(QWidget* parent)
+    : QWidget(parent),
+      ui_(new Ui_VisualisationOverlay),
+      fade_timeline_(new QTimeLine(kFadeDuration, this)),
+      visible_(false) {
   ui_->setupUi(this);
 
   setAttribute(Qt::WA_TranslucentBackground);
@@ -42,14 +41,14 @@ VisualisationOverlay::VisualisationOverlay(QWidget *parent)
   ui_->settings->setIcon(IconLoader::Load("configure"));
   connect(ui_->settings, SIGNAL(clicked()), SLOT(ShowSettingsMenu()));
 
-  connect(fade_timeline_, SIGNAL(valueChanged(qreal)), SIGNAL(OpacityChanged(qreal)));
+  connect(fade_timeline_, SIGNAL(valueChanged(qreal)),
+          SIGNAL(OpacityChanged(qreal)));
 }
 
-VisualisationOverlay::~VisualisationOverlay() {
-  delete ui_;
-}
+VisualisationOverlay::~VisualisationOverlay() { delete ui_; }
 
-QGraphicsProxyWidget* VisualisationOverlay::title(QGraphicsProxyWidget* proxy) const {
+QGraphicsProxyWidget* VisualisationOverlay::title(QGraphicsProxyWidget* proxy)
+    const {
   return proxy->createProxyForChildWidget(ui_->song_title);
 }
 
@@ -62,7 +61,8 @@ void VisualisationOverlay::SetActions(QAction* previous, QAction* play_pause,
 }
 
 void VisualisationOverlay::ShowSettingsMenu() {
-  emit ShowPopupMenu(ui_->settings->mapToGlobal(ui_->settings->rect().bottomLeft()));
+  emit ShowPopupMenu(
+      ui_->settings->mapToGlobal(ui_->settings->rect().bottomLeft()));
 }
 
 void VisualisationOverlay::timerEvent(QTimerEvent* e) {
@@ -76,12 +76,10 @@ void VisualisationOverlay::timerEvent(QTimerEvent* e) {
 void VisualisationOverlay::SetVisible(bool visible) {
   // If we're showing the overlay, then fade out again in a little while
   fade_out_timeout_.stop();
-  if (visible)
-    fade_out_timeout_.start(kFadeTimeout, this);
+  if (visible) fade_out_timeout_.start(kFadeTimeout, this);
 
   // Don't change to the state we're in already
-  if (visible == visible_)
-    return;
+  if (visible == visible_) return;
   visible_ = visible;
 
   // If there's already another fader running then start from the same time
@@ -91,12 +89,13 @@ void VisualisationOverlay::SetVisible(bool visible) {
     start_time = fade_timeline_->currentTime();
 
   fade_timeline_->stop();
-  fade_timeline_->setDirection(visible ? QTimeLine::Forward : QTimeLine::Backward);
+  fade_timeline_->setDirection(visible ? QTimeLine::Forward
+                                       : QTimeLine::Backward);
   fade_timeline_->setCurrentTime(start_time);
   fade_timeline_->resume();
 }
 
-void VisualisationOverlay::SetSongTitle(const QString &title) {
+void VisualisationOverlay::SetSongTitle(const QString& title) {
   ui_->song_title->setText(title);
   SetVisible(true);
 }
