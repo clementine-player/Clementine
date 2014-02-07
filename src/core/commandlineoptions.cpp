@@ -66,7 +66,7 @@ const char* CommandlineOptions::kVersionText = "Clementine %1";
 CommandlineOptions::CommandlineOptions(int argc, char** argv)
     : argc_(argc),
       argv_(argv),
-      url_list_action_(UrlList_Append),
+      url_list_action_(UrlList_None),
       player_action_(Player_None),
       set_volume_(-1),
       volume_modifier_(0),
