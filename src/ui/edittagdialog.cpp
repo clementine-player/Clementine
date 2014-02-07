@@ -354,7 +354,7 @@ void EditTagDialog::InitFieldValue(const FieldData& field,
     editor->clear();
     editor->clear_hint();
     if (varies) {
-      editor->set_hint(EditTagDialog::kHintText);
+      editor->set_hint(tr(EditTagDialog::kHintText));
     } else {
       editor->set_text(data_[sel[0].row()].current_value(field.id_).toString());
     }
