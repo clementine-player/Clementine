@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GPODDERTOPTAGSPAGE_H
-#define GPODDERTOPTAGSPAGE_H
+#ifndef PODCASTS_GPODDERTOPTAGSPAGE_H_
+#define PODCASTS_GPODDERTOPTAGSPAGE_H_
 
 #include <QScopedPointer>
 
@@ -49,4 +49,4 @@ class GPodderTopTagsPage : public AddPodcastPage {
   bool done_initial_load_;
 };
 
-#endif  // GPODDERTOPTAGSPAGE_H
+#endif  // PODCASTS_GPODDERTOPTAGSPAGE_H_

@@ -43,7 +43,7 @@ const char* PodcastService::kSettingsGroup = "Podcasts";
 
 class PodcastSortProxyModel : public QSortFilterProxyModel {
  public:
-  PodcastSortProxyModel(QObject* parent = nullptr);
+  explicit PodcastSortProxyModel(QObject* parent = nullptr);
 
  protected:
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
@@ -464,7 +464,7 @@ void PodcastService::ReloadSettings() {
   s.beginGroup(LibraryView::kSettingsGroup);
 
   use_pretty_covers_ = s.value("pretty_covers", true).toBool();
-  // TODO: reload the podcast icons that are already loaded?
+  // TODO(hatstand): reload the podcast icons that are already loaded?
 }
 
 void PodcastService::EnsureAddPodcastDialogCreated() {

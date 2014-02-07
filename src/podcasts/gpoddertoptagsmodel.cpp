@@ -55,7 +55,7 @@ void GPodderTopTagsModel::fetchMore(const QModelIndex& parent) {
   // Create a little Loading... item.
   itemFromIndex(parent)->appendRow(CreateLoadingIndicator());
 
-  mygpo::PodcastListPtr list(api_->podcastsOfTag(
+  auto list(api_->podcastsOfTag(
       GPodderTopTagsPage::kMaxTagCount, parent.data().toString()));
 
   NewClosure(list, SIGNAL(finished()), this,
@@ -79,7 +79,7 @@ void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
     parent_item->removeRow(0);
   }
 
-  foreach(mygpo::PodcastPtr gpo_podcast, list->list()) {
+  for (auto gpo_podcast : list->list()) {
     Podcast podcast;
     podcast.InitFromGpo(gpo_podcast.data());
 

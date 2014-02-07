@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTPARSER_H
-#define PODCASTPARSER_H
+#ifndef PODCASTS_PODCASTPARSER_H_
+#define PODCASTS_PODCASTPARSER_H_
 
 #include <QStringList>
 
@@ -64,4 +64,4 @@ class PodcastParser {
   QStringList supported_mime_types_;
 };
 
-#endif  // PODCASTPARSER_H
+#endif  // PODCASTS_PODCASTPARSER_H_

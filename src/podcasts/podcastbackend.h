@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTBACKEND_H
-#define PODCASTBACKEND_H
+#ifndef PODCASTS_PODCASTBACKEND_H_
+#define PODCASTS_PODCASTBACKEND_H_
 
 #include <QObject>
 
@@ -70,7 +70,7 @@ class PodcastBackend : public QObject {
   // local_url) on episodes that must already exist in the database.
   void UpdateEpisodes(const PodcastEpisodeList& episodes);
 
-signals:
+ signals:
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
 
@@ -90,4 +90,4 @@ signals:
   Database* db_;
 };
 
-#endif  // PODCASTBACKEND_H
+#endif  // PODCASTS_PODCASTBACKEND_H_

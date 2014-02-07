@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTINFOWIDGET_H
-#define PODCASTINFOWIDGET_H
+#ifndef PODCASTS_PODCASTINFOWIDGET_H_
+#define PODCASTS_PODCASTINFOWIDGET_H_
 
 #include "podcast.h"
 #include "covers/albumcoverloaderoptions.h"
@@ -32,14 +32,14 @@ class PodcastInfoWidget : public QWidget {
   Q_OBJECT
 
  public:
-  PodcastInfoWidget(QWidget* parent = 0);
+  explicit PodcastInfoWidget(QWidget* parent = 0);
   ~PodcastInfoWidget();
 
   void SetApplication(Application* app);
 
   void SetPodcast(const Podcast& podcast);
 
-signals:
+ signals:
   void LoadingFinished();
 
  private slots:
@@ -55,4 +55,4 @@ signals:
   quint64 image_id_;
 };
 
-#endif  // PODCASTINFOWIDGET_H
+#endif  // PODCASTS_PODCASTINFOWIDGET_H_

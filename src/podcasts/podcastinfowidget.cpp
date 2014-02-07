@@ -38,7 +38,7 @@ PodcastInfoWidget::PodcastInfoWidget(QWidget* parent)
   label_palette.setColor(QPalette::WindowText,
                          light ? color.darker(150) : color.lighter(125));
 
-  foreach(QLabel * label, findChildren<QLabel*>()) {
+  for (QLabel * label : findChildren<QLabel*>()) {
     if (label->property("field_label").toBool()) {
       label->setPalette(label_palette);
     }
@@ -67,7 +67,7 @@ void SetText(const QString& value, T* label, QLabel* buddy_label = nullptr) {
     label->setText(value);
   }
 }
-}
+}  // namespace
 
 void PodcastInfoWidget::SetPodcast(const Podcast& podcast) {
   if (image_id_) {

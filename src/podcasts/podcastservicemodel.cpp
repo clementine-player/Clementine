@@ -26,7 +26,7 @@ QMimeData* PodcastServiceModel::mimeData(const QModelIndexList& indexes) const {
   SongMimeData* data = new SongMimeData;
   QList<QUrl> urls;
 
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex & index : indexes) {
     switch (index.data(InternetModel::Role_Type).toInt()) {
       case PodcastService::Type_Episode:
         MimeDataForEpisode(index, data, &urls);

@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OPMLCONTAINER_H
-#define OPMLCONTAINER_H
+#ifndef PODCASTS_OPMLCONTAINER_H_
+#define PODCASTS_OPMLCONTAINER_H_
 
 #include "podcast.h"
 
@@ -32,4 +32,4 @@ class OpmlContainer {
 
 Q_DECLARE_METATYPE(OpmlContainer)
 
-#endif  // OPMLCONTAINER_H
+#endif  // PODCASTS_OPMLCONTAINER_H_

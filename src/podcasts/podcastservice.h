@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTSERVICE_H
-#define PODCASTSERVICE_H
+#ifndef PODCASTS_PODCASTSERVICE_H_
+#define PODCASTS_PODCASTSERVICE_H_
 
 #include "podcastdownloader.h"
 #include "internet/internetmodel.h"
@@ -148,4 +148,4 @@ class PodcastService : public InternetService {
   QScopedPointer<AddPodcastDialog> add_podcast_dialog_;
 };
 
-#endif  // PODCASTSERVICE_H
+#endif  // PODCASTS_PODCASTSERVICE_H_

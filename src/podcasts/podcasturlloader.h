@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTURLLOADER_H
-#define PODCASTURLLOADER_H
+#ifndef PODCASTS_PODCASTURLLOADER_H_
+#define PODCASTS_PODCASTURLLOADER_H_
 
 #include <QObject>
 #include <QRegExp>
@@ -50,7 +50,7 @@ class PodcastUrlLoaderReply : public QObject {
   void SetFinished(const PodcastList& results);
   void SetFinished(const OpmlContainer& results);
 
-signals:
+ signals:
   void Finished(bool success);
 
  private:
@@ -67,7 +67,7 @@ class PodcastUrlLoader : public QObject {
   Q_OBJECT
 
  public:
-  PodcastUrlLoader(QObject* parent = 0);
+  explicit PodcastUrlLoader(QObject* parent = 0);
   ~PodcastUrlLoader();
 
   static const int kMaxRedirects;
@@ -109,4 +109,4 @@ class PodcastUrlLoader : public QObject {
   QRegExp html_link_href_re_;
 };
 
-#endif  // PODCASTURLLOADER_H
+#endif  // PODCASTS_PODCASTURLLOADER_H_

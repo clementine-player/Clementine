@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDPODCASTDIALOG_H
-#define ADDPODCASTDIALOG_H
+#ifndef PODCASTS_ADDPODCASTDIALOG_H_
+#define PODCASTS_ADDPODCASTDIALOG_H_
 
 #include "podcast.h"
 
@@ -82,4 +82,4 @@ class AddPodcastDialog : public QDialog {
   QString last_opml_path_;
 };
 
-#endif  // ADDPODCASTDIALOG_H
+#endif  // PODCASTS_ADDPODCASTDIALOG_H_

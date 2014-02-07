@@ -83,7 +83,7 @@ void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {
     return;
   }
 
-  foreach(const QVariant & result_variant, data.toMap()["results"].toList()) {
+  for (const QVariant & result_variant : data.toMap()["results"].toList()) {
     QVariantMap result(result_variant.toMap());
     if (result["kind"].toString() != "podcast") {
       continue;

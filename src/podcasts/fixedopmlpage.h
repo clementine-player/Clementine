@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FIXEDOPMLPAGE_H
-#define FIXEDOPMLPAGE_H
+#ifndef PODCASTS_FIXEDOPMLPAGE_H_
+#define PODCASTS_FIXEDOPMLPAGE_H_
 
 #include "addpodcastpage.h"
 
@@ -45,4 +45,4 @@ class FixedOpmlPage : public AddPodcastPage {
   bool done_initial_load_;
 };
 
-#endif  // FIXEDOPMLPAGE_H
+#endif  // PODCASTS_FIXEDOPMLPAGE_H_
