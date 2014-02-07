@@ -23,7 +23,11 @@
 #  define _WIN32_WINNT 0x0600
 #  include <windows.h>
 #  include <iostream>
-#endif // Q_OS_WIN32
+#endif  // Q_OS_WIN32
+
+#ifdef Q_OS_UNIX
+#  include <unistd.h>
+#endif  // Q_OS_UNIX
 
 #include <QDir>
 #include <QFont>
