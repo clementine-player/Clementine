@@ -673,7 +673,7 @@ void EditTagDialog::SaveData(const QList<Data>& data) {
     if (ref.current_.IsMetadataEqual(ref.original_)) continue;
 
     if (!TagReaderClient::Instance()->SaveFileBlocking(
-             ref.current_.url().toLocalFile(), ref.current_)) {
+            ref.current_.url().toLocalFile(), ref.current_)) {
       emit Error(tr("An error occurred writing metadata to '%1'")
                      .arg(ref.current_.url().toLocalFile()));
     }

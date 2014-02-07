@@ -309,7 +309,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       if (!info.device_) {
         if (info.database_id_ == -1 &&
             !info.BestBackend()->lister_->DeviceNeedsMount(
-                 info.BestBackend()->unique_id_)) {
+                info.BestBackend()->unique_id_)) {
 
           if (info.BestBackend()->lister_->AskForScan(
                   info.BestBackend()->unique_id_)) {

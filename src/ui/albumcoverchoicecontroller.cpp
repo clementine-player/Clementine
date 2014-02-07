@@ -132,7 +132,7 @@ void AlbumCoverChoiceController::SaveCoverToFile(const Song& song,
   QString extension = save_filename.right(4);
   if (!extension.startsWith('.') ||
       !QImageWriter::supportedImageFormats().contains(
-           extension.right(3).toUtf8())) {
+          extension.right(3).toUtf8())) {
     save_filename.append(".jpg");
   }
 

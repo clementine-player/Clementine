@@ -43,8 +43,8 @@ class BarAnalyzer : public Analyzer::Base {
   // every iteration
   uint m_lvlMapper[256];
   std::vector<aroofMemVec> m_roofMem;
-  std::vector<uint> barVector;  // positions of bars
-  std::vector<int> roofVector;  // positions of roofs
+  std::vector<uint> barVector;           // positions of bars
+  std::vector<int> roofVector;           // positions of roofs
   std::vector<uint> roofVelocityVector;  // speed that roofs falls
 
   const QPixmap* gradient() const { return &m_pixBarGradient; }

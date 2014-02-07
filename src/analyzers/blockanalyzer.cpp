@@ -14,8 +14,8 @@
 
 const uint BlockAnalyzer::HEIGHT = 2;
 const uint BlockAnalyzer::WIDTH = 4;
-const uint BlockAnalyzer::MIN_ROWS = 3;  // arbituary
-const uint BlockAnalyzer::MIN_COLUMNS = 32;  // arbituary
+const uint BlockAnalyzer::MIN_ROWS = 3;       // arbituary
+const uint BlockAnalyzer::MIN_COLUMNS = 32;   // arbituary
 const uint BlockAnalyzer::MAX_COLUMNS = 256;  // must be 2**n
 const uint BlockAnalyzer::FADE_SIZE = 90;
 

@@ -856,7 +856,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   restoreGeometry(settings_.value("geometry").toByteArray());
   if (!ui_->splitter->restoreState(
-           settings_.value("splitter_state").toByteArray())) {
+          settings_.value("splitter_state").toByteArray())) {
     ui_->splitter->setSizes(QList<int>() << 300 << width() - 300);
   }
   ui_->tabs->SetCurrentIndex(
