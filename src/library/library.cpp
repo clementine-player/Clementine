@@ -126,6 +126,8 @@ void Library::Init() {
           backend_, SLOT(UpdateMTimesOnly(SongList)));
   connect(watcher_, SIGNAL(SongsDeleted(SongList)),
           backend_, SLOT(MarkSongsUnavailable(SongList)));
+  connect(watcher_, SIGNAL(SongsReadded(SongList,bool)),
+          backend_, SLOT(MarkSongsUnavailable(SongList,bool)));
   connect(watcher_, SIGNAL(SubdirsDiscovered(SubdirectoryList)),
           backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
   connect(watcher_, SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
