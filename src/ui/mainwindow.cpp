@@ -223,7 +223,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(global_search_view_, IconLoader::Load("search"),
-                    tr("Search"));
+                    tr("Search", "Global search settings dialog title."));
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"),
                     tr("Library"));
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 
 set (XGETTEXT_OPTIONS --qt --keyword=tr:1,2c --keyword=tr --flag=tr:1:pass-c-format --flag=tr:1:pass-qt-format
     --keyword=trUtf8 --flag=tr:1:pass-c-format --flag=tr:1:pass-qt-format
-    --keyword=translate:2 --flag=translate:2:pass-c-format --flag=translate:2:pass-qt-format
+    --keyword=translate:2,3c --keyword=translate:2 --flag=translate:2:pass-c-format --flag=translate:2:pass-qt-format
     --keyword=QT_TR_NOOP --flag=QT_TR_NOOP:1:pass-c-format --flag=QT_TR_NOOP:1:pass-qt-format
     --keyword=QT_TRANSLATE_NOOP:2 --flag=QT_TRANSLATE_NOOP:2:pass-c-format --flag=QT_TRANSLATE_NOOP:2:pass-qt-format
     --keyword=_ --flag=_:1:pass-c-format --flag=_:1:pass-qt-format
