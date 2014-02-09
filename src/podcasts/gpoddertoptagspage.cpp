@@ -43,7 +43,7 @@ void GPodderTopTagsPage::Show() {
     emit Busy(true);
     done_initial_load_ = true;
 
-    auto tag_list(api_->topTags(kMaxTagCount));
+    mygpo::TagListPtr tag_list(api_->topTags(kMaxTagCount));
     NewClosure(tag_list, SIGNAL(finished()), this,
                SLOT(TagListLoaded(mygpo::TagListPtr)), tag_list);
     NewClosure(tag_list, SIGNAL(parseError()), this,
@@ -56,7 +56,7 @@ void GPodderTopTagsPage::Show() {
 void GPodderTopTagsPage::TagListLoaded(mygpo::TagListPtr tag_list) {
   emit Busy(false);
 
-  for (auto tag : tag_list->list()) {
+  for (mygpo::TagPtr tag : tag_list->list()) {
     model()->appendRow(model()->CreateFolder(tag->tag()));
   }
 }

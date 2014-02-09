@@ -168,11 +168,11 @@ void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
   // Remember episode actions for each podcast, so when we add a new podcast
   // we can apply the actions immediately.
   QMap<QUrl, QList<mygpo::EpisodePtr> > episodes_by_podcast;
-  for (auto episode : reply->updateList()) {
+  for (mygpo::EpisodePtr episode : reply->updateList()) {
     episodes_by_podcast[episode->podcastUrl()].append(episode);
   }
 
-  for (auto podcast : reply->addList()) {
+  for (mygpo::PodcastPtr podcast : reply->addList()) {
     const QUrl url(podcast->url());
 
     // Are we subscribed to this podcast already?
@@ -237,7 +237,7 @@ void GPodderSync::ApplyActions(
   for (PodcastEpisodeList::iterator it = episodes->begin();
        it != episodes->end(); ++it) {
     // Find an action for this episode
-    for (auto action : actions) {
+    for (mygpo::EpisodePtr action : actions) {
       if (action->url() != it->url()) continue;
 
       switch (action->status()) {
@@ -332,7 +332,7 @@ void GPodderSync::FlushUpdateQueue() {
   if (all_urls.isEmpty()) return;
 
   flushing_queue_ = true;
-  auto reply(api_->addRemoveSubscriptions(
+  mygpo::AddRemoveResultPtr reply(api_->addRemoveSubscriptions(
       username_, DeviceId(), queued_add_subscriptions_.toList(),
       queued_remove_subscriptions_.toList()));
 

@@ -41,7 +41,7 @@ GPodderSearchPage::~GPodderSearchPage() {
 void GPodderSearchPage::SearchClicked() {
   emit Busy(true);
 
-  auto list(api_->search(ui_->query->text()));
+  mygpo::PodcastListPtrlist list(api_->search(ui_->query->text()));
   NewClosure(list, SIGNAL(finished()), this,
              SLOT(SearchFinished(mygpo::PodcastListPtr)), list);
   NewClosure(list, SIGNAL(parseError()), this,
@@ -55,7 +55,7 @@ void GPodderSearchPage::SearchFinished(mygpo::PodcastListPtr list) {
 
   model()->clear();
 
-  for (auto gpo_podcast : list->list()) {
+  for (mygpo::PodcastPtr gpo_podcast : list->list()) {
     Podcast podcast;
     podcast.InitFromGpo(gpo_podcast.data());
 
