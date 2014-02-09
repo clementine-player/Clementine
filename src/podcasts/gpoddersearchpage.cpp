@@ -41,7 +41,7 @@ GPodderSearchPage::~GPodderSearchPage() {
 void GPodderSearchPage::SearchClicked() {
   emit Busy(true);
 
-  mygpo::PodcastListPtrlist list(api_->search(ui_->query->text()));
+  mygpo::PodcastListPtr list(api_->search(ui_->query->text()));
   NewClosure(list, SIGNAL(finished()), this,
              SLOT(SearchFinished(mygpo::PodcastListPtr)), list);
   NewClosure(list, SIGNAL(parseError()), this,
