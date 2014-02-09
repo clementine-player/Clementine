@@ -34,7 +34,11 @@ class CommandlineOptions {
 
   // Don't change the values or order, these get serialised and sent to
   // possibly a different version of Clementine
-  enum UrlListAction { UrlList_Append = 0, UrlList_Load = 1, };
+  enum UrlListAction {
+    UrlList_Append = 0,
+    UrlList_Load = 1,
+    UrlList_None = 2,
+  };
   enum PlayerAction {
     Player_None = 0,
     Player_Play = 1,

@@ -1949,7 +1949,9 @@ void MainWindow::CommandlineOptionsReceived(
 void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
   switch (options.player_action()) {
     case CommandlineOptions::Player_Play:
-      app_->player()->Play();
+      if (options.urls().empty()) {
+        app_->player()->Play();
+      }
       break;
     case CommandlineOptions::Player_PlayPause:
       app_->player()->PlayPause();
@@ -1974,17 +1976,30 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
       break;
   }
 
-  switch (options.url_list_action()) {
-    case CommandlineOptions::UrlList_Load:
-      app_->playlist_manager()->ClearCurrent();
+  if (!options.urls().empty()) {
+    MimeData* data = new MimeData;
+    data->setUrls(options.urls());
+    // Behaviour depends on command line options, so set it here
+    data->override_user_settings_ = true;
 
-    // fallthrough
-    case CommandlineOptions::UrlList_Append: {
-      MimeData* data = new MimeData;
-      data->setUrls(options.urls());
-      AddToPlaylist(data);
-      break;
+    if (options.player_action() == CommandlineOptions::Player_Play)
+      data->play_now_ = true;
+    else
+      ApplyPlayBehaviour(doubleclick_playmode_, data);
+
+    switch (options.url_list_action()) {
+      case CommandlineOptions::UrlList_Load:
+        data->clear_first_ = true;
+        break;
+      case CommandlineOptions::UrlList_Append:
+        // Nothing to do
+        break;
+      case CommandlineOptions::UrlList_None:
+        ApplyAddBehaviour(doubleclick_addmode_, data);
+        break;
     }
+
+    AddToPlaylist(data);
   }
 
   if (options.set_volume() != -1)
