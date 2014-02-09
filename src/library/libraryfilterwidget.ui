@@ -21,7 +21,10 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QSearchField" name="filter">
+    <widget class="QSearchField" name="filter" native="true">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Prefix a word with a field name to limit the search to that field, e.g. &lt;span style=&quot; font-weight:600;&quot;&gt;artist:&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Bode&lt;/span&gt; searches the library for all artists that contain the word Bode.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Available fields: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;title, album, artist, albumartist, composer, performer, grouping, genre, comment&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
      <property name="placeholderText" stdset="0">
       <string>Enter search terms here</string>
      </property>
