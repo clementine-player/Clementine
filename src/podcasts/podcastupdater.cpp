@@ -112,7 +112,7 @@ void PodcastUpdater::UpdatePodcastNow(const Podcast& podcast) {
 }
 
 void PodcastUpdater::UpdateAllPodcastsNow() {
-  for (const Podcast & podcast :
+  for (const Podcast& podcast :
           app_->podcast_backend()->GetAllSubscriptions()) {
     PodcastUrlLoaderReply* reply = loader_->Load(podcast.url());
     NewClosure(reply, SIGNAL(Finished(bool)), this,
@@ -151,15 +151,15 @@ void PodcastUpdater::PodcastLoaded(PodcastUrlLoaderReply* reply,
 
   // Get the episode URLs we had for this podcast already.
   QSet<QUrl> existing_urls;
-  for (const PodcastEpisode & episode :
+  for (const PodcastEpisode& episode :
           app_->podcast_backend()->GetEpisodes(podcast.database_id())) {
     existing_urls.insert(episode.url());
   }
 
   // Add any new episodes
   PodcastEpisodeList new_episodes;
-  for (const Podcast & reply_podcast : reply->podcast_results()) {
-    for (const PodcastEpisode & episode : reply_podcast.episodes()) {
+  for (const Podcast& reply_podcast : reply->podcast_results()) {
+    for (const PodcastEpisode& episode : reply_podcast.episodes()) {
       if (!existing_urls.contains(episode.url())) {
         PodcastEpisode episode_copy(episode);
         episode_copy.set_podcast_database_id(podcast.database_id());

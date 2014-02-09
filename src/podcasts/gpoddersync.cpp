@@ -195,7 +195,7 @@ void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
   }
 
   // Unsubscribe from podcasts that were removed.
-  for (const QUrl & url : reply->removeList()) {
+  for (const QUrl& url : reply->removeList()) {
     backend_->Unsubscribe(backend_->GetSubscriptionByUrl(url));
   }
 
@@ -284,7 +284,7 @@ void WriteContainer(const T& container, QSettings* s, const char* array_name,
                     const char* item_name) {
   s->beginWriteArray(array_name, container.count());
   int index = 0;
-  for (const typename T::value_type & item : container) {
+  for (const auto& item : container) {
     s->setArrayIndex(index++);
     s->setValue(item_name, item);
   }
@@ -357,7 +357,7 @@ void GPodderSync::AddRemoveFinished(mygpo::AddRemoveResultPtr reply,
   flushing_queue_ = false;
 
   // Remove the URLs from the queue.
-  for (const QUrl & url : affected_urls) {
+  for (const QUrl& url : affected_urls) {
     queued_add_subscriptions_.remove(url);
     queued_remove_subscriptions_.remove(url);
   }
