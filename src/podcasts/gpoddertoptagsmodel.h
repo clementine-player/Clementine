@@ -30,7 +30,7 @@ class GPodderTopTagsModel : public PodcastDiscoveryModel {
 
  public:
   GPodderTopTagsModel(mygpo::ApiRequest* api, Application* app,
-                      QObject* parent = 0);
+                      QObject* parent = nullptr);
 
   enum Role {
     Role_HasLazyLoaded = PodcastDiscoveryModel::RoleCount,

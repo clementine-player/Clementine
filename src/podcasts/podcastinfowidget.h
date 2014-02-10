@@ -32,7 +32,7 @@ class PodcastInfoWidget : public QWidget {
   Q_OBJECT
 
  public:
-  explicit PodcastInfoWidget(QWidget* parent = 0);
+  explicit PodcastInfoWidget(QWidget* parent = nullptr);
   ~PodcastInfoWidget();
 
   void SetApplication(Application* app);

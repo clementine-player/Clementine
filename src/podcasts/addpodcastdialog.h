@@ -35,7 +35,7 @@ class AddPodcastDialog : public QDialog {
   Q_OBJECT
 
  public:
-  AddPodcastDialog(Application* app, QWidget* parent = 0);
+  AddPodcastDialog(Application* app, QWidget* parent = nullptr);
   ~AddPodcastDialog();
 
   static const char* kBbcOpmlUrl;

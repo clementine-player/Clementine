@@ -43,7 +43,7 @@ class GPodderSync : public QObject {
   Q_OBJECT
 
  public:
-  GPodderSync(Application* app, QObject* parent = 0);
+  GPodderSync(Application* app, QObject* parent = nullptr);
   ~GPodderSync();
 
   static const char* kSettingsGroup;

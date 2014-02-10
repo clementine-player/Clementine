@@ -34,7 +34,7 @@ class PodcastUpdater : public QObject {
   Q_OBJECT
 
  public:
-  PodcastUpdater(Application* app, QObject* parent = 0);
+  PodcastUpdater(Application* app, QObject* parent = nullptr);
 
   static const char* kSettingsGroup;
 

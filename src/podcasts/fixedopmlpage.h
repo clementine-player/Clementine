@@ -30,7 +30,7 @@ class FixedOpmlPage : public AddPodcastPage {
 
  public:
   FixedOpmlPage(const QUrl& opml_url, const QString& title, const QIcon& icon,
-                Application* app, QWidget* parent = 0);
+                Application* app, QWidget* parent = nullptr);
 
   bool has_visible_widget() const { return false; }
   void Show();
