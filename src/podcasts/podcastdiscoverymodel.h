@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTDISCOVERYMODEL_H
-#define PODCASTDISCOVERYMODEL_H
+#ifndef PODCASTS_PODCASTDISCOVERYMODEL_H_
+#define PODCASTS_PODCASTDISCOVERYMODEL_H_
 
 #include "covers/albumcoverloaderoptions.h"
 
@@ -32,7 +32,7 @@ class PodcastDiscoveryModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  PodcastDiscoveryModel(Application* app, QObject* parent = 0);
+  PodcastDiscoveryModel(Application* app, QObject* parent = nullptr);
 
   enum Type { Type_Folder, Type_Podcast, Type_LoadingIndicator };
 
@@ -64,4 +64,4 @@ class PodcastDiscoveryModel : public QStandardItemModel {
   QIcon folder_icon_;
 };
 
-#endif  // PODCASTDISCOVERYMODEL_H
+#endif  // PODCASTS_PODCASTDISCOVERYMODEL_H_

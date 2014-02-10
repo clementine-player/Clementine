@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTUPDATER_H
-#define PODCASTUPDATER_H
+#ifndef PODCASTS_PODCASTUPDATER_H_
+#define PODCASTS_PODCASTUPDATER_H_
 
 #include <QDateTime>
 #include <QObject>
@@ -34,7 +34,7 @@ class PodcastUpdater : public QObject {
   Q_OBJECT
 
  public:
-  PodcastUpdater(Application* app, QObject* parent = 0);
+  PodcastUpdater(Application* app, QObject* parent = nullptr);
 
   static const char* kSettingsGroup;
 
@@ -64,4 +64,4 @@ class PodcastUpdater : public QObject {
   int pending_replies_;
 };
 
-#endif  // PODCASTUPDATER_H
+#endif  // PODCASTS_PODCASTUPDATER_H_

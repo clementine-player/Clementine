@@ -67,7 +67,7 @@ void SetText(const QString& value, T* label, QLabel* buddy_label = nullptr) {
     label->setText(value);
   }
 }
-}
+}  // namespace
 
 void PodcastInfoWidget::SetPodcast(const Podcast& podcast) {
   if (image_id_) {

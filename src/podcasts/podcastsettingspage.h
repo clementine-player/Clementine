@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTSETTINGSPAGE_H
-#define PODCASTSETTINGSPAGE_H
+#ifndef PODCASTS_PODCASTSETTINGSPAGE_H_
+#define PODCASTS_PODCASTSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -28,7 +28,7 @@ class PodcastSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  PodcastSettingsPage(SettingsDialog* dialog);
+  explicit PodcastSettingsPage(SettingsDialog* dialog);
   ~PodcastSettingsPage();
 
   static const char* kSettingsGroup;
@@ -47,4 +47,4 @@ class PodcastSettingsPage : public SettingsPage {
   Ui_PodcastSettingsPage* ui_;
 };
 
-#endif  // PODCASTSETTINGSPAGE_H
+#endif  // PODCASTS_PODCASTSETTINGSPAGE_H_

@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDPODCASTPAGE_H
-#define ADDPODCASTPAGE_H
+#ifndef PODCASTS_ADDPODCASTPAGE_H_
+#define PODCASTS_ADDPODCASTPAGE_H_
 
 #include <QWidget>
 
@@ -27,14 +27,14 @@ class AddPodcastPage : public QWidget {
   Q_OBJECT
 
  public:
-  AddPodcastPage(Application* app, QWidget* parent = 0);
+  AddPodcastPage(Application* app, QWidget* parent = nullptr);
 
   PodcastDiscoveryModel* model() const { return model_; }
 
   virtual bool has_visible_widget() const { return true; }
   virtual void Show() {}
 
-signals:
+ signals:
   void Busy(bool busy);
 
  protected:
@@ -44,4 +44,4 @@ signals:
   PodcastDiscoveryModel* model_;
 };
 
-#endif  // ADDPODCASTPAGE_H
+#endif  // PODCASTS_ADDPODCASTPAGE_H_

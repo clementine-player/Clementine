@@ -284,7 +284,7 @@ void WriteContainer(const T& container, QSettings* s, const char* array_name,
                     const char* item_name) {
   s->beginWriteArray(array_name, container.count());
   int index = 0;
-  for (const typename T::value_type& item : container) {
+  for (const auto& item : container) {
     s->setArrayIndex(index++);
     s->setValue(item_name, item);
   }
@@ -302,7 +302,7 @@ void ReadContainer(T* container, QSettings* s, const char* array_name,
   }
   s->endArray();
 }
-}
+}  // namespace
 
 void GPodderSync::SaveQueue() {
   QSettings s;

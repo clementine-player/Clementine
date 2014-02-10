@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GPODDERTOPTAGSMODEL_H
-#define GPODDERTOPTAGSMODEL_H
+#ifndef PODCASTS_GPODDERTOPTAGSMODEL_H_
+#define PODCASTS_GPODDERTOPTAGSMODEL_H_
 
 #include "podcastdiscoverymodel.h"
 
@@ -30,7 +30,7 @@ class GPodderTopTagsModel : public PodcastDiscoveryModel {
 
  public:
   GPodderTopTagsModel(mygpo::ApiRequest* api, Application* app,
-                      QObject* parent = 0);
+                      QObject* parent = nullptr);
 
   enum Role {
     Role_HasLazyLoaded = PodcastDiscoveryModel::RoleCount,
@@ -50,4 +50,4 @@ class GPodderTopTagsModel : public PodcastDiscoveryModel {
   mygpo::ApiRequest* api_;
 };
 
-#endif  // GPODDERTOPTAGSMODEL_H
+#endif  // PODCASTS_GPODDERTOPTAGSMODEL_H_

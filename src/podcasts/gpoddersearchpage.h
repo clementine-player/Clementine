@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GPODDERSEARCHPAGE_H
-#define GPODDERSEARCHPAGE_H
+#ifndef PODCASTS_GPODDERSEARCHPAGE_H_
+#define PODCASTS_GPODDERSEARCHPAGE_H_
 
 #include "addpodcastpage.h"
 
@@ -30,7 +30,7 @@ class GPodderSearchPage : public AddPodcastPage {
   Q_OBJECT
 
  public:
-  GPodderSearchPage(Application* app, QWidget* parent = 0);
+  GPodderSearchPage(Application* app, QWidget* parent = nullptr);
   ~GPodderSearchPage();
 
   void Show();
@@ -47,4 +47,4 @@ class GPodderSearchPage : public AddPodcastPage {
   mygpo::ApiRequest* api_;
 };
 
-#endif  // GPODDERSEARCHPAGE_H
+#endif  // PODCASTS_GPODDERSEARCHPAGE_H_

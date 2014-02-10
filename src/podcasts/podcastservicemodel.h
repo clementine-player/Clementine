@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTSERVICEMODEL_H
-#define PODCASTSERVICEMODEL_H
+#ifndef PODCASTS_PODCASTSERVICEMODEL_H_
+#define PODCASTS_PODCASTSERVICEMODEL_H_
 
 #include <QStandardItemModel>
 
@@ -26,7 +26,7 @@ class PodcastServiceModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  PodcastServiceModel(QObject* parent = 0);
+  explicit PodcastServiceModel(QObject* parent = nullptr);
 
   QMimeData* mimeData(const QModelIndexList& indexes) const;
 
@@ -37,4 +37,4 @@ class PodcastServiceModel : public QStandardItemModel {
                           QList<QUrl>* urls) const;
 };
 
-#endif  // PODCASTSERVICEMODEL_H
+#endif  // PODCASTS_PODCASTSERVICEMODEL_H_
