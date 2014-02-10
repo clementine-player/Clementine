@@ -48,7 +48,7 @@ class DeviceView : public AutoExpandingTreeView {
   Q_OBJECT
 
  public:
-  DeviceView(QWidget* parent = 0);
+  DeviceView(QWidget* parent = nullptr);
   ~DeviceView();
 
   void SetApplication(Application* app);

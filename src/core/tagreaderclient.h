@@ -32,7 +32,7 @@ class TagReaderClient : public QObject {
   Q_OBJECT
 
  public:
-  TagReaderClient(QObject* parent = 0);
+  TagReaderClient(QObject* parent = nullptr);
 
   typedef AbstractMessageHandler<pb::tagreader::Message> HandlerType;
   typedef HandlerType::ReplyType ReplyType;

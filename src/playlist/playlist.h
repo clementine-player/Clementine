@@ -78,7 +78,7 @@ class Playlist : public QAbstractListModel {
   Playlist(PlaylistBackend* backend, TaskManager* task_manager,
            LibraryBackend* library, int id,
            const QString& special_type = QString(), bool favorite = false,
-           QObject* parent = 0);
+           QObject* parent = nullptr);
   ~Playlist();
 
   void SkipTracks(const QModelIndexList& source_indexes);

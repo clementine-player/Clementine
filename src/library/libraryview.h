@@ -53,7 +53,7 @@ class LibraryView : public AutoExpandingTreeView {
   Q_OBJECT
 
  public:
-  LibraryView(QWidget* parent = 0);
+  LibraryView(QWidget* parent = nullptr);
   ~LibraryView();
 
   static const char* kSettingsGroup;

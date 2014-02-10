@@ -27,7 +27,7 @@ class FileViewList : public QListView {
   Q_OBJECT
 
  public:
-  FileViewList(QWidget* parent = 0);
+  FileViewList(QWidget* parent = nullptr);
 
   void mousePressEvent(QMouseEvent* e);
 

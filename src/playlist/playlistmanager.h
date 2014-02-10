@@ -135,7 +135,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   Q_OBJECT
 
  public:
-  PlaylistManager(Application* app, QObject* parent = 0);
+  PlaylistManager(Application* app, QObject* parent = nullptr);
   ~PlaylistManager();
 
   int current_id() const { return current_; }

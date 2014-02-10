@@ -34,7 +34,7 @@ class AlbumCoverLoader : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverLoader(QObject* parent = 0);
+  AlbumCoverLoader(QObject* parent = nullptr);
 
   void Stop() { stop_requested_ = true; }
 

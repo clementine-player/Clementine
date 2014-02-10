@@ -28,7 +28,7 @@ class ProjectMPresetModel : public QAbstractItemModel {
   friend class ProjectMVisualisation;
 
  public:
-  ProjectMPresetModel(ProjectMVisualisation* vis, QObject* parent = 0);
+  ProjectMPresetModel(ProjectMVisualisation* vis, QObject* parent = nullptr);
 
   enum { Role_Url = Qt::UserRole, };
 

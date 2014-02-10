@@ -29,7 +29,7 @@ class VisualisationOverlay : public QWidget {
   Q_OBJECT
 
  public:
-  VisualisationOverlay(QWidget* parent = 0);
+  VisualisationOverlay(QWidget* parent = nullptr);
   ~VisualisationOverlay();
 
   static const int kFadeDuration;

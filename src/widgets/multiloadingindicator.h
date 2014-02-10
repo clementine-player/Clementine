@@ -27,7 +27,7 @@ class MultiLoadingIndicator : public QWidget {
   Q_OBJECT
 
  public:
-  MultiLoadingIndicator(QWidget* parent = 0);
+  MultiLoadingIndicator(QWidget* parent = nullptr);
 
   static const int kVerticalPadding;
   static const int kHorizontalPadding;

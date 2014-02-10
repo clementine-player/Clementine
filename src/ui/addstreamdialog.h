@@ -28,7 +28,7 @@ class AddStreamDialog : public QDialog {
   Q_OBJECT
 
  public:
-  AddStreamDialog(QWidget* parent = 0);
+  AddStreamDialog(QWidget* parent = nullptr);
   ~AddStreamDialog();
 
   void set_url(const QUrl& url);

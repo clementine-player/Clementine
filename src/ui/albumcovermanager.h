@@ -48,7 +48,7 @@ class AlbumCoverManager : public QMainWindow {
   Q_OBJECT
  public:
   AlbumCoverManager(Application* app, LibraryBackend* library_backend,
-                    QWidget* parent = 0, QNetworkAccessManager* network = 0);
+                    QWidget* parent = nullptr, QNetworkAccessManager* network = 0);
   ~AlbumCoverManager();
 
   static const char* kSettingsGroup;

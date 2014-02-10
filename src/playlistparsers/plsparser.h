@@ -24,7 +24,7 @@ class PLSParser : public ParserBase {
   Q_OBJECT
 
  public:
-  PLSParser(LibraryBackendInterface* library, QObject* parent = 0);
+  PLSParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "PLS"; }
   QStringList file_extensions() const { return QStringList() << "pls"; }

@@ -31,7 +31,7 @@ class PlaylistTabBar : public QTabBar {
   Q_OBJECT
 
  public:
-  PlaylistTabBar(QWidget* parent = 0);
+  PlaylistTabBar(QWidget* parent = nullptr);
 
   static const int kDragHoverTimeout = 500;
   static const char* kSettingsGroup;

@@ -24,7 +24,7 @@ class SongInfoTextView : public QTextBrowser {
   Q_OBJECT
 
  public:
-  SongInfoTextView(QWidget* parent = 0);
+  SongInfoTextView(QWidget* parent = nullptr);
 
   static const qreal kDefaultFontSize;
   static const char* kSettingsGroup;

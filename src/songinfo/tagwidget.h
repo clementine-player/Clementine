@@ -70,7 +70,7 @@ class TagWidget : public QWidget {
  public:
   enum Type { Type_Tags, Type_Artists, };
 
-  TagWidget(Type type, QWidget* parent = 0);
+  TagWidget(Type type, QWidget* parent = nullptr);
 
   void SetIcon(const QIcon& icon) { icon_ = icon; }
   void AddTag(const QString& tag);

@@ -34,7 +34,7 @@ class WiimotedevShortcuts : public QObject {
   static const char* kActionsGroup;
   static const char* kSettingsGroup;
 
-  WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* parent = 0);
+  WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* parent = nullptr);
 
   enum Action {
     WiimotedevActiveDeactive = 0,

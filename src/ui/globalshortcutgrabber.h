@@ -33,7 +33,7 @@ class GlobalShortcutGrabber : public QDialog {
   Q_OBJECT
 
  public:
-  GlobalShortcutGrabber(QWidget* parent = 0);
+  GlobalShortcutGrabber(QWidget* parent = nullptr);
   ~GlobalShortcutGrabber();
 
   QKeySequence GetKey(const QString& name);

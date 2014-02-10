@@ -21,7 +21,7 @@ class OAuthenticator : public QObject {
   };
 
   OAuthenticator(const QString& client_id, const QString& client_secret,
-                 RedirectStyle redirect, QObject* parent = 0);
+                 RedirectStyle redirect, QObject* parent = nullptr);
   void StartAuthorisation(const QString& oauth_endpoint,
                           const QString& token_endpoint, const QString& scope);
   void RefreshAuthorisation(const QString& token_endpoint,

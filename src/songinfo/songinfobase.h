@@ -38,7 +38,7 @@ class SongInfoBase : public QWidget {
   Q_OBJECT
 
  public:
-  SongInfoBase(QWidget* parent = 0);
+  SongInfoBase(QWidget* parent = nullptr);
 
   static const char* kSettingsGroup;
 

@@ -28,7 +28,7 @@ class SystemTrayIcon : public QObject {
   Q_OBJECT
 
  public:
-  SystemTrayIcon(QObject* parent = 0);
+  SystemTrayIcon(QObject* parent = nullptr);
 
   // Called once to create the icon's context menu
   virtual void SetupMenu(QAction* previous, QAction* play, QAction* stop,
@@ -48,7 +48,7 @@ class SystemTrayIcon : public QObject {
   virtual void SetNowPlaying(const Song& song, const QString& image_path) {}
   virtual void ClearNowPlaying() {}
 
-  static SystemTrayIcon* CreateSystemTrayIcon(QObject* parent = 0);
+  static SystemTrayIcon* CreateSystemTrayIcon(QObject* parent = nullptr);
 
  public slots:
   void SetProgress(int percentage);

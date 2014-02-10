@@ -33,7 +33,7 @@ class IcecastFilterWidget : public QWidget {
   Q_OBJECT
 
  public:
-  IcecastFilterWidget(QWidget* parent = 0);
+  IcecastFilterWidget(QWidget* parent = nullptr);
   ~IcecastFilterWidget();
 
   static const char* kSettingsGroup;

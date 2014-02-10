@@ -28,7 +28,7 @@ class MacSystemTrayIcon : public SystemTrayIcon {
   Q_OBJECT
 
  public:
-  MacSystemTrayIcon(QObject* parent = 0);
+  MacSystemTrayIcon(QObject* parent = nullptr);
   ~MacSystemTrayIcon();
 
   void SetupMenu(QAction* previous, QAction* play, QAction* stop,

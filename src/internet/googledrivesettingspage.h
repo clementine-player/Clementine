@@ -30,7 +30,7 @@ class GoogleDriveSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  GoogleDriveSettingsPage(SettingsDialog* parent = 0);
+  GoogleDriveSettingsPage(SettingsDialog* parent = nullptr);
   ~GoogleDriveSettingsPage();
 
   void Load();

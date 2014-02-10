@@ -102,7 +102,7 @@ class Mpris2 : public QObject {
   Q_PROPERTY(QStringList Orderings READ Orderings)
   Q_PROPERTY(MaybePlaylist ActivePlaylist READ ActivePlaylist)
 
-  Mpris2(Application* app, Mpris1* mpris1, QObject* parent = 0);
+  Mpris2(Application* app, Mpris1* mpris1, QObject* parent = nullptr);
 
   // Root Properties
   bool CanQuit() const;

@@ -13,7 +13,7 @@ class QAction;
 class BackgroundStreams : public QObject {
   Q_OBJECT
  public:
-  explicit BackgroundStreams(EngineBase* engine, QObject* parent = 0);
+  explicit BackgroundStreams(EngineBase* engine, QObject* parent = nullptr);
   ~BackgroundStreams();
 
   void LoadStreams();

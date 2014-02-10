@@ -26,7 +26,7 @@ class TranscoderOptionsMP3 : public TranscoderOptionsInterface {
   Q_OBJECT
 
  public:
-  TranscoderOptionsMP3(QWidget* parent = 0);
+  TranscoderOptionsMP3(QWidget* parent = nullptr);
   ~TranscoderOptionsMP3();
 
   void Load();

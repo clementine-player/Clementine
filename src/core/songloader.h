@@ -41,7 +41,7 @@ class SongLoader : public QObject {
   Q_OBJECT
  public:
   SongLoader(LibraryBackendInterface* library, const Player* player,
-             QObject* parent = 0);
+             QObject* parent = nullptr);
   ~SongLoader();
 
   enum Result { Success, Error, WillLoadAsync, };

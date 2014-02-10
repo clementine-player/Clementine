@@ -42,7 +42,7 @@ class Database : public QObject {
   Q_OBJECT
 
  public:
-  Database(Application* app, QObject* parent = 0,
+  Database(Application* app, QObject* parent = nullptr,
            const QString& database_name = QString());
 
   struct AttachedDatabase {
@@ -175,7 +175,7 @@ signals:
 
 class MemoryDatabase : public Database {
  public:
-  MemoryDatabase(Application* app, QObject* parent = 0)
+  MemoryDatabase(Application* app, QObject* parent = nullptr)
       : Database(app, parent, ":memory:") {}
   ~MemoryDatabase() {
     // Make sure Qt doesn't reuse the same database

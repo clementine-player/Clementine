@@ -36,7 +36,7 @@ class VisualisationContainer : public QGraphicsView {
   Q_OBJECT
 
  public:
-  VisualisationContainer(QWidget* parent = 0);
+  VisualisationContainer(QWidget* parent = nullptr);
 
   static const int kLowFramerate;
   static const int kMediumFramerate;

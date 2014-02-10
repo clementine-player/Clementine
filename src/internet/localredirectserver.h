@@ -11,7 +11,7 @@ class QTcpSocket;
 class LocalRedirectServer : public QObject {
   Q_OBJECT
  public:
-  LocalRedirectServer(QObject* parent = 0);
+  LocalRedirectServer(QObject* parent = nullptr);
 
   // Causes the server to listen for _one_ request.
   void Listen();

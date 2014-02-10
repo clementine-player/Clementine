@@ -30,7 +30,7 @@ class DeviceViewContainer : public QWidget {
   Q_OBJECT
 
  public:
-  explicit DeviceViewContainer(QWidget* parent = 0);
+  explicit DeviceViewContainer(QWidget* parent = nullptr);
   ~DeviceViewContainer();
 
   DeviceView* view() const;

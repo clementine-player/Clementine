@@ -30,7 +30,7 @@ class UltimateLyricsReader : public QObject {
   Q_OBJECT
 
  public:
-  UltimateLyricsReader(QObject* parent = 0);
+  UltimateLyricsReader(QObject* parent = nullptr);
 
   QList<SongInfoProvider*> Parse(const QString& filename) const;
   QList<SongInfoProvider*> ParseDevice(QIODevice* device) const;

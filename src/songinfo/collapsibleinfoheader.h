@@ -28,7 +28,7 @@ class CollapsibleInfoHeader : public QWidget {
   Q_PROPERTY(float opacity READ opacity WRITE set_opacity);
 
  public:
-  CollapsibleInfoHeader(QWidget* parent = 0);
+  CollapsibleInfoHeader(QWidget* parent = nullptr);
 
   static const int kHeight;
   static const int kIconSize;

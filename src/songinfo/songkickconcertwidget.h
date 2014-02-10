@@ -30,7 +30,7 @@ class SongKickConcertWidget : public QWidget {
   Q_OBJECT
 
  public:
-  SongKickConcertWidget(QWidget* parent = 0);
+  SongKickConcertWidget(QWidget* parent = nullptr);
   ~SongKickConcertWidget();
 
   static const int kStaticMapWidth;

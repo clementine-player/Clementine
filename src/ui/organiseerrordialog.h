@@ -28,7 +28,7 @@ class OrganiseErrorDialog : public QDialog {
   Q_OBJECT
 
  public:
-  OrganiseErrorDialog(QWidget* parent = 0);
+  OrganiseErrorDialog(QWidget* parent = nullptr);
   ~OrganiseErrorDialog();
 
   enum OperationType { Type_Copy, Type_Delete, };

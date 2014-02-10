@@ -27,7 +27,7 @@ class LoginStateWidget : public QWidget {
   Q_OBJECT
 
  public:
-  LoginStateWidget(QWidget* parent = 0);
+  LoginStateWidget(QWidget* parent = nullptr);
   ~LoginStateWidget();
 
   enum State { LoggedIn, LoginInProgress, LoggedOut };

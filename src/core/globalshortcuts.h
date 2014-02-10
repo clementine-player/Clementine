@@ -33,7 +33,7 @@ class GlobalShortcuts : public QWidget {
   Q_OBJECT
 
  public:
-  GlobalShortcuts(QWidget* parent = 0);
+  GlobalShortcuts(QWidget* parent = nullptr);
 
   static const char* kSettingsGroup;
 

@@ -27,7 +27,7 @@ class StickySlider : public QSlider {
                  set_sticky_threshold);
 
  public:
-  StickySlider(QWidget* parent = 0);
+  StickySlider(QWidget* parent = nullptr);
 
   int sticky_center() const { return sticky_center_; }
   int sticky_threshold() const { return sticky_threshold_; }

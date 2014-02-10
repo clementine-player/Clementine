@@ -38,7 +38,7 @@ class AcoustidClient : public QObject {
   // the Finished signal - they have no meaning to AcoustidClient.
 
  public:
-  AcoustidClient(QObject* parent = 0);
+  AcoustidClient(QObject* parent = nullptr);
 
   // Network requests will be aborted after this interval.
   void SetTimeout(int msec);

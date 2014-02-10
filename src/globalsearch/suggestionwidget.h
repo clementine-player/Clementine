@@ -26,7 +26,7 @@ class SuggestionWidget : public QWidget {
   Q_OBJECT
 
  public:
-  SuggestionWidget(const QIcon& search_icon, QWidget* parent = 0);
+  SuggestionWidget(const QIcon& search_icon, QWidget* parent = nullptr);
   ~SuggestionWidget();
 
   bool eventFilter(QObject* object, QEvent* event);

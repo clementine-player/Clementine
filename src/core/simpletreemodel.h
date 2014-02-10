@@ -25,7 +25,7 @@ class QModelIndex;
 template <typename T>
 class SimpleTreeModel : public QAbstractItemModel {
  public:
-  SimpleTreeModel(T* root = 0, QObject* parent = 0);
+  SimpleTreeModel(T* root = 0, QObject* parent = nullptr);
   virtual ~SimpleTreeModel() {}
 
   // QAbstractItemModel

@@ -96,7 +96,7 @@ class FancyTabBar : public QWidget {
   Q_OBJECT
 
  public:
-  FancyTabBar(QWidget* parent = 0);
+  FancyTabBar(QWidget* parent = nullptr);
   ~FancyTabBar();
 
   void paintEvent(QPaintEvent* event);
@@ -145,7 +145,7 @@ class FancyTabWidget : public QWidget {
   Q_OBJECT
 
  public:
-  FancyTabWidget(QWidget* parent = 0);
+  FancyTabWidget(QWidget* parent = nullptr);
 
   // Values are persisted - only add to the end
   enum Mode {

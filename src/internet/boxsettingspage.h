@@ -30,7 +30,7 @@ class BoxSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  BoxSettingsPage(SettingsDialog* parent = 0);
+  BoxSettingsPage(SettingsDialog* parent = nullptr);
   ~BoxSettingsPage();
 
   void Load();

@@ -134,7 +134,7 @@ class Client : public QObject {
   Q_OBJECT
 
  public:
-  Client(QObject* parent = 0);
+  Client(QObject* parent = nullptr);
 
   bool is_authenticated() const;
   const QString& access_token() const { return access_token_; }

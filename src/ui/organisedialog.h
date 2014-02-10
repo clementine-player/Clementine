@@ -41,7 +41,7 @@ class OrganiseDialog : public QDialog {
   Q_OBJECT
 
  public:
-  OrganiseDialog(TaskManager* task_manager, QWidget* parent = 0);
+  OrganiseDialog(TaskManager* task_manager, QWidget* parent = nullptr);
   ~OrganiseDialog();
 
   static const char* kDefaultFormat;

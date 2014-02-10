@@ -30,7 +30,7 @@ class PrettyImage : public QWidget {
 
  public:
   PrettyImage(const QUrl& url, QNetworkAccessManager* network,
-              QWidget* parent = 0);
+              QWidget* parent = nullptr);
 
   static const int kTotalHeight;
   static const int kReflectionHeight;

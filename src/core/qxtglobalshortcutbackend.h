@@ -24,7 +24,7 @@ class QxtGlobalShortcut;
 
 class QxtGlobalShortcutBackend : public GlobalShortcutBackend {
  public:
-  QxtGlobalShortcutBackend(GlobalShortcuts* parent = 0);
+  QxtGlobalShortcutBackend(GlobalShortcuts* parent = nullptr);
 
  protected:
   bool DoRegister();

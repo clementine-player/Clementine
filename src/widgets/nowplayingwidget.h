@@ -42,7 +42,7 @@ class NowPlayingWidget : public QWidget {
   Q_OBJECT
 
  public:
-  NowPlayingWidget(QWidget* parent = 0);
+  NowPlayingWidget(QWidget* parent = nullptr);
   ~NowPlayingWidget();
 
   static const char* kSettingsGroup;

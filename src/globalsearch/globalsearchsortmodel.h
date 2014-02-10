@@ -22,7 +22,7 @@
 
 class GlobalSearchSortModel : public QSortFilterProxyModel {
  public:
-  GlobalSearchSortModel(QObject* parent = 0);
+  GlobalSearchSortModel(QObject* parent = nullptr);
 
  protected:
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const;

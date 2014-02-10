@@ -26,7 +26,7 @@ class ErrorDialog : public QDialog {
   Q_OBJECT
 
  public:
-  ErrorDialog(QWidget* parent = 0);
+  ErrorDialog(QWidget* parent = nullptr);
   ~ErrorDialog();
 
  public slots:

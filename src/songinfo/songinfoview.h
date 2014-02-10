@@ -29,7 +29,7 @@ class SongInfoView : public SongInfoBase {
   Q_OBJECT
 
  public:
-  SongInfoView(QWidget* parent = 0);
+  SongInfoView(QWidget* parent = nullptr);
   ~SongInfoView();
 
   static const char* kSettingsGroup;

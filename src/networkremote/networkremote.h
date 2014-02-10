@@ -18,7 +18,7 @@ class NetworkRemote : public QObject {
   static const char* kSettingsGroup;
   static const quint16 kDefaultServerPort;
 
-  explicit NetworkRemote(Application* app, QObject* parent = 0);
+  explicit NetworkRemote(Application* app, QObject* parent = nullptr);
   ~NetworkRemote();
 
  public slots:

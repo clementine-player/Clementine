@@ -32,7 +32,7 @@ class SearchProvider : public QObject {
   Q_OBJECT
 
  public:
-  SearchProvider(Application* app, QObject* parent = 0);
+  SearchProvider(Application* app, QObject* parent = nullptr);
 
   static const int kArtHeight;
 
@@ -199,7 +199,7 @@ class BlockingSearchProvider : public SearchProvider {
   Q_OBJECT
 
  public:
-  BlockingSearchProvider(Application* app, QObject* parent = 0);
+  BlockingSearchProvider(Application* app, QObject* parent = nullptr);
 
   void SearchAsync(int id, const QString& query);
   virtual ResultList Search(int id, const QString& query) = 0;

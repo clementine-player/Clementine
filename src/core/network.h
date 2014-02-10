@@ -48,7 +48,7 @@ class NetworkAccessManager : public QNetworkAccessManager {
   Q_OBJECT
 
  public:
-  NetworkAccessManager(QObject* parent = 0);
+  NetworkAccessManager(QObject* parent = nullptr);
 
  protected:
   QNetworkReply* createRequest(Operation op, const QNetworkRequest& request,
@@ -104,7 +104,7 @@ class NetworkTimeouts : public QObject {
   Q_OBJECT
 
  public:
-  NetworkTimeouts(int timeout_msec, QObject* parent = 0);
+  NetworkTimeouts(int timeout_msec, QObject* parent = nullptr);
 
   // TODO: Template this to avoid code duplication.
   void AddReply(QNetworkReply* reply);

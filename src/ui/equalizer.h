@@ -29,7 +29,7 @@ class Equalizer : public QDialog {
   Q_OBJECT
 
  public:
-  Equalizer(QWidget* parent = 0);
+  Equalizer(QWidget* parent = nullptr);
   ~Equalizer();
 
   static const int kBands = 10;

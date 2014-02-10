@@ -24,7 +24,7 @@ class FreeSpaceBar : public QWidget {
   Q_OBJECT
 
  public:
-  FreeSpaceBar(QWidget* parent = 0);
+  FreeSpaceBar(QWidget* parent = nullptr);
 
   static const int kBarHeight;
   static const int kBarBorderRadius;

@@ -24,7 +24,7 @@ class Ui_TranscoderOptionsSpeex;
 
 class TranscoderOptionsSpeex : public TranscoderOptionsInterface {
  public:
-  TranscoderOptionsSpeex(QWidget* parent = 0);
+  TranscoderOptionsSpeex(QWidget* parent = nullptr);
   ~TranscoderOptionsSpeex();
 
   void Load();

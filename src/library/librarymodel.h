@@ -47,7 +47,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   Q_ENUMS(GroupBy);
 
  public:
-  LibraryModel(LibraryBackend* backend, Application* app, QObject* parent = 0);
+  LibraryModel(LibraryBackend* backend, Application* app, QObject* parent = nullptr);
   ~LibraryModel();
 
   static const char* kSmartPlaylistsMimeType;

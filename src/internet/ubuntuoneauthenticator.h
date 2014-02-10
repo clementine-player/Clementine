@@ -9,7 +9,7 @@ class NetworkAccessManager;
 class UbuntuOneAuthenticator : public QObject {
   Q_OBJECT
  public:
-  explicit UbuntuOneAuthenticator(QObject* parent = 0);
+  explicit UbuntuOneAuthenticator(QObject* parent = nullptr);
   void StartAuthorisation(const QString& email, const QString& password);
 
   bool success() const { return success_; }

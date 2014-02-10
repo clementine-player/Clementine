@@ -24,7 +24,7 @@ class LineTextEdit : public QTextEdit {
   Q_OBJECT
 
  public:
-  LineTextEdit(QWidget* parent = 0);
+  LineTextEdit(QWidget* parent = nullptr);
 
   QSize sizeHint() const;
   QSize minimumSizeHint() const;

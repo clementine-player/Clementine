@@ -43,7 +43,7 @@ class CueParser : public ParserBase {
   static const char* kGenre;
   static const char* kDate;
 
-  CueParser(LibraryBackendInterface* library, QObject* parent = 0);
+  CueParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "CUE"; }
   QStringList file_extensions() const { return QStringList() << "cue"; }

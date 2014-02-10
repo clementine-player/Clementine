@@ -31,7 +31,7 @@ class DropboxSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  DropboxSettingsPage(SettingsDialog* parent = 0);
+  DropboxSettingsPage(SettingsDialog* parent = nullptr);
   ~DropboxSettingsPage();
 
   void Load();

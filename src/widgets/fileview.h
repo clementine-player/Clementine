@@ -39,7 +39,7 @@ class FileView : public QWidget {
   Q_OBJECT
 
  public:
-  FileView(QWidget* parent = 0);
+  FileView(QWidget* parent = nullptr);
   ~FileView();
 
   static const char* kFileFilter;

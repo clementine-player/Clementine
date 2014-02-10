@@ -24,7 +24,7 @@ class AsxIniParser : public ParserBase {
   Q_OBJECT
 
  public:
-  AsxIniParser(LibraryBackendInterface* library, QObject* parent = 0);
+  AsxIniParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "ASX/INI"; }
   QStringList file_extensions() const { return QStringList() << "asxini"; }

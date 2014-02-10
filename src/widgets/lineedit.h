@@ -101,7 +101,7 @@ class LineEdit : public QLineEdit, public ExtendedEditor {
                  set_reset_button);
 
  public:
-  LineEdit(QWidget* parent = 0);
+  LineEdit(QWidget* parent = nullptr);
 
   // ExtendedEditor
   void set_focus() { QLineEdit::setFocus(); }
@@ -133,7 +133,7 @@ class TextEdit : public QPlainTextEdit, public ExtendedEditor {
                  set_reset_button);
 
  public:
-  TextEdit(QWidget* parent = 0);
+  TextEdit(QWidget* parent = nullptr);
 
   // ExtendedEditor
   void set_focus() { QPlainTextEdit::setFocus(); }
@@ -158,7 +158,7 @@ class SpinBox : public QSpinBox, public ExtendedEditor {
                  set_reset_button);
 
  public:
-  SpinBox(QWidget* parent = 0);
+  SpinBox(QWidget* parent = nullptr);
 
   // QSpinBox
   QString textFromValue(int val) const;

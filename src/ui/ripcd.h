@@ -34,7 +34,7 @@ class RipCD : public QDialog {
   Q_OBJECT
 
  public:
-  explicit RipCD(QWidget* parent = 0);
+  explicit RipCD(QWidget* parent = nullptr);
   ~RipCD();
   bool CDIOIsValid() const;
 

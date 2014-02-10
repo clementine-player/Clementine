@@ -35,7 +35,7 @@ class PlaylistListContainer : public QWidget {
   Q_OBJECT
 
  public:
-  PlaylistListContainer(QWidget* parent = 0);
+  PlaylistListContainer(QWidget* parent = nullptr);
   ~PlaylistListContainer();
 
   void SetApplication(Application* app);

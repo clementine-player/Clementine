@@ -24,7 +24,7 @@ class InternetView : public AutoExpandingTreeView {
   Q_OBJECT
 
  public:
-  InternetView(QWidget* parent = 0);
+  InternetView(QWidget* parent = nullptr);
 
   // QWidget
   void contextMenuEvent(QContextMenuEvent* e);

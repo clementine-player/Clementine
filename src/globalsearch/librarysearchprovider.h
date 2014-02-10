@@ -27,7 +27,7 @@ class LibrarySearchProvider : public BlockingSearchProvider {
   LibrarySearchProvider(LibraryBackendInterface* backend, const QString& name,
                         const QString& id, const QIcon& icon,
                         bool enabled_by_default, Application* app,
-                        QObject* parent = 0);
+                        QObject* parent = nullptr);
 
   ResultList Search(int id, const QString& query);
   MimeData* LoadTracks(const ResultList& results);

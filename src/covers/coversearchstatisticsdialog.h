@@ -30,7 +30,7 @@ class CoverSearchStatisticsDialog : public QDialog {
   Q_OBJECT
 
  public:
-  CoverSearchStatisticsDialog(QWidget* parent = 0);
+  CoverSearchStatisticsDialog(QWidget* parent = nullptr);
   ~CoverSearchStatisticsDialog();
 
   void Show(const CoverSearchStatistics& statistics);

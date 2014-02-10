@@ -40,7 +40,7 @@ class GroupedIconView : public QListView {
   Q_PROPERTY(QString header_text READ header_text WRITE set_header_text);
 
  public:
-  GroupedIconView(QWidget* parent = 0);
+  GroupedIconView(QWidget* parent = nullptr);
 
   enum Role { Role_Group = 1158300, };
 

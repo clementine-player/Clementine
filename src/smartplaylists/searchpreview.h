@@ -34,7 +34,7 @@ class SearchPreview : public QWidget {
   Q_OBJECT
 
  public:
-  SearchPreview(QWidget* parent = 0);
+  SearchPreview(QWidget* parent = nullptr);
   ~SearchPreview();
 
   void set_application(Application* app);

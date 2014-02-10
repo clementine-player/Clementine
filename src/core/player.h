@@ -37,7 +37,7 @@ class PlayerInterface : public QObject {
   Q_OBJECT
 
  public:
-  PlayerInterface(QObject* parent = 0) : QObject(parent) {}
+  PlayerInterface(QObject* parent = nullptr) : QObject(parent) {}
 
   virtual EngineBase* engine() const = 0;
   virtual Engine::State GetState() const = 0;
@@ -107,7 +107,7 @@ class Player : public PlayerInterface {
   Q_OBJECT
 
  public:
-  Player(Application* app, QObject* parent = 0);
+  Player(Application* app, QObject* parent = nullptr);
   ~Player();
 
   void Init();

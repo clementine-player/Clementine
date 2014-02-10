@@ -10,7 +10,7 @@ class Ui_UbuntuOneSettingsPage;
 class UbuntuOneSettingsPage : public SettingsPage {
   Q_OBJECT
  public:
-  UbuntuOneSettingsPage(SettingsDialog* parent = 0);
+  UbuntuOneSettingsPage(SettingsDialog* parent = nullptr);
 
   void Load();
   void Save();

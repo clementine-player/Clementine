@@ -30,7 +30,7 @@ class DeviceProperties : public QDialog {
   Q_OBJECT
 
  public:
-  DeviceProperties(QWidget* parent = 0);
+  DeviceProperties(QWidget* parent = nullptr);
   ~DeviceProperties();
 
   void SetDeviceManager(DeviceManager* manager);

@@ -33,7 +33,7 @@ class PrettyImageView : public QScrollArea {
   Q_OBJECT
 
  public:
-  PrettyImageView(QNetworkAccessManager* network, QWidget* parent = 0);
+  PrettyImageView(QNetworkAccessManager* network, QWidget* parent = nullptr);
 
   static const char* kSettingsGroup;
 

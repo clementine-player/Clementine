@@ -30,7 +30,7 @@ class PlaylistParser : public QObject {
   Q_OBJECT
 
  public:
-  PlaylistParser(LibraryBackendInterface* library, QObject* parent = 0);
+  PlaylistParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   static const int kMagicSize;
 

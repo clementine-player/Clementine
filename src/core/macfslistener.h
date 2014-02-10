@@ -30,7 +30,7 @@ class MacFSListener : public FileSystemWatcherInterface {
   Q_OBJECT
 
  public:
-  explicit MacFSListener(QObject* parent = 0);
+  explicit MacFSListener(QObject* parent = nullptr);
   void Init();
   void AddPath(const QString& path);
   void RemovePath(const QString& path);

@@ -25,7 +25,7 @@ class AlbumCoverManager;
 class AlbumCoverManagerList : public QListWidget {
   Q_OBJECT
  public:
-  AlbumCoverManagerList(QWidget* parent = 0);
+  AlbumCoverManagerList(QWidget* parent = nullptr);
 
   void set_cover_manager(AlbumCoverManager* manager) { manager_ = manager; }
 

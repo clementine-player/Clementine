@@ -78,7 +78,7 @@ class Mpris1 : public QObject {
   Q_OBJECT
 
  public:
-  Mpris1(Application* app, QObject* parent = 0,
+  Mpris1(Application* app, QObject* parent = nullptr,
          const QString& dbus_service_name = QString());
   ~Mpris1();
 
@@ -102,7 +102,7 @@ class Mpris1Root : public QObject {
   Q_OBJECT
 
  public:
-  Mpris1Root(Application* app, QObject* parent = 0);
+  Mpris1Root(Application* app, QObject* parent = nullptr);
 
   QString Identity();
   void Quit();
@@ -116,7 +116,7 @@ class Mpris1Player : public QObject {
   Q_OBJECT
 
  public:
-  Mpris1Player(Application* app, QObject* parent = 0);
+  Mpris1Player(Application* app, QObject* parent = nullptr);
 
   void Pause();
   void Stop();
@@ -171,7 +171,7 @@ class Mpris1TrackList : public QObject {
   Q_OBJECT
 
  public:
-  Mpris1TrackList(Application* app, QObject* parent = 0);
+  Mpris1TrackList(Application* app, QObject* parent = nullptr);
 
   int AddTrack(const QString&, bool);
   void DelTrack(int index);

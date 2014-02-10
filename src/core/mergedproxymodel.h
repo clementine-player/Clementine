@@ -30,7 +30,7 @@ class MergedProxyModel : public QAbstractProxyModel {
   Q_OBJECT
 
  public:
-  MergedProxyModel(QObject* parent = 0);
+  MergedProxyModel(QObject* parent = nullptr);
   ~MergedProxyModel();
 
   // Make another model appear as a child of the given item in the source model.

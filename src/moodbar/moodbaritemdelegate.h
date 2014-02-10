@@ -36,7 +36,7 @@ class MoodbarItemDelegate : public QItemDelegate {
 
  public:
   MoodbarItemDelegate(Application* app, PlaylistView* view,
-                      QObject* parent = 0);
+                      QObject* parent = nullptr);
 
   void paint(QPainter* painter, const QStyleOptionViewItem& option,
              const QModelIndex& index) const;

@@ -33,7 +33,7 @@ class TagFetcher : public QObject {
   // MusicBrainzClient.
 
  public:
-  TagFetcher(QObject* parent = 0);
+  TagFetcher(QObject* parent = nullptr);
 
   void StartFetch(const SongList& songs);
 

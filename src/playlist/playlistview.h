@@ -59,7 +59,7 @@ class PlaylistView : public QTreeView {
  public:
   enum BackgroundImageType { Default, None, Custom, AlbumCover };
 
-  PlaylistView(QWidget* parent = 0);
+  PlaylistView(QWidget* parent = nullptr);
 
   static const int kStateVersion;
   // Constants for settings: are persistent, values should not be changed

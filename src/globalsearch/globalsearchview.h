@@ -41,7 +41,7 @@ class GlobalSearchView : public QWidget {
   Q_OBJECT
 
  public:
-  GlobalSearchView(Application* app, QWidget* parent = 0);
+  GlobalSearchView(Application* app, QWidget* parent = nullptr);
   ~GlobalSearchView();
 
   static const int kSwapModelsTimeoutMsec;

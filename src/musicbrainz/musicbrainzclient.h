@@ -38,7 +38,7 @@ class MusicBrainzClient : public QObject {
   // the Finished signal - they have no meaning to MusicBrainzClient.
 
  public:
-  MusicBrainzClient(QObject* parent = 0);
+  MusicBrainzClient(QObject* parent = nullptr);
 
   struct Result {
     Result() : duration_msec_(0), track_(0), year_(-1) {}

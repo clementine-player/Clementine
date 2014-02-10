@@ -78,7 +78,7 @@ class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverFetcher(CoverProviders* cover_providers, QObject* parent = 0,
+  AlbumCoverFetcher(CoverProviders* cover_providers, QObject* parent = nullptr,
                     QNetworkAccessManager* network = 0);
   virtual ~AlbumCoverFetcher() {}
 

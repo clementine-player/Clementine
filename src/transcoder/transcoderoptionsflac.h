@@ -24,7 +24,7 @@ class Ui_TranscoderOptionsFlac;
 
 class TranscoderOptionsFlac : public TranscoderOptionsInterface {
  public:
-  TranscoderOptionsFlac(QWidget* parent = 0);
+  TranscoderOptionsFlac(QWidget* parent = nullptr);
   ~TranscoderOptionsFlac();
 
   void Load();

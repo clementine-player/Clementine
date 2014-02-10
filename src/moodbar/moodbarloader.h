@@ -32,7 +32,7 @@ class MoodbarLoader : public QObject {
   Q_OBJECT
 
  public:
-  MoodbarLoader(Application* app, QObject* parent = 0);
+  MoodbarLoader(Application* app, QObject* parent = nullptr);
   ~MoodbarLoader();
 
   enum Result {

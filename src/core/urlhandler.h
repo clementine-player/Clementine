@@ -26,7 +26,7 @@ class UrlHandler : public QObject {
   Q_OBJECT
 
  public:
-  UrlHandler(QObject* parent = 0);
+  UrlHandler(QObject* parent = nullptr);
 
   // The URL scheme that this handler handles.
   virtual QString scheme() const = 0;

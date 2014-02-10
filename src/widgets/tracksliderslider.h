@@ -27,7 +27,7 @@ class TrackSliderSlider : public QSlider {
   Q_OBJECT
 
  public:
-  TrackSliderSlider(QWidget* parent = 0);
+  TrackSliderSlider(QWidget* parent = nullptr);
 
  protected:
   void mousePressEvent(QMouseEvent* e);

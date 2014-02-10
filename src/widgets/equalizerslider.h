@@ -27,7 +27,7 @@ class EqualizerSlider : public QWidget {
   Q_OBJECT
 
  public:
-  EqualizerSlider(const QString& label, QWidget* parent = 0);
+  EqualizerSlider(const QString& label, QWidget* parent = nullptr);
   ~EqualizerSlider();
 
   int value() const;

@@ -42,7 +42,7 @@ class InternetModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  InternetModel(Application* app, QObject* parent = 0);
+  InternetModel(Application* app, QObject* parent = nullptr);
 
   enum Role {
     // Services can use this role to distinguish between different types of

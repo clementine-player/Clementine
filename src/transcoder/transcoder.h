@@ -47,7 +47,7 @@ class Transcoder : public QObject {
   Q_OBJECT
 
  public:
-  Transcoder(QObject* parent = 0);
+  Transcoder(QObject* parent = nullptr);
 
   static TranscoderPreset PresetForFileType(Song::FileType type);
   static QList<TranscoderPreset> GetAllPresets();

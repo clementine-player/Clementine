@@ -29,7 +29,7 @@ class SpotifyBlobDownloader : public QObject {
 
  public:
   SpotifyBlobDownloader(const QString& version, const QString& path,
-                        QObject* parent = 0);
+                        QObject* parent = nullptr);
   ~SpotifyBlobDownloader();
 
   static const char* kSignatureSuffix;

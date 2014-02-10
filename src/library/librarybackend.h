@@ -36,7 +36,7 @@ class LibraryBackendInterface : public QObject {
   Q_OBJECT
 
  public:
-  LibraryBackendInterface(QObject* parent = 0) : QObject(parent) {}
+  LibraryBackendInterface(QObject* parent = nullptr) : QObject(parent) {}
   virtual ~LibraryBackendInterface() {}
 
   struct Album {
@@ -121,7 +121,7 @@ class LibraryBackend : public LibraryBackendInterface {
  public:
   static const char* kSettingsGroup;
 
-  Q_INVOKABLE LibraryBackend(QObject* parent = 0);
+  Q_INVOKABLE LibraryBackend(QObject* parent = nullptr);
   void Init(Database* db, const QString& songs_table, const QString& dirs_table,
             const QString& subdirs_table, const QString& fts_table);
 

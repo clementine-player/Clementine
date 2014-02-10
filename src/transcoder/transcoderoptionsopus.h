@@ -24,7 +24,7 @@ class Ui_TranscoderOptionsOpus;
 
 class TranscoderOptionsOpus : public TranscoderOptionsInterface {
  public:
-  TranscoderOptionsOpus(QWidget* parent = 0);
+  TranscoderOptionsOpus(QWidget* parent = nullptr);
   ~TranscoderOptionsOpus();
 
   void Load();

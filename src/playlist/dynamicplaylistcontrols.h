@@ -26,7 +26,7 @@ class DynamicPlaylistControls : public QWidget {
   Q_OBJECT
 
  public:
-  DynamicPlaylistControls(QWidget* parent = 0);
+  DynamicPlaylistControls(QWidget* parent = nullptr);
   ~DynamicPlaylistControls();
 
 signals:

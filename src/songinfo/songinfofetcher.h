@@ -33,7 +33,7 @@ class SongInfoFetcher : public QObject {
   Q_OBJECT
 
  public:
-  SongInfoFetcher(QObject* parent = 0);
+  SongInfoFetcher(QObject* parent = nullptr);
 
   struct Result {
     QList<QUrl> images_;

@@ -35,7 +35,7 @@ class QXmlStreamReader;
 class MagnatuneDownloadDialog : public QDialog {
   Q_OBJECT
  public:
-  MagnatuneDownloadDialog(MagnatuneService* service, QWidget* parent = 0);
+  MagnatuneDownloadDialog(MagnatuneService* service, QWidget* parent = nullptr);
   ~MagnatuneDownloadDialog();
 
   void Show(const SongList& songs);

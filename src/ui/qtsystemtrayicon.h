@@ -26,7 +26,7 @@ class QtSystemTrayIcon : public SystemTrayIcon {
   Q_OBJECT
 
  public:
-  QtSystemTrayIcon(QObject* parent = 0);
+  QtSystemTrayIcon(QObject* parent = nullptr);
   ~QtSystemTrayIcon();
 
   void SetupMenu(QAction* previous, QAction* play, QAction* stop,

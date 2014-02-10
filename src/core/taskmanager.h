@@ -26,7 +26,7 @@ class TaskManager : public QObject {
   Q_OBJECT
 
  public:
-  TaskManager(QObject* parent = 0);
+  TaskManager(QObject* parent = nullptr);
 
   struct Task {
     int id;

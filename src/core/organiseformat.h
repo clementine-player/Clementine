@@ -48,7 +48,7 @@ class OrganiseFormat {
 
   class Validator : public QValidator {
    public:
-    explicit Validator(QObject* parent = 0);
+    explicit Validator(QObject* parent = nullptr);
     QValidator::State validate(QString& format, int& pos) const;
   };
 
@@ -61,7 +61,7 @@ class OrganiseFormat {
     static const QRgb kInvalidTagColorDark;
     static const QRgb kBlockColorDark;
 
-    explicit SyntaxHighlighter(QObject* parent = 0);
+    explicit SyntaxHighlighter(QObject* parent = nullptr);
     explicit SyntaxHighlighter(QTextEdit* parent);
     explicit SyntaxHighlighter(QTextDocument* parent);
     void highlightBlock(const QString& format);

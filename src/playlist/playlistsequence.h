@@ -32,7 +32,7 @@ class PlaylistSequence : public QWidget {
   Q_OBJECT
 
  public:
-  PlaylistSequence(QWidget* parent = 0, SettingsProvider* settings = 0);
+  PlaylistSequence(QWidget* parent = nullptr, SettingsProvider* settings = 0);
   ~PlaylistSequence();
 
   enum RepeatMode {

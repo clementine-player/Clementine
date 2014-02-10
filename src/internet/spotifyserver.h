@@ -31,7 +31,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   Q_OBJECT
 
  public:
-  SpotifyServer(QObject* parent = 0);
+  SpotifyServer(QObject* parent = nullptr);
 
   void Init();
   void Login(const QString& username, const QString& password,

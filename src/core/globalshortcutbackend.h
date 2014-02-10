@@ -26,7 +26,7 @@ class GlobalShortcutBackend : public QObject {
   Q_OBJECT
 
  public:
-  GlobalShortcutBackend(GlobalShortcuts* parent = 0);
+  GlobalShortcutBackend(GlobalShortcuts* parent = nullptr);
   virtual ~GlobalShortcutBackend() {}
 
   bool is_active() const { return active_; }

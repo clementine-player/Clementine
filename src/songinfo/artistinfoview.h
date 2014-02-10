@@ -32,7 +32,7 @@ class ArtistInfoView : public SongInfoBase {
   Q_OBJECT
 
  public:
-  ArtistInfoView(QWidget* parent = 0);
+  ArtistInfoView(QWidget* parent = nullptr);
   ~ArtistInfoView();
 
  protected:

@@ -30,7 +30,7 @@ class QueueManager : public QDialog {
   Q_OBJECT
 
  public:
-  QueueManager(QWidget* parent = 0);
+  QueueManager(QWidget* parent = nullptr);
   ~QueueManager();
 
   void SetPlaylistManager(PlaylistManager* manager);

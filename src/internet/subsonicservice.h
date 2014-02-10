@@ -140,7 +140,7 @@ class SubsonicLibraryScanner : public QObject {
   Q_OBJECT
 
  public:
-  SubsonicLibraryScanner(SubsonicService* service, QObject* parent = 0);
+  SubsonicLibraryScanner(SubsonicService* service, QObject* parent = nullptr);
   ~SubsonicLibraryScanner();
 
   void Scan();

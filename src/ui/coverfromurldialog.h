@@ -30,7 +30,7 @@ class CoverFromURLDialog : public QDialog {
   Q_OBJECT
 
  public:
-  CoverFromURLDialog(QWidget* parent = 0);
+  CoverFromURLDialog(QWidget* parent = nullptr);
   ~CoverFromURLDialog();
 
   // Opens the dialog. This returns an image found at the URL chosen by user

@@ -51,7 +51,7 @@ class CollapsibleInfoPane : public QWidget {
     QObject* content_object_;
   };
 
-  CollapsibleInfoPane(const Data& data, QWidget* parent = 0);
+  CollapsibleInfoPane(const Data& data, QWidget* parent = nullptr);
 
   const Data& data() const { return data_; }
 

@@ -22,7 +22,7 @@
 
 class WplParser : public XMLParser {
  public:
-  WplParser(LibraryBackendInterface* library, QObject* parent = 0);
+  WplParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "WPL"; }
   QStringList file_extensions() const { return QStringList() << "wpl"; }

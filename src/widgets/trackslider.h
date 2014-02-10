@@ -30,7 +30,7 @@ class TrackSlider : public QWidget {
   Q_OBJECT
 
  public:
-  TrackSlider(QWidget* parent = 0);
+  TrackSlider(QWidget* parent = nullptr);
   ~TrackSlider();
 
   void SetApplication(Application* app);

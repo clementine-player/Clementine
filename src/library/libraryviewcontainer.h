@@ -28,7 +28,7 @@ class LibraryViewContainer : public QWidget {
   Q_OBJECT
 
  public:
-  LibraryViewContainer(QWidget* parent = 0);
+  LibraryViewContainer(QWidget* parent = nullptr);
   ~LibraryViewContainer();
 
   LibraryFilterWidget* filter() const;

@@ -30,7 +30,7 @@ class IcecastModel : public SimpleTreeModel<IcecastItem> {
   Q_OBJECT
 
  public:
-  IcecastModel(IcecastBackend* backend, QObject* parent = 0);
+  IcecastModel(IcecastBackend* backend, QObject* parent = nullptr);
   ~IcecastModel();
 
   // These values get saved in QSettings - don't change them

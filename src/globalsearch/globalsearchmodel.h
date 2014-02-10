@@ -31,7 +31,7 @@ class GlobalSearchModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  GlobalSearchModel(GlobalSearch* engine, QObject* parent = 0);
+  GlobalSearchModel(GlobalSearch* engine, QObject* parent = nullptr);
 
   enum Role {
     Role_Result = LibraryModel::LastRole,

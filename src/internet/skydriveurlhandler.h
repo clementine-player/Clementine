@@ -8,7 +8,7 @@ class SkydriveService;
 class SkydriveUrlHandler : public UrlHandler {
   Q_OBJECT
  public:
-  SkydriveUrlHandler(SkydriveService* service, QObject* parent = 0);
+  SkydriveUrlHandler(SkydriveService* service, QObject* parent = nullptr);
 
   QString scheme() const { return "skydrive"; }
   QIcon icon() const { return QIcon(":providers/skydrive.png"); }

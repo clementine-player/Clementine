@@ -26,7 +26,7 @@ class LastFMStationDialog : public QDialog {
   Q_OBJECT
 
  public:
-  LastFMStationDialog(QWidget* parent = 0);
+  LastFMStationDialog(QWidget* parent = nullptr);
   ~LastFMStationDialog();
 
   enum Type { Artist, Tag, Custom, };

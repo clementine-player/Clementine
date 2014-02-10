@@ -38,7 +38,7 @@ class LibraryFilterWidget : public QWidget {
   Q_OBJECT
 
  public:
-  LibraryFilterWidget(QWidget* parent = 0);
+  LibraryFilterWidget(QWidget* parent = nullptr);
   ~LibraryFilterWidget();
 
   static const int kFilterDelay = 500;  // msec

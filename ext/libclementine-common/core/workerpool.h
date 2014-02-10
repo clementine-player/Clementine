@@ -38,7 +38,7 @@ class _WorkerPoolBase : public QObject {
   Q_OBJECT
 
  public:
-  _WorkerPoolBase(QObject* parent = 0);
+  _WorkerPoolBase(QObject* parent = nullptr);
 
 signals:
   // Emitted when a worker failed to start.  This usually happens when the
@@ -60,7 +60,7 @@ signals:
 template <typename HandlerType>
 class WorkerPool : public _WorkerPoolBase {
  public:
-  WorkerPool(QObject* parent = 0);
+  WorkerPool(QObject* parent = nullptr);
   ~WorkerPool();
 
   typedef typename HandlerType::MessageType MessageType;

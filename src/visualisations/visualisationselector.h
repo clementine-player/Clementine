@@ -26,7 +26,7 @@ class Ui_VisualisationSelector;
 class VisualisationSelector : public QDialog {
   Q_OBJECT
  public:
-  VisualisationSelector(QWidget* parent = 0);
+  VisualisationSelector(QWidget* parent = nullptr);
   ~VisualisationSelector();
 
   void SetVisualisation(ProjectMVisualisation* vis) { vis_ = vis; }

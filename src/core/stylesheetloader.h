@@ -25,7 +25,7 @@
 
 class StyleSheetLoader : public QObject {
  public:
-  StyleSheetLoader(QObject* parent = 0);
+  StyleSheetLoader(QObject* parent = nullptr);
 
   // Sets the given stylesheet on the given widget.
   // If the stylesheet contains strings like %palette-[role], these get replaced

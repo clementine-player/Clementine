@@ -36,7 +36,7 @@ class PlaylistContainer : public QWidget {
   Q_OBJECT
 
  public:
-  PlaylistContainer(QWidget* parent = 0);
+  PlaylistContainer(QWidget* parent = nullptr);
   ~PlaylistContainer();
 
   static const char* kSettingsGroup;

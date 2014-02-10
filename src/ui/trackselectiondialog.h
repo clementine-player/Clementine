@@ -31,7 +31,7 @@ class TrackSelectionDialog : public QDialog {
   Q_OBJECT
 
  public:
-  TrackSelectionDialog(QWidget* parent = 0);
+  TrackSelectionDialog(QWidget* parent = nullptr);
   ~TrackSelectionDialog();
 
   void set_save_on_close(bool save_on_close) { save_on_close_ = save_on_close; }

@@ -39,7 +39,7 @@ class DeviceManager : public QAbstractListModel {
   Q_OBJECT
 
  public:
-  DeviceManager(Application* app, QObject* parent = 0);
+  DeviceManager(Application* app, QObject* parent = nullptr);
   ~DeviceManager();
 
   enum Role {

@@ -36,7 +36,7 @@ class StandardItemIconLoader : public QObject {
   Q_OBJECT
 
  public:
-  StandardItemIconLoader(AlbumCoverLoader* cover_loader, QObject* parent = 0);
+  StandardItemIconLoader(AlbumCoverLoader* cover_loader, QObject* parent = nullptr);
 
   AlbumCoverLoaderOptions* options() { return &cover_options_; }
 

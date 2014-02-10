@@ -39,7 +39,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   Q_OBJECT
 
  public:
-  SpotifyClient(QObject* parent = 0);
+  SpotifyClient(QObject* parent = nullptr);
   ~SpotifyClient();
 
   static const int kSpotifyImageIDSize;

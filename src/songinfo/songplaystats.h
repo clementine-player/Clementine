@@ -25,7 +25,7 @@ class SongPlayStats : public QWidget {
   Q_OBJECT
 
  public:
-  SongPlayStats(QWidget* parent = 0);
+  SongPlayStats(QWidget* parent = nullptr);
 
   static const int kIconSize;
   static const int kLineSpacing;

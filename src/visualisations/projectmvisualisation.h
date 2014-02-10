@@ -35,7 +35,7 @@ class QTemporaryFile;
 class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   Q_OBJECT
  public:
-  ProjectMVisualisation(QObject* parent = 0);
+  ProjectMVisualisation(QObject* parent = nullptr);
   ~ProjectMVisualisation();
 
   enum Mode { Random = 0, FromList = 1, };

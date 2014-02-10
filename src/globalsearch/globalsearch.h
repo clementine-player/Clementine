@@ -32,7 +32,7 @@ class GlobalSearch : public QObject {
   Q_OBJECT
 
  public:
-  GlobalSearch(Application* app, QObject* parent = 0);
+  GlobalSearch(Application* app, QObject* parent = nullptr);
 
   static const int kDelayedSearchTimeoutMs;
   static const char* kSettingsGroup;

@@ -24,7 +24,7 @@ class Ui_TranscoderOptionsWma;
 
 class TranscoderOptionsWma : public TranscoderOptionsInterface {
  public:
-  TranscoderOptionsWma(QWidget* parent = 0);
+  TranscoderOptionsWma(QWidget* parent = nullptr);
   ~TranscoderOptionsWma();
 
   void Load();

@@ -25,7 +25,7 @@ class UltimateLyricsLyric : public QTextDocument {
   Q_OBJECT
 
  public:
-  UltimateLyricsLyric(QObject* parent = 0);
+  UltimateLyricsLyric(QObject* parent = nullptr);
 
   void SetHtml(const QString& html);
 };

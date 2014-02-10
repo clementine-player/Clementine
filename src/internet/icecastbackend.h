@@ -29,7 +29,7 @@ class IcecastBackend : public QObject {
   Q_OBJECT
 
  public:
-  IcecastBackend(QObject* parent = 0);
+  IcecastBackend(QObject* parent = nullptr);
   void Init(Database* db);
 
   static const char* kTableName;

@@ -24,7 +24,7 @@ class ElidedLabel : public QLabel {
   Q_OBJECT
 
  public:
-  ElidedLabel(QWidget* parent = 0);
+  ElidedLabel(QWidget* parent = nullptr);
 
  public slots:
   void SetText(const QString& text);

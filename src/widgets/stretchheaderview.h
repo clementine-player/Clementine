@@ -24,7 +24,7 @@ class StretchHeaderView : public QHeaderView {
   Q_OBJECT
 
  public:
-  StretchHeaderView(Qt::Orientation orientation, QWidget* parent = 0);
+  StretchHeaderView(Qt::Orientation orientation, QWidget* parent = nullptr);
 
   typedef double ColumnWidthType;
 

@@ -54,7 +54,7 @@ class SettingsDialog : public QDialog {
 
  public:
   SettingsDialog(Application* app, BackgroundStreams* streams,
-                 QWidget* parent = 0);
+                 QWidget* parent = nullptr);
   ~SettingsDialog();
 
   enum Page {

@@ -8,7 +8,7 @@ class DropboxService;
 class DropboxUrlHandler : public UrlHandler {
   Q_OBJECT
  public:
-  DropboxUrlHandler(DropboxService* service, QObject* parent = 0);
+  DropboxUrlHandler(DropboxService* service, QObject* parent = nullptr);
 
   QString scheme() const { return "dropbox"; }
   QIcon icon() const { return QIcon(":providers/dropbox.png"); }

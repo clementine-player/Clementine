@@ -31,7 +31,7 @@ class Mpris : public QObject {
   Q_OBJECT
 
  public:
-  Mpris(Application* app, QObject* parent = 0);
+  Mpris(Application* app, QObject* parent = nullptr);
 
 signals:
   void RaiseMainWindow();

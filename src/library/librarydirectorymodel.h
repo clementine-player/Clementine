@@ -32,7 +32,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  LibraryDirectoryModel(LibraryBackend* backend, QObject* parent = 0);
+  LibraryDirectoryModel(LibraryBackend* backend, QObject* parent = nullptr);
   ~LibraryDirectoryModel();
 
   // To be called by GUIs

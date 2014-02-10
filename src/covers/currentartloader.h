@@ -34,7 +34,7 @@ class CurrentArtLoader : public QObject {
   Q_OBJECT
 
  public:
-  CurrentArtLoader(Application* app, QObject* parent = 0);
+  CurrentArtLoader(Application* app, QObject* parent = nullptr);
   ~CurrentArtLoader();
 
   const AlbumCoverLoaderOptions& options() const { return options_; }

@@ -38,7 +38,7 @@ class LibraryWatcher : public QObject {
   Q_OBJECT
 
  public:
-  LibraryWatcher(QObject* parent = 0);
+  LibraryWatcher(QObject* parent = nullptr);
 
   static const char* kSettingsGroup;
 

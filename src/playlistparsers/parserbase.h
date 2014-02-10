@@ -29,7 +29,7 @@ class ParserBase : public QObject {
   Q_OBJECT
 
  public:
-  ParserBase(LibraryBackendInterface* library, QObject* parent = 0);
+  ParserBase(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   virtual QString name() const = 0;
   virtual QStringList file_extensions() const = 0;
