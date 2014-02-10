@@ -198,6 +198,7 @@ _ERROR_CATEGORIES = [
   'whitespace/newline',
   'whitespace/operators',
   'whitespace/parens',
+  'whitespace/references',
   'whitespace/semicolon',
   'whitespace/tab',
   'whitespace/todo'
@@ -4121,6 +4122,11 @@ def CheckForNonConstReference(filename, clean_lines, linenum,
           Search(whitelisted_functions, clean_lines.elided[linenum - i - 1])):
         check_params = False
         break
+
+  # While using a reference, space before & is unnecessary
+  if Search(r'const[\s][\S]+[\s]&[\s]', line):
+    error(filename, linenum, 'whitespace/references', 4,
+          'While using a reference, space before \"&\" is unnecessary')
 
   if check_params:
     decls = ReplaceAll(r'{[^}]*}', ' ', line)  # exclude function body
