@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FIXEDOPMLPAGE_H
-#define FIXEDOPMLPAGE_H
+#ifndef PODCASTS_FIXEDOPMLPAGE_H_
+#define PODCASTS_FIXEDOPMLPAGE_H_
 
 #include "addpodcastpage.h"
 
@@ -30,7 +30,7 @@ class FixedOpmlPage : public AddPodcastPage {
 
  public:
   FixedOpmlPage(const QUrl& opml_url, const QString& title, const QIcon& icon,
-                Application* app, QWidget* parent = 0);
+                Application* app, QWidget* parent = nullptr);
 
   bool has_visible_widget() const { return false; }
   void Show();
@@ -45,4 +45,4 @@ class FixedOpmlPage : public AddPodcastPage {
   bool done_initial_load_;
 };
 
-#endif  // FIXEDOPMLPAGE_H
+#endif  // PODCASTS_FIXEDOPMLPAGE_H_

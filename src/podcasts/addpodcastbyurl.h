@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDPODCASTBYURL_H
-#define ADDPODCASTBYURL_H
+#ifndef PODCASTS_ADDPODCASTBYURL_H_
+#define PODCASTS_ADDPODCASTBYURL_H_
 
 #include "addpodcastpage.h"
 
@@ -32,7 +32,7 @@ class AddPodcastByUrl : public AddPodcastPage {
   Q_OBJECT
 
  public:
-  AddPodcastByUrl(Application* app, QWidget* parent = 0);
+  AddPodcastByUrl(Application* app, QWidget* parent = nullptr);
   ~AddPodcastByUrl();
 
   void Show();
@@ -49,4 +49,4 @@ class AddPodcastByUrl : public AddPodcastPage {
   PodcastUrlLoader* loader_;
 };
 
-#endif  // ADDPODCASTBYURL_H
+#endif  // PODCASTS_ADDPODCASTBYURL_H_

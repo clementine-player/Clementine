@@ -55,7 +55,7 @@ void GPodderSearchPage::SearchFinished(mygpo::PodcastListPtr list) {
 
   model()->clear();
 
-  foreach(mygpo::PodcastPtr gpo_podcast, list->list()) {
+  for (mygpo::PodcastPtr gpo_podcast : list->list()) {
     Podcast podcast;
     podcast.InitFromGpo(gpo_podcast.data());
 

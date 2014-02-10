@@ -79,12 +79,12 @@ QStandardItem* PodcastDiscoveryModel::CreateOpmlContainerItem(
 
 void PodcastDiscoveryModel::CreateOpmlContainerItems(
     const OpmlContainer& container, QStandardItem* parent) {
-  foreach(const OpmlContainer & child, container.containers) {
+  for (const OpmlContainer& child : container.containers) {
     QStandardItem* child_item = CreateOpmlContainerItem(child);
     parent->appendRow(child_item);
   }
 
-  foreach(const Podcast & child, container.feeds) {
+  for (const Podcast& child : container.feeds) {
     QStandardItem* child_item = CreatePodcastItem(child);
     parent->appendRow(child_item);
   }

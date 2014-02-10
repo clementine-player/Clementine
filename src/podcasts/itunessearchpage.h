@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ITUNESSEARCHPAGE_H
-#define ITUNESSEARCHPAGE_H
+#ifndef PODCASTS_ITUNESSEARCHPAGE_H_
+#define PODCASTS_ITUNESSEARCHPAGE_H_
 
 #include "addpodcastpage.h"
 
@@ -46,4 +46,4 @@ class ITunesSearchPage : public AddPodcastPage {
   QNetworkAccessManager* network_;
 };
 
-#endif  // ITUNESSEARCHPAGE_H
+#endif  // PODCASTS_ITUNESSEARCHPAGE_H_

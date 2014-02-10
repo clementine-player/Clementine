@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTDOWNLOADER_H
-#define PODCASTDOWNLOADER_H
+#ifndef PODCASTS_PODCASTDOWNLOADER_H_
+#define PODCASTS_PODCASTDOWNLOADER_H_
 
 #include "podcast.h"
 #include "podcastepisode.h"
@@ -42,7 +42,7 @@ class PodcastDownloader : public QObject {
   Q_OBJECT
 
  public:
-  PodcastDownloader(Application* app, QObject* parent = 0);
+  PodcastDownloader(Application* app, QObject* parent = nullptr);
 
   enum State { NotDownloading, Queued, Downloading, Finished };
 
@@ -58,7 +58,7 @@ class PodcastDownloader : public QObject {
   // Deletes downloaded data for this episode
   void DeleteEpisode(const PodcastEpisode& episode);
 
-signals:
+ signals:
   void ProgressChanged(const PodcastEpisode& episode,
                        PodcastDownloader::State state, int percent);
 
@@ -105,4 +105,4 @@ signals:
   QTimer* auto_delete_timer_;
 };
 
-#endif  // PODCASTDOWNLOADER_H
+#endif  // PODCASTS_PODCASTDOWNLOADER_H_

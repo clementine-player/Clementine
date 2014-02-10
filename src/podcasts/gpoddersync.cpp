@@ -168,11 +168,11 @@ void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
   // Remember episode actions for each podcast, so when we add a new podcast
   // we can apply the actions immediately.
   QMap<QUrl, QList<mygpo::EpisodePtr> > episodes_by_podcast;
-  foreach(mygpo::EpisodePtr episode, reply->updateList()) {
+  for (mygpo::EpisodePtr episode : reply->updateList()) {
     episodes_by_podcast[episode->podcastUrl()].append(episode);
   }
 
-  foreach(mygpo::PodcastPtr podcast, reply->addList()) {
+  for (mygpo::PodcastPtr podcast : reply->addList()) {
     const QUrl url(podcast->url());
 
     // Are we subscribed to this podcast already?
@@ -195,7 +195,7 @@ void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
   }
 
   // Unsubscribe from podcasts that were removed.
-  foreach(const QUrl & url, reply->removeList()) {
+  for (const QUrl& url : reply->removeList()) {
     backend_->Unsubscribe(backend_->GetSubscriptionByUrl(url));
   }
 
@@ -223,7 +223,7 @@ void GPodderSync::NewPodcastLoaded(PodcastUrlLoaderReply* reply,
   }
 
   // Apply the actions to the episodes in the podcast.
-  foreach(Podcast podcast, reply->podcast_results()) {
+  for (Podcast podcast : reply->podcast_results()) {
     ApplyActions(actions, podcast.mutable_episodes());
 
     // Add the subscription
@@ -237,7 +237,7 @@ void GPodderSync::ApplyActions(
   for (PodcastEpisodeList::iterator it = episodes->begin();
        it != episodes->end(); ++it) {
     // Find an action for this episode
-    foreach(mygpo::EpisodePtr action, actions) {
+    for (mygpo::EpisodePtr action : actions) {
       if (action->url() != it->url()) continue;
 
       switch (action->status()) {
@@ -284,7 +284,7 @@ void WriteContainer(const T& container, QSettings* s, const char* array_name,
                     const char* item_name) {
   s->beginWriteArray(array_name, container.count());
   int index = 0;
-  foreach(const typename T::value_type & item, container) {
+  for (const auto& item : container) {
     s->setArrayIndex(index++);
     s->setValue(item_name, item);
   }
@@ -302,7 +302,7 @@ void ReadContainer(T* container, QSettings* s, const char* array_name,
   }
   s->endArray();
 }
-}
+}  // namespace
 
 void GPodderSync::SaveQueue() {
   QSettings s;
@@ -357,7 +357,7 @@ void GPodderSync::AddRemoveFinished(mygpo::AddRemoveResultPtr reply,
   flushing_queue_ = false;
 
   // Remove the URLs from the queue.
-  foreach(const QUrl & url, affected_urls) {
+  for (const QUrl& url : affected_urls) {
     queued_add_subscriptions_.remove(url);
     queued_remove_subscriptions_.remove(url);
   }
@@ -379,7 +379,7 @@ void GPodderSync::DoInitialSync() {
   // Send our complete list of subscriptions
   queued_remove_subscriptions_.clear();
   queued_add_subscriptions_.clear();
-  foreach(const Podcast & podcast, backend_->GetAllSubscriptions()) {
+  for (const Podcast& podcast : backend_->GetAllSubscriptions()) {
     queued_add_subscriptions_.insert(podcast.url());
   }
 
