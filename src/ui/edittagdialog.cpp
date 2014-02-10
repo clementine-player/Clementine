@@ -84,7 +84,7 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
 
   // An editable field is one that has a label as a buddy.  The label is
   // important because it gets turned bold when the field is changed.
-  foreach(QLabel * label, findChildren<QLabel*>()) {
+  for (QLabel* label : findChildren<QLabel*>()) {
     QWidget* widget = label->buddy();
     if (widget) {
       // Store information about the field
@@ -113,7 +113,7 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   summary_label_palette.setColor(
       QPalette::WindowText, light ? color.darker(150) : color.lighter(125));
 
-  foreach(QLabel * label, ui_->summary_tab->findChildren<QLabel*>()) {
+  for (QLabel* label : ui_->summary_tab->findChildren<QLabel*>()) {
     if (label->property("field_label").toBool()) {
       label->setPalette(summary_label_palette);
     }
@@ -220,7 +220,7 @@ QList<EditTagDialog::Data> EditTagDialog::LoadData(const SongList& songs)
     const {
   QList<Data> ret;
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     if (song.IsEditable()) {
       // Try reloading the tags from file
       Song copy(song);
@@ -277,7 +277,7 @@ void EditTagDialog::SetSongsFinished() {
   }
 
   // Add the filenames to the list
-  foreach(const Data & data, data_) {
+  for (const Data& data : data_) {
     ui_->song_list->addItem(data.current_.basefilename());
   }
 
@@ -338,7 +338,7 @@ bool EditTagDialog::DoesValueVary(const QModelIndexList& sel,
 
 bool EditTagDialog::IsValueModified(const QModelIndexList& sel,
                                     const QString& id) const {
-  foreach(const QModelIndex & i, sel) {
+  for (const QModelIndex& i : sel) {
     if (data_[i.row()].original_value(id) != data_[i.row()].current_value(id))
       return true;
   }
@@ -380,7 +380,7 @@ void EditTagDialog::UpdateFieldValue(const FieldData& field,
   }
 
   // Set it in each selected song
-  foreach(const QModelIndex & i, sel) {
+  for (const QModelIndex& i : sel) {
     data_[i.row()].set_value(field.id_, value);
   }
 
@@ -396,7 +396,7 @@ void EditTagDialog::UpdateFieldValue(const FieldData& field,
 void EditTagDialog::ResetFieldValue(const FieldData& field,
                                     const QModelIndexList& sel) {
   // Reset each selected song
-  foreach(const QModelIndex & i, sel) {
+  for (const QModelIndex& i : sel) {
     Data& data = data_[i.row()];
     data.set_value(field.id_, data.original_value(field.id_));
   }
@@ -412,7 +412,9 @@ void EditTagDialog::SelectionChanged() {
 
   // Set the editable fields
   ignore_edits_ = true;
-  foreach(const FieldData & field, fields_) { InitFieldValue(field, sel); }
+  for (const FieldData& field : fields_) {
+    InitFieldValue(field, sel);
+  }
   ignore_edits_ = false;
 
   // If we're editing multiple songs then we have to disable certain tabs
@@ -525,7 +527,7 @@ void EditTagDialog::FieldValueEdited() {
   QWidget* w = qobject_cast<QWidget*>(sender());
 
   // Find the field
-  foreach(const FieldData & field, fields_) {
+  for (const FieldData& field : fields_) {
     if (field.editor_ == w) {
       UpdateFieldValue(field, sel);
       return;
@@ -541,7 +543,7 @@ void EditTagDialog::ResetField() {
   QWidget* w = qobject_cast<QWidget*>(sender());
 
   // Find the field
-  foreach(const FieldData & field, fields_) {
+  for (const FieldData& field : fields_) {
     if (field.editor_ == w) {
       ignore_edits_ = true;
       ResetFieldValue(field, sel);
@@ -673,7 +675,7 @@ void EditTagDialog::SaveData(const QList<Data>& data) {
     if (ref.current_.IsMetadataEqual(ref.original_)) continue;
 
     if (!TagReaderClient::Instance()->SaveFileBlocking(
-            ref.current_.url().toLocalFile(), ref.current_)) {
+             ref.current_.url().toLocalFile(), ref.current_)) {
       emit Error(tr("An error occurred writing metadata to '%1'")
                      .arg(ref.current_.url().toLocalFile()));
     }
@@ -799,7 +801,7 @@ void EditTagDialog::FetchTag() {
 
   SongList songs;
 
-  foreach(const QModelIndex & index, sel) {
+  for (const QModelIndex& index : sel) {
     Song song = data_[index.row()].original_;
     if (!song.is_valid()) {
       continue;

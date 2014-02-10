@@ -28,8 +28,8 @@ QxtGlobalShortcutBackend::QxtGlobalShortcutBackend(GlobalShortcuts* parent)
 
 bool QxtGlobalShortcutBackend::DoRegister() {
   qLog(Debug) << "registering";
-  foreach(const GlobalShortcuts::Shortcut & shortcut,
-          manager_->shortcuts().values()) {
+  for (const GlobalShortcuts::Shortcut& shortcut :
+       manager_->shortcuts().values()) {
     AddShortcut(shortcut.action);
   }
 

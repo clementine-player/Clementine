@@ -132,7 +132,7 @@ void AlbumCoverChoiceController::SaveCoverToFile(const Song& song,
   QString extension = save_filename.right(4);
   if (!extension.startsWith('.') ||
       !QImageWriter::supportedImageFormats().contains(
-          extension.right(3).toUtf8())) {
+           extension.right(3).toUtf8())) {
     save_filename.append(".jpg");
   }
 
@@ -284,7 +284,7 @@ bool AlbumCoverChoiceController::IsKnownImageExtension(const QString& suffix) {
 }
 
 bool AlbumCoverChoiceController::CanAcceptDrag(const QDragEnterEvent* e) {
-  foreach(const QUrl & url, e->mimeData()->urls()) {
+  for (const QUrl& url : e->mimeData()->urls()) {
     const QString suffix = QFileInfo(url.toLocalFile()).suffix().toLower();
     if (IsKnownImageExtension(suffix)) return true;
   }
@@ -295,7 +295,7 @@ bool AlbumCoverChoiceController::CanAcceptDrag(const QDragEnterEvent* e) {
 }
 
 QString AlbumCoverChoiceController::SaveCover(Song* song, const QDropEvent* e) {
-  foreach(const QUrl & url, e->mimeData()->urls()) {
+  for (const QUrl& url : e->mimeData()->urls()) {
     const QString filename = url.toLocalFile();
     const QString suffix = QFileInfo(filename).suffix().toLower();
 

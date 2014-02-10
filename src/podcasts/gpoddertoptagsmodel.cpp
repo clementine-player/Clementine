@@ -79,7 +79,7 @@ void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
     parent_item->removeRow(0);
   }
 
-  foreach(mygpo::PodcastPtr gpo_podcast, list->list()) {
+  for (mygpo::PodcastPtr gpo_podcast : list->list()) {
     Podcast podcast;
     podcast.InitFromGpo(gpo_podcast.data());
 

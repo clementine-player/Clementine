@@ -70,7 +70,7 @@ void MagnatuneDownloadDialog::Show(const SongList& songs) {
   ui_->albums->clear();
 
   QSet<QString> sku_codes;
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     if (!sku_codes.contains(song.comment())) {
       sku_codes.insert(song.comment());
 

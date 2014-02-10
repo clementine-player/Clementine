@@ -137,7 +137,7 @@ void SearchTermWidget::FieldChanged(int index) {
   // Populate the operator combo box
   if (type != current_field_type_) {
     ui_->op->clear();
-    foreach(SearchTerm::Operator op, SearchTerm::OperatorsForType(type)) {
+    for (SearchTerm::Operator op : SearchTerm::OperatorsForType(type)) {
       const int i = ui_->op->count();
       ui_->op->addItem(SearchTerm::OperatorText(type, op));
       ui_->op->setItemData(i, op);

@@ -249,7 +249,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
   QModelIndexList new_indexes;
 
   QModelIndex last_valid_index;
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
     if (!IsPlayable(index)) continue;
 
     last_valid_index = index;
@@ -299,7 +299,7 @@ void InternetModel::ShowContextMenu(
   current_index_ = merged_model_->mapToSource(current_merged_model_index);
 
   selected_indexes_.clear();
-  foreach(const QModelIndex & index, selected_merged_model_indexes) {
+  for (const QModelIndex& index : selected_merged_model_indexes) {
     selected_indexes_ << merged_model_->mapToSource(index);
   }
 
@@ -308,7 +308,7 @@ void InternetModel::ShowContextMenu(
 }
 
 void InternetModel::ReloadSettings() {
-  foreach(InternetService * service, sServices->values()) {
+  for (InternetService* service : sServices->values()) {
     service->ReloadSettings();
   }
 }

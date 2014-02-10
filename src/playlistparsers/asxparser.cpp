@@ -126,7 +126,7 @@ void ASXParser::Save(const SongList& songs, QIODevice* device,
   {
     StreamElement asx("asx", &writer);
     writer.writeAttribute("version", "3.0");
-    foreach(const Song & song, songs) {
+    for (const Song& song : songs) {
       StreamElement entry("entry", &writer);
       writer.writeTextElement("title", song.title());
       {

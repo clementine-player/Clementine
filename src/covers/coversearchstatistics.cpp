@@ -30,10 +30,10 @@ CoverSearchStatistics& CoverSearchStatistics::operator+=(
   network_requests_made_ += other.network_requests_made_;
   bytes_transferred_ += other.bytes_transferred_;
 
-  foreach(const QString & key, other.chosen_images_by_provider_.keys()) {
+  for (const QString& key : other.chosen_images_by_provider_.keys()) {
     chosen_images_by_provider_[key] += other.chosen_images_by_provider_[key];
   }
-  foreach(const QString & key, other.total_images_by_provider_.keys()) {
+  for (const QString& key : other.total_images_by_provider_.keys()) {
     total_images_by_provider_[key] += other.total_images_by_provider_[key];
   }
 

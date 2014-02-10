@@ -78,7 +78,7 @@ void SpotifyBlobDownloader::Start() {
                     << "libspotify.so.12.1.45"
                     << "libspotify.so.12.1.45" + QString(kSignatureSuffix);
 
-  foreach(const QString & filename, filenames) {
+  for (const QString& filename : filenames) {
     const QUrl url(SpotifyService::kBlobDownloadUrl + version_ + "/" +
                    filename);
     qLog(Info) << "Downloading" << url;
@@ -103,7 +103,7 @@ void SpotifyBlobDownloader::ReplyFinished() {
   }
 
   // Is everything finished?
-  foreach(QNetworkReply * reply, replies_) {
+  for (QNetworkReply* reply : replies_) {
     if (!reply->isFinished()) {
       return;
     }
@@ -113,7 +113,7 @@ void SpotifyBlobDownloader::ReplyFinished() {
   QMap<QString, QByteArray> file_data;
   QStringList signature_filenames;
 
-  foreach(QNetworkReply * reply, replies_) {
+  for (QNetworkReply* reply : replies_) {
     const QString filename = reply->url().path().section('/', -1, -1);
 
     if (filename.endsWith(kSignatureSuffix)) {
@@ -134,7 +134,7 @@ void SpotifyBlobDownloader::ReplyFinished() {
   }
 
   // Verify signatures
-  foreach(const QString & signature_filename, signature_filenames) {
+  for (const QString& signature_filename : signature_filenames) {
     QString actual_filename = signature_filename;
     actual_filename.remove(kSignatureSuffix);
 
@@ -152,7 +152,7 @@ void SpotifyBlobDownloader::ReplyFinished() {
   // Make the destination directory and write the files into it
   QDir().mkpath(path_);
 
-  foreach(const QString & filename, file_data.keys()) {
+  for (const QString& filename : file_data.keys()) {
     const QString dest_path = path_ + "/" + filename;
 
     if (filename.endsWith(kSignatureSuffix)) continue;
@@ -197,7 +197,7 @@ void SpotifyBlobDownloader::ReplyProgress() {
   int progress = 0;
   int total = 0;
 
-  foreach(QNetworkReply * reply, replies_) {
+  for (QNetworkReply* reply : replies_) {
     progress += reply->bytesAvailable();
     total += reply->rawHeader("Content-Length").toInt();
   }
@@ -211,7 +211,7 @@ void SpotifyBlobDownloader::Cancel() { deleteLater(); }
 void SpotifyBlobDownloader::ShowError(const QString& message) {
   // Stop any remaining replies before showing the dialog so they don't
   // carry on in the background
-  foreach(QNetworkReply * reply, replies_) {
+  for (QNetworkReply* reply : replies_) {
     disconnect(reply, 0, this, 0);
     reply->abort();
   }

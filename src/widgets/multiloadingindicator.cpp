@@ -50,7 +50,7 @@ void MultiLoadingIndicator::UpdateText() {
   QList<TaskManager::Task> tasks = task_manager_->GetTasks();
 
   QStringList strings;
-  foreach(const TaskManager::Task & task, tasks) {
+  for (const TaskManager::Task& task : tasks) {
     QString task_text(task.name);
     task_text[0] = task_text[0].toLower();
 

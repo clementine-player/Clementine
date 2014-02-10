@@ -221,13 +221,13 @@ QString GetTemporaryFileName() {
 
 void RemoveRecursive(const QString& path) {
   QDir dir(path);
-  foreach(const QString & child,
-          dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden))
-  RemoveRecursive(path + "/" + child);
+  for (const QString& child :
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden))
+    RemoveRecursive(path + "/" + child);
 
-  foreach(const QString & child,
-          dir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Hidden))
-  QFile::remove(path + "/" + child);
+  for (const QString& child :
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Hidden))
+    QFile::remove(path + "/" + child);
 
   dir.rmdir(path);
 }
@@ -239,8 +239,8 @@ bool CopyRecursive(const QString& source, const QString& destination) {
   QDir().mkpath(dest_path);
 
   QDir dir(source);
-  foreach(const QString & child,
-          dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs)) {
+  for (const QString& child :
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs)) {
     if (!CopyRecursive(source + "/" + child, dest_path)) {
       qLog(Warning) << "Failed to copy dir" << source + "/" + child << "to"
                     << dest_path;
@@ -248,8 +248,8 @@ bool CopyRecursive(const QString& source, const QString& destination) {
     }
   }
 
-  foreach(const QString & child,
-          dir.entryList(QDir::NoDotAndDotDot | QDir::Files)) {
+  for (const QString& child :
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Files)) {
     if (!QFile::copy(source + "/" + child, dest_path + "/" + child)) {
       qLog(Warning) << "Failed to copy file" << source + "/" + child << "to"
                     << dest_path;
@@ -382,7 +382,7 @@ void ShowFileInExplorer(QString const& path) {
 void OpenInFileBrowser(const QList<QUrl>& urls) {
   QSet<QString> dirs;
 
-  foreach(const QUrl & url, urls) {
+  for (const QUrl& url : urls) {
     if (url.scheme() != "file") {
       continue;
     }

@@ -70,7 +70,7 @@ void LoginStateWidget::SetLoggedIn(State state, const QString& account_name) {
     ui_->signed_in_label->setText(
         tr("You are signed in as %1.").arg("<b>" + account_name + "</b>"));
 
-  foreach(QWidget * widget, credential_groups_) {
+  for (QWidget* widget : credential_groups_) {
     widget->setVisible(state != LoggedIn);
     widget->setEnabled(state != LoginInProgress);
   }

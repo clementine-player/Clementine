@@ -81,8 +81,7 @@ void GlobalShortcutsSettingsPage::Load() {
       ui_->gnome_container->hide();
     }
 
-    foreach(const GlobalShortcuts::Shortcut & s,
-            manager->shortcuts().values()) {
+    for (const GlobalShortcuts::Shortcut& s : manager->shortcuts().values()) {
       Shortcut shortcut;
       shortcut.s = s;
       shortcut.key = s.action->shortcut();
@@ -98,7 +97,7 @@ void GlobalShortcutsSettingsPage::Load() {
     ItemClicked(ui_->list->topLevelItem(0));
   }
 
-  foreach(const Shortcut & s, shortcuts_.values()) {
+  for (const Shortcut& s : shortcuts_.values()) {
     SetShortcut(s.s.id, s.s.action->shortcut());
   }
 
@@ -119,7 +118,7 @@ void GlobalShortcutsSettingsPage::SetShortcut(const QString& id,
 }
 
 void GlobalShortcutsSettingsPage::Save() {
-  foreach(const Shortcut & s, shortcuts_.values()) {
+  for (const Shortcut& s : shortcuts_.values()) {
     s.s.action->setShortcut(s.key);
     s.s.shortcut->setKey(s.key);
     settings_.setValue(s.s.id, s.key.toString());
@@ -164,7 +163,7 @@ void GlobalShortcutsSettingsPage::ChangeClicked() {
   if (key.isEmpty()) return;
 
   // Check if this key sequence is used by any other actions
-  foreach(const QString & id, shortcuts_.keys()) {
+  for (const QString& id : shortcuts_.keys()) {
     if (shortcuts_[id].key == key) SetShortcut(id, QKeySequence());
   }
 

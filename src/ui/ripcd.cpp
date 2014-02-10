@@ -429,19 +429,19 @@ void RipCD::SetWorking(bool working) {
 }
 
 void RipCD::SelectAll() {
-  foreach(QCheckBox * checkbox, checkboxes_) {
+  for (QCheckBox* checkbox : checkboxes_) {
     checkbox->setCheckState(Qt::Checked);
   }
 }
 
 void RipCD::SelectNone() {
-  foreach(QCheckBox * checkbox, checkboxes_) {
+  for (QCheckBox* checkbox : checkboxes_) {
     checkbox->setCheckState(Qt::Unchecked);
   }
 }
 
 void RipCD::InvertSelection() {
-  foreach(QCheckBox * checkbox, checkboxes_) {
+  for (QCheckBox* checkbox : checkboxes_) {
     if (checkbox->isChecked()) {
       checkbox->setCheckState(Qt::Unchecked);
     } else {

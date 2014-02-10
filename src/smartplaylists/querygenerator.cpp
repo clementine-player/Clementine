@@ -71,7 +71,7 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
 
   SongList songs = backend_->FindSongs(search_copy);
   PlaylistItemList items;
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     items << PlaylistItemPtr(PlaylistItem::NewFromSongsTable(
                  backend_->songs_table(), song));
     previous_ids_ << song.id();

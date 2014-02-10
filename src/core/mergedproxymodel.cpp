@@ -397,7 +397,7 @@ QStringList MergedProxyModel::mimeTypes() const {
   QStringList ret;
   ret << sourceModel()->mimeTypes();
 
-  foreach(const QAbstractItemModel * model, merge_points_.keys()) {
+  for (const QAbstractItemModel* model : merge_points_.keys()) {
     ret << model->mimeTypes();
   }
 
@@ -416,7 +416,7 @@ QMimeData* MergedProxyModel::mimeData(const QModelIndexList& indexes) const {
   // Only ask about the indexes that are actually in that model
   QModelIndexList indexes_in_model;
 
-  foreach(const QModelIndex & proxy_index, indexes) {
+  for (const QModelIndex& proxy_index : indexes) {
     QModelIndex source_index = mapToSource(proxy_index);
     if (source_index.model() != model) continue;
     indexes_in_model << source_index;
@@ -467,7 +467,7 @@ QAbstractItemModel* MergedProxyModel::GetModel(const QModelIndex& source_index)
   // but without the const_cast
   const QAbstractItemModel* const_model = source_index.model();
   if (const_model == sourceModel()) return sourceModel();
-  foreach(QAbstractItemModel * submodel, merge_points_.keys()) {
+  for (QAbstractItemModel* submodel : merge_points_.keys()) {
     if (submodel == const_model) return submodel;
   }
   return nullptr;
@@ -480,13 +480,13 @@ void MergedProxyModel::DataChanged(const QModelIndex& top_left,
 
 void MergedProxyModel::LayoutAboutToBeChanged() {
   old_merge_points_.clear();
-  foreach(QAbstractItemModel * key, merge_points_.keys()) {
+  for (QAbstractItemModel* key : merge_points_.keys()) {
     old_merge_points_[key] = merge_points_.value(key);
   }
 }
 
 void MergedProxyModel::LayoutChanged() {
-  foreach(QAbstractItemModel * key, merge_points_.keys()) {
+  for (QAbstractItemModel* key : merge_points_.keys()) {
     if (!old_merge_points_.contains(key)) continue;
 
     const int old_row = old_merge_points_[key].row();
@@ -509,7 +509,7 @@ bool MergedProxyModel::IsKnownModel(const QAbstractItemModel* model) const {
 QModelIndexList MergedProxyModel::mapFromSource(
     const QModelIndexList& source_indexes) const {
   QModelIndexList ret;
-  foreach(const QModelIndex & index, source_indexes) {
+  for (const QModelIndex& index : source_indexes) {
     ret << mapFromSource(index);
   }
   return ret;
@@ -518,7 +518,7 @@ QModelIndexList MergedProxyModel::mapFromSource(
 QModelIndexList MergedProxyModel::mapToSource(
     const QModelIndexList& proxy_indexes) const {
   QModelIndexList ret;
-  foreach(const QModelIndex & index, proxy_indexes) {
+  for (const QModelIndex& index : proxy_indexes) {
     ret << mapToSource(index);
   }
   return ret;

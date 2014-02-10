@@ -88,7 +88,7 @@ static void MessageHandler(QtMsgType type, const char* message) {
       break;
   }
 
-  foreach(const QString & line, QString::fromLocal8Bit(message).split('\n')) {
+  for (const QString& line : QString::fromLocal8Bit(message).split('\n')) {
     CreateLogger(level, "unknown", -1) << line.toLocal8Bit().constData();
   }
 
@@ -113,7 +113,7 @@ void Init() {
 void SetLevels(const QString& levels) {
   if (!sClassLevels) return;
 
-  foreach(const QString & item, levels.split(',')) {
+  for (const QString& item : levels.split(',')) {
     const QStringList class_level = item.split(':');
 
     QString class_name;

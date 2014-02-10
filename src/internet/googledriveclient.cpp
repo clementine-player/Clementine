@@ -49,7 +49,7 @@ static const char* kClientSecret = "l3cWb8efUZsrBI4wmY3uKl6i";
 QStringList File::parent_ids() const {
   QStringList ret;
 
-  foreach(const QVariant & var, data_["parents"].toList()) {
+  for (const QVariant& var : data_["parents"].toList()) {
     QVariantMap map(var.toMap());
 
     if (map["isRoot"].toBool()) {
@@ -216,7 +216,7 @@ void Client::ListChangesFinished(ListChangesResponse* response,
   // Emit the FilesFound signal for the files in the response.
   FileList files;
   QList<QUrl> files_deleted;
-  foreach(const QVariant & v, result["items"].toList()) {
+  for (const QVariant& v : result["items"].toList()) {
     QVariantMap change = v.toMap();
     if (!change["deleted"].toBool()) {
       files << File(change["file"].toMap());

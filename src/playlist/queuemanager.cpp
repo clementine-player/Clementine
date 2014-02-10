@@ -103,7 +103,7 @@ void QueueManager::MoveUp() {
 
   if (indexes.isEmpty() || indexes.first().row() == 0) return;
 
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
     current_playlist_->queue()->MoveUp(index.row());
   }
 }
@@ -126,8 +126,7 @@ void QueueManager::Clear() { current_playlist_->queue()->Clear(); }
 void QueueManager::Remove() {
   // collect the rows to be removed
   QList<int> row_list;
-  foreach(const QModelIndex & index,
-          ui_->list->selectionModel()->selectedRows()) {
+  for (const QModelIndex& index : ui_->list->selectionModel()->selectedRows()) {
     if (index.isValid()) row_list << index.row();
   }
 

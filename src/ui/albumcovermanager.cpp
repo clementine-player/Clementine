@@ -273,7 +273,7 @@ void AlbumCoverManager::Reset() {
   QStringList artists(library_backend_->GetAllArtistsWithAlbums());
   qStableSort(artists.begin(), artists.end(), CompareNocase);
 
-  foreach(const QString & artist, artists) {
+  for (const QString& artist : artists) {
     if (artist.isEmpty()) continue;
 
     new QListWidgetItem(artist_icon_, artist, ui_->artists, Specific_Artist);
@@ -320,7 +320,7 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
   // case sensitively.
   qStableSort(albums.begin(), albums.end(), CompareAlbumNameNocase);
 
-  foreach(const LibraryBackend::Album & info, albums) {
+  for (const LibraryBackend::Album& info : albums) {
     // Don't show songs without an album, obviously
     if (info.album_name.isEmpty()) continue;
 
@@ -406,7 +406,7 @@ bool AlbumCoverManager::ShouldHide(const QListWidgetItem& item,
   }
 
   QStringList query = filter.split(' ');
-  foreach(const QString & s, query) {
+  for (const QString& s : query) {
     if (!item.text().contains(s, Qt::CaseInsensitive) &&
         !item.data(Role_ArtistName).toString().contains(s,
                                                         Qt::CaseInsensitive)) {
@@ -491,7 +491,7 @@ bool AlbumCoverManager::eventFilter(QObject* obj, QEvent* event) {
 
     bool some_with_covers = false;
 
-    foreach(QListWidgetItem * item, context_menu_items_) {
+    for (QListWidgetItem* item : context_menu_items_) {
       if (item->icon().cacheKey() != no_cover_icon_.cacheKey())
         some_with_covers = true;
     }
@@ -556,7 +556,7 @@ void AlbumCoverManager::ShowCover() {
 }
 
 void AlbumCoverManager::FetchSingleCover() {
-  foreach(QListWidgetItem * item, context_menu_items_) {
+  for (QListWidgetItem* item : context_menu_items_) {
     quint64 id =
         cover_fetcher_->FetchAlbumCover(item->data(Role_ArtistName).toString(),
                                         item->data(Role_AlbumName).toString());
@@ -637,7 +637,7 @@ void AlbumCoverManager::SearchForCover() {
   if (cover.isEmpty()) return;
 
   // force the found cover on all of the selected items
-  foreach(QListWidgetItem * current, context_menu_items_) {
+  for (QListWidgetItem* current : context_menu_items_) {
     // don't save the first one twice
     if (current != item) {
       Song current_song = ItemAsSong(current);
@@ -657,7 +657,7 @@ void AlbumCoverManager::UnsetCover() {
   QString cover = album_cover_choice_controller_->UnsetCover(&song);
 
   // force the 'none' cover on all of the selected items
-  foreach(QListWidgetItem * current, context_menu_items_) {
+  for (QListWidgetItem* current : context_menu_items_) {
     current->setIcon(no_cover_icon_);
     current->setData(Role_PathManual, cover);
 
@@ -694,7 +694,9 @@ SongList AlbumCoverManager::GetSongsInAlbum(const QModelIndex& index) const {
 SongList AlbumCoverManager::GetSongsInAlbums(const QModelIndexList& indexes)
     const {
   SongList ret;
-  foreach(const QModelIndex & index, indexes) { ret << GetSongsInAlbum(index); }
+  for (const QModelIndex& index : indexes) {
+    ret << GetSongsInAlbum(index);
+  }
   return ret;
 }
 

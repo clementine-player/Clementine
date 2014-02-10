@@ -111,7 +111,7 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
   writer.writeDefaultNamespace("http://xspf.org/ns/0/");
 
   StreamElement tracklist("trackList", &writer);
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     StreamElement track("track", &writer);
     writer.writeTextElement("location", song.url().toString());
     writer.writeTextElement("title", song.title());

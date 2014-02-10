@@ -30,7 +30,7 @@ SearchProvider::ResultList IcecastSearchProvider::Search(int id,
   IcecastBackend::StationList stations = backend_->GetStations(query);
   ResultList ret;
 
-  foreach(const IcecastBackend::Station & station, stations) {
+  for (const IcecastBackend::Station& station : stations) {
     if (ret.count() > 3) break;
 
     Result result(this);

@@ -52,7 +52,7 @@ namespace {
 QMap<QString, QString> ParseParamList(const QString& params) {
   QMap<QString, QString> ret;
   QStringList components = params.split("&");
-  foreach(const QString & component, components) {
+  for (const QString& component : components) {
     QStringList pairs = component.split("=");
     if (pairs.size() != 2) {
       continue;
@@ -136,7 +136,7 @@ QByteArray DropboxAuthenticator::GenerateAuthorisationHeader(
     params << Param("oauth_token", token);
   }
   QStringList encoded_params;
-  foreach(const Param & p, params) {
+  for (const Param& p : params) {
     encoded_params << QString("%1=\"%2\"").arg(p.first, p.second);
   }
   QString authorisation_header = QString("OAuth ") + encoded_params.join(", ");

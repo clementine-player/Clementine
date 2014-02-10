@@ -71,7 +71,7 @@ void NetworkRemoteSettingsPage::Load() {
   // Get local ip addresses
   QString ip_addresses;
   QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
-  foreach(const QHostAddress & address, addresses) {
+  for (const QHostAddress& address : addresses) {
     // TODO: Add ipv6 support to tinysvcmdns.
     if (address.protocol() == QAbstractSocket::IPv4Protocol &&
         !address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8"))) {

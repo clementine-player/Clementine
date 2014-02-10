@@ -105,7 +105,7 @@ bool M3UParser::ParseMetadata(const QString& line,
 void M3UParser::Save(const SongList& songs, QIODevice* device,
                      const QDir& dir) const {
   device->write("#EXTM3U\n");
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     if (song.url().isEmpty()) {
       continue;
     }

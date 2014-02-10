@@ -706,7 +706,9 @@ void LastFMService::RefreshFriendsFinished(QNetworkReply* reply) {
   }
 
   QStringList names;
-  foreach(const lastfm::User & f, friends) { names << f.name(); }
+  for (const lastfm::User& f : friends) {
+    names << f.name();
+  }
 
   friend_names_.Update(names);
 
@@ -718,7 +720,7 @@ void LastFMService::PopulateFriendsList() {
   if (friends_list_->hasChildren())
     friends_list_->removeRows(0, friends_list_->rowCount());
 
-  foreach(const QString & name, friend_names_) {
+  for (const QString& name : friend_names_) {
     Song song;
     song.set_url(QUrl("lastfm://user/" + name + "/library"));
     song.set_title(tr("Last.fm Library - %1").arg(name));
@@ -743,7 +745,7 @@ void LastFMService::RefreshNeighboursFinished(QNetworkReply* reply) {
   if (neighbours_list_->hasChildren())
     neighbours_list_->removeRows(0, neighbours_list_->rowCount());
 
-  foreach(const lastfm::User & n, neighbours) {
+  for (const lastfm::User& n : neighbours) {
     Song song;
     song.set_url(QUrl("lastfm://user/" + n.name() + "/library"));
     song.set_title(tr("Last.fm Library - %1").arg(n.name()));
@@ -829,7 +831,7 @@ void LastFMService::RestoreList(const QString& name, const QString& url_pattern,
 
   const QStringList keys = SavedArtistOrTagRadioNames(name);
 
-  foreach(const QString & key, keys) {
+  for (const QString& key : keys) {
     QString url;
     if (name == "custom" && key.startsWith("lastfm://")) {
       url = key;
@@ -883,7 +885,7 @@ void LastFMService::FetchMoreTracksFinished(QNetworkReply* reply) {
   lastfm::XmlQuery query(lastfm::compat::EmptyXmlQuery());
   if (lastfm::compat::ParseQuery(reply->readAll(), &query)) {
     const XmlQuery& playlist = query["playlist"];
-    foreach(const XmlQuery & q, playlist["trackList"].children("track")) {
+    for (const XmlQuery& q : playlist["trackList"].children("track")) {
       lastfm::MutableTrack t;
       t.setUrl(QUrl(q["location"].text()));
       t.setExtra("trackauth", q["extension"]["trackauth"].text());

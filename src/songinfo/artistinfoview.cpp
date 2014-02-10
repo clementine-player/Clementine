@@ -63,7 +63,9 @@ void ArtistInfoView::ResultReady(int id,
     PrettyImageView* image_view = new PrettyImageView(network_, this);
     AddWidget(image_view);
 
-    foreach(const QUrl & url, result.images_) { image_view->AddImage(url); }
+    for (const QUrl& url : result.images_) {
+      image_view->AddImage(url);
+    }
   }
   CollapseSections();
 }

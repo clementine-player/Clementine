@@ -51,7 +51,7 @@ void PlaybackSettingsPage::Load() {
     GstEngine::PluginDetailsList list = engine->GetOutputsList();
 
     ui_->gst_plugin->setItemData(0, GstEngine::kAutoSink);
-    foreach(const GstEngine::PluginDetails & details, list) {
+    for (const GstEngine::PluginDetails& details : list) {
       if (details.name == "autoaudiosink") continue;
 
       ui_->gst_plugin->addItem(details.long_name, details.name);

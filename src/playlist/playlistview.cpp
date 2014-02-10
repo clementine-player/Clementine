@@ -622,7 +622,7 @@ void PlaylistView::RemoveSelected() {
   // Store the last selected row, which is the first in the list
   int last_row = selection.first().bottom();
 
-  foreach(const QItemSelectionRange & range, selection) {
+  for (const QItemSelectionRange& range : selection) {
     rows_removed += range.height();
     model()->removeRows(range.top(), range.height(), range.parent());
   }
@@ -742,7 +742,7 @@ void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
 
   update(index);
   update(old_index);
-  foreach(const QModelIndex & index, selectedIndexes()) {
+  for (const QModelIndex& index : selectedIndexes()) {
     if (index.column() == Playlist::Column_Rating) {
       update(index);
     }
@@ -764,7 +764,7 @@ void PlaylistView::RatingHoverOut() {
   setCursor(QCursor());
 
   update(old_index);
-  foreach(const QModelIndex & index, selectedIndexes()) {
+  for (const QModelIndex& index : selectedIndexes()) {
     if (index.column() == Playlist::Column_Rating) {
       update(index);
     }
@@ -790,7 +790,7 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
 
     if (selectedIndexes().contains(index)) {
       // Update all the selected items
-      foreach(const QModelIndex & index, selectedIndexes()) {
+      for (const QModelIndex& index : selectedIndexes()) {
         if (index.data(Playlist::Role_CanSetRating).toBool()) {
           playlist_->RateSong(playlist_->proxy()->mapToSource(index),
                               new_rating);

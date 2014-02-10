@@ -259,7 +259,7 @@ PlaylistItemPtr PlaylistBackend::RestoreCueData(
     }
   }
 
-  foreach(const Song & from_list, song_list) {
+  for (const Song& from_list : song_list) {
     if (from_list.url().toEncoded() == song.url().toEncoded() &&
         from_list.beginning_nanosec() == song.beginning_nanosec()) {
       // we found a matching section; replace the input
@@ -313,7 +313,7 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
   if (db_->CheckErrors(clear)) return;
 
   // Save the new ones
-  foreach(PlaylistItemPtr item, items) {
+  for (PlaylistItemPtr item : items) {
     insert.bindValue(":playlist", playlist);
     item->BindToQuery(&insert);
 

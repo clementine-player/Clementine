@@ -89,7 +89,7 @@ int GlobalSearch::SearchAsync(const QString& query) {
   if (url_provider_->LooksLikeUrl(query)) {
     url_provider_->SearchAsync(id, query);
   } else {
-    foreach(SearchProvider * provider, providers_.keys()) {
+    for (SearchProvider* provider : providers_.keys()) {
       if (!is_provider_usable(provider)) continue;
 
       pending_search_providers_[id]++;
@@ -124,7 +124,7 @@ void GlobalSearch::CancelSearch(int id) {
 void GlobalSearch::timerEvent(QTimerEvent* e) {
   QMap<int, DelayedSearch>::iterator it = delayed_searches_.find(e->timerId());
   if (it != delayed_searches_.end()) {
-    foreach(SearchProvider * provider, it.value().providers_) {
+    for (SearchProvider* provider : it.value().providers_) {
       provider->SearchAsync(it.value().id_, it.value().query_);
     }
     delayed_searches_.erase(it);
@@ -184,7 +184,9 @@ void GlobalSearch::ProviderDestroyedSlot(QObject* object) {
 
   // We have to abort any pending searches since we can't tell whether they
   // were on this provider.
-  foreach(int id, pending_search_providers_.keys()) { emit SearchFinished(id); }
+  for (int id : pending_search_providers_.keys()) {
+    emit SearchFinished(id);
+  }
   pending_search_providers_.clear();
 }
 
@@ -279,7 +281,7 @@ MimeData* GlobalSearch::LoadTracks(const SearchProvider::ResultList& results) {
 
   SearchProvider* first_provider = results[0].provider_;
   SearchProvider::ResultList results_copy;
-  foreach(const SearchProvider::Result & result, results) {
+  for (const SearchProvider::Result& result : results) {
     if (result.provider_ == first_provider) {
       results_copy << result;
     }
@@ -325,7 +327,7 @@ void GlobalSearch::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  foreach(SearchProvider * provider, providers_.keys()) {
+  for (SearchProvider* provider : providers_.keys()) {
     QVariant value = s.value("enabled_" + provider->id());
     if (!value.isValid()) continue;
     const bool enabled = value.toBool();
@@ -340,7 +342,7 @@ void GlobalSearch::ReloadSettings() {
 void GlobalSearch::SaveProvidersSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  foreach(SearchProvider * provider, providers_.keys()) {
+  for (SearchProvider* provider : providers_.keys()) {
     s.setValue("enabled_" + provider->id(), providers_[provider].enabled_);
   }
 }
@@ -349,9 +351,9 @@ QStringList GlobalSearch::GetSuggestions(int count) {
   QStringList ret;
 
   // Get count suggestions from each provider
-  foreach(SearchProvider * provider, providers_.keys()) {
+  for (SearchProvider* provider : providers_.keys()) {
     if (is_provider_enabled(provider) && provider->can_give_suggestions()) {
-      foreach(QString suggestion, provider->GetSuggestions(count)) {
+      for (QString suggestion : provider->GetSuggestions(count)) {
         suggestion = suggestion.trimmed().toLower();
 
         if (!suggestion.isEmpty()) {

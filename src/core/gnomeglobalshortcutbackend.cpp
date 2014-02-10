@@ -50,7 +50,7 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
   qLog(Debug) << "registering";
   // Check if the GSD service is available
   if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(
-          kGsdService)) {
+           kGsdService)) {
     qLog(Warning) << "gnome settings daemon not registered";
     return false;
   }
@@ -100,7 +100,7 @@ void GnomeGlobalShortcutBackend::DoUnregister() {
 #ifdef QT_DBUS_LIB
   // Check if the GSD service is available
   if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(
-          kGsdService))
+           kGsdService))
     return;
   if (!interface_ || !is_connected_) return;
 

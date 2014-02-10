@@ -265,7 +265,7 @@ Song::FileType Transcoder::PickBestFormat(QList<Song::FileType> supported) {
   best_formats << Song::Type_OggVorbis;
   best_formats << Song::Type_Asf;
 
-  foreach(Song::FileType type, best_formats) {
+  for (Song::FileType type : best_formats) {
     if (supported.isEmpty() || supported.contains(type)) return type;
   }
 

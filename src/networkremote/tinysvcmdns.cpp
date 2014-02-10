@@ -29,7 +29,7 @@ TinySVCMDNS::TinySVCMDNS() {
   // Get all network interfaces
   QList<QNetworkInterface> network_interfaces =
       QNetworkInterface::allInterfaces();
-  foreach(QNetworkInterface network_interface, network_interfaces) {
+  for (QNetworkInterface network_interface : network_interfaces) {
     // Only use up and non loopback interfaces
     if (network_interface.flags().testFlag(network_interface.IsUp) &&
         !network_interface.flags().testFlag(network_interface.IsLoopBack)) {
@@ -42,8 +42,8 @@ TinySVCMDNS::TinySVCMDNS() {
       QList<QNetworkAddressEntry> network_address_entries =
           network_interface.addressEntries();
 
-      foreach(QNetworkAddressEntry network_address_entry,
-              network_address_entries) {
+      for (QNetworkAddressEntry network_address_entry :
+           network_address_entries) {
         QHostAddress host_address = network_address_entry.ip();
         if (host_address.protocol() == QAbstractSocket::IPv4Protocol) {
           ipv4 = qToBigEndian(host_address.toIPv4Address());
@@ -61,7 +61,9 @@ TinySVCMDNS::TinySVCMDNS() {
 }
 
 TinySVCMDNS::~TinySVCMDNS() {
-  foreach(mdnsd * mdnsd, mdnsd_) { mdnsd_stop(mdnsd); }
+  for (mdnsd* mdnsd : mdnsd_) {
+    mdnsd_stop(mdnsd);
+  }
 }
 
 void TinySVCMDNS::PublishInternal(const QString& domain, const QString& type,
@@ -70,7 +72,7 @@ void TinySVCMDNS::PublishInternal(const QString& domain, const QString& type,
   // Some pointless text, so tinymDNS publishes the service correctly.
   const char* txt[] = {"cat=nyan", nullptr};
 
-  foreach(mdnsd * mdnsd, mdnsd_) {
+  for (mdnsd* mdnsd : mdnsd_) {
     mdnsd_register_svc(mdnsd, name.constData(),
                        QString(type + ".local").toUtf8().constData(), port,
                        nullptr, txt);

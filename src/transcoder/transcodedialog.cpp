@@ -63,7 +63,7 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
   qSort(presets.begin(), presets.end(), ComparePresetsByName);
-  foreach(const TranscoderPreset & preset, presets) {
+  for (const TranscoderPreset& preset : presets) {
     ui_->format->addItem(
         QString("%1 (.%2)").arg(preset.name_, preset.extension_),
         QVariant::fromValue(preset));
@@ -180,7 +180,7 @@ void TranscodeDialog::UpdateProgress() {
   int progress = (finished_success_ + finished_failed_) * 100;
 
   QMap<QString, float> current_jobs = transcoder_->GetProgress();
-  foreach(float value, current_jobs.values()) {
+  for (float value : current_jobs.values()) {
     progress += qBound(0, int(value * 100), 99);
   }
 
@@ -227,7 +227,7 @@ void TranscodeDialog::Add() {
 }
 
 void TranscodeDialog::SetFilenames(const QStringList& filenames) {
-  foreach(const QString & filename, filenames) {
+  for (const QString& filename : filenames) {
     QString name = filename.section('/', -1, -1);
     QString path = filename.section('/', 0, -2);
 

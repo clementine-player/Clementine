@@ -111,7 +111,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 
   QVariantList contents = response["entries"].toList();
   qLog(Debug) << "Delta found:" << contents.size();
-  foreach(const QVariant & c, contents) {
+  for (const QVariant& c : contents) {
     QVariantList item = c.toList();
     QString path = item[0].toString();
 

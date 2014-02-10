@@ -64,7 +64,7 @@ void EchoNestSimilarArtists::RequestFinished() {
 
     widget->SetIcon(QIcon(":/icons/22x22/x-clementine-artist.png"));
 
-    foreach(const Echonest::Artist & artist, artists) {
+    for (const Echonest::Artist& artist : artists) {
       widget->AddTag(artist.name());
       if (widget->count() >= 10) break;
     }

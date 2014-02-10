@@ -199,7 +199,7 @@ void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
     FetchRecursiveFolderItems(folder_id, offset + entries.size());
   }
 
-  foreach(const QVariant & e, entries) {
+  for (const QVariant& e : entries) {
     QVariantMap entry = e.toMap();
     if (entry["type"].toString() == "folder") {
       FetchRecursiveFolderItems(entry["id"].toInt());
@@ -273,7 +273,7 @@ void BoxService::FetchEventsFinished(QNetworkReply* reply) {
   s.setValue("cursor", response["next_stream_position"]);
 
   QVariantList entries = response["entries"].toList();
-  foreach(const QVariant & e, entries) {
+  for (const QVariant& e : entries) {
     QVariantMap event = e.toMap();
     QString type = event["event_type"].toString();
     QVariantMap source = event["source"].toMap();

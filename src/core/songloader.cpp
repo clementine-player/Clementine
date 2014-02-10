@@ -225,7 +225,7 @@ void SongLoader::AudioCDTagsLoaded(
   // and that we are going to fill it with new (more complete) ones
   songs_.clear();
   int track_number = 1;
-  foreach(const MusicBrainzClient::Result & ret, results) {
+  for (const MusicBrainzClient::Result& ret : results) {
     Song song;
     song.set_artist(artist);
     song.set_album(album);
@@ -313,7 +313,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
     }
   }
 
-  foreach(const Song & song, song_list) {
+  for (const Song& song : song_list) {
     if (song.is_valid()) {
       songs_ << song;
     }

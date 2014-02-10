@@ -93,7 +93,7 @@ MoodbarLoader::Result MoodbarLoader::Load(const QUrl& url, QByteArray* data,
   // Check if a mood file exists for this file already
   const QString filename(url.toLocalFile());
 
-  foreach(const QString & possible_mood_file, MoodFilenames(filename)) {
+  for (const QString& possible_mood_file : MoodFilenames(filename)) {
     QFile f(possible_mood_file);
     if (f.open(QIODevice::ReadOnly)) {
       qLog(Info) << "Loading moodbar data from" << possible_mood_file;

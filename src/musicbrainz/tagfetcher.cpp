@@ -54,7 +54,7 @@ void TagFetcher::StartFetch(const SongList& songs) {
   connect(fingerprint_watcher_, SIGNAL(resultReadyAt(int)),
           SLOT(FingerprintFound(int)));
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     emit Progress(song, tr("Fingerprinting song"));
   }
 }
@@ -117,7 +117,7 @@ void TagFetcher::TagsFetched(int index,
   const Song& original_song = songs_[index];
   SongList songs_guessed;
 
-  foreach(const MusicBrainzClient::Result & result, results) {
+  for (const MusicBrainzClient::Result& result : results) {
     Song song;
     song.Init(result.title_, result.artist_, result.album_,
               result.duration_msec_ * kNsecPerMsec);

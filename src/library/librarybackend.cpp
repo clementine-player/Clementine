@@ -93,7 +93,7 @@ void LibraryBackend::LoadDirectories() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  foreach(const Directory & dir, dirs) {
+  for (const Directory& dir : dirs) {
     emit DirectoryDiscovered(dir, SubdirsInDirectory(dir.id, db));
   }
 }
@@ -307,7 +307,7 @@ void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
       db);
 
   ScopedTransaction transaction(&db);
-  foreach(const Subdirectory & subdir, subdirs) {
+  for (const Subdirectory& subdir : subdirs) {
     if (subdir.mtime == 0) {
       // Delete the subdirectory
       delete_query.bindValue(":id", subdir.directory_id);
@@ -368,7 +368,7 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
   SongList added_songs;
   SongList deleted_songs;
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     // Do a sanity check first - make sure the song's directory still exists
     // This is to fix a possible race condition when a directory is removed
     // while LibraryWatcher is scanning it.
@@ -439,7 +439,7 @@ void LibraryBackend::UpdateMTimesOnly(const SongList& songs) {
               db);
 
   ScopedTransaction transaction(&db);
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     q.bindValue(":mtime", song.mtime());
     q.bindValue(":id", song.id());
     q.exec();
@@ -458,7 +458,7 @@ void LibraryBackend::DeleteSongs(const SongList& songs) {
       QString("DELETE FROM %1 WHERE ROWID = :id").arg(fts_table_), db);
 
   ScopedTransaction transaction(&db);
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     remove.bindValue(":id", song.id());
     remove.exec();
     db_->CheckErrors(remove);
@@ -485,7 +485,7 @@ void LibraryBackend::MarkSongsUnavailable(const SongList& songs,
                    db);
 
   ScopedTransaction transaction(&db);
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     remove.bindValue(":id", song.id());
     remove.exec();
     db_->CheckErrors(remove);
@@ -584,7 +584,9 @@ SongList LibraryBackend::GetSongsById(const QList<int>& ids) {
   QSqlDatabase db(db_->Connect());
 
   QStringList str_ids;
-  foreach(int id, ids) { str_ids << QString::number(id); }
+  for (int id : ids) {
+    str_ids << QString::number(id);
+  }
 
   return GetSongsById(str_ids, db);
 }
@@ -954,7 +956,7 @@ void LibraryBackend::ForceCompilation(const QString& album,
   QSqlDatabase db(db_->Connect());
   SongList deleted_songs, added_songs;
 
-  foreach(const QString & artist, artists) {
+  for (const QString& artist : artists) {
     // Get the songs before they're updated
     LibraryQuery query;
     query.SetColumnSpec("ROWID, " + Song::kColumnSpec);

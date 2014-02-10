@@ -53,7 +53,7 @@ void CoverSearchStatisticsDialog::Show(
           .arg(statistics.chosen_images_ + statistics.missing_images_)
           .arg(statistics.missing_images_));
 
-  foreach(const QString & provider, providers) {
+  for (const QString& provider : providers) {
     AddLine(tr("Covers from %1").arg(provider),
             QString::number(statistics.chosen_images_by_provider_[provider]));
   }

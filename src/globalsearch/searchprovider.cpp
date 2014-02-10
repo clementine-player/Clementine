@@ -55,7 +55,7 @@ QStringList SearchProvider::TokenizeQuery(const QString& query) {
 }
 
 bool SearchProvider::Matches(const QStringList& tokens, const QString& string) {
-  foreach(const QString & token, tokens) {
+  for (const QString& token : tokens) {
     if (!string.contains(token, Qt::CaseInsensitive)) {
       return false;
     }
@@ -125,7 +125,9 @@ MimeData* SearchProvider::LoadTracks(const ResultList& results) {
     mime_data = new MimeData;
   } else {
     SongList songs;
-    foreach(const Result & result, results) { songs << result.metadata_; }
+    for (const Result& result : results) {
+      songs << result.metadata_;
+    }
 
     if (internet_service()) {
       InternetSongMimeData* internet_song_mime_data =
@@ -140,7 +142,9 @@ MimeData* SearchProvider::LoadTracks(const ResultList& results) {
   }
 
   QList<QUrl> urls;
-  foreach(const Result & result, results) { urls << result.metadata_.url(); }
+  for (const Result& result : results) {
+    urls << result.metadata_.url();
+  }
   mime_data->setUrls(urls);
 
   return mime_data;

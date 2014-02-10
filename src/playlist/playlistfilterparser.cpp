@@ -190,7 +190,7 @@ class FilterTerm : public FilterTree {
 
   virtual bool accept(int row, const QModelIndex& parent,
                       const QAbstractItemModel* const model) const {
-    foreach(int i, columns_) {
+    for (int i : columns_) {
       QModelIndex idx(model->index(row, i, parent));
       if (cmp_->Matches(idx.data().toString().toLower())) return true;
     }
@@ -242,7 +242,7 @@ class OrFilter : public FilterTree {
   virtual void add(FilterTree* child) { children_.append(child); }
   virtual bool accept(int row, const QModelIndex& parent,
                       const QAbstractItemModel* const model) const {
-    foreach(FilterTree * child, children_) {
+    for (FilterTree* child : children_) {
       if (child->accept(row, parent, model)) return true;
     }
     return false;
@@ -259,7 +259,7 @@ class AndFilter : public FilterTree {
   virtual void add(FilterTree* child) { children_.append(child); }
   virtual bool accept(int row, const QModelIndex& parent,
                       const QAbstractItemModel* const model) const {
-    foreach(FilterTree * child, children_) {
+    for (FilterTree* child : children_) {
       if (!child->accept(row, parent, model)) return false;
     }
     return true;
@@ -523,7 +523,7 @@ int FilterParser::parseTime(const QString& time_str) const {
   int seconds = 0;
   int accum = 0;
   int colon_count = 0;
-  foreach(const QChar & c, time_str) {
+  for (const QChar& c : time_str) {
     if (c.isDigit()) {
       accum = accum * 10 + c.digitValue();
     } else if (c == ':') {

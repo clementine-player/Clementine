@@ -45,7 +45,9 @@ PlaylistParser::PlaylistParser(LibraryBackendInterface* library,
 QStringList PlaylistParser::file_extensions() const {
   QStringList ret;
 
-  foreach(ParserBase * parser, parsers_) { ret << parser->file_extensions(); }
+  for (ParserBase* parser : parsers_) {
+    ret << parser->file_extensions();
+  }
 
   qStableSort(ret);
   return ret;
@@ -54,7 +56,7 @@ QStringList PlaylistParser::file_extensions() const {
 QString PlaylistParser::filters() const {
   QStringList filters;
   QStringList all_extensions;
-  foreach(ParserBase * parser, parsers_) {
+  for (ParserBase* parser : parsers_) {
     filters << FilterForParser(parser, &all_extensions);
   }
 
@@ -66,8 +68,8 @@ QString PlaylistParser::filters() const {
 QString PlaylistParser::FilterForParser(const ParserBase* parser,
                                         QStringList* all_extensions) const {
   QStringList extensions;
-  foreach(const QString & extension, parser->file_extensions())
-  extensions << "*." + extension;
+  for (const QString& extension : parser->file_extensions())
+    extensions << "*." + extension;
 
   if (all_extensions) *all_extensions << extensions;
 
@@ -83,7 +85,7 @@ QString PlaylistParser::default_filter() const {
 }
 
 ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
-  foreach(ParserBase * p, parsers_) {
+  for (ParserBase* p : parsers_) {
     if (p->file_extensions().contains(suffix)) return p;
   }
   return nullptr;
@@ -91,7 +93,7 @@ ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
 
 ParserBase* PlaylistParser::ParserForMagic(const QByteArray& data,
                                            const QString& mime_type) const {
-  foreach(ParserBase * p, parsers_) {
+  for (ParserBase* p : parsers_) {
     if ((!mime_type.isEmpty() && mime_type == p->mime_type()) ||
         p->TryMagic(data))
       return p;

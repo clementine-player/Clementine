@@ -56,7 +56,7 @@ void SongInfoView::UltimateLyricsParsed() {
   QFutureWatcher<ProviderList>* watcher =
       static_cast<QFutureWatcher<ProviderList>*>(sender());
 
-  foreach(SongInfoProvider * provider, watcher->result()) {
+  for (SongInfoProvider* provider : watcher->result()) {
     fetcher_->AddProvider(provider);
   }
 
@@ -113,21 +113,21 @@ void SongInfoView::ReloadSettings() {
                 << "darklyrics.com";
 
   QVariant saved_order = s.value("search_order", default_order);
-  foreach(const QVariant & name, saved_order.toList()) {
+  for (const QVariant& name : saved_order.toList()) {
     SongInfoProvider* provider = ProviderByName(name.toString());
     if (provider) ordered_providers << provider;
   }
 
   // Enable all the providers in the list and rank them
   int relevance = 100;
-  foreach(SongInfoProvider * provider, ordered_providers) {
+  for (SongInfoProvider* provider : ordered_providers) {
     provider->set_enabled(true);
     qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance--);
   }
 
   // Any lyric providers we don't have in ordered_providers are considered
   // disabled
-  foreach(SongInfoProvider * provider, fetcher_->providers()) {
+  for (SongInfoProvider* provider : fetcher_->providers()) {
     if (qobject_cast<UltimateLyricsProvider*>(provider) &&
         !ordered_providers.contains(provider)) {
       provider->set_enabled(false);
@@ -138,7 +138,7 @@ void SongInfoView::ReloadSettings() {
 }
 
 SongInfoProvider* SongInfoView::ProviderByName(const QString& name) const {
-  foreach(SongInfoProvider * provider, fetcher_->providers()) {
+  for (SongInfoProvider* provider : fetcher_->providers()) {
     if (UltimateLyricsProvider* lyrics =
             qobject_cast<UltimateLyricsProvider*>(provider)) {
       if (lyrics->name() == name) return provider;
@@ -158,7 +158,7 @@ bool CompareLyricProviders(const UltimateLyricsProvider* a,
 
 QList<const UltimateLyricsProvider*> SongInfoView::lyric_providers() const {
   QList<const UltimateLyricsProvider*> ret;
-  foreach(SongInfoProvider * provider, fetcher_->providers()) {
+  for (SongInfoProvider* provider : fetcher_->providers()) {
     if (UltimateLyricsProvider* lyrics =
             qobject_cast<UltimateLyricsProvider*>(provider)) {
       ret << lyrics;

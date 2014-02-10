@@ -151,7 +151,7 @@ void SoundCloudService::SearchFinished(QNetworkReply* reply, int task_id) {
 
   SongList songs = ExtractSongs(ExtractResult(reply));
   // Fill results list
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
     search_->appendRow(child);
   }
@@ -206,7 +206,7 @@ QNetworkReply* SoundCloudService::CreateRequest(const QString& ressource_name,
   url.setPath(ressource_name);
 
   url.addQueryItem("client_id", kApiClientId);
-  foreach(const Param & param, params) {
+  for (const Param& param : params) {
     url.addQueryItem(param.first, param.second);
   }
 
@@ -232,7 +232,7 @@ SongList SoundCloudService::ExtractSongs(const QVariant& result) {
   SongList songs;
 
   QVariantList q_variant_list = result.toList();
-  foreach(const QVariant & q, q_variant_list) {
+  for (const QVariant& q : q_variant_list) {
     Song song = ExtractSong(q.toMap());
     if (song.is_valid()) {
       songs << song;

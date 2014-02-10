@@ -115,7 +115,7 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
   qLog(Debug) << response;
 
   QVariantList files = response["data"].toList();
-  foreach(const QVariant & f, files) {
+  for (const QVariant& f : files) {
     QVariantMap file = f.toMap();
     if (file["type"].toString() == "audio") {
       QString mime_type = GuessMimeTypeForFile(file["name"].toString());

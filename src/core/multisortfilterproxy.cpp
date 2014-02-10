@@ -14,7 +14,7 @@ void MultiSortFilterProxy::AddSortSpec(int role, Qt::SortOrder order) {
 
 bool MultiSortFilterProxy::lessThan(const QModelIndex& left,
                                     const QModelIndex& right) const {
-  foreach(const SortSpec & spec, sorting_) {
+  for (const SortSpec& spec : sorting_) {
     const int ret = Compare(left.data(spec.first), right.data(spec.first));
 
     if (ret < 0) {

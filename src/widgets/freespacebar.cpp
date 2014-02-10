@@ -171,15 +171,15 @@ void FreeSpaceBar::DrawText(QPainter* p, const QRect& r) {
   labels << Label(TextForSize(free_text_, free_ - additional_), kColorBg2);
 
   int text_width = 0;
-  foreach(const Label & label, labels)
-  text_width += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing +
-                small_metrics.width(label.text);
+  for (const Label& label : labels)
+    text_width += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing +
+                  small_metrics.width(label.text);
 
   // Draw the text
   int x = (r.width() - text_width) / 2;
 
   p->setRenderHint(QPainter::Antialiasing, false);
-  foreach(const Label & label, labels) {
+  for (const Label& label : labels) {
     const bool light = palette().color(QPalette::Base).value() > 128;
 
     QRect box(x, r.top() + (r.height() - kLabelBoxSize) / 2, kLabelBoxSize,

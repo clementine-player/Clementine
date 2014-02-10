@@ -154,7 +154,7 @@ void LibraryModel::Init(bool async) {
 }
 
 void LibraryModel::SongsDiscovered(const SongList& songs) {
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     // Sanity check to make sure we don't add songs that are outside the user's
     // filter
     if (!query_options_.Matches(song)) continue;
@@ -250,7 +250,7 @@ void LibraryModel::SongsSlightlyChanged(const SongList& songs) {
   // This is called if there was a minor change to the songs that will not
   // normally require the library to be restructured.  We can just update our
   // internal cache of Song objects without worrying about resetting the model.
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     if (song_nodes_.contains(song.id())) {
       song_nodes_[song.id()]->metadata = song;
     }
@@ -356,7 +356,7 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
   // Delete the actual song nodes first, keeping track of each parent so we
   // might check to see if they're empty later.
   QSet<LibraryItem*> parents;
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     if (song_nodes_.contains(song.id())) {
       LibraryItem* node = song_nodes_[song.id()];
 
@@ -380,7 +380,7 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
   // Now delete empty parents
   QSet<QString> divider_keys;
   while (!parents.isEmpty()) {
-    foreach(LibraryItem * node, parents) {
+    for (LibraryItem* node : parents) {
       parents.remove(node);
       if (node->children.count() != 0) continue;
 
@@ -405,12 +405,12 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
   }
 
   // Delete empty dividers
-  foreach(const QString & divider_key, divider_keys) {
+  for (const QString& divider_key : divider_keys) {
     if (!divider_nodes_.contains(divider_key)) continue;
 
     // Look to see if there are any other items still under this divider
     bool found = false;
-    foreach(LibraryItem * node, container_nodes_[0].values()) {
+    for (LibraryItem* node : container_nodes_[0].values()) {
       if (DividerKey(group_by_[0], node) == divider_key) {
         found = true;
         break;
@@ -571,7 +571,7 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
         // if we have even one non editable item as a child, we ourselves
         // are not available for edit
         if (!item->children.isEmpty()) {
-          foreach(LibraryItem * child, item->children) {
+          for (LibraryItem* child : item->children) {
             if (!data(child, role).toBool()) {
               return false;
             }
@@ -655,7 +655,7 @@ void LibraryModel::PostQuery(LibraryItem* parent,
   }
 
   // Step through the results
-  foreach(const SqlRow & row, result.rows) {
+  for (const SqlRow& row : result.rows) {
     // Create the item - it will get inserted into the model here
     LibraryItem* item = ItemFromQuery(child_type, signal, child_level == 0,
                                       parent, row, child_level);
@@ -1098,7 +1098,7 @@ QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
 
   data->backend = backend_;
 
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
     GetChildSongs(IndexToItem(index), &urls, &data->songs, &song_ids);
   }
 
@@ -1128,8 +1128,8 @@ void LibraryModel::GetChildSongs(LibraryItem* item, QList<QUrl>* urls,
       qSort(children.begin(), children.end(),
             std::bind(&LibraryModel::CompareItems, this, _1, _2));
 
-      foreach(LibraryItem * child, children)
-      GetChildSongs(child, urls, songs, song_ids);
+      for (LibraryItem* child : children)
+        GetChildSongs(child, urls, songs, song_ids);
       break;
     }
 
@@ -1151,7 +1151,7 @@ SongList LibraryModel::GetChildSongs(const QModelIndexList& indexes) const {
   SongList ret;
   QSet<int> song_ids;
 
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
     GetChildSongs(IndexToItem(index), &dontcare, &ret, &song_ids);
   }
   return ret;
@@ -1244,8 +1244,8 @@ void LibraryModel::CreateSmartPlaylists() {
     s.beginWriteArray(backend_->songs_table(),
                       playlist_index + unwritten_defaults);
     for (; version < default_smart_playlists_.count(); ++version) {
-      foreach(smart_playlists::GeneratorPtr gen,
-              default_smart_playlists_[version]) {
+      for (smart_playlists::GeneratorPtr gen :
+           default_smart_playlists_[version]) {
         SaveGenerator(&s, playlist_index++, gen);
       }
     }
@@ -1329,7 +1329,7 @@ void LibraryModel::DeleteGenerator(const QModelIndex& index) {
   s.beginWriteArray(backend_->songs_table(),
                     smart_playlist_node_->children.count());
   int i = 0;
-  foreach(LibraryItem * item, smart_playlist_node_->children) {
+  for (LibraryItem* item : smart_playlist_node_->children) {
     s.setArrayIndex(i++);
     s.setValue("name", item->display_text);
     s.setValue("type", item->key);

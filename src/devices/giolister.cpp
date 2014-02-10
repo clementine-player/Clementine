@@ -260,7 +260,7 @@ void GioLister::MountAdded(GMount* mount) {
     QMutexLocker l(&mutex_);
 
     // The volume might already exist - either mounted or unmounted.
-    foreach(const QString & id, devices_.keys()) {
+    for (const QString& id : devices_.keys()) {
       if (devices_[id].volume == info.volume) {
         old_id = id;
         break;
@@ -430,14 +430,14 @@ void GioLister::DeviceInfo::ReadDriveInfo(GDrive* drive) {
 }
 
 QString GioLister::FindUniqueIdByMount(GMount* mount) const {
-  foreach(const DeviceInfo & info, devices_) {
+  for (const DeviceInfo& info : devices_) {
     if (info.mount == mount) return info.unique_id();
   }
   return QString();
 }
 
 QString GioLister::FindUniqueIdByVolume(GVolume* volume) const {
-  foreach(const DeviceInfo & info, devices_) {
+  for (const DeviceInfo& info : devices_) {
     if (info.volume == volume) return info.unique_id();
   }
   return QString();

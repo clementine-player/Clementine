@@ -96,7 +96,7 @@ void WplParser::Save(const SongList& songs, QIODevice* device,
     StreamElement body("body", &writer);
     {
       StreamElement seq("seq", &writer);
-      foreach(const Song & song, songs) {
+      for (const Song& song : songs) {
         writer.writeStartElement("media");
         writer.writeAttribute("src", URLOrRelativeFilename(song.url(), dir));
         writer.writeEndElement();

@@ -55,7 +55,9 @@ PlaylistManager::PlaylistManager(Application* app, QObject* parent)
 }
 
 PlaylistManager::~PlaylistManager() {
-  foreach(const Data & data, playlists_.values()) { delete data.p; }
+  for (const Data& data : playlists_.values()) {
+    delete data.p;
+  }
 }
 
 void PlaylistManager::Init(LibraryBackend* library_backend,
@@ -75,8 +77,8 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   connect(library_backend_, SIGNAL(SongsRatingChanged(SongList)),
           SLOT(SongsDiscovered(SongList)));
 
-  foreach(const PlaylistBackend::Playlist & p,
-          playlist_backend->GetAllOpenPlaylists()) {
+  for (const PlaylistBackend::Playlist& p :
+       playlist_backend->GetAllOpenPlaylists()) {
     AddPlaylist(p.id, p.name, p.special_type, p.ui_path, p.favorite);
   }
 
@@ -89,7 +91,9 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
 QList<Playlist*> PlaylistManager::GetAllPlaylists() const {
   QList<Playlist*> result;
 
-  foreach(const Data & data, playlists_.values()) { result.append(data.p); }
+  for (const Data& data : playlists_.values()) {
+    result.append(data.p);
+  }
 
   return result;
 }
@@ -276,7 +280,7 @@ bool PlaylistManager::Close(int id) {
   if (playlists_.count() <= 1 || !playlists_.contains(id)) return false;
 
   int next_id = -1;
-  foreach(int possible_next_id, playlists_.keys()) {
+  for (int possible_next_id : playlists_.keys()) {
     if (possible_next_id != id) {
       next_id = possible_next_id;
       break;
@@ -379,8 +383,7 @@ void PlaylistManager::UpdateSummaryText() {
   int selected = 0;
 
   // Get the length of the selected tracks
-  foreach(const QItemSelectionRange & range,
-          playlists_[current_id()].selection) {
+  for (const QItemSelectionRange& range : playlists_[current_id()].selection) {
     if (!range.isValid()) continue;
 
     selected += range.bottom() - range.top() + 1;
@@ -416,10 +419,10 @@ void PlaylistManager::SongsDiscovered(const SongList& songs) {
   // Some songs might've changed in the library, let's update any playlist
   // items we have that match those songs
 
-  foreach(const Song & song, songs) {
-    foreach(const Data & data, playlists_) {
+  for (const Song& song : songs) {
+    for (const Data& data : playlists_) {
       PlaylistItemList items = data.p->library_items_by_id(song.id());
-      foreach(PlaylistItemPtr item, items) {
+      for (PlaylistItemPtr item : items) {
         if (item->Metadata().directory_id() != song.directory_id()) continue;
         static_cast<LibraryPlaylistItem*>(item.get())->SetMetadata(song);
         data.p->ItemChanged(item);
@@ -443,7 +446,7 @@ void PlaylistManager::PlaySmartPlaylist(GeneratorPtr generator, bool as_new,
 
 // When Player has processed the new song chosen by the user...
 void PlaylistManager::SongChangeRequestProcessed(const QUrl& url, bool valid) {
-  foreach(Playlist * playlist, GetAllPlaylists()) {
+  for (Playlist* playlist : GetAllPlaylists()) {
     if (playlist->ApplyValidityOnCurrentSong(url, valid)) {
       return;
     }
@@ -465,13 +468,13 @@ void PlaylistManager::RemoveItemsWithoutUndo(int id,
 }
 
 void PlaylistManager::InvalidateDeletedSongs() {
-  foreach(Playlist * playlist, GetAllPlaylists()) {
+  for (Playlist* playlist : GetAllPlaylists()) {
     playlist->InvalidateDeletedSongs();
   }
 }
 
 void PlaylistManager::RemoveDeletedSongs() {
-  foreach(Playlist * playlist, GetAllPlaylists()) {
+  for (Playlist* playlist : GetAllPlaylists()) {
     playlist->RemoveDeletedSongs();
   }
 }
@@ -484,7 +487,7 @@ QString PlaylistManager::GetNameForNewPlaylist(const SongList& songs) {
   QSet<QString> artists;
   QSet<QString> albums;
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     artists << (song.artist().isEmpty() ? tr("Unknown") : song.artist());
     albums << (song.album().isEmpty() ? tr("Unknown") : song.album());
 

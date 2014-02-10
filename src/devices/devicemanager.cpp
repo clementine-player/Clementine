@@ -81,7 +81,7 @@ DeviceDatabaseBackend::Device DeviceManager::DeviceInfo::SaveToDb() const {
   ret.transcode_format_ = transcode_format_;
 
   QStringList unique_ids;
-  foreach(const Backend & backend, backends_) {
+  for (const Backend& backend : backends_) {
     unique_ids << backend.unique_id_;
   }
   ret.unique_id_ = unique_ids.join(",");
@@ -99,12 +99,16 @@ void DeviceManager::DeviceInfo::InitFromDb(
 
   QStringList icon_names = dev.icon_name_.split(',');
   QVariantList icons;
-  foreach(const QString & icon_name, icon_names) { icons << icon_name; }
+  for (const QString& icon_name : icon_names) {
+    icons << icon_name;
+  }
 
   LoadIcon(icons, friendly_name_);
 
   QStringList unique_ids = dev.unique_id_.split(',');
-  foreach(const QString & id, unique_ids) { backends_ << Backend(nullptr, id); }
+  for (const QString& id : unique_ids) {
+    backends_ << Backend(nullptr, id);
+  }
 }
 
 void DeviceManager::DeviceInfo::LoadIcon(const QVariantList& icons,
@@ -116,7 +120,7 @@ void DeviceManager::DeviceInfo::LoadIcon(const QVariantList& icons,
   }
 
   // Try to load the icon with that exact name first
-  foreach(const QVariant & icon, icons) {
+  for (const QVariant& icon : icons) {
     if (!icon.value<QPixmap>().isNull()) {
       icon_ = QIcon(icon.value<QPixmap>());
       return;
@@ -210,7 +214,7 @@ DeviceManager::DeviceManager(Application* app, QObject* parent)
 }
 
 DeviceManager::~DeviceManager() {
-  foreach(DeviceLister * lister, listers_) {
+  for (DeviceLister* lister : listers_) {
     lister->ShutDown();
     delete lister;
   }
@@ -221,7 +225,7 @@ DeviceManager::~DeviceManager() {
 void DeviceManager::LoadAllDevices() {
   Q_ASSERT(QThread::currentThread() != qApp->thread());
   DeviceDatabaseBackend::DeviceList devices = backend_->GetAllDevices();
-  foreach(const DeviceDatabaseBackend::Device & device, devices) {
+  for (const DeviceDatabaseBackend::Device& device : devices) {
     DeviceInfo info;
     info.InitFromDb(device);
     devices_ << info;
@@ -309,7 +313,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       if (!info.device_) {
         if (info.database_id_ == -1 &&
             !info.BestBackend()->lister_->DeviceNeedsMount(
-                info.BestBackend()->unique_id_)) {
+                 info.BestBackend()->unique_id_)) {
 
           if (info.BestBackend()->lister_->AskForScan(
                   info.BestBackend()->unique_id_)) {
@@ -371,7 +375,7 @@ void DeviceManager::AddLister(DeviceLister* lister) {
 
 int DeviceManager::FindDeviceById(const QString& id) const {
   for (int i = 0; i < devices_.count(); ++i) {
-    foreach(const DeviceInfo::Backend & backend, devices_[i].backends_) {
+    for (const DeviceInfo::Backend& backend : devices_[i].backends_) {
       if (backend.unique_id_ == id) return i;
     }
   }
@@ -382,12 +386,12 @@ int DeviceManager::FindDeviceByUrl(const QList<QUrl>& urls) const {
   if (urls.isEmpty()) return -1;
 
   for (int i = 0; i < devices_.count(); ++i) {
-    foreach(const DeviceInfo::Backend & backend, devices_[i].backends_) {
+    for (const DeviceInfo::Backend& backend : devices_[i].backends_) {
       if (!backend.lister_) continue;
 
       QList<QUrl> device_urls =
           backend.lister_->MakeDeviceUrls(backend.unique_id_);
-      foreach(const QUrl & url, device_urls) {
+      for (const QUrl& url : device_urls) {
         if (urls.contains(url)) return i;
       }
     }
@@ -487,7 +491,7 @@ void DeviceManager::PhysicalDeviceRemoved(const QString& id) {
       beginRemoveRows(QModelIndex(), i, i);
       devices_.removeAt(i);
 
-      foreach(const QModelIndex & idx, persistentIndexList()) {
+      for (const QModelIndex& idx : persistentIndexList()) {
         if (idx.row() == i)
           changePersistentIndex(idx, QModelIndex());
         else if (idx.row() > i)
@@ -542,7 +546,7 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
 
   // Take the first URL that we have a handler for
   QUrl device_url;
-  foreach(const QUrl & url, urls) {
+  for (const QUrl& url : urls) {
     qLog(Info) << "Connecting" << url;
 
     // Find a device class for this URL's scheme
@@ -580,7 +584,9 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   if (device_url.isEmpty()) {
     // Munge the URL list into a string list
     QStringList url_strings;
-    foreach(const QUrl & url, urls) { url_strings << url.toString(); }
+    for (const QUrl& url : urls) {
+      url_strings << url.toString();
+    }
 
     app_->AddError(tr("This type of device is not supported: %1")
                        .arg(url_strings.join(", ")));
@@ -651,7 +657,7 @@ void DeviceManager::Forget(int row) {
     beginRemoveRows(QModelIndex(), row, row);
     devices_.removeAt(row);
 
-    foreach(const QModelIndex & idx, persistentIndexList()) {
+    for (const QModelIndex& idx : persistentIndexList()) {
       if (idx.row() == row)
         changePersistentIndex(idx, QModelIndex());
       else if (idx.row() > row)
@@ -708,7 +714,7 @@ void DeviceManager::TasksChanged() {
   QList<TaskManager::Task> tasks = app_->task_manager()->GetTasks();
   QList<QPersistentModelIndex> finished_tasks = active_tasks_.values();
 
-  foreach(const TaskManager::Task & task, tasks) {
+  for (const TaskManager::Task& task : tasks) {
     if (!active_tasks_.contains(task.id)) continue;
 
     QPersistentModelIndex index = active_tasks_[task.id];
@@ -723,7 +729,7 @@ void DeviceManager::TasksChanged() {
     finished_tasks.removeAll(index);
   }
 
-  foreach(const QPersistentModelIndex & index, finished_tasks) {
+  for (const QPersistentModelIndex& index : finished_tasks) {
     if (!index.isValid()) continue;
 
     DeviceInfo& info = devices_[index.row()];

@@ -28,7 +28,7 @@ NetworkProxyFactory::NetworkProxyFactory()
 
   qLog(Debug) << "Detected system proxy URLs:" << urls;
 
-  foreach(const QString & url_str, urls) {
+  for (const QString& url_str : urls) {
     if (url_str.isEmpty()) continue;
 
     env_url_ = QUrl(url_str);

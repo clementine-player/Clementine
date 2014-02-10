@@ -192,7 +192,7 @@ void DeviceManager::AddDeviceClass() {
   QStringList schemes = T::url_schemes();
   QMetaObject obj = T::staticMetaObject;
 
-  foreach(const QString & scheme, schemes) {
+  for (const QString& scheme : schemes) {
     device_classes_.insert(scheme, obj);
   }
 }

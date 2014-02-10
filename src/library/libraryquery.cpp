@@ -37,7 +37,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     QStringList tokens(
         options.filter().split(QRegExp("\\s+"), QString::SkipEmptyParts));
     QString query;
-    foreach(QString token, tokens) {
+    for (QString token : tokens) {
       token.remove('(');
       token.remove(')');
       token.remove('"');
@@ -109,7 +109,7 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value,
   // ignore 'literal' for IN
   if (!op.compare("IN", Qt::CaseInsensitive)) {
     QStringList final;
-    foreach(const QString & single_value, value.toStringList()) {
+    for (const QString& single_value : value.toStringList()) {
       final.append("?");
       bound_values_ << single_value;
     }
@@ -163,7 +163,9 @@ QSqlQuery LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
   query_ = QSqlQuery(sql, db);
 
   // Bind values
-  foreach(const QVariant & value, bound_values_) { query_.addBindValue(value); }
+  for (const QVariant& value : bound_values_) {
+    query_.addBindValue(value);
+  }
 
   query_.exec();
   return query_;

@@ -152,7 +152,7 @@ void BackgroundStreams::StreamActionDestroyed() {
     return;
   }
 
-  foreach(Stream * stream, streams_.values()) {
+  for (Stream* stream : streams_.values()) {
     if (stream->action == action) {
       stream->action = nullptr;
     }
@@ -165,7 +165,7 @@ void BackgroundStreams::StreamActionToggled(bool checked) {
     return;
   }
 
-  foreach(Stream * stream, streams_.values()) {
+  for (Stream* stream : streams_.values()) {
     if (stream->action == action) {
       EnableStream(stream->name, checked);
     }

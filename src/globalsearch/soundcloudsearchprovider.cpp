@@ -57,7 +57,7 @@ void SoundCloudSearchProvider::SearchDone(int id, const SongList& songs) {
   const int global_search_id = state.orig_id_;
 
   ResultList ret;
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     Result result(this);
     result.metadata_ = song;
 

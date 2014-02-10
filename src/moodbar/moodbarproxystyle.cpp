@@ -362,7 +362,7 @@ void MoodbarProxyStyle::ShowContextMenu(const QPoint& pos) {
   }
 
   // Update the currently selected style
-  foreach(QAction * action, style_action_group_->actions()) {
+  for (QAction* action : style_action_group_->actions()) {
     if (MoodbarRenderer::MoodbarStyle(action->data().toInt()) ==
         moodbar_style_) {
       action->setChecked(true);

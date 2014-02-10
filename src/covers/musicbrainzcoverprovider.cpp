@@ -74,7 +74,7 @@ void MusicbrainzCoverProvider::ReleaseSearchFinished(QNetworkReply* reply,
     }
   }
 
-  foreach(const QString & release_id, releases) {
+  for (const QString& release_id : releases) {
     QUrl url(QString(kAlbumCoverUrl).arg(release_id));
     QNetworkReply* reply = network_->head(QNetworkRequest(url));
     image_checks_.insert(id, reply);
@@ -90,7 +90,7 @@ void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
   if (finished_count == replies.size()) {
     QString cover_name = cover_names_.take(id);
     QList<CoverSearchResult> results;
-    foreach(QNetworkReply * reply, replies) {
+    for (QNetworkReply* reply : replies) {
       reply->deleteLater();
       if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <
           400) {
@@ -107,7 +107,7 @@ void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
 
 void MusicbrainzCoverProvider::CancelSearch(int id) {
   QList<QNetworkReply*> replies = image_checks_.values(id);
-  foreach(QNetworkReply * reply, replies) {
+  for (QNetworkReply* reply : replies) {
     reply->abort();
     reply->deleteLater();
   }

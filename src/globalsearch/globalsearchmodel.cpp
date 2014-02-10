@@ -64,7 +64,7 @@ void GlobalSearchModel::AddResults(const SearchProvider::ResultList& results) {
     sort_index = provider_sort_indices_[provider];
   }
 
-  foreach(const SearchProvider::Result & result, results) {
+  for (const SearchProvider::Result& result : results) {
     QStandardItem* parent = invisibleRootItem();
 
     // Find (or create) the container nodes for this result if we can.
@@ -198,7 +198,9 @@ void GlobalSearchModel::Clear() {
 SearchProvider::ResultList GlobalSearchModel::GetChildResults(
     const QModelIndexList& indexes) const {
   QList<QStandardItem*> items;
-  foreach(const QModelIndex & index, indexes) { items << itemFromIndex(index); }
+  for (const QModelIndex& index : indexes) {
+    items << itemFromIndex(index);
+  }
   return GetChildResults(items);
 }
 
@@ -207,7 +209,7 @@ SearchProvider::ResultList GlobalSearchModel::GetChildResults(
   SearchProvider::ResultList results;
   QSet<const QStandardItem*> visited;
 
-  foreach(QStandardItem * item, items) {
+  for (QStandardItem* item : items) {
     GetChildResults(item, &results, &visited);
   }
 
@@ -272,7 +274,7 @@ void GlobalSearchModel::SetGroupBy(const LibraryModel::Grouping& grouping,
     // Reset the model and re-add all the results using the new grouping.
     Clear();
 
-    foreach(const SearchProvider::ResultList & result_list, results) {
+    for (const SearchProvider::ResultList& result_list : results) {
       AddResults(result_list);
     }
   }

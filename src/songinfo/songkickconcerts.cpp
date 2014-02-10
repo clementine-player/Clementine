@@ -70,7 +70,7 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
     const Echonest::Artist& artist = artists[0];
     const Echonest::ForeignIds& foreign_ids = artist.foreignIds();
     QString songkick_id;
-    foreach(const Echonest::ForeignId & id, foreign_ids) {
+    for (const Echonest::ForeignId& id : foreign_ids) {
       if (id.catalog == "songkick") {
         songkick_id = id.foreign_id;
         break;
@@ -130,7 +130,7 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   QWidget* container = new QWidget;
   QVBoxLayout* layout = new QVBoxLayout(container);
 
-  foreach(const QVariant & v, events) {
+  for (const QVariant& v : events) {
     QVariantMap event = v.toMap();
     QString display_name = event["displayName"].toString();
     QString start_date = event["start"].toMap()["date"].toString();

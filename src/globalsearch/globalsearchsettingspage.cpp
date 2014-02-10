@@ -60,9 +60,8 @@ void GlobalSearchSettingsPage::Load() {
 
   // Add the ones in the configured list first
   ui_->sources->clear();
-  foreach(
-      const QString & id,
-      s.value("provider_order", QStringList() << "library").toStringList()) {
+  for (const QString& id :
+       s.value("provider_order", QStringList() << "library").toStringList()) {
     // Find a matching provider for this id
     for (QList<SearchProvider*>::iterator it = providers.begin();
          it != providers.end(); ++it) {
@@ -75,7 +74,7 @@ void GlobalSearchSettingsPage::Load() {
   }
 
   // Now add any others that are remaining
-  foreach(SearchProvider * provider, providers) {
+  for (SearchProvider* provider : providers) {
     AddProviderItem(engine, provider);
   }
 

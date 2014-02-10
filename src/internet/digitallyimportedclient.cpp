@@ -127,7 +127,7 @@ DigitallyImportedClient::ChannelList DigitallyImportedClient::ParseChannelList(
 
   QVariantList filters = data["channel_filters"].toList();
 
-  foreach(const QVariant & filter, filters) {
+  for (const QVariant& filter : filters) {
     // Find the filter called "All"
     QVariantMap filter_map = filter.toMap();
     if (filter_map.value("name", QString()).toString() != "All") continue;
@@ -135,7 +135,7 @@ DigitallyImportedClient::ChannelList DigitallyImportedClient::ParseChannelList(
     // Add all its stations to the result
     QVariantList channels =
         filter_map.value("channels", QVariantList()).toList();
-    foreach(const QVariant & channel_var, channels) {
+    for (const QVariant& channel_var : channels) {
       QVariantMap channel_map = channel_var.toMap();
 
       Channel channel;

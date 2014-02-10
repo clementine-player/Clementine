@@ -184,7 +184,7 @@ QString Mpris2::DesktopEntryAbsolutePath() const {
   xdg_data_dirs.append("/usr/local/share/");
   xdg_data_dirs.append("/usr/share/");
 
-  foreach(const QString & directory, xdg_data_dirs) {
+  for (const QString& directory : xdg_data_dirs) {
     QString path = QString("%1/applications/%2.desktop").arg(
         directory, QApplication::applicationName().toLower());
     if (QFile::exists(path)) return path;
@@ -534,7 +534,7 @@ MprisPlaylistList Mpris2::GetPlaylists(quint32 index, quint32 max_count,
                                        const QString& order,
                                        bool reverse_order) {
   MprisPlaylistList ret;
-  foreach(Playlist * p, app_->playlist_manager()->GetAllPlaylists()) {
+  for (Playlist* p : app_->playlist_manager()->GetAllPlaylists()) {
     MprisPlaylist mpris_playlist;
     mpris_playlist.id = MakePlaylistPath(p->id());
     mpris_playlist.name = app_->playlist_manager()->GetPlaylistName(p->id());

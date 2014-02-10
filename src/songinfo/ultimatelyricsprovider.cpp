@@ -105,7 +105,7 @@ void UltimateLyricsProvider::LyricsFetched() {
   QString lyrics;
 
   // Check for invalid indicators
-  foreach(const QString & indicator, invalid_indicators_) {
+  for (const QString& indicator : invalid_indicators_) {
     if (original_content.contains(indicator)) {
       qLog(Debug) << "Found invalid indicator" << indicator;
       url_hop_ = false;
@@ -116,7 +116,7 @@ void UltimateLyricsProvider::LyricsFetched() {
 
   if (!url_hop_) {
     // Apply extract rules
-    foreach(const Rule & rule, extract_rules_) {
+    for (const Rule& rule : extract_rules_) {
       // Modify the rule for this request's metadata
       Rule rule_copy(rule);
       for (Rule::iterator it = rule_copy.begin(); it != rule_copy.end(); ++it) {
@@ -135,7 +135,7 @@ void UltimateLyricsProvider::LyricsFetched() {
       }
 
       // Apply exclude rules
-      foreach(const Rule & rule, exclude_rules_) {
+      for (const Rule& rule : exclude_rules_) {
         ApplyExcludeRule(rule, &content);
       }
 
@@ -173,7 +173,7 @@ void UltimateLyricsProvider::LyricsFetched() {
 
 bool UltimateLyricsProvider::ApplyExtractRule(const Rule& rule,
                                               QString* content) const {
-  foreach(const RuleItem & item, rule) {
+  for (const RuleItem& item : rule) {
     if (item.second.isNull()) {
       if (item.first.startsWith("http://") && item.second.isNull()) {
         *content = ExtractUrl(*content, rule);
@@ -193,7 +193,7 @@ QString UltimateLyricsProvider::ExtractUrl(const QString& source,
   QString url;
   QString id;
 
-  foreach(const RuleItem & item, rule) {
+  for (const RuleItem& item : rule) {
     if (item.first.startsWith("http://") && item.second.isNull())
       url = item.first;
     else
@@ -228,7 +228,7 @@ QString UltimateLyricsProvider::Extract(const QString& source,
 
 void UltimateLyricsProvider::ApplyExcludeRule(const Rule& rule,
                                               QString* content) const {
-  foreach(const RuleItem & item, rule) {
+  for (const RuleItem& item : rule) {
     if (item.second.isNull()) {
       *content = ExcludeXmlTag(*content, item.first);
     } else {
@@ -288,7 +288,7 @@ void UltimateLyricsProvider::ReplaceField(const QString& tag,
 
   // Apply URL character replacement
   QString value_copy(value);
-  foreach(const UrlFormat & format, url_formats_) {
+  for (const UrlFormat& format : url_formats_) {
     QRegExp re("[" + QRegExp::escape(format.first) + "]");
     value_copy.replace(re, format.second);
   }
@@ -323,7 +323,7 @@ QString UltimateLyricsProvider::NoSpace(const QString& text) {
 // TODO: handle special characters (e.g. &reg; &aacute;)
 bool UltimateLyricsProvider::HTMLHasAlphaNumeric(const QString& html) {
   bool in_tag = false;
-  foreach(const QChar & c, html) {
+  for (const QChar& c : html) {
     if (!in_tag and c.isLetterOrNumber())
       return true;
     else if (c == QChar('<'))

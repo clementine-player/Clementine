@@ -56,7 +56,7 @@ void FixedOpmlPage::LoadFinished(PodcastUrlLoaderReply* reply) {
 
   switch (reply->result_type()) {
     case PodcastUrlLoaderReply::Type_Podcast:
-      foreach(const Podcast & podcast, reply->podcast_results()) {
+      for (const Podcast& podcast : reply->podcast_results()) {
         model()->appendRow(model()->CreatePodcastItem(podcast));
       }
       break;

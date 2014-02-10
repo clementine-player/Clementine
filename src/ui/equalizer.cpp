@@ -270,7 +270,7 @@ void Equalizer::Save() {
   // Presets
   s.beginWriteArray("presets", presets_.count());
   int i = 0;
-  foreach(const QString & name, presets_.keys()) {
+  for (const QString& name : presets_.keys()) {
     s.setArrayIndex(i++);
     s.setValue("name", name);
     s.setValue("params", QVariant::fromValue(presets_[name]));

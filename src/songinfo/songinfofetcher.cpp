@@ -50,7 +50,7 @@ int SongInfoFetcher::FetchInfo(const Song& metadata) {
   connect(timeout_timers_[id], SIGNAL(timeout()), timeout_timer_mapper_,
           SLOT(map()));
 
-  foreach(SongInfoProvider * provider, providers_) {
+  for (SongInfoProvider* provider : providers_) {
     if (provider->is_enabled()) {
       waiting_for_[id].append(provider);
       provider->FetchInfo(id, metadata);
@@ -95,7 +95,7 @@ void SongInfoFetcher::Timeout(int id) {
   emit ResultReady(id, results_.take(id));
 
   // Cancel any providers that we're still waiting for
-  foreach(SongInfoProvider * provider, waiting_for_[id]) {
+  for (SongInfoProvider* provider : waiting_for_[id]) {
     qLog(Info) << "Request timed out from info provider" << provider->name();
     provider->Cancel(id);
   }

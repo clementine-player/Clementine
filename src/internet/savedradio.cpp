@@ -52,8 +52,7 @@ QStandardItem* SavedRadio::CreateRootItem() {
 void SavedRadio::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
-      foreach(const Stream & stream, streams_)
-      AddStreamToList(stream, root_);
+      for (const Stream& stream : streams_) AddStreamToList(stream, root_);
 
       break;
 

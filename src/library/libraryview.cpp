@@ -256,7 +256,7 @@ bool LibraryView::RestoreLevelFocus(const QModelIndex& parent) {
           QModelIndex index = qobject_cast<QSortFilterProxyModel*>(model())
                                   ->mapToSource(current);
           SongList songs = app_->library_model()->GetChildSongs(index);
-          foreach(const Song & song, songs) {
+          for (const Song& song : songs) {
             if (song == last_selected_song_) {
               setCurrentIndex(current);
               return true;
@@ -450,7 +450,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   // number of editable non smart playlists selected
   int regular_editable = 0;
 
-  foreach(const QModelIndex & index, selected_indexes) {
+  for (const QModelIndex& index : selected_indexes) {
     int type =
         app_->library_model()->data(index, LibraryModel::Role_Type).toInt();
 
@@ -530,7 +530,7 @@ void LibraryView::ShowInVarious(bool on) {
   // node gets removed (due to all children removed), before the new one gets
   // added
   QMultiMap<QString, QString> albums;
-  foreach(const Song & song, GetSelectedSongs()) {
+  for (const Song& song : GetSelectedSongs()) {
     if (albums.find(song.album(), song.artist()) == albums.end())
       albums.insert(song.album(), song.artist());
   }
@@ -543,7 +543,7 @@ void LibraryView::ShowInVarious(bool on) {
     const QString album = albums.keys().first();
     QList<Song> all_of_album = app_->library_backend()->GetSongsByAlbum(album);
     QSet<QString> other_artists;
-    foreach(const Song & s, all_of_album) {
+    for (const Song& s : all_of_album) {
       if (!albums.contains(album, s.artist()) &&
           !other_artists.contains(s.artist())) {
         other_artists.insert(s.artist());
@@ -555,12 +555,14 @@ void LibraryView::ShowInVarious(bool on) {
                                    "this album to Various Artists as well?"),
                                 QMessageBox::Yes | QMessageBox::No,
                                 QMessageBox::Yes) == QMessageBox::Yes) {
-        foreach(const QString & s, other_artists) { albums.insert(album, s); }
+        for (const QString& s : other_artists) {
+          albums.insert(album, s);
+        }
       }
     }
   }
 
-  foreach(const QString & album, QSet<QString>::fromList(albums.keys())) {
+  for (const QString& album : QSet<QString>::fromList(albums.keys())) {
     app_->library_backend()->ForceCompilation(album, albums.values(album), on);
   }
 }
@@ -733,7 +735,9 @@ void LibraryView::EditSmartPlaylistFinished() {
 
 void LibraryView::ShowInBrowser() {
   QList<QUrl> urls;
-  foreach(const Song & song, GetSelectedSongs()) { urls << song.url(); }
+  for (const Song& song : GetSelectedSongs()) {
+    urls << song.url();
+  }
 
   Utilities::OpenInFileBrowser(urls);
 }

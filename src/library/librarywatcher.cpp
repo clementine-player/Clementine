@@ -118,7 +118,7 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
 
   if (watcher_->monitor_) {
     // Watch the new subdirectories
-    foreach(const Subdirectory & subdir, new_subdirs) {
+    for (const Subdirectory& subdir : new_subdirs) {
       watcher_->AddWatch(watcher_->watched_dirs_[dir_], subdir.path);
     }
   }
@@ -143,7 +143,7 @@ SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(
 
   // TODO: Make this faster
   SongList ret;
-  foreach(const Song & song, cached_songs_) {
+  for (const Song& song : cached_songs_) {
     if (song.url().toLocalFile().section('/', 0, -2) == path) ret << song;
   }
   return ret;
@@ -159,7 +159,7 @@ bool LibraryWatcher::ScanTransaction::HasSeenSubdir(const QString& path) {
   if (known_subdirs_dirty_)
     SetKnownSubdirs(watcher_->backend_->SubdirsInDirectory(dir_));
 
-  foreach(const Subdirectory & subdir, known_subdirs_) {
+  for (const Subdirectory& subdir : known_subdirs_) {
     if (subdir.path == path && subdir.mtime != 0) return true;
   }
   return false;
@@ -171,7 +171,7 @@ SubdirectoryList LibraryWatcher::ScanTransaction::GetImmediateSubdirs(
     SetKnownSubdirs(watcher_->backend_->SubdirsInDirectory(dir_));
 
   SubdirectoryList ret;
-  foreach(const Subdirectory & subdir, known_subdirs_) {
+  for (const Subdirectory& subdir : known_subdirs_) {
     if (subdir.path.left(subdir.path.lastIndexOf(QDir::separator())) == path &&
         subdir.mtime != 0) {
       ret << subdir;
@@ -204,7 +204,7 @@ void LibraryWatcher::AddDirectory(const Directory& dir,
     ScanTransaction transaction(this, dir.id, true);
     transaction.SetKnownSubdirs(subdirs);
     transaction.AddToProgressMax(subdirs.count());
-    foreach(const Subdirectory & subdir, subdirs) {
+    for (const Subdirectory& subdir : subdirs) {
       if (stop_requested_) return;
 
       if (scan_on_startup_) ScanSubdirectory(subdir.path, subdir, &transaction);
@@ -225,7 +225,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   // Do not scan symlinked dirs that are already in collection
   if (path_info.isSymLink()) {
     QString real_path = path_info.symLinkTarget();
-    foreach(const Directory & dir, watched_dirs_) {
+    for (const Directory& dir : watched_dirs_) {
       if (real_path.startsWith(dir.path)) {
         t->AddToProgress(1);
         return;
@@ -248,7 +248,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   // so we need to look and see if any of our children don't exist any more.
   // If one has been removed, "rescan" it to get the deleted songs
   SubdirectoryList previous_subdirs = t->GetImmediateSubdirs(path);
-  foreach(const Subdirectory & subdir, previous_subdirs) {
+  for (const Subdirectory& subdir : previous_subdirs) {
     if (!QFile::exists(subdir.path) && subdir.path != path) {
       t->AddToProgressMax(1);
       ScanSubdirectory(subdir.path, subdir, t, true);
@@ -296,7 +296,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   QSet<QString> cues_processed;
 
   // Now compare the list from the database with the list of files on disk
-  foreach(const QString & file, files_on_disk) {
+  for (const QString& file : files_on_disk) {
     if (stop_requested_) return;
 
     // associated cue
@@ -370,7 +370,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       // choose an image for the song(s)
       QString image = ImageForSong(file, album_art);
 
-      foreach(Song song, song_list) {
+      for (Song song : song_list) {
         song.set_directory_id(t->dir());
         if (song.art_automatic().isEmpty()) song.set_art_automatic(image);
 
@@ -380,7 +380,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   }
 
   // Look for deleted songs
-  foreach(const Song & song, songs_in_db) {
+  for (const Song& song : songs_in_db) {
     if (!song.is_unavailable() &&
         !files_on_disk.contains(song.url().toLocalFile())) {
       qLog(Debug) << "Song deleted from disk:" << song.url().toLocalFile();
@@ -404,7 +404,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
 
   // Recurse into the new subdirs that we found
   t->AddToProgressMax(my_new_subdirs.count());
-  foreach(const Subdirectory & my_new_subdir, my_new_subdirs) {
+  for (const Subdirectory& my_new_subdir : my_new_subdirs) {
     if (stop_requested_) return;
     ScanSubdirectory(my_new_subdir.path, my_new_subdir, t, true);
   }
@@ -421,14 +421,14 @@ void LibraryWatcher::UpdateCueAssociatedSongs(const QString& file,
   SongList old_sections = backend_->GetSongsByUrl(QUrl::fromLocalFile(file));
 
   QHash<quint64, Song> sections_map;
-  foreach(const Song & song, old_sections) {
+  for (const Song& song : old_sections) {
     sections_map[song.beginning_nanosec()] = song;
   }
 
   QSet<int> used_ids;
 
   // update every song that's in the cue and library
-  foreach(Song cue_song, cue_parser_->Load(&cue, matching_cue, path)) {
+  for (Song cue_song : cue_parser_->Load(&cue, matching_cue, path)) {
     cue_song.set_directory_id(t->dir());
 
     Song matching = sections_map[cue_song.beginning_nanosec()];
@@ -443,7 +443,7 @@ void LibraryWatcher::UpdateCueAssociatedSongs(const QString& file,
   }
 
   // sections that are now missing
-  foreach(const Song & matching, old_sections) {
+  for (const Song& matching : old_sections) {
     if (!used_ids.contains(matching.id())) {
       t->deleted_songs << matching;
     }
@@ -459,8 +459,8 @@ void LibraryWatcher::UpdateNonCueAssociatedSong(const QString& file,
   // 'raw' (cueless) song and we just remove the rest of the sections
   // from the library
   if (cue_deleted) {
-    foreach(const Song & song,
-            backend_->GetSongsByUrl(QUrl::fromLocalFile(file))) {
+    for (const Song& song :
+         backend_->GetSongsByUrl(QUrl::fromLocalFile(file))) {
       if (!song.IsMetadataEqual(matching_song)) {
         t->deleted_songs << song;
       }
@@ -493,8 +493,7 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
     // Ignore FILEs pointing to other media files. Also, watch out for incorrect
     // media files. Playlist parser for CUEs considers every entry in sheet
     // valid and we don't want invalid media getting into library!
-    foreach(const Song & cue_song,
-            cue_parser_->Load(&cue, matching_cue, path)) {
+    for (const Song& cue_song : cue_parser_->Load(&cue, matching_cue, path)) {
       if (cue_song.url().toLocalFile() == file) {
         if (TagReaderClient::Instance()->IsMediaFileBlocking(file)) {
           song_list << cue_song;
@@ -579,7 +578,7 @@ void LibraryWatcher::RemoveDirectory(const Directory& dir) {
   watched_dirs_.remove(dir.id);
 
   // Stop watching the directory's subdirectories
-  foreach(const QString & subdir_path, subdir_mapping_.keys(dir)) {
+  for (const QString& subdir_path : subdir_mapping_.keys(dir)) {
     fs_watcher_->RemovePath(subdir_path);
     subdir_mapping_.remove(subdir_path);
   }
@@ -588,7 +587,7 @@ void LibraryWatcher::RemoveDirectory(const Directory& dir) {
 bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path,
                                     Song* out) {
   // TODO: Make this faster
-  foreach(const Song & song, list) {
+  for (const Song& song : list) {
     if (song.url().toLocalFile() == path) {
       *out = song;
       return true;
@@ -616,12 +615,12 @@ void LibraryWatcher::DirectoryChanged(const QString& subdir) {
 }
 
 void LibraryWatcher::RescanPathsNow() {
-  foreach(int dir, rescan_queue_.keys()) {
+  for (int dir : rescan_queue_.keys()) {
     if (stop_requested_) return;
     ScanTransaction transaction(this, dir, false);
     transaction.AddToProgressMax(rescan_queue_[dir].count());
 
-    foreach(const QString & path, rescan_queue_[dir]) {
+    for (const QString& path : rescan_queue_[dir]) {
       if (stop_requested_) return;
       Subdirectory subdir;
       subdir.directory_id = dir;
@@ -643,10 +642,10 @@ QString LibraryWatcher::PickBestImage(const QStringList& images) {
 
   QStringList filtered;
 
-  foreach(const QString & filter_text, best_image_filters_) {
+  for (const QString& filter_text : best_image_filters_) {
     // the images in the images list are represented by a full path,
     // so we need to isolate just the filename
-    foreach(const QString & image, images) {
+    for (const QString& image : images) {
       QFileInfo file_info(image);
       QString filename(file_info.fileName());
       if (filename.contains(filter_text, Qt::CaseInsensitive))
@@ -667,7 +666,7 @@ QString LibraryWatcher::PickBestImage(const QStringList& images) {
   int biggest_size = 0;
   QString biggest_path;
 
-  foreach(const QString & path, filtered) {
+  for (const QString& path : filtered) {
     QImage image(path);
     if (image.isNull()) continue;
 
@@ -713,7 +712,7 @@ void LibraryWatcher::ReloadSettings() {
   QStringList filters =
       s.value("cover_art_patterns", QStringList() << "front"
                                                   << "cover").toStringList();
-  foreach(const QString & filter, filters) {
+  for (const QString& filter : filters) {
     QString s = filter.trimmed();
     if (!s.isEmpty()) best_image_filters_ << s;
   }
@@ -722,9 +721,9 @@ void LibraryWatcher::ReloadSettings() {
     fs_watcher_->Clear();
   } else if (monitor_ && !was_monitoring_before) {
     // Add all directories to all QFileSystemWatchers again
-    foreach(const Directory & dir, watched_dirs_.values()) {
+    for (const Directory& dir : watched_dirs_.values()) {
       SubdirectoryList subdirs = backend_->SubdirsInDirectory(dir.id);
-      foreach(const Subdirectory & subdir, subdirs) {
+      for (const Subdirectory& subdir : subdirs) {
         AddWatch(dir, subdir.path);
       }
     }
@@ -754,12 +753,12 @@ void LibraryWatcher::IncrementalScanNow() { PerformScan(true, false); }
 void LibraryWatcher::FullScanNow() { PerformScan(false, true); }
 
 void LibraryWatcher::PerformScan(bool incremental, bool ignore_mtimes) {
-  foreach(const Directory & dir, watched_dirs_.values()) {
+  for (const Directory& dir : watched_dirs_.values()) {
     ScanTransaction transaction(this, dir.id, incremental, ignore_mtimes);
     SubdirectoryList subdirs(transaction.GetAllSubdirs());
     transaction.AddToProgressMax(subdirs.count());
 
-    foreach(const Subdirectory & subdir, subdirs) {
+    for (const Subdirectory& subdir : subdirs) {
       if (stop_requested_) return;
 
       ScanSubdirectory(subdir.path, subdir, &transaction);

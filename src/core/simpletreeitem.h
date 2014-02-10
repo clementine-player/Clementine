@@ -148,7 +148,7 @@ void SimpleTreeItem<T>::Delete(int child_row) {
 
 template <typename T>
 T* SimpleTreeItem<T>::ChildByKey(const QString& key) const {
-  foreach(T * child, children) {
+  for (T* child : children) {
     if (child->key == key) return child;
   }
   return NULL;

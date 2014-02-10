@@ -156,8 +156,8 @@ void PlaylistListContainer::SetApplication(Application* app) {
   connect(player, SIGNAL(Stopped()), SLOT(ActiveStopped()));
 
   // Get all playlists, even ones that are hidden in the UI.
-  foreach(const PlaylistBackend::Playlist & p,
-          app->playlist_backend()->GetAllFavoritePlaylists()) {
+  for (const PlaylistBackend::Playlist& p :
+       app->playlist_backend()->GetAllFavoritePlaylists()) {
     QStandardItem* playlist_item = model_->NewPlaylist(p.name, p.id);
     QStandardItem* parent_folder = model_->FolderByPath(p.ui_path);
     parent_folder->appendRow(playlist_item);
@@ -293,8 +293,8 @@ void PlaylistListContainer::DeleteClicked() {
   QSet<int> ids;
   QList<QPersistentModelIndex> folders_to_delete;
 
-  foreach(const QModelIndex & proxy_index,
-          ui_->tree->selectionModel()->selectedRows(0)) {
+  for (const QModelIndex& proxy_index :
+       ui_->tree->selectionModel()->selectedRows(0)) {
     const QModelIndex& index = proxy_->mapToSource(proxy_index);
 
     // Is it a playlist?
@@ -325,10 +325,12 @@ void PlaylistListContainer::DeleteClicked() {
   }
 
   // Unfavorite the playlists
-  foreach(int id, ids) { app_->playlist_manager()->Favorite(id, false); }
+  for (int id : ids) {
+    app_->playlist_manager()->Favorite(id, false);
+  }
 
   // Delete the top-level folders.
-  foreach(const QPersistentModelIndex & index, folders_to_delete) {
+  for (const QPersistentModelIndex& index : folders_to_delete) {
     if (index.isValid()) {
       model_->removeRow(index.row(), index.parent());
     }

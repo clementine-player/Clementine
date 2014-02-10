@@ -127,7 +127,7 @@ WiimoteSettingsPage::WiimoteSettingsPage(SettingsDialog* dialog)
 }
 
 void WiimoteSettingsPage::AddShortcut(quint64 button, quint32 action) {
-  foreach(const Shortcut & shortcut, actions_) {
+  for (const Shortcut& shortcut : actions_) {
     if (shortcut.button == button) {
       QMessageBox::information(this, tr("Information"),
                                QString(tr("Shortcut for %1 already exists"))
@@ -172,7 +172,7 @@ void WiimoteSettingsPage::Load() {
   quint64 fvalue, svalue;
   bool fvalid, svalid;
 
-  foreach(const QString & str, s.allKeys()) {
+  for (const QString& str : s.allKeys()) {
     fvalue = str.toULongLong(&fvalid, 10);
     svalue = s.value(str, 0).toULongLong(&svalid);
     if (fvalid && svalid) AddShortcut(fvalue, svalue);
@@ -187,8 +187,8 @@ void WiimoteSettingsPage::Save() {
 
   s.beginGroup(WiimotedevShortcuts::kActionsGroup);
   s.remove("");
-  foreach(const Shortcut & shortcut, actions_)
-  s.setValue(QString::number(shortcut.button), shortcut.action);
+  for (const Shortcut& shortcut : actions_)
+    s.setValue(QString::number(shortcut.button), shortcut.action);
   s.endGroup();
 
   s.beginGroup(WiimotedevShortcuts::kSettingsGroup);

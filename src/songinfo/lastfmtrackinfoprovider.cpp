@@ -136,7 +136,7 @@ void LastfmTrackInfoProvider::GetTags(int id, const lastfm::XmlQuery& q) {
 
   widget->SetIcon(data.icon_);
 
-  foreach(const lastfm::XmlQuery & e, q["track"]["toptags"].children("tag")) {
+  for (const lastfm::XmlQuery& e : q["track"]["toptags"].children("tag")) {
     widget->AddTag(e["name"].text());
   }
 

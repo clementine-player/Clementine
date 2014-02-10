@@ -85,7 +85,7 @@ void DiscogsCoverProvider::SendSearchRequest(DiscogsCoverSearchContext* ctx) {
 
   EncodedArgList encoded_args;
 
-  foreach(const Arg & arg, args) {
+  for (const Arg& arg : args) {
     EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
                            QUrl::toPercentEncoding(arg.second));
     encoded_args << encoded_arg;
@@ -126,7 +126,7 @@ void DiscogsCoverProvider::HandleSearchReply(QNetworkReply* reply, int id) {
 
   QVariantList results = reply_map["results"].toList();
 
-  foreach(const QVariant & result, results) {
+  for (const QVariant& result : results) {
     QVariantMap result_map = result.toMap();
     // In order to use less round-trips, we cheat here.  Instead of
     // following the "resource_url", and then scan all images in the

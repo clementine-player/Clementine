@@ -85,14 +85,14 @@ void DeviceProperties::ShowDevice(int row) {
                              << "phone-nokia-n900"
                              << "phone-palm-pre";
 
-    foreach(const QString & icon_name, icon_names) {
+    for (const QString& icon_name : icon_names) {
       QListWidgetItem* item = new QListWidgetItem(IconLoader::Load(icon_name),
                                                   QString(), ui_->icon);
       item->setData(Qt::UserRole, icon_name);
     }
 
     // Load the transcode formats the first time the dialog is shown
-    foreach(const TranscoderPreset & preset, Transcoder::GetAllPresets()) {
+    for (const TranscoderPreset& preset : Transcoder::GetAllPresets()) {
       ui_->transcode_format->addItem(preset.name_, preset.type_);
     }
     ui_->transcode_format->model()->sort(0);
@@ -142,7 +142,7 @@ void DeviceProperties::UpdateHardwareInfo() {
     QVariantMap info = lister->DeviceHardwareInfo(id);
 
     // Remove empty items
-    foreach(const QString & key, info.keys()) {
+    for (const QString& key : info.keys()) {
       if (info[key].isNull() || info[key].toString().isEmpty())
         info.remove(key);
     }
@@ -154,7 +154,7 @@ void DeviceProperties::UpdateHardwareInfo() {
     int row = 0;
     AddHardwareInfo(row++, tr("Model"), lister->DeviceModel(id));
     AddHardwareInfo(row++, tr("Manufacturer"), lister->DeviceManufacturer(id));
-    foreach(const QString & key, info.keys()) {
+    for (const QString& key : info.keys()) {
       AddHardwareInfo(row++, tr(key.toAscii()), info[key].toString());
     }
 
@@ -278,7 +278,7 @@ void DeviceProperties::UpdateFormatsFinished() {
 
   // Populate supported types list
   ui_->supported_formats->clear();
-  foreach(Song::FileType type, supported_formats_) {
+  for (Song::FileType type : supported_formats_) {
     QListWidgetItem* item = new QListWidgetItem(Song::TextForFiletype(type));
     ui_->supported_formats->addItem(item);
   }

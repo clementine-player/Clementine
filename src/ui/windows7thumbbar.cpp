@@ -43,7 +43,7 @@ void Windows7ThumbBar::SetActions(const QList<QAction*>& actions) {
   Q_ASSERT(actions.count() <= kMaxButtonCount);
 
   actions_ = actions;
-  foreach(QAction * action, actions) {
+  for (QAction* action : actions) {
     if (action) {
       connect(action, SIGNAL(changed()), SLOT(ActionChanged()));
     }

@@ -133,7 +133,7 @@ void InternetViewContainer::FocusOnFilter(QKeyEvent* event) {
 void InternetViewContainer::SetHeaderHeight(int height) {
   QTimeLine* animation = qobject_cast<QTimeLine*>(sender());
   QWidget* header = nullptr;
-  foreach(QWidget * h, headers_.keys()) {
+  for (QWidget* h : headers_.keys()) {
     if (headers_[h].animation_ == animation) {
       header = h;
       break;

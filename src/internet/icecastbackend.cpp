@@ -105,7 +105,9 @@ IcecastBackend::StationList IcecastBackend::GetStations(const QString& filter,
     sql += " WHERE " + where_clauses.join(" AND ");
   }
   QSqlQuery q(sql, db);
-  foreach(const QString & value, bound_items) { q.addBindValue(value); }
+  for (const QString& value : bound_items) {
+    q.addBindValue(value);
+  }
 
   q.exec();
   if (db_->CheckErrors(q)) return ret;
@@ -152,7 +154,7 @@ void IcecastBackend::ClearAndAddStations(const StationList& stations) {
         db);
 
     // Add these ones
-    foreach(const Station & station, stations) {
+    for (const Station& station : stations) {
       q.bindValue(":name", station.name);
       q.bindValue(":url", station.url);
       q.bindValue(":mime_type", station.mime_type);

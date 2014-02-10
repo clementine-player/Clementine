@@ -70,7 +70,7 @@ void AddPodcastByUrl::RequestFinished(PodcastUrlLoaderReply* reply) {
 
   switch (reply->result_type()) {
     case PodcastUrlLoaderReply::Type_Podcast:
-      foreach(const Podcast & podcast, reply->podcast_results()) {
+      for (const Podcast& podcast : reply->podcast_results()) {
         model()->appendRow(model()->CreatePodcastItem(podcast));
       }
       break;
@@ -89,9 +89,9 @@ void AddPodcastByUrl::Show() {
   }
 
   const QClipboard* clipboard = QApplication::clipboard();
-  foreach(const QString & contents,
-          QStringList() << clipboard->text(QClipboard::Clipboard)
-                        << clipboard->text(QClipboard::Selection)) {
+  for (const QString& contents : QStringList()
+       << clipboard->text(QClipboard::Clipboard)
+       << clipboard->text(QClipboard::Selection)) {
     if (contents.contains("://")) {
       ui_->url->setText(contents);
       return;

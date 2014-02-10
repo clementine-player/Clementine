@@ -55,7 +55,7 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   QDir dir(":/translations/");
   QStringList codes(dir.entryList(QStringList() << "*.qm"));
   QRegExp lang_re("^clementine_(.*).qm$");
-  foreach(const QString & filename, codes) {
+  for (const QString& filename : codes) {
     // The regex captures the "ru" from "clementine_ru.qm"
     if (!lang_re.exactMatch(filename)) continue;
 

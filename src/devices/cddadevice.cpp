@@ -144,7 +144,7 @@ void CddaDevice::AudioCDTagsLoaded(
   int track_number = 1;
   if (results.size() == 0) return;
   model_->Reset();
-  foreach(const MusicBrainzClient::Result & ret, results) {
+  for (const MusicBrainzClient::Result& ret : results) {
     Song song;
     song.set_artist(artist);
     song.set_album(album);

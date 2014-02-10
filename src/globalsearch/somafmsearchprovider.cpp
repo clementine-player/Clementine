@@ -42,7 +42,7 @@ void SomaFMSearchProvider::LoadArtAsync(int id, const Result& result) {
 void SomaFMSearchProvider::RecreateItems() {
   QList<Item> items;
 
-  foreach(const SomaFMService::Stream & stream, service_->Streams()) {
+  for (const SomaFMService::Stream& stream : service_->Streams()) {
     Item item;
     item.metadata_ = stream.ToSong(service_->name());
     item.keyword_ = stream.title_;

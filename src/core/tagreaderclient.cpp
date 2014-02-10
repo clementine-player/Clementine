@@ -77,7 +77,7 @@ TagReaderReply* TagReaderClient::UpdateSongStatistics(const Song& metadata) {
 }
 
 void TagReaderClient::UpdateSongsStatistics(const SongList& songs) {
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     TagReaderReply* reply = UpdateSongStatistics(song);
     connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
   }
@@ -95,7 +95,7 @@ TagReaderReply* TagReaderClient::UpdateSongRating(const Song& metadata) {
 }
 
 void TagReaderClient::UpdateSongsRating(const SongList& songs) {
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     TagReaderReply* reply = UpdateSongRating(song);
     connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
   }

@@ -52,7 +52,7 @@ void SongLoaderInserter::Load(Playlist* destination, int row, bool play_now,
   connect(this, SIGNAL(EffectiveLoadFinished(const SongList&)), destination,
           SLOT(UpdateItems(const SongList&)));
 
-  foreach(const QUrl & url, urls) {
+  for (const QUrl& url : urls) {
     SongLoader* loader = new SongLoader(library_, player_, this);
 
     // we're connecting this before we're even sure if this is an async load
@@ -151,7 +151,7 @@ void SongLoaderInserter::PartiallyFinished() {
 }
 
 void SongLoaderInserter::EffectiveLoad() {
-  foreach(SongLoader * loader, pending_async_) {
+  for (SongLoader* loader : pending_async_) {
     loader->EffectiveSongsLoad();
     task_manager_->SetTaskProgress(async_load_id_, ++async_progress_);
     emit EffectiveLoadFinished(loader->songs());

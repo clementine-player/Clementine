@@ -69,7 +69,7 @@ void PLSParser::Save(const SongList& songs, QIODevice* device,
   s << "NumberOfEntries=" << songs.count() << endl;
 
   int n = 1;
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     s << "File" << n << "=" << URLOrRelativeFilename(song.url(), dir) << endl;
     s << "Title" << n << "=" << song.title() << endl;
     s << "Length" << n << "=" << song.length_nanosec() / kNsecPerSec << endl;

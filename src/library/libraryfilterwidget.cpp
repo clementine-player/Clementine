@@ -211,7 +211,7 @@ void LibraryFilterWidget::GroupingChanged(const LibraryModel::Grouping& g) {
   }
 
   // Now make sure the correct action is checked
-  foreach(QAction * action, group_by_group_->actions()) {
+  for (QAction* action : group_by_group_->actions()) {
     if (action->property("group_by").isNull()) continue;
 
     if (g == action->property("group_by").value<LibraryModel::Grouping>()) {

@@ -51,7 +51,7 @@ AlbumCoverFetcherSearch::AlbumCoverFetcherSearch(
 }
 
 void AlbumCoverFetcherSearch::TerminateSearch() {
-  foreach(int id, pending_requests_.keys()) {
+  for (int id : pending_requests_.keys()) {
     pending_requests_.take(id)->CancelSearch(id);
   }
 
@@ -59,7 +59,7 @@ void AlbumCoverFetcherSearch::TerminateSearch() {
 }
 
 void AlbumCoverFetcherSearch::Start(CoverProviders* cover_providers) {
-  foreach(CoverProvider * provider, cover_providers->List()) {
+  for (CoverProvider* provider : cover_providers->List()) {
     connect(provider, SIGNAL(SearchFinished(int, QList<CoverSearchResult>)),
             SLOT(ProviderSearchFinished(int, QList<CoverSearchResult>)));
     const int id = cover_providers->NextId();
@@ -248,7 +248,7 @@ void AlbumCoverFetcherSearch::Cancel() {
   if (!pending_requests_.isEmpty()) {
     TerminateSearch();
   } else if (!pending_image_loads_.isEmpty()) {
-    foreach(RedirectFollower * reply, pending_image_loads_.keys()) {
+    for (RedirectFollower* reply : pending_image_loads_.keys()) {
       reply->abort();
     }
     pending_image_loads_.clear();

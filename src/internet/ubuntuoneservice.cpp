@@ -111,7 +111,7 @@ void UbuntuOneService::VolumeListRequestFinished(QNetworkReply* reply) {
 
   QJson::Parser parser;
   QVariantList result = parser.parse(reply).toList();
-  foreach(const QVariant & v, result) {
+  for (const QVariant& v : result) {
     RequestFileList(v.toMap()["node_path"].toString());
   }
 }
@@ -132,7 +132,7 @@ void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
   QVariantMap result = parser.parse(reply).toMap();
 
   QVariantList children = result["children"].toList();
-  foreach(const QVariant & c, children) {
+  for (const QVariant& c : children) {
     QVariantMap child = c.toMap();
     if (child["kind"].toString() == "file") {
       QString content_path = child["content_path"].toString();

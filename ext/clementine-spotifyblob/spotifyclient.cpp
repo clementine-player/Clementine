@@ -245,7 +245,7 @@ void SpotifyClient::SendSearchResponse(sp_search* result) {
 
   // Get the albums from the search.  All these should be resolved by now.
   QList<sp_albumbrowse*> browses = pending_search_album_browses_.take(result);
-  foreach(sp_albumbrowse * browse, browses) {
+  for (sp_albumbrowse* browse : browses) {
     sp_album* album = sp_albumbrowse_album(browse);
     pb::spotify::Album* msg = response->add_album();
 
@@ -548,7 +548,7 @@ void SpotifyClient::PlaylistStateChangedForLoadPlaylist(sp_playlist* pl,
   }
 
   // If any of the tracks aren't loaded yet we have to wait
-  foreach(sp_track * track, pending_load->tracks_) {
+  for (sp_track* track : pending_load->tracks_) {
     if (!sp_track_is_loaded(track)) {
       qLog(Debug) << "One or more tracks aren't loaded yet, waiting";
       return;
@@ -567,7 +567,7 @@ void SpotifyClient::PlaylistStateChangedForLoadPlaylist(sp_playlist* pl,
   }
 
   *response->mutable_request() = pending_load->request_;
-  foreach(sp_track * track, pending_load->tracks_) {
+  for (sp_track* track : pending_load->tracks_) {
     me->ConvertTrack(track, response->add_track());
     sp_track_release(track);
   }
@@ -660,11 +660,11 @@ void SpotifyClient::MetadataUpdatedCallback(sp_session* session) {
   SpotifyClient* me =
       reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
 
-  foreach(const PendingLoadPlaylist & load, me->pending_load_playlists_) {
+  for (const PendingLoadPlaylist& load : me->pending_load_playlists_) {
     PlaylistStateChangedForLoadPlaylist(load.playlist_, me);
   }
-  foreach(const PendingPlaybackRequest & playback,
-          me->pending_playback_requests_) {
+  for (const PendingPlaybackRequest& playback :
+       me->pending_playback_requests_) {
     me->TryPlaybackAgain(playback);
   }
 }

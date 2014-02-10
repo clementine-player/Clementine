@@ -74,7 +74,7 @@ void TrackSelectionDialog::Init(const SongList& songs) {
   ui_->stack->setCurrentWidget(ui_->loading_page);
   data_.clear();
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     Data data;
     data.original_song_ = song;
     data_ << data;
@@ -166,7 +166,7 @@ void TrackSelectionDialog::UpdateStack() {
   AddDivider(tr("Suggested tags"), ui_->results);
 
   int song_index = 0;
-  foreach(const Song & song, data.results_) {
+  for (const Song& song : data.results_) {
     AddSong(song, song_index++, ui_->results);
   }
 
@@ -265,7 +265,7 @@ void TrackSelectionDialog::accept() {
 
   QDialog::accept();
 
-  foreach(const Data & data, data_) {
+  for (const Data& data : data_) {
     if (data.pending_ || data.results_.isEmpty() || data.selected_result_ == -1)
       continue;
 

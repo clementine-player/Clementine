@@ -150,7 +150,7 @@ void SongInfoBase::InfoResultReady(int id,
                                    const CollapsibleInfoPane::Data& data) {}
 
 void SongInfoBase::ResultReady(int id, const SongInfoFetcher::Result& result) {
-  foreach(const CollapsibleInfoPane::Data & data, result.info_) {
+  for (const CollapsibleInfoPane::Data& data : result.info_) {
     delete data.contents_;
   }
 }
@@ -169,7 +169,7 @@ void SongInfoBase::CollapseSections() {
 
   QMap<CollapsibleInfoPane::Data::Type, CollapsibleInfoPane*> types_;
   QSet<CollapsibleInfoPane::Data::Type> has_user_preference_;
-  foreach(CollapsibleInfoPane * pane, sections_) {
+  for (CollapsibleInfoPane* pane : sections_) {
     const CollapsibleInfoPane::Data::Type type = pane->data().type_;
     types_.insertMulti(type, pane);
 
@@ -182,14 +182,14 @@ void SongInfoBase::CollapseSections() {
     }
   }
 
-  foreach(CollapsibleInfoPane::Data::Type type, types_.keys()) {
+  for (CollapsibleInfoPane::Data::Type type : types_.keys()) {
     if (!has_user_preference_.contains(type)) {
       // Expand the first one
       types_.values(type).last()->Expand();
     }
   }
 
-  foreach(CollapsibleInfoPane * pane, sections_) {
+  for (CollapsibleInfoPane* pane : sections_) {
     connect(pane, SIGNAL(Toggled(bool)), SLOT(SectionToggled(bool)));
   }
 }
@@ -204,7 +204,7 @@ void SongInfoBase::SectionToggled(bool value) {
 }
 
 void SongInfoBase::ReloadSettings() {
-  foreach(CollapsibleInfoPane * pane, sections_) {
+  for (CollapsibleInfoPane* pane : sections_) {
     QWidget* contents = pane->data().contents_;
     if (!contents) continue;
 

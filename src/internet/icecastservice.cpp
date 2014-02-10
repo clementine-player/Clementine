@@ -165,7 +165,7 @@ struct StationEquality {
 
 QStringList FilterGenres(const QStringList& genres) {
   QStringList ret;
-  foreach(const QString & genre, genres) {
+  for (const QString& genre : genres) {
     if (genre.length() < 2) continue;
     if (genre.contains("ÃÂ")) continue;  // Broken unicode.
     if (genre.contains(QRegExp("^#x[0-9a-f][0-9a-f]")))
@@ -210,10 +210,12 @@ void IcecastService::ParseDirectoryFinished(
   QSet<QString> genre_set = genres.keys().toSet();
 
   // Merge genres with only 1 or 2 stations into "Other".
-  foreach(const QString & genre, genre_set) {
+  for (const QString& genre : genre_set) {
     if (genres.count(genre) < 3) {
       const QList<IcecastBackend::Station*>& small_genre = genres.values(genre);
-      foreach(IcecastBackend::Station * s, small_genre) { s->genre = "Other"; }
+      for (IcecastBackend::Station* s : small_genre) {
+        s->genre = "Other";
+      }
     }
   }
 

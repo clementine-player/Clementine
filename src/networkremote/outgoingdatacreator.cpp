@@ -63,7 +63,7 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   connect(fetcher_, SIGNAL(ResultReady(int, SongInfoFetcher::Result)),
           SLOT(SendLyrics(int, SongInfoFetcher::Result)));
 
-  foreach(SongInfoProvider * provider, provider_list_) {
+  for (SongInfoProvider* provider : provider_list_) {
     fetcher_->AddProvider(provider);
   }
 
@@ -98,21 +98,21 @@ void OutgoingDataCreator::CheckEnabledProviders() {
                 << "darklyrics.com";
 
   QVariant saved_order = s.value("search_order", default_order);
-  foreach(const QVariant & name, saved_order.toList()) {
+  for (const QVariant& name : saved_order.toList()) {
     SongInfoProvider* provider = ProviderByName(name.toString());
     if (provider) ordered_providers << provider;
   }
 
   // Enable all the providers in the list and rank them
   int relevance = 100;
-  foreach(SongInfoProvider * provider, ordered_providers) {
+  for (SongInfoProvider* provider : ordered_providers) {
     provider->set_enabled(true);
     qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance--);
   }
 
   // Any lyric providers we don't have in ordered_providers are considered
   // disabled
-  foreach(SongInfoProvider * provider, fetcher_->providers()) {
+  for (SongInfoProvider* provider : fetcher_->providers()) {
     if (qobject_cast<UltimateLyricsProvider*>(provider) &&
         !ordered_providers.contains(provider)) {
       provider->set_enabled(false);
@@ -122,7 +122,7 @@ void OutgoingDataCreator::CheckEnabledProviders() {
 
 SongInfoProvider* OutgoingDataCreator::ProviderByName(const QString& name)
     const {
-  foreach(SongInfoProvider * provider, fetcher_->providers()) {
+  for (SongInfoProvider* provider : fetcher_->providers()) {
     if (UltimateLyricsProvider* lyrics =
             qobject_cast<UltimateLyricsProvider*>(provider)) {
       if (lyrics->name() == name) return provider;
@@ -137,8 +137,7 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     return;
   }
 
-  RemoteClient* client;
-  foreach(client, *clients_) {
+  for (RemoteClient* client : *clients_) {
     // Do not send data to downloaders
     if (client->isDownloader()) {
       if (client->State() != QTcpSocket::ConnectedState) {
@@ -207,8 +206,8 @@ void OutgoingDataCreator::SendAllPlaylists() {
   pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
 
   // Get all playlists, even ones that are hidden in the UI.
-  foreach(const PlaylistBackend::Playlist & p,
-          app_->playlist_backend()->GetAllPlaylists()) {
+  for (const PlaylistBackend::Playlist& p :
+       app_->playlist_backend()->GetAllPlaylists()) {
     bool playlist_open = app_->playlist_manager()->IsPlaylistOpen(p.id);
     int item_count = playlist_open ? app_playlists.at(p.id)->rowCount() : 0;
 
@@ -553,7 +552,7 @@ void OutgoingDataCreator::SendLyrics(int id,
   msg.set_type(pb::remote::LYRICS);
   pb::remote::ResponseLyrics* response = msg.mutable_response_lyrics();
 
-  foreach(const CollapsibleInfoPane::Data & data, result.info_) {
+  for (const CollapsibleInfoPane::Data& data : result.info_) {
     // If the size is zero, do not send the provider
     UltimateLyricsLyric* editor =
         qobject_cast<UltimateLyricsLyric*>(data.content_object_);
@@ -707,7 +706,7 @@ void OutgoingDataCreator::SendAlbum(RemoteClient* client, const Song& song) {
 
   SongList album = app_->library_backend()->GetSongsByAlbum(song.album());
 
-  foreach(Song s, album) {
+  for (Song s : album) {
     DownloadItem item(s, album.indexOf(s) + 1, album.size());
     download_queue_[client].append(item);
   }
@@ -723,13 +722,13 @@ void OutgoingDataCreator::SendPlaylist(RemoteClient* client, int playlist_id) {
 
   // Count the local songs
   int count = 0;
-  foreach(Song s, song_list) {
+  for (Song s : song_list) {
     if (s.url().scheme() == "file") {
       count++;
     }
   }
 
-  foreach(Song s, song_list) {
+  for (Song s : song_list) {
     // Only local files!
     if (s.url().scheme() == "file") {
       DownloadItem item(s, song_list.indexOf(s) + 1, count);

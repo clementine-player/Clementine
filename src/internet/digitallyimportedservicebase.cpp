@@ -127,7 +127,7 @@ void DigitallyImportedServiceBase::PopulateStreams() {
   if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
 
   // Add each stream to the model
-  foreach(const DigitallyImportedClient::Channel & channel, saved_channels_) {
+  for (const DigitallyImportedClient::Channel& channel : saved_channels_) {
     Song song;
     SongFromChannel(channel, &song);
 

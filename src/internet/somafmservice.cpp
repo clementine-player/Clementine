@@ -226,7 +226,7 @@ void SomaFMServiceBase::RefreshStreams() {
 void SomaFMServiceBase::PopulateStreams() {
   if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
 
-  foreach(const Stream & stream, streams_) {
+  for (const Stream& stream : streams_) {
     QStandardItem* item =
         new QStandardItem(QIcon(":last.fm/icon_radio.png"), QString());
     item->setText(stream.title_);

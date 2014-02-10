@@ -39,7 +39,7 @@ ProjectMPresetModel::ProjectMPresetModel(ProjectMVisualisation* vis,
                            QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
                            QDir::Name | QDir::IgnoreCase));
 
-  foreach(const QString & filename, presets) {
+  for (const QString& filename : presets) {
     all_presets_ << Preset(preset_dir.absoluteFilePath(filename), filename,
                            false);
   }

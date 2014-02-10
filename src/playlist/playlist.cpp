@@ -149,7 +149,9 @@ void Playlist::InsertSongItems(const SongList& songs, int pos, bool play_now,
                                bool enqueue) {
   PlaylistItemList items;
 
-  foreach(const Song & song, songs) { items << PlaylistItemPtr(new T(song)); }
+  for (const Song& song : songs) {
+    items << PlaylistItemPtr(new T(song));
+  }
 
   InsertItems(items, pos, play_now, enqueue);
 }
@@ -473,7 +475,8 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
     // Advance i until we find any track that is in the filter, skipping
     // the selected to be skipped
     while (i < virtual_items_.count() &&
-        (!FilterContainsVirtualIndex(i) || item_at(virtual_items_[i])->GetShouldSkip())) {
+           (!FilterContainsVirtualIndex(i) ||
+            item_at(virtual_items_[i])->GetShouldSkip())) {
       ++i;
     }
     return i;
@@ -481,7 +484,7 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
 
   // We need to advance i until we get something else on the same album
   Song last_song = current_item_metadata();
-  for (int j=i+1 ; j<virtual_items_.count(); ++j) {
+  for (int j = i + 1; j < virtual_items_.count(); ++j) {
     if (item_at(virtual_items_[j])->GetShouldSkip()) {
       continue;
     }
@@ -517,14 +520,15 @@ int Playlist::PreviousVirtualIndex(int i, bool ignore_repeat_track) const {
     --i;
 
     // Decrement i until we find any track that is in the filter
-    while (i>=0 && (!FilterContainsVirtualIndex(i) || item_at(virtual_items_[i])->GetShouldSkip()))
+    while (i >= 0 && (!FilterContainsVirtualIndex(i) ||
+                      item_at(virtual_items_[i])->GetShouldSkip()))
       --i;
     return i;
   }
 
   // We need to decrement i until we get something else on the same album
   Song last_song = current_item_metadata();
-  for (int j=i-1 ; j>=0; --j) {
+  for (int j = i - 1; j >= 0; --j) {
     if (item_at(virtual_items_[j])->GetShouldSkip()) {
       continue;
     }
@@ -793,8 +797,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
     } else if (pid == own_pid) {
       // Drag from a different playlist
       PlaylistItemList items;
-      foreach(int row, source_rows)
-      items << source_playlist->item_at(row);
+      for (int row : source_rows) items << source_playlist->item_at(row);
 
       if (items.count() > kUndoItemLimit) {
         // Too big to keep in the undo stack. Also clear the stack because it
@@ -808,7 +811,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
 
       // Remove the items from the source playlist if it was a move event
       if (action == Qt::MoveAction) {
-        foreach(int row, source_rows) {
+        for (int row : source_rows) {
           source_playlist->undo_stack()->push(
               new PlaylistUndoCommands::RemoveItems(source_playlist, row, 1));
         }
@@ -878,7 +881,7 @@ void Playlist::MoveItemsWithoutUndo(const QList<int>& source_rows, int pos) {
   // insertion point changes
   int offset = 0;
   int start = pos;
-  foreach(int source_row, source_rows) {
+  for (int source_row : source_rows) {
     moved_items << items_.takeAt(source_row - offset);
     if (pos > source_row) {
       start--;
@@ -893,7 +896,7 @@ void Playlist::MoveItemsWithoutUndo(const QList<int>& source_rows, int pos) {
   }
 
   // Update persistent indexes
-  foreach(const QModelIndex & pidx, persistentIndexList()) {
+  for (const QModelIndex& pidx : persistentIndexList()) {
     const int dest_offset = source_rows.indexOf(pidx.row());
     if (dest_offset != -1) {
       // This index was moved
@@ -901,7 +904,7 @@ void Playlist::MoveItemsWithoutUndo(const QList<int>& source_rows, int pos) {
           pidx, index(start + dest_offset, pidx.column(), QModelIndex()));
     } else {
       int d = 0;
-      foreach(int source_row, source_rows) {
+      for (int source_row : source_rows) {
         if (pidx.row() > source_row) d--;
       }
       if (pidx.row() + d >= start) d += source_rows.count();
@@ -921,7 +924,7 @@ void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
   PlaylistItemList moved_items;
 
   int pos = start;
-  foreach(int dest_row, dest_rows) {
+  for (int dest_row : dest_rows) {
     if (dest_row < pos) start--;
   }
 
@@ -935,13 +938,13 @@ void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
 
   // Put the items back in
   int offset = 0;
-  foreach(int dest_row, dest_rows) {
+  for (int dest_row : dest_rows) {
     items_.insert(dest_row, moved_items[offset]);
     offset++;
   }
 
   // Update persistent indexes
-  foreach(const QModelIndex & pidx, persistentIndexList()) {
+  for (const QModelIndex& pidx : persistentIndexList()) {
     if (pidx.row() >= start && pidx.row() < start + dest_rows.count()) {
       // This index was moved
       const int i = pidx.row() - start;
@@ -951,7 +954,7 @@ void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
       int d = 0;
       if (pidx.row() >= start + dest_rows.count()) d -= dest_rows.count();
 
-      foreach(int dest_row, dest_rows) {
+      for (int dest_row : dest_rows) {
         if (pidx.row() + d > dest_row) d++;
       }
 
@@ -974,13 +977,15 @@ void Playlist::InsertItems(const PlaylistItemList& itemsIn, int pos,
   // exercise vetoes
   SongList songs;
 
-  foreach(PlaylistItemPtr item, items) { songs << item->Metadata(); }
+  for (PlaylistItemPtr item : items) {
+    songs << item->Metadata();
+  }
 
   const int song_count = songs.length();
   QSet<Song> vetoed;
-  foreach(SongInsertVetoListener * listener, veto_listeners_) {
-    foreach(const Song & song,
-            listener->AboutToInsertSongs(GetAllSongs(), songs)) {
+  for (SongInsertVetoListener* listener : veto_listeners_) {
+    for (const Song& song :
+         listener->AboutToInsertSongs(GetAllSongs(), songs)) {
       // avoid veto-ing a song multiple times
       vetoed.insert(song);
     }
@@ -1077,7 +1082,7 @@ void Playlist::InsertSongs(const SongList& songs, int pos, bool play_now,
 void Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos,
                                          bool play_now, bool enqueue) {
   PlaylistItemList items;
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     if (song.id() == -1)
       items << PlaylistItemPtr(new SongPlaylistItem(song));
     else
@@ -1092,7 +1097,7 @@ void Playlist::InsertInternetItems(const InternetModel* model,
   PlaylistItemList playlist_items;
   QList<QUrl> song_urls;
 
-  foreach(const QModelIndex & item, items) {
+  for (const QModelIndex& item : items) {
     switch (item.data(InternetModel::Role_PlayBehaviour).toInt()) {
       case InternetModel::PlayBehaviour_SingleItem:
         playlist_items << shared_ptr<PlaylistItem>(new InternetPlaylistItem(
@@ -1119,7 +1124,7 @@ void Playlist::InsertInternetItems(InternetService* service,
                                    const SongList& songs, int pos,
                                    bool play_now, bool enqueue) {
   PlaylistItemList playlist_items;
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     playlist_items << shared_ptr<PlaylistItem>(
                           new InternetPlaylistItem(service, song));
   }
@@ -1137,7 +1142,7 @@ void Playlist::UpdateItems(const SongList& songs) {
   // our list because we will not need to check it again.
   // And we also update undo actions.
   QLinkedList<Song> songs_list;
-  foreach(const Song & song, songs) songs_list.append(song);
+  for (const Song& song : songs) songs_list.append(song);
 
   for (int i = 0; i < items_.size(); i++) {
     // Update current items list
@@ -1188,7 +1193,7 @@ QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
 
   QList<QUrl> urls;
   QList<int> rows;
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
     if (index.column() != first_column) continue;
 
     urls << items_[index.row()]->Url();
@@ -1395,7 +1400,7 @@ void Playlist::ReOrderWithoutUndo(const PlaylistItemList& new_items) {
 
   // This is a slow and nasty way to keep the persistent indices
   QMap<int, shared_ptr<PlaylistItem> > old_persistent_mappings;
-  foreach(const QModelIndex & index, persistentIndexList()) {
+  for (const QModelIndex& index : persistentIndexList()) {
     old_persistent_mappings[index.row()] = items_[index.row()];
   }
 
@@ -1783,7 +1788,7 @@ void Playlist::RemoveItemsNotInQueue() {
 }
 
 void Playlist::ReloadItems(const QList<int>& rows) {
-  foreach(int row, rows) {
+  for (int row : rows) {
     PlaylistItemPtr item = item_at(row);
 
     item->Reload();
@@ -1938,7 +1943,9 @@ QSortFilterProxyModel* Playlist::proxy() const { return proxy_; }
 
 SongList Playlist::GetAllSongs() const {
   SongList ret;
-  foreach(PlaylistItemPtr item, items_) { ret << item->Metadata(); }
+  for (PlaylistItemPtr item : items_) {
+    ret << item->Metadata();
+  }
   return ret;
 }
 
@@ -1946,7 +1953,7 @@ PlaylistItemList Playlist::GetAllItems() const { return items_; }
 
 quint64 Playlist::GetTotalLength() const {
   quint64 ret = 0;
-  foreach(PlaylistItemPtr item, items_) {
+  for (PlaylistItemPtr item : items_) {
     quint64 length = item->Metadata().length_nanosec();
     if (length > 0) ret += length;
   }
@@ -1965,7 +1972,7 @@ void Playlist::TracksAboutToBeDequeued(const QModelIndex&, int begin, int end) {
 }
 
 void Playlist::TracksDequeued() {
-  foreach(const QModelIndex & index, temp_dequeue_change_indexes_) {
+  for (const QModelIndex& index : temp_dequeue_change_indexes_) {
     emit dataChanged(index, index);
   }
   temp_dequeue_change_indexes_.clear();
@@ -2117,8 +2124,8 @@ void Playlist::SetColumnAlignment(const ColumnAlignmentMap& alignment) {
   column_alignments_ = alignment;
 }
 
-void Playlist::SkipTracks(const QModelIndexList &source_indexes) {
-  foreach (const QModelIndex& source_index, source_indexes) {
+void Playlist::SkipTracks(const QModelIndexList& source_indexes) {
+  for (const QModelIndex& source_index : source_indexes) {
     PlaylistItemPtr track_to_skip = item_at(source_index.row());
     track_to_skip->SetShouldSkip(!((track_to_skip)->GetShouldSkip()));
   }

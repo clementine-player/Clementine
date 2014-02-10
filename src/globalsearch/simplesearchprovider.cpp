@@ -61,9 +61,9 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id,
   const QStringList tokens = TokenizeQuery(query);
 
   QMutexLocker l(&items_mutex_);
-  foreach(const Item & item, items_) {
+  for (const Item& item : items_) {
     bool matched = true;
-    foreach(const QString & token, tokens) {
+    for (const QString& token : tokens) {
       if (!item.keyword_.contains(token, Qt::CaseInsensitive) &&
           !item.metadata_.title().contains(token, Qt::CaseInsensitive) &&
           !safe_words_.contains(token, Qt::CaseInsensitive)) {

@@ -49,7 +49,7 @@ QString Search::ToSql(const QString& songs_table) const {
   // Add search terms
   QStringList where_clauses;
   QStringList term_where_clauses;
-  foreach(const SearchTerm & term, terms_) {
+  for (const SearchTerm& term : terms_) {
     term_where_clauses << term.ToSql();
   }
 
@@ -61,7 +61,7 @@ QString Search::ToSql(const QString& songs_table) const {
   // Restrict the IDs of songs if we're making a dynamic playlist
   if (!id_not_in_.isEmpty()) {
     QString numbers;
-    foreach(int id, id_not_in_) {
+    for (int id : id_not_in_) {
       numbers += (numbers.isEmpty() ? "" : ",") + QString::number(id);
     }
     where_clauses << "(ROWID NOT IN (" + numbers + "))";

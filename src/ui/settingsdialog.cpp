@@ -251,7 +251,9 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page,
 }
 
 void SettingsDialog::Save() {
-  foreach(const PageData & data, pages_.values()) { data.page_->Save(); }
+  for (const PageData& data : pages_.values()) {
+    data.page_->Save();
+  }
 }
 
 void SettingsDialog::accept() {
@@ -261,7 +263,9 @@ void SettingsDialog::accept() {
 
 void SettingsDialog::reject() {
   // Notify each page that user clicks on Cancel
-  foreach(const PageData & data, pages_.values()) { data.page_->Cancel(); }
+  for (const PageData& data : pages_.values()) {
+    data.page_->Cancel();
+  }
 
   QDialog::reject();
 }
@@ -276,7 +280,9 @@ void SettingsDialog::DialogButtonClicked(QAbstractButton* button) {
 void SettingsDialog::showEvent(QShowEvent* e) {
   // Load settings
   loading_settings_ = true;
-  foreach(const PageData & data, pages_.values()) { data.page_->Load(); }
+  for (const PageData& data : pages_.values()) {
+    data.page_->Load();
+  }
   loading_settings_ = false;
 
   // Resize the dialog if it's too big
@@ -307,7 +313,7 @@ void SettingsDialog::CurrentItemChanged(QTreeWidgetItem* item) {
   ui_->title->setText("<b>" + item->text(0) + "</b>");
 
   // Display the right page
-  foreach(const PageData & data, pages_.values()) {
+  for (const PageData& data : pages_.values()) {
     if (data.item_ == item) {
       ui_->stacked_widget->setCurrentWidget(data.scroll_area_);
       break;

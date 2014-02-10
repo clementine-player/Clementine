@@ -126,7 +126,7 @@ QStandardItem* PlaylistListModel::FolderByPath(const QString& path) {
   QStandardItem* parent = invisibleRootItem();
 
   const QStringList parts = path.split('/', QString::SkipEmptyParts);
-  foreach(const QString & part, parts) {
+  for (const QString& part : parts) {
     QStandardItem* matching_child = nullptr;
 
     const int child_count = parent->rowCount();

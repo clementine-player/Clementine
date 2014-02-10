@@ -659,7 +659,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   ret->set_mono_playback(mono_playback_);
 
   ret->AddBufferConsumer(this);
-  foreach(BufferConsumer * consumer, buffer_consumers_) {
+  for (BufferConsumer* consumer : buffer_consumers_) {
     ret->AddBufferConsumer(consumer);
   }
 

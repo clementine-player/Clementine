@@ -270,7 +270,7 @@ void GroupedIconView::paintEvent(QPaintEvent* e) {
   }
 
   // Draw headers
-  foreach(const Header & header, headers_) {
+  for (const Header& header : headers_) {
     const QRect header_rect =
         QRect(header_indent_, header.y,
               viewport()->width() - header_indent_ * 2, header_height());
@@ -294,7 +294,7 @@ void GroupedIconView::setSelection(
       IntersectingItems(rect.translated(horizontalOffset(), verticalOffset())));
   QItemSelection selection;
 
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
     selection << QItemSelectionRange(index);
   }
 
@@ -318,7 +318,7 @@ QVector<QModelIndex> GroupedIconView::IntersectingItems(const QRect& rect)
 QRegion GroupedIconView::visualRegionForSelection(
     const QItemSelection& selection) const {
   QRegion ret;
-  foreach(const QModelIndex & index, selection.indexes()) {
+  for (const QModelIndex& index : selection.indexes()) {
     ret += visual_rects_[index.row()];
   }
   return ret;

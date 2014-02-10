@@ -41,8 +41,8 @@ WiimoteShortcutGrabber::WiimoteShortcutGrabber(quint32 action, quint32 device,
             SLOT(DbusWiimoteGeneralButtons(uint, qulonglong)));
   }
 
-  foreach(const QString & name, config_->TextActions())
-  ui_->comboBox->addItem(name);
+  for (const QString& name : config_->TextActions())
+    ui_->comboBox->addItem(name);
 
   ui_->comboBox->setCurrentIndex(pref_action_);
   ui_->keep_label->setVisible(false);

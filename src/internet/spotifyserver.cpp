@@ -47,7 +47,7 @@ void SpotifyServer::NewConnection() {
   qLog(Info) << "Connection from port" << socket->peerPort();
 
   // Send any login messages that were queued before the client connected
-  foreach(const pb::spotify::Message & message, queued_login_messages_) {
+  for (const pb::spotify::Message& message : queued_login_messages_) {
     SendOrQueueMessage(message);
   }
   queued_login_messages_.clear();
@@ -105,7 +105,7 @@ void SpotifyServer::MessageArrived(const pb::spotify::Message& message) {
 
     if (response.success()) {
       // Send any messages that were queued before the client logged in
-      foreach(const pb::spotify::Message & message, queued_messages_) {
+      for (const pb::spotify::Message& message : queued_messages_) {
         SendOrQueueMessage(message);
       }
       queued_messages_.clear();

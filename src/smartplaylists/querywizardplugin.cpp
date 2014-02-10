@@ -40,7 +40,7 @@ class QueryWizardPlugin::SearchPage : public QWizardPage {
     if (ui_->type->currentIndex() == 2)  // All songs
       return true;
 
-    foreach(SearchTermWidget * widget, terms_) {
+    for (SearchTermWidget* widget : terms_) {
       if (!widget->Term().is_valid()) return false;
     }
     return true;
@@ -179,7 +179,7 @@ void QueryWizardPlugin::SetGenerator(GeneratorPtr g) {
   qDeleteAll(search_page_->terms_);
   search_page_->terms_.clear();
 
-  foreach(const SearchTerm & term, search.terms_) {
+  for (const SearchTerm& term : search.terms_) {
     AddSearchTerm();
     search_page_->terms_.last()->SetTerm(term);
   }
@@ -273,7 +273,7 @@ Search QueryWizardPlugin::MakeSearch() const {
       Search::SearchType(search_page_->ui_->type->currentIndex());
 
   // Search terms
-  foreach(SearchTermWidget * widget, search_page_->terms_) {
+  for (SearchTermWidget* widget : search_page_->terms_) {
     SearchTerm term = widget->Term();
     if (term.is_valid()) ret.terms_ << term;
   }

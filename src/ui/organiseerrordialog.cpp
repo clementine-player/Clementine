@@ -36,7 +36,7 @@ OrganiseErrorDialog::~OrganiseErrorDialog() { delete ui_; }
 void OrganiseErrorDialog::Show(OperationType type,
                                const SongList& songs_with_errors) {
   QStringList files;
-  foreach(const Song & song, songs_with_errors) {
+  for (const Song& song : songs_with_errors) {
     files << song.url().toLocalFile();
   }
   Show(type, files);

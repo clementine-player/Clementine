@@ -287,7 +287,7 @@ void JamendoService::InsertTrackIds(const TrackIdList& ids) const {
                        .arg(kTrackIdsTable, kTrackIdsColumn),
                    db);
 
-  foreach(int id, ids) {
+  for (int id : ids) {
     insert.bindValue(":id", id);
     if (!insert.exec()) {
       qLog(Warning) << "Query failed" << insert.lastQuery();

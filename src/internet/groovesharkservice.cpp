@@ -237,7 +237,7 @@ void GroovesharkService::SearchAlbumsFinished(QNetworkReply* reply, int id) {
   QVariantList albums = result["albums"].toList();
 
   QList<quint64> ret;
-  foreach(const QVariant & v, albums) {
+  for (const QVariant& v : albums) {
     quint64 album_id = v.toMap()["AlbumID"].toULongLong();
     GetAlbumSongs(album_id);
     ret << album_id;
@@ -292,7 +292,7 @@ void GroovesharkService::SearchSongsFinished(QNetworkReply* reply) {
   task_search_id_ = 0;
 
   // Fill results list
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
     search_->appendRow(child);
   }
@@ -692,7 +692,7 @@ void GroovesharkService::UserPlaylistsRetrieved(QNetworkReply* reply) {
   QVariantMap result = ExtractResult(reply);
   QList<PlaylistInfo> playlists = ExtractPlaylistInfo(result);
 
-  foreach(const PlaylistInfo & playlist_info, playlists) {
+  for (const PlaylistInfo& playlist_info : playlists) {
     int playlist_id = playlist_info.id_;
     const QString& playlist_name = playlist_info.name_;
     QStandardItem* playlist_item =
@@ -725,7 +725,7 @@ void GroovesharkService::PlaylistSongsRetrieved(QNetworkReply* reply,
   SongList songs = ExtractSongs(result);
   Song::SortSongsListAlphabetically(&songs);
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
     child->setData(playlist_info->id_, Role_UserPlaylistId);
     child->setData(true, InternetModel::Role_CanBeModified);
@@ -766,7 +766,7 @@ void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply,
   SongList songs = ExtractSongs(result);
   Song::SortSongsListAlphabetically(&songs);
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
     child->setData(true, InternetModel::Role_CanBeModified);
 
@@ -800,7 +800,7 @@ void GroovesharkService::UserLibrarySongsRetrieved(QNetworkReply* reply,
   SongList songs = ExtractSongs(result);
   Song::SortSongsListAlphabetically(&songs);
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
     child->setData(true, InternetModel::Role_CanBeModified);
 
@@ -835,7 +835,7 @@ void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
 
   if (!popular_month_) return;
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
     popular_month_->appendRow(child);
   }
@@ -861,7 +861,7 @@ void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
 
   if (!popular_today_) return;
 
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
     popular_today_->appendRow(child);
   }
@@ -880,7 +880,7 @@ void GroovesharkService::SubscribedPlaylistsRetrieved(QNetworkReply* reply) {
   QVariantMap result = ExtractResult(reply);
   QList<PlaylistInfo> playlists = ExtractPlaylistInfo(result);
 
-  foreach(const PlaylistInfo & playlist_info, playlists) {
+  for (const PlaylistInfo& playlist_info : playlists) {
     int playlist_id = playlist_info.id_;
     const QString& playlist_name = playlist_info.name_;
 
@@ -947,11 +947,11 @@ Song GroovesharkService::StartAutoplayTag(int tag_id,
 Song GroovesharkService::StartAutoplay(QVariantMap& autoplay_state) {
   QList<Param> parameters;
   QVariantList artists_ids_qvariant;
-  foreach(int artist_id, last_artists_ids_) {
+  for (int artist_id : last_artists_ids_) {
     artists_ids_qvariant << QVariant(artist_id);
   }
   QVariantList songs_ids_qvariant;
-  foreach(int song_id, last_songs_ids_) {
+  for (int song_id : last_songs_ids_) {
     songs_ids_qvariant << QVariant(song_id);
   }
   parameters << Param("artistIDs", artists_ids_qvariant)
@@ -1071,7 +1071,9 @@ void GroovesharkService::DropMimeData(const QMimeData* data,
     // If dropped on Favorites list
     if (playlist_type == UserFavorites ||
         parent_playlist_type == UserFavorites) {
-      foreach(int song_id, data_songs_ids) { AddUserFavoriteSong(song_id); }
+      for (int song_id : data_songs_ids) {
+        AddUserFavoriteSong(song_id);
+      }
     } else if (playlist_type == UserLibrary ||
                parent_playlist_type == UserLibrary) {
       // FIXME: Adding songs to user libray doesn't work atm, but the problem
@@ -1123,7 +1125,7 @@ QList<QAction*> GroovesharkService::playlistitem_actions(const Song& song) {
   QAction* add_to_playlists = new QAction(
       IconLoader::Load("list-add"), tr("Add to Grooveshark playlists"), this);
   QMenu* playlists_menu = new QMenu();
-  foreach(PlaylistInfo playlist_info, playlists_.values()) {
+  for (PlaylistInfo playlist_info : playlists_.values()) {
     QAction* add_to_playlist = new QAction(playlist_info.name_, this);
     add_to_playlist->setData(playlist_info.id_);
     playlists_menu->addAction(add_to_playlist);
@@ -1229,7 +1231,9 @@ void GroovesharkService::SetPlaylistSongs(int playlist_id,
 
   // Convert song ids to QVariant
   QVariantList songs_ids_qvariant;
-  foreach(int song_id, songs_ids) { songs_ids_qvariant << QVariant(song_id); }
+  for (int song_id : songs_ids) {
+    songs_ids_qvariant << QVariant(song_id);
+  }
 
   parameters << Param("playlistID", playlist_id)
              << Param("songIDs", songs_ids_qvariant);
@@ -1421,7 +1425,9 @@ void GroovesharkService::AddUserLibrarySongs(const QList<int>& songs_ids) {
 
   // Convert songs ids to QVariant
   QVariantList songs_ids_qvariant;
-  foreach(int song_id, songs_ids) { songs_ids_qvariant << QVariant(song_id); }
+  for (int song_id : songs_ids) {
+    songs_ids_qvariant << QVariant(song_id);
+  }
   QVariantList albums_ids_qvariant;
   QVariantList artists_ids_qvariant;
 
@@ -1452,7 +1458,7 @@ void GroovesharkService::UserLibrarySongAdded(QNetworkReply* reply,
 void GroovesharkService::RemoveCurrentFromPlaylist() {
   const QModelIndexList& indexes(model()->selected_indexes());
   QMap<int, QList<int> > playlists_songs_ids;
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
 
     if (index.parent().data(InternetModel::Role_Type).toInt() !=
         InternetModel::Type_UserPlaylist) {
@@ -1480,7 +1486,7 @@ void GroovesharkService::RemoveFromPlaylist(
   }
 
   QList<int> songs_ids = playlists_[playlist_id].songs_ids_;
-  foreach(const int song_id, songs_ids_to_remove) {
+  for (const int song_id : songs_ids_to_remove) {
     songs_ids.removeOne(song_id);
   }
 
@@ -1490,7 +1496,7 @@ void GroovesharkService::RemoveFromPlaylist(
 void GroovesharkService::RemoveCurrentFromFavorites() {
   const QModelIndexList& indexes(model()->selected_indexes());
   QList<int> songs_ids;
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
 
     if (index.parent().data(Role_PlaylistType).toInt() != UserFavorites) {
       continue;
@@ -1515,7 +1521,7 @@ void GroovesharkService::RemoveFromFavorites(
 
   // Convert song ids to QVariant
   QVariantList songs_ids_qvariant;
-  foreach(const int song_id, songs_ids_to_remove) {
+  for (const int song_id : songs_ids_to_remove) {
     songs_ids_qvariant << QVariant(song_id);
   }
 
@@ -1543,7 +1549,7 @@ void GroovesharkService::RemoveCurrentFromLibrary() {
   const QModelIndexList& indexes(model()->selected_indexes());
   QList<int> songs_ids;
 
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
 
     if (index.parent().data(Role_PlaylistType).toInt() != UserLibrary) {
       continue;
@@ -1568,7 +1574,7 @@ void GroovesharkService::RemoveFromLibrary(
 
   // Convert song ids to QVariant
   QVariantList songs_ids_qvariant;
-  foreach(const int song_id, songs_ids_to_remove) {
+  for (const int song_id : songs_ids_to_remove) {
     songs_ids_qvariant << QVariant(song_id);
   }
   QVariantList albums_ids_qvariant;
@@ -1620,7 +1626,7 @@ QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name,
   request_params.insert("header", header);
 
   QVariantMap parameters;
-  foreach(const Param & param, params) {
+  for (const Param& param : params) {
     parameters.insert(param.first, param.second);
   }
   request_params.insert("parameters", parameters);
@@ -1650,7 +1656,7 @@ QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name,
 void GroovesharkService::RequestSslErrors(const QList<QSslError>& errors) {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
 
-  foreach(const QSslError & error, errors) {
+  for (const QSslError& error : errors) {
     emit StreamError("SSL error occurred in Grooveshark request for " +
                      reply->url().toString() + ": " + error.errorString());
   }
@@ -1760,7 +1766,7 @@ QList<int> GroovesharkService::ExtractSongsIds(const QVariantMap& result) {
 
 QList<int> GroovesharkService::ExtractSongsIds(const QList<QUrl>& urls) {
   QList<int> songs_ids;
-  foreach(const QUrl & url, urls) {
+  for (const QUrl& url : urls) {
     int song_id = ExtractSongId(url);
     if (song_id) {
       songs_ids << song_id;
@@ -1786,7 +1792,7 @@ QList<GroovesharkService::PlaylistInfo> GroovesharkService::ExtractPlaylistInfo(
   QList<PlaylistInfo> playlists;
 
   // Get playlists info
-  foreach(const QVariant & playlist_qvariant, playlists_qvariant) {
+  for (const QVariant& playlist_qvariant : playlists_qvariant) {
     QVariantMap playlist = playlist_qvariant.toMap();
     int playlist_id = playlist["PlaylistID"].toInt();
     QString playlist_name = playlist["PlaylistName"].toString();

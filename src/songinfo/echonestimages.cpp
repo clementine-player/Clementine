@@ -54,7 +54,7 @@ void EchoNestImages::RequestFinished() {
                   << e.what();
   }
 
-  foreach(const Echonest::ArtistImage & image, request->artist_->images()) {
+  for (const Echonest::ArtistImage& image : request->artist_->images()) {
     emit ImageReady(request->id_, image.url());
   }
 

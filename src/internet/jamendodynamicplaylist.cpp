@@ -156,7 +156,7 @@ void JamendoDynamicPlaylist::Fetch() {
   }
 
   current_items_.clear();
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     if (song.is_valid())
       current_items_ << PlaylistItemPtr(new JamendoPlaylistItem(song));
   }

@@ -64,7 +64,7 @@ void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   const int global_search_id = state.orig_id_;
 
   ResultList ret;
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     Result result(this);
     result.metadata_ = song;
 
@@ -84,7 +84,7 @@ void GroovesharkSearchProvider::AlbumSearchResult(
     MaybeSearchFinished(global_search_id);
     return;
   }
-  foreach(const quint64 album_id, albums_ids) {
+  for (const quint64 album_id : albums_ids) {
     pending_searches_[album_id] = PendingState(global_search_id, QStringList());
   }
 }
@@ -121,7 +121,7 @@ void GroovesharkSearchProvider::AlbumSongsLoaded(quint64 id,
   const PendingState state = pending_searches_.take(id);
   const int global_search_id = state.orig_id_;
   ResultList ret;
-  foreach(const Song & s, songs) {
+  for (const Song& s : songs) {
     Result result(this);
     result.metadata_ = s;
     ret << result;

@@ -225,7 +225,7 @@ void GlobalSearchView::ReloadSettings() {
 
     bool any_disabled = false;
 
-    foreach(SearchProvider * provider, providers) {
+    for (SearchProvider* provider : providers) {
       QWidget* parent = ui_->enabled_list;
       if (!engine_->is_provider_usable(provider)) {
         parent = ui_->disabled_list;
@@ -389,7 +389,7 @@ MimeData* GlobalSearchView::SelectedMimeData() {
 
   // Get items for these indexes
   QList<QStandardItem*> items;
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
     items << (front_model_->itemFromIndex(front_proxy_->mapToSource(index)));
   }
 
@@ -471,7 +471,7 @@ bool GlobalSearchView::ResultsContextMenuEvent(QContextMenuEvent* event) {
       ui_->results->selectionModel() &&
       ui_->results->selectionModel()->hasSelection();
 
-  foreach(QAction * action, context_actions_) {
+  for (QAction* action : context_actions_) {
     action->setEnabled(enable_context_actions);
   }
 
@@ -565,7 +565,7 @@ void GlobalSearchView::SetGroupBy(const LibraryModel::Grouping& g) {
   s.setValue("group_by3", int(g.third));
 
   // Make sure the correct action is checked.
-  foreach(QAction * action, group_by_actions_->actions()) {
+  for (QAction* action : group_by_actions_->actions()) {
     if (action->property("group_by").isNull()) continue;
 
     if (g == action->property("group_by").value<LibraryModel::Grouping>()) {

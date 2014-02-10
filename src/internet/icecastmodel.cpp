@@ -81,7 +81,7 @@ void IcecastModel::PopulateGenre(IcecastItem* parent, const QString& genre,
   QChar last_divider;
 
   IcecastBackend::StationList stations = backend_->GetStations(filter_, genre);
-  foreach(const IcecastBackend::Station & station, stations) {
+  for (const IcecastBackend::Station& station : stations) {
     QChar divider_char = DividerKey(station.name);
     if (create_dividers && !divider_char.isNull() &&
         divider_char != last_divider) {
@@ -104,7 +104,7 @@ void IcecastModel::PopulateGenre(IcecastItem* parent, const QString& genre,
 void IcecastModel::AddGenres(const QStringList& genres, bool create_dividers) {
   QChar last_divider;
 
-  foreach(const QString & genre, genres) {
+  for (const QString& genre : genres) {
     QChar divider_char = DividerKey(genre);
     if (create_dividers && divider_char != last_divider) {
       last_divider = divider_char;
@@ -196,7 +196,7 @@ QMimeData* IcecastModel::mimeData(const QModelIndexList& indexes) const {
   SongMimeData* data = new SongMimeData;
   QList<QUrl> urls;
 
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
     IcecastItem* item = IndexToItem(index);
     if (!item || item->type != IcecastItem::Type_Station) continue;
 

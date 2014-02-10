@@ -119,7 +119,7 @@ void GoogleDriveService::EnsureConnected() {
 }
 
 void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
-  foreach(const google_drive::File & file, files) {
+  for (const google_drive::File& file : files) {
     if (!IsSupportedMimeType(file.mime_type())) {
       continue;
     }
@@ -149,7 +149,7 @@ void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
 }
 
 void GoogleDriveService::FilesDeleted(const QList<QUrl>& files) {
-  foreach(const QUrl & url, files) {
+  for (const QUrl& url : files) {
     Song song = library_backend_->GetSongByUrl(url);
     qLog(Debug) << "Deleting:" << url << song.title();
     if (song.is_valid()) {
@@ -187,7 +187,7 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
 
   // Only show some actions if there are real songs selected
   bool songs_selected = false;
-  foreach(const QModelIndex & index, model()->selected_indexes()) {
+  for (const QModelIndex& index : model()->selected_indexes()) {
     const int type = index.data(LibraryModel::Role_Type).toInt();
     if (type == LibraryItem::Type_Song || type == LibraryItem::Type_Container) {
       songs_selected = true;
@@ -203,14 +203,14 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
 void GoogleDriveService::OpenWithDrive() {
   // Map indexes to the actual library model.
   QModelIndexList library_indexes;
-  foreach(const QModelIndex & index, model()->selected_indexes()) {
+  for (const QModelIndex& index : model()->selected_indexes()) {
     if (index.model() == library_sort_model_) {
       library_indexes << library_sort_model_->mapToSource(index);
     }
   }
 
   // Ask the library for the songs for these indexes.
-  foreach(const Song & song, library_model_->GetChildSongs(library_indexes)) {
+  for (const Song& song : library_model_->GetChildSongs(library_indexes)) {
     QDesktopServices::openUrl(
         QUrl(QString(kDriveEditFileUrl).arg(song.url().path())));
   }

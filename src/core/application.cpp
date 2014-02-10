@@ -128,11 +128,17 @@ Application::~Application() {
   delete device_manager_;
   device_manager_ = nullptr;
 
-  foreach(QObject * object, objects_in_threads_) { object->deleteLater(); }
+  for (QObject* object : objects_in_threads_) {
+    object->deleteLater();
+  }
 
-  foreach(QThread * thread, threads_) { thread->quit(); }
+  for (QThread* thread : threads_) {
+    thread->quit();
+  }
 
-  foreach(QThread * thread, threads_) { thread->wait(); }
+  for (QThread* thread : threads_) {
+    thread->wait();
+  }
 }
 
 void Application::MoveToNewThread(QObject* object) {

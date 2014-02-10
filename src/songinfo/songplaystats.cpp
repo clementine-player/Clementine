@@ -44,7 +44,7 @@ void SongPlayStats::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
   int y = kMargin;
-  foreach(const Item & item, items_) {
+  for (const Item& item : items_) {
     const QRect line(kMargin, y, width() - kMargin * 2, kIconSize);
     const QRect icon_rect(line.topLeft(), QSize(kIconSize, kIconSize));
     const QRect text_rect(

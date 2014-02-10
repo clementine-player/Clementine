@@ -393,7 +393,7 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   }
 
   // Remove and recreate the other playlists
-  foreach(QStandardItem * item, playlists_) {
+  for (QStandardItem* item : playlists_) {
     item->parent()->removeRow(item->row());
   }
   playlists_.clear();
@@ -460,7 +460,7 @@ void SpotifyService::ToplistLoaded(
 }
 
 QStandardItem* SpotifyService::PlaylistBySpotifyIndex(int index) const {
-  foreach(QStandardItem * item, playlists_) {
+  for (QStandardItem* item : playlists_) {
     if (item->data(Role_UserPlaylistIndex).toInt() == index) {
       return item;
     }
@@ -637,7 +637,7 @@ void SpotifyService::SearchResults(
   ClearSearchResults();
 
   // Fill results list
-  foreach(const Song & song, songs) {
+  for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
     search_->appendRow(child);
   }

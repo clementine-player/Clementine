@@ -694,7 +694,7 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf,
     consumers = instance->buffer_consumers_;
   }
 
-  foreach(BufferConsumer * consumer, consumers) {
+  for (BufferConsumer* consumer : consumers) {
     gst_buffer_ref(buf);
     consumer->ConsumeBuffer(buf, instance->id());
   }

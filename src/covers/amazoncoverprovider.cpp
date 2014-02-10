@@ -62,7 +62,7 @@ bool AmazonCoverProvider::StartSearch(const QString& artist,
   QStringList query_items;
 
   // Encode the arguments
-  foreach(const Arg & arg, args) {
+  for (const Arg& arg : args) {
     EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
                            QUrl::toPercentEncoding(arg.second));
     encoded_args << encoded_arg;

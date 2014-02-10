@@ -182,7 +182,7 @@ void AlbumCoverSearcher::SearchFinished(quint64 id,
   ui_->search->setText(tr("Search"));
   id_ = 0;
 
-  foreach(const CoverSearchResult & result, results) {
+  for (const CoverSearchResult& result : results) {
     if (result.image_url.isEmpty()) continue;
 
     quint64 id = app_->album_cover_loader()->LoadImageAsync(

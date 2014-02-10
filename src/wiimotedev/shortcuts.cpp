@@ -92,7 +92,7 @@ void WiimotedevShortcuts::ReloadSettings() {
   quint64 fvalue, svalue;
   bool fvalid, svalid;
 
-  foreach(const QString & str, settings_.allKeys()) {
+  for (const QString& str : settings_.allKeys()) {
     fvalue = str.toULongLong(&fvalid, 10);
     svalue = settings_.value(str, 0).toULongLong(&svalid);
     if (fvalid && svalid) actions_[fvalue] = svalue;

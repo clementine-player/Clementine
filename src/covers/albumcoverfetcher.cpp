@@ -70,7 +70,7 @@ void AlbumCoverFetcher::AddRequest(const CoverSearchRequest& req) {
 void AlbumCoverFetcher::Clear() {
   queued_requests_.clear();
 
-  foreach(AlbumCoverFetcherSearch * search, active_requests_.values()) {
+  for (AlbumCoverFetcherSearch* search : active_requests_.values()) {
     search->Cancel();
     search->deleteLater();
   }

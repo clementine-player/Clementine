@@ -51,7 +51,7 @@ void LastFmCoverProvider::QueryFinished(QNetworkReply* reply, int id) {
     QList<lastfm::XmlQuery> elements =
         query["results"]["albummatches"].children("album");
 
-    foreach(const lastfm::XmlQuery & element, elements) {
+    for (const lastfm::XmlQuery& element : elements) {
       CoverSearchResult result;
       result.description =
           element["artist"].text() + " - " + element["name"].text();

@@ -91,11 +91,11 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int id) {
     return;
   }
   QVariantList results = result["results"].toList();
-  foreach(const QVariant & v, results) {
+  for (const QVariant& v : results) {
     QVariantMap r = v.toMap();
     if (r.contains("recordings")) {
       QVariantList recordings = r["recordings"].toList();
-      foreach(const QVariant & recording, recordings) {
+      for (const QVariant& recording : recordings) {
         QVariantMap o = recording.toMap();
         if (o.contains("id")) {
           emit Finished(id, o["id"].toString());

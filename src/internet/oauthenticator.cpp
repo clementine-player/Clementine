@@ -74,7 +74,7 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code,
              << Param("redirect_uri", url.toString());
 
   QStringList params;
-  foreach(const Param & p, parameters) {
+  for (const Param& p : parameters) {
     params.append(QString("%1=%2").arg(
         p.first, QString(QUrl::toPercentEncoding(p.second))));
   }
@@ -128,7 +128,7 @@ void OAuthenticator::RefreshAuthorisation(const QString& token_endpoint,
              << Param("grant_type", "refresh_token")
              << Param("refresh_token", refresh_token);
   QStringList params;
-  foreach(const Param & p, parameters) {
+  for (const Param& p : parameters) {
     params.append(QString("%1=%2").arg(
         p.first, QString(QUrl::toPercentEncoding(p.second))));
   }

@@ -361,7 +361,7 @@ void DeviceView::mouseDoubleClickEvent(QMouseEvent* event) {
 SongList DeviceView::GetSelectedSongs() const {
   QModelIndexList selected_merged_indexes = selectionModel()->selectedRows();
   SongList songs;
-  foreach(const QModelIndex & merged_index, selected_merged_indexes) {
+  for (const QModelIndex& merged_index : selected_merged_indexes) {
     QModelIndex library_index = MapToLibrary(merged_index);
     if (!library_index.isValid()) continue;
 
@@ -421,7 +421,9 @@ void DeviceView::Delete() {
 void DeviceView::Organise() {
   SongList songs = GetSelectedSongs();
   QStringList filenames;
-  foreach(const Song & song, songs) { filenames << song.url().toLocalFile(); }
+  for (const Song& song : songs) {
+    filenames << song.url().toLocalFile();
+  }
 
   organise_dialog_->SetCopy(true);
   organise_dialog_->SetFilenames(filenames);

@@ -91,7 +91,7 @@ void PlaylistSequence::Save() {
 
 QIcon PlaylistSequence::AddDesaturatedIcon(const QIcon& icon) {
   QIcon ret;
-  foreach(const QSize & size, icon.availableSizes()) {
+  for (const QSize& size : icon.availableSizes()) {
     QPixmap on(icon.pixmap(size));
     QPixmap off(DesaturatedPixmap(on));
 

@@ -81,7 +81,7 @@ void ProjectMVisualisation::InitProjectM() {
 #endif
 
   QString preset_path;
-  foreach(const QString & path, paths) {
+  for (const QString& path : paths) {
     if (!QFile::exists(path)) continue;
 
     // Don't use empty directories
@@ -175,7 +175,7 @@ void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
 
 void ProjectMVisualisation::SetSelected(const QStringList& paths,
                                         bool selected) {
-  foreach(const QString & path, paths) {
+  for (const QString& path : paths) {
     int index = IndexOfPreset(path);
     if (selected && index == -1) {
       projectm_->addPresetURL(path.toStdString(), std::string(),
@@ -220,7 +220,7 @@ void ProjectMVisualisation::Load() {
 
     case FromList: {
       QStringList paths(s.value("preset_paths").toStringList());
-      foreach(const QString & path, paths) {
+      for (const QString& path : paths) {
         projectm_->addPresetURL(path.toStdString(), std::string(),
                                 default_rating_list_);
         preset_model_->MarkSelected(path, true);
@@ -232,8 +232,8 @@ void ProjectMVisualisation::Load() {
 void ProjectMVisualisation::Save() {
   QStringList paths;
 
-  foreach(const ProjectMPresetModel::Preset & preset,
-          preset_model_->all_presets_) {
+  for (const ProjectMPresetModel::Preset& preset :
+       preset_model_->all_presets_) {
     if (preset.selected_) paths << preset.path_;
   }
 

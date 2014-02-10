@@ -33,7 +33,7 @@ QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items)
     const {
   // Get songs
   SongList songs;
-  foreach(QListWidgetItem * item, items) {
+  for (QListWidgetItem* item : items) {
     songs << manager_->GetSongsInAlbum(indexFromItem(item));
   }
 
@@ -41,7 +41,9 @@ QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items)
 
   // Get URLs from the songs
   QList<QUrl> urls;
-  foreach(const Song & song, songs) { urls << song.url(); }
+  for (const Song& song : songs) {
+    urls << song.url();
+  }
 
   // Get the QAbstractItemModel data so the picture works
   std::unique_ptr<QMimeData> orig_data(QListWidget::mimeData(items));

@@ -37,7 +37,7 @@ SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service,
 void SavedRadioSearchProvider::RecreateItems() {
   QList<Item> items;
 
-  foreach(const SavedRadio::Stream & stream, service_->Streams()) {
+  for (const SavedRadio::Stream& stream : service_->Streams()) {
     Item item;
     item.metadata_.set_title(stream.name_);
     item.metadata_.set_url(stream.url_);

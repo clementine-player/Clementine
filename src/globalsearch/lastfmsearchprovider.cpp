@@ -59,17 +59,17 @@ void LastFMSearchProvider::RecreateItems() {
   const QStringList tags = service_->SavedTagRadioNames();
   const QStringList friends = service_->FriendNames();
 
-  foreach(const QString & name, artists) {
+  for (const QString& name : artists) {
     items << Item(tr(LastFMService::kTitleArtist).arg(name),
                   QUrl(QString(LastFMService::kUrlArtist).arg(name)), name);
   }
 
-  foreach(const QString & name, tags) {
+  for (const QString& name : tags) {
     items << Item(tr(LastFMService::kTitleTag).arg(name),
                   QUrl(QString(LastFMService::kUrlTag).arg(name)), name);
   }
 
-  foreach(const QString & name, friends) {
+  for (const QString& name : friends) {
     items << Item(tr("Last.fm Radio Station - %1").arg(name),
                   QUrl("lastfm://user/" + name + "/library"), name);
     items << Item(tr("Last.fm Mix Radio - %1").arg(name),

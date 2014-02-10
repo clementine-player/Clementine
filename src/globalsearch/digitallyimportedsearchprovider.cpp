@@ -44,7 +44,7 @@ void DigitallyImportedSearchProvider::RecreateItems() {
 
   DigitallyImportedClient::ChannelList channels = service_->Channels();
 
-  foreach(const DigitallyImportedClient::Channel & channel, channels) {
+  for (const DigitallyImportedClient::Channel& channel : channels) {
     Song song;
     service_->SongFromChannel(channel, &song);
     items << Item(song);

@@ -68,7 +68,7 @@ void DeviceKitLister::Init() {
 
   // Get information about each one
   QMap<QString, DeviceData> device_data;
-  foreach(const QDBusObjectPath & path, reply.value()) {
+  for (const QDBusObjectPath& path : reply.value()) {
     DeviceData data = ReadDeviceData(path);
     if (data.suitable) device_data[data.unique_id()] = data;
   }
@@ -80,7 +80,9 @@ void DeviceKitLister::Init() {
   }
 
   // Notify about the changes
-  foreach(const QString & id, device_data.keys()) { emit DeviceAdded(id); }
+  for (const QString& id : device_data.keys()) {
+    emit DeviceAdded(id);
+  }
 }
 
 QStringList DeviceKitLister::DeviceUniqueIDs() {
@@ -225,7 +227,7 @@ void DeviceKitLister::DBusDeviceChanged(const QDBusObjectPath& path) {
 }
 
 QString DeviceKitLister::FindUniqueIdByPath(const QDBusObjectPath& path) const {
-  foreach(const DeviceData & data, device_data_) {
+  for (const DeviceData& data : device_data_) {
     if (data.dbus_path == path.path()) return data.unique_id();
   }
   return QString();

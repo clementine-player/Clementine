@@ -63,7 +63,7 @@ void SongInfoSettingsPage::Load() {
       dialog()->song_info_view()->lyric_providers();
 
   ui_->providers->clear();
-  foreach(const UltimateLyricsProvider * provider, providers) {
+  for (const UltimateLyricsProvider* provider : providers) {
     QListWidgetItem* item = new QListWidgetItem(ui_->providers);
     item->setText(provider->name());
     item->setCheckState(provider->is_enabled() ? Qt::Checked : Qt::Unchecked);

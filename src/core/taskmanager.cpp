@@ -95,7 +95,7 @@ void TaskManager::SetTaskFinished(int id) {
 
     if (tasks_[id].blocks_library_scans) {
       resume_library_watchers = true;
-      foreach(const Task & task, tasks_.values()) {
+      for (const Task& task : tasks_.values()) {
         if (task.id != id && task.blocks_library_scans) {
           resume_library_watchers = false;
           break;

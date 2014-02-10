@@ -167,7 +167,7 @@ WorkerPool<HandlerType>::WorkerPool(QObject* parent)
 
 template <typename HandlerType>
 WorkerPool<HandlerType>::~WorkerPool() {
-  foreach(const Worker & worker, workers_) {
+  for (const Worker& worker : workers_) {
     if (worker.local_socket_ && worker.process_) {
       disconnect(worker.process_, SIGNAL(error(QProcess::ProcessError)), this,
                  SLOT(ProcessError(QProcess::ProcessError)));
@@ -188,7 +188,9 @@ WorkerPool<HandlerType>::~WorkerPool() {
     }
   }
 
-  foreach(ReplyType * reply, message_queue_) { reply->Abort(); }
+  for (ReplyType* reply : message_queue_) {
+    reply->Abort();
+  }
 }
 
 template <typename HandlerType>
@@ -231,7 +233,7 @@ void WorkerPool<HandlerType>::DoStart() {
   search_path << qApp->applicationDirPath() + "/../PlugIns";
 #endif
 
-  foreach(const QString & path_prefix, search_path) {
+  for (const QString& path_prefix : search_path) {
     const QString executable_path = path_prefix + "/" + executable_name_;
     if (QFile::exists(executable_path)) {
       executable_path_ = executable_path;

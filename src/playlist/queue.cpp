@@ -133,7 +133,7 @@ QVariant Queue::data(const QModelIndex& proxy_index, int role) const {
 }
 
 void Queue::ToggleTracks(const QModelIndexList& source_indexes) {
-  foreach(const QModelIndex & source_index, source_indexes) {
+  for (const QModelIndex& source_index : source_indexes) {
     QModelIndex proxy_index = mapFromSource(source_index);
     if (proxy_index.isValid()) {
       // Dequeue the track
@@ -172,7 +172,7 @@ void Queue::Move(const QList<int>& proxy_rows, int pos) {
   // Take the items out of the list first, keeping track of whether the
   // insertion point changes
   int offset = 0;
-  foreach(int row, proxy_rows) {
+  for (int row : proxy_rows) {
     moved_items << source_indexes_.takeAt(row - offset);
     if (pos != -1 && pos >= row) pos--;
     offset++;
@@ -185,7 +185,7 @@ void Queue::Move(const QList<int>& proxy_rows, int pos) {
   }
 
   // Update persistent indexes
-  foreach(const QModelIndex & pidx, persistentIndexList()) {
+  for (const QModelIndex& pidx : persistentIndexList()) {
     const int dest_offset = proxy_rows.indexOf(pidx.row());
     if (dest_offset != -1) {
       // This index was moved
@@ -193,7 +193,7 @@ void Queue::Move(const QList<int>& proxy_rows, int pos) {
           pidx, index(start + dest_offset, pidx.column(), QModelIndex()));
     } else {
       int d = 0;
-      foreach(int row, proxy_rows) {
+      for (int row : proxy_rows) {
         if (pidx.row() > row) d--;
       }
       if (pidx.row() + d >= start) d += proxy_rows.count();
@@ -222,7 +222,7 @@ QMimeData* Queue::mimeData(const QModelIndexList& indexes) const {
   QMimeData* data = new QMimeData;
 
   QList<int> rows;
-  foreach(const QModelIndex & index, indexes) {
+  for (const QModelIndex& index : indexes) {
     if (index.column() != 0) continue;
 
     rows << index.row();
@@ -262,7 +262,7 @@ bool Queue::dropMimeData(const QMimeData* data, Qt::DropAction action, int row,
     stream >> source_rows;
 
     QModelIndexList source_indexes;
-    foreach(int source_row, source_rows) {
+    for (int source_row : source_rows) {
       const QModelIndex source_index = sourceModel()->index(source_row, 0);
       const QModelIndex proxy_index = mapFromSource(source_index);
       if (proxy_index.isValid()) {
@@ -326,7 +326,7 @@ void Queue::Remove(QList<int>& proxy_rows) {
   layoutAboutToBeChanged();
 
   int removed_rows = 0;
-  foreach(int row, proxy_rows) {
+  for (int row : proxy_rows) {
     // after the first row, the row number needs to be updated
     const int real_row = row - removed_rows;
     beginRemoveRows(QModelIndex(), real_row, real_row);

@@ -175,7 +175,9 @@ bool AbstractMessageHandler<MT>::RawMessageArrived(const QByteArray& data) {
 
 template <typename MT>
 void AbstractMessageHandler<MT>::AbortAll() {
-  foreach(ReplyType * reply, pending_replies_) { reply->Abort(); }
+  for (ReplyType* reply : pending_replies_) {
+    reply->Abort();
+  }
   pending_replies_.clear();
 }
 

@@ -30,7 +30,7 @@ BackgroundStreamsSettingsPage::BackgroundStreamsSettingsPage(
   ui_->setupUi(this);
   setWindowIcon(QIcon(":/icons/32x32/weather-showers-scattered.png"));
 
-  foreach(const QString & name, dialog->background_streams()->streams()) {
+  for (const QString& name : dialog->background_streams()->streams()) {
     AddStream(name);
   }
 }

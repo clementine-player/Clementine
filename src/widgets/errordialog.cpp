@@ -51,7 +51,7 @@ void ErrorDialog::hideEvent(QHideEvent*) {
 
 void ErrorDialog::UpdateContent() {
   QString html;
-  foreach(const QString & message, current_messages_) {
+  for (const QString& message : current_messages_) {
     if (!html.isEmpty()) html += "<hr/>";
     html += Qt::escape(message);
   }

@@ -137,7 +137,7 @@ void MoodbarItemDelegate::StartLoadingData(const QUrl& url, Data* data) {
 
 bool MoodbarItemDelegate::RemoveFromCacheIfIndexesInvalid(const QUrl& url,
                                                           Data* data) {
-  foreach(const QPersistentModelIndex & index, data->indexes_) {
+  for (const QPersistentModelIndex& index : data->indexes_) {
     if (index.isValid()) {
       return false;
     }
@@ -148,7 +148,7 @@ bool MoodbarItemDelegate::RemoveFromCacheIfIndexesInvalid(const QUrl& url,
 }
 
 void MoodbarItemDelegate::ReloadAllColors() {
-  foreach(const QUrl & url, data_.keys()) {
+  for (const QUrl& url : data_.keys()) {
     Data* data = data_[url];
 
     if (data->state_ == Data::State_Loaded) {
@@ -252,7 +252,7 @@ void MoodbarItemDelegate::ImageLoaded(const QUrl& url,
   const QSortFilterProxyModel* filter = playlist->proxy();
 
   // Update all the indices with the new pixmap.
-  foreach(const QPersistentModelIndex & index, data->indexes_) {
+  for (const QPersistentModelIndex& index : data->indexes_) {
     if (index.isValid() &&
         index.sibling(index.row(), Playlist::Column_Filename).data().toUrl() ==
             url) {

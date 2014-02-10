@@ -56,7 +56,7 @@ void GPodderTopTagsPage::Show() {
 void GPodderTopTagsPage::TagListLoaded(mygpo::TagListPtr tag_list) {
   emit Busy(false);
 
-  foreach(mygpo::TagPtr tag, tag_list->list()) {
+  for (mygpo::TagPtr tag : tag_list->list()) {
     model()->appendRow(model()->CreateFolder(tag->tag()));
   }
 }

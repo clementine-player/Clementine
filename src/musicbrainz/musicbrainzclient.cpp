@@ -118,7 +118,7 @@ void MusicBrainzClient::DiscIdRequestFinished(QNetworkReply* reply) {
     if (token == QXmlStreamReader::StartElement &&
         reader.name() == "recording") {
       ResultList tracks = ParseTrack(&reader);
-      foreach(const Result & track, tracks) {
+      for (const Result& track : tracks) {
         if (!track.title_.isEmpty()) {
           ret << track;
         }
@@ -148,7 +148,7 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id) {
     if (reader.readNext() == QXmlStreamReader::StartElement &&
         reader.name() == "recording") {
       ResultList tracks = ParseTrack(&reader);
-      foreach(const Result & track, tracks) {
+      for (const Result& track : tracks) {
         if (!track.title_.isEmpty()) {
           ret << track;
         }
@@ -190,7 +190,7 @@ MusicBrainzClient::ResultList MusicBrainzClient::ParseTrack(
   if (releases.isEmpty()) {
     ret << result;
   } else {
-    foreach(const Release & release, releases) {
+    for (const Release& release : releases) {
       ret << release.CopyAndMergeInto(result);
     }
   }
