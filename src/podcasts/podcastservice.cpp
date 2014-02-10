@@ -464,7 +464,7 @@ void PodcastService::ReloadSettings() {
   s.beginGroup(LibraryView::kSettingsGroup);
 
   use_pretty_covers_ = s.value("pretty_covers", true).toBool();
-  // TODO(hatstand): reload the podcast icons that are already loaded?
+  // TODO(notme): reload the podcast icons that are already loaded?
 }
 
 void PodcastService::EnsureAddPodcastDialogCreated() {
