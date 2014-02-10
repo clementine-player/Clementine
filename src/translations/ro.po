@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-01-27 02:54+0000\n"
+"PO-Revision-Date: 2014-02-09 04:21+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Language: ro\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
-#: playlist/playlistlistview.cpp:39
+#: playlist/playlistlistview.cpp:37
 msgid ""
 "\n"
 "\n"
@@ -58,11 +58,11 @@ msgstr "pct"
 msgid " seconds"
 msgstr " secunde"
 
-#: ../bin/src/ui_querysortpage.h:143
+#: ../bin/src/ui_querysortpage.h:144
 msgid " songs"
 msgstr " melodii"
 
-#: widgets/osd.cpp:193
+#: widgets/osd.cpp:190
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 albume"
@@ -72,63 +72,63 @@ msgstr "%1 albume"
 msgid "%1 days"
 msgstr "%1 zile"
 
-#: core/utilities.cpp:131
+#: core/utilities.cpp:129
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 zile în urmă"
 
-#: podcasts/gpoddersync.cpp:79
+#: podcasts/gpoddersync.cpp:81
 #, qt-format
 msgid "%1 on %2"
 msgstr ""
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 liste de redare (%2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:396
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 selectat din"
 
-#: devices/deviceview.cpp:123
+#: devices/deviceview.cpp:125
 #, qt-format
 msgid "%1 song"
 msgstr "%1 melodie"
 
-#: devices/deviceview.cpp:125
+#: devices/deviceview.cpp:127
 #, qt-format
 msgid "%1 songs"
 msgstr "%1 melodii"
 
-#: smartplaylists/searchpreview.cpp:133
+#: smartplaylists/searchpreview.cpp:132
 #, qt-format
 msgid "%1 songs found"
 msgstr "%1 melodii găsite"
 
-#: smartplaylists/searchpreview.cpp:130
+#: smartplaylists/searchpreview.cpp:128
 #, qt-format
 msgid "%1 songs found (showing %2)"
 msgstr "%1 melodii găsite (se afișează %2)"
 
-#: playlist/playlistmanager.cpp:419
+#: playlist/playlistmanager.cpp:402
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 melodii"
 
-#: ui/albumcovermanager.cpp:459
+#: ui/albumcovermanager.cpp:466
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 transferat"
 
-#: widgets/osd.cpp:243 widgets/osd.cpp:248 widgets/osd.cpp:253
-#: widgets/osd.cpp:258 widgets/osd.cpp:263 widgets/osd.cpp:268
+#: widgets/osd.cpp:237 widgets/osd.cpp:243 widgets/osd.cpp:249
+#: widgets/osd.cpp:255 widgets/osd.cpp:261 widgets/osd.cpp:268
 #, qt-format
 msgid "%1: Wiimotedev module"
 msgstr "%1: modul Wiimotedev"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:94
+#: songinfo/lastfmtrackinfoprovider.cpp:95
 #, qt-format
 msgid "%L1 other listeners"
 msgstr "%L1 alți ascultători"
@@ -142,18 +142,21 @@ msgstr "%L1 redări în total"
 msgid "%filename%"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:207
+#: transcoder/transcodedialog.cpp:205
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "%n failed"
 msgstr "%n eșuat"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:200
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "%n finished"
 msgstr "%n finalizat"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:194
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "%n remaining"
 msgstr "%n rămas"
 
@@ -177,12 +180,12 @@ msgstr "&Extra"
 msgid "&Help"
 msgstr "&Ajutor"
 
-#: playlist/playlistheader.cpp:70
+#: playlist/playlistheader.cpp:73
 #, qt-format
 msgid "&Hide %1"
 msgstr "Ascunde %1"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:32
 msgid "&Hide..."
 msgstr "&Ascunde..."
 
@@ -218,7 +221,7 @@ msgstr "La &dreapta"
 msgid "&Shuffle mode"
 msgstr "Mod &aleator"
 
-#: playlist/playlistheader.cpp:34
+#: playlist/playlistheader.cpp:33
 msgid "&Stretch columns to fit window"
 msgstr "&Îngustează coloanele pentru a se potrivi în fereastră"
 
@@ -226,11 +229,11 @@ msgstr "&Îngustează coloanele pentru a se potrivi în fereastră"
 msgid "&Tools"
 msgstr "&Unelte"
 
-#: ui/edittagdialog.cpp:48
+#: ui/edittagdialog.cpp:49
 msgid "(different across multiple songs)"
 msgstr "(diferit în cadrul mai multor melodii)"
 
-#: ui/about.cpp:77
+#: ui/about.cpp:81
 msgid "...and all the Amarok contributors"
 msgstr "...și tuturor contribuitorilor Amarok"
 
@@ -250,13 +253,9 @@ msgstr ""
 msgid "1 day"
 msgstr "1 zi"
 
-#: playlist/playlistmanager.cpp:419
+#: playlist/playlistmanager.cpp:402
 msgid "1 track"
 msgstr "1 melodie"
-
-#: ../bin/src/ui_networkremotesettingspage.h:201
-msgid "127.0.0.1"
-msgstr ""
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
@@ -267,7 +266,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr ""
 
-#: library/library.cpp:60
+#: library/library.cpp:62
 msgid "50 random tracks"
 msgstr "50 de melodii aleatoare"
 
@@ -291,6 +290,17 @@ msgid ""
 "music players might not be able to read them.</p></body></html>"
 msgstr ""
 
+#: ../bin/src/ui_libraryfilterwidget.h:97
+msgid ""
+"<html><head/><body><p>Prefix a word with a field name to limit the search to"
+" that field, e.g. <span style=\" font-weight:600;\">artist:</span><span "
+"style=\" font-style:italic;\">Bode</span> searches the library for all "
+"artists that contain the word Bode.</p><p><span style=\" font-"
+"weight:600;\">Available fields: </span><span style=\" font-"
+"style:italic;\">title, album, artist, albumartist, composer, performer, "
+"grouping, genre, comment</span>.</p></body></html>"
+msgstr ""
+
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
@@ -310,27 +320,27 @@ msgstr "<p>Jetoanele începe cu%, de exemplu:% artist %album %titlu </ p>\n\n<p>
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Este necesar un cont Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:162
+#: internet/spotifysettingspage.cpp:163
 msgid "A Spotify Premium account is required."
 msgstr "Este necesar un cont Spotify Premium."
 
-#: ../bin/src/ui_networkremotesettingspage.h:189
+#: ../bin/src/ui_networkremotesettingspage.h:190
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
-#: smartplaylists/wizard.cpp:78
+#: smartplaylists/wizard.cpp:74
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr "O listă de redare inteligentă este o listă dinamică de melodii care vin din biblioteca ta. Există diferite tipuri de liste de redare inteligente care oferă moduri diferite de selectare melodii."
 
-#: smartplaylists/querywizardplugin.cpp:153
+#: smartplaylists/querywizardplugin.cpp:157
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "O melodie va fi inclusă în lista de redare dacă îndeplinește aceste condiții."
 
-#: smartplaylists/searchterm.cpp:297
+#: smartplaylists/searchterm.cpp:365
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -350,19 +360,19 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:348
+#: core/song.cpp:395
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:127
+#: widgets/nowplayingwidget.cpp:131
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "GLORIE HYPNOTOADULUI"
 
-#: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
+#: ui/albumcovermanager.cpp:111 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr ""
 
-#: ui/about.cpp:32
+#: ui/about.cpp:30
 #, qt-format
 msgid "About %1"
 msgstr "Despre %1"
@@ -391,11 +401,11 @@ msgstr "Detalii cont (Premium)"
 msgid "Action"
 msgstr "Acțiune"
 
-#: wiimotedev/wiimotesettingspage.cpp:98
+#: wiimotedev/wiimotesettingspage.cpp:96
 msgid "Active/deactive Wiiremote"
 msgstr "Activează/dezactivează telecomanda Wii"
 
-#: podcasts/addpodcastdialog.cpp:56
+#: podcasts/addpodcastdialog.cpp:59
 msgid "Add Podcast"
 msgstr ""
 
@@ -411,15 +421,15 @@ msgstr "Adaugă o linie nouă dacă este acceptată de tipul de notificare"
 msgid "Add action"
 msgstr "Adaugă o acțiune"
 
-#: internet/savedradio.cpp:103
+#: internet/savedradio.cpp:105
 msgid "Add another stream..."
 msgstr "Adaugă alt flux..."
 
-#: library/librarysettingspage.cpp:68
+#: library/librarysettingspage.cpp:67
 msgid "Add directory..."
 msgstr "Adaugă dosar..."
 
-#: ui/mainwindow.cpp:1623
+#: ui/mainwindow.cpp:1814
 msgid "Add file"
 msgstr "Adaugă fisier"
 
@@ -435,11 +445,11 @@ msgstr ""
 msgid "Add file..."
 msgstr "Adaugă fișier..."
 
-#: transcoder/transcodedialog.cpp:219
+#: transcoder/transcodedialog.cpp:215
 msgid "Add files to transcode"
 msgstr "Adaugă fișiere pentru transcodat"
 
-#: transcoder/transcodedialog.cpp:281 ui/mainwindow.cpp:1651 ui/ripcd.cpp:386
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1841 ui/ripcd.cpp:389
 msgid "Add folder"
 msgstr "Adaugă dosar"
 
@@ -455,11 +465,11 @@ msgstr "Adaugă un dosar nou..."
 msgid "Add podcast"
 msgstr ""
 
-#: podcasts/podcastservice.cpp:316 ../bin/src/ui_mainwindow.h:723
+#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:723
 msgid "Add podcast..."
 msgstr ""
 
-#: smartplaylists/searchtermwidget.cpp:341
+#: smartplaylists/searchtermwidget.cpp:352
 msgid "Add search term"
 msgstr "Adaugă termen de căutare"
 
@@ -535,15 +545,15 @@ msgstr "Adaugă tagul de an al melodiei"
 msgid "Add stream..."
 msgstr "Adaugă flux..."
 
-#: internet/groovesharkservice.cpp:1087
+#: internet/groovesharkservice.cpp:1109
 msgid "Add to Grooveshark favorites"
 msgstr "Adaugă la favoritele Grooveshark"
 
-#: internet/groovesharkservice.cpp:1099
+#: internet/groovesharkservice.cpp:1124
 msgid "Add to Grooveshark playlists"
 msgstr "Adaugă la listele de redare Grooveshark"
 
-#: ui/mainwindow.cpp:1448
+#: ui/mainwindow.cpp:1635
 msgid "Add to another playlist"
 msgstr "Adaugă la altă listă de redare"
 
@@ -584,15 +594,15 @@ msgstr "Adăugat azi"
 msgid "Added within three months"
 msgstr "Adăugat în ultimele trei luni"
 
-#: internet/groovesharkservice.cpp:1394
+#: internet/groovesharkservice.cpp:1419
 msgid "Adding song to My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1371
+#: internet/groovesharkservice.cpp:1396
 msgid "Adding song to favorites"
 msgstr "Adăugare melodie la favorite"
 
-#: library/libraryfilterwidget.cpp:116
+#: library/libraryfilterwidget.cpp:133
 msgid "Advanced grouping..."
 msgstr "Grupare avansată..."
 
@@ -604,8 +614,8 @@ msgstr ""
 msgid "After copying..."
 msgstr "După copiere..."
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:56
-#: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
+#: playlist/playlist.cpp:1302 ui/organisedialog.cpp:59
+#: ui/qtsystemtrayicon.cpp:251 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
@@ -617,7 +627,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (volum ideal pentru toate piesele)"
 
-#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:62
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -627,31 +637,32 @@ msgstr "Artistul albumului"
 msgid "Album cover"
 msgstr ""
 
-#: internet/jamendoservice.cpp:415
+#: internet/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
 msgstr "Informații despre album de la jamendo.com..."
 
-#: ui/albumcovermanager.cpp:134
+#: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
 msgstr "Albume cu coperți"
 
-#: ui/albumcovermanager.cpp:135
+#: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Albume fără coperți"
 
-#: ui/mainwindow.cpp:160
+#: ui/mainwindow.cpp:157
 msgid "All Files (*)"
 msgstr "Toate fișierele (*)"
 
 #: ../bin/src/ui_mainwindow.h:693
+msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
-msgstr "Glorie Hypnotoadului!"
+msgstr ""
 
-#: ui/albumcovermanager.cpp:133
+#: ui/albumcovermanager.cpp:134
 msgid "All albums"
 msgstr "Toate albumele"
 
-#: ui/albumcovermanager.cpp:265
+#: ui/albumcovermanager.cpp:268
 msgid "All artists"
 msgstr "Toți artiștii"
 
@@ -659,24 +670,24 @@ msgstr "Toți artiștii"
 msgid "All files (*)"
 msgstr "Toate fișierele (*)"
 
-#: playlistparsers/playlistparser.cpp:63
+#: playlistparsers/playlistparser.cpp:61
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Toate listele de redare (%1)"
 
-#: ui/about.cpp:74
+#: ui/about.cpp:77
 msgid "All the translators"
 msgstr "Toți traducătorii"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "All tracks"
 msgstr "Toate melodiile"
 
-#: ../bin/src/ui_networkremotesettingspage.h:194
+#: ../bin/src/ui_networkremotesettingspage.h:195
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:196
+#: ../bin/src/ui_networkremotesettingspage.h:197
 msgid "Allow downloads"
 msgstr ""
 
@@ -701,30 +712,30 @@ msgstr "Arată întotdeauna fereastra principală"
 msgid "Always start playing"
 msgstr "Începe redarea întotdeauna"
 
-#: internet/spotifyblobdownloader.cpp:60
+#: internet/spotifyblobdownloader.cpp:65
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
 msgstr "Este necesara activarea unui plugin pentru utlizarea Spotify in Clementine. Doriți să fie descărcat si instalat acum?"
 
-#: devices/gpodloader.cpp:61
+#: devices/gpodloader.cpp:60
 msgid "An error occurred loading the iTunes database"
 msgstr "A apărut o eroare la încărcarea bazei de date iTunes"
 
-#: ui/edittagdialog.cpp:663
+#: ui/edittagdialog.cpp:677
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "A apărut o eroare la scrierea metadata '%1'"
 
-#: internet/subsonicsettingspage.cpp:103
+#: internet/subsonicsettingspage.cpp:102
 msgid "An unspecified error occurred."
 msgstr ""
 
-#: ui/about.cpp:78
+#: ui/about.cpp:82
 msgid "And:"
 msgstr "Și:"
 
-#: moodbar/moodbarrenderer.cpp:156
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Angry"
 msgstr ""
 
@@ -733,13 +744,13 @@ msgstr ""
 msgid "Appearance"
 msgstr "Aspect"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:161
 msgid "Append files/URLs to the playlist"
 msgstr "Adaugă fișiere/URL-uri în lista de redare"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
-#: internet/internetservice.cpp:56 library/libraryview.cpp:367
-#: widgets/fileviewlist.cpp:32
+#: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:446
+#: internet/internetservice.cpp:53 library/libraryview.cpp:370
+#: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Adaugă în lista de redare curentă"
 
@@ -751,27 +762,27 @@ msgstr "Adaugă în lista de redare"
 msgid "Apply compression to prevent clipping"
 msgstr "Alicați compresia pentru a preveni tăierea"
 
-#: ui/equalizer.cpp:201
+#: ui/equalizer.cpp:216
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Sigur doriți să ștergeți presetarea \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1292
+#: internet/groovesharkservice.cpp:1318
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Sigur doriți să ștergeți această listă de redare?"
 
-#: ui/edittagdialog.cpp:769
+#: ui/edittagdialog.cpp:783
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Sigur doriți să resetați statisticile acestei melodii?"
 
-#: library/librarysettingspage.cpp:152
+#: library/librarysettingspage.cpp:155
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
 msgstr ""
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:57
-#: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
+#: playlist/playlist.cpp:1300 ui/organisedialog.cpp:60
+#: ui/qtsystemtrayicon.cpp:249 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
@@ -780,7 +791,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Artist"
 
-#: ui/mainwindow.cpp:248
+#: ui/mainwindow.cpp:241
 msgid "Artist info"
 msgstr "Info artist"
 
@@ -788,11 +799,11 @@ msgstr "Info artist"
 msgid "Artist radio"
 msgstr "Radioul artistului"
 
-#: songinfo/echonesttags.cpp:59
+#: songinfo/echonesttags.cpp:61
 msgid "Artist tags"
 msgstr "Etichetele artistului"
 
-#: ui/organisedialog.cpp:58
+#: ui/organisedialog.cpp:61
 msgid "Artist's initial"
 msgstr "Inițiala artistului"
 
@@ -800,9 +811,9 @@ msgstr "Inițiala artistului"
 msgid "Audio format"
 msgstr "Format audio"
 
-#: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
-#: internet/lastfmsettingspage.cpp:84 internet/ubuntuonesettingspage.cpp:75
+#: internet/digitallyimportedsettingspage.cpp:80
+#: internet/magnatunesettingspage.cpp:112 internet/lastfmservice.cpp:441
+#: internet/lastfmsettingspage.cpp:82 internet/ubuntuonesettingspage.cpp:74
 msgid "Authentication failed"
 msgstr "Autentificarea a eșuat"
 
@@ -810,7 +821,7 @@ msgstr "Autentificarea a eșuat"
 msgid "Author"
 msgstr ""
 
-#: ui/about.cpp:65
+#: ui/about.cpp:67
 msgid "Authors"
 msgstr "Autori"
 
@@ -826,7 +837,7 @@ msgstr "Încărcare automată"
 msgid "Automatically open single categories in the library tree"
 msgstr "Deschide automat categorii singure din bibliotecă"
 
-#: widgets/freespacebar.cpp:45
+#: widgets/freespacebar.cpp:44
 msgid "Available"
 msgstr "Disponibil"
 
@@ -834,15 +845,15 @@ msgstr "Disponibil"
 msgid "Average bitrate"
 msgstr "Rată de biți medie"
 
-#: covers/coversearchstatisticsdialog.cpp:70
+#: covers/coversearchstatisticsdialog.cpp:67
 msgid "Average image size"
 msgstr "Dimensiunea medie a imaginii"
 
-#: podcasts/addpodcastdialog.cpp:80
+#: podcasts/addpodcastdialog.cpp:84
 msgid "BBC Podcasts"
 msgstr ""
 
-#: playlist/playlist.cpp:1228 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1334 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -863,7 +874,7 @@ msgstr ""
 msgid "Background opacity"
 msgstr "Opacitatea fundalului"
 
-#: core/database.cpp:644
+#: core/database.cpp:640
 msgid "Backing up database"
 msgstr ""
 
@@ -875,7 +886,7 @@ msgstr ""
 msgid "Ban"
 msgstr "Blochează"
 
-#: analyzers/baranalyzer.cpp:19
+#: analyzers/baranalyzer.cpp:20
 msgid "Bar analyzer"
 msgstr "Analizator cu bare"
 
@@ -895,18 +906,17 @@ msgstr "Comportament"
 msgid "Best"
 msgstr "Optim"
 
-#: songinfo/echonestbiographies.cpp:83
+#: songinfo/echonestbiographies.cpp:84
 #, qt-format
 msgid "Biography from %1"
 msgstr "Biografie de la %1"
 
-#: playlist/playlist.cpp:1229 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Rată de biți"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:137
-#: ../bin/src/ui_groupbydialog.h:151 ../bin/src/ui_groupbydialog.h:165
-#: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -914,7 +924,12 @@ msgstr "Rată de biți"
 msgid "Bitrate"
 msgstr "Rată de biți"
 
-#: analyzers/blockanalyzer.cpp:22
+#: ui/organisedialog.cpp:73
+msgctxt "Refers to bitrate in file organise dialog."
+msgid "Bitrate"
+msgstr ""
+
+#: analyzers/blockanalyzer.cpp:23
 msgid "Block analyzer"
 msgstr "Analizator cu blocuri"
 
@@ -930,7 +945,7 @@ msgstr ""
 msgid "Body"
 msgstr "Corp"
 
-#: analyzers/boomanalyzer.cpp:8
+#: analyzers/boomanalyzer.cpp:9
 msgid "Boom analyzer"
 msgstr "Analizator cu brațe"
 
@@ -948,7 +963,7 @@ msgstr "Navighează..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:784
+#: engines/gstengine.cpp:778
 msgid "Buffering"
 msgstr ""
 
@@ -960,15 +975,15 @@ msgstr ""
 msgid "Buttons"
 msgstr "Butoane"
 
-#: core/song.cpp:351
+#: core/song.cpp:401
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:100
+#: library/library.cpp:118
 msgid "CUE sheet support"
 msgstr "CUE placa suport"
 
-#: internet/spotifyblobdownloader.cpp:44
+#: internet/spotifyblobdownloader.cpp:50
 msgid "Cancel"
 msgstr "Anulare"
 
@@ -976,11 +991,11 @@ msgstr "Anulare"
 msgid "Change cover art"
 msgstr "Schimbă imaginea coperții"
 
-#: songinfo/songinfotextview.cpp:83
+#: songinfo/songinfotextview.cpp:73
 msgid "Change font size..."
 msgstr "Schimbă dimensiunea fontului..."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:69
 msgid "Change repeat mode"
 msgstr "Schimba modul repetiție"
 
@@ -988,11 +1003,11 @@ msgstr "Schimba modul repetiție"
 msgid "Change shortcut..."
 msgstr "Schimbă scurtătura..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:67
 msgid "Change shuffle mode"
 msgstr "Schimbă modul amestecare"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:166
 msgid "Change the language"
 msgstr "Schimbă limba"
 
@@ -1006,11 +1021,11 @@ msgstr ""
 msgid "Check for new episodes"
 msgstr ""
 
-#: ui/mainwindow.cpp:602
+#: ui/mainwindow.cpp:696
 msgid "Check for updates..."
 msgstr "Verifică după actualizări..."
 
-#: smartplaylists/wizard.cpp:86
+#: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
 msgstr "Alegeți un nume pentru lista de redare inteligentă"
 
@@ -1030,11 +1045,11 @@ msgstr "Alege font..."
 msgid "Choose from the list"
 msgstr "Alegeți din listă"
 
-#: smartplaylists/querywizardplugin.cpp:155
+#: smartplaylists/querywizardplugin.cpp:161
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Alegeți cum va fi sortată lista de redare și câte melodii va conține."
 
-#: podcasts/podcastsettingspage.cpp:132
+#: podcasts/podcastsettingspage.cpp:133
 msgid "Choose podcast download directory"
 msgstr ""
 
@@ -1043,7 +1058,7 @@ msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr "Alegeți paginile web pe care doriți ca Clementine să le folosească pentru a căuta versuri."
 
-#: ui/equalizer.cpp:115
+#: ui/equalizer.cpp:112
 msgid "Classical"
 msgstr "Clasică"
 
@@ -1051,7 +1066,7 @@ msgstr "Clasică"
 msgid "Cleaning up"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:62 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Golește"
@@ -1060,8 +1075,8 @@ msgstr "Golește"
 msgid "Clear playlist"
 msgstr "Golește lista de redare"
 
-#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:651
-#: visualisations/visualisationcontainer.cpp:211
+#: smartplaylists/searchtermwidget.cpp:341 ../bin/src/ui_mainwindow.h:651
+#: visualisations/visualisationcontainer.cpp:215
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
 msgstr "Clementine"
@@ -1074,8 +1089,8 @@ msgstr "Eroare Clementine"
 msgid "Clementine Orange"
 msgstr "Portocaliu Clementine"
 
-#: visualisations/visualisationcontainer.cpp:77
-#: visualisations/visualisationcontainer.cpp:151
+#: visualisations/visualisationcontainer.cpp:76
+#: visualisations/visualisationcontainer.cpp:158
 msgid "Clementine Visualization"
 msgstr "Vizualizare Clementine"
 
@@ -1112,20 +1127,20 @@ msgid ""
 "an account</a>."
 msgstr ""
 
-#: visualisations/projectmvisualisation.cpp:133
+#: visualisations/projectmvisualisation.cpp:132
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr "Clementine nu a putut încărca nici un projectM vizualizări. Verificaţi dacă aţi instalat corect Clementine."
 
-#: internet/lastfmsettingspage.cpp:110
+#: internet/lastfmsettingspage.cpp:108
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
 msgstr "Clementine nu a putut verifica statusul abonamentului tău pentru că sunt probleme cu conexiunea ta. Melodiile ascultate vor fi salvate și trimise la Last.fm mai târziu."
 
-#: widgets/prettyimage.cpp:201
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Vizualizator de imagini Clementine"
 
@@ -1137,11 +1152,11 @@ msgstr "Clementine nu a reușit să găsească rezultate pentru acest fişier"
 msgid "Clementine will find music in:"
 msgstr ""
 
-#: library/libraryview.cpp:349
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "Clic aici pentru a adăuga niște muzică"
 
-#: playlist/playlisttabbar.cpp:293
+#: playlist/playlisttabbar.cpp:286
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1166,19 +1181,19 @@ msgstr "Închidere"
 msgid "Close playlist"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:127
+#: visualisations/visualisationcontainer.cpp:135
 msgid "Close visualization"
 msgstr "Închide vizualizarea"
 
-#: internet/magnatunedownloaddialog.cpp:280
+#: internet/magnatunedownloaddialog.cpp:304
 msgid "Closing this window will cancel the download."
 msgstr "Închiderea acestei ferestre va anula descărcarea."
 
-#: ui/albumcovermanager.cpp:216
+#: ui/albumcovermanager.cpp:219
 msgid "Closing this window will stop searching for album covers."
 msgstr "Se va opri căutarea pentru coperti de albume la închiderea acestei ferestre."
 
-#: ui/equalizer.cpp:116
+#: ui/equalizer.cpp:114
 msgid "Club"
 msgstr "Club"
 
@@ -1186,12 +1201,12 @@ msgstr "Club"
 msgid "Colors"
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:169
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listă separată prin virgulă de clasă:nivel, nivel este 0-3"
 
-#: playlist/playlist.cpp:1238 smartplaylists/searchterm.cpp:288
-#: ui/organisedialog.cpp:68 ../bin/src/ui_edittagdialog.h:694
+#: playlist/playlist.cpp:1353 smartplaylists/searchterm.cpp:353
+#: ui/organisedialog.cpp:71 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Comentariu"
 
@@ -1203,26 +1218,26 @@ msgstr "Completează etichetele automat"
 msgid "Complete tags automatically..."
 msgstr "Taguri complete în mod automat ..."
 
-#: playlist/playlist.cpp:1218 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
 msgstr "Compozitor"
 
-#: internet/searchboxwidget.cpp:42
+#: internet/searchboxwidget.cpp:41
 #, qt-format
 msgid "Configure %1..."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:552
+#: internet/groovesharkservice.cpp:554
 msgid "Configure Grooveshark..."
 msgstr "Configureză Grooveshark ..."
 
-#: internet/lastfmservice.cpp:126
+#: internet/lastfmservice.cpp:129
 msgid "Configure Last.fm..."
 msgstr "Configurează Last.fm..."
 
-#: internet/magnatuneservice.cpp:280
+#: internet/magnatuneservice.cpp:282
 msgid "Configure Magnatune..."
 msgstr "Configurează Magnatune..."
 
@@ -1230,29 +1245,29 @@ msgstr "Configurează Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Configurează scurtături"
 
-#: internet/spotifyservice.cpp:526 internet/spotifyservice.cpp:538
+#: internet/spotifyservice.cpp:545 internet/spotifyservice.cpp:556
 msgid "Configure Spotify..."
 msgstr "Configurare Spotify..."
 
-#: internet/subsonicservice.cpp:96
+#: internet/subsonicservice.cpp:90
 msgid "Configure Subsonic..."
 msgstr ""
 
-#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
+#: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:466
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:483
+#: ui/mainwindow.cpp:546
 msgid "Configure library..."
 msgstr "Configurează biblioteca..."
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:350
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
 msgid "Configure podcasts..."
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:186
+#: internet/digitallyimportedservicebase.cpp:178
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:193
+#: internet/googledriveservice.cpp:184
 msgid "Configure..."
 msgstr "Configurează..."
 
@@ -1260,11 +1275,11 @@ msgstr "Configurează..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Conectează telecomenzile Wii folosind active / acţiune deactive"
 
-#: devices/devicemanager.cpp:323 devices/devicemanager.cpp:327
+#: devices/devicemanager.cpp:317 devices/devicemanager.cpp:322
 msgid "Connect device"
 msgstr "Conectează un dispozitiv"
 
-#: internet/spotifyservice.cpp:253
+#: internet/spotifyservice.cpp:266
 msgid "Connecting to Spotify"
 msgstr "Se conectează la Spotify"
 
@@ -1274,7 +1289,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:117
+#: internet/subsonicsettingspage.cpp:119
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr ""
@@ -1295,17 +1310,17 @@ msgstr "Convertește toată muzica"
 msgid "Convert any music that the device can't play"
 msgstr "Convertește muzica pe care nu o poate reda dispozitivul"
 
-#: internet/groovesharkservice.cpp:1172
+#: internet/groovesharkservice.cpp:1198
 msgid "Copy to clipboard"
 msgstr "Copiază în clipboard"
 
-#: library/libraryview.cpp:389 podcasts/podcastservice.cpp:336
-#: ui/mainwindow.cpp:517 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: ui/mainwindow.cpp:595 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copiază pe dispozitiv..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:514
-#: widgets/fileviewlist.cpp:39
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:585
+#: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Copiază în bibliotecă..."
 
@@ -1313,76 +1328,76 @@ msgstr "Copiază în bibliotecă..."
 msgid "Copyright"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:81
+#: internet/subsonicsettingspage.cpp:75
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
 msgstr ""
 
-#: transcoder/transcoder.cpp:64
+#: transcoder/transcoder.cpp:57
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr "Nu este posibilă crearea elementului GStreamer \"%1\" - asiguraţi-vă că aveţi toate plugin-urile necesare GStreamer instalat"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nu s-a putut găsi un muxer de %1, verifică dacă ai instalat plugin-uri corecte GStreamer"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:423
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr "Nu s-a putut găsi un encoder pentru %1, verifică dacă ai instalat plugin-uri corecte GStreamer"
 
-#: internet/lastfmservice.cpp:875
+#: internet/lastfmservice.cpp:900
 msgid "Couldn't load the last.fm radio station"
 msgstr "Nu s-a putut încărca postul de radio last.fm"
 
-#: internet/magnatunedownloaddialog.cpp:203
+#: internet/magnatunedownloaddialog.cpp:218
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Nu s-a putut deschide fișierul de ieșire %1"
 
-#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
+#: internet/cloudfileservice.cpp:79 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:691
-#: internet/googledriveservice.cpp:189
+#: internet/googledriveservice.cpp:182
 msgid "Cover Manager"
 msgstr "Gestionar de coperți"
 
-#: ui/edittagdialog.cpp:443
+#: ui/edittagdialog.cpp:458
 msgid "Cover art from embedded image"
 msgstr "Coperta din imagine încorporată"
 
-#: ui/edittagdialog.cpp:445
+#: ui/edittagdialog.cpp:461
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Coperta încarcată de la %1"
 
-#: ui/edittagdialog.cpp:438
+#: ui/edittagdialog.cpp:453
 msgid "Cover art manually unset"
 msgstr "Deselectează manual coperta"
 
-#: ui/edittagdialog.cpp:447
+#: ui/edittagdialog.cpp:463
 msgid "Cover art not set"
 msgstr "Coperta nu este stabilită"
 
-#: ui/edittagdialog.cpp:441
+#: ui/edittagdialog.cpp:456
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Copertă stabilită de la %1"
 
-#: covers/coversearchstatisticsdialog.cpp:60 ui/albumcoversearcher.cpp:106
+#: covers/coversearchstatisticsdialog.cpp:57 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
 msgstr "Coperte din %1"
 
-#: internet/groovesharkservice.cpp:520 internet/groovesharkservice.cpp:1244
+#: internet/groovesharkservice.cpp:522 internet/groovesharkservice.cpp:1270
 msgid "Create a new Grooveshark playlist"
 msgstr "Creează o nouă listă de redare Grooveshark"
 
@@ -1470,7 +1485,7 @@ msgstr "Ctrl+T"
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
-#: ui/equalizer.cpp:114 ../bin/src/ui_lastfmstationdialog.h:98
+#: ui/equalizer.cpp:110 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
 msgstr "Personalizat"
 
@@ -1482,7 +1497,7 @@ msgstr ""
 msgid "Custom message settings"
 msgstr "Setări mesaj personalizat"
 
-#: internet/lastfmservice.cpp:216
+#: internet/lastfmservice.cpp:218
 msgid "Custom radio"
 msgstr "Radio personalizat"
 
@@ -1494,26 +1509,26 @@ msgstr "Personalizat..."
 msgid "DBus path"
 msgstr "DBus path"
 
-#: ui/equalizer.cpp:117
+#: ui/equalizer.cpp:116
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:598
+#: core/database.cpp:593
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
 msgstr ""
 
-#: playlist/playlist.cpp:1236 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Data creării"
 
-#: playlist/playlist.cpp:1235 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Data modificării"
 
-#: smartplaylists/searchterm.cpp:311
+#: smartplaylists/searchterm.cpp:388
 msgid "Days"
 msgstr "Zile"
 
@@ -1521,15 +1536,15 @@ msgstr "Zile"
 msgid "De&fault"
 msgstr "&Implicit"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:151
 msgid "Decrease the volume by 4%"
 msgstr "Reduce volumul cu 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:153
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "Redu volumul"
 
@@ -1545,30 +1560,30 @@ msgstr "Implicite"
 msgid "Delay between visualizations"
 msgstr "Întârziere între vizualizări"
 
-#: playlist/playlistlistcontainer.cpp:73
+#: playlist/playlistlistcontainer.cpp:70
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:523 internet/groovesharkservice.cpp:1291
+#: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:1317
 msgid "Delete Grooveshark playlist"
 msgstr "Șterge listă de redare Grooveshark"
 
-#: podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:345
 msgid "Delete downloaded data"
 msgstr ""
 
-#: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1960 widgets/fileview.cpp:187
+#: devices/deviceview.cpp:404 library/libraryview.cpp:634
+#: ui/mainwindow.cpp:2177 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Șterge fișiere"
 
-#: devices/deviceview.cpp:220
+#: devices/deviceview.cpp:228
 msgid "Delete from device..."
 msgstr "Șterge de pe dispozitiv..."
 
-#: library/libraryview.cpp:391 ui/mainwindow.cpp:518
-#: widgets/fileviewlist.cpp:45
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:597
+#: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Șterge de pe disc..."
 
@@ -1576,11 +1591,11 @@ msgstr "Șterge de pe disc..."
 msgid "Delete played episodes"
 msgstr ""
 
-#: ui/equalizer.cpp:200 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Șterge preconfigurarea"
 
-#: library/libraryview.cpp:383
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "Șterge lista de redare inteligentă"
 
@@ -1588,15 +1603,15 @@ msgstr "Șterge lista de redare inteligentă"
 msgid "Delete the original files"
 msgstr "Șterge fișierele originale"
 
-#: core/deletefiles.cpp:50
+#: core/deletefiles.cpp:48
 msgid "Deleting files"
 msgstr "Se șterg fișierele"
 
-#: ui/mainwindow.cpp:1382
+#: ui/mainwindow.cpp:1556
 msgid "Dequeue selected tracks"
 msgstr "Elimină melodiile selectate din coadă"
 
-#: ui/mainwindow.cpp:1380
+#: ui/mainwindow.cpp:1554
 msgid "Dequeue track"
 msgstr "Elimină melodie din coadă"
 
@@ -1609,7 +1624,7 @@ msgstr "Destinaţie"
 msgid "Details..."
 msgstr "Detalii..."
 
-#: devices/devicekitlister.cpp:126 devices/giolister.cpp:160
+#: devices/devicekitlister.cpp:126 devices/giolister.cpp:156
 msgid "Device"
 msgstr "Dispozitiv"
 
@@ -1621,11 +1636,11 @@ msgstr "Proprietățile dispozitivului"
 msgid "Device name"
 msgstr "Numele dispozitivului"
 
-#: devices/deviceview.cpp:207
+#: devices/deviceview.cpp:210
 msgid "Device properties..."
 msgstr "Dispozitiv de proprietăți..."
 
-#: ui/mainwindow.cpp:245
+#: ui/mainwindow.cpp:236
 msgid "Devices"
 msgstr "Dispozitive"
 
@@ -1666,12 +1681,17 @@ msgstr "Dezactivează durată"
 msgid "Disable moodbar generation"
 msgstr ""
 
-#: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:433
+msgctxt "Refers to a disabled notification type in Notification settings."
 msgid "Disabled"
-msgstr "Dezactivat"
+msgstr ""
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:64
+#: globalsearch/searchproviderstatuswidget.cpp:46
+msgctxt "Refers to search provider's status."
+msgid "Disabled"
+msgstr ""
+
+#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Disc"
@@ -1681,11 +1701,11 @@ msgid "Discontinuous transmission"
 msgstr "Transmisie discontinuă"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
+#: library/libraryfilterwidget.cpp:95 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Afișează opțiunile"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:164
 msgid "Display the on-screen-display"
 msgstr ""
 
@@ -1701,27 +1721,27 @@ msgstr "Nu converti muzică"
 msgid "Do not overwrite"
 msgstr ""
 
-#: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:103
+#: widgets/osd.cpp:302 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "Nu repeta"
 
-#: library/libraryview.cpp:405
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "Nu arăta în artiști diferiți"
 
-#: widgets/osd.cpp:278 ../bin/src/ui_playlistsequence.h:107
+#: widgets/osd.cpp:281 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Nu amesteca"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:218
+#: internet/magnatunedownloaddialog.cpp:306 ui/albumcovermanager.cpp:221
 msgid "Don't stop!"
 msgstr "Nu opri!"
 
-#: internet/somafmservice.cpp:103
+#: internet/somafmservice.cpp:101
 msgid "Donate"
 msgstr ""
 
-#: devices/deviceview.cpp:115
+#: devices/deviceview.cpp:117
 msgid "Double click to open"
 msgstr "Dublu clic pentru a deschide"
 
@@ -1729,12 +1749,13 @@ msgstr "Dublu clic pentru a deschide"
 msgid "Double clicking a song will..."
 msgstr "Dublu clic pe o melodie va..."
 
-#: podcasts/podcastservice.cpp:421
+#: podcasts/podcastservice.cpp:437
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "Download %n episodes"
 msgstr ""
 
-#: internet/magnatunedownloaddialog.cpp:252
+#: internet/magnatunedownloaddialog.cpp:266
 msgid "Download directory"
 msgstr "Descarcă dosarul"
 
@@ -1750,7 +1771,7 @@ msgstr "Descarcă apartenență"
 msgid "Download new episodes automatically"
 msgstr ""
 
-#: podcasts/podcastservice.cpp:246
+#: podcasts/podcastservice.cpp:253
 msgid "Download queued"
 msgstr ""
 
@@ -1758,15 +1779,15 @@ msgstr ""
 msgid "Download the Android app"
 msgstr ""
 
-#: internet/magnatuneservice.cpp:276
+#: internet/magnatuneservice.cpp:272
 msgid "Download this album"
 msgstr "Descarcă acest album"
 
-#: internet/jamendoservice.cpp:417
+#: internet/jamendoservice.cpp:424
 msgid "Download this album..."
 msgstr "Descarcă acest album..."
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:439
 msgid "Download this episode"
 msgstr ""
 
@@ -1774,7 +1795,7 @@ msgstr ""
 msgid "Download..."
 msgstr "Descărcare..."
 
-#: podcasts/podcastservice.cpp:254
+#: podcasts/podcastservice.cpp:261
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr ""
@@ -1783,23 +1804,23 @@ msgstr ""
 msgid "Downloading Icecast directory"
 msgstr "Descărcare dosarul Icecast"
 
-#: internet/jamendoservice.cpp:187
+#: internet/jamendoservice.cpp:195
 msgid "Downloading Jamendo catalogue"
 msgstr "Descărcare catalog Jamendo"
 
-#: internet/magnatuneservice.cpp:158
+#: internet/magnatuneservice.cpp:152
 msgid "Downloading Magnatune catalogue"
 msgstr "Descărcare catalog Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:44
+#: internet/spotifyblobdownloader.cpp:49
 msgid "Downloading Spotify plugin"
 msgstr "Se descarcă pluginul Spotify"
 
-#: musicbrainz/tagfetcher.cpp:102
+#: musicbrainz/tagfetcher.cpp:107
 msgid "Downloading metadata"
 msgstr "Descărcare metadata"
 
-#: ui/notificationssettingspage.cpp:37
+#: ui/notificationssettingspage.cpp:36
 msgid "Drag to reposition"
 msgstr "Trage pentru a repoziționa"
 
@@ -1819,15 +1840,15 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "Modul dinamic este pornit"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:93
+#: internet/jamendoservice.cpp:121 library/library.cpp:112
 msgid "Dynamic random mix"
 msgstr "Mix aleator dinamic"
 
-#: library/libraryview.cpp:381
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "Editare listă de redare inteligentă..."
 
-#: ui/mainwindow.cpp:1415
+#: ui/mainwindow.cpp:1598
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -1844,16 +1865,16 @@ msgstr "Modifica etichete"
 msgid "Edit track information"
 msgstr "Modifică informații melodie"
 
-#: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:673
 msgid "Edit track information..."
 msgstr "Modifică informații melodie..."
 
-#: library/libraryview.cpp:397
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "Modifică informații melodii..."
 
-#: internet/savedradio.cpp:101
+#: internet/savedradio.cpp:102
 msgid "Edit..."
 msgstr "Modifică..."
 
@@ -1875,7 +1896,7 @@ msgid ""
 "displayed in this order."
 msgstr ""
 
-#: core/globalshortcuts.cpp:63
+#: core/globalshortcuts.cpp:72
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Efectuează o scanare completă a bibliotecii"
 
@@ -1903,7 +1924,7 @@ msgstr "Introduce un URL pentru a descărca de pe internet:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:137
+#: playlist/playlisttabbar.cpp:136
 msgid "Enter a new name for this playlist"
 msgstr "Introduce un nume nou pentru această listă de redare"
 
@@ -1925,7 +1946,7 @@ msgstr ""
 msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr ""
 
-#: ../bin/src/ui_libraryfilterwidget.h:96
+#: ../bin/src/ui_libraryfilterwidget.h:99
 #: ../bin/src/ui_albumcovermanager.h:219
 msgid "Enter search terms here"
 msgstr "Introduceți aici termenii de căutat"
@@ -1934,11 +1955,11 @@ msgstr "Introduceți aici termenii de căutat"
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Introduceți URL-ul unui flux radio de pe internet:"
 
-#: playlist/playlistlistcontainer.cpp:172
+#: playlist/playlistlistcontainer.cpp:169
 msgid "Enter the name of the folder"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:198
+#: ../bin/src/ui_networkremotesettingspage.h:199
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr ""
 
@@ -1950,17 +1971,17 @@ msgstr "Toată colecția"
 msgid "Equalizer"
 msgstr "Egalizator"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:167
 msgid "Equivalent to --log-levels *:1"
 msgstr "Echivalent cu --log-levels *:1"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:168
 msgid "Equivalent to --log-levels *:3"
 msgstr "Echivalent cu --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1017
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1690 ui/mainwindow.cpp:1912 ui/mainwindow.cpp:2028
+#: internet/groovesharkservice.cpp:1038
+#: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:628
+#: ui/mainwindow.cpp:1880 ui/mainwindow.cpp:2127 ui/mainwindow.cpp:2275
 msgid "Error"
 msgstr "Eroare"
 
@@ -1968,29 +1989,29 @@ msgstr "Eroare"
 msgid "Error connecting MTP device"
 msgstr "Eroare conectare dispozitiv MTP"
 
-#: ui/organiseerrordialog.cpp:55
+#: ui/organiseerrordialog.cpp:52
 msgid "Error copying songs"
 msgstr "Eroare copiere melodii"
 
-#: ui/organiseerrordialog.cpp:60
+#: ui/organiseerrordialog.cpp:59
 msgid "Error deleting songs"
 msgstr "Eroare ștergere melodii"
 
-#: internet/spotifyblobdownloader.cpp:215
+#: internet/spotifyblobdownloader.cpp:220
 msgid "Error downloading Spotify plugin"
 msgstr "Eroare la descărcarea pluginului Spotify"
 
-#: playlist/songloaderinserter.cpp:73 playlist/songloaderinserter.cpp:135
+#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
 #, qt-format
 msgid "Error loading %1"
 msgstr "Eroare încărcare %1"
 
-#: internet/digitallyimportedservicebase.cpp:203
-#: internet/digitallyimportedurlhandler.cpp:89
+#: internet/digitallyimportedservicebase.cpp:196
+#: internet/digitallyimportedurlhandler.cpp:85
 msgid "Error loading di.fm playlist"
 msgstr "Eroare la încărcarea liste de redare last.fm"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:394
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Eroare procesare %1: %2"
@@ -1999,7 +2020,7 @@ msgstr "Eroare procesare %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Eroare la încărcarea CD-ului audio"
 
-#: library/library.cpp:63
+#: library/library.cpp:66
 msgid "Ever played"
 msgstr "Redate vreodată"
 
@@ -2043,7 +2064,7 @@ msgstr ""
 msgid "Expand"
 msgstr "Extinde"
 
-#: widgets/loginstatewidget.cpp:142
+#: widgets/loginstatewidget.cpp:139
 #, qt-format
 msgid "Expires on %1"
 msgstr "Expiră pe %1"
@@ -2064,11 +2085,11 @@ msgstr ""
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
+#: ui/albumcovermanager.cpp:783 ui/albumcovermanager.cpp:807
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:786
+#: ui/albumcovermanager.cpp:792
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2120,25 +2141,25 @@ msgstr ""
 msgid "Fading duration"
 msgstr "Durată fade"
 
-#: ui/mainwindow.cpp:1690
+#: ui/mainwindow.cpp:1881
 msgid "Failed reading CD drive"
 msgstr ""
 
-#: podcasts/gpoddertoptagspage.cpp:76
+#: podcasts/gpoddertoptagspage.cpp:69
 msgid "Failed to fetch directory"
 msgstr ""
 
-#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
-#: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
-#: podcasts/itunessearchpage.cpp:82
+#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
+#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
+#: podcasts/itunessearchpage.cpp:81
 msgid "Failed to fetch podcasts"
 msgstr ""
 
-#: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
 msgid "Failed to load podcast"
 msgstr ""
 
-#: podcasts/podcasturlloader.cpp:167
+#: podcasts/podcasturlloader.cpp:173
 msgid "Failed to parse the XML for this RSS feed"
 msgstr ""
 
@@ -2147,11 +2168,11 @@ msgstr ""
 msgid "Fast"
 msgstr "Rapidă"
 
-#: internet/groovesharkservice.cpp:617
+#: internet/groovesharkservice.cpp:633
 msgid "Favorites"
 msgstr "Favorite"
 
-#: library/library.cpp:77
+#: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "Melodii favorite"
 
@@ -2167,11 +2188,11 @@ msgstr "Obține automat"
 msgid "Fetch completed"
 msgstr "Descărcare completă"
 
-#: internet/subsonicservice.cpp:241
+#: internet/subsonicservice.cpp:228
 msgid "Fetching Subsonic library"
 msgstr ""
 
-#: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
+#: ui/coverfromurldialog.cpp:70 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Eroare la obținerea coperții de album"
 
@@ -2179,7 +2200,7 @@ msgstr "Eroare la obținerea coperții de album"
 msgid "File Format"
 msgstr ""
 
-#: ui/organisedialog.cpp:72
+#: ui/organisedialog.cpp:75
 msgid "File extension"
 msgstr "Extensie fișier"
 
@@ -2187,19 +2208,19 @@ msgstr "Extensie fișier"
 msgid "File formats"
 msgstr "Formate de fișier"
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Nume fișier"
 
-#: playlist/playlist.cpp:1232
+#: playlist/playlist.cpp:1342
 msgid "File name (without path)"
 msgstr "Nume fișier (fără cale)"
 
-#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Dimensiune fișier"
 
-#: playlist/playlist.cpp:1234 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1346 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2209,7 +2230,7 @@ msgstr "Tip fișier"
 msgid "Filename"
 msgstr "Nume de fișier"
 
-#: ui/mainwindow.cpp:242
+#: ui/mainwindow.cpp:229
 msgid "Files"
 msgstr "Fișiere"
 
@@ -2217,15 +2238,15 @@ msgstr "Fișiere"
 msgid "Files to transcode"
 msgstr "Fișiere pentru transcodare"
 
-#: smartplaylists/querywizardplugin.cpp:90
+#: smartplaylists/querywizardplugin.cpp:82
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Căutați melodii în biblioteca dvs. care se potrivesc cu criteriile pe care le specificaţi."
 
-#: musicbrainz/tagfetcher.cpp:55
+#: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
 msgstr "Amprentare melodie"
 
-#: smartplaylists/wizard.cpp:85
+#: smartplaylists/wizard.cpp:83
 msgid "Finish"
 msgstr "Sfârșit"
 
@@ -2233,7 +2254,7 @@ msgstr "Sfârșit"
 msgid "First level"
 msgstr "Primul nivel"
 
-#: core/song.cpp:340
+#: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
 msgstr "Flac"
 
@@ -2249,12 +2270,12 @@ msgstr "Din motive de licență, suportul pentru Spotify este într-un plugin se
 msgid "Force mono encoding"
 msgstr "Forțează codarea mono"
 
-#: devices/deviceview.cpp:204 devices/deviceview.cpp:310
-#: devices/deviceview.cpp:314
+#: devices/deviceview.cpp:207 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr "Omite dispozitivul"
 
-#: devices/deviceview.cpp:311
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2269,7 +2290,7 @@ msgstr ""
 #: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
+#: ../bin/src/ui_querysortpage.h:137 ../bin/src/ui_searchpreview.h:104
 #: ../bin/src/ui_searchtermwidget.h:268 ../bin/src/ui_wizardfinishpage.h:83
 #: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
@@ -2297,23 +2318,23 @@ msgstr "Rată de cadre"
 msgid "Frames per buffer"
 msgstr ""
 
-#: internet/lastfmservice.cpp:224
+#: internet/lastfmservice.cpp:230
 msgid "Friends"
 msgstr "Prieteni"
 
-#: moodbar/moodbarrenderer.cpp:157
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Frozen"
 msgstr ""
 
-#: ui/equalizer.cpp:120
+#: ui/equalizer.cpp:121
 msgid "Full Bass"
 msgstr "Bass complet"
 
-#: ui/equalizer.cpp:122
+#: ui/equalizer.cpp:125
 msgid "Full Bass + Treble"
 msgstr "Bas complet"
 
-#: ui/equalizer.cpp:121
+#: ui/equalizer.cpp:123
 msgid "Full Treble"
 msgstr "Note înalte complete"
 
@@ -2321,7 +2342,7 @@ msgstr "Note înalte complete"
 msgid "GStreamer audio engine"
 msgstr "Motor audio GStreamer"
 
-#: ui/settingsdialog.cpp:131
+#: ui/settingsdialog.cpp:129
 msgid "General"
 msgstr ""
 
@@ -2329,30 +2350,30 @@ msgstr ""
 msgid "General settings"
 msgstr "Setări generale"
 
-#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:70
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Gen"
 
-#: internet/groovesharkservice.cpp:542
+#: internet/groovesharkservice.cpp:544
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:539 internet/groovesharkservice.cpp:1110
+#: internet/groovesharkservice.cpp:541 internet/groovesharkservice.cpp:1137
 msgid "Get a URL to share this Grooveshark song"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:790
+#: internet/groovesharkservice.cpp:813
 msgid "Getting Grooveshark popular songs"
 msgstr "Obținere melodii populare Grooveshark"
 
-#: internet/somafmservice.cpp:114
+#: internet/somafmservice.cpp:115
 msgid "Getting channels"
 msgstr "Se preiau canalele"
 
-#: internet/digitallyimportedservicebase.cpp:108
+#: internet/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
 msgstr "Obținere fluxuri"
 
@@ -2376,7 +2397,7 @@ msgstr "Mergi la fila listei de redare precedente"
 msgid "Google Drive"
 msgstr ""
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:453
+#: covers/coversearchstatisticsdialog.cpp:51 ui/albumcovermanager.cpp:460
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2390,19 +2411,19 @@ msgstr "Colorează în gri melodiile inexistente în listele de redare"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:408
+#: internet/groovesharkservice.cpp:407
 msgid "Grooveshark login error"
 msgstr "Eroare la logarea in Grooveshark"
 
-#: internet/groovesharkservice.cpp:1162
+#: internet/groovesharkservice.cpp:1188
 msgid "Grooveshark playlist's URL"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:603
+#: internet/groovesharkservice.cpp:613
 msgid "Grooveshark radio"
 msgstr "Radio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1140
+#: internet/groovesharkservice.cpp:1166
 msgid "Grooveshark song's URL"
 msgstr "URL-ul melodiei Grooveshark"
 
@@ -2410,44 +2431,44 @@ msgstr "URL-ul melodiei Grooveshark"
 msgid "Group Library by..."
 msgstr "Grupează Bibliotecă după..."
 
-#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:463 library/libraryfilterwidget.cpp:88
 msgid "Group by"
 msgstr "Grupează după"
 
-#: library/libraryfilterwidget.cpp:110
+#: library/libraryfilterwidget.cpp:122
 msgid "Group by Album"
 msgstr "Grupează după album"
 
-#: library/libraryfilterwidget.cpp:104
+#: library/libraryfilterwidget.cpp:111
 msgid "Group by Artist"
 msgstr "Grupează după artist"
 
-#: library/libraryfilterwidget.cpp:106
+#: library/libraryfilterwidget.cpp:114
 msgid "Group by Artist/Album"
 msgstr "Grupează după artist/album"
 
-#: library/libraryfilterwidget.cpp:108
+#: library/libraryfilterwidget.cpp:118
 msgid "Group by Artist/Year - Album"
 msgstr "Grupează după artist/an - album"
 
-#: library/libraryfilterwidget.cpp:112
+#: library/libraryfilterwidget.cpp:125
 msgid "Group by Genre/Album"
 msgstr "Grupează după gen/album"
 
-#: library/libraryfilterwidget.cpp:114
+#: library/libraryfilterwidget.cpp:129
 msgid "Group by Genre/Artist/Album"
 msgstr "Grupează după gen/artist/album"
 
-#: playlist/playlist.cpp:1220 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:65
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr ""
 
-#: podcasts/podcasturlloader.cpp:196
+#: podcasts/podcasturlloader.cpp:204
 msgid "HTML page did not contain any RSS feeds"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:135
+#: internet/subsonicsettingspage.cpp:141
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr ""
@@ -2456,7 +2477,7 @@ msgstr ""
 msgid "HTTP proxy"
 msgstr "Proxy HTTP"
 
-#: moodbar/moodbarrenderer.cpp:158
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Happy"
 msgstr ""
 
@@ -2472,25 +2493,25 @@ msgstr "Informațiile hardware sunt disponibile numai în timp ce dispozitivul e
 msgid "High"
 msgstr "Ridicată"
 
-#: analyzers/analyzercontainer.cpp:64
-#: visualisations/visualisationcontainer.cpp:109
+#: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Înalt (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:119
+#: visualisations/visualisationcontainer.cpp:124
 msgid "High (1024x1024)"
 msgstr "Înalt (1024x1024)"
 
-#: internet/subsonicsettingspage.cpp:112
+#: internet/subsonicsettingspage.cpp:113
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:310
+#: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "Ore"
 
-#: core/backgroundstreams.cpp:30
+#: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
 
@@ -2502,15 +2523,15 @@ msgstr "Nu am un cont Magnatune"
 msgid "Icon"
 msgstr "Iconiță"
 
-#: widgets/fancytabwidget.cpp:674
+#: widgets/fancytabwidget.cpp:666
 msgid "Icons on top"
 msgstr "Iconițe în partea de sus"
 
-#: musicbrainz/tagfetcher.cpp:86
+#: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Identificare melodie"
 
-#: devices/devicemanager.cpp:568 devices/devicemanager.cpp:576
+#: devices/devicemanager.cpp:562 devices/devicemanager.cpp:573
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2532,12 +2553,12 @@ msgstr "Imagini (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imagini (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:141
 #, qt-format
 msgid "In %1 days"
 msgstr ""
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 weeks"
 msgstr ""
@@ -2548,7 +2569,7 @@ msgid ""
 "time a song finishes."
 msgstr "În modul dinamic, melodii noi vor fi alese și adăugate la lista de redare de fiecare dată când se termină o melodie."
 
-#: internet/spotifyservice.cpp:360
+#: internet/spotifyservice.cpp:371
 msgid "Inbox"
 msgstr "Inbox"
 
@@ -2560,36 +2581,36 @@ msgstr "Includeți album de artă în notificare"
 msgid "Include all songs"
 msgstr "Includeți toate melodiile"
 
-#: internet/subsonicsettingspage.cpp:90
+#: internet/subsonicsettingspage.cpp:85
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:94
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:127
+#: internet/subsonicsettingspage.cpp:131
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:150
 msgid "Increase the volume by 4%"
 msgstr "Crește volumul cu 4%"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:152
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Crește volumul"
 
-#: internet/cloudfileservice.cpp:136
+#: internet/cloudfileservice.cpp:126
 #, qt-format
 msgid "Indexing %1"
 msgstr ""
 
-#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
+#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:132
 msgid "Information"
 msgstr "Informații"
 
@@ -2601,51 +2622,51 @@ msgstr ""
 msgid "Insert..."
 msgstr "Introduce..."
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:72
 msgid "Installed"
 msgstr "Instalat"
 
-#: core/database.cpp:583
+#: core/database.cpp:577
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:244
+#: ui/mainwindow.cpp:233
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:151
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "Cheie API invalidă"
 
-#: internet/lastfmservice.cpp:428
+#: internet/lastfmservice.cpp:443
 msgid "Invalid format"
 msgstr "Format invalid"
 
-#: internet/lastfmservice.cpp:426
+#: internet/lastfmservice.cpp:439
 msgid "Invalid method"
 msgstr "Metodă invalidă"
 
-#: internet/lastfmservice.cpp:429
+#: internet/lastfmservice.cpp:445
 msgid "Invalid parameters"
 msgstr "Parametri invalizi"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:447
 msgid "Invalid resource specified"
 msgstr "Resursă specificată este nevalidă"
 
-#: internet/lastfmservice.cpp:425
+#: internet/lastfmservice.cpp:437
 msgid "Invalid service"
 msgstr "Serviciu invalid"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:451
 msgid "Invalid session key"
 msgstr "Cheie de sesiune invalidă"
 
-#: internet/groovesharkservice.cpp:401
+#: internet/groovesharkservice.cpp:399
 msgid "Invalid username and/or password"
 msgstr "Nume de utilizator și/sau parolă incorect(e)"
 
@@ -2653,27 +2674,27 @@ msgstr "Nume de utilizator și/sau parolă incorect(e)"
 msgid "Invert Selection"
 msgstr ""
 
-#: internet/jamendoservice.cpp:127
+#: internet/jamendoservice.cpp:133
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:109
+#: internet/jamendoservice.cpp:117
 msgid "Jamendo Most Listened Tracks"
 msgstr "Cele mai ascultate melodii Jamendo"
 
-#: internet/jamendoservice.cpp:107
+#: internet/jamendoservice.cpp:114
 msgid "Jamendo Top Tracks"
 msgstr "Melodii de top Jamendo"
 
-#: internet/jamendoservice.cpp:103
+#: internet/jamendoservice.cpp:108
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Jamendo melodii de top ale lunii"
 
-#: internet/jamendoservice.cpp:105
+#: internet/jamendoservice.cpp:111
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Jamedo melodii de top ale săptămănii"
 
-#: internet/jamendoservice.cpp:171
+#: internet/jamendoservice.cpp:175
 msgid "Jamendo database"
 msgstr "Jamendo bază de date"
 
@@ -2681,14 +2702,14 @@ msgstr "Jamendo bază de date"
 msgid "Jump to the currently playing track"
 msgstr "Salt la melodia în curs de redare"
 
-#: wiimotedev/wiimoteshortcutgrabber.cpp:72
+#: wiimotedev/wiimoteshortcutgrabber.cpp:69
 #, qt-format
 msgid "Keep buttons for %1 second..."
 msgstr "Mențineți butoanele pentru %1 secundă..."
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:127
-#: wiimotedev/wiimoteshortcutgrabber.cpp:73
-#: wiimotedev/wiimoteshortcutgrabber.cpp:117
+#: wiimotedev/wiimoteshortcutgrabber.cpp:72
+#: wiimotedev/wiimoteshortcutgrabber.cpp:114
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Păstrează butoane pentru %1 seconde..."
@@ -2702,18 +2723,19 @@ msgid "Keep the original files"
 msgstr "Mențineți fișierele originale"
 
 #: ../bin/src/ui_mainwindow.h:695
+msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
-msgstr "Pisoi"
+msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Language"
 msgstr "Limbă"
 
-#: ui/equalizer.cpp:123
+#: ui/equalizer.cpp:127
 msgid "Laptop/Headphones"
 msgstr "Laptop/Căști"
 
-#: ui/equalizer.cpp:124
+#: ui/equalizer.cpp:129
 msgid "Large Hall"
 msgstr "Sală mare"
 
@@ -2721,58 +2743,62 @@ msgstr "Sală mare"
 msgid "Large album cover"
 msgstr "Copertă de album mare"
 
-#: widgets/fancytabwidget.cpp:670
+#: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
 msgstr "Bară laterală mare"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1225
-#: ../bin/src/ui_edittagdialog.h:671
+#: library/library.cpp:80
 msgid "Last played"
 msgstr "Ultimele redate"
+
+#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:671
+msgctxt "A playlist's tag."
+msgid "Last played"
+msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:85
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Radio Last.fm personalizat: %1"
 
-#: internet/lastfmservice.cpp:255 internet/lastfmservice.cpp:699
-#: internet/lastfmservice.cpp:722
+#: internet/lastfmservice.cpp:261 internet/lastfmservice.cpp:724
+#: internet/lastfmservice.cpp:749
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Bibliotecă Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:257
-#: internet/lastfmservice.cpp:260
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:263
+#: internet/lastfmservice.cpp:266
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Radio Last.fm mix - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:262
-#: internet/lastfmservice.cpp:265
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:268
+#: internet/lastfmservice.cpp:271
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Radio vecin Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:252
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Post de radio Last.fm - %1"
 
-#: internet/lastfmservice.cpp:83
+#: internet/lastfmservice.cpp:81
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Artiști Last.fm similari cu %1"
 
-#: internet/lastfmservice.cpp:84
+#: internet/lastfmservice.cpp:82
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Radio Last.fm etichetat: %1"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:460
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm este momentan ocupat, încercați din nou peste câteva minute"
 
@@ -2780,11 +2806,11 @@ msgstr "Last.fm este momentan ocupat, încercați din nou peste câteva minute"
 msgid "Last.fm password"
 msgstr "Parolă Last.fm"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:78
+#: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
 msgstr "Număr de redări Last.fm"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:131
+#: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Etichete Last.fm"
 
@@ -2792,11 +2818,11 @@ msgstr "Etichete Last.fm"
 msgid "Last.fm username"
 msgstr "Nume utilizator Last.fm"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:111
+#: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
 msgstr "Wiki Last.fm"
 
-#: library/library.cpp:87
+#: library/library.cpp:102
 msgid "Least favourite tracks"
 msgstr "Melodiile cel mai puțin preferate"
 
@@ -2808,12 +2834,12 @@ msgstr "Lăsați necompletat pentru implicit. Exemple: \"/ dev /dsp\", \"front\"
 msgid "Left"
 msgstr ""
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:69
-#: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
+#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:72
+#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Durată"
 
-#: ui/mainwindow.cpp:231 ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:215 ui/mainwindow.cpp:228
 msgid "Library"
 msgstr "Bibliotecă"
 
@@ -2821,24 +2847,24 @@ msgstr "Bibliotecă"
 msgid "Library advanced grouping"
 msgstr "Grupare avansată bibliotecă"
 
-#: ui/mainwindow.cpp:2145
+#: ui/mainwindow.cpp:2399
 msgid "Library rescan notice"
 msgstr ""
 
-#: smartplaylists/querywizardplugin.cpp:86
+#: smartplaylists/querywizardplugin.cpp:79
 msgid "Library search"
 msgstr "Căutare bibliotecă"
 
-#: ../bin/src/ui_querysortpage.h:140
+#: ../bin/src/ui_querysortpage.h:141
 msgid "Limits"
 msgstr "Limite"
 
-#: internet/groovesharkservice.cpp:604
+#: internet/groovesharkservice.cpp:615
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr ""
 
-#: ui/equalizer.cpp:125
+#: ui/equalizer.cpp:131
 msgid "Live"
 msgstr "În direct"
 
@@ -2850,11 +2876,11 @@ msgstr "Încărcare"
 msgid "Load cover from URL"
 msgstr "Încarcă copertă de la URL"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:63
 msgid "Load cover from URL..."
 msgstr "Încarcă copertă de la URL..."
 
-#: ui/albumcoverchoicecontroller.cpp:98
+#: ui/albumcoverchoicecontroller.cpp:103
 msgid "Load cover from disk"
 msgstr "Încarcă copertă de pe disc"
 
@@ -2870,7 +2896,7 @@ msgstr "Încarcă listă de redare"
 msgid "Load playlist..."
 msgstr "Încarcă listă de redare..."
 
-#: internet/lastfmservice.cpp:884
+#: internet/lastfmservice.cpp:910
 msgid "Loading Last.fm radio"
 msgstr "Se încarcă radio Last.fm"
 
@@ -2878,38 +2904,38 @@ msgstr "Se încarcă radio Last.fm"
 msgid "Loading MTP device"
 msgstr "Încarcare dispozitiv MTP"
 
-#: devices/gpodloader.cpp:46
+#: devices/gpodloader.cpp:45
 msgid "Loading iPod database"
 msgstr "Încărcare bază de date iPod"
 
-#: smartplaylists/generatorinserter.cpp:52
+#: smartplaylists/generatorinserter.cpp:50
 msgid "Loading smart playlist"
 msgstr "Încărcare listă de redare inteligentă"
 
-#: library/librarymodel.cpp:139
+#: library/librarymodel.cpp:148
 msgid "Loading songs"
 msgstr "Încărcare melodii"
 
-#: internet/digitallyimportedurlhandler.cpp:67
-#: internet/somafmurlhandler.cpp:58
+#: internet/digitallyimportedurlhandler.cpp:63
+#: internet/somafmurlhandler.cpp:49
 msgid "Loading stream"
 msgstr "Se încarcă fluxul"
 
-#: playlist/songloaderinserter.cpp:81 ui/edittagdialog.cpp:233
+#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Încărcare melodii"
 
-#: playlist/songloaderinserter.cpp:141
+#: playlist/songloaderinserter.cpp:137
 msgid "Loading tracks info"
 msgstr "Încărcare info melodii"
 
-#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
-#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
+#: library/librarymodel.cpp:143 podcasts/podcastdiscoverymodel.cpp:102
+#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Încărcare..."
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:162
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 
@@ -2925,7 +2951,7 @@ msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 msgid "Login"
 msgstr "Logare"
 
-#: podcasts/podcastsettingspage.cpp:119
+#: podcasts/podcastsettingspage.cpp:120
 msgid "Login failed"
 msgstr ""
 
@@ -2937,13 +2963,13 @@ msgstr "Profil de predicție pe termen lung (LTP)"
 msgid "Love"
 msgstr "Iubește"
 
-#: analyzers/analyzercontainer.cpp:62
+#: analyzers/analyzercontainer.cpp:61
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Scăzut (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:121
 msgid "Low (256x256)"
 msgstr ""
 
@@ -2955,12 +2981,17 @@ msgstr "Profil de complexitate redusă (LC)"
 msgid "Lyrics"
 msgstr "Versuri"
 
-#: songinfo/ultimatelyricsprovider.cpp:156
+#: songinfo/ultimatelyricsprovider.cpp:154
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Versuri de pe %1"
 
-#: core/song.cpp:343 ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcoder.cpp:232
+msgid "M4A AAC"
+msgstr ""
+
+#: core/song.cpp:385 transcoder/transcoder.cpp:235
+#: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2972,15 +3003,15 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:341
+#: core/song.cpp:381
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:342
+#: core/song.cpp:383
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:103 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatuneservice.cpp:101 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -2988,7 +3019,7 @@ msgstr "Magnatune"
 msgid "Magnatune Download"
 msgstr "Descărcare Magnatune"
 
-#: widgets/osd.cpp:195
+#: widgets/osd.cpp:192
 msgid "Magnatune download finished"
 msgstr "Descărcarea Magnatune completă"
 
@@ -2996,15 +3027,20 @@ msgstr "Descărcarea Magnatune completă"
 msgid "Main profile (MAIN)"
 msgstr "Profil principal (MAIN)"
 
-#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:694
+#: core/backgroundstreams.cpp:33
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotifyservice.cpp:533
+#: ../bin/src/ui_mainwindow.h:694
+msgctxt "Label for button to enable/disable Enterprise background sound."
+msgid "Make it so!"
+msgstr ""
+
+#: internet/spotifyservice.cpp:552
 msgid "Make playlist available offline"
 msgstr ""
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:472
 msgid "Malformed response"
 msgstr ""
 
@@ -3017,15 +3053,15 @@ msgstr "Configurare proxy manuală"
 msgid "Manually"
 msgstr ""
 
-#: devices/deviceproperties.cpp:153
+#: devices/deviceproperties.cpp:156
 msgid "Manufacturer"
 msgstr "Producător"
 
-#: podcasts/podcastservice.cpp:346
+#: podcasts/podcastservice.cpp:357
 msgid "Mark as listened"
 msgstr ""
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:356
 msgid "Mark as new"
 msgstr ""
 
@@ -3041,13 +3077,13 @@ msgstr "Caută unul sau mai mulți termeni (SAU)"
 msgid "Maximum bitrate"
 msgstr "Rata de biți maximă"
 
-#: analyzers/analyzercontainer.cpp:63
-#: visualisations/visualisationcontainer.cpp:108
+#: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Mediu (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:118
+#: visualisations/visualisationcontainer.cpp:122
 msgid "Medium (512x512)"
 msgstr "Mediu (512x512)"
 
@@ -3059,11 +3095,11 @@ msgstr ""
 msgid "Minimum bitrate"
 msgstr "Rata de biți minimă"
 
-#: visualisations/projectmvisualisation.cpp:132
+#: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
 msgstr ""
 
-#: devices/deviceproperties.cpp:152
+#: devices/deviceproperties.cpp:155
 msgid "Model"
 msgstr "Model"
 
@@ -3075,16 +3111,16 @@ msgstr "Monitorizează biblioteca pentru schimbări"
 msgid "Mono playback"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:313
+#: smartplaylists/searchterm.cpp:392
 msgid "Months"
 msgstr "Luni"
 
-#: playlist/playlist.cpp:1240
+#: playlist/playlist.cpp:1357
 msgid "Mood"
 msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:294
-#: moodbar/moodbarproxystyle.cpp:342
+#: moodbar/moodbarproxystyle.cpp:345
 msgid "Moodbar style"
 msgstr ""
 
@@ -3092,11 +3128,11 @@ msgstr ""
 msgid "Moodbars"
 msgstr ""
 
-#: library/library.cpp:74
+#: library/library.cpp:84
 msgid "Most played"
 msgstr "Redate cel mai mult"
 
-#: devices/giolister.cpp:159
+#: devices/giolister.cpp:155
 msgid "Mount point"
 msgstr "Punct de montură"
 
@@ -3109,7 +3145,7 @@ msgstr "Puncte de montură"
 msgid "Move down"
 msgstr "Mută in jos"
 
-#: ui/mainwindow.cpp:515 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:588 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Mută în bibliotecă..."
 
@@ -3118,7 +3154,7 @@ msgstr "Mută în bibliotecă..."
 msgid "Move up"
 msgstr "Mută in sus"
 
-#: transcoder/transcodedialog.cpp:221 ui/mainwindow.cpp:1625
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1815
 msgid "Music"
 msgstr ""
 
@@ -3126,54 +3162,58 @@ msgstr ""
 msgid "Music Library"
 msgstr "Biblioteca audio"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:717
-#: wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:717
+#: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "Mut"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:197
 msgid "My Last.fm Library"
 msgstr "Biblioteca mea Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
 msgstr ""
 
-#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:205
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:204
 msgid "My Last.fm Neighborhood"
 msgstr "Vecinătatea mea Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:190
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:194
 msgid "My Last.fm Recommended Radio"
 msgstr "Recomandările mele Last.fm"
 
-#: internet/lastfmservice.cpp:197
+#: internet/lastfmservice.cpp:198
 msgid "My Mix Radio"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:608
+#: internet/groovesharkservice.cpp:622
 msgid "My Music"
 msgstr ""
 
-#: internet/lastfmservice.cpp:202
+#: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
 msgstr "Vecinătatea mea"
 
-#: internet/lastfmservice.cpp:192
+#: internet/lastfmservice.cpp:196
 msgid "My Radio Station"
 msgstr "Postul meu de radio"
 
-#: internet/lastfmservice.cpp:187
+#: internet/lastfmservice.cpp:191
 msgid "My Recommendations"
 msgstr "Recomandările mele"
 
-#: internet/groovesharkservice.cpp:1245 internet/groovesharkservice.cpp:1338
-#: ui/equalizer.cpp:182 ../bin/src/ui_deviceproperties.h:369
-#: ../bin/src/ui_magnatunedownloaddialog.h:135
+#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1366
+#: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_wizardfinishpage.h:84
-#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgid "Name"
 msgstr "Nume"
+
+#: ../bin/src/ui_magnatunedownloaddialog.h:135
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
+msgctxt "Category label"
+msgid "Name"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:197
 msgid "Naming options"
@@ -3183,7 +3223,7 @@ msgstr "Opțiuni de numire"
 msgid "Narrow band (NB)"
 msgstr "Bandă îngustă (NB)"
 
-#: internet/lastfmservice.cpp:229
+#: internet/lastfmservice.cpp:236
 msgid "Neighbors"
 msgstr "Vecini"
 
@@ -3191,15 +3231,15 @@ msgstr "Vecini"
 msgid "Network Proxy"
 msgstr "Proxy de Rețea"
 
-#: ../bin/src/ui_networkremotesettingspage.h:177
+#: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Network Remote"
 msgstr ""
 
-#: playlist/playlistdelegates.cpp:304 ui/edittagdialog.cpp:487
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:505
 msgid "Never"
 msgstr "Niciodată"
 
-#: library/library.cpp:67
+#: library/library.cpp:73
 msgid "Never played"
 msgstr "Niciodată redate"
 
@@ -3208,21 +3248,21 @@ msgstr "Niciodată redate"
 msgid "Never start playing"
 msgstr "Nu începe redarea niciodată"
 
-#: playlist/playlistlistcontainer.cpp:72
-#: playlist/playlistlistcontainer.cpp:171
+#: playlist/playlistlistcontainer.cpp:69
+#: playlist/playlistlistcontainer.cpp:168
 #: ../bin/src/ui_playlistlistcontainer.h:128
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1465 ../bin/src/ui_mainwindow.h:705
+#: ui/mainwindow.cpp:1652 ../bin/src/ui_mainwindow.h:705
 msgid "New playlist"
 msgstr "Listă de redare nouă"
 
-#: library/libraryview.cpp:379
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "Listă de redare inteligentă nouă..."
 
-#: widgets/freespacebar.cpp:46
+#: widgets/freespacebar.cpp:45
 msgid "New songs"
 msgstr "Melodii noi"
 
@@ -3230,24 +3270,24 @@ msgstr "Melodii noi"
 msgid "New tracks will be added automatically."
 msgstr "Melodii noi vor fi adăugate automat."
 
-#: library/library.cpp:80
+#: library/library.cpp:92
 msgid "Newest tracks"
 msgstr "Cele mai noi melodii"
 
-#: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
 msgid "Next"
 msgstr "Următoarea"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:658
-#: wiimotedev/wiimotesettingspage.cpp:99
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:658
+#: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "Melodia următoare"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:142
 msgid "Next week"
 msgstr ""
 
-#: analyzers/analyzercontainer.cpp:80
+#: analyzers/analyzercontainer.cpp:79
 msgid "No analyzer"
 msgstr "Niciun analizator"
 
@@ -3255,7 +3295,7 @@ msgstr "Niciun analizator"
 msgid "No background image"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:778
+#: ui/albumcovermanager.cpp:784
 msgid "No covers to export."
 msgstr ""
 
@@ -3263,7 +3303,7 @@ msgstr ""
 msgid "No long blocks"
 msgstr "Fără blocuri lungi"
 
-#: playlist/playlistcontainer.cpp:366
+#: playlist/playlistcontainer.cpp:365
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
@@ -3277,11 +3317,11 @@ msgstr "Fără blocuri scurte"
 msgid "None"
 msgstr "Niciunul"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1913 ui/mainwindow.cpp:2029
+#: library/libraryview.cpp:629 ui/mainwindow.cpp:2128 ui/mainwindow.cpp:2276
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
-#: moodbar/moodbarrenderer.cpp:155
+#: moodbar/moodbarrenderer.cpp:167
 msgid "Normal"
 msgstr ""
 
@@ -3289,40 +3329,40 @@ msgstr ""
 msgid "Normal block type"
 msgstr "Tip normal de bloc"
 
-#: playlist/playlistsequence.cpp:170
+#: playlist/playlistsequence.cpp:189
 msgid "Not available while using a dynamic playlist"
 msgstr "Indisponibil în timpul folosirii unei liste de redare dinamice"
 
-#: devices/deviceview.cpp:107
+#: devices/deviceview.cpp:109
 msgid "Not connected"
 msgstr "Neconectat"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:463
 msgid "Not enough content"
 msgstr "Nu este destul conținut"
 
-#: internet/lastfmservice.cpp:441
+#: internet/lastfmservice.cpp:467
 msgid "Not enough fans"
 msgstr "Nu sunt destui fani"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:465
 msgid "Not enough members"
 msgstr "Nu sunt destui membri"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:469
 msgid "Not enough neighbors"
 msgstr "Nu sunt destui vecini"
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:72
 msgid "Not installed"
 msgstr "Neinstalat"
 
 #: globalsearch/globalsearchsettingspage.cpp:120
-#: globalsearch/searchproviderstatuswidget.cpp:48
+#: globalsearch/searchproviderstatuswidget.cpp:47
 msgid "Not logged in"
 msgstr ""
 
-#: devices/deviceview.cpp:111
+#: devices/deviceview.cpp:113
 msgid "Not mounted - double click to mount"
 msgstr ""
 
@@ -3338,36 +3378,37 @@ msgstr "Notificări"
 msgid "Now Playing"
 msgstr "Ascultă Acum"
 
-#: ui/notificationssettingspage.cpp:37
+#: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Previzualizare OSD"
 
-#: widgets/osd.cpp:171
+#: widgets/osd.cpp:169
 msgid "Off"
 msgstr ""
 
-#: core/song.cpp:344
+#: core/song.cpp:387 transcoder/transcoder.cpp:241
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:347
+#: core/song.cpp:393 transcoder/transcoder.cpp:247
 msgid "Ogg Opus"
 msgstr ""
 
-#: core/song.cpp:345
+#: core/song.cpp:389 transcoder/transcoder.cpp:244
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:346 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:391 transcoder/transcoder.cpp:238
+#: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: widgets/osd.cpp:171
+#: widgets/osd.cpp:169
 msgid "On"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:182
+#: ../bin/src/ui_networkremotesettingspage.h:183
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3375,11 +3416,11 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:187
+#: ../bin/src/ui_networkremotesettingspage.h:188
 msgid "Only allow connections from the local network"
 msgstr ""
 
-#: ../bin/src/ui_querysortpage.h:142
+#: ../bin/src/ui_querysortpage.h:143
 msgid "Only show the first"
 msgstr "Arată numai primele"
 
@@ -3387,10 +3428,10 @@ msgstr "Arată numai primele"
 msgid "Opacity"
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:179
-#: internet/groovesharkservice.cpp:546 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
-#: internet/somafmservice.cpp:100 internet/soundcloudservice.cpp:194
+#: internet/digitallyimportedservicebase.cpp:172
+#: internet/groovesharkservice.cpp:548 internet/icecastservice.cpp:295
+#: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:190
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Deschide %1 in browser"
@@ -3399,11 +3440,11 @@ msgstr "Deschide %1 in browser"
 msgid "Open &audio CD..."
 msgstr "Deschide CD &audio..."
 
-#: podcasts/addpodcastdialog.cpp:230
+#: podcasts/addpodcastdialog.cpp:235
 msgid "Open OPML file"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:73
+#: podcasts/addpodcastdialog.cpp:77
 msgid "Open OPML file..."
 msgstr ""
 
@@ -3415,17 +3456,22 @@ msgstr "Deschide dispozitiv"
 msgid "Open file..."
 msgstr "Deschide fișier..."
 
-#: internet/googledriveservice.cpp:184
+#: internet/googledriveservice.cpp:179
 msgid "Open in Google Drive"
 msgstr ""
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
-#: internet/internetservice.cpp:76 library/libraryview.cpp:371
-#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:219
+#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:454
+#: internet/internetservice.cpp:75 library/libraryview.cpp:375
+#: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Deschide în listă de redare nouă"
 
-#: songinfo/echonestbiographies.cpp:96
+#: ../bin/src/ui_behavioursettingspage.h:219
+msgctxt "Refers to behavior settings in Clementine settings page."
+msgid "Open in new playlist"
+msgstr ""
+
+#: songinfo/echonestbiographies.cpp:97
 msgid "Open in your browser"
 msgstr ""
 
@@ -3434,7 +3480,7 @@ msgstr ""
 msgid "Open..."
 msgstr "Deschide..."
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:449
 msgid "Operation failed"
 msgstr "Operația a eșuat"
 
@@ -3458,19 +3504,19 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Organizează Fișiere"
 
-#: library/libraryview.cpp:387 ui/mainwindow.cpp:516
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:591
 msgid "Organise files..."
 msgstr "Organizează fișiere..."
 
-#: core/organise.cpp:66
+#: core/organise.cpp:67
 msgid "Organising files"
 msgstr "Organizare fișiere"
 
-#: ui/trackselectiondialog.cpp:167
+#: ui/trackselectiondialog.cpp:162
 msgid "Original tags"
 msgstr "Taguri originale"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:164
 msgid "Other options"
 msgstr "Alte opțiuni"
 
@@ -3506,11 +3552,11 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: internet/jamendoservice.cpp:214
+#: internet/jamendoservice.cpp:222
 msgid "Parsing Jamendo catalogue"
 msgstr "Procesare catalog Jamendo"
 
-#: ui/equalizer.cpp:126
+#: ui/equalizer.cpp:133
 msgid "Party"
 msgstr "Petrecere"
 
@@ -3523,20 +3569,20 @@ msgstr "Petrecere"
 msgid "Password"
 msgstr "Parolă"
 
-#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:871 ui/mainwindow.cpp:1304
-#: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1010 ui/mainwindow.cpp:1465
+#: ui/qtsystemtrayicon.cpp:181 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pauză"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:146
 msgid "Pause playback"
 msgstr "Întrerupe redarea"
 
-#: widgets/osd.cpp:156
+#: widgets/osd.cpp:153
 msgid "Paused"
 msgstr "În pauză"
 
-#: playlist/playlist.cpp:1219 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr ""
@@ -3545,14 +3591,14 @@ msgstr ""
 msgid "Pixel"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:672
+#: widgets/fancytabwidget.cpp:664
 msgid "Plain sidebar"
 msgstr "Bară laterală simplă"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:498 ui/mainwindow.cpp:839
-#: ui/mainwindow.cpp:858 ui/mainwindow.cpp:1307 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:654
-#: wiimotedev/wiimotesettingspage.cpp:101
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:563 ui/mainwindow.cpp:978
+#: ui/mainwindow.cpp:997 ui/mainwindow.cpp:1468 ui/qtsystemtrayicon.cpp:169
+#: ui/qtsystemtrayicon.cpp:195 ../bin/src/ui_mainwindow.h:654
+#: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
 msgstr "Redă"
 
@@ -3560,19 +3606,19 @@ msgstr "Redă"
 msgid "Play Artist or Tag"
 msgstr "Ascultă Artist sau Tag"
 
-#: internet/lastfmservice.cpp:118
+#: internet/lastfmservice.cpp:117
 msgid "Play artist radio..."
 msgstr "Ascultă radio artist..."
 
-#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1325 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Număr ascultări"
 
-#: internet/lastfmservice.cpp:122
+#: internet/lastfmservice.cpp:123
 msgid "Play custom radio..."
 msgstr ""
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:145
 msgid "Play if stopped, pause if playing"
 msgstr "Redă dacă este oprit, întrerupe dacă se redă"
 
@@ -3585,11 +3631,11 @@ msgstr "Redă numai dacă nu se redă deja ceva"
 msgid "Play tag radio..."
 msgstr "Ascultă radio tag..."
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:163
 msgid "Play the <n>th track in the playlist"
 msgstr "Redă melodia a  <n>a din lista de redare"
 
-#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "Rulează/Pauză"
 
@@ -3597,29 +3643,29 @@ msgstr "Rulează/Pauză"
 msgid "Playback"
 msgstr "Redare"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:143
 msgid "Player options"
 msgstr "Opțiuni player"
 
-#: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
-#: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:357
+#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:151
+#: playlist/playlistmanager.cpp:481 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Listă de redare"
 
-#: widgets/osd.cpp:178
+#: widgets/osd.cpp:176
 msgid "Playlist finished"
 msgstr "Listă de redare terminată"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:160
 msgid "Playlist options"
 msgstr "Opțiuni listă de redare"
 
-#: smartplaylists/wizard.cpp:77
+#: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
 msgstr "Tipul listei de redare"
 
-#: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:243
+#: internet/groovesharkservice.cpp:643 ui/mainwindow.cpp:231
 msgid "Playlists"
 msgstr "Liste de redare"
 
@@ -3631,23 +3677,23 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "Status plugin:"
 
-#: podcasts/podcastservice.cpp:116 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr ""
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:135
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:577
+#: internet/groovesharkservice.cpp:580
 msgid "Popular songs"
 msgstr "Melodii populare"
 
-#: internet/groovesharkservice.cpp:580
+#: internet/groovesharkservice.cpp:584
 msgid "Popular songs of the Month"
 msgstr "Melodiile populare ale lunii"
 
-#: internet/groovesharkservice.cpp:587
+#: internet/groovesharkservice.cpp:593
 msgid "Popular songs today"
 msgstr "Melodii populare azi"
 
@@ -3656,11 +3702,11 @@ msgid "Popup duration"
 msgstr "Durata afișării"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:181
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:47 ../bin/src/ui_playbacksettingspage.h:317
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:317
 msgid "Pre-amp"
 msgstr "Preamplificare"
 
@@ -3707,7 +3753,7 @@ msgstr "Apasă o combinație de butoane pentru a folosi la"
 msgid "Press a key"
 msgstr "Apasă o tastă"
 
-#: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
+#: ui/globalshortcutgrabber.cpp:35 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
 msgstr "Apasă o combinație de taste pentru a folosi la %1..."
@@ -3722,16 +3768,16 @@ msgstr "Opțiuni OSD drăguț"
 msgid "Preview"
 msgstr "Previzualizare"
 
-#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:162 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "Precedenta"
 
-#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:652
-#: wiimotedev/wiimotesettingspage.cpp:100
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:652
+#: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "Melodia precedentă"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:170
 msgid "Print out version information"
 msgstr "Tipărește informații versiune"
 
@@ -3739,21 +3785,25 @@ msgstr "Tipărește informații versiune"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_magnatunedownloaddialog.h:134
 #: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcd.h:324
 msgid "Progress"
 msgstr "Progres"
 
-#: ui/equalizer.cpp:129
+#: ../bin/src/ui_magnatunedownloaddialog.h:134
+msgctxt "Category label"
+msgid "Progress"
+msgstr ""
+
+#: ui/equalizer.cpp:138
 msgid "Psychedelic"
 msgstr ""
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
-#: wiimotedev/wiimotesettingspage.cpp:227
+#: wiimotedev/wiimotesettingspage.cpp:239
 msgid "Push Wiiremote button"
 msgstr "Apasă buton Wiimote"
 
-#: ../bin/src/ui_querysortpage.h:138
+#: ../bin/src/ui_querysortpage.h:139
 msgid "Put songs in a random order"
 msgstr "Aranjează melodiile într-o ordine aleatoare"
 
@@ -3761,7 +3811,7 @@ msgstr "Aranjează melodiile într-o ordine aleatoare"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:114
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Quality"
 msgstr "Calitate"
 
@@ -3773,12 +3823,12 @@ msgstr "Interoghez dispozitiv..."
 msgid "Queue Manager"
 msgstr "Gestionar de listă"
 
-#: ui/mainwindow.cpp:1386
+#: ui/mainwindow.cpp:1560
 msgid "Queue selected tracks"
 msgstr "Adaugă în coadă melodiile selectate"
 
-#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1384
+#: globalsearch/globalsearchview.cpp:459 library/libraryview.cpp:380
+#: ui/mainwindow.cpp:1558
 msgid "Queue track"
 msgstr "Adaugă în coadă melodia"
 
@@ -3786,60 +3836,65 @@ msgstr "Adaugă în coadă melodia"
 msgid "Radio (equal loudness for all tracks)"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:595
+#: internet/groovesharkservice.cpp:602
 msgid "Radios"
 msgstr "Radiouri"
 
-#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:692
+#: core/backgroundstreams.cpp:28
 msgid "Rain"
 msgstr "Ploaie"
+
+#: ../bin/src/ui_mainwindow.h:692
+msgctxt "Label for button to enable/disable rain background sound."
+msgid "Rain"
+msgstr ""
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
 msgstr "Vizualizare aleatorie"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:75
 msgid "Rate the current song 0 stars"
 msgstr ""
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:77
 msgid "Rate the current song 1 star"
 msgstr ""
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 2 stars"
 msgstr ""
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 3 stars"
 msgstr ""
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 4 stars"
 msgstr ""
 
-#: core/globalshortcuts.cpp:70
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 5 stars"
 msgstr ""
 
-#: playlist/playlist.cpp:1222 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1323 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr ""
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:215
+#: internet/magnatunedownloaddialog.cpp:303 ui/albumcovermanager.cpp:218
 msgid "Really cancel?"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:131
+#: internet/subsonicsettingspage.cpp:136
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:549
+#: internet/groovesharkservice.cpp:550
 msgid "Refresh"
 msgstr ""
 
-#: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:92
+#: internet/jamendoservice.cpp:431 internet/magnatuneservice.cpp:279
+#: internet/subsonicservice.cpp:87
 msgid "Refresh catalogue"
 msgstr ""
 
@@ -3847,19 +3902,19 @@ msgstr ""
 msgid "Refresh channels"
 msgstr "Reîncarcă canalele"
 
-#: internet/lastfmservice.cpp:124
+#: internet/lastfmservice.cpp:126
 msgid "Refresh friends list"
 msgstr ""
 
-#: internet/icecastservice.cpp:297
+#: internet/icecastservice.cpp:298
 msgid "Refresh station list"
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:182
+#: internet/digitallyimportedservicebase.cpp:175
 msgid "Refresh streams"
 msgstr ""
 
-#: ui/equalizer.cpp:130
+#: ui/equalizer.cpp:140
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -3872,7 +3927,7 @@ msgid "Remember from last time"
 msgstr "Ține minte de data trecută"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_transcodedialog.h:210 internet/lastfmservice.cpp:115
+#: ../bin/src/ui_transcodedialog.h:210 internet/lastfmservice.cpp:114
 msgid "Remove"
 msgstr "Elimină"
 
@@ -3888,48 +3943,48 @@ msgstr ""
 msgid "Remove folder"
 msgstr "Șterge folder"
 
-#: internet/groovesharkservice.cpp:536
+#: internet/groovesharkservice.cpp:538
 msgid "Remove from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:533
+#: internet/groovesharkservice.cpp:535
 msgid "Remove from favorites"
 msgstr "Scoate din favorite"
 
-#: internet/groovesharkservice.cpp:530 ../bin/src/ui_mainwindow.h:699
+#: internet/groovesharkservice.cpp:532 ../bin/src/ui_mainwindow.h:699
 msgid "Remove from playlist"
 msgstr "Elimină din lista de redare"
 
-#: playlist/playlisttabbar.cpp:174
+#: playlist/playlisttabbar.cpp:172
 msgid "Remove playlist"
 msgstr ""
 
-#: playlist/playlistlistcontainer.cpp:315
+#: playlist/playlistlistcontainer.cpp:317
 msgid "Remove playlists"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1539
+#: internet/groovesharkservice.cpp:1566
 msgid "Removing songs from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1489
+#: internet/groovesharkservice.cpp:1513
 msgid "Removing songs from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1337
+#: internet/groovesharkservice.cpp:1365
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:526
+#: internet/groovesharkservice.cpp:528
 msgid "Rename Grooveshark playlist"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:137
+#: playlist/playlisttabbar.cpp:135
 msgid "Rename playlist"
 msgstr "Redenumește listă de redare"
 
-#: playlist/playlisttabbar.cpp:55
+#: playlist/playlisttabbar.cpp:56
 msgid "Rename playlist..."
 msgstr "Redenumește listă de redare..."
 
@@ -3937,24 +3992,24 @@ msgstr "Redenumește listă de redare..."
 msgid "Renumber tracks in this order..."
 msgstr ""
 
-#: playlist/playlistsequence.cpp:174 ../bin/src/ui_playlistsequence.h:112
+#: playlist/playlistsequence.cpp:193 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat"
 msgstr "Repetă"
 
-#: widgets/osd.cpp:293 ../bin/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
 msgstr "Repetă albumul"
 
-#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:106
+#: widgets/osd.cpp:311 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
 msgstr "Repetă lista"
 
-#: widgets/osd.cpp:292 ../bin/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:305 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
 msgstr "Repetă melodia"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
-#: internet/internetservice.cpp:66 library/libraryview.cpp:369
+#: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:450
+#: internet/internetservice.cpp:64 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Înlocuiește lista de redare curentă"
@@ -3979,7 +4034,7 @@ msgstr ""
 msgid "Repopulate"
 msgstr "Repopulează"
 
-#: ../bin/src/ui_networkremotesettingspage.h:191
+#: ../bin/src/ui_networkremotesettingspage.h:192
 msgid "Require authentication code"
 msgstr ""
 
@@ -3987,11 +4042,11 @@ msgstr ""
 msgid "Reset"
 msgstr "Resetare"
 
-#: ui/edittagdialog.cpp:768 ../bin/src/ui_edittagdialog.h:665
+#: ui/edittagdialog.cpp:782 ../bin/src/ui_edittagdialog.h:665
 msgid "Reset play counts"
 msgstr "Resetează numărul de ascultări"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:158
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4004,15 +4059,15 @@ msgstr ""
 msgid "Resume playback on start"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:758
+#: internet/groovesharkservice.cpp:779
 msgid "Retrieving Grooveshark My Music songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:726
+#: internet/groovesharkservice.cpp:746
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Obținere melodii favorite Grooveshark"
 
-#: internet/groovesharkservice.cpp:663
+#: internet/groovesharkservice.cpp:682
 msgid "Retrieving Grooveshark playlists"
 msgstr ""
 
@@ -4036,7 +4091,7 @@ msgstr ""
 msgid "Rip audio CD..."
 msgstr ""
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:142
 msgid "Rock"
 msgstr "Rock"
 
@@ -4048,13 +4103,13 @@ msgstr ""
 msgid "SOCKS proxy"
 msgstr "Proxy SOCKS"
 
-#: internet/subsonicsettingspage.cpp:122
+#: internet/subsonicsettingspage.cpp:125
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
 msgstr ""
 
-#: devices/deviceview.cpp:202
+#: devices/deviceview.cpp:203
 msgid "Safely remove device"
 msgstr ""
 
@@ -4062,11 +4117,11 @@ msgstr ""
 msgid "Safely remove the device after copying"
 msgstr ""
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Rată de eșantionare"
 
-#: ui/organisedialog.cpp:71
+#: ui/organisedialog.cpp:74
 msgid "Samplerate"
 msgstr ""
 
@@ -4074,27 +4129,33 @@ msgstr ""
 msgid "Save .mood files in your music library"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:121
+#: ui/albumcoverchoicecontroller.cpp:126
 msgid "Save album cover"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Save cover to disk..."
 msgstr ""
 
-#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:232
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Salvează imagine"
 
-#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:240
+#: playlist/playlistlistcontainer.cpp:72
+msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr "Salvează listă de redare"
+msgstr ""
 
-#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:707
+#: playlist/playlistmanager.cpp:237
+msgctxt "Title of the playlist save dialog."
+msgid "Save playlist"
+msgstr ""
+
+#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "Salvează listă de redare..."
 
-#: ui/equalizer.cpp:182 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Salvează presetări"
 
@@ -4110,11 +4171,11 @@ msgstr ""
 msgid "Save this stream in the Internet tab"
 msgstr "Salvează fluxul in fila Internet"
 
-#: library/library.cpp:164
+#: library/library.cpp:177
 msgid "Saving songs statistics into songs files"
 msgstr ""
 
-#: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
+#: ui/edittagdialog.cpp:685 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr ""
 
@@ -4126,7 +4187,7 @@ msgstr ""
 msgid "Scale size"
 msgstr ""
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Scor"
 
@@ -4134,34 +4195,38 @@ msgstr "Scor"
 msgid "Scrobble tracks that I listen to"
 msgstr ""
 
-#: ui/albumcoversearcher.cpp:173 ui/albumcoversearcher.cpp:190
-#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
 #: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
 msgstr "Căutare"
 
+#: ui/mainwindow.cpp:226 ../bin/src/ui_globalsearchsettingspage.h:145
+msgctxt "Global search settings dialog title."
+msgid "Search"
+msgstr ""
+
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
 msgstr "Caută în posturile Icecast"
 
-#: internet/jamendoservice.cpp:426
+#: internet/jamendoservice.cpp:438
 msgid "Search Jamendo"
 msgstr "Caută în Jamendo"
 
-#: internet/magnatuneservice.cpp:285
+#: internet/magnatuneservice.cpp:288
 msgid "Search Magnatune"
 msgstr "Caută în Magnatune"
 
-#: internet/subsonicservice.cpp:75
+#: internet/subsonicservice.cpp:71
 msgid "Search Subsonic"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:72
 msgid "Search automatically"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:65
 msgid "Search for album covers..."
 msgstr "Caută coperți pentru album..."
 
@@ -4181,16 +4246,16 @@ msgstr ""
 msgid "Search mode"
 msgstr "Modul căutării"
 
-#: smartplaylists/querywizardplugin.cpp:154
+#: smartplaylists/querywizardplugin.cpp:159
 msgid "Search options"
 msgstr "Opțiuni căutare"
 
-#: internet/groovesharkservice.cpp:569 internet/soundcloudservice.cpp:104
-#: internet/spotifyservice.cpp:347
+#: internet/groovesharkservice.cpp:571 internet/soundcloudservice.cpp:104
+#: internet/spotifyservice.cpp:357
 msgid "Search results"
 msgstr ""
 
-#: smartplaylists/querywizardplugin.cpp:152
+#: smartplaylists/querywizardplugin.cpp:155
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Termeni de căutat"
@@ -4203,27 +4268,27 @@ msgstr ""
 msgid "Second level"
 msgstr "Al doilea nivel"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr ""
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr ""
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:156
 msgid "Seek the currently playing track by a relative amount"
 msgstr ""
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
 msgstr ""
 
-#: visualisations/visualisationselector.cpp:40 ../bin/src/ui_ripcd.h:310
+#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
 msgid "Select All"
 msgstr "Selectează Tot"
 
-#: visualisations/visualisationselector.cpp:42 ../bin/src/ui_ripcd.h:311
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcd.h:311
 msgid "Select None"
 msgstr ""
 
@@ -4231,7 +4296,7 @@ msgstr ""
 msgid "Select background color:"
 msgstr ""
 
-#: ui/appearancesettingspage.cpp:247
+#: ui/appearancesettingspage.cpp:258
 msgid "Select background image"
 msgstr ""
 
@@ -4247,7 +4312,7 @@ msgstr ""
 msgid "Select visualizations"
 msgstr "Selectează vizualizări"
 
-#: visualisations/visualisationcontainer.cpp:124
+#: visualisations/visualisationcontainer.cpp:131
 msgid "Select visualizations..."
 msgstr "Selectează vizualizări..."
 
@@ -4267,16 +4332,16 @@ msgstr ""
 msgid "Server details"
 msgstr ""
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:455
 msgid "Service offline"
 msgstr "Serviciu offline"
 
-#: ui/mainwindow.cpp:1413
+#: ui/mainwindow.cpp:1597
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr ""
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:149
 msgid "Set the volume to <value> percent"
 msgstr ""
 
@@ -4284,7 +4349,7 @@ msgstr ""
 msgid "Set value for all selected tracks..."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:180
 msgid "Settings"
 msgstr ""
 
@@ -4292,22 +4357,22 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Scurtătură"
 
-#: ui/globalshortcutssettingspage.cpp:135
+#: ui/globalshortcutssettingspage.cpp:140
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Scurtătură pentru %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:124
+#: wiimotedev/wiimotesettingspage.cpp:133
 #, qt-format
 msgid "Shortcut for %1 already exists"
 msgstr "Scurtătură pentru %1 există deja"
 
-#: library/libraryfilterwidget.cpp:61
+#: library/libraryfilterwidget.cpp:60
 msgid "Show"
 msgstr "Arată"
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "Arată OSD"
 
@@ -4339,15 +4404,15 @@ msgstr "Arată o notificare din zona de notificări"
 msgid "Show a pretty OSD"
 msgstr "Arată un OSD drăguț"
 
-#: widgets/nowplayingwidget.cpp:121
+#: widgets/nowplayingwidget.cpp:122
 msgid "Show above status bar"
 msgstr ""
 
-#: ui/mainwindow.cpp:471
+#: ui/mainwindow.cpp:531
 msgid "Show all songs"
 msgstr "Arată toate melodiile"
 
-#: ../bin/src/ui_querysortpage.h:141
+#: ../bin/src/ui_querysortpage.h:142
 msgid "Show all the songs"
 msgstr "Arată toate melodiile"
 
@@ -4359,32 +4424,32 @@ msgstr ""
 msgid "Show dividers"
 msgstr "Arată separatori"
 
-#: ui/albumcoverchoicecontroller.cpp:64 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr ""
 
-#: library/libraryview.cpp:399 ui/mainwindow.cpp:519
-#: widgets/fileviewlist.cpp:52
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:600
+#: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Arată în browser-ul de fișiere..."
 
-#: ui/mainwindow.cpp:520
+#: ui/mainwindow.cpp:603
 msgid "Show in library..."
 msgstr ""
 
-#: library/libraryview.cpp:403
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "Arată în artiști diferiți"
 
-#: moodbar/moodbarproxystyle.cpp:337
+#: moodbar/moodbarproxystyle.cpp:340
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:472
+#: ui/mainwindow.cpp:533
 msgid "Show only duplicates"
 msgstr "Arată numai duplicatele"
 
-#: ui/mainwindow.cpp:473
+#: ui/mainwindow.cpp:535
 msgid "Show only untagged"
 msgstr "Arată numai fără taguri"
 
@@ -4408,19 +4473,19 @@ msgstr "Arată pictogramă în tava de sistem"
 msgid "Show which sources are enabled and disabled"
 msgstr ""
 
-#: core/globalshortcuts.cpp:58
+#: core/globalshortcuts.cpp:62
 msgid "Show/Hide"
 msgstr "Arată/Ascunde"
 
-#: playlist/playlistsequence.cpp:173 ../bin/src/ui_playlistsequence.h:115
+#: playlist/playlistsequence.cpp:192 ../bin/src/ui_playlistsequence.h:115
 msgid "Shuffle"
 msgstr "Amestecă"
 
-#: widgets/osd.cpp:281 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:290 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
 msgstr "Amestecă albume"
 
-#: widgets/osd.cpp:279 ../bin/src/ui_playlistsequence.h:109
+#: widgets/osd.cpp:284 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
 msgstr "Amestecă tot"
 
@@ -4428,7 +4493,7 @@ msgstr "Amestecă tot"
 msgid "Shuffle playlist"
 msgstr "Amestecă lista de melodii"
 
-#: widgets/osd.cpp:280 ../bin/src/ui_playlistsequence.h:108
+#: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
 msgstr "Amestecă melodiile din acest album"
 
@@ -4444,7 +4509,7 @@ msgstr ""
 msgid "Signing in..."
 msgstr ""
 
-#: songinfo/echonestsimilarartists.cpp:57
+#: songinfo/echonestsimilarartists.cpp:58
 msgid "Similar artists"
 msgstr "Artiști similari"
 
@@ -4456,43 +4521,51 @@ msgstr ""
 msgid "Size:"
 msgstr ""
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:146
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:147
 msgid "Skip backwards in playlist"
 msgstr "Sare în listă înapoi"
 
-#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1327 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr ""
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:148
 msgid "Skip forwards in playlist"
 msgstr "Sare în listă înainte"
 
-#: widgets/nowplayingwidget.cpp:93
+#: ui/mainwindow.cpp:1571
+msgid "Skip selected tracks"
+msgstr ""
+
+#: ui/mainwindow.cpp:1569
+msgid "Skip track"
+msgstr ""
+
+#: widgets/nowplayingwidget.cpp:92
 msgid "Small album cover"
 msgstr "Imagine album mică"
 
-#: widgets/fancytabwidget.cpp:671
+#: widgets/fancytabwidget.cpp:663
 msgid "Small sidebar"
 msgstr "Bară laterală mică"
 
-#: smartplaylists/wizard.cpp:68
+#: smartplaylists/wizard.cpp:63
 msgid "Smart playlist"
 msgstr "Listă de redare inteligentă"
 
-#: library/librarymodel.cpp:1207
+#: library/librarymodel.cpp:1224
 msgid "Smart playlists"
 msgstr "Liste de redare inteligente"
 
-#: ui/equalizer.cpp:132
+#: ui/equalizer.cpp:144
 msgid "Soft"
 msgstr ""
 
-#: ui/equalizer.cpp:134
+#: ui/equalizer.cpp:148
 msgid "Soft Rock"
 msgstr ""
 
@@ -4500,11 +4573,11 @@ msgstr ""
 msgid "Song Information"
 msgstr "Informații melodie"
 
-#: ui/mainwindow.cpp:247
+#: ui/mainwindow.cpp:239
 msgid "Song info"
 msgstr "Info melodie"
 
-#: analyzers/sonogram.cpp:18
+#: analyzers/sonogram.cpp:19
 msgid "Sonogram"
 msgstr ""
 
@@ -4524,15 +4597,15 @@ msgstr "Sortează după gen (după popularitate)"
 msgid "Sort by station name"
 msgstr "Sortează după numele stației"
 
-#: ../bin/src/ui_querysortpage.h:139
+#: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Sortează melodii după"
 
-#: ../bin/src/ui_querysortpage.h:137
+#: ../bin/src/ui_querysortpage.h:138
 msgid "Sorting"
 msgstr "Sortare"
 
-#: playlist/playlist.cpp:1239
+#: playlist/playlist.cpp:1355
 msgid "Source"
 msgstr ""
 
@@ -4548,7 +4621,7 @@ msgstr ""
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:184
+#: internet/spotifyservice.cpp:190
 msgid "Spotify login error"
 msgstr "Eroare la logarea în Spotify"
 
@@ -4556,7 +4629,7 @@ msgstr "Eroare la logarea în Spotify"
 msgid "Spotify plugin"
 msgstr "Plugin Spotify"
 
-#: internet/spotifyblobdownloader.cpp:59
+#: internet/spotifyblobdownloader.cpp:64
 msgid "Spotify plugin not installed"
 msgstr "Pluginul Spotify nu este instalat"
 
@@ -4564,77 +4637,77 @@ msgstr "Pluginul Spotify nu este instalat"
 msgid "Standard"
 msgstr "Standard"
 
-#: internet/spotifyservice.cpp:354
+#: internet/spotifyservice.cpp:365
 msgid "Starred"
 msgstr "Cu steluță"
 
-#: ui/ripcd.cpp:90
+#: ui/ripcd.cpp:88
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:144
 msgid "Start the playlist currently playing"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:90
+#: transcoder/transcodedialog.cpp:87
 msgid "Start transcoding"
 msgstr "Începe transcodare"
 
-#: internet/groovesharkservice.cpp:570 internet/soundcloudservice.cpp:105
-#: internet/spotifyservice.cpp:348
+#: internet/groovesharkservice.cpp:573 internet/soundcloudservice.cpp:106
+#: internet/spotifyservice.cpp:359
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
 msgstr ""
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Starting %1"
 msgstr "Pornire %1"
 
-#: internet/magnatunedownloaddialog.cpp:120
+#: internet/magnatunedownloaddialog.cpp:122
 msgid "Starting..."
 msgstr "Pornire..."
 
-#: internet/groovesharkservice.cpp:598
+#: internet/groovesharkservice.cpp:606
 msgid "Stations"
 msgstr "Posturi"
 
 #: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:656
-#: wiimotedev/wiimotesettingspage.cpp:102
+#: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "Oprește"
 
-#: wiimotedev/wiimotesettingspage.cpp:110
+#: wiimotedev/wiimotesettingspage.cpp:114
 msgid "Stop after"
 msgstr "Oprește după"
 
-#: ui/mainwindow.cpp:500 ../bin/src/ui_mainwindow.h:662
+#: ui/mainwindow.cpp:566 ../bin/src/ui_mainwindow.h:662
 msgid "Stop after this track"
 msgstr "Oprește după pista aceasta"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:146
 msgid "Stop playback"
 msgstr "Oprește redarea"
 
-#: core/globalshortcuts.cpp:50
+#: core/globalshortcuts.cpp:51
 msgid "Stop playing after current track"
 msgstr "Oprește rularea după melodia curentă"
 
-#: widgets/osd.cpp:171
+#: widgets/osd.cpp:169
 #, qt-format
 msgid "Stop playing after track: %1"
 msgstr ""
 
-#: widgets/osd.cpp:166
+#: widgets/osd.cpp:163
 msgid "Stopped"
 msgstr "Oprit"
 
-#: core/song.cpp:353
+#: core/song.cpp:404
 msgid "Stream"
 msgstr "Flux"
 
-#: internet/subsonicsettingspage.cpp:30
+#: internet/subsonicsettingspage.cpp:29
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4644,7 +4717,7 @@ msgstr ""
 msgid "Streaming membership"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:629
+#: internet/groovesharkservice.cpp:647
 msgid "Subscribed playlists"
 msgstr ""
 
@@ -4652,7 +4725,7 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:98 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr ""
 
@@ -4660,12 +4733,12 @@ msgstr ""
 msgid "Success!"
 msgstr ""
 
-#: transcoder/transcoder.cpp:200
+#: transcoder/transcoder.cpp:188
 #, qt-format
 msgid "Successfully written %1"
 msgstr ""
 
-#: ui/trackselectiondialog.cpp:171
+#: ui/trackselectiondialog.cpp:166
 msgid "Suggested tags"
 msgstr "Taguri sugerate"
 
@@ -4674,13 +4747,13 @@ msgstr "Taguri sugerate"
 msgid "Summary"
 msgstr "Sumar"
 
-#: analyzers/analyzercontainer.cpp:65
-#: visualisations/visualisationcontainer.cpp:110
+#: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:126
 msgid "Super high (2048x2048)"
 msgstr ""
 
@@ -4692,23 +4765,23 @@ msgstr "Formate acceptate"
 msgid "Synchronize statistics to files now"
 msgstr ""
 
-#: internet/spotifyservice.cpp:561
+#: internet/spotifyservice.cpp:579
 msgid "Syncing Spotify inbox"
 msgstr ""
 
-#: internet/spotifyservice.cpp:556
+#: internet/spotifyservice.cpp:573
 msgid "Syncing Spotify playlist"
 msgstr ""
 
-#: internet/spotifyservice.cpp:565
+#: internet/spotifyservice.cpp:584
 msgid "Syncing Spotify starred tracks"
 msgstr ""
 
-#: moodbar/moodbarrenderer.cpp:159
+#: moodbar/moodbarrenderer.cpp:175
 msgid "System colors"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:673
+#: widgets/fancytabwidget.cpp:665
 msgid "Tabs on top"
 msgstr "File deasupra"
 
@@ -4720,7 +4793,7 @@ msgstr "Tag"
 msgid "Tag fetcher"
 msgstr ""
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:213
 msgid "Tag radio"
 msgstr ""
 
@@ -4728,7 +4801,7 @@ msgstr ""
 msgid "Target bitrate"
 msgstr "Rată de biți țintă"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:150
 msgid "Techno"
 msgstr "Techno"
 
@@ -4736,11 +4809,11 @@ msgstr "Techno"
 msgid "Text options"
 msgstr "Opțiuni text"
 
-#: ui/about.cpp:70
+#: ui/about.cpp:72
 msgid "Thanks to"
 msgstr "Mulțumiri"
 
-#: ui/globalshortcutssettingspage.cpp:177
+#: ui/globalshortcutssettingspage.cpp:180
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr ""
@@ -4749,17 +4822,17 @@ msgstr ""
 msgid "The album cover of the currently playing song"
 msgstr ""
 
-#: internet/magnatunedownloaddialog.cpp:90
+#: internet/magnatunedownloaddialog.cpp:92
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Dosarul %1 nu este valid"
 
-#: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
+#: playlist/playlistmanager.cpp:165 playlist/playlistmanager.cpp:183
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr ""
 
-#: smartplaylists/searchtermwidget.cpp:330
+#: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
 msgstr ""
 
@@ -4767,40 +4840,40 @@ msgstr ""
 msgid "The site you requested does not exist!"
 msgstr "Site-ul pe care l-ați solicitat nu există!"
 
-#: ui/coverfromurldialog.cpp:82
+#: ui/coverfromurldialog.cpp:83
 msgid "The site you requested is not an image!"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:98
+#: internet/subsonicsettingspage.cpp:95
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2138
+#: ui/mainwindow.cpp:2390
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr ""
 
-#: library/libraryview.cpp:529
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr ""
 
-#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
-#: podcasts/gpoddertoptagspage.cpp:77
+#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
+#: podcasts/gpoddertoptagspage.cpp:70
 msgid "There was a problem communicating with gpodder.net"
 msgstr ""
 
-#: internet/magnatunedownloaddialog.cpp:158
+#: internet/magnatunedownloaddialog.cpp:161
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr ""
 
-#: podcasts/itunessearchpage.cpp:76
+#: podcasts/itunessearchpage.cpp:75
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr ""
 
-#: ui/organiseerrordialog.cpp:56
+#: ui/organiseerrordialog.cpp:54
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
@@ -4812,13 +4885,13 @@ msgid ""
 "deleted:"
 msgstr ""
 
-#: devices/deviceview.cpp:389
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr ""
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1961 widgets/fileview.cpp:188
+#: library/libraryview.cpp:635 ui/mainwindow.cpp:2178 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4838,13 +4911,13 @@ msgstr ""
 msgid "Third level"
 msgstr "Al treilea nivel"
 
-#: internet/jamendoservice.cpp:171
+#: internet/jamendoservice.cpp:176
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr ""
 
-#: internet/magnatunedownloaddialog.cpp:175
+#: internet/magnatunedownloaddialog.cpp:188
 msgid "This album is not available in the requested format"
 msgstr "Acest album nu este valabil în formatul cerut"
 
@@ -4858,20 +4931,20 @@ msgstr ""
 msgid "This device supports the following file formats:"
 msgstr ""
 
-#: devices/devicemanager.cpp:566 devices/devicemanager.cpp:574
+#: devices/devicemanager.cpp:559 devices/devicemanager.cpp:570
 msgid "This device will not work properly"
 msgstr "Acest dispozitiv nu va funcționa corespunzător"
 
-#: devices/devicemanager.cpp:567
+#: devices/devicemanager.cpp:560
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
 
-#: devices/devicemanager.cpp:575
+#: devices/devicemanager.cpp:571
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Acesta este un iPod, dar ați compilat Clementine fără suport libgpod."
 
-#: devices/devicemanager.cpp:324
+#: devices/devicemanager.cpp:318
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4881,33 +4954,33 @@ msgstr ""
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr ""
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:457
 msgid "This stream is for paid subscribers only"
 msgstr ""
 
-#: devices/devicemanager.cpp:587
+#: devices/devicemanager.cpp:585
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr ""
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:55
-#: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
+#: playlist/playlist.cpp:1298 ui/organisedialog.cpp:58
+#: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "Titlu"
 
-#: internet/groovesharkservice.cpp:1018
+#: internet/groovesharkservice.cpp:1039
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
 msgstr "Pentru a putea porni radioul Grooveshark, ar trebui mai întâi să mai ascultați câteva melodii Grooveshark"
 
-#: core/utilities.cpp:127 core/utilities.cpp:143
+#: core/utilities.cpp:127 core/utilities.cpp:139
 msgid "Today"
 msgstr "Astăzi"
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:65
 msgid "Toggle Pretty OSD"
 msgstr ""
 
@@ -4915,7 +4988,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: ui/mainwindow.cpp:1388
+#: ui/mainwindow.cpp:1562
 msgid "Toggle queue status"
 msgstr ""
 
@@ -4923,19 +4996,19 @@ msgstr ""
 msgid "Toggle scrobbling"
 msgstr ""
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:165
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:140
 msgid "Tomorrow"
 msgstr ""
 
-#: podcasts/podcasturlloader.cpp:116
+#: podcasts/podcasturlloader.cpp:115
 msgid "Too many redirects"
 msgstr ""
 
-#: internet/spotifyservice.cpp:366
+#: internet/spotifyservice.cpp:377
 msgid "Top tracks"
 msgstr ""
 
@@ -4943,15 +5016,15 @@ msgstr ""
 msgid "Total albums:"
 msgstr ""
 
-#: covers/coversearchstatisticsdialog.cpp:71
+#: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total bytes transferred"
 msgstr ""
 
-#: covers/coversearchstatisticsdialog.cpp:68
+#: covers/coversearchstatisticsdialog.cpp:65
 msgid "Total network requests made"
 msgstr ""
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -4969,7 +5042,7 @@ msgstr "Logul Transcoderului"
 msgid "Transcoding"
 msgstr "Transcodare"
 
-#: transcoder/transcoder.cpp:312
+#: transcoder/transcoder.cpp:305
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr ""
@@ -4978,11 +5051,11 @@ msgstr ""
 msgid "Transcoding options"
 msgstr ""
 
-#: core/song.cpp:350
+#: core/song.cpp:399
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:15
+#: analyzers/turbine.cpp:16
 msgid "Turbine"
 msgstr ""
 
@@ -4990,11 +5063,11 @@ msgstr ""
 msgid "Turn off"
 msgstr "Oprește"
 
-#: devices/giolister.cpp:161
+#: devices/giolister.cpp:157
 msgid "URI"
 msgstr ""
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:142
 msgid "URL(s)"
 msgstr "URL(-uri)"
 
@@ -5014,44 +5087,52 @@ msgstr ""
 msgid "Ultra wide band (UWB)"
 msgstr ""
 
-#: internet/magnatunedownloaddialog.cpp:144
+#: internet/magnatunedownloaddialog.cpp:147
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr ""
 
-#: core/song.cpp:357 library/librarymodel.cpp:312 library/librarymodel.cpp:317
-#: library/librarymodel.cpp:322 library/librarymodel.cpp:999
-#: playlist/playlistdelegates.cpp:314 playlist/playlistmanager.cpp:505
-#: playlist/playlistmanager.cpp:508 ui/albumcoverchoicecontroller.cpp:117
-#: ui/edittagdialog.cpp:424 ui/edittagdialog.cpp:465
+#: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
+#: library/librarymodel.cpp:344 library/librarymodel.cpp:1014
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:488
+#: playlist/playlistmanager.cpp:489 ui/albumcoverchoicecontroller.cpp:123
+#: ui/edittagdialog.cpp:437 ui/edittagdialog.cpp:481
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: podcasts/podcasturlloader.cpp:198
+#: podcasts/podcasturlloader.cpp:206
 msgid "Unknown content-type"
 msgstr ""
 
-#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:448
+#: internet/digitallyimportedclient.cpp:71 internet/lastfmservice.cpp:476
 msgid "Unknown error"
 msgstr "Eroare necunoscută"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:67
 msgid "Unset cover"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:61 podcasts/podcastservice.cpp:339
+#: ui/mainwindow.cpp:1567
+msgid "Unskip selected tracks"
+msgstr ""
+
+#: ui/mainwindow.cpp:1565
+msgid "Unskip track"
+msgstr ""
+
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
 msgid "Unsubscribe"
 msgstr ""
 
-#: songinfo/songkickconcerts.cpp:168
+#: songinfo/songkickconcerts.cpp:172
 msgid "Upcoming Concerts"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1200
+#: internet/groovesharkservice.cpp:1226
 msgid "Update Grooveshark playlist"
 msgstr ""
 
-#: podcasts/podcastservice.cpp:319
+#: podcasts/podcastservice.cpp:331
 msgid "Update all podcasts"
 msgstr ""
 
@@ -5063,7 +5144,7 @@ msgstr "Actualizează foldere schimbate din bibliotecă"
 msgid "Update the library when Clementine starts"
 msgstr "Actualizează librăria când pornește Clementine"
 
-#: podcasts/podcastservice.cpp:327
+#: podcasts/podcastservice.cpp:339
 msgid "Update this podcast"
 msgstr ""
 
@@ -5071,21 +5152,21 @@ msgstr ""
 msgid "Updating"
 msgstr ""
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:94
 #, qt-format
 msgid "Updating %1"
 msgstr "Actualizare %1"
 
-#: devices/deviceview.cpp:103
+#: devices/deviceview.cpp:105
 #, qt-format
 msgid "Updating %1%..."
 msgstr "Actualizare %1%..."
 
-#: library/librarywatcher.cpp:90
+#: library/librarywatcher.cpp:92
 msgid "Updating library"
 msgstr "Se actualizează biblioteca"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:142
 msgid "Usage"
 msgstr "Utilizare"
 
@@ -5117,7 +5198,7 @@ msgstr ""
 msgid "Use a custom message for notifications"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5157,16 +5238,16 @@ msgstr "Folosește setările de proxy ale sistemului"
 msgid "Use volume normalisation"
 msgstr ""
 
-#: widgets/freespacebar.cpp:47
+#: widgets/freespacebar.cpp:46
 msgid "Used"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:404
+#: internet/groovesharkservice.cpp:402
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
-#: ui/settingsdialog.cpp:145
+#: ui/settingsdialog.cpp:143
 msgid "User interface"
 msgstr "Interfață utilizator "
 
@@ -5192,12 +5273,12 @@ msgstr "MP3 VBR"
 msgid "Variable bit rate"
 msgstr "Rată de biți variabilă"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:242
-#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
+#: playlist/playlistmanager.cpp:500 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Artiști diferiți"
 
-#: ui/about.cpp:34
+#: ui/about.cpp:33
 #, qt-format
 msgid "Version %1"
 msgstr "Versiunea %1"
@@ -5210,7 +5291,7 @@ msgstr "Vizualizare"
 msgid "Visualization mode"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:714 ui/dbusscreensaver.cpp:35
+#: ../bin/src/ui_mainwindow.h:714 ui/dbusscreensaver.cpp:33
 msgid "Visualizations"
 msgstr "Vizualizări"
 
@@ -5222,7 +5303,7 @@ msgstr "Setări vizualizări"
 msgid "Voice activity detection"
 msgstr ""
 
-#: widgets/osd.cpp:185
+#: widgets/osd.cpp:182
 #, qt-format
 msgid "Volume %1%"
 msgstr "Volum %1%"
@@ -5240,11 +5321,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:182 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
-#: core/song.cpp:349
+#: core/song.cpp:397 transcoder/transcoder.cpp:253
 msgid "Wav"
 msgstr "Wav"
 
@@ -5252,7 +5333,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:312
+#: smartplaylists/searchterm.cpp:390
 msgid "Weeks"
 msgstr "Săptămâni"
 
@@ -5278,32 +5359,32 @@ msgstr ""
 msgid "Wide band (WB)"
 msgstr ""
 
-#: widgets/osd.cpp:244
+#: widgets/osd.cpp:239
 #, qt-format
 msgid "Wii Remote %1: actived"
 msgstr ""
 
-#: widgets/osd.cpp:254
+#: widgets/osd.cpp:251
 #, qt-format
 msgid "Wii Remote %1: connected"
 msgstr ""
 
-#: widgets/osd.cpp:269
+#: widgets/osd.cpp:270
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
 msgstr ""
 
-#: widgets/osd.cpp:249
+#: widgets/osd.cpp:245
 #, qt-format
 msgid "Wii Remote %1: disactived"
 msgstr ""
 
-#: widgets/osd.cpp:259
+#: widgets/osd.cpp:257
 #, qt-format
 msgid "Wii Remote %1: disconnected"
 msgstr ""
 
-#: widgets/osd.cpp:264
+#: widgets/osd.cpp:263
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr ""
@@ -5324,7 +5405,7 @@ msgstr ""
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:339
+#: core/song.cpp:377 transcoder/transcoder.cpp:250
 msgid "Windows Media audio"
 msgstr ""
 
@@ -5332,25 +5413,25 @@ msgstr ""
 msgid "Without cover:"
 msgstr ""
 
-#: library/libraryview.cpp:530
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2143
+#: ui/mainwindow.cpp:2397
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
-#: library/librarysettingspage.cpp:151
+#: library/librarysettingspage.cpp:154
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:86
+#: internet/subsonicsettingspage.cpp:80
 msgid "Wrong username or password."
 msgstr ""
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:69
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5362,11 +5443,11 @@ msgstr "An"
 msgid "Year - Album"
 msgstr "An - Album"
 
-#: smartplaylists/searchterm.cpp:314
+#: smartplaylists/searchterm.cpp:394
 msgid "Years"
 msgstr "Ani"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:128
 msgid "Yesterday"
 msgstr "Ieri"
 
@@ -5374,13 +5455,13 @@ msgstr "Ieri"
 msgid "You are about to download the following albums"
 msgstr ""
 
-#: playlist/playlistlistcontainer.cpp:316
+#: playlist/playlistlistcontainer.cpp:318
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:177
+#: playlist/playlisttabbar.cpp:175
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5390,12 +5471,12 @@ msgstr ""
 msgid "You are not signed in."
 msgstr ""
 
-#: widgets/loginstatewidget.cpp:75
+#: widgets/loginstatewidget.cpp:71
 #, qt-format
 msgid "You are signed in as %1."
 msgstr ""
 
-#: widgets/loginstatewidget.cpp:73
+#: widgets/loginstatewidget.cpp:68
 msgid "You are signed in."
 msgstr ""
 
@@ -5403,13 +5484,13 @@ msgstr ""
 msgid "You can change the way the songs in the library are organised."
 msgstr ""
 
-#: internet/digitallyimportedsettingspage.cpp:46
+#: internet/digitallyimportedsettingspage.cpp:45
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "Puteți asculta gratuit fără un cont, însă membrii Premium pot asculta fluxuri de calitate mai bună fără reclame."
 
-#: internet/magnatunesettingspage.cpp:53
+#: internet/magnatunesettingspage.cpp:54
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5433,29 +5514,29 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr ""
 
-#: internet/groovesharksettingspage.cpp:103
+#: internet/groovesharksettingspage.cpp:101
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
 
-#: internet/spotifysettingspage.cpp:149
+#: internet/spotifysettingspage.cpp:146
 msgid "You do not have a Spotify Premium account."
 msgstr "Nu aveți un cont Spotify Premium."
 
-#: internet/digitallyimportedclient.cpp:89
+#: internet/digitallyimportedclient.cpp:93
 msgid "You do not have an active subscription"
 msgstr ""
 
-#: internet/spotifyservice.cpp:170
+#: internet/spotifyservice.cpp:175
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr ""
 
-#: internet/spotifysettingspage.cpp:158
+#: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr ""
 
-#: songinfo/lastfmtrackinfoprovider.cpp:87
+#: songinfo/lastfmtrackinfoprovider.cpp:85
 msgid "You love this track"
 msgstr ""
 
@@ -5476,11 +5557,11 @@ msgid ""
 " subscriber."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:200
+#: ../bin/src/ui_networkremotesettingspage.h:201
 msgid "Your IP address:"
 msgstr ""
 
-#: internet/lastfmsettingspage.cpp:80
+#: internet/lastfmsettingspage.cpp:78
 msgid "Your Last.fm credentials were incorrect"
 msgstr ""
 
@@ -5488,42 +5569,43 @@ msgstr ""
 msgid "Your Magnatune credentials were incorrect"
 msgstr ""
 
-#: library/libraryview.cpp:343
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "Biblioteca este goală!"
 
-#: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
+#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
 msgid "Your radio streams"
 msgstr "Fluxurile dumneavoastră radio"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:88
+#: songinfo/lastfmtrackinfoprovider.cpp:87
 #, qt-format
 msgid "Your scrobbles: %1"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:152
+#: visualisations/visualisationcontainer.cpp:159
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr ""
 
-#: internet/groovesharksettingspage.cpp:107
-#: internet/spotifysettingspage.cpp:154 internet/ubuntuonesettingspage.cpp:76
+#: internet/groovesharksettingspage.cpp:106
+#: internet/spotifysettingspage.cpp:152 internet/ubuntuonesettingspage.cpp:75
 msgid "Your username or password was incorrect."
 msgstr "Parola sau numele de utilizator au fost incorecte."
 
-#: smartplaylists/searchterm.cpp:297
+#: smartplaylists/searchterm.cpp:365
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:136
+#: ui/equalizer.cpp:152
 msgid "Zero"
 msgstr "Zero"
 
-#: playlist/playlistundocommands.cpp:37
+#: playlist/playlistundocommands.cpp:28
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "add %n songs"
 msgstr "adaugă %n melodii"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:204
 msgid "after"
 msgstr "după"
 
@@ -5543,19 +5625,19 @@ msgstr "automat"
 msgid "before"
 msgstr "inainte"
 
-#: smartplaylists/searchterm.cpp:211
+#: smartplaylists/searchterm.cpp:216
 msgid "between"
 msgstr "între"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:375
 msgid "biggest first"
 msgstr ""
 
-#: playlist/playlistview.cpp:204 ui/edittagdialog.cpp:458
+#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:474
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:224
 msgid "contains"
 msgstr "conține"
 
@@ -5565,20 +5647,20 @@ msgstr "conține"
 msgid "disabled"
 msgstr "dezactivat"
 
-#: widgets/osd.cpp:114
+#: widgets/osd.cpp:110
 #, qt-format
 msgid "disc %1"
 msgstr "disc %1"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:226
 msgid "does not contain"
 msgstr "nu conține"
 
-#: smartplaylists/searchterm.cpp:220
+#: smartplaylists/searchterm.cpp:230
 msgid "ends with"
 msgstr "se termină cu"
 
-#: smartplaylists/searchterm.cpp:223
+#: smartplaylists/searchterm.cpp:236
 msgid "equals"
 msgstr ""
 
@@ -5586,11 +5668,11 @@ msgstr ""
 msgid "gpodder.net"
 msgstr ""
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:32
 msgid "gpodder.net directory"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:221
+#: smartplaylists/searchterm.cpp:232
 msgid "greater than"
 msgstr "mai mare decât"
 
@@ -5598,54 +5680,55 @@ msgstr "mai mare decât"
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:209
+#: smartplaylists/searchterm.cpp:212
 msgid "in the last"
 msgstr ""
 
-#: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62 playlist/playlistview.cpp:206
-#: ui/edittagdialog.cpp:460
+#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
+#: internet/spotifysettingspage.cpp:61 playlist/playlistview.cpp:232
+#: ui/edittagdialog.cpp:476
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:222
+#: smartplaylists/searchterm.cpp:234
 msgid "less than"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:299
+#: smartplaylists/searchterm.cpp:371
 msgid "longest first"
 msgstr ""
 
-#: playlist/playlistundocommands.cpp:99
+#: playlist/playlistundocommands.cpp:83
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "move %n songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:298
+#: smartplaylists/searchterm.cpp:368
 msgid "newest first"
 msgstr "întâi cele mai noi"
 
-#: smartplaylists/searchterm.cpp:224
+#: smartplaylists/searchterm.cpp:238
 msgid "not equals"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:210
+#: smartplaylists/searchterm.cpp:214
 msgid "not in the last"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:208
+#: smartplaylists/searchterm.cpp:210
 msgid "not on"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:298
+#: smartplaylists/searchterm.cpp:367
 msgid "oldest first"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:207
+#: smartplaylists/searchterm.cpp:208
 msgid "on"
 msgstr ""
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:142
 msgid "options"
 msgstr "opțiuni"
 
@@ -5657,36 +5740,37 @@ msgstr ""
 msgid "press enter"
 msgstr "apasă enter"
 
-#: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
+#: playlist/playlistundocommands.cpp:53 playlist/playlistundocommands.cpp:76
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "remove %n songs"
 msgstr "elimină %n melodii"
 
-#: smartplaylists/searchterm.cpp:299
+#: smartplaylists/searchterm.cpp:370
 msgid "shortest first"
 msgstr "cele mai scurte primele"
 
-#: playlist/playlistundocommands.cpp:138
+#: playlist/playlistundocommands.cpp:107
 msgid "shuffle songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:374
 msgid "smallest first"
 msgstr "cele mai mici primele"
 
-#: playlist/playlistundocommands.cpp:131
+#: playlist/playlistundocommands.cpp:101
 msgid "sort songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:228
 msgid "starts with"
 msgstr "începând cu"
 
-#: playlist/playlistdelegates.cpp:185
+#: playlist/playlistdelegates.cpp:181
 msgid "stop"
 msgstr "oprește"
 
-#: widgets/osd.cpp:116
+#: widgets/osd.cpp:111
 #, qt-format
 msgid "track %1"
 msgstr "pista %1"

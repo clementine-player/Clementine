@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-01-27 02:54+0000\n"
+"PO-Revision-Date: 2014-02-09 04:21+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Language: sl\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
-#: playlist/playlistlistview.cpp:39
+#: playlist/playlistlistview.cpp:37
 msgid ""
 "\n"
 "\n"
@@ -61,11 +61,11 @@ msgstr " pt"
 msgid " seconds"
 msgstr " sekund"
 
-#: ../bin/src/ui_querysortpage.h:143
+#: ../bin/src/ui_querysortpage.h:144
 msgid " songs"
 msgstr " skladb"
 
-#: widgets/osd.cpp:193
+#: widgets/osd.cpp:190
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 albumov"
@@ -75,63 +75,63 @@ msgstr "%1 albumov"
 msgid "%1 days"
 msgstr "%1 dni"
 
-#: core/utilities.cpp:131
+#: core/utilities.cpp:129
 #, qt-format
 msgid "%1 days ago"
 msgstr "pred %1 dnevi"
 
-#: podcasts/gpoddersync.cpp:79
+#: podcasts/gpoddersync.cpp:81
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 na %2"
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 seznamov predvajanja (%2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:396
 #, qt-format
 msgid "%1 selected of"
 msgstr "izbran %1 od"
 
-#: devices/deviceview.cpp:123
+#: devices/deviceview.cpp:125
 #, qt-format
 msgid "%1 song"
 msgstr "%1 skladba"
 
-#: devices/deviceview.cpp:125
+#: devices/deviceview.cpp:127
 #, qt-format
 msgid "%1 songs"
 msgstr "%1 skladb"
 
-#: smartplaylists/searchpreview.cpp:133
+#: smartplaylists/searchpreview.cpp:132
 #, qt-format
 msgid "%1 songs found"
 msgstr "najdenih %1 skladb"
 
-#: smartplaylists/searchpreview.cpp:130
+#: smartplaylists/searchpreview.cpp:128
 #, qt-format
 msgid "%1 songs found (showing %2)"
 msgstr "najdenih %1 skladb (prikazanih %2)"
 
-#: playlist/playlistmanager.cpp:419
+#: playlist/playlistmanager.cpp:402
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladb"
 
-#: ui/albumcovermanager.cpp:459
+#: ui/albumcovermanager.cpp:466
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 prenesenih"
 
-#: widgets/osd.cpp:243 widgets/osd.cpp:248 widgets/osd.cpp:253
-#: widgets/osd.cpp:258 widgets/osd.cpp:263 widgets/osd.cpp:268
+#: widgets/osd.cpp:237 widgets/osd.cpp:243 widgets/osd.cpp:249
+#: widgets/osd.cpp:255 widgets/osd.cpp:261 widgets/osd.cpp:268
 #, qt-format
 msgid "%1: Wiimotedev module"
 msgstr "%1: modul Wimotedev"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:94
+#: songinfo/lastfmtrackinfoprovider.cpp:95
 #, qt-format
 msgid "%L1 other listeners"
 msgstr "%L1 drugih poslušalcev"
@@ -145,18 +145,21 @@ msgstr "skupno %L1 predvajanj"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:207
+#: transcoder/transcodedialog.cpp:205
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "%n failed"
 msgstr "%n spodletelih"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:200
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "%n finished"
 msgstr "%n končanih"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:194
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "%n remaining"
 msgstr "%n preostaja"
 
@@ -180,12 +183,12 @@ msgstr "Dodatki"
 msgid "&Help"
 msgstr "&Pomoč"
 
-#: playlist/playlistheader.cpp:70
+#: playlist/playlistheader.cpp:73
 #, qt-format
 msgid "&Hide %1"
 msgstr "&Skrij %1"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:32
 msgid "&Hide..."
 msgstr "&Skrij ..."
 
@@ -221,7 +224,7 @@ msgstr "&Desno"
 msgid "&Shuffle mode"
 msgstr "Pre&mešani način"
 
-#: playlist/playlistheader.cpp:34
+#: playlist/playlistheader.cpp:33
 msgid "&Stretch columns to fit window"
 msgstr "Raztegni &stolpce, da se prilegajo oknu"
 
@@ -229,11 +232,11 @@ msgstr "Raztegni &stolpce, da se prilegajo oknu"
 msgid "&Tools"
 msgstr "&Orodja"
 
-#: ui/edittagdialog.cpp:48
+#: ui/edittagdialog.cpp:49
 msgid "(different across multiple songs)"
 msgstr "(različno preko več skladb)"
 
-#: ui/about.cpp:77
+#: ui/about.cpp:81
 msgid "...and all the Amarok contributors"
 msgstr "... in vsem razvijalcem Amaroka"
 
@@ -253,13 +256,9 @@ msgstr "0 px"
 msgid "1 day"
 msgstr "1 dan"
 
-#: playlist/playlistmanager.cpp:419
+#: playlist/playlistmanager.cpp:402
 msgid "1 track"
 msgstr "1 skladba"
-
-#: ../bin/src/ui_networkremotesettingspage.h:201
-msgid "127.0.0.1"
-msgstr "127.0.0.1"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
@@ -270,7 +269,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40 %"
 
-#: library/library.cpp:60
+#: library/library.cpp:62
 msgid "50 random tracks"
 msgstr "50 naključnih skladb"
 
@@ -294,6 +293,17 @@ msgid ""
 "music players might not be able to read them.</p></body></html>"
 msgstr "<html><head/><body><p>Če ni označeno, bo Clementine poskusil shraniti vaše ocene in druge statistike v ločeno podatkovno zbirko in ne bo spreminjal vaših datotek.</p><p>Če je označeno, bo shranil statistike tako v podatkovno zbirko kot tudi neposredno v datoteko, vsakič, ko se spremenijo.</p><p>Zapomnite si, da to morda ne bo delovalo za vsako vrsto datotek in ker ni standardov, jih morda drugi predvajalniki ne bodo mogli prebrati.</p></body></html>"
 
+#: ../bin/src/ui_libraryfilterwidget.h:97
+msgid ""
+"<html><head/><body><p>Prefix a word with a field name to limit the search to"
+" that field, e.g. <span style=\" font-weight:600;\">artist:</span><span "
+"style=\" font-style:italic;\">Bode</span> searches the library for all "
+"artists that contain the word Bode.</p><p><span style=\" font-"
+"weight:600;\">Available fields: </span><span style=\" font-"
+"style:italic;\">title, album, artist, albumartist, composer, performer, "
+"grouping, genre, comment</span>.</p></body></html>"
+msgstr ""
+
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
@@ -313,27 +323,27 @@ msgstr "<p>Žetoni se pričnejo z %, na primer: %artist %album %title </p>\n\n<p
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Zahtevan je račun Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:162
+#: internet/spotifysettingspage.cpp:163
 msgid "A Spotify Premium account is required."
 msgstr "Zahtevan je račun Spotify Premium."
 
-#: ../bin/src/ui_networkremotesettingspage.h:189
+#: ../bin/src/ui_networkremotesettingspage.h:190
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Odjemalec se lahko poveže le, če je vnesel pravo kodo."
 
-#: smartplaylists/wizard.cpp:78
+#: smartplaylists/wizard.cpp:74
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr "Pametni seznam predvajanja je dinamični seznam skladb, ki se nahajajo v vaši knjižnici. Obstajajo različne vrste pametnih seznamov predvajanja, ki ponujajo različne načine izbire skladb."
 
-#: smartplaylists/querywizardplugin.cpp:153
+#: smartplaylists/querywizardplugin.cpp:157
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Skladba bo vključena v seznam predvajanja, če se ujema s temi pogoji."
 
-#: smartplaylists/searchterm.cpp:297
+#: smartplaylists/searchterm.cpp:365
 msgid "A-Z"
 msgstr "A-Ž"
 
@@ -353,19 +363,19 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:348
+#: core/song.cpp:395
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:127
+#: widgets/nowplayingwidget.cpp:131
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
+#: ui/albumcovermanager.cpp:111 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Prekini"
 
-#: ui/about.cpp:32
+#: ui/about.cpp:30
 #, qt-format
 msgid "About %1"
 msgstr "O %1"
@@ -394,11 +404,11 @@ msgstr "Podrobnosti računa (Premium)"
 msgid "Action"
 msgstr "Dejanje"
 
-#: wiimotedev/wiimotesettingspage.cpp:98
+#: wiimotedev/wiimotesettingspage.cpp:96
 msgid "Active/deactive Wiiremote"
 msgstr "Omogoči/Onemogoči Wiiremote"
 
-#: podcasts/addpodcastdialog.cpp:56
+#: podcasts/addpodcastdialog.cpp:59
 msgid "Add Podcast"
 msgstr "Dodaj podcast"
 
@@ -414,15 +424,15 @@ msgstr "Dodaj novo vrstico, če jo podpira vrsta obvestila"
 msgid "Add action"
 msgstr "Dodaj dejanje"
 
-#: internet/savedradio.cpp:103
+#: internet/savedradio.cpp:105
 msgid "Add another stream..."
 msgstr "Dodaj še en pretok ..."
 
-#: library/librarysettingspage.cpp:68
+#: library/librarysettingspage.cpp:67
 msgid "Add directory..."
 msgstr "Dodaj mapo ..."
 
-#: ui/mainwindow.cpp:1623
+#: ui/mainwindow.cpp:1814
 msgid "Add file"
 msgstr "Dodaj datoteko"
 
@@ -438,11 +448,11 @@ msgstr "Dodaj datoteko(-e) v prekodirnik"
 msgid "Add file..."
 msgstr "Dodaj datoteko ..."
 
-#: transcoder/transcodedialog.cpp:219
+#: transcoder/transcodedialog.cpp:215
 msgid "Add files to transcode"
 msgstr "Dodajte datoteke za prekodiranje"
 
-#: transcoder/transcodedialog.cpp:281 ui/mainwindow.cpp:1651 ui/ripcd.cpp:386
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1841 ui/ripcd.cpp:389
 msgid "Add folder"
 msgstr "Dodaj mapo"
 
@@ -458,11 +468,11 @@ msgstr "Dodaj novo mapo ..."
 msgid "Add podcast"
 msgstr "Dodaj podcast"
 
-#: podcasts/podcastservice.cpp:316 ../bin/src/ui_mainwindow.h:723
+#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:723
 msgid "Add podcast..."
 msgstr "Dodaj podcast ..."
 
-#: smartplaylists/searchtermwidget.cpp:341
+#: smartplaylists/searchtermwidget.cpp:352
 msgid "Add search term"
 msgstr "Dodaj iskalni pojem"
 
@@ -538,15 +548,15 @@ msgstr "Dodaj oznako: leto"
 msgid "Add stream..."
 msgstr "Dodaj pretok ..."
 
-#: internet/groovesharkservice.cpp:1087
+#: internet/groovesharkservice.cpp:1109
 msgid "Add to Grooveshark favorites"
 msgstr "Dodaj med priljubljene v Grooveshark"
 
-#: internet/groovesharkservice.cpp:1099
+#: internet/groovesharkservice.cpp:1124
 msgid "Add to Grooveshark playlists"
 msgstr "Dodaj v sezname predvajanja Grooveshark"
 
-#: ui/mainwindow.cpp:1448
+#: ui/mainwindow.cpp:1635
 msgid "Add to another playlist"
 msgstr "Dodaj na drug seznam predvajanja"
 
@@ -587,15 +597,15 @@ msgstr "Dodano danes"
 msgid "Added within three months"
 msgstr "Dodano v zadnjih treh mesecih"
 
-#: internet/groovesharkservice.cpp:1394
+#: internet/groovesharkservice.cpp:1419
 msgid "Adding song to My Music"
 msgstr "Dodajanje skladbe v Mojo glasbo"
 
-#: internet/groovesharkservice.cpp:1371
+#: internet/groovesharkservice.cpp:1396
 msgid "Adding song to favorites"
 msgstr "Dodajanje skladbe med priljubljene"
 
-#: library/libraryfilterwidget.cpp:116
+#: library/libraryfilterwidget.cpp:133
 msgid "Advanced grouping..."
 msgstr "Napredno združevanje ..."
 
@@ -607,8 +617,8 @@ msgstr "Po "
 msgid "After copying..."
 msgstr "Po kopiranju ..."
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:56
-#: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
+#: playlist/playlist.cpp:1302 ui/organisedialog.cpp:59
+#: ui/qtsystemtrayicon.cpp:251 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
@@ -620,7 +630,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (najboljša glasnost za vse skladbe)"
 
-#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:62
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -630,31 +640,32 @@ msgstr "Izvajalec albuma"
 msgid "Album cover"
 msgstr "Ovitek albuma"
 
-#: internet/jamendoservice.cpp:415
+#: internet/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
 msgstr "Podrobnosti albuma na jamendo.com ..."
 
-#: ui/albumcovermanager.cpp:134
+#: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
 msgstr "Albumi z ovitkom"
 
-#: ui/albumcovermanager.cpp:135
+#: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Albumi brez ovitka"
 
-#: ui/mainwindow.cpp:160
+#: ui/mainwindow.cpp:157
 msgid "All Files (*)"
 msgstr "Vse datoteke (*)"
 
 #: ../bin/src/ui_mainwindow.h:693
+msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
-msgstr "All Glory to the Hypnotoad!"
+msgstr ""
 
-#: ui/albumcovermanager.cpp:133
+#: ui/albumcovermanager.cpp:134
 msgid "All albums"
 msgstr "Vsi albumi"
 
-#: ui/albumcovermanager.cpp:265
+#: ui/albumcovermanager.cpp:268
 msgid "All artists"
 msgstr "Vsi izvajalci"
 
@@ -662,24 +673,24 @@ msgstr "Vsi izvajalci"
 msgid "All files (*)"
 msgstr "Vse datoteke (*)"
 
-#: playlistparsers/playlistparser.cpp:63
+#: playlistparsers/playlistparser.cpp:61
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Vsi seznami predvajanja (%1)"
 
-#: ui/about.cpp:74
+#: ui/about.cpp:77
 msgid "All the translators"
 msgstr "Vsem prevajalcem"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "All tracks"
 msgstr "Vse skladbe"
 
-#: ../bin/src/ui_networkremotesettingspage.h:194
+#: ../bin/src/ui_networkremotesettingspage.h:195
 msgid "Allow a client to download music from this computer."
 msgstr "Dovoli odjemalcu, da prejme glasbo iz tega računalnika."
 
-#: ../bin/src/ui_networkremotesettingspage.h:196
+#: ../bin/src/ui_networkremotesettingspage.h:197
 msgid "Allow downloads"
 msgstr "Dovoli prejeme"
 
@@ -704,30 +715,30 @@ msgstr "Vedno pokaži glavno okno"
 msgid "Always start playing"
 msgstr "Vedno začni s predvajanjem"
 
-#: internet/spotifyblobdownloader.cpp:60
+#: internet/spotifyblobdownloader.cpp:65
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
 msgstr "Da lahko uporabite Spotify v Clementine, potrebujete dodaten vstavek. Ali ga želite prejeti in namestiti zdaj?"
 
-#: devices/gpodloader.cpp:61
+#: devices/gpodloader.cpp:60
 msgid "An error occurred loading the iTunes database"
 msgstr "Med nalaganjem podatkovne zbirke iTunes je prišlo do napake"
 
-#: ui/edittagdialog.cpp:663
+#: ui/edittagdialog.cpp:677
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Med zapisovanjem metapodatkov v '%1' je prišlo do napake"
 
-#: internet/subsonicsettingspage.cpp:103
+#: internet/subsonicsettingspage.cpp:102
 msgid "An unspecified error occurred."
 msgstr "Prišlo je do nedoločene napake."
 
-#: ui/about.cpp:78
+#: ui/about.cpp:82
 msgid "And:"
 msgstr "In:"
 
-#: moodbar/moodbarrenderer.cpp:156
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Angry"
 msgstr "Jezen"
 
@@ -736,13 +747,13 @@ msgstr "Jezen"
 msgid "Appearance"
 msgstr "Videz"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:161
 msgid "Append files/URLs to the playlist"
 msgstr "Pripni datoteke/naslove URL seznamu predvajanja"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
-#: internet/internetservice.cpp:56 library/libraryview.cpp:367
-#: widgets/fileviewlist.cpp:32
+#: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:446
+#: internet/internetservice.cpp:53 library/libraryview.cpp:370
+#: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Pripni trenutnemu seznamu predvajanja"
 
@@ -754,27 +765,27 @@ msgstr "Pripni k seznamu predvajanja"
 msgid "Apply compression to prevent clipping"
 msgstr "Uporabi stiskanje za preprečitev odrezanja"
 
-#: ui/equalizer.cpp:201
+#: ui/equalizer.cpp:216
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ali resnično želite izbrisati predlogo nastavitev \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1292
+#: internet/groovesharkservice.cpp:1318
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ali ste prepričani, da želite izbrisati ta seznam predvajanja?"
 
-#: ui/edittagdialog.cpp:769
+#: ui/edittagdialog.cpp:783
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Ali ste prepričani, da želite ponastaviti statistike te skladbe?"
 
-#: library/librarysettingspage.cpp:152
+#: library/librarysettingspage.cpp:155
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
 msgstr "Ali ste prepričani, da želite zapisati statistike skladbe v datoteko skladbe za vse skladbe v vaši knjižnici?"
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:57
-#: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
+#: playlist/playlist.cpp:1300 ui/organisedialog.cpp:60
+#: ui/qtsystemtrayicon.cpp:249 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
@@ -783,7 +794,7 @@ msgstr "Ali ste prepričani, da želite zapisati statistike skladbe v datoteko s
 msgid "Artist"
 msgstr "Izvajalec"
 
-#: ui/mainwindow.cpp:248
+#: ui/mainwindow.cpp:241
 msgid "Artist info"
 msgstr "O izvajalcu"
 
@@ -791,11 +802,11 @@ msgstr "O izvajalcu"
 msgid "Artist radio"
 msgstr "Radio izvajalca"
 
-#: songinfo/echonesttags.cpp:59
+#: songinfo/echonesttags.cpp:61
 msgid "Artist tags"
 msgstr "Oznake izvajalcev"
 
-#: ui/organisedialog.cpp:58
+#: ui/organisedialog.cpp:61
 msgid "Artist's initial"
 msgstr "Začetnice izvajalca"
 
@@ -803,9 +814,9 @@ msgstr "Začetnice izvajalca"
 msgid "Audio format"
 msgstr "Vrsta zvoka"
 
-#: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
-#: internet/lastfmsettingspage.cpp:84 internet/ubuntuonesettingspage.cpp:75
+#: internet/digitallyimportedsettingspage.cpp:80
+#: internet/magnatunesettingspage.cpp:112 internet/lastfmservice.cpp:441
+#: internet/lastfmsettingspage.cpp:82 internet/ubuntuonesettingspage.cpp:74
 msgid "Authentication failed"
 msgstr "Overitev ni uspela"
 
@@ -813,7 +824,7 @@ msgstr "Overitev ni uspela"
 msgid "Author"
 msgstr "Avtor"
 
-#: ui/about.cpp:65
+#: ui/about.cpp:67
 msgid "Authors"
 msgstr "Avtorji"
 
@@ -829,7 +840,7 @@ msgstr "Samodejno posodabljanje"
 msgid "Automatically open single categories in the library tree"
 msgstr "Samodejno razširi enojne kategorije v drevesnem pogledu knjižnice"
 
-#: widgets/freespacebar.cpp:45
+#: widgets/freespacebar.cpp:44
 msgid "Available"
 msgstr "Na voljo"
 
@@ -837,15 +848,15 @@ msgstr "Na voljo"
 msgid "Average bitrate"
 msgstr "Povprečna bitna hitrost"
 
-#: covers/coversearchstatisticsdialog.cpp:70
+#: covers/coversearchstatisticsdialog.cpp:67
 msgid "Average image size"
 msgstr "Povprečna velikost slike"
 
-#: podcasts/addpodcastdialog.cpp:80
+#: podcasts/addpodcastdialog.cpp:84
 msgid "BBC Podcasts"
 msgstr "BBC-jevi podcasti"
 
-#: playlist/playlist.cpp:1228 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1334 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "udarcev/min"
@@ -866,7 +877,7 @@ msgstr "Slika ozadja"
 msgid "Background opacity"
 msgstr "Prekrivnost ozadja"
 
-#: core/database.cpp:644
+#: core/database.cpp:640
 msgid "Backing up database"
 msgstr "Varnostno kopiranje podatkovne zbirke"
 
@@ -878,7 +889,7 @@ msgstr "Ravnovesje"
 msgid "Ban"
 msgstr "Izobči"
 
-#: analyzers/baranalyzer.cpp:19
+#: analyzers/baranalyzer.cpp:20
 msgid "Bar analyzer"
 msgstr "Stolpčni preučevalnik"
 
@@ -898,18 +909,17 @@ msgstr "Obnašanje"
 msgid "Best"
 msgstr "Najboljše"
 
-#: songinfo/echonestbiographies.cpp:83
+#: songinfo/echonestbiographies.cpp:84
 #, qt-format
 msgid "Biography from %1"
 msgstr "Biografija iz %1"
 
-#: playlist/playlist.cpp:1229 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "Bitna hitrost"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:137
-#: ../bin/src/ui_groupbydialog.h:151 ../bin/src/ui_groupbydialog.h:165
-#: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -917,7 +927,12 @@ msgstr "Bitna hitrost"
 msgid "Bitrate"
 msgstr "Bitna hitrost"
 
-#: analyzers/blockanalyzer.cpp:22
+#: ui/organisedialog.cpp:73
+msgctxt "Refers to bitrate in file organise dialog."
+msgid "Bitrate"
+msgstr "Bitna hitrost"
+
+#: analyzers/blockanalyzer.cpp:23
 msgid "Block analyzer"
 msgstr "Blokovni preučevalnik"
 
@@ -933,7 +948,7 @@ msgstr "Raven zabrisanja"
 msgid "Body"
 msgstr "Telo"
 
-#: analyzers/boomanalyzer.cpp:8
+#: analyzers/boomanalyzer.cpp:9
 msgid "Boom analyzer"
 msgstr "Preučevalnik Boom"
 
@@ -951,7 +966,7 @@ msgstr "Prebrskaj ..."
 msgid "Buffer duration"
 msgstr "Trajanje medpomnilnika"
 
-#: engines/gstengine.cpp:784
+#: engines/gstengine.cpp:778
 msgid "Buffering"
 msgstr "Medpomnjenje"
 
@@ -963,15 +978,15 @@ msgstr "Ti viri so onemogočeni:"
 msgid "Buttons"
 msgstr "Gumbi"
 
-#: core/song.cpp:351
+#: core/song.cpp:401
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:100
+#: library/library.cpp:118
 msgid "CUE sheet support"
 msgstr "Podpora predlogam CUE"
 
-#: internet/spotifyblobdownloader.cpp:44
+#: internet/spotifyblobdownloader.cpp:50
 msgid "Cancel"
 msgstr "Prekliči"
 
@@ -979,11 +994,11 @@ msgstr "Prekliči"
 msgid "Change cover art"
 msgstr "Spremeni ovitek albuma"
 
-#: songinfo/songinfotextview.cpp:83
+#: songinfo/songinfotextview.cpp:73
 msgid "Change font size..."
 msgstr "Spremeni velikost pisave ..."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:69
 msgid "Change repeat mode"
 msgstr "Spremeni način ponavljanja"
 
@@ -991,11 +1006,11 @@ msgstr "Spremeni način ponavljanja"
 msgid "Change shortcut..."
 msgstr "Spremeni bližnjico ..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:67
 msgid "Change shuffle mode"
 msgstr "Spremeni način naključnega predvajanja"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:166
 msgid "Change the language"
 msgstr "Sprememba jezika"
 
@@ -1009,11 +1024,11 @@ msgstr "Sprememba nastavitve predvajanja mono, bo dejavna za naslednje skladbe, 
 msgid "Check for new episodes"
 msgstr "Preveri za novimi epizodami"
 
-#: ui/mainwindow.cpp:602
+#: ui/mainwindow.cpp:696
 msgid "Check for updates..."
 msgstr "Preveri za posodobitvami ..."
 
-#: smartplaylists/wizard.cpp:86
+#: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
 msgstr "Izberite ime za vaš pametni seznam predvajanja"
 
@@ -1033,11 +1048,11 @@ msgstr "Izberi pisavo ..."
 msgid "Choose from the list"
 msgstr "Izberi s seznama"
 
-#: smartplaylists/querywizardplugin.cpp:155
+#: smartplaylists/querywizardplugin.cpp:161
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Izberite kako bo seznam predvajanja razvrščen in koliko skladb bo vseboval."
 
-#: podcasts/podcastsettingspage.cpp:132
+#: podcasts/podcastsettingspage.cpp:133
 msgid "Choose podcast download directory"
 msgstr "Izberi mapo za prejeme podcastov"
 
@@ -1046,7 +1061,7 @@ msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr "Izberite spletne strani za katere želite, da jih Clementine uporabi pri iskanju besedil"
 
-#: ui/equalizer.cpp:115
+#: ui/equalizer.cpp:112
 msgid "Classical"
 msgstr "Klasična"
 
@@ -1054,7 +1069,7 @@ msgstr "Klasična"
 msgid "Cleaning up"
 msgstr "Čiščenje"
 
-#: transcoder/transcodedialog.cpp:62 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Počisti"
@@ -1063,8 +1078,8 @@ msgstr "Počisti"
 msgid "Clear playlist"
 msgstr "Počisti seznam predvajanja"
 
-#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:651
-#: visualisations/visualisationcontainer.cpp:211
+#: smartplaylists/searchtermwidget.cpp:341 ../bin/src/ui_mainwindow.h:651
+#: visualisations/visualisationcontainer.cpp:215
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
 msgstr "Clementine"
@@ -1077,8 +1092,8 @@ msgstr "Napaka v Clementine"
 msgid "Clementine Orange"
 msgstr "Clementine oranžna"
 
-#: visualisations/visualisationcontainer.cpp:77
-#: visualisations/visualisationcontainer.cpp:151
+#: visualisations/visualisationcontainer.cpp:76
+#: visualisations/visualisationcontainer.cpp:158
 msgid "Clementine Visualization"
 msgstr "Clementine predočenja"
 
@@ -1115,20 +1130,20 @@ msgid ""
 "an account</a>."
 msgstr "Clementine lahko uskladi vaš seznam naročil z drugimi računalniki in programi za podcast. <a href=\"https://gpodder.net/register/\">Ustvari račun</a>."
 
-#: visualisations/projectmvisualisation.cpp:133
+#: visualisations/projectmvisualisation.cpp:132
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr "Clementine ni mogel naložiti predočenj projectM. Preverite, če je Clementine pravilno nameščen."
 
-#: internet/lastfmsettingspage.cpp:110
+#: internet/lastfmsettingspage.cpp:108
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
 msgstr "Clementine ni mogel pridobiti vašega stanja naročnine, ker so težave z vašo povezavo. Predvajane skladbe bodo predpomnjene in na Last.fm poslane kasneje."
 
-#: widgets/prettyimage.cpp:201
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Pregledovalnik slik Clementine"
 
@@ -1140,11 +1155,11 @@ msgstr "Clementine ni mogel najti rezultatov za to datoteko"
 msgid "Clementine will find music in:"
 msgstr "Clementine bo našel glasbo v:"
 
-#: library/libraryview.cpp:349
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "Kliknite sem za dodajanje glasbe"
 
-#: playlist/playlisttabbar.cpp:293
+#: playlist/playlisttabbar.cpp:286
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1169,19 +1184,19 @@ msgstr "Zapri"
 msgid "Close playlist"
 msgstr "Zapri seznam predvajanja"
 
-#: visualisations/visualisationcontainer.cpp:127
+#: visualisations/visualisationcontainer.cpp:135
 msgid "Close visualization"
 msgstr "Zapri predočenje"
 
-#: internet/magnatunedownloaddialog.cpp:280
+#: internet/magnatunedownloaddialog.cpp:304
 msgid "Closing this window will cancel the download."
 msgstr "Zaprtje tega okna bo prekinilo prejem."
 
-#: ui/albumcovermanager.cpp:216
+#: ui/albumcovermanager.cpp:219
 msgid "Closing this window will stop searching for album covers."
 msgstr "Zaprtje tega okna bo prekinilo iskanje ovitkov albumov."
 
-#: ui/equalizer.cpp:116
+#: ui/equalizer.cpp:114
 msgid "Club"
 msgstr "Klubska"
 
@@ -1189,12 +1204,12 @@ msgstr "Klubska"
 msgid "Colors"
 msgstr "Barve"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:169
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Z vejicami ločen seznam razred:raven, raven je 0-3"
 
-#: playlist/playlist.cpp:1238 smartplaylists/searchterm.cpp:288
-#: ui/organisedialog.cpp:68 ../bin/src/ui_edittagdialog.h:694
+#: playlist/playlist.cpp:1353 smartplaylists/searchterm.cpp:353
+#: ui/organisedialog.cpp:71 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "Opomba"
 
@@ -1206,26 +1221,26 @@ msgstr "Samodejno dopolni oznake"
 msgid "Complete tags automatically..."
 msgstr "Samodejno dopolni oznake ..."
 
-#: playlist/playlist.cpp:1218 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
 msgstr "Skladatelj"
 
-#: internet/searchboxwidget.cpp:42
+#: internet/searchboxwidget.cpp:41
 #, qt-format
 msgid "Configure %1..."
 msgstr "Nastavi %1 ..."
 
-#: internet/groovesharkservice.cpp:552
+#: internet/groovesharkservice.cpp:554
 msgid "Configure Grooveshark..."
 msgstr "Nastavi Grooveshark ..."
 
-#: internet/lastfmservice.cpp:126
+#: internet/lastfmservice.cpp:129
 msgid "Configure Last.fm..."
 msgstr "Nastavi Last.fm ..."
 
-#: internet/magnatuneservice.cpp:280
+#: internet/magnatuneservice.cpp:282
 msgid "Configure Magnatune..."
 msgstr "Nastavi Magnatune ..."
 
@@ -1233,29 +1248,29 @@ msgstr "Nastavi Magnatune ..."
 msgid "Configure Shortcuts"
 msgstr "Nastavi bližnjice"
 
-#: internet/spotifyservice.cpp:526 internet/spotifyservice.cpp:538
+#: internet/spotifyservice.cpp:545 internet/spotifyservice.cpp:556
 msgid "Configure Spotify..."
 msgstr "Nastavi Spotify ..."
 
-#: internet/subsonicservice.cpp:96
+#: internet/subsonicservice.cpp:90
 msgid "Configure Subsonic..."
 msgstr "Nastavite Subsonic ..."
 
-#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
+#: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:466
 msgid "Configure global search..."
 msgstr "Nastavi splošno iskanje"
 
-#: ui/mainwindow.cpp:483
+#: ui/mainwindow.cpp:546
 msgid "Configure library..."
 msgstr "Nastavi knjižnico ..."
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:350
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
 msgid "Configure podcasts..."
 msgstr "Nastavi podcaste ..."
 
-#: internet/digitallyimportedservicebase.cpp:186
+#: internet/digitallyimportedservicebase.cpp:178
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:193
+#: internet/googledriveservice.cpp:184
 msgid "Configure..."
 msgstr "Nastavi ..."
 
@@ -1263,11 +1278,11 @@ msgstr "Nastavi ..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Povežite Wii Remotes z uporabo dejanja omogoči/onemogoči"
 
-#: devices/devicemanager.cpp:323 devices/devicemanager.cpp:327
+#: devices/devicemanager.cpp:317 devices/devicemanager.cpp:322
 msgid "Connect device"
 msgstr "Povežite napravo"
 
-#: internet/spotifyservice.cpp:253
+#: internet/spotifyservice.cpp:266
 msgid "Connecting to Spotify"
 msgstr "Povezovanje na Spotify"
 
@@ -1277,7 +1292,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Strežnik je zavrnil povezavo, preverite njegov naslov URL. Primer: http://localhost:4040/"
 
-#: internet/subsonicsettingspage.cpp:117
+#: internet/subsonicsettingspage.cpp:119
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Povezava je časovno pretekla, preverite naslov URL strežnika. Primer: http://localhost:4040/"
@@ -1298,17 +1313,17 @@ msgstr "Pretvori vso glasbo"
 msgid "Convert any music that the device can't play"
 msgstr "Pretvori vso glasbo, ki je naprava ne more predvajati"
 
-#: internet/groovesharkservice.cpp:1172
+#: internet/groovesharkservice.cpp:1198
 msgid "Copy to clipboard"
 msgstr "Kopiraj v odložišče"
 
-#: library/libraryview.cpp:389 podcasts/podcastservice.cpp:336
-#: ui/mainwindow.cpp:517 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: ui/mainwindow.cpp:595 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiraj na napravo ..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:514
-#: widgets/fileviewlist.cpp:39
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:585
+#: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Kopiraj v knjižnico ..."
 
@@ -1316,76 +1331,76 @@ msgstr "Kopiraj v knjižnico ..."
 msgid "Copyright"
 msgstr "Avtorske pravice"
 
-#: internet/subsonicsettingspage.cpp:81
+#: internet/subsonicsettingspage.cpp:75
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "Ni se bilo mogoče povezati s Subsonic. Preverite naslov URL strežnika. Primer: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:64
+#: transcoder/transcoder.cpp:57
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr "Ni bilo mogoče ustvariti GStreamer-jevega elementa \"%1\" - prepričajte se, da imate nameščene vse zahtevane vstavke GStreamer"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Zvijalnika za %1 ni bilo mogoče najti. Preverite, če so nameščeni pravilni vstavki GStreamer"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:423
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr "Kodirnika za %1 ni bilo mogoče najti. Preverite, če so nameščeni pravilni vstavki GStreamer"
 
-#: internet/lastfmservice.cpp:875
+#: internet/lastfmservice.cpp:900
 msgid "Couldn't load the last.fm radio station"
 msgstr "Radijske postaje last.fm ni bilo mogoče naložiti"
 
-#: internet/magnatunedownloaddialog.cpp:203
+#: internet/magnatunedownloaddialog.cpp:218
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Izhodne datoteke %1 ni bilo mogoče odpreti"
 
-#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
+#: internet/cloudfileservice.cpp:79 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:691
-#: internet/googledriveservice.cpp:189
+#: internet/googledriveservice.cpp:182
 msgid "Cover Manager"
 msgstr "Upravljalnik ovitkov"
 
-#: ui/edittagdialog.cpp:443
+#: ui/edittagdialog.cpp:458
 msgid "Cover art from embedded image"
 msgstr "Ovitek albuma iz vstavljene slike"
 
-#: ui/edittagdialog.cpp:445
+#: ui/edittagdialog.cpp:461
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Ovitek albuma je bil samodejno naložen iz %1"
 
-#: ui/edittagdialog.cpp:438
+#: ui/edittagdialog.cpp:453
 msgid "Cover art manually unset"
 msgstr "Ovitek albuma je bil ročno odstranjen iz uporabe"
 
-#: ui/edittagdialog.cpp:447
+#: ui/edittagdialog.cpp:463
 msgid "Cover art not set"
 msgstr "Ovitek albuma ni nastavljen"
 
-#: ui/edittagdialog.cpp:441
+#: ui/edittagdialog.cpp:456
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Ovitek albuma je nastavljen iz %1"
 
-#: covers/coversearchstatisticsdialog.cpp:60 ui/albumcoversearcher.cpp:106
+#: covers/coversearchstatisticsdialog.cpp:57 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
 msgstr "Ovitki iz %1"
 
-#: internet/groovesharkservice.cpp:520 internet/groovesharkservice.cpp:1244
+#: internet/groovesharkservice.cpp:522 internet/groovesharkservice.cpp:1270
 msgid "Create a new Grooveshark playlist"
 msgstr "Ustvari nov seznam prevajanja Grooveshark"
 
@@ -1473,7 +1488,7 @@ msgstr "Ctrl+T"
 msgid "Ctrl+Up"
 msgstr "Ctrl+Gor"
 
-#: ui/equalizer.cpp:114 ../bin/src/ui_lastfmstationdialog.h:98
+#: ui/equalizer.cpp:110 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
 msgstr "Po meri"
 
@@ -1485,7 +1500,7 @@ msgstr "Slika po meri:"
 msgid "Custom message settings"
 msgstr "Nastavitve sporočil po meri"
 
-#: internet/lastfmservice.cpp:216
+#: internet/lastfmservice.cpp:218
 msgid "Custom radio"
 msgstr "Radio po meri"
 
@@ -1497,26 +1512,26 @@ msgstr "Po meri ..."
 msgid "DBus path"
 msgstr "Pot DBus"
 
-#: ui/equalizer.cpp:117
+#: ui/equalizer.cpp:116
 msgid "Dance"
 msgstr "Plesna"
 
-#: core/database.cpp:598
+#: core/database.cpp:593
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
 msgstr "Zaznana je bila okvara podatkovne zbirke. Za navodila obnovitve podatkovne zbirke si oglejte: https://code.google.com/p/clementine-player/wiki/DatabaseCorruption"
 
-#: playlist/playlist.cpp:1236 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "Datum ustvarjenja"
 
-#: playlist/playlist.cpp:1235 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "Datum spremembe"
 
-#: smartplaylists/searchterm.cpp:311
+#: smartplaylists/searchterm.cpp:388
 msgid "Days"
 msgstr "Dnevi"
 
@@ -1524,15 +1539,15 @@ msgstr "Dnevi"
 msgid "De&fault"
 msgstr "&Privzeto"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:151
 msgid "Decrease the volume by 4%"
 msgstr "Zmanjšaj glasnost za 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:153
 msgid "Decrease the volume by <value> percent"
 msgstr "Zmanjšaj glasnost za <value> odstotkov"
 
-#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "Zmanjšaj glasnost"
 
@@ -1548,30 +1563,30 @@ msgstr "Privzete vrednosti"
 msgid "Delay between visualizations"
 msgstr "Zakasnitev med predočenji"
 
-#: playlist/playlistlistcontainer.cpp:73
+#: playlist/playlistlistcontainer.cpp:70
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "Izbriši"
 
-#: internet/groovesharkservice.cpp:523 internet/groovesharkservice.cpp:1291
+#: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:1317
 msgid "Delete Grooveshark playlist"
 msgstr "Izbriši seznam predvajanja Grooveshark"
 
-#: podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:345
 msgid "Delete downloaded data"
 msgstr "Izbriši prejete podatke"
 
-#: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1960 widgets/fileview.cpp:187
+#: devices/deviceview.cpp:404 library/libraryview.cpp:634
+#: ui/mainwindow.cpp:2177 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Izbriši datoteke"
 
-#: devices/deviceview.cpp:220
+#: devices/deviceview.cpp:228
 msgid "Delete from device..."
 msgstr "Izbriši iz naprave ..."
 
-#: library/libraryview.cpp:391 ui/mainwindow.cpp:518
-#: widgets/fileviewlist.cpp:45
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:597
+#: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Izbriši iz diska ..."
 
@@ -1579,11 +1594,11 @@ msgstr "Izbriši iz diska ..."
 msgid "Delete played episodes"
 msgstr "Izbriši predvajane epizode"
 
-#: ui/equalizer.cpp:200 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Izbriši predlogo nastavitev"
 
-#: library/libraryview.cpp:383
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "Izbriši pameten seznam predvajanja"
 
@@ -1591,15 +1606,15 @@ msgstr "Izbriši pameten seznam predvajanja"
 msgid "Delete the original files"
 msgstr "Izbriši izvorne datoteke"
 
-#: core/deletefiles.cpp:50
+#: core/deletefiles.cpp:48
 msgid "Deleting files"
 msgstr "Brisanje datotek"
 
-#: ui/mainwindow.cpp:1382
+#: ui/mainwindow.cpp:1556
 msgid "Dequeue selected tracks"
 msgstr "Odstrani izbrane skladbe iz vrste"
 
-#: ui/mainwindow.cpp:1380
+#: ui/mainwindow.cpp:1554
 msgid "Dequeue track"
 msgstr "Odstrani skladbo iz vrste"
 
@@ -1612,7 +1627,7 @@ msgstr "Cilj"
 msgid "Details..."
 msgstr "Podrobnosti ..."
 
-#: devices/devicekitlister.cpp:126 devices/giolister.cpp:160
+#: devices/devicekitlister.cpp:126 devices/giolister.cpp:156
 msgid "Device"
 msgstr "Naprava"
 
@@ -1624,17 +1639,17 @@ msgstr "Lastnosti naprave"
 msgid "Device name"
 msgstr "Ime naprave"
 
-#: devices/deviceview.cpp:207
+#: devices/deviceview.cpp:210
 msgid "Device properties..."
 msgstr "Lastnosti naprave ..."
 
-#: ui/mainwindow.cpp:245
+#: ui/mainwindow.cpp:236
 msgid "Devices"
 msgstr "Naprave"
 
 #: ../bin/src/ui_ripcd.h:300
 msgid "Dialog"
-msgstr ""
+msgstr "Pogovorno okno"
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1669,12 +1684,17 @@ msgstr "Trajanje onemogočenja"
 msgid "Disable moodbar generation"
 msgstr "Onemogoči ustvarjanje moodbara"
 
-#: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:433
+msgctxt "Refers to a disabled notification type in Notification settings."
+msgid "Disabled"
+msgstr ""
+
+#: globalsearch/searchproviderstatuswidget.cpp:46
+msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Onemogočeno"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Disk"
@@ -1684,11 +1704,11 @@ msgid "Discontinuous transmission"
 msgstr "Nezvezni prenos (DTX)"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
+#: library/libraryfilterwidget.cpp:95 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Možnosti prikaza"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:164
 msgid "Display the on-screen-display"
 msgstr "Pokaži prikaz na zaslonu"
 
@@ -1704,27 +1724,27 @@ msgstr "Ne pretvarjaj glasbe"
 msgid "Do not overwrite"
 msgstr "Ne prepiši"
 
-#: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:103
+#: widgets/osd.cpp:302 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "Ne ponavljaj"
 
-#: library/libraryview.cpp:405
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "Ne prikaži med \"Različni izvajalci\""
 
-#: widgets/osd.cpp:278 ../bin/src/ui_playlistsequence.h:107
+#: widgets/osd.cpp:281 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Ne premešaj"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:218
+#: internet/magnatunedownloaddialog.cpp:306 ui/albumcovermanager.cpp:221
 msgid "Don't stop!"
 msgstr "Ne zaustavi!"
 
-#: internet/somafmservice.cpp:103
+#: internet/somafmservice.cpp:101
 msgid "Donate"
 msgstr "Donacija"
 
-#: devices/deviceview.cpp:115
+#: devices/deviceview.cpp:117
 msgid "Double click to open"
 msgstr "Dvoklik za odpiranje"
 
@@ -1732,12 +1752,13 @@ msgstr "Dvoklik za odpiranje"
 msgid "Double clicking a song will..."
 msgstr "Dvoklik skladbe bo povzročil sledeče ..."
 
-#: podcasts/podcastservice.cpp:421
+#: podcasts/podcastservice.cpp:437
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "Download %n episodes"
 msgstr "Prejmi %n epizod"
 
-#: internet/magnatunedownloaddialog.cpp:252
+#: internet/magnatunedownloaddialog.cpp:266
 msgid "Download directory"
 msgstr "Mapa prejemov"
 
@@ -1753,7 +1774,7 @@ msgstr "Članstvo prejemanja"
 msgid "Download new episodes automatically"
 msgstr "Samodejno prejmi nove epizode"
 
-#: podcasts/podcastservice.cpp:246
+#: podcasts/podcastservice.cpp:253
 msgid "Download queued"
 msgstr "Prejem je v čakalni vrsti"
 
@@ -1761,15 +1782,15 @@ msgstr "Prejem je v čakalni vrsti"
 msgid "Download the Android app"
 msgstr "Prejmite app za Android"
 
-#: internet/magnatuneservice.cpp:276
+#: internet/magnatuneservice.cpp:272
 msgid "Download this album"
 msgstr "Prejmi ta album"
 
-#: internet/jamendoservice.cpp:417
+#: internet/jamendoservice.cpp:424
 msgid "Download this album..."
 msgstr "Prejmi ta album ..."
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:439
 msgid "Download this episode"
 msgstr "Prejmi to epizodo"
 
@@ -1777,7 +1798,7 @@ msgstr "Prejmi to epizodo"
 msgid "Download..."
 msgstr "Prejmi ..."
 
-#: podcasts/podcastservice.cpp:254
+#: podcasts/podcastservice.cpp:261
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Prejemanje (%1 %) ..."
@@ -1786,23 +1807,23 @@ msgstr "Prejemanje (%1 %) ..."
 msgid "Downloading Icecast directory"
 msgstr "Prejemanje imenika Icecast"
 
-#: internet/jamendoservice.cpp:187
+#: internet/jamendoservice.cpp:195
 msgid "Downloading Jamendo catalogue"
 msgstr "Prejemanje kataloga Jamendo"
 
-#: internet/magnatuneservice.cpp:158
+#: internet/magnatuneservice.cpp:152
 msgid "Downloading Magnatune catalogue"
 msgstr "Prejemanje kataloga Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:44
+#: internet/spotifyblobdownloader.cpp:49
 msgid "Downloading Spotify plugin"
 msgstr "Prejemanje vstavka Spotify"
 
-#: musicbrainz/tagfetcher.cpp:102
+#: musicbrainz/tagfetcher.cpp:107
 msgid "Downloading metadata"
 msgstr "Prejemanje metapodatkov"
 
-#: ui/notificationssettingspage.cpp:37
+#: ui/notificationssettingspage.cpp:36
 msgid "Drag to reposition"
 msgstr "Povlecite za spremembo položaja"
 
@@ -1816,21 +1837,21 @@ msgstr "Dubstep"
 
 #: ../bin/src/ui_ripcd.h:309
 msgid "Duration"
-msgstr ""
+msgstr "Trajanje"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
 msgstr "Dinamični način je vključen"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:93
+#: internet/jamendoservice.cpp:121 library/library.cpp:112
 msgid "Dynamic random mix"
 msgstr "Dinamični naključni miks"
 
-#: library/libraryview.cpp:381
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "Uredi pametni seznam predvajanja ..."
 
-#: ui/mainwindow.cpp:1415
+#: ui/mainwindow.cpp:1598
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Uredi oznako \"%1\" ..."
@@ -1847,16 +1868,16 @@ msgstr "Uredi oznake"
 msgid "Edit track information"
 msgstr "Uredi podrobnosti o skladbi"
 
-#: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:673
 msgid "Edit track information..."
 msgstr "Uredi podrobnosti o skladbi ..."
 
-#: library/libraryview.cpp:397
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "Uredi podrobnosti skladb ..."
 
-#: internet/savedradio.cpp:101
+#: internet/savedradio.cpp:102
 msgid "Edit..."
 msgstr "Uredi ..."
 
@@ -1878,7 +1899,7 @@ msgid ""
 "displayed in this order."
 msgstr "Omogočite spodnje vire, da bodo vključeni v iskalne rezultate. Rezultati bodo prikazani v sledečem vrstnem redu."
 
-#: core/globalshortcuts.cpp:63
+#: core/globalshortcuts.cpp:72
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Omogoči/onemogoči pošiljanje podatkov o predvajanih skladbah v Last.fm"
 
@@ -1906,7 +1927,7 @@ msgstr "Vnesite naslov URL, da prejmete ovitek z interneta:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Vnesite ime datoteke za izvožene ovitke (brez pripone):"
 
-#: playlist/playlisttabbar.cpp:137
+#: playlist/playlisttabbar.cpp:136
 msgid "Enter a new name for this playlist"
 msgstr "Vnesite novo ime za ta seznam predvajanja"
 
@@ -1928,7 +1949,7 @@ msgstr "Spodaj vnesite iskalne pogoje, da najdete podcaste v trgovini iTunes"
 msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Spodaj vnesite iskalne pogoje, da najdete podcaste na gpodder.net"
 
-#: ../bin/src/ui_libraryfilterwidget.h:96
+#: ../bin/src/ui_libraryfilterwidget.h:99
 #: ../bin/src/ui_albumcovermanager.h:219
 msgid "Enter search terms here"
 msgstr "Sem vnesite iskalne pogoje"
@@ -1937,11 +1958,11 @@ msgstr "Sem vnesite iskalne pogoje"
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Vnesite naslov URL pretoka internetnega radia:"
 
-#: playlist/playlistlistcontainer.cpp:172
+#: playlist/playlistlistcontainer.cpp:169
 msgid "Enter the name of the folder"
 msgstr "Vnesite ime mape"
 
-#: ../bin/src/ui_networkremotesettingspage.h:198
+#: ../bin/src/ui_networkremotesettingspage.h:199
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Vnesite ta IP v App, da se povežete s Clementine."
 
@@ -1953,17 +1974,17 @@ msgstr "Celotna zbirka"
 msgid "Equalizer"
 msgstr "Uravnalnik"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:167
 msgid "Equivalent to --log-levels *:1"
 msgstr "Enakovredno --log-levels *:1"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:168
 msgid "Equivalent to --log-levels *:3"
 msgstr "Enakovredno --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1017
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1690 ui/mainwindow.cpp:1912 ui/mainwindow.cpp:2028
+#: internet/groovesharkservice.cpp:1038
+#: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:628
+#: ui/mainwindow.cpp:1880 ui/mainwindow.cpp:2127 ui/mainwindow.cpp:2275
 msgid "Error"
 msgstr "Napaka"
 
@@ -1971,38 +1992,38 @@ msgstr "Napaka"
 msgid "Error connecting MTP device"
 msgstr "Napaka med povezovanjem naprave MTP"
 
-#: ui/organiseerrordialog.cpp:55
+#: ui/organiseerrordialog.cpp:52
 msgid "Error copying songs"
 msgstr "Napaka med kopiranjem skladb"
 
-#: ui/organiseerrordialog.cpp:60
+#: ui/organiseerrordialog.cpp:59
 msgid "Error deleting songs"
 msgstr "Napaka med brisanjem skladb"
 
-#: internet/spotifyblobdownloader.cpp:215
+#: internet/spotifyblobdownloader.cpp:220
 msgid "Error downloading Spotify plugin"
 msgstr "Napaka med prejemanjem vstavka Spotify"
 
-#: playlist/songloaderinserter.cpp:73 playlist/songloaderinserter.cpp:135
+#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
 #, qt-format
 msgid "Error loading %1"
 msgstr "Napaka med nalaganjem %1"
 
-#: internet/digitallyimportedservicebase.cpp:203
-#: internet/digitallyimportedurlhandler.cpp:89
+#: internet/digitallyimportedservicebase.cpp:196
+#: internet/digitallyimportedurlhandler.cpp:85
 msgid "Error loading di.fm playlist"
 msgstr "Napaka med nalaganjem seznama predvajanja di.fm"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:394
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Napaka med obdelavo %1: %2"
 
 #: playlist/songloaderinserter.cpp:102
 msgid "Error while loading audio CD"
-msgstr "Napaka med nalaganjem glasbenega CD-ja"
+msgstr "Napaka med nalaganjem zvočnega CD-ja"
 
-#: library/library.cpp:63
+#: library/library.cpp:66
 msgid "Ever played"
 msgstr "Sploh predvajano"
 
@@ -2046,7 +2067,7 @@ msgstr "Obstoječi ovitki"
 msgid "Expand"
 msgstr "Razširi"
 
-#: widgets/loginstatewidget.cpp:142
+#: widgets/loginstatewidget.cpp:139
 #, qt-format
 msgid "Expires on %1"
 msgstr "Poteče %1"
@@ -2067,11 +2088,11 @@ msgstr "Izvozi prejete ovitke"
 msgid "Export embedded covers"
 msgstr "Izvozi vstavljene ovitke"
 
-#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
+#: ui/albumcovermanager.cpp:783 ui/albumcovermanager.cpp:807
 msgid "Export finished"
 msgstr "Izvoz končan"
 
-#: ui/albumcovermanager.cpp:786
+#: ui/albumcovermanager.cpp:792
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Izvoženih %1 od %2 ovitkov (%3 preskočenih)"
@@ -2123,25 +2144,25 @@ msgstr "Pojemanje"
 msgid "Fading duration"
 msgstr "Trajanje pojemanja"
 
-#: ui/mainwindow.cpp:1690
+#: ui/mainwindow.cpp:1881
 msgid "Failed reading CD drive"
-msgstr ""
+msgstr "Napaka med branjem iz pogona CD"
 
-#: podcasts/gpoddertoptagspage.cpp:76
+#: podcasts/gpoddertoptagspage.cpp:69
 msgid "Failed to fetch directory"
 msgstr "Imenika ni bilo mogoče prejeti"
 
-#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
-#: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
-#: podcasts/itunessearchpage.cpp:82
+#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
+#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
+#: podcasts/itunessearchpage.cpp:81
 msgid "Failed to fetch podcasts"
 msgstr "Podcastov ni bilo mogoče prejeti"
 
-#: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
 msgid "Failed to load podcast"
 msgstr "Podcasta ni bilo mogoče naložiti"
 
-#: podcasts/podcasturlloader.cpp:167
+#: podcasts/podcasturlloader.cpp:173
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "XML-ja za ta vir RSS ni bilo mogoče razčleniti"
 
@@ -2150,11 +2171,11 @@ msgstr "XML-ja za ta vir RSS ni bilo mogoče razčleniti"
 msgid "Fast"
 msgstr "Hitro"
 
-#: internet/groovesharkservice.cpp:617
+#: internet/groovesharkservice.cpp:633
 msgid "Favorites"
 msgstr "Priljubljene"
 
-#: library/library.cpp:77
+#: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "Priljubljene skladbe"
 
@@ -2170,19 +2191,19 @@ msgstr "Samodejno pridobi"
 msgid "Fetch completed"
 msgstr "Prejemanje zaključeno"
 
-#: internet/subsonicservice.cpp:241
+#: internet/subsonicservice.cpp:228
 msgid "Fetching Subsonic library"
 msgstr "Pridobivanje knjižnice Subsonic"
 
-#: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
+#: ui/coverfromurldialog.cpp:70 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Napaka med pridobivanjem ovitka"
 
 #: ../bin/src/ui_ripcd.h:320
 msgid "File Format"
-msgstr ""
+msgstr "Vrsta datoteke"
 
-#: ui/organisedialog.cpp:72
+#: ui/organisedialog.cpp:75
 msgid "File extension"
 msgstr "Pripona datoteke"
 
@@ -2190,19 +2211,19 @@ msgstr "Pripona datoteke"
 msgid "File formats"
 msgstr "Vrste datotek"
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "Ime datoteke"
 
-#: playlist/playlist.cpp:1232
+#: playlist/playlist.cpp:1342
 msgid "File name (without path)"
 msgstr "Ime datoteke (brez poti)"
 
-#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "Velikost datoteke"
 
-#: playlist/playlist.cpp:1234 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1346 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2212,7 +2233,7 @@ msgstr "Vrsta datoteke"
 msgid "Filename"
 msgstr "Ime datoteke"
 
-#: ui/mainwindow.cpp:242
+#: ui/mainwindow.cpp:229
 msgid "Files"
 msgstr "Datoteke"
 
@@ -2220,15 +2241,15 @@ msgstr "Datoteke"
 msgid "Files to transcode"
 msgstr "Datoteke za prekodiranje"
 
-#: smartplaylists/querywizardplugin.cpp:90
+#: smartplaylists/querywizardplugin.cpp:82
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Najdite skladbe v knjižnici, ki se ujemajo z merili, ki jih določite."
 
-#: musicbrainz/tagfetcher.cpp:55
+#: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
 msgstr "Jemanje prstnega odtisa skladbe"
 
-#: smartplaylists/wizard.cpp:85
+#: smartplaylists/wizard.cpp:83
 msgid "Finish"
 msgstr "Končaj"
 
@@ -2236,7 +2257,7 @@ msgstr "Končaj"
 msgid "First level"
 msgstr "Prva raven"
 
-#: core/song.cpp:340
+#: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
 msgstr "Flac"
 
@@ -2252,12 +2273,12 @@ msgstr "Zaradi licence je podpora Spotify v ločenem vstavku."
 msgid "Force mono encoding"
 msgstr "Vsili mono kodiranje"
 
-#: devices/deviceview.cpp:204 devices/deviceview.cpp:310
-#: devices/deviceview.cpp:314
+#: devices/deviceview.cpp:207 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr "Pozabi napravo"
 
-#: devices/deviceview.cpp:311
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2272,7 +2293,7 @@ msgstr "Klik na \"Pozabi napravo\", bo napravo odstranil iz tega seznama. Ob nas
 #: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
+#: ../bin/src/ui_querysortpage.h:137 ../bin/src/ui_searchpreview.h:104
 #: ../bin/src/ui_searchtermwidget.h:268 ../bin/src/ui_wizardfinishpage.h:83
 #: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
@@ -2300,23 +2321,23 @@ msgstr "Hitrost sličic"
 msgid "Frames per buffer"
 msgstr "Sličic na medpomnilnik"
 
-#: internet/lastfmservice.cpp:224
+#: internet/lastfmservice.cpp:230
 msgid "Friends"
 msgstr "Prijatelji"
 
-#: moodbar/moodbarrenderer.cpp:157
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Frozen"
 msgstr "Zmrznjen"
 
-#: ui/equalizer.cpp:120
+#: ui/equalizer.cpp:121
 msgid "Full Bass"
 msgstr "Polni basi"
 
-#: ui/equalizer.cpp:122
+#: ui/equalizer.cpp:125
 msgid "Full Bass + Treble"
 msgstr "Polni basi in visoki toni"
 
-#: ui/equalizer.cpp:121
+#: ui/equalizer.cpp:123
 msgid "Full Treble"
 msgstr "Polni visoki toni"
 
@@ -2324,7 +2345,7 @@ msgstr "Polni visoki toni"
 msgid "GStreamer audio engine"
 msgstr "Zvočni pogon GStreamer"
 
-#: ui/settingsdialog.cpp:131
+#: ui/settingsdialog.cpp:129
 msgid "General"
 msgstr "Splošno"
 
@@ -2332,30 +2353,30 @@ msgstr "Splošno"
 msgid "General settings"
 msgstr "Splošne nastavitve"
 
-#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:70
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Zvrst"
 
-#: internet/groovesharkservice.cpp:542
+#: internet/groovesharkservice.cpp:544
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Dobi naslov URL za deljenje tega seznama predvajanja Grooveshark"
 
-#: internet/groovesharkservice.cpp:539 internet/groovesharkservice.cpp:1110
+#: internet/groovesharkservice.cpp:541 internet/groovesharkservice.cpp:1137
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Dobi naslov URL za deljenje te skladbe Grooveshark"
 
-#: internet/groovesharkservice.cpp:790
+#: internet/groovesharkservice.cpp:813
 msgid "Getting Grooveshark popular songs"
 msgstr "Pridobivanje seznama priljubljenih skladb iz Grooveshark"
 
-#: internet/somafmservice.cpp:114
+#: internet/somafmservice.cpp:115
 msgid "Getting channels"
 msgstr "Pridobivanje kanalov"
 
-#: internet/digitallyimportedservicebase.cpp:108
+#: internet/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
 msgstr "Pridobivanje pretokov"
 
@@ -2379,7 +2400,7 @@ msgstr "Pojdi na predhodni zavihek seznama predvajanja"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:453
+#: covers/coversearchstatisticsdialog.cpp:51 ui/albumcovermanager.cpp:460
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2393,19 +2414,19 @@ msgstr "Označi s sivo skladbe, ki so na seznamih predvajanja in ne obstajajo ve
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:408
+#: internet/groovesharkservice.cpp:407
 msgid "Grooveshark login error"
 msgstr "Napaka med prijavo v Grooveshark"
 
-#: internet/groovesharkservice.cpp:1162
+#: internet/groovesharkservice.cpp:1188
 msgid "Grooveshark playlist's URL"
 msgstr "Naslov URL seznama predvajanja Grooveshark"
 
-#: internet/groovesharkservice.cpp:603
+#: internet/groovesharkservice.cpp:613
 msgid "Grooveshark radio"
 msgstr "Radio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1140
+#: internet/groovesharkservice.cpp:1166
 msgid "Grooveshark song's URL"
 msgstr "Naslov URL skladbe Grooveshark"
 
@@ -2413,44 +2434,44 @@ msgstr "Naslov URL skladbe Grooveshark"
 msgid "Group Library by..."
 msgstr "Združi knjižnico po ..."
 
-#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:463 library/libraryfilterwidget.cpp:88
 msgid "Group by"
 msgstr "Združi po"
 
-#: library/libraryfilterwidget.cpp:110
+#: library/libraryfilterwidget.cpp:122
 msgid "Group by Album"
 msgstr "Združi po albumu"
 
-#: library/libraryfilterwidget.cpp:104
+#: library/libraryfilterwidget.cpp:111
 msgid "Group by Artist"
 msgstr "Združi po izvajalcu"
 
-#: library/libraryfilterwidget.cpp:106
+#: library/libraryfilterwidget.cpp:114
 msgid "Group by Artist/Album"
 msgstr "Združi po izvajalcu/albumu"
 
-#: library/libraryfilterwidget.cpp:108
+#: library/libraryfilterwidget.cpp:118
 msgid "Group by Artist/Year - Album"
 msgstr "Združi po izvajalcu/letu - albumu"
 
-#: library/libraryfilterwidget.cpp:112
+#: library/libraryfilterwidget.cpp:125
 msgid "Group by Genre/Album"
 msgstr "Združi po zvrsti/albumu"
 
-#: library/libraryfilterwidget.cpp:114
+#: library/libraryfilterwidget.cpp:129
 msgid "Group by Genre/Artist/Album"
 msgstr "Združi po zvrsti/izvajalcu/albumu"
 
-#: playlist/playlist.cpp:1220 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:65
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr "Združevanje"
 
-#: podcasts/podcasturlloader.cpp:196
+#: podcasts/podcasturlloader.cpp:204
 msgid "HTML page did not contain any RSS feeds"
 msgstr "Stran HTML ni vsebovala virov RSS"
 
-#: internet/subsonicsettingspage.cpp:135
+#: internet/subsonicsettingspage.cpp:141
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr "Prejeta je bila koda stanja HTTP 3xx brez naslova URL, preverite nastavitev strežnika."
@@ -2459,7 +2480,7 @@ msgstr "Prejeta je bila koda stanja HTTP 3xx brez naslova URL, preverite nastavi
 msgid "HTTP proxy"
 msgstr "Posredniški strežnik HTTP"
 
-#: moodbar/moodbarrenderer.cpp:158
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Happy"
 msgstr "Srečen"
 
@@ -2475,25 +2496,25 @@ msgstr "Podrobnosti o strojni opremi so na voljo le, ko je naprava povezana"
 msgid "High"
 msgstr "Visoka"
 
-#: analyzers/analyzercontainer.cpp:64
-#: visualisations/visualisationcontainer.cpp:109
+#: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Visoko (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:119
+#: visualisations/visualisationcontainer.cpp:124
 msgid "High (1024x1024)"
 msgstr "Visoka (1024x1024)"
 
-#: internet/subsonicsettingspage.cpp:112
+#: internet/subsonicsettingspage.cpp:113
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Gostitelj ni bil najden, preverite naslov URL strežnika. Primer: http://localhost:4040/"
 
-#: smartplaylists/searchterm.cpp:310
+#: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "Ure"
 
-#: core/backgroundstreams.cpp:30
+#: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
 
@@ -2505,15 +2526,15 @@ msgstr "Nimam računa Magnatune"
 msgid "Icon"
 msgstr "Ikona"
 
-#: widgets/fancytabwidget.cpp:674
+#: widgets/fancytabwidget.cpp:666
 msgid "Icons on top"
 msgstr "Ikone na vrhu"
 
-#: musicbrainz/tagfetcher.cpp:86
+#: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Prepoznavanje skladbe"
 
-#: devices/devicemanager.cpp:568 devices/devicemanager.cpp:576
+#: devices/devicemanager.cpp:562 devices/devicemanager.cpp:573
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2535,12 +2556,12 @@ msgstr "Slike (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Slike (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:141
 #, qt-format
 msgid "In %1 days"
 msgstr "čez %1 dni"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 weeks"
 msgstr "čez %1 tednov"
@@ -2551,7 +2572,7 @@ msgid ""
 "time a song finishes."
 msgstr "V dinamičnem načinu bodo nove skladbe izbrane in dodane na seznam predvajanja vsakič, ko se prejšnja skladba konča."
 
-#: internet/spotifyservice.cpp:360
+#: internet/spotifyservice.cpp:371
 msgid "Inbox"
 msgstr "Prejeto"
 
@@ -2563,120 +2584,120 @@ msgstr "Vključi ovitek albuma v obvestilo"
 msgid "Include all songs"
 msgstr "Vključi vse skladbe"
 
-#: internet/subsonicsettingspage.cpp:90
+#: internet/subsonicsettingspage.cpp:85
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Nezdružljiva različica protokola REST za Subsonic. Odjemalec mora nadgraditi."
 
-#: internet/subsonicsettingspage.cpp:94
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Nezdružljiva različica protokola REST za Subsonic. Strežnik mora nadgraditi."
 
-#: internet/subsonicsettingspage.cpp:127
+#: internet/subsonicsettingspage.cpp:131
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Nepopolna nastavitev, prepričajte se, da so vsa polja izpolnjena."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:150
 msgid "Increase the volume by 4%"
 msgstr "Povečaj glasnost za 4%"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:152
 msgid "Increase the volume by <value> percent"
 msgstr "Povečaj glasnost za <value> odstotkov"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Povečaj glasnost"
 
-#: internet/cloudfileservice.cpp:136
+#: internet/cloudfileservice.cpp:126
 #, qt-format
 msgid "Indexing %1"
 msgstr "Izgradnja kazala za %1"
 
-#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
+#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:132
 msgid "Information"
 msgstr "Podrobnosti"
 
 #: ../bin/src/ui_ripcd.h:301
 msgid "Input options"
-msgstr ""
+msgstr "Možnosti vhoda"
 
 #: ../bin/src/ui_organisedialog.h:203
 msgid "Insert..."
 msgstr "Vstavi ..."
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:72
 msgid "Installed"
 msgstr "Nameščeno"
 
-#: core/database.cpp:583
+#: core/database.cpp:577
 msgid "Integrity check"
 msgstr "Preverjanje celovitosti"
 
-#: ui/mainwindow.cpp:244
+#: ui/mainwindow.cpp:233
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:151
 msgid "Internet providers"
 msgstr "Ponudniki interneta"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "Neveljaven ključ API"
 
-#: internet/lastfmservice.cpp:428
+#: internet/lastfmservice.cpp:443
 msgid "Invalid format"
 msgstr "Neveljavna vrsta"
 
-#: internet/lastfmservice.cpp:426
+#: internet/lastfmservice.cpp:439
 msgid "Invalid method"
 msgstr "Neveljavni način"
 
-#: internet/lastfmservice.cpp:429
+#: internet/lastfmservice.cpp:445
 msgid "Invalid parameters"
 msgstr "Neveljavni parametri"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:447
 msgid "Invalid resource specified"
 msgstr "Podan je bil neveljaven vir"
 
-#: internet/lastfmservice.cpp:425
+#: internet/lastfmservice.cpp:437
 msgid "Invalid service"
 msgstr "Neveljavna storitev"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:451
 msgid "Invalid session key"
 msgstr "Neveljavni ključ seje"
 
-#: internet/groovesharkservice.cpp:401
+#: internet/groovesharkservice.cpp:399
 msgid "Invalid username and/or password"
 msgstr "Neveljavno uporabniško ime in/ali geslo"
 
 #: ../bin/src/ui_ripcd.h:312
 msgid "Invert Selection"
-msgstr ""
+msgstr "Obrni izbor"
 
-#: internet/jamendoservice.cpp:127
+#: internet/jamendoservice.cpp:133
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:109
+#: internet/jamendoservice.cpp:117
 msgid "Jamendo Most Listened Tracks"
 msgstr "Jamendo: najbolj poslušane skladbe"
 
-#: internet/jamendoservice.cpp:107
+#: internet/jamendoservice.cpp:114
 msgid "Jamendo Top Tracks"
 msgstr "Jamendo: najboljše skladbe"
 
-#: internet/jamendoservice.cpp:103
+#: internet/jamendoservice.cpp:108
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Jamendo: najboljše skladbe meseca"
 
-#: internet/jamendoservice.cpp:105
+#: internet/jamendoservice.cpp:111
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Jamendo: najboljše skladbe tedna"
 
-#: internet/jamendoservice.cpp:171
+#: internet/jamendoservice.cpp:175
 msgid "Jamendo database"
 msgstr "Podatkovna zbirka Jamendo"
 
@@ -2684,14 +2705,14 @@ msgstr "Podatkovna zbirka Jamendo"
 msgid "Jump to the currently playing track"
 msgstr "Skoči na trenutno predvajano skladbo"
 
-#: wiimotedev/wiimoteshortcutgrabber.cpp:72
+#: wiimotedev/wiimoteshortcutgrabber.cpp:69
 #, qt-format
 msgid "Keep buttons for %1 second..."
 msgstr "Ohrani gumbe za %1 sekundo ..."
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:127
-#: wiimotedev/wiimoteshortcutgrabber.cpp:73
-#: wiimotedev/wiimoteshortcutgrabber.cpp:117
+#: wiimotedev/wiimoteshortcutgrabber.cpp:72
+#: wiimotedev/wiimoteshortcutgrabber.cpp:114
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Ohrani gumbe za %1 sekund ..."
@@ -2705,18 +2726,19 @@ msgid "Keep the original files"
 msgstr "Ohrani izvorne datoteke"
 
 #: ../bin/src/ui_mainwindow.h:695
+msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
-msgstr "Mucke"
+msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Language"
 msgstr "Jezik"
 
-#: ui/equalizer.cpp:123
+#: ui/equalizer.cpp:127
 msgid "Laptop/Headphones"
 msgstr "Prenosnik/slušalke"
 
-#: ui/equalizer.cpp:124
+#: ui/equalizer.cpp:129
 msgid "Large Hall"
 msgstr "Velika dvorana"
 
@@ -2724,12 +2746,16 @@ msgstr "Velika dvorana"
 msgid "Large album cover"
 msgstr "Velik ovitek albuma"
 
-#: widgets/fancytabwidget.cpp:670
+#: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
 msgstr "Velika stranska vrstica"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1225
-#: ../bin/src/ui_edittagdialog.h:671
+#: library/library.cpp:80
+msgid "Last played"
+msgstr "Zadnjič predvajano"
+
+#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:671
+msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Zadnjič predvajano"
 
@@ -2737,45 +2763,45 @@ msgstr "Zadnjič predvajano"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:85
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Radio po meri Last.fm: %1"
 
-#: internet/lastfmservice.cpp:255 internet/lastfmservice.cpp:699
-#: internet/lastfmservice.cpp:722
+#: internet/lastfmservice.cpp:261 internet/lastfmservice.cpp:724
+#: internet/lastfmservice.cpp:749
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Knjižnica Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:257
-#: internet/lastfmservice.cpp:260
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:263
+#: internet/lastfmservice.cpp:266
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Miks radio Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:262
-#: internet/lastfmservice.cpp:265
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:268
+#: internet/lastfmservice.cpp:271
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Radio soseske Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:252
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Radio postaja Last.fm - %1"
 
-#: internet/lastfmservice.cpp:83
+#: internet/lastfmservice.cpp:81
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Last.fm izvajalci podobni %1"
 
-#: internet/lastfmservice.cpp:84
+#: internet/lastfmservice.cpp:82
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Radio oznak Last.fm: %1"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:460
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm je trenutno zaposlen, poskusite znova čez nekaj minut"
 
@@ -2783,11 +2809,11 @@ msgstr "Last.fm je trenutno zaposlen, poskusite znova čez nekaj minut"
 msgid "Last.fm password"
 msgstr "Geslo Last.fm"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:78
+#: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
 msgstr "Število predvajanj last.fm"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:131
+#: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Oznake Last.fm"
 
@@ -2795,11 +2821,11 @@ msgstr "Oznake Last.fm"
 msgid "Last.fm username"
 msgstr "Uporabniško ime Last.fm"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:111
+#: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
 msgstr "Wiki last.fm"
 
-#: library/library.cpp:87
+#: library/library.cpp:102
 msgid "Least favourite tracks"
 msgstr "Najmanj priljubljene skladbe"
 
@@ -2811,12 +2837,12 @@ msgstr "Pustite prazno za privzeto. Primeri: \"/dev/dsp\", \"front\", itd."
 msgid "Left"
 msgstr "Levo"
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:69
-#: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
+#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:72
+#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "Dolžina"
 
-#: ui/mainwindow.cpp:231 ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:215 ui/mainwindow.cpp:228
 msgid "Library"
 msgstr "Knjižnica"
 
@@ -2824,24 +2850,24 @@ msgstr "Knjižnica"
 msgid "Library advanced grouping"
 msgstr "Napredno združevanje v knjižnici"
 
-#: ui/mainwindow.cpp:2145
+#: ui/mainwindow.cpp:2399
 msgid "Library rescan notice"
 msgstr "Obvestilo ponovnega preiskovanja knjižnice"
 
-#: smartplaylists/querywizardplugin.cpp:86
+#: smartplaylists/querywizardplugin.cpp:79
 msgid "Library search"
 msgstr "Iskanje po knjižnici"
 
-#: ../bin/src/ui_querysortpage.h:140
+#: ../bin/src/ui_querysortpage.h:141
 msgid "Limits"
 msgstr "Omejitve"
 
-#: internet/groovesharkservice.cpp:604
+#: internet/groovesharkservice.cpp:615
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Poslušajte skladbe iz Grooveshark glede na tiste, ki ste jih že poslušali"
 
-#: ui/equalizer.cpp:125
+#: ui/equalizer.cpp:131
 msgid "Live"
 msgstr "V živo"
 
@@ -2853,11 +2879,11 @@ msgstr "Naloži"
 msgid "Load cover from URL"
 msgstr "Naloži ovitek iz naslova URL"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:63
 msgid "Load cover from URL..."
 msgstr "Naloži ovitek iz naslova URL ..."
 
-#: ui/albumcoverchoicecontroller.cpp:98
+#: ui/albumcoverchoicecontroller.cpp:103
 msgid "Load cover from disk"
 msgstr "Naloži ovitek iz diska"
 
@@ -2873,7 +2899,7 @@ msgstr "Naloži seznam predvajanja"
 msgid "Load playlist..."
 msgstr "Naloži seznam predvajanja ..."
 
-#: internet/lastfmservice.cpp:884
+#: internet/lastfmservice.cpp:910
 msgid "Loading Last.fm radio"
 msgstr "Nalaganje radia Last.fm"
 
@@ -2881,38 +2907,38 @@ msgstr "Nalaganje radia Last.fm"
 msgid "Loading MTP device"
 msgstr "Nalaganje naprave MTP"
 
-#: devices/gpodloader.cpp:46
+#: devices/gpodloader.cpp:45
 msgid "Loading iPod database"
 msgstr "Nalaganje zbirke podatkov iPod"
 
-#: smartplaylists/generatorinserter.cpp:52
+#: smartplaylists/generatorinserter.cpp:50
 msgid "Loading smart playlist"
 msgstr "Nalaganje pametnega seznama predvajanja"
 
-#: library/librarymodel.cpp:139
+#: library/librarymodel.cpp:148
 msgid "Loading songs"
 msgstr "Nalaganje skladb"
 
-#: internet/digitallyimportedurlhandler.cpp:67
-#: internet/somafmurlhandler.cpp:58
+#: internet/digitallyimportedurlhandler.cpp:63
+#: internet/somafmurlhandler.cpp:49
 msgid "Loading stream"
 msgstr "Nalaganje pretoka"
 
-#: playlist/songloaderinserter.cpp:81 ui/edittagdialog.cpp:233
+#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Nalaganje skladb"
 
-#: playlist/songloaderinserter.cpp:141
+#: playlist/songloaderinserter.cpp:137
 msgid "Loading tracks info"
 msgstr "Nalaganje podrobnosti o skladbah"
 
-#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
-#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
+#: library/librarymodel.cpp:143 podcasts/podcastdiscoverymodel.cpp:102
+#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Nalaganje ..."
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:162
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Naloži datoteke/naslove URL in zamenjaj trenutni seznam predvajanja"
 
@@ -2928,7 +2954,7 @@ msgstr "Naloži datoteke/naslove URL in zamenjaj trenutni seznam predvajanja"
 msgid "Login"
 msgstr "Prijava"
 
-#: podcasts/podcastsettingspage.cpp:119
+#: podcasts/podcastsettingspage.cpp:120
 msgid "Login failed"
 msgstr "Prijava je spodletela"
 
@@ -2940,13 +2966,13 @@ msgstr "Profil daljnosežnega predvidevanja (LTP)"
 msgid "Love"
 msgstr "Priljubljena"
 
-#: analyzers/analyzercontainer.cpp:62
+#: analyzers/analyzercontainer.cpp:61
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Nizko (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:121
 msgid "Low (256x256)"
 msgstr "Nizka (256x256)"
 
@@ -2958,12 +2984,17 @@ msgstr "Profil nizke kompleksnosti (LC)"
 msgid "Lyrics"
 msgstr "Besedila"
 
-#: songinfo/ultimatelyricsprovider.cpp:156
+#: songinfo/ultimatelyricsprovider.cpp:154
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Besedila iz %1"
 
-#: core/song.cpp:343 ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcoder.cpp:232
+msgid "M4A AAC"
+msgstr "M4A AAC"
+
+#: core/song.cpp:385 transcoder/transcoder.cpp:235
+#: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2975,15 +3006,15 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:341
+#: core/song.cpp:381
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:342
+#: core/song.cpp:383
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:103 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatuneservice.cpp:101 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -2991,7 +3022,7 @@ msgstr "Magnatune"
 msgid "Magnatune Download"
 msgstr "Prejemi Magnatune"
 
-#: widgets/osd.cpp:195
+#: widgets/osd.cpp:192
 msgid "Magnatune download finished"
 msgstr "Prejem Magnatune je končan"
 
@@ -2999,15 +3030,20 @@ msgstr "Prejem Magnatune je končan"
 msgid "Main profile (MAIN)"
 msgstr "Glavni profil (MAIN)"
 
-#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:694
+#: core/backgroundstreams.cpp:33
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotifyservice.cpp:533
+#: ../bin/src/ui_mainwindow.h:694
+msgctxt "Label for button to enable/disable Enterprise background sound."
+msgid "Make it so!"
+msgstr ""
+
+#: internet/spotifyservice.cpp:552
 msgid "Make playlist available offline"
 msgstr "Seznam predvajanja naj bo na voljo tudi brez povezave"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:472
 msgid "Malformed response"
 msgstr "Napačno oblikovan odziv"
 
@@ -3020,15 +3056,15 @@ msgstr "Ročna nastavitev posredniškega strežnika"
 msgid "Manually"
 msgstr "Ročno"
 
-#: devices/deviceproperties.cpp:153
+#: devices/deviceproperties.cpp:156
 msgid "Manufacturer"
 msgstr "Proizvajalec"
 
-#: podcasts/podcastservice.cpp:346
+#: podcasts/podcastservice.cpp:357
 msgid "Mark as listened"
 msgstr "Označi kot poslušano"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:356
 msgid "Mark as new"
 msgstr "Označi kot novo"
 
@@ -3044,13 +3080,13 @@ msgstr "Ujemanje enega ali več pogojev iskanja (ALI)"
 msgid "Maximum bitrate"
 msgstr "Največja bitna hitrost"
 
-#: analyzers/analyzercontainer.cpp:63
-#: visualisations/visualisationcontainer.cpp:108
+#: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Srednje (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:118
+#: visualisations/visualisationcontainer.cpp:122
 msgid "Medium (512x512)"
 msgstr "Srednja (512x512)"
 
@@ -3062,11 +3098,11 @@ msgstr "Vrsta članstva"
 msgid "Minimum bitrate"
 msgstr "Najmanjša bitna hitrost"
 
-#: visualisations/projectmvisualisation.cpp:132
+#: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
 msgstr "Manjkajoče predloge nastavitev projectM"
 
-#: devices/deviceproperties.cpp:152
+#: devices/deviceproperties.cpp:155
 msgid "Model"
 msgstr "Model"
 
@@ -3078,16 +3114,16 @@ msgstr "Spremljaj knjižnico za spremembami"
 msgid "Mono playback"
 msgstr "Predvajanje v načinu mono"
 
-#: smartplaylists/searchterm.cpp:313
+#: smartplaylists/searchterm.cpp:392
 msgid "Months"
 msgstr "Meseci"
 
-#: playlist/playlist.cpp:1240
+#: playlist/playlist.cpp:1357
 msgid "Mood"
 msgstr "Razpoloženje"
 
 #: ../bin/src/ui_appearancesettingspage.h:294
-#: moodbar/moodbarproxystyle.cpp:342
+#: moodbar/moodbarproxystyle.cpp:345
 msgid "Moodbar style"
 msgstr "Slog vrstice razpoloženja"
 
@@ -3095,11 +3131,11 @@ msgstr "Slog vrstice razpoloženja"
 msgid "Moodbars"
 msgstr "Vrstice razpoloženja"
 
-#: library/library.cpp:74
+#: library/library.cpp:84
 msgid "Most played"
 msgstr "Najbolj predvajano"
 
-#: devices/giolister.cpp:159
+#: devices/giolister.cpp:155
 msgid "Mount point"
 msgstr "Priklopna točka"
 
@@ -3112,7 +3148,7 @@ msgstr "Priklopne točke"
 msgid "Move down"
 msgstr "Premakni dol"
 
-#: ui/mainwindow.cpp:515 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:588 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Premakni v knjižnico ..."
 
@@ -3121,7 +3157,7 @@ msgstr "Premakni v knjižnico ..."
 msgid "Move up"
 msgstr "Premakni gor"
 
-#: transcoder/transcodedialog.cpp:221 ui/mainwindow.cpp:1625
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1815
 msgid "Music"
 msgstr "Glasba"
 
@@ -3129,54 +3165,58 @@ msgstr "Glasba"
 msgid "Music Library"
 msgstr "Glasbena knjižnica"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:717
-#: wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:717
+#: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "Utišaj"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:197
 msgid "My Last.fm Library"
 msgstr "Moja knjižnica Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
 msgstr "Moj miks radio Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:205
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:204
 msgid "My Last.fm Neighborhood"
 msgstr "Moja soseska Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:190
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:194
 msgid "My Last.fm Recommended Radio"
 msgstr "Moj radio priporočenih Last.fm"
 
-#: internet/lastfmservice.cpp:197
+#: internet/lastfmservice.cpp:198
 msgid "My Mix Radio"
 msgstr "Moj miks radio"
 
-#: internet/groovesharkservice.cpp:608
+#: internet/groovesharkservice.cpp:622
 msgid "My Music"
 msgstr "Moja glasba"
 
-#: internet/lastfmservice.cpp:202
+#: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
 msgstr "Moja soseska"
 
-#: internet/lastfmservice.cpp:192
+#: internet/lastfmservice.cpp:196
 msgid "My Radio Station"
 msgstr "Moja radijska postaja"
 
-#: internet/lastfmservice.cpp:187
+#: internet/lastfmservice.cpp:191
 msgid "My Recommendations"
 msgstr "Moja priporočila"
 
-#: internet/groovesharkservice.cpp:1245 internet/groovesharkservice.cpp:1338
-#: ui/equalizer.cpp:182 ../bin/src/ui_deviceproperties.h:369
-#: ../bin/src/ui_magnatunedownloaddialog.h:135
+#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1366
+#: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_wizardfinishpage.h:84
-#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgid "Name"
 msgstr "Ime"
+
+#: ../bin/src/ui_magnatunedownloaddialog.h:135
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
+msgctxt "Category label"
+msgid "Name"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:197
 msgid "Naming options"
@@ -3186,7 +3226,7 @@ msgstr "Možnosti poimenovanja"
 msgid "Narrow band (NB)"
 msgstr "Ozek pas (NB)"
 
-#: internet/lastfmservice.cpp:229
+#: internet/lastfmservice.cpp:236
 msgid "Neighbors"
 msgstr "Sosedje"
 
@@ -3194,15 +3234,15 @@ msgstr "Sosedje"
 msgid "Network Proxy"
 msgstr "Omrežni posredniški strežnik"
 
-#: ../bin/src/ui_networkremotesettingspage.h:177
+#: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Network Remote"
 msgstr "Omrežni nadzor"
 
-#: playlist/playlistdelegates.cpp:304 ui/edittagdialog.cpp:487
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:505
 msgid "Never"
 msgstr "Nikoli"
 
-#: library/library.cpp:67
+#: library/library.cpp:73
 msgid "Never played"
 msgstr "Nikoli predvajano"
 
@@ -3211,21 +3251,21 @@ msgstr "Nikoli predvajano"
 msgid "Never start playing"
 msgstr "Nikoli ne začni s predvajanjem"
 
-#: playlist/playlistlistcontainer.cpp:72
-#: playlist/playlistlistcontainer.cpp:171
+#: playlist/playlistlistcontainer.cpp:69
+#: playlist/playlistlistcontainer.cpp:168
 #: ../bin/src/ui_playlistlistcontainer.h:128
 msgid "New folder"
 msgstr "Nova mapa"
 
-#: ui/mainwindow.cpp:1465 ../bin/src/ui_mainwindow.h:705
+#: ui/mainwindow.cpp:1652 ../bin/src/ui_mainwindow.h:705
 msgid "New playlist"
 msgstr "Nov seznam predvajanja"
 
-#: library/libraryview.cpp:379
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "Nov pametni seznam predvajanja"
 
-#: widgets/freespacebar.cpp:46
+#: widgets/freespacebar.cpp:45
 msgid "New songs"
 msgstr "Nove skladbe"
 
@@ -3233,24 +3273,24 @@ msgstr "Nove skladbe"
 msgid "New tracks will be added automatically."
 msgstr "Nove skladbe bodo samodejno dodane."
 
-#: library/library.cpp:80
+#: library/library.cpp:92
 msgid "Newest tracks"
 msgstr "Najnovejše skladbe"
 
-#: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
 msgid "Next"
 msgstr "Naslednji"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:658
-#: wiimotedev/wiimotesettingspage.cpp:99
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:658
+#: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "Naslednja skladba"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:142
 msgid "Next week"
 msgstr "Naslednji teden"
 
-#: analyzers/analyzercontainer.cpp:80
+#: analyzers/analyzercontainer.cpp:79
 msgid "No analyzer"
 msgstr "Brez preučevalnika"
 
@@ -3258,7 +3298,7 @@ msgstr "Brez preučevalnika"
 msgid "No background image"
 msgstr "Brez slike ozadja"
 
-#: ui/albumcovermanager.cpp:778
+#: ui/albumcovermanager.cpp:784
 msgid "No covers to export."
 msgstr "Ni ovitkov za izvoz."
 
@@ -3266,7 +3306,7 @@ msgstr "Ni ovitkov za izvoz."
 msgid "No long blocks"
 msgstr "Brez dolgih blokov"
 
-#: playlist/playlistcontainer.cpp:366
+#: playlist/playlistcontainer.cpp:365
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Iskanje ni vrnilo rezultatov. Počistite iskalno polje za prikaz celotnega seznama predvajanja."
@@ -3280,11 +3320,11 @@ msgstr "Brez kratkih blokov"
 msgid "None"
 msgstr "Brez"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1913 ui/mainwindow.cpp:2029
+#: library/libraryview.cpp:629 ui/mainwindow.cpp:2128 ui/mainwindow.cpp:2276
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nobena izmed izbranih skladb ni bila primerna za kopiranje na napravo"
 
-#: moodbar/moodbarrenderer.cpp:155
+#: moodbar/moodbarrenderer.cpp:167
 msgid "Normal"
 msgstr "Običajno"
 
@@ -3292,40 +3332,40 @@ msgstr "Običajno"
 msgid "Normal block type"
 msgstr "Običajna vrsta bloka"
 
-#: playlist/playlistsequence.cpp:170
+#: playlist/playlistsequence.cpp:189
 msgid "Not available while using a dynamic playlist"
 msgstr "Ni razpoložljivo med uporabo dinamičnega seznama predvajanja"
 
-#: devices/deviceview.cpp:107
+#: devices/deviceview.cpp:109
 msgid "Not connected"
 msgstr "Brez povezave"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:463
 msgid "Not enough content"
 msgstr "Ni dovolj vsebine"
 
-#: internet/lastfmservice.cpp:441
+#: internet/lastfmservice.cpp:467
 msgid "Not enough fans"
 msgstr "Ni dovolj oboževalcev"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:465
 msgid "Not enough members"
 msgstr "Ni dovolj članov"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:469
 msgid "Not enough neighbors"
 msgstr "Ni dovolj sosedov"
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:72
 msgid "Not installed"
 msgstr "Ni nameščeno"
 
 #: globalsearch/globalsearchsettingspage.cpp:120
-#: globalsearch/searchproviderstatuswidget.cpp:48
+#: globalsearch/searchproviderstatuswidget.cpp:47
 msgid "Not logged in"
 msgstr "Niste prijavljeni"
 
-#: devices/deviceview.cpp:111
+#: devices/deviceview.cpp:113
 msgid "Not mounted - double click to mount"
 msgstr "Ni priklopljeno - dvokliknite za priklop"
 
@@ -3341,36 +3381,37 @@ msgstr "Obvestila"
 msgid "Now Playing"
 msgstr "Se predvaja"
 
-#: ui/notificationssettingspage.cpp:37
+#: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Predogled prikaza na zaslonu"
 
-#: widgets/osd.cpp:171
+#: widgets/osd.cpp:169
 msgid "Off"
 msgstr "Izklopljeno"
 
-#: core/song.cpp:344
+#: core/song.cpp:387 transcoder/transcoder.cpp:241
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:347
+#: core/song.cpp:393 transcoder/transcoder.cpp:247
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:345
+#: core/song.cpp:389 transcoder/transcoder.cpp:244
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:346 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:391 transcoder/transcoder.cpp:238
+#: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: widgets/osd.cpp:171
+#: widgets/osd.cpp:169
 msgid "On"
 msgstr "Vklopljeno"
 
-#: ../bin/src/ui_networkremotesettingspage.h:182
+#: ../bin/src/ui_networkremotesettingspage.h:183
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3378,11 +3419,11 @@ msgid ""
 "192.168.x.x"
 msgstr "Sprejmi samo povezave iz odjemalcev znotraj območij IP:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:187
+#: ../bin/src/ui_networkremotesettingspage.h:188
 msgid "Only allow connections from the local network"
 msgstr "Dovoli samo povezave iz krajevnega omrežja"
 
-#: ../bin/src/ui_querysortpage.h:142
+#: ../bin/src/ui_querysortpage.h:143
 msgid "Only show the first"
 msgstr "Pokaži le prve"
 
@@ -3390,10 +3431,10 @@ msgstr "Pokaži le prve"
 msgid "Opacity"
 msgstr "Motnost"
 
-#: internet/digitallyimportedservicebase.cpp:179
-#: internet/groovesharkservice.cpp:546 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
-#: internet/somafmservice.cpp:100 internet/soundcloudservice.cpp:194
+#: internet/digitallyimportedservicebase.cpp:172
+#: internet/groovesharkservice.cpp:548 internet/icecastservice.cpp:295
+#: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:190
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Odpri %1 v brskalniku"
@@ -3402,11 +3443,11 @@ msgstr "Odpri %1 v brskalniku"
 msgid "Open &audio CD..."
 msgstr "Odpri  &zvočni CD ..."
 
-#: podcasts/addpodcastdialog.cpp:230
+#: podcasts/addpodcastdialog.cpp:235
 msgid "Open OPML file"
 msgstr "Odpri datoteko OPML"
 
-#: podcasts/addpodcastdialog.cpp:73
+#: podcasts/addpodcastdialog.cpp:77
 msgid "Open OPML file..."
 msgstr "Odpri datoteko OPML ..."
 
@@ -3418,17 +3459,22 @@ msgstr "Odpri napravo"
 msgid "Open file..."
 msgstr "Odpri datoteko ..."
 
-#: internet/googledriveservice.cpp:184
+#: internet/googledriveservice.cpp:179
 msgid "Open in Google Drive"
 msgstr "Odpri v Google Drive"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
-#: internet/internetservice.cpp:76 library/libraryview.cpp:371
-#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:219
+#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:454
+#: internet/internetservice.cpp:75 library/libraryview.cpp:375
+#: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Odpri v novem seznamu predvajanja"
 
-#: songinfo/echonestbiographies.cpp:96
+#: ../bin/src/ui_behavioursettingspage.h:219
+msgctxt "Refers to behavior settings in Clementine settings page."
+msgid "Open in new playlist"
+msgstr ""
+
+#: songinfo/echonestbiographies.cpp:97
 msgid "Open in your browser"
 msgstr "Odpri v brskalniku"
 
@@ -3437,7 +3483,7 @@ msgstr "Odpri v brskalniku"
 msgid "Open..."
 msgstr "Odpri ..."
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:449
 msgid "Operation failed"
 msgstr "Opravilo je spodletelo"
 
@@ -3461,19 +3507,19 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organiziraj datoteke"
 
-#: library/libraryview.cpp:387 ui/mainwindow.cpp:516
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:591
 msgid "Organise files..."
 msgstr "Organiziraj datoteke ..."
 
-#: core/organise.cpp:66
+#: core/organise.cpp:67
 msgid "Organising files"
 msgstr "Organiziranje datotek"
 
-#: ui/trackselectiondialog.cpp:167
+#: ui/trackselectiondialog.cpp:162
 msgid "Original tags"
 msgstr "Izvorne oznake"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:164
 msgid "Other options"
 msgstr "Druge možnosti"
 
@@ -3509,11 +3555,11 @@ msgstr "Prepiši le manjše"
 msgid "Owner"
 msgstr "Lastnik"
 
-#: internet/jamendoservice.cpp:214
+#: internet/jamendoservice.cpp:222
 msgid "Parsing Jamendo catalogue"
 msgstr "Razčlenjanje kataloga Jamendo"
 
-#: ui/equalizer.cpp:126
+#: ui/equalizer.cpp:133
 msgid "Party"
 msgstr "Zabava"
 
@@ -3526,20 +3572,20 @@ msgstr "Zabava"
 msgid "Password"
 msgstr "Geslo"
 
-#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:871 ui/mainwindow.cpp:1304
-#: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1010 ui/mainwindow.cpp:1465
+#: ui/qtsystemtrayicon.cpp:181 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Naredi premor"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:146
 msgid "Pause playback"
 msgstr "Naredi premor predvajanja"
 
-#: widgets/osd.cpp:156
+#: widgets/osd.cpp:153
 msgid "Paused"
 msgstr "V premoru"
 
-#: playlist/playlist.cpp:1219 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:64
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr "Izvajalec"
@@ -3548,14 +3594,14 @@ msgstr "Izvajalec"
 msgid "Pixel"
 msgstr "Slikovna točka"
 
-#: widgets/fancytabwidget.cpp:672
+#: widgets/fancytabwidget.cpp:664
 msgid "Plain sidebar"
 msgstr "Navadna stranska vrstica"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:498 ui/mainwindow.cpp:839
-#: ui/mainwindow.cpp:858 ui/mainwindow.cpp:1307 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:654
-#: wiimotedev/wiimotesettingspage.cpp:101
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:563 ui/mainwindow.cpp:978
+#: ui/mainwindow.cpp:997 ui/mainwindow.cpp:1468 ui/qtsystemtrayicon.cpp:169
+#: ui/qtsystemtrayicon.cpp:195 ../bin/src/ui_mainwindow.h:654
+#: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
 msgstr "Predvajaj"
 
@@ -3563,19 +3609,19 @@ msgstr "Predvajaj"
 msgid "Play Artist or Tag"
 msgstr "Predvajaj izvajalca ali oznako"
 
-#: internet/lastfmservice.cpp:118
+#: internet/lastfmservice.cpp:117
 msgid "Play artist radio..."
 msgstr "Predvajaj radio izvajalca ..."
 
-#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1325 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "Število predvajanj"
 
-#: internet/lastfmservice.cpp:122
+#: internet/lastfmservice.cpp:123
 msgid "Play custom radio..."
 msgstr "Predvajaj radio po meri ..."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:145
 msgid "Play if stopped, pause if playing"
 msgstr "Predvajaj, če je zaustavljeno, napravi premor, če se predvaja"
 
@@ -3588,11 +3634,11 @@ msgstr "Predvajaj, če se trenutno ne predvaja nič"
 msgid "Play tag radio..."
 msgstr "Predvajaj radio oznak ..."
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:163
 msgid "Play the <n>th track in the playlist"
 msgstr "Predvajaj <n>-to skladbo v seznamu predvajanja"
 
-#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "Predvajaj/premor"
 
@@ -3600,29 +3646,29 @@ msgstr "Predvajaj/premor"
 msgid "Playback"
 msgstr "Predvajanje"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:143
 msgid "Player options"
 msgstr "Možnosti predvajalnika"
 
-#: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
-#: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:357
+#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:151
+#: playlist/playlistmanager.cpp:481 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Seznam predvajanja"
 
-#: widgets/osd.cpp:178
+#: widgets/osd.cpp:176
 msgid "Playlist finished"
 msgstr "Seznam predvajanja je končan"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:160
 msgid "Playlist options"
 msgstr "Možnosti seznama predvajanja"
 
-#: smartplaylists/wizard.cpp:77
+#: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
 msgstr "Vrsta seznama predvajanja"
 
-#: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:243
+#: internet/groovesharkservice.cpp:643 ui/mainwindow.cpp:231
 msgid "Playlists"
 msgstr "Seznami predvajanja"
 
@@ -3634,23 +3680,23 @@ msgstr "Zaprite vaš brskalnik in se vrnite v Clementine."
 msgid "Plugin status:"
 msgstr "Stanje vstavka:"
 
-#: podcasts/podcastservice.cpp:116 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcasti"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:135
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:577
+#: internet/groovesharkservice.cpp:580
 msgid "Popular songs"
 msgstr "Priljubljene skladbe"
 
-#: internet/groovesharkservice.cpp:580
+#: internet/groovesharkservice.cpp:584
 msgid "Popular songs of the Month"
 msgstr "Priljubljene skladbe meseca"
 
-#: internet/groovesharkservice.cpp:587
+#: internet/groovesharkservice.cpp:593
 msgid "Popular songs today"
 msgstr "Današnje priljubljene skladbe"
 
@@ -3659,11 +3705,11 @@ msgid "Popup duration"
 msgstr "Trajanje pojavnega obvestila"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:181
 msgid "Port"
 msgstr "Vrata"
 
-#: ui/equalizer.cpp:47 ../bin/src/ui_playbacksettingspage.h:317
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:317
 msgid "Pre-amp"
 msgstr "Predojačanje"
 
@@ -3710,7 +3756,7 @@ msgstr "Pritisnite kombinacijo gumbov za"
 msgid "Press a key"
 msgstr "Pritisnite tipko"
 
-#: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
+#: ui/globalshortcutgrabber.cpp:35 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
 msgstr "Pritisnite kombinacijo tipk, ki jo želite uporabiti za %1 ..."
@@ -3725,16 +3771,16 @@ msgstr "Možnosti za lep prikaz na zaslonu"
 msgid "Preview"
 msgstr "Predogled"
 
-#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:162 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "Predhodni"
 
-#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:652
-#: wiimotedev/wiimotesettingspage.cpp:100
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:652
+#: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "Predhodna skladba"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:170
 msgid "Print out version information"
 msgstr "Izpiši podrobnosti o različici"
 
@@ -3742,21 +3788,25 @@ msgstr "Izpiši podrobnosti o različici"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_magnatunedownloaddialog.h:134
 #: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcd.h:324
 msgid "Progress"
 msgstr "Napredek"
 
-#: ui/equalizer.cpp:129
+#: ../bin/src/ui_magnatunedownloaddialog.h:134
+msgctxt "Category label"
+msgid "Progress"
+msgstr ""
+
+#: ui/equalizer.cpp:138
 msgid "Psychedelic"
 msgstr "Psihedelično"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
-#: wiimotedev/wiimotesettingspage.cpp:227
+#: wiimotedev/wiimotesettingspage.cpp:239
 msgid "Push Wiiremote button"
 msgstr "Pritisnite gumb Wiiremote"
 
-#: ../bin/src/ui_querysortpage.h:138
+#: ../bin/src/ui_querysortpage.h:139
 msgid "Put songs in a random order"
 msgstr "Razvrsti skladbe naključno"
 
@@ -3764,7 +3814,7 @@ msgstr "Razvrsti skladbe naključno"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:114
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Quality"
 msgstr "Kakovost"
 
@@ -3776,12 +3826,12 @@ msgstr "Poizvedovanje po napravi ..."
 msgid "Queue Manager"
 msgstr "Upravljalnik vrste"
 
-#: ui/mainwindow.cpp:1386
+#: ui/mainwindow.cpp:1560
 msgid "Queue selected tracks"
 msgstr "Postavi izbrane skladbe v vrsto"
 
-#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1384
+#: globalsearch/globalsearchview.cpp:459 library/libraryview.cpp:380
+#: ui/mainwindow.cpp:1558
 msgid "Queue track"
 msgstr "Postavi skladbo v vrsto"
 
@@ -3789,60 +3839,65 @@ msgstr "Postavi skladbo v vrsto"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (enaka glasnost za vse skladbe)"
 
-#: internet/groovesharkservice.cpp:595
+#: internet/groovesharkservice.cpp:602
 msgid "Radios"
 msgstr "Radio"
 
-#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:692
+#: core/backgroundstreams.cpp:28
 msgid "Rain"
 msgstr "Dež"
+
+#: ../bin/src/ui_mainwindow.h:692
+msgctxt "Label for button to enable/disable rain background sound."
+msgid "Rain"
+msgstr ""
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
 msgstr "Naključno predočenje"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:75
 msgid "Rate the current song 0 stars"
 msgstr "Oceni trenutno skladbo: 0 zvezdic"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:77
 msgid "Rate the current song 1 star"
 msgstr "Oceni trenutno skladbo: 1 zvezdica"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 2 stars"
 msgstr "Oceni trenutno skladbo: 2 zvezdici"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 3 stars"
 msgstr "Oceni trenutno skladbo: 3 zvezdice"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 4 stars"
 msgstr "Oceni trenutno skladbo: 4 zvezdice"
 
-#: core/globalshortcuts.cpp:70
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 5 stars"
 msgstr "Oceni trenutno skladbo: 5 zvezdic"
 
-#: playlist/playlist.cpp:1222 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1323 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "Ocena"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:215
+#: internet/magnatunedownloaddialog.cpp:303 ui/albumcovermanager.cpp:218
 msgid "Really cancel?"
 msgstr "Resnično prekličem?"
 
-#: internet/subsonicsettingspage.cpp:131
+#: internet/subsonicsettingspage.cpp:136
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Presežena je bila omejitev preusmeritev, preverite nastavitev strežnika."
 
-#: internet/groovesharkservice.cpp:549
+#: internet/groovesharkservice.cpp:550
 msgid "Refresh"
 msgstr "Osveži"
 
-#: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:92
+#: internet/jamendoservice.cpp:431 internet/magnatuneservice.cpp:279
+#: internet/subsonicservice.cpp:87
 msgid "Refresh catalogue"
 msgstr "Osveži katalog"
 
@@ -3850,19 +3905,19 @@ msgstr "Osveži katalog"
 msgid "Refresh channels"
 msgstr "Osveži kanale"
 
-#: internet/lastfmservice.cpp:124
+#: internet/lastfmservice.cpp:126
 msgid "Refresh friends list"
 msgstr "Osveži seznam prijateljev"
 
-#: internet/icecastservice.cpp:297
+#: internet/icecastservice.cpp:298
 msgid "Refresh station list"
 msgstr "Osveži seznam postaj"
 
-#: internet/digitallyimportedservicebase.cpp:182
+#: internet/digitallyimportedservicebase.cpp:175
 msgid "Refresh streams"
 msgstr "Osveži pretoke"
 
-#: ui/equalizer.cpp:130
+#: ui/equalizer.cpp:140
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -3875,7 +3930,7 @@ msgid "Remember from last time"
 msgstr "Zapomni si od zadnjič"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_transcodedialog.h:210 internet/lastfmservice.cpp:115
+#: ../bin/src/ui_transcodedialog.h:210 internet/lastfmservice.cpp:114
 msgid "Remove"
 msgstr "Odstrani"
 
@@ -3891,48 +3946,48 @@ msgstr "Odstrani podvojene iz seznama predvajanja"
 msgid "Remove folder"
 msgstr "Odstrani mapo"
 
-#: internet/groovesharkservice.cpp:536
+#: internet/groovesharkservice.cpp:538
 msgid "Remove from My Music"
 msgstr "Odstrani iz Moje glasbe"
 
-#: internet/groovesharkservice.cpp:533
+#: internet/groovesharkservice.cpp:535
 msgid "Remove from favorites"
 msgstr "Odstrani iz priljubljenih"
 
-#: internet/groovesharkservice.cpp:530 ../bin/src/ui_mainwindow.h:699
+#: internet/groovesharkservice.cpp:532 ../bin/src/ui_mainwindow.h:699
 msgid "Remove from playlist"
 msgstr "Odstrani iz seznama predvajanja"
 
-#: playlist/playlisttabbar.cpp:174
+#: playlist/playlisttabbar.cpp:172
 msgid "Remove playlist"
 msgstr "Odstrani seznam predvajanja"
 
-#: playlist/playlistlistcontainer.cpp:315
+#: playlist/playlistlistcontainer.cpp:317
 msgid "Remove playlists"
 msgstr "Odstrani sezname predvajanja"
 
-#: internet/groovesharkservice.cpp:1539
+#: internet/groovesharkservice.cpp:1566
 msgid "Removing songs from My Music"
 msgstr "Odstranjevanje skladb iz Moje glasbe"
 
-#: internet/groovesharkservice.cpp:1489
+#: internet/groovesharkservice.cpp:1513
 msgid "Removing songs from favorites"
 msgstr "Odstranjevanje skladb iz priljubljenih"
 
-#: internet/groovesharkservice.cpp:1337
+#: internet/groovesharkservice.cpp:1365
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Preimenuj seznam predvajanja \"%1\""
 
-#: internet/groovesharkservice.cpp:526
+#: internet/groovesharkservice.cpp:528
 msgid "Rename Grooveshark playlist"
 msgstr "Preimenuj seznam predvajanja Grooveshark"
 
-#: playlist/playlisttabbar.cpp:137
+#: playlist/playlisttabbar.cpp:135
 msgid "Rename playlist"
 msgstr "Preimenuj seznam predvajanja"
 
-#: playlist/playlisttabbar.cpp:55
+#: playlist/playlisttabbar.cpp:56
 msgid "Rename playlist..."
 msgstr "Preimenuj seznam predvajanja ..."
 
@@ -3940,24 +3995,24 @@ msgstr "Preimenuj seznam predvajanja ..."
 msgid "Renumber tracks in this order..."
 msgstr "Znova oštevilči skladbe v naslednjem vrstnem redu ..."
 
-#: playlist/playlistsequence.cpp:174 ../bin/src/ui_playlistsequence.h:112
+#: playlist/playlistsequence.cpp:193 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat"
 msgstr "Ponavljanje"
 
-#: widgets/osd.cpp:293 ../bin/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
 msgstr "Ponavljaj album"
 
-#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:106
+#: widgets/osd.cpp:311 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
 msgstr "Ponavljaj seznam predvajanja"
 
-#: widgets/osd.cpp:292 ../bin/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:305 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
 msgstr "Ponavljaj skladbo"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
-#: internet/internetservice.cpp:66 library/libraryview.cpp:369
+#: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:450
+#: internet/internetservice.cpp:64 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Zamenjaj trenuten seznam predvajanja"
@@ -3982,7 +4037,7 @@ msgstr "Način Jakosti predvajanja"
 msgid "Repopulate"
 msgstr "Znova napolni"
 
-#: ../bin/src/ui_networkremotesettingspage.h:191
+#: ../bin/src/ui_networkremotesettingspage.h:192
 msgid "Require authentication code"
 msgstr "Zahtevaj overitveno kodo"
 
@@ -3990,11 +4045,11 @@ msgstr "Zahtevaj overitveno kodo"
 msgid "Reset"
 msgstr "Ponastavi"
 
-#: ui/edittagdialog.cpp:768 ../bin/src/ui_edittagdialog.h:665
+#: ui/edittagdialog.cpp:782 ../bin/src/ui_edittagdialog.h:665
 msgid "Reset play counts"
 msgstr "Ponastavi število predvajanj"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:158
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Znova zaženi skladbo ali predvajaj predhodno skladbo, če je znotraj 8 sekund začetka."
@@ -4007,15 +4062,15 @@ msgstr "Omeji na znake ASCII"
 msgid "Resume playback on start"
 msgstr "Ob zagonu nadaljuj s predvajanjem"
 
-#: internet/groovesharkservice.cpp:758
+#: internet/groovesharkservice.cpp:779
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Pridobivanje skladb Grooveshark iz Moje glasbe"
 
-#: internet/groovesharkservice.cpp:726
+#: internet/groovesharkservice.cpp:746
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Pridobivanje priljubljenih skladb Grooveshark"
 
-#: internet/groovesharkservice.cpp:663
+#: internet/groovesharkservice.cpp:682
 msgid "Retrieving Grooveshark playlists"
 msgstr "Pridobivanje seznamov predvajanja Grooveshark"
 
@@ -4029,17 +4084,17 @@ msgstr "Desno"
 
 #: ../bin/src/ui_ripcd.h:303
 msgid "Rip"
-msgstr ""
+msgstr "Zajemi"
 
 #: ui/ripcd.cpp:116
 msgid "Rip CD"
-msgstr ""
+msgstr "Zajemi CD"
 
 #: ../bin/src/ui_mainwindow.h:730
 msgid "Rip audio CD..."
-msgstr ""
+msgstr "Zajemi zvočni CD ..."
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:142
 msgid "Rock"
 msgstr "Rock"
 
@@ -4051,13 +4106,13 @@ msgstr "Zaženi"
 msgid "SOCKS proxy"
 msgstr "Posredniški strežnik SOCKS"
 
-#: internet/subsonicsettingspage.cpp:122
+#: internet/subsonicsettingspage.cpp:125
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
 msgstr "Napaka med rokovanjem SSH, preverite nastavitev strežnika. Za nekatere težave je morda začasna rešitev spodnja možnost SSLv3."
 
-#: devices/deviceview.cpp:202
+#: devices/deviceview.cpp:203
 msgid "Safely remove device"
 msgstr "Varno odstrani napravo"
 
@@ -4065,11 +4120,11 @@ msgstr "Varno odstrani napravo"
 msgid "Safely remove the device after copying"
 msgstr "Varno odstrani napravo po kopiranju"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "Hitrost vzorčenja"
 
-#: ui/organisedialog.cpp:71
+#: ui/organisedialog.cpp:74
 msgid "Samplerate"
 msgstr "Hitrost vzorčenja"
 
@@ -4077,27 +4132,33 @@ msgstr "Hitrost vzorčenja"
 msgid "Save .mood files in your music library"
 msgstr "Shrani datoteke .mood v vašo glasbeno knjižnico"
 
-#: ui/albumcoverchoicecontroller.cpp:121
+#: ui/albumcoverchoicecontroller.cpp:126
 msgid "Save album cover"
 msgstr "Shrani ovitek albuma"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Save cover to disk..."
 msgstr "Shrani ovitek na disk ..."
 
-#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:232
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Shrani sliko"
 
-#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:240
+#: playlist/playlistlistcontainer.cpp:72
+msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Shrani seznam predvajanja"
 
-#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:707
+#: playlist/playlistmanager.cpp:237
+msgctxt "Title of the playlist save dialog."
+msgid "Save playlist"
+msgstr "Shrani seznam predvajanja"
+
+#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "Shrani seznam predvajanja ..."
 
-#: ui/equalizer.cpp:182 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Shrani predlogo nastavitev"
 
@@ -4113,11 +4174,11 @@ msgstr "Shrani statistike v oznake datotek, če je to mogoče"
 msgid "Save this stream in the Internet tab"
 msgstr "Shrani ta pretok v zavihek Internet"
 
-#: library/library.cpp:164
+#: library/library.cpp:177
 msgid "Saving songs statistics into songs files"
 msgstr "Shranjevanje statistike skladb v datoteke skladb"
 
-#: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
+#: ui/edittagdialog.cpp:685 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr "Shranjevanje skladb"
 
@@ -4129,7 +4190,7 @@ msgstr "Profil prilagodljive vzorčne hitrosti (SSR)"
 msgid "Scale size"
 msgstr "Umeri velikost"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "Rezultat"
 
@@ -4137,34 +4198,38 @@ msgstr "Rezultat"
 msgid "Scrobble tracks that I listen to"
 msgstr "Pošlji podatke o predvajanih skladbah"
 
-#: ui/albumcoversearcher.cpp:173 ui/albumcoversearcher.cpp:190
-#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
 #: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
 msgstr "Poišči"
 
+#: ui/mainwindow.cpp:226 ../bin/src/ui_globalsearchsettingspage.h:145
+msgctxt "Global search settings dialog title."
+msgid "Search"
+msgstr ""
+
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
 msgstr "Poišči postaje Icecast"
 
-#: internet/jamendoservice.cpp:426
+#: internet/jamendoservice.cpp:438
 msgid "Search Jamendo"
 msgstr "Poišči na Jamendo"
 
-#: internet/magnatuneservice.cpp:285
+#: internet/magnatuneservice.cpp:288
 msgid "Search Magnatune"
 msgstr "Poišči na Magnatune"
 
-#: internet/subsonicservice.cpp:75
+#: internet/subsonicservice.cpp:71
 msgid "Search Subsonic"
 msgstr "Poišči na Subsonicu"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:72
 msgid "Search automatically"
 msgstr "Samodejno najdi"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:65
 msgid "Search for album covers..."
 msgstr "Poišči ovitke albumov ..."
 
@@ -4184,16 +4249,16 @@ msgstr "Poišči na iTunes"
 msgid "Search mode"
 msgstr "Način iskanja"
 
-#: smartplaylists/querywizardplugin.cpp:154
+#: smartplaylists/querywizardplugin.cpp:159
 msgid "Search options"
 msgstr "Možnosti iskanja"
 
-#: internet/groovesharkservice.cpp:569 internet/soundcloudservice.cpp:104
-#: internet/spotifyservice.cpp:347
+#: internet/groovesharkservice.cpp:571 internet/soundcloudservice.cpp:104
+#: internet/spotifyservice.cpp:357
 msgid "Search results"
 msgstr "Rezultati iskanja"
 
-#: smartplaylists/querywizardplugin.cpp:152
+#: smartplaylists/querywizardplugin.cpp:155
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Iskalni pojmi"
@@ -4206,27 +4271,27 @@ msgstr "Iskanje po Grooveshark"
 msgid "Second level"
 msgstr "Druga raven"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr "Previj nazaj"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr "Previj naprej"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:156
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Previj trenutno predvajano skladbo za relativno količino"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Previj trenutno predvajano skladbo na absoluten položaj"
 
-#: visualisations/visualisationselector.cpp:40 ../bin/src/ui_ripcd.h:310
+#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
 msgid "Select All"
 msgstr "Izberi vse"
 
-#: visualisations/visualisationselector.cpp:42 ../bin/src/ui_ripcd.h:311
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcd.h:311
 msgid "Select None"
 msgstr "Odstrani izbor"
 
@@ -4234,7 +4299,7 @@ msgstr "Odstrani izbor"
 msgid "Select background color:"
 msgstr "Izberite barvo ozadja:"
 
-#: ui/appearancesettingspage.cpp:247
+#: ui/appearancesettingspage.cpp:258
 msgid "Select background image"
 msgstr "Izberi sliko ozadja"
 
@@ -4250,13 +4315,13 @@ msgstr "Izberite barvo ospredja:"
 msgid "Select visualizations"
 msgstr "Izberi predočenja"
 
-#: visualisations/visualisationcontainer.cpp:124
+#: visualisations/visualisationcontainer.cpp:131
 msgid "Select visualizations..."
 msgstr "Izberi predočenja ..."
 
 #: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
-msgstr ""
+msgstr "Izberi ..."
 
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
@@ -4270,16 +4335,16 @@ msgstr "Naslov URL strežnika"
 msgid "Server details"
 msgstr "Podrobnosti strežnika"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:455
 msgid "Service offline"
 msgstr "Storitev je nepovezana"
 
-#: ui/mainwindow.cpp:1413
+#: ui/mainwindow.cpp:1597
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavi %1 na \"%2\" ..."
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:149
 msgid "Set the volume to <value> percent"
 msgstr "Nastavi glasnost na <value> odstotkov"
 
@@ -4287,7 +4352,7 @@ msgstr "Nastavi glasnost na <value> odstotkov"
 msgid "Set value for all selected tracks..."
 msgstr "Nastavi vrednost za vse izbrane skladbe ..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:180
 msgid "Settings"
 msgstr "Nastavitve"
 
@@ -4295,22 +4360,22 @@ msgstr "Nastavitve"
 msgid "Shortcut"
 msgstr "Bližnjica"
 
-#: ui/globalshortcutssettingspage.cpp:135
+#: ui/globalshortcutssettingspage.cpp:140
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Bližnjica za %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:124
+#: wiimotedev/wiimotesettingspage.cpp:133
 #, qt-format
 msgid "Shortcut for %1 already exists"
 msgstr "Bližnjica za %1 že obstaja"
 
-#: library/libraryfilterwidget.cpp:61
+#: library/libraryfilterwidget.cpp:60
 msgid "Show"
 msgstr "Pokaži"
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "Pokaži prikaz na zaslonu"
 
@@ -4342,15 +4407,15 @@ msgstr "Prikaži pojavno okno iz sistemske vrstice"
 msgid "Show a pretty OSD"
 msgstr "Pokaži lep prikaz na zaslonu"
 
-#: widgets/nowplayingwidget.cpp:121
+#: widgets/nowplayingwidget.cpp:122
 msgid "Show above status bar"
 msgstr "Pokaži nad vrstico stanja"
 
-#: ui/mainwindow.cpp:471
+#: ui/mainwindow.cpp:531
 msgid "Show all songs"
 msgstr "Pokaži vse skladbe"
 
-#: ../bin/src/ui_querysortpage.h:141
+#: ../bin/src/ui_querysortpage.h:142
 msgid "Show all the songs"
 msgstr "Pokaži vse skladbe"
 
@@ -4362,32 +4427,32 @@ msgstr "Pokaži ovitek albuma v knjižnici"
 msgid "Show dividers"
 msgstr "Pokaži razdelilnike"
 
-#: ui/albumcoverchoicecontroller.cpp:64 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "Pokaži v polni velikosti ..."
 
-#: library/libraryview.cpp:399 ui/mainwindow.cpp:519
-#: widgets/fileviewlist.cpp:52
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:600
+#: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Pokaži v brskalniku datotek ..."
 
-#: ui/mainwindow.cpp:520
+#: ui/mainwindow.cpp:603
 msgid "Show in library..."
-msgstr ""
+msgstr "Pokaži v knjižnici ..."
 
-#: library/libraryview.cpp:403
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "Pokaži med \"Različni izvajalci\""
 
-#: moodbar/moodbarproxystyle.cpp:337
+#: moodbar/moodbarproxystyle.cpp:340
 msgid "Show moodbar"
 msgstr "Pokaži vrstico razpoloženja"
 
-#: ui/mainwindow.cpp:472
+#: ui/mainwindow.cpp:533
 msgid "Show only duplicates"
 msgstr "Pokaži samo podvojene"
 
-#: ui/mainwindow.cpp:473
+#: ui/mainwindow.cpp:535
 msgid "Show only untagged"
 msgstr "Pokaži samo tiste brez oznak"
 
@@ -4411,19 +4476,19 @@ msgstr "Pokaži ikono v sistemski vrstici"
 msgid "Show which sources are enabled and disabled"
 msgstr "Prikaži kateri viri so omogočeni in kateri onemogočeni"
 
-#: core/globalshortcuts.cpp:58
+#: core/globalshortcuts.cpp:62
 msgid "Show/Hide"
 msgstr "Pokaži/Skrij"
 
-#: playlist/playlistsequence.cpp:173 ../bin/src/ui_playlistsequence.h:115
+#: playlist/playlistsequence.cpp:192 ../bin/src/ui_playlistsequence.h:115
 msgid "Shuffle"
 msgstr "Premešaj"
 
-#: widgets/osd.cpp:281 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:290 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
 msgstr "Premešaj albume"
 
-#: widgets/osd.cpp:279 ../bin/src/ui_playlistsequence.h:109
+#: widgets/osd.cpp:284 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
 msgstr "Premešaj vse"
 
@@ -4431,7 +4496,7 @@ msgstr "Premešaj vse"
 msgid "Shuffle playlist"
 msgstr "Premešaj seznam predvajanja"
 
-#: widgets/osd.cpp:280 ../bin/src/ui_playlistsequence.h:108
+#: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
 msgstr "Premešaj skladbe v tem albumu"
 
@@ -4447,7 +4512,7 @@ msgstr "Odjavi se"
 msgid "Signing in..."
 msgstr "Prijavljanje ..."
 
-#: songinfo/echonestsimilarartists.cpp:57
+#: songinfo/echonestsimilarartists.cpp:58
 msgid "Similar artists"
 msgstr "Podobni izvajalci"
 
@@ -4459,43 +4524,51 @@ msgstr "Velikost"
 msgid "Size:"
 msgstr "Velikost:"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:146
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:147
 msgid "Skip backwards in playlist"
 msgstr "Skoči nazaj po seznamu predvajanja"
 
-#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1327 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
 msgstr "Število preskočenih"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:148
 msgid "Skip forwards in playlist"
 msgstr "Skoči naprej po seznamu predvajanja"
 
-#: widgets/nowplayingwidget.cpp:93
+#: ui/mainwindow.cpp:1571
+msgid "Skip selected tracks"
+msgstr "Preskoči izbrane skladbe"
+
+#: ui/mainwindow.cpp:1569
+msgid "Skip track"
+msgstr "Preskoči skladbo"
+
+#: widgets/nowplayingwidget.cpp:92
 msgid "Small album cover"
 msgstr "Majhen ovitek albuma"
 
-#: widgets/fancytabwidget.cpp:671
+#: widgets/fancytabwidget.cpp:663
 msgid "Small sidebar"
 msgstr "Majhna stranska vrstica"
 
-#: smartplaylists/wizard.cpp:68
+#: smartplaylists/wizard.cpp:63
 msgid "Smart playlist"
 msgstr "Pametni seznam predvajanja"
 
-#: library/librarymodel.cpp:1207
+#: library/librarymodel.cpp:1224
 msgid "Smart playlists"
 msgstr "Pametni seznami predvajanja"
 
-#: ui/equalizer.cpp:132
+#: ui/equalizer.cpp:144
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:134
+#: ui/equalizer.cpp:148
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -4503,11 +4576,11 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Podrobnosti o skladbi"
 
-#: ui/mainwindow.cpp:247
+#: ui/mainwindow.cpp:239
 msgid "Song info"
 msgstr "O skladbi"
 
-#: analyzers/sonogram.cpp:18
+#: analyzers/sonogram.cpp:19
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4527,15 +4600,15 @@ msgstr "Razvrsti po zvrsti (po priljubljenosti)"
 msgid "Sort by station name"
 msgstr "Razvrsti po imenu postaje"
 
-#: ../bin/src/ui_querysortpage.h:139
+#: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Razvrsti skladbe po"
 
-#: ../bin/src/ui_querysortpage.h:137
+#: ../bin/src/ui_querysortpage.h:138
 msgid "Sorting"
 msgstr "Razvrščanje"
 
-#: playlist/playlist.cpp:1239
+#: playlist/playlist.cpp:1355
 msgid "Source"
 msgstr "Vir"
 
@@ -4551,7 +4624,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:184
+#: internet/spotifyservice.cpp:190
 msgid "Spotify login error"
 msgstr "Napaka med prijavo na Spotify"
 
@@ -4559,7 +4632,7 @@ msgstr "Napaka med prijavo na Spotify"
 msgid "Spotify plugin"
 msgstr "Vstavek Spotify"
 
-#: internet/spotifyblobdownloader.cpp:59
+#: internet/spotifyblobdownloader.cpp:64
 msgid "Spotify plugin not installed"
 msgstr "Vstavek Spotify ni nameščen"
 
@@ -4567,77 +4640,77 @@ msgstr "Vstavek Spotify ni nameščen"
 msgid "Standard"
 msgstr "Običajno"
 
-#: internet/spotifyservice.cpp:354
+#: internet/spotifyservice.cpp:365
 msgid "Starred"
 msgstr "Z zvezdico"
 
-#: ui/ripcd.cpp:90
+#: ui/ripcd.cpp:88
 msgid "Start ripping"
-msgstr ""
+msgstr "Začni z zajemanjem"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:144
 msgid "Start the playlist currently playing"
 msgstr "Predvajaj skladbo, ki je označena v seznamu predvajanja"
 
-#: transcoder/transcodedialog.cpp:90
+#: transcoder/transcodedialog.cpp:87
 msgid "Start transcoding"
 msgstr "Začni s prekodiranjem"
 
-#: internet/groovesharkservice.cpp:570 internet/soundcloudservice.cpp:105
-#: internet/spotifyservice.cpp:348
+#: internet/groovesharkservice.cpp:573 internet/soundcloudservice.cpp:106
+#: internet/spotifyservice.cpp:359
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
 msgstr "Natipkajte nekaj v iskalno polje, da napolnite te seznam z rezultati iskanja"
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Starting %1"
 msgstr "Začenjanje %1"
 
-#: internet/magnatunedownloaddialog.cpp:120
+#: internet/magnatunedownloaddialog.cpp:122
 msgid "Starting..."
 msgstr "Začenjanje ..."
 
-#: internet/groovesharkservice.cpp:598
+#: internet/groovesharkservice.cpp:606
 msgid "Stations"
 msgstr "Postaje"
 
 #: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:656
-#: wiimotedev/wiimotesettingspage.cpp:102
+#: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "Zaustavi"
 
-#: wiimotedev/wiimotesettingspage.cpp:110
+#: wiimotedev/wiimotesettingspage.cpp:114
 msgid "Stop after"
 msgstr "Zaustavi po"
 
-#: ui/mainwindow.cpp:500 ../bin/src/ui_mainwindow.h:662
+#: ui/mainwindow.cpp:566 ../bin/src/ui_mainwindow.h:662
 msgid "Stop after this track"
 msgstr "Zaustavi po tej skladbi"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:146
 msgid "Stop playback"
 msgstr "Zaustavi predvajanje"
 
-#: core/globalshortcuts.cpp:50
+#: core/globalshortcuts.cpp:51
 msgid "Stop playing after current track"
 msgstr "Zaustavi predvajanje po trenutni skladbi"
 
-#: widgets/osd.cpp:171
+#: widgets/osd.cpp:169
 #, qt-format
 msgid "Stop playing after track: %1"
 msgstr "Zaustavi predvajanje po skladbi: %1"
 
-#: widgets/osd.cpp:166
+#: widgets/osd.cpp:163
 msgid "Stopped"
 msgstr "Zaustavljeno"
 
-#: core/song.cpp:353
+#: core/song.cpp:404
 msgid "Stream"
 msgstr "Pretok"
 
-#: internet/subsonicsettingspage.cpp:30
+#: internet/subsonicsettingspage.cpp:29
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4647,7 +4720,7 @@ msgstr "Pretakanje iz strežnika Subsonic zahteva veljavno strežniško licenco,
 msgid "Streaming membership"
 msgstr "Članstvo pretakanja"
 
-#: internet/groovesharkservice.cpp:629
+#: internet/groovesharkservice.cpp:647
 msgid "Subscribed playlists"
 msgstr "Naročeni seznami predvajanja"
 
@@ -4655,7 +4728,7 @@ msgstr "Naročeni seznami predvajanja"
 msgid "Subscribers"
 msgstr "Naročniki"
 
-#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:98 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4663,12 +4736,12 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Uspeh!"
 
-#: transcoder/transcoder.cpp:200
+#: transcoder/transcoder.cpp:188
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Uspešno zapisan %1"
 
-#: ui/trackselectiondialog.cpp:171
+#: ui/trackselectiondialog.cpp:166
 msgid "Suggested tags"
 msgstr "Predlagane oznake"
 
@@ -4677,13 +4750,13 @@ msgstr "Predlagane oznake"
 msgid "Summary"
 msgstr "Povzetek"
 
-#: analyzers/analyzercontainer.cpp:65
-#: visualisations/visualisationcontainer.cpp:110
+#: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Zelo visoko (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:126
 msgid "Super high (2048x2048)"
 msgstr "Zelo visoko (2048x2048)"
 
@@ -4695,23 +4768,23 @@ msgstr "Podprte vrste"
 msgid "Synchronize statistics to files now"
 msgstr "Uskladi statistike v datoteke zdaj"
 
-#: internet/spotifyservice.cpp:561
+#: internet/spotifyservice.cpp:579
 msgid "Syncing Spotify inbox"
 msgstr "Usklajevanje mape Spotify - prejeto"
 
-#: internet/spotifyservice.cpp:556
+#: internet/spotifyservice.cpp:573
 msgid "Syncing Spotify playlist"
 msgstr "Usklajevanje seznama predvajanja Spotify"
 
-#: internet/spotifyservice.cpp:565
+#: internet/spotifyservice.cpp:584
 msgid "Syncing Spotify starred tracks"
 msgstr "Usklajevanje označenih skladb v Spotify"
 
-#: moodbar/moodbarrenderer.cpp:159
+#: moodbar/moodbarrenderer.cpp:175
 msgid "System colors"
 msgstr "Sistemske barve"
 
-#: widgets/fancytabwidget.cpp:673
+#: widgets/fancytabwidget.cpp:665
 msgid "Tabs on top"
 msgstr "Zavihki na vrhu"
 
@@ -4723,7 +4796,7 @@ msgstr "Oznaka"
 msgid "Tag fetcher"
 msgstr "Prejemnik oznak"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:213
 msgid "Tag radio"
 msgstr "Radio oznak"
 
@@ -4731,7 +4804,7 @@ msgstr "Radio oznak"
 msgid "Target bitrate"
 msgstr "Ciljna bitna hitrost"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:150
 msgid "Techno"
 msgstr "Techno"
 
@@ -4739,11 +4812,11 @@ msgstr "Techno"
 msgid "Text options"
 msgstr "Možnosti besedila"
 
-#: ui/about.cpp:70
+#: ui/about.cpp:72
 msgid "Thanks to"
 msgstr "Zahvala gre"
 
-#: ui/globalshortcutssettingspage.cpp:177
+#: ui/globalshortcutssettingspage.cpp:180
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Ukaza \"%1\" ni bilo mogoče zagnati."
@@ -4752,17 +4825,17 @@ msgstr "Ukaza \"%1\" ni bilo mogoče zagnati."
 msgid "The album cover of the currently playing song"
 msgstr "Ovitek albuma skladbe, ki se trenutno predvaja"
 
-#: internet/magnatunedownloaddialog.cpp:90
+#: internet/magnatunedownloaddialog.cpp:92
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Mapa %1 ni veljavna"
 
-#: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
+#: playlist/playlistmanager.cpp:165 playlist/playlistmanager.cpp:183
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Seznam predvajanja '%1' je prazen ali pa ga ni bilo mogoče naložiti."
 
-#: smartplaylists/searchtermwidget.cpp:330
+#: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
 msgstr "Druga vrednost mora biti višja od prve!"
 
@@ -4770,40 +4843,40 @@ msgstr "Druga vrednost mora biti višja od prve!"
 msgid "The site you requested does not exist!"
 msgstr "Zahtevana stran ne obstaja!"
 
-#: ui/coverfromurldialog.cpp:82
+#: ui/coverfromurldialog.cpp:83
 msgid "The site you requested is not an image!"
 msgstr "Zahtevana stran ni slika!"
 
-#: internet/subsonicsettingspage.cpp:98
+#: internet/subsonicsettingspage.cpp:95
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Preizkusno obdobje za strežnik Subsonic je končano. Da pridobite licenčni ključ, morate donirati. Za podrobnosti si oglejte subsonic.org."
 
-#: ui/mainwindow.cpp:2138
+#: ui/mainwindow.cpp:2390
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Različica Clementine, ki ste jo posodobili, zahteva polno ponovno preiskovanje knjižnice, zaradi spodaj navedenih novih zmožnosti:"
 
-#: library/libraryview.cpp:529
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "V tem albumu so druge skladbe"
 
-#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
-#: podcasts/gpoddertoptagspage.cpp:77
+#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
+#: podcasts/gpoddertoptagspage.cpp:70
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Med komunikacijo z gpodder.net je prišlo do težave"
 
-#: internet/magnatunedownloaddialog.cpp:158
+#: internet/magnatunedownloaddialog.cpp:161
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Med pridobivanjem metapodatkov iz Magnatune je prišlo do težave"
 
-#: podcasts/itunessearchpage.cpp:76
+#: podcasts/itunessearchpage.cpp:75
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Med razčlenjevanjem odgovora iz trgovine iTunes je prišlo do težave"
 
-#: ui/organiseerrordialog.cpp:56
+#: ui/organiseerrordialog.cpp:54
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
@@ -4815,13 +4888,13 @@ msgid ""
 "deleted:"
 msgstr "Med brisanjem nekaterih skladb so nastopile težave. Sledečih datotek ni bilo mogoče izbrisati:"
 
-#: devices/deviceview.cpp:389
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Te datoteke bodo izbrisane iz naprave. Ali ste prepričani, da želite nadaljevati?"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1961 widgets/fileview.cpp:188
+#: library/libraryview.cpp:635 ui/mainwindow.cpp:2178 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4841,13 +4914,13 @@ msgstr "Te nastavitve so uporabljene v pogovornem oknu \"Prekodiraj glasbo\" in 
 msgid "Third level"
 msgstr "Tretja raven"
 
-#: internet/jamendoservice.cpp:171
+#: internet/jamendoservice.cpp:176
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr "To dejanje bo ustvarilo podatkovno zbirko, ki je lahko velika tudi do 150 MB.\nAli želite vseeno nadaljevati?"
 
-#: internet/magnatunedownloaddialog.cpp:175
+#: internet/magnatunedownloaddialog.cpp:188
 msgid "This album is not available in the requested format"
 msgstr "Ta album ni na voljo v zahtevani obliki"
 
@@ -4861,20 +4934,20 @@ msgstr "Ta naprava mora biti povezana in odprta, preden lahko Clementine ugotovi
 msgid "This device supports the following file formats:"
 msgstr "Ta naprava podpira sledeče vrste datotek:"
 
-#: devices/devicemanager.cpp:566 devices/devicemanager.cpp:574
+#: devices/devicemanager.cpp:559 devices/devicemanager.cpp:570
 msgid "This device will not work properly"
 msgstr "Ta naprava ne bo delovala pravilno"
 
-#: devices/devicemanager.cpp:567
+#: devices/devicemanager.cpp:560
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "To je naprava MTP, Clementine pa je preveden brez podpore libmtp."
 
-#: devices/devicemanager.cpp:575
+#: devices/devicemanager.cpp:571
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "To je naprava iPod, Clementine pa je preveden brez podpore libgpod."
 
-#: devices/devicemanager.cpp:324
+#: devices/devicemanager.cpp:318
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -4884,33 +4957,33 @@ msgstr "Tokrat ste prvič priklopili to napravo. Clementine bo sedaj preiskal na
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "To možnost lahko spremenite v \"Obnašanje\""
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:457
 msgid "This stream is for paid subscribers only"
 msgstr "Ta pretok je le za plačane naročnike"
 
-#: devices/devicemanager.cpp:587
+#: devices/devicemanager.cpp:585
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Ta vrsta naprave ni podprta: %1"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:55
-#: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
+#: playlist/playlist.cpp:1298 ui/organisedialog.cpp:58
+#: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "Naslov"
 
-#: internet/groovesharkservice.cpp:1018
+#: internet/groovesharkservice.cpp:1039
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
 msgstr "Da zaženete radio Grooveshark, morate najprej poslušati nekaj drugih skladb Grooveshark"
 
-#: core/utilities.cpp:127 core/utilities.cpp:143
+#: core/utilities.cpp:127 core/utilities.cpp:139
 msgid "Today"
 msgstr "Danes"
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:65
 msgid "Toggle Pretty OSD"
 msgstr "Preklopi lep prikaz na zaslonu"
 
@@ -4918,7 +4991,7 @@ msgstr "Preklopi lep prikaz na zaslonu"
 msgid "Toggle fullscreen"
 msgstr "Preklopi celozaslonski način"
 
-#: ui/mainwindow.cpp:1388
+#: ui/mainwindow.cpp:1562
 msgid "Toggle queue status"
 msgstr "Preklopi stanje vrste"
 
@@ -4926,19 +4999,19 @@ msgstr "Preklopi stanje vrste"
 msgid "Toggle scrobbling"
 msgstr "Preklopi med pošiljanjem podatkov o predvajanih skladbah"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:165
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Preklopi vidnost lepega prikaza na zaslonu"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:140
 msgid "Tomorrow"
 msgstr "Jutri"
 
-#: podcasts/podcasturlloader.cpp:116
+#: podcasts/podcasturlloader.cpp:115
 msgid "Too many redirects"
 msgstr "Preveč preusmeritev"
 
-#: internet/spotifyservice.cpp:366
+#: internet/spotifyservice.cpp:377
 msgid "Top tracks"
 msgstr "Najboljše skladbe"
 
@@ -4946,15 +5019,15 @@ msgstr "Najboljše skladbe"
 msgid "Total albums:"
 msgstr "Skupno albumov:"
 
-#: covers/coversearchstatisticsdialog.cpp:71
+#: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total bytes transferred"
 msgstr "Skupno prenesenih bajtov"
 
-#: covers/coversearchstatisticsdialog.cpp:68
+#: covers/coversearchstatisticsdialog.cpp:65
 msgid "Total network requests made"
 msgstr "Skupno število omrežnih zahtev"
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -4972,7 +5045,7 @@ msgstr "Dnevnik prekodirnika"
 msgid "Transcoding"
 msgstr "Prekodiranje"
 
-#: transcoder/transcoder.cpp:312
+#: transcoder/transcoder.cpp:305
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Prekodiranje %1 datotek z uporabo %2 niti"
@@ -4981,11 +5054,11 @@ msgstr "Prekodiranje %1 datotek z uporabo %2 niti"
 msgid "Transcoding options"
 msgstr "Možnosti prekodiranja"
 
-#: core/song.cpp:350
+#: core/song.cpp:399
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:15
+#: analyzers/turbine.cpp:16
 msgid "Turbine"
 msgstr "Turbina"
 
@@ -4993,11 +5066,11 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Izklopi"
 
-#: devices/giolister.cpp:161
+#: devices/giolister.cpp:157
 msgid "URI"
 msgstr "Naslov URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:142
 msgid "URL(s)"
 msgstr "Naslovi URL"
 
@@ -5017,44 +5090,52 @@ msgstr "Uporabniško ime Ubuntu One"
 msgid "Ultra wide band (UWB)"
 msgstr "Zelo širok pas (UWB)"
 
-#: internet/magnatunedownloaddialog.cpp:144
+#: internet/magnatunedownloaddialog.cpp:147
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "Ni bilo mogoče prejeti %1 (%2)"
 
-#: core/song.cpp:357 library/librarymodel.cpp:312 library/librarymodel.cpp:317
-#: library/librarymodel.cpp:322 library/librarymodel.cpp:999
-#: playlist/playlistdelegates.cpp:314 playlist/playlistmanager.cpp:505
-#: playlist/playlistmanager.cpp:508 ui/albumcoverchoicecontroller.cpp:117
-#: ui/edittagdialog.cpp:424 ui/edittagdialog.cpp:465
+#: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
+#: library/librarymodel.cpp:344 library/librarymodel.cpp:1014
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:488
+#: playlist/playlistmanager.cpp:489 ui/albumcoverchoicecontroller.cpp:123
+#: ui/edittagdialog.cpp:437 ui/edittagdialog.cpp:481
 msgid "Unknown"
 msgstr "Neznano"
 
-#: podcasts/podcasturlloader.cpp:198
+#: podcasts/podcasturlloader.cpp:206
 msgid "Unknown content-type"
 msgstr "Neznan content-type"
 
-#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:448
+#: internet/digitallyimportedclient.cpp:71 internet/lastfmservice.cpp:476
 msgid "Unknown error"
 msgstr "Neznana napaka"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:67
 msgid "Unset cover"
 msgstr "Odstrani ovitek"
 
-#: podcasts/addpodcastdialog.cpp:61 podcasts/podcastservice.cpp:339
+#: ui/mainwindow.cpp:1567
+msgid "Unskip selected tracks"
+msgstr "Ne preskoči izbranih skladb"
+
+#: ui/mainwindow.cpp:1565
+msgid "Unskip track"
+msgstr "Ne preskoči skladbe"
+
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
 msgid "Unsubscribe"
 msgstr "Ukini naročnino"
 
-#: songinfo/songkickconcerts.cpp:168
+#: songinfo/songkickconcerts.cpp:172
 msgid "Upcoming Concerts"
 msgstr "Prihajajoči koncerti"
 
-#: internet/groovesharkservice.cpp:1200
+#: internet/groovesharkservice.cpp:1226
 msgid "Update Grooveshark playlist"
 msgstr "Posodobi seznam predvajanja Grooveshark"
 
-#: podcasts/podcastservice.cpp:319
+#: podcasts/podcastservice.cpp:331
 msgid "Update all podcasts"
 msgstr "Posodobi vse podcaste"
 
@@ -5066,7 +5147,7 @@ msgstr "Posodobi spremenjene mape v knjižnici"
 msgid "Update the library when Clementine starts"
 msgstr "Posodobi knjižnico ob zagonu Clementine"
 
-#: podcasts/podcastservice.cpp:327
+#: podcasts/podcastservice.cpp:339
 msgid "Update this podcast"
 msgstr "Posodobi ta podcast"
 
@@ -5074,21 +5155,21 @@ msgstr "Posodobi ta podcast"
 msgid "Updating"
 msgstr "Posodabljanje"
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:94
 #, qt-format
 msgid "Updating %1"
 msgstr "Posodabljanje %1"
 
-#: devices/deviceview.cpp:103
+#: devices/deviceview.cpp:105
 #, qt-format
 msgid "Updating %1%..."
 msgstr "Posodabljanje %1 % ..."
 
-#: library/librarywatcher.cpp:90
+#: library/librarywatcher.cpp:92
 msgid "Updating library"
 msgstr "Posodabljanje knjižnice"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:142
 msgid "Usage"
 msgstr "Uporaba"
 
@@ -5120,7 +5201,7 @@ msgstr "Izberite seznam barv po meri"
 msgid "Use a custom message for notifications"
 msgstr "Za obvestila uporabi sporočila po meri"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Use a network remote control"
 msgstr "Uporabi omrežni oddaljeni nadzor"
 
@@ -5160,16 +5241,16 @@ msgstr "Uporabi nastavitve posredniškega strežnika sistema"
 msgid "Use volume normalisation"
 msgstr "Uporabi izenačevanje glasnosti"
 
-#: widgets/freespacebar.cpp:47
+#: widgets/freespacebar.cpp:46
 msgid "Used"
 msgstr "Uporabljeno"
 
-#: internet/groovesharkservice.cpp:404
+#: internet/groovesharkservice.cpp:402
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Uporabnik %1 nima računa Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:145
+#: ui/settingsdialog.cpp:143
 msgid "User interface"
 msgstr "Uporabniški vmesnik"
 
@@ -5195,12 +5276,12 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Spremenljiva bitna hitrost"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:242
-#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
+#: playlist/playlistmanager.cpp:500 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Različni izvajalci"
 
-#: ui/about.cpp:34
+#: ui/about.cpp:33
 #, qt-format
 msgid "Version %1"
 msgstr "Različica %1"
@@ -5213,7 +5294,7 @@ msgstr "Pogled"
 msgid "Visualization mode"
 msgstr "Način predočenja"
 
-#: ../bin/src/ui_mainwindow.h:714 ui/dbusscreensaver.cpp:35
+#: ../bin/src/ui_mainwindow.h:714 ui/dbusscreensaver.cpp:33
 msgid "Visualizations"
 msgstr "Predočenja"
 
@@ -5225,7 +5306,7 @@ msgstr "Nastavitve predočenja"
 msgid "Voice activity detection"
 msgstr "Zaznava dejavnosti glasu"
 
-#: widgets/osd.cpp:185
+#: widgets/osd.cpp:182
 #, qt-format
 msgid "Volume %1%"
 msgstr "Glasnost %1 %"
@@ -5243,11 +5324,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:182 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
 msgstr "Opozori med pred zapiranjem zavihkov seznamov predvajanja"
 
-#: core/song.cpp:349
+#: core/song.cpp:397 transcoder/transcoder.cpp:253
 msgid "Wav"
 msgstr "Wav"
 
@@ -5255,7 +5336,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "Spletišče"
 
-#: smartplaylists/searchterm.cpp:312
+#: smartplaylists/searchterm.cpp:390
 msgid "Weeks"
 msgstr "Tednov"
 
@@ -5281,32 +5362,32 @@ msgstr "Zakaj ne bi poskusili ..."
 msgid "Wide band (WB)"
 msgstr "Širok pas (WB)"
 
-#: widgets/osd.cpp:244
+#: widgets/osd.cpp:239
 #, qt-format
 msgid "Wii Remote %1: actived"
 msgstr "Wii Remote %1: omogočen"
 
-#: widgets/osd.cpp:254
+#: widgets/osd.cpp:251
 #, qt-format
 msgid "Wii Remote %1: connected"
 msgstr "Wii Remote %1: povezan"
 
-#: widgets/osd.cpp:269
+#: widgets/osd.cpp:270
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
 msgstr "Wii Remote %1: kritična baterija (%2%) "
 
-#: widgets/osd.cpp:249
+#: widgets/osd.cpp:245
 #, qt-format
 msgid "Wii Remote %1: disactived"
 msgstr "Wii Remote %1: onemogočen"
 
-#: widgets/osd.cpp:259
+#: widgets/osd.cpp:257
 #, qt-format
 msgid "Wii Remote %1: disconnected"
 msgstr "Wii Remote %1: nepovezan"
 
-#: widgets/osd.cpp:264
+#: widgets/osd.cpp:263
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "Wii Remote %1: šibka baterija (%2%)"
@@ -5327,7 +5408,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:339
+#: core/song.cpp:377 transcoder/transcoder.cpp:250
 msgid "Windows Media audio"
 msgstr "Windows Media Audio"
 
@@ -5335,25 +5416,25 @@ msgstr "Windows Media Audio"
 msgid "Without cover:"
 msgstr "Brez ovitka:"
 
-#: library/libraryview.cpp:530
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Ali bi želeli tudi druge skladbe v tem albumu premakniti med kategorijo Različni izvajalci?"
 
-#: ui/mainwindow.cpp:2143
+#: ui/mainwindow.cpp:2397
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ali želite opraviti ponovno preiskovanje celotne knjižnice?"
 
-#: library/librarysettingspage.cpp:151
+#: library/librarysettingspage.cpp:154
 msgid "Write all songs statistics into songs' files"
 msgstr "Zapiši vse statistike skladb v datoteke skladb"
 
-#: internet/subsonicsettingspage.cpp:86
+#: internet/subsonicsettingspage.cpp:80
 msgid "Wrong username or password."
 msgstr "Napačno uporabniško ime ali geslo."
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:69
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5365,11 +5446,11 @@ msgstr "Leto"
 msgid "Year - Album"
 msgstr "Leto - Album"
 
-#: smartplaylists/searchterm.cpp:314
+#: smartplaylists/searchterm.cpp:394
 msgid "Years"
 msgstr "Let"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:128
 msgid "Yesterday"
 msgstr "Včeraj"
 
@@ -5377,13 +5458,13 @@ msgstr "Včeraj"
 msgid "You are about to download the following albums"
 msgstr "Pravkar boste prejeli naslednje albume"
 
-#: playlist/playlistlistcontainer.cpp:316
+#: playlist/playlistlistcontainer.cpp:318
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Pravkar boste izbrisali %1 seznamov predvajanja iz vaših priljubljenih, ali ste prepričani?"
 
-#: playlist/playlisttabbar.cpp:177
+#: playlist/playlisttabbar.cpp:175
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5393,12 +5474,12 @@ msgstr "Pravkar boste odstranili seznam predvajanja, ki ni del vaših priljublje
 msgid "You are not signed in."
 msgstr "Niste prijavljeni."
 
-#: widgets/loginstatewidget.cpp:75
+#: widgets/loginstatewidget.cpp:71
 #, qt-format
 msgid "You are signed in as %1."
 msgstr "Prijavljeni ste kot %1."
 
-#: widgets/loginstatewidget.cpp:73
+#: widgets/loginstatewidget.cpp:68
 msgid "You are signed in."
 msgstr "Ste prijavljeni."
 
@@ -5406,13 +5487,13 @@ msgstr "Ste prijavljeni."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Spremenite lahko kako so skladbe organizirane v knjižnici"
 
-#: internet/digitallyimportedsettingspage.cpp:46
+#: internet/digitallyimportedsettingspage.cpp:45
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "Brezplačno lahko poslušate tudi brez računa, ampak le Premium člani lahko poslušajo pretoke višje kakovosti brez reklam."
 
-#: internet/magnatunesettingspage.cpp:53
+#: internet/magnatunesettingspage.cpp:54
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5436,29 +5517,29 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Wii Remote lahko uporabite kot daljinski upravljalnik v Clementine. Obiščite <a href=\"http://www.clementine-player.org/wiimote\">Clementine wiki</a> za več podrobnosti.\n"
 
-#: internet/groovesharksettingspage.cpp:103
+#: internet/groovesharksettingspage.cpp:101
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "Nimate računa Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:149
+#: internet/spotifysettingspage.cpp:146
 msgid "You do not have a Spotify Premium account."
 msgstr "Nimate računa Spotify Premium."
 
-#: internet/digitallyimportedclient.cpp:89
+#: internet/digitallyimportedclient.cpp:93
 msgid "You do not have an active subscription"
 msgstr "Nimate dejavne naročnine"
 
-#: internet/spotifyservice.cpp:170
+#: internet/spotifyservice.cpp:175
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr "Bili ste odjavljeni iz Spotify. Ponovno vnesite geslo v pogovorno okno nastavitev."
 
-#: internet/spotifysettingspage.cpp:158
+#: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr "Bili ste odjavljeni iz Spotify. Ponovno vnesite vaše geslo."
 
-#: songinfo/lastfmtrackinfoprovider.cpp:87
+#: songinfo/lastfmtrackinfoprovider.cpp:85
 msgid "You love this track"
 msgstr "To je vaša priljubljena skladba"
 
@@ -5479,11 +5560,11 @@ msgid ""
 " subscriber."
 msgstr "Ne boste mogli predvajati radio postaj Last.fm, če niste njihov naročnik."
 
-#: ../bin/src/ui_networkremotesettingspage.h:200
+#: ../bin/src/ui_networkremotesettingspage.h:201
 msgid "Your IP address:"
 msgstr "Vaš naslov IP:"
 
-#: internet/lastfmsettingspage.cpp:80
+#: internet/lastfmsettingspage.cpp:78
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Vaša poverila Last.fm so bila napačna"
 
@@ -5491,42 +5572,43 @@ msgstr "Vaša poverila Last.fm so bila napačna"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vaša poverila Magnatune so bila napačna"
 
-#: library/libraryview.cpp:343
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "Vaša knjižnica je prazna!"
 
-#: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
+#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
 msgid "Your radio streams"
 msgstr "Vaši radio pretoki"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:88
+#: songinfo/lastfmtrackinfoprovider.cpp:87
 #, qt-format
 msgid "Your scrobbles: %1"
 msgstr "Vaši poslani seznami predvajanih skladb: %1"
 
-#: visualisations/visualisationcontainer.cpp:152
+#: visualisations/visualisationcontainer.cpp:159
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Predočenja niso na voljo, ker vašemu sistemu manjka podpora OpenGL"
 
-#: internet/groovesharksettingspage.cpp:107
-#: internet/spotifysettingspage.cpp:154 internet/ubuntuonesettingspage.cpp:76
+#: internet/groovesharksettingspage.cpp:106
+#: internet/spotifysettingspage.cpp:152 internet/ubuntuonesettingspage.cpp:75
 msgid "Your username or password was incorrect."
 msgstr "Vaše uporabniško ime ali geslo je bilo napačno."
 
-#: smartplaylists/searchterm.cpp:297
+#: smartplaylists/searchterm.cpp:365
 msgid "Z-A"
 msgstr "Ž-A"
 
-#: ui/equalizer.cpp:136
+#: ui/equalizer.cpp:152
 msgid "Zero"
 msgstr "Brez"
 
-#: playlist/playlistundocommands.cpp:37
+#: playlist/playlistundocommands.cpp:28
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "add %n songs"
 msgstr "dodaj %n skladb"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:204
 msgid "after"
 msgstr "po"
 
@@ -5546,19 +5628,19 @@ msgstr "samodejno"
 msgid "before"
 msgstr "pred"
 
-#: smartplaylists/searchterm.cpp:211
+#: smartplaylists/searchterm.cpp:216
 msgid "between"
 msgstr "med"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:375
 msgid "biggest first"
 msgstr "najprej največji"
 
-#: playlist/playlistview.cpp:204 ui/edittagdialog.cpp:458
+#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:474
 msgid "bpm"
 msgstr "udarcev/min"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:224
 msgid "contains"
 msgstr "vsebuje"
 
@@ -5568,20 +5650,20 @@ msgstr "vsebuje"
 msgid "disabled"
 msgstr "onemogočeno"
 
-#: widgets/osd.cpp:114
+#: widgets/osd.cpp:110
 #, qt-format
 msgid "disc %1"
 msgstr "disk %1"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:226
 msgid "does not contain"
 msgstr "ne vsebuje"
 
-#: smartplaylists/searchterm.cpp:220
+#: smartplaylists/searchterm.cpp:230
 msgid "ends with"
 msgstr "se konča z"
 
-#: smartplaylists/searchterm.cpp:223
+#: smartplaylists/searchterm.cpp:236
 msgid "equals"
 msgstr "je enako"
 
@@ -5589,11 +5671,11 @@ msgstr "je enako"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:32
 msgid "gpodder.net directory"
 msgstr "mapa gpodder.net"
 
-#: smartplaylists/searchterm.cpp:221
+#: smartplaylists/searchterm.cpp:232
 msgid "greater than"
 msgstr "večje kot"
 
@@ -5601,54 +5683,55 @@ msgstr "večje kot"
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
 msgstr "Žal iPodi in naprave USB trenutno ne delujejo na Windows."
 
-#: smartplaylists/searchterm.cpp:209
+#: smartplaylists/searchterm.cpp:212
 msgid "in the last"
 msgstr "v zadnjih"
 
-#: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62 playlist/playlistview.cpp:206
-#: ui/edittagdialog.cpp:460
+#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
+#: internet/spotifysettingspage.cpp:61 playlist/playlistview.cpp:232
+#: ui/edittagdialog.cpp:476
 msgid "kbps"
 msgstr "kb/s"
 
-#: smartplaylists/searchterm.cpp:222
+#: smartplaylists/searchterm.cpp:234
 msgid "less than"
 msgstr "manjše od"
 
-#: smartplaylists/searchterm.cpp:299
+#: smartplaylists/searchterm.cpp:371
 msgid "longest first"
 msgstr "najprej najdaljši"
 
-#: playlist/playlistundocommands.cpp:99
+#: playlist/playlistundocommands.cpp:83
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "move %n songs"
 msgstr "premakni %n skladb"
 
-#: smartplaylists/searchterm.cpp:298
+#: smartplaylists/searchterm.cpp:368
 msgid "newest first"
 msgstr "najprej novejši"
 
-#: smartplaylists/searchterm.cpp:224
+#: smartplaylists/searchterm.cpp:238
 msgid "not equals"
 msgstr "ni enako"
 
-#: smartplaylists/searchterm.cpp:210
+#: smartplaylists/searchterm.cpp:214
 msgid "not in the last"
 msgstr "ne v zadnjih"
 
-#: smartplaylists/searchterm.cpp:208
+#: smartplaylists/searchterm.cpp:210
 msgid "not on"
 msgstr "ne na"
 
-#: smartplaylists/searchterm.cpp:298
+#: smartplaylists/searchterm.cpp:367
 msgid "oldest first"
 msgstr "najprej starejši"
 
-#: smartplaylists/searchterm.cpp:207
+#: smartplaylists/searchterm.cpp:208
 msgid "on"
 msgstr "v"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:142
 msgid "options"
 msgstr "možnosti"
 
@@ -5660,36 +5743,37 @@ msgstr "ali optično preberite kodo QR!"
 msgid "press enter"
 msgstr "pritisnite enter"
 
-#: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
+#: playlist/playlistundocommands.cpp:53 playlist/playlistundocommands.cpp:76
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "remove %n songs"
 msgstr "odstrani %n skladb"
 
-#: smartplaylists/searchterm.cpp:299
+#: smartplaylists/searchterm.cpp:370
 msgid "shortest first"
 msgstr "najprej krajši"
 
-#: playlist/playlistundocommands.cpp:138
+#: playlist/playlistundocommands.cpp:107
 msgid "shuffle songs"
 msgstr "premešaj skladbe"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:374
 msgid "smallest first"
 msgstr "najprej manjši"
 
-#: playlist/playlistundocommands.cpp:131
+#: playlist/playlistundocommands.cpp:101
 msgid "sort songs"
 msgstr "razvrsti skladbe"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:228
 msgid "starts with"
 msgstr "se začne z"
 
-#: playlist/playlistdelegates.cpp:185
+#: playlist/playlistdelegates.cpp:181
 msgid "stop"
 msgstr "zaustavi"
 
-#: widgets/osd.cpp:116
+#: widgets/osd.cpp:111
 #, qt-format
 msgid "track %1"
 msgstr "skladba %1"
