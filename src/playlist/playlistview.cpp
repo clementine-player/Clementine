@@ -615,15 +615,16 @@ void PlaylistView::RemoveSelected() {
     return;
   }
 
+  // Store the last selected row, which is the last in the list
+  int last_row = selection.last().top();
+
   // Sort the selection so we remove the items at the *bottom* first, ensuring
   // we don't have to mess around with changing row numbers
   qSort(selection.begin(), selection.end(), CompareSelectionRanges);
 
-  // Store the last selected row, which is the first in the list
-  int last_row = selection.first().bottom();
-
   for (const QItemSelectionRange& range : selection) {
-    rows_removed += range.height();
+    if (range.top() < last_row)
+      rows_removed += range.height();
     model()->removeRows(range.top(), range.height(), range.parent());
   }
 
@@ -634,23 +635,20 @@ void PlaylistView::RemoveSelected() {
   // Select the new current item, we want always the item after the last
   // selected
   if (new_index.isValid()) {
-    // Update visual selection with the entire row
-    selectionModel()->select(
-        QItemSelection(new_index,
-                       model()->index(new_row, model()->columnCount() - 1)),
-        QItemSelectionModel::Select);
-    // Update keyboard selected row, if it's not the first row
+    // Workaround to update keyboard selected row, if it's not the first row
+    // (this also triggers selection)
     if (new_row != 0)
       keyPressEvent(
           new QKeyEvent(QEvent::KeyPress, Qt::Key_Down, Qt::NoModifier));
-  } else {
-    // We're removing the last item, select the new last row
-    selectionModel()->select(
-        QItemSelection(model()->index(model()->rowCount() - 1, 0),
-                       model()->index(model()->rowCount() - 1,
-                                      model()->columnCount() - 1)),
-        QItemSelectionModel::Select);
-  }
+     // Update visual selection with the entire row
+     selectionModel()->select(new_index, QItemSelectionModel::ClearAndSelect |
+                              QItemSelectionModel::Rows);
+    } else {
+      // We're removing the last item, select the new last row
+      selectionModel()->select(model()->index(model()->rowCount()-1, 0),
+                               QItemSelectionModel::ClearAndSelect |
+                               QItemSelectionModel::Rows);
+    }
 }
 
 QList<int> PlaylistView::GetEditableColumns() {
