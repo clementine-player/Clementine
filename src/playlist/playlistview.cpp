@@ -576,10 +576,9 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
   } else if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
     if (currentIndex().isValid()) emit PlayItem(currentIndex());
     event->accept();
-  } else if (event->modifiers() !=
-                 Qt::ControlModifier  // Ctrl+Space selects the item
-             &&
-             event->key() == Qt::Key_Space) {
+  } else if (event->modifiers() != Qt::ControlModifier  // Ctrl+Space selects
+                                                        // the item
+             && event->key() == Qt::Key_Space) {
     emit PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
@@ -623,8 +622,7 @@ void PlaylistView::RemoveSelected() {
   qSort(selection.begin(), selection.end(), CompareSelectionRanges);
 
   for (const QItemSelectionRange& range : selection) {
-    if (range.top() < last_row)
-      rows_removed += range.height();
+    if (range.top() < last_row) rows_removed += range.height();
     model()->removeRows(range.top(), range.height(), range.parent());
   }
 
@@ -640,15 +638,15 @@ void PlaylistView::RemoveSelected() {
     if (new_row != 0)
       keyPressEvent(
           new QKeyEvent(QEvent::KeyPress, Qt::Key_Down, Qt::NoModifier));
-     // Update visual selection with the entire row
-     selectionModel()->select(new_index, QItemSelectionModel::ClearAndSelect |
-                              QItemSelectionModel::Rows);
-    } else {
-      // We're removing the last item, select the new last row
-      selectionModel()->select(model()->index(model()->rowCount()-1, 0),
-                               QItemSelectionModel::ClearAndSelect |
-                               QItemSelectionModel::Rows);
-    }
+    // Update visual selection with the entire row
+    selectionModel()->select(new_index, QItemSelectionModel::ClearAndSelect |
+                                            QItemSelectionModel::Rows);
+  } else {
+    // We're removing the last item, select the new last row
+    selectionModel()->select(
+        model()->index(model()->rowCount() - 1, 0),
+        QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
+  }
 }
 
 QList<int> PlaylistView::GetEditableColumns() {
