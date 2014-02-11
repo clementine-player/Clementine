@@ -9,6 +9,7 @@ include(cmake/Deb.cmake)
 include(cmake/Rpm.cmake)
 include(cmake/SpotifyVersion.cmake)
 include(cmake/OptionalSource.cmake)
+include(cmake/Format.cmake)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 if (CMAKE_CXX_COMPILER MATCHES ".*clang")
