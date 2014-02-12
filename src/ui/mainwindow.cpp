@@ -1639,7 +1639,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   QMenu* add_to_another_menu = new QMenu(tr("Add to another playlist"), this);
   add_to_another_menu->setIcon(IconLoader::Load("list-add"));
 
-  for (PlaylistBackend::Playlist playlist :
+  for (const PlaylistBackend::Playlist& playlist :
        app_->playlist_backend()->GetAllOpenPlaylists()) {
     // don't add the current playlist
     if (playlist.id != app_->playlist_manager()->current()->id()) {

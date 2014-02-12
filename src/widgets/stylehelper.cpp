@@ -108,7 +108,9 @@ void StyleHelper::setBaseColor(const QColor& newcolor) {
 
   if (color.isValid() && color != m_baseColor) {
     m_baseColor = color;
-    for (QWidget* w : QApplication::topLevelWidgets()) w->update();
+    for (QWidget* w : QApplication::topLevelWidgets()) {
+      w->update();
+    }
   }
 }
 

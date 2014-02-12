@@ -171,9 +171,10 @@ void FreeSpaceBar::DrawText(QPainter* p, const QRect& r) {
   labels << Label(TextForSize(free_text_, free_ - additional_), kColorBg2);
 
   int text_width = 0;
-  for (const Label& label : labels)
+  for (const Label& label : labels) {
     text_width += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing +
                   small_metrics.width(label.text);
+  }
 
   // Draw the text
   int x = (r.width() - text_width) / 2;

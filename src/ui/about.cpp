@@ -66,11 +66,15 @@ QString About::MakeHtml() const {
                     "<p><a href=\"%1\">%2</a></p>"
                     "<p><b>%3:</b>").arg(kUrl, kUrl, tr("Authors"));
 
-  for (const Person& person : authors_) ret += "<br />" + MakeHtml(person);
+  for (const Person& person : authors_) {
+    ret += "<br />" + MakeHtml(person);
+  }
 
   ret += QString("</p><p><b>%3:</b>").arg(tr("Thanks to"));
 
-  for (const Person& person : thanks_to_) ret += "<br />" + MakeHtml(person);
+  for (const Person& person : thanks_to_) {
+    ret += "<br />" + MakeHtml(person);
+  }
   ret += QString(
       "<br />" + tr("All the translators") +
       " &lt;<a href=\"https://www.transifex.net/projects/p/clementine\">"

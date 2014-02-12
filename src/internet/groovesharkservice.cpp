@@ -1125,7 +1125,7 @@ QList<QAction*> GroovesharkService::playlistitem_actions(const Song& song) {
   QAction* add_to_playlists = new QAction(
       IconLoader::Load("list-add"), tr("Add to Grooveshark playlists"), this);
   QMenu* playlists_menu = new QMenu();
-  for (PlaylistInfo playlist_info : playlists_.values()) {
+  for (const PlaylistInfo& playlist_info : playlists_.values()) {
     QAction* add_to_playlist = new QAction(playlist_info.name_, this);
     add_to_playlist->setData(playlist_info.id_);
     playlists_menu->addAction(add_to_playlist);
