@@ -380,7 +380,11 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
   // Now delete empty parents
   QSet<QString> divider_keys;
   while (!parents.isEmpty()) {
-    for (LibraryItem* node : parents) {
+    // Since we are going to remove elements from the container, we
+    // need a copy to iterate over. If we iterate over the original,
+    // the behavior will be undefined.
+    QSet<LibraryItem*> parents_copy = parents;
+    for (LibraryItem* node : parents_copy) {
       parents.remove(node);
       if (node->children.count() != 0) continue;
 
