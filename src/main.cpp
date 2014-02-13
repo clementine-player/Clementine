@@ -112,6 +112,8 @@ const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 #include <QtPlugin>
 Q_IMPORT_PLUGIN(qsqlite)
 
+namespace {
+
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& language) {
 #if QT_VERSION < 0x040700
@@ -202,25 +204,6 @@ void SetGstreamerEnvironment() {
 #endif
 }
 
-#ifdef HAVE_GIO
-#undef signals  // Clashes with GIO, and not needed in this file
-#include <gio/gio.h>
-
-void ScanGIOModulePath() {
-  QString gio_module_path;
-
-#if defined(Q_OS_WIN32)
-  gio_module_path = QCoreApplication::applicationDirPath() + "/gio-modules";
-#endif
-
-  if (!gio_module_path.isEmpty()) {
-    qLog(Debug) << "Adding GIO module path:" << gio_module_path;
-    QByteArray bytes = gio_module_path.toLocal8Bit();
-    g_io_modules_scan_all_in_directory(bytes.data());
-  }
-}
-#endif
-
 void ParseAProto() {
   const QByteArray data = QByteArray::fromHex(
       "08001a8b010a8801b2014566696c653a2f2f2f453a2f4d7573696b2f28414c42554d2"
@@ -244,6 +227,31 @@ void CheckPortable() {
                        f.fileName());
   }
 }
+
+}  // namespace
+
+#ifdef HAVE_GIO
+#undef signals  // Clashes with GIO, and not needed in this file
+#include <gio/gio.h>
+
+namespace {
+
+void ScanGIOModulePath() {
+  QString gio_module_path;
+
+#if defined(Q_OS_WIN32)
+  gio_module_path = QCoreApplication::applicationDirPath() + "/gio-modules";
+#endif
+
+  if (!gio_module_path.isEmpty()) {
+    qLog(Debug) << "Adding GIO module path:" << gio_module_path;
+    QByteArray bytes = gio_module_path.toLocal8Bit();
+    g_io_modules_scan_all_in_directory(bytes.data());
+  }
+}
+
+}  // namespace
+#endif  // HAVE_GIO
 
 int main(int argc, char* argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
