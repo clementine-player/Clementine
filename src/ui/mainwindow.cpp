@@ -1083,14 +1083,15 @@ void MainWindow::ScrobblingEnabledChanged(bool value) {
   if (ui_->action_toggle_scrobbling->isVisible())
     SetToggleScrobblingIcon(value);
 
-  if (!app_->player()->GetState() == Engine::Idle) {
+  if (app_->player()->GetState() == Engine::Idle) {
     return;
   } else {
     // invalidate current song, we will scrobble the next one
     if (app_->playlist_manager()->active()->get_lastfm_status() ==
-        Playlist::LastFM_New)
+        Playlist::LastFM_New) {
       app_->playlist_manager()->active()->set_lastfm_status(
           Playlist::LastFM_Seeked);
+    }
   }
 
   bool is_lastfm = (app_->player()->GetCurrentItem()->options() &
