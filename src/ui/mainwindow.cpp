@@ -1083,7 +1083,7 @@ void MainWindow::ScrobblingEnabledChanged(bool value) {
   if (ui_->action_toggle_scrobbling->isVisible())
     SetToggleScrobblingIcon(value);
 
-  if (app_->player()->GetState() == Engine::Idle) {
+  if (app_->player()->GetState() != Engine::Idle) {
     return;
   } else {
     // invalidate current song, we will scrobble the next one
