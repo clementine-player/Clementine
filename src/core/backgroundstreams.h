@@ -39,7 +39,7 @@ signals:
 
  private:
   struct Stream {
-    Stream() : volume(0), id(0), action(NULL) {}
+    Stream() : volume(0), id(0), action(nullptr) {}
 
     QString name;
     QUrl url;

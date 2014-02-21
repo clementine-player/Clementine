@@ -45,7 +45,7 @@ class DiscogsCoverProvider : public CoverProvider {
   Q_OBJECT
 
  public:
-  DiscogsCoverProvider(QObject* parent = NULL);
+  DiscogsCoverProvider(QObject* parent = nullptr);
 
   static const char* kSearchUrl;
 

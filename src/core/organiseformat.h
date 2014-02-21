@@ -69,7 +69,7 @@ class OrganiseFormat {
 
  private:
   QString ParseBlock(QString block, const Song& song,
-                     bool* any_empty = NULL) const;
+                     bool* any_empty = nullptr) const;
   QString TagValue(const QString& tag, const Song& song) const;
 
   QString format_;

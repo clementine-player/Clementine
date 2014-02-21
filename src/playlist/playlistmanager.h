@@ -240,7 +240,7 @@ class PlaylistManager : public PlaylistManagerInterface {
 
  private:
   struct Data {
-    Data(Playlist* _p = NULL, const QString& _name = QString())
+    Data(Playlist* _p = nullptr, const QString& _name = QString())
         : p(_p), name(_name) {}
     Playlist* p;
     QString name;

@@ -25,7 +25,7 @@ class QProcess;
 class UbuntuUnityHack : public QObject {
   Q_OBJECT
  public:
-  UbuntuUnityHack(QObject* parent = NULL);
+  UbuntuUnityHack(QObject* parent = nullptr);
 
  private slots:
   void GetFinished(int exit_code);

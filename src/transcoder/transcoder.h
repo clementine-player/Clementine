@@ -89,8 +89,8 @@ signals:
     JobState(const Job& job, Transcoder* parent)
         : job_(job),
           parent_(parent),
-          pipeline_(NULL),
-          convert_element_(NULL),
+          pipeline_(nullptr),
+          convert_element_(nullptr),
           bus_callback_id_(0) {}
     ~JobState();
 
@@ -125,11 +125,11 @@ signals:
   StartJobStatus MaybeStartNextJob();
   bool StartJob(const Job& job);
 
-  GstElement* CreateElement(const QString& factory_name, GstElement* bin = NULL,
+  GstElement* CreateElement(const QString& factory_name, GstElement* bin = nullptr,
                             const QString& name = QString());
   GstElement* CreateElementForMimeType(const QString& element_type,
                                        const QString& mime_type,
-                                       GstElement* bin = NULL);
+                                       GstElement* bin = nullptr);
   void SetElementProperties(const QString& name, GObject* element);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);

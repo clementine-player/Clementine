@@ -108,7 +108,7 @@ signals:
   };
 
   struct FieldData {
-    FieldData(QLabel* label = NULL, QWidget* editor = NULL,
+    FieldData(QLabel* label = nullptr, QWidget* editor = nullptr,
               const QString& id = QString())
         : label_(label), editor_(editor), id_(id) {}
 

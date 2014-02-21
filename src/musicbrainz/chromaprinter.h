@@ -46,7 +46,7 @@ class Chromaprinter {
 
  private:
   GstElement* CreateElement(const QString& factory_name,
-                            GstElement* bin = NULL);
+                            GstElement* bin = nullptr);
 
   void ReportError(GstMessage* message);
 

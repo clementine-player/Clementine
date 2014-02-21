@@ -53,7 +53,7 @@ class Application : public QObject {
  public:
   static bool kIsPortable;
 
-  Application(QObject* parent = NULL);
+  Application(QObject* parent = nullptr);
   ~Application();
 
   const QString& language_name() const { return language_name_; }

@@ -38,7 +38,7 @@ class DigitallyImportedServiceBase : public InternetService {
                                const QUrl& homepage_url, const QIcon& icon,
                                const QString& api_service_name,
                                Application* app, InternetModel* model,
-                               QObject* parent = NULL);
+                               QObject* parent = nullptr);
   ~DigitallyImportedServiceBase();
 
   static const char* kSettingsGroup;
@@ -111,24 +111,24 @@ signals:
 class DigitallyImportedService : public DigitallyImportedServiceBase {
  public:
   DigitallyImportedService(Application* app, InternetModel* model,
-                           QObject* parent = NULL);
+                           QObject* parent = nullptr);
 };
 
 class SkyFmService : public DigitallyImportedServiceBase {
  public:
-  SkyFmService(Application* app, InternetModel* model, QObject* parent = NULL);
+  SkyFmService(Application* app, InternetModel* model, QObject* parent = nullptr);
 };
 
 class JazzRadioService : public DigitallyImportedServiceBase {
  public:
   JazzRadioService(Application* app, InternetModel* model,
-                   QObject* parent = NULL);
+                   QObject* parent = nullptr);
 };
 
 class RockRadioService : public DigitallyImportedServiceBase {
  public:
   RockRadioService(Application* app, InternetModel* model,
-                   QObject* parent = NULL);
+                   QObject* parent = nullptr);
 };
 
 #endif  // DIGITALLYIMPORTEDSERVICEBASE_H

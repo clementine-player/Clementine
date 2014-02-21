@@ -130,7 +130,7 @@ class Song {
   // but you want to keep user stats.
   void MergeUserSetData(const Song& other);
 
-  static QString Decode(const QString& tag, const QTextCodec* codec = NULL);
+  static QString Decode(const QString& tag, const QTextCodec* codec = nullptr);
 
   // Save
   void BindToQuery(QSqlQuery* query) const;

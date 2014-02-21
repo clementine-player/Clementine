@@ -42,7 +42,7 @@ class SystemTrayIcon : public QObject {
   virtual void ShowPopup(const QString& summary, const QString& message,
                          int timeout) {}
   /**
-   * If this get's invoked with image_path equal to NULL, the tooltip should
+   * If this get's invoked with image_path equal to nullptr, the tooltip should
    * still be shown - just without the cover art.
    */
   virtual void SetNowPlaying(const Song& song, const QString& image_path) {}

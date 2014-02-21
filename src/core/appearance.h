@@ -23,7 +23,7 @@
 
 class Appearance : public QObject {
  public:
-  Appearance(QObject* parent = NULL);
+  Appearance(QObject* parent = nullptr);
   // Load the user preferred theme, which could the default system theme or a
   // custom set of colors that user has chosen
   void LoadUserTheme();

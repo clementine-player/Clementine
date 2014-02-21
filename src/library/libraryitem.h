@@ -39,12 +39,12 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
   LibraryItem(SimpleTreeModel<LibraryItem>* model)
       : SimpleTreeItem<LibraryItem>(Type_Root, model),
         container_level(-1),
-        compilation_artist_node_(NULL) {}
+        compilation_artist_node_(nullptr) {}
 
-  LibraryItem(Type type, LibraryItem* parent = NULL)
+  LibraryItem(Type type, LibraryItem* parent = nullptr)
       : SimpleTreeItem<LibraryItem>(type, parent),
         container_level(-1),
-        compilation_artist_node_(NULL) {}
+        compilation_artist_node_(nullptr) {}
 
   int container_level;
   Song metadata;

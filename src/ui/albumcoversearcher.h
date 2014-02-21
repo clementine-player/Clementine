@@ -43,7 +43,7 @@ class SizeOverlayDelegate : public QStyledItemDelegate {
   static const int kBorderAlpha;
   static const int kBackgroundAlpha;
 
-  SizeOverlayDelegate(QObject* parent = NULL);
+  SizeOverlayDelegate(QObject* parent = nullptr);
 
   void paint(QPainter* painter, const QStyleOptionViewItem& option,
              const QModelIndex& index) const;

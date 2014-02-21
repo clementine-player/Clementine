@@ -142,9 +142,9 @@ class SearchProvider : public QObject {
   // be reimplemented
   virtual bool IsLoggedIn() { return true; }
   virtual void ShowConfig() {}  // Remember to set the CanShowConfig hint
-  // Returns the Internet service in charge of this provider, or NULL if there
+  // Returns the Internet service in charge of this provider, or nullptr if there
   // is none
-  virtual InternetService* internet_service() { return NULL; }
+  virtual InternetService* internet_service() { return nullptr; }
 
   static QImage ScaleAndPad(const QImage& image);
 

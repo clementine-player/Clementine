@@ -45,7 +45,7 @@ namespace compat {
 lastfm::XmlQuery EmptyXmlQuery();
 
 bool ParseQuery(const QByteArray& data, lastfm::XmlQuery* query,
-                bool* connection_problems = NULL);
+                bool* connection_problems = nullptr);
 
 bool ParseUserList(QNetworkReply* reply, QList<lastfm::User>* users);
 

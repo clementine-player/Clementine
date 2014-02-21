@@ -39,7 +39,7 @@ class LibraryModelTest : public ::testing::Test {
     backend_.reset(new LibraryBackend);
     backend_->Init(database_, Library::kSongsTable,
                    Library::kDirsTable, Library::kSubdirsTable, Library::kFtsTable);
-    model_.reset(new LibraryModel(backend_.get(), NULL));
+    model_.reset(new LibraryModel(backend_.get(), nullptr));
 
     added_dir_ = false;
 

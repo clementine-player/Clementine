@@ -40,7 +40,7 @@ class InternetService : public QObject {
   // Constructs a new internet service with the given name and model. The name
   // should be user-friendly (like 'DigitallyImported' or 'Last.fm').
   InternetService(const QString& name, Application* app, InternetModel* model,
-                  QObject* parent = NULL);
+                  QObject* parent = nullptr);
   virtual ~InternetService() {}
 
   QString name() const { return name_; }
@@ -67,7 +67,7 @@ class InternetService : public QObject {
     return QList<QAction*>();
   }
 
-  virtual QWidget* HeaderWidget() const { return NULL; }
+  virtual QWidget* HeaderWidget() const { return nullptr; }
 
   virtual void ReloadSettings() {}
 

@@ -22,13 +22,13 @@ class ScopedCFTypeRef {
  public:
   typedef CFT element_type;
 
-  explicit ScopedCFTypeRef(CFT object = NULL) : object_(object) {}
+  explicit ScopedCFTypeRef(CFT object = nullptr) : object_(object) {}
 
   ~ScopedCFTypeRef() {
     if (object_) CFRelease(object_);
   }
 
-  void reset(CFT object = NULL) {
+  void reset(CFT object = nullptr) {
     if (object_) CFRelease(object_);
     object_ = object;
   }
@@ -52,7 +52,7 @@ class ScopedCFTypeRef {
   // CFRelease(), use ScopedCFTypeRef<>::reset().
   CFT release() __attribute__((warn_unused_result)) {
     CFT temp = object_;
-    object_ = NULL;
+    object_ = nullptr;
     return temp;
   }
 

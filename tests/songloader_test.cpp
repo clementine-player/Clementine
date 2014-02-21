@@ -46,7 +46,7 @@ public:
 
   static void TearDownTestCase() {
     delete sGstEngine;
-    sGstEngine = NULL;
+    sGstEngine = nullptr;
   }
 
 protected:
@@ -69,7 +69,7 @@ protected:
 };
 
 const char* SongLoaderTest::kRemoteUrl = "http://remotetestdata.clementine-player.org";
-GstEngine* SongLoaderTest::sGstEngine = NULL;
+GstEngine* SongLoaderTest::sGstEngine = nullptr;
 
 TEST_F(SongLoaderTest, LoadLocalMp3) {
   TemporaryResource file(":/testdata/beep.mp3");

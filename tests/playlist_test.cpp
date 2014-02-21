@@ -36,8 +36,8 @@ namespace {
 class PlaylistTest : public ::testing::Test {
  protected:
   PlaylistTest()
-    : playlist_(NULL, NULL, NULL, 1),
-      sequence_(NULL, new DummySettingsProvider)
+    : playlist_(nullptr, nullptr, nullptr, 1),
+      sequence_(nullptr, new DummySettingsProvider)
   {
   }
 

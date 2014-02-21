@@ -37,7 +37,7 @@ class Windows7ThumbBar : public QObject {
   static const int kMaxButtonCount;
 
   // You must call this in the parent widget's constructor before returning
-  // to the event loop.  If an action is NULL it becomes a spacer.
+  // to the event loop.  If an action is nullptr it becomes a spacer.
   void SetActions(const QList<QAction*>& actions);
 
   // Call this from the parent's winEvent() function.

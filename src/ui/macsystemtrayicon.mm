@@ -65,16 +65,16 @@ class MacSystemTrayIconPrivate {
     NSString* t =
         [[NSString alloc] initWithUTF8String:title.toUtf8().constData()];
     now_playing_ =
-        [[NSMenuItem alloc] initWithTitle:t action:NULL keyEquivalent:@""];
+        [[NSMenuItem alloc] initWithTitle:t action:nullptr keyEquivalent:@""];
 
     now_playing_artist_ =
         [[NSMenuItem alloc] initWithTitle:@"Nothing to see here"
-                                   action:NULL
+                                   action:nullptr
                             keyEquivalent:@""];
 
     now_playing_title_ =
         [[NSMenuItem alloc] initWithTitle:@"Nothing to see here"
-                                   action:NULL
+                                   action:nullptr
                             keyEquivalent:@""];
 
     [dock_menu_ insertItem:now_playing_title_ atIndex:0];

@@ -74,7 +74,7 @@ TEST_F(Mpris1BasicTest, CreatesDBusService) {
                isServiceRegistered(service_name()));
 
   std::unique_ptr<mpris::Mpris1> mpris(
-      new mpris::Mpris1(&player_, NULL, NULL, service_name()));
+      new mpris::Mpris1(&player_, nullptr, nullptr, service_name()));
   EXPECT_TRUE(QDBusConnection::sessionBus().interface()->
               isServiceRegistered(service_name()));
 
@@ -89,7 +89,7 @@ protected:
   void SetUp() {
     Mpris1BasicTest::SetUp();
 
-    mpris_.reset(new mpris::Mpris1(&player_, NULL, NULL, service_name()));
+    mpris_.reset(new mpris::Mpris1(&player_, nullptr, nullptr, service_name()));
   }
 
   std::unique_ptr<mpris::Mpris1> mpris_;

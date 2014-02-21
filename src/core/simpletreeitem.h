@@ -27,8 +27,8 @@ template <typename T>
 class SimpleTreeItem {
  public:
   SimpleTreeItem(int _type, SimpleTreeModel<T>* _model);  // For the root item
-  SimpleTreeItem(int _type, const QString& _key, T* _parent = NULL);
-  SimpleTreeItem(int _type, T* _parent = NULL);
+  SimpleTreeItem(int _type, const QString& _key, T* _parent = nullptr);
+  SimpleTreeItem(int _type, T* _parent = nullptr);
   virtual ~SimpleTreeItem();
 
   void InsertNotify(T* _parent);
@@ -64,8 +64,8 @@ SimpleTreeItem<T>::SimpleTreeItem(int _type, SimpleTreeModel<T>* _model)
     : type(_type),
       row(0),
       lazy_loaded(true),
-      parent(NULL),
-      child_model(NULL),
+      parent(nullptr),
+      child_model(nullptr),
       model(_model) {}
 
 template <typename T>
@@ -74,8 +74,8 @@ SimpleTreeItem<T>::SimpleTreeItem(int _type, const QString& _key, T* _parent)
       key(_key),
       lazy_loaded(false),
       parent(_parent),
-      child_model(NULL),
-      model(_parent ? _parent->model : NULL) {
+      child_model(nullptr),
+      model(_parent ? _parent->model : nullptr) {
   if (parent) {
     row = parent->children.count();
     parent->children << static_cast<T*>(this);
@@ -87,8 +87,8 @@ SimpleTreeItem<T>::SimpleTreeItem(int _type, T* _parent)
     : type(_type),
       lazy_loaded(false),
       parent(_parent),
-      child_model(NULL),
-      model(_parent ? _parent->model : NULL) {
+      child_model(nullptr),
+      model(_parent ? _parent->model : nullptr) {
   if (parent) {
     row = parent->children.count();
     parent->children << static_cast<T*>(this);
@@ -151,7 +151,7 @@ T* SimpleTreeItem<T>::ChildByKey(const QString& key) const {
   for (T* child : children) {
     if (child->key == key) return child;
   }
-  return NULL;
+  return nullptr;
 }
 
 #endif  // SIMPLETREEITEM_H

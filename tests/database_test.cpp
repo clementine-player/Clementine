@@ -54,8 +54,8 @@ TEST_F(DatabaseTest, DatabaseInitialises) {
 }
 
 TEST_F(DatabaseTest, FTSOpenParsesSimpleInput) {
-  sqlite3_tokenizer_cursor* cursor = NULL;
-  Database::FTSOpen(NULL, "foo", 3, &cursor);
+  sqlite3_tokenizer_cursor* cursor = nullptr;
+  Database::FTSOpen(nullptr, "foo", 3, &cursor);
   ASSERT_TRUE(cursor);
   Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
   QList<Database::Token> tokens = real_cursor->tokens;
@@ -69,8 +69,8 @@ TEST_F(DatabaseTest, FTSOpenParsesSimpleInput) {
 }
 
 TEST_F(DatabaseTest, FTSOpenParsesUTF8Input) {
-  sqlite3_tokenizer_cursor* cursor = NULL;
-  Database::FTSOpen(NULL, "Röyksopp", 9, &cursor);
+  sqlite3_tokenizer_cursor* cursor = nullptr;
+  Database::FTSOpen(nullptr, "Röyksopp", 9, &cursor);
   ASSERT_TRUE(cursor);
   Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
   QList<Database::Token> tokens = real_cursor->tokens;
@@ -84,8 +84,8 @@ TEST_F(DatabaseTest, FTSOpenParsesUTF8Input) {
 }
 
 TEST_F(DatabaseTest, FTSOpenParsesMultipleTokens) {
-  sqlite3_tokenizer_cursor* cursor = NULL;
-  Database::FTSOpen(NULL, "Röyksopp foo", 13, &cursor);
+  sqlite3_tokenizer_cursor* cursor = nullptr;
+  Database::FTSOpen(nullptr, "Röyksopp foo", 13, &cursor);
   ASSERT_TRUE(cursor);
   Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
   QList<Database::Token> tokens = real_cursor->tokens;
@@ -103,9 +103,9 @@ TEST_F(DatabaseTest, FTSOpenParsesMultipleTokens) {
 }
 
 TEST_F(DatabaseTest, FTSOpenLeavesCyrillicQueries) {
-  sqlite3_tokenizer_cursor* cursor = NULL;
+  sqlite3_tokenizer_cursor* cursor = nullptr;
   const char* query = "Снег";
-  Database::FTSOpen(NULL, query, strlen(query), &cursor);
+  Database::FTSOpen(nullptr, query, strlen(query), &cursor);
   ASSERT_TRUE(cursor);
   Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
   QList<Database::Token> tokens = real_cursor->tokens;
@@ -119,8 +119,8 @@ TEST_F(DatabaseTest, FTSOpenLeavesCyrillicQueries) {
 }
 
 TEST_F(DatabaseTest, FTSCursorWorks) {
-  sqlite3_tokenizer_cursor* cursor = NULL;
-  Database::FTSOpen(NULL, "Röyksopp foo", 13, &cursor);
+  sqlite3_tokenizer_cursor* cursor = nullptr;
+  Database::FTSOpen(nullptr, "Röyksopp foo", 13, &cursor);
   ASSERT_TRUE(cursor);
   Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
 

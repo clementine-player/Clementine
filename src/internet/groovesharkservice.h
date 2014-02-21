@@ -139,7 +139,7 @@ signals:
  protected:
   struct PlaylistInfo {
     PlaylistInfo() {}
-    PlaylistInfo(int id, QString name, QStandardItem* item = NULL)
+    PlaylistInfo(int id, QString name, QStandardItem* item = nullptr)
         : id_(id), name_(name), item_(item) {}
 
     bool operator<(const PlaylistInfo other) const {

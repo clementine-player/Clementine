@@ -97,7 +97,7 @@ static BreakpadRef InitBreakpad() {
   NSDictionary* plist = [[NSBundle mainBundle] infoDictionary];
   if (plist) {
     breakpad = BreakpadCreate(plist);
-    BreakpadSetFilterCallback(breakpad, &BreakpadCallback, NULL);
+    BreakpadSetFilterCallback(breakpad, &BreakpadCallback, nullptr);
   }
   [pool release];
   return breakpad;

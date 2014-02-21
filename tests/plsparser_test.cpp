@@ -33,7 +33,7 @@ using std::shared_ptr;
 
 class PLSParserTest : public ::testing::Test {
 protected:
-  PLSParserTest() : parser_(NULL) {}
+  PLSParserTest() : parser_(nullptr) {}
 
   shared_ptr<QFile> Open(const QString& filename) {
     shared_ptr<QFile> ret(new QFile(":/testdata/" + filename));

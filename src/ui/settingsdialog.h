@@ -129,7 +129,7 @@ signals:
   };
 
   QTreeWidgetItem* AddCategory(const QString& name);
-  void AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent = NULL);
+  void AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent = nullptr);
 
   void Save();
 

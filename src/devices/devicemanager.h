@@ -127,10 +127,10 @@ signals:
     // Sometimes the same device is discovered more than once.  In this case
     // the device will have multiple "backends".
     struct Backend {
-      Backend(DeviceLister* lister = NULL, const QString& id = QString())
+      Backend(DeviceLister* lister = nullptr, const QString& id = QString())
           : lister_(lister), unique_id_(id) {}
 
-      DeviceLister* lister_;  // NULL if not physically connected
+      DeviceLister* lister_;  // nullptr if not physically connected
       QString unique_id_;
     };
 
@@ -146,7 +146,7 @@ signals:
 
     int database_id_;  // -1 if not remembered in the database
     std::shared_ptr<ConnectedDevice>
-        device_;  // NULL if not connected to clementine
+        device_;  // nullptr if not connected to clementine
     QList<Backend> backends_;
 
     QString friendly_name_;

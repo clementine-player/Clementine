@@ -25,9 +25,9 @@
 template <typename T>
 class ScopedGObject {
  public:
-  ScopedGObject() : object_(NULL) {}
+  ScopedGObject() : object_(nullptr) {}
 
-  explicit ScopedGObject(const ScopedGObject& other) : object_(NULL) {
+  explicit ScopedGObject(const ScopedGObject& other) : object_(nullptr) {
     reset(other.object_);
   }
 
@@ -38,12 +38,12 @@ class ScopedGObject {
     return *this;
   }
 
-  void reset(T* new_object = NULL) {
+  void reset(T* new_object = nullptr) {
     if (new_object) g_object_ref(new_object);
     reset_without_add(new_object);
   }
 
-  void reset_without_add(T* new_object = NULL) {
+  void reset_without_add(T* new_object = nullptr) {
     if (object_) g_object_unref(object_);
 
     object_ = new_object;
