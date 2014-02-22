@@ -163,7 +163,8 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
                            ScaleAndPad(task.options, taglib_image));
   }
 
-  if (filename.toLower().startsWith("http://")) {
+  if (filename.toLower().startsWith("http://") ||
+      filename.toLower().startsWith("https://")) {
     QUrl url(filename);
     QNetworkReply* reply = network_->get(QNetworkRequest(url));
     NewClosure(reply, SIGNAL(finished()), this,
