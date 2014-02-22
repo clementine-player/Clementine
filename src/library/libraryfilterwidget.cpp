@@ -20,12 +20,14 @@
 #include "libraryquery.h"
 #include "groupbydialog.h"
 #include "ui_libraryfilterwidget.h"
+#include "core/song.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
 #include <QActionGroup>
 #include <QKeyEvent>
 #include <QMenu>
+#include <QRegExp>
 #include <QSettings>
 #include <QSignalMapper>
 #include <QTimer>
@@ -39,6 +41,13 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget* parent)
       filter_applies_to_model_(true),
       delay_behaviour_(DelayedOnLargeLibraries) {
   ui_->setupUi(this);
+
+  // Add the available fields to the tooltip here instead of the ui
+  // file to prevent that they get translated by mistake.
+  QString available_fields =
+      Song::kFtsColumns.join(", ").replace(QRegExp("\\bfts"), "");
+  ui_->filter->setToolTip(ui_->filter->toolTip().arg(available_fields));
+
   connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));
   connect(filter_delay_, SIGNAL(timeout()), SLOT(FilterDelayTimeout()));
 
