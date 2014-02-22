@@ -349,7 +349,7 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
       } else {
         p->drawPixmap(x_offset, kTopBorder, total_size, total_size, cover_);
         if (downloading_covers_) {
-          p->drawPixmap(total_size - 31, 40, 16, 16,
+          p->drawPixmap(x_offset + 45, 35, 16, 16,
                         spinner_animation_->currentPixmap());
         }
       }
