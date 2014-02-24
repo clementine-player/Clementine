@@ -6,12 +6,13 @@
 # davidsansome <me@davidsansome.com>, 2010
 # Masaki <m.sagami+sourceforge@gmail.com>, 2013
 # Masaki <m.sagami+sourceforge@gmail.com>, 2011-2012
+# Geefo Power, 2014
 # Yoshihito YOSHINO <yy.y.ja.jp+transifex@gmail.com>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-02-09 04:21+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-02-23 00:18+0000\n"
+"Last-Translator: Geefo Power\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -115,7 +116,7 @@ msgstr "%1 曲見つかりました (%2 曲を表示中)"
 #: playlist/playlistmanager.cpp:405
 #, qt-format
 msgid "%1 tracks"
-msgstr "%1 個のトラック"
+msgstr "%1 トラック"
 
 #: ui/albumcovermanager.cpp:466
 #, qt-format
@@ -235,7 +236,7 @@ msgstr "(複数の曲で一致しません)"
 
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
-msgstr "... および Amarok に貢献されたすべての方々"
+msgstr "... および Amarok に貢献したすべての方々"
 
 #: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
 msgid "0"
@@ -272,7 +273,7 @@ msgstr "ランダムな 50 トラック"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href=\"http://www.di.fm/premium/\">今すぐプレミアムへアップグレードする</a>"
+msgstr "<a href=\"http://www.di.fm/premium/\">今すぐプレミアム版へアップグレードする</a>"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:133
 msgid ""
@@ -314,7 +315,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>トークンは % で始まります (例: %artist %album %title)。 </p>\n\n<p>トークンを含むテキストの一部を「{ }」で囲むと、トークンが空の場合、{ } の選択部分が非表示になります。</p>"
+msgstr "<p>トークンは % で始まります (例: %artist %album %title)。 </p>\n\n<p>トークンを含むテキストの一部を「{ }」で囲むと、トークンが空の場合、{ } で選択した部分が非表示になります。</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -333,7 +334,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "スマートプレイリストは、ライブラリから一定の条件に従って抽出されるプレイリストです。さまざまな選曲方法を提供する、さまざまなスマートプレイリストがあります。"
+msgstr "スマートプレイリストは、ライブラリから一定の条件に従って抽出されるプレイリストです。さまざまな選曲方法を提供する様々なスマートプレイリストがあります。"
 
 #: smartplaylists/querywizardplugin.cpp:157
 msgid ""
@@ -395,7 +396,7 @@ msgstr "アカウントの詳細"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:161
 msgid "Account details (Premium)"
-msgstr "アカウントの詳細 (プレミアム)"
+msgstr "アカウントの詳細 (プレミアム版)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:191
 msgid "Action"
@@ -447,7 +448,7 @@ msgstr "ファイルを追加..."
 
 #: transcoder/transcodedialog.cpp:215
 msgid "Add files to transcode"
-msgstr "トランスコードするファイルの追加"
+msgstr "変換するファイルを追加"
 
 #: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1848 ui/ripcd.cpp:389
 msgid "Add folder"
@@ -475,15 +476,15 @@ msgstr "検索条件を追加"
 
 #: ../bin/src/ui_notificationssettingspage.h:380
 msgid "Add song album tag"
-msgstr "曲のアルバムタグを追加"
+msgstr "曲にアルバムタグを追加"
 
 #: ../bin/src/ui_notificationssettingspage.h:386
 msgid "Add song albumartist tag"
-msgstr "曲のアルバムアーティストタグを追加"
+msgstr "曲にアルバムアーティストタグを追加"
 
 #: ../bin/src/ui_notificationssettingspage.h:377
 msgid "Add song artist tag"
-msgstr "曲のアーティストタグを追加"
+msgstr "曲にアーティストタグを追加"
 
 #: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Add song auto score"
@@ -491,11 +492,11 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:392
 msgid "Add song composer tag"
-msgstr "曲の作曲者タグを追加"
+msgstr "曲に作曲者タグを追加"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song disc tag"
-msgstr "曲のディスクタグを追加"
+msgstr "曲にディスクタグを追加"
 
 #: ../bin/src/ui_notificationssettingspage.h:429
 msgid "Add song filename"
@@ -503,7 +504,7 @@ msgstr "曲のファイル名を追加"
 
 #: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Add song genre tag"
-msgstr "曲のジャンルタグを追加"
+msgstr "曲にジャンルタグを追加"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song grouping tag"
@@ -511,7 +512,7 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
-msgstr "曲の長さタグを追加"
+msgstr "曲に曲の長さのタグを追加"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
