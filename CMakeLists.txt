@@ -365,14 +365,10 @@ if(GMOCK_INCLUDE_DIRS)
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
 
-# Use system sha2 if it's available
-find_path(SHA2_INCLUDE_DIRS sha2.h)
-find_library(SHA2_LIBRARIES sha2)
-if(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
-  add_subdirectory(3rdparty/sha2)
-  set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
-  set(SHA2_LIBRARIES sha2)
-endif(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
+# Never use the system's sha2.
+add_subdirectory(3rdparty/sha2)
+set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
+set(SHA2_LIBRARIES sha2)
 
 # Use our 3rdparty chromaprint if a system one wasn't found
 if(NOT CHROMAPRINT_FOUND)
