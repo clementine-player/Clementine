@@ -28,7 +28,7 @@ class PodcastSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  explicit PodcastSettingsPage(SettingsDialog* dialog);
+  PodcastSettingsPage(SettingsDialog* dialog);
   ~PodcastSettingsPage();
 
   static const char* kSettingsGroup;

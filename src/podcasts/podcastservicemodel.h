@@ -26,7 +26,7 @@ class PodcastServiceModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  explicit PodcastServiceModel(QObject* parent = nullptr);
+  PodcastServiceModel(QObject* parent = nullptr);
 
   QMimeData* mimeData(const QModelIndexList& indexes) const;
 

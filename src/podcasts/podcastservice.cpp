@@ -43,7 +43,7 @@ const char* PodcastService::kSettingsGroup = "Podcasts";
 
 class PodcastSortProxyModel : public QSortFilterProxyModel {
  public:
-  explicit PodcastSortProxyModel(QObject* parent = nullptr);
+  PodcastSortProxyModel(QObject* parent = nullptr);
 
  protected:
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
