@@ -67,7 +67,7 @@ class PodcastUrlLoader : public QObject {
   Q_OBJECT
 
  public:
-  explicit PodcastUrlLoader(QObject* parent = nullptr);
+  PodcastUrlLoader(QObject* parent = nullptr);
   ~PodcastUrlLoader();
 
   static const int kMaxRedirects;
