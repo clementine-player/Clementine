@@ -468,9 +468,7 @@ void PodcastService::ReloadSettings() {
 }
 
 void PodcastService::EnsureAddPodcastDialogCreated() {
-  if (!add_podcast_dialog_) {
-    add_podcast_dialog_.reset(new AddPodcastDialog(app_));
-  }
+  add_podcast_dialog_.reset(new AddPodcastDialog(app_));
 }
 
 void PodcastService::AddPodcast() {

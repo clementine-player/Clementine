@@ -84,16 +84,15 @@ void AddPodcastByUrl::RequestFinished(PodcastUrlLoaderReply* reply) {
 
 void AddPodcastByUrl::Show() {
   ui_->url->setFocus();
-  if (!ui_->url->text().isEmpty()) {
-    return;
-  }
 
   const QClipboard* clipboard = QApplication::clipboard();
-  for (const QString& contents : QStringList()
-       << clipboard->text(QClipboard::Clipboard)
-       << clipboard->text(QClipboard::Selection)) {
-    if (contents.contains("://")) {
-      ui_->url->setText(contents);
+  QStringList contents;
+  contents << clipboard->text(QClipboard::Selection)
+           << clipboard->text(QClipboard::Clipboard);
+
+  for (const QString& content : contents) {
+    if (content.contains("://")) {
+      ui_->url->setText(content);
       return;
     }
   }
