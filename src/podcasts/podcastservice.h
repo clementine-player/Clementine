@@ -145,7 +145,7 @@ class PodcastService : public InternetService {
   QMap<int, QStandardItem*> podcasts_by_database_id_;
   QMap<int, QStandardItem*> episodes_by_database_id_;
 
-  QScopedPointer<AddPodcastDialog> add_podcast_dialog_;
+  std::unique_ptr<AddPodcastDialog> add_podcast_dialog_;
 };
 
 #endif  // PODCASTS_PODCASTSERVICE_H_
