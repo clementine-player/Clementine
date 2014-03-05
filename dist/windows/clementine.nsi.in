@@ -38,7 +38,6 @@ SetCompressor /SOLID lzma
 ; Installer pages
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY
-Page custom CustomPageFunctionWarning
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 
@@ -117,10 +116,6 @@ Function .onInit
 
   !insertmacro MUI_LANGDLL_DISPLAY
 
-FunctionEnd
-
-Function CustomPageFunctionWarning ;Display a warning message to ask user to check Clementine is closed before installing a new version
-  !insertmacro MUI_INSTALLOPTIONS_DISPLAY "warning.ini"
 FunctionEnd
 
 Function RunClementine
