@@ -41,6 +41,7 @@ signals:
 
  public slots:
   void FocusOnFilter(QKeyEvent* e);
+  void SetText(const QString& text);
 
  protected:
   void keyReleaseEvent(QKeyEvent* e);
