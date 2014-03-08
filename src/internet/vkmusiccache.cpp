@@ -14,10 +14,10 @@
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #include "vkmusiccache.h"
 #include "vkservice.h"
 
+#include <qmath.h>
 #include <QDir>
 
 #include "core/application.h"
@@ -130,7 +130,7 @@ void VkMusicCache::DownloadNext() {
 
 void VkMusicCache::DownloadProgress(qint64 bytesReceived, qint64 bytesTotal) {
   if (bytesTotal) {
-    int progress = round(100 * bytesReceived / bytesTotal);
+    int progress = qRound(100 * bytesReceived / bytesTotal);
     app_->task_manager()->SetTaskProgress(task_id, progress, 100);
   }
 }

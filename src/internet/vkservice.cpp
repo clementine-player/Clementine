@@ -148,7 +148,7 @@ Song MusicOwner::toOwnerRadio() const {
                         .arg(songs_count_)
                         .arg(screen_name_)
                         .arg(QString(name_).replace('/', '_'))));
-  song.set_artist(" " + QObject::tr("Group radio"));
+  song.set_artist(" " + QObject::tr("Community Radio"));
   song.set_valid(true);
   return song;
 }
