@@ -58,6 +58,11 @@ void SearchBoxWidget::FocusOnFilter(QKeyEvent* event) {
   QApplication::sendEvent(ui_->filter, event);
 }
 
+void SearchBoxWidget::SetText(const QString &text)
+{
+    ui_->filter->setText(text);
+}
+
 void SearchBoxWidget::keyReleaseEvent(QKeyEvent* e) {
   switch (e->key()) {
     case Qt::Key_Escape:
