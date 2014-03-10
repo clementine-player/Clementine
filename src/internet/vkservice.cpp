@@ -142,7 +142,7 @@ MusicOwner::MusicOwner(const QUrl& group_url) {
 
 Song MusicOwner::toOwnerRadio() const {
   Song song;
-  song.set_title(QObject::tr("%1 (%0 songs)").arg(songs_count_).arg(name_));
+  song.set_title(QObject::tr("%1 (%2 songs)").arg(name_).arg(songs_count_));
   song.set_url(QUrl(QString("vk://group/%1/%2/%3/%4")
                         .arg(-id_)
                         .arg(songs_count_)
