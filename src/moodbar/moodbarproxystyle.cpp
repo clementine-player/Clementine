@@ -98,6 +98,12 @@ void MoodbarProxyStyle::SetMoodbarEnabled(bool enabled) {
 void MoodbarProxyStyle::NextState() {
   const bool visible = enabled_ && !data_.isEmpty();
 
+  // While the regular slider should stay at the standard size (Fixed),
+  // moodbars should use all available space (MinimumExpanding).
+  slider_->setSizePolicy(QSizePolicy::Expanding,
+      visible ? QSizePolicy::MinimumExpanding : QSizePolicy::Fixed);
+  slider_->updateGeometry();
+
   if (show_moodbar_action_) {
     show_moodbar_action_->setChecked(enabled_);
   }
