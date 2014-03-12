@@ -287,6 +287,12 @@ int main(int argc, char* argv[]) {
 
   CommandlineOptions options(argc, argv);
 
+  // Initialise logging
+  logging::Init();
+  logging::SetLevels(options.log_levels());
+  g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog),
+                            nullptr);
+
   {
     // Only start a core application now so we can check if there's another
     // Clementine running without needing an X server.
@@ -325,12 +331,6 @@ int main(int argc, char* argv[]) {
   lastfm::ws::SharedSecret = LastFMService::kSecret;
   lastfm::setNetworkAccessManager(new NetworkAccessManager);
 #endif
-
-  // Initialise logging
-  logging::Init();
-  logging::SetLevels(options.log_levels());
-  g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog),
-                            nullptr);
 
   // Output the version, so when people attach log output to bug reports they
   // don't have to tell us which version they're using.
