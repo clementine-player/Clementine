@@ -16,9 +16,11 @@ class RemoteClient : public QObject {
 
   // This method checks if client is authenticated before sending the data
   void SendData(pb::remote::Message* msg);
+  void SendRawData(QByteArray& data);
   QAbstractSocket::SocketState State();
   void setDownloader(bool downloader);
   bool isDownloader() { return downloader_; }
+  bool isStreamer() { return stream_; }
   void DisconnectClient(pb::remote::ReasonDisconnect reason);
 
  private slots:
@@ -40,6 +42,7 @@ signals:
   bool authenticated_;
   bool allow_downloads_;
   bool downloader_;
+  bool stream_;
 
   QTcpSocket* client_;
   bool reading_protobuf_;

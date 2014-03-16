@@ -254,6 +254,15 @@ bool GstEnginePipeline::Init() {
     return false;
   }
 
+  GstElement* tcp_queue = engine_->CreateElement("queue", audiobin_);
+  GstElement* vorbisenc = engine_->CreateElement("vorbisenc", audiobin_);
+  GstElement* oggmux = engine_->CreateElement("oggmux", audiobin_);
+  GstElement* tcp_sink = engine_->CreateElement("tcpclientsink", audiobin_);
+
+  g_object_set(tcp_sink, "port", 30001, nullptr);
+
+  gst_element_link_many(tcp_queue, vorbisenc, oggmux, tcp_sink, nullptr);
+
   // Create the replaygain elements if it's enabled.  event_probe is the
   // audioconvert element we attach the probe to, which will change depending
   // on whether replaygain is enabled.  convert_sink is the element after the
@@ -355,6 +364,8 @@ bool GstEnginePipeline::Init() {
                gst_element_get_static_pad(probe_queue, "sink"));
   gst_pad_link(gst_element_get_request_pad(tee, "src%d"),
                gst_element_get_static_pad(audio_queue, "sink"));
+  gst_pad_link(gst_element_get_request_pad(tee, "src%d"),
+               gst_element_get_static_pad(tcp_queue, "sink"));
 
   // Link replaygain elements if enabled.
   if (rg_enabled_) {

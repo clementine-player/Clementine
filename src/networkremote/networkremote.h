@@ -26,6 +26,8 @@ class NetworkRemote : public QObject {
   void StartServer();
   void ReloadSettings();
   void AcceptConnection();
+  void AcceptStream();
+  void IncomingData();
   void EnableKittens(bool aww);
   void SendKitten(quint64 id, const QImage& kitten);
 
@@ -34,6 +36,8 @@ class NetworkRemote : public QObject {
   std::unique_ptr<QTcpServer> server_ipv6_;
   std::unique_ptr<IncomingDataParser> incoming_data_parser_;
   std::unique_ptr<OutgoingDataCreator> outgoing_data_creator_;
+
+  std::unique_ptr<QTcpServer> stream_server_;
 
   quint16 port_;
   bool use_remote_;

@@ -54,6 +54,8 @@ void NetworkRemote::SetupServer() {
   incoming_data_parser_.reset(new IncomingDataParser(app_));
   outgoing_data_creator_.reset(new OutgoingDataCreator(app_));
 
+  stream_server_.reset(new QTcpServer());
+
   outgoing_data_creator_->SetClients(&clients_);
 
   connect(app_->current_art_loader(),
@@ -66,6 +68,8 @@ void NetworkRemote::SetupServer() {
           SLOT(AcceptConnection()));
   connect(server_ipv6_.get(), SIGNAL(newConnection()), this,
           SLOT(AcceptConnection()));
+  connect(stream_server_.get(), SIGNAL(newConnection()), this,
+          SLOT(AcceptStream()));
 }
 
 void NetworkRemote::StartServer() {
@@ -84,9 +88,11 @@ void NetworkRemote::StartServer() {
 
   server_->setProxy(QNetworkProxy::NoProxy);
   server_ipv6_->setProxy(QNetworkProxy::NoProxy);
+  stream_server_->setProxy(QNetworkProxy::NoProxy);
 
   server_->listen(QHostAddress::Any, port_);
   server_ipv6_->listen(QHostAddress::AnyIPv6, port_);
+  stream_server_->listen(QHostAddress::LocalHost, 30001);
 
   qLog(Info) << "Listening on port " << port_;
 
@@ -218,4 +224,25 @@ void NetworkRemote::EnableKittens(bool aww) {
 
 void NetworkRemote::SendKitten(quint64 id, const QImage& kitten) {
   if (outgoing_data_creator_.get()) outgoing_data_creator_->SendKitten(kitten);
+}
+
+void NetworkRemote::AcceptStream() {
+  qLog(Debug) << "AcceptStream";
+  QTcpServer* server = qobject_cast<QTcpServer*>(sender());
+  QTcpSocket* client_socket = server->nextPendingConnection();
+
+  connect(client_socket, SIGNAL(readyRead()), this, SLOT(IncomingData()));
+}
+
+void NetworkRemote::IncomingData() {
+  QTcpSocket* client = qobject_cast<QTcpSocket*>(sender());
+
+  while (client->bytesAvailable() > 0) {
+    QByteArray data = client->read(client->bytesAvailable());
+    for (RemoteClient* rc : clients_) {
+      if (rc->isStreamer()) {
+        rc->SendRawData(data);
+      }
+    }
+  }
 }

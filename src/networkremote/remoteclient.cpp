@@ -24,7 +24,7 @@
 #include <QSettings>
 
 RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
-    : app_(app), downloader_(false), client_(client) {
+    : app_(app), downloader_(false), stream_(false), client_(client) {
   // Open the buffer
   buffer_.setData(QByteArray());
   buffer_.open(QIODevice::ReadWrite);
@@ -56,8 +56,21 @@ RemoteClient::~RemoteClient() {
 void RemoteClient::setDownloader(bool downloader) { downloader_ = downloader; }
 
 void RemoteClient::IncomingData() {
+  if (stream_) return;
+
   while (client_->bytesAvailable()) {
     if (!reading_protobuf_) {
+      qLog(Debug) << "peek" << client_->peek(11);
+      if (client_->peek(11) == QString("GET /listen").toUtf8()) {
+        stream_ = true;
+        qLog(Debug) << "Stream found!";
+        client_->write("HTTP/1.0 200 OK\r\n");
+        client_->write("Content-type: application/ogg\r\n");
+        client_->write("Connection: close\r\n");
+        client_->write("\r\n");
+        client_->flush();
+        return;
+      }
       // Read the length of the next message
       QDataStream s(client_);
       s >> expected_length_;
@@ -179,6 +192,10 @@ void RemoteClient::SendData(pb::remote::Message* msg) {
   if (authenticated_) {
     SendDataToClient(msg);
   }
+}
+
+void RemoteClient::SendRawData(QByteArray& data) {
+  client_->write(data.data(), data.length());
 }
 
 QAbstractSocket::SocketState RemoteClient::State() { return client_->state(); }
