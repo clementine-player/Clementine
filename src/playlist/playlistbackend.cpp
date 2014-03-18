@@ -29,6 +29,7 @@
 
 #include "core/application.h"
 #include "core/database.h"
+#include "core/logging.h"
 #include "core/scopedtransaction.h"
 #include "core/song.h"
 #include "library/librarybackend.h"
@@ -286,6 +287,8 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
                                    int last_played, GeneratorPtr dynamic) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
+
+  qLog(Debug) << "Saving playlist" << playlist;
 
   QSqlQuery clear("DELETE FROM playlist_items WHERE playlist = :playlist", db);
   QSqlQuery insert(
