@@ -151,11 +151,13 @@ void SongLoaderInserter::PartiallyFinished() {
 }
 
 void SongLoaderInserter::EffectiveLoad() {
+  SongList songs;
   for (SongLoader* loader : pending_async_) {
     loader->EffectiveSongsLoad();
     task_manager_->SetTaskProgress(async_load_id_, ++async_progress_);
-    emit EffectiveLoadFinished(loader->songs());
+    songs << loader->songs();
   }
+  emit EffectiveLoadFinished(songs);
   task_manager_->SetTaskFinished(async_load_id_);
 
   deleteLater();
