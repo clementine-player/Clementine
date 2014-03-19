@@ -102,7 +102,8 @@ return_song:
   return song;
 }
 
-void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) const {
+void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir) const {
+  QFileInfo file;
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
@@ -114,7 +115,8 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) con
   StreamElement tracklist("trackList", &writer);
   foreach (const Song& song, songs) {
     StreamElement track("track", &writer);
-    writer.writeTextElement("location", song.url().toString());
+	writer.writeTextElement("location", dir.relativeFilePath(
+								QFileInfo(song.url().toLocalFile()).absoluteFilePath()));
     writer.writeTextElement("title", song.title());
     if (!song.artist().isEmpty()) {
       writer.writeTextElement("creator", song.artist());
@@ -126,14 +128,15 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) con
       writer.writeTextElement("duration", QString::number(song.length_nanosec() / kNsecPerMsec));
     }
 
-    QString art = song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
+	QString art = song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
       // Convert local files to URLs.
-      if (!art.contains("://")) {
-        art = QUrl::fromLocalFile(art).toString();
+	  if (art.contains("://")) {
+		art = QUrl(art).toLocalFile();
       }
-      writer.writeTextElement("image", art);
+
+	  writer.writeTextElement("image", dir.relativeFilePath(QFileInfo(art).absoluteFilePath()));
     }
   }
   writer.writeEndDocument();
