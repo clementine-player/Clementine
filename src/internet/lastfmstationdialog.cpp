@@ -19,17 +19,13 @@
 #include "ui_lastfmstationdialog.h"
 
 LastFMStationDialog::LastFMStationDialog(QWidget* parent)
-  : QDialog(parent),
-    ui_(new Ui_LastFMStationDialog)
-{
+    : QDialog(parent), ui_(new Ui_LastFMStationDialog) {
   ui_->setupUi(this);
 
   resize(sizeHint());
 }
 
-LastFMStationDialog::~LastFMStationDialog() {
-  delete ui_;
-}
+LastFMStationDialog::~LastFMStationDialog() { delete ui_; }
 
 void LastFMStationDialog::SetType(Type type) {
   ui_->type->setCurrentIndex(type);
@@ -37,6 +33,4 @@ void LastFMStationDialog::SetType(Type type) {
   ui_->content->setFocus(Qt::OtherFocusReason);
 }
 
-QString LastFMStationDialog::content() const {
-  return ui_->content->text();
-}
+QString LastFMStationDialog::content() const { return ui_->content->text(); }

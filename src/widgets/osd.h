@@ -18,6 +18,8 @@
 #ifndef OSD_H
 #define OSD_H
 
+#include <memory>
+
 #include <QDateTime>
 #include <QImage>
 #include <QObject>
@@ -35,28 +37,22 @@ class SystemTrayIcon;
 class QDBusPendingCallWatcher;
 
 #ifdef HAVE_DBUS
-# include <QDBusArgument>
-# include <boost/scoped_ptr.hpp>
+#include <QDBusArgument>
 
-  QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
-  const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
+QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image);
+const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 #endif
 
 class OSD : public QObject {
   Q_OBJECT
 
  public:
-  OSD(SystemTrayIcon* tray_icon, Application* app, QObject* parent = 0);
+  OSD(SystemTrayIcon* tray_icon, Application* app, QObject* parent = nullptr);
   ~OSD();
 
   static const char* kSettingsGroup;
 
-  enum Behaviour {
-    Disabled = 0,
-    Native,
-    TrayPopup,
-    Pretty,
-  };
+  enum Behaviour { Disabled = 0, Native, TrayPopup, Pretty, };
 
   // Implemented in the OS-specific files
   static bool SupportsNativeNotifications();
@@ -71,6 +67,7 @@ class OSD : public QObject {
 
   void Paused();
   void Stopped();
+  void StopAfterToggle(bool stop);
   void PlaylistFinished();
   void VolumeChanged(int value);
   void MagnatuneDownloadFinished(const QStringList& albums);
@@ -88,25 +85,25 @@ class OSD : public QObject {
   void WiiremoteCriticalBattery(int id, int live);
 #endif
 
-  void ShowPreview(const Behaviour type, const QString& line1, const QString& line2, const Song& song);
+  void ShowPreview(const Behaviour type, const QString& line1,
+                   const QString& line2, const Song& song);
 
  private:
-  void ShowMessage(const QString& summary,
-                   const QString& message = QString(),
+  void ShowMessage(const QString& summary, const QString& message = QString(),
                    const QString& icon = QString(),
                    const QImage& image = QImage());
 
   // These are implemented in the OS-specific files
   void Init();
-  void ShowMessageNative(const QString& summary,
-                         const QString& message,
+  void ShowMessageNative(const QString& summary, const QString& message,
                          const QString& icon = QString(),
                          const QImage& image = QImage());
   QString ReplaceVariable(const QString& variable, const Song& song);
 
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);
-  void AlbumArtLoaded(const Song& song, const QString& uri, const QImage& image);
+  void AlbumArtLoaded(const Song& song, const QString& uri,
+                      const QImage& image);
 
  private:
   SystemTrayIcon* tray_icon_;
@@ -136,10 +133,10 @@ class OSD : public QObject {
 #endif  // Q_OS_DARWIN
 
 #ifdef HAVE_DBUS
-  boost::scoped_ptr<OrgFreedesktopNotificationsInterface> interface_;
+  std::unique_ptr<OrgFreedesktopNotificationsInterface> interface_;
   uint notification_id_;
   QDateTime last_notification_time_;
 #endif
 };
 
-#endif // OSD_H
+#endif  // OSD_H

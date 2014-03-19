@@ -22,11 +22,10 @@
 
 class LastFMService;
 
-
 class LastFMUrlHandler : public UrlHandler {
   friend class LastFMService;
 
-public:
+ public:
   LastFMUrlHandler(LastFMService* service, QObject* parent);
 
   QString scheme() const { return "lastfm"; }
@@ -37,8 +36,8 @@ public:
   void TunerTrackAvailable();
   void TunerError();
 
-private:
+ private:
   LastFMService* service_;
 };
 
-#endif // LASTFMURLHANDLER_H
+#endif  // LASTFMURLHANDLER_H

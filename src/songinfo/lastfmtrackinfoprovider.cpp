@@ -38,8 +38,7 @@ void LastfmTrackInfoProvider::FetchInfo(int id, const Song& metadata) {
 
 void LastfmTrackInfoProvider::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !requests_.contains(reply))
-    return;
+  if (!reply || !requests_.contains(reply)) return;
 
   const int id = requests_.take(reply);
 
@@ -70,8 +69,7 @@ void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
     love = q["track"]["userloved"].text() == "1";
   }
 
-  if (!listeners && !playcount && myplaycount == -1)
-    return; // No useful data
+  if (!listeners && !playcount && myplaycount == -1) return;  // No useful data
 
   CollapsibleInfoPane::Data data;
   data.id_ = "lastfm/playcounts";
@@ -85,26 +83,27 @@ void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
   if (myplaycount != -1) {
     if (love)
       widget->AddItem(QIcon(":/last.fm/love.png"), tr("You love this track"));
-    widget->AddItem(QIcon(":/last.fm/icon_user.png"), tr("Your scrobbles: %1").arg(myplaycount));
+    widget->AddItem(QIcon(":/last.fm/icon_user.png"),
+                    tr("Your scrobbles: %1").arg(myplaycount));
   }
 
   if (playcount)
-    widget->AddItem(IconLoader::Load("media-playback-start"), tr("%L1 total plays").arg(playcount));
+    widget->AddItem(IconLoader::Load("media-playback-start"),
+                    tr("%L1 total plays").arg(playcount));
   if (listeners)
-    widget->AddItem(QIcon(":/last.fm/my_neighbours.png"), tr("%L1 other listeners").arg(listeners));
+    widget->AddItem(QIcon(":/last.fm/my_neighbours.png"),
+                    tr("%L1 other listeners").arg(listeners));
 
   emit InfoReady(id, data);
 }
 
 void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
   // Parse the response
-  if (q["track"].children("wiki").isEmpty())
-    return; // No wiki element
+  if (q["track"].children("wiki").isEmpty()) return;  // No wiki element
 
   const QString content = q["track"]["wiki"]["content"].text();
 
-  if (content.isEmpty())
-    return; // No useful data
+  if (content.isEmpty()) return;  // No useful data
 
   CollapsibleInfoPane::Data data;
   data.id_ = "lastfm/songwiki";
@@ -124,7 +123,7 @@ void LastfmTrackInfoProvider::GetTags(int id, const lastfm::XmlQuery& q) {
   // Parse the response
   if (q["track"].children("toptags").isEmpty() ||
       q["track"]["toptags"].children("tag").isEmpty())
-    return; // No tag elements
+    return;  // No tag elements
 
   CollapsibleInfoPane::Data data;
   data.id_ = "lastfm/songtags";
@@ -137,7 +136,7 @@ void LastfmTrackInfoProvider::GetTags(int id, const lastfm::XmlQuery& q) {
 
   widget->SetIcon(data.icon_);
 
-  foreach (const lastfm::XmlQuery& e, q["track"]["toptags"].children("tag")) {
+  for (const lastfm::XmlQuery& e : q["track"]["toptags"].children("tag")) {
     widget->AddTag(e["name"].text());
   }
 

@@ -19,10 +19,7 @@
 
 #include <QtDebug>
 
-GstElementDeleter::GstElementDeleter(QObject* parent)
-  : QObject(parent)
-{
-}
+GstElementDeleter::GstElementDeleter(QObject* parent) : QObject(parent) {}
 
 void GstElementDeleter::DeleteElementLater(GstElement* element) {
   metaObject()->invokeMethod(this, "DeleteElement", Qt::QueuedConnection,

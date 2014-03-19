@@ -27,11 +27,9 @@
 #include <QXmlStreamReader>
 
 XSPFParser::XSPFParser(LibraryBackendInterface* library, QObject* parent)
-    : XMLParser(library, parent)
-{
-}
+    : XMLParser(library, parent) {}
 
-SongList XSPFParser::Load(QIODevice *device, const QString& playlist_path,
+SongList XSPFParser::Load(QIODevice* device, const QString& playlist_path,
                           const QDir& dir) const {
   SongList ret;
 
@@ -102,7 +100,8 @@ return_song:
   return song;
 }
 
-void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir) const {
+void XSPFParser::Save(const SongList& songs, QIODevice* device,		
+                      const QDir& dir) const {
   QFileInfo file;
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
@@ -113,9 +112,9 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir)
   writer.writeDefaultNamespace("http://xspf.org/ns/0/");
 
   StreamElement tracklist("trackList", &writer);
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     StreamElement track("track", &writer);
-	writer.writeTextElement("location", dir.relativeFilePath(
+    writer.writeTextElement("location", dir.relativeFilePath(
 								QFileInfo(song.url().toLocalFile()).absoluteFilePath()));
     writer.writeTextElement("title", song.title());
     if (!song.artist().isEmpty()) {
@@ -125,23 +124,24 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir)
       writer.writeTextElement("album", song.album());
     }
     if (song.length_nanosec() != -1) {
-      writer.writeTextElement("duration", QString::number(song.length_nanosec() / kNsecPerMsec));
+      writer.writeTextElement(
+          "duration", QString::number(song.length_nanosec() / kNsecPerMsec));
     }
 
-	QString art = song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
+    QString art =
+        song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
       // Convert local files to URLs.
-	  if (art.contains("://")) {
+      if (art.contains("://")) {
 		art = QUrl(art).toLocalFile();
       }
-
-	  writer.writeTextElement("image", dir.relativeFilePath(QFileInfo(art).absoluteFilePath()));
+      writer.writeTextElement("image", dir.relativeFilePath(QFileInfo(art).absoluteFilePath()));
     }
   }
   writer.writeEndDocument();
 }
 
-bool XSPFParser::TryMagic(const QByteArray &data) const {
+bool XSPFParser::TryMagic(const QByteArray& data) const {
   return data.contains("<playlist") && data.contains("<trackList");
 }

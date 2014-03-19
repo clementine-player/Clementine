@@ -18,7 +18,6 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-
 #include "messagehandler.h"
 #include "core/logging.h"
 
@@ -26,13 +25,13 @@
 #include <QLocalSocket>
 
 _MessageHandlerBase::_MessageHandlerBase(QIODevice* device, QObject* parent)
-  : QObject(parent),
-    device_(NULL),
-    flush_abstract_socket_(NULL),
-    flush_local_socket_(NULL),
-    reading_protobuf_(false),
-    expected_length_(0),
-    is_device_closed_(false) {
+    : QObject(parent),
+      device_(nullptr),
+      flush_abstract_socket_(nullptr),
+      flush_local_socket_(nullptr),
+      reading_protobuf_(false),
+      expected_length_(0),
+      is_device_closed_(false) {
   if (device) {
     SetDevice(device);
   }

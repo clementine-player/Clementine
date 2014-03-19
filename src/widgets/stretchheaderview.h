@@ -23,8 +23,8 @@
 class StretchHeaderView : public QHeaderView {
   Q_OBJECT
 
-public:
-  StretchHeaderView(Qt::Orientation orientation, QWidget* parent = 0);
+ public:
+  StretchHeaderView(Qt::Orientation orientation, QWidget* parent = nullptr);
 
   typedef double ColumnWidthType;
 
@@ -55,7 +55,7 @@ public:
 
   bool is_stretch_enabled() const { return stretch_enabled_; }
 
-public slots:
+ public slots:
   // Changes the stretch mode.  Enabling stretch mode will initialise the
   // proportional column widths from the current state of the header.
   void ToggleStretchEnabled();
@@ -65,17 +65,12 @@ signals:
   // Emitted when the stretch mode is changed.
   void StretchEnabledChanged(bool enabled);
 
-protected:
+ protected:
   // QWidget
   void mouseMoveEvent(QMouseEvent* e);
   void resizeEvent(QResizeEvent* event);
 
-private:
-  // If the width of the given column is less than a sensible threshold, resize
-  // it to make it bigger.  Workaround for a QHeaderView oddity that means a
-  // column can be visible but with a width of 0.
-  void AssertMinimalColumnWidth(int logical);
-
+ private:
   // Scales column_widths_ values so the total is 1.0.
   void NormaliseWidths(const QList<int>& sections = QList<int>());
 
@@ -83,14 +78,14 @@ private:
   // in column_widths_.
   void UpdateWidths(const QList<int>& sections = QList<int>());
 
-private slots:
+ private slots:
   void SectionResized(int logical, int old_size, int new_size);
 
-private:
+ private:
   bool stretch_enabled_;
   QVector<ColumnWidthType> column_widths_;
 
   bool in_mouse_move_event_;
 };
 
-#endif // STRETCHHEADERVIEW_H
+#endif  // STRETCHHEADERVIEW_H

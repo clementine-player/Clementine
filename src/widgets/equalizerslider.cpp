@@ -18,24 +18,16 @@
 #include "equalizerslider.h"
 #include "ui_equalizerslider.h"
 
-EqualizerSlider::EqualizerSlider(const QString& label, QWidget *parent)
-  : QWidget(parent),
-    ui_(new Ui_EqualizerSlider)
-{
+EqualizerSlider::EqualizerSlider(const QString& label, QWidget* parent)
+    : QWidget(parent), ui_(new Ui_EqualizerSlider) {
   ui_->setupUi(this);
   ui_->label->setText(label);
 
   connect(ui_->slider, SIGNAL(valueChanged(int)), SIGNAL(ValueChanged(int)));
 }
 
-EqualizerSlider::~EqualizerSlider() {
-  delete ui_;
-}
+EqualizerSlider::~EqualizerSlider() { delete ui_; }
 
-int EqualizerSlider::value() const {
-  return ui_->slider->value();
-}
+int EqualizerSlider::value() const { return ui_->slider->value(); }
 
-void EqualizerSlider::set_value(int value) {
-  ui_->slider->setValue(value);
-}
+void EqualizerSlider::set_value(int value) { ui_->slider->setValue(value); }

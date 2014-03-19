@@ -34,14 +34,10 @@ class PlaylistBackend : public QObject {
   Q_OBJECT
 
  public:
-  Q_INVOKABLE PlaylistBackend(Application* app, QObject* parent = 0);
+  Q_INVOKABLE PlaylistBackend(Application* app, QObject* parent = nullptr);
 
   struct Playlist {
-    Playlist()
-      : id(-1),
-        favorite(false),
-        last_played(0) {
-    }
+    Playlist() : id(-1), favorite(false), last_played(0) {}
 
     int id;
     QString name;
@@ -73,10 +69,13 @@ class PlaylistBackend : public QObject {
 
   int CreatePlaylist(const QString& name, const QString& special_type);
   void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
-                         int last_played, smart_playlists::GeneratorPtr dynamic);
+                         int last_played,
+                         smart_playlists::GeneratorPtr dynamic);
   void RenamePlaylist(int id, const QString& new_name);
   void FavoritePlaylist(int id, bool is_favorite);
   void RemovePlaylist(int id);
+
+  Application* app() const { return app_; }
 
  public slots:
   void SavePlaylist(int playlist, const PlaylistItemList& items,
@@ -90,9 +89,12 @@ class PlaylistBackend : public QObject {
 
   QList<SqlRow> GetPlaylistRows(int playlist);
 
-  Song NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
-  PlaylistItemPtr NewPlaylistItemFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
-  PlaylistItemPtr RestoreCueData(PlaylistItemPtr item, boost::shared_ptr<NewSongFromQueryState> state);
+  Song NewSongFromQuery(const SqlRow& row,
+                        std::shared_ptr<NewSongFromQueryState> state);
+  PlaylistItemPtr NewPlaylistItemFromQuery(
+      const SqlRow& row, std::shared_ptr<NewSongFromQueryState> state);
+  PlaylistItemPtr RestoreCueData(PlaylistItemPtr item,
+                                 std::shared_ptr<NewSongFromQueryState> state);
 
   enum GetPlaylistsFlags {
     GetPlaylists_OpenInUi = 1,
@@ -105,4 +107,4 @@ class PlaylistBackend : public QObject {
   Database* db_;
 };
 
-#endif // PLAYLISTBACKEND_H
+#endif  // PLAYLISTBACKEND_H

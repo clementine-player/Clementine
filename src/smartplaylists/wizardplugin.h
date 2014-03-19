@@ -32,7 +32,7 @@ namespace smart_playlists {
 class WizardPlugin : public QObject {
   Q_OBJECT
 
-public:
+ public:
   WizardPlugin(Application* app, LibraryBackend* library, QObject* parent);
 
   virtual QString type() const = 0;
@@ -46,16 +46,16 @@ public:
 
   void Init(QWizard* wizard, int finish_page_id);
 
-protected:
+ protected:
   virtual int CreatePages(QWizard* wizard, int finish_page_id) = 0;
 
   Application* app_;
   LibraryBackend* library_;
 
-private:
+ private:
   int start_page_;
 };
 
-} // namespace smart_playlists
+}  // namespace smart_playlists
 
-#endif // WIZARDPLUGIN_H
+#endif  // WIZARDPLUGIN_H

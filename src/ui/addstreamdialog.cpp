@@ -27,11 +27,8 @@
 
 const char* AddStreamDialog::kSettingsGroup = "AddStreamDialog";
 
-AddStreamDialog::AddStreamDialog(QWidget *parent)
-  : QDialog(parent),
-    ui_(new Ui_AddStreamDialog),
-    saved_radio_(NULL)
-{
+AddStreamDialog::AddStreamDialog(QWidget* parent)
+    : QDialog(parent), ui_(new Ui_AddStreamDialog), saved_radio_(nullptr) {
   ui_->setupUi(this);
 
   connect(ui_->url, SIGNAL(textChanged(QString)), SLOT(TextChanged(QString)));
@@ -45,30 +42,23 @@ AddStreamDialog::AddStreamDialog(QWidget *parent)
   ui_->name->setText(s.value("name").toString());
 }
 
-AddStreamDialog::~AddStreamDialog() {
-  delete ui_;
-}
+AddStreamDialog::~AddStreamDialog() { delete ui_; }
 
-QUrl AddStreamDialog::url() const {
-  return QUrl(ui_->url->text());
-}
+QUrl AddStreamDialog::url() const { return QUrl(ui_->url->text()); }
 
-QString AddStreamDialog::name() const {
-  return ui_->name->text();
-}
+QString AddStreamDialog::name() const { return ui_->name->text(); }
 
-void AddStreamDialog::set_name(const QString &name) {
+void AddStreamDialog::set_name(const QString& name) {
   ui_->name->setText(name);
 }
 
-void AddStreamDialog::set_url(const QUrl &url) {
+void AddStreamDialog::set_url(const QUrl& url) {
   ui_->url->setText(url.toString());
 }
 
 void AddStreamDialog::set_save_visible(bool visible) {
   ui_->save->setVisible(visible);
-  if (!visible)
-    ui_->name_container->setEnabled(true);
+  if (!visible) ui_->name_container->setEnabled(true);
 }
 
 void AddStreamDialog::accept() {
@@ -86,18 +76,17 @@ void AddStreamDialog::accept() {
   QDialog::accept();
 }
 
-void AddStreamDialog::TextChanged(const QString &text) {
+void AddStreamDialog::TextChanged(const QString& text) {
   // Decide whether the URL is valid
   QUrl url(text);
 
-  bool valid = url.isValid() &&
-               !url.scheme().isEmpty() &&
-               !url.toString().isEmpty();
+  bool valid =
+      url.isValid() && !url.scheme().isEmpty() && !url.toString().isEmpty();
 
   ui_->button_box->button(QDialogButtonBox::Ok)->setEnabled(valid);
 }
 
-void AddStreamDialog::showEvent(QShowEvent *) {
+void AddStreamDialog::showEvent(QShowEvent*) {
   ui_->url->setFocus();
   ui_->url->selectAll();
 }

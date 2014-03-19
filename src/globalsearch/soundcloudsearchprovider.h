@@ -28,7 +28,7 @@ class SoundCloudSearchProvider : public SearchProvider {
   Q_OBJECT
 
  public:
-  explicit SoundCloudSearchProvider(Application* app, QObject* parent = 0);
+  explicit SoundCloudSearchProvider(Application* app, QObject* parent = nullptr);
   void Init(SoundCloudService* service);
 
   // SearchProvider

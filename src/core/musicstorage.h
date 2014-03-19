@@ -20,13 +20,13 @@
 
 #include "song.h"
 
+#include <functional>
+#include <memory>
+
 #include <QMetaType>
 
-#include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
-
 class MusicStorage {
-public:
+ public:
   MusicStorage();
   virtual ~MusicStorage() {}
 
@@ -44,7 +44,7 @@ public:
     Transcode_Unsupported = 3,
   };
 
-  typedef boost::function<void (float progress)> ProgressFunction;
+  typedef std::function<void(float progress)> ProgressFunction;
 
   struct CopyJob {
     QString source_;
@@ -62,10 +62,16 @@ public:
   virtual QString LocalPath() const { return QString(); }
 
   virtual TranscodeMode GetTranscodeMode() const { return Transcode_Never; }
-  virtual Song::FileType GetTranscodeFormat() const { return Song::Type_Unknown; }
-  virtual bool GetSupportedFiletypes(QList<Song::FileType>* ret) { return true; }
+  virtual Song::FileType GetTranscodeFormat() const {
+    return Song::Type_Unknown;
+  }
+  virtual bool GetSupportedFiletypes(QList<Song::FileType>* ret) {
+    return true;
+  }
 
-  virtual bool StartCopy(QList<Song::FileType>* supported_types) { return true;}
+  virtual bool StartCopy(QList<Song::FileType>* supported_types) {
+    return true;
+  }
   virtual bool CopyToStorage(const CopyJob& job) = 0;
   virtual void FinishCopy(bool success) {}
 
@@ -77,6 +83,6 @@ public:
 };
 
 Q_DECLARE_METATYPE(MusicStorage*);
-Q_DECLARE_METATYPE(boost::shared_ptr<MusicStorage>);
+Q_DECLARE_METATYPE(std::shared_ptr<MusicStorage>);
 
-#endif // MUSICSTORAGE_H
+#endif  // MUSICSTORAGE_H

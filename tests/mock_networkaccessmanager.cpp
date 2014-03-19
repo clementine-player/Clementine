@@ -83,14 +83,14 @@ MockNetworkReply* MockNetworkAccessManager::ExpectGet(
   reply->setAttribute(QNetworkRequest::HttpStatusCodeAttribute, status);
 
   EXPECT_CALL(*this, createRequest(
-      GetOperation, RequestForUrl(contains, expected_params), NULL)).
+      GetOperation, RequestForUrl(contains, expected_params), nullptr)).
           WillOnce(Return(reply));
 
   return reply;
 }
 
 MockNetworkReply::MockNetworkReply()
-    : data_(NULL) {
+    : data_(nullptr) {
 }
 
 MockNetworkReply::MockNetworkReply(const QByteArray& data)

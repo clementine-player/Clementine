@@ -21,17 +21,17 @@
 #include <QLabel>
 
 class FullscreenHypnotoad : public QLabel {
-public:
+ public:
   FullscreenHypnotoad();
 
-protected:
+ protected:
   void keyReleaseEvent(QKeyEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
   void showEvent(QShowEvent* e);
   void hideEvent(QHideEvent* e);
 
-private:
+ private:
   QMovie* movie_;
 };
 
-#endif // FULLSCREENHYPNOTOAD_H
+#endif  // FULLSCREENHYPNOTOAD_H

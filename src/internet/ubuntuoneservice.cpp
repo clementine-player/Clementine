@@ -37,11 +37,9 @@ static const char* kServiceId = "ubuntu_one";
 }
 
 UbuntuOneService::UbuntuOneService(Application* app, InternetModel* parent)
-    : CloudFileService(
-        app, parent,
-        kServiceName, kServiceId,
-        QIcon(":/providers/ubuntuone.png"),
-        SettingsDialog::Page_UbuntuOne) {
+    : CloudFileService(app, parent, kServiceName, kServiceId,
+                       QIcon(":/providers/ubuntuone.png"),
+                       SettingsDialog::Page_UbuntuOne) {
   app_->player()->RegisterUrlHandler(new UbuntuOneUrlHandler(this, this));
 
   QSettings s;
@@ -68,10 +66,7 @@ void UbuntuOneService::Connect() {
 
 QByteArray UbuntuOneService::GenerateAuthorisationHeader() {
   return UbuntuOneAuthenticator::GenerateAuthorisationHeader(
-      consumer_key_,
-      consumer_secret_,
-      token_,
-      token_secret_);
+      consumer_key_, consumer_secret_, token_, token_secret_);
 }
 
 void UbuntuOneService::AuthenticationFinished(
@@ -107,8 +102,8 @@ QNetworkReply* UbuntuOneService::SendRequest(const QUrl& url) {
 void UbuntuOneService::RequestVolumeList() {
   QUrl volumes_url(kVolumesEndpoint);
   QNetworkReply* reply = SendRequest(volumes_url);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(VolumeListRequestFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(VolumeListRequestFinished(QNetworkReply*)), reply);
 }
 
 void UbuntuOneService::VolumeListRequestFinished(QNetworkReply* reply) {
@@ -116,7 +111,7 @@ void UbuntuOneService::VolumeListRequestFinished(QNetworkReply* reply) {
 
   QJson::Parser parser;
   QVariantList result = parser.parse(reply).toList();
-  foreach (const QVariant& v, result) {
+  for (const QVariant& v : result) {
     RequestFileList(v.toMap()["node_path"].toString());
   }
 }
@@ -127,8 +122,8 @@ void UbuntuOneService::RequestFileList(const QString& path) {
 
   qLog(Debug) << "Sending files request" << files_url;
   QNetworkReply* files_reply = SendRequest(files_url);
-  NewClosure(files_reply, SIGNAL(finished()),
-             this, SLOT(FileListRequestFinished(QNetworkReply*)), files_reply);
+  NewClosure(files_reply, SIGNAL(finished()), this,
+             SLOT(FileListRequestFinished(QNetworkReply*)), files_reply);
 }
 
 void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
@@ -137,7 +132,7 @@ void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
   QVariantMap result = parser.parse(reply).toMap();
 
   QVariantList children = result["children"].toList();
-  foreach (const QVariant& c, children) {
+  for (const QVariant& c : children) {
     QVariantMap child = c.toMap();
     if (child["kind"].toString() == "file") {
       QString content_path = child["content_path"].toString();
@@ -150,17 +145,15 @@ void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
       Song metadata;
       metadata.set_url(service_url);
       metadata.set_etag(child["hash"].toString());
-      metadata.set_mtime(QDateTime::fromString(
-          child["when_changed"].toString(), Qt::ISODate).toTime_t());
-      metadata.set_ctime(QDateTime::fromString(
-          child["when_created"].toString(), Qt::ISODate).toTime_t());
+      metadata.set_mtime(QDateTime::fromString(child["when_changed"].toString(),
+                                               Qt::ISODate).toTime_t());
+      metadata.set_ctime(QDateTime::fromString(child["when_created"].toString(),
+                                               Qt::ISODate).toTime_t());
       metadata.set_filesize(child["size"].toInt());
       metadata.set_title(child["path"].toString().mid(1));
       MaybeAddFileToDatabase(
-          metadata,
-          GuessMimeTypeForFile(child["path"].toString().mid(1)),
-          content_url,
-          GenerateAuthorisationHeader());
+          metadata, GuessMimeTypeForFile(child["path"].toString().mid(1)),
+          content_url, GenerateAuthorisationHeader());
     } else {
       RequestFileList(child["resource_path"].toString());
     }
@@ -185,6 +178,6 @@ void UbuntuOneService::ShowCoverManager() {
 }
 
 void UbuntuOneService::AddToPlaylist(QMimeData* mime) {
-  playlist_manager_->current()->dropMimeData(
-      mime, Qt::CopyAction, -1, 0, QModelIndex());
+  playlist_manager_->current()->dropMimeData(mime, Qt::CopyAction, -1, 0,
+                                             QModelIndex());
 }

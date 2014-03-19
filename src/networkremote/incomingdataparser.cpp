@@ -27,39 +27,30 @@
 #include "playlist/playlist.h"
 
 #ifdef HAVE_LIBLASTFM
-# include "internet/lastfmservice.h"
+#include "internet/lastfmservice.h"
 #endif
 
-IncomingDataParser::IncomingDataParser(Application* app)
-  :app_(app)
-{
+IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
   // Connect all the signals
-  // due the player is in a different thread, we cannot access these functions directly
-  connect(this, SIGNAL(Play()),
-          app_->player(), SLOT(Play()));
-  connect(this, SIGNAL(PlayPause()),
-          app_->player(), SLOT(PlayPause()));
-  connect(this, SIGNAL(Pause()),
-          app_->player(), SLOT(Pause()));
-  connect(this, SIGNAL(Stop()),
-          app_->player(), SLOT(Stop()));
-  connect(this, SIGNAL(StopAfterCurrent()),
-          app_->player(), SLOT(StopAfterCurrent()));
-  connect(this, SIGNAL(Next()),
-          app_->player(), SLOT(Next()));
-  connect(this, SIGNAL(Previous()),
-          app_->player(), SLOT(Previous()));
-  connect(this, SIGNAL(SetVolume(int)),
-          app_->player(), SLOT(SetVolume(int)));
-  connect(this, SIGNAL(PlayAt(int,Engine::TrackChangeFlags,bool)),
-          app_->player(), SLOT(PlayAt(int,Engine::TrackChangeFlags,bool)));
-  connect(this, SIGNAL(SeekTo(int)),
-          app_->player(), SLOT(SeekTo(int)));
+  // due the player is in a different thread, we cannot access these functions
+  // directly
+  connect(this, SIGNAL(Play()), app_->player(), SLOT(Play()));
+  connect(this, SIGNAL(PlayPause()), app_->player(), SLOT(PlayPause()));
+  connect(this, SIGNAL(Pause()), app_->player(), SLOT(Pause()));
+  connect(this, SIGNAL(Stop()), app_->player(), SLOT(Stop()));
+  connect(this, SIGNAL(StopAfterCurrent()), app_->player(),
+          SLOT(StopAfterCurrent()));
+  connect(this, SIGNAL(Next()), app_->player(), SLOT(Next()));
+  connect(this, SIGNAL(Previous()), app_->player(), SLOT(Previous()));
+  connect(this, SIGNAL(SetVolume(int)), app_->player(), SLOT(SetVolume(int)));
+  connect(this, SIGNAL(PlayAt(int, Engine::TrackChangeFlags, bool)),
+          app_->player(), SLOT(PlayAt(int, Engine::TrackChangeFlags, bool)));
+  connect(this, SIGNAL(SeekTo(int)), app_->player(), SLOT(SeekTo(int)));
 
-  connect(this, SIGNAL(SetActivePlaylist(int)),
-          app_->playlist_manager(), SLOT(SetActivePlaylist(int)));
-  connect(this, SIGNAL(ShuffleCurrent()),
-          app_->playlist_manager(), SLOT(ShuffleCurrent()));
+  connect(this, SIGNAL(SetActivePlaylist(int)), app_->playlist_manager(),
+          SLOT(SetActivePlaylist(int)));
+  connect(this, SIGNAL(ShuffleCurrent()), app_->playlist_manager(),
+          SLOT(ShuffleCurrent()));
   connect(this, SIGNAL(SetRepeatMode(PlaylistSequence::RepeatMode)),
           app_->playlist_manager()->sequence(),
           SLOT(SetRepeatMode(PlaylistSequence::RepeatMode)));
@@ -72,31 +63,26 @@ IncomingDataParser::IncomingDataParser(Application* app)
   connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)),
           app_->playlist_manager(),
           SLOT(RemoveItemsWithoutUndo(int, const QList<int>&)));
-  connect(this, SIGNAL(Open(int)),
-          app_->playlist_manager(), SLOT(Open(int)));
-  connect(this, SIGNAL(Close(int)),
-          app_->playlist_manager(), SLOT(Close(int)));
+  connect(this, SIGNAL(Open(int)), app_->playlist_manager(), SLOT(Open(int)));
+  connect(this, SIGNAL(Close(int)), app_->playlist_manager(), SLOT(Close(int)));
 
-  connect(this, SIGNAL(RateCurrentSong(double)),
-          app_->playlist_manager(), SLOT(RateCurrentSong(double)));
+  connect(this, SIGNAL(RateCurrentSong(double)), app_->playlist_manager(),
+          SLOT(RateCurrentSong(double)));
 
 #ifdef HAVE_LIBLASTFM
-  connect(this, SIGNAL(Love()),
-          InternetModel::Service<LastFMService>(), SLOT(Love()));
-  connect(this, SIGNAL(Ban()),
-          InternetModel::Service<LastFMService>(), SLOT(Ban()));
+  connect(this, SIGNAL(Love()), InternetModel::Service<LastFMService>(),
+          SLOT(Love()));
+  connect(this, SIGNAL(Ban()), InternetModel::Service<LastFMService>(),
+          SLOT(Ban()));
 #endif
 }
 
-IncomingDataParser::~IncomingDataParser() {
-}
+IncomingDataParser::~IncomingDataParser() {}
 
-bool IncomingDataParser::close_connection() {
-  return close_connection_;
-}
+bool IncomingDataParser::close_connection() { return close_connection_; }
 
 void IncomingDataParser::Parse(const pb::remote::Message& msg) {
-  close_connection_  = false;
+  close_connection_ = false;
 
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
 
@@ -186,7 +172,8 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
     case pb::remote::RATE_SONG:
       RateSong(msg);
       break;
-    default: break;
+    default:
+      break;
   }
 }
 
@@ -221,7 +208,8 @@ void IncomingDataParser::SetRepeatMode(const pb::remote::Repeat& repeat) {
     case pb::remote::Repeat_Playlist:
       emit SetRepeatMode(PlaylistSequence::Repeat_Playlist);
       break;
-    default: break;
+    default:
+      break;
   }
 }
 
@@ -239,7 +227,8 @@ void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
     case pb::remote::Shuffle_Albums:
       emit SetShuffleMode(PlaylistSequence::Shuffle_Albums);
       break;
-    default: break;
+    default:
+      break;
   }
 }
 
@@ -259,16 +248,16 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
 }
 
 void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
-    const pb::remote::RequestRemoveSongs& request = msg.request_remove_songs();
+  const pb::remote::RequestRemoveSongs& request = msg.request_remove_songs();
 
-    // Extract urls
-    QList<int> songs;
-    for (int i = 0; i<request.songs().size();i++) {
-        songs.append(request.songs(i));
-    }
+  // Extract urls
+  QList<int> songs;
+  for (int i = 0; i < request.songs().size(); i++) {
+    songs.append(request.songs(i));
+  }
 
-    // Insert the urls
-    emit RemoveSongs(request.playlist_id(), songs);
+  // Insert the urls
+  emit RemoveSongs(request.playlist_id(), songs);
 }
 
 void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {
@@ -277,32 +266,32 @@ void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {
   emit SendClementineInfo();
 
   // Check if we should send the first data
-  if (!msg.request_connect().has_send_playlist_songs() // legacy
-   || msg.request_connect().send_playlist_songs()) {
+  if (!msg.request_connect().has_send_playlist_songs()  // legacy
+      || msg.request_connect().send_playlist_songs()) {
     emit SendFirstData(true);
   } else {
     emit SendFirstData(false);
   }
 }
 
-void IncomingDataParser::SendPlaylists(const pb::remote::Message &msg) {
-  if (!msg.has_request_playlists()
-   || !msg.request_playlists().include_closed()) {
+void IncomingDataParser::SendPlaylists(const pb::remote::Message& msg) {
+  if (!msg.has_request_playlists() ||
+      !msg.request_playlists().include_closed()) {
     emit SendAllActivePlaylists();
   } else {
     emit SendAllPlaylists();
   }
 }
 
-void IncomingDataParser::OpenPlaylist(const pb::remote::Message &msg) {
+void IncomingDataParser::OpenPlaylist(const pb::remote::Message& msg) {
   emit Open(msg.request_open_playlist().playlist_id());
 }
 
-void IncomingDataParser::ClosePlaylist(const pb::remote::Message &msg) {
+void IncomingDataParser::ClosePlaylist(const pb::remote::Message& msg) {
   emit Close(msg.request_close_playlist().playlist_id());
 }
 
-void IncomingDataParser::RateSong(const pb::remote::Message &msg) {
-  double rating = (double) msg.request_rate_song().rating();
+void IncomingDataParser::RateSong(const pb::remote::Message& msg) {
+  double rating = (double)msg.request_rate_song().rating();
   emit RateCurrentSong(rating);
 }

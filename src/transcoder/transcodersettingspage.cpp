@@ -20,16 +20,12 @@
 #include "ui/iconloader.h"
 
 TranscoderSettingsPage::TranscoderSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_TranscoderSettingsPage)
-{
+    : SettingsPage(dialog), ui_(new Ui_TranscoderSettingsPage) {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("tools-wizard"));
 }
 
-TranscoderSettingsPage::~TranscoderSettingsPage() {
-  delete ui_;
-}
+TranscoderSettingsPage::~TranscoderSettingsPage() { delete ui_; }
 
 void TranscoderSettingsPage::Load() {
   ui_->transcoding_aac->Load();

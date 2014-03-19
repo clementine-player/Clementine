@@ -27,7 +27,7 @@
 #include <gst/app/gstappsrc.h>
 
 class MediaPipeline {
-public:
+ public:
   MediaPipeline(int port, quint64 length_msec);
   ~MediaPipeline();
 
@@ -38,12 +38,12 @@ public:
   void WriteData(const char* data, qint64 length);
   void EndStream();
 
-private:
+ private:
   static void NeedDataCallback(GstAppSrc* src, guint length, void* data);
   static void EnoughDataCallback(GstAppSrc* src, void* data);
   static gboolean SeekDataCallback(GstAppSrc* src, guint64 offset, void* data);
 
-private:
+ private:
   Q_DISABLE_COPY(MediaPipeline)
 
   const int port_;
@@ -59,4 +59,4 @@ private:
   quint64 offset_bytes_;
 };
 
-#endif // MEDIAPIPELINE_H
+#endif  // MEDIAPIPELINE_H

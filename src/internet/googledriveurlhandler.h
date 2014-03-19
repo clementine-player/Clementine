@@ -8,7 +8,7 @@ class GoogleDriveService;
 class GoogleDriveUrlHandler : public UrlHandler {
   Q_OBJECT
  public:
-  GoogleDriveUrlHandler(GoogleDriveService* service, QObject* parent = 0);
+  GoogleDriveUrlHandler(GoogleDriveService* service, QObject* parent = nullptr);
 
   QString scheme() const { return "googledrive"; }
   QIcon icon() const { return QIcon(":providers/googledrive.png"); }

@@ -13,9 +13,7 @@ class SkydriveService : public CloudFileService {
   Q_OBJECT
 
  public:
-  SkydriveService(
-      Application* app,
-      InternetModel* parent);
+  SkydriveService(Application* app, InternetModel* parent);
   QUrl GetStreamingUrlFromSongId(const QString& song_id);
 
  protected:
@@ -28,7 +26,7 @@ class SkydriveService : public CloudFileService {
   void FetchUserInfoFinished(QNetworkReply* reply);
   void ListFilesFinished(QNetworkReply* reply);
 
- signals:
+signals:
   void Connected();
 
  private:

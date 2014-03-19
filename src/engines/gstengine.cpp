@@ -19,29 +19,19 @@
  *   51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307, USA.          *
  ***************************************************************************/
 
-#include "config.h"
 #include "gstengine.h"
-#include "gstenginepipeline.h"
-#include "core/logging.h"
-#include "core/taskmanager.h"
-#include "core/utilities.h"
-
-#ifdef HAVE_MOODBAR
-# include "gst/moodbar/spectrum.h"
-#endif
 
 #include <math.h>
 #include <unistd.h>
-#include <vector>
-#include <iostream>
 
-#include <boost/bind.hpp>
+#include <iostream>
+#include <memory>
+#include <vector>
 
 #include <QTimer>
 #include <QRegExp>
 #include <QFile>
 #include <QSettings>
-#include <QtDebug>
 #include <QCoreApplication>
 #include <QTimeLine>
 #include <QDir>
@@ -49,42 +39,50 @@
 
 #include <gst/gst.h>
 
+#include "config.h"
+#include "gstenginepipeline.h"
+#include "core/logging.h"
+#include "core/taskmanager.h"
+#include "core/utilities.h"
 
+#ifdef HAVE_MOODBAR
+#include "gst/moodbar/spectrum.h"
+#endif
+
+using std::shared_ptr;
 using std::vector;
-using boost::shared_ptr;
 
 const char* GstEngine::kSettingsGroup = "GstEngine";
 const char* GstEngine::kAutoSink = "autoaudiosink";
 const char* GstEngine::kHypnotoadPipeline =
-      "audiotestsrc wave=6 ! "
-      "audioecho intensity=1 delay=50000000 ! "
-      "audioecho intensity=1 delay=25000000 ! "
-      "equalizer-10bands "
-      "band0=-24 band1=-3 band2=7.5 band3=12 band4=8 "
-      "band5=6 band6=5 band7=6 band8=0 band9=-24";
+    "audiotestsrc wave=6 ! "
+    "audioecho intensity=1 delay=50000000 ! "
+    "audioecho intensity=1 delay=25000000 ! "
+    "equalizer-10bands "
+    "band0=-24 band1=-3 band2=7.5 band3=12 band4=8 "
+    "band5=6 band6=5 band7=6 band8=0 band9=-24";
 const char* GstEngine::kEnterprisePipeline =
-      "audiotestsrc wave=5 ! "
-      "audiocheblimit mode=0 cutoff=120";
+    "audiotestsrc wave=5 ! "
+    "audiocheblimit mode=0 cutoff=120";
 
 GstEngine::GstEngine(TaskManager* task_manager)
-  : Engine::Base(),
-    task_manager_(task_manager),
-    buffering_task_id_(-1),
-    latest_buffer_(NULL),
-    equalizer_enabled_(false),
-    stereo_balance_(0.0f),
-    rg_enabled_(false),
-    rg_mode_(0),
-    rg_preamp_(0.0),
-    rg_compression_(true),
-    buffer_duration_nanosec_(1 * kNsecPerSec), // 1s
-    mono_playback_(false),
-    seek_timer_(new QTimer(this)),
-    timer_id_(-1),
-    next_element_id_(0),
-    is_fading_out_to_pause_(false),
-    has_faded_out_(false)
-{
+    : Engine::Base(),
+      task_manager_(task_manager),
+      buffering_task_id_(-1),
+      latest_buffer_(nullptr),
+      equalizer_enabled_(false),
+      stereo_balance_(0.0f),
+      rg_enabled_(false),
+      rg_mode_(0),
+      rg_preamp_(0.0),
+      rg_compression_(true),
+      buffer_duration_nanosec_(1 * kNsecPerSec),  // 1s
+      mono_playback_(false),
+      seek_timer_(new QTimer(this)),
+      timer_id_(-1),
+      next_element_id_(0),
+      is_fading_out_to_pause_(false),
+      has_faded_out_(false) {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelayNanosec / kNsecPerMsec);
   connect(seek_timer_, SIGNAL(timeout()), SLOT(SeekNow()));
@@ -107,7 +105,7 @@ bool GstEngine::Init() {
 }
 
 void GstEngine::InitialiseGstreamer() {
-  gst_init(NULL, NULL);
+  gst_init(nullptr, nullptr);
 
 #ifdef HAVE_MOODBAR
   gstmoodbar_register_static();
@@ -123,46 +121,47 @@ void GstEngine::ReloadSettings() {
   sink_ = s.value("sink", kAutoSink).toString();
   device_ = s.value("device").toString();
 
-  if (sink_.isEmpty())
-    sink_ = kAutoSink;
+  if (sink_.isEmpty()) sink_ = kAutoSink;
 
   rg_enabled_ = s.value("rgenabled", false).toBool();
   rg_mode_ = s.value("rgmode", 0).toInt();
   rg_preamp_ = s.value("rgpreamp", 0.0).toDouble();
   rg_compression_ = s.value("rgcompression", true).toBool();
 
-  buffer_duration_nanosec_ = s.value("bufferduration", 4000).toLongLong() * kNsecPerMsec;
+  buffer_duration_nanosec_ =
+      s.value("bufferduration", 4000).toLongLong() * kNsecPerMsec;
 
   mono_playback_ = s.value("monoplayback", false).toBool();
 }
 
-
 qint64 GstEngine::position_nanosec() const {
-  if (!current_pipeline_)
-    return 0;
+  if (!current_pipeline_) return 0;
 
   qint64 result = current_pipeline_->position() - beginning_nanosec_;
   return qint64(qMax(0ll, result));
 }
 
 qint64 GstEngine::length_nanosec() const {
-  if (!current_pipeline_)
-    return 0;
+  if (!current_pipeline_) return 0;
 
   qint64 result = end_nanosec_ - beginning_nanosec_;
   return qint64(qMax(0ll, result));
 }
 
 Engine::State GstEngine::state() const {
-  if (!current_pipeline_)
-    return url_.isEmpty() ? Engine::Empty : Engine::Idle;
+  if (!current_pipeline_) return url_.isEmpty() ? Engine::Empty : Engine::Idle;
 
   switch (current_pipeline_->state()) {
-    case GST_STATE_NULL:    return Engine::Empty;
-    case GST_STATE_READY:   return Engine::Idle;
-    case GST_STATE_PLAYING: return Engine::Playing;
-    case GST_STATE_PAUSED:  return Engine::Paused;
-    default:                return Engine::Empty;
+    case GST_STATE_NULL:
+      return Engine::Empty;
+    case GST_STATE_READY:
+      return Engine::Idle;
+    case GST_STATE_PLAYING:
+      return Engine::Playing;
+    case GST_STATE_PAUSED:
+      return Engine::Paused;
+    default:
+      return Engine::Empty;
   }
 }
 
@@ -182,14 +181,14 @@ void GstEngine::AddBufferToScope(GstBuffer* buf, int pipeline_id) {
     return;
   }
 
-  if (latest_buffer_ != NULL) {
+  if (latest_buffer_ != nullptr) {
     gst_buffer_unref(latest_buffer_);
   }
   latest_buffer_ = buf;
 }
 
 const Engine::Scope& GstEngine::scope() {
-  if (latest_buffer_ != NULL) {
+  if (latest_buffer_ != nullptr) {
     UpdateScope();
   }
 
@@ -200,26 +199,25 @@ void GstEngine::UpdateScope() {
   typedef Engine::Scope::value_type sample_type;
 
   // determine the number of channels
-  GstStructure* structure = gst_caps_get_structure(
-      GST_BUFFER_CAPS(latest_buffer_), 0);
+  GstStructure* structure =
+      gst_caps_get_structure(GST_BUFFER_CAPS(latest_buffer_), 0);
   int channels = 2;
   gst_structure_get_int(structure, "channels", &channels);
 
   // scope does not support >2 channels
-  if (channels > 2)
-    return;
+  if (channels > 2) return;
 
-  const sample_type* source = reinterpret_cast<sample_type*>(
-      GST_BUFFER_DATA(latest_buffer_));
+  const sample_type* source =
+      reinterpret_cast<sample_type*>(GST_BUFFER_DATA(latest_buffer_));
   sample_type* dest = scope_.data();
   const int bytes = qMin(
-        static_cast<Engine::Scope::size_type>(GST_BUFFER_SIZE(latest_buffer_)),
-        scope_.size() * sizeof(sample_type));
+      static_cast<Engine::Scope::size_type>(GST_BUFFER_SIZE(latest_buffer_)),
+      scope_.size() * sizeof(sample_type));
 
   memcpy(dest, source, bytes);
 
   gst_buffer_unref(latest_buffer_);
-  latest_buffer_ = NULL;
+  latest_buffer_ = nullptr;
 }
 
 void GstEngine::StartPreloading(const QUrl& url, bool force_stop_at_end,
@@ -232,7 +230,7 @@ void GstEngine::StartPreloading(const QUrl& url, bool force_stop_at_end,
   // pipeline and get gapless playback (hopefully)
   if (current_pipeline_)
     current_pipeline_->SetNextUrl(gst_url, beginning_nanosec,
-        force_stop_at_end ? end_nanosec : 0);
+                                  force_stop_at_end ? end_nanosec : 0);
 }
 
 QUrl GstEngine::FixupUrl(const QUrl& url) {
@@ -250,19 +248,21 @@ QUrl GstEngine::FixupUrl(const QUrl& url) {
 }
 
 bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
-                     bool force_stop_at_end,
-                     quint64 beginning_nanosec, qint64 end_nanosec) {
+                     bool force_stop_at_end, quint64 beginning_nanosec,
+                     qint64 end_nanosec) {
   EnsureInitialised();
 
-  Engine::Base::Load(url, change, force_stop_at_end, beginning_nanosec, end_nanosec);
+  Engine::Base::Load(url, change, force_stop_at_end, beginning_nanosec,
+                     end_nanosec);
 
   QUrl gst_url = FixupUrl(url);
 
-  bool crossfade = current_pipeline_ &&
-                   ((crossfade_enabled_ && change & Engine::Manual) ||
-                    (autocrossfade_enabled_ && change & Engine::Auto));
+  bool crossfade =
+      current_pipeline_ && ((crossfade_enabled_ && change & Engine::Manual) ||
+                            (autocrossfade_enabled_ && change & Engine::Auto));
 
-  if (change & Engine::Auto && change & Engine::SameAlbum && !crossfade_same_album_)
+  if (change & Engine::Auto && change & Engine::SameAlbum &&
+      !crossfade_same_album_)
     crossfade = false;
 
   if (!crossfade && current_pipeline_ && current_pipeline_->url() == gst_url &&
@@ -272,13 +272,11 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
     return true;
   }
 
-  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(gst_url,
-      force_stop_at_end ? end_nanosec : 0);
-  if (!pipeline)
-    return false;
+  shared_ptr<GstEnginePipeline> pipeline =
+      CreatePipeline(gst_url, force_stop_at_end ? end_nanosec : 0);
+  if (!pipeline) return false;
 
-  if (crossfade)
-    StartFadeout();
+  if (crossfade) StartFadeout();
 
   BufferingFinished();
   current_pipeline_ = pipeline;
@@ -290,21 +288,22 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
 
   // Maybe fade in this track
   if (crossfade)
-    current_pipeline_->StartFader(fadeout_duration_nanosec_, QTimeLine::Forward);
+    current_pipeline_->StartFader(fadeout_duration_nanosec_,
+                                  QTimeLine::Forward);
 
   return true;
 }
 
 void GstEngine::StartFadeout() {
-  if (is_fading_out_to_pause_)
-    return;
+  if (is_fading_out_to_pause_) return;
 
   fadeout_pipeline_ = current_pipeline_;
   disconnect(fadeout_pipeline_.get(), 0, 0, 0);
   fadeout_pipeline_->RemoveAllBufferConsumers();
 
   fadeout_pipeline_->StartFader(fadeout_duration_nanosec_, QTimeLine::Backward);
-  connect(fadeout_pipeline_.get(), SIGNAL(FaderFinished()), SLOT(FadeoutFinished()));
+  connect(fadeout_pipeline_.get(), SIGNAL(FaderFinished()),
+          SLOT(FadeoutFinished()));
 }
 
 void GstEngine::StartFadeoutPause() {
@@ -313,27 +312,26 @@ void GstEngine::StartFadeoutPause() {
 
   fadeout_pause_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
                                       QTimeLine::Backward,
-                                      QTimeLine::EaseInOutCurve,
-                                      false);
+                                      QTimeLine::EaseInOutCurve, false);
   if (fadeout_pipeline_ && fadeout_pipeline_->state() == GST_STATE_PLAYING) {
     fadeout_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
-                                  QTimeLine::Backward,
-                                  QTimeLine::LinearCurve,
+                                  QTimeLine::Backward, QTimeLine::LinearCurve,
                                   false);
   }
-  connect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()), SLOT(FadeoutPauseFinished()));
+  connect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()),
+          SLOT(FadeoutPauseFinished()));
   is_fading_out_to_pause_ = true;
 }
 
 bool GstEngine::Play(quint64 offset_nanosec) {
   EnsureInitialised();
 
-  if (!current_pipeline_ || current_pipeline_->is_buffering())
-    return false;
+  if (!current_pipeline_ || current_pipeline_->is_buffering()) return false;
 
-  QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
+  QFuture<GstStateChangeReturn> future =
+      current_pipeline_->SetState(GST_STATE_PLAYING);
   PlayFutureWatcher* watcher = new PlayFutureWatcher(
-        PlayFutureWatcherArg(offset_nanosec, current_pipeline_->id()), this);
+      PlayFutureWatcherArg(offset_nanosec, current_pipeline_->id()), this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(PlayDone()));
 
@@ -375,7 +373,7 @@ void GstEngine::PlayDone() {
   StartTimers();
 
   // initial offset
-  if(offset_nanosec != 0 || beginning_nanosec_ != 0) {
+  if (offset_nanosec != 0 || beginning_nanosec_ != 0) {
     Seek(offset_nanosec);
   }
 
@@ -384,15 +382,13 @@ void GstEngine::PlayDone() {
   emit ValidSongRequested(url_);
 }
 
-
 void GstEngine::Stop() {
   StopTimers();
 
-  url_ = QUrl(); // To ensure we return Empty from state()
+  url_ = QUrl();  // To ensure we return Empty from state()
   beginning_nanosec_ = end_nanosec_ = 0;
 
-  if (fadeout_enabled_ && current_pipeline_)
-    StartFadeout();
+  if (fadeout_enabled_ && current_pipeline_) StartFadeout();
 
   current_pipeline_.reset();
   BufferingFinished();
@@ -419,16 +415,14 @@ void GstEngine::FadeoutPauseFinished() {
 }
 
 void GstEngine::Pause() {
-  if (!current_pipeline_ || current_pipeline_->is_buffering())
-    return;
+  if (!current_pipeline_ || current_pipeline_->is_buffering()) return;
 
   // Check if we started a fade out. If it isn't finished yet and the user
   // pressed play, we inverse the fader and resume the playback.
   if (is_fading_out_to_pause_) {
     disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
     current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
-                                  QTimeLine::Forward,
-                                  QTimeLine::EaseInOutCurve,
+                                  QTimeLine::Forward, QTimeLine::EaseInOutCurve,
                                   false);
     is_fading_out_to_pause_ = false;
     has_faded_out_ = false;
@@ -436,7 +430,7 @@ void GstEngine::Pause() {
     return;
   }
 
-  if ( current_pipeline_->state() == GST_STATE_PLAYING ) {
+  if (current_pipeline_->state() == GST_STATE_PLAYING) {
     if (fadeout_pause_enabled_) {
       StartFadeoutPause();
     } else {
@@ -448,10 +442,9 @@ void GstEngine::Pause() {
 }
 
 void GstEngine::Unpause() {
-  if (!current_pipeline_ || current_pipeline_->is_buffering())
-    return;
+  if (!current_pipeline_ || current_pipeline_->is_buffering()) return;
 
-  if ( current_pipeline_->state() == GST_STATE_PAUSED ) {
+  if (current_pipeline_->state() == GST_STATE_PAUSED) {
     current_pipeline_->SetState(GST_STATE_PLAYING);
 
     // Check if we faded out last time. If yes, fade in no matter what the
@@ -460,9 +453,8 @@ void GstEngine::Unpause() {
     if (has_faded_out_) {
       disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
       current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
-                                          QTimeLine::Forward,
-                                          QTimeLine::EaseInOutCurve,
-                                          false);
+                                    QTimeLine::Forward,
+                                    QTimeLine::EaseInOutCurve, false);
       has_faded_out_ = false;
     }
 
@@ -473,15 +465,14 @@ void GstEngine::Unpause() {
 }
 
 void GstEngine::Seek(quint64 offset_nanosec) {
-  if (!current_pipeline_)
-    return;
+  if (!current_pipeline_) return;
 
   seek_pos_ = beginning_nanosec_ + offset_nanosec;
   waiting_to_seek_ = true;
 
   if (!seek_timer_->isActive()) {
     SeekNow();
-    seek_timer_->start(); // Stop us from seeking again for a little while
+    seek_timer_->start();  // Stop us from seeking again for a little while
   }
 }
 
@@ -489,8 +480,7 @@ void GstEngine::SeekNow() {
   if (!waiting_to_seek_) return;
   waiting_to_seek_ = false;
 
-  if (!current_pipeline_)
-    return;
+  if (!current_pipeline_) return;
 
   if (!current_pipeline_->Seek(seek_pos_)) {
     qLog(Warning) << "Seek failed";
@@ -498,14 +488,13 @@ void GstEngine::SeekNow() {
 }
 
 void GstEngine::SetEqualizerEnabled(bool enabled) {
-  equalizer_enabled_= enabled;
+  equalizer_enabled_ = enabled;
 
-  if (current_pipeline_)
-    current_pipeline_->SetEqualizerEnabled(enabled);
+  if (current_pipeline_) current_pipeline_->SetEqualizerEnabled(enabled);
 }
 
-
-void GstEngine::SetEqualizerParameters(int preamp, const QList<int>& band_gains) {
+void GstEngine::SetEqualizerParameters(int preamp,
+                                       const QList<int>& band_gains) {
   equalizer_preamp_ = preamp;
   equalizer_gains_ = band_gains;
 
@@ -516,13 +505,11 @@ void GstEngine::SetEqualizerParameters(int preamp, const QList<int>& band_gains)
 void GstEngine::SetStereoBalance(float value) {
   stereo_balance_ = value;
 
-  if (current_pipeline_)
-    current_pipeline_->SetStereoBalance(value);
+  if (current_pipeline_) current_pipeline_->SetStereoBalance(value);
 }
 
-void GstEngine::SetVolumeSW( uint percent ) {
-  if (current_pipeline_)
-    current_pipeline_->SetVolume(percent);
+void GstEngine::SetVolumeSW(uint percent) {
+  if (current_pipeline_) current_pipeline_->SetVolume(percent);
 }
 
 void GstEngine::StartTimers() {
@@ -539,8 +526,7 @@ void GstEngine::StopTimers() {
 }
 
 void GstEngine::timerEvent(QTimerEvent* e) {
-  if (e->timerId() != timer_id_)
-    return;
+  if (e->timerId() != timer_id_) return;
 
   if (current_pipeline_) {
     const qint64 current_position = position_nanosec();
@@ -548,14 +534,14 @@ void GstEngine::timerEvent(QTimerEvent* e) {
 
     const qint64 remaining = current_length - current_position;
 
-    const qint64 fudge = kTimerIntervalNanosec + 100 * kNsecPerMsec; // Mmm fudge
-    const qint64 gap = buffer_duration_nanosec_ + (
-        autocrossfade_enabled_ ?
-            fadeout_duration_nanosec_ :
-            kPreloadGapNanosec);
+    const qint64 fudge =
+        kTimerIntervalNanosec + 100 * kNsecPerMsec;  // Mmm fudge
+    const qint64 gap = buffer_duration_nanosec_ +
+                       (autocrossfade_enabled_ ? fadeout_duration_nanosec_
+                                               : kPreloadGapNanosec);
 
     // only if we know the length of the current stream...
-    if(current_length > 0) {
+    if (current_length > 0) {
       // emit TrackAboutToEnd when we're a few seconds away from finishing
       if (remaining < gap + fudge) {
         EmitAboutToEnd();
@@ -574,19 +560,22 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
   current_pipeline_.reset();
 
   BufferingFinished();
-  emit StateChanged(Engine::Empty);
+  emit StateChanged(Engine::Error);
   // unable to play media stream with this url
   emit InvalidSongRequested(url_);
 
-  // TODO: the types of errors listed below won't be shown to user - they will 
-  // get logged and the current song will be skipped; instead of maintaining 
+  // TODO: the types of errors listed below won't be shown to user - they will
+  // get logged and the current song will be skipped; instead of maintaining
   // the list we should probably:
   // - don't report any engine's errors to user (always just log and skip)
   // - come up with a less intrusive error box (not a dialog but a notification
   //   popup of some kind) and then report all errors
-  if(!(domain == GST_RESOURCE_ERROR && error_code == GST_RESOURCE_ERROR_NOT_FOUND) &&
-     !(domain == GST_STREAM_ERROR && error_code == GST_STREAM_ERROR_TYPE_NOT_FOUND) &&
-     !(domain == GST_RESOURCE_ERROR && error_code == GST_RESOURCE_ERROR_OPEN_READ)) {
+  if (!(domain == GST_RESOURCE_ERROR &&
+        error_code == GST_RESOURCE_ERROR_NOT_FOUND) &&
+      !(domain == GST_STREAM_ERROR &&
+        error_code == GST_STREAM_ERROR_TYPE_NOT_FOUND) &&
+      !(domain == GST_RESOURCE_ERROR &&
+        error_code == GST_RESOURCE_ERROR_OPEN_READ)) {
     emit Error(message);
   }
 }
@@ -602,36 +591,38 @@ void GstEngine::EndOfStreamReached(int pipeline_id, bool has_next_track) {
   emit TrackEnded();
 }
 
-void GstEngine::NewMetaData(int pipeline_id, const Engine::SimpleMetaBundle& bundle) {
+void GstEngine::NewMetaData(int pipeline_id,
+                            const Engine::SimpleMetaBundle& bundle) {
   if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
     return;
 
   emit MetaData(bundle);
 }
 
-GstElement* GstEngine::CreateElement(const QString& factoryName, GstElement* bin) {
+GstElement* GstEngine::CreateElement(const QString& factoryName,
+                                     GstElement* bin) {
   // Make a unique name
-  QString name = factoryName + "-" + QString::number(next_element_id_ ++);
+  QString name = factoryName + "-" + QString::number(next_element_id_++);
 
   GstElement* element = gst_element_factory_make(
       factoryName.toAscii().constData(), name.toAscii().constData());
 
   if (!element) {
-    emit Error(QString("GStreamer could not create the element: %1.  "
-                       "Please make sure that you have installed all necessary GStreamer plugins (e.g. OGG and MP3)").arg( factoryName ) );
+    emit Error(QString(
+                   "GStreamer could not create the element: %1.  "
+                   "Please make sure that you have installed all necessary "
+                   "GStreamer plugins (e.g. OGG and MP3)").arg(factoryName));
     gst_object_unref(GST_OBJECT(bin));
-    return NULL;
+    return nullptr;
   }
 
-  if (bin)
-    gst_bin_add(GST_BIN(bin), element);
+  if (bin) gst_bin_add(GST_BIN(bin), element);
 
   return element;
 }
 
-
-GstEngine::PluginDetailsList
-    GstEngine::GetPluginList(const QString& classname) const {
+GstEngine::PluginDetailsList GstEngine::GetPluginList(const QString& classname)
+    const {
   const_cast<GstEngine*>(this)->EnsureInitialised();
 
   PluginDetailsList ret;
@@ -668,16 +659,19 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   ret->set_mono_playback(mono_playback_);
 
   ret->AddBufferConsumer(this);
-  foreach (BufferConsumer* consumer, buffer_consumers_) {
+  for (BufferConsumer* consumer : buffer_consumers_) {
     ret->AddBufferConsumer(consumer);
   }
 
-  connect(ret.get(), SIGNAL(EndOfStreamReached(int, bool)), SLOT(EndOfStreamReached(int, bool)));
-  connect(ret.get(), SIGNAL(Error(int, QString,int,int)), SLOT(HandlePipelineError(int, QString,int,int)));
+  connect(ret.get(), SIGNAL(EndOfStreamReached(int, bool)),
+          SLOT(EndOfStreamReached(int, bool)));
+  connect(ret.get(), SIGNAL(Error(int, QString, int, int)),
+          SLOT(HandlePipelineError(int, QString, int, int)));
   connect(ret.get(), SIGNAL(MetadataFound(int, Engine::SimpleMetaBundle)),
           SLOT(NewMetaData(int, Engine::SimpleMetaBundle)));
   connect(ret.get(), SIGNAL(BufferingStarted()), SLOT(BufferingStarted()));
-  connect(ret.get(), SIGNAL(BufferingProgress(int)), SLOT(BufferingProgress(int)));
+  connect(ret.get(), SIGNAL(BufferingProgress(int)),
+          SLOT(BufferingProgress(int)));
   connect(ret.get(), SIGNAL(BufferingFinished()), SLOT(BufferingFinished()));
 
   return ret;
@@ -697,33 +691,33 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url,
     return ret;
   }
 
-  if (!ret->InitFromUrl(url, end_nanosec))
-    ret.reset();
+  if (!ret->InitFromUrl(url, end_nanosec)) ret.reset();
 
   return ret;
 }
 
-bool GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString &name) {
+bool GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(
+    const QString& name) {
   return (name == "alsasink" || name == "osssink" || name == "pulsesink");
 }
 
-void GstEngine::AddBufferConsumer(BufferConsumer *consumer) {
+void GstEngine::AddBufferConsumer(BufferConsumer* consumer) {
   buffer_consumers_ << consumer;
-  if (current_pipeline_)
-    current_pipeline_->AddBufferConsumer(consumer);
+  if (current_pipeline_) current_pipeline_->AddBufferConsumer(consumer);
 }
 
-void GstEngine::RemoveBufferConsumer(BufferConsumer *consumer) {
+void GstEngine::RemoveBufferConsumer(BufferConsumer* consumer) {
   buffer_consumers_.removeAll(consumer);
-  if (current_pipeline_)
-    current_pipeline_->RemoveBufferConsumer(consumer);
+  if (current_pipeline_) current_pipeline_->RemoveBufferConsumer(consumer);
 }
 
 int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
   // We don't want to get metadata messages or end notifications.
-  disconnect(pipeline.get(), SIGNAL(MetadataFound(int,Engine::SimpleMetaBundle)), this, 0);
-  disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(int,bool)), this, 0);
-  connect(pipeline.get(), SIGNAL(EndOfStreamReached(int,bool)), SLOT(BackgroundStreamFinished()));
+  disconnect(pipeline.get(),
+             SIGNAL(MetadataFound(int, Engine::SimpleMetaBundle)), this, 0);
+  disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(int, bool)), this, 0);
+  connect(pipeline.get(), SIGNAL(EndOfStreamReached(int, bool)),
+          SLOT(BackgroundStreamFinished()));
 
   const int stream_id = next_background_stream_id_++;
   background_streams_[stream_id] = pipeline;

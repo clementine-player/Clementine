@@ -29,12 +29,12 @@ AlbumCoverExporter::AlbumCoverExporter(QObject* parent)
       thread_pool_(new QThreadPool(this)),
       exported_(0),
       skipped_(0),
-      all_(0)
-{
+      all_(0) {
   thread_pool_->setMaxThreadCount(kMaxConcurrentRequests);
 }
 
-void AlbumCoverExporter::SetDialogResult(const AlbumCoverExport::DialogResult &dialog_result) {
+void AlbumCoverExporter::SetDialogResult(
+    const AlbumCoverExport::DialogResult& dialog_result) {
   dialog_result_ = dialog_result;
 }
 
@@ -43,9 +43,7 @@ void AlbumCoverExporter::AddExportRequest(Song song) {
   all_ = requests_.count();
 }
 
-void AlbumCoverExporter::Cancel() {
-  requests_.clear();
-}
+void AlbumCoverExporter::Cancel() { requests_.clear(); }
 
 void AlbumCoverExporter::StartExporting() {
   exported_ = 0;
@@ -54,8 +52,8 @@ void AlbumCoverExporter::StartExporting() {
 }
 
 void AlbumCoverExporter::AddJobsToPool() {
-  while (!requests_.isEmpty()
-      && thread_pool_->activeThreadCount() < thread_pool_->maxThreadCount()) {
+  while (!requests_.isEmpty() &&
+         thread_pool_->activeThreadCount() < thread_pool_->maxThreadCount()) {
     CoverExportRunnable* runnable = requests_.dequeue();
 
     connect(runnable, SIGNAL(CoverExported()), SLOT(CoverExported()));

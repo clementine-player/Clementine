@@ -21,8 +21,6 @@
 
 #include "core/utilities.h"
 
-#include <boost/scoped_ptr.hpp>
-
 #include <QtDebug>
 
 TEST(UtilitiesTest, HmacFunctions) {

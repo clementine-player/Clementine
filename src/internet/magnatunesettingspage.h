@@ -28,28 +28,28 @@ class Ui_MagnatuneSettingsPage;
 
 class MagnatuneSettingsPage : public SettingsPage {
   Q_OBJECT
-public:
+ public:
   MagnatuneSettingsPage(SettingsDialog* dialog);
   ~MagnatuneSettingsPage();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void Login();
   void Logout();
   void MembershipChanged(int value);
   void LoginFinished();
   void AuthenticationRequired(QNetworkReply* reply, QAuthenticator* auth);
 
-private:
+ private:
   void UpdateLoginState();
 
-private:
+ private:
   NetworkAccessManager* network_;
   Ui_MagnatuneSettingsPage* ui_;
 
   bool logged_in_;
 };
 
-#endif // MAGNATUNESETTINGSPAGE_H
+#endif  // MAGNATUNESETTINGSPAGE_H

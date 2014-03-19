@@ -18,6 +18,8 @@
 #ifndef LASTFMSERVICE_H
 #define LASTFMSERVICE_H
 
+#include <memory>
+
 namespace lastfm {
 class RadioStation;
 class Track;
@@ -39,8 +41,6 @@ uint qHash(const lastfm::Track& track);
 #include <QMap>
 #include <QMenu>
 #include <QQueue>
-
-#include <boost/scoped_ptr.hpp>
 
 class LastFMUrlHandler;
 
@@ -85,7 +85,7 @@ class LastFMService : public InternetService {
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
 
-  void ShowContextMenu(const QPoint &global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
 
   PlaylistItem::Options playlistitem_options() const;
 
@@ -126,7 +126,7 @@ class LastFMService : public InternetService {
   void ShowConfig();
   void ToggleScrobbling();
 
- signals:
+signals:
   void AuthenticationComplete(bool success, const QString& error_message);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
@@ -163,9 +163,9 @@ class LastFMService : public InternetService {
   void StreamMetadataReady();
 
  private:
-  QStandardItem* CreateStationItem(QStandardItem* parent,
-      const QString& name, const QString& icon, const QUrl& url,
-      const QString& title);
+  QStandardItem* CreateStationItem(QStandardItem* parent, const QString& name,
+                                   const QString& icon, const QUrl& url,
+                                   const QString& title);
   QString ErrorString(lastfm::ws::Error error) const;
   bool InitScrobbler();
   lastfm::Track TrackFromSong(const Song& song) const;
@@ -173,14 +173,12 @@ class LastFMService : public InternetService {
   void RefreshNeighbours();
   void AddArtistOrTag(const QString& name,
                       LastFMStationDialog::Type dialog_type,
-                      const QString& url_pattern,
-                      const QString& title_pattern,
+                      const QString& url_pattern, const QString& title_pattern,
                       const QString& icon, QStandardItem* list);
   void SaveList(const QString& name, QStandardItem* list) const;
-  void RestoreList(const QString& name,
-                   const QString& url_pattern,
-                   const QString& title_pattern,
-                   const QIcon& icon, QStandardItem* parent);
+  void RestoreList(const QString& name, const QString& url_pattern,
+                   const QString& title_pattern, const QIcon& icon,
+                   QStandardItem* parent);
 
   static QUrl FixupUrl(const QUrl& url);
   void Tune(const QUrl& station);
@@ -198,9 +196,9 @@ class LastFMService : public InternetService {
   QQueue<lastfm::Track> playlist_;
   bool already_scrobbled_;
 
-  boost::scoped_ptr<LastFMStationDialog> station_dialog_;
+  std::unique_ptr<LastFMStationDialog> station_dialog_;
 
-  boost::scoped_ptr<QMenu> context_menu_;
+  std::unique_ptr<QMenu> context_menu_;
   QAction* remove_action_;
   QAction* add_artist_action_;
   QAction* add_tag_action_;
@@ -231,4 +229,4 @@ class LastFMService : public InternetService {
   bool connection_problems_;
 };
 
-#endif // LASTFMSERVICE_H
+#endif  // LASTFMSERVICE_H

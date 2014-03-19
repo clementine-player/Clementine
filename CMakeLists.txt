@@ -9,6 +9,7 @@ include(cmake/Deb.cmake)
 include(cmake/Rpm.cmake)
 include(cmake/SpotifyVersion.cmake)
 include(cmake/OptionalSource.cmake)
+include(cmake/Format.cmake)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 if (CMAKE_CXX_COMPILER MATCHES ".*clang")
@@ -16,23 +17,9 @@ if (CMAKE_CXX_COMPILER MATCHES ".*clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-uninitialized")
 endif ()
 
-set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
-check_cxx_source_compiles(
-    "#include <unordered_map>
-     int main() {
-       std::unordered_map<int, int> m;
-       return 0;
-     }
-    "
-    USE_STD_UNORDERED_MAP)
-check_cxx_source_compiles(
-    "int main() {
-       [](){}();
-     }
-    "
-    HAVE_LAMBDAS)
-unset(CMAKE_REQUIRED_FLAGS)
-
+if (APPLE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++")
+endif ()
 
 if (UNIX AND NOT APPLE)
   set(LINUX 1)
@@ -96,11 +83,9 @@ find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 # distros.  If the user seems to want Drive support (ie. they have sparsehash
 # installed and haven't disabled drive), and has an old taglib, compile our
 # internal one and use that instead.
-option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old for Google Drive support, compile our builtin version instead" ON)
-if (USE_BUILTIN_TAGLIB AND
-    (NOT "${ENABLE_GOOGLE_DRIVE}" STREQUAL "OFF") AND
-    SPARSEHASH_INCLUDE_DIRS AND
-    TAGLIB_VERSION VERSION_LESS 1.8)
+option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old, compile our builtin version instead" ON)
+if (USE_BUILTIN_TAGLIB AND TAGLIB_VERSION VERSION_LESS 1.8)
+  message(STATUS "Using builtin taglib because your system's version is too old")
   set(TAGLIB_VERSION 1.9.1)
   set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
   set(TAGLIB_LIBRARY_DIRS "")
@@ -221,6 +206,8 @@ optional_component(BOX ON "Box support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
+optional_component(VK ON "Vk.com support")
+
 optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )
@@ -285,6 +272,12 @@ endif()
 if (HAVE_DBUS)
   find_package(Qt4 REQUIRED QtDbus)
 endif ()
+
+if (HAVE_VK)
+  add_subdirectory(3rdparty/vreen)
+  include_directories(${VREEN_INCLUDE_DIRS})
+  include_directories(${VREENOAUTH_INCLUDE_DIRS})
+endif(HAVE_VK)
 
 # We can include the Qt definitions now
 include(${QT_USE_FILE})
@@ -380,14 +373,10 @@ if(GMOCK_INCLUDE_DIRS)
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
 
-# Use system sha2 if it's available
-find_path(SHA2_INCLUDE_DIRS sha2.h)
-find_library(SHA2_LIBRARIES sha2)
-if(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
-  add_subdirectory(3rdparty/sha2)
-  set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
-  set(SHA2_LIBRARIES sha2)
-endif(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
+# Never use the system's sha2.
+add_subdirectory(3rdparty/sha2)
+set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
+set(SHA2_LIBRARIES sha2)
 
 # Use our 3rdparty chromaprint if a system one wasn't found
 if(NOT CHROMAPRINT_FOUND)

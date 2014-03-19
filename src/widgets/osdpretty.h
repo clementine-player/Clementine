@@ -28,12 +28,9 @@ class OSDPretty : public QWidget {
   Q_OBJECT
 
  public:
-  enum Mode {
-    Mode_Popup,
-    Mode_Draggable,
-  };
+  enum Mode { Mode_Popup, Mode_Draggable, };
 
-  OSDPretty(Mode mode, QWidget *parent = 0);
+  OSDPretty(Mode mode, QWidget* parent = nullptr);
   ~OSDPretty();
 
   static const char* kSettingsGroup;
@@ -49,11 +46,9 @@ class OSDPretty : public QWidget {
 
   static bool IsTransparencyAvailable();
 
-  void SetMessage(const QString& summary,
-                  const QString& message,
+  void SetMessage(const QString& summary, const QString& message,
                   const QImage& image);
-  void ShowMessage(const QString& summary,
-                   const QString& message,
+  void ShowMessage(const QString& summary, const QString& message,
                    const QImage& image);
 
   // Controls the fader.  This is enabled by default on Windows.
@@ -92,13 +87,13 @@ class OSDPretty : public QWidget {
   void ReloadSettings();
 
  protected:
-  void paintEvent(QPaintEvent *);
-  void enterEvent(QEvent *);
-  void leaveEvent(QEvent *);
-  void mousePressEvent(QMouseEvent *);
-  void showEvent(QShowEvent *);
-  void mouseMoveEvent(QMouseEvent *);
-  void mouseReleaseEvent(QMouseEvent *);
+  void paintEvent(QPaintEvent*);
+  void enterEvent(QEvent*);
+  void leaveEvent(QEvent*);
+  void mousePressEvent(QMouseEvent*);
+  void showEvent(QShowEvent*);
+  void mouseMoveEvent(QMouseEvent*);
+  void mouseReleaseEvent(QMouseEvent*);
 
  private:
   void Reposition();
@@ -119,7 +114,7 @@ class OSDPretty : public QWidget {
   QColor foreground_color_;
   QColor background_color_;
   float background_opacity_;
-  int popup_display_; // -1 for default
+  int popup_display_;  // -1 for default
   QPoint popup_pos_;
   QFont font_;
   // The OSD is kept always on top until you click (no timer)
@@ -145,4 +140,4 @@ class OSDPretty : public QWidget {
   bool toggle_mode_;
 };
 
-#endif // OSDPRETTY_H
+#endif  // OSDPRETTY_H

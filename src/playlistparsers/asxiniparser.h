@@ -23,16 +23,18 @@
 class AsxIniParser : public ParserBase {
   Q_OBJECT
 
-public:
-  AsxIniParser(LibraryBackendInterface* library, QObject* parent = 0);
+ public:
+  AsxIniParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "ASX/INI"; }
   QStringList file_extensions() const { return QStringList() << "asxini"; }
 
-  bool TryMagic(const QByteArray &data) const;
+  bool TryMagic(const QByteArray& data) const;
 
-  SongList Load(QIODevice *device, const QString& playlist_path = "", const QDir &dir = QDir()) const;
-  void Save(const SongList &songs, QIODevice *device, const QDir &dir = QDir()) const;
+  SongList Load(QIODevice* device, const QString& playlist_path = "",
+                const QDir& dir = QDir()) const;
+  void Save(const SongList& songs, QIODevice* device,
+            const QDir& dir = QDir()) const;
 };
 
-#endif // ASXINIPARSER_H
+#endif  // ASXINIPARSER_H

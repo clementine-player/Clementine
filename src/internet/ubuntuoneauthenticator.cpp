@@ -24,22 +24,20 @@ static const char* kOAuthHeaderPrefix = "OAuth realm=\"\", ";
 }
 
 UbuntuOneAuthenticator::UbuntuOneAuthenticator(QObject* parent)
-  : QObject(parent),
-    network_(new NetworkAccessManager(this)),
-    success_(false) {
-}
+    : QObject(parent),
+      network_(new NetworkAccessManager(this)),
+      success_(false) {}
 
-void UbuntuOneAuthenticator::StartAuthorisation(
-    const QString& email,
-    const QString& password) {
+void UbuntuOneAuthenticator::StartAuthorisation(const QString& email,
+                                                const QString& password) {
   QUrl url(kUbuntuOneEndpoint);
   url.addQueryItem("ws.op", "authenticate");
   QString token_name = QString(kTokenNameTemplate).arg(
-      QHostInfo::localHostName(),
-      QCoreApplication::applicationName());
+      QHostInfo::localHostName(), QCoreApplication::applicationName());
   url.addQueryItem("token_name", token_name);
 
-  QByteArray authentication = QString(email + ":" + password).toAscii().toBase64();
+  QByteArray authentication =
+      QString(email + ":" + password).toAscii().toBase64();
   QString authorisation =
       QString("Basic %1").arg(QString::fromAscii(authentication));
 
@@ -48,8 +46,8 @@ void UbuntuOneAuthenticator::StartAuthorisation(
   request.setRawHeader("Accept", "application/json");
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(AuthorisationFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(AuthorisationFinished(QNetworkReply*)), reply);
 
   qLog(Debug) << url;
   qLog(Debug) << authorisation;
@@ -65,7 +63,8 @@ void UbuntuOneAuthenticator::AuthorisationFinished(QNetworkReply* reply) {
   bool ok = false;
   QVariant json = parser.parse(data, &ok);
   if (!ok) {
-    qLog(Error) << "Failed to authenticate to Ubuntu One:" << parser.errorString();
+    qLog(Error) << "Failed to authenticate to Ubuntu One:"
+                << parser.errorString();
     emit Finished();
     return;
   }
@@ -80,12 +79,10 @@ void UbuntuOneAuthenticator::AuthorisationFinished(QNetworkReply* reply) {
 }
 
 QByteArray UbuntuOneAuthenticator::GenerateAuthorisationHeader(
-    const QString& consumer_key,
-    const QString& consumer_secret,
-    const QString& token,
-    const QString& token_secret) {
+    const QString& consumer_key, const QString& consumer_secret,
+    const QString& token, const QString& token_secret) {
   typedef QPair<QString, QString> Param;
-  QString timestamp = QString::number(time(NULL));
+  QString timestamp = QString::number(time(nullptr));
   QList<Param> parameters;
   parameters << Param("oauth_nonce", QString::number(qrand()))
              << Param("oauth_timestamp", timestamp)
@@ -95,18 +92,17 @@ QByteArray UbuntuOneAuthenticator::GenerateAuthorisationHeader(
              << Param("oauth_signature_method", "PLAINTEXT");
   qSort(parameters.begin(), parameters.end());
   QStringList encoded_params;
-  foreach (const Param& p, parameters) {
+  for (const Param& p : parameters) {
     encoded_params << QString("%1=%2").arg(p.first, p.second);
   }
 
-  QString signing_key =
-      consumer_secret + "&" + token_secret;
+  QString signing_key = consumer_secret + "&" + token_secret;
   QByteArray signature = QUrl::toPercentEncoding(signing_key);
 
   // Construct authorisation header
   parameters << Param("oauth_signature", signature);
   QStringList header_params;
-  foreach (const Param& p, parameters) {
+  for (const Param& p : parameters) {
     header_params << QString("%1=\"%2\"").arg(p.first, p.second);
   }
   QString authorisation_header = header_params.join(", ");
@@ -116,11 +112,8 @@ QByteArray UbuntuOneAuthenticator::GenerateAuthorisationHeader(
 }
 
 QByteArray UbuntuOneAuthenticator::GenerateAuthorisationHeader() {
-  return GenerateAuthorisationHeader(
-      consumer_key_,
-      consumer_secret_,
-      token_,
-      token_secret_);
+  return GenerateAuthorisationHeader(consumer_key_, consumer_secret_, token_,
+                                     token_secret_);
 }
 
 void UbuntuOneAuthenticator::CopySSOTokens() {
@@ -130,8 +123,8 @@ void UbuntuOneAuthenticator::CopySSOTokens() {
   request.setRawHeader("Accept", "application/json");
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(CopySSOTokensFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(CopySSOTokensFinished(QNetworkReply*)), reply);
 }
 
 void UbuntuOneAuthenticator::CopySSOTokensFinished(QNetworkReply* reply) {

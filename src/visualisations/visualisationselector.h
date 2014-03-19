@@ -25,22 +25,22 @@ class Ui_VisualisationSelector;
 
 class VisualisationSelector : public QDialog {
   Q_OBJECT
-public:
-  VisualisationSelector(QWidget* parent = 0);
+ public:
+  VisualisationSelector(QWidget* parent = nullptr);
   ~VisualisationSelector();
 
   void SetVisualisation(ProjectMVisualisation* vis) { vis_ = vis; }
 
-protected:
-  void showEvent(QShowEvent *);
-  void hideEvent(QHideEvent *);
+ protected:
+  void showEvent(QShowEvent*);
+  void hideEvent(QHideEvent*);
 
-private slots:
+ private slots:
   void ModeChanged(int mode);
   void SelectAll();
   void SelectNone();
 
-private:
+ private:
   Ui_VisualisationSelector* ui_;
   QPushButton* select_all_;
   QPushButton* select_none_;
@@ -48,4 +48,4 @@ private:
   ProjectMVisualisation* vis_;
 };
 
-#endif // VISUALISATIONSELECTOR_H
+#endif  // VISUALISATIONSELECTOR_H

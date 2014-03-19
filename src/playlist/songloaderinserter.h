@@ -25,6 +25,7 @@
 #include "core/song.h"
 
 class LibraryBackendInterface;
+class Player;
 class Playlist;
 class SongLoader;
 class TaskManager;
@@ -33,8 +34,9 @@ class QModelIndex;
 
 class SongLoaderInserter : public QObject {
   Q_OBJECT
-public:
-  SongLoaderInserter(TaskManager* task_manager, LibraryBackendInterface* library);
+ public:
+  SongLoaderInserter(TaskManager* task_manager,
+                     LibraryBackendInterface* library, const Player* player);
   ~SongLoaderInserter();
 
   void Load(Playlist* destination, int row, bool play_now, bool enqueue,
@@ -45,17 +47,17 @@ signals:
   void Error(const QString& message);
   void EffectiveLoadFinished(const SongList& songs);
 
-private slots:
+ private slots:
   void PendingLoadFinished(bool success);
   void DestinationDestroyed();
   void AudioCDTagsLoaded(bool success);
 
-private:
+ private:
   void PartiallyFinished();
   void EffectiveLoad();
   void Finished();
 
-private:
+ private:
   TaskManager* task_manager_;
 
   Playlist* destination_;
@@ -70,6 +72,7 @@ private:
   int async_load_id_;
   int async_progress_;
   LibraryBackendInterface* library_;
+  const Player* player_;
 };
 
-#endif // SONGLOADERINSERTER_H
+#endif  // SONGLOADERINSERTER_H

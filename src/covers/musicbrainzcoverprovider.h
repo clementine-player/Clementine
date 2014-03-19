@@ -28,7 +28,7 @@ class QNetworkReply;
 class MusicbrainzCoverProvider : public CoverProvider {
   Q_OBJECT
  public:
-  MusicbrainzCoverProvider(QObject* parent = 0);
+  MusicbrainzCoverProvider(QObject* parent = nullptr);
 
   // CoverProvider
   virtual bool StartSearch(const QString& artist, const QString& album, int id);

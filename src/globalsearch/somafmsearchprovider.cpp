@@ -18,12 +18,11 @@
 #include "somafmsearchprovider.h"
 #include "internet/somafmservice.h"
 
-SomaFMSearchProvider::SomaFMSearchProvider(
-    SomaFMServiceBase* service, Application* app, QObject* parent)
-  : SimpleSearchProvider(app, parent),
-    service_(service)
-{
-  Init(service->name(), service->url_scheme(), service->icon(), CanGiveSuggestions);
+SomaFMSearchProvider::SomaFMSearchProvider(SomaFMServiceBase* service,
+                                           Application* app, QObject* parent)
+    : SimpleSearchProvider(app, parent), service_(service) {
+  Init(service->name(), service->url_scheme(), service->icon(),
+       CanGiveSuggestions);
   set_result_limit(3);
   set_max_suggestion_count(3);
   icon_ = ScaleAndPad(
@@ -33,8 +32,7 @@ SomaFMSearchProvider::SomaFMSearchProvider(
 
   // Load the stream list on startup only if it doesn't involve going to update
   // info from the server.
-  if (!service_->IsStreamListStale())
-    RecreateItems();
+  if (!service_->IsStreamListStale()) RecreateItems();
 }
 
 void SomaFMSearchProvider::LoadArtAsync(int id, const Result& result) {
@@ -44,7 +42,7 @@ void SomaFMSearchProvider::LoadArtAsync(int id, const Result& result) {
 void SomaFMSearchProvider::RecreateItems() {
   QList<Item> items;
 
-  foreach (const SomaFMService::Stream& stream, service_->Streams()) {
+  for (const SomaFMService::Stream& stream : service_->Streams()) {
     Item item;
     item.metadata_ = stream.ToSong(service_->name());
     item.keyword_ = stream.title_;

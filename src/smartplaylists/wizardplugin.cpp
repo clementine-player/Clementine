@@ -19,16 +19,12 @@
 
 namespace smart_playlists {
 
-WizardPlugin::WizardPlugin(Application* app, LibraryBackend* library, QObject* parent)
-  : QObject(parent),
-    app_(app),
-    library_(library),
-    start_page_(-1)
-{
-}
+WizardPlugin::WizardPlugin(Application* app, LibraryBackend* library,
+                           QObject* parent)
+    : QObject(parent), app_(app), library_(library), start_page_(-1) {}
 
 void WizardPlugin::Init(QWizard* wizard, int finish_page_id) {
   start_page_ = CreatePages(wizard, finish_page_id);
 }
 
-} // namespace smart_playlists
+}  // namespace smart_playlists

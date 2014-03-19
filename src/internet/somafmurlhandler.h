@@ -23,28 +23,25 @@
 class Application;
 class SomaFMServiceBase;
 
-
 class SomaFMUrlHandler : public UrlHandler {
   Q_OBJECT
 
-public:
-  SomaFMUrlHandler(
-      Application* app,
-      SomaFMServiceBase* service,
-      QObject* parent);
+ public:
+  SomaFMUrlHandler(Application* app, SomaFMServiceBase* service,
+                   QObject* parent);
 
   QString scheme() const;
   QIcon icon() const;
   LoadResult StartLoading(const QUrl& url);
 
-private slots:
+ private slots:
   void LoadPlaylistFinished();
 
-private:
+ private:
   Application* app_;
   SomaFMServiceBase* service_;
 
   int task_id_;
 };
 
-#endif // SOMAFMURLHANDLER_H
+#endif  // SOMAFMURLHANDLER_H

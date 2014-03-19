@@ -28,14 +28,12 @@
 const int FavoriteWidget::kStarSize = 15;
 
 FavoriteWidget::FavoriteWidget(int tab_index, bool favorite, QWidget* parent)
-  : QWidget(parent),
-    tab_index_(tab_index),
-    favorite_(favorite),
-    on_(":/star-on.png"),
-    off_(":/star-off.png"),
-    rect_(0, 0, kStarSize, kStarSize)
-{
-}
+    : QWidget(parent),
+      tab_index_(tab_index),
+      favorite_(favorite),
+      on_(":/star-on.png"),
+      off_(":/star-off.png"),
+      rect_(0, 0, kStarSize, kStarSize) {}
 
 void FavoriteWidget::SetFavorite(bool favorite) {
   if (favorite_ != favorite) {
@@ -46,8 +44,9 @@ void FavoriteWidget::SetFavorite(bool favorite) {
 }
 
 QSize FavoriteWidget::sizeHint() const {
-  const int frame_width = 1 + style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-  return QSize(kStarSize + frame_width*2, kStarSize + frame_width*2);
+  const int frame_width =
+      1 + style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  return QSize(kStarSize + frame_width * 2, kStarSize + frame_width * 2);
 }
 
 void FavoriteWidget::paintEvent(QPaintEvent* e) {

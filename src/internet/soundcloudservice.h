@@ -30,15 +30,15 @@ class QNetworkReply;
 class SoundCloudService : public InternetService {
   Q_OBJECT
  public:
-  SoundCloudService(Application* app, InternetModel *parent);
+  SoundCloudService(Application* app, InternetModel* parent);
   ~SoundCloudService();
 
   // Internet Service methods
   QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem *parent);
+  void LazyPopulate(QStandardItem* parent);
 
   // TODO
-  //QList<QAction*> playlistitem_actions(const Song& song);
+  // QList<QAction*> playlistitem_actions(const Song& song);
   void ShowContextMenu(const QPoint& global_pos);
   QWidget* HeaderWidget() const;
 
@@ -47,7 +47,7 @@ class SoundCloudService : public InternetService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
 
- signals:
+signals:
   void SimpleSearchResults(int id, SongList songs);
 
  private slots:
@@ -93,5 +93,4 @@ class SoundCloudService : public InternetService {
   static const char* kApiClientId;
 };
 
-
-#endif // SOUNDCLOUDSERVICE_H
+#endif  // SOUNDCLOUDSERVICE_H

@@ -3,6 +3,8 @@
 
 #include "internetservice.h"
 
+#include <memory>
+
 #include <QMenu>
 
 #include "core/tagreaderclient.h"
@@ -18,13 +20,9 @@ class PlaylistManager;
 class CloudFileService : public InternetService {
   Q_OBJECT
  public:
-  CloudFileService(
-      Application* app,
-      InternetModel* parent,
-      const QString& service_name,
-      const QString& service_id,
-      const QIcon& icon,
-      SettingsDialog::Page settings_page);
+  CloudFileService(Application* app, InternetModel* parent,
+                   const QString& service_name, const QString& service_id,
+                   const QIcon& icon, SettingsDialog::Page settings_page);
 
   // InternetService
   virtual QStandardItem* CreateRootItem();
@@ -35,23 +33,19 @@ class CloudFileService : public InternetService {
   virtual bool has_credentials() const = 0;
   virtual void Connect() = 0;
   virtual bool ShouldIndexFile(const QUrl& url, const QString& mime_type) const;
-  virtual void MaybeAddFileToDatabase(
-      const Song& metadata,
-      const QString& mime_type,
-      const QUrl& download_url,
-      const QString& authorisation);
+  virtual void MaybeAddFileToDatabase(const Song& metadata,
+                                      const QString& mime_type,
+                                      const QUrl& download_url,
+                                      const QString& authorisation);
   virtual bool IsSupportedMimeType(const QString& mime_type) const;
   QString GuessMimeTypeForFile(const QString& filename) const;
-
 
  protected slots:
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
   void ShowSettingsDialog();
-  void ReadTagsFinished(
-      TagReaderClient::ReplyType* reply,
-      const Song& metadata,
-      const int task_id);
+  void ReadTagsFinished(TagReaderClient::ReplyType* reply, const Song& metadata,
+                        const int task_id);
 
  protected:
   QStandardItem* root_;
@@ -61,8 +55,8 @@ class CloudFileService : public InternetService {
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;
 
-  boost::scoped_ptr<QMenu> context_menu_;
-  boost::scoped_ptr<AlbumCoverManager> cover_manager_;
+  std::unique_ptr<QMenu> context_menu_;
+  std::unique_ptr<AlbumCoverManager> cover_manager_;
   PlaylistManager* playlist_manager_;
   TaskManager* task_manager_;
 

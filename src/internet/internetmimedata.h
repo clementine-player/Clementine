@@ -28,12 +28,11 @@ class InternetModel;
 class InternetMimeData : public MimeData {
   Q_OBJECT
 
-public:
-  InternetMimeData(const InternetModel* _model)
-    : model(_model) {}
+ public:
+  InternetMimeData(const InternetModel* _model) : model(_model) {}
 
   const InternetModel* model;
   QModelIndexList indexes;
 };
 
-#endif // INTERNETMIMEDATA_H
+#endif  // INTERNETMIMEDATA_H

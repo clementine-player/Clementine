@@ -47,18 +47,18 @@ class PodcastUpdater;
 class TagReaderClient;
 class TaskManager;
 
-
 class Application : public QObject {
   Q_OBJECT
 
-public:
+ public:
   static bool kIsPortable;
 
-  Application(QObject* parent = NULL);
+  Application(QObject* parent = nullptr);
   ~Application();
 
   const QString& language_name() const { return language_name_; }
-  // Same as language_name, but remove the region code at the end if there is one
+  // Same as language_name, but remove the region code at the end if there is
+  // one
   QString language_without_region() const;
   void set_language_name(const QString& name) { language_name_ = name; }
 
@@ -83,7 +83,9 @@ public:
   MoodbarLoader* moodbar_loader() const { return moodbar_loader_; }
   MoodbarController* moodbar_controller() const { return moodbar_controller_; }
   NetworkRemote* network_remote() const { return network_remote_; }
-  NetworkRemoteHelper* network_remote_helper() const { return network_remote_helper_; }
+  NetworkRemoteHelper* network_remote_helper() const {
+    return network_remote_helper_;
+  }
 
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
@@ -91,7 +93,7 @@ public:
   void MoveToNewThread(QObject* object);
   void MoveToThread(QObject* object, QThread* thread);
 
-public slots:
+ public slots:
   void AddError(const QString& message);
   void ReloadSettings();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
@@ -101,7 +103,7 @@ signals:
   void SettingsChanged();
   void SettingsDialogRequested(SettingsDialog::Page page);
 
-private:
+ private:
   QString language_name_;
 
   TagReaderClient* tag_reader_client_;
@@ -131,4 +133,4 @@ private:
   QList<QThread*> threads_;
 };
 
-#endif // APPLICATION_H
+#endif  // APPLICATION_H

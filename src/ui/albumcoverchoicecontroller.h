@@ -27,9 +27,10 @@ class AlbumCoverFetcher;
 class AlbumCoverSearcher;
 class Application;
 class CoverFromURLDialog;
-class CoverSearchStatistics;
 class QFileDialog;
 class Song;
+
+struct CoverSearchStatistics;
 
 // Controller for the common album cover related menu options.
 class AlbumCoverChoiceController : public QWidget {
@@ -40,7 +41,7 @@ class AlbumCoverChoiceController : public QWidget {
   static const char* kSaveImageFileFilter;
   static const char* kAllFilesFilter;
 
-  AlbumCoverChoiceController(QWidget* parent = 0);
+  AlbumCoverChoiceController(QWidget* parent = nullptr);
   ~AlbumCoverChoiceController();
 
   void SetApplication(Application* app);
@@ -66,11 +67,13 @@ class AlbumCoverChoiceController : public QWidget {
 
   // All of the methods below require a currently selected song as an
   // input parameter. Also - LoadCoverFromFile, LoadCoverFromURL,
-  // SearchForCover, UnsetCover and SaveCover all update manual path 
+  // SearchForCover, UnsetCover and SaveCover all update manual path
   // of the given song in library to the new cover.
 
-  // Lets the user choose a cover from disk. If no cover will be chosen or the chosen
-  // cover will not be a proper image, this returns an empty string. Otherwise, the
+  // Lets the user choose a cover from disk. If no cover will be chosen or the
+  // chosen
+  // cover will not be a proper image, this returns an empty string. Otherwise,
+  // the
   // path to the chosen cover will be returned.
   QString LoadCoverFromFile(Song* song);
 
@@ -78,7 +81,8 @@ class AlbumCoverChoiceController : public QWidget {
   // is supposed to be the cover of the given song's album.
   void SaveCoverToFile(const Song& song, const QImage& image);
 
-  // Downloads the cover from an URL given by user. This returns the downloaded image
+  // Downloads the cover from an URL given by user. This returns the downloaded
+  // image
   // or null image if something went wrong for example when user cancelled the
   // dialog.
   QString LoadCoverFromURL(Song* song);
@@ -102,20 +106,21 @@ class AlbumCoverChoiceController : public QWidget {
   // Saves the cover that the user picked through a drag and drop operation.
   QString SaveCover(Song* song, const QDropEvent* e);
 
-  // Saves the given image in cache as a cover for 'artist' - 'album'. 
+  // Saves the given image in cache as a cover for 'artist' - 'album'.
   // The method returns path of the cached image.
-  QString SaveCoverInCache(const QString& artist, const QString& album, const QImage& image);
+  QString SaveCoverInCache(const QString& artist, const QString& album,
+                           const QImage& image);
 
   static bool CanAcceptDrag(const QDragEnterEvent* e);
 
 signals:
   void AutomaticCoverSearchDone();
 
-private slots:
+ private slots:
   void AlbumCoverFetched(quint64 id, const QImage& image,
                          const CoverSearchStatistics& statistics);
 
-private:
+ private:
   QString GetInitialPathForFileDialog(const Song& song,
                                       const QString& filename);
 
@@ -141,4 +146,4 @@ private:
   QMap<quint64, Song> cover_fetching_tasks_;
 };
 
-#endif // ALBUMCOVERCHOICECONTROLLER_H
+#endif  // ALBUMCOVERCHOICECONTROLLER_H

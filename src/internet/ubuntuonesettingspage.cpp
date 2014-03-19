@@ -38,8 +38,7 @@ void UbuntuOneSettingsPage::Load() {
   }
 }
 
-void UbuntuOneSettingsPage::Save() {
-}
+void UbuntuOneSettingsPage::Save() {}
 
 void UbuntuOneSettingsPage::LoginClicked() {
   const QString username = ui_->username->text();
@@ -48,10 +47,10 @@ void UbuntuOneSettingsPage::LoginClicked() {
 
   UbuntuOneAuthenticator* authenticator = new UbuntuOneAuthenticator;
   authenticator->StartAuthorisation(username, password);
-  NewClosure(authenticator, SIGNAL(Finished()),
-             this, SLOT(Connected(UbuntuOneAuthenticator*)), authenticator);
-  NewClosure(authenticator, SIGNAL(Finished()),
-             service_, SLOT(AuthenticationFinished(UbuntuOneAuthenticator*)),
+  NewClosure(authenticator, SIGNAL(Finished()), this,
+             SLOT(Connected(UbuntuOneAuthenticator*)), authenticator);
+  NewClosure(authenticator, SIGNAL(Finished()), service_,
+             SLOT(AuthenticationFinished(UbuntuOneAuthenticator*)),
              authenticator);
 
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
@@ -77,7 +76,8 @@ void UbuntuOneSettingsPage::Connected(UbuntuOneAuthenticator* authenticator) {
     return;
   }
 
-  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, ui_->username->text());
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn,
+                                ui_->username->text());
   authenticated_ = true;
 
   QSettings s;

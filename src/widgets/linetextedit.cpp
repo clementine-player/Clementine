@@ -19,9 +19,7 @@
 
 #include <QKeyEvent>
 
-LineTextEdit::LineTextEdit(QWidget *parent)
-  : QTextEdit(parent)
-{
+LineTextEdit::LineTextEdit(QWidget* parent) : QTextEdit(parent) {
   setWordWrapMode(QTextOption::NoWrap);
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -39,13 +37,10 @@ QSize LineTextEdit::sizeHint() const {
   return QSize(w, h);
 }
 
-QSize LineTextEdit::minimumSizeHint() const {
-  return sizeHint();
-}
+QSize LineTextEdit::minimumSizeHint() const { return sizeHint(); }
 
 void LineTextEdit::keyPressEvent(QKeyEvent* e) {
-  if (e->key() == Qt::Key_Enter ||
-      e->key() == Qt::Key_Return) {
+  if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return) {
     e->ignore();
   } else {
     QTextEdit::keyPressEvent(e);

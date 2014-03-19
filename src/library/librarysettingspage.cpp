@@ -37,12 +37,10 @@
 
 const char* LibrarySettingsPage::kSettingsGroup = "LibraryConfig";
 
-
 LibrarySettingsPage::LibrarySettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_LibrarySettingsPage),
-    initialised_model_(false)
-{
+    : SettingsPage(dialog),
+      ui_(new Ui_LibrarySettingsPage),
+      initialised_model_(false) {
   ui_->setupUi(this);
   ui_->list->setItemDelegate(new NativeSeparatorsDelegate(this));
 
@@ -52,19 +50,20 @@ LibrarySettingsPage::LibrarySettingsPage(SettingsDialog* dialog)
 
   connect(ui_->add, SIGNAL(clicked()), SLOT(Add()));
   connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));
-  connect(ui_->sync_stats_button, SIGNAL(clicked()), SLOT(WriteAllSongsStatisticsToFiles()));
+  connect(ui_->sync_stats_button, SIGNAL(clicked()),
+          SLOT(WriteAllSongsStatisticsToFiles()));
 }
 
-LibrarySettingsPage::~LibrarySettingsPage() {
-  delete ui_;
-}
+LibrarySettingsPage::~LibrarySettingsPage() { delete ui_; }
 
 void LibrarySettingsPage::Add() {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
-  QString path(settings.value("last_path",
-      Utilities::GetConfigPath(Utilities::Path_DefaultMusicLibrary)).toString());
+  QString path(
+      settings.value("last_path", Utilities::GetConfigPath(
+                                      Utilities::Path_DefaultMusicLibrary))
+          .toString());
   path = QFileDialog::getExistingDirectory(this, tr("Add directory..."), path);
 
   if (!path.isNull()) {
@@ -75,7 +74,8 @@ void LibrarySettingsPage::Add() {
 }
 
 void LibrarySettingsPage::Remove() {
-  dialog()->library_directory_model()->RemoveDirectory(ui_->list->currentIndex());
+  dialog()->library_directory_model()->RemoveDirectory(
+      ui_->list->currentIndex());
 }
 
 void LibrarySettingsPage::CurrentRowChanged(const QModelIndex& index) {
@@ -93,16 +93,17 @@ void LibrarySettingsPage::Save() {
   s.beginGroup(LibraryWatcher::kSettingsGroup);
   s.setValue("startup_scan", ui_->startup_scan->isChecked());
   s.setValue("monitor", ui_->monitor->isChecked());
-  
+
   QString filter_text = ui_->cover_art_patterns->text();
   QStringList filters = filter_text.split(',', QString::SkipEmptyParts);
   s.setValue("cover_art_patterns", filters);
-  
+
   s.endGroup();
 
   s.beginGroup(LibraryBackend::kSettingsGroup);
   s.setValue("save_ratings_in_file", ui_->save_ratings_in_file->isChecked());
-  s.setValue("save_statistics_in_file", ui_->save_statistics_in_file->isChecked());
+  s.setValue("save_statistics_in_file",
+             ui_->save_statistics_in_file->isChecked());
   s.endGroup();
 }
 
@@ -110,8 +111,8 @@ void LibrarySettingsPage::Load() {
   if (!initialised_model_) {
     if (ui_->list->selectionModel()) {
       disconnect(ui_->list->selectionModel(),
-                 SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-                 this, SLOT(CurrentRowChanged(QModelIndex)));
+                 SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), this,
+                 SLOT(CurrentRowChanged(QModelIndex)));
     }
 
     ui_->list->setModel(dialog()->library_directory_model());
@@ -132,27 +133,31 @@ void LibrarySettingsPage::Load() {
   s.beginGroup(LibraryWatcher::kSettingsGroup);
   ui_->startup_scan->setChecked(s.value("startup_scan", true).toBool());
   ui_->monitor->setChecked(s.value("monitor", true).toBool());
-  
-  QStringList filters = s.value("cover_art_patterns",
-      QStringList() << "front" << "cover").toStringList();
+
+  QStringList filters =
+      s.value("cover_art_patterns", QStringList() << "front"
+                                                  << "cover").toStringList();
   ui_->cover_art_patterns->setText(filters.join(","));
-  
+
   s.endGroup();
 
   s.beginGroup(LibraryBackend::kSettingsGroup);
-  ui_->save_ratings_in_file->setChecked(s.value("save_ratings_in_file", false).toBool());
-  ui_->save_statistics_in_file->setChecked(s.value("save_statistics_in_file", false).toBool());
+  ui_->save_ratings_in_file->setChecked(
+      s.value("save_ratings_in_file", false).toBool());
+  ui_->save_statistics_in_file->setChecked(
+      s.value("save_statistics_in_file", false).toBool());
   s.endGroup();
 }
 
 void LibrarySettingsPage::WriteAllSongsStatisticsToFiles() {
   QMessageBox confirmation_dialog(
-      QMessageBox::Question,
-      tr("Write all songs statistics into songs' files"),
-      tr("Are you sure you want to write song's statistics into song's file for all the songs of your library?"),
+      QMessageBox::Question, tr("Write all songs statistics into songs' files"),
+      tr("Are you sure you want to write song's statistics into song's file "
+         "for all the songs of your library?"),
       QMessageBox::Yes | QMessageBox::Cancel);
   if (confirmation_dialog.exec() != QMessageBox::Yes) {
     return;
   }
-  QtConcurrent::run(dialog()->app()->library(), &Library::WriteAllSongsStatisticsToFiles);
+  QtConcurrent::run(dialog()->app()->library(),
+                    &Library::WriteAllSongsStatisticsToFiles);
 }

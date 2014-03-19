@@ -18,7 +18,6 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-
 #ifndef MESSAGEHANDLER_H
 #define MESSAGEHANDLER_H
 
@@ -37,11 +36,8 @@ class QAbstractSocket;
 class QIODevice;
 class QLocalSocket;
 
-#define QStringFromStdString(x) \
-  QString::fromUtf8(x.data(), x.size())
-#define DataCommaSizeFromQString(x) \
-  x.toUtf8().constData(), x.toUtf8().length()
-
+#define QStringFromStdString(x) QString::fromUtf8(x.data(), x.size())
+#define DataCommaSizeFromQString(x) x.toUtf8().constData(), x.toUtf8().length()
 
 // Reads and writes uint32 length encoded protobufs to a socket.
 // This base QObject is separate from AbstractMessageHandler because moc can't
@@ -49,7 +45,7 @@ class QLocalSocket;
 class _MessageHandlerBase : public QObject {
   Q_OBJECT
 
-public:
+ public:
   // device can be NULL, in which case you must call SetDevice before writing
   // any messages.
   _MessageHandlerBase(QIODevice* device, QObject* parent);
@@ -59,16 +55,16 @@ public:
   // After this is true, messages cannot be sent to the handler any more.
   bool is_device_closed() const { return is_device_closed_; }
 
-protected slots:
+ protected slots:
   void WriteMessage(const QByteArray& data);
   void DeviceReadyRead();
   virtual void DeviceClosed();
 
-protected:
+ protected:
   virtual bool RawMessageArrived(const QByteArray& data) = 0;
   virtual void AbortAll() = 0;
 
-protected:
+ protected:
   typedef bool (QAbstractSocket::*FlushAbstractSocket)();
   typedef bool (QLocalSocket::*FlushLocalSocket)();
 
@@ -83,13 +79,12 @@ protected:
   bool is_device_closed_;
 };
 
-
 // Reads and writes uint32 length encoded MessageType messages to a socket.
 // You should subclass this and implement the MessageArrived(MessageType)
 // method.
 template <typename MT>
 class AbstractMessageHandler : public _MessageHandlerBase {
-public:
+ public:
   AbstractMessageHandler(QIODevice* device, QObject* parent);
   ~AbstractMessageHandler() { AbortAll(); }
 
@@ -113,7 +108,7 @@ public:
   // reply on the socket.  Used on the worker side.
   void SendReply(const MessageType& request, MessageType* reply);
 
-protected:
+ protected:
   // Called when a message is received from the socket.
   virtual void MessageArrived(const MessageType& message) {}
 
@@ -121,19 +116,16 @@ protected:
   bool RawMessageArrived(const QByteArray& data);
   void AbortAll();
 
-private:
+ private:
   QMap<int, ReplyType*> pending_replies_;
 };
 
+template <typename MT>
+AbstractMessageHandler<MT>::AbstractMessageHandler(QIODevice* device,
+                                                   QObject* parent)
+    : _MessageHandlerBase(device, parent) {}
 
-template<typename MT>
-AbstractMessageHandler<MT>::AbstractMessageHandler(
-    QIODevice* device, QObject* parent)
-  : _MessageHandlerBase(device, parent)
-{
-}
-
-template<typename MT>
+template <typename MT>
 void AbstractMessageHandler<MT>::SendMessage(const MessageType& message) {
   Q_ASSERT(QThread::currentThread() == thread());
 
@@ -141,27 +133,28 @@ void AbstractMessageHandler<MT>::SendMessage(const MessageType& message) {
   WriteMessage(QByteArray(data.data(), data.size()));
 }
 
-template<typename MT>
+template <typename MT>
 void AbstractMessageHandler<MT>::SendMessageAsync(const MessageType& message) {
   std::string data = message.SerializeAsString();
-  metaObject()->invokeMethod(this, "WriteMessage", Qt::QueuedConnection,
-                             Q_ARG(QByteArray, QByteArray(data.data(), data.size())));
+  metaObject()->invokeMethod(
+      this, "WriteMessage", Qt::QueuedConnection,
+      Q_ARG(QByteArray, QByteArray(data.data(), data.size())));
 }
 
-template<typename MT>
+template <typename MT>
 void AbstractMessageHandler<MT>::SendRequest(ReplyType* reply) {
   pending_replies_[reply->id()] = reply;
   SendMessage(reply->request_message());
 }
 
-template<typename MT>
+template <typename MT>
 void AbstractMessageHandler<MT>::SendReply(const MessageType& request,
                                            MessageType* reply) {
   reply->set_id(request.id());
   SendMessage(*reply);
 }
 
-template<typename MT>
+template <typename MT>
 bool AbstractMessageHandler<MT>::RawMessageArrived(const QByteArray& data) {
   MessageType message;
   if (!message.ParseFromArray(data.constData(), data.size())) {
@@ -180,14 +173,12 @@ bool AbstractMessageHandler<MT>::RawMessageArrived(const QByteArray& data) {
   return true;
 }
 
-template<typename MT>
+template <typename MT>
 void AbstractMessageHandler<MT>::AbortAll() {
-  foreach (ReplyType* reply, pending_replies_) {
+  for (ReplyType* reply : pending_replies_) {
     reply->Abort();
   }
   pending_replies_.clear();
 }
 
-
-
-#endif // MESSAGEHANDLER_H
+#endif  // MESSAGEHANDLER_H

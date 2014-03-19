@@ -1,7 +1,6 @@
 #include "skydriveservice.h"
 
-#include <boost/scoped_ptr.hpp>
-using boost::scoped_ptr;
+#include <memory>
 
 #include <qjson/parser.h>
 
@@ -13,7 +12,7 @@ using boost::scoped_ptr;
 
 namespace {
 
-static const char* kServiceName = "Skydrive";
+static const char* kServiceName = "OneDrive";
 static const char* kServiceId = "skydrive";
 static const char* kSettingsGroup = "Skydrive";
 
@@ -31,18 +30,14 @@ static const char* kSkydriveBase = "https://apis.live.net/v5.0/";
 
 }  // namespace
 
-SkydriveService::SkydriveService(
-    Application* app,
-    InternetModel* parent)
-  : CloudFileService(
-      app, parent, kServiceName, kServiceId,
-      QIcon(":providers/skydrive.png"), SettingsDialog::Page_Skydrive) {
+SkydriveService::SkydriveService(Application* app, InternetModel* parent)
+    : CloudFileService(app, parent, kServiceName, kServiceId,
+                       QIcon(":providers/skydrive.png"),
+                       SettingsDialog::Page_Skydrive) {
   app->player()->RegisterUrlHandler(new SkydriveUrlHandler(this, this));
 }
 
-bool SkydriveService::has_credentials() const {
-  return true;
-}
+bool SkydriveService::has_credentials() const { return true; }
 
 void SkydriveService::Connect() {
   OAuthenticator* oauth = new OAuthenticator(
@@ -50,17 +45,14 @@ void SkydriveService::Connect() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   if (s.contains("refresh_token")) {
-    oauth->RefreshAuthorisation(
-        kOAuthTokenEndpoint, s.value("refresh_token").toString());
+    oauth->RefreshAuthorisation(kOAuthTokenEndpoint,
+                                s.value("refresh_token").toString());
   } else {
-    oauth->StartAuthorisation(
-        kOAuthEndpoint,
-        kOAuthTokenEndpoint,
-        kOAuthScope);
+    oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
   }
 
-  NewClosure(oauth, SIGNAL(Finished()),
-             this, SLOT(ConnectFinished(OAuthenticator*)), oauth);
+  NewClosure(oauth, SIGNAL(Finished()), this,
+             SLOT(ConnectFinished(OAuthenticator*)), oauth);
 }
 
 void SkydriveService::ConnectFinished(OAuthenticator* oauth) {
@@ -78,13 +70,13 @@ void SkydriveService::ConnectFinished(OAuthenticator* oauth) {
   AddAuthorizationHeader(&request);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(FetchUserInfoFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(FetchUserInfoFinished(QNetworkReply*)), reply);
 }
 
 void SkydriveService::AddAuthorizationHeader(QNetworkRequest* request) {
-  request->setRawHeader(
-      "Authorization", QString("Bearer %1").arg(access_token_).toUtf8());
+  request->setRawHeader("Authorization",
+                        QString("Bearer %1").arg(access_token_).toUtf8());
 }
 
 void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
@@ -112,8 +104,8 @@ void SkydriveService::ListFiles(const QString& folder) {
   AddAuthorizationHeader(&request);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(ListFilesFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(ListFilesFinished(QNetworkReply*)), reply);
 }
 
 void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
@@ -123,7 +115,7 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
   qLog(Debug) << response;
 
   QVariantList files = response["data"].toList();
-  foreach (const QVariant& f, files) {
+  for (const QVariant& f : files) {
     QVariantMap file = f.toMap();
     if (file["type"].toString() == "audio") {
       QString mime_type = GuessMimeTypeForFile(file["name"].toString());
@@ -143,11 +135,7 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
       // HTTPS appears to be broken somehow between Qt & Skydrive downloads.
       // Fortunately, just changing the scheme to HTTP works.
       download_url.setScheme("http");
-      MaybeAddFileToDatabase(
-          song,
-          mime_type,
-          download_url,
-          QString::null);
+      MaybeAddFileToDatabase(song, mime_type, download_url, QString::null);
     }
   }
 }
@@ -158,7 +146,7 @@ QUrl SkydriveService::GetStreamingUrlFromSongId(const QString& file_id) {
   QUrl url(QString(kSkydriveBase) + file_id);
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
-  scoped_ptr<QNetworkReply> reply(network_->get(request));
+  std::unique_ptr<QNetworkReply> reply(network_->get(request));
   WaitForSignal(reply.get(), SIGNAL(finished()));
 
   QJson::Parser parser;

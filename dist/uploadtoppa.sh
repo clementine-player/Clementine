@@ -10,7 +10,7 @@ if [ -z "$REFSPEC" -o -z "$DIST" ]; then
 fi
 
 PPA=ppa:me-davidsansome/clementine
-REPO=https://code.google.com/p/clementine-player/
+REPO=https://github.com/clementine-player/Clementine
 
 BASE=`pwd`
 DIRECTORY=clementine

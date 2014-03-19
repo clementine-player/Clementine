@@ -25,19 +25,15 @@
 
 #include <QStack>
 
-
 LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
                                              const QString& name,
                                              const QString& id,
                                              const QIcon& icon,
                                              bool enabled_by_default,
-                                             Application* app,
-                                             QObject* parent)
-  : BlockingSearchProvider(app, parent),
-    backend_(backend)
-{
-  Hints hints = WantsSerialisedArtQueries | ArtIsInSongMetadata |
-                CanGiveSuggestions;
+                                             Application* app, QObject* parent)
+    : BlockingSearchProvider(app, parent), backend_(backend) {
+  Hints hints =
+      WantsSerialisedArtQueries | ArtIsInSongMetadata | CanGiveSuggestions;
 
   if (!enabled_by_default) {
     hints |= DisabledByDefault;
@@ -46,7 +42,8 @@ LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
   Init(name, id, icon, hints);
 }
 
-SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& query) {
+SearchProvider::ResultList LibrarySearchProvider::Search(int id,
+                                                         const QString& query) {
   QueryOptions options;
   options.set_filter(query);
 
@@ -94,7 +91,7 @@ QStringList LibrarySearchProvider::GetSuggestions(int count) {
 
   const int largest_rowid = q.Value(0).toInt();
 
-  for (int attempt=0 ; attempt<count*5 ; ++attempt) {
+  for (int attempt = 0; attempt < count * 5; ++attempt) {
     if (ret.count() >= count) {
       break;
     }
@@ -110,7 +107,7 @@ QStringList LibrarySearchProvider::GetSuggestions(int count) {
     }
 
     const QString artist = q.Value(0).toString();
-    const QString album  = q.Value(1).toString();
+    const QString album = q.Value(1).toString();
 
     if (!artist.isEmpty() && !album.isEmpty())
       ret << ((qrand() % 2 == 0) ? artist : album);

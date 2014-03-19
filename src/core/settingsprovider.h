@@ -55,4 +55,4 @@ class DefaultSettingsProvider : public SettingsProvider {
   QSettings backend_;
 };
 
-#endif // SETTINGSPROVIDER_H
+#endif  // SETTINGSPROVIDER_H

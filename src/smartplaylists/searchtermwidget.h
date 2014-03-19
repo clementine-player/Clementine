@@ -32,11 +32,10 @@ namespace smart_playlists {
 
 class SearchTermWidget : public QWidget {
   Q_OBJECT
-  Q_PROPERTY(float overlay_opacity
-             READ  overlay_opacity
-             WRITE set_overlay_opacity);
+  Q_PROPERTY(float overlay_opacity READ overlay_opacity WRITE
+                 set_overlay_opacity);
 
-public:
+ public:
   SearchTermWidget(LibraryBackend* library, QWidget* parent);
   ~SearchTermWidget();
 
@@ -54,19 +53,19 @@ signals:
 
   void Changed();
 
-protected:
+ protected:
   void showEvent(QShowEvent*);
   void enterEvent(QEvent*);
   void leaveEvent(QEvent*);
   void resizeEvent(QResizeEvent*);
 
-private slots:
+ private slots:
   void FieldChanged(int index);
   void OpChanged(int index);
   void RelativeValueChanged();
   void Grab();
 
-private:
+ private:
   class Overlay;
   friend class Overlay;
 
@@ -81,6 +80,6 @@ private:
   SearchTerm::Type current_field_type_;
 };
 
-} // namespace
+}  // namespace
 
-#endif // SMARTPLAYLISTSEARCHTERMWIDGET_H
+#endif  // SMARTPLAYLISTSEARCHTERMWIDGET_H

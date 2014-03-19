@@ -23,41 +23,42 @@
 #include "core/songloader.h"
 #include "core/taskmanager.h"
 
-SongLoaderInserter::SongLoaderInserter(
-    TaskManager* task_manager, LibraryBackendInterface* library)
+SongLoaderInserter::SongLoaderInserter(TaskManager* task_manager,
+                                       LibraryBackendInterface* library,
+                                       const Player* player)
     : task_manager_(task_manager),
-      destination_(NULL),
+      destination_(nullptr),
       row_(-1),
       play_now_(true),
       enqueue_(false),
       async_load_id_(0),
       async_progress_(0),
-      library_(library) {
-}
+      library_(library),
+      player_(player) {}
 
 SongLoaderInserter::~SongLoaderInserter() {
   qDeleteAll(pending_);
   qDeleteAll(pending_async_);
 }
 
-void SongLoaderInserter::Load(Playlist *destination,
-                              int row, bool play_now, bool enqueue,
-                              const QList<QUrl> &urls) {
+void SongLoaderInserter::Load(Playlist* destination, int row, bool play_now,
+                              bool enqueue, const QList<QUrl>& urls) {
   destination_ = destination;
   row_ = row;
   play_now_ = play_now;
   enqueue_ = enqueue;
 
   connect(destination, SIGNAL(destroyed()), SLOT(DestinationDestroyed()));
-  connect(this, SIGNAL(EffectiveLoadFinished(const SongList&)),
-          destination, SLOT(UpdateItems(const SongList&)));
+  connect(this, SIGNAL(EffectiveLoadFinished(const SongList&)), destination,
+          SLOT(UpdateItems(const SongList&)));
 
-  foreach (const QUrl& url, urls) {
-    SongLoader* loader = new SongLoader(library_, this);
+  for (const QUrl& url : urls) {
+    SongLoader* loader = new SongLoader(library_, player_, this);
 
     // we're connecting this before we're even sure if this is an async load
     // to avoid race conditions (signal emission before we're listening to it)
-    connect(loader, SIGNAL(LoadFinished(bool)), SLOT(PendingLoadFinished(bool)));
+    connect(loader, SIGNAL(LoadFinished(bool)),
+            SLOT(PendingLoadFinished(bool)));
     SongLoader::Result ret = loader->Load(url);
 
     if (ret == SongLoader::WillLoadAsync) {
@@ -77,7 +78,8 @@ void SongLoaderInserter::Load(Playlist *destination,
   else {
     async_progress_ = 0;
     async_load_id_ = task_manager_->StartTask(tr("Loading tracks"));
-    task_manager_->SetTaskProgress(async_load_id_, async_progress_, pending_.count());
+    task_manager_->SetTaskProgress(async_load_id_, async_progress_,
+                                   pending_.count());
   }
 }
 
@@ -85,14 +87,14 @@ void SongLoaderInserter::Load(Playlist *destination,
 // First, we add tracks (without metadata) into the playlist
 // In the meantine, MusicBrainz will be queried to get songs' metadata.
 // AudioCDTagsLoaded will be called next, and playlist's items will be updated.
-void SongLoaderInserter::LoadAudioCD(Playlist *destination,
-                                     int row, bool play_now, bool enqueue) {
+void SongLoaderInserter::LoadAudioCD(Playlist* destination, int row,
+                                     bool play_now, bool enqueue) {
   destination_ = destination;
   row_ = row;
   play_now_ = play_now;
   enqueue_ = enqueue;
 
-  SongLoader *loader = new SongLoader(library_, this);
+  SongLoader* loader = new SongLoader(library_, player_, this);
   connect(loader, SIGNAL(LoadFinished(bool)), SLOT(AudioCDTagsLoaded(bool)));
   qLog(Info) << "Loading audio CD...";
   SongLoader::Result ret = loader->LoadAudioCD();
@@ -104,14 +106,11 @@ void SongLoaderInserter::LoadAudioCD(Playlist *destination,
   PartiallyFinished();
 }
 
-void SongLoaderInserter::DestinationDestroyed() {
-  destination_ = NULL;
-}
+void SongLoaderInserter::DestinationDestroyed() { destination_ = nullptr; }
 
 void SongLoaderInserter::AudioCDTagsLoaded(bool success) {
   SongLoader* loader = qobject_cast<SongLoader*>(sender());
-  if (!loader || !destination_)
-    return;
+  if (!loader || !destination_) return;
 
   if (success)
     destination_->UpdateItems(loader->songs());
@@ -122,8 +121,7 @@ void SongLoaderInserter::AudioCDTagsLoaded(bool success) {
 
 void SongLoaderInserter::PendingLoadFinished(bool success) {
   SongLoader* loader = qobject_cast<SongLoader*>(sender());
-  if (!loader || !pending_.contains(loader))
-    return;
+  if (!loader || !pending_.contains(loader)) return;
   pending_.remove(loader);
   pending_async_.insert(loader);
 
@@ -137,7 +135,8 @@ void SongLoaderInserter::PendingLoadFinished(bool success) {
     task_manager_->SetTaskFinished(async_load_id_);
     async_progress_ = 0;
     async_load_id_ = task_manager_->StartTask(tr("Loading tracks info"));
-    task_manager_->SetTaskProgress(async_load_id_, async_progress_, pending_async_.count());
+    task_manager_->SetTaskProgress(async_load_id_, async_progress_,
+                                   pending_async_.count());
     PartiallyFinished();
     QtConcurrent::run(this, &SongLoaderInserter::EffectiveLoad);
   }
@@ -152,11 +151,13 @@ void SongLoaderInserter::PartiallyFinished() {
 }
 
 void SongLoaderInserter::EffectiveLoad() {
-  foreach (SongLoader* loader, pending_async_) {
+  SongList songs;
+  for (SongLoader* loader : pending_async_) {
     loader->EffectiveSongsLoad();
     task_manager_->SetTaskProgress(async_load_id_, ++async_progress_);
-    emit EffectiveLoadFinished(loader->songs());
+    songs << loader->songs();
   }
+  emit EffectiveLoadFinished(songs);
   task_manager_->SetTaskFinished(async_load_id_);
 
   deleteLater();

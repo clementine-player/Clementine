@@ -27,31 +27,29 @@
 #include <QFile>
 #include <QSettings>
 
-
 SongInfoSettingsPage::SongInfoSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_SongInfoSettingsPage)
-{
+    : SettingsPage(dialog), ui_(new Ui_SongInfoSettingsPage) {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("view-media-lyrics"));
 
   connect(ui_->up, SIGNAL(clicked()), SLOT(MoveUp()));
   connect(ui_->down, SIGNAL(clicked()), SLOT(MoveDown()));
-  connect(ui_->providers, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
+  connect(ui_->providers,
+          SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
           SLOT(CurrentItemChanged(QListWidgetItem*)));
   connect(ui_->providers, SIGNAL(itemChanged(QListWidgetItem*)),
           SLOT(ItemChanged(QListWidgetItem*)));
 
   QFile song_info_preview(":/lumberjacksong.txt");
   song_info_preview.open(QIODevice::ReadOnly);
-  ui_->song_info_font_preview->setText(QString::fromUtf8(song_info_preview.readAll()));
+  ui_->song_info_font_preview->setText(
+      QString::fromUtf8(song_info_preview.readAll()));
 
-  connect(ui_->song_info_font_size, SIGNAL(valueChanged(double)), SLOT(FontSizeChanged(double)));
+  connect(ui_->song_info_font_size, SIGNAL(valueChanged(double)),
+          SLOT(FontSizeChanged(double)));
 }
 
-SongInfoSettingsPage::~SongInfoSettingsPage() {
-  delete ui_;
-}
+SongInfoSettingsPage::~SongInfoSettingsPage() { delete ui_; }
 
 void SongInfoSettingsPage::Load() {
   QSettings s;
@@ -61,15 +59,18 @@ void SongInfoSettingsPage::Load() {
       s.value("font_size", SongInfoTextView::kDefaultFontSize).toReal());
   s.endGroup();
 
-  QList<const UltimateLyricsProvider*> providers = dialog()->song_info_view()->lyric_providers();
+  QList<const UltimateLyricsProvider*> providers =
+      dialog()->song_info_view()->lyric_providers();
 
   ui_->providers->clear();
-  foreach (const UltimateLyricsProvider* provider, providers) {
+  for (const UltimateLyricsProvider* provider : providers) {
     QListWidgetItem* item = new QListWidgetItem(ui_->providers);
     item->setText(provider->name());
     item->setCheckState(provider->is_enabled() ? Qt::Checked : Qt::Unchecked);
-    item->setForeground(provider->is_enabled() ? palette().color(QPalette::Active, QPalette::Text)
-                                               : palette().color(QPalette::Disabled, QPalette::Text));
+    item->setForeground(
+        provider->is_enabled()
+            ? palette().color(QPalette::Active, QPalette::Text)
+            : palette().color(QPalette::Disabled, QPalette::Text));
   }
 }
 
@@ -82,10 +83,9 @@ void SongInfoSettingsPage::Save() {
 
   s.beginGroup(SongInfoView::kSettingsGroup);
   QVariantList search_order;
-  for (int i=0 ; i<ui_->providers->count() ; ++i) {
+  for (int i = 0; i < ui_->providers->count(); ++i) {
     const QListWidgetItem* item = ui_->providers->item(i);
-    if (item->checkState() == Qt::Checked)
-      search_order << item->text();
+    if (item->checkState() == Qt::Checked) search_order << item->text();
   }
   s.setValue("search_order", search_order);
   s.endGroup();
@@ -102,13 +102,9 @@ void SongInfoSettingsPage::CurrentItemChanged(QListWidgetItem* item) {
   }
 }
 
-void SongInfoSettingsPage::MoveUp() {
-  Move(-1);
-}
+void SongInfoSettingsPage::MoveUp() { Move(-1); }
 
-void SongInfoSettingsPage::MoveDown() {
-  Move(+1);
-}
+void SongInfoSettingsPage::MoveDown() { Move(+1); }
 
 void SongInfoSettingsPage::Move(int d) {
   const int row = ui_->providers->currentRow();
@@ -119,8 +115,9 @@ void SongInfoSettingsPage::Move(int d) {
 
 void SongInfoSettingsPage::ItemChanged(QListWidgetItem* item) {
   const bool checked = item->checkState() == Qt::Checked;
-  item->setForeground(checked ? palette().color(QPalette::Active, QPalette::Text)
-                              : palette().color(QPalette::Disabled, QPalette::Text));
+  item->setForeground(
+      checked ? palette().color(QPalette::Active, QPalette::Text)
+              : palette().color(QPalette::Disabled, QPalette::Text));
 }
 
 void SongInfoSettingsPage::FontSizeChanged(double value) {

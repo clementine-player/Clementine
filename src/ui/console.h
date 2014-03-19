@@ -10,7 +10,7 @@ class Application;
 class Console : public QDialog {
   Q_OBJECT
  public:
-  Console(Application* app, QWidget* parent = 0);
+  Console(Application* app, QWidget* parent = nullptr);
 
  private slots:
   void RunQuery();

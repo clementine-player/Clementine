@@ -13,7 +13,7 @@ class QAction;
 class BackgroundStreams : public QObject {
   Q_OBJECT
  public:
-  explicit BackgroundStreams(EngineBase* engine, QObject* parent = 0);
+  explicit BackgroundStreams(EngineBase* engine, QObject* parent = nullptr);
   ~BackgroundStreams();
 
   void LoadStreams();
@@ -29,7 +29,7 @@ class BackgroundStreams : public QObject {
 
   void AddAction(const QString& name, QAction* action);
 
- signals:
+signals:
   void StreamStarted(const QString& name);
   void StreamStopped(const QString& name);
 
@@ -39,7 +39,7 @@ class BackgroundStreams : public QObject {
 
  private:
   struct Stream {
-    Stream() : volume(0), id(0), action(NULL) {}
+    Stream() : volume(0), id(0), action(nullptr) {}
 
     QString name;
     QUrl url;

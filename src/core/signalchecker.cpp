@@ -19,16 +19,13 @@
 
 #include "core/logging.h"
 
-bool CheckedGConnect(
-    gpointer source,
-    const char* signal,
-    GCallback callback,
-    gpointer data,
-    const int callback_param_count) {
+bool CheckedGConnect(gpointer source, const char* signal, GCallback callback,
+                     gpointer data, const int callback_param_count) {
   guint signal_id = 0;
   GQuark detail = 0;
 
-  if (!g_signal_parse_name(signal, G_OBJECT_TYPE(source), &signal_id, &detail, false)) {
+  if (!g_signal_parse_name(signal, G_OBJECT_TYPE(source), &signal_id, &detail,
+                           false)) {
     qFatal("Connecting to invalid signal: %s", signal);
     return false;
   }

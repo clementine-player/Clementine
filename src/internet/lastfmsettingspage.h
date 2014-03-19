@@ -26,20 +26,20 @@ class Ui_LastFMSettingsPage;
 class LastFMSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   LastFMSettingsPage(SettingsDialog* dialog);
   ~LastFMSettingsPage();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void Login();
   void AuthenticationComplete(bool success, const QString& error_message);
   void Logout();
   void UpdatedSubscriberStatus(bool is_subscriber);
 
-private:
+ private:
   LastFMService* service_;
   Ui_LastFMSettingsPage* ui_;
   QMovie* loading_icon_;
@@ -49,4 +49,4 @@ private:
   void RefreshControls(bool authenticated);
 };
 
-#endif // LASTFMSETTINGSPAGE_H
+#endif  // LASTFMSETTINGSPAGE_H

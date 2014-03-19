@@ -28,7 +28,7 @@
 class CueParserTest : public ::testing::Test {
  protected:
   CueParserTest()
-      : parser_(NULL) {
+      : parser_(nullptr) {
   }
 
   // We believe CUE - all songs with proper CUE entries should be valid.

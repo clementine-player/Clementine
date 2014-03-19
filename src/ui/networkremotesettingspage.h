@@ -25,20 +25,20 @@ class Ui_NetworkRemoteSettingsPage;
 class NetworkRemoteSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   NetworkRemoteSettingsPage(SettingsDialog* dialog);
   ~NetworkRemoteSettingsPage();
 
   void Load();
   void Save();
 
-protected:
+ protected:
   bool eventFilter(QObject* object, QEvent* event);
 
-private:
+ private:
   static const char* kPlayStoreUrl;
 
   Ui_NetworkRemoteSettingsPage* ui_;
 };
 
-#endif // NETWORKREMOTESETTINGSPAGE_H
+#endif  // NETWORKREMOTESETTINGSPAGE_H

@@ -1,22 +1,22 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTDOWNLOADER_H
-#define PODCASTDOWNLOADER_H
+#ifndef PODCASTS_PODCASTDOWNLOADER_H_
+#define PODCASTS_PODCASTDOWNLOADER_H_
 
 #include "podcast.h"
 #include "podcastepisode.h"
@@ -27,6 +27,12 @@
 #include <QRegExp>
 #include <QSet>
 
+#ifdef Q_OS_WIN
+#include <time.h>
+#else
+#include <sys/time.h>
+#endif
+
 class Application;
 class PodcastBackend;
 
@@ -35,37 +41,32 @@ class QNetworkAccessManager;
 class PodcastDownloader : public QObject {
   Q_OBJECT
 
-public:
-  PodcastDownloader(Application* app, QObject* parent = 0);
+ public:
+  PodcastDownloader(Application* app, QObject* parent = nullptr);
 
-  enum State {
-    NotDownloading,
-    Queued,
-    Downloading,
-    Finished
-  };
+  enum State { NotDownloading, Queued, Downloading, Finished };
 
   static const char* kSettingsGroup;
   static const int kAutoDeleteCheckIntervalMsec;
 
   QString DefaultDownloadDir() const;
 
-public slots:
+ public slots:
   // Adds the episode to the download queue
   void DownloadEpisode(const PodcastEpisode& episode);
 
   // Deletes downloaded data for this episode
   void DeleteEpisode(const PodcastEpisode& episode);
 
-signals:
+ signals:
   void ProgressChanged(const PodcastEpisode& episode,
                        PodcastDownloader::State state, int percent);
 
-private slots:
+ private slots:
   void ReloadSettings();
 
   void SubscriptionAdded(const Podcast& podcast);
-  void EpisodesAdded(const QList<PodcastEpisode>& episodes);
+  void EpisodesAdded(const PodcastEpisodeList& episodes);
 
   void ReplyReadyRead();
   void ReplyFinished();
@@ -73,7 +74,7 @@ private slots:
 
   void AutoDelete();
 
-private:
+ private:
   struct Task;
 
   void StartDownloading(Task* task);
@@ -84,7 +85,7 @@ private:
                              const PodcastEpisode& episode) const;
   QString SanitiseFilenameComponent(const QString& text) const;
 
-private:
+ private:
   Application* app_;
   PodcastBackend* backend_;
   QNetworkAccessManager* network_;
@@ -104,4 +105,4 @@ private:
   QTimer* auto_delete_timer_;
 };
 
-#endif // PODCASTDOWNLOADER_H
+#endif  // PODCASTS_PODCASTDOWNLOADER_H_

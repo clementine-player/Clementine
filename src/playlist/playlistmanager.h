@@ -42,9 +42,9 @@ class QUrl;
 class PlaylistManagerInterface : public QObject {
   Q_OBJECT
 
-public:
+ public:
   PlaylistManagerInterface(Application* app, QObject* parent)
-    : QObject(parent) {}
+      : QObject(parent) {}
 
   virtual int current_id() const = 0;
   virtual int active_id() const = 0;
@@ -72,7 +72,7 @@ public:
   virtual PlaylistParser* parser() const = 0;
   virtual PlaylistContainer* playlist_container() const = 0;
 
-public slots:
+ public slots:
   virtual void New(const QString& name, const SongList& songs = SongList(),
                    const QString& special_type = QString()) = 0;
   virtual void Load(const QString& filename) = 0;
@@ -104,7 +104,8 @@ public slots:
   // Rate current song using 0 - 5 scale.
   virtual void RateCurrentSong(int rating) = 0;
 
-  virtual void PlaySmartPlaylist(smart_playlists::GeneratorPtr generator, bool as_new, bool clear) = 0;
+  virtual void PlaySmartPlaylist(smart_playlists::GeneratorPtr generator,
+                                 bool as_new, bool clear) = 0;
 
 signals:
   void PlaylistManagerInitialized();
@@ -133,8 +134,8 @@ signals:
 class PlaylistManager : public PlaylistManagerInterface {
   Q_OBJECT
 
-public:
-  PlaylistManager(Application* app, QObject *parent = 0);
+ public:
+  PlaylistManager(Application* app, QObject* parent = nullptr);
   ~PlaylistManager();
 
   int current_id() const { return current_; }
@@ -162,7 +163,9 @@ public:
   QItemSelection active_selection() const { return selection(active_id()); }
 
   QString GetPlaylistName(int index) const { return playlists_[index].name; }
-  bool IsPlaylistFavorite(int index) const { return playlists_[index].p->is_favorite(); }
+  bool IsPlaylistFavorite(int index) const {
+    return playlists_[index].p->is_favorite();
+  }
 
   void Init(LibraryBackend* library_backend, PlaylistBackend* playlist_backend,
             PlaylistSequence* sequence, PlaylistContainer* playlist_container);
@@ -173,7 +176,7 @@ public:
   PlaylistParser* parser() const { return parser_; }
   PlaylistContainer* playlist_container() const { return playlist_container_; }
 
-public slots:
+ public slots:
   void New(const QString& name, const SongList& songs = SongList(),
            const QString& special_type = QString());
   void Load(const QString& filename);
@@ -207,15 +210,18 @@ public slots:
   // Rate current song using 0 - 5 scale.
   void RateCurrentSong(int rating);
 
-  void PlaySmartPlaylist(smart_playlists::GeneratorPtr generator, bool as_new, bool clear);
+  void PlaySmartPlaylist(smart_playlists::GeneratorPtr generator, bool as_new,
+                         bool clear);
 
   void SongChangeRequestProcessed(const QUrl& url, bool valid);
 
-  void InsertUrls(int id, const QList<QUrl>& urls, int pos = -1, bool play_now = false, bool enqueue = false);
-  // Removes items with given indices from the playlist. This operation is not undoable.
+  void InsertUrls(int id, const QList<QUrl>& urls, int pos = -1,
+                  bool play_now = false, bool enqueue = false);
+  // Removes items with given indices from the playlist. This operation is not
+  // undoable.
   void RemoveItemsWithoutUndo(int id, const QList<int>& indices);
 
-private slots:
+ private slots:
   void SetActivePlaying();
   void SetActivePaused();
   void SetActiveStopped();
@@ -224,15 +230,18 @@ private slots:
   void UpdateSummaryText();
   void SongsDiscovered(const SongList& songs);
   void LoadFinished(bool success);
-  void ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher, const QString& filename);
+  void ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
+                                  const QString& filename);
 
-private:
-  Playlist* AddPlaylist(int id, const QString& name, const QString& special_type,
-                        const QString& ui_path, bool favorite);
+ private:
+  Playlist* AddPlaylist(int id, const QString& name,
+                        const QString& special_type, const QString& ui_path,
+                        bool favorite);
 
-private:
+ private:
   struct Data {
-    Data(Playlist* _p = NULL, const QString& _name = QString()) : p(_p), name(_name) {}
+    Data(Playlist* _p = nullptr, const QString& _name = QString())
+        : p(_p), name(_name) {}
     Playlist* p;
     QString name;
     QItemSelection selection;
@@ -254,4 +263,4 @@ private:
   int active_;
 };
 
-#endif // PLAYLISTMANAGER_H
+#endif  // PLAYLISTMANAGER_H

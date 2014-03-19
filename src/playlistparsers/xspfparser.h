@@ -29,16 +29,17 @@ class XSPFParser : public XMLParser {
   Q_OBJECT
 
  public:
-  XSPFParser(LibraryBackendInterface* library, QObject* parent = 0);
+  XSPFParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "XSPF"; }
   QStringList file_extensions() const { return QStringList() << "xspf"; }
 
-  bool TryMagic(const QByteArray &data) const;
+  bool TryMagic(const QByteArray& data) const;
 
-  SongList Load(QIODevice *device, const QString& playlist_path = "",
+  SongList Load(QIODevice* device, const QString& playlist_path = "",
                 const QDir& dir = QDir()) const;
-  void Save(const SongList &songs, QIODevice *device, const QDir &dir = QDir()) const;
+  void Save(const SongList& songs, QIODevice* device,
+            const QDir& dir = QDir()) const;
 
  private:
   Song ParseTrack(QXmlStreamReader* reader, const QDir& dir) const;

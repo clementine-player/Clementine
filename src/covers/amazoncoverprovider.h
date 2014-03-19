@@ -24,12 +24,11 @@
 
 class QNetworkAccessManager;
 
-
 class AmazonCoverProvider : public CoverProvider {
   Q_OBJECT
 
-public:
-  AmazonCoverProvider(QObject* parent = NULL);
+ public:
+  AmazonCoverProvider(QObject* parent = nullptr);
 
   static const char* kAccessKeyB64;
   static const char* kSecretAccessKeyB64;
@@ -38,15 +37,15 @@ public:
 
   bool StartSearch(const QString& artist, const QString& album, int id);
 
-private slots:
+ private slots:
   void QueryFinished(QNetworkReply* reply, int id);
 
-private:
+ private:
   void ReadItem(QXmlStreamReader* reader, CoverSearchResults* results);
   void ReadLargeImage(QXmlStreamReader* reader, CoverSearchResults* results);
 
-private:
+ private:
   QNetworkAccessManager* network_;
 };
 
-#endif // AMAZONCOVERPROVIDER_H
+#endif  // AMAZONCOVERPROVIDER_H

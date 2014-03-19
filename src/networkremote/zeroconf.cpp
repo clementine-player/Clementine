@@ -16,23 +16,21 @@
 
 #include <QTextCodec>
 
-Zeroconf* Zeroconf::sInstance = NULL;
+Zeroconf* Zeroconf::sInstance = nullptr;
 
-Zeroconf::~Zeroconf() {
-
-}
+Zeroconf::~Zeroconf() {}
 
 Zeroconf* Zeroconf::GetZeroconf() {
   if (!sInstance) {
-    #ifdef HAVE_DBUS
-      sInstance = new Avahi;
-    #endif  // HAVE_DBUS
-    #ifdef Q_OS_DARWIN
-      sInstance = new Bonjour;
-    #endif
-    #ifdef Q_OS_WIN32
-      sInstance = new TinySVCMDNS;
-    #endif
+#ifdef HAVE_DBUS
+    sInstance = new Avahi;
+#endif  // HAVE_DBUS
+#ifdef Q_OS_DARWIN
+    sInstance = new Bonjour;
+#endif
+#ifdef Q_OS_WIN32
+    sInstance = new TinySVCMDNS;
+#endif
   }
 
   return sInstance;
@@ -41,8 +39,8 @@ Zeroconf* Zeroconf::GetZeroconf() {
 QByteArray Zeroconf::TruncateName(const QString& name) {
   QTextCodec* codec = QTextCodec::codecForName("UTF-8");
   QByteArray truncated_utf8;
-  foreach (QChar c, name) {
-    QByteArray rendered = codec->fromUnicode(&c, 1, NULL);
+  for (QChar c : name) {
+    QByteArray rendered = codec->fromUnicode(&c, 1, nullptr);
     if (truncated_utf8.size() + rendered.size() >= 63) {
       break;
     }
@@ -53,15 +51,8 @@ QByteArray Zeroconf::TruncateName(const QString& name) {
   return truncated_utf8;
 }
 
-void Zeroconf::Publish(
-    const QString& domain,
-    const QString& type,
-    const QString& name,
-    quint16 port) {
+void Zeroconf::Publish(const QString& domain, const QString& type,
+                       const QString& name, quint16 port) {
   QByteArray truncated_name = TruncateName(name);
-  PublishInternal(
-      domain,
-      type,
-      truncated_name,
-      port);
+  PublishInternal(domain, type, truncated_name, port);
 }

@@ -21,18 +21,16 @@
 #include <QMovie>
 
 BusyIndicator::BusyIndicator(const QString& text, QWidget* parent)
-  : QWidget(parent) {
+    : QWidget(parent) {
   Init(text);
 }
 
-BusyIndicator::BusyIndicator(QWidget* parent)
-  : QWidget(parent) {
+BusyIndicator::BusyIndicator(QWidget* parent) : QWidget(parent) {
   Init(QString::null);
 }
 
 void BusyIndicator::Init(const QString& text) {
-  movie_ = new QMovie(":spinner.gif"),
-  label_ = new QLabel;
+  movie_ = new QMovie(":spinner.gif"), label_ = new QLabel;
 
   QLabel* icon = new QLabel;
   icon->setMovie(movie_);
@@ -50,24 +48,15 @@ void BusyIndicator::Init(const QString& text) {
   set_text(text);
 }
 
-BusyIndicator::~BusyIndicator() {
-  delete movie_;
-}
+BusyIndicator::~BusyIndicator() { delete movie_; }
 
-void BusyIndicator::showEvent(QShowEvent*) {
-  movie_->start();
-}
+void BusyIndicator::showEvent(QShowEvent*) { movie_->start(); }
 
-void BusyIndicator::hideEvent(QHideEvent*) {
-  movie_->stop();
-}
+void BusyIndicator::hideEvent(QHideEvent*) { movie_->stop(); }
 
 void BusyIndicator::set_text(const QString& text) {
   label_->setText(text);
   label_->setVisible(!text.isEmpty());
 }
 
-QString BusyIndicator::text() const {
-  return label_->text();
-}
-
+QString BusyIndicator::text() const { return label_->text(); }

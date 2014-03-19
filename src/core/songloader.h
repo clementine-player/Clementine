@@ -18,6 +18,10 @@
 #ifndef SONGLOADER_H
 #define SONGLOADER_H
 
+#include <memory>
+
+#include <gst/gst.h>
+
 #include <QObject>
 #include <QThreadPool>
 #include <QUrl>
@@ -26,27 +30,21 @@
 #include "core/tagreaderclient.h"
 #include "musicbrainz/musicbrainzclient.h"
 
-#include <boost/shared_ptr.hpp>
-
-#include <gst/gst.h>
-
 class CueParser;
 class LibraryBackendInterface;
 class ParserBase;
+class Player;
 class PlaylistParser;
 class PodcastParser;
 
 class SongLoader : public QObject {
   Q_OBJECT
-public:
-  SongLoader(LibraryBackendInterface* library, QObject* parent = 0);
+ public:
+  SongLoader(LibraryBackendInterface* library, const Player* player,
+             QObject* parent = nullptr);
   ~SongLoader();
 
-  enum Result {
-    Success,
-    Error,
-    WillLoadAsync,
-  };
+  enum Result { Success, Error, WillLoadAsync, };
 
   static const int kDefaultTimeout;
 
@@ -72,20 +70,15 @@ public:
 signals:
   void LoadFinished(bool success);
 
-private slots:
+ private slots:
   void Timeout();
   void StopTypefind();
   void AudioCDTagsLoaded(const QString& artist, const QString& album,
                          const MusicBrainzClient::ResultList& results);
   void LocalFileLoaded(TagReaderReply* reply);
 
-private:
-  enum State {
-    WaitingForType,
-    WaitingForMagic,
-    WaitingForData,
-    Finished,
-  };
+ private:
+  enum State { WaitingForType, WaitingForMagic, WaitingForData, Finished, };
 
   Result LoadLocal(const QString& filename);
   Result LoadLocalPartial(const QString& filename);
@@ -99,7 +92,8 @@ private:
   Result LoadRemote();
 
   // GStreamer callbacks
-  static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps, void* self);
+  static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps,
+                        void* self);
   static gboolean DataReady(GstPad*, GstBuffer* buf, void* self);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage*, gpointer);
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
@@ -110,7 +104,7 @@ private:
   void MagicReady();
   bool IsPipelinePlaying();
 
-private:
+ private:
   static QSet<QString> sRawUriSchemes;
 
   QUrl url_;
@@ -130,10 +124,11 @@ private:
   bool is_podcast_;
   QByteArray buffer_;
   LibraryBackendInterface* library_;
+  const Player* player_;
 
-  boost::shared_ptr<GstElement> pipeline_;
+  std::shared_ptr<GstElement> pipeline_;
 
   QThreadPool thread_pool_;
 };
 
-#endif // SONGLOADER_H
+#endif  // SONGLOADER_H

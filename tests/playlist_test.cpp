@@ -15,6 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
@@ -26,7 +28,7 @@
 #include <QtDebug>
 #include <QUndoStack>
 
-using boost::shared_ptr;
+using std::shared_ptr;
 using ::testing::Return;
 
 namespace {
@@ -34,8 +36,8 @@ namespace {
 class PlaylistTest : public ::testing::Test {
  protected:
   PlaylistTest()
-    : playlist_(NULL, NULL, NULL, 1),
-      sequence_(NULL, new DummySettingsProvider)
+    : playlist_(nullptr, nullptr, nullptr, 1),
+      sequence_(nullptr, new DummySettingsProvider)
   {
   }
 

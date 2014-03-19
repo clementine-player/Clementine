@@ -1,6 +1,8 @@
 #ifndef OUTGOINGDATACREATOR_H
 #define OUTGOINGDATACREATOR_H
 
+#include <memory>
+
 #include <QTcpSocket>
 #include <QImage>
 #include <QList>
@@ -24,7 +26,6 @@
 #include "songinfo/ultimatelyricsreader.h"
 #include "remotecontrolmessages.pb.h"
 #include "remoteclient.h"
-#include <boost/scoped_ptr.hpp>
 
 typedef QList<SongInfoProvider*> ProviderList;
 
@@ -32,15 +33,13 @@ struct DownloadItem {
   Song song_;
   int song_no_;
   int song_count_;
-  DownloadItem(Song s, int no, int count) :
-    song_(s),
-    song_no_(no),
-    song_count_(count) { }
+  DownloadItem(Song s, int no, int count)
+      : song_(s), song_no_(no), song_count_(count) {}
 };
 
 class OutgoingDataCreator : public QObject {
-    Q_OBJECT
-public:
+  Q_OBJECT
+ public:
   OutgoingDataCreator(Application* app);
   ~OutgoingDataCreator();
 
@@ -48,7 +47,7 @@ public:
 
   void SetClients(QList<RemoteClient*>* clients);
 
-public slots:
+ public slots:
   void SendClementineInfo();
   void SendAllPlaylists();
   void SendAllActivePlaylists();
@@ -61,7 +60,8 @@ public slots:
   void PlaylistClosed(int id);
   void PlaylistRenamed(int id, const QString& new_name);
   void ActiveChanged(Playlist*);
-  void CurrentSongChanged(const Song& song, const QString& uri, const QImage& img);
+  void CurrentSongChanged(const Song& song, const QString& uri,
+                          const QImage& img);
   void SendSongMetadata();
   void StateChanged(Engine::State);
   void SendKeepAlive();
@@ -71,13 +71,14 @@ public slots:
   void DisconnectAllClients();
   void GetLyrics();
   void SendLyrics(int id, const SongInfoFetcher::Result& result);
-  void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
+  void SendSongs(const pb::remote::RequestDownloadSongs& request,
+                 RemoteClient* client);
   void ResponseSongOffer(RemoteClient* client, bool accepted);
   void SendLibrary(RemoteClient* client);
   void EnableKittens(bool aww);
   void SendKitten(const QImage& kitten);
 
-private:
+ private:
   Application* app_;
   QList<RemoteClient*>* clients_;
   Song current_song_;
@@ -91,24 +92,22 @@ private:
   int last_track_position_;
   bool aww_;
 
-  boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
+  std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
   ProviderList provider_list_;
   QMap<int, SongInfoFetcher::Result> results_;
   SongInfoFetcher* fetcher_;
 
   void SendDataToClients(pb::remote::Message* msg);
   void SetEngineState(pb::remote::ResponseClementineInfo* msg);
-  void CreateSong(
-      const Song& song,
-      const QImage& art,
-      const int index,
-      pb::remote::SongMetadata* song_metadata);
+  void CreateSong(const Song& song, const QImage& art, const int index,
+                  pb::remote::SongMetadata* song_metadata);
   void CheckEnabledProviders();
   SongInfoProvider* ProviderByName(const QString& name) const;
-  void SendSingleSong(RemoteClient* client, const Song& song, int song_no, int song_count);
+  void SendSingleSong(RemoteClient* client, const Song& song, int song_no,
+                      int song_count);
   void SendAlbum(RemoteClient* client, const Song& song);
   void SendPlaylist(RemoteClient* client, int playlist_id);
   void OfferNextSong(RemoteClient* client);
 };
 
-#endif // OUTGOINGDATACREATOR_H
+#endif  // OUTGOINGDATACREATOR_H

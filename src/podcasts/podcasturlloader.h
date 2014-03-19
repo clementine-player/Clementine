@@ -1,22 +1,22 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTURLLOADER_H
-#define PODCASTURLLOADER_H
+#ifndef PODCASTS_PODCASTURLLOADER_H_
+#define PODCASTS_PODCASTURLLOADER_H_
 
 #include <QObject>
 #include <QRegExp>
@@ -32,13 +32,10 @@ class QNetworkReply;
 class PodcastUrlLoaderReply : public QObject {
   Q_OBJECT
 
-public:
+ public:
   PodcastUrlLoaderReply(const QUrl& url, QObject* parent);
 
-  enum ResultType {
-    Type_Podcast,
-    Type_Opml
-  };
+  enum ResultType { Type_Podcast, Type_Opml };
 
   const QUrl& url() const { return url_; }
   bool is_finished() const { return finished_; }
@@ -53,10 +50,10 @@ public:
   void SetFinished(const PodcastList& results);
   void SetFinished(const OpmlContainer& results);
 
-signals:
+ signals:
   void Finished(bool success);
 
-private:
+ private:
   QUrl url_;
   bool finished_;
   QString error_text_;
@@ -66,12 +63,11 @@ private:
   OpmlContainer opml_results_;
 };
 
-
 class PodcastUrlLoader : public QObject {
   Q_OBJECT
 
-public:
-  PodcastUrlLoader(QObject* parent = 0);
+ public:
+  explicit PodcastUrlLoader(QObject* parent = nullptr);
   ~PodcastUrlLoader();
 
   static const int kMaxRedirects;
@@ -86,7 +82,7 @@ public:
   static QUrl FixPodcastUrl(const QString& url_text);
   static QUrl FixPodcastUrl(const QUrl& url);
 
-private:
+ private:
   struct RequestState {
     int redirects_remaining_;
     PodcastUrlLoaderReply* reply_;
@@ -95,14 +91,14 @@ private:
   typedef QPair<QString, QString> QuickPrefix;
   typedef QList<QuickPrefix> QuickPrefixList;
 
-private slots:
+ private slots:
   void RequestFinished(RequestState* state, QNetworkReply* reply);
 
-private:
+ private:
   void SendErrorAndDelete(const QString& error_text, RequestState* state);
   void NextRequest(const QUrl& url, RequestState* state);
 
-private:
+ private:
   QNetworkAccessManager* network_;
   PodcastParser* parser_;
 
@@ -113,4 +109,4 @@ private:
   QRegExp html_link_href_re_;
 };
 
-#endif // PODCASTURLLOADER_H
+#endif  // PODCASTS_PODCASTURLLOADER_H_

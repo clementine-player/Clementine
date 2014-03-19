@@ -44,20 +44,19 @@
 using std::sort;
 using std::unique;
 
-
 const char* IcecastService::kServiceName = "Icecast";
-const char* IcecastService::kDirectoryUrl = "http://data.clementine-player.org/icecast-directory";
+const char* IcecastService::kDirectoryUrl =
+    "http://data.clementine-player.org/icecast-directory";
 const char* IcecastService::kHomepage = "http://dir.xiph.org/";
 
 IcecastService::IcecastService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
-      context_menu_(NULL),
-      backend_(NULL),
-      model_(NULL),
+      context_menu_(nullptr),
+      backend_(nullptr),
+      model_(nullptr),
       filter_(new IcecastFilterWidget(0)),
-      load_directory_task_id_(0)
-{
+      load_directory_task_id_(0) {
   backend_ = new IcecastBackend;
   backend_->moveToThread(app_->database()->thread());
   backend_->Init(app_->database());
@@ -65,11 +64,11 @@ IcecastService::IcecastService(Application* app, InternetModel* parent)
   model_ = new IcecastModel(backend_, this);
   filter_->SetIcecastModel(model_);
 
-  app_->global_search()->AddProvider(new IcecastSearchProvider(backend_, app_, this));
+  app_->global_search()->AddProvider(
+      new IcecastSearchProvider(backend_, app_, this));
 }
 
-IcecastService::~IcecastService() {
-}
+IcecastService::~IcecastService() {}
 
 QStandardItem* IcecastService::CreateRootItem() {
   root_ = new QStandardItem(QIcon(":last.fm/icon_radio.png"), kServiceName);
@@ -81,7 +80,8 @@ void IcecastService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
       model_->Init();
-      model()->merged_model()->AddSubModel(model()->indexFromItem(item), model_);
+      model()->merged_model()->AddSubModel(model()->indexFromItem(item),
+                                           model_);
 
       if (backend_->IsEmpty()) {
         LoadDirectory();
@@ -97,8 +97,8 @@ void IcecastService::LoadDirectory() {
   RequestDirectory(QUrl(kDirectoryUrl));
 
   if (!load_directory_task_id_) {
-    load_directory_task_id_ = app_->task_manager()->StartTask(
-        tr("Downloading Icecast directory"));
+    load_directory_task_id_ =
+        app_->task_manager()->StartTask(tr("Downloading Icecast directory"));
   }
 }
 
@@ -116,7 +116,8 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply) {
   if (reply->attribute(QNetworkRequest::RedirectionTargetAttribute).isValid()) {
     // Discard the old reply and follow the redirect
     reply->deleteLater();
-    RequestDirectory(reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
+    RequestDirectory(
+        reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
     return;
   }
 
@@ -125,19 +126,17 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply) {
   QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
   watcher->setFuture(future);
   NewClosure(watcher, SIGNAL(finished()), this,
-      SLOT(ParseDirectoryFinished(QFuture<IcecastBackend::StationList>)),
-      future);
+             SLOT(ParseDirectoryFinished(QFuture<IcecastBackend::StationList>)),
+             future);
   connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
 }
 
 namespace {
 template <typename T>
 struct GenreSorter {
-  GenreSorter(const QMultiHash<QString, T>& genres)
-      : genres_(genres) {
-  }
+  GenreSorter(const QMultiHash<QString, T>& genres) : genres_(genres) {}
 
-  bool operator() (const QString& a, const QString& b) const {
+  bool operator()(const QString& a, const QString& b) const {
     return genres_.count(a) > genres_.count(b);
   }
 
@@ -147,31 +146,30 @@ struct GenreSorter {
 
 template <typename T>
 struct StationSorter {
-  bool operator() (const T& a, const T& b) const {
+  bool operator()(const T& a, const T& b) const {
     return a.name.compare(b.name, Qt::CaseInsensitive) < 0;
   }
 };
 
 template <typename T>
 struct StationSorter<T*> {
-  bool operator() (const T* a, const T* b) const {
+  bool operator()(const T* a, const T* b) const {
     return a->name.compare(b->name, Qt::CaseInsensitive) < 0;
   }
 };
 
 template <typename T>
 struct StationEquality {
-  bool operator() (T a, T b) const {
-    return a.name == b.name;
-  }
+  bool operator()(T a, T b) const { return a.name == b.name; }
 };
 
 QStringList FilterGenres(const QStringList& genres) {
   QStringList ret;
-  foreach (const QString& genre, genres) {
+  for (const QString& genre : genres) {
     if (genre.length() < 2) continue;
     if (genre.contains("ÃÂ")) continue;  // Broken unicode.
-    if (genre.contains(QRegExp("^#x[0-9a-f][0-9a-f]"))) continue;  // Broken XML entities.
+    if (genre.contains(QRegExp("^#x[0-9a-f][0-9a-f]")))
+      continue;  // Broken XML entities.
 
     // Convert 80 -> 80s.
     if (genre.contains(QRegExp("^[0-9]0$"))) {
@@ -186,23 +184,25 @@ QStringList FilterGenres(const QStringList& genres) {
   }
   return ret;
 }
-
 }
 
 void IcecastService::ParseDirectoryFinished(
     QFuture<IcecastBackend::StationList> future) {
   IcecastBackend::StationList all_stations = future.result();
-  sort(all_stations.begin(), all_stations.end(), StationSorter<IcecastBackend::Station>());
-  // Remove duplicates by name. These tend to be multiple URLs for the same station.
+  sort(all_stations.begin(), all_stations.end(),
+       StationSorter<IcecastBackend::Station>());
+  // Remove duplicates by name. These tend to be multiple URLs for the same
+  // station.
   IcecastBackend::StationList::iterator it =
-      unique(all_stations.begin(), all_stations.end(), StationEquality<IcecastBackend::Station>());
+      unique(all_stations.begin(), all_stations.end(),
+             StationEquality<IcecastBackend::Station>());
   all_stations.erase(it, all_stations.end());
 
   // Cluster stations by genre.
   QMultiHash<QString, IcecastBackend::Station*> genres;
 
   // Add stations.
-  for (int i=0 ; i<all_stations.count() ; ++i) {
+  for (int i = 0; i < all_stations.count(); ++i) {
     IcecastBackend::Station& s = all_stations[i];
     genres.insert(s.genre, &s);
   }
@@ -210,10 +210,10 @@ void IcecastService::ParseDirectoryFinished(
   QSet<QString> genre_set = genres.keys().toSet();
 
   // Merge genres with only 1 or 2 stations into "Other".
-  foreach (const QString& genre, genre_set) {
+  for (const QString& genre : genre_set) {
     if (genres.count(genre) < 3) {
       const QList<IcecastBackend::Station*>& small_genre = genres.values(genre);
-      foreach (IcecastBackend::Station* s, small_genre) {
+      for (IcecastBackend::Station* s : small_genre) {
         s->genre = "Other";
       }
     }
@@ -225,7 +225,8 @@ void IcecastService::ParseDirectoryFinished(
   load_directory_task_id_ = 0;
 }
 
-IcecastBackend::StationList IcecastService::ParseDirectory(QIODevice* device) const {
+IcecastBackend::StationList IcecastService::ParseDirectory(QIODevice* device)
+    const {
   QXmlStreamReader reader(device);
   IcecastBackend::StationList stations;
   while (!reader.atEnd()) {
@@ -239,25 +240,27 @@ IcecastBackend::StationList IcecastService::ParseDirectory(QIODevice* device) co
   return stations;
 }
 
-IcecastBackend::Station IcecastService::ReadStation(QXmlStreamReader* reader) const {
+IcecastBackend::Station IcecastService::ReadStation(QXmlStreamReader* reader)
+    const {
   IcecastBackend::Station station;
   while (!reader->atEnd()) {
     reader->readNext();
-    if (reader->tokenType() == QXmlStreamReader::EndElement)
-      break;
+    if (reader->tokenType() == QXmlStreamReader::EndElement) break;
 
     if (reader->tokenType() == QXmlStreamReader::StartElement) {
       QStringRef name = reader->name();
-      QString value = reader->readElementText(QXmlStreamReader::SkipChildElements);
+      QString value =
+          reader->readElementText(QXmlStreamReader::SkipChildElements);
 
       if (name == "server_name") station.name = value;
-      if (name == "listen_url")  station.url = QUrl(value);
+      if (name == "listen_url") station.url = QUrl(value);
       if (name == "server_type") station.mime_type = value;
-      if (name == "bitrate")     station.bitrate = value.toInt();
-      if (name == "channels")    station.channels = value.toInt();
-      if (name == "samplerate")  station.samplerate = value.toInt();
-      if (name == "genre")       station.genre =
-          FilterGenres(value.split(' ', QString::SkipEmptyParts))[0];
+      if (name == "bitrate") station.bitrate = value.toInt();
+      if (name == "channels") station.channels = value.toInt();
+      if (name == "samplerate") station.samplerate = value.toInt();
+      if (name == "genre")
+        station.genre =
+            FilterGenres(value.split(' ', QString::SkipEmptyParts))[0];
     }
   }
 
@@ -269,9 +272,7 @@ IcecastBackend::Station IcecastService::ReadStation(QXmlStreamReader* reader) co
   return station;
 }
 
-QWidget* IcecastService::HeaderWidget() const {
-  return filter_;
-}
+QWidget* IcecastService::HeaderWidget() const { return filter_; }
 
 void IcecastService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
@@ -287,19 +288,20 @@ void IcecastService::ShowContextMenu(const QPoint& global_pos) {
 }
 
 void IcecastService::EnsureMenuCreated() {
-  if (context_menu_)
-    return;
+  if (context_menu_) return;
 
   context_menu_ = new QMenu;
 
   context_menu_->addActions(GetPlaylistActions());
-  context_menu_->addAction(IconLoader::Load("download"), tr("Open %1 in browser").arg("dir.xiph.org"), this, SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh station list"), this, SLOT(LoadDirectory()));
+  context_menu_->addAction(IconLoader::Load("download"),
+                           tr("Open %1 in browser").arg("dir.xiph.org"), this,
+                           SLOT(Homepage()));
+  context_menu_->addAction(IconLoader::Load("view-refresh"),
+                           tr("Refresh station list"), this,
+                           SLOT(LoadDirectory()));
 
   context_menu_->addSeparator();
   context_menu_->addMenu(filter_->menu());
 }
 
-void IcecastService::Homepage() {
-  QDesktopServices::openUrl(QUrl(kHomepage));
-}
+void IcecastService::Homepage() { QDesktopServices::openUrl(QUrl(kHomepage)); }

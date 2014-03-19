@@ -25,10 +25,9 @@
 #include "ui/settingsdialog.h"
 
 DropboxSettingsPage::DropboxSettingsPage(SettingsDialog* parent)
-  : SettingsPage(parent),
-    ui_(new Ui::DropboxSettingsPage),
-    service_(dialog()->app()->internet_model()->Service<DropboxService>())
-{
+    : SettingsPage(parent),
+      ui_(new Ui::DropboxSettingsPage),
+      service_(dialog()->app()->internet_model()->Service<DropboxService>()) {
   ui_->setupUi(this);
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
@@ -38,9 +37,7 @@ DropboxSettingsPage::DropboxSettingsPage(SettingsDialog* parent)
   dialog()->installEventFilter(this);
 }
 
-DropboxSettingsPage::~DropboxSettingsPage() {
-  delete ui_;
-}
+DropboxSettingsPage::~DropboxSettingsPage() { delete ui_; }
 
 void DropboxSettingsPage::Load() {
   QSettings s;
@@ -60,11 +57,10 @@ void DropboxSettingsPage::Save() {
 
 void DropboxSettingsPage::LoginClicked() {
   DropboxAuthenticator* authenticator = new DropboxAuthenticator;
-  NewClosure(authenticator, SIGNAL(Finished()),
-             this, SLOT(Connected(DropboxAuthenticator*)),
-             authenticator);
-  NewClosure(authenticator, SIGNAL(Finished()),
-             service_, SLOT(AuthenticationFinished(DropboxAuthenticator*)),
+  NewClosure(authenticator, SIGNAL(Finished()), this,
+             SLOT(Connected(DropboxAuthenticator*)), authenticator);
+  NewClosure(authenticator, SIGNAL(Finished()), service_,
+             SLOT(AuthenticationFinished(DropboxAuthenticator*)),
              authenticator);
   authenticator->StartAuthorisation();
 
@@ -85,6 +81,6 @@ void DropboxSettingsPage::LogoutClicked() {
 }
 
 void DropboxSettingsPage::Connected(DropboxAuthenticator* authenticator) {
-  ui_->login_state->SetLoggedIn(
-      LoginStateWidget::LoggedIn, authenticator->name());
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn,
+                                authenticator->name());
 }

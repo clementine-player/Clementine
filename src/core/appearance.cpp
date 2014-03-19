@@ -27,24 +27,21 @@ const char* Appearance::kBackgroundColor = "background-color";
 
 const QPalette Appearance::kDefaultPalette = QPalette();
 
-Appearance::Appearance(QObject* parent)
-  : QObject(parent)
-{
+Appearance::Appearance(QObject* parent) : QObject(parent) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   QPalette p = QApplication::palette();
-  background_color_ = s.value(kBackgroundColor,
-                              p.color(QPalette::WindowText)).value<QColor>();
-  foreground_color_ = s.value(kForegroundColor,
-                              p.color(QPalette::Window)).value<QColor>();
+  background_color_ =
+      s.value(kBackgroundColor, p.color(QPalette::WindowText)).value<QColor>();
+  foreground_color_ =
+      s.value(kForegroundColor, p.color(QPalette::Window)).value<QColor>();
 }
 
 void Appearance::LoadUserTheme() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   bool use_a_custom_color_set = s.value(kUseCustomColorSet).toBool();
-  if (!use_a_custom_color_set)
-    return;
+  if (!use_a_custom_color_set) return;
 
   ChangeForegroundColor(foreground_color_);
   ChangeBackgroundColor(background_color_);

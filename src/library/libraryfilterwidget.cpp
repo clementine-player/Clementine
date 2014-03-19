@@ -30,15 +30,14 @@
 #include <QSignalMapper>
 #include <QTimer>
 
-LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
-  : QWidget(parent),
-    ui_(new Ui_LibraryFilterWidget),
-    model_(NULL),
-    group_by_dialog_(new GroupByDialog),
-    filter_delay_(new QTimer(this)),
-    filter_applies_to_model_(true),
-    delay_behaviour_(DelayedOnLargeLibraries)
-{
+LibraryFilterWidget::LibraryFilterWidget(QWidget* parent)
+    : QWidget(parent),
+      ui_(new Ui_LibraryFilterWidget),
+      model_(nullptr),
+      group_by_dialog_(new GroupByDialog),
+      filter_delay_(new QTimer(this)),
+      filter_applies_to_model_(true),
+      delay_behaviour_(DelayedOnLargeLibraries) {
   ui_->setupUi(this);
   connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));
   connect(filter_delay_, SIGNAL(timeout()), SLOT(FilterDelayTimeout()));
@@ -63,18 +62,25 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
 
   filter_age_mapper_ = new QSignalMapper(this);
   filter_age_mapper_->setMapping(ui_->filter_age_all, -1);
-  filter_age_mapper_->setMapping(ui_->filter_age_today, 60*60*24);
-  filter_age_mapper_->setMapping(ui_->filter_age_week, 60*60*24*7);
-  filter_age_mapper_->setMapping(ui_->filter_age_month, 60*60*24*30);
-  filter_age_mapper_->setMapping(ui_->filter_age_three_months, 60*60*24*30*3);
-  filter_age_mapper_->setMapping(ui_->filter_age_year, 60*60*24*365);
+  filter_age_mapper_->setMapping(ui_->filter_age_today, 60 * 60 * 24);
+  filter_age_mapper_->setMapping(ui_->filter_age_week, 60 * 60 * 24 * 7);
+  filter_age_mapper_->setMapping(ui_->filter_age_month, 60 * 60 * 24 * 30);
+  filter_age_mapper_->setMapping(ui_->filter_age_three_months,
+                                 60 * 60 * 24 * 30 * 3);
+  filter_age_mapper_->setMapping(ui_->filter_age_year, 60 * 60 * 24 * 365);
 
-  connect(ui_->filter_age_all, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
-  connect(ui_->filter_age_today, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
-  connect(ui_->filter_age_week, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
-  connect(ui_->filter_age_month, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
-  connect(ui_->filter_age_three_months, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
-  connect(ui_->filter_age_year, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
+  connect(ui_->filter_age_all, SIGNAL(triggered()), filter_age_mapper_,
+          SLOT(map()));
+  connect(ui_->filter_age_today, SIGNAL(triggered()), filter_age_mapper_,
+          SLOT(map()));
+  connect(ui_->filter_age_week, SIGNAL(triggered()), filter_age_mapper_,
+          SLOT(map()));
+  connect(ui_->filter_age_month, SIGNAL(triggered()), filter_age_mapper_,
+          SLOT(map()));
+  connect(ui_->filter_age_three_months, SIGNAL(triggered()), filter_age_mapper_,
+          SLOT(map()));
+  connect(ui_->filter_age_year, SIGNAL(triggered()), filter_age_mapper_,
+          SLOT(map()));
 
   // "Group by ..."
   group_by_group_ = CreateGroupByActions(this);
@@ -82,7 +88,8 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   group_by_menu_ = new QMenu(tr("Group by"), this);
   group_by_menu_->addActions(group_by_group_->actions());
 
-  connect(group_by_group_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
+  connect(group_by_group_, SIGNAL(triggered(QAction*)),
+          SLOT(GroupByClicked(QAction*)));
 
   // Library config menu
   library_menu_ = new QMenu(tr("Display options"), this);
@@ -92,35 +99,46 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   library_menu_->addSeparator();
   ui_->options->setMenu(library_menu_);
 
-  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(FilterTextChanged(QString)));
+  connect(ui_->filter, SIGNAL(textChanged(QString)),
+          SLOT(FilterTextChanged(QString)));
 }
 
-LibraryFilterWidget::~LibraryFilterWidget() {
-  delete ui_;
-}
+LibraryFilterWidget::~LibraryFilterWidget() { delete ui_; }
 
 QActionGroup* LibraryFilterWidget::CreateGroupByActions(QObject* parent) {
   QActionGroup* ret = new QActionGroup(parent);
-  ret->addAction(CreateGroupByAction(tr("Group by Artist"), parent,
+  ret->addAction(CreateGroupByAction(
+      tr("Group by Artist"), parent,
       LibraryModel::Grouping(LibraryModel::GroupBy_Artist)));
-  ret->addAction(CreateGroupByAction(tr("Group by Artist/Album"), parent,
-      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
-  ret->addAction(CreateGroupByAction(tr("Group by Artist/Year - Album"), parent,
-      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_YearAlbum)));
-  ret->addAction(CreateGroupByAction(tr("Group by Album"), parent,
-      LibraryModel::Grouping(LibraryModel::GroupBy_Album)));
-  ret->addAction(CreateGroupByAction(tr("Group by Genre/Album"), parent,
-      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Album)));
-  ret->addAction(CreateGroupByAction(tr("Group by Genre/Artist/Album"), parent,
-      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
+  ret->addAction(
+      CreateGroupByAction(tr("Group by Artist/Album"), parent,
+                          LibraryModel::Grouping(LibraryModel::GroupBy_Artist,
+                                                 LibraryModel::GroupBy_Album)));
+  ret->addAction(CreateGroupByAction(
+      tr("Group by Artist/Year - Album"), parent,
+      LibraryModel::Grouping(LibraryModel::GroupBy_Artist,
+                             LibraryModel::GroupBy_YearAlbum)));
+  ret->addAction(
+      CreateGroupByAction(tr("Group by Album"), parent,
+                          LibraryModel::Grouping(LibraryModel::GroupBy_Album)));
+  ret->addAction(
+      CreateGroupByAction(tr("Group by Genre/Album"), parent,
+                          LibraryModel::Grouping(LibraryModel::GroupBy_Genre,
+                                                 LibraryModel::GroupBy_Album)));
+  ret->addAction(
+      CreateGroupByAction(tr("Group by Genre/Artist/Album"), parent,
+                          LibraryModel::Grouping(LibraryModel::GroupBy_Genre,
+                                                 LibraryModel::GroupBy_Artist,
+                                                 LibraryModel::GroupBy_Album)));
   ret->addAction(CreateGroupByAction(tr("Advanced grouping..."), parent,
-      LibraryModel::Grouping()));
+                                     LibraryModel::Grouping()));
 
   return ret;
 }
 
 QAction* LibraryFilterWidget::CreateGroupByAction(
-    const QString& text, QObject* parent, const LibraryModel::Grouping& grouping) {
+    const QString& text, QObject* parent,
+    const LibraryModel::Grouping& grouping) {
   QAction* ret = new QAction(text, parent);
   ret->setCheckable(true);
 
@@ -131,12 +149,12 @@ QAction* LibraryFilterWidget::CreateGroupByAction(
   return ret;
 }
 
-void LibraryFilterWidget::FocusOnFilter(QKeyEvent *event) {
+void LibraryFilterWidget::FocusOnFilter(QKeyEvent* event) {
   ui_->filter->setFocus();
   QApplication::sendEvent(ui_->filter, event);
 }
 
-void LibraryFilterWidget::SetLibraryModel(LibraryModel *model) {
+void LibraryFilterWidget::SetLibraryModel(LibraryModel* model) {
   if (model_) {
     disconnect(model_, 0, this, 0);
     disconnect(model_, 0, group_by_dialog_.get(), 0);
@@ -148,21 +166,26 @@ void LibraryFilterWidget::SetLibraryModel(LibraryModel *model) {
 
   // Connect signals
   connect(model_, SIGNAL(GroupingChanged(LibraryModel::Grouping)),
-          group_by_dialog_.get(), SLOT(LibraryGroupingChanged(LibraryModel::Grouping)));
+          group_by_dialog_.get(),
+          SLOT(LibraryGroupingChanged(LibraryModel::Grouping)));
   connect(model_, SIGNAL(GroupingChanged(LibraryModel::Grouping)),
           SLOT(GroupingChanged(LibraryModel::Grouping)));
   connect(group_by_dialog_.get(), SIGNAL(Accepted(LibraryModel::Grouping)),
           model_, SLOT(SetGroupBy(LibraryModel::Grouping)));
-  connect(filter_age_mapper_, SIGNAL(mapped(int)), model_, SLOT(SetFilterAge(int)));
+  connect(filter_age_mapper_, SIGNAL(mapped(int)), model_,
+          SLOT(SetFilterAge(int)));
 
   // Load settings
   if (!settings_group_.isEmpty()) {
     QSettings s;
     s.beginGroup(settings_group_);
     model_->SetGroupBy(LibraryModel::Grouping(
-        LibraryModel::GroupBy(s.value("group_by1", int(LibraryModel::GroupBy_Artist)).toInt()),
-        LibraryModel::GroupBy(s.value("group_by2", int(LibraryModel::GroupBy_Album)).toInt()),
-        LibraryModel::GroupBy(s.value("group_by3", int(LibraryModel::GroupBy_None)).toInt())));
+        LibraryModel::GroupBy(
+            s.value("group_by1", int(LibraryModel::GroupBy_Artist)).toInt()),
+        LibraryModel::GroupBy(
+            s.value("group_by2", int(LibraryModel::GroupBy_Album)).toInt()),
+        LibraryModel::GroupBy(
+            s.value("group_by3", int(LibraryModel::GroupBy_None)).toInt())));
   }
 }
 
@@ -172,7 +195,8 @@ void LibraryFilterWidget::GroupByClicked(QAction* action) {
     return;
   }
 
-  LibraryModel::Grouping g = action->property("group_by").value<LibraryModel::Grouping>();
+  LibraryModel::Grouping g =
+      action->property("group_by").value<LibraryModel::Grouping>();
   model_->SetGroupBy(g);
 }
 
@@ -187,9 +211,8 @@ void LibraryFilterWidget::GroupingChanged(const LibraryModel::Grouping& g) {
   }
 
   // Now make sure the correct action is checked
-  foreach (QAction* action, group_by_group_->actions()) {
-    if (action->property("group_by").isNull())
-      continue;
+  for (QAction* action : group_by_group_->actions()) {
+    if (action->property("group_by").isNull()) continue;
 
     if (g == action->property("group_by").value<LibraryModel::Grouping>()) {
       action->setChecked(true);
@@ -210,6 +233,10 @@ void LibraryFilterWidget::SetQueryMode(QueryOptions::QueryMode query_mode) {
   ui_->filter->setEnabled(query_mode == QueryOptions::QueryMode_All);
 
   model_->SetFilterQueryMode(query_mode);
+}
+
+void LibraryFilterWidget::ShowInLibrary(const QString& search) {
+  ui_->filter->setText(search);
 }
 
 void LibraryFilterWidget::SetAgeFilterEnabled(bool enabled) {
@@ -250,10 +277,10 @@ void LibraryFilterWidget::FilterTextChanged(const QString& text) {
   // even with FTS, so if there are a large number of songs in the database
   // introduce a small delay before actually filtering the model, so if the
   // user is typing the first few characters of something it will be quicker.
-  const bool delay = (delay_behaviour_ == AlwaysDelayed)
-                  || (delay_behaviour_ == DelayedOnLargeLibraries &&
-                      !text.isEmpty() && text.length() < 3 &&
-                      model_->total_song_count() >= 100000);
+  const bool delay =
+      (delay_behaviour_ == AlwaysDelayed) ||
+      (delay_behaviour_ == DelayedOnLargeLibraries && !text.isEmpty() &&
+       text.length() < 3 && model_->total_song_count() >= 100000);
 
   if (delay) {
     filter_delay_->start();

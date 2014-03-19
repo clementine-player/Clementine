@@ -23,7 +23,7 @@
 class GstEnginePipeline;
 
 class BufferConsumer {
-public:
+ public:
   virtual ~BufferConsumer() {}
 
   // This is called in some unspecified GStreamer thread.
@@ -32,4 +32,4 @@ public:
   virtual void ConsumeBuffer(GstBuffer* buffer, int pipeline_id) = 0;
 };
 
-#endif // BUFFERCONSUMER_H
+#endif  // BUFFERCONSUMER_H

@@ -9,7 +9,7 @@ class NetworkAccessManager;
 class UbuntuOneAuthenticator : public QObject {
   Q_OBJECT
  public:
-  explicit UbuntuOneAuthenticator(QObject* parent = 0);
+  explicit UbuntuOneAuthenticator(QObject* parent = nullptr);
   void StartAuthorisation(const QString& email, const QString& password);
 
   bool success() const { return success_; }
@@ -18,13 +18,12 @@ class UbuntuOneAuthenticator : public QObject {
   QString token() const { return token_; }
   QString token_secret() const { return token_secret_; }
 
-  static QByteArray GenerateAuthorisationHeader(
-      const QString& consumer_key,
-      const QString& consumer_secret,
-      const QString& token,
-      const QString& token_secret);
+  static QByteArray GenerateAuthorisationHeader(const QString& consumer_key,
+                                                const QString& consumer_secret,
+                                                const QString& token,
+                                                const QString& token_secret);
 
- signals:
+signals:
   void Finished();
 
  private slots:
@@ -47,4 +46,4 @@ class UbuntuOneAuthenticator : public QObject {
   QString token_secret_;
 };
 
-#endif   // UBUNTUONEAUTHENTICATOR_H
+#endif  // UBUNTUONEAUTHENTICATOR_H

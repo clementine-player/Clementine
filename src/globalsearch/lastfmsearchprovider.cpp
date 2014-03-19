@@ -19,24 +19,22 @@
 #include "core/logging.h"
 #include "internet/lastfmservice.h"
 
-
 LastFMSearchProvider::LastFMSearchProvider(LastFMService* service,
                                            Application* app, QObject* parent)
-  : SimpleSearchProvider(app, parent),
-    service_(service) {
+    : SimpleSearchProvider(app, parent), service_(service) {
   Init("Last.fm", "lastfm", QIcon(":last.fm/as.png"),
        CanShowConfig | CanGiveSuggestions);
   icon_ = ScaleAndPad(QImage(":last.fm/as.png"));
 
-  set_safe_words(QStringList() << "lastfm" << "last.fm");
+  set_safe_words(QStringList() << "lastfm"
+                               << "last.fm");
   set_max_suggestion_count(3);
 
   connect(service, SIGNAL(SavedItemsChanged()), SLOT(MaybeRecreateItems()));
 
   // Load the friends list on startup only if it doesn't involve going to update
   // info from the server.
-  if (!service_->IsFriendsListStale())
-    RecreateItems();
+  if (!service_->IsFriendsListStale()) RecreateItems();
 }
 
 void LastFMSearchProvider::LoadArtAsync(int id, const Result& result) {
@@ -52,8 +50,8 @@ void LastFMSearchProvider::RecreateItems() {
                 QUrl("lastfm://user/USERNAME/recommended"), "recommended");
   items << Item(tr("My Last.fm Library"),
                 QUrl("lastfm://user/USERNAME/library"), "radio");
-  items << Item(tr("My Last.fm Mix Radio"),
-                QUrl("lastfm://user/USERNAME/mix"), "mix");
+  items << Item(tr("My Last.fm Mix Radio"), QUrl("lastfm://user/USERNAME/mix"),
+                "mix");
   items << Item(tr("My Last.fm Neighborhood"),
                 QUrl("lastfm://user/USERNAME/neighbours"), "neighborhood");
 
@@ -61,17 +59,17 @@ void LastFMSearchProvider::RecreateItems() {
   const QStringList tags = service_->SavedTagRadioNames();
   const QStringList friends = service_->FriendNames();
 
-  foreach (const QString& name, artists) {
+  for (const QString& name : artists) {
     items << Item(tr(LastFMService::kTitleArtist).arg(name),
                   QUrl(QString(LastFMService::kUrlArtist).arg(name)), name);
   }
 
-  foreach (const QString& name, tags) {
+  for (const QString& name : tags) {
     items << Item(tr(LastFMService::kTitleTag).arg(name),
                   QUrl(QString(LastFMService::kUrlTag).arg(name)), name);
   }
 
-  foreach (const QString& name, friends) {
+  for (const QString& name : friends) {
     items << Item(tr("Last.fm Radio Station - %1").arg(name),
                   QUrl("lastfm://user/" + name + "/library"), name);
     items << Item(tr("Last.fm Mix Radio - %1").arg(name),
@@ -83,10 +81,6 @@ void LastFMSearchProvider::RecreateItems() {
   SetItems(items);
 }
 
-bool LastFMSearchProvider::IsLoggedIn() {
-  return service_->IsAuthenticated();
-}
+bool LastFMSearchProvider::IsLoggedIn() { return service_->IsAuthenticated(); }
 
-void LastFMSearchProvider::ShowConfig() {
-  service_->ShowConfig();
-}
+void LastFMSearchProvider::ShowConfig() { service_->ShowConfig(); }

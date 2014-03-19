@@ -40,7 +40,7 @@ class AlbumCoverFetcherTest : public ::testing::Test {
   }
 
   void SetUp() {
-    network_ = new NetworkAccessManager(NULL, mock_network_);
+    network_ = new NetworkAccessManager(nullptr, mock_network_);
   }
 
   void TearDown() {
@@ -71,7 +71,7 @@ TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {
   params.clear();
   MockNetworkReply* album_reply = mock_network_->ExpectGet("http://example.com/image.jpg", params, 200, "");
 
-  AlbumCoverFetcher fetcher(network_, NULL);
+  AlbumCoverFetcher fetcher(network_, nullptr);
   QSignalSpy spy(&fetcher, SIGNAL(AlbumCoverFetched(quint64, const QImage&)));
   ASSERT_TRUE(spy.isValid());
   fetcher.FetchAlbumCover("Foo", "Bar");

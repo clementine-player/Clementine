@@ -28,24 +28,25 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, PlaylistView* view,
     : StretchHeaderView(orientation, parent),
       view_(view),
       menu_(new QMenu(this)),
-      show_mapper_(new QSignalMapper(this))
-{
+      show_mapper_(new QSignalMapper(this)) {
   hide_action_ = menu_->addAction(tr("&Hide..."), this, SLOT(HideCurrent()));
-  stretch_action_ = menu_->addAction(tr("&Stretch columns to fit window"), this, SLOT(ToggleStretchEnabled()));
+  stretch_action_ = menu_->addAction(tr("&Stretch columns to fit window"), this,
+                                     SLOT(ToggleStretchEnabled()));
   menu_->addSeparator();
 
-  QMenu* align_menu         = new QMenu(tr("&Align text"), this);
+  QMenu* align_menu = new QMenu(tr("&Align text"), this);
   QActionGroup* align_group = new QActionGroup(this);
-  align_left_action_        = new QAction(tr("&Left"), align_group);
-  align_center_action_      = new QAction(tr("&Center"), align_group);
-  align_right_action_       = new QAction(tr("&Right"), align_group);
+  align_left_action_ = new QAction(tr("&Left"), align_group);
+  align_center_action_ = new QAction(tr("&Center"), align_group);
+  align_right_action_ = new QAction(tr("&Right"), align_group);
 
   align_left_action_->setCheckable(true);
   align_center_action_->setCheckable(true);
   align_right_action_->setCheckable(true);
   align_menu->addActions(align_group->actions());
 
-  connect(align_group, SIGNAL(triggered(QAction*)), SLOT(SetColumnAlignment(QAction*)));
+  connect(align_group, SIGNAL(triggered(QAction*)),
+          SLOT(SetColumnAlignment(QAction*)));
 
   menu_->addMenu(align_menu);
   menu_->addSeparator();
@@ -54,7 +55,8 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, PlaylistView* view,
   stretch_action_->setChecked(is_stretch_enabled());
 
   connect(show_mapper_, SIGNAL(mapped(int)), SLOT(ToggleVisible(int)));
-  connect(this, SIGNAL(StretchEnabledChanged(bool)), stretch_action_, SLOT(setChecked(bool)));
+  connect(this, SIGNAL(StretchEnabledChanged(bool)), stretch_action_,
+          SLOT(setChecked(bool)));
 }
 
 void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
@@ -66,18 +68,22 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
   else {
     hide_action_->setVisible(true);
 
-    QString title(model()->headerData(menu_section_, Qt::Horizontal).toString());
+    QString title(
+        model()->headerData(menu_section_, Qt::Horizontal).toString());
     hide_action_->setText(tr("&Hide %1").arg(title));
 
     Qt::Alignment alignment = view_->column_alignment(menu_section_);
-    if      (alignment & Qt::AlignLeft)    align_left_action_->setChecked(true);
-    else if (alignment & Qt::AlignHCenter) align_center_action_->setChecked(true);
-    else if (alignment & Qt::AlignRight)   align_right_action_->setChecked(true);
+    if (alignment & Qt::AlignLeft)
+      align_left_action_->setChecked(true);
+    else if (alignment & Qt::AlignHCenter)
+      align_center_action_->setChecked(true);
+    else if (alignment & Qt::AlignRight)
+      align_right_action_->setChecked(true);
   }
 
   qDeleteAll(show_actions_);
   show_actions_.clear();
-  for (int i=0 ; i<count() ; ++i) {
+  for (int i = 0; i < count(); ++i) {
     AddColumnAction(i);
   }
 
@@ -102,8 +108,7 @@ void PlaylistHeader::AddColumnAction(int index) {
 }
 
 void PlaylistHeader::HideCurrent() {
-  if (menu_section_ == -1)
-    return;
+  if (menu_section_ == -1) return;
 
   SetSectionHidden(menu_section_, true);
 }
@@ -111,9 +116,9 @@ void PlaylistHeader::HideCurrent() {
 void PlaylistHeader::SetColumnAlignment(QAction* action) {
   Qt::Alignment alignment = Qt::AlignVCenter;
 
-  if (action == align_left_action_)   alignment |= Qt::AlignLeft;
+  if (action == align_left_action_) alignment |= Qt::AlignLeft;
   if (action == align_center_action_) alignment |= Qt::AlignHCenter;
-  if (action == align_right_action_)  alignment |= Qt::AlignRight;
+  if (action == align_right_action_) alignment |= Qt::AlignRight;
 
   view_->SetColumnAlignment(menu_section_, alignment);
 }
@@ -123,6 +128,4 @@ void PlaylistHeader::ToggleVisible(int section) {
   emit SectionVisibilityChanged(section, !isSectionHidden(section));
 }
 
-void PlaylistHeader::enterEvent(QEvent*) {
-  emit MouseEntered();
-}
+void PlaylistHeader::enterEvent(QEvent*) { emit MouseEntered(); }

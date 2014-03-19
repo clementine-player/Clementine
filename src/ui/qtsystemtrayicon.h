@@ -25,8 +25,8 @@
 class QtSystemTrayIcon : public SystemTrayIcon {
   Q_OBJECT
 
-public:
-  QtSystemTrayIcon(QObject* parent = 0);
+ public:
+  QtSystemTrayIcon(QObject* parent = nullptr);
   ~QtSystemTrayIcon();
 
   void SetupMenu(QAction* previous, QAction* play, QAction* stop,
@@ -35,12 +35,12 @@ public:
   bool IsVisible() const;
   void SetVisible(bool visible);
 
-  void ShowPopup(const QString &summary, const QString &message, int timeout);
+  void ShowPopup(const QString& summary, const QString& message, int timeout);
 
   void SetNowPlaying(const Song& song, const QString& image_path);
   void ClearNowPlaying();
-  
-protected:
+
+ protected:
   // SystemTrayIcon
   void UpdateIcon();
   void SetPaused();
@@ -53,12 +53,12 @@ protected:
   void MuteButtonStateChanged(bool value);
 
   // QObject
-  bool eventFilter(QObject *, QEvent *);
+  bool eventFilter(QObject*, QEvent*);
 
-private slots:
+ private slots:
   void Clicked(QSystemTrayIcon::ActivationReason);
 
-private:
+ private:
   QSystemTrayIcon* tray_;
   QMenu* menu_;
   QAction* action_play_pause_;
@@ -74,4 +74,4 @@ private:
   QPixmap grey_icon_;
 };
 
-#endif // QTSYSTEMTRAYICON_H
+#endif  // QTSYSTEMTRAYICON_H

@@ -28,26 +28,22 @@
 namespace smart_playlists {
 
 class Wizard::TypePage : public QWizardPage {
-public:
-  TypePage(QWidget* parent)
-    : QWizardPage(parent), next_id_(-1) {}
+ public:
+  TypePage(QWidget* parent) : QWizardPage(parent), next_id_(-1) {}
 
   int nextId() const { return next_id_; }
   int next_id_;
 };
 
 class Wizard::FinishPage : public QWizardPage {
-public:
+ public:
   FinishPage(QWidget* parent)
-    : QWizardPage(parent),
-      ui_(new Ui_SmartPlaylistWizardFinishPage) {
+      : QWizardPage(parent), ui_(new Ui_SmartPlaylistWizardFinishPage) {
     ui_->setupUi(this);
     connect(ui_->name, SIGNAL(textChanged(QString)), SIGNAL(completeChanged()));
   }
 
-  ~FinishPage() {
-    delete ui_;
-  }
+  ~FinishPage() { delete ui_; }
 
   int nextId() const { return -1; }
   bool isComplete() const { return !ui_->name->text().isEmpty(); }
@@ -56,14 +52,13 @@ public:
 };
 
 Wizard::Wizard(Application* app, LibraryBackend* library, QWidget* parent)
-  : QWizard(parent),
-    app_(app),
-    library_(library),
-    type_page_(new TypePage(this)),
-    finish_page_(new FinishPage(this)),
-    type_index_(-1),
-    type_mapper_(new QSignalMapper(this))
-{
+    : QWizard(parent),
+      app_(app),
+      library_(library),
+      type_page_(new TypePage(this)),
+      finish_page_(new FinishPage(this)),
+      type_index_(-1),
+      type_mapper_(new QSignalMapper(this)) {
   setWindowIcon(QIcon(":/icon.png"));
   setWindowTitle(tr("Smart playlist"));
   resize(788, 628);
@@ -71,14 +66,17 @@ Wizard::Wizard(Application* app, LibraryBackend* library, QWidget* parent)
 #ifdef Q_OS_MAC
   // MacStyle leaves an ugly empty space on the left side of the dialog.
   setWizardStyle(QWizard::ClassicStyle);
-#endif // Q_OS_MAC
+#endif  // Q_OS_MAC
 
   // Type page
   type_page_->setTitle(tr("Playlist type"));
-  type_page_->setSubTitle(tr("A smart playlist is a dynamic list of songs that come from your library.  There are different types of smart playlist that offer different ways of selecting songs."));
+  type_page_->setSubTitle(
+      tr("A smart playlist is a dynamic list of songs that come from your "
+         "library.  There are different types of smart playlist that offer "
+         "different ways of selecting songs."));
   type_page_->setStyleSheet(
-        "QRadioButton { font-weight: bold; }"
-        "QLabel { margin-bottom: 1em; margin-left: 24px; }");
+      "QRadioButton { font-weight: bold; }"
+      "QLabel { margin-bottom: 1em; margin-left: 24px; }");
   addPage(type_page_);
 
   // Finish page
@@ -95,13 +93,11 @@ Wizard::Wizard(Application* app, LibraryBackend* library, QWidget* parent)
   setStartId(2);
 }
 
-Wizard::~Wizard() {
-  qDeleteAll(plugins_);
-}
+Wizard::~Wizard() { qDeleteAll(plugins_); }
 
 void Wizard::SetGenerator(GeneratorPtr gen) {
   // Find the right type and jump to the start page
-  for (int i=0 ; i<plugins_.count() ; ++i) {
+  for (int i = 0; i < plugins_.count(); ++i) {
     if (plugins_[i]->type() == gen->type()) {
       TypeChanged(i);
       // TODO: Put this back in when the setStartId is removed from the ctor
@@ -145,12 +141,10 @@ void Wizard::TypeChanged(int index) {
 
 GeneratorPtr Wizard::CreateGenerator() const {
   GeneratorPtr ret;
-  if (type_index_ == -1)
-    return ret;
+  if (type_index_ == -1) return ret;
 
   ret = plugins_[type_index_]->CreateGenerator();
-  if (!ret)
-    return ret;
+  if (!ret) return ret;
 
   ret->set_name(finish_page_->ui_->name->text());
   ret->set_dynamic(finish_page_->ui_->dynamic->isChecked());
@@ -160,9 +154,9 @@ GeneratorPtr Wizard::CreateGenerator() const {
 void Wizard::initializePage(int id) {
   if (id == finish_id_) {
     finish_page_->ui_->dynamic_container->setEnabled(
-          plugins_[type_index_]->is_dynamic());
+        plugins_[type_index_]->is_dynamic());
   }
   QWizard::initializePage(id);
 }
 
-} // namespace
+}  // namespace

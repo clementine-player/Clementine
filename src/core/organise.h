@@ -18,11 +18,11 @@
 #ifndef ORGANISE_H
 #define ORGANISE_H
 
+#include <memory>
+
 #include <QBasicTimer>
 #include <QObject>
 #include <QTemporaryFile>
-
-#include <boost/shared_ptr.hpp>
 
 #include "organiseformat.h"
 #include "transcoder/transcoder.h"
@@ -33,11 +33,19 @@ class TaskManager;
 class Organise : public QObject {
   Q_OBJECT
 
-public:
-  Organise(TaskManager* task_manager,
-           boost::shared_ptr<MusicStorage> destination,
+ public:
+  struct NewSongInfo {
+    NewSongInfo(const Song& song = Song(),
+                const QString& new_filename = QString())
+        : song_(song), new_filename_(new_filename) {}
+    Song song_;
+    QString new_filename_;
+  };
+  typedef QList<NewSongInfo> NewSongInfoList;
+
+  Organise(TaskManager* task_manager, std::shared_ptr<MusicStorage> destination,
            const OrganiseFormat& format, bool copy, bool overwrite,
-           const QStringList& files, bool eject_after);
+           const NewSongInfoList& songs, bool eject_after);
 
   static const int kBatchSize;
   static const int kTranscodeProgressInterval;
@@ -47,26 +55,24 @@ public:
 signals:
   void Finished(const QStringList& files_with_errors);
 
-protected:
+ protected:
   void timerEvent(QTimerEvent* e);
 
-private slots:
+ private slots:
   void ProcessSomeFiles();
   void FileTranscoded(const QString& filename, bool success);
 
-private:
+ private:
   void SetSongProgress(float progress, bool transcoded = false);
   void UpdateProgress();
   Song::FileType CheckTranscode(Song::FileType original_type) const;
 
-  static QString FiddleFileExtension(const QString& filename, const QString& new_extension);
-
-private:
+ private:
   struct Task {
-    explicit Task(const QString& filename = QString())
-      : filename_(filename), transcode_progress_(0.0) {}
+    explicit Task(const NewSongInfo& song_info = NewSongInfo())
+        : song_info_(song_info), transcode_progress_(0.0) {}
 
-    QString filename_;
+    NewSongInfo song_info_;
 
     float transcode_progress_;
     QString transcoded_filename_;
@@ -78,7 +84,7 @@ private:
   QThread* original_thread_;
   TaskManager* task_manager_;
   Transcoder* transcoder_;
-  boost::shared_ptr<MusicStorage> destination_;
+  std::shared_ptr<MusicStorage> destination_;
   QList<Song::FileType> supported_filetypes_;
 
   const OrganiseFormat format_;
@@ -103,4 +109,4 @@ private:
   QStringList files_with_errors_;
 };
 
-#endif // ORGANISE_H
+#endif  // ORGANISE_H

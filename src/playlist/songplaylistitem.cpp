@@ -25,16 +25,10 @@
 #include <QFile>
 #include <QSettings>
 
-SongPlaylistItem::SongPlaylistItem(const QString& type)
-  : PlaylistItem(type)
-{
-}
+SongPlaylistItem::SongPlaylistItem(const QString& type) : PlaylistItem(type) {}
 
 SongPlaylistItem::SongPlaylistItem(const Song& song)
-  : PlaylistItem(song.is_stream() ? "Stream" : "File"),
-    song_(song)
-{
-}
+    : PlaylistItem(song.is_stream() ? "Stream" : "File"), song_(song) {}
 
 bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
   song_.InitFromQuery(query, false, (Song::kColumns.count() + 1) * 3);
@@ -46,21 +40,16 @@ bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
   return true;
 }
 
-QUrl SongPlaylistItem::Url() const {
-  return song_.url();
-}
+QUrl SongPlaylistItem::Url() const { return song_.url(); }
 
 void SongPlaylistItem::Reload() {
-  if (song_.url().scheme() != "file")
-    return;
+  if (song_.url().scheme() != "file") return;
 
-  TagReaderClient::Instance()->ReadFileBlocking(song_.url().toLocalFile(), &song_);
+  TagReaderClient::Instance()->ReadFileBlocking(song_.url().toLocalFile(),
+                                                &song_);
 }
 
 Song SongPlaylistItem::Metadata() const {
-  if (HasTemporaryMetadata())
-    return temp_metadata_;
+  if (HasTemporaryMetadata()) return temp_metadata_;
   return song_;
 }
-
-
