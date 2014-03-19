@@ -135,11 +135,9 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
     if (!art.startsWith(":") && !art.isEmpty()) {
       // Convert local files to URLs.
       QUrl url(art);
-      qDebug() << url.toString() << "\n\n\n";
-      if (!art.contains("http")) {
+      if (!art.contains("://") || url.scheme() == "file") {
         art = dir.relativeFilePath(QFileInfo(url.toLocalFile()).absoluteFilePath());
-      }
-      else {
+      } else {
         art = url.toString();
       }
       writer.writeTextElement("image", art);
