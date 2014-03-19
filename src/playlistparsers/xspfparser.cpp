@@ -25,6 +25,7 @@
 #include <QRegExp>
 #include <QUrl>
 #include <QXmlStreamReader>
+#include <QDebug>
 
 XSPFParser::XSPFParser(LibraryBackendInterface* library, QObject* parent)
     : XMLParser(library, parent) {}
@@ -115,7 +116,7 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
   for (const Song& song : songs) {
     StreamElement track("track", &writer);
     writer.writeTextElement("location", dir.relativeFilePath(
-								QFileInfo(song.url().toLocalFile()).absoluteFilePath()));
+                            QFileInfo(song.url().toLocalFile()).absoluteFilePath()));
     writer.writeTextElement("title", song.title());
     if (!song.artist().isEmpty()) {
       writer.writeTextElement("creator", song.artist());
@@ -133,10 +134,15 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
       // Convert local files to URLs.
-      if (art.contains("://")) {
-		art = QUrl(art).toLocalFile();
+      QUrl url(art);
+      qDebug() << url.toString() << "\n\n\n";
+      if (!art.contains("http")) {
+        art = dir.relativeFilePath(QFileInfo(url.toLocalFile()).absoluteFilePath());
       }
-      writer.writeTextElement("image", dir.relativeFilePath(QFileInfo(art).absoluteFilePath()));
+      else {
+        art = url.toString();
+      }
+      writer.writeTextElement("image", art);
     }
   }
   writer.writeEndDocument();
