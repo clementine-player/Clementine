@@ -70,6 +70,8 @@ void GroovesharkSettingsPage::Load() {
   validated_ = false;
 
   UpdateLoginState();
+
+  ui_->sort_alphabetically->setChecked(s.value("sort_alphabetically").toBool());
 }
 
 void GroovesharkSettingsPage::Save() {
@@ -78,6 +80,12 @@ void GroovesharkSettingsPage::Save() {
 
   s.setValue("username", ui_->username->text());
   s.setValue("sessionid", service_->session_id());
+  const bool old_sort_value = s.value("sort_alphabetically").toBool();
+  const bool new_sort_value = ui_->sort_alphabetically->isChecked();
+  if (old_sort_value != new_sort_value) {
+    s.setValue("sort_alphabetically", new_sort_value);
+    service_->RefreshItems();
+  }
 }
 
 void GroovesharkSettingsPage::LoginFinished(bool success) {

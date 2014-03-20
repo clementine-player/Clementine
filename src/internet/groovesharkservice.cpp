@@ -723,7 +723,7 @@ void GroovesharkService::PlaylistSongsRetrieved(QNetworkReply* reply,
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
-  Song::SortSongsListAlphabetically(&songs);
+  SortSongsAlphabeticallyIfNeeded(&songs);
 
   for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
@@ -764,7 +764,7 @@ void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply,
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
-  Song::SortSongsListAlphabetically(&songs);
+  SortSongsAlphabeticallyIfNeeded(&songs);
 
   for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
@@ -798,7 +798,7 @@ void GroovesharkService::UserLibrarySongsRetrieved(QNetworkReply* reply,
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
-  Song::SortSongsListAlphabetically(&songs);
+  SortSongsAlphabeticallyIfNeeded(&songs);
 
   for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
@@ -1704,8 +1704,15 @@ QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
   return result["result"].toMap();
 }
 
+namespace {
+bool CompareSongs(const QVariant& song1, const QVariant& song2) {
+  return song1.toMap()["Sort"].toInt() < song1.toMap()["Sort"].toInt();
+}
+}
+
 SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
   QVariantList result_songs = result["songs"].toList();
+  qStableSort(result_songs.begin(), result_songs.end(), CompareSongs);
   SongList songs;
   for (int i = 0; i < result_songs.size(); ++i) {
     QVariantMap result_song = result_songs[i].toMap();
@@ -1804,4 +1811,13 @@ QList<GroovesharkService::PlaylistInfo> GroovesharkService::ExtractPlaylistInfo(
   qSort(playlists.begin(), playlists.end());
 
   return playlists;
+}
+
+void GroovesharkService::SortSongsAlphabeticallyIfNeeded(SongList* songs) const {
+  QSettings s;
+  s.beginGroup(GroovesharkService::kSettingsGroup);
+  const bool sort_songs_alphabetically = s.value("sort_alphabetically").toBool();
+  if (sort_songs_alphabetically) {
+    Song::SortSongsListAlphabetically(songs);
+  }
 }

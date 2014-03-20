@@ -135,6 +135,8 @@ signals:
  public slots:
   void Search(const QString& text, bool now = false);
   void ShowConfig();
+  // Refresh all Grooveshark's items, and re-fill them
+  void RefreshItems();
 
  protected:
   struct PlaylistInfo {
@@ -200,8 +202,6 @@ signals:
   void RequestSslErrors(const QList<QSslError>& errors);
 
   void Homepage();
-  // Refresh all Grooveshark's items, and re-fill them
-  void RefreshItems();
 
  private:
   void EnsureMenuCreated();
@@ -247,6 +247,10 @@ signals:
   QList<PlaylistInfo> ExtractPlaylistInfo(const QVariantMap& result);
 
   void ResetSessionId();
+
+  // Sort songs alphabetically only if the "sort_alphabetically" option has been
+  // checked in the preferences settings.
+  void SortSongsAlphabeticallyIfNeeded(SongList* songs) const;
 
   GroovesharkUrlHandler* url_handler_;
 
