@@ -169,7 +169,7 @@ signals:
   void PopularSongsTodayRetrieved(QNetworkReply* reply);
   void SubscribedPlaylistsRetrieved(QNetworkReply* reply);
   void AutoplayTagsRetrieved(QNetworkReply* reply);
-  void PlaylistSongsRetrieved(QNetworkReply* reply, int playlist_id);
+  void PlaylistSongsRetrieved(QNetworkReply* reply, int playlist_id, int request_id);
   void PlaylistSongsSet(QNetworkReply* reply, int playlist_id, int task_id);
   void CreateNewPlaylist();
   void NewPlaylistCreated(QNetworkReply* reply, const QString& name);
@@ -257,6 +257,7 @@ signals:
   QString pending_search_;
 
   int next_pending_search_id_;
+  int next_pending_playlist_retrieve_id_;
 
   QSet<int> pending_retrieve_playlists_;
 

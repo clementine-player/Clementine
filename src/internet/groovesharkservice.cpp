@@ -89,6 +89,7 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       url_handler_(new GroovesharkUrlHandler(this, this)),
       next_pending_search_id_(0),
+      next_pending_playlist_retrieve_id_(0),
       root_(nullptr),
       search_(nullptr),
       popular_month_(nullptr),
@@ -441,7 +442,12 @@ void GroovesharkService::RemoveItems() {
   playlists_.clear();
   subscribed_playlists_parent_ = nullptr;
   subscribed_playlists_.clear();
+  // Cancel any pending requests and mark tasks as finished, in case they weren't
+  // finished yet.
   pending_retrieve_playlists_.clear();
+  app_->task_manager()->SetTaskFinished(task_playlists_id_);
+  app_->task_manager()->SetTaskFinished(task_popular_id_);
+  app_->task_manager()->SetTaskFinished(task_search_id_);
 }
 
 void GroovesharkService::ResetSessionId() {
@@ -713,9 +719,13 @@ void GroovesharkService::UserPlaylistsRetrieved(QNetworkReply* reply) {
 }
 
 void GroovesharkService::PlaylistSongsRetrieved(QNetworkReply* reply,
-                                                int playlist_id) {
+    int playlist_id, int request_id) {
   reply->deleteLater();
-  pending_retrieve_playlists_.remove(playlist_id);
+
+  if (!pending_retrieve_playlists_.remove(request_id)) {
+    // This request has been canceled. Stop here
+    return;
+  }
   PlaylistInfo* playlist_info = subscribed_playlists_.contains(playlist_id)
                                     ? &subscribed_playlists_[playlist_id]
                                     : &playlists_[playlist_id];
@@ -1263,10 +1273,12 @@ void GroovesharkService::RefreshPlaylist(int playlist_id) {
   QList<Param> parameters;
   parameters << Param("playlistID", playlist_id);
   QNetworkReply* reply = CreateRequest("getPlaylistSongs", parameters);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(PlaylistSongsRetrieved(QNetworkReply*, int)), reply,
-             playlist_id);
-  pending_retrieve_playlists_.insert(playlist_id);
+  int id = next_pending_playlist_retrieve_id_++;
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(PlaylistSongsRetrieved(QNetworkReply*, int, int)),
+             reply, playlist_id, id);
+
+  pending_retrieve_playlists_.insert(id);
 }
 
 void GroovesharkService::CreateNewPlaylist() {
