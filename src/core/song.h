@@ -71,6 +71,8 @@ class Song {
   static const QString kManuallyUnsetCover;
   static const QString kEmbeddedCover;
 
+  static const QStringList kValidSuffixes;
+
   static QString JoinSpec(const QString& table);
 
   // Don't change these values - they're stored in the database, and defined
