@@ -254,26 +254,29 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   }
 
   // It's a local file, so check if it looks like a playlist.
-  // Read the first few bytes.
-  QFile file(filename);
-  if (!file.open(QIODevice::ReadOnly)) return Error;
-  QByteArray data(file.read(PlaylistParser::kMagicSize));
+  QString suffix = QFileInfo(filename).suffix().toLower();
+  if (!Song::kValidSuffixes.contains(suffix)) {
+    // Read the first few bytes.
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly)) return Error;
+    QByteArray data(file.read(PlaylistParser::kMagicSize));
 
-  ParserBase* parser = playlist_parser_->ParserForMagic(data);
-  if (!parser) {
-    // Check the file extension as well, maybe the magic failed, or it was a
-    // basic M3U file which is just a plain list of filenames.
-    parser = playlist_parser_->ParserForExtension(QFileInfo(filename).suffix());
-  }
+    ParserBase* parser = playlist_parser_->ParserForMagic(data);
+    if (!parser) {
+      // Check the file extension as well, maybe the magic failed, or it was a
+      // basic M3U file which is just a plain list of filenames.
+      parser = playlist_parser_->ParserForExtension(suffix);
+    }
 
-  if (parser) {
-    qLog(Debug) << "Parsing using" << parser->name();
+    if (parser) {
+      qLog(Debug) << "Parsing using" << parser->name();
 
-    // It's a playlist!
-    ConcurrentRun::Run<void>(
-        &thread_pool_,
-        std::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
-    return WillLoadAsync;
+      // It's a playlist!
+      ConcurrentRun::Run<void>(
+          &thread_pool_,
+          std::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
+      return WillLoadAsync;
+    }
   }
 
   // Not a playlist, so just assume it's a song

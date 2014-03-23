@@ -127,6 +127,18 @@ const QString Song::kFtsUpdateSpec =
 const QString Song::kManuallyUnsetCover = "(unset)";
 const QString Song::kEmbeddedCover = "(embedded)";
 
+const QStringList Song::kValidSuffixes = QStringList() << "mp3"
+                                                       << "ogg"
+                                                       << "flac"
+                                                       << "mpc"
+                                                       << "m4a"
+                                                       << "aac"
+                                                       << "wma"
+                                                       << "mp4"
+                                                       << "spx"
+                                                       << "wav"
+                                                       << "opus";
+
 struct Song::Private : public QSharedData {
   Private();
 
@@ -617,10 +629,7 @@ void Song::InitFromFilePartial(const QString& filename) {
   QFileInfo info(filename);
   d->basefilename_ = info.fileName();
   QString suffix = info.suffix().toLower();
-  if (suffix == "mp3" || suffix == "ogg" || suffix == "flac" ||
-      suffix == "mpc" || suffix == "m4a" || suffix == "aac" ||
-      suffix == "wma" || suffix == "mp4" || suffix == "spx" ||
-      suffix == "wav" || suffix == "opus") {
+  if (kValidSuffixes.contains(suffix)){
     d->valid_ = true;
   } else {
     d->valid_ = false;
