@@ -27,6 +27,7 @@
 #include <qjson/serializer.h>
 
 #include "internetmodel.h"
+#include "oauthenticator.h"
 #include "searchboxwidget.h"
 
 #include "core/application.h"
@@ -44,10 +45,15 @@
 
 const char* SoundCloudService::kApiClientId =
     "2add0f709fcfae1fd7a198ec7573d2d4";
+const char* SoundCloudService::kApiClientSecret =
+    "d1cd7829da2e98e1e0621d85d57a2077";
 
 const char* SoundCloudService::kServiceName = "SoundCloud";
 const char* SoundCloudService::kSettingsGroup = "SoundCloud";
 const char* SoundCloudService::kUrl = "https://api.soundcloud.com/";
+const char* SoundCloudService::kOAuthEndpoint = "https://soundcloud.com/connect";
+const char* SoundCloudService::kOAuthTokenEndpoint = "https://api.soundcloud.com/oauth2/token";
+const char* SoundCloudService::kOAuthScope = "non-expiring";
 const char* SoundCloudService::kHomepage = "http://soundcloud.com/";
 
 const int SoundCloudService::kSearchDelayMsec = 400;
@@ -60,6 +66,8 @@ SoundCloudService::SoundCloudService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       root_(nullptr),
       search_(nullptr),
+      user_tracks_(nullptr),
+      user_activities_(nullptr),
       network_(new NetworkAccessManager(this)),
       context_menu_(nullptr),
       search_box_(new SearchBoxWidget(this)),
@@ -100,20 +108,148 @@ void SoundCloudService::LazyPopulate(QStandardItem* item) {
 }
 
 void SoundCloudService::EnsureItemsCreated() {
-  search_ =
-      new QStandardItem(IconLoader::Load("edit-find"), tr("Search results"));
-  search_->setToolTip(
-      tr("Start typing something on the search box above to "
-         "fill this search results list"));
-  search_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                   InternetModel::Role_PlayBehaviour);
-  root_->appendRow(search_);
+  if (!search_) {
+    search_ =
+        new QStandardItem(IconLoader::Load("edit-find"), tr("Search results"));
+    search_->setToolTip(
+        tr("Start typing something on the search box above to "
+           "fill this search results list"));
+    search_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                     InternetModel::Role_PlayBehaviour);
+    root_->appendRow(search_);
+  }
+  if (!user_tracks_ && !user_activities_ && IsLoggedIn()) {
+    user_tracks_ =
+        new QStandardItem(tr("Tracks"));
+    user_tracks_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                     InternetModel::Role_PlayBehaviour);
+    root_->appendRow(user_tracks_);
+
+    user_activities_ =
+        new QStandardItem(tr("Activities stream"));
+    user_activities_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                     InternetModel::Role_PlayBehaviour);
+    root_->appendRow(user_activities_);
+    RetrieveUserData(); // at least, try to (this will do nothing if user isn't logged)
+  }
 }
 
-QWidget* SoundCloudService::HeaderWidget() const { return search_box_; }
+QWidget* SoundCloudService::HeaderWidget() const {
+  return search_box_;
+}
+
+void SoundCloudService::ShowConfig() {
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_SoundCloud);
+}
 
 void SoundCloudService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
+}
+
+void SoundCloudService::Connect() {
+  OAuthenticator* oauth = new OAuthenticator(
+      kApiClientId, kApiClientSecret, OAuthenticator::RedirectStyle::REMOTE_WITH_STATE, this);
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  QString refresh_token = s.value("refresh_token").toString();
+  if (!refresh_token.isEmpty()) {
+    oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token);
+  } else {
+    oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
+  }
+
+  NewClosure(oauth, SIGNAL(Finished()), this,
+             SLOT(ConnectFinished(OAuthenticator*)), oauth);
+}
+
+void SoundCloudService::ConnectFinished(OAuthenticator* oauth) {
+  oauth->deleteLater();
+
+  access_token_ = oauth->access_token();
+  if (!access_token_.isEmpty()) {
+    emit Connected();
+  }
+  expiry_time_ = oauth->expiry_time();
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("refresh_token", oauth->refresh_token());
+  s.setValue("access_token", access_token_);
+  qLog(Debug) << "access_token" << oauth->access_token();
+  qLog(Debug) << "refresh_token" << oauth->refresh_token();
+  qLog(Debug) << "expiry_time()" << oauth->expiry_time();
+
+  EnsureItemsCreated();
+}
+
+void SoundCloudService::LoadAccessTokenIfEmpty() {
+  if (access_token_.isEmpty()) {
+    QSettings s;
+    s.beginGroup(kSettingsGroup);
+    if (!s.contains("access_token")) {
+      return;
+    }
+    access_token_ = s.value("access_token").toString();
+  }
+}
+
+bool SoundCloudService::IsLoggedIn() {
+  LoadAccessTokenIfEmpty();
+  return !access_token_.isEmpty();
+}
+
+void SoundCloudService::Logout() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  access_token_.clear();
+  s.remove("access_token");
+  root_->removeRow(user_activities_->row());
+  root_->removeRow(user_tracks_->row());
+  user_activities_ = nullptr;
+  user_tracks_ = nullptr;
+}
+
+void SoundCloudService::RetrieveUserData() {
+  LoadAccessTokenIfEmpty();
+  RetrieveUserTracks();
+  RetrieveUserActivities();
+}
+
+void SoundCloudService::RetrieveUserTracks() {
+  QList<Param> parameters;
+  parameters << Param("oauth_token", access_token_);
+  QNetworkReply* reply = CreateRequest("me/tracks", parameters);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(UserTracksRetrieved(QNetworkReply*)), reply);
+}
+
+void SoundCloudService::UserTracksRetrieved(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  SongList songs = ExtractSongs(ExtractResult(reply));
+  // Fill results list
+  for (const Song& song : songs) {
+    QStandardItem* child = CreateSongItem(song);
+    user_tracks_->appendRow(child);
+  }
+}
+
+void SoundCloudService::RetrieveUserActivities() {
+  QList<Param> parameters;
+  parameters << Param("oauth_token", access_token_);
+  QNetworkReply* reply = CreateRequest("me/activities", parameters);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(UserActivitiesRetrieved(QNetworkReply*)), reply);
+}
+
+void SoundCloudService::UserActivitiesRetrieved(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  QList<QStandardItem*> activities = ExtractActivities(ExtractResult(reply));
+  // Fill results list
+  for (QStandardItem* activity : activities) {
+    user_activities_->appendRow(activity);
+  }
 }
 
 void SoundCloudService::Search(const QString& text, bool now) {
@@ -161,7 +297,9 @@ void SoundCloudService::SearchFinished(QNetworkReply* reply, int task_id) {
 }
 
 void SoundCloudService::ClearSearchResults() {
-  if (search_) search_->removeRows(0, search_->rowCount());
+  if (search_) {
+    search_->removeRows(0, search_->rowCount());
+  }
 }
 
 int SoundCloudService::SimpleSearch(const QString& text) {
@@ -226,6 +364,24 @@ QVariant SoundCloudService::ExtractResult(QNetworkReply* reply) {
     qLog(Error) << "Error while parsing SoundCloud result";
   }
   return result;
+}
+
+QList<QStandardItem*> SoundCloudService::ExtractActivities(const QVariant& result) {
+  QList<QStandardItem*> activities;
+  QVariantList q_variant_list = result.toMap()["collection"].toList();
+  for (const QVariant& q : q_variant_list) {
+    QMap<QString, QVariant> activity = q.toMap();
+    const QString type = activity["type"].toString();
+    if (type == "track") {
+      Song song = ExtractSong(activity["origin"].toMap());
+      if (song.is_valid()) {
+        activities << CreateSongItem(song);
+      }
+    } else if (type == "playlist") {
+      // TODO
+    }
+  }
+  return activities;
 }
 
 SongList SoundCloudService::ExtractSongs(const QVariant& result) {

@@ -10,6 +10,8 @@
 #include "core/logging.h"
 #include "internet/localredirectserver.h"
 
+const char* OAuthenticator::kRemoteURL = "https://clementine-data.appspot.com/skydrive";
+
 OAuthenticator::OAuthenticator(const QString& client_id,
                                const QString& client_secret,
                                RedirectStyle redirect, QObject* parent)
@@ -29,14 +31,19 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
   url.addQueryItem("response_type", "code");
   url.addQueryItem("client_id", client_id_);
   QUrl redirect_url;
+
+  const QString port = QString::number(server->url().port());
+
   if (redirect_style_ == RedirectStyle::REMOTE) {
-    const int port = server->url().port();
-    redirect_url =
-        QUrl(QString("https://clementine-data.appspot.com/skydrive?port=%1")
-                 .arg(port));
+    redirect_url = QUrl(kRemoteURL);
+    url.addQueryItem("port", port);
+  } else if (redirect_style_ == RedirectStyle::REMOTE_WITH_STATE) {
+    redirect_url = QUrl(kRemoteURL);
+    url.addQueryItem("state", port);
   } else {
     redirect_url = server->url();
   }
+
   url.addQueryItem("redirect_uri", redirect_url.toString());
   url.addQueryItem("scope", scope);
 
@@ -66,7 +73,8 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code,
                                         const QUrl& url) {
   typedef QPair<QString, QString> Param;
   QList<Param> parameters;
-  parameters << Param("code", code) << Param("client_id", client_id_)
+  parameters << Param("code", code)
+             << Param("client_id", client_id_)
              << Param("client_secret", client_secret_)
              << Param("grant_type", "authorization_code")
       // Even though we don't use this URI anymore, it must match the

@@ -197,6 +197,7 @@ set(SOURCES
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
   internet/soundcloudservice.cpp
+  internet/soundcloudsettingspage.cpp
   internet/spotifyserver.cpp
   internet/spotifyservice.cpp
   internet/spotifysettingspage.cpp
@@ -497,6 +498,7 @@ set(HEADERS
   internet/somafmservice.h
   internet/somafmurlhandler.h
   internet/soundcloudservice.h
+  internet/soundcloudsettingspage.h
   internet/spotifyserver.h
   internet/spotifyservice.h
   internet/spotifysettingspage.h
@@ -689,6 +691,7 @@ set(UI
   internet/magnatunedownloaddialog.ui
   internet/magnatunesettingspage.ui
   internet/searchboxwidget.ui
+  internet/soundcloudsettingspage.ui
   internet/spotifysettingspage.ui
   internet/subsonicsettingspage.ui
 

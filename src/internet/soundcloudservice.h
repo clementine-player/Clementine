@@ -22,6 +22,7 @@
 #include "internetservice.h"
 
 class NetworkAccessManager;
+class OAuthenticator;
 class SearchBoxWidget;
 
 class QMenu;
@@ -42,15 +43,26 @@ class SoundCloudService : public InternetService {
   void ShowContextMenu(const QPoint& global_pos);
   QWidget* HeaderWidget() const;
 
+  void Connect();
+  bool IsLoggedIn();
+  void Logout();
+
   int SimpleSearch(const QString& query);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
 
-signals:
+ signals:
   void SimpleSearchResults(int id, SongList songs);
+  void Connected();
+
+ public slots:
+  void ShowConfig();
 
  private slots:
+  void ConnectFinished(OAuthenticator* oauth);
+  void UserTracksRetrieved(QNetworkReply* reply);
+  void UserActivitiesRetrieved(QNetworkReply* reply);
   void Search(const QString& text, bool now = false);
   void DoSearch();
   void SearchFinished(QNetworkReply* reply, int task);
@@ -59,6 +71,12 @@ signals:
   void Homepage();
 
  private:
+  // Try to load "access_token" from preferences if the current access_token's
+  // value is empty
+  void LoadAccessTokenIfEmpty();
+  void RetrieveUserData();
+  void RetrieveUserTracks();
+  void RetrieveUserActivities();
   void ClearSearchResults();
   void EnsureItemsCreated();
   void EnsureMenuCreated();
@@ -66,11 +84,15 @@ signals:
                                const QList<QPair<QString, QString> >& params);
   // Convenient function for extracting result from reply
   QVariant ExtractResult(QNetworkReply* reply);
+  // Returns items directly, as activities can be playlists or songs
+  QList<QStandardItem*> ExtractActivities(const QVariant& result);
   SongList ExtractSongs(const QVariant& result);
   Song ExtractSong(const QVariantMap& result_song);
 
   QStandardItem* root_;
   QStandardItem* search_;
+  QStandardItem* user_tracks_;
+  QStandardItem* user_activities_;
 
   NetworkAccessManager* network_;
 
@@ -82,8 +104,13 @@ signals:
 
   QByteArray api_key_;
 
+  QString access_token_;
+  QDateTime expiry_time_;
+
   static const char* kUrl;
-  static const char* kUrlCover;
+  static const char* kOAuthEndpoint;
+  static const char* kOAuthTokenEndpoint;
+  static const char* kOAuthScope;
   static const char* kHomepage;
 
   static const int kSongSearchLimit;
@@ -91,6 +118,7 @@ signals:
   static const int kSearchDelayMsec;
 
   static const char* kApiClientId;
+  static const char* kApiClientSecret;
 };
 
 #endif  // SOUNDCLOUDSERVICE_H

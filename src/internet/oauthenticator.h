@@ -18,6 +18,10 @@ class OAuthenticator : public QObject {
     // Redirect via data.clementine-player.org for when localhost is
     // unsupported (eg. Skydrive).
     REMOTE = 1,
+    // Same as REMOTE, but pass the 'port' parameter as 'state' parameter, for
+    // services which don't allow other parameters to be append to the redirect
+    // URI (e.g. SoundCloud)
+    REMOTE_WITH_STATE = 2
   };
 
   OAuthenticator(const QString& client_id, const QString& client_secret,
@@ -44,6 +48,8 @@ signals:
   void RefreshAccessTokenFinished(QNetworkReply* reply);
 
  private:
+  static const char* kRemoteURL;
+
   QByteArray ParseHttpRequest(const QByteArray& request) const;
   void RequestAccessToken(const QByteArray& code, const QUrl& url);
   void SetExpiryTime(int expires_in_seconds);

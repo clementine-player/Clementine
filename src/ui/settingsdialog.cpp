@@ -38,6 +38,7 @@
 #include "internet/digitallyimportedsettingspage.h"
 #include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
+#include "internet/soundcloudsettingspage.h"
 #include "internet/spotifysettingspage.h"
 #include "internet/subsonicsettingspage.h"
 #include "internet/ubuntuonesettingspage.h"
@@ -176,6 +177,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_Box, new BoxSettingsPage(this), providers);
 #endif
 
+  AddPage(Page_SoundCloud, new SoundCloudSettingsPage(this), providers);
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
 
 #ifdef HAVE_VK
