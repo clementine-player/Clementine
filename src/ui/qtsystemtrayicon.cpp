@@ -36,8 +36,7 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
       action_stop_(nullptr),
       action_stop_after_this_track_(nullptr),
       action_mute_(nullptr),
-      action_love_(nullptr),
-      action_ban_(nullptr) {
+      action_love_(nullptr) {
   QIcon theme_icon = IconLoader::Load("clementine-panel");
   QIcon theme_icon_grey = IconLoader::Load("clementine-panel-grey");
 
@@ -97,7 +96,7 @@ bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
 void QtSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
                                  QAction* stop, QAction* stop_after,
                                  QAction* next, QAction* mute, QAction* love,
-                                 QAction* ban, QAction* quit) {
+                                 QAction* quit) {
   // Creating new actions and connecting them to old ones. This allows us to
   // use old actions without displaying shortcuts that can not be used when
   // Clementine's window is hidden
@@ -123,10 +122,6 @@ void QtSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
       menu_->addAction(love->icon(), love->text(), love, SLOT(trigger()));
   action_love_->setVisible(love->isVisible());
   action_love_->setEnabled(love->isEnabled());
-  action_ban_ =
-      menu_->addAction(ban->icon(), ban->text(), ban, SLOT(trigger()));
-  action_ban_->setVisible(ban->isVisible());
-  action_ban_->setEnabled(ban->isEnabled());
 #endif
 
   menu_->addSeparator();
@@ -171,8 +166,7 @@ void QtSystemTrayIcon::SetPaused() {
   action_play_pause_->setEnabled(true);
 }
 
-void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_ban,
-                                  bool enable_love) {
+void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_love) {
   SystemTrayIcon::SetPlaying();
 
   action_stop_->setEnabled(true);
@@ -181,7 +175,6 @@ void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_ban,
   action_play_pause_->setText(tr("Pause"));
   action_play_pause_->setEnabled(enable_play_pause);
 #ifdef HAVE_LIBLASTFM
-  action_ban_->setEnabled(enable_ban);
   action_love_->setEnabled(enable_love);
 #endif
 }
@@ -197,14 +190,12 @@ void QtSystemTrayIcon::SetStopped() {
   action_play_pause_->setEnabled(true);
 
 #ifdef HAVE_LIBLASTFM
-  action_ban_->setEnabled(false);
   action_love_->setEnabled(false);
 #endif
 }
 
 void QtSystemTrayIcon::LastFMButtonVisibilityChanged(bool value) {
 #ifdef HAVE_LIBLASTFM
-  action_ban_->setVisible(value);
   action_love_->setVisible(value);
 #endif
 }
@@ -212,12 +203,6 @@ void QtSystemTrayIcon::LastFMButtonVisibilityChanged(bool value) {
 void QtSystemTrayIcon::LastFMButtonLoveStateChanged(bool value) {
 #ifdef HAVE_LIBLASTFM
   action_love_->setEnabled(value);
-#endif
-}
-
-void QtSystemTrayIcon::LastFMButtonBanStateChanged(bool value) {
-#ifdef HAVE_LIBLASTFM
-  action_ban_->setEnabled(value);
 #endif
 }
 

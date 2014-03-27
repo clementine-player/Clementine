@@ -76,7 +76,7 @@ void Player::Init() {
   engine_->SetVolume(settings_.value("volume", 50).toInt());
 
 #ifdef HAVE_LIBLASTFM
-  lastfm_ = InternetModel::Service<LastFMService>();
+  lastfm_ = app_->scrobbler();
 #endif
 }
 

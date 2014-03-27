@@ -33,7 +33,7 @@ class SystemTrayIcon : public QObject {
   // Called once to create the icon's context menu
   virtual void SetupMenu(QAction* previous, QAction* play, QAction* stop,
                          QAction* stop_after, QAction* next, QAction* mute,
-                         QAction* love, QAction* ban, QAction* quit) = 0;
+                         QAction* love, QAction* quit) = 0;
 
   virtual bool IsVisible() const { return true; }
   virtual void SetVisible(bool visible) {}
@@ -54,11 +54,10 @@ class SystemTrayIcon : public QObject {
   void SetProgress(int percentage);
   virtual void SetPaused();
   virtual void SetPlaying(bool enable_play_pause = false,
-                          bool enable_ban = false, bool enable_love = false);
+                          bool enable_love = false);
   virtual void SetStopped();
   virtual void LastFMButtonVisibilityChanged(bool value) {}
   virtual void LastFMButtonLoveStateChanged(bool value) {}
-  virtual void LastFMButtonBanStateChanged(bool value) {}
   virtual void MuteButtonStateChanged(bool value) {}
 
 signals:

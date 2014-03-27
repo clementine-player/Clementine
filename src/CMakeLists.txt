@@ -494,6 +494,7 @@ set(HEADERS
   internet/magnatunesettingspage.h
   internet/oauthenticator.h
   internet/savedradio.h
+  internet/scrobbler.h
   internet/searchboxwidget.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
@@ -817,13 +818,10 @@ optional_source(ENABLE_VISUALISATIONS
 optional_source(HAVE_LIBLASTFM
   SOURCES
     covers/lastfmcoverprovider.cpp
-    globalsearch/lastfmsearchprovider.cpp
     internet/fixlastfm.cpp
     internet/lastfmcompat.cpp
     internet/lastfmservice.cpp
     internet/lastfmsettingspage.cpp
-    internet/lastfmstationdialog.cpp
-    internet/lastfmurlhandler.cpp
     songinfo/echonestsimilarartists.cpp
     songinfo/echonesttags.cpp
     songinfo/lastfmtrackinfoprovider.cpp
@@ -832,14 +830,12 @@ optional_source(HAVE_LIBLASTFM
     covers/lastfmcoverprovider.h
     internet/lastfmservice.h
     internet/lastfmsettingspage.h
-    internet/lastfmstationdialog.h
     songinfo/echonestsimilarartists.h
     songinfo/echonesttags.h
     songinfo/lastfmtrackinfoprovider.h
     songinfo/tagwidget.h
   UI
     internet/lastfmsettingspage.ui
-    internet/lastfmstationdialog.ui
 )
 
 

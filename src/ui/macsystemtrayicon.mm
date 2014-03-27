@@ -177,7 +177,7 @@ MacSystemTrayIcon::~MacSystemTrayIcon() {}
 void MacSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
                                   QAction* stop, QAction* stop_after,
                                   QAction* next, QAction* mute, QAction* love,
-                                  QAction* ban, QAction* quit) {
+                                  QAction* quit) {
   p_.reset(new MacSystemTrayIconPrivate());
   SetupMenuItem(previous);
   SetupMenuItem(play);
@@ -188,7 +188,6 @@ void MacSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
   SetupMenuItem(mute);
   p_->AddSeparator();
   SetupMenuItem(love);
-  SetupMenuItem(ban);
   Q_UNUSED(quit);  // Mac already has a Quit item.
 }
 

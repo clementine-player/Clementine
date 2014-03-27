@@ -39,6 +39,10 @@
 #include "podcasts/podcastdownloader.h"
 #include "podcasts/podcastupdater.h"
 
+#ifdef HAVE_LIBLASTFM
+#include "internet/lastfmservice.h"
+#endif  // HAVE_LIBLASTFM
+
 #ifdef HAVE_MOODBAR
 #include "moodbar/moodbarcontroller.h"
 #include "moodbar/moodbarloader.h"
@@ -69,7 +73,8 @@ Application::Application(QObject* parent)
       moodbar_loader_(nullptr),
       moodbar_controller_(nullptr),
       network_remote_(nullptr),
-      network_remote_helper_(nullptr) {
+      network_remote_helper_(nullptr),
+      scrobbler_(nullptr) {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
   tag_reader_client_->Start();
@@ -115,6 +120,10 @@ Application::Application(QObject* parent)
   // to start the remote. Without the playlist manager clementine can
   // crash when a client connects before the manager is initialized!
   network_remote_helper_ = new NetworkRemoteHelper(this);
+
+#ifdef HAVE_LIBLASTFM
+  scrobbler_ = new LastFMService(this, this);
+#endif  // HAVE_LIBLASTFM
 
   library_->Init();
 

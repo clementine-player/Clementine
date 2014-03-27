@@ -70,10 +70,7 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
           SLOT(RateCurrentSong(double)));
 
 #ifdef HAVE_LIBLASTFM
-  connect(this, SIGNAL(Love()), InternetModel::Service<LastFMService>(),
-          SLOT(Love()));
-  connect(this, SIGNAL(Ban()), InternetModel::Service<LastFMService>(),
-          SLOT(Ban()));
+  connect(this, SIGNAL(Love()), app_->scrobbler(), SLOT(Love()));
 #endif
 }
 
@@ -261,7 +258,6 @@ void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
 }
 
 void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {
-
   // Always sned the Clementine infos
   emit SendClementineInfo();
 

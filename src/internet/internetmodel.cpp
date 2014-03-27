@@ -38,9 +38,6 @@
 #include "podcasts/podcastservice.h"
 #include "smartplaylists/generatormimedata.h"
 
-#ifdef HAVE_LIBLASTFM
-#include "lastfmservice.h"
-#endif
 #ifdef HAVE_GOOGLE_DRIVE
 #include "googledriveservice.h"
 #endif
@@ -57,7 +54,7 @@
 #include "boxservice.h"
 #endif
 #ifdef HAVE_VK
-  #include "vkservice.h"
+#include "vkservice.h"
 #endif
 
 using smart_playlists::Generator;
@@ -80,9 +77,6 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new DigitallyImportedService(app, this));
   AddService(new IcecastService(app, this));
   AddService(new JamendoService(app, this));
-#ifdef HAVE_LIBLASTFM
-  AddService(new LastFMService(app, this));
-#endif
 #ifdef HAVE_GOOGLE_DRIVE
   AddService(new GoogleDriveService(app, this));
 #endif
@@ -172,13 +166,13 @@ InternetService* InternetModel::ServiceByName(const QString& name) {
   return nullptr;
 }
 
-InternetService* InternetModel::ServiceForItem(const QStandardItem* item)
-    const {
+InternetService* InternetModel::ServiceForItem(
+    const QStandardItem* item) const {
   return ServiceForIndex(indexFromItem(item));
 }
 
-InternetService* InternetModel::ServiceForIndex(const QModelIndex& index)
-    const {
+InternetService* InternetModel::ServiceForIndex(
+    const QModelIndex& index) const {
   QModelIndex current_index = index;
   while (current_index.isValid()) {
     InternetService* service =

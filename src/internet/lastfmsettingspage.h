@@ -37,12 +37,10 @@ class LastFMSettingsPage : public SettingsPage {
   void Login();
   void AuthenticationComplete(bool success, const QString& error_message);
   void Logout();
-  void UpdatedSubscriberStatus(bool is_subscriber);
 
  private:
   LastFMService* service_;
   Ui_LastFMSettingsPage* ui_;
-  QMovie* loading_icon_;
 
   bool waiting_for_auth_;
 

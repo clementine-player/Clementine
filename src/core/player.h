@@ -31,7 +31,7 @@
 #include "playlist/playlistitem.h"
 
 class Application;
-class LastFMService;
+class Scrobbler;
 
 class PlayerInterface : public QObject {
   Q_OBJECT
@@ -173,7 +173,7 @@ class Player : public PlayerInterface {
 
  private:
   Application* app_;
-  LastFMService* lastfm_;
+  Scrobbler* lastfm_;
   QSettings settings_;
 
   PlaylistItemPtr current_item_;
