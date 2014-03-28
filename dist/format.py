@@ -42,6 +42,9 @@ def main():
       continue
 
     path = os.path.join(root_dir, filename)
+    if not os.path.exists(path):
+      # Probably a deletion
+      continue
     original = open(path).read()
     response = urllib2.urlopen(args.url, original)
     formatted = response.read()
