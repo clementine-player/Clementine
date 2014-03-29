@@ -62,6 +62,7 @@ pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
+pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(QCA qca2)
 pkg_check_modules(QJSON REQUIRED QJson)
@@ -257,6 +258,10 @@ optional_component(MOODBAR ON "Moodbar support"
 optional_component(SPARKLE ON "Sparkle integration"
   DEPENDS "Mac OS X" APPLE
   DEPENDS "Sparkle" SPARKLE
+)
+
+optional_component(LIBPULSE ON "Pulse audio integration"
+  DEPENDS "libpulse" LIBPULSE_FOUND
 )
 
 optional_component(VISUALISATIONS ON "Visualisations")

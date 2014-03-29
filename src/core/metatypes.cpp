@@ -6,6 +6,7 @@
 #include "config.h"
 #include "covers/albumcoverfetcher.h"
 #include "engines/enginebase.h"
+#include "engines/gstengine.h"
 #include "globalsearch/searchprovider.h"
 #include "internet/digitallyimportedclient.h"
 #include "internet/geolocator.h"
@@ -26,8 +27,6 @@
 #include "dbus/metatypes.h"
 #endif
 
-class GstBuffer;
-class GstElement;
 class GstEnginePipeline;
 class QNetworkReply;
 
@@ -47,6 +46,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<Geolocator::LatLng>("Geolocator::LatLng");
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");
+  qRegisterMetaType<GstEngine::OutputDetails>("GstEngine::OutputDetails");
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
   qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
   qRegisterMetaType<PlaylistItemPtr>("PlaylistItemPtr");

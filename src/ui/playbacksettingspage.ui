@@ -170,9 +170,6 @@
    </item>
    <item>
     <widget class="QGroupBox" name="replaygain_group">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
      <property name="title">
       <string>Replay Gain</string>
      </property>
@@ -259,11 +256,8 @@
    </item>
    <item>
     <widget class="QGroupBox" name="gst_group">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
      <property name="title">
-      <string>GStreamer audio engine</string>
+      <string>Audio output</string>
      </property>
      <layout class="QFormLayout" name="formLayout_3">
       <property name="fieldGrowthPolicy">
@@ -272,47 +266,21 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Output plugin</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="gst_plugin">
-        <item>
-         <property name="text">
-          <string>Choose automatically</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="gst_device_label">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
          <string>Output device</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="LineEdit" name="gst_device">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="hint" stdset="0">
-         <string>Leave blank for the default.  Examples: &quot;/dev/dsp&quot;, &quot;front&quot;, etc.</string>
-        </property>
-       </widget>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="gst_output"/>
       </item>
-      <item row="2" column="0">
+      <item row="1" column="0">
        <widget class="QLabel" name="buffer_duration_label">
         <property name="text">
          <string>Buffer duration</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="1" column="1">
        <widget class="QSpinBox" name="buffer_duration">
         <property name="suffix">
          <string> ms</string>
@@ -325,7 +293,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="2">
+      <item row="2" column="0" colspan="2">
        <widget class="QCheckBox" name="mono_playback">
         <property name="toolTip">
          <string>Changing mono playback preference will be effective for the next playing songs</string>
@@ -354,11 +322,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>LineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>widgets/lineedit.h</header>
-  </customwidget>
   <customwidget>
    <class>StickySlider</class>
    <extends>QSlider</extends>

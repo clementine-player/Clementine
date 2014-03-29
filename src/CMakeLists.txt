@@ -138,6 +138,7 @@ set(SOURCES
   devices/deviceviewcontainer.cpp
   devices/filesystemdevice.cpp
 
+  engines/devicefinder.cpp
   engines/enginebase.cpp
   engines/gstengine.cpp
   engines/gstenginepipeline.cpp
@@ -1142,24 +1143,32 @@ optional_source(HAVE_VK
   INCLUDE_DIRECTORIES 
     ${VREEN_INCLUDE_DIRS}
   SOURCES
+    globalsearch/vksearchprovider.cpp
+    internet/vkconnection.cpp
+    internet/vkmusiccache.cpp
+    internet/vksearchdialog.cpp
     internet/vkservice.cpp
     internet/vksettingspage.cpp
     internet/vkurlhandler.cpp
-    globalsearch/vksearchprovider.cpp
-    internet/vkmusiccache.cpp
-    internet/vksearchdialog.cpp
-    internet/vkconnection.cpp
   HEADERS
+    globalsearch/vksearchprovider.h
+    internet/vkconnection.h
+    internet/vkmusiccache.h
+    internet/vksearchdialog.h
     internet/vkservice.h
     internet/vksettingspage.h
     internet/vkurlhandler.h
-    globalsearch/vksearchprovider.h
-    internet/vkmusiccache.h
-    internet/vksearchdialog.h
-    internet/vkconnection.h
   UI
-    internet/vksettingspage.ui
     internet/vksearchdialog.ui
+    internet/vksettingspage.ui
+)
+
+# Pulse audio integration
+optional_source(HAVE_LIBPULSE
+  INCLUDE_DIRECTORIES
+    ${LIBPULSE_INCLUDE_DIRS}
+  SOURCES
+    engines/pulsedevicefinder.cpp
 )
 
 # Hack to add Clementine to the Unity system tray whitelist
@@ -1283,6 +1292,10 @@ if(HAVE_SPOTIFY_DOWNLOADER)
   )
   link_directories(${QCA_LIBRARY_DIRS})
 endif(HAVE_SPOTIFY_DOWNLOADER)
+
+if(HAVE_LIBPULSE)
+  target_link_libraries(clementine_lib ${LIBPULSE_LIBRARIES})
+endif()
 
 if (APPLE)
   target_link_libraries(clementine_lib

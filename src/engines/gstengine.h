@@ -41,6 +41,7 @@
 class QTimer;
 class QTimerEvent;
 
+class DeviceFinder;
 class GstEnginePipeline;
 class TaskManager;
 
@@ -56,20 +57,21 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   GstEngine(TaskManager* task_manager);
   ~GstEngine();
 
-  struct PluginDetails {
-    QString name;
-    QString long_name;
-    QString author;
+  struct OutputDetails {
     QString description;
+    QString icon_name;
+
+    QString gstreamer_plugin_name;
+    QString device_name;
   };
-  typedef QList<PluginDetails> PluginDetailsList;
+  typedef QList<OutputDetails> OutputDetailsList;
 
   static const char* kSettingsGroup;
   static const char* kAutoSink;
 
   bool Init();
   void EnsureInitialised() { initialising_.waitForFinished(); }
-  static void InitialiseGstreamer();
+  void InitialiseGstreamer();
 
   int AddBackgroundStream(const QUrl& url);
   void StopBackgroundStream(int id);
@@ -80,11 +82,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   Engine::State state() const;
   const Engine::Scope& scope();
 
-  PluginDetailsList GetOutputsList() const {
-    return GetPluginList("Sink/Audio");
-  }
-  static bool DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(
-      const QString& name);
+  OutputDetailsList GetOutputsList() const;
 
   GstElement* CreateElement(const QString& factoryName, GstElement* bin = 0);
 
@@ -142,6 +140,13 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   typedef QPair<quint64, int> PlayFutureWatcherArg;
   typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg>
       PlayFutureWatcher;
+
+  struct PluginDetails {
+    QString name;
+    QString description;
+  };
+
+  typedef QList<PluginDetails> PluginDetailsList;
 
   static void SetEnv(const char* key, const QString& value);
   PluginDetailsList GetPluginList(const QString& classname) const;
@@ -216,6 +221,10 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   bool is_fading_out_to_pause_;
   bool has_faded_out_;
+
+  QList<DeviceFinder*> device_finders_;
 };
+
+Q_DECLARE_METATYPE(GstEngine::OutputDetails)
 
 #endif /*AMAROK_GSTENGINE_H*/

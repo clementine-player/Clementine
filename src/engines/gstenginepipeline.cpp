@@ -221,12 +221,11 @@ bool GstEnginePipeline::Init() {
   // Create the sink
   if (!(audiosink_ = engine_->CreateElement(sink_, audiobin_))) return false;
 
-  if (GstEngine::
-          DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(
-              sink_) &&
-      !device_.isEmpty())
+  if (g_object_class_find_property(G_OBJECT_CLASS(audiosink_), "device") &&
+      !device_.isEmpty()) {
     g_object_set(G_OBJECT(audiosink_), "device", device_.toUtf8().constData(),
                  nullptr);
+  }
 
   // Create all the other elements
   GstElement* tee, *probe_queue, *probe_converter, *probe_sink, *audio_queue,

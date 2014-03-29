@@ -40,6 +40,7 @@
 #include <gst/gst.h>
 
 #include "config.h"
+#include "devicefinder.h"
 #include "gstenginepipeline.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
@@ -47,6 +48,10 @@
 
 #ifdef HAVE_MOODBAR
 #include "gst/moodbar/spectrum.h"
+#endif
+
+#ifdef HAVE_LIBPULSE
+#include "engines/pulsedevicefinder.h"
 #endif
 
 using std::shared_ptr;
@@ -97,10 +102,12 @@ GstEngine::~GstEngine() {
 
   // Save configuration
   gst_deinit();
+
+  qDeleteAll(device_finders_);
 }
 
 bool GstEngine::Init() {
-  initialising_ = QtConcurrent::run(&GstEngine::InitialiseGstreamer);
+  initialising_ = QtConcurrent::run(this, &GstEngine::InitialiseGstreamer);
   return true;
 }
 
@@ -110,6 +117,33 @@ void GstEngine::InitialiseGstreamer() {
 #ifdef HAVE_MOODBAR
   gstmoodbar_register_static();
 #endif
+
+  QSet<QString> plugin_names;
+  for (const PluginDetails& plugin : GetPluginList("Sink/Audio")) {
+    plugin_names.insert(plugin.name);
+  }
+
+  QList<DeviceFinder*> device_finders;
+#ifdef HAVE_LIBPULSE
+  device_finders.append(new PulseDeviceFinder);
+#endif
+
+  for (DeviceFinder* finder : device_finders) {
+    if (!plugin_names.contains(finder->gstreamer_sink())) {
+      qLog(Info) << "Skipping DeviceFinder for" << finder->gstreamer_sink()
+                 << "known plugins:" << plugin_names;
+      delete finder;
+      continue;
+    }
+    if (!finder->Initialise()) {
+      qLog(Warning) << "Failed to initialise DeviceFinder for"
+                    << finder->gstreamer_sink();
+      delete finder;
+      continue;
+    }
+
+    device_finders_.append(finder);
+  }
 }
 
 void GstEngine::ReloadSettings() {
@@ -623,8 +657,6 @@ GstElement* GstEngine::CreateElement(const QString& factoryName,
 
 GstEngine::PluginDetailsList GstEngine::GetPluginList(const QString& classname)
     const {
-  const_cast<GstEngine*>(this)->EnsureInitialised();
-
   PluginDetailsList ret;
 
   GstRegistry* registry = gst_registry_get_default();
@@ -637,9 +669,7 @@ GstEngine::PluginDetailsList GstEngine::GetPluginList(const QString& classname)
     if (QString(factory->details.klass).contains(classname)) {
       PluginDetails details;
       details.name = QString::fromUtf8(GST_PLUGIN_FEATURE_NAME(p->data));
-      details.long_name = QString::fromUtf8(factory->details.longname);
-      details.description = QString::fromUtf8(factory->details.description);
-      details.author = QString::fromUtf8(factory->details.author);
+      details.description = QString::fromUtf8(factory->details.longname);
       ret << details;
     }
     p = g_list_next(p);
@@ -694,11 +724,6 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url,
   if (!ret->InitFromUrl(url, end_nanosec)) ret.reset();
 
   return ret;
-}
-
-bool GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(
-    const QString& name) {
-  return (name == "alsasink" || name == "osssink" || name == "pulsesink");
 }
 
 void GstEngine::AddBufferConsumer(BufferConsumer* consumer) {
@@ -788,4 +813,39 @@ void GstEngine::BufferingFinished() {
     task_manager_->SetTaskFinished(buffering_task_id_);
     buffering_task_id_ = -1;
   }
+}
+
+GstEngine::OutputDetailsList GstEngine::GetOutputsList() const {
+  const_cast<GstEngine*>(this)->EnsureInitialised();
+
+  OutputDetailsList ret;
+
+  OutputDetails default_output;
+  default_output.description = tr("Choose automatically");
+  default_output.gstreamer_plugin_name = kAutoSink;
+  ret.append(default_output);
+
+  for (DeviceFinder* finder : device_finders_) {
+    for (const DeviceFinder::Device& device : finder->ListDevices()) {
+      OutputDetails output;
+      output.description = device.description;
+      output.icon_name = device.icon_name;
+      output.gstreamer_plugin_name = finder->gstreamer_sink();
+      output.device_name = device.name;
+      ret.append(output);
+    }
+  }
+
+  for (const PluginDetails& plugin : GetPluginList("Sink/Audio")) {
+    if (plugin.name == kAutoSink) {
+      continue;
+    }
+
+    OutputDetails output;
+    output.description = tr("Default device on %1").arg(plugin.description);
+    output.gstreamer_plugin_name = plugin.name;
+    ret.append(output);
+  }
+
+  return ret;
 }
