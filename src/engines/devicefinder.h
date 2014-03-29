@@ -51,7 +51,7 @@ class DeviceFinder {
  protected:
   explicit DeviceFinder(const QString& gstreamer_sink);
 
-  QString GuessIconName(const QString& description) const;
+  static QString GuessIconName(const QString& description);
 
  private:
   QString gstreamer_sink_;

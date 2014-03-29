@@ -18,6 +18,7 @@
 #include <limits>
 
 #include <QCoreApplication>
+#include <QUuid>
 
 #include "bufferconsumer.h"
 #include "config.h"
@@ -234,6 +235,17 @@ bool GstEnginePipeline::Init() {
                      "device", device_.toString().toUtf8().constData(),
                      nullptr);
         break;
+
+      #ifdef Q_OS_WIN32
+      case QVariant::ByteArray: {
+        GUID guid = QUuid(device_.toByteArray());
+        g_object_set(G_OBJECT(audiosink_),
+                     "device", &guid,
+                     nullptr);
+        break;
+      }
+      #endif  // Q_OS_WIN32
+
       default:
         qLog(Warning) << "Unknown device type" << device_;
         break;

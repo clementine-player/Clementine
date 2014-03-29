@@ -58,6 +58,10 @@
 #include "engines/osxdevicefinder.h"
 #endif
 
+#ifdef Q_OS_WIN32
+#include "engines/directsounddevicefinder.h"
+#endif
+
 using std::shared_ptr;
 using std::vector;
 
@@ -133,6 +137,9 @@ void GstEngine::InitialiseGstreamer() {
 #endif
 #ifdef Q_OS_DARWIN
   device_finders.append(new OsxDeviceFinder);
+#endif
+#ifdef Q_OS_WIN32
+  device_finders.append(new DirectSoundDeviceFinder);
 #endif
 
   for (DeviceFinder* finder : device_finders) {
@@ -843,15 +850,20 @@ GstEngine::OutputDetailsList GstEngine::GetOutputsList() const {
     }
   }
 
-  for (const PluginDetails& plugin : GetPluginList("Sink/Audio")) {
-    if (plugin.name == kAutoSink) {
-      continue;
-    }
+  PluginDetailsList plugins = GetPluginList("Sink/Audio");
+  // If there are only 2 plugins (autoaudiosink and the OS' default), don't add
+  // any, since the OS' default would be redundant.
+  if (plugins.count() > 2) {
+    for (const PluginDetails& plugin : plugins) {
+      if (plugin.name == kAutoSink) {
+        continue;
+      }
 
-    OutputDetails output;
-    output.description = tr("Default device on %1").arg(plugin.description);
-    output.gstreamer_plugin_name = plugin.name;
-    ret.append(output);
+      OutputDetails output;
+      output.description = tr("Default device on %1").arg(plugin.description);
+      output.gstreamer_plugin_name = plugin.name;
+      ret.append(output);
+    }
   }
 
   return ret;

@@ -876,6 +876,7 @@ optional_source(APPLE
 # Platform specific - Windows
 optional_source(WIN32
   SOURCES
+    engines/directsounddevicefinder.cpp
     networkremote/tinysvcmdns.cpp
     widgets/osd_win.cpp
   INCLUDE_DIRECTORIES
@@ -1326,6 +1327,7 @@ if (WIN32)
     ${QTSPARKLE_LIBRARIES}
     tinysvcmdns
     qtwin
+    dsound
   )
 endif (WIN32)
 

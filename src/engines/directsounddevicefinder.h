@@ -15,21 +15,29 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "devicefinder.h"
+#ifndef DIRECTSOUNDDEVICEFINDER_H
+#define DIRECTSOUNDDEVICEFINDER_H
 
-DeviceFinder::DeviceFinder(const QString& gstreamer_sink)
-    : gstreamer_sink_(gstreamer_sink) {
-}
+#include <rpc.h>
 
-QString DeviceFinder::GuessIconName(const QString& description) {
-  QString description_lower = description.toLower();
-  if (description_lower.contains("headset")) {
-    return "audio-headset";
-  }
+#include "engines/devicefinder.h"
 
-  if (description_lower.contains("headphone")) {
-    return "audio-headphones";
-  }
+class DirectSoundDeviceFinder : public DeviceFinder {
+ public:
+  DirectSoundDeviceFinder();
 
-  return "audio-card";
-}
+  virtual bool Initialise() { return true; }
+  virtual QList<Device> ListDevices();
+
+ private:
+  struct State {
+    QList<Device> devices;
+  };
+
+  static BOOL EnumerateCallback(LPGUID guid,
+                                LPCSTR description,
+                                LPCSTR module,
+                                LPVOID state_voidptr) __attribute__((stdcall));
+};
+
+#endif // DIRECTSOUNDDEVICEFINDER_H
