@@ -18,15 +18,15 @@
 #ifndef DEVICEFINDER_H
 #define DEVICEFINDER_H
 
-#include <QIcon>
 #include <QStringList>
+#include <QVariant>
 
 // Finds audio output devices that can be used with a given gstreamer sink.
 class DeviceFinder {
  public:
   struct Device {
     // The value to set as the "device" gstreamer property.
-    QString name;
+    QVariant device_property_value;
 
     // A human readable description of the device.
     QString description;
@@ -34,6 +34,8 @@ class DeviceFinder {
     // An icon to use in the UI.
     QString icon_name;
   };
+
+  virtual ~DeviceFinder() {}
 
   // The name of the gstreamer sink element that devices found by this class
   // can be used with.
@@ -48,6 +50,8 @@ class DeviceFinder {
 
  protected:
   explicit DeviceFinder(const QString& gstreamer_sink);
+
+  QString GuessIconName(const QString& description) const;
 
  private:
   QString gstreamer_sink_;

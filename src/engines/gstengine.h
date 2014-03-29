@@ -62,7 +62,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
     QString icon_name;
 
     QString gstreamer_plugin_name;
-    QString device_name;
+    QVariant device_property_value;
   };
   typedef QList<OutputDetails> OutputDetailsList;
 
@@ -181,7 +181,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   QFuture<void> initialising_;
 
   QString sink_;
-  QString device_;
+  QVariant device_;
 
   std::shared_ptr<GstEnginePipeline> current_pipeline_;
   std::shared_ptr<GstEnginePipeline> fadeout_pipeline_;

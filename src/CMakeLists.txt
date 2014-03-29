@@ -860,6 +860,7 @@ optional_source(APPLE
     core/mac_startup.mm
     core/scoped_nsautorelease_pool.mm
     devices/macdevicelister.mm
+    engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp
@@ -1302,6 +1303,7 @@ if (APPLE)
     ${GROWL}
     /System/Library/Frameworks/AppKit.framework
     /System/Library/Frameworks/Carbon.framework
+    /System/Library/Frameworks/CoreAudio.framework
     /System/Library/Frameworks/DiskArbitration.framework
     /System/Library/Frameworks/Foundation.framework
     /System/Library/Frameworks/IOKit.framework

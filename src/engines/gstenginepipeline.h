@@ -50,7 +50,7 @@ class GstEnginePipeline : public QObject {
   int id() const { return id_; }
 
   // Call these setters before Init
-  void set_output_device(const QString& sink, const QString& device);
+  void set_output_device(const QString& sink, const QVariant& device);
   void set_replaygain(bool enabled, int mode, float preamp, bool compression);
   void set_buffer_duration_nanosec(qint64 duration_nanosec);
   void set_mono_playback(bool enabled);
@@ -184,7 +184,7 @@ signals:
   // General settings for the pipeline
   bool valid_;
   QString sink_;
-  QString device_;
+  QVariant device_;
 
   // These get called when there is a new audio buffer available
   QList<BufferConsumer*> buffer_consumers_;

@@ -54,6 +54,10 @@
 #include "engines/pulsedevicefinder.h"
 #endif
 
+#ifdef Q_OS_DARWIN
+#include "engines/osxdevicefinder.h"
+#endif
+
 using std::shared_ptr;
 using std::vector;
 
@@ -127,6 +131,9 @@ void GstEngine::InitialiseGstreamer() {
 #ifdef HAVE_LIBPULSE
   device_finders.append(new PulseDeviceFinder);
 #endif
+#ifdef Q_OS_DARWIN
+  device_finders.append(new OsxDeviceFinder);
+#endif
 
   for (DeviceFinder* finder : device_finders) {
     if (!plugin_names.contains(finder->gstreamer_sink())) {
@@ -153,7 +160,7 @@ void GstEngine::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   sink_ = s.value("sink", kAutoSink).toString();
-  device_ = s.value("device").toString();
+  device_ = s.value("device");
 
   if (sink_.isEmpty()) sink_ = kAutoSink;
 
@@ -831,7 +838,7 @@ GstEngine::OutputDetailsList GstEngine::GetOutputsList() const {
       output.description = device.description;
       output.icon_name = device.icon_name;
       output.gstreamer_plugin_name = finder->gstreamer_sink();
-      output.device_name = device.name;
+      output.device_property_value = device.device_property_value;
       ret.append(output);
     }
   }

@@ -94,7 +94,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
 }
 
 void GstEnginePipeline::set_output_device(const QString& sink,
-                                          const QString& device) {
+                                          const QVariant& device) {
   sink_ = sink;
   device_ = device;
 }
@@ -221,10 +221,23 @@ bool GstEnginePipeline::Init() {
   // Create the sink
   if (!(audiosink_ = engine_->CreateElement(sink_, audiobin_))) return false;
 
-  if (g_object_class_find_property(G_OBJECT_CLASS(audiosink_), "device") &&
-      !device_.isEmpty()) {
-    g_object_set(G_OBJECT(audiosink_), "device", device_.toUtf8().constData(),
-                 nullptr);
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(audiosink_), "device") &&
+      !device_.toString().isEmpty()) {
+    switch (device_.type()) {
+      case QVariant::Int:
+        g_object_set(G_OBJECT(audiosink_),
+                     "device", device_.toInt(),
+                     nullptr);
+        break;
+      case QVariant::String:
+        g_object_set(G_OBJECT(audiosink_),
+                     "device", device_.toString().toUtf8().constData(),
+                     nullptr);
+        break;
+      default:
+        qLog(Warning) << "Unknown device type" << device_;
+        break;
+    }
   }
 
   // Create all the other elements

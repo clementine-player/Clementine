@@ -15,21 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "devicefinder.h"
+#ifndef OSXDEVICEFINDER_H
+#define OSXDEVICEFINDER_H
 
-DeviceFinder::DeviceFinder(const QString& gstreamer_sink)
-    : gstreamer_sink_(gstreamer_sink) {
-}
+#include "engines/devicefinder.h"
 
-QString DeviceFinder::GuessIconName(const QString& description) const {
-  QString description_lower = description.toLower();
-  if (description_lower.contains("headset")) {
-    return "audio-headset";
-  }
+class OsxDeviceFinder : public DeviceFinder {
+ public:
+  OsxDeviceFinder();
 
-  if (description_lower.contains("headphone")) {
-    return "audio-headphones";
-  }
+  virtual bool Initialise() { return true; }
+  virtual QList<Device> ListDevices();
+};
 
-  return "audio-card";
-}
+#endif // OSXDEVICEFINDER_H

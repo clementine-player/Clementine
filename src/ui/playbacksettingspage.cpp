@@ -88,7 +88,7 @@ void PlaybackSettingsPage::Load() {
         ui_->gst_output->itemData(i).value<GstEngine::OutputDetails>();
 
     if (details.gstreamer_plugin_name == sink &&
-        details.device_name == device) {
+        details.device_property_value == device) {
       ui_->gst_output->setCurrentIndex(i);
       break;
     }
@@ -128,7 +128,7 @@ void PlaybackSettingsPage::Save() {
 
   s.beginGroup(GstEngine::kSettingsGroup);
   s.setValue("sink", details.gstreamer_plugin_name);
-  s.setValue("device", details.device_name);
+  s.setValue("device", details.device_property_value);
   s.setValue("rgenabled", ui_->replaygain->isChecked());
   s.setValue("rgmode", ui_->replaygain_mode->currentIndex());
   s.setValue("rgpreamp", float(ui_->replaygain_preamp->value()) / 10 - 15);
