@@ -36,10 +36,10 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
 
   if (redirect_style_ == RedirectStyle::REMOTE) {
     redirect_url = QUrl(kRemoteURL);
-    url.addQueryItem("port", port);
+    redirect_url.addQueryItem("port", port);
   } else if (redirect_style_ == RedirectStyle::REMOTE_WITH_STATE) {
     redirect_url = QUrl(kRemoteURL);
-    url.addQueryItem("state", port);
+    redirect_url.addQueryItem("state", port);
   } else {
     redirect_url = server->url();
   }
@@ -77,8 +77,8 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code,
              << Param("client_id", client_id_)
              << Param("client_secret", client_secret_)
              << Param("grant_type", "authorization_code")
-      // Even though we don't use this URI anymore, it must match the
-      // original one.
+             // Even though we don't use this URI anymore, it must match the
+             // original one.
              << Param("redirect_uri", url.toString());
 
   QStringList params;
