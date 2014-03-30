@@ -200,6 +200,8 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
   AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
 
+  providers->sortChildren(0, Qt::AscendingOrder);
+
   // List box
   connect(ui_->list,
           SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),

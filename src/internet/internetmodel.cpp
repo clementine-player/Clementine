@@ -77,9 +77,6 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new DigitallyImportedService(app, this));
   AddService(new IcecastService(app, this));
   AddService(new JamendoService(app, this));
-#ifdef HAVE_GOOGLE_DRIVE
-  AddService(new GoogleDriveService(app, this));
-#endif
   AddService(new GroovesharkService(app, this));
   AddService(new JazzRadioService(app, this));
   AddService(new MagnatuneService(app, this));
@@ -92,21 +89,26 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new SoundCloudService(app, this));
   AddService(new SpotifyService(app, this));
   AddService(new SubsonicService(app, this));
-#ifdef HAVE_UBUNTU_ONE
-  AddService(new UbuntuOneService(app, this));
+#ifdef HAVE_BOX
+  AddService(new BoxService(app, this));
 #endif
 #ifdef HAVE_DROPBOX
   AddService(new DropboxService(app, this));
 #endif
+#ifdef HAVE_GOOGLE_DRIVE
+  AddService(new GoogleDriveService(app, this));
+#endif
 #ifdef HAVE_SKYDRIVE
   AddService(new SkydriveService(app, this));
 #endif
-#ifdef HAVE_BOX
-  AddService(new BoxService(app, this));
+#ifdef HAVE_UBUNTU_ONE
+  AddService(new UbuntuOneService(app, this));
 #endif
 #ifdef HAVE_VK
   AddService(new VkService(app, this));
 #endif
+
+  invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);
 }
 
 void InternetModel::AddService(InternetService* service) {
