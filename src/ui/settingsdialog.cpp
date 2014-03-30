@@ -77,7 +77,11 @@
 #endif
 
 #ifdef HAVE_VK
-#  include "internet/vksettingspage.h"
+#include "internet/vksettingspage.h"
+#endif
+
+#ifdef HAVE_SKYDRIVE
+#include "internet/skydrivesettingspage.h"
 #endif
 
 #include <QAbstractButton>
@@ -175,6 +179,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 
 #ifdef HAVE_BOX
   AddPage(Page_Box, new BoxSettingsPage(this), providers);
+#endif
+
+#ifdef HAVE_SKYDRIVE
+  AddPage(Page_Skydrive, new SkydriveSettingsPage(this), providers);
 #endif
 
   AddPage(Page_SoundCloud, new SoundCloudSettingsPage(this), providers);

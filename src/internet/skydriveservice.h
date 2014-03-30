@@ -14,22 +14,27 @@ class SkydriveService : public CloudFileService {
 
  public:
   SkydriveService(Application* app, InternetModel* parent);
+
+  static const char* kServiceName;
+  static const char* kSettingsGroup;
+
+  virtual bool has_credentials() const;
   QUrl GetStreamingUrlFromSongId(const QString& song_id);
 
- protected:
-  // CloudFileService
-  virtual bool has_credentials() const;
+ public slots:
   virtual void Connect();
+  void ForgetCredentials();
 
  private slots:
   void ConnectFinished(OAuthenticator* oauth);
   void FetchUserInfoFinished(QNetworkReply* reply);
   void ListFilesFinished(QNetworkReply* reply);
 
-signals:
+ signals:
   void Connected();
 
  private:
+  QString refresh_token() const;
   void AddAuthorizationHeader(QNetworkRequest* request);
   void ListFiles(const QString& folder);
   void EnsureConnected();

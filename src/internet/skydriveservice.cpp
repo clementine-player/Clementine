@@ -12,9 +12,7 @@
 
 namespace {
 
-static const char* kServiceName = "OneDrive";
 static const char* kServiceId = "skydrive";
-static const char* kSettingsGroup = "Skydrive";
 
 static const char* kClientId = "0000000040111F16";
 static const char* kClientSecret = "w2ClguSX0jG56cBl1CeUniypTBRjXt2Z";
@@ -30,6 +28,9 @@ static const char* kSkydriveBase = "https://apis.live.net/v5.0/";
 
 }  // namespace
 
+const char* SkydriveService::kServiceName = "OneDrive";
+const char* SkydriveService::kSettingsGroup = "Skydrive";
+
 SkydriveService::SkydriveService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
                        QIcon(":providers/skydrive.png"),
@@ -37,16 +38,22 @@ SkydriveService::SkydriveService(Application* app, InternetModel* parent)
   app->player()->RegisterUrlHandler(new SkydriveUrlHandler(this, this));
 }
 
-bool SkydriveService::has_credentials() const { return true; }
+bool SkydriveService::has_credentials() const {
+  return !refresh_token().isEmpty();
+}
+
+QString SkydriveService::refresh_token() const {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  return s.value("refresh_token").toString();
+}
 
 void SkydriveService::Connect() {
   OAuthenticator* oauth = new OAuthenticator(
       kClientId, kClientSecret, OAuthenticator::RedirectStyle::REMOTE, this);
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  if (s.contains("refresh_token")) {
-    oauth->RefreshAuthorisation(kOAuthTokenEndpoint,
-                                s.value("refresh_token").toString());
+  if (!refresh_token().isEmpty()) {
+    oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token());
   } else {
     oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
   }
@@ -161,4 +168,12 @@ void SkydriveService::EnsureConnected() {
 
   Connect();
   WaitForSignal(this, SIGNAL(Connected()));
+}
+
+void SkydriveService::ForgetCredentials() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  s.remove("refresh_token");
+  s.remove("name");
 }

@@ -1120,10 +1120,14 @@ optional_source(HAVE_DROPBOX
 optional_source(HAVE_SKYDRIVE
   SOURCES
     internet/skydriveservice.cpp
+    internet/skydrivesettingspage.cpp
     internet/skydriveurlhandler.cpp
   HEADERS
     internet/skydriveservice.h
+    internet/skydrivesettingspage.h
     internet/skydriveurlhandler.h
+  UI
+    internet/skydrivesettingspage.ui
 )
 
 # Box support
