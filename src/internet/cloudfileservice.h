@@ -44,8 +44,8 @@ class CloudFileService : public InternetService {
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
   void ShowSettingsDialog();
-  void ReadTagsFinished(TagReaderClient::ReplyType* reply, const Song& metadata,
-                        const int task_id);
+  void ReadTagsFinished(TagReaderClient::ReplyType* reply,
+                        const Song& metadata);
 
  protected:
   QStandardItem* root_;
@@ -63,6 +63,10 @@ class CloudFileService : public InternetService {
  private:
   QIcon icon_;
   SettingsDialog::Page settings_page_;
+
+  int indexing_task_id_;
+  int indexing_task_progress_;
+  int indexing_task_max_;
 };
 
 #endif  // CLOUDFILESERVICE_H

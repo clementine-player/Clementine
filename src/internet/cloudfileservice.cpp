@@ -28,7 +28,10 @@ CloudFileService::CloudFileService(Application* app, InternetModel* parent,
       playlist_manager_(app->playlist_manager()),
       task_manager_(app->task_manager()),
       icon_(icon),
-      settings_page_(settings_page) {
+      settings_page_(settings_page),
+      indexing_task_id_(-1),
+      indexing_task_progress_(0),
+      indexing_task_max_(0) {
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
 
@@ -122,22 +125,36 @@ void CloudFileService::MaybeAddFileToDatabase(const Song& metadata,
     return;
   }
 
-  const int task_id =
-      task_manager_->StartTask(tr("Indexing %1").arg(metadata.title()));
+  if (indexing_task_id_ == -1) {
+    indexing_task_id_ =
+        task_manager_->StartTask(tr("Indexing %1").arg(name()));
+    indexing_task_progress_ = 0;
+    indexing_task_max_ = 0;
+  }
+  indexing_task_max_ ++;
+  task_manager_->SetTaskProgress(
+      indexing_task_id_, indexing_task_progress_, indexing_task_max_);
 
   TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
       download_url, metadata.title(), metadata.filesize(), mime_type,
       authorisation);
   NewClosure(reply, SIGNAL(Finished(bool)), this,
-             SLOT(ReadTagsFinished(TagReaderClient::ReplyType*, Song, int)),
-             reply, metadata, task_id);
+             SLOT(ReadTagsFinished(TagReaderClient::ReplyType*, Song)),
+             reply, metadata);
 }
 
 void CloudFileService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
-                                        const Song& metadata,
-                                        const int task_id) {
+                                        const Song& metadata) {
   reply->deleteLater();
-  TaskManager::ScopedTask(task_id, task_manager_);
+
+  indexing_task_progress_ ++;
+  if (indexing_task_progress_ == indexing_task_max_) {
+    task_manager_->SetTaskFinished(indexing_task_id_);
+    indexing_task_id_ = -1;
+  } else {
+    task_manager_->SetTaskProgress(
+        indexing_task_id_, indexing_task_progress_, indexing_task_max_);
+  }
 
   const pb::tagreader::ReadCloudFileResponse& message =
       reply->message().read_cloud_file_response();
