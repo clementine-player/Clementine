@@ -217,7 +217,6 @@ void ParseAProto() {
 
 void CheckPortable() {
   QFile f(QApplication::applicationDirPath() + QDir::separator() + "data");
-  qLog(Debug) << f.fileName();
   if (f.exists()) {
     // We are portable. Set the bool and change the qsettings path
     Application::kIsPortable = true;
