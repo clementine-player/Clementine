@@ -164,6 +164,7 @@ signals:
   // Subclasses must call this from their constructors.
   void Init(const QString& name, const QString& id, const QIcon& icon,
             Hints hints = NoHints);
+  void SetHint(Hint hint, bool set = true);
 
   struct PendingState {
     PendingState() : orig_id_(-1) {}

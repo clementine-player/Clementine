@@ -10,7 +10,7 @@
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "globalsearch/globalsearch.h"
-#include "globalsearch/librarysearchprovider.h"
+#include "internet/cloudfilesearchprovider.h"
 #include "internet/internetmodel.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
@@ -48,8 +48,8 @@ CloudFileService::CloudFileService(Application* app, InternetModel* parent,
   library_sort_model_->setSortLocaleAware(true);
   library_sort_model_->sort(0);
 
-  app->global_search()->AddProvider(new LibrarySearchProvider(
-      library_backend_, service_name, service_id, icon_, true, app_, this));
+  app->global_search()->AddProvider(new CloudFileSearchProvider(
+      library_backend_, service_id, icon_, this));
 }
 
 QStandardItem* CloudFileService::CreateRootItem() {

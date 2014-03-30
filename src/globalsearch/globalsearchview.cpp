@@ -184,6 +184,8 @@ bool CompareProvider(const QStringList& provider_order, SearchProvider* left,
 }
 
 void GlobalSearchView::ReloadSettings() {
+  const bool old_show_suggestions = show_suggestions_;
+
   QSettings s;
 
   // Library settings
@@ -245,6 +247,10 @@ void GlobalSearchView::ReloadSettings() {
   ui_->suggestions_group->setVisible(show_suggestions_);
   if (!show_suggestions_) {
     update_suggestions_timer_->stop();
+  }
+
+  if (!old_show_suggestions && show_suggestions_) {
+    UpdateSuggestions();
   }
 }
 

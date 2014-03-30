@@ -164,6 +164,7 @@ set(SOURCES
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
+  internet/cloudfilesearchprovider.cpp
   internet/cloudfileservice.cpp
   internet/digitallyimportedclient.cpp
   internet/digitallyimportedservicebase.cpp

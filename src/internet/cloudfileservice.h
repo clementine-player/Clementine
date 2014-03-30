@@ -29,13 +29,16 @@ class CloudFileService : public InternetService {
   virtual void LazyPopulate(QStandardItem* item);
   virtual void ShowContextMenu(const QPoint& point);
 
+  virtual bool has_credentials() const = 0;
   bool is_indexing() const { return indexing_task_id_ != -1; }
 
  signals:
   void AllIndexingTasksFinished();
 
+ public slots:
+  void ShowSettingsDialog();
+
  protected:
-  virtual bool has_credentials() const = 0;
   virtual void Connect() = 0;
   virtual bool ShouldIndexFile(const QUrl& url, const QString& mime_type) const;
   virtual void MaybeAddFileToDatabase(const Song& metadata,
@@ -48,7 +51,6 @@ class CloudFileService : public InternetService {
  protected slots:
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
-  void ShowSettingsDialog();
   void ReadTagsFinished(TagReaderClient::ReplyType* reply,
                         const Song& metadata);
 

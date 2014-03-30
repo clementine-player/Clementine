@@ -37,6 +37,14 @@ void SearchProvider::Init(const QString& name, const QString& id,
   hints_ = hints;
 }
 
+void SearchProvider::SetHint(Hint hint, bool set) {
+  if (set) {
+    hints_ |= hint;
+  } else {
+    hints_ &= ~hint;
+  }
+}
+
 QStringList SearchProvider::TokenizeQuery(const QString& query) {
   QStringList tokens(query.split(QRegExp("\\s+")));
 
