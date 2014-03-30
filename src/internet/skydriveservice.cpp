@@ -90,7 +90,6 @@ void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
   reply->deleteLater();
   QJson::Parser parser;
   QVariantMap response = parser.parse(reply).toMap();
-  qLog(Debug) << response;
 
   QString name = response["name"].toString();
   if (!name.isEmpty()) {
@@ -119,7 +118,6 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
   reply->deleteLater();
   QJson::Parser parser;
   QVariantMap response = parser.parse(reply).toMap();
-  qLog(Debug) << response;
 
   QVariantList files = response["data"].toList();
   for (const QVariant& f : files) {
@@ -143,6 +141,8 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
       // Fortunately, just changing the scheme to HTTP works.
       download_url.setScheme("http");
       MaybeAddFileToDatabase(song, mime_type, download_url, QString::null);
+    } else if (file["type"].toString() == "folder") {
+      ListFiles(file["id"].toString());
     }
   }
 }
