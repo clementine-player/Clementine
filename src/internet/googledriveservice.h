@@ -39,6 +39,7 @@ signals:
   void FilesFound(const QList<google_drive::File>& files);
   void FilesDeleted(const QList<QUrl>& files);
   void ListChangesFinished(google_drive::ListChangesResponse* response);
+  void SaveCursor(const QString& cursor);
 
   void OpenWithDrive();
 

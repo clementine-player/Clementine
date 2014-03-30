@@ -151,6 +151,7 @@ void CloudFileService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
   if (indexing_task_progress_ == indexing_task_max_) {
     task_manager_->SetTaskFinished(indexing_task_id_);
     indexing_task_id_ = -1;
+    emit AllIndexingTasksFinished();
   } else {
     task_manager_->SetTaskProgress(
         indexing_task_id_, indexing_task_progress_, indexing_task_max_);

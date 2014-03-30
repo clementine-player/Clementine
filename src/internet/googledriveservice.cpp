@@ -82,9 +82,23 @@ void GoogleDriveService::ListChanges(const QString& cursor) {
 void GoogleDriveService::ListChangesFinished(
     google_drive::ListChangesResponse* changes_response) {
   changes_response->deleteLater();
+
+  const QString cursor = changes_response->next_cursor();
+  if (is_indexing()) {
+    // Only save the cursor after all the songs have been indexed - that way if
+    // Clementine is closed it'll resume next time.
+    NewClosure(this, SIGNAL(AllIndexingTasksFinished()),
+               this, SLOT(SaveCursor(QString)),
+               cursor);
+  } else {
+    SaveCursor(cursor);
+  }
+}
+
+void GoogleDriveService::SaveCursor(const QString& cursor) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue("cursor", changes_response->next_cursor());
+  s.setValue("cursor", cursor);
 }
 
 void GoogleDriveService::ConnectFinished(

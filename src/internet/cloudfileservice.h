@@ -29,6 +29,11 @@ class CloudFileService : public InternetService {
   virtual void LazyPopulate(QStandardItem* item);
   virtual void ShowContextMenu(const QPoint& point);
 
+  bool is_indexing() const { return indexing_task_id_ != -1; }
+
+ signals:
+  void AllIndexingTasksFinished();
+
  protected:
   virtual bool has_credentials() const = 0;
   virtual void Connect() = 0;
