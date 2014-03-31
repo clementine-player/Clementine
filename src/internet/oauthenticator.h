@@ -18,9 +18,10 @@ class OAuthenticator : public QObject {
     // Redirect via data.clementine-player.org for when localhost is
     // unsupported (eg. Skydrive).
     REMOTE = 1,
-    // Same as REMOTE, but pass the 'port' parameter as 'state' parameter, for
-    // services which don't allow other parameters to be append to the redirect
-    // URI (e.g. SoundCloud)
+    // Same as REMOTE, but pass the 'port' parameter of the redirect URL as
+    // 'state' parameter of the URL, for services which allow only redirect URL
+    // without parameters (e.g. SoundCloud). "state" parameter will be added to
+    // the redirect URL by the service itself.
     REMOTE_WITH_STATE = 2
   };
 

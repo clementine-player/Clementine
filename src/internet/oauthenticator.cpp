@@ -39,7 +39,7 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
     redirect_url.addQueryItem("port", port);
   } else if (redirect_style_ == RedirectStyle::REMOTE_WITH_STATE) {
     redirect_url = QUrl(kRemoteURL);
-    redirect_url.addQueryItem("state", port);
+    url.addQueryItem("state", port);
   } else {
     redirect_url = server->url();
   }
