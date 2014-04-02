@@ -153,9 +153,7 @@ void PlaybackSettingsPage::RgPreampChanged(int value) {
 }
 
 void PlaybackSettingsPage::BufferMinFillChanged(int value) {
-  QString percent;
-  percent.sprintf("%d%%", value);
-  ui_->buffer_min_fill_value_label->setText(percent);
+  ui_->buffer_min_fill_value_label->setText(QString::number(value) + "%");
 }
 
 void PlaybackSettingsPage::FadingOptionsChanged() {
