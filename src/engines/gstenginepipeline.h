@@ -53,6 +53,7 @@ class GstEnginePipeline : public QObject {
   void set_output_device(const QString& sink, const QVariant& device);
   void set_replaygain(bool enabled, int mode, float preamp, bool compression);
   void set_buffer_duration_nanosec(qint64 duration_nanosec);
+  void set_buffer_min_fill(int percent);
   void set_mono_playback(bool enabled);
 
   // Creates the pipeline, returns false on error
@@ -213,6 +214,7 @@ signals:
 
   // Buffering
   quint64 buffer_duration_nanosec_;
+  int buffer_min_fill_;
   bool buffering_;
 
   bool mono_playback_;

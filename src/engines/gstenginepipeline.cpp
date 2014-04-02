@@ -62,6 +62,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       rg_preamp_(0.0),
       rg_compression_(true),
       buffer_duration_nanosec_(1 * kNsecPerSec),
+      buffer_min_fill_(33),
       buffering_(false),
       mono_playback_(false),
       end_offset_nanosec_(-1),
@@ -111,6 +112,10 @@ void GstEnginePipeline::set_replaygain(bool enabled, int mode, float preamp,
 void GstEnginePipeline::set_buffer_duration_nanosec(
     qint64 buffer_duration_nanosec) {
   buffer_duration_nanosec_ = buffer_duration_nanosec;
+}
+
+void GstEnginePipeline::set_buffer_min_fill(int percent) {
+  buffer_min_fill_ = percent;
 }
 
 void GstEnginePipeline::set_mono_playback(bool enabled) {
@@ -349,7 +354,7 @@ bool GstEnginePipeline::Init() {
   g_object_set(G_OBJECT(queue_), "max-size-bytes", 0, nullptr);
   g_object_set(G_OBJECT(queue_), "max-size-time", buffer_duration_nanosec_,
                nullptr);
-  g_object_set(G_OBJECT(queue_), "low-percent", 1, nullptr);
+  g_object_set(G_OBJECT(queue_), "low-percent", buffer_min_fill_, nullptr);
 
   if (buffer_duration_nanosec_ > 0) {
     g_object_set(G_OBJECT(queue_), "use-buffering", true, nullptr);

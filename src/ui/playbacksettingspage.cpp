@@ -33,6 +33,11 @@ PlaybackSettingsPage::PlaybackSettingsPage(SettingsDialog* dialog)
   connect(ui_->fading_auto, SIGNAL(toggled(bool)),
           SLOT(FadingOptionsChanged()));
 
+  connect(ui_->buffer_min_fill, SIGNAL(valueChanged(int)),
+          SLOT(BufferMinFillChanged(int)));
+  ui_->buffer_min_fill_value_label->setMinimumWidth(
+      QFontMetrics(ui_->buffer_min_fill_value_label->font()).width("WW%"));
+
   connect(ui_->replaygain_preamp, SIGNAL(valueChanged(int)),
           SLOT(RgPreampChanged(int)));
   ui_->replaygain_preamp_label->setMinimumWidth(
@@ -102,6 +107,7 @@ void PlaybackSettingsPage::Load() {
       s.value("rgcompression", true).toBool());
   ui_->buffer_duration->setValue(s.value("bufferduration", 4000).toInt());
   ui_->mono_playback->setChecked(s.value("monoplayback", false).toBool());
+  ui_->buffer_min_fill->setValue(s.value("bufferminfill", 33).toInt());
   s.endGroup();
 }
 
@@ -135,6 +141,7 @@ void PlaybackSettingsPage::Save() {
   s.setValue("rgcompression", ui_->replaygain_compression->isChecked());
   s.setValue("bufferduration", ui_->buffer_duration->value());
   s.setValue("monoplayback", ui_->mono_playback->isChecked());
+  s.setValue("bufferminfill", ui_->buffer_min_fill->value());
   s.endGroup();
 }
 
@@ -143,6 +150,10 @@ void PlaybackSettingsPage::RgPreampChanged(int value) {
   QString db_str;
   db_str.sprintf("%+.1f dB", db);
   ui_->replaygain_preamp_label->setText(db_str);
+}
+
+void PlaybackSettingsPage::BufferMinFillChanged(int value) {
+  ui_->buffer_min_fill_value_label->setText(QString::number(value) + "%");
 }
 
 void PlaybackSettingsPage::FadingOptionsChanged() {

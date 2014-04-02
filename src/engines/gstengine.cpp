@@ -90,6 +90,7 @@ GstEngine::GstEngine(TaskManager* task_manager)
       rg_preamp_(0.0),
       rg_compression_(true),
       buffer_duration_nanosec_(1 * kNsecPerSec),  // 1s
+      buffer_min_fill_(33),
       mono_playback_(false),
       seek_timer_(new QTimer(this)),
       timer_id_(-1),
@@ -178,6 +179,8 @@ void GstEngine::ReloadSettings() {
 
   buffer_duration_nanosec_ =
       s.value("bufferduration", 4000).toLongLong() * kNsecPerMsec;
+
+  buffer_min_fill_ = s.value("bufferminfill", 33).toInt();
 
   mono_playback_ = s.value("monoplayback", false).toBool();
 }
@@ -700,6 +703,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   ret->set_output_device(sink_, device_);
   ret->set_replaygain(rg_enabled_, rg_mode_, rg_preamp_, rg_compression_);
   ret->set_buffer_duration_nanosec(buffer_duration_nanosec_);
+  ret->set_buffer_min_fill(buffer_min_fill_);
   ret->set_mono_playback(mono_playback_);
 
   ret->AddBufferConsumer(this);

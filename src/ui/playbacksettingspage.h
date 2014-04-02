@@ -35,6 +35,7 @@ class PlaybackSettingsPage : public SettingsPage {
  private slots:
   void FadingOptionsChanged();
   void RgPreampChanged(int value);
+  void BufferMinFillChanged(int value);
 
  private:
   Ui_PlaybackSettingsPage* ui_;
