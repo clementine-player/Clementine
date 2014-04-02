@@ -107,6 +107,11 @@ void GlobalShortcutsSettingsPage::Load() {
   }
 
   ui_->mac_container->setVisible(!manager->IsMacAccessibilityEnabled());
+#ifdef Q_OS_DARWIN
+  qint32 mac_version = Utilities::GetMacVersion();
+  ui_->mac_label->setVisible(mac_version < 9);
+  ui_->mac_label_mavericks->setVisible(mac_version >= 9);
+#endif  // Q_OS_DARWIN
 }
 
 void GlobalShortcutsSettingsPage::SetShortcut(const QString& id,

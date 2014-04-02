@@ -73,6 +73,22 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="mac_label_mavericks">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>You need to launch System Preferences and allow Clementine to &quot;&lt;span style=&quot;font-style:italic&quot;&gt;control your computer&lt;/span&gt;&quot; to use global shortcuts in Clementine.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="mac_open">
         <property name="text">
          <string>Open...</string>
