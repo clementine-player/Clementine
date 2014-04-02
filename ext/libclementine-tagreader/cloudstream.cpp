@@ -114,11 +114,6 @@ TagLib::ByteVector CloudStream::readBlock(ulong length) {
                        QString("bytes=%1-%2").arg(start).arg(end).toUtf8());
   request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                        QNetworkRequest::AlwaysNetwork);
-  // The Ubuntu One server applies the byte range to the gzipped data, rather
-  // than the raw data so we must disable compression.
-  if (url_.host() == "files.one.ubuntu.com") {
-    request.setRawHeader("Accept-Encoding", "identity");
-  }
 
   QNetworkReply* reply = network_->get(request);
   connect(reply, SIGNAL(sslErrors(QList<QSslError>)),

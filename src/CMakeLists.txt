@@ -1085,22 +1085,6 @@ optional_source(HAVE_GOOGLE_DRIVE
     internet/googledrivesettingspage.ui
 )
 
-# Ubuntu One file support
-optional_source(HAVE_UBUNTU_ONE
-  SOURCES
-    internet/ubuntuoneauthenticator.cpp
-    internet/ubuntuoneservice.cpp
-    internet/ubuntuonesettingspage.cpp
-    internet/ubuntuoneurlhandler.cpp
-  HEADERS
-    internet/ubuntuoneauthenticator.h
-    internet/ubuntuoneservice.h
-    internet/ubuntuonesettingspage.h
-    internet/ubuntuoneurlhandler.h
-  UI
-    internet/ubuntuonesettingspage.ui
-)
-
 # Dropbox support
 optional_source(HAVE_DROPBOX
   SOURCES

@@ -41,9 +41,6 @@
 #ifdef HAVE_GOOGLE_DRIVE
 #include "googledriveservice.h"
 #endif
-#ifdef HAVE_UBUNTU_ONE
-#include "ubuntuoneservice.h"
-#endif
 #ifdef HAVE_DROPBOX
 #include "dropboxservice.h"
 #endif
@@ -100,9 +97,6 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_SKYDRIVE
   AddService(new SkydriveService(app, this));
-#endif
-#ifdef HAVE_UBUNTU_ONE
-  AddService(new UbuntuOneService(app, this));
 #endif
 #ifdef HAVE_VK
   AddService(new VkService(app, this));

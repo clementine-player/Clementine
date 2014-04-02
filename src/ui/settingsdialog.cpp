@@ -41,7 +41,6 @@
 #include "internet/soundcloudsettingspage.h"
 #include "internet/spotifysettingspage.h"
 #include "internet/subsonicsettingspage.h"
-#include "internet/ubuntuonesettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
 #include "podcasts/podcastsettingspage.h"
@@ -62,10 +61,6 @@
 
 #ifdef HAVE_GOOGLE_DRIVE
 #include "internet/googledrivesettingspage.h"
-#endif
-
-#ifdef HAVE_UBUNTU_ONE
-#include "internet/ubuntuonesettingspage.h"
 #endif
 
 #ifdef HAVE_DROPBOX
@@ -167,10 +162,6 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 
 #ifdef HAVE_GOOGLE_DRIVE
   AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this), providers);
-#endif
-
-#ifdef HAVE_UBUNTU_ONE
-  AddPage(Page_UbuntuOne, new UbuntuOneSettingsPage(this), providers);
 #endif
 
 #ifdef HAVE_DROPBOX
