@@ -18,6 +18,7 @@
 #ifndef SONGLOADER_H
 #define SONGLOADER_H
 
+#include <functional>
 #include <memory>
 
 #include <gst/gst.h>
@@ -54,15 +55,12 @@ class SongLoader : public QObject {
   int timeout() const { return timeout_; }
   void set_timeout(int msec) { timeout_ = msec; }
 
+  // If Success is returned the songs are fully loaded. If WillLoadAsync is
+  // returned PreLoad() needs to be called next.
   Result Load(const QUrl& url);
-  // To effectively load the songs:
-  // when we call Load() on a directory, it will return WillLoadAsync, load the
-  // files with only filenames and emit LoadFinished(). When LoadFinished() is
-  // received by songloaderinserter, it will insert songs (incompletely loaded)
-  // in playlist, and call EffectiveSongsLoad() in a background thread to
-  // perform the real load of the songs. Next, UpdateItems() will be called on
-  // playlist and replace the partially-loaded items by the new ones, fully
-  // loaded.
+  // Loads the files with only filenames (blocking) and emits LoadFinished().
+  void PreLoad();
+  // Completely load songs (blocking) previously loaded with PreLoad().
   void EffectiveSongsLoad();
   void EffectiveSongLoad(Song* song);
   Result LoadAudioCD();
@@ -75,21 +73,19 @@ signals:
   void StopTypefind();
   void AudioCDTagsLoaded(const QString& artist, const QString& album,
                          const MusicBrainzClient::ResultList& results);
-  void LocalFileLoaded(TagReaderReply* reply);
 
  private:
   enum State { WaitingForType, WaitingForMagic, WaitingForData, Finished, };
 
   Result LoadLocal(const QString& filename);
+  void LoadLocalAsync(const QString& filename);
   Result LoadLocalPartial(const QString& filename);
   void LoadLocalDirectory(const QString& filename);
   void LoadPlaylist(ParserBase* parser, const QString& filename);
-  void LoadLocalDirectoryAndEmit(const QString& filename);
-  void LoadPlaylistAndEmit(ParserBase* parser, const QString& filename);
 
   void AddAsRawStream();
 
-  Result LoadRemote();
+  void LoadRemote();
 
   // GStreamer callbacks
   static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps,
@@ -116,6 +112,7 @@ signals:
   CueParser* cue_parser_;
 
   // For async loads
+  std::function<void()> preload_func_;
   int timeout_;
   State state_;
   bool success_;

@@ -158,37 +158,16 @@ void PlaylistManager::New(const QString& name, const SongList& songs,
 }
 
 void PlaylistManager::Load(const QString& filename) {
-  QUrl url = QUrl::fromLocalFile(filename);
-  SongLoader* loader = new SongLoader(library_backend_, app_->player(), this);
-  connect(loader, SIGNAL(LoadFinished(bool)), SLOT(LoadFinished(bool)));
-  SongLoader::Result result = loader->Load(url);
   QFileInfo info(filename);
 
-  if (result == SongLoader::Error ||
-      (result == SongLoader::Success && loader->songs().isEmpty())) {
-    app_->AddError(tr("The playlist '%1' was empty or could not be loaded.")
-                       .arg(info.completeBaseName()));
-    delete loader;
-    return;
-  }
+  int id = playlist_backend_->CreatePlaylist(info.baseName(), QString());
 
-  if (result == SongLoader::Success) {
-    New(info.baseName(), loader->songs());
-    delete loader;
-  }
-}
+  if (id == -1) qFatal("Couldn't create playlist");
 
-void PlaylistManager::LoadFinished(bool success) {
-  SongLoader* loader = qobject_cast<SongLoader*>(sender());
-  loader->deleteLater();
-  QString localfile = loader->url().toLocalFile();
-  QFileInfo info(localfile);
-  if (!success || loader->songs().isEmpty()) {
-    app_->AddError(tr("The playlist '%1' was empty or could not be loaded.")
-                       .arg(info.completeBaseName()));
-  }
+  Playlist* playlist = AddPlaylist(id, info.baseName(), QString(), QString(), false);
 
-  New(info.baseName(), loader->songs());
+  QList<QUrl> urls;
+  playlist->InsertUrls(urls << QUrl::fromLocalFile(filename));
 }
 
 void PlaylistManager::Save(int id, const QString& filename) {
