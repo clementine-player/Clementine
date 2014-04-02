@@ -1297,6 +1297,7 @@ if (APPLE)
     /System/Library/Frameworks/DiskArbitration.framework
     /System/Library/Frameworks/Foundation.framework
     /System/Library/Frameworks/IOKit.framework
+    /System/Library/Frameworks/ScriptingBridge.framework
   )
   target_link_libraries(clementine_lib ${SPMEDIAKEYTAP_LIBRARIES})
   if (HAVE_SPARKLE)
