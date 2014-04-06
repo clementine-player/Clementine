@@ -101,7 +101,8 @@ return_song:
 }
 
 void XSPFParser::Save(const SongList& songs, QIODevice* device,
-                      const QDir&) const {
+                      const QDir& dir) const {
+  QFileInfo file;
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
@@ -112,8 +113,17 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
 
   StreamElement tracklist("trackList", &writer);
   for (const Song& song : songs) {
+    QString filename_or_url;
+    if (song.url().scheme() == "file") {
+      // Make the filename relative to the directory we're saving the playlist.
+      filename_or_url = dir.relativeFilePath(
+          QFileInfo(song.url().toLocalFile()).absoluteFilePath());
+    } else {
+      filename_or_url = song.url().toEncoded();
+    }
+
     StreamElement track("track", &writer);
-    writer.writeTextElement("location", song.url().toString());
+    writer.writeTextElement("location", filename_or_url);
     writer.writeTextElement("title", song.title());
     if (!song.artist().isEmpty()) {
       writer.writeTextElement("creator", song.artist());
@@ -130,11 +140,24 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
         song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
-      // Convert local files to URLs.
+      QString art_filename;
       if (!art.contains("://")) {
-        art = QUrl::fromLocalFile(art).toString();
+        art_filename = art;
+      } else if (QUrl(art).scheme() == "file") {
+        art_filename = QUrl(art).toLocalFile();
       }
-      writer.writeTextElement("image", art);
+
+      if (!art_filename.isEmpty()) {
+        // Make this filename relative to the directory we're saving the
+        // playlist.
+        art_filename = dir.relativeFilePath(
+            QFileInfo(art_filename).absoluteFilePath());
+      } else {
+        // Just use whatever URL was in the Song.
+        art_filename = art;
+      }
+
+      writer.writeTextElement("image", art_filename);
     }
   }
   writer.writeEndDocument();
