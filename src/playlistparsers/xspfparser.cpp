@@ -25,6 +25,7 @@
 #include <QRegExp>
 #include <QUrl>
 #include <QXmlStreamReader>
+#include <QDebug>
 
 XSPFParser::XSPFParser(LibraryBackendInterface* library, QObject* parent)
     : XMLParser(library, parent) {}
@@ -100,8 +101,9 @@ return_song:
   return song;
 }
 
-void XSPFParser::Save(const SongList& songs, QIODevice* device,
-                      const QDir&) const {
+void XSPFParser::Save(const SongList& songs, QIODevice* device,		
+                      const QDir& dir) const {
+  QFileInfo file;
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
@@ -113,7 +115,8 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
   StreamElement tracklist("trackList", &writer);
   for (const Song& song : songs) {
     StreamElement track("track", &writer);
-    writer.writeTextElement("location", song.url().toString());
+    writer.writeTextElement("location", dir.relativeFilePath(
+                            QFileInfo(song.url().toLocalFile()).absoluteFilePath()));
     writer.writeTextElement("title", song.title());
     if (!song.artist().isEmpty()) {
       writer.writeTextElement("creator", song.artist());
@@ -131,8 +134,11 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
       // Convert local files to URLs.
-      if (!art.contains("://")) {
-        art = QUrl::fromLocalFile(art).toString();
+      QUrl url(art);
+      if (!art.contains("://") || url.scheme() == "file") {
+        art = dir.relativeFilePath(QFileInfo(url.toLocalFile()).absoluteFilePath());
+      } else {
+        art = url.toString();
       }
       writer.writeTextElement("image", art);
     }
