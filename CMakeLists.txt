@@ -107,7 +107,6 @@ if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
 endif()
 
 if (APPLE)
-  find_library(GROWL Growl)
   find_library(SPARKLE Sparkle)
 
   find_library(SPOTIFY libspotify)

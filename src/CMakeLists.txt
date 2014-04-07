@@ -853,7 +853,6 @@ optional_source(HAVE_SPOTIFY_DOWNLOADER
 # Platform specific - OS X
 optional_source(APPLE
   INCLUDE_DIRECTORIES
-    ${GROWL}/Headers
     ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
   SOURCES
     core/macfslistener.mm
@@ -1290,7 +1289,6 @@ endif()
 
 if (APPLE)
   target_link_libraries(clementine_lib
-    ${GROWL}
     /System/Library/Frameworks/AppKit.framework
     /System/Library/Frameworks/Carbon.framework
     /System/Library/Frameworks/CoreAudio.framework
@@ -1394,9 +1392,6 @@ if (APPLE)
     install(DIRECTORY "${SPARKLE}/Versions/Current/Resources"
       DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
   endif (HAVE_SPARKLE)
-
-  install(DIRECTORY "${GROWL}/Versions/Current/Resources"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Growl.framework")
 
   install(FILES "${QT_QTCORE_LIBRARY_RELEASE}/Contents/Info.plist"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtCore.framework/Contents")
