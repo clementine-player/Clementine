@@ -53,7 +53,7 @@ void SongLoaderInserter::Load(Playlist* destination, int row, bool play_now,
 
     SongLoader::Result ret = loader->Load(url);
 
-    if (ret == SongLoader::WillLoadAsync) {
+    if (ret == SongLoader::BlockingLoadRequired) {
       pending_.append(loader);
       continue;
     }
@@ -85,7 +85,7 @@ void SongLoaderInserter::LoadAudioCD(Playlist* destination, int row,
   enqueue_ = enqueue;
 
   SongLoader* loader = new SongLoader(library_, player_, this);
-  connect(loader, SIGNAL(LoadFinished(bool)), SLOT(AudioCDTagsLoaded(bool)));
+  connect(loader, SIGNAL(LoadAudioCDFinished(bool)), SLOT(AudioCDTagsLoaded(bool)));
   qLog(Info) << "Loading audio CD...";
   SongLoader::Result ret = loader->LoadAudioCD();
   if (ret == SongLoader::Error) {
@@ -126,7 +126,7 @@ void SongLoaderInserter::AsyncLoad() {
   task_manager_->SetTaskProgress(async_load_id, async_progress,
                                  pending_.count());
   for (SongLoader* loader : pending_) {
-    loader->PreLoad();
+    loader->LoadFilenamesBlocking();
     task_manager_->SetTaskProgress(async_load_id, ++async_progress);
     songs_ << loader->songs();
   }
@@ -139,7 +139,7 @@ void SongLoaderInserter::AsyncLoad() {
   task_manager_->SetTaskProgress(async_load_id, async_progress, songs_.count());
   SongList songs;
   for (SongLoader* loader : pending_) {
-    loader->EffectiveSongsLoad();
+    loader->LoadMetadataBlocking();
     songs << loader->songs();
     task_manager_->SetTaskProgress(async_load_id, songs.count());
   }

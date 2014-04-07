@@ -162,7 +162,10 @@ void PlaylistManager::Load(const QString& filename) {
 
   int id = playlist_backend_->CreatePlaylist(info.baseName(), QString());
 
-  if (id == -1) qFatal("Couldn't create playlist");
+  if (id == -1) {
+    emit Error(tr("Couldn't create playlist"));
+    return;
+  }
 
   Playlist* playlist = AddPlaylist(id, info.baseName(), QString(), QString(), false);
 

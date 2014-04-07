@@ -113,10 +113,10 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
   url_ = PodcastUrlLoader::FixPodcastUrl(url_);
 
   preload_func_ = std::bind(&SongLoader::LoadRemote, this);
-  return WillLoadAsync;
+  return BlockingLoadRequired;
 }
 
-void SongLoader::PreLoad() {
+void SongLoader::LoadFilenamesBlocking() {
   if (preload_func_) {
     preload_func_();
   }
@@ -243,7 +243,7 @@ void SongLoader::AudioCDTagsLoaded(
     song.set_url(QUrl(QString("cdda://%1").arg(track_number++)));
     songs_ << song;
   }
-  emit LoadFinished(true);
+  emit LoadAudioCDFinished(true);
 }
 
 SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
@@ -273,7 +273,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   // It's not in the database, load it asynchronously.
   preload_func_ =
       std::bind(&SongLoader::LoadLocalAsync, this, filename);
-  return WillLoadAsync;
+  return BlockingLoadRequired;
 }
 
 void SongLoader::LoadLocalAsync(const QString& filename) {
@@ -327,7 +327,7 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
   if (song.is_valid()) songs_ << song;
 }
 
-void SongLoader::EffectiveSongsLoad() {
+void SongLoader::LoadMetadataBlocking() {
   for (int i = 0; i < songs_.size(); i++) {
     EffectiveSongLoad(&songs_[i]);
   }
@@ -438,7 +438,7 @@ void SongLoader::StopTypefind() {
     AddAsRawStream();
   }
 
-  emit LoadFinished(success_);
+  emit LoadRemoteFinished();
 }
 
 void SongLoader::LoadRemote() {
@@ -489,7 +489,7 @@ void SongLoader::LoadRemote() {
   gst_object_unref(pad);
 
   QEventLoop loop;
-  loop.connect(this, SIGNAL(LoadFinished(bool)), SLOT(quit()));
+  loop.connect(this, SIGNAL(LoadRemoteFinished()), SLOT(quit()));
 
   // Start "playing"
   gst_element_set_state(pipeline.get(), GST_STATE_PLAYING);
