@@ -45,7 +45,11 @@ class SongLoader : public QObject {
              QObject* parent = nullptr);
   ~SongLoader();
 
-  enum Result { Success, Error, BlockingLoadRequired, };
+  enum Result {
+    Success,
+    Error,
+    BlockingLoadRequired,
+  };
 
   static const int kDefaultTimeout;
 
@@ -55,8 +59,8 @@ class SongLoader : public QObject {
   int timeout() const { return timeout_; }
   void set_timeout(int msec) { timeout_ = msec; }
 
-  // If Success is returned the songs are fully loaded. If WillLoadAsync is
-  // returned LoadFilenamesBlocking() needs to be called next.
+  // If Success is returned the songs are fully loaded. If BlockingLoadRequired
+  // is returned LoadFilenamesBlocking() needs to be called next.
   Result Load(const QUrl& url);
   // Loads the files with only filenames. When finished, songs() contains a
   // complete list of all Song objects, but without metadata. This method is
