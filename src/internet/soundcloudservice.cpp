@@ -149,14 +149,8 @@ void SoundCloudService::Homepage() {
 void SoundCloudService::Connect() {
   OAuthenticator* oauth = new OAuthenticator(
       kApiClientId, kApiClientSecret, OAuthenticator::RedirectStyle::REMOTE_WITH_STATE, this);
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  QString refresh_token = s.value("refresh_token").toString();
-  if (!refresh_token.isEmpty()) {
-    oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token);
-  } else {
-    oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
-  }
+
+  oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
 
   NewClosure(oauth, SIGNAL(Finished()), this,
              SLOT(ConnectFinished(OAuthenticator*)), oauth);
@@ -172,11 +166,7 @@ void SoundCloudService::ConnectFinished(OAuthenticator* oauth) {
   expiry_time_ = oauth->expiry_time();
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue("refresh_token", oauth->refresh_token());
   s.setValue("access_token", access_token_);
-  qLog(Debug) << "access_token" << oauth->access_token();
-  qLog(Debug) << "refresh_token" << oauth->refresh_token();
-  qLog(Debug) << "expiry_time()" << oauth->expiry_time();
 
   EnsureItemsCreated();
 }
