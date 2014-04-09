@@ -127,11 +127,6 @@ class OSD : public QObject {
   QString last_image_uri_;
   QImage last_image_;
 
-#ifdef Q_OS_DARWIN
-  class GrowlNotificationWrapper;
-  GrowlNotificationWrapper* wrapper_;
-#endif  // Q_OS_DARWIN
-
 #ifdef HAVE_DBUS
   std::unique_ptr<OrgFreedesktopNotificationsInterface> interface_;
   uint notification_id_;
