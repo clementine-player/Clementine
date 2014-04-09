@@ -203,8 +203,10 @@ void SoundCloudService::Logout() {
 
   access_token_.clear();
   s.remove("access_token");
-  root_->removeRow(user_activities_->row());
-  root_->removeRow(user_tracks_->row());
+  if (user_activities_)
+    root_->removeRow(user_activities_->row());
+  if (user_tracks_)
+    root_->removeRow(user_tracks_->row());
   user_activities_ = nullptr;
   user_tracks_ = nullptr;
 }
@@ -357,6 +359,17 @@ QNetworkReply* SoundCloudService::CreateRequest(const QString& ressource_name,
 }
 
 QVariant SoundCloudService::ExtractResult(QNetworkReply* reply) {
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Debug) << "Error when retrieving SoundCloud results:" << reply->errorString() << QString(" (%1)").arg(reply->error());
+    if (reply->error() == QNetworkReply::ContentAccessDenied ||
+        reply->error() == QNetworkReply::ContentOperationNotPermittedError ||
+        reply->error() == QNetworkReply::ContentNotFoundError ||
+        reply->error() == QNetworkReply::AuthenticationRequiredError) {
+      // In case of access denied errors (invalid token?) logout
+      Logout();
+      return QVariant();
+    }
+  }
   QJson::Parser parser;
   bool ok;
   QVariant result = parser.parse(reply, &ok);
