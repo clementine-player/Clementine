@@ -350,7 +350,7 @@ QNetworkReply* SoundCloudService::CreateRequest(const QString& ressource_name,
 
 QVariant SoundCloudService::ExtractResult(QNetworkReply* reply) {
   if (reply->error() != QNetworkReply::NoError) {
-    qLog(Debug) << "Error when retrieving SoundCloud results:" << reply->errorString() << QString(" (%1)").arg(reply->error());
+    qLog(Error) << "Error when retrieving SoundCloud results:" << reply->errorString() << QString(" (%1)").arg(reply->error());
     if (reply->error() == QNetworkReply::ContentAccessDenied ||
         reply->error() == QNetworkReply::ContentOperationNotPermittedError ||
         reply->error() == QNetworkReply::ContentNotFoundError ||
