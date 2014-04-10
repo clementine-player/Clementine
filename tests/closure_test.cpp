@@ -133,7 +133,6 @@ TEST(ClosureTest, ClosureWorksWithMemberFunctionPointers) {
   EXPECT_EQ(42, q);
 }
 
-#ifdef HAVE_LAMBDAS
 TEST(ClosureTest, ClosureCallsLambda) {
   TestQObject sender;
   bool called = false;
@@ -144,4 +143,3 @@ TEST(ClosureTest, ClosureCallsLambda) {
   sender.Emit();
   EXPECT_TRUE(called);
 }
-#endif  // HAVE_LAMBDAS
