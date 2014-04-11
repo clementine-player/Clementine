@@ -77,8 +77,8 @@ QString About::MakeHtml() const {
   }
   ret += QString(
       "<br />" + tr("All the translators") +
-      " &lt;<a href=\"https://www.transifex.net/projects/p/clementine\">"
-      "https://www.transifex.net/projects/p/clementine</a>&gt;");
+      " &lt;<a href=\"https://www.transifex.com/projects/p/clementine/\">"
+      "https://www.transifex.com/projects/p/clementine/</a>&gt;");
 
   ret += QString("<br />%1</p>").arg(tr("...and all the Amarok contributors"));
   ret += QString("<p><b>%1</b>").arg(tr("And:"));
