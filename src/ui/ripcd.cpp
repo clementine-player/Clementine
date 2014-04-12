@@ -73,7 +73,6 @@ RipCD::RipCD(QWidget* parent)
       finished_success_(0),
       finished_failed_(0),
       ui_(new Ui_RipCD) {
-
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   // Init
   ui_->setupUi(this);
@@ -307,10 +306,11 @@ void RipCD::ThreadedTranscoding() {
 }
 
 void RipCD::ClickedRipButton() {
-  if((cdio_) && cdio_get_media_changed(cdio_)) {
-    QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"), tr("Media has changed. Reloading"));
+  if ((cdio_) && cdio_get_media_changed(cdio_)) {
+    QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"),
+                          tr("Media has changed. Reloading"));
     cdio_fail.exec();
-    if(CheckCDIOIsValid()) {
+    if (CheckCDIOIsValid()) {
       BuildTrackListTable();
     } else {
       ui_->tableWidget->clearContents();
@@ -409,7 +409,7 @@ void RipCD::Cancel() {
 }
 
 bool RipCD::CheckCDIOIsValid() {
-  if((cdio_)) {
+  if ((cdio_)) {
     cdio_destroy(cdio_);
   }
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
@@ -459,21 +459,19 @@ void RipCD::BuildTrackListTable() {
   i_tracks_ = cdio_get_num_tracks(cdio_);
   ui_->tableWidget->setRowCount(i_tracks_);
   for (int i = 1; i <= i_tracks_; i++) {
-    QCheckBox *checkbox_i = new QCheckBox(ui_->tableWidget);
+    QCheckBox* checkbox_i = new QCheckBox(ui_->tableWidget);
     checkbox_i->setCheckState(Qt::Checked);
     checkboxes_.append(checkbox_i);
     ui_->tableWidget->setCellWidget(i - 1, kCheckboxColumn, checkbox_i);
     ui_->tableWidget->setCellWidget(i - 1, kTrackNumberColumn,
-        new QLabel(QString::number(i)));
+                                    new QLabel(QString::number(i)));
     QString track_title = QString("Track %1").arg(i);
-    QLineEdit *line_edit_track_title_i = new QLineEdit(track_title,
-        ui_->tableWidget);
+    QLineEdit* line_edit_track_title_i =
+        new QLineEdit(track_title, ui_->tableWidget);
     track_names_.append(line_edit_track_title_i);
     ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn,
-        line_edit_track_title_i);
+                                    line_edit_track_title_i);
   }
 }
 
-void RipCD::showEvent(QShowEvent *event) {
-  BuildTrackListTable();
-}
+void RipCD::showEvent(QShowEvent* event) { BuildTrackListTable(); }
