@@ -38,18 +38,23 @@ const char* SongkickConcerts::kSongkickArtistCalendarUrl =
 SongkickConcerts::SongkickConcerts() {
   Geolocator* geolocator = new Geolocator;
   geolocator->Geolocate();
-  connect(geolocator, SIGNAL(Finished(Geolocator::LatLng)), SLOT(GeolocateFinished(Geolocator::LatLng)));
-  NewClosure(geolocator, SIGNAL(Finished(Geolocator::LatLng)), geolocator, SLOT(deleteLater()));
+  connect(geolocator, SIGNAL(Finished(Geolocator::LatLng)),
+          SLOT(GeolocateFinished(Geolocator::LatLng)));
+  NewClosure(geolocator, SIGNAL(Finished(Geolocator::LatLng)), geolocator,
+             SLOT(deleteLater()));
 }
 
 void SongkickConcerts::FetchInfo(int id, const Song& metadata) {
   Echonest::Artist::SearchParams params;
-  params.push_back(qMakePair(Echonest::Artist::Name, QVariant(metadata.artist())));
-  params.push_back(qMakePair(Echonest::Artist::IdSpace, QVariant(kSongkickArtistBucket)));
+  params.push_back(
+      qMakePair(Echonest::Artist::Name, QVariant(metadata.artist())));
+  params.push_back(
+      qMakePair(Echonest::Artist::IdSpace, QVariant(kSongkickArtistBucket)));
   qLog(Debug) << "Params:" << params;
   QNetworkReply* reply = Echonest::Artist::search(params);
   qLog(Debug) << reply->request().url();
-  NewClosure(reply, SIGNAL(finished()), this, SLOT(ArtistSearchFinished(QNetworkReply*, int)), reply, id);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(ArtistSearchFinished(QNetworkReply*, int)), reply, id);
 }
 
 void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
@@ -65,7 +70,7 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
     const Echonest::Artist& artist = artists[0];
     const Echonest::ForeignIds& foreign_ids = artist.foreignIds();
     QString songkick_id;
-    foreach (const Echonest::ForeignId& id, foreign_ids) {
+    for (const Echonest::ForeignId& id : foreign_ids) {
       if (id.catalog == "songkick") {
         songkick_id = id.foreign_id;
         break;
@@ -86,7 +91,8 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
     }
 
     FetchSongkickCalendar(split[2], id);
-  } catch (Echonest::ParseError& e) {
+  }
+  catch (Echonest::ParseError& e) {
     qLog(Error) << "Error parsing echonest reply:" << e.errorType() << e.what();
     emit Finished(id);
   }
@@ -96,7 +102,8 @@ void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
   QUrl url(QString(kSongkickArtistCalendarUrl).arg(artist_id));
   qLog(Debug) << url;
   QNetworkReply* reply = network_.get(QNetworkRequest(url));
-  NewClosure(reply, SIGNAL(finished()), this, SLOT(CalendarRequestFinished(QNetworkReply*, int)), reply, id);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(CalendarRequestFinished(QNetworkReply*, int)), reply, id);
 }
 
 void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
@@ -123,7 +130,7 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   QWidget* container = new QWidget;
   QVBoxLayout* layout = new QVBoxLayout(container);
 
-  foreach (const QVariant& v, events) {
+  for (const QVariant& v : events) {
     QVariantMap event = v.toMap();
     QString display_name = event["displayName"].toString();
     QString start_date = event["start"].toMap()["date"].toString();
@@ -132,20 +139,17 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
 
     // Try to get the lat/lng coordinates of the venue.
     QVariantMap venue = event["venue"].toMap();
-    const bool valid_latlng =
-        venue["lng"].isValid() && venue["lat"].isValid();
+    const bool valid_latlng = venue["lng"].isValid() && venue["lat"].isValid();
 
     if (valid_latlng && latlng_.IsValid()) {
       static const int kFilterDistanceMetres = 250 * 1e3;  // 250km
-      Geolocator::LatLng latlng(
-          venue["lat"].toString(), venue["lng"].toString());
+      Geolocator::LatLng latlng(venue["lat"].toString(),
+                                venue["lng"].toString());
       if (latlng_.IsValid() && latlng.IsValid()) {
         int distance_metres = latlng_.Distance(latlng);
         if (distance_metres > kFilterDistanceMetres) {
-          qLog(Debug) << "Filtered concert:"
-                      << display_name
-                      << "as too far away:"
-                      << distance_metres;
+          qLog(Debug) << "Filtered concert:" << display_name
+                      << "as too far away:" << distance_metres;
           continue;
         }
       }

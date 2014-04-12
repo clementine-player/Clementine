@@ -18,10 +18,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <memory>
+
 #include <QObject>
 #include <QSettings>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "config.h"
 #include "core/song.h"
@@ -31,14 +31,13 @@
 #include "playlist/playlistitem.h"
 
 class Application;
-class LastFMService;
-
+class Scrobbler;
 
 class PlayerInterface : public QObject {
   Q_OBJECT
 
-public:
-  PlayerInterface(QObject* parent = 0) : QObject(parent) {}
+ public:
+  PlayerInterface(QObject* parent = nullptr) : QObject(parent) {}
 
   virtual EngineBase* engine() const = 0;
   virtual Engine::State GetState() const = 0;
@@ -50,11 +49,12 @@ public:
   virtual void RegisterUrlHandler(UrlHandler* handler) = 0;
   virtual void UnregisterUrlHandler(UrlHandler* handler) = 0;
 
-public slots:
+ public slots:
   virtual void ReloadSettings() = 0;
 
   // Manual track change to the specified track
-  virtual void PlayAt(int i, Engine::TrackChangeFlags change, bool reshuffle) = 0;
+  virtual void PlayAt(int i, Engine::TrackChangeFlags change,
+                      bool reshuffle) = 0;
 
   // If there's currently a song playing, pause it, otherwise play the track
   // that was playing last, or the first one on the playlist
@@ -93,19 +93,21 @@ signals:
   // Emitted when there's a manual change to the current's track position.
   void Seeked(qlonglong microseconds);
 
-  // Emitted when Player has processed a request to play another song. This contains
+  // Emitted when Player has processed a request to play another song. This
+  // contains
   // the URL of the song and a flag saying whether it was able to play the song.
   void SongChangeRequestProcessed(const QUrl& url, bool valid);
 
-  // The toggle parameter is true when user requests to toggle visibility for Pretty OSD
+  // The toggle parameter is true when user requests to toggle visibility for
+  // Pretty OSD
   void ForceShowOSD(Song, bool toogle);
 };
 
 class Player : public PlayerInterface {
   Q_OBJECT
 
-public:
-  Player(Application* app, QObject* parent = 0);
+ public:
+  Player(Application* app, QObject* parent = nullptr);
   ~Player();
 
   void Init();
@@ -122,7 +124,7 @@ public:
 
   const UrlHandler* HandlerForUrl(const QUrl& url) const;
 
-public slots:
+ public slots:
   void ReloadSettings();
 
   void PlayAt(int i, Engine::TrackChangeFlags change, bool reshuffle);
@@ -171,14 +173,15 @@ public slots:
 
  private:
   Application* app_;
-  LastFMService* lastfm_;
+  Scrobbler* lastfm_;
   QSettings settings_;
 
   PlaylistItemPtr current_item_;
 
-  boost::scoped_ptr<EngineBase> engine_;
+  std::unique_ptr<EngineBase> engine_;
   Engine::TrackChangeFlags stream_change_type_;
   Engine::State last_state_;
+  int nb_errors_received_;
 
   QMap<QString, UrlHandler*> url_handlers_;
 
@@ -187,4 +190,4 @@ public slots:
   int volume_before_mute_;
 };
 
-#endif // PLAYER_H
+#endif  // PLAYER_H

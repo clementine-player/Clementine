@@ -24,15 +24,15 @@
 #include "core/messagehandler.h"
 
 class TagReaderWorker : public AbstractMessageHandler<pb::tagreader::Message> {
-public:
+ public:
   TagReaderWorker(QIODevice* socket, QObject* parent = NULL);
 
-protected:
+ protected:
   void MessageArrived(const pb::tagreader::Message& message);
   void DeviceClosed();
 
-private:
+ private:
   TagReader tag_reader_;
 };
 
-#endif // TAGREADERWORKER_H
+#endif  // TAGREADERWORKER_H

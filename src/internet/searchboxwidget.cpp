@@ -25,10 +25,9 @@
 #include <QMenu>
 
 SearchBoxWidget::SearchBoxWidget(InternetService* service)
-  : service_(service),
-    ui_(new Ui_SearchBoxWidget),
-    menu_(new QMenu(tr("Display options"), this))
-{
+    : service_(service),
+      ui_(new Ui_SearchBoxWidget),
+      menu_(new QMenu(tr("Display options"), this)) {
   ui_->setupUi(this);
 
   // Icons
@@ -39,24 +38,29 @@ SearchBoxWidget::SearchBoxWidget(InternetService* service)
   ui_->options->setMenu(menu_);
 
   menu_->addAction(IconLoader::Load("configure"),
-                   tr("Configure %1...").arg(service_->name()),
-                   service_, SLOT(ShowConfig()));
+                   tr("Configure %1...").arg(service_->name()), service_,
+                   SLOT(ShowConfig()));
 
-  ui_->filter->setPlaceholderText(QString("Search on %1").arg(service_->name()));
-  connect(ui_->filter, SIGNAL(textChanged(QString)), SIGNAL(TextChanged(QString)));
+  ui_->filter->setPlaceholderText(
+      QString("Search on %1").arg(service_->name()));
+  connect(ui_->filter, SIGNAL(textChanged(QString)),
+          SIGNAL(TextChanged(QString)));
 
   did_you_mean_ = new DidYouMean(ui_->filter, this);
-  connect(did_you_mean_, SIGNAL(Accepted(QString)),
-          ui_->filter, SLOT(setText(QString)));
+  connect(did_you_mean_, SIGNAL(Accepted(QString)), ui_->filter,
+          SLOT(setText(QString)));
 }
 
-SearchBoxWidget::~SearchBoxWidget() {
-  delete ui_;
-}
+SearchBoxWidget::~SearchBoxWidget() { delete ui_; }
 
-void SearchBoxWidget::FocusOnFilter(QKeyEvent *event) {
+void SearchBoxWidget::FocusOnFilter(QKeyEvent* event) {
   ui_->filter->setFocus(Qt::OtherFocusReason);
   QApplication::sendEvent(ui_->filter, event);
+}
+
+void SearchBoxWidget::SetText(const QString &text)
+{
+    ui_->filter->setText(text);
 }
 
 void SearchBoxWidget::keyReleaseEvent(QKeyEvent* e) {

@@ -25,6 +25,7 @@ if (QT_VERSION_MINOR GREATER 5)
   endif(QT_VERSION_MINOR GREATER 7)
 endif(QT_VERSION_MINOR GREATER 5)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+add_definitions(-DBOOST_BIND_NO_PLACEHOLDERS)
 
 include_directories(${CMAKE_BINARY_DIR})
 include_directories(${GLIB_INCLUDE_DIRS})
@@ -137,6 +138,7 @@ set(SOURCES
   devices/deviceviewcontainer.cpp
   devices/filesystemdevice.cpp
 
+  engines/devicefinder.cpp
   engines/enginebase.cpp
   engines/gstengine.cpp
   engines/gstenginepipeline.cpp
@@ -162,6 +164,7 @@ set(SOURCES
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
+  internet/cloudfilesearchprovider.cpp
   internet/cloudfileservice.cpp
   internet/digitallyimportedclient.cpp
   internet/digitallyimportedservicebase.cpp
@@ -196,6 +199,7 @@ set(SOURCES
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
   internet/soundcloudservice.cpp
+  internet/soundcloudsettingspage.cpp
   internet/spotifyserver.cpp
   internet/spotifyservice.cpp
   internet/spotifysettingspage.cpp
@@ -492,10 +496,12 @@ set(HEADERS
   internet/magnatunesettingspage.h
   internet/oauthenticator.h
   internet/savedradio.h
+  internet/scrobbler.h
   internet/searchboxwidget.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
   internet/soundcloudservice.h
+  internet/soundcloudsettingspage.h
   internet/spotifyserver.h
   internet/spotifyservice.h
   internet/spotifysettingspage.h
@@ -688,6 +694,7 @@ set(UI
   internet/magnatunedownloaddialog.ui
   internet/magnatunesettingspage.ui
   internet/searchboxwidget.ui
+  internet/soundcloudsettingspage.ui
   internet/spotifysettingspage.ui
   internet/subsonicsettingspage.ui
 
@@ -813,13 +820,10 @@ optional_source(ENABLE_VISUALISATIONS
 optional_source(HAVE_LIBLASTFM
   SOURCES
     covers/lastfmcoverprovider.cpp
-    globalsearch/lastfmsearchprovider.cpp
     internet/fixlastfm.cpp
     internet/lastfmcompat.cpp
     internet/lastfmservice.cpp
     internet/lastfmsettingspage.cpp
-    internet/lastfmstationdialog.cpp
-    internet/lastfmurlhandler.cpp
     songinfo/echonestsimilarartists.cpp
     songinfo/echonesttags.cpp
     songinfo/lastfmtrackinfoprovider.cpp
@@ -828,14 +832,12 @@ optional_source(HAVE_LIBLASTFM
     covers/lastfmcoverprovider.h
     internet/lastfmservice.h
     internet/lastfmsettingspage.h
-    internet/lastfmstationdialog.h
     songinfo/echonestsimilarartists.h
     songinfo/echonesttags.h
     songinfo/lastfmtrackinfoprovider.h
     songinfo/tagwidget.h
   UI
     internet/lastfmsettingspage.ui
-    internet/lastfmstationdialog.ui
 )
 
 
@@ -851,7 +853,6 @@ optional_source(HAVE_SPOTIFY_DOWNLOADER
 # Platform specific - OS X
 optional_source(APPLE
   INCLUDE_DIRECTORIES
-    ${GROWL}/Headers
     ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
   SOURCES
     core/macfslistener.mm
@@ -859,6 +860,7 @@ optional_source(APPLE
     core/mac_startup.mm
     core/scoped_nsautorelease_pool.mm
     devices/macdevicelister.mm
+    engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp
@@ -874,6 +876,7 @@ optional_source(APPLE
 # Platform specific - Windows
 optional_source(WIN32
   SOURCES
+    engines/directsounddevicefinder.cpp
     networkremote/tinysvcmdns.cpp
     widgets/osd_win.cpp
   INCLUDE_DIRECTORIES
@@ -1081,22 +1084,6 @@ optional_source(HAVE_GOOGLE_DRIVE
     internet/googledrivesettingspage.ui
 )
 
-# Ubuntu One file support
-optional_source(HAVE_UBUNTU_ONE
-  SOURCES
-    internet/ubuntuoneauthenticator.cpp
-    internet/ubuntuoneservice.cpp
-    internet/ubuntuonesettingspage.cpp
-    internet/ubuntuoneurlhandler.cpp
-  HEADERS
-    internet/ubuntuoneauthenticator.h
-    internet/ubuntuoneservice.h
-    internet/ubuntuonesettingspage.h
-    internet/ubuntuoneurlhandler.h
-  UI
-    internet/ubuntuonesettingspage.ui
-)
-
 # Dropbox support
 optional_source(HAVE_DROPBOX
   SOURCES
@@ -1117,10 +1104,14 @@ optional_source(HAVE_DROPBOX
 optional_source(HAVE_SKYDRIVE
   SOURCES
     internet/skydriveservice.cpp
+    internet/skydrivesettingspage.cpp
     internet/skydriveurlhandler.cpp
   HEADERS
     internet/skydriveservice.h
+    internet/skydrivesettingspage.h
     internet/skydriveurlhandler.h
+  UI
+    internet/skydrivesettingspage.ui
 )
 
 # Box support
@@ -1135,6 +1126,39 @@ optional_source(HAVE_BOX
     internet/boxurlhandler.h
   UI
     internet/boxsettingspage.ui
+)
+
+# Vk.com support
+optional_source(HAVE_VK
+  INCLUDE_DIRECTORIES 
+    ${VREEN_INCLUDE_DIRS}
+  SOURCES
+    globalsearch/vksearchprovider.cpp
+    internet/vkconnection.cpp
+    internet/vkmusiccache.cpp
+    internet/vksearchdialog.cpp
+    internet/vkservice.cpp
+    internet/vksettingspage.cpp
+    internet/vkurlhandler.cpp
+  HEADERS
+    globalsearch/vksearchprovider.h
+    internet/vkconnection.h
+    internet/vkmusiccache.h
+    internet/vksearchdialog.h
+    internet/vkservice.h
+    internet/vksettingspage.h
+    internet/vkurlhandler.h
+  UI
+    internet/vksearchdialog.ui
+    internet/vksettingspage.ui
+)
+
+# Pulse audio integration
+optional_source(HAVE_LIBPULSE
+  INCLUDE_DIRECTORIES
+    ${LIBPULSE_INCLUDE_DIRS}
+  SOURCES
+    engines/pulsedevicefinder.cpp
 )
 
 # Hack to add Clementine to the Unity system tray whitelist
@@ -1204,6 +1228,10 @@ target_link_libraries(clementine_lib
   Qocoa
 )
 
+if(HAVE_VK)
+  target_link_libraries(clementine_lib ${VREEN_LIBRARIES})
+endif(HAVE_VK)
+
 if(ENABLE_VISUALISATIONS)
   target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
 endif(ENABLE_VISUALISATIONS)
@@ -1255,14 +1283,19 @@ if(HAVE_SPOTIFY_DOWNLOADER)
   link_directories(${QCA_LIBRARY_DIRS})
 endif(HAVE_SPOTIFY_DOWNLOADER)
 
+if(HAVE_LIBPULSE)
+  target_link_libraries(clementine_lib ${LIBPULSE_LIBRARIES})
+endif()
+
 if (APPLE)
   target_link_libraries(clementine_lib
-    ${GROWL}
     /System/Library/Frameworks/AppKit.framework
     /System/Library/Frameworks/Carbon.framework
+    /System/Library/Frameworks/CoreAudio.framework
     /System/Library/Frameworks/DiskArbitration.framework
     /System/Library/Frameworks/Foundation.framework
     /System/Library/Frameworks/IOKit.framework
+    /System/Library/Frameworks/ScriptingBridge.framework
   )
   target_link_libraries(clementine_lib ${SPMEDIAKEYTAP_LIBRARIES})
   if (HAVE_SPARKLE)
@@ -1282,6 +1315,7 @@ if (WIN32)
     ${QTSPARKLE_LIBRARIES}
     tinysvcmdns
     qtwin
+    dsound
   )
 endif (WIN32)
 
@@ -1359,22 +1393,19 @@ if (APPLE)
       DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
   endif (HAVE_SPARKLE)
 
-  install(DIRECTORY "${GROWL}/Versions/Current/Resources"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Growl.framework")
-
-  install(FILES "${QT_QTCORE_LIBRARY}/Contents/Info.plist"
+  install(FILES "${QT_QTCORE_LIBRARY_RELEASE}/Contents/Info.plist"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtCore.framework/Contents")
-  install(FILES "${QT_QTGUI_LIBRARY}/Contents/Info.plist"
+  install(FILES "${QT_QTGUI_LIBRARY_RELEASE}/Contents/Info.plist"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtGui.framework/Contents")
-  install(FILES "${QT_QTNETWORK_LIBRARY}/Contents/Info.plist"
+  install(FILES "${QT_QTNETWORK_LIBRARY_RELEASE}/Contents/Info.plist"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtNetwork.framework/Contents")
-  install(FILES "${QT_QTOPENGL_LIBRARY}/Contents/Info.plist"
+  install(FILES "${QT_QTOPENGL_LIBRARY_RELEASE}/Contents/Info.plist"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtOpenGL.framework/Contents")
-  install(FILES "${QT_QTSQL_LIBRARY}/Contents/Info.plist"
+  install(FILES "${QT_QTSQL_LIBRARY_RELEASE}/Contents/Info.plist"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSql.framework/Contents")
-  install(FILES "${QT_QTSVG_LIBRARY}/Contents/Info.plist"
+  install(FILES "${QT_QTSVG_LIBRARY_RELEASE}/Contents/Info.plist"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSvg.framework/Contents")
-  install(FILES "${QT_QTXML_LIBRARY}/Contents/Info.plist"
+  install(FILES "${QT_QTXML_LIBRARY_RELEASE}/Contents/Info.plist"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtXml.framework/Contents")
 
   if (HAVE_BREAKPAD)

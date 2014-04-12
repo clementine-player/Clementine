@@ -6,8 +6,8 @@
 #include "networkremote.h"
 
 class NetworkRemoteHelper : public QObject {
-    Q_OBJECT
-public:
+  Q_OBJECT
+ public:
   static NetworkRemoteHelper* Instance();
 
   NetworkRemoteHelper(Application* app);
@@ -15,7 +15,7 @@ public:
 
   void ReloadSettings();
 
-private slots:
+ private slots:
   void StartServer();
 
 signals:
@@ -23,9 +23,9 @@ signals:
   void StartServerSig();
   void ReloadSettingsSig();
 
-private:
+ private:
   static NetworkRemoteHelper* sInstance;
   Application* app_;
 };
 
-#endif // NETWORKREMOTEHELPER_H
+#endif  // NETWORKREMOTEHELPER_H

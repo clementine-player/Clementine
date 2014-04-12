@@ -21,9 +21,7 @@
 #include <QUrl>
 
 #if QT_VERSION < 0x040700
-inline uint qHash(const QUrl& url) {
-  return qHash(url.toEncoded());
-}
+inline uint qHash(const QUrl& url) { return qHash(url.toEncoded()); }
 #endif
 
-#endif // QHASH_QURL_H
+#endif  // QHASH_QURL_H

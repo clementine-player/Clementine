@@ -35,26 +35,26 @@ class WizardPlugin;
 class Wizard : public QWizard {
   Q_OBJECT
 
-public:
+ public:
   Wizard(Application* app, LibraryBackend* library, QWidget* parent);
   ~Wizard();
 
   void SetGenerator(GeneratorPtr gen);
   GeneratorPtr CreateGenerator() const;
 
-protected:
+ protected:
   void initializePage(int id);
 
-private:
+ private:
   class TypePage;
   class FinishPage;
 
   void AddPlugin(WizardPlugin* plugin);
 
-private slots:
+ private slots:
   void TypeChanged(int index);
 
-private:
+ private:
   Application* app_;
   LibraryBackend* library_;
   TypePage* type_page_;
@@ -66,6 +66,6 @@ private:
   QSignalMapper* type_mapper_;
 };
 
-} // namespace
+}  // namespace
 
-#endif // SMARTPLAYLISTWIZARD_H
+#endif  // SMARTPLAYLISTWIZARD_H

@@ -24,24 +24,20 @@
 #include <QCheckBox>
 #include <QGroupBox>
 
-BackgroundStreamsSettingsPage::BackgroundStreamsSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_BackgroundStreamsSettingsPage)
-{
+BackgroundStreamsSettingsPage::BackgroundStreamsSettingsPage(
+    SettingsDialog* dialog)
+    : SettingsPage(dialog), ui_(new Ui_BackgroundStreamsSettingsPage) {
   ui_->setupUi(this);
   setWindowIcon(QIcon(":/icons/32x32/weather-showers-scattered.png"));
 
-  foreach (const QString& name, dialog->background_streams()->streams()) {
+  for (const QString& name : dialog->background_streams()->streams()) {
     AddStream(name);
   }
 }
 
-BackgroundStreamsSettingsPage::~BackgroundStreamsSettingsPage() {
-  delete ui_;
-}
+BackgroundStreamsSettingsPage::~BackgroundStreamsSettingsPage() { delete ui_; }
 
-void BackgroundStreamsSettingsPage::Load() {
-}
+void BackgroundStreamsSettingsPage::Load() {}
 
 void BackgroundStreamsSettingsPage::Save() {
   dialog()->background_streams()->SaveStreams();

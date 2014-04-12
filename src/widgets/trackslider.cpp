@@ -23,19 +23,18 @@
 #include <QSettings>
 
 #ifdef HAVE_MOODBAR
-# include "moodbar/moodbarproxystyle.h"
+#include "moodbar/moodbarproxystyle.h"
 #endif
 
 const char* TrackSlider::kSettingsGroup = "MainWindow";
 
 TrackSlider::TrackSlider(QWidget* parent)
-  : QWidget(parent),
-    ui_(new Ui_TrackSlider),
-    moodbar_style_(NULL),
-    setting_value_(false),
-    show_remaining_time_(true),
-    slider_maximum_value_(0)
-{
+    : QWidget(parent),
+      ui_(new Ui_TrackSlider),
+      moodbar_style_(nullptr),
+      setting_value_(false),
+      show_remaining_time_(true),
+      slider_maximum_value_(0) {
   ui_->setupUi(this);
 
   UpdateLabelWidth();
@@ -50,9 +49,7 @@ TrackSlider::TrackSlider(QWidget* parent)
   connect(ui_->remaining, SIGNAL(Clicked()), SLOT(ToggleTimeDisplay()));
 }
 
-TrackSlider::~TrackSlider() {
-  delete ui_;
-}
+TrackSlider::~TrackSlider() { delete ui_; }
 
 void TrackSlider::SetApplication(Application* app) {
 #ifdef HAVE_MOODBAR
@@ -82,13 +79,15 @@ QSize TrackSlider::sizeHint() const {
   width += ui_->elapsed->sizeHint().width();
   width += ui_->remaining->sizeHint().width();
 
-  int height = qMax(ui_->slider->sizeHint().height(), ui_->elapsed->sizeHint().height());
+  int height =
+      qMax(ui_->slider->sizeHint().height(), ui_->elapsed->sizeHint().height());
 
   return QSize(width, height);
 }
 
 void TrackSlider::SetValue(int elapsed, int total) {
-  setting_value_ = true; // This is so we don't emit from QAbstractSlider::valueChanged
+  setting_value_ =
+      true;  // This is so we don't emit from QAbstractSlider::valueChanged
   ui_->slider->setMaximum(total);
   ui_->slider->setValue(elapsed);
   setting_value_ = false;
@@ -98,12 +97,12 @@ void TrackSlider::SetValue(int elapsed, int total) {
 
 void TrackSlider::UpdateTimes(int elapsed) {
   ui_->elapsed->setText(Utilities::PrettyTime(elapsed));
-  //update normally if showing remaining time
+  // update normally if showing remaining time
   if (show_remaining_time_) {
-    ui_->remaining->setText("-" + Utilities::PrettyTime(ui_->slider->maximum() - elapsed));
-  }
-  else {
-    //check if slider maximum value is changed before updating
+    ui_->remaining->setText(
+        "-" + Utilities::PrettyTime(ui_->slider->maximum() - elapsed));
+  } else {
+    // check if slider maximum value is changed before updating
     if (slider_maximum_value_ != ui_->slider->maximum()) {
       slider_maximum_value_ = ui_->slider->maximum();
       ui_->remaining->setText(Utilities::PrettyTime(ui_->slider->maximum()));
@@ -129,12 +128,11 @@ void TrackSlider::SetCanSeek(bool can_seek) {
 
 void TrackSlider::Seek(int gap) {
   if (ui_->slider->isEnabled())
-    ui_->slider->setValue(ui_->slider->value()+gap);
+    ui_->slider->setValue(ui_->slider->value() + gap);
 }
 
 void TrackSlider::ValueMaybeChanged(int value) {
-  if (setting_value_)
-    return;
+  if (setting_value_) return;
 
   UpdateTimes(value);
   emit ValueChanged(value);
@@ -155,12 +153,12 @@ bool TrackSlider::event(QEvent* e) {
 void TrackSlider::ToggleTimeDisplay() {
   show_remaining_time_ = !show_remaining_time_;
   if (!show_remaining_time_) {
-    //we set the value to -1 because the label must be updated
+    // we set the value to -1 because the label must be updated
     slider_maximum_value_ = -1;
   }
   UpdateTimes(ui_->slider->value());
 
-  //save this setting
+  // save this setting
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("show_remaining_time", show_remaining_time_);

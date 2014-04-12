@@ -33,9 +33,9 @@ namespace smart_playlists {
 class GeneratorInserter : public QObject {
   Q_OBJECT
 
-public:
-  GeneratorInserter(TaskManager* task_manager,
-                    LibraryBackend* library, QObject* parent);
+ public:
+  GeneratorInserter(TaskManager* task_manager, LibraryBackend* library,
+                    QObject* parent);
 
   void Load(Playlist* destination, int row, bool play_now, bool enqueue,
             GeneratorPtr generator, int dynamic_count = 0);
@@ -44,10 +44,10 @@ signals:
   void Error(const QString& message);
   void PlayRequested(const QModelIndex& index);
 
-private slots:
+ private slots:
   void Finished();
 
-private:
+ private:
   TaskManager* task_manager_;
   LibraryBackend* library_;
   int task_id_;
@@ -59,6 +59,6 @@ private:
   bool is_dynamic_;
 };
 
-} // namespace
+}  // namespace
 
-#endif // PLAYLISTGENERATORINSERTER_H
+#endif  // PLAYLISTGENERATORINSERTER_H

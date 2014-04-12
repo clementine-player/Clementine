@@ -22,44 +22,46 @@
 #include "engines/gstengine.h"
 #include "playlist/playlist.h"
 
-
 PlaybackSettingsPage::PlaybackSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_PlaybackSettingsPage)
-{
+    : SettingsPage(dialog), ui_(new Ui_PlaybackSettingsPage) {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("media-playback-start"));
 
-  connect(ui_->fading_cross, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
+  connect(ui_->fading_cross, SIGNAL(toggled(bool)),
+          SLOT(FadingOptionsChanged()));
   connect(ui_->fading_out, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
-  connect(ui_->fading_auto, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
-  connect(ui_->gst_plugin, SIGNAL(currentIndexChanged(int)), SLOT(GstPluginChanged(int)));
+  connect(ui_->fading_auto, SIGNAL(toggled(bool)),
+          SLOT(FadingOptionsChanged()));
 
-  connect(ui_->replaygain_preamp, SIGNAL(valueChanged(int)), SLOT(RgPreampChanged(int)));
+  connect(ui_->buffer_min_fill, SIGNAL(valueChanged(int)),
+          SLOT(BufferMinFillChanged(int)));
+  ui_->buffer_min_fill_value_label->setMinimumWidth(
+      QFontMetrics(ui_->buffer_min_fill_value_label->font()).width("WW%"));
+
+  connect(ui_->replaygain_preamp, SIGNAL(valueChanged(int)),
+          SLOT(RgPreampChanged(int)));
   ui_->replaygain_preamp_label->setMinimumWidth(
       QFontMetrics(ui_->replaygain_preamp_label->font()).width("-WW.W dB"));
   RgPreampChanged(ui_->replaygain_preamp->value());
 }
 
-PlaybackSettingsPage::~PlaybackSettingsPage() {
-  delete ui_;
-}
+PlaybackSettingsPage::~PlaybackSettingsPage() { delete ui_; }
 
 void PlaybackSettingsPage::Load() {
   const GstEngine* engine = dialog()->gst_engine();
 
-  if (ui_->gst_plugin->count() <= 1 && engine) {
-    GstEngine::PluginDetailsList list = engine->GetOutputsList();
-
-    ui_->gst_plugin->setItemData(0, GstEngine::kAutoSink);
-    foreach (const GstEngine::PluginDetails& details, list) {
-      if (details.name == "autoaudiosink")
-        continue;
-
-      ui_->gst_plugin->addItem(details.long_name, details.name);
+  ui_->gst_output->clear();
+  for (const GstEngine::OutputDetails& output : engine->GetOutputsList()) {
+    // Strip components off the icon name until we find one.
+    QStringList components = output.icon_name.split("-");
+    QIcon icon;
+    while (icon.isNull() && !components.isEmpty()) {
+      icon = IconLoader::Load(components.join("-"));
+      components.removeLast();
     }
-    ui_->gst_group->setEnabled(true);
-    ui_->replaygain_group->setEnabled(true);
+
+    ui_->gst_output->addItem(
+        icon, output.description, QVariant::fromValue(output));
   }
 
   QSettings s;
@@ -73,27 +75,39 @@ void PlaybackSettingsPage::Load() {
   ui_->fading_cross->setChecked(s.value("CrossfadeEnabled", true).toBool());
   ui_->fading_auto->setChecked(s.value("AutoCrossfadeEnabled", false).toBool());
   ui_->fading_duration->setValue(s.value("FadeoutDuration", 2000).toInt());
-  ui_->fading_samealbum->setChecked(s.value("NoCrossfadeSameAlbum", true).toBool());
-  ui_->fadeout_pause->setChecked(s.value("FadeoutPauseEnabled", false).toBool());
-  ui_->fading_pause_duration->setValue(s.value("FadeoutPauseDuration", 250).toInt());
+  ui_->fading_samealbum->setChecked(
+      s.value("NoCrossfadeSameAlbum", true).toBool());
+  ui_->fadeout_pause->setChecked(
+      s.value("FadeoutPauseEnabled", false).toBool());
+  ui_->fading_pause_duration->setValue(
+      s.value("FadeoutPauseDuration", 250).toInt());
   s.endGroup();
 
   s.beginGroup(GstEngine::kSettingsGroup);
   QString sink = s.value("sink", GstEngine::kAutoSink).toString();
-  ui_->gst_plugin->setCurrentIndex(0);
-  for (int i=0 ; i<ui_->gst_plugin->count() ; ++i) {
-    if (ui_->gst_plugin->itemData(i).toString() == sink) {
-      ui_->gst_plugin->setCurrentIndex(i);
+  QString device = s.value("device").toString();
+
+  ui_->gst_output->setCurrentIndex(0);
+  for (int i = 0; i < ui_->gst_output->count(); ++i) {
+    GstEngine::OutputDetails details =
+        ui_->gst_output->itemData(i).value<GstEngine::OutputDetails>();
+
+    if (details.gstreamer_plugin_name == sink &&
+        details.device_property_value == device) {
+      ui_->gst_output->setCurrentIndex(i);
       break;
     }
   }
-  ui_->gst_device->setText(s.value("device").toString());
+
   ui_->replaygain->setChecked(s.value("rgenabled", false).toBool());
   ui_->replaygain_mode->setCurrentIndex(s.value("rgmode", 0).toInt());
-  ui_->replaygain_preamp->setValue(s.value("rgpreamp", 0.0).toDouble() * 10 + 150);
-  ui_->replaygain_compression->setChecked(s.value("rgcompression", true).toBool());
+  ui_->replaygain_preamp->setValue(s.value("rgpreamp", 0.0).toDouble() * 10 +
+                                   150);
+  ui_->replaygain_compression->setChecked(
+      s.value("rgcompression", true).toBool());
   ui_->buffer_duration->setValue(s.value("bufferduration", 4000).toInt());
   ui_->mono_playback->setChecked(s.value("monoplayback", false).toBool());
+  ui_->buffer_min_fill->setValue(s.value("bufferminfill", 33).toInt());
   s.endGroup();
 }
 
@@ -114,25 +128,21 @@ void PlaybackSettingsPage::Save() {
   s.setValue("FadeoutPauseDuration", ui_->fading_pause_duration->value());
   s.endGroup();
 
+  GstEngine::OutputDetails details =
+      ui_->gst_output->itemData(ui_->gst_output->currentIndex())
+      .value<GstEngine::OutputDetails>();
+
   s.beginGroup(GstEngine::kSettingsGroup);
-  s.setValue("sink", ui_->gst_plugin->itemData(ui_->gst_plugin->currentIndex()).toString());
-  s.setValue("device", ui_->gst_device->text());
+  s.setValue("sink", details.gstreamer_plugin_name);
+  s.setValue("device", details.device_property_value);
   s.setValue("rgenabled", ui_->replaygain->isChecked());
   s.setValue("rgmode", ui_->replaygain_mode->currentIndex());
   s.setValue("rgpreamp", float(ui_->replaygain_preamp->value()) / 10 - 15);
   s.setValue("rgcompression", ui_->replaygain_compression->isChecked());
   s.setValue("bufferduration", ui_->buffer_duration->value());
   s.setValue("monoplayback", ui_->mono_playback->isChecked());
+  s.setValue("bufferminfill", ui_->buffer_min_fill->value());
   s.endGroup();
-}
-
-void PlaybackSettingsPage::GstPluginChanged(int index) {
-  QString name = ui_->gst_plugin->itemData(index).toString();
-
-  bool enabled = GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(name);
-
-  ui_->gst_device->setEnabled(enabled);
-  ui_->gst_device_label->setEnabled(enabled);
 }
 
 void PlaybackSettingsPage::RgPreampChanged(int value) {
@@ -142,8 +152,12 @@ void PlaybackSettingsPage::RgPreampChanged(int value) {
   ui_->replaygain_preamp_label->setText(db_str);
 }
 
+void PlaybackSettingsPage::BufferMinFillChanged(int value) {
+  ui_->buffer_min_fill_value_label->setText(QString::number(value) + "%");
+}
+
 void PlaybackSettingsPage::FadingOptionsChanged() {
-  ui_->fading_options->setEnabled(
-      ui_->fading_out->isChecked() || ui_->fading_cross->isChecked() ||
-      ui_->fading_auto->isChecked());
+  ui_->fading_options->setEnabled(ui_->fading_out->isChecked() ||
+                                  ui_->fading_cross->isChecked() ||
+                                  ui_->fading_auto->isChecked());
 }

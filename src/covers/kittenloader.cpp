@@ -19,19 +19,13 @@ const char* KittenLoader::kFlickrKittenUrl =
 const char* KittenLoader::kFlickrPhotoUrl =
     "https://farm%1.static.flickr.com/%2/%3_%4_m.jpg";
 
-KittenLoader::KittenLoader(QObject* parent)
-    : AlbumCoverLoader(parent) {
-}
+KittenLoader::KittenLoader(QObject* parent) : AlbumCoverLoader(parent) {}
 
 quint64 KittenLoader::LoadKitten(const AlbumCoverLoaderOptions& options) {
   if (!kitten_urls_.isEmpty()) {
     QUrl url = kitten_urls_.dequeue();
     return AlbumCoverLoader::LoadImageAsync(
-        options,
-        QString::null,
-        url.toString(),
-        QString::null,
-        QImage());
+        options, QString::null, url.toString(), QString::null, QImage());
   }
 
   Task task;
@@ -68,10 +62,10 @@ void KittenLoader::KittensRetrieved(QNetworkReply* reply) {
         QStringRef secret = attrs.value("secret");
         QStringRef server = attrs.value("server");
         QString photo_url = QString(kFlickrPhotoUrl)
-            .arg(farm_id.toString())
-            .arg(server.toString())
-            .arg(photo_id.toString())
-            .arg(secret.toString());
+                                .arg(farm_id.toString())
+                                .arg(server.toString())
+                                .arg(photo_id.toString())
+                                .arg(secret.toString());
         kitten_urls_ << QUrl(photo_url);
       }
     }

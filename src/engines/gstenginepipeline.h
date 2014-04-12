@@ -18,6 +18,8 @@
 #ifndef GSTENGINEPIPELINE_H
 #define GSTENGINEPIPELINE_H
 
+#include <memory>
+
 #include <QBasicTimer>
 #include <QFuture>
 #include <QMutex>
@@ -27,7 +29,6 @@
 #include <QUrl>
 
 #include <gst/gst.h>
-#include <boost/scoped_ptr.hpp>
 
 #include "engine_fwd.h"
 
@@ -49,9 +50,10 @@ class GstEnginePipeline : public QObject {
   int id() const { return id_; }
 
   // Call these setters before Init
-  void set_output_device(const QString& sink, const QString& device);
+  void set_output_device(const QString& sink, const QVariant& device);
   void set_replaygain(bool enabled, int mode, float preamp, bool compression);
   void set_buffer_duration_nanosec(qint64 duration_nanosec);
+  void set_buffer_min_fill(int percent);
   void set_mono_playback(bool enabled);
 
   // Creates the pipeline, returns false on error
@@ -77,7 +79,8 @@ class GstEnginePipeline : public QObject {
 
   // If this is set then it will be loaded automatically when playback finishes
   // for gapless playback
-  void SetNextUrl(const QUrl& url, qint64 beginning_nanosec, qint64 end_nanosec);
+  void SetNextUrl(const QUrl& url, qint64 beginning_nanosec,
+                  qint64 end_nanosec);
   bool has_next_valid_url() const { return next_url_.isValid(); }
 
   // Get information about the music playback
@@ -105,12 +108,13 @@ class GstEnginePipeline : public QObject {
  public slots:
   void SetVolumeModifier(qreal mod);
 
- signals:
+signals:
   void EndOfStreamReached(int pipeline_id, bool has_next_track);
   void MetadataFound(int pipeline_id, const Engine::SimpleMetaBundle& bundle);
   // This indicates an error, delegated from GStreamer, in the pipeline.
   // The message, domain and error_code are related to GStreamer's GError.
-  void Error(int pipeline_id, const QString& message, int domain, int error_code);
+  void Error(int pipeline_id, const QString& message, int domain,
+             int error_code);
   void FaderFinished();
 
   void BufferingStarted();
@@ -118,7 +122,7 @@ class GstEnginePipeline : public QObject {
   void BufferingFinished();
 
  protected:
-  void timerEvent(QTimerEvent *);
+  void timerEvent(QTimerEvent*);
 
  private:
   // Static callbacks.  The GstEnginePipeline instance is passed in the last
@@ -129,7 +133,8 @@ class GstEnginePipeline : public QObject {
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static bool EventHandoffCallback(GstPad*, GstEvent*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
-  static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec *pspec, gpointer);
+  static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec* pspec,
+                                  gpointer);
   static void TaskEnterCallback(GstTask*, GThread*, gpointer);
 
   void TagMessageReceived(GstMessage*);
@@ -180,7 +185,7 @@ class GstEnginePipeline : public QObject {
   // General settings for the pipeline
   bool valid_;
   QString sink_;
-  QString device_;
+  QVariant device_;
 
   // These get called when there is a new audio buffer available
   QList<BufferConsumer*> buffer_consumers_;
@@ -209,6 +214,7 @@ class GstEnginePipeline : public QObject {
 
   // Buffering
   quint64 buffer_duration_nanosec_;
+  int buffer_min_fill_;
   bool buffering_;
 
   bool mono_playback_;
@@ -253,7 +259,7 @@ class GstEnginePipeline : public QObject {
   int volume_percent_;
   qreal volume_modifier_;
 
-  boost::scoped_ptr<QTimeLine> fader_;
+  std::unique_ptr<QTimeLine> fader_;
   QBasicTimer fader_fudge_timer_;
   bool use_fudge_timer_;
 
@@ -282,4 +288,4 @@ class GstEnginePipeline : public QObject {
   QThreadPool set_state_threadpool_;
 };
 
-#endif // GSTENGINEPIPELINE_H
+#endif  // GSTENGINEPIPELINE_H

@@ -18,14 +18,12 @@
 #ifndef ALBUMCOVERSEARCHER_H
 #define ALBUMCOVERSEARCHER_H
 
-#include "covers/albumcoverfetcher.h"
-#include "covers/albumcoverloaderoptions.h"
-
 #include <QDialog>
 #include <QIcon>
 #include <QStyledItemDelegate>
 
-#include <boost/shared_ptr.hpp>
+#include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloaderoptions.h"
 
 class AlbumCoverLoader;
 class Application;
@@ -35,9 +33,8 @@ class QModelIndex;
 class QStandardItem;
 class QStandardItemModel;
 
-
 class SizeOverlayDelegate : public QStyledItemDelegate {
-public:
+ public:
   static const int kMargin;
   static const int kPaddingX;
   static const int kPaddingY;
@@ -46,26 +43,26 @@ public:
   static const int kBorderAlpha;
   static const int kBackgroundAlpha;
 
-  SizeOverlayDelegate(QObject* parent = NULL);
+  SizeOverlayDelegate(QObject* parent = nullptr);
 
   void paint(QPainter* painter, const QStyleOptionViewItem& option,
              const QModelIndex& index) const;
 };
 
-
 // This is a dialog that lets the user search for album covers
 class AlbumCoverSearcher : public QDialog {
   Q_OBJECT
 
-public:
-  AlbumCoverSearcher(const QIcon& no_cover_icon, Application* app, QWidget* parent);
+ public:
+  AlbumCoverSearcher(const QIcon& no_cover_icon, Application* app,
+                     QWidget* parent);
   ~AlbumCoverSearcher();
 
   enum Role {
     Role_ImageURL = Qt::UserRole + 1,
     Role_ImageRequestId,
     Role_ImageFetchFinished,
-    Role_ImageDimensions, // width * height
+    Role_ImageDimensions,  // width * height
     Role_ImageSize,
   };
 
@@ -73,17 +70,17 @@ public:
 
   QImage Exec(const QString& artist, const QString& album);
 
-protected:
-  void keyPressEvent(QKeyEvent *);
+ protected:
+  void keyPressEvent(QKeyEvent*);
 
-private slots:
+ private slots:
   void Search();
   void SearchFinished(quint64 id, const CoverSearchResults& results);
   void ImageLoaded(quint64 id, const QImage& image);
 
   void CoverDoubleClicked(const QModelIndex& index);
 
-private:
+ private:
   Ui_AlbumCoverSearcher* ui_;
 
   Application* app_;
@@ -97,4 +94,4 @@ private:
   QMap<quint64, QStandardItem*> cover_loading_tasks_;
 };
 
-#endif // ALBUMCOVERSEARCHER_H
+#endif  // ALBUMCOVERSEARCHER_H

@@ -11,15 +11,14 @@
 
 #include "boomanalyzer.h"
 
-class TurbineAnalyzer : public BoomAnalyzer
-{
+class TurbineAnalyzer : public BoomAnalyzer {
   Q_OBJECT
-    public:
-        Q_INVOKABLE TurbineAnalyzer( QWidget *parent ) : BoomAnalyzer( parent ) {}
+ public:
+  Q_INVOKABLE TurbineAnalyzer(QWidget* parent) : BoomAnalyzer(parent) {}
 
-        void analyze( QPainter& p, const Scope&, bool new_frame);
+  void analyze(QPainter& p, const Scope&, bool new_frame);
 
-        static const char* kName;
+  static const char* kName;
 };
 
 #endif

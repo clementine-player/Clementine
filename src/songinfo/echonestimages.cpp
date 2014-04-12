@@ -16,21 +16,22 @@
 */
 
 #include "echonestimages.h"
-#include "core/logging.h"
+
+#include <memory>
 
 #include <echonest/Artist.h>
 
-#include <boost/scoped_ptr.hpp>
+#include "core/logging.h"
 
 struct EchoNestImages::Request {
   Request(int id) : id_(id), artist_(new Echonest::Artist) {}
 
   int id_;
-  boost::scoped_ptr<Echonest::Artist> artist_;
+  std::unique_ptr<Echonest::Artist> artist_;
 };
 
 void EchoNestImages::FetchInfo(int id, const Song& metadata) {
-  boost::shared_ptr<Request> request(new Request(id));
+  std::shared_ptr<Request> request(new Request(id));
   request->artist_->setName(metadata.artist());
 
   QNetworkReply* reply = request->artist_->fetchImages();
@@ -40,19 +41,20 @@ void EchoNestImages::FetchInfo(int id, const Song& metadata) {
 
 void EchoNestImages::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !requests_.contains(reply))
-    return;
+  if (!reply || !requests_.contains(reply)) return;
   reply->deleteLater();
 
   RequestPtr request = requests_.take(reply);
 
   try {
     request->artist_->parseProfile(reply);
-  } catch (Echonest::ParseError e) {
-    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
+  }
+  catch (Echonest::ParseError e) {
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType()
+                  << e.what();
   }
 
-  foreach (const Echonest::ArtistImage& image, request->artist_->images()) {
+  for (const Echonest::ArtistImage& image : request->artist_->images()) {
     emit ImageReady(request->id_, image.url());
   }
 

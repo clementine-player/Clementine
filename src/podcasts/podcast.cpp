@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -23,16 +23,27 @@
 
 #include <Podcast.h>
 
-const QStringList Podcast::kColumns = QStringList()
-    << "url" << "title" << "description" << "copyright" << "link"
-    << "image_url_large" << "image_url_small" << "author" << "owner_name"
-    << "owner_email" << "last_updated" << "last_update_error" << "extra";
+const QStringList Podcast::kColumns = QStringList() << "url"
+                                                    << "title"
+                                                    << "description"
+                                                    << "copyright"
+                                                    << "link"
+                                                    << "image_url_large"
+                                                    << "image_url_small"
+                                                    << "author"
+                                                    << "owner_name"
+                                                    << "owner_email"
+                                                    << "last_updated"
+                                                    << "last_update_error"
+                                                    << "extra";
 
 const QString Podcast::kColumnSpec = Podcast::kColumns.join(", ");
-const QString Podcast::kJoinSpec = Utilities::Prepend("p.", Podcast::kColumns).join(", ");
-const QString Podcast::kBindSpec = Utilities::Prepend(":", Podcast::kColumns).join(", ");
-const QString Podcast::kUpdateSpec = Utilities::Updateify(Podcast::kColumns).join(", ");
-
+const QString Podcast::kJoinSpec =
+    Utilities::Prepend("p.", Podcast::kColumns).join(", ");
+const QString Podcast::kBindSpec =
+    Utilities::Prepend(":", Podcast::kColumns).join(", ");
+const QString Podcast::kUpdateSpec =
+    Utilities::Updateify(Podcast::kColumns).join(", ");
 
 struct Podcast::Private : public QSharedData {
   Private();
@@ -61,26 +72,15 @@ struct Podcast::Private : public QSharedData {
   PodcastEpisodeList episodes_;
 };
 
-Podcast::Private::Private()
-  : database_id_(-1)
-{
-}
+Podcast::Private::Private() : database_id_(-1) {}
 
+Podcast::Podcast() : d(new Private) {}
 
-Podcast::Podcast()
-  : d(new Private)
-{
-}
+Podcast::Podcast(const Podcast& other) : d(other.d) {}
 
-Podcast::Podcast(const Podcast& other)
-  : d(other.d)
-{
-}
+Podcast::~Podcast() {}
 
-Podcast::~Podcast() {
-}
-
-Podcast& Podcast::operator =(const Podcast& other) {
+Podcast& Podcast::operator=(const Podcast& other) {
   d = other.d;
   return *this;
 }
@@ -97,7 +97,9 @@ const QString& Podcast::author() const { return d->author_; }
 const QString& Podcast::owner_name() const { return d->owner_name_; }
 const QString& Podcast::owner_email() const { return d->owner_email_; }
 const QDateTime& Podcast::last_updated() const { return d->last_updated_; }
-const QString& Podcast::last_update_error() const { return d->last_update_error_; }
+const QString& Podcast::last_update_error() const {
+  return d->last_update_error_;
+}
 const QVariantMap& Podcast::extra() const { return d->extra_; }
 QVariant Podcast::extra(const QString& key) const { return d->extra_[key]; }
 
@@ -113,14 +115,20 @@ void Podcast::set_author(const QString& v) { d->author_ = v; }
 void Podcast::set_owner_name(const QString& v) { d->owner_name_ = v; }
 void Podcast::set_owner_email(const QString& v) { d->owner_email_ = v; }
 void Podcast::set_last_updated(const QDateTime& v) { d->last_updated_ = v; }
-void Podcast::set_last_update_error(const QString& v) { d->last_update_error_ = v; }
+void Podcast::set_last_update_error(const QString& v) {
+  d->last_update_error_ = v;
+}
 void Podcast::set_extra(const QVariantMap& v) { d->extra_ = v; }
-void Podcast::set_extra(const QString& key, const QVariant& value) { d->extra_[key] = value; }
+void Podcast::set_extra(const QString& key, const QVariant& value) {
+  d->extra_[key] = value;
+}
 
 const PodcastEpisodeList& Podcast::episodes() const { return d->episodes_; }
 PodcastEpisodeList* Podcast::mutable_episodes() { return &d->episodes_; }
 void Podcast::set_episodes(const PodcastEpisodeList& v) { d->episodes_ = v; }
-void Podcast::add_episode(const PodcastEpisode& episode) { d->episodes_.append(episode); }
+void Podcast::add_episode(const PodcastEpisode& episode) {
+  d->episodes_.append(episode);
+}
 
 void Podcast::InitFromQuery(const QSqlQuery& query) {
   d->database_id_ = query.value(0).toInt();

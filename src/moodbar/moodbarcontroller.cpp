@@ -25,38 +25,36 @@
 #include "playlist/playlistmanager.h"
 
 MoodbarController::MoodbarController(Application* app, QObject* parent)
-  : QObject(parent),
-    app_(app)
-{
-  connect(app_->playlist_manager(),
-          SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
+    : QObject(parent), app_(app) {
+  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
+          SLOT(CurrentSongChanged(Song)));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(PlaybackStopped()));
 }
 
 void MoodbarController::CurrentSongChanged(const Song& song) {
   QByteArray data;
-  MoodbarPipeline* pipeline = NULL;
+  MoodbarPipeline* pipeline = nullptr;
   const MoodbarLoader::Result result =
       app_->moodbar_loader()->Load(song.url(), &data, &pipeline);
 
   switch (result) {
-  case MoodbarLoader::CannotLoad:
-    emit CurrentMoodbarDataChanged(QByteArray());
-    break;
+    case MoodbarLoader::CannotLoad:
+      emit CurrentMoodbarDataChanged(QByteArray());
+      break;
 
-  case MoodbarLoader::Loaded:
-    emit CurrentMoodbarDataChanged(data);
-    break;
+    case MoodbarLoader::Loaded:
+      emit CurrentMoodbarDataChanged(data);
+      break;
 
-  case MoodbarLoader::WillLoadAsync:
-    // Emit an empty array for now so the GUI reverts to a normal progress
-    // bar.  Our slot will be called when the data is actually loaded.
-    emit CurrentMoodbarDataChanged(QByteArray());
+    case MoodbarLoader::WillLoadAsync:
+      // Emit an empty array for now so the GUI reverts to a normal progress
+      // bar.  Our slot will be called when the data is actually loaded.
+      emit CurrentMoodbarDataChanged(QByteArray());
 
-    NewClosure(pipeline, SIGNAL(Finished(bool)),
-               this, SLOT(AsyncLoadComplete(MoodbarPipeline*,QUrl)),
-               pipeline, song.url());
-    break;
+      NewClosure(pipeline, SIGNAL(Finished(bool)), this,
+                 SLOT(AsyncLoadComplete(MoodbarPipeline*, QUrl)), pipeline,
+                 song.url());
+      break;
   }
 }
 

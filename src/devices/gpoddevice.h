@@ -31,12 +31,10 @@ class GPodLoader;
 class GPodDevice : public ConnectedDevice, public virtual MusicStorage {
   Q_OBJECT
 
-public:
-  Q_INVOKABLE GPodDevice(
-      const QUrl& url, DeviceLister* lister,
-      const QString& unique_id, DeviceManager* manager,
-      Application* app,
-      int database_id, bool first_time);
+ public:
+  Q_INVOKABLE GPodDevice(const QUrl& url, DeviceLister* lister,
+                         const QString& unique_id, DeviceManager* manager,
+                         Application* app, int database_id, bool first_time);
   ~GPodDevice();
 
   void Init();
@@ -53,20 +51,20 @@ public:
   bool DeleteFromStorage(const DeleteJob& job);
   void FinishDelete(bool success);
 
-protected slots:
+ protected slots:
   void LoadFinished(Itdb_iTunesDB* db);
 
-protected:
+ protected:
   Itdb_Track* AddTrackToITunesDb(const Song& metadata);
   void AddTrackToModel(Itdb_Track* track, const QString& prefix);
   bool RemoveTrackFromITunesDb(const QString& path,
                                const QString& relative_to = QString());
   virtual void FinaliseDatabase() {}
 
-private:
+ private:
   void WriteDatabase(bool success);
 
-protected:
+ protected:
   QThread* loader_thread_;
   GPodLoader* loader_;
 
@@ -79,4 +77,4 @@ protected:
   SongList songs_to_remove_;
 };
 
-#endif // GPODDEVICE_H
+#endif  // GPODDEVICE_H

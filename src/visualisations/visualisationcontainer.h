@@ -35,8 +35,8 @@ class QActionGroup;
 class VisualisationContainer : public QGraphicsView {
   Q_OBJECT
 
-public:
-  VisualisationContainer(QWidget* parent = 0);
+ public:
+  VisualisationContainer(QWidget* parent = nullptr);
 
   static const int kLowFramerate;
   static const int kMediumFramerate;
@@ -50,14 +50,14 @@ public:
   static const int kDefaultTextureSize;
 
   void SetEngine(GstEngine* engine);
-  void SetActions(QAction* previous, QAction* play_pause,
-                  QAction* stop, QAction* next);
+  void SetActions(QAction* previous, QAction* play_pause, QAction* stop,
+                  QAction* next);
 
-public slots:
+ public slots:
   void SongMetadataChanged(const Song& metadata);
   void Stopped();
 
-protected:
+ protected:
   // QWidget
   void showEvent(QShowEvent* e);
   void hideEvent(QHideEvent* e);
@@ -67,24 +67,24 @@ protected:
   void enterEvent(QEvent* e);
   void leaveEvent(QEvent* e);
   void mouseDoubleClickEvent(QMouseEvent* e);
-  void contextMenuEvent(QContextMenuEvent *event);
-  void keyReleaseEvent(QKeyEvent *event);
+  void contextMenuEvent(QContextMenuEvent* event);
+  void keyReleaseEvent(QKeyEvent* event);
 
-private:
+ private:
   void Init();
 
   void SizeChanged();
-  void AddMenuItem(const QString& name, int value, int def,
-                   QActionGroup* group, QSignalMapper* mapper);
+  void AddMenuItem(const QString& name, int value, int def, QActionGroup* group,
+                   QSignalMapper* mapper);
 
-private slots:
+ private slots:
   void ChangeOverlayOpacity(qreal value);
   void ShowPopupMenu(const QPoint& pos);
   void ToggleFullscreen();
   void SetFps(int fps);
   void SetQuality(int size);
 
-private:
+ private:
   bool initialised_;
 
   GstEngine* engine_;
@@ -102,4 +102,4 @@ private:
   int size_;
 };
 
-#endif // VISUALISATIONCONTAINER_H
+#endif  // VISUALISATIONCONTAINER_H

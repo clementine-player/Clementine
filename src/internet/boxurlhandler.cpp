@@ -3,9 +3,7 @@
 #include "boxservice.h"
 
 BoxUrlHandler::BoxUrlHandler(BoxService* service, QObject* parent)
-  : UrlHandler(parent),
-    service_(service) {
-}
+    : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult BoxUrlHandler::StartLoading(const QUrl& url) {
   QString file_id = url.path();

@@ -30,11 +30,11 @@ class Transcoder;
 
 struct TranscoderPreset;
 
-class RipCD: public QDialog {
+class RipCD : public QDialog {
   Q_OBJECT
 
  public:
-  explicit RipCD(QWidget* parent = 0);
+  explicit RipCD(QWidget* parent = nullptr);
   ~RipCD();
   bool CheckCDIOIsValid();
   void BuildTrackListTable();
@@ -51,7 +51,7 @@ class RipCD: public QDialog {
   int finished_failed_;
   track_t i_tracks_;
   Ui_RipCD* ui_;
-  CdIo_t *cdio_;
+  CdIo_t* cdio_;
   QList<QCheckBox*> checkboxes_;
   QList<QString> generated_files_;
   QList<int> tracks_to_rip_;
@@ -62,18 +62,18 @@ class RipCD: public QDialog {
   QPushButton* rip_button_;
   QString temporary_directory_;
 
-  void WriteWAVHeader(QFile *stream, int32_t i_bytecount);
+  void WriteWAVHeader(QFile* stream, int32_t i_bytecount);
   int NumTracksToRip();
   void ThreadClickedRipButton();
   QString TrimPath(const QString& path) const;
   QString GetOutputFileName(const QString& input,
-      const TranscoderPreset& preset) const;
+                            const TranscoderPreset& preset) const;
   QString ParseFileFormatString(const QString& file_format, int track_no) const;
   void SetWorking(bool working);
   void AddDestinationDirectory(QString dir);
   void RemoveTemporaryDirectory();
 
- signals:
+signals:
   void RippingComplete();
   void SignalUpdateProgress();
  private slots:

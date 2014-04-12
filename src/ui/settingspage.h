@@ -27,7 +27,7 @@ class SettingsDialog;
 class SettingsPage : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   SettingsPage(SettingsDialog* dialog);
 
   // Return false to grey out the page's item in the list.
@@ -46,8 +46,8 @@ signals:
   void NotificationPreview(OSD::Behaviour, QString, QString);
   void SetWiimotedevInterfaceActived(bool);
 
-private:
+ private:
   SettingsDialog* dialog_;
 };
 
-#endif // SETTINGSPAGE_H
+#endif  // SETTINGSPAGE_H

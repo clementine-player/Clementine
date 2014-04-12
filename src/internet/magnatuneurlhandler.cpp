@@ -18,10 +18,9 @@
 #include "magnatuneservice.h"
 #include "magnatuneurlhandler.h"
 
-MagnatuneUrlHandler::MagnatuneUrlHandler(MagnatuneService* service, QObject* parent)
-  : UrlHandler(parent),
-    service_(service) {
-}
+MagnatuneUrlHandler::MagnatuneUrlHandler(MagnatuneService* service,
+                                         QObject* parent)
+    : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult MagnatuneUrlHandler::StartLoading(const QUrl& url) {
   return LoadResult(url, LoadResult::TrackAvailable, service_->ModifyUrl(url));

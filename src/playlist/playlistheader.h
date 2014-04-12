@@ -30,13 +30,13 @@ class PlaylistHeader : public StretchHeaderView {
 
  public:
   PlaylistHeader(Qt::Orientation orientation, PlaylistView* view,
-                 QWidget* parent = 0);
+                 QWidget* parent = nullptr);
 
   // QWidget
   void contextMenuEvent(QContextMenuEvent* e);
   void enterEvent(QEvent*);
 
- signals:
+signals:
   void SectionVisibilityChanged(int logical, bool visible);
   void MouseEntered();
 
@@ -63,4 +63,4 @@ class PlaylistHeader : public StretchHeaderView {
   QSignalMapper* show_mapper_;
 };
 
-#endif // PLAYLISTHEADER_H
+#endif  // PLAYLISTHEADER_H

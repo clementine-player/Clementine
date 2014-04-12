@@ -30,15 +30,14 @@ class QString;
 class QTextCodec;
 class QUrl;
 
-
 namespace TagLib {
-  class FileRef;
-  class String;
+class FileRef;
+class String;
 
-  namespace ID3v2 {
-    class Tag;
-    class PopularimeterFrame;
-  }
+namespace ID3v2 {
+class Tag;
+class PopularimeterFrame;
+}
 }
 
 class FileRefFactory;
@@ -52,25 +51,26 @@ class TagReader {
  public:
   TagReader();
 
-  void ReadFile(const QString& filename, pb::tagreader::SongMetadata* song) const;
-  bool SaveFile(const QString& filename, const pb::tagreader::SongMetadata& song) const;
+  void ReadFile(const QString& filename,
+                pb::tagreader::SongMetadata* song) const;
+  bool SaveFile(const QString& filename,
+                const pb::tagreader::SongMetadata& song) const;
   // Returns false if something went wrong; returns true otherwise (might
   // returns true if the file exists but nothing has been written inside because
   // statistics tag format is not supported for this kind of file)
-  bool SaveSongStatisticsToFile(const QString& filename, const pb::tagreader::SongMetadata& song) const;
-  bool SaveSongRatingToFile(const QString& filename, const pb::tagreader::SongMetadata& song) const;
+  bool SaveSongStatisticsToFile(const QString& filename,
+                                const pb::tagreader::SongMetadata& song) const;
+  bool SaveSongRatingToFile(const QString& filename,
+                            const pb::tagreader::SongMetadata& song) const;
 
   bool IsMediaFile(const QString& filename) const;
   QByteArray LoadEmbeddedArt(const QString& filename) const;
 
-  #ifdef HAVE_GOOGLE_DRIVE
-  bool ReadCloudFile(const QUrl& download_url,
-                     const QString& title,
-                     int size,
-                     const QString& mime_type,
-                     const QString& access_token,
+#ifdef HAVE_GOOGLE_DRIVE
+  bool ReadCloudFile(const QUrl& download_url, const QString& title, int size,
+                     const QString& mime_type, const QString& access_token,
                      pb::tagreader::SongMetadata* song) const;
-  #endif // HAVE_GOOGLE_DRIVE
+#endif  // HAVE_GOOGLE_DRIVE
 
   static void Decode(const TagLib::String& tag, const QTextCodec* codec,
                      std::string* output);
@@ -80,21 +80,24 @@ class TagReader {
   void ParseFMPSFrame(const QString& name, const QString& value,
                       pb::tagreader::SongMetadata* song) const;
   void ParseOggTag(const TagLib::Ogg::FieldListMap& map,
-                   const QTextCodec* codec,
-                   QString* disc, QString* compilation,
+                   const QTextCodec* codec, QString* disc, QString* compilation,
                    pb::tagreader::SongMetadata* song) const;
   void SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
                          const pb::tagreader::SongMetadata& song) const;
-  void SetFMPSStatisticsVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
-                                       const pb::tagreader::SongMetadata& song) const;
+  void SetFMPSStatisticsVorbisComments(
+      TagLib::Ogg::XiphComment* vorbis_comments,
+      const pb::tagreader::SongMetadata& song) const;
   void SetFMPSRatingVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
-                                   const pb::tagreader::SongMetadata& song) const;
+                                   const pb::tagreader::SongMetadata& song)
+      const;
 
-  pb::tagreader::SongMetadata_Type GuessFileType(TagLib::FileRef* fileref) const;
+  pb::tagreader::SongMetadata_Type GuessFileType(TagLib::FileRef* fileref)
+      const;
 
   void SetUserTextFrame(const QString& description, const QString& value,
                         TagLib::ID3v2::Tag* tag) const;
-  void SetUserTextFrame(const std::string& description, const std::string& value,
+  void SetUserTextFrame(const std::string& description,
+                        const std::string& value,
                         TagLib::ID3v2::Tag* tag) const;
 
   void SetTextFrame(const char* id, const QString& value,
@@ -102,15 +105,17 @@ class TagReader {
   void SetTextFrame(const char* id, const std::string& value,
                     TagLib::ID3v2::Tag* tag) const;
 
-private:
+ private:
   static const char* kMP4_FMPS_Rating_ID;
   static const char* kMP4_FMPS_Playcount_ID;
   static const char* kMP4_FMPS_Score_ID;
-  // Returns a float in [0.0..1.0] corresponding to the rating range we use in Clementine
+  // Returns a float in [0.0..1.0] corresponding to the rating range we use in
+  // Clementine
   static float ConvertPOPMRating(const int POPM_rating);
   // Reciprocal
   static int ConvertToPOPMRating(const float rating);
-  static TagLib::ID3v2::PopularimeterFrame* GetPOPMFrameFromTag(TagLib::ID3v2::Tag* tag);
+  static TagLib::ID3v2::PopularimeterFrame* GetPOPMFrameFromTag(
+      TagLib::ID3v2::Tag* tag);
 
   FileRefFactory* factory_;
   QNetworkAccessManager* network_;
@@ -118,4 +123,4 @@ private:
   const std::string kEmbeddedCover;
 };
 
-#endif // TAGREADER_H
+#endif  // TAGREADER_H

@@ -17,19 +17,14 @@
 
 #include "elidedlabel.h"
 
-ElidedLabel::ElidedLabel(QWidget* parent)
-  : QLabel(parent)
-{
-}
+ElidedLabel::ElidedLabel(QWidget* parent) : QLabel(parent) {}
 
 void ElidedLabel::SetText(const QString& text) {
   text_ = text;
   UpdateText();
 }
 
-void ElidedLabel::resizeEvent(QResizeEvent*) {
-  UpdateText();
-}
+void ElidedLabel::resizeEvent(QResizeEvent*) { UpdateText(); }
 
 void ElidedLabel::UpdateText() {
   setText(fontMetrics().elidedText(text_, Qt::ElideRight, width() - 5));

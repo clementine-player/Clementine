@@ -31,7 +31,7 @@
 
 // winspool.h defines this :(
 #ifdef AddJob
-#  undef AddJob
+#undef AddJob
 #endif
 
 const char* TranscodeDialog::kSettingsGroup = "Transcoder";
@@ -43,29 +43,27 @@ static bool ComparePresetsByName(const TranscoderPreset& left,
   return left.name_ < right.name_;
 }
 
-
-TranscodeDialog::TranscodeDialog(QWidget *parent)
-  : QDialog(parent),
-    ui_(new Ui_TranscodeDialog),
-    log_ui_(new Ui_TranscodeLogDialog),
-    log_dialog_(new QDialog(this)),
-    transcoder_(new Transcoder(this)),
-    queued_(0),
-    finished_success_(0),
-    finished_failed_(0)
-{
+TranscodeDialog::TranscodeDialog(QWidget* parent)
+    : QDialog(parent),
+      ui_(new Ui_TranscodeDialog),
+      log_ui_(new Ui_TranscodeLogDialog),
+      log_dialog_(new QDialog(this)),
+      transcoder_(new Transcoder(this)),
+      queued_(0),
+      finished_success_(0),
+      finished_failed_(0) {
   ui_->setupUi(this);
   ui_->files->header()->setResizeMode(QHeaderView::ResizeToContents);
 
   log_ui_->setupUi(log_dialog_);
   QPushButton* clear_button =
       log_ui_->buttonBox->addButton(tr("Clear"), QDialogButtonBox::ResetRole);
-  connect(clear_button, SIGNAL(clicked()),log_ui_->log, SLOT(clear()));
+  connect(clear_button, SIGNAL(clicked()), log_ui_->log, SLOT(clear()));
 
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
   qSort(presets.begin(), presets.end(), ComparePresetsByName);
-  foreach (const TranscoderPreset& preset, presets) {
+  for (const TranscoderPreset& preset : presets) {
     ui_->format->addItem(
         QString("%1 (.%2)").arg(preset.name_, preset.extension_),
         QVariant::fromValue(preset));
@@ -77,7 +75,7 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   last_add_dir_ = s.value("last_add_dir", QDir::homePath()).toString();
 
   QString last_output_format = s.value("last_output_format", "ogg").toString();
-  for (int i=0 ; i<ui_->format->count() ; ++i) {
+  for (int i = 0; i < ui_->format->count(); ++i) {
     if (last_output_format ==
         ui_->format->itemData(i).value<TranscoderPreset>().extension_) {
       ui_->format->setCurrentIndex(i);
@@ -86,8 +84,8 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   }
 
   // Add a start button
-  start_button_ = ui_->button_box->addButton(
-      tr("Start transcoding"), QDialogButtonBox::ActionRole);
+  start_button_ = ui_->button_box->addButton(tr("Start transcoding"),
+                                             QDialogButtonBox::ActionRole);
   cancel_button_ = ui_->button_box->button(QDialogButtonBox::Cancel);
   close_button_ = ui_->button_box->button(QDialogButtonBox::Close);
 
@@ -107,8 +105,8 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
 
-
-  connect(transcoder_, SIGNAL(JobComplete(QString,bool)), SLOT(JobComplete(QString,bool)));
+  connect(transcoder_, SIGNAL(JobComplete(QString, bool)),
+          SLOT(JobComplete(QString, bool)));
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
 }
@@ -136,11 +134,11 @@ void TranscodeDialog::Start() {
   SetWorking(true);
 
   QAbstractItemModel* file_model = ui_->files->model();
-  TranscoderPreset preset = ui_->format->itemData(
-      ui_->format->currentIndex()).value<TranscoderPreset>();
+  TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
+                                .value<TranscoderPreset>();
 
   // Add jobs to the transcoder
-  for (int i=0 ; i<file_model->rowCount() ; ++i) {
+  for (int i = 0; i < file_model->rowCount(); ++i) {
     QString filename = file_model->index(i, 0).data(Qt::UserRole).toString();
     QString outfilename = GetOutputFileName(filename, preset);
     transcoder_->AddJob(filename, preset, outfilename);
@@ -171,8 +169,8 @@ void TranscodeDialog::Cancel() {
 }
 
 void TranscodeDialog::JobComplete(const QString& filename, bool success) {
-  (*(success ? &finished_success_ : &finished_failed_)) ++;
-  queued_ --;
+  (*(success ? &finished_success_ : &finished_failed_))++;
+  queued_--;
 
   UpdateStatusText();
   UpdateProgress();
@@ -182,7 +180,7 @@ void TranscodeDialog::UpdateProgress() {
   int progress = (finished_success_ + finished_failed_) * 100;
 
   QMap<QString, float> current_jobs = transcoder_->GetProgress();
-  foreach (float value, current_jobs.values()) {
+  for (float value : current_jobs.values()) {
     progress += qBound(0, int(value * 100), 99);
   }
 
@@ -193,37 +191,32 @@ void TranscodeDialog::UpdateStatusText() {
   QStringList sections;
 
   if (queued_) {
-    sections << "<font color=\"#3467c8\">" +
-        tr("%n remaining", "", queued_) + "</font>";
+    sections << "<font color=\"#3467c8\">" + tr("%n remaining", "", queued_) +
+                    "</font>";
   }
 
   if (finished_success_) {
     sections << "<font color=\"#02b600\">" +
-        tr("%n finished", "", finished_success_) + "</font>";
+                    tr("%n finished", "", finished_success_) + "</font>";
   }
 
   if (finished_failed_) {
     sections << "<font color=\"#b60000\">" +
-        tr("%n failed", "", finished_failed_) + "</font>";
+                    tr("%n failed", "", finished_failed_) + "</font>";
   }
 
   ui_->progress_text->setText(sections.join(", "));
 }
 
-void TranscodeDialog::AllJobsComplete() {
-  SetWorking(false);
-}
+void TranscodeDialog::AllJobsComplete() { SetWorking(false); }
 
 void TranscodeDialog::Add() {
   QStringList filenames = QFileDialog::getOpenFileNames(
       this, tr("Add files to transcode"), last_add_dir_,
-      QString("%1 (%2);;%3").arg(
-          tr("Music"),
-          FileView::kFileFilter,
-          tr(MainWindow::kAllFilesFilterSpec)));
+      QString("%1 (%2);;%3").arg(tr("Music"), FileView::kFileFilter,
+                                 tr(MainWindow::kAllFilesFilterSpec)));
 
-  if (filenames.isEmpty())
-    return;
+  if (filenames.isEmpty()) return;
 
   SetFilenames(filenames);
 
@@ -233,22 +226,20 @@ void TranscodeDialog::Add() {
   s.setValue("last_add_dir", last_add_dir_);
 }
 
-void TranscodeDialog::SetFilenames(const QStringList &filenames) {
-  foreach (const QString& filename, filenames) {
+void TranscodeDialog::SetFilenames(const QStringList& filenames) {
+  for (const QString& filename : filenames) {
     QString name = filename.section('/', -1, -1);
     QString path = filename.section('/', 0, -2);
 
-    QTreeWidgetItem* item = new QTreeWidgetItem(
-        ui_->files, QStringList() << name << path);
+    QTreeWidgetItem* item =
+        new QTreeWidgetItem(ui_->files, QStringList() << name << path);
     item->setData(0, Qt::UserRole, filename);
   }
 }
 
-void TranscodeDialog::Remove() {
-  qDeleteAll(ui_->files->selectedItems());
-}
+void TranscodeDialog::Remove() { qDeleteAll(ui_->files->selectedItems()); }
 
-void TranscodeDialog::LogLine(const QString &message) {
+void TranscodeDialog::LogLine(const QString& message) {
   QString date(QDateTime::currentDateTime().toString(Qt::TextDate));
   log_ui_->log->appendPlainText(QString("%1: %2").arg(date, message));
 }
@@ -262,8 +253,8 @@ void TranscodeDialog::timerEvent(QTimerEvent* e) {
 }
 
 void TranscodeDialog::Options() {
-  TranscoderPreset preset = ui_->format->itemData(
-      ui_->format->currentIndex()).value<TranscoderPreset>();
+  TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
+                                .value<TranscoderPreset>();
 
   TranscoderOptionsDialog dialog(preset.type_, this);
   if (dialog.is_valid()) {
@@ -274,16 +265,16 @@ void TranscodeDialog::Options() {
 // Adds a folder to the destination box.
 void TranscodeDialog::AddDestination() {
   int index = ui_->destination->currentIndex();
-  QString initial_dir = (!ui_->destination->itemData(index).isNull() ?
-                           ui_->destination->itemData(index).toString() :
-                           QDir::homePath());
-  QString dir = QFileDialog::getExistingDirectory(
-      this, tr("Add folder"), initial_dir);
+  QString initial_dir = (!ui_->destination->itemData(index).isNull()
+                             ? ui_->destination->itemData(index).toString()
+                             : QDir::homePath());
+  QString dir =
+      QFileDialog::getExistingDirectory(this, tr("Add folder"), initial_dir);
 
   if (!dir.isEmpty()) {
     // Keep only a finite number of items in the box.
     while (ui_->destination->count() >= kMaxDestinationItems) {
-      ui_->destination->removeItem(1); // The oldest folder item.
+      ui_->destination->removeItem(1);  // The oldest folder item.
     }
 
     QIcon icon = IconLoader::Load("folder");
@@ -304,10 +295,10 @@ QString TranscodeDialog::TrimPath(const QString& path) const {
   return path.section('/', -1, -1, QString::SectionSkipEmpty);
 }
 
-QString TranscodeDialog::GetOutputFileName(const QString& input,
-                                           const TranscoderPreset &preset) const {
-  QString path = ui_->destination->itemData(
-      ui_->destination->currentIndex()).toString();
+QString TranscodeDialog::GetOutputFileName(
+    const QString& input, const TranscoderPreset& preset) const {
+  QString path =
+      ui_->destination->itemData(ui_->destination->currentIndex()).toString();
   if (path.isEmpty()) {
     // Keep the original path.
     return input.section('.', 0, -2) + '.' + preset.extension_;

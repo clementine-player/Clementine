@@ -10,36 +10,36 @@
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "globalsearch/globalsearch.h"
-#include "globalsearch/librarysearchprovider.h"
+#include "internet/cloudfilesearchprovider.h"
 #include "internet/internetmodel.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 #include "playlist/playlist.h"
 #include "ui/iconloader.h"
 
-CloudFileService::CloudFileService(
-    Application* app,
-    InternetModel* parent,
-    const QString& service_name,
-    const QString& service_id,
-    const QIcon& icon,
-    SettingsDialog::Page settings_page)
-  : InternetService(service_name, app, parent, parent),
-    root_(NULL),
-    network_(new NetworkAccessManager(this)),
-    library_sort_model_(new QSortFilterProxyModel(this)),
-    playlist_manager_(app->playlist_manager()),
-    task_manager_(app->task_manager()),
-    icon_(icon),
-    settings_page_(settings_page) {
+CloudFileService::CloudFileService(Application* app, InternetModel* parent,
+                                   const QString& service_name,
+                                   const QString& service_id, const QIcon& icon,
+                                   SettingsDialog::Page settings_page)
+    : InternetService(service_name, app, parent, parent),
+      root_(nullptr),
+      network_(new NetworkAccessManager(this)),
+      library_sort_model_(new QSortFilterProxyModel(this)),
+      playlist_manager_(app->playlist_manager()),
+      task_manager_(app->task_manager()),
+      icon_(icon),
+      settings_page_(settings_page),
+      indexing_task_id_(-1),
+      indexing_task_progress_(0),
+      indexing_task_max_(0) {
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
 
   QString songs_table = service_id + "_songs";
   QString songs_fts_table = service_id + "_songs_fts";
 
-  library_backend_->Init(
-      app->database(), songs_table, QString::null, QString::null, songs_fts_table);
+  library_backend_->Init(app->database(), songs_table, QString::null,
+                         QString::null, songs_fts_table);
   library_model_ = new LibraryModel(library_backend_, app_, this);
 
   library_sort_model_->setSourceModel(library_model_);
@@ -48,12 +48,8 @@ CloudFileService::CloudFileService(
   library_sort_model_->setSortLocaleAware(true);
   library_sort_model_->sort(0);
 
-  app->global_search()->AddProvider(new LibrarySearchProvider(
-      library_backend_,
-      service_name,
-      service_id,
-      icon_,
-      true, app_, this));
+  app->global_search()->AddProvider(new CloudFileSearchProvider(
+      library_backend_, service_id, icon_, this));
 }
 
 QStandardItem* CloudFileService::CreateRootItem() {
@@ -83,11 +79,11 @@ void CloudFileService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
-    context_menu_->addAction(
-        IconLoader::Load("download"),
-        tr("Cover Manager"),
-        this,
-        SLOT(ShowCoverManager()));
+    context_menu_->addAction(IconLoader::Load("download"), tr("Cover Manager"),
+                             this, SLOT(ShowCoverManager()));
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("configure"), tr("Configure..."),
+                             this, SLOT(ShowSettingsDialog()));
   }
   context_menu_->popup(global_pos);
 }
@@ -103,15 +99,16 @@ void CloudFileService::ShowCoverManager() {
 }
 
 void CloudFileService::AddToPlaylist(QMimeData* mime) {
-  playlist_manager_->current()->dropMimeData(
-      mime, Qt::CopyAction, -1, 0, QModelIndex());
+  playlist_manager_->current()->dropMimeData(mime, Qt::CopyAction, -1, 0,
+                                             QModelIndex());
 }
 
 void CloudFileService::ShowSettingsDialog() {
   app_->OpenSettingsDialogAtPage(settings_page_);
 }
 
-bool CloudFileService::ShouldIndexFile(const QUrl& url, const QString& mime_type) const {
+bool CloudFileService::ShouldIndexFile(const QUrl& url,
+                                       const QString& mime_type) const {
   if (!IsSupportedMimeType(mime_type)) {
     return false;
   }
@@ -123,35 +120,45 @@ bool CloudFileService::ShouldIndexFile(const QUrl& url, const QString& mime_type
   return true;
 }
 
-void CloudFileService::MaybeAddFileToDatabase(
-    const Song& metadata,
-    const QString& mime_type,
-    const QUrl& download_url,
-    const QString& authorisation) {
+void CloudFileService::MaybeAddFileToDatabase(const Song& metadata,
+                                              const QString& mime_type,
+                                              const QUrl& download_url,
+                                              const QString& authorisation) {
   if (!ShouldIndexFile(metadata.url(), mime_type)) {
     return;
   }
 
-  const int task_id = task_manager_->StartTask(
-      tr("Indexing %1").arg(metadata.title()));
+  if (indexing_task_id_ == -1) {
+    indexing_task_id_ =
+        task_manager_->StartTask(tr("Indexing %1").arg(name()));
+    indexing_task_progress_ = 0;
+    indexing_task_max_ = 0;
+  }
+  indexing_task_max_ ++;
+  task_manager_->SetTaskProgress(
+      indexing_task_id_, indexing_task_progress_, indexing_task_max_);
 
   TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
-      download_url,
-      metadata.title(),
-      metadata.filesize(),
-      mime_type,
+      download_url, metadata.title(), metadata.filesize(), mime_type,
       authorisation);
-  NewClosure(reply, SIGNAL(Finished(bool)),
-             this, SLOT(ReadTagsFinished(TagReaderClient::ReplyType*,Song,int)),
-             reply, metadata, task_id);
+  NewClosure(reply, SIGNAL(Finished(bool)), this,
+             SLOT(ReadTagsFinished(TagReaderClient::ReplyType*, Song)),
+             reply, metadata);
 }
 
-void CloudFileService::ReadTagsFinished(
-    TagReaderClient::ReplyType* reply,
-    const Song& metadata,
-    const int task_id) {
+void CloudFileService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
+                                        const Song& metadata) {
   reply->deleteLater();
-  TaskManager::ScopedTask(task_id, task_manager_);
+
+  indexing_task_progress_ ++;
+  if (indexing_task_progress_ == indexing_task_max_) {
+    task_manager_->SetTaskFinished(indexing_task_id_);
+    indexing_task_id_ = -1;
+    emit AllIndexingTasksFinished();
+  } else {
+    task_manager_->SetTaskProgress(
+        indexing_task_id_, indexing_task_progress_, indexing_task_max_);
+  }
 
   const pb::tagreader::ReadCloudFileResponse& message =
       reply->message().read_cloud_file_response();
@@ -173,14 +180,10 @@ void CloudFileService::ReadTagsFinished(
 }
 
 bool CloudFileService::IsSupportedMimeType(const QString& mime_type) const {
-  return mime_type == "audio/ogg" ||
-         mime_type == "audio/mpeg" ||
-         mime_type == "audio/mp4" ||
-         mime_type == "audio/flac" ||
-         mime_type == "audio/x-flac" ||
-         mime_type == "application/ogg" ||
-         mime_type == "application/x-flac" ||
-         mime_type == "audio/x-ms-wma";
+  return mime_type == "audio/ogg" || mime_type == "audio/mpeg" ||
+         mime_type == "audio/mp4" || mime_type == "audio/flac" ||
+         mime_type == "audio/x-flac" || mime_type == "application/ogg" ||
+         mime_type == "application/x-flac" || mime_type == "audio/x-ms-wma";
 }
 
 QString CloudFileService::GuessMimeTypeForFile(const QString& filename) const {

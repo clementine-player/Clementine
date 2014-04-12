@@ -24,11 +24,9 @@
 
 #include <QKeySequence>
 
-#include <boost/noncopyable.hpp>
-
 #import "core/mac_utilities.h"
 
-class MacMonitorWrapper : boost::noncopyable {
+class MacMonitorWrapper {
  public:
   explicit MacMonitorWrapper(id monitor) : local_monitor_(monitor) {}
 
@@ -36,6 +34,7 @@ class MacMonitorWrapper : boost::noncopyable {
 
  private:
   id local_monitor_;
+  Q_DISABLE_COPY(MacMonitorWrapper);
 };
 
 bool GlobalShortcutGrabber::HandleMacEvent(NSEvent* event) {

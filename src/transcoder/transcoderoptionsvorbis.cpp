@@ -23,21 +23,17 @@
 const char* TranscoderOptionsVorbis::kSettingsGroup = "Transcoder/vorbisenc";
 
 TranscoderOptionsVorbis::TranscoderOptionsVorbis(QWidget* parent)
-  : TranscoderOptionsInterface(parent),
-    ui_(new Ui_TranscoderOptionsVorbis)
-{
+    : TranscoderOptionsInterface(parent), ui_(new Ui_TranscoderOptionsVorbis) {
   ui_->setupUi(this);
 }
 
-TranscoderOptionsVorbis::~TranscoderOptionsVorbis() {
-  delete ui_;
-}
+TranscoderOptionsVorbis::~TranscoderOptionsVorbis() { delete ui_; }
 
 void TranscoderOptionsVorbis::Load() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-#define GET_BITRATE(variable, property) \
+#define GET_BITRATE(variable, property)         \
   int variable = s.value(property, -1).toInt(); \
   variable = variable == -1 ? 0 : variable / 1000
 
@@ -58,7 +54,7 @@ void TranscoderOptionsVorbis::Save() {
   s.beginGroup(kSettingsGroup);
 
 #define GET_BITRATE(variable, ui_slider) \
-  int variable = ui_slider->value(); \
+  int variable = ui_slider->value();     \
   variable = variable == 0 ? -1 : variable * 1000
 
   GET_BITRATE(bitrate, ui_->bitrate_slider);

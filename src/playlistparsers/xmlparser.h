@@ -23,8 +23,6 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-#include <boost/noncopyable.hpp>
-
 class QDomDocument;
 class QDomNode;
 
@@ -32,18 +30,18 @@ class XMLParser : public ParserBase {
  protected:
   XMLParser(LibraryBackendInterface* library, QObject* parent);
 
-  class StreamElement : public boost::noncopyable {
+  class StreamElement {
    public:
-    StreamElement(const QString& name, QXmlStreamWriter* stream) : stream_(stream) {
+    StreamElement(const QString& name, QXmlStreamWriter* stream)
+        : stream_(stream) {
       stream->writeStartElement(name);
     }
 
-    ~StreamElement() {
-      stream_->writeEndElement();
-    }
+    ~StreamElement() { stream_->writeEndElement(); }
 
    private:
     QXmlStreamWriter* stream_;
+    Q_DISABLE_COPY(StreamElement);
   };
 };
 

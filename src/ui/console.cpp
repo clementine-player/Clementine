@@ -10,8 +10,7 @@
 #include "core/database.h"
 
 Console::Console(Application* app, QWidget* parent)
-    : QDialog(parent),
-      app_(app) {
+    : QDialog(parent), app_(app) {
   ui_.setupUi(this);
   connect(ui_.run, SIGNAL(clicked()), SLOT(RunQuery()));
 

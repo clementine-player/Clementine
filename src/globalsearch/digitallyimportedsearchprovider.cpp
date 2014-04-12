@@ -20,14 +20,15 @@
 #include "internet/digitallyimportedservicebase.h"
 
 DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
-  DigitallyImportedServiceBase* service, Application* app, QObject* parent)
-    : SimpleSearchProvider(app, parent),
-      service_(service)
-{
+    DigitallyImportedServiceBase* service, Application* app, QObject* parent)
+    : SimpleSearchProvider(app, parent), service_(service) {
   Init(service_->name(), service->api_service_name(), service_->icon(),
        ArtIsInSongMetadata | CanGiveSuggestions | CanShowConfig);
 
-  set_safe_words(QStringList() << "sky.fm" << "skyfm" << "di.fm" << "difm"
+  set_safe_words(QStringList() << "sky.fm"
+                               << "skyfm"
+                               << "di.fm"
+                               << "difm"
                                << "digitallyimported");
   set_max_suggestion_count(5);
 
@@ -35,8 +36,7 @@ DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
 
   // Load the channel list on startup only if it doesn't involve going to update
   // info from the server.
-  if (!service_->IsChannelListStale())
-    RecreateItems();
+  if (!service_->IsChannelListStale()) RecreateItems();
 }
 
 void DigitallyImportedSearchProvider::RecreateItems() {
@@ -44,7 +44,7 @@ void DigitallyImportedSearchProvider::RecreateItems() {
 
   DigitallyImportedClient::ChannelList channels = service_->Channels();
 
-  foreach (const DigitallyImportedClient::Channel& channel, channels) {
+  for (const DigitallyImportedClient::Channel& channel : channels) {
     Song song;
     service_->SongFromChannel(channel, &song);
     items << Item(song);

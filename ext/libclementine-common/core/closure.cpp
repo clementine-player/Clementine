@@ -23,34 +23,22 @@
 
 namespace _detail {
 
-ClosureBase::ClosureBase(ObjectHelper* helper)
-    : helper_(helper) {
-}
+ClosureBase::ClosureBase(ObjectHelper* helper) : helper_(helper) {}
 
-ClosureBase::~ClosureBase() {
-}
+ClosureBase::~ClosureBase() {}
 
-CallbackClosure::CallbackClosure(
-    QObject* sender,
-    const char* signal,
-    boost::function<void()> callback)
-  : ClosureBase(new ObjectHelper(sender, signal, this)),
-    callback_(callback) {
-}
+CallbackClosure::CallbackClosure(QObject* sender, const char* signal,
+                                 std::function<void()> callback)
+    : ClosureBase(new ObjectHelper(sender, signal, this)),
+      callback_(callback) {}
 
-void CallbackClosure::Invoke() {
-  callback_();
-}
+void CallbackClosure::Invoke() { callback_(); }
 
-ObjectHelper* ClosureBase::helper() const {
-  return helper_;
-}
+ObjectHelper* ClosureBase::helper() const { return helper_; }
 
-ObjectHelper::ObjectHelper(
-    QObject* sender,
-    const char* signal,
-    ClosureBase* closure)
-  : closure_(closure) {
+ObjectHelper::ObjectHelper(QObject* sender, const char* signal,
+                           ClosureBase* closure)
+    : closure_(closure) {
   connect(sender, signal, SLOT(Invoked()));
   connect(sender, SIGNAL(destroyed()), SLOT(deleteLater()));
 }
@@ -64,12 +52,9 @@ void Unpack(QList<QGenericArgument>*) {}
 
 }  // namespace _detail
 
-_detail::ClosureBase* NewClosure(
-    QObject* sender,
-    const char* signal,
-    boost::function<void()> callback) {
-  return new _detail::CallbackClosure(
-      sender, signal, callback);
+_detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
+                                 std::function<void()> callback) {
+  return new _detail::CallbackClosure(sender, signal, callback);
 }
 
 void DoAfter(QObject* receiver, const char* slot, int msec) {

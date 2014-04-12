@@ -20,46 +20,47 @@
 
 #include <QUrl>
 
-OrganiseErrorDialog::OrganiseErrorDialog(QWidget *parent)
-  : QDialog(parent),
-    ui_(new Ui_OrganiseErrorDialog)
-{
+OrganiseErrorDialog::OrganiseErrorDialog(QWidget* parent)
+    : QDialog(parent), ui_(new Ui_OrganiseErrorDialog) {
   ui_->setupUi(this);
 
-  const int icon_size = style()->pixelMetric(QStyle::PM_MessageBoxIconSize, 0, this);
+  const int icon_size =
+      style()->pixelMetric(QStyle::PM_MessageBoxIconSize, 0, this);
   QIcon icon = style()->standardIcon(QStyle::SP_MessageBoxCritical, 0, this);
 
   ui_->icon->setPixmap(icon.pixmap(icon_size));
 }
 
-OrganiseErrorDialog::~OrganiseErrorDialog() {
-  delete ui_;
-}
+OrganiseErrorDialog::~OrganiseErrorDialog() { delete ui_; }
 
-void OrganiseErrorDialog::Show(
-    OperationType type, const SongList& songs_with_errors) {
+void OrganiseErrorDialog::Show(OperationType type,
+                               const SongList& songs_with_errors) {
   QStringList files;
-  foreach (const Song& song, songs_with_errors) {
+  for (const Song& song : songs_with_errors) {
     files << song.url().toLocalFile();
   }
   Show(type, files);
 }
 
-void OrganiseErrorDialog::Show(
-    OperationType type, const QStringList& files_with_errors) {
+void OrganiseErrorDialog::Show(OperationType type,
+                               const QStringList& files_with_errors) {
   QStringList sorted_files = files_with_errors;
   qStableSort(sorted_files);
 
   switch (type) {
-  case Type_Copy:
-    setWindowTitle(tr("Error copying songs"));
-    ui_->label->setText(tr("There were problems copying some songs.  The following files could not be copied:"));
-    break;
+    case Type_Copy:
+      setWindowTitle(tr("Error copying songs"));
+      ui_->label->setText(
+          tr("There were problems copying some songs.  The following files "
+             "could not be copied:"));
+      break;
 
-  case Type_Delete:
-    setWindowTitle(tr("Error deleting songs"));
-    ui_->label->setText(tr("There were problems deleting some songs.  The following files could not be deleted:"));
-    break;
+    case Type_Delete:
+      setWindowTitle(tr("Error deleting songs"));
+      ui_->label->setText(
+          tr("There were problems deleting some songs.  The following files "
+             "could not be deleted:"));
+      break;
   }
 
   ui_->list->addItems(sorted_files);

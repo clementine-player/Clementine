@@ -22,15 +22,14 @@
 #include <QtDebug>
 
 AsxIniParser::AsxIniParser(LibraryBackendInterface* library, QObject* parent)
-  : ParserBase(library, parent)
-{
-}
+    : ParserBase(library, parent) {}
 
-bool AsxIniParser::TryMagic(const QByteArray &data) const {
+bool AsxIniParser::TryMagic(const QByteArray& data) const {
   return data.toLower().contains("[reference]");
 }
 
-SongList AsxIniParser::Load(QIODevice *device, const QString& playlist_path, const QDir &dir) const {
+SongList AsxIniParser::Load(QIODevice* device, const QString& playlist_path,
+                            const QDir& dir) const {
   SongList ret;
 
   while (!device->atEnd()) {
@@ -50,12 +49,13 @@ SongList AsxIniParser::Load(QIODevice *device, const QString& playlist_path, con
   return ret;
 }
 
-void AsxIniParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+void AsxIniParser::Save(const SongList& songs, QIODevice* device,
+                        const QDir& dir) const {
   QTextStream s(device);
   s << "[Reference]" << endl;
 
   int n = 1;
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     s << "Ref" << n << "=" << URLOrRelativeFilename(song.url(), dir) << endl;
     ++n;
   }

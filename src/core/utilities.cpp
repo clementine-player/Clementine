@@ -19,7 +19,7 @@
 
 #include <stdlib.h>
 
-#include <boost/scoped_array.hpp>
+#include <memory>
 
 #include <QApplication>
 #include <QDateTime>
@@ -45,27 +45,28 @@
 #include "sha2.h"
 
 #if defined(Q_OS_UNIX)
-#  include <sys/statvfs.h>
+#include <sys/statvfs.h>
 #elif defined(Q_OS_WIN32)
-#  include <windows.h>
-#  include <QProcess>
+#include <windows.h>
+#include <QProcess>
 #endif
 
 #ifdef Q_OS_LINUX
-#  include <sys/syscall.h>
+#include <unistd.h>
+#include <sys/syscall.h>
 #endif
 #ifdef Q_OS_DARWIN
-#  include <sys/resource.h>
+#include <sys/resource.h>
 #endif
 
 #ifdef Q_OS_DARWIN
-#  include "core/mac_startup.h"
-#  include "core/mac_utilities.h"
-#  include "core/scoped_cftyperef.h"
-#  include "CoreServices/CoreServices.h"
-#  include "IOKit/ps/IOPowerSources.h"
-#  include "IOKit/ps/IOPSKeys.h"
-#  include <QProcess>
+#include "core/mac_startup.h"
+#include "core/mac_utilities.h"
+#include "core/scoped_cftyperef.h"
+#include "CoreServices/CoreServices.h"
+#include "IOKit/ps/IOPowerSources.h"
+#include "IOKit/ps/IOPSKeys.h"
+#include <QProcess>
 #endif
 
 namespace Utilities {
@@ -83,7 +84,7 @@ QString PrettyTime(int seconds) {
   // negative times.
   seconds = qAbs(seconds);
 
-  int hours = seconds / (60*60);
+  int hours = seconds / (60 * 60);
   int minutes = (seconds / 60) % 60;
   seconds %= 60;
 
@@ -101,14 +102,13 @@ QString PrettyTimeNanosec(qint64 nanoseconds) {
 }
 
 QString WordyTime(quint64 seconds) {
-  quint64 days = seconds / (60*60*24);
+  quint64 days = seconds / (60 * 60 * 24);
 
   // TODO: Make the plural rules translatable
   QStringList parts;
 
-  if (days)
-    parts << (days == 1 ? tr("1 day") : tr("%1 days").arg(days));
-  parts << PrettyTime(seconds - days*60*60*24);
+  if (days) parts << (days == 1 ? tr("1 day") : tr("%1 days").arg(days));
+  parts << PrettyTime(seconds - days * 60 * 60 * 24);
 
   return parts.join(" ");
 }
@@ -121,14 +121,12 @@ QString Ago(int seconds_since_epoch, const QLocale& locale) {
   const QDateTime now = QDateTime::currentDateTime();
   const QDateTime then = QDateTime::fromTime_t(seconds_since_epoch);
   const int days_ago = then.date().daysTo(now.date());
-  const QString time = then.time().toString(locale.timeFormat(QLocale::ShortFormat));
+  const QString time =
+      then.time().toString(locale.timeFormat(QLocale::ShortFormat));
 
-  if (days_ago == 0)
-    return tr("Today") + " " + time;
-  if (days_ago == 1)
-    return tr("Yesterday") + " " + time;
-  if (days_ago <= 7)
-    return tr("%1 days ago").arg(days_ago);
+  if (days_ago == 0) return tr("Today") + " " + time;
+  if (days_ago == 1) return tr("Yesterday") + " " + time;
+  if (days_ago <= 7) return tr("%1 days ago").arg(days_ago);
 
   return then.date().toString(locale.dateFormat(QLocale::ShortFormat));
 }
@@ -137,16 +135,11 @@ QString PrettyFutureDate(const QDate& date) {
   const QDate now = QDate::currentDate();
   const int delta_days = now.daysTo(date);
 
-  if (delta_days < 0)
-    return QString();
-  if (delta_days == 0)
-    return tr("Today");
-  if (delta_days == 1)
-    return tr("Tomorrow");
-  if (delta_days <= 7)
-    return tr("In %1 days").arg(delta_days);
-  if (delta_days <= 14)
-    return tr("Next week");
+  if (delta_days < 0) return QString();
+  if (delta_days == 0) return tr("Today");
+  if (delta_days == 1) return tr("Tomorrow");
+  if (delta_days <= 7) return tr("In %1 days").arg(delta_days);
+  if (delta_days <= 14) return tr("Next week");
 
   return tr("In %1 weeks").arg(delta_days / 7);
 }
@@ -157,12 +150,12 @@ QString PrettySize(quint64 bytes) {
   if (bytes > 0) {
     if (bytes <= 1000)
       ret = QString::number(bytes) + " bytes";
-    else if (bytes <= 1000*1000)
+    else if (bytes <= 1000 * 1000)
       ret.sprintf("%.1f KB", float(bytes) / 1000);
-    else if (bytes <= 1000*1000*1000)
-      ret.sprintf("%.1f MB", float(bytes) / (1000*1000));
+    else if (bytes <= 1000 * 1000 * 1000)
+      ret.sprintf("%.1f MB", float(bytes) / (1000 * 1000));
     else
-      ret.sprintf("%.1f GB", float(bytes) / (1000*1000*1000));
+      ret.sprintf("%.1f GB", float(bytes) / (1000 * 1000 * 1000));
   }
   return ret;
 }
@@ -174,8 +167,9 @@ quint64 FileSystemCapacity(const QString& path) {
     return quint64(fs_info.f_blocks) * quint64(fs_info.f_bsize);
 #elif defined(Q_OS_WIN32)
   _ULARGE_INTEGER ret;
-  if (GetDiskFreeSpaceEx(QDir::toNativeSeparators(path).toLocal8Bit().constData(),
-                         NULL, &ret, NULL) != 0)
+  if (GetDiskFreeSpaceEx(
+          QDir::toNativeSeparators(path).toLocal8Bit().constData(), nullptr,
+          &ret, nullptr) != 0)
     return ret.QuadPart;
 #endif
 
@@ -189,8 +183,9 @@ quint64 FileSystemFreeSpace(const QString& path) {
     return quint64(fs_info.f_bavail) * quint64(fs_info.f_bsize);
 #elif defined(Q_OS_WIN32)
   _ULARGE_INTEGER ret;
-  if (GetDiskFreeSpaceEx(QDir::toNativeSeparators(path).toLocal8Bit().constData(),
-                         &ret, NULL, NULL) != 0)
+  if (GetDiskFreeSpaceEx(
+          QDir::toNativeSeparators(path).toLocal8Bit().constData(), &ret,
+          nullptr, nullptr) != 0)
     return ret.QuadPart;
 #endif
 
@@ -201,8 +196,7 @@ QString MakeTempDir(const QString template_name) {
   QString path;
   {
     QTemporaryFile tempfile;
-    if (!template_name.isEmpty())
-      tempfile.setFileTemplate(template_name);
+    if (!template_name.isEmpty()) tempfile.setFileTemplate(template_name);
 
     tempfile.open();
     path = tempfile.fileName();
@@ -227,10 +221,12 @@ QString GetTemporaryFileName() {
 
 void RemoveRecursive(const QString& path) {
   QDir dir(path);
-  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden))
+  for (const QString& child :
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden))
     RemoveRecursive(path + "/" + child);
 
-  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Hidden))
+  for (const QString& child :
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Hidden))
     QFile::remove(path + "/" + child);
 
   dir.rmdir(path);
@@ -243,16 +239,20 @@ bool CopyRecursive(const QString& source, const QString& destination) {
   QDir().mkpath(dest_path);
 
   QDir dir(source);
-  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs)) {
+  for (const QString& child :
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs)) {
     if (!CopyRecursive(source + "/" + child, dest_path)) {
-      qLog(Warning) << "Failed to copy dir" << source + "/" + child << "to" << dest_path;
+      qLog(Warning) << "Failed to copy dir" << source + "/" + child << "to"
+                    << dest_path;
       return false;
     }
   }
 
-  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Files)) {
+  for (const QString& child :
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Files)) {
     if (!QFile::copy(source + "/" + child, dest_path + "/" + child)) {
-      qLog(Warning) << "Failed to copy file" << source + "/" + child << "to" << dest_path;
+      qLog(Warning) << "Failed to copy file" << source + "/" + child << "to"
+                    << dest_path;
       return false;
     }
   }
@@ -260,21 +260,18 @@ bool CopyRecursive(const QString& source, const QString& destination) {
 }
 
 bool Copy(QIODevice* source, QIODevice* destination) {
-  if (!source->open(QIODevice::ReadOnly))
-    return false;
+  if (!source->open(QIODevice::ReadOnly)) return false;
 
-  if (!destination->open(QIODevice::WriteOnly))
-    return false;
+  if (!destination->open(QIODevice::WriteOnly)) return false;
 
   const qint64 bytes = source->size();
-  boost::scoped_array<char> data(new char[bytes]);
+  std::unique_ptr<char[]> data(new char[bytes]);
   qint64 pos = 0;
 
   qint64 bytes_read;
   do {
     bytes_read = source->read(data.get() + pos, bytes - pos);
-    if (bytes_read == -1)
-      return false;
+    if (bytes_read == -1) return false;
 
     pos += bytes_read;
   } while (bytes_read > 0 && pos != bytes);
@@ -283,8 +280,7 @@ bool Copy(QIODevice* source, QIODevice* destination) {
   qint64 bytes_written;
   do {
     bytes_written = destination->write(data.get() + pos, bytes - pos);
-    if (bytes_written == -1)
-      return false;
+    if (bytes_written == -1) return false;
 
     pos += bytes_written;
   } while (bytes_written > 0 && pos != bytes);
@@ -294,7 +290,10 @@ bool Copy(QIODevice* source, QIODevice* destination) {
 
 QString ColorToRgba(const QColor& c) {
   return QString("rgba(%1, %2, %3, %4)")
-      .arg(c.red()).arg(c.green()).arg(c.blue()).arg(c.alpha());
+      .arg(c.red())
+      .arg(c.green())
+      .arg(c.blue())
+      .arg(c.alpha());
 }
 
 QString GetConfigPath(ConfigPath config) {
@@ -303,30 +302,31 @@ QString GetConfigPath(ConfigPath config) {
       if (Application::kIsPortable) {
         return QString("%1/data").arg(QCoreApplication::applicationDirPath());
       }
-      #ifdef Q_OS_DARWIN
-        return mac::GetApplicationSupportPath() + "/" + QCoreApplication::organizationName();
-      #else
-        return QString("%1/.config/%2").arg(QDir::homePath(), QCoreApplication::organizationName());
-      #endif
-    }
-    break;
+#ifdef Q_OS_DARWIN
+      return mac::GetApplicationSupportPath() + "/" +
+             QCoreApplication::organizationName();
+#else
+      return QString("%1/.config/%2")
+          .arg(QDir::homePath(), QCoreApplication::organizationName());
+#endif
+    } break;
 
     case Path_CacheRoot: {
       if (Application::kIsPortable) {
         return GetConfigPath(Path_Root) + "/cache";
       }
-      #if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
-        char* xdg = getenv("XDG_CACHE_HOME");
-        if (!xdg || !*xdg) {
-          return QString("%1/.cache/%2").arg(QDir::homePath(), QCoreApplication::organizationName());
-        } else {
-          return QString("%1/%2").arg(xdg, QCoreApplication::organizationName());
-        }
-      #else
-        return GetConfigPath(Path_Root);
-      #endif
-    }
-    break;
+#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
+      char* xdg = getenv("XDG_CACHE_HOME");
+      if (!xdg || !*xdg) {
+        return QString("%1/.cache/%2")
+            .arg(QDir::homePath(), QCoreApplication::organizationName());
+      } else {
+        return QString("%1/%2").arg(xdg, QCoreApplication::organizationName());
+      }
+#else
+      return GetConfigPath(Path_Root);
+#endif
+    } break;
 
     case Path_AlbumCovers:
       return GetConfigPath(Path_Root) + "/albumcovers";
@@ -339,14 +339,15 @@ QString GetConfigPath(ConfigPath config) {
 
     case Path_GstreamerRegistry:
       return GetConfigPath(Path_Root) +
-          QString("/gst-registry-%1-bin").arg(QCoreApplication::applicationVersion());
+             QString("/gst-registry-%1-bin")
+                 .arg(QCoreApplication::applicationVersion());
 
     case Path_DefaultMusicLibrary:
-      #ifdef Q_OS_DARWIN
-        return mac::GetMusicDirectory();
-      #else
-        return QDir::homePath();
-      #endif
+#ifdef Q_OS_DARWIN
+      return mac::GetMusicDirectory();
+#else
+      return QDir::homePath();
+#endif
 
     case Path_LocalSpotifyBlob:
       return GetConfigPath(Path_Root) + "/spotifyblob";
@@ -372,26 +373,25 @@ void RevealFileInFinder(QString const& path) {
 
 #ifdef Q_OS_WIN
 void ShowFileInExplorer(QString const& path) {
-  QProcess::execute("explorer.exe", QStringList() << "/select,"
-                                                  << QDir::toNativeSeparators(path));
+  QProcess::execute("explorer.exe", QStringList()
+                                        << "/select,"
+                                        << QDir::toNativeSeparators(path));
 }
 #endif
 
 void OpenInFileBrowser(const QList<QUrl>& urls) {
   QSet<QString> dirs;
 
-  foreach (const QUrl& url, urls) {
+  for (const QUrl& url : urls) {
     if (url.scheme() != "file") {
       continue;
     }
     QString path = url.toLocalFile();
 
-    if (!QFile::exists(path))
-      continue;
+    if (!QFile::exists(path)) continue;
 
     const QString directory = QFileInfo(path).dir().path();
-    if (dirs.contains(directory))
-      continue;
+    if (dirs.contains(directory)) continue;
     dirs.insert(directory);
     qLog(Debug) << path;
 #ifdef Q_OS_DARWIN
@@ -406,28 +406,29 @@ void OpenInFileBrowser(const QList<QUrl>& urls) {
   }
 }
 
-QByteArray Hmac(const QByteArray& key, const QByteArray& data, HashFunction method) {
-  const int kBlockSize = 64; // bytes
+QByteArray Hmac(const QByteArray& key, const QByteArray& data,
+                HashFunction method) {
+  const int kBlockSize = 64;  // bytes
   Q_ASSERT(key.length() <= kBlockSize);
 
   QByteArray inner_padding(kBlockSize, char(0x36));
   QByteArray outer_padding(kBlockSize, char(0x5c));
 
-  for (int i=0 ; i<key.length() ; ++i) {
+  for (int i = 0; i < key.length(); ++i) {
     inner_padding[i] = inner_padding[i] ^ key[i];
     outer_padding[i] = outer_padding[i] ^ key[i];
   }
   if (Md5_Algo == method) {
-    return QCryptographicHash::hash(outer_padding +
-                                    QCryptographicHash::hash(inner_padding + data,
-                                                             QCryptographicHash::Md5),
-                                    QCryptographicHash::Md5);
+    return QCryptographicHash::hash(
+        outer_padding + QCryptographicHash::hash(inner_padding + data,
+                                                 QCryptographicHash::Md5),
+        QCryptographicHash::Md5);
   } else if (Sha1_Algo == method) {
-    return QCryptographicHash::hash(outer_padding +
-                                    QCryptographicHash::hash(inner_padding + data,
-                                                             QCryptographicHash::Sha1),
-                                    QCryptographicHash::Sha1);
-  } else { // Sha256_Algo, currently default
+    return QCryptographicHash::hash(
+        outer_padding + QCryptographicHash::hash(inner_padding + data,
+                                                 QCryptographicHash::Sha1),
+        QCryptographicHash::Sha1);
+  } else {  // Sha256_Algo, currently default
     return Sha256(outer_padding + Sha256(inner_padding + data));
   }
 }
@@ -448,24 +449,24 @@ QByteArray Sha256(const QByteArray& data) {
   clementine_sha2::SHA256_CTX context;
   clementine_sha2::SHA256_Init(&context);
   clementine_sha2::SHA256_Update(
-      &context, reinterpret_cast<const u_int8_t*>(data.constData()),
+      &context, reinterpret_cast<const quint8*>(data.constData()),
       data.length());
 
   QByteArray ret(clementine_sha2::SHA256_DIGEST_LENGTH, '\0');
-  clementine_sha2::SHA256_Final(
-      reinterpret_cast<u_int8_t*>(ret.data()), &context);
+  clementine_sha2::SHA256_Final(reinterpret_cast<quint8*>(ret.data()),
+                                &context);
 
   return ret;
 }
 
 // File must not be open and will be closed afterwards!
-QByteArray Sha1File(QFile &file) {
+QByteArray Sha1File(QFile& file) {
   file.open(QIODevice::ReadOnly);
   QCryptographicHash hash(QCryptographicHash::Sha1);
   QByteArray data;
 
-  while(!file.atEnd()) {
-    data = file.read(1000000); // 1 mib
+  while (!file.atEnd()) {
+    data = file.read(1000000);  // 1 mib
     hash.addData(data.data(), data.length());
     data.clear();
   }
@@ -484,8 +485,7 @@ QByteArray Sha1CoverHash(const QString& artist, const QString& album) {
 }
 
 QString PrettySize(const QSize& size) {
-  return QString::number(size.width()) + "x" +
-         QString::number(size.height());
+  return QString::number(size.width()) + "x" + QString::number(size.height());
 }
 
 void ForwardMouseEvent(const QMouseEvent* e, QWidget* target) {
@@ -514,9 +514,14 @@ void ConsumeCurrentElement(QXmlStreamReader* reader) {
   int level = 1;
   while (level != 0 && !reader->atEnd()) {
     switch (reader->readNext()) {
-      case QXmlStreamReader::StartElement: ++level; break;
-      case QXmlStreamReader::EndElement:   --level; break;
-      default: break;
+      case QXmlStreamReader::StartElement:
+        ++level;
+        break;
+      case QXmlStreamReader::EndElement:
+        --level;
+        break;
+      default:
+        break;
     }
   }
 }
@@ -541,37 +546,36 @@ QDateTime ParseRFC822DateTime(const QString& text) {
   // This sucks but we need it because some podcasts don't quite follow the
   // spec properly - they might have 1-digit hour numbers for example.
 
-  QRegExp re("([a-zA-Z]{3}),? (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
-  if (re.indexIn(text) == -1)
-    return QDateTime();
+  QRegExp re(
+      "([a-zA-Z]{3}),? (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) "
+      "(\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
+  if (re.indexIn(text) == -1) return QDateTime();
 
   return QDateTime(
-    QDate::fromString(QString("%1 %2 %3 %4").arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)), Qt::TextDate),
-    QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
+      QDate::fromString(QString("%1 %2 %3 %4")
+                            .arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)),
+                        Qt::TextDate),
+      QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
 }
 
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {
   int index = meta.indexOfEnumerator(name);
-  if (index == -1)
-    return "[UnknownEnum]";
+  if (index == -1) return "[UnknownEnum]";
   QMetaEnum metaenum = meta.enumerator(index);
   const char* result = metaenum.valueToKey(value);
-  if (result == 0)
-    return "[UnknownEnumValue]";
+  if (result == 0) return "[UnknownEnumValue]";
   return result;
 }
 
 QStringList Prepend(const QString& text, const QStringList& list) {
   QStringList ret(list);
-  for (int i=0 ; i<ret.count() ; ++i)
-    ret[i].prepend(text);
+  for (int i = 0; i < ret.count(); ++i) ret[i].prepend(text);
   return ret;
 }
 
 QStringList Updateify(const QStringList& list) {
   QStringList ret(list);
-  for (int i=0 ; i<ret.count() ; ++i)
-    ret[i].prepend(ret[i] + " = :");
+  for (int i = 0; i < ret.count(); ++i) ret[i].prepend(ret[i] + " = :");
   return ret;
 }
 
@@ -612,17 +616,19 @@ bool IsLaptop() {
     return false;
   }
 
-  return !(status.BatteryFlag & 128); // 128 = no system battery
+  return !(status.BatteryFlag & 128);  // 128 = no system battery
 #elif defined(Q_OS_LINUX)
-  return !QDir("/proc/acpi/battery").entryList(QDir::Dirs | QDir::NoDotAndDotDot).isEmpty();
+  return !QDir("/proc/acpi/battery")
+              .entryList(QDir::Dirs | QDir::NoDotAndDotDot)
+              .isEmpty();
 #elif defined(Q_OS_MAC)
   ScopedCFTypeRef<CFTypeRef> power_sources(IOPSCopyPowerSourcesInfo());
   ScopedCFTypeRef<CFArrayRef> power_source_list(
       IOPSCopyPowerSourcesList(power_sources.get()));
   for (CFIndex i = 0; i < CFArrayGetCount(power_source_list.get()); ++i) {
     CFTypeRef ps = CFArrayGetValueAtIndex(power_source_list.get(), i);
-    CFDictionaryRef description = IOPSGetPowerSourceDescription(
-        power_sources.get(), ps);
+    CFDictionaryRef description =
+        IOPSGetPowerSourceDescription(power_sources.get(), ps);
 
     if (CFDictionaryContainsKey(description, CFSTR(kIOPSBatteryHealthKey))) {
       return true;
@@ -636,8 +642,9 @@ bool IsLaptop() {
 
 QString SystemLanguageName() {
 #if QT_VERSION >= 0x040800
-  QString system_language = QLocale::system().uiLanguages().empty() ?
-      QLocale::system().name() : QLocale::system().uiLanguages().first();
+  QString system_language = QLocale::system().uiLanguages().empty()
+                                ? QLocale::system().name()
+                                : QLocale::system().uiLanguages().first();
   // uiLanguages returns strings with "-" as separators for language/region;
   // however QTranslator needs "_" separators
   system_language.replace("-", "_");
@@ -648,9 +655,8 @@ QString SystemLanguageName() {
   return system_language;
 }
 
-bool UrlOnSameDriveAsClementine(const QUrl &url) {
-  if (url.scheme() != "file")
-    return false;
+bool UrlOnSameDriveAsClementine(const QUrl& url) {
+  if (url.scheme() != "file") return false;
 
 #ifdef Q_OS_WIN
   QUrl appUrl = QUrl::fromLocalFile(QCoreApplication::applicationDirPath());
@@ -675,17 +681,15 @@ QString PathWithoutFilenameExtension(const QString& filename) {
   return filename;
 }
 
-QString FiddleFileExtension(const QString& filename, const QString& new_extension) {
+QString FiddleFileExtension(const QString& filename,
+                            const QString& new_extension) {
   return PathWithoutFilenameExtension(filename) + "." + new_extension;
 }
 
 }  // namespace Utilities
 
-
 ScopedWCharArray::ScopedWCharArray(const QString& str)
-  : chars_(str.length()),
-    data_(new wchar_t[chars_ + 1])
-{
+    : chars_(str.length()), data_(new wchar_t[chars_ + 1]) {
   str.toWCharArray(data_.get());
   data_[chars_] = '\0';
 }

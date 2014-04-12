@@ -21,7 +21,7 @@ class DropboxService : public CloudFileService {
 
   QUrl GetStreamingUrlFromSongId(const QUrl& url);
 
- signals:
+signals:
   void Connected();
 
  public slots:

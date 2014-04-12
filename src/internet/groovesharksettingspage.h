@@ -27,22 +27,22 @@ class GroovesharkService;
 class GroovesharkSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   GroovesharkSettingsPage(SettingsDialog* dialog);
   ~GroovesharkSettingsPage();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void Login();
   void LoginFinished(bool success);
   void Logout();
 
-private:
+ private:
   void UpdateLoginState();
 
-private:
+ private:
   Ui_GroovesharkSettingsPage* ui_;
   GroovesharkService* service_;
 
@@ -51,4 +51,4 @@ private:
   QString original_password_;
 };
 
-#endif // GROOVESHARKSETTINGSPAGE_H
+#endif  // GROOVESHARKSETTINGSPAGE_H

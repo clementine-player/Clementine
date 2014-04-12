@@ -26,15 +26,14 @@
 
 ExtendedEditor::ExtendedEditor(QWidget* widget, int extra_right_padding,
                                bool draw_hint)
-  : LineEditInterface(widget),
-    has_clear_button_(true),
-    clear_button_(new QToolButton(widget)),
-    reset_button_(new QToolButton(widget)),
-    extra_right_padding_(extra_right_padding),
-    draw_hint_(draw_hint),
-    font_point_size_(widget->font().pointSizeF() - 1),
-    is_rtl_(false)
-{
+    : LineEditInterface(widget),
+      has_clear_button_(true),
+      clear_button_(new QToolButton(widget)),
+      reset_button_(new QToolButton(widget)),
+      extra_right_padding_(extra_right_padding),
+      draw_hint_(draw_hint),
+      font_point_size_(widget->font().pointSizeF() - 1),
+      is_rtl_(false) {
   clear_button_->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
   clear_button_->setIconSize(QSize(16, 16));
   clear_button_->setCursor(Qt::ArrowCursor);
@@ -45,7 +44,8 @@ ExtendedEditor::ExtendedEditor(QWidget* widget, int extra_right_padding,
   QStyleOption opt;
   opt.initFrom(widget);
 
-  reset_button_->setIcon(widget->style()->standardIcon(QStyle::SP_DialogResetButton, &opt, widget));
+  reset_button_->setIcon(widget->style()->standardIcon(
+      QStyle::SP_DialogResetButton, &opt, widget));
   reset_button_->setIconSize(QSize(16, 16));
   reset_button_->setCursor(Qt::ArrowCursor);
   reset_button_->setStyleSheet("QToolButton { border: none; padding: 0px; }");
@@ -80,19 +80,25 @@ void ExtendedEditor::set_reset_button(bool visible) {
 }
 
 void ExtendedEditor::UpdateButtonGeometry() {
-  const int frame_width = widget_->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-  const int left = frame_width + 1 + (
-        has_clear_button() ? clear_button_->sizeHint().width() : 0);
-  const int right = frame_width + 1 + (
-        has_reset_button() ? reset_button_->sizeHint().width() : 0);
+  const int frame_width =
+      widget_->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  const int left = frame_width + 1 +
+                   (has_clear_button() ? clear_button_->sizeHint().width() : 0);
+  const int right =
+      frame_width + 1 +
+      (has_reset_button() ? reset_button_->sizeHint().width() : 0);
 
   widget_->setStyleSheet(
       QString("QLineEdit { padding-left: %1px; padding-right: %2px; }")
-        .arg(left).arg(right));
+          .arg(left)
+          .arg(right));
 
   QSize msz = widget_->minimumSizeHint();
-  widget_->setMinimumSize(msz.width() + (clear_button_->sizeHint().width() + frame_width + 1) * 2 + extra_right_padding_,
-                          qMax(msz.height(), clear_button_->sizeHint().height() + frame_width * 2 + 2));
+  widget_->setMinimumSize(
+      msz.width() + (clear_button_->sizeHint().width() + frame_width + 1) * 2 +
+          extra_right_padding_,
+      qMax(msz.height(),
+           clear_button_->sizeHint().height() + frame_width * 2 + 2));
 }
 
 void ExtendedEditor::Paint(QPaintDevice* device) {
@@ -113,7 +119,7 @@ void ExtendedEditor::Paint(QPaintDevice* device) {
       p.setPen(widget_->palette().color(QPalette::Disabled, QPalette::Text));
       p.setFont(font);
 
-      QRect r(5, kBorder, device->width() - 10, device->height() - kBorder*2);
+      QRect r(5, kBorder, device->width() - 10, device->height() - kBorder * 2);
       p.drawText(r, Qt::AlignLeft | Qt::AlignVCenter,
                  m.elidedText(hint_, Qt::ElideRight, r.width()));
     }
@@ -124,23 +130,22 @@ void ExtendedEditor::Paint(QPaintDevice* device) {
 
 void ExtendedEditor::Resize() {
   const QSize sz = clear_button_->sizeHint();
-  const int frame_width = widget_->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  const int frame_width =
+      widget_->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   const int y = (widget_->rect().height() - sz.height()) / 2;
 
   clear_button_->move(frame_width, y);
 
   if (!is_rtl_) {
-    reset_button_->move(widget_->width() - frame_width - sz.width() - extra_right_padding_, y);
+    reset_button_->move(
+        widget_->width() - frame_width - sz.width() - extra_right_padding_, y);
   } else {
-    reset_button_->move((has_clear_button() ? sz.width() + 4 : 0) + frame_width, y);
+    reset_button_->move((has_clear_button() ? sz.width() + 4 : 0) + frame_width,
+                        y);
   }
 }
 
-
-LineEdit::LineEdit(QWidget* parent)
-  : QLineEdit(parent),
-    ExtendedEditor(this)
-{
+LineEdit::LineEdit(QWidget* parent) : QLineEdit(parent), ExtendedEditor(this) {
   connect(reset_button_, SIGNAL(clicked()), SIGNAL(Reset()));
   connect(this, SIGNAL(textChanged(QString)), SLOT(text_changed(QString)));
 }
@@ -150,7 +155,8 @@ void LineEdit::text_changed(const QString& text) {
     // Consider empty string as LTR
     set_rtl(false);
   } else {
-    // For some reason Qt will detect any text with LTR at the end as LTR, so instead
+    // For some reason Qt will detect any text with LTR at the end as LTR, so
+    // instead
     // compare only the first character
     set_rtl(QString(text.at(0)).isRightToLeft());
   }
@@ -167,13 +173,11 @@ void LineEdit::resizeEvent(QResizeEvent* e) {
   Resize();
 }
 
-
 TextEdit::TextEdit(QWidget* parent)
-  : QPlainTextEdit(parent),
-    ExtendedEditor(this)
-{
+    : QPlainTextEdit(parent), ExtendedEditor(this) {
   connect(reset_button_, SIGNAL(clicked()), SIGNAL(Reset()));
-  connect(this, SIGNAL(textChanged()), viewport(), SLOT(update())); // To clear the hint
+  connect(this, SIGNAL(textChanged()), viewport(),
+          SLOT(update()));  // To clear the hint
 }
 
 void TextEdit::paintEvent(QPaintEvent* e) {
@@ -186,11 +190,8 @@ void TextEdit::resizeEvent(QResizeEvent* e) {
   Resize();
 }
 
-
 SpinBox::SpinBox(QWidget* parent)
-  : QSpinBox(parent),
-    ExtendedEditor(this, 14, false)
-{
+    : QSpinBox(parent), ExtendedEditor(this, 14, false) {
   connect(reset_button_, SIGNAL(clicked()), SIGNAL(Reset()));
 }
 
@@ -205,7 +206,6 @@ void SpinBox::resizeEvent(QResizeEvent* e) {
 }
 
 QString SpinBox::textFromValue(int val) const {
-  if (val <= 0 && !hint_.isEmpty())
-    return "-";
+  if (val <= 0 && !hint_.isEmpty()) return "-";
   return QSpinBox::textFromValue(val);
 }

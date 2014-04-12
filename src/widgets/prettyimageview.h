@@ -32,26 +32,26 @@ class QTimeLine;
 class PrettyImageView : public QScrollArea {
   Q_OBJECT
 
-public:
-  PrettyImageView(QNetworkAccessManager* network, QWidget* parent = 0);
+ public:
+  PrettyImageView(QNetworkAccessManager* network, QWidget* parent = nullptr);
 
   static const char* kSettingsGroup;
 
-public slots:
+ public slots:
   void AddImage(const QUrl& url);
 
-protected:
+ protected:
   void mouseReleaseEvent(QMouseEvent*);
   void resizeEvent(QResizeEvent* e);
   void wheelEvent(QWheelEvent* e);
 
-private slots:
+ private slots:
   void ScrollBarReleased();
   void ScrollBarAction(int action);
   void ScrollTo(int index, bool smooth = true);
   void ScrollToCurrent();
 
-private:
+ private:
   bool eventFilter(QObject*, QEvent*);
 
   QNetworkAccessManager* network_;
@@ -65,4 +65,4 @@ private:
   bool recursion_filter_;
 };
 
-#endif // PRETTYIMAGEVIEW_H
+#endif  // PRETTYIMAGEVIEW_H

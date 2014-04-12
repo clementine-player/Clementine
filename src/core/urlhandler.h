@@ -25,8 +25,8 @@
 class UrlHandler : public QObject {
   Q_OBJECT
 
-public:
-  UrlHandler(QObject* parent = 0);
+ public:
+  UrlHandler(QObject* parent = nullptr);
 
   // The URL scheme that this handler handles.
   virtual QString scheme() const = 0;
@@ -49,10 +49,8 @@ public:
       TrackAvailable,
     };
 
-    LoadResult(const QUrl& original_url = QUrl(),
-               Type type = NoMoreTracks,
-               const QUrl& media_url = QUrl(),
-               qint64 length_nanosec_ = -1);
+    LoadResult(const QUrl& original_url = QUrl(), Type type = NoMoreTracks,
+               const QUrl& media_url = QUrl(), qint64 length_nanosec_ = -1);
 
     // The url that the playlist item has in Url().
     // Might be something unplayable like lastfm://...
@@ -75,12 +73,13 @@ public:
   // get another track to play.
   virtual LoadResult LoadNext(const QUrl& url) { return LoadResult(url); }
 
-  // Functions to be warned when something happen to a track handled by UrlHandler.
-  virtual void TrackAboutToEnd() { };
-  virtual void TrackSkipped() { };
+  // Functions to be warned when something happen to a track handled by
+  // UrlHandler.
+  virtual void TrackAboutToEnd() {};
+  virtual void TrackSkipped() {};
 
 signals:
   void AsyncLoadComplete(const UrlHandler::LoadResult& result);
 };
 
-#endif // URLHANDLER_H
+#endif  // URLHANDLER_H

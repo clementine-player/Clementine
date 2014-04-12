@@ -25,7 +25,7 @@ class QTimer;
 
 class GroovesharkUrlHandler : public UrlHandler {
   Q_OBJECT
-public:
+ public:
   GroovesharkUrlHandler(GroovesharkService* service, QObject* parent);
 
   QString scheme() const { return "grooveshark"; }
@@ -34,10 +34,10 @@ public:
   void TrackAboutToEnd();
   void TrackSkipped();
 
-private slots:
+ private slots:
   void MarkStreamKeyOver30Secs();
 
-private:
+ private:
   GroovesharkService* service_;
   QTimer* timer_mark_stream_key_;
   QString last_artist_id_;
@@ -47,4 +47,4 @@ private:
   QString last_stream_key_;
 };
 
-#endif // GROOVESHARKURLHANDLER_H
+#endif  // GROOVESHARKURLHANDLER_H

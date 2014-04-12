@@ -25,19 +25,19 @@
 class NyanCatAnalyzer : public Analyzer::Base {
   Q_OBJECT
 
-public:
+ public:
   Q_INVOKABLE NyanCatAnalyzer(QWidget* parent);
 
   static const char* kName;
 
-protected:
+ protected:
   void transform(Scope&);
   void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
 
   void timerEvent(QTimerEvent* e);
   void resizeEvent(QResizeEvent* e);
 
-private:
+ private:
   static const int kCatHeight = 21;
   static const int kCatWidth = 34;
   static const int kCatFrameCount = 6;
@@ -50,7 +50,7 @@ private:
 
   static const int kFrameIntervalMs = 150;
 
-private:
+ private:
   inline QRect CatSourceRect() const {
     return QRect(0, kCatHeight * frame_, kCatWidth, kCatHeight);
   }
@@ -60,8 +60,8 @@ private:
   }
 
   inline QRect CatDestRect() const {
-    return QRect(width() - kCatWidth, (height() - kCatHeight) / 2,
-                 kCatWidth, kCatHeight);
+    return QRect(width() - kCatWidth, (height() - kCatHeight) / 2, kCatWidth,
+                 kCatHeight);
   }
 
   inline QRect SleepingCatDestRect() const {
@@ -69,7 +69,7 @@ private:
                  kCatWidth, kSleepingCatHeight);
   }
 
-private:
+ private:
   // "constants" that get initialised in the constructor
   float band_scale_[kRainbowBands];
   QPen colors_[kRainbowBands];
@@ -102,4 +102,4 @@ private:
   QBrush background_brush_;
 };
 
-#endif // NYANCATANALYZER_H
+#endif  // NYANCATANALYZER_H

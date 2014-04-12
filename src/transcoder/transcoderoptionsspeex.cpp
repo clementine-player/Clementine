@@ -23,15 +23,11 @@
 const char* TranscoderOptionsSpeex::kSettingsGroup = "Transcoder/speexenc";
 
 TranscoderOptionsSpeex::TranscoderOptionsSpeex(QWidget* parent)
-  : TranscoderOptionsInterface(parent),
-    ui_(new Ui_TranscoderOptionsSpeex)
-{
+    : TranscoderOptionsInterface(parent), ui_(new Ui_TranscoderOptionsSpeex) {
   ui_->setupUi(this);
 }
 
-TranscoderOptionsSpeex::~TranscoderOptionsSpeex() {
-  delete ui_;
-}
+TranscoderOptionsSpeex::~TranscoderOptionsSpeex() { delete ui_; }
 
 void TranscoderOptionsSpeex::Load() {
   QSettings s;

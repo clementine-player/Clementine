@@ -28,21 +28,19 @@
 #include <QNetworkRequest>
 
 CoverFromURLDialog::CoverFromURLDialog(QWidget* parent)
-  : QDialog(parent),
-    ui_(new Ui_CoverFromURLDialog),
-    network_(new NetworkAccessManager(this))
-{
+    : QDialog(parent),
+      ui_(new Ui_CoverFromURLDialog),
+      network_(new NetworkAccessManager(this)) {
   ui_->setupUi(this);
   ui_->busy->hide();
 }
 
-CoverFromURLDialog::~CoverFromURLDialog() {
-  delete ui_;
-}
+CoverFromURLDialog::~CoverFromURLDialog() { delete ui_; }
 
 QImage CoverFromURLDialog::Exec() {
   // reset state
-  ui_->url->setText("");;
+  ui_->url->setText("");
+  ;
   last_image_ = QImage();
 
   QClipboard* clipboard = QApplication::clipboard();
@@ -55,7 +53,8 @@ QImage CoverFromURLDialog::Exec() {
 void CoverFromURLDialog::accept() {
   ui_->busy->show();
 
-  QNetworkRequest network_request = QNetworkRequest(QUrl::fromUserInput(ui_->url->text()));
+  QNetworkRequest network_request =
+      QNetworkRequest(QUrl::fromUserInput(ui_->url->text()));
 
   QNetworkReply* reply = network_->get(network_request);
   connect(reply, SIGNAL(finished()), SLOT(LoadCoverFromURLFinished()));
@@ -68,17 +67,19 @@ void CoverFromURLDialog::LoadCoverFromURLFinished() {
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
-    QMessageBox::information(this, tr("Fetching cover error"), tr("The site you requested does not exist!"));
+    QMessageBox::information(this, tr("Fetching cover error"),
+                             tr("The site you requested does not exist!"));
     return;
   }
 
   QImage image;
   image.loadFromData(reply->readAll());
 
-  if(!image.isNull()) {
+  if (!image.isNull()) {
     last_image_ = image;
     QDialog::accept();
   } else {
-    QMessageBox::information(this, tr("Fetching cover error"), tr("The site you requested is not an image!"));
+    QMessageBox::information(this, tr("Fetching cover error"),
+                             tr("The site you requested is not an image!"));
   }
 }

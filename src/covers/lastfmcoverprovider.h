@@ -30,16 +30,16 @@ class QNetworkReply;
 class LastFmCoverProvider : public CoverProvider {
   Q_OBJECT
 
-public:
+ public:
   LastFmCoverProvider(QObject* parent);
 
   bool StartSearch(const QString& artist, const QString& album, int id);
 
-private slots:
+ private slots:
   void QueryFinished(QNetworkReply* reply, int id);
 
-private:
+ private:
   QMap<QNetworkReply*, int> pending_queries_;
 };
 
-#endif // LASTFMCOVERPROVIDER_H
+#endif  // LASTFMCOVERPROVIDER_H

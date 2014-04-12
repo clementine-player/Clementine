@@ -33,11 +33,10 @@
 #include <QtDebug>
 
 GlobalShortcutsSettingsPage::GlobalShortcutsSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_GlobalShortcutsSettingsPage),
-    initialised_(false),
-    grabber_(new GlobalShortcutGrabber)
-{
+    : SettingsPage(dialog),
+      ui_(new Ui_GlobalShortcutsSettingsPage),
+      initialised_(false),
+      grabber_(new GlobalShortcutGrabber) {
   ui_->setupUi(this);
   ui_->shortcut_options->setEnabled(false);
   ui_->list->header()->setResizeMode(QHeaderView::ResizeToContents);
@@ -45,17 +44,18 @@ GlobalShortcutsSettingsPage::GlobalShortcutsSettingsPage(SettingsDialog* dialog)
 
   settings_.beginGroup(GlobalShortcuts::kSettingsGroup);
 
-  connect(ui_->list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(ItemClicked(QTreeWidgetItem*)));
+  connect(ui_->list,
+          SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
+          SLOT(ItemClicked(QTreeWidgetItem*)));
   connect(ui_->radio_none, SIGNAL(clicked()), SLOT(NoneClicked()));
   connect(ui_->radio_default, SIGNAL(clicked()), SLOT(DefaultClicked()));
   connect(ui_->radio_custom, SIGNAL(clicked()), SLOT(ChangeClicked()));
   connect(ui_->change, SIGNAL(clicked()), SLOT(ChangeClicked()));
-  connect(ui_->gnome_open, SIGNAL(clicked()), SLOT(OpenGnomeKeybindingProperties()));
+  connect(ui_->gnome_open, SIGNAL(clicked()),
+          SLOT(OpenGnomeKeybindingProperties()));
 }
 
-GlobalShortcutsSettingsPage::~GlobalShortcutsSettingsPage() {
-  delete ui_;
-}
+GlobalShortcutsSettingsPage::~GlobalShortcutsSettingsPage() { delete ui_; }
 
 bool GlobalShortcutsSettingsPage::IsEnabled() const {
 #ifdef Q_OS_MAC
@@ -74,19 +74,21 @@ void GlobalShortcutsSettingsPage::Load() {
   if (!initialised_) {
     initialised_ = true;
 
-    connect(ui_->mac_open, SIGNAL(clicked()), manager, SLOT(ShowMacAccessibilityDialog()));
+    connect(ui_->mac_open, SIGNAL(clicked()), manager,
+            SLOT(ShowMacAccessibilityDialog()));
 
     if (!manager->IsGsdAvailable()) {
       ui_->gnome_container->hide();
     }
 
-    foreach (const GlobalShortcuts::Shortcut& s, manager->shortcuts().values()) {
+    for (const GlobalShortcuts::Shortcut& s : manager->shortcuts().values()) {
       Shortcut shortcut;
       shortcut.s = s;
       shortcut.key = s.action->shortcut();
-      shortcut.item = new QTreeWidgetItem(ui_->list,
-          QStringList() << s.action->text()
-                        << s.action->shortcut().toString(QKeySequence::NativeText));
+      shortcut.item = new QTreeWidgetItem(
+          ui_->list, QStringList() << s.action->text()
+                                   << s.action->shortcut().toString(
+                                          QKeySequence::NativeText));
       shortcut.item->setData(0, Qt::UserRole, s.id);
       shortcuts_[s.id] = shortcut;
     }
@@ -95,7 +97,7 @@ void GlobalShortcutsSettingsPage::Load() {
     ItemClicked(ui_->list->topLevelItem(0));
   }
 
-  foreach (const Shortcut& s, shortcuts_.values()) {
+  for (const Shortcut& s : shortcuts_.values()) {
     SetShortcut(s.s.id, s.s.action->shortcut());
   }
 
@@ -105,9 +107,15 @@ void GlobalShortcutsSettingsPage::Load() {
   }
 
   ui_->mac_container->setVisible(!manager->IsMacAccessibilityEnabled());
+#ifdef Q_OS_DARWIN
+  qint32 mac_version = Utilities::GetMacVersion();
+  ui_->mac_label->setVisible(mac_version < 9);
+  ui_->mac_label_mavericks->setVisible(mac_version >= 9);
+#endif  // Q_OS_DARWIN
 }
 
-void GlobalShortcutsSettingsPage::SetShortcut(const QString& id, const QKeySequence& key) {
+void GlobalShortcutsSettingsPage::SetShortcut(const QString& id,
+                                              const QKeySequence& key) {
   Shortcut& shortcut = shortcuts_[id];
 
   shortcut.key = key;
@@ -115,7 +123,7 @@ void GlobalShortcutsSettingsPage::SetShortcut(const QString& id, const QKeySeque
 }
 
 void GlobalShortcutsSettingsPage::Save() {
-  foreach (const Shortcut& s, shortcuts_.values()) {
+  for (const Shortcut& s : shortcuts_.values()) {
     s.s.action->setShortcut(s.key);
     s.s.shortcut->setKey(s.key);
     settings_.setValue(s.s.id, s.key.toString());
@@ -132,7 +140,8 @@ void GlobalShortcutsSettingsPage::ItemClicked(QTreeWidgetItem* item) {
 
   // Enable options
   ui_->shortcut_options->setEnabled(true);
-  ui_->shortcut_options->setTitle(tr("Shortcut for %1").arg(shortcut.s.action->text()));
+  ui_->shortcut_options->setTitle(
+      tr("Shortcut for %1").arg(shortcut.s.action->text()));
 
   if (shortcut.key == shortcut.s.default_key)
     ui_->radio_default->setChecked(true);
@@ -156,13 +165,11 @@ void GlobalShortcutsSettingsPage::ChangeClicked() {
   QKeySequence key = grabber_->GetKey(shortcuts_[current_id_].s.action->text());
   manager->Register();
 
-  if (key.isEmpty())
-    return;
+  if (key.isEmpty()) return;
 
   // Check if this key sequence is used by any other actions
-  foreach (const QString& id, shortcuts_.keys()) {
-    if (shortcuts_[id].key == key)
-      SetShortcut(id, QKeySequence());
+  for (const QString& id : shortcuts_.keys()) {
+    if (shortcuts_[id].key == key) SetShortcut(id, QKeySequence());
   }
 
   ui_->radio_custom->setChecked(true);
@@ -171,11 +178,11 @@ void GlobalShortcutsSettingsPage::ChangeClicked() {
 
 void GlobalShortcutsSettingsPage::OpenGnomeKeybindingProperties() {
   if (!QProcess::startDetached("gnome-keybinding-properties")) {
-    if (!QProcess::startDetached("gnome-control-center",
-                                 QStringList() << "keyboard")) {
+    if (!QProcess::startDetached("gnome-control-center", QStringList()
+                                                             << "keyboard")) {
       QMessageBox::warning(this, "Error",
-          tr("The \"%1\" command could not be started.")
-          .arg("gnome-keybinding-properties"));
+                           tr("The \"%1\" command could not be started.")
+                               .arg("gnome-keybinding-properties"));
     }
   }
 }

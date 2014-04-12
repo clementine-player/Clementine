@@ -77,12 +77,9 @@ class JamendoService : public InternetService {
   SongList ReadArtist(QXmlStreamReader* reader, TrackIdList* track_ids) const;
   SongList ReadAlbum(const QString& artist, QXmlStreamReader* reader,
                      TrackIdList* track_ids) const;
-  Song ReadTrack(const QString& artist,
-                 const QString& album,
-                 const QString& album_cover,
-                 int album_id,
-                 QXmlStreamReader* reader,
-                 TrackIdList* track_ids) const;
+  Song ReadTrack(const QString& artist, const QString& album,
+                 const QString& album_cover, int album_id,
+                 QXmlStreamReader* reader, TrackIdList* track_ids) const;
   void InsertTrackIds(const TrackIdList& ids) const;
 
   void EnsureMenuCreated();

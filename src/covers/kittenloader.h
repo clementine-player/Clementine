@@ -11,7 +11,7 @@ class QNetworkReply;
 class KittenLoader : public AlbumCoverLoader {
   Q_OBJECT
  public:
-  KittenLoader(QObject* parent = 0);
+  KittenLoader(QObject* parent = nullptr);
 
   virtual quint64 LoadKitten(const AlbumCoverLoaderOptions& options);
 

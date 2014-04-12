@@ -25,15 +25,16 @@
 #include <QTimer>
 #include <QtDebug>
 
-PrettyImageView::PrettyImageView(QNetworkAccessManager* network, QWidget* parent)
-  : QScrollArea(parent),
-    network_(network),
-    container_(new QWidget(this)),
-    layout_(new QHBoxLayout(container_)),
-    current_index_(-1),
-    scroll_animation_(new QPropertyAnimation(horizontalScrollBar(), "value", this)),
-    recursion_filter_(false)
-{
+PrettyImageView::PrettyImageView(QNetworkAccessManager* network,
+                                 QWidget* parent)
+    : QScrollArea(parent),
+      network_(network),
+      container_(new QWidget(this)),
+      layout_(new QHBoxLayout(container_)),
+      current_index_(-1),
+      scroll_animation_(
+          new QPropertyAnimation(horizontalScrollBar(), "value", this)),
+      recursion_filter_(false) {
   setWidget(container_);
   setWidgetResizable(true);
   setMinimumHeight(PrettyImage::kTotalHeight + 10);
@@ -43,8 +44,10 @@ PrettyImageView::PrettyImageView(QNetworkAccessManager* network, QWidget* parent
 
   scroll_animation_->setDuration(250);
   scroll_animation_->setEasingCurve(QEasingCurve::InOutCubic);
-  connect(horizontalScrollBar(), SIGNAL(sliderReleased()), SLOT(ScrollBarReleased()));
-  connect(horizontalScrollBar(), SIGNAL(actionTriggered(int)), SLOT(ScrollBarAction(int)));
+  connect(horizontalScrollBar(), SIGNAL(sliderReleased()),
+          SLOT(ScrollBarReleased()));
+  connect(horizontalScrollBar(), SIGNAL(actionTriggered(int)),
+          SLOT(ScrollBarAction(int)));
 
   layout_->setSizeConstraint(QLayout::SetMinAndMaxSize);
   layout_->setContentsMargins(6, 6, 6, 6);
@@ -72,20 +75,17 @@ void PrettyImageView::AddImage(const QUrl& url) {
   connect(image, SIGNAL(Loaded()), SLOT(ScrollToCurrent()));
 
   layout_->insertWidget(layout_->count() - 1, image);
-  if (current_index_ == -1)
-    ScrollTo(0);
+  if (current_index_ == -1) ScrollTo(0);
 }
 
 void PrettyImageView::mouseReleaseEvent(QMouseEvent* e) {
   // Find the image that was clicked on
   QWidget* widget = container_->childAt(container_->mapFrom(this, e->pos()));
-  if (!widget)
-    return;
+  if (!widget) return;
 
   // Get the index of that image
   const int index = layout_->indexOf(widget) - 1;
-  if (index == -1)
-    return;
+  if (index == -1) return;
 
   if (index == current_index_) {
     // Show the image fullsize
@@ -104,14 +104,12 @@ void PrettyImageView::ScrollTo(int index, bool smooth) {
   const int layout_index = current_index_ + 1;
 
   const QWidget* target_widget = layout_->itemAt(layout_index)->widget();
-  if (!target_widget)
-    return;
+  if (!target_widget) return;
 
   const int current_x = horizontalScrollBar()->value();
   const int target_x = target_widget->geometry().center().x() - width() / 2;
 
-  if (current_x == target_x)
-    return;
+  if (current_x == target_x) return;
 
   if (smooth) {
     scroll_animation_->setStartValue(current_x);
@@ -123,15 +121,13 @@ void PrettyImageView::ScrollTo(int index, bool smooth) {
   }
 }
 
-void PrettyImageView::ScrollToCurrent() {
-  ScrollTo(current_index_);
-}
+void PrettyImageView::ScrollToCurrent() { ScrollTo(current_index_); }
 
 void PrettyImageView::ScrollBarReleased() {
   // Find the nearest widget to where the scroll bar was released
   const int current_x = horizontalScrollBar()->value() + width() / 2;
   int layout_index = 1;
-  for (; layout_index<layout_->count() - 1 ; ++layout_index) {
+  for (; layout_index < layout_->count() - 1; ++layout_index) {
     const QWidget* widget = layout_->itemAt(layout_index)->widget();
     if (widget && widget->geometry().right() > current_x) {
       break;
@@ -143,15 +139,15 @@ void PrettyImageView::ScrollBarReleased() {
 
 void PrettyImageView::ScrollBarAction(int action) {
   switch (action) {
-  case QAbstractSlider::SliderSingleStepAdd:
-  case QAbstractSlider::SliderPageStepAdd:
-    ScrollTo(current_index_ + 1);
-    break;
+    case QAbstractSlider::SliderSingleStepAdd:
+    case QAbstractSlider::SliderPageStepAdd:
+      ScrollTo(current_index_ + 1);
+      break;
 
-  case QAbstractSlider::SliderSingleStepSub:
-  case QAbstractSlider::SliderPageStepSub:
-    ScrollTo(current_index_ - 1);
-    break;
+    case QAbstractSlider::SliderSingleStepSub:
+    case QAbstractSlider::SliderPageStepSub:
+      ScrollTo(current_index_ - 1);
+      break;
   }
 }
 

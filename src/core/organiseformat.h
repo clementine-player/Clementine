@@ -46,10 +46,9 @@ class OrganiseFormat {
   bool IsValid() const;
   QString GetFilenameForSong(const Song& song) const;
 
-
   class Validator : public QValidator {
    public:
-    explicit Validator(QObject* parent = 0);
+    explicit Validator(QObject* parent = nullptr);
     QValidator::State validate(QString& format, int& pos) const;
   };
 
@@ -62,15 +61,15 @@ class OrganiseFormat {
     static const QRgb kInvalidTagColorDark;
     static const QRgb kBlockColorDark;
 
-    explicit SyntaxHighlighter(QObject* parent = 0);
+    explicit SyntaxHighlighter(QObject* parent = nullptr);
     explicit SyntaxHighlighter(QTextEdit* parent);
     explicit SyntaxHighlighter(QTextDocument* parent);
     void highlightBlock(const QString& format);
   };
 
  private:
-  QString ParseBlock(
-      QString block, const Song& song, bool* any_empty = NULL) const;
+  QString ParseBlock(QString block, const Song& song,
+                     bool* any_empty = nullptr) const;
   QString TagValue(const QString& tag, const Song& song) const;
 
   QString format_;

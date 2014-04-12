@@ -18,10 +18,8 @@
 #include "dynamicplaylistcontrols.h"
 #include "ui_dynamicplaylistcontrols.h"
 
-DynamicPlaylistControls::DynamicPlaylistControls(QWidget *parent)
-  : QWidget(parent),
-    ui_(new Ui_DynamicPlaylistControls)
-{
+DynamicPlaylistControls::DynamicPlaylistControls(QWidget* parent)
+    : QWidget(parent), ui_(new Ui_DynamicPlaylistControls) {
   ui_->setupUi(this);
 
   connect(ui_->expand, SIGNAL(clicked()), SIGNAL(Expand()));
@@ -29,6 +27,4 @@ DynamicPlaylistControls::DynamicPlaylistControls(QWidget *parent)
   connect(ui_->off, SIGNAL(clicked()), SIGNAL(TurnOff()));
 }
 
-DynamicPlaylistControls::~DynamicPlaylistControls() {
-  delete ui_;
-}
+DynamicPlaylistControls::~DynamicPlaylistControls() { delete ui_; }

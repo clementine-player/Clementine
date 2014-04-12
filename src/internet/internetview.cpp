@@ -22,9 +22,7 @@
 
 #include <QContextMenuEvent>
 
-InternetView::InternetView(QWidget *parent)
-  : AutoExpandingTreeView(parent)
-{
+InternetView::InternetView(QWidget* parent) : AutoExpandingTreeView(parent) {
   setItemDelegate(new LibraryItemDelegate(this));
   SetExpandOnReset(false);
   setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -33,26 +31,27 @@ InternetView::InternetView(QWidget *parent)
 
 void InternetView::contextMenuEvent(QContextMenuEvent* e) {
   QModelIndex index = indexAt(e->pos());
-  if (!index.isValid())
-    return;
+  if (!index.isValid()) return;
 
   MergedProxyModel* merged_model = static_cast<MergedProxyModel*>(model());
-  InternetModel* internet_model = static_cast<InternetModel*>(merged_model->sourceModel());
+  InternetModel* internet_model =
+      static_cast<InternetModel*>(merged_model->sourceModel());
 
   internet_model->ShowContextMenu(selectionModel()->selectedRows(), index,
                                   e->globalPos());
 }
 
-void InternetView::currentChanged(const QModelIndex &current, const QModelIndex&) {
+void InternetView::currentChanged(const QModelIndex& current,
+                                  const QModelIndex&) {
   emit CurrentIndexChanged(current);
 }
 
-void InternetView::setModel(QAbstractItemModel *model) {
+void InternetView::setModel(QAbstractItemModel* model) {
   AutoExpandingTreeView::setModel(model);
 
   if (MergedProxyModel* merged_model = qobject_cast<MergedProxyModel*>(model)) {
     connect(merged_model,
-            SIGNAL(SubModelReset(QModelIndex,QAbstractItemModel*)),
+            SIGNAL(SubModelReset(QModelIndex, QAbstractItemModel*)),
             SLOT(RecursivelyExpand(QModelIndex)));
   }
 }

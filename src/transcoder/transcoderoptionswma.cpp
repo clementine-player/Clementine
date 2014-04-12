@@ -23,15 +23,11 @@
 const char* TranscoderOptionsWma::kSettingsGroup = "Transcoder/ffenc_wmav2";
 
 TranscoderOptionsWma::TranscoderOptionsWma(QWidget* parent)
-  : TranscoderOptionsInterface(parent),
-    ui_(new Ui_TranscoderOptionsWma)
-{
+    : TranscoderOptionsInterface(parent), ui_(new Ui_TranscoderOptionsWma) {
   ui_->setupUi(this);
 }
 
-TranscoderOptionsWma::~TranscoderOptionsWma() {
-  delete ui_;
-}
+TranscoderOptionsWma::~TranscoderOptionsWma() { delete ui_; }
 
 void TranscoderOptionsWma::Load() {
   QSettings s;

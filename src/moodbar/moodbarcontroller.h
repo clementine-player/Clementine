@@ -28,20 +28,20 @@ class QUrl;
 
 class MoodbarController : public QObject {
   Q_OBJECT
-  
-public:
-  MoodbarController(Application* app, QObject* parent = 0);
+
+ public:
+  MoodbarController(Application* app, QObject* parent = nullptr);
 
 signals:
   void CurrentMoodbarDataChanged(const QByteArray& data);
-  
-private slots:
+
+ private slots:
   void CurrentSongChanged(const Song& song);
   void PlaybackStopped();
   void AsyncLoadComplete(MoodbarPipeline* pipeline, const QUrl& url);
-  
-private:
+
+ private:
   Application* app_;
 };
 
-#endif // MOODBARCONTROLLER_H
+#endif  // MOODBARCONTROLLER_H

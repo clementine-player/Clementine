@@ -25,14 +25,14 @@ class QAbstractItemView;
 // Some KDE styles override the ScrollMode property of QAbstractItemViews.
 // This helper class forces the mode back to ScrollPerPixel.
 class ForceScrollPerPixel : public QObject {
-public:
-  ForceScrollPerPixel(QAbstractItemView* item_view, QObject* parent = 0);
+ public:
+  ForceScrollPerPixel(QAbstractItemView* item_view, QObject* parent = nullptr);
 
-protected:
+ protected:
   bool eventFilter(QObject* object, QEvent* event);
 
-private:
+ private:
   QAbstractItemView* item_view_;
 };
 
-#endif // FORCESCROLLPERPIXEL_H
+#endif  // FORCESCROLLPERPIXEL_H

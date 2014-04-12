@@ -27,9 +27,9 @@ class QProgressDialog;
 class SpotifyBlobDownloader : public QObject {
   Q_OBJECT
 
-public:
+ public:
   SpotifyBlobDownloader(const QString& version, const QString& path,
-                        QObject* parent = 0);
+                        QObject* parent = nullptr);
   ~SpotifyBlobDownloader();
 
   static const char* kSignatureSuffix;
@@ -41,16 +41,16 @@ public:
 signals:
   void Finished();
 
-private slots:
+ private slots:
   void ReplyFinished();
   void ReplyProgress();
   void Cancel();
 
-private:
+ private:
   void ShowError(const QString& message);
   void EmitFinished();
 
-private:
+ private:
   QString version_;
   QString path_;
 
@@ -60,4 +60,4 @@ private:
   QProgressDialog* progress_;
 };
 
-#endif // SPOTIFYBLOBDOWNLOADER_H
+#endif  // SPOTIFYBLOBDOWNLOADER_H

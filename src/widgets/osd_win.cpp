@@ -20,18 +20,13 @@
 
 #include <QtDebug>
 
-void OSD::Init() {
-}
+void OSD::Init() {}
 
-bool OSD::SupportsNativeNotifications() {
-  return false;
-}
+bool OSD::SupportsNativeNotifications() { return false; }
 
-bool OSD::SupportsTrayPopups() {
-  return true;
-}
+bool OSD::SupportsTrayPopups() { return true; }
 
-void OSD::ShowMessageNative(const QString&, const QString&,
-                            const QString&, const QImage&) {
+void OSD::ShowMessageNative(const QString&, const QString&, const QString&,
+                            const QImage&) {
   qLog(Warning) << "not implemented";
 }

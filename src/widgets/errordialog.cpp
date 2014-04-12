@@ -18,27 +18,24 @@
 #include "errordialog.h"
 #include "ui_errordialog.h"
 
-ErrorDialog::ErrorDialog(QWidget *parent)
-  : QDialog(parent),
-    ui_(new Ui_ErrorDialog)
-{
+ErrorDialog::ErrorDialog(QWidget* parent)
+    : QDialog(parent), ui_(new Ui_ErrorDialog) {
   ui_->setupUi(this);
 
   QIcon warning_icon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
   QPixmap warning_pixmap(warning_icon.pixmap(48));
 
   QPalette messages_palette(ui_->messages->palette());
-  messages_palette.setColor(QPalette::Base, messages_palette.color(QPalette::Background));
+  messages_palette.setColor(QPalette::Base,
+                            messages_palette.color(QPalette::Background));
 
   ui_->messages->setPalette(messages_palette);
   ui_->icon->setPixmap(warning_pixmap);
 }
 
-ErrorDialog::~ErrorDialog() {
-  delete ui_;
-}
+ErrorDialog::~ErrorDialog() { delete ui_; }
 
-void ErrorDialog::ShowMessage(const QString &message) {
+void ErrorDialog::ShowMessage(const QString& message) {
   current_messages_ << message;
   UpdateContent();
 
@@ -47,16 +44,15 @@ void ErrorDialog::ShowMessage(const QString &message) {
   activateWindow();
 }
 
-void ErrorDialog::hideEvent(QHideEvent *) {
+void ErrorDialog::hideEvent(QHideEvent*) {
   current_messages_.clear();
   UpdateContent();
 }
 
 void ErrorDialog::UpdateContent() {
   QString html;
-  foreach (const QString& message, current_messages_) {
-    if (!html.isEmpty())
-      html += "<hr/>";
+  for (const QString& message : current_messages_) {
+    if (!html.isEmpty()) html += "<hr/>";
     html += Qt::escape(message);
   }
   ui_->messages->setHtml(html);

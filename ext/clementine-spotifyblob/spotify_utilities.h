@@ -32,7 +32,6 @@ QString GetUserDataDirectory();
 QString GetCacheDirectory();
 
 QString GetSettingsDirectory();
-
 }
 
 #endif

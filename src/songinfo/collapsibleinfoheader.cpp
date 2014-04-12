@@ -27,12 +27,11 @@ const int CollapsibleInfoHeader::kHeight = 20;
 const int CollapsibleInfoHeader::kIconSize = 16;
 
 CollapsibleInfoHeader::CollapsibleInfoHeader(QWidget* parent)
-  : QWidget(parent),
-    expanded_(false),
-    hovering_(false),
-    animation_(new QPropertyAnimation(this, "opacity", this)),
-    opacity_(0.0)
-{
+    : QWidget(parent),
+      expanded_(false),
+      hovering_(false),
+      animation_(new QPropertyAnimation(this, "opacity", this)),
+      opacity_(0.0) {
   setMinimumHeight(kHeight);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   setCursor(QCursor(Qt::PointingHandCursor));
@@ -86,21 +85,25 @@ void CollapsibleInfoHeader::set_opacity(float opacity) {
 void CollapsibleInfoHeader::paintEvent(QPaintEvent* e) {
   QPainter p(this);
 
-  QColor active_text_color(palette().color(QPalette::Active, QPalette::HighlightedText));
+  QColor active_text_color(
+      palette().color(QPalette::Active, QPalette::HighlightedText));
   QColor inactive_text_color(palette().color(QPalette::Active, QPalette::Text));
   QColor text_color;
   if (expanded_) {
     text_color = active_text_color;
   } else {
     p.setOpacity(0.4 + opacity_ * 0.6);
-    text_color = QColor(
-        active_text_color.red() * opacity_   + inactive_text_color.red()   * (1.0 - opacity_),
-        active_text_color.green() * opacity_ + inactive_text_color.green() * (1.0 - opacity_),
-        active_text_color.blue() * opacity_  + inactive_text_color.blue()  * (1.0 - opacity_));
+    text_color = QColor(active_text_color.red() * opacity_ +
+                            inactive_text_color.red() * (1.0 - opacity_),
+                        active_text_color.green() * opacity_ +
+                            inactive_text_color.green() * (1.0 - opacity_),
+                        active_text_color.blue() * opacity_ +
+                            inactive_text_color.blue() * (1.0 - opacity_));
   }
 
   QRect indicator_rect(0, 0, height(), height());
-  QRect icon_rect(height() + 2, (kHeight - kIconSize) / 2, kIconSize, kIconSize);
+  QRect icon_rect(height() + 2, (kHeight - kIconSize) / 2, kIconSize,
+                  kIconSize);
   QRect text_rect(rect());
   text_rect.setLeft(icon_rect.right() + 4);
 
@@ -127,14 +130,13 @@ void CollapsibleInfoHeader::paintEvent(QPaintEvent* e) {
   opt.initFrom(this);
   opt.rect = indicator_rect;
   opt.state |= QStyle::State_Children;
-  if (expanded_)
-    opt.state |= QStyle::State_Open;
-  if (hovering_)
-    opt.state |= QStyle::State_Active;
+  if (expanded_) opt.state |= QStyle::State_Open;
+  if (hovering_) opt.state |= QStyle::State_Active;
 
   // Have to use the application's style here because using the widget's style
   // will trigger QStyleSheetStyle's recursion guard (I don't know why).
-  QApplication::style()->drawPrimitive(QStyle::PE_IndicatorBranch, &opt, &p, this);
+  QApplication::style()->drawPrimitive(QStyle::PE_IndicatorBranch, &opt, &p,
+                                       this);
 
   // Draw the icon
   p.drawPixmap(icon_rect, icon_.pixmap(kIconSize));

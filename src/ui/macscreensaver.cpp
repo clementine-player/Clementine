@@ -24,22 +24,16 @@
 // kIOPMAssertionTypePreventUserIdleDisplaySleep from Lion.
 #define kLionDisplayAssertion CFSTR("PreventUserIdleDisplaySleep")
 
-MacScreensaver::MacScreensaver()
-    : assertion_id_(0) {
-}
+MacScreensaver::MacScreensaver() : assertion_id_(0) {}
 
 void MacScreensaver::Inhibit() {
   CFStringRef assertion_type = (Utilities::GetMacVersion() >= 7)
-      ? kLionDisplayAssertion
-      : kIOPMAssertionTypeNoDisplaySleep;
+                                   ? kLionDisplayAssertion
+                                   : kIOPMAssertionTypeNoDisplaySleep;
 
   IOPMAssertionCreateWithName(
-      assertion_type,
-      kIOPMAssertionLevelOn,
-      CFSTR("Showing full-screen Clementine visualisations"),
-      &assertion_id_);
+      assertion_type, kIOPMAssertionLevelOn,
+      CFSTR("Showing full-screen Clementine visualisations"), &assertion_id_);
 }
 
-void MacScreensaver::Uninhibit() {
-  IOPMAssertionRelease(assertion_id_);
-}
+void MacScreensaver::Uninhibit() { IOPMAssertionRelease(assertion_id_); }

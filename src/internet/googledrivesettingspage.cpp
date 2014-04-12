@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -26,10 +26,10 @@
 #include <QSortFilterProxyModel>
 
 GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
-  : SettingsPage(parent),
-    ui_(new Ui::GoogleDriveSettingsPage),
-    service_(dialog()->app()->internet_model()->Service<GoogleDriveService>())
-{
+    : SettingsPage(parent),
+      ui_(new Ui::GoogleDriveSettingsPage),
+      service_(
+          dialog()->app()->internet_model()->Service<GoogleDriveService>()) {
   ui_->setupUi(this);
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
@@ -40,9 +40,7 @@ GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
   dialog()->installEventFilter(this);
 }
 
-GoogleDriveSettingsPage::~GoogleDriveSettingsPage() {
-  delete ui_;
-}
+GoogleDriveSettingsPage::~GoogleDriveSettingsPage() { delete ui_; }
 
 void GoogleDriveSettingsPage::Load() {
   QSettings s;

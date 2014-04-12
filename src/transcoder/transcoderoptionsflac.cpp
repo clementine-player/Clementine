@@ -23,15 +23,11 @@
 const char* TranscoderOptionsFlac::kSettingsGroup = "Transcoder/flacenc";
 
 TranscoderOptionsFlac::TranscoderOptionsFlac(QWidget* parent)
-  : TranscoderOptionsInterface(parent),
-    ui_(new Ui_TranscoderOptionsFlac)
-{
+    : TranscoderOptionsInterface(parent), ui_(new Ui_TranscoderOptionsFlac) {
   ui_->setupUi(this);
 }
 
-TranscoderOptionsFlac::~TranscoderOptionsFlac() {
-  delete ui_;
-}
+TranscoderOptionsFlac::~TranscoderOptionsFlac() { delete ui_; }
 
 void TranscoderOptionsFlac::Load() {
   QSettings s;

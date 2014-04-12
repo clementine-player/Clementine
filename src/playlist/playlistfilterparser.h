@@ -29,25 +29,21 @@ class QAbstractItemModel;
 class FilterTree {
  public:
   virtual ~FilterTree() {}
-  virtual bool accept(int row, const QModelIndex& parent, const QAbstractItemModel* const model) const = 0;
-  enum FilterType {
-    Nop = 0,
-    Or,
-    And,
-    Not,
-    Column,
-    Term
-  };
+  virtual bool accept(int row, const QModelIndex& parent,
+                      const QAbstractItemModel* const model) const = 0;
+  enum FilterType { Nop = 0, Or, And, Not, Column, Term };
   virtual FilterType type() = 0;
 };
 
 // trivial filter that accepts *anything*
 class NopFilter : public FilterTree {
  public:
-  virtual bool accept(int row, const QModelIndex& parent, const QAbstractItemModel* const model) const { return true; }
+  virtual bool accept(int row, const QModelIndex& parent,
+                      const QAbstractItemModel* const model) const {
+    return true;
+  }
   virtual FilterType type() { return Nop; }
 };
-
 
 // A utility class to parse search filter strings into a decision tree
 // that can decide whether a playlist entry matches the filter.
@@ -64,10 +60,8 @@ class NopFilter : public FilterTree {
 //     col       ::= "title" | "artist" | ...
 class FilterParser {
  public:
-  FilterParser(
-      const QString& filter,
-      const QMap<QString, int>& columns,
-      const QSet<int>& numerical_cols);
+  FilterParser(const QString& filter, const QMap<QString, int>& columns,
+               const QSet<int>& numerical_cols);
 
   FilterTree* parse();
 
@@ -84,8 +78,9 @@ class FilterParser {
   FilterTree* parseSearchExpression();
   FilterTree* parseSearchTerm();
 
-  FilterTree* createSearchTermTreeNode(
-      const QString& col, const QString& prefix, const QString& search) const;
+  FilterTree* createSearchTermTreeNode(const QString& col,
+                                       const QString& prefix,
+                                       const QString& search) const;
   int parseTime(const QString& time_str) const;
 
   QString::const_iterator iter_;

@@ -27,33 +27,33 @@ class ProjectMPresetModel : public QAbstractItemModel {
 
   friend class ProjectMVisualisation;
 
-public:
-  ProjectMPresetModel(ProjectMVisualisation* vis, QObject* parent = 0);
+ public:
+  ProjectMPresetModel(ProjectMVisualisation* vis, QObject* parent = nullptr);
 
-  enum {
-    Role_Url = Qt::UserRole,
-  };
+  enum { Role_Url = Qt::UserRole, };
 
   void MarkSelected(const QString& path, bool selected);
 
   // QAbstractItemModel
-  QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-  QModelIndex parent(const QModelIndex &child) const;
-  int rowCount(const QModelIndex &parent = QModelIndex()) const;
-  int columnCount(const QModelIndex &parent = QModelIndex()) const;
-  QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-  Qt::ItemFlags flags(const QModelIndex &index) const;
-  bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+  QModelIndex index(int row, int column,
+                    const QModelIndex& parent = QModelIndex()) const;
+  QModelIndex parent(const QModelIndex& child) const;
+  int rowCount(const QModelIndex& parent = QModelIndex()) const;
+  int columnCount(const QModelIndex& parent = QModelIndex()) const;
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+  Qt::ItemFlags flags(const QModelIndex& index) const;
+  bool setData(const QModelIndex& index, const QVariant& value,
+               int role = Qt::EditRole);
 
-public slots:
+ public slots:
   void SetImmediatePreset(const QModelIndex& index);
   void SelectAll();
   void SelectNone();
 
-private:
+ private:
   struct Preset {
     Preset(const QString& path, const QString& name, bool selected)
-      : path_(path), name_(name), selected_(selected) {}
+        : path_(path), name_(name), selected_(selected) {}
 
     QString path_;
     QString name_;
@@ -64,4 +64,4 @@ private:
   QList<Preset> all_presets_;
 };
 
-#endif // PROJECTMPRESETMODEL_H
+#endif  // PROJECTMPRESETMODEL_H

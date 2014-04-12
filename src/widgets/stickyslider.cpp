@@ -17,18 +17,13 @@
 
 #include "stickyslider.h"
 
-StickySlider::StickySlider(QWidget *parent)
-  : QSlider(parent),
-    sticky_center_(-1),
-    sticky_threshold_(10)
-{
-}
+StickySlider::StickySlider(QWidget* parent)
+    : QSlider(parent), sticky_center_(-1), sticky_threshold_(10) {}
 
-void StickySlider::mouseMoveEvent(QMouseEvent *e) {
+void StickySlider::mouseMoveEvent(QMouseEvent* e) {
   QSlider::mouseMoveEvent(e);
 
-  if (sticky_center_ == -1)
-    return;
+  if (sticky_center_ == -1) return;
 
   const int v = sliderPosition();
   if (v <= sticky_center_ + sticky_threshold_ &&

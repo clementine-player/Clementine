@@ -28,14 +28,14 @@ class QListWidgetItem;
 class SongInfoSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   SongInfoSettingsPage(SettingsDialog* parent);
   ~SongInfoSettingsPage();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void MoveUp();
   void MoveDown();
   void Move(int d);
@@ -45,8 +45,8 @@ private slots:
 
   void FontSizeChanged(double value);
 
-private:
+ private:
   Ui_SongInfoSettingsPage* ui_;
 };
 
-#endif // SONGINFOSETTINGSPAGE_H
+#endif  // SONGINFOSETTINGSPAGE_H

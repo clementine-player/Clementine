@@ -26,11 +26,11 @@ class CollapsibleInfoHeader;
 class CollapsibleInfoPane : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   struct Data {
     Data() : type_(Type_Biography), relevance_(0) {}
 
-    bool operator <(const Data& other) const;
+    bool operator<(const Data& other) const;
 
     enum Type {
       Type_PlayCounts,
@@ -38,7 +38,6 @@ public:
       Type_Similar,
       Type_Biography,
       Type_Lyrics,
-
       TypeCount
     };
 
@@ -52,23 +51,23 @@ public:
     QObject* content_object_;
   };
 
-  CollapsibleInfoPane(const Data& data, QWidget* parent = 0);
+  CollapsibleInfoPane(const Data& data, QWidget* parent = nullptr);
 
   const Data& data() const { return data_; }
 
-public slots:
+ public slots:
   void Expand();
   void Collapse();
 
 signals:
   void Toggled(bool expanded);
 
-private slots:
+ private slots:
   void ExpandedToggled(bool expanded);
 
-private:
+ private:
   Data data_;
   CollapsibleInfoHeader* header_;
 };
 
-#endif // COLLAPSIBLEINFOPANE_H
+#endif  // COLLAPSIBLEINFOPANE_H
