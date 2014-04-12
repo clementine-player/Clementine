@@ -229,7 +229,6 @@ class PlaylistManager : public PlaylistManagerInterface {
   void OneOfPlaylistsChanged();
   void UpdateSummaryText();
   void SongsDiscovered(const SongList& songs);
-  void LoadFinished(bool success);
   void ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
                                   const QString& filename);
 
