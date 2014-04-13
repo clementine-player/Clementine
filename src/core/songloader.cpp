@@ -17,7 +17,6 @@
 
 #include "songloader.h"
 
-#include <functional>
 #include <memory>
 
 #include <QBuffer>
@@ -113,8 +112,14 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
 
   url_ = PodcastUrlLoader::FixPodcastUrl(url_);
 
-  timeout_timer_->start(timeout_);
-  return LoadRemote();
+  preload_func_ = std::bind(&SongLoader::LoadRemote, this);
+  return BlockingLoadRequired;
+}
+
+void SongLoader::LoadFilenamesBlocking() {
+  if (preload_func_) {
+    preload_func_();
+  }
 }
 
 SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
@@ -238,52 +243,18 @@ void SongLoader::AudioCDTagsLoaded(
     song.set_url(QUrl(QString("cdda://%1").arg(track_number++)));
     songs_ << song;
   }
-  emit LoadFinished(true);
+  emit LoadAudioCDFinished(true);
 }
 
 SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   qLog(Debug) << "Loading local file" << filename;
 
-  // First check to see if it's a directory - if so we can load all the songs
-  // inside right away.
-  if (QFileInfo(filename).isDir()) {
-    ConcurrentRun::Run<void>(
-        &thread_pool_,
-        std::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
-    return WillLoadAsync;
-  }
-
-  // It's a local file, so check if it looks like a playlist.
-  // Read the first few bytes.
-  QFile file(filename);
-  if (!file.open(QIODevice::ReadOnly)) return Error;
-  QByteArray data(file.read(PlaylistParser::kMagicSize));
-
-  ParserBase* parser = playlist_parser_->ParserForMagic(data);
-  if (!parser) {
-    // Check the file extension as well, maybe the magic failed, or it was a
-    // basic M3U file which is just a plain list of filenames.
-    parser = playlist_parser_->ParserForExtension(QFileInfo(filename).suffix());
-  }
-
-  if (parser) {
-    qLog(Debug) << "Parsing using" << parser->name();
-
-    // It's a playlist!
-    ConcurrentRun::Run<void>(
-        &thread_pool_,
-        std::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
-    return WillLoadAsync;
-  }
-
-  // Not a playlist, so just assume it's a song
+  // Search in the database.
   QUrl url = QUrl::fromLocalFile(filename);
 
   LibraryQuery query;
   query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
   query.AddWhere("filename", url.toEncoded());
-
-  SongList song_list;
 
   if (library_->ExecQuery(&query) && query.Next()) {
     // we may have many results when the file has many sections
@@ -291,51 +262,72 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
       Song song;
       song.InitFromQuery(query, true);
 
-      song_list << song;
+      if (song.is_valid()) {
+        songs_ << song;
+      }
     } while (query.Next());
-  } else {
-    QString matching_cue = filename.section('.', 0, -2) + ".cue";
 
-    if (QFile::exists(matching_cue)) {
-      // it's a cue - create virtual tracks
-      QFile cue(matching_cue);
-      cue.open(QIODevice::ReadOnly);
-
-      song_list = cue_parser_->Load(&cue, matching_cue,
-                                    QDir(filename.section('/', 0, -2)));
-    } else {
-      // it's a normal media file, load it asynchronously.
-      TagReaderReply* reply = TagReaderClient::Instance()->ReadFile(filename);
-      NewClosure(reply, SIGNAL(Finished(bool)), this,
-                 SLOT(LocalFileLoaded(TagReaderReply*)), reply);
-
-      return WillLoadAsync;
-    }
+    return Success;
   }
 
-  for (const Song& song : song_list) {
-    if (song.is_valid()) {
-      songs_ << song;
-    }
-  }
-
-  return Success;
+  // It's not in the database, load it asynchronously.
+  preload_func_ =
+      std::bind(&SongLoader::LoadLocalAsync, this, filename);
+  return BlockingLoadRequired;
 }
 
-void SongLoader::LocalFileLoaded(TagReaderReply* reply) {
-  reply->deleteLater();
+void SongLoader::LoadLocalAsync(const QString& filename) {
 
+  // First check to see if it's a directory - if so we will load all the songs
+  // inside right away.
+  if (QFileInfo(filename).isDir()) {
+    LoadLocalDirectory(filename);
+    return;
+  }
+
+  // It's a local file, so check if it looks like a playlist.
+  // Read the first few bytes.
+  QFile file(filename);
+  if (!file.open(QIODevice::ReadOnly)) return;
+  QByteArray data(file.read(PlaylistParser::kMagicSize));
+
+  ParserBase* parser = playlist_parser_->ParserForMagic(data);
+  if (!parser) {
+    // Check the file extension as well, maybe the magic failed, or it was a
+    // basic M3U file which is just a plain list of filenames.
+    parser = playlist_parser_->ParserForExtension(QFileInfo(filename).suffix().toLower());
+  }
+
+  if (parser) {
+    qLog(Debug) << "Parsing using" << parser->name();
+
+    // It's a playlist!
+    LoadPlaylist(parser, filename);
+    return;
+  }
+
+  // Check if it's a cue file
+  QString matching_cue = filename.section('.', 0, -2) + ".cue";
+  if (QFile::exists(matching_cue)) {
+    // it's a cue - create virtual tracks
+    QFile cue(matching_cue);
+    cue.open(QIODevice::ReadOnly);
+
+    SongList song_list = cue_parser_->Load(&cue, matching_cue,
+                                           QDir(filename.section('/', 0, -2)));
+    for (Song song: song_list){
+      if (song.is_valid()) songs_ << song;
+    }
+    return;
+  }
+
+  // Assume it's just a normal file
   Song song;
-  song.InitFromProtobuf(reply->message().read_file_response().metadata());
-
-  if (song.is_valid()) {
-    songs_ << song;
-  }
-
-  emit LoadFinished(true);
+  song.InitFromFilePartial(filename);
+  if (song.is_valid()) songs_ << song;
 }
 
-void SongLoader::EffectiveSongsLoad() {
+void SongLoader::LoadMetadataBlocking() {
   for (int i = 0; i < songs_.size(); i++) {
     EffectiveSongLoad(&songs_[i]);
   }
@@ -360,12 +352,6 @@ void SongLoader::EffectiveSongLoad(Song* song) {
   }
 }
 
-void SongLoader::LoadPlaylistAndEmit(ParserBase* parser,
-                                     const QString& filename) {
-  LoadPlaylist(parser, filename);
-  emit LoadFinished(true);
-}
-
 void SongLoader::LoadPlaylist(ParserBase* parser, const QString& filename) {
   QFile file(filename);
   file.open(QIODevice::ReadOnly);
@@ -383,11 +369,6 @@ static bool CompareSongs(const Song& left, const Song& right) {
   if (left.track() < right.track()) return true;
   if (left.track() > right.track()) return false;
   return left.url() < right.url();
-}
-
-void SongLoader::LoadLocalDirectoryAndEmit(const QString& filename) {
-  LoadLocalDirectory(filename);
-  emit LoadFinished(true);
 }
 
 void SongLoader::LoadLocalDirectory(const QString& filename) {
@@ -457,10 +438,10 @@ void SongLoader::StopTypefind() {
     AddAsRawStream();
   }
 
-  emit LoadFinished(success_);
+  emit LoadRemoteFinished();
 }
 
-SongLoader::Result SongLoader::LoadRemote() {
+void SongLoader::LoadRemote() {
   qLog(Debug) << "Loading remote file" << url_;
 
   // It's not a local file so we have to fetch it to see what it is.  We use
@@ -473,6 +454,8 @@ SongLoader::Result SongLoader::LoadRemote() {
   // If the magic succeeds then we know for sure it's a playlist - so read the
   // rest of the file, parse the playlist and return success.
 
+  timeout_timer_->start(timeout_);
+
   // Create the pipeline - it gets unreffed if it goes out of scope
   std::shared_ptr<GstElement> pipeline(gst_pipeline_new(nullptr),
                                        std::bind(&gst_object_unref, _1));
@@ -483,7 +466,7 @@ SongLoader::Result SongLoader::LoadRemote() {
   if (!source) {
     qLog(Warning) << "Couldn't create gstreamer source element for"
                   << url_.toString();
-    return Error;
+    return;
   }
 
   // Create the other elements and link them up
@@ -505,10 +488,15 @@ SongLoader::Result SongLoader::LoadRemote() {
   gst_pad_add_buffer_probe(pad, G_CALLBACK(DataReady), this);
   gst_object_unref(pad);
 
+  QEventLoop loop;
+  loop.connect(this, SIGNAL(LoadRemoteFinished()), SLOT(quit()));
+
   // Start "playing"
   gst_element_set_state(pipeline.get(), GST_STATE_PLAYING);
   pipeline_ = pipeline;
-  return WillLoadAsync;
+
+  // Wait until loading is finished
+  loop.exec();
 }
 
 void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
