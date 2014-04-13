@@ -413,6 +413,9 @@ bool RipCD::CheckCDIOIsValid() {
     cdio_destroy(cdio_);
   }
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
+  // Refresh the status of the cd media. This will prevent unnecessary
+  // rebuilds of the track list table.
+  cdio_get_media_changed(cdio_);
   return (cdio_);
 }
 
