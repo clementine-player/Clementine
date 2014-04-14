@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:43+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -91,7 +91,7 @@ msgstr "%1 на %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 списків відтворення (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "обрано %1 з"
@@ -116,7 +116,7 @@ msgstr "Знайдено %1 пісень"
 msgid "%1 songs found (showing %2)"
 msgstr "Знайдено %1 пісень (показано %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 доріжок"
@@ -257,7 +257,7 @@ msgstr "0 т."
 msgid "1 day"
 msgstr "1 день"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 доріжка"
 
@@ -1393,6 +1393,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Не вдалось створити елемент GStreamer \"%1\" - переконайтесь, що всі потрібні для GStreamer модулі встановлені"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr "Не вдалося створити список відтворення"
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2046,7 +2050,7 @@ msgstr "Помилка вилучення композицій"
 msgid "Error downloading Spotify plugin"
 msgstr "Помилка завантаження модуля Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Помилка завантаження %1"
@@ -2061,7 +2065,7 @@ msgstr "Помилка завантаження списку відтворен�
 msgid "Error processing %1: %2"
 msgstr "Помилка обробляння %1: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Помилка завантаження аудіо CD"
 
@@ -2924,11 +2928,11 @@ msgstr "Завантаження пісень"
 msgid "Loading stream"
 msgstr "Завантаження потоку"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Завантаження доріжок"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Завантажую дані доріжок"
 
@@ -3430,7 +3434,7 @@ msgstr "Непрозорість"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Відкрити %1 у переглядачі"
@@ -3628,7 +3632,7 @@ msgstr "Налаштування програвача"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Список відтворення"
 
@@ -4126,7 +4130,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Зберегти список відтворення"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Збереження списку відтворення"
@@ -4594,8 +4598,8 @@ msgid "Sorting"
 msgstr "Сортування"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
-msgstr "Sound Cloud"
+msgid "SoundCloud"
+msgstr ""
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4810,11 +4814,6 @@ msgstr "Обкладинка альбому, до якого увійшла ко
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Тека %1 не чинна"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Список відтворення '%1' порожній або не може бути завантажений."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5070,8 +5069,8 @@ msgstr "Не вдалось завантажити %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Невідомо"
@@ -5254,7 +5253,7 @@ msgid "Variable bit rate"
 msgstr "Змінна бітова швидкість"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Різні виконавці"
 

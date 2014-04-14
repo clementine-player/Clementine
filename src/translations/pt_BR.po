@@ -7,6 +7,7 @@
 # amiltonpc <amiltonpc@gmail.com>, 2013
 # bedi1982 <bedi.com@gmail.com>, 2012
 # carlo_valente <carlo.gt.valente@gmail.com>, 2014
+# carlo_valente <carlo.gt.valente@gmail.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Gustavo Brito <gustavobs.katel@gmail.com>, 2014
 # Israel IsraeLins <israelins85@yahoo.com.br>, 2012
@@ -18,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 10:17+0000\n"
-"Last-Translator: carlo_valente <carlo.gt.valente@gmail.com>\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -100,7 +101,7 @@ msgstr "%1 de %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reprodução (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 selecionado(s) de"
@@ -125,7 +126,7 @@ msgstr "%1 músicas encontradas"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 músicas encontradas (Exibindo %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 faixas"
@@ -266,7 +267,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 faixa"
 
@@ -333,7 +334,7 @@ msgstr "É necessária uma conta Premium Spotify."
 
 #: ../bin/src/ui_networkremotesettingspage.h:190
 msgid "A client can connect only, if the correct code was entered."
-msgstr "Somente um cliente pode se conectar, se o código correto for inserido."
+msgstr "Um cliente só pode se conectar se o código correto for digitado."
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -715,7 +716,7 @@ msgstr "Todas as faixas"
 
 #: ../bin/src/ui_networkremotesettingspage.h:195
 msgid "Allow a client to download music from this computer."
-msgstr "Permitir cliente baixar musicas deste computador."
+msgstr "Permitir que um cliente baixe músicas desse computador."
 
 #: ../bin/src/ui_networkremotesettingspage.h:197
 msgid "Allow downloads"
@@ -1402,6 +1403,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Incapaz de criar o elemento GStreamer \"%1\" - confira se você possui todos os plugins requeridos pelo GStreamer instalados"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr "Não foi possível criar a lista de reprodução"
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2055,7 +2060,7 @@ msgstr "Erro ao apagar músicas"
 msgid "Error downloading Spotify plugin"
 msgstr "Erro ao baixar o plugin Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Erro carregando %1"
@@ -2070,7 +2075,7 @@ msgstr "Erro carregando a lista de reprodução: di.fm"
 msgid "Error processing %1: %2"
 msgstr "Erro processando %1:%2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Erro ao carregar o CD de áudio"
 
@@ -2641,7 +2646,7 @@ msgstr "Incluir todas as músicas"
 
 #: internet/subsonicsettingspage.cpp:85
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
-msgstr "Versão do protocolo Subsonic REST incompatível.  Cliente deve atualizar."
+msgstr "Versão do protocolo Subsonic REST incompatível. O cliente deve ser atualizado."
 
 #: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
@@ -2933,11 +2938,11 @@ msgstr "Carregando músicas"
 msgid "Loading stream"
 msgstr "Carregando transmissão"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Carregando faixas"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Carregando informações da faixa"
 
@@ -3439,7 +3444,7 @@ msgstr "Opacidade"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Abrir %1 no browser"
@@ -3637,7 +3642,7 @@ msgstr "Opções do player"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Lista de Reprodução"
 
@@ -4135,7 +4140,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Salvar lista de reprodução"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Salvar lista de reprodução"
@@ -4603,8 +4608,8 @@ msgid "Sorting"
 msgstr "Organizando"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
-msgstr "Sound Cloud"
+msgid "SoundCloud"
+msgstr ""
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4819,11 +4824,6 @@ msgstr "A capa do álbum da música atual"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "O diretório %1 não é válido"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "A lista de reprodução '%1' está vazia ou não pode ser carregada."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5079,8 +5079,8 @@ msgstr "Não foi possível baixar %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Desconhecido"
@@ -5263,7 +5263,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de bits variável"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Vários artistas"
 

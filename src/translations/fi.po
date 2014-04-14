@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:39+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-04-14 07:13+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -93,7 +93,7 @@ msgstr ""
 msgid "%1 playlists (%2)"
 msgstr "%1-soittolistat (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "valittuna %1 /"
@@ -118,7 +118,7 @@ msgstr "%1 kappaletta löytyi"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 kappaletta löytyi (näytetään %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 kappaletta"
@@ -259,7 +259,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 päivä"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 kappale"
 
@@ -1395,6 +1395,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "GStreamer-elementin \"%1\" luonti epäonnistui - varmista, että kaikki vaaditut GStreamer-liitännäiset on asennettu"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr "Soittolistan luominen epäonnistui"
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2048,7 +2052,7 @@ msgstr "Virhe kappaleita poistaessa"
 msgid "Error downloading Spotify plugin"
 msgstr "Virhe ladatessa Spotify-liitännäistä"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Virhe ladattaessa %1"
@@ -2063,7 +2067,7 @@ msgstr "Virhe ladattaessa di.fm soittolistaa"
 msgid "Error processing %1: %2"
 msgstr "Virhe käsitellessä %1:%2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Virhe ladattaessa CD"
 
@@ -2926,11 +2930,11 @@ msgstr "Ladataan kappaleita"
 msgid "Loading stream"
 msgstr "Ladataan suoratoistoa"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Ladataan kappaleita"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Lataa kappaleen tietoja"
 
@@ -3432,7 +3436,7 @@ msgstr "Läpinäkyvyys"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Avaa %1 selaimessa"
@@ -3630,7 +3634,7 @@ msgstr "Soittimen asetukset"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Soittolista"
 
@@ -4128,7 +4132,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Tallenna soittolista"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Tallenna soittolista"
@@ -4596,8 +4600,8 @@ msgid "Sorting"
 msgstr "Järjestys"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
-msgstr "Sound Cloud"
+msgid "SoundCloud"
+msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4812,11 +4816,6 @@ msgstr "Parhaillaan soivan kappaleen levyn kansikuva"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Kansio %1 ei ole kelvollinen"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Soittolista \"%1\" oli tyhjä tai sitä ei pystytty ladata."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5072,8 +5071,8 @@ msgstr "Kohteen %1 lataus epäonnistui (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Tuntematon"
@@ -5256,7 +5255,7 @@ msgid "Variable bit rate"
 msgstr "Muuttuva bittinopeus"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Useita esittäjiä"
 

@@ -39,7 +39,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:39+0000\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,7 +121,7 @@ msgstr "%1 sur %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listes de lecture (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 sélectionnés de"
@@ -146,7 +146,7 @@ msgstr "%1 morceaux trouvés"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 morceaux trouvés (%2 affichés)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pistes"
@@ -287,7 +287,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 jour"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "Une piste"
 
@@ -327,7 +327,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Préfixe un mot par un nom de champ pour limiter la recherche à ce champ, ex. <span style=\" font-weight:600;\">artiste:</span><span style=\" font-style:italic;\">Bode</span> recherche tous les artistes contenant le mot Bode dans la bibliothèque.</p><p><span style=\" font-weight:600;\">Champs disponibles: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -1423,6 +1423,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Impossible de créer l'élément GStreamer « %1 » - vérifier que les modules externes GStreamer nécessaires sont installés."
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr "La liste de lecture n'a pas pu être créée"
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2076,7 +2080,7 @@ msgstr "Erreur lors de la suppression des morceaux"
 msgid "Error downloading Spotify plugin"
 msgstr "Erreur lors du téléchargement du module Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Erreur lors du chargement de %1"
@@ -2091,7 +2095,7 @@ msgstr "Erreur du chargement de la liste de lecture di.fm"
 msgid "Error processing %1: %2"
 msgstr "Erreur lors du traitement de %1 : %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Erreur durant le chargement du CD audio"
 
@@ -2954,11 +2958,11 @@ msgstr "Chargement des morceaux"
 msgid "Loading stream"
 msgstr "Chargement du flux"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Chargement des pistes"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Chargement des info des pistes"
 
@@ -3142,7 +3146,7 @@ msgstr "Débit minimum"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr ""
+msgstr "Remplissage minimum du tampon"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3460,7 +3464,7 @@ msgstr "Opacité"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Ouvrir %1 dans le navigateur"
@@ -3658,7 +3662,7 @@ msgstr "Options du lecteur"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Liste de lecture"
 
@@ -4156,7 +4160,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Sauvegarder la liste de lecture"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Sauvegarder la liste de lecture"
@@ -4624,8 +4628,8 @@ msgid "Sorting"
 msgstr "Tri"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
-msgstr "SoundCloud"
+msgid "SoundCloud"
+msgstr ""
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4840,11 +4844,6 @@ msgstr "La pochette d'album de la piste courante"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Le répertoire %1 est invalide"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "La liste de lecture « %1 » est vide ou ne peut être chargée"
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5100,8 +5099,8 @@ msgstr "Impossible de télécharger %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Inconnu"
@@ -5284,7 +5283,7 @@ msgid "Variable bit rate"
 msgstr "Débit variable"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Compilations d'artistes"
 
@@ -5558,7 +5557,7 @@ msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Vous devez lancer les Préférences Système et permettre à Clementine de « <span style=\"font-style:italic\">contrôler votre ordinateur</span> » pour utiliser les raccourcis globaux de Clementine."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid ""

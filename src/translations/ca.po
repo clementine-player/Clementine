@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:39+0000\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,7 +67,7 @@ msgstr " cançons"
 #: internet/vkservice.cpp:145
 #, qt-format
 msgid "%1 (%2 songs)"
-msgstr ""
+msgstr "%1 (%2 cançons)"
 
 #: widgets/osd.cpp:190
 #, qt-format
@@ -94,7 +94,7 @@ msgstr "%1 a %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 llistes de reproducció (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 seleccionades de"
@@ -119,7 +119,7 @@ msgstr "%1 cançons trobades"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 cançons trobades (mostrant %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 temes"
@@ -260,7 +260,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 pista"
 
@@ -275,7 +275,7 @@ msgstr "40 %"
 
 #: library/library.cpp:62
 msgid "50 random tracks"
-msgstr "50 pistes aleatòries"
+msgstr "50 pistes a l’atzar"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -407,7 +407,7 @@ msgstr "Habilita/inhabilita el Wiiremote"
 
 #: internet/soundcloudservice.cpp:129
 msgid "Activities stream"
-msgstr ""
+msgstr "Llista d’activitats"
 
 #: podcasts/addpodcastdialog.cpp:59
 msgid "Add Podcast"
@@ -539,7 +539,7 @@ msgstr "Afegeix l’etiqueta de títol a la cançó"
 
 #: internet/vkservice.cpp:314
 msgid "Add song to cache"
-msgstr ""
+msgstr "Afegeix la cançó a la memòria cau"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song track tag"
@@ -551,7 +551,7 @@ msgstr "Afegeix l’etiqueta d’any a la cançó"
 
 #: ../bin/src/ui_vksettingspage.h:216
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
-msgstr ""
+msgstr "Afegeix cançons a La meva música en fer clic a «M’encanta»"
 
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Add stream..."
@@ -567,7 +567,7 @@ msgstr "Afegeix a les llistes de reproducció de Grooveshark"
 
 #: internet/vkservice.cpp:306
 msgid "Add to My Music"
-msgstr ""
+msgstr "Afegeix a La meva música"
 
 #: ui/mainwindow.cpp:1618
 msgid "Add to another playlist"
@@ -996,7 +996,7 @@ msgstr "Botons"
 
 #: ../bin/src/ui_groovesharksettingspage.h:139
 msgid "By default, Grooveshark sorts songs on date added"
-msgstr ""
+msgstr "Per defecte, el Grooveshark ordena les cançons per data d’addició"
 
 #: core/song.cpp:401
 msgid "CDDA"
@@ -1069,7 +1069,7 @@ msgstr "Comprova si hi ha actualitzacions…"
 
 #: internet/vksettingspage.cpp:97
 msgid "Choose Vk.com cache directory"
-msgstr ""
+msgstr "Trieu la carpeta de memòria cau del Vk.com"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
@@ -1144,23 +1144,23 @@ msgstr "Visualització de Clementine"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "El Clementine pot convertir automàticament la música que copieu en aquest dispositiu a un formant que pugui reproduir."
+msgstr "El Clementine pot convertir automàticament la música que copieu en aquest dispositiu a un format que pugui reproduir."
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr "Clementine pot reproduir música que hagi carregat a Box"
+msgstr "El Clementine pot reproduir música que hàgiu penjat al Box"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr "Clementine pot reproduir música que hagi carregat a Dropbox"
+msgstr "El Clementine pot reproduir música que hàgiu penjat al Dropbox"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "Clementine pot reproduir música que hagi carregat a Google Drive"
+msgstr "El Clementine pot reproduir música que hàgiu penjat al Google Drive"
 
 #: ../bin/src/ui_skydrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to OneDrive"
-msgstr ""
+msgstr "El Clementine pot reproduir música que hàgiu penjat a l’OneDrive"
 
 #: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Clementine can show a message when the track changes."
@@ -1254,7 +1254,7 @@ msgstr "Comentari"
 
 #: internet/vkservice.cpp:151
 msgid "Community Radio"
-msgstr ""
+msgstr "Ràdio de la comunitat"
 
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Complete tags automatically"
@@ -1343,7 +1343,7 @@ msgstr "S’ha esgotat el temps d’espera de la connexió, comproveu l’URL de
 
 #: internet/vkservice.cpp:961
 msgid "Connection trouble or audio is disabled by owner"
-msgstr ""
+msgstr "Hi ha un problema en la connexió o el propietari ha inhabilitat l’àudio"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:678
 msgid "Console"
@@ -1363,7 +1363,7 @@ msgstr "Convertir qualsevol música que el dispositiu no pugui reproduir"
 
 #: internet/vkservice.cpp:318
 msgid "Copy share url to clipboard"
-msgstr ""
+msgstr "Copia l’URL per compartir en el porta-retalls"
 
 #: internet/groovesharkservice.cpp:1210
 msgid "Copy to clipboard"
@@ -1372,12 +1372,12 @@ msgstr "Copiar al porta-retalls"
 #: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
 #: ui/mainwindow.cpp:602 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
-msgstr "Còpia al dispositiu…"
+msgstr "Copia al dispositiu…"
 
 #: devices/deviceview.cpp:225 ui/mainwindow.cpp:592
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
-msgstr "Còpia a la col·lecció…"
+msgstr "Copia a la col·lecció…"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
@@ -1395,6 +1395,10 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr "No s’ha pogut crear l’element «%1» de GStreamer. Comproveu que teniu tots els connectors requerits de GStramer instal·lats"
+
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr "No s’ha pogut crear la llista de reproducció"
 
 #: transcoder/transcoder.cpp:429
 #, qt-format
@@ -1723,7 +1727,7 @@ msgstr "Directori"
 
 #: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Disable duration"
-msgstr "Deshabilita la durada"
+msgstr "Inhabilita la durada"
 
 #: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
@@ -1932,7 +1936,7 @@ msgstr "Activa l’admissió del remot del Wii"
 
 #: ../bin/src/ui_vksettingspage.h:219
 msgid "Enable automatic caching"
-msgstr ""
+msgstr "Habilita l’emmagatzematge automàtic en memòria cau"
 
 #: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
@@ -2049,7 +2053,7 @@ msgstr "S’ha produït un error en suprimir les cançons"
 msgid "Error downloading Spotify plugin"
 msgstr "S’ha produït un error en baixar el connector d’Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "S’ha produït un error en carregar %1"
@@ -2064,7 +2068,7 @@ msgstr "S’ha produït un error en carregar la llista de reproducció del di.fm
 msgid "Error processing %1: %2"
 msgstr "S’ha produït un error en processar %1: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "S’ha produït un error en carregar el CD d’àudio"
 
@@ -2266,7 +2270,7 @@ msgstr "Nom del fitxer (sense camí)"
 
 #: ../bin/src/ui_vksettingspage.h:221
 msgid "File name pattern:"
-msgstr ""
+msgstr "Patró del nom del fitxer:"
 
 #: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
@@ -2296,7 +2300,7 @@ msgstr "Troba cançons en la vostra col·lecció que coincideixen amb el criteri
 
 #: internet/vkservice.cpp:302
 msgid "Find this artist"
-msgstr ""
+msgstr "Troba a aquest artista"
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
@@ -2561,7 +2565,7 @@ msgstr "Hores"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:110
 msgid "However, you need to login to access your playlists and your stream."
-msgstr ""
+msgstr "Però, heu d’iniciar sessió per accedir a les vostres llestes i retransmissions."
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2927,11 +2931,11 @@ msgstr "S’estan carregant les cançons"
 msgid "Loading stream"
 msgstr "S’està carregant el flux"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "S’estan carregant les pistes"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "S’està carregant la informació de les pistes"
 
@@ -2967,7 +2971,7 @@ msgstr "Ha fallat l'inici de sessió"
 
 #: internet/vksettingspage.cpp:121
 msgid "Logout"
-msgstr ""
+msgstr "Finalitza la sessió"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
@@ -3115,7 +3119,7 @@ msgstr "Taxa de bits mínima"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr ""
+msgstr "Valor mínim de memòria"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3362,7 +3366,7 @@ msgstr "No s’ha muntat, feu doble clic per muntar-ho"
 
 #: internet/vksearchdialog.cpp:94
 msgid "Nothing found"
-msgstr ""
+msgstr "No s’ha trobat cap resultat"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Notification type"
@@ -3408,7 +3412,7 @@ msgstr "Actiu"
 
 #: ../bin/src/ui_skydrivesettingspage.h:103
 msgid "OneDrive"
-msgstr ""
+msgstr "OneDrive"
 
 #: ../bin/src/ui_networkremotesettingspage.h:183
 msgid ""
@@ -3433,7 +3437,7 @@ msgstr "Opacitat"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Obre %1 en un navegador"
@@ -3631,7 +3635,7 @@ msgstr "Opcions del reproductor"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Llista de reproducció"
 
@@ -4129,7 +4133,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Desa la llista de reproducció"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Desa la llista de reproducció"
@@ -4413,7 +4417,7 @@ msgstr "Mostra a mida completa..."
 
 #: ../bin/src/ui_vksettingspage.h:217
 msgid "Show groups in global search result"
-msgstr ""
+msgstr "Mostra grups en els resultats de la cerca global"
 
 #: library/libraryview.cpp:413 ui/mainwindow.cpp:607
 #: widgets/fileviewlist.cpp:51
@@ -4446,7 +4450,7 @@ msgstr "Mostra suggeriments de cerca"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" button"
-msgstr ""
+msgstr "Mostra el botó «M’encanta»"
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
@@ -4586,7 +4590,7 @@ msgstr "Ordena pel nom de l'emissora"
 
 #: ../bin/src/ui_groovesharksettingspage.h:146
 msgid "Sort playlists songs alphabetically"
-msgstr ""
+msgstr "Ordena alfabèticament les cançons en llistes"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
@@ -4597,7 +4601,7 @@ msgid "Sorting"
 msgstr "Ordenació"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
+msgid "SoundCloud"
 msgstr ""
 
 #: playlist/playlist.cpp:1360
@@ -4814,11 +4818,6 @@ msgstr "La caràtula de l’àlbum de la cançó en reproducció"
 msgid "The directory %1 is not valid"
 msgstr "El directori %1 no es vàlid"
 
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "La llista de reproducció «%1» està buida o no s’ha pogut carregar."
-
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
 msgstr "El segon valor ha de ser major que el primer!"
@@ -5019,7 +5018,7 @@ msgstr "Pista"
 
 #: internet/soundcloudservice.cpp:123
 msgid "Tracks"
-msgstr ""
+msgstr "Pistes"
 
 #: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:683
 msgid "Transcode Music"
@@ -5073,8 +5072,8 @@ msgstr "No es pot baixar %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Desconegut"
@@ -5257,7 +5256,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de bits variable"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Artistes diversos"
 
@@ -5510,7 +5509,7 @@ msgstr "No teniu una subscripció activa"
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud."
-msgstr ""
+msgstr "No cal iniciar sessió per cercar i escoltar música al SoundCloud."
 
 #: internet/spotifyservice.cpp:175
 msgid ""
@@ -5531,7 +5530,7 @@ msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Obriu Preferències del sistema i permeteu que el Clementine «<span style=\"font-style:italic\">controli l’equip</span>» per utilitzar les dreceres globals al Clementine."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid ""

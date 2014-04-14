@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:39+0000\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,7 +97,7 @@ msgstr "%1 στο %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 λίστες αναπαραγωγής (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 επιλεγμένα από"
@@ -122,7 +122,7 @@ msgstr "βρέθηκαν %1 τραγούδια"
 msgid "%1 songs found (showing %2)"
 msgstr "βρέθηκαν %1 τραγούδια (εμφάνιση %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 κομμάτια"
@@ -263,7 +263,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 ημέρα"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 κομμάτι"
 
@@ -1399,6 +1399,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Δεν μπόρεσε να δημιουργηθεί το στοιχείο \"%1\" του GStreamer - βεβαιωθείτε ότι έχετε όλα τα απαραίτητα πρόσθετα του GStreamer εγκατεστημένα"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr ""
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2052,7 +2056,7 @@ msgstr "Σφάλμα κατά την διαγραφή τραγουδιών"
 msgid "Error downloading Spotify plugin"
 msgstr "Σφάλμα στην λήψη του πρόσθετου του Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Σφάλμα φόρτωσης του %1"
@@ -2067,7 +2071,7 @@ msgstr "Σφάλμα φόρτωσης λίστας από το di.fm"
 msgid "Error processing %1: %2"
 msgstr "Σφάλμα επεξεργασίας %1: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Σφάλμα κατά την φόρτωση CD ήχου"
 
@@ -2930,11 +2934,11 @@ msgstr "Φόρτωση τραγουδιού"
 msgid "Loading stream"
 msgstr "Φόρτωμα ροής (stream)"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Φόρτωση κομματιών"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Φόρτωση πληροφοριών κομματιού"
 
@@ -3436,7 +3440,7 @@ msgstr "Αδιαφάνεια"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Άνοιγμα του %1 στον περιηγητή"
@@ -3634,7 +3638,7 @@ msgstr "Επιλογές αναπαραγωγής"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Λίστα"
 
@@ -4132,7 +4136,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Αποθήκευση λίστας αναπαραγωγής"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Αποθήκευση λίστας αναπαραγωγής"
@@ -4600,7 +4604,7 @@ msgid "Sorting"
 msgstr "Ταξινόμηση"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
+msgid "SoundCloud"
 msgstr ""
 
 #: playlist/playlist.cpp:1360
@@ -4816,11 +4820,6 @@ msgstr "Το εξώφυλλο του άλμπουμ του τραγουδιού 
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Ο κατάλογος %1 δεν είναι έγκυρος"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Η λίστα αναπαραγωγής '%1' ήταν άδεια ή δεν μπόρεσε να φορτωθεί."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5076,8 +5075,8 @@ msgstr "Αδυναμία \"κατεβάσματος\" του %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Άγνωστο"
@@ -5260,7 +5259,7 @@ msgid "Variable bit rate"
 msgstr "Μεταβαλλόμενος ρυθμός bit"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Διάφοροι καλλιτέχνες"
 

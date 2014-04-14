@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:39+0000\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,7 +110,7 @@ msgstr "%1 en %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reproducción (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 seleccionadas de"
@@ -135,7 +135,7 @@ msgstr "Se encontraron %1 canciones"
 msgid "%1 songs found (showing %2)"
 msgstr "Se encontraron %1 canciones (%2 visibles)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pistas"
@@ -276,7 +276,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 día"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 pista"
 
@@ -316,7 +316,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Añada un nombre de campo como prefijo para filtrar la búsqueda. P.ej., <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> busca todos los artistas de la colección que contienen la palabra «Bode».</p><p><span style=\" font-weight:600;\">Campos disponibles: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -423,7 +423,7 @@ msgstr "Activar/desactivar Wiiremote"
 
 #: internet/soundcloudservice.cpp:129
 msgid "Activities stream"
-msgstr ""
+msgstr "Lista de actividades"
 
 #: podcasts/addpodcastdialog.cpp:59
 msgid "Add Podcast"
@@ -1043,7 +1043,7 @@ msgstr "Cancelar"
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
-msgstr ""
+msgstr "Se necesita el «captcha».\nPruebe a iniciar sesión en Vk.com en el navegador para corregir el problema."
 
 #: ../bin/src/ui_edittagdialog.h:664
 msgid "Change cover art"
@@ -1411,6 +1411,10 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr "No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener instalados todos los complementos necesarios de GStreamer."
+
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr "No se pudo crear la lista de reproducción"
 
 #: transcoder/transcoder.cpp:429
 #, qt-format
@@ -2065,7 +2069,7 @@ msgstr "Error al eliminar canciones"
 msgid "Error downloading Spotify plugin"
 msgstr "Error al descargar el complemento de Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Error al cargar %1"
@@ -2080,7 +2084,7 @@ msgstr "Error al cargar la lista de reproducción de di.fm"
 msgid "Error processing %1: %2"
 msgstr "Error al procesar %1: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Error al cargar el CD de audio"
 
@@ -2943,11 +2947,11 @@ msgstr "Cargando las canciones"
 msgid "Loading stream"
 msgstr "Cargando el flujo"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Cargando las pistas"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Cargando información de pistas"
 
@@ -3105,7 +3109,7 @@ msgstr "Coincide uno o más términos de búsqueda (O)"
 
 #: ../bin/src/ui_vksettingspage.h:215
 msgid "Max global search results"
-msgstr ""
+msgstr "Resultados de búsqueda globales máximos"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
@@ -3131,7 +3135,7 @@ msgstr "Tasa de bits mínima"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr ""
+msgstr "Valor mínimo de memoria"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3449,7 +3453,7 @@ msgstr "Opacidad"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Abrir %1 en el navegador"
@@ -3647,7 +3651,7 @@ msgstr "Opciones del reproductor"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Lista de reproducción"
 
@@ -4145,7 +4149,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
@@ -4602,7 +4606,7 @@ msgstr "Ordenar por nombre de estación"
 
 #: ../bin/src/ui_groovesharksettingspage.h:146
 msgid "Sort playlists songs alphabetically"
-msgstr ""
+msgstr "Ordenar canciones de listas alfabéticamente"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
@@ -4613,8 +4617,8 @@ msgid "Sorting"
 msgstr "Ordenación"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
-msgstr "Sound Cloud"
+msgid "SoundCloud"
+msgstr ""
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4829,11 +4833,6 @@ msgstr "La carátula del álbum de la canción en reproducción"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "La carpeta %1 no es válida"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "La lista de reproducción «%1» está vacía o no se pudo cargar."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5089,8 +5088,8 @@ msgstr "No se puede descargar %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Desconocido"
@@ -5273,7 +5272,7 @@ msgid "Variable bit rate"
 msgstr "Tasa de bits variable"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Varios artistas"
 
@@ -5547,7 +5546,7 @@ msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Abra Preferencias del sistema y permita que Clementine «<span style=\"font-style:italic\">controle el equipo</span>» para utilizar los atajos globales en Clementine."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid ""

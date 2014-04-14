@@ -24,8 +24,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 12:38+0000\n"
-"Last-Translator: volkangezer <volkangezer@gmail.com>\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -106,7 +106,7 @@ msgstr "%2 üzerinde %1"
 msgid "%1 playlists (%2)"
 msgstr "%1 çalma listesi (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 seçili"
@@ -131,7 +131,7 @@ msgstr "%1 şarkı bulundu"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 şarkı bulundu (%2 tanesi gösteriliyor)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 parça"
@@ -272,7 +272,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 gün"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 parça"
 
@@ -1408,6 +1408,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "GStreamer elementi  \"%1\" oluşturulamadı - tüm Gstreamer eklentilerinin kurulu olduğundan emin olun"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr "Çalma listesi oluşturulamadı"
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2061,7 +2065,7 @@ msgstr "Şarkılar silinirken hata"
 msgid "Error downloading Spotify plugin"
 msgstr "Spotify eklentisini indirirken hata"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "%1 yüklenirken hata"
@@ -2076,7 +2080,7 @@ msgstr "di.fm çalma listesi yüklenirken hata oluştu"
 msgid "Error processing %1: %2"
 msgstr "%1 işlenirken hata: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Ses CD'si yüklenirken hata"
 
@@ -2939,11 +2943,11 @@ msgstr "Şarkılar yükleniyor"
 msgid "Loading stream"
 msgstr "Yayın akışı yükleniyor"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Parçalar yükleniyor"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Parça bilgileri yükleniyor"
 
@@ -3445,7 +3449,7 @@ msgstr "Opaklık"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Tarayıcıda aç: %1"
@@ -3643,7 +3647,7 @@ msgstr "Oynatıcı seçenekleri"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Çalma Listesi"
 
@@ -4141,7 +4145,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Çalma listesini kaydet"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Çalma listesini kaydet"
@@ -4609,8 +4613,8 @@ msgid "Sorting"
 msgstr "Dizim"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
-msgstr "Sound Cloud"
+msgid "SoundCloud"
+msgstr ""
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4825,11 +4829,6 @@ msgstr "Şu anda çalan şarkının albüm kapağı"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "%1 dizini geçersiz"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Çalma listesi '%1' boş veya yüklenemiyor."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5085,8 +5084,8 @@ msgstr "%1 indirilemedi (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Bilinmeyen"
@@ -5269,7 +5268,7 @@ msgid "Variable bit rate"
 msgstr "Değişken bit oranı"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Çeşitli sanatçılar"
 

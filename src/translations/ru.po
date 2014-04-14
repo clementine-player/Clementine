@@ -31,7 +31,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 11:11+0000\n"
+"PO-Revision-Date: 2014-04-14 07:13+0000\n"
 "Last-Translator: adem4ik\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,7 +113,7 @@ msgstr "%1 на %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 плейлистов (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 выбрано из"
@@ -138,7 +138,7 @@ msgstr "%1 композиций найдено"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 композиций найдено (показано %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 композиций"
@@ -279,7 +279,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 день"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 композиция"
 
@@ -570,7 +570,7 @@ msgstr "Добавить тег \"Год\""
 
 #: ../bin/src/ui_vksettingspage.h:216
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
-msgstr "Добавить композиции в \"Мою музыку\", если нажата кнопка \"Любимое\""
+msgstr "Добавить композиции в \"Мою музыку\", если нажата кнопка \"В любимые\""
 
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Add stream..."
@@ -1415,6 +1415,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Невозможно создать элемент GStreamer \"%1\" - убедитесь, что у вас установлены все необходимые дополнения GStreamer"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr "Невозможно создать плейлист"
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2068,7 +2072,7 @@ msgstr "Ошибка удаления композиций"
 msgid "Error downloading Spotify plugin"
 msgstr "Ошибка загрузки модуля Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Ошибка загрузки %1"
@@ -2083,7 +2087,7 @@ msgstr "Ошибка при загрузке плейлиста di.fm"
 msgid "Error processing %1: %2"
 msgstr "Ошибка при обработке %1: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Ошибка при загрузке Аудио CD"
 
@@ -2771,7 +2775,7 @@ msgstr "База данных Jamendo"
 
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Jump to the currently playing track"
-msgstr "Перейти к проигрываемой композиции"
+msgstr "Перейти к текущей композии"
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:69
 #, qt-format
@@ -2946,11 +2950,11 @@ msgstr "Загрузка песен"
 msgid "Loading stream"
 msgstr "Загрузка потока"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Загрузка композиций"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Загрузка информации о композициях"
 
@@ -2994,7 +2998,7 @@ msgstr "Профиль Long term prediction (LTP)"
 
 #: ../bin/src/ui_mainwindow.h:648
 msgid "Love"
-msgstr "Любимое"
+msgstr "В любимые"
 
 #: analyzers/analyzercontainer.cpp:61
 #: visualisations/visualisationcontainer.cpp:107
@@ -3294,7 +3298,7 @@ msgstr "Дальше"
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
-msgstr "Следующая композиция"
+msgstr "Следующий трек"
 
 #: core/utilities.cpp:142
 msgid "Next week"
@@ -3452,7 +3456,7 @@ msgstr "Прозрачность"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Открыть «%1» в браузере"
@@ -3650,7 +3654,7 @@ msgstr "Настройки проигрывателя"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Плейлист"
 
@@ -3777,7 +3781,7 @@ msgstr "Предыдущий"
 #: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:636
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
-msgstr "Предыдущая композиция"
+msgstr "Предыдущий трек"
 
 #: core/commandlineoptions.cpp:170
 msgid "Print out version information"
@@ -4148,7 +4152,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Сохранить плейлист"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Сохранить плейлист"
@@ -4465,7 +4469,7 @@ msgstr "Показать поисковые подсказки"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" button"
-msgstr "Показывать кнопку \"Любимое\""
+msgstr "Показывать кнопку \"В любимые\""
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
@@ -4581,7 +4585,7 @@ msgstr "Сведения о композиции"
 
 #: ui/mainwindow.cpp:243
 msgid "Song info"
-msgstr "О песне"
+msgstr "Песня"
 
 #: analyzers/sonogram.cpp:19
 msgid "Sonogram"
@@ -4616,7 +4620,7 @@ msgid "Sorting"
 msgstr "Сортировка"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
+msgid "SoundCloud"
 msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1360
@@ -4698,7 +4702,7 @@ msgstr "Остановить после"
 
 #: ui/mainwindow.cpp:573 ../bin/src/ui_mainwindow.h:646
 msgid "Stop after this track"
-msgstr "Остановить после этой композиции"
+msgstr "Остановить после этого трэка"
 
 #: core/commandlineoptions.cpp:146
 msgid "Stop playback"
@@ -4832,11 +4836,6 @@ msgstr "Обложка альбома текущей композиции"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Каталог %1 неправильный"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Плейлист '%1' пуст или не может быть загружен."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5092,8 +5091,8 @@ msgstr "Невозможно загрузить %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Неизвестный"
@@ -5276,7 +5275,7 @@ msgid "Variable bit rate"
 msgstr "Переменный битрейт"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Разные исполнители"
 
@@ -5684,7 +5683,7 @@ msgstr "больше чем"
 
 #: ../bin/src/ui_deviceviewcontainer.h:99
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
-msgstr "Извините, но устройства iPod и USB в данный момент не работают в Windows!"
+msgstr "Устройства iPod и USB пока не поддерживаются в Windows. Извините!"
 
 #: smartplaylists/searchterm.cpp:212
 msgid "in the last"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:39+0000\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +93,7 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 popisi izvođenja (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 odabranih od"
@@ -118,7 +118,7 @@ msgstr "%1 pronađenih pjesma"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 pronađenih pjesama (prikazuje %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pjesama"
@@ -259,7 +259,7 @@ msgstr "0 piksela"
 msgid "1 day"
 msgstr "1 dan"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 pjesma"
 
@@ -406,7 +406,7 @@ msgstr "Aktiviraj/deaktiviraj Wii Daljinski upravljač"
 
 #: internet/soundcloudservice.cpp:129
 msgid "Activities stream"
-msgstr ""
+msgstr "Aktivnosti streama"
 
 #: podcasts/addpodcastdialog.cpp:59
 msgid "Add Podcast"
@@ -1395,6 +1395,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Nije moguče stvoriti GStreamer element \"%1\" - provjerite imate li sve GStreamer pluginove instalirane"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr ""
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2048,7 +2052,7 @@ msgstr "Greška u brisanju pjesama"
 msgid "Error downloading Spotify plugin"
 msgstr "greška pri preuzimanju Spotify dodatka"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Greška pri učitavanju %1"
@@ -2063,7 +2067,7 @@ msgstr "Greška pri učitavanju di.fm popisa izvođenja"
 msgid "Error processing %1: %2"
 msgstr "Greška pri obradi %1: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Greška pri učitavanju glazbenog CD-a"
 
@@ -2926,11 +2930,11 @@ msgstr "Učitavanje pjesama"
 msgid "Loading stream"
 msgstr "Učitaj stream"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Učitavanje  pjesama"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Učitavanje informacija o pjesmi"
 
@@ -3432,7 +3436,7 @@ msgstr "Zasjenjenost"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Otvori %1 u pregledniku"
@@ -3630,7 +3634,7 @@ msgstr "Mogućnosti preglednika"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Popis izvođenja"
 
@@ -4128,7 +4132,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Spremite popis izvođenja"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Spremite popis izvođenja"
@@ -4596,8 +4600,8 @@ msgid "Sorting"
 msgstr "Razvrstavanje"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
-msgstr "Sound Cloud"
+msgid "SoundCloud"
+msgstr ""
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4812,11 +4816,6 @@ msgstr "Omot albuma trenutno reproducirane pjesme"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Direktorij %1 nije valjan"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Popis izvođenja '%1' je prazan ili se ne može očitati."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5072,8 +5071,8 @@ msgstr "Nije moguće preuzeti %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Nepoznato"
@@ -5256,7 +5255,7 @@ msgid "Variable bit rate"
 msgstr "Promjenjiva brzina prijenosa"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Razni izvođači"
 

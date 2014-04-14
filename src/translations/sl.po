@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:39+0000\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +95,7 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 seznamov predvajanja (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "izbran %1 od"
@@ -120,7 +120,7 @@ msgstr "najdenih %1 skladb"
 msgid "%1 songs found (showing %2)"
 msgstr "najdenih %1 skladb (prikazanih %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladb"
@@ -261,7 +261,7 @@ msgstr "0 px"
 msgid "1 day"
 msgstr "1 dan"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 skladba"
 
@@ -1397,6 +1397,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Ni bilo mogoče ustvariti GStreamer-jevega elementa \"%1\" - prepričajte se, da imate nameščene vse zahtevane vstavke GStreamer"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr ""
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2050,7 +2054,7 @@ msgstr "Napaka med brisanjem skladb"
 msgid "Error downloading Spotify plugin"
 msgstr "Napaka med prejemanjem vstavka Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Napaka med nalaganjem %1"
@@ -2065,7 +2069,7 @@ msgstr "Napaka med nalaganjem seznama predvajanja di.fm"
 msgid "Error processing %1: %2"
 msgstr "Napaka med obdelavo %1: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Napaka med nalaganjem zvočnega CD-ja"
 
@@ -2928,11 +2932,11 @@ msgstr "Nalaganje skladb"
 msgid "Loading stream"
 msgstr "Nalaganje pretoka"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Nalaganje skladb"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Nalaganje podrobnosti o skladbah"
 
@@ -3434,7 +3438,7 @@ msgstr "Motnost"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Odpri %1 v brskalniku"
@@ -3632,7 +3636,7 @@ msgstr "Možnosti predvajalnika"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Seznam predvajanja"
 
@@ -4130,7 +4134,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Shrani seznam predvajanja"
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Shrani seznam predvajanja"
@@ -4598,8 +4602,8 @@ msgid "Sorting"
 msgstr "Razvrščanje"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
-msgstr "Sound Cloud"
+msgid "SoundCloud"
+msgstr ""
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4814,11 +4818,6 @@ msgstr "Ovitek albuma skladbe, ki se trenutno predvaja"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Mapa %1 ni veljavna"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Seznam predvajanja '%1' je prazen ali pa ga ni bilo mogoče naložiti."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5074,8 +5073,8 @@ msgstr "Ni bilo mogoče prejeti %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Neznano"
@@ -5258,7 +5257,7 @@ msgid "Variable bit rate"
 msgstr "Spremenljiva bitna hitrost"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Različni izvajalci"
 

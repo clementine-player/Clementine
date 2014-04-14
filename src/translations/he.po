@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:39+0000\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +93,7 @@ msgstr "%1 על %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 רשימות השמעה (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "נבחרו %1 מתוך"
@@ -118,7 +118,7 @@ msgstr "נמצאו %1 שירים"
 msgid "%1 songs found (showing %2)"
 msgstr "נמצאו %1 שירים (מוצגים %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 רצועות"
@@ -259,7 +259,7 @@ msgstr ""
 msgid "1 day"
 msgstr "יום אחד"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "רצועה אחת"
 
@@ -1395,6 +1395,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "לא ניתן ליצור את רכיב ה־GStreamer „%1“ - יש לוודא שכל תוספי ה־GStreamer מותקנים כראוי"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr ""
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -2048,7 +2052,7 @@ msgstr "שגיאה במחיקת שירים"
 msgid "Error downloading Spotify plugin"
 msgstr "שגיאה בהורדת תוסף Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "שגיאה בטעינת %1"
@@ -2063,7 +2067,7 @@ msgstr "שגיאה בטעינת רשימת ההשמעה של di.fm"
 msgid "Error processing %1: %2"
 msgstr "שגיאה בעיבוד %1: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "שגיאה בטעינת דיסק מוזיקה"
 
@@ -2926,11 +2930,11 @@ msgstr "השירים נטענים"
 msgid "Loading stream"
 msgstr "מדיה זורמת בטעינה"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "הרצועות נטענות"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "נטען מידע אודות השירים"
 
@@ -3432,7 +3436,7 @@ msgstr "שקיפות"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "פתיחת %1 בדפדפן"
@@ -3630,7 +3634,7 @@ msgstr "אפשרויות נגן"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "רשימת השמעה"
 
@@ -4128,7 +4132,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr ""
@@ -4596,7 +4600,7 @@ msgid "Sorting"
 msgstr "מיון"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
+msgid "SoundCloud"
 msgstr ""
 
 #: playlist/playlist.cpp:1360
@@ -4812,11 +4816,6 @@ msgstr "עטיפת האלבום של השיר המתנגן כעת"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "התיקייה %1 לא חוקית"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "רשימת ההשמעה %1 ריקה או שלא ניתן היה לטעון אותה."
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5072,8 +5071,8 @@ msgstr "לא ניתן להוריד %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "לא ידוע"
@@ -5256,7 +5255,7 @@ msgid "Variable bit rate"
 msgstr "קצב סיביות משתנה"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "אמנים שונים"
 

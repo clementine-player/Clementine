@@ -6,6 +6,7 @@
 # Andre Mata Ludji <>, 2012
 # Nurissalam Nurissalam <elwarosesceince@gmail.com>, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# hasssan <me@hasssan.com>, 2014
 # chocolateshirt <tydushikari@gmail.com>, 2013
 # nix.Lilium <nix.lilium@gmail.com>, 2012
 # operamaniac <rizkiaulia.r@gmail.com>, 2013
@@ -15,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-06 09:39+0000\n"
+"PO-Revision-Date: 2014-04-14 07:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,7 +98,7 @@ msgstr "%1 pada %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 daftar main (%2)"
 
-#: playlist/playlistmanager.cpp:399
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 terpilih dari"
@@ -122,7 +123,7 @@ msgstr "%1 songs found"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 lagu ditemukan (menunjukkan %2)"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 lagu"
@@ -263,7 +264,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 Hari"
 
-#: playlist/playlistmanager.cpp:405
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1 lagu"
 
@@ -1399,6 +1400,10 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Tidak dapat membuat elemen GStreamer \"%1\" - pastikan Anda memiliki semua pengaya GStreamer yang telah terinstal"
 
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr ""
+
 #: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
@@ -1885,7 +1890,7 @@ msgstr ""
 
 #: ../bin/src/ui_ripcd.h:309
 msgid "Duration"
-msgstr ""
+msgstr "Durasi"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
@@ -2052,7 +2057,7 @@ msgstr "Kesalahan saat menghapus lagu"
 msgid "Error downloading Spotify plugin"
 msgstr "Kesalahan pengunduhan pengaya Spotify"
 
-#: playlist/songloaderinserter.cpp:72 playlist/songloaderinserter.cpp:131
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "Kesalahan pemuatan %1"
@@ -2067,7 +2072,7 @@ msgstr "Kesalahan pemuatan daftar lagu di.fm"
 msgid "Error processing %1: %2"
 msgstr "Proses kesalahan %1: %2"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "Kesalahan ketika pemuatan CD audio"
 
@@ -2249,7 +2254,7 @@ msgstr "Kesalahan pengambilan sampul "
 
 #: ../bin/src/ui_ripcd.h:320
 msgid "File Format"
-msgstr ""
+msgstr "Format Berkas"
 
 #: ui/organisedialog.cpp:75
 msgid "File extension"
@@ -2671,7 +2676,7 @@ msgstr "Informasi"
 
 #: ../bin/src/ui_ripcd.h:301
 msgid "Input options"
-msgstr ""
+msgstr "Opsi masukan"
 
 #: ../bin/src/ui_organisedialog.h:203
 msgid "Insert..."
@@ -2930,11 +2935,11 @@ msgstr "Pemuatan lagu-lagu"
 msgid "Loading stream"
 msgstr "Pemuatan aliran"
 
-#: playlist/songloaderinserter.cpp:80 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Pemuatan trek"
 
-#: playlist/songloaderinserter.cpp:137
+#: playlist/songloaderinserter.cpp:138
 msgid "Loading tracks info"
 msgstr "Pemuatan info trek"
 
@@ -3214,7 +3219,7 @@ msgstr "Nama"
 #: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgctxt "Category label"
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: ../bin/src/ui_organisedialog.h:197
 msgid "Naming options"
@@ -3365,7 +3370,7 @@ msgstr "Tidak terpasang - klik dua kali untuk memasang"
 
 #: internet/vksearchdialog.cpp:94
 msgid "Nothing found"
-msgstr ""
+msgstr "Tidak menemukan apapun"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Notification type"
@@ -3436,7 +3441,7 @@ msgstr "Opasitas"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:328
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Buka %1 di browser"
@@ -3478,7 +3483,7 @@ msgstr ""
 
 #: songinfo/echonestbiographies.cpp:97
 msgid "Open in your browser"
-msgstr ""
+msgstr "Buka di penjelajah Anda"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:178
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
@@ -3634,7 +3639,7 @@ msgstr "Pilihan pemutar"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:484 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Daftar lagu"
 
@@ -3833,7 +3838,7 @@ msgstr "Hujan"
 #: ../bin/src/ui_mainwindow.h:674
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
-msgstr ""
+msgstr "Hujan"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
@@ -4132,7 +4137,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:241
+#: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr ""
@@ -4190,7 +4195,7 @@ msgstr "Cari"
 #: ui/mainwindow.cpp:230 ../bin/src/ui_globalsearchsettingspage.h:145
 msgctxt "Global search settings dialog title."
 msgid "Search"
-msgstr ""
+msgstr "Cari"
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
@@ -4210,7 +4215,7 @@ msgstr "Pencarian Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:72
 msgid "Search automatically"
-msgstr ""
+msgstr "Otomatis mencari"
 
 #: ui/albumcoverchoicecontroller.cpp:65
 msgid "Search for album covers..."
@@ -4304,7 +4309,7 @@ msgstr "Pilih visualisasi..."
 
 #: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
-msgstr ""
+msgstr "Pilih..."
 
 #: devices/devicekitlister.cpp:126
 msgid "Serial number"
@@ -4425,7 +4430,7 @@ msgstr "Tampilkan di browser berkas"
 
 #: ui/mainwindow.cpp:610
 msgid "Show in library..."
-msgstr ""
+msgstr "Tampilkan dalam pustaka..."
 
 #: library/libraryview.cpp:417
 msgid "Show in various artists"
@@ -4600,7 +4605,7 @@ msgid "Sorting"
 msgstr "Mengurutkan"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
-msgid "Sound Cloud"
+msgid "SoundCloud"
 msgstr ""
 
 #: playlist/playlist.cpp:1360
@@ -4816,11 +4821,6 @@ msgstr "Sampul album dari lagu yang sedang dimainkan"
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Direktori %1 tidak sah"
-
-#: playlist/playlistmanager.cpp:169 playlist/playlistmanager.cpp:187
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Daftar lagu '%1' kosong atau tidak dapat dimuat"
 
 #: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
@@ -5076,8 +5076,8 @@ msgstr "Tidak dapat mengunduh %1 (%2)"
 
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:491
-#: playlist/playlistmanager.cpp:492 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Tidak diketahui"
@@ -5112,7 +5112,7 @@ msgstr "Konser mendatang"
 
 #: internet/vkservice.cpp:326 internet/vkservice.cpp:330
 msgid "Update"
-msgstr ""
+msgstr "Perbarui"
 
 #: internet/groovesharkservice.cpp:1238
 msgid "Update Grooveshark playlist"
@@ -5260,7 +5260,7 @@ msgid "Variable bit rate"
 msgstr "Variabel laju bit"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:503 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Berbagai artis"
 
