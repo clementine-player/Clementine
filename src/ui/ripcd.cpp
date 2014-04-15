@@ -269,7 +269,7 @@ void RipCD::ThreadClickedRipButton() {
                                   .value<TranscoderPreset>();
 
     QString outfilename = GetOutputFileName(filename, preset);
-    transcoder_->AddJob(filename.toUtf8().constData(), preset, outfilename);
+    transcoder_->AddJob(filename, preset, outfilename);
   }
   emit(RippingComplete());
 }
