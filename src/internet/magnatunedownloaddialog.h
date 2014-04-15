@@ -18,11 +18,11 @@
 #ifndef MAGNATUNEDOWNLOADDIALOG_H
 #define MAGNATUNEDOWNLOADDIALOG_H
 
+#include <memory>
+
 #include <QDialog>
 #include <QNetworkReply>
 #include <QStringList>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "core/song.h"
 
@@ -34,8 +34,8 @@ class QXmlStreamReader;
 
 class MagnatuneDownloadDialog : public QDialog {
   Q_OBJECT
-public:
-  MagnatuneDownloadDialog(MagnatuneService* service, QWidget *parent = 0);
+ public:
+  MagnatuneDownloadDialog(MagnatuneService* service, QWidget* parent = nullptr);
   ~MagnatuneDownloadDialog();
 
   void Show(const SongList& songs);
@@ -43,13 +43,13 @@ public:
 signals:
   void Finished(const QStringList& albums);
 
-public slots:
+ public slots:
   void accept();
 
-protected:
+ protected:
   void closeEvent(QCloseEvent* e);
 
-private slots:
+ private slots:
   void Browse();
 
   void DownloadNext();
@@ -62,18 +62,18 @@ private slots:
   void ShowError(const QString& message);
   void AllFinished(bool error);
 
-private:
+ private:
   QString GetOutputFilename();
 
-private:
+ private:
   Ui_MagnatuneDownloadDialog* ui_;
   MagnatuneService* service_;
 
   QNetworkAccessManager* network_;
   QNetworkReply* current_reply_;
-  boost::scoped_ptr<QFile> download_file_;
+  std::unique_ptr<QFile> download_file_;
 
   int next_row_;
 };
 
-#endif // MAGNATUNEDOWNLOADDIALOG_H
+#endif  // MAGNATUNEDOWNLOADDIALOG_H

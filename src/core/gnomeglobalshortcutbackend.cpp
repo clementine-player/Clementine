@@ -21,7 +21,7 @@
 #include "core/logging.h"
 
 #ifdef QT_DBUS_LIB
-#  include "dbus/gnomesettingsdaemon.h"
+#include "dbus/gnomesettingsdaemon.h"
 #endif
 
 #include <QAction>
@@ -30,26 +30,27 @@
 #include <QtDebug>
 
 #ifdef QT_DBUS_LIB
-#  include <QtDBus>
+#include <QtDBus>
 #endif
 
-const char* GnomeGlobalShortcutBackend::kGsdService = "org.gnome.SettingsDaemon";
-const char* GnomeGlobalShortcutBackend::kGsdPath = "/org/gnome/SettingsDaemon/MediaKeys";
-const char* GnomeGlobalShortcutBackend::kGsdInterface = "org.gnome.SettingsDaemon.MediaKeys";
+const char* GnomeGlobalShortcutBackend::kGsdService =
+    "org.gnome.SettingsDaemon";
+const char* GnomeGlobalShortcutBackend::kGsdPath =
+    "/org/gnome/SettingsDaemon/MediaKeys";
+const char* GnomeGlobalShortcutBackend::kGsdInterface =
+    "org.gnome.SettingsDaemon.MediaKeys";
 
 GnomeGlobalShortcutBackend::GnomeGlobalShortcutBackend(GlobalShortcuts* parent)
-  : GlobalShortcutBackend(parent),
-    interface_(NULL),
-    is_connected_(false)
-{
-}
-
+    : GlobalShortcutBackend(parent),
+      interface_(nullptr),
+      is_connected_(false) {}
 
 bool GnomeGlobalShortcutBackend::DoRegister() {
 #ifdef QT_DBUS_LIB
   qLog(Debug) << "registering";
   // Check if the GSD service is available
-  if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService)) {
+  if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(
+           kGsdService)) {
     qLog(Warning) << "gnome settings daemon not registered";
     return false;
   }
@@ -64,56 +65,57 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
                                       QDateTime::currentDateTime().toTime_t());
 
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
-  NewClosure(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-             this, SLOT(RegisterFinished(QDBusPendingCallWatcher*)),
-             watcher);
+  NewClosure(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), this,
+             SLOT(RegisterFinished(QDBusPendingCallWatcher*)), watcher);
 
   return true;
-#else // QT_DBUS_LIB
+#else  // QT_DBUS_LIB
   qLog(Warning) << "dbus not available";
   return false;
 #endif
 }
 
-void GnomeGlobalShortcutBackend::RegisterFinished(QDBusPendingCallWatcher* watcher) {
+void GnomeGlobalShortcutBackend::RegisterFinished(
+    QDBusPendingCallWatcher* watcher) {
 #ifdef QT_DBUS_LIB
   QDBusMessage reply = watcher->reply();
   watcher->deleteLater();
 
   if (reply.type() == QDBusMessage::ErrorMessage) {
-    qLog(Warning) << "Failed to grab media keys"
-                  << reply.errorName() <<reply.errorMessage();
+    qLog(Warning) << "Failed to grab media keys" << reply.errorName()
+                  << reply.errorMessage();
     return;
   }
 
-  connect(interface_, SIGNAL(MediaPlayerKeyPressed(QString,QString)),
-          this, SLOT(GnomeMediaKeyPressed(QString,QString)));
+  connect(interface_, SIGNAL(MediaPlayerKeyPressed(QString, QString)), this,
+          SLOT(GnomeMediaKeyPressed(QString, QString)));
   is_connected_ = true;
 
   qLog(Debug) << "registered";
-#endif // QT_DBUS_LIB
+#endif  // QT_DBUS_LIB
 }
 
 void GnomeGlobalShortcutBackend::DoUnregister() {
   qLog(Debug) << "unregister";
 #ifdef QT_DBUS_LIB
   // Check if the GSD service is available
-  if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService))
+  if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(
+           kGsdService))
     return;
-  if (!interface_ || !is_connected_)
-    return;
+  if (!interface_ || !is_connected_) return;
 
   is_connected_ = false;
 
   interface_->ReleaseMediaPlayerKeys(QCoreApplication::applicationName());
-  disconnect(interface_, SIGNAL(MediaPlayerKeyPressed(QString,QString)),
-             this, SLOT(GnomeMediaKeyPressed(QString,QString)));
+  disconnect(interface_, SIGNAL(MediaPlayerKeyPressed(QString, QString)), this,
+             SLOT(GnomeMediaKeyPressed(QString, QString)));
 #endif
 }
 
-void GnomeGlobalShortcutBackend::GnomeMediaKeyPressed(const QString&, const QString& key) {
-  if (key == "Play")     manager_->shortcuts()["play_pause"].action->trigger();
-  if (key == "Stop")     manager_->shortcuts()["stop"].action->trigger();
-  if (key == "Next")     manager_->shortcuts()["next_track"].action->trigger();
+void GnomeGlobalShortcutBackend::GnomeMediaKeyPressed(const QString&,
+                                                      const QString& key) {
+  if (key == "Play") manager_->shortcuts()["play_pause"].action->trigger();
+  if (key == "Stop") manager_->shortcuts()["stop"].action->trigger();
+  if (key == "Next") manager_->shortcuts()["next_track"].action->trigger();
   if (key == "Previous") manager_->shortcuts()["prev_track"].action->trigger();
 }

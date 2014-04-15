@@ -25,5 +25,4 @@
 #include <QXmlStreamReader>
 
 XMLParser::XMLParser(LibraryBackendInterface* library, QObject* parent)
-    : ParserBase(library, parent) {
-}
+    : ParserBase(library, parent) {}

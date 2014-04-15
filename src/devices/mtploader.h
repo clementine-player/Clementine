@@ -18,10 +18,10 @@
 #ifndef MTPLOADER_H
 #define MTPLOADER_H
 
+#include <memory>
+
 #include <QObject>
 #include <QUrl>
-
-#include <boost/shared_ptr.hpp>
 
 class ConnectedDevice;
 class LibraryBackend;
@@ -30,12 +30,12 @@ class TaskManager;
 class MtpLoader : public QObject {
   Q_OBJECT
 
-public:
-  MtpLoader(const QUrl& url, TaskManager* task_manager,
-            LibraryBackend* backend, boost::shared_ptr<ConnectedDevice> device);
+ public:
+  MtpLoader(const QUrl& url, TaskManager* task_manager, LibraryBackend* backend,
+            std::shared_ptr<ConnectedDevice> device);
   ~MtpLoader();
 
-public slots:
+ public slots:
   void LoadDatabase();
 
 signals:
@@ -43,11 +43,11 @@ signals:
   void TaskStarted(int task_id);
   void LoadFinished();
 
-private:
+ private:
   bool TryLoad();
 
-private:
-  boost::shared_ptr<ConnectedDevice> device_;
+ private:
+  std::shared_ptr<ConnectedDevice> device_;
   QThread* original_thread_;
 
   QUrl url_;
@@ -55,4 +55,4 @@ private:
   LibraryBackend* backend_;
 };
 
-#endif // MTPLOADER_H
+#endif  // MTPLOADER_H

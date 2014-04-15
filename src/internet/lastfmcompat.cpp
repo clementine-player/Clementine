@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -23,16 +23,15 @@ namespace compat {
 
 #ifdef HAVE_LIBLASTFM1
 
-XmlQuery EmptyXmlQuery() {
-  return XmlQuery();
-}
+XmlQuery EmptyXmlQuery() { return XmlQuery(); }
 
-bool ParseQuery(const QByteArray& data, XmlQuery* query, bool* connection_problems) {
+bool ParseQuery(const QByteArray& data, XmlQuery* query,
+                bool* connection_problems) {
   const bool ret = query->parse(data);
 
   if (connection_problems) {
-    *connection_problems =
-        !ret && query->parseError().enumValue() == lastfm::ws::MalformedResponse;
+    *connection_problems = !ret && query->parseError().enumValue() ==
+                                       lastfm::ws::MalformedResponse;
   }
 
   return ret;
@@ -48,32 +47,33 @@ bool ParseUserList(QNetworkReply* reply, QList<User>* users) {
   return true;
 }
 
-uint ScrobbleTimeMin() {
-  return lastfm::ScrobblePoint::scrobbleTimeMin();
-}
+uint ScrobbleTimeMin() { return lastfm::ScrobblePoint::scrobbleTimeMin(); }
 
-#else // HAVE_LIBLASTFM1
+#else  // HAVE_LIBLASTFM1
 
 XmlQuery EmptyXmlQuery() {
   QByteArray dummy;
   return XmlQuery(dummy);
 }
 
-bool ParseQuery(const QByteArray& data, XmlQuery* query, bool* connection_problems) {
+bool ParseQuery(const QByteArray& data, XmlQuery* query,
+                bool* connection_problems) {
   try {
     *query = lastfm::XmlQuery(data);
-    #ifdef Q_OS_WIN32
-      if (lastfm::ws::last_parse_error != lastfm::ws::NoError) {
-        return false;
-      }
-    #endif // Q_OS_WIN32
-  } catch (lastfm::ws::ParseError e) {
+#ifdef Q_OS_WIN32
+    if (lastfm::ws::last_parse_error != lastfm::ws::NoError) {
+      return false;
+    }
+#endif  // Q_OS_WIN32
+  }
+  catch (lastfm::ws::ParseError e) {
     qLog(Error) << "Last.fm parse error: " << e.enumValue();
     if (connection_problems) {
       *connection_problems = e.enumValue() == lastfm::ws::MalformedResponse;
     }
     return false;
-  } catch(std::runtime_error& e) {
+  }
+  catch (std::runtime_error& e) {
     qLog(Error) << e.what();
     return false;
   }
@@ -93,23 +93,21 @@ bool ParseQuery(const QByteArray& data, XmlQuery* query, bool* connection_proble
 bool ParseUserList(QNetworkReply* reply, QList<User>* users) {
   try {
     *users = lastfm::User::list(reply);
-    #ifdef Q_OS_WIN32
-      if (lastfm::ws::last_parse_error != lastfm::ws::NoError) {
-        return false;
-      }
-    #endif // Q_OS_WIN32
-  } catch(std::runtime_error& e) {
+#ifdef Q_OS_WIN32
+    if (lastfm::ws::last_parse_error != lastfm::ws::NoError) {
+      return false;
+    }
+#endif  // Q_OS_WIN32
+  }
+  catch (std::runtime_error& e) {
     qLog(Error) << e.what();
     return false;
   }
   return true;
 }
 
-uint ScrobbleTimeMin() {
-  return ScrobblePoint::kScrobbleMinLength;
-}
+uint ScrobbleTimeMin() { return ScrobblePoint::kScrobbleMinLength; }
 
-#endif // HAVE_LIBLASTFM1
-
+#endif  // HAVE_LIBLASTFM1
 }
 }

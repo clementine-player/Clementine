@@ -18,46 +18,47 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-
 #ifndef LOGGING_H
 #define LOGGING_H
 
 #include <QDebug>
 
 #ifdef QT_NO_DEBUG_STREAM
-#  define qLog(level) while (false) QNoDebug()
+#define qLog(level) \
+  while (false) QNoDebug()
 #else
-#  define qLog(level) \
-     logging::CreateLogger(logging::Level_##level, \
-         logging::ParsePrettyFunction(__PRETTY_FUNCTION__), __LINE__)
+#define qLog(level)                                                        \
+  logging::CreateLogger(logging::Level_##level,                            \
+                        logging::ParsePrettyFunction(__PRETTY_FUNCTION__), \
+                        __LINE__)
 #endif
 
 namespace logging {
-  class NullDevice : public QIODevice {
-  protected:
-    qint64 readData(char*, qint64) { return -1; }
-    qint64 writeData(const char*, qint64 len) { return len; }
-  };
+class NullDevice : public QIODevice {
+ protected:
+  qint64 readData(char*, qint64) { return -1; }
+  qint64 writeData(const char*, qint64 len) { return len; }
+};
 
-  enum Level {
-    Level_Fatal = -1,
-    Level_Error = 0,
-    Level_Warning,
-    Level_Info,
-    Level_Debug,
-  };
+enum Level {
+  Level_Fatal = -1,
+  Level_Error = 0,
+  Level_Warning,
+  Level_Info,
+  Level_Debug,
+};
 
-  void Init();
-  void SetLevels(const QString& levels);
+void Init();
+void SetLevels(const QString& levels);
 
-  void DumpStackTrace();
+void DumpStackTrace();
 
-  QString ParsePrettyFunction(const char* pretty_function);
-  QDebug CreateLogger(Level level, const QString& class_name, int line);
+QString ParsePrettyFunction(const char* pretty_function);
+QDebug CreateLogger(Level level, const QString& class_name, int line);
 
-  void GLog(const char* domain, int level, const char* message, void* user_data);
+void GLog(const char* domain, int level, const char* message, void* user_data);
 
-  extern const char* kDefaultLogLevels;
+extern const char* kDefaultLogLevels;
 }
 
-#endif // LOGGING_H
+#endif  // LOGGING_H

@@ -30,4 +30,4 @@ class MagnatunePlaylistItem : public LibraryPlaylistItem {
   QUrl Url() const;
 };
 
-#endif // MAGNATUNEPLAYLISTITEM_H
+#endif  // MAGNATUNEPLAYLISTITEM_H

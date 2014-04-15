@@ -36,11 +36,11 @@ class QStandardItem;
 class InternetService : public QObject {
   Q_OBJECT
 
-public:
+ public:
   // Constructs a new internet service with the given name and model. The name
   // should be user-friendly (like 'DigitallyImported' or 'Last.fm').
   InternetService(const QString& name, Application* app, InternetModel* model,
-                  QObject* parent = NULL);
+                  QObject* parent = nullptr);
   virtual ~InternetService() {}
 
   QString name() const { return name_; }
@@ -52,15 +52,22 @@ public:
   virtual void ShowContextMenu(const QPoint& global_pos) {}
   virtual void ItemDoubleClicked(QStandardItem* item) {}
   // Create a generator for smart playlists
-  virtual smart_playlists::GeneratorPtr CreateGenerator(QStandardItem* item) { return smart_playlists::GeneratorPtr(); }
+  virtual smart_playlists::GeneratorPtr CreateGenerator(QStandardItem* item) {
+    return smart_playlists::GeneratorPtr();
+  }
   // Give the service a chance to do a custom action when data is dropped on it
   virtual void DropMimeData(const QMimeData* data, const QModelIndex& index) {}
 
-  virtual PlaylistItem::Options playlistitem_options() const { return PlaylistItem::Default; }
-  // Redefine this function to add service' specific actions to the playlist item
-  virtual QList<QAction*> playlistitem_actions(const Song& song) { return QList<QAction*>(); }
+  virtual PlaylistItem::Options playlistitem_options() const {
+    return PlaylistItem::Default;
+  }
+  // Redefine this function to add service' specific actions to the playlist
+  // item
+  virtual QList<QAction*> playlistitem_actions(const Song& song) {
+    return QList<QAction*>();
+  }
 
-  virtual QWidget* HeaderWidget() const { return NULL; }
+  virtual QWidget* HeaderWidget() const { return nullptr; }
 
   virtual void ReloadSettings() {}
 
@@ -73,15 +80,15 @@ signals:
   void AddToPlaylistSignal(QMimeData* data);
   void ScrollToIndex(const QModelIndex& index);
 
-public slots:
+ public slots:
   virtual void ShowConfig() {}
 
-private slots:
+ private slots:
   void AppendToPlaylist();
   void ReplacePlaylist();
   void OpenInNewPlaylist();
 
-protected:
+ protected:
   // Returns all the playlist insertion related QActions (see below).
   QList<QAction*> GetPlaylistActions();
 
@@ -111,10 +118,10 @@ protected:
   // Set some common properties (type=track, url, etc.)
   QStandardItem* CreateSongItem(const Song& song);
 
-protected:
+ protected:
   Application* app_;
 
-private:
+ private:
   InternetModel* model_;
   QString name_;
 
@@ -126,4 +133,4 @@ private:
 
 Q_DECLARE_METATYPE(InternetService*);
 
-#endif // INTERNETSERVICE_H
+#endif  // INTERNETSERVICE_H

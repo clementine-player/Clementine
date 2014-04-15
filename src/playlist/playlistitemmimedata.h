@@ -24,13 +24,12 @@
 class PlaylistItemMimeData : public MimeData {
   Q_OBJECT
 
-public:
+ public:
   PlaylistItemMimeData(const PlaylistItemPtr& item)
-    : items_(PlaylistItemList() << item) {}
-  PlaylistItemMimeData(const PlaylistItemList& items)
-    : items_(items) {}
+      : items_(PlaylistItemList() << item) {}
+  PlaylistItemMimeData(const PlaylistItemList& items) : items_(items) {}
 
   PlaylistItemList items_;
 };
 
-#endif // PLAYLISTITEMMIMEDATA_H
+#endif  // PLAYLISTITEMMIMEDATA_H

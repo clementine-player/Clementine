@@ -21,12 +21,11 @@
 #include "ui/iconloader.h"
 
 SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service,
-                                                   Application* app, QObject* parent)
-  : SimpleSearchProvider(app, parent),
-    service_(service)
-{
-  Init(tr("Your radio streams"), "savedradio", IconLoader::Load("document-open-remote"),
-       MimeDataContainsUrlsOnly);
+                                                   Application* app,
+                                                   QObject* parent)
+    : SimpleSearchProvider(app, parent), service_(service) {
+  Init(tr("Your radio streams"), "savedradio",
+       IconLoader::Load("document-open-remote"), MimeDataContainsUrlsOnly);
 
   set_max_suggestion_count(3);
 
@@ -38,7 +37,7 @@ SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service,
 void SavedRadioSearchProvider::RecreateItems() {
   QList<Item> items;
 
-  foreach (const SavedRadio::Stream& stream, service_->Streams()) {
+  for (const SavedRadio::Stream& stream : service_->Streams()) {
     Item item;
     item.metadata_.set_title(stream.name_);
     item.metadata_.set_url(stream.url_);

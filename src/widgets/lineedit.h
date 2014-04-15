@@ -27,7 +27,7 @@
 class QToolButton;
 
 class LineEditInterface {
-public:
+ public:
   LineEditInterface(QWidget* widget) : widget_(widget) {}
 
   QWidget* widget() const { return widget_; }
@@ -45,13 +45,14 @@ public:
 
   virtual void set_enabled(bool enabled) = 0;
 
-protected:
+ protected:
   QWidget* widget_;
 };
 
 class ExtendedEditor : public LineEditInterface {
-public:
-  ExtendedEditor(QWidget* widget, int extra_right_padding = 0, bool draw_hint = true);
+ public:
+  ExtendedEditor(QWidget* widget, int extra_right_padding = 0,
+                 bool draw_hint = true);
   virtual ~ExtendedEditor() {}
 
   virtual bool is_empty() const { return text().isEmpty(); }
@@ -69,14 +70,14 @@ public:
   qreal font_point_size() const { return font_point_size_; }
   void set_font_point_size(qreal size) { font_point_size_ = size; }
 
-protected:
+ protected:
   void Paint(QPaintDevice* device);
   void Resize();
 
-private:
+ private:
   void UpdateButtonGeometry();
 
-protected:
+ protected:
   QString hint_;
 
   bool has_clear_button_;
@@ -89,16 +90,18 @@ protected:
   bool is_rtl_;
 };
 
-class LineEdit : public QLineEdit,
-                 public ExtendedEditor {
+class LineEdit : public QLineEdit, public ExtendedEditor {
   Q_OBJECT
   Q_PROPERTY(QString hint READ hint WRITE set_hint);
-  Q_PROPERTY(qreal font_point_size READ font_point_size WRITE set_font_point_size);
-  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
-  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button);
+  Q_PROPERTY(qreal font_point_size READ font_point_size WRITE
+                 set_font_point_size);
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
+                 set_clear_button);
+  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
+                 set_reset_button);
 
-public:
-  LineEdit(QWidget* parent = 0);
+ public:
+  LineEdit(QWidget* parent = nullptr);
 
   // ExtendedEditor
   void set_focus() { QLineEdit::setFocus(); }
@@ -106,30 +109,31 @@ public:
   void set_text(const QString& text) { QLineEdit::setText(text); }
   void set_enabled(bool enabled) { QLineEdit::setEnabled(enabled); }
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
 
-private:
+ private:
   bool is_rtl() const { return is_rtl_; }
   void set_rtl(bool rtl) { is_rtl_ = rtl; }
 
-private slots:
+ private slots:
   void text_changed(const QString& text);
 
 signals:
   void Reset();
 };
 
-class TextEdit : public QPlainTextEdit,
-                 public ExtendedEditor {
+class TextEdit : public QPlainTextEdit, public ExtendedEditor {
   Q_OBJECT
   Q_PROPERTY(QString hint READ hint WRITE set_hint);
-  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
-  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button);
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
+                 set_clear_button);
+  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
+                 set_reset_button);
 
-public:
-  TextEdit(QWidget* parent = 0);
+ public:
+  TextEdit(QWidget* parent = nullptr);
 
   // ExtendedEditor
   void set_focus() { QPlainTextEdit::setFocus(); }
@@ -137,7 +141,7 @@ public:
   void set_text(const QString& text) { QPlainTextEdit::setPlainText(text); }
   void set_enabled(bool enabled) { QPlainTextEdit::setEnabled(enabled); }
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
 
@@ -145,15 +149,16 @@ signals:
   void Reset();
 };
 
-class SpinBox : public QSpinBox,
-                public ExtendedEditor {
+class SpinBox : public QSpinBox, public ExtendedEditor {
   Q_OBJECT
   Q_PROPERTY(QString hint READ hint WRITE set_hint);
-  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
-  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button);
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
+                 set_clear_button);
+  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
+                 set_reset_button);
 
-public:
-  SpinBox(QWidget* parent = 0);
+ public:
+  SpinBox(QWidget* parent = nullptr);
 
   // QSpinBox
   QString textFromValue(int val) const;
@@ -165,7 +170,7 @@ public:
   void set_text(const QString& text) { QSpinBox::setValue(text.toInt()); }
   void set_enabled(bool enabled) { QSpinBox::setEnabled(enabled); }
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
 
@@ -173,4 +178,4 @@ signals:
   void Reset();
 };
 
-#endif // LINEEDIT_H
+#endif  // LINEEDIT_H

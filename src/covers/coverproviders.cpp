@@ -20,9 +20,7 @@
 #include "coverproviders.h"
 #include "core/logging.h"
 
-CoverProviders::CoverProviders(QObject* parent)
-  : QObject(parent) {
-}
+CoverProviders::CoverProviders(QObject* parent) : QObject(parent) {}
 
 void CoverProviders::AddProvider(CoverProvider* provider) {
   {
@@ -35,8 +33,7 @@ void CoverProviders::AddProvider(CoverProvider* provider) {
 }
 
 void CoverProviders::RemoveProvider(CoverProvider* provider) {
-  if (!provider)
-    return;
+  if (!provider) return;
 
   // It's not safe to dereference provider at this pointbecause it might have
   // already been destroyed.
@@ -60,6 +57,4 @@ void CoverProviders::ProviderDestroyed() {
   RemoveProvider(provider);
 }
 
-int CoverProviders::NextId() {
-  return next_id_.fetchAndAddRelaxed(1);
-}
+int CoverProviders::NextId() { return next_id_.fetchAndAddRelaxed(1); }

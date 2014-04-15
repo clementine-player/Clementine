@@ -29,7 +29,7 @@ class Ui_AppearanceSettingsPage;
 class AppearanceSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   AppearanceSettingsPage(SettingsDialog* dialog);
   ~AppearanceSettingsPage();
 
@@ -37,7 +37,7 @@ public:
   void Save();
   void Cancel();
 
-private slots:
+ private slots:
   void SelectForegroundColor();
   void SelectBackgroundColor();
   void UseCustomColorSetOptionChanged(bool);
@@ -46,12 +46,13 @@ private slots:
   void OpacityLevelChanged(int);
   void DisableBlurAndOpacitySliders(bool);
 
-private:
+ private:
   static const int kMoodbarPreviewWidth;
   static const int kMoodbarPreviewHeight;
 
   // Set the widget's background to new_color
-  void UpdateColorSelectorColor(QWidget* color_selector, const QColor& new_color);
+  void UpdateColorSelectorColor(QWidget* color_selector,
+                                const QColor& new_color);
   // Init (or refresh) the colorSelectors colors
   void InitColorSelectorsColors();
 
@@ -69,4 +70,4 @@ private:
   bool initialised_moodbar_previews_;
 };
 
-#endif // APPEARANCESETTINGSPAGE_H
+#endif  // APPEARANCESETTINGSPAGE_H

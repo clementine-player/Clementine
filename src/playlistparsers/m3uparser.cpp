@@ -23,11 +23,10 @@
 #include <QtDebug>
 
 M3UParser::M3UParser(LibraryBackendInterface* library, QObject* parent)
-    : ParserBase(library, parent)
-{
-}
+    : ParserBase(library, parent) {}
 
-SongList M3UParser::Load(QIODevice* device, const QString& playlist_path, const QDir& dir) const {
+SongList M3UParser::Load(QIODevice* device, const QString& playlist_path,
+                         const QDir& dir) const {
   SongList ret;
 
   M3UType type = STANDARD;
@@ -79,7 +78,8 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path, const 
   return ret;
 }
 
-bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata) const {
+bool M3UParser::ParseMetadata(const QString& line,
+                              M3UParser::Metadata* metadata) const {
   // Extended info, eg.
   // #EXTINF:123,Sample Artist - Sample title
   QString info = line.section(':', 1);
@@ -102,21 +102,23 @@ bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata
   return true;
 }
 
-void M3UParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+void M3UParser::Save(const SongList& songs, QIODevice* device,
+                     const QDir& dir) const {
   device->write("#EXTM3U\n");
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     if (song.url().isEmpty()) {
       continue;
     }
     QString meta = QString("#EXTINF:%1,%2 - %3\n")
-                   .arg(song.length_nanosec() / kNsecPerSec)
-                   .arg(song.artist()).arg(song.title());
+                       .arg(song.length_nanosec() / kNsecPerSec)
+                       .arg(song.artist())
+                       .arg(song.title());
     device->write(meta.toUtf8());
     device->write(URLOrRelativeFilename(song.url(), dir).toUtf8());
     device->write("\n");
   }
 }
 
-bool M3UParser::TryMagic(const QByteArray &data) const {
+bool M3UParser::TryMagic(const QByteArray& data) const {
   return data.contains("#EXTM3U") || data.contains("#EXTINF");
 }

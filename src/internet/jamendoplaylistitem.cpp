@@ -18,13 +18,10 @@
 #include "jamendoplaylistitem.h"
 
 JamendoPlaylistItem::JamendoPlaylistItem(const QString& type)
-  : LibraryPlaylistItem(type)
-{
-}
+    : LibraryPlaylistItem(type) {}
 
 JamendoPlaylistItem::JamendoPlaylistItem(const Song& song)
-  : LibraryPlaylistItem("Jamendo")
-{
+    : LibraryPlaylistItem("Jamendo") {
   song_ = song;
 }
 
@@ -35,6 +32,4 @@ bool JamendoPlaylistItem::InitFromQuery(const SqlRow& query) {
   return song_.is_valid();
 }
 
-QUrl JamendoPlaylistItem::Url() const {
-  return song_.url();
-}
+QUrl JamendoPlaylistItem::Url() const { return song_.url(); }

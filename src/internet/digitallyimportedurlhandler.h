@@ -23,10 +23,10 @@
 class Application;
 class DigitallyImportedServiceBase;
 
-
 class DigitallyImportedUrlHandler : public UrlHandler {
-public:
-  DigitallyImportedUrlHandler(Application* app, DigitallyImportedServiceBase* service);
+ public:
+  DigitallyImportedUrlHandler(Application* app,
+                              DigitallyImportedServiceBase* service);
 
   QString scheme() const;
   QIcon icon() const;
@@ -35,7 +35,7 @@ public:
   void CancelTask();
   void LoadPlaylistFinished(QIODevice* device);
 
-private:
+ private:
   Application* app_;
   DigitallyImportedServiceBase* service_;
   int task_id_;
@@ -43,4 +43,4 @@ private:
   QUrl last_original_url_;
 };
 
-#endif // DIGITALLYIMPORTEDURLHANDLER_H
+#endif  // DIGITALLYIMPORTEDURLHANDLER_H

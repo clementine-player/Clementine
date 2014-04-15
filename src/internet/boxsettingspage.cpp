@@ -26,10 +26,9 @@
 #include "ui/settingsdialog.h"
 
 BoxSettingsPage::BoxSettingsPage(SettingsDialog* parent)
-  : SettingsPage(parent),
-    ui_(new Ui::BoxSettingsPage),
-    service_(dialog()->app()->internet_model()->Service<BoxService>())
-{
+    : SettingsPage(parent),
+      ui_(new Ui::BoxSettingsPage),
+      service_(dialog()->app()->internet_model()->Service<BoxService>()) {
   ui_->setupUi(this);
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
@@ -40,9 +39,7 @@ BoxSettingsPage::BoxSettingsPage(SettingsDialog* parent)
   dialog()->installEventFilter(this);
 }
 
-BoxSettingsPage::~BoxSettingsPage() {
-  delete ui_;
-}
+BoxSettingsPage::~BoxSettingsPage() { delete ui_; }
 
 void BoxSettingsPage::Load() {
   QSettings s;

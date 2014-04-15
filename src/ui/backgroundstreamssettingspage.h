@@ -25,22 +25,22 @@ class Ui_BackgroundStreamsSettingsPage;
 class BackgroundStreamsSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   BackgroundStreamsSettingsPage(SettingsDialog* dialog);
   ~BackgroundStreamsSettingsPage();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void EnableStream(bool enabled);
   void StreamVolumeChanged(int value);
 
-private:
+ private:
   void AddStream(const QString& name);
 
-private:
+ private:
   Ui_BackgroundStreamsSettingsPage* ui_;
 };
 
-#endif // BACKGROUNDSTREAMSSETTINGSPAGE_H
+#endif  // BACKGROUNDSTREAMSSETTINGSPAGE_H

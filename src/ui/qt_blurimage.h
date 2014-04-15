@@ -22,4 +22,4 @@
 void qt_blurImage(QPainter* p, QImage& blurImage, qreal radius, bool quality,
                   bool alphaOnly, int transposed = 0);
 
-#endif // QT_BLURIMAGE_H
+#endif  // QT_BLURIMAGE_H

@@ -20,8 +20,7 @@
 #include <QMovie>
 
 FullscreenHypnotoad::FullscreenHypnotoad()
-  : movie_(new QMovie(":/hypnotoad.gif"))
-{
+    : movie_(new QMovie(":/hypnotoad.gif")) {
   setMovie(movie_);
   setScaledContents(true);
 
@@ -31,18 +30,10 @@ FullscreenHypnotoad::FullscreenHypnotoad()
   setPalette(p);
 }
 
-void FullscreenHypnotoad::mouseReleaseEvent(QMouseEvent* e) {
-  hide();
-}
+void FullscreenHypnotoad::mouseReleaseEvent(QMouseEvent* e) { hide(); }
 
-void FullscreenHypnotoad::keyReleaseEvent(QKeyEvent* e) {
-  hide();
-}
+void FullscreenHypnotoad::keyReleaseEvent(QKeyEvent* e) { hide(); }
 
-void FullscreenHypnotoad::showEvent(QShowEvent*) {
-  movie_->start();
-}
+void FullscreenHypnotoad::showEvent(QShowEvent*) { movie_->start(); }
 
-void FullscreenHypnotoad::hideEvent(QHideEvent*) {
-  movie_->stop();
-}
+void FullscreenHypnotoad::hideEvent(QHideEvent*) { movie_->stop(); }

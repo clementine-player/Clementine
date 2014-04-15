@@ -21,7 +21,7 @@
 #include "songinfoprovider.h"
 
 namespace lastfm {
-  class XmlQuery;
+class XmlQuery;
 }
 
 class QNetworkReply;
@@ -29,19 +29,19 @@ class QNetworkReply;
 class LastfmTrackInfoProvider : public SongInfoProvider {
   Q_OBJECT
 
-public:
+ public:
   void FetchInfo(int id, const Song& metadata);
 
-private slots:
+ private slots:
   void RequestFinished();
 
-private:
+ private:
   void GetPlayCounts(int id, const lastfm::XmlQuery& q);
   void GetWiki(int id, const lastfm::XmlQuery& q);
   void GetTags(int id, const lastfm::XmlQuery& q);
 
-private:
+ private:
   QMap<QNetworkReply*, int> requests_;
 };
 
-#endif // LASTFMTRACKINFOPROVIDER_H
+#endif  // LASTFMTRACKINFOPROVIDER_H

@@ -25,12 +25,7 @@
 
 DigitallyImportedUrlHandler::DigitallyImportedUrlHandler(
     Application* app, DigitallyImportedServiceBase* service)
-  : UrlHandler(service),
-    app_(app),
-    service_(service),
-    task_id_(-1)
-{
-}
+    : UrlHandler(service), app_(app), service_(service), task_id_(-1) {}
 
 QString DigitallyImportedUrlHandler::scheme() const {
   return service_->api_service_name();
@@ -49,7 +44,8 @@ QIcon DigitallyImportedUrlHandler::icon() const {
   return QIcon();
 }
 
-UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(const QUrl& url) {
+UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(
+    const QUrl& url) {
   LoadResult ret(url);
   if (task_id_ != -1) {
     return ret;
@@ -79,7 +75,7 @@ void DigitallyImportedUrlHandler::LoadPlaylistFinished(QIODevice* device) {
   CancelTask();
 
   // Try to parse the playlist
-  PlaylistParser parser(NULL);
+  PlaylistParser parser(nullptr);
   QList<Song> songs = parser.LoadFromDevice(device);
 
   qLog(Info) << "Loading station finished, got" << songs.count() << "songs";
@@ -91,7 +87,7 @@ void DigitallyImportedUrlHandler::LoadPlaylistFinished(QIODevice* device) {
   }
 
   emit AsyncLoadComplete(LoadResult(
-    last_original_url_, LoadResult::TrackAvailable, songs[0].url()));
+      last_original_url_, LoadResult::TrackAvailable, songs[0].url()));
 }
 
 void DigitallyImportedUrlHandler::CancelTask() {

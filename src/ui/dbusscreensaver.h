@@ -30,7 +30,7 @@ class DBusScreensaver : public Screensaver {
   void Inhibit();
   void Uninhibit();
 
-private:
+ private:
   QString service_;
   QString path_;
   QString interface_;

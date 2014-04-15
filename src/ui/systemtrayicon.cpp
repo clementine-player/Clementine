@@ -29,14 +29,13 @@
 #include <cmath>
 
 SystemTrayIcon::SystemTrayIcon(QObject* parent)
-  : QObject(parent),
-    percentage_(0),
-    playing_icon_(":/tiny-start.png"),
-    paused_icon_(":/tiny-pause.png")
-{
-}
+    : QObject(parent),
+      percentage_(0),
+      playing_icon_(":/tiny-start.png"),
+      paused_icon_(":/tiny-pause.png") {}
 
-QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon, const QPixmap& grey_icon) {
+QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon,
+                                   const QPixmap& grey_icon) {
   QRect rect(icon.rect());
 
   // The angle of the line that's used to cover the icon.
@@ -46,12 +45,9 @@ QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon, const QPixmap& grey_icon
 
   QPolygon mask;
   mask << rect.topRight();
-  mask << rect.topRight() + QPoint(
-      length * sin(angle),
-      - length * cos(angle));
+  mask << rect.topRight() + QPoint(length * sin(angle), -length * cos(angle));
 
-  if (song_progress() > 50)
-    mask << rect.bottomLeft();
+  if (song_progress() > 50) mask << rect.bottomLeft();
 
   mask << rect.topLeft();
   mask << rect.topRight();
@@ -67,9 +63,11 @@ QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon, const QPixmap& grey_icon
   // Draw the playing or paused icon in the top-right
   if (!current_state_icon().isNull()) {
     int height = rect.height() / 2;
-    QPixmap scaled(current_state_icon().scaledToHeight(height, Qt::SmoothTransformation));
+    QPixmap scaled(
+        current_state_icon().scaledToHeight(height, Qt::SmoothTransformation));
 
-    QRect state_rect(rect.width() - scaled.width(), 0, scaled.width(), scaled.height());
+    QRect state_rect(rect.width() - scaled.width(), 0, scaled.width(),
+                     scaled.height());
     p.drawPixmap(state_rect, scaled);
   }
 
@@ -88,8 +86,7 @@ void SystemTrayIcon::SetPaused() {
   UpdateIcon();
 }
 
-void SystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_ban,
-                                bool enable_love) {
+void SystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_love) {
   current_state_icon_ = playing_icon_;
   UpdateIcon();
 }

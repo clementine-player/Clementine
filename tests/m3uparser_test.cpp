@@ -30,7 +30,7 @@ using ::testing::HasSubstr;
 class M3UParserTest : public ::testing::Test {
  protected:
   M3UParserTest()
-      : parser_(NULL) {
+      : parser_(nullptr) {
   }
 
   M3UParser parser_;
@@ -66,7 +66,7 @@ TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
   temp.open();
   QFileInfo info(temp);
   taglib_.ExpectCall(temp.fileName(), "foo", "bar", "baz");
-  M3UParser parser(NULL);
+  M3UParser parser(nullptr);
   QString line(info.fileName());
   Song song(&taglib_);
   parser.LoadSong(line, 0, info.dir(), &song);
@@ -90,7 +90,7 @@ TEST_F(M3UParserTest, ParsesSongsFromDevice) {
                     "http://foo.com/bar/somefile.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  M3UParser parser(NULL);
+  M3UParser parser(nullptr);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.size());
   Song s = songs[0];
@@ -105,7 +105,7 @@ TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
                     "http://baz.com/thing.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  M3UParser parser(NULL);
+  M3UParser parser(nullptr);
   SongList songs = parser.Load(&buffer, "", QDir("somedir"));
   ASSERT_EQ(2, songs.size());
   EXPECT_EQ(QUrl("http://foo.com/bar/somefile.mp3"), songs[0].url());
@@ -118,7 +118,7 @@ TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
 TEST_F(M3UParserTest, ParsesActualM3U) {
   QFile file(":testdata/test.m3u");
   file.open(QIODevice::ReadOnly);
-  M3UParser parser(NULL);
+  M3UParser parser(nullptr);
   SongList songs = parser.Load(&file, "", QDir("somedir"));
   ASSERT_EQ(239, songs.size());
   EXPECT_EQ("gravity", songs[0].title());
@@ -139,7 +139,7 @@ TEST_F(M3UParserTest, SavesSong) {
   one.set_url(QUrl("http://www.example.com/foo.mp3"));
   SongList songs;
   songs << one;
-  M3UParser parser(NULL);
+  M3UParser parser(nullptr);
   parser.Save(songs, &buffer);
   EXPECT_THAT(data.constData(), HasSubstr("#EXTM3U"));
   EXPECT_THAT(data.constData(), HasSubstr("#EXTINF:123,bar - foo"));
@@ -152,7 +152,7 @@ TEST_F(M3UParserTest, ParsesUTF8) {
                     "/foo/Разные/исполнители.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  M3UParser parser(NULL);
+  M3UParser parser(nullptr);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
   EXPECT_EQ(6, songs[0].artist().length());

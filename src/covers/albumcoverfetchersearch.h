@@ -55,19 +55,19 @@ signals:
   // It's the end of search and we've fetched a cover.
   void AlbumCoverFetched(quint64, const QImage& cover);
 
-private slots:
+ private slots:
   void ProviderSearchFinished(int id, const QList<CoverSearchResult>& results);
   void ProviderCoverFetchFinished(RedirectFollower* reply);
   void TerminateSearch();
 
-private:
+ private:
   void AllProvidersFinished();
 
   void FetchMoreImages();
   float ScoreImage(const QImage& image) const;
   void SendBestImage();
 
-private:
+ private:
   static const int kSearchTimeoutMs;
   static const int kImageLoadTimeoutMs;
   static const int kTargetSize;

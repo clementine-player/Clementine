@@ -27,26 +27,26 @@ class SpotifyService;
 class SpotifySettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   SpotifySettingsPage(SettingsDialog* dialog);
   ~SpotifySettingsPage();
 
   void Load();
   void Save();
 
-public slots:
+ public slots:
   void BlobStateChanged();
   void DownloadBlob();
 
-private slots:
+ private slots:
   void Login();
   void LoginFinished(bool success);
   void Logout();
 
-private:
+ private:
   void UpdateLoginState();
 
-private:
+ private:
   Ui_SpotifySettingsPage* ui_;
   SpotifyService* service_;
 
@@ -55,4 +55,4 @@ private:
   QString original_password_;
 };
 
-#endif // SPOTIFYSETTINGSPAGE_H
+#endif  // SPOTIFYSETTINGSPAGE_H

@@ -18,7 +18,4 @@
 #include "coverprovider.h"
 
 CoverProvider::CoverProvider(const QString& name, QObject* parent)
-  : QObject(parent),
-    name_(name)
-{
-}
+    : QObject(parent), name_(name) {}

@@ -43,4 +43,4 @@ class LibraryPlaylistItem : public PlaylistItem {
   Song song_;
 };
 
-#endif // LIBRARYPLAYLISTITEM_H
+#endif  // LIBRARYPLAYLISTITEM_H

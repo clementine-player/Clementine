@@ -8,7 +8,7 @@ class BoxService;
 class BoxUrlHandler : public UrlHandler {
   Q_OBJECT
  public:
-  BoxUrlHandler(BoxService* service, QObject* parent = 0);
+  BoxUrlHandler(BoxService* service, QObject* parent = nullptr);
 
   QString scheme() const { return "box"; }
   QIcon icon() const { return QIcon(":/providers/box.png"); }

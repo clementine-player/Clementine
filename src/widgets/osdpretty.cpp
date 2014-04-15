@@ -18,7 +18,6 @@
 #include "osdpretty.h"
 #include "ui_osdpretty.h"
 
-
 #include <QApplication>
 #include <QBitmap>
 #include <QColor>
@@ -33,12 +32,12 @@
 #include <QtDebug>
 
 #ifdef Q_WS_X11
-#  include <QX11Info>
+#include <QX11Info>
 #endif
 
 #ifdef Q_OS_WIN32
-#  include "qtwin.h"
-#  include <windows.h>
+#include "qtwin.h"
+#include <windows.h>
 #endif
 
 const char* OSDPretty::kSettingsGroup = "OSDPretty";
@@ -52,21 +51,19 @@ const int OSDPretty::kSnapProximity = 20;
 const QRgb OSDPretty::kPresetBlue = qRgb(102, 150, 227);
 const QRgb OSDPretty::kPresetOrange = qRgb(254, 156, 67);
 
-
-OSDPretty::OSDPretty(Mode mode, QWidget *parent)
-  : QWidget(parent),
-    ui_(new Ui_OSDPretty),
-    mode_(mode),
-    background_color_(kPresetBlue),
-    background_opacity_(0.85),
-    popup_display_(0),
-    font_(QFont()),
-    disable_duration_(false),
-    timeout_(new QTimer(this)),
-    fading_enabled_(false),
-    fader_(new QTimeLine(300, this)),
-    toggle_mode_(false)
-{
+OSDPretty::OSDPretty(Mode mode, QWidget* parent)
+    : QWidget(parent),
+      ui_(new Ui_OSDPretty),
+      mode_(mode),
+      background_color_(kPresetBlue),
+      background_opacity_(0.85),
+      popup_display_(0),
+      font_(QFont()),
+      disable_duration_(false),
+      timeout_(new QTimer(this)),
+      fading_enabled_(false),
+      fader_(new QTimeLine(300, this)),
+      toggle_mode_(false) {
   Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint |
                           Qt::X11BypassWindowManagerHint;
 
@@ -86,13 +83,13 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
 
   // Mode settings
   switch (mode_) {
-  case Mode_Popup:
-    setCursor(QCursor(Qt::ArrowCursor));
-    break;
+    case Mode_Popup:
+      setCursor(QCursor(Qt::ArrowCursor));
+      break;
 
-  case Mode_Draggable:
-    setCursor(QCursor(Qt::OpenHandCursor));
-    break;
+    case Mode_Draggable:
+      setCursor(QCursor(Qt::OpenHandCursor));
+      break;
   }
 
   // Timeout
@@ -113,7 +110,7 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
   // Load the show edges and corners
   QImage shadow_edge(":osd_shadow_edge.png");
   QImage shadow_corner(":osd_shadow_corner.png");
-  for (int i=0 ; i<4 ; ++i) {
+  for (int i = 0; i < 4; ++i) {
     QTransform rotation = QTransform().rotate(90 * i);
     shadow_edge_[i] = QPixmap::fromImage(shadow_edge.transformed(rotation));
     shadow_corner_[i] = QPixmap::fromImage(shadow_corner.transformed(rotation));
@@ -128,17 +125,16 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
   // Get current screen resolution
   QRect screenResolution = QApplication::desktop()->screenGeometry();
   // Leave 200 px for icon
-  ui_->summary->setMaximumWidth(screenResolution.width()-200);
-  ui_->message->setMaximumWidth(screenResolution.width()-200);
+  ui_->summary->setMaximumWidth(screenResolution.width() - 200);
+  ui_->message->setMaximumWidth(screenResolution.width() - 200);
   // Set maximum size for the OSD, a little margin here too
-  setMaximumSize(screenResolution.width()-100,screenResolution.height()-100);
+  setMaximumSize(screenResolution.width() - 100,
+                 screenResolution.height() - 100);
 
   // Don't load settings here, they will be reloaded anyway on creation
 }
 
-OSDPretty::~OSDPretty() {
-  delete ui_;
-}
+OSDPretty::~OSDPretty() { delete ui_; }
 
 bool OSDPretty::IsTransparencyAvailable() {
 #ifdef Q_WS_X11
@@ -165,16 +161,15 @@ void OSDPretty::Load() {
 
 void OSDPretty::ReloadSettings() {
   Load();
-  if (isVisible())
-    update();
+  if (isVisible()) update();
 }
 
 QRect OSDPretty::BoxBorder() const {
-  return rect().adjusted(kDropShadowSize, kDropShadowSize,
-                         -kDropShadowSize, -kDropShadowSize);
+  return rect().adjusted(kDropShadowSize, kDropShadowSize, -kDropShadowSize,
+                         -kDropShadowSize);
 }
 
-void OSDPretty::paintEvent(QPaintEvent *) {
+void OSDPretty::paintEvent(QPaintEvent*) {
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
   p.setRenderHint(QPainter::HighQualityAntialiasing);
@@ -185,22 +180,21 @@ void OSDPretty::paintEvent(QPaintEvent *) {
   const int kShadowCornerSize = kDropShadowSize + kBorderRadius;
   p.drawPixmap(0, 0, shadow_corner_[0]);
   p.drawPixmap(width() - kShadowCornerSize, 0, shadow_corner_[1]);
-  p.drawPixmap(width() - kShadowCornerSize, height() - kShadowCornerSize, shadow_corner_[2]);
+  p.drawPixmap(width() - kShadowCornerSize, height() - kShadowCornerSize,
+               shadow_corner_[2]);
   p.drawPixmap(0, height() - kShadowCornerSize, shadow_corner_[3]);
 
   // Shadow edges
-  p.drawTiledPixmap(kShadowCornerSize, 0,
-                    width() - kShadowCornerSize*2, kDropShadowSize,
-                    shadow_edge_[0]);
+  p.drawTiledPixmap(kShadowCornerSize, 0, width() - kShadowCornerSize * 2,
+                    kDropShadowSize, shadow_edge_[0]);
   p.drawTiledPixmap(width() - kDropShadowSize, kShadowCornerSize,
-                    kDropShadowSize, height() - kShadowCornerSize*2,
+                    kDropShadowSize, height() - kShadowCornerSize * 2,
                     shadow_edge_[1]);
   p.drawTiledPixmap(kShadowCornerSize, height() - kDropShadowSize,
-                    width() - kShadowCornerSize*2, kDropShadowSize,
+                    width() - kShadowCornerSize * 2, kDropShadowSize,
                     shadow_edge_[2]);
-  p.drawTiledPixmap(0, kShadowCornerSize,
-                    kDropShadowSize, height() - kShadowCornerSize*2,
-                    shadow_edge_[3]);
+  p.drawTiledPixmap(0, kShadowCornerSize, kDropShadowSize,
+                    height() - kShadowCornerSize * 2, shadow_edge_[3]);
 
   // Box background
   p.setBrush(background_color_);
@@ -235,8 +229,8 @@ void OSDPretty::SetMessage(const QString& summary, const QString& message,
 
   if (!image.isNull()) {
     QImage scaled_image =
-        image.scaled(kMaxIconSize, kMaxIconSize,
-                     Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        image.scaled(kMaxIconSize, kMaxIconSize, Qt::KeepAspectRatio,
+                     Qt::SmoothTransformation);
     ui_->icon->setPixmap(QPixmap::fromImage(scaled_image));
     ui_->icon->show();
   } else {
@@ -246,8 +240,7 @@ void OSDPretty::SetMessage(const QString& summary, const QString& message,
   ui_->summary->setText(summary);
   ui_->message->setText(message);
 
-  if (isVisible())
-    Reposition();
+  if (isVisible()) Reposition();
 }
 
 // Set the desired message and then show the OSD
@@ -260,16 +253,13 @@ void OSDPretty::ShowMessage(const QString& summary, const QString& message,
     if (toggle_mode()) {
       set_toggle_mode(false);
       // If timeout is disabled, timer hadn't been started
-      if (!disable_duration())
-        timeout_->stop();
+      if (!disable_duration()) timeout_->stop();
       hide();
     } else {
-      if (!disable_duration())
-        timeout_->start(); // Restart the timer
+      if (!disable_duration()) timeout_->start();  // Restart the timer
     }
   } else {
-    if (toggle_mode())
-      set_toggle_mode(false);
+    if (toggle_mode()) set_toggle_mode(false);
     // The OSD is not visible, show it
     show();
   }
@@ -284,18 +274,17 @@ void OSDPretty::showEvent(QShowEvent* e) {
 
   if (fading_enabled_) {
     fader_->setDirection(QTimeLine::Forward);
-    fader_->start(); // Timeout will be started in FaderFinished
-  }
-  else if (mode_ == Mode_Popup) {
-    if (!disable_duration())
-      timeout_->start();
+    fader_->start();  // Timeout will be started in FaderFinished
+  } else if (mode_ == Mode_Popup) {
+    if (!disable_duration()) timeout_->start();
     // Ensures it is above when showing the preview
     raise();
   }
 }
 
 void OSDPretty::setVisible(bool visible) {
-  if (!visible && fading_enabled_ && fader_->direction() == QTimeLine::Forward) {
+  if (!visible && fading_enabled_ &&
+      fader_->direction() == QTimeLine::Forward) {
     fader_->setDirection(QTimeLine::Backward);
     fader_->start();
   } else {
@@ -310,9 +299,7 @@ void OSDPretty::FaderFinished() {
     timeout_->start();
 }
 
-void OSDPretty::FaderValueChanged(qreal value) {
-  setWindowOpacity(value);
-}
+void OSDPretty::FaderValueChanged(qreal value) { setWindowOpacity(value); }
 
 void OSDPretty::Reposition() {
   QDesktopWidget* desktop = QApplication::desktop();
@@ -339,7 +326,8 @@ void OSDPretty::Reposition() {
 
   QPainter p(&mask);
   p.setBrush(Qt::color1);
-  p.drawRoundedRect(BoxBorder().adjusted(-1, -1, 0, 0), kBorderRadius, kBorderRadius);
+  p.drawRoundedRect(BoxBorder().adjusted(-1, -1, 0, 0), kBorderRadius,
+                    kBorderRadius);
   p.end();
 
   // If there's no compositing window manager running then we have to set an
@@ -356,14 +344,11 @@ void OSDPretty::Reposition() {
 #endif
 }
 
-void OSDPretty::enterEvent(QEvent *) {
-  if (mode_ == Mode_Popup)
-    setWindowOpacity(0.25);
+void OSDPretty::enterEvent(QEvent*) {
+  if (mode_ == Mode_Popup) setWindowOpacity(0.25);
 }
 
-void OSDPretty::leaveEvent(QEvent *) {
-  setWindowOpacity(1.0);
-}
+void OSDPretty::leaveEvent(QEvent*) { setWindowOpacity(1.0); }
 
 void OSDPretty::mousePressEvent(QMouseEvent* e) {
   if (mode_ == Mode_Popup)
@@ -383,12 +368,15 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
     QDesktopWidget* desktop = QApplication::desktop();
     QRect geometry(desktop->availableGeometry(e->globalPos()));
 
-    new_pos.setX(qBound(geometry.left(), new_pos.x(), geometry.right() - width()));
-    new_pos.setY(qBound(geometry.top(), new_pos.y(), geometry.bottom() - height()));
+    new_pos.setX(
+        qBound(geometry.left(), new_pos.x(), geometry.right() - width()));
+    new_pos.setY(
+        qBound(geometry.top(), new_pos.y(), geometry.bottom() - height()));
 
     // Snap to center
     int snap_x = geometry.center().x() - width() / 2;
-    if (new_pos.x() > snap_x - kSnapProximity && new_pos.x() < snap_x + kSnapProximity) {
+    if (new_pos.x() > snap_x - kSnapProximity &&
+        new_pos.x() < snap_x + kSnapProximity) {
       new_pos.setX(snap_x);
     }
 
@@ -403,10 +391,10 @@ QPoint OSDPretty::current_pos() const {
   QDesktopWidget* desktop = QApplication::desktop();
   QRect geometry(desktop->availableGeometry(current_display()));
 
-  int x = pos().x() >= geometry.right() - width()
-          ? -1 : pos().x() - geometry.left();
-  int y = pos().y() >= geometry.bottom() - height()
-          ? -1 : pos().y() - geometry.top();
+  int x = pos().x() >= geometry.right() - width() ? -1
+                                                  : pos().x() - geometry.left();
+  int y = pos().y() >= geometry.bottom() - height() ? -1 : pos().y() -
+                                                               geometry.top();
 
   return QPoint(x, y);
 }
@@ -418,14 +406,12 @@ int OSDPretty::current_display() const {
 
 void OSDPretty::set_background_color(QRgb color) {
   background_color_ = color;
-  if (isVisible())
-    update();
+  if (isVisible()) update();
 }
 
 void OSDPretty::set_background_opacity(qreal opacity) {
   background_opacity_ = opacity;
-  if (isVisible())
-    update();
+  if (isVisible()) update();
 }
 
 void OSDPretty::set_foreground_color(QRgb color) {
@@ -438,11 +424,9 @@ void OSDPretty::set_foreground_color(QRgb color) {
   ui_->message->setPalette(p);
 }
 
-void OSDPretty::set_popup_duration(int msec) {
-  timeout_->setInterval(msec);
-}
+void OSDPretty::set_popup_duration(int msec) { timeout_->setInterval(msec); }
 
-void OSDPretty::mouseReleaseEvent(QMouseEvent *) {
+void OSDPretty::mouseReleaseEvent(QMouseEvent*) {
   if (mode_ == Mode_Draggable) {
     popup_display_ = current_display();
     popup_pos_ = current_pos();

@@ -25,9 +25,7 @@ const int SongPlayStats::kLineSpacing = 2;
 const int SongPlayStats::kIconTextSpacing = 6;
 const int SongPlayStats::kMargin = 4;
 
-SongPlayStats::SongPlayStats(QWidget* parent)
-  : QWidget(parent)
-{
+SongPlayStats::SongPlayStats(QWidget* parent) : QWidget(parent) {
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 }
 
@@ -38,21 +36,21 @@ void SongPlayStats::AddItem(const QIcon& icon, const QString& text) {
 }
 
 QSize SongPlayStats::sizeHint() const {
-  return QSize(100, kMargin * 2 +
-                    items_.count() * kIconSize +
-                    (items_.count() - 1) * kLineSpacing);
+  return QSize(100, kMargin * 2 + items_.count() * kIconSize +
+                        (items_.count() - 1) * kLineSpacing);
 }
 
 void SongPlayStats::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
   int y = kMargin;
-  foreach (const Item& item, items_) {
-    const QRect line(kMargin, y, width() - kMargin*2, kIconSize);
+  for (const Item& item : items_) {
+    const QRect line(kMargin, y, width() - kMargin * 2, kIconSize);
     const QRect icon_rect(line.topLeft(), QSize(kIconSize, kIconSize));
-    const QRect text_rect(icon_rect.topRight() + QPoint(kIconTextSpacing, 0),
-                          QSize(line.width() - icon_rect.width() - kIconTextSpacing,
-                                line.height()));
+    const QRect text_rect(
+        icon_rect.topRight() + QPoint(kIconTextSpacing, 0),
+        QSize(line.width() - icon_rect.width() - kIconTextSpacing,
+              line.height()));
 
     p.drawPixmap(icon_rect, item.icon_.pixmap(kIconSize));
     p.drawText(text_rect, item.text_);

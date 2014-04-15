@@ -27,8 +27,8 @@ class BusyIndicator : public QWidget {
   Q_PROPERTY(QString text READ text WRITE set_text)
 
  public:
-  explicit BusyIndicator(const QString& text, QWidget* parent = 0);
-  explicit BusyIndicator(QWidget* parent = 0);
+  explicit BusyIndicator(const QString& text, QWidget* parent = nullptr);
+  explicit BusyIndicator(QWidget* parent = nullptr);
   ~BusyIndicator();
 
   QString text() const;
@@ -46,4 +46,4 @@ class BusyIndicator : public QWidget {
   QLabel* label_;
 };
 
-#endif // BUSYINDICATOR_H
+#endif  // BUSYINDICATOR_H

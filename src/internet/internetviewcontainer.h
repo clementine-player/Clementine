@@ -34,7 +34,7 @@ class InternetViewContainer : public QWidget {
   Q_OBJECT
 
  public:
-  InternetViewContainer(QWidget* parent = 0);
+  InternetViewContainer(QWidget* parent = nullptr);
   ~InternetViewContainer();
 
   static const int kAnimationDuration;
@@ -72,4 +72,4 @@ class InternetViewContainer : public QWidget {
   QMap<QWidget*, HeaderData> headers_;
 };
 
-#endif // INTERNETVIEWCONTAINER_H
+#endif  // INTERNETVIEWCONTAINER_H

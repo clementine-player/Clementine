@@ -27,7 +27,7 @@
 
 class AsxIniParserTest : public ::testing::Test {
 protected:
-  AsxIniParserTest() : parser_(NULL) {}
+  AsxIniParserTest() : parser_(nullptr) {}
 
   AsxIniParser parser_;
 };

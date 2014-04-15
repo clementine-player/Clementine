@@ -9,6 +9,7 @@ include(cmake/Deb.cmake)
 include(cmake/Rpm.cmake)
 include(cmake/SpotifyVersion.cmake)
 include(cmake/OptionalSource.cmake)
+include(cmake/Format.cmake)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 if (CMAKE_CXX_COMPILER MATCHES ".*clang")
@@ -19,24 +20,6 @@ endif ()
 if (APPLE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++")
 endif ()
-
-set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
-check_cxx_source_compiles(
-    "#include <unordered_map>
-     int main() {
-       std::unordered_map<int, int> m;
-       return 0;
-     }
-    "
-    USE_STD_UNORDERED_MAP)
-check_cxx_source_compiles(
-    "int main() {
-       [](){}();
-     }
-    "
-    HAVE_LAMBDAS)
-unset(CMAKE_REQUIRED_FLAGS)
-
 
 if (UNIX AND NOT APPLE)
   set(LINUX 1)
@@ -79,6 +62,7 @@ pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
+pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(QCA qca2)
 pkg_check_modules(QJSON REQUIRED QJson)
@@ -123,7 +107,6 @@ if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
 endif()
 
 if (APPLE)
-  find_library(GROWL Growl)
   find_library(SPARKLE Sparkle)
 
   find_library(SPOTIFY libspotify)
@@ -203,11 +186,6 @@ optional_component(GOOGLE_DRIVE ON "Google Drive support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(UBUNTU_ONE ON "Ubuntu One file support"
-  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
-  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
-)
-
 optional_component(DROPBOX ON "Dropbox support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
@@ -222,6 +200,8 @@ optional_component(BOX ON "Box support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
+
+optional_component(VK ON "Vk.com support")
 
 optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
@@ -274,6 +254,10 @@ optional_component(SPARKLE ON "Sparkle integration"
   DEPENDS "Sparkle" SPARKLE
 )
 
+optional_component(LIBPULSE ON "Pulse audio integration"
+  DEPENDS "libpulse" LIBPULSE_FOUND
+)
+
 optional_component(VISUALISATIONS ON "Visualisations")
 
 if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_FOUND)
@@ -287,6 +271,12 @@ endif()
 if (HAVE_DBUS)
   find_package(Qt4 REQUIRED QtDbus)
 endif ()
+
+if (HAVE_VK)
+  add_subdirectory(3rdparty/vreen)
+  include_directories(${VREEN_INCLUDE_DIRS})
+  include_directories(${VREENOAUTH_INCLUDE_DIRS})
+endif(HAVE_VK)
 
 # We can include the Qt definitions now
 include(${QT_USE_FILE})
@@ -382,14 +372,10 @@ if(GMOCK_INCLUDE_DIRS)
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
 
-# Use system sha2 if it's available
-find_path(SHA2_INCLUDE_DIRS sha2.h)
-find_library(SHA2_LIBRARIES sha2)
-if(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
-  add_subdirectory(3rdparty/sha2)
-  set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
-  set(SHA2_LIBRARIES sha2)
-endif(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
+# Never use the system's sha2.
+add_subdirectory(3rdparty/sha2)
+set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
+set(SHA2_LIBRARIES sha2)
 
 # Use our 3rdparty chromaprint if a system one wasn't found
 if(NOT CHROMAPRINT_FOUND)

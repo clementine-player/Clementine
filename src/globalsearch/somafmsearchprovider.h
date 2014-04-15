@@ -23,17 +23,18 @@
 class SomaFMServiceBase;
 
 class SomaFMSearchProvider : public SimpleSearchProvider {
-public:
-  SomaFMSearchProvider(SomaFMServiceBase* service, Application* app, QObject* parent);
+ public:
+  SomaFMSearchProvider(SomaFMServiceBase* service, Application* app,
+                       QObject* parent);
 
   void LoadArtAsync(int id, const Result& result);
 
-protected:
+ protected:
   void RecreateItems();
 
-private:
+ private:
   SomaFMServiceBase* service_;
   QImage icon_;
 };
 
-#endif // SOMAFMSEARCHPROVIDER_H
+#endif  // SOMAFMSEARCHPROVIDER_H

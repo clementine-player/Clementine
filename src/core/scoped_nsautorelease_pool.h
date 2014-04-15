@@ -9,7 +9,7 @@
 
 #if defined(__OBJC__)
 @class NSAutoreleasePool;
-#else  // __OBJC__
+#else   // __OBJC__
 class NSAutoreleasePool;
 #endif  // __OBJC__
 
@@ -28,6 +28,7 @@ class ScopedNSAutoreleasePool {
   // Only use then when you're certain the items currently in the pool are
   // no longer needed.
   void Recycle();
+
  private:
   NSAutoreleasePool* autorelease_pool_;
 

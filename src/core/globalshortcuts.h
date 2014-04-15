@@ -32,8 +32,8 @@ class QSignalMapper;
 class GlobalShortcuts : public QWidget {
   Q_OBJECT
 
-public:
-  GlobalShortcuts(QWidget* parent = 0);
+ public:
+  GlobalShortcuts(QWidget* parent = nullptr);
 
   static const char* kSettingsGroup;
 
@@ -48,7 +48,7 @@ public:
   bool IsGsdAvailable() const;
   bool IsMacAccessibilityEnabled() const;
 
-public slots:
+ public slots:
   void ReloadSettings();
   void ShowMacAccessibilityDialog();
 
@@ -76,14 +76,16 @@ signals:
   void CycleRepeatMode();
   void ToggleScrobbling();
 
-private:
+ private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,
                    const QKeySequence& default_key = QKeySequence(0));
-  void AddRatingShortcut(const QString& id, const QString& name, QSignalMapper* mapper,
-                         int rating, const QKeySequence& default_key = QKeySequence(0));
-  Shortcut AddShortcut(const QString& id, const QString& name, const QKeySequence& default_key);
+  void AddRatingShortcut(const QString& id, const QString& name,
+                         QSignalMapper* mapper, int rating,
+                         const QKeySequence& default_key = QKeySequence(0));
+  Shortcut AddShortcut(const QString& id, const QString& name,
+                       const QKeySequence& default_key);
 
-private:
+ private:
   GlobalShortcutBackend* gnome_backend_;
   GlobalShortcutBackend* system_backend_;
 

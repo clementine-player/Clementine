@@ -20,32 +20,26 @@
 #include "globalsearch/globalsearch.h"
 
 LibraryViewContainer::LibraryViewContainer(QWidget* parent)
-  : QWidget(parent),
-    ui_(new Ui_LibraryViewContainer)
-{
+    : QWidget(parent), ui_(new Ui_LibraryViewContainer) {
   ui_->setupUi(this);
   view()->SetFilter(filter());
 
   connect(filter(), SIGNAL(UpPressed()), view(), SLOT(UpAndFocus()));
   connect(filter(), SIGNAL(DownPressed()), view(), SLOT(DownAndFocus()));
-  connect(filter(), SIGNAL(ReturnPressed()), view(), SLOT(FilterReturnPressed()));
-  connect(view(), SIGNAL(FocusOnFilterSignal(QKeyEvent*)), filter(), SLOT(FocusOnFilter(QKeyEvent*)));
+  connect(filter(), SIGNAL(ReturnPressed()), view(),
+          SLOT(FilterReturnPressed()));
+  connect(view(), SIGNAL(FocusOnFilterSignal(QKeyEvent*)), filter(),
+          SLOT(FocusOnFilter(QKeyEvent*)));
 
   ReloadSettings();
 }
 
-LibraryViewContainer::~LibraryViewContainer() {
-  delete ui_;
-}
+LibraryViewContainer::~LibraryViewContainer() { delete ui_; }
 
-LibraryView* LibraryViewContainer::view() const {
-  return ui_->view;
-}
+LibraryView* LibraryViewContainer::view() const { return ui_->view; }
 
 LibraryFilterWidget* LibraryViewContainer::filter() const {
   return ui_->filter;
 }
 
-void LibraryViewContainer::ReloadSettings() {
-  view()->ReloadSettings();
-}
+void LibraryViewContainer::ReloadSettings() { view()->ReloadSettings(); }

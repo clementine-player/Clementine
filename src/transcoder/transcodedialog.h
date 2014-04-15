@@ -31,7 +31,7 @@ class TranscodeDialog : public QDialog {
   Q_OBJECT
 
  public:
-  TranscodeDialog(QWidget* parent = 0);
+  TranscodeDialog(QWidget* parent = nullptr);
   ~TranscodeDialog();
 
   static const char* kSettingsGroup;
@@ -81,4 +81,4 @@ class TranscodeDialog : public QDialog {
   int finished_failed_;
 };
 
-#endif // TRANSCODEDIALOG_H
+#endif  // TRANSCODEDIALOG_H

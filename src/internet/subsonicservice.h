@@ -14,14 +14,13 @@ class QXmlStreamReader;
 class SubsonicUrlHandler;
 class SubsonicLibraryScanner;
 
-class SubsonicService : public InternetService
-{
+class SubsonicService : public InternetService {
   Q_OBJECT
   Q_ENUMS(LoginState)
   Q_ENUMS(ApiError)
 
  public:
-  SubsonicService(Application* app, InternetModel *parent);
+  SubsonicService(Application* app, InternetModel* parent);
   ~SubsonicService();
 
   enum LoginState {
@@ -53,15 +52,9 @@ class SubsonicService : public InternetService
     ApiError_NotFound = 70,
   };
 
-  enum Type {
-    Type_Artist = InternetModel::TypeCount,
-    Type_Album,
-    Type_Track,
-  };
+  enum Type { Type_Artist = InternetModel::TypeCount, Type_Album, Type_Track, };
 
-  enum Role {
-    Role_Id = InternetModel::RoleCount,
-  };
+  enum Role { Role_Id = InternetModel::RoleCount, };
 
   typedef QMap<QString, QString> RequestOptions;
 
@@ -74,11 +67,8 @@ class SubsonicService : public InternetService
   void ReloadSettings();
 
   void Login();
-  void Login(
-      const QString& server,
-      const QString& username,
-      const QString& password,
-      const bool& usesslv3);
+  void Login(const QString& server, const QString& username,
+             const QString& password, const bool& usesslv3);
 
   LoginState login_state() const { return login_state_; }
 
@@ -88,7 +78,8 @@ class SubsonicService : public InternetService
   QUrl BuildRequestUrl(const QString& view) const;
   // Scrubs the part of the path that we re-add in BuildRequestUrl().
   static QUrl ScrubUrl(const QUrl& url);
-  // Convenience function to reduce QNetworkRequest/QSslConfiguration boilerplate.
+  // Convenience function to reduce QNetworkRequest/QSslConfiguration
+  // boilerplate.
   QNetworkReply* Send(const QUrl& url);
 
   static const char* kServiceName;
@@ -101,7 +92,7 @@ class SubsonicService : public InternetService
 
   static const int kMaxRedirects;
 
- signals:
+signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
  private:
@@ -132,7 +123,7 @@ class SubsonicService : public InternetService
   bool usesslv3_;
 
   LoginState login_state_;
-  QString working_server_; // The actual server, possibly post-redirect
+  QString working_server_;  // The actual server, possibly post-redirect
   int redirect_count_;
 
  private slots:
@@ -149,7 +140,7 @@ class SubsonicLibraryScanner : public QObject {
   Q_OBJECT
 
  public:
-  SubsonicLibraryScanner(SubsonicService* service, QObject* parent = 0);
+  SubsonicLibraryScanner(SubsonicService* service, QObject* parent = nullptr);
   ~SubsonicLibraryScanner();
 
   void Scan();
@@ -158,7 +149,7 @@ class SubsonicLibraryScanner : public QObject {
   static const int kAlbumChunkSize;
   static const int kConcurrentRequests;
 
- signals:
+signals:
   void ScanFinished();
 
  private slots:
@@ -178,4 +169,4 @@ class SubsonicLibraryScanner : public QObject {
   SongList songs_;
 };
 
-#endif // SUBSONICSERVICE_H
+#endif  // SUBSONICSERVICE_H

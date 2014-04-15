@@ -27,7 +27,7 @@
 class AlbumCoverExporter;
 
 class CoverExportRunnable : public QObject, public QRunnable {
- Q_OBJECT
+  Q_OBJECT
 
  public:
   CoverExportRunnable(const AlbumCoverExport::DialogResult& dialog_result,
@@ -36,7 +36,7 @@ class CoverExportRunnable : public QObject, public QRunnable {
 
   void run();
 
- signals:
+signals:
   void CoverExported();
   void CoverSkipped();
 

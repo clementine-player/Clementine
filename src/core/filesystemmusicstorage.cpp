@@ -23,17 +23,14 @@
 #include <QUrl>
 
 FilesystemMusicStorage::FilesystemMusicStorage(const QString& root)
-  : root_(root)
-{
-}
+    : root_(root) {}
 
 bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
   const QFileInfo src = QFileInfo(job.source_);
-  const QFileInfo dest = QFileInfo(root_ + "/" + job.destination_ );
+  const QFileInfo dest = QFileInfo(root_ + "/" + job.destination_);
 
   // Don't do anything if the destination is the same as the source
-  if (src == dest)
-    return true;
+  if (src == dest) return true;
 
   // Create directories as required
   QDir dir;
@@ -43,8 +40,7 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
   }
 
   // Remove the destination file if it exists and we want to overwrite
-  if (job.overwrite_ && dest.exists())
-    QFile::remove(dest.absoluteFilePath());
+  if (job.overwrite_ && dest.exists()) QFile::remove(dest.absoluteFilePath());
 
   // Copy or move
   if (job.remove_original_)

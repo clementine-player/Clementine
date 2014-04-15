@@ -23,16 +23,12 @@
 // scoped_nsautorelease_pool.h instead.
 // We check for bad uses of scoped_nsobject and NSAutoreleasePool at compile
 // time with a template specialization (see below).
-template<typename NST>
+template <typename NST>
 class scoped_nsobject {
  public:
-  explicit scoped_nsobject(NST* object = nil)
-      : object_(object) {
-  }
+  explicit scoped_nsobject(NST* object = nil) : object_(object) {}
 
-  ~scoped_nsobject() {
-    [object_ release];
-  }
+  ~scoped_nsobject() { [object_ release]; }
 
   void reset(NST* object = nil) {
     // We intentionally do not check that object != object_ as the caller must
@@ -47,13 +43,9 @@ class scoped_nsobject {
   bool operator==(NST* that) const { return object_ == that; }
   bool operator!=(NST* that) const { return object_ != that; }
 
-  operator NST*() const {
-    return object_;
-  }
+  operator NST*() const { return object_; }
 
-  NST* get() const {
-    return object_;
-  }
+  NST* get() const { return object_; }
 
   void swap(scoped_nsobject& that) {
     NST* temp = that.object_;
@@ -92,18 +84,13 @@ bool operator!=(C* p1, const scoped_nsobject<C>& p2) {
   return p1 != p2.get();
 }
 
-
 // Specialization to make scoped_nsobject<id> work.
-template<>
+template <>
 class scoped_nsobject<id> {
  public:
-  explicit scoped_nsobject(id object = nil)
-      : object_(object) {
-  }
+  explicit scoped_nsobject(id object = nil) : object_(object) {}
 
-  ~scoped_nsobject() {
-    [object_ release];
-  }
+  ~scoped_nsobject() { [object_ release]; }
 
   void reset(id object = nil) {
     // We intentionally do not check that object != object_ as the caller must
@@ -118,13 +105,9 @@ class scoped_nsobject<id> {
   bool operator==(id that) const { return object_ == that; }
   bool operator!=(id that) const { return object_ != that; }
 
-  operator id() const {
-    return object_;
-  }
+  operator id() const { return object_; }
 
-  id get() const {
-    return object_;
-  }
+  id get() const { return object_; }
 
   void swap(scoped_nsobject& that) {
     id temp = that.object_;
@@ -150,7 +133,7 @@ class scoped_nsobject<id> {
 // Do not use scoped_nsobject for NSAutoreleasePools, use
 // ScopedNSAutoreleasePool instead. This is a compile time check. See details
 // at top of header.
-template<>
+template <>
 class scoped_nsobject<NSAutoreleasePool> {
  private:
   explicit scoped_nsobject(NSAutoreleasePool* object = nil);

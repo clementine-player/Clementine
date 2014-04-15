@@ -11,7 +11,7 @@ class QTcpSocket;
 class LocalRedirectServer : public QObject {
   Q_OBJECT
  public:
-  LocalRedirectServer(QObject* parent = 0);
+  LocalRedirectServer(QObject* parent = nullptr);
 
   // Causes the server to listen for _one_ request.
   void Listen();
@@ -22,8 +22,7 @@ class LocalRedirectServer : public QObject {
   // Returns the URL requested by the OAuth redirect.
   const QUrl& request_url() const { return request_url_; }
 
-
- signals:
+signals:
   void Finished();
 
  private slots:

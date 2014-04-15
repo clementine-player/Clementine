@@ -23,10 +23,11 @@
 class StickySlider : public QSlider {
   Q_OBJECT
   Q_PROPERTY(int sticky_center READ sticky_center WRITE set_sticky_center);
-  Q_PROPERTY(int sticky_threshold READ sticky_threshold WRITE set_sticky_threshold);
+  Q_PROPERTY(int sticky_threshold READ sticky_threshold WRITE
+                 set_sticky_threshold);
 
  public:
-  StickySlider(QWidget* parent = 0);
+  StickySlider(QWidget* parent = nullptr);
 
   int sticky_center() const { return sticky_center_; }
   int sticky_threshold() const { return sticky_threshold_; }
@@ -41,4 +42,4 @@ class StickySlider : public QSlider {
   int sticky_threshold_;
 };
 
-#endif // STICKYSLIDER_H
+#endif  // STICKYSLIDER_H

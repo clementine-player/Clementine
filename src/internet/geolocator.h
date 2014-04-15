@@ -25,7 +25,7 @@
 class Geolocator : public QObject {
   Q_OBJECT
  public:
-  explicit Geolocator(QObject* parent = 0);
+  explicit Geolocator(QObject* parent = nullptr);
 
   void Geolocate();
 
@@ -47,7 +47,7 @@ class Geolocator : public QObject {
     int lng_e6_;
   };
 
- signals:
+signals:
   void Finished(Geolocator::LatLng latlng);
 
  private slots:

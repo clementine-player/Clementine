@@ -18,12 +18,12 @@
 #ifndef DEVICEKITLISTER_H
 #define DEVICEKITLISTER_H
 
-#include "devicelister.h"
+#include <memory>
 
 #include <QMutex>
 #include <QStringList>
 
-#include <boost/scoped_ptr.hpp>
+#include "devicelister.h"
 
 class OrgFreedesktopUDisksInterface;
 
@@ -32,7 +32,7 @@ class QDBusObjectPath;
 class DeviceKitLister : public DeviceLister {
   Q_OBJECT
 
-public:
+ public:
   DeviceKitLister();
   ~DeviceKitLister();
 
@@ -44,23 +44,23 @@ public:
   quint64 DeviceFreeSpace(const QString& id);
   QVariantMap DeviceHardwareInfo(const QString& id);
 
-  QString MakeFriendlyName(const QString &id);
-  QList<QUrl> MakeDeviceUrls(const QString &id);
+  QString MakeFriendlyName(const QString& id);
+  QList<QUrl> MakeDeviceUrls(const QString& id);
 
-  void UnmountDevice(const QString &id);
+  void UnmountDevice(const QString& id);
 
-public slots:
+ public slots:
   void UpdateDeviceFreeSpace(const QString& id);
 
-protected:
+ protected:
   void Init();
 
-private slots:
+ private slots:
   void DBusDeviceAdded(const QDBusObjectPath& path);
   void DBusDeviceRemoved(const QDBusObjectPath& path);
   void DBusDeviceChanged(const QDBusObjectPath& path);
 
-private:
+ private:
   struct DeviceData {
     DeviceData() : suitable(false), device_size(0), free_space(0) {}
 
@@ -87,20 +87,20 @@ private:
   template <typename T>
   T LockAndGetDeviceInfo(const QString& id, T DeviceData::*field);
 
-private:
-  boost::scoped_ptr<OrgFreedesktopUDisksInterface> interface_;
+ private:
+  std::unique_ptr<OrgFreedesktopUDisksInterface> interface_;
 
   QMutex mutex_;
   QMap<QString, DeviceData> device_data_;
 };
 
 template <typename T>
-T DeviceKitLister::LockAndGetDeviceInfo(const QString& id, T DeviceData::*field) {
+T DeviceKitLister::LockAndGetDeviceInfo(const QString& id,
+                                        T DeviceData::*field) {
   QMutexLocker l(&mutex_);
-  if (!device_data_.contains(id))
-    return T();
+  if (!device_data_.contains(id)) return T();
 
   return device_data_[id].*field;
 }
 
-#endif // DEVICEKITLISTER_H
+#endif  // DEVICEKITLISTER_H

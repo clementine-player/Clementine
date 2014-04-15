@@ -20,17 +20,17 @@
 
 #include "playlist/playlistitem.h"
 
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 class LibraryBackend;
 
 namespace smart_playlists {
 
-class Generator : public QObject, public boost::enable_shared_from_this<Generator> {
+class Generator : public QObject,
+                  public std::enable_shared_from_this<Generator> {
   Q_OBJECT
 
-public:
+ public:
   Generator();
 
   static const int kDefaultLimit;
@@ -38,7 +38,7 @@ public:
   static const int kDefaultDynamicFuture;
 
   // Creates a new Generator of the given type
-  static boost::shared_ptr<Generator> Create(const QString& type);
+  static std::shared_ptr<Generator> Create(const QString& type);
 
   // Should be called before Load on a new Generator
   void set_library(LibraryBackend* backend) { backend_ = backend; }
@@ -61,27 +61,30 @@ public:
 
   // If the generator can be used as a dynamic playlist then GenerateMore
   // should return the next tracks in the sequence.  The subclass should
-  // remember the last GetDynamicHistory() + GetDynamicFuture() tracks and ensure that
+  // remember the last GetDynamicHistory() + GetDynamicFuture() tracks and
+  // ensure that
   // the tracks returned from this method are not in that set.
   virtual bool is_dynamic() const { return false; }
   virtual void set_dynamic(bool dynamic) {}
   // Called from non-UI thread.
-  virtual PlaylistItemList GenerateMore(int count) { return PlaylistItemList(); }
+  virtual PlaylistItemList GenerateMore(int count) {
+    return PlaylistItemList();
+  }
 
-  virtual int GetDynamicHistory () { return kDefaultDynamicHistory; }
-  virtual int GetDynamicFuture () { return kDefaultDynamicFuture; }
+  virtual int GetDynamicHistory() { return kDefaultDynamicHistory; }
+  virtual int GetDynamicFuture() { return kDefaultDynamicFuture; }
 signals:
   void Error(const QString& message);
 
-protected:
+ protected:
   LibraryBackend* backend_;
 
-private:
+ private:
   QString name_;
 };
 
-} // namespace
+}  // namespace
 
 #include "generator_fwd.h"
 
-#endif // PLAYLISTGENERATOR_H
+#endif  // PLAYLISTGENERATOR_H

@@ -200,19 +200,6 @@
                      </property>
                     </widget>
                    </item>
-                   <item>
-                    <widget class="QToolButton" name="ban_button">
-                     <property name="iconSize">
-                      <size>
-                       <width>22</width>
-                       <height>22</height>
-                      </size>
-                     </property>
-                     <property name="autoRaise">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
                   </layout>
                  </widget>
                 </item>
@@ -435,7 +422,6 @@
     <addaction name="action_mute"/>
     <addaction name="separator"/>
     <addaction name="action_love"/>
-    <addaction name="action_ban"/>
     <addaction name="separator"/>
     <addaction name="action_quit"/>
    </widget>
@@ -565,21 +551,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+L</string>
-   </property>
-  </action>
-  <action name="action_ban">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/last.fm/ban.png</normaloff>:/last.fm/ban.png</iconset>
-   </property>
-   <property name="text">
-    <string>Ban</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+B</string>
    </property>
   </action>
   <action name="action_clear_playlist">
