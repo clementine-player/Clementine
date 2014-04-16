@@ -119,13 +119,7 @@ void SoundCloudService::EnsureItemsCreated() {
                      InternetModel::Role_PlayBehaviour);
     root_->appendRow(search_);
   }
-  if (!user_tracks_ && !user_activities_ && IsLoggedIn()) {
-    user_tracks_ =
-        new QStandardItem(tr("Tracks"));
-    user_tracks_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                     InternetModel::Role_PlayBehaviour);
-    root_->appendRow(user_tracks_);
-
+  if (!user_tracks_ && !user_activities_ &&!user_playlists_ && IsLoggedIn()) {
     user_activities_ =
         new QStandardItem(tr("Activities stream"));
     user_activities_->setData(InternetModel::PlayBehaviour_MultipleItems,
@@ -135,6 +129,13 @@ void SoundCloudService::EnsureItemsCreated() {
     user_playlists_ =
         new QStandardItem(tr("Playlists"));
     root_->appendRow(user_playlists_);
+
+    user_tracks_ =
+        new QStandardItem(tr("Tracks"));
+    user_tracks_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                     InternetModel::Role_PlayBehaviour);
+    root_->appendRow(user_tracks_);
+
     RetrieveUserData(); // at least, try to (this will do nothing if user isn't logged)
   }
 }
@@ -212,8 +213,8 @@ void SoundCloudService::Logout() {
 
 void SoundCloudService::RetrieveUserData() {
   LoadAccessTokenIfEmpty();
-  RetrieveUserTracks();
   RetrieveUserActivities();
+  RetrieveUserTracks();
   RetrieveUserPlaylists();
 }
 
