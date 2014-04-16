@@ -306,7 +306,7 @@ void RipCD::ThreadedTranscoding() {
 }
 
 void RipCD::ClickedRipButton() {
-  if ((cdio_) && cdio_get_media_changed(cdio_)) {
+  if (cdio_ && cdio_get_media_changed(cdio_)) {
     QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"),
                           tr("Media has changed. Reloading"));
     cdio_fail.exec();
@@ -409,7 +409,7 @@ void RipCD::Cancel() {
 }
 
 bool RipCD::CheckCDIOIsValid() {
-  if ((cdio_)) {
+  if (cdio_) {
     cdio_destroy(cdio_);
   }
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
