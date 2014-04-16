@@ -63,6 +63,7 @@ class SoundCloudService : public InternetService {
   void ConnectFinished(OAuthenticator* oauth);
   void UserTracksRetrieved(QNetworkReply* reply);
   void UserActivitiesRetrieved(QNetworkReply* reply);
+  void PlaylistRetrieved(QNetworkReply* reply, int request_id);
   void Search(const QString& text, bool now = false);
   void DoSearch();
   void SearchFinished(QNetworkReply* reply, int task);
@@ -71,15 +72,28 @@ class SoundCloudService : public InternetService {
   void Homepage();
 
  private:
+  struct PlaylistInfo {
+    PlaylistInfo() {}
+    PlaylistInfo(int id, QStandardItem* item)
+        : id_(id), item_(item) {}
+
+    int id_;
+    QStandardItem* item_;
+  };
+
   // Try to load "access_token" from preferences if the current access_token's
   // value is empty
   void LoadAccessTokenIfEmpty();
   void RetrieveUserData();
   void RetrieveUserTracks();
   void RetrieveUserActivities();
+  void RetrievePlaylist(int playlist_id, QStandardItem* playlist_item);
   void ClearSearchResults();
   void EnsureItemsCreated();
   void EnsureMenuCreated();
+
+  QStandardItem* CreatePlaylistItem(const QString& playlist_name);
+
   QNetworkReply* CreateRequest(const QString& ressource_name,
                                const QList<QPair<QString, QString> >& params);
   // Convenient function for extracting result from reply
@@ -100,7 +114,11 @@ class SoundCloudService : public InternetService {
   SearchBoxWidget* search_box_;
   QTimer* search_delay_;
   QString pending_search_;
+  // Request IDs
   int next_pending_search_id_;
+  int next_retrieve_playlist_id_;
+
+  QMap<int, PlaylistInfo> pending_playlists_requests_;
 
   QByteArray api_key_;
 

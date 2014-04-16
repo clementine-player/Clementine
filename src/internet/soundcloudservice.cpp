@@ -193,6 +193,7 @@ void SoundCloudService::Logout() {
 
   access_token_.clear();
   s.remove("access_token");
+  pending_playlists_requests_.clear();
   if (user_activities_)
     root_->removeRow(user_activities_->row());
   if (user_tracks_)
@@ -328,6 +329,14 @@ void SoundCloudService::ShowContextMenu(const QPoint& global_pos) {
   context_menu_->popup(global_pos);
 }
 
+QStandardItem* SoundCloudService::CreatePlaylistItem(const QString& playlist_name) {
+  QStandardItem* item = new QStandardItem(playlist_name);
+  item->setData(true, InternetModel::Role_CanLazyLoad);
+  item->setData(InternetModel::PlayBehaviour_MultipleItems,
+                InternetModel::Role_PlayBehaviour);
+  return item;
+}
+
 QNetworkReply* SoundCloudService::CreateRequest(const QString& ressource_name,
                                                 const QList<Param>& params) {
 
@@ -369,6 +378,30 @@ QVariant SoundCloudService::ExtractResult(QNetworkReply* reply) {
   return result;
 }
 
+void SoundCloudService::RetrievePlaylist(int playlist_id, QStandardItem* playlist_item) {
+  const int request_id = next_retrieve_playlist_id_++;
+  pending_playlists_requests_.insert(
+      request_id,
+      PlaylistInfo(playlist_id, playlist_item));
+  QList<Param> parameters;
+  parameters << Param("oauth_token", access_token_);
+  QNetworkReply* reply = CreateRequest("playlists/" + QString::number(playlist_id), parameters);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(PlaylistRetrieved(QNetworkReply*, int)), reply, request_id);
+}
+
+void SoundCloudService::PlaylistRetrieved(QNetworkReply* reply, int request_id) {
+  if (!pending_playlists_requests_.contains(request_id))
+    return;
+  PlaylistInfo playlist_info = pending_playlists_requests_.take(request_id);
+  QVariant res = ExtractResult(reply);
+  SongList songs = ExtractSongs(res.toMap()["tracks"]);
+  for (const Song& song : songs) {
+    QStandardItem* child = CreateSongItem(song);
+    playlist_info.item_->appendRow(child);
+  }
+}
+
 QList<QStandardItem*> SoundCloudService::ExtractActivities(const QVariant& result) {
   QList<QStandardItem*> activities;
   QVariantList q_variant_list = result.toMap()["collection"].toList();
@@ -381,7 +414,11 @@ QList<QStandardItem*> SoundCloudService::ExtractActivities(const QVariant& resul
         activities << CreateSongItem(song);
       }
     } else if (type == "playlist") {
-      // TODO
+      QMap<QString, QVariant> origin_map = activity["origin"].toMap();
+      QStandardItem* playlist_item =
+          CreatePlaylistItem(origin_map["title"].toString());
+      activities << playlist_item;
+      RetrievePlaylist(origin_map["id"].toInt(), playlist_item);
     }
   }
   return activities;
