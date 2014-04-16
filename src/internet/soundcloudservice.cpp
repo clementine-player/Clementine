@@ -67,6 +67,7 @@ SoundCloudService::SoundCloudService(Application* app, InternetModel* parent)
       root_(nullptr),
       search_(nullptr),
       user_tracks_(nullptr),
+      user_playlists_(nullptr),
       user_activities_(nullptr),
       network_(new NetworkAccessManager(this)),
       context_menu_(nullptr),
@@ -130,6 +131,10 @@ void SoundCloudService::EnsureItemsCreated() {
     user_activities_->setData(InternetModel::PlayBehaviour_MultipleItems,
                      InternetModel::Role_PlayBehaviour);
     root_->appendRow(user_activities_);
+
+    user_playlists_ =
+        new QStandardItem(tr("Playlists"));
+    root_->appendRow(user_playlists_);
     RetrieveUserData(); // at least, try to (this will do nothing if user isn't logged)
   }
 }
@@ -198,14 +203,18 @@ void SoundCloudService::Logout() {
     root_->removeRow(user_activities_->row());
   if (user_tracks_)
     root_->removeRow(user_tracks_->row());
+  if (user_playlists_)
+    root_->removeRow(user_playlists_->row());
   user_activities_ = nullptr;
   user_tracks_ = nullptr;
+  user_playlists_ = nullptr;
 }
 
 void SoundCloudService::RetrieveUserData() {
   LoadAccessTokenIfEmpty();
   RetrieveUserTracks();
   RetrieveUserActivities();
+  RetrieveUserPlaylists();
 }
 
 void SoundCloudService::RetrieveUserTracks() {
@@ -242,6 +251,31 @@ void SoundCloudService::UserActivitiesRetrieved(QNetworkReply* reply) {
   // Fill results list
   for (QStandardItem* activity : activities) {
     user_activities_->appendRow(activity);
+  }
+}
+
+void SoundCloudService::RetrieveUserPlaylists() {
+  QList<Param> parameters;
+  parameters << Param("oauth_token", access_token_);
+  QNetworkReply* reply = CreateRequest("me/playlists", parameters);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(UserPlaylistsRetrieved(QNetworkReply*)), reply);
+
+}
+
+void SoundCloudService::UserPlaylistsRetrieved(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  QList<QVariant> playlists = ExtractResult(reply).toList();
+  for (const QVariant& playlist : playlists) {
+    QMap<QString, QVariant> playlist_map = playlist.toMap();
+
+    QStandardItem* playlist_item = CreatePlaylistItem(playlist_map["title"].toString());
+    SongList songs = ExtractSongs(playlist_map["tracks"]);
+    for (const Song& song : songs) {
+      playlist_item->appendRow(CreateSongItem(song));
+    }
+    user_playlists_->appendRow(playlist_item);
   }
 }
 
