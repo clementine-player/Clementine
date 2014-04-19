@@ -128,7 +128,7 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value,
 }
 
 void LibraryQuery::AddCompilationRequirement(bool compilation) {
-  where_clauses_ << QString("effective_compilation = %1")
+  where_clauses_ << QString("+effective_compilation = %1")
                         .arg(compilation ? 1 : 0);
 }
 
