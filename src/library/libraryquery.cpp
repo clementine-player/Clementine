@@ -113,7 +113,8 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value,
 }
 
 void LibraryQuery::AddCompilationRequirement(bool compilation) {
-  where_clauses_ << QString("effective_compilation = %1").arg(compilation ? 1 : 0);
+  where_clauses_ << QString("+effective_compilation = %1")
+                        .arg(compilation ? 1 : 0);
 }
 
 QSqlQuery LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
