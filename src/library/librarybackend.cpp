@@ -87,6 +87,11 @@ void LibraryBackend::UpdateSongRatingAsync(int id, float rating) {
                              Q_ARG(int, id), Q_ARG(float, rating));
 }
 
+void LibraryBackend::UpdateSongsRatingAsync(const QList<int>& ids, float rating) {
+  metaObject()->invokeMethod(this, "UpdateSongsRating", Qt::QueuedConnection,
+                             Q_ARG(const QList<int>&, ids), Q_ARG(float, rating));
+}
+
 void LibraryBackend::LoadDirectories() {
   DirectoryList dirs = GetAllDirectories();
 
@@ -1105,20 +1110,31 @@ void LibraryBackend::ResetStatistics(int id) {
 void LibraryBackend::UpdateSongRating(int id, float rating) {
   if (id == -1) return;
 
+  QList<int> id_list;
+  id_list << id;
+  UpdateSongsRating(id_list, rating);
+}
+
+void LibraryBackend::UpdateSongsRating(const QList<int> &id_list, float rating) {
+  if (id_list.isEmpty()) return;
+
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
+  QStringList id_str_list;
+  for (int i : id_list) {
+    id_str_list << QString::number(i);
+  }
+  QString ids = id_str_list.join(",");
   QSqlQuery q(QString(
-                  "UPDATE %1 SET rating = :rating"
-                  " WHERE ROWID = :id").arg(songs_table_),
-              db);
+                 "UPDATE %1 SET rating = :rating"
+                 " WHERE ROWID IN (%2)").arg(songs_table_, ids),
+               db);
   q.bindValue(":rating", rating);
-  q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
-
-  Song new_song = GetSongById(id, db);
-  emit SongsRatingChanged(SongList() << new_song);
+  SongList new_song_list = GetSongsById(id_str_list, db);
+  emit SongsRatingChanged(new_song_list);
 }
 
 void LibraryBackend::DeleteAll() {

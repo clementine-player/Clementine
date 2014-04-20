@@ -786,12 +786,15 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
 
     if (selectedIndexes().contains(index)) {
       // Update all the selected items
+      QModelIndexList src_index_list;
       for (const QModelIndex& index : selectedIndexes()) {
         if (index.data(Playlist::Role_CanSetRating).toBool()) {
-          playlist_->RateSong(playlist_->proxy()->mapToSource(index),
-                              new_rating);
+          QModelIndex src_index = playlist_->proxy()->mapToSource(index);
+          src_index_list << src_index;
+          //playlist_->RateSong(src_index, new_rating);
         }
       }
+      playlist_->RateSongs(src_index_list, new_rating);
     } else {
       // Update only this item
       playlist_->RateSong(playlist_->proxy()->mapToSource(index), new_rating);
