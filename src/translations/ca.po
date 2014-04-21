@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-14 07:10+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-04-17 11:02+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -405,7 +405,7 @@ msgstr "Acció"
 msgid "Active/deactive Wiiremote"
 msgstr "Habilita/inhabilita el Wiiremote"
 
-#: internet/soundcloudservice.cpp:129
+#: internet/soundcloudservice.cpp:124
 msgid "Activities stream"
 msgstr "Llista d’activitats"
 
@@ -3437,7 +3437,7 @@ msgstr "Opacitat"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Obre %1 en un navegador"
@@ -3651,7 +3651,8 @@ msgstr "Opcions de la llista de reproducció"
 msgid "Playlist type"
 msgstr "Tipus de llista de reproducció"
 
-#: internet/groovesharkservice.cpp:649 ui/mainwindow.cpp:235
+#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
+#: ui/mainwindow.cpp:235
 msgid "Playlists"
 msgstr "Llistes rep."
 
@@ -4237,7 +4238,7 @@ msgstr "Mode de cerca"
 msgid "Search options"
 msgstr "Opcions de cerca"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:113
+#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
 #: internet/spotifyservice.cpp:357
 msgid "Search results"
 msgstr "Resultats de la cerca"
@@ -4602,7 +4603,7 @@ msgstr "Ordenació"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4652,7 +4653,7 @@ msgstr "Inicia la llista de reproducció que s'està reproduint"
 msgid "Start transcoding"
 msgstr "Inicia la conversió"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:115
+#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
 #: internet/spotifyservice.cpp:359
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5016,7 +5017,7 @@ msgstr "Total de sol·licituds de xarxa fetes"
 msgid "Track"
 msgstr "Pista"
 
-#: internet/soundcloudservice.cpp:123
+#: internet/soundcloudservice.cpp:134
 msgid "Tracks"
 msgstr "Pistes"
 

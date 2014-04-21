@@ -7,12 +7,13 @@
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2012-2014
 # Jaergenoth <jstuomisto@gmail.com>, 2013-2014
 # Jaergenoth <jstuomisto@gmail.com>, 2013
+# Larso <larso@gmx.com>, 2014
 # Moonwrist <moonwrist@moonwrist.org>, 2011, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-14 07:13+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"PO-Revision-Date: 2014-04-17 09:15+0000\n"
+"Last-Translator: Larso <larso@gmx.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -180,11 +181,11 @@ msgstr "&Oma"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "&Extras"
-msgstr "Extrat"
+msgstr "&Extrat"
 
 #: ../bin/src/ui_mainwindow.h:716
 msgid "&Help"
-msgstr "Ohje"
+msgstr "O&hje"
 
 #: playlist/playlistheader.cpp:73
 #, qt-format
@@ -201,7 +202,7 @@ msgstr "&Vasemmalle"
 
 #: ../bin/src/ui_mainwindow.h:714
 msgid "&Music"
-msgstr "Musiikki"
+msgstr "&Musiikki"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:186
 msgid "&None"
@@ -209,7 +210,7 @@ msgstr "&Ei mitään"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Playlist"
-msgstr "Soittolista"
+msgstr "&Soittolista"
 
 #: ../bin/src/ui_mainwindow.h:644
 msgid "&Quit"
@@ -233,7 +234,7 @@ msgstr "&Sovita sarakkeet ikkunan leveyteen"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Tools"
-msgstr "Työkalut"
+msgstr "&Työkalut"
 
 #: ui/edittagdialog.cpp:49
 msgid "(different across multiple songs)"
@@ -404,7 +405,7 @@ msgstr "Toiminto"
 msgid "Active/deactive Wiiremote"
 msgstr "Ota käyttöön / poista käytöstä Wiiremote"
 
-#: internet/soundcloudservice.cpp:129
+#: internet/soundcloudservice.cpp:124
 msgid "Activities stream"
 msgstr ""
 
@@ -1284,7 +1285,7 @@ msgstr "Magnatune-asetukset..."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "Configure Shortcuts"
-msgstr "Pikanäppäinten asetukset..."
+msgstr "Pikanäppäinten asetukset"
 
 #: internet/spotifyservice.cpp:545 internet/spotifyservice.cpp:556
 msgid "Configure Spotify..."
@@ -3436,7 +3437,7 @@ msgstr "Läpinäkyvyys"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Avaa %1 selaimessa"
@@ -3650,7 +3651,8 @@ msgstr "Soittolistan valinnat"
 msgid "Playlist type"
 msgstr "Soittolistan tyyppi"
 
-#: internet/groovesharkservice.cpp:649 ui/mainwindow.cpp:235
+#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
+#: ui/mainwindow.cpp:235
 msgid "Playlists"
 msgstr "Soittolistat"
 
@@ -4236,7 +4238,7 @@ msgstr "Hakutapa"
 msgid "Search options"
 msgstr "Haun asetukset"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:113
+#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
 #: internet/spotifyservice.cpp:357
 msgid "Search results"
 msgstr "Hakutulokset"
@@ -4651,7 +4653,7 @@ msgstr ""
 msgid "Start transcoding"
 msgstr "Aloita muunnos"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:115
+#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
 #: internet/spotifyservice.cpp:359
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5015,7 +5017,7 @@ msgstr "Yhteensä verkko pyyntöjä tehty"
 msgid "Track"
 msgstr "Kappale"
 
-#: internet/soundcloudservice.cpp:123
+#: internet/soundcloudservice.cpp:134
 msgid "Tracks"
 msgstr "Kappaleet"
 

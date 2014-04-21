@@ -37,8 +37,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-14 07:10+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-04-18 17:35+0000\n"
+"Last-Translator: to_ba\n"
 "Language-Team: German (http://www.transifex.com/projects/p/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -430,7 +430,7 @@ msgstr "Aktion"
 msgid "Active/deactive Wiiremote"
 msgstr "Wii-Fernbedienung aktivieren/deaktivieren"
 
-#: internet/soundcloudservice.cpp:129
+#: internet/soundcloudservice.cpp:124
 msgid "Activities stream"
 msgstr "Aktivitätenstrom"
 
@@ -1423,7 +1423,7 @@ msgstr "GStreamer-Element »%1« konnte nicht erstellt werden. Stellen Sie siche
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
-msgstr ""
+msgstr "Wiedergabeliste konnte nicht erstellt werden"
 
 #: transcoder/transcoder.cpp:429
 #, qt-format
@@ -3462,7 +3462,7 @@ msgstr "Deckkraft"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "%1 im Browser öffnen"
@@ -3676,7 +3676,8 @@ msgstr "Wiedergabeliste einrichten"
 msgid "Playlist type"
 msgstr "Art der Wiedergabeliste"
 
-#: internet/groovesharkservice.cpp:649 ui/mainwindow.cpp:235
+#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
+#: ui/mainwindow.cpp:235
 msgid "Playlists"
 msgstr "Wiedergabelisten"
 
@@ -4262,7 +4263,7 @@ msgstr "Suchmodus"
 msgid "Search options"
 msgstr "Suchoptionen"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:113
+#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
 #: internet/spotifyservice.cpp:357
 msgid "Search results"
 msgstr "Suchergebnisse"
@@ -4627,7 +4628,7 @@ msgstr "Sortierung"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4677,7 +4678,7 @@ msgstr "Spiele das aktuelle Stück in der Wiedergabeliste ab"
 msgid "Start transcoding"
 msgstr "Konvertieren"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:115
+#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
 #: internet/spotifyservice.cpp:359
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5041,7 +5042,7 @@ msgstr "Insgesamt gestellte Netzwerkanfragen"
 msgid "Track"
 msgstr "Stück"
 
-#: internet/soundcloudservice.cpp:123
+#: internet/soundcloudservice.cpp:134
 msgid "Tracks"
 msgstr "Stücke"
 

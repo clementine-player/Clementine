@@ -31,7 +31,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-14 07:13+0000\n"
+"PO-Revision-Date: 2014-04-19 10:54+0000\n"
 "Last-Translator: adem4ik\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -399,11 +399,11 @@ msgstr "О «%1»"
 
 #: ../bin/src/ui_mainwindow.h:663
 msgid "About Clementine..."
-msgstr "О программе Clementine..."
+msgstr "О Clementine"
 
 #: ../bin/src/ui_mainwindow.h:698
 msgid "About Qt..."
-msgstr "Информация о Qt..."
+msgstr "Информация о Qt"
 
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -424,7 +424,7 @@ msgstr "Действие"
 msgid "Active/deactive Wiiremote"
 msgstr "Активировать/деактивировать Wiiremote"
 
-#: internet/soundcloudservice.cpp:129
+#: internet/soundcloudservice.cpp:124
 msgid "Activities stream"
 msgstr "Лента активности"
 
@@ -668,7 +668,7 @@ msgstr "Альбом"
 
 #: ../bin/src/ui_playbacksettingspage.h:328
 msgid "Album (ideal loudness for all tracks)"
-msgstr "Альбом (идеальная громкость всех композиций)"
+msgstr "Альбом (идеальная громкость всех дорожек)"
 
 #: playlist/playlist.cpp:1319 ui/organisedialog.cpp:62
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
@@ -780,7 +780,7 @@ msgstr "А также:"
 
 #: moodbar/moodbarrenderer.cpp:169
 msgid "Angry"
-msgstr "Сердитое"
+msgstr "Сердитый"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
@@ -1782,7 +1782,7 @@ msgstr "Показывать экранное уведомление"
 
 #: ../bin/src/ui_mainwindow.h:701
 msgid "Do a full library rescan"
-msgstr "Полностью пересканировать фонотеку"
+msgstr "Пересканировать фонотеку"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
@@ -2197,7 +2197,7 @@ msgstr "FLAC"
 
 #: ../bin/src/ui_playbacksettingspage.h:319
 msgid "Fade out on pause / fade in on resume"
-msgstr "Затихание громкости при паузе / Нарастание громкости при продолжении воспроизведения"
+msgstr "Затухание при паузе / нарастание при продолжении воспроизведения"
 
 #: ../bin/src/ui_playbacksettingspage.h:313
 msgid "Fade out when stopping a track"
@@ -2205,7 +2205,7 @@ msgstr "Приглушать звук при остановке воспроиз
 
 #: ../bin/src/ui_playbacksettingspage.h:312
 msgid "Fading"
-msgstr "Затухание"
+msgstr "Затухание звука"
 
 #: ../bin/src/ui_playbacksettingspage.h:317
 #: ../bin/src/ui_playbacksettingspage.h:320
@@ -2237,7 +2237,7 @@ msgstr "Ошибка разбора XML в данной RSS подписке"
 #: ../bin/src/ui_transcoderoptionsflac.h:82
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
-msgstr "Быстро"
+msgstr "Быстрое"
 
 #: internet/groovesharkservice.cpp:639
 msgid "Favorites"
@@ -2399,7 +2399,7 @@ msgstr "Фреймов на буфер"
 
 #: moodbar/moodbarrenderer.cpp:171
 msgid "Frozen"
-msgstr "Сдержанное"
+msgstr "Сдержанный"
 
 #: ui/equalizer.cpp:121
 msgid "Full Bass"
@@ -2550,7 +2550,7 @@ msgstr "HTTP-прокси"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Happy"
-msgstr "Счастливое"
+msgstr "Счастливый"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2562,7 +2562,7 @@ msgstr "Информация об оборудовании доступна то
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:202
 msgid "High"
-msgstr "Высокий"
+msgstr "Высокое"
 
 #: analyzers/analyzercontainer.cpp:63
 #: visualisations/visualisationcontainer.cpp:111
@@ -2775,7 +2775,7 @@ msgstr "База данных Jamendo"
 
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Jump to the currently playing track"
-msgstr "Перейти к текущей композии"
+msgstr "Перейти к текущему треку"
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:69
 #, qt-format
@@ -3340,7 +3340,7 @@ msgstr "Ни одна из выбранных песен не будет ско�
 
 #: moodbar/moodbarrenderer.cpp:167
 msgid "Normal"
-msgstr "Нормальное"
+msgstr "Нормальный"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -3456,7 +3456,7 @@ msgstr "Прозрачность"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Открыть «%1» в браузере"
@@ -3670,7 +3670,8 @@ msgstr "Настройки плейлиста"
 msgid "Playlist type"
 msgstr "Тип плейлиста"
 
-#: internet/groovesharkservice.cpp:649 ui/mainwindow.cpp:235
+#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
+#: ui/mainwindow.cpp:235
 msgid "Playlists"
 msgstr "Плейлисты"
 
@@ -3840,7 +3841,7 @@ msgstr "Добавить в очередь композицию"
 
 #: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Radio (equal loudness for all tracks)"
-msgstr "Радио (одинаковая громкость для всех композиций)"
+msgstr "Радио (одинаковая громкость для всех дорожек)"
 
 #: internet/groovesharkservice.cpp:608
 msgid "Radios"
@@ -4030,11 +4031,11 @@ msgstr "Заменять пробелы подчеркиванием"
 
 #: ../bin/src/ui_playbacksettingspage.h:322
 msgid "Replay Gain"
-msgstr "Replay Gain"
+msgstr "Нормализация громкости"
 
 #: ../bin/src/ui_playbacksettingspage.h:324
 msgid "Replay Gain mode"
-msgstr "Режим Replay Gain"
+msgstr "Режим нормализации"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -4256,7 +4257,7 @@ msgstr "Режим поиска"
 msgid "Search options"
 msgstr "Параметры поиска"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:113
+#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
 #: internet/spotifyservice.cpp:357
 msgid "Search results"
 msgstr "Результаты поиска"
@@ -4388,7 +4389,7 @@ msgstr "Подсвечивать проигрывающийся трек"
 
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
-msgstr "Показывать индикаторы настроения в статусе воспроизведения композиции"
+msgstr "Показывать индикатор настроения в полосе прокрутки"
 
 #: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Show a native desktop notification"
@@ -4653,7 +4654,7 @@ msgstr "Модуль Spotify не установлен"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
-msgstr "Стандартный"
+msgstr "Стандартнoe"
 
 #: internet/spotifyservice.cpp:365
 msgid "Starred"
@@ -4671,7 +4672,7 @@ msgstr "Запустить проигрываемый сейчас плейли�
 msgid "Start transcoding"
 msgstr "Начать перекодирование"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:115
+#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
 #: internet/spotifyservice.cpp:359
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5035,7 +5036,7 @@ msgstr "Всего выполнено сетевых запросов"
 msgid "Track"
 msgstr "Композиция"
 
-#: internet/soundcloudservice.cpp:123
+#: internet/soundcloudservice.cpp:134
 msgid "Tracks"
 msgstr "Композиции"
 
@@ -5139,7 +5140,7 @@ msgstr "Обновить все подкасты"
 
 #: ../bin/src/ui_mainwindow.h:695
 msgid "Update changed library folders"
-msgstr "Обновить измененные папки фонотеки"
+msgstr "Сканировать обновлённые папки"
 
 #: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
@@ -5181,7 +5182,7 @@ msgstr "Использовать комбинации клавиш Gnome"
 
 #: ../bin/src/ui_playbacksettingspage.h:323
 msgid "Use Replay Gain metadata if it is available"
-msgstr "По возможности использовать метаданные Replay Gain"
+msgstr "Использовать значения из тегов по возможности"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 msgid "Use SSLv3"
@@ -5773,7 +5774,7 @@ msgstr "начинается на"
 
 #: playlist/playlistdelegates.cpp:181
 msgid "stop"
-msgstr "Остановить"
+msgstr "останов"
 
 #: widgets/osd.cpp:111
 #, qt-format

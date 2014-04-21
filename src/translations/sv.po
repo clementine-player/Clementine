@@ -18,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-14 07:10+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-04-17 21:13+0000\n"
+"Last-Translator: paperbagcorner <mandersson444@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -285,7 +285,7 @@ msgstr "50 slumpmässiga spår"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href=\"http://www.di.fm/premium/\">Uppgradera till Premium nu</a>"
+msgstr "<a href=\"http://www.di.fm/premium/\">Uppgradera till premium nu</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -306,7 +306,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Begränsa sökningen till ett specifikt fält genom att lägga till fältnamnet före sökordet. Till exempel söker <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> igenom biblioteket efter alla artister som innehåller ordet Bode.</p><p><span style=\" font-weight:600;\">Tillgängliga fält: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -411,7 +411,7 @@ msgstr "Åtgärd"
 msgid "Active/deactive Wiiremote"
 msgstr "Aktivera/inaktivera Wiiremote"
 
-#: internet/soundcloudservice.cpp:129
+#: internet/soundcloudservice.cpp:124
 msgid "Activities stream"
 msgstr ""
 
@@ -573,7 +573,7 @@ msgstr "Lägg till i Grooveshark-spellistor"
 
 #: internet/vkservice.cpp:306
 msgid "Add to My Music"
-msgstr ""
+msgstr "Lägg till i Min Musik"
 
 #: ui/mainwindow.cpp:1618
 msgid "Add to another playlist"
@@ -581,7 +581,7 @@ msgstr "Lägg till i en annan spellista"
 
 #: internet/vkservice.cpp:292
 msgid "Add to bookmarks"
-msgstr ""
+msgstr "Lägg till i bokmärken"
 
 #: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
@@ -838,7 +838,7 @@ msgstr "Ljudformat"
 
 #: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Audio output"
-msgstr ""
+msgstr "Ljudutgång"
 
 #: internet/digitallyimportedsettingspage.cpp:80
 #: internet/magnatunesettingspage.cpp:112 internet/lastfmservice.cpp:222
@@ -1166,7 +1166,7 @@ msgstr "Clementine kan spela musik som du laddat upp till Google Drive"
 
 #: ../bin/src/ui_skydrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to OneDrive"
-msgstr ""
+msgstr "Clementine kan spela musik som du laddat upp till OneDrive"
 
 #: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Clementine can show a message when the track changes."
@@ -1219,7 +1219,7 @@ msgstr "Klicka för att växla mellan återstående tid och total tid"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "Att klicka på Login kommer att öppna en webbläsare.Du bör återgå till Clementine efter att inloggningen slutförts."
+msgstr "Att klicka på Login kommer att öppna en webbläsare. Du bör återgå till Clementine efter att inloggningen slutförts."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1303,7 +1303,7 @@ msgstr "Konfigurera Subsonic..."
 
 #: internet/vkservice.cpp:335
 msgid "Configure Vk.com..."
-msgstr ""
+msgstr "Konfigurera VK.com..."
 
 #: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:472
 msgid "Configure global search..."
@@ -1404,7 +1404,7 @@ msgstr "Kunde inte skapa GStreamer-elementet \"%1\" - kontrollera att du har all
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
-msgstr ""
+msgstr "Kunde inte skapa spellista"
 
 #: transcoder/transcoder.cpp:429
 #, qt-format
@@ -1608,7 +1608,7 @@ msgstr "Standardbakgrund"
 #: engines/gstengine.cpp:867
 #, qt-format
 msgid "Default device on %1"
-msgstr ""
+msgstr "Standardenhet på %1"
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
@@ -2571,7 +2571,7 @@ msgstr "Timmar"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:110
 msgid "However, you need to login to access your playlists and your stream."
-msgstr ""
+msgstr "Dock måste du logga in för att komma åt dina spellistor och din ström."
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2698,7 +2698,7 @@ msgstr "Internet"
 
 #: ui/settingsdialog.cpp:155
 msgid "Internet providers"
-msgstr "Internet operatörer"
+msgstr "Internetoperatörer"
 
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
@@ -3125,7 +3125,7 @@ msgstr "Minimal bithastighet"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr ""
+msgstr "Minsta buffertfyllnad"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3418,7 +3418,7 @@ msgstr "På"
 
 #: ../bin/src/ui_skydrivesettingspage.h:103
 msgid "OneDrive"
-msgstr ""
+msgstr "OneDrive"
 
 #: ../bin/src/ui_networkremotesettingspage.h:183
 msgid ""
@@ -3443,7 +3443,7 @@ msgstr "Opacitet"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Öppna %1 i webbläsare"
@@ -3657,7 +3657,8 @@ msgstr "Alternativ för spellista"
 msgid "Playlist type"
 msgstr "Spellistetyp"
 
-#: internet/groovesharkservice.cpp:649 ui/mainwindow.cpp:235
+#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
+#: ui/mainwindow.cpp:235
 msgid "Playlists"
 msgstr "Spellistor"
 
@@ -4243,7 +4244,7 @@ msgstr "Sökläge"
 msgid "Search options"
 msgstr "Sökalternativ"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:113
+#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
 #: internet/spotifyservice.cpp:357
 msgid "Search results"
 msgstr "Sökresultat"
@@ -4456,7 +4457,7 @@ msgstr "Visa sökförslag"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" button"
-msgstr ""
+msgstr "Visa knappen \"Älska\""
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
@@ -4596,7 +4597,7 @@ msgstr "Sortera efter stationsnamn"
 
 #: ../bin/src/ui_groovesharksettingspage.h:146
 msgid "Sort playlists songs alphabetically"
-msgstr ""
+msgstr "Sortera spellistors innehåll i bokstavsordning"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
@@ -4608,7 +4609,7 @@ msgstr "Sortering"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4658,7 +4659,7 @@ msgstr "Starta spellistan som spelas för närvarande"
 msgid "Start transcoding"
 msgstr "Starta omkodning"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:115
+#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
 #: internet/spotifyservice.cpp:359
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5002,7 +5003,7 @@ msgstr "För många omdirigeringar"
 
 #: internet/spotifyservice.cpp:377
 msgid "Top tracks"
-msgstr "Topp låtar"
+msgstr "Topplåtar"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
@@ -5022,9 +5023,9 @@ msgstr "Totalt antal nätverksbegäran"
 msgid "Track"
 msgstr "Spår"
 
-#: internet/soundcloudservice.cpp:123
+#: internet/soundcloudservice.cpp:134
 msgid "Tracks"
-msgstr ""
+msgstr "Spår"
 
 #: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:683
 msgid "Transcode Music"
@@ -5036,7 +5037,7 @@ msgstr "Omkodningslogg"
 
 #: ../bin/src/ui_transcodersettingspage.h:173
 msgid "Transcoding"
-msgstr "Omkodar"
+msgstr "Omkodare"
 
 #: transcoder/transcoder.cpp:305
 #, qt-format
@@ -5480,7 +5481,7 @@ msgstr "Du kan ändra hur låtarna i biblioteket är organiserade."
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr "Du kan lyssna gratis utan ett konto, men Premium användare kan lyssna på strömmar med högre kvalité utan reklam."
+msgstr "Du kan lyssna gratis utan ett konto, men premiumanvändare kan lyssna på strömmar med högre kvalité utan reklam."
 
 #: internet/magnatunesettingspage.cpp:54
 msgid ""
@@ -5515,7 +5516,7 @@ msgstr "Du har inte någon aktiv prenumeration"
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud."
-msgstr ""
+msgstr "Du behöver inte vara inloggad för att söka och lyssna på musik på SoundCloud."
 
 #: internet/spotifyservice.cpp:175
 msgid ""

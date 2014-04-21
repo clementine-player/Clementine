@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-14 07:10+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-04-15 14:09+0000\n"
+"Last-Translator: daimonion <pejakm@autistici.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/projects/p/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -403,7 +403,7 @@ msgstr "радња"
 msgid "Active/deactive Wiiremote"
 msgstr "Укључи/искључи Wii даљински"
 
-#: internet/soundcloudservice.cpp:129
+#: internet/soundcloudservice.cpp:124
 msgid "Activities stream"
 msgstr "Ток активности"
 
@@ -1396,7 +1396,7 @@ msgstr "Не могу да направим Гстример елемент „%
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
-msgstr ""
+msgstr "Не могу да направим листу нумера"
 
 #: transcoder/transcoder.cpp:429
 #, qt-format
@@ -3435,7 +3435,7 @@ msgstr "Прозирност"
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:320
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Отвори %1 у прегледачу"
@@ -3649,7 +3649,8 @@ msgstr "Опције листе нумера"
 msgid "Playlist type"
 msgstr "Тип листе"
 
-#: internet/groovesharkservice.cpp:649 ui/mainwindow.cpp:235
+#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
+#: ui/mainwindow.cpp:235
 msgid "Playlists"
 msgstr "Листе нумера"
 
@@ -4235,7 +4236,7 @@ msgstr "Режим претраге"
 msgid "Search options"
 msgstr "Опције претраге"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:113
+#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
 #: internet/spotifyservice.cpp:357
 msgid "Search results"
 msgstr "Резултати претраге"
@@ -4600,7 +4601,7 @@ msgstr "Ређање"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:108
 msgid "SoundCloud"
-msgstr ""
+msgstr "Саундклауд"
 
 #: playlist/playlist.cpp:1360
 msgid "Source"
@@ -4650,7 +4651,7 @@ msgstr "Пусти текућу листу нумера"
 msgid "Start transcoding"
 msgstr "Почни прекодирање"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:115
+#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
 #: internet/spotifyservice.cpp:359
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5014,7 +5015,7 @@ msgstr "Укупно направљених мрежних захтева"
 msgid "Track"
 msgstr "нумера"
 
-#: internet/soundcloudservice.cpp:123
+#: internet/soundcloudservice.cpp:134
 msgid "Tracks"
 msgstr "Нумере"
 
