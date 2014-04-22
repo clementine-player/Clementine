@@ -66,12 +66,12 @@ class MoodbarProxyStyle : public QProxyStyle {
 
   void Render(ComplexControl control, const QStyleOptionSlider* option,
               QPainter* painter, const QWidget* widget);
-  void EnsureMoodbarRendered();
+  void EnsureMoodbarRendered(const QStyleOptionSlider* opt);
   void DrawArrow(const QStyleOptionSlider* option, QPainter* painter) const;
   void ShowContextMenu(const QPoint& pos);
 
-  static QPixmap MoodbarPixmap(const ColorVector& colors, const QSize& size,
-                               const QPalette& palette);
+  QPixmap MoodbarPixmap(const ColorVector& colors, const QSize& size,
+                        const QPalette& palette, const QStyleOptionSlider* opt);
 
  private slots:
   void ReloadSettings();
@@ -79,6 +79,10 @@ class MoodbarProxyStyle : public QProxyStyle {
   void ChangeStyle(QAction* action);
 
  private:
+  // The slider "groove" is smaller than the actual slider: this convenient
+  // function returns the difference between groove width and slider width.
+  int GetExtraSpace(const QStyleOptionComplex* opt) const;
+
   Application* app_;
   QSlider* slider_;
 
