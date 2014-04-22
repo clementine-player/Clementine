@@ -247,8 +247,7 @@ void MoodbarProxyStyle::EnsureMoodbarRendered(const QStyleOptionSlider* opt) {
   }
 }
 
-int MoodbarProxyStyle::GetExtraSpace(const QStyleOptionComplex* opt) const
-{
+int MoodbarProxyStyle::GetExtraSpace(const QStyleOptionComplex* opt) const {
   int space_available =
       slider_->style()->pixelMetric(QStyle::PM_SliderSpaceAvailable, opt, slider_);
   int w = slider_->width();
