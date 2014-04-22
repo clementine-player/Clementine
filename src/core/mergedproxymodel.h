@@ -18,6 +18,8 @@
 #ifndef MERGEDPROXYMODEL_H
 #define MERGEDPROXYMODEL_H
 
+#include <functional>
+
 #include <QAbstractProxyModel>
 
 using std::placeholders::_1;
