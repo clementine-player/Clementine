@@ -113,6 +113,12 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value,
 }
 
 void LibraryQuery::AddCompilationRequirement(bool compilation) {
+  // The unary + is added to prevent sqlite from using the index
+  // idx_comp_artist. When joining with fts, sqlite 3.8 has a tendency
+  // to use this index and thereby nesting the tables in an order
+  // which gives very poor performance. See
+  // https://github.com/clementine-player/Clementine/pull/4285 for
+  // more details.
   where_clauses_ << QString("+effective_compilation = %1")
                         .arg(compilation ? 1 : 0);
 }
