@@ -154,7 +154,7 @@ int OrganiseDialog::SetFilenames(const QStringList& filenames,
     // If it's a directory, add all the files inside.
     if (QFileInfo(filename).isDir()) {
       const QDir dir(filename);
-      foreach (const QString& entry, dir.entryList(
+      for (const QString& entry : dir.entryList(
           QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Readable)) {
         filenames_copy << dir.filePath(entry);
       }
