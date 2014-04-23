@@ -22,12 +22,14 @@
 
 #include <QDir>
 #include <QFileInfo>
+#include <QFutureWatcher>
 #include <QHash>
 #include <QMenu>
 #include <QPushButton>
 #include <QResizeEvent>
 #include <QSettings>
 #include <QSignalMapper>
+#include <QtConcurrentRun>
 #include <QtDebug>
 
 #include "iconloader.h"
@@ -48,7 +50,7 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent)
       total_size_(0),
       resized_by_user_(false) {
   ui_->setupUi(this);
-  connect(ui_->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
+  connect(ui_->button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));
 
   ui_->aftercopying->setItemIcon(1, IconLoader::Load("edit-delete"));
@@ -109,7 +111,7 @@ void OrganiseDialog::SetDestinationModel(QAbstractItemModel* model,
   ui_->eject_after->setVisible(devices);
 }
 
-int OrganiseDialog::SetSongs(const SongList& songs) {
+bool OrganiseDialog::SetSongs(const SongList& songs) {
   total_size_ = 0;
   songs_.clear();
 
@@ -125,11 +127,17 @@ int OrganiseDialog::SetSongs(const SongList& songs) {
 
   ui_->free_space->set_additional_bytes(total_size_);
   UpdatePreviews();
+  SetLoadingSongs(false);
+
+  if (songs_future_.isRunning()) {
+    songs_future_.cancel();
+  }
+  songs_future_ = QFuture<SongList>();
 
   return songs_.count();
 }
 
-int OrganiseDialog::SetUrls(const QList<QUrl>& urls, quint64 total_size) {
+bool OrganiseDialog::SetUrls(const QList<QUrl>& urls) {
   QStringList filenames;
 
   // Only add file:// URLs
@@ -142,8 +150,30 @@ int OrganiseDialog::SetUrls(const QList<QUrl>& urls, quint64 total_size) {
   return SetFilenames(filenames);
 }
 
-int OrganiseDialog::SetFilenames(const QStringList& filenames,
-                                 quint64 total_size) {
+bool OrganiseDialog::SetFilenames(const QStringList& filenames) {
+  songs_future_ =
+      QtConcurrent::run(this, &OrganiseDialog::LoadSongsBlocking, filenames);
+  QFutureWatcher<SongList>* watcher = new QFutureWatcher<SongList>(this);
+  watcher->setFuture(songs_future_);
+  connect(watcher, SIGNAL(finished()), SLOT(LoadSongsFinished()));
+
+  SetLoadingSongs(true);
+  return true;
+}
+
+void OrganiseDialog::SetLoadingSongs(bool loading) {
+  if (loading) {
+    ui_->preview_stack->setCurrentWidget(ui_->loading_page);
+    ui_->button_box->button(QDialogButtonBox::Ok)->setEnabled(false);
+  } else {
+    ui_->preview_stack->setCurrentWidget(ui_->preview_page);
+    // The Ok button is enabled by UpdatePreviews
+  }
+}
+
+void OrganiseDialog::LoadSongsFinished() { SetSongs(songs_future_.result()); }
+
+SongList OrganiseDialog::LoadSongsBlocking(const QStringList& filenames) {
   SongList songs;
   Song song;
 
@@ -154,8 +184,9 @@ int OrganiseDialog::SetFilenames(const QStringList& filenames,
     // If it's a directory, add all the files inside.
     if (QFileInfo(filename).isDir()) {
       const QDir dir(filename);
-      for (const QString& entry : dir.entryList(
-          QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Readable)) {
+      for (const QString& entry :
+           dir.entryList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot |
+                         QDir::Readable)) {
         filenames_copy << dir.filePath(entry);
       }
       continue;
@@ -164,7 +195,8 @@ int OrganiseDialog::SetFilenames(const QStringList& filenames,
     TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
     if (song.is_valid()) songs << song;
   }
-  return SetSongs(songs);
+
+  return songs;
 }
 
 void OrganiseDialog::SetCopy(bool copy) {
@@ -177,7 +209,6 @@ void OrganiseDialog::InsertTag(const QString& tag) {
 
 Organise::NewSongInfoList OrganiseDialog::ComputeNewSongsFilenames(
     const SongList& songs, const OrganiseFormat& format) {
-
   // Check if we will have multiple files with the same name.
   // If so, they will erase each other if the overwrite flag is set.
   // Better to rename them: e.g. foo.bar -> foo(2).bar
@@ -199,6 +230,10 @@ Organise::NewSongInfoList OrganiseDialog::ComputeNewSongsFilenames(
 }
 
 void OrganiseDialog::UpdatePreviews() {
+  if (songs_future_.isRunning()) {
+    return;
+  }
+
   const QModelIndex destination =
       ui_->destination->model()->index(ui_->destination->currentIndex(), 0);
   std::shared_ptr<MusicStorage> storage;
@@ -236,7 +271,7 @@ void OrganiseDialog::UpdatePreviews() {
   bool ok = format_valid && !songs_.isEmpty();
   if (capacity != 0 && total_size_ > free) ok = false;
 
-  ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(ok);
+  ui_->button_box->button(QDialogButtonBox::Ok)->setEnabled(ok);
   if (!format_valid) return;
 
   new_songs_info_ = ComputeNewSongsFilenames(songs_, format_);

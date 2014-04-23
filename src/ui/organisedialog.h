@@ -51,9 +51,13 @@ class OrganiseDialog : public QDialog {
 
   void SetDestinationModel(QAbstractItemModel* model, bool devices = false);
 
-  int SetSongs(const SongList& songs);
-  int SetUrls(const QList<QUrl>& urls, quint64 total_size = 0);
-  int SetFilenames(const QStringList& filenames, quint64 total_size = 0);
+  // These functions return true if any songs were actually added to the dialog.
+  // SetSongs returns immediately, SetUrls and SetFilenames load the songs in
+  // the background.
+  bool SetSongs(const SongList& songs);
+  bool SetUrls(const QList<QUrl>& urls);
+  bool SetFilenames(const QStringList& filenames);
+
   void SetCopy(bool copy);
 
  public slots:
@@ -69,9 +73,13 @@ class OrganiseDialog : public QDialog {
   void InsertTag(const QString& tag);
   void UpdatePreviews();
 
+  void LoadSongsFinished();
   void OrganiseFinished(const QStringList& files_with_errors);
 
  private:
+  SongList LoadSongsBlocking(const QStringList& filenames);
+  void SetLoadingSongs(bool loading);
+
   static Organise::NewSongInfoList ComputeNewSongsFilenames(
       const SongList& songs, const OrganiseFormat& format);
 
@@ -80,6 +88,7 @@ class OrganiseDialog : public QDialog {
 
   OrganiseFormat format_;
 
+  QFuture<SongList> songs_future_;
   SongList songs_;
   Organise::NewSongInfoList new_songs_info_;
   quint64 total_size_;
