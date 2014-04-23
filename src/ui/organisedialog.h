@@ -73,7 +73,6 @@ class OrganiseDialog : public QDialog {
   void InsertTag(const QString& tag);
   void UpdatePreviews();
 
-  void LoadSongsFinished();
   void OrganiseFinished(const QStringList& files_with_errors);
 
  private:

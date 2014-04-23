@@ -155,7 +155,10 @@ bool OrganiseDialog::SetFilenames(const QStringList& filenames) {
       QtConcurrent::run(this, &OrganiseDialog::LoadSongsBlocking, filenames);
   QFutureWatcher<SongList>* watcher = new QFutureWatcher<SongList>(this);
   watcher->setFuture(songs_future_);
-  connect(watcher, SIGNAL(finished()), SLOT(LoadSongsFinished()));
+  NewClosure(watcher, SIGNAL(finished()), [&]() {
+    SetSongs(songs_future_.result());
+    watcher->deleteLater();
+  });
 
   SetLoadingSongs(true);
   return true;
@@ -170,8 +173,6 @@ void OrganiseDialog::SetLoadingSongs(bool loading) {
     // The Ok button is enabled by UpdatePreviews
   }
 }
-
-void OrganiseDialog::LoadSongsFinished() { SetSongs(songs_future_.result()); }
 
 SongList OrganiseDialog::LoadSongsBlocking(const QStringList& filenames) {
   SongList songs;
