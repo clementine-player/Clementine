@@ -130,17 +130,16 @@ int OrganiseDialog::SetSongs(const SongList& songs) {
 }
 
 int OrganiseDialog::SetUrls(const QList<QUrl>& urls, quint64 total_size) {
-  SongList songs;
-  Song song;
+  QStringList filenames;
 
   // Only add file:// URLs
   for (const QUrl& url : urls) {
-    if (url.scheme() != "file") continue;
-    TagReaderClient::Instance()->ReadFileBlocking(url.toLocalFile(), &song);
-    if (song.is_valid()) songs << song;
+    if (url.scheme() == "file") {
+      filenames << url.toLocalFile();
+    }
   }
 
-  return SetSongs(songs);
+  return SetFilenames(filenames);
 }
 
 int OrganiseDialog::SetFilenames(const QStringList& filenames,
@@ -148,8 +147,20 @@ int OrganiseDialog::SetFilenames(const QStringList& filenames,
   SongList songs;
   Song song;
 
-  // Load some of the songs to show in the preview
-  for (const QString& filename : filenames) {
+  QStringList filenames_copy = filenames;
+  while (!filenames_copy.isEmpty()) {
+    const QString filename = filenames_copy.takeFirst();
+
+    // If it's a directory, add all the files inside.
+    if (QFileInfo(filename).isDir()) {
+      const QDir dir(filename);
+      foreach (const QString& entry, dir.entryList(
+          QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Readable)) {
+        filenames_copy << dir.filePath(entry);
+      }
+      continue;
+    }
+
     TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
     if (song.is_valid()) songs << song;
   }
