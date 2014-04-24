@@ -50,5 +50,44 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
 }
 
 bool FilesystemMusicStorage::DeleteFromStorage(const DeleteJob& job) {
-  return QFile::remove(job.metadata_.url().toLocalFile());
+  bool result = false;
+  
+  QString path = job.metadata_.url().toLocalFile();  
+  QFileInfo fileInfo(path);
+  if (fileInfo.isDir())
+    result = RemoveDirectory(path);
+  else
+    result = QFile::remove(path);
+    
+  return result;
+}
+
+bool FilesystemMusicStorage::RemoveDirectory(const QString& dirName) {
+  bool result = true;
+  QDir dir(dirName);
+
+  if (dir.exists(dirName)) {    
+    auto fileInfoList = dir.entryInfoList(QDir::NoDotAndDotDot
+                                        | QDir::System
+                                        | QDir::Hidden
+                                        | QDir::AllDirs
+                                        | QDir::Files
+                                        , QDir::DirsFirst);
+    
+    for (auto info : fileInfoList) {      
+      // remove subdirectories too
+      if (info.isDir()) {
+        result = RemoveDirectory(info.absoluteFilePath());
+      }
+      else { 
+        result = QFile::remove(info.absoluteFilePath());
+      } 
+      
+      if (!result) {
+        return result;
+      }      
+    }
+    result = dir.rmdir(dirName);    
+  }
+    return result;
 }
