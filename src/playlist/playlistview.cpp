@@ -578,7 +578,8 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     event->accept();
   } else if (event->modifiers() != Qt::ControlModifier  // Ctrl+Space selects
                                                         // the item
-             && event->key() == Qt::Key_Space) {
+             &&
+             event->key() == Qt::Key_Space) {
     emit PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
@@ -689,7 +690,6 @@ void PlaylistView::closeEditor(QWidget* editor,
     QTreeView::closeEditor(editor, QAbstractItemDelegate::SubmitModelCache);
   } else if (hint == QAbstractItemDelegate::EditNextItem ||
              hint == QAbstractItemDelegate::EditPreviousItem) {
-
     QModelIndex index;
     if (hint == QAbstractItemDelegate::EditNextItem)
       index = NextEditableIndex(currentIndex());
@@ -791,7 +791,6 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
         if (index.data(Playlist::Role_CanSetRating).toBool()) {
           QModelIndex src_index = playlist_->proxy()->mapToSource(index);
           src_index_list << src_index;
-          //playlist_->RateSong(src_index, new_rating);
         }
       }
       playlist_->RateSongs(src_index_list, new_rating);
@@ -892,7 +891,6 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       // Check if we should recompute the background image
       if (height() != last_height_ || width() != last_width_ ||
           force_background_redraw_) {
-
         if (background_image_.isNull()) {
           cached_scaled_background_image_ = QPixmap();
         } else {

@@ -189,7 +189,6 @@ bool Playlist::column_is_editable(Playlist::Column column) {
 
 bool Playlist::set_column_value(Song& song, Playlist::Column column,
                                 const QVariant& value) {
-
   if (!song.IsEditable()) return false;
 
   switch (column) {
@@ -1399,13 +1398,13 @@ void Playlist::ReOrderWithoutUndo(const PlaylistItemList& new_items) {
   layoutAboutToBeChanged();
 
   // This is a slow and nasty way to keep the persistent indices
-  QMap<int, shared_ptr<PlaylistItem> > old_persistent_mappings;
+  QMap<int, shared_ptr<PlaylistItem>> old_persistent_mappings;
   for (const QModelIndex& index : persistentIndexList()) {
     old_persistent_mappings[index.row()] = items_[index.row()];
   }
 
   items_ = new_items;
-  QMapIterator<int, shared_ptr<PlaylistItem> > it(old_persistent_mappings);
+  QMapIterator<int, shared_ptr<PlaylistItem>> it(old_persistent_mappings);
   while (it.hasNext()) {
     it.next();
     for (int col = 0; col < ColumnCount; ++col) {
@@ -1445,7 +1444,7 @@ void Playlist::Save() const {
 }
 
 namespace {
-typedef QFutureWatcher<shared_ptr<PlaylistItem> > PlaylistItemFutureWatcher;
+typedef QFutureWatcher<shared_ptr<PlaylistItem>> PlaylistItemFutureWatcher;
 }
 
 void Playlist::Restore() {
@@ -1816,7 +1815,7 @@ void Playlist::RateSong(const QModelIndex& index, double rating) {
 
 void Playlist::RateSongs(const QModelIndexList& index_list, double rating) {
   QList<int> id_list;
-  for (const QModelIndex &index : index_list) {
+  for (const QModelIndex& index : index_list) {
     int row = index.row();
 
     if (has_item_at(row)) {

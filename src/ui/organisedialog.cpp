@@ -166,7 +166,6 @@ void OrganiseDialog::InsertTag(const QString& tag) {
 
 Organise::NewSongInfoList OrganiseDialog::ComputeNewSongsFilenames(
     const SongList& songs, const OrganiseFormat& format) {
-
   // Check if we will have multiple files with the same name.
   // If so, they will erase each other if the overwrite flag is set.
   // Better to rename them: e.g. foo.bar -> foo(2).bar
