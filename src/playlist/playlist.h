@@ -402,6 +402,8 @@ signals:
   QPersistentModelIndex stop_after_;
   bool current_is_paused_;
   int current_virtual_index_;
+  
+  bool is_stopping_next_;
 
   bool is_shuffled_;
 

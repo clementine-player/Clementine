@@ -106,6 +106,7 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
       favorite_(favorite),
       current_is_paused_(false),
       current_virtual_index_(-1),
+      is_stopping_next_(false),
       is_shuffled_(false),
       scrobble_point_(-1),
       lastfm_status_(LastFM_New),
@@ -547,7 +548,6 @@ int Playlist::PreviousVirtualIndex(int i, bool ignore_repeat_track) const {
 
 int Playlist::next_row(bool ignore_repeat_track) const {
   // Did we want to stop after this track?
-  if (stop_after_.isValid() && current_row() == stop_after_.row()) return -1;
 
   // Any queued items take priority
   if (!queue_->is_empty()) {
@@ -629,8 +629,8 @@ void Playlist::set_current_row(int i) {
                      old_current_item_index.sibling(
                          old_current_item_index.row(), ColumnCount - 1));
   }
-
-  if (current_item_index_.isValid()) {
+  
+  if (current_item_index_.isValid() && !is_stopping_next_) {
     InformOfCurrentSongChange();
   }
 
@@ -1636,11 +1636,16 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
 void Playlist::StopAfter(int row) {
   QModelIndex old_stop_after = stop_after_;
 
-  if ((stop_after_.isValid() && stop_after_.row() == row) || row == -1)
+  if ((stop_after_.isValid() && stop_after_.row() == row) || row == -1){
     stop_after_ = QModelIndex();
-  else
+    is_stopping_next_ = false;
+  } else if (row == -2) {
+    is_stopping_next_ = true;
+  } else{
     stop_after_ = index(row, 0);
-
+    is_stopping_next_ = false;
+  }
+  
   if (old_stop_after.isValid())
     emit dataChanged(
         old_stop_after,
