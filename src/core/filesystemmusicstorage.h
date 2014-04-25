@@ -30,9 +30,6 @@ class FilesystemMusicStorage : public virtual MusicStorage {
   bool CopyToStorage(const CopyJob& job);
   bool DeleteFromStorage(const DeleteJob& job);
 
-private:
-  bool RemoveDirectory(const QString &dirName);
-  
  private:
   QString root_;
 };
