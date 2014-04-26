@@ -190,13 +190,11 @@ void Player::NextItem(Engine::TrackChangeFlags change) {
 
 bool Player::HandleStopAfter() {
   if (app_->playlist_manager()->active()->stop_after_current()) {
-    
     // Find what the next track would've been, and mark that one as current
     // so it plays next time the user presses Play.
-    app_->playlist_manager()->active()->StopAfter(-2);
     const int next_row = app_->playlist_manager()->active()->next_row();
     if (next_row != -1) {
-      app_->playlist_manager()->active()->set_current_row(next_row);
+      app_->playlist_manager()->active()->set_current_row(next_row, true);
     }
 
     app_->playlist_manager()->active()->StopAfter(-1);

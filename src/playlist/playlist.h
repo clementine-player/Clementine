@@ -290,7 +290,7 @@ class Playlist : public QAbstractListModel {
                   const QModelIndex& parent = QModelIndex());
 
  public slots:
-  void set_current_row(int index);
+  void set_current_row(int index, bool is_stopping = false);
   void Paused();
   void Playing();
   void Stopped();
@@ -402,8 +402,6 @@ signals:
   QPersistentModelIndex stop_after_;
   bool current_is_paused_;
   int current_virtual_index_;
-  
-  bool is_stopping_next_;
 
   bool is_shuffled_;
 
