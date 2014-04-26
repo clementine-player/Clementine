@@ -78,7 +78,7 @@ class PlayerInterface : public QObject {
 
   virtual void Mute() = 0;
   virtual void Pause() = 0;
-  virtual void Stop() = 0;
+  virtual void Stop(bool stop_after = false) = 0;
   virtual void Play() = 0;
   virtual void ShowOSD() = 0;
 
@@ -143,7 +143,7 @@ class Player : public PlayerInterface {
 
   void Mute();
   void Pause();
-  void Stop();
+  void Stop(bool stop_after = false);
   void StopAfterCurrent();
   void Play();
   void ShowOSD();
