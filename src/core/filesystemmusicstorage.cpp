@@ -17,6 +17,7 @@
 
 #include "filesystemmusicstorage.h"
 #include "core/logging.h"
+#include "core/utilities.h"
 
 #include <QDir>
 #include <QFile>
@@ -50,5 +51,10 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
 }
 
 bool FilesystemMusicStorage::DeleteFromStorage(const DeleteJob& job) {
-  return QFile::remove(job.metadata_.url().toLocalFile());
+  QString path = job.metadata_.url().toLocalFile();
+  QFileInfo fileInfo(path);
+  if (fileInfo.isDir())
+    return Utilities::RemoveRecursive(path);
+  else
+    return QFile::remove(path);
 }

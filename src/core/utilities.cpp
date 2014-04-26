@@ -219,17 +219,24 @@ QString GetTemporaryFileName() {
   return file;
 }
 
-void RemoveRecursive(const QString& path) {
+bool RemoveRecursive(const QString& path) {
   QDir dir(path);
   for (const QString& child :
-       dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden))
-    RemoveRecursive(path + "/" + child);
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden)) {
+    if (!RemoveRecursive(path + "/" + child))
+      return false;
+  }
 
   for (const QString& child :
-       dir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Hidden))
-    QFile::remove(path + "/" + child);
+       dir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Hidden)) {
+    if (!QFile::remove(path + "/" + child))
+      return false;
+  }
 
-  dir.rmdir(path);
+  if (!dir.rmdir(path))
+    return false;
+
+  return true;
 }
 
 bool CopyRecursive(const QString& source, const QString& destination) {
