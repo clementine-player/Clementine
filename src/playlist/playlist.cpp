@@ -545,8 +545,6 @@ int Playlist::PreviousVirtualIndex(int i, bool ignore_repeat_track) const {
 }
 
 int Playlist::next_row(bool ignore_repeat_track) const {
-  // Did we want to stop after this track?
-
   // Any queued items take priority
   if (!queue_->is_empty()) {
     return queue_->PeekNext();
