@@ -96,7 +96,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
             bool force_stop_at_end, quint64 beginning_nanosec,
             qint64 end_nanosec);
   bool Play(quint64 offset_nanosec);
-  void Stop();
+  void Stop(bool stop_after = false);
   void Pause();
   void Unpause();
   void Seek(quint64 offset_nanosec);
@@ -219,7 +219,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int timer_id_;
   int next_element_id_;
 
-  QHash<int, std::shared_ptr<GstEnginePipeline> > background_streams_;
+  QHash<int, std::shared_ptr<GstEnginePipeline>> background_streams_;
 
   bool is_fading_out_to_pause_;
   bool has_faded_out_;

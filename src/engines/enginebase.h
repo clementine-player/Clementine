@@ -47,7 +47,7 @@ class Base : public QObject {
 
   virtual void StartPreloading(const QUrl&, bool, qint64, qint64) {}
   virtual bool Play(quint64 offset_nanosec) = 0;
-  virtual void Stop() = 0;
+  virtual void Stop(bool stop_after = false) = 0;
   virtual void Pause() = 0;
   virtual void Unpause() = 0;
   virtual void Seek(quint64 offset_nanosec) = 0;

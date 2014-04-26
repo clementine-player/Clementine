@@ -433,13 +433,13 @@ void GstEngine::PlayDone() {
   emit ValidSongRequested(url_);
 }
 
-void GstEngine::Stop() {
+void GstEngine::Stop(bool stop_after) {
   StopTimers();
 
   url_ = QUrl();  // To ensure we return Empty from state()
   beginning_nanosec_ = end_nanosec_ = 0;
 
-  if (fadeout_enabled_ && current_pipeline_) StartFadeout();
+  if (fadeout_enabled_ && current_pipeline_ && !stop_after) StartFadeout();
 
   current_pipeline_.reset();
   BufferingFinished();
@@ -672,8 +672,8 @@ GstElement* GstEngine::CreateElement(const QString& factoryName,
   return element;
 }
 
-GstEngine::PluginDetailsList GstEngine::GetPluginList(const QString& classname)
-    const {
+GstEngine::PluginDetailsList GstEngine::GetPluginList(
+    const QString& classname) const {
   PluginDetailsList ret;
 
   GstRegistry* registry = gst_registry_get_default();
