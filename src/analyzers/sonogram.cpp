@@ -35,6 +35,11 @@ void Sonogram::resizeEvent(QResizeEvent* e) {
 }
 
 void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
+  if (!new_frame) {
+    p.drawPixmap(0, 0, canvas_);
+    return;
+  }
+
   int x = width() - 1;
   QColor c;
 

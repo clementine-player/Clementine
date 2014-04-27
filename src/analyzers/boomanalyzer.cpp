@@ -37,6 +37,8 @@ void BoomAnalyzer::init() {
   F = double(HEIGHT) / (log10(256) * 1.1 /*<- max. amplitude*/);
 
   barPixmap = QPixmap(COLUMN_WIDTH - 2, HEIGHT);
+  canvas_ = QPixmap(size());
+  canvas_.fill(palette().color(QPalette::Background));
 
   QPainter p(&barPixmap);
   for (uint y = 0; y < HEIGHT; ++y) {
@@ -69,8 +71,15 @@ void BoomAnalyzer::transform(Scope& s) {
 }
 
 void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
+  if (!new_frame) {
+    p.drawPixmap(0, 0, canvas_);
+    return;
+  }
   float h;
   const uint MAX_HEIGHT = height() - 1;
+
+  QPainter canvas_painter(&canvas_);
+  canvas_.fill(palette().color(QPalette::Background));
 
   for (uint i = 0, x = 0, y; i < BAND_COUNT; ++i, x += COLUMN_WIDTH + 1) {
     h = log10(scope[i] * 256.0) * F;
@@ -103,12 +112,15 @@ void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
     }
 
     y = height() - uint(bar_height[i]);
-    p.drawPixmap(x + 1, y, barPixmap, 0, y, -1, -1);
-    p.setPen(palette().color(QPalette::Highlight));
-    if (bar_height[i] > 0) p.drawRect(x, y, COLUMN_WIDTH - 1, height() - y - 1);
+    canvas_painter.drawPixmap(x + 1, y, barPixmap, 0, y, -1, -1);
+    canvas_painter.setPen(palette().color(QPalette::Highlight));
+    if (bar_height[i] > 0)
+      canvas_painter.drawRect(x, y, COLUMN_WIDTH - 1, height() - y - 1);
 
     y = height() - uint(peak_height[i]);
-    p.setPen(palette().color(QPalette::Base));
-    p.drawLine(x, y, x + COLUMN_WIDTH - 1, y);
+    canvas_painter.setPen(palette().color(QPalette::Base));
+    canvas_painter.drawLine(x, y, x + COLUMN_WIDTH - 1, y);
   }
+
+  p.drawPixmap(0, 0, canvas_);
 }

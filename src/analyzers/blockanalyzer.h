@@ -48,6 +48,7 @@ class BlockAnalyzer : public Analyzer::Base {
   QPixmap m_barPixmap;
   QPixmap m_topBarPixmap;
   QPixmap m_background;
+  QPixmap canvas_;
   Scope m_scope;               // so we don't create a vector every frame
   std::vector<float> m_store;  // current bar heights
   std::vector<float> m_yscale;
