@@ -39,6 +39,7 @@ class BoomAnalyzer : public Analyzer::Base {
   std::vector<float> peak_speed;
 
   QPixmap barPixmap;
+  QPixmap canvas_;
 };
 
 #endif

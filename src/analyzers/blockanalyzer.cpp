@@ -58,6 +58,7 @@ void BlockAnalyzer::resizeEvent(QResizeEvent* e) {
   QWidget::resizeEvent(e);
 
   m_background = QPixmap(size());
+  canvas_ = QPixmap(size());
 
   const uint oldRows = m_rows;
 
@@ -135,10 +136,17 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
   // m_yscale looks similar to: { 0.7, 0.5, 0.25, 0.15, 0.1, 0 }
   // if it contains 6 elements there are 5 rows in the analyzer
 
+  if (!new_frame) {
+    p.drawPixmap(0, 0, canvas_);
+    return;
+  }
+
+  QPainter canvas_painter(&canvas_);
+
   Analyzer::interpolate(s, m_scope);
 
   // Paint the background
-  p.drawPixmap(0, 0, m_background);
+  canvas_painter.drawPixmap(0, 0, m_background);
 
   for (uint y, x = 0; x < m_scope.size(); ++x) {
     // determine y
@@ -163,21 +171,24 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
     if (m_fade_intensity[x] > 0) {
       const uint offset = --m_fade_intensity[x];
       const uint y = m_y + (m_fade_pos[x] * (HEIGHT + 1));
-      p.drawPixmap(x * (WIDTH + 1), y, m_fade_bars[offset], 0, 0, WIDTH,
-                   height() - y);
+      canvas_painter.drawPixmap(x * (WIDTH + 1), y, m_fade_bars[offset], 0, 0,
+                                WIDTH, height() - y);
     }
 
     if (m_fade_intensity[x] == 0) m_fade_pos[x] = m_rows;
 
     // REMEMBER: y is a number from 0 to m_rows, 0 means all blocks are glowing,
     // m_rows means none are
-    p.drawPixmap(x * (WIDTH + 1), y * (HEIGHT + 1) + m_y, *bar(), 0,
-                 y * (HEIGHT + 1), bar()->width(), bar()->height());
+    canvas_painter.drawPixmap(x * (WIDTH + 1), y * (HEIGHT + 1) + m_y, *bar(),
+                              0, y * (HEIGHT + 1), bar()->width(),
+                              bar()->height());
   }
 
   for (uint x = 0; x < m_store.size(); ++x)
-    p.drawPixmap(x * (WIDTH + 1), int(m_store[x]) * (HEIGHT + 1) + m_y,
-                 m_topBarPixmap);
+    canvas_painter.drawPixmap(
+        x * (WIDTH + 1), int(m_store[x]) * (HEIGHT + 1) + m_y, m_topBarPixmap);
+
+  p.drawPixmap(0, 0, canvas_);
 }
 
 static inline void adjustToLimits(int& b, int& f, uint& amount) {

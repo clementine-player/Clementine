@@ -21,10 +21,10 @@ const char* BarAnalyzer::kName =
 
 BarAnalyzer::BarAnalyzer(QWidget* parent)
     : Analyzer::Base(parent, 8)
-      //, m_bands( BAND_COUNT )
-      //, barVector( BAND_COUNT, 0 )
-      //, roofVector( BAND_COUNT, 50 )
-      //, roofVelocityVector( BAND_COUNT, ROOF_VELOCITY_REDUCTION_FACTOR )
+//, m_bands( BAND_COUNT )
+//, barVector( BAND_COUNT, 0 )
+//, roofVector( BAND_COUNT, 50 )
+//, roofVelocityVector( BAND_COUNT, ROOF_VELOCITY_REDUCTION_FACTOR )
 {
   // roof pixmaps don't depend on size() so we do in the ctor
   m_bg = parent->palette().color(QPalette::Background);
@@ -69,6 +69,8 @@ void BarAnalyzer::init() {
 
   m_pixBarGradient = QPixmap(height() * COLUMN_WIDTH, height());
   m_pixCompose = QPixmap(size());
+  canvas_ = QPixmap(size());
+  canvas_.fill(palette().color(QPalette::Background));
 
   QPainter p(&m_pixBarGradient);
   for (int x = 0, r = 0x40, g = 0x30, b = 0xff, r2 = 255 - r; x < height();
@@ -88,10 +90,17 @@ void BarAnalyzer::init() {
 }
 
 void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
+  if (!new_frame) {
+    p.drawPixmap(0, 0, canvas_);
+    return;
+  }
   // Analyzer::interpolate( s, m_bands );
 
   Scope& v = m_scope;
   Analyzer::interpolate(s, v);
+  QPainter canvas_painter(&canvas_);
+
+  canvas_.fill(palette().color(QPalette::Background));
 
   for (uint i = 0, x = 0, y2; i < v.size(); ++i, x += COLUMN_WIDTH + 1) {
     // assign pre[log10]'d value
@@ -134,11 +143,12 @@ void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
       // );
       // bitBlt( canvas(), x, m_roofMem[i][c], &m_pixRoof[ NUM_ROOFS - 1 - c ]
       // );
-      p.drawPixmap(x, m_roofMem[i][c], m_pixRoof[NUM_ROOFS - 1 - c]);
+      canvas_painter.drawPixmap(x, m_roofMem[i][c],
+                                m_pixRoof[NUM_ROOFS - 1 - c]);
 
     // blt the bar
-    p.drawPixmap(x, height() - y2, *gradient(), y2 * COLUMN_WIDTH,
-                 height() - y2, COLUMN_WIDTH, y2);
+    canvas_painter.drawPixmap(x, height() - y2, *gradient(), y2 * COLUMN_WIDTH,
+                              height() - y2, COLUMN_WIDTH, y2);
     /*bitBlt( canvas(), x, height() - y2,
             gradient(), y2 * COLUMN_WIDTH, height() - y2, COLUMN_WIDTH, y2,
        Qt::CopyROP );*/
@@ -158,4 +168,6 @@ void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
         ++roofVelocityVector[i];
     }
   }
+
+  p.drawPixmap(0, 0, canvas_);
 }

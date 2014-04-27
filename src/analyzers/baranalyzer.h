@@ -52,6 +52,7 @@ class BarAnalyzer : public Analyzer::Base {
  private:
   QPixmap m_pixBarGradient;
   QPixmap m_pixCompose;
+  QPixmap canvas_;
   Scope m_scope;  // so we don't create a vector every frame
   QColor m_bg;
 };
