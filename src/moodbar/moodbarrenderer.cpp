@@ -20,6 +20,8 @@
 #include <QPainter>
 #include <QPalette>
 
+#include "core/arraysize.h"
+
 const int MoodbarRenderer::kNumHues = 12;
 
 ColorVector MoodbarRenderer::Colors(const QByteArray& data, MoodbarStyle style,
@@ -60,7 +62,7 @@ ColorVector MoodbarRenderer::Colors(const QByteArray& data, MoodbarStyle style,
   int hue_distribution[360];
   int total = 0;
 
-  memset(hue_distribution, 0, sizeof(hue_distribution));
+  memset(hue_distribution, 0, arraysize(hue_distribution));
 
   ColorVector colors;
 

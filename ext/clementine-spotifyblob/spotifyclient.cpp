@@ -18,20 +18,22 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-#include <algorithm>
-
-#include "mediapipeline.h"
 #include "spotifyclient.h"
-#include "spotifykey.h"
-#include "spotifymessages.pb.h"
-#include "spotify_utilities.h"
-#include "core/logging.h"
+
+#include <algorithm>
 
 #include <QCoreApplication>
 #include <QDir>
 #include <QHostAddress>
 #include <QTcpSocket>
 #include <QTimer>
+
+#include "core/arraysize.h"
+#include "core/logging.h"
+#include "mediapipeline.h"
+#include "spotifykey.h"
+#include "spotifymessages.pb.h"
+#include "spotify_utilities.h"
 
 const int SpotifyClient::kSpotifyImageIDSize = 20;
 const int SpotifyClient::kWaveHeaderSize = 44;
@@ -615,7 +617,7 @@ void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {
   // URI - Blugh
   char uri[256];
   sp_link* link = sp_link_create_from_track(track, 0);
-  sp_link_as_string(link, uri, sizeof(uri));
+  sp_link_as_string(link, uri, arraysize(uri));
   sp_link_release(link);
 
   pb->set_uri(uri);
@@ -645,7 +647,7 @@ void SpotifyClient::ConvertAlbum(sp_album* album, pb::spotify::Track* pb) {
   // URI - Blugh
   char uri[256];
   sp_link* link = sp_link_create_from_album(album);
-  sp_link_as_string(link, uri, sizeof(uri));
+  sp_link_as_string(link, uri, arraysize(uri));
   sp_link_release(link);
 
   pb->set_uri(uri);
