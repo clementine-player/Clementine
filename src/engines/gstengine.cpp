@@ -287,7 +287,7 @@ void GstEngine::UpdateScope(int chunk_length_) {
   // pass the next chunk of the buffer to the analyser
   const sample_type* source =
       reinterpret_cast<sample_type*>(GST_BUFFER_DATA(latest_buffer_));
-  source += (chunk_size / 2 * scope_chunk);
+  source += (chunk_size / sizeof(sample_type)) * scope_chunk;
   sample_type* dest = scope_.data();
 
   const int bytes = qMin(
