@@ -22,6 +22,7 @@
 #include "gstengine.h"
 
 #include <math.h>
+#include <cmath>
 #include <unistd.h>
 
 #include <iostream>
@@ -96,7 +97,9 @@ GstEngine::GstEngine(TaskManager* task_manager)
       timer_id_(-1),
       next_element_id_(0),
       is_fading_out_to_pause_(false),
-      has_faded_out_(false) {
+      has_faded_out_(false),
+      scope_chunk(0),
+      have_new_buffer(false) {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelayNanosec / kNsecPerMsec);
   connect(seek_timer_, SIGNAL(timeout()), SLOT(SeekNow()));
@@ -235,19 +238,36 @@ void GstEngine::AddBufferToScope(GstBuffer* buf, int pipeline_id) {
   if (latest_buffer_ != nullptr) {
     gst_buffer_unref(latest_buffer_);
   }
+
   latest_buffer_ = buf;
+  have_new_buffer = true;
 }
 
-const Engine::Scope& GstEngine::scope() {
-  if (latest_buffer_ != nullptr) {
-    UpdateScope();
+const Engine::Scope& GstEngine::scope(int chunk_length) {
+
+  // the new buffer could have a different size
+  if (have_new_buffer) {
+    if (latest_buffer_ != nullptr) {
+      scope_chunks = ceil(((double)GST_BUFFER_DURATION(latest_buffer_) /
+          (double)(chunk_length * 1000000)));
+    }
+  
+  // if the buffer is shorter than the chunk length
+  if (scope_chunks <= 0) {
+    scope_chunks = 1;
   }
 
+    scope_chunk = 0;
+    have_new_buffer = false;
+  }
+
+  UpdateScope(chunk_length);
   return scope_;
 }
 
-void GstEngine::UpdateScope() {
+void GstEngine::UpdateScope(int chunk_length_) {
   typedef Engine::Scope::value_type sample_type;
+  int chunk_size = GST_BUFFER_SIZE(latest_buffer_) / (scope_chunks);
 
   // determine the number of channels
   GstStructure* structure =
@@ -258,17 +278,25 @@ void GstEngine::UpdateScope() {
   // scope does not support >2 channels
   if (channels > 2) return;
 
+  // in case a buffer doesn't arrive in time
+  if (scope_chunk >= scope_chunks) {
+    scope_chunk = 0;
+    return;
+  }
+
+  // pass the next chunk of the buffer to the analyser
   const sample_type* source =
       reinterpret_cast<sample_type*>(GST_BUFFER_DATA(latest_buffer_));
+  source += (chunk_size / 2 * scope_chunk);
   sample_type* dest = scope_.data();
+
   const int bytes = qMin(
-      static_cast<Engine::Scope::size_type>(GST_BUFFER_SIZE(latest_buffer_)),
+      static_cast<Engine::Scope::size_type>(chunk_size),
       scope_.size() * sizeof(sample_type));
 
-  memcpy(dest, source, bytes);
+  scope_chunk++;
 
-  gst_buffer_unref(latest_buffer_);
-  latest_buffer_ = nullptr;
+  memcpy(dest, source, bytes);
 }
 
 void GstEngine::StartPreloading(const QUrl& url, bool force_stop_at_end,

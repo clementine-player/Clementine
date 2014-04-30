@@ -85,7 +85,7 @@ class Base : public QObject {
 
   // Simple accessors
   inline uint volume() const { return volume_; }
-  virtual const Scope& scope() { return scope_; }
+  virtual const Scope& scope(int chunk_length) { return scope_; }
   bool is_fadeout_enabled() const { return fadeout_enabled_; }
   bool is_crossfade_enabled() const { return crossfade_enabled_; }
   bool is_autocrossfade_enabled() const { return autocrossfade_enabled_; }

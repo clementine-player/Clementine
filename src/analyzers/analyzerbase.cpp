@@ -52,6 +52,7 @@ Analyzer::Base::Base(QWidget* parent, uint scopeSize)
       m_fht(new FHT(scopeSize)),
       m_engine(nullptr),
       m_lastScope(512),
+      current_chunk(0),
       new_frame_(false),
       is_playing_(false) {}
 
@@ -85,10 +86,10 @@ void Analyzer::Base::paintEvent(QPaintEvent* e) {
 
   switch (m_engine->state()) {
     case Engine::Playing: {
-      const Engine::Scope& thescope = m_engine->scope();
+      const Engine::Scope& thescope = m_engine->scope(m_timeout);
       int i = 0;
 
-      // convert to mono here - our built in analyzers need mono, but we the
+      // convert to mono here - our built in analyzers need mono, but the
       // engines provide interleaved pcm
       for (uint x = 0; (int)x < m_fht->size(); ++x) {
         m_lastScope[x] =
