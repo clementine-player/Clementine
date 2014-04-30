@@ -244,7 +244,6 @@ void GstEngine::AddBufferToScope(GstBuffer* buf, int pipeline_id) {
 }
 
 const Engine::Scope& GstEngine::scope(int chunk_length) {
-
   // the new buffer could have a different size
   if (have_new_buffer) {
     if (latest_buffer_ != nullptr) {
@@ -252,10 +251,10 @@ const Engine::Scope& GstEngine::scope(int chunk_length) {
           (double)(chunk_length * 1000000)));
     }
   
-  // if the buffer is shorter than the chunk length
-  if (scope_chunks <= 0) {
-    scope_chunks = 1;
-  }
+    // if the buffer is shorter than the chunk length
+    if (scope_chunks <= 0) {
+      scope_chunks = 1;
+    }
 
     scope_chunk = 0;
     have_new_buffer = false;
@@ -267,7 +266,11 @@ const Engine::Scope& GstEngine::scope(int chunk_length) {
 
 void GstEngine::UpdateScope(int chunk_length_) {
   typedef Engine::Scope::value_type sample_type;
-  int chunk_size = GST_BUFFER_SIZE(latest_buffer_) / (scope_chunks);
+
+  // determine where to split the buffer
+  int chunk_density = GST_BUFFER_SIZE(latest_buffer_) / 
+      (GST_BUFFER_DURATION(latest_buffer_) / 1000000);
+  int chunk_size = chunk_length_ * chunk_density;
 
   // determine the number of channels
   GstStructure* structure =
@@ -284,15 +287,24 @@ void GstEngine::UpdateScope(int chunk_length_) {
     return;
   }
 
-  // pass the next chunk of the buffer to the analyser
+  // set the starting point in the buffer to take data from
   const sample_type* source =
       reinterpret_cast<sample_type*>(GST_BUFFER_DATA(latest_buffer_));
   source += (chunk_size / sizeof(sample_type)) * scope_chunk;
   sample_type* dest = scope_.data();
 
-  const int bytes = qMin(
+  int bytes;
+
+  // make sure we don't go beyond the end of the buffer
+  if (scope_chunk == scope_chunks - 1) {
+    bytes = qMin(
+      static_cast<Engine::Scope::size_type>(GST_BUFFER_SIZE(latest_buffer_) - (chunk_size * scope_chunk)),
+      scope_.size() * sizeof(sample_type));
+  } else {
+    bytes = qMin(
       static_cast<Engine::Scope::size_type>(chunk_size),
       scope_.size() * sizeof(sample_type));
+  }
 
   scope_chunk++;
 
