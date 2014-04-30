@@ -22,6 +22,7 @@
 #include <QCheckBox>
 #include <QThread>
 #include <QFile>
+#include <QScopedPointer>
 #include <cdio/cdio.h>
 #include "ui_ripcd.h"
 
@@ -51,7 +52,7 @@ class RipCD : public QDialog {
   int finished_success_;
   int finished_failed_;
   track_t i_tracks_;
-  Ui_RipCD* ui_;
+  QScopedPointer<Ui_RipCD> ui_;
   CdIo_t* cdio_;
   QList<QCheckBox*> checkboxes_;
   QList<QString> generated_files_;

@@ -145,7 +145,6 @@ RipCD::RipCD(QWidget* parent)
 }
 
 RipCD::~RipCD() {
-  delete ui_;
   cdio_destroy(cdio_);
 }
 
@@ -307,7 +306,7 @@ void RipCD::ThreadedTranscoding() {
 
 void RipCD::ClickedRipButton() {
   if (cdio_ && cdio_get_media_changed(cdio_)) {
-    QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"),
+    QMessageBox cdio_fail(QMessageBox::Critical, tr("Error Ripping CD"),
                           tr("Media has changed. Reloading"));
     cdio_fail.exec();
     if (CheckCDIOIsValid()) {
@@ -416,7 +415,7 @@ bool RipCD::CheckCDIOIsValid() {
   // Refresh the status of the cd media. This will prevent unnecessary
   // rebuilds of the track list table.
   cdio_get_media_changed(cdio_);
-  return (cdio_);
+  return cdio_;
 }
 
 void RipCD::SetWorking(bool working) {
