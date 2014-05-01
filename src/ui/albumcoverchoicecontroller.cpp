@@ -30,6 +30,7 @@
 #include "ui/iconloader.h"
 
 #include <QAction>
+#include <QDesktopWidget>
 #include <QDialog>
 #include <QDragEnterEvent>
 #include <QFileDialog>
@@ -205,13 +206,26 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
 
   if (!song.album().isEmpty()) title_text += " - " + song.album();
 
-  dialog->setWindowTitle(title_text);
-
   QLabel* label = new QLabel(dialog);
   label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
       song.art_automatic(), song.art_manual(), song.url().toLocalFile()));
 
-  dialog->resize(label->pixmap()->size());
+  // add (WxHpx) to the title before possibly resizing
+  title_text += " (" + QString::number(label->pixmap()->width()) +
+        "x" + QString::number(label->pixmap()->height()) + "px)";
+
+  // if the cover is larger than the screen, resize the window
+  // 85% seems to be enough to account for title bar and taskbar etc.
+  QDesktopWidget desktop;
+  int desktop_height = desktop.geometry().height();
+  const int new_height = (double)desktop_height * 0.85;
+  if (new_height < label->pixmap()->height()) {
+    label->setPixmap(label->pixmap()->scaledToHeight(new_height,
+        Qt::SmoothTransformation));
+  }
+
+  dialog->setWindowTitle(title_text);
+  dialog->setFixedSize(label->pixmap()->size());
   dialog->show();
 }
 
