@@ -249,7 +249,7 @@ const Engine::Scope& GstEngine::scope(int chunk_length) {
   if (have_new_buffer_) {
     if (latest_buffer_ != nullptr) {
       scope_chunks_ = ceil(((double)GST_BUFFER_DURATION(latest_buffer_) /
-                           (double)(chunk_length * 1000000)));
+                           (double)(chunk_length * kNsecPerMsec)));
     }
 
     // if the buffer is shorter than the chunk length

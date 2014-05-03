@@ -161,7 +161,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   std::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url,
                                                     qint64 end_nanosec);
 
-  void UpdateScope(int chunk_length_);
+  void UpdateScope(int chunk_length);
 
   int AddBackgroundStream(std::shared_ptr<GstEnginePipeline> pipeline);
 
