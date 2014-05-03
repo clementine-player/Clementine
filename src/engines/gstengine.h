@@ -80,7 +80,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   qint64 position_nanosec() const;
   qint64 length_nanosec() const;
   Engine::State state() const;
-  const Engine::Scope& scope();
+  const Engine::Scope& scope(int chunk_length);
 
   OutputDetailsList GetOutputsList() const;
 
@@ -161,7 +161,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   std::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url,
                                                     qint64 end_nanosec);
 
-  void UpdateScope();
+  void UpdateScope(int chunk_length);
 
   int AddBackgroundStream(std::shared_ptr<GstEnginePipeline> pipeline);
 
@@ -223,6 +223,10 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   bool is_fading_out_to_pause_;
   bool has_faded_out_;
+
+  int scope_chunk_;
+  bool have_new_buffer_;
+  int scope_chunks_;
 
   QList<DeviceFinder*> device_finders_;
 };
