@@ -73,7 +73,7 @@ class Base : public QWidget {
   FHT* m_fht;
   EngineBase* m_engine;
   Scope m_lastScope;
-  int current_chunk;
+  int current_chunk_;
 
   bool new_frame_;
   bool is_playing_;

@@ -224,9 +224,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   bool is_fading_out_to_pause_;
   bool has_faded_out_;
 
-  int scope_chunk;
-  bool have_new_buffer;
-  int scope_chunks;
+  int scope_chunk_;
+  bool have_new_buffer_;
+  int scope_chunks_;
 
   QList<DeviceFinder*> device_finders_;
 };

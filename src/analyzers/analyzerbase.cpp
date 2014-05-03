@@ -52,7 +52,7 @@ Analyzer::Base::Base(QWidget* parent, uint scopeSize)
       m_fht(new FHT(scopeSize)),
       m_engine(nullptr),
       m_lastScope(512),
-      current_chunk(0),
+      current_chunk_(0),
       new_frame_(false),
       is_playing_(false) {}
 
