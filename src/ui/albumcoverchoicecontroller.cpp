@@ -133,7 +133,7 @@ void AlbumCoverChoiceController::SaveCoverToFile(const Song& song,
   QString extension = save_filename.right(4);
   if (!extension.startsWith('.') ||
       !QImageWriter::supportedImageFormats().contains(
-           extension.right(3).toUtf8())) {
+          extension.right(3).toUtf8())) {
     save_filename.append(".jpg");
   }
 
@@ -211,17 +211,28 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
       song.art_automatic(), song.art_manual(), song.url().toLocalFile()));
 
   // add (WxHpx) to the title before possibly resizing
-  title_text += " (" + QString::number(label->pixmap()->width()) +
-        "x" + QString::number(label->pixmap()->height()) + "px)";
+  title_text += " (" + QString::number(label->pixmap()->width()) + "x" +
+                QString::number(label->pixmap()->height()) + "px)";
 
   // if the cover is larger than the screen, resize the window
   // 85% seems to be enough to account for title bar and taskbar etc.
   QDesktopWidget desktop;
   int desktop_height = desktop.geometry().height();
-  const int new_height = (double)desktop_height * 0.85;
-  if (new_height < label->pixmap()->height()) {
-    label->setPixmap(label->pixmap()->scaledToHeight(new_height,
-        Qt::SmoothTransformation));
+  int desktop_width = desktop.geometry().width();
+
+  // resize differently if monitor is in portrait mode
+  if (desktop_width < desktop_height) {
+    const int new_width = (double)desktop_width * 0.95;
+    if (new_width < label->pixmap()->width()) {
+      label->setPixmap(
+          label->pixmap()->scaledToWidth(new_width, Qt::SmoothTransformation));
+    }
+  } else {
+    const int new_height = (double)desktop_height * 0.85;
+    if (new_height < label->pixmap()->height()) {
+      label->setPixmap(label->pixmap()->scaledToHeight(
+          new_height, Qt::SmoothTransformation));
+    }
   }
 
   dialog->setWindowTitle(title_text);
@@ -264,7 +275,6 @@ void AlbumCoverChoiceController::SaveCover(Song* song, const QString& cover) {
 QString AlbumCoverChoiceController::SaveCoverInCache(const QString& artist,
                                                      const QString& album,
                                                      const QImage& image) {
-
   // Hash the artist and album into a filename for the image
   QString filename(Utilities::Sha1CoverHash(artist, album).toHex() + ".jpg");
   QString path(AlbumCoverLoader::ImageCacheDir() + "/" + filename);
