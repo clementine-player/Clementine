@@ -1668,29 +1668,9 @@ QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name,
 void GroovesharkService::RequestSslErrors(const QList<QSslError>& errors) {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
 
-  bool ignore_ssl_errors = false;
-
   for (const QSslError& error : errors) {
     emit StreamError("SSL error occurred in Grooveshark request for " +
                      reply->url().toString() + ": " + error.errorString());
-    if (error.error() == QSslError::UnableToGetLocalIssuerCertificate) {
-      // We face this error on some installations (Linux Mint 15, Windows 8),
-      // probably because a root certificate is missing. However, I was unable
-      // to find which one was missing, and adding the full chain of
-      // certificate didn't help. As it means the root certificate wasn't
-      // found, but the certificate itself looks OK and the connection is
-      // secure anyway, I believe it's probably fine to ignore this particular
-      // error. Let's emit StreamError anyway, to not hide the error to the user
-      // completely.
-      // I might have used QNetworkReply::ignoreSslErrors(QList<QSslError>)
-      // instead, but it doesn't work as expected (see QTBUG-16770).
-      ignore_ssl_errors = true;
-    }
-  }
-
-  if (ignore_ssl_errors) {
-    qLog(Info) << "Ignoring SSL errors for this Grooveshark request";
-    reply->ignoreSslErrors();
   }
 }
 
