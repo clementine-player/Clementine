@@ -20,15 +20,14 @@
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QLabel" name="label">
-     <property name="text">
-      <string>You don't need to be logged in to search and to listen to music on SoundCloud.</string>
+     <property name="enabled">
+      <bool>true</bool>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>However, you need to login to access your playlists and your stream.</string>
+      <string>You don't need to be logged in to search and to listen to music on SoundCloud. However, you need to login to access your playlists and your stream.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
