@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-14 07:10+0000\n"
+"PO-Revision-Date: 2014-05-04 08:11+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -689,7 +689,7 @@ msgstr "Tất cả album"
 msgid "All artists"
 msgstr "Tất cả nghệ sĩ"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "Mọi tập tin (*)"
 
@@ -758,7 +758,7 @@ msgstr "Lỗi không xác định."
 msgid "And:"
 msgstr "Và:"
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "Angry"
 
@@ -981,7 +981,7 @@ msgstr "Duyệt tìm..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "Đang tạo bộ đệm"
 
@@ -1074,7 +1074,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Đặt tên cho danh sách nhạc của bạn"
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "Tự động lựa chọn"
 
@@ -1204,7 +1204,7 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr "Nhấn vào đây để chuyển đổi giữa thời gian còn lại và tổng thời gian"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1598,7 +1598,7 @@ msgstr "Giảm âm lượng"
 msgid "Default background image"
 msgstr "Dùng ảnh nền mặc định"
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2377,7 +2377,7 @@ msgstr "Tần số khung hình"
 msgid "Frames per buffer"
 msgstr "Số khung mỗi lần tạo bộ đệm"
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "Frozen"
 
@@ -2528,7 +2528,7 @@ msgstr ""
 msgid "HTTP proxy"
 msgstr "Proxy HTTP"
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "Happy"
 
@@ -2561,10 +2561,6 @@ msgstr "Không tìm thấy máy chủ, kiểm tra lại URL. Ví dụ: http://lo
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "Giờ"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr ""
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2600,11 +2596,11 @@ msgstr "Nếu bạn biết URL của một podcast, nhập nó vào bên dưới
 msgid "Ignore \"The\" in artist names"
 msgstr "Bỏ qua \"The\" trong phần tên nghệ sĩ"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "Hình ảnh (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Hình ảnh (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2889,15 +2885,15 @@ msgstr "Nạp"
 msgid "Load cover from URL"
 msgstr "Nạp ảnh bìa từ URL"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "Nạp ảnh bìa từ URL..."
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "Nạp ảnh bìa từ đĩa"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "Nạp ảnh bìa từ đĩa..."
 
@@ -2954,7 +2950,7 @@ msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3319,7 +3315,7 @@ msgstr "Không"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Không bài hát nào phù hợp để chép qua thiết bị"
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "Bình thường"
 
@@ -4117,11 +4113,11 @@ msgstr "Tần số âm thanh"
 msgid "Save .mood files in your music library"
 msgstr "Lưu tập tin .mood trong thư viện nhạc"
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "Lưu ảnh bìa album"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "Lưu lại ảnh bìa..."
 
@@ -4210,11 +4206,11 @@ msgstr "Tìm trên Magnatune"
 msgid "Search Subsonic"
 msgstr "Tìm trên Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr "Tìm ảnh bìa..."
 
@@ -4412,7 +4408,7 @@ msgstr "Hiện ảnh bìa trong thư viện"
 msgid "Show dividers"
 msgstr "Hiện đường phân cách"
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "Hiện với kích thước gốc..."
 
@@ -4601,7 +4597,7 @@ msgstr "Sắp xếp bài hát theo"
 msgid "Sorting"
 msgstr "Sắp xếp"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr ""
 
@@ -4777,7 +4773,7 @@ msgstr "Đang đồng bộ danh sách Spotify"
 msgid "Syncing Spotify starred tracks"
 msgstr "Đang đồng bộ các bài hát được đánh dấu sao của Spotify"
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "Màu hệ thống"
 
@@ -5074,7 +5070,7 @@ msgstr "Không thể tải về %1 (%2)"
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Chưa xác định"
@@ -5087,7 +5083,7 @@ msgstr "Không hiểu nội dung"
 msgid "Unknown error"
 msgstr "Lỗi không xác định"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "Bỏ thiết đặt ảnh bìa"
 
@@ -5506,10 +5502,11 @@ msgstr "Bạn không có tài khoản cao cấp của Spotify."
 msgid "You do not have an active subscription"
 msgstr "Bạn không có một đăng kí được kích hoạt"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
 msgstr ""
 
 #: internet/spotifyservice.cpp:175

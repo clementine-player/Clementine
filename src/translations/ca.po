@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-17 11:02+0000\n"
+"PO-Revision-Date: 2014-05-04 13:21+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -690,7 +690,7 @@ msgstr "Tots els àlbums"
 msgid "All artists"
 msgstr "Tots els artistes"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "Tots els fitxers (*)"
 
@@ -759,7 +759,7 @@ msgstr "S’ha produït un error no especificat."
 msgid "And:"
 msgstr "I:"
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "Enfadat"
 
@@ -982,7 +982,7 @@ msgstr "Explora…"
 msgid "Buffer duration"
 msgstr "Durada de la memòria intermèdia"
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "Emplenant la memòria intermèdia"
 
@@ -1075,7 +1075,7 @@ msgstr "Trieu la carpeta de memòria cau del Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Trieu un nom per a la llista de reproducció intel·ligent"
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "Tria automàticament"
 
@@ -1205,7 +1205,7 @@ msgstr "Feu clic aquí per marcar aquesta llista com a favorita i afegir-la al p
 msgid "Click to toggle between remaining time and total time"
 msgstr "Feu clic aquí per alternar entre el temps de reproducció restant i total"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1213,7 +1213,7 @@ msgstr "Feu clic aquí per alternar entre el temps de reproducció restant i tot
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "Premeu «Inicia sessió» i s’obrirà un navegador. Una vegada que acabi, torneu a Clementine."
+msgstr "Premeu «Entra» i s’obrirà un navegador. Quan acabeu, torneu al Clementine."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1599,7 +1599,7 @@ msgstr "Redueix el volum"
 msgid "Default background image"
 msgstr "Imatge de fons per defecte"
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositiu per defecte a %1"
@@ -2378,7 +2378,7 @@ msgstr "Taxa de mostreig"
 msgid "Frames per buffer"
 msgstr "Trames per espai de memòria intermèdia"
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "Congelat"
 
@@ -2529,7 +2529,7 @@ msgstr "S’ha rebut el codi d’estat d’HTTP 3xx sense un URL, comproveu la c
 msgid "HTTP proxy"
 msgstr "Proxy HTTP"
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "Content"
 
@@ -2562,10 +2562,6 @@ msgstr "No s’ha trobat l’amfitrió, comproveu l’URL del servidor. Exemple:
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "Hores"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr "Però, heu d’iniciar sessió per accedir a les vostres llestes i retransmissions."
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2601,11 +2597,11 @@ msgstr "Si coneixeu l’URL d’un podcast, escriviu-ho a continuació i feu cli
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignora «The» als noms dels artistes"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2890,15 +2886,15 @@ msgstr "Carregar"
 msgid "Load cover from URL"
 msgstr "Carrega la caràtula des de l’URL"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "Carrega la caràtula des de l’URL…"
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "Carrega la portada des del disc dur"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "Carrega la caràtula des del disc…"
 
@@ -2955,7 +2951,7 @@ msgstr "Carregar fitxers/URLs, substituïnt l'actual llista de reproducció"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3094,7 +3090,7 @@ msgstr "Un o més termes de cerca han de coincidir (OR)"
 
 #: ../bin/src/ui_vksettingspage.h:215
 msgid "Max global search results"
-msgstr ""
+msgstr "Resultats globals de cerca màxims"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
@@ -3320,7 +3316,7 @@ msgstr "Cap"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Cap de les cançons seleccionades són adequades per copiar-les a un dispositiu"
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "Normal"
 
@@ -3712,7 +3708,7 @@ msgstr "Preferències…"
 
 #: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
-msgstr "Noms d'arxiu preferits per a les caràtules dels àlbums (separats per comes)"
+msgstr "Noms de fitxer preferits per a les caràtules dels àlbums (separats per comes)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:167
 msgid "Preferred audio format"
@@ -4118,11 +4114,11 @@ msgstr "Freqüència de mostreig"
 msgid "Save .mood files in your music library"
 msgstr "Desa fitxers .mood en la vostra col·lecció musical"
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "Desa la caràtula de l’àlbum"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "Desa la caràtula al disc dur…"
 
@@ -4211,11 +4207,11 @@ msgstr "Cerca al Magnatune"
 msgid "Search Subsonic"
 msgstr "Cerca a Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr "Cerca automàticament"
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr "Cerca la caràtula del àlbum…"
 
@@ -4413,7 +4409,7 @@ msgstr "Mostra les caràtules a la col·lecció"
 msgid "Show dividers"
 msgstr "Mostra els separadors"
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "Mostra a mida completa..."
 
@@ -4496,7 +4492,7 @@ msgstr "Inicieu la sessió"
 
 #: ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
-msgstr "Tancar la sessió"
+msgstr "Finalitza la sessió"
 
 #: ../bin/src/ui_loginstatewidget.h:175
 msgid "Signing in..."
@@ -4602,7 +4598,7 @@ msgstr "Ordena les cançons per"
 msgid "Sorting"
 msgstr "Ordenació"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
@@ -4778,7 +4774,7 @@ msgstr "S'està sincronitzant la llista de reproducció de Spotify"
 msgid "Syncing Spotify starred tracks"
 msgstr "S'estan sincronitzant les pistes destacades de Spotify"
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "Colors del sistema"
 
@@ -4936,7 +4932,7 @@ msgstr "Aquest dispositiu és un iPod, però heu compilat el Clementine sense co
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "Aquest es el primer cop que connectes aquest dispositiu. Clementine analitzarà el dispositiu per trobar arxius de música - això pot trigar un mica."
+msgstr "Aquest es el primer cop que connecteu aquest dispositiu. El Clementine analitzarà el dispositiu per trobar música. Això pot trigar un mica."
 
 #: playlist/playlisttabbar.cpp:186
 msgid "This option can be changed in the \"Behavior\" preferences"
@@ -5075,7 +5071,7 @@ msgstr "No es pot baixar %1 (%2)"
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Desconegut"
@@ -5088,7 +5084,7 @@ msgstr "Tipus de contingut desconegut"
 msgid "Unknown error"
 msgstr "Error desconegut"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "Esborra'n la portada"
 
@@ -5507,21 +5503,22 @@ msgstr "No disposeu d'un compte Spotify Premium"
 msgid "You do not have an active subscription"
 msgstr "No teniu una subscripció activa"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
-msgstr "No cal iniciar sessió per cercar i escoltar música al SoundCloud."
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
+msgstr "No cal iniciar sessió per cercar i escoltar música al SoundCloud. Però, heu d’iniciar sessió per accedir a les vostres llestes de reproducció i actualitzacions."
 
 #: internet/spotifyservice.cpp:175
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr "S’ha tancat la vostra sessió de l’Spotify, torneu a introduir la contrasenya al diàleg de configuració."
+msgstr "Ha finalitzat la vostra sessió de l’Spotify. Torneu a introduir la contrasenya al diàleg de configuració."
 
 #: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "S’ha tancat la vostra sessió de l’Spotify, torneu a introduir la contrasenya."
+msgstr "Ha finalitzat la vostra sessió de l’Spotify. Torneu a introduir la contrasenya."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:85
 msgid "You love this track"

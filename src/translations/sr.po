@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-15 14:09+0000\n"
+"PO-Revision-Date: 2014-05-04 10:33+0000\n"
 "Last-Translator: daimonion <pejakm@autistici.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/projects/p/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -688,7 +688,7 @@ msgstr "Сви албуми"
 msgid "All artists"
 msgstr "Сви извођачи"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "Сви фајлови"
 
@@ -757,7 +757,7 @@ msgstr "Дошло је до неодређене грешке."
 msgid "And:"
 msgstr "И:"
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "љутит"
 
@@ -980,7 +980,7 @@ msgstr "Прегледај..."
 msgid "Buffer duration"
 msgstr "Величина бафера"
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "Баферујем"
 
@@ -1073,7 +1073,7 @@ msgstr "Избор фасцикле кеша за Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Изаберите име за вашу паметну листу"
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "Изабери аутоматски"
 
@@ -1203,7 +1203,7 @@ msgstr "Кликните овде да ставите ову листу нуме
 msgid "Click to toggle between remaining time and total time"
 msgstr "Кликните да промените приказ преосталог/укупног времена"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1597,7 +1597,7 @@ msgstr "Смањи јачину звука"
 msgid "Default background image"
 msgstr "Подразумевана"
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr "Подразумевани уређај на %1"
@@ -2376,7 +2376,7 @@ msgstr "Број кадрова"
 msgid "Frames per buffer"
 msgstr "Сличица по баферу"
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "залеђен"
 
@@ -2527,7 +2527,7 @@ msgstr "Примљен ХТТП 3xx кôд без УРЛ-а, проверите 
 msgid "HTTP proxy"
 msgstr "ХТТП прокси"
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "срећан"
 
@@ -2560,10 +2560,6 @@ msgstr "Домаћин није нађен, проверите УРЛ серве
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "сати"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr "Међутим, морате да се пријавите да бисте приступили вашим листама нумера и вашем току."
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2599,11 +2595,11 @@ msgstr "Ако знате УРЛ подкаста, унесите га испо�
 msgid "Ignore \"The\" in artist names"
 msgstr "Игонориши „The“ у имену извођача"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "Слике (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Слике (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2888,15 +2884,15 @@ msgstr "Учитај"
 msgid "Load cover from URL"
 msgstr "Учитавање омота са УРЛ-а"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "Учитај омот са УРЛ-а..."
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "Учитавање омота са диска"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "Учитај омот са диска..."
 
@@ -2953,7 +2949,7 @@ msgstr "Учитава датотеке/УРЛ-ове, замењујући те
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3318,7 +3314,7 @@ msgstr "ништа"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ниједна од изабраних песама није погодна за копирање на уређај"
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "нормалан"
 
@@ -4116,11 +4112,11 @@ msgstr "узорковање"
 msgid "Save .mood files in your music library"
 msgstr "Сачувај .mood фајлове у музичкој библиотеци"
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "Уписивање омота албума"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "Сачувај омот на диск..."
 
@@ -4209,11 +4205,11 @@ msgstr "Тражи на Магнатјуну"
 msgid "Search Subsonic"
 msgstr "Тражи на Субсонику"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr "Тражи аутоматски"
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr "Тражи омоте албума..."
 
@@ -4411,7 +4407,7 @@ msgstr "Прикажи омот у библиотеци"
 msgid "Show dividers"
 msgstr "Прикажи раздвајаче"
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "Пуна величина..."
 
@@ -4600,7 +4596,7 @@ msgstr "Критеријум ређања"
 msgid "Sorting"
 msgstr "Ређање"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr "Саундклауд"
 
@@ -4776,7 +4772,7 @@ msgstr "Синхронизовање Спотифај листе нумера"
 msgid "Syncing Spotify starred tracks"
 msgstr "Синхронизовање Спотифај оцењених нумера"
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "системске боје"
 
@@ -5073,7 +5069,7 @@ msgstr "Не могу да преузмем %1 (%2)"
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Непознато"
@@ -5086,7 +5082,7 @@ msgstr "Непознат тип садржаја"
 msgid "Unknown error"
 msgstr "Непозната грешка"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "Уклони омот"
 
@@ -5505,11 +5501,12 @@ msgstr "Немате Спотифај Премијум налог."
 msgid "You do not have an active subscription"
 msgstr "Немате активну претплату"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
-msgstr "Не морате бити пријављени да бисте претраживали и слушали музику са Саундклауда."
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
+msgstr "Не морате бити пријављени да бисте претраживали и слушали музику са Саундклауда. Међутим, морате да се пријавите да бисте приступили вашим листама нумера и вашем току."
 
 #: internet/spotifyservice.cpp:175
 msgid ""

@@ -31,7 +31,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-26 12:28+0000\n"
+"PO-Revision-Date: 2014-05-04 08:29+0000\n"
 "Last-Translator: adem4ik\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -482,7 +482,7 @@ msgstr "Добавить папку…"
 
 #: ../bin/src/ui_librarysettingspage.h:188
 msgid "Add new folder..."
-msgstr "Добавить новую папку"
+msgstr "Добавить папку"
 
 #: ../bin/src/ui_addpodcastdialog.h:179
 msgid "Add podcast"
@@ -709,7 +709,7 @@ msgstr "Все альбомы"
 msgid "All artists"
 msgstr "Все исполнители"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "Все файлы (*)"
 
@@ -778,7 +778,7 @@ msgstr "Произошла неизвестная ошибка."
 msgid "And:"
 msgstr "А также:"
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "Сердитый"
 
@@ -1001,7 +1001,7 @@ msgstr "Обзор..."
 msgid "Buffer duration"
 msgstr "Размер буфера"
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "Буферизация"
 
@@ -1094,7 +1094,7 @@ msgstr "Выбрать путь кэша для Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Выберите название умного плейлиста"
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "Выбирать автоматически"
 
@@ -1163,15 +1163,15 @@ msgstr "Визуализация Clementine"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "При копировании на устройство, Clementine может автоматически конвертировать музыку в формат, который оно поддерживает."
+msgstr "При копировании на носитель Clementine может автоматически конвертировать музыку в формат, который оно поддерживает."
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr "Clementine может проигрывать музыку, загруженную вами на Box"
+msgstr "Clementine может проигрывать музыку, загруженную вами в Box"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr "Clementine может воспроизводить музыку, которую вы загрузили в Dropbox"
+msgstr "Clementine может проигрывать музыку, загруженную вами в Dropbox"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
@@ -1224,7 +1224,7 @@ msgstr "Нажмите здесь, чтобы добавить этот плей
 msgid "Click to toggle between remaining time and total time"
 msgstr "Нажмите для переключения между остающимся временем и полной длительностью"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1232,7 +1232,7 @@ msgstr "Нажмите для переключения между остающи
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "Нажатие на кнопку входа откроет браузер. Вернитесь в Clementine после совершения входа."
+msgstr "После нажатия откроется окно браузера. Вернитесь в Clementine, когда совершите вход."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1343,7 +1343,7 @@ msgstr "Подключить пульт Wii используя активаци�
 
 #: devices/devicemanager.cpp:321 devices/devicemanager.cpp:326
 msgid "Connect device"
-msgstr "Подсоединение устройства"
+msgstr "Подключить носитель"
 
 #: internet/spotifyservice.cpp:266
 msgid "Connecting to Spotify"
@@ -1378,7 +1378,7 @@ msgstr "Конвертировать всю музыку"
 
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert any music that the device can't play"
-msgstr "Конвертировать всю музыку, которую может проигрывать устройство."
+msgstr "Конвертировать всю музыку, не поддерживаемую носителем."
 
 #: internet/vkservice.cpp:318
 msgid "Copy share url to clipboard"
@@ -1391,7 +1391,7 @@ msgstr "Скопировать в буфер"
 #: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
 #: ui/mainwindow.cpp:602 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
-msgstr "Копировать на устройство..."
+msgstr "Копировать на носитель"
 
 #: devices/deviceview.cpp:225 ui/mainwindow.cpp:592
 #: widgets/fileviewlist.cpp:38
@@ -1618,7 +1618,7 @@ msgstr "Уменьшить громкость"
 msgid "Default background image"
 msgstr "Стандартное фоновое изображение"
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr "Устройство по умолчанию на %1"
@@ -1651,7 +1651,7 @@ msgstr "Удалить файлы"
 
 #: devices/deviceview.cpp:228
 msgid "Delete from device..."
-msgstr "Удалить с устройства"
+msgstr "Удалить с носителя"
 
 #: library/libraryview.cpp:402 ui/mainwindow.cpp:604
 #: widgets/fileviewlist.cpp:44
@@ -1705,7 +1705,7 @@ msgstr "Свойства носителя"
 
 #: ../bin/src/ui_podcastsettingspage.h:254
 msgid "Device name"
-msgstr "Имя устройства"
+msgstr "Имя носителя"
 
 #: devices/deviceview.cpp:210
 msgid "Device properties..."
@@ -2352,13 +2352,13 @@ msgstr "Принудительное кодирование в моно"
 #: devices/deviceview.cpp:207 devices/deviceview.cpp:330
 #: devices/deviceview.cpp:335
 msgid "Forget device"
-msgstr "\"Забыть\" устройство"
+msgstr "\"Забыть\" носитель"
 
 #: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "Команда \"Забыть устройство\", удалит устройство из этого списка и Clementine пересканирует все песни на нём при следующем подключении."
+msgstr "Команда \"Забыть носитель\", удалит носитель из этого списка и Clementine пересканирует все песни на нём при следующем подключении."
 
 #: ../bin/src/ui_deviceviewcontainer.h:98
 #: ../bin/src/ui_searchproviderstatuswidget.h:94
@@ -2397,7 +2397,7 @@ msgstr "Частота кадров"
 msgid "Frames per buffer"
 msgstr "Фреймов на буфер"
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "Сдержанный"
 
@@ -2548,7 +2548,7 @@ msgstr "Код состояния HTTP 3xx получен без URL, прове
 msgid "HTTP proxy"
 msgstr "HTTP-прокси"
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "Счастливый"
 
@@ -2581,10 +2581,6 @@ msgstr "Сервер не найден, проверьте адрес серве
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "Часа(ов)"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr "Но всё же вам нужно войти, чтобы получить доступ к своим плейлистам и подпискам."
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2620,11 +2616,11 @@ msgstr "Если вы знаете адрес подкаста, введите �
 msgid "Ignore \"The\" in artist names"
 msgstr "Игнорировать \"The\" в именах исполнителей"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2909,15 +2905,15 @@ msgstr "Загрузить"
 msgid "Load cover from URL"
 msgstr "Загрузить обложку по ссылке"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "Загрузить обложку по ссылке..."
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "Загрузить обложку с диска"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "Загрузить обложку с диска..."
 
@@ -2974,7 +2970,7 @@ msgstr "Загрузка файлов или ссылок с заменой те
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3324,7 +3320,7 @@ msgstr "Без длинных блоков"
 #: playlist/playlistcontainer.cpp:365
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Совпадений не найдено. Очистите строку поиска, чтобы снова увидеть плейлист."
+msgstr "Совпадений не найдено. Очистите строку поиска, чтобы увидеть плейлист снова."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -3339,7 +3335,7 @@ msgstr "Ничего"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ни одна из выбранных песен не будет скопирована на устройство"
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "Нормальный"
 
@@ -3499,7 +3495,7 @@ msgstr "Открыть в новом плейлисте"
 
 #: songinfo/echonestbiographies.cpp:97
 msgid "Open in your browser"
-msgstr "Открыть в вашем браузере"
+msgstr "Открыть в браузере"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:178
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
@@ -3678,7 +3674,7 @@ msgstr "Списки"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
-msgstr "Закройте браузер и вернитесь в Clementine."
+msgstr "Пожалуйста, закройте браузер и вернитесь в Clementine."
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
@@ -4137,11 +4133,11 @@ msgstr "Частота дискретизации"
 msgid "Save .mood files in your music library"
 msgstr "Сохранять файлы настроения .mood рядом с аудио файлами"
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "Сохранить обложку альбома"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "Сохранить обложку на диск..."
 
@@ -4230,11 +4226,11 @@ msgstr "Поиск на Magnatune"
 msgid "Search Subsonic"
 msgstr "Поиск Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr "Искать автоматически"
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr "Поиск обложек альбомов..."
 
@@ -4432,7 +4428,7 @@ msgstr "Показывать обложки в фонотеке"
 msgid "Show dividers"
 msgstr "Показывать разделители"
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "Показать в полный размер..."
 
@@ -4583,11 +4579,11 @@ msgstr "Soft Rock"
 
 #: ../bin/src/ui_songinfosettingspage.h:154
 msgid "Song Information"
-msgstr "Информация о песне"
+msgstr "О песне"
 
 #: ui/mainwindow.cpp:243
 msgid "Song info"
-msgstr "Песня"
+msgstr "О песне"
 
 #: analyzers/sonogram.cpp:19
 msgid "Sonogram"
@@ -4621,7 +4617,7 @@ msgstr "Сортировать песни по"
 msgid "Sorting"
 msgstr "Сортировка"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
@@ -4678,7 +4674,7 @@ msgstr "Конвертировать"
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr "Введите что-нибудь в поле для поиска"
+msgstr "Введите что-нибудь в поле для начала поиска"
 
 #: transcoder/transcoder.cpp:401
 #, qt-format
@@ -4797,7 +4793,7 @@ msgstr "Синхронизация плейлистов Spotify"
 msgid "Syncing Spotify starred tracks"
 msgstr "Синхронизация оцененных треков Spotify"
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "Системные цвета"
 
@@ -4968,7 +4964,7 @@ msgstr "Поток только для платных подписчиков"
 #: devices/devicemanager.cpp:591
 #, qt-format
 msgid "This type of device is not supported: %1"
-msgstr "Тип устройства не поддерживается: %1"
+msgstr "Не поддерживаемый тип устройства: %1"
 
 #: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
@@ -5043,7 +5039,7 @@ msgstr "Композиции"
 
 #: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:683
 msgid "Transcode Music"
-msgstr "Конвертация музыки"
+msgstr "Конвертер музыки"
 
 #: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
@@ -5051,7 +5047,7 @@ msgstr "Журнал конвертера"
 
 #: ../bin/src/ui_transcodersettingspage.h:173
 msgid "Transcoding"
-msgstr "Конвертация"
+msgstr "Конвертер"
 
 #: transcoder/transcoder.cpp:305
 #, qt-format
@@ -5094,7 +5090,7 @@ msgstr "Невозможно загрузить %1 (%2)"
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Неизвестный"
@@ -5107,7 +5103,7 @@ msgstr "Неизвестный тип контента"
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "Удалить обложку"
 
@@ -5526,11 +5522,12 @@ msgstr "У вас нет учетной записи Spotify Premium"
 msgid "You do not have an active subscription"
 msgstr "У вас нет активной подписки"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
-msgstr "Для поиска и прослушивания музыки на SoundCloud входить не обязательно."
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
+msgstr "Для поиска и прослушивания музыки на SoundCloud входить не обязательно. Но если вы хотите получить доступ к своим плейлистам и подпискам, вам нужно войти."
 
 #: internet/spotifyservice.cpp:175
 msgid ""
@@ -5626,7 +5623,7 @@ msgstr "и"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 msgid "automatic"
-msgstr "автоматически"
+msgstr "авто"
 
 #: smartplaylists/searchterm.cpp:206
 msgid "before"
@@ -5685,7 +5682,7 @@ msgstr "больше чем"
 
 #: ../bin/src/ui_deviceviewcontainer.h:99
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
-msgstr "Устройства iPod и USB пока не поддерживаются в Windows. Извините!"
+msgstr "iPod и USB носители пока не поддерживаются в Windows. Извините!"
 
 #: smartplaylists/searchterm.cpp:212
 msgid "in the last"

@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-23 12:12+0000\n"
+"PO-Revision-Date: 2014-05-06 09:29+0000\n"
 "Last-Translator: whdgmawkd <whdgmawkd@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -694,7 +694,7 @@ msgstr "모든 앨범"
 msgid "All artists"
 msgstr "모든 음악가"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "모든 파일 (*)"
 
@@ -763,7 +763,7 @@ msgstr "지정되지 않은 에러가 발생"
 msgid "And:"
 msgstr "그리고:"
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "화난"
 
@@ -986,7 +986,7 @@ msgstr "찾아보기..."
 msgid "Buffer duration"
 msgstr "버퍼 시간"
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "버퍼링"
 
@@ -1079,7 +1079,7 @@ msgstr "Vk.com 캐시 디렉터리 선택"
 msgid "Choose a name for your smart playlist"
 msgstr "스마트 재생목록에 이름 추가"
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "자동 선택"
 
@@ -1209,7 +1209,7 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr "남은 시간과 전체 시간을 바꾸려면 클릭하세요"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1603,7 +1603,7 @@ msgstr "음량 줄이기"
 msgid "Default background image"
 msgstr "기본 배경 그림"
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2382,7 +2382,7 @@ msgstr "프레임레이트"
 msgid "Frames per buffer"
 msgstr "프레임/"
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "얼음"
 
@@ -2533,7 +2533,7 @@ msgstr "URL이 없이 HTTP 3XX 상태코드가 수신 되었습니다. 서버 �
 msgid "HTTP proxy"
 msgstr "HTTP "
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "행복"
 
@@ -2566,10 +2566,6 @@ msgstr "호스트가 발견되지 않았습니다. 서버의 주소를 확인하
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "시간"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr ""
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2605,11 +2601,11 @@ msgstr "팟케스트에 URL을 알고 있다면, 아래에 입력하고 버튼�
 msgid "Ignore \"The\" in artist names"
 msgstr "음악가 이름에서 \"The\" 제거"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "그림 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2894,15 +2890,15 @@ msgstr "열기"
 msgid "Load cover from URL"
 msgstr "URL로 부터 커버 열기"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "URL로 부터 커버 열기..."
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "디스크로부터 커버 열기"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "디스크로부터 커버열기..."
 
@@ -2959,7 +2955,7 @@ msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3324,7 +3320,7 @@ msgstr "없음"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "선택된 음악들이 장치에 복사되기 적합하지 않음"
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "일반"
 
@@ -3806,7 +3802,7 @@ msgstr "무작위 순서에 곡을 "
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 #: visualisations/visualisationcontainer.cpp:118
 msgid "Quality"
-msgstr "음질"
+msgstr "품질"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -4122,11 +4118,11 @@ msgstr "샘플 레이트"
 msgid "Save .mood files in your music library"
 msgstr "음악 라이브러리에 .mood 파일 저장"
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "앨범 표지 저장"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "커버를 디스크에 저장..."
 
@@ -4215,11 +4211,11 @@ msgstr "Magnature 검색"
 msgid "Search Subsonic"
 msgstr "Subsonic 검색"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr "자동적으로 찾기"
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr "앨범 표지 검색..."
 
@@ -4417,7 +4413,7 @@ msgstr "라이브러리에서 커버아트 보기"
 msgid "Show dividers"
 msgstr "분할 표시"
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "전체화면 보기..."
 
@@ -4606,7 +4602,7 @@ msgstr "음악 정렬"
 msgid "Sorting"
 msgstr "정렬"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr ""
 
@@ -4782,7 +4778,7 @@ msgstr "Spotify 재생목록 동기화중"
 msgid "Syncing Spotify starred tracks"
 msgstr "Sportify 별점 트랙 동기화 중"
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "시스템 색상"
 
@@ -5079,7 +5075,7 @@ msgstr ""
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "알 수 없는"
@@ -5092,7 +5088,7 @@ msgstr "알 수 없는 content-type"
 msgid "Unknown error"
 msgstr "알 수 없는 오류"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "커버 해제"
 
@@ -5511,10 +5507,11 @@ msgstr "당신은 Spotify 프리미엄 계정이 아닙니다."
 msgid "You do not have an active subscription"
 msgstr ""
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
 msgstr ""
 
 #: internet/spotifyservice.cpp:175
