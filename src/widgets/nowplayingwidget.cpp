@@ -44,11 +44,6 @@ const char* NowPlayingWidget::kHypnotoadPath = ":/hypnotoad.gif";
 // Space between the cover and the details in small mode
 const int NowPlayingWidget::kPadding = 2;
 
-// Width of the transparent to black gradient above and below the text in large
-// mode
-const int NowPlayingWidget::kGradientHead = 40;
-const int NowPlayingWidget::kGradientTail = 20;
-
 // Maximum height of the cover in large mode, and offset between the
 // bottom of the cover and bottom of the widget
 const int NowPlayingWidget::kMaxCoverSize = 260;
@@ -354,23 +349,6 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
         }
       }
 
-      // Work out how high the text is going to be
-      const int text_height = details_->size().height();
-      const int gradient_mid = height() - qMax(text_height, kBottomOffset);
-
-      // Draw the black fade
-      QLinearGradient gradient(0, gradient_mid - kGradientHead, 0,
-                               gradient_mid + kGradientTail);
-      gradient.setColorAt(0, QColor(0, 0, 0, 0));
-      gradient.setColorAt(1, QColor(0, 0, 0, 255));
-
-      p->fillRect(0, gradient_mid - kGradientHead, width(),
-                  height() - (gradient_mid - kGradientHead), gradient);
-
-      // Draw the text on top
-      p->translate(x_offset, height() - text_height);
-      details_->drawContents(p);
-      p->translate(-x_offset, -height() + text_height);
       break;
   }
 }
