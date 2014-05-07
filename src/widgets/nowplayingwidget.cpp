@@ -525,7 +525,8 @@ bool NowPlayingWidget::GetCoverAutomatically() {
   bool search =
       album_cover_choice_controller_->search_cover_auto_action()->isChecked() &&
       !metadata_.has_manually_unset_cover() &&
-      metadata_.art_automatic().isEmpty() && metadata_.art_manual().isEmpty();
+      metadata_.art_automatic().isEmpty() && metadata_.art_manual().isEmpty() &&
+      !metadata_.artist().isEmpty() && !metadata_.album().isEmpty();
 
   if (search) {
     qLog(Debug) << "GetCoverAutomatically";
