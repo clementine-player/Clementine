@@ -588,6 +588,9 @@ void OutgoingDataCreator::SendSongs(
     case pb::remote::APlaylist:
       SendPlaylist(client, request.playlist_id());
       break;
+    case pb::remote::Urls:
+      SendUrls(client, request);
+      break;
     default:
       break;
   }
@@ -734,6 +737,29 @@ void OutgoingDataCreator::SendPlaylist(RemoteClient* client, int playlist_id) {
       DownloadItem item(s, song_list.indexOf(s) + 1, count);
       download_queue_[client].append(item);
     }
+  }
+}
+
+void OutgoingDataCreator::SendUrls(RemoteClient *client,
+                                   const pb::remote::RequestDownloadSongs &request) {
+  SongList song_list;
+
+  // First gather all valid songs
+  for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
+    std::string s = *it;
+    QUrl url = QUrl(QStringFromStdString(s));
+
+    Song song = app_->library_backend()->GetSongByUrl(url);
+
+    if (song.is_valid() && song.url().scheme() == "file") {
+      song_list.append(song);
+    }
+  }
+
+  // Then send them to Clementine Remote
+  for (Song s : song_list) {
+    DownloadItem item(s, song_list.indexOf(s) + 1, song_list.count());
+    download_queue_[client].append(item);
   }
 }
 

@@ -243,10 +243,12 @@ enum DownloadItem {
   CurrentItem = 1;
   ItemAlbum = 2;
   APlaylist = 3;
+  Urls = 4;
 }
 message RequestDownloadSongs {
   optional DownloadItem download_item = 1;
   optional int32 playlist_id = 2;
+  repeated string urls = 3;
 }
 
 message ResponseSongFileChunk {
@@ -278,7 +280,7 @@ message RequestRateSong {
 
 // The message itself
 message Message {
-  optional int32 version = 1 [default=14];
+  optional int32 version = 1 [default=15];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
