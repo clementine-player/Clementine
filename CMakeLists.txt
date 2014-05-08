@@ -25,11 +25,7 @@ if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-find_package(Qt4 4.5.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
-
-if(NOT APPLE)
-  find_package(Qt4 COMPONENTS QtWebKit)
-endif(NOT APPLE)
+find_package(Qt4 4.5.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml QtWebKit)
 
 # Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
 find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)

@@ -139,8 +139,8 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
 
   for (RemoteClient* client : *clients_) {
     // Do not send data to downloaders
-    if (client->isDownloader()) {
-      if (client->State() != QTcpSocket::ConnectedState) {
+    if (client->downloader()) {
+      if (client->state() != QAbstractSocket::ConnectedState) {
         clients_->removeAt(clients_->indexOf(client));
         download_queue_.remove(client);
         delete client;
@@ -149,7 +149,7 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     }
 
     // Check if the client is still active
-    if (client->State() == QTcpSocket::ConnectedState) {
+    if (client->state() == QAbstractSocket::ConnectedState) {
       client->SendData(msg);
     } else {
       clients_->removeAt(clients_->indexOf(client));

@@ -15,9 +15,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fullscreenhypnotoad.h"
 #include "nowplayingwidget.h"
+
+#include <QMenu>
+#include <QMovie>
+#include <QPainter>
+#include <QPaintEvent>
+#include <QSettings>
+#include <QSignalMapper>
+#include <QtDebug>
+#include <QTextDocument>
+#include <QTimeLine>
+
 #include "core/application.h"
+#include "core/logging.h"
 #include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
 #include "covers/currentartloader.h"
@@ -26,16 +37,7 @@
 #include "networkremote/networkremote.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/iconloader.h"
-
-#include <QMenu>
-#include <QMovie>
-#include <QPainter>
-#include <QPaintEvent>
-#include <QSettings>
-#include <QSignalMapper>
-#include <QTextDocument>
-#include <QTimeLine>
-#include <QtDebug>
+#include "widgets/fullscreenhypnotoad.h"
 
 const char* NowPlayingWidget::kSettingsGroup = "NowPlayingWidget";
 

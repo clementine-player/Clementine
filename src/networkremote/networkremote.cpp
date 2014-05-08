@@ -17,21 +17,29 @@
 
 #include "networkremote.h"
 
-#include "core/logging.h"
-#include "covers/currentartloader.h"
-#include "networkremote/zeroconf.h"
-#include "playlist/playlistmanager.h"
-
 #include <QDataStream>
-#include <QSettings>
 #include <QHostInfo>
 #include <QNetworkProxy>
+#include <QSettings>
+#include <QTcpServer>
+#include <QWebFrame>
+
+#include "core/application.h"
+#include "core/logging.h"
+#include "covers/currentartloader.h"
+#include "networkremote/clementinewebpage.h"
+#include "networkremote/incomingdataparser.h"
+#include "networkremote/outgoingdatacreator.h"
+#include "networkremote/tcpremoteclient.h"
+#include "networkremote/webremoteclient.h"
+#include "networkremote/zeroconf.h"
+#include "playlist/playlistmanager.h"
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
 const quint16 NetworkRemote::kDefaultServerPort = 5500;
 
-NetworkRemote::NetworkRemote(Application* app, QObject* parent)
-    : QObject(parent), signals_connected_(false), app_(app) {}
+NetworkRemote::NetworkRemote(ClementineWebPage* web_channel, Application* app, QObject* parent)
+    : QObject(parent), web_channel_(web_channel), signals_connected_(false), app_(app) {}
 
 NetworkRemote::~NetworkRemote() { StopServer(); }
 
@@ -49,8 +57,8 @@ void NetworkRemote::ReadSettings() {
 }
 
 void NetworkRemote::SetupServer() {
-  server_.reset(new QTcpServer());
-  server_ipv6_.reset(new QTcpServer());
+  server_.reset(new QTcpServer);
+  server_ipv6_.reset(new QTcpServer);
   incoming_data_parser_.reset(new IncomingDataParser(app_));
   outgoing_data_creator_.reset(new OutgoingDataCreator(app_));
 
@@ -66,6 +74,7 @@ void NetworkRemote::SetupServer() {
           SLOT(AcceptConnection()));
   connect(server_ipv6_.get(), SIGNAL(newConnection()), this,
           SLOT(AcceptConnection()));
+  connect(web_channel_.get(), SIGNAL(Connected()), SLOT(AcceptWebConnection()));
 }
 
 void NetworkRemote::StartServer() {
@@ -112,6 +121,32 @@ void NetworkRemote::ReloadSettings() {
 }
 
 void NetworkRemote::AcceptConnection() {
+  ConnectSignals();
+
+  QTcpServer* server = qobject_cast<QTcpServer*>(sender());
+  QTcpSocket* client_socket = server->nextPendingConnection();
+  // Check if our ip is in private scope
+  if (only_non_public_ip_ && !IpIsPrivate(client_socket->peerAddress())) {
+    qLog(Info) << "Got a connection from public ip"
+               << client_socket->peerAddress().toString();
+    client_socket->close();
+  } else {
+    CreateRemoteClient(client_socket);
+  }
+}
+
+void NetworkRemote::AcceptWebConnection() {
+  ConnectSignals();
+
+  WebRemoteClient* client = new WebRemoteClient(web_channel_.get(), app_, this);
+  clients_.push_back(client);
+
+  // Connect the signal to parse data
+  connect(client, SIGNAL(Parse(pb::remote::Message)),
+          incoming_data_parser_.get(), SLOT(Parse(pb::remote::Message)));
+}
+
+void NetworkRemote::ConnectSignals() {
   if (!signals_connected_) {
     signals_connected_ = true;
 
@@ -170,17 +205,6 @@ void NetworkRemote::AcceptConnection() {
     connect(incoming_data_parser_.get(), SIGNAL(SendLibrary(RemoteClient*)),
             outgoing_data_creator_.get(), SLOT(SendLibrary(RemoteClient*)));
   }
-
-  QTcpServer* server = qobject_cast<QTcpServer*>(sender());
-  QTcpSocket* client_socket = server->nextPendingConnection();
-  // Check if our ip is in private scope
-  if (only_non_public_ip_ && !IpIsPrivate(client_socket->peerAddress())) {
-    qLog(Info) << "Got a connection from public ip"
-               << client_socket->peerAddress().toString();
-    client_socket->close();
-  } else {
-    CreateRemoteClient(client_socket);
-  }
 }
 
 bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
@@ -203,7 +227,7 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
 void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
   if (client_socket) {
     // Add the client to the list
-    RemoteClient* client = new RemoteClient(app_, client_socket);
+    RemoteClient* client = new TcpRemoteClient(app_, client_socket);
     clients_.push_back(client);
 
     // Connect the signal to parse data

@@ -419,9 +419,6 @@ void SpotifyClient::SendPlaylistList() {
     sp_playlist* playlist = sp_playlistcontainer_playlist(container, i);
     const bool is_loaded = sp_playlist_is_loaded(playlist);
 
-    qLog(Debug) << "Got playlist" << i << is_loaded << type
-                << sp_playlist_name(playlist);
-
     if (!is_loaded) {
       qLog(Info) << "Playlist is not loaded yet, waiting...";
       return;

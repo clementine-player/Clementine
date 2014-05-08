@@ -226,11 +226,14 @@ set(SOURCES
   musicbrainz/musicbrainzclient.cpp
   musicbrainz/tagfetcher.cpp
 
+  networkremote/clementinewebpage.cpp
   networkremote/incomingdataparser.cpp
   networkremote/networkremote.cpp
   networkremote/networkremotehelper.cpp
   networkremote/outgoingdatacreator.cpp
   networkremote/remoteclient.cpp
+  networkremote/tcpremoteclient.cpp
+  networkremote/webremoteclient.cpp
   networkremote/zeroconf.cpp
 
   playlist/dynamicplaylistcontrols.cpp
@@ -523,12 +526,15 @@ set(HEADERS
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
   musicbrainz/tagfetcher.h
-  
+
+  networkremote/clementinewebpage.h
   networkremote/networkremotehelper.h
   networkremote/networkremote.h
   networkremote/incomingdataparser.h
   networkremote/outgoingdatacreator.h
   networkremote/remoteclient.h
+  networkremote/tcpremoteclient.h
+  networkremote/webremoteclient.h
 
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h

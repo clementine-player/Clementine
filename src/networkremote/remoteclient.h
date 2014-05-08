@@ -2,49 +2,31 @@
 #define REMOTECLIENT_H
 
 #include <QAbstractSocket>
-#include <QTcpSocket>
-#include <QBuffer>
+#include <QObject>
 
-#include "core/application.h"
 #include "remotecontrolmessages.pb.h"
+
+class Application;
+class QByteArray;
 
 class RemoteClient : public QObject {
   Q_OBJECT
  public:
-  RemoteClient(Application* app, QTcpSocket* client);
-  ~RemoteClient();
+  RemoteClient(Application* app, QObject* parent = nullptr);
 
-  // This method checks if client is authenticated before sending the data
-  void SendData(pb::remote::Message* msg);
-  QAbstractSocket::SocketState State();
-  void setDownloader(bool downloader);
-  bool isDownloader() { return downloader_; }
-  void DisconnectClient(pb::remote::ReasonDisconnect reason);
+  virtual void SendData(pb::remote::Message* msg) = 0;
+  virtual void DisconnectClient(pb::remote::ReasonDisconnect reason) = 0;
+  virtual QAbstractSocket::SocketState state() = 0;
 
- private slots:
-  void IncomingData();
+  void set_downloader(bool downloader) { downloader_ = downloader; }
+  bool downloader() const { return downloader_; }
 
-signals:
-  void Parse(const pb::remote::Message& msg);
-
- private:
+ signals:
   void ParseMessage(const QByteArray& data);
 
-  // Sends data to client without check if authenticated
-  void SendDataToClient(pb::remote::Message* msg);
-
+ private:
   Application* app_;
-
-  bool use_auth_code_;
-  int auth_code_;
-  bool authenticated_;
-  bool allow_downloads_;
   bool downloader_;
-
-  QTcpSocket* client_;
-  bool reading_protobuf_;
-  quint32 expected_length_;
-  QBuffer buffer_;
 };
 
 #endif  // REMOTECLIENT_H

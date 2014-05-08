@@ -15,16 +15,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "iconloader.h"
 #include "networkremotesettingspage.h"
 #include "ui_networkremotesettingspage.h"
-#include "networkremote/networkremote.h"
-#include "networkremote/networkremotehelper.h"
 
 #include <QDesktopServices>
-#include <QSettings>
+#include <QFile>
 #include <QHostInfo>
 #include <QNetworkInterface>
+#include <QSettings>
+#include <QUrl>
+
+#include "core/application.h"
+#include "networkremote/networkremote.h"
+#include "networkremote/networkremotehelper.h"
+#include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
 
 const char* NetworkRemoteSettingsPage::kPlayStoreUrl =
     "https://play.google.com/store/apps/details?id=de.qspool.clementineremote";

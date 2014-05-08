@@ -1,9 +1,9 @@
 #ifndef NETWORKREMOTEHELPER_H
 #define NETWORKREMOTEHELPER_H
 
-#include <QThread>
+#include <QObject>
 
-#include "networkremote.h"
+class Application;
 
 class NetworkRemoteHelper : public QObject {
   Q_OBJECT

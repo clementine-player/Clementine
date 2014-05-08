@@ -3,14 +3,17 @@
 
 #include <memory>
 
-#include <QTcpServer>
-#include <QTcpSocket>
+#include <QObject>
 
-#include "core/player.h"
-#include "core/application.h"
-#include "incomingdataparser.h"
-#include "outgoingdatacreator.h"
-#include "remoteclient.h"
+class Application;
+class ClementineWebPage;
+class IncomingDataParser;
+class OutgoingDataCreator;
+class QHostAddress;
+class QImage;
+class QTcpServer;
+class QTcpSocket;
+class RemoteClient;
 
 class NetworkRemote : public QObject {
   Q_OBJECT
@@ -18,7 +21,8 @@ class NetworkRemote : public QObject {
   static const char* kSettingsGroup;
   static const quint16 kDefaultServerPort;
 
-  explicit NetworkRemote(Application* app, QObject* parent = nullptr);
+  explicit NetworkRemote(
+      ClementineWebPage* web_channel, Application* app, QObject* parent = nullptr);
   ~NetworkRemote();
 
  public slots:
@@ -29,11 +33,17 @@ class NetworkRemote : public QObject {
   void EnableKittens(bool aww);
   void SendKitten(quint64 id, const QImage& kitten);
 
+ private slots:
+  void AcceptWebConnection();
+
  private:
+  void ConnectSignals();
+
   std::unique_ptr<QTcpServer> server_;
   std::unique_ptr<QTcpServer> server_ipv6_;
   std::unique_ptr<IncomingDataParser> incoming_data_parser_;
   std::unique_ptr<OutgoingDataCreator> outgoing_data_creator_;
+  std::unique_ptr<ClementineWebPage> web_channel_;
 
   quint16 port_;
   bool use_remote_;

@@ -20,6 +20,7 @@
 
 #include "settingspage.h"
 
+class SettingsDialog;
 class Ui_NetworkRemoteSettingsPage;
 
 class NetworkRemoteSettingsPage : public SettingsPage {

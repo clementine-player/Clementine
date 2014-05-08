@@ -15,10 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/logging.h"
-
-#include "networkremote.h"
 #include "networkremotehelper.h"
+
+#include "core/application.h"
+#include "core/logging.h"
+#include "networkremote/networkremote.h"
+#include "playlist/playlistmanager.h"
 
 NetworkRemoteHelper* NetworkRemoteHelper::sInstance = nullptr;
 

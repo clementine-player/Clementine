@@ -388,7 +388,6 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
 
   // Don't do anything if the playlists haven't changed since last time.
   if (!DoPlaylistsDiffer(response)) {
-    qLog(Debug) << "Playlists haven't changed - not updating";
     return;
   }
 
@@ -495,7 +494,6 @@ void SpotifyService::FillPlaylist(
 
 void SpotifyService::FillPlaylist(
     QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response) {
-  qLog(Debug) << "Filling playlist:" << item->text();
   FillPlaylist(item, response.track());
 }
 

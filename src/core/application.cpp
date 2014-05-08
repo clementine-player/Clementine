@@ -21,6 +21,7 @@
 #include "database.h"
 #include "player.h"
 #include "tagreaderclient.h"
+#include <QWebFrame>
 #include "taskmanager.h"
 #include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
@@ -30,6 +31,7 @@
 #include "globalsearch/globalsearch.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
+#include "networkremote/clementinewebpage.h"
 #include "networkremote/networkremote.h"
 #include "networkremote/networkremotehelper.h"
 #include "playlist/playlistbackend.h"
@@ -111,7 +113,9 @@ Application::Application(QObject* parent)
 #endif
 
   // Network Remote
-  network_remote_ = new NetworkRemote(this);
+  ClementineWebPage* web_channel = new ClementineWebPage(this);
+  web_channel->mainFrame()->load(QUrl("http://localhost:8080/channel"));
+  network_remote_ = new NetworkRemote(web_channel, this);
   MoveToNewThread(network_remote_);
 
   // This must be before libraray_->Init();
