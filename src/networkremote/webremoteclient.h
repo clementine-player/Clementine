@@ -7,6 +7,7 @@
 
 class ClementineWebPage;
 class NetworkAccessManager;
+class QNetworkReply;
 
 class WebRemoteClient : public RemoteClient {
   Q_OBJECT
@@ -19,6 +20,9 @@ class WebRemoteClient : public RemoteClient {
   void SendData(pb::remote::Message* msg);
   void DisconnectClient(pb::remote::ReasonDisconnect reason);
   QAbstractSocket::SocketState state();
+
+ private slots:
+  void SendDataFinished(QNetworkReply*);
 
  private:
   ClementineWebPage* web_channel_;

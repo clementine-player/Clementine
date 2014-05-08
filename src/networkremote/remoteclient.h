@@ -22,7 +22,7 @@ class RemoteClient : public QObject {
   bool downloader() const { return downloader_; }
 
  signals:
-  void ParseMessage(const QByteArray& data);
+  void Parse(const pb::remote::Message& msg);
 
  private:
   Application* app_;

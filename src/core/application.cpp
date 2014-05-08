@@ -114,7 +114,6 @@ Application::Application(QObject* parent)
 
   // Network Remote
   ClementineWebPage* web_channel = new ClementineWebPage(this);
-  web_channel->mainFrame()->load(QUrl("http://localhost:8080/channel"));
   network_remote_ = new NetworkRemote(web_channel, this);
   MoveToNewThread(network_remote_);
 

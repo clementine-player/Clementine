@@ -25,9 +25,6 @@ class TcpRemoteClient : public RemoteClient {
  private slots:
   void IncomingData();
 
-signals:
-  void Parse(const pb::remote::Message& msg);
-
  private:
   void ParseMessage(const QByteArray& data);
 

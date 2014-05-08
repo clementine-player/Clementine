@@ -75,6 +75,7 @@ void NetworkRemote::SetupServer() {
   connect(server_ipv6_.get(), SIGNAL(newConnection()), this,
           SLOT(AcceptConnection()));
   connect(web_channel_.get(), SIGNAL(Connected()), SLOT(AcceptWebConnection()));
+  web_channel_->Init();
 }
 
 void NetworkRemote::StartServer() {
@@ -136,6 +137,7 @@ void NetworkRemote::AcceptConnection() {
 }
 
 void NetworkRemote::AcceptWebConnection() {
+  qLog(Debug) << Q_FUNC_INFO;
   ConnectSignals();
 
   WebRemoteClient* client = new WebRemoteClient(web_channel_.get(), app_, this);

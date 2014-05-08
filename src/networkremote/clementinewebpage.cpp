@@ -1,11 +1,19 @@
 #include "clementinewebpage.h"
 
 #include <QByteArray>
+#include <QMetaObject>
+#include <QThread>
 #include <QWebFrame>
 
 #include "core/closure.h"
 #include "core/logging.h"
 #include "remotecontrolmessages.pb.h"
+
+namespace {
+
+const char* kRemoteEndpoint = "http://localhost:8080/channel/remote/%1";
+
+}  // namespace
 
 ClementineWebPage::ClementineWebPage(QObject* parent)
     : QWebPage(parent) {
@@ -17,8 +25,28 @@ ClementineWebPage::ClementineWebPage(QObject* parent)
   });
 }
 
+void ClementineWebPage::Init() {
+  QMetaObject::invokeMethod(this, "InitOnMainThread", Qt::QueuedConnection);
+}
+
+void ClementineWebPage::InitOnMainThread() {
+  Q_ASSERT(QThread::currentThread() == qApp->thread());
+  mainFrame()->load(QUrl("http://localhost:8080/channel/clementine"));
+}
+
 void ClementineWebPage::javaScriptConsoleMessage(
     const QString& message, int, const QString&) {
+  qLog(Error) << message;
+}
+
+bool ClementineWebPage::javaScriptConfirm(QWebFrame*, const QString& message) {
+  id_ = message;
+  qLog(Debug) << "id:" << message;
+  qLog(Debug) << QString(kRemoteEndpoint).arg(message);
+  return true;
+}
+
+void ClementineWebPage::javaScriptAlert(QWebFrame*, const QString& message) {
   qLog(Debug) << message;
 
   QByteArray bytes = QByteArray::fromBase64(message.toAscii());
@@ -34,11 +62,8 @@ void ClementineWebPage::javaScriptConsoleMessage(
   emit MessageReceived(msg);
 }
 
-void ClementineWebPage::javaScriptAlert(QWebFrame*, const QString& message) {
-  qLog(Debug) << message;
-}
-
 bool ClementineWebPage::shouldInterruptJavaScript() {
   qLog(Debug) << Q_FUNC_INFO;
+  // Make sure any long-running js does not get interrupted.
   return false;
 }

@@ -4,6 +4,7 @@
 #include <QNetworkCookie>
 
 #include "config.h"
+#include "remotecontrolmessages.pb.h"
 #include "covers/albumcoverfetcher.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
@@ -81,6 +82,8 @@ void RegisterMetaTypes() {
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<QList<QUrl> >("QList<QUrl>");
+
+  qRegisterMetaType<pb::remote::Message>("pb::remote::Message");
 
 #ifdef HAVE_VK
   qRegisterMetaType<MusicOwner>("MusicOwner");
