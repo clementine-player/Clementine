@@ -11,7 +11,10 @@
 
 namespace {
 
-const char* kRemoteEndpoint = "http://localhost:8080/channel/remote/%1";
+//const char* kRemoteEndpoint = "http://localhost:8080/channel/remote/%1";
+const char* kRemoteEndpoint = "https://remote-dot-clementine-data.appspot.com/channel/remote/%1";
+
+const char* kInitialPage = "https://remote-dot-clementine-data.appspot.com/channel/clementine";
 
 }  // namespace
 
@@ -31,7 +34,7 @@ void ClementineWebPage::Init() {
 
 void ClementineWebPage::InitOnMainThread() {
   Q_ASSERT(QThread::currentThread() == qApp->thread());
-  mainFrame()->load(QUrl("http://localhost:8080/channel/clementine"));
+  mainFrame()->load(QUrl(kInitialPage));
 }
 
 void ClementineWebPage::javaScriptConsoleMessage(

@@ -9,7 +9,8 @@
 
 namespace {
 
-const char* kEndpoint = "http://localhost:8080/channel/clementine/push/%1";
+//const char* kEndpoint = "http://localhost:8080/channel/clementine/push/%1";
+const char* kEndpoint = "https://remote-dot-clementine-data.appspot.com/channel/clementine/push/%1";
 
 }  // namespace
 
