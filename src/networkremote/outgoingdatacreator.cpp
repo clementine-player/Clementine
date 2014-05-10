@@ -595,8 +595,32 @@ void OutgoingDataCreator::SendSongs(
       break;
   }
 
+  // Send total file size & file count
+  SendTotalFileSize(client);
+
   // Send first file
   OfferNextSong(client);
+}
+
+void OutgoingDataCreator::SendTotalFileSize(RemoteClient *client) {
+  if (!download_queue_.contains(client)) return;
+
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::DOWNLOAD_TOTAL_SIZE);
+
+  pb::remote::ResponseDownloadTotalSize* response =
+      msg.mutable_response_download_total_size();
+
+  response->set_file_count(download_queue_[client].size());
+
+  int total = 0;
+  for (DownloadItem item : download_queue_[client]) {
+    total += item.song_.filesize();
+  }
+
+  response->set_total_size(total);
+
+  client->SendData(&msg);
 }
 
 void OutgoingDataCreator::OfferNextSong(RemoteClient* client) {
