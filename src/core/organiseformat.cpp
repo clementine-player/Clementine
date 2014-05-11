@@ -47,9 +47,13 @@ const QStringList OrganiseFormat::kKnownTags = QStringList() << "title"
                                                              << "grouping";
 
 // From http://en.wikipedia.org/wiki/8.3_filename#Directory_table
-const char* OrganiseFormat::kInvalidFatCharacters = "\"*/\\:<>?|";
+const char OrganiseFormat::kInvalidFatCharacters[] = "\"*/\\:<>?|";
 const int OrganiseFormat::kInvalidFatCharactersCount =
-    strlen(OrganiseFormat::kInvalidFatCharacters);
+    sizeof(OrganiseFormat::kInvalidFatCharacters) - 1;
+
+const char OrganiseFormat::kInvalidPrefixCharacters[] = ".";
+const int OrganiseFormat::kInvalidPrefixCharactersCount =
+    sizeof(OrganiseFormat::kInvalidPrefixCharacters) - 1;
 
 const QRgb OrganiseFormat::SyntaxHighlighter::kValidTagColorLight =
     qRgb(64, 64, 255);
@@ -116,7 +120,19 @@ QString OrganiseFormat::GetFilenameForSong(const Song& song) const {
     filename = stripped;
   }
 
-  return filename;
+  // Fix any parts of the path that start with dots.
+  QStringList parts = filename.split("/");
+  for (int i = 0; i < parts.count(); ++i) {
+    QString* part = &parts[i];
+    for (int j = 0; j < kInvalidPrefixCharactersCount; ++j) {
+      if (part->startsWith(kInvalidPrefixCharacters[j])) {
+        part->replace(0, 1, '_');
+        break;
+      }
+    }
+  }
+
+  return parts.join("/");
 }
 
 QString OrganiseFormat::ParseBlock(QString block, const Song& song,
