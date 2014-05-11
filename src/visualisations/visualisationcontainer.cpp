@@ -115,7 +115,7 @@ void VisualisationContainer::Init() {
   fps_menu->addActions(fps_group->actions());
   connect(fps_mapper, SIGNAL(mapped(int)), SLOT(SetFps(int)));
 
-  QMenu* quality_menu = menu_->addMenu(tr("Quality"));
+  QMenu* quality_menu = menu_->addMenu(tr("Quality", "Visualisation quality"));
   QSignalMapper* quality_mapper = new QSignalMapper(this);
   QActionGroup* quality_group = new QActionGroup(this);
   AddMenuItem(tr("Low (256x256)"), 256, size_, quality_group, quality_mapper);
