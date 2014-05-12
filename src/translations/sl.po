@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-04 08:11+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-05-11 08:08+0000\n"
+"Last-Translator: R33D3M33R <andrejm@ubuntu.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -301,7 +301,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Da omejite iskanje na eno izmed polj, dodajte ime polja pred iskalni pojem, npr. <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> preišče knjižnico za vse izvajalce, ki vsebujejo besedo Bode.</p><p><span style=\" font-weight:600;\">Razpoložljiva polja: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -1399,7 +1399,7 @@ msgstr "Ni bilo mogoče ustvariti GStreamer-jevega elementa \"%1\" - prepričajt
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
-msgstr ""
+msgstr "Ni bilo mogoče ustvariti seznama predvajanja"
 
 #: transcoder/transcoder.cpp:429
 #, qt-format
@@ -2928,11 +2928,11 @@ msgstr "Nalaganje skladb"
 msgid "Loading stream"
 msgstr "Nalaganje pretoka"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Nalaganje skladb"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "Nalaganje podrobnosti o skladbah"
 
@@ -3797,7 +3797,12 @@ msgstr "Razvrsti skladbe naključno"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
+msgctxt "Sound quality"
+msgid "Quality"
+msgstr "Kakovost"
+
 #: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
 msgid "Quality"
 msgstr "Kakovost"
 
@@ -4601,7 +4606,7 @@ msgstr "Razvrščanje"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1356
 msgid "Source"
@@ -5509,7 +5514,7 @@ msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud. However, you need to login to access your playlists and your "
 "stream."
-msgstr ""
+msgstr "Za iskanje in predvajanje glasbe se vam ni potrebno prijaviti v SoundCloud, vseeno pa se boste morali prijaviti za dostop do vaših seznamov predvajanja in vašega pretoka."
 
 #: internet/spotifyservice.cpp:175
 msgid ""

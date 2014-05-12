@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-04 08:11+0000\n"
+"PO-Revision-Date: 2014-05-11 07:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2926,11 +2926,11 @@ msgstr "Učitavanje pjesama"
 msgid "Loading stream"
 msgstr "Učitaj stream"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Učitavanje  pjesama"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "Učitavanje informacija o pjesmi"
 
@@ -3795,9 +3795,14 @@ msgstr "Stavi pjesmu u naizmjenični redosljed"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Sound quality"
 msgid "Quality"
-msgstr "Kvaliteta"
+msgstr ""
+
+#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
+msgid "Quality"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -5507,7 +5512,7 @@ msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud. However, you need to login to access your playlists and your "
 "stream."
-msgstr ""
+msgstr "Za pretraživanje i slušanje glazbe ne morate biti prijavljeni na SoundCloud. Međutim, ipak se morate prijaviti za pristup vašim popisima izvođenja i streamovima."
 
 #: internet/spotifyservice.cpp:175
 msgid ""

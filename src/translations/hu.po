@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-04 08:11+0000\n"
+"PO-Revision-Date: 2014-05-11 07:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2930,11 +2930,11 @@ msgstr "Számok betöltése"
 msgid "Loading stream"
 msgstr "Adatfolyam betöltése"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Számok betöltése"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "Szám információk betöltése"
 
@@ -3799,9 +3799,14 @@ msgstr "Számok felvétele véletlenszerű rendezésben"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Sound quality"
 msgid "Quality"
-msgstr "Minőség"
+msgstr ""
+
+#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
+msgid "Quality"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."

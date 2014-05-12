@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-06 09:29+0000\n"
-"Last-Translator: whdgmawkd <whdgmawkd@naver.com>\n"
+"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2931,11 +2931,11 @@ msgstr "음악 여는 중"
 msgid "Loading stream"
 msgstr "스트림 여는 중"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "트랙 여는 중"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "트랙 정보 불러오는중"
 
@@ -3800,9 +3800,14 @@ msgstr "무작위 순서에 곡을 "
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Sound quality"
 msgid "Quality"
-msgstr "품질"
+msgstr ""
+
+#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
+msgid "Quality"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."

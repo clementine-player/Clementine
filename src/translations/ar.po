@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-05 12:17+0000\n"
-"Last-Translator: mankind <ghassan658@hotmail.com>\n"
+"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -119,7 +119,7 @@ msgstr "%1 العثور على مقاطع"
 #: smartplaylists/searchpreview.cpp:128
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr "%1 songs found (showing %2)"
+msgstr "عثر على 1% أغنية (يعرض منها 2%)"
 
 #: playlist/playlistmanager.cpp:387
 #, qt-format
@@ -2929,11 +2929,11 @@ msgstr "تحميل المقاطع"
 msgid "Loading stream"
 msgstr "تحميل تيار الانترنت"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "جاري تحميل المقاطع"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "جاري تحميل معلومات المقاطع"
 
@@ -3798,9 +3798,14 @@ msgstr "ضع المقاطع في ترتيب عشوائي"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Sound quality"
 msgid "Quality"
-msgstr "الجودة"
+msgstr ""
+
+#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
+msgid "Quality"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."

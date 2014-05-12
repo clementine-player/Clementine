@@ -31,7 +31,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-04 08:29+0000\n"
+"PO-Revision-Date: 2014-05-11 07:40+0000\n"
 "Last-Translator: adem4ik\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -720,7 +720,7 @@ msgstr "Все плейлисты (%1)"
 
 #: ui/about.cpp:79
 msgid "All the translators"
-msgstr "Все переводчики"
+msgstr "Всех переводчиков"
 
 #: library/library.cpp:98
 msgid "All tracks"
@@ -2281,11 +2281,11 @@ msgstr "Форматы файлов"
 
 #: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
-msgstr "Имя файла"
+msgstr "Полное имя файла"
 
 #: playlist/playlist.cpp:1343
 msgid "File name (without path)"
-msgstr "Имя файла (без указания пути)"
+msgstr "Имя файла"
 
 #: ../bin/src/ui_vksettingspage.h:221
 msgid "File name pattern:"
@@ -2946,11 +2946,11 @@ msgstr "Загрузка песен"
 msgid "Loading stream"
 msgstr "Загрузка потока"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Загрузка композиций"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "Загрузка сведений о композициях"
 
@@ -3815,7 +3815,12 @@ msgstr "Разбросать композиции в случайном поря
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
+msgctxt "Sound quality"
+msgid "Quality"
+msgstr "Качество"
+
 #: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
 msgid "Quality"
 msgstr "Качество"
 

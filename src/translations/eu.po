@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-04 08:11+0000\n"
+"PO-Revision-Date: 2014-05-11 07:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2926,11 +2926,11 @@ msgstr "Abestiak kargatzen"
 msgid "Loading stream"
 msgstr "Jarioa kargatzen"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Pistak kargatzen"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "Pisten informazioa kargatzen"
 
@@ -3795,9 +3795,14 @@ msgstr "Abestiak ausazko ordenan jarri"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Sound quality"
 msgid "Quality"
-msgstr "Kalitatea"
+msgstr ""
+
+#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
+msgid "Quality"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
