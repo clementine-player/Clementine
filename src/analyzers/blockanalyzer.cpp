@@ -100,7 +100,9 @@ void BlockAnalyzer::determineStep() {
   // boxes/blocks of pixels)
   // I calculated the value 30 based on some trial and error
 
-  const double fallTime = 30 * m_rows;
+  // the fall time of 30 is too slow on framerates above 50fps
+  const double fallTime = timeout() < 20 ? 20 * m_rows : 30 * m_rows;
+
   m_step = double(m_rows * timeout()) / fallTime;
 }
 

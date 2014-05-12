@@ -165,6 +165,11 @@ void AnalyzerContainer::ChangeFramerate(int new_framerate) {
     // Even if it is not supposed to happen, I don't want to get a dbz error
     new_framerate = new_framerate == 0 ? kMediumFramerate : new_framerate;
     current_analyzer_->changeTimeout(1000 / new_framerate);
+
+    // the BlockAnalyzer needs to know when the framerate changes
+    if (strcmp(current_analyzer_->metaObject()->className(), "BlockAnalyzer") == 0) {
+      qobject_cast<BlockAnalyzer*>(current_analyzer_)->determineStep();
+    }
   }
   SaveFramerate(new_framerate);
 }

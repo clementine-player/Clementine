@@ -31,6 +31,8 @@ class BlockAnalyzer : public Analyzer::Base {
 
   static const char* kName;
 
+  void determineStep();
+
  protected:
   virtual void transform(Scope&);
   virtual void analyze(QPainter& p, const Scope&, bool new_frame);
@@ -38,7 +40,6 @@ class BlockAnalyzer : public Analyzer::Base {
   virtual void paletteChange(const QPalette&);
 
   void drawBackground();
-  void determineStep();
 
  private:
   QPixmap* bar() { return &m_barPixmap; }
