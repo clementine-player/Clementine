@@ -108,6 +108,7 @@ signals:
   void SelectAll();
   void SelectNone();
   void InvertSelection();
+  void LogLine(const QString& message);
 };
 
 #endif  // SRC_UI_RIPCD_H_

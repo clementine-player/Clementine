@@ -102,6 +102,7 @@ RipCD::RipCD(QWidget* parent)
   connect(transcoder_, SIGNAL(JobComplete(QString, bool)),
           SLOT(JobComplete(QString, bool)));
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
+  connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
   connect(this, SIGNAL(RippingComplete()), SLOT(ThreadedTranscoding()));
   connect(this, SIGNAL(SignalUpdateProgress()), SLOT(UpdateProgress()));
 
@@ -479,5 +480,7 @@ void RipCD::BuildTrackListTable() {
                                     line_edit_track_title_i);
   }
 }
+
+void RipCD::LogLine(const QString& message) { qLog(Debug) << message; }
 
 void RipCD::showEvent(QShowEvent* event) { BuildTrackListTable(); }
