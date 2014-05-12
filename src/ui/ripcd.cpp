@@ -31,6 +31,7 @@
 #include <QFrame>
 #include <QLineEdit>
 #include <QMessageBox>
+#include <QMutexLocker>
 #include <QtDebug>
 #include <QtConcurrentRun>
 #include <cdio/cdio.h>
@@ -230,6 +231,7 @@ void RipCD::ThreadClickedRipButton() {
 
     QByteArray buffered_input_bytes(CDIO_CD_FRAMESIZE_RAW, '\0');
     for (lsn_t i_cursor = i_first_lsn; i_cursor <= i_last_lsn; i_cursor++) {
+      QMutexLocker l(&mutex_);
       if (cancel_requested_) {
         qLog(Debug) << "CD ripping canceled.";
         return;
@@ -319,6 +321,7 @@ void RipCD::ClickedRipButton() {
     return;
   }
   SetWorking(true);
+  QMutexLocker l(&mutex_);
   cancel_requested_ = false;
   QtConcurrent::run(this, &RipCD::ThreadClickedRipButton);
 }
@@ -404,6 +407,7 @@ void RipCD::AddDestinationDirectory(QString dir) {
 }
 
 void RipCD::Cancel() {
+  QMutexLocker l(&mutex_);
   cancel_requested_ = true;
   ui_->progress_bar->setValue(0);
   transcoder_->Cancel();
