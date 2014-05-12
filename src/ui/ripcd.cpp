@@ -22,6 +22,8 @@
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
 #include "core/logging.h"
+#include "core/song.h"
+#include "core/tagreaderclient.h"
 #include "core/utilities.h"
 
 #include <QSettings>
@@ -35,14 +37,6 @@
 #include <QtDebug>
 #include <QtConcurrentRun>
 #include <cdio/cdio.h>
-#include <tag.h>
-#include <taglib.h>
-#include <tfile.h>
-#include <fileref.h>
-#include <wavfile.h>
-#include <tpropertymap.h>
-#include <tstring.h>
-#include <tstringlist.h>
 
 // winspool.h defines this :(
 #ifdef AddJob
@@ -108,8 +102,6 @@ RipCD::RipCD(QWidget* parent)
   connect(transcoder_, SIGNAL(JobComplete(QString, bool)),
           SLOT(JobComplete(QString, bool)));
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
-  connect(transcoder_, SIGNAL(JobOutputName(QString)),
-          SLOT(AppendOutput(QString)));
   connect(this, SIGNAL(RippingComplete()), SLOT(ThreadedTranscoding()));
   connect(this, SIGNAL(SignalUpdateProgress()), SLOT(UpdateProgress()));
 
@@ -213,20 +205,15 @@ void RipCD::ThreadClickedRipButton() {
 
   // Set up progress bar
   emit(SignalUpdateProgress());
-  tracks_to_rip_.clear();
-  for (int i = 1; i <= i_tracks_; i++) {
-    if (!checkboxes_.value(i - 1)->isChecked()) {
-      continue;
-    }
-    tracks_to_rip_.append(i);
-    QString filename = temporary_directory_ +
-                       ParseFileFormatString(ui_->format_filename->text(), i) +
-                       ".wav";
+
+  for (const TrackInformation& track : tracks_) {
+    QString filename =
+        QString("%1%2.wav").arg(temporary_directory_).arg(track.track_number);
     QFile* destination_file = new QFile(filename);
     destination_file->open(QIODevice::WriteOnly);
 
-    lsn_t i_first_lsn = cdio_get_track_lsn(cdio_, i);
-    lsn_t i_last_lsn = cdio_get_track_last_lsn(cdio_, i);
+    lsn_t i_first_lsn = cdio_get_track_lsn(cdio_, track.track_number);
+    lsn_t i_last_lsn = cdio_get_track_last_lsn(cdio_, track.track_number);
     WriteWAVHeader(destination_file,
                    (i_last_lsn - i_first_lsn + 1) * CDIO_CD_FRAMESIZE_RAW);
 
@@ -253,29 +240,18 @@ void RipCD::ThreadClickedRipButton() {
     TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
                                   .value<TranscoderPreset>();
 
-    QString outfilename = GetOutputFileName(filename, preset);
-    transcoder_->AddJob(filename, preset, outfilename);
+    transcoder_->AddJob(filename, preset, track.transcoded_filename);
   }
   emit(RippingComplete());
 }
 
-// Returns the rightmost non-empty part of 'path'.
-QString RipCD::TrimPath(const QString& path) const {
-  return path.section('/', -1, -1, QString::SectionSkipEmpty);
-}
-
-QString RipCD::GetOutputFileName(const QString& input,
-                                 const TranscoderPreset& preset) const {
+QString RipCD::GetOutputFileName(const QString& basename) const {
   QString path =
       ui_->destination->itemData(ui_->destination->currentIndex()).toString();
-  if (path.isEmpty()) {
-    // Keep the original path.
-    return input.section('.', 0, -2) + '.' + preset.extension_;
-  } else {
-    QString file_name = TrimPath(input);
-    file_name = file_name.section('.', 0, -2);
-    return path + '/' + file_name + '.' + preset.extension_;
-  }
+  QString extension = ui_->format->itemData(ui_->format->currentIndex())
+                          .value<TranscoderPreset>()
+                          .extension_;
+  return path + '/' + basename + '.' + extension;
 }
 
 QString RipCD::ParseFileFormatString(const QString& file_format,
@@ -323,12 +299,32 @@ void RipCD::ClickedRipButton() {
     }
     return;
   }
+
+  // Add tracks to the rip list.
+  tracks_.clear();
+  for (int i = 1; i <= i_tracks_; ++i) {
+    if (!checkboxes_.value(i - 1)->isChecked()) {
+      continue;
+    }
+    QString transcoded_filename = GetOutputFileName(
+        ParseFileFormatString(ui_->format_filename->text(), i));
+    QString title = track_names_.value(i - 1)->text();
+    AddTrack(i, title, transcoded_filename);
+  }
+
+  // Start ripping.
   SetWorking(true);
   {
     QMutexLocker l(&mutex_);
     cancel_requested_ = false;
   }
   QtConcurrent::run(this, &RipCD::ThreadClickedRipButton);
+}
+
+void RipCD::AddTrack(int track_number, const QString& title,
+                     const QString& transcoded_filename) {
+  TrackInformation track(track_number, title, transcoded_filename);
+  tracks_.append(track);
 }
 
 void RipCD::JobComplete(const QString& filename, bool success) {
@@ -338,35 +334,28 @@ void RipCD::JobComplete(const QString& filename, bool success) {
 
 void RipCD::AllJobsComplete() {
   RemoveTemporaryDirectory();
-
-  // having a little trouble on wav files, works fine on ogg-vorbis
-  qSort(generated_files_);
-
-  for (int i = 0; i < generated_files_.length(); i++) {
-    TagLib::FileRef f(generated_files_.value(i).toUtf8().constData());
-
-    f.tag()->setTitle(track_names_.value(tracks_to_rip_.value(i) - 1)
-                          ->text()
-                          .toUtf8()
-                          .constData());
-    f.tag()->setAlbum(ui_->albumLineEdit->text().toUtf8().constData());
-    f.tag()->setArtist(ui_->artistLineEdit->text().toUtf8().constData());
-    f.tag()->setGenre(ui_->genreLineEdit->text().toUtf8().constData());
-    f.tag()->setYear(ui_->yearLineEdit->text().toInt());
-    f.tag()->setTrack(tracks_to_rip_.value(i) - 1);
-    // Need to check this
-    // f.tag()->setDisc(ui_->discLineEdit->text().toInt());
-    f.save();
-  }
-  // Resets lists
-  generated_files_.clear();
-  tracks_to_rip_.clear();
-
+  TagFiles();
   SetWorking(false);
 }
 
-void RipCD::AppendOutput(const QString& filename) {
-  generated_files_.append(filename);
+void RipCD::TagFiles() {
+  TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
+                                .value<TranscoderPreset>();
+  for (const TrackInformation& track : tracks_) {
+    Song song;
+    song.InitFromFilePartial(track.transcoded_filename);
+    song.set_title(track.title);
+    song.set_album(ui_->albumLineEdit->text());
+    song.set_artist(ui_->artistLineEdit->text());
+    song.set_genre(ui_->genreLineEdit->text());
+    song.set_year(ui_->yearLineEdit->text().toInt());
+    song.set_track(track.track_number);
+    song.set_disc(ui_->discLineEdit->text().toInt());
+    song.set_filetype(preset.type_);
+
+    TagReaderClient::Instance()->SaveFileBlocking(song.url().toLocalFile(),
+                                                  song);
+  }
 }
 
 void RipCD::Options() {

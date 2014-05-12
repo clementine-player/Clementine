@@ -44,6 +44,18 @@ class RipCD : public QDialog {
   void showEvent(QShowEvent* event);
 
  private:
+  struct TrackInformation {
+    TrackInformation(int track_number, const QString& title,
+                     const QString& transcoded_filename)
+        : track_number(track_number),
+          title(title),
+          transcoded_filename(transcoded_filename) {}
+
+    int track_number;
+    QString title;
+    QString transcoded_filename;
+  };
+
   static const char* kSettingsGroup;
   static const int kProgressInterval;
   static const int kMaxDestinationItems;
@@ -55,9 +67,8 @@ class RipCD : public QDialog {
   std::unique_ptr<Ui_RipCD> ui_;
   CdIo_t* cdio_;
   QList<QCheckBox*> checkboxes_;
-  QList<QString> generated_files_;
-  QList<int> tracks_to_rip_;
   QList<QLineEdit*> track_names_;
+  QList<TrackInformation> tracks_;
   QString last_add_dir_;
   QPushButton* cancel_button_;
   QPushButton* close_button_;
@@ -68,14 +79,19 @@ class RipCD : public QDialog {
 
   void WriteWAVHeader(QFile* stream, int32_t i_bytecount);
   int NumTracksToRip();
+  void AddTrack(int track_number, const QString& title,
+                const QString& transcoded_filename);
   void ThreadClickedRipButton();
-  QString TrimPath(const QString& path) const;
-  QString GetOutputFileName(const QString& input,
-                            const TranscoderPreset& preset) const;
+  // Constructs a filename from the given base name with a path taken
+  // from the ui dialog and an extension that corresponds to the audio
+  // format chosen in the ui.
+  QString GetOutputFileName(const QString& basename) const;
+
   QString ParseFileFormatString(const QString& file_format, int track_no) const;
   void SetWorking(bool working);
   void AddDestinationDirectory(QString dir);
   void RemoveTemporaryDirectory();
+  void TagFiles();
 
 signals:
   void RippingComplete();
@@ -86,7 +102,6 @@ signals:
   void ClickedRipButton();
   void JobComplete(const QString& filename, bool success);
   void AllJobsComplete();
-  void AppendOutput(const QString& filename);
   void Options();
   void AddDestination();
   void Cancel();
