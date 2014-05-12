@@ -18,8 +18,8 @@
 #ifndef SONGLOADERINSERTER_H
 #define SONGLOADERINSERTER_H
 
+#include <QList>
 #include <QObject>
-#include <QSet>
 #include <QUrl>
 
 #include "core/song.h"
@@ -34,10 +34,9 @@ class QModelIndex;
 
 class SongLoaderInserter : public QObject {
   Q_OBJECT
-public:
+ public:
   SongLoaderInserter(TaskManager* task_manager,
-                     LibraryBackendInterface* library,
-                     const Player* player);
+                     LibraryBackendInterface* library, const Player* player);
   ~SongLoaderInserter();
 
   void Load(Playlist* destination, int row, bool play_now, bool enqueue,
@@ -46,19 +45,18 @@ public:
 
 signals:
   void Error(const QString& message);
+  void PreloadFinished();
   void EffectiveLoadFinished(const SongList& songs);
 
-private slots:
-  void PendingLoadFinished(bool success);
+ private slots:
   void DestinationDestroyed();
   void AudioCDTagsLoaded(bool success);
+  void InsertSongs();
 
-private:
-  void PartiallyFinished();
-  void EffectiveLoad();
-  void Finished();
+ private:
+  void AsyncLoad();
 
-private:
+ private:
   TaskManager* task_manager_;
 
   Playlist* destination_;
@@ -68,12 +66,9 @@ private:
 
   SongList songs_;
 
-  QSet<SongLoader*> pending_;
-  QSet<SongLoader*> pending_async_;
-  int async_load_id_;
-  int async_progress_;
+  QList<SongLoader*> pending_;
   LibraryBackendInterface* library_;
   const Player* player_;
 };
 
-#endif // SONGLOADERINSERTER_H
+#endif  // SONGLOADERINSERTER_H

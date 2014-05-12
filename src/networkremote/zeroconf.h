@@ -7,11 +7,8 @@ class Zeroconf {
  public:
   virtual ~Zeroconf();
 
-  void Publish(
-      const QString& domain,
-      const QString& type,
-      const QString& name,
-      quint16 port);
+  void Publish(const QString& domain, const QString& type, const QString& name,
+               quint16 port);
 
   static Zeroconf* GetZeroconf();
 
@@ -19,11 +16,8 @@ class Zeroconf {
   static QByteArray TruncateName(const QString& name);
 
  protected:
-  virtual void PublishInternal(
-      const QString& domain,
-      const QString& type,
-      const QByteArray& name,
-      quint16 port) = 0;
+  virtual void PublishInternal(const QString& domain, const QString& type,
+                               const QByteArray& name, quint16 port) = 0;
 
  private:
   static Zeroconf* sInstance;

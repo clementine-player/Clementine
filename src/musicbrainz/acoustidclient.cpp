@@ -29,25 +29,21 @@
 
 const char* AcoustidClient::kClientId = "qsZGpeLx";
 const char* AcoustidClient::kUrl = "http://api.acoustid.org/v2/lookup";
-const int AcoustidClient::kDefaultTimeout = 5000; // msec
+const int AcoustidClient::kDefaultTimeout = 5000;  // msec
 
 AcoustidClient::AcoustidClient(QObject* parent)
-  : QObject(parent),
-    network_(new NetworkAccessManager(this)),
-    timeouts_(new NetworkTimeouts(kDefaultTimeout, this))
-{
-}
+    : QObject(parent),
+      network_(new NetworkAccessManager(this)),
+      timeouts_(new NetworkTimeouts(kDefaultTimeout, this)) {}
 
-void AcoustidClient::SetTimeout(int msec) {
-  timeouts_->SetTimeout(msec);
-}
+void AcoustidClient::SetTimeout(int msec) { timeouts_->SetTimeout(msec); }
 
-void AcoustidClient::Start(int id, const QString& fingerprint, int duration_msec) {
+void AcoustidClient::Start(int id, const QString& fingerprint,
+                           int duration_msec) {
   typedef QPair<QString, QString> Param;
 
   QList<Param> parameters;
-  parameters << Param("format", "json")
-             << Param("client", kClientId)
+  parameters << Param("format", "json") << Param("client", kClientId)
              << Param("duration", QString::number(duration_msec / kMsecPerSec))
              << Param("meta", "recordingids")
              << Param("fingerprint", fingerprint);
@@ -64,9 +60,7 @@ void AcoustidClient::Start(int id, const QString& fingerprint, int duration_msec
   timeouts_->AddReply(reply);
 }
 
-void AcoustidClient::Cancel(int id) {
-  delete requests_.take(id);
-}
+void AcoustidClient::Cancel(int id) { delete requests_.take(id); }
 
 void AcoustidClient::CancelAll() {
   qDeleteAll(requests_.values());
@@ -77,7 +71,8 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
   requests_.remove(id);
 
-  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 200) {
+  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() !=
+      200) {
     emit Finished(id, QString());
     return;
   }
@@ -96,11 +91,11 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int id) {
     return;
   }
   QVariantList results = result["results"].toList();
-  foreach (const QVariant& v, results) {
+  for (const QVariant& v : results) {
     QVariantMap r = v.toMap();
     if (r.contains("recordings")) {
       QVariantList recordings = r["recordings"].toList();
-      foreach (const QVariant& recording, recordings) {
+      for (const QVariant& recording : recordings) {
         QVariantMap o = recording.toMap();
         if (o.contains("id")) {
           emit Finished(id, o["id"].toString());

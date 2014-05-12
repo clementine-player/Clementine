@@ -23,18 +23,18 @@
 
 const int AutoExpandingTreeView::kRowsToShow = 50;
 
-AutoExpandingTreeView::AutoExpandingTreeView(QWidget *parent)
-  : QTreeView(parent),
-    auto_open_(true),
-    expand_on_reset_(true),
-    add_on_double_click_(true),
-    ignore_next_click_(false)
-{
+AutoExpandingTreeView::AutoExpandingTreeView(QWidget* parent)
+    : QTreeView(parent),
+      auto_open_(true),
+      expand_on_reset_(true),
+      add_on_double_click_(true),
+      ignore_next_click_(false) {
   setExpandsOnDoubleClick(false);
 
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
   connect(this, SIGNAL(clicked(QModelIndex)), SLOT(ItemClicked(QModelIndex)));
-  connect(this, SIGNAL(doubleClicked(QModelIndex)), SLOT(ItemDoubleClicked(QModelIndex)));
+  connect(this, SIGNAL(doubleClicked(QModelIndex)),
+          SLOT(ItemDoubleClicked(QModelIndex)));
 }
 
 void AutoExpandingTreeView::reset() {
@@ -46,28 +46,25 @@ void AutoExpandingTreeView::reset() {
   }
 }
 
-void AutoExpandingTreeView::RecursivelyExpand(const QModelIndex &index) {
+void AutoExpandingTreeView::RecursivelyExpand(const QModelIndex& index) {
   int rows = model()->rowCount(index);
   RecursivelyExpand(index, &rows);
 }
 
-bool AutoExpandingTreeView::RecursivelyExpand(const QModelIndex& index, int* count) {
-  if (!CanRecursivelyExpand(index))
-    return true;
+bool AutoExpandingTreeView::RecursivelyExpand(const QModelIndex& index,
+                                              int* count) {
+  if (!CanRecursivelyExpand(index)) return true;
 
-  if (model()->canFetchMore(index))
-    model()->fetchMore(index);
+  if (model()->canFetchMore(index)) model()->fetchMore(index);
 
   int children = model()->rowCount(index);
-  if (*count + children > kRowsToShow)
-    return false;
+  if (*count + children > kRowsToShow) return false;
 
   expand(index);
   *count += children;
 
-  for (int i=0 ; i<children ; ++i) {
-    if (!RecursivelyExpand(model()->index(i, 0, index), count))
-      return false;
+  for (int i = 0; i < children; ++i) {
+    if (!RecursivelyExpand(model()->index(i, 0, index), count)) return false;
   }
 
   return true;
@@ -106,7 +103,7 @@ void AutoExpandingTreeView::mousePressEvent(QMouseEvent* event) {
 
   QTreeView::mousePressEvent(event);
 
-  //enqueue to playlist with middleClick
+  // enqueue to playlist with middleClick
   if (event->button() == Qt::MidButton) {
     QMimeData* data = model()->mimeData(selectedIndexes());
     if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
@@ -120,8 +117,7 @@ void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
   switch (e->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
-      if (currentIndex().isValid())
-        emit doubleClicked(currentIndex());
+      if (currentIndex().isValid()) emit doubleClicked(currentIndex());
       e->accept();
       break;
 

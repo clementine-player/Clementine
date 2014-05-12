@@ -31,12 +31,13 @@
 #include <QtDebug>
 
 // Exported by QtGui
-void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0);
+void qt_blurImage(QPainter* p, QImage& blurImage, qreal radius, bool quality,
+                  bool alphaOnly, int transposed = 0);
 
 namespace smart_playlists {
 
 class SearchTermWidget::Overlay : public QWidget {
-public:
+ public:
   Overlay(SearchTermWidget* parent);
   void Grab();
   void SetOpacity(float opacity);
@@ -45,11 +46,11 @@ public:
   static const int kSpacing;
   static const int kIconSize;
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
   void mouseReleaseEvent(QMouseEvent*);
 
-private:
+ private:
   SearchTermWidget* parent_;
 
   float opacity_;
@@ -61,19 +62,18 @@ private:
 const int SearchTermWidget::Overlay::kSpacing = 6;
 const int SearchTermWidget::Overlay::kIconSize = 22;
 
-
 SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
-  : QWidget(parent),
-    ui_(new Ui_SmartPlaylistSearchTermWidget),
-    library_(library),
-    overlay_(NULL),
-    animation_(new QPropertyAnimation(this, "overlay_opacity", this)),
-    active_(true),
-    initialized_(false),
-    current_field_type_(SearchTerm::Type_Invalid)
-{
+    : QWidget(parent),
+      ui_(new Ui_SmartPlaylistSearchTermWidget),
+      library_(library),
+      overlay_(nullptr),
+      animation_(new QPropertyAnimation(this, "overlay_opacity", this)),
+      active_(true),
+      initialized_(false),
+      current_field_type_(SearchTerm::Type_Invalid) {
   ui_->setupUi(this);
-  connect(ui_->field, SIGNAL(currentIndexChanged(int)), SLOT(FieldChanged(int)));
+  connect(ui_->field, SIGNAL(currentIndexChanged(int)),
+          SLOT(FieldChanged(int)));
   connect(ui_->op, SIGNAL(currentIndexChanged(int)), SLOT(OpChanged(int)));
   connect(ui_->remove, SIGNAL(clicked()), SIGNAL(RemoveClicked()));
 
@@ -82,27 +82,33 @@ SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
   connect(ui_->value_rating, SIGNAL(RatingChanged(float)), SIGNAL(Changed()));
   connect(ui_->value_text, SIGNAL(textChanged(QString)), SIGNAL(Changed()));
   connect(ui_->value_time, SIGNAL(timeChanged(QTime)), SIGNAL(Changed()));
-  connect(ui_->value_date_numeric, SIGNAL(valueChanged(int)), SIGNAL(Changed()));
-  connect(ui_->value_date_numeric1, SIGNAL(valueChanged(int)), SLOT(RelativeValueChanged()));
-  connect(ui_->value_date_numeric2, SIGNAL(valueChanged(int)), SLOT(RelativeValueChanged()));
+  connect(ui_->value_date_numeric, SIGNAL(valueChanged(int)),
+          SIGNAL(Changed()));
+  connect(ui_->value_date_numeric1, SIGNAL(valueChanged(int)),
+          SLOT(RelativeValueChanged()));
+  connect(ui_->value_date_numeric2, SIGNAL(valueChanged(int)),
+          SLOT(RelativeValueChanged()));
   connect(ui_->date_type, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
-  connect(ui_->date_type_relative, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
+  connect(ui_->date_type_relative, SIGNAL(currentIndexChanged(int)),
+          SIGNAL(Changed()));
 
   ui_->value_date->setDate(QDate::currentDate());
 
   // Populate the combo boxes
-  for (int i=0; i<SearchTerm::FieldCount; ++i) {
+  for (int i = 0; i < SearchTerm::FieldCount; ++i) {
     ui_->field->addItem(SearchTerm::FieldName(SearchTerm::Field(i)));
     ui_->field->setItemData(i, i);
   }
   ui_->field->model()->sort(0);
 
   // Populate the date type combo box
-  for (int i=0; i<5; ++i) {
-    ui_->date_type->addItem(SearchTerm::DateName(SearchTerm::DateType(i), false));
+  for (int i = 0; i < 5; ++i) {
+    ui_->date_type->addItem(
+        SearchTerm::DateName(SearchTerm::DateType(i), false));
     ui_->date_type->setItemData(i, i);
 
-    ui_->date_type_relative->addItem(SearchTerm::DateName(SearchTerm::DateType(i), false));
+    ui_->date_type_relative->addItem(
+        SearchTerm::DateName(SearchTerm::DateType(i), false));
     ui_->date_type_relative->setItemData(i, i);
   }
 
@@ -115,25 +121,23 @@ SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
   QString stylesheet = QString::fromAscii(stylesheet_file.readAll());
   const QColor base(222, 97, 97, 128);
   stylesheet.replace("%light2", Utilities::ColorToRgba(base.lighter(140)));
-  stylesheet.replace("%light",  Utilities::ColorToRgba(base.lighter(120)));
-  stylesheet.replace("%dark",   Utilities::ColorToRgba(base.darker(120)));
-  stylesheet.replace("%base",   Utilities::ColorToRgba(base));
+  stylesheet.replace("%light", Utilities::ColorToRgba(base.lighter(120)));
+  stylesheet.replace("%dark", Utilities::ColorToRgba(base.darker(120)));
+  stylesheet.replace("%base", Utilities::ColorToRgba(base));
   setStyleSheet(stylesheet);
 }
 
-SearchTermWidget::~SearchTermWidget() {
-  delete ui_;
-}
+SearchTermWidget::~SearchTermWidget() { delete ui_; }
 
 void SearchTermWidget::FieldChanged(int index) {
-  SearchTerm::Field field = SearchTerm::Field(
-        ui_->field->itemData(index).toInt());
+  SearchTerm::Field field =
+      SearchTerm::Field(ui_->field->itemData(index).toInt());
   SearchTerm::Type type = SearchTerm::TypeOf(field);
 
   // Populate the operator combo box
   if (type != current_field_type_) {
     ui_->op->clear();
-    foreach (SearchTerm::Operator op, SearchTerm::OperatorsForType(type)) {
+    for (SearchTerm::Operator op : SearchTerm::OperatorsForType(type)) {
       const int i = ui_->op->count();
       ui_->op->addItem(SearchTerm::OperatorText(type, op));
       ui_->op->setItemData(i, op);
@@ -142,29 +146,41 @@ void SearchTermWidget::FieldChanged(int index) {
   }
 
   // Show the correct value editor
-  QWidget* page = NULL;
+  QWidget* page = nullptr;
   switch (type) {
-    case SearchTerm::Type_Time:    page = ui_->page_time;   break;
-    case SearchTerm::Type_Number:  page = ui_->page_number; break;
-    case SearchTerm::Type_Date:    page = ui_->page_date;   break;
-    case SearchTerm::Type_Rating:  page = ui_->page_rating; break;
-    case SearchTerm::Type_Text:    page = ui_->page_text;   break;
-    case SearchTerm::Type_Invalid: page = NULL;             break;
+    case SearchTerm::Type_Time:
+      page = ui_->page_time;
+      break;
+    case SearchTerm::Type_Number:
+      page = ui_->page_number;
+      break;
+    case SearchTerm::Type_Date:
+      page = ui_->page_date;
+      break;
+    case SearchTerm::Type_Rating:
+      page = ui_->page_rating;
+      break;
+    case SearchTerm::Type_Text:
+      page = ui_->page_text;
+      break;
+    case SearchTerm::Type_Invalid:
+      page = nullptr;
+      break;
   }
   ui_->value_stack->setCurrentWidget(page);
 
   // Maybe set a tag completer
   switch (field) {
-  case SearchTerm::Field_Artist:
-    new TagCompleter(library_, Playlist::Column_Artist, ui_->value_text);
-    break;
+    case SearchTerm::Field_Artist:
+      new TagCompleter(library_, Playlist::Column_Artist, ui_->value_text);
+      break;
 
-  case SearchTerm::Field_Album:
-    new TagCompleter(library_, Playlist::Column_Album, ui_->value_text);
-    break;
+    case SearchTerm::Field_Album:
+      new TagCompleter(library_, Playlist::Column_Album, ui_->value_text);
+      break;
 
-  default:
-    ui_->value_text->setCompleter(NULL);
+    default:
+      ui_->value_text->setCompleter(nullptr);
   }
 
   emit Changed();
@@ -172,17 +188,18 @@ void SearchTermWidget::FieldChanged(int index) {
 
 void SearchTermWidget::OpChanged(int index) {
   // We need to change the page only in the following case
-  if ((ui_->value_stack->currentWidget() == ui_->page_date) || (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
+  if ((ui_->value_stack->currentWidget() == ui_->page_date) ||
+      (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
       (ui_->value_stack->currentWidget() == ui_->page_date_relative)) {
-      QWidget* page = NULL;
-      if (index == 4 || index == 5) {
-        page = ui_->page_date_numeric;
-      } else if (index == 6) {
-        page = ui_->page_date_relative;
-      } else {
-        page = ui_->page_date;
-      }
-      ui_->value_stack->setCurrentWidget(page);
+    QWidget* page = nullptr;
+    if (index == 4 || index == 5) {
+      page = ui_->page_date_numeric;
+    } else if (index == 6) {
+      page = ui_->page_date_relative;
+    } else {
+      page = ui_->page_date;
+    }
+    ui_->value_stack->setCurrentWidget(page);
   }
   emit Changed();
 }
@@ -190,7 +207,7 @@ void SearchTermWidget::OpChanged(int index) {
 void SearchTermWidget::SetActive(bool active) {
   active_ = active;
   delete overlay_;
-  overlay_ = NULL;
+  overlay_ = nullptr;
 
   if (!active) {
     overlay_ = new Overlay(this);
@@ -198,8 +215,7 @@ void SearchTermWidget::SetActive(bool active) {
 }
 
 void SearchTermWidget::enterEvent(QEvent*) {
-  if (!overlay_ || !isEnabled())
-    return;
+  if (!overlay_ || !isEnabled()) return;
 
   animation_->stop();
   animation_->setEndValue(1.0);
@@ -208,8 +224,7 @@ void SearchTermWidget::enterEvent(QEvent*) {
 }
 
 void SearchTermWidget::leaveEvent(QEvent*) {
-  if (!overlay_)
-    return;
+  if (!overlay_) return;
 
   animation_->stop();
   animation_->setEndValue(0.0);
@@ -231,13 +246,10 @@ void SearchTermWidget::showEvent(QShowEvent* e) {
   }
 }
 
-void SearchTermWidget::Grab() {
-  overlay_->Grab();
-}
+void SearchTermWidget::Grab() { overlay_->Grab(); }
 
 void SearchTermWidget::set_overlay_opacity(float opacity) {
-  if (overlay_)
-    overlay_->SetOpacity(opacity);
+  if (overlay_) overlay_->SetOpacity(opacity);
 }
 
 float SearchTermWidget::overlay_opacity() const {
@@ -250,45 +262,44 @@ void SearchTermWidget::SetTerm(const SearchTerm& term) {
 
   // The value depends on the data type
   switch (SearchTerm::TypeOf(term.field_)) {
-  case SearchTerm::Type_Text:
-    ui_->value_text->setText(term.value_.toString());
-    break;
+    case SearchTerm::Type_Text:
+      ui_->value_text->setText(term.value_.toString());
+      break;
 
-  case SearchTerm::Type_Number:
-    ui_->value_number->setValue(term.value_.toInt());
-    break;
+    case SearchTerm::Type_Number:
+      ui_->value_number->setValue(term.value_.toInt());
+      break;
 
-  case SearchTerm::Type_Date:
-    if (ui_->value_stack->currentWidget() == ui_->page_date_numeric) {
-      ui_->value_date_numeric->setValue(term.value_.toInt());
-      ui_->date_type->setCurrentIndex(term.date_);
-    }
-    else if (ui_->value_stack->currentWidget() == ui_->page_date_relative) {
-      ui_->value_date_numeric1->setValue(term.value_.toInt());
-      ui_->value_date_numeric2->setValue(term.second_value_.toInt());
-      ui_->date_type_relative->setCurrentIndex(term.date_);
-    }
-    else if (ui_->value_stack->currentWidget() == ui_->page_date) {
-      ui_->value_date->setDateTime(QDateTime::fromTime_t(term.value_.toInt()));
-    }
-    break;
+    case SearchTerm::Type_Date:
+      if (ui_->value_stack->currentWidget() == ui_->page_date_numeric) {
+        ui_->value_date_numeric->setValue(term.value_.toInt());
+        ui_->date_type->setCurrentIndex(term.date_);
+      } else if (ui_->value_stack->currentWidget() == ui_->page_date_relative) {
+        ui_->value_date_numeric1->setValue(term.value_.toInt());
+        ui_->value_date_numeric2->setValue(term.second_value_.toInt());
+        ui_->date_type_relative->setCurrentIndex(term.date_);
+      } else if (ui_->value_stack->currentWidget() == ui_->page_date) {
+        ui_->value_date->setDateTime(
+            QDateTime::fromTime_t(term.value_.toInt()));
+      }
+      break;
 
-  case SearchTerm::Type_Time:
-    ui_->value_time->setTime(QTime(0,0).addSecs(term.value_.toInt()));
-    break;
+    case SearchTerm::Type_Time:
+      ui_->value_time->setTime(QTime(0, 0).addSecs(term.value_.toInt()));
+      break;
 
-  case SearchTerm::Type_Rating:
-    ui_->value_rating->set_rating(term.value_.toFloat());
-    break;
+    case SearchTerm::Type_Rating:
+      ui_->value_rating->set_rating(term.value_.toFloat());
+      break;
 
-  case SearchTerm::Type_Invalid:
-    break;
+    case SearchTerm::Type_Invalid:
+      break;
   }
 }
 
 SearchTerm SearchTermWidget::Term() const {
   const int field = ui_->field->itemData(ui_->field->currentIndex()).toInt();
-  const int op    = ui_->op->itemData(ui_->op->currentIndex()).toInt();
+  const int op = ui_->op->itemData(ui_->op->currentIndex()).toInt();
 
   SearchTerm ret;
   ret.field_ = SearchTerm::Field(field);
@@ -303,7 +314,7 @@ SearchTerm SearchTermWidget::Term() const {
   } else if (value_page == ui_->page_date) {
     ret.value_ = ui_->value_date->dateTime().toTime_t();
   } else if (value_page == ui_->page_time) {
-    ret.value_ = QTime(0,0).secsTo(ui_->value_time->time());
+    ret.value_ = QTime(0, 0).secsTo(ui_->value_time->time());
   } else if (value_page == ui_->page_rating) {
     ret.value_ = ui_->value_rating->rating();
   } else if (value_page == ui_->page_date_numeric) {
@@ -326,21 +337,20 @@ void SearchTermWidget::RelativeValueChanged() {
   }
   // Explain the user why he can't proceed
   if (ui_->value_date_numeric1->value() >= ui_->value_date_numeric2->value()) {
-    QMessageBox::warning(this, tr("Clementine"),
-                                    tr("The second value must be greater than the first one!"));
+    QMessageBox::warning(
+        this, tr("Clementine"),
+        tr("The second value must be greater than the first one!"));
   }
   // Emit the signal in any case, so the Next button will be disabled
   emit Changed();
 }
 
-
 SearchTermWidget::Overlay::Overlay(SearchTermWidget* parent)
-  : QWidget(parent),
-    parent_(parent),
-    opacity_(0.0),
-    text_(tr("Add search term")),
-    icon_(IconLoader::Load("list-add").pixmap(kIconSize))
-{
+    : QWidget(parent),
+      parent_(parent),
+      opacity_(0.0),
+      text_(tr("Add search term")),
+      icon_(IconLoader::Load("list-add").pixmap(kIconSize)) {
   raise();
 }
 
@@ -395,8 +405,7 @@ void SearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
                        contents_size);
   const QRect icon(contents.topLeft(), QSize(kIconSize, kIconSize));
   const QRect text(icon.right() + kSpacing, icon.top(),
-                   contents.width() - kSpacing - kIconSize,
-                   contents.height());
+                   contents.width() - kSpacing - kIconSize, contents.height());
 
   // Icon and text
   p.setPen(palette().color(QPalette::Text));
@@ -408,4 +417,4 @@ void SearchTermWidget::Overlay::mouseReleaseEvent(QMouseEvent*) {
   emit parent_->Clicked();
 }
 
-} // namespace
+}  // namespace

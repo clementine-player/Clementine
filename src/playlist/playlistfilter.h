@@ -30,8 +30,8 @@ class FilterTree;
 class PlaylistFilter : public QSortFilterProxyModel {
   Q_OBJECT
 
-public:
-  PlaylistFilter(QObject* parent = 0);
+ public:
+  PlaylistFilter(QObject* parent = nullptr);
   ~PlaylistFilter();
 
   // QAbstractItemModel
@@ -39,9 +39,9 @@ public:
 
   // QSortFilterProxyModel
   // public so Playlist::NextVirtualIndex and friends can get at it
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const;
 
-private:
+ private:
   // Mutable because they're modified from filterAcceptsRow() const
   mutable QScopedPointer<FilterTree> filter_tree_;
   mutable uint query_hash_;
@@ -50,4 +50,4 @@ private:
   QSet<int> numerical_columns_;
 };
 
-#endif // PLAYLISTFILTER_H
+#endif  // PLAYLISTFILTER_H

@@ -23,14 +23,15 @@
 class SavedRadio;
 
 class SavedRadioSearchProvider : public SimpleSearchProvider {
-public:
-  SavedRadioSearchProvider(SavedRadio* service, Application* app, QObject* parent);
+ public:
+  SavedRadioSearchProvider(SavedRadio* service, Application* app,
+                           QObject* parent);
 
-protected:
+ protected:
   void RecreateItems();
 
-private:
+ private:
   SavedRadio* service_;
 };
 
-#endif // SAVEDRADIOSEARCHPROVIDER_H
+#endif  // SAVEDRADIOSEARCHPROVIDER_H

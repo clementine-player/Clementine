@@ -110,7 +110,7 @@ void MacDeviceLister::Init() {
 
   // Populate MTP Device list.
   if (sMTPDeviceList.empty()) {
-    LIBMTP_device_entry_t* devices = NULL;
+    LIBMTP_device_entry_t* devices = nullptr;
     int num = 0;
     if (LIBMTP_Get_Supported_Devices_List(&devices, &num) != 0) {
       qLog(Warning) << "Failed to get MTP device list";
@@ -144,7 +144,7 @@ void MacDeviceLister::Init() {
   DARegisterDiskAppearedCallback(
       loop_session_, kDADiskDescriptionMatchVolumeMountable, &DiskAddedCallback,
       reinterpret_cast<void*>(this));
-  DARegisterDiskDisappearedCallback(loop_session_, NULL, &DiskRemovedCallback,
+  DARegisterDiskDisappearedCallback(loop_session_, nullptr, &DiskRemovedCallback,
                                     reinterpret_cast<void*>(this));
   DASessionScheduleWithRunLoop(loop_session_, run_loop_, kCFRunLoopDefaultMode);
 
@@ -213,7 +213,7 @@ CFTypeRef GetUSBRegistryEntry(io_object_t device, CFStringRef key) {
   }
 
   IOObjectRelease(it);
-  return NULL;
+  return nullptr;
 }
 
 QString GetUSBRegistryEntryString(io_object_t device, CFStringRef key) {
@@ -520,7 +520,7 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
         continue;
       }
 
-      IOCFPlugInInterface** plugin_interface = NULL;
+      IOCFPlugInInterface** plugin_interface = nullptr;
       SInt32 score;
       kern_return_t err = IOCreatePlugInInterfaceForService(
           object, kIOUSBDeviceUserClientTypeID, kIOCFPlugInInterfaceID,
@@ -529,7 +529,7 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
         continue;
       }
 
-      IOUSBDeviceInterface** dev = NULL;
+      IOUSBDeviceInterface** dev = nullptr;
       HRESULT result = (*plugin_interface)->QueryInterface(
           plugin_interface, CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID),
           (LPVOID*)&dev);

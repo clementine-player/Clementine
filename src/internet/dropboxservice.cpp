@@ -24,21 +24,17 @@ namespace {
 
 static const char* kServiceId = "dropbox";
 
-static const char* kMediaEndpoint =
-    "https://api.dropbox.com/1/media/dropbox/";
-static const char* kDeltaEndpoint =
-    "https://api.dropbox.com/1/delta";
+static const char* kMediaEndpoint = "https://api.dropbox.com/1/media/dropbox/";
+static const char* kDeltaEndpoint = "https://api.dropbox.com/1/delta";
 static const char* kLongPollEndpoint =
     "https://api-notify.dropbox.com/1/longpoll_delta";
 
 }  // namespace
 
 DropboxService::DropboxService(Application* app, InternetModel* parent)
-    : CloudFileService(
-        app, parent,
-        kServiceName, kServiceId,
-        QIcon(":/providers/dropbox.png"),
-        SettingsDialog::Page_Dropbox),
+    : CloudFileService(app, parent, kServiceName, kServiceId,
+                       QIcon(":/providers/dropbox.png"),
+                       SettingsDialog::Page_Dropbox),
       network_(new NetworkAccessManager(this)) {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
@@ -59,7 +55,8 @@ void DropboxService::Connect() {
   }
 }
 
-void DropboxService::AuthenticationFinished(DropboxAuthenticator* authenticator) {
+void DropboxService::AuthenticationFinished(
+    DropboxAuthenticator* authenticator) {
   authenticator->deleteLater();
 
   access_token_ = authenticator->access_token();
@@ -79,8 +76,7 @@ void DropboxService::AuthenticationFinished(DropboxAuthenticator* authenticator)
 
 QByteArray DropboxService::GenerateAuthorisationHeader() {
   return DropboxAuthenticator::GenerateAuthorisationHeader(
-      access_token_,
-      access_token_secret_);
+      access_token_, access_token_secret_);
 }
 
 void DropboxService::RequestFileList() {
@@ -95,8 +91,8 @@ void DropboxService::RequestFileList() {
   request.setRawHeader("Authorization", GenerateAuthorisationHeader());
 
   QNetworkReply* reply = network_->post(request, QByteArray());
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(RequestFileListFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RequestFileListFinished(QNetworkReply*)), reply);
 }
 
 void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
@@ -104,8 +100,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 
   QJson::Parser parser;
   QVariantMap response = parser.parse(reply).toMap();
-  if (response.contains("reset") &&
-      response["reset"].toBool()) {
+  if (response.contains("reset") && response["reset"].toBool()) {
     qLog(Debug) << "Resetting Dropbox DB";
     library_backend_->DeleteAll();
   }
@@ -116,7 +111,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 
   QVariantList contents = response["entries"].toList();
   qLog(Debug) << "Delta found:" << contents.size();
-  foreach (const QVariant& c, contents) {
+  for (const QVariant& c : contents) {
     QVariantList item = c.toList();
     QString path = item[0].toString();
 
@@ -139,16 +134,17 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
       continue;
     }
 
-    // Workaround: Since Dropbox doesn't recognize Opus files and thus treats them
+    // Workaround: Since Dropbox doesn't recognize Opus files and thus treats
+    // them
     // as application/octet-stream, we overwrite the mime type here
-    if (metadata["mime_type"].toString() == "application/octet-stream" && 
+    if (metadata["mime_type"].toString() == "application/octet-stream" &&
         url.toString().endsWith(".opus"))
       metadata["mime_type"] = GuessMimeTypeForFile(url.toString());
 
     if (ShouldIndexFile(url, metadata["mime_type"].toString())) {
       QNetworkReply* reply = FetchContentUrl(url);
-      NewClosure(reply, SIGNAL(finished()),
-                 this, SLOT(FetchContentUrlFinished(QNetworkReply*, QVariantMap)),
+      NewClosure(reply, SIGNAL(finished()), this,
+                 SLOT(FetchContentUrlFinished(QNetworkReply*, QVariantMap)),
                  reply, metadata);
     }
   }
@@ -172,8 +168,8 @@ void DropboxService::LongPollDelta() {
   QNetworkRequest request(request_url);
   request.setRawHeader("Authorization", GenerateAuthorisationHeader());
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(LongPollFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(LongPollFinished(QNetworkReply*)), reply);
 }
 
 void DropboxService::LongPollFinished(QNetworkReply* reply) {
@@ -201,8 +197,8 @@ QNetworkReply* DropboxService::FetchContentUrl(const QUrl& url) {
   return network_->post(request, QByteArray());
 }
 
-void DropboxService::FetchContentUrlFinished(
-    QNetworkReply* reply, const QVariantMap& data) {
+void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
+                                             const QVariantMap& data) {
   reply->deleteLater();
   QJson::Parser parser;
   QVariantMap response = parser.parse(reply).toMap();
@@ -220,11 +216,9 @@ void DropboxService::FetchContentUrlFinished(
   song.set_filesize(data["bytes"].toInt());
   song.set_ctime(0);
 
-  MaybeAddFileToDatabase(
-      song,
-      data["mime_type"].toString(),
-      QUrl::fromEncoded(response["url"].toByteArray()),
-      QString::null);
+  MaybeAddFileToDatabase(song, data["mime_type"].toString(),
+                         QUrl::fromEncoded(response["url"].toByteArray()),
+                         QString::null);
 }
 
 QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {

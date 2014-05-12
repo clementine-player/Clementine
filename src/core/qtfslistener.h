@@ -32,7 +32,6 @@ class QtFSListener : public FileSystemWatcherInterface {
 
  private:
   QFileSystemWatcher watcher_;
-
 };
 
 #endif

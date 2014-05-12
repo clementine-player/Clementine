@@ -33,31 +33,37 @@
 
 #include "logging.h"
 
-
 namespace logging {
 
 static Level sDefaultLevel = Level_Debug;
-static QMap<QString, Level>* sClassLevels = NULL;
-static QIODevice* sNullDevice = NULL;
+static QMap<QString, Level>* sClassLevels = nullptr;
+static QIODevice* sNullDevice = nullptr;
 
 const char* kDefaultLogLevels = "GstEnginePipeline:2,*:3";
 
 static const char* kMessageHandlerMagic = "__logging_message__";
 static const int kMessageHandlerMagicLength = strlen(kMessageHandlerMagic);
-static QtMsgHandler sOriginalMessageHandler = NULL;
-
+static QtMsgHandler sOriginalMessageHandler = nullptr;
 
 void GLog(const char* domain, int level, const char* message, void* user_data) {
   switch (level) {
     case G_LOG_FLAG_RECURSION:
     case G_LOG_FLAG_FATAL:
     case G_LOG_LEVEL_ERROR:
-    case G_LOG_LEVEL_CRITICAL: qLog(Error)   << message; break;
-    case G_LOG_LEVEL_WARNING:  qLog(Warning) << message; break;
+    case G_LOG_LEVEL_CRITICAL:
+      qLog(Error) << message;
+      break;
+    case G_LOG_LEVEL_WARNING:
+      qLog(Warning) << message;
+      break;
     case G_LOG_LEVEL_MESSAGE:
-    case G_LOG_LEVEL_INFO:     qLog(Info)    << message; break;
+    case G_LOG_LEVEL_INFO:
+      qLog(Info) << message;
+      break;
     case G_LOG_LEVEL_DEBUG:
-    default:                   qLog(Debug)   << message; break;
+    default:
+      qLog(Debug) << message;
+      break;
   }
 }
 
@@ -70,13 +76,19 @@ static void MessageHandler(QtMsgType type, const char* message) {
   Level level = Level_Debug;
   switch (type) {
     case QtFatalMsg:
-    case QtCriticalMsg: level = Level_Error;   break;
-    case QtWarningMsg:  level = Level_Warning; break;
+    case QtCriticalMsg:
+      level = Level_Error;
+      break;
+    case QtWarningMsg:
+      level = Level_Warning;
+      break;
     case QtDebugMsg:
-    default:            level = Level_Debug;   break;
+    default:
+      level = Level_Debug;
+      break;
   }
 
-  foreach (const QString& line, QString::fromLocal8Bit(message).split('\n')) {
+  for (const QString& line : QString::fromLocal8Bit(message).split('\n')) {
     CreateLogger(level, "unknown", -1) << line.toLocal8Bit().constData();
   }
 
@@ -84,7 +96,6 @@ static void MessageHandler(QtMsgType type, const char* message) {
     abort();
   }
 }
-
 
 void Init() {
   delete sClassLevels;
@@ -100,10 +111,9 @@ void Init() {
 }
 
 void SetLevels(const QString& levels) {
-  if (!sClassLevels)
-    return;
+  if (!sClassLevels) return;
 
-  foreach (const QString& item, levels.split(',')) {
+  for (const QString& item : levels.split(',')) {
     const QStringList class_level = item.split(':');
 
     QString class_name;
@@ -122,14 +132,14 @@ void SetLevels(const QString& levels) {
     }
 
     if (class_name.isEmpty() || class_name == "*") {
-      sDefaultLevel = (Level) level;
+      sDefaultLevel = (Level)level;
     } else {
-      sClassLevels->insert(class_name, (Level) level);
+      sClassLevels->insert(class_name, (Level)level);
     }
   }
 }
 
-QString ParsePrettyFunction(const char * pretty_function) {
+QString ParsePrettyFunction(const char* pretty_function) {
   // Get the class name out of the function name.
   QString class_name = pretty_function;
   const int paren = class_name.indexOf('(');
@@ -144,7 +154,7 @@ QString ParsePrettyFunction(const char * pretty_function) {
 
   const int space = class_name.lastIndexOf(' ');
   if (space != -1) {
-    class_name = class_name.mid(space+1);
+    class_name = class_name.mid(space + 1);
   }
 
   return class_name;
@@ -152,13 +162,23 @@ QString ParsePrettyFunction(const char * pretty_function) {
 
 QDebug CreateLogger(Level level, const QString& class_name, int line) {
   // Map the level to a string
-  const char* level_name = NULL;
+  const char* level_name = nullptr;
   switch (level) {
-    case Level_Debug:   level_name = " DEBUG "; break;
-    case Level_Info:    level_name = " INFO  "; break;
-    case Level_Warning: level_name = " WARN  "; break;
-    case Level_Error:   level_name = " ERROR "; break;
-    case Level_Fatal:   level_name = " FATAL "; break;
+    case Level_Debug:
+      level_name = " DEBUG ";
+      break;
+    case Level_Info:
+      level_name = " INFO  ";
+      break;
+    case Level_Warning:
+      level_name = " WARN  ";
+      break;
+    case Level_Error:
+      level_name = " ERROR ";
+      break;
+    case Level_Fatal:
+      level_name = " FATAL ";
+      break;
   }
 
   // Check the settings to see if we're meant to show or hide this message.
@@ -182,9 +202,11 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
   }
 
   QDebug ret(type);
-  ret.nospace() << kMessageHandlerMagic
-      << QDateTime::currentDateTime().toString("hh:mm:ss.zzz").toAscii().constData()
-      << level_name << function_line.leftJustified(32).toAscii().constData();
+  ret.nospace() << kMessageHandlerMagic << QDateTime::currentDateTime()
+                                               .toString("hh:mm:ss.zzz")
+                                               .toAscii()
+                                               .constData() << level_name
+                << function_line.leftJustified(32).toAscii().constData();
 
   return ret.space();
 }
@@ -192,10 +214,7 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
 QString CXXDemangle(const QString& mangled_function) {
   int status;
   char* demangled_function = abi::__cxa_demangle(
-      mangled_function.toAscii().constData(),
-      NULL,
-      NULL,
-      &status);
+      mangled_function.toAscii().constData(), nullptr, nullptr, &status);
   if (status == 0) {
     QString ret = QString::fromAscii(demangled_function);
     free(demangled_function);
@@ -232,8 +251,10 @@ QString DemangleSymbol(const QString& symbol) {
 void DumpStackTrace() {
 #ifdef Q_OS_UNIX
   void* callstack[128];
-  int callstack_size = backtrace(reinterpret_cast<void**>(&callstack), sizeof(callstack));
-  char** symbols = backtrace_symbols(reinterpret_cast<void**>(&callstack), callstack_size);
+  int callstack_size =
+      backtrace(reinterpret_cast<void**>(&callstack), sizeof(callstack));
+  char** symbols =
+      backtrace_symbols(reinterpret_cast<void**>(&callstack), callstack_size);
   // Start from 1 to skip ourself.
   for (int i = 1; i < callstack_size; ++i) {
     qLog(Debug) << DemangleSymbol(QString::fromAscii(symbols[i]));
@@ -244,4 +265,4 @@ void DumpStackTrace() {
 #endif
 }
 
-} // namespace logging
+}  // namespace logging

@@ -27,9 +27,7 @@
 #include "core/logging.h"
 #include "core/song.h"
 
-QStringList CddaLister::DeviceUniqueIDs() {
-  return devices_list_;
-}
+QStringList CddaLister::DeviceUniqueIDs() { return devices_list_; }
 
 QVariantList CddaLister::DeviceIcons(const QString&) {
   QVariantList icons;
@@ -38,7 +36,7 @@ QVariantList CddaLister::DeviceIcons(const QString&) {
 }
 
 QString CddaLister::DeviceManufacturer(const QString& id) {
-  CdIo_t *cdio = cdio_open (id.toLocal8Bit().constData(), DRIVER_DEVICE);
+  CdIo_t* cdio = cdio_open(id.toLocal8Bit().constData(), DRIVER_DEVICE);
   cdio_hwinfo_t cd_info;
   if (cdio_get_hwinfo(cdio, &cd_info)) {
     cdio_destroy(cdio);
@@ -49,7 +47,7 @@ QString CddaLister::DeviceManufacturer(const QString& id) {
 }
 
 QString CddaLister::DeviceModel(const QString& id) {
-  CdIo_t *cdio = cdio_open (id.toLocal8Bit().constData(), DRIVER_DEVICE);
+  CdIo_t* cdio = cdio_open(id.toLocal8Bit().constData(), DRIVER_DEVICE);
   cdio_hwinfo_t cd_info;
   if (cdio_get_hwinfo(cdio, &cd_info)) {
     cdio_destroy(cdio);
@@ -59,20 +57,16 @@ QString CddaLister::DeviceModel(const QString& id) {
   return QString();
 }
 
-quint64 CddaLister::DeviceCapacity(const QString&) {
-  return 0;
-}
+quint64 CddaLister::DeviceCapacity(const QString&) { return 0; }
 
-quint64 CddaLister::DeviceFreeSpace(const QString&) {
-  return 0;
-}
+quint64 CddaLister::DeviceFreeSpace(const QString&) { return 0; }
 
 QVariantMap CddaLister::DeviceHardwareInfo(const QString&) {
   return QVariantMap();
 }
 
 QString CddaLister::MakeFriendlyName(const QString& id) {
-  CdIo_t *cdio = cdio_open (id.toLocal8Bit().constData(), DRIVER_DEVICE);
+  CdIo_t* cdio = cdio_open(id.toLocal8Bit().constData(), DRIVER_DEVICE);
   cdio_hwinfo_t cd_info;
   if (cdio_get_hwinfo(cdio, &cd_info)) {
     cdio_destroy(cdio);
@@ -90,8 +84,7 @@ void CddaLister::UnmountDevice(const QString& id) {
   cdio_eject_media_drive(id.toLocal8Bit().constData());
 }
 
-void CddaLister::UpdateDeviceFreeSpace(const QString&) {
-}
+void CddaLister::UpdateDeviceFreeSpace(const QString&) {}
 
 void CddaLister::Init() {
   cdio_init();
@@ -100,19 +93,20 @@ void CddaLister::Init() {
     qLog(Error) << "libcdio was compiled without support for OS X!";
   }
 #endif
-  char **devices = cdio_get_devices(DRIVER_DEVICE);
+  char** devices = cdio_get_devices(DRIVER_DEVICE);
   if (!devices) {
     qLog(Debug) << "No CD devices found";
     return;
   }
-  for (; *devices != NULL; ++devices) {
+  for (; *devices != nullptr; ++devices) {
     QString device(*devices);
     QFileInfo device_info(device);
     if (device_info.isSymLink()) {
       device = device_info.symLinkTarget();
     }
 #ifdef Q_OS_DARWIN
-    // Every track is detected as a separate device on Darwin. The raw disk looks
+    // Every track is detected as a separate device on Darwin. The raw disk
+    // looks
     // like /dev/rdisk1
     if (!device.contains(QRegExp("^/dev/rdisk[0-9]$"))) {
       continue;
@@ -124,4 +118,3 @@ void CddaLister::Init() {
     }
   }
 }
-

@@ -29,17 +29,15 @@
 #include <QWheelEvent>
 
 QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
-  : SystemTrayIcon(parent),
-    tray_(new QSystemTrayIcon(this)),
-    menu_(new QMenu),
-    action_play_pause_(NULL),
-    action_stop_(NULL),
-    action_stop_after_this_track_(NULL),
-    action_mute_(NULL),
-    action_love_(NULL),
-    action_ban_(NULL)
-{
-  QIcon theme_icon      = IconLoader::Load("clementine-panel");
+    : SystemTrayIcon(parent),
+      tray_(new QSystemTrayIcon(this)),
+      menu_(new QMenu),
+      action_play_pause_(nullptr),
+      action_stop_(nullptr),
+      action_stop_after_this_track_(nullptr),
+      action_mute_(nullptr),
+      action_love_(nullptr) {
+  QIcon theme_icon = IconLoader::Load("clementine-panel");
   QIcon theme_icon_grey = IconLoader::Load("clementine-panel-grey");
 
   if (theme_icon.isNull() || theme_icon_grey.isNull()) {
@@ -65,16 +63,12 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
           SLOT(Clicked(QSystemTrayIcon::ActivationReason)));
 }
 
-QtSystemTrayIcon::~QtSystemTrayIcon() {
-  delete menu_;
-}
+QtSystemTrayIcon::~QtSystemTrayIcon() { delete menu_; }
 
 bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
-  if (QObject::eventFilter(object, event))
-    return true;
+  if (QObject::eventFilter(object, event)) return true;
 
-  if (object != tray_)
-    return false;
+  if (object != tray_) return false;
 
   if (event->type() == QEvent::Wheel) {
     QWheelEvent* e = static_cast<QWheelEvent*>(event);
@@ -99,31 +93,35 @@ bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
   return false;
 }
 
-void QtSystemTrayIcon::SetupMenu(
-    QAction* previous, QAction* play, QAction* stop, QAction* stop_after,
-    QAction* next, QAction* mute, QAction* love, QAction* ban, QAction* quit) {
+void QtSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
+                                 QAction* stop, QAction* stop_after,
+                                 QAction* next, QAction* mute, QAction* love,
+                                 QAction* quit) {
   // Creating new actions and connecting them to old ones. This allows us to
   // use old actions without displaying shortcuts that can not be used when
   // Clementine's window is hidden
-  menu_->addAction(previous->icon(), previous->text(), previous, SLOT(trigger()));
-  action_play_pause_ = menu_->addAction(play->icon(), play->text(), play, SLOT(trigger()));
-  action_stop_ = menu_->addAction(stop->icon(), stop->text(), stop, SLOT(trigger()));
-  action_stop_after_this_track_ = menu_->addAction(stop_after->icon(), stop_after->text(), stop_after, SLOT(trigger()));
+  menu_->addAction(previous->icon(), previous->text(), previous,
+                   SLOT(trigger()));
+  action_play_pause_ =
+      menu_->addAction(play->icon(), play->text(), play, SLOT(trigger()));
+  action_stop_ =
+      menu_->addAction(stop->icon(), stop->text(), stop, SLOT(trigger()));
+  action_stop_after_this_track_ = menu_->addAction(
+      stop_after->icon(), stop_after->text(), stop_after, SLOT(trigger()));
   menu_->addAction(next->icon(), next->text(), next, SLOT(trigger()));
 
   menu_->addSeparator();
-  action_mute_ = menu_->addAction(mute->icon(), mute->text(), mute, SLOT(trigger()));
+  action_mute_ =
+      menu_->addAction(mute->icon(), mute->text(), mute, SLOT(trigger()));
   action_mute_->setCheckable(true);
   action_mute_->setChecked(mute->isChecked());
 
   menu_->addSeparator();
 #ifdef HAVE_LIBLASTFM
-  action_love_ = menu_->addAction(love->icon(), love->text(), love, SLOT(trigger()));
+  action_love_ =
+      menu_->addAction(love->icon(), love->text(), love, SLOT(trigger()));
   action_love_->setVisible(love->isVisible());
   action_love_->setEnabled(love->isEnabled());
-  action_ban_ = menu_->addAction(ban->icon(), ban->text(), ban, SLOT(trigger()));
-  action_ban_->setVisible(ban->isVisible());
-  action_ban_->setEnabled(ban->isEnabled());
 #endif
 
   menu_->addSeparator();
@@ -148,8 +146,8 @@ void QtSystemTrayIcon::Clicked(QSystemTrayIcon::ActivationReason reason) {
   }
 }
 
-void QtSystemTrayIcon::ShowPopup(const QString &summary,
-                                 const QString &message, int timeout) {
+void QtSystemTrayIcon::ShowPopup(const QString& summary, const QString& message,
+                                 int timeout) {
   tray_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout);
 }
 
@@ -168,8 +166,7 @@ void QtSystemTrayIcon::SetPaused() {
   action_play_pause_->setEnabled(true);
 }
 
-void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_ban,
-                                  bool enable_love) {
+void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_love) {
   SystemTrayIcon::SetPlaying();
 
   action_stop_->setEnabled(true);
@@ -178,7 +175,6 @@ void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_ban,
   action_play_pause_->setText(tr("Pause"));
   action_play_pause_->setEnabled(enable_play_pause);
 #ifdef HAVE_LIBLASTFM
-  action_ban_->setEnabled(enable_ban);
   action_love_->setEnabled(enable_love);
 #endif
 }
@@ -194,14 +190,12 @@ void QtSystemTrayIcon::SetStopped() {
   action_play_pause_->setEnabled(true);
 
 #ifdef HAVE_LIBLASTFM
-  action_ban_->setEnabled(false);
   action_love_->setEnabled(false);
 #endif
 }
 
 void QtSystemTrayIcon::LastFMButtonVisibilityChanged(bool value) {
 #ifdef HAVE_LIBLASTFM
-  action_ban_->setVisible(value);
   action_love_->setVisible(value);
 #endif
 }
@@ -212,56 +206,48 @@ void QtSystemTrayIcon::LastFMButtonLoveStateChanged(bool value) {
 #endif
 }
 
-void QtSystemTrayIcon::LastFMButtonBanStateChanged(bool value) {
-#ifdef HAVE_LIBLASTFM
-  action_ban_->setEnabled(value);
-#endif
-}
-
 void QtSystemTrayIcon::MuteButtonStateChanged(bool value) {
-  if (action_mute_)
-    action_mute_->setChecked(value);
+  if (action_mute_) action_mute_->setChecked(value);
 }
 
-bool QtSystemTrayIcon::IsVisible() const {
-  return tray_->isVisible();
-}
+bool QtSystemTrayIcon::IsVisible() const { return tray_->isVisible(); }
 
-void QtSystemTrayIcon::SetVisible(bool visible) {
-  tray_->setVisible(visible);
-}
+void QtSystemTrayIcon::SetVisible(bool visible) { tray_->setVisible(visible); }
 
-void QtSystemTrayIcon::SetNowPlaying(const Song& song, const QString& image_path) {
+void QtSystemTrayIcon::SetNowPlaying(const Song& song,
+                                     const QString& image_path) {
 #ifdef Q_WS_WIN
   // Windows doesn't support HTML in tooltips, so just show something basic
   tray_->setToolTip(song.PrettyTitleWithArtist());
   return;
 #endif
 
-  int columns = image_path == NULL ? 1 : 2;
+  int columns = image_path == nullptr ? 1 : 2;
 
   QString clone = pattern_;
 
-  clone.replace("%columns"    , QString::number(columns));
-  clone.replace("%appName"    , QCoreApplication::applicationName());
+  clone.replace("%columns", QString::number(columns));
+  clone.replace("%appName", QCoreApplication::applicationName());
 
-  clone.replace("%titleKey"   , tr("Title") % ":");
-  clone.replace("%titleValue" , Qt::escape(song.PrettyTitle()));
-  clone.replace("%artistKey"  , tr("Artist") % ":");
+  clone.replace("%titleKey", tr("Title") % ":");
+  clone.replace("%titleValue", Qt::escape(song.PrettyTitle()));
+  clone.replace("%artistKey", tr("Artist") % ":");
   clone.replace("%artistValue", Qt::escape(song.artist()));
-  clone.replace("%albumKey"   , tr("Album") % ":");
-  clone.replace("%albumValue" , Qt::escape(song.album()));
+  clone.replace("%albumKey", tr("Album") % ":");
+  clone.replace("%albumValue", Qt::escape(song.album()));
 
-  clone.replace("%lengthKey"  , tr("Length") % ":");
+  clone.replace("%lengthKey", tr("Length") % ":");
   clone.replace("%lengthValue", Qt::escape(song.PrettyLength()));
 
-  if(columns == 2) {
-    QString final_path = image_path.startsWith("file://")
-                                         ? image_path.mid(7)
-                                         : image_path;
-    clone.replace("%image", "    <td>"
-                            "      <img src=\"" % final_path % "\" />"
-                            "    </td>");
+  if (columns == 2) {
+    QString final_path =
+        image_path.startsWith("file://") ? image_path.mid(7) : image_path;
+    clone.replace("%image",
+                  "    <td>"
+                  "      <img src=\"" %
+                      final_path %
+                      "\" />"
+                      "    </td>");
   } else {
     clone.replace("%image", "");
   }

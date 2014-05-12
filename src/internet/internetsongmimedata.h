@@ -26,12 +26,11 @@ class InternetService;
 class InternetSongMimeData : public MimeData {
   Q_OBJECT
 
-public:
-  InternetSongMimeData(InternetService* _service)
-    : service(_service) {}
+ public:
+  InternetSongMimeData(InternetService* _service) : service(_service) {}
 
   InternetService* service;
   SongList songs;
 };
 
-#endif // INTERNETSONGMIMEDATA_H
+#endif  // INTERNETSONGMIMEDATA_H

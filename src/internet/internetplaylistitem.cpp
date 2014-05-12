@@ -27,23 +27,21 @@
 #include <QtDebug>
 
 InternetPlaylistItem::InternetPlaylistItem(const QString& type)
-  : PlaylistItem(type),
-    set_service_icon_(false)
-{
-}
+    : PlaylistItem(type), set_service_icon_(false) {}
 
-InternetPlaylistItem::InternetPlaylistItem(InternetService* service, const Song& metadata)
-  : PlaylistItem("Internet"),
-    service_name_(service->name()),
-    set_service_icon_(false),
-    metadata_(metadata)
-{
+InternetPlaylistItem::InternetPlaylistItem(InternetService* service,
+                                           const Song& metadata)
+    : PlaylistItem("Internet"),
+      service_name_(service->name()),
+      set_service_icon_(false),
+      metadata_(metadata) {
   InitMetadata();
 }
 
 bool InternetPlaylistItem::InitFromQuery(const SqlRow& query) {
   // The song tables gets joined first, plus one each for the song ROWIDs
-  const int row = (Song::kColumns.count() + 1) * PlaylistBackend::kSongTableJoins;
+  const int row =
+      (Song::kColumns.count() + 1) * PlaylistBackend::kSongTableJoins;
 
   service_name_ = query.value(row + 1).toString();
 
@@ -70,8 +68,10 @@ InternetService* InternetPlaylistItem::service() const {
 
 QVariant InternetPlaylistItem::DatabaseValue(DatabaseColumn column) const {
   switch (column) {
-    case Column_InternetService: return service_name_;
-    default:                  return PlaylistItem::DatabaseValue(column);
+    case Column_InternetService:
+      return service_name_;
+    default:
+      return PlaylistItem::DatabaseValue(column);
   }
 }
 
@@ -88,25 +88,20 @@ Song InternetPlaylistItem::Metadata() const {
     service();
   }
 
-  if (HasTemporaryMetadata())
-    return temp_metadata_;
+  if (HasTemporaryMetadata()) return temp_metadata_;
   return metadata_;
 }
 
-QUrl InternetPlaylistItem::Url() const {
-  return metadata_.url();
-}
+QUrl InternetPlaylistItem::Url() const { return metadata_.url(); }
 
 PlaylistItem::Options InternetPlaylistItem::options() const {
   InternetService* s = service();
-  if (!s)
-    return Default;
+  if (!s) return Default;
   return s->playlistitem_options();
 }
 
 QList<QAction*> InternetPlaylistItem::actions() {
   InternetService* s = service();
-  if (!s)
-    return QList<QAction*>();
+  if (!s) return QList<QAction*>();
   return s->playlistitem_actions(metadata_);
 }

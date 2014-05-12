@@ -27,18 +27,19 @@
 #include <QToolTip>
 
 NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_NotificationsSettingsPage),
-    pretty_popup_(new OSDPretty(OSDPretty::Mode_Draggable))
-{
+    : SettingsPage(dialog),
+      ui_(new Ui_NotificationsSettingsPage),
+      pretty_popup_(new OSDPretty(OSDPretty::Mode_Draggable)) {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("help-hint"));
 
   pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
                             QImage(":nocover.png"));
 
-  ui_->notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue), Qt::DecorationRole);
-  ui_->notifications_bg_preset->setItemData(1, QColor(OSDPretty::kPresetOrange), Qt::DecorationRole);
+  ui_->notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue),
+                                            Qt::DecorationRole);
+  ui_->notifications_bg_preset->setItemData(1, QColor(OSDPretty::kPresetOrange),
+                                            Qt::DecorationRole);
 
   // Create and populate the helper menus
   QMenu* menu = new QMenu(this);
@@ -68,27 +69,40 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
   // We need this because by default menus don't show tooltips
   connect(menu, SIGNAL(hovered(QAction*)), SLOT(ShowMenuTooltip(QAction*)));
 
-  connect(ui_->notifications_none, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
-  connect(ui_->notifications_native, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
-  connect(ui_->notifications_tray, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
-  connect(ui_->notifications_pretty, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
-  connect(ui_->notifications_opacity, SIGNAL(valueChanged(int)), SLOT(PrettyOpacityChanged(int)));
-  connect(ui_->notifications_bg_preset, SIGNAL(activated(int)), SLOT(PrettyColorPresetChanged(int)));
-  connect(ui_->notifications_fg_choose, SIGNAL(clicked()), SLOT(ChooseFgColor()));
-  connect(ui_->notifications_font_choose, SIGNAL(clicked()), SLOT(ChooseFont()));
-  connect(ui_->notifications_exp_chooser1, SIGNAL(triggered(QAction*)), SLOT(InsertVariableFirstLine(QAction*)));
-  connect(ui_->notifications_exp_chooser2, SIGNAL(triggered(QAction*)), SLOT(InsertVariableSecondLine(QAction*)));
-  connect(ui_->notifications_disable_duration, SIGNAL(toggled(bool)), ui_->notifications_duration, SLOT(setDisabled(bool)));
+  connect(ui_->notifications_none, SIGNAL(toggled(bool)),
+          SLOT(NotificationTypeChanged()));
+  connect(ui_->notifications_native, SIGNAL(toggled(bool)),
+          SLOT(NotificationTypeChanged()));
+  connect(ui_->notifications_tray, SIGNAL(toggled(bool)),
+          SLOT(NotificationTypeChanged()));
+  connect(ui_->notifications_pretty, SIGNAL(toggled(bool)),
+          SLOT(NotificationTypeChanged()));
+  connect(ui_->notifications_opacity, SIGNAL(valueChanged(int)),
+          SLOT(PrettyOpacityChanged(int)));
+  connect(ui_->notifications_bg_preset, SIGNAL(activated(int)),
+          SLOT(PrettyColorPresetChanged(int)));
+  connect(ui_->notifications_fg_choose, SIGNAL(clicked()),
+          SLOT(ChooseFgColor()));
+  connect(ui_->notifications_font_choose, SIGNAL(clicked()),
+          SLOT(ChooseFont()));
+  connect(ui_->notifications_exp_chooser1, SIGNAL(triggered(QAction*)),
+          SLOT(InsertVariableFirstLine(QAction*)));
+  connect(ui_->notifications_exp_chooser2, SIGNAL(triggered(QAction*)),
+          SLOT(InsertVariableSecondLine(QAction*)));
+  connect(ui_->notifications_disable_duration, SIGNAL(toggled(bool)),
+          ui_->notifications_duration, SLOT(setDisabled(bool)));
 
   if (!OSD::SupportsNativeNotifications())
     ui_->notifications_native->setEnabled(false);
-  if (!OSD::SupportsTrayPopups())
-    ui_->notifications_tray->setEnabled(false);
+  if (!OSD::SupportsTrayPopups()) ui_->notifications_tray->setEnabled(false);
 
-  connect(ui_->notifications_pretty, SIGNAL(toggled(bool)), SLOT(UpdatePopupVisible()));
+  connect(ui_->notifications_pretty, SIGNAL(toggled(bool)),
+          SLOT(UpdatePopupVisible()));
 
-  connect(ui_->notifications_custom_text_enabled, SIGNAL(toggled(bool)), SLOT(NotificationCustomTextChanged(bool)));
-  connect(ui_->notifications_preview, SIGNAL(clicked()), SLOT(PrepareNotificationPreview()));
+  connect(ui_->notifications_custom_text_enabled, SIGNAL(toggled(bool)),
+          SLOT(NotificationCustomTextChanged(bool)));
+  connect(ui_->notifications_preview, SIGNAL(clicked()),
+          SLOT(PrepareNotificationPreview()));
 
   // Icons
   ui_->notifications_exp_chooser1->setIcon(IconLoader::Load("list-add"));
@@ -100,26 +114,23 @@ NotificationsSettingsPage::~NotificationsSettingsPage() {
   delete ui_;
 }
 
-void NotificationsSettingsPage::showEvent(QShowEvent*) {
-  UpdatePopupVisible();
-}
+void NotificationsSettingsPage::showEvent(QShowEvent*) { UpdatePopupVisible(); }
 
-void NotificationsSettingsPage::hideEvent(QHideEvent*) {
-  UpdatePopupVisible();
-}
+void NotificationsSettingsPage::hideEvent(QHideEvent*) { UpdatePopupVisible(); }
 
 void NotificationsSettingsPage::Load() {
   QSettings s;
 
   s.beginGroup(OSD::kSettingsGroup);
-  OSD::Behaviour osd_behaviour = OSD::Behaviour(s.value("Behaviour", OSD::Native).toInt());
+  OSD::Behaviour osd_behaviour =
+      OSD::Behaviour(s.value("Behaviour", OSD::Native).toInt());
   switch (osd_behaviour) {
     case OSD::Native:
       if (OSD::SupportsNativeNotifications()) {
         ui_->notifications_native->setChecked(true);
         break;
       }
-      // Fallthrough
+    // Fallthrough
 
     case OSD::Pretty:
       ui_->notifications_pretty->setChecked(true);
@@ -130,29 +141,35 @@ void NotificationsSettingsPage::Load() {
         ui_->notifications_tray->setChecked(true);
         break;
       }
-      // Fallthrough
+    // Fallthrough
 
     case OSD::Disabled:
     default:
       ui_->notifications_none->setChecked(true);
       break;
   }
-  ui_->notifications_duration->setValue(s.value("Timeout", 5000).toInt() / 1000);
-  ui_->notifications_volume->setChecked(s.value("ShowOnVolumeChange", false).toBool());
-  ui_->notifications_play_mode->setChecked(s.value("ShowOnPlayModeChange", true).toBool());
+  ui_->notifications_duration->setValue(s.value("Timeout", 5000).toInt() /
+                                        1000);
+  ui_->notifications_volume->setChecked(
+      s.value("ShowOnVolumeChange", false).toBool());
+  ui_->notifications_play_mode->setChecked(
+      s.value("ShowOnPlayModeChange", true).toBool());
   ui_->notifications_art->setChecked(s.value("ShowArt", true).toBool());
-  ui_->notifications_custom_text_enabled->setChecked(s.value("CustomTextEnabled", false).toBool());
+  ui_->notifications_custom_text_enabled->setChecked(
+      s.value("CustomTextEnabled", false).toBool());
   ui_->notifications_custom_text1->setText(s.value("CustomText1").toString());
   ui_->notifications_custom_text2->setText(s.value("CustomText2").toString());
   s.endGroup();
 
 #ifdef Q_OS_DARWIN
-  ui_->notifications_options->setEnabled(ui_->notifications_pretty->isChecked());
+  ui_->notifications_options->setEnabled(
+      ui_->notifications_pretty->isChecked());
 #endif
 
   // Pretty OSD
   pretty_popup_->ReloadSettings();
-  ui_->notifications_opacity->setValue(pretty_popup_->background_opacity() * 100);
+  ui_->notifications_opacity->setValue(pretty_popup_->background_opacity() *
+                                       100);
 
   QRgb color = pretty_popup_->background_color();
   if (color == OSDPretty::kPresetBlue)
@@ -161,8 +178,10 @@ void NotificationsSettingsPage::Load() {
     ui_->notifications_bg_preset->setCurrentIndex(1);
   else
     ui_->notifications_bg_preset->setCurrentIndex(2);
-  ui_->notifications_bg_preset->setItemData(2, QColor(color), Qt::DecorationRole);
-  ui_->notifications_disable_duration->setChecked(pretty_popup_->disable_duration());
+  ui_->notifications_bg_preset->setItemData(2, QColor(color),
+                                            Qt::DecorationRole);
+  ui_->notifications_disable_duration->setChecked(
+      pretty_popup_->disable_duration());
   UpdatePopupVisible();
 }
 
@@ -170,10 +189,14 @@ void NotificationsSettingsPage::Save() {
   QSettings s;
 
   OSD::Behaviour osd_behaviour = OSD::Disabled;
-  if      (ui_->notifications_none->isChecked())   osd_behaviour = OSD::Disabled;
-  else if (ui_->notifications_native->isChecked()) osd_behaviour = OSD::Native;
-  else if (ui_->notifications_tray->isChecked())   osd_behaviour = OSD::TrayPopup;
-  else if (ui_->notifications_pretty->isChecked()) osd_behaviour = OSD::Pretty;
+  if (ui_->notifications_none->isChecked())
+    osd_behaviour = OSD::Disabled;
+  else if (ui_->notifications_native->isChecked())
+    osd_behaviour = OSD::Native;
+  else if (ui_->notifications_tray->isChecked())
+    osd_behaviour = OSD::TrayPopup;
+  else if (ui_->notifications_pretty->isChecked())
+    osd_behaviour = OSD::Pretty;
 
   s.beginGroup(OSD::kSettingsGroup);
   s.setValue("Behaviour", int(osd_behaviour));
@@ -181,7 +204,8 @@ void NotificationsSettingsPage::Save() {
   s.setValue("ShowOnVolumeChange", ui_->notifications_volume->isChecked());
   s.setValue("ShowOnPlayModeChange", ui_->notifications_play_mode->isChecked());
   s.setValue("ShowArt", ui_->notifications_art->isChecked());
-  s.setValue("CustomTextEnabled", ui_->notifications_custom_text_enabled->isChecked());
+  s.setValue("CustomTextEnabled",
+             ui_->notifications_custom_text_enabled->isChecked());
   s.setValue("CustomText1", ui_->notifications_custom_text1->text());
   s.setValue("CustomText2", ui_->notifications_custom_text2->text());
   s.endGroup();
@@ -193,7 +217,8 @@ void NotificationsSettingsPage::Save() {
   s.setValue("popup_display", pretty_popup_->popup_display());
   s.setValue("popup_pos", pretty_popup_->popup_pos());
   s.setValue("font", pretty_popup_->font().toString());
-  s.setValue("disable_duration", ui_->notifications_disable_duration->isChecked());
+  s.setValue("disable_duration",
+             ui_->notifications_disable_duration->isChecked());
   s.endGroup();
 }
 
@@ -202,44 +227,42 @@ void NotificationsSettingsPage::PrettyOpacityChanged(int value) {
 }
 
 void NotificationsSettingsPage::UpdatePopupVisible() {
-  pretty_popup_->setVisible(
-      isVisible() &&
-      ui_->notifications_pretty->isChecked());
+  pretty_popup_->setVisible(isVisible() &&
+                            ui_->notifications_pretty->isChecked());
 }
 
 void NotificationsSettingsPage::PrettyColorPresetChanged(int index) {
-  if (dialog()->is_loading_settings())
-    return;
+  if (dialog()->is_loading_settings()) return;
 
   switch (index) {
-  case 0:
-    pretty_popup_->set_background_color(OSDPretty::kPresetBlue);
-    break;
+    case 0:
+      pretty_popup_->set_background_color(OSDPretty::kPresetBlue);
+      break;
 
-  case 1:
-    pretty_popup_->set_background_color(OSDPretty::kPresetOrange);
-    break;
+    case 1:
+      pretty_popup_->set_background_color(OSDPretty::kPresetOrange);
+      break;
 
-  case 2:
-  default:
-    ChooseBgColor();
-    break;
+    case 2:
+    default:
+      ChooseBgColor();
+      break;
   }
 }
 
 void NotificationsSettingsPage::ChooseBgColor() {
-  QColor color = QColorDialog::getColor(pretty_popup_->background_color(), this);
-  if (!color.isValid())
-    return;
+  QColor color =
+      QColorDialog::getColor(pretty_popup_->background_color(), this);
+  if (!color.isValid()) return;
 
   pretty_popup_->set_background_color(color.rgb());
   ui_->notifications_bg_preset->setItemData(2, color, Qt::DecorationRole);
 }
 
 void NotificationsSettingsPage::ChooseFgColor() {
-  QColor color = QColorDialog::getColor(pretty_popup_->foreground_color(), this);
-  if (!color.isValid())
-    return;
+  QColor color =
+      QColorDialog::getColor(pretty_popup_->foreground_color(), this);
+  if (!color.isValid()) return;
 
   pretty_popup_->set_foreground_color(color.rgb());
 }
@@ -247,8 +270,7 @@ void NotificationsSettingsPage::ChooseFgColor() {
 void NotificationsSettingsPage::ChooseFont() {
   bool ok;
   QFont font = QFontDialog::getFont(&ok, pretty_popup_->font(), this);
-  if (ok)
-    pretty_popup_->set_font(font);
+  if (ok) pretty_popup_->set_font(font);
 }
 
 void NotificationsSettingsPage::NotificationCustomTextChanged(bool enabled) {
@@ -271,8 +293,11 @@ void NotificationsSettingsPage::PrepareNotificationPreview() {
     notificationType = OSD::TrayPopup;
   }
 
-  // If user changes timeout or other options, that won't be reflected in the preview
-  emit NotificationPreview(notificationType, ui_->notifications_custom_text1->text(), ui_->notifications_custom_text2->text());
+  // If user changes timeout or other options, that won't be reflected in the
+  // preview
+  emit NotificationPreview(notificationType,
+                           ui_->notifications_custom_text1->text(),
+                           ui_->notifications_custom_text2->text());
 }
 
 void NotificationsSettingsPage::InsertVariableFirstLine(QAction* action) {
@@ -300,6 +325,7 @@ void NotificationsSettingsPage::NotificationTypeChanged() {
 #ifdef Q_OS_DARWIN
   ui_->notifications_options->setEnabled(pretty);
 #endif
-  ui_->notifications_duration->setEnabled(!pretty || (pretty && !ui_->notifications_disable_duration->isChecked()));
+  ui_->notifications_duration->setEnabled(
+      !pretty || (pretty && !ui_->notifications_disable_duration->isChecked()));
   ui_->notifications_disable_duration->setEnabled(pretty);
 }

@@ -18,12 +18,12 @@
 #ifndef MACGLOBALSHORTCUTBACKEND_H
 #define MACGLOBALSHORTCUTBACKEND_H
 
+#include <memory>
+
 #include "globalshortcutbackend.h"
 
 #include <QKeySequence>
 #include <QMap>
-
-#include <boost/scoped_ptr.hpp>
 
 class MacGlobalShortcutBackendPrivate;
 class QAction;
@@ -31,7 +31,7 @@ class QAction;
 class MacGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
 
-public:
+ public:
   MacGlobalShortcutBackend(GlobalShortcuts* parent);
   virtual ~MacGlobalShortcutBackend();
 
@@ -40,17 +40,17 @@ public:
 
   void MacMediaKeyPressed(int key);
 
-protected:
+ protected:
   bool DoRegister();
   void DoUnregister();
 
-private:
+ private:
   bool KeyPressed(const QKeySequence& sequence);
 
   QMap<QKeySequence, QAction*> shortcuts_;
 
   friend class MacGlobalShortcutBackendPrivate;
-  boost::scoped_ptr<MacGlobalShortcutBackendPrivate> p_;
+  std::unique_ptr<MacGlobalShortcutBackendPrivate> p_;
 };
 
-#endif // MACGLOBALSHORTCUTBACKEND_H
+#endif  // MACGLOBALSHORTCUTBACKEND_H

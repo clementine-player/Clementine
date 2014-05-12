@@ -19,7 +19,4 @@
 #include "settingspage.h"
 
 SettingsPage::SettingsPage(SettingsDialog* dialog)
-  : QWidget(dialog),
-    dialog_(dialog)
-{
-}
+    : QWidget(dialog), dialog_(dialog) {}

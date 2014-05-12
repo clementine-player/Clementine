@@ -30,21 +30,18 @@ namespace smart_playlists {
 class QueryWizardPlugin::SearchPage : public QWizardPage {
   friend class QueryWizardPlugin;
 
-public:
+ public:
   SearchPage(QWidget* parent = 0)
-    : QWizardPage(parent),
-      ui_(new Ui_SmartPlaylistQuerySearchPage)
-  {
+      : QWizardPage(parent), ui_(new Ui_SmartPlaylistQuerySearchPage) {
     ui_->setupUi(this);
   }
 
   bool isComplete() const {
-    if (ui_->type->currentIndex() == 2) // All songs
+    if (ui_->type->currentIndex() == 2)  // All songs
       return true;
 
-    foreach (SearchTermWidget* widget, terms_) {
-      if (!widget->Term().is_valid())
-        return false;
+    for (SearchTermWidget* widget : terms_) {
+      if (!widget->Term().is_valid()) return false;
     }
     return true;
   }
@@ -55,13 +52,13 @@ public:
 
   SearchPreview* preview_;
 
-  boost::scoped_ptr<Ui_SmartPlaylistQuerySearchPage> ui_;
+  std::unique_ptr<Ui_SmartPlaylistQuerySearchPage> ui_;
 };
 
 class QueryWizardPlugin::SortPage : public QWizardPage {
-public:
+ public:
   SortPage(QueryWizardPlugin* plugin, QWidget* parent, int next_id)
-    : QWizardPage(parent), next_id_(next_id), plugin_(plugin) {}
+      : QWizardPage(parent), next_id_(next_id), plugin_(plugin) {}
 
   void showEvent(QShowEvent*) { plugin_->UpdateSortPreview(); }
 
@@ -71,20 +68,15 @@ public:
   QueryWizardPlugin* plugin_;
 };
 
+QueryWizardPlugin::QueryWizardPlugin(Application* app, LibraryBackend* library,
+                                     QObject* parent)
+    : WizardPlugin(app, library, parent),
+      search_page_(nullptr),
+      previous_scrollarea_max_(0) {}
 
-QueryWizardPlugin::QueryWizardPlugin(Application* app, LibraryBackend* library, QObject* parent)
-  : WizardPlugin(app, library, parent),
-    search_page_(NULL),
-    previous_scrollarea_max_(0)
-{
-}
+QueryWizardPlugin::~QueryWizardPlugin() {}
 
-QueryWizardPlugin::~QueryWizardPlugin() {
-}
-
-QString QueryWizardPlugin::name() const {
-  return tr("Library search");
-}
+QString QueryWizardPlugin::name() const { return tr("Library search"); }
 
 QString QueryWizardPlugin::description() const {
   return tr("Find songs in your library that match the criteria you specify.");
@@ -100,7 +92,8 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
 
   sort_ui_->limit_value->setValue(Generator::kDefaultLimit);
 
-  connect(search_page_->ui_->type, SIGNAL(currentIndexChanged(int)), SLOT(SearchTypeChanged()));
+  connect(search_page_->ui_->type, SIGNAL(currentIndexChanged(int)),
+          SLOT(SearchTypeChanged()));
 
   // Create the new search term widget
   search_page_->new_term_ = new SearchTermWidget(library_, search_page_);
@@ -108,15 +101,19 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
   connect(search_page_->new_term_, SIGNAL(Clicked()), SLOT(AddSearchTerm()));
 
   // Add an empty initial term
-  search_page_->layout_ = static_cast<QVBoxLayout*>(search_page_->ui_->terms_scroll_area_content->layout());
+  search_page_->layout_ = static_cast<QVBoxLayout*>(
+      search_page_->ui_->terms_scroll_area_content->layout());
   search_page_->layout_->addWidget(search_page_->new_term_);
   AddSearchTerm();
 
   // Ensure that the terms are scrolled to the bottom when a new one is added
-  connect(search_page_->ui_->terms_scroll_area->verticalScrollBar(), SIGNAL(rangeChanged(int,int)), this, SLOT(MoveTermListToBottom(int, int)));
+  connect(search_page_->ui_->terms_scroll_area->verticalScrollBar(),
+          SIGNAL(rangeChanged(int, int)), this,
+          SLOT(MoveTermListToBottom(int, int)));
 
   // Add the preview widget at the bottom of the search terms page
-  QVBoxLayout* terms_page_layout = static_cast<QVBoxLayout*>(search_page_->layout());
+  QVBoxLayout* terms_page_layout =
+      static_cast<QVBoxLayout*>(search_page_->layout());
   terms_page_layout->addStretch();
   search_page_->preview_ = new SearchPreview(search_page_);
   search_page_->preview_->set_application(app_);
@@ -124,12 +121,13 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
   terms_page_layout->addWidget(search_page_->preview_);
 
   // Add sort field texts
-  for (int i=0 ; i<SearchTerm::FieldCount ; ++i) {
+  for (int i = 0; i < SearchTerm::FieldCount; ++i) {
     const SearchTerm::Field field = SearchTerm::Field(i);
     const QString field_name = SearchTerm::FieldName(field);
     sort_ui_->field_value->addItem(field_name);
   }
-  connect(sort_ui_->field_value, SIGNAL(currentIndexChanged(int)), SLOT(UpdateSortOrder()));
+  connect(sort_ui_->field_value, SIGNAL(currentIndexChanged(int)),
+          SLOT(UpdateSortOrder()));
   UpdateSortOrder();
 
   // Set the sort and limit radio buttons back to their defaults - they would
@@ -141,18 +139,26 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
   sort_ui_->preview->set_application(app_);
   sort_ui_->preview->set_library(library_);
   connect(sort_ui_->field, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
-  connect(sort_ui_->field_value, SIGNAL(currentIndexChanged(int)), SLOT(UpdateSortPreview()));
-  connect(sort_ui_->limit_limit, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
-  connect(sort_ui_->limit_none, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
-  connect(sort_ui_->limit_value, SIGNAL(valueChanged(QString)), SLOT(UpdateSortPreview()));
-  connect(sort_ui_->order, SIGNAL(currentIndexChanged(int)), SLOT(UpdateSortPreview()));
+  connect(sort_ui_->field_value, SIGNAL(currentIndexChanged(int)),
+          SLOT(UpdateSortPreview()));
+  connect(sort_ui_->limit_limit, SIGNAL(toggled(bool)),
+          SLOT(UpdateSortPreview()));
+  connect(sort_ui_->limit_none, SIGNAL(toggled(bool)),
+          SLOT(UpdateSortPreview()));
+  connect(sort_ui_->limit_value, SIGNAL(valueChanged(QString)),
+          SLOT(UpdateSortPreview()));
+  connect(sort_ui_->order, SIGNAL(currentIndexChanged(int)),
+          SLOT(UpdateSortPreview()));
   connect(sort_ui_->random, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
 
   // Configure the page text
   search_page_->setTitle(tr("Search terms"));
-  search_page_->setSubTitle(tr("A song will be included in the playlist if it matches these conditions."));
+  search_page_->setSubTitle(
+      tr("A song will be included in the playlist if it matches these "
+         "conditions."));
   sort_page->setTitle(tr("Search options"));
-  sort_page->setSubTitle(tr("Choose how the playlist is sorted and how many songs it will contain."));
+  sort_page->setSubTitle(tr(
+      "Choose how the playlist is sorted and how many songs it will contain."));
 
   // Add the pages
   const int first_page = wizard->addPage(search_page_);
@@ -161,10 +167,9 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
 }
 
 void QueryWizardPlugin::SetGenerator(GeneratorPtr g) {
-  boost::shared_ptr<QueryGenerator> gen =
-      boost::dynamic_pointer_cast<QueryGenerator>(g);
-  if (!gen)
-    return;
+  std::shared_ptr<QueryGenerator> gen =
+      std::dynamic_pointer_cast<QueryGenerator>(g);
+  if (!gen) return;
   Search search = gen->search();
 
   // Search type
@@ -174,7 +179,7 @@ void QueryWizardPlugin::SetGenerator(GeneratorPtr g) {
   qDeleteAll(search_page_->terms_);
   search_page_->terms_.clear();
 
-  foreach (const SearchTerm& term, search.terms_) {
+  for (const SearchTerm& term : search.terms_) {
     AddSearchTerm();
     search_page_->terms_.last()->SetTerm(term);
   }
@@ -184,7 +189,8 @@ void QueryWizardPlugin::SetGenerator(GeneratorPtr g) {
     sort_ui_->random->setChecked(true);
   } else {
     sort_ui_->field->setChecked(true);
-    sort_ui_->order->setCurrentIndex(search.sort_type_ == Search::Sort_FieldAsc ? 0 : 1);
+    sort_ui_->order->setCurrentIndex(
+        search.sort_type_ == Search::Sort_FieldAsc ? 0 : 1);
     sort_ui_->field_value->setCurrentIndex(search.sort_field_);
   }
 
@@ -198,10 +204,10 @@ void QueryWizardPlugin::SetGenerator(GeneratorPtr g) {
 }
 
 GeneratorPtr QueryWizardPlugin::CreateGenerator() const {
-  boost::shared_ptr<QueryGenerator> gen(new QueryGenerator);
+  std::shared_ptr<QueryGenerator> gen(new QueryGenerator);
   gen->Load(MakeSearch());
 
-  return boost::static_pointer_cast<Generator>(gen);
+  return std::static_pointer_cast<Generator>(gen);
 }
 
 void QueryWizardPlugin::UpdateSortOrder() {
@@ -219,8 +225,7 @@ void QueryWizardPlugin::UpdateSortOrder() {
 }
 
 void QueryWizardPlugin::AddSearchTerm() {
-  SearchTermWidget* widget =
-      new SearchTermWidget(library_, search_page_);
+  SearchTermWidget* widget = new SearchTermWidget(library_, search_page_);
   connect(widget, SIGNAL(RemoveClicked()), SLOT(RemoveSearchTerm()));
   connect(widget, SIGNAL(Changed()), SLOT(UpdateTermPreview()));
 
@@ -231,14 +236,11 @@ void QueryWizardPlugin::AddSearchTerm() {
 }
 
 void QueryWizardPlugin::RemoveSearchTerm() {
-  SearchTermWidget* widget =
-      qobject_cast<SearchTermWidget*>(sender());
-  if (!widget)
-    return;
+  SearchTermWidget* widget = qobject_cast<SearchTermWidget*>(sender());
+  if (!widget) return;
 
   const int index = search_page_->terms_.indexOf(widget);
-  if (index == -1)
-    return;
+  if (index == -1) return;
 
   search_page_->terms_.takeAt(index)->deleteLater();
   UpdateTermPreview();
@@ -248,8 +250,7 @@ void QueryWizardPlugin::UpdateTermPreview() {
   Search search = MakeSearch();
   emit search_page_->completeChanged();
   // When removing last term, update anyway the search
-  if (!search.is_valid() && !search_page_->terms_.isEmpty())
-    return;
+  if (!search.is_valid() && !search_page_->terms_.isEmpty()) return;
 
   // Don't apply limits in the term page
   search.limit_ = -1;
@@ -259,8 +260,7 @@ void QueryWizardPlugin::UpdateTermPreview() {
 
 void QueryWizardPlugin::UpdateSortPreview() {
   Search search = MakeSearch();
-  if (!search.is_valid())
-    return;
+  if (!search.is_valid()) return;
 
   sort_ui_->preview->Update(search);
 }
@@ -269,13 +269,13 @@ Search QueryWizardPlugin::MakeSearch() const {
   Search ret;
 
   // Search type
-  ret.search_type_ = Search::SearchType(search_page_->ui_->type->currentIndex());
+  ret.search_type_ =
+      Search::SearchType(search_page_->ui_->type->currentIndex());
 
   // Search terms
-  foreach (SearchTermWidget* widget, search_page_->terms_) {
+  for (SearchTermWidget* widget : search_page_->terms_) {
     SearchTerm term = widget->Term();
-    if (term.is_valid())
-      ret.terms_ << term;
+    if (term.is_valid()) ret.terms_ << term;
   }
 
   // Sort order
@@ -283,8 +283,7 @@ Search QueryWizardPlugin::MakeSearch() const {
     ret.sort_type_ = Search::Sort_Random;
   } else {
     const bool ascending = sort_ui_->order->currentIndex() == 0;
-    ret.sort_type_ = ascending ? Search::Sort_FieldAsc :
-                                 Search::Sort_FieldDesc;
+    ret.sort_type_ = ascending ? Search::Sort_FieldAsc : Search::Sort_FieldDesc;
     ret.sort_field_ = SearchTerm::Field(sort_ui_->field_value->currentIndex());
   }
 
@@ -305,13 +304,12 @@ void QueryWizardPlugin::SearchTypeChanged() {
 }
 
 void QueryWizardPlugin::MoveTermListToBottom(int min, int max) {
-   Q_UNUSED(min);
-   // Only scroll to the bottom if a new term is added
-   if (previous_scrollarea_max_ < max)
-      search_page_->ui_->terms_scroll_area->verticalScrollBar()->setValue(max);
+  Q_UNUSED(min);
+  // Only scroll to the bottom if a new term is added
+  if (previous_scrollarea_max_ < max)
+    search_page_->ui_->terms_scroll_area->verticalScrollBar()->setValue(max);
 
-   previous_scrollarea_max_ = max;
+  previous_scrollarea_max_ = max;
 }
 
-
-} // namespace smart_playlists
+}  // namespace smart_playlists

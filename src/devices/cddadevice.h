@@ -28,14 +28,13 @@
 #include "core/song.h"
 #include "musicbrainz/musicbrainzclient.h"
 
-class CddaDevice: public ConnectedDevice {
+class CddaDevice : public ConnectedDevice {
   Q_OBJECT
 
-public:
+ public:
   Q_INVOKABLE CddaDevice(const QUrl& url, DeviceLister* lister,
-                  const QString& unique_id, DeviceManager* manager,
-                  Application* app,
-                  int database_id, bool first_time);
+                         const QString& unique_id, DeviceManager* manager,
+                         Application* app, int database_id, bool first_time);
   ~CddaDevice();
 
   void Init();
@@ -48,15 +47,14 @@ public:
 signals:
   void SongsDiscovered(const SongList& songs);
 
-private slots:
+ private slots:
   void AudioCDTagsLoaded(const QString& artist, const QString& album,
                          const MusicBrainzClient::ResultList& results);
 
-private:
-  GstElement *cdda_;
-  CdIo_t *cdio_;
+ private:
+  GstElement* cdda_;
+  CdIo_t* cdio_;
   QMutex mutex_init_;
-
 };
 
 #endif

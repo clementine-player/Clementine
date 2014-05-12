@@ -16,34 +16,32 @@
 */
 
 #include "deletefiles.h"
-#include "musicstorage.h"
-#include "taskmanager.h"
 
 #include <QStringList>
 #include <QTimer>
 #include <QThread>
 #include <QUrl>
 
+#include "musicstorage.h"
+#include "taskmanager.h"
+
 const int DeleteFiles::kBatchSize = 50;
 
 DeleteFiles::DeleteFiles(TaskManager* task_manager,
-                         boost::shared_ptr<MusicStorage> storage)
-  : thread_(NULL),
-    task_manager_(task_manager),
-    storage_(storage),
-    started_(false),
-    task_id_(0),
-    progress_(0)
-{
+                         std::shared_ptr<MusicStorage> storage)
+    : thread_(nullptr),
+      task_manager_(task_manager),
+      storage_(storage),
+      started_(false),
+      task_id_(0),
+      progress_(0) {
   original_thread_ = thread();
 }
 
-DeleteFiles::~DeleteFiles() {
-}
+DeleteFiles::~DeleteFiles() {}
 
 void DeleteFiles::Start(const SongList& songs) {
-  if (thread_)
-    return;
+  if (thread_) return;
 
   songs_ = songs;
 
@@ -59,7 +57,7 @@ void DeleteFiles::Start(const SongList& songs) {
 
 void DeleteFiles::Start(const QStringList& filenames) {
   SongList songs;
-  foreach (const QString& filename, filenames) {
+  for (const QString& filename : filenames) {
     Song song;
     song.set_url(QUrl::fromLocalFile(filename));
     songs << song;
@@ -97,7 +95,7 @@ void DeleteFiles::ProcessSomeFiles() {
   // We process files in batches so we can be cancelled part-way through.
 
   const int n = qMin(songs_.count(), progress_ + kBatchSize);
-  for ( ; progress_<n ; ++progress_) {
+  for (; progress_ < n; ++progress_) {
     task_manager_->SetTaskProgress(task_id_, progress_, songs_.count());
 
     const Song& song = songs_[progress_];

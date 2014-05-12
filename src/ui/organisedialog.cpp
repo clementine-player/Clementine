@@ -15,38 +15,43 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "iconloader.h"
 #include "organisedialog.h"
-#include "organiseerrordialog.h"
 #include "ui_organisedialog.h"
-#include "core/musicstorage.h"
-#include "core/organise.h"
-#include "core/tagreaderclient.h"
-#include "core/utilities.h"
+
+#include <memory>
 
 #include <QDir>
 #include <QFileInfo>
+#include <QFutureWatcher>
 #include <QHash>
 #include <QMenu>
 #include <QPushButton>
 #include <QResizeEvent>
 #include <QSettings>
 #include <QSignalMapper>
+#include <QtConcurrentRun>
 #include <QtDebug>
+
+#include "iconloader.h"
+#include "organiseerrordialog.h"
+#include "core/musicstorage.h"
+#include "core/organise.h"
+#include "core/tagreaderclient.h"
+#include "core/utilities.h"
 
 const char* OrganiseDialog::kDefaultFormat =
     "%artist/%album{ (Disc %disc)}/{%track - }%title.%extension";
 const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
 
-OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
-  : QDialog(parent),
-    ui_(new Ui_OrganiseDialog),
-    task_manager_(task_manager),
-    total_size_(0),
-    resized_by_user_(false)
-{
+OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent)
+    : QDialog(parent),
+      ui_(new Ui_OrganiseDialog),
+      task_manager_(task_manager),
+      total_size_(0),
+      resized_by_user_(false) {
   ui_->setupUi(this);
-  connect(ui_->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(Reset()));
+  connect(ui_->button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
+          SLOT(Reset()));
 
   ui_->aftercopying->setItemIcon(1, IconLoader::Load("edit-delete"));
 
@@ -74,7 +79,8 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
   // Naming scheme input field
   new OrganiseFormat::SyntaxHighlighter(ui_->naming);
 
-  connect(ui_->destination, SIGNAL(currentIndexChanged(int)), SLOT(UpdatePreviews()));
+  connect(ui_->destination, SIGNAL(currentIndexChanged(int)),
+          SLOT(UpdatePreviews()));
   connect(ui_->naming, SIGNAL(textChanged()), SLOT(UpdatePreviews()));
   connect(ui_->replace_ascii, SIGNAL(toggled(bool)), SLOT(UpdatePreviews()));
   connect(ui_->replace_the, SIGNAL(toggled(bool)), SLOT(UpdatePreviews()));
@@ -96,17 +102,16 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
   ui_->insert->setMenu(tag_menu);
 }
 
-OrganiseDialog::~OrganiseDialog() {
-  delete ui_;
-}
+OrganiseDialog::~OrganiseDialog() { delete ui_; }
 
-void OrganiseDialog::SetDestinationModel(QAbstractItemModel *model, bool devices) {
+void OrganiseDialog::SetDestinationModel(QAbstractItemModel* model,
+                                         bool devices) {
   ui_->destination->setModel(model);
 
   ui_->eject_after->setVisible(devices);
 }
 
-int OrganiseDialog::SetSongs(const SongList& songs) {
+bool OrganiseDialog::SetSongs(const SongList& songs) {
   total_size_ = 0;
   songs_.clear();
 
@@ -115,58 +120,96 @@ int OrganiseDialog::SetSongs(const SongList& songs) {
       continue;
     }
 
-    if (song.filesize() > 0)
-      total_size_ += song.filesize();
+    if (song.filesize() > 0) total_size_ += song.filesize();
 
     songs_ << song;
   }
 
   ui_->free_space->set_additional_bytes(total_size_);
   UpdatePreviews();
+  SetLoadingSongs(false);
+
+  if (songs_future_.isRunning()) {
+    songs_future_.cancel();
+  }
+  songs_future_ = QFuture<SongList>();
 
   return songs_.count();
 }
 
-int OrganiseDialog::SetUrls(const QList<QUrl> &urls, quint64 total_size) {
-  SongList songs;
-  Song song;
+bool OrganiseDialog::SetUrls(const QList<QUrl>& urls) {
+  QStringList filenames;
 
   // Only add file:// URLs
   for (const QUrl& url : urls) {
-    if (url.scheme() != "file")
-      continue;
-    TagReaderClient::Instance()->ReadFileBlocking(url.toLocalFile(), &song);
-    if (song.is_valid())
-      songs << song;
+    if (url.scheme() == "file") {
+      filenames << url.toLocalFile();
+    }
   }
 
-  return SetSongs(songs);
+  return SetFilenames(filenames);
 }
 
-int OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_size) {
+bool OrganiseDialog::SetFilenames(const QStringList& filenames) {
+  songs_future_ =
+      QtConcurrent::run(this, &OrganiseDialog::LoadSongsBlocking, filenames);
+  QFutureWatcher<SongList>* watcher = new QFutureWatcher<SongList>(this);
+  watcher->setFuture(songs_future_);
+  NewClosure(watcher, SIGNAL(finished()), [=]() {
+    SetSongs(songs_future_.result());
+    watcher->deleteLater();
+  });
+
+  SetLoadingSongs(true);
+  return true;
+}
+
+void OrganiseDialog::SetLoadingSongs(bool loading) {
+  if (loading) {
+    ui_->preview_stack->setCurrentWidget(ui_->loading_page);
+    ui_->button_box->button(QDialogButtonBox::Ok)->setEnabled(false);
+  } else {
+    ui_->preview_stack->setCurrentWidget(ui_->preview_page);
+    // The Ok button is enabled by UpdatePreviews
+  }
+}
+
+SongList OrganiseDialog::LoadSongsBlocking(const QStringList& filenames) {
   SongList songs;
   Song song;
 
-  // Load some of the songs to show in the preview
-  for (const QString& filename : filenames) {
+  QStringList filenames_copy = filenames;
+  while (!filenames_copy.isEmpty()) {
+    const QString filename = filenames_copy.takeFirst();
+
+    // If it's a directory, add all the files inside.
+    if (QFileInfo(filename).isDir()) {
+      const QDir dir(filename);
+      for (const QString& entry :
+           dir.entryList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot |
+                         QDir::Readable)) {
+        filenames_copy << dir.filePath(entry);
+      }
+      continue;
+    }
+
     TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
-    if (song.is_valid())
-      songs << song;
+    if (song.is_valid()) songs << song;
   }
-  return SetSongs(songs);
+
+  return songs;
 }
 
 void OrganiseDialog::SetCopy(bool copy) {
   ui_->aftercopying->setCurrentIndex(copy ? 0 : 1);
 }
 
-void OrganiseDialog::InsertTag(const QString &tag) {
+void OrganiseDialog::InsertTag(const QString& tag) {
   ui_->naming->insertPlainText("%" + tag);
 }
 
 Organise::NewSongInfoList OrganiseDialog::ComputeNewSongsFilenames(
     const SongList& songs, const OrganiseFormat& format) {
-
   // Check if we will have multiple files with the same name.
   // If so, they will erase each other if the overwrite flag is set.
   // Better to rename them: e.g. foo.bar -> foo(2).bar
@@ -177,9 +220,9 @@ Organise::NewSongInfoList OrganiseDialog::ComputeNewSongsFilenames(
     QString new_filename = format.GetFilenameForSong(song);
     if (filenames.contains(new_filename)) {
       QString song_number = QString::number(++filenames[new_filename]);
-      new_filename =
-          Utilities::PathWithoutFilenameExtension(new_filename) +
-          "(" + song_number + ")." + QFileInfo(new_filename).suffix();
+      new_filename = Utilities::PathWithoutFilenameExtension(new_filename) +
+                     "(" + song_number + ")." +
+                     QFileInfo(new_filename).suffix();
     }
     filenames.insert(new_filename, 1);
     new_songs_info << Organise::NewSongInfo(song, new_filename);
@@ -188,14 +231,18 @@ Organise::NewSongInfoList OrganiseDialog::ComputeNewSongsFilenames(
 }
 
 void OrganiseDialog::UpdatePreviews() {
-  const QModelIndex destination = ui_->destination->model()->index(
-      ui_->destination->currentIndex(), 0);
-  boost::shared_ptr<MusicStorage> storage;
+  if (songs_future_.isRunning()) {
+    return;
+  }
+
+  const QModelIndex destination =
+      ui_->destination->model()->index(ui_->destination->currentIndex(), 0);
+  std::shared_ptr<MusicStorage> storage;
   bool has_local_destination = false;
 
   if (destination.isValid()) {
     storage = destination.data(MusicStorage::Role_Storage)
-              .value<boost::shared_ptr<MusicStorage> >();
+                  .value<std::shared_ptr<MusicStorage>>();
     if (storage) {
       has_local_destination = !storage->LocalPath().isEmpty();
     }
@@ -223,12 +270,10 @@ void OrganiseDialog::UpdatePreviews() {
 
   // Are we gonna enable the ok button?
   bool ok = format_valid && !songs_.isEmpty();
-  if (capacity != 0 && total_size_ > free)
-    ok = false;
+  if (capacity != 0 && total_size_ > free) ok = false;
 
-  ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(ok);
-  if (!format_valid)
-    return;
+  ui_->button_box->button(QDialogButtonBox::Ok)->setEnabled(ok);
+  if (!format_valid) return;
 
   new_songs_info_ = ComputeNewSongsFilenames(songs_, format_);
 
@@ -238,8 +283,7 @@ void OrganiseDialog::UpdatePreviews() {
   ui_->naming_group->setVisible(has_local_destination);
   if (has_local_destination) {
     for (const Organise::NewSongInfo& song_info : new_songs_info_) {
-      QString filename = storage->LocalPath() + "/" +
-                         song_info.new_filename_;
+      QString filename = storage->LocalPath() + "/" + song_info.new_filename_;
       ui_->preview->addItem(QDir::toNativeSeparators(filename));
     }
   }
@@ -249,9 +293,7 @@ void OrganiseDialog::UpdatePreviews() {
   }
 }
 
-QSize OrganiseDialog::sizeHint() const {
-  return QSize(650, 0);
-}
+QSize OrganiseDialog::sizeHint() const { return QSize(650, 0); }
 
 void OrganiseDialog::Reset() {
   ui_->naming->setPlainText(kDefaultFormat);
@@ -292,29 +334,28 @@ void OrganiseDialog::accept() {
   s.setValue("destination", ui_->destination->currentText());
   s.setValue("eject_after", ui_->eject_after->isChecked());
 
-  const QModelIndex destination = ui_->destination->model()->index(
-      ui_->destination->currentIndex(), 0);
-  boost::shared_ptr<MusicStorage> storage =
+  const QModelIndex destination =
+      ui_->destination->model()->index(ui_->destination->currentIndex(), 0);
+  std::shared_ptr<MusicStorage> storage =
       destination.data(MusicStorage::Role_StorageForceConnect)
-      .value<boost::shared_ptr<MusicStorage> >();
+          .value<std::shared_ptr<MusicStorage>>();
 
-  if (!storage)
-    return;
+  if (!storage) return;
 
   // It deletes itself when it's finished.
   const bool copy = ui_->aftercopying->currentIndex() == 0;
   Organise* organise = new Organise(
       task_manager_, storage, format_, copy, ui_->overwrite->isChecked(),
       new_songs_info_, ui_->eject_after->isChecked());
-  connect(organise, SIGNAL(Finished(QStringList)), SLOT(OrganiseFinished(QStringList)));
+  connect(organise, SIGNAL(Finished(QStringList)),
+          SLOT(OrganiseFinished(QStringList)));
   organise->Start();
 
   QDialog::accept();
 }
 
 void OrganiseDialog::OrganiseFinished(const QStringList& files_with_errors) {
-  if (files_with_errors.isEmpty())
-    return;
+  if (files_with_errors.isEmpty()) return;
 
   error_dialog_.reset(new OrganiseErrorDialog);
   error_dialog_->Show(OrganiseErrorDialog::Type_Copy, files_with_errors);

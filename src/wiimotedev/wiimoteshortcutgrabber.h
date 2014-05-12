@@ -18,36 +18,35 @@
 #ifndef WIIMOTESHORTCUTGRABBER_H
 #define WIIMOTESHORTCUTGRABBER_H
 
+#include <memory>
+
 #include <QDialog>
 #include <QTimeLine>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "wiimotesettingspage.h"
 #include "dbus/wiimotedev.h"
 
 class Ui_WiimoteShortcutGrabber;
 
-
 class WiimoteShortcutGrabber : public QDialog {
   Q_OBJECT
-public:
+ public:
   WiimoteShortcutGrabber(quint32 action, quint32 device,
                          WiimoteSettingsPage* parent);
   ~WiimoteShortcutGrabber();
 
-private slots:
+ private slots:
   void DbusWiimoteGeneralButtons(uint id, qulonglong value);
   void RememberSwingChecked(bool checked);
   void Timeout(int);
 
-private:
+ private:
   QTimeLine line_;
   quint32 pref_action_;
 
   Ui_WiimoteShortcutGrabber* ui_;
   WiimoteSettingsPage* config_;
-  boost::scoped_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
+  std::unique_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
   quint32 wiimotedev_device_;
   quint64 wiimotedev_buttons_;
 
@@ -56,7 +55,6 @@ private:
 
 signals:
   void AddShortcut(quint64 buttons, quint32 action);
-
 };
 
-#endif // WIIMOTESHORTCUTGRABBER_H
+#endif  // WIIMOTESHORTCUTGRABBER_H

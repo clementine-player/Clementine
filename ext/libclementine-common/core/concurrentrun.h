@@ -18,8 +18,7 @@
 #ifndef CONCURRENTRUN_H
 #define CONCURRENTRUN_H
 
-#include <boost/bind.hpp>
-#include <boost/function.hpp>
+#include <functional>
 
 #include <QFuture>
 #include <QRunnable>
@@ -42,13 +41,13 @@
   ThreadFunctor object and start it.
 */
 
-
 /*
   Base abstract classes ThreadFunctorBase and ThreadFunctor (for void and
   non-void result):
 */
-template<typename ReturnType>
-class ThreadFunctorBase : public QFutureInterface<ReturnType>, public QRunnable {
+template <typename ReturnType>
+class ThreadFunctorBase : public QFutureInterface<ReturnType>,
+                          public QRunnable {
  public:
   ThreadFunctorBase() {}
 
@@ -69,10 +68,8 @@ class ThreadFunctorBase : public QFutureInterface<ReturnType>, public QRunnable 
 template <typename ReturnType, typename... Args>
 class ThreadFunctor : public ThreadFunctorBase<ReturnType> {
  public:
-  ThreadFunctor(boost::function<ReturnType (Args...)> function,
-                Args... args)
-      : function_(boost::bind(function, args...)) {
-  }
+  ThreadFunctor(std::function<ReturnType(Args...)> function, Args... args)
+      : function_(std::bind(function, args...)) {}
 
   virtual void run() {
     this->reportResult(function_());
@@ -80,17 +77,15 @@ class ThreadFunctor : public ThreadFunctorBase<ReturnType> {
   }
 
  private:
-  boost::function<ReturnType()> function_;
+  std::function<ReturnType()> function_;
 };
 
 // Partial specialisation for void return type.
 template <typename... Args>
-class ThreadFunctor <void, Args...> : public ThreadFunctorBase<void> {
+class ThreadFunctor<void, Args...> : public ThreadFunctorBase<void> {
  public:
-  ThreadFunctor(boost::function<void (Args...)> function,
-                Args... args)
-      : function_(boost::bind(function, args...)) {
-  }
+  ThreadFunctor(std::function<void(Args...)> function, Args... args)
+      : function_(std::bind(function, args...)) {}
 
   virtual void run() {
     function_();
@@ -98,42 +93,36 @@ class ThreadFunctor <void, Args...> : public ThreadFunctorBase<void> {
   }
 
  private:
-  boost::function<void()> function_;
+  std::function<void()> function_;
 };
-
 
 /*
   Run functions
 */
 namespace ConcurrentRun {
 
-  // Empty argument form.
-  template <typename ReturnType>
-  QFuture<ReturnType> Run(
-      QThreadPool* threadpool,
-      boost::function<ReturnType ()> function) {
-    return (new ThreadFunctor<ReturnType>(function))->Start(threadpool);
-  }
-
-  // Function object with arguments form.
-  template <typename ReturnType, typename... Args>
-  QFuture<ReturnType> Run(
-      QThreadPool* threadpool,
-      boost::function<ReturnType (Args...)> function,
-      const Args&... args) {
-    return (new ThreadFunctor<ReturnType, Args...>(
-        function, args...))->Start(threadpool);
-  }
-
-  // Support passing C function pointers instead of function objects.
-  template <typename ReturnType, typename... Args>
-  QFuture<ReturnType> Run(
-      QThreadPool* threadpool,
-      ReturnType (*function) (Args...),
-      const Args&... args) {
-    return Run(
-        threadpool, boost::function<ReturnType (Args...)>(function), args...);
-  }
+// Empty argument form.
+template <typename ReturnType>
+QFuture<ReturnType> Run(QThreadPool* threadpool,
+                        std::function<ReturnType()> function) {
+  return (new ThreadFunctor<ReturnType>(function))->Start(threadpool);
 }
 
-#endif // CONCURRENTRUN_H
+// Function object with arguments form.
+template <typename ReturnType, typename... Args>
+QFuture<ReturnType> Run(QThreadPool* threadpool,
+                        std::function<ReturnType(Args...)> function,
+                        const Args&... args) {
+  return (new ThreadFunctor<ReturnType, Args...>(function, args...))
+      ->Start(threadpool);
+}
+
+// Support passing C function pointers instead of function objects.
+template <typename ReturnType, typename... Args>
+QFuture<ReturnType> Run(QThreadPool* threadpool,
+                        ReturnType (*function)(Args...), const Args&... args) {
+  return Run(threadpool, std::function<ReturnType(Args...)>(function), args...);
+}
+}
+
+#endif  // CONCURRENTRUN_H

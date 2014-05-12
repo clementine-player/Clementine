@@ -23,18 +23,18 @@
 class TrackSliderPopup : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   TrackSliderPopup(QWidget* parent);
 
-public slots:
+ public slots:
   void SetText(const QString& text);
   void SetSmallText(const QString& small_text);
   void SetPopupPosition(const QPoint& pos);
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
 
-private:
+ private:
   static const int kTextMargin;
   static const int kPointLength;
   static const int kPointWidth;
@@ -45,7 +45,7 @@ private:
   void UpdatePosition();
   void SendMouseEventToParent(QMouseEvent* e);
 
-private:
+ private:
   QString text_;
   QString small_text_;
   QPoint pos_;
@@ -58,4 +58,4 @@ private:
   QPixmap background_cache_;
 };
 
-#endif // TRACKSLIDERPOPUP_H
+#endif  // TRACKSLIDERPOPUP_H

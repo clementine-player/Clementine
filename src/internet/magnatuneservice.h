@@ -86,7 +86,7 @@ class MagnatuneService : public InternetService {
 
   QUrl ModifyUrl(const QUrl& url) const;
 
- signals:
+signals:
   void DownloadFinished(const QStringList& albums);
 
  private slots:
@@ -127,4 +127,4 @@ class MagnatuneService : public InternetService {
   QNetworkAccessManager* network_;
 };
 
-#endif // MAGNATUNESERVICE_H
+#endif  // MAGNATUNESERVICE_H

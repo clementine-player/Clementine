@@ -22,7 +22,7 @@
 #include <QPixmap>
 
 class RatingPainter {
-public:
+ public:
   RatingPainter();
 
   static const int kStarCount = 5;
@@ -32,16 +32,16 @@ public:
 
   void Paint(QPainter* painter, const QRect& rect, float rating) const;
 
-private:
-  QPixmap stars_[kStarCount*2+1];
+ private:
+  QPixmap stars_[kStarCount * 2 + 1];
 };
 
 class RatingWidget : public QWidget {
   Q_OBJECT
   Q_PROPERTY(float rating READ rating WRITE set_rating);
 
-public:
-  RatingWidget(QWidget* parent = 0);
+ public:
+  RatingWidget(QWidget* parent = nullptr);
 
   QSize sizeHint() const;
 
@@ -51,16 +51,16 @@ public:
 signals:
   void RatingChanged(float rating);
 
-protected:
+ protected:
   void paintEvent(QPaintEvent*);
   void mousePressEvent(QMouseEvent* e);
   void mouseMoveEvent(QMouseEvent* e);
   void leaveEvent(QEvent*);
 
-private:
+ private:
   RatingPainter painter_;
   float rating_;
   float hover_rating_;
 };
 
-#endif // RATINGWIDGET_H
+#endif  // RATINGWIDGET_H

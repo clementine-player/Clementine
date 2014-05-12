@@ -22,20 +22,15 @@
 #include "core/simpletreeitem.h"
 
 class IcecastItem : public SimpleTreeItem<IcecastItem> {
-public:
-  enum Type {
-    Type_Root,
-    Type_Genre,
-    Type_Station,
-    Type_Divider,
-  };
+ public:
+  enum Type { Type_Root, Type_Genre, Type_Station, Type_Divider, };
 
   IcecastItem(SimpleTreeModel<IcecastItem>* model)
-    : SimpleTreeItem<IcecastItem>(Type_Root, model) {}
-  IcecastItem(Type type, IcecastItem* parent = NULL)
-    : SimpleTreeItem<IcecastItem>(type, parent) {}
+      : SimpleTreeItem<IcecastItem>(Type_Root, model) {}
+  IcecastItem(Type type, IcecastItem* parent = nullptr)
+      : SimpleTreeItem<IcecastItem>(type, parent) {}
 
   IcecastBackend::Station station;
 };
 
-#endif // ICECASTITEM_H
+#endif  // ICECASTITEM_H

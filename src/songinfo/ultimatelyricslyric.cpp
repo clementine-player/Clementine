@@ -19,9 +19,8 @@
 
 #include <QRegExp>
 
-UltimateLyricsLyric::UltimateLyricsLyric(QObject* parent) :
-  QTextDocument(parent) {
-}
+UltimateLyricsLyric::UltimateLyricsLyric(QObject* parent)
+    : QTextDocument(parent) {}
 
 void UltimateLyricsLyric::SetHtml(const QString& html) {
   QString copy(html.trimmed());
@@ -31,7 +30,8 @@ void UltimateLyricsLyric::SetHtml(const QString& html) {
   copy.replace(QRegExp("([^>])[\\t ]*\\n"), "\\1<p>");
 
   // Strip any newlines from the end
-  copy.replace(QRegExp("((<\\s*br\\s*/?\\s*>)|(<\\s*/?\\s*p\\s*/?\\s*>))+$"), "");
+  copy.replace(QRegExp("((<\\s*br\\s*/?\\s*>)|(<\\s*/?\\s*p\\s*/?\\s*>))+$"),
+               "");
 
   setHtml(copy);
 }

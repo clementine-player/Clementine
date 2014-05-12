@@ -20,11 +20,10 @@
 
 #include <QtDebug>
 
-PlaylistFilter::PlaylistFilter(QObject *parent)
-  : QSortFilterProxyModel(parent),
-    filter_tree_(new NopFilter),
-    query_hash_(0)
-{
+PlaylistFilter::PlaylistFilter(QObject* parent)
+    : QSortFilterProxyModel(parent),
+      filter_tree_(new NopFilter),
+      query_hash_(0) {
   setDynamicSortFilter(true);
 
   column_names_["title"] = Playlist::Column_Title;
@@ -47,25 +46,21 @@ PlaylistFilter::PlaylistFilter(QObject *parent)
   column_names_["filename"] = Playlist::Column_Filename;
   column_names_["rating"] = Playlist::Column_Rating;
 
-  numerical_columns_ << Playlist::Column_Length
-                     << Playlist::Column_Track
-                     << Playlist::Column_Disc
-                     << Playlist::Column_Year
-                     << Playlist::Column_Score
-                     << Playlist::Column_BPM
-                     << Playlist::Column_Bitrate
-                     << Playlist::Column_Rating;
+  numerical_columns_ << Playlist::Column_Length << Playlist::Column_Track
+                     << Playlist::Column_Disc << Playlist::Column_Year
+                     << Playlist::Column_Score << Playlist::Column_BPM
+                     << Playlist::Column_Bitrate << Playlist::Column_Rating;
 }
 
-PlaylistFilter::~PlaylistFilter() {
-}
+PlaylistFilter::~PlaylistFilter() {}
 
 void PlaylistFilter::sort(int column, Qt::SortOrder order) {
   // Pass this through to the Playlist, it does sorting itself
   sourceModel()->sort(column, order);
 }
 
-bool PlaylistFilter::filterAcceptsRow(int row, const QModelIndex &parent) const {
+bool PlaylistFilter::filterAcceptsRow(int row,
+                                      const QModelIndex& parent) const {
   QString filter = filterRegExp().pattern();
 
   uint hash = qHash(filter);
@@ -78,5 +73,5 @@ bool PlaylistFilter::filterAcceptsRow(int row, const QModelIndex &parent) const 
   }
 
   // Test the row
-  return filter_tree_->accept(row,parent,sourceModel());
+  return filter_tree_->accept(row, parent, sourceModel());
 }

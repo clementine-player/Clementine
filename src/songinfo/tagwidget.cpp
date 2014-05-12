@@ -34,13 +34,13 @@ const int TagWidgetTag::kIconTextSpacing = 8;
 const int TagWidgetTag::kHPadding = 6;
 const int TagWidgetTag::kVPadding = 2;
 
-TagWidgetTag::TagWidgetTag(const QIcon& icon, const QString& text, QWidget* parent)
-  : QWidget(parent),
-    text_(text),
-    icon_(icon),
-    opacity_(0.0),
-    animation_(new QPropertyAnimation(this, "background_opacity", this))
-{
+TagWidgetTag::TagWidgetTag(const QIcon& icon, const QString& text,
+                           QWidget* parent)
+    : QWidget(parent),
+      text_(text),
+      icon_(icon),
+      opacity_(0.0),
+      animation_(new QPropertyAnimation(this, "background_opacity", this)) {
   setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 }
 
@@ -77,9 +77,10 @@ void TagWidgetTag::paintEvent(QPaintEvent*) {
   const QRect tag_rect(rect());
   const QRect icon_rect(tag_rect.topLeft() + QPoint(kHPadding, kVPadding),
                         QSize(kIconSize, kIconSize));
-  const QRect text_rect(icon_rect.topRight() + QPoint(kIconTextSpacing, 0),
-                        QSize(tag_rect.width() - icon_rect.right() - kIconTextSpacing - kHPadding,
-                              icon_rect.height()));
+  const QRect text_rect(
+      icon_rect.topRight() + QPoint(kIconTextSpacing, 0),
+      QSize(tag_rect.width() - icon_rect.right() - kIconTextSpacing - kHPadding,
+            icon_rect.height()));
 
   // Use the tag's opacity
   p.setOpacity(0.3 + opacity_ * 0.7);
@@ -102,25 +103,17 @@ void TagWidgetTag::paintEvent(QPaintEvent*) {
   p.drawText(text_rect, text_);
 }
 
-void TagWidgetTag::mouseReleaseEvent(QMouseEvent*) {
-  emit Clicked();
-}
+void TagWidgetTag::mouseReleaseEvent(QMouseEvent*) { emit Clicked(); }
 
-void TagWidgetTag::contextMenuEvent(QContextMenuEvent*) {
-  emit Clicked();
-}
-
+void TagWidgetTag::contextMenuEvent(QContextMenuEvent*) { emit Clicked(); }
 
 TagWidget::TagWidget(Type type, QWidget* parent)
-  : QWidget(parent),
-    type_(type)
-{
+    : QWidget(parent), type_(type) {
   setLayout(new FlowLayout(4, 6, 4));
 }
 
 void TagWidget::AddTag(const QString& tag) {
-  if (tag.isEmpty())
-    return;
+  if (tag.isEmpty()) return;
 
   TagWidgetTag* widget = new TagWidgetTag(icon_, tag, this);
   connect(widget, SIGNAL(Clicked()), SLOT(TagClicked()));
@@ -131,8 +124,7 @@ void TagWidget::AddTag(const QString& tag) {
 
 void TagWidget::TagClicked() {
   TagWidgetTag* tag = qobject_cast<TagWidgetTag*>(sender());
-  if (!tag)
-    return;
+  if (!tag) return;
 
   emit DoGlobalSearch(tag->text());
 }

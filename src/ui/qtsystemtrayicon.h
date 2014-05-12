@@ -25,40 +25,38 @@
 class QtSystemTrayIcon : public SystemTrayIcon {
   Q_OBJECT
 
-public:
-  QtSystemTrayIcon(QObject* parent = 0);
+ public:
+  QtSystemTrayIcon(QObject* parent = nullptr);
   ~QtSystemTrayIcon();
 
   void SetupMenu(QAction* previous, QAction* play, QAction* stop,
                  QAction* stop_after, QAction* next, QAction* mute,
-                 QAction* love, QAction* ban, QAction* quit);
+                 QAction* love, QAction* quit);
   bool IsVisible() const;
   void SetVisible(bool visible);
 
-  void ShowPopup(const QString &summary, const QString &message, int timeout);
+  void ShowPopup(const QString& summary, const QString& message, int timeout);
 
   void SetNowPlaying(const Song& song, const QString& image_path);
   void ClearNowPlaying();
-  
-protected:
+
+ protected:
   // SystemTrayIcon
   void UpdateIcon();
   void SetPaused();
-  void SetPlaying(bool enable_play_pause = false, bool enable_ban = false,
-                  bool enable_love = false);
+  void SetPlaying(bool enable_play_pause = false, bool enable_love = false);
   void SetStopped();
   void LastFMButtonVisibilityChanged(bool value);
   void LastFMButtonLoveStateChanged(bool value);
-  void LastFMButtonBanStateChanged(bool value);
   void MuteButtonStateChanged(bool value);
 
   // QObject
-  bool eventFilter(QObject *, QEvent *);
+  bool eventFilter(QObject*, QEvent*);
 
-private slots:
+ private slots:
   void Clicked(QSystemTrayIcon::ActivationReason);
 
-private:
+ private:
   QSystemTrayIcon* tray_;
   QMenu* menu_;
   QAction* action_play_pause_;
@@ -66,7 +64,6 @@ private:
   QAction* action_stop_after_this_track_;
   QAction* action_mute_;
   QAction* action_love_;
-  QAction* action_ban_;
 
   QString pattern_;
 
@@ -74,4 +71,4 @@ private:
   QPixmap grey_icon_;
 };
 
-#endif // QTSYSTEMTRAYICON_H
+#endif  // QTSYSTEMTRAYICON_H

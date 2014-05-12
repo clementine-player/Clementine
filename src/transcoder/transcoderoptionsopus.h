@@ -23,17 +23,17 @@
 class Ui_TranscoderOptionsOpus;
 
 class TranscoderOptionsOpus : public TranscoderOptionsInterface {
-public:
-  TranscoderOptionsOpus(QWidget* parent = 0);
+ public:
+  TranscoderOptionsOpus(QWidget* parent = nullptr);
   ~TranscoderOptionsOpus();
 
   void Load();
   void Save();
 
-private:
+ private:
   static const char* kSettingsGroup;
 
   Ui_TranscoderOptionsOpus* ui_;
 };
 
-#endif // TRANSCODEROPTIONSOPUS_H
+#endif  // TRANSCODEROPTIONSOPUS_H

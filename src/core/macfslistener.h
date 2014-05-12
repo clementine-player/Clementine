@@ -30,13 +30,13 @@ class MacFSListener : public FileSystemWatcherInterface {
   Q_OBJECT
 
  public:
-  explicit MacFSListener(QObject* parent = 0);
+  explicit MacFSListener(QObject* parent = nullptr);
   void Init();
   void AddPath(const QString& path);
   void RemovePath(const QString& path);
   void Clear();
 
- signals:
+signals:
   void PathChanged(const QString& path);
 
  private slots:
@@ -45,13 +45,10 @@ class MacFSListener : public FileSystemWatcherInterface {
  private:
   void UpdateStreamAsync();
 
-  static void EventStreamCallback(
-      ConstFSEventStreamRef stream,
-      void* user_data,
-      size_t num_events,
-      void* event_paths,
-      const FSEventStreamEventFlags event_flags[],
-      const FSEventStreamEventId event_ids[]);
+  static void EventStreamCallback(ConstFSEventStreamRef stream, void* user_data,
+                                  size_t num_events, void* event_paths,
+                                  const FSEventStreamEventFlags event_flags[],
+                                  const FSEventStreamEventId event_ids[]);
 
   CFRunLoopRef run_loop_;
   FSEventStreamRef stream_;

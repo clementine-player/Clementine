@@ -31,7 +31,7 @@ class QNetworkReply;
 class CoverProvider : public QObject {
   Q_OBJECT
 
-public:
+ public:
   CoverProvider(const QString& name, QObject* parent);
 
   // A name (very short description) of this provider, like "last.fm".
@@ -40,15 +40,16 @@ public:
   // Starts searching for covers matching the given query text.  Returns true
   // if the query has been started, or false if an error occurred.  The provider
   // should remember the ID and emit it along with the result when it finishes.
-  virtual bool StartSearch(const QString& artist, const QString& album, int id) = 0;
+  virtual bool StartSearch(const QString& artist, const QString& album,
+                           int id) = 0;
 
   virtual void CancelSearch(int id) {}
 
 signals:
   void SearchFinished(int id, const QList<CoverSearchResult>& results);
 
-private:
+ private:
   QString name_;
 };
 
-#endif // COVERPROVIDER_H
+#endif  // COVERPROVIDER_H

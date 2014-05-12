@@ -32,33 +32,33 @@ class QTreeWidgetItem;
 class GlobalSearchSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   GlobalSearchSettingsPage(SettingsDialog* dialog);
   ~GlobalSearchSettingsPage();
 
   void Load();
   void Save();
 
-protected:
+ protected:
   void showEvent(QShowEvent* e);
 
-private slots:
+ private slots:
   void MoveUp();
   void MoveDown();
   void ConfigureProvider();
 
   void CurrentProviderChanged(QTreeWidgetItem* item);
 
-private:
+ private:
   void AddProviderItem(GlobalSearch* engine, SearchProvider* provider);
   void UpdateLoggedInState(GlobalSearch* engine, QTreeWidgetItem* item,
                            bool set_checked_state);
   void MoveCurrentItem(int d);
 
-private:
+ private:
   QScopedPointer<Ui_GlobalSearchSettingsPage> ui_;
 
   QIcon warning_icon_;
 };
 
-#endif // GLOBALSEARCHSETTINGSPAGE_H
+#endif  // GLOBALSEARCHSETTINGSPAGE_H

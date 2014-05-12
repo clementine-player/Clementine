@@ -18,7 +18,6 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-
 #ifndef OVERRIDE_H
 #define OVERRIDE_H
 
@@ -26,13 +25,13 @@
 // it is available.
 
 #ifndef __has_extension
-  #define __has_extension(x) 0
+#define __has_extension(x) 0
 #endif
 
 #if __has_extension(cxx_override_control)  // Clang feature checking macro.
-#  define OVERRIDE override
+#define OVERRIDE override
 #else
-#  define OVERRIDE
+#define OVERRIDE
 #endif
 
 #endif  // OVERRIDE_H

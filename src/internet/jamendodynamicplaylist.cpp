@@ -33,17 +33,17 @@ const char* JamendoDynamicPlaylist::kUrl =
     "http://api.jamendo.com/get2/id/track/plain/";
 
 JamendoDynamicPlaylist::JamendoDynamicPlaylist()
-  : order_by_(OrderBy_Rating),
-    order_direction_(Order_Descending),
-    current_page_(0),
-    current_index_(0) {
-}
+    : order_by_(OrderBy_Rating),
+      order_direction_(Order_Descending),
+      current_page_(0),
+      current_index_(0) {}
 
-JamendoDynamicPlaylist::JamendoDynamicPlaylist(const QString& name, OrderBy order_by)
-  : order_by_(order_by),
-    order_direction_(Order_Descending),
-    current_page_(0),
-    current_index_(0) {
+JamendoDynamicPlaylist::JamendoDynamicPlaylist(const QString& name,
+                                               OrderBy order_by)
+    : order_by_(order_by),
+      order_direction_(Order_Descending),
+      current_page_(0),
+      current_index_(0) {
   set_name(name);
 }
 
@@ -52,7 +52,8 @@ void JamendoDynamicPlaylist::Load(const QByteArray& data) {
   s >> *this;
 }
 
-void JamendoDynamicPlaylist::Load(OrderBy order_by, OrderDirection order_direction) {
+void JamendoDynamicPlaylist::Load(OrderBy order_by,
+                                  OrderDirection order_direction) {
   order_by_ = order_by;
   order_direction_ = order_direction;
 }
@@ -65,9 +66,7 @@ QByteArray JamendoDynamicPlaylist::Save() const {
   return ret;
 }
 
-PlaylistItemList JamendoDynamicPlaylist::Generate() {
-  return GenerateMore(20);
-}
+PlaylistItemList JamendoDynamicPlaylist::Generate() { return GenerateMore(20); }
 
 PlaylistItemList JamendoDynamicPlaylist::GenerateMore(int count) {
   int tries = 0;
@@ -91,14 +90,26 @@ PlaylistItemList JamendoDynamicPlaylist::GenerateMore(int count) {
 QString JamendoDynamicPlaylist::OrderSpec(OrderBy by, OrderDirection dir) {
   QString ret;
   switch (by) {
-    case OrderBy_Listened:    ret += "listened";    break;
-    case OrderBy_Rating:      ret += "rating";      break;
-    case OrderBy_RatingMonth: ret += "ratingmonth"; break;
-    case OrderBy_RatingWeek:  ret += "ratingweek";  break;
+    case OrderBy_Listened:
+      ret += "listened";
+      break;
+    case OrderBy_Rating:
+      ret += "rating";
+      break;
+    case OrderBy_RatingMonth:
+      ret += "ratingmonth";
+      break;
+    case OrderBy_RatingWeek:
+      ret += "ratingweek";
+      break;
   }
   switch (dir) {
-    case Order_Ascending:     ret += "_asc";        break;
-    case Order_Descending:    ret += "_desc";       break;
+    case Order_Ascending:
+      ret += "_asc";
+      break;
+    case Order_Descending:
+      ret += "_desc";
+      break;
   }
   return ret;
 }
@@ -111,7 +122,8 @@ void JamendoDynamicPlaylist::Fetch() {
 
   // We have to use QHttp here because there's no way to disable Keep-Alive
   // with QNetworkManager.
-  QHttpRequestHeader header("GET", QString(url.encodedPath() + "?" + url.encodedQuery()));
+  QHttpRequestHeader header(
+      "GET", QString(url.encodedPath() + "?" + url.encodedQuery()));
   header.setValue("Host", url.encodedHost());
 
   QHttp http(url.host());
@@ -120,13 +132,14 @@ void JamendoDynamicPlaylist::Fetch() {
   // Wait for the reply
   {
     QEventLoop event_loop;
-    connect(&http, SIGNAL(requestFinished(int,bool)), &event_loop, SLOT(quit()));
+    connect(&http, SIGNAL(requestFinished(int, bool)), &event_loop,
+            SLOT(quit()));
     event_loop.exec();
   }
 
   if (http.error() != QHttp::NoError) {
     qLog(Warning) << "HTTP error returned from Jamendo:" << http.errorString()
-               << ", url:" << url.toString();
+                  << ", url:" << url.toString();
     return;
   }
 
@@ -135,28 +148,27 @@ void JamendoDynamicPlaylist::Fetch() {
 
   // Get the songs from the database
   SongList songs = backend_->GetSongsByForeignId(
-        lines, JamendoService::kTrackIdsTable, JamendoService::kTrackIdsColumn);
+      lines, JamendoService::kTrackIdsTable, JamendoService::kTrackIdsColumn);
 
   if (songs.empty()) {
-    qLog(Warning) << "No songs returned from Jamendo:"
-               << url.toString();
+    qLog(Warning) << "No songs returned from Jamendo:" << url.toString();
     return;
   }
 
   current_items_.clear();
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     if (song.is_valid())
       current_items_ << PlaylistItemPtr(new JamendoPlaylistItem(song));
   }
   current_index_ = 0;
 }
 
-QDataStream& operator <<(QDataStream& s, const JamendoDynamicPlaylist& p) {
+QDataStream& operator<<(QDataStream& s, const JamendoDynamicPlaylist& p) {
   s << quint8(p.order_by_) << quint8(p.order_direction_);
   return s;
 }
 
-QDataStream& operator >>(QDataStream& s, JamendoDynamicPlaylist& p) {
+QDataStream& operator>>(QDataStream& s, JamendoDynamicPlaylist& p) {
   quint8 order_by, order_direction;
   s >> order_by >> order_direction;
   p.order_by_ = JamendoDynamicPlaylist::OrderBy(order_by);

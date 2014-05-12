@@ -23,11 +23,8 @@
 
 #include <QUrl>
 
-ParserBase::ParserBase(LibraryBackendInterface* library, QObject *parent)
-  : QObject(parent),
-    library_(library)
-{
-}
+ParserBase::ParserBase(LibraryBackendInterface* library, QObject* parent)
+    : QObject(parent), library_(library) {}
 
 void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
                           const QDir& dir, Song* song) const {
@@ -79,22 +76,22 @@ void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
   }
 }
 
-Song ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning, const QDir& dir) const {
+Song ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
+                          const QDir& dir) const {
   Song song;
   LoadSong(filename_or_url, beginning, dir, &song);
   return song;
 }
 
-QString ParserBase::URLOrRelativeFilename(const QUrl& url, const QDir& dir) const {
-  if (url.scheme() != "file")
-    return url.toString();
+QString ParserBase::URLOrRelativeFilename(const QUrl& url,
+                                          const QDir& dir) const {
+  if (url.scheme() != "file") return url.toString();
 
   const QString filename = url.toLocalFile();
   if (QDir::isAbsolutePath(filename)) {
     const QString relative = dir.relativeFilePath(filename);
 
-    if (!relative.contains(".."))
-      return relative;
+    if (!relative.contains("..")) return relative;
   }
   return filename;
 }

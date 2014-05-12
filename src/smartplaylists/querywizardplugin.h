@@ -18,12 +18,13 @@
 #ifndef QUERYWIZARDPLUGIN_H
 #define QUERYWIZARDPLUGIN_H
 
-#include "search.h"
 #include "wizardplugin.h"
+
+#include <memory>
 
 #include <QWizard>
 
-#include <boost/scoped_ptr.hpp>
+#include "search.h"
 
 class Ui_SmartPlaylistQuerySearchPage;
 class Ui_SmartPlaylistQuerySortPage;
@@ -38,7 +39,7 @@ class SearchTermWidget;
 class QueryWizardPlugin : public WizardPlugin {
   Q_OBJECT
 
-public:
+ public:
   QueryWizardPlugin(Application* app, LibraryBackend* library, QObject* parent);
   ~QueryWizardPlugin();
 
@@ -51,7 +52,7 @@ public:
   void SetGenerator(GeneratorPtr);
   GeneratorPtr CreateGenerator() const;
 
-private slots:
+ private slots:
   void AddSearchTerm();
   void RemoveSearchTerm();
 
@@ -63,18 +64,18 @@ private slots:
 
   void MoveTermListToBottom(int min, int max);
 
-private:
+ private:
   class SearchPage;
   class SortPage;
 
   Search MakeSearch() const;
 
   SearchPage* search_page_;
-  boost::scoped_ptr<Ui_SmartPlaylistQuerySortPage> sort_ui_;
+  std::unique_ptr<Ui_SmartPlaylistQuerySortPage> sort_ui_;
 
   int previous_scrollarea_max_;
 };
 
-} // namespace smart_playlists
+}  // namespace smart_playlists
 
-#endif // QUERYWIZARDPLUGIN_H
+#endif  // QUERYWIZARDPLUGIN_H

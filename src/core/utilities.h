@@ -18,6 +18,8 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#include <memory>
+
 #include <QColor>
 #include <QFile>
 #include <QLocale>
@@ -26,137 +28,127 @@
 #include <QString>
 #include <QUrl>
 
-#include <boost/scoped_array.hpp>
-
 class QIODevice;
 class QMouseEvent;
 class QXmlStreamReader;
 struct QMetaObject;
 
 namespace Utilities {
-  QString PrettyTime(int seconds);
-  QString PrettyTimeDelta(int seconds);
-  QString PrettyTimeNanosec(qint64 nanoseconds);
-  QString PrettySize(quint64 bytes);
-  QString PrettySize(const QSize& size);
-  QString WordyTime(quint64 seconds);
-  QString WordyTimeNanosec(qint64 nanoseconds);
-  QString Ago(int seconds_since_epoch, const QLocale& locale);
-  QString PrettyFutureDate(const QDate& date);
+QString PrettyTime(int seconds);
+QString PrettyTimeDelta(int seconds);
+QString PrettyTimeNanosec(qint64 nanoseconds);
+QString PrettySize(quint64 bytes);
+QString PrettySize(const QSize& size);
+QString WordyTime(quint64 seconds);
+QString WordyTimeNanosec(qint64 nanoseconds);
+QString Ago(int seconds_since_epoch, const QLocale& locale);
+QString PrettyFutureDate(const QDate& date);
 
-  QString ColorToRgba(const QColor& color);
+QString ColorToRgba(const QColor& color);
 
-  quint64 FileSystemCapacity(const QString& path);
-  quint64 FileSystemFreeSpace(const QString& path);
+quint64 FileSystemCapacity(const QString& path);
+quint64 FileSystemFreeSpace(const QString& path);
 
-  QString MakeTempDir(const QString template_name = QString());
-  QString GetTemporaryFileName();
-  void RemoveRecursive(const QString& path);
-  bool CopyRecursive(const QString& source, const QString& destination);
-  bool Copy(QIODevice* source, QIODevice* destination);
+QString MakeTempDir(const QString template_name = QString());
+QString GetTemporaryFileName();
+bool RemoveRecursive(const QString& path);
+bool CopyRecursive(const QString& source, const QString& destination);
+bool Copy(QIODevice* source, QIODevice* destination);
 
-  void OpenInFileBrowser(const QList<QUrl>& filenames);
+void OpenInFileBrowser(const QList<QUrl>& filenames);
 
-  enum HashFunction {
-    Md5_Algo,
-    Sha256_Algo,
-    Sha1_Algo,
-  };
-  QByteArray Hmac(const QByteArray& key, const QByteArray& data, HashFunction algo);
-  QByteArray HmacMd5(const QByteArray& key, const QByteArray& data);
-  QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
-  QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
-  QByteArray Sha256(const QByteArray& data);
-  QByteArray Sha1File(QFile& file);
-  QByteArray Sha1CoverHash(const QString& artist, const QString& album);
+enum HashFunction { Md5_Algo, Sha256_Algo, Sha1_Algo, };
+QByteArray Hmac(const QByteArray& key, const QByteArray& data,
+                HashFunction algo);
+QByteArray HmacMd5(const QByteArray& key, const QByteArray& data);
+QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
+QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
+QByteArray Sha256(const QByteArray& data);
+QByteArray Sha1File(QFile& file);
+QByteArray Sha1CoverHash(const QString& artist, const QString& album);
 
+// Picks an unused ephemeral port number.  Doesn't hold the port open so
+// there's the obvious race condition
+quint16 PickUnusedPort();
 
-  // Picks an unused ephemeral port number.  Doesn't hold the port open so
-  // there's the obvious race condition
-  quint16 PickUnusedPort();
+// Forwards a mouse event to a different widget, remapping the event's widget
+// coordinates relative to those of the target widget.
+void ForwardMouseEvent(const QMouseEvent* e, QWidget* target);
 
+// Checks if the mouse event was inside the widget's rectangle.
+bool IsMouseEventInWidget(const QMouseEvent* e, const QWidget* widget);
 
-  // Forwards a mouse event to a different widget, remapping the event's widget
-  // coordinates relative to those of the target widget.
-  void ForwardMouseEvent(const QMouseEvent* e, QWidget* target);
+// Reads all children of the current element, and returns with the stream
+// reader either on the EndElement for the current element, or the end of the
+// file - whichever came first.
+void ConsumeCurrentElement(QXmlStreamReader* reader);
 
-  // Checks if the mouse event was inside the widget's rectangle.
-  bool IsMouseEventInWidget(const QMouseEvent* e, const QWidget* widget);
+// Advances the stream reader until it finds an element with the given name.
+// Returns false if the end of the document was reached before finding a
+// matching element.
+bool ParseUntilElement(QXmlStreamReader* reader, const QString& name);
 
-  // Reads all children of the current element, and returns with the stream
-  // reader either on the EndElement for the current element, or the end of the
-  // file - whichever came first.
-  void ConsumeCurrentElement(QXmlStreamReader* reader);
+// Parses a string containing an RFC822 time and date.
+QDateTime ParseRFC822DateTime(const QString& text);
 
-  // Advances the stream reader until it finds an element with the given name.
-  // Returns false if the end of the document was reached before finding a
-  // matching element.
-  bool ParseUntilElement(QXmlStreamReader* reader, const QString& name);
+// Replaces some HTML entities with their normal characters.
+QString DecodeHtmlEntities(const QString& text);
 
-  // Parses a string containing an RFC822 time and date.
-  QDateTime ParseRFC822DateTime(const QString& text);
+// Shortcut for getting a Qt-aware enum value as a string.
+// Pass in the QMetaObject of the class that owns the enum, the string name of
+// the enum and a valid value from that enum.
+const char* EnumToString(const QMetaObject& meta, const char* name, int value);
 
-  // Replaces some HTML entities with their normal characters.
-  QString DecodeHtmlEntities(const QString& text);
+QStringList Prepend(const QString& text, const QStringList& list);
+QStringList Updateify(const QStringList& list);
 
-  // Shortcut for getting a Qt-aware enum value as a string.
-  // Pass in the QMetaObject of the class that owns the enum, the string name of
-  // the enum and a valid value from that enum.
-  const char* EnumToString(const QMetaObject& meta, const char* name, int value);
+// Check if two urls are on the same drive (mainly for windows)
+bool UrlOnSameDriveAsClementine(const QUrl& url);
 
-  QStringList Prepend(const QString& text, const QStringList& list);
-  QStringList Updateify(const QStringList& list);
+// Get relative path to clementine binary
+QUrl GetRelativePathToClementineBin(const QUrl& url);
 
-  // Check if two urls are on the same drive (mainly for windows)
-  bool UrlOnSameDriveAsClementine(const QUrl& url);
+// Get the path without the filename extension
+QString PathWithoutFilenameExtension(const QString& filename);
+QString FiddleFileExtension(const QString& filename,
+                            const QString& new_extension);
 
-  // Get relative path to clementine binary
-  QUrl GetRelativePathToClementineBin(const QUrl& url);
+enum ConfigPath {
+  Path_Root,
+  Path_AlbumCovers,
+  Path_NetworkCache,
+  Path_GstreamerRegistry,
+  Path_DefaultMusicLibrary,
+  Path_LocalSpotifyBlob,
+  Path_MoodbarCache,
+  Path_CacheRoot,
+};
+QString GetConfigPath(ConfigPath config);
 
-  // Get the path without the filename extension
-  QString PathWithoutFilenameExtension(const QString& filename);
-  QString FiddleFileExtension(const QString& filename, const QString& new_extension);
+// Returns the minor version of OS X (ie. 6 for Snow Leopard, 7 for Lion).
+qint32 GetMacVersion();
 
-  enum ConfigPath {
-    Path_Root,
-    Path_AlbumCovers,
-    Path_NetworkCache,
-    Path_GstreamerRegistry,
-    Path_DefaultMusicLibrary,
-    Path_LocalSpotifyBlob,
-    Path_MoodbarCache,
-    Path_CacheRoot,
-  };
-  QString GetConfigPath(ConfigPath config);
+// Borrowed from schedutils
+enum IoPriority {
+  IOPRIO_CLASS_NONE = 0,
+  IOPRIO_CLASS_RT,
+  IOPRIO_CLASS_BE,
+  IOPRIO_CLASS_IDLE,
+};
+enum { IOPRIO_WHO_PROCESS = 1, IOPRIO_WHO_PGRP, IOPRIO_WHO_USER, };
+static const int IOPRIO_CLASS_SHIFT = 13;
 
-  // Returns the minor version of OS X (ie. 6 for Snow Leopard, 7 for Lion).
-  qint32 GetMacVersion();
+int SetThreadIOPriority(IoPriority priority);
+int GetThreadId();
 
-  // Borrowed from schedutils
-  enum IoPriority {
-    IOPRIO_CLASS_NONE = 0,
-    IOPRIO_CLASS_RT,
-    IOPRIO_CLASS_BE,
-    IOPRIO_CLASS_IDLE,
-  };
-  enum {
-    IOPRIO_WHO_PROCESS = 1,
-    IOPRIO_WHO_PGRP,
-    IOPRIO_WHO_USER,
-  };
-  static const int IOPRIO_CLASS_SHIFT = 13;
+// Returns true if this machine has a battery.
+bool IsLaptop();
 
-  int SetThreadIOPriority(IoPriority priority);
-  int GetThreadId();
-
-  // Returns true if this machine has a battery.
-  bool IsLaptop();
-
-  QString SystemLanguageName();
+QString SystemLanguageName();
 }
 
 class ScopedWCharArray {
-public:
+ public:
   ScopedWCharArray(const QString& str);
 
   QString ToString() const { return QString::fromWCharArray(data_.get()); }
@@ -167,11 +159,11 @@ public:
   int characters() const { return chars_; }
   int bytes() const { return (chars_ + 1) * sizeof(wchar_t); }
 
-private:
+ private:
   Q_DISABLE_COPY(ScopedWCharArray);
 
   int chars_;
-  boost::scoped_array<wchar_t> data_;
+  std::unique_ptr<wchar_t[]> data_;
 };
 
-#endif // UTILITIES_H
+#endif  // UTILITIES_H

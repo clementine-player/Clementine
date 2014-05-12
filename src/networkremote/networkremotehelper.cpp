@@ -20,43 +20,38 @@
 #include "networkremote.h"
 #include "networkremotehelper.h"
 
-NetworkRemoteHelper* NetworkRemoteHelper::sInstance = NULL;
+NetworkRemoteHelper* NetworkRemoteHelper::sInstance = nullptr;
 
-NetworkRemoteHelper::NetworkRemoteHelper(Application* app)
-  : app_(app)
-{
+NetworkRemoteHelper::NetworkRemoteHelper(Application* app) : app_(app) {
   app_ = app;
-  connect(this, SIGNAL(ReloadSettingsSig()),
-          app_->network_remote(), SLOT(ReloadSettings()));
-  connect(this, SIGNAL(StartServerSig()),
-          app_->network_remote(), SLOT(StartServer()));
-  connect(this, SIGNAL(SetupServerSig()),
-          app_->network_remote(), SLOT(SetupServer()));
+  connect(this, SIGNAL(ReloadSettingsSig()), app_->network_remote(),
+          SLOT(ReloadSettings()));
+  connect(this, SIGNAL(StartServerSig()), app_->network_remote(),
+          SLOT(StartServer()));
+  connect(this, SIGNAL(SetupServerSig()), app_->network_remote(),
+          SLOT(SetupServer()));
 
   // Start the server once the playlistmanager is initialized
-  connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()),
-          this, SLOT(StartServer()));
+  connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()), this,
+          SLOT(StartServer()));
 
   sInstance = this;
 }
 
-NetworkRemoteHelper::~NetworkRemoteHelper() {
-}
+NetworkRemoteHelper::~NetworkRemoteHelper() {}
 
 void NetworkRemoteHelper::StartServer() {
   emit SetupServerSig();
   emit StartServerSig();
 }
 
-void NetworkRemoteHelper::ReloadSettings() {
-  emit ReloadSettingsSig();
-}
+void NetworkRemoteHelper::ReloadSettings() { emit ReloadSettingsSig(); }
 
 // For using in Settingsdialog, we haven't the appication there
 NetworkRemoteHelper* NetworkRemoteHelper::Instance() {
   if (!sInstance) {
     // normally he shouldn't go here. Only for safety
-    return NULL;
+    return nullptr;
   }
   return sInstance;
 }

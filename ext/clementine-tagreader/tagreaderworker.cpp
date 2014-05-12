@@ -24,11 +24,8 @@
 #include <QTextCodec>
 #include <QUrl>
 
-
 TagReaderWorker::TagReaderWorker(QIODevice* socket, QObject* parent)
-  : AbstractMessageHandler<pb::tagreader::Message>(socket, parent)
-{
-}
+    : AbstractMessageHandler<pb::tagreader::Message>(socket, parent) {}
 
 void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
   pb::tagreader::Message reply;
@@ -42,42 +39,44 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
 #endif
 
   if (message.has_read_file_request()) {
-    tag_reader_.ReadFile(QStringFromStdString(message.read_file_request().filename()),
-             reply.mutable_read_file_response()->mutable_metadata());
+    tag_reader_.ReadFile(
+        QStringFromStdString(message.read_file_request().filename()),
+        reply.mutable_read_file_response()->mutable_metadata());
   } else if (message.has_save_file_request()) {
-    reply.mutable_save_file_response()->set_success(
-          tag_reader_.SaveFile(QStringFromStdString(message.save_file_request().filename()),
-                   message.save_file_request().metadata()));
+    reply.mutable_save_file_response()->set_success(tag_reader_.SaveFile(
+        QStringFromStdString(message.save_file_request().filename()),
+        message.save_file_request().metadata()));
   } else if (message.has_save_song_statistics_to_file_request()) {
     reply.mutable_save_song_statistics_to_file_response()->set_success(
         tag_reader_.SaveSongStatisticsToFile(
-            QStringFromStdString(message.save_song_statistics_to_file_request().filename()),
+            QStringFromStdString(
+                message.save_song_statistics_to_file_request().filename()),
             message.save_song_statistics_to_file_request().metadata()));
   } else if (message.has_save_song_rating_to_file_request()) {
     reply.mutable_save_song_rating_to_file_response()->set_success(
         tag_reader_.SaveSongRatingToFile(
-            QStringFromStdString(message.save_song_rating_to_file_request().filename()),
+            QStringFromStdString(
+                message.save_song_rating_to_file_request().filename()),
             message.save_song_rating_to_file_request().metadata()));
   } else if (message.has_is_media_file_request()) {
-    reply.mutable_is_media_file_response()->set_success(
-        tag_reader_.IsMediaFile(QStringFromStdString(message.is_media_file_request().filename())));
+    reply.mutable_is_media_file_response()->set_success(tag_reader_.IsMediaFile(
+        QStringFromStdString(message.is_media_file_request().filename())));
   } else if (message.has_load_embedded_art_request()) {
     QByteArray data = tag_reader_.LoadEmbeddedArt(
-          QStringFromStdString(message.load_embedded_art_request().filename()));
-    reply.mutable_load_embedded_art_response()->set_data(
-          data.constData(), data.size());
+        QStringFromStdString(message.load_embedded_art_request().filename()));
+    reply.mutable_load_embedded_art_response()->set_data(data.constData(),
+                                                         data.size());
   } else if (message.has_read_cloud_file_request()) {
 #ifdef HAVE_GOOGLE_DRIVE
     const pb::tagreader::ReadCloudFileRequest& req =
         message.read_cloud_file_request();
     if (!tag_reader_.ReadCloudFile(
-        QUrl::fromEncoded(QByteArray(req.download_url().data(),
-                                     req.download_url().size())),
-        QStringFromStdString(req.title()),
-        req.size(),
-        QStringFromStdString(req.mime_type()),
-        QStringFromStdString(req.authorisation_header()),
-        reply.mutable_read_cloud_file_response()->mutable_metadata())) {
+             QUrl::fromEncoded(QByteArray(req.download_url().data(),
+                                          req.download_url().size())),
+             QStringFromStdString(req.title()), req.size(),
+             QStringFromStdString(req.mime_type()),
+             QStringFromStdString(req.authorisation_header()),
+             reply.mutable_read_cloud_file_response()->mutable_metadata())) {
       reply.mutable_read_cloud_file_response()->clear_metadata();
     }
 #endif
@@ -86,10 +85,8 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
   SendReply(message, &reply);
 }
 
-
 void TagReaderWorker::DeviceClosed() {
   AbstractMessageHandler<pb::tagreader::Message>::DeviceClosed();
 
   qApp->exit();
 }
-

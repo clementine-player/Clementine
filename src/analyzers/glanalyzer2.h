@@ -25,48 +25,46 @@
 #include <qstring.h>
 #include <qptrlist.h>
 
+class GLAnalyzer2 : public Analyzer::Base3D {
+ public:
+  GLAnalyzer2(QWidget*);
+  ~GLAnalyzer2();
+  void analyze(const Scope&);
+  void paused();
 
-class GLAnalyzer2 : public Analyzer::Base3D
-{
-public:
-    GLAnalyzer2(QWidget *);
-    ~GLAnalyzer2();
-    void analyze( const Scope & );
-    void paused();
+ protected:
+  void initializeGL();
+  void resizeGL(int w, int h);
+  void paintGL();
 
-protected:
-    void initializeGL();
-    void resizeGL( int w, int h );
-    void paintGL();
-
-private:
-    struct ShowProperties {
+ private:
+  struct ShowProperties {
     bool paused;
     double timeStamp;
     double dT;
     double pauseTimer;
     float rotDegrees;
-    } show;
+  } show;
 
-    struct FrameProperties {
+  struct FrameProperties {
     float energy;
     float dEnergy;
     float meanBand;
     float rotDegrees;
     bool silence;
-    } frame;
+  } frame;
 
-    GLuint dotTexture;
-    GLuint w1Texture;
-    GLuint w2Texture;
-    float unitX, unitY;
+  GLuint dotTexture;
+  GLuint w1Texture;
+  GLuint w2Texture;
+  float unitX, unitY;
 
-    void drawDot( float x, float y, float size );
-    void drawFullDot( float r, float g, float b, float a );
-    void setTextureMatrix( float rot, float scale );
+  void drawDot(float x, float y, float size);
+  void drawFullDot(float r, float g, float b, float a);
+  void setTextureMatrix(float rot, float scale);
 
-    bool loadTexture(QString file, GLuint& textureID);
-    void freeTexture(GLuint& textureID);
+  bool loadTexture(QString file, GLuint& textureID);
+  void freeTexture(GLuint& textureID);
 };
 
 #endif

@@ -17,9 +17,4 @@
 
 #include "workerpool.h"
 
-_WorkerPoolBase::_WorkerPoolBase(QObject* parent)
-  : QObject(parent)
-{
-}
-
-
+_WorkerPoolBase::_WorkerPoolBase(QObject* parent) : QObject(parent) {}

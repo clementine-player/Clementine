@@ -37,4 +37,4 @@ class ScopedTransaction : boost::noncopyable {
   bool pending_;
 };
 
-#endif // SCOPEDTRANSACTION_H
+#endif  // SCOPEDTRANSACTION_H

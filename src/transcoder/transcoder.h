@@ -18,6 +18,8 @@
 #ifndef TRANSCODER_H
 #define TRANSCODER_H
 
+#include <memory>
+
 #include <gst/gst.h>
 
 #include <QObject>
@@ -25,18 +27,12 @@
 #include <QEvent>
 #include <QMetaType>
 
-#include <boost/shared_ptr.hpp>
-#include <boost/scoped_ptr.hpp>
-
 #include "core/song.h"
-
 
 struct TranscoderPreset {
   TranscoderPreset() : type_(Song::Type_Unknown) {}
-  TranscoderPreset(Song::FileType type,
-                   const QString& name,
-                   const QString& extension,
-                   const QString& codec_mimetype,
+  TranscoderPreset(Song::FileType type, const QString& name,
+                   const QString& extension, const QString& codec_mimetype,
                    const QString& muxer_mimetype_ = QString());
 
   Song::FileType type_;
@@ -47,12 +43,11 @@ struct TranscoderPreset {
 };
 Q_DECLARE_METATYPE(TranscoderPreset);
 
-
 class Transcoder : public QObject {
   Q_OBJECT
 
  public:
-  Transcoder(QObject* parent = 0);
+  Transcoder(QObject* parent = nullptr);
 
   static TranscoderPreset PresetForFileType(Song::FileType type);
   static QList<TranscoderPreset> GetAllPresets();
@@ -71,7 +66,7 @@ class Transcoder : public QObject {
   void Start();
   void Cancel();
 
- signals:
+signals:
   void JobComplete(const QString& filename, bool success);
   void LogLine(const QString& message);
   void AllJobsComplete();
@@ -92,8 +87,11 @@ class Transcoder : public QObject {
   // job's thread.
   struct JobState {
     JobState(const Job& job, Transcoder* parent)
-      : job_(job), parent_(parent), pipeline_(NULL), convert_element_(NULL),
-        bus_callback_id_(0) {}
+        : job_(job),
+          parent_(parent),
+          pipeline_(nullptr),
+          convert_element_(nullptr),
+          bus_callback_id_(0) {}
     ~JobState();
 
     void PostFinished(bool success);
@@ -127,23 +125,24 @@ class Transcoder : public QObject {
   StartJobStatus MaybeStartNextJob();
   bool StartJob(const Job& job);
 
-  GstElement* CreateElement(const QString& factory_name, GstElement* bin = NULL,
+  GstElement* CreateElement(const QString& factory_name, GstElement* bin = nullptr,
                             const QString& name = QString());
   GstElement* CreateElementForMimeType(const QString& element_type,
                                        const QString& mime_type,
-                                       GstElement* bin = NULL);
+                                       GstElement* bin = nullptr);
   void SetElementProperties(const QString& name, GObject* element);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
-  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg, gpointer data);
+  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
+                                         gpointer data);
 
  private:
-  typedef QList<boost::shared_ptr<JobState> > JobStateList;
+  typedef QList<std::shared_ptr<JobState> > JobStateList;
 
   int max_threads_;
   QList<Job> queued_jobs_;
   JobStateList current_jobs_;
 };
 
-#endif // TRANSCODER_H
+#endif  // TRANSCODER_H

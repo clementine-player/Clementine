@@ -28,7 +28,7 @@ class QModelIndex;
 class LibrarySettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   LibrarySettingsPage(SettingsDialog* dialog);
   ~LibrarySettingsPage();
 
@@ -37,16 +37,16 @@ public:
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void Add();
   void Remove();
   void WriteAllSongsStatisticsToFiles();
 
   void CurrentRowChanged(const QModelIndex& index);
 
-private:
+ private:
   Ui_LibrarySettingsPage* ui_;
   bool initialised_model_;
 };
 
-#endif // LIBRARYSETTINGSPAGE_H
+#endif  // LIBRARYSETTINGSPAGE_H

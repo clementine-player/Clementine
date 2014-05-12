@@ -26,17 +26,17 @@ const int MultiLoadingIndicator::kVerticalPadding = 4;
 const int MultiLoadingIndicator::kHorizontalPadding = 6;
 const int MultiLoadingIndicator::kSpacing = 6;
 
-MultiLoadingIndicator::MultiLoadingIndicator(QWidget *parent)
-  : QWidget(parent),
-    spinner_(new BusyIndicator(this))
-{
+MultiLoadingIndicator::MultiLoadingIndicator(QWidget* parent)
+    : QWidget(parent), spinner_(new BusyIndicator(this)) {
   spinner_->move(kHorizontalPadding, kVerticalPadding);
   setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
 }
 
 QSize MultiLoadingIndicator::sizeHint() const {
-  const int width = kHorizontalPadding*2 + spinner_->sizeHint().width() + kSpacing + fontMetrics().width(text_);
-  const int height = kVerticalPadding*2 + qMax(spinner_->sizeHint().height(), fontMetrics().height());
+  const int width = kHorizontalPadding * 2 + spinner_->sizeHint().width() +
+                    kSpacing + fontMetrics().width(text_);
+  const int height = kVerticalPadding * 2 + qMax(spinner_->sizeHint().height(),
+                                                 fontMetrics().height());
 
   return QSize(width, height);
 }
@@ -50,7 +50,7 @@ void MultiLoadingIndicator::UpdateText() {
   QList<TaskManager::Task> tasks = task_manager_->GetTasks();
 
   QStringList strings;
-  foreach (const TaskManager::Task& task, tasks) {
+  for (const TaskManager::Task& task : tasks) {
     QString task_text(task.name);
     task_text[0] = task_text[0].toLower();
 
@@ -77,10 +77,11 @@ void MultiLoadingIndicator::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
   const QRect text_rect(
-        kHorizontalPadding + spinner_->sizeHint().width() + kSpacing,
-        kVerticalPadding,
-        width() - kHorizontalPadding*2 - spinner_->sizeHint().width() - kSpacing,
-        height() - kVerticalPadding*2);
-  p.drawText(text_rect, Qt::TextSingleLine | Qt::AlignLeft,
-             fontMetrics().elidedText(text_, Qt::ElideRight, text_rect.width()));
+      kHorizontalPadding + spinner_->sizeHint().width() + kSpacing,
+      kVerticalPadding, width() - kHorizontalPadding * 2 -
+                            spinner_->sizeHint().width() - kSpacing,
+      height() - kVerticalPadding * 2);
+  p.drawText(
+      text_rect, Qt::TextSingleLine | Qt::AlignLeft,
+      fontMetrics().elidedText(text_, Qt::ElideRight, text_rect.width()));
 }

@@ -56,7 +56,7 @@
 }
 @end
 
-class MacSystemTrayIconPrivate : boost::noncopyable {
+class MacSystemTrayIconPrivate {
  public:
   MacSystemTrayIconPrivate() {
     dock_menu_ = [[NSMenu alloc] initWithTitle:@"DockMenu"];
@@ -65,16 +65,16 @@ class MacSystemTrayIconPrivate : boost::noncopyable {
     NSString* t =
         [[NSString alloc] initWithUTF8String:title.toUtf8().constData()];
     now_playing_ =
-        [[NSMenuItem alloc] initWithTitle:t action:NULL keyEquivalent:@""];
+        [[NSMenuItem alloc] initWithTitle:t action:nullptr keyEquivalent:@""];
 
     now_playing_artist_ =
         [[NSMenuItem alloc] initWithTitle:@"Nothing to see here"
-                                   action:NULL
+                                   action:nullptr
                             keyEquivalent:@""];
 
     now_playing_title_ =
         [[NSMenuItem alloc] initWithTitle:@"Nothing to see here"
-                                   action:NULL
+                                   action:nullptr
                             keyEquivalent:@""];
 
     [dock_menu_ insertItem:now_playing_title_ atIndex:0];
@@ -159,6 +159,8 @@ class MacSystemTrayIconPrivate : boost::noncopyable {
   NSMenuItem* now_playing_;
   NSMenuItem* now_playing_artist_;
   NSMenuItem* now_playing_title_;
+
+  Q_DISABLE_COPY(MacSystemTrayIconPrivate);
 };
 
 MacSystemTrayIcon::MacSystemTrayIcon(QObject* parent)
@@ -175,7 +177,7 @@ MacSystemTrayIcon::~MacSystemTrayIcon() {}
 void MacSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
                                   QAction* stop, QAction* stop_after,
                                   QAction* next, QAction* mute, QAction* love,
-                                  QAction* ban, QAction* quit) {
+                                  QAction* quit) {
   p_.reset(new MacSystemTrayIconPrivate());
   SetupMenuItem(previous);
   SetupMenuItem(play);
@@ -186,7 +188,6 @@ void MacSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
   SetupMenuItem(mute);
   p_->AddSeparator();
   SetupMenuItem(love);
-  SetupMenuItem(ban);
   Q_UNUSED(quit);  // Mac already has a Quit item.
 }
 

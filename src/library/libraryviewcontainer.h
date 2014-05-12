@@ -27,8 +27,8 @@ class Ui_LibraryViewContainer;
 class LibraryViewContainer : public QWidget {
   Q_OBJECT
 
-public:
-  LibraryViewContainer(QWidget* parent = 0);
+ public:
+  LibraryViewContainer(QWidget* parent = nullptr);
   ~LibraryViewContainer();
 
   LibraryFilterWidget* filter() const;
@@ -36,8 +36,8 @@ public:
 
   void ReloadSettings();
 
-private:
+ private:
   Ui_LibraryViewContainer* ui_;
 };
 
-#endif // LIBRARYVIEWCONTAINER_H
+#endif  // LIBRARYVIEWCONTAINER_H

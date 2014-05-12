@@ -8,8 +8,6 @@
 #include <QProcess>
 #include <QTimer>
 
-#include <boost/shared_ptr.hpp>
-
 class Playlist;
 class SearchBoxWidget;
 class SpotifyServer;
@@ -19,7 +17,7 @@ class QMenu;
 class SpotifyService : public InternetService {
   Q_OBJECT
 
-public:
+ public:
   SpotifyService(Application* app, InternetModel* parent);
   ~SpotifyService();
 
@@ -31,9 +29,7 @@ public:
     Type_Toplist,
   };
 
-  enum Role {
-    Role_UserPlaylistIndex = InternetModel::RoleCount,
-  };
+  enum Role { Role_UserPlaylistIndex = InternetModel::RoleCount, };
 
   // Values are persisted - don't change.
   enum LoginState {
@@ -80,23 +76,24 @@ signals:
   void LoginFinished(bool success);
   void ImageLoaded(const QString& id, const QImage& image);
 
-public slots:
+ public slots:
   void Search(const QString& text, bool now = false);
   void ShowConfig();
 
-private:
+ private:
   void StartBlobProcess();
   void FillPlaylist(
       QStandardItem* item,
       const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks);
-  void FillPlaylist(QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response);
+  void FillPlaylist(QStandardItem* item,
+                    const pb::spotify::LoadPlaylistResponse& response);
   void EnsureMenuCreated();
   void ClearSearchResults();
 
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
   bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
 
-private slots:
+ private slots:
   void EnsureServerCreated(const QString& username = QString(),
                            const QString& password = QString());
   void BlobProcessError(QProcess::ProcessError error);
@@ -115,7 +112,7 @@ private slots:
   void SyncPlaylist();
   void BlobDownloadFinished();
 
-private:
+ private:
   SpotifyServer* server_;
 
   QString system_blob_path_;

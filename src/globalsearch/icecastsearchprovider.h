@@ -22,15 +22,15 @@
 
 class IcecastBackend;
 
-
 class IcecastSearchProvider : public BlockingSearchProvider {
-public:
-  IcecastSearchProvider(IcecastBackend* backend, Application* app, QObject* parent);
+ public:
+  IcecastSearchProvider(IcecastBackend* backend, Application* app,
+                        QObject* parent);
 
   ResultList Search(int id, const QString& query);
 
-private:
+ private:
   IcecastBackend* backend_;
 };
 
-#endif // ICECASTSEARCHPROVIDER_H
+#endif  // ICECASTSEARCHPROVIDER_H

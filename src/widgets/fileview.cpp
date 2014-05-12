@@ -21,7 +21,7 @@
 #include "core/filesystemmusicstorage.h"
 #include "core/mimedata.h"
 #include "ui/iconloader.h"
-#include "ui/mainwindow.h" // for filter information
+#include "ui/mainwindow.h"  // for filter information
 #include "ui/organiseerrordialog.h"
 
 #include <QKeyEvent>
@@ -29,19 +29,19 @@
 #include <QMessageBox>
 #include <QScrollBar>
 
-const char* FileView::kFileFilter = "*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma "
-                                    "*.mp4 *.spx *.wav *.m3u *.m3u8 *.pls *.xspf "
-                                    "*.asx *.asxini *.cue *.ape *.wv *.mka *.opus "
-                                    "*.oga *.mka *.mp2";
+const char* FileView::kFileFilter =
+    "*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma "
+    "*.mp4 *.spx *.wav *.m3u *.m3u8 *.pls *.xspf "
+    "*.asx *.asxini *.cue *.ape *.wv *.mka *.opus "
+    "*.oga *.mka *.mp2";
 
 FileView::FileView(QWidget* parent)
     : QWidget(parent),
       ui_(new Ui_FileView),
-      model_(NULL),
+      model_(nullptr),
       undo_stack_(new QUndoStack(this)),
-      task_manager_(NULL),
-      storage_(new FilesystemMusicStorage("/"))
-{
+      task_manager_(nullptr),
+      storage_(new FilesystemMusicStorage("/")) {
   ui_->setupUi(this);
 
   // Icons
@@ -54,27 +54,35 @@ FileView::FileView(QWidget* parent)
   connect(ui_->forward, SIGNAL(clicked()), undo_stack_, SLOT(redo()));
   connect(ui_->home, SIGNAL(clicked()), SLOT(FileHome()));
   connect(ui_->up, SIGNAL(clicked()), SLOT(FileUp()));
-  connect(ui_->path, SIGNAL(textChanged(QString)), SLOT(ChangeFilePath(QString)));
+  connect(ui_->path, SIGNAL(textChanged(QString)),
+          SLOT(ChangeFilePath(QString)));
 
-  connect(undo_stack_, SIGNAL(canUndoChanged(bool)), ui_->back, SLOT(setEnabled(bool)));
-  connect(undo_stack_, SIGNAL(canRedoChanged(bool)), ui_->forward, SLOT(setEnabled(bool)));
+  connect(undo_stack_, SIGNAL(canUndoChanged(bool)), ui_->back,
+          SLOT(setEnabled(bool)));
+  connect(undo_stack_, SIGNAL(canRedoChanged(bool)), ui_->forward,
+          SLOT(setEnabled(bool)));
 
-  connect(ui_->list, SIGNAL(activated(QModelIndex)), SLOT(ItemActivated(QModelIndex)));
-  connect(ui_->list, SIGNAL(doubleClicked(QModelIndex)), SLOT(ItemDoubleClick(QModelIndex)));
-  connect(ui_->list, SIGNAL(AddToPlaylist(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
-  connect(ui_->list, SIGNAL(CopyToLibrary(QList<QUrl>)), SIGNAL(CopyToLibrary(QList<QUrl>)));
-  connect(ui_->list, SIGNAL(MoveToLibrary(QList<QUrl>)), SIGNAL(MoveToLibrary(QList<QUrl>)));
-  connect(ui_->list, SIGNAL(CopyToDevice(QList<QUrl>)), SIGNAL(CopyToDevice(QList<QUrl>)));
+  connect(ui_->list, SIGNAL(activated(QModelIndex)),
+          SLOT(ItemActivated(QModelIndex)));
+  connect(ui_->list, SIGNAL(doubleClicked(QModelIndex)),
+          SLOT(ItemDoubleClick(QModelIndex)));
+  connect(ui_->list, SIGNAL(AddToPlaylist(QMimeData*)),
+          SIGNAL(AddToPlaylist(QMimeData*)));
+  connect(ui_->list, SIGNAL(CopyToLibrary(QList<QUrl>)),
+          SIGNAL(CopyToLibrary(QList<QUrl>)));
+  connect(ui_->list, SIGNAL(MoveToLibrary(QList<QUrl>)),
+          SIGNAL(MoveToLibrary(QList<QUrl>)));
+  connect(ui_->list, SIGNAL(CopyToDevice(QList<QUrl>)),
+          SIGNAL(CopyToDevice(QList<QUrl>)));
   connect(ui_->list, SIGNAL(Delete(QStringList)), SLOT(Delete(QStringList)));
-  connect(ui_->list, SIGNAL(EditTags(QList<QUrl>)), SIGNAL(EditTags(QList<QUrl>)));
+  connect(ui_->list, SIGNAL(EditTags(QList<QUrl>)),
+          SIGNAL(EditTags(QList<QUrl>)));
 
   QString filter(FileView::kFileFilter);
   filter_list_ << filter.split(" ");
 }
 
-FileView::~FileView() {
-  delete ui_;
-}
+FileView::~FileView() { delete ui_; }
 
 void FileView::SetPath(const QString& path) {
   if (!model_)
@@ -95,7 +103,7 @@ void FileView::FileUp() {
   // view scroll position.
   if (undo_stack_->canUndo()) {
     const UndoCommand* last_dir = static_cast<const UndoCommand*>(
-        undo_stack_->command(undo_stack_->index()-1));
+        undo_stack_->command(undo_stack_->index() - 1));
     if (last_dir->undo_path() == dir.path()) {
       undo_stack_->undo();
       return;
@@ -105,20 +113,16 @@ void FileView::FileUp() {
   ChangeFilePath(dir.path());
 }
 
-void FileView::FileHome() {
-  ChangeFilePath(QDir::homePath());
-}
+void FileView::FileHome() { ChangeFilePath(QDir::homePath()); }
 
 void FileView::ChangeFilePath(const QString& new_path_native) {
   QString new_path = QDir::fromNativeSeparators(new_path_native);
 
   QFileInfo info(new_path);
-  if (!info.exists() || !info.isDir())
-    return;
+  if (!info.exists() || !info.isDir()) return;
 
   QString old_path(model_->rootPath());
-  if (old_path == new_path)
-    return;
+  if (old_path == new_path) return;
 
   undo_stack_->push(new UndoCommand(this, new_path));
 }
@@ -134,13 +138,11 @@ void FileView::ChangeFilePathWithoutUndo(const QString& new_path) {
 }
 
 void FileView::ItemActivated(const QModelIndex& index) {
-  if (model_->isDir(index))
-    ChangeFilePath(model_->filePath(index));
+  if (model_->isDir(index)) ChangeFilePath(model_->filePath(index));
 }
 
 void FileView::ItemDoubleClick(const QModelIndex& index) {
-  if (model_->isDir(index))
-    return;
+  if (model_->isDir(index)) return;
 
   QString file_path = model_->filePath(index);
 
@@ -152,10 +154,8 @@ void FileView::ItemDoubleClick(const QModelIndex& index) {
   emit AddToPlaylist(data);
 }
 
-
 FileView::UndoCommand::UndoCommand(FileView* view, const QString& new_path)
-  : view_(view)
-{
+    : view_(view) {
   old_state_.path = view->model_->rootPath();
   old_state_.scroll_pos = view_->ui_->list->verticalScrollBar()->value();
   old_state_.index = view_->ui_->list->currentIndex();
@@ -181,22 +181,23 @@ void FileView::UndoCommand::undo() {
 }
 
 void FileView::Delete(const QStringList& filenames) {
-  if (filenames.isEmpty())
-    return;
+  if (filenames.isEmpty()) return;
 
   if (QMessageBox::warning(this, tr("Delete files"),
-        tr("These files will be permanently deleted from disk, are you sure you want to continue?"),
-        QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
+                           tr("These files will be permanently deleted from "
+                              "disk, are you sure you want to continue?"),
+                           QMessageBox::Yes,
+                           QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
   DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage_);
-  connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
+  connect(delete_files, SIGNAL(Finished(SongList)),
+          SLOT(DeleteFinished(SongList)));
   delete_files->Start(filenames);
 }
 
 void FileView::DeleteFinished(const SongList& songs_with_errors) {
-  if (songs_with_errors.isEmpty())
-    return;
+  if (songs_with_errors.isEmpty()) return;
 
   OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
@@ -206,11 +207,10 @@ void FileView::DeleteFinished(const SongList& songs_with_errors) {
 void FileView::showEvent(QShowEvent* e) {
   QWidget::showEvent(e);
 
-  if (model_)
-    return;
+  if (model_) return;
 
   model_ = new QFileSystemModel(this);
-  
+
   model_->setNameFilters(filter_list_);
   // if an item fails the filter, hide it
   model_->setNameFilterDisables(false);
@@ -218,8 +218,7 @@ void FileView::showEvent(QShowEvent* e) {
   ui_->list->setModel(model_);
   ChangeFilePathWithoutUndo(QDir::homePath());
 
-  if (!lazy_set_path_.isEmpty())
-    ChangeFilePathWithoutUndo(lazy_set_path_);
+  if (!lazy_set_path_.isEmpty()) ChangeFilePathWithoutUndo(lazy_set_path_);
 }
 
 void FileView::keyPressEvent(QKeyEvent* e) {

@@ -30,16 +30,12 @@ namespace {
 
 static const char* kDriveEditFileUrl = "https://docs.google.com/file/d/%1/edit";
 static const char* kServiceId = "google_drive";
-
 }
 
-
 GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
-    : CloudFileService(
-        app, parent,
-        kServiceName, kServiceId,
-        QIcon(":/providers/googledrive.png"),
-        SettingsDialog::Page_GoogleDrive),
+    : CloudFileService(app, parent, kServiceName, kServiceId,
+                       QIcon(":/providers/googledrive.png"),
+                       SettingsDialog::Page_GoogleDrive),
       client_(new google_drive::Client(this)) {
   app->player()->RegisterUrlHandler(new GoogleDriveUrlHandler(this, this));
 }
@@ -57,9 +53,8 @@ QString GoogleDriveService::refresh_token() const {
 
 void GoogleDriveService::Connect() {
   google_drive::ConnectResponse* response = client_->Connect(refresh_token());
-  NewClosure(response, SIGNAL(Finished()),
-             this, SLOT(ConnectFinished(google_drive::ConnectResponse*)),
-             response);
+  NewClosure(response, SIGNAL(Finished()), this,
+             SLOT(ConnectFinished(google_drive::ConnectResponse*)), response);
 }
 
 void GoogleDriveService::ForgetCredentials() {
@@ -73,24 +68,41 @@ void GoogleDriveService::ForgetCredentials() {
 }
 
 void GoogleDriveService::ListChanges(const QString& cursor) {
-  google_drive::ListChangesResponse* changes_response = client_->ListChanges(cursor);
+  google_drive::ListChangesResponse* changes_response =
+      client_->ListChanges(cursor);
   connect(changes_response, SIGNAL(FilesFound(QList<google_drive::File>)),
           SLOT(FilesFound(QList<google_drive::File>)));
   connect(changes_response, SIGNAL(FilesDeleted(QList<QUrl>)),
           SLOT(FilesDeleted(QList<QUrl>)));
-  NewClosure(changes_response, SIGNAL(Finished()),
-             this, SLOT(ListChangesFinished(google_drive::ListChangesResponse*)),
+  NewClosure(changes_response, SIGNAL(Finished()), this,
+             SLOT(ListChangesFinished(google_drive::ListChangesResponse*)),
              changes_response);
 }
 
-void GoogleDriveService::ListChangesFinished(google_drive::ListChangesResponse* changes_response) {
+void GoogleDriveService::ListChangesFinished(
+    google_drive::ListChangesResponse* changes_response) {
   changes_response->deleteLater();
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  s.setValue("cursor", changes_response->next_cursor());
+
+  const QString cursor = changes_response->next_cursor();
+  if (is_indexing()) {
+    // Only save the cursor after all the songs have been indexed - that way if
+    // Clementine is closed it'll resume next time.
+    NewClosure(this, SIGNAL(AllIndexingTasksFinished()),
+               this, SLOT(SaveCursor(QString)),
+               cursor);
+  } else {
+    SaveCursor(cursor);
+  }
 }
 
-void GoogleDriveService::ConnectFinished(google_drive::ConnectResponse* response) {
+void GoogleDriveService::SaveCursor(const QString& cursor) {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("cursor", cursor);
+}
+
+void GoogleDriveService::ConnectFinished(
+    google_drive::ConnectResponse* response) {
   response->deleteLater();
 
   // Save the refresh token
@@ -121,7 +133,7 @@ void GoogleDriveService::EnsureConnected() {
 }
 
 void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
-  foreach (const google_drive::File& file, files) {
+  for (const google_drive::File& file : files) {
     if (!IsSupportedMimeType(file.mime_type())) {
       continue;
     }
@@ -145,16 +157,13 @@ void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
       song.set_title(file.title());
     }
 
-    MaybeAddFileToDatabase(
-        song,
-        file.mime_type(),
-        file.download_url(), 
-        QString("Bearer %1").arg(client_->access_token()));
+    MaybeAddFileToDatabase(song, file.mime_type(), file.download_url(),
+                           QString("Bearer %1").arg(client_->access_token()));
   }
 }
 
 void GoogleDriveService::FilesDeleted(const QList<QUrl>& files) {
-  foreach (const QUrl& url, files) {
+  for (const QUrl& url : files) {
     Song song = library_backend_->GetSongByUrl(url);
     qLog(Debug) << "Deleting:" << url << song.title();
     if (song.is_valid()) {
@@ -181,25 +190,20 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
     open_in_drive_action_ = context_menu_->addAction(
-          QIcon(":/providers/googledrive.png"), tr("Open in Google Drive"),
-          this, SLOT(OpenWithDrive()));
+        QIcon(":/providers/googledrive.png"), tr("Open in Google Drive"), this,
+        SLOT(OpenWithDrive()));
     context_menu_->addSeparator();
-    context_menu_->addAction(
-        IconLoader::Load("download"),
-        tr("Cover Manager"),
-        this,
-        SLOT(ShowCoverManager()));
-    context_menu_->addAction(IconLoader::Load("configure"),
-                             tr("Configure..."),
+    context_menu_->addAction(IconLoader::Load("download"), tr("Cover Manager"),
+                             this, SLOT(ShowCoverManager()));
+    context_menu_->addAction(IconLoader::Load("configure"), tr("Configure..."),
                              this, SLOT(ShowSettingsDialog()));
   }
 
   // Only show some actions if there are real songs selected
   bool songs_selected = false;
-  foreach (const QModelIndex& index, model()->selected_indexes()) {
+  for (const QModelIndex& index : model()->selected_indexes()) {
     const int type = index.data(LibraryModel::Role_Type).toInt();
-    if (type == LibraryItem::Type_Song ||
-        type == LibraryItem::Type_Container) {
+    if (type == LibraryItem::Type_Song || type == LibraryItem::Type_Container) {
       songs_selected = true;
       break;
     }
@@ -213,15 +217,15 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
 void GoogleDriveService::OpenWithDrive() {
   // Map indexes to the actual library model.
   QModelIndexList library_indexes;
-  foreach (const QModelIndex& index, model()->selected_indexes()) {
+  for (const QModelIndex& index : model()->selected_indexes()) {
     if (index.model() == library_sort_model_) {
       library_indexes << library_sort_model_->mapToSource(index);
     }
   }
 
   // Ask the library for the songs for these indexes.
-  foreach (const Song& song, library_model_->GetChildSongs(library_indexes)) {
+  for (const Song& song : library_model_->GetChildSongs(library_indexes)) {
     QDesktopServices::openUrl(
-          QUrl(QString(kDriveEditFileUrl).arg(song.url().path())));
+        QUrl(QString(kDriveEditFileUrl).arg(song.url().path())));
   }
 }

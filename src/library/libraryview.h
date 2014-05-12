@@ -18,13 +18,13 @@
 #ifndef LIBRARYVIEW_H
 #define LIBRARYVIEW_H
 
-#include "core/song.h"
-#include "ui/edittagdialog.h"
-#include "widgets/autoexpandingtreeview.h"
+#include <memory>
 
 #include <QStyledItemDelegate>
 
-#include <boost/scoped_ptr.hpp>
+#include "core/song.h"
+#include "ui/edittagdialog.h"
+#include "widgets/autoexpandingtreeview.h"
 
 class Application;
 class LibraryFilterWidget;
@@ -32,25 +32,28 @@ class OrganiseDialog;
 
 class QMimeData;
 
-namespace smart_playlists { class Wizard; }
+namespace smart_playlists {
+class Wizard;
+}
 
 class LibraryItemDelegate : public QStyledItemDelegate {
   Q_OBJECT
 
-public:
+ public:
   LibraryItemDelegate(QObject* parent);
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option,
+             const QModelIndex& index) const;
 
-public slots:
-  bool helpEvent(QHelpEvent *event, QAbstractItemView *view,
-                 const QStyleOptionViewItem &option, const QModelIndex &index);
+ public slots:
+  bool helpEvent(QHelpEvent* event, QAbstractItemView* view,
+                 const QStyleOptionViewItem& option, const QModelIndex& index);
 };
 
 class LibraryView : public AutoExpandingTreeView {
   Q_OBJECT
 
  public:
-  LibraryView(QWidget* parent = 0);
+  LibraryView(QWidget* parent = nullptr);
   ~LibraryView();
 
   static const char* kSettingsGroup;
@@ -64,7 +67,7 @@ class LibraryView : public AutoExpandingTreeView {
   void SetFilter(LibraryFilterWidget* filter);
 
   // QTreeView
-  void keyboardSearch(const QString &search);
+  void keyboardSearch(const QString& search);
   void scrollTo(const QModelIndex& index, ScrollHint hint = EnsureVisible);
 
  public slots:
@@ -76,7 +79,7 @@ class LibraryView : public AutoExpandingTreeView {
   void SaveFocus();
   void RestoreFocus();
 
- signals:
+signals:
   void ShowConfigDialog();
 
  protected:
@@ -140,8 +143,8 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* edit_smart_playlist_;
   QAction* delete_smart_playlist_;
 
-  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
-  boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
+  std::unique_ptr<OrganiseDialog> organise_dialog_;
+  std::unique_ptr<EditTagDialog> edit_tag_dialog_;
 
   bool is_in_keyboard_search_;
 
@@ -151,4 +154,4 @@ class LibraryView : public AutoExpandingTreeView {
   QSet<QString> last_selected_path_;
 };
 
-#endif // LIBRARYVIEW_H
+#endif  // LIBRARYVIEW_H

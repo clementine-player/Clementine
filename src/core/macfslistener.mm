@@ -25,7 +25,7 @@
 #include "core/scoped_nsobject.h"
 
 MacFSListener::MacFSListener(QObject* parent)
-    : FileSystemWatcherInterface(parent), run_loop_(NULL), stream_(NULL) {
+    : FileSystemWatcherInterface(parent), run_loop_(nullptr), stream_(nullptr) {
   update_timer_.setSingleShot(true);
   update_timer_.setInterval(2000);
   connect(&update_timer_, SIGNAL(timeout()), SLOT(UpdateStream()));
@@ -73,7 +73,7 @@ void MacFSListener::UpdateStream() {
     FSEventStreamStop(stream_);
     FSEventStreamInvalidate(stream_);
     FSEventStreamRelease(stream_);
-    stream_ = NULL;
+    stream_ = nullptr;
   }
 
   if (paths_.empty()) {
@@ -93,7 +93,7 @@ void MacFSListener::UpdateStream() {
   context.info = this;
   CFAbsoluteTime latency = 1.0;
 
-  stream_ = FSEventStreamCreate(NULL, &EventStreamCallback, &context,  // Copied
+  stream_ = FSEventStreamCreate(nullptr, &EventStreamCallback, &context,  // Copied
                                 reinterpret_cast<CFArrayRef>(array.get()),
                                 kFSEventStreamEventIdSinceNow, latency,
                                 kFSEventStreamCreateFlagNone);

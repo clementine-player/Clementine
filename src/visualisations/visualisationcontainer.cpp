@@ -47,18 +47,17 @@ const int VisualisationContainer::kDefaultHeight = 512;
 const int VisualisationContainer::kDefaultFps = kHighFramerate;
 const int VisualisationContainer::kDefaultTextureSize = 512;
 
-VisualisationContainer::VisualisationContainer(QWidget *parent)
-  : QGraphicsView(parent),
-    initialised_(false),
-    engine_(NULL),
-    vis_(new ProjectMVisualisation(this)),
-    overlay_(new VisualisationOverlay),
-    selector_(new VisualisationSelector(this)),
-    overlay_proxy_(NULL),
-    menu_(new QMenu(this)),
-    fps_(kDefaultFps),
-    size_(kDefaultTextureSize)
-{
+VisualisationContainer::VisualisationContainer(QWidget* parent)
+    : QGraphicsView(parent),
+      initialised_(false),
+      engine_(nullptr),
+      vis_(new ProjectMVisualisation(this)),
+      overlay_(new VisualisationOverlay),
+      selector_(new VisualisationSelector(this)),
+      overlay_proxy_(nullptr),
+      menu_(new QMenu(this)),
+      fps_(kDefaultFps),
+      size_(kDefaultTextureSize) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   if (!restoreGeometry(s.value("geometry").toByteArray())) {
@@ -87,7 +86,8 @@ void VisualisationContainer::Init() {
 
   // Add the overlay
   overlay_proxy_ = scene()->addWidget(overlay_);
-  connect(overlay_, SIGNAL(OpacityChanged(qreal)), SLOT(ChangeOverlayOpacity(qreal)));
+  connect(overlay_, SIGNAL(OpacityChanged(qreal)),
+          SLOT(ChangeOverlayOpacity(qreal)));
   connect(overlay_, SIGNAL(ShowPopupMenu(QPoint)), SLOT(ShowPopupMenu(QPoint)));
   ChangeOverlayOpacity(0.0);
 
@@ -104,32 +104,40 @@ void VisualisationContainer::Init() {
   QMenu* fps_menu = menu_->addMenu(tr("Framerate"));
   QSignalMapper* fps_mapper = new QSignalMapper(this);
   QActionGroup* fps_group = new QActionGroup(this);
-  AddMenuItem(tr("Low (%1 fps)").arg(kLowFramerate), kLowFramerate, fps_, fps_group, fps_mapper);
-  AddMenuItem(tr("Medium (%1 fps)").arg(kMediumFramerate), kMediumFramerate, fps_, fps_group, fps_mapper);
-  AddMenuItem(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate, fps_, fps_group, fps_mapper);
-  AddMenuItem(tr("Super high (%1 fps)").arg(kSuperHighFramerate), kSuperHighFramerate, fps_, fps_group, fps_mapper);
+  AddMenuItem(tr("Low (%1 fps)").arg(kLowFramerate), kLowFramerate, fps_,
+              fps_group, fps_mapper);
+  AddMenuItem(tr("Medium (%1 fps)").arg(kMediumFramerate), kMediumFramerate,
+              fps_, fps_group, fps_mapper);
+  AddMenuItem(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate, fps_,
+              fps_group, fps_mapper);
+  AddMenuItem(tr("Super high (%1 fps)").arg(kSuperHighFramerate),
+              kSuperHighFramerate, fps_, fps_group, fps_mapper);
   fps_menu->addActions(fps_group->actions());
   connect(fps_mapper, SIGNAL(mapped(int)), SLOT(SetFps(int)));
 
-  QMenu* quality_menu = menu_->addMenu(tr("Quality"));
+  QMenu* quality_menu = menu_->addMenu(tr("Quality", "Visualisation quality"));
   QSignalMapper* quality_mapper = new QSignalMapper(this);
   QActionGroup* quality_group = new QActionGroup(this);
   AddMenuItem(tr("Low (256x256)"), 256, size_, quality_group, quality_mapper);
-  AddMenuItem(tr("Medium (512x512)"), 512, size_, quality_group, quality_mapper);
-  AddMenuItem(tr("High (1024x1024)"), 1024, size_, quality_group, quality_mapper);
-  AddMenuItem(tr("Super high (2048x2048)"), 2048, size_, quality_group, quality_mapper);
+  AddMenuItem(tr("Medium (512x512)"), 512, size_, quality_group,
+              quality_mapper);
+  AddMenuItem(tr("High (1024x1024)"), 1024, size_, quality_group,
+              quality_mapper);
+  AddMenuItem(tr("Super high (2048x2048)"), 2048, size_, quality_group,
+              quality_mapper);
   quality_menu->addActions(quality_group->actions());
   connect(quality_mapper, SIGNAL(mapped(int)), SLOT(SetQuality(int)));
 
   menu_->addAction(tr("Select visualizations..."), selector_, SLOT(show()));
 
   menu_->addSeparator();
-  menu_->addAction(IconLoader::Load("application-exit"), tr("Close visualization"),
-                   this, SLOT(hide()));
+  menu_->addAction(IconLoader::Load("application-exit"),
+                   tr("Close visualization"), this, SLOT(hide()));
 }
 
-void VisualisationContainer::AddMenuItem(const QString &name, int value, int def,
-                                         QActionGroup* group, QSignalMapper *mapper) {
+void VisualisationContainer::AddMenuItem(const QString& name, int value,
+                                         int def, QActionGroup* group,
+                                         QSignalMapper* mapper) {
   QAction* action = group->addAction(name);
   action->setCheckable(true);
   action->setChecked(value == def);
@@ -140,8 +148,7 @@ void VisualisationContainer::AddMenuItem(const QString &name, int value, int def
 void VisualisationContainer::SetEngine(GstEngine* engine) {
   engine_ = engine;
 
-  if (isVisible())
-    engine_->AddBufferConsumer(vis_);
+  if (isVisible()) engine_->AddBufferConsumer(vis_);
 }
 
 void VisualisationContainer::showEvent(QShowEvent* e) {
@@ -149,8 +156,9 @@ void VisualisationContainer::showEvent(QShowEvent* e) {
     if (!QGLFormat::hasOpenGL()) {
       hide();
       QMessageBox::warning(this, tr("Clementine Visualization"),
-          tr("Your system is missing OpenGL support, visualizations are unavailable."),
-          QMessageBox::Close);
+                           tr("Your system is missing OpenGL support, "
+                              "visualizations are unavailable."),
+                           QMessageBox::Close);
       return;
     }
     Init();
@@ -160,16 +168,14 @@ void VisualisationContainer::showEvent(QShowEvent* e) {
   QGraphicsView::showEvent(e);
   update_timer_.start(1000 / fps_, this);
 
-  if (engine_)
-    engine_->AddBufferConsumer(vis_);
+  if (engine_) engine_->AddBufferConsumer(vis_);
 }
 
 void VisualisationContainer::hideEvent(QHideEvent* e) {
   QGraphicsView::hideEvent(e);
   update_timer_.stop();
 
-  if (engine_)
-    engine_->RemoveBufferConsumer(vis_);
+  if (engine_) engine_->RemoveBufferConsumer(vis_);
 }
 
 void VisualisationContainer::resizeEvent(QResizeEvent* e) {
@@ -184,27 +190,25 @@ void VisualisationContainer::SizeChanged() {
   s.setValue("geometry", saveGeometry());
 
   // Resize the scene
-  if (scene())
-    scene()->setSceneRect(QRect(QPoint(0, 0), size()));
+  if (scene()) scene()->setSceneRect(QRect(QPoint(0, 0), size()));
 
   // Resize the overlay
-  if (overlay_)
-    overlay_->resize(size());
+  if (overlay_) overlay_->resize(size());
 }
 
 void VisualisationContainer::timerEvent(QTimerEvent* e) {
   QGraphicsView::timerEvent(e);
-  if (e->timerId() == update_timer_.timerId())
-    scene()->update();
+  if (e->timerId() == update_timer_.timerId()) scene()->update();
 }
 
-void VisualisationContainer::SetActions(QAction *previous, QAction *play_pause,
-                                        QAction *stop, QAction *next) {
+void VisualisationContainer::SetActions(QAction* previous, QAction* play_pause,
+                                        QAction* stop, QAction* next) {
   overlay_->SetActions(previous, play_pause, stop, next);
 }
 
-void VisualisationContainer::SongMetadataChanged(const Song &metadata) {
-  overlay_->SetSongTitle(QString("%1 - %2").arg(metadata.artist(), metadata.title()));
+void VisualisationContainer::SongMetadataChanged(const Song& metadata) {
+  overlay_->SetSongTitle(
+      QString("%1 - %2").arg(metadata.artist(), metadata.title()));
 }
 
 void VisualisationContainer::Stopped() {
@@ -241,14 +245,13 @@ void VisualisationContainer::mouseDoubleClickEvent(QMouseEvent* e) {
   ToggleFullscreen();
 }
 
-void VisualisationContainer::contextMenuEvent(QContextMenuEvent *event) {
+void VisualisationContainer::contextMenuEvent(QContextMenuEvent* event) {
   QGraphicsView::contextMenuEvent(event);
   ShowPopupMenu(event->pos());
 }
 
-void VisualisationContainer::keyReleaseEvent(QKeyEvent *event) {
-  if (event->matches(QKeySequence::Close) ||
-      event->key() == Qt::Key_Escape) {
+void VisualisationContainer::keyReleaseEvent(QKeyEvent* event) {
+  if (event->matches(QKeySequence::Close) || event->key() == Qt::Key_Escape) {
     if (isFullScreen())
       ToggleFullscreen();
     else
@@ -279,7 +282,7 @@ void VisualisationContainer::SetFps(int fps) {
   update_timer_.start(1000 / fps_, this);
 }
 
-void VisualisationContainer::ShowPopupMenu(const QPoint &pos) {
+void VisualisationContainer::ShowPopupMenu(const QPoint& pos) {
   menu_->popup(mapToGlobal(pos));
 }
 

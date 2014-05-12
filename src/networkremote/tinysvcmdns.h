@@ -12,11 +12,8 @@ class TinySVCMDNS : public Zeroconf {
   virtual ~TinySVCMDNS();
 
  protected:
-  virtual void PublishInternal(
-      const QString& domain,
-      const QString& type,
-      const QByteArray& name,
-      quint16 port);
+  virtual void PublishInternal(const QString& domain, const QString& type,
+                               const QByteArray& name, quint16 port);
 
  private:
   void CreateMdnsd(uint32_t ipv4, QString ipv6);

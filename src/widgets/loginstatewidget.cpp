@@ -25,10 +25,7 @@
 #include <QTimer>
 
 LoginStateWidget::LoginStateWidget(QWidget* parent)
-  : QWidget(parent),
-    ui_(new Ui_LoginStateWidget),
-    state_(LoggedOut)
-{
+    : QWidget(parent), ui_(new Ui_LoginStateWidget), state_(LoggedOut) {
   ui_->setupUi(this);
   ui_->signed_in->hide();
   ui_->expires->hide();
@@ -44,9 +41,7 @@ LoginStateWidget::LoginStateWidget(QWidget* parent)
   connect(ui_->sign_out, SIGNAL(clicked()), SLOT(Logout()));
 }
 
-LoginStateWidget::~LoginStateWidget() {
-  delete ui_;
-}
+LoginStateWidget::~LoginStateWidget() { delete ui_; }
 
 void LoginStateWidget::Logout() {
   SetLoggedIn(LoggedOut);
@@ -72,9 +67,10 @@ void LoginStateWidget::SetLoggedIn(State state, const QString& account_name) {
   if (account_name.isEmpty())
     ui_->signed_in_label->setText("<b>" + tr("You are signed in.") + "</b>");
   else
-    ui_->signed_in_label->setText(tr("You are signed in as %1.").arg("<b>" + account_name + "</b>"));
+    ui_->signed_in_label->setText(
+        tr("You are signed in as %1.").arg("<b>" + account_name + "</b>"));
 
-  foreach (QWidget* widget, credential_groups_) {
+  for (QWidget* widget : credential_groups_) {
     widget->setVisible(state != LoggedIn);
     widget->setEnabled(state != LoginInProgress);
   }
@@ -139,7 +135,7 @@ void LoginStateWidget::SetExpires(const QDate& expires) {
 
   if (expires.isValid()) {
     const QString expires_text = expires.toString(Qt::SystemLocaleLongDate);
-    ui_->expires_label->setText(tr("Expires on %1").arg("<b>" + expires_text + "</b>"));
+    ui_->expires_label->setText(
+        tr("Expires on %1").arg("<b>" + expires_text + "</b>"));
   }
 }
-

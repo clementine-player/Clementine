@@ -10,11 +10,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # 현구 임 <bradlim980@gmail.com>, 2012
 # kladess <kladess@gmail.com>, 2013
+# kladess <kladess@gmail.com>, 2014
 # Thomas Min <thomas.min.v2@gmail.com>, 2013
+# whdgmawkd <whdgmawkd@naver.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-01-27 02:54+0000\n"
+"PO-Revision-Date: 2014-05-11 07:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +24,7 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: playlist/playlistlistview.cpp:39
+#: playlist/playlistlistview.cpp:37
 msgid ""
 "\n"
 "\n"
@@ -47,9 +49,9 @@ msgstr "일"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:305
-#: ../bin/src/ui_playbacksettingspage.h:308
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:318
+#: ../bin/src/ui_playbacksettingspage.h:321
+#: ../bin/src/ui_playbacksettingspage.h:335
 msgid " ms"
 msgstr " ms"
 
@@ -62,11 +64,16 @@ msgstr " pt"
 msgid " seconds"
 msgstr " 초"
 
-#: ../bin/src/ui_querysortpage.h:143
+#: ../bin/src/ui_querysortpage.h:144
 msgid " songs"
 msgstr " 노래"
 
-#: widgets/osd.cpp:193
+#: internet/vkservice.cpp:145
+#, qt-format
+msgid "%1 (%2 songs)"
+msgstr "%1 (%2 곡)"
+
+#: widgets/osd.cpp:190
 #, qt-format
 msgid "%1 albums"
 msgstr "%1개 앨범"
@@ -76,12 +83,12 @@ msgstr "%1개 앨범"
 msgid "%1 days"
 msgstr "%1일"
 
-#: core/utilities.cpp:131
+#: core/utilities.cpp:129
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1일 전"
 
-#: podcasts/gpoddersync.cpp:79
+#: podcasts/gpoddersync.cpp:81
 #, qt-format
 msgid "%1 on %2"
 msgstr ""
@@ -91,48 +98,48 @@ msgstr ""
 msgid "%1 playlists (%2)"
 msgstr "%1 재생목록 (%2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:381
 #, qt-format
 msgid "%1 selected of"
 msgstr "다음 중 %1개 선택됨"
 
-#: devices/deviceview.cpp:123
+#: devices/deviceview.cpp:125
 #, qt-format
 msgid "%1 song"
 msgstr "%1개 노래"
 
-#: devices/deviceview.cpp:125
+#: devices/deviceview.cpp:127
 #, qt-format
 msgid "%1 songs"
 msgstr "%1개 노래"
 
-#: smartplaylists/searchpreview.cpp:133
+#: smartplaylists/searchpreview.cpp:132
 #, qt-format
 msgid "%1 songs found"
 msgstr "%1개 노래 찾음"
 
-#: smartplaylists/searchpreview.cpp:130
+#: smartplaylists/searchpreview.cpp:128
 #, qt-format
 msgid "%1 songs found (showing %2)"
 msgstr "%1개 노래 찾음 (%2개 표시 중)"
 
-#: playlist/playlistmanager.cpp:419
+#: playlist/playlistmanager.cpp:387
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1개 트랙"
 
-#: ui/albumcovermanager.cpp:459
+#: ui/albumcovermanager.cpp:466
 #, qt-format
 msgid "%1 transferred"
-msgstr "%1 이동함"
+msgstr "%1 이동됨"
 
-#: widgets/osd.cpp:243 widgets/osd.cpp:248 widgets/osd.cpp:253
-#: widgets/osd.cpp:258 widgets/osd.cpp:263 widgets/osd.cpp:268
+#: widgets/osd.cpp:237 widgets/osd.cpp:243 widgets/osd.cpp:249
+#: widgets/osd.cpp:255 widgets/osd.cpp:261 widgets/osd.cpp:268
 #, qt-format
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii 리모컨 모듈"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:94
+#: songinfo/lastfmtrackinfoprovider.cpp:95
 #, qt-format
 msgid "%L1 other listeners"
 msgstr "다른 청취자 %L1명"
@@ -146,18 +153,21 @@ msgstr "총 %L1번 재생"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:207
+#: transcoder/transcodedialog.cpp:205
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "%n failed"
-msgstr "%n 실패함"
+msgstr "%n 실패"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:200
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "%n finished"
 msgstr "%n 끝냄"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:194
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "%n remaining"
 msgstr "%n 남음"
 
@@ -169,24 +179,24 @@ msgstr "글자 정렬(&A)"
 msgid "&Center"
 msgstr "가운데(&C)"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:178
+#: ../bin/src/ui_globalshortcutssettingspage.h:188
 msgid "&Custom"
 msgstr "사용자 정의(&C)"
 
-#: ../bin/src/ui_mainwindow.h:735
+#: ../bin/src/ui_mainwindow.h:717
 msgid "&Extras"
 msgstr "효과음(&E)"
 
-#: ../bin/src/ui_mainwindow.h:734
+#: ../bin/src/ui_mainwindow.h:716
 msgid "&Help"
 msgstr "도움말(&H)"
 
-#: playlist/playlistheader.cpp:70
+#: playlist/playlistheader.cpp:73
 #, qt-format
 msgid "&Hide %1"
 msgstr "%1 숨김(&H)"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:32
 msgid "&Hide..."
 msgstr "숨기기(&H)..."
 
@@ -194,23 +204,23 @@ msgstr "숨기기(&H)..."
 msgid "&Left"
 msgstr "왼쪽(&L)"
 
-#: ../bin/src/ui_mainwindow.h:732
+#: ../bin/src/ui_mainwindow.h:714
 msgid "&Music"
 msgstr "음악(&M)"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:186
 msgid "&None"
 msgstr "없음(&N)"
 
-#: ../bin/src/ui_mainwindow.h:733
+#: ../bin/src/ui_mainwindow.h:715
 msgid "&Playlist"
 msgstr "재생목록(&P)"
 
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:644
 msgid "&Quit"
 msgstr "종료(&Q)"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:680
 msgid "&Repeat mode"
 msgstr "반복 모드(&R)"
 
@@ -218,23 +228,23 @@ msgstr "반복 모드(&R)"
 msgid "&Right"
 msgstr "오른쪽(&R)"
 
-#: ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:679
 msgid "&Shuffle mode"
 msgstr "셔플 모드(&S)"
 
-#: playlist/playlistheader.cpp:34
+#: playlist/playlistheader.cpp:33
 msgid "&Stretch columns to fit window"
 msgstr "창 크기에 맞게 글자열 넓히기(&S)"
 
-#: ../bin/src/ui_mainwindow.h:736
+#: ../bin/src/ui_mainwindow.h:718
 msgid "&Tools"
 msgstr "도구(&T)"
 
-#: ui/edittagdialog.cpp:48
+#: ui/edittagdialog.cpp:49
 msgid "(different across multiple songs)"
 msgstr "(전반적으로 다양한 곡)"
 
-#: ui/about.cpp:77
+#: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
 msgstr "...그리고 Amarok에 기여해 주신 모든 분들"
 
@@ -254,13 +264,9 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1일"
 
-#: playlist/playlistmanager.cpp:419
+#: playlist/playlistmanager.cpp:387
 msgid "1 track"
 msgstr "1개 트랙"
-
-#: ../bin/src/ui_networkremotesettingspage.h:201
-msgid "127.0.0.1"
-msgstr "127.0.0.1"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
@@ -271,19 +277,13 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:60
+#: library/library.cpp:62
 msgid "50 random tracks"
 msgstr "무작위 50개 트랙"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">프리미엄으로 업그레이드하기</a>"
-
-#: ../bin/src/ui_ubuntuonesettingspage.h:133
-msgid ""
-"<a href=\"https://one.ubuntu.com/auth/login\">Create a new account or reset "
-"your password</a>"
-msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -295,6 +295,17 @@ msgid ""
 "music players might not be able to read them.</p></body></html>"
 msgstr ""
 
+#: ../bin/src/ui_libraryfilterwidget.h:97
+#, qt-format
+msgid ""
+"<html><head/><body><p>Prefix a word with a field name to limit the search to"
+" that field, e.g. <span style=\" font-weight:600;\">artist:</span><span "
+"style=\" font-style:italic;\">Bode</span> searches the library for all "
+"artists that contain the word Bode.</p><p><span style=\" font-"
+"weight:600;\">Available fields: </span><span style=\" font-"
+"style:italic;\">%1</span>.</p></body></html>"
+msgstr ""
+
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
@@ -303,38 +314,38 @@ msgid ""
 "activated.</p></body></html>"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:199
+#: ../bin/src/ui_organisedialog.h:245
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>토큰은 %로 시작하니다, 예제: %artist %album %title </p>⏎\n⏎\n<p>만약 중괄호를 포함하고 있는 토큰을 포함한 텍스트 단원을 감싸고 있고 토큰이 비어 있다면, 그 단원은 감춰질 것입니다.</p>"
 
-#: internet/groovesharksettingspage.cpp:111
+#: internet/groovesharksettingspage.cpp:119
 msgid "A Grooveshark Anywhere account is required."
 msgstr "그루브샤크 Anywhere 계정이 필요합니다."
 
-#: internet/spotifysettingspage.cpp:162
+#: internet/spotifysettingspage.cpp:163
 msgid "A Spotify Premium account is required."
-msgstr "스포티피 프리미엄 계정이 필요합니다."
+msgstr "Spotify 프리미엄 계정이 필요합니다."
 
-#: ../bin/src/ui_networkremotesettingspage.h:189
+#: ../bin/src/ui_networkremotesettingspage.h:190
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
-#: smartplaylists/wizard.cpp:78
+#: smartplaylists/wizard.cpp:74
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr "스마트 재생 목록은 라이브러리에서 불러온 음악의 다이나믹 목록입니다. 다른 방식으로 노래를 선택할 수 있는 스마트 재생 목록의 또 다른 형태입니다."
 
-#: smartplaylists/querywizardplugin.cpp:153
+#: smartplaylists/querywizardplugin.cpp:157
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "노래가 이러한 조건과 일치하면 재생 목록에 포함됩니다."
 
-#: smartplaylists/searchterm.cpp:297
+#: smartplaylists/searchterm.cpp:365
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -354,36 +365,35 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:348
+#: core/song.cpp:395
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:127
+#: widgets/nowplayingwidget.cpp:131
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "HYPNOTOAD에 모든 영광을"
 
-#: ui/albumcovermanager.cpp:108 ui/albumcoversearcher.cpp:166
+#: ui/albumcovermanager.cpp:111 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "중단"
 
-#: ui/about.cpp:32
+#: ui/about.cpp:30
 #, qt-format
 msgid "About %1"
 msgstr "%1 정보"
 
-#: ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:663
 msgid "About Clementine..."
-msgstr "클레멘타인 정보"
+msgstr "Clementine 정보"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:698
 msgid "About Qt..."
 msgstr "Qt 정보"
 
-#: ../bin/src/ui_groovesharksettingspage.h:113
+#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_spotifysettingspage.h:208 ../bin/src/ui_vksettingspage.h:211
 #: ../bin/src/ui_lastfmsettingspage.h:151
-#: ../bin/src/ui_ubuntuonesettingspage.h:129
 msgid "Account details"
 msgstr "계정 정보"
 
@@ -395,11 +405,15 @@ msgstr "계정 상세정보 (프리미엄)"
 msgid "Action"
 msgstr "동작"
 
-#: wiimotedev/wiimotesettingspage.cpp:98
+#: wiimotedev/wiimotesettingspage.cpp:96
 msgid "Active/deactive Wiiremote"
 msgstr "Wii 리모컨 사용/중지"
 
-#: podcasts/addpodcastdialog.cpp:56
+#: internet/soundcloudservice.cpp:124
+msgid "Activities stream"
+msgstr ""
+
+#: podcasts/addpodcastdialog.cpp:59
 msgid "Add Podcast"
 msgstr "팟케스트 추가"
 
@@ -415,39 +429,39 @@ msgstr "알림 형식이 지원한다면 새로운 줄 추가"
 msgid "Add action"
 msgstr "동작 추가"
 
-#: internet/savedradio.cpp:103
+#: internet/savedradio.cpp:106
 msgid "Add another stream..."
 msgstr "다른 스트림 추가..."
 
-#: library/librarysettingspage.cpp:68
+#: library/librarysettingspage.cpp:67
 msgid "Add directory..."
 msgstr "디렉토리 추가..."
 
-#: ui/mainwindow.cpp:1623
+#: ui/mainwindow.cpp:1797
 msgid "Add file"
 msgstr "파일 추가"
 
-#: ../bin/src/ui_mainwindow.h:727
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "transcoder에 파일 추가"
 
-#: ../bin/src/ui_mainwindow.h:725
+#: ../bin/src/ui_mainwindow.h:707
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "transcoder 파일(들) 추가"
 
-#: ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:667
 msgid "Add file..."
 msgstr "파일 추가..."
 
-#: transcoder/transcodedialog.cpp:219
+#: transcoder/transcodedialog.cpp:215
 msgid "Add files to transcode"
 msgstr "변환할 파일 추가"
 
-#: transcoder/transcodedialog.cpp:281 ui/mainwindow.cpp:1651 ui/ripcd.cpp:386
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1824 ui/ripcd.cpp:389
 msgid "Add folder"
 msgstr "폴더 추가"
 
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Add folder..."
 msgstr "폴더 추가..."
 
@@ -459,11 +473,11 @@ msgstr "새로운 폴더 추가..."
 msgid "Add podcast"
 msgstr "팟케스트 추가"
 
-#: podcasts/podcastservice.cpp:316 ../bin/src/ui_mainwindow.h:723
+#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:705
 msgid "Add podcast..."
 msgstr "팟케스트 추가..."
 
-#: smartplaylists/searchtermwidget.cpp:341
+#: smartplaylists/searchtermwidget.cpp:352
 msgid "Add search term"
 msgstr "검색 조건 추가"
 
@@ -527,6 +541,10 @@ msgstr "무시 횟수 추가"
 msgid "Add song title tag"
 msgstr "제목 태그 추가"
 
+#: internet/vkservice.cpp:314
+msgid "Add song to cache"
+msgstr "캐시에 음악 추가"
+
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song track tag"
 msgstr "트랙 태그 추가"
@@ -535,21 +553,33 @@ msgstr "트랙 태그 추가"
 msgid "Add song year tag"
 msgstr "연도 태그 추가"
 
-#: ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_vksettingspage.h:216
+msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
+msgstr "\"좋아요\" 버튼을 클릭하면 노래가 \"내 음악\"에 추가됩니다."
+
+#: ../bin/src/ui_mainwindow.h:669
 msgid "Add stream..."
 msgstr "스트림 추가..."
 
-#: internet/groovesharkservice.cpp:1087
+#: internet/groovesharkservice.cpp:1121
 msgid "Add to Grooveshark favorites"
-msgstr "그루브샤크 즐겨찾기에 추가"
+msgstr "Grooveshark 즐겨찾기에 추가"
 
-#: internet/groovesharkservice.cpp:1099
+#: internet/groovesharkservice.cpp:1136
 msgid "Add to Grooveshark playlists"
-msgstr "그루브샤크 재생목록에 추가"
+msgstr "Grooveshark 재생목록에 추가"
 
-#: ui/mainwindow.cpp:1448
+#: internet/vkservice.cpp:306
+msgid "Add to My Music"
+msgstr "내 음악에 추가"
+
+#: ui/mainwindow.cpp:1618
 msgid "Add to another playlist"
 msgstr "다른 재생목록에 추가"
+
+#: internet/vkservice.cpp:292
+msgid "Add to bookmarks"
+msgstr "북마크에 추가"
 
 #: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
@@ -558,6 +588,10 @@ msgstr "재생목록에 추가"
 #: ../bin/src/ui_behavioursettingspage.h:220
 msgid "Add to the queue"
 msgstr "대기열에 추가"
+
+#: internet/vkservice.cpp:322
+msgid "Add user/group to bookmarks"
+msgstr "북마크에 사용자/그룹 추가"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
@@ -588,15 +622,15 @@ msgstr "오늘 추가됨"
 msgid "Added within three months"
 msgstr "3개월 이내에 추가됨"
 
-#: internet/groovesharkservice.cpp:1394
+#: internet/groovesharkservice.cpp:1435
 msgid "Adding song to My Music"
 msgstr "내 음악에  음악 추가"
 
-#: internet/groovesharkservice.cpp:1371
+#: internet/groovesharkservice.cpp:1412
 msgid "Adding song to favorites"
 msgstr "즐겨찾기에 곡 추가"
 
-#: library/libraryfilterwidget.cpp:116
+#: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
 msgstr "고급 그룹화..."
 
@@ -604,12 +638,12 @@ msgstr "고급 그룹화..."
 msgid "After "
 msgstr "이후"
 
-#: ../bin/src/ui_organisedialog.h:190
+#: ../bin/src/ui_organisedialog.h:236
 msgid "After copying..."
 msgstr "복사 한 후...."
 
-#: playlist/playlist.cpp:1211 ui/organisedialog.cpp:56
-#: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
+#: playlist/playlist.cpp:1303 ui/organisedialog.cpp:61
+#: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
@@ -617,11 +651,11 @@ msgstr "복사 한 후...."
 msgid "Album"
 msgstr "앨범"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:328
 msgid "Album (ideal loudness for all tracks)"
 msgstr "앨범 (모든 트랙에 이상적인 음량)"
 
-#: playlist/playlist.cpp:1217 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
 msgid "Album artist"
@@ -631,35 +665,36 @@ msgstr "앨범 가수"
 msgid "Album cover"
 msgstr "앨범 표지"
 
-#: internet/jamendoservice.cpp:415
+#: internet/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
-msgstr "자멘도 앨범 정보..."
+msgstr " jamendo.com 앨범 정보..."
 
-#: ui/albumcovermanager.cpp:134
+#: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
 msgstr "앨범 표지가 있는 앨범"
 
-#: ui/albumcovermanager.cpp:135
+#: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "앨범 표지가 없는 앨범"
 
-#: ui/mainwindow.cpp:160
+#: ui/mainwindow.cpp:161
 msgid "All Files (*)"
 msgstr "모든 파일 (*)"
 
-#: ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:675
+msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Hypnotoad에 모든 영광을!"
 
-#: ui/albumcovermanager.cpp:133
+#: ui/albumcovermanager.cpp:134
 msgid "All albums"
 msgstr "모든 앨범"
 
-#: ui/albumcovermanager.cpp:265
+#: ui/albumcovermanager.cpp:268
 msgid "All artists"
 msgstr "모든 음악가"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "모든 파일 (*)"
 
@@ -668,21 +703,21 @@ msgstr "모든 파일 (*)"
 msgid "All playlists (%1)"
 msgstr "전체 재생목록 (%1)"
 
-#: ui/about.cpp:74
+#: ui/about.cpp:79
 msgid "All the translators"
 msgstr "모든 번역가"
 
-#: library/library.cpp:84
+#: library/library.cpp:98
 msgid "All tracks"
 msgstr "모든 트랙"
 
-#: ../bin/src/ui_networkremotesettingspage.h:194
+#: ../bin/src/ui_networkremotesettingspage.h:195
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:196
+#: ../bin/src/ui_networkremotesettingspage.h:197
 msgid "Allow downloads"
-msgstr ""
+msgstr "다운로드 허용"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
@@ -705,30 +740,30 @@ msgstr "항상 메인 창 표시함"
 msgid "Always start playing"
 msgstr "항상 재생 시작"
 
-#: internet/spotifyblobdownloader.cpp:60
+#: internet/spotifyblobdownloader.cpp:65
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr "클레멘타인엔서 스포티피를 이용하시려면 추가 플러그인이 있어야 합니다. 지금 설치하시겠습니까?"
+msgstr "Clementine에서 Spotify를 이용하시려면 추가 플러그인이 있어야 합니다. 지금 설치하시겠습니까?"
 
-#: devices/gpodloader.cpp:61
+#: devices/gpodloader.cpp:60
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes 데이터베이스를 불러오는 중 오류 발생"
 
-#: ui/edittagdialog.cpp:663
+#: ui/edittagdialog.cpp:679
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1'에 메타데이터를 쓰던 중 오류 발생"
 
-#: internet/subsonicsettingspage.cpp:103
+#: internet/subsonicsettingspage.cpp:102
 msgid "An unspecified error occurred."
 msgstr "지정되지 않은 에러가 발생"
 
-#: ui/about.cpp:78
+#: ui/about.cpp:84
 msgid "And:"
 msgstr "그리고:"
 
-#: moodbar/moodbarrenderer.cpp:156
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "화난"
 
@@ -737,13 +772,13 @@ msgstr "화난"
 msgid "Appearance"
 msgstr "외형"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:161
 msgid "Append files/URLs to the playlist"
 msgstr "재생목록에 파일/URL 추가"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
-#: internet/internetservice.cpp:56 library/libraryview.cpp:367
-#: widgets/fileviewlist.cpp:32
+#: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:452
+#: internet/internetservice.cpp:53 library/libraryview.cpp:370
+#: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "현재 재생목록에 추가"
 
@@ -751,52 +786,47 @@ msgstr "현재 재생목록에 추가"
 msgid "Append to the playlist"
 msgstr "재생목록에 추가"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
+#: ../bin/src/ui_playbacksettingspage.h:331
 msgid "Apply compression to prevent clipping"
 msgstr "클리핑 방지를 위한 압축 적용"
 
-#: ui/equalizer.cpp:201
+#: ui/equalizer.cpp:216
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" 프리셋을 정말 지우시겠습니까?"
 
-#: internet/groovesharkservice.cpp:1292
+#: internet/groovesharkservice.cpp:1334
 msgid "Are you sure you want to delete this playlist?"
 msgstr "이 재생목록을 지우시겠습니까?"
 
-#: ui/edittagdialog.cpp:769
+#: ui/edittagdialog.cpp:785
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "이 곡의 통계를 초기화하시겠습니까?"
 
-#: library/librarysettingspage.cpp:152
+#: library/librarysettingspage.cpp:155
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
 msgstr "라이브러리의 모든 곡의 해당하는 음악 파일에 음악 통계를 작성 하시겠습니까?"
 
-#: playlist/playlist.cpp:1210 ui/organisedialog.cpp:57
-#: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
+#: playlist/playlist.cpp:1301 ui/organisedialog.cpp:62
+#: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
-#: ../bin/src/ui_trackselectiondialog.h:210
-#: ../bin/src/ui_lastfmstationdialog.h:96 ../bin/src/ui_ripcd.h:316
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "음악가"
 
-#: ui/mainwindow.cpp:248
+#: ui/mainwindow.cpp:245
 msgid "Artist info"
 msgstr "음악가 정보"
 
-#: internet/lastfmservice.cpp:208
-msgid "Artist radio"
-msgstr "음악가 라디오"
-
-#: songinfo/echonesttags.cpp:59
+#: songinfo/echonesttags.cpp:61
 msgid "Artist tags"
 msgstr "음악가 태그"
 
-#: ui/organisedialog.cpp:58
+#: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "음악가 이니셜"
 
@@ -804,9 +834,13 @@ msgstr "음악가 이니셜"
 msgid "Audio format"
 msgstr "오디오 형식"
 
-#: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
-#: internet/lastfmsettingspage.cpp:84 internet/ubuntuonesettingspage.cpp:75
+#: ../bin/src/ui_playbacksettingspage.h:332
+msgid "Audio output"
+msgstr "오디오 출력"
+
+#: internet/digitallyimportedsettingspage.cpp:80
+#: internet/magnatunesettingspage.cpp:112 internet/lastfmservice.cpp:222
+#: internet/lastfmsettingspage.cpp:80
 msgid "Authentication failed"
 msgstr "인증 실패"
 
@@ -814,7 +848,7 @@ msgstr "인증 실패"
 msgid "Author"
 msgstr "작성자"
 
-#: ui/about.cpp:65
+#: ui/about.cpp:67
 msgid "Authors"
 msgstr "작성자"
 
@@ -830,7 +864,7 @@ msgstr "자동 업데이트"
 msgid "Automatically open single categories in the library tree"
 msgstr "라이브러리 트리에 자동으로 하나의 카테고리로 열기"
 
-#: widgets/freespacebar.cpp:45
+#: widgets/freespacebar.cpp:44
 msgid "Available"
 msgstr "이용 가능"
 
@@ -838,15 +872,15 @@ msgstr "이용 가능"
 msgid "Average bitrate"
 msgstr "평균 비트 전송률"
 
-#: covers/coversearchstatisticsdialog.cpp:70
+#: covers/coversearchstatisticsdialog.cpp:67
 msgid "Average image size"
 msgstr "평균 이미지 크기"
 
-#: podcasts/addpodcastdialog.cpp:80
+#: podcasts/addpodcastdialog.cpp:84
 msgid "BBC Podcasts"
 msgstr "BBC 팟케스트"
 
-#: playlist/playlist.cpp:1228 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:668
 msgid "BPM"
 msgstr "BPM"
@@ -867,7 +901,7 @@ msgstr "배경 그림"
 msgid "Background opacity"
 msgstr "배경 투명도"
 
-#: core/database.cpp:644
+#: core/database.cpp:640
 msgid "Backing up database"
 msgstr "데이터베이스 백업"
 
@@ -875,11 +909,7 @@ msgstr "데이터베이스 백업"
 msgid "Balance"
 msgstr "밸런스"
 
-#: ../bin/src/ui_mainwindow.h:666
-msgid "Ban"
-msgstr "싫어요"
-
-#: analyzers/baranalyzer.cpp:19
+#: analyzers/baranalyzer.cpp:20
 msgid "Bar analyzer"
 msgstr "막대"
 
@@ -899,18 +929,17 @@ msgstr "행동"
 msgid "Best"
 msgstr "최고"
 
-#: songinfo/echonestbiographies.cpp:83
+#: songinfo/echonestbiographies.cpp:84
 #, qt-format
 msgid "Biography from %1"
 msgstr "%1의 바이오그래피"
 
-#: playlist/playlist.cpp:1229 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:670
 msgid "Bit rate"
 msgstr "비트 전송률"
 
-#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:137
-#: ../bin/src/ui_groupbydialog.h:151 ../bin/src/ui_groupbydialog.h:165
-#: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -918,7 +947,12 @@ msgstr "비트 전송률"
 msgid "Bitrate"
 msgstr "비트 전송률"
 
-#: analyzers/blockanalyzer.cpp:22
+#: ui/organisedialog.cpp:75
+msgctxt "Refers to bitrate in file organise dialog."
+msgid "Bitrate"
+msgstr "비트레이트"
+
+#: analyzers/blockanalyzer.cpp:23
 msgid "Block analyzer"
 msgstr "블록"
 
@@ -932,9 +966,9 @@ msgstr "블러 정도"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Body"
-msgstr ""
+msgstr "본문"
 
-#: analyzers/boomanalyzer.cpp:8
+#: analyzers/boomanalyzer.cpp:9
 msgid "Boom analyzer"
 msgstr "붐"
 
@@ -948,11 +982,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "찾아보기..."
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:334
 msgid "Buffer duration"
 msgstr "버퍼 시간"
 
-#: engines/gstengine.cpp:784
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "버퍼링"
 
@@ -964,43 +998,66 @@ msgstr "하지만 다음 출처는 사용할 수 없습니다:"
 msgid "Buttons"
 msgstr "버튼"
 
-#: core/song.cpp:351
+#: ../bin/src/ui_groovesharksettingspage.h:139
+msgid "By default, Grooveshark sorts songs on date added"
+msgstr ""
+
+#: core/song.cpp:401
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:100
+#: library/library.cpp:118
 msgid "CUE sheet support"
 msgstr "큐 시트 지원"
 
-#: internet/spotifyblobdownloader.cpp:44
+#: ../bin/src/ui_vksettingspage.h:220
+msgid "Cache path:"
+msgstr "캐시 경로:"
+
+#: ../bin/src/ui_vksettingspage.h:218
+msgid "Caching"
+msgstr "캐시 중"
+
+#: internet/vkmusiccache.cpp:121
+#, qt-format
+msgid "Caching %1"
+msgstr "%1 캐시 중"
+
+#: internet/spotifyblobdownloader.cpp:50
 msgid "Cancel"
 msgstr "취소"
+
+#: internet/vkservice.cpp:622
+msgid ""
+"Captcha is needed.\n"
+"Try to login into Vk.com with your browser,to fix this problem."
+msgstr "Captcha 가 필요합니다.\n이 문제의 해결하려면 브라우저에서 Vk.com로 접속하여 로그인을 시도하세요. "
 
 #: ../bin/src/ui_edittagdialog.h:664
 msgid "Change cover art"
 msgstr "커버 아트 바꾸기"
 
-#: songinfo/songinfotextview.cpp:83
+#: songinfo/songinfotextview.cpp:73
 msgid "Change font size..."
 msgstr "글꼴 크기 바꾸기..."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:69
 msgid "Change repeat mode"
 msgstr "반복 모드 "
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:179
+#: ../bin/src/ui_globalshortcutssettingspage.h:189
 msgid "Change shortcut..."
 msgstr "단축키 바꾸기..."
 
-#: core/globalshortcuts.cpp:61
+#: core/globalshortcuts.cpp:67
 msgid "Change shuffle mode"
 msgstr "셔플 모드 "
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:166
 msgid "Change the language"
 msgstr "언어 변경"
 
-#: ../bin/src/ui_playbacksettingspage.h:330
+#: ../bin/src/ui_playbacksettingspage.h:338
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1010,15 +1067,19 @@ msgstr ""
 msgid "Check for new episodes"
 msgstr "새로운 에피소드 확인"
 
-#: ui/mainwindow.cpp:602
+#: ui/mainwindow.cpp:702
 msgid "Check for updates..."
 msgstr "업데이트 확인..."
 
-#: smartplaylists/wizard.cpp:86
+#: internet/vksettingspage.cpp:97
+msgid "Choose Vk.com cache directory"
+msgstr "Vk.com 캐시 디렉터리 선택"
+
+#: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
 msgstr "스마트 재생목록에 이름 추가"
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "자동 선택"
 
@@ -1034,20 +1095,20 @@ msgstr "글꼴 선택..."
 msgid "Choose from the list"
 msgstr "목록에서 선택"
 
-#: smartplaylists/querywizardplugin.cpp:155
+#: smartplaylists/querywizardplugin.cpp:161
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "재생목록의 정렬 방식과 최대 곡수를 선택하세요."
 
-#: podcasts/podcastsettingspage.cpp:132
+#: podcasts/podcastsettingspage.cpp:133
 msgid "Choose podcast download directory"
 msgstr "팟케스트 다운로드 경로를 선택하세요"
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "클레멘타인이 가사를 찾기위해 이용할 사이트를 선택하세요."
+msgstr "Clementine이 가사를 찾기위해 이용할 사이트를 선택하세요."
 
-#: ui/equalizer.cpp:115
+#: ui/equalizer.cpp:112
 msgid "Classical"
 msgstr "클래식"
 
@@ -1055,97 +1116,90 @@ msgstr "클래식"
 msgid "Cleaning up"
 msgstr "자동 정리"
 
-#: transcoder/transcodedialog.cpp:62 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "비우기"
 
-#: ../bin/src/ui_mainwindow.h:668 ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:650 ../bin/src/ui_mainwindow.h:652
 msgid "Clear playlist"
 msgstr "재생목록 비우기"
 
-#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:651
-#: visualisations/visualisationcontainer.cpp:211
+#: smartplaylists/searchtermwidget.cpp:341 ../bin/src/ui_mainwindow.h:635
+#: visualisations/visualisationcontainer.cpp:215
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
-msgstr "클레멘타인"
+msgstr "Clementine"
 
 #: ../bin/src/ui_errordialog.h:93
 msgid "Clementine Error"
-msgstr "클레멘타인 오류"
+msgstr "Clementine 오류"
 
 #: ../bin/src/ui_notificationssettingspage.h:457
 msgid "Clementine Orange"
-msgstr "클레멘타인 오렌지"
+msgstr "Clementine 오렌지"
 
-#: visualisations/visualisationcontainer.cpp:77
-#: visualisations/visualisationcontainer.cpp:151
+#: visualisations/visualisationcontainer.cpp:76
+#: visualisations/visualisationcontainer.cpp:158
 msgid "Clementine Visualization"
-msgstr "클레멘타인 시각화"
+msgstr "Clementine 시각화"
 
 #: ../bin/src/ui_deviceproperties.h:376
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "클레멘타인은 이 장치에서 복사한 곡을 재생 가능한 형식으로 자동 변환할 수 있습니다."
+msgstr "Clementine은 이 장치에서 복사한 곡을 재생 가능한 형식으로 자동 변환할 수 있습니다."
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr "클레멘타인은 당신이 Box에 업로드한 음악을 재생할 수 있습니다."
+msgstr "Clementine은 당신이 Box에 업로드한 음악을 재생할 수 있습니다."
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr "클레멘타인은 당신이 드롭박스에 업로드한 음악을 재생할 수 있습니다."
+msgstr "Clementine은 당신이 Dropbox에 업로드한 음악을 재생할 수 있습니다."
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "클레멘타인은 당신이 구글 드라이브에 업로드한 음악을 재생할 수 있습니다."
+msgstr "Clementine은 당신이 Google Drive에 업로드한 음악을 재생할 수 있습니다."
 
-#: ../bin/src/ui_ubuntuonesettingspage.h:128
-msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr "클레멘타인은 당신이 우분투 원에 업로드한 음악을 재생할 수 있습니다."
+#: ../bin/src/ui_skydrivesettingspage.h:104
+msgid "Clementine can play music that you have uploaded to OneDrive"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Clementine can show a message when the track changes."
-msgstr "클레멘타인은 트랙이 변할 때 메시지를 표시할 수 있습니다."
+msgstr "Clementine은 트랙이 변할 때 메시지를 표시할 수 있습니다."
 
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr "클레멘타인은 당신의 다른 컴퓨터와 팟케스트 어플리케이션과 당신의 구독 목록을 동기화 할 수 있습니다. <a href=\"https://gpodder.net/register/\">계정을 만드세요</a>."
+msgstr "Clementine은 당신의 다른 컴퓨터와 팟케스트 어플리케이션과 당신의 구독 목록을 동기화 할 수 있습니다. <a href=\"https://gpodder.net/register/\">계정을 만드세요</a>."
 
-#: visualisations/projectmvisualisation.cpp:133
+#: visualisations/projectmvisualisation.cpp:132
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr "클레멘타인은 프로젝트M 시각화를 불러올 수 없습니다. 클레멘타인이 제대로 설치되었는지 확인해 보세요."
+msgstr "Clementine이 projectM 시각화를 불러올 수 없습니다. Clementine이 제대로 설치되었는지 확인해 보세요."
 
-#: internet/lastfmsettingspage.cpp:110
-msgid ""
-"Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to "
-"Last.fm."
-msgstr "연결에 문제가 있어서 클레멘타인이 당신의 가입 정보를 가져올 수 없습니다. 재생중인 트랙은 캐시로 저장되고 나중에 Last.fm에 보낼 것입니다."
-
-#: widgets/prettyimage.cpp:201
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
-msgstr "클레멘타인 이미지 뷰어"
+msgstr "Clementine 이미지 뷰어"
 
 #: ../bin/src/ui_trackselectiondialog.h:206
 msgid "Clementine was unable to find results for this file"
-msgstr "클레멘타인은 이 파일의 결과를 검색할 수 없습니다"
+msgstr "Clementine은 이 파일의 결과를 검색할 수 없습니다"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr "클레멘타인이 음악을 찾을 수 있습니다."
+msgstr "Clementine이 음악을 찾을 수 있습니다."
 
-#: library/libraryview.cpp:349
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "음악을 추가하려면 여기를 클릭하세요"
 
-#: playlist/playlisttabbar.cpp:293
+#: playlist/playlisttabbar.cpp:286
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1155,12 +1209,15 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr "남은 시간과 전체 시간을 바꾸려면 클릭하세요"
 
-#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
+#: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_skydrivesettingspage.h:106
+#: ../bin/src/ui_boxsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "로그인 버튼을 클릭하면 웹 브라우저가 열립니다. 당신이 로그인을 한 후에 클레멘타인으로 반환하여야 합니다."
+msgstr "로그인 버튼을 클릭하면 웹 브라우저가 열립니다. 당신이 로그인을 한 후에 Clementine으로 되돌아 와야 합니다."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1170,19 +1227,19 @@ msgstr "닫기"
 msgid "Close playlist"
 msgstr "재생목록 닫기"
 
-#: visualisations/visualisationcontainer.cpp:127
+#: visualisations/visualisationcontainer.cpp:135
 msgid "Close visualization"
 msgstr "시각화 닫기"
 
-#: internet/magnatunedownloaddialog.cpp:280
+#: internet/magnatunedownloaddialog.cpp:304
 msgid "Closing this window will cancel the download."
 msgstr "이 창을 닫으면 다운로드가 취소됩니다."
 
-#: ui/albumcovermanager.cpp:216
+#: ui/albumcovermanager.cpp:219
 msgid "Closing this window will stop searching for album covers."
 msgstr "이 창을 닫으면 앨범 표지 검색이 중지됩니다."
 
-#: ui/equalizer.cpp:116
+#: ui/equalizer.cpp:114
 msgid "Club"
 msgstr "클럽"
 
@@ -1190,73 +1247,78 @@ msgstr "클럽"
 msgid "Colors"
 msgstr "색상"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:169
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "콤마로 클래스:단계의 목록을 나눔, 단계는 0-3"
 
-#: playlist/playlist.cpp:1238 smartplaylists/searchterm.cpp:288
-#: ui/organisedialog.cpp:68 ../bin/src/ui_edittagdialog.h:694
+#: playlist/playlist.cpp:1354 smartplaylists/searchterm.cpp:353
+#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:694
 msgid "Comment"
 msgstr "설명"
+
+#: internet/vkservice.cpp:151
+msgid "Community Radio"
+msgstr "커뮤니티 라디오"
 
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Complete tags automatically"
 msgstr "자동으로 태그 저장"
 
-#: ../bin/src/ui_mainwindow.h:720
+#: ../bin/src/ui_mainwindow.h:702
 msgid "Complete tags automatically..."
 msgstr "자동으로 태그 저장..."
 
-#: playlist/playlist.cpp:1218 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
 msgid "Composer"
 msgstr "작곡가"
 
-#: internet/searchboxwidget.cpp:42
+#: internet/searchboxwidget.cpp:41
 #, qt-format
 msgid "Configure %1..."
 msgstr "%1 설정..."
 
-#: internet/groovesharkservice.cpp:552
+#: internet/groovesharkservice.cpp:560
 msgid "Configure Grooveshark..."
-msgstr "그루브샤크 설정..."
+msgstr "Grooveshark 설정..."
 
-#: internet/lastfmservice.cpp:126
-msgid "Configure Last.fm..."
-msgstr "Last.fm 설정..."
-
-#: internet/magnatuneservice.cpp:280
+#: internet/magnatuneservice.cpp:282
 msgid "Configure Magnatune..."
-msgstr "매그나튠 설정..."
+msgstr "Magnatune 설정..."
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:167
+#: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "Configure Shortcuts"
 msgstr "단축키 설정"
 
-#: internet/spotifyservice.cpp:526 internet/spotifyservice.cpp:538
+#: internet/spotifyservice.cpp:545 internet/spotifyservice.cpp:556
 msgid "Configure Spotify..."
-msgstr "스포티피 설정..."
+msgstr "Spotify 설정..."
 
-#: internet/subsonicservice.cpp:96
+#: internet/subsonicservice.cpp:90
 msgid "Configure Subsonic..."
-msgstr "서브소닉 설정"
+msgstr "Subsonic 설정"
 
-#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
+#: internet/vkservice.cpp:335
+msgid "Configure Vk.com..."
+msgstr "Vk.com 설정..."
+
+#: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:472
 msgid "Configure global search..."
 msgstr "글로벌 검색 설정..."
 
-#: ui/mainwindow.cpp:483
+#: ui/mainwindow.cpp:553
 msgid "Configure library..."
 msgstr "라이브러리 설정..."
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:350
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
 msgid "Configure podcasts..."
 msgstr "팟케스트 설정..."
 
-#: internet/digitallyimportedservicebase.cpp:186
+#: internet/cloudfileservice.cpp:85
+#: internet/digitallyimportedservicebase.cpp:178
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:193
+#: internet/googledriveservice.cpp:198
 msgid "Configure..."
 msgstr "설정..."
 
@@ -1264,26 +1326,30 @@ msgstr "설정..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "사용/중지 실행으로 Wii 리모컨 연결"
 
-#: devices/devicemanager.cpp:323 devices/devicemanager.cpp:327
+#: devices/devicemanager.cpp:321 devices/devicemanager.cpp:326
 msgid "Connect device"
 msgstr "장치 연결"
 
-#: internet/spotifyservice.cpp:253
+#: internet/spotifyservice.cpp:266
 msgid "Connecting to Spotify"
-msgstr "스포티피에 연결 중"
+msgstr "Spotify에 연결 중"
 
 #: internet/subsonicsettingspage.cpp:107
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "서버에서 연결을 거부하였습니다. 서버의 주소를 확인하세요. 예)http://localhost:4040/"
 
-#: internet/subsonicsettingspage.cpp:117
+#: internet/subsonicsettingspage.cpp:119
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "연결 시간이 초과되었습니다. 서버의 주소를 확인하세요. 예)http://localhost:4040/"
 
-#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:696
+#: internet/vkservice.cpp:961
+msgid "Connection trouble or audio is disabled by owner"
+msgstr "연결 문제 또는 오디오가 사용자에 의한 비활성화"
+
+#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:678
 msgid "Console"
 msgstr "콘솔"
 
@@ -1299,17 +1365,21 @@ msgstr "모든 곡 변환"
 msgid "Convert any music that the device can't play"
 msgstr "장치가 재생할 수 없는 곡 변환"
 
-#: internet/groovesharkservice.cpp:1172
+#: internet/vkservice.cpp:318
+msgid "Copy share url to clipboard"
+msgstr "공유 URL 복사"
+
+#: internet/groovesharkservice.cpp:1210
 msgid "Copy to clipboard"
 msgstr "클립보드로 복사"
 
-#: library/libraryview.cpp:389 podcasts/podcastservice.cpp:336
-#: ui/mainwindow.cpp:517 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: ui/mainwindow.cpp:602 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "장치에 복사..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:514
-#: widgets/fileviewlist.cpp:39
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:592
+#: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "라이브러리에 복사..."
 
@@ -1317,156 +1387,152 @@ msgstr "라이브러리에 복사..."
 msgid "Copyright"
 msgstr "저작권"
 
-#: internet/subsonicsettingspage.cpp:81
+#: internet/subsonicsettingspage.cpp:75
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr "서브소닉에 접속할 수 없습니다. 서버 URL을 확인 하세요. 예시:http://localhost:4040/"
+msgstr "Subsonic에 접속할 수 없습니다. 서버 URL을 확인 하세요. 예시:http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:64
+#: transcoder/transcoder.cpp:57
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr "GStreamer 요소 \"%1\"를 찾을 수 없습니다  - 필요한 모든 GStreamer 플러그인이 설치되어 있는지 확인하세요"
 
-#: transcoder/transcoder.cpp:434
+#: playlist/playlistmanager.cpp:166
+msgid "Couldn't create playlist"
+msgstr "재생목록을 생성할수 없습니다."
+
+#: transcoder/transcoder.cpp:429
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "%1 먹서를 찾을 수 없습니다, GStreamer 플러그인이 올바르게 설치되어 있는지 확인하세요"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:423
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr "%1 인코더를 찾을 수 없습니다, GStreamer 플러그인이 올바르게 설치되어 있는지 확인하세요"
 
-#: internet/lastfmservice.cpp:875
-msgid "Couldn't load the last.fm radio station"
-msgstr "last.fm 라디오 방송국을 불러올 수 없습니다"
-
-#: internet/magnatunedownloaddialog.cpp:203
+#: internet/magnatunedownloaddialog.cpp:218
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "출력 파일 %1를 열 수 없습니다"
 
-#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:215
-#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:691
-#: internet/googledriveservice.cpp:189
+#: internet/cloudfileservice.cpp:82 ../bin/src/ui_albumcovermanager.h:215
+#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:673
+#: internet/googledriveservice.cpp:196
 msgid "Cover Manager"
 msgstr "커버 관리자"
 
-#: ui/edittagdialog.cpp:443
+#: ui/edittagdialog.cpp:460
 msgid "Cover art from embedded image"
 msgstr "내장된 이미지로부터 커버 아트 사용"
 
-#: ui/edittagdialog.cpp:445
+#: ui/edittagdialog.cpp:463
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "%1에서 자동으로 커버 아트를 불러옴"
 
-#: ui/edittagdialog.cpp:438
+#: ui/edittagdialog.cpp:455
 msgid "Cover art manually unset"
 msgstr "커버 아트를 수동으로 설정하지 않음"
 
-#: ui/edittagdialog.cpp:447
+#: ui/edittagdialog.cpp:465
 msgid "Cover art not set"
 msgstr "커버 아트를 설정하지 않음"
 
-#: ui/edittagdialog.cpp:441
+#: ui/edittagdialog.cpp:458
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "%1에서 커버 아트를 설정함"
 
-#: covers/coversearchstatisticsdialog.cpp:60 ui/albumcoversearcher.cpp:106
+#: covers/coversearchstatisticsdialog.cpp:57 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
 msgstr "%1에서 커버"
 
-#: internet/groovesharkservice.cpp:520 internet/groovesharkservice.cpp:1244
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1286
 msgid "Create a new Grooveshark playlist"
-msgstr "새로운 그루브샤크 재생목록 만들기"
+msgstr "새로운 Grooveshark 재생목록 만들기"
 
-#: ../bin/src/ui_playbacksettingspage.h:302
+#: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "트랙을 자동으로 바꿀 때 크로스-페이드"
 
-#: ../bin/src/ui_playbacksettingspage.h:301
+#: ../bin/src/ui_playbacksettingspage.h:314
 msgid "Cross-fade when changing tracks manually"
 msgstr "트랙을 직접 바꿀 때 크로스-페이드"
 
-#: ../bin/src/ui_mainwindow.h:663
+#: ../bin/src/ui_mainwindow.h:647
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
-
-#: ../bin/src/ui_mainwindow.h:667
-msgid "Ctrl+B"
-msgstr "Ctrl+B"
 
 #: ../bin/src/ui_queuemanager.h:133
 msgid "Ctrl+Down"
 msgstr "Ctrl+Down"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:656
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:666
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
-#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:654
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_mainwindow.h:665
+#: ../bin/src/ui_mainwindow.h:649
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:700
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: ../bin/src/ui_mainwindow.h:706
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: ../bin/src/ui_mainwindow.h:688
+#: ../bin/src/ui_mainwindow.h:670
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_mainwindow.h:662
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:645
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:668
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#: ../bin/src/ui_mainwindow.h:710
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
-#: ../bin/src/ui_mainwindow.h:729
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Ctrl+Shift+T"
-msgstr ""
+msgstr "Ctrl+Shift+T"
 
-#: ../bin/src/ui_mainwindow.h:721
+#: ../bin/src/ui_mainwindow.h:703
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
@@ -1474,7 +1540,7 @@ msgstr "Ctrl+T"
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
-#: ui/equalizer.cpp:114 ../bin/src/ui_lastfmstationdialog.h:98
+#: ui/equalizer.cpp:110
 msgid "Custom"
 msgstr "사용자 정의"
 
@@ -1486,60 +1552,61 @@ msgstr "사용자 정의 이미지:"
 msgid "Custom message settings"
 msgstr "사용자 정의 메시지 설정"
 
-#: internet/lastfmservice.cpp:216
-msgid "Custom radio"
-msgstr "사용자 정의 라디오"
-
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Custom..."
 msgstr "사용자 정의..."
 
-#: devices/devicekitlister.cpp:123
+#: devices/devicekitlister.cpp:125
 msgid "DBus path"
 msgstr "DBus 경로"
 
-#: ui/equalizer.cpp:117
+#: ui/equalizer.cpp:116
 msgid "Dance"
 msgstr "댄스"
 
-#: core/database.cpp:598
+#: core/database.cpp:593
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
 msgstr ""
 
-#: playlist/playlist.cpp:1236 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:679
 msgid "Date created"
 msgstr "생성한 날짜"
 
-#: playlist/playlist.cpp:1235 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:678
 msgid "Date modified"
 msgstr "수정한 날짜"
 
-#: smartplaylists/searchterm.cpp:311
+#: smartplaylists/searchterm.cpp:388
 msgid "Days"
 msgstr "일"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:187
 msgid "De&fault"
 msgstr "기본값(&f)"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:151
 msgid "Decrease the volume by 4%"
 msgstr "4% 단위로 음량 줄이기"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:153
 msgid "Decrease the volume by <value> percent"
 msgstr "<value>% 단위로 음량 줄이기"
 
-#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "음량 줄이기"
 
 #: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "기본 배경 그림"
+
+#: engines/gstengine.cpp:908
+#, qt-format
+msgid "Default device on %1"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
@@ -1549,30 +1616,30 @@ msgstr "기본값"
 msgid "Delay between visualizations"
 msgstr "시각화 사이의 시간 간격"
 
-#: playlist/playlistlistcontainer.cpp:73
+#: playlist/playlistlistcontainer.cpp:70
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "삭제"
 
-#: internet/groovesharkservice.cpp:523 internet/groovesharkservice.cpp:1291
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1333
 msgid "Delete Grooveshark playlist"
-msgstr "그루브샤크 재생목록 지우기"
+msgstr "Grooveshark 재생목록 지우기"
 
-#: podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:345
 msgid "Delete downloaded data"
 msgstr "다운로드된 데이터 삭제"
 
-#: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1960 widgets/fileview.cpp:187
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
+#: ui/mainwindow.cpp:2160 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "파일 삭제"
 
-#: devices/deviceview.cpp:220
+#: devices/deviceview.cpp:228
 msgid "Delete from device..."
 msgstr "장치에서 삭제..."
 
-#: library/libraryview.cpp:391 ui/mainwindow.cpp:518
-#: widgets/fileviewlist.cpp:45
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:604
+#: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "디스크에서 삭제..."
 
@@ -1580,31 +1647,31 @@ msgstr "디스크에서 삭제..."
 msgid "Delete played episodes"
 msgstr "재생된 에피소드 삭제"
 
-#: ui/equalizer.cpp:200 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "프리셋 삭제"
 
-#: library/libraryview.cpp:383
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "스마트 재생목록 지우기"
 
-#: ../bin/src/ui_organisedialog.h:194
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Delete the original files"
 msgstr "원본 파일 삭제"
 
-#: core/deletefiles.cpp:50
+#: core/deletefiles.cpp:48
 msgid "Deleting files"
 msgstr "파일 삭제 중"
 
-#: ui/mainwindow.cpp:1382
+#: ui/mainwindow.cpp:1539
 msgid "Dequeue selected tracks"
 msgstr "선택한 트랙을 대기열에서 해제"
 
-#: ui/mainwindow.cpp:1380
+#: ui/mainwindow.cpp:1537
 msgid "Dequeue track"
 msgstr "트랙을 대기열에서 해제"
 
-#: ../bin/src/ui_transcodedialog.h:214 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_transcodedialog.h:214 ../bin/src/ui_organisedialog.h:235
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "대상"
@@ -1613,7 +1680,7 @@ msgstr "대상"
 msgid "Details..."
 msgstr "세부 내용..."
 
-#: devices/devicekitlister.cpp:126 devices/giolister.cpp:160
+#: devices/devicekitlister.cpp:128 devices/giolister.cpp:156
 msgid "Device"
 msgstr "장치"
 
@@ -1625,17 +1692,17 @@ msgstr "장치 속성"
 msgid "Device name"
 msgstr "장치 이름"
 
-#: devices/deviceview.cpp:207
+#: devices/deviceview.cpp:210
 msgid "Device properties..."
 msgstr "장치 속성..."
 
-#: ui/mainwindow.cpp:245
+#: ui/mainwindow.cpp:240
 msgid "Devices"
 msgstr "장치"
 
-#: ../bin/src/ui_ripcd.h:300
+#: ../bin/src/ui_vksearchdialog.h:61 ../bin/src/ui_ripcd.h:300
 msgid "Dialog"
-msgstr ""
+msgstr "다이얼로그"
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1643,15 +1710,15 @@ msgstr "이것을 원하셨습니까"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:160
 msgid "Digitally Imported"
-msgstr "디지탈리 임포티드"
+msgstr "Digitally Imported"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "Digitally Imported password"
-msgstr "디지탈리 임포티드 비밀번호"
+msgstr "Digitally Imported 비밀번호"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 msgid "Digitally Imported username"
-msgstr "디지탈리 임포티드 사용자명"
+msgstr "Digitally Imported 사용자명"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Direct internet connection"
@@ -1664,18 +1731,23 @@ msgstr "디렉토리"
 
 #: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Disable duration"
-msgstr ""
+msgstr "지속 해제"
 
 #: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr "분위기 막대 생성 "
 
-#: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:433
+msgctxt "Refers to a disabled notification type in Notification settings."
 msgid "Disabled"
 msgstr "사용 안함"
 
-#: playlist/playlist.cpp:1214 ui/organisedialog.cpp:64
+#: globalsearch/searchproviderstatuswidget.cpp:46
+msgctxt "Refers to search provider's status."
+msgid "Disabled"
+msgstr "사용 안함"
+
+#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "디스크"
@@ -1685,15 +1757,15 @@ msgid "Discontinuous transmission"
 msgstr "불연속적인 전송"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
+#: library/libraryfilterwidget.cpp:104 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "옵션 표시"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:164
 msgid "Display the on-screen-display"
 msgstr "OSD 표시"
 
-#: ../bin/src/ui_mainwindow.h:719
+#: ../bin/src/ui_mainwindow.h:701
 msgid "Do a full library rescan"
 msgstr "전체 라이브러리 다시 읽기"
 
@@ -1703,29 +1775,29 @@ msgstr "어떤 곡도 변환하지 않기"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
-msgstr ""
+msgstr "덮어쓸 수 없음"
 
-#: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:103
+#: widgets/osd.cpp:302 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "반복하지 않기"
 
-#: library/libraryview.cpp:405
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "다양한 음악가에 표시하지 않기"
 
-#: widgets/osd.cpp:278 ../bin/src/ui_playlistsequence.h:107
+#: widgets/osd.cpp:281 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "섞지 않기"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:218
+#: internet/magnatunedownloaddialog.cpp:306 ui/albumcovermanager.cpp:221
 msgid "Don't stop!"
 msgstr "멈추지 마세요!"
 
-#: internet/somafmservice.cpp:103
+#: internet/somafmservice.cpp:101
 msgid "Donate"
 msgstr "기부"
 
-#: devices/deviceview.cpp:115
+#: devices/deviceview.cpp:117
 msgid "Double click to open"
 msgstr "열려면 더블클릭하세요"
 
@@ -1733,12 +1805,13 @@ msgstr "열려면 더블클릭하세요"
 msgid "Double clicking a song will..."
 msgstr "노래를 더블클릭하면..."
 
-#: podcasts/podcastservice.cpp:421
+#: podcasts/podcastservice.cpp:437
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "Download %n episodes"
 msgstr "에피소드 %n 다운로드"
 
-#: internet/magnatunedownloaddialog.cpp:252
+#: internet/magnatunedownloaddialog.cpp:266
 msgid "Download directory"
 msgstr "디렉토리 다운로드"
 
@@ -1754,23 +1827,23 @@ msgstr "멤버십 다운로드"
 msgid "Download new episodes automatically"
 msgstr "자동으로 새로운 에피소드 다운로드"
 
-#: podcasts/podcastservice.cpp:246
+#: podcasts/podcastservice.cpp:253
 msgid "Download queued"
 msgstr "다운로드 대기열 추가됨"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr ""
+msgstr "Android 앱 다운로드"
 
-#: internet/magnatuneservice.cpp:276
+#: internet/magnatuneservice.cpp:272
 msgid "Download this album"
 msgstr "이 앨범 다운로드"
 
-#: internet/jamendoservice.cpp:417
+#: internet/jamendoservice.cpp:424
 msgid "Download this album..."
 msgstr "이 앨범 다운로드..."
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:439
 msgid "Download this episode"
 msgstr "이 에피소드 다운로드"
 
@@ -1778,7 +1851,7 @@ msgstr "이 에피소드 다운로드"
 msgid "Download..."
 msgstr "다운로드..."
 
-#: podcasts/podcastservice.cpp:254
+#: podcasts/podcastservice.cpp:261
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "다운로드 중 (%1%)..."
@@ -1787,56 +1860,56 @@ msgstr "다운로드 중 (%1%)..."
 msgid "Downloading Icecast directory"
 msgstr "Icecast 디렉토리 다운로드 중"
 
-#: internet/jamendoservice.cpp:187
+#: internet/jamendoservice.cpp:195
 msgid "Downloading Jamendo catalogue"
-msgstr "자멘도 카탈로그 다운로드 중"
+msgstr "Jamendo 카탈로그 다운로드 중"
 
-#: internet/magnatuneservice.cpp:158
+#: internet/magnatuneservice.cpp:152
 msgid "Downloading Magnatune catalogue"
-msgstr "매그나튠 카탈로그 다운로드 중"
+msgstr "Magnatune 카탈로그 다운로드 중"
 
-#: internet/spotifyblobdownloader.cpp:44
+#: internet/spotifyblobdownloader.cpp:49
 msgid "Downloading Spotify plugin"
-msgstr "스포티피 플러그인 다운로드 중"
+msgstr "Spotify 플러그인 다운로드 중"
 
-#: musicbrainz/tagfetcher.cpp:102
+#: musicbrainz/tagfetcher.cpp:107
 msgid "Downloading metadata"
 msgstr "메타데이터 다운로드 중"
 
-#: ui/notificationssettingspage.cpp:37
+#: ui/notificationssettingspage.cpp:36
 msgid "Drag to reposition"
 msgstr "재배치하려면 드래그하세요"
 
 #: ../bin/src/ui_dropboxsettingspage.h:103
 msgid "Dropbox"
-msgstr "드롭박스"
+msgstr "Dropbox"
 
 #: ui/equalizer.cpp:119
 msgid "Dubstep"
-msgstr ""
+msgstr "덥스탭"
 
 #: ../bin/src/ui_ripcd.h:309
 msgid "Duration"
-msgstr ""
+msgstr "지속"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
 msgstr "다이나믹 모드가 켜졌습니다"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:93
+#: internet/jamendoservice.cpp:121 library/library.cpp:112
 msgid "Dynamic random mix"
 msgstr "다이나믹 랜덤 믹스"
 
-#: library/libraryview.cpp:381
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "스마트 재생목록 편집..."
 
-#: ui/mainwindow.cpp:1415
+#: ui/mainwindow.cpp:1581
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr ""
+msgstr "태그 수정 \"%1\"..."
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:659
 msgid "Edit tag..."
 msgstr "태그 편집..."
 
@@ -1848,16 +1921,16 @@ msgstr "태그 편집"
 msgid "Edit track information"
 msgstr "트랙 정보 편집"
 
-#: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
-#: ../bin/src/ui_mainwindow.h:673
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
+#: ../bin/src/ui_mainwindow.h:655
 msgid "Edit track information..."
 msgstr "트랙 정보 편집..."
 
-#: library/libraryview.cpp:397
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "트랙 정보 편집..."
 
-#: internet/savedradio.cpp:101
+#: internet/savedradio.cpp:103
 msgid "Edit..."
 msgstr "편집..."
 
@@ -1865,13 +1938,17 @@ msgstr "편집..."
 msgid "Enable Wii Remote support"
 msgstr "Wii 리모컨 모드 사용"
 
+#: ../bin/src/ui_vksettingspage.h:219
+msgid "Enable automatic caching"
+msgstr "자동 캐싱 허용"
+
 #: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
 msgstr "이퀄라이저 사용"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr "클레멘타인이 활성화 되었을 때에만 단축키 허용"
+msgstr "Clementine이 활성화 되었을 때에만 단축키 허용"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -1879,7 +1956,7 @@ msgid ""
 "displayed in this order."
 msgstr "검색 결과에 아래의 소스들을 포함시킵니다. 검색 결과는 다음의 순서대로 표시됩니다."
 
-#: core/globalshortcuts.cpp:63
+#: core/globalshortcuts.cpp:72
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm 스크로블 켜기/끄기"
 
@@ -1905,16 +1982,11 @@ msgstr "인터넷에서 다운로드할 커버의 URL 주소를 입력하세요"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Enter a filename for exported covers (no extension):"
-msgstr ""
+msgstr "내보낼 커버의 파일이름을 입력(확장자 제외):"
 
-#: playlist/playlisttabbar.cpp:137
+#: playlist/playlisttabbar.cpp:136
 msgid "Enter a new name for this playlist"
 msgstr "새로운 재생목록 이름을 입력하세요"
-
-#: ../bin/src/ui_lastfmstationdialog.h:93
-msgid ""
-"Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Last.fm 라디오에서 듣고 싶은 <b>음악가</b>나 <b>태그</b>를 입력하세요."
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
@@ -1929,7 +2001,7 @@ msgstr "iTunes 스토어에서 팟케스트를 찾기 위한 검색 조건을 �
 msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "gpodder.net에서 팟케스트를 찾기 위한 검색 조건을 아래에 입력하세요."
 
-#: ../bin/src/ui_libraryfilterwidget.h:96
+#: ../bin/src/ui_libraryfilterwidget.h:99
 #: ../bin/src/ui_albumcovermanager.h:219
 msgid "Enter search terms here"
 msgstr "여기에 검색할 단어를 입력하세요"
@@ -1938,33 +2010,34 @@ msgstr "여기에 검색할 단어를 입력하세요"
 msgid "Enter the URL of an internet radio stream:"
 msgstr "인터넷 라디오 스트림 URL 주소를 입력하세요"
 
-#: playlist/playlistlistcontainer.cpp:172
+#: playlist/playlistlistcontainer.cpp:169
 msgid "Enter the name of the folder"
 msgstr "폴더의 이름 입력"
 
-#: ../bin/src/ui_networkremotesettingspage.h:198
+#: ../bin/src/ui_networkremotesettingspage.h:199
 msgid "Enter this IP in the App to connect to Clementine."
-msgstr "클레멘타인에 연결하기 위한 앱에서 다음의 IP를 입력하세요."
+msgstr "Clementine에 연결하기 위한 앱에서 다음의 IP를 입력하세요."
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
 msgstr "전체 선택"
 
-#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:682
 msgid "Equalizer"
 msgstr "이퀄라이저"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:167
 msgid "Equivalent to --log-levels *:1"
-msgstr ""
+msgstr "동등한 --log-levels *:1"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:168
 msgid "Equivalent to --log-levels *:3"
-msgstr ""
+msgstr "동등한 --log-level *:3"
 
-#: internet/groovesharkservice.cpp:1017
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1690 ui/mainwindow.cpp:1912 ui/mainwindow.cpp:2028
+#: internet/groovesharkservice.cpp:1048
+#: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
+#: ui/mainwindow.cpp:1863 ui/mainwindow.cpp:2110 ui/mainwindow.cpp:2258
+#: internet/vkservice.cpp:621
 msgid "Error"
 msgstr "오류"
 
@@ -1972,38 +2045,38 @@ msgstr "오류"
 msgid "Error connecting MTP device"
 msgstr "MTP 장치에 연결 오류"
 
-#: ui/organiseerrordialog.cpp:55
+#: ui/organiseerrordialog.cpp:52
 msgid "Error copying songs"
 msgstr "노래 복사 오류"
 
-#: ui/organiseerrordialog.cpp:60
+#: ui/organiseerrordialog.cpp:59
 msgid "Error deleting songs"
 msgstr "노래 삭제 오류"
 
-#: internet/spotifyblobdownloader.cpp:215
+#: internet/spotifyblobdownloader.cpp:220
 msgid "Error downloading Spotify plugin"
-msgstr "스포티피 플러그인 다운로드 오류"
+msgstr "Spotify 플러그인 다운로드 오류"
 
-#: playlist/songloaderinserter.cpp:73 playlist/songloaderinserter.cpp:135
+#: playlist/songloaderinserter.cpp:64
 #, qt-format
 msgid "Error loading %1"
 msgstr "%1 불러오기 오류"
 
-#: internet/digitallyimportedservicebase.cpp:203
-#: internet/digitallyimportedurlhandler.cpp:89
+#: internet/digitallyimportedservicebase.cpp:196
+#: internet/digitallyimportedurlhandler.cpp:85
 msgid "Error loading di.fm playlist"
 msgstr "dl.fm 재생목록 불러오기 오류"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:394
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "%1: %2 처리 오류"
 
-#: playlist/songloaderinserter.cpp:102
+#: playlist/songloaderinserter.cpp:92
 msgid "Error while loading audio CD"
 msgstr "오디오 CD 불러오기 오류"
 
-#: library/library.cpp:63
+#: library/library.cpp:66
 msgid "Ever played"
 msgstr "재생한 적 있음"
 
@@ -2035,19 +2108,19 @@ msgstr "매 6시간"
 msgid "Every hour"
 msgstr "매 시간"
 
-#: ../bin/src/ui_playbacksettingspage.h:303
+#: ../bin/src/ui_playbacksettingspage.h:316
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "같은 앨범이나 같은 큐 시트의 트랙 사이에선 제외"
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
-msgstr ""
+msgstr "존재하는 커버"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
 msgstr "확장"
 
-#: widgets/loginstatewidget.cpp:142
+#: widgets/loginstatewidget.cpp:139
 #, qt-format
 msgid "Expires on %1"
 msgstr "만료 일자: "
@@ -2068,36 +2141,36 @@ msgstr "다운로드된 커버 내보내기"
 msgid "Export embedded covers"
 msgstr "내장된 커버 내보내기"
 
-#: ui/albumcovermanager.cpp:777 ui/albumcovermanager.cpp:801
+#: ui/albumcovermanager.cpp:785 ui/albumcovermanager.cpp:809
 msgid "Export finished"
 msgstr "내보내기 완료"
 
-#: ui/albumcovermanager.cpp:786
+#: ui/albumcovermanager.cpp:794
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "%2개의 앨범 표지중 %1개 내보냄. (%3개 건너뜀)"
 
-#: ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_mainwindow.h:664
 msgid "F1"
 msgstr "F1"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:660
 msgid "F2"
 msgstr "F2"
 
-#: ../bin/src/ui_mainwindow.h:653
+#: ../bin/src/ui_mainwindow.h:637
 msgid "F5"
 msgstr "F5"
 
-#: ../bin/src/ui_mainwindow.h:655
+#: ../bin/src/ui_mainwindow.h:639
 msgid "F6"
 msgstr "F6"
 
-#: ../bin/src/ui_mainwindow.h:657
+#: ../bin/src/ui_mainwindow.h:641
 msgid "F7"
 msgstr "F7"
 
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:643
 msgid "F8"
 msgstr "F8"
 
@@ -2107,42 +2180,42 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:306
+#: ../bin/src/ui_playbacksettingspage.h:319
 msgid "Fade out on pause / fade in on resume"
 msgstr "일시정지시 페이드 아웃/ 다시시작시 페이드 인"
 
-#: ../bin/src/ui_playbacksettingspage.h:300
+#: ../bin/src/ui_playbacksettingspage.h:313
 msgid "Fade out when stopping a track"
 msgstr "트랙 정지 시 페이드 아웃"
 
-#: ../bin/src/ui_playbacksettingspage.h:299
+#: ../bin/src/ui_playbacksettingspage.h:312
 msgid "Fading"
 msgstr "페이드 아웃"
 
-#: ../bin/src/ui_playbacksettingspage.h:304
-#: ../bin/src/ui_playbacksettingspage.h:307
+#: ../bin/src/ui_playbacksettingspage.h:317
+#: ../bin/src/ui_playbacksettingspage.h:320
 msgid "Fading duration"
 msgstr "페이드 아웃 시간"
 
-#: ui/mainwindow.cpp:1690
+#: ui/mainwindow.cpp:1864
 msgid "Failed reading CD drive"
-msgstr ""
+msgstr "CD 드라이브 읽기 실패"
 
-#: podcasts/gpoddertoptagspage.cpp:76
+#: podcasts/gpoddertoptagspage.cpp:69
 msgid "Failed to fetch directory"
-msgstr ""
+msgstr "폴더 가져오기 실패"
 
-#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
-#: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
-#: podcasts/itunessearchpage.cpp:82
+#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
+#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
+#: podcasts/itunessearchpage.cpp:81
 msgid "Failed to fetch podcasts"
 msgstr "팟케스트 가져오기 실패"
 
-#: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
 msgid "Failed to load podcast"
 msgstr "팟케스트 열기 실패"
 
-#: podcasts/podcasturlloader.cpp:167
+#: podcasts/podcasturlloader.cpp:173
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "RSS 피드를 위한 XML 파싱이 실패되었습니다."
 
@@ -2151,11 +2224,11 @@ msgstr "RSS 피드를 위한 XML 파싱이 실패되었습니다."
 msgid "Fast"
 msgstr "빠른"
 
-#: internet/groovesharkservice.cpp:617
+#: internet/groovesharkservice.cpp:639
 msgid "Favorites"
 msgstr "좋아하는"
 
-#: library/library.cpp:77
+#: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "좋아하는 트랙"
 
@@ -2171,19 +2244,19 @@ msgstr "자동으로 가져오기"
 msgid "Fetch completed"
 msgstr "가져오기 완료"
 
-#: internet/subsonicservice.cpp:241
+#: internet/subsonicservice.cpp:228
 msgid "Fetching Subsonic library"
-msgstr "서브소닉 라이브러리 가져오기"
+msgstr "Subsonic 라이브러리 가져오기"
 
-#: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
+#: ui/coverfromurldialog.cpp:70 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "커버 가져오기 오류"
 
 #: ../bin/src/ui_ripcd.h:320
 msgid "File Format"
-msgstr ""
+msgstr "파일 형식"
 
-#: ui/organisedialog.cpp:72
+#: ui/organisedialog.cpp:77
 msgid "File extension"
 msgstr "파일 확장자"
 
@@ -2191,19 +2264,23 @@ msgstr "파일 확장자"
 msgid "File formats"
 msgstr "파일 "
 
-#: playlist/playlist.cpp:1231 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:680
 msgid "File name"
 msgstr "파일 "
 
-#: playlist/playlist.cpp:1232
+#: playlist/playlist.cpp:1343
 msgid "File name (without path)"
 msgstr "파일 이름 (경로 제외)"
 
-#: playlist/playlist.cpp:1233 ../bin/src/ui_edittagdialog.h:674
+#: ../bin/src/ui_vksettingspage.h:221
+msgid "File name pattern:"
+msgstr "파일 명 규칙:"
+
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:674
 msgid "File size"
 msgstr "파일 크기"
 
-#: playlist/playlist.cpp:1234 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1347 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
 #: ../bin/src/ui_edittagdialog.h:676
 msgid "File type"
@@ -2213,7 +2290,7 @@ msgstr "파일 형태"
 msgid "Filename"
 msgstr "파일 "
 
-#: ui/mainwindow.cpp:242
+#: ui/mainwindow.cpp:233
 msgid "Files"
 msgstr "파일"
 
@@ -2221,15 +2298,19 @@ msgstr "파일"
 msgid "Files to transcode"
 msgstr "변환할 파일들"
 
-#: smartplaylists/querywizardplugin.cpp:90
+#: smartplaylists/querywizardplugin.cpp:82
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "라이브러리에서 지정한 기준과 일치하는 노래를 찾습니다."
 
-#: musicbrainz/tagfetcher.cpp:55
+#: internet/vkservice.cpp:302
+msgid "Find this artist"
+msgstr "이 음악가 찾기"
+
+#: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
 msgstr "노래 "
 
-#: smartplaylists/wizard.cpp:85
+#: smartplaylists/wizard.cpp:83
 msgid "Finish"
 msgstr "마침"
 
@@ -2237,7 +2318,7 @@ msgstr "마침"
 msgid "First level"
 msgstr "첫 단계"
 
-#: core/song.cpp:340
+#: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
 msgstr "Flac"
 
@@ -2247,22 +2328,22 @@ msgstr "글꼴 크기"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr ""
+msgstr "라이선스 문제로 인하여 Spotify 는 별도의 플러그인에서 지원합니다."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
 msgstr "강제 모노 인코딩"
 
-#: devices/deviceview.cpp:204 devices/deviceview.cpp:310
-#: devices/deviceview.cpp:314
+#: devices/deviceview.cpp:207 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr "장치를 잃어버림"
 
-#: devices/deviceview.cpp:311
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr ""
+msgstr "장치를 잃어버렸을 경우 목록에서 제거하고 Clementine이 다음 연결할 때 모든 음악을 다시 스캔합니다."
 
 #: ../bin/src/ui_deviceviewcontainer.h:98
 #: ../bin/src/ui_searchproviderstatuswidget.h:94
@@ -2273,7 +2354,7 @@ msgstr ""
 #: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
+#: ../bin/src/ui_querysortpage.h:137 ../bin/src/ui_searchpreview.h:104
 #: ../bin/src/ui_searchtermwidget.h:268 ../bin/src/ui_wizardfinishpage.h:83
 #: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
@@ -2301,31 +2382,23 @@ msgstr "프레임레이트"
 msgid "Frames per buffer"
 msgstr "프레임/"
 
-#: internet/lastfmservice.cpp:224
-msgid "Friends"
-msgstr "친구들"
-
-#: moodbar/moodbarrenderer.cpp:157
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "얼음"
 
-#: ui/equalizer.cpp:120
+#: ui/equalizer.cpp:121
 msgid "Full Bass"
 msgstr "베이스 강화"
 
-#: ui/equalizer.cpp:122
+#: ui/equalizer.cpp:125
 msgid "Full Bass + Treble"
 msgstr "베이스+고음 강화"
 
-#: ui/equalizer.cpp:121
+#: ui/equalizer.cpp:123
 msgid "Full Treble"
 msgstr "고음 강화"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
-msgid "GStreamer audio engine"
-msgstr "G스트리머 오디오 엔진"
-
-#: ui/settingsdialog.cpp:131
+#: ui/settingsdialog.cpp:133
 msgid "General"
 msgstr "일반 "
 
@@ -2333,30 +2406,30 @@ msgstr "일반 "
 msgid "General settings"
 msgstr "일반 "
 
-#: playlist/playlist.cpp:1216 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "장르"
 
-#: internet/groovesharkservice.cpp:542
+#: internet/groovesharkservice.cpp:550
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Grooveshark 재생목록을 공유하기 위한 URL 얻기"
 
-#: internet/groovesharkservice.cpp:539 internet/groovesharkservice.cpp:1110
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1149
 msgid "Get a URL to share this Grooveshark song"
 msgstr " Grooveshark 음악을 공유하기 위한 URL 얻기"
 
-#: internet/groovesharkservice.cpp:790
+#: internet/groovesharkservice.cpp:823
 msgid "Getting Grooveshark popular songs"
-msgstr "그루브샤크에서 인기곡 가져오기"
+msgstr "Grooveshark에서 인기곡 가져오기"
 
-#: internet/somafmservice.cpp:114
+#: internet/somafmservice.cpp:115
 msgid "Getting channels"
 msgstr "채널 "
 
-#: internet/digitallyimportedservicebase.cpp:108
+#: internet/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
 msgstr "스트림 "
 
@@ -2368,99 +2441,99 @@ msgstr "이름 지정:"
 msgid "Go"
 msgstr "Go"
 
-#: ../bin/src/ui_mainwindow.h:711
+#: ../bin/src/ui_mainwindow.h:693
 msgid "Go to next playlist tab"
 msgstr "다음 재생목록 탭으로 가기"
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:694
 msgid "Go to previous playlist tab"
 msgstr "이전 재생목록 탭으로 가기"
 
 #: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
-msgstr "구글 드라이브"
+msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:453
+#: covers/coversearchstatisticsdialog.cpp:51 ui/albumcovermanager.cpp:460
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
-msgstr ""
+msgstr "%2 중 %1개 커버 가져옴 (%3 실패 됨)"
 
 #: ../bin/src/ui_behavioursettingspage.h:206
 msgid "Grey out non existent songs in my playlists"
-msgstr ""
+msgstr "내 재생목록에서 존재하지 않는 음악 회색화"
 
-#: ../bin/src/ui_groovesharksettingspage.h:112
+#: ../bin/src/ui_groovesharksettingspage.h:137
 msgid "Grooveshark"
-msgstr "그루브샤크"
+msgstr "Grooveshark"
 
 #: internet/groovesharkservice.cpp:408
 msgid "Grooveshark login error"
-msgstr "그루브샤크 로그인 에러"
+msgstr "Grooveshark 로그인 에러"
 
-#: internet/groovesharkservice.cpp:1162
+#: internet/groovesharkservice.cpp:1200
 msgid "Grooveshark playlist's URL"
 msgstr "Grooveshark 재생목록 URL"
 
-#: internet/groovesharkservice.cpp:603
+#: internet/groovesharkservice.cpp:619
 msgid "Grooveshark radio"
-msgstr "그루브샤크 라디오"
+msgstr "Grooveshark 라디오"
 
-#: internet/groovesharkservice.cpp:1140
+#: internet/groovesharkservice.cpp:1178
 msgid "Grooveshark song's URL"
-msgstr "그루브샤크 음악 URL"
+msgstr "Grooveshark 음악 URL"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
 msgstr "그룹 라이브러리..."
 
-#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:469 library/libraryfilterwidget.cpp:97
 msgid "Group by"
 msgstr "그룹"
 
-#: library/libraryfilterwidget.cpp:110
+#: library/libraryfilterwidget.cpp:131
 msgid "Group by Album"
 msgstr "앨범에 의한 그룹"
 
-#: library/libraryfilterwidget.cpp:104
+#: library/libraryfilterwidget.cpp:120
 msgid "Group by Artist"
 msgstr "음악가에 의한 그룹"
 
-#: library/libraryfilterwidget.cpp:106
+#: library/libraryfilterwidget.cpp:123
 msgid "Group by Artist/Album"
 msgstr "음악가/앨범에 의한 그룹"
 
-#: library/libraryfilterwidget.cpp:108
+#: library/libraryfilterwidget.cpp:127
 msgid "Group by Artist/Year - Album"
 msgstr "음악가/년도에 의한 그룹 - 앨범"
 
-#: library/libraryfilterwidget.cpp:112
+#: library/libraryfilterwidget.cpp:134
 msgid "Group by Genre/Album"
 msgstr "장르/앨범에 의한 그룹"
 
-#: library/libraryfilterwidget.cpp:114
+#: library/libraryfilterwidget.cpp:138
 msgid "Group by Genre/Artist/Album"
 msgstr "장르/음악가/앨범에 의한 그룹"
 
-#: playlist/playlist.cpp:1220 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
 msgstr "그룹화"
 
-#: podcasts/podcasturlloader.cpp:196
+#: podcasts/podcasturlloader.cpp:204
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML 페이지가 어떠한 RSS 피드를 포함하지 않습니다."
 
-#: internet/subsonicsettingspage.cpp:135
+#: internet/subsonicsettingspage.cpp:141
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr ""
+msgstr "URL이 없이 HTTP 3XX 상태코드가 수신 되었습니다. 서버 설정을 확인하세요."
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
 msgstr "HTTP "
 
-#: moodbar/moodbarrenderer.cpp:158
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "행복"
 
@@ -2476,72 +2549,72 @@ msgstr "하드웨어 정보는 장치가 연결되어있는 동안에만 가능�
 msgid "High"
 msgstr "높음"
 
-#: analyzers/analyzercontainer.cpp:64
-#: visualisations/visualisationcontainer.cpp:109
+#: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "높음 (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:119
+#: visualisations/visualisationcontainer.cpp:124
 msgid "High (1024x1024)"
 msgstr "높음 (1024x1024)"
 
-#: internet/subsonicsettingspage.cpp:112
+#: internet/subsonicsettingspage.cpp:113
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "호스트가 발견되지 않았습니다. 서버의 주소를 확인하세요. 예)http://localhost:4040/"
 
-#: smartplaylists/searchterm.cpp:310
+#: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "시간"
 
-#: core/backgroundstreams.cpp:30
+#: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
 msgstr "최면 두꺼비 대왕"
 
 #: ../bin/src/ui_magnatunesettingspage.h:159
 msgid "I don't have a Magnatune account"
-msgstr "매그나튠 계정을 가지고 있지 않습니다."
+msgstr "Magnatune 계정을 가지고 있지 않습니다."
 
 #: ../bin/src/ui_deviceproperties.h:370
 msgid "Icon"
 msgstr "아이콘"
 
-#: widgets/fancytabwidget.cpp:674
+#: widgets/fancytabwidget.cpp:666
 msgid "Icons on top"
 msgstr "상단에 아이콘"
 
-#: musicbrainz/tagfetcher.cpp:86
+#: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "음악을 식별하는 "
 
-#: devices/devicemanager.cpp:568 devices/devicemanager.cpp:576
+#: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
-msgstr ""
+msgstr "계속 한다면, 이 장치는 느리고 복사된 음악들이 작동 되지 않을 수 있습니다."
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "팟케스트에 URL을 알고 있다면, 아래에 입력하고 버튼을 누르세요."
 
-#: ../bin/src/ui_organisedialog.h:204
+#: ../bin/src/ui_organisedialog.h:250
 msgid "Ignore \"The\" in artist names"
 msgstr "음악가 이름에서 \"The\" 제거"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "그림 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:147
+#: core/utilities.cpp:141
 #, qt-format
 msgid "In %1 days"
 msgstr ""
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 weeks"
 msgstr ""
@@ -2552,9 +2625,9 @@ msgid ""
 "time a song finishes."
 msgstr "다이나믹 모드에서는 곡이 끝날 때마다 자동으로 재생목록에 곡이 추가됩니다."
 
-#: internet/spotifyservice.cpp:360
+#: internet/spotifyservice.cpp:371
 msgid "Inbox"
-msgstr ""
+msgstr "수신함"
 
 #: ../bin/src/ui_notificationssettingspage.h:443
 msgid "Include album art in the notification"
@@ -2564,135 +2637,135 @@ msgstr "알림에 앨범 아트 포함"
 msgid "Include all songs"
 msgstr "모든 음악 포함"
 
-#: internet/subsonicsettingspage.cpp:90
+#: internet/subsonicsettingspage.cpp:85
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
-msgstr "호환되지 않는 서브소닉 REST 프로토콜 버전입니다. 클라이언트를 업그레이드 해야만 합니다."
+msgstr "호환되지 않는 Subsonic REST 프로토콜 버전입니다. 클라이언트를 업그레이드 해야만 합니다."
 
-#: internet/subsonicsettingspage.cpp:94
+#: internet/subsonicsettingspage.cpp:90
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
-msgstr "호환되지 않는 서브소닉 REST 프로토콜 버전입니다. 서버를 업그레이드 해야만 합니다."
+msgstr "호환되지 않는 Subsonic REST 프로토콜 버전입니다. 서버를 업그레이드 해야만 합니다."
 
-#: internet/subsonicsettingspage.cpp:127
+#: internet/subsonicsettingspage.cpp:131
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:150
 msgid "Increase the volume by 4%"
 msgstr "4% 단위로 음량 올리기"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:152
 msgid "Increase the volume by <value> percent"
 msgstr "<value>% 단위로 음량 올리기"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "음량 올리기"
 
-#: internet/cloudfileservice.cpp:136
+#: internet/cloudfileservice.cpp:133
 #, qt-format
 msgid "Indexing %1"
 msgstr "색인 %1"
 
-#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
+#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:132
 msgid "Information"
 msgstr "정보"
 
 #: ../bin/src/ui_ripcd.h:301
 msgid "Input options"
-msgstr ""
+msgstr "옵션 "
 
-#: ../bin/src/ui_organisedialog.h:203
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Insert..."
 msgstr "추가..."
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:72
 msgid "Installed"
 msgstr "설치 됨"
 
-#: core/database.cpp:583
+#: core/database.cpp:577
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:244
+#: ui/mainwindow.cpp:237
 msgid "Internet"
 msgstr "인터넷"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "인터넷 "
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
 msgstr "잘못된 API "
 
-#: internet/lastfmservice.cpp:428
+#: internet/lastfmservice.cpp:224
 msgid "Invalid format"
 msgstr "잘못된 형식"
 
-#: internet/lastfmservice.cpp:426
+#: internet/lastfmservice.cpp:220
 msgid "Invalid method"
 msgstr "잘못된 방법"
 
-#: internet/lastfmservice.cpp:429
+#: internet/lastfmservice.cpp:226
 msgid "Invalid parameters"
 msgstr "잘못된 매개변수"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:228
 msgid "Invalid resource specified"
 msgstr "잘못된 리소스가 지정되었습니다."
 
-#: internet/lastfmservice.cpp:425
+#: internet/lastfmservice.cpp:218
 msgid "Invalid service"
 msgstr "잘못된 서비스"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:232
 msgid "Invalid session key"
 msgstr "잘못된 세션 키"
 
-#: internet/groovesharkservice.cpp:401
+#: internet/groovesharkservice.cpp:400
 msgid "Invalid username and/or password"
 msgstr "잘못된 사용자명 또는(그리고) 비밀번호입니다."
 
 #: ../bin/src/ui_ripcd.h:312
 msgid "Invert Selection"
-msgstr ""
+msgstr "선택 반전"
 
-#: internet/jamendoservice.cpp:127
+#: internet/jamendoservice.cpp:133
 msgid "Jamendo"
-msgstr "자멘도"
+msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:109
+#: internet/jamendoservice.cpp:117
 msgid "Jamendo Most Listened Tracks"
-msgstr "자멘도 가장 많이 들은 트랙"
+msgstr "Jamendo 가장 많이 들은 트랙"
 
-#: internet/jamendoservice.cpp:107
+#: internet/jamendoservice.cpp:114
 msgid "Jamendo Top Tracks"
-msgstr "자멘도 최고의 트랙"
+msgstr "Jamendo 최고의 트랙"
 
-#: internet/jamendoservice.cpp:103
+#: internet/jamendoservice.cpp:108
 msgid "Jamendo Top Tracks of the Month"
-msgstr "자멘도 이 달의 최고 트랙"
+msgstr "Jamendo 이 달의 최고 트랙"
 
-#: internet/jamendoservice.cpp:105
+#: internet/jamendoservice.cpp:111
 msgid "Jamendo Top Tracks of the Week"
-msgstr "자멘도 금주의 최그 트랙"
+msgstr "Jamendo 금주의 최그 트랙"
 
-#: internet/jamendoservice.cpp:171
+#: internet/jamendoservice.cpp:175
 msgid "Jamendo database"
-msgstr "자멘도 데이터베이스"
+msgstr "Jamendo 데이터베이스"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Jump to the currently playing track"
 msgstr "현재 재생 중인 트랙 건너뛰기"
 
-#: wiimotedev/wiimoteshortcutgrabber.cpp:72
+#: wiimotedev/wiimoteshortcutgrabber.cpp:69
 #, qt-format
 msgid "Keep buttons for %1 second..."
 msgstr "%1 초 동안 버튼 유지..."
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:127
-#: wiimotedev/wiimoteshortcutgrabber.cpp:73
-#: wiimotedev/wiimoteshortcutgrabber.cpp:117
+#: wiimotedev/wiimoteshortcutgrabber.cpp:72
+#: wiimotedev/wiimoteshortcutgrabber.cpp:114
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "%1 초 동안 버튼 유지..."
@@ -2701,23 +2774,24 @@ msgstr "%1 초 동안 버튼 유지..."
 msgid "Keep running in the background when the window is closed"
 msgstr "창을 닫을 때 백그라운드에서 계속 실행"
 
-#: ../bin/src/ui_organisedialog.h:193
+#: ../bin/src/ui_organisedialog.h:239
 msgid "Keep the original files"
 msgstr "원본 파일들 "
 
-#: ../bin/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:677
+msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "고양이"
 
 #: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Language"
-msgstr "Language"
+msgstr "언어"
 
-#: ui/equalizer.cpp:123
+#: ui/equalizer.cpp:127
 msgid "Laptop/Headphones"
 msgstr "노트북/헤드폰"
 
-#: ui/equalizer.cpp:124
+#: ui/equalizer.cpp:129
 msgid "Large Hall"
 msgstr "거대한 홀"
 
@@ -2725,12 +2799,16 @@ msgstr "거대한 홀"
 msgid "Large album cover"
 msgstr "큰 앨범 표지"
 
-#: widgets/fancytabwidget.cpp:670
+#: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
 msgstr "큰 사이드바"
 
-#: library/library.cpp:71 playlist/playlist.cpp:1225
-#: ../bin/src/ui_edittagdialog.h:671
+#: library/library.cpp:80
+msgid "Last played"
+msgstr "마지막으로 재생됨"
+
+#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:671
+msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "마지막으로 재생됨"
 
@@ -2738,45 +2816,7 @@ msgstr "마지막으로 재생됨"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:85
-#, qt-format
-msgid "Last.fm Custom Radio: %1"
-msgstr "Last.fm 사용자 정의 라디오: %1"
-
-#: internet/lastfmservice.cpp:255 internet/lastfmservice.cpp:699
-#: internet/lastfmservice.cpp:722
-#, qt-format
-msgid "Last.fm Library - %1"
-msgstr "Last.fm 라이브러리 - %1"
-
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:257
-#: internet/lastfmservice.cpp:260
-#, qt-format
-msgid "Last.fm Mix Radio - %1"
-msgstr "Last.fm 믹스 라디오 - %1"
-
-#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:262
-#: internet/lastfmservice.cpp:265
-#, qt-format
-msgid "Last.fm Neighbor Radio - %1"
-msgstr "Last.fm 이웃 라디오 - %1"
-
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:252
-#, qt-format
-msgid "Last.fm Radio Station - %1"
-msgstr "Last.fm 라디오 방송국 - %1"
-
-#: internet/lastfmservice.cpp:83
-#, qt-format
-msgid "Last.fm Similar Artists to %1"
-msgstr "Last.fm %1 와 유사한 음악가"
-
-#: internet/lastfmservice.cpp:84
-#, qt-format
-msgid "Last.fm Tag Radio: %1"
-msgstr "Last.fm 태그 라디오: %1"
-
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:241
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm 이 현재 바쁩니다. 잠시 후 다시 시도해 주세요."
 
@@ -2784,11 +2824,11 @@ msgstr "Last.fm 이 현재 바쁩니다. 잠시 후 다시 시도해 주세요."
 msgid "Last.fm password"
 msgstr "Last.fm 비밀번호"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:78
+#: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
 msgstr "Last.fm 재생 횟수"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:131
+#: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Last.fm 태그"
 
@@ -2796,28 +2836,24 @@ msgstr "Last.fm 태그"
 msgid "Last.fm username"
 msgstr "Last.fm 사용자명"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:111
+#: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
 msgstr "Last.fm 위키"
 
-#: library/library.cpp:87
+#: library/library.cpp:102
 msgid "Least favourite tracks"
 msgstr "Last.fm 좋아하는 트랙"
-
-#: ../bin/src/ui_playbacksettingspage.h:326
-msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
 msgstr "왼쪽"
 
-#: playlist/playlist.cpp:1212 ui/organisedialog.cpp:69
-#: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:666
+#: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
+#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:666
 msgid "Length"
 msgstr "길이"
 
-#: ui/mainwindow.cpp:231 ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:219 ui/mainwindow.cpp:232
 msgid "Library"
 msgstr "라이브러리 "
 
@@ -2825,24 +2861,24 @@ msgstr "라이브러리 "
 msgid "Library advanced grouping"
 msgstr "향상된 그룹 "
 
-#: ui/mainwindow.cpp:2145
+#: ui/mainwindow.cpp:2382
 msgid "Library rescan notice"
 msgstr "라이브러리 재탐색 알림"
 
-#: smartplaylists/querywizardplugin.cpp:86
+#: smartplaylists/querywizardplugin.cpp:79
 msgid "Library search"
 msgstr "라이브러리 "
 
-#: ../bin/src/ui_querysortpage.h:140
+#: ../bin/src/ui_querysortpage.h:141
 msgid "Limits"
 msgstr "제한"
 
-#: internet/groovesharkservice.cpp:604
+#: internet/groovesharkservice.cpp:621
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr ""
 
-#: ui/equalizer.cpp:125
+#: ui/equalizer.cpp:131
 msgid "Live"
 msgstr "라이브"
 
@@ -2854,15 +2890,15 @@ msgstr "열기"
 msgid "Load cover from URL"
 msgstr "URL로 부터 커버 열기"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "URL로 부터 커버 열기..."
 
-#: ui/albumcoverchoicecontroller.cpp:98
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "디스크로부터 커버 열기"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "디스크로부터 커버열기..."
 
@@ -2870,101 +2906,111 @@ msgstr "디스크로부터 커버열기..."
 msgid "Load playlist"
 msgstr "재생목록 불러오기"
 
-#: ../bin/src/ui_mainwindow.h:709
+#: ../bin/src/ui_mainwindow.h:691
 msgid "Load playlist..."
 msgstr "재생목록 불러오기..."
-
-#: internet/lastfmservice.cpp:884
-msgid "Loading Last.fm radio"
-msgstr "Last.fm 라디오 여는 중"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
 msgstr "MTP 장치 여는 중"
 
-#: devices/gpodloader.cpp:46
+#: devices/gpodloader.cpp:45
 msgid "Loading iPod database"
 msgstr "iPod 데이터베이스 여는 중"
 
-#: smartplaylists/generatorinserter.cpp:52
+#: smartplaylists/generatorinserter.cpp:50
 msgid "Loading smart playlist"
 msgstr "스마트 재생목록 불러오기 중"
 
-#: library/librarymodel.cpp:139
+#: library/librarymodel.cpp:148
 msgid "Loading songs"
 msgstr "음악 여는 중"
 
-#: internet/digitallyimportedurlhandler.cpp:67
-#: internet/somafmurlhandler.cpp:58
+#: internet/digitallyimportedurlhandler.cpp:63
+#: internet/somafmurlhandler.cpp:49
 msgid "Loading stream"
 msgstr "스트림 여는 중"
 
-#: playlist/songloaderinserter.cpp:81 ui/edittagdialog.cpp:233
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "트랙 여는 중"
 
-#: playlist/songloaderinserter.cpp:141
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "트랙 정보 불러오는중"
 
-#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
-#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
+#: library/librarymodel.cpp:143 podcasts/podcastdiscoverymodel.cpp:102
+#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
+#: internet/vkservice.cpp:485 internet/vksettingspage.cpp:122
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Loading..."
 msgstr "여는 중..."
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:162
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 
+#: internet/vksettingspage.cpp:110
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:116
+#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
-#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_skydrivesettingspage.h:105
+#: ../bin/src/ui_boxsettingspage.h:105 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
-#: ../bin/src/ui_ubuntuonesettingspage.h:131
 msgid "Login"
 msgstr "로그인"
 
-#: podcasts/podcastsettingspage.cpp:119
+#: podcasts/podcastsettingspage.cpp:120
 msgid "Login failed"
 msgstr "로그인 실패"
 
+#: internet/vksettingspage.cpp:121
+msgid "Logout"
+msgstr "로그아웃"
+
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
-msgstr ""
+msgstr "장기 예측 프로파일(LTP)"
 
-#: ../bin/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:648
 msgid "Love"
 msgstr "좋아요"
 
-#: analyzers/analyzercontainer.cpp:62
+#: analyzers/analyzercontainer.cpp:61
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "낮음 (%1fps)"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:121
 msgid "Low (256x256)"
 msgstr "낮음 (256x256)"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
-msgstr ""
+msgstr "저복잡도 프로파일(LC)"
 
 #: ../bin/src/ui_songinfosettingspage.h:159
 msgid "Lyrics"
 msgstr "가사"
 
-#: songinfo/ultimatelyricsprovider.cpp:156
+#: songinfo/ultimatelyricsprovider.cpp:154
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "%1 의 가사"
 
-#: core/song.cpp:343 ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcoder.cpp:232
+msgid "M4A AAC"
+msgstr "MP4 AAC"
+
+#: core/song.cpp:385 transcoder/transcoder.cpp:235
+#: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2976,41 +3022,46 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:341
+#: core/song.cpp:381
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:342
+#: core/song.cpp:383
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:103 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatuneservice.cpp:101 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
-msgstr "매그나튠"
+msgstr "Magnatune"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:131
 msgid "Magnatune Download"
-msgstr "매그나튠 다운로드"
+msgstr "Magnatune 다운로드"
 
-#: widgets/osd.cpp:195
+#: widgets/osd.cpp:192
 msgid "Magnatune download finished"
-msgstr "매그나튠 다운로드 완료됨"
+msgstr "Magnatune 다운로드 완료 됨"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:134
 msgid "Main profile (MAIN)"
 msgstr "메인 프로필 (MAIN)"
 
-#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:694
+#: core/backgroundstreams.cpp:33
 msgid "Make it so!"
-msgstr ""
+msgstr "Make it so!"
 
-#: internet/spotifyservice.cpp:533
+#: ../bin/src/ui_mainwindow.h:676
+msgctxt "Label for button to enable/disable Enterprise background sound."
+msgid "Make it so!"
+msgstr "Make it so!"
+
+#: internet/spotifyservice.cpp:552
 msgid "Make playlist available offline"
 msgstr "재생목록을 오프라인에서 재생 가능하도록 설정"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:253
 msgid "Malformed response"
-msgstr ""
+msgstr "잘못된 응답"
 
 #: ../bin/src/ui_networkproxysettingspage.h:160
 msgid "Manual proxy configuration"
@@ -3021,17 +3072,17 @@ msgstr "수동 프록시 설정"
 msgid "Manually"
 msgstr "수동적"
 
-#: devices/deviceproperties.cpp:153
+#: devices/deviceproperties.cpp:156
 msgid "Manufacturer"
 msgstr "제조회사"
 
-#: podcasts/podcastservice.cpp:346
+#: podcasts/podcastservice.cpp:357
 msgid "Mark as listened"
-msgstr ""
+msgstr "들음으로 기록"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:356
 msgid "Mark as new"
-msgstr ""
+msgstr "새로 기록"
 
 #: ../bin/src/ui_querysearchpage.h:116
 msgid "Match every search term (AND)"
@@ -3041,17 +3092,21 @@ msgstr "모든 검색조건 일치 (AND)"
 msgid "Match one or more search terms (OR)"
 msgstr "하나 이상의 검색조건 일치 (OR)"
 
+#: ../bin/src/ui_vksettingspage.h:215
+msgid "Max global search results"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "최고 비트 전송률"
 
-#: analyzers/analyzercontainer.cpp:63
-#: visualisations/visualisationcontainer.cpp:108
+#: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "중간 (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:118
+#: visualisations/visualisationcontainer.cpp:122
 msgid "Medium (512x512)"
 msgstr "중간 (512x512)"
 
@@ -3063,11 +3118,15 @@ msgstr "멤버쉽 유형"
 msgid "Minimum bitrate"
 msgstr "최저 비트 전송률"
 
-#: visualisations/projectmvisualisation.cpp:132
-msgid "Missing projectM presets"
+#: ../bin/src/ui_playbacksettingspage.h:336
+msgid "Minimum buffer fill"
 msgstr ""
 
-#: devices/deviceproperties.cpp:152
+#: visualisations/projectmvisualisation.cpp:131
+msgid "Missing projectM presets"
+msgstr "projectM 프리셋들이 누락되었습니다"
+
+#: devices/deviceproperties.cpp:155
 msgid "Model"
 msgstr "모형"
 
@@ -3075,20 +3134,20 @@ msgstr "모형"
 msgid "Monitor the library for changes"
 msgstr "라이브러리의 변화를 감지"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Mono playback"
 msgstr "모노 재생"
 
-#: smartplaylists/searchterm.cpp:313
+#: smartplaylists/searchterm.cpp:392
 msgid "Months"
 msgstr "개월"
 
-#: playlist/playlist.cpp:1240
+#: playlist/playlist.cpp:1358
 msgid "Mood"
 msgstr "분위기"
 
 #: ../bin/src/ui_appearancesettingspage.h:294
-#: moodbar/moodbarproxystyle.cpp:342
+#: moodbar/moodbarproxystyle.cpp:376
 msgid "Moodbar style"
 msgstr "분위기 막대 "
 
@@ -3096,15 +3155,19 @@ msgstr "분위기 막대 "
 msgid "Moodbars"
 msgstr "분위기 막대"
 
-#: library/library.cpp:74
+#: internet/vkservice.cpp:489
+msgid "More"
+msgstr "더 "
+
+#: library/library.cpp:84
 msgid "Most played"
 msgstr "자주 재생됨"
 
-#: devices/giolister.cpp:159
+#: devices/giolister.cpp:155
 msgid "Mount point"
 msgstr "마운트 지점"
 
-#: devices/devicekitlister.cpp:125
+#: devices/devicekitlister.cpp:127
 msgid "Mount points"
 msgstr "마운트 지점"
 
@@ -3113,7 +3176,7 @@ msgstr "마운트 지점"
 msgid "Move down"
 msgstr "아래로 이동"
 
-#: ui/mainwindow.cpp:515 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:595 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "라이브러리로 이동..."
 
@@ -3122,7 +3185,7 @@ msgstr "라이브러리로 이동..."
 msgid "Move up"
 msgstr "위로 이동"
 
-#: transcoder/transcodedialog.cpp:221 ui/mainwindow.cpp:1625
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1798
 msgid "Music"
 msgstr "음악"
 
@@ -3130,56 +3193,32 @@ msgstr "음악"
 msgid "Music Library"
 msgstr "음악 라이브러리"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:717
-#: wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:699
+#: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "음소거"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
-msgid "My Last.fm Library"
-msgstr "내 Last.fm 라이브러리"
-
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
-msgid "My Last.fm Mix Radio"
-msgstr "내 Last.fm 믹스 라디오"
-
-#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:205
-msgid "My Last.fm Neighborhood"
-msgstr "내 Last.fm 이웃들"
-
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:190
-msgid "My Last.fm Recommended Radio"
-msgstr "내 Last.fm 추천 라디오"
-
-#: internet/lastfmservice.cpp:197
-msgid "My Mix Radio"
-msgstr "내 믹스 라디오"
-
-#: internet/groovesharkservice.cpp:608
+#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
 msgid "My Music"
 msgstr "내 음악"
 
-#: internet/lastfmservice.cpp:202
-msgid "My Neighborhood"
-msgstr "내 이웃들"
-
-#: internet/lastfmservice.cpp:192
-msgid "My Radio Station"
-msgstr "내 라디오 방송국"
-
-#: internet/lastfmservice.cpp:187
+#: internet/vkservice.cpp:496
 msgid "My Recommendations"
 msgstr "내 추천목록"
 
-#: internet/groovesharkservice.cpp:1245 internet/groovesharkservice.cpp:1338
-#: ui/equalizer.cpp:182 ../bin/src/ui_deviceproperties.h:369
-#: ../bin/src/ui_magnatunedownloaddialog.h:135
+#: internet/groovesharkservice.cpp:1287 internet/groovesharkservice.cpp:1382
+#: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_wizardfinishpage.h:84
-#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgid "Name"
 msgstr "이름"
 
-#: ../bin/src/ui_organisedialog.h:197
+#: ../bin/src/ui_magnatunedownloaddialog.h:135
+#: ../bin/src/ui_globalshortcutssettingspage.h:184
+msgctxt "Category label"
+msgid "Name"
+msgstr "이름"
+
+#: ../bin/src/ui_organisedialog.h:243
 msgid "Naming options"
 msgstr "명명 옵션"
 
@@ -3187,46 +3226,42 @@ msgstr "명명 옵션"
 msgid "Narrow band (NB)"
 msgstr "협대역(NB)"
 
-#: internet/lastfmservice.cpp:229
-msgid "Neighbors"
-msgstr "이웃"
-
 #: ../bin/src/ui_networkproxysettingspage.h:157
 msgid "Network Proxy"
 msgstr "네트워크 프록시"
 
-#: ../bin/src/ui_networkremotesettingspage.h:177
+#: ../bin/src/ui_networkremotesettingspage.h:178
 msgid "Network Remote"
 msgstr "네트워크 리모콘"
 
-#: playlist/playlistdelegates.cpp:304 ui/edittagdialog.cpp:487
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:507
 msgid "Never"
-msgstr ""
+msgstr "없음"
 
-#: library/library.cpp:67
+#: library/library.cpp:73
 msgid "Never played"
 msgstr "재생한 적 없음"
 
 #: ../bin/src/ui_behavioursettingspage.h:210
 #: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Never start playing"
-msgstr ""
+msgstr "재생을 시작하지 않음"
 
-#: playlist/playlistlistcontainer.cpp:72
-#: playlist/playlistlistcontainer.cpp:171
+#: playlist/playlistlistcontainer.cpp:69
+#: playlist/playlistlistcontainer.cpp:168
 #: ../bin/src/ui_playlistlistcontainer.h:128
 msgid "New folder"
 msgstr "새 폴더"
 
-#: ui/mainwindow.cpp:1465 ../bin/src/ui_mainwindow.h:705
+#: ui/mainwindow.cpp:1635 ../bin/src/ui_mainwindow.h:687
 msgid "New playlist"
 msgstr "새로운 재생목록"
 
-#: library/libraryview.cpp:379
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "새 스마트 재생목록"
 
-#: widgets/freespacebar.cpp:46
+#: widgets/freespacebar.cpp:45
 msgid "New songs"
 msgstr "새로운 음악"
 
@@ -3234,24 +3269,24 @@ msgstr "새로운 음악"
 msgid "New tracks will be added automatically."
 msgstr "새로운 음악을 자동으로 추가함"
 
-#: library/library.cpp:80
+#: library/library.cpp:92
 msgid "Newest tracks"
 msgstr "새로운 트랙"
 
-#: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
 msgid "Next"
 msgstr "다음"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:658
-#: wiimotedev/wiimotesettingspage.cpp:99
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:642
+#: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "다음 트랙"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:142
 msgid "Next week"
 msgstr "다음 주"
 
-#: analyzers/analyzercontainer.cpp:80
+#: analyzers/analyzercontainer.cpp:79
 msgid "No analyzer"
 msgstr "없음"
 
@@ -3259,33 +3294,33 @@ msgstr "없음"
 msgid "No background image"
 msgstr "배경 그림 없음"
 
-#: ui/albumcovermanager.cpp:778
+#: ui/albumcovermanager.cpp:786
 msgid "No covers to export."
 msgstr "내보낼수 있는 커버가 없습니다."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
-msgstr ""
+msgstr "긴 블록 "
 
-#: playlist/playlistcontainer.cpp:366
+#: playlist/playlistcontainer.cpp:365
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "일치하는 결과를 찾을 수 없습니다. 검색창을 비우시면 전체 재생목록을 보실 수 있습니다."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
-msgstr ""
+msgstr "짧은 블록 "
 
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
 #: ../bin/src/ui_groupbydialog.h:156
 msgid "None"
 msgstr "없음"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1913 ui/mainwindow.cpp:2029
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2111 ui/mainwindow.cpp:2259
 msgid "None of the selected songs were suitable for copying to a device"
-msgstr ""
+msgstr "선택된 음악들이 장치에 복사되기 적합하지 않음"
 
-#: moodbar/moodbarrenderer.cpp:155
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "일반"
 
@@ -3293,42 +3328,46 @@ msgstr "일반"
 msgid "Normal block type"
 msgstr "일반 블록 형식"
 
-#: playlist/playlistsequence.cpp:170
+#: playlist/playlistsequence.cpp:189
 msgid "Not available while using a dynamic playlist"
 msgstr "다이나믹 재생목록을 사용 중일 때는 사용할 수 없습니다."
 
-#: devices/deviceview.cpp:107
+#: devices/deviceview.cpp:109
 msgid "Not connected"
 msgstr "연결되지 않음"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:244
 msgid "Not enough content"
 msgstr "내용이 충분하지 않습니다."
 
-#: internet/lastfmservice.cpp:441
+#: internet/lastfmservice.cpp:248
 msgid "Not enough fans"
 msgstr "팬이 충분하지 않습니다."
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:246
 msgid "Not enough members"
 msgstr "회원이 충분하지 않습니다."
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:250
 msgid "Not enough neighbors"
 msgstr "이웃이 충분하지 않습니다."
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:72
 msgid "Not installed"
 msgstr "설치되지 않음"
 
-#: globalsearch/globalsearchsettingspage.cpp:120
-#: globalsearch/searchproviderstatuswidget.cpp:48
+#: globalsearch/globalsearchsettingspage.cpp:119
+#: globalsearch/searchproviderstatuswidget.cpp:47
 msgid "Not logged in"
 msgstr "로그인 되지 않음"
 
-#: devices/deviceview.cpp:111
+#: devices/deviceview.cpp:113
 msgid "Not mounted - double click to mount"
 msgstr "마운트 되지 않음 - 마운트 하려면 더블클릭"
+
+#: internet/vksearchdialog.cpp:94
+msgid "Nothing found"
+msgstr "찾을 수 없음"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Notification type"
@@ -3342,36 +3381,41 @@ msgstr "알림"
 msgid "Now Playing"
 msgstr "지금 재생중"
 
-#: ui/notificationssettingspage.cpp:37
+#: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "OSD 미리보기"
 
-#: widgets/osd.cpp:171
+#: widgets/osd.cpp:169
 msgid "Off"
-msgstr ""
+msgstr "꺼짐"
 
-#: core/song.cpp:344
+#: core/song.cpp:387 transcoder/transcoder.cpp:241
 msgid "Ogg Flac"
 msgstr "OGG Flac"
 
-#: core/song.cpp:347
+#: core/song.cpp:393 transcoder/transcoder.cpp:247
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:345
+#: core/song.cpp:389 transcoder/transcoder.cpp:244
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:346 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:391 transcoder/transcoder.cpp:238
+#: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: widgets/osd.cpp:171
+#: widgets/osd.cpp:169
 msgid "On"
+msgstr "켜짐"
+
+#: ../bin/src/ui_skydrivesettingspage.h:103
+msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:182
+#: ../bin/src/ui_networkremotesettingspage.h:183
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3379,11 +3423,11 @@ msgid ""
 "192.168.x.x"
 msgstr "다음의 ip 대역에 포함된 클라이언트의 연결만 받아들입니다 :\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:187
+#: ../bin/src/ui_networkremotesettingspage.h:188
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "로컬 네트워크로 부터의 연결만 허용"
 
-#: ../bin/src/ui_querysortpage.h:142
+#: ../bin/src/ui_querysortpage.h:143
 msgid "Only show the first"
 msgstr "처음에만 보이기"
 
@@ -3391,23 +3435,23 @@ msgstr "처음에만 보이기"
 msgid "Opacity"
 msgstr "투명도"
 
-#: internet/digitallyimportedservicebase.cpp:179
-#: internet/groovesharkservice.cpp:546 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
-#: internet/somafmservice.cpp:100 internet/soundcloudservice.cpp:194
+#: internet/digitallyimportedservicebase.cpp:172
+#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
+#: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
+#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "브라우저에서 %1 열기"
 
-#: ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_mainwindow.h:672
 msgid "Open &audio CD..."
 msgstr "오디오 CD 열기(&a)..."
 
-#: podcasts/addpodcastdialog.cpp:230
+#: podcasts/addpodcastdialog.cpp:235
 msgid "Open OPML file"
 msgstr "OPML 파일 열기"
 
-#: podcasts/addpodcastdialog.cpp:73
+#: podcasts/addpodcastdialog.cpp:77
 msgid "Open OPML file..."
 msgstr "OPML 파일 열기"
 
@@ -3415,30 +3459,35 @@ msgstr "OPML 파일 열기"
 msgid "Open device"
 msgstr "장치 열기"
 
-#: ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Open file..."
 msgstr "파일 열기..."
 
-#: internet/googledriveservice.cpp:184
+#: internet/googledriveservice.cpp:193
 msgid "Open in Google Drive"
-msgstr "구글 드라이브에서 열기"
+msgstr "Google Drive에서 열기"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
-#: internet/internetservice.cpp:76 library/libraryview.cpp:371
-#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:219
+#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:460
+#: internet/internetservice.cpp:75 library/libraryview.cpp:375
+#: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "새로운 재생목록에서 열기"
 
-#: songinfo/echonestbiographies.cpp:96
-msgid "Open in your browser"
-msgstr ""
+#: ../bin/src/ui_behavioursettingspage.h:219
+msgctxt "Refers to behavior settings in Clementine settings page."
+msgid "Open in new playlist"
+msgstr "새로운 재생목록에서 열기"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:169
-#: ../bin/src/ui_globalshortcutssettingspage.h:171
+#: songinfo/echonestbiographies.cpp:97
+msgid "Open in your browser"
+msgstr "브라우저에서 열기"
+
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
+#: ../bin/src/ui_globalshortcutssettingspage.h:181
 msgid "Open..."
 msgstr "열기..."
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:230
 msgid "Operation failed"
 msgstr "작업이 실패됨"
 
@@ -3458,31 +3507,31 @@ msgstr "옵션..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:188
+#: ../bin/src/ui_organisedialog.h:234
 msgid "Organise Files"
 msgstr "파일 정리"
 
-#: library/libraryview.cpp:387 ui/mainwindow.cpp:516
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:598
 msgid "Organise files..."
 msgstr "파일 정리..."
 
-#: core/organise.cpp:66
+#: core/organise.cpp:67
 msgid "Organising files"
 msgstr "파일 정리 중..."
 
-#: ui/trackselectiondialog.cpp:167
+#: ui/trackselectiondialog.cpp:162
 msgid "Original tags"
 msgstr "원본 태그"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:164
 msgid "Other options"
 msgstr "그 외 옵션"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
-msgstr ""
+msgstr "출력"
 
-#: ../bin/src/ui_playbacksettingspage.h:325
+#: ../bin/src/ui_playbacksettingspage.h:333
 msgid "Output device"
 msgstr "출력 장치"
 
@@ -3490,15 +3539,11 @@ msgstr "출력 장치"
 msgid "Output options"
 msgstr "저장 옵션"
 
-#: ../bin/src/ui_playbacksettingspage.h:320
-msgid "Output plugin"
-msgstr "출력 플러그인"
-
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite all"
 msgstr "모두 덮어쓰기"
 
-#: ../bin/src/ui_organisedialog.h:207
+#: ../bin/src/ui_organisedialog.h:253
 msgid "Overwrite existing files"
 msgstr "기존 파일들 "
 
@@ -3510,15 +3555,15 @@ msgstr ""
 msgid "Owner"
 msgstr "소유자"
 
-#: internet/jamendoservice.cpp:214
+#: internet/jamendoservice.cpp:222
 msgid "Parsing Jamendo catalogue"
-msgstr "자멘도 목록 구성 중"
+msgstr "Jamendo 목록 구성 중"
 
-#: ui/equalizer.cpp:126
+#: ui/equalizer.cpp:133
 msgid "Party"
 msgstr "파티"
 
-#: ../bin/src/ui_groovesharksettingspage.h:115
+#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3527,20 +3572,20 @@ msgstr "파티"
 msgid "Password"
 msgstr "비밀번호"
 
-#: core/globalshortcuts.cpp:47 ui/mainwindow.cpp:871 ui/mainwindow.cpp:1304
-#: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1007 ui/mainwindow.cpp:1448
+#: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "일시중지"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:146
 msgid "Pause playback"
 msgstr "재생 일시중지"
 
-#: widgets/osd.cpp:156
+#: widgets/osd.cpp:153
 msgid "Paused"
 msgstr "일시중지됨"
 
-#: playlist/playlist.cpp:1219 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
 msgstr "연주가"
@@ -3549,34 +3594,22 @@ msgstr "연주가"
 msgid "Pixel"
 msgstr "픽셀"
 
-#: widgets/fancytabwidget.cpp:672
+#: widgets/fancytabwidget.cpp:664
 msgid "Plain sidebar"
 msgstr "일반 사이드바"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:498 ui/mainwindow.cpp:839
-#: ui/mainwindow.cpp:858 ui/mainwindow.cpp:1307 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:654
-#: wiimotedev/wiimotesettingspage.cpp:101
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:570 ui/mainwindow.cpp:977
+#: ui/mainwindow.cpp:994 ui/mainwindow.cpp:1451 ui/qtsystemtrayicon.cpp:164
+#: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:638
+#: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
 msgstr "재생"
 
-#: ../bin/src/ui_lastfmstationdialog.h:92
-msgid "Play Artist or Tag"
-msgstr "음악가 또는 태그 재생"
-
-#: internet/lastfmservice.cpp:118
-msgid "Play artist radio..."
-msgstr "음악가 라디오 재생..."
-
-#: playlist/playlist.cpp:1223 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
 msgstr "재생 횟수"
 
-#: internet/lastfmservice.cpp:122
-msgid "Play custom radio..."
-msgstr "사용자 정의 라디오 재생..."
-
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:145
 msgid "Play if stopped, pause if playing"
 msgstr "중지중일때 재생, 재생중일때 중지"
 
@@ -3585,73 +3618,70 @@ msgstr "중지중일때 재생, 재생중일때 중지"
 msgid "Play if there is nothing already playing"
 msgstr "이미 재생되는 곡이 없다면 재생"
 
-#: internet/lastfmservice.cpp:120
-msgid "Play tag radio..."
-msgstr "태그 라디오 재생..."
-
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:163
 msgid "Play the <n>th track in the playlist"
 msgstr "재생목록 <n>번째의 곡 재생"
 
-#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "재생/일시중지"
 
-#: ../bin/src/ui_playbacksettingspage.h:297
+#: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Playback"
 msgstr "재생"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:143
 msgid "Player options"
 msgstr "플레이어 옵션"
 
-#: playlist/playlistcontainer.cpp:280 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:84 playlist/playlistmanager.cpp:152
-#: playlist/playlistmanager.cpp:497 playlist/playlisttabbar.cpp:357
+#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
+#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "재생목록"
 
-#: widgets/osd.cpp:178
+#: widgets/osd.cpp:176
 msgid "Playlist finished"
 msgstr "재생목록 끝남"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:160
 msgid "Playlist options"
 msgstr "재생목록 옵션"
 
-#: smartplaylists/wizard.cpp:77
+#: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
 msgstr "재생목록 종류"
 
-#: internet/groovesharkservice.cpp:626 ui/mainwindow.cpp:243
+#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
+#: ui/mainwindow.cpp:235
 msgid "Playlists"
 msgstr "재생목록"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
-msgstr "브라우저를 닫고 클레멘타인으로 돌아오세요"
+msgstr "브라우저를 닫고 Clementine으로 돌아오세요"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Plugin status:"
 msgstr "플러그인 상태:"
 
-#: podcasts/podcastservice.cpp:116 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "팟케스트"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:135
 msgid "Pop"
 msgstr "팝"
 
-#: internet/groovesharkservice.cpp:577
+#: internet/groovesharkservice.cpp:586
 msgid "Popular songs"
 msgstr "인기곡"
 
-#: internet/groovesharkservice.cpp:580
+#: internet/groovesharkservice.cpp:590
 msgid "Popular songs of the Month"
 msgstr "이번달의 인기곡"
 
-#: internet/groovesharkservice.cpp:587
+#: internet/groovesharkservice.cpp:599
 msgid "Popular songs today"
 msgstr "오늘의 인기곡"
 
@@ -3660,22 +3690,23 @@ msgid "Popup duration"
 msgstr "팝업 시간"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:181
 msgid "Port"
 msgstr "포트"
 
-#: ui/equalizer.cpp:47 ../bin/src/ui_playbacksettingspage.h:317
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
 msgid "Pre-amp"
 msgstr "프리-엠프"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
+#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_vksettingspage.h:214 ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "환경설정"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:661
 msgid "Preferences..."
 msgstr "환경설정..."
 
@@ -3705,16 +3736,16 @@ msgstr "프리셋:"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
-msgstr ""
+msgstr "을 사용하기 위한 조합 키를 누르세요"
 
 #: ../bin/src/ui_globalshortcutgrabber.h:73
 msgid "Press a key"
 msgstr "a키를 누르세요"
 
-#: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
+#: ui/globalshortcutgrabber.cpp:35 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
-msgstr ""
+msgstr "%1에 사용하기 위한 키조합을 누르세요..."
 
 #: ../bin/src/ui_notificationssettingspage.h:451
 msgid "Pretty OSD options"
@@ -3722,20 +3753,20 @@ msgstr "예쁜 OSD 옵션"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:446
-#: ../bin/src/ui_organisedialog.h:208
+#: ../bin/src/ui_organisedialog.h:254
 msgid "Preview"
 msgstr "미리보기"
 
-#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:162 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "이전"
 
-#: core/globalshortcuts.cpp:52 ../bin/src/ui_mainwindow.h:652
-#: wiimotedev/wiimotesettingspage.cpp:100
+#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:636
+#: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "이전 트랙"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:170
 msgid "Print out version information"
 msgstr "출력 버전 정보"
 
@@ -3743,58 +3774,72 @@ msgstr "출력 버전 정보"
 msgid "Profile"
 msgstr "프로필"
 
-#: ../bin/src/ui_magnatunedownloaddialog.h:134
 #: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcd.h:324
 msgid "Progress"
 msgstr "진행"
 
-#: ui/equalizer.cpp:129
+#: ../bin/src/ui_magnatunedownloaddialog.h:134
+msgctxt "Category label"
+msgid "Progress"
+msgstr "진행"
+
+#: ui/equalizer.cpp:138
 msgid "Psychedelic"
-msgstr ""
+msgstr "사이키델릭"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
-#: wiimotedev/wiimotesettingspage.cpp:227
+#: wiimotedev/wiimotesettingspage.cpp:239
 msgid "Push Wiiremote button"
 msgstr "Wii 리모콘 버튼을 누르세요"
 
-#: ../bin/src/ui_querysortpage.h:138
+#: ../bin/src/ui_querysortpage.h:139
 msgid "Put songs in a random order"
-msgstr ""
+msgstr "무작위 순서에 곡을 "
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:114
+msgctxt "Sound quality"
 msgid "Quality"
-msgstr "음질"
+msgstr ""
+
+#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
+msgid "Quality"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
 msgstr "장치 질의..."
 
-#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:697
 msgid "Queue Manager"
 msgstr "대기열 관리자"
 
-#: ui/mainwindow.cpp:1386
+#: ui/mainwindow.cpp:1543
 msgid "Queue selected tracks"
 msgstr "선택한 트랙을 큐에 추가"
 
-#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1384
+#: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
+#: ui/mainwindow.cpp:1541
 msgid "Queue track"
 msgstr "대기열 트랙"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Radio (equal loudness for all tracks)"
 msgstr "라디오 (모든 트랙을 같은 볼륨으로)"
 
-#: internet/groovesharkservice.cpp:595
+#: internet/groovesharkservice.cpp:608
 msgid "Radios"
 msgstr "라디오"
 
-#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:692
+#: core/backgroundstreams.cpp:28
+msgid "Rain"
+msgstr "빗소리"
+
+#: ../bin/src/ui_mainwindow.h:674
+msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "빗소리"
 
@@ -3802,48 +3847,48 @@ msgstr "빗소리"
 msgid "Random visualization"
 msgstr "랜덤 시각화"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:75
 msgid "Rate the current song 0 stars"
 msgstr "현재 음악에 별점 0점 평가"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:77
 msgid "Rate the current song 1 star"
 msgstr "현재 음악에 별점 1점 평가"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 2 stars"
 msgstr "현재 음악에 별점 2점 평가"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 3 stars"
 msgstr "현재 음악에 별점 3점 평가"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 4 stars"
 msgstr "현재 음악에 별점 4점 평가"
 
-#: core/globalshortcuts.cpp:70
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 5 stars"
 msgstr "현재 음악에 별점 5점 평가"
 
-#: playlist/playlist.cpp:1222 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:675
 msgid "Rating"
 msgstr "등급"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:215
+#: internet/magnatunedownloaddialog.cpp:303 ui/albumcovermanager.cpp:218
 msgid "Really cancel?"
 msgstr "정말 취소 하시겠습니까?"
 
-#: internet/subsonicsettingspage.cpp:131
+#: internet/subsonicsettingspage.cpp:136
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:549
+#: internet/groovesharkservice.cpp:556
 msgid "Refresh"
 msgstr "새로고침"
 
-#: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:92
+#: internet/jamendoservice.cpp:431 internet/magnatuneservice.cpp:279
+#: internet/subsonicservice.cpp:87
 msgid "Refresh catalogue"
 msgstr "목록 새로고침"
 
@@ -3851,19 +3896,15 @@ msgstr "목록 새로고침"
 msgid "Refresh channels"
 msgstr "채널 새로고침"
 
-#: internet/lastfmservice.cpp:124
-msgid "Refresh friends list"
-msgstr "친구 목록 새로고침"
-
-#: internet/icecastservice.cpp:297
+#: internet/icecastservice.cpp:300
 msgid "Refresh station list"
 msgstr "방송국 목록 새로고침"
 
-#: internet/digitallyimportedservicebase.cpp:182
+#: internet/digitallyimportedservicebase.cpp:175
 msgid "Refresh streams"
 msgstr "스트림 새로고침"
 
-#: ui/equalizer.cpp:130
+#: ui/equalizer.cpp:140
 msgid "Reggae"
 msgstr "레게"
 
@@ -3875,8 +3916,8 @@ msgstr "Wii 리모콘 스윙 기억하기"
 msgid "Remember from last time"
 msgstr "마지막 기억"
 
-#: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_transcodedialog.h:210 internet/lastfmservice.cpp:115
+#: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
+#: ../bin/src/ui_transcodedialog.h:210
 msgid "Remove"
 msgstr "제거"
 
@@ -3884,7 +3925,7 @@ msgstr "제거"
 msgid "Remove action"
 msgstr "제거 행동"
 
-#: ../bin/src/ui_mainwindow.h:724
+#: ../bin/src/ui_mainwindow.h:706
 msgid "Remove duplicates from playlist"
 msgstr "재생목록에서 중복 제거"
 
@@ -3892,73 +3933,77 @@ msgstr "재생목록에서 중복 제거"
 msgid "Remove folder"
 msgstr "폴더 제거"
 
-#: internet/groovesharkservice.cpp:536
+#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:310
 msgid "Remove from My Music"
 msgstr "내 음악에서 제거"
 
-#: internet/groovesharkservice.cpp:533
+#: internet/vkservice.cpp:296
+msgid "Remove from bookmarks"
+msgstr "북마크에서 제거"
+
+#: internet/groovesharkservice.cpp:541
 msgid "Remove from favorites"
 msgstr "즐겨찾기에서 제거"
 
-#: internet/groovesharkservice.cpp:530 ../bin/src/ui_mainwindow.h:699
+#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:681
 msgid "Remove from playlist"
 msgstr "재생목록에서 제거"
 
-#: playlist/playlisttabbar.cpp:174
+#: playlist/playlisttabbar.cpp:172
 msgid "Remove playlist"
-msgstr ""
+msgstr "재생목록 삭제"
 
-#: playlist/playlistlistcontainer.cpp:315
+#: playlist/playlistlistcontainer.cpp:317
 msgid "Remove playlists"
 msgstr "재생목록 제거"
 
-#: internet/groovesharkservice.cpp:1539
+#: internet/groovesharkservice.cpp:1584
 msgid "Removing songs from My Music"
 msgstr "내 음악에서 음악 제거 중"
 
-#: internet/groovesharkservice.cpp:1489
+#: internet/groovesharkservice.cpp:1531
 msgid "Removing songs from favorites"
 msgstr "즐겨찾기에서 곡 제거 중"
 
-#: internet/groovesharkservice.cpp:1337
+#: internet/groovesharkservice.cpp:1381
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "재생목록 \"%1\" 이름 바꾸기"
 
-#: internet/groovesharkservice.cpp:526
+#: internet/groovesharkservice.cpp:534
 msgid "Rename Grooveshark playlist"
-msgstr "그루브샤크 재생목록 이름 바꾸기"
+msgstr "Grooveshark 재생목록 이름 바꾸기"
 
-#: playlist/playlisttabbar.cpp:137
+#: playlist/playlisttabbar.cpp:135
 msgid "Rename playlist"
 msgstr "재생목록 이름 바꾸기"
 
-#: playlist/playlisttabbar.cpp:55
+#: playlist/playlisttabbar.cpp:56
 msgid "Rename playlist..."
 msgstr "재생목록 이름 바꾸기..."
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:657
 msgid "Renumber tracks in this order..."
-msgstr ""
+msgstr "이 순서에서 트랙 번호를 다시 부여..."
 
-#: playlist/playlistsequence.cpp:174 ../bin/src/ui_playlistsequence.h:112
+#: playlist/playlistsequence.cpp:193 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat"
 msgstr "반복"
 
-#: widgets/osd.cpp:293 ../bin/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
 msgstr "앨범 "
 
-#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:106
+#: widgets/osd.cpp:311 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
 msgstr "재생 목록 반복"
 
-#: widgets/osd.cpp:292 ../bin/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:305 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
 msgstr "한 곡 반복"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
-#: internet/internetservice.cpp:66 library/libraryview.cpp:369
+#: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:456
+#: internet/internetservice.cpp:64 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "현재 재생목록 교체"
@@ -3967,62 +4012,62 @@ msgstr "현재 재생목록 교체"
 msgid "Replace the playlist"
 msgstr "재생목록 교체"
 
-#: ../bin/src/ui_organisedialog.h:205
+#: ../bin/src/ui_organisedialog.h:251
 msgid "Replaces spaces with underscores"
 msgstr "공백을 및줄로 대체"
 
-#: ../bin/src/ui_playbacksettingspage.h:309
+#: ../bin/src/ui_playbacksettingspage.h:322
 msgid "Replay Gain"
 msgstr "리플레이 게인"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:324
 msgid "Replay Gain mode"
 msgstr "리플레이 게인 모드"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
-msgstr ""
+msgstr "다시 채우기"
 
-#: ../bin/src/ui_networkremotesettingspage.h:191
+#: ../bin/src/ui_networkremotesettingspage.h:192
 msgid "Require authentication code"
-msgstr ""
+msgstr "인증 코드 "
 
-#: widgets/lineedit.cpp:52
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
 msgid "Reset"
 msgstr "초기화"
 
-#: ui/edittagdialog.cpp:768 ../bin/src/ui_edittagdialog.h:665
+#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:665
 msgid "Reset play counts"
 msgstr "재생 횟수 초기화"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:158
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:206
+#: ../bin/src/ui_organisedialog.h:252
 msgid "Restrict to ASCII characters"
 msgstr "ASCII 문자로 제한"
 
 #: ../bin/src/ui_behavioursettingspage.h:205
 msgid "Resume playback on start"
-msgstr ""
+msgstr "시작할 때 재생목록 일시정지"
 
-#: internet/groovesharkservice.cpp:758
+#: internet/groovesharkservice.cpp:789
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Grooveshark 에서 내 음악을 받아오는 중"
 
-#: internet/groovesharkservice.cpp:726
+#: internet/groovesharkservice.cpp:756
 msgid "Retrieving Grooveshark favorites songs"
-msgstr "그루브샤크에서 인기곡을 받아오는 중"
+msgstr "Grooveshark에서 인기곡을 받아오는 중"
 
-#: internet/groovesharkservice.cpp:663
+#: internet/groovesharkservice.cpp:688
 msgid "Retrieving Grooveshark playlists"
-msgstr "그루브샤크 재생목록을 받아오는 중"
+msgstr "Grooveshark 재생목록을 받아오는 중"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
-msgstr "클레멘타인으로 되돌아가기"
+msgstr "Clementine으로 되돌아가기"
 
 #: ../bin/src/ui_equalizer.h:174
 msgid "Right"
@@ -4030,17 +4075,17 @@ msgstr "오른쪽"
 
 #: ../bin/src/ui_ripcd.h:303
 msgid "Rip"
-msgstr ""
+msgstr "굽기"
 
 #: ui/ripcd.cpp:116
 msgid "Rip CD"
-msgstr ""
+msgstr "CD "
 
-#: ../bin/src/ui_mainwindow.h:730
+#: ../bin/src/ui_mainwindow.h:712
 msgid "Rip audio CD..."
-msgstr ""
+msgstr "오디오 CD "
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:142
 msgid "Rock"
 msgstr "록"
 
@@ -4052,25 +4097,25 @@ msgstr "실행"
 msgid "SOCKS proxy"
 msgstr "SOCKS 프록시"
 
-#: internet/subsonicsettingspage.cpp:122
+#: internet/subsonicsettingspage.cpp:125
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
 msgstr ""
 
-#: devices/deviceview.cpp:202
+#: devices/deviceview.cpp:203
 msgid "Safely remove device"
 msgstr "안전하게 장치 제거"
 
-#: ../bin/src/ui_organisedialog.h:196
+#: ../bin/src/ui_organisedialog.h:242
 msgid "Safely remove the device after copying"
 msgstr "복사 후 안전하게 장치 제거"
 
-#: playlist/playlist.cpp:1230 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:672
 msgid "Sample rate"
 msgstr "샘플 레이트"
 
-#: ui/organisedialog.cpp:71
+#: ui/organisedialog.cpp:76
 msgid "Samplerate"
 msgstr "샘플 레이트"
 
@@ -4078,27 +4123,33 @@ msgstr "샘플 레이트"
 msgid "Save .mood files in your music library"
 msgstr "음악 라이브러리에 .mood 파일 저장"
 
-#: ui/albumcoverchoicecontroller.cpp:121
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "앨범 표지 저장"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "커버를 디스크에 저장..."
 
-#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:232
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "그림 저장"
 
-#: playlist/playlistlistcontainer.cpp:74 playlist/playlistmanager.cpp:240
+#: playlist/playlistlistcontainer.cpp:72
+msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "재생목록 저장"
 
-#: playlist/playlisttabbar.cpp:56 ../bin/src/ui_mainwindow.h:707
+#: playlist/playlistmanager.cpp:223
+msgctxt "Title of the playlist save dialog."
+msgid "Save playlist"
+msgstr "재생목록 저장"
+
+#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:689
 msgid "Save playlist..."
 msgstr "재생목록 저장..."
 
-#: ui/equalizer.cpp:182 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "프리셋 저장"
 
@@ -4114,13 +4165,13 @@ msgstr "가능하면 파일 태그에 통계를 저장"
 msgid "Save this stream in the Internet tab"
 msgstr "인터넷 탭에 이 스트림을 저장"
 
-#: library/library.cpp:164
+#: library/library.cpp:177
 msgid "Saving songs statistics into songs files"
 msgstr ""
 
-#: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
+#: ui/edittagdialog.cpp:687 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
-msgstr ""
+msgstr "트랙 저장 중"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
@@ -4130,18 +4181,22 @@ msgstr "Scalable sampling rate profile (SSR)"
 msgid "Scale size"
 msgstr "축척 크기"
 
-#: playlist/playlist.cpp:1226 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:673
 msgid "Score"
 msgstr "점수"
 
 #: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
-msgstr ""
+msgstr "내가 들은 Scrobble 트랙"
 
-#: ui/albumcoversearcher.cpp:173 ui/albumcoversearcher.cpp:190
-#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
-#: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114
+#: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
+#: internet/vkservice.cpp:512 ../bin/src/ui_gpoddersearchpage.h:78
+#: ../bin/src/ui_itunessearchpage.h:78 ../bin/src/ui_albumcoversearcher.h:114
+msgid "Search"
+msgstr "검색"
+
+#: ui/mainwindow.cpp:230 ../bin/src/ui_globalsearchsettingspage.h:145
+msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "검색"
 
@@ -4149,23 +4204,23 @@ msgstr "검색"
 msgid "Search Icecast stations"
 msgstr "Icecast 방송국 검색"
 
-#: internet/jamendoservice.cpp:426
+#: internet/jamendoservice.cpp:438
 msgid "Search Jamendo"
-msgstr "자멘도 검색"
+msgstr "Jamendo 검색"
 
-#: internet/magnatuneservice.cpp:285
+#: internet/magnatuneservice.cpp:288
 msgid "Search Magnatune"
 msgstr "Magnature 검색"
 
-#: internet/subsonicservice.cpp:75
+#: internet/subsonicservice.cpp:71
 msgid "Search Subsonic"
-msgstr "서브소닉 검색"
+msgstr "Subsonic 검색"
+
+#: ui/albumcoverchoicecontroller.cpp:73
+msgid "Search automatically"
+msgstr "자동적으로 찾기"
 
 #: ui/albumcoverchoicecontroller.cpp:66
-msgid "Search automatically"
-msgstr ""
-
-#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "앨범 표지 검색..."
 
@@ -4185,49 +4240,49 @@ msgstr "iTunes 검색"
 msgid "Search mode"
 msgstr "모드 검색"
 
-#: smartplaylists/querywizardplugin.cpp:154
+#: smartplaylists/querywizardplugin.cpp:159
 msgid "Search options"
 msgstr "옵션 검색"
 
-#: internet/groovesharkservice.cpp:569 internet/soundcloudservice.cpp:104
-#: internet/spotifyservice.cpp:347
+#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
+#: internet/spotifyservice.cpp:357
 msgid "Search results"
 msgstr "검색 결과"
 
-#: smartplaylists/querywizardplugin.cpp:152
+#: smartplaylists/querywizardplugin.cpp:155
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "검색 조건"
 
-#: internet/groovesharkservice.cpp:270
+#: internet/groovesharkservice.cpp:271
 msgid "Searching on Grooveshark"
-msgstr "그루브샤크에서 검색"
+msgstr "Grooveshark에서 검색"
 
 #: ../bin/src/ui_groupbydialog.h:139
 msgid "Second level"
-msgstr ""
+msgstr "두 번째 단계"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr "뒤로 탐색"
 
-#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr "앞으로 탐색"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:156
 msgid "Seek the currently playing track by a relative amount"
-msgstr ""
+msgstr "현재 재생중인 트랙을 상대 양으로 탐색"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
-msgstr ""
+msgstr "현재 재생중인 트랙을 절대 위치로 탐색"
 
-#: visualisations/visualisationselector.cpp:40 ../bin/src/ui_ripcd.h:310
+#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
 msgid "Select All"
 msgstr "모두 선택"
 
-#: visualisations/visualisationselector.cpp:42 ../bin/src/ui_ripcd.h:311
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcd.h:311
 msgid "Select None"
 msgstr "선택 없음"
 
@@ -4235,7 +4290,7 @@ msgstr "선택 없음"
 msgid "Select background color:"
 msgstr "배경 색상 선택"
 
-#: ui/appearancesettingspage.cpp:247
+#: ui/appearancesettingspage.cpp:258
 msgid "Select background image"
 msgstr "배경 그림 선택"
 
@@ -4251,15 +4306,15 @@ msgstr "전경 색상 선택"
 msgid "Select visualizations"
 msgstr "시각화 선택"
 
-#: visualisations/visualisationcontainer.cpp:124
+#: visualisations/visualisationcontainer.cpp:131
 msgid "Select visualizations..."
 msgstr "시각화 선택..."
 
 #: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
-msgstr ""
+msgstr "선택..."
 
-#: devices/devicekitlister.cpp:124
+#: devices/devicekitlister.cpp:126
 msgid "Serial number"
 msgstr "시리얼 넘버"
 
@@ -4271,51 +4326,51 @@ msgstr "서버 URL"
 msgid "Server details"
 msgstr "서버 자세히"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:236
 msgid "Service offline"
 msgstr "서비스 오프라인"
 
-#: ui/mainwindow.cpp:1413
+#: ui/mainwindow.cpp:1580
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr ""
+msgstr "%1을 \"%2\"로 설정..."
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:149
 msgid "Set the volume to <value> percent"
 msgstr "음량을 <value> 퍼센트로 설정"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_mainwindow.h:658
 msgid "Set value for all selected tracks..."
 msgstr "모든 선택 트랙의 값을 설정..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:180
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:173
+#: ../bin/src/ui_globalshortcutssettingspage.h:183
 msgid "Shortcut"
 msgstr "단축키"
 
-#: ui/globalshortcutssettingspage.cpp:135
-#: ../bin/src/ui_globalshortcutssettingspage.h:175
+#: ui/globalshortcutssettingspage.cpp:144
+#: ../bin/src/ui_globalshortcutssettingspage.h:185
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "단축키: %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:124
+#: wiimotedev/wiimotesettingspage.cpp:133
 #, qt-format
 msgid "Shortcut for %1 already exists"
 msgstr "%1위한 단축키가 이미 존재합니다."
 
-#: library/libraryfilterwidget.cpp:61
+#: library/libraryfilterwidget.cpp:69
 msgid "Show"
 msgstr "보기"
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "OSD 보기"
 
-#: ../bin/src/ui_playbacksettingspage.h:298
+#: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Show a glowing animation on the current track"
 msgstr "현재 트랙에서 빛나는 애니메이션 보기"
 
@@ -4325,7 +4380,7 @@ msgstr "트랙 진행 막대에 분위기 막대 표시"
 
 #: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Show a native desktop notification"
-msgstr "네이트브 데스크탑 알림 보기"
+msgstr "네이티브 데스크탑 알림 보기"
 
 #: ../bin/src/ui_notificationssettingspage.h:442
 msgid "Show a notification when I change the repeat/shuffle mode"
@@ -4343,15 +4398,15 @@ msgstr "시스템 트레이에서 팝업 보기"
 msgid "Show a pretty OSD"
 msgstr "예쁜 OSD 보기"
 
-#: widgets/nowplayingwidget.cpp:121
+#: widgets/nowplayingwidget.cpp:122
 msgid "Show above status bar"
 msgstr "상태 표시 줄 위에 보기"
 
-#: ui/mainwindow.cpp:471
+#: ui/mainwindow.cpp:538
 msgid "Show all songs"
 msgstr "모든 음악 보기"
 
-#: ../bin/src/ui_querysortpage.h:141
+#: ../bin/src/ui_querysortpage.h:142
 msgid "Show all the songs"
 msgstr "모든 음악 보기"
 
@@ -4363,32 +4418,36 @@ msgstr "라이브러리에서 커버아트 보기"
 msgid "Show dividers"
 msgstr "분할 표시"
 
-#: ui/albumcoverchoicecontroller.cpp:64 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "전체화면 보기..."
 
-#: library/libraryview.cpp:399 ui/mainwindow.cpp:519
-#: widgets/fileviewlist.cpp:52
+#: ../bin/src/ui_vksettingspage.h:217
+msgid "Show groups in global search result"
+msgstr "글로벌 검색 결과에서 그룹 보기"
+
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:607
+#: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "파일 브라우져에서 보기..."
 
-#: ui/mainwindow.cpp:520
+#: ui/mainwindow.cpp:610
 msgid "Show in library..."
-msgstr ""
+msgstr "라이브러리에서 보기..."
 
-#: library/libraryview.cpp:403
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "다양한 음악가에서 보기"
 
-#: moodbar/moodbarproxystyle.cpp:337
+#: moodbar/moodbarproxystyle.cpp:371
 msgid "Show moodbar"
 msgstr "분위기 막대 "
 
-#: ui/mainwindow.cpp:472
+#: ui/mainwindow.cpp:540
 msgid "Show only duplicates"
 msgstr "복사본만 보기"
 
-#: ui/mainwindow.cpp:473
+#: ui/mainwindow.cpp:542
 msgid "Show only untagged"
 msgstr "태그되지 않은 것만 보기"
 
@@ -4397,8 +4456,8 @@ msgid "Show search suggestions"
 msgstr "검색 제안 표시"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
-msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "\"좋아요\"와 \"싫어요\"버튼 보기"
+msgid "Show the \"love\" button"
+msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
@@ -4412,27 +4471,27 @@ msgstr "트레이 아이콘 보기"
 msgid "Show which sources are enabled and disabled"
 msgstr "출처의 사용가능 여부 보기"
 
-#: core/globalshortcuts.cpp:58
+#: core/globalshortcuts.cpp:62
 msgid "Show/Hide"
 msgstr "보기/숨기기"
 
-#: playlist/playlistsequence.cpp:173 ../bin/src/ui_playlistsequence.h:115
+#: playlist/playlistsequence.cpp:192 ../bin/src/ui_playlistsequence.h:115
 msgid "Shuffle"
 msgstr "섞기"
 
-#: widgets/osd.cpp:281 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:290 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
 msgstr "앨범 섞기"
 
-#: widgets/osd.cpp:279 ../bin/src/ui_playlistsequence.h:109
+#: widgets/osd.cpp:284 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
 msgstr "전부 "
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:665
 msgid "Shuffle playlist"
 msgstr "재생 목록 섞기"
 
-#: widgets/osd.cpp:280 ../bin/src/ui_playlistsequence.h:108
+#: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
 msgstr "이 앨범에 있는 곡 섞기"
 
@@ -4448,7 +4507,7 @@ msgstr "로그아웃"
 msgid "Signing in..."
 msgstr "로그인..."
 
-#: songinfo/echonestsimilarartists.cpp:57
+#: songinfo/echonestsimilarartists.cpp:58
 msgid "Similar artists"
 msgstr "유사한 음악가"
 
@@ -4460,43 +4519,51 @@ msgstr "크기"
 msgid "Size:"
 msgstr "크기:"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:146
 msgid "Ska"
 msgstr "스카"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:147
 msgid "Skip backwards in playlist"
 msgstr "재생목록에서 뒤로 넘기기"
 
-#: playlist/playlist.cpp:1224 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
-msgstr ""
+msgstr "넘긴 회수"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:148
 msgid "Skip forwards in playlist"
 msgstr "재생목록에서 앞으로 넘기기"
 
-#: widgets/nowplayingwidget.cpp:93
+#: ui/mainwindow.cpp:1554
+msgid "Skip selected tracks"
+msgstr "선택된 트랙들 "
+
+#: ui/mainwindow.cpp:1552
+msgid "Skip track"
+msgstr "트랙 "
+
+#: widgets/nowplayingwidget.cpp:92
 msgid "Small album cover"
 msgstr "작은 앨범 표지"
 
-#: widgets/fancytabwidget.cpp:671
+#: widgets/fancytabwidget.cpp:663
 msgid "Small sidebar"
 msgstr "작은 사이드바"
 
-#: smartplaylists/wizard.cpp:68
+#: smartplaylists/wizard.cpp:63
 msgid "Smart playlist"
 msgstr "스마트 재생목록"
 
-#: library/librarymodel.cpp:1207
+#: library/librarymodel.cpp:1228
 msgid "Smart playlists"
 msgstr "스마트 재생목록"
 
-#: ui/equalizer.cpp:132
+#: ui/equalizer.cpp:144
 msgid "Soft"
 msgstr "소프트"
 
-#: ui/equalizer.cpp:134
+#: ui/equalizer.cpp:148
 msgid "Soft Rock"
 msgstr "소프트 록"
 
@@ -4504,11 +4571,11 @@ msgstr "소프트 록"
 msgid "Song Information"
 msgstr "음악 정보"
 
-#: ui/mainwindow.cpp:247
+#: ui/mainwindow.cpp:243
 msgid "Song info"
 msgstr "음악 정보"
 
-#: analyzers/sonogram.cpp:18
+#: analyzers/sonogram.cpp:19
 msgid "Sonogram"
 msgstr "소노그래프"
 
@@ -4528,15 +4595,23 @@ msgstr "장르에 의한 정렬(인기순)"
 msgid "Sort by station name"
 msgstr "방송국 이름으로 정렬"
 
-#: ../bin/src/ui_querysortpage.h:139
+#: ../bin/src/ui_groovesharksettingspage.h:146
+msgid "Sort playlists songs alphabetically"
+msgstr ""
+
+#: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "음악 정렬"
 
-#: ../bin/src/ui_querysortpage.h:137
+#: ../bin/src/ui_querysortpage.h:138
 msgid "Sorting"
 msgstr "정렬"
 
-#: playlist/playlist.cpp:1239
+#: ../bin/src/ui_soundcloudsettingspage.h:104
+msgid "SoundCloud"
+msgstr ""
+
+#: playlist/playlist.cpp:1356
 msgid "Source"
 msgstr "출처"
 
@@ -4550,95 +4625,95 @@ msgstr "Speex"
 
 #: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Spotify"
-msgstr "스포티피"
+msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:184
+#: internet/spotifyservice.cpp:190
 msgid "Spotify login error"
-msgstr "스포티피 로그인 에러"
+msgstr "Spotify 로그인 에러"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
-msgstr "스포티피 플러그인"
+msgstr "Spotify 플러그인"
 
-#: internet/spotifyblobdownloader.cpp:59
+#: internet/spotifyblobdownloader.cpp:64
 msgid "Spotify plugin not installed"
-msgstr "스포티피 플러그인이 설치되지 않았습니다."
+msgstr "Spotify 플러그인이 설치되지 않았습니다."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
 msgstr "표준"
 
-#: internet/spotifyservice.cpp:354
+#: internet/spotifyservice.cpp:365
 msgid "Starred"
 msgstr "볊점"
 
-#: ui/ripcd.cpp:90
+#: ui/ripcd.cpp:88
 msgid "Start ripping"
-msgstr ""
+msgstr "굽기 시작"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:144
 msgid "Start the playlist currently playing"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:90
+#: transcoder/transcodedialog.cpp:87
 msgid "Start transcoding"
 msgstr "변환 시작"
 
-#: internet/groovesharkservice.cpp:570 internet/soundcloudservice.cpp:105
-#: internet/spotifyservice.cpp:348
+#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
+#: internet/spotifyservice.cpp:359
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
 msgstr ""
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 시작중"
 
-#: internet/magnatunedownloaddialog.cpp:120
+#: internet/magnatunedownloaddialog.cpp:122
 msgid "Starting..."
 msgstr "시작중..."
 
-#: internet/groovesharkservice.cpp:598
+#: internet/groovesharkservice.cpp:612
 msgid "Stations"
 msgstr "방송국"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:656
-#: wiimotedev/wiimotesettingspage.cpp:102
+#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:640
+#: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "중지"
 
-#: wiimotedev/wiimotesettingspage.cpp:110
+#: wiimotedev/wiimotesettingspage.cpp:114
 msgid "Stop after"
 msgstr "이후 정지"
 
-#: ui/mainwindow.cpp:500 ../bin/src/ui_mainwindow.h:662
+#: ui/mainwindow.cpp:573 ../bin/src/ui_mainwindow.h:646
 msgid "Stop after this track"
 msgstr "이번 트랙 이후 정지"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:146
 msgid "Stop playback"
 msgstr "재생 "
 
-#: core/globalshortcuts.cpp:50
+#: core/globalshortcuts.cpp:51
 msgid "Stop playing after current track"
-msgstr ""
+msgstr "현재 트랙 이후 재생 정지"
 
-#: widgets/osd.cpp:171
+#: widgets/osd.cpp:169
 #, qt-format
 msgid "Stop playing after track: %1"
-msgstr ""
+msgstr "%1 트랙 재생 후 정지"
 
-#: widgets/osd.cpp:166
+#: widgets/osd.cpp:163
 msgid "Stopped"
 msgstr "중지됨"
 
-#: core/song.cpp:353
+#: core/song.cpp:404
 msgid "Stream"
 msgstr "스트림"
 
-#: internet/subsonicsettingspage.cpp:30
+#: internet/subsonicsettingspage.cpp:29
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4648,7 +4723,7 @@ msgstr ""
 msgid "Streaming membership"
 msgstr "스트리밍 멤버쉽"
 
-#: internet/groovesharkservice.cpp:629
+#: internet/groovesharkservice.cpp:653
 msgid "Subscribed playlists"
 msgstr "구독중인 재생목록"
 
@@ -4656,20 +4731,20 @@ msgstr "구독중인 재생목록"
 msgid "Subscribers"
 msgstr "구독자"
 
-#: internet/subsonicservice.cpp:105 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonicservice.cpp:98 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
-msgstr "서브소닉"
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:36
 msgid "Success!"
 msgstr "성공!"
 
-#: transcoder/transcoder.cpp:200
+#: transcoder/transcoder.cpp:188
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 작성 완료"
 
-#: ui/trackselectiondialog.cpp:171
+#: ui/trackselectiondialog.cpp:166
 msgid "Suggested tags"
 msgstr "제안된 태그"
 
@@ -4678,13 +4753,13 @@ msgstr "제안된 태그"
 msgid "Summary"
 msgstr "요약"
 
-#: analyzers/analyzercontainer.cpp:65
-#: visualisations/visualisationcontainer.cpp:110
+#: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "아주 높음 (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:126
 msgid "Super high (2048x2048)"
 msgstr "아주 높음 (2048x2048)"
 
@@ -4696,43 +4771,35 @@ msgstr "지원가능한 형식"
 msgid "Synchronize statistics to files now"
 msgstr "지금 파일들의 통계들을 동기화"
 
-#: internet/spotifyservice.cpp:561
+#: internet/spotifyservice.cpp:579
 msgid "Syncing Spotify inbox"
-msgstr ""
+msgstr "Spotify inbox와 동기화 중"
 
-#: internet/spotifyservice.cpp:556
+#: internet/spotifyservice.cpp:573
 msgid "Syncing Spotify playlist"
-msgstr "스포티피 재생목록 동기화중"
+msgstr "Spotify 재생목록 동기화중"
 
-#: internet/spotifyservice.cpp:565
+#: internet/spotifyservice.cpp:584
 msgid "Syncing Spotify starred tracks"
-msgstr ""
+msgstr "Sportify 별점 트랙 동기화 중"
 
-#: moodbar/moodbarrenderer.cpp:159
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "시스템 색상"
 
-#: widgets/fancytabwidget.cpp:673
+#: widgets/fancytabwidget.cpp:665
 msgid "Tabs on top"
 msgstr "상단 탭"
-
-#: ../bin/src/ui_lastfmstationdialog.h:97
-msgid "Tag"
-msgstr "태그"
 
 #: ../bin/src/ui_trackselectiondialog.h:204
 msgid "Tag fetcher"
 msgstr "태그 가져오기"
 
-#: internet/lastfmservice.cpp:212
-msgid "Tag radio"
-msgstr "태그 라디오"
-
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
 msgstr "목표 비트 전송률"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:150
 msgid "Techno"
 msgstr "테크노"
 
@@ -4740,89 +4807,84 @@ msgstr "테크노"
 msgid "Text options"
 msgstr "문자 옵션"
 
-#: ui/about.cpp:70
+#: ui/about.cpp:73
 msgid "Thanks to"
 msgstr "감사합니다"
 
-#: ui/globalshortcutssettingspage.cpp:177
+#: ui/globalshortcutssettingspage.cpp:184
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr ""
+msgstr "\"%1\" 명령이 시작 되지 않았습니다."
 
 #: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "재생 중인 음악의 앨범 표지"
 
-#: internet/magnatunedownloaddialog.cpp:90
+#: internet/magnatunedownloaddialog.cpp:92
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "디렉터리 %1 이 유효하지 않습니다."
 
-#: playlist/playlistmanager.cpp:166 playlist/playlistmanager.cpp:184
-#, qt-format
-msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "재생목록 '%1'이 비어있거나 재생이 불가능한 상태입니다."
-
-#: smartplaylists/searchtermwidget.cpp:330
+#: smartplaylists/searchtermwidget.cpp:342
 msgid "The second value must be greater than the first one!"
-msgstr ""
+msgstr "두 번재 값이 반드시 첫 번째 값 보다 커야 합니다!"
 
 #: ui/coverfromurldialog.cpp:71
 msgid "The site you requested does not exist!"
 msgstr "요청한 사이트가 존재하지 않습니다!"
 
-#: ui/coverfromurldialog.cpp:82
+#: ui/coverfromurldialog.cpp:83
 msgid "The site you requested is not an image!"
 msgstr "요청하신 사이트는 이미지가 아닙니다!"
 
-#: internet/subsonicsettingspage.cpp:98
+#: internet/subsonicsettingspage.cpp:95
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr "서브소닉의 시험 기간이 끝났습니다. 라이센스 키를 얻기위한 기부를 해주세요. 자세한 사항은 subsonic.org 에서 확인하세요."
+msgstr "Subsonic의 시험 기간이 끝났습니다. 라이센스 키를 얻기위한 기부를 해주세요. 자세한 사항은 subsonic.org 에서 확인하세요."
 
-#: ui/mainwindow.cpp:2138
+#: ui/mainwindow.cpp:2373
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr ""
 
-#: library/libraryview.cpp:529
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "이 앨범과 다른 음악"
 
-#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
-#: podcasts/gpoddertoptagspage.cpp:77
+#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
+#: podcasts/gpoddertoptagspage.cpp:70
 msgid "There was a problem communicating with gpodder.net"
 msgstr "gpodder.net과 통신하는데 문제가 발생하였습니다."
 
-#: internet/magnatunedownloaddialog.cpp:158
+#: internet/magnatunedownloaddialog.cpp:161
 msgid "There was a problem fetching the metadata from Magnatune"
-msgstr "매그나튠 으로부터 메타데이터를 가져오는데 문제가 발생했습니다"
+msgstr "Magnatune 으로부터 메타데이터를 가져오는데 문제가 발생했습니다"
 
-#: podcasts/itunessearchpage.cpp:76
+#: podcasts/itunessearchpage.cpp:75
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "iTunes 스토어로부터 응답을 처리하는데 문제가 발생했습니다."
 
-#: ui/organiseerrordialog.cpp:56
+#: ui/organiseerrordialog.cpp:54
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr ""
+msgstr "음악을 복사하는 도중 문제가 발생하였습니다. 복사에 실패한 파일 :"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr ""
+msgstr "음악을 삭제하는 도중 문제가 발생하였습니다. 삭제에 실패한 파일 :"
 
-#: devices/deviceview.cpp:389
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "파일들이 장치로 부터 삭제 될 것 입니다. 계속 진행 하시겠습니까?"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1961 widgets/fileview.cpp:188
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2161 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4840,15 +4902,15 @@ msgstr ""
 
 #: ../bin/src/ui_groupbydialog.h:153
 msgid "Third level"
-msgstr ""
+msgstr "세 번째 단계"
 
-#: internet/jamendoservice.cpp:171
+#: internet/jamendoservice.cpp:176
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr "이 행동은 150MB 보다 큰 데이터 베이스를 생성할 것입니다.\n계속 진행하시겠습니까?"
 
-#: internet/magnatunedownloaddialog.cpp:175
+#: internet/magnatunedownloaddialog.cpp:188
 msgid "This album is not available in the requested format"
 msgstr "이 앨범은 요청된 형식이 아닙니다."
 
@@ -4862,56 +4924,56 @@ msgstr ""
 msgid "This device supports the following file formats:"
 msgstr "이 장치는 다음의 파일 형식을 지원합니다:"
 
-#: devices/devicemanager.cpp:566 devices/devicemanager.cpp:574
+#: devices/devicemanager.cpp:563 devices/devicemanager.cpp:574
 msgid "This device will not work properly"
-msgstr ""
+msgstr "이 기기는 완벽하게 작동하지 않을 수 있음."
 
-#: devices/devicemanager.cpp:567
+#: devices/devicemanager.cpp:564
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr ""
+msgstr "MTP 장치이지만 libmtp 지원을 하지 않도록 Clementine이 컴파일 되었습니다."
 
 #: devices/devicemanager.cpp:575
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr ""
+msgstr "iPod 장치이지만 libgpod 지원을 하지 않도록 Clementine이 컴파일 되었습니다."
 
-#: devices/devicemanager.cpp:324
+#: devices/devicemanager.cpp:322
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr ""
+msgstr "이 장치는 처음 연결 되었습니다. Clementine은 지금 장치에서 음악 파일들을 탐색할 것 입니다. - 시간이 조금 걸릴수 도 있습니다."
 
 #: playlist/playlisttabbar.cpp:186
 msgid "This option can be changed in the \"Behavior\" preferences"
-msgstr ""
+msgstr "이 옵션은 환경설정의 \"행동\" 에서 변경할 수 있습니다."
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:238
 msgid "This stream is for paid subscribers only"
 msgstr "이 스트림은 유료 subscribers만 사용할 수 있습니다"
 
-#: devices/devicemanager.cpp:587
+#: devices/devicemanager.cpp:591
 #, qt-format
 msgid "This type of device is not supported: %1"
-msgstr ""
+msgstr "이 장치의 형태는 지원되지 않습니다: %1"
 
-#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:55
-#: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
+#: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
+#: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "제목"
 
-#: internet/groovesharkservice.cpp:1018
+#: internet/groovesharkservice.cpp:1049
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
 msgstr "Grooveshark 라디오를 시청하시려면, 먼저 Grooveshark에서 몇 곡을 들으셔야 합니다."
 
-#: core/utilities.cpp:127 core/utilities.cpp:143
+#: core/utilities.cpp:127 core/utilities.cpp:139
 msgid "Today"
 msgstr "오늘"
 
-#: core/globalshortcuts.cpp:60
+#: core/globalshortcuts.cpp:65
 msgid "Toggle Pretty OSD"
 msgstr "예쁜 OSD 토글"
 
@@ -4919,27 +4981,27 @@ msgstr "예쁜 OSD 토글"
 msgid "Toggle fullscreen"
 msgstr "전체화면 토글"
 
-#: ui/mainwindow.cpp:1388
+#: ui/mainwindow.cpp:1545
 msgid "Toggle queue status"
 msgstr "대기열 상황 토글"
 
-#: ../bin/src/ui_mainwindow.h:722
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Toggle scrobbling"
 msgstr ""
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:165
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:140
 msgid "Tomorrow"
 msgstr "내일"
 
-#: podcasts/podcasturlloader.cpp:116
+#: podcasts/podcasturlloader.cpp:115
 msgid "Too many redirects"
 msgstr "너무 많은 리다이렉트"
 
-#: internet/spotifyservice.cpp:366
+#: internet/spotifyservice.cpp:377
 msgid "Top tracks"
 msgstr "상위 트랙"
 
@@ -4947,21 +5009,25 @@ msgstr "상위 트랙"
 msgid "Total albums:"
 msgstr "총 앨범수:"
 
-#: covers/coversearchstatisticsdialog.cpp:71
+#: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total bytes transferred"
 msgstr "전송된 총 바이트"
 
-#: covers/coversearchstatisticsdialog.cpp:68
+#: covers/coversearchstatisticsdialog.cpp:65
 msgid "Total network requests made"
 msgstr ""
 
-#: playlist/playlist.cpp:1213 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
 msgstr "트랙"
 
-#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:701
+#: internet/soundcloudservice.cpp:134
+msgid "Tracks"
+msgstr ""
+
+#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:683
 msgid "Transcode Music"
 msgstr "음악 변환"
 
@@ -4973,7 +5039,7 @@ msgstr "변환 기록"
 msgid "Transcoding"
 msgstr "변환"
 
-#: transcoder/transcoder.cpp:312
+#: transcoder/transcoder.cpp:305
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "%2개의 쓰레드를 이용하여 %1 파일을 변환 중"
@@ -4982,11 +5048,11 @@ msgstr "%2개의 쓰레드를 이용하여 %1 파일을 변환 중"
 msgid "Transcoding options"
 msgstr "변환 옵션"
 
-#: core/song.cpp:350
+#: core/song.cpp:399
 msgid "TrueAudio"
 msgstr "트루오디오"
 
-#: analyzers/turbine.cpp:15
+#: analyzers/turbine.cpp:16
 msgid "Turbine"
 msgstr "터빈"
 
@@ -4994,80 +5060,80 @@ msgstr "터빈"
 msgid "Turn off"
 msgstr "끄기"
 
-#: devices/giolister.cpp:161
+#: devices/giolister.cpp:157
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:142
 msgid "URL(s)"
 msgstr "URL(들)"
-
-#: ../bin/src/ui_ubuntuonesettingspage.h:127
-msgid "Ubuntu One"
-msgstr "우분투 원"
-
-#: ../bin/src/ui_ubuntuonesettingspage.h:132
-msgid "Ubuntu One password"
-msgstr ""
-
-#: ../bin/src/ui_ubuntuonesettingspage.h:130
-msgid "Ubuntu One username"
-msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
 msgstr "초광대역 (UWB)"
 
-#: internet/magnatunedownloaddialog.cpp:144
+#: internet/magnatunedownloaddialog.cpp:147
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr ""
 
-#: core/song.cpp:357 library/librarymodel.cpp:312 library/librarymodel.cpp:317
-#: library/librarymodel.cpp:322 library/librarymodel.cpp:999
-#: playlist/playlistdelegates.cpp:314 playlist/playlistmanager.cpp:505
-#: playlist/playlistmanager.cpp:508 ui/albumcoverchoicecontroller.cpp:117
-#: ui/edittagdialog.cpp:424 ui/edittagdialog.cpp:465
+#: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
+#: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
+#: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "알 수 없는"
 
-#: podcasts/podcasturlloader.cpp:198
+#: podcasts/podcasturlloader.cpp:206
 msgid "Unknown content-type"
 msgstr "알 수 없는 content-type"
 
-#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:448
+#: internet/digitallyimportedclient.cpp:71 internet/lastfmservice.cpp:257
 msgid "Unknown error"
 msgstr "알 수 없는 오류"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "커버 해제"
 
-#: podcasts/addpodcastdialog.cpp:61 podcasts/podcastservice.cpp:339
+#: ui/mainwindow.cpp:1550
+msgid "Unskip selected tracks"
+msgstr "선택된 트랙들 넘기기 "
+
+#: ui/mainwindow.cpp:1548
+msgid "Unskip track"
+msgstr "트랙 넘기기 "
+
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
 msgid "Unsubscribe"
 msgstr "구독 안함"
 
-#: songinfo/songkickconcerts.cpp:168
+#: songinfo/songkickconcerts.cpp:172
 msgid "Upcoming Concerts"
 msgstr "다가오는 콘서트"
 
-#: internet/groovesharkservice.cpp:1200
-msgid "Update Grooveshark playlist"
-msgstr "그루브샤크 재생목록 업데이트"
+#: internet/vkservice.cpp:326 internet/vkservice.cpp:330
+msgid "Update"
+msgstr "갱신"
 
-#: podcasts/podcastservice.cpp:319
+#: internet/groovesharkservice.cpp:1238
+msgid "Update Grooveshark playlist"
+msgstr "Grooveshark 재생목록 업데이트"
+
+#: podcasts/podcastservice.cpp:331
 msgid "Update all podcasts"
 msgstr "모든 팟케스트 업데이트"
 
-#: ../bin/src/ui_mainwindow.h:713
+#: ../bin/src/ui_mainwindow.h:695
 msgid "Update changed library folders"
 msgstr "변경된 라이브러리 폴더 업데이트"
 
 #: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
-msgstr "클레멘타인이 시작될 때 라이브러리 업데이트"
+msgstr "Clementine이 시작될 때 라이브러리 업데이트"
 
-#: podcasts/podcastservice.cpp:327
+#: podcasts/podcastservice.cpp:339
 msgid "Update this podcast"
 msgstr "이 팟케스트 업데이트"
 
@@ -5075,21 +5141,21 @@ msgstr "이 팟케스트 업데이트"
 msgid "Updating"
 msgstr "업데이트 중"
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:94
 #, qt-format
 msgid "Updating %1"
 msgstr "업데이트 중 %1"
 
-#: devices/deviceview.cpp:103
+#: devices/deviceview.cpp:105
 #, qt-format
 msgid "Updating %1%..."
 msgstr "업데이트 중 %1%..."
 
-#: library/librarywatcher.cpp:90
+#: library/librarywatcher.cpp:92
 msgid "Updating library"
 msgstr "라이브러리 업데이트 중"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:142
 msgid "Usage"
 msgstr "사용"
 
@@ -5097,17 +5163,17 @@ msgstr "사용"
 msgid "Use Album Artist tag when available"
 msgstr ""
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:168
+#: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Use Gnome's shortcut keys"
 msgstr "Gnome의 단축키를 사용합니다."
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:323
 msgid "Use Replay Gain metadata if it is available"
 msgstr "가능하면 리플레이 게인 메타데이터를 사용"
 
 #: ../bin/src/ui_subsonicsettingspage.h:129
 msgid "Use SSLv3"
-msgstr ""
+msgstr "SSL 버전 3 사용"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -5121,9 +5187,9 @@ msgstr "사용자 정의 색상 사용"
 msgid "Use a custom message for notifications"
 msgstr "알림을 위한 사용자 정의 메시지 설정"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "Use a network remote control"
-msgstr ""
+msgstr "네트워크 리모콘 사용"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -5161,20 +5227,20 @@ msgstr "시스템 프록시 설정 사용"
 msgid "Use volume normalisation"
 msgstr "음량 표준화 사용"
 
-#: widgets/freespacebar.cpp:47
+#: widgets/freespacebar.cpp:46
 msgid "Used"
 msgstr "사용 됨"
 
-#: internet/groovesharkservice.cpp:404
+#: internet/groovesharkservice.cpp:403
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "사용자 %1 은(는) 그루브샤크 Anywhere 계정이 아닙니다"
+msgstr "사용자 %1 은(는) Grooveshark Anywhere 계정이 아닙니다"
 
-#: ui/settingsdialog.cpp:145
+#: ui/settingsdialog.cpp:147
 msgid "User interface"
 msgstr "사용자 인터페이스"
 
-#: ../bin/src/ui_groovesharksettingspage.h:114
+#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5185,7 +5251,7 @@ msgstr "사용자명"
 
 #: ../bin/src/ui_behavioursettingspage.h:207
 msgid "Using the menu to add a song will..."
-msgstr ""
+msgstr "음악 추가를 하였을 때..."
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:173
@@ -5196,12 +5262,12 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "가변 비트 전송률"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:242
-#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:266
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
+#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "다양한 음악가"
 
-#: ui/about.cpp:34
+#: ui/about.cpp:33
 #, qt-format
 msgid "Version %1"
 msgstr "버전 %1"
@@ -5214,7 +5280,7 @@ msgstr "보기"
 msgid "Visualization mode"
 msgstr "시각화 모드"
 
-#: ../bin/src/ui_mainwindow.h:714 ui/dbusscreensaver.cpp:35
+#: ../bin/src/ui_mainwindow.h:696 ui/dbusscreensaver.cpp:33
 msgid "Visualizations"
 msgstr "시각화"
 
@@ -5222,11 +5288,15 @@ msgstr "시각화"
 msgid "Visualizations Settings"
 msgstr "시각화 설정"
 
+#: ../bin/src/ui_vksettingspage.h:210
+msgid "Vk.com"
+msgstr "Vk.com"
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
 msgstr ""
 
-#: widgets/osd.cpp:185
+#: widgets/osd.cpp:182
 #, qt-format
 msgid "Volume %1%"
 msgstr "음량 %1%"
@@ -5244,11 +5314,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:182 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "재생목록 탭을 닫으면 알림"
 
-#: core/song.cpp:349
+#: core/song.cpp:397 transcoder/transcoder.cpp:253
 msgid "Wav"
 msgstr "Wav"
 
@@ -5256,13 +5326,13 @@ msgstr "Wav"
 msgid "Website"
 msgstr "웹 사이트"
 
-#: smartplaylists/searchterm.cpp:312
+#: smartplaylists/searchterm.cpp:390
 msgid "Weeks"
 msgstr "주"
 
 #: ../bin/src/ui_behavioursettingspage.h:201
 msgid "When Clementine starts"
-msgstr "클레멘타인이 시작할 때"
+msgstr "Clementine이 시작할 때"
 
 #: ../bin/src/ui_librarysettingspage.h:204
 msgid ""
@@ -5282,39 +5352,39 @@ msgstr "다음의 검색어는 어떠시나요..."
 msgid "Wide band (WB)"
 msgstr "광대역 (WB)"
 
-#: widgets/osd.cpp:244
+#: widgets/osd.cpp:239
 #, qt-format
 msgid "Wii Remote %1: actived"
 msgstr "Wii 리모콘 %1: 활성화"
 
-#: widgets/osd.cpp:254
+#: widgets/osd.cpp:251
 #, qt-format
 msgid "Wii Remote %1: connected"
 msgstr "Wii 리모콘 %1: 연결됨"
 
-#: widgets/osd.cpp:269
+#: widgets/osd.cpp:270
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
 msgstr "Wii 리모콘 %1: 배터리 위험(%2%)"
 
-#: widgets/osd.cpp:249
+#: widgets/osd.cpp:245
 #, qt-format
 msgid "Wii Remote %1: disactived"
 msgstr "Wii 리모콘 %1: 비 활성화"
 
-#: widgets/osd.cpp:259
+#: widgets/osd.cpp:257
 #, qt-format
 msgid "Wii Remote %1: disconnected"
 msgstr "Wii 리모콘 %1: 연결 끊김"
 
-#: widgets/osd.cpp:264
+#: widgets/osd.cpp:263
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "Wii 리모콘 %1: 낮은 배터리(%2%)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:182
 msgid "Wiimotedev"
-msgstr ""
+msgstr "Wii 리모콘 개발"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:181
 msgid "Windows Media 128k"
@@ -5328,7 +5398,7 @@ msgstr "윈도우 미디어 40k"
 msgid "Windows Media 64k"
 msgstr "윈도우 미디어 64k"
 
-#: core/song.cpp:339
+#: core/song.cpp:377 transcoder/transcoder.cpp:250
 msgid "Windows Media audio"
 msgstr "윈도우 미디어 오디오"
 
@@ -5336,25 +5406,25 @@ msgstr "윈도우 미디어 오디오"
 msgid "Without cover:"
 msgstr "커버 제외:"
 
-#: library/libraryview.cpp:530
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2143
+#: ui/mainwindow.cpp:2380
 msgid "Would you like to run a full rescan right now?"
 msgstr "지금 전부 다시 검색해도 좋습니까?"
 
-#: library/librarysettingspage.cpp:151
+#: library/librarysettingspage.cpp:154
 msgid "Write all songs statistics into songs' files"
 msgstr "모든 음악에 통계를 작성"
 
-#: internet/subsonicsettingspage.cpp:86
+#: internet/subsonicsettingspage.cpp:80
 msgid "Wrong username or password."
 msgstr "잘못된 사용자명 또는 비밀번호 입니다."
 
-#: playlist/playlist.cpp:1215 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5366,11 +5436,11 @@ msgstr "년도"
 msgid "Year - Album"
 msgstr "년도 - 앨범"
 
-#: smartplaylists/searchterm.cpp:314
+#: smartplaylists/searchterm.cpp:394
 msgid "Years"
 msgstr "년도"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:128
 msgid "Yesterday"
 msgstr "어제"
 
@@ -5378,13 +5448,13 @@ msgstr "어제"
 msgid "You are about to download the following albums"
 msgstr ""
 
-#: playlist/playlistlistcontainer.cpp:316
+#: playlist/playlistlistcontainer.cpp:318
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "즐겨찾기에서 재생목록 %1(을)를 제거합니다. 계속하시겠습니까?"
 
-#: playlist/playlisttabbar.cpp:177
+#: playlist/playlisttabbar.cpp:175
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5394,12 +5464,12 @@ msgstr ""
 msgid "You are not signed in."
 msgstr "로그인 하지 않았습니다."
 
-#: widgets/loginstatewidget.cpp:75
+#: widgets/loginstatewidget.cpp:71
 #, qt-format
 msgid "You are signed in as %1."
 msgstr "%1 로 로그인 하였습니다."
 
-#: widgets/loginstatewidget.cpp:73
+#: widgets/loginstatewidget.cpp:68
 msgid "You are signed in."
 msgstr "로그인 되었습니다."
 
@@ -5407,63 +5477,70 @@ msgstr "로그인 되었습니다."
 msgid "You can change the way the songs in the library are organised."
 msgstr ""
 
-#: internet/digitallyimportedsettingspage.cpp:46
+#: internet/digitallyimportedsettingspage.cpp:45
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr ""
+msgstr "계정과 관계 없이 무료로 들을 수 있지만 프리미엄 회원은 광고 없이 고음질 스트림으로 들을 수 있습니다."
 
-#: internet/magnatunesettingspage.cpp:53
+#: internet/magnatunesettingspage.cpp:54
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr "계정이 없이 무료로 매그나튠의 음악을 들을 수 있습니다. 회원권을 구입하면 각 트랙의 마지막의 메시지를 지웁니다."
+msgstr "계정이 없이 무료로 Magnatune의 음악을 들을 수 있습니다. 회원권을 구입하면 각 트랙의 마지막의 메시지를 지웁니다."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
 msgstr "다른 음악과 동시에 배경 음악을 들을 수 있습니다. "
-
-#: internet/lastfmsettingspage.cpp:148
-msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
-msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr "클레멘타인에서 Wii 리모콘을 사용할 수 있습니다. 더 알고 싶으면 <a href=\"http://www.clementine-player.org/wiimote\">클레멘타인 위키의 페이지</a>를 확인 하세요.\n"
+msgstr "Clementine에서 Wii 리모콘을 사용할 수 있습니다. 더 알고 싶으면 <a href=\"http://www.clementine-player.org/wiimote\">Clementine 위키의 페이지</a>를 확인 하세요.\n"
 
-#: internet/groovesharksettingspage.cpp:103
+#: internet/groovesharksettingspage.cpp:109
 msgid "You do not have a Grooveshark Anywhere account."
-msgstr "당신은 그루브샤크 Anywhere 계정을 가지고 있지 않습니다."
+msgstr "당신은 Grooveshark Anywhere 계정을 가지고 있지 않습니다."
 
-#: internet/spotifysettingspage.cpp:149
+#: internet/spotifysettingspage.cpp:146
 msgid "You do not have a Spotify Premium account."
-msgstr ""
+msgstr "당신은 Spotify 프리미엄 계정이 아닙니다."
 
-#: internet/digitallyimportedclient.cpp:89
+#: internet/digitallyimportedclient.cpp:93
 msgid "You do not have an active subscription"
 msgstr ""
 
-#: internet/spotifyservice.cpp:170
+#: ../bin/src/ui_soundcloudsettingspage.h:105
+msgid ""
+"You don't need to be logged in to search and to listen to music on "
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
+msgstr ""
+
+#: internet/spotifyservice.cpp:175
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr "스포티피에서 로그아웃 되셨습니다. 설정에서 비밀번호를 재입력하여 주십시오."
+msgstr "Spotify에서 로그아웃 되셨습니다. 설정에서 비밀번호를 재입력하여 주십시오."
 
-#: internet/spotifysettingspage.cpp:158
+#: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "스포티피에서 로그아웃 되셨습니다. 비밀번호를 재입력하여 주십시오."
+msgstr "Spotify에서 로그아웃 되셨습니다. 비밀번호를 재입력하여 주십시오."
 
-#: songinfo/lastfmtrackinfoprovider.cpp:87
+#: songinfo/lastfmtrackinfoprovider.cpp:85
 msgid "You love this track"
 msgstr "이 트랙을 좋아합니다."
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:170
+#: ../bin/src/ui_globalshortcutssettingspage.h:180
+msgid ""
+"You need to launch System Preferences and allow Clementine to \"<span style"
+"=\"font-style:italic\">control your computer</span>\" to use global "
+"shortcuts in Clementine."
+msgstr ""
+
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
@@ -5472,62 +5549,57 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:200
 msgid "You will need to restart Clementine if you change the language."
-msgstr "언어를 변경을 하였다면 클레멘타인을 재시작 해야합니다."
+msgstr "언어를 변경을 하였다면 Clementine을 재시작 해야합니다."
 
-#: internet/lastfmsettingspage.cpp:114
-msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm"
-" subscriber."
-msgstr ""
-
-#: ../bin/src/ui_networkremotesettingspage.h:200
+#: ../bin/src/ui_networkremotesettingspage.h:201
 msgid "Your IP address:"
 msgstr "당신의 IP 주소:"
 
-#: internet/lastfmsettingspage.cpp:80
+#: internet/lastfmsettingspage.cpp:76
 msgid "Your Last.fm credentials were incorrect"
-msgstr ""
+msgstr "당신의 Last.fm 계정정보가 부정확 합니다."
 
 #: internet/magnatunesettingspage.cpp:113
 msgid "Your Magnatune credentials were incorrect"
-msgstr "매그나튠의 계정정보가 잘 못되었습니다."
+msgstr "Magnatune의 계정정보가 잘 못 되었습니다."
 
-#: library/libraryview.cpp:343
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "라이브러리가 비었습니다!"
 
-#: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
+#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
 msgid "Your radio streams"
 msgstr "당신의 라디오 스트림"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:88
+#: songinfo/lastfmtrackinfoprovider.cpp:87
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr ""
+msgstr "당신의 scrobbles: %1"
 
-#: visualisations/visualisationcontainer.cpp:152
+#: visualisations/visualisationcontainer.cpp:159
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "당신의 시스템은 OpenGL을 지원하지 않아서, 시각화를 사용할 수 없습니다."
 
-#: internet/groovesharksettingspage.cpp:107
-#: internet/spotifysettingspage.cpp:154 internet/ubuntuonesettingspage.cpp:76
+#: internet/groovesharksettingspage.cpp:114
+#: internet/spotifysettingspage.cpp:152
 msgid "Your username or password was incorrect."
 msgstr "사용자명 또는 비밀번호가 틀렸습니다."
 
-#: smartplaylists/searchterm.cpp:297
+#: smartplaylists/searchterm.cpp:365
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:136
+#: ui/equalizer.cpp:152
 msgid "Zero"
 msgstr "제로"
 
-#: playlist/playlistundocommands.cpp:37
+#: playlist/playlistundocommands.cpp:28
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "add %n songs"
 msgstr "%n 곡 추가"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:204
 msgid "after"
 msgstr "이후"
 
@@ -5547,19 +5619,19 @@ msgstr "자동"
 msgid "before"
 msgstr "이전"
 
-#: smartplaylists/searchterm.cpp:211
+#: smartplaylists/searchterm.cpp:216
 msgid "between"
 msgstr "사이"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:375
 msgid "biggest first"
-msgstr ""
+msgstr "큰 순서"
 
-#: playlist/playlistview.cpp:204 ui/edittagdialog.cpp:458
+#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:476
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:224
 msgid "contains"
 msgstr "포함"
 
@@ -5569,20 +5641,20 @@ msgstr "포함"
 msgid "disabled"
 msgstr "사용 안함"
 
-#: widgets/osd.cpp:114
+#: widgets/osd.cpp:110
 #, qt-format
 msgid "disc %1"
 msgstr "%1 디스크"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:226
 msgid "does not contain"
 msgstr "포함 되지 않음"
 
-#: smartplaylists/searchterm.cpp:220
+#: smartplaylists/searchterm.cpp:230
 msgid "ends with"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:223
+#: smartplaylists/searchterm.cpp:236
 msgid "equals"
 msgstr "같음"
 
@@ -5590,107 +5662,109 @@ msgstr "같음"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:32
 msgid "gpodder.net directory"
 msgstr "gpodder.net 디렉토리"
 
-#: smartplaylists/searchterm.cpp:221
+#: smartplaylists/searchterm.cpp:232
 msgid "greater than"
 msgstr ""
 
 #: ../bin/src/ui_deviceviewcontainer.h:99
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
-msgstr ""
+msgstr "죄송합니다. iPods 과 USB 장치가 현재 Windows 에서 작동하지 않습니다. "
 
-#: smartplaylists/searchterm.cpp:209
+#: smartplaylists/searchterm.cpp:212
 msgid "in the last"
 msgstr ""
 
-#: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62 playlist/playlistview.cpp:206
-#: ui/edittagdialog.cpp:460
+#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
+#: internet/spotifysettingspage.cpp:61 playlist/playlistview.cpp:232
+#: ui/edittagdialog.cpp:478
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:222
+#: smartplaylists/searchterm.cpp:234
 msgid "less than"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:299
+#: smartplaylists/searchterm.cpp:371
 msgid "longest first"
 msgstr ""
 
-#: playlist/playlistundocommands.cpp:99
+#: playlist/playlistundocommands.cpp:82
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "move %n songs"
 msgstr "%n 곡 이동"
 
-#: smartplaylists/searchterm.cpp:298
+#: smartplaylists/searchterm.cpp:368
 msgid "newest first"
-msgstr ""
+msgstr "최신 순서"
 
-#: smartplaylists/searchterm.cpp:224
+#: smartplaylists/searchterm.cpp:238
 msgid "not equals"
 msgstr "같지 않음"
 
-#: smartplaylists/searchterm.cpp:210
+#: smartplaylists/searchterm.cpp:214
 msgid "not in the last"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:208
+#: smartplaylists/searchterm.cpp:210
 msgid "not on"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:298
+#: smartplaylists/searchterm.cpp:367
 msgid "oldest first"
-msgstr ""
+msgstr "오래된것을 먼저"
 
-#: smartplaylists/searchterm.cpp:207
+#: smartplaylists/searchterm.cpp:208
 msgid "on"
 msgstr ""
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:142
 msgid "options"
 msgstr "옵션"
 
 #: ../bin/src/ui_networkremotesettingspage.h:203
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "또는 QR 코드를 스캔하세요!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
 msgstr "엔터를 누르세요"
 
-#: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
+#: playlist/playlistundocommands.cpp:53 playlist/playlistundocommands.cpp:75
 #, c-format, qt-plural-format
+msgctxt ""
 msgid "remove %n songs"
 msgstr "%n 곡 제거"
 
-#: smartplaylists/searchterm.cpp:299
+#: smartplaylists/searchterm.cpp:370
 msgid "shortest first"
-msgstr ""
+msgstr "짧은 순서"
 
-#: playlist/playlistundocommands.cpp:138
+#: playlist/playlistundocommands.cpp:106
 msgid "shuffle songs"
 msgstr "섞인 노래들"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:374
 msgid "smallest first"
-msgstr ""
+msgstr "작은 순서"
 
-#: playlist/playlistundocommands.cpp:131
+#: playlist/playlistundocommands.cpp:100
 msgid "sort songs"
 msgstr "음악 정렬"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:228
 msgid "starts with"
 msgstr ""
 
-#: playlist/playlistdelegates.cpp:185
+#: playlist/playlistdelegates.cpp:181
 msgid "stop"
 msgstr "중지"
 
-#: widgets/osd.cpp:116
+#: widgets/osd.cpp:111
 #, qt-format
 msgid "track %1"
 msgstr ""

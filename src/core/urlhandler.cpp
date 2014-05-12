@@ -17,17 +17,13 @@
 
 #include "urlhandler.h"
 
-UrlHandler::LoadResult::LoadResult(
-    const QUrl& original_url, Type type, const QUrl& media_url, qint64 length_nanosec)
-      : original_url_(original_url), type_(type), media_url_(media_url), length_nanosec_(length_nanosec)
-{
-}
+UrlHandler::LoadResult::LoadResult(const QUrl& original_url, Type type,
+                                   const QUrl& media_url, qint64 length_nanosec)
+    : original_url_(original_url),
+      type_(type),
+      media_url_(media_url),
+      length_nanosec_(length_nanosec) {}
 
-UrlHandler::UrlHandler(QObject* parent)
-  : QObject(parent)
-{
-}
+UrlHandler::UrlHandler(QObject* parent) : QObject(parent) {}
 
-QIcon UrlHandler::icon() const {
-  return QIcon();
-}
+QIcon UrlHandler::icon() const { return QIcon(); }

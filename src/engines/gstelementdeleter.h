@@ -25,8 +25,8 @@
 class GstElementDeleter : public QObject {
   Q_OBJECT
 
-public:
-  GstElementDeleter(QObject* parent = 0);
+ public:
+  GstElementDeleter(QObject* parent = nullptr);
 
   // If you call this function with any gstreamer element, the element will get
   // deleted in the main thread.  This is useful if you need to delete an
@@ -36,8 +36,8 @@ public:
   // deleted later regardless.
   void DeleteElementLater(GstElement* element);
 
-private slots:
+ private slots:
   void DeleteElement(GstElement* element);
 };
 
-#endif // GSTBINDELETER_H
+#endif  // GSTBINDELETER_H

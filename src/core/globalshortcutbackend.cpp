@@ -20,16 +20,11 @@
 #include "globalshortcuts.h"
 
 GlobalShortcutBackend::GlobalShortcutBackend(GlobalShortcuts* parent)
-  : QObject(parent),
-    manager_(parent),
-    active_(false)
-{
-}
+    : QObject(parent), manager_(parent), active_(false) {}
 
 bool GlobalShortcutBackend::Register() {
   bool ret = DoRegister();
-  if (ret)
-    active_ = true;
+  if (ret) active_ = true;
   return ret;
 }
 

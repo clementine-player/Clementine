@@ -32,15 +32,15 @@ class QSignalMapper;
 class SongInfoFetcher : public QObject {
   Q_OBJECT
 
-public:
-  SongInfoFetcher(QObject* parent = 0);
+ public:
+  SongInfoFetcher(QObject* parent = nullptr);
 
   struct Result {
     QList<QUrl> images_;
     QList<CollapsibleInfoPane::Data> info_;
   };
 
-  static const int kDefaultTimeoutDuration = 25000; // msec
+  static const int kDefaultTimeoutDuration = 25000;  // msec
 
   void AddProvider(SongInfoProvider* provider);
   int FetchInfo(const Song& metadata);
@@ -48,16 +48,16 @@ public:
   QList<SongInfoProvider*> providers() const { return providers_; }
 
 signals:
-  void InfoResultReady (int id, const CollapsibleInfoPane::Data& data);
+  void InfoResultReady(int id, const CollapsibleInfoPane::Data& data);
   void ResultReady(int id, const SongInfoFetcher::Result& result);
 
-private slots:
+ private slots:
   void ImageReady(int id, const QUrl& url);
   void InfoReady(int id, const CollapsibleInfoPane::Data& data);
   void ProviderFinished(int id);
   void Timeout(int id);
 
-private:
+ private:
   QList<SongInfoProvider*> providers_;
 
   QMap<int, Result> results_;
@@ -70,5 +70,4 @@ private:
   int next_id_;
 };
 
-#endif // SONGINFOFETCHER_H
-
+#endif  // SONGINFOFETCHER_H

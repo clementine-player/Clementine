@@ -20,59 +20,33 @@
 
 #include <QDialog>
 
-#include <boost/multi_index_container.hpp>
-#include <boost/multi_index/member.hpp>
-#include <boost/multi_index/ordered_index.hpp>
+#include <memory>
 
 #include "librarymodel.h"
 
+class GroupByDialogPrivate;
 class Ui_GroupByDialog;
-
-using boost::multi_index_container;
-using boost::multi_index::indexed_by;
-using boost::multi_index::ordered_unique;
-using boost::multi_index::tag;
-using boost::multi_index::member;
 
 class GroupByDialog : public QDialog {
   Q_OBJECT
 
  public:
-  GroupByDialog(QWidget *parent = 0);
+  GroupByDialog(QWidget* parent = nullptr);
   ~GroupByDialog();
 
  public slots:
   void LibraryGroupingChanged(const LibraryModel::Grouping& g);
   void accept();
 
- signals:
+signals:
   void Accepted(const LibraryModel::Grouping& g);
 
  private slots:
   void Reset();
 
  private:
-  struct Mapping {
-    Mapping(LibraryModel::GroupBy g, int i) : group_by(g), combo_box_index(i) {}
-
-    LibraryModel::GroupBy group_by;
-    int combo_box_index;
-  };
-
-  struct tag_index {};
-  struct tag_group_by {};
-  typedef multi_index_container<
-    Mapping,
-    indexed_by<
-      ordered_unique<tag<tag_index>,
-        member<Mapping, int, &Mapping::combo_box_index> >,
-      ordered_unique<tag<tag_group_by>,
-        member<Mapping, LibraryModel::GroupBy, &Mapping::group_by> >
-    >
-  > MappingContainer;
-
-  MappingContainer mapping_;
-  Ui_GroupByDialog* ui_;
+  std::unique_ptr<Ui_GroupByDialog> ui_;
+  std::unique_ptr<GroupByDialogPrivate> p_;
 };
 
-#endif // GROUPBYDIALOG_H
+#endif  // GROUPBYDIALOG_H

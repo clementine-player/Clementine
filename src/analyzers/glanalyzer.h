@@ -27,16 +27,13 @@
  *@author piggz
  */
 
-typedef struct
-{
+typedef struct {
   float level;
   uint delay;
-}
-peak_tx;
+} peak_tx;
 
-class GLAnalyzer : public Analyzer::Base3D
-{
-private:
+class GLAnalyzer : public Analyzer::Base3D {
+ private:
   std::vector<float> m_oldy;
   std::vector<peak_tx> m_peaks;
 
@@ -47,14 +44,15 @@ private:
   void drawFloor();
 
   GLfloat x, y;
-public:
-  GLAnalyzer(QWidget *);
+
+ public:
+  GLAnalyzer(QWidget*);
   ~GLAnalyzer();
-  void analyze( const Scope & );
-  
-protected:
+  void analyze(const Scope&);
+
+ protected:
   void initializeGL();
-  void resizeGL( int w, int h );
+  void resizeGL(int w, int h);
   void paintGL();
 };
 

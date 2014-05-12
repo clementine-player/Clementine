@@ -21,10 +21,7 @@
 #include <QVBoxLayout>
 
 CollapsibleInfoPane::CollapsibleInfoPane(const Data& data, QWidget* parent)
-  : QWidget(parent),
-    data_(data),
-    header_(new CollapsibleInfoHeader(this))
-{
+    : QWidget(parent), data_(data), header_(new CollapsibleInfoHeader(this)) {
   QVBoxLayout* layout = new QVBoxLayout(this);
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(3);
@@ -44,20 +41,17 @@ CollapsibleInfoPane::CollapsibleInfoPane(const Data& data, QWidget* parent)
   connect(header_, SIGNAL(ExpandedToggled(bool)), SIGNAL(Toggled(bool)));
 }
 
-void CollapsibleInfoPane::Collapse() {
-  header_->SetExpanded(false);
-}
+void CollapsibleInfoPane::Collapse() { header_->SetExpanded(false); }
 
-void CollapsibleInfoPane::Expand() {
-  header_->SetExpanded(true);
-}
+void CollapsibleInfoPane::Expand() { header_->SetExpanded(true); }
 
 void CollapsibleInfoPane::ExpandedToggled(bool expanded) {
   data_.contents_->setVisible(expanded);
 }
 
-bool CollapsibleInfoPane::Data::operator <(const CollapsibleInfoPane::Data& other) const {
-  const int my_score    = (TypeCount - type_      ) * 1000 + relevance_;
+bool CollapsibleInfoPane::Data::operator<(
+    const CollapsibleInfoPane::Data& other) const {
+  const int my_score = (TypeCount - type_) * 1000 + relevance_;
   const int other_score = (TypeCount - other.type_) * 1000 + other.relevance_;
 
   return my_score > other_score;

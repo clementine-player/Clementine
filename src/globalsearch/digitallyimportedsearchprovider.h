@@ -23,17 +23,17 @@
 class DigitallyImportedServiceBase;
 
 class DigitallyImportedSearchProvider : public SimpleSearchProvider {
-public:
+ public:
   DigitallyImportedSearchProvider(DigitallyImportedServiceBase* service,
                                   Application* app, QObject* parent);
 
   void ShowConfig();
 
-protected:
+ protected:
   void RecreateItems();
 
-private:
+ private:
   DigitallyImportedServiceBase* service_;
 };
 
-#endif // DIGITALLYIMPORTEDSEARCHPROVIDER_H
+#endif  // DIGITALLYIMPORTEDSEARCHPROVIDER_H
