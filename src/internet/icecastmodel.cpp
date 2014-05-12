@@ -19,18 +19,15 @@
 #include "icecastmodel.h"
 #include "playlist/songmimedata.h"
 IcecastModel::IcecastModel(IcecastBackend* backend, QObject* parent)
-  : SimpleTreeModel<IcecastItem>(new IcecastItem(this), parent),
-    backend_(backend),
-    sort_mode_(SortMode_GenreByPopularity),
-    genre_icon_(":last.fm/icon_tag.png"),
-    station_icon_(":last.fm/icon_radio.png")
-{
+    : SimpleTreeModel<IcecastItem>(new IcecastItem(this), parent),
+      backend_(backend),
+      sort_mode_(SortMode_GenreByPopularity),
+      genre_icon_(":last.fm/icon_tag.png"),
+      station_icon_(":last.fm/icon_radio.png") {
   root_->lazy_loaded = true;
 }
 
-IcecastModel::~IcecastModel() {
-  delete root_;
-}
+IcecastModel::~IcecastModel() { delete root_; }
 
 void IcecastModel::Init() {
   connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
@@ -50,8 +47,7 @@ void IcecastModel::Reset() {
 }
 
 void IcecastModel::LazyPopulate(IcecastItem* parent) {
-  if (parent->lazy_loaded)
-    return;
+  if (parent->lazy_loaded) return;
   parent->lazy_loaded = true;
 
   switch (parent->type) {
@@ -85,9 +81,10 @@ void IcecastModel::PopulateGenre(IcecastItem* parent, const QString& genre,
   QChar last_divider;
 
   IcecastBackend::StationList stations = backend_->GetStations(filter_, genre);
-  foreach (const IcecastBackend::Station& station, stations) {
+  for (const IcecastBackend::Station& station : stations) {
     QChar divider_char = DividerKey(station.name);
-    if (create_dividers && !divider_char.isNull() && divider_char != last_divider) {
+    if (create_dividers && !divider_char.isNull() &&
+        divider_char != last_divider) {
       last_divider = divider_char;
 
       IcecastItem* divider = new IcecastItem(IcecastItem::Type_Divider, parent);
@@ -107,7 +104,7 @@ void IcecastModel::PopulateGenre(IcecastItem* parent, const QString& genre,
 void IcecastModel::AddGenres(const QStringList& genres, bool create_dividers) {
   QChar last_divider;
 
-  foreach (const QString& genre, genres) {
+  for (const QString& genre : genres) {
     QChar divider_char = DividerKey(genre);
     if (create_dividers && divider_char != last_divider) {
       last_divider = divider_char;
@@ -123,16 +120,13 @@ void IcecastModel::AddGenres(const QStringList& genres, bool create_dividers) {
 }
 
 QChar IcecastModel::DividerKey(const QString& text) {
-  if (text.isEmpty())
-    return QChar();
+  if (text.isEmpty()) return QChar();
 
   QChar c;
   c = text[0];
 
-  if (c.isDigit())
-    return '0';
-  if (c.isPunct() || c.isSymbol())
-    return QChar();
+  if (c.isDigit()) return '0';
+  if (c.isPunct() || c.isSymbol()) return QChar();
 
   if (c.decompositionTag() != QChar::NoDecomposition)
     return QChar(c.decomposition()[0]);
@@ -140,8 +134,7 @@ QChar IcecastModel::DividerKey(const QString& text) {
 }
 
 QString IcecastModel::DividerDisplayText(const QChar& key) {
-  if (key == '0')
-    return "0-9";
+  if (key == '0') return "0-9";
   return key;
 }
 
@@ -158,8 +151,10 @@ QVariant IcecastModel::data(const IcecastItem* item, int role) const {
 
     case Qt::DecorationRole:
       switch (item->type) {
-        case IcecastItem::Type_Genre:   return genre_icon_;
-        case IcecastItem::Type_Station: return station_icon_;
+        case IcecastItem::Type_Genre:
+          return genre_icon_;
+        case IcecastItem::Type_Station:
+          return station_icon_;
       }
       break;
 
@@ -181,16 +176,13 @@ void IcecastModel::SetSortMode(SortMode mode) {
 
 Qt::ItemFlags IcecastModel::flags(const QModelIndex& index) const {
   switch (IndexToItem(index)->type) {
-  case IcecastItem::Type_Station:
-    return Qt::ItemIsSelectable |
-           Qt::ItemIsEnabled |
-           Qt::ItemIsDragEnabled;
-  case IcecastItem::Type_Genre:
-  case IcecastItem::Type_Root:
-  case IcecastItem::Type_Divider:
-  default:
-    return Qt::ItemIsSelectable |
-           Qt::ItemIsEnabled;
+    case IcecastItem::Type_Station:
+      return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled;
+    case IcecastItem::Type_Genre:
+    case IcecastItem::Type_Root:
+    case IcecastItem::Type_Divider:
+    default:
+      return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
   }
 }
 
@@ -199,16 +191,14 @@ QStringList IcecastModel::mimeTypes() const {
 }
 
 QMimeData* IcecastModel::mimeData(const QModelIndexList& indexes) const {
-  if (indexes.isEmpty())
-    return NULL;
+  if (indexes.isEmpty()) return nullptr;
 
   SongMimeData* data = new SongMimeData;
   QList<QUrl> urls;
 
-  foreach (const QModelIndex& index, indexes) {
+  for (const QModelIndex& index : indexes) {
     IcecastItem* item = IndexToItem(index);
-    if (!item || item->type != IcecastItem::Type_Station)
-      continue;
+    if (!item || item->type != IcecastItem::Type_Station) continue;
 
     data->songs << item->station.ToSong();
     urls << item->station.url;
@@ -216,7 +206,7 @@ QMimeData* IcecastModel::mimeData(const QModelIndexList& indexes) const {
 
   if (data->songs.isEmpty()) {
     delete data;
-    return NULL;
+    return nullptr;
   }
 
   data->setUrls(urls);
@@ -227,8 +217,7 @@ QMimeData* IcecastModel::mimeData(const QModelIndexList& indexes) const {
 
 Song IcecastModel::GetSong(const QModelIndex& index) const {
   IcecastItem* item = IndexToItem(index);
-  if (!item || item->type != IcecastItem::Type_Station)
-    return Song();
+  if (!item || item->type != IcecastItem::Type_Station) return Song();
 
   return item->station.ToSong();
 }

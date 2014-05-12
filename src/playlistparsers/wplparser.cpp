@@ -22,9 +22,7 @@
 #include <QXmlStreamReader>
 
 WplParser::WplParser(LibraryBackendInterface* library, QObject* parent)
-  : XMLParser(library, parent)
-{
-}
+    : XMLParser(library, parent) {}
 
 bool WplParser::TryMagic(const QByteArray& data) const {
   return data.contains("<?wpl") || data.contains("<smil>");
@@ -81,13 +79,16 @@ void WplParser::ParseSeq(const QDir& dir, QXmlStreamReader* reader,
 void WplParser::Save(const SongList& songs, QIODevice* device,
                      const QDir& dir) const {
   QXmlStreamWriter writer(device);
+  writer.setAutoFormatting(true);
+  writer.setAutoFormattingIndent(2);
   writer.writeProcessingInstruction("wpl", "version=\"1.0\"");
 
   StreamElement smil("smil", &writer);
 
   {
     StreamElement head("head", &writer);
-    WriteMeta("Generator", "Clementine -- " CLEMENTINE_VERSION_DISPLAY, &writer);
+    WriteMeta("Generator", "Clementine -- " CLEMENTINE_VERSION_DISPLAY,
+              &writer);
     WriteMeta("ItemCount", QString::number(songs.count()), &writer);
   }
 
@@ -95,7 +96,7 @@ void WplParser::Save(const SongList& songs, QIODevice* device,
     StreamElement body("body", &writer);
     {
       StreamElement seq("seq", &writer);
-      foreach (const Song& song, songs) {
+      for (const Song& song : songs) {
         writer.writeStartElement("media");
         writer.writeAttribute("src", URLOrRelativeFilename(song.url(), dir));
         writer.writeEndElement();

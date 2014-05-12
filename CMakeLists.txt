@@ -9,6 +9,7 @@ include(cmake/Deb.cmake)
 include(cmake/Rpm.cmake)
 include(cmake/SpotifyVersion.cmake)
 include(cmake/OptionalSource.cmake)
+include(cmake/Format.cmake)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 if (CMAKE_CXX_COMPILER MATCHES ".*clang")
@@ -16,23 +17,9 @@ if (CMAKE_CXX_COMPILER MATCHES ".*clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-uninitialized")
 endif ()
 
-set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
-check_cxx_source_compiles(
-    "#include <unordered_map>
-     int main() {
-       std::unordered_map<int, int> m;
-       return 0;
-     }
-    "
-    USE_STD_UNORDERED_MAP)
-check_cxx_source_compiles(
-    "int main() {
-       [](){}();
-     }
-    "
-    HAVE_LAMBDAS)
-unset(CMAKE_REQUIRED_FLAGS)
-
+if (APPLE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++")
+endif ()
 
 if (UNIX AND NOT APPLE)
   set(LINUX 1)
@@ -75,6 +62,7 @@ pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
+pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(QCA qca2)
 pkg_check_modules(QJSON REQUIRED QJson)
@@ -96,12 +84,10 @@ find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 # distros.  If the user seems to want Drive support (ie. they have sparsehash
 # installed and haven't disabled drive), and has an old taglib, compile our
 # internal one and use that instead.
-option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old for Google Drive support, compile our builtin version instead" ON)
-if (USE_BUILTIN_TAGLIB AND
-    (NOT "${ENABLE_GOOGLE_DRIVE}" STREQUAL "OFF") AND
-    SPARSEHASH_INCLUDE_DIRS AND
-    TAGLIB_VERSION VERSION_LESS 1.8)
-  set(TAGLIB_VERSION 1.8)
+option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old, compile our builtin version instead" ON)
+if (USE_BUILTIN_TAGLIB AND TAGLIB_VERSION VERSION_LESS 1.8)
+  message(STATUS "Using builtin taglib because your system's version is too old")
+  set(TAGLIB_VERSION 1.9.1)
   set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
   set(TAGLIB_LIBRARY_DIRS "")
   set(TAGLIB_LIBRARIES tag)
@@ -121,7 +107,6 @@ if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
 endif()
 
 if (APPLE)
-  find_library(GROWL Growl)
   find_library(SPARKLE Sparkle)
 
   find_library(SPOTIFY libspotify)
@@ -158,6 +143,10 @@ include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
 include_directories(${QJSON_INCLUDE_DIRS})
 include_directories(${GSTREAMER_INCLUDE_DIRS})
+include_directories(${GSTREAMER_APP_INCLUDE_DIRS})
+include_directories(${GSTREAMER_BASE_INCLUDE_DIRS})
+include_directories(${GSTREAMER_CDDA_INCLUDE_DIRS})
+include_directories(${GSTREAMER_TAG_INCLUDE_DIRS})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
@@ -197,11 +186,6 @@ optional_component(GOOGLE_DRIVE ON "Google Drive support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(UBUNTU_ONE ON "Ubuntu One file support"
-  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
-  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
-)
-
 optional_component(DROPBOX ON "Dropbox support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
@@ -216,6 +200,8 @@ optional_component(BOX ON "Box support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
+
+optional_component(VK ON "Vk.com support")
 
 optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
@@ -268,12 +254,16 @@ optional_component(SPARKLE ON "Sparkle integration"
   DEPENDS "Sparkle" SPARKLE
 )
 
+optional_component(LIBPULSE ON "Pulse audio integration"
+  DEPENDS "libpulse" LIBPULSE_FOUND
+)
+
 optional_component(VISUALISATIONS ON "Visualisations")
 
 if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_FOUND)
   message(FATAL_ERROR "Either QCA must be available or the non-GPL Spotify "
           "code must be compiled in")
-elif(QCA_FOUND)
+elseif(QCA_FOUND)
   set(HAVE_SPOTIFY_DOWNLOADER ON)
 endif()
 
@@ -281,6 +271,12 @@ endif()
 if (HAVE_DBUS)
   find_package(Qt4 REQUIRED QtDbus)
 endif ()
+
+if (HAVE_VK)
+  add_subdirectory(3rdparty/vreen)
+  include_directories(${VREEN_INCLUDE_DIRS})
+  include_directories(${VREENOAUTH_INCLUDE_DIRS})
+endif(HAVE_VK)
 
 # We can include the Qt definitions now
 include(${QT_USE_FILE})
@@ -304,31 +300,14 @@ if(ENABLE_VISUALISATIONS)
   endif(USE_SYSTEM_PROJECTM)
 endif(ENABLE_VISUALISATIONS)
 
-# We compile our own qsqlite3 by default now, because in Qt 4.7 the symbols we
-# need from it are private.
-option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
 
-set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
-if(STATIC_SQLITE)
-  message(STATUS "Building static qsqlite plugin")
-  add_subdirectory(3rdparty/qsqlite)
-  include_directories("3rdparty/qsqlite")
-else()
-  if (NOT I_HATE_MY_USERS)
-    message(FATAL_ERROR "No, really, Clementine needs sqlite to be linked "
-        "statically.  If it's not, Clementine won't be able to resolve the "
-        "functions it needs to register full text search support.  Search will "
-        "be really slow and users will be unhappy.  If you're packaging "
-        "Clementine for a distribution and you really hate your users and want "
-        "them to have a bad time please rerun cmake with -DI_HATE_MY_USERS=ON")
-  else()
-    if (NOT MY_USERS_WILL_SUFFER_BECAUSE_OF_ME)
-      message(FATAL_ERROR "So you really hate your users and you want to "
-          "create a crippled package that doesn't work properly?  Please send "
-          "an email to the devs and help us understand why.")
-    endif()
-  endif()
-endif(STATIC_SQLITE)
+# Build our copy of QSqlLiteDriver.
+# We do this because we can't guarantee that the driver shipped with Qt exposes the
+# raw sqlite3_ functions required for FTS support. This way we know that those symbols
+# exist at compile-time and that our code links to the same sqlite library as the
+# Qt driver.
+add_subdirectory(3rdparty/qsqlite)
+include_directories("3rdparty/qsqlite")
 
 # When/if upstream accepts our patches then these options can be used to link
 # to system installed qtsingleapplication instead.
@@ -393,14 +372,10 @@ if(GMOCK_INCLUDE_DIRS)
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
 
-# Use system sha2 if it's available
-find_path(SHA2_INCLUDE_DIRS sha2.h)
-find_library(SHA2_LIBRARIES sha2)
-if(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
-  add_subdirectory(3rdparty/sha2)
-  set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
-  set(SHA2_LIBRARIES sha2)
-endif(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
+# Never use the system's sha2.
+add_subdirectory(3rdparty/sha2)
+set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
+set(SHA2_LIBRARIES sha2)
 
 # Use our 3rdparty chromaprint if a system one wasn't found
 if(NOT CHROMAPRINT_FOUND)

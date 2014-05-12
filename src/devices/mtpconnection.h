@@ -23,17 +23,17 @@
 #include <libmtp.h>
 
 class MtpConnection {
-public:
+ public:
   MtpConnection(const QUrl& url);
   ~MtpConnection();
 
   bool is_valid() const { return device_; }
   LIBMTP_mtpdevice_t* device() const { return device_; }
 
-private:
+ private:
   Q_DISABLE_COPY(MtpConnection);
 
   LIBMTP_mtpdevice_t* device_;
 };
 
-#endif // MTPCONNECTION_H
+#endif  // MTPCONNECTION_H

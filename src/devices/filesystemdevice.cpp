@@ -26,40 +26,40 @@
 #include <QThread>
 #include <QtDebug>
 
-FilesystemDevice::FilesystemDevice(
-    const QUrl& url, DeviceLister* lister,
-    const QString& unique_id, DeviceManager* manager,
-    Application* app,
-    int database_id, bool first_time)
-      : FilesystemMusicStorage(url.toLocalFile()),
-        ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
-        watcher_(new LibraryWatcher),
-        watcher_thread_(new QThread(this))
-{
+FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
+                                   const QString& unique_id,
+                                   DeviceManager* manager, Application* app,
+                                   int database_id, bool first_time)
+    : FilesystemMusicStorage(url.toLocalFile()),
+      ConnectedDevice(url, lister, unique_id, manager, app, database_id,
+                      first_time),
+      watcher_(new LibraryWatcher),
+      watcher_thread_(new QThread(this)) {
   watcher_->moveToThread(watcher_thread_);
   watcher_thread_->start(QThread::IdlePriority);
 
-  watcher_->set_device_name(manager->data(manager->index(
-      manager->FindDeviceById(unique_id)), DeviceManager::Role_FriendlyName).toString());
+  watcher_->set_device_name(
+      manager->data(manager->index(manager->FindDeviceById(unique_id)),
+                    DeviceManager::Role_FriendlyName).toString());
   watcher_->set_backend(backend_);
   watcher_->set_task_manager(app_->task_manager());
 
-  connect(backend_, SIGNAL(DirectoryDiscovered(Directory,SubdirectoryList)),
-          watcher_, SLOT(AddDirectory(Directory,SubdirectoryList)));
-  connect(backend_, SIGNAL(DirectoryDeleted(Directory)),
-          watcher_, SLOT(RemoveDirectory(Directory)));
-  connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)),
-          backend_, SLOT(AddOrUpdateSongs(SongList)));
-  connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)),
-          backend_, SLOT(UpdateMTimesOnly(SongList)));
-  connect(watcher_, SIGNAL(SongsDeleted(SongList)),
-          backend_, SLOT(DeleteSongs(SongList)));
-  connect(watcher_, SIGNAL(SubdirsDiscovered(SubdirectoryList)),
-          backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher_, SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
-          backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher_, SIGNAL(CompilationsNeedUpdating()),
-          backend_, SLOT(UpdateCompilations()));
+  connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)),
+          watcher_, SLOT(AddDirectory(Directory, SubdirectoryList)));
+  connect(backend_, SIGNAL(DirectoryDeleted(Directory)), watcher_,
+          SLOT(RemoveDirectory(Directory)));
+  connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)), backend_,
+          SLOT(AddOrUpdateSongs(SongList)));
+  connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)), backend_,
+          SLOT(UpdateMTimesOnly(SongList)));
+  connect(watcher_, SIGNAL(SongsDeleted(SongList)), backend_,
+          SLOT(DeleteSongs(SongList)));
+  connect(watcher_, SIGNAL(SubdirsDiscovered(SubdirectoryList)), backend_,
+          SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
+  connect(watcher_, SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)), backend_,
+          SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
+  connect(watcher_, SIGNAL(CompilationsNeedUpdating()), backend_,
+          SLOT(UpdateCompilations()));
   connect(watcher_, SIGNAL(ScanStarted(int)), SIGNAL(TaskStarted(int)));
 }
 

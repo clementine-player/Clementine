@@ -52,7 +52,7 @@ if(NOT USE_SYSTEM_GMOCK)
   set(GMOCK_LIBRARIES gmock gtest)
 endif(NOT USE_SYSTEM_GMOCK)
 
-add_definitions(-DGTEST_USE_OWN_TR1_TUPLE=0)
+add_definitions(-DGTEST_USE_OWN_TR1_TUPLE=1)
 
 set(TESTUTILS-SOURCES
   mock_networkaccessmanager.cpp
@@ -132,6 +132,7 @@ add_test_file(fmpsparser_test.cpp false)
 #add_test_file(m3uparser_test.cpp false)
 add_test_file(mergedproxymodel_test.cpp false)
 add_test_file(organiseformat_test.cpp false)
+add_test_file(organisedialog_test.cpp false)
 #add_test_file(playlist_test.cpp true)
 #add_test_file(plsparser_test.cpp false)
 add_test_file(scopedtransaction_test.cpp false)
@@ -144,6 +145,7 @@ add_test_file(utilities_test.cpp false)
 add_test_file(closure_test.cpp false)
 add_test_file(concurrentrun_test.cpp false)
 add_test_file(zeroconf_test.cpp false)
+add_test_file(sqlite_test.cpp false)
 
 #if(LINUX AND HAVE_DBUS)
 #  add_test_file(mpris1_test.cpp true)

@@ -28,9 +28,9 @@ class QNetworkReply;
 class PrettyImage : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   PrettyImage(const QUrl& url, QNetworkAccessManager* network,
-              QWidget* parent = 0);
+              QWidget* parent = nullptr);
 
   static const int kTotalHeight;
   static const int kReflectionHeight;
@@ -46,20 +46,20 @@ public:
 signals:
   void Loaded();
 
-public slots:
+ public slots:
   void LazyLoad();
   void SaveAs();
   void ShowFullsize();
 
-protected:
+ protected:
   void contextMenuEvent(QContextMenuEvent*);
   void paintEvent(QPaintEvent*);
 
-private slots:
+ private slots:
   void ImageFetched();
   void ImageScaled();
 
-private:
+ private:
   enum State {
     State_WaitingForLazyLoad,
     State_Fetching,
@@ -69,7 +69,7 @@ private:
 
   void DrawThumbnail(QPainter* p, const QRect& rect);
 
-private:
+ private:
   QNetworkAccessManager* network_;
   State state_;
   QUrl url_;
@@ -81,4 +81,4 @@ private:
   QString last_save_dir_;
 };
 
-#endif // PRETTYIMAGE_H
+#endif  // PRETTYIMAGE_H

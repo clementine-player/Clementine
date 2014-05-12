@@ -39,36 +39,42 @@
 #include "podcasts/podcastdownloader.h"
 #include "podcasts/podcastupdater.h"
 
+#ifdef HAVE_LIBLASTFM
+#include "internet/lastfmservice.h"
+#endif  // HAVE_LIBLASTFM
+
 #ifdef HAVE_MOODBAR
-# include "moodbar/moodbarcontroller.h"
-# include "moodbar/moodbarloader.h"
+#include "moodbar/moodbarcontroller.h"
+#include "moodbar/moodbarloader.h"
 #endif
 
+bool Application::kIsPortable = false;
+
 Application::Application(QObject* parent)
-  : QObject(parent),
-    tag_reader_client_(NULL),
-    database_(NULL),
-    album_cover_loader_(NULL),
-    playlist_backend_(NULL),
-    podcast_backend_(NULL),
-    appearance_(NULL),
-    cover_providers_(NULL),
-    task_manager_(NULL),
-    player_(NULL),
-    playlist_manager_(NULL),
-    current_art_loader_(NULL),
-    global_search_(NULL),
-    internet_model_(NULL),
-    library_(NULL),
-    device_manager_(NULL),
-    podcast_updater_(NULL),
-    podcast_downloader_(NULL),
-    gpodder_sync_(NULL),
-    moodbar_loader_(NULL),
-    moodbar_controller_(NULL),
-    network_remote_(NULL),
-    network_remote_helper_(NULL)
-{
+    : QObject(parent),
+      tag_reader_client_(nullptr),
+      database_(nullptr),
+      album_cover_loader_(nullptr),
+      playlist_backend_(nullptr),
+      podcast_backend_(nullptr),
+      appearance_(nullptr),
+      cover_providers_(nullptr),
+      task_manager_(nullptr),
+      player_(nullptr),
+      playlist_manager_(nullptr),
+      current_art_loader_(nullptr),
+      global_search_(nullptr),
+      internet_model_(nullptr),
+      library_(nullptr),
+      device_manager_(nullptr),
+      podcast_updater_(nullptr),
+      podcast_downloader_(nullptr),
+      gpodder_sync_(nullptr),
+      moodbar_loader_(nullptr),
+      moodbar_controller_(nullptr),
+      network_remote_(nullptr),
+      network_remote_helper_(nullptr),
+      scrobbler_(nullptr) {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
   tag_reader_client_->Start();
@@ -109,10 +115,15 @@ Application::Application(QObject* parent)
   MoveToNewThread(network_remote_);
 
   // This must be before libraray_->Init();
-  // In the constructor the helper waits for the signal PlaylistManagerInitialized
+  // In the constructor the helper waits for the signal
+  // PlaylistManagerInitialized
   // to start the remote. Without the playlist manager clementine can
   // crash when a client connects before the manager is initialized!
   network_remote_helper_ = new NetworkRemoteHelper(this);
+
+#ifdef HAVE_LIBLASTFM
+  scrobbler_ = new LastFMService(this, this);
+#endif  // HAVE_LIBLASTFM
 
   library_->Init();
 
@@ -123,17 +134,18 @@ Application::~Application() {
   // It's important that the device manager is deleted before the database.
   // Deleting the database deletes all objects that have been created in its
   // thread, including some device library backends.
-  delete device_manager_; device_manager_ = NULL;
+  delete device_manager_;
+  device_manager_ = nullptr;
 
-  foreach (QObject* object, objects_in_threads_) {
+  for (QObject* object : objects_in_threads_) {
     object->deleteLater();
   }
 
-  foreach (QThread* thread, threads_) {
+  for (QThread* thread : threads_) {
     thread->quit();
   }
 
-  foreach (QThread* thread, threads_) {
+  for (QThread* thread : threads_) {
     thread->wait();
   }
 }
@@ -148,14 +160,12 @@ void Application::MoveToNewThread(QObject* object) {
 }
 
 void Application::MoveToThread(QObject* object, QThread* thread) {
-  object->setParent(NULL);
+  object->setParent(nullptr);
   object->moveToThread(thread);
   objects_in_threads_ << object;
 }
 
-void Application::AddError(const QString& message) {
-  emit ErrorAdded(message);
-}
+void Application::AddError(const QString& message) { emit ErrorAdded(message); }
 
 QString Application::language_without_region() const {
   const int underscore = language_name_.indexOf('_');
@@ -169,13 +179,9 @@ LibraryBackend* Application::library_backend() const {
   return library()->backend();
 }
 
-LibraryModel* Application::library_model() const {
-  return library()->model();
-}
+LibraryModel* Application::library_model() const { return library()->model(); }
 
-void Application::ReloadSettings() {
-  emit SettingsChanged();
-}
+void Application::ReloadSettings() { emit SettingsChanged(); }
 
 void Application::OpenSettingsDialogAtPage(SettingsDialog::Page page) {
   emit SettingsDialogRequested(page);

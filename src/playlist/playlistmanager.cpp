@@ -38,16 +38,15 @@
 
 using smart_playlists::GeneratorPtr;
 
-PlaylistManager::PlaylistManager(Application* app, QObject *parent)
-  : PlaylistManagerInterface(app, parent),
-    app_(app),
-    playlist_backend_(NULL),
-    library_backend_(NULL),
-    sequence_(NULL),
-    parser_(NULL),
-    current_(-1),
-    active_(-1)
-{
+PlaylistManager::PlaylistManager(Application* app, QObject* parent)
+    : PlaylistManagerInterface(app, parent),
+      app_(app),
+      playlist_backend_(nullptr),
+      library_backend_(nullptr),
+      sequence_(nullptr),
+      parser_(nullptr),
+      current_(-1),
+      active_(-1) {
   connect(app_->player(), SIGNAL(Paused()), SLOT(SetActivePaused()));
   connect(app_->player(), SIGNAL(Playing()), SLOT(SetActivePlaying()));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(SetActiveStopped()));
@@ -56,7 +55,7 @@ PlaylistManager::PlaylistManager(Application* app, QObject *parent)
 }
 
 PlaylistManager::~PlaylistManager() {
-  foreach (const Data& data, playlists_.values()) {
+  for (const Data& data : playlists_.values()) {
     delete data.p;
   }
 }
@@ -71,17 +70,20 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   parser_ = new PlaylistParser(library_backend, this);
   playlist_container_ = playlist_container;
 
-  connect(library_backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
-  connect(library_backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsDiscovered(SongList)));
-  connect(library_backend_, SIGNAL(SongsRatingChanged(SongList)), SLOT(SongsDiscovered(SongList)));
+  connect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
+          SLOT(SongsDiscovered(SongList)));
+  connect(library_backend_, SIGNAL(SongsStatisticsChanged(SongList)),
+          SLOT(SongsDiscovered(SongList)));
+  connect(library_backend_, SIGNAL(SongsRatingChanged(SongList)),
+          SLOT(SongsDiscovered(SongList)));
 
-  foreach (const PlaylistBackend::Playlist& p, playlist_backend->GetAllOpenPlaylists()) {
+  for (const PlaylistBackend::Playlist& p :
+       playlist_backend->GetAllOpenPlaylists()) {
     AddPlaylist(p.id, p.name, p.special_type, p.ui_path, p.favorite);
   }
 
   // If no playlist exists then make a new one
-  if (playlists_.isEmpty())
-    New(tr("Playlist"));
+  if (playlists_.isEmpty()) New(tr("Playlist"));
 
   emit PlaylistManagerInitialized();
 }
@@ -89,7 +91,7 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
 QList<Playlist*> PlaylistManager::GetAllPlaylists() const {
   QList<Playlist*> result;
 
-  foreach(const Data& data, playlists_.values()) {
+  for (const Data& data : playlists_.values()) {
     result.append(data.p);
   }
 
@@ -103,21 +105,24 @@ QItemSelection PlaylistManager::selection(int id) const {
 
 Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
                                        const QString& special_type,
-                                       const QString& ui_path,
-                                       bool favorite) {
+                                       const QString& ui_path, bool favorite) {
   Playlist* ret = new Playlist(playlist_backend_, app_->task_manager(),
                                library_backend_, id, special_type, favorite);
   ret->set_sequence(sequence_);
   ret->set_ui_path(ui_path);
 
-  connect(ret, SIGNAL(CurrentSongChanged(Song)), SIGNAL(CurrentSongChanged(Song)));
+  connect(ret, SIGNAL(CurrentSongChanged(Song)),
+          SIGNAL(CurrentSongChanged(Song)));
   connect(ret, SIGNAL(PlaylistChanged()), SLOT(OneOfPlaylistsChanged()));
   connect(ret, SIGNAL(PlaylistChanged()), SLOT(UpdateSummaryText()));
-  connect(ret, SIGNAL(EditingFinished(QModelIndex)), SIGNAL(EditingFinished(QModelIndex)));
+  connect(ret, SIGNAL(EditingFinished(QModelIndex)),
+          SIGNAL(EditingFinished(QModelIndex)));
   connect(ret, SIGNAL(LoadTracksError(QString)), SIGNAL(Error(QString)));
-  connect(ret, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
-  connect(playlist_container_->view(), SIGNAL(ColumnAlignmentChanged(ColumnAlignmentMap)),
-          ret, SLOT(SetColumnAlignment(ColumnAlignmentMap)));
+  connect(ret, SIGNAL(PlayRequested(QModelIndex)),
+          SIGNAL(PlayRequested(QModelIndex)));
+  connect(playlist_container_->view(),
+          SIGNAL(ColumnAlignmentChanged(ColumnAlignmentMap)), ret,
+          SLOT(SetColumnAlignment(ColumnAlignmentMap)));
 
   playlists_[id] = Data(ret, name);
 
@@ -135,13 +140,11 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
 
 void PlaylistManager::New(const QString& name, const SongList& songs,
                           const QString& special_type) {
-  if (name.isNull())
-    return;
+  if (name.isNull()) return;
 
   int id = playlist_backend_->CreatePlaylist(name, special_type);
 
-  if (id == -1)
-    qFatal("Couldn't create playlist");
+  if (id == -1) qFatal("Couldn't create playlist");
 
   Playlist* playlist = AddPlaylist(id, name, special_type, QString(), false);
   playlist->InsertSongsOrLibraryItems(songs);
@@ -155,57 +158,40 @@ void PlaylistManager::New(const QString& name, const SongList& songs,
 }
 
 void PlaylistManager::Load(const QString& filename) {
-  QUrl url = QUrl::fromLocalFile(filename);
-  SongLoader* loader = new SongLoader(library_backend_, this);
-  connect(loader, SIGNAL(LoadFinished(bool)), SLOT(LoadFinished(bool)));
-  SongLoader::Result result = loader->Load(url);
   QFileInfo info(filename);
 
-  if (result == SongLoader::Error ||
-      (result == SongLoader::Success && loader->songs().isEmpty())) {
-    app_->AddError(tr("The playlist '%1' was empty or could not be loaded.").arg(
-        info.completeBaseName()));
-    delete loader;
+  int id = playlist_backend_->CreatePlaylist(info.baseName(), QString());
+
+  if (id == -1) {
+    emit Error(tr("Couldn't create playlist"));
     return;
   }
 
-  if (result == SongLoader::Success) {
-    New(info.baseName(), loader->songs());
-    delete loader;
-  }
-}
+  Playlist* playlist = AddPlaylist(id, info.baseName(), QString(), QString(), false);
 
-void PlaylistManager::LoadFinished(bool success) {
-  SongLoader* loader = qobject_cast<SongLoader*>(sender());
-  loader->deleteLater();
-  QString localfile = loader->url().toLocalFile();
-  QFileInfo info(localfile);
-  if (!success || loader->songs().isEmpty()) {
-    app_->AddError(tr("The playlist '%1' was empty or could not be loaded.").arg(
-        info.completeBaseName()));
-  }
-
-  New(info.baseName(), loader->songs());
+  QList<QUrl> urls;
+  playlist->InsertUrls(urls << QUrl::fromLocalFile(filename));
 }
 
 void PlaylistManager::Save(int id, const QString& filename) {
   if (playlists_.contains(id)) {
     parser_->Save(playlist(id)->GetAllSongs(), filename);
   } else {
-    // Playlist is not in the playlist manager: probably save action was triggered
+    // Playlist is not in the playlist manager: probably save action was
+    // triggered
     // from the left side bar and the playlist isn't loaded.
     QFuture<Song> future = playlist_backend_->GetPlaylistSongs(id);
     QFutureWatcher<Song>* watcher = new QFutureWatcher<Song>(this);
     watcher->setFuture(future);
 
-    NewClosure(watcher, SIGNAL(finished()),
-        this, SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString)), watcher, filename);
+    NewClosure(watcher, SIGNAL(finished()), this,
+               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString)),
+               watcher, filename);
   }
 }
 
-void PlaylistManager::ItemsLoadedForSavePlaylist(
-    QFutureWatcher<Song>* watcher,
-    const QString& filename) {
+void PlaylistManager::ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
+                                                 const QString& filename) {
 
   SongList song_list = watcher->future().results();
   parser_->Save(song_list, filename);
@@ -220,34 +206,29 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
   // Strip off filename components until we find something that's a folder
   forever {
     QFileInfo fileinfo(filename);
-    if (filename.isEmpty() || fileinfo.isDir())
-      break;
+    if (filename.isEmpty() || fileinfo.isDir()) break;
 
     filename = filename.section('/', 0, -2);
   }
 
   // Use the home directory as a fallback in case the path is empty.
-  if (filename.isEmpty())
-    filename = QDir::homePath();
+  if (filename.isEmpty()) filename = QDir::homePath();
 
   // Add the suggested filename
-  filename += "/" + suggested_filename +
-              "." + parser()->default_extension();
+  filename += "/" + suggested_filename + "." + parser()->default_extension();
 
   QString default_filter = parser()->default_filter();
 
   filename = QFileDialog::getSaveFileName(
-      NULL, tr("Save playlist"), filename,
-      parser()->filters(), &default_filter);
+      nullptr, tr("Save playlist", "Title of the playlist save dialog."),
+      filename, parser()->filters(), &default_filter);
 
-  if (filename.isNull())
-    return;
+  if (filename.isNull()) return;
 
   settings_.setValue("last_save_playlist", filename);
 
   Save(id == -1 ? current_id() : id, filename);
 }
-
 
 void PlaylistManager::Rename(int id, const QString& new_name) {
   Q_ASSERT(playlists_.contains(id));
@@ -261,12 +242,14 @@ void PlaylistManager::Rename(int id, const QString& new_name) {
 void PlaylistManager::Favorite(int id, bool favorite) {
 
   if (playlists_.contains(id)) {
-    // If playlists_ contains this playlist, its means it's opened: star or unstar it.
+    // If playlists_ contains this playlist, its means it's opened: star or
+    // unstar it.
     playlist_backend_->FavoritePlaylist(id, favorite);
     playlists_[id].p->set_favorite(favorite);
   } else {
     Q_ASSERT(!favorite);
-    // Otherwise it means user wants to remove this playlist from the left panel,
+    // Otherwise it means user wants to remove this playlist from the left
+    // panel,
     // while it's not visible in the playlist tabbar either, because it has been
     // closed: delete it.
     playlist_backend_->RemovePlaylist(id);
@@ -276,23 +259,19 @@ void PlaylistManager::Favorite(int id, bool favorite) {
 
 bool PlaylistManager::Close(int id) {
   // Won't allow removing the last playlist
-  if (playlists_.count() <= 1 || !playlists_.contains(id))
-    return false;
+  if (playlists_.count() <= 1 || !playlists_.contains(id)) return false;
 
   int next_id = -1;
-  foreach (int possible_next_id, playlists_.keys()) {
+  for (int possible_next_id : playlists_.keys()) {
     if (possible_next_id != id) {
       next_id = possible_next_id;
       break;
     }
   }
-  if (next_id == -1)
-    return false;
+  if (next_id == -1) return false;
 
-  if (id == active_)
-    SetActivePlaylist(next_id);
-  if (id == current_)
-    SetCurrentPlaylist(next_id);
+  if (id == active_) SetActivePlaylist(next_id);
+  if (id == current_) SetCurrentPlaylist(next_id);
 
   Data data = playlists_.take(id);
   emit PlaylistClosed(id);
@@ -331,8 +310,7 @@ void PlaylistManager::SetActivePlaylist(int id) {
 
   // Kinda a hack: unset the current item from the old active playlist before
   // setting the new one
-  if (active_ != -1 && active_ != id)
-    active()->set_current_row(-1);
+  if (active_ != -1 && active_ != id) active()->set_current_row(-1);
 
   active_ = id;
   emit ActiveChanged(active());
@@ -350,31 +328,22 @@ void PlaylistManager::SetActiveToCurrent() {
   }
 }
 
-void PlaylistManager::ClearCurrent() {
-  current()->Clear();
-}
+void PlaylistManager::ClearCurrent() { current()->Clear(); }
 
-void PlaylistManager::ShuffleCurrent() {
-  current()->Shuffle();
-}
+void PlaylistManager::ShuffleCurrent() { current()->Shuffle(); }
 
 void PlaylistManager::RemoveDuplicatesCurrent() {
   current()->RemoveDuplicateSongs();
 }
 
-void PlaylistManager::SetActivePlaying() {
-  active()->Playing();
-}
+void PlaylistManager::SetActivePlaying() { active()->Playing(); }
 
-void PlaylistManager::SetActivePaused() {
-  active()->Paused();
-}
+void PlaylistManager::SetActivePaused() { active()->Paused(); }
 
-void PlaylistManager::SetActiveStopped() {
-  active()->Stopped();
-}
+void PlaylistManager::SetActiveStopped() { active()->Stopped(); }
 
-void PlaylistManager::SetActiveStreamMetadata(const QUrl &url, const Song &song) {
+void PlaylistManager::SetActiveStreamMetadata(const QUrl& url,
+                                              const Song& song) {
   active()->SetStreamMetadata(url, song);
 }
 
@@ -396,15 +365,14 @@ void PlaylistManager::UpdateSummaryText() {
   int selected = 0;
 
   // Get the length of the selected tracks
-  foreach (const QItemSelectionRange& range, playlists_[current_id()].selection) {
-    if (!range.isValid())
-      continue;
+  for (const QItemSelectionRange& range : playlists_[current_id()].selection) {
+    if (!range.isValid()) continue;
 
     selected += range.bottom() - range.top() + 1;
-    for (int i=range.top() ; i<=range.bottom() ; ++i) {
-      qint64 length = range.model()->index(i, Playlist::Column_Length).data().toLongLong();
-      if (length > 0)
-        nanoseconds += length;
+    for (int i = range.top(); i <= range.bottom(); ++i) {
+      qint64 length =
+          range.model()->index(i, Playlist::Column_Length).data().toLongLong();
+      if (length > 0) nanoseconds += length;
     }
   }
 
@@ -433,12 +401,11 @@ void PlaylistManager::SongsDiscovered(const SongList& songs) {
   // Some songs might've changed in the library, let's update any playlist
   // items we have that match those songs
 
-  foreach (const Song& song, songs) {
-    foreach (const Data& data, playlists_) {
+  for (const Song& song : songs) {
+    for (const Data& data : playlists_) {
       PlaylistItemList items = data.p->library_items_by_id(song.id());
-      foreach (PlaylistItemPtr item, items) {
-        if (item->Metadata().directory_id() != song.directory_id())
-          continue;
+      for (PlaylistItemPtr item : items) {
+        if (item->Metadata().directory_id() != song.directory_id()) continue;
         static_cast<LibraryPlaylistItem*>(item.get())->SetMetadata(song);
         data.p->ItemChanged(item);
       }
@@ -446,7 +413,8 @@ void PlaylistManager::SongsDiscovered(const SongList& songs) {
   }
 }
 
-void PlaylistManager::PlaySmartPlaylist(GeneratorPtr generator, bool as_new, bool clear) {
+void PlaylistManager::PlaySmartPlaylist(GeneratorPtr generator, bool as_new,
+                                        bool clear) {
   if (as_new) {
     New(generator->name());
   }
@@ -460,34 +428,35 @@ void PlaylistManager::PlaySmartPlaylist(GeneratorPtr generator, bool as_new, boo
 
 // When Player has processed the new song chosen by the user...
 void PlaylistManager::SongChangeRequestProcessed(const QUrl& url, bool valid) {
-  foreach(Playlist* playlist, GetAllPlaylists()) {
-    if(playlist->ApplyValidityOnCurrentSong(url, valid)) {
+  for (Playlist* playlist : GetAllPlaylists()) {
+    if (playlist->ApplyValidityOnCurrentSong(url, valid)) {
       return;
     }
   }
 }
 
-void PlaylistManager::InsertUrls(int id, const QList<QUrl> &urls, int pos,
+void PlaylistManager::InsertUrls(int id, const QList<QUrl>& urls, int pos,
                                  bool play_now, bool enqueue) {
   Q_ASSERT(playlists_.contains(id));
 
   playlists_[id].p->InsertUrls(urls, pos, play_now, enqueue);
 }
 
-void PlaylistManager::RemoveItemsWithoutUndo(int id, const QList<int> &indices) {
+void PlaylistManager::RemoveItemsWithoutUndo(int id,
+                                             const QList<int>& indices) {
   Q_ASSERT(playlists_.contains(id));
 
   playlists_[id].p->RemoveItemsWithoutUndo(indices);
 }
 
 void PlaylistManager::InvalidateDeletedSongs() {
-  foreach(Playlist* playlist, GetAllPlaylists()) {
+  for (Playlist* playlist : GetAllPlaylists()) {
     playlist->InvalidateDeletedSongs();
   }
 }
 
 void PlaylistManager::RemoveDeletedSongs() {
-  foreach(Playlist* playlist, GetAllPlaylists()) {
+  for (Playlist* playlist : GetAllPlaylists()) {
     playlist->RemoveDeletedSongs();
   }
 }
@@ -500,15 +469,11 @@ QString PlaylistManager::GetNameForNewPlaylist(const SongList& songs) {
   QSet<QString> artists;
   QSet<QString> albums;
 
-  foreach(const Song& song, songs) {
-    artists << (song.artist().isEmpty()
-                    ? tr("Unknown")
-                    : song.artist());
-    albums << (song.album().isEmpty()
-                    ? tr("Unknown")
-                    : song.album());
+  for (const Song& song : songs) {
+    artists << (song.artist().isEmpty() ? tr("Unknown") : song.artist());
+    albums << (song.album().isEmpty() ? tr("Unknown") : song.album());
 
-    if(artists.size() > 1) {
+    if (artists.size() > 1) {
       break;
     }
   }
@@ -516,13 +481,13 @@ QString PlaylistManager::GetNameForNewPlaylist(const SongList& songs) {
   bool various_artists = artists.size() > 1;
 
   QString result;
-  if(various_artists) {
+  if (various_artists) {
     result = tr("Various artists");
   } else {
     result = artists.values().first();
   }
 
-  if(!various_artists && albums.size() == 1) {
+  if (!various_artists && albums.size() == 1) {
     result += " - " + albums.toList().first();
   }
 
@@ -547,6 +512,4 @@ void PlaylistManager::SetCurrentOrOpen(int id) {
   SetCurrentPlaylist(id);
 }
 
-bool PlaylistManager::IsPlaylistOpen(int id) {
-  return playlists_.contains(id);
-}
+bool PlaylistManager::IsPlaylistOpen(int id) { return playlists_.contains(id); }

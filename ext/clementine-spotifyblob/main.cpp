@@ -18,7 +18,6 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-
 #include <QCoreApplication>
 #include <QStringList>
 
@@ -35,7 +34,7 @@ int main(int argc, char** argv) {
 
   logging::Init();
 
-  gst_init(NULL, NULL);
+  gst_init(nullptr, nullptr);
 
   const QStringList arguments(a.arguments());
 

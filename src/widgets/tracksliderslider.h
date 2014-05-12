@@ -26,23 +26,23 @@ class TrackSliderPopup;
 class TrackSliderSlider : public QSlider {
   Q_OBJECT
 
-public:
-  TrackSliderSlider(QWidget* parent = 0);
+ public:
+  TrackSliderSlider(QWidget* parent = nullptr);
 
-protected:
+ protected:
   void mousePressEvent(QMouseEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
   void mouseMoveEvent(QMouseEvent* e);
   void enterEvent(QEvent*);
   void leaveEvent(QEvent*);
 
-private slots:
+ private slots:
   void UpdateDeltaTime();
 
-private:
+ private:
   TrackSliderPopup* popup_;
 
   int mouse_hover_seconds_;
 };
 
-#endif // TRACKSLIDERSLIDER_H
+#endif  // TRACKSLIDERSLIDER_H

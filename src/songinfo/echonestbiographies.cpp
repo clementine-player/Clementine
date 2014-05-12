@@ -16,18 +16,19 @@
 */
 
 #include "echonestbiographies.h"
-#include "songinfotextview.h"
-#include "core/logging.h"
+
+#include <memory>
 
 #include <echonest/Artist.h>
 
-#include <boost/scoped_ptr.hpp>
+#include "songinfotextview.h"
+#include "core/logging.h"
 
 struct EchoNestBiographies::Request {
   Request(int id) : id_(id), artist_(new Echonest::Artist) {}
 
   int id_;
-  boost::scoped_ptr<Echonest::Artist> artist_;
+  std::unique_ptr<Echonest::Artist> artist_;
 };
 
 EchoNestBiographies::EchoNestBiographies() {
@@ -46,7 +47,7 @@ EchoNestBiographies::EchoNestBiographies() {
 }
 
 void EchoNestBiographies::FetchInfo(int id, const Song& metadata) {
-  boost::shared_ptr<Request> request(new Request(id));
+  std::shared_ptr<Request> request(new Request(id));
   request->artist_->setName(metadata.artist());
 
   QNetworkReply* reply = request->artist_->fetchBiographies();
@@ -56,26 +57,26 @@ void EchoNestBiographies::FetchInfo(int id, const Song& metadata) {
 
 void EchoNestBiographies::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !requests_.contains(reply))
-    return;
+  if (!reply || !requests_.contains(reply)) return;
   reply->deleteLater();
 
   RequestPtr request = requests_.take(reply);
 
   try {
     request->artist_->parseProfile(reply);
-  } catch (Echonest::ParseError e) {
-    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
+  }
+  catch (Echonest::ParseError e) {
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType()
+                  << e.what();
   }
 
   QSet<QString> already_seen;
 
-  foreach (const Echonest::Biography& bio, request->artist_->biographies()) {
+  for (const Echonest::Biography& bio : request->artist_->biographies()) {
     QString canonical_site = bio.site().toLower();
-    canonical_site.replace(QRegExp("[^a-z]"),"");
+    canonical_site.replace(QRegExp("[^a-z]"), "");
 
-    if (already_seen.contains(canonical_site))
-      continue;
+    if (already_seen.contains(canonical_site)) continue;
     already_seen.insert(canonical_site);
 
     CollapsibleInfoPane::Data data;
@@ -89,18 +90,25 @@ void EchoNestBiographies::RequestFinished() {
       data.icon_ = site_icons_[canonical_site];
 
     SongInfoTextView* editor = new SongInfoTextView;
+    QString text;
+    // Add a link to the bio webpage at the top if we have one
+    if (!bio.url().isEmpty()) {
+      text += "<p><a href=\"" + bio.url().toEncoded() + "\">" +
+              tr("Open in your browser") + "</a></p>";
+    }
+
+    text += bio.text();
     if (bio.site() == "last.fm") {
-      // Echonest lost formatting and it seems there is currently no plans on Echonest side for changing this.
+      // Echonest lost formatting and it seems there is currently no plans on
+      // Echonest side for changing this.
       // But with last.fm, we can guess newlines: "  " corresponds to a newline
       // (this seems to be because on last.fm' website, extra blank is inserted
       // before <br /> tag, and this blank is kept).
-      // This is tricky, but this make the display nicer for last.fm biographies.
-      QString copy(bio.text());
-      copy.replace("  ","<p>");
-      editor->SetHtml(copy);
-    } else {
-      editor->SetHtml(bio.text());
+      // This is tricky, but this make the display nicer for last.fm
+      // biographies.
+      text.replace("  ", "<p>");
     }
+    editor->SetHtml(text);
     data.contents_ = editor;
 
     emit InfoReady(request->id_, data);

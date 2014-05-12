@@ -4,11 +4,11 @@
 #include "cloudfileservice.h"
 
 namespace google_drive {
-  class Client;
-  class ConnectResponse;
-  class File;
-  class ListFilesResponse;
-  class ListChangesResponse;
+class Client;
+class ConnectResponse;
+class File;
+class ListFilesResponse;
+class ListChangesResponse;
 }
 
 class GoogleDriveService : public CloudFileService {
@@ -31,7 +31,7 @@ class GoogleDriveService : public CloudFileService {
   void Connect();
   void ForgetCredentials();
 
- signals:
+signals:
   void Connected();
 
  private slots:
@@ -39,6 +39,7 @@ class GoogleDriveService : public CloudFileService {
   void FilesFound(const QList<google_drive::File>& files);
   void FilesDeleted(const QList<QUrl>& files);
   void ListChangesFinished(google_drive::ListChangesResponse* response);
+  void SaveCursor(const QString& cursor);
 
   void OpenWithDrive();
 

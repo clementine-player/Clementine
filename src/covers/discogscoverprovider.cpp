@@ -24,15 +24,15 @@
 #include <QNetworkReply>
 #include <qjson/parser.h>
 
-const char* DiscogsCoverProvider::kSearchUrl = "http://api.discogs.com/database/search";
+const char* DiscogsCoverProvider::kSearchUrl =
+    "http://api.discogs.com/database/search";
 
 DiscogsCoverProvider::DiscogsCoverProvider(QObject* parent)
-  : CoverProvider("Discogs", parent),
-    network_(new NetworkAccessManager(this))
-{
-}
+    : CoverProvider("Discogs", parent),
+      network_(new NetworkAccessManager(this)) {}
 
-bool DiscogsCoverProvider::StartSearch(const QString& artist, const QString& album, int id) {
+bool DiscogsCoverProvider::StartSearch(const QString& artist,
+                                       const QString& album, int id) {
   DiscogsCoverSearchContext* ctx = new DiscogsCoverSearchContext;
   ctx->id = id;
   ctx->artist = artist;
@@ -61,17 +61,17 @@ void DiscogsCoverProvider::SendSearchRequest(DiscogsCoverSearchContext* ctx) {
   QString type;
 
   switch (ctx->state) {
-  case DiscogsCoverSearchContext::State_Init:
-    type = "master";
-    ctx->state = DiscogsCoverSearchContext::State_MastersRequested;
-    break;
-  case DiscogsCoverSearchContext::State_MastersRequested:
-    type = "release";
-    ctx->state = DiscogsCoverSearchContext::State_ReleasesRequested;
-    break;
-  default:
-    EndSearch(ctx);
-    return;
+    case DiscogsCoverSearchContext::State_Init:
+      type = "master";
+      ctx->state = DiscogsCoverSearchContext::State_MastersRequested;
+      break;
+    case DiscogsCoverSearchContext::State_MastersRequested:
+      type = "release";
+      ctx->state = DiscogsCoverSearchContext::State_ReleasesRequested;
+      break;
+    default:
+      EndSearch(ctx);
+      return;
   }
 
   ArgList args = ArgList();
@@ -85,7 +85,7 @@ void DiscogsCoverProvider::SendSearchRequest(DiscogsCoverSearchContext* ctx) {
 
   EncodedArgList encoded_args;
 
-  foreach (const Arg& arg, args) {
+  for (const Arg& arg : args) {
     EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
                            QUrl::toPercentEncoding(arg.second));
     encoded_args << encoded_arg;
@@ -93,12 +93,12 @@ void DiscogsCoverProvider::SendSearchRequest(DiscogsCoverSearchContext* ctx) {
 
   url.setEncodedQueryItems(encoded_args);
 
-  qLog(Debug) << "Discogs: send search request for id:" << ctx->id << "url: " << url;
+  qLog(Debug) << "Discogs: send search request for id:" << ctx->id
+              << "url: " << url;
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(HandleSearchReply(QNetworkReply*, int)),
-             reply, ctx->id);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(HandleSearchReply(QNetworkReply*, int)), reply, ctx->id);
 }
 
 // Parse the reply from a search
@@ -126,7 +126,7 @@ void DiscogsCoverProvider::HandleSearchReply(QNetworkReply* reply, int id) {
 
   QVariantList results = reply_map["results"].toList();
 
-  foreach (const QVariant& result, results) {
+  for (const QVariant& result : results) {
     QVariantMap result_map = result.toMap();
     // In order to use less round-trips, we cheat here.  Instead of
     // following the "resource_url", and then scan all images in the
@@ -134,7 +134,8 @@ void DiscogsCoverProvider::HandleSearchReply(QNetworkReply* reply, int id) {
     // constructing the primary image's url from the thmub's url.
     if (result_map.contains("thumb")) {
       CoverSearchResult cover_result;
-      cover_result.image_url = QUrl(result_map["thumb"].toString().replace("R-90-", "R-"));
+      cover_result.image_url =
+          QUrl(result_map["thumb"].toString().replace("R-90-", "R-"));
       if (result_map.contains("title")) {
         cover_result.description = result_map["title"].toString();
       }
@@ -160,7 +161,7 @@ void DiscogsCoverProvider::HandleSearchReply(QNetworkReply* reply, int id) {
 }
 
 void DiscogsCoverProvider::EndSearch(DiscogsCoverSearchContext* ctx) {
-  (void) pending_requests_.remove(ctx->id);
+  (void)pending_requests_.remove(ctx->id);
   emit SearchFinished(ctx->id, ctx->results);
   delete ctx;
 }

@@ -32,13 +32,13 @@
 #include "playlist/playlistmanager.h"
 #include "smartplaylists/generator_fwd.h"
 
-#include <boost/scoped_ptr.hpp>
-
 class Application;
 class AlbumCoverLoader;
 class LibraryDirectoryModel;
 class LibraryBackend;
-namespace smart_playlists { class Search; }
+namespace smart_playlists {
+class Search;
+}
 
 class QSettings;
 
@@ -47,8 +47,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   Q_ENUMS(GroupBy);
 
  public:
-  LibraryModel(LibraryBackend* backend, Application* app,
-               QObject* parent = 0);
+  LibraryModel(LibraryBackend* backend, Application* app, QObject* parent = nullptr);
   ~LibraryModel();
 
   static const char* kSmartPlaylistsMimeType;
@@ -65,7 +64,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     Role_Artist,
     Role_IsDivider,
     Role_Editable,
-
     LastRole
   };
 
@@ -82,28 +80,25 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     GroupBy_FileType = 8,
     GroupBy_Performer = 9,
     GroupBy_Grouping = 10,
+    GroupBy_Bitrate = 11,
   };
 
   struct Grouping {
-    Grouping(GroupBy f = GroupBy_None,
-             GroupBy s = GroupBy_None,
+    Grouping(GroupBy f = GroupBy_None, GroupBy s = GroupBy_None,
              GroupBy t = GroupBy_None)
-               : first(f), second(s), third(t) {}
+        : first(f), second(s), third(t) {}
 
     GroupBy first;
     GroupBy second;
     GroupBy third;
 
-    const GroupBy& operator [](int i) const;
-    GroupBy& operator [](int i);
-    bool operator ==(const Grouping& other) const {
-      return first == other.first &&
-             second == other.second &&
+    const GroupBy& operator[](int i) const;
+    GroupBy& operator[](int i);
+    bool operator==(const Grouping& other) const {
+      return first == other.first && second == other.second &&
              third == other.third;
     }
-    bool operator !=(const Grouping& other) const {
-      return ! (*this == other);
-    }
+    bool operator!=(const Grouping& other) const { return !(*this == other); }
   };
 
   struct QueryResult {
@@ -120,9 +115,15 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   typedef QList<GeneratorList> DefaultGenerators;
 
   // Call before Init()
-  void set_show_smart_playlists(bool show_smart_playlists) { show_smart_playlists_ = show_smart_playlists; }
-  void set_default_smart_playlists(const DefaultGenerators& defaults) { default_smart_playlists_ = defaults; }
-  void set_show_various_artists(bool show_various_artists) { show_various_artists_ = show_various_artists; }
+  void set_show_smart_playlists(bool show_smart_playlists) {
+    show_smart_playlists_ = show_smart_playlists;
+  }
+  void set_default_smart_playlists(const DefaultGenerators& defaults) {
+    default_smart_playlists_ = defaults;
+  }
+  void set_show_various_artists(bool show_various_artists) {
+    show_various_artists_ = show_various_artists;
+  }
 
   // Get information about the library
   void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs,
@@ -136,15 +137,16 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Smart playlists
   smart_playlists::GeneratorPtr CreateGenerator(const QModelIndex& index) const;
   void AddGenerator(smart_playlists::GeneratorPtr gen);
-  void UpdateGenerator(const QModelIndex& index, smart_playlists::GeneratorPtr gen);
+  void UpdateGenerator(const QModelIndex& index,
+                       smart_playlists::GeneratorPtr gen);
   void DeleteGenerator(const QModelIndex& index);
 
   // QAbstractItemModel
-  QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
   Qt::ItemFlags flags(const QModelIndex& index) const;
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;
-  bool canFetchMore(const QModelIndex &parent) const;
+  bool canFetchMore(const QModelIndex& parent) const;
 
   // Whether or not to use album cover art, if it exists, in the library view
   void set_pretty_covers(bool use_pretty_covers);
@@ -159,9 +161,10 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   static QString SortText(QString text);
   static QString SortTextForArtist(QString artist);
   static QString SortTextForYear(int year);
+  static QString SortTextForBitrate(int bitrate);
   static QString SortTextForSong(const Song& song);
 
- signals:
+signals:
   void TotalSongCountUpdated(int count);
   void GroupingChanged(const LibraryModel::Grouping& g);
 
@@ -224,7 +227,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
   // Smart playlists are shown in another top-level node
   void CreateSmartPlaylists();
-  void SaveGenerator(QSettings* s, int i, smart_playlists::GeneratorPtr generator) const;
+  void SaveGenerator(QSettings* s, int i,
+                     smart_playlists::GeneratorPtr generator) const;
   void ItemFromSmartPlaylist(const QSettings& s, bool notify) const;
 
   // Helpers for ItemFromQuery and ItemFromSong
@@ -276,7 +280,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QIcon playlist_icon_;
 
   int init_task_id_;
-  
+
   bool use_pretty_covers_;
   bool show_dividers_;
 
@@ -289,4 +293,4 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
 Q_DECLARE_METATYPE(LibraryModel::Grouping);
 
-#endif // LIBRARYMODEL_H
+#endif  // LIBRARYMODEL_H

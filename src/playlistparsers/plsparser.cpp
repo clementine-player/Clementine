@@ -23,11 +23,10 @@
 #include <QtDebug>
 
 PLSParser::PLSParser(LibraryBackendInterface* library, QObject* parent)
-  : ParserBase(library, parent)
-{
-}
+    : ParserBase(library, parent) {}
 
-SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const QDir &dir) const {
+SongList PLSParser::Load(QIODevice* device, const QString& playlist_path,
+                         const QDir& dir) const {
   QMap<int, Song> songs;
   QRegExp n_re("\\d+$");
 
@@ -44,9 +43,8 @@ SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const 
       Song song = LoadSong(value, 0, dir);
 
       // Use the title and length we've already loaded if any
-      if (!songs[n].title().isEmpty())
-        song.set_title(songs[n].title());
-      if (!songs[n].length_nanosec() != -1)
+      if (!songs[n].title().isEmpty()) song.set_title(songs[n].title());
+      if (songs[n].length_nanosec() != -1)
         song.set_length_nanosec(songs[n].length_nanosec());
 
       songs[n] = song;
@@ -63,14 +61,15 @@ SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const 
   return songs.values();
 }
 
-void PLSParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+void PLSParser::Save(const SongList& songs, QIODevice* device,
+                     const QDir& dir) const {
   QTextStream s(device);
   s << "[playlist]" << endl;
   s << "Version=2" << endl;
   s << "NumberOfEntries=" << songs.count() << endl;
 
   int n = 1;
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     s << "File" << n << "=" << URLOrRelativeFilename(song.url(), dir) << endl;
     s << "Title" << n << "=" << song.title() << endl;
     s << "Length" << n << "=" << song.length_nanosec() / kNsecPerSec << endl;

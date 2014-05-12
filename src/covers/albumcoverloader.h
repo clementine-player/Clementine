@@ -34,28 +34,29 @@ class AlbumCoverLoader : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverLoader(QObject* parent = 0);
+  AlbumCoverLoader(QObject* parent = nullptr);
 
   void Stop() { stop_requested_ = true; }
 
   static QString ImageCacheDir();
 
-  quint64 LoadImageAsync(const AlbumCoverLoaderOptions& options, const Song& song);
-  virtual quint64 LoadImageAsync(
-      const AlbumCoverLoaderOptions& options,
-      const QString& art_automatic,
-      const QString& art_manual,
-      const QString& song_filename = QString(),
-      const QImage& embedded_image = QImage());
+  quint64 LoadImageAsync(const AlbumCoverLoaderOptions& options,
+                         const Song& song);
+  virtual quint64 LoadImageAsync(const AlbumCoverLoaderOptions& options,
+                                 const QString& art_automatic,
+                                 const QString& art_manual,
+                                 const QString& song_filename = QString(),
+                                 const QImage& embedded_image = QImage());
 
   void CancelTask(quint64 id);
   void CancelTasks(const QSet<quint64>& ids);
 
   static QPixmap TryLoadPixmap(const QString& automatic, const QString& manual,
                                const QString& filename = QString());
-  static QImage ScaleAndPad(const AlbumCoverLoaderOptions& options, const QImage& image);
+  static QImage ScaleAndPad(const AlbumCoverLoaderOptions& options,
+                            const QImage& image);
 
- signals:
+signals:
   void ImageLoaded(quint64 id, const QImage& image);
   void ImageLoaded(quint64 id, const QImage& scaled, const QImage& original);
 
@@ -65,10 +66,7 @@ class AlbumCoverLoader : public QObject {
   void SpotifyImageLoaded(const QString& url, const QImage& image);
 
  protected:
-  enum State {
-    State_TryingManual,
-    State_TryingAuto,
-  };
+  enum State { State_TryingManual, State_TryingAuto, };
 
   struct Task {
     Task() : redirects(0) {}
@@ -86,7 +84,7 @@ class AlbumCoverLoader : public QObject {
 
   struct TryLoadResult {
     TryLoadResult(bool async, bool success, const QImage& i)
-      : started_async(async), loaded_success(success), image(i) {}
+        : started_async(async), loaded_success(success), image(i) {}
 
     bool started_async;
     bool loaded_success;
@@ -112,4 +110,4 @@ class AlbumCoverLoader : public QObject {
   static const int kMaxRedirects = 3;
 };
 
-#endif // ALBUMCOVERLOADER_H
+#endif  // ALBUMCOVERLOADER_H

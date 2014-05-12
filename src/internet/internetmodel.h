@@ -35,14 +35,14 @@ class SettingsDialog;
 class TaskManager;
 
 #ifdef HAVE_LIBLASTFM
-  class LastFMService;
+class LastFMService;
 #endif
 
 class InternetModel : public QStandardItemModel {
   Q_OBJECT
 
-public:
-  InternetModel(Application* app, QObject* parent = 0);
+ public:
+  InternetModel(Application* app, QObject* parent = nullptr);
 
   enum Role {
     // Services can use this role to distinguish between different types of
@@ -77,9 +77,7 @@ public:
     // Setting this to true means that the item can be changed by user action
     // (e.g. changing remote playlists)
     Role_CanBeModified,
-
     RoleCount,
-
     Role_IsDivider = LibraryModel::Role_IsDivider,
   };
 
@@ -88,7 +86,6 @@ public:
     Type_Track,
     Type_UserPlaylist,
     Type_SmartPlaylist,
-
     TypeCount
   };
 
@@ -120,7 +117,7 @@ public:
   // Needs to be static for InternetPlaylistItem::restore
   static InternetService* ServiceByName(const QString& name);
 
-  template<typename T>
+  template <typename T>
   static T* Service() {
     return static_cast<T*>(ServiceByName(T::kServiceName));
   }
@@ -143,7 +140,8 @@ public:
   Qt::ItemFlags flags(const QModelIndex& index) const;
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;
-  bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
+  bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row,
+                    int column, const QModelIndex& parent);
   bool hasChildren(const QModelIndex& parent) const;
   int rowCount(const QModelIndex& parent) const;
 
@@ -165,10 +163,10 @@ signals:
   void AddToPlaylist(QMimeData* data);
   void ScrollToIndex(const QModelIndex& index);
 
-private slots:
+ private slots:
   void ServiceDeleted();
 
-private:
+ private:
   static QMap<QString, InternetService*>* sServices;
 
   Application* app_;
@@ -180,4 +178,4 @@ private:
   QModelIndex current_index_;
 };
 
-#endif // INTERNETMODEL_H
+#endif  // INTERNETMODEL_H

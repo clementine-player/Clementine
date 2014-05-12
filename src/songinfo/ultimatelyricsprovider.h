@@ -31,7 +31,7 @@ class QNetworkReply;
 class UltimateLyricsProvider : public SongInfoProvider {
   Q_OBJECT
 
-public:
+ public:
   UltimateLyricsProvider();
 
   static const int kRedirectLimit;
@@ -47,36 +47,44 @@ public:
   void set_relevance(int relevance) { relevance_ = relevance; }
 
   void add_url_format(const QString& replace, const QString& with) {
-    url_formats_ << UrlFormat(replace, with); }
+    url_formats_ << UrlFormat(replace, with);
+  }
 
   void add_extract_rule(const Rule& rule) { extract_rules_ << rule; }
   void add_exclude_rule(const Rule& rule) { exclude_rules_ << rule; }
-  void add_invalid_indicator(const QString& indicator) { invalid_indicators_ << indicator; }
+  void add_invalid_indicator(const QString& indicator) {
+    invalid_indicators_ << indicator;
+  }
 
   QString name() const { return name_; }
   int relevance() const { return relevance_; }
 
   void FetchInfo(int id, const Song& metadata);
 
-private slots:
+ private slots:
   void LyricsFetched();
 
-private:
-  void ApplyExtractRule(const Rule& rule, QString* content) const;
+ private:
+  bool ApplyExtractRule(const Rule& rule, QString* content) const;
   void ApplyExcludeRule(const Rule& rule, QString* content) const;
 
+  static QString ExtractUrl(const QString& source, const Rule& rule);
   static QString ExtractXmlTag(const QString& source, const QString& tag);
-  static QString Extract(const QString& source, const QString& begin, const QString& end);
+  static QString Extract(const QString& source, const QString& begin,
+                         const QString& end);
   static QString ExcludeXmlTag(const QString& source, const QString& tag);
-  static QString Exclude(const QString& source, const QString& begin, const QString& end);
+  static QString Exclude(const QString& source, const QString& begin,
+                         const QString& end);
   static QString FirstChar(const QString& text);
   static QString TitleCase(const QString& text);
   static QString NoSpace(const QString& text);
+  static bool HTMLHasAlphaNumeric(const QString& html);
 
-  void ReplaceField(const QString& tag, const QString& value, QString* text) const;
+  void ReplaceField(const QString& tag, const QString& value,
+                    QString* text) const;
   void ReplaceFields(const Song& metadata, QString* text) const;
 
-private:
+ private:
   NetworkAccessManager* network_;
   QMap<QNetworkReply*, int> requests_;
 
@@ -93,6 +101,7 @@ private:
 
   Song metadata_;
   int redirect_count_;
+  bool url_hop_;
 };
 
-#endif // ULTIMATELYRICSPROVIDER_H
+#endif  // ULTIMATELYRICSPROVIDER_H

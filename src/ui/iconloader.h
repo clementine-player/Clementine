@@ -21,14 +21,14 @@
 #include <QIcon>
 
 class IconLoader {
-public:
+ public:
   static void Init();
   static QIcon Load(const QString& name);
 
-private:
+ private:
   IconLoader() {}
 
   static QList<int> sizes_;
 };
 
-#endif // ICONLOADER_H
+#endif  // ICONLOADER_H

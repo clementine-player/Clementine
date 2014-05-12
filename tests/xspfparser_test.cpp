@@ -44,7 +44,7 @@ TEST_F(XSPFParserTest, ParsesOneTrackFromXML) {
       "</track></trackList></playlist>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  XSPFParser parser(NULL);
+  XSPFParser parser(nullptr);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
   const Song& song = songs[0];
@@ -68,7 +68,7 @@ TEST_F(XSPFParserTest, ParsesMoreThanOneTrackFromXML) {
       "</trackList></playlist>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  XSPFParser parser(NULL);
+  XSPFParser parser(nullptr);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(2, songs.length());
   EXPECT_EQ(QUrl("http://example.com/foo.mp3"), songs[0].url());
@@ -90,7 +90,7 @@ TEST_F(XSPFParserTest, IgnoresInvalidLength) {
       "</track></trackList></playlist>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  XSPFParser parser(NULL);
+  XSPFParser parser(nullptr);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
   EXPECT_EQ(-1, songs[0].length_nanosec());
@@ -100,7 +100,7 @@ TEST_F(XSPFParserTest, SavesSong) {
   QByteArray data;
   QBuffer buffer(&data);
   buffer.open(QIODevice::WriteOnly);
-  XSPFParser parser(NULL);
+  XSPFParser parser(nullptr);
   Song one;
   one.set_url(QUrl("http://www.example.com/foo.mp3"));
   one.set_filetype(Song::Type_Stream);
@@ -121,7 +121,7 @@ TEST_F(XSPFParserTest, SavesLocalFile) {
   QByteArray data;
   QBuffer buffer(&data);
   buffer.open(QIODevice::WriteOnly);
-  XSPFParser parser(NULL);
+  XSPFParser parser(nullptr);
   Song one;
   one.set_url(QUrl("file:///bar/foo.mp3"));
   one.set_filetype(Song::Type_Mpeg);

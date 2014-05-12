@@ -23,35 +23,39 @@
 const char* WiimotedevShortcuts::kActionsGroup = "WiimotedevActions";
 const char* WiimotedevShortcuts::kSettingsGroup = "WiimotedevSettings";
 
-WiimotedevShortcuts::WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* parent)
- :QObject(parent),
-  osd_(osd),
-  main_window_(window),
-  player_(qobject_cast<Player*>(parent)),
-  low_battery_notification_(true),
-  critical_battery_notification_(true),
-  actived_(false),
-  wiimotedev_active_(true),
-  wiimotedev_buttons_(0),
-  wiimotedev_device_(1),
-  wiimotedev_enable_(true),
-  wiimotedev_focus_(false),
-  wiimotedev_iface_(NULL),
-  wiimotedev_notification_(true)
-{
-  connect(this, SIGNAL(WiiremoteActived(int)), osd_, SLOT(WiiremoteActived(int)));
-  connect(this, SIGNAL(WiiremoteDeactived(int)), osd_, SLOT(WiiremoteDeactived(int)));
-  connect(this, SIGNAL(WiiremoteConnected(int)), osd_, SLOT(WiiremoteConnected(int)));
-  connect(this, SIGNAL(WiiremoteDisconnected(int)), osd_, SLOT(WiiremoteDisconnected(int)));
-  connect(this, SIGNAL(WiiremoteLowBattery(int,int)), osd_, SLOT(WiiremoteLowBattery(int,int)));
-  connect(this, SIGNAL(WiiremoteCriticalBattery(int,int)), osd_, SLOT(WiiremoteCriticalBattery(int,int)));
+WiimotedevShortcuts::WiimotedevShortcuts(OSD* osd, QWidget* window,
+                                         QObject* parent)
+    : QObject(parent),
+      osd_(osd),
+      main_window_(window),
+      player_(qobject_cast<Player*>(parent)),
+      low_battery_notification_(true),
+      critical_battery_notification_(true),
+      actived_(false),
+      wiimotedev_active_(true),
+      wiimotedev_buttons_(0),
+      wiimotedev_device_(1),
+      wiimotedev_enable_(true),
+      wiimotedev_focus_(false),
+      wiimotedev_notification_(true) {
+  connect(this, SIGNAL(WiiremoteActived(int)), osd_,
+          SLOT(WiiremoteActived(int)));
+  connect(this, SIGNAL(WiiremoteDeactived(int)), osd_,
+          SLOT(WiiremoteDeactived(int)));
+  connect(this, SIGNAL(WiiremoteConnected(int)), osd_,
+          SLOT(WiiremoteConnected(int)));
+  connect(this, SIGNAL(WiiremoteDisconnected(int)), osd_,
+          SLOT(WiiremoteDisconnected(int)));
+  connect(this, SIGNAL(WiiremoteLowBattery(int, int)), osd_,
+          SLOT(WiiremoteLowBattery(int, int)));
+  connect(this, SIGNAL(WiiremoteCriticalBattery(int, int)), osd_,
+          SLOT(WiiremoteCriticalBattery(int, int)));
 
   ReloadSettings();
 }
 
 void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
-  if (!QDBusConnection::systemBus().isConnected())
-    return;
+  if (!QDBusConnection::systemBus().isConnected()) return;
 
   // http://code.google.com/p/clementine-player/issues/detail?id=670
   // Probably dbus bug, or something else
@@ -61,21 +65,22 @@ void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
         WIIMOTEDEV_DBUS_SERVICE_NAME, WIIMOTEDEV_DBUS_EVENTS_OBJECT,
         QDBusConnection::systemBus(), this));
 
-    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteGeneralButtons(uint,qulonglong)),
-            this, SLOT(DbusWiimoteGeneralButtons(uint,qulonglong)));
+    connect(wiimotedev_iface_.get(),
+            SIGNAL(dbusWiimoteGeneralButtons(uint, qulonglong)), this,
+            SLOT(DbusWiimoteGeneralButtons(uint, qulonglong)));
     connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteConnected(uint)), this,
             SLOT(DbusWiimoteConnected(uint)));
-    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteDisconnected(uint)), this,
-            SLOT(DbusWiimoteDisconnected(uint)));
-    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteBatteryLife(uint,uchar)), this,
-            SLOT(DbusWiimoteBatteryLife(uint,uchar)));
+    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteDisconnected(uint)),
+            this, SLOT(DbusWiimoteDisconnected(uint)));
+    connect(wiimotedev_iface_.get(),
+            SIGNAL(dbusWiimoteBatteryLife(uint, uchar)), this,
+            SLOT(DbusWiimoteBatteryLife(uint, uchar)));
 
     if (!wiimotedev_iface_.get()->isValid())
       qWarning("Error connecting to the Wiimotedev-daemon DBUS service");
   }
 
-  if (!actived && wiimotedev_iface_)
-    wiimotedev_iface_.reset();
+  if (!actived && wiimotedev_iface_) wiimotedev_iface_.reset();
 }
 
 void WiimotedevShortcuts::ReloadSettings() {
@@ -87,11 +92,10 @@ void WiimotedevShortcuts::ReloadSettings() {
   quint64 fvalue, svalue;
   bool fvalid, svalid;
 
-  foreach (const QString& str, settings_.allKeys()) {
+  for (const QString& str : settings_.allKeys()) {
     fvalue = str.toULongLong(&fvalid, 10);
     svalue = settings_.value(str, 0).toULongLong(&svalid);
-    if (fvalid && svalid)
-      actions_[fvalue] = svalue;
+    if (fvalid && svalid) actions_[fvalue] = svalue;
   }
 
   settings_.endGroup();
@@ -110,14 +114,11 @@ void WiimotedevShortcuts::ReloadSettings() {
 void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
   if (id != wiimotedev_device_ || !wiimotedev_enable_ || !player_) return;
 
-  if (wiimotedev_focus_ && !main_window_->isActiveWindow())
-    return;
+  if (wiimotedev_focus_ && !main_window_->isActiveWindow()) return;
 
-  quint64 buttons = value & ~(
-      WIIMOTE_TILT_MASK |
-      NUNCHUK_TILT_MASK |
-      WIIMOTE_BTN_SHIFT_SHAKE |
-      NUNCHUK_BTN_SHIFT_SHAKE);
+  quint64 buttons =
+      value & ~(WIIMOTE_TILT_MASK | NUNCHUK_TILT_MASK |
+                WIIMOTE_BTN_SHIFT_SHAKE | NUNCHUK_BTN_SHIFT_SHAKE);
 
   if (wiimotedev_buttons_ == buttons) return;
 
@@ -128,7 +129,8 @@ void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
         actived_ = !actived_;
         if (wiimotedev_notification_) {
           if (actived_)
-            emit WiiremoteActived(id); else
+            emit WiiremoteActived(id);
+          else
             emit WiiremoteDeactived(id);
         }
       }
@@ -136,19 +138,45 @@ void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
 
     if (actived_ || !wiimotedev_active_) {
       switch (actions_.value(buttons, ActionNone)) {
-        case PlayerNextTrack: player_->Next(); break;
-        case PlayerPreviousTrack: player_->Previous(); break;
-        case PlayerPlay: player_->Play(); break;
-        case PlayerStop: player_->Stop(); break;
-        case PlayerIncVolume: player_->VolumeUp(); break;
-        case PlayerDecVolume: player_->VolumeDown(); break;
-        case PlayerMute: player_->Mute(); break;
-        case PlayerPause: player_->Pause(); break;
-        case PlayerTogglePause: player_->PlayPause(); break;
-        case PlayerSeekBackward: player_->SeekBackward(); break;
-        case PlayerSeekForward: player_->SeekForward(); break;
-        case PlayerStopAfter: player_->Stop(); break;
-        case PlayerShowOSD: player_->ShowOSD(); break;
+        case PlayerNextTrack:
+          player_->Next();
+          break;
+        case PlayerPreviousTrack:
+          player_->Previous();
+          break;
+        case PlayerPlay:
+          player_->Play();
+          break;
+        case PlayerStop:
+          player_->Stop();
+          break;
+        case PlayerIncVolume:
+          player_->VolumeUp();
+          break;
+        case PlayerDecVolume:
+          player_->VolumeDown();
+          break;
+        case PlayerMute:
+          player_->Mute();
+          break;
+        case PlayerPause:
+          player_->Pause();
+          break;
+        case PlayerTogglePause:
+          player_->PlayPause();
+          break;
+        case PlayerSeekBackward:
+          player_->SeekBackward();
+          break;
+        case PlayerSeekForward:
+          player_->SeekForward();
+          break;
+        case PlayerStopAfter:
+          player_->Stop();
+          break;
+        case PlayerShowOSD:
+          player_->ShowOSD();
+          break;
       }
     }
   }
@@ -180,5 +208,3 @@ void WiimotedevShortcuts::DbusWiimoteBatteryLife(uint id, uchar life) {
     }
   }
 }
-
-

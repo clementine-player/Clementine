@@ -18,9 +18,7 @@
 #include "spotifysearchprovider.h"
 
 #include <ctime>
-
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/random/uniform_int.hpp>
+#include <random>
 
 #include "core/logging.h"
 #include "internet/internetmodel.h"
@@ -34,42 +32,36 @@ const int kSearchAlbumLimit = 20;
 }
 
 SpotifySearchProvider::SpotifySearchProvider(Application* app, QObject* parent)
-  : SearchProvider(app, parent),
-    server_(NULL),
-    service_(NULL)
-{
+    : SearchProvider(app, parent), server_(nullptr), service_(nullptr) {
   Init("Spotify", "spotify", QIcon(":icons/32x32/spotify.png"),
        WantsDelayedQueries | WantsSerialisedArtQueries | ArtIsProbablyRemote |
-       CanShowConfig | CanGiveSuggestions);
+           CanShowConfig | CanGiveSuggestions);
 }
 
 SpotifyServer* SpotifySearchProvider::server() {
-  if (server_)
-    return server_;
+  if (server_) return server_;
 
-  if (!service_)
-    service_ = InternetModel::Service<SpotifyService>();
+  if (!service_) service_ = InternetModel::Service<SpotifyService>();
 
   if (service_->login_state() != SpotifyService::LoginState_LoggedIn)
-    return NULL;
+    return nullptr;
 
   server_ = service_->server();
   connect(server_, SIGNAL(SearchResults(pb::spotify::SearchResponse)),
           SLOT(SearchFinishedSlot(pb::spotify::SearchResponse)));
-  connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
-          SLOT(ArtLoadedSlot(QString,QImage)));
+  connect(server_, SIGNAL(ImageLoaded(QString, QImage)),
+          SLOT(ArtLoadedSlot(QString, QImage)));
   connect(server_, SIGNAL(destroyed()), SLOT(ServerDestroyed()));
   connect(server_, SIGNAL(StarredLoaded(pb::spotify::LoadPlaylistResponse)),
           SLOT(SuggestionsLoaded(pb::spotify::LoadPlaylistResponse)));
-  connect(server_, SIGNAL(ToplistBrowseResults(pb::spotify::BrowseToplistResponse)),
+  connect(server_,
+          SIGNAL(ToplistBrowseResults(pb::spotify::BrowseToplistResponse)),
           SLOT(SuggestionsLoaded(pb::spotify::BrowseToplistResponse)));
 
   return server_;
 }
 
-void SpotifySearchProvider::ServerDestroyed() {
-  server_ = NULL;
-}
+void SpotifySearchProvider::ServerDestroyed() { server_ = nullptr; }
 
 void SpotifySearchProvider::SearchAsync(int id, const QString& query) {
   SpotifyServer* s = server();
@@ -87,17 +79,17 @@ void SpotifySearchProvider::SearchAsync(int id, const QString& query) {
   queries_[query_string] = state;
 }
 
-void SpotifySearchProvider::SearchFinishedSlot(const pb::spotify::SearchResponse& response) {
+void SpotifySearchProvider::SearchFinishedSlot(
+    const pb::spotify::SearchResponse& response) {
   QString query_string = QString::fromUtf8(response.request().query().c_str());
   QMap<QString, PendingState>::iterator it = queries_.find(query_string);
-  if (it == queries_.end())
-    return;
+  if (it == queries_.end()) return;
 
   PendingState state = it.value();
   queries_.erase(it);
 
   ResultList ret;
-  for (int i=0; i < response.result_size() ; ++i) {
+  for (int i = 0; i < response.result_size(); ++i) {
     const pb::spotify::Track& track = response.result(i);
 
     Result result(this);
@@ -106,10 +98,10 @@ void SpotifySearchProvider::SearchFinishedSlot(const pb::spotify::SearchResponse
     ret << result;
   }
 
-  for (int i=0 ; i<response.album_size() ; ++i) {
+  for (int i = 0; i < response.album_size(); ++i) {
     const pb::spotify::Album& album = response.album(i);
 
-    for (int j=0; j < album.track_size() ; ++j) {
+    for (int j = 0; j < album.track_size(); ++j) {
       Result result(this);
       SpotifyService::SongFromProtobuf(album.track(j), &result.metadata_);
 
@@ -132,17 +124,16 @@ void SpotifySearchProvider::LoadArtAsync(int id, const Result& result) {
   }
 
   QString image_id = QUrl(result.metadata_.art_automatic()).path();
-  if (image_id.startsWith('/'))
-    image_id.remove(0, 1);
+  if (image_id.startsWith('/')) image_id.remove(0, 1);
 
   pending_art_[image_id] = id;
   s->LoadImage(image_id);
 }
 
-void SpotifySearchProvider::ArtLoadedSlot(const QString& id, const QImage& image) {
+void SpotifySearchProvider::ArtLoadedSlot(const QString& id,
+                                          const QImage& image) {
   QMap<QString, int>::iterator it = pending_art_.find(id);
-  if (it == pending_art_.end())
-    return;
+  if (it == pending_art_.end()) return;
 
   const int orig_id = it.value();
   pending_art_.erase(it);
@@ -219,8 +210,8 @@ QStringList SpotifySearchProvider::GetSuggestions(int count) {
 
   QStringList all_suggestions = suggestions_.toList();
 
-  boost::mt19937 gen(std::time(0));
-  boost::uniform_int<> random(0, all_suggestions.size() - 1);
+  std::mt19937 gen(std::time(0));
+  std::uniform_int_distribution<> random(0, all_suggestions.size() - 1);
 
   QSet<QString> candidates;
 

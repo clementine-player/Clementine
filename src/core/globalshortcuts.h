@@ -18,21 +18,22 @@
 #ifndef GLOBALSHORTCUTS_H
 #define GLOBALSHORTCUTS_H
 
-#include <QObject>
 #include <QKeySequence>
 #include <QMap>
 #include <QSettings>
+#include <QWidget>
 
 class QAction;
+class QShortcut;
 
 class GlobalShortcutBackend;
 class QSignalMapper;
 
-class GlobalShortcuts : public QObject {
+class GlobalShortcuts : public QWidget {
   Q_OBJECT
 
-public:
-  GlobalShortcuts(QObject* parent = 0);
+ public:
+  GlobalShortcuts(QWidget* parent = nullptr);
 
   static const char* kSettingsGroup;
 
@@ -40,13 +41,14 @@ public:
     QString id;
     QKeySequence default_key;
     QAction* action;
+    QShortcut* shortcut;
   };
 
   QMap<QString, Shortcut> shortcuts() const { return shortcuts_; }
   bool IsGsdAvailable() const;
   bool IsMacAccessibilityEnabled() const;
 
-public slots:
+ public slots:
   void ReloadSettings();
   void ShowMacAccessibilityDialog();
 
@@ -74,14 +76,16 @@ signals:
   void CycleRepeatMode();
   void ToggleScrobbling();
 
-private:
+ private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,
                    const QKeySequence& default_key = QKeySequence(0));
-  void AddRatingShortcut(const QString& id, const QString& name, QSignalMapper* mapper,
-                         int rating, const QKeySequence& default_key = QKeySequence(0));
-  Shortcut AddShortcut(const QString& id, const QString& name, const QKeySequence& default_key);
+  void AddRatingShortcut(const QString& id, const QString& name,
+                         QSignalMapper* mapper, int rating,
+                         const QKeySequence& default_key = QKeySequence(0));
+  Shortcut AddShortcut(const QString& id, const QString& name,
+                       const QKeySequence& default_key);
 
-private:
+ private:
   GlobalShortcutBackend* gnome_backend_;
   GlobalShortcutBackend* system_backend_;
 

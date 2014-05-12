@@ -19,31 +19,24 @@
 #include "core/logging.h"
 #include "playlist/songmimedata.h"
 
-
 const int SimpleSearchProvider::kDefaultResultLimit = 6;
 
-SimpleSearchProvider::Item::Item(const QString& title, const QUrl& url, const QString& keyword)
-  : keyword_(keyword)
-{
+SimpleSearchProvider::Item::Item(const QString& title, const QUrl& url,
+                                 const QString& keyword)
+    : keyword_(keyword) {
   metadata_.set_title(title);
   metadata_.set_url(url);
 }
 
 SimpleSearchProvider::Item::Item(const Song& song, const QString& keyword)
-  : keyword_(keyword),
-    metadata_(song)
-{
-}
-
+    : keyword_(keyword), metadata_(song) {}
 
 SimpleSearchProvider::SimpleSearchProvider(Application* app, QObject* parent)
-  : BlockingSearchProvider(app, parent),
-    result_limit_(kDefaultResultLimit),
-    max_suggestion_count_(-1),
-    items_dirty_(true),
-    has_searched_before_(false)
-{
-}
+    : BlockingSearchProvider(app, parent),
+      result_limit_(kDefaultResultLimit),
+      max_suggestion_count_(-1),
+      items_dirty_(true),
+      has_searched_before_(false) {}
 
 void SimpleSearchProvider::MaybeRecreateItems() {
   if (has_searched_before_) {
@@ -53,7 +46,8 @@ void SimpleSearchProvider::MaybeRecreateItems() {
   }
 }
 
-SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& query) {
+SearchProvider::ResultList SimpleSearchProvider::Search(int id,
+                                                        const QString& query) {
   Q_UNUSED(id)
 
   if (items_dirty_) {
@@ -67,9 +61,9 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
   const QStringList tokens = TokenizeQuery(query);
 
   QMutexLocker l(&items_mutex_);
-  foreach (const Item& item, items_) {
+  for (const Item& item : items_) {
     bool matched = true;
-    foreach (const QString& token, tokens) {
+    for (const QString& token : tokens) {
       if (!item.keyword_.contains(token, Qt::CaseInsensitive) &&
           !item.metadata_.title().contains(token, Qt::CaseInsensitive) &&
           !safe_words_.contains(token, Qt::CaseInsensitive)) {
@@ -85,8 +79,7 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
       ret << result;
     }
 
-    if (ret.count() >= result_limit_)
-      break;
+    if (ret.count() >= result_limit_) break;
   }
 
   return ret;
@@ -95,7 +88,7 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
 void SimpleSearchProvider::SetItems(const ItemList& items) {
   QMutexLocker l(&items_mutex_);
   items_ = items;
-  for (ItemList::iterator it = items_.begin() ; it != items_.end() ; ++it) {
+  for (ItemList::iterator it = items_.begin(); it != items_.end(); ++it) {
     it->metadata_.set_filetype(Song::Type_Stream);
   }
 }
@@ -108,19 +101,16 @@ QStringList SimpleSearchProvider::GetSuggestions(int count) {
   QStringList ret;
   QMutexLocker l(&items_mutex_);
 
-  if (items_.isEmpty())
-    return ret;
+  if (items_.isEmpty()) return ret;
 
-  for (int attempt=0 ; attempt<count*5 ; ++attempt) {
+  for (int attempt = 0; attempt < count * 5; ++attempt) {
     if (ret.count() >= count) {
       break;
     }
 
     const Item& item = items_[qrand() % items_.count()];
-    if (!item.keyword_.isEmpty())
-      ret << item.keyword_;
-    if (!item.metadata_.title().isEmpty())
-      ret << item.metadata_.title();
+    if (!item.keyword_.isEmpty()) ret << item.keyword_;
+    if (!item.metadata_.title().isEmpty()) ret << item.metadata_.title();
   }
 
   return ret;

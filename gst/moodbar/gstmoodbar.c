@@ -593,7 +593,7 @@ normalize (gdouble *vals, guint numvals)
     delta = 1.f;
 
   for (i = 0; i < numvals; i++)
-    vals[i] = finite (vals[i]) ? MIN(1.f, MAX(0.f, (vals[i] - mini) / delta))
+    vals[i] = isfinite (vals[i]) ? MIN(1.f, MAX(0.f, (vals[i] - mini) / delta))
                                : 0.f;
 }
 

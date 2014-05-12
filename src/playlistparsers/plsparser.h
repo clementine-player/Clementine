@@ -23,16 +23,18 @@
 class PLSParser : public ParserBase {
   Q_OBJECT
 
-public:
-  PLSParser(LibraryBackendInterface* library, QObject* parent = 0);
+ public:
+  PLSParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "PLS"; }
   QStringList file_extensions() const { return QStringList() << "pls"; }
 
-  bool TryMagic(const QByteArray &data) const;
+  bool TryMagic(const QByteArray& data) const;
 
-  SongList Load(QIODevice* device, const QString& playlist_path = "", const QDir& dir = QDir()) const;
-  void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir()) const;
+  SongList Load(QIODevice* device, const QString& playlist_path = "",
+                const QDir& dir = QDir()) const;
+  void Save(const SongList& songs, QIODevice* device,
+            const QDir& dir = QDir()) const;
 };
 
-#endif // PLSPARSER_H
+#endif  // PLSPARSER_H

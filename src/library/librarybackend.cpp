@@ -18,9 +18,11 @@
 #include "librarybackend.h"
 #include "libraryquery.h"
 #include "sqlrow.h"
+#include "core/application.h"
 #include "core/database.h"
 #include "core/scopedtransaction.h"
 #include "core/tagreaderclient.h"
+#include "core/utilities.h"
 #include "smartplaylists/search.h"
 
 #include <QCoreApplication>
@@ -35,18 +37,18 @@ const char* LibraryBackend::kSettingsGroup = "LibraryBackend";
 
 const char* LibraryBackend::kNewScoreSql =
     "case when playcount <= 0 then (%1 * 100 + score) / 2"
-    "     else (score * (playcount + skipcount) + %1 * 100) / (playcount + skipcount + 1)"
+    "     else (score * (playcount + skipcount) + %1 * 100) / (playcount + "
+    "skipcount + 1)"
     " end";
 
-LibraryBackend::LibraryBackend(QObject *parent)
-  : LibraryBackendInterface(parent),
-    save_statistics_in_file_(false),
-    save_ratings_in_file_(false)
-{
-}
+LibraryBackend::LibraryBackend(QObject* parent)
+    : LibraryBackendInterface(parent),
+      save_statistics_in_file_(false),
+      save_ratings_in_file_(false) {}
 
 void LibraryBackend::Init(Database* db, const QString& songs_table,
-                          const QString& dirs_table, const QString& subdirs_table,
+                          const QString& dirs_table,
+                          const QString& subdirs_table,
                           const QString& fts_table) {
   db_ = db;
   songs_table_ = songs_table;
@@ -61,7 +63,8 @@ void LibraryBackend::LoadDirectoriesAsync() {
 }
 
 void LibraryBackend::UpdateTotalSongCountAsync() {
-  metaObject()->invokeMethod(this, "UpdateTotalSongCount", Qt::QueuedConnection);
+  metaObject()->invokeMethod(this, "UpdateTotalSongCount",
+                             Qt::QueuedConnection);
 }
 
 void LibraryBackend::IncrementPlayCountAsync(int id) {
@@ -90,7 +93,7 @@ void LibraryBackend::LoadDirectories() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  foreach (const Directory& dir, dirs) {
+  for (const Directory& dir : dirs) {
     emit DirectoryDiscovered(dir, SubdirsInDirectory(dir.id, db));
   }
 }
@@ -102,7 +105,8 @@ void LibraryBackend::ChangeDirPath(int id, const QString& old_path,
   ScopedTransaction t(&db);
 
   // Do the dirs table
-  QSqlQuery q(QString("UPDATE %1 SET path=:path WHERE ROWID=:id").arg(dirs_table_), db);
+  QSqlQuery q(
+      QString("UPDATE %1 SET path=:path WHERE ROWID=:id").arg(dirs_table_), db);
   q.bindValue(":path", new_path);
   q.bindValue(":id", id);
   q.exec();
@@ -114,16 +118,24 @@ void LibraryBackend::ChangeDirPath(int id, const QString& old_path,
   const int path_len = old_url.length();
 
   // Do the subdirs table
-  q = QSqlQuery(QString("UPDATE %1 SET path=:path || substr(path, %2)"
-                        " WHERE directory=:id").arg(subdirs_table_).arg(path_len), db);
+  q = QSqlQuery(QString(
+                    "UPDATE %1 SET path=:path || substr(path, %2)"
+                    " WHERE directory=:id")
+                    .arg(subdirs_table_)
+                    .arg(path_len),
+                db);
   q.bindValue(":path", new_url);
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
 
   // Do the songs table
-  q = QSqlQuery(QString("UPDATE %1 SET filename=:path || substr(filename, %2)"
-                        " WHERE directory=:id").arg(songs_table_).arg(path_len), db);
+  q = QSqlQuery(QString(
+                    "UPDATE %1 SET filename=:path || substr(filename, %2)"
+                    " WHERE directory=:id")
+                    .arg(songs_table_)
+                    .arg(path_len),
+                db);
   q.bindValue(":path", new_url);
   q.bindValue(":id", id);
   q.exec();
@@ -158,9 +170,11 @@ SubdirectoryList LibraryBackend::SubdirsInDirectory(int id) {
   return SubdirsInDirectory(id, db);
 }
 
-SubdirectoryList LibraryBackend::SubdirsInDirectory(int id, QSqlDatabase &db) {
-  QSqlQuery q(QString("SELECT path, mtime FROM %1"
-                      " WHERE directory = :dir").arg(subdirs_table_), db);
+SubdirectoryList LibraryBackend::SubdirsInDirectory(int id, QSqlDatabase& db) {
+  QSqlQuery q(QString(
+                  "SELECT path, mtime FROM %1"
+                  " WHERE directory = :dir").arg(subdirs_table_),
+              db);
   q.bindValue(":dir", id);
   q.exec();
   if (db_->CheckErrors(q)) return SubdirectoryList();
@@ -181,7 +195,9 @@ void LibraryBackend::UpdateTotalSongCount() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(QString("SELECT COUNT(*) FROM %1 WHERE unavailable = 0").arg(songs_table_), db);
+  QSqlQuery q(QString("SELECT COUNT(*) FROM %1 WHERE unavailable = 0")
+                  .arg(songs_table_),
+              db);
   q.exec();
   if (db_->CheckErrors(q)) return;
   if (!q.next()) return;
@@ -191,13 +207,23 @@ void LibraryBackend::UpdateTotalSongCount() {
 
 void LibraryBackend::AddDirectory(const QString& path) {
   QString canonical_path = QFileInfo(path).canonicalFilePath();
+  QString db_path = canonical_path;
+
+  if (Application::kIsPortable && Utilities::UrlOnSameDriveAsClementine(
+                                      QUrl::fromLocalFile(canonical_path))) {
+    db_path = Utilities::GetRelativePathToClementineBin(
+                  QUrl::fromLocalFile(db_path)).toLocalFile();
+    qLog(Debug) << "db_path" << db_path;
+  }
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(QString("INSERT INTO %1 (path, subdirs)"
-                      " VALUES (:path, 1)").arg(dirs_table_), db);
-  q.bindValue(":path", canonical_path);
+  QSqlQuery q(QString(
+                  "INSERT INTO %1 (path, subdirs)"
+                  " VALUES (:path, 1)").arg(dirs_table_),
+              db);
+  q.bindValue(":path", db_path);
   q.exec();
   if (db_->CheckErrors(q)) return;
 
@@ -218,15 +244,15 @@ void LibraryBackend::RemoveDirectory(const Directory& dir) {
   ScopedTransaction transaction(&db);
 
   // Delete the subdirs that were in this directory
-  QSqlQuery q(QString("DELETE FROM %1 WHERE directory = :id")
-              .arg(subdirs_table_), db);
+  QSqlQuery q(
+      QString("DELETE FROM %1 WHERE directory = :id").arg(subdirs_table_), db);
   q.bindValue(":id", dir.id);
   q.exec();
   if (db_->CheckErrors(q)) return;
 
   // Now remove the directory itself
-  q = QSqlQuery(QString("DELETE FROM %1 WHERE ROWID = :id")
-                .arg(dirs_table_), db);
+  q = QSqlQuery(QString("DELETE FROM %1 WHERE ROWID = :id").arg(dirs_table_),
+                db);
   q.bindValue(":id", dir.id);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -240,9 +266,10 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec +
-                      " FROM %1 WHERE directory = :directory")
-              .arg(songs_table_), db);
+  QSqlQuery q(
+      QString("SELECT ROWID, " + Song::kColumnSpec +
+              " FROM %1 WHERE directory = :directory").arg(songs_table_),
+      db);
   q.bindValue(":directory", id);
   q.exec();
   if (db_->CheckErrors(q)) return SongList();
@@ -259,21 +286,28 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
 void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
-  QSqlQuery find_query(QString("SELECT ROWID FROM %1"
-                               " WHERE directory = :id AND path = :path")
-                       .arg(subdirs_table_), db);
-  QSqlQuery add_query(QString("INSERT INTO %1 (directory, path, mtime)"
-                              " VALUES (:id, :path, :mtime)")
-                      .arg(subdirs_table_), db);
-  QSqlQuery update_query(QString("UPDATE %1 SET mtime = :mtime"
-                                 " WHERE directory = :id AND path = :path")
-                         .arg(subdirs_table_), db);
-  QSqlQuery delete_query(QString("DELETE FROM %1"
-                                 " WHERE directory = :id AND path = :path")
-                         .arg(subdirs_table_), db);
+  QSqlQuery find_query(
+      QString(
+          "SELECT ROWID FROM %1"
+          " WHERE directory = :id AND path = :path").arg(subdirs_table_),
+      db);
+  QSqlQuery add_query(QString(
+                          "INSERT INTO %1 (directory, path, mtime)"
+                          " VALUES (:id, :path, :mtime)").arg(subdirs_table_),
+                      db);
+  QSqlQuery update_query(
+      QString(
+          "UPDATE %1 SET mtime = :mtime"
+          " WHERE directory = :id AND path = :path").arg(subdirs_table_),
+      db);
+  QSqlQuery delete_query(
+      QString(
+          "DELETE FROM %1"
+          " WHERE directory = :id AND path = :path").arg(subdirs_table_),
+      db);
 
   ScopedTransaction transaction(&db);
-  foreach (const Subdirectory& subdir, subdirs) {
+  for (const Subdirectory& subdir : subdirs) {
     if (subdir.mtime == 0) {
       // Delete the subdirectory
       delete_query.bindValue(":id", subdir.directory_id);
@@ -309,25 +343,32 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery check_dir(QString("SELECT ROWID FROM %1 WHERE ROWID = :id")
-                      .arg(dirs_table_), db);
-  QSqlQuery add_song(QString("INSERT INTO %1 (" + Song::kColumnSpec + ")"
-                             " VALUES (" + Song::kBindSpec + ")")
-                     .arg(songs_table_), db);
+  QSqlQuery check_dir(
+      QString("SELECT ROWID FROM %1 WHERE ROWID = :id").arg(dirs_table_), db);
+  QSqlQuery add_song(QString("INSERT INTO %1 (" + Song::kColumnSpec +
+                             ")"
+                             " VALUES (" +
+                             Song::kBindSpec + ")").arg(songs_table_),
+                     db);
   QSqlQuery update_song(QString("UPDATE %1 SET " + Song::kUpdateSpec +
-                                " WHERE ROWID = :id").arg(songs_table_), db);
-  QSqlQuery add_song_fts(QString("INSERT INTO %1 (ROWID, " + Song::kFtsColumnSpec + ")"
-                                 " VALUES (:id, " + Song::kFtsBindSpec + ")")
-                         .arg(fts_table_), db);
+                                " WHERE ROWID = :id").arg(songs_table_),
+                        db);
+  QSqlQuery add_song_fts(
+      QString("INSERT INTO %1 (ROWID, " + Song::kFtsColumnSpec +
+              ")"
+              " VALUES (:id, " +
+              Song::kFtsBindSpec + ")").arg(fts_table_),
+      db);
   QSqlQuery update_song_fts(QString("UPDATE %1 SET " + Song::kFtsUpdateSpec +
-                                    " WHERE ROWID = :id").arg(fts_table_), db);
+                                    " WHERE ROWID = :id").arg(fts_table_),
+                            db);
 
   ScopedTransaction transaction(&db);
 
   SongList added_songs;
   SongList deleted_songs;
 
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     // Do a sanity check first - make sure the song's directory still exists
     // This is to fix a possible race condition when a directory is removed
     // while LibraryWatcher is scanning it.
@@ -336,8 +377,7 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
       check_dir.exec();
       if (db_->CheckErrors(check_dir)) continue;
 
-      if (!check_dir.next())
-        continue; // Directory didn't exist
+      if (!check_dir.next()) continue;  // Directory didn't exist
     }
 
     if (song.id() == -1) {
@@ -363,8 +403,7 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
     } else {
       // Get the previous song data first
       Song old_song(GetSongById(song.id()));
-      if (!old_song.is_valid())
-        continue;
+      if (!old_song.is_valid()) continue;
 
       // Update
       song.BindToQuery(&update_song);
@@ -384,11 +423,9 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
 
   transaction.Commit();
 
-  if (!deleted_songs.isEmpty())
-    emit SongsDeleted(deleted_songs);
+  if (!deleted_songs.isEmpty()) emit SongsDeleted(deleted_songs);
 
-  if (!added_songs.isEmpty())
-    emit SongsDiscovered(added_songs);
+  if (!added_songs.isEmpty()) emit SongsDiscovered(added_songs);
 
   UpdateTotalSongCountAsync();
 }
@@ -398,10 +435,11 @@ void LibraryBackend::UpdateMTimesOnly(const SongList& songs) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("UPDATE %1 SET mtime = :mtime WHERE ROWID = :id")
-              .arg(songs_table_), db);
+                  .arg(songs_table_),
+              db);
 
   ScopedTransaction transaction(&db);
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     q.bindValue(":mtime", song.mtime());
     q.bindValue(":id", song.id());
     q.exec();
@@ -410,17 +448,17 @@ void LibraryBackend::UpdateMTimesOnly(const SongList& songs) {
   transaction.Commit();
 }
 
-void LibraryBackend::DeleteSongs(const SongList &songs) {
+void LibraryBackend::DeleteSongs(const SongList& songs) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery remove(QString("DELETE FROM %1 WHERE ROWID = :id")
-                   .arg(songs_table_), db);
-  QSqlQuery remove_fts(QString("DELETE FROM %1 WHERE ROWID = :id")
-                       .arg(fts_table_), db);
+  QSqlQuery remove(
+      QString("DELETE FROM %1 WHERE ROWID = :id").arg(songs_table_), db);
+  QSqlQuery remove_fts(
+      QString("DELETE FROM %1 WHERE ROWID = :id").arg(fts_table_), db);
 
   ScopedTransaction transaction(&db);
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     remove.bindValue(":id", song.id());
     remove.exec();
     db_->CheckErrors(remove);
@@ -436,15 +474,18 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
   UpdateTotalSongCountAsync();
 }
 
-void LibraryBackend::MarkSongsUnavailable(const SongList &songs) {
+void LibraryBackend::MarkSongsUnavailable(const SongList& songs,
+                                          bool unavailable) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery remove(QString("UPDATE %1 SET unavailable = 1 WHERE ROWID = :id")
-                   .arg(songs_table_), db);
+  QSqlQuery remove(QString("UPDATE %1 SET unavailable = %2 WHERE ROWID = :id")
+                       .arg(songs_table_)
+                       .arg(int(unavailable)),
+                   db);
 
   ScopedTransaction transaction(&db);
-  foreach (const Song& song, songs) {
+  for (const Song& song : songs) {
     remove.bindValue(":id", song.id());
     remove.exec();
     db_->CheckErrors(remove);
@@ -455,7 +496,8 @@ void LibraryBackend::MarkSongsUnavailable(const SongList &songs) {
   UpdateTotalSongCountAsync();
 }
 
-QStringList LibraryBackend::GetAll(const QString& column, const QueryOptions& opt) {
+QStringList LibraryBackend::GetAll(const QString& column,
+                                   const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.SetColumnSpec("DISTINCT " + column);
   query.AddCompilationRequirement(false);
@@ -490,24 +532,26 @@ QStringList LibraryBackend::GetAllArtistsWithAlbums(const QueryOptions& opt) {
   return ret;
 }
 
-LibraryBackend::AlbumList LibraryBackend::GetAllAlbums(const QueryOptions &opt) {
+LibraryBackend::AlbumList LibraryBackend::GetAllAlbums(
+    const QueryOptions& opt) {
   return GetAlbums(QString(), false, opt);
 }
 
-LibraryBackend::AlbumList LibraryBackend::GetAlbumsByArtist(const QString& artist,
-                                                            const QueryOptions& opt) {
+LibraryBackend::AlbumList LibraryBackend::GetAlbumsByArtist(
+    const QString& artist, const QueryOptions& opt) {
   return GetAlbums(artist, false, opt);
 }
 
-
-SongList LibraryBackend::GetSongsByAlbum(const QString& album, const QueryOptions& opt) {
+SongList LibraryBackend::GetSongsByAlbum(const QString& album,
+                                         const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.AddCompilationRequirement(false);
   query.AddWhere("album", album);
   return ExecLibraryQuery(&query);
 }
 
-SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, const QueryOptions& opt) {
+SongList LibraryBackend::GetSongs(const QString& artist, const QString& album,
+                                  const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.AddCompilationRequirement(false);
   query.AddWhere("artist", artist);
@@ -540,7 +584,7 @@ SongList LibraryBackend::GetSongsById(const QList<int>& ids) {
   QSqlDatabase db(db_->Connect());
 
   QStringList str_ids;
-  foreach (int id, ids) {
+  for (int id : ids) {
     str_ids << QString::number(id);
   }
 
@@ -554,17 +598,22 @@ SongList LibraryBackend::GetSongsById(const QStringList& ids) {
   return GetSongsById(ids, db);
 }
 
-SongList LibraryBackend::GetSongsByForeignId(
-    const QStringList& ids, const QString& table, const QString& column) {
+SongList LibraryBackend::GetSongsByForeignId(const QStringList& ids,
+                                             const QString& table,
+                                             const QString& column) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QString in = ids.join(",");
 
-  QSqlQuery q(QString("SELECT %2.ROWID, " + Song::kColumnSpec + ", %2.%3"
-                      " FROM %2, %1"
-                      " WHERE %2.%3 IN (%4) AND %1.ROWID = %2.ROWID AND unavailable = 0")
-              .arg(songs_table_, table, column, in), db);
+  QSqlQuery q(
+      QString(
+          "SELECT %2.ROWID, " + Song::kColumnSpec +
+          ", %2.%3"
+          " FROM %2, %1"
+          " WHERE %2.%3 IN (%4) AND %1.ROWID = %2.ROWID AND unavailable = 0")
+          .arg(songs_table_, table, column, in),
+      db);
   q.exec();
   if (db_->CheckErrors(q)) return SongList();
 
@@ -572,8 +621,7 @@ SongList LibraryBackend::GetSongsByForeignId(
   while (q.next()) {
     const QString foreign_id = q.value(Song::kColumns.count() + 1).toString();
     const int index = ids.indexOf(foreign_id);
-    if (index == -1)
-      continue;
+    if (index == -1) continue;
 
     ret[index].InitFromQuery(q, true);
   }
@@ -582,16 +630,18 @@ SongList LibraryBackend::GetSongsByForeignId(
 
 Song LibraryBackend::GetSongById(int id, QSqlDatabase& db) {
   SongList list = GetSongsById(QStringList() << QString::number(id), db);
-  if (list.isEmpty())
-    return Song();
+  if (list.isEmpty()) return Song();
   return list.first();
 }
 
-SongList LibraryBackend::GetSongsById(const QStringList& ids, QSqlDatabase& db) {
+SongList LibraryBackend::GetSongsById(const QStringList& ids,
+                                      QSqlDatabase& db) {
   QString in = ids.join(",");
 
-  QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec + " FROM %1"
-                      " WHERE ROWID IN (%2)").arg(songs_table_, in), db);
+  QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec +
+                      " FROM %1"
+                      " WHERE ROWID IN (%2)").arg(songs_table_, in),
+              db);
   q.exec();
   if (db_->CheckErrors(q)) return SongList();
 
@@ -624,7 +674,7 @@ SongList LibraryBackend::GetSongsByUrl(const QUrl& url) {
 
   SongList songlist;
   if (ExecQuery(&query)) {
-    while(query.Next()) {
+    while (query.Next()) {
       Song song;
       song.InitFromQuery(query, true);
 
@@ -634,11 +684,13 @@ SongList LibraryBackend::GetSongsByUrl(const QUrl& url) {
   return songlist;
 }
 
-LibraryBackend::AlbumList LibraryBackend::GetCompilationAlbums(const QueryOptions& opt) {
+LibraryBackend::AlbumList LibraryBackend::GetCompilationAlbums(
+    const QueryOptions& opt) {
   return GetAlbums(QString(), true, opt);
 }
 
-SongList LibraryBackend::GetCompilationSongs(const QString& album, const QueryOptions& opt) {
+SongList LibraryBackend::GetCompilationSongs(const QString& album,
+                                             const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
   query.AddCompilationRequirement(true);
@@ -660,11 +712,15 @@ void LibraryBackend::UpdateCompilations() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  // Look for albums that have songs by more than one 'effective album artist' in the same
+  // Look for albums that have songs by more than one 'effective album artist'
+  // in the same
   // directory
 
-  QSqlQuery q(QString("SELECT effective_albumartist, album, filename, sampler "
-    "FROM %1 WHERE unavailable = 0 ORDER BY album").arg(songs_table_), db);
+  QSqlQuery q(
+      QString(
+          "SELECT effective_albumartist, album, filename, sampler "
+          "FROM %1 WHERE unavailable = 0 ORDER BY album").arg(songs_table_),
+      db);
   q.exec();
   if (db_->CheckErrors(q)) return;
 
@@ -676,49 +732,61 @@ void LibraryBackend::UpdateCompilations() {
     bool sampler = q.value(3).toBool();
 
     // Ignore songs that don't have an album field set
-    if (album.isEmpty())
-      continue;
+    if (album.isEmpty()) continue;
 
     // Find the directory the song is in
     int last_separator = filename.lastIndexOf('/');
-    if (last_separator == -1)
-      continue;
+    if (last_separator == -1) continue;
 
     CompilationInfo& info = compilation_info[album];
     info.artists.insert(artist);
     info.directories.insert(filename.left(last_separator));
-    if (sampler) info.has_samplers = true;
-    else         info.has_not_samplers = true;
+    if (sampler)
+      info.has_samplers = true;
+    else
+      info.has_not_samplers = true;
   }
 
   // Now mark the songs that we think are in compilations
-  QSqlQuery update(QString("UPDATE %1"
-                           " SET sampler = :sampler,"
-                           "     effective_compilation = ((compilation OR :sampler OR forced_compilation_on) AND NOT forced_compilation_off) + 0"
-                           " WHERE album = :album AND unavailable = 0").arg(songs_table_), db);
-  QSqlQuery find_songs(QString("SELECT ROWID, " + Song::kColumnSpec + " FROM %1"
-                               " WHERE album = :album AND sampler = :sampler AND unavailable = 0")
-                       .arg(songs_table_), db);
+  QSqlQuery update(
+      QString(
+          "UPDATE %1"
+          " SET sampler = :sampler,"
+          "     effective_compilation = ((compilation OR :sampler OR "
+          "forced_compilation_on) AND NOT forced_compilation_off) + 0"
+          " WHERE album = :album AND unavailable = 0").arg(songs_table_),
+      db);
+  QSqlQuery find_songs(
+      QString(
+          "SELECT ROWID, " + Song::kColumnSpec +
+          " FROM %1"
+          " WHERE album = :album AND sampler = :sampler AND unavailable = 0")
+          .arg(songs_table_),
+      db);
 
   SongList deleted_songs;
   SongList added_songs;
 
   ScopedTransaction transaction(&db);
 
-  QMap<QString, CompilationInfo>::const_iterator it = compilation_info.constBegin();
-  for ( ; it != compilation_info.constEnd() ; ++it) {
+  QMap<QString, CompilationInfo>::const_iterator it =
+      compilation_info.constBegin();
+  for (; it != compilation_info.constEnd(); ++it) {
     const CompilationInfo& info = it.value();
     QString album(it.key());
 
-    // If there were more 'effective album artists' than there were directories for this album,
+    // If there were more 'effective album artists' than there were directories
+    // for this album,
     // then it's a compilation
 
     if (info.artists.count() > info.directories.count()) {
       if (info.has_not_samplers)
-        UpdateCompilations(find_songs, update, deleted_songs, added_songs, album, 1);
+        UpdateCompilations(find_songs, update, deleted_songs, added_songs,
+                           album, 1);
     } else {
       if (info.has_samplers)
-        UpdateCompilations(find_songs, update, deleted_songs, added_songs, album, 0);
+        UpdateCompilations(find_songs, update, deleted_songs, added_songs,
+                           album, 0);
     }
   }
 
@@ -730,8 +798,10 @@ void LibraryBackend::UpdateCompilations() {
   }
 }
 
-void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update,
-                                        SongList& deleted_songs, SongList& added_songs,
+void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs,
+                                        QSqlQuery& update,
+                                        SongList& deleted_songs,
+                                        SongList& added_songs,
                                         const QString& album, int sampler) {
   // Get songs that were already in that album, so we can tell the model
   // they've been updated
@@ -759,8 +829,9 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
   AlbumList ret;
 
   LibraryQuery query(opt);
-  query.SetColumnSpec("album, artist, compilation, sampler, art_automatic, "
-                      "art_manual, filename");
+  query.SetColumnSpec(
+      "album, artist, compilation, sampler, art_automatic, "
+      "art_manual, filename");
   query.SetOrderBy("album");
 
   if (compilation) {
@@ -785,8 +856,7 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     info.art_manual = query.Value(5).toString();
     info.first_url = QUrl::fromEncoded(query.Value(6).toByteArray());
 
-    if (info.artist == last_artist && info.album_name == last_album)
-      continue;
+    if (info.artist == last_artist && info.album_name == last_album) continue;
 
     ret << info;
 
@@ -797,7 +867,8 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
   return ret;
 }
 
-LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist, const QString& album) {
+LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist,
+                                                  const QString& album) {
   Album ret;
   ret.album_name = album;
   ret.artist = artist;
@@ -819,18 +890,17 @@ LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist, const Q
   return ret;
 }
 
-void LibraryBackend::UpdateManualAlbumArtAsync(const QString &artist,
-                                               const QString &album,
-                                               const QString &art) {
+void LibraryBackend::UpdateManualAlbumArtAsync(const QString& artist,
+                                               const QString& album,
+                                               const QString& art) {
   metaObject()->invokeMethod(this, "UpdateManualAlbumArt", Qt::QueuedConnection,
-                             Q_ARG(QString, artist),
-                             Q_ARG(QString, album),
+                             Q_ARG(QString, artist), Q_ARG(QString, album),
                              Q_ARG(QString, art));
 }
 
-void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
-                                          const QString &album,
-                                          const QString &art) {
+void LibraryBackend::UpdateManualAlbumArt(const QString& artist,
+                                          const QString& album,
+                                          const QString& art) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -838,8 +908,7 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
   LibraryQuery query;
   query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
   query.AddWhere("album", album);
-  if (!artist.isNull())
-    query.AddWhere("artist", artist);
+  if (!artist.isNull()) query.AddWhere("artist", artist);
 
   if (!ExecQuery(&query)) return;
 
@@ -850,22 +919,20 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
     deleted_songs << song;
   }
 
-
   // Update the songs
-  QString sql(QString("UPDATE %1 SET art_manual = :art"
-                      " WHERE album = :album AND unavailable = 0").arg(songs_table_));
-  if (!artist.isNull())
-    sql += " AND artist = :artist";
+  QString sql(
+      QString(
+          "UPDATE %1 SET art_manual = :art"
+          " WHERE album = :album AND unavailable = 0").arg(songs_table_));
+  if (!artist.isNull()) sql += " AND artist = :artist";
 
   QSqlQuery q(sql, db);
   q.bindValue(":art", art);
   q.bindValue(":album", album);
-  if (!artist.isNull())
-    q.bindValue(":artist", artist);
+  if (!artist.isNull()) q.bindValue(":artist", artist);
 
   q.exec();
   db_->CheckErrors(q);
-
 
   // Now get the updated songs
   if (!ExecQuery(&query)) return;
@@ -883,18 +950,18 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
   }
 }
 
-void LibraryBackend::ForceCompilation(const QString& album, const QList<QString>& artists, bool on) {
+void LibraryBackend::ForceCompilation(const QString& album,
+                                      const QList<QString>& artists, bool on) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
   SongList deleted_songs, added_songs;
 
-  foreach(const QString &artist, artists) {
+  for (const QString& artist : artists) {
     // Get the songs before they're updated
     LibraryQuery query;
     query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
     query.AddWhere("album", album);
-    if (!artist.isNull())
-      query.AddWhere("artist", artist);
+    if (!artist.isNull()) query.AddWhere("artist", artist);
 
     if (!ExecQuery(&query)) return;
 
@@ -905,19 +972,20 @@ void LibraryBackend::ForceCompilation(const QString& album, const QList<QString>
     }
 
     // Update the songs
-    QString sql(QString("UPDATE %1 SET forced_compilation_on = :forced_compilation_on,"
-                        "              forced_compilation_off = :forced_compilation_off,"
-                        "              effective_compilation = ((compilation OR sampler OR :forced_compilation_on) AND NOT :forced_compilation_off) + 0"
-                        " WHERE album = :album AND unavailable = 0").arg(songs_table_));
-    if (!artist.isEmpty())
-      sql += " AND artist = :artist";
+    QString sql(
+        QString(
+            "UPDATE %1 SET forced_compilation_on = :forced_compilation_on,"
+            "              forced_compilation_off = :forced_compilation_off,"
+            "              effective_compilation = ((compilation OR sampler OR "
+            ":forced_compilation_on) AND NOT :forced_compilation_off) + 0"
+            " WHERE album = :album AND unavailable = 0").arg(songs_table_));
+    if (!artist.isEmpty()) sql += " AND artist = :artist";
 
     QSqlQuery q(sql, db);
     q.bindValue(":forced_compilation_on", on ? 1 : 0);
     q.bindValue(":forced_compilation_off", on ? 0 : 1);
     q.bindValue(":album", album);
-    if (!artist.isEmpty())
-      q.bindValue(":artist", artist);
+    if (!artist.isEmpty()) q.bindValue(":artist", artist);
 
     q.exec();
     db_->CheckErrors(q);
@@ -938,7 +1006,7 @@ void LibraryBackend::ForceCompilation(const QString& album, const QList<QString>
   }
 }
 
-bool LibraryBackend::ExecQuery(LibraryQuery *q) {
+bool LibraryBackend::ExecQuery(LibraryQuery* q) {
   return !db_->CheckErrors(q->Exec(db_->Connect(), songs_table_, fts_table_));
 }
 
@@ -953,8 +1021,7 @@ SongList LibraryBackend::FindSongs(const smart_playlists::Search& search) {
   SongList ret;
   QSqlQuery query(sql, db);
   query.exec();
-  if (db_->CheckErrors(query))
-    return ret;
+  if (db_->CheckErrors(query)) return ret;
 
   // Read the results
   while (query.next()) {
@@ -969,84 +1036,86 @@ SongList LibraryBackend::GetAllSongs() {
   // Get all the songs!
   return FindSongs(smart_playlists::Search(
       smart_playlists::Search::Type_All, smart_playlists::Search::TermList(),
-      smart_playlists::Search::Sort_FieldAsc, smart_playlists::SearchTerm::Field_Artist, -1));
+      smart_playlists::Search::Sort_FieldAsc,
+      smart_playlists::SearchTerm::Field_Artist, -1));
 }
 
 void LibraryBackend::IncrementPlayCount(int id) {
-  if (id == -1)
-    return;
+  if (id == -1) return;
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(QString("UPDATE %1 SET playcount = playcount + 1,"
-                      "              lastplayed = :now,"
-                      "              score = " + QString(kNewScoreSql).arg("1.0") +
-                      " WHERE ROWID = :id").arg(songs_table_), db);
+  QSqlQuery q(QString(
+                  "UPDATE %1 SET playcount = playcount + 1,"
+                  "              lastplayed = :now,"
+                  "              score = " +
+                  QString(kNewScoreSql).arg("1.0") +
+                  " WHERE ROWID = :id").arg(songs_table_),
+              db);
   q.bindValue(":now", QDateTime::currentDateTime().toTime_t());
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q))
-    return;
+  if (db_->CheckErrors(q)) return;
 
   Song new_song = GetSongById(id, db);
   emit SongsStatisticsChanged(SongList() << new_song);
 }
 
 void LibraryBackend::IncrementSkipCount(int id, float progress) {
-  if (id == -1)
-    return;
+  if (id == -1) return;
   progress = qBound(0.0f, progress, 1.0f);
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(QString("UPDATE %1 SET skipcount = skipcount + 1,"
-                      "              score = " + QString(kNewScoreSql).arg(progress) +
-                      " WHERE ROWID = :id").arg(songs_table_), db);
+  QSqlQuery q(QString(
+                  "UPDATE %1 SET skipcount = skipcount + 1,"
+                  "              score = " +
+                  QString(kNewScoreSql).arg(progress) +
+                  " WHERE ROWID = :id").arg(songs_table_),
+              db);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q))
-    return;
+  if (db_->CheckErrors(q)) return;
 
   Song new_song = GetSongById(id, db);
   emit SongsStatisticsChanged(SongList() << new_song);
 }
 
 void LibraryBackend::ResetStatistics(int id) {
-  if (id == -1)
-    return;
+  if (id == -1) return;
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString(
-      "UPDATE %1 SET playcount = 0, skipcount = 0,"
-      "              lastplayed = -1, score = 0"
-      " WHERE ROWID = :id").arg(songs_table_), db);
+                  "UPDATE %1 SET playcount = 0, skipcount = 0,"
+                  "              lastplayed = -1, score = 0"
+                  " WHERE ROWID = :id").arg(songs_table_),
+              db);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q))
-    return;
+  if (db_->CheckErrors(q)) return;
 
   Song new_song = GetSongById(id, db);
   emit SongsStatisticsChanged(SongList() << new_song);
 }
 
 void LibraryBackend::UpdateSongRating(int id, float rating) {
-  if (id == -1)
-    return;
+  if (id == -1) return;
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(QString("UPDATE %1 SET rating = :rating"
-                      " WHERE ROWID = :id").arg(songs_table_), db);
+  QSqlQuery q(QString(
+                  "UPDATE %1 SET rating = :rating"
+                  " WHERE ROWID = :id").arg(songs_table_),
+              db);
   q.bindValue(":rating", rating);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q))
-    return;
+  if (db_->CheckErrors(q)) return;
 
   Song new_song = GetSongById(id, db);
   emit SongsRatingChanged(SongList() << new_song);
@@ -1060,13 +1129,11 @@ void LibraryBackend::DeleteAll() {
 
     QSqlQuery q("DELETE FROM " + songs_table_, db);
     q.exec();
-    if (db_->CheckErrors(q))
-      return;
+    if (db_->CheckErrors(q)) return;
 
     q = QSqlQuery("DELETE FROM " + fts_table_, db);
     q.exec();
-    if (db_->CheckErrors(q))
-      return;
+    if (db_->CheckErrors(q)) return;
 
     t.Commit();
   }
@@ -1084,14 +1151,18 @@ void LibraryBackend::ReloadSettings() {
 
   // Statistics
   {
-    bool save_statistics_in_file = s.value("save_statistics_in_file", false).toBool();
-    // Compare with previous value to know if we should connect, disconnect or nothing
+    bool save_statistics_in_file =
+        s.value("save_statistics_in_file", false).toBool();
+    // Compare with previous value to know if we should connect, disconnect or
+    // nothing
     if (save_statistics_in_file_ && !save_statistics_in_file) {
       disconnect(this, SIGNAL(SongsStatisticsChanged(SongList)),
-          TagReaderClient::Instance(), SLOT(UpdateSongsStatistics(SongList)));
+                 TagReaderClient::Instance(),
+                 SLOT(UpdateSongsStatistics(SongList)));
     } else if (!save_statistics_in_file_ && save_statistics_in_file) {
       connect(this, SIGNAL(SongsStatisticsChanged(SongList)),
-          TagReaderClient::Instance(), SLOT(UpdateSongsStatistics(SongList)));
+              TagReaderClient::Instance(),
+              SLOT(UpdateSongsStatistics(SongList)));
     }
     // Save old value
     save_statistics_in_file_ = save_statistics_in_file;
@@ -1100,13 +1171,15 @@ void LibraryBackend::ReloadSettings() {
   // Rating
   {
     bool save_ratings_in_file = s.value("save_ratings_in_file", false).toBool();
-    // Compare with previous value to know if we should connect, disconnect or nothing
+    // Compare with previous value to know if we should connect, disconnect or
+    // nothing
     if (save_ratings_in_file_ && !save_ratings_in_file) {
       disconnect(this, SIGNAL(SongsRatingChanged(SongList)),
-          TagReaderClient::Instance(), SLOT(UpdateSongsRating(SongList)));
+                 TagReaderClient::Instance(),
+                 SLOT(UpdateSongsRating(SongList)));
     } else if (!save_ratings_in_file_ && save_ratings_in_file) {
       connect(this, SIGNAL(SongsRatingChanged(SongList)),
-          TagReaderClient::Instance(), SLOT(UpdateSongsRating(SongList)));
+              TagReaderClient::Instance(), SLOT(UpdateSongsRating(SongList)));
     }
     // Save old value
     save_ratings_in_file_ = save_ratings_in_file;

@@ -31,8 +31,8 @@ class CoverProvider;
 class CoverProviders : public QObject {
   Q_OBJECT
 
-public:
-  CoverProviders(QObject* parent = NULL);
+ public:
+  CoverProviders(QObject* parent = nullptr);
 
   // Lets a cover provider register itself in the repository.
   void AddProvider(CoverProvider* provider);
@@ -46,10 +46,10 @@ public:
 
   int NextId();
 
-private slots:
+ private slots:
   void ProviderDestroyed();
 
-private:
+ private:
   Q_DISABLE_COPY(CoverProviders);
 
   QMap<CoverProvider*, QString> cover_providers_;
@@ -58,4 +58,4 @@ private:
   QAtomicInt next_id_;
 };
 
-#endif // COVERPROVIDERS_H
+#endif  // COVERPROVIDERS_H

@@ -28,20 +28,20 @@ class Ui_TranscoderOptionsDialog;
 class TranscoderOptionsDialog : public QDialog {
   Q_OBJECT
 
-public:
-  TranscoderOptionsDialog(Song::FileType type, QWidget* parent = 0);
+ public:
+  TranscoderOptionsDialog(Song::FileType type, QWidget* parent = nullptr);
   ~TranscoderOptionsDialog();
 
   bool is_valid() const { return options_; }
 
   void accept();
 
-protected:
+ protected:
   void showEvent(QShowEvent* e);
 
-private:
+ private:
   Ui_TranscoderOptionsDialog* ui_;
   TranscoderOptionsInterface* options_;
 };
 
-#endif // TRANSCODEROPTIONSDIALOG_H
+#endif  // TRANSCODEROPTIONSDIALOG_H

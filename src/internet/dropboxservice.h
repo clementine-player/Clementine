@@ -21,7 +21,7 @@ class DropboxService : public CloudFileService {
 
   QUrl GetStreamingUrlFromSongId(const QUrl& url);
 
- signals:
+signals:
   void Connected();
 
  public slots:
@@ -31,6 +31,8 @@ class DropboxService : public CloudFileService {
  private slots:
   void RequestFileListFinished(QNetworkReply* reply);
   void FetchContentUrlFinished(QNetworkReply* reply, const QVariantMap& file);
+  void LongPollFinished(QNetworkReply* reply);
+  void LongPollDelta();
 
  private:
   void RequestFileList();

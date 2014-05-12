@@ -21,11 +21,19 @@ qt4_wrap_cpp(SQLITE-SOURCES-MOC ${SQLITE-MOC-HEADERS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_definitions(-DQT_PLUGIN -DQT_NO_DEBUG)
-add_definitions(-DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS)
 
-add_library(sqlite STATIC sqlite3.c)
-set_target_properties(sqlite PROPERTIES COMPILE_FLAGS
-  "-Wno-pointer-to-int-cast -Wno-int-to-pointer-cast")
+find_path(SQLITE_INCLUDE_DIRS sqlite3.h)
+find_library(SQLITE_LIBRARIES sqlite3)
+
+if (SQLITE_INCLUDE_DIRS AND SQLITE_LIBRARIES)
+  set(SQLITE_FOUND true)
+endif()
+
+if (NOT SQLITE_FOUND)
+  message(SEND_ERROR "Could not find sqlite3")
+endif()
+
+include_directories(${SQLITE_INCLUDE_DIRS})
 
 add_library(qsqlite STATIC
    ${SQLITE-SOURCES}
@@ -33,6 +41,6 @@ add_library(qsqlite STATIC
    ${SQLITE-WIN32-RESOURCES}
 )
 target_link_libraries(qsqlite
-    sqlite
+    ${SQLITE_LIBRARIES}
     ${QT_LIBRARIES}
 )

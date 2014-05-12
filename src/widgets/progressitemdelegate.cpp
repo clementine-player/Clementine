@@ -19,12 +19,12 @@
 
 #include <QApplication>
 
-ProgressItemDelegate::ProgressItemDelegate(QObject *parent)
-  : QStyledItemDelegate(parent)
-{
-}
+ProgressItemDelegate::ProgressItemDelegate(QObject* parent)
+    : QStyledItemDelegate(parent) {}
 
-void ProgressItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
+void ProgressItemDelegate::paint(QPainter* painter,
+                                 const QStyleOptionViewItem& option,
+                                 const QModelIndex& index) const {
   bool ok = false;
   int progress = index.data().toInt(&ok);
 

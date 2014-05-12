@@ -25,24 +25,22 @@
 #include <QUrl>
 
 CurrentArtLoader::CurrentArtLoader(Application* app, QObject* parent)
-  : QObject(parent),
-    app_(app),
-    temp_file_pattern_(QDir::tempPath() + "/clementine-art-XXXXXX.jpg"),
-    id_(0)
-{
+    : QObject(parent),
+      app_(app),
+      temp_file_pattern_(QDir::tempPath() + "/clementine-art-XXXXXX.jpg"),
+      id_(0) {
   options_.scale_output_image_ = false;
   options_.pad_output_image_ = false;
   options_.default_output_image_ = QImage(":nocover.png");
 
-  connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64,QImage)),
-          SLOT(TempArtLoaded(quint64,QImage)));
+  connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
+          SLOT(TempArtLoaded(quint64, QImage)));
 
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
           SLOT(LoadArt(Song)));
 }
 
-CurrentArtLoader::~CurrentArtLoader() {
-}
+CurrentArtLoader::~CurrentArtLoader() {}
 
 void CurrentArtLoader::LoadArt(const Song& song) {
   last_song_ = song;
@@ -50,8 +48,7 @@ void CurrentArtLoader::LoadArt(const Song& song) {
 }
 
 void CurrentArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
-  if (id != id_)
-    return;
+  if (id != id_) return;
   id_ = 0;
 
   QString uri;

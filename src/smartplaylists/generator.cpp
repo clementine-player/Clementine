@@ -28,11 +28,7 @@ const int Generator::kDefaultLimit = 20;
 const int Generator::kDefaultDynamicHistory = 5;
 const int Generator::kDefaultDynamicFuture = 15;
 
-Generator::Generator()
-  : QObject(NULL),
-    backend_(NULL)
-{
-}
+Generator::Generator() : QObject(nullptr), backend_(nullptr) {}
 
 GeneratorPtr Generator::Create(const QString& type) {
   if (type == "Query")
@@ -44,5 +40,4 @@ GeneratorPtr Generator::Create(const QString& type) {
   return GeneratorPtr();
 }
 
-} // namespace
-
+}  // namespace

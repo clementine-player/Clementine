@@ -25,12 +25,11 @@
 #include <QNetworkReply>
 #include <QSettings>
 
-
-DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_DigitallyImportedSettingsPage),
-    client_(new DigitallyImportedClient("di", this))
-{
+DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(
+    SettingsDialog* dialog)
+    : SettingsPage(dialog),
+      ui_(new Ui_DigitallyImportedSettingsPage),
+      client_(new DigitallyImportedClient("di", this)) {
   ui_->setupUi(this);
   setWindowIcon(QIcon(":/providers/digitallyimported-32.png"));
 
@@ -42,22 +41,21 @@ DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(SettingsDialog* dia
   ui_->login_state->AddCredentialField(ui_->password);
   ui_->login_state->AddCredentialGroup(ui_->credential_group);
 
-  ui_->login_state->SetAccountTypeText(tr(
-      "You can listen for free without an account, but Premium members can "
-      "listen to higher quality streams without advertisements."));
+  ui_->login_state->SetAccountTypeText(
+      tr("You can listen for free without an account, but Premium members can "
+         "listen to higher quality streams without advertisements."));
   ui_->login_state->SetAccountTypeVisible(true);
 }
 
-DigitallyImportedSettingsPage::~DigitallyImportedSettingsPage() {
-  delete ui_;
-}
+DigitallyImportedSettingsPage::~DigitallyImportedSettingsPage() { delete ui_; }
 
 void DigitallyImportedSettingsPage::Login() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
 
-  QNetworkReply* reply = client_->Auth(ui_->username->text(), ui_->password->text());
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(LoginFinished(QNetworkReply*)), reply);
+  QNetworkReply* reply =
+      client_->Auth(ui_->username->text(), ui_->password->text());
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(LoginFinished(QNetworkReply*)), reply);
 }
 
 void DigitallyImportedSettingsPage::LoginFinished(QNetworkReply* reply) {
@@ -84,8 +82,9 @@ void DigitallyImportedSettingsPage::LoginFinished(QNetworkReply* reply) {
   }
 }
 
-void DigitallyImportedSettingsPage::UpdateLoginState(
-    const QString& listen_hash, const QString& name, const QDateTime& expires) {
+void DigitallyImportedSettingsPage::UpdateLoginState(const QString& listen_hash,
+                                                     const QString& name,
+                                                     const QDateTime& expires) {
   if (listen_hash.isEmpty()) {
     ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
     ui_->login_state->SetExpires(QDate());
@@ -114,8 +113,10 @@ void DigitallyImportedSettingsPage::Load() {
   QSettings s;
   s.beginGroup(DigitallyImportedServiceBase::kSettingsGroup);
 
-  ui_->basic_audio_type->setCurrentIndex(s.value("basic_audio_type", 1).toInt());
-  ui_->premium_audio_type->setCurrentIndex(s.value("premium_audio_type", 2).toInt());
+  ui_->basic_audio_type->setCurrentIndex(
+      s.value("basic_audio_type", 1).toInt());
+  ui_->premium_audio_type->setCurrentIndex(
+      s.value("premium_audio_type", 2).toInt());
   ui_->username->setText(s.value("username").toString());
 
   UpdateLoginState(s.value("listen_hash").toString(),
@@ -131,5 +132,3 @@ void DigitallyImportedSettingsPage::Save() {
   s.setValue("premium_audio_type", ui_->premium_audio_type->currentIndex());
   s.setValue("username", ui_->username->text());
 }
-
-

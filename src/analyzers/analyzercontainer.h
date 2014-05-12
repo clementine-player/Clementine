@@ -28,7 +28,7 @@
 class AnalyzerContainer : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   AnalyzerContainer(QWidget* parent);
 
   void SetEngine(EngineBase* engine);
@@ -40,18 +40,18 @@ public:
 signals:
   void WheelEvent(int delta);
 
-protected:
-  void mouseReleaseEvent(QMouseEvent *);
-  void mouseDoubleClickEvent(QMouseEvent *);
+ protected:
+  void mouseReleaseEvent(QMouseEvent*);
+  void mouseDoubleClickEvent(QMouseEvent*);
   void wheelEvent(QWheelEvent* e);
 
-private slots:
+ private slots:
   void ChangeAnalyzer(int id);
   void ChangeFramerate(int new_framerate);
   void DisableAnalyzer();
   void ShowPopupMenu();
 
-private:
+ private:
   static const int kLowFramerate;
   static const int kMediumFramerate;
   static const int kHighFramerate;
@@ -61,11 +61,11 @@ private:
   void Save();
   void SaveFramerate(int framerate);
   template <typename T>
-      void AddAnalyzerType();
+  void AddAnalyzerType();
   void AddFramerate(const QString& name, int framerate);
 
-private:
-  int current_framerate_; // fps
+ private:
+  int current_framerate_;  // fps
   QMenu* context_menu_;
   QMenu* context_menu_framerate_;
   QActionGroup* group_;
@@ -88,11 +88,12 @@ private:
 };
 
 template <typename T>
-    void AnalyzerContainer::AddAnalyzerType() {
+void AnalyzerContainer::AddAnalyzerType() {
   int id = analyzer_types_.count();
   analyzer_types_ << &T::staticMetaObject;
 
-  QAction* action = context_menu_->addAction(tr(T::kName), mapper_, SLOT(map()));
+  QAction* action =
+      context_menu_->addAction(tr(T::kName), mapper_, SLOT(map()));
   group_->addAction(action);
   mapper_->setMapping(action, id);
   action->setCheckable(true);
@@ -100,4 +101,3 @@ template <typename T>
 }
 
 #endif
-

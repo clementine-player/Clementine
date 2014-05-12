@@ -28,7 +28,8 @@
 #include <QTextStream>
 #include <QtDebug>
 
-const char* CueParser::kFileLineRegExp = "(\\S+)\\s+(?:\"([^\"]+)\"|(\\S+))\\s*(?:\"([^\"]+)\"|(\\S+))?";
+const char* CueParser::kFileLineRegExp =
+    "(\\S+)\\s+(?:\"([^\"]+)\"|(\\S+))\\s*(?:\"([^\"]+)\"|(\\S+))?";
 const char* CueParser::kIndexRegExp = "(\\d{2,3}):(\\d{2}):(\\d{2})";
 
 const char* CueParser::kPerformer = "performer";
@@ -43,15 +44,15 @@ const char* CueParser::kGenre = "genre";
 const char* CueParser::kDate = "date";
 
 CueParser::CueParser(LibraryBackendInterface* library, QObject* parent)
-    : ParserBase(library, parent)
-{
-}
+    : ParserBase(library, parent) {}
 
-SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const QDir& dir) const {
+SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
+                         const QDir& dir) const {
   SongList ret;
 
   QTextStream text_stream(device);
-  text_stream.setCodec(QTextCodec::codecForUtfText(device->peek(1024), QTextCodec::codecForName("UTF-8")));
+  text_stream.setCodec(QTextCodec::codecForUtfText(
+      device->peek(1024), QTextCodec::codecForName("UTF-8")));
 
   QString dir_path = dir.absolutePath();
   // read the first line already
@@ -76,7 +77,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const 
       QStringList splitted = SplitCueLine(line);
 
       // uninteresting or incorrect line
-      if(splitted.size() < 2) {
+      if (splitted.size() < 2) {
         continue;
       }
 
@@ -84,59 +85,59 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const 
       QString line_value = splitted[1];
 
       // PERFORMER
-      if(line_name == kPerformer) {
+      if (line_name == kPerformer) {
 
         album_artist = line_value;
 
-      // TITLE
-      } else if(line_name == kTitle) {
+        // TITLE
+      } else if (line_name == kTitle) {
 
         album = line_value;
 
-      // SONGWRITER
-      } else if(line_name == kSongWriter) {
+        // SONGWRITER
+      } else if (line_name == kSongWriter) {
 
         album_composer = line_value;
 
-      // FILE
-      } else if(line_name == kFile) {
+        // FILE
+      } else if (line_name == kFile) {
 
         file = QDir::isAbsolutePath(line_value)
-               ? line_value
-                 : dir.absoluteFilePath(line_value);
+                   ? line_value
+                   : dir.absoluteFilePath(line_value);
 
-        if(splitted.size() > 2) {
+        if (splitted.size() > 2) {
           file_type = splitted[2];
         }
 
-      // REM
-      } else if(line_name == kRem) {
-          if(splitted.size() < 3) {
-              break;
-          }
+        // REM
+      } else if (line_name == kRem) {
+        if (splitted.size() < 3) {
+          break;
+        }
 
-          // REM GENRE
-          if (line_value.toLower() == kGenre) {
-              genre = splitted[2];
+        // REM GENRE
+        if (line_value.toLower() == kGenre) {
+          genre = splitted[2];
 
           // REM DATE
-          } else if(line_value.toLower() == kDate) {
-              date = splitted[2];
-          }
+        } else if (line_value.toLower() == kDate) {
+          date = splitted[2];
+        }
 
-      // end of the header -> go into the track mode
-      } else if(line_name == kTrack) {
+        // end of the header -> go into the track mode
+      } else if (line_name == kTrack) {
 
         files++;
         break;
-
       }
 
       // just ignore the rest of possible field types for now...
-    } while(!(line = text_stream.readLine()).isNull());
+    } while (!(line = text_stream.readLine()).isNull());
 
-    if(line.isNull()) {
-      qLog(Warning) << "the .cue file from " << dir_path << " defines no tracks!";
+    if (line.isNull()) {
+      qLog(Warning) << "the .cue file from " << dir_path
+                    << " defines no tracks!";
       return ret;
     }
 
@@ -155,83 +156,88 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const 
       QStringList splitted = SplitCueLine(line);
 
       // uninteresting or incorrect line
-      if(splitted.size() < 2) {
+      if (splitted.size() < 2) {
         continue;
       }
 
       QString line_name = splitted[0].toLower();
       QString line_value = splitted[1];
-      QString line_additional = splitted.size() > 2 ? splitted[2].toLower() : "";
+      QString line_additional =
+          splitted.size() > 2 ? splitted[2].toLower() : "";
 
-      if(line_name == kTrack) {
+      if (line_name == kTrack) {
 
-        // the beginning of another track's definition - we're saving the current one
+        // the beginning of another track's definition - we're saving the
+        // current one
         // for later (if it's valid of course)
-        // please note that the same code is repeated just after this 'do-while' loop
-        if(valid_file && !index.isEmpty() && (track_type.isEmpty() || track_type == kAudioTrackType)) {
-          entries.append(CueEntry(file, index, title, artist, album_artist, album, composer, album_composer, genre, date));
+        // please note that the same code is repeated just after this 'do-while'
+        // loop
+        if (valid_file && !index.isEmpty() &&
+            (track_type.isEmpty() || track_type == kAudioTrackType)) {
+          entries.append(CueEntry(file, index, title, artist, album_artist,
+                                  album, composer, album_composer, genre,
+                                  date));
         }
 
         // clear the state
         track_type = index = artist = title = "";
 
-        if(!line_additional.isEmpty()) {
+        if (!line_additional.isEmpty()) {
           track_type = line_additional;
         }
 
-      } else if(line_name == kIndex) {
+      } else if (line_name == kIndex) {
 
         // we need the index's position field
-        if(!line_additional.isEmpty()) {
+        if (!line_additional.isEmpty()) {
 
           // if there's none "01" index, we'll just take the first one
           // also, we'll take the "01" index even if it's the last one
-          if(line_value == "01" || index.isEmpty()) {
+          if (line_value == "01" || index.isEmpty()) {
 
             index = line_additional;
-
           }
-
         }
 
-      } else if(line_name == kPerformer) {
+      } else if (line_name == kPerformer) {
 
         artist = line_value;
 
-      } else if(line_name == kTitle) {
+      } else if (line_name == kTitle) {
 
         title = line_value;
 
-      } else if(line_name == kSongWriter) {
+      } else if (line_name == kSongWriter) {
 
         composer = line_value;
 
-      // end of track's for the current file -> parse next one
-      } else if(line_name == kFile) {
+        // end of track's for the current file -> parse next one
+      } else if (line_name == kFile) {
 
         break;
-
       }
 
       // just ignore the rest of possible field types for now...
-    } while(!(line = text_stream.readLine()).isNull());
+    } while (!(line = text_stream.readLine()).isNull());
 
     // we didn't add the last song yet...
-    if(valid_file && !index.isEmpty() && (track_type.isEmpty() || track_type == kAudioTrackType)) {
-      entries.append(CueEntry(file, index, title, artist, album_artist, album, composer, album_composer, genre, date));
+    if (valid_file && !index.isEmpty() &&
+        (track_type.isEmpty() || track_type == kAudioTrackType)) {
+      entries.append(CueEntry(file, index, title, artist, album_artist, album,
+                              composer, album_composer, genre, date));
     }
   }
 
   QDateTime cue_mtime = QFileInfo(playlist_path).lastModified();
 
   // finalize parsing songs
-  for(int i = 0; i < entries.length(); i++) {
+  for (int i = 0; i < entries.length(); i++) {
     CueEntry entry = entries.at(i);
 
     Song song = LoadSong(entry.file, IndexToMarker(entry.index), dir);
 
     // cue song has mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
-    if(cue_mtime.isValid()) {
+    if (cue_mtime.isValid()) {
       song.set_mtime(qMax(cue_mtime.toTime_t(), song.mtime()));
     }
     song.set_cue_path(playlist_path);
@@ -240,20 +246,22 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const 
     // the current .cue metadata
 
     // set track number only in single-file mode
-    if(files == 1) {
+    if (files == 1) {
       song.set_track(i + 1);
     }
 
-    // the last TRACK for every FILE gets it's 'end' marker from the media file's
+    // the last TRACK for every FILE gets it's 'end' marker from the media
+    // file's
     // length
-    if(i + 1 < entries.size() && entries.at(i).file == entries.at(i + 1).file) {
+    if (i + 1 < entries.size() &&
+        entries.at(i).file == entries.at(i + 1).file) {
       // incorrect indices?
-      if(!UpdateSong(entry, entries.at(i + 1).index, &song)) {
+      if (!UpdateSong(entry, entries.at(i + 1).index, &song)) {
         continue;
       }
     } else {
       // incorrect index?
-      if(!UpdateLastSong(entry, &song)) {
+      if (!UpdateLastSong(entry, &song)) {
         continue;
       }
     }
@@ -264,11 +272,13 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const 
   return ret;
 }
 
-// This and the kFileLineRegExp do most of the "dirty" work, namely: splitting the raw .cue
-// line into logical parts and getting rid of all the unnecessary whitespaces and quoting.
+// This and the kFileLineRegExp do most of the "dirty" work, namely: splitting
+// the raw .cue
+// line into logical parts and getting rid of all the unnecessary whitespaces
+// and quoting.
 QStringList CueParser::SplitCueLine(const QString& line) const {
   QRegExp line_regexp(kFileLineRegExp);
-  if(!line_regexp.exactMatch(line.trimmed())) {
+  if (!line_regexp.exactMatch(line.trimmed())) {
     return QStringList();
   }
 
@@ -276,20 +286,21 @@ QStringList CueParser::SplitCueLine(const QString& line) const {
   return line_regexp.capturedTexts().filter(QRegExp(".+")).mid(1, -1);
 }
 
-// Updates the song with data from the .cue entry. This one mustn't be used for the
+// Updates the song with data from the .cue entry. This one mustn't be used for
+// the
 // last song in the .cue file.
-bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index, Song* song) const {
+bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index,
+                           Song* song) const {
   qint64 beginning = IndexToMarker(entry.index);
   qint64 end = IndexToMarker(next_index);
 
   // incorrect indices (we won't be able to calculate beginning or end)
-  if(beginning == -1 || end == -1) {
+  if (beginning == -1 || end == -1) {
     return false;
   }
 
   // believe the CUE: Init() forces validity
-  song->Init(entry.title, entry.PrettyArtist(),
-             entry.album, beginning, end);
+  song->Init(entry.title, entry.PrettyArtist(), entry.album, beginning, end);
   song->set_albumartist(entry.album_artist);
   song->set_composer(entry.PrettyComposer());
   song->set_genre(entry.genre);
@@ -298,13 +309,14 @@ bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index, Son
   return true;
 }
 
-// Updates the song with data from the .cue entry. This one must be used only for the
+// Updates the song with data from the .cue entry. This one must be used only
+// for the
 // last song in the .cue file.
 bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
   qint64 beginning = IndexToMarker(entry.index);
 
   // incorrect index (we won't be able to calculate beginning)
-  if(beginning == -1) {
+  if (beginning == -1) {
     return false;
   }
 
@@ -328,30 +340,32 @@ bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
 
 qint64 CueParser::IndexToMarker(const QString& index) const {
   QRegExp index_regexp(kIndexRegExp);
-  if(!index_regexp.exactMatch(index)) {
+  if (!index_regexp.exactMatch(index)) {
     return -1;
   }
 
   QStringList splitted = index_regexp.capturedTexts().mid(1, -1);
-  qlonglong frames = splitted.at(0).toLongLong() * 60 * 75 + splitted.at(1).toLongLong() * 75 +
+  qlonglong frames = splitted.at(0).toLongLong() * 60 * 75 +
+                     splitted.at(1).toLongLong() * 75 +
                      splitted.at(2).toLongLong();
   return (frames * kNsecPerSec) / 75;
 }
 
-void CueParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+void CueParser::Save(const SongList& songs, QIODevice* device,
+                     const QDir& dir) const {
   // TODO
 }
 
 // Looks for a track starting with one of the .cue's keywords.
-bool CueParser::TryMagic(const QByteArray &data) const {
+bool CueParser::TryMagic(const QByteArray& data) const {
   QStringList splitted = QString::fromUtf8(data.constData()).split('\n');
 
-  for(int i = 0; i < splitted.length(); i++) {
+  for (int i = 0; i < splitted.length(); i++) {
     QString line = splitted.at(i).trimmed();
-    if(line.startsWith(kPerformer, Qt::CaseInsensitive) ||
-       line.startsWith(kTitle, Qt::CaseInsensitive) ||
-       line.startsWith(kFile, Qt::CaseInsensitive) ||
-       line.startsWith(kTrack, Qt::CaseInsensitive)) {
+    if (line.startsWith(kPerformer, Qt::CaseInsensitive) ||
+        line.startsWith(kTitle, Qt::CaseInsensitive) ||
+        line.startsWith(kFile, Qt::CaseInsensitive) ||
+        line.startsWith(kTrack, Qt::CaseInsensitive)) {
       return true;
     }
   }

@@ -8,13 +8,13 @@
 
 class IncomingDataParser : public QObject {
   Q_OBJECT
-public:
+ public:
   IncomingDataParser(Application* app);
   ~IncomingDataParser();
 
   bool close_connection();
 
-public slots:
+ public slots:
   void Parse(const pb::remote::Message& msg);
 
 signals:
@@ -42,15 +42,17 @@ signals:
   void ShuffleCurrent();
   void SetRepeatMode(PlaylistSequence::RepeatMode mode);
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
-  void InsertUrls(int id, const QList<QUrl>& urls, int pos, bool play_now, bool enqueue);
+  void InsertUrls(int id, const QList<QUrl>& urls, int pos, bool play_now,
+                  bool enqueue);
   void RemoveSongs(int id, const QList<int>& indices);
   void SeekTo(int seconds);
-  void SendSongs(const pb::remote::RequestDownloadSongs& request, RemoteClient* client);
+  void SendSongs(const pb::remote::RequestDownloadSongs& request,
+                 RemoteClient* client);
   void ResponseSongOffer(RemoteClient* client, bool accepted);
   void SendLibrary(RemoteClient* client);
-  void RateCurrentSong(int);
+  void RateCurrentSong(double);
 
-private:
+ private:
   Application* app_;
   bool close_connection_;
 
@@ -67,4 +69,4 @@ private:
   void RateSong(const pb::remote::Message& msg);
 };
 
-#endif // INCOMINGDATAPARSER_H
+#endif  // INCOMINGDATAPARSER_H

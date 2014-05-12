@@ -27,6 +27,7 @@
 #include <config.h>
 #endif
 
+#include <algorithm>
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -208,6 +209,9 @@ T toNumber(const ByteVector &v, size_t offset, size_t length, bool mostSignifica
 template <class T>
 T toNumber(const ByteVector &v, size_t offset, bool mostSignificantByteFirst)
 {
+  static const bool isBigEndian = (Utils::SystemByteOrder == Utils::BigEndian);
+  const bool swap = (mostSignificantByteFirst != isBigEndian);
+
   if(offset + sizeof(T) > v.size()) 
     return toNumber<T>(v, offset, v.size() - offset, mostSignificantByteFirst);
 
@@ -215,13 +219,8 @@ T toNumber(const ByteVector &v, size_t offset, bool mostSignificantByteFirst)
   T tmp;
   ::memcpy(&tmp, v.data() + offset, sizeof(T));
 
-#if SYSTEM_BYTEORDER == 1
-  const bool swap = mostSignificantByteFirst;
-#else
-  const bool swap = !mostSignificantByteFirst;
-#endif
   if(swap)
-    return byteSwap(tmp);
+    return Utils::byteSwap(tmp);
   else
     return tmp;
 }
@@ -229,17 +228,13 @@ T toNumber(const ByteVector &v, size_t offset, bool mostSignificantByteFirst)
 template <class T>
 ByteVector fromNumber(T value, bool mostSignificantByteFirst)
 {
-  const size_t size = sizeof(T);
+  static const bool isBigEndian = (Utils::SystemByteOrder == Utils::BigEndian);
+  const bool swap = (mostSignificantByteFirst != isBigEndian);
 
-#if SYSTEM_BYTEORDER == 1
-  const bool swap = mostSignificantByteFirst;
-#else
-  const bool swap = !mostSignificantByteFirst;
-#endif
- if(swap)
-    value = byteSwap(value);
+  if(swap)
+    value = Utils::byteSwap(value);
 
-  return ByteVector(reinterpret_cast<const char *>(&value), size);
+  return ByteVector(reinterpret_cast<const char *>(&value), sizeof(T));
 }
 
 class DataPrivate : public RefCounter

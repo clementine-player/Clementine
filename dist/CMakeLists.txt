@@ -7,8 +7,21 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in
                ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/maketarball.sh.in
                ${CMAKE_CURRENT_SOURCE_DIR}/maketarball.sh @ONLY)
+
+# Create two installers, one for the normal version, one for the portable one
+# Create normal installer
+set(PORTABLE ";")
+set(NORMAL "")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/windows/clementine.nsi.in
                ${CMAKE_CURRENT_SOURCE_DIR}/windows/clementine.nsi @ONLY)
+
+# Create portable installer
+set(PORTABLE "")
+set(NORMAL ";")
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/windows/clementine.nsi.in
+               ${CMAKE_CURRENT_SOURCE_DIR}/windows/clementine-portable.nsi @ONLY)
+
+
 # windows/windres.rc is done by src/CMakeLists.txt
 
 if(EXISTS /etc/lsb-release)

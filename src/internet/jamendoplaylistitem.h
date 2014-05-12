@@ -21,7 +21,7 @@
 #include "library/libraryplaylistitem.h"
 
 class JamendoPlaylistItem : public LibraryPlaylistItem {
-public:
+ public:
   JamendoPlaylistItem(const QString& type);
   JamendoPlaylistItem(const Song& song);
 
@@ -30,4 +30,4 @@ public:
   QUrl Url() const;
 };
 
-#endif // JAMENDOPLAYLISTITEM_H
+#endif  // JAMENDOPLAYLISTITEM_H

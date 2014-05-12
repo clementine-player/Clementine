@@ -16,28 +16,28 @@
 */
 
 #include "songinfotextview.h"
+#include "ultimatelyricslyric.h"
 #include "ultimatelyricsprovider.h"
 #include "core/logging.h"
 #include "core/network.h"
 
+#include <QCoreApplication>
 #include <QNetworkReply>
 #include <QTextCodec>
-
-#include <boost/scoped_ptr.hpp>
+#include <QThread>
 
 const int UltimateLyricsProvider::kRedirectLimit = 5;
 
-
 UltimateLyricsProvider::UltimateLyricsProvider()
-  : network_(new NetworkAccessManager(this)),
-    relevance_(0),
-    redirect_count_(0)
-{
-}
+    : network_(new NetworkAccessManager(this)),
+      relevance_(0),
+      redirect_count_(0),
+      url_hop_(false) {}
 
 void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
   // Get the text codec
-  const QTextCodec* codec = QTextCodec::codecForName(charset_.toAscii().constData());
+  const QTextCodec* codec =
+      QTextCodec::codecForName(charset_.toAscii().constData());
   if (!codec) {
     qLog(Warning) << "Invalid codec" << charset_;
     emit Finished(id);
@@ -61,21 +61,26 @@ void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
 
 void UltimateLyricsProvider::LyricsFetched() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply)
+  if (!reply) {
+    url_hop_ = false;
     return;
+  }
 
   int id = requests_.take(reply);
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
+    url_hop_ = false;
     emit Finished(id);
     return;
   }
 
   // Handle redirects
-  QVariant redirect_target = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+  QVariant redirect_target =
+      reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
   if (redirect_target.isValid()) {
     if (redirect_count_ >= kRedirectLimit) {
+      url_hop_ = false;
       emit Finished(id);
       return;
     }
@@ -87,98 +92,143 @@ void UltimateLyricsProvider::LyricsFetched() {
       target.setPath(path);
     }
 
-    redirect_count_ ++;
+    redirect_count_++;
     QNetworkReply* reply = network_->get(QNetworkRequest(target));
     requests_[reply] = id;
     connect(reply, SIGNAL(finished()), SLOT(LyricsFetched()));
     return;
   }
 
-  const QTextCodec* codec = QTextCodec::codecForName(charset_.toAscii().constData());
+  const QTextCodec* codec =
+      QTextCodec::codecForName(charset_.toAscii().constData());
   const QString original_content = codec->toUnicode(reply->readAll());
   QString lyrics;
 
   // Check for invalid indicators
-  foreach (const QString& indicator, invalid_indicators_) {
+  for (const QString& indicator : invalid_indicators_) {
     if (original_content.contains(indicator)) {
       qLog(Debug) << "Found invalid indicator" << indicator;
+      url_hop_ = false;
       emit Finished(id);
       return;
     }
   }
 
-  // Apply extract rules
-  foreach (const Rule& rule, extract_rules_) {
-    // Modify the rule for this request's metadata
-    Rule rule_copy(rule);
-    for (Rule::iterator it = rule_copy.begin() ; it != rule_copy.end() ; ++it) {
-      ReplaceFields(metadata_, &it->first);
-    }
+  if (!url_hop_) {
+    // Apply extract rules
+    for (const Rule& rule : extract_rules_) {
+      // Modify the rule for this request's metadata
+      Rule rule_copy(rule);
+      for (Rule::iterator it = rule_copy.begin(); it != rule_copy.end(); ++it) {
+        ReplaceFields(metadata_, &it->first);
+      }
 
-    QString content = original_content;
-    ApplyExtractRule(rule_copy, &content);
-    qLog(Debug) << "Extract rule" << rule_copy << "matched" << content.length();
+      QString content = original_content;
+      if (ApplyExtractRule(rule_copy, &content)) {
+        url_hop_ = true;
+        QUrl url(content);
+        qLog(Debug) << "Next url hop: " << url;
+        QNetworkReply* reply = network_->get(QNetworkRequest(url));
+        requests_[reply] = id;
+        connect(reply, SIGNAL(finished()), SLOT(LyricsFetched()));
+        return;
+      }
 
-    if (!content.isEmpty()) {
-      lyrics = content;
-      break;
+      // Apply exclude rules
+      for (const Rule& rule : exclude_rules_) {
+        ApplyExcludeRule(rule, &content);
+      }
+
+      if (!content.isEmpty() and HTMLHasAlphaNumeric(content)) {
+        lyrics = content;
+        break;
+      }
     }
+  } else {
+    lyrics = original_content;
   }
 
-  // Apply exclude rules
-  foreach (const Rule& rule, exclude_rules_) {
-    ApplyExcludeRule(rule, &lyrics);
-  }
-
-  if (!lyrics.isEmpty()) {
+  if (!lyrics.isEmpty() and HTMLHasAlphaNumeric(lyrics)) {
     CollapsibleInfoPane::Data data;
     data.id_ = "ultimatelyrics/" + name_;
     data.title_ = tr("Lyrics from %1").arg(name_);
     data.type_ = CollapsibleInfoPane::Data::Type_Lyrics;
     data.relevance_ = relevance();
 
-    SongInfoTextView* editor = new SongInfoTextView;
-    editor->SetHtml(lyrics);
-    data.contents_ = editor;
+    if (QThread::currentThread() == QCoreApplication::instance()->thread()) {
+      SongInfoTextView* editor = new SongInfoTextView;
+      editor->SetHtml(lyrics);
+      data.contents_ = editor;
+    } else {
+      UltimateLyricsLyric* editor = new UltimateLyricsLyric;
+      editor->SetHtml(lyrics);
+      data.content_object_ = editor;
+    }
 
     emit InfoReady(id, data);
   }
+  url_hop_ = false;
   emit Finished(id);
 }
 
-void UltimateLyricsProvider::ApplyExtractRule(const Rule& rule, QString* content) const {
-  foreach (const RuleItem& item, rule) {
+bool UltimateLyricsProvider::ApplyExtractRule(const Rule& rule,
+                                              QString* content) const {
+  for (const RuleItem& item : rule) {
     if (item.second.isNull()) {
-      *content = ExtractXmlTag(*content, item.first);
+      if (item.first.startsWith("http://") && item.second.isNull()) {
+        *content = ExtractUrl(*content, rule);
+        return true;
+      } else {
+        *content = ExtractXmlTag(*content, item.first);
+      }
     } else {
       *content = Extract(*content, item.first, item.second);
     }
   }
+  return false;
 }
 
-QString UltimateLyricsProvider::ExtractXmlTag(const QString& source, const QString& tag) {
-  QRegExp re("<(\\w+).*>"); // ಠ_ಠ
-  if (re.indexIn(tag) == -1)
-    return QString();
+QString UltimateLyricsProvider::ExtractUrl(const QString& source,
+                                           const Rule& rule) {
+  QString url;
+  QString id;
+
+  for (const RuleItem& item : rule) {
+    if (item.first.startsWith("http://") && item.second.isNull())
+      url = item.first;
+    else
+      id = Extract(source, item.first, item.second);
+  }
+
+  url.replace("{id}", id);
+
+  return url;
+}
+
+QString UltimateLyricsProvider::ExtractXmlTag(const QString& source,
+                                              const QString& tag) {
+  QRegExp re("<(\\w+).*>");  // ಠ_ಠ
+  if (re.indexIn(tag) == -1) return QString();
 
   return Extract(source, tag, "</" + re.cap(1) + ">");
 }
 
-QString UltimateLyricsProvider::Extract(const QString& source, const QString& begin, const QString& end) {
+QString UltimateLyricsProvider::Extract(const QString& source,
+                                        const QString& begin,
+                                        const QString& end) {
   int begin_idx = source.indexOf(begin);
-  if (begin_idx == -1)
-    return QString();
+  if (begin_idx == -1) return QString();
   begin_idx += begin.length();
 
   int end_idx = source.indexOf(end, begin_idx);
-  if (end_idx == -1)
-    return QString();
+  if (end_idx == -1) return QString();
 
   return source.mid(begin_idx, end_idx - begin_idx - 1);
 }
 
-void UltimateLyricsProvider::ApplyExcludeRule(const Rule& rule, QString* content) const {
-  foreach (const RuleItem& item, rule) {
+void UltimateLyricsProvider::ApplyExcludeRule(const Rule& rule,
+                                              QString* content) const {
+  for (const RuleItem& item : rule) {
     if (item.second.isNull()) {
       *content = ExcludeXmlTag(*content, item.first);
     } else {
@@ -187,40 +237,39 @@ void UltimateLyricsProvider::ApplyExcludeRule(const Rule& rule, QString* content
   }
 }
 
-QString UltimateLyricsProvider::ExcludeXmlTag(const QString& source, const QString& tag) {
-  QRegExp re("<(\\w+).*>"); // ಠ_ಠ
-  if (re.indexIn(tag) == -1)
-    return source;
+QString UltimateLyricsProvider::ExcludeXmlTag(const QString& source,
+                                              const QString& tag) {
+  QRegExp re("<(\\w+).*>");  // ಠ_ಠ
+  if (re.indexIn(tag) == -1) return source;
 
   return Exclude(source, tag, "</" + re.cap(1) + ">");
 }
 
-QString UltimateLyricsProvider::Exclude(const QString& source, const QString& begin, const QString& end) {
+QString UltimateLyricsProvider::Exclude(const QString& source,
+                                        const QString& begin,
+                                        const QString& end) {
   int begin_idx = source.indexOf(begin);
-  if (begin_idx == -1)
-    return source;
+  if (begin_idx == -1) return source;
 
   int end_idx = source.indexOf(end, begin_idx + begin.length());
-  if (end_idx == -1)
-    return source;
+  if (end_idx == -1) return source;
 
-  return source.left(begin_idx) + source.right(source.length() - end_idx - end.length());
+  return source.left(begin_idx) +
+         source.right(source.length() - end_idx - end.length());
 }
 
 QString UltimateLyricsProvider::FirstChar(const QString& text) {
-  if (text.isEmpty())
-    return QString();
+  if (text.isEmpty()) return QString();
   return text[0].toLower();
 }
 
 QString UltimateLyricsProvider::TitleCase(const QString& text) {
-  if (text.length() == 0)
-    return QString();
+  if (text.length() == 0) return QString();
 
   QString ret = text;
   bool last_was_space = true;
 
-  for (QString::iterator it = ret.begin() ; it != ret.end() ; ++it) {
+  for (QString::iterator it = ret.begin(); it != ret.end(); ++it) {
     if (last_was_space) {
       *it = it->toUpper();
       last_was_space = false;
@@ -228,18 +277,18 @@ QString UltimateLyricsProvider::TitleCase(const QString& text) {
       last_was_space = true;
     }
   }
-  
+
   return ret;
 }
 
-void UltimateLyricsProvider::ReplaceField(const QString& tag, const QString& value,
+void UltimateLyricsProvider::ReplaceField(const QString& tag,
+                                          const QString& value,
                                           QString* text) const {
-  if (!text->contains(tag))
-    return;
+  if (!text->contains(tag)) return;
 
   // Apply URL character replacement
   QString value_copy(value);
-  foreach (const UrlFormat& format, url_formats_) {
+  for (const UrlFormat& format : url_formats_) {
     QRegExp re("[" + QRegExp::escape(format.first) + "]");
     value_copy.replace(re, format.second);
   }
@@ -247,24 +296,41 @@ void UltimateLyricsProvider::ReplaceField(const QString& tag, const QString& val
   text->replace(tag, value_copy, Qt::CaseInsensitive);
 }
 
-void UltimateLyricsProvider::ReplaceFields(const Song& metadata, QString* text) const {
-  ReplaceField("{artist}", metadata.artist().toLower(),          text);
-  ReplaceField("{artist2}",NoSpace(metadata.artist().toLower()), text);
-  ReplaceField("{album}",  metadata.album().toLower(),           text);
-  ReplaceField("{album2}", NoSpace(metadata.album().toLower()),  text);
-  ReplaceField("{title}",  metadata.title().toLower(),           text);
-  ReplaceField("{Artist}", metadata.artist(),                    text);
-  ReplaceField("{Album}",  metadata.album(),                     text);
-  ReplaceField("{ARTIST}", metadata.artist().toUpper(),          text);
-  ReplaceField("{year}",   metadata.PrettyYear(),                text);
-  ReplaceField("{Title}",  metadata.title(),                     text);
-  ReplaceField("{Title2}", TitleCase(metadata.title()),          text);
-  ReplaceField("{a}",      FirstChar(metadata.artist()),         text);
-  ReplaceField("{track}",  QString::number(metadata.track()),    text);
+void UltimateLyricsProvider::ReplaceFields(const Song& metadata,
+                                           QString* text) const {
+  ReplaceField("{artist}", metadata.artist().toLower(), text);
+  ReplaceField("{artist2}", NoSpace(metadata.artist().toLower()), text);
+  ReplaceField("{album}", metadata.album().toLower(), text);
+  ReplaceField("{album2}", NoSpace(metadata.album().toLower()), text);
+  ReplaceField("{title}", metadata.title().toLower(), text);
+  ReplaceField("{Artist}", metadata.artist(), text);
+  ReplaceField("{Album}", metadata.album(), text);
+  ReplaceField("{ARTIST}", metadata.artist().toUpper(), text);
+  ReplaceField("{year}", metadata.PrettyYear(), text);
+  ReplaceField("{Title}", metadata.title(), text);
+  ReplaceField("{Title2}", TitleCase(metadata.title()), text);
+  ReplaceField("{a}", FirstChar(metadata.artist()), text);
+  ReplaceField("{track}", QString::number(metadata.track()), text);
 }
 
 QString UltimateLyricsProvider::NoSpace(const QString& text) {
   QString ret(text);
   ret.remove(' ');
   return ret;
+}
+
+// tells whether a html block has alphanumeric characters (skipping tags)
+// TODO: handle special characters (e.g. &reg; &aacute;)
+bool UltimateLyricsProvider::HTMLHasAlphaNumeric(const QString& html) {
+  bool in_tag = false;
+  for (const QChar& c : html) {
+    if (!in_tag and c.isLetterOrNumber())
+      return true;
+    else if (c == QChar('<'))
+      in_tag = true;
+    else if (c == QChar('>'))
+      in_tag = false;
+  }
+  qLog(Debug) << html;
+  return false;
 }

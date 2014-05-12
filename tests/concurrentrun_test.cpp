@@ -1,7 +1,6 @@
 #include "gtest/gtest.h"
 
 #include <functional>
-#include <tr1/functional>
 
 #include <QEventLoop>
 #include <QFutureWatcher>
@@ -144,7 +143,7 @@ TEST(ConcurrentRunTest, ConcurrentRunVoidBindFunctionStart) {
 
   A a;
   int nb = 10;
-  QFuture<void> future = ConcurrentRun::Run<void>(&threadpool, std::tr1::bind(&A::f, &a, &nb));
+  QFuture<void> future = ConcurrentRun::Run<void>(&threadpool, std::bind(&A::f, &a, &nb));
   QFutureWatcher<void> watcher;
   watcher.setFuture(future);
   QEventLoop loop;

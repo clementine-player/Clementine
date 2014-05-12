@@ -18,9 +18,9 @@
 #ifndef SONGINFOVIEW_H
 #define SONGINFOVIEW_H
 
-#include "songinfobase.h"
+#include <memory>
 
-#include <boost/scoped_ptr.hpp>
+#include "songinfobase.h"
 
 class UltimateLyricsProvider;
 class UltimateLyricsReader;
@@ -28,31 +28,32 @@ class UltimateLyricsReader;
 class SongInfoView : public SongInfoBase {
   Q_OBJECT
 
-public:
-  SongInfoView(QWidget* parent = 0);
+ public:
+  SongInfoView(QWidget* parent = nullptr);
   ~SongInfoView();
 
   static const char* kSettingsGroup;
 
   QList<const UltimateLyricsProvider*> lyric_providers() const;
 
-public slots:
+ public slots:
   void ReloadSettings();
 
-protected:
+ protected:
   bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
 
-protected slots:
-  void ResultReady(int id, const SongInfoFetcher::Result& result);
+ protected slots:
+  virtual void InfoResultReady(int id, const CollapsibleInfoPane::Data& data);
+  virtual void ResultReady(int id, const SongInfoFetcher::Result& result);
 
-private:
+ private:
   SongInfoProvider* ProviderByName(const QString& name) const;
 
-private slots:
+ private slots:
   void UltimateLyricsParsed();
 
-private:
-  boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
+ private:
+  std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
 };
 
-#endif // SONGINFOVIEW_H
+#endif  // SONGINFOVIEW_H

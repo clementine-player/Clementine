@@ -8,10 +8,10 @@
 *.dll
 *.exe
 *.pyd
+build/
 3rdparty/libprojectm/config.inp
 3rdparty/libprojectm/libprojectM.pc
 CMakeLists.txt.user
-bin/
 dist/Info.plist
 dist/clementine.spec
 dist/maketarball.sh
@@ -31,6 +31,7 @@ dist/mergetranslations/bzr/
 dist/mergetranslations/svn/
 dist/mergetranslations/www-bzr/
 dist/mergetranslations/www-svn/
+dist/windows/clementine-portable.nsi
 debian/rules
 debian/changelog
 *-stamp

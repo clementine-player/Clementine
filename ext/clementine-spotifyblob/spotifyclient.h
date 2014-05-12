@@ -18,7 +18,6 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-
 #ifndef SPOTIFYCLIENT_H
 #define SPOTIFYCLIENT_H
 
@@ -39,8 +38,8 @@ class ResponseMessage;
 class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   Q_OBJECT
 
-public:
-  SpotifyClient(QObject* parent = 0);
+ public:
+  SpotifyClient(QObject* parent = nullptr);
   ~SpotifyClient();
 
   static const int kSpotifyImageIDSize;
@@ -48,14 +47,14 @@ public:
 
   void Init(quint16 port);
 
-protected:
+ protected:
   void MessageArrived(const pb::spotify::Message& message);
   void DeviceClosed();
 
-private slots:
+ private slots:
   void ProcessEvents();
 
-private:
+ private:
   void SendLoginCompleted(bool success, const QString& error,
                           pb::spotify::LoginResponse_Error error_code);
   void SendPlaybackError(const QString& error);
@@ -64,49 +63,59 @@ private:
   // Spotify session callbacks.
   static void SP_CALLCONV LoggedInCallback(sp_session* session, sp_error error);
   static void SP_CALLCONV NotifyMainThreadCallback(sp_session* session);
-  static void SP_CALLCONV LogMessageCallback(sp_session* session, const char* data);
-  static void SP_CALLCONV SearchCompleteCallback(sp_search* result, void* userdata);
+  static void SP_CALLCONV
+      LogMessageCallback(sp_session* session, const char* data);
+  static void SP_CALLCONV
+      SearchCompleteCallback(sp_search* result, void* userdata);
   static void SP_CALLCONV MetadataUpdatedCallback(sp_session* session);
-  static int SP_CALLCONV MusicDeliveryCallback(
-    sp_session* session, const sp_audioformat* format,
-    const void* frames, int num_frames);
+  static int SP_CALLCONV
+      MusicDeliveryCallback(sp_session* session, const sp_audioformat* format,
+                            const void* frames, int num_frames);
   static void SP_CALLCONV EndOfTrackCallback(sp_session* session);
-  static void SP_CALLCONV StreamingErrorCallback(sp_session* session, sp_error error);
+  static void SP_CALLCONV
+      StreamingErrorCallback(sp_session* session, sp_error error);
   static void SP_CALLCONV OfflineStatusUpdatedCallback(sp_session* session);
-  static void SP_CALLCONV ConnectionErrorCallback(sp_session* session, sp_error error);
-  static void SP_CALLCONV UserMessageCallback(sp_session* session, const char* message);
+  static void SP_CALLCONV
+      ConnectionErrorCallback(sp_session* session, sp_error error);
+  static void SP_CALLCONV
+      UserMessageCallback(sp_session* session, const char* message);
   static void SP_CALLCONV StartPlaybackCallback(sp_session* session);
   static void SP_CALLCONV StopPlaybackCallback(sp_session* session);
 
   // Spotify playlist container callbacks.
-  static void SP_CALLCONV PlaylistAddedCallback(
-    sp_playlistcontainer* pc, sp_playlist* playlist,
-    int position, void* userdata);
-  static void SP_CALLCONV PlaylistRemovedCallback(
-    sp_playlistcontainer* pc, sp_playlist* playlist,
-    int position, void* userdata);
-  static void SP_CALLCONV PlaylistMovedCallback(
-    sp_playlistcontainer* pc, sp_playlist* playlist,
-    int position, int new_position, void* userdata);
-  static void SP_CALLCONV PlaylistContainerLoadedCallback(
-    sp_playlistcontainer* pc, void* userdata);
+  static void SP_CALLCONV PlaylistAddedCallback(sp_playlistcontainer* pc,
+                                                sp_playlist* playlist,
+                                                int position, void* userdata);
+  static void SP_CALLCONV PlaylistRemovedCallback(sp_playlistcontainer* pc,
+                                                  sp_playlist* playlist,
+                                                  int position, void* userdata);
+  static void SP_CALLCONV
+      PlaylistMovedCallback(sp_playlistcontainer* pc, sp_playlist* playlist,
+                            int position, int new_position, void* userdata);
+  static void SP_CALLCONV
+      PlaylistContainerLoadedCallback(sp_playlistcontainer* pc, void* userdata);
 
   // Spotify playlist callbacks - when loading the list of playlists
   // initially
-  static void SP_CALLCONV PlaylistStateChangedForGetPlaylists(sp_playlist* pl, void* userdata);
+  static void SP_CALLCONV
+      PlaylistStateChangedForGetPlaylists(sp_playlist* pl, void* userdata);
 
   // Spotify playlist callbacks - when loading a playlist
-  static void SP_CALLCONV PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* userdata);
+  static void SP_CALLCONV
+      PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* userdata);
 
   // Spotify image callbacks.
   static void SP_CALLCONV ImageLoaded(sp_image* image, void* userdata);
 
   // Spotify album browse callbacks.
-  static void SP_CALLCONV SearchAlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
-  static void SP_CALLCONV AlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
+  static void SP_CALLCONV
+      SearchAlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
+  static void SP_CALLCONV
+      AlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
 
   // Spotify toplist browse callbacks.
-  static void SP_CALLCONV ToplistBrowseComplete(sp_toplistbrowse* result, void* userdata);
+  static void SP_CALLCONV
+      ToplistBrowseComplete(sp_toplistbrowse* result, void* userdata);
 
   // Request handlers.
   void Login(const pb::spotify::LoginRequest& req);
@@ -129,7 +138,7 @@ private:
   // Gets the appropriate sp_playlist* but does not load it.
   sp_playlist* GetPlaylist(pb::spotify::PlaylistType type, int user_index);
 
-private:
+ private:
   struct PendingLoadPlaylist {
     pb::spotify::LoadPlaylistRequest request_;
     sp_playlist* playlist_;
@@ -142,7 +151,7 @@ private:
     sp_link* link_;
     sp_track* track_;
 
-    bool operator ==(const PendingPlaybackRequest& other) const {
+    bool operator==(const PendingPlaybackRequest& other) const {
       return request_.track_uri() == other.request_.track_uri() &&
              request_.media_port() == other.request_.media_port();
     }
@@ -157,7 +166,8 @@ private:
   void TryPlaybackAgain(const PendingPlaybackRequest& req);
   void TryImageAgain(sp_image* image);
   int GetDownloadProgress(sp_playlist* playlist);
-  void SendDownloadProgress(pb::spotify::PlaylistType type, int index, int download_progress);
+  void SendDownloadProgress(pb::spotify::PlaylistType type, int index,
+                            int download_progress);
 
   QByteArray api_key_;
 
@@ -178,7 +188,8 @@ private:
   QMap<sp_image*, int> image_callbacks_registered_;
   QMap<sp_search*, pb::spotify::SearchRequest> pending_searches_;
   QMap<sp_albumbrowse*, QString> pending_album_browses_;
-  QMap<sp_toplistbrowse*, pb::spotify::BrowseToplistRequest> pending_toplist_browses_;
+  QMap<sp_toplistbrowse*, pb::spotify::BrowseToplistRequest>
+      pending_toplist_browses_;
 
   QMap<sp_search*, QList<sp_albumbrowse*> > pending_search_album_browses_;
   QMap<sp_albumbrowse*, sp_search*> pending_search_album_browse_responses_;
@@ -186,4 +197,4 @@ private:
   QScopedPointer<MediaPipeline> media_pipeline_;
 };
 
-#endif // SPOTIFYCLIENT_H
+#endif  // SPOTIFYCLIENT_H

@@ -18,9 +18,9 @@
 #ifndef DELETEFILES_H
 #define DELETEFILES_H
 
-#include <QObject>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
+#include <QObject>
 
 #include "song.h"
 
@@ -30,8 +30,8 @@ class TaskManager;
 class DeleteFiles : public QObject {
   Q_OBJECT
 
-public:
-  DeleteFiles(TaskManager* task_manager, boost::shared_ptr<MusicStorage> storage);
+ public:
+  DeleteFiles(TaskManager* task_manager, std::shared_ptr<MusicStorage> storage);
   ~DeleteFiles();
 
   static const int kBatchSize;
@@ -42,14 +42,14 @@ public:
 signals:
   void Finished(const SongList& songs_with_errors);
 
-private slots:
+ private slots:
   void ProcessSomeFiles();
 
-private:
+ private:
   QThread* thread_;
   QThread* original_thread_;
   TaskManager* task_manager_;
-  boost::shared_ptr<MusicStorage> storage_;
+  std::shared_ptr<MusicStorage> storage_;
 
   SongList songs_;
 
@@ -61,4 +61,4 @@ private:
   SongList songs_with_errors_;
 };
 
-#endif // DELETEFILES_H
+#endif  // DELETEFILES_H

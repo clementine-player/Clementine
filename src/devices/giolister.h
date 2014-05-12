@@ -23,7 +23,7 @@
 
 // Work around compile issue with glib >= 2.25
 #ifdef signals
-# undef signals
+#undef signals
 #endif
 
 #include <gio/gio.h>
@@ -34,7 +34,7 @@
 class GioLister : public DeviceLister {
   Q_OBJECT
 
-public:
+ public:
   GioLister() {}
 
   int priority() const { return 50; }
@@ -48,22 +48,25 @@ public:
   QVariantMap DeviceHardwareInfo(const QString& id);
   bool DeviceNeedsMount(const QString& id);
 
-  QString MakeFriendlyName(const QString &id);
-  QList<QUrl> MakeDeviceUrls(const QString &id);
+  QString MakeFriendlyName(const QString& id);
+  QList<QUrl> MakeDeviceUrls(const QString& id);
 
   int MountDevice(const QString& id);
-  void UnmountDevice(const QString &id);
+  void UnmountDevice(const QString& id);
 
-public slots:
+ public slots:
   void UpdateDeviceFreeSpace(const QString& id);
 
-protected:
+ protected:
   void Init();
 
-private:
+ private:
   struct DeviceInfo {
-    DeviceInfo() : drive_removable(false), filesystem_size(0),
-                   filesystem_free(0), invalid_enclosing_mount(false) {}
+    DeviceInfo()
+        : drive_removable(false),
+          filesystem_size(0),
+          filesystem_free(0),
+          invalid_enclosing_mount(false) {}
 
     QString unique_id() const;
     bool is_suitable() const;
@@ -113,10 +116,14 @@ private:
   static void MountChangedCallback(GVolumeMonitor*, GMount*, gpointer);
   static void MountRemovedCallback(GVolumeMonitor*, GMount*, gpointer);
 
-  static void VolumeMountFinished(GObject* object, GAsyncResult* result, gpointer);
-  static void VolumeEjectFinished(GObject* object, GAsyncResult* result, gpointer);
-  static void MountEjectFinished(GObject* object, GAsyncResult* result, gpointer);
-  static void MountUnmountFinished(GObject* object, GAsyncResult* result, gpointer);
+  static void VolumeMountFinished(GObject* object, GAsyncResult* result,
+                                  gpointer);
+  static void VolumeEjectFinished(GObject* object, GAsyncResult* result,
+                                  gpointer);
+  static void MountEjectFinished(GObject* object, GAsyncResult* result,
+                                 gpointer);
+  static void MountUnmountFinished(GObject* object, GAsyncResult* result,
+                                   gpointer);
 
   // You MUST hold the mutex while calling this function
   QString FindUniqueIdByMount(GMount* mount) const;
@@ -125,10 +132,10 @@ private:
   template <typename T>
   T LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field);
 
-private slots:
+ private slots:
   void DoMountDevice(const QString& id, int request_id);
 
-private:
+ private:
   ScopedGObject<GVolumeMonitor> monitor_;
 
   QMutex mutex_;
@@ -138,10 +145,9 @@ private:
 template <typename T>
 T GioLister::LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field) {
   QMutexLocker l(&mutex_);
-  if (!devices_.contains(id))
-    return T();
+  if (!devices_.contains(id)) return T();
 
   return devices_[id].*field;
 }
 
-#endif // GIOLISTER_H
+#endif  // GIOLISTER_H

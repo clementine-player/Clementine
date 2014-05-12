@@ -22,4 +22,4 @@ class QObject;
 
 void WaitForSignal(QObject* sender, const char* signal);
 
-#endif // WAITFORSIGNAL_H
+#endif  // WAITFORSIGNAL_H

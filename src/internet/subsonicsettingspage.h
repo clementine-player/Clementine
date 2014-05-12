@@ -6,12 +6,11 @@
 
 class Ui_SubsonicSettingsPage;
 
-class SubsonicSettingsPage : public SettingsPage
-{
+class SubsonicSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  SubsonicSettingsPage(SettingsDialog *dialog);
+  SubsonicSettingsPage(SettingsDialog* dialog);
   ~SubsonicSettingsPage();
 
   void Load();
@@ -30,4 +29,4 @@ class SubsonicSettingsPage : public SettingsPage
   SubsonicService* service_;
 };
 
-#endif // SUBSONICSETTINGSPAGE_H
+#endif  // SUBSONICSETTINGSPAGE_H

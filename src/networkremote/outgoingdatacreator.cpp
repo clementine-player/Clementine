@@ -29,21 +29,20 @@
 #include <QSqlQuery>
 #include "core/database.h"
 
-const quint32 OutgoingDataCreator::kFileChunkSize = 100000; // in Bytes
+const quint32 OutgoingDataCreator::kFileChunkSize = 100000;  // in Bytes
 
 OutgoingDataCreator::OutgoingDataCreator(Application* app)
-  : app_(app),
-    ultimate_reader_(new UltimateLyricsReader(this)),
-    fetcher_(new SongInfoFetcher(this))
-{
+    : app_(app),
+      aww_(false),
+      ultimate_reader_(new UltimateLyricsReader(this)),
+      fetcher_(new SongInfoFetcher(this)) {
   // Create Keep Alive Timer
   keep_alive_timer_ = new QTimer(this);
   connect(keep_alive_timer_, SIGNAL(timeout()), this, SLOT(SendKeepAlive()));
   keep_alive_timeout_ = 10000;
 }
 
-OutgoingDataCreator::~OutgoingDataCreator() {
-}
+OutgoingDataCreator::~OutgoingDataCreator() {}
 
 void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   clients_ = clients;
@@ -53,17 +52,18 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
 
   // Create the song position timer
   track_position_timer_ = new QTimer(this);
-  connect(track_position_timer_, SIGNAL(timeout()), this, SLOT(UpdateTrackPosition()));
+  connect(track_position_timer_, SIGNAL(timeout()), this,
+          SLOT(UpdateTrackPosition()));
 
   // Parse the ultimate lyrics xml file
   ultimate_reader_->SetThread(this->thread());
   provider_list_ = ultimate_reader_->Parse(":lyrics/ultimate_providers.xml");
 
   // Set up the lyrics parser
-  connect(fetcher_, SIGNAL(ResultReady(int,SongInfoFetcher::Result)),
-          SLOT(SendLyrics(int,SongInfoFetcher::Result)));
+  connect(fetcher_, SIGNAL(ResultReady(int, SongInfoFetcher::Result)),
+          SLOT(SendLyrics(int, SongInfoFetcher::Result)));
 
-  foreach (SongInfoProvider* provider, provider_list_) {
+  for (SongInfoProvider* provider : provider_list_) {
     fetcher_->AddProvider(provider);
   }
 
@@ -98,35 +98,37 @@ void OutgoingDataCreator::CheckEnabledProviders() {
                 << "darklyrics.com";
 
   QVariant saved_order = s.value("search_order", default_order);
-  foreach (const QVariant& name, saved_order.toList()) {
+  for (const QVariant& name : saved_order.toList()) {
     SongInfoProvider* provider = ProviderByName(name.toString());
-    if (provider)
-      ordered_providers << provider;
+    if (provider) ordered_providers << provider;
   }
 
   // Enable all the providers in the list and rank them
   int relevance = 100;
-  foreach (SongInfoProvider* provider, ordered_providers) {
+  for (SongInfoProvider* provider : ordered_providers) {
     provider->set_enabled(true);
     qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance--);
   }
 
-  // Any lyric providers we don't have in ordered_providers are considered disabled
-  foreach (SongInfoProvider* provider, fetcher_->providers()) {
-    if (qobject_cast<UltimateLyricsProvider*>(provider) && !ordered_providers.contains(provider)) {
+  // Any lyric providers we don't have in ordered_providers are considered
+  // disabled
+  for (SongInfoProvider* provider : fetcher_->providers()) {
+    if (qobject_cast<UltimateLyricsProvider*>(provider) &&
+        !ordered_providers.contains(provider)) {
       provider->set_enabled(false);
     }
   }
 }
 
-SongInfoProvider* OutgoingDataCreator::ProviderByName(const QString& name) const {
-  foreach (SongInfoProvider* provider, fetcher_->providers()) {
-    if (UltimateLyricsProvider* lyrics = qobject_cast<UltimateLyricsProvider*>(provider)) {
-      if (lyrics->name() == name)
-        return provider;
+SongInfoProvider* OutgoingDataCreator::ProviderByName(const QString& name)
+    const {
+  for (SongInfoProvider* provider : fetcher_->providers()) {
+    if (UltimateLyricsProvider* lyrics =
+            qobject_cast<UltimateLyricsProvider*>(provider)) {
+      if (lyrics->name() == name) return provider;
     }
   }
-  return NULL;
+  return nullptr;
 }
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
@@ -135,8 +137,7 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     return;
   }
 
-  RemoteClient* client;
-  foreach(client, *clients_) {
+  for (RemoteClient* client : *clients_) {
     // Do not send data to downloaders
     if (client->isDownloader()) {
       if (client->State() != QTcpSocket::ConnectedState) {
@@ -167,22 +168,29 @@ void OutgoingDataCreator::SendClementineInfo() {
       msg.mutable_response_clementine_info();
   SetEngineState(info);
 
-  QString version = QString("%1 %2").arg(QCoreApplication::applicationName(),
-                                         QCoreApplication::applicationVersion());
+  QString version =
+      QString("%1 %2").arg(QCoreApplication::applicationName(),
+                           QCoreApplication::applicationVersion());
   info->set_version(version.toAscii());
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::SetEngineState(pb::remote::ResponseClementineInfo* msg) {
-  switch(app_->player()->GetState()) {
-    case Engine::Idle:    msg->set_state(pb::remote::Idle);
-                          break;
-    case Engine::Empty:   msg->set_state(pb::remote::Empty);
-                          break;
-    case Engine::Playing: msg->set_state(pb::remote::Playing);
-                          break;
-    case Engine::Paused:  msg->set_state(pb::remote::Paused);
-                          break;
+void OutgoingDataCreator::SetEngineState(
+    pb::remote::ResponseClementineInfo* msg) {
+  switch (app_->player()->GetState()) {
+    case Engine::Idle:
+      msg->set_state(pb::remote::Idle);
+      break;
+    case Engine::Error:
+    case Engine::Empty:
+      msg->set_state(pb::remote::Empty);
+      break;
+    case Engine::Playing:
+      msg->set_state(pb::remote::Playing);
+      break;
+    case Engine::Paused:
+      msg->set_state(pb::remote::Paused);
+      break;
   }
 }
 
@@ -198,11 +206,10 @@ void OutgoingDataCreator::SendAllPlaylists() {
   pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
 
   // Get all playlists, even ones that are hidden in the UI.
-  foreach (const PlaylistBackend::Playlist& p,
-           app_->playlist_backend()->GetAllPlaylists()) {
+  for (const PlaylistBackend::Playlist& p :
+       app_->playlist_backend()->GetAllPlaylists()) {
     bool playlist_open = app_->playlist_manager()->IsPlaylistOpen(p.id);
-    int item_count = playlist_open ?
-                        app_playlists.at(p.id)->rowCount() : 0;
+    int item_count = playlist_open ? app_playlists.at(p.id)->rowCount() : 0;
 
     // Create a new playlist
     pb::remote::Playlist* playlist = playlists->add_playlist();
@@ -228,7 +235,7 @@ void OutgoingDataCreator::SendAllActivePlaylists() {
   pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
 
   QListIterator<Playlist*> it(app_playlists);
-  while(it.hasNext()) {
+  while (it.hasNext()) {
     // Get the next Playlist
     Playlist* p = it.next();
     QString playlist_name = app_->playlist_manager()->GetPlaylistName(p->id());
@@ -256,17 +263,14 @@ void OutgoingDataCreator::ActiveChanged(Playlist* playlist) {
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::PlaylistAdded(int id, const QString& name, bool favorite) {
+void OutgoingDataCreator::PlaylistAdded(int id, const QString& name,
+                                        bool favorite) {
   SendAllActivePlaylists();
 }
 
-void OutgoingDataCreator::PlaylistDeleted(int id) {
-  SendAllActivePlaylists();
-}
+void OutgoingDataCreator::PlaylistDeleted(int id) { SendAllActivePlaylists(); }
 
-void OutgoingDataCreator::PlaylistClosed(int id) {
-  SendAllActivePlaylists();
-}
+void OutgoingDataCreator::PlaylistClosed(int id) { SendAllActivePlaylists(); }
 
 void OutgoingDataCreator::PlaylistRenamed(int id, const QString& new_name) {
   SendAllActivePlaylists();
@@ -311,40 +315,46 @@ void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& uri, const QImage& img) {
-  current_song_  = song;
-  current_uri_   = uri;
-  current_image_ = img;
+void OutgoingDataCreator::CurrentSongChanged(const Song& song,
+                                             const QString& uri,
+                                             const QImage& img) {
+  current_song_ = song;
+  current_uri_ = uri;
 
-  if (!clients_->empty()) {
-    // Create the message
-    pb::remote::Message msg;
-    msg.set_type(pb::remote::CURRENT_METAINFO);
-
-    // If there is no song, create an empty node, otherwise fill it with data
-    int i = app_->playlist_manager()->active()->current_row();
-    CreateSong(
-        current_song_, img, i,
-        msg.mutable_response_current_metadata()->mutable_song_metadata());
-
-    SendDataToClients(&msg);
+  if (!aww_) {
+    current_image_ = img;
   }
+
+  SendSongMetadata();
 }
 
-void OutgoingDataCreator::CreateSong(
-    const Song& song,
-    const QImage& art,
-    const int index,
-    pb::remote::SongMetadata* song_metadata) {
+void OutgoingDataCreator::SendSongMetadata() {
+  // Create the message
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::CURRENT_METAINFO);
+
+  // If there is no song, create an empty node, otherwise fill it with data
+  int i = app_->playlist_manager()->active()->current_row();
+  CreateSong(current_song_, current_image_, i,
+             msg.mutable_response_current_metadata()->mutable_song_metadata());
+
+  SendDataToClients(&msg);
+}
+
+void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
+                                     const int index,
+                                     pb::remote::SongMetadata* song_metadata) {
   if (song.is_valid()) {
     song_metadata->set_id(song.id());
     song_metadata->set_index(index);
     song_metadata->set_title(DataCommaSizeFromQString(song.PrettyTitle()));
     song_metadata->set_artist(DataCommaSizeFromQString(song.artist()));
     song_metadata->set_album(DataCommaSizeFromQString(song.album()));
-    song_metadata->set_albumartist(DataCommaSizeFromQString(song.albumartist()));
+    song_metadata->set_albumartist(
+        DataCommaSizeFromQString(song.albumartist()));
     song_metadata->set_length(song.length_nanosec() / kNsecPerSec);
-    song_metadata->set_pretty_length(DataCommaSizeFromQString(song.PrettyLength()));
+    song_metadata->set_pretty_length(
+        DataCommaSizeFromQString(song.PrettyLength()));
     song_metadata->set_genre(DataCommaSizeFromQString(song.genre()));
     song_metadata->set_pretty_year(DataCommaSizeFromQString(song.PrettyYear()));
     song_metadata->set_track(song.track());
@@ -353,6 +363,7 @@ void OutgoingDataCreator::CreateSong(
     song_metadata->set_is_local(song.url().scheme() == "file");
     song_metadata->set_filename(DataCommaSizeFromQString(song.basefilename()));
     song_metadata->set_file_size(song.filesize());
+    song_metadata->set_rating(song.rating());
 
     // Append coverart
     if (!art.isNull()) {
@@ -376,7 +387,6 @@ void OutgoingDataCreator::CreateSong(
   }
 }
 
-
 void OutgoingDataCreator::VolumeChanged(int volume) {
   // Create the message
   pb::remote::Message msg;
@@ -388,7 +398,7 @@ void OutgoingDataCreator::VolumeChanged(int volume) {
 void OutgoingDataCreator::SendPlaylistSongs(int id) {
   // Get the PlaylistQByteArray(data.data(), data.size()
   Playlist* playlist = app_->playlist_manager()->playlist(id);
-  if(!playlist) {
+  if (!playlist) {
     qLog(Info) << "Could not find playlist with id = " << id;
     return;
   }
@@ -399,7 +409,7 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
 
   // Create the Response message
   pb::remote::ResponsePlaylistSongs* pb_response_playlist_songs =
-                                     msg.mutable_response_playlist_songs();
+      msg.mutable_response_playlist_songs();
 
   // Create a new playlist
   pb::remote::Playlist* pb_playlist =
@@ -411,8 +421,8 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
   SongList song_list = playlist->GetAllSongs();
   QListIterator<Song> it(song_list);
   QImage null_img;
-  while(it.hasNext()) {
-    Song song   = it.next();
+  while (it.hasNext()) {
+    Song song = it.next();
     pb::remote::SongMetadata* pb_song = pb_response_playlist_songs->add_songs();
     CreateSong(song, null_img, index, pb_song);
     ++index;
@@ -437,18 +447,22 @@ void OutgoingDataCreator::StateChanged(Engine::State state) {
   pb::remote::Message msg;
 
   switch (state) {
-  case Engine::Playing: msg.set_type(pb::remote::PLAY);
-                        track_position_timer_->start(1000);
-                        break;
-  case Engine::Paused:  msg.set_type(pb::remote::PAUSE);
-                        track_position_timer_->stop();
-                        break;
-  case Engine::Empty:   msg.set_type(pb::remote::STOP); // Empty is called when player stopped
-                        track_position_timer_->stop();
-                        break;
-  default:              msg.set_type(pb::remote::STOP);
-                        track_position_timer_->stop();
-                        break;
+    case Engine::Playing:
+      msg.set_type(pb::remote::PLAY);
+      track_position_timer_->start(1000);
+      break;
+    case Engine::Paused:
+      msg.set_type(pb::remote::PAUSE);
+      track_position_timer_->stop();
+      break;
+    case Engine::Empty:
+      msg.set_type(pb::remote::STOP);  // Empty is called when player stopped
+      track_position_timer_->stop();
+      break;
+    default:
+      msg.set_type(pb::remote::STOP);
+      track_position_timer_->stop();
+      break;
   };
 
   SendDataToClients(&msg);
@@ -459,18 +473,18 @@ void OutgoingDataCreator::SendRepeatMode(PlaylistSequence::RepeatMode mode) {
   msg.set_type(pb::remote::REPEAT);
 
   switch (mode) {
-  case PlaylistSequence::Repeat_Off:
-       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Off);
-       break;
-  case PlaylistSequence::Repeat_Track:
-       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Track);
-       break;
-  case PlaylistSequence::Repeat_Album:
-       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Album);
-       break;
-  case PlaylistSequence::Repeat_Playlist:
-       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Playlist);
-       break;
+    case PlaylistSequence::Repeat_Off:
+      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Off);
+      break;
+    case PlaylistSequence::Repeat_Track:
+      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Track);
+      break;
+    case PlaylistSequence::Repeat_Album:
+      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Album);
+      break;
+    case PlaylistSequence::Repeat_Playlist:
+      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Playlist);
+      break;
   }
 
   SendDataToClients(&msg);
@@ -481,18 +495,18 @@ void OutgoingDataCreator::SendShuffleMode(PlaylistSequence::ShuffleMode mode) {
   msg.set_type(pb::remote::SHUFFLE);
 
   switch (mode) {
-  case PlaylistSequence::Shuffle_Off:
-       msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_Off);
-       break;
-  case PlaylistSequence::Shuffle_All:
-       msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_All);
-       break;
-  case PlaylistSequence::Shuffle_InsideAlbum:
-       msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_InsideAlbum);
-       break;
-  case PlaylistSequence::Shuffle_Albums:
-       msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_Albums);
-       break;
+    case PlaylistSequence::Shuffle_Off:
+      msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_Off);
+      break;
+    case PlaylistSequence::Shuffle_All:
+      msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_All);
+      break;
+    case PlaylistSequence::Shuffle_InsideAlbum:
+      msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_InsideAlbum);
+      break;
+    case PlaylistSequence::Shuffle_Albums:
+      msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_Albums);
+      break;
   }
 
   SendDataToClients(&msg);
@@ -508,10 +522,16 @@ void OutgoingDataCreator::UpdateTrackPosition() {
   pb::remote::Message msg;
   msg.set_type(pb::remote::UPDATE_TRACK_POSITION);
 
-  const int position = std::floor(
-    float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
+  int position = std::floor(
+      float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
+
+  if (app_->player()->engine()->position_nanosec() >
+      current_song_.length_nanosec())
+    position = last_track_position_;
 
   msg.mutable_response_update_track_position()->set_position(position);
+
+  last_track_position_ = position;
 
   SendDataToClients(&msg);
 }
@@ -519,24 +539,24 @@ void OutgoingDataCreator::UpdateTrackPosition() {
 void OutgoingDataCreator::DisconnectAllClients() {
   pb::remote::Message msg;
   msg.set_type(pb::remote::DISCONNECT);
-  msg.mutable_response_disconnect()->set_reason_disconnect(pb::remote::Server_Shutdown);
+  msg.mutable_response_disconnect()->set_reason_disconnect(
+      pb::remote::Server_Shutdown);
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::GetLyrics() {
-  fetcher_->FetchInfo(current_song_);
-}
+void OutgoingDataCreator::GetLyrics() { fetcher_->FetchInfo(current_song_); }
 
-void OutgoingDataCreator::SendLyrics(int id, const SongInfoFetcher::Result& result) {
+void OutgoingDataCreator::SendLyrics(int id,
+                                     const SongInfoFetcher::Result& result) {
   pb::remote::Message msg;
   msg.set_type(pb::remote::LYRICS);
   pb::remote::ResponseLyrics* response = msg.mutable_response_lyrics();
 
-  foreach (const CollapsibleInfoPane::Data& data, result.info_) {
+  for (const CollapsibleInfoPane::Data& data : result.info_) {
     // If the size is zero, do not send the provider
-    SongInfoTextView* editor = qobject_cast<SongInfoTextView*>(data.contents_);
-    if (editor->toPlainText().length() == 0)
-      continue;
+    UltimateLyricsLyric* editor =
+        qobject_cast<UltimateLyricsLyric*>(data.content_object_);
+    if (editor->toPlainText().length() == 0) continue;
 
     pb::remote::Lyric* lyric = response->mutable_lyrics()->Add();
 
@@ -549,36 +569,62 @@ void OutgoingDataCreator::SendLyrics(int id, const SongInfoFetcher::Result& resu
   results_.take(id);
 }
 
-void OutgoingDataCreator::SendSongs(const pb::remote::RequestDownloadSongs &request,
-                                    RemoteClient* client) {
+void OutgoingDataCreator::SendSongs(
+    const pb::remote::RequestDownloadSongs& request, RemoteClient* client) {
 
   if (!download_queue_.contains(client)) {
-    download_queue_.insert(client, QQueue<DownloadItem>() );
+    download_queue_.insert(client, QQueue<DownloadItem>());
   }
 
   switch (request.download_item()) {
-  case pb::remote::CurrentItem: {
-    DownloadItem item(current_song_, 1 , 1);
-    download_queue_[client].append(item);
-    break;
+    case pb::remote::CurrentItem: {
+      DownloadItem item(current_song_, 1, 1);
+      download_queue_[client].append(item);
+      break;
+    }
+    case pb::remote::ItemAlbum:
+      SendAlbum(client, current_song_);
+      break;
+    case pb::remote::APlaylist:
+      SendPlaylist(client, request.playlist_id());
+      break;
+    case pb::remote::Urls:
+      SendUrls(client, request);
+      break;
+    default:
+      break;
   }
-  case pb::remote::ItemAlbum:
-    SendAlbum(client, current_song_);
-    break;
-  case pb::remote::APlaylist:
-    SendPlaylist(client, request.playlist_id());
-    break;
-  default:
-    break;
-  }
+
+  // Send total file size & file count
+  SendTotalFileSize(client);
 
   // Send first file
   OfferNextSong(client);
 }
 
-void OutgoingDataCreator::OfferNextSong(RemoteClient *client) {
-  if (!download_queue_.contains(client))
-    return;
+void OutgoingDataCreator::SendTotalFileSize(RemoteClient *client) {
+  if (!download_queue_.contains(client)) return;
+
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::DOWNLOAD_TOTAL_SIZE);
+
+  pb::remote::ResponseDownloadTotalSize* response =
+      msg.mutable_response_download_total_size();
+
+  response->set_file_count(download_queue_[client].size());
+
+  int total = 0;
+  for (DownloadItem item : download_queue_[client]) {
+    total += item.song_.filesize();
+  }
+
+  response->set_total_size(total);
+
+  client->SendData(&msg);
+}
+
+void OutgoingDataCreator::OfferNextSong(RemoteClient* client) {
+  if (!download_queue_.contains(client)) return;
 
   pb::remote::Message msg;
 
@@ -590,7 +636,8 @@ void OutgoingDataCreator::OfferNextSong(RemoteClient *client) {
     DownloadItem item = download_queue_[client].head();
 
     msg.set_type(pb::remote::SONG_FILE_CHUNK);
-    pb::remote::ResponseSongFileChunk* chunk = msg.mutable_response_song_file_chunk();
+    pb::remote::ResponseSongFileChunk* chunk =
+        msg.mutable_response_song_file_chunk();
 
     // Song offer is chunk no 0
     chunk->set_chunk_count(0);
@@ -598,19 +645,17 @@ void OutgoingDataCreator::OfferNextSong(RemoteClient *client) {
     chunk->set_file_count(item.song_count_);
     chunk->set_file_number(item.song_no_);
 
-    CreateSong(item.song_, QImage() , -1,
-               chunk->mutable_song_metadata());
+    CreateSong(item.song_, QImage(), -1, chunk->mutable_song_metadata());
   }
 
   client->SendData(&msg);
 }
 
-void OutgoingDataCreator::ResponseSongOffer(RemoteClient *client, bool accepted) {
-  if (!download_queue_.contains(client))
-    return;
+void OutgoingDataCreator::ResponseSongOffer(RemoteClient* client,
+                                            bool accepted) {
+  if (!download_queue_.contains(client)) return;
 
-  if (download_queue_.value(client).isEmpty())
-    return;
+  if (download_queue_.value(client).isEmpty()) return;
 
   // Get the item and send the single song
   DownloadItem item = download_queue_[client].dequeue();
@@ -621,26 +666,31 @@ void OutgoingDataCreator::ResponseSongOffer(RemoteClient *client, bool accepted)
   OfferNextSong(client);
 }
 
-void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
+void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song& song,
                                          int song_no, int song_count) {
   // Only local files!!!
-  if (!(song.url().scheme() == "file"))
-    return;
-
-  // Calculate the number of chunks
-  int chunk_count  = qRound((song.filesize() / kFileChunkSize) + 0.5);
-  int chunk_number = 1;
+  if (!(song.url().scheme() == "file")) return;
 
   // Open the file
   QFile file(song.url().toLocalFile());
+
+  // Get sha1 for file
+  QByteArray sha1 = Utilities::Sha1File(file).toHex();
+  qLog(Debug) << "sha1 for file" << song.url().toLocalFile() << "=" << sha1;
+
   file.open(QIODevice::ReadOnly);
 
   QByteArray data;
   pb::remote::Message msg;
-  pb::remote::ResponseSongFileChunk* chunk = msg.mutable_response_song_file_chunk();
+  pb::remote::ResponseSongFileChunk* chunk =
+      msg.mutable_response_song_file_chunk();
   msg.set_type(pb::remote::SONG_FILE_CHUNK);
 
   QImage null_image;
+
+  // Calculate the number of chunks
+  int chunk_count = qRound((file.size() / kFileChunkSize) + 0.5);
+  int chunk_number = 1;
 
   while (!file.atEnd()) {
     // Read file chunk
@@ -653,14 +703,15 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
     chunk->set_file_number(song_no);
     chunk->set_size(file.size());
     chunk->set_data(data.data(), data.size());
+    chunk->set_file_hash(sha1.data(), sha1.size());
 
     // On the first chunk send the metadata, so the client knows
     // what file it receives.
     if (chunk_number == 1) {
       int i = app_->playlist_manager()->active()->current_row();
       CreateSong(
-        song, null_image, i,
-        msg.mutable_response_song_file_chunk()->mutable_song_metadata());
+          song, null_image, i,
+          msg.mutable_response_song_file_chunk()->mutable_song_metadata());
     }
 
     // Send data directly to the client
@@ -676,22 +727,21 @@ void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song &song,
   file.close();
 }
 
-void OutgoingDataCreator::SendAlbum(RemoteClient *client, const Song &song) {
+void OutgoingDataCreator::SendAlbum(RemoteClient* client, const Song& song) {
   // No streams!
-  if (song.url().scheme() != "file")
-    return;
+  if (song.url().scheme() != "file") return;
 
   SongList album = app_->library_backend()->GetSongsByAlbum(song.album());
 
-  foreach (Song s, album) {
-    DownloadItem item(s, album.indexOf(s)+1, album.size());
+  for (Song s : album) {
+    DownloadItem item(s, album.indexOf(s) + 1, album.size());
     download_queue_[client].append(item);
   }
 }
 
-void OutgoingDataCreator::SendPlaylist(RemoteClient *client, int playlist_id) {
+void OutgoingDataCreator::SendPlaylist(RemoteClient* client, int playlist_id) {
   Playlist* playlist = app_->playlist_manager()->playlist(playlist_id);
-  if(!playlist) {
+  if (!playlist) {
     qLog(Info) << "Could not find playlist with id = " << playlist_id;
     return;
   }
@@ -699,33 +749,59 @@ void OutgoingDataCreator::SendPlaylist(RemoteClient *client, int playlist_id) {
 
   // Count the local songs
   int count = 0;
-  foreach (Song s, song_list) {
+  for (Song s : song_list) {
     if (s.url().scheme() == "file") {
       count++;
     }
   }
 
-  foreach (Song s, song_list) {
+  for (Song s : song_list) {
     // Only local files!
     if (s.url().scheme() == "file") {
-      DownloadItem item(s, song_list.indexOf(s)+1, count);
+      DownloadItem item(s, song_list.indexOf(s) + 1, count);
       download_queue_[client].append(item);
     }
   }
 }
 
-void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
+void OutgoingDataCreator::SendUrls(RemoteClient *client,
+                                   const pb::remote::RequestDownloadSongs &request) {
+  SongList song_list;
+
+  // First gather all valid songs
+  for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
+    std::string s = *it;
+    QUrl url = QUrl(QStringFromStdString(s));
+
+    Song song = app_->library_backend()->GetSongByUrl(url);
+
+    if (song.is_valid() && song.url().scheme() == "file") {
+      song_list.append(song);
+    }
+  }
+
+  // Then send them to Clementine Remote
+  for (Song s : song_list) {
+    DownloadItem item(s, song_list.indexOf(s) + 1, song_list.count());
+    download_queue_[client].append(item);
+  }
+}
+
+void OutgoingDataCreator::SendLibrary(RemoteClient* client) {
   // Get a temporary file name
   QString temp_file_name = Utilities::GetTemporaryFileName();
 
   // Attach this file to the database
   Database::AttachedDatabase adb(temp_file_name, "", true);
-  app_->database()->AttachDatabase("songs_export", adb);
   QSqlDatabase db(app_->database()->Connect());
 
+  app_->database()->AttachDatabaseOnDbConnection("songs_export", adb, db);
+
   // Copy the content of the song table to this temporary database
-  QSqlQuery q(QString("create table songs_export.songs as SELECT * FROM songs;"), db);
-  q.exec();
+  QSqlQuery q(QString(
+                  "create table songs_export.songs as SELECT * FROM songs "
+                  "where unavailable = 0;"),
+              db);
 
   if (app_->database()->CheckErrors(q)) return;
 
@@ -734,15 +810,21 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
 
   // Open the file
   QFile file(temp_file_name);
+
+  // Get the sha1 hash
+  QByteArray sha1 = Utilities::Sha1File(file).toHex();
+  qLog(Debug) << "Library sha1" << sha1;
+
   file.open(QIODevice::ReadOnly);
 
   QByteArray data;
   pb::remote::Message msg;
-  pb::remote::ResponseLibraryChunk* chunk = msg.mutable_response_library_chunk();
+  pb::remote::ResponseLibraryChunk* chunk =
+      msg.mutable_response_library_chunk();
   msg.set_type(pb::remote::LIBRARY_CHUNK);
 
   // Calculate the number of chunks
-  int chunk_count  = qRound((file.size() / kFileChunkSize) + 0.5);
+  int chunk_count = qRound((file.size() / kFileChunkSize) + 0.5);
   int chunk_number = 1;
 
   while (!file.atEnd()) {
@@ -754,6 +836,7 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
     chunk->set_chunk_number(chunk_number);
     chunk->set_size(file.size());
     chunk->set_data(data.data(), data.size());
+    chunk->set_file_hash(sha1.data(), sha1.size());
 
     // Send data directly to the client
     client->SendData(&msg);
@@ -767,4 +850,13 @@ void OutgoingDataCreator::SendLibrary(RemoteClient *client) {
 
   // Remove temporary file
   file.remove();
+}
+
+void OutgoingDataCreator::EnableKittens(bool aww) { aww_ = aww; }
+
+void OutgoingDataCreator::SendKitten(const QImage& kitten) {
+  if (aww_) {
+    current_image_ = kitten;
+    SendSongMetadata();
+  }
 }

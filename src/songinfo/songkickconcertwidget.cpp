@@ -32,12 +32,10 @@
 const int SongKickConcertWidget::kStaticMapWidth = 100;
 const int SongKickConcertWidget::kStaticMapHeight = 100;
 
-
 SongKickConcertWidget::SongKickConcertWidget(QWidget* parent)
-  : QWidget(parent),
-    ui_(new Ui_SongKickConcertWidget),
-    network_(new NetworkAccessManager(this))
-{
+    : QWidget(parent),
+      ui_(new Ui_SongKickConcertWidget),
+      network_(new NetworkAccessManager(this)) {
   ui_->setupUi(this);
 
   // Hide the map by default
@@ -48,9 +46,7 @@ SongKickConcertWidget::SongKickConcertWidget(QWidget* parent)
   ReloadSettings();
 }
 
-SongKickConcertWidget::~SongKickConcertWidget() {
-  delete ui_;
-}
+SongKickConcertWidget::~SongKickConcertWidget() { delete ui_; }
 
 void SongKickConcertWidget::ReloadSettings() {
   QFont font(SongInfoTextView::Font());
@@ -61,9 +57,8 @@ void SongKickConcertWidget::ReloadSettings() {
 
 void SongKickConcertWidget::Init(const QString& title, const QString& url,
                                  const QString& date, const QString& location) {
-  ui_->title->setText(QString("<a href=\"%1\">%2</a>").arg(
-      Qt::escape(url),
-      Qt::escape(title)));
+  ui_->title->setText(
+      QString("<a href=\"%1\">%2</a>").arg(Qt::escape(url), Qt::escape(title)));
 
   if (!location.isEmpty()) {
     ui_->location->setText(location);
@@ -90,7 +85,7 @@ void SongKickConcertWidget::Init(const QString& title, const QString& url,
 void SongKickConcertWidget::SetMap(const QString& lat, const QString& lng,
                                    const QString& venue_name) {
   static const char* kStaticMapUrl =
-      "http://maps.googleapis.com/maps/api/staticmap"
+      "https://maps.googleapis.com/maps/api/staticmap"
       "?key=AIzaSyDDJqmLOeE1mY_EBONhnQmdXbKtasgCtqg"
       "&sensor=false"
       "&size=%1x%2"
@@ -107,13 +102,11 @@ void SongKickConcertWidget::SetMap(const QString& lat, const QString& lng,
   }
 
   // Request the static map image
-  const QUrl url(QString(kStaticMapUrl).arg(
-      QString::number(kStaticMapWidth),
-      QString::number(kStaticMapHeight),
-      lat, lng));
+  const QUrl url(QString(kStaticMapUrl).arg(QString::number(kStaticMapWidth),
+                                            QString::number(kStaticMapHeight),
+                                            lat, lng));
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(MapLoaded(QNetworkReply*)),
+  NewClosure(reply, SIGNAL(finished()), this, SLOT(MapLoaded(QNetworkReply*)),
              reply);
 }
 

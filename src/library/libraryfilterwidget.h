@@ -18,9 +18,9 @@
 #ifndef LIBRARYFILTERWIDGET_H
 #define LIBRARYFILTERWIDGET_H
 
-#include <QWidget>
+#include <memory>
 
-#include <boost/scoped_ptr.hpp>
+#include <QWidget>
 
 #include "librarymodel.h"
 
@@ -38,10 +38,10 @@ class LibraryFilterWidget : public QWidget {
   Q_OBJECT
 
  public:
-  LibraryFilterWidget(QWidget* parent = 0);
+  LibraryFilterWidget(QWidget* parent = nullptr);
   ~LibraryFilterWidget();
 
-  static const int kFilterDelay = 500; // msec
+  static const int kFilterDelay = 500;  // msec
 
   enum DelayBehaviour {
     AlwaysInstant,
@@ -52,10 +52,15 @@ class LibraryFilterWidget : public QWidget {
   static QActionGroup* CreateGroupByActions(QObject* parent);
 
   void SetFilterHint(const QString& hint);
-  void SetApplyFilterToLibrary(bool filter_applies_to_model) { filter_applies_to_model_ = filter_applies_to_model; }
-  void SetDelayBehaviour(DelayBehaviour behaviour) { delay_behaviour_ = behaviour; }
+  void SetApplyFilterToLibrary(bool filter_applies_to_model) {
+    filter_applies_to_model_ = filter_applies_to_model;
+  }
+  void SetDelayBehaviour(DelayBehaviour behaviour) {
+    delay_behaviour_ = behaviour;
+  }
   void SetAgeFilterEnabled(bool enabled);
   void SetGroupByEnabled(bool enabled);
+  void ShowInLibrary(const QString& search);
 
   QMenu* menu() const { return library_menu_; }
   void AddMenuAction(QAction* action);
@@ -67,7 +72,7 @@ class LibraryFilterWidget : public QWidget {
   void SetQueryMode(QueryOptions::QueryMode view);
   void FocusOnFilter(QKeyEvent* e);
 
- signals:
+signals:
   void UpPressed();
   void DownPressed();
   void ReturnPressed();
@@ -91,7 +96,7 @@ class LibraryFilterWidget : public QWidget {
   Ui_LibraryFilterWidget* ui_;
   LibraryModel* model_;
 
-  boost::scoped_ptr<GroupByDialog> group_by_dialog_;
+  std::unique_ptr<GroupByDialog> group_by_dialog_;
   SettingsDialog* settings_dialog_;
 
   QMenu* filter_age_menu_;
@@ -108,4 +113,4 @@ class LibraryFilterWidget : public QWidget {
   QString settings_group_;
 };
 
-#endif // LIBRARYFILTERWIDGET_H
+#endif  // LIBRARYFILTERWIDGET_H

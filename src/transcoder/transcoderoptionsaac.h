@@ -23,17 +23,17 @@
 class Ui_TranscoderOptionsAAC;
 
 class TranscoderOptionsAAC : public TranscoderOptionsInterface {
-public:
-  TranscoderOptionsAAC(QWidget* parent = 0);
+ public:
+  TranscoderOptionsAAC(QWidget* parent = nullptr);
   ~TranscoderOptionsAAC();
 
   void Load();
   void Save();
 
-private:
+ private:
   static const char* kSettingsGroup;
 
   Ui_TranscoderOptionsAAC* ui_;
 };
 
-#endif // TRANSCODEROPTIONSAAC_H
+#endif  // TRANSCODEROPTIONSAAC_H

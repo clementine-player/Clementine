@@ -41,7 +41,7 @@ class FileformatsTest : public ::testing::TestWithParam<const char*> {
 
   static void TearDownTestCase() {
     delete sGstEngine;
-    sGstEngine = NULL;
+    sGstEngine = nullptr;
   }
 
  protected:
@@ -74,7 +74,7 @@ class FileformatsTest : public ::testing::TestWithParam<const char*> {
   QString temp_filetemplate_;
 };
 
-GstEngine* FileformatsTest::sGstEngine = NULL;
+GstEngine* FileformatsTest::sGstEngine = nullptr;
 
 
 TEST_P(FileformatsTest, Exists) {

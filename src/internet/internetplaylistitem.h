@@ -55,4 +55,4 @@ class InternetPlaylistItem : public PlaylistItem {
   Song metadata_;
 };
 
-#endif // INTERNETPLAYLISTITEM_H
+#endif  // INTERNETPLAYLISTITEM_H

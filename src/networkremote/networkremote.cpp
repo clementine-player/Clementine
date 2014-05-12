@@ -31,22 +31,16 @@ const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
 const quint16 NetworkRemote::kDefaultServerPort = 5500;
 
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
-  : QObject(parent),
-    signals_connected_(false),
-    app_(app) {
-}
+    : QObject(parent), signals_connected_(false), app_(app) {}
 
-
-NetworkRemote::~NetworkRemote() {
-  StopServer();
-}
+NetworkRemote::~NetworkRemote() { StopServer(); }
 
 void NetworkRemote::ReadSettings() {
   QSettings s;
 
   s.beginGroup(NetworkRemote::kSettingsGroup);
   use_remote_ = s.value("use_remote", false).toBool();
-  port_       = s.value("port", kDefaultServerPort).toInt();
+  port_ = s.value("port", kDefaultServerPort).toInt();
 
   // Use only non public ips must be true be default
   only_non_public_ip_ = s.value("only_non_public_ip", true).toBool();
@@ -68,8 +62,10 @@ void NetworkRemote::SetupServer() {
           SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
 
   // Only connect the signals once
-  connect(server_.get(), SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
-  connect(server_ipv6_.get(), SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
+  connect(server_.get(), SIGNAL(newConnection()), this,
+          SLOT(AcceptConnection()));
+  connect(server_ipv6_.get(), SIGNAL(newConnection()), this,
+          SLOT(AcceptConnection()));
 }
 
 void NetworkRemote::StartServer() {
@@ -96,8 +92,7 @@ void NetworkRemote::StartServer() {
 
   if (Zeroconf::GetZeroconf()) {
     QString name = QString("Clementine on %1").arg(QHostInfo::localHostName());
-    Zeroconf::GetZeroconf()->Publish(
-        "local", "_clementine._tcp", name, port_);
+    Zeroconf::GetZeroconf()->Publish("local", "_clementine._tcp", name, port_);
   }
 }
 
@@ -136,17 +131,18 @@ void NetworkRemote::AcceptConnection() {
             outgoing_data_creator_.get(), SLOT(ActiveChanged(Playlist*)));
     connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)),
             outgoing_data_creator_.get(), SLOT(PlaylistChanged(Playlist*)));
-    connect(app_->playlist_manager(), SIGNAL(PlaylistAdded(int,QString,bool)),
-            outgoing_data_creator_.get(), SLOT(PlaylistAdded(int,QString,bool)));
-    connect(app_->playlist_manager(), SIGNAL(PlaylistRenamed(int,QString)),
-            outgoing_data_creator_.get(), SLOT(PlaylistRenamed(int,QString)));
+    connect(app_->playlist_manager(), SIGNAL(PlaylistAdded(int, QString, bool)),
+            outgoing_data_creator_.get(),
+            SLOT(PlaylistAdded(int, QString, bool)));
+    connect(app_->playlist_manager(), SIGNAL(PlaylistRenamed(int, QString)),
+            outgoing_data_creator_.get(), SLOT(PlaylistRenamed(int, QString)));
     connect(app_->playlist_manager(), SIGNAL(PlaylistClosed(int)),
             outgoing_data_creator_.get(), SLOT(PlaylistClosed(int)));
     connect(app_->playlist_manager(), SIGNAL(PlaylistDeleted(int)),
             outgoing_data_creator_.get(), SLOT(PlaylistDeleted(int)));
 
-    connect(app_->player(), SIGNAL(VolumeChanged(int)), outgoing_data_creator_.get(),
-            SLOT(VolumeChanged(int)));
+    connect(app_->player(), SIGNAL(VolumeChanged(int)),
+            outgoing_data_creator_.get(), SLOT(VolumeChanged(int)));
     connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)),
             outgoing_data_creator_.get(), SLOT(StateChanged(Engine::State)));
 
@@ -163,26 +159,24 @@ void NetworkRemote::AcceptConnection() {
             outgoing_data_creator_.get(), SLOT(GetLyrics()));
 
     connect(incoming_data_parser_.get(),
-            SIGNAL(SendSongs(pb::remote::RequestDownloadSongs,RemoteClient*)),
+            SIGNAL(SendSongs(pb::remote::RequestDownloadSongs, RemoteClient*)),
             outgoing_data_creator_.get(),
-            SLOT(SendSongs(pb::remote::RequestDownloadSongs,RemoteClient*)));
+            SLOT(SendSongs(pb::remote::RequestDownloadSongs, RemoteClient*)));
     connect(incoming_data_parser_.get(),
             SIGNAL(ResponseSongOffer(RemoteClient*, bool)),
             outgoing_data_creator_.get(),
             SLOT(ResponseSongOffer(RemoteClient*, bool)));
 
-    connect(incoming_data_parser_.get(),
-            SIGNAL(SendLibrary(RemoteClient*)),
-            outgoing_data_creator_.get(),
-            SLOT(SendLibrary(RemoteClient*)));
+    connect(incoming_data_parser_.get(), SIGNAL(SendLibrary(RemoteClient*)),
+            outgoing_data_creator_.get(), SLOT(SendLibrary(RemoteClient*)));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
   QTcpSocket* client_socket = server->nextPendingConnection();
   // Check if our ip is in private scope
   if (only_non_public_ip_ && !IpIsPrivate(client_socket->peerAddress())) {
-    qLog(Info) << "Got a connection from public ip" <<
-                client_socket->peerAddress().toString();
+    qLog(Info) << "Got a connection from public ip"
+               << client_socket->peerAddress().toString();
     client_socket->close();
   } else {
     CreateRemoteClient(client_socket);
@@ -216,4 +210,12 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
     connect(client, SIGNAL(Parse(pb::remote::Message)),
             incoming_data_parser_.get(), SLOT(Parse(pb::remote::Message)));
   }
+}
+
+void NetworkRemote::EnableKittens(bool aww) {
+  if (outgoing_data_creator_.get()) outgoing_data_creator_->EnableKittens(aww);
+}
+
+void NetworkRemote::SendKitten(quint64 id, const QImage& kitten) {
+  if (outgoing_data_creator_.get()) outgoing_data_creator_->SendKitten(kitten);
 }

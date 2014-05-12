@@ -14,10 +14,10 @@ class SubsonicUrlHandler : public UrlHandler {
   QString scheme() const { return "subsonic"; }
   QIcon icon() const { return QIcon(":providers/subsonic-32.png"); }
   LoadResult StartLoading(const QUrl& url);
-  //LoadResult LoadNext(const QUrl& url);
+  // LoadResult LoadNext(const QUrl& url);
 
  private:
   SubsonicService* service_;
 };
 
-#endif // SUBSONICURLHANDLER_H
+#endif  // SUBSONICURLHANDLER_H

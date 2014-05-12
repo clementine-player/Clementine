@@ -15,27 +15,28 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "querygenerator.h"
 #include "searchpreview.h"
 #include "ui_searchpreview.h"
-#include "playlist/playlist.h"
+
+#include <memory>
 
 #include <QFutureWatcher>
 #include <QtConcurrentRun>
+
+#include "querygenerator.h"
+#include "playlist/playlist.h"
 
 namespace smart_playlists {
 
 typedef QFuture<PlaylistItemList> Future;
 typedef QFutureWatcher<PlaylistItemList> FutureWatcher;
 
-SearchPreview::SearchPreview(QWidget *parent)
-  : QWidget(parent),
-    ui_(new Ui_SmartPlaylistSearchPreview),
-    model_(NULL)
-{
+SearchPreview::SearchPreview(QWidget* parent)
+    : QWidget(parent), ui_(new Ui_SmartPlaylistSearchPreview), model_(nullptr) {
   ui_->setupUi(this);
 
-  // Prevent editing songs and saving settings (like header columns and geometry)
+  // Prevent editing songs and saving settings (like header columns and
+  // geometry)
   ui_->tree->setEditTriggers(QAbstractItemView::NoEditTriggers);
   ui_->tree->SetReadOnlySettings(true);
 
@@ -45,9 +46,7 @@ SearchPreview::SearchPreview(QWidget *parent)
   ui_->busy_container->hide();
 }
 
-SearchPreview::~SearchPreview() {
-  delete ui_;
-}
+SearchPreview::~SearchPreview() { delete ui_; }
 
 void SearchPreview::set_application(Application* app) {
   ui_->tree->SetApplication(app);
@@ -56,7 +55,7 @@ void SearchPreview::set_application(Application* app) {
 void SearchPreview::set_library(LibraryBackend* backend) {
   backend_ = backend;
 
-  model_ = new Playlist(NULL, NULL, backend_, -1, QString(), false, this);
+  model_ = new Playlist(nullptr, nullptr, backend_, -1, QString(), false, this);
   ui_->tree->setModel(model_);
   ui_->tree->SetPlaylist(model_);
   ui_->tree->SetItemDelegates(backend_);
@@ -87,14 +86,12 @@ void SearchPreview::showEvent(QShowEvent* e) {
   QWidget::showEvent(e);
 }
 
-PlaylistItemList DoRunSearch(GeneratorPtr gen) {
-  return gen->Generate();
-}
+PlaylistItemList DoRunSearch(GeneratorPtr gen) { return gen->Generate(); }
 
 void SearchPreview::RunSearch(const Search& search) {
   generator_.reset(new QueryGenerator);
   generator_->set_library(backend_);
-  boost::dynamic_pointer_cast<QueryGenerator>(generator_)->Load(search);
+  std::dynamic_pointer_cast<QueryGenerator>(generator_)->Load(search);
 
   ui_->busy_container->show();
   ui_->count_label->hide();
@@ -109,7 +106,8 @@ void SearchPreview::SearchFinished() {
   FutureWatcher* watcher = static_cast<FutureWatcher*>(sender());
   watcher->deleteLater();
 
-  last_search_ = boost::dynamic_pointer_cast<QueryGenerator>(generator_)->search();
+  last_search_ =
+      std::dynamic_pointer_cast<QueryGenerator>(generator_)->search();
   generator_.reset();
 
   if (pending_search_.is_valid() && pending_search_ != last_search_) {
@@ -128,7 +126,8 @@ void SearchPreview::SearchFinished() {
 
   if (displayed_items.count() < all_items.count()) {
     ui_->count_label->setText(tr("%1 songs found (showing %2)")
-        .arg(all_items.count()).arg(displayed_items.count()));
+                                  .arg(all_items.count())
+                                  .arg(displayed_items.count()));
   } else {
     ui_->count_label->setText(tr("%1 songs found").arg(all_items.count()));
   }
@@ -137,4 +136,4 @@ void SearchPreview::SearchFinished() {
   ui_->count_label->show();
 }
 
-} // namespace
+}  // namespace

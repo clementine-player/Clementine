@@ -24,10 +24,7 @@
 #include <QSettings>
 
 RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
-  : app_(app),
-    downloader_(false),
-    client_(client)
-{
+    : app_(app), downloader_(false), client_(client) {
   // Open the buffer
   buffer_.setData(QByteArray());
   buffer_.open(QIODevice::ReadWrite);
@@ -41,7 +38,7 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
 
   s.beginGroup(NetworkRemote::kSettingsGroup);
   use_auth_code_ = s.value("use_auth_code", false).toBool();
-  auth_code_     = s.value("auth_code", 0).toInt();
+  auth_code_ = s.value("auth_code", 0).toInt();
   allow_downloads_ = s.value("allow_downloads", false).toBool();
 
   s.endGroup();
@@ -50,15 +47,13 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
   authenticated_ = !use_auth_code_;
 }
 
-
 RemoteClient::~RemoteClient() {
   client_->close();
-  client_->waitForDisconnected(2000);
+  if (client_->state() == QAbstractSocket::ConnectedState)
+    client_->waitForDisconnected(2000);
 }
 
-void RemoteClient::setDownloader(bool downloader) {
-  downloader_ = downloader;
-}
+void RemoteClient::setDownloader(bool downloader) { downloader_ = downloader; }
 
 void RemoteClient::IncomingData() {
   while (client_->bytesAvailable()) {
@@ -80,8 +75,7 @@ void RemoteClient::IncomingData() {
     }
 
     // Read some of the message
-    buffer_.write(
-      client_->read(expected_length_ - buffer_.size()));
+    buffer_.write(client_->read(expected_length_ - buffer_.size()));
 
     // Did we get everything?
     if (buffer_.size() == expected_length_) {
@@ -97,7 +91,7 @@ void RemoteClient::IncomingData() {
   }
 }
 
-void RemoteClient::ParseMessage(const QByteArray &data) {
+void RemoteClient::ParseMessage(const QByteArray& data) {
   pb::remote::Message msg;
   if (!msg.ParseFromArray(data.constData(), data.size())) {
     qLog(Info) << "Couldn't parse data";
@@ -153,7 +147,7 @@ void RemoteClient::DisconnectClient(pb::remote::ReasonDisconnect reason) {
 }
 
 // Sends data to client without check if authenticated
-void RemoteClient::SendDataToClient(pb::remote::Message *msg) {
+void RemoteClient::SendDataToClient(pb::remote::Message* msg) {
   // Set the default version
   msg->set_version(msg->default_instance().version());
 
@@ -180,13 +174,11 @@ void RemoteClient::SendDataToClient(pb::remote::Message *msg) {
   }
 }
 
-void RemoteClient::SendData(pb::remote::Message *msg) {
+void RemoteClient::SendData(pb::remote::Message* msg) {
   // Check if client is authenticated before sending the data
   if (authenticated_) {
     SendDataToClient(msg);
   }
 }
 
-QAbstractSocket::SocketState RemoteClient::State() {
-  return client_->state();
-}
+QAbstractSocket::SocketState RemoteClient::State() { return client_->state(); }

@@ -15,20 +15,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include "test_utils.h"
 #include "gtest/gtest.h"
-
-#include "library/librarybackend.h"
-#include "library/library.h"
-#include "core/song.h"
-#include "core/database.h"
-
-#include <boost/scoped_ptr.hpp>
 
 #include <QFileInfo>
 #include <QSignalSpy>
 #include <QThread>
 #include <QtDebug>
+
+#include "library/librarybackend.h"
+#include "library/library.h"
+#include "core/song.h"
+#include "core/database.h"
 
 namespace {
 
@@ -53,8 +53,8 @@ class LibraryBackendTest : public ::testing::Test {
     return ret;
   }
 
-  boost::shared_ptr<Database> database_;
-  boost::scoped_ptr<LibraryBackend> backend_;
+  std::shared_ptr<Database> database_;
+  std::unique_ptr<LibraryBackend> backend_;
 };
 
 TEST_F(LibraryBackendTest, EmptyDatabase) {

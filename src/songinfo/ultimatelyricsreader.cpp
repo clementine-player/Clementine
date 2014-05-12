@@ -24,16 +24,12 @@
 #include <QXmlStreamReader>
 
 UltimateLyricsReader::UltimateLyricsReader(QObject* parent)
-  : QObject(parent),
-    thread_(qApp->thread())
-{
-}
+    : QObject(parent), thread_(qApp->thread()) {}
 
-void UltimateLyricsReader::SetThread(QThread *thread) {
-  thread_ = thread;
-}
+void UltimateLyricsReader::SetThread(QThread* thread) { thread_ = thread; }
 
-QList<SongInfoProvider*> UltimateLyricsReader::Parse(const QString& filename) const {
+QList<SongInfoProvider*> UltimateLyricsReader::Parse(const QString& filename)
+    const {
   QFile file(filename);
   if (!file.open(QIODevice::ReadOnly)) {
     qLog(Warning) << "Error opening" << filename;
@@ -43,7 +39,8 @@ QList<SongInfoProvider*> UltimateLyricsReader::Parse(const QString& filename) co
   return ParseDevice(&file);
 }
 
-QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(QIODevice* device) const {
+QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(QIODevice* device)
+    const {
   QList<SongInfoProvider*> ret;
 
   QXmlStreamReader reader(device);
@@ -62,7 +59,8 @@ QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(QIODevice* device) co
   return ret;
 }
 
-SongInfoProvider* UltimateLyricsReader::ParseProvider(QXmlStreamReader* reader) const {
+SongInfoProvider* UltimateLyricsReader::ParseProvider(QXmlStreamReader* reader)
+    const {
   QXmlStreamAttributes attributes = reader->attributes();
 
   UltimateLyricsProvider* scraper = new UltimateLyricsProvider;
@@ -74,8 +72,7 @@ SongInfoProvider* UltimateLyricsReader::ParseProvider(QXmlStreamReader* reader) 
   while (!reader->atEnd()) {
     reader->readNext();
 
-    if (reader->tokenType() == QXmlStreamReader::EndElement)
-      break;
+    if (reader->tokenType() == QXmlStreamReader::EndElement) break;
 
     if (reader->tokenType() == QXmlStreamReader::StartElement) {
       if (reader->name() == "extract")
@@ -85,34 +82,39 @@ SongInfoProvider* UltimateLyricsReader::ParseProvider(QXmlStreamReader* reader) 
       else if (reader->name() == "invalidIndicator")
         scraper->add_invalid_indicator(ParseInvalidIndicator(reader));
       else if (reader->name() == "urlFormat") {
-        scraper->add_url_format(reader->attributes().value("replace").toString(),
-                                reader->attributes().value("with").toString());
+        scraper->add_url_format(
+            reader->attributes().value("replace").toString(),
+            reader->attributes().value("with").toString());
         reader->skipCurrentElement();
-      }
-      else
+      } else
         reader->skipCurrentElement();
     }
   }
   return scraper;
 }
 
-UltimateLyricsProvider::Rule UltimateLyricsReader::ParseRule(QXmlStreamReader* reader) const {
+UltimateLyricsProvider::Rule UltimateLyricsReader::ParseRule(
+    QXmlStreamReader* reader) const {
   UltimateLyricsProvider::Rule ret;
 
   while (!reader->atEnd()) {
     reader->readNext();
 
-    if (reader->tokenType() == QXmlStreamReader::EndElement)
-      break;
+    if (reader->tokenType() == QXmlStreamReader::EndElement) break;
 
     if (reader->tokenType() == QXmlStreamReader::StartElement) {
       if (reader->name() == "item") {
         QXmlStreamAttributes attr = reader->attributes();
         if (attr.hasAttribute("tag"))
-          ret << UltimateLyricsProvider::RuleItem(attr.value("tag").toString(), QString());
+          ret << UltimateLyricsProvider::RuleItem(attr.value("tag").toString(),
+                                                  QString());
+        else if (attr.hasAttribute("url"))
+          ret << UltimateLyricsProvider::RuleItem(attr.value("url").toString(),
+                                                  QString());
         else if (attr.hasAttribute("begin"))
-          ret << UltimateLyricsProvider::RuleItem(attr.value("begin").toString(),
-                                                  attr.value("end").toString());
+          ret << UltimateLyricsProvider::RuleItem(
+                     attr.value("begin").toString(),
+                     attr.value("end").toString());
       }
       reader->skipCurrentElement();
     }
@@ -120,9 +122,9 @@ UltimateLyricsProvider::Rule UltimateLyricsReader::ParseRule(QXmlStreamReader* r
   return ret;
 }
 
-QString UltimateLyricsReader::ParseInvalidIndicator(QXmlStreamReader* reader) const {
+QString UltimateLyricsReader::ParseInvalidIndicator(QXmlStreamReader* reader)
+    const {
   QString ret = reader->attributes().value("value").toString();
   reader->skipCurrentElement();
   return ret;
 }
-

@@ -11,9 +11,7 @@
 #include "core/closure.h"
 
 LocalRedirectServer::LocalRedirectServer(QObject* parent)
-  : QObject(parent),
-    server_(new QTcpServer(this)) {
-}
+    : QObject(parent), server_(new QTcpServer(this)) {}
 
 void LocalRedirectServer::Listen() {
   server_->listen(QHostAddress::LocalHost);
@@ -31,8 +29,8 @@ void LocalRedirectServer::NewConnection() {
   server_->close();
 
   QByteArray buffer;
-  NewClosure(socket, SIGNAL(readyRead()),
-             this, SLOT(ReadyRead(QTcpSocket*,QByteArray)), socket, buffer);
+  NewClosure(socket, SIGNAL(readyRead()), this,
+             SLOT(ReadyRead(QTcpSocket*, QByteArray)), socket, buffer);
 }
 
 void LocalRedirectServer::ReadyRead(QTcpSocket* socket, QByteArray buffer) {
@@ -43,8 +41,8 @@ void LocalRedirectServer::ReadyRead(QTcpSocket* socket, QByteArray buffer) {
     request_url_ = ParseUrlFromRequest(buffer);
     emit Finished();
   } else {
-    NewClosure(socket, SIGNAL(readyRead()),
-               this, SLOT(ReadyReady(QTcpSocket*,QByteArray)), socket, buffer);
+    NewClosure(socket, SIGNAL(readyRead()), this,
+               SLOT(ReadyReady(QTcpSocket*, QByteArray)), socket, buffer);
   }
 }
 
@@ -68,8 +66,11 @@ void LocalRedirectServer::WriteTemplate(QTcpSocket* socket) const {
 
   QBuffer image_buffer;
   image_buffer.open(QIODevice::ReadWrite);
-  QApplication::style()->standardIcon(QStyle::SP_DialogOkButton)
-      .pixmap(16).toImage().save(&image_buffer, "PNG");
+  QApplication::style()
+      ->standardIcon(QStyle::SP_DialogOkButton)
+      .pixmap(16)
+      .toImage()
+      .save(&image_buffer, "PNG");
   page_data.replace("@IMAGE_DATA@", image_buffer.data().toBase64());
 
   socket->write("HTTP/1.0 200 OK\r\n");

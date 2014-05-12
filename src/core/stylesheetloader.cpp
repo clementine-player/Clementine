@@ -21,18 +21,15 @@
 #include <QFile>
 #include <QEvent>
 
-StyleSheetLoader::StyleSheetLoader(QObject* parent)
-  : QObject(parent)
-{
-}
+StyleSheetLoader::StyleSheetLoader(QObject* parent) : QObject(parent) {}
 
-void StyleSheetLoader::SetStyleSheet(QWidget* widget, const QString &filename) {
+void StyleSheetLoader::SetStyleSheet(QWidget* widget, const QString& filename) {
   filenames_[widget] = filename;
   widget->installEventFilter(this);
   UpdateStyleSheet(widget);
 }
 
-void StyleSheetLoader::UpdateStyleSheet(QWidget *widget) {
+void StyleSheetLoader::UpdateStyleSheet(QWidget* widget) {
   QString filename(filenames_[widget]);
 
   // Load the file
@@ -43,14 +40,16 @@ void StyleSheetLoader::UpdateStyleSheet(QWidget *widget) {
   }
   QString contents(file.readAll());
 
-
   // Replace %palette-role with actual colours
   QPalette p(widget->palette());
 
   QColor alt = p.color(QPalette::AlternateBase);
   alt.setAlpha(50);
   contents.replace("%palette-alternate-base", QString("rgba(%1,%2,%3,%4%)")
-      .arg(alt.red()).arg(alt.green()).arg(alt.blue()).arg(alt.alpha()));
+                                                  .arg(alt.red())
+                                                  .arg(alt.green())
+                                                  .arg(alt.blue())
+                                                  .arg(alt.alpha()));
 
   ReplaceColor(&contents, "Window", p, QPalette::Window);
   ReplaceColor(&contents, "Background", p, QPalette::Background);
@@ -88,17 +87,15 @@ void StyleSheetLoader::ReplaceColor(QString* css, const QString& name,
                palette.color(role).lighter().name(), Qt::CaseInsensitive);
   css->replace("%palette-" + name + "-darker",
                palette.color(role).darker().name(), Qt::CaseInsensitive);
-  css->replace("%palette-" + name,
-               palette.color(role).name(), Qt::CaseInsensitive);
+  css->replace("%palette-" + name, palette.color(role).name(),
+               Qt::CaseInsensitive);
 }
 
 bool StyleSheetLoader::eventFilter(QObject* obj, QEvent* event) {
-  if (event->type() != QEvent::PaletteChange)
-    return false;
+  if (event->type() != QEvent::PaletteChange) return false;
 
   QWidget* widget = qobject_cast<QWidget*>(obj);
-  if (!widget || !filenames_.contains(widget))
-    return false;
+  if (!widget || !filenames_.contains(widget)) return false;
 
   UpdateStyleSheet(widget);
   return false;

@@ -22,25 +22,14 @@
 #include "internet/internetplaylistitem.h"
 
 GroovesharkRadio::GroovesharkRadio(GroovesharkService* service)
-  : service_(service),
-    tag_id_(0),
-    use_tag_(false),
-    first_time_(true) {
-}
+    : service_(service), tag_id_(0), use_tag_(false), first_time_(true) {}
 
 GroovesharkRadio::GroovesharkRadio(GroovesharkService* service, int tag_id)
-  : service_(service),
-    tag_id_(tag_id),
-    use_tag_(true),
-    first_time_(true) {
-}
+    : service_(service), tag_id_(tag_id), use_tag_(true), first_time_(true) {}
 
-void GroovesharkRadio::Load(const QByteArray& data) {
-}
+void GroovesharkRadio::Load(const QByteArray& data) {}
 
-QByteArray GroovesharkRadio::Save() const {
-  return QByteArray();
-}
+QByteArray GroovesharkRadio::Save() const { return QByteArray(); }
 
 PlaylistItemList GroovesharkRadio::Generate() {
   PlaylistItemList items;
@@ -55,7 +44,8 @@ PlaylistItemList GroovesharkRadio::Generate() {
     if (!song.is_valid()) {
       return items;
     }
-    PlaylistItemPtr playlist_item = PlaylistItemPtr(new InternetPlaylistItem(service_, song));
+    PlaylistItemPtr playlist_item =
+        PlaylistItemPtr(new InternetPlaylistItem(service_, song));
     items << playlist_item;
     first_time_ = false;
   }
@@ -63,7 +53,8 @@ PlaylistItemList GroovesharkRadio::Generate() {
   if (!song.is_valid()) {
     return items;
   }
-  PlaylistItemPtr playlist_item = PlaylistItemPtr(new InternetPlaylistItem(service_, song));
+  PlaylistItemPtr playlist_item =
+      PlaylistItemPtr(new InternetPlaylistItem(service_, song));
   items << playlist_item;
   return items;
 }

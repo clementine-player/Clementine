@@ -52,6 +52,7 @@ enum MsgType {
   SONG_FILE_CHUNK = 50;
   DOWNLOAD_QUEUE_EMPTY = 51;
   LIBRARY_CHUNK = 52;
+  DOWNLOAD_TOTAL_SIZE = 53;
 }
 
 // Valid Engine states
@@ -81,6 +82,7 @@ message SongMetadata {
   optional bool is_local = 15;
   optional string filename = 16;
   optional int32 file_size = 17;
+  optional float rating = 18; // 0 (0 stars) to 1 (5 stars)
 }
 
 // Playlist informations
@@ -242,10 +244,12 @@ enum DownloadItem {
   CurrentItem = 1;
   ItemAlbum = 2;
   APlaylist = 3;
+  Urls = 4;
 }
 message RequestDownloadSongs {
   optional DownloadItem download_item = 1;
   optional int32 playlist_id = 2;
+  repeated string urls = 3;
 }
 
 message ResponseSongFileChunk {
@@ -256,6 +260,7 @@ message ResponseSongFileChunk {
   optional SongMetadata song_metadata = 6; // only sent with first chunk!
   optional bytes data = 7;
   optional int32 size = 8;
+  optional bytes file_hash = 9;
 }
 
 message ResponseLibraryChunk {
@@ -263,6 +268,7 @@ message ResponseLibraryChunk {
   optional int32 chunk_count = 2;
   optional bytes data = 3;
   optional int32 size = 4;
+  optional bytes file_hash = 5;
 }
 
 message ResponseSongOffer {
@@ -270,12 +276,17 @@ message ResponseSongOffer {
 }
 
 message RequestRateSong {
-  optional int32 rating = 1; // 0 to 5
+  optional float rating = 1; // 0 to 1
+}
+
+message ResponseDownloadTotalSize {
+  optional int32 total_size = 1;
+  optional int32 file_count = 2;
 }
 
 // The message itself
 message Message {
-  optional int32 version = 1 [default=10];
+  optional int32 version = 1 [default=16];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
@@ -306,4 +317,5 @@ message Message {
   optional ResponseSongFileChunk response_song_file_chunk = 32;
   optional ResponseSongOffer response_song_offer = 33;
   optional ResponseLibraryChunk response_library_chunk = 34;
+  optional ResponseDownloadTotalSize response_download_total_size = 36;
 }

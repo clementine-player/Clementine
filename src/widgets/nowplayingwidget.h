@@ -18,12 +18,12 @@
 #ifndef NOWPLAYINGWIDGET_H
 #define NOWPLAYINGWIDGET_H
 
-#include "core/song.h"
-#include "covers/albumcoverloaderoptions.h"
+#include <memory>
 
 #include <QWidget>
 
-#include <boost/scoped_ptr.hpp>
+#include "core/song.h"
+#include "covers/albumcoverloaderoptions.h"
 
 class AlbumCoverChoiceController;
 class Application;
@@ -41,8 +41,8 @@ class QTimeLine;
 class NowPlayingWidget : public QWidget {
   Q_OBJECT
 
-public:
-  NowPlayingWidget(QWidget* parent = 0);
+ public:
+  NowPlayingWidget(QWidget* parent = nullptr);
   ~NowPlayingWidget();
 
   static const char* kSettingsGroup;
@@ -54,10 +54,7 @@ public:
   static const int kTopBorder;
 
   // Values are saved in QSettings
-  enum Mode {
-    SmallSongDetails = 0,
-    LargeSongDetails = 1,
-  };
+  enum Mode { SmallSongDetails = 0, LargeSongDetails = 1, };
 
   void SetApplication(Application* app);
 
@@ -69,23 +66,24 @@ public:
 signals:
   void ShowAboveStatusBarChanged(bool above);
 
-public slots:
+ public slots:
   void Stopped();
   void AllHail(bool hypnotoad);
   void EnableKittens(bool aww);
 
-protected:
+ protected:
   void paintEvent(QPaintEvent* e);
   void resizeEvent(QResizeEvent*);
   void contextMenuEvent(QContextMenuEvent* e);
   void dragEnterEvent(QDragEnterEvent* e);
   void dropEvent(QDropEvent* e);
 
-private slots:
+ private slots:
   void SetMode(int mode);
   void ShowAboveStatusBar(bool above);
 
-  void AlbumArtLoaded(const Song& metadata, const QString& uri, const QImage& image);
+  void AlbumArtLoaded(const Song& metadata, const QString& uri,
+                      const QImage& image);
   void KittenLoaded(quint64 id, const QImage& image);
 
   void SetVisible(bool visible);
@@ -99,10 +97,13 @@ private slots:
   void SearchForCover();
   void UnsetCover();
   void ShowCover();
+  void SearchCoverAutomatically();
 
   void Bask();
 
-private:
+  void AutomaticCoverSearchDone();
+
+ private:
   void CreateModeAction(Mode mode, const QString& text, QActionGroup* group,
                         QSignalMapper* mapper);
   void UpdateDetailsText();
@@ -110,8 +111,9 @@ private:
   void DrawContents(QPainter* p);
   void SetImage(const QImage& image);
   void ScaleCover();
+  bool GetCoverAutomatically();
 
-private:
+ private:
   Application* app_;
   AlbumCoverChoiceController* album_cover_choice_controller_;
 
@@ -141,12 +143,15 @@ private:
 
   static const char* kHypnotoadPath;
   QAction* bask_in_his_glory_action_;
-  boost::scoped_ptr<QMovie> hypnotoad_;
-  boost::scoped_ptr<FullscreenHypnotoad> big_hypnotoad_;
+  std::unique_ptr<QMovie> hypnotoad_;
+  std::unique_ptr<FullscreenHypnotoad> big_hypnotoad_;
+
+  std::unique_ptr<QMovie> spinner_animation_;
+  bool downloading_covers_;
 
   bool aww_;
   KittenLoader* kittens_;
   quint64 pending_kitten_;
 };
 
-#endif // NOWPLAYINGWIDGET_H
+#endif  // NOWPLAYINGWIDGET_H

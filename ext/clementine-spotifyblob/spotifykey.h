@@ -18,16 +18,20 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-
 // The Spotify terms of service require that application keys are not
 // accessible to third parties.  Therefore this application key is heavily
 // encrypted here in the source to prevent third parties from viewing it.
 // It is most definitely not base64 encoded.
 
 static const char* kSpotifyApiKey =
-  "AVlOrvJkKx8T+LEsCk+Kyl24I0MSsjohZAtMFzm2O5Lms1bmAWFWgdZaHkpypzSJPmSd+Wi50wwg"
-  "JwVCU0sq4Lep1zB4t6Z8h26NK6+z8gmkHVkV9DRPkRgebcUkWTDTflwVPKWF4+gdRjUwprsqBw6O"
-  "iofRLJzeKaxbmaUGqkSkxVLOiXC9lxylNq6ju7Q7uY8u8XkDUsVM3YIxiWy2+EM7I/lhatzT9xrq"
-  "rxHe2lg7CzOwF5kuFdwgmi8MQ72xTYXIKnNlOry/hJDlN9lKxkbUBLh+pzbYvO92S2fYKK5PAHvX"
-  "5+SmSBGbh6dlpHeCGqb8MPdaeZ5I1YxMcDkxa2+tbLA/Muat7gKA9u57TFCtYjun/u/i/ONwdBIQ"
-  "rePzXZjipO32kYmQAiCkN1p8sgQEcF43QxaVwXGo2X0rRnJf";
+    "AVlOrvJkKx8T+LEsCk+Kyl24I0MSsjohZAtMFzm2O5Lms1bmAWFWgdZaHkpypzSJPmSd+"
+    "Wi50wwg"
+    "JwVCU0sq4Lep1zB4t6Z8h26NK6+z8gmkHVkV9DRPkRgebcUkWTDTflwVPKWF4+"
+    "gdRjUwprsqBw6O"
+    "iofRLJzeKaxbmaUGqkSkxVLOiXC9lxylNq6ju7Q7uY8u8XkDUsVM3YIxiWy2+EM7I/"
+    "lhatzT9xrq"
+    "rxHe2lg7CzOwF5kuFdwgmi8MQ72xTYXIKnNlOry/"
+    "hJDlN9lKxkbUBLh+pzbYvO92S2fYKK5PAHvX"
+    "5+SmSBGbh6dlpHeCGqb8MPdaeZ5I1YxMcDkxa2+tbLA/Muat7gKA9u57TFCtYjun/u/i/"
+    "ONwdBIQ"
+    "rePzXZjipO32kYmQAiCkN1p8sgQEcF43QxaVwXGo2X0rRnJf";

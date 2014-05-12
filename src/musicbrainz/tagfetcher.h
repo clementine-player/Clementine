@@ -32,12 +32,12 @@ class TagFetcher : public QObject {
   // High level interface to Fingerprinter, AcoustidClient and
   // MusicBrainzClient.
 
-public:
-  TagFetcher(QObject* parent = 0);
+ public:
+  TagFetcher(QObject* parent = nullptr);
 
   void StartFetch(const SongList& songs);
 
-public slots:
+ public slots:
   void Cancel();
 
 signals:
@@ -45,12 +45,12 @@ signals:
   void ResultAvailable(const Song& original_song,
                        const SongList& songs_guessed);
 
-private slots:
+ private slots:
   void FingerprintFound(int index);
   void PuidFound(int index, const QString& puid);
   void TagsFetched(int index, const MusicBrainzClient::ResultList& result);
 
-private:
+ private:
   static QString GetFingerprint(const Song& song);
 
   QFutureWatcher<QString>* fingerprint_watcher_;
@@ -60,4 +60,4 @@ private:
   SongList songs_;
 };
 
-#endif // TAGFETCHER_H
+#endif  // TAGFETCHER_H

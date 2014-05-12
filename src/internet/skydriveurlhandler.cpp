@@ -2,12 +2,9 @@
 
 #include "skydriveservice.h"
 
-SkydriveUrlHandler::SkydriveUrlHandler(
-    SkydriveService* service,
-    QObject* parent)
-  : UrlHandler(parent),
-    service_(service) {
-}
+SkydriveUrlHandler::SkydriveUrlHandler(SkydriveService* service,
+                                       QObject* parent)
+    : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult SkydriveUrlHandler::StartLoading(const QUrl& url) {
   QString file_id(url.path());

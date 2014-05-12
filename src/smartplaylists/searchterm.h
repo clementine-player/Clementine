@@ -24,7 +24,7 @@
 namespace smart_playlists {
 
 class SearchTerm {
-public:
+ public:
   // These values are persisted, so add to the end of the enum only
   enum Field {
     Field_Title = 0,
@@ -52,7 +52,6 @@ public:
     Field_Filepath,
     Field_Performer,
     Field_Grouping,
-
     FieldCount
   };
 
@@ -89,18 +88,11 @@ public:
     Type_Time,
     Type_Number,
     Type_Rating,
-
     Type_Invalid
   };
 
   // These values are persisted, so add to the end of the enum only
-  enum DateType {
-    Date_Hour = 0,
-    Date_Day,
-    Date_Week,
-    Date_Month,
-    Date_Year,
-  };
+  enum DateType { Date_Hour = 0, Date_Day, Date_Week, Date_Month, Date_Year, };
 
   SearchTerm();
   SearchTerm(Field field, Operator op, const QVariant& value);
@@ -109,13 +101,14 @@ public:
   Operator operator_;
   QVariant value_;
   DateType date_;
-  // For relative dates, we need a second parameter, might be useful somewhere else
+  // For relative dates, we need a second parameter, might be useful somewhere
+  // else
   QVariant second_value_;
 
   QString ToSql() const;
   bool is_valid() const;
-  bool operator ==(const SearchTerm& other) const;
-  bool operator !=(const SearchTerm& other) const { return !(*this == other); }
+  bool operator==(const SearchTerm& other) const;
+  bool operator!=(const SearchTerm& other) const { return !(*this == other); }
 
   static Type TypeOf(Field field);
   static QList<Operator> OperatorsForType(Type type);
@@ -128,9 +121,10 @@ public:
 
 typedef QList<SearchTerm::Operator> OperatorList;
 
-} // namespace
+}  // namespace
 
-QDataStream& operator <<(QDataStream& s, const smart_playlists::SearchTerm& term);
-QDataStream& operator >>(QDataStream& s, smart_playlists::SearchTerm& term);
+QDataStream& operator<<(QDataStream& s,
+                        const smart_playlists::SearchTerm& term);
+QDataStream& operator>>(QDataStream& s, smart_playlists::SearchTerm& term);
 
-#endif // SMARTPLAYLISTSEARCHTERM_H
+#endif  // SMARTPLAYLISTSEARCHTERM_H

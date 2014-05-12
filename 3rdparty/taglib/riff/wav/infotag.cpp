@@ -185,6 +185,11 @@ bool RIFF::Info::Tag::isEmpty() const
   return d->fieldListMap.isEmpty();
 }
 
+FieldListMap RIFF::Info::Tag::fieldListMap() const
+{
+  return d->fieldListMap;
+}
+
 String RIFF::Info::Tag::fieldText(const ByteVector &id) const
 {
   if(d->fieldListMap.contains(id))

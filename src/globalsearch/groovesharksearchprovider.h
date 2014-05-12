@@ -28,7 +28,7 @@ class GroovesharkSearchProvider : public SearchProvider {
   Q_OBJECT
 
  public:
-  explicit GroovesharkSearchProvider(Application* app, QObject* parent = 0);
+  explicit GroovesharkSearchProvider(Application* app, QObject* parent = nullptr);
   void Init(GroovesharkService* service);
 
   // SearchProvider

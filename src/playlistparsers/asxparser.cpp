@@ -28,11 +28,9 @@
 #include <QtDebug>
 
 ASXParser::ASXParser(LibraryBackendInterface* library, QObject* parent)
-    : XMLParser(library, parent)
-{
-}
+    : XMLParser(library, parent) {}
 
-SongList ASXParser::Load(QIODevice *device, const QString& playlist_path,
+SongList ASXParser::Load(QIODevice* device, const QString& playlist_path,
                          const QDir& dir) const {
   // We have to load everything first so we can munge the "XML".
   QByteArray data = device->readAll();
@@ -80,7 +78,6 @@ SongList ASXParser::Load(QIODevice *device, const QString& playlist_path,
   return ret;
 }
 
-
 Song ASXParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
   QString title, artist, album, ref;
 
@@ -120,14 +117,16 @@ return_song:
   return song;
 }
 
-void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&) const {
+void ASXParser::Save(const SongList& songs, QIODevice* device,
+                     const QDir&) const {
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
+  writer.setAutoFormattingIndent(2);
   writer.writeStartDocument();
   {
     StreamElement asx("asx", &writer);
     writer.writeAttribute("version", "3.0");
-    foreach (const Song& song, songs) {
+    for (const Song& song : songs) {
       StreamElement entry("entry", &writer);
       writer.writeTextElement("title", song.title());
       {
@@ -142,6 +141,6 @@ void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&) cons
   writer.writeEndDocument();
 }
 
-bool ASXParser::TryMagic(const QByteArray &data) const {
+bool ASXParser::TryMagic(const QByteArray& data) const {
   return data.toLower().contains("<asx");
 }

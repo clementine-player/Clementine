@@ -25,6 +25,8 @@
 
 #include <boost/scope_exit.hpp>
 
+#include <sqlite3.h>
+
 #include <QCoreApplication>
 #include <QDir>
 #include <QLibrary>
@@ -44,87 +46,59 @@ int Database::sNextConnectionId = 1;
 QMutex Database::sNextConnectionIdMutex;
 
 Database::Token::Token(const QString& token, int start, int end)
-    : token(token),
-      start_offset(start),
-      end_offset(end) {
-}
+    : token(token), start_offset(start), end_offset(end) {}
 
 struct sqlite3_tokenizer_module {
   int iVersion;
-  int (*xCreate)(
-    int argc,                           /* Size of argv array */
-    const char *const*argv,             /* Tokenizer argument strings */
-    sqlite3_tokenizer **ppTokenizer     /* OUT: Created tokenizer */
-  );
+  int (*xCreate)(int argc,                /* Size of argv array */
+                 const char* const* argv, /* Tokenizer argument strings */
+                 sqlite3_tokenizer** ppTokenizer); /* OUT: Created tokenizer */
 
-  int (*xDestroy)(sqlite3_tokenizer *pTokenizer);
+  int (*xDestroy)(sqlite3_tokenizer* pTokenizer);
 
   int (*xOpen)(
-    sqlite3_tokenizer *pTokenizer,       /* Tokenizer object */
-    const char *pInput, int nBytes,      /* Input buffer */
-    sqlite3_tokenizer_cursor **ppCursor  /* OUT: Created tokenizer cursor */
-  );
+      sqlite3_tokenizer* pTokenizer,        /* Tokenizer object */
+      const char* pInput, int nBytes,       /* Input buffer */
+      sqlite3_tokenizer_cursor** ppCursor); /* OUT: Created tokenizer cursor */
 
-  int (*xClose)(sqlite3_tokenizer_cursor *pCursor);
+  int (*xClose)(sqlite3_tokenizer_cursor* pCursor);
 
   int (*xNext)(
-    sqlite3_tokenizer_cursor *pCursor,   /* Tokenizer cursor */
-    const char **ppToken, int *pnBytes,  /* OUT: Normalized text for token */
-    int *piStartOffset,  /* OUT: Byte offset of token in input buffer */
-    int *piEndOffset,    /* OUT: Byte offset of end of token in input buffer */
-    int *piPosition      /* OUT: Number of tokens returned before this one */
-  );
+      sqlite3_tokenizer_cursor* pCursor,  /* Tokenizer cursor */
+      const char** ppToken, int* pnBytes, /* OUT: Normalized text for token */
+      int* piStartOffset, /* OUT: Byte offset of token in input buffer */
+      int* piEndOffset,   /* OUT: Byte offset of end of token in input buffer */
+      int* piPosition);   /* OUT: Number of tokens returned before this one */
 };
 
 struct sqlite3_tokenizer {
-  const sqlite3_tokenizer_module *pModule;  /* The module for this tokenizer */
+  const sqlite3_tokenizer_module* pModule; /* The module for this tokenizer */
   /* Tokenizer implementations will typically add additional fields */
 };
 
 struct sqlite3_tokenizer_cursor {
-  sqlite3_tokenizer *pTokenizer;       /* Tokenizer for this cursor. */
+  sqlite3_tokenizer* pTokenizer; /* Tokenizer for this cursor. */
   /* Tokenizer implementations will typically add additional fields */
 };
 
-int (*Database::_sqlite3_value_type) (sqlite3_value*) = NULL;
-sqlite_int64 (*Database::_sqlite3_value_int64) (sqlite3_value*) = NULL;
-const uchar* (*Database::_sqlite3_value_text) (sqlite3_value*) = NULL;
-void (*Database::_sqlite3_result_int64) (sqlite3_context*, sqlite_int64) = NULL;
-void* (*Database::_sqlite3_user_data) (sqlite3_context*) = NULL;
+sqlite3_tokenizer_module* Database::sFTSTokenizer = nullptr;
 
-int (*Database::_sqlite3_open) (const char*, sqlite3**) = NULL;
-const char* (*Database::_sqlite3_errmsg) (sqlite3*) = NULL;
-int (*Database::_sqlite3_close) (sqlite3*) = NULL;
-sqlite3_backup* (*Database::_sqlite3_backup_init) (
-    sqlite3*, const char*, sqlite3*, const char*) = NULL;
-int (*Database::_sqlite3_backup_step) (sqlite3_backup*, int) = NULL;
-int (*Database::_sqlite3_backup_finish) (sqlite3_backup*) = NULL;
-int (*Database::_sqlite3_backup_pagecount) (sqlite3_backup*) = NULL;
-int (*Database::_sqlite3_backup_remaining) (sqlite3_backup*) = NULL;
-
-bool Database::sStaticInitDone = false;
-bool Database::sLoadedSqliteSymbols = false;
-
-sqlite3_tokenizer_module* Database::sFTSTokenizer = NULL;
-
-
-int Database::FTSCreate(int argc, const char* const* argv, sqlite3_tokenizer** tokenizer) {
+int Database::FTSCreate(int argc, const char* const* argv,
+                        sqlite3_tokenizer** tokenizer) {
   *tokenizer = reinterpret_cast<sqlite3_tokenizer*>(new UnicodeTokenizer);
 
   return SQLITE_OK;
 }
 
 int Database::FTSDestroy(sqlite3_tokenizer* tokenizer) {
-  UnicodeTokenizer* real_tokenizer = reinterpret_cast<UnicodeTokenizer*>(tokenizer);
+  UnicodeTokenizer* real_tokenizer =
+      reinterpret_cast<UnicodeTokenizer*>(tokenizer);
   delete real_tokenizer;
   return SQLITE_OK;
 }
 
-int Database::FTSOpen(
-    sqlite3_tokenizer* pTokenizer,
-    const char* input,
-    int bytes,
-    sqlite3_tokenizer_cursor** cursor) {
+int Database::FTSOpen(sqlite3_tokenizer* pTokenizer, const char* input,
+                      int bytes, sqlite3_tokenizer_cursor** cursor) {
   UnicodeTokenizerCursor* new_cursor = new UnicodeTokenizerCursor;
   new_cursor->pTokenizer = pTokenizer;
   new_cursor->position = 0;
@@ -183,20 +157,18 @@ int Database::FTSOpen(
 }
 
 int Database::FTSClose(sqlite3_tokenizer_cursor* cursor) {
-  UnicodeTokenizerCursor* real_cursor = reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
+  UnicodeTokenizerCursor* real_cursor =
+      reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
   delete real_cursor;
 
   return SQLITE_OK;
 }
 
-int Database::FTSNext(
-    sqlite3_tokenizer_cursor* cursor,
-    const char** token,
-    int* bytes,
-    int* start_offset,
-    int* end_offset,
-    int* position) {
-  UnicodeTokenizerCursor* real_cursor = reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
+int Database::FTSNext(sqlite3_tokenizer_cursor* cursor, const char** token,
+                      int* bytes, int* start_offset, int* end_offset,
+                      int* position) {
+  UnicodeTokenizerCursor* real_cursor =
+      reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
 
   QList<Token> tokens = real_cursor->tokens;
   if (real_cursor->position >= tokens.size()) {
@@ -216,13 +188,7 @@ int Database::FTSNext(
   return SQLITE_OK;
 }
 
-
 void Database::StaticInit() {
-  if (sStaticInitDone) {
-    return;
-  }
-  sStaticInitDone = true;
-
   sFTSTokenizer = new sqlite3_tokenizer_module;
   sFTSTokenizer->iVersion = 0;
   sFTSTokenizer->xCreate = &Database::FTSCreate;
@@ -230,106 +196,27 @@ void Database::StaticInit() {
   sFTSTokenizer->xOpen = &Database::FTSOpen;
   sFTSTokenizer->xNext = &Database::FTSNext;
   sFTSTokenizer->xClose = &Database::FTSClose;
-
-#ifdef HAVE_STATIC_SQLITE
-  // We statically link libqsqlite.dll on windows and mac so these symbols are already
-  // available
-  _sqlite3_value_type = sqlite3_value_type;
-  _sqlite3_value_int64 = sqlite3_value_int64;
-  _sqlite3_value_text = sqlite3_value_text;
-  _sqlite3_result_int64 = sqlite3_result_int64;
-  _sqlite3_user_data = sqlite3_user_data;
-
-  _sqlite3_open = sqlite3_open;
-  _sqlite3_errmsg = sqlite3_errmsg;
-  _sqlite3_close = sqlite3_close;
-  _sqlite3_backup_init = sqlite3_backup_init;
-  _sqlite3_backup_step = sqlite3_backup_step;
-  _sqlite3_backup_finish = sqlite3_backup_finish;
-  _sqlite3_backup_pagecount = sqlite3_backup_pagecount;
-  _sqlite3_backup_remaining = sqlite3_backup_remaining;
-
-  sLoadedSqliteSymbols = true;
   return;
-#else // HAVE_STATIC_SQLITE
-  QString plugin_path = QLibraryInfo::location(QLibraryInfo::PluginsPath) +
-                        "/sqldrivers/libqsqlite";
-
-  QLibrary library(plugin_path);
-  if (!library.load()) {
-    qLog(Error) << "QLibrary::load() failed for " << plugin_path;
-    return;
-  }
-
-  _sqlite3_value_type = reinterpret_cast<int (*) (sqlite3_value*)>(
-      library.resolve("sqlite3_value_type"));
-  _sqlite3_value_int64 = reinterpret_cast<sqlite_int64 (*) (sqlite3_value*)>(
-      library.resolve("sqlite3_value_int64"));
-  _sqlite3_value_text = reinterpret_cast<const uchar* (*) (sqlite3_value*)>(
-      library.resolve("sqlite3_value_text"));
-  _sqlite3_result_int64 = reinterpret_cast<void (*) (sqlite3_context*, sqlite_int64)>(
-      library.resolve("sqlite3_result_int64"));
-  _sqlite3_user_data = reinterpret_cast<void* (*) (sqlite3_context*)>(
-      library.resolve("sqlite3_user_data"));
-
-  _sqlite3_open = reinterpret_cast<int (*) (const char*, sqlite3**)>(
-      library.resolve("sqlite3_open"));
-  _sqlite3_errmsg = reinterpret_cast<const char* (*) (sqlite3*)>(
-      library.resolve("sqlite3_errmsg"));
-  _sqlite3_close = reinterpret_cast<int (*) (sqlite3*)>(
-      library.resolve("sqlite3_close"));
-  _sqlite3_backup_init = reinterpret_cast<
-      sqlite3_backup* (*) (sqlite3*, const char*, sqlite3*, const char*)>(
-          library.resolve("sqlite3_backup_init"));
-  _sqlite3_backup_step = reinterpret_cast<int (*) (sqlite3_backup*, int)>(
-      library.resolve("sqlite3_backup_step"));
-  _sqlite3_backup_finish = reinterpret_cast<int (*) (sqlite3_backup*)>(
-      library.resolve("sqlite3_backup_finish"));
-  _sqlite3_backup_pagecount = reinterpret_cast<int (*) (sqlite3_backup*)>(
-      library.resolve("sqlite3_backup_pagecount"));
-  _sqlite3_backup_remaining = reinterpret_cast<int (*) (sqlite3_backup*)>(
-      library.resolve("sqlite3_backup_remaining"));
-
-  if (!_sqlite3_value_type ||
-      !_sqlite3_value_int64 ||
-      !_sqlite3_value_text ||
-      !_sqlite3_result_int64 ||
-      !_sqlite3_user_data ||
-      !_sqlite3_open ||
-      !_sqlite3_errmsg ||
-      !_sqlite3_close ||
-      !_sqlite3_backup_init ||
-      !_sqlite3_backup_step ||
-      !_sqlite3_backup_finish ||
-      !_sqlite3_backup_pagecount ||
-      !_sqlite3_backup_remaining) {
-    qLog(Fatal) << "Couldn't resolve sqlite symbols.  Please compile "
-                   "Clementine with -DSTATIC_SQLITE=ON.";
-    sLoadedSqliteSymbols = false;
-  } else {
-    sLoadedSqliteSymbols = true;
-  }
-#endif
 }
 
-Database::Database(Application* app, QObject* parent, const QString& database_name)
-  : QObject(parent),
-    app_(app),
-    mutex_(QMutex::Recursive),
-    injected_database_name_(database_name),
-    query_hash_(0),
-    startup_schema_version_(-1)
-{
+Database::Database(Application* app, QObject* parent,
+                   const QString& database_name)
+    : QObject(parent),
+      app_(app),
+      mutex_(QMutex::Recursive),
+      injected_database_name_(database_name),
+      query_hash_(0),
+      startup_schema_version_(-1) {
   {
     QMutexLocker l(&sNextConnectionIdMutex);
-    connection_id_ = sNextConnectionId ++;
+    connection_id_ = sNextConnectionId++;
   }
 
-  directory_ = QDir::toNativeSeparators(
-      Utilities::GetConfigPath(Utilities::Path_Root));
+  directory_ =
+      QDir::toNativeSeparators(Utilities::GetConfigPath(Utilities::Path_Root));
 
   attached_databases_["jamendo"] = AttachedDatabase(
-        directory_ + "/jamendo.db", ":/schema/jamendo.sql", false);
+      directory_ + "/jamendo.db", ":/schema/jamendo.sql", false);
 
   QMutexLocker l(&mutex_);
   Connect();
@@ -345,9 +232,8 @@ QSqlDatabase Database::Connect() {
     }
   }
 
-  const QString connection_id =
-      QString("%1_thread_%2").arg(connection_id_).arg(
-        reinterpret_cast<quint64>(QThread::currentThread()));
+  const QString connection_id = QString("%1_thread_%2").arg(connection_id_).arg(
+      reinterpret_cast<quint64>(QThread::currentThread()));
 
   // Try to find an existing connection for this thread
   QSqlDatabase db = QSqlDatabase::database(connection_id);
@@ -373,8 +259,9 @@ QSqlDatabase Database::Connect() {
   {
     QSqlQuery set_fts_tokenizer("SELECT fts3_tokenizer(:name, :pointer)", db);
     set_fts_tokenizer.bindValue(":name", "unicode");
-    set_fts_tokenizer.bindValue(":pointer", QByteArray(
-        reinterpret_cast<const char*>(&sFTSTokenizer), sizeof(&sFTSTokenizer)));
+    set_fts_tokenizer.bindValue(
+        ":pointer", QByteArray(reinterpret_cast<const char*>(&sFTSTokenizer),
+                               sizeof(&sFTSTokenizer)));
     if (!set_fts_tokenizer.exec()) {
       qLog(Warning) << "Couldn't register FTS3 tokenizer";
     }
@@ -389,34 +276,36 @@ QSqlDatabase Database::Connect() {
   }
 
   // Attach external databases
-  foreach (const QString& key, attached_databases_.keys()) {
+  for (const QString& key : attached_databases_.keys()) {
     QString filename = attached_databases_[key].filename_;
 
-    if (!injected_database_name_.isNull())
-      filename = injected_database_name_;
+    if (!injected_database_name_.isNull()) filename = injected_database_name_;
 
     // Attach the db
     QSqlQuery q("ATTACH DATABASE :filename AS :alias", db);
     q.bindValue(":filename", filename);
     q.bindValue(":alias", key);
     if (!q.exec()) {
-      qFatal("Couldn't attach external database '%s'", key.toAscii().constData());
+      qFatal("Couldn't attach external database '%s'",
+             key.toAscii().constData());
     }
   }
 
-  if(startup_schema_version_ == -1) {
+  if (startup_schema_version_ == -1) {
     UpdateMainSchema(&db);
   }
 
   // We might have to initialise the schema in some attached databases now, if
   // they were deleted and don't match up with the main schema version.
-  foreach (const QString& key, attached_databases_.keys()) {
+  for (const QString& key : attached_databases_.keys()) {
     if (attached_databases_[key].is_temporary_ &&
         attached_databases_[key].schema_.isEmpty())
       continue;
     // Find out if there are any tables in this database
-    QSqlQuery q(QString("SELECT ROWID FROM %1.sqlite_master"
-                        " WHERE type='table'").arg(key), db);
+    QSqlQuery q(QString(
+                    "SELECT ROWID FROM %1.sqlite_master"
+                    " WHERE type='table'").arg(key),
+                db);
     if (!q.exec() || !q.next()) {
       q.finish();
       ExecSchemaCommandsFromFile(db, attached_databases_[key].schema_, 0);
@@ -431,8 +320,7 @@ void Database::UpdateMainSchema(QSqlDatabase* db) {
   int schema_version = 0;
   {
     QSqlQuery q("SELECT version FROM schema_version", *db);
-    if (q.next())
-      schema_version = q.value(0).toInt();
+    if (q.next()) schema_version = q.value(0).toInt();
     // Implicit invocation of ~QSqlQuery() when leaving the scope
     // to release any remaining database locks!
   }
@@ -440,12 +328,13 @@ void Database::UpdateMainSchema(QSqlDatabase* db) {
   startup_schema_version_ = schema_version;
 
   if (schema_version > kSchemaVersion) {
-    qLog(Warning) << "The database schema (version" << schema_version << ") is newer than I was expecting";
+    qLog(Warning) << "The database schema (version" << schema_version
+                  << ") is newer than I was expecting";
     return;
   }
   if (schema_version < kSchemaVersion) {
     // Update the schema
-    for (int v=schema_version+1 ; v<= kSchemaVersion ; ++v) {
+    for (int v = schema_version + 1; v <= kSchemaVersion; ++v) {
       UpdateDatabaseSchema(v, *db);
     }
   }
@@ -478,7 +367,7 @@ void Database::RecreateAttachedDb(const QString& database_name) {
   // We can't just re-attach the database now because it needs to be done for
   // each thread.  Close all the database connections, so each thread will
   // re-attach it when they next connect.
-  foreach (const QString& name, QSqlDatabase::connectionNames()) {
+  for (const QString& name : QSqlDatabase::connectionNames()) {
     QSqlDatabase::removeDatabase(name);
   }
 }
@@ -486,6 +375,21 @@ void Database::RecreateAttachedDb(const QString& database_name) {
 void Database::AttachDatabase(const QString& database_name,
                               const AttachedDatabase& database) {
   attached_databases_[database_name] = database;
+}
+
+void Database::AttachDatabaseOnDbConnection(const QString& database_name,
+                                            const AttachedDatabase& database,
+                                            QSqlDatabase& db) {
+  AttachDatabase(database_name, database);
+
+  // Attach the db
+  QSqlQuery q("ATTACH DATABASE :filename AS :alias", db);
+  q.bindValue(":filename", database.filename_);
+  q.bindValue(":alias", database_name);
+  if (!q.exec()) {
+    qFatal("Couldn't attach external database '%s'",
+           database_name.toAscii().constData());
+  }
 }
 
 void Database::DetachDatabase(const QString& database_name) {
@@ -504,7 +408,7 @@ void Database::DetachDatabase(const QString& database_name) {
   attached_databases_.remove(database_name);
 }
 
-void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
+void Database::UpdateDatabaseSchema(int version, QSqlDatabase& db) {
   QString filename;
   if (version == 0)
     filename = ":/schema/schema.sql";
@@ -519,25 +423,27 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
     UrlEncodeFilenameColumn("songs", db);
     UrlEncodeFilenameColumn("playlist_items", db);
 
-    foreach (const QString& table, db.tables()) {
+    for (const QString& table : db.tables()) {
       if (table.startsWith("device_") && table.endsWith("_songs")) {
         UrlEncodeFilenameColumn(table, db);
       }
     }
-    qLog(Debug) << "Applying database schema update" << version
-                << "from" << filename;
+    qLog(Debug) << "Applying database schema update" << version << "from"
+                << filename;
     ExecSchemaCommandsFromFile(db, filename, version - 1, true);
     t.Commit();
   } else {
-    qLog(Debug) << "Applying database schema update" << version
-                << "from" << filename;
+    qLog(Debug) << "Applying database schema update" << version << "from"
+                << filename;
     ExecSchemaCommandsFromFile(db, filename, version - 1);
   }
 }
 
 void Database::UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db) {
   QSqlQuery select(QString("SELECT ROWID, filename FROM %1").arg(table), db);
-  QSqlQuery update(QString("UPDATE %1 SET filename=:filename WHERE ROWID=:id").arg(table), db);
+  QSqlQuery update(
+      QString("UPDATE %1 SET filename=:filename WHERE ROWID=:id").arg(table),
+      db);
   select.exec();
   if (CheckErrors(select)) return;
   while (select.next()) {
@@ -565,16 +471,12 @@ void Database::ExecSchemaCommandsFromFile(QSqlDatabase& db,
   QFile schema_file(filename);
   if (!schema_file.open(QIODevice::ReadOnly))
     qFatal("Couldn't open schema file %s", filename.toUtf8().constData());
-  ExecSchemaCommands(db,
-                     QString::fromUtf8(schema_file.readAll()),
-                     schema_version,
-                     in_transaction);
+  ExecSchemaCommands(db, QString::fromUtf8(schema_file.readAll()),
+                     schema_version, in_transaction);
 }
 
-void Database::ExecSchemaCommands(QSqlDatabase& db,
-                                  const QString& schema,
-                                  int schema_version,
-                                  bool in_transaction) {
+void Database::ExecSchemaCommands(QSqlDatabase& db, const QString& schema,
+                                  int schema_version, bool in_transaction) {
   // Run each command
   const QStringList commands(schema.split(QRegExp("; *\n\n")));
 
@@ -598,12 +500,12 @@ void Database::ExecSchemaCommands(QSqlDatabase& db,
 void Database::ExecSongTablesCommands(QSqlDatabase& db,
                                       const QStringList& song_tables,
                                       const QStringList& commands) {
-  foreach (const QString& command, commands) {
+  for (const QString& command : commands) {
     // There are now lots of "songs" tables that need to have the same schema:
     // songs, magnatune_songs, and device_*_songs.  We allow a magic value
     // in the schema files to update all songs tables at once.
     if (command.contains(kMagicAllSongsTables)) {
-      foreach (const QString& table, song_tables) {
+      for (const QString& table : song_tables) {
         // Another horrible hack: device songs tables don't have matching _fts
         // tables, so if this command tries to touch one, ignore it.
         if (table.startsWith("device_") &&
@@ -620,8 +522,7 @@ void Database::ExecSongTablesCommands(QSqlDatabase& db,
       }
     } else {
       QSqlQuery query(db.exec(command));
-      if (CheckErrors(query))
-        qFatal("Unable to update music library database");
+      if (CheckErrors(query)) qFatal("Unable to update music library database");
     }
   }
 }
@@ -630,17 +531,20 @@ QStringList Database::SongsTables(QSqlDatabase& db, int schema_version) const {
   QStringList ret;
 
   // look for the tables in the main db
-  foreach (const QString& table, db.tables()) {
-    if (table == "songs" || table.endsWith("_songs"))
-      ret << table;
+  for (const QString& table : db.tables()) {
+    if (table == "songs" || table.endsWith("_songs")) ret << table;
   }
 
   // look for the tables in attached dbs
-  foreach (const QString& key, attached_databases_.keys()) {
-    QSqlQuery q(QString("SELECT NAME FROM %1.sqlite_master"
-                        " WHERE type='table' AND name='songs' OR name LIKE '%songs'").arg(key), db);
+  for (const QString& key : attached_databases_.keys()) {
+    QSqlQuery q(
+        QString(
+            "SELECT NAME FROM %1.sqlite_master"
+            " WHERE type='table' AND name='songs' OR name LIKE '%songs'")
+            .arg(key),
+        db);
     if (q.exec()) {
-      while(q.next()) {
+      while (q.next()) {
         QString tab_name = key + "." + q.value(0).toString();
         ret << tab_name;
       }
@@ -662,7 +566,6 @@ bool Database::CheckErrors(const QSqlQuery& query) {
     qLog(Error) << "faulty query: " << query.lastQuery();
     qLog(Error) << "bound values: " << query.boundValues();
 
-    app_->AddError("LibraryBackend: " + last_error.text());
     return true;
   }
 
@@ -686,9 +589,11 @@ bool Database::IntegrityCheck(QSqlDatabase db) {
       break;
     } else {
       if (!error_reported) {
-        app_->AddError(tr("Database corruption detected. Please read "
-            "https://code.google.com/p/clementine-player/wiki/DatabaseCorruption "
-            "for instructions on how to recover your database"));
+        app_->AddError(
+            tr("Database corruption detected. Please read "
+               "https://code.google.com/p/clementine-player/wiki/"
+               "DatabaseCorruption "
+               "for instructions on how to recover your database"));
       }
       app_->AddError("Database: " + message);
       error_reported = true;
@@ -712,17 +617,16 @@ void Database::DoBackup() {
   }
 }
 
-bool Database::OpenDatabase(const QString& filename, sqlite3** connection) const {
-  int ret = _sqlite3_open(filename.toUtf8(), connection);
+bool Database::OpenDatabase(const QString& filename,
+                            sqlite3** connection) const {
+  int ret = sqlite3_open(filename.toUtf8(), connection);
   if (ret != 0) {
     if (*connection) {
-      const char* error_message = _sqlite3_errmsg(*connection);
-      qLog(Error) << "Failed to open database for backup:"
-                  << filename
+      const char* error_message = sqlite3_errmsg(*connection);
+      qLog(Error) << "Failed to open database for backup:" << filename
                   << error_message;
     } else {
-      qLog(Error) << "Failed to open database for backup:"
-                  << filename;
+      qLog(Error) << "Failed to open database for backup:" << filename;
     }
     return false;
   }
@@ -732,17 +636,19 @@ bool Database::OpenDatabase(const QString& filename, sqlite3** connection) const
 void Database::BackupFile(const QString& filename) {
   qLog(Debug) << "Starting database backup";
   QString dest_filename = QString("%1.bak").arg(filename);
-  const int task_id = app_->task_manager()->StartTask(tr("Backing up database"));
+  const int task_id =
+      app_->task_manager()->StartTask(tr("Backing up database"));
 
-  sqlite3* source_connection = NULL;
-  sqlite3* dest_connection = NULL;
+  sqlite3* source_connection = nullptr;
+  sqlite3* dest_connection = nullptr;
 
   BOOST_SCOPE_EXIT((source_connection)(dest_connection)(task_id)(app_)) {
-    // Harmless to call sqlite3_close() with a NULL pointer.
-    _sqlite3_close(source_connection);
-    _sqlite3_close(dest_connection);
+    // Harmless to call sqlite3_close() with a nullptr pointer.
+    sqlite3_close(source_connection);
+    sqlite3_close(dest_connection);
     app_->task_manager()->SetTaskFinished(task_id);
-  } BOOST_SCOPE_EXIT_END
+  }
+  BOOST_SCOPE_EXIT_END
 
   bool success = OpenDatabase(filename, &source_connection);
   if (!success) {
@@ -754,26 +660,25 @@ void Database::BackupFile(const QString& filename) {
     return;
   }
 
-  sqlite3_backup* backup = _sqlite3_backup_init(
-      dest_connection, "main",
-      source_connection, "main");
+  sqlite3_backup* backup =
+      sqlite3_backup_init(dest_connection, "main", source_connection, "main");
   if (!backup) {
-    const char* error_message = _sqlite3_errmsg(dest_connection);
+    const char* error_message = sqlite3_errmsg(dest_connection);
     qLog(Error) << "Failed to start database backup:" << error_message;
     return;
   }
 
   int ret = SQLITE_OK;
   do {
-    ret = _sqlite3_backup_step(backup, 16);
-    const int page_count = _sqlite3_backup_pagecount(backup);
+    ret = sqlite3_backup_step(backup, 16);
+    const int page_count = sqlite3_backup_pagecount(backup);
     app_->task_manager()->SetTaskProgress(
-        task_id, page_count - _sqlite3_backup_remaining(backup), page_count);
+        task_id, page_count - sqlite3_backup_remaining(backup), page_count);
   } while (ret == SQLITE_OK);
 
   if (ret != SQLITE_DONE) {
     qLog(Error) << "Database backup failed";
   }
 
-  _sqlite3_backup_finish(backup);
+  sqlite3_backup_finish(backup);
 }

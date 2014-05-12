@@ -22,6 +22,8 @@
 #ifndef AMAROK_GSTENGINE_H
 #define AMAROK_GSTENGINE_H
 
+#include <memory>
+
 #include "bufferconsumer.h"
 #include "enginebase.h"
 #include "core/boundfuturewatcher.h"
@@ -35,11 +37,11 @@
 #include <QTimerEvent>
 
 #include <gst/gst.h>
-#include <boost/shared_ptr.hpp>
 
 class QTimer;
 class QTimerEvent;
 
+class DeviceFinder;
 class GstEnginePipeline;
 class TaskManager;
 
@@ -55,20 +57,21 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   GstEngine(TaskManager* task_manager);
   ~GstEngine();
 
-  struct PluginDetails {
-    QString name;
-    QString long_name;
-    QString author;
+  struct OutputDetails {
     QString description;
+    QString icon_name;
+
+    QString gstreamer_plugin_name;
+    QVariant device_property_value;
   };
-  typedef QList<PluginDetails> PluginDetailsList;
+  typedef QList<OutputDetails> OutputDetailsList;
 
   static const char* kSettingsGroup;
   static const char* kAutoSink;
 
   bool Init();
   void EnsureInitialised() { initialising_.waitForFinished(); }
-  static void InitialiseGstreamer();
+  void InitialiseGstreamer();
 
   int AddBackgroundStream(const QUrl& url);
   void StopBackgroundStream(int id);
@@ -77,24 +80,23 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   qint64 position_nanosec() const;
   qint64 length_nanosec() const;
   Engine::State state() const;
-  const Engine::Scope& scope();
+  const Engine::Scope& scope(int chunk_length);
 
-  PluginDetailsList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
-  static bool DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString& name);
+  OutputDetailsList GetOutputsList() const;
 
   GstElement* CreateElement(const QString& factoryName, GstElement* bin = 0);
 
   // BufferConsumer
-  void ConsumeBuffer(GstBuffer *buffer, int pipeline_id);
+  void ConsumeBuffer(GstBuffer* buffer, int pipeline_id);
 
  public slots:
   void StartPreloading(const QUrl& url, bool force_stop_at_end,
                        qint64 beginning_nanosec, qint64 end_nanosec);
   bool Load(const QUrl&, Engine::TrackChangeFlags change,
-            bool force_stop_at_end,
-            quint64 beginning_nanosec, qint64 end_nanosec);
+            bool force_stop_at_end, quint64 beginning_nanosec,
+            qint64 end_nanosec);
   bool Play(quint64 offset_nanosec);
-  void Stop();
+  void Stop(bool stop_after = false);
   void Pause();
   void Unpause();
   void Seek(quint64 offset_nanosec);
@@ -119,7 +121,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
  private slots:
   void EndOfStreamReached(int pipeline_id, bool has_next_track);
-  void HandlePipelineError(int pipeline_id, const QString& message, int domain, int error_code);
+  void HandlePipelineError(int pipeline_id, const QString& message, int domain,
+                           int error_code);
   void NewMetaData(int pipeline_id, const Engine::SimpleMetaBundle& bundle);
   void AddBufferToScope(GstBuffer* buf, int pipeline_id);
   void FadeoutFinished();
@@ -135,7 +138,15 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
  private:
   typedef QPair<quint64, int> PlayFutureWatcherArg;
-  typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg> PlayFutureWatcher;
+  typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg>
+      PlayFutureWatcher;
+
+  struct PluginDetails {
+    QString name;
+    QString description;
+  };
+
+  typedef QList<PluginDetails> PluginDetailsList;
 
   static void SetEnv(const char* key, const QString& value);
   PluginDetailsList GetPluginList(const QString& classname) const;
@@ -146,19 +157,20 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void StartTimers();
   void StopTimers();
 
-  boost::shared_ptr<GstEnginePipeline> CreatePipeline();
-  boost::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url, qint64 end_nanosec);
+  std::shared_ptr<GstEnginePipeline> CreatePipeline();
+  std::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url,
+                                                    qint64 end_nanosec);
 
-  void UpdateScope();
+  void UpdateScope(int chunk_length);
 
-  int AddBackgroundStream(boost::shared_ptr<GstEnginePipeline> pipeline);
+  int AddBackgroundStream(std::shared_ptr<GstEnginePipeline> pipeline);
 
   static QUrl FixupUrl(const QUrl& url);
 
  private:
-  static const qint64 kTimerIntervalNanosec = 1000 * kNsecPerMsec; // 1s
-  static const qint64 kPreloadGapNanosec = 2000 * kNsecPerMsec; // 2s
-  static const qint64 kSeekDelayNanosec = 100 * kNsecPerMsec; // 100msec
+  static const qint64 kTimerIntervalNanosec = 1000 * kNsecPerMsec;  // 1s
+  static const qint64 kPreloadGapNanosec = 2000 * kNsecPerMsec;     // 2s
+  static const qint64 kSeekDelayNanosec = 100 * kNsecPerMsec;       // 100msec
 
   static const char* kHypnotoadPipeline;
   static const char* kEnterprisePipeline;
@@ -169,11 +181,11 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   QFuture<void> initialising_;
 
   QString sink_;
-  QString device_;
+  QVariant device_;
 
-  boost::shared_ptr<GstEnginePipeline> current_pipeline_;
-  boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
-  boost::shared_ptr<GstEnginePipeline> fadeout_pause_pipeline_;
+  std::shared_ptr<GstEnginePipeline> current_pipeline_;
+  std::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
+  std::shared_ptr<GstEnginePipeline> fadeout_pause_pipeline_;
   QUrl preloaded_url_;
 
   QList<BufferConsumer*> buffer_consumers_;
@@ -192,6 +204,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   qint64 buffer_duration_nanosec_;
 
+  int buffer_min_fill_;
+
   bool mono_playback_;
 
   mutable bool can_decode_success_;
@@ -205,11 +219,18 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int timer_id_;
   int next_element_id_;
 
-  QHash<int, boost::shared_ptr<GstEnginePipeline> > background_streams_;
+  QHash<int, std::shared_ptr<GstEnginePipeline>> background_streams_;
 
   bool is_fading_out_to_pause_;
   bool has_faded_out_;
+
+  int scope_chunk_;
+  bool have_new_buffer_;
+  int scope_chunks_;
+
+  QList<DeviceFinder*> device_finders_;
 };
 
+Q_DECLARE_METATYPE(GstEngine::OutputDetails)
 
 #endif /*AMAROK_GSTENGINE_H*/

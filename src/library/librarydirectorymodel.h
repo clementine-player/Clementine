@@ -18,10 +18,10 @@
 #ifndef LIBRARYDIRECTORYMODEL_H
 #define LIBRARYDIRECTORYMODEL_H
 
+#include <memory>
+
 #include <QIcon>
 #include <QStandardItemModel>
-
-#include <boost/shared_ptr.hpp>
 
 #include "directory.h"
 
@@ -32,14 +32,14 @@ class LibraryDirectoryModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  LibraryDirectoryModel(LibraryBackend* backend, QObject* parent = 0);
+  LibraryDirectoryModel(LibraryBackend* backend, QObject* parent = nullptr);
   ~LibraryDirectoryModel();
 
   // To be called by GUIs
   void AddDirectory(const QString& path);
   void RemoveDirectory(const QModelIndex& index);
 
-  QVariant data(const QModelIndex &index, int role) const;
+  QVariant data(const QModelIndex& index, int role) const;
 
  private slots:
   // To be called by the backend
@@ -51,7 +51,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
 
   QIcon dir_icon_;
   LibraryBackend* backend_;
-  QList<boost::shared_ptr<MusicStorage> > storage_;
+  QList<std::shared_ptr<MusicStorage> > storage_;
 };
 
-#endif // LIBRARYDIRECTORYMODEL_H
+#endif  // LIBRARYDIRECTORYMODEL_H

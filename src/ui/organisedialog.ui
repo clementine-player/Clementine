@@ -136,13 +136,73 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QListWidget" name="preview"/>
+       <widget class="QStackedWidget" name="preview_stack">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="preview_page">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QListWidget" name="preview"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="loading_page">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>264</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="BusyIndicator" name="loading_indicator" native="true">
+            <property name="text" stdset="0">
+             <string>Loading...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>264</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
+    <widget class="QDialogButtonBox" name="button_box">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -165,6 +225,12 @@
    <extends>QTextEdit</extends>
    <header>widgets/linetextedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>BusyIndicator</class>
+   <extends>QWidget</extends>
+   <header>widgets/busyindicator.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>destination</tabstop>
@@ -176,15 +242,14 @@
   <tabstop>replace_spaces</tabstop>
   <tabstop>replace_ascii</tabstop>
   <tabstop>overwrite</tabstop>
-  <tabstop>preview</tabstop>
-  <tabstop>buttonBox</tabstop>
+  <tabstop>button_box</tabstop>
  </tabstops>
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>accepted()</signal>
    <receiver>OrganiseDialog</receiver>
    <slot>accept()</slot>
@@ -200,7 +265,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
    <receiver>OrganiseDialog</receiver>
    <slot>reject()</slot>

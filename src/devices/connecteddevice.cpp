@@ -28,31 +28,30 @@
 #include <QtDebug>
 
 ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
-                                 const QString& unique_id, DeviceManager* manager,
-                                 Application* app,
+                                 const QString& unique_id,
+                                 DeviceManager* manager, Application* app,
                                  int database_id, bool first_time)
-  : QObject(manager),
-    app_(app),
-    url_(url),
-    first_time_(first_time),
-    lister_(lister),
-    unique_id_(unique_id),
-    database_id_(database_id),
-    manager_(manager),
-    backend_(NULL),
-    model_(NULL),
-    song_count_(0)
-{
+    : QObject(manager),
+      app_(app),
+      url_(url),
+      first_time_(first_time),
+      lister_(lister),
+      unique_id_(unique_id),
+      database_id_(database_id),
+      manager_(manager),
+      backend_(nullptr),
+      model_(nullptr),
+      song_count_(0) {
   qLog(Info) << "connected" << url << unique_id << first_time;
 
   // Create the backend in the database thread.
   backend_ = new LibraryBackend();
   backend_->moveToThread(app_->database()->thread());
 
-  connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(BackendTotalSongCountUpdated(int)));
+  connect(backend_, SIGNAL(TotalSongCountUpdated(int)),
+          SLOT(BackendTotalSongCountUpdated(int)));
 
-  backend_->Init(app_->database(),
-                 QString("device_%1_songs").arg(database_id),
+  backend_->Init(app_->database(), QString("device_%1_songs").arg(database_id),
                  QString("device_%1_directories").arg(database_id),
                  QString("device_%1_subdirectories").arg(database_id),
                  QString("device_%1_fts").arg(database_id));
@@ -61,15 +60,13 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
   model_ = new LibraryModel(backend_, app_, this);
 }
 
-ConnectedDevice::~ConnectedDevice() {
-  backend_->deleteLater();
-}
+ConnectedDevice::~ConnectedDevice() { backend_->deleteLater(); }
 
-void ConnectedDevice::InitBackendDirectory(
-    const QString& mount_point, bool first_time, bool rewrite_path) {
-  if (first_time)
+void ConnectedDevice::InitBackendDirectory(const QString& mount_point,
+                                           bool first_time, bool rewrite_path) {
+  if (first_time || backend_->GetAllDirectories().isEmpty()) {
     backend_->AddDirectory(mount_point);
-  else {
+  } else {
     if (rewrite_path) {
       // This is a bit of a hack.  The device might not be mounted at the same
       // path each time, so if it's different we have to munge all the paths in

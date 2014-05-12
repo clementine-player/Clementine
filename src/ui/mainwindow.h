@@ -18,7 +18,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 #include <QMainWindow>
 #include <QSettings>
@@ -44,6 +44,7 @@ class CoverProviders;
 class Database;
 class DeviceManager;
 class DeviceView;
+class DeviceViewContainer;
 class EditTagDialog;
 class Equalizer;
 class ErrorDialog;
@@ -67,6 +68,7 @@ class InternetItem;
 class InternetModel;
 class InternetViewContainer;
 class Remote;
+class RipCD;
 class Song;
 class SongInfoBase;
 class SongInfoView;
@@ -86,10 +88,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Q_OBJECT
 
  public:
-  MainWindow(Application* app,
-             SystemTrayIcon* tray_icon,
-             OSD* osd,
-             QWidget *parent = 0);
+  MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
+             QWidget* parent = nullptr);
   ~MainWindow();
 
   static const char* kSettingsGroup;
@@ -133,9 +133,13 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Activate();
   bool LoadUrl(const QString& url);
 
+signals:
+  // Signals that stop playing after track was toggled.
+  void StopAfterToggled(bool stop);
+
  private slots:
   void FilePathChanged(const QString& path);
-  
+
   void MediaStopped();
   void MediaPaused();
   void MediaPlaying();
@@ -148,6 +152,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlaylistPlay();
   void PlaylistStopAfter();
   void PlaylistQueue();
+  void PlaylistSkip();
   void PlaylistRemoveCurrent();
   void PlaylistEditFinished(const QModelIndex& index);
   void EditTracks();
@@ -166,6 +171,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlaylistOrganiseSelected(bool copy);
   void PlaylistDelete();
   void PlaylistOpenInBrowser();
+  void ShowInLibrary();
 
   void ChangeLibraryQueryMode(QAction* action);
 
@@ -189,7 +195,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Seeked(qlonglong microseconds);
   void UpdateTrackPosition();
 
-  //Handle visibility of LastFM icons
+  // Handle visibility of LastFM icons
   void LastFMButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
   void SetToggleScrobblingIcon(bool value);
@@ -211,6 +217,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFolder();
   void AddStream();
   void AddStreamAccepted();
+  void OpenRipCD();
   void AddCDTracks();
   void AddPodcast();
 
@@ -252,7 +259,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void Exit();
 
-  void HandleNotificationPreview(OSD::Behaviour type, QString line1, QString line2);
+  void HandleNotificationPreview(OSD::Behaviour type, QString line1,
+                                 QString line2);
 
   void ScrollToInternetIndex(const QModelIndex& index);
   void FocusGlobalSearchField();
@@ -268,7 +276,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void CheckFullRescanRevisions();
 
-  //creates the icon by painting the full one depending on the current position
+  // creates the icon by painting the full one depending on the current position
   QPixmap CreateOverlayedIcon(int position, int scrobble_point);
 
  private:
@@ -278,8 +286,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Application* app_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
-  boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
-  boost::scoped_ptr<About> about_dialog_;
+  std::unique_ptr<EditTagDialog> edit_tag_dialog_;
+  std::unique_ptr<About> about_dialog_;
 
   GlobalShortcuts* global_shortcuts_;
   Remote* remote_;
@@ -287,31 +295,35 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
   FileView* file_view_;
+#ifdef HAVE_AUDIOCD
+  std::unique_ptr<RipCD> rip_cd_;
+#endif
   PlaylistListContainer* playlist_list_;
   InternetViewContainer* internet_view_;
+  DeviceViewContainer* device_view_container_;
   DeviceView* device_view_;
   SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;
 
-  boost::scoped_ptr<SettingsDialog> settings_dialog_;
-  boost::scoped_ptr<AddStreamDialog> add_stream_dialog_;
-  boost::scoped_ptr<AlbumCoverManager> cover_manager_;
-  boost::scoped_ptr<Equalizer> equalizer_;
-  boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
-  boost::scoped_ptr<ErrorDialog> error_dialog_;
-  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
-  boost::scoped_ptr<QueueManager> queue_manager_;
+  std::unique_ptr<SettingsDialog> settings_dialog_;
+  std::unique_ptr<AddStreamDialog> add_stream_dialog_;
+  std::unique_ptr<AlbumCoverManager> cover_manager_;
+  std::unique_ptr<Equalizer> equalizer_;
+  std::unique_ptr<TranscodeDialog> transcode_dialog_;
+  std::unique_ptr<ErrorDialog> error_dialog_;
+  std::unique_ptr<OrganiseDialog> organise_dialog_;
+  std::unique_ptr<QueueManager> queue_manager_;
 
-  boost::scoped_ptr<TagFetcher> tag_fetcher_;
-  boost::scoped_ptr<TrackSelectionDialog> track_selection_dialog_;
+  std::unique_ptr<TagFetcher> tag_fetcher_;
+  std::unique_ptr<TrackSelectionDialog> track_selection_dialog_;
   PlaylistItemList autocomplete_tag_items_;
 
 #ifdef ENABLE_VISUALISATIONS
-  boost::scoped_ptr<VisualisationContainer> visualisation_;
+  std::unique_ptr<VisualisationContainer> visualisation_;
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
-  boost::scoped_ptr<WiimotedevShortcuts> wiimotedev_shortcuts_;
+  std::unique_ptr<WiimotedevShortcuts> wiimotedev_shortcuts_;
 #endif
 
   QAction* library_show_all_;
@@ -323,12 +335,14 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_stop_after_;
   QAction* playlist_undoredo_;
   QAction* playlist_organise_;
+  QAction* playlist_show_in_library_;
   QAction* playlist_copy_to_library_;
   QAction* playlist_move_to_library_;
   QAction* playlist_copy_to_device_;
   QAction* playlist_delete_;
   QAction* playlist_open_in_browser_;
   QAction* playlist_queue_;
+  QAction* playlist_skip_;
   QAction* playlist_add_to_another_;
   QList<QAction*> playlistitem_actions_;
   QAction* playlistitem_actions_separator_;
@@ -349,4 +363,4 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   BackgroundStreams* background_streams_;
 };
 
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

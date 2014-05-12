@@ -19,13 +19,14 @@
 #define DEVICEMANAGER_H
 
 #include "devicedatabasebackend.h"
-#include "library/librarymodel.h"
+
+#include <memory>
 
 #include <QAbstractListModel>
 #include <QIcon>
 #include <QThreadPool>
 
-#include <boost/shared_ptr.hpp>
+#include "library/librarymodel.h"
 
 class Application;
 class ConnectedDevice;
@@ -37,8 +38,8 @@ class TaskManager;
 class DeviceManager : public QAbstractListModel {
   Q_OBJECT
 
-public:
-  DeviceManager(Application* app, QObject* parent = 0);
+ public:
+  DeviceManager(Application* app, QObject* parent = nullptr);
   ~DeviceManager();
 
   enum Role {
@@ -53,7 +54,6 @@ public:
     Role_TranscodeMode,
     Role_TranscodeFormat,
     Role_SongCount,
-
     LastRole,
   };
 
@@ -67,38 +67,41 @@ public:
   static const int kDeviceIconSize;
   static const int kDeviceIconOverlaySize;
 
-  DeviceStateFilterModel* connected_devices_model() const { return connected_devices_model_; }
+  DeviceStateFilterModel* connected_devices_model() const {
+    return connected_devices_model_;
+  }
 
   // Get info about devices
   int GetDatabaseId(int row) const;
   DeviceLister* GetLister(int row) const;
-  boost::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
+  std::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
 
   int FindDeviceById(const QString& id) const;
   int FindDeviceByUrl(const QList<QUrl>& url) const;
 
   // Actions on devices
-  boost::shared_ptr<ConnectedDevice> Connect(int row);
+  std::shared_ptr<ConnectedDevice> Connect(int row);
   void Disconnect(int row);
   void Forget(int row);
   void UnmountAsync(int row);
 
-  void SetDeviceOptions(int row,
-      const QString& friendly_name, const QString& icon_name,
-      MusicStorage::TranscodeMode mode, Song::FileType format);
+  void SetDeviceOptions(int row, const QString& friendly_name,
+                        const QString& icon_name,
+                        MusicStorage::TranscodeMode mode,
+                        Song::FileType format);
 
   // QAbstractListModel
-  int rowCount(const QModelIndex &parent) const;
-  QVariant data(const QModelIndex &index, int role) const;
+  int rowCount(const QModelIndex& parent) const;
+  QVariant data(const QModelIndex& index, int role) const;
 
-public slots:
+ public slots:
   void Unmount(int row);
 
 signals:
   void DeviceConnected(int row);
   void DeviceDisconnected(int row);
 
-private slots:
+ private slots:
   void PhysicalDeviceAdded(const QString& id);
   void PhysicalDeviceRemoved(const QString& id);
   void PhysicalDeviceChanged(const QString& id);
@@ -107,7 +110,7 @@ private slots:
   void DeviceSongCountUpdated(int count);
   void LoadAllDevices();
 
-private:
+ private:
   // Devices can be in three different states:
   //  1) Remembered in the database but not physically connected at the moment.
   //     database_id valid, lister null, device null
@@ -124,10 +127,10 @@ private:
     // Sometimes the same device is discovered more than once.  In this case
     // the device will have multiple "backends".
     struct Backend {
-      Backend(DeviceLister* lister = NULL, const QString& id = QString())
-        : lister_(lister), unique_id_(id) {}
+      Backend(DeviceLister* lister = nullptr, const QString& id = QString())
+          : lister_(lister), unique_id_(id) {}
 
-      DeviceLister* lister_; // NULL if not physically connected
+      DeviceLister* lister_;  // nullptr if not physically connected
       QString unique_id_;
     };
 
@@ -141,9 +144,9 @@ private:
     // Gets the best backend available (the one with the highest priority)
     const Backend* BestBackend() const;
 
-
-    int database_id_; // -1 if not remembered in the database
-    boost::shared_ptr<ConnectedDevice> device_; // NULL if not connected to clementine
+    int database_id_;  // -1 if not remembered in the database
+    std::shared_ptr<ConnectedDevice>
+        device_;  // nullptr if not connected to clementine
     QList<Backend> backends_;
 
     QString friendly_name_;
@@ -159,11 +162,13 @@ private:
   };
 
   void AddLister(DeviceLister* lister);
-  template <typename T> void AddDeviceClass();
+  template <typename T>
+  void AddDeviceClass();
 
-  DeviceDatabaseBackend::Device InfoToDatabaseDevice(const DeviceInfo& info) const;
+  DeviceDatabaseBackend::Device InfoToDatabaseDevice(const DeviceInfo& info)
+      const;
 
-private:
+ private:
   Application* app_;
   DeviceDatabaseBackend* backend_;
 
@@ -182,16 +187,14 @@ private:
   QThreadPool thread_pool_;
 };
 
-
-
 template <typename T>
 void DeviceManager::AddDeviceClass() {
   QStringList schemes = T::url_schemes();
   QMetaObject obj = T::staticMetaObject;
 
-  foreach (const QString& scheme, schemes) {
+  for (const QString& scheme : schemes) {
     device_classes_.insert(scheme, obj);
   }
 }
 
-#endif // DEVICEMANAGER_H
+#endif  // DEVICEMANAGER_H
