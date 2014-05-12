@@ -31,6 +31,7 @@
 #include <QFrame>
 #include <QLineEdit>
 #include <QMessageBox>
+#include <QMutexLocker>
 #include <QtDebug>
 #include <QtConcurrentRun>
 #include <cdio/cdio.h>
@@ -72,7 +73,8 @@ RipCD::RipCD(QWidget* parent)
       queued_(0),
       finished_success_(0),
       finished_failed_(0),
-      ui_(new Ui_RipCD) {
+      ui_(new Ui_RipCD),
+      cancel_requested_(false) {
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   // Init
   ui_->setupUi(this);
@@ -144,9 +146,7 @@ RipCD::RipCD(QWidget* parent)
   ui_->progress_bar->setMaximum(100);
 }
 
-RipCD::~RipCD() {
-  cdio_destroy(cdio_);
-}
+RipCD::~RipCD() { cdio_destroy(cdio_); }
 
 /*
  * WAV Header documentation
@@ -232,6 +232,13 @@ void RipCD::ThreadClickedRipButton() {
 
     QByteArray buffered_input_bytes(CDIO_CD_FRAMESIZE_RAW, '\0');
     for (lsn_t i_cursor = i_first_lsn; i_cursor <= i_last_lsn; i_cursor++) {
+      {
+        QMutexLocker l(&mutex_);
+        if (cancel_requested_) {
+          qLog(Debug) << "CD ripping canceled.";
+          return;
+        }
+      }
       if (cdio_read_audio_sector(cdio_, buffered_input_bytes.data(),
                                  i_cursor) == DRIVER_OP_SUCCESS) {
         destination_file->write(buffered_input_bytes.data(),
@@ -317,6 +324,10 @@ void RipCD::ClickedRipButton() {
     return;
   }
   SetWorking(true);
+  {
+    QMutexLocker l(&mutex_);
+    cancel_requested_ = false;
+  }
   QtConcurrent::run(this, &RipCD::ThreadClickedRipButton);
 }
 
@@ -401,6 +412,10 @@ void RipCD::AddDestinationDirectory(QString dir) {
 }
 
 void RipCD::Cancel() {
+  {
+    QMutexLocker l(&mutex_);
+    cancel_requested_ = true;
+  }
   ui_->progress_bar->setValue(0);
   transcoder_->Cancel();
   RemoveTemporaryDirectory();

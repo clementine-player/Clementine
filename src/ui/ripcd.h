@@ -22,6 +22,7 @@
 #include <QCheckBox>
 #include <QThread>
 #include <QFile>
+#include <QMutex>
 #include <cdio/cdio.h>
 #include "ui_ripcd.h"
 #include <memory>
@@ -62,6 +63,8 @@ class RipCD : public QDialog {
   QPushButton* close_button_;
   QPushButton* rip_button_;
   QString temporary_directory_;
+  bool cancel_requested_;
+  QMutex mutex_;
 
   void WriteWAVHeader(QFile* stream, int32_t i_bytecount);
   int NumTracksToRip();
