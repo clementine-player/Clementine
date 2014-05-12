@@ -73,7 +73,8 @@ RipCD::RipCD(QWidget* parent)
       queued_(0),
       finished_success_(0),
       finished_failed_(0),
-      ui_(new Ui_RipCD) {
+      ui_(new Ui_RipCD),
+      cancel_requested_(false) {
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   // Init
   ui_->setupUi(this);
