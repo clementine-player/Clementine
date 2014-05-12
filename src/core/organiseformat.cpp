@@ -22,6 +22,7 @@
 #include <QPalette>
 #include <QUrl>
 
+#include "core/arraysize.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 
@@ -49,11 +50,11 @@ const QStringList OrganiseFormat::kKnownTags = QStringList() << "title"
 // From http://en.wikipedia.org/wiki/8.3_filename#Directory_table
 const char OrganiseFormat::kInvalidFatCharacters[] = "\"*/\\:<>?|";
 const int OrganiseFormat::kInvalidFatCharactersCount =
-    sizeof(OrganiseFormat::kInvalidFatCharacters) - 1;
+    arraysize(OrganiseFormat::kInvalidFatCharacters) - 1;
 
 const char OrganiseFormat::kInvalidPrefixCharacters[] = ".";
 const int OrganiseFormat::kInvalidPrefixCharactersCount =
-    sizeof(OrganiseFormat::kInvalidPrefixCharacters) - 1;
+    arraysize(OrganiseFormat::kInvalidPrefixCharacters) - 1;
 
 const QRgb OrganiseFormat::SyntaxHighlighter::kValidTagColorLight =
     qRgb(64, 64, 255);
