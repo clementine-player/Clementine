@@ -144,9 +144,7 @@ RipCD::RipCD(QWidget* parent)
   ui_->progress_bar->setMaximum(100);
 }
 
-RipCD::~RipCD() {
-  cdio_destroy(cdio_);
-}
+RipCD::~RipCD() { cdio_destroy(cdio_); }
 
 /*
  * WAV Header documentation
