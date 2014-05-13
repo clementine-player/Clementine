@@ -24,6 +24,7 @@
 #include <QFile>
 #include <QMutex>
 #include <cdio/cdio.h>
+#include "core/song.h"
 #include "ui_ripcd.h"
 #include <memory>
 class Ui_RipCD;
@@ -56,6 +57,25 @@ class RipCD : public QDialog {
     QString transcoded_filename;
   };
 
+  struct AlbumInformation {
+    AlbumInformation(const QString& album, const QString& artist,
+                     const QString& genre, int year, int disc,
+                     Song::FileType type)
+        : album(album),
+          artist(artist),
+          genre(genre),
+          year(year),
+          disc(disc),
+          type(type) {}
+
+    QString album;
+    QString artist;
+    QString genre;
+    int year;
+    int disc;
+    Song::FileType type;
+  };
+
   static const char* kSettingsGroup;
   static const int kProgressInterval;
   static const int kMaxDestinationItems;
@@ -86,16 +106,18 @@ class RipCD : public QDialog {
   // from the ui dialog and an extension that corresponds to the audio
   // format chosen in the ui.
   QString GetOutputFileName(const QString& basename) const;
-
   QString ParseFileFormatString(const QString& file_format, int track_no) const;
   void SetWorking(bool working);
   void AddDestinationDirectory(QString dir);
   void RemoveTemporaryDirectory();
-  void TagFiles();
+  // Tags the final files. This function should not be run in the UI thread.
+  void TagFiles(const AlbumInformation& album,
+                const QList<TrackInformation>& tracks);
 
 signals:
   void RippingComplete();
   void SignalUpdateProgress();
+
  private slots:
   void UpdateProgress();
   void ThreadedTranscoding();

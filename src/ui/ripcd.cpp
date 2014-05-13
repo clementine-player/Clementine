@@ -22,7 +22,6 @@
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
 #include "core/logging.h"
-#include "core/song.h"
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
 
@@ -335,25 +334,32 @@ void RipCD::JobComplete(const QString& filename, bool success) {
 
 void RipCD::AllJobsComplete() {
   RemoveTemporaryDirectory();
-  TagFiles();
+  // Save tags in the background.
+  TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
+                                .value<TranscoderPreset>();
+  AlbumInformation album(
+      ui_->albumLineEdit->text(), ui_->artistLineEdit->text(),
+      ui_->genreLineEdit->text(), ui_->yearLineEdit->text().toInt(),
+      ui_->discLineEdit->text().toInt(), preset.type_);
+  QtConcurrent::run(this, &RipCD::TagFiles, album, tracks_);
   SetWorking(false);
 }
 
-void RipCD::TagFiles() {
-  TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
-                                .value<TranscoderPreset>();
+void RipCD::TagFiles(const AlbumInformation& album,
+                     const QList<TrackInformation>& tracks) {
   for (const TrackInformation& track : tracks_) {
     Song song;
     song.InitFromFilePartial(track.transcoded_filename);
-    song.set_title(track.title);
-    song.set_album(ui_->albumLineEdit->text());
-    song.set_artist(ui_->artistLineEdit->text());
-    song.set_genre(ui_->genreLineEdit->text());
-    song.set_year(ui_->yearLineEdit->text().toInt());
     song.set_track(track.track_number);
-    song.set_disc(ui_->discLineEdit->text().toInt());
-    song.set_filetype(preset.type_);
+    song.set_title(track.title);
+    song.set_album(album.album);
+    song.set_artist(album.artist);
+    song.set_genre(album.genre);
+    song.set_year(album.year);
+    song.set_disc(album.disc);
+    song.set_filetype(album.type);
 
+    Q_ASSERT(QThread::currentThread() != qApp->thread());
     TagReaderClient::Instance()->SaveFileBlocking(song.url().toLocalFile(),
                                                   song);
   }
