@@ -166,10 +166,8 @@ void AnalyzerContainer::ChangeFramerate(int new_framerate) {
     new_framerate = new_framerate == 0 ? kMediumFramerate : new_framerate;
     current_analyzer_->changeTimeout(1000 / new_framerate);
 
-    // the BlockAnalyzer needs to know when the framerate changes
-    if (strcmp(current_analyzer_->metaObject()->className(), "BlockAnalyzer") == 0) {
-      qobject_cast<BlockAnalyzer*>(current_analyzer_)->determineStep();
-    }
+    // notify the current analyzer that the framerate has changed
+    current_analyzer_->framerateChanged();
   }
   SaveFramerate(new_framerate);
 }

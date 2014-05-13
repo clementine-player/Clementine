@@ -31,15 +31,15 @@ class BlockAnalyzer : public Analyzer::Base {
 
   static const char* kName;
 
-  void determineStep();
-
  protected:
   virtual void transform(Scope&);
   virtual void analyze(QPainter& p, const Scope&, bool new_frame);
   virtual void resizeEvent(QResizeEvent*);
   virtual void paletteChange(const QPalette&);
+  virtual void framerateChanged();
 
   void drawBackground();
+  void determineStep();
 
  private:
   QPixmap* bar() { return &m_barPixmap; }

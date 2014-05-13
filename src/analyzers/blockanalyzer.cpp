@@ -106,6 +106,10 @@ void BlockAnalyzer::determineStep() {
   m_step = double(m_rows * timeout()) / fallTime;
 }
 
+void BlockAnalyzer::framerateChanged() {  // virtual
+  determineStep();
+}
+
 void BlockAnalyzer::transform(Analyzer::Scope& s)  // pure virtual
 {
   for (uint x = 0; x < s.size(); ++x) s[x] *= 2;
