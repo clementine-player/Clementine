@@ -16,7 +16,7 @@ class BarAnalyzer : public Analyzer::Base {
   Q_INVOKABLE BarAnalyzer(QWidget*);
 
   void init();
-  virtual void analyze(QPainter& p, const Scope&, bool new_frame);
+  virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
   // virtual void transform( Scope& );
 
   /**
@@ -53,7 +53,7 @@ class BarAnalyzer : public Analyzer::Base {
   QPixmap m_pixBarGradient;
   QPixmap m_pixCompose;
   QPixmap canvas_;
-  Scope m_scope;  // so we don't create a vector every frame
+  Analyzer::Scope m_scope;  // so we don't create a vector every frame
   QColor m_bg;
 };
 

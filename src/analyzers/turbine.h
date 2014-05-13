@@ -16,7 +16,7 @@ class TurbineAnalyzer : public BoomAnalyzer {
  public:
   Q_INVOKABLE TurbineAnalyzer(QWidget* parent) : BoomAnalyzer(parent) {}
 
-  void analyze(QPainter& p, const Scope&, bool new_frame);
+  void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
 
   static const char* kName;
 };

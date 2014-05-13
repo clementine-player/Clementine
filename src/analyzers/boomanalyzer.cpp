@@ -5,6 +5,8 @@
 #include <cmath>
 #include <QPainter>
 
+using Analyzer::Scope;
+
 const char* BoomAnalyzer::kName =
     QT_TRANSLATE_NOOP("AnalyzerContainer", "Boom analyzer");
 

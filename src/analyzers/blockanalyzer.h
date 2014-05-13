@@ -32,8 +32,8 @@ class BlockAnalyzer : public Analyzer::Base {
   static const char* kName;
 
  protected:
-  virtual void transform(Scope&);
-  virtual void analyze(QPainter& p, const Scope&, bool new_frame);
+  virtual void transform(Analyzer::Scope&);
+  virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
   virtual void resizeEvent(QResizeEvent*);
   virtual void paletteChange(const QPalette&);
 
@@ -49,7 +49,7 @@ class BlockAnalyzer : public Analyzer::Base {
   QPixmap m_topBarPixmap;
   QPixmap m_background;
   QPixmap canvas_;
-  Scope m_scope;               // so we don't create a vector every frame
+  Analyzer::Scope m_scope;     // so we don't create a vector every frame
   std::vector<float> m_store;  // current bar heights
   std::vector<float> m_yscale;
 

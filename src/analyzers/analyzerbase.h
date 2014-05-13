@@ -84,6 +84,4 @@ void initSin(Scope&, const uint = 6000);
 
 }  // END namespace Analyzer
 
-using Analyzer::Scope;
-
 #endif
