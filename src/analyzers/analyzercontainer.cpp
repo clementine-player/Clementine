@@ -165,6 +165,9 @@ void AnalyzerContainer::ChangeFramerate(int new_framerate) {
     // Even if it is not supposed to happen, I don't want to get a dbz error
     new_framerate = new_framerate == 0 ? kMediumFramerate : new_framerate;
     current_analyzer_->changeTimeout(1000 / new_framerate);
+
+    // notify the current analyzer that the framerate has changed
+    current_analyzer_->framerateChanged();
   }
   SaveFramerate(new_framerate);
 }

@@ -36,6 +36,7 @@ class BlockAnalyzer : public Analyzer::Base {
   virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
   virtual void resizeEvent(QResizeEvent*);
   virtual void paletteChange(const QPalette&);
+  virtual void framerateChanged();
 
   void drawBackground();
   void determineStep();

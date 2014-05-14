@@ -50,6 +50,8 @@ class Base : public QWidget {
     }
   }
 
+  virtual void framerateChanged() {}
+
  protected:
   Base(QWidget*, uint scopeSize = 7);
 
