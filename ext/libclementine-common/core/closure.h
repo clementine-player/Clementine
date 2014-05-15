@@ -53,8 +53,9 @@ class ObjectHelper : public QObject {
   Q_OBJECT
  public:
   ObjectHelper(QObject* parent, const char* signal, ClosureBase* closure);
+  explicit ObjectHelper(ClosureBase* closure);
 
- private slots:
+ public slots:
   void Invoked();
 
  private:
@@ -138,11 +139,20 @@ class CallbackClosure : public ClosureBase {
  public:
   CallbackClosure(QObject* sender, const char* signal,
                   std::function<void()> callback);
+  explicit CallbackClosure(std::function<void()> callback);
 
   virtual void Invoke();
 
  private:
   std::function<void()> callback_;
+};
+
+class MainThreadCallbackClosure : public CallbackClosure {
+ public:
+  explicit MainThreadCallbackClosure(std::function<void()> callback);
+  virtual void Invoke();
+
+  void DoNow();
 };
 
 }  // namespace _detail
@@ -189,5 +199,6 @@ _detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
 
 void DoAfter(QObject* receiver, const char* slot, int msec);
 void DoInAMinuteOrSo(QObject* receiver, const char* slot);
+void RunOnMainThread(std::function<void()> callback);
 
 #endif  // CLOSURE_H

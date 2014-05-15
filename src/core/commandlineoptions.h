@@ -66,6 +66,7 @@ class CommandlineOptions {
   QList<QUrl> urls() const { return urls_; }
   QString language() const { return language_; }
   QString log_levels() const { return log_levels_; }
+  QString remote_base_url() const { return remote_base_url_; }
 
   QByteArray Serialize() const;
   void Load(const QByteArray& serialized);
@@ -84,7 +85,8 @@ class CommandlineOptions {
     Version,
     VolumeIncreaseBy,
     VolumeDecreaseBy,
-    RestartOrPrevious
+    RestartOrPrevious,
+    RemoteBaseUrl,
   };
 
   QString tr(const char* source_text);
@@ -107,6 +109,7 @@ class CommandlineOptions {
   bool toggle_pretty_osd_;
   QString language_;
   QString log_levels_;
+  QString remote_base_url_;
 
   QList<QUrl> urls_;
 };

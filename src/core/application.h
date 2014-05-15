@@ -54,14 +54,18 @@ class Application : public QObject {
  public:
   static bool kIsPortable;
 
-  Application(QObject* parent = nullptr);
+  explicit Application(QObject* parent = nullptr);
   ~Application();
+
+  void Init();
 
   const QString& language_name() const { return language_name_; }
   // Same as language_name, but remove the region code at the end if there is
   // one
   QString language_without_region() const;
   void set_language_name(const QString& name) { language_name_ = name; }
+  QString remote_base_url() const { return remote_base_url_; }
+  void set_remote_base_url(const QString& url) { remote_base_url_ = url; }
 
   TagReaderClient* tag_reader_client() const { return tag_reader_client_; }
   Database* database() const { return database_; }
@@ -107,6 +111,7 @@ signals:
 
  private:
   QString language_name_;
+  QString remote_base_url_;
 
   TagReaderClient* tag_reader_client_;
   Database* database_;

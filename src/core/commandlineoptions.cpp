@@ -63,6 +63,13 @@ const char* CommandlineOptions::kHelpText =
 
 const char* CommandlineOptions::kVersionText = "Clementine %1";
 
+namespace {
+
+const char* kDefaultRemoteBaseUrl =
+    "https://dev-dot-clementine-data.appspot.com";
+
+}  // namespace
+
 CommandlineOptions::CommandlineOptions(int argc, char** argv)
     : argc_(argc),
       argv_(argv),
@@ -75,7 +82,8 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
       play_track_at_(-1),
       show_osd_(false),
       toggle_pretty_osd_(false),
-      log_levels_(logging::kDefaultLogLevels) {
+      log_levels_(logging::kDefaultLogLevels),
+      remote_base_url_(kDefaultRemoteBaseUrl) {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
   RemoveArg("-psn", 1);
@@ -125,6 +133,7 @@ bool CommandlineOptions::Parse() {
       {"verbose", no_argument, 0, Verbose},
       {"log-levels", required_argument, 0, LogLevels},
       {"version", no_argument, 0, Version},
+      {"remote-base-url", required_argument, 0, RemoteBaseUrl},
       {0, 0, 0, 0}};
 
   // Parse the arguments
@@ -259,6 +268,10 @@ bool CommandlineOptions::Parse() {
       case 'k':
         play_track_at_ = QString(optarg).toInt(&ok);
         if (!ok) play_track_at_ = -1;
+        break;
+
+      case RemoteBaseUrl:
+        remote_base_url_ = optarg;
         break;
 
       case '?':

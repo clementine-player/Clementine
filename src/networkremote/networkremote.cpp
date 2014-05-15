@@ -75,7 +75,7 @@ void NetworkRemote::SetupServer() {
   connect(server_ipv6_.get(), SIGNAL(newConnection()), this,
           SLOT(AcceptConnection()));
   connect(web_channel_.get(), SIGNAL(Connected()), SLOT(AcceptWebConnection()));
-  web_channel_->Init();
+  web_channel_->Init(app_->remote_base_url());
 }
 
 void NetworkRemote::StartServer() {

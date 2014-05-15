@@ -11,30 +11,28 @@
 
 namespace {
 
-//const char* kRemoteEndpoint = "http://localhost:8080/channel/remote/%1";
-const char* kRemoteEndpoint = "https://remote-dot-clementine-data.appspot.com/channel/remote/%1";
-
-const char* kInitialPage = "https://remote-dot-clementine-data.appspot.com/channel/clementine";
+const char* kInitialPagePath = "/channel/clementine";
+const char* kRemoteEndpointPath = "/channel/remote/%1";
 
 }  // namespace
 
 ClementineWebPage::ClementineWebPage(QObject* parent)
     : QWebPage(parent) {
   qLog(Debug) << Q_FUNC_INFO;
-  NewClosure(this, SIGNAL(loadFinished(bool)), [&]() {
+  NewClosure(this, SIGNAL(loadFinished(bool)), [=]() {
     qLog(Debug) << Q_FUNC_INFO << "load finished" << totalBytes();
     qLog(Debug) << mainFrame()->toHtml();
-    mainFrame()->evaluateJavaScript("window.setTimeout");
   });
 }
 
-void ClementineWebPage::Init() {
-  QMetaObject::invokeMethod(this, "InitOnMainThread", Qt::QueuedConnection);
-}
-
-void ClementineWebPage::InitOnMainThread() {
-  Q_ASSERT(QThread::currentThread() == qApp->thread());
-  mainFrame()->load(QUrl(kInitialPage));
+void ClementineWebPage::Init(const QString& base_url) {
+  RunOnMainThread([=]{
+    Q_ASSERT(QThread::currentThread() == qApp->thread());
+    base_url_ = base_url;
+    QUrl url(base_url_);
+    url.setPath(kInitialPagePath);
+    mainFrame()->load(url);
+  });
 }
 
 void ClementineWebPage::javaScriptConsoleMessage(
@@ -45,7 +43,9 @@ void ClementineWebPage::javaScriptConsoleMessage(
 bool ClementineWebPage::javaScriptConfirm(QWebFrame*, const QString& message) {
   id_ = message;
   qLog(Debug) << "id:" << message;
-  qLog(Debug) << QString(kRemoteEndpoint).arg(message);
+  QUrl url(base_url_);
+  url.setPath(QString(kRemoteEndpointPath).arg(message));
+  qLog(Debug) << url;
   return true;
 }
 

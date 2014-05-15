@@ -77,6 +77,29 @@ Application::Application(QObject* parent)
       network_remote_(nullptr),
       network_remote_helper_(nullptr),
       scrobbler_(nullptr) {
+}
+
+Application::~Application() {
+  // It's important that the device manager is deleted before the database.
+  // Deleting the database deletes all objects that have been created in its
+  // thread, including some device library backends.
+  delete device_manager_;
+  device_manager_ = nullptr;
+
+  for (QObject* object : objects_in_threads_) {
+    object->deleteLater();
+  }
+
+  for (QThread* thread : threads_) {
+    thread->quit();
+  }
+
+  for (QThread* thread : threads_) {
+    thread->wait();
+  }
+}
+
+void Application::Init() {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
   tag_reader_client_->Start();
@@ -131,26 +154,6 @@ Application::Application(QObject* parent)
   library_->Init();
 
   DoInAMinuteOrSo(database_, SLOT(DoBackup()));
-}
-
-Application::~Application() {
-  // It's important that the device manager is deleted before the database.
-  // Deleting the database deletes all objects that have been created in its
-  // thread, including some device library backends.
-  delete device_manager_;
-  device_manager_ = nullptr;
-
-  for (QObject* object : objects_in_threads_) {
-    object->deleteLater();
-  }
-
-  for (QThread* thread : threads_) {
-    thread->quit();
-  }
-
-  for (QThread* thread : threads_) {
-    thread->wait();
-  }
 }
 
 void Application::MoveToNewThread(QObject* object) {

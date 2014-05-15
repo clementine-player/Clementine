@@ -2,6 +2,7 @@
 
 #include <QByteArray>
 
+#include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
@@ -9,8 +10,7 @@
 
 namespace {
 
-//const char* kEndpoint = "http://localhost:8080/channel/clementine/push/%1";
-const char* kEndpoint = "https://remote-dot-clementine-data.appspot.com/channel/clementine/push/%1";
+const char* kEndpointPath = "/channel/clementine/push/%1";
 
 }  // namespace
 
@@ -29,8 +29,11 @@ void WebRemoteClient::SendData(pb::remote::Message* msg) {
   qLog(Debug) << "Sending:" << msg->DebugString().c_str();
   std::string data = msg->SerializeAsString();
   QByteArray base64 = QByteArray(data.data(), data.size()).toBase64();
-  QNetworkRequest request = QNetworkRequest(
-      QUrl(QString(kEndpoint).arg(web_channel_->id())));
+
+  QUrl url(app_->remote_base_url());
+  url.setPath(QString(kEndpointPath).arg(web_channel_->id()));
+
+  QNetworkRequest request = QNetworkRequest(url);
   QNetworkReply* reply = network_->post(request, base64);
   NewClosure(reply, SIGNAL(finished()),
              this, SLOT(SendDataFinished(QNetworkReply*)), reply);

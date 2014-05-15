@@ -24,7 +24,7 @@ class RemoteClient : public QObject {
  signals:
   void Parse(const pb::remote::Message& msg);
 
- private:
+ protected:
   Application* app_;
   bool downloader_;
 };

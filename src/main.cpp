@@ -448,6 +448,8 @@ int main(int argc, char* argv[]) {
 
   Application app;
   app.set_language_name(language);
+  app.set_remote_base_url(options.remote_base_url());
+  app.Init();
 
   Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
   Echonest::Config::instance()->setNetworkAccessManager(

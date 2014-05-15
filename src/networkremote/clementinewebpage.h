@@ -7,7 +7,7 @@ class ClementineWebPage : public QWebPage {
 
  public:
   explicit ClementineWebPage(QObject* parent = nullptr);
-  void Init();
+  void Init(const QString& base_url);
   const QString id() const { return id_; }
 
  public slots:
@@ -16,9 +16,6 @@ class ClementineWebPage : public QWebPage {
  signals:
   void Connected();
   void MessageReceived(const pb::remote::Message& msg);
-
- private slots:
-  void InitOnMainThread();
 
  protected:
   // For OOB communication for controlling the appengine channel.
@@ -31,4 +28,5 @@ class ClementineWebPage : public QWebPage {
 
  private:
   QString id_;
+  QString base_url_;
 };
