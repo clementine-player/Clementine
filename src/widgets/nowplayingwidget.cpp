@@ -268,7 +268,10 @@ void NowPlayingWidget::UpdateDetailsText() {
     case LargeSongDetailsBelow:
       details_->setTextWidth(cover_loader_options_.desired_height_);
       if (fit_width_) {
-        details_->setDefaultStyleSheet("");
+         details_->setDefaultStyleSheet(
+            "p {"
+            "  font-size: small;"
+            "}");
       } else {
         details_->setDefaultStyleSheet(
             "p {"
