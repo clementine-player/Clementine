@@ -144,6 +144,16 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
           SLOT(FadePreviousTrack(qreal)));
   fade_animation_->setDirection(QTimeLine::Backward);  // 1.0 -> 0.0
 
+  // add placeholder text to get the correct height
+  if (mode_ == LargeSongDetailsBelow) {
+    details_->setDefaultStyleSheet(
+          "p {"
+          "  font-size: small;"
+          "  color: white;"
+          "}");
+    details_->setHtml(QString("<p align=center><i></i><br/><br/></p>"));
+  }
+
   UpdateHeight();
 
   connect(album_cover_choice_controller_, SIGNAL(AutomaticCoverSearchDone()),
