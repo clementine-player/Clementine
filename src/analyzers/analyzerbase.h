@@ -50,6 +50,8 @@ class Base : public QWidget {
     }
   }
 
+  virtual void framerateChanged() {}
+
  protected:
   Base(QWidget*, uint scopeSize = 7);
 
@@ -73,6 +75,7 @@ class Base : public QWidget {
   FHT* m_fht;
   EngineBase* m_engine;
   Scope m_lastScope;
+  int current_chunk_;
 
   bool new_frame_;
   bool is_playing_;
@@ -82,7 +85,5 @@ void interpolate(const Scope&, Scope&);
 void initSin(Scope&, const uint = 6000);
 
 }  // END namespace Analyzer
-
-using Analyzer::Scope;
 
 #endif

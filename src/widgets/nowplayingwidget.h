@@ -54,7 +54,11 @@ class NowPlayingWidget : public QWidget {
   static const int kTopBorder;
 
   // Values are saved in QSettings
-  enum Mode { SmallSongDetails = 0, LargeSongDetails = 1, };
+  enum Mode {
+    SmallSongDetails = 0,
+    LargeSongDetails = 1,
+    LargeSongDetailsBelow = 2,
+  };
 
   void SetApplication(Application* app);
 

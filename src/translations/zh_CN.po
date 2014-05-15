@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-14 07:19+0000\n"
+"PO-Revision-Date: 2014-05-11 11:11+0000\n"
 "Last-Translator: min zhang <zm1990s@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -695,7 +695,7 @@ msgstr "全部专辑"
 msgid "All artists"
 msgstr "全部艺人"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "全部文件 (*)"
 
@@ -764,7 +764,7 @@ msgstr "出现了意外错误。"
 msgid "And:"
 msgstr "和："
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "愤怒"
 
@@ -987,7 +987,7 @@ msgstr "浏览..."
 msgid "Buffer duration"
 msgstr "缓冲时长"
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "缓冲中"
 
@@ -1080,7 +1080,7 @@ msgstr "选择 VK.com 缓存目录"
 msgid "Choose a name for your smart playlist"
 msgstr "为您的智能播放列表起名"
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "自动选择"
 
@@ -1210,7 +1210,7 @@ msgstr "点此收藏播放列表，列表将被保存并可稍候通过左侧边
 msgid "Click to toggle between remaining time and total time"
 msgstr "单击切换剩余时间和总计时间模式"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1604,7 +1604,7 @@ msgstr "降低音量"
 msgid "Default background image"
 msgstr "默认背景图片"
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr "%1 的默认设备"
@@ -2383,7 +2383,7 @@ msgstr "帧速率"
 msgid "Frames per buffer"
 msgstr "每次缓冲帧数"
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "冻结"
 
@@ -2534,7 +2534,7 @@ msgstr "未获得 URL 返回 HTTP 3xx 状态代码, 请检查服务器配置。"
 msgid "HTTP proxy"
 msgstr "HTTP 代理"
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "高兴"
 
@@ -2567,10 +2567,6 @@ msgstr "主机未找到，请检查服务器链接。例如: http://localhost:40
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "小时"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr "但是，你需要登录才能访问播放列表和流媒体"
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2606,11 +2602,11 @@ msgstr "如果您知道播客地址，请在下面填入地址并且点击 Go。
 msgid "Ignore \"The\" in artist names"
 msgstr "忽略艺人名称中的“The”"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2895,15 +2891,15 @@ msgstr "载入"
 msgid "Load cover from URL"
 msgstr "从 URL 载入封面"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "从 URL 载入封面..."
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "从磁盘读取封面"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "从磁盘载入封面..."
 
@@ -2936,11 +2932,11 @@ msgstr "加载曲目"
 msgid "Loading stream"
 msgstr "正在载入媒体流"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "正在载入曲目"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "正在加载曲目信息"
 
@@ -2960,7 +2956,7 @@ msgstr "载入文件或URL，替换当前播放列表"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3325,7 +3321,7 @@ msgstr "无"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "已选择的曲目均不适合复制到设备"
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "正常"
 
@@ -3805,7 +3801,12 @@ msgstr "随机打乱曲目顺序"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
+msgctxt "Sound quality"
+msgid "Quality"
+msgstr "质量"
+
 #: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
 msgid "Quality"
 msgstr "质量"
 
@@ -4123,11 +4124,11 @@ msgstr "采样率"
 msgid "Save .mood files in your music library"
 msgstr "保存 .mood 文件至您的音乐库"
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "保存转接封面"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "保存封面至硬盘..."
 
@@ -4216,11 +4217,11 @@ msgstr "搜索 Magnatune"
 msgid "Search Subsonic"
 msgstr "搜索 Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr "自动搜索"
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr "搜索专辑封面..."
 
@@ -4418,7 +4419,7 @@ msgstr "在媒体库中显示封面"
 msgid "Show dividers"
 msgstr "显示分频器"
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "显示完整尺寸..."
 
@@ -4607,7 +4608,7 @@ msgstr "排序曲目"
 msgid "Sorting"
 msgstr "正在排序"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
@@ -4783,7 +4784,7 @@ msgstr "同步 Spotify 播放列表"
 msgid "Syncing Spotify starred tracks"
 msgstr "同步 Spotify 星号标记的曲目"
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "系统颜色"
 
@@ -5080,7 +5081,7 @@ msgstr "无法下载 %1 (%2)"
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "未知"
@@ -5093,7 +5094,7 @@ msgstr "未知的content-type"
 msgid "Unknown error"
 msgstr "未知错误"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "撤销封面"
 
@@ -5512,11 +5513,12 @@ msgstr "您没有Spotify付费账户。"
 msgid "You do not have an active subscription"
 msgstr "您没有活动订阅"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
-msgstr "你不需要登录就可以搜索或聆听 SoundCloud 上的音乐"
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
+msgstr "你不需要登录就可以搜索或聆听 SoundCloud 上的音乐。但是只有登录后才能获取您自己的播放列表和流"
 
 #: internet/spotifyservice.cpp:175
 msgid ""

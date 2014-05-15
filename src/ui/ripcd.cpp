@@ -30,6 +30,8 @@
 #include <QFileDialog>
 #include <QFrame>
 #include <QLineEdit>
+#include <QMessageBox>
+#include <QMutexLocker>
 #include <QtDebug>
 #include <QtConcurrentRun>
 #include <cdio/cdio.h>
@@ -71,8 +73,9 @@ RipCD::RipCD(QWidget* parent)
       queued_(0),
       finished_success_(0),
       finished_failed_(0),
-      ui_(new Ui_RipCD) {
-
+      ui_(new Ui_RipCD),
+      cancel_requested_(false) {
+  cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   // Init
   ui_->setupUi(this);
 
@@ -116,28 +119,6 @@ RipCD::RipCD(QWidget* parent)
   setWindowTitle(tr("Rip CD"));
   AddDestinationDirectory(QDir::homePath());
 
-  cdio_ = cdio_open(nullptr, DRIVER_UNKNOWN);
-  if (!cdio_) {
-    qLog(Error) << "Failed to read CD drive";
-    return;
-  } else {
-    i_tracks_ = cdio_get_num_tracks(cdio_);
-    ui_->tableWidget->setRowCount(i_tracks_);
-    for (int i = 1; i <= i_tracks_; i++) {
-      QCheckBox* checkbox_i = new QCheckBox(ui_->tableWidget);
-      checkbox_i->setCheckState(Qt::Checked);
-      checkboxes_.append(checkbox_i);
-      ui_->tableWidget->setCellWidget(i - 1, kCheckboxColumn, checkbox_i);
-      ui_->tableWidget->setCellWidget(i - 1, kTrackNumberColumn,
-                                      new QLabel(QString::number(i)));
-      QString track_title = QString("Track %1").arg(i);
-      QLineEdit* line_edit_track_title_i =
-          new QLineEdit(track_title, ui_->tableWidget);
-      track_names_.append(line_edit_track_title_i);
-      ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn,
-                                      line_edit_track_title_i);
-    }
-  }
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
   qSort(presets.begin(), presets.end(), ComparePresetsByName);
@@ -165,7 +146,7 @@ RipCD::RipCD(QWidget* parent)
   ui_->progress_bar->setMaximum(100);
 }
 
-RipCD::~RipCD() { delete ui_; }
+RipCD::~RipCD() { cdio_destroy(cdio_); }
 
 /*
  * WAV Header documentation
@@ -225,22 +206,19 @@ int RipCD::NumTracksToRip() {
 }
 
 void RipCD::ThreadClickedRipButton() {
-
   temporary_directory_ = Utilities::MakeTempDir() + "/";
-
   finished_success_ = 0;
   finished_failed_ = 0;
   ui_->progress_bar->setMaximum(NumTracksToRip() * 2 * 100);
 
   // Set up progress bar
   emit(SignalUpdateProgress());
-
+  tracks_to_rip_.clear();
   for (int i = 1; i <= i_tracks_; i++) {
     if (!checkboxes_.value(i - 1)->isChecked()) {
       continue;
     }
     tracks_to_rip_.append(i);
-
     QString filename = temporary_directory_ +
                        ParseFileFormatString(ui_->format_filename->text(), i) +
                        ".wav";
@@ -254,6 +232,13 @@ void RipCD::ThreadClickedRipButton() {
 
     QByteArray buffered_input_bytes(CDIO_CD_FRAMESIZE_RAW, '\0');
     for (lsn_t i_cursor = i_first_lsn; i_cursor <= i_last_lsn; i_cursor++) {
+      {
+        QMutexLocker l(&mutex_);
+        if (cancel_requested_) {
+          qLog(Debug) << "CD ripping canceled.";
+          return;
+        }
+      }
       if (cdio_read_audio_sector(cdio_, buffered_input_bytes.data(),
                                  i_cursor) == DRIVER_OP_SUCCESS) {
         destination_file->write(buffered_input_bytes.data(),
@@ -327,7 +312,22 @@ void RipCD::ThreadedTranscoding() {
 }
 
 void RipCD::ClickedRipButton() {
+  if (cdio_ && cdio_get_media_changed(cdio_)) {
+    QMessageBox cdio_fail(QMessageBox::Critical, tr("Error Ripping CD"),
+                          tr("Media has changed. Reloading"));
+    cdio_fail.exec();
+    if (CheckCDIOIsValid()) {
+      BuildTrackListTable();
+    } else {
+      ui_->tableWidget->clearContents();
+    }
+    return;
+  }
   SetWorking(true);
+  {
+    QMutexLocker l(&mutex_);
+    cancel_requested_ = false;
+  }
   QtConcurrent::run(this, &RipCD::ThreadClickedRipButton);
 }
 
@@ -412,12 +412,26 @@ void RipCD::AddDestinationDirectory(QString dir) {
 }
 
 void RipCD::Cancel() {
+  {
+    QMutexLocker l(&mutex_);
+    cancel_requested_ = true;
+  }
+  ui_->progress_bar->setValue(0);
   transcoder_->Cancel();
   RemoveTemporaryDirectory();
   SetWorking(false);
 }
 
-bool RipCD::CDIOIsValid() const { return (cdio_); }
+bool RipCD::CheckCDIOIsValid() {
+  if (cdio_) {
+    cdio_destroy(cdio_);
+  }
+  cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
+  // Refresh the status of the cd media. This will prevent unnecessary
+  // rebuilds of the track list table.
+  cdio_get_media_changed(cdio_);
+  return cdio_;
+}
 
 void RipCD::SetWorking(bool working) {
   rip_button_->setVisible(!working);
@@ -455,3 +469,26 @@ void RipCD::RemoveTemporaryDirectory() {
     Utilities::RemoveRecursive(temporary_directory_);
   temporary_directory_.clear();
 }
+
+void RipCD::BuildTrackListTable() {
+  checkboxes_.clear();
+  track_names_.clear();
+  i_tracks_ = cdio_get_num_tracks(cdio_);
+  ui_->tableWidget->setRowCount(i_tracks_);
+  for (int i = 1; i <= i_tracks_; i++) {
+    QCheckBox* checkbox_i = new QCheckBox(ui_->tableWidget);
+    checkbox_i->setCheckState(Qt::Checked);
+    checkboxes_.append(checkbox_i);
+    ui_->tableWidget->setCellWidget(i - 1, kCheckboxColumn, checkbox_i);
+    ui_->tableWidget->setCellWidget(i - 1, kTrackNumberColumn,
+                                    new QLabel(QString::number(i)));
+    QString track_title = QString("Track %1").arg(i);
+    QLineEdit* line_edit_track_title_i =
+        new QLineEdit(track_title, ui_->tableWidget);
+    track_names_.append(line_edit_track_title_i);
+    ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn,
+                                    line_edit_track_title_i);
+  }
+}
+
+void RipCD::showEvent(QShowEvent* event) { BuildTrackListTable(); }

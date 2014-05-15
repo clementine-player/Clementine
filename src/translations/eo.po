@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-17 11:34+0000\n"
+"PO-Revision-Date: 2014-05-12 06:08+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/projects/p/clementine/language/eo/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -206,7 +206,7 @@ msgstr "&Nenio"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Playlist"
-msgstr ""
+msgstr "&Ludlisto"
 
 #: ../bin/src/ui_mainwindow.h:644
 msgid "&Quit"
@@ -686,7 +686,7 @@ msgstr "Ĉiuj albumoj"
 msgid "All artists"
 msgstr "Ĉiuj verkintoj"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "Ĉiuj dosieroj (*)"
 
@@ -755,7 +755,7 @@ msgstr ""
 msgid "And:"
 msgstr "Kaj:"
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr ""
 
@@ -978,7 +978,7 @@ msgstr ""
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr ""
 
@@ -1071,7 +1071,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr ""
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr ""
 
@@ -1201,7 +1201,7 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr ""
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1233,7 +1233,7 @@ msgstr ""
 
 #: ui/equalizer.cpp:114
 msgid "Club"
-msgstr ""
+msgstr "Klubo"
 
 #: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
@@ -1377,7 +1377,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
-msgstr ""
+msgstr "Kopirajto"
 
 #: internet/subsonicsettingspage.cpp:75
 msgid ""
@@ -1595,7 +1595,7 @@ msgstr ""
 msgid "Default background image"
 msgstr ""
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1611,7 +1611,7 @@ msgstr ""
 #: playlist/playlistlistcontainer.cpp:70
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
-msgstr ""
+msgstr "Forigi"
 
 #: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1333
 msgid "Delete Grooveshark playlist"
@@ -1694,7 +1694,7 @@ msgstr ""
 
 #: ../bin/src/ui_vksearchdialog.h:61 ../bin/src/ui_ripcd.h:300
 msgid "Dialog"
-msgstr ""
+msgstr "Dialogujo"
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1882,7 +1882,7 @@ msgstr ""
 
 #: ../bin/src/ui_ripcd.h:309
 msgid "Duration"
-msgstr ""
+msgstr "Daŭro"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
@@ -2246,7 +2246,7 @@ msgstr ""
 
 #: ../bin/src/ui_ripcd.h:320
 msgid "File Format"
-msgstr ""
+msgstr "Dosierformo"
 
 #: ui/organisedialog.cpp:77
 msgid "File extension"
@@ -2374,7 +2374,7 @@ msgstr ""
 msgid "Frames per buffer"
 msgstr ""
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr ""
 
@@ -2525,7 +2525,7 @@ msgstr ""
 msgid "HTTP proxy"
 msgstr ""
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr ""
 
@@ -2558,10 +2558,6 @@ msgstr ""
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "Horoj"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr ""
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2597,11 +2593,11 @@ msgstr ""
 msgid "Ignore \"The\" in artist names"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr ""
 
@@ -2684,7 +2680,7 @@ msgstr ""
 
 #: ui/mainwindow.cpp:237
 msgid "Internet"
-msgstr ""
+msgstr "Interreto"
 
 #: ui/settingsdialog.cpp:155
 msgid "Internet providers"
@@ -2886,15 +2882,15 @@ msgstr ""
 msgid "Load cover from URL"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr ""
 
@@ -2927,11 +2923,11 @@ msgstr ""
 msgid "Loading stream"
 msgstr ""
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr ""
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr ""
 
@@ -2951,7 +2947,7 @@ msgstr ""
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -2960,7 +2956,7 @@ msgstr ""
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 msgid "Login"
-msgstr ""
+msgstr "Ensaluti"
 
 #: podcasts/podcastsettingspage.cpp:120
 msgid "Login failed"
@@ -2968,7 +2964,7 @@ msgstr ""
 
 #: internet/vksettingspage.cpp:121
 msgid "Logout"
-msgstr ""
+msgstr "Elsaluti"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
@@ -3192,7 +3188,7 @@ msgstr ""
 #: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:699
 #: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
-msgstr ""
+msgstr "Silentigi"
 
 #: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
 msgid "My Music"
@@ -3316,7 +3312,7 @@ msgstr ""
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr ""
 
@@ -3371,7 +3367,7 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:375
 msgid "Notifications"
-msgstr ""
+msgstr "Sciigoj"
 
 #: ui/macsystemtrayicon.mm:64
 msgid "Now Playing"
@@ -3429,7 +3425,7 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:290
 msgid "Opacity"
-msgstr ""
+msgstr "Opakeco"
 
 #: internet/digitallyimportedservicebase.cpp:172
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
@@ -3571,7 +3567,7 @@ msgstr "Pasvorto"
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1007 ui/mainwindow.cpp:1448
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
-msgstr ""
+msgstr "Paŭzigi"
 
 #: core/commandlineoptions.cpp:146
 msgid "Pause playback"
@@ -3588,7 +3584,7 @@ msgstr ""
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
-msgstr ""
+msgstr "Bildero"
 
 #: widgets/fancytabwidget.cpp:664
 msgid "Plain sidebar"
@@ -3599,7 +3595,7 @@ msgstr ""
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:638
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
-msgstr ""
+msgstr "Ludi"
 
 #: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:667
 msgid "Play count"
@@ -3620,11 +3616,11 @@ msgstr ""
 
 #: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
-msgstr ""
+msgstr "Ludi/paŭzigi"
 
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Playback"
-msgstr ""
+msgstr "Ludado"
 
 #: core/commandlineoptions.cpp:143
 msgid "Player options"
@@ -3634,7 +3630,7 @@ msgstr ""
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
-msgstr ""
+msgstr "Ludlisto"
 
 #: widgets/osd.cpp:176
 msgid "Playlist finished"
@@ -3651,7 +3647,7 @@ msgstr ""
 #: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
 #: ui/mainwindow.cpp:235
 msgid "Playlists"
-msgstr ""
+msgstr "Ludlistoj"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
@@ -3663,7 +3659,7 @@ msgstr ""
 
 #: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
-msgstr ""
+msgstr "Podkastoj"
 
 #: ui/equalizer.cpp:135
 msgid "Pop"
@@ -3688,7 +3684,7 @@ msgstr ""
 #: ../bin/src/ui_networkproxysettingspage.h:166
 #: ../bin/src/ui_networkremotesettingspage.h:181
 msgid "Port"
-msgstr ""
+msgstr "Pordo"
 
 #: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
 msgid "Pre-amp"
@@ -3728,7 +3724,7 @@ msgstr ""
 
 #: ../bin/src/ui_equalizer.h:164
 msgid "Preset:"
-msgstr ""
+msgstr "Antaŭagordo:"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
@@ -3796,9 +3792,14 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Sound quality"
 msgid "Quality"
-msgstr "Kvalito"
+msgstr ""
+
+#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
+msgid "Quality"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -4025,7 +4026,7 @@ msgstr ""
 
 #: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
 msgid "Reset"
-msgstr ""
+msgstr "Reŝargo"
 
 #: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:665
 msgid "Reset play counts"
@@ -4114,11 +4115,11 @@ msgstr ""
 msgid "Save .mood files in your music library"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr ""
 
@@ -4207,11 +4208,11 @@ msgstr ""
 msgid "Search Subsonic"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr ""
 
@@ -4409,7 +4410,7 @@ msgstr ""
 msgid "Show dividers"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr ""
 
@@ -4488,7 +4489,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
-msgstr ""
+msgstr "Ensaluti"
 
 #: ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
@@ -4598,7 +4599,7 @@ msgstr ""
 msgid "Sorting"
 msgstr ""
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
@@ -4724,7 +4725,7 @@ msgstr ""
 
 #: internet/subsonicservice.cpp:98 ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:36
 msgid "Success!"
@@ -4774,7 +4775,7 @@ msgstr ""
 msgid "Syncing Spotify starred tracks"
 msgstr ""
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr ""
 
@@ -5012,7 +5013,7 @@ msgstr ""
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
-msgstr ""
+msgstr "Kanto"
 
 #: internet/soundcloudservice.cpp:134
 msgid "Tracks"
@@ -5071,7 +5072,7 @@ msgstr ""
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr ""
@@ -5084,7 +5085,7 @@ msgstr ""
 msgid "Unknown error"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr ""
 
@@ -5229,7 +5230,7 @@ msgstr ""
 
 #: ui/settingsdialog.cpp:147
 msgid "User interface"
-msgstr ""
+msgstr "Fasado"
 
 #: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
@@ -5281,7 +5282,7 @@ msgstr ""
 
 #: ../bin/src/ui_vksettingspage.h:210
 msgid "Vk.com"
-msgstr ""
+msgstr "Vk.com"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
@@ -5315,7 +5316,7 @@ msgstr "Wav"
 
 #: ../bin/src/ui_podcastinfowidget.h:193
 msgid "Website"
-msgstr ""
+msgstr "Retejo"
 
 #: smartplaylists/searchterm.cpp:390
 msgid "Weeks"
@@ -5503,10 +5504,11 @@ msgstr ""
 msgid "You do not have an active subscription"
 msgstr ""
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
 msgstr ""
 
 #: internet/spotifyservice.cpp:175
@@ -5650,7 +5652,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:249
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: podcasts/gpoddertoptagspage.cpp:32
 msgid "gpodder.net directory"

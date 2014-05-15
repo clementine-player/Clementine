@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-27 15:08+0000\n"
-"Last-Translator: AsavarTzeth <asavartzeth@gmail.com>\n"
+"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -697,7 +697,7 @@ msgstr "Alla album"
 msgid "All artists"
 msgstr "Alla artister"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "Alla filer (*)"
 
@@ -766,7 +766,7 @@ msgstr "Ett okänt fel inträffade."
 msgid "And:"
 msgstr "Och:"
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "Arg"
 
@@ -989,7 +989,7 @@ msgstr "Bläddra..."
 msgid "Buffer duration"
 msgstr "Längd på buffer"
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "Buffrar"
 
@@ -1082,7 +1082,7 @@ msgstr "Välj Vk.com cache-katalog"
 msgid "Choose a name for your smart playlist"
 msgstr "Välj ett namn för din smara spellista"
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "Välj automatiskt"
 
@@ -1212,7 +1212,7 @@ msgstr "Klicka här för att favorisera denna spellista så att den sparas och f
 msgid "Click to toggle between remaining time and total time"
 msgstr "Klicka för att växla mellan återstående tid och total tid"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1606,7 +1606,7 @@ msgstr "Sänk volymen"
 msgid "Default background image"
 msgstr "Standardbakgrund"
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr "Standardenhet på %1"
@@ -2385,7 +2385,7 @@ msgstr "Bildfrekvens"
 msgid "Frames per buffer"
 msgstr "Ramar per buffert"
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "Frusen"
 
@@ -2536,7 +2536,7 @@ msgstr "HTTP 3xx statuskod mottagen utan URL, verifiera serverkonfiguration."
 msgid "HTTP proxy"
 msgstr "HTTP-proxy"
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "Glad"
 
@@ -2569,10 +2569,6 @@ msgstr "Hittade ingen värd, Kontrollera serverns URL. Exempel: http://localhost
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "Timmar"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr "Dock måste du logga in för att komma åt dina spellistor och din ström."
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2608,11 +2604,11 @@ msgstr "Om du känner till en adress till en podsändnin, ange den här under oc
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorera \"The\" i artistnamn"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2897,15 +2893,15 @@ msgstr "Läs in"
 msgid "Load cover from URL"
 msgstr "Ladda omslag från URL"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "Ladda omslag från URL..."
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "Ladda omslag från hårddisk"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "Läs in omslagsbild från disk..."
 
@@ -2938,11 +2934,11 @@ msgstr "Laddar låtar"
 msgid "Loading stream"
 msgstr "Läser in ström"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Läser in spår"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "Laddar låtinformation"
 
@@ -2962,7 +2958,7 @@ msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3327,7 +3323,7 @@ msgstr "Inga"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ingen av de valda låtarna lämpar sig för kopiering till en enhet"
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "Normal"
 
@@ -3807,9 +3803,14 @@ msgstr "Lägg till låtar i slumpmässig ordning"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Sound quality"
 msgid "Quality"
-msgstr "Kvalitet"
+msgstr ""
+
+#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
+msgid "Quality"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -4125,11 +4126,11 @@ msgstr "Samplingsfrekvens"
 msgid "Save .mood files in your music library"
 msgstr "Spara .stämningsfiler i ditt musikbibliotek"
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "Spara skivomslag"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "Spara omslag till disk..."
 
@@ -4218,11 +4219,11 @@ msgstr "Sök i Magnatune"
 msgid "Search Subsonic"
 msgstr "Sök Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr "Sök automatiskt"
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr "Sök efter albumomslag..."
 
@@ -4420,7 +4421,7 @@ msgstr "Visa omslagsbilder i biblioteket"
 msgid "Show dividers"
 msgstr "Visa avdelare"
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "Visa full storlek..."
 
@@ -4609,7 +4610,7 @@ msgstr "Ordna låtar efter"
 msgid "Sorting"
 msgstr "Sortering"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
@@ -4785,7 +4786,7 @@ msgstr "Synkroniserar Spotify-spellista"
 msgid "Syncing Spotify starred tracks"
 msgstr "Synkroniserar stjärnmärkta spår i Spotify"
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "Systemfärger"
 
@@ -5082,7 +5083,7 @@ msgstr "Det går inte att hämta %1 (%2)"
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Okänt"
@@ -5095,7 +5096,7 @@ msgstr "Okänd innehållstyp"
 msgid "Unknown error"
 msgstr "Okänt fel"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "Ta bort omslag"
 
@@ -5514,11 +5515,12 @@ msgstr "Du har inget Spotify Premium konto"
 msgid "You do not have an active subscription"
 msgstr "Du har inte någon aktiv prenumeration"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
-msgstr "Du behöver inte vara inloggad för att söka och lyssna på musik på SoundCloud."
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
+msgstr ""
 
 #: internet/spotifyservice.cpp:175
 msgid ""

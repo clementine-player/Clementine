@@ -209,3 +209,8 @@ void QtLocalPeer::receiveConnection()
     emit messageReceived(uMsg); //### (might take a long time to return)
     emit messageReceived(QString::fromUtf8(uMsg));
 }
+
+QtLocalPeer::~QtLocalPeer ()
+{
+  lockFile.remove();
+}

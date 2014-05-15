@@ -25,6 +25,8 @@
 #include "core/arraysize.h"
 #include "core/logging.h"
 
+using Analyzer::Scope;
+
 const char* NyanCatAnalyzer::kName = "Nyanalyzer cat";
 const float NyanCatAnalyzer::kPixelScale = 0.02f;
 

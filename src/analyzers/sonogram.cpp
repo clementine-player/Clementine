@@ -15,6 +15,8 @@
 
 #include <QPainter>
 
+using Analyzer::Scope;
+
 const char* Sonogram::kName =
     QT_TRANSLATE_NOOP("AnalyzerContainer", "Sonogram");
 

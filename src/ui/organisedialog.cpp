@@ -155,7 +155,7 @@ bool OrganiseDialog::SetFilenames(const QStringList& filenames) {
       QtConcurrent::run(this, &OrganiseDialog::LoadSongsBlocking, filenames);
   QFutureWatcher<SongList>* watcher = new QFutureWatcher<SongList>(this);
   watcher->setFuture(songs_future_);
-  NewClosure(watcher, SIGNAL(finished()), [&]() {
+  NewClosure(watcher, SIGNAL(finished()), [=]() {
     SetSongs(songs_future_.result());
     watcher->deleteLater();
   });

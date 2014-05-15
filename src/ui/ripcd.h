@@ -22,9 +22,10 @@
 #include <QCheckBox>
 #include <QThread>
 #include <QFile>
+#include <QMutex>
 #include <cdio/cdio.h>
 #include "ui_ripcd.h"
-
+#include <memory>
 class Ui_RipCD;
 class Transcoder;
 
@@ -36,7 +37,11 @@ class RipCD : public QDialog {
  public:
   explicit RipCD(QWidget* parent = nullptr);
   ~RipCD();
-  bool CDIOIsValid() const;
+  bool CheckCDIOIsValid();
+  void BuildTrackListTable();
+
+ protected:
+  void showEvent(QShowEvent* event);
 
  private:
   static const char* kSettingsGroup;
@@ -47,7 +52,7 @@ class RipCD : public QDialog {
   int finished_success_;
   int finished_failed_;
   track_t i_tracks_;
-  Ui_RipCD* ui_;
+  std::unique_ptr<Ui_RipCD> ui_;
   CdIo_t* cdio_;
   QList<QCheckBox*> checkboxes_;
   QList<QString> generated_files_;
@@ -58,6 +63,8 @@ class RipCD : public QDialog {
   QPushButton* close_button_;
   QPushButton* rip_button_;
   QString temporary_directory_;
+  bool cancel_requested_;
+  QMutex mutex_;
 
   void WriteWAVHeader(QFile* stream, int32_t i_bytecount);
   int NumTracksToRip();

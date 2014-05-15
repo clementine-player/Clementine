@@ -6,12 +6,13 @@
 # eliash <elia.shreidler@gmail.com>, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # matanya <matanya.moses@gmail.com>, 2012
+# Oran Shuster <thristle666@gmail.com>, 2014
 # ud1955 <ud1955@gmail.com>, 2013
 # Yaron Shahrabani <sh.yaron@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-14 07:10+0000\n"
+"PO-Revision-Date: 2014-05-11 07:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -689,7 +690,7 @@ msgstr "כל האלבומים"
 msgid "All artists"
 msgstr "כל האמנים"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "כל הקבצים (*)"
 
@@ -758,7 +759,7 @@ msgstr "אירעה שגיאה לא מוגדרת"
 msgid "And:"
 msgstr "וגם:"
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "כָּעוּס"
 
@@ -981,7 +982,7 @@ msgstr "עיון..."
 msgid "Buffer duration"
 msgstr "משך הבאפר (buffer)"
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "באגירה"
 
@@ -1074,7 +1075,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "נא לבחור בשם עבור רשימת ההשמעה החכמה"
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "בחירה אוטומטית"
 
@@ -1204,7 +1205,7 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr "יש ללחוץ כאן על מנת לעבור בין הצגת הזמן הנותר לזמן הכולל"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1598,7 +1599,7 @@ msgstr "הנמכת עצמת השמע"
 msgid "Default background image"
 msgstr "תמונת בררת המחדל לרקע"
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2109,7 +2110,7 @@ msgstr "מלבד בין שירים באותו אלבום או אותו CUE sheet
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
-msgstr ""
+msgstr "עטיפות קיימות"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
@@ -2122,19 +2123,19 @@ msgstr "התפוגה היא ב־%1"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Export Covers"
-msgstr ""
+msgstr "ייצא עטיפות"
 
 #: ../bin/src/ui_albumcoverexport.h:203
 msgid "Export covers"
-msgstr ""
+msgstr "ייצא עטיפות"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
-msgstr ""
+msgstr "ייצא עטיפות שהורדו"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
-msgstr ""
+msgstr "ייצא עטיפות שהוטמעו"
 
 #: ui/albumcovermanager.cpp:785 ui/albumcovermanager.cpp:809
 msgid "Export finished"
@@ -2143,7 +2144,7 @@ msgstr ""
 #: ui/albumcovermanager.cpp:794
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "ייצא %1 עטיפות מתוך %2(%3 דולגו)"
 
 #: ../bin/src/ui_mainwindow.h:664
 msgid "F1"
@@ -2377,7 +2378,7 @@ msgstr "קצב מסגרות"
 msgid "Frames per buffer"
 msgstr "מסגרות לאגירה"
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "קפוא"
 
@@ -2528,7 +2529,7 @@ msgstr ""
 msgid "HTTP proxy"
 msgstr "מתווך HTTP"
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "שמח"
 
@@ -2561,10 +2562,6 @@ msgstr ""
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "שעות"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr ""
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2600,11 +2597,11 @@ msgstr "אם כתובת ההפודקאסט ידועה לך, נא להכניס א
 msgid "Ignore \"The\" in artist names"
 msgstr "התעלמות מה־\"The\" בשם האמן"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "קובצי תמונה (‎*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "קובצי תמונה (‎*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2889,15 +2886,15 @@ msgstr "טעינה"
 msgid "Load cover from URL"
 msgstr "טעינת עטיפה מכתובת"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "טעינת עטיפה מכתובת..."
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "טעינת עטיפה מדיסק"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "טעינת עטיפה מהדיסק..."
 
@@ -2930,11 +2927,11 @@ msgstr "השירים נטענים"
 msgid "Loading stream"
 msgstr "מדיה זורמת בטעינה"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "הרצועות נטענות"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "נטען מידע אודות השירים"
 
@@ -2954,7 +2951,7 @@ msgstr "טעינת קבצים/כתובות, תוך החלפת רשימת ההש�
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3295,7 +3292,7 @@ msgstr "ללא תמונת רקע"
 
 #: ui/albumcovermanager.cpp:786
 msgid "No covers to export."
-msgstr ""
+msgstr "אין עטיפות לייצא."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
@@ -3319,7 +3316,7 @@ msgstr "אין"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "אף אחד מהשירים הנבחרים לא היה ראוי להעתקה להתקן"
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "נורמאלי"
 
@@ -3528,7 +3525,7 @@ msgstr "אפשרויות נוספות"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Output"
-msgstr ""
+msgstr "פלט"
 
 #: ../bin/src/ui_playbacksettingspage.h:333
 msgid "Output device"
@@ -3591,7 +3588,7 @@ msgstr "מבצע"
 
 #: ../bin/src/ui_albumcoverexport.h:215
 msgid "Pixel"
-msgstr ""
+msgstr "פיקסל"
 
 #: widgets/fancytabwidget.cpp:664
 msgid "Plain sidebar"
@@ -3799,9 +3796,14 @@ msgstr "הוספת שירים ברצף אקראי"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Sound quality"
 msgid "Quality"
-msgstr "איכות"
+msgstr ""
+
+#: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
+msgid "Quality"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -3949,7 +3951,7 @@ msgstr "הסר רשימת השמעה"
 
 #: playlist/playlistlistcontainer.cpp:317
 msgid "Remove playlists"
-msgstr ""
+msgstr "הסר רשימות השמעה"
 
 #: internet/groovesharkservice.cpp:1584
 msgid "Removing songs from My Music"
@@ -4117,11 +4119,11 @@ msgstr "קצב דגימה"
 msgid "Save .mood files in your music library"
 msgstr "שמירת קבצי .מַצַב רוּחַ בספרית המוסיקה שלך"
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "שמירת עטיפת האלבום"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "שמירת עטיפת האלבום לכונן..."
 
@@ -4210,11 +4212,11 @@ msgstr "חיפוש ב־Magnatune"
 msgid "Search Subsonic"
 msgstr "חיפוש Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr "חיפוש אחר עטיפות אלבום..."
 
@@ -4412,7 +4414,7 @@ msgstr "הצגת עטיפת אלבום בספרייה"
 msgid "Show dividers"
 msgstr "הצגת חוצצים"
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "הצגה על מסך מלא..."
 
@@ -4507,11 +4509,11 @@ msgstr "אמנים דומים"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
-msgstr ""
+msgstr "גודל"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Size:"
-msgstr ""
+msgstr "גודל:"
 
 #: ui/equalizer.cpp:146
 msgid "Ska"
@@ -4601,7 +4603,7 @@ msgstr "מיון שירים על פי"
 msgid "Sorting"
 msgstr "מיון"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr ""
 
@@ -4777,7 +4779,7 @@ msgstr "רשימת ההשמעה מ־Spotify מסונכרנת"
 msgid "Syncing Spotify starred tracks"
 msgstr "השירים המסומנים בכוכב ב‏־Spotify מסונכרנים"
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "צבעי המערכת"
 
@@ -5001,7 +5003,7 @@ msgstr "מסלול עליון"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
-msgstr ""
+msgstr "סך הכל אלבומים:"
 
 #: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total bytes transferred"
@@ -5074,7 +5076,7 @@ msgstr "לא ניתן להוריד %1 (%2)"
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "לא ידוע"
@@ -5087,7 +5089,7 @@ msgstr "סוג התוכן לא ידוע"
 msgid "Unknown error"
 msgstr "שגיאה לא ידועה"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "הסרת עטיפה"
 
@@ -5398,7 +5400,7 @@ msgstr "שמע של Windows Media"
 
 #: ../bin/src/ui_albumcovermanager.h:222
 msgid "Without cover:"
-msgstr ""
+msgstr "ללא עטיפה:"
 
 #: library/libraryview.cpp:554
 msgid ""
@@ -5506,10 +5508,11 @@ msgstr "אין לך חשבון פרימיום ב־Spotify."
 msgid "You do not have an active subscription"
 msgstr "אינך בעל מנוי פעיל"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
 msgstr ""
 
 #: internet/spotifyservice.cpp:175

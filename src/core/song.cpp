@@ -885,7 +885,7 @@ void Song::BindToQuery(QSqlQuery* query) const {
   if (Application::kIsPortable &&
       Utilities::UrlOnSameDriveAsClementine(d->url_)) {
     query->bindValue(":filename",
-                     Utilities::GetRelativePathToClementineBin(d->url_));
+                     Utilities::GetRelativePathToClementineBin(d->url_).toEncoded());
   } else {
     query->bindValue(":filename", d->url_.toEncoded());
   }

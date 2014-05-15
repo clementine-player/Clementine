@@ -107,7 +107,9 @@ class OutgoingDataCreator : public QObject {
                       int song_count);
   void SendAlbum(RemoteClient* client, const Song& song);
   void SendPlaylist(RemoteClient* client, int playlist_id);
+  void SendUrls(RemoteClient* client, const pb::remote::RequestDownloadSongs& request);
   void OfferNextSong(RemoteClient* client);
+  void SendTotalFileSize(RemoteClient* client);
 };
 
 #endif  // OUTGOINGDATACREATOR_H

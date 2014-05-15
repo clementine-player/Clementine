@@ -1857,7 +1857,7 @@ void MainWindow::OpenRipCD() {
   if (!rip_cd_) {
     rip_cd_.reset(new RipCD);
   }
-  if (rip_cd_->CDIOIsValid()) {
+  if (rip_cd_->CheckCDIOIsValid()) {
     rip_cd_->show();
   } else {
     QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"),

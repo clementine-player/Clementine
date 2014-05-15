@@ -588,12 +588,39 @@ void OutgoingDataCreator::SendSongs(
     case pb::remote::APlaylist:
       SendPlaylist(client, request.playlist_id());
       break;
+    case pb::remote::Urls:
+      SendUrls(client, request);
+      break;
     default:
       break;
   }
 
+  // Send total file size & file count
+  SendTotalFileSize(client);
+
   // Send first file
   OfferNextSong(client);
+}
+
+void OutgoingDataCreator::SendTotalFileSize(RemoteClient *client) {
+  if (!download_queue_.contains(client)) return;
+
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::DOWNLOAD_TOTAL_SIZE);
+
+  pb::remote::ResponseDownloadTotalSize* response =
+      msg.mutable_response_download_total_size();
+
+  response->set_file_count(download_queue_[client].size());
+
+  int total = 0;
+  for (DownloadItem item : download_queue_[client]) {
+    total += item.song_.filesize();
+  }
+
+  response->set_total_size(total);
+
+  client->SendData(&msg);
 }
 
 void OutgoingDataCreator::OfferNextSong(RemoteClient* client) {
@@ -734,6 +761,29 @@ void OutgoingDataCreator::SendPlaylist(RemoteClient* client, int playlist_id) {
       DownloadItem item(s, song_list.indexOf(s) + 1, count);
       download_queue_[client].append(item);
     }
+  }
+}
+
+void OutgoingDataCreator::SendUrls(RemoteClient *client,
+                                   const pb::remote::RequestDownloadSongs &request) {
+  SongList song_list;
+
+  // First gather all valid songs
+  for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
+    std::string s = *it;
+    QUrl url = QUrl(QStringFromStdString(s));
+
+    Song song = app_->library_backend()->GetSongByUrl(url);
+
+    if (song.is_valid() && song.url().scheme() == "file") {
+      song_list.append(song);
+    }
+  }
+
+  // Then send them to Clementine Remote
+  for (Song s : song_list) {
+    DownloadItem item(s, song_list.indexOf(s) + 1, song_list.count());
+    download_queue_[client].append(item);
   }
 }
 

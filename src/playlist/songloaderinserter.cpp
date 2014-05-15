@@ -119,15 +119,21 @@ void SongLoaderInserter::InsertSongs() {
 }
 
 void SongLoaderInserter::AsyncLoad() {
-
   // First, quick load raw songs.
   int async_progress = 0;
   int async_load_id = task_manager_->StartTask(tr("Loading tracks"));
   task_manager_->SetTaskProgress(async_load_id, async_progress,
                                  pending_.count());
-  for (SongLoader* loader : pending_) {
+  for (int i = 0; i < pending_.count(); ++i) {
+    SongLoader* loader = pending_[i];
     loader->LoadFilenamesBlocking();
     task_manager_->SetTaskProgress(async_load_id, ++async_progress);
+    if (i == 0) {
+      // Load everything from the first song.  It'll start playing as soon as
+      // we emit PreloadFinished, so it needs to have the duration set to show
+      // properly in the UI.
+      loader->LoadMetadataBlocking();
+    }
     songs_ << loader->songs();
   }
   task_manager_->SetTaskFinished(async_load_id);
@@ -138,8 +144,12 @@ void SongLoaderInserter::AsyncLoad() {
   async_load_id = task_manager_->StartTask(tr("Loading tracks info"));
   task_manager_->SetTaskProgress(async_load_id, async_progress, songs_.count());
   SongList songs;
-  for (SongLoader* loader : pending_) {
-    loader->LoadMetadataBlocking();
+  for (int i = 0; i < pending_.count(); ++i) {
+    SongLoader* loader = pending_[i];
+    if (i != 0) {
+      // We already did this earlier for the first song.
+      loader->LoadMetadataBlocking();
+    }
     songs << loader->songs();
     task_manager_->SetTaskProgress(async_load_id, songs.count());
   }

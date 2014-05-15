@@ -109,7 +109,6 @@ void ExtendedEditor::Paint(QPaintDevice* device) {
       QPainter p(device);
 
       QFont font;
-      font.setItalic(true);
       font.setBold(false);
       font.setPointSizeF(font_point_size_);
 

@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-04-17 11:01+0000\n"
+"PO-Revision-Date: 2014-05-12 05:28+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -706,7 +706,7 @@ msgstr "Todos los álbumes"
 msgid "All artists"
 msgstr "Todos los artistas"
 
-#: ui/albumcoverchoicecontroller.cpp:47
+#: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
 msgstr "Todos los archivos (*)"
 
@@ -775,7 +775,7 @@ msgstr "Ocurrió un error no especificado."
 msgid "And:"
 msgstr "Y:"
 
-#: moodbar/moodbarrenderer.cpp:169
+#: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
 msgstr "Furioso"
 
@@ -878,7 +878,7 @@ msgstr "Expandir automáticamente las categorías únicas en el árbol de la col
 
 #: widgets/freespacebar.cpp:44
 msgid "Available"
-msgstr "Disponible"
+msgstr "Disponible:"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 msgid "Average bitrate"
@@ -998,7 +998,7 @@ msgstr "Examinar…"
 msgid "Buffer duration"
 msgstr "Duración del búfer"
 
-#: engines/gstengine.cpp:821
+#: engines/gstengine.cpp:862
 msgid "Buffering"
 msgstr "Guardando en búfer"
 
@@ -1091,7 +1091,7 @@ msgstr "Elija la carpeta de caché de Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Elija un nombre para la lista de reproducción inteligente"
 
-#: engines/gstengine.cpp:842
+#: engines/gstengine.cpp:883
 msgid "Choose automatically"
 msgstr "Elegir automáticamente"
 
@@ -1131,11 +1131,11 @@ msgstr "Limpieza"
 #: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
-msgstr "Limpiar"
+msgstr "Vaciar"
 
 #: ../bin/src/ui_mainwindow.h:650 ../bin/src/ui_mainwindow.h:652
 msgid "Clear playlist"
-msgstr "Limpiar lista de reproducción"
+msgstr "Vaciar la lista de reproducción"
 
 #: smartplaylists/searchtermwidget.cpp:341 ../bin/src/ui_mainwindow.h:635
 #: visualisations/visualisationcontainer.cpp:215
@@ -1221,7 +1221,7 @@ msgstr "Pulse aquí para marcar esta lista como favorita y añadirla al panel «
 msgid "Click to toggle between remaining time and total time"
 msgstr "Pulse para cambiar entre tiempo restante y tiempo total"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:112
+#: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
@@ -1615,7 +1615,7 @@ msgstr "Disminuir volumen"
 msgid "Default background image"
 msgstr "Imagen de fondo predeterminada"
 
-#: engines/gstengine.cpp:867
+#: engines/gstengine.cpp:908
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositivo predeterminado en %1"
@@ -2394,7 +2394,7 @@ msgstr "Tasa de muestreo"
 msgid "Frames per buffer"
 msgstr "Cuadros por búfer"
 
-#: moodbar/moodbarrenderer.cpp:171
+#: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
 msgstr "Congelado"
 
@@ -2545,7 +2545,7 @@ msgstr "Se recibió el código de estado de HTTP 3xx sin un URL. Compruebe la co
 msgid "HTTP proxy"
 msgstr "Proxy HTTP"
 
-#: moodbar/moodbarrenderer.cpp:173
+#: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
 msgstr "Alegre"
 
@@ -2578,10 +2578,6 @@ msgstr "No se encontró el equipo, compruebe el URL del servidor. Ejemplo: http:
 #: smartplaylists/searchterm.cpp:386
 msgid "Hours"
 msgstr "Horas"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:110
-msgid "However, you need to login to access your playlists and your stream."
-msgstr "Sin embargo, debe iniciar sesión para acceder a sus listas y retransmisiones."
 
 #: core/backgroundstreams.cpp:27
 msgid "Hypnotoad"
@@ -2617,11 +2613,11 @@ msgstr "Si conoce el URL de un podcast, escríbalo a continuación y pulse en Ir
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorar «The» en los nombres de artistas"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "Imágenes (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imágenes (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2906,15 +2902,15 @@ msgstr "Cargar"
 msgid "Load cover from URL"
 msgstr "Cargar carátula desde un URL"
 
-#: ui/albumcoverchoicecontroller.cpp:63
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Load cover from URL..."
 msgstr "Cargar carátula desde un URL…"
 
-#: ui/albumcoverchoicecontroller.cpp:103
+#: ui/albumcoverchoicecontroller.cpp:104
 msgid "Load cover from disk"
 msgstr "Cargar carátula desde el disco"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from disk..."
 msgstr "Cargar carátula desde disco…"
 
@@ -2947,11 +2943,11 @@ msgstr "Cargando las canciones"
 msgid "Loading stream"
 msgstr "Cargando el flujo"
 
-#: playlist/songloaderinserter.cpp:125 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Cargando las pistas"
 
-#: playlist/songloaderinserter.cpp:138
+#: playlist/songloaderinserter.cpp:144
 msgid "Loading tracks info"
 msgstr "Cargando información de pistas"
 
@@ -2971,7 +2967,7 @@ msgstr "Carga archivos/URL, reemplazando la lista de reproducción actual"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_soundcloudsettingspage.h:111
+#: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3336,7 +3332,7 @@ msgstr "Ninguno"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ninguna de las canciones seleccionadas fueron aptas para copiarlas a un dispositivo"
 
-#: moodbar/moodbarrenderer.cpp:167
+#: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
 msgstr "Normal"
 
@@ -3816,7 +3812,12 @@ msgstr "Poner canciones en un orden aleatorio"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
+msgctxt "Sound quality"
+msgid "Quality"
+msgstr "Calidad"
+
 #: visualisations/visualisationcontainer.cpp:118
+msgctxt "Visualisation quality"
 msgid "Quality"
 msgstr "Calidad"
 
@@ -4134,11 +4135,11 @@ msgstr "Tasa de muestreo"
 msgid "Save .mood files in your music library"
 msgstr "Guardar archivos .mood en la colección musical"
 
-#: ui/albumcoverchoicecontroller.cpp:126
+#: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
 msgstr "Guardar la carátula del álbum"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
 msgstr "Guardar la carátula en el disco…"
 
@@ -4227,11 +4228,11 @@ msgstr "Buscar en Magnatune"
 msgid "Search Subsonic"
 msgstr "Buscar en Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
 msgstr "Buscar automáticamente"
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
 msgstr "Buscar la carátula del álbum…"
 
@@ -4429,7 +4430,7 @@ msgstr "Mostrar las carátulas en la colección"
 msgid "Show dividers"
 msgstr "Mostrar divisores"
 
-#: ui/albumcoverchoicecontroller.cpp:69 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "Mostrar a tamaño completo…"
 
@@ -4540,7 +4541,7 @@ msgstr "Saltar hacia atrás en la lista de reproducción"
 
 #: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:669
 msgid "Skip count"
-msgstr "Contador de omisiones"
+msgstr "N.º de omisiones"
 
 #: core/commandlineoptions.cpp:148
 msgid "Skip forwards in playlist"
@@ -4618,7 +4619,7 @@ msgstr "Ordenar canciones por"
 msgid "Sorting"
 msgstr "Ordenación"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:108
+#: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
@@ -4794,7 +4795,7 @@ msgstr "Sincronizando lista de reproducción de Spotify"
 msgid "Syncing Spotify starred tracks"
 msgstr "Sincronizando canciones destacadas de Spotify"
 
-#: moodbar/moodbarrenderer.cpp:175
+#: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
 msgstr "Colores del sistema"
 
@@ -4923,7 +4924,7 @@ msgstr "Esto creará una base de datos que podría llegar hasta los 150 MB.\n¿Q
 
 #: internet/magnatunedownloaddialog.cpp:188
 msgid "This album is not available in the requested format"
-msgstr "Este álbum no se encuentra disponible en el formato solicitado"
+msgstr "Este álbum no está disponible en el formato solicitado"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
@@ -5091,7 +5092,7 @@ msgstr "No se puede descargar %1 (%2)"
 #: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
 #: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:123
+#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Desconocido"
@@ -5104,7 +5105,7 @@ msgstr "Tipo de contenido desconocido"
 msgid "Unknown error"
 msgstr "Error desconocido"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Unset cover"
 msgstr "Eliminar la carátula"
 
@@ -5160,7 +5161,7 @@ msgstr "Actualizando %1"
 #: devices/deviceview.cpp:105
 #, qt-format
 msgid "Updating %1%..."
-msgstr "Actualizando %1%…"
+msgstr "Actualizando… (%1%)"
 
 #: library/librarywatcher.cpp:92
 msgid "Updating library"
@@ -5240,7 +5241,7 @@ msgstr "Usar normalización de volumen"
 
 #: widgets/freespacebar.cpp:46
 msgid "Used"
-msgstr "Usado"
+msgstr "En uso:"
 
 #: internet/groovesharkservice.cpp:403
 #, qt-format
@@ -5523,11 +5524,12 @@ msgstr "No tiene una cuenta Premium de Spotify."
 msgid "You do not have an active subscription"
 msgstr "No tiene una suscripción activa"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:109
+#: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
 "You don't need to be logged in to search and to listen to music on "
-"SoundCloud."
-msgstr "No necesita iniciar sesión para buscar y escuchar música en SoundCloud."
+"SoundCloud. However, you need to login to access your playlists and your "
+"stream."
+msgstr "No es necesario iniciar sesión para buscar y escuchar música de SoundCloud. Sin embargo, debe iniciar sesión para acceder a sus listas de reproducción y actualizaciones."
 
 #: internet/spotifyservice.cpp:175
 msgid ""
@@ -5666,7 +5668,7 @@ msgstr "termina con"
 
 #: smartplaylists/searchterm.cpp:236
 msgid "equals"
-msgstr "sea igual a"
+msgstr "es igual a"
 
 #: ../bin/src/ui_podcastsettingspage.h:249
 msgid "gpodder.net"
@@ -5714,7 +5716,7 @@ msgstr "más nuevo primero"
 
 #: smartplaylists/searchterm.cpp:238
 msgid "not equals"
-msgstr "no sea igual a"
+msgstr "no es igual a"
 
 #: smartplaylists/searchterm.cpp:214
 msgid "not in the last"

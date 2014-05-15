@@ -29,8 +29,8 @@ class Sonogram : public Analyzer::Base {
   static const char* kName;
 
  protected:
-  void analyze(QPainter& p, const Scope&, bool new_frame);
-  void transform(Scope&);
+  void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
+  void transform(Analyzer::Scope&);
   void demo(QPainter& p);
   void resizeEvent(QResizeEvent*);
 

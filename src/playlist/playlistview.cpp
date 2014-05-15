@@ -476,7 +476,6 @@ void PlaylistView::drawRow(QPainter* painter,
                                              QPalette::HighlightedText));
     opt.palette.setColor(QPalette::Highlight, Qt::transparent);
     opt.palette.setColor(QPalette::AlternateBase, Qt::transparent);
-    opt.font.setItalic(true);
     opt.decorationSize = QSize(20, 20);
 
     // Draw the actual row data on top.  We cache this, because it's fairly
