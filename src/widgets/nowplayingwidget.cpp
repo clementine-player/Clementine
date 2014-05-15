@@ -64,6 +64,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
       mode_(SmallSongDetails),
       menu_(new QMenu(this)),
       above_statusbar_action_(nullptr),
+      fit_cover_width_action_(nullptr),
       visible_(false),
       small_ideal_height_(0),
       show_hide_animation_(new QTimeLine(500, this)),
@@ -81,6 +82,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   mode_ = Mode(s.value("mode", SmallSongDetails).toInt());
   album_cover_choice_controller_->search_cover_auto_action()->setChecked(
       s.value("search_for_cover_auto", false).toBool());
+  fit_width_ = s.value("fit_cover_width", false).toBool();
 
   // Accept drops for setting album art
   setAcceptDrops(true);
@@ -98,6 +100,15 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
                    mode_mapper);
 
   menu_->addActions(mode_group->actions());
+
+  fit_cover_width_action_ = menu_->addAction(tr("Fit cover to width"));
+
+  fit_cover_width_action_->setCheckable(true);
+  fit_cover_width_action_->setEnabled((mode_ != SmallSongDetails) ? true
+                                                                  : false);
+  connect(fit_cover_width_action_, SIGNAL(toggled(bool)),
+          SLOT(FitCoverWidth(bool)));
+  fit_cover_width_action_->setChecked(fit_width_);
   menu_->addSeparator();
 
   QList<QAction*> actions = album_cover_choice_controller_->GetAllActions();
@@ -147,10 +158,10 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   // add placeholder text to get the correct height
   if (mode_ == LargeSongDetailsBelow) {
     details_->setDefaultStyleSheet(
-          "p {"
-          "  font-size: small;"
-          "  color: white;"
-          "}");
+        "p {"
+        "  font-size: small;"
+        "  color: white;"
+        "}");
     details_->setHtml(QString("<p align=center><i></i><br/><br/></p>"));
   }
 
@@ -198,13 +209,21 @@ void NowPlayingWidget::UpdateHeight() {
       break;
 
     case LargeSongDetails:
-      cover_loader_options_.desired_height_ = qMin(kMaxCoverSize, width());
+      if (fit_width_) {
+        cover_loader_options_.desired_height_ = width();
+      } else {
+        cover_loader_options_.desired_height_ = qMin(kMaxCoverSize, width());
+      }
       total_height_ =
           kTopBorder + cover_loader_options_.desired_height_ + kBottomOffset;
       break;
 
     case LargeSongDetailsBelow:
-      cover_loader_options_.desired_height_ = qMin(kMaxCoverSize, width());
+      if (fit_width_) {
+        cover_loader_options_.desired_height_ = width();
+      } else {
+        cover_loader_options_.desired_height_ = qMin(kMaxCoverSize, width());
+      }
       total_height_ = kTopBorder + cover_loader_options_.desired_height_ +
                       kBottomOffset + details_->size().height();
       break;
@@ -368,7 +387,8 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
       break;
 
     case LargeSongDetails: {
-      const int total_size = qMin(kMaxCoverSize, width());
+      const int total_size =
+          fit_width_ ? width() : qMin(kMaxCoverSize, width());
       const int x_offset =
           (width() - cover_loader_options_.desired_height_) / 2;
 
@@ -412,7 +432,8 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
       // Work out how high the text is going to be
       const int text_height = details_->size().height();
 
-      const int cover_size = qMin(kMaxCoverSize, width());
+      const int cover_size =
+          fit_width_ ? width() : qMin(kMaxCoverSize, width());
       const int x_offset =
           (width() - cover_loader_options_.desired_height_) / 2;
 
@@ -451,6 +472,13 @@ void NowPlayingWidget::FadePreviousTrack(qreal value) {
 
 void NowPlayingWidget::SetMode(int mode) {
   mode_ = Mode(mode);
+
+  if (mode_ == SmallSongDetails) {
+    fit_cover_width_action_->setEnabled(false);
+  } else {
+    fit_cover_width_action_->setEnabled(true);
+  }
+
   UpdateHeight();
   UpdateDetailsText();
   update();
@@ -506,6 +534,16 @@ void NowPlayingWidget::ShowAboveStatusBar(bool above) {
 
 bool NowPlayingWidget::show_above_status_bar() const {
   return above_statusbar_action_->isChecked();
+}
+
+void NowPlayingWidget::FitCoverWidth(bool fit) {
+  fit_width_ = fit;
+  UpdateHeight();
+  update();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("fit_cover_width", fit_width_);
 }
 
 void NowPlayingWidget::AllHail(bool hypnotoad) {

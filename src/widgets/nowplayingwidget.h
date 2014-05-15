@@ -85,6 +85,7 @@ signals:
  private slots:
   void SetMode(int mode);
   void ShowAboveStatusBar(bool above);
+  void FitCoverWidth(bool fit);
 
   void AlbumArtLoaded(const Song& metadata, const QString& uri,
                       const QImage& image);
@@ -126,11 +127,13 @@ signals:
   QMenu* menu_;
 
   QAction* above_statusbar_action_;
+  QAction* fit_cover_width_action_;
 
   bool visible_;
   int small_ideal_height_;
   AlbumCoverLoaderOptions cover_loader_options_;
   int total_height_;
+  bool fit_width_;
   QTimeLine* show_hide_animation_;
   QTimeLine* fade_animation_;
 
