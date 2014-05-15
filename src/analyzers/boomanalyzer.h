@@ -19,8 +19,8 @@ class BoomAnalyzer : public Analyzer::Base {
   static const char* kName;
 
   virtual void init();
-  virtual void transform(Scope& s);
-  virtual void analyze(QPainter& p, const Scope&, bool new_frame);
+  virtual void transform(Analyzer::Scope& s);
+  virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
 
  public slots:
   void changeK_barHeight(int);

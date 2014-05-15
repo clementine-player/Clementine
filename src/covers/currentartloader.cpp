@@ -57,6 +57,7 @@ void CurrentArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
 
   if (!image.isNull()) {
     temp_art_.reset(new QTemporaryFile(temp_file_pattern_));
+    temp_art_->setAutoRemove(true);
     temp_art_->open();
     image.save(temp_art_->fileName(), "JPEG");
 
@@ -64,6 +65,7 @@ void CurrentArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
     // since it's the GUI thread, but the alternative is hard.
     temp_art_thumbnail_.reset(new QTemporaryFile(temp_file_pattern_));
     temp_art_thumbnail_->open();
+    temp_art_thumbnail_->setAutoRemove(true);
     thumbnail = image.scaledToHeight(120, Qt::SmoothTransformation);
     thumbnail.save(temp_art_thumbnail_->fileName(), "JPEG");
 

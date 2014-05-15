@@ -31,7 +31,7 @@ class NyanCatAnalyzer : public Analyzer::Base {
   static const char* kName;
 
  protected:
-  void transform(Scope&);
+  void transform(Analyzer::Scope&);
   void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
 
   void timerEvent(QTimerEvent* e);

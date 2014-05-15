@@ -93,6 +93,9 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
                    mode_mapper);
   CreateModeAction(LargeSongDetails, tr("Large album cover"), mode_group,
                    mode_mapper);
+  CreateModeAction(LargeSongDetailsBelow,
+                   tr("Large album cover (details below)"), mode_group,
+                   mode_mapper);
 
   menu_->addActions(mode_group->actions());
   menu_->addSeparator();
@@ -140,6 +143,16 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   connect(fade_animation_, SIGNAL(valueChanged(qreal)),
           SLOT(FadePreviousTrack(qreal)));
   fade_animation_->setDirection(QTimeLine::Backward);  // 1.0 -> 0.0
+
+  // add placeholder text to get the correct height
+  if (mode_ == LargeSongDetailsBelow) {
+    details_->setDefaultStyleSheet(
+          "p {"
+          "  font-size: small;"
+          "  color: white;"
+          "}");
+    details_->setHtml(QString("<p align=center><i></i><br/><br/></p>"));
+  }
 
   UpdateHeight();
 
@@ -189,6 +202,12 @@ void NowPlayingWidget::UpdateHeight() {
       total_height_ =
           kTopBorder + cover_loader_options_.desired_height_ + kBottomOffset;
       break;
+
+    case LargeSongDetailsBelow:
+      cover_loader_options_.desired_height_ = qMin(kMaxCoverSize, width());
+      total_height_ = kTopBorder + cover_loader_options_.desired_height_ +
+                      kBottomOffset + details_->size().height();
+      break;
   }
 
   // Update the animation settings and resize the widget now if we're visible
@@ -226,6 +245,16 @@ void NowPlayingWidget::UpdateDetailsText() {
           "}");
       html += "<p align=center>";
       break;
+
+    case LargeSongDetailsBelow:
+      details_->setTextWidth(cover_loader_options_.desired_height_);
+      details_->setDefaultStyleSheet(
+          "p {"
+          "  font-size: small;"
+          "  color: white;"
+          "}");
+      html += "<p align=center>";
+      break;
   }
 
   // TODO: Make this configurable
@@ -235,6 +264,11 @@ void NowPlayingWidget::UpdateDetailsText() {
 
   html += "</p>";
   details_->setHtml(html);
+
+  // if something spans multiple lines the height needs to change
+  if (mode_ == LargeSongDetailsBelow) {
+    UpdateHeight();
+  }
 }
 
 void NowPlayingWidget::ScaleCover() {
@@ -333,7 +367,7 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
       p->translate(-small_ideal_height_ - kPadding, 0);
       break;
 
-    case LargeSongDetails:
+    case LargeSongDetails: {
       const int total_size = qMin(kMaxCoverSize, width());
       const int x_offset =
           (width() - cover_loader_options_.desired_height_) / 2;
@@ -372,6 +406,37 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
       details_->drawContents(p);
       p->translate(-x_offset, -height() + text_height);
       break;
+    }
+
+    case LargeSongDetailsBelow:
+      // Work out how high the text is going to be
+      const int text_height = details_->size().height();
+
+      const int cover_size = qMin(kMaxCoverSize, width());
+      const int x_offset =
+          (width() - cover_loader_options_.desired_height_) / 2;
+
+      // Draw the black background
+      p->fillRect(QRect(0, kTopBorder, width(), height() - kTopBorder),
+                  Qt::black);
+
+      // Draw the cover
+      if (hypnotoad_) {
+        p->drawPixmap(x_offset, kTopBorder, cover_size, cover_size,
+                      hypnotoad_->currentPixmap());
+      } else {
+        p->drawPixmap(x_offset, kTopBorder, cover_size, cover_size, cover_);
+        if (downloading_covers_) {
+          p->drawPixmap(x_offset + 45, 35, 16, 16,
+                        spinner_animation_->currentPixmap());
+        }
+      }
+
+      // Draw the text below
+      p->translate(x_offset, height() - text_height);
+      details_->drawContents(p);
+      p->translate(-x_offset, -height() + text_height);
+      break;
   }
 }
 
@@ -396,9 +461,11 @@ void NowPlayingWidget::SetMode(int mode) {
 }
 
 void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
-  if (visible_ && mode_ == LargeSongDetails && e->oldSize() != e->size()) {
-    UpdateHeight();
-    UpdateDetailsText();
+  if (visible_ && e->oldSize() != e->size()) {
+    if (mode_ == LargeSongDetails || mode_ == LargeSongDetailsBelow) {
+      UpdateHeight();
+      UpdateDetailsText();
+    }
   }
 }
 

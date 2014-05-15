@@ -12,6 +12,8 @@
 
 #include "turbine.h"
 
+using Analyzer::Scope;
+
 const char* TurbineAnalyzer::kName =
     QT_TRANSLATE_NOOP("AnalyzerContainer", "Turbine");
 

@@ -50,6 +50,8 @@ class Base : public QWidget {
     }
   }
 
+  virtual void framerateChanged() {}
+
  protected:
   Base(QWidget*, uint scopeSize = 7);
 
@@ -83,7 +85,5 @@ void interpolate(const Scope&, Scope&);
 void initSin(Scope&, const uint = 6000);
 
 }  // END namespace Analyzer
-
-using Analyzer::Scope;
 
 #endif

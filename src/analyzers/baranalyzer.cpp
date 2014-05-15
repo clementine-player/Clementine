@@ -16,11 +16,12 @@
 #include <QtDebug>
 #include <QPainter>
 
+using Analyzer::Scope;
+
 const char* BarAnalyzer::kName =
     QT_TRANSLATE_NOOP("AnalyzerContainer", "Bar analyzer");
 
-BarAnalyzer::BarAnalyzer(QWidget* parent)
-    : Analyzer::Base(parent, 8) {
+BarAnalyzer::BarAnalyzer(QWidget* parent) : Analyzer::Base(parent, 8) {
   // roof pixmaps don't depend on size() so we do in the ctor
   m_bg = parent->palette().color(QPalette::Background);
 
