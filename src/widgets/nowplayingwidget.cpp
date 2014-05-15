@@ -264,6 +264,11 @@ void NowPlayingWidget::UpdateDetailsText() {
 
   html += "</p>";
   details_->setHtml(html);
+
+  // if something spans multiple lines the height needs to change
+  if (mode_ == LargeSongDetailsBelow) {
+    UpdateHeight();
+  }
 }
 
 void NowPlayingWidget::ScaleCover() {
