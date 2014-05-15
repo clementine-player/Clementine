@@ -267,11 +267,15 @@ void NowPlayingWidget::UpdateDetailsText() {
 
     case LargeSongDetailsBelow:
       details_->setTextWidth(cover_loader_options_.desired_height_);
-      details_->setDefaultStyleSheet(
-          "p {"
-          "  font-size: small;"
-          "  color: white;"
-          "}");
+      if (fit_width_) {
+        details_->setDefaultStyleSheet("");
+      } else {
+        details_->setDefaultStyleSheet(
+            "p {"
+            "  font-size: small;"
+            "  color: white;"
+            "}");
+      }
       html += "<p align=center>";
       break;
   }
@@ -437,9 +441,11 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
       const int x_offset =
           (width() - cover_loader_options_.desired_height_) / 2;
 
-      // Draw the black background
-      p->fillRect(QRect(0, kTopBorder, width(), height() - kTopBorder),
-                  Qt::black);
+      if (!fit_width_) {
+        // Draw the black background
+        p->fillRect(QRect(0, kTopBorder, width(), height() - kTopBorder),
+                    Qt::black);
+      }
 
       // Draw the cover
       if (hypnotoad_) {
