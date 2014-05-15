@@ -42,7 +42,7 @@ void StreamingSettingsPage::Load() {
   ui_->stream_port->setValue(
       s.value("port", StreamServer::kDefaultServerPort).toInt());
 
-  ui_->bitrate_box->setValue(s.value("bitrate", 128).toInt());
+  ui_->bitrate_box->setValue(s.value("quality", 0.3).toDouble() * 10);
 
   s.endGroup();
 }
@@ -55,7 +55,7 @@ void StreamingSettingsPage::Save() {
 
   s.setValue("use_streaming", ui_->use_streaming->isChecked());
   s.setValue("port", ui_->stream_port->value());
-  s.setValue("bitrate", ui_->bitrate_box->value());
+  s.setValue("quality", double(ui_->bitrate_box->value()) / 10);
 
   s.endGroup();
 

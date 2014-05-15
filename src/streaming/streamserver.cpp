@@ -134,7 +134,7 @@ void StreamServer::SendStream(const QUrl& url, QTcpSocket* socket) {
       decodebin, audioconvert, audioresample, vorbisenc, oggmux, fdsink,
       NULL);
 
-  g_object_set(vorbisenc, "bitrate", getBitrate(), NULL);
+  g_object_set(vorbisenc, "quality", getQuality(), NULL);
   g_object_set(decodebin, "uri", url.toString().toUtf8().constData(), NULL);
   g_object_set(fdsink, "fd", socket->socketDescriptor(), NULL);
 
@@ -161,8 +161,8 @@ void StreamServer::AsyncLoadComplete(const UrlHandler::LoadResult& result) {
   SendStream(result.media_url_, socket);
 }
 
-int StreamServer::getBitrate() {
+double StreamServer::getQuality() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  return s.value("bitrate", 128).toInt() * 1000;
+  return s.value("quality", 0.3).toDouble();
 }

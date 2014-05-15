@@ -30,7 +30,7 @@ class StreamServer : public QObject {
  private:
   QByteArray ParseRequest(const QByteArray& data);
   void SendStream(const QUrl& url, QTcpSocket* socket);
-  int getBitrate();
+  double getQuality();
 
   Player* player_;
   QTcpServer* server_;
