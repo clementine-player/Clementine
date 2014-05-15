@@ -114,8 +114,6 @@ Q_IMPORT_PLUGIN(qsqlite)
 
 namespace {
 
-#include "streaming/streamserver.h"
-
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& language) {
 #if QT_VERSION < 0x040700
@@ -495,9 +493,6 @@ int main(int argc, char* argv[]) {
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w,
                    SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);
-
-  StreamServer stream_server(app.player());;
-  stream_server.Listen();
 
   int ret = a.exec();
 

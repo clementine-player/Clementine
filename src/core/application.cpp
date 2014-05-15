@@ -38,6 +38,7 @@
 #include "podcasts/podcastbackend.h"
 #include "podcasts/podcastdownloader.h"
 #include "podcasts/podcastupdater.h"
+#include "streaming/streamserver.h"
 
 #ifdef HAVE_LIBLASTFM
 #include "internet/lastfmservice.h"
@@ -74,7 +75,8 @@ Application::Application(QObject* parent)
       moodbar_controller_(nullptr),
       network_remote_(nullptr),
       network_remote_helper_(nullptr),
-      scrobbler_(nullptr) {
+      scrobbler_(nullptr),
+      stream_server_(nullptr) {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
   tag_reader_client_->Start();
@@ -113,6 +115,10 @@ Application::Application(QObject* parent)
   // Network Remote
   network_remote_ = new NetworkRemote(this);
   MoveToNewThread(network_remote_);
+
+  // StreamServer
+  stream_server_ = new StreamServer(player_);
+  stream_server_->Listen();
 
   // This must be before libraray_->Init();
   // In the constructor the helper waits for the signal

@@ -1,5 +1,5 @@
 #ifndef STREAMSERVER_H
-#define STREAMSERVER_h
+#define STREAMSERVER_H
 
 #include <QByteArray>
 #include <QObject>
@@ -15,8 +15,12 @@ class QTcpSocket;
 class StreamServer : public QObject {
   Q_OBJECT
  public:
-  StreamServer(Player* player, QObject* parent = 0);
-  void Listen(quint16 port = 8080);
+  static const char* kSettingsGroup;
+  static const quint16 kDefaultServerPort;
+
+  StreamServer(Player* player, QObject* parent = nullptr);
+  void Listen();
+  void StopListening();
 
  private slots:
   void AcceptConnection();
@@ -26,6 +30,7 @@ class StreamServer : public QObject {
  private:
   QByteArray ParseRequest(const QByteArray& data);
   void SendStream(const QUrl& url, QTcpSocket* socket);
+  int getBitrate();
 
   Player* player_;
   QTcpServer* server_;

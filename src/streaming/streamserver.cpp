@@ -1,6 +1,7 @@
 #include "streamserver.h"
 
 #include <QByteArray>
+#include <QSettings>
 #include <QTcpSocket>
 #include <QTcpServer>
 
@@ -13,16 +14,32 @@
 
 #include <gst/gst.h>
 
+const char* StreamServer::kSettingsGroup = "Streaming";
+const quint16 StreamServer::kDefaultServerPort = 8080;
+
 StreamServer::StreamServer(Player* player, QObject* parent)
     : QObject(parent),
       player_(player),
       server_(new QTcpServer(this)) {
-  GstEngine::InitialiseGstreamer();
+  //GstEngine::InitialiseGstreamer();
+  gst_init(nullptr, nullptr);
 }
 
-void StreamServer::Listen(quint16 port) {
-  server_->listen(QHostAddress::LocalHost, port);
+void StreamServer::Listen() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  // Streaming activated?
+  if (!s.value("use_streaming", false).toBool()) {
+    return;
+  }
+
+  server_->listen(QHostAddress::LocalHost, s.value("port", kDefaultServerPort).toInt());
   connect(server_, SIGNAL(newConnection()), SLOT(AcceptConnection()));
+}
+
+void StreamServer::StopListening() {
+  server_->close();
 }
 
 void StreamServer::AcceptConnection() {
@@ -60,7 +77,7 @@ static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg, gpointer data) 
                  GST_OBJECT_NAME(msg->src), err->message);
       g_error_free(err);
       g_free(dbg_info);
-      socket->deleteLater();
+      socket->close();
       break;
     }
     default:
@@ -77,7 +94,6 @@ void StreamServer::ReadyRead(QTcpSocket* socket, QByteArray buffer) {
   if (socket->atEnd() || buffer.endsWith("\r\n\r\n")) {
     QByteArray response = ParseRequest(buffer);
     qLog(Debug) << response;
-
     socket->write("HTTP/1.0 200 OK\r\n");
     socket->write("Content-type: application/ogg\r\n");
     socket->write("Connection: close\r\n");
@@ -86,9 +102,9 @@ void StreamServer::ReadyRead(QTcpSocket* socket, QByteArray buffer) {
 
     QUrl url(QString::fromUtf8(response), QUrl::StrictMode);
     UrlHandler* handler = player_->HandlerForUrl(url);
-    connect(handler, SIGNAL(AsyncLoadComplete(const UrlHandler::LoadResult&)),
-            SLOT(AsyncLoadComplete(const UrlHandler::LoadResult&)), Qt::UniqueConnection);
     if (handler) {
+      connect(handler, SIGNAL(AsyncLoadComplete(const UrlHandler::LoadResult&)),
+              SLOT(AsyncLoadComplete(const UrlHandler::LoadResult&)), Qt::UniqueConnection);
       UrlHandler::LoadResult result = handler->StartLoading(url);
       if (result.type_ == UrlHandler::LoadResult::TrackAvailable) {
         SendStream(result.media_url_, socket);
@@ -118,6 +134,7 @@ void StreamServer::SendStream(const QUrl& url, QTcpSocket* socket) {
       decodebin, audioconvert, audioresample, vorbisenc, oggmux, fdsink,
       NULL);
 
+  g_object_set(vorbisenc, "bitrate", getBitrate(), NULL);
   g_object_set(decodebin, "uri", url.toString().toUtf8().constData(), NULL);
   g_object_set(fdsink, "fd", socket->socketDescriptor(), NULL);
 
@@ -142,4 +159,10 @@ QByteArray StreamServer::ParseRequest(const QByteArray& data) {
 void StreamServer::AsyncLoadComplete(const UrlHandler::LoadResult& result) {
   QTcpSocket* socket = sockets_.take(result.original_url_);
   SendStream(result.media_url_, socket);
+}
+
+int StreamServer::getBitrate() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  return s.value("bitrate", 128).toInt() * 1000;
 }

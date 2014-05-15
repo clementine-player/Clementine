@@ -361,6 +361,7 @@ set(SOURCES
   ui/settingsdialog.cpp
   ui/settingspage.cpp
   ui/standarditemiconloader.cpp
+  ui/streamingsettingspage.cpp
   ui/systemtrayicon.cpp
   ui/trackselectiondialog.cpp
   ui/windows7thumbbar.cpp
@@ -642,6 +643,7 @@ set(HEADERS
   ui/settingsdialog.h
   ui/settingspage.h
   ui/standarditemiconloader.h
+  ui/streamingsettingspage.h
   ui/systemtrayicon.h
   ui/trackselectiondialog.h
   ui/windows7thumbbar.h
@@ -763,6 +765,7 @@ set(UI
   ui/organiseerrordialog.ui
   ui/playbacksettingspage.ui
   ui/settingsdialog.ui
+  ui/streamingsettingspage.ui
   ui/trackselectiondialog.ui
 
   widgets/equalizerslider.ui

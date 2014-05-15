@@ -45,6 +45,7 @@ class PlaylistManager;
 class PodcastBackend;
 class PodcastUpdater;
 class Scrobbler;
+class StreamServer;
 class TagReaderClient;
 class TaskManager;
 
@@ -88,6 +89,7 @@ class Application : public QObject {
     return network_remote_helper_;
   }
   Scrobbler* scrobbler() const { return scrobbler_; }
+  StreamServer* stream_server() const { return stream_server_; }
 
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
@@ -131,6 +133,7 @@ signals:
   NetworkRemote* network_remote_;
   NetworkRemoteHelper* network_remote_helper_;
   Scrobbler* scrobbler_;
+  StreamServer* stream_server_;
 
   QList<QObject*> objects_in_threads_;
   QList<QThread*> threads_;

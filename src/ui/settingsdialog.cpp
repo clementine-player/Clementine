@@ -27,6 +27,7 @@
 #include "notificationssettingspage.h"
 #include "mainwindow.h"
 #include "settingsdialog.h"
+#include "streamingsettingspage.h"
 #include "core/application.h"
 #include "core/backgroundstreams.h"
 #include "core/logging.h"
@@ -137,10 +138,14 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_Library, new LibrarySettingsPage(this), general);
   AddPage(Page_Proxy, new NetworkProxySettingsPage(this), general);
   AddPage(Page_Transcoding, new TranscoderSettingsPage(this), general);
-  AddPage(Page_NetworkRemote, new NetworkRemoteSettingsPage(this), general);
+
+  QTreeWidgetItem* network = AddCategory(tr("Interfaces"));
+
+  AddPage(Page_NetworkRemote, new NetworkRemoteSettingsPage(this), network);
+  AddPage(Page_Streaming, new StreamingSettingsPage(this), network);
 
 #ifdef HAVE_WIIMOTEDEV
-  AddPage(Page_Wiimotedev, new WiimoteSettingsPage(this), general);
+  AddPage(Page_Wiimotedev, new WiimoteSettingsPage(this), network);
 #endif
 
   // User interface

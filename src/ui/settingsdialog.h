@@ -65,6 +65,7 @@ class SettingsDialog : public QDialog {
     Page_GlobalSearch,
     Page_Appearance,
     Page_NetworkRemote,
+    Page_Streaming,
     Page_Notifications,
     Page_Library,
     Page_Lastfm,
