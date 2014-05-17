@@ -67,6 +67,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
       fit_cover_width_action_(nullptr),
       visible_(false),
       small_ideal_height_(0),
+      fit_width_(false),
       show_hide_animation_(new QTimeLine(500, this)),
       fade_animation_(new QTimeLine(1000, this)),
       details_(new QTextDocument(this)),
