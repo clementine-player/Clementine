@@ -249,7 +249,7 @@ const Engine::Scope& GstEngine::scope(int chunk_length) {
   if (have_new_buffer_) {
     if (latest_buffer_ != nullptr) {
       scope_chunks_ = ceil(((double)GST_BUFFER_DURATION(latest_buffer_) /
-                           (double)(chunk_length * kNsecPerMsec)));
+                            (double)(chunk_length * kNsecPerMsec)));
     }
 
     // if the buffer is shorter than the chunk length
@@ -268,9 +268,14 @@ const Engine::Scope& GstEngine::scope(int chunk_length) {
 void GstEngine::UpdateScope(int chunk_length) {
   typedef Engine::Scope::value_type sample_type;
 
+  // prevent dbz or invalid chunk size
+  if (!GST_CLOCK_TIME_IS_VALID(GST_BUFFER_DURATION(latest_buffer_))) return;
+  if (GST_BUFFER_DURATION(latest_buffer_) == 0) return;
+
   // determine where to split the buffer
-  int chunk_density = GST_BUFFER_SIZE(latest_buffer_) /
-                      (GST_BUFFER_DURATION(latest_buffer_) / kNsecPerMsec);
+  int chunk_density = (GST_BUFFER_SIZE(latest_buffer_) * kNsecPerMsec) /
+                      GST_BUFFER_DURATION(latest_buffer_);
+
   int chunk_size = chunk_length * chunk_density;
 
   // determine the number of channels
