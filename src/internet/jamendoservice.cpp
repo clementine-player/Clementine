@@ -49,7 +49,7 @@
 
 const char* JamendoService::kServiceName = "Jamendo";
 const char* JamendoService::kDirectoryUrl =
-    "http://img.jamendo.com/data/dbdump_artistalbumtrack.xml.gz";
+    "https://imgjam.com/data/dbdump_artistalbumtrack.xml.gz";
 const char* JamendoService::kMp3StreamUrl =
     "http://api.jamendo.com/get2/stream/track/redirect/"
     "?id=%1&streamencoding=mp31";
