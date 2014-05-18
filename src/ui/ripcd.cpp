@@ -101,8 +101,9 @@ RipCD::RipCD(QWidget* parent)
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
 
   connect(transcoder_, SIGNAL(JobComplete(QString, bool)),
-          SLOT(JobComplete(QString, bool)));
-  connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
+          SLOT(TranscodingJobComplete(QString, bool)));
+  connect(transcoder_, SIGNAL(AllJobsComplete()),
+          SLOT(AllTranscodingJobsComplete()));
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
   connect(this, SIGNAL(RippingComplete()), SLOT(ThreadedTranscoding()));
   connect(this, SIGNAL(SignalUpdateProgress()), SLOT(UpdateProgress()));
@@ -329,12 +330,12 @@ void RipCD::AddTrack(int track_number, const QString& title,
   tracks_.append(track);
 }
 
-void RipCD::JobComplete(const QString& filename, bool success) {
+void RipCD::TranscodingJobComplete(const QString& filename, bool success) {
   (*(success ? &finished_success_ : &finished_failed_))++;
   emit(SignalUpdateProgress());
 }
 
-void RipCD::AllJobsComplete() {
+void RipCD::AllTranscodingJobsComplete() {
   RemoveTemporaryDirectory();
 
   // Save tags in the background.

@@ -122,8 +122,8 @@ signals:
   void UpdateProgress();
   void ThreadedTranscoding();
   void ClickedRipButton();
-  void JobComplete(const QString& filename, bool success);
-  void AllJobsComplete();
+  void TranscodingJobComplete(const QString& filename, bool success);
+  void AllTranscodingJobsComplete();
   void TaggingComplete();
   void Options();
   void AddDestination();
