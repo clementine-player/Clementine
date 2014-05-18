@@ -30,6 +30,8 @@
 #include <QDataStream>
 #include <QFileDialog>
 #include <QFrame>
+#include <QFuture>
+#include <QFutureWatcher>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QMutexLocker>
@@ -334,6 +336,7 @@ void RipCD::JobComplete(const QString& filename, bool success) {
 
 void RipCD::AllJobsComplete() {
   RemoveTemporaryDirectory();
+
   // Save tags in the background.
   TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
                                 .value<TranscoderPreset>();
@@ -341,8 +344,11 @@ void RipCD::AllJobsComplete() {
       ui_->albumLineEdit->text(), ui_->artistLineEdit->text(),
       ui_->genreLineEdit->text(), ui_->yearLineEdit->text().toInt(),
       ui_->discLineEdit->text().toInt(), preset.type_);
-  QtConcurrent::run(this, &RipCD::TagFiles, album, tracks_);
-  SetWorking(false);
+  QFuture<void> future =
+      QtConcurrent::run(this, &RipCD::TagFiles, album, tracks_);
+  QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
+  connect(watcher, SIGNAL(finished()), SLOT(TaggingComplete()));
+  watcher->setFuture(future);
 }
 
 void RipCD::TagFiles(const AlbumInformation& album,
@@ -363,6 +369,15 @@ void RipCD::TagFiles(const AlbumInformation& album,
     TagReaderClient::Instance()->SaveFileBlocking(song.url().toLocalFile(),
                                                   song);
   }
+}
+
+void RipCD::TaggingComplete() {
+  QFutureWatcher<void>* watcher = dynamic_cast<QFutureWatcher<void>*>(sender());
+  if (!watcher) return;
+  watcher->deleteLater();
+
+  SetWorking(false);
+  qLog(Debug) << "CD ripper finished.";
 }
 
 void RipCD::Options() {

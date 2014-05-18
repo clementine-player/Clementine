@@ -124,6 +124,7 @@ signals:
   void ClickedRipButton();
   void JobComplete(const QString& filename, bool success);
   void AllJobsComplete();
+  void TaggingComplete();
   void Options();
   void AddDestination();
   void Cancel();
