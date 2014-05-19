@@ -31,7 +31,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:40+0000\n"
+"PO-Revision-Date: 2014-05-18 17:54+0000\n"
 "Last-Translator: adem4ik\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -384,7 +384,7 @@ msgstr "AAC 64к"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ВСЯ СЛАВА ГИПНОЖАБЕ!"
 
@@ -924,7 +924,7 @@ msgstr "Резервное копирование базы данных"
 msgid "Balance"
 msgstr "Баланс"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Анализатор полосами"
 
@@ -983,7 +983,7 @@ msgstr "Степень размытости"
 msgid "Body"
 msgstr "Содержимое"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Бум-анализатор"
 
@@ -1001,7 +1001,7 @@ msgstr "Обзор..."
 msgid "Buffer duration"
 msgstr "Размер буфера"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Буферизация"
 
@@ -1094,7 +1094,7 @@ msgstr "Выбрать путь кэша для Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Выберите название умного плейлиста"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Выбирать автоматически"
 
@@ -1618,7 +1618,7 @@ msgstr "Уменьшить громкость"
 msgid "Default background image"
 msgstr "Стандартное фоновое изображение"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Устройство по умолчанию на %1"
@@ -2056,6 +2056,10 @@ msgstr "Аналогично --log-levels *:3"
 msgid "Error"
 msgstr "Ошибка"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Ошибка конвертирования CD"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Ошибка подключения устройства MTP"
@@ -2332,6 +2336,10 @@ msgstr "Готово"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Первый уровень"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr "Подогнать обложку по ширине"
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2810,9 +2818,13 @@ msgstr "Портативный компьютер/наушники"
 msgid "Large Hall"
 msgstr "Large Hall"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Большая обложка альбома"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Большая обложка альбома (сведения снизу)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3114,6 +3126,10 @@ msgstr "Максимизировать результаты глобальног
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Максимальный битрейт"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "Источник медиа сменился. Перезагрузка."
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4092,7 +4108,7 @@ msgstr "Правый канал"
 msgid "Rip"
 msgstr "Конвертировать"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Конвертировать CD"
 
@@ -4413,7 +4429,7 @@ msgstr "Всплывающие сообщения из системного ло
 msgid "Show a pretty OSD"
 msgstr "Показывать OSD"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Показать над строкой состояния"
 
@@ -4558,7 +4574,7 @@ msgstr "Пропустить выбранные композиции"
 msgid "Skip track"
 msgstr "Пропустить композицию"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Маленькая обложка альбома"
 
@@ -4590,7 +4606,7 @@ msgstr "О песне"
 msgid "Song info"
 msgstr "О песне"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Сонограмма"
 
@@ -4662,7 +4678,7 @@ msgstr "Стандартнoe"
 msgid "Starred"
 msgstr "Оцененные"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Начать конвертирование"
 
@@ -5067,7 +5083,7 @@ msgstr "Настройки конвертации"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Турбина"
 

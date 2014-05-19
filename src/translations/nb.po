@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/clementine/language/nb/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -362,7 +362,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "Ære være Hypnotoad"
 
@@ -902,7 +902,7 @@ msgstr "Tar sikkerhetskopi av databasen"
 msgid "Balance"
 msgstr "Balanse"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Stolpeanalyse"
 
@@ -961,7 +961,7 @@ msgstr "Mengde slør"
 msgid "Body"
 msgstr "Innhold"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Boomanalysator"
 
@@ -979,7 +979,7 @@ msgstr "Bla gjennom..."
 msgid "Buffer duration"
 msgstr "Bufferlengde"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Mellomlagring"
 
@@ -1072,7 +1072,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Sett et navn på den smarte spillelisten"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Velg automatisk"
 
@@ -1596,7 +1596,7 @@ msgstr "Demp volumet"
 msgid "Default background image"
 msgstr "Standard bakgrunnsbilde"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2034,6 +2034,10 @@ msgstr "Tilsvarer --log-levels *:3"
 msgid "Error"
 msgstr "Feil"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Kunne ikke koble til MTP-enhet"
@@ -2310,6 +2314,10 @@ msgstr "Ferdig"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Første nivå"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2788,9 +2796,13 @@ msgstr "Laptop/Hodetelefoner"
 msgid "Large Hall"
 msgstr "Storsal"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Stort albumbilde"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3092,6 +3104,10 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Høyeste bitrate"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4070,7 +4086,7 @@ msgstr "Høyre"
 msgid "Rip"
 msgstr ""
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr ""
 
@@ -4391,7 +4407,7 @@ msgstr "Popp opp informasjon fra systemskuffa"
 msgid "Show a pretty OSD"
 msgstr "Vis en Clementine-spesifikk skrivebordsmelding"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Vis over statuslinja"
 
@@ -4536,7 +4552,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Lite albumbilde"
 
@@ -4568,7 +4584,7 @@ msgstr "Informasjon om sange"
 msgid "Song info"
 msgstr "Info om sangen"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4640,7 +4656,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Har stjerner"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr ""
 
@@ -5045,7 +5061,7 @@ msgstr "Innstillinger for omkoding"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbin"
 

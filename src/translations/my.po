@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/projects/p/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -360,7 +360,7 @@ msgstr "အေအေစီ၆၄ကီလို"
 msgid "AIFF"
 msgstr "အေအိုင်အက်ဖ်အက်ဖ်"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "အံ့မခန်းဖွယ်အားလံုးကိုဟိုက်ဖ်နိုဖားသို့"
 
@@ -900,7 +900,7 @@ msgstr "အချက်အလက်အစုအရန်မှတ်သိမ်
 msgid "Balance"
 msgstr "ချိန်ညှိချက်"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "တိုင်စိစစ်သူ"
 
@@ -959,7 +959,7 @@ msgstr "မှုန်ဝါးပမာဏ"
 msgid "Body"
 msgstr "စာကိုယ်"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "မြည်ဟိန်းသံစိစစ်သူ"
 
@@ -977,7 +977,7 @@ msgstr "လျှောက်ကြည့်..."
 msgid "Buffer duration"
 msgstr "ကြားခံကြာချိန်"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "ကြားခံ"
 
@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "သင့်ရဲ့ချက်ချာသီချင်းစာရင်းအတွက်နာမည်တစ်ခုရွေး"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "အလိုအလျောက်ရွေးချယ်ခြင်း"
 
@@ -1594,7 +1594,7 @@ msgstr "အသံပမာဏလျှော့ချ"
 msgid "Default background image"
 msgstr "မူလပံုစံနောက်ခံပုံ"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2032,6 +2032,10 @@ msgstr "Equivalent to --log-levels *:3တူညီ"
 msgid "Error"
 msgstr "အမှားပြ"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "အမ်တီပီပစ္စည်းချိတ်ဆက်မှုအမှားပြ"
@@ -2308,6 +2312,10 @@ msgstr "ပြီးဆုံး"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "ပထမဆံုးအဆင့်"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2786,9 +2794,13 @@ msgstr "လက်ဆွဲကွန်ပျူတာ/နားကြပ်မ�
 msgid "Large Hall"
 msgstr "ခန်းမကြီး"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "အယ်လဘမ်အဖုံးကြီး"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3090,6 +3102,10 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "အများဆုံးဘစ်နှုန်း"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4068,7 +4084,7 @@ msgstr "ညာ"
 msgid "Rip"
 msgstr ""
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr ""
 
@@ -4389,7 +4405,7 @@ msgstr "စနစ်အသေးမှထွက်ပေါ်ပြသ"
 msgid "Show a pretty OSD"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှတစ်ခုပြသ"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "အခြေအနေပြတိုင်အပေါ်မှာပြသ"
 
@@ -4534,7 +4550,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "အယ်လဘမ်အဖုံးသေး"
 
@@ -4566,7 +4582,7 @@ msgstr "သီချင်းအချက်အလက်"
 msgid "Song info"
 msgstr "သီချင်းအချက်အလက်"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "အသံလှိုင်းသံုးကျွန်ပျုတာရိုက်ယူပံု"
 
@@ -4638,7 +4654,7 @@ msgstr "အဆင့်အတန်း"
 msgid "Starred"
 msgstr "ကြည့်ခဲ့ပြီး"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr ""
 
@@ -5043,7 +5059,7 @@ msgstr "ပံုစံပြောင်းလဲခြင်းရွေးပ
 msgid "TrueAudio"
 msgstr "တီတီအေ"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "တာဗိုင်"
 

@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 09:45+0000\n"
+"PO-Revision-Date: 2014-05-18 17:58+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -373,7 +373,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "VŠECHNU SLÁVU HYPNOŽÁBĚ"
 
@@ -913,7 +913,7 @@ msgstr "Záloha databáze"
 msgid "Balance"
 msgstr "Vyvážení"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Proužkový analyzátor"
 
@@ -972,7 +972,7 @@ msgstr "Velikost rozmazání"
 msgid "Body"
 msgstr "Tělo"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Růstový analyzátor"
 
@@ -990,7 +990,7 @@ msgstr "Procházet…"
 msgid "Buffer duration"
 msgstr "Délka vyrovnávací paměti"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Ukládá se do vyrovnávací paměti"
 
@@ -1083,7 +1083,7 @@ msgstr "Vyberte adresář pro vyrovnávací paměť Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Vyberte název pro svůj chytrý seznam skladeb"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Vybrat automaticky"
 
@@ -1607,7 +1607,7 @@ msgstr "Snížit hlasitost"
 msgid "Default background image"
 msgstr "Výchozí obrázek na pozadí"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Výchozí zařízení na %1"
@@ -2045,6 +2045,10 @@ msgstr "Rovnocenné s --log-levels *:3"
 msgid "Error"
 msgstr "Chyba"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Chyba při vytahování skladeb z CD"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Chyba při připojování zařízení MTP"
@@ -2321,6 +2325,10 @@ msgstr "Dokončit"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "První úroveň"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr "Přizpůsobit obal šířce"
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2799,9 +2807,13 @@ msgstr "Přenosný počítač/Sluchátka"
 msgid "Large Hall"
 msgstr "Velký sál"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Velký obal alba"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Velký obal alba (podrobnosti níže)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3103,6 +3115,10 @@ msgstr "Nejvíce výsledků celkového hledání"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Nejvyšší datový tok"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "Médium se změnilo. Načítá se znovu."
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4081,7 +4097,7 @@ msgstr "Vpravo"
 msgid "Rip"
 msgstr "Vytáhnout"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Vytáhnout skladby z CD"
 
@@ -4402,7 +4418,7 @@ msgstr "Ukazovat okno vyskakující z oznamovací části panelu"
 msgid "Show a pretty OSD"
 msgstr "Ukazovat OSD"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Ukazovat nad stavovým řádkem"
 
@@ -4547,7 +4563,7 @@ msgstr "Přeskočit vybrané skladby"
 msgid "Skip track"
 msgstr "Přeskočit skladbu"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Malý obal alba"
 
@@ -4579,7 +4595,7 @@ msgstr "Informace o písni"
 msgid "Song info"
 msgstr "Píseň"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4651,7 +4667,7 @@ msgstr "Obvyklý"
 msgid "Starred"
 msgstr "S hvězdičkou"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Začít vytahovat"
 
@@ -5056,7 +5072,7 @@ msgstr "Volby překódování"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbína"
 

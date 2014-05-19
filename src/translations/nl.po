@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 09:43+0000\n"
+"PO-Revision-Date: 2014-05-18 17:53+0000\n"
 "Last-Translator: Senno Kaasjager <senno.kaasjager@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -368,7 +368,7 @@ msgstr "AAC 64K"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
@@ -908,7 +908,7 @@ msgstr "Bezig met het maken van een backup van de database"
 msgid "Balance"
 msgstr "Balans"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Balkweergave"
 
@@ -967,7 +967,7 @@ msgstr "Vervagen"
 msgid "Body"
 msgstr "Body"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Boomweergave"
 
@@ -985,7 +985,7 @@ msgstr "Bladeren…"
 msgid "Buffer duration"
 msgstr "Buffer duur"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Bufferen"
 
@@ -1078,7 +1078,7 @@ msgstr "Kies Vk.com cachemap"
 msgid "Choose a name for your smart playlist"
 msgstr "Kies een naam voor uw slimme-afspeellijst"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Automatisch kiezen"
 
@@ -1602,7 +1602,7 @@ msgstr "Volume verlagen"
 msgid "Default background image"
 msgstr "Standaard achtergrondafbeelding"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Standaard apparaat op %1"
@@ -2040,6 +2040,10 @@ msgstr "Gelijkwaardig aan --log-levels *:3"
 msgid "Error"
 msgstr "Fout"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Fout tijdens rippen van CD"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Fout tijdens het verbinden met het MTP-apparaat"
@@ -2316,6 +2320,10 @@ msgstr "Voltooien"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Eerste niveau"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr "Albumhoes aan breedte aanpassen"
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2794,9 +2802,13 @@ msgstr "Laptop/koptelefoon"
 msgid "Large Hall"
 msgstr "Grote hal"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Grote albumhoes"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Grote albumhoes (details eronder)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3098,6 +3110,10 @@ msgstr "Max aantal zoekresultaten"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Maximale bitrate"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "Media is veranderd. Bezig met herladen."
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4076,7 +4092,7 @@ msgstr "Rechts"
 msgid "Rip"
 msgstr "Rip"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Rip CD"
 
@@ -4397,7 +4413,7 @@ msgstr "Pop-up van systeemvak weergeven"
 msgid "Show a pretty OSD"
 msgstr "Mooi infoschermvenster weergeven"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Boven statusbalk weergeven"
 
@@ -4542,7 +4558,7 @@ msgstr "Geselecteerde nummers overslaan"
 msgid "Skip track"
 msgstr "Nummer overslaan"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Kleine albumhoes"
 
@@ -4574,7 +4590,7 @@ msgstr "Nummerinformatie"
 msgid "Song info"
 msgstr "Nummerinfo"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4646,7 +4662,7 @@ msgstr "Standaard"
 msgid "Starred"
 msgstr "Met ster"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Begin met rippen"
 
@@ -5051,7 +5067,7 @@ msgstr "Conversieopties"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbine"
 

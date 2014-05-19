@@ -28,8 +28,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-12 05:28+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -175,13 +175,13 @@ msgstr "%n falló"
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
-msgstr "%n completado(s)"
+msgstr "%n completados"
 
 #: transcoder/transcodedialog.cpp:194
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
-msgstr "%n pendiente(s)"
+msgstr "%n pendientes"
 
 #: playlist/playlistheader.cpp:37
 msgid "&Align text"
@@ -381,7 +381,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALABEMOS TODOS AL HIPNOSAPO"
 
@@ -773,7 +773,7 @@ msgstr "Ocurrió un error no especificado."
 
 #: ui/about.cpp:84
 msgid "And:"
-msgstr "Y:"
+msgstr "Y a:"
 
 #: moodbar/moodbarrenderer.cpp:171
 msgid "Angry"
@@ -921,7 +921,7 @@ msgstr "Respaldando la base de datos"
 msgid "Balance"
 msgstr "Balance"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Analizador de barras"
 
@@ -980,7 +980,7 @@ msgstr "Cantidad de desenfoque"
 msgid "Body"
 msgstr "Cuerpo"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Analizador de resonancia"
 
@@ -998,7 +998,7 @@ msgstr "Examinar…"
 msgid "Buffer duration"
 msgstr "Duración del búfer"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Guardando en búfer"
 
@@ -1081,7 +1081,7 @@ msgstr "Comprobar episodios nuevos"
 
 #: ui/mainwindow.cpp:702
 msgid "Check for updates..."
-msgstr "Comprobar actualizaciones…"
+msgstr "Buscar actualizaciones…"
 
 #: internet/vksettingspage.cpp:97
 msgid "Choose Vk.com cache directory"
@@ -1091,7 +1091,7 @@ msgstr "Elija la carpeta de caché de Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Elija un nombre para la lista de reproducción inteligente"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Elegir automáticamente"
 
@@ -1388,7 +1388,7 @@ msgstr "Copiar al portapapeles"
 #: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
 #: ui/mainwindow.cpp:602 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
-msgstr "Copiar al dispositivo…"
+msgstr "Copiar en un dispositivo…"
 
 #: devices/deviceview.cpp:225 ui/mainwindow.cpp:592
 #: widgets/fileviewlist.cpp:38
@@ -1601,7 +1601,7 @@ msgstr "Pre&determinado"
 
 #: core/commandlineoptions.cpp:151
 msgid "Decrease the volume by 4%"
-msgstr "Disminuir el volumen en 4 %"
+msgstr "Disminuir el volumen un 4 %"
 
 #: core/commandlineoptions.cpp:153
 msgid "Decrease the volume by <value> percent"
@@ -1615,7 +1615,7 @@ msgstr "Disminuir volumen"
 msgid "Default background image"
 msgstr "Imagen de fondo predeterminada"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositivo predeterminado en %1"
@@ -2053,6 +2053,10 @@ msgstr "Equivalente a --log-levels*:3"
 msgid "Error"
 msgstr "Error"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Error al copiar desde CD"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Error al conectar al dispositivo MTP"
@@ -2329,6 +2333,10 @@ msgstr "Finalizar"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Primer nivel"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2807,9 +2815,13 @@ msgstr "Portátil/auriculares"
 msgid "Large Hall"
 msgstr "Salón grande"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
-msgstr "Carátula de álbum grande"
+msgstr "Carátula del álbum grande"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Carátula del álbum grande (detalles abajo)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3112,6 +3124,10 @@ msgstr "Resultados de búsqueda globales máximos"
 msgid "Maximum bitrate"
 msgstr "Tasa de bits máxima"
 
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "El soporte ha cambiado. Cargando de nuevo"
+
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
@@ -3275,7 +3291,7 @@ msgstr "Lista de reproducción inteligente nueva…"
 
 #: widgets/freespacebar.cpp:45
 msgid "New songs"
-msgstr "Canciones nuevas"
+msgstr "Canciones nuevas:"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
@@ -3375,7 +3391,7 @@ msgstr "No inició sesión"
 
 #: devices/deviceview.cpp:113
 msgid "Not mounted - double click to mount"
-msgstr "Sin montar – pulse dos veces para montar"
+msgstr "Sin montar. Pulse dos veces para montar"
 
 #: internet/vksearchdialog.cpp:94
 msgid "Nothing found"
@@ -4089,7 +4105,7 @@ msgstr "Derecha"
 msgid "Rip"
 msgstr "Extraer"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Extraer CD"
 
@@ -4410,7 +4426,7 @@ msgstr "Mostrar un mensaje emergente en el área de notificación"
 msgid "Show a pretty OSD"
 msgstr "Mostrar OSD estético"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Mostrar sobre la barra de estado"
 
@@ -4555,9 +4571,9 @@ msgstr "Omitir pistas seleccionadas"
 msgid "Skip track"
 msgstr "Omitir pista"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
-msgstr "Carátula de álbum pequeña"
+msgstr "Carátula del álbum pequeña"
 
 #: widgets/fancytabwidget.cpp:663
 msgid "Small sidebar"
@@ -4587,7 +4603,7 @@ msgstr "Información de la canción"
 msgid "Song info"
 msgstr "Inf. canción"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonograma"
 
@@ -4659,7 +4675,7 @@ msgstr "Estándar"
 msgid "Starred"
 msgstr "Destacado"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Iniciar extracción"
 
@@ -4821,7 +4837,7 @@ msgstr "Opciones del texto"
 
 #: ui/about.cpp:73
 msgid "Thanks to"
-msgstr "Agradecemos a"
+msgstr "Agradecimientos"
 
 #: ui/globalshortcutssettingspage.cpp:184
 #, qt-format
@@ -5064,7 +5080,7 @@ msgstr "Opciones de conversión"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbina"
 
@@ -5078,7 +5094,7 @@ msgstr "URI"
 
 #: core/commandlineoptions.cpp:142
 msgid "URL(s)"
-msgstr "URL(s)"
+msgstr "URL"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"

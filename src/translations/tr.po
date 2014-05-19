@@ -24,7 +24,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 11:39+0000\n"
+"PO-Revision-Date: 2014-05-18 18:23+0000\n"
 "Last-Translator: volkangezer <volkangezer@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -377,7 +377,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "TÜM ŞEREF HYPNOTOAD'A GİTSİN"
 
@@ -917,7 +917,7 @@ msgstr "Veritabanını yedekliyor"
 msgid "Balance"
 msgstr "Denge"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Bar çözümleyici"
 
@@ -976,7 +976,7 @@ msgstr "Bulanıklık miktarı"
 msgid "Body"
 msgstr "Gövde"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Boom çözümleyici"
 
@@ -994,7 +994,7 @@ msgstr "Gözat..."
 msgid "Buffer duration"
 msgstr "Önbellek süresi"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Arabelleğe alınıyor"
 
@@ -1087,7 +1087,7 @@ msgstr "Vk.com önbellek dizinini seç"
 msgid "Choose a name for your smart playlist"
 msgstr "Akıllı çalma listesi için isim seçin"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Otomatik seç"
 
@@ -1611,7 +1611,7 @@ msgstr "Sesi azalt"
 msgid "Default background image"
 msgstr "Varsayılan arkaplan resmi"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "%1 üzerinde öntanımlı aygıt"
@@ -2049,6 +2049,10 @@ msgstr "--log-levels *:3'e eşdeğer"
 msgid "Error"
 msgstr "Hata"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "CD Kopyalanırken Hata"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "MTP aygıtına bağlanırken hata"
@@ -2325,6 +2329,10 @@ msgstr "Bitir"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "İlk Seviye"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr "Kapağı genişliğe sığdır"
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2803,9 +2811,13 @@ msgstr "Dizüstü/Kulaklık"
 msgid "Large Hall"
 msgstr "Geniş Salon"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Geniş albüm kapağı"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Büyük albüm kapağı (ayrıntılar aşağıda)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3107,6 +3119,10 @@ msgstr "En fazla genel arama sonucu"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Maksimum bit oranı"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "Ortam değişti. Yeniden yükleniyor"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4085,7 +4101,7 @@ msgstr "Sağ"
 msgid "Rip"
 msgstr "Dönüştür"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "CD Dönüştür"
 
@@ -4406,7 +4422,7 @@ msgstr "Sistem tepsisinden bir açılır pencere göster"
 msgid "Show a pretty OSD"
 msgstr "Şirin bir OSD göster"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Durum çubuğunun üzerinde göster"
 
@@ -4551,7 +4567,7 @@ msgstr "Seçili parçaları atla"
 msgid "Skip track"
 msgstr "Parçayı atla"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Küçük albüm kapağı"
 
@@ -4583,7 +4599,7 @@ msgstr "Şarkı Bilgisi"
 msgid "Song info"
 msgstr "Şarkı bilgisi"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4655,7 +4671,7 @@ msgstr "Standart"
 msgid "Starred"
 msgstr "Yıldızlı"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Dönüştürmeyi başlat"
 
@@ -5060,7 +5076,7 @@ msgstr "Kod çevrimi seçenekleri"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Türbin"
 

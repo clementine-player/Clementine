@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 11:11+0000\n"
+"PO-Revision-Date: 2014-05-19 04:53+0000\n"
 "Last-Translator: min zhang <zm1990s@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -370,7 +370,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
@@ -910,7 +910,7 @@ msgstr "备份数据库"
 msgid "Balance"
 msgstr "均衡"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "条形分析器"
 
@@ -969,7 +969,7 @@ msgstr "模糊量"
 msgid "Body"
 msgstr "通知正文"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "轰鸣音分析器"
 
@@ -987,7 +987,7 @@ msgstr "浏览..."
 msgid "Buffer duration"
 msgstr "缓冲时长"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "缓冲中"
 
@@ -1080,7 +1080,7 @@ msgstr "选择 VK.com 缓存目录"
 msgid "Choose a name for your smart playlist"
 msgstr "为您的智能播放列表起名"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "自动选择"
 
@@ -1604,7 +1604,7 @@ msgstr "降低音量"
 msgid "Default background image"
 msgstr "默认背景图片"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "%1 的默认设备"
@@ -2042,6 +2042,10 @@ msgstr "相当于 --log-levels *:3"
 msgid "Error"
 msgstr "错误"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "CD抓轨出错"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "连接 MTP 设备出错"
@@ -2318,6 +2322,10 @@ msgstr "完成"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "第一阶段"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr "适应封面到等宽"
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2796,9 +2804,13 @@ msgstr "笔记本电脑/耳机"
 msgid "Large Hall"
 msgstr "大礼堂"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "大专辑封面"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "大专辑封面(详情如下)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3100,6 +3112,10 @@ msgstr "最大全局搜索结果"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "最大位速率"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "媒体库已改变，重新载入中"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4078,7 +4094,7 @@ msgstr "右"
 msgid "Rip"
 msgstr "抓轨"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "CD 抓轨"
 
@@ -4399,7 +4415,7 @@ msgstr "系统托盘气泡通知"
 msgid "Show a pretty OSD"
 msgstr "显示漂亮的 OSD"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "在状态栏之上显示"
 
@@ -4544,7 +4560,7 @@ msgstr "跳过所选择的曲目"
 msgid "Skip track"
 msgstr "跳过曲目"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "小专辑封面"
 
@@ -4576,7 +4592,7 @@ msgstr "曲目信息"
 msgid "Song info"
 msgstr "曲目信息"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "声波图"
 
@@ -4648,7 +4664,7 @@ msgstr "标准"
 msgid "Starred"
 msgstr "用星号标记"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "开始抓轨"
 
@@ -5053,7 +5069,7 @@ msgstr "转码设置"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbine"
 

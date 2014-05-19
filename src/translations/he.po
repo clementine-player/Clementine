@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -365,7 +365,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "הללו את ה־Hypnotoad!"
 
@@ -905,7 +905,7 @@ msgstr "מסד הנתונים מגובה"
 msgid "Balance"
 msgstr "איזון"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "אנלייזר עמודות"
 
@@ -964,7 +964,7 @@ msgstr "כמות טשטוש"
 msgid "Body"
 msgstr "גוף"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "אנלייזר בום"
 
@@ -982,7 +982,7 @@ msgstr "עיון..."
 msgid "Buffer duration"
 msgstr "משך הבאפר (buffer)"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "באגירה"
 
@@ -1075,7 +1075,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "נא לבחור בשם עבור רשימת ההשמעה החכמה"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "בחירה אוטומטית"
 
@@ -1599,7 +1599,7 @@ msgstr "הנמכת עצמת השמע"
 msgid "Default background image"
 msgstr "תמונת בררת המחדל לרקע"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2037,6 +2037,10 @@ msgstr "זהה לאפשרות--log-levels *:3"
 msgid "Error"
 msgstr "שגיאה"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "שגיאה בחיבור להתקן מולטימדיה"
@@ -2313,6 +2317,10 @@ msgstr "סיום"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "רמה ראשונה"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2791,9 +2799,13 @@ msgstr "מחשב נייד/אוזניות"
 msgid "Large Hall"
 msgstr "חלל גדול"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "עטיפת אלבום גדולה"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3095,6 +3107,10 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "קצב סיביות מירבי"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4073,7 +4089,7 @@ msgstr "ימינה"
 msgid "Rip"
 msgstr ""
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr ""
 
@@ -4394,7 +4410,7 @@ msgstr "הצגת חלונית קופצת ממגשית המערכת"
 msgid "Show a pretty OSD"
 msgstr "הצגת חיווי מסך נאה"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "הצגה מעל לשורת המצב"
 
@@ -4539,7 +4555,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "עטיפת אלבום קטנה"
 
@@ -4571,7 +4587,7 @@ msgstr "מידע על השיר"
 msgid "Song info"
 msgstr "מידע על השיר"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "סונוגרמה"
 
@@ -4643,7 +4659,7 @@ msgstr "סטנדרטי"
 msgid "Starred"
 msgstr "מסומן בכוכב"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr ""
 
@@ -5048,7 +5064,7 @@ msgstr "אפשרויות המרה"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbine"
 

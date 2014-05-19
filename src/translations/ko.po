@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -369,7 +369,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "HYPNOTOAD에 모든 영광을"
 
@@ -909,7 +909,7 @@ msgstr "데이터베이스 백업"
 msgid "Balance"
 msgstr "밸런스"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "막대"
 
@@ -968,7 +968,7 @@ msgstr "블러 정도"
 msgid "Body"
 msgstr "본문"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "붐"
 
@@ -986,7 +986,7 @@ msgstr "찾아보기..."
 msgid "Buffer duration"
 msgstr "버퍼 시간"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "버퍼링"
 
@@ -1079,7 +1079,7 @@ msgstr "Vk.com 캐시 디렉터리 선택"
 msgid "Choose a name for your smart playlist"
 msgstr "스마트 재생목록에 이름 추가"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "자동 선택"
 
@@ -1603,7 +1603,7 @@ msgstr "음량 줄이기"
 msgid "Default background image"
 msgstr "기본 배경 그림"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2041,6 +2041,10 @@ msgstr "동등한 --log-level *:3"
 msgid "Error"
 msgstr "오류"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "MTP 장치에 연결 오류"
@@ -2317,6 +2321,10 @@ msgstr "마침"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "첫 단계"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2795,9 +2803,13 @@ msgstr "노트북/헤드폰"
 msgid "Large Hall"
 msgstr "거대한 홀"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "큰 앨범 표지"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3099,6 +3111,10 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "최고 비트 전송률"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4077,7 +4093,7 @@ msgstr "오른쪽"
 msgid "Rip"
 msgstr "굽기"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "CD "
 
@@ -4398,7 +4414,7 @@ msgstr "시스템 트레이에서 팝업 보기"
 msgid "Show a pretty OSD"
 msgstr "예쁜 OSD 보기"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "상태 표시 줄 위에 보기"
 
@@ -4543,7 +4559,7 @@ msgstr "선택된 트랙들 "
 msgid "Skip track"
 msgstr "트랙 "
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "작은 앨범 표지"
 
@@ -4575,7 +4591,7 @@ msgstr "음악 정보"
 msgid "Song info"
 msgstr "음악 정보"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "소노그래프"
 
@@ -4647,7 +4663,7 @@ msgstr "표준"
 msgid "Starred"
 msgstr "볊점"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "굽기 시작"
 
@@ -5052,7 +5068,7 @@ msgstr "변환 옵션"
 msgid "TrueAudio"
 msgstr "트루오디오"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "터빈"
 

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -364,7 +364,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
@@ -904,7 +904,7 @@ msgstr "Đang sao lưu cơ sở dữ liệu"
 msgid "Balance"
 msgstr ""
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Phân tích theo các thanh"
 
@@ -963,7 +963,7 @@ msgstr ""
 msgid "Body"
 msgstr "Nội dung"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Phân tích theo dạng cây"
 
@@ -981,7 +981,7 @@ msgstr "Duyệt tìm..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Đang tạo bộ đệm"
 
@@ -1074,7 +1074,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Đặt tên cho danh sách nhạc của bạn"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Tự động lựa chọn"
 
@@ -1598,7 +1598,7 @@ msgstr "Giảm âm lượng"
 msgid "Default background image"
 msgstr "Dùng ảnh nền mặc định"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2036,6 +2036,10 @@ msgstr "Tương đương với --log-levels *:3"
 msgid "Error"
 msgstr "Lỗi"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Lỗi kết nối thiết bị MTP"
@@ -2312,6 +2316,10 @@ msgstr "Hoàn tất"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Mức độ đầu"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2790,9 +2798,13 @@ msgstr "Laptop/Headphones"
 msgid "Large Hall"
 msgstr "Large Hall"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Ảnh bìa lớn"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3094,6 +3106,10 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Bitrate tối đa"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4072,7 +4088,7 @@ msgstr "Phải"
 msgid "Rip"
 msgstr ""
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr ""
 
@@ -4393,7 +4409,7 @@ msgstr "Hiện một thông báo nhỏ dưới khay hệ thống"
 msgid "Show a pretty OSD"
 msgstr "Tùy chỉnh thông báo"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Hiện phía trên thanh trạng thái"
 
@@ -4538,7 +4554,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Ảnh bìa nhỏ"
 
@@ -4570,7 +4586,7 @@ msgstr "Thông tin bài hát"
 msgid "Song info"
 msgstr "Bài hát"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4642,7 +4658,7 @@ msgstr "Chuẩn"
 msgid "Starred"
 msgstr "Đã đánh giá"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr ""
 
@@ -5047,7 +5063,7 @@ msgstr "Tùy chỉnh chuyển mã"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbine"
 

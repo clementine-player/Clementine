@@ -24,6 +24,7 @@
 # jb78180 <jblum66@gmail.com>, 2012
 # jb78180 <jblum66@gmail.com>, 2014
 # jb78180 <jblum66@gmail.com>, 2012
+# Darkitty <nicolaslegall34@free.fr>, 2014
 # Marco Tulio Costa <mmarcottulio@gmail.com>, 2012
 # evangeneer <mathieu@evangeneer.net>, 2012
 # matlantin <matlantin@gmail.com>, 2012
@@ -39,8 +40,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-12 07:05+0000\n"
-"Last-Translator: TTOO <vic952@hotmail.com>\n"
+"PO-Revision-Date: 2014-05-18 19:01+0000\n"
+"Last-Translator: Tubuntu <tubuntu@testimonium.be>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -392,7 +393,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "GLOIRE AU CRAPAUD HYPNOTIQUE !"
 
@@ -932,7 +933,7 @@ msgstr "Sauvegarde de la base de données"
 msgid "Balance"
 msgstr "Balance"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Spectrogramme à barres"
 
@@ -991,7 +992,7 @@ msgstr "Niveau de flou"
 msgid "Body"
 msgstr "Corps"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Spectrogramme « Boom »"
 
@@ -1009,7 +1010,7 @@ msgstr "Parcourir..."
 msgid "Buffer duration"
 msgstr "Durée du tampon"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Mise en mémoire tampon"
 
@@ -1102,7 +1103,7 @@ msgstr "Choisissez le répertoire de cache Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Choisissez un nom pour votre liste de lecture intelligente"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Choisir automatiquement"
 
@@ -1626,7 +1627,7 @@ msgstr "Diminuer le volume"
 msgid "Default background image"
 msgstr "Image d'arrière-plan par défaut"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Périphérique par défaut à %1"
@@ -2064,6 +2065,10 @@ msgstr "Equivalent à --log-levels *:3"
 msgid "Error"
 msgstr "Erreur"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Erreur de copie du CD"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Erreur durant la connexion au périphérique MTP"
@@ -2340,6 +2345,10 @@ msgstr "Terminé"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Premier niveau"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr "Ajuster la pochette sur la largeur"
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2818,9 +2827,13 @@ msgstr "Portable/Écouteurs"
 msgid "Large Hall"
 msgstr "Large Salle"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Grande pochette d'album"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Grande pochette d'album (détails ci-dessous)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3122,6 +3135,10 @@ msgstr "Maximum pour les résultats globaux de recherche"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Débit maximum"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "Le média à changé. Rechargement"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -3825,12 +3842,12 @@ msgstr "Mettre les morceaux dans un ordre aléatoire"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "Qualité"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "Qualité"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -4100,7 +4117,7 @@ msgstr "Droite"
 msgid "Rip"
 msgstr "Extraire"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Extraire le CD"
 
@@ -4421,7 +4438,7 @@ msgstr "Afficher une pop-up à côté de la zone de notification"
 msgid "Show a pretty OSD"
 msgstr "Utiliser l'affichage à l'écran (OSD)"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Afficher au dessus de la barre d'état"
 
@@ -4566,7 +4583,7 @@ msgstr "Passer les pistes sélectionnées"
 msgid "Skip track"
 msgstr "Passer la piste"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Petite pochette d'album"
 
@@ -4598,7 +4615,7 @@ msgstr "Informations sur le morceau"
 msgid "Song info"
 msgstr "Info morceau"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogramme"
 
@@ -4670,7 +4687,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Favoris"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Démarrer l'extraction"
 
@@ -5075,7 +5092,7 @@ msgstr "Option de transcodage"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Spectrogramme « Turbine »"
 
@@ -5601,7 +5618,7 @@ msgstr "Vos scrobbles : %1"
 
 #: visualisations/visualisationcontainer.cpp:159
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr "Votre système n'est pas compatible avec OpenGL, les visualitions ne sont pas disponibles."
+msgstr "Votre système n'est pas compatible avec OpenGL, les visualisations ne sont pas disponibles."
 
 #: internet/groovesharksettingspage.cpp:114
 #: internet/spotifysettingspage.cpp:152

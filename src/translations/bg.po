@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/clementine/language/bg/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -366,7 +366,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "Славният хипножабок!"
 
@@ -906,7 +906,7 @@ msgstr "Архивиране на базата данни"
 msgid "Balance"
 msgstr ""
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Колонков анализатор"
 
@@ -965,7 +965,7 @@ msgstr ""
 msgid "Body"
 msgstr "Тяло"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Бум анализатор"
 
@@ -983,7 +983,7 @@ msgstr "Избор…"
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Буфериране"
 
@@ -1076,7 +1076,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Изберете име за вашият умен списък с песни"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Автоматичен избор"
 
@@ -1600,7 +1600,7 @@ msgstr "Намаляване на звука"
 msgid "Default background image"
 msgstr "Фоново изображение по подразбиране"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2038,6 +2038,10 @@ msgstr "Еквивалентно на --log-levels *:3"
 msgid "Error"
 msgstr "Грешка"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Грешка при свързването на MTP устройство"
@@ -2314,6 +2318,10 @@ msgstr "Край"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Първо ниво"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2792,9 +2800,13 @@ msgstr "Лаптоп/Слушалки"
 msgid "Large Hall"
 msgstr "Голяма зала"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Голяма обложка"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3096,6 +3108,10 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Максимален битов поток"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4074,7 +4090,7 @@ msgstr ""
 msgid "Rip"
 msgstr ""
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr ""
 
@@ -4395,7 +4411,7 @@ msgstr "Покажи изкачащо прозорче в областа за у
 msgid "Show a pretty OSD"
 msgstr "Показване на красиво OSD"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Покажи над status bar-а"
 
@@ -4540,7 +4556,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Малки обложки"
 
@@ -4572,7 +4588,7 @@ msgstr "Информация за песен"
 msgid "Song info"
 msgstr "Информация за песен"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Сонограма"
 
@@ -4644,7 +4660,7 @@ msgstr "Стандартно"
 msgid "Starred"
 msgstr "Със звезда"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr ""
 
@@ -5049,7 +5065,7 @@ msgstr "Настройки на прекодиране"
 msgid "TrueAudio"
 msgstr "Инстинско Аудио"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Турбина"
 

@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -366,7 +366,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
@@ -906,7 +906,7 @@ msgstr "データベースをバックアップ中"
 msgid "Balance"
 msgstr "バランス"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "バー表示"
 
@@ -965,7 +965,7 @@ msgstr "ぼかし量"
 msgid "Body"
 msgstr "本文"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "ブームアナライザー"
 
@@ -983,7 +983,7 @@ msgstr "参照..."
 msgid "Buffer duration"
 msgstr "バッファーの長さ"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "バッファ中"
 
@@ -1076,7 +1076,7 @@ msgstr "Vk.com のキャッシュディレクトリーを選択する"
 msgid "Choose a name for your smart playlist"
 msgstr "スマートプレイリストの名前を選択してください"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "自動的に選択する"
 
@@ -1600,7 +1600,7 @@ msgstr "音量を下げる"
 msgid "Default background image"
 msgstr "既定の背景画像"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2038,6 +2038,10 @@ msgstr "--log-levels *:3 と同じ"
 msgid "Error"
 msgstr "エラー"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "MTP デバイスの接続エラー"
@@ -2314,6 +2318,10 @@ msgstr "完了"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "第 1 階層"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2792,9 +2800,13 @@ msgstr "ノートパソコン・ヘッドフォン"
 msgid "Large Hall"
 msgstr "広間"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "大きいアルバムカバー"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3096,6 +3108,10 @@ msgstr "検索結果の最大件数"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "最高ビットレート"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "メディアが交換されました。読み込み中"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -3799,12 +3815,12 @@ msgstr "曲をランダムに並び替える"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "品質"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "品質"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -4074,7 +4090,7 @@ msgstr "右"
 msgid "Rip"
 msgstr "リッピングする"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "CD をリンピングする"
 
@@ -4395,7 +4411,7 @@ msgstr "システムトレイからポップアップを表示する"
 msgid "Show a pretty OSD"
 msgstr "Pretty OSD を表示する"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "ステータスバーの上に表示"
 
@@ -4540,7 +4556,7 @@ msgstr "選択したトラックをスキップする"
 msgid "Skip track"
 msgstr "トラックをスキップする"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "小さいアルバムカバー"
 
@@ -4572,7 +4588,7 @@ msgstr "曲の情報"
 msgid "Song info"
 msgstr "曲の情報"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4644,7 +4660,7 @@ msgstr "標準"
 msgid "Starred"
 msgstr "星付き"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "リッピングを開始する"
 
@@ -4687,7 +4703,7 @@ msgstr "次で停止"
 
 #: ui/mainwindow.cpp:573 ../bin/src/ui_mainwindow.h:646
 msgid "Stop after this track"
-msgstr "このトラックで停止"
+msgstr "このトラック後に停止"
 
 #: core/commandlineoptions.cpp:146
 msgid "Stop playback"
@@ -4695,12 +4711,12 @@ msgstr "再生の停止"
 
 #: core/globalshortcuts.cpp:51
 msgid "Stop playing after current track"
-msgstr "現在のトラックで停止"
+msgstr "現在のトラック後に停止"
 
 #: widgets/osd.cpp:169
 #, qt-format
 msgid "Stop playing after track: %1"
-msgstr "トラック %1 の後に再生を停止"
+msgstr "現在のトラック後に停止: %1"
 
 #: widgets/osd.cpp:163
 msgid "Stopped"
@@ -5049,7 +5065,7 @@ msgstr "トランスコードのオプション"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbine"
 

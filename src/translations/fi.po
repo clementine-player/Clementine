@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 13:53+0000\n"
+"PO-Revision-Date: 2014-05-18 17:32+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -365,7 +365,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "KAIKKI KUNNIA HYPNOTOADILLE"
 
@@ -905,7 +905,7 @@ msgstr "Varmuuskopioidaan tietokantaa"
 msgid "Balance"
 msgstr "Tasapaino"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Taajuusjakauma"
 
@@ -964,7 +964,7 @@ msgstr "Sumennuksen määrä"
 msgid "Body"
 msgstr "Sisältö"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Boom analyzer"
 
@@ -982,7 +982,7 @@ msgstr "Selaa..."
 msgid "Buffer duration"
 msgstr "Puskurin kesto"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Puskuroidaan"
 
@@ -1075,7 +1075,7 @@ msgstr "Valitse Vk.comin välimuistikansio"
 msgid "Choose a name for your smart playlist"
 msgstr "Anna nimi älykkäälle soittolistalle"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Valitse automaattisesti"
 
@@ -1599,7 +1599,7 @@ msgstr "Vähennä äänenvoimakkuutta"
 msgid "Default background image"
 msgstr "Oletustaustakuva"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2037,6 +2037,10 @@ msgstr "Vastaa --log-levels *:3"
 msgid "Error"
 msgstr "Virhe"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Virhe CD:tä kopioitaessa"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Virhe yhdistäessä MTP-laitteeseen"
@@ -2313,6 +2317,10 @@ msgstr "Valmis"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Ensimmäinen taso"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr "Sovita kansi leveyteen"
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2791,9 +2799,13 @@ msgstr "Kannettava/kuulokkeet"
 msgid "Large Hall"
 msgstr "Suuri halli"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Suuri kansikuva"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Suuri levyn kansi (tiedot alla)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3095,6 +3107,10 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Suurin bittinopeus"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "Media vaihtui, ladataan uudelleen"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4073,7 +4089,7 @@ msgstr "Oikea"
 msgid "Rip"
 msgstr "Kopioi levy"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Kopioi CD:n sisältö"
 
@@ -4394,7 +4410,7 @@ msgstr "Näytä ponnahdus tehtäväpalkista"
 msgid "Show a pretty OSD"
 msgstr "Näytä kuvaruutunäyttö"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Näytä tilapalkin yläpuolella"
 
@@ -4539,7 +4555,7 @@ msgstr "Ohita valitut kappaleet"
 msgid "Skip track"
 msgstr "Ohita kappale"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Pieni kansikuva"
 
@@ -4571,7 +4587,7 @@ msgstr "Kappaletiedot"
 msgid "Song info"
 msgstr "Kappaletiedot"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogrammi"
 
@@ -4643,7 +4659,7 @@ msgstr "Normaali"
 msgid "Starred"
 msgstr "Tähdellä merkitty"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Aloita levyn kopiointi"
 
@@ -5048,7 +5064,7 @@ msgstr "Muunnosvalinnat"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbine"
 

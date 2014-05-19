@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Galician (http://www.transifex.com/projects/p/clementine/language/gl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -364,7 +364,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "Toda a gloria ao Hipnosapo"
 
@@ -904,7 +904,7 @@ msgstr "Gardando unha copia de seguranza da base de datos…"
 msgid "Balance"
 msgstr "Equilibrio"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Analisador da barra"
 
@@ -963,7 +963,7 @@ msgstr "Cantidade de blur"
 msgid "Body"
 msgstr "Corpo"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Analisador de Boom"
 
@@ -981,7 +981,7 @@ msgstr "Examinar..."
 msgid "Buffer duration"
 msgstr "Duración de almacenado en búfer"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Almacenando no búfer…"
 
@@ -1074,7 +1074,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Escolla un nome para a súa lista intelixente"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Elixir automaticamente"
 
@@ -1598,7 +1598,7 @@ msgstr "Diminuír o volume"
 msgid "Default background image"
 msgstr "Imaxe de fondo predeterminada"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2036,6 +2036,10 @@ msgstr "Equivalente a «--log-levels *:3»."
 msgid "Error"
 msgstr "Erro"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Erro conectando dispositivo MTP"
@@ -2312,6 +2316,10 @@ msgstr "Rematar"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Primeiro nivel"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2790,9 +2798,13 @@ msgstr "Portátil/Auscultadores"
 msgid "Large Hall"
 msgstr "Large Hall"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Portada grande do álbum"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3094,6 +3106,10 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Taxa de bits máxima"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4072,7 +4088,7 @@ msgstr "Dereita"
 msgid "Rip"
 msgstr ""
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr ""
 
@@ -4393,7 +4409,7 @@ msgstr "Mostrar unha xanela emerxente da bandexa do sistema "
 msgid "Show a pretty OSD"
 msgstr "Amosar unha pantalla xeitosa"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Mostrar"
 
@@ -4538,7 +4554,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Portada pequena do álbum"
 
@@ -4570,7 +4586,7 @@ msgstr "Información da canción"
 msgid "Song info"
 msgstr "Información"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Espectrograma"
 
@@ -4642,7 +4658,7 @@ msgstr "Estándar"
 msgid "Starred"
 msgstr "Vixiado"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr ""
 
@@ -5047,7 +5063,7 @@ msgstr "Opcións de conversión"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbine"
 

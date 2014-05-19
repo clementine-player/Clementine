@@ -6,7 +6,7 @@
 # TraN <chris.sv88@gmail.com>, 2013
 # Daniel Sandman <revoltism@gmail.com>, 2012
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# kristian <kristianm24@gmail.com>, 2013
+# kristian <kristianm24@gmail.com>, 2013-2014
 # kristian <kristianm24@gmail.com>, 2012
 # Kristoffer Grundströ <kristoffer.grundstrom1983@gmail.com>, 2014
 # paperbagcorner <mandersson444@gmail.com>, 2014
@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -372,7 +372,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ÄRAD VARE HYPNOTOAD"
 
@@ -912,7 +912,7 @@ msgstr "Säkerhetskopiera databasen"
 msgid "Balance"
 msgstr "Balans"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Stapelanalysator"
 
@@ -971,7 +971,7 @@ msgstr "Grumlighet"
 msgid "Body"
 msgstr "Brödtext"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Boom-analysator"
 
@@ -989,7 +989,7 @@ msgstr "Bläddra..."
 msgid "Buffer duration"
 msgstr "Längd på buffer"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Buffrar"
 
@@ -1082,7 +1082,7 @@ msgstr "Välj Vk.com cache-katalog"
 msgid "Choose a name for your smart playlist"
 msgstr "Välj ett namn för din smara spellista"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Välj automatiskt"
 
@@ -1606,7 +1606,7 @@ msgstr "Sänk volymen"
 msgid "Default background image"
 msgstr "Standardbakgrund"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Standardenhet på %1"
@@ -2044,6 +2044,10 @@ msgstr "Motsvarar --log-levels *:3"
 msgid "Error"
 msgstr "Fel"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Något gick fel med CD-Rippningen"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Fel vid anslutning av MTP-enhet"
@@ -2320,6 +2324,10 @@ msgstr "Avsluta"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Första nivån"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2798,9 +2806,13 @@ msgstr "Laptop/hörlurar"
 msgid "Large Hall"
 msgstr "Stor hall"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Stort albumomslag"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Stora skivomslag (detaljer nedan)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3102,6 +3114,10 @@ msgstr "Max globala sökresultat"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Maximal bithastighet"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "Media har ändrats. Laddar om"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -3805,12 +3821,12 @@ msgstr "Lägg till låtar i slumpmässig ordning"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "Kvalitet"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "Kvalitet"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -4080,7 +4096,7 @@ msgstr "Höger"
 msgid "Rip"
 msgstr "Kopiera"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Kopiera CD-skiva"
 
@@ -4401,7 +4417,7 @@ msgstr "Visa en popup från notifieringsytan"
 msgid "Show a pretty OSD"
 msgstr "Visa en skön notifiering"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Visa ovanför statusraden"
 
@@ -4546,7 +4562,7 @@ msgstr "Hoppa över valda spår"
 msgid "Skip track"
 msgstr "Hoppa över spår"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Liten omslagsbild"
 
@@ -4578,7 +4594,7 @@ msgstr "Låtinformation"
 msgid "Song info"
 msgstr "Låtinfo"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Spektrogram"
 
@@ -4650,7 +4666,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Stjärnmärkta"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Starta kopiering"
 
@@ -5055,7 +5071,7 @@ msgstr "Omkodningsalternativ"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbin"
 
@@ -5520,7 +5536,7 @@ msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud. However, you need to login to access your playlists and your "
 "stream."
-msgstr ""
+msgstr "Du behöver inte vara inloggad för att söka och lyssna till musik på SoundCloud. Men om du vill komma åt dina spellistor och strömmar krävs inloggning."
 
 #: internet/spotifyservice.cpp:175
 msgid ""

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 09:29+0000\n"
+"PO-Revision-Date: 2014-05-18 23:19+0000\n"
 "Last-Translator: daimonion <pejakm@autistici.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/projects/p/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -363,7 +363,7 @@ msgstr "ААЦ 64k"
 msgid "AIFF"
 msgstr "АИФФ"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "СЛАВА ХИПНОЖАПЦУ"
 
@@ -903,7 +903,7 @@ msgstr "Бекапујем базу података"
 msgid "Balance"
 msgstr "Равнотежа"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Тракасти анализатор"
 
@@ -962,7 +962,7 @@ msgstr "Замућење"
 msgid "Body"
 msgstr "Тело"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Бум анализатор"
 
@@ -980,7 +980,7 @@ msgstr "Прегледај..."
 msgid "Buffer duration"
 msgstr "Величина бафера"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Баферујем"
 
@@ -1073,7 +1073,7 @@ msgstr "Избор фасцикле кеша за Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Изаберите име за вашу паметну листу"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Изабери аутоматски"
 
@@ -1597,7 +1597,7 @@ msgstr "Смањи јачину звука"
 msgid "Default background image"
 msgstr "Подразумевана"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Подразумевани уређај на %1"
@@ -2035,6 +2035,10 @@ msgstr "Исто као и --log-levels *:3"
 msgid "Error"
 msgstr "Грешка"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Грешка при чупању ЦД-а"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Грешка повезивања МТП уређаја"
@@ -2311,6 +2315,10 @@ msgstr "Заврши"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Први ниво"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr "Уклопи омот по ширини"
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2789,9 +2797,13 @@ msgstr "лаптоп/слушалице"
 msgid "Large Hall"
 msgstr "велика дворана"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Велики омот"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Велики омот албума (детаљи испод)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3093,6 +3105,10 @@ msgstr "Највише резултата опште претраге"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Највећи битски проток"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "Медиј је промењен. Учитавам поново"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4071,7 +4087,7 @@ msgstr "Десно"
 msgid "Rip"
 msgstr "чупај"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Чупање ЦД-а"
 
@@ -4392,7 +4408,7 @@ msgstr "Облачић са системске касете"
 msgid "Show a pretty OSD"
 msgstr "Лепи ОСД"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Прикажи изнад траке стања"
 
@@ -4537,7 +4553,7 @@ msgstr "Прескочи изабране нумере"
 msgid "Skip track"
 msgstr "Прескочи нумеру"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Мали омот"
 
@@ -4569,7 +4585,7 @@ msgstr "Подаци о песми"
 msgid "Song info"
 msgstr "Подаци о песми"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Сонограм"
 
@@ -4641,7 +4657,7 @@ msgstr "стандардан"
 msgid "Starred"
 msgstr "Са звездицом"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Почни чупање"
 
@@ -5046,7 +5062,7 @@ msgstr "Опције прекодирања"
 msgid "TrueAudio"
 msgstr "ТруеАудио"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Турбина"
 

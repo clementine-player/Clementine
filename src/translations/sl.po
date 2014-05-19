@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 08:08+0000\n"
-"Last-Translator: R33D3M33R <andrejm@ubuntu.si>\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -366,7 +366,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
@@ -906,7 +906,7 @@ msgstr "Varnostno kopiranje podatkovne zbirke"
 msgid "Balance"
 msgstr "Ravnovesje"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Stolpčni preučevalnik"
 
@@ -965,7 +965,7 @@ msgstr "Raven zabrisanja"
 msgid "Body"
 msgstr "Telo"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Preučevalnik Boom"
 
@@ -983,7 +983,7 @@ msgstr "Prebrskaj ..."
 msgid "Buffer duration"
 msgstr "Trajanje medpomnilnika"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Medpomnjenje"
 
@@ -1076,7 +1076,7 @@ msgstr "Izberi mapo s predpomnilnikom za Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Izberite ime za vaš pametni seznam predvajanja"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Izberi samodejno"
 
@@ -1600,7 +1600,7 @@ msgstr "Zmanjšaj glasnost"
 msgid "Default background image"
 msgstr "Privzeta slika ozadja"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Privzeta naprava na %1"
@@ -2038,6 +2038,10 @@ msgstr "Enakovredno --log-levels *:3"
 msgid "Error"
 msgstr "Napaka"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Napaka med povezovanjem naprave MTP"
@@ -2314,6 +2318,10 @@ msgstr "Končaj"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Prva raven"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2792,9 +2800,13 @@ msgstr "Prenosnik/slušalke"
 msgid "Large Hall"
 msgstr "Velika dvorana"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Velik ovitek albuma"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3096,6 +3108,10 @@ msgstr "Največ rezultatov splošnega iskanja"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Največja bitna hitrost"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4074,7 +4090,7 @@ msgstr "Desno"
 msgid "Rip"
 msgstr "Zajemi"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Zajemi CD"
 
@@ -4395,7 +4411,7 @@ msgstr "Prikaži pojavno okno iz sistemske vrstice"
 msgid "Show a pretty OSD"
 msgstr "Pokaži lep prikaz na zaslonu"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Pokaži nad vrstico stanja"
 
@@ -4540,7 +4556,7 @@ msgstr "Preskoči izbrane skladbe"
 msgid "Skip track"
 msgstr "Preskoči skladbo"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Majhen ovitek albuma"
 
@@ -4572,7 +4588,7 @@ msgstr "Podrobnosti o skladbi"
 msgid "Song info"
 msgstr "O skladbi"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4644,7 +4660,7 @@ msgstr "Običajno"
 msgid "Starred"
 msgstr "Z zvezdico"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Začni z zajemanjem"
 
@@ -5049,7 +5065,7 @@ msgstr "Možnosti prekodiranja"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbina"
 

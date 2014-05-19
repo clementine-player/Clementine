@@ -9,7 +9,7 @@
 # carlo_valente <carlo.gt.valente@gmail.com>, 2014
 # carlo_valente <carlo.gt.valente@gmail.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Gustavo Brito <gustavobs.katel@gmail.com>, 2014
+# Gustavo Brito <gbritosampaio@gmail.com>, 2014
 # Israel IsraeLins <israelins85@yahoo.com.br>, 2012
 # aramaicus <maico.sertorio@gmail.com>, 2013
 # Marco Tulio Costa <mmarcottulio@gmail.com>, 2012
@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 12:31+0000\n"
-"Last-Translator: carlo_valente <carlo.gt.valente@gmail.com>\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -372,7 +372,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "TODA A GLÓRIA PARA O HYPNOTOAD"
 
@@ -912,7 +912,7 @@ msgstr "Cópia do banco de dados"
 msgid "Balance"
 msgstr "Balança"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Barra"
 
@@ -971,7 +971,7 @@ msgstr "Quantidade borrão"
 msgid "Body"
 msgstr "Conteúdo"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Explosão"
 
@@ -989,7 +989,7 @@ msgstr "Procurar..."
 msgid "Buffer duration"
 msgstr "Duração do buffer"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Armazenando em buffer"
 
@@ -1082,7 +1082,7 @@ msgstr "Escolha o diretório do cache do Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Escolha um nome para sua lista inteligente"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Escolher automaticamente"
 
@@ -1606,7 +1606,7 @@ msgstr "Diminuir volume"
 msgid "Default background image"
 msgstr "Imagem de fundo padrão"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositivo padrão em %1"
@@ -2044,6 +2044,10 @@ msgstr "Equivalente ao --log-levels *:3"
 msgid "Error"
 msgstr "Erro"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Erro ao extrair do CD"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Erro ao conectar ao dispositivo MTP"
@@ -2320,6 +2324,10 @@ msgstr "Finalizar"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Primeiro nível"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2798,9 +2806,13 @@ msgstr "Notebook / fones de ouvido"
 msgid "Large Hall"
 msgstr "Salão Grande"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Capa grande de álbum"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Capa grande de disco (detalhes abaixo)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3102,6 +3114,10 @@ msgstr "Número máximo de resultados da busca global"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Taxa de bits máxima"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "A mídia foi alterada. Recarregando"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4080,7 +4096,7 @@ msgstr "Direita"
 msgid "Rip"
 msgstr "Converter"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Extrair CD"
 
@@ -4401,7 +4417,7 @@ msgstr "Mostrar uma notificação na área de notificação"
 msgid "Show a pretty OSD"
 msgstr "Mostrar aviso estilizado na tela"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Mostrar acima da barra de status"
 
@@ -4546,7 +4562,7 @@ msgstr "Pular faixas selecionadas"
 msgid "Skip track"
 msgstr "Pular faixa"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Capa pequena de álbum"
 
@@ -4578,7 +4594,7 @@ msgstr "Informações da Música"
 msgid "Song info"
 msgstr "Sobre a Música"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonograma"
 
@@ -4650,7 +4666,7 @@ msgstr "Padrão"
 msgid "Starred"
 msgstr "Favoritos"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Iniciar conversão"
 
@@ -5055,7 +5071,7 @@ msgstr "Opção de conversão"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbina"
 

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -364,7 +364,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "SVA SLAVA HYPNOTOADU!"
 
@@ -904,7 +904,7 @@ msgstr "Sigurnosno kopiranje baze podataka"
 msgid "Balance"
 msgstr "Balansiranje"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Bar analizator"
 
@@ -963,7 +963,7 @@ msgstr "Zamućenje"
 msgid "Body"
 msgstr "Pojedinosti"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Boom analizator"
 
@@ -981,7 +981,7 @@ msgstr "Pogledaj..."
 msgid "Buffer duration"
 msgstr "Trajanje međuspremnika"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Međupohrana"
 
@@ -1074,7 +1074,7 @@ msgstr "Odaberite Vk.com direktorij priručne memorije"
 msgid "Choose a name for your smart playlist"
 msgstr "Izaberite naziv za svoj pametni popis izvođenja"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Automatski odabir"
 
@@ -1598,7 +1598,7 @@ msgstr "Smanji glasnoću zvuka"
 msgid "Default background image"
 msgstr "Uobičajena slika pozadine"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr "Zadani uređaj na %1"
@@ -2036,6 +2036,10 @@ msgstr "Odgovara --log-levels *: 3"
 msgid "Error"
 msgstr "Greška"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr "Greška pri ripanju CD-a"
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Greška pri spajanju na MTP uređaj"
@@ -2312,6 +2316,10 @@ msgstr "Kraj"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Prva razina"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2790,9 +2798,13 @@ msgstr "Laptop/Slušalice"
 msgid "Large Hall"
 msgstr "Velika dvorana"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Veliki omot albuma"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Veliki omot albuma (s pojedinostima ispod)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3094,6 +3106,10 @@ msgstr "Maksimalno rezultata globalne pretrage"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Maksimalna brzina prijenosa"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr "Medij je promijenjen. Ponovno učitavanje"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -3797,12 +3813,12 @@ msgstr "Stavi pjesmu u naizmjenični redosljed"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "Kvaliteta"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "Kvaliteta"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -4072,7 +4088,7 @@ msgstr "Desno"
 msgid "Rip"
 msgstr "Ripaj"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr "Ripaj CD"
 
@@ -4393,7 +4409,7 @@ msgstr "Prikažite skočni prozor iz trake sustava"
 msgid "Show a pretty OSD"
 msgstr "Prikaži ljepši OSD"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Prikaži iznad statusne trake"
 
@@ -4538,7 +4554,7 @@ msgstr "Preskoči odabrane pjesme"
 msgid "Skip track"
 msgstr "Preskoči pjesmu"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Mali omot albuma"
 
@@ -4570,7 +4586,7 @@ msgstr "Informacije o pjesmi"
 msgid "Song info"
 msgstr "Info pjesme"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4642,7 +4658,7 @@ msgstr "Standardno"
 msgid "Starred"
 msgstr "Sa zvjezdicom"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr "Pokreni ripanje"
 
@@ -5047,7 +5063,7 @@ msgstr "Mogućnosti enkôdiranja"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbina"
 

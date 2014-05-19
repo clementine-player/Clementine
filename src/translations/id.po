@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2014-05-18 17:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -369,7 +369,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "KEMENANGAN UNTUK SANG HYPNOTOAD"
 
@@ -909,7 +909,7 @@ msgstr "Buat cadangan database"
 msgid "Balance"
 msgstr "Seimbang"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
 msgstr "Penganalisa batang"
 
@@ -968,7 +968,7 @@ msgstr "Jumlah blur"
 msgid "Body"
 msgstr "Badan"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:11
 msgid "Boom analyzer"
 msgstr "Penganalisa dentuman"
 
@@ -986,7 +986,7 @@ msgstr "Menelusuri..."
 msgid "Buffer duration"
 msgstr "Durasi Buffer"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:867
 msgid "Buffering"
 msgstr "Menyangga..."
 
@@ -1079,7 +1079,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Pilih nama untuk playlist pintar"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:888
 msgid "Choose automatically"
 msgstr "Pilih otomatis"
 
@@ -1603,7 +1603,7 @@ msgstr "Kurangi volume"
 msgid "Default background image"
 msgstr "Gambar latar belakang standar"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:913
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2041,6 +2041,10 @@ msgstr "Setara dengan --log-level *: 3"
 msgid "Error"
 msgstr "Kesalahan"
 
+#: ui/ripcd.cpp:316
+msgid "Error Ripping CD"
+msgstr ""
+
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "Kesalahan koneksi perangkat MTP"
@@ -2317,6 +2321,10 @@ msgstr "Selesai"
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Tingkat pertama"
+
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2795,9 +2803,13 @@ msgstr "Laptop/Headphone"
 msgid "Large Hall"
 msgstr "Balai Besar"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Sampul album besar"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3099,6 +3111,10 @@ msgstr "Max hasil pencarian global"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Laju bit maksimum"
+
+#: ui/ripcd.cpp:317
+msgid "Media has changed. Reloading"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:109
@@ -4077,7 +4093,7 @@ msgstr "Kanan"
 msgid "Rip"
 msgstr ""
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:119
 msgid "Rip CD"
 msgstr ""
 
@@ -4398,7 +4414,7 @@ msgstr "Tampilkan popup dari system tray"
 msgid "Show a pretty OSD"
 msgstr "Tampilkan OSD cantik"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Tampilkan di atas status bar"
 
@@ -4543,7 +4559,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Sampul album kecil"
 
@@ -4575,7 +4591,7 @@ msgstr "Informasi Lagu"
 msgid "Song info"
 msgstr "Info lagu"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:21
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4647,7 +4663,7 @@ msgstr "Standar"
 msgid "Starred"
 msgstr "Berbintang"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:91
 msgid "Start ripping"
 msgstr ""
 
@@ -5052,7 +5068,7 @@ msgstr "Pilihan transcoding"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:18
 msgid "Turbine"
 msgstr "Turbin"
 
