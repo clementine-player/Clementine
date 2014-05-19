@@ -186,6 +186,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       playlistitem_actions_separator_(nullptr),
       library_sort_model_(new QSortFilterProxyModel(this)),
       track_position_timer_(new QTimer(this)),
+      track_slider_timer_(new QTimer(this)),
       was_maximized_(false),
       saved_playback_position_(0),
       saved_playback_state_(Engine::Empty),
@@ -252,6 +253,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   track_position_timer_->setInterval(1000);
   connect(track_position_timer_, SIGNAL(timeout()),
           SLOT(UpdateTrackPosition()));
+  track_slider_timer_->setInterval(40);
+  connect(track_slider_timer_, SIGNAL(timeout()),
+          SLOT(UpdateTrackSliderPosition()));
 
   // Start initialising the player
   qLog(Debug) << "Initialising player";
@@ -508,7 +512,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->playlist->view(), SIGNAL(BackgroundPropertyChanged()),
           SLOT(RefreshStyleSheet()));
 
-  connect(ui_->track_slider, SIGNAL(ValueChanged(int)), app_->player(),
+  connect(ui_->track_slider, SIGNAL(ValueChangedSeconds(int)), app_->player(),
           SLOT(SeekTo(int)));
 
   // Library connections
@@ -982,6 +986,7 @@ void MainWindow::MediaStopped() {
   tray_icon_->LastFMButtonLoveStateChanged(false);
 
   track_position_timer_->stop();
+  track_slider_timer_->stop();
   ui_->track_slider->SetStopped();
   tray_icon_->SetProgress(0);
   tray_icon_->SetStopped();
@@ -996,6 +1001,7 @@ void MainWindow::MediaPaused() {
   ui_->action_play_pause->setEnabled(true);
 
   track_position_timer_->stop();
+  track_slider_timer_->stop();
 
   tray_icon_->SetPaused();
 }
@@ -1024,6 +1030,7 @@ void MainWindow::MediaPlaying() {
 #endif
 
   track_position_timer_->start();
+  track_slider_timer_->start();
   UpdateTrackPosition();
 }
 
@@ -1297,9 +1304,6 @@ void MainWindow::UpdateTrackPosition() {
     }
   }
 
-  // Update the slider
-  ui_->track_slider->SetValue(position, length);
-
   // Update the tray icon every 10 seconds
   if (position % 10 == 0) {
     qLog(Debug) << "position" << position << "scrobble point" << scrobble_point
@@ -1316,6 +1320,17 @@ void MainWindow::UpdateTrackPosition() {
     }
 #endif
   }
+}
+
+void MainWindow::UpdateTrackSliderPosition() {
+  PlaylistItemPtr item(app_->player()->GetCurrentItem());
+
+  const int slider_position = std::floor(
+      float(app_->player()->engine()->position_nanosec()) / kNsecPerMsec);
+  const int slider_length = item->Metadata().length_nanosec() / kNsecPerMsec;
+
+  // Update the slider
+  ui_->track_slider->SetValue(slider_position, slider_length);
 }
 
 #ifdef HAVE_LIBLASTFM
@@ -1830,7 +1845,7 @@ void MainWindow::AddFolder() {
   // Add media
   MimeData* data = new MimeData;
   data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(
-                                     QFileInfo(directory).canonicalFilePath()));
+                    QFileInfo(directory).canonicalFilePath()));
   AddToPlaylist(data);
 }
 
@@ -2216,7 +2231,7 @@ void MainWindow::PlaylistQueue() {
   for (const QModelIndex& proxy_index :
        ui_->playlist->view()->selectionModel()->selectedRows()) {
     indexes << app_->playlist_manager()->current()->proxy()->mapToSource(
-                   proxy_index);
+        proxy_index);
   }
 
   app_->playlist_manager()->current()->queue()->ToggleTracks(indexes);
@@ -2227,7 +2242,7 @@ void MainWindow::PlaylistSkip() {
   for (const QModelIndex& proxy_index :
        ui_->playlist->view()->selectionModel()->selectedRows()) {
     indexes << app_->playlist_manager()->current()->proxy()->mapToSource(
-                   proxy_index);
+        proxy_index);
   }
 
   app_->playlist_manager()->current()->SkipTracks(indexes);

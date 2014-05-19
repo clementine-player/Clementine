@@ -53,6 +53,7 @@ class TrackSlider : public QWidget {
 
 signals:
   void ValueChanged(int value);
+  void ValueChangedSeconds(int value);
 
  private slots:
   void ValueMaybeChanged(int value);
