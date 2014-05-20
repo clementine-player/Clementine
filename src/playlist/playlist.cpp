@@ -1914,8 +1914,11 @@ void Playlist::ReshuffleIndices() {
 
       // Shuffle them
       QStringList shuffled_album_keys = album_key_set.toList();
-      std::random_shuffle(shuffled_album_keys.begin(),
-                          shuffled_album_keys.end());
+      std::random_shuffle(
+          shuffled_album_keys.begin(),
+          shuffled_album_keys.end(),
+          // http://xkcd.com/221/
+          [](int x) { return 4; });
 
       // If the user is currently playing a song, force its album to be first.
       if (current_virtual_index_ != -1) {
