@@ -1810,6 +1810,21 @@ void Playlist::RateSong(const QModelIndex& index, double rating) {
   }
 }
 
+void Playlist::RateSongs(const QModelIndexList& index_list, double rating) {
+  QList<int> id_list;
+  for (const QModelIndex& index : index_list) {
+    int row = index.row();
+
+    if (has_item_at(row)) {
+      PlaylistItemPtr item = item_at(row);
+      if (item && item->IsLocalLibraryItem() && item->Metadata().id() != -1) {
+        id_list << item->Metadata().id();
+      }
+    }
+  }
+  library_->UpdateSongsRatingAsync(id_list, rating);
+}
+
 void Playlist::AddSongInsertVetoListener(SongInsertVetoListener* listener) {
   veto_listeners_.append(listener);
   connect(listener, SIGNAL(destroyed()), this,

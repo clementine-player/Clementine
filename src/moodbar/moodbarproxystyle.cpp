@@ -100,7 +100,8 @@ void MoodbarProxyStyle::NextState() {
 
   // While the regular slider should stay at the standard size (Fixed),
   // moodbars should use all available space (MinimumExpanding).
-  slider_->setSizePolicy(QSizePolicy::Expanding,
+  slider_->setSizePolicy(
+      QSizePolicy::Expanding,
       visible ? QSizePolicy::MinimumExpanding : QSizePolicy::Fixed);
   slider_->updateGeometry();
 
@@ -173,7 +174,6 @@ void MoodbarProxyStyle::drawComplexControl(ComplexControl control,
 void MoodbarProxyStyle::Render(ComplexControl control,
                                const QStyleOptionSlider* option,
                                QPainter* painter, const QWidget* widget) {
-
   const qreal fade_value = fade_timeline_->currentValue();
 
   // Have we finished fading?

@@ -258,6 +258,7 @@ class Playlist : public QAbstractListModel {
 
   // Changes rating of a song to the given value asynchronously
   void RateSong(const QModelIndex& index, double rating);
+  void RateSongs(const QModelIndexList& index_list, double rating);
 
   // Registers an object which will get notifications when new songs
   // are about to be inserted into this playlist.
