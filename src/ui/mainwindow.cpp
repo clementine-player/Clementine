@@ -250,10 +250,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   ui_->tabs->SetBackgroundPixmap(QPixmap(":/sidebar_background.png"));
 
-  track_position_timer_->setInterval(1000);
+  track_position_timer_->setInterval(TRACK_POSITION_UPDATE_TIME);
   connect(track_position_timer_, SIGNAL(timeout()),
           SLOT(UpdateTrackPosition()));
-  track_slider_timer_->setInterval(40);
+  track_slider_timer_->setInterval(TRACK_SLIDER_UPDATE_TIME);
   connect(track_slider_timer_, SIGNAL(timeout()),
           SLOT(UpdateTrackSliderPosition()));
 
