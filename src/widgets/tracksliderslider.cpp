@@ -17,6 +17,7 @@
 
 #include "tracksliderpopup.h"
 #include "tracksliderslider.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
 
 #include <QMouseEvent>
@@ -76,8 +77,8 @@ void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
   int slider_max = gr.right() - slider_length + 1;
 
   mouse_hover_seconds_ = QStyle::sliderValueFromPosition(
-      minimum(), maximum(), e->x() - slider_length / 2 - slider_min + 1,
-      slider_max - slider_min);
+      minimum() / kMsecPerSec, maximum() / kMsecPerSec,
+      e->x() - slider_length / 2 - slider_min + 1, slider_max - slider_min);
 
   popup_->SetText(Utilities::PrettyTime(mouse_hover_seconds_));
   UpdateDeltaTime();
@@ -99,7 +100,7 @@ void TrackSliderSlider::leaveEvent(QEvent* e) {
 
 void TrackSliderSlider::UpdateDeltaTime() {
   if (popup_->isVisible()) {
-    int delta_seconds = mouse_hover_seconds_ - value();
+    int delta_seconds = mouse_hover_seconds_ - (value() / kMsecPerSec);
     popup_->SetSmallText(Utilities::PrettyTimeDelta(delta_seconds));
   }
 }
