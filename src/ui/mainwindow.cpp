@@ -160,6 +160,11 @@ void qt_mac_set_dock_menu(QMenu*);
 const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kAllFilesFilterSpec = QT_TR_NOOP("All Files (*)");
 
+namespace {
+  const int kTrackSliderUpdateTimeMs = 40;
+  const int kTrackPositionUpdateTimeMs = 1000;
+}
+
 MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
                        QWidget* parent)
     : QMainWindow(parent),
@@ -250,10 +255,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   ui_->tabs->SetBackgroundPixmap(QPixmap(":/sidebar_background.png"));
 
-  track_position_timer_->setInterval(TRACK_POSITION_UPDATE_TIME);
+  track_position_timer_->setInterval(kTrackPositionUpdateTimeMs);
   connect(track_position_timer_, SIGNAL(timeout()),
           SLOT(UpdateTrackPosition()));
-  track_slider_timer_->setInterval(TRACK_SLIDER_UPDATE_TIME);
+  track_slider_timer_->setInterval(kTrackSliderUpdateTimeMs);
   connect(track_slider_timer_, SIGNAL(timeout()),
           SLOT(UpdateTrackSliderPosition()));
 

@@ -95,10 +95,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   static const char* kSettingsGroup;
   static const char* kAllFilesFilterSpec;
 
-  // ms
-  static const int TRACK_SLIDER_UPDATE_TIME = 40;
-  static const int TRACK_POSITION_UPDATE_TIME = 1000;
-
   // Don't change the values
   enum StartupBehaviour {
     Startup_Remember = 1,
