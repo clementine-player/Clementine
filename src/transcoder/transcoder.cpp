@@ -324,7 +324,6 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
 
   Job job = queued_jobs_.takeFirst();
   if (StartJob(job)) {
-    emit(JobOutputName(job.output));
     return StartedSuccessfully;
   }
 

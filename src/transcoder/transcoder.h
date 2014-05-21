@@ -70,7 +70,6 @@ signals:
   void JobComplete(const QString& filename, bool success);
   void LogLine(const QString& message);
   void AllJobsComplete();
-  void JobOutputName(const QString& filename);
 
  protected:
   bool event(QEvent* e);
@@ -125,7 +124,8 @@ signals:
   StartJobStatus MaybeStartNextJob();
   bool StartJob(const Job& job);
 
-  GstElement* CreateElement(const QString& factory_name, GstElement* bin = nullptr,
+  GstElement* CreateElement(const QString& factory_name,
+                            GstElement* bin = nullptr,
                             const QString& name = QString());
   GstElement* CreateElementForMimeType(const QString& element_type,
                                        const QString& mime_type,
@@ -138,7 +138,7 @@ signals:
                                          gpointer data);
 
  private:
-  typedef QList<std::shared_ptr<JobState> > JobStateList;
+  typedef QList<std::shared_ptr<JobState>> JobStateList;
 
   int max_threads_;
   QList<Job> queued_jobs_;
