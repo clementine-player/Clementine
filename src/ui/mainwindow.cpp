@@ -322,6 +322,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->action_save_playlist->setIcon(IconLoader::Load("document-save"));
   ui_->action_full_library_scan->setIcon(IconLoader::Load("view-refresh"));
   ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
+  ui_->action_hypnotoad->setIcon(IconLoader::Load("hypnotoad"));
+  ui_->action_kittens->setIcon(IconLoader::Load("kittens"));
+  ui_->action_enterprise->setIcon(IconLoader::Load("enterprise"));
 
   // File view connections
   connect(file_view_, SIGNAL(AddToPlaylist(QMimeData*)),
