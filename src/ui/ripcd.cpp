@@ -315,6 +315,10 @@ void RipCD::ClickedRipButton() {
     AddTrack(i, title, transcoded_filename);
   }
 
+  // Do nothing if no tracks are selected.
+  if (tracks_.isEmpty())
+    return;
+
   // Start ripping.
   SetWorking(true);
   {
