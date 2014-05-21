@@ -21,6 +21,7 @@
 #include "transcoder/transcoder.h"
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
+#include "core/closure.h"
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
@@ -30,8 +31,6 @@
 #include <QDataStream>
 #include <QFileDialog>
 #include <QFrame>
-#include <QFuture>
-#include <QFutureWatcher>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QMutexLocker>
@@ -69,7 +68,8 @@ RipCD::RipCD(QWidget* parent)
       finished_success_(0),
       finished_failed_(0),
       ui_(new Ui_RipCD),
-      cancel_requested_(false) {
+      cancel_requested_(false),
+      files_tagged_(0) {
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   // Init
   ui_->setupUi(this);
@@ -338,22 +338,19 @@ void RipCD::TranscodingJobComplete(const QString& filename, bool success) {
 void RipCD::AllTranscodingJobsComplete() {
   RemoveTemporaryDirectory();
 
-  // Save tags in the background.
+  // Save tags.
   TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
                                 .value<TranscoderPreset>();
   AlbumInformation album(
       ui_->albumLineEdit->text(), ui_->artistLineEdit->text(),
       ui_->genreLineEdit->text(), ui_->yearLineEdit->text().toInt(),
       ui_->discLineEdit->text().toInt(), preset.type_);
-  QFuture<void> future =
-      QtConcurrent::run(this, &RipCD::TagFiles, album, tracks_);
-  QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
-  connect(watcher, SIGNAL(finished()), SLOT(TaggingComplete()));
-  watcher->setFuture(future);
+  TagFiles(album, tracks_);
 }
 
 void RipCD::TagFiles(const AlbumInformation& album,
                      const QList<TrackInformation>& tracks) {
+  files_tagged_ = 0;
   for (const TrackInformation& track : tracks_) {
     Song song;
     song.InitFromFilePartial(track.transcoded_filename);
@@ -366,19 +363,25 @@ void RipCD::TagFiles(const AlbumInformation& album,
     song.set_disc(album.disc);
     song.set_filetype(album.type);
 
-    Q_ASSERT(QThread::currentThread() != qApp->thread());
-    TagReaderClient::Instance()->SaveFileBlocking(song.url().toLocalFile(),
-                                                  song);
+    TagReaderReply* reply =
+        TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
+    NewClosure(reply, SIGNAL(Finished(bool)), this,
+               SLOT(FileTagged(TagReaderReply*)), reply);
   }
 }
 
-void RipCD::TaggingComplete() {
-  QFutureWatcher<void>* watcher = dynamic_cast<QFutureWatcher<void>*>(sender());
-  if (!watcher) return;
-  watcher->deleteLater();
+void RipCD::FileTagged(TagReaderReply* reply) {
+  files_tagged_++;
+  qLog(Debug) << "Tagged" << files_tagged_ << "of" << tracks_.length()
+              << "files";
 
-  SetWorking(false);
-  qLog(Debug) << "CD ripper finished.";
+  // Stop working if all files are tagged.
+  if (files_tagged_ == tracks_.length()) {
+    qLog(Debug) << "CD ripper finished.";
+    SetWorking(false);
+  }
+
+  reply->deleteLater();
 }
 
 void RipCD::Options() {

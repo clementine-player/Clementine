@@ -25,8 +25,10 @@
 #include <QMutex>
 #include <cdio/cdio.h>
 #include "core/song.h"
+#include "core/tagreaderclient.h"
 #include "ui_ripcd.h"
 #include <memory>
+
 class Ui_RipCD;
 class Transcoder;
 
@@ -96,6 +98,7 @@ class RipCD : public QDialog {
   QString temporary_directory_;
   bool cancel_requested_;
   QMutex mutex_;
+  int files_tagged_;
 
   void WriteWAVHeader(QFile* stream, int32_t i_bytecount);
   int NumTracksToRip();
@@ -110,7 +113,6 @@ class RipCD : public QDialog {
   void SetWorking(bool working);
   void AddDestinationDirectory(QString dir);
   void RemoveTemporaryDirectory();
-  // Tags the final files. This function should not be run in the UI thread.
   void TagFiles(const AlbumInformation& album,
                 const QList<TrackInformation>& tracks);
 
@@ -124,7 +126,7 @@ signals:
   void ClickedRipButton();
   void TranscodingJobComplete(const QString& filename, bool success);
   void AllTranscodingJobsComplete();
-  void TaggingComplete();
+  void FileTagged(TagReaderReply* reply);
   void Options();
   void AddDestination();
   void Cancel();
