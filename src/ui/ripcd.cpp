@@ -492,7 +492,12 @@ void RipCD::RemoveTemporaryDirectory() {
 void RipCD::BuildTrackListTable() {
   checkboxes_.clear();
   track_names_.clear();
+
   i_tracks_ = cdio_get_num_tracks(cdio_);
+  // Build an empty table if there is an error, e.g. no medium found.
+  if (i_tracks_ == CDIO_INVALID_TRACK)
+    i_tracks_ = 0;
+
   ui_->tableWidget->setRowCount(i_tracks_);
   for (int i = 1; i <= i_tracks_; i++) {
     QCheckBox* checkbox_i = new QCheckBox(ui_->tableWidget);
