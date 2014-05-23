@@ -62,7 +62,7 @@ ColorVector MoodbarRenderer::Colors(const QByteArray& data, MoodbarStyle style,
   int hue_distribution[360];
   int total = 0;
 
-  memset(hue_distribution, 0, arraysize(hue_distribution));
+  memset(hue_distribution, 0, sizeof(hue_distribution));
 
   ColorVector colors;
 

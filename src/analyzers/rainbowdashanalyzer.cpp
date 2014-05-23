@@ -40,7 +40,7 @@ RainbowDashAnalyzer::RainbowDashAnalyzer(QWidget* parent)
       px_per_frame_(0),
       x_offset_(0),
       background_brush_(QColor(0x38, 0x88, 0x00)) {
-  memset(history_, 0, arraysize(history_) * sizeof(*history_));
+  memset(history_, 0, sizeof(history_));
 
   for (int i = 0; i < kRainbowBands; ++i) {
     colors_[i] = QPen(QColor::fromHsv(i * 255 / kRainbowBands, 255, 255),
