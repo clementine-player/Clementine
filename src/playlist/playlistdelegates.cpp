@@ -113,7 +113,7 @@ void QueuedItemDelegate::DrawBox(QPainter* painter, const QRect& line_rect,
 
   // Draw the text
   painter->setFont(smaller);
-  painter->drawText(rect.translated(-1, -1), Qt::AlignCenter, text);
+  painter->drawText(rect, Qt::AlignCenter, text);
   painter->translate(-0.5, -0.5);
 }
 
