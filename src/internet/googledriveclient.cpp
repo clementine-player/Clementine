@@ -218,13 +218,14 @@ void Client::ListChangesFinished(ListChangesResponse* response,
   QList<QUrl> files_deleted;
   for (const QVariant& v : result["items"].toList()) {
     QVariantMap change = v.toMap();
-    if (!change["deleted"].toBool()) {
-      files << File(change["file"].toMap());
-    } else {
+    if (change["deleted"].toBool() ||
+        change["file"].toMap()["labels"].toMap()["trashed"].toBool()) {
       QUrl url;
       url.setScheme("googledrive");
       url.setPath(change["fileId"].toString());
       files_deleted << url;
+    } else {
+      files << File(change["file"].toMap());
     }
   }
 
