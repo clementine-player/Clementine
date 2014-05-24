@@ -97,7 +97,7 @@ signals:
 
  private slots:
   void RequestFinished(QNetworkReply* reply, int id);
-  void DiscIdRequestFinished(QNetworkReply* reply);
+  void DiscIdRequestFinished(const QString& discid, QNetworkReply* reply);
 
  private:
   struct Release {
@@ -116,6 +116,9 @@ signals:
     int year_;
   };
 
+  static bool MediumHasDiscid(const QString& discid, QXmlStreamReader* reader);
+  static ResultList ParseMedium(QXmlStreamReader* reader);
+  static Result ParseTrackFromDisc(QXmlStreamReader* reader);
   static ResultList ParseTrack(QXmlStreamReader* reader);
   static void ParseArtist(QXmlStreamReader* reader, QString* artist);
   static Release ParseRelease(QXmlStreamReader* reader);
