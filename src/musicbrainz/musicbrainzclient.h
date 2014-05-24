@@ -38,7 +38,10 @@ class MusicBrainzClient : public QObject {
   // the Finished signal - they have no meaning to MusicBrainzClient.
 
  public:
-  MusicBrainzClient(QObject* parent = nullptr);
+  // The second argument allows for specifying a custom network access
+  // manager. It is used in tests.
+  MusicBrainzClient(QObject* parent = nullptr,
+                    QNetworkAccessManager* network = nullptr);
 
   struct Result {
     Result() : duration_msec_(0), track_(0), year_(-1) {}
@@ -133,5 +136,4 @@ inline uint qHash(const MusicBrainzClient::Result& result) {
   return qHash(result.album_) ^ qHash(result.artist_) ^ result.duration_msec_ ^
          qHash(result.title_) ^ result.track_ ^ result.year_;
 }
-
 #endif  // MUSICBRAINZCLIENT_H

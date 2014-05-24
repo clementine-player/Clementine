@@ -34,9 +34,10 @@ const char* MusicBrainzClient::kDiscUrl =
 const char* MusicBrainzClient::kDateRegex = "^[12]\\d{3}";
 const int MusicBrainzClient::kDefaultTimeout = 5000;  // msec
 
-MusicBrainzClient::MusicBrainzClient(QObject* parent)
+MusicBrainzClient::MusicBrainzClient(QObject* parent,
+                                     QNetworkAccessManager* network)
     : QObject(parent),
-      network_(new NetworkAccessManager(this)),
+      network_(network ? network : new NetworkAccessManager(this)),
       timeouts_(new NetworkTimeouts(kDefaultTimeout, this)) {}
 
 void MusicBrainzClient::Start(int id, const QString& mbid) {
