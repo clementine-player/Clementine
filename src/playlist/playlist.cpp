@@ -2142,5 +2142,6 @@ void Playlist::SkipTracks(const QModelIndexList& source_indexes) {
   for (const QModelIndex& source_index : source_indexes) {
     PlaylistItemPtr track_to_skip = item_at(source_index.row());
     track_to_skip->SetShouldSkip(!((track_to_skip)->GetShouldSkip()));
+    emit dataChanged(source_index, source_index);
   }
 }
