@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-18 17:32+0000\n"
+"PO-Revision-Date: 2014-05-24 06:37+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -401,6 +401,11 @@ msgstr "Tilitiedot (Premium)"
 msgid "Action"
 msgstr "Toiminto"
 
+#: ../bin/src/ui_globalshortcutssettingspage.h:184
+msgctxt "Category label"
+msgid "Action"
+msgstr "Toiminto"
+
 #: wiimotedev/wiimotesettingspage.cpp:96
 msgid "Active/deactive Wiiremote"
 msgstr "Ota käyttöön / poista käytöstä Wiiremote"
@@ -433,7 +438,7 @@ msgstr "Lisää toinen suoratoisto..."
 msgid "Add directory..."
 msgstr "Lisää kansio..."
 
-#: ui/mainwindow.cpp:1797
+#: ui/mainwindow.cpp:1820
 msgid "Add file"
 msgstr "Lisää tiedosto"
 
@@ -453,7 +458,7 @@ msgstr "Lisää tiedosto..."
 msgid "Add files to transcode"
 msgstr "Lisää tiedostoja muunnettavaksi"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1824 ui/ripcd.cpp:389
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1847 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "Lisää kansio"
 
@@ -569,7 +574,7 @@ msgstr "Lisää Grooveshark-soittolistaan"
 msgid "Add to My Music"
 msgstr "Lisää omaan musiikkiin"
 
-#: ui/mainwindow.cpp:1618
+#: ui/mainwindow.cpp:1641
 msgid "Add to another playlist"
 msgstr "Lisää toiseen soittolistaan"
 
@@ -814,7 +819,7 @@ msgstr "Oletko varma että haluat kirjoittaa kaikkien kirjastosi kappleiden tila
 msgid "Artist"
 msgstr "Esittäjä"
 
-#: ui/mainwindow.cpp:245
+#: ui/mainwindow.cpp:251
 msgid "Artist info"
 msgstr "Esittäjätiedot"
 
@@ -1063,7 +1068,7 @@ msgstr "Mono-toistoasetuksen tilan vaihtaminen tulee voimaan seuraavassa kappale
 msgid "Check for new episodes"
 msgstr "Tarkista uudet jaksot"
 
-#: ui/mainwindow.cpp:702
+#: ui/mainwindow.cpp:714
 msgid "Check for updates..."
 msgstr "Tarkista päivitykset..."
 
@@ -1303,7 +1308,7 @@ msgstr "Vk.com-asetukset..."
 msgid "Configure global search..."
 msgstr "Muokkaa hakua..."
 
-#: ui/mainwindow.cpp:553
+#: ui/mainwindow.cpp:565
 msgid "Configure library..."
 msgstr "Kirjaston asetukset..."
 
@@ -1370,11 +1375,11 @@ msgid "Copy to clipboard"
 msgstr "Kopioi leikepöydälle"
 
 #: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
-#: ui/mainwindow.cpp:602 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:614 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopioi laitteelle..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:592
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:604
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Kopioi kirjastoon"
@@ -1400,14 +1405,14 @@ msgstr "GStreamer-elementin \"%1\" luonti epäonnistui - varmista, että kaikki 
 msgid "Couldn't create playlist"
 msgstr "Soittolistan luominen epäonnistui"
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Ei löydetty %1 -multiplekseriä, tarkista että sinulla on oikeat GStreamer-liitännäiset asennettuna"
 
-#: transcoder/transcoder.cpp:423
+#: transcoder/transcoder.cpp:422
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1626,7 +1631,7 @@ msgid "Delete downloaded data"
 msgstr "Poista ladattu data"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2160 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2183 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Poista tiedostot"
 
@@ -1634,7 +1639,7 @@ msgstr "Poista tiedostot"
 msgid "Delete from device..."
 msgstr "Poista laitteelta..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:604
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:616
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Poista levyltä..."
@@ -1659,11 +1664,11 @@ msgstr "Poista alkuperäiset tiedostot"
 msgid "Deleting files"
 msgstr "Poistetaan tiedostoja"
 
-#: ui/mainwindow.cpp:1539
+#: ui/mainwindow.cpp:1562
 msgid "Dequeue selected tracks"
 msgstr "Poista valitut kappaleet jonosta"
 
-#: ui/mainwindow.cpp:1537
+#: ui/mainwindow.cpp:1560
 msgid "Dequeue track"
 msgstr "Poista kappale jonosta"
 
@@ -1692,7 +1697,7 @@ msgstr "Laitteen nimi"
 msgid "Device properties..."
 msgstr "Laitteen ominaisuudet..."
 
-#: ui/mainwindow.cpp:240
+#: ui/mainwindow.cpp:246
 msgid "Devices"
 msgstr "Laitteet"
 
@@ -1900,7 +1905,7 @@ msgstr "Dynaaminen satunnainen sekoitus"
 msgid "Edit smart playlist..."
 msgstr "Muokkaa älykästä soittolistaa..."
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1604
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Muokkaa tunnistetta \"%1\"..."
@@ -2032,12 +2037,12 @@ msgstr "Vastaa --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1863 ui/mainwindow.cpp:2110 ui/mainwindow.cpp:2258
+#: ui/mainwindow.cpp:1886 ui/mainwindow.cpp:2133 ui/mainwindow.cpp:2281
 #: internet/vkservice.cpp:621
 msgid "Error"
 msgstr "Virhe"
 
-#: ui/ripcd.cpp:316
+#: ui/ripcd.cpp:295
 msgid "Error Ripping CD"
 msgstr "Virhe CD:tä kopioitaessa"
 
@@ -2067,7 +2072,7 @@ msgstr "Virhe ladattaessa %1"
 msgid "Error loading di.fm playlist"
 msgstr "Virhe ladattaessa di.fm soittolistaa"
 
-#: transcoder/transcoder.cpp:394
+#: transcoder/transcoder.cpp:393
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Virhe käsitellessä %1:%2"
@@ -2197,7 +2202,7 @@ msgstr "Häivytys"
 msgid "Fading duration"
 msgstr "Häivytyksen kesto"
 
-#: ui/mainwindow.cpp:1864
+#: ui/mainwindow.cpp:1887
 msgid "Failed reading CD drive"
 msgstr "CD-aseman lukeminen epäonnistui"
 
@@ -2290,7 +2295,7 @@ msgstr "Tiedostotyyppi"
 msgid "Filename"
 msgstr "Tiedostonimi"
 
-#: ui/mainwindow.cpp:233
+#: ui/mainwindow.cpp:239
 msgid "Files"
 msgstr "Tiedostot"
 
@@ -2377,7 +2382,7 @@ msgstr "Lomake"
 msgid "Format"
 msgstr "Muoto"
 
-#: analyzers/analyzercontainer.cpp:46
+#: analyzers/analyzercontainer.cpp:47
 #: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Kuvanopeus"
@@ -2553,7 +2558,7 @@ msgstr "Laitetiedot on saatavilla vain laitteen ollessa yhdistettynä."
 msgid "High"
 msgstr "Korkea"
 
-#: analyzers/analyzercontainer.cpp:63
+#: analyzers/analyzercontainer.cpp:64
 #: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
@@ -2690,7 +2695,7 @@ msgstr "Asennettu"
 msgid "Integrity check"
 msgstr "Eheystarkistus"
 
-#: ui/mainwindow.cpp:237
+#: ui/mainwindow.cpp:243
 msgid "Internet"
 msgstr "Internet"
 
@@ -2861,7 +2866,7 @@ msgstr "Vasen"
 msgid "Length"
 msgstr "Kesto"
 
-#: ui/mainwindow.cpp:219 ui/mainwindow.cpp:232
+#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
 msgid "Library"
 msgstr "Kirjasto"
 
@@ -2869,7 +2874,7 @@ msgstr "Kirjasto"
 msgid "Library advanced grouping"
 msgstr "Kirjaston tarkennettu ryhmittely"
 
-#: ui/mainwindow.cpp:2382
+#: ui/mainwindow.cpp:2405
 msgid "Library rescan notice"
 msgstr "Ilmoitus kirjaston läpikäynnistä"
 
@@ -2990,7 +2995,7 @@ msgstr "Long term prediction -profiili (LTP)"
 msgid "Love"
 msgstr "Tykkää"
 
-#: analyzers/analyzercontainer.cpp:61
+#: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
@@ -3108,11 +3113,11 @@ msgstr ""
 msgid "Maximum bitrate"
 msgstr "Suurin bittinopeus"
 
-#: ui/ripcd.cpp:317
+#: ui/ripcd.cpp:296
 msgid "Media has changed. Reloading"
 msgstr "Media vaihtui, ladataan uudelleen"
 
-#: analyzers/analyzercontainer.cpp:62
+#: analyzers/analyzercontainer.cpp:63
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
@@ -3188,7 +3193,7 @@ msgstr "Liitoskohdat"
 msgid "Move down"
 msgstr "Siirrä alas"
 
-#: ui/mainwindow.cpp:595 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:607 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Siirrä kirjastoon..."
 
@@ -3197,7 +3202,7 @@ msgstr "Siirrä kirjastoon..."
 msgid "Move up"
 msgstr "Siirrä ylös"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1798
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1821
 msgid "Music"
 msgstr "Musiikki"
 
@@ -3225,7 +3230,6 @@ msgid "Name"
 msgstr "Nimi"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgctxt "Category label"
 msgid "Name"
 msgstr "Nimi"
@@ -3265,7 +3269,7 @@ msgstr "Älä koskaan aloita toistoa"
 msgid "New folder"
 msgstr "Uusi kansio"
 
-#: ui/mainwindow.cpp:1635 ../bin/src/ui_mainwindow.h:687
+#: ui/mainwindow.cpp:1658 ../bin/src/ui_mainwindow.h:687
 msgid "New playlist"
 msgstr "Uusi soittolista"
 
@@ -3298,7 +3302,7 @@ msgstr "Seuraava kappale"
 msgid "Next week"
 msgstr "Ensi viikolla"
 
-#: analyzers/analyzercontainer.cpp:79
+#: analyzers/analyzercontainer.cpp:81
 msgid "No analyzer"
 msgstr "Ei visualisointia"
 
@@ -3328,7 +3332,7 @@ msgstr "Ei lyhyitä lohkoja"
 msgid "None"
 msgstr "Ei mitään"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2111 ui/mainwindow.cpp:2259
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2134 ui/mainwindow.cpp:2282
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Yksikään valitsemistasi kappaleista ei sovellu kopioitavaksi laitteelle"
 
@@ -3523,7 +3527,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Hallitse tiedostoja"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:598
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:610
 msgid "Organise files..."
 msgstr "Hallitse tiedostoja..."
 
@@ -3584,7 +3588,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Salasana"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1007 ui/mainwindow.cpp:1448
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1021 ui/mainwindow.cpp:1471
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Keskeytä"
@@ -3610,8 +3614,8 @@ msgstr "Pikseli"
 msgid "Plain sidebar"
 msgstr "Pelkistetty sivupalkki"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:570 ui/mainwindow.cpp:977
-#: ui/mainwindow.cpp:994 ui/mainwindow.cpp:1451 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:582 ui/mainwindow.cpp:989
+#: ui/mainwindow.cpp:1007 ui/mainwindow.cpp:1474 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:638
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3665,7 +3669,7 @@ msgid "Playlist type"
 msgstr "Soittolistan tyyppi"
 
 #: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:235
+#: ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Soittolistat"
 
@@ -3829,12 +3833,12 @@ msgstr "Kysytään tietoja laitteelta..."
 msgid "Queue Manager"
 msgstr "Jonohallinta"
 
-#: ui/mainwindow.cpp:1543
+#: ui/mainwindow.cpp:1566
 msgid "Queue selected tracks"
 msgstr "Aseta valitut kappaleet jonoon"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1541
+#: ui/mainwindow.cpp:1564
 msgid "Queue track"
 msgstr "Aseta kappale jonoon"
 
@@ -4089,7 +4093,7 @@ msgstr "Oikea"
 msgid "Rip"
 msgstr "Kopioi levy"
 
-#: ui/ripcd.cpp:119
+#: ui/ripcd.cpp:114
 msgid "Rip CD"
 msgstr "Kopioi CD:n sisältö"
 
@@ -4207,7 +4211,7 @@ msgstr "Lähetä kappaletiedot kuuntelemistani kappaleista"
 msgid "Search"
 msgstr "Etsi"
 
-#: ui/mainwindow.cpp:230 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:145
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Haku"
@@ -4342,7 +4346,7 @@ msgstr "Palvelimen tiedot"
 msgid "Service offline"
 msgstr "Ei yhteyttä palveluun"
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1603
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Aseta %1 %2:een"
@@ -4414,7 +4418,7 @@ msgstr "Näytä kuvaruutunäyttö"
 msgid "Show above status bar"
 msgstr "Näytä tilapalkin yläpuolella"
 
-#: ui/mainwindow.cpp:538
+#: ui/mainwindow.cpp:550
 msgid "Show all songs"
 msgstr "Näytä kaikki kappaleet"
 
@@ -4438,12 +4442,12 @@ msgstr "Näytä oikeassa koossa..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:607
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:619
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Näytä tiedostoselaimessa..."
 
-#: ui/mainwindow.cpp:610
+#: ui/mainwindow.cpp:622
 msgid "Show in library..."
 msgstr "Näytä kirjastossa..."
 
@@ -4455,11 +4459,11 @@ msgstr "Näytä kohdassa \"Useita esittäjiä\""
 msgid "Show moodbar"
 msgstr "Näytä mielialapalkki"
 
-#: ui/mainwindow.cpp:540
+#: ui/mainwindow.cpp:552
 msgid "Show only duplicates"
 msgstr "Näytä vain kaksoiskappaleet"
 
-#: ui/mainwindow.cpp:542
+#: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "Näytä vain vailla tunnistetta olevat"
 
@@ -4547,11 +4551,11 @@ msgstr "Ohituskerrat"
 msgid "Skip forwards in playlist"
 msgstr "Siirry soittolistan seuraavaan kappaleeseen"
 
-#: ui/mainwindow.cpp:1554
+#: ui/mainwindow.cpp:1577
 msgid "Skip selected tracks"
 msgstr "Ohita valitut kappaleet"
 
-#: ui/mainwindow.cpp:1552
+#: ui/mainwindow.cpp:1575
 msgid "Skip track"
 msgstr "Ohita kappale"
 
@@ -4583,7 +4587,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Kappaletiedot"
 
-#: ui/mainwindow.cpp:243
+#: ui/mainwindow.cpp:249
 msgid "Song info"
 msgstr "Kappaletiedot"
 
@@ -4659,7 +4663,7 @@ msgstr "Normaali"
 msgid "Starred"
 msgstr "Tähdellä merkitty"
 
-#: ui/ripcd.cpp:91
+#: ui/ripcd.cpp:86
 msgid "Start ripping"
 msgstr "Aloita levyn kopiointi"
 
@@ -4678,7 +4682,7 @@ msgid ""
 "list"
 msgstr "Kirjoita jotain yllä olevaan hakukenttään täyttääksesi tämän hakutuloslistan"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Starting %1"
 msgstr "Aloittaa %1"
@@ -4700,7 +4704,7 @@ msgstr "Pysäytä"
 msgid "Stop after"
 msgstr "Lopeta jälkeen"
 
-#: ui/mainwindow.cpp:573 ../bin/src/ui_mainwindow.h:646
+#: ui/mainwindow.cpp:585 ../bin/src/ui_mainwindow.h:646
 msgid "Stop after this track"
 msgstr "Pysäytä toistettavan kappaleen jälkeen"
 
@@ -4765,7 +4769,7 @@ msgstr "Ehdotetut tunnisteet"
 msgid "Summary"
 msgstr "Yhteenveto"
 
-#: analyzers/analyzercontainer.cpp:64
+#: analyzers/analyzercontainer.cpp:65
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
@@ -4855,7 +4859,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic-palvelimen kokeiluaika on ohi. Lahjoita saadaksesi lisenssiavaimen. Lisätietoja osoitteessa subsonic.org."
 
-#: ui/mainwindow.cpp:2373
+#: ui/mainwindow.cpp:2396
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4896,7 +4900,7 @@ msgid ""
 "continue?"
 msgstr "Nämä tiedostot poistetaan laitteelta, haluatko varmasti jatkaa?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2161 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2184 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4993,7 +4997,7 @@ msgstr "Kuvaruutunäyttö päälle / pois"
 msgid "Toggle fullscreen"
 msgstr "Koko näytön tila"
 
-#: ui/mainwindow.cpp:1545
+#: ui/mainwindow.cpp:1568
 msgid "Toggle queue status"
 msgstr "Vaihda jonon tila"
 
@@ -5109,11 +5113,11 @@ msgstr "Tuntematon virhe"
 msgid "Unset cover"
 msgstr "Poista kansikuva"
 
-#: ui/mainwindow.cpp:1550
+#: ui/mainwindow.cpp:1573
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1548
+#: ui/mainwindow.cpp:1571
 msgid "Unskip track"
 msgstr ""
 
@@ -5424,7 +5428,7 @@ msgid ""
 "well?"
 msgstr "Haluatko siirtä albumin muut kappaleet luokkaan \"Useita esittäjiä\"?"
 
-#: ui/mainwindow.cpp:2380
+#: ui/mainwindow.cpp:2403
 msgid "Would you like to run a full rescan right now?"
 msgstr "Haluatko suorittaa kirjaston läpikäynnin nyt?"
 
