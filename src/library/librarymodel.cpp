@@ -63,7 +63,6 @@ const char* LibraryModel::kSmartPlaylistsSettingsGroup =
 const int LibraryModel::kSmartPlaylistsVersion = 4;
 const int LibraryModel::kPrettyCoverSize = 32;
 const qint64 LibraryModel::kIconCacheSize = 100000000;  //~100MB
-
 typedef QFuture<LibraryModel::QueryResult> RootQueryFuture;
 typedef QFutureWatcher<LibraryModel::QueryResult> RootQueryWatcher;
 
@@ -465,17 +464,14 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
   }
 
   // Try to load it from the disk cache
-  QIODevice* cache;
-  cache = icon_cache_->data(QUrl(cache_key));
-  if (cache != 0) {
+  std::unique_ptr<QIODevice> cache (icon_cache_->data(QUrl(cache_key)));
+  if (cache) {
     QImage cached_pixmap;
-    if (cached_pixmap.load(cache, "XPM")) {
-      delete cache;
+    if (cached_pixmap.load(cache.get(), "XPM")) {
       qLog(Debug) << "Loading pixmap from disk...";
       QPixmapCache::insert(cache_key, QPixmap::fromImage(cached_pixmap));
       return QPixmap::fromImage(cached_pixmap);
     }
-    delete cache;
   }
 
   // Maybe we're loading a pixmap already?
@@ -514,16 +510,14 @@ void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
 
   // if not already in the disk cache
   if (icon_cache_->data(QUrl(cache_key)) == 0) {
-    qLog(Debug) << "Caching new pixmap...";
-    QNetworkCacheMetaData* item_metadata = new QNetworkCacheMetaData();
-    item_metadata->setSaveToDisk(true);
-    item_metadata->setUrl(QUrl(cache_key));
-    QIODevice* cache = icon_cache_->prepare(*item_metadata);
-    if (cache != 0) {
+    QNetworkCacheMetaData item_metadata;
+    item_metadata.setSaveToDisk(true);
+    item_metadata.setUrl(QUrl(cache_key));
+    QIODevice* cache = icon_cache_->prepare(item_metadata);
+    if (cache) {
       image.save(cache, "XPM");
       icon_cache_->insert(cache);
     }
-    delete item_metadata;
   }
 
   const QModelIndex index = ItemToIndex(item);
