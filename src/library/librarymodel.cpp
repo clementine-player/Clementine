@@ -508,7 +508,8 @@ void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
   }
 
   // if not already in the disk cache
-  if (!icon_cache_->data(QUrl(cache_key))) {
+  std::unique_ptr<QIODevice> cached_img (icon_cache_->data(QUrl(cache_key)));
+  if (!cached_img) {
     QNetworkCacheMetaData item_metadata;
     item_metadata.setSaveToDisk(true);
     item_metadata.setUrl(QUrl(cache_key));
