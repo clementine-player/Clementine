@@ -468,7 +468,6 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
   if (cache) {
     QImage cached_pixmap;
     if (cached_pixmap.load(cache.get(), "XPM")) {
-      qLog(Debug) << "Loading pixmap from disk...";
       QPixmapCache::insert(cache_key, QPixmap::fromImage(cached_pixmap));
       return QPixmap::fromImage(cached_pixmap);
     }
@@ -509,7 +508,7 @@ void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
   }
 
   // if not already in the disk cache
-  if (icon_cache_->data(QUrl(cache_key)) == 0) {
+  if (!icon_cache_->data(QUrl(cache_key))) {
     QNetworkCacheMetaData item_metadata;
     item_metadata.setSaveToDisk(true);
     item_metadata.setUrl(QUrl(cache_key));
