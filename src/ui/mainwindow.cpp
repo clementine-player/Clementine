@@ -881,6 +881,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   file_view_->SetPath(
       settings_.value("file_path", QDir::homePath()).toString());
 
+  // Users often collapse one side of the splitter by mistake and don't know
+  // how to restore it.  This must be set after the state is restored above.
+  ui_->splitter->setChildrenCollapsible(false);
+
   ReloadSettings();
 
   // Reload pretty OSD to avoid issues with fonts
