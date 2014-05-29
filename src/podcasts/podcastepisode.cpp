@@ -180,6 +180,10 @@ Song PodcastEpisode::ToSong(const Podcast& podcast) const {
   ret.set_year(publication_date().date().year());
   ret.set_comment(description());
 
+  if (ret.length_nanosec() < 0) {
+    ret.set_length_nanosec(-1);
+  }
+
   if (downloaded() && QFile::exists(local_url().toLocalFile())) {
     ret.set_url(local_url());
   } else {

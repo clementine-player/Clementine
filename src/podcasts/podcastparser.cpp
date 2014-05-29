@@ -23,7 +23,8 @@
 #include <QDateTime>
 #include <QXmlStreamReader>
 
-const char* PodcastParser::kAtomNamespace = "http://www.w3.org/2005/Atom";
+// Namespace constants must be lower case.
+const char* PodcastParser::kAtomNamespace = "http://www.w3.org/2005/atom";
 const char* PodcastParser::kItunesNamespace =
     "http://www.itunes.com/dtds/podcast-1.0.dtd";
 
@@ -104,20 +105,23 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
     switch (type) {
       case QXmlStreamReader::StartElement: {
         const QStringRef name = reader->name();
+        const QString lower_namespace =
+            reader->namespaceUri().toString().toLower();
+
         if (name == "title") {
           ret->set_title(reader->readElementText());
-        } else if (name == "link" && reader->namespaceUri().isEmpty()) {
+        } else if (name == "link" && lower_namespace.isEmpty()) {
           ret->set_link(QUrl::fromEncoded(reader->readElementText().toAscii()));
         } else if (name == "description") {
           ret->set_description(reader->readElementText());
-        } else if (name == "owner" &&
-                   reader->namespaceUri() == kItunesNamespace) {
+        } else if (name == "owner" && lower_namespace == kItunesNamespace) {
           ParseItunesOwner(reader, ret);
         } else if (name == "image") {
           ParseImage(reader, ret);
         } else if (name == "copyright") {
           ret->set_copyright(reader->readElementText());
-        } else if (name == "link" && reader->namespaceUri() == kAtomNamespace &&
+        } else if (name == "link" &&
+                   lower_namespace == kAtomNamespace &&
                    ret->url().isEmpty() &&
                    reader->attributes().value("rel") == "self") {
           ret->set_url(QUrl::fromEncoded(reader->readElementText().toAscii()));
@@ -196,6 +200,9 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
     switch (type) {
       case QXmlStreamReader::StartElement: {
         const QStringRef name = reader->name();
+        const QString lower_namespace =
+            reader->namespaceUri().toString().toLower();
+
         if (name == "title") {
           episode.set_title(reader->readElementText());
         } else if (name == "description") {
@@ -203,8 +210,7 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
         } else if (name == "pubDate") {
           episode.set_publication_date(
               Utilities::ParseRFC822DateTime(reader->readElementText()));
-        } else if (name == "duration" &&
-                   reader->namespaceUri() == kItunesNamespace) {
+        } else if (name == "duration" && lower_namespace == kItunesNamespace) {
           // http://www.apple.com/itunes/podcasts/specs.html
           QStringList parts = reader->readElementText().split(':');
           if (parts.count() == 2) {
@@ -220,8 +226,7 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
                 reader->attributes().value("url").toString().toAscii()));
           }
           Utilities::ConsumeCurrentElement(reader);
-        } else if (name == "author" &&
-                   reader->namespaceUri() == kItunesNamespace) {
+        } else if (name == "author" && lower_namespace == kItunesNamespace) {
           episode.set_author(reader->readElementText());
         } else {
           Utilities::ConsumeCurrentElement(reader);
