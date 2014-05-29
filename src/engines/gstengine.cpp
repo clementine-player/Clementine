@@ -192,15 +192,21 @@ void GstEngine::ReloadSettings() {
 qint64 GstEngine::position_nanosec() const {
   if (!current_pipeline_) return 0;
 
-  qint64 result = current_pipeline_->position() - beginning_nanosec_;
+  const qint64 result = current_pipeline_->position() - beginning_nanosec_;
   return qint64(qMax(0ll, result));
 }
 
 qint64 GstEngine::length_nanosec() const {
   if (!current_pipeline_) return 0;
 
-  qint64 result = end_nanosec_ - beginning_nanosec_;
-  return qint64(qMax(0ll, result));
+  const qint64 result = end_nanosec_ - beginning_nanosec_;
+
+  if (result > 0) {
+    return result;
+  } else {
+    // Get the length from the pipeline if we don't know.
+    return current_pipeline_->length();
+  }
 }
 
 Engine::State GstEngine::state() const {

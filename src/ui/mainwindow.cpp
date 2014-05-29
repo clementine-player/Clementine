@@ -1280,7 +1280,7 @@ void MainWindow::UpdateTrackPosition() {
   PlaylistItemPtr item(app_->player()->GetCurrentItem());
   const int position = std::floor(
       float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
-  const int length = item->Metadata().length_nanosec() / kNsecPerSec;
+  const int length = app_->player()->engine()->length_nanosec() / kNsecPerSec;
   const int scrobble_point = playlist->scrobble_point_nanosec() / kNsecPerSec;
 
   if (length <= 0) {
@@ -1339,7 +1339,8 @@ void MainWindow::UpdateTrackSliderPosition() {
 
   const int slider_position = std::floor(
       float(app_->player()->engine()->position_nanosec()) / kNsecPerMsec);
-  const int slider_length = item->Metadata().length_nanosec() / kNsecPerMsec;
+  const int slider_length =
+      app_->player()->engine()->length_nanosec() / kNsecPerMsec;
 
   // Update the slider
   ui_->track_slider->SetValue(slider_position, slider_length);
