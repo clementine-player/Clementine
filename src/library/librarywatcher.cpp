@@ -104,18 +104,7 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
   // If we're stopping then don't commit the transaction
   if (watcher_->stop_requested_) return;
 
-  if (!new_songs.isEmpty()) emit watcher_->NewOrUpdatedSongs(new_songs);
-
-  if (!touched_songs.isEmpty()) emit watcher_->SongsMTimeUpdated(touched_songs);
-
-  if (!deleted_songs.isEmpty()) emit watcher_->SongsDeleted(deleted_songs);
-
-  if (!readded_songs.isEmpty()) emit watcher_->SongsReadded(readded_songs);
-
-  if (!new_subdirs.isEmpty()) emit watcher_->SubdirsDiscovered(new_subdirs);
-
-  if (!touched_subdirs.isEmpty())
-    emit watcher_->SubdirsMTimeUpdated(touched_subdirs);
+  CommitNewOrUpdatedSongs();
 
   watcher_->task_manager_->SetTaskFinished(task_id_);
 
@@ -137,10 +126,28 @@ void LibraryWatcher::ScanTransaction::AddToProgressMax(int n) {
   watcher_->task_manager_->SetTaskProgress(task_id_, progress_, progress_max_);
 }
 
+void LibraryWatcher::ScanTransaction::CommitNewOrUpdatedSongs()
+{
+    qDebug() << Q_FUNC_INFO << "got " << new_songs.size() << " new or updated songs";
+    if (!new_songs.isEmpty()) emit watcher_->NewOrUpdatedSongs(new_songs);
+    new_songs.clear();
+    if (!touched_songs.isEmpty()) emit watcher_->SongsMTimeUpdated(touched_songs);
+    touched_songs.clear();
+    if (!deleted_songs.isEmpty()) emit watcher_->SongsDeleted(deleted_songs);
+    deleted_songs.clear();
+    if (!readded_songs.isEmpty()) emit watcher_->SongsReadded(readded_songs);
+    readded_songs.clear();
+    if (!new_subdirs.isEmpty()) emit watcher_->SubdirsDiscovered(new_subdirs);
+    new_subdirs.clear();
+    if (!touched_subdirs.isEmpty())
+        emit watcher_->SubdirsMTimeUpdated(touched_subdirs);
+    touched_subdirs.clear();
+}
+
 SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(
     const QString& path) {
-  if (cached_songs_dirty_) {
-    cached_songs_ = watcher_->backend_->FindSongsInDirectory(dir_);
+    if (cached_songs_dirty_) {
+        cached_songs_ = watcher_->backend_->FindSongsInDirectory(dir_);
     cached_songs_dirty_ = false;
   }
 
@@ -248,8 +255,10 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       subdir.mtime == path_info.lastModified().toTime_t()) {
     // The directory hasn't changed since last time
     t->AddToProgress(1);
+    qLog(Debug) << path << " not changed";
     return;
   }
+  qLog(Debug) << path << " dir changed";
 
   QMap<QString, QStringList> album_art;
   QStringList files_on_disk;
@@ -363,6 +372,8 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
           UpdateNonCueAssociatedSong(file, matching_song, image, cue_deleted,
                                      t);
         }
+      } else {
+          qLog(Debug) << file << "not changed";
       }
 
       // nothing has changed - mark the song available without re-scanning
@@ -412,6 +423,8 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
     t->touched_subdirs << updated_subdir;
 
   t->AddToProgress(1);
+
+  emit t->CommitNewOrUpdatedSongs();
 
   // Recurse into the new subdirs that we found
   t->AddToProgressMax(my_new_subdirs.count());
@@ -761,7 +774,7 @@ void LibraryWatcher::FullScanAsync() {
 
 void LibraryWatcher::IncrementalScanNow() { PerformScan(true, false); }
 
-void LibraryWatcher::FullScanNow() { PerformScan(false, true); }
+void LibraryWatcher::FullScanNow() { PerformScan(false, false); } // Why would you ignore mtimes?
 
 void LibraryWatcher::PerformScan(bool incremental, bool ignore_mtimes) {
   for (const Directory& dir : watched_dirs_.values()) {

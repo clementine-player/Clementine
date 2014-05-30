@@ -99,6 +99,11 @@ signals:
     void AddToProgress(int n = 1);
     void AddToProgressMax(int n);
 
+    // Emits the signals for new & deleted songs etc
+    // and clears the lists. This causes the new
+    // stuff to be updated on UI.
+    void CommitNewOrUpdatedSongs();
+
     int dir() const { return dir_; }
     bool is_incremental() const { return incremental_; }
     bool ignores_mtime() const { return ignores_mtime_; }
