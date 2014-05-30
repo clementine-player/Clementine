@@ -15,6 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include "core/logging.h"
 #include "musicbrainz/musicbrainzclient.h"
 
@@ -36,12 +38,11 @@ Q_DECLARE_METATYPE(ResultList);
 
 class MusicBrainzClientTest : public ::testing::Test {
  protected:
-  static void SetUpTestCase() {
-    mock_network_ = new MockNetworkAccessManager;
+  void SetUp() {
+    mock_network_.reset(new MockNetworkAccessManager);
     qRegisterMetaType<ResultList>("MusicBrainzClient::ResultList");
   }
 
-  static void TearDownTestCase() { delete mock_network_; }
 
   // Reads the data from a file into a QByteArray and returns it.
   QByteArray ReadDataFromFile(const QString& filename) {
@@ -51,10 +52,9 @@ class MusicBrainzClientTest : public ::testing::Test {
     return data;
   }
 
-  static MockNetworkAccessManager* mock_network_;
+  std::unique_ptr<MockNetworkAccessManager> mock_network_;
 };
 
-MockNetworkAccessManager* MusicBrainzClientTest::mock_network_;
 
 // Test if a discid that do not exist in the musicbrainz database
 // generates an empty result.
@@ -65,7 +65,7 @@ TEST_F(MusicBrainzClientTest, DiscIdNotFound) {
       "http://musicbrainz.org/development/mmd</text></error>";
 
   // Create a MusicBrainzClient instance with mock_network_.
-  MusicBrainzClient musicbrainz_client(nullptr, mock_network_);
+  MusicBrainzClient musicbrainz_client(nullptr, mock_network_.get());
 
   // Hook the data as the response to a query of a given type.
   QMap<QString, QString> params;
@@ -112,7 +112,7 @@ TEST_F(MusicBrainzClientTest, ParseDiscID) {
   const int expected_number_of_tracks = 6;
 
   // Create a MusicBrainzClient instance with mock_network_.
-  MusicBrainzClient musicbrainz_client(nullptr, mock_network_);
+  MusicBrainzClient musicbrainz_client(nullptr, mock_network_.get());
 
   // Hook the data as the response to a query of a given type.
   QMap<QString, QString> params;
@@ -175,7 +175,7 @@ TEST_F(MusicBrainzClientTest, ParseTrack) {
   const QString expected_album = "An Evening at the Operetta";
 
   // Create a MusicBrainzClient instance with mock_network_.
-  MusicBrainzClient musicbrainz_client(nullptr, mock_network_);
+  MusicBrainzClient musicbrainz_client(nullptr, mock_network_.get());
 
   // Hook the data as the response to a query of a given type.
   QMap<QString, QString> params;
@@ -218,7 +218,7 @@ TEST_F(MusicBrainzClientTest, ParseTrackWithMultipleReleases) {
   const int expected_number_of_releases = 7;
 
   // Create a MusicBrainzClient instance with mock_network_.
-  MusicBrainzClient musicbrainz_client(nullptr, mock_network_);
+  MusicBrainzClient musicbrainz_client(nullptr, mock_network_.get());
 
   // Hook the data as the response to a query of a given type.
   QMap<QString, QString> params;
