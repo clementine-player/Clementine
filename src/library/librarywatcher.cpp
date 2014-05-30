@@ -146,8 +146,8 @@ void LibraryWatcher::ScanTransaction::CommitNewOrUpdatedSongs()
 
 SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(
     const QString& path) {
-    if (cached_songs_dirty_) {
-        cached_songs_ = watcher_->backend_->FindSongsInDirectory(dir_);
+  if (cached_songs_dirty_) {
+    cached_songs_ = watcher_->backend_->FindSongsInDirectory(dir_);
     cached_songs_dirty_ = false;
   }
 
@@ -255,10 +255,8 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       subdir.mtime == path_info.lastModified().toTime_t()) {
     // The directory hasn't changed since last time
     t->AddToProgress(1);
-    qLog(Debug) << path << " not changed";
     return;
   }
-  qLog(Debug) << path << " dir changed";
 
   QMap<QString, QStringList> album_art;
   QStringList files_on_disk;
@@ -372,8 +370,6 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
           UpdateNonCueAssociatedSong(file, matching_song, image, cue_deleted,
                                      t);
         }
-      } else {
-          qLog(Debug) << file << "not changed";
       }
 
       // nothing has changed - mark the song available without re-scanning
