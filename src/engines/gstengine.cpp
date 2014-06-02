@@ -267,7 +267,10 @@ const Engine::Scope& GstEngine::scope(int chunk_length) {
     have_new_buffer_ = false;
   }
 
-  UpdateScope(chunk_length);
+  if (latest_buffer_ != nullptr) {
+    UpdateScope(chunk_length);
+  }
+
   return scope_;
 }
 
