@@ -38,11 +38,13 @@ Q_DECLARE_METATYPE(ResultList);
 
 class MusicBrainzClientTest : public ::testing::Test {
  protected:
-  void SetUp() {
-    mock_network_.reset(new MockNetworkAccessManager);
+  static void SetUpTestCase() {
     qRegisterMetaType<ResultList>("MusicBrainzClient::ResultList");
   }
 
+  void SetUp() {
+    mock_network_.reset(new MockNetworkAccessManager);
+  }
 
   // Reads the data from a file into a QByteArray and returns it.
   QByteArray ReadDataFromFile(const QString& filename) {
