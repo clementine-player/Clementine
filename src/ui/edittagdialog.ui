@@ -641,6 +641,9 @@
         </item>
         <item row="0" column="3">
          <widget class="SpinBox" name="track">
+          <property name="correctionMode">
+           <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+          </property>
           <property name="maximum">
            <number>9999</number>
           </property>
@@ -684,6 +687,9 @@
         </item>
         <item row="1" column="3">
          <widget class="SpinBox" name="disc">
+          <property name="correctionMode">
+           <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+          </property>
           <property name="maximum">
            <number>9999</number>
           </property>
@@ -727,6 +733,9 @@
         </item>
         <item row="2" column="3">
          <widget class="SpinBox" name="year">
+          <property name="correctionMode">
+           <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+          </property>
           <property name="maximum">
            <number>9999</number>
           </property>
