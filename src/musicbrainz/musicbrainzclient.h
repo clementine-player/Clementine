@@ -38,7 +38,11 @@ class MusicBrainzClient : public QObject {
   // the Finished signal - they have no meaning to MusicBrainzClient.
 
  public:
-  MusicBrainzClient(QObject* parent = nullptr);
+  // The second argument allows for specifying a custom network access
+  // manager. It is used in tests. The ownership of network
+  // is not transferred.
+  MusicBrainzClient(QObject* parent = nullptr,
+                    QNetworkAccessManager* network = nullptr);
 
   struct Result {
     Result() : duration_msec_(0), track_(0), year_(-1) {}
@@ -94,7 +98,7 @@ signals:
 
  private slots:
   void RequestFinished(QNetworkReply* reply, int id);
-  void DiscIdRequestFinished(QNetworkReply* reply);
+  void DiscIdRequestFinished(const QString& discid, QNetworkReply* reply);
 
  private:
   struct Release {
@@ -113,6 +117,9 @@ signals:
     int year_;
   };
 
+  static bool MediumHasDiscid(const QString& discid, QXmlStreamReader* reader);
+  static ResultList ParseMedium(QXmlStreamReader* reader);
+  static Result ParseTrackFromDisc(QXmlStreamReader* reader);
   static ResultList ParseTrack(QXmlStreamReader* reader);
   static void ParseArtist(QXmlStreamReader* reader, QString* artist);
   static Release ParseRelease(QXmlStreamReader* reader);
@@ -133,5 +140,4 @@ inline uint qHash(const MusicBrainzClient::Result& result) {
   return qHash(result.album_) ^ qHash(result.artist_) ^ result.duration_msec_ ^
          qHash(result.title_) ^ result.track_ ^ result.year_;
 }
-
 #endif  // MUSICBRAINZCLIENT_H

@@ -99,6 +99,10 @@ void CddaDevice::Init() {
   song_count_ = num_tracks;
   connect(this, SIGNAL(SongsDiscovered(const SongList&)), model_,
           SLOT(SongsDiscovered(const SongList&)));
+  // Reset the model before emitting the SongsDiscovered signal. This
+  // ensures that the model is updated properly even when a disc that
+  // doesn't exist in MusicBrainz is inserted.
+  model_->Reset();
   emit SongsDiscovered(songs);
 
   // Generate MusicBrainz DiscId
