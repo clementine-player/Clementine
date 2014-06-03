@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SeafileSettingsPage</class>
+ <widget class="QWidget" name="SeafileSettingsPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>261</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Seafile</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="LoginStateWidget" name="login_state" native="true"/>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="account_group">
+     <property name="title">
+      <string>Account details</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QWidget" name="login_container" native="true">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="2" column="0">
+          <widget class="QLabel" name="password_label">
+           <property name="text">
+            <string>Password</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" colspan="2">
+          <widget class="QLineEdit" name="password">
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="mail_label">
+           <property name="text">
+            <string>Email</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="login_button">
+           <property name="text">
+            <string>Login</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="server_label">
+           <property name="text">
+            <string>Server</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="2">
+          <widget class="QLineEdit" name="mail">
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="server">
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="preference_group">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Preference</string>
+     </property>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>19</y>
+        <width>431</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="preference_container">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="library_box">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="library_label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Library</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LoginStateWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/loginstatewidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>server</tabstop>
+  <tabstop>mail</tabstop>
+  <tabstop>password</tabstop>
+  <tabstop>login_button</tabstop>
+  <tabstop>library_box</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

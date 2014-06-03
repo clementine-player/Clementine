@@ -203,6 +203,11 @@ optional_component(BOX ON "Box support"
 
 optional_component(VK ON "Vk.com support")
 
+optional_component(SEAFILE ON "Seafile support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
+
 optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )

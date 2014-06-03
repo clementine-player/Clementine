@@ -84,7 +84,8 @@ class SettingsDialog : public QDialog {
     Page_Dropbox,
     Page_Skydrive,
     Page_Box,
-    Page_Vk
+    Page_Vk,
+    Page_Seafile
   };
 
   enum Role { Role_IsSeparator = Qt::UserRole };

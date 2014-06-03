@@ -1155,6 +1155,23 @@ optional_source(HAVE_VK
     internet/vksettingspage.ui
 )
 
+# Seafile support
+optional_source(HAVE_SEAFILE
+  SOURCES
+    internet/seafileservice.cpp
+    internet/seafilesettingspage.cpp
+    internet/seafileurlhandler.cpp
+    internet/seafiletree.cpp
+  HEADERS
+    internet/seafileservice.h
+    internet/seafilesettingspage.h
+    internet/seafileurlhandler.h
+    internet/seafiletree.h
+  UI
+    internet/seafilesettingspage.ui
+)
+
+
 # Pulse audio integration
 optional_source(HAVE_LIBPULSE
   INCLUDE_DIRECTORIES

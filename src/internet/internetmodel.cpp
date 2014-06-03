@@ -53,6 +53,10 @@
 #ifdef HAVE_VK
 #include "vkservice.h"
 #endif
+#ifdef HAVE_SEAFILE
+#include "seafileservice.h"
+#endif
+
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
@@ -100,6 +104,9 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_VK
   AddService(new VkService(app, this));
+#endif
+#ifdef HAVE_SEAFILE
+  AddService(new SeafileService(app, this));
 #endif
 
   invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);
