@@ -22,6 +22,8 @@ static const char* kListReposUrl = "/api2/repos/";
 
 static const char* kFileUrl = "/api2/repos/%1/file/";
 static const char* kFileContentUrl = "/api2/repos/%1/file/detail/";
+
+static const int kMaxTries = 10;
 }
 
 SeafileService::SeafileService(Application* app, InternetModel* parent)
@@ -536,7 +538,11 @@ void SeafileService::DeleteEntry(const QString& library, const QString& path,
 }
 
 bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
-  if (!(*reply) || tries > 10) {
+  if (!(*reply)) {
+    return false;
+  }
+  else if (tries > kMaxTries) {
+    (*reply)->deleteLater();
     return false;
   }
 
@@ -572,8 +578,9 @@ bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
     }
   }
 
-  qLog(Warning) << "Error for reply : " << status_code_variant.toInt();
   // Unknown, 404 ...
+  (*reply)->deleteLater();
+  qLog(Warning) << "Error for reply : " << status_code_variant.toInt();
   return false;
 }
 
