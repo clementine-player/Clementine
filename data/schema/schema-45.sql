@@ -21,3 +21,4 @@ INSERT INTO %allsongstables_fts (ROWID, ftstitle, ftsalbum, ftsartist, ftsalbuma
     FROM %allsongstables;
 
 UPDATE schema_version SET version=45;
+
