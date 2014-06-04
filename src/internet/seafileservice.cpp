@@ -10,25 +10,24 @@
 #include "library/librarybackend.h"
 #include "internet/oauthenticator.h"
 
-
 const char* SeafileService::kServiceName = "Seafile";
 const char* SeafileService::kSettingsGroup = "Seafile";
 
 namespace {
 
-static const char* kAuthToken = "/api2/auth-token/";
+static const char* kAuthTokenUrl = "/api2/auth-token/";
 
-static const char* kFolderItems = "/api2/repos/%1/dir/";
-static const char* kListRepos = "/api2/repos/";
+static const char* kFolderItemsUrl = "/api2/repos/%1/dir/";
+static const char* kListReposUrl = "/api2/repos/";
 
 static const char* kFileUrl = "/api2/repos/%1/file/";
-static const char* kFileContent = "/api2/repos/%1/file/detail/";
+static const char* kFileContentUrl = "/api2/repos/%1/file/detail/";
 }
 
 SeafileService::SeafileService(Application* app, InternetModel* parent)
-  : CloudFileService(app, parent, kServiceName, kSettingsGroup,
-                     QIcon(":/providers/seafile.png"), SettingsDialog::Page_Seafile) {
-
+    : CloudFileService(app, parent, kServiceName, kSettingsGroup,
+                       QIcon(":/providers/seafile.png"),
+                       SettingsDialog::Page_Seafile) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   access_token_ = s.value("access_token").toString();
@@ -36,19 +35,19 @@ SeafileService::SeafileService(Application* app, InternetModel* parent)
 
   QByteArray tree_bytes = s.value("tree").toByteArray();
 
-  if(!tree_bytes.isEmpty()) {
+  if (!tree_bytes.isEmpty()) {
     QDataStream stream(&tree_bytes, QIODevice::ReadOnly);
     stream >> tree_;
   }
 
   app->player()->RegisterUrlHandler(new SeafileUrlHandler(this, this));
 
-  connect(&tree_, SIGNAL(ToAdd(QString, QString, SeafileTree::Entry)), this, SLOT(AddEntry(QString, QString, SeafileTree::Entry)));
-  connect(&tree_, SIGNAL(ToDelete(QString, QString, SeafileTree::Entry)), this, SLOT(DeleteEntry(QString, QString, SeafileTree::Entry)));
-  connect(&tree_, SIGNAL(ToUpdate(QString, QString, SeafileTree::Entry)), this, SLOT(UpdateEntry(QString, QString, SeafileTree::Entry)));
-
-  library_updated_ = QString::null;
-
+  connect(&tree_, SIGNAL(ToAdd(QString, QString, SeafileTree::Entry)), this,
+          SLOT(AddEntry(QString, QString, SeafileTree::Entry)));
+  connect(&tree_, SIGNAL(ToDelete(QString, QString, SeafileTree::Entry)), this,
+          SLOT(DeleteEntry(QString, QString, SeafileTree::Entry)));
+  connect(&tree_, SIGNAL(ToUpdate(QString, QString, SeafileTree::Entry)), this,
+          SLOT(UpdateEntry(QString, QString, SeafileTree::Entry)));
 }
 
 bool SeafileService::has_credentials() const {
@@ -67,7 +66,8 @@ QString SeafileService::access_token() const {
 }
 
 void SeafileService::AddAuthorizationHeader(QNetworkRequest* request) const {
-  request->setRawHeader("Authorization", QString(QString("Token ") + QString(access_token_)).toAscii());
+  request->setRawHeader("Authorization",
+                        QString("Token %1").arg(access_token_).toAscii());
 }
 
 void SeafileService::ForgetCredentials() {
@@ -82,8 +82,9 @@ void SeafileService::ForgetCredentials() {
   server_.clear();
 }
 
-bool SeafileService::GetToken(const QString &mail, const QString &password, const QString &server) {
-  QUrl url(server + kAuthToken);
+bool SeafileService::GetToken(const QString& mail, const QString& password,
+                              const QString& server) {
+  QUrl url(server + kAuthTokenUrl);
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
 
@@ -91,10 +92,9 @@ bool SeafileService::GetToken(const QString &mail, const QString &password, cons
   url.addQueryItem("password", password);
 
   QNetworkReply* reply = network_->post(request, url.encodedQuery());
-  reply->ignoreSslErrors();
   WaitForSignal(reply, SIGNAL(finished()));
 
-  if(!CheckReply(&reply)) {
+  if (!CheckReply(&reply)) {
     qLog(Warning) << "Something wrong with the reply... (GetToken)";
     return false;
   }
@@ -107,7 +107,7 @@ bool SeafileService::GetToken(const QString &mail, const QString &password, cons
   // Because the server responds "token"
   access_token_ = response["token"].toString().replace("\"", "");
 
-  if(access_token_.isEmpty()) {
+  if (access_token_.isEmpty()) {
     return false;
   }
 
@@ -122,19 +122,18 @@ bool SeafileService::GetToken(const QString &mail, const QString &password, cons
   return true;
 }
 
-
 void SeafileService::GetLibraries() {
-  QUrl url(server_ + kListRepos);
+  QUrl url(server_ + kListReposUrl);
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
-  QNetworkReply *reply = network_->get(request);
-  reply->ignoreSslErrors();
+  QNetworkReply* reply = network_->get(request);
 
-  NewClosure(reply, SIGNAL(finished()), this, SLOT(GetLibrariesFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(GetLibrariesFinished(QNetworkReply*)), reply);
 }
 
-void SeafileService::GetLibrariesFinished(QNetworkReply *reply) {
-  if(!CheckReply(&reply)) {
+void SeafileService::GetLibrariesFinished(QNetworkReply* reply) {
+  if (!CheckReply(&reply)) {
     qLog(Warning) << "Something wrong with the reply... (GetLibraries)";
     return;
   }
@@ -147,13 +146,14 @@ void SeafileService::GetLibrariesFinished(QNetworkReply *reply) {
   QJson::Parser parser;
   QList<QVariant> repos = parser.parse(data).toList();
 
-  for (int i=0; i<repos.size(); ++i) {
+  for (int i = 0; i < repos.size(); ++i) {
     QVariantMap repo = repos.at(i).toMap();
     QString repo_name = repo["name"].toString(),
-        repo_id = repo["id"].toString();
+            repo_id = repo["id"].toString();
 
-    // One library can appear several times and we don't add encrypted libraries (not supported yet)
-    if(!libraries.contains(repo_id) && !repo["encrypted"].toBool()) {
+    // One library can appear several times and we don't add encrypted libraries
+    // (not supported yet)
+    if (!libraries.contains(repo_id) && !repo["encrypted"].toBool()) {
       libraries.insert(repo_id, repo_name);
     }
   }
@@ -161,19 +161,15 @@ void SeafileService::GetLibrariesFinished(QNetworkReply *reply) {
   emit GetLibrariesFinishedSignal(libraries);
 }
 
-
-void SeafileService::ChangeLibrary(const QString &new_library) {
-
+void SeafileService::ChangeLibrary(const QString& new_library) {
   // Every other libraries have to be destroyed from the tree
-  if(new_library != "all") {
-
-    for (SeafileTree::TreeItem *library : tree_.libraries()) {
+  if (new_library != "all") {
+    for (SeafileTree::TreeItem* library : tree_.libraries()) {
       if (new_library != library->entry().id()) {
         DeleteEntry(library->entry().id(), "/", library->entry());
       }
     }
   }
-
 
   UpdateLibraries();
 }
@@ -181,23 +177,22 @@ void SeafileService::ChangeLibrary(const QString &new_library) {
 void SeafileService::Connect() {
   if (is_authenticated()) {
     UpdateLibraries();
-  }
-  else {
+  } else {
     ShowSettingsDialog();
   }
 }
 
 void SeafileService::UpdateLibraries() {
-
-  connect(this, SIGNAL(GetLibrariesFinishedSignal(QMap<QString,QString>)), this,
-          SLOT(UpdateLibrariesInProgress(QMap<QString,QString>)));
+  connect(this, SIGNAL(GetLibrariesFinishedSignal(QMap<QString, QString>)),
+          this, SLOT(UpdateLibrariesInProgress(QMap<QString, QString>)));
 
   GetLibraries();
 }
 
-void SeafileService::UpdateLibrariesInProgress(const QMap<QString, QString> &libraries) {
-  disconnect(this, SIGNAL(GetLibrariesFinishedSignal(QMap<QString,QString>)), this,
-             SLOT(UpdateLibrariesInProgress(QMap<QString,QString>)));
+void SeafileService::UpdateLibrariesInProgress(
+    const QMap<QString, QString>& libraries) {
+  disconnect(this, SIGNAL(GetLibrariesFinishedSignal(QMap<QString, QString>)),
+             this, SLOT(UpdateLibrariesInProgress(QMap<QString, QString>)));
 
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -210,7 +205,7 @@ void SeafileService::UpdateLibrariesInProgress(const QMap<QString, QString> &lib
 
   library_updated_ = library_to_update;
 
-  if(library_to_update == "none") {
+  if (library_to_update == "none") {
     return;
   }
 
@@ -220,43 +215,49 @@ void SeafileService::UpdateLibrariesInProgress(const QMap<QString, QString> &lib
 
     // Need to check this library ?
     if (library_to_update == "all" || library.key() == library_to_update) {
-
       FetchAndCheckFolderItems(
-            SeafileTree::Entry(library.value(), library.key(), SeafileTree::Entry::LIBRARY), "/");
+          SeafileTree::Entry(library.value(), library.key(),
+                             SeafileTree::Entry::LIBRARY),
+          "/");
     }
     // If not, we can destroy the library from the tree
     else {
-      // If the library was not in the tree, it's not a problem because DeleteEntry won't do anything
+      // If the library was not in the tree, it's not a problem because
+      // DeleteEntry won't do anything
       DeleteEntry(library.key(), "/",
-                  SeafileTree::Entry(library.value(), library.key(), SeafileTree::Entry::LIBRARY));
+                  SeafileTree::Entry(library.value(), library.key(),
+                                     SeafileTree::Entry::LIBRARY));
     }
   }
-
 }
 
-QNetworkReply* SeafileService::PrepareFetchFolderItems(const QString &library, const QString &path) {
-  QUrl url(server_ + QString(kFolderItems).arg(library));
+QNetworkReply* SeafileService::PrepareFetchFolderItems(const QString& library,
+                                                       const QString& path) {
+  QUrl url(server_ + QString(kFolderItemsUrl).arg(library));
   url.addQueryItem("p", path);
 
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
-  reply->ignoreSslErrors();
 
   return reply;
 }
 
-void SeafileService::FetchAndCheckFolderItems(const SeafileTree::Entry &library, const QString &path) {
-  QNetworkReply *reply = PrepareFetchFolderItems(library.id(), path);
+void SeafileService::FetchAndCheckFolderItems(const SeafileTree::Entry& library,
+                                              const QString& path) {
+  QNetworkReply* reply = PrepareFetchFolderItems(library.id(), path);
   NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(FetchAndCheckFolderItemsFinished(QNetworkReply*,SeafileTree::Entry,QString)),
+             SLOT(FetchAndCheckFolderItemsFinished(
+                 QNetworkReply*, SeafileTree::Entry, QString)),
              reply, library, path);
 }
 
 void SeafileService::FetchAndCheckFolderItemsFinished(
-    QNetworkReply *reply, const SeafileTree::Entry &library, const QString &path) {
-  if(!CheckReply(&reply)) {
-    qLog(Warning) << "Something wrong with the reply... (FetchFolderItemsToList)";
+    QNetworkReply* reply, const SeafileTree::Entry& library,
+    const QString& path) {
+  if (!CheckReply(&reply)) {
+    qLog(Warning)
+        << "Something wrong with the reply... (FetchFolderItemsToList)";
     return;
   }
 
@@ -268,33 +269,40 @@ void SeafileService::FetchAndCheckFolderItemsFinished(
   QList<QVariant> variant_entries = parser.parse(data).toList();
 
   SeafileTree::Entries entries;
-  for (const QVariant & e: variant_entries) {
+  for (const QVariant& e : variant_entries) {
     QVariantMap entry = e.toMap();
-    SeafileTree::Entry::Type entry_type = SeafileTree::Entry::StringToType(entry["type"].toString());
+    SeafileTree::Entry::Type entry_type =
+        SeafileTree::Entry::StringToType(entry["type"].toString());
     QString entry_name = entry["name"].toString();
 
     // We just want libraries/directories and files which could be songs.
     if (entry_type == SeafileTree::Entry::NONE) {
       qLog(Warning) << "Type entry unknown for this entry";
-    }
-    else if (entry_type == SeafileTree::Entry::FILE && GuessMimeTypeForFile(entry_name).isNull()) {
+    } else if (entry_type == SeafileTree::Entry::FILE &&
+               GuessMimeTypeForFile(entry_name).isNull()) {
       continue;
     }
 
-    entries.append(SeafileTree::Entry(entry_name, entry["id"].toString(), entry_type));
+    entries.append(
+        SeafileTree::Entry(entry_name, entry["id"].toString(), entry_type));
   }
 
   tree_.CheckEntries(entries, library, path);
 }
 
-
-void SeafileService::AddRecursivelyFolderItems(const QString &library, const QString &path) {
-  QNetworkReply *reply = PrepareFetchFolderItems(library, path);
-  NewClosure(reply, SIGNAL(finished()), this, SLOT(AddRecursivelyFolderItemsFinished(QNetworkReply*,QString,QString)), reply, library, path);
+void SeafileService::AddRecursivelyFolderItems(const QString& library,
+                                               const QString& path) {
+  QNetworkReply* reply = PrepareFetchFolderItems(library, path);
+  NewClosure(
+      reply, SIGNAL(finished()), this,
+      SLOT(AddRecursivelyFolderItemsFinished(QNetworkReply*, QString, QString)),
+      reply, library, path);
 }
 
-void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply, const QString &library, const QString &path) {
-  if(!CheckReply(&reply)) {
+void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply,
+                                                       const QString& library,
+                                                       const QString& path) {
+  if (!CheckReply(&reply)) {
     qLog(Warning) << "Something wrong with the reply... (FetchFolderItems)";
     return;
   }
@@ -307,36 +315,39 @@ void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply, con
 
   for (const QVariant& e : entries) {
     QVariantMap entry_map = e.toMap();
-    SeafileTree::Entry::Type entry_type = SeafileTree::Entry::StringToType(entry_map["type"].toString());
+    SeafileTree::Entry::Type entry_type =
+        SeafileTree::Entry::StringToType(entry_map["type"].toString());
     QString entry_name = entry_map["name"].toString();
 
     // We just want libraries/directories and files which could be songs.
     if (entry_type == SeafileTree::Entry::NONE) {
       qLog(Warning) << "Type entry unknown for this entry";
-    }
-    else if (entry_type == SeafileTree::Entry::FILE && GuessMimeTypeForFile(entry_name).isNull()) {
+    } else if (entry_type == SeafileTree::Entry::FILE &&
+               GuessMimeTypeForFile(entry_name).isNull()) {
       continue;
     }
 
-    SeafileTree::Entry entry(entry_name, entry_map["id"].toString(), entry_type);
+    SeafileTree::Entry entry(entry_name, entry_map["id"].toString(),
+                             entry_type);
 
     // If AddEntry was not successful we stop
-    // It could happen when the user changes the library to update while an update was in progress
-    if(!tree_.AddEntry(library, path, entry)) {
+    // It could happen when the user changes the library to update while an
+    // update was in progress
+    if (!tree_.AddEntry(library, path, entry)) {
       return;
     }
 
     if (entry.is_dir()) {
       AddRecursivelyFolderItems(library, path + entry.name() + "/");
-    }
-    else {
+    } else {
       MaybeAddFileEntry(entry.name(), library, path);
     }
   }
 }
 
-QNetworkReply *SeafileService::PrepareFetchContentForFile(const QString &library, const QString &filepath) {
-  QUrl content_url(server_ + QString(kFileContent).arg(library));
+QNetworkReply* SeafileService::PrepareFetchContentForFile(
+    const QString& library, const QString& filepath) {
+  QUrl content_url(server_ + QString(kFileContentUrl).arg(library));
   content_url.addQueryItem("p", filepath);
 
   QNetworkRequest request(content_url);
@@ -346,24 +357,26 @@ QNetworkReply *SeafileService::PrepareFetchContentForFile(const QString &library
   return reply;
 }
 
-
-void SeafileService::MaybeAddFileEntry(const QString &entry_name, const QString &library, const QString &path) {
+void SeafileService::MaybeAddFileEntry(const QString& entry_name,
+                                       const QString& library,
+                                       const QString& path) {
   QString mime_type = GuessMimeTypeForFile(entry_name);
 
-  if(mime_type.isNull())
-    return;
+  if (mime_type.isNull()) return;
 
   // Get the details of the entry
-  QNetworkReply *reply = PrepareFetchContentForFile(library, path + entry_name);
+  QNetworkReply* reply = PrepareFetchContentForFile(library, path + entry_name);
   NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(MaybeAddFileEntryInProgress(QNetworkReply*,QString,QString,QString)),
+             SLOT(MaybeAddFileEntryInProgress(QNetworkReply*, QString, QString,
+                                              QString)),
              reply, library, path, mime_type);
 }
 
-void SeafileService::MaybeAddFileEntryInProgress(
-    QNetworkReply *reply, const QString &library, const QString &path, const QString &mime_type) {
-
-  if(!CheckReply(&reply)) {
+void SeafileService::MaybeAddFileEntryInProgress(QNetworkReply* reply,
+                                                 const QString& library,
+                                                 const QString& path,
+                                                 const QString& mime_type) {
+  if (!CheckReply(&reply)) {
     qLog(Warning) << "Something wrong with the reply... (MaybeAddFileEntry)";
     return;
   }
@@ -387,12 +400,16 @@ void SeafileService::MaybeAddFileEntryInProgress(
   song.set_title(entry_detail_map["name"].toString());
 
   // Get the download url of the entry
-  reply = PrepareFetchContentUrlForFile(library, path + entry_detail_map["name"].toString());
-  NewClosure(reply, SIGNAL(finished()), this, SLOT(FetchContentUrlForFileFinished(QNetworkReply*, Song, QString)), reply, song, mime_type);
+  reply = PrepareFetchContentUrlForFile(
+      library, path + entry_detail_map["name"].toString());
+  NewClosure(
+      reply, SIGNAL(finished()), this,
+      SLOT(FetchContentUrlForFileFinished(QNetworkReply*, Song, QString)),
+      reply, song, mime_type);
 }
 
-
-QNetworkReply* SeafileService::PrepareFetchContentUrlForFile(const QString &library, const QString &filepath) {
+QNetworkReply* SeafileService::PrepareFetchContentUrlForFile(
+    const QString& library, const QString& filepath) {
   QUrl content_url(server_ + QString(kFileUrl).arg(library));
   content_url.addQueryItem("p", filepath);
 
@@ -403,10 +420,12 @@ QNetworkReply* SeafileService::PrepareFetchContentUrlForFile(const QString &libr
   return reply;
 }
 
-void SeafileService::FetchContentUrlForFileFinished(QNetworkReply* reply, const Song &song, const QString &mime_type) {
-
-  if(!CheckReply(&reply)) {
-    qLog(Warning) << "Something wrong with the reply... (FetchContentUrlForFile)";
+void SeafileService::FetchContentUrlForFileFinished(QNetworkReply* reply,
+                                                    const Song& song,
+                                                    const QString& mime_type) {
+  if (!CheckReply(&reply)) {
+    qLog(Warning)
+        << "Something wrong with the reply... (FetchContentUrlForFile)";
     return;
   }
 
@@ -415,17 +434,18 @@ void SeafileService::FetchContentUrlForFileFinished(QNetworkReply* reply, const 
   // Because server response is "http://..."
   QString real_url = QString(reply->readAll()).replace("\"", "");
 
-  MaybeAddFileToDatabase(song, mime_type, QUrl(real_url), QString("Token %1").arg(access_token_));
+  MaybeAddFileToDatabase(song, mime_type, QUrl(real_url),
+                         QString("Token %1").arg(access_token_));
 }
 
-QUrl SeafileService::GetStreamingUrlFromSongId(const QString &library, const QString &filepath) {
-
+QUrl SeafileService::GetStreamingUrlFromSongId(const QString& library,
+                                               const QString& filepath) {
   QNetworkReply* reply = PrepareFetchContentUrlForFile(library, filepath);
-  reply->ignoreSslErrors();
   WaitForSignal(reply, SIGNAL(finished()));
 
-  if(!CheckReply(&reply)) {
-    qLog(Warning) << "Something wrong with the reply... (GetStreamingUrlFromSongId)";
+  if (!CheckReply(&reply)) {
+    qLog(Warning)
+        << "Something wrong with the reply... (GetStreamingUrlFromSongId)";
     return QUrl("");
   }
   reply->deleteLater();
@@ -435,115 +455,120 @@ QUrl SeafileService::GetStreamingUrlFromSongId(const QString &library, const QSt
   return QUrl(response);
 }
 
-
-void SeafileService::AddEntry(const QString &library, const QString &path, const SeafileTree::Entry &entry) {
-
+void SeafileService::AddEntry(const QString& library, const QString& path,
+                              const SeafileTree::Entry& entry) {
   if (entry.is_library()) {
     tree_.AddLibrary(entry.name(), entry.id());
     AddRecursivelyFolderItems(library, "/");
-  }
-  else {
+  } else {
     // If AddEntry was not successful we stop
-    // It could happen when the user changes the library to update while an update was in progress
-    if(!tree_.AddEntry(library, path, entry)) {
+    // It could happen when the user changes the library to update while an
+    // update was in progress
+    if (!tree_.AddEntry(library, path, entry)) {
       return;
     }
 
     if (entry.is_file()) {
       MaybeAddFileEntry(entry.name(), library, path);
-    }
-    else {
-      AddRecursivelyFolderItems(library, path  + entry.name() + "/");
+    } else {
+      AddRecursivelyFolderItems(library, path + entry.name() + "/");
     }
   }
 }
 
-void SeafileService::UpdateEntry(const QString & library, const QString &path, const SeafileTree::Entry &entry) {
-
+void SeafileService::UpdateEntry(const QString& library, const QString& path,
+                                 const SeafileTree::Entry& entry) {
   if (entry.is_file()) {
     DeleteEntry(library, path, entry);
     AddEntry(library, path, entry);
-  }
-  else {
+  } else {
     QString entry_path = path;
 
-    if(entry.is_dir()) {
+    if (entry.is_dir()) {
       entry_path += entry.name() + "/";
     }
 
-    FetchAndCheckFolderItems(SeafileTree::Entry("", library, SeafileTree::Entry::LIBRARY),
-                             entry_path);
+    FetchAndCheckFolderItems(
+        SeafileTree::Entry("", library, SeafileTree::Entry::LIBRARY),
+        entry_path);
   }
 }
 
-void SeafileService::DeleteEntry(const QString &library, const QString &path, const SeafileTree::Entry &entry) {
-
+void SeafileService::DeleteEntry(const QString& library, const QString& path,
+                                 const SeafileTree::Entry& entry) {
   // For the QPair -> 1 : path, 2 : entry
   QList<QPair<QString, SeafileTree::Entry>> files_to_delete;
-  if(entry.is_library()) {
-    SeafileTree::TreeItem *item = tree_.FindLibrary(library);
+  if (entry.is_library()) {
+    SeafileTree::TreeItem* item = tree_.FindLibrary(library);
     files_to_delete = tree_.GetRecursiveFilesOfDir("/", item);
     tree_.DeleteLibrary(library);
-  }
-  else {
-    if(entry.is_dir()) {
-      SeafileTree::TreeItem *item = tree_.FindFromAbsolutePath(library, path + entry.name() + "/");
-      files_to_delete = tree_.GetRecursiveFilesOfDir(path + entry.name() + "/", item);
-    }
-    else {
+  } else {
+    if (entry.is_dir()) {
+      SeafileTree::TreeItem* item =
+          tree_.FindFromAbsolutePath(library, path + entry.name() + "/");
+      files_to_delete =
+          tree_.GetRecursiveFilesOfDir(path + entry.name() + "/", item);
+    } else {
       files_to_delete.append(qMakePair(path, entry));
     }
 
-    if(!tree_.DeleteEntry(library, path, entry)) {
+    if (!tree_.DeleteEntry(library, path, entry)) {
       return;
     }
   }
 
   // Delete songs from the library of Clementine
-  for (const QPair<QString, SeafileTree::Entry> &file_to_delete : files_to_delete) {
-    if(!GuessMimeTypeForFile(file_to_delete.second.name())
-       .isEmpty()) {
-      QUrl song_url("seafile:/" + library + file_to_delete.first + file_to_delete.second.name());
+  for (const QPair<QString, SeafileTree::Entry>& file_to_delete :
+       files_to_delete) {
+    if (!GuessMimeTypeForFile(file_to_delete.second.name()).isEmpty()) {
+      QUrl song_url("seafile:/" + library + file_to_delete.first +
+                    file_to_delete.second.name());
       Song song = library_backend_->GetSongByUrl(song_url);
 
       if (song.is_valid()) {
         library_backend_->DeleteSongs(SongList() << song);
-      }
-      else {
-        qLog(Warning) << "Can't delete song from the Clementine's library : " << song_url;
+      } else {
+        qLog(Warning) << "Can't delete song from the Clementine's library : "
+                      << song_url;
       }
     }
   }
 }
 
-
-bool SeafileService::CheckReply(QNetworkReply **reply) {
-  if (!(*reply)) {
+bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
+  if (!(*reply) || tries > 10) {
     return false;
   }
 
-  QVariant status_code_variant = (*reply)->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+  QVariant status_code_variant =
+      (*reply)->attribute(QNetworkRequest::HttpStatusCodeAttribute);
   if (status_code_variant.isValid()) {
     int status_code = status_code_variant.toInt();
 
     if (status_code == NO_ERROR) {
       return true;
-    }
-    else if (status_code == TOO_MANY_REQUESTS) {
+    } else if (status_code == TOO_MANY_REQUESTS) {
       qLog(Debug) << "Too many requests, wait...";
 
-      // If there are too many requests, we just wait
+      int seconds_to_wait;
+      if ((*reply)->hasRawHeader("X-Throttle-Wait-Seconds")) {
+        seconds_to_wait =
+            ((*reply)->rawHeader("X-Throttle-Wait-Seconds").toInt() + 1) * 1000;
+      } else {
+        seconds_to_wait = pow(tries, 2) * 1000;
+      }
+
       QTimer timer;
-      timer.start(10000);
+      timer.start(seconds_to_wait);
       WaitForSignal(&timer, SIGNAL(timeout()));
 
       (*reply)->deleteLater();
 
-      // And we execute the reply again
+      // We execute the reply again
       *reply = network_->get((*reply)->request());
       WaitForSignal(*reply, SIGNAL(finished()));
 
-      return CheckReply(reply);
+      return CheckReply(reply, ++tries);
     }
   }
 
@@ -551,7 +576,6 @@ bool SeafileService::CheckReply(QNetworkReply **reply) {
   // Unknown, 404 ...
   return false;
 }
-
 
 SeafileService::~SeafileService() {
   // Save the tree !
@@ -563,6 +587,4 @@ SeafileService::~SeafileService() {
   stream << tree_;
 
   s.setValue("tree", tree_byte);
-
 }
-

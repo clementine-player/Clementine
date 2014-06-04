@@ -15,13 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "seafileservice.h"
 #include "seafilesettingspage.h"
-#include "internetmodel.h"
-#include "core/logging.h"
-#include "core/network.h"
-#include "ui_seafilesettingspage.h"
-#include "ui/iconloader.h"
 
 #include <QMessageBox>
 #include <QNetworkReply>
@@ -29,10 +23,17 @@
 #include <QSettings>
 #include <QtDebug>
 
+#include "seafileservice.h"
+#include "internetmodel.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "ui_seafilesettingspage.h"
+#include "ui/iconloader.h"
+
 SeafileSettingsPage::SeafileSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_SeafileSettingsPage),
-    service_(InternetModel::Service<SeafileService>()) {
+    : SettingsPage(dialog),
+      ui_(new Ui_SeafileSettingsPage),
+      service_(InternetModel::Service<SeafileService>()) {
   ui_->setupUi(this);
 
   setWindowIcon(QIcon(":/providers/seafile.png"));
@@ -47,12 +48,11 @@ SeafileSettingsPage::SeafileSettingsPage(SettingsDialog* dialog)
 
   ui_->library_box->addItem("None", "none");
 
-  connect(service_, SIGNAL(GetLibrariesFinishedSignal(QMap<QString,QString>)), this,
-          SLOT(GetLibrariesFinished(QMap<QString,QString>)));
+  connect(service_, SIGNAL(GetLibrariesFinishedSignal(QMap<QString, QString>)),
+          this, SLOT(GetLibrariesFinished(QMap<QString, QString>)));
 }
 
-SeafileSettingsPage::~SeafileSettingsPage() { delete ui_; }
-
+SeafileSettingsPage::~SeafileSettingsPage() {}
 
 void SeafileSettingsPage::Load() {
   QSettings s;
@@ -62,23 +62,26 @@ void SeafileSettingsPage::Load() {
   ui_->mail->setText(s.value("mail").toString());
 
   if (!ui_->server->text().isEmpty() && !ui_->mail->text().isEmpty()) {
-    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, ui_->mail->text());
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn,
+                                  ui_->mail->text());
 
-    // If there is more than "none" library, that means that we already got the libraries
-    if(ui_->library_box->count() <= 1) {
-        service_->GetLibraries();
+    // If there is more than "none" library, that means that we already got the
+    // libraries
+    if (ui_->library_box->count() <= 1) {
+      service_->GetLibraries();
     }
   }
 }
 
-void SeafileSettingsPage::GetLibrariesFinished(QMap<QString, QString> libraries) {
+void SeafileSettingsPage::GetLibrariesFinished(
+    const QMap<QString, QString>& libraries) {
   ui_->library_box->clear();
   ui_->library_box->addItem("None", "none");
   ui_->library_box->addItem("All (could be slow)", "all");
 
   // key : library's id, value : library's name
-  QMapIterator <QString, QString> library(libraries);
-  while(library.hasNext()) {
+  QMapIterator<QString, QString> library(libraries);
+  while (library.hasNext()) {
     library.next();
     ui_->library_box->addItem(library.value(), library.key());
   }
@@ -93,9 +96,9 @@ void SeafileSettingsPage::GetLibrariesFinished(QMap<QString, QString> libraries)
   }
 }
 
-
 void SeafileSettingsPage::Save() {
-  QString id = ui_->library_box->itemData(ui_->library_box->currentIndex()).toString();
+  QString id =
+      ui_->library_box->itemData(ui_->library_box->currentIndex()).toString();
 
   QSettings s;
   s.beginGroup(SeafileService::kSettingsGroup);
@@ -108,21 +111,21 @@ void SeafileSettingsPage::Save() {
   service_->ChangeLibrary(id);
 }
 
-
 void SeafileSettingsPage::Login() {
-
   ui_->login_button->setEnabled(false);
 
-  if(service_->GetToken(ui_->mail->text(), ui_->password->text(), ui_->server->text())) {
+  if (service_->GetToken(ui_->mail->text(), ui_->password->text(),
+                         ui_->server->text())) {
     Save();
 
-    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, ui_->mail->text());
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn,
+                                  ui_->mail->text());
 
     service_->GetLibraries();
-  }
-  else {
+  } else {
     ui_->login_button->setEnabled(true);
-    QMessageBox::warning(this, tr("Unable to connect"), tr("Unable to connect"));
+    QMessageBox::warning(this, tr("Unable to connect"),
+                         tr("Unable to connect"));
   }
 }
 
@@ -145,6 +148,4 @@ void SeafileSettingsPage::Logout() {
 
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
   ui_->login_button->setEnabled(true);
-
 }
-

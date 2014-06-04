@@ -40,12 +40,11 @@ class SeafileSettingsPage : public SettingsPage {
   void Login();
   void Logout();
   // Map -> key : library's id, value : library's name
-  void GetLibrariesFinished(QMap<QString, QString> libraries);
+  void GetLibrariesFinished(const QMap<QString, QString>& libraries);
 
  private:
-  Ui_SeafileSettingsPage* ui_;
+  std::unique_ptr<Ui_SeafileSettingsPage> ui_;
   SeafileService* service_;
-
 };
 
 #endif  // SEAFILESETTINGSPAGE_H
