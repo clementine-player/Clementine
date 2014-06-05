@@ -1007,9 +1007,12 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
     if (tag->audioProperties()) {
       song->set_length_nanosec(tag->audioProperties()->length() * kNsecPerSec);
     }
+
+    delete stream;
     return true;
   }
 
+  delete stream;
   return false;
 }
 #endif  // HAVE_GOOGLE_DRIVE
