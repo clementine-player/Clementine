@@ -945,41 +945,40 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                               pb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Loading tags from" << title;
 
-  CloudStream* stream = new CloudStream(download_url, title, size,
-                                        authorisation_header, network_);
+  std::unique_ptr<CloudStream> stream(
+        new CloudStream(download_url, title, size, authorisation_header, network_));
   stream->Precache();
   std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {
-    tag.reset(new TagLib::MPEG::File(stream,  // Doesn't take ownership.
+    tag.reset(new TagLib::MPEG::File(stream.get(),
                                      TagLib::ID3v2::FrameFactory::instance(),
                                      TagLib::AudioProperties::Accurate));
   } else if (mime_type == "audio/mp4" ||
              (mime_type == "audio/mpeg" && title.endsWith(".m4a"))) {
     tag.reset(
-        new TagLib::MP4::File(stream, true, TagLib::AudioProperties::Accurate));
+        new TagLib::MP4::File(stream.get(), true, TagLib::AudioProperties::Accurate));
   }
 #ifdef TAGLIB_HAS_OPUS
   else if ((mime_type == "application/opus" || mime_type == "audio/opus" ||
             mime_type == "application/ogg" || mime_type == "audio/ogg") &&
            title.endsWith(".opus")) {
-    tag.reset(new TagLib::Ogg::Opus::File(stream, true,
+    tag.reset(new TagLib::Ogg::Opus::File(stream.get(), true,
                                           TagLib::AudioProperties::Accurate));
   }
 #endif
   else if (mime_type == "application/ogg" || mime_type == "audio/ogg") {
-    tag.reset(new TagLib::Ogg::Vorbis::File(stream, true,
+    tag.reset(new TagLib::Ogg::Vorbis::File(stream.get(), true,
                                             TagLib::AudioProperties::Accurate));
   } else if (mime_type == "application/x-flac" || mime_type == "audio/flac" ||
              mime_type == "audio/x-flac") {
-    tag.reset(new TagLib::FLAC::File(stream,
+    tag.reset(new TagLib::FLAC::File(stream.get(),
                                      TagLib::ID3v2::FrameFactory::instance(),
                                      true, TagLib::AudioProperties::Accurate));
   } else if (mime_type == "audio/x-ms-wma") {
     tag.reset(
-        new TagLib::ASF::File(stream, true, TagLib::AudioProperties::Accurate));
+        new TagLib::ASF::File(stream.get(), true, TagLib::AudioProperties::Accurate));
   } else {
     qLog(Debug) << "Unknown mime type for tagging:" << mime_type;
-    delete stream;
     return false;
   }
 
@@ -1007,12 +1006,9 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
     if (tag->audioProperties()) {
       song->set_length_nanosec(tag->audioProperties()->length() * kNsecPerSec);
     }
-
-    delete stream;
     return true;
   }
 
-  delete stream;
   return false;
 }
 #endif  // HAVE_GOOGLE_DRIVE
