@@ -29,7 +29,8 @@ class SeafileTree : public QObject {
     Entry(const QString& name = QString(), const QString& id = QString(),
           const Type& type = NONE)
         : name_(name), id_(id), type_(type) {}
-    Entry(const Entry& entry) : Entry(entry.name(), entry.id(), entry.type()) {}
+    Entry(const Entry& entry)
+      : name_(entry.name()), id_(entry.id()), type_(entry.type()) {}
     ~Entry();
 
     QString name() const;
@@ -70,7 +71,8 @@ class SeafileTree : public QObject {
     TreeItem(const Entry& entry = Entry(),
              const QList<TreeItem*>& children = QList<TreeItem*>())
         : entry_(entry), children_(children) {}
-    TreeItem(const TreeItem& copy) : TreeItem(copy.entry()) {}
+    TreeItem(const TreeItem& copy)
+      : entry_(copy.entry()), children_(copy.children()) {}
     ~TreeItem();
 
     TreeItem* child(int i) const;
