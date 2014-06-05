@@ -8,7 +8,7 @@
 
 SeafileTree::SeafileTree() {}
 
-SeafileTree::SeafileTree(const SeafileTree& copy) : SeafileTree() {
+SeafileTree::SeafileTree(const SeafileTree& copy) {
   libraries_ = copy.libraries();
 }
 
