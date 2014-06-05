@@ -53,6 +53,9 @@
 #ifdef HAVE_VK
 #include "vkservice.h"
 #endif
+#ifdef HAVE_SEAFILE
+#include "seafileservice.h"
+#endif
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
@@ -94,6 +97,9 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_GOOGLE_DRIVE
   AddService(new GoogleDriveService(app, this));
+#endif
+#ifdef HAVE_SEAFILE
+  AddService(new SeafileService(app, this));
 #endif
 #ifdef HAVE_SKYDRIVE
   AddService(new SkydriveService(app, this));
@@ -223,8 +229,9 @@ QStringList InternetModel::mimeTypes() const {
 
 QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
   // Special case for when the user double clicked on a special item.
-  if (indexes.count() == 1 && indexes[0].data(Role_PlayBehaviour).toInt() ==
-                                  PlayBehaviour_DoubleClickAction) {
+  if (indexes.count() == 1 &&
+      indexes[0].data(Role_PlayBehaviour).toInt() ==
+          PlayBehaviour_DoubleClickAction) {
     InternetModel::ServiceForIndex(indexes[0])
         ->ItemDoubleClicked(itemFromIndex(indexes[0]));
     return nullptr;
