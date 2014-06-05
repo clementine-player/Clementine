@@ -3,6 +3,8 @@
 #include <QDesktopServices>
 #include <QEventLoop>
 #include <QMenu>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QScopedPointer>
 #include <QSortFilterProxyModel>
 
@@ -36,7 +38,10 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
                        QIcon(":/providers/googledrive.png"),
                        SettingsDialog::Page_GoogleDrive),
-      client_(new google_drive::Client(this)) {
+      client_(new google_drive::Client(this)),
+      open_in_drive_action_(nullptr),
+      update_action_(nullptr),
+      full_rescan_action_(nullptr) {
   app->player()->RegisterUrlHandler(new GoogleDriveUrlHandler(this, this));
 }
 
@@ -118,7 +123,7 @@ void GoogleDriveService::ConnectFinished(
   emit Connected();
 
   // Find all the changes since the last check.
-  ListChanges(s.value("cursor").toString());
+  CheckForUpdates();
 }
 
 void GoogleDriveService::EnsureConnected() {
@@ -193,6 +198,13 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
         QIcon(":/providers/googledrive.png"), tr("Open in Google Drive"), this,
         SLOT(OpenWithDrive()));
     context_menu_->addSeparator();
+    update_action_ = context_menu_->addAction(
+        IconLoader::Load("view-refresh"), tr("Check for updates"),
+        this, SLOT(CheckForUpdates()));
+    full_rescan_action_ = context_menu_->addAction(
+        IconLoader::Load("view-refresh"), tr("Do a full rescan..."),
+        this, SLOT(ConfirmFullRescan()));
+    context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("download"), tr("Cover Manager"),
                              this, SLOT(ShowCoverManager()));
     context_menu_->addAction(IconLoader::Load("configure"), tr("Configure..."),
@@ -210,6 +222,8 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
   }
 
   open_in_drive_action_->setEnabled(songs_selected);
+  update_action_->setEnabled(!is_indexing());
+  full_rescan_action_->setEnabled(!is_indexing());
 
   context_menu_->popup(global_pos);
 }
@@ -228,4 +242,38 @@ void GoogleDriveService::OpenWithDrive() {
     QDesktopServices::openUrl(
         QUrl(QString(kDriveEditFileUrl).arg(song.url().path())));
   }
+}
+
+void GoogleDriveService::ConfirmFullRescan() {
+  QMessageBox* message_box = new QMessageBox(
+      QMessageBox::Warning,
+      tr("Do a full rescan"),
+      tr("Doing a full rescan will lose any metadata you've saved in "
+         "Clementine such as cover art, play counts and ratings.  Clementine "
+         "will rescan all your music in Google Drive which may take some "
+         "time."),
+      QMessageBox::NoButton);
+  QPushButton* button = message_box->addButton(
+      tr("Do a full rescan"), QMessageBox::DestructiveRole);
+  connect(button, SIGNAL(clicked()), SLOT(DoFullRescan()));
+
+  message_box->addButton(QMessageBox::Cancel);
+  message_box->setAttribute(Qt::WA_DeleteOnClose);
+  message_box->show();
+}
+
+void GoogleDriveService::DoFullRescan() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.remove("cursor");
+
+  library_backend_->DeleteAll();
+
+  ListChanges(QString());
+}
+
+void GoogleDriveService::CheckForUpdates() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  ListChanges(s.value("cursor").toString());
 }

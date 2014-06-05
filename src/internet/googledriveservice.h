@@ -42,6 +42,9 @@ signals:
   void SaveCursor(const QString& cursor);
 
   void OpenWithDrive();
+  void ConfirmFullRescan();
+  void DoFullRescan();
+  void CheckForUpdates();
 
  private:
   void EnsureConnected();
@@ -51,6 +54,8 @@ signals:
   google_drive::Client* client_;
 
   QAction* open_in_drive_action_;
+  QAction* update_action_;
+  QAction* full_rescan_action_;
 };
 
 #endif
