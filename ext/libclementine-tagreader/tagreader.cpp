@@ -950,7 +950,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
   stream->Precache();
   std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {
-    tag.reset(new TagLib::MPEG::File(stream,  // Takes ownership.
+    tag.reset(new TagLib::MPEG::File(stream,  // Doesn't take ownership.
                                      TagLib::ID3v2::FrameFactory::instance(),
                                      TagLib::AudioProperties::Accurate));
   } else if (mime_type == "audio/mp4" ||
