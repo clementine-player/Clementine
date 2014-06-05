@@ -164,6 +164,8 @@ gst_fftwspectrum_class_init (GstFFTWSpectrumClass * klass)
 
   gstelement_class->change_state 
     = GST_DEBUG_FUNCPTR (gst_fftwspectrum_change_state);
+
+  g_mutex_init(&klass->mutex);
 }
 
 /* initialize the new element
@@ -221,6 +223,8 @@ gst_fftwspectrum_init (GstFFTWSpectrum * conv,
   conv->def_size = DEF_SIZE_DEFAULT;
   conv->def_step = DEF_STEP_DEFAULT;
   conv->hi_q     = HIQUALITY_DEFAULT;
+
+  conv->mutex = &gclass->mutex;
 }
 
 static void
@@ -303,13 +307,12 @@ alloc_fftw_data (GstFFTWSpectrum *conv)
    * implementing filters.
    */
 
-  static GStaticMutex mutex = G_STATIC_MUTEX_INIT;
-  g_static_mutex_lock(&mutex);
+  g_mutex_lock(conv->mutex);
   conv->fftw_plan 
     = fftw_plan_dft_r2c_1d(conv->size, conv->fftw_in,
           (fftw_complex *) conv->fftw_out,
 			    conv->hi_q ? FFTW_MEASURE : FFTW_ESTIMATE);
-  g_static_mutex_unlock(&mutex);
+  g_mutex_unlock(conv->mutex);
 }
 
 
