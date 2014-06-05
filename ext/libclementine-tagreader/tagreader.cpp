@@ -979,6 +979,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
         new TagLib::ASF::File(stream, true, TagLib::AudioProperties::Accurate));
   } else {
     qLog(Debug) << "Unknown mime type for tagging:" << mime_type;
+    delete stream;
     return false;
   }
 
