@@ -21,6 +21,7 @@
 #include "librarybackend.h"
 #include "core/application.h"
 #include "core/database.h"
+#include "core/player.h"
 #include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
 #include "smartplaylists/generator.h"
@@ -160,6 +161,9 @@ void Library::Init() {
           SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
   connect(watcher_, SIGNAL(CompilationsNeedUpdating()), backend_,
           SLOT(UpdateCompilations()));
+  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
+          SLOT(CurrentSongChanged(Song)));
+  connect(app_->player(), SIGNAL(Stopped()), SLOT(Stopped()));
 
   // This will start the watcher checking for updates
   backend_->LoadDirectoriesAsync();
@@ -202,14 +206,51 @@ void Library::WriteAllSongsStatisticsToFiles() {
   app_->task_manager()->SetTaskFinished(task_id);
 }
 
+void Library::Stopped() {
+  CurrentSongChanged(Song());
+}
+
+void Library::CurrentSongChanged(const Song& song) {
+  TagReaderReply* reply = nullptr;
+  if (queued_rating_.is_valid()) {
+    reply = app_->tag_reader_client()->UpdateSongRating(queued_rating_);
+    queued_rating_ = Song();
+  } else if (queued_statistics_.is_valid()) {
+    reply = app_->tag_reader_client()->UpdateSongStatistics(queued_statistics_);
+    queued_statistics_ = Song();
+  }
+
+  if (reply) {
+    connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
+  }
+
+  if (song.filetype() == Song::Type_Asf) {
+    current_wma_song_url_ = song.url();
+  }
+}
+
 void Library::SongsRatingChanged(const SongList& songs) {
   if (save_ratings_in_files_) {
-    app_->tag_reader_client()->UpdateSongsRating(songs);
+    app_->tag_reader_client()->UpdateSongsRating(
+        FilterCurrentWMASong(songs, &queued_rating_));
   }
 }
 
 void Library::SongsStatisticsChanged(const SongList& songs) {
   if (save_statistics_in_files_) {
-    app_->tag_reader_client()->UpdateSongsStatistics(songs);
+    app_->tag_reader_client()->UpdateSongsStatistics(
+        FilterCurrentWMASong(songs, &queued_statistics_));
   }
+}
+
+SongList Library::FilterCurrentWMASong(SongList songs, Song* queued) {
+  for (SongList::iterator it = songs.begin(); it != songs.end(); ) {
+    if (it->url() == current_wma_song_url_) {
+      *queued = *it;
+      it = songs.erase(it);
+    } else {
+      ++it;
+    }
+  }
+  return songs;
 }

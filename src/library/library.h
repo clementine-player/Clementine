@@ -20,6 +20,7 @@
 
 #include <QHash>
 #include <QObject>
+#include <QUrl>
 
 #include "core/song.h"
 
@@ -66,6 +67,11 @@ class Library : public QObject {
 
   void SongsStatisticsChanged(const SongList& songs);
   void SongsRatingChanged(const SongList& songs);
+  void CurrentSongChanged(const Song& song);
+  void Stopped();
+
+ private:
+  SongList FilterCurrentWMASong(SongList songs, Song* queued);
 
  private:
   Application* app_;
@@ -77,6 +83,13 @@ class Library : public QObject {
 
   bool save_statistics_in_files_;
   bool save_ratings_in_files_;
+
+  // Hack: Gstreamer doesn't cope well with WMA files being rewritten while
+  // being played, so we delay statistics and rating changes until the current
+  // song has finished playing.
+  QUrl current_wma_song_url_;
+  Song queued_statistics_;
+  Song queued_rating_;
 
   // DB schema versions which should trigger a full library rescan (each of
   // those with a short reason why).
