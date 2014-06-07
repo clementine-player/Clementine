@@ -48,7 +48,7 @@ class SeafileService : public CloudFileService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
 
-  virtual bool has_credentials() const;
+  bool has_credentials() const;
   QUrl GetStreamingUrlFromSongId(const QString& library,
                                  const QString& filepath);
   // Get the token for an user (simple rest api)
@@ -100,9 +100,6 @@ signals:
                                    const QString& mime_type);
 
  private:
-  QString access_token() const;
-  bool is_authenticated() const;
-
   void AddAuthorizationHeader(QNetworkRequest* request) const;
 
   void UpdateLibraries();

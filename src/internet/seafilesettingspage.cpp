@@ -108,7 +108,9 @@ void SeafileSettingsPage::Save() {
   s.setValue("library", id);
   // Don't need to save the password
 
-  service_->ChangeLibrary(id);
+  if (service_->has_credentials()) {
+    service_->ChangeLibrary(id);
+  }
 }
 
 void SeafileSettingsPage::Login() {

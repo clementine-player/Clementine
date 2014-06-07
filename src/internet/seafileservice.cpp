@@ -53,18 +53,7 @@ SeafileService::SeafileService(Application* app, InternetModel* parent)
 }
 
 bool SeafileService::has_credentials() const {
-  return !access_token().isEmpty();
-}
-
-bool SeafileService::is_authenticated() const {
   return !access_token_.isEmpty();
-}
-
-QString SeafileService::access_token() const {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  return s.value("access_token").toString();
 }
 
 void SeafileService::AddAuthorizationHeader(QNetworkRequest* request) const {
@@ -177,7 +166,7 @@ void SeafileService::ChangeLibrary(const QString& new_library) {
 }
 
 void SeafileService::Connect() {
-  if (is_authenticated()) {
+  if (has_credentials()) {
     UpdateLibraries();
   } else {
     ShowSettingsDialog();
