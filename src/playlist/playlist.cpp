@@ -1394,21 +1394,18 @@ void Playlist::sort(int column, Qt::SortOrder order) {
 void Playlist::ReOrderWithoutUndo(const PlaylistItemList& new_items) {
   layoutAboutToBeChanged();
 
-  // This is a slow and nasty way to keep the persistent indices
-  QMap<int, shared_ptr<PlaylistItem>> old_persistent_mappings;
-  for (const QModelIndex& index : persistentIndexList()) {
-    old_persistent_mappings[index.row()] = items_[index.row()];
+  PlaylistItemList old_items = items_;
+  items_ = new_items;
+
+  QMap<const PlaylistItem*, int> new_rows;
+  for (int i = 0; i < new_items.length(); ++i) {
+    new_rows[new_items[i].get()] = i;
   }
 
-  items_ = new_items;
-  QMapIterator<int, shared_ptr<PlaylistItem>> it(old_persistent_mappings);
-  while (it.hasNext()) {
-    it.next();
-    for (int col = 0; col < ColumnCount; ++col) {
-      int new_row = items_.indexOf(it.value());
-      changePersistentIndex(index(it.key(), col, QModelIndex()),
-                            index(new_row, col, QModelIndex()));
-    }
+  for (const QModelIndex& idx: persistentIndexList()) {
+    const PlaylistItem* item = old_items[idx.row()].get();
+    changePersistentIndex(
+        idx, index(new_rows[item], idx.column(), idx.parent()));
   }
 
   layoutChanged();
