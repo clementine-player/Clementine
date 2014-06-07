@@ -55,7 +55,6 @@ void LibraryBackend::Init(Database* db, const QString& songs_table,
   dirs_table_ = dirs_table;
   subdirs_table_ = subdirs_table;
   fts_table_ = fts_table;
-  ReloadSettings();
 }
 
 void LibraryBackend::LoadDirectoriesAsync() {
@@ -1158,49 +1157,4 @@ void LibraryBackend::DeleteAll() {
   }
 
   emit DatabaseReset();
-}
-
-void LibraryBackend::ReloadSettingsAsync() {
-  QMetaObject::invokeMethod(this, "ReloadSettings", Qt::QueuedConnection);
-}
-
-void LibraryBackend::ReloadSettings() {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  // Statistics
-  {
-    bool save_statistics_in_file =
-        s.value("save_statistics_in_file", false).toBool();
-    // Compare with previous value to know if we should connect, disconnect or
-    // nothing
-    if (save_statistics_in_file_ && !save_statistics_in_file) {
-      disconnect(this, SIGNAL(SongsStatisticsChanged(SongList)),
-                 TagReaderClient::Instance(),
-                 SLOT(UpdateSongsStatistics(SongList)));
-    } else if (!save_statistics_in_file_ && save_statistics_in_file) {
-      connect(this, SIGNAL(SongsStatisticsChanged(SongList)),
-              TagReaderClient::Instance(),
-              SLOT(UpdateSongsStatistics(SongList)));
-    }
-    // Save old value
-    save_statistics_in_file_ = save_statistics_in_file;
-  }
-
-  // Rating
-  {
-    bool save_ratings_in_file = s.value("save_ratings_in_file", false).toBool();
-    // Compare with previous value to know if we should connect, disconnect or
-    // nothing
-    if (save_ratings_in_file_ && !save_ratings_in_file) {
-      disconnect(this, SIGNAL(SongsRatingChanged(SongList)),
-                 TagReaderClient::Instance(),
-                 SLOT(UpdateSongsRating(SongList)));
-    } else if (!save_ratings_in_file_ && save_ratings_in_file) {
-      connect(this, SIGNAL(SongsRatingChanged(SongList)),
-              TagReaderClient::Instance(), SLOT(UpdateSongsRating(SongList)));
-    }
-    // Save old value
-    save_ratings_in_file_ = save_ratings_in_file;
-  }
 }

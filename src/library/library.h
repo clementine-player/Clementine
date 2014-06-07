@@ -21,6 +21,8 @@
 #include <QHash>
 #include <QObject>
 
+#include "core/song.h"
+
 class Application;
 class Database;
 class LibraryBackend;
@@ -62,6 +64,9 @@ class Library : public QObject {
  private slots:
   void IncrementalScan();
 
+  void SongsStatisticsChanged(const SongList& songs);
+  void SongsRatingChanged(const SongList& songs);
+
  private:
   Application* app_;
   LibraryBackend* backend_;
@@ -70,9 +75,11 @@ class Library : public QObject {
   LibraryWatcher* watcher_;
   QThread* watcher_thread_;
 
+  bool save_statistics_in_files_;
+  bool save_ratings_in_files_;
+
   // DB schema versions which should trigger a full library rescan (each of
-  // those with
-  // a short reason why).
+  // those with a short reason why).
   QHash<int, QString> full_rescan_revisions_;
 };
 

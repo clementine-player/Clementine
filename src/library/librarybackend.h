@@ -188,8 +188,6 @@ class LibraryBackend : public LibraryBackendInterface {
 
   void DeleteAll();
 
-  void ReloadSettingsAsync();
-
  public slots:
   void LoadDirectories();
   void UpdateTotalSongCount();
@@ -208,7 +206,6 @@ class LibraryBackend : public LibraryBackendInterface {
   void ResetStatistics(int id);
   void UpdateSongRating(int id, float rating);
   void UpdateSongsRating(const QList<int>& id_list, float rating);
-  void ReloadSettings();
 
 signals:
   void DirectoryDiscovered(const Directory& dir,
