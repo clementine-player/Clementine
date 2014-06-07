@@ -108,10 +108,10 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
 
   // Set the colour of all the labels on the summary page
   const bool light = palette().color(QPalette::Base).value() > 128;
-  const QColor color = palette().color(QPalette::Dark);
+  const QColor color = palette().color(QPalette::WindowText);
   QPalette summary_label_palette(palette());
   summary_label_palette.setColor(
-      QPalette::WindowText, light ? color.darker(150) : color.lighter(125));
+      QPalette::WindowText, light ? color.lighter(150) : color.darker(150));
 
   for (QLabel* label : ui_->summary_tab->findChildren<QLabel*>()) {
     if (label->property("field_label").toBool()) {
