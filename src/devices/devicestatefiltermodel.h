@@ -25,23 +25,23 @@
 class DeviceStateFilterModel : public QSortFilterProxyModel {
   Q_OBJECT
 
-public:
-  DeviceStateFilterModel(QObject* parent,
-      DeviceManager::State state = DeviceManager::State_Remembered);
+ public:
+  DeviceStateFilterModel(QObject* parent, DeviceManager::State state =
+                                              DeviceManager::State_Remembered);
 
   void setSourceModel(QAbstractItemModel* sourceModel);
 
 signals:
   void IsEmptyChanged(bool is_empty);
 
-protected:
+ protected:
   bool filterAcceptsRow(int row, const QModelIndex& parent) const;
 
-private slots:
+ private slots:
   void ProxyRowCountChanged();
 
-private:
+ private:
   DeviceManager::State state_;
 };
 
-#endif // DEVICESTATEFILTERMODEL_H
+#endif  // DEVICESTATEFILTERMODEL_H

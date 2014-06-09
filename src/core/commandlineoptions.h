@@ -27,7 +27,7 @@ class CommandlineOptions {
   friend QDataStream& operator>>(QDataStream& s, CommandlineOptions& a);
 
  public:
-  CommandlineOptions(int argc = 0, char** argv = NULL);
+  CommandlineOptions(int argc = 0, char* *argv = nullptr);
 
   static const char* kHelpText;
   static const char* kVersionText;
@@ -37,6 +37,7 @@ class CommandlineOptions {
   enum UrlListAction {
     UrlList_Append = 0,
     UrlList_Load = 1,
+    UrlList_None = 2,
   };
   enum PlayerAction {
     Player_None = 0,
@@ -90,7 +91,6 @@ class CommandlineOptions {
   void RemoveArg(const QString& starts_with, int count);
 
  private:
-
   int argc_;
   char** argv_;
 
@@ -114,4 +114,4 @@ class CommandlineOptions {
 QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a);
 QDataStream& operator>>(QDataStream& s, CommandlineOptions& a);
 
-#endif // COMMANDLINEOPTIONS_H
+#endif  // COMMANDLINEOPTIONS_H

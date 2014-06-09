@@ -27,11 +27,10 @@ const int WidgetFadeHelper::kLoadingPadding = 9;
 const int WidgetFadeHelper::kLoadingBorderRadius = 10;
 
 WidgetFadeHelper::WidgetFadeHelper(QWidget* parent, int msec)
-  : QWidget(parent),
-    parent_(parent),
-    blur_timeline_(new QTimeLine(msec, this)),
-    fade_timeline_(new QTimeLine(msec, this))
-{
+    : QWidget(parent),
+      parent_(parent),
+      blur_timeline_(new QTimeLine(msec, this)),
+      fade_timeline_(new QTimeLine(msec, this)) {
   parent->installEventFilter(this);
 
   connect(blur_timeline_, SIGNAL(valueChanged(qreal)), SLOT(update()));
@@ -43,12 +42,10 @@ WidgetFadeHelper::WidgetFadeHelper(QWidget* parent, int msec)
 
 bool WidgetFadeHelper::eventFilter(QObject* obj, QEvent* event) {
   // We're only interested in our parent's resize events
-  if (obj != parent_ || event->type() != QEvent::Resize)
-    return false;
+  if (obj != parent_ || event->type() != QEvent::Resize) return false;
 
   // Don't care if we're hidden
-  if (!isVisible())
-    return false;
+  if (!isVisible()) return false;
 
   QResizeEvent* re = static_cast<QResizeEvent*>(event);
   if (re->oldSize() == re->size()) {
@@ -98,8 +95,8 @@ void WidgetFadeHelper::CaptureParent() {
 
   const QString loading_text = tr("Loading...");
   const QSize loading_size(
-        kLoadingPadding*2 + loading_font_metrics.width(loading_text),
-        kLoadingPadding*2 + loading_font_metrics.height());
+      kLoadingPadding * 2 + loading_font_metrics.width(loading_text),
+      kLoadingPadding * 2 + loading_font_metrics.height());
   const QRect loading_rect((blurred.width() - loading_size.width()) / 2, 100,
                            loading_size.width(), loading_size.height());
 
@@ -109,11 +106,13 @@ void WidgetFadeHelper::CaptureParent() {
   blur_painter.translate(0.5, 0.5);
   blur_painter.setPen(QColor(200, 200, 200, 255));
   blur_painter.setBrush(QColor(200, 200, 200, 192));
-  blur_painter.drawRoundedRect(loading_rect, kLoadingBorderRadius, kLoadingBorderRadius);
+  blur_painter.drawRoundedRect(loading_rect, kLoadingBorderRadius,
+                               kLoadingBorderRadius);
 
   blur_painter.setPen(palette().brush(QPalette::Text).color());
   blur_painter.setFont(loading_font);
-  blur_painter.drawText(loading_rect.translated(-1, -1), Qt::AlignCenter, loading_text);
+  blur_painter.drawText(loading_rect.translated(-1, -1), Qt::AlignCenter,
+                        loading_text);
   blur_painter.translate(-0.5, -0.5);
 
   blur_painter.end();
@@ -144,7 +143,7 @@ void WidgetFadeHelper::StartFade() {
   setAttribute(Qt::WA_TransparentForMouseEvents, true);
 }
 
-void WidgetFadeHelper::paintEvent(QPaintEvent* ) {
+void WidgetFadeHelper::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
   if (fade_timeline_->state() != QTimeLine::Running) {

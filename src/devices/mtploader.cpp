@@ -15,28 +15,28 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "mtploader.h"
+
+#include <libmtp.h>
+
 #include "connecteddevice.h"
 #include "mtpconnection.h"
-#include "mtploader.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "library/librarybackend.h"
 
-#include <libmtp.h>
-
 MtpLoader::MtpLoader(const QUrl& url, TaskManager* task_manager,
-                     LibraryBackend* backend, boost::shared_ptr<ConnectedDevice> device)
-  : QObject(NULL),
-    device_(device),
-    url_(url),
-    task_manager_(task_manager),
-    backend_(backend)
-{
+                     LibraryBackend* backend,
+                     std::shared_ptr<ConnectedDevice> device)
+    : QObject(nullptr),
+      device_(device),
+      url_(url),
+      task_manager_(task_manager),
+      backend_(backend) {
   original_thread_ = thread();
 }
 
-MtpLoader::~MtpLoader() {
-}
+MtpLoader::~MtpLoader() {}
 
 void MtpLoader::LoadDatabase() {
   int task_id = task_manager_->StartTask(tr("Loading MTP device"));
@@ -59,7 +59,8 @@ bool MtpLoader::TryLoad() {
 
   // Load the list of songs on the device
   SongList songs;
-  LIBMTP_track_t* tracks = LIBMTP_Get_Tracklisting_With_Callback(dev.device(), NULL, NULL);
+  LIBMTP_track_t* tracks =
+      LIBMTP_Get_Tracklisting_With_Callback(dev.device(), nullptr, nullptr);
   while (tracks) {
     LIBMTP_track_t* track = tracks;
 

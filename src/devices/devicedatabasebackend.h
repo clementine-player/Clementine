@@ -28,8 +28,8 @@ class Database;
 class DeviceDatabaseBackend : public QObject {
   Q_OBJECT
 
-public:
-  Q_INVOKABLE DeviceDatabaseBackend(QObject* parent = 0);
+ public:
+  Q_INVOKABLE DeviceDatabaseBackend(QObject* parent = nullptr);
 
   struct Device {
     Device() : id_(-1) {}
@@ -54,13 +54,13 @@ public:
   int AddDevice(const Device& device);
   void RemoveDevice(int id);
 
-  void SetDeviceOptions(int id,
-      const QString& friendly_name, const QString& icon_name,
-      MusicStorage::TranscodeMode mode, Song::FileType format);
+  void SetDeviceOptions(int id, const QString& friendly_name,
+                        const QString& icon_name,
+                        MusicStorage::TranscodeMode mode,
+                        Song::FileType format);
 
-private:
+ private:
   Database* db_;
-
 };
 
-#endif // DEVICEDATABASEBACKEND_H
+#endif  // DEVICEDATABASEBACKEND_H

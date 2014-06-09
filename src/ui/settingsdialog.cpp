@@ -38,9 +38,9 @@
 #include "internet/digitallyimportedsettingspage.h"
 #include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
+#include "internet/soundcloudsettingspage.h"
 #include "internet/spotifysettingspage.h"
 #include "internet/subsonicsettingspage.h"
-#include "internet/ubuntuonesettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
 #include "podcasts/podcastsettingspage.h"
@@ -52,29 +52,38 @@
 #include "ui_settingsdialog.h"
 
 #ifdef HAVE_LIBLASTFM
-# include "internet/lastfmsettingspage.h"
+#include "internet/lastfmsettingspage.h"
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
-# include "wiimotedev/wiimotesettingspage.h"
+#include "wiimotedev/wiimotesettingspage.h"
 #endif
-
 
 #ifdef HAVE_GOOGLE_DRIVE
-# include "internet/googledrivesettingspage.h"
-#endif
-
-#ifdef HAVE_UBUNTU_ONE
-#  include "internet/ubuntuonesettingspage.h"
+#include "internet/googledrivesettingspage.h"
 #endif
 
 #ifdef HAVE_DROPBOX
-#  include "internet/dropboxsettingspage.h"
+#include "internet/dropboxsettingspage.h"
 #endif
 
 #ifdef HAVE_BOX
-#  include "internet/boxsettingspage.h"
+#include "internet/boxsettingspage.h"
 #endif
+
+#ifdef HAVE_VK
+#include "internet/vksettingspage.h"
+#endif
+
+#ifdef HAVE_SKYDRIVE
+#include "internet/skydrivesettingspage.h"
+#endif
+
+#ifdef HAVE_SEAFILE
+#include "internet/seafilesettingspage.h"
+#endif
+
+
 
 #include <QAbstractButton>
 #include <QDesktopWidget>
@@ -82,15 +91,13 @@
 #include <QPushButton>
 #include <QScrollArea>
 
-
 SettingsItemDelegate::SettingsItemDelegate(QObject* parent)
-  : QStyledItemDelegate(parent)
-{
-}
+    : QStyledItemDelegate(parent) {}
 
 QSize SettingsItemDelegate::sizeHint(const QStyleOptionViewItem& option,
                                      const QModelIndex& index) const {
-  const bool is_separator = index.data(SettingsDialog::Role_IsSeparator).toBool();
+  const bool is_separator =
+      index.data(SettingsDialog::Role_IsSeparator).toBool();
   QSize ret = QStyledItemDelegate::sizeHint(option, index);
 
   if (is_separator) {
@@ -100,9 +107,11 @@ QSize SettingsItemDelegate::sizeHint(const QStyleOptionViewItem& option,
   return ret;
 }
 
-void SettingsItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
+void SettingsItemDelegate::paint(QPainter* painter,
+                                 const QStyleOptionViewItem& option,
                                  const QModelIndex& index) const {
-  const bool is_separator = index.data(SettingsDialog::Role_IsSeparator).toBool();
+  const bool is_separator =
+      index.data(SettingsDialog::Role_IsSeparator).toBool();
 
   if (is_separator) {
     GroupedIconView::DrawHeader(painter, option.rect, option.font,
@@ -112,19 +121,18 @@ void SettingsItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& 
   }
 }
 
-
-SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWidget* parent)
-  : QDialog(parent),
-    app_(app),
-    model_(app_->library_model()->directory_model()),
-    gst_engine_(qobject_cast<GstEngine*>(app_->player()->engine())),
-    song_info_view_(NULL),
-    streams_(streams),
-    global_search_(app_->global_search()),
-    appearance_(app_->appearance()),
-    ui_(new Ui_SettingsDialog),
-    loading_settings_(false)
-{
+SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
+                               QWidget* parent)
+    : QDialog(parent),
+      app_(app),
+      model_(app_->library_model()->directory_model()),
+      gst_engine_(qobject_cast<GstEngine*>(app_->player()->engine())),
+      song_info_view_(nullptr),
+      streams_(streams),
+      global_search_(app_->global_search()),
+      appearance_(app_->appearance()),
+      ui_(new Ui_SettingsDialog),
+      loading_settings_(false) {
   ui_->setupUi(this);
   ui_->list->setItemDelegate(new SettingsItemDelegate(this));
 
@@ -162,10 +170,6 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this), providers);
 #endif
 
-#ifdef HAVE_UBUNTU_ONE
-  AddPage(Page_UbuntuOne, new UbuntuOneSettingsPage(this), providers);
-#endif
-
 #ifdef HAVE_DROPBOX
   AddPage(Page_Dropbox, new DropboxSettingsPage(this), providers);
 #endif
@@ -174,27 +178,48 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_Box, new BoxSettingsPage(this), providers);
 #endif
 
+#ifdef HAVE_SKYDRIVE
+  AddPage(Page_Skydrive, new SkydriveSettingsPage(this), providers);
+#endif
+
+  AddPage(Page_SoundCloud, new SoundCloudSettingsPage(this), providers);
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
+
+#ifdef HAVE_VK
+  AddPage(Page_Vk, new VkSettingsPage(this), providers);
+#endif
+
+#ifdef HAVE_SEAFILE
+  AddPage(Page_Seafile, new SeafileSettingsPage(this), providers);
+#endif
+
+
+
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
-  AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
-  AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
+  AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this),
+          providers);
+  AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this),
+          providers);
   AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
   AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
 
+  providers->sortChildren(0, Qt::AscendingOrder);
+
   // List box
-  connect(ui_->list, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+  connect(ui_->list,
+          SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
           SLOT(CurrentItemChanged(QTreeWidgetItem*)));
   ui_->list->setCurrentItem(pages_[Page_Playback].item_);
 
   // Make sure the list is big enough to show all the items
-  ui_->list->setMinimumWidth(static_cast<QAbstractItemView*>(ui_->list)->sizeHintForColumn(0));
+  ui_->list->setMinimumWidth(
+      static_cast<QAbstractItemView*>(ui_->list)->sizeHintForColumn(0));
 
-  ui_->buttonBox->button(QDialogButtonBox::Cancel)->setShortcut(QKeySequence::Close);
+  ui_->buttonBox->button(QDialogButtonBox::Cancel)
+      ->setShortcut(QKeySequence::Close);
 }
 
-SettingsDialog::~SettingsDialog() {
-  delete ui_;
-}
+SettingsDialog::~SettingsDialog() { delete ui_; }
 
 QTreeWidgetItem* SettingsDialog::AddCategory(const QString& name) {
   QTreeWidgetItem* item = new QTreeWidgetItem;
@@ -208,15 +233,15 @@ QTreeWidgetItem* SettingsDialog::AddCategory(const QString& name) {
   return item;
 }
 
-void SettingsDialog::AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent) {
-  if (!parent)
-    parent = ui_->list->invisibleRootItem();
+void SettingsDialog::AddPage(Page id, SettingsPage* page,
+                             QTreeWidgetItem* parent) {
+  if (!parent) parent = ui_->list->invisibleRootItem();
 
   // Connect page's signals to the settings dialog's signals
-  connect(page, SIGNAL(NotificationPreview(OSD::Behaviour,QString,QString)),
-                SIGNAL(NotificationPreview(OSD::Behaviour,QString,QString)));
+  connect(page, SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
+          SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)));
   connect(page, SIGNAL(SetWiimotedevInterfaceActived(bool)),
-                SIGNAL(SetWiimotedevInterfaceActived(bool)));
+          SIGNAL(SetWiimotedevInterfaceActived(bool)));
 
   // Create the list item
   QTreeWidgetItem* item = new QTreeWidgetItem;
@@ -250,7 +275,7 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page, QTreeWidgetItem* paren
 }
 
 void SettingsDialog::Save() {
-  foreach (const PageData& data, pages_.values()) {
+  for (const PageData& data : pages_.values()) {
     data.page_->Save();
   }
 }
@@ -262,7 +287,7 @@ void SettingsDialog::accept() {
 
 void SettingsDialog::reject() {
   // Notify each page that user clicks on Cancel
-  foreach (const PageData& data, pages_.values()) {
+  for (const PageData& data : pages_.values()) {
     data.page_->Cancel();
   }
 
@@ -279,13 +304,14 @@ void SettingsDialog::DialogButtonClicked(QAbstractButton* button) {
 void SettingsDialog::showEvent(QShowEvent* e) {
   // Load settings
   loading_settings_ = true;
-  foreach (const PageData& data, pages_.values()) {
+  for (const PageData& data : pages_.values()) {
     data.page_->Load();
   }
   loading_settings_ = false;
 
   // Resize the dialog if it's too big
-  const QSize available = QApplication::desktop()->availableGeometry(this).size();
+  const QSize available =
+      QApplication::desktop()->availableGeometry(this).size();
   if (available.height() < height()) {
     resize(width(), sizeHint().height());
   }
@@ -303,7 +329,7 @@ void SettingsDialog::OpenAtPage(Page page) {
 }
 
 void SettingsDialog::CurrentItemChanged(QTreeWidgetItem* item) {
-  if (! (item->flags() & Qt::ItemIsSelectable)) {
+  if (!(item->flags() & Qt::ItemIsSelectable)) {
     return;
   }
 
@@ -311,7 +337,7 @@ void SettingsDialog::CurrentItemChanged(QTreeWidgetItem* item) {
   ui_->title->setText("<b>" + item->text(0) + "</b>");
 
   // Display the right page
-  foreach (const PageData& data, pages_.values()) {
+  for (const PageData& data : pages_.values()) {
     if (data.item_ == item) {
       ui_->stacked_widget->setCurrentWidget(data.scroll_area_);
       break;

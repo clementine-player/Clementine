@@ -31,11 +31,8 @@ class QNetworkAccessManager;
 class CloudStream : public QObject, public TagLib::IOStream {
   Q_OBJECT
  public:
-  CloudStream(const QUrl& url,
-                    const QString& filename,
-                    const long length,
-                    const QString& auth,
-                    QNetworkAccessManager* network);
+  CloudStream(const QUrl& url, const QString& filename, const long length,
+              const QString& auth, QNetworkAccessManager* network);
 
   // Taglib::IOStream
   virtual TagLib::FileName name() const;
@@ -55,9 +52,7 @@ class CloudStream : public QObject, public TagLib::IOStream {
     return cache_.num_nonempty();
   }
 
-  int num_requests() const {
-    return num_requests_;
-  }
+  int num_requests() const { return num_requests_; }
 
   // Use educated guess to request the bytes that TagLib will probably want.
   void Precache();
@@ -84,4 +79,4 @@ class CloudStream : public QObject, public TagLib::IOStream {
   int num_requests_;
 };
 
-#endif // GOOGLEDRIVESTREAM_H
+#endif  // GOOGLEDRIVESTREAM_H

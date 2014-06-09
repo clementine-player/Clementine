@@ -30,8 +30,10 @@ class OrganiseFormat {
   static const char* kTagPattern;
   static const char* kBlockPattern;
   static const QStringList kKnownTags;
-  static const char* kInvalidFatCharacters;
+  static const char kInvalidFatCharacters[];
   static const int kInvalidFatCharactersCount;
+  static const char kInvalidPrefixCharacters[];
+  static const int kInvalidPrefixCharactersCount;
 
   QString format() const { return format_; }
   bool replace_non_ascii() const { return replace_non_ascii_; }
@@ -46,10 +48,9 @@ class OrganiseFormat {
   bool IsValid() const;
   QString GetFilenameForSong(const Song& song) const;
 
-
   class Validator : public QValidator {
    public:
-    explicit Validator(QObject* parent = 0);
+    explicit Validator(QObject* parent = nullptr);
     QValidator::State validate(QString& format, int& pos) const;
   };
 
@@ -62,15 +63,15 @@ class OrganiseFormat {
     static const QRgb kInvalidTagColorDark;
     static const QRgb kBlockColorDark;
 
-    explicit SyntaxHighlighter(QObject* parent = 0);
+    explicit SyntaxHighlighter(QObject* parent = nullptr);
     explicit SyntaxHighlighter(QTextEdit* parent);
     explicit SyntaxHighlighter(QTextDocument* parent);
     void highlightBlock(const QString& format);
   };
 
  private:
-  QString ParseBlock(
-      QString block, const Song& song, bool* any_empty = NULL) const;
+  QString ParseBlock(QString block, const Song& song,
+                     bool* any_empty = nullptr) const;
   QString TagValue(const QString& tag, const Song& song) const;
 
   QString format_;

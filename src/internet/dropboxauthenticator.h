@@ -11,7 +11,7 @@ class QNetworkReply;
 class DropboxAuthenticator : public QObject {
   Q_OBJECT
  public:
-  explicit DropboxAuthenticator(QObject* parent = 0);
+  explicit DropboxAuthenticator(QObject* parent = nullptr);
   void StartAuthorisation();
 
   const QString& access_token() const { return access_token_; }
@@ -19,10 +19,10 @@ class DropboxAuthenticator : public QObject {
   const QString& uid() const { return uid_; }
   const QString& name() const { return name_; }
 
-  static QByteArray GenerateAuthorisationHeader(
-      const QString& token, const QString& secret);
+  static QByteArray GenerateAuthorisationHeader(const QString& token,
+                                                const QString& secret);
 
- signals:
+signals:
   void Finished();
 
  private slots:
@@ -44,7 +44,6 @@ class DropboxAuthenticator : public QObject {
   // Temporary access token used for first authentication flow.
   QString token_;
   QString secret_;
-
 
   // Permanent OAuth access tokens.
   QString access_token_;

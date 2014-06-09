@@ -27,7 +27,7 @@
 class CddaLister : public DeviceLister {
   Q_OBJECT
 
-public:
+ public:
   CddaLister() {}
 
   QStringList DeviceUniqueIDs();
@@ -44,9 +44,7 @@ public:
   void UpdateDeviceFreeSpace(const QString&);
   void Init();
 
-private:
+ private:
   QStringList devices_list_;
-
 };
-#endif // CDDALISTER_H
-
+#endif  // CDDALISTER_H

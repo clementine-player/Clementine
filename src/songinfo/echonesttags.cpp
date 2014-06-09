@@ -16,22 +16,23 @@
 */
 
 #include "echonesttags.h"
-#include "tagwidget.h"
-#include "core/logging.h"
+
+#include <memory>
 
 #include <echonest/Artist.h>
 
-#include <boost/scoped_ptr.hpp>
+#include "tagwidget.h"
+#include "core/logging.h"
 
 struct EchoNestTags::Request {
   Request(int id) : id_(id), artist_(new Echonest::Artist) {}
 
   int id_;
-  boost::scoped_ptr<Echonest::Artist> artist_;
+  std::unique_ptr<Echonest::Artist> artist_;
 };
 
 void EchoNestTags::FetchInfo(int id, const Song& metadata) {
-  boost::shared_ptr<Request> request(new Request(id));
+  std::shared_ptr<Request> request(new Request(id));
   request->artist_->setName(metadata.artist());
 
   QNetworkReply* reply = request->artist_->fetchTerms();
@@ -41,16 +42,17 @@ void EchoNestTags::FetchInfo(int id, const Song& metadata) {
 
 void EchoNestTags::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !requests_.contains(reply))
-    return;
+  if (!reply || !requests_.contains(reply)) return;
   reply->deleteLater();
 
   RequestPtr request = requests_.take(reply);
 
   try {
     request->artist_->parseProfile(reply);
-  } catch (Echonest::ParseError e) {
-    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
+  }
+  catch (Echonest::ParseError e) {
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType()
+                  << e.what();
   }
 
   if (!request->artist_->terms().isEmpty()) {
@@ -65,10 +67,9 @@ void EchoNestTags::RequestFinished() {
 
     widget->SetIcon(data.icon_);
 
-    foreach (const Echonest::Term& term, request->artist_->terms()) {
+    for (const Echonest::Term& term : request->artist_->terms()) {
       widget->AddTag(term.name());
-      if (widget->count() >= 10)
-        break;
+      if (widget->count() >= 10) break;
     }
 
     emit InfoReady(request->id_, data);
@@ -76,4 +77,3 @@ void EchoNestTags::RequestFinished() {
 
   emit Finished(request->id_);
 }
-

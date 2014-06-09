@@ -35,7 +35,7 @@ class Chromaprinter {
   // You should create one Chromaprinter for each file you want to fingerprint.
   // This class works well with QtConcurrentMap.
 
-public:
+ public:
   Chromaprinter(const QString& filename);
   ~Chromaprinter();
 
@@ -44,17 +44,19 @@ public:
   // could be created.
   QString CreateFingerprint();
 
-private:
-  GstElement* CreateElement(const QString& factory_name, GstElement* bin = NULL);
+ private:
+  GstElement* CreateElement(const QString& factory_name,
+                            GstElement* bin = nullptr);
 
   void ReportError(GstMessage* message);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gpointer data);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
-  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg, gpointer data);
+  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
+                                         gpointer data);
   static GstFlowReturn NewBufferCallback(GstAppSink* app_sink, gpointer self);
 
-private:
+ private:
   QString filename_;
   GMainLoop* event_loop_;
 
@@ -65,4 +67,4 @@ private:
   bool finishing_;
 };
 
-#endif // CHROMAPRINTER_H
+#endif  // CHROMAPRINTER_H

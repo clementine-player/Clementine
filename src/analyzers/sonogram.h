@@ -20,22 +20,21 @@
 @author Melchior FRANZ
 */
 
-class Sonogram : public Analyzer::Base
-{
+class Sonogram : public Analyzer::Base {
   Q_OBJECT
-public:
-    Q_INVOKABLE Sonogram(QWidget*);
-    ~Sonogram();
+ public:
+  Q_INVOKABLE Sonogram(QWidget*);
+  ~Sonogram();
 
-    static const char* kName;
+  static const char* kName;
 
-protected:
-    void analyze(QPainter& p, const Scope&, bool new_frame);
-    void transform(Scope&);
-    void demo(QPainter& p);
-    void resizeEvent(QResizeEvent*);
+ protected:
+  void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
+  void transform(Analyzer::Scope&);
+  void demo(QPainter& p);
+  void resizeEvent(QResizeEvent*);
 
-    QPixmap canvas_;
+  QPixmap canvas_;
 };
 
 #endif

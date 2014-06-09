@@ -29,8 +29,8 @@ class LibraryBackendInterface;
 class PlaylistParser : public QObject {
   Q_OBJECT
 
-public:
-  PlaylistParser(LibraryBackendInterface* library, QObject* parent = 0);
+ public:
+  PlaylistParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   static const int kMagicSize;
 
@@ -45,17 +45,18 @@ public:
   ParserBase* ParserForExtension(const QString& suffix) const;
 
   SongList LoadFromFile(const QString& filename) const;
-  SongList LoadFromDevice(QIODevice* device, const QString& path_hint = QString(),
+  SongList LoadFromDevice(QIODevice* device,
+                          const QString& path_hint = QString(),
                           const QDir& dir_hint = QDir()) const;
   void Save(const SongList& songs, const QString& filename) const;
 
-private:
+ private:
   QString FilterForParser(const ParserBase* parser,
-                          QStringList* all_extensions = NULL) const;
+                          QStringList* all_extensions = nullptr) const;
 
-private:
+ private:
   QList<ParserBase*> parsers_;
   ParserBase* default_parser_;
 };
 
-#endif // PLAYLISTPARSER_H
+#endif  // PLAYLISTPARSER_H

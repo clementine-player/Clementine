@@ -27,20 +27,20 @@ class Ui_BehaviourSettingsPage;
 class BehaviourSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   BehaviourSettingsPage(SettingsDialog* dialog);
   ~BehaviourSettingsPage();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void ShowTrayIconToggled(bool on);
 
-private:
+ private:
   Ui_BehaviourSettingsPage* ui_;
 
   QMap<QString, QString> language_map_;
 };
 
-#endif // BEHAVIOURSETTINGSPAGE_H
+#endif  // BEHAVIOURSETTINGSPAGE_H

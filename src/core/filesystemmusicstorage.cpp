@@ -17,23 +17,21 @@
 
 #include "filesystemmusicstorage.h"
 #include "core/logging.h"
+#include "core/utilities.h"
 
 #include <QDir>
 #include <QFile>
 #include <QUrl>
 
 FilesystemMusicStorage::FilesystemMusicStorage(const QString& root)
-  : root_(root)
-{
-}
+    : root_(root) {}
 
 bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
   const QFileInfo src = QFileInfo(job.source_);
-  const QFileInfo dest = QFileInfo(root_ + "/" + job.destination_ );
+  const QFileInfo dest = QFileInfo(root_ + "/" + job.destination_);
 
   // Don't do anything if the destination is the same as the source
-  if (src == dest)
-    return true;
+  if (src == dest) return true;
 
   // Create directories as required
   QDir dir;
@@ -43,8 +41,7 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
   }
 
   // Remove the destination file if it exists and we want to overwrite
-  if (job.overwrite_ && dest.exists())
-    QFile::remove(dest.absoluteFilePath());
+  if (job.overwrite_ && dest.exists()) QFile::remove(dest.absoluteFilePath());
 
   // Copy or move
   if (job.remove_original_)
@@ -54,5 +51,10 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
 }
 
 bool FilesystemMusicStorage::DeleteFromStorage(const DeleteJob& job) {
-  return QFile::remove(job.metadata_.url().toLocalFile());
+  QString path = job.metadata_.url().toLocalFile();
+  QFileInfo fileInfo(path);
+  if (fileInfo.isDir())
+    return Utilities::RemoveRecursive(path);
+  else
+    return QFile::remove(path);
 }

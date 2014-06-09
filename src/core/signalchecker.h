@@ -24,16 +24,14 @@
 #include <boost/typeof/typeof.hpp>
 
 // Do not call this directly, use CHECKED_GCONNECT instead.
-bool CheckedGConnect(
-    gpointer source,
-    const char* signal,
-    GCallback callback,
-    gpointer data,
-    const int callback_param_count);
+bool CheckedGConnect(gpointer source, const char* signal, GCallback callback,
+                     gpointer data, const int callback_param_count);
 
-#define FUNCTION_ARITY(callback) boost::function_types::function_arity<BOOST_TYPEOF(callback)>::value
+#define FUNCTION_ARITY(callback) \
+  boost::function_types::function_arity<BOOST_TYPEOF(callback)>::value
 
-#define CHECKED_GCONNECT(source, signal, callback, data) \
-    CheckedGConnect(source, signal, G_CALLBACK(callback), data, FUNCTION_ARITY(callback));
+#define CHECKED_GCONNECT(source, signal, callback, data)      \
+  CheckedGConnect(source, signal, G_CALLBACK(callback), data, \
+                  FUNCTION_ARITY(callback));
 
 #endif  // SIGNALCHECKER_H

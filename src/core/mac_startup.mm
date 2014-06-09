@@ -62,16 +62,17 @@
 
 #include <QtDebug>
 
-QDebug operator <<(QDebug dbg, NSObject* object) {
-  QString ns_format = [[NSString stringWithFormat: @"%@", object] UTF8String];
+QDebug operator<<(QDebug dbg, NSObject* object) {
+  QString ns_format = [[NSString stringWithFormat:@"%@", object] UTF8String];
   dbg.nospace() << ns_format;
   return dbg.space();
 }
 
 // Capture global media keys on Mac (Cocoa only!)
-// See: http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
+// See:
+// http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
 
-@interface MacApplication :NSApplication {
+@interface MacApplication : NSApplication {
   PlatformInterface* application_handler_;
   AppDelegate* delegate_;
   // shortcut_handler_ only used to temporarily save it
@@ -79,18 +80,16 @@ QDebug operator <<(QDebug dbg, NSObject* object) {
   MacGlobalShortcutBackend* shortcut_handler_;
 }
 
-- (MacGlobalShortcutBackend*) shortcut_handler;
-- (void) SetShortcutHandler: (MacGlobalShortcutBackend*)handler;
+- (MacGlobalShortcutBackend*)shortcut_handler;
+- (void)SetShortcutHandler:(MacGlobalShortcutBackend*)handler;
 
-- (PlatformInterface*) application_handler;
-- (void) SetApplicationHandler: (PlatformInterface*)handler;
+- (PlatformInterface*)application_handler;
+- (void)SetApplicationHandler:(PlatformInterface*)handler;
 
 @end
 
 #ifdef HAVE_BREAKPAD
-static bool BreakpadCallback(int, int, mach_port_t, void*) {
-  return true;
-}
+static bool BreakpadCallback(int, int, mach_port_t, void*) { return true; }
 
 static BreakpadRef InitBreakpad() {
   ScopedNSAutoreleasePool pool;
@@ -98,16 +97,16 @@ static BreakpadRef InitBreakpad() {
   NSDictionary* plist = [[NSBundle mainBundle] infoDictionary];
   if (plist) {
     breakpad = BreakpadCreate(plist);
-    BreakpadSetFilterCallback(breakpad, &BreakpadCallback, NULL);
+    BreakpadSetFilterCallback(breakpad, &BreakpadCallback, nullptr);
   }
   [pool release];
   return breakpad;
 }
-#endif // HAVE_BREAKPAD
+#endif  // HAVE_BREAKPAD
 
 @implementation AppDelegate
 
-- (id) init {
+- (id)init {
   if ((self = [super init])) {
     application_handler_ = nil;
     shortcut_handler_ = nil;
@@ -116,7 +115,7 @@ static BreakpadRef InitBreakpad() {
   return self;
 }
 
-- (id) initWithHandler: (PlatformInterface*)handler {
+- (id)initWithHandler:(PlatformInterface*)handler {
   application_handler_ = handler;
 
 #ifdef HAVE_BREAKPAD
@@ -124,45 +123,48 @@ static BreakpadRef InitBreakpad() {
 #endif
 
   // Register defaults for the whitelist of apps that want to use media keys
-  [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-     [SPMediaKeyTap defaultMediaKeyUserBundleIdentifiers], kMediaKeyUsingBundleIdentifiersDefaultsKey,
-      nil]];
+  [[NSUserDefaults standardUserDefaults]
+      registerDefaults:
+          [NSDictionary
+              dictionaryWithObjectsAndKeys:
+                  [SPMediaKeyTap defaultMediaKeyUserBundleIdentifiers],
+                  kMediaKeyUsingBundleIdentifiersDefaultsKey, nil]];
   return self;
 }
 
-- (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag {
+- (BOOL)applicationShouldHandleReopen:(NSApplication*)app
+                    hasVisibleWindows:(BOOL)flag {
   if (application_handler_) {
     application_handler_->Activate();
   }
   return YES;
 }
 
-- (void) setDockMenu: (NSMenu*)menu {
+- (void)setDockMenu:(NSMenu*)menu {
   dock_menu_ = menu;
 }
 
-- (NSMenu*) applicationDockMenu: (NSApplication*)sender {
+- (NSMenu*)applicationDockMenu:(NSApplication*)sender {
   return dock_menu_;
 }
 
-- (void) setShortcutHandler: (MacGlobalShortcutBackend*)backend {
+- (void)setShortcutHandler:(MacGlobalShortcutBackend*)backend {
   shortcut_handler_ = backend;
 }
 
-- (MacGlobalShortcutBackend*) shortcut_handler { 
+- (MacGlobalShortcutBackend*)shortcut_handler {
   return shortcut_handler_;
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void)applicationDidFinishLaunching:(NSNotification*)aNotification {
   key_tap_ = [[SPMediaKeyTap alloc] initWithDelegate:self];
-  if([SPMediaKeyTap usesGlobalMediaKeyTap])
+  if ([SPMediaKeyTap usesGlobalMediaKeyTap])
     [key_tap_ startWatchingMediaKeys];
   else
-    qLog(Warning)<<"Media key monitoring disabled";
-
+    qLog(Warning) << "Media key monitoring disabled";
 }
 
-- (BOOL) application: (NSApplication*)app openFile:(NSString*)filename {
+- (BOOL)application:(NSApplication*)app openFile:(NSString*)filename {
   qLog(Debug) << "Wants to open:" << [filename UTF8String];
 
   if (application_handler_->LoadUrl(QString::fromUtf8([filename UTF8String]))) {
@@ -172,15 +174,19 @@ static BreakpadRef InitBreakpad() {
   return NO;
 }
 
-- (void) application: (NSApplication*)app openFiles:(NSArray*)filenames {
+- (void)application:(NSApplication*)app openFiles:(NSArray*)filenames {
   qLog(Debug) << "Wants to open:" << filenames;
-  [filenames enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL* stop) {
-    [self application:app openFile:(NSString*)object];
-  }];
+  [filenames
+      enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL* stop) {
+          [self application:app openFile:(NSString*)object];
+      }];
 }
 
-- (void) mediaKeyTap: (SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event {
-  NSAssert([event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys, @"Unexpected NSEvent in mediaKeyTap:receivedMediaKeyEvent:");
+- (void)mediaKeyTap:(SPMediaKeyTap*)keyTap
+    receivedMediaKeyEvent:(NSEvent*)event {
+  NSAssert([event type] == NSSystemDefined &&
+               [event subtype] == SPSystemDefinedEventMediaKeys,
+           @"Unexpected NSEvent in mediaKeyTap:receivedMediaKeyEvent:");
 
   int key_code = (([event data1] & 0xFFFF0000) >> 16);
   int key_flags = ([event data1] & 0x0000FFFF);
@@ -196,14 +202,16 @@ static BreakpadRef InitBreakpad() {
   }
 }
 
-- (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication*) sender {
+- (NSApplicationTerminateReply)applicationShouldTerminate:
+                                   (NSApplication*)sender {
 #ifdef HAVE_BREAKPAD
   BreakpadRelease(breakpad_);
 #endif
   return NSTerminateNow;
 }
 
-- (BOOL) userNotificationCenter: (id)center shouldPresentNotification: (id)notification {
+- (BOOL)userNotificationCenter:(id)center
+     shouldPresentNotification:(id)notification {
   // Always show notifications, even if Clementine is in the foreground.
   return YES;
 }
@@ -212,51 +220,54 @@ static BreakpadRef InitBreakpad() {
 
 @implementation MacApplication
 
-- (id) init {
+- (id)init {
   if ((self = [super init])) {
     [self SetShortcutHandler:nil];
   }
   return self;
 }
 
-- (MacGlobalShortcutBackend*) shortcut_handler {
+- (MacGlobalShortcutBackend*)shortcut_handler {
   // should be the same as delegate_'s shortcut handler
   return shortcut_handler_;
 }
 
-- (void) SetShortcutHandler: (MacGlobalShortcutBackend*)handler {
+- (void)SetShortcutHandler:(MacGlobalShortcutBackend*)handler {
   shortcut_handler_ = handler;
-  if(delegate_)
-    [delegate_ setShortcutHandler:handler];
+  if (delegate_) [delegate_ setShortcutHandler:handler];
 }
 
-- (PlatformInterface*) application_handler {
+- (PlatformInterface*)application_handler {
   return application_handler_;
 }
 
-- (void) SetApplicationHandler: (PlatformInterface*)handler {
+- (void)SetApplicationHandler:(PlatformInterface*)handler {
   delegate_ = [[AppDelegate alloc] initWithHandler:handler];
   // App-shortcut-handler set before delegate is set.
   // this makes sure the delegate's shortcut_handler is set
   [delegate_ setShortcutHandler:shortcut_handler_];
   [self setDelegate:delegate_];
 
-  Class notification_center_class = NSClassFromString(@"NSUserNotificationCenter");
+  Class notification_center_class =
+      NSClassFromString(@"NSUserNotificationCenter");
   if (notification_center_class) {
-    id notification_center = [notification_center_class defaultUserNotificationCenter];
-    [notification_center setDelegate: delegate_];
+    id notification_center =
+        [notification_center_class defaultUserNotificationCenter];
+    [notification_center setDelegate:delegate_];
   }
 }
 
--(void) sendEvent: (NSEvent*)event {
+- (void)sendEvent:(NSEvent*)event {
   // If event tap is not installed, handle events that reach the app instead
-  BOOL shouldHandleMediaKeyEventLocally = ![SPMediaKeyTap usesGlobalMediaKeyTap];
+  BOOL shouldHandleMediaKeyEventLocally =
+      ![SPMediaKeyTap usesGlobalMediaKeyTap];
 
-  if(shouldHandleMediaKeyEventLocally && [event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys) {
-    [(id)[self delegate] mediaKeyTap: nil receivedMediaKeyEvent: event];
+  if (shouldHandleMediaKeyEventLocally && [event type] == NSSystemDefined &&
+      [event subtype] == SPSystemDefinedEventMediaKeys) {
+    [(id)[self delegate] mediaKeyTap:nil receivedMediaKeyEvent:event];
   }
 
-  [super sendEvent: event];
+  [super sendEvent:event];
 }
 
 @end
@@ -267,30 +278,33 @@ void MacMain() {
   ScopedNSAutoreleasePool pool;
   // Creates and sets the magic global variable so QApplication will find it.
   [MacApplication sharedApplication];
-  #ifdef HAVE_SPARKLE
-    // Creates and sets the magic global variable for Sparkle.
-    [[SUUpdater sharedUpdater] setDelegate: NSApp];
-  #endif
+#ifdef HAVE_SPARKLE
+  // Creates and sets the magic global variable for Sparkle.
+  [[SUUpdater sharedUpdater] setDelegate:NSApp];
+#endif
 }
 
 void SetShortcutHandler(MacGlobalShortcutBackend* handler) {
-  [NSApp SetShortcutHandler: handler];
+  [NSApp SetShortcutHandler:handler];
 }
 
 void SetApplicationHandler(PlatformInterface* handler) {
-  [NSApp SetApplicationHandler: handler];
+  [NSApp SetApplicationHandler:handler];
 }
 
 void CheckForUpdates() {
-  #ifdef HAVE_SPARKLE
-  [[SUUpdater sharedUpdater] checkForUpdates: NSApp];
-  #endif
+#ifdef HAVE_SPARKLE
+  [[SUUpdater sharedUpdater] checkForUpdates:NSApp];
+#endif
 }
 
 QString GetBundlePath() {
-  ScopedCFTypeRef<CFURLRef> app_url(CFBundleCopyBundleURL(CFBundleGetMainBundle()));
-  ScopedCFTypeRef<CFStringRef> mac_path(CFURLCopyFileSystemPath(app_url.get(), kCFURLPOSIXPathStyle));
-  const char* path = CFStringGetCStringPtr(mac_path.get(), CFStringGetSystemEncoding());
+  ScopedCFTypeRef<CFURLRef> app_url(
+      CFBundleCopyBundleURL(CFBundleGetMainBundle()));
+  ScopedCFTypeRef<CFStringRef> mac_path(
+      CFURLCopyFileSystemPath(app_url.get(), kCFURLPOSIXPathStyle));
+  const char* path =
+      CFStringGetCStringPtr(mac_path.get(), CFStringGetSystemEncoding());
   QString bundle_path = QString::fromUtf8(path);
   return bundle_path;
 }
@@ -303,9 +317,7 @@ QString GetResourcesPath() {
 QString GetApplicationSupportPath() {
   ScopedNSAutoreleasePool pool;
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
-      NSApplicationSupportDirectory,
-      NSUserDomainMask,
-      YES);
+      NSApplicationSupportDirectory, NSUserDomainMask, YES);
   QString ret;
   if ([paths count] > 0) {
     NSString* user_path = [paths objectAtIndex:0];
@@ -318,10 +330,8 @@ QString GetApplicationSupportPath() {
 
 QString GetMusicDirectory() {
   ScopedNSAutoreleasePool pool;
-  NSArray* paths = NSSearchPathForDirectoriesInDomains(
-      NSMusicDirectory,
-      NSUserDomainMask,
-      YES);
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory,
+                                                       NSUserDomainMask, YES);
   QString ret;
   if ([paths count] > 0) {
     NSString* user_path = [paths objectAtIndex:0];
@@ -335,57 +345,108 @@ QString GetMusicDirectory() {
 static int MapFunctionKey(int keycode) {
   switch (keycode) {
     // Function keys
-    case NSInsertFunctionKey: return Qt::Key_Insert;
-    case NSDeleteFunctionKey: return Qt::Key_Delete;
-    case NSPauseFunctionKey: return Qt::Key_Pause;
-    case NSPrintFunctionKey: return Qt::Key_Print;
-    case NSSysReqFunctionKey: return Qt::Key_SysReq;
-    case NSHomeFunctionKey: return Qt::Key_Home;
-    case NSEndFunctionKey: return Qt::Key_End;
-    case NSLeftArrowFunctionKey: return Qt::Key_Left;
-    case NSUpArrowFunctionKey: return Qt::Key_Up;
-    case NSRightArrowFunctionKey: return Qt::Key_Right;
-    case NSDownArrowFunctionKey: return Qt::Key_Down;
-    case NSPageUpFunctionKey: return Qt::Key_PageUp;
-    case NSPageDownFunctionKey: return Qt::Key_PageDown;
-    case NSScrollLockFunctionKey: return Qt::Key_ScrollLock;
-    case NSF1FunctionKey: return Qt::Key_F1;
-    case NSF2FunctionKey: return Qt::Key_F2;
-    case NSF3FunctionKey: return Qt::Key_F3;
-    case NSF4FunctionKey: return Qt::Key_F4;
-    case NSF5FunctionKey: return Qt::Key_F5;
-    case NSF6FunctionKey: return Qt::Key_F6;
-    case NSF7FunctionKey: return Qt::Key_F7;
-    case NSF8FunctionKey: return Qt::Key_F8;
-    case NSF9FunctionKey: return Qt::Key_F9;
-    case NSF10FunctionKey: return Qt::Key_F10;
-    case NSF11FunctionKey: return Qt::Key_F11;
-    case NSF12FunctionKey: return Qt::Key_F12;
-    case NSF13FunctionKey: return Qt::Key_F13;
-    case NSF14FunctionKey: return Qt::Key_F14;
-    case NSF15FunctionKey: return Qt::Key_F15;
-    case NSF16FunctionKey: return Qt::Key_F16;
-    case NSF17FunctionKey: return Qt::Key_F17;
-    case NSF18FunctionKey: return Qt::Key_F18;
-    case NSF19FunctionKey: return Qt::Key_F19;
-    case NSF20FunctionKey: return Qt::Key_F20;
-    case NSF21FunctionKey: return Qt::Key_F21;
-    case NSF22FunctionKey: return Qt::Key_F22;
-    case NSF23FunctionKey: return Qt::Key_F23;
-    case NSF24FunctionKey: return Qt::Key_F24;
-    case NSF25FunctionKey: return Qt::Key_F25;
-    case NSF26FunctionKey: return Qt::Key_F26;
-    case NSF27FunctionKey: return Qt::Key_F27;
-    case NSF28FunctionKey: return Qt::Key_F28;
-    case NSF29FunctionKey: return Qt::Key_F29;
-    case NSF30FunctionKey: return Qt::Key_F30;
-    case NSF31FunctionKey: return Qt::Key_F31;
-    case NSF32FunctionKey: return Qt::Key_F32;
-    case NSF33FunctionKey: return Qt::Key_F33;
-    case NSF34FunctionKey: return Qt::Key_F34;
-    case NSF35FunctionKey: return Qt::Key_F35;
-    case NSMenuFunctionKey: return Qt::Key_Menu;
-    case NSHelpFunctionKey: return Qt::Key_Help;
+    case NSInsertFunctionKey:
+      return Qt::Key_Insert;
+    case NSDeleteFunctionKey:
+      return Qt::Key_Delete;
+    case NSPauseFunctionKey:
+      return Qt::Key_Pause;
+    case NSPrintFunctionKey:
+      return Qt::Key_Print;
+    case NSSysReqFunctionKey:
+      return Qt::Key_SysReq;
+    case NSHomeFunctionKey:
+      return Qt::Key_Home;
+    case NSEndFunctionKey:
+      return Qt::Key_End;
+    case NSLeftArrowFunctionKey:
+      return Qt::Key_Left;
+    case NSUpArrowFunctionKey:
+      return Qt::Key_Up;
+    case NSRightArrowFunctionKey:
+      return Qt::Key_Right;
+    case NSDownArrowFunctionKey:
+      return Qt::Key_Down;
+    case NSPageUpFunctionKey:
+      return Qt::Key_PageUp;
+    case NSPageDownFunctionKey:
+      return Qt::Key_PageDown;
+    case NSScrollLockFunctionKey:
+      return Qt::Key_ScrollLock;
+    case NSF1FunctionKey:
+      return Qt::Key_F1;
+    case NSF2FunctionKey:
+      return Qt::Key_F2;
+    case NSF3FunctionKey:
+      return Qt::Key_F3;
+    case NSF4FunctionKey:
+      return Qt::Key_F4;
+    case NSF5FunctionKey:
+      return Qt::Key_F5;
+    case NSF6FunctionKey:
+      return Qt::Key_F6;
+    case NSF7FunctionKey:
+      return Qt::Key_F7;
+    case NSF8FunctionKey:
+      return Qt::Key_F8;
+    case NSF9FunctionKey:
+      return Qt::Key_F9;
+    case NSF10FunctionKey:
+      return Qt::Key_F10;
+    case NSF11FunctionKey:
+      return Qt::Key_F11;
+    case NSF12FunctionKey:
+      return Qt::Key_F12;
+    case NSF13FunctionKey:
+      return Qt::Key_F13;
+    case NSF14FunctionKey:
+      return Qt::Key_F14;
+    case NSF15FunctionKey:
+      return Qt::Key_F15;
+    case NSF16FunctionKey:
+      return Qt::Key_F16;
+    case NSF17FunctionKey:
+      return Qt::Key_F17;
+    case NSF18FunctionKey:
+      return Qt::Key_F18;
+    case NSF19FunctionKey:
+      return Qt::Key_F19;
+    case NSF20FunctionKey:
+      return Qt::Key_F20;
+    case NSF21FunctionKey:
+      return Qt::Key_F21;
+    case NSF22FunctionKey:
+      return Qt::Key_F22;
+    case NSF23FunctionKey:
+      return Qt::Key_F23;
+    case NSF24FunctionKey:
+      return Qt::Key_F24;
+    case NSF25FunctionKey:
+      return Qt::Key_F25;
+    case NSF26FunctionKey:
+      return Qt::Key_F26;
+    case NSF27FunctionKey:
+      return Qt::Key_F27;
+    case NSF28FunctionKey:
+      return Qt::Key_F28;
+    case NSF29FunctionKey:
+      return Qt::Key_F29;
+    case NSF30FunctionKey:
+      return Qt::Key_F30;
+    case NSF31FunctionKey:
+      return Qt::Key_F31;
+    case NSF32FunctionKey:
+      return Qt::Key_F32;
+    case NSF33FunctionKey:
+      return Qt::Key_F33;
+    case NSF34FunctionKey:
+      return Qt::Key_F34;
+    case NSF35FunctionKey:
+      return Qt::Key_F35;
+    case NSMenuFunctionKey:
+      return Qt::Key_Menu;
+    case NSHelpFunctionKey:
+      return Qt::Key_Help;
   }
 
   return 0;
@@ -399,11 +460,21 @@ QKeySequence KeySequenceFromNSEvent(NSEvent* event) {
   int key = 0;
   unsigned char c = chars[0];
   switch (c) {
-    case 0x1b: key = Qt::Key_Escape; break;
-    case 0x09: key = Qt::Key_Tab; break;
-    case 0x0d: key = Qt::Key_Return; break;
-    case 0x08: key = Qt::Key_Backspace; break;
-    case 0x03: key = Qt::Key_Enter; break;
+    case 0x1b:
+      key = Qt::Key_Escape;
+      break;
+    case 0x09:
+      key = Qt::Key_Tab;
+      break;
+    case 0x0d:
+      key = Qt::Key_Return;
+      break;
+    case 0x08:
+      key = Qt::Key_Backspace;
+      break;
+    case 0x03:
+      key = Qt::Key_Enter;
+      break;
   }
 
   if (key == 0) {
@@ -448,12 +519,12 @@ void EnableFullScreen(const QWidget& main_window) {
 
   NSView* view = reinterpret_cast<NSView*>(main_window.winId());
   NSWindow* window = [view window];
-  [window setCollectionBehavior: kFullScreenPrimary];
+  [window setCollectionBehavior:kFullScreenPrimary];
 }
 
 float GetDevicePixelRatio(QWidget* widget) {
   NSView* view = reinterpret_cast<NSView*>(widget->winId());
-  if ([[view window] respondsToSelector: @selector(backingScaleFactor)]) {
+  if ([[view window] respondsToSelector:@selector(backingScaleFactor)]) {
     return [[view window] backingScaleFactor];
   }
   return 1.0f;

@@ -27,7 +27,7 @@
 class SongInfoProvider : public QObject {
   Q_OBJECT
 
-public:
+ public:
   SongInfoProvider();
 
   virtual void FetchInfo(int id, const Song& metadata) = 0;
@@ -43,8 +43,8 @@ signals:
   void InfoReady(int id, const CollapsibleInfoPane::Data& data);
   void Finished(int id);
 
-private:
+ private:
   bool enabled_;
 };
 
-#endif // SONGINFOPROVIDER_H
+#endif  // SONGINFOPROVIDER_H

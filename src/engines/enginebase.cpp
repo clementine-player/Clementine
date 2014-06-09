@@ -15,9 +15,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Copyright: (C) 2003 Mark Kretschmann
+// Copyright: (C) 2003 Mark Kretschmann
 //           (C) 2004,2005 Max Howell, <max.howell@methylblue.com>
-//License:   See COPYING
+// License:   See COPYING
 
 #include "enginebase.h"
 #include "core/timeconstants.h"
@@ -29,26 +29,23 @@
 const char* Engine::Base::kSettingsGroup = "Player";
 
 Engine::Base::Base()
-  : volume_(50),
-    beginning_nanosec_(0),
-    end_nanosec_(0),
-    scope_(kScopeSize),
-    fadeout_enabled_(true),
-    fadeout_duration_nanosec_(2 * kNsecPerSec), // 2s
-    crossfade_enabled_(true),
-    autocrossfade_enabled_(false),
-    crossfade_same_album_(false),
-    next_background_stream_id_(0),
-    about_to_end_emitted_(false)
-{
-}
+    : volume_(50),
+      beginning_nanosec_(0),
+      end_nanosec_(0),
+      scope_(kScopeSize),
+      fadeout_enabled_(true),
+      fadeout_duration_nanosec_(2 * kNsecPerSec),  // 2s
+      crossfade_enabled_(true),
+      autocrossfade_enabled_(false),
+      crossfade_same_album_(false),
+      next_background_stream_id_(0),
+      about_to_end_emitted_(false) {}
 
-Engine::Base::~Base() {
-}
+Engine::Base::~Base() {}
 
 bool Engine::Base::Load(const QUrl& url, TrackChangeFlags,
-                        bool force_stop_at_end,
-                        quint64 beginning_nanosec, qint64 end_nanosec) {
+                        bool force_stop_at_end, quint64 beginning_nanosec,
+                        qint64 end_nanosec) {
   Q_UNUSED(force_stop_at_end);
 
   url_ = url;
@@ -67,7 +64,8 @@ void Engine::Base::SetVolume(uint value) {
 
 uint Engine::Base::MakeVolumeLogarithmic(uint volume) {
   // We're using a logarithmic function to make the volume ramp more natural.
-  return static_cast<uint>( 100 - 100.0 * std::log10( ( 100 - volume ) * 0.09 + 1.0 ) );
+  return static_cast<uint>(100 -
+                           100.0 * std::log10((100 - volume) * 0.09 + 1.0));
 }
 
 void Engine::Base::ReloadSettings() {
@@ -75,29 +73,28 @@ void Engine::Base::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   fadeout_enabled_ = s.value("FadeoutEnabled", true).toBool();
-  fadeout_duration_nanosec_ = s.value("FadeoutDuration", 2000).toLongLong() * kNsecPerMsec;
+  fadeout_duration_nanosec_ =
+      s.value("FadeoutDuration", 2000).toLongLong() * kNsecPerMsec;
   crossfade_enabled_ = s.value("CrossfadeEnabled", true).toBool();
   autocrossfade_enabled_ = s.value("AutoCrossfadeEnabled", false).toBool();
   crossfade_same_album_ = !s.value("NoCrossfadeSameAlbum", true).toBool();
   fadeout_pause_enabled_ = s.value("FadeoutPauseEnabled", false).toBool();
-  fadeout_pause_duration_nanosec_ = s.value("FadeoutPauseDuration", 250).toLongLong() * kNsecPerMsec;
+  fadeout_pause_duration_nanosec_ =
+      s.value("FadeoutPauseDuration", 250).toLongLong() * kNsecPerMsec;
 }
 
 void Engine::Base::EmitAboutToEnd() {
-  if (about_to_end_emitted_)
-    return;
+  if (about_to_end_emitted_) return;
 
   about_to_end_emitted_ = true;
   emit TrackAboutToEnd();
 }
 
-int Engine::Base::AddBackgroundStream(const QUrl& url) {
-  return -1;
-}
+int Engine::Base::AddBackgroundStream(const QUrl& url) { return -1; }
 
 bool Engine::Base::Play(const QUrl& u, TrackChangeFlags c,
-                        bool force_stop_at_end,
-                        quint64 beginning_nanosec, qint64 end_nanosec) {
+                        bool force_stop_at_end, quint64 beginning_nanosec,
+                        qint64 end_nanosec) {
   if (!Load(u, c, force_stop_at_end, beginning_nanosec, end_nanosec))
     return false;
 

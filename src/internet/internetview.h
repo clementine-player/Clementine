@@ -24,17 +24,17 @@ class InternetView : public AutoExpandingTreeView {
   Q_OBJECT
 
  public:
-  InternetView(QWidget* parent = 0);
+  InternetView(QWidget* parent = nullptr);
 
   // QWidget
   void contextMenuEvent(QContextMenuEvent* e);
 
   // QTreeView
-  void currentChanged(const QModelIndex &current, const QModelIndex &previous);
-  void setModel(QAbstractItemModel *model);
+  void currentChanged(const QModelIndex& current, const QModelIndex& previous);
+  void setModel(QAbstractItemModel* model);
 
- signals:
+signals:
   void CurrentIndexChanged(const QModelIndex& index);
 };
 
-#endif // INTERNETVIEW_H
+#endif  // INTERNETVIEW_H

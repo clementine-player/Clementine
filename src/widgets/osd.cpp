@@ -24,7 +24,7 @@
 #include "ui/systemtrayicon.h"
 
 #ifdef HAVE_DBUS
-# include "dbus/notification.h"
+#include "dbus/notification.h"
 #endif
 
 #include <QCoreApplication>
@@ -34,32 +34,30 @@
 const char* OSD::kSettingsGroup = "OSD";
 
 OSD::OSD(SystemTrayIcon* tray_icon, Application* app, QObject* parent)
-  : QObject(parent),
-    tray_icon_(tray_icon),
-    app_(app),
-    timeout_msec_(5000),
-    behaviour_(Native),
-    show_on_volume_change_(false),
-    show_art_(true),
-    show_on_play_mode_change_(true),
-    use_custom_text_(false),
-    custom_text1_(QString()),
-    custom_text2_(QString()),
-    preview_mode_(false),
-    force_show_next_(false),
-    ignore_next_stopped_(false),
-    pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup))
-{
-  connect(app_->current_art_loader(), SIGNAL(ThumbnailLoaded(Song,QString,QImage)),
-          SLOT(AlbumArtLoaded(Song,QString,QImage)));
+    : QObject(parent),
+      tray_icon_(tray_icon),
+      app_(app),
+      timeout_msec_(5000),
+      behaviour_(Native),
+      show_on_volume_change_(false),
+      show_art_(true),
+      show_on_play_mode_change_(true),
+      use_custom_text_(false),
+      custom_text1_(QString()),
+      custom_text2_(QString()),
+      preview_mode_(false),
+      force_show_next_(false),
+      ignore_next_stopped_(false),
+      pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup)) {
+  connect(app_->current_art_loader(),
+          SIGNAL(ThumbnailLoaded(Song, QString, QImage)),
+          SLOT(AlbumArtLoaded(Song, QString, QImage)));
 
   ReloadSettings();
   Init();
 }
 
-OSD::~OSD() {
-  delete pretty_popup_;
-}
+OSD::~OSD() { delete pretty_popup_; }
 
 void OSD::ReloadSettings() {
   QSettings s;
@@ -75,8 +73,7 @@ void OSD::ReloadSettings() {
 
   if (!SupportsNativeNotifications() && behaviour_ == Native)
     behaviour_ = Pretty;
-  if (!SupportsTrayPopups() && behaviour_ == TrayPopup)
-    behaviour_ = Disabled;
+  if (!SupportsTrayPopups() && behaviour_ == TrayPopup) behaviour_ = Disabled;
 
   ReloadPrettyOSDSettings();
 }
@@ -92,7 +89,8 @@ void OSD::ReshowCurrentSong() {
   AlbumArtLoaded(last_song_, last_image_uri_, last_image_);
 }
 
-void OSD::AlbumArtLoaded(const Song& song, const QString& uri, const QImage& image) {
+void OSD::AlbumArtLoaded(const Song& song, const QString& uri,
+                         const QImage& image) {
   // Don't change tray icon details if it's a preview
   if (!preview_mode_) {
     tray_icon_->SetNowPlaying(song, uri);
@@ -108,12 +106,9 @@ void OSD::AlbumArtLoaded(const Song& song, const QString& uri, const QImage& ima
     summary = song.PrettyTitle();
     if (!song.artist().isEmpty())
       summary = QString("%1 - %2").arg(song.artist(), summary);
-    if (!song.album().isEmpty())
-      message_parts << song.album();
-    if (song.disc() > 0)
-      message_parts << tr("disc %1").arg(song.disc());
-    if (song.track() > 0)
-      message_parts << tr("track %1").arg(song.track());
+    if (!song.album().isEmpty()) message_parts << song.album();
+    if (song.disc() > 0) message_parts << tr("disc %1").arg(song.disc());
+    if (song.track() > 0) message_parts << tr("track %1").arg(song.track());
   } else {
     QRegExp variable_replacer("[%][a-z]+[%]");
     summary = custom_text1_;
@@ -140,9 +135,11 @@ void OSD::AlbumArtLoaded(const Song& song, const QString& uri, const QImage& ima
   }
 
   if (show_art_) {
-    ShowMessage(summary, message_parts.join(", "), "notification-audio-play", image);
+    ShowMessage(summary, message_parts.join(", "), "notification-audio-play",
+                image);
   } else {
-    ShowMessage(summary, message_parts.join(", "), "notification-audio-play", QImage());
+    ShowMessage(summary, message_parts.join(", "), "notification-audio-play",
+                QImage());
   }
 
   // Reload the saved settings if they were changed for preview
@@ -167,8 +164,9 @@ void OSD::Stopped() {
 }
 
 void OSD::StopAfterToggle(bool stop) {
-  ShowMessage(QCoreApplication::applicationName(), 
-              tr("Stop playing after track: %1").arg(stop ? tr("On") : tr("Off")));
+  ShowMessage(
+      QCoreApplication::applicationName(),
+      tr("Stop playing after track: %1").arg(stop ? tr("On") : tr("Off")));
 }
 
 void OSD::PlaylistFinished() {
@@ -179,8 +177,7 @@ void OSD::PlaylistFinished() {
 }
 
 void OSD::VolumeChanged(int value) {
-  if (!show_on_volume_change_)
-    return;
+  if (!show_on_volume_change_) return;
 
   ShowMessage(QCoreApplication::applicationName(), tr("Volume %1%").arg(value));
 }
@@ -196,39 +193,36 @@ void OSD::MagnatuneDownloadFinished(const QStringList& albums) {
               QImage(":/providers/magnatune.png"));
 }
 
-void OSD::ShowMessage(const QString& summary,
-                      const QString& message,
-                      const QString& icon,
-                      const QImage& image) {
+void OSD::ShowMessage(const QString& summary, const QString& message,
+                      const QString& icon, const QImage& image) {
   if (pretty_popup_->toggle_mode()) {
     pretty_popup_->ShowMessage(summary, message, image);
   } else {
     switch (behaviour_) {
-    case Native:
-      if (image.isNull()) {
-        ShowMessageNative(summary, message, icon, QImage());
-      } else {
-        ShowMessageNative(summary, message, QString(), image);
-      }
-      break;
+      case Native:
+        if (image.isNull()) {
+          ShowMessageNative(summary, message, icon, QImage());
+        } else {
+          ShowMessageNative(summary, message, QString(), image);
+        }
+        break;
 
 #ifndef Q_OS_DARWIN
-    case TrayPopup:
-      tray_icon_->ShowPopup(summary, message, timeout_msec_);
-      break;
+      case TrayPopup:
+        tray_icon_->ShowPopup(summary, message, timeout_msec_);
+        break;
 #endif
 
-    case Disabled:
-      if (!force_show_next_)
-        break;
-      force_show_next_ = false;
+      case Disabled:
+        if (!force_show_next_) break;
+        force_show_next_ = false;
       // fallthrough
-    case Pretty:
-      pretty_popup_->ShowMessage(summary, message, image);
-      break;
+      case Pretty:
+        pretty_popup_->ShowMessage(summary, message, image);
+        break;
 
-    default:
-      break;
+      default:
+        break;
     }
   }
 }
@@ -240,33 +234,41 @@ void OSD::CallFinished(QDBusPendingCallWatcher*) {}
 #ifdef HAVE_WIIMOTEDEV
 
 void OSD::WiiremoteActived(int id) {
-  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+  ShowMessage(QString(tr("%1: Wiimotedev module"))
+                  .arg(QCoreApplication::applicationName()),
               tr("Wii Remote %1: actived").arg(QString::number(id)));
 }
 
 void OSD::WiiremoteDeactived(int id) {
-  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+  ShowMessage(QString(tr("%1: Wiimotedev module"))
+                  .arg(QCoreApplication::applicationName()),
               tr("Wii Remote %1: disactived").arg(QString::number(id)));
 }
 
 void OSD::WiiremoteConnected(int id) {
-  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+  ShowMessage(QString(tr("%1: Wiimotedev module"))
+                  .arg(QCoreApplication::applicationName()),
               tr("Wii Remote %1: connected").arg(QString::number(id)));
 }
 
 void OSD::WiiremoteDisconnected(int id) {
-  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+  ShowMessage(QString(tr("%1: Wiimotedev module"))
+                  .arg(QCoreApplication::applicationName()),
               tr("Wii Remote %1: disconnected").arg(QString::number(id)));
 }
 
 void OSD::WiiremoteLowBattery(int id, int live) {
-  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
-              tr("Wii Remote %1: low battery (%2%)").arg(QString::number(id), QString::number(live)));
+  ShowMessage(QString(tr("%1: Wiimotedev module"))
+                  .arg(QCoreApplication::applicationName()),
+              tr("Wii Remote %1: low battery (%2%)")
+                  .arg(QString::number(id), QString::number(live)));
 }
 
 void OSD::WiiremoteCriticalBattery(int id, int live) {
-  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
-              tr("Wii Remote %1: critical battery (%2%) ").arg(QString::number(id), QString::number(live)));
+  ShowMessage(QString(tr("%1: Wiimotedev module"))
+                  .arg(QCoreApplication::applicationName()),
+              tr("Wii Remote %1: critical battery (%2%) ")
+                  .arg(QString::number(id), QString::number(live)));
 }
 
 #endif
@@ -275,10 +277,18 @@ void OSD::ShuffleModeChanged(PlaylistSequence::ShuffleMode mode) {
   if (show_on_play_mode_change_) {
     QString current_mode = QString();
     switch (mode) {
-      case PlaylistSequence::Shuffle_Off:         current_mode = tr("Don't shuffle");   break;
-      case PlaylistSequence::Shuffle_All:         current_mode = tr("Shuffle all");     break;
-      case PlaylistSequence::Shuffle_InsideAlbum: current_mode = tr("Shuffle tracks in this album"); break;
-      case PlaylistSequence::Shuffle_Albums:      current_mode = tr("Shuffle albums");  break;
+      case PlaylistSequence::Shuffle_Off:
+        current_mode = tr("Don't shuffle");
+        break;
+      case PlaylistSequence::Shuffle_All:
+        current_mode = tr("Shuffle all");
+        break;
+      case PlaylistSequence::Shuffle_InsideAlbum:
+        current_mode = tr("Shuffle tracks in this album");
+        break;
+      case PlaylistSequence::Shuffle_Albums:
+        current_mode = tr("Shuffle albums");
+        break;
     }
     ShowMessage(QCoreApplication::applicationName(), current_mode);
   }
@@ -288,10 +298,18 @@ void OSD::RepeatModeChanged(PlaylistSequence::RepeatMode mode) {
   if (show_on_play_mode_change_) {
     QString current_mode = QString();
     switch (mode) {
-      case PlaylistSequence::Repeat_Off:      current_mode = tr("Don't repeat");   break;
-      case PlaylistSequence::Repeat_Track:    current_mode = tr("Repeat track");   break;
-      case PlaylistSequence::Repeat_Album:    current_mode = tr("Repeat album"); break;
-      case PlaylistSequence::Repeat_Playlist: current_mode = tr("Repeat playlist"); break;
+      case PlaylistSequence::Repeat_Off:
+        current_mode = tr("Don't repeat");
+        break;
+      case PlaylistSequence::Repeat_Track:
+        current_mode = tr("Repeat track");
+        break;
+      case PlaylistSequence::Repeat_Album:
+        current_mode = tr("Repeat album");
+        break;
+      case PlaylistSequence::Repeat_Playlist:
+        current_mode = tr("Repeat playlist");
+        break;
     }
     ShowMessage(QCoreApplication::applicationName(), current_mode);
   }
@@ -345,7 +363,8 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
 #endif
 #ifdef Q_OS_WIN32
         // Other OS don't support native notifications
-        qLog(Debug) << "New line not supported by this notification type under Windows";
+        qLog(Debug)
+            << "New line not supported by this notification type under Windows";
         return "";
 #endif
       case TrayPopup:
@@ -358,18 +377,19 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
     }
   }
 
-  //if the variable is not recognized, just return it
+  // if the variable is not recognized, just return it
   return variable;
 }
 
-void OSD::ShowPreview(const Behaviour type, const QString& line1, const QString& line2, const Song& song) {
+void OSD::ShowPreview(const Behaviour type, const QString& line1,
+                      const QString& line2, const Song& song) {
   behaviour_ = type;
   custom_text1_ = line1;
   custom_text2_ = line2;
-  if (!use_custom_text_)
-    use_custom_text_ = true;
+  if (!use_custom_text_) use_custom_text_ = true;
 
-  // We want to reload the settings, but we can't do this here because the cover art loading is asynch
+  // We want to reload the settings, but we can't do this here because the cover
+  // art loading is asynch
   preview_mode_ = true;
   AlbumArtLoaded(song, QString(), QImage());
 }

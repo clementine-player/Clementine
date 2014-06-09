@@ -25,11 +25,10 @@
 #include "internet/lastfmcompat.h"
 
 LastFmCoverProvider::LastFmCoverProvider(QObject* parent)
-  : CoverProvider("last.fm", parent)
-{
-}
+    : CoverProvider("last.fm", parent) {}
 
-bool LastFmCoverProvider::StartSearch(const QString& artist, const QString& album, int id) {
+bool LastFmCoverProvider::StartSearch(const QString& artist,
+                                      const QString& album, int id) {
   QMap<QString, QString> params;
   params["method"] = "album.search";
   params["album"] = album + " " + artist;
@@ -49,11 +48,13 @@ void LastFmCoverProvider::QueryFinished(QNetworkReply* reply, int id) {
   lastfm::XmlQuery query(lastfm::compat::EmptyXmlQuery());
   if (lastfm::compat::ParseQuery(reply->readAll(), &query)) {
     // parse the list of search results
-    QList<lastfm::XmlQuery> elements = query["results"]["albummatches"].children("album");
+    QList<lastfm::XmlQuery> elements =
+        query["results"]["albummatches"].children("album");
 
-    foreach (const lastfm::XmlQuery& element, elements) {
+    for (const lastfm::XmlQuery& element : elements) {
       CoverSearchResult result;
-      result.description = element["artist"].text() + " - " + element["name"].text();
+      result.description =
+          element["artist"].text() + " - " + element["name"].text();
       result.image_url = QUrl(element["image size=extralarge"].text());
       results << result;
     }

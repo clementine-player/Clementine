@@ -22,6 +22,7 @@
 #include "internetservice.h"
 
 class NetworkAccessManager;
+class OAuthenticator;
 class SearchBoxWidget;
 
 class QMenu;
@@ -30,17 +31,21 @@ class QNetworkReply;
 class SoundCloudService : public InternetService {
   Q_OBJECT
  public:
-  SoundCloudService(Application* app, InternetModel *parent);
+  SoundCloudService(Application* app, InternetModel* parent);
   ~SoundCloudService();
 
   // Internet Service methods
   QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem *parent);
+  void LazyPopulate(QStandardItem* parent);
 
   // TODO
-  //QList<QAction*> playlistitem_actions(const Song& song);
+  // QList<QAction*> playlistitem_actions(const Song& song);
   void ShowContextMenu(const QPoint& global_pos);
   QWidget* HeaderWidget() const;
+
+  void Connect();
+  bool IsLoggedIn();
+  void Logout();
 
   int SimpleSearch(const QString& query);
 
@@ -49,8 +54,17 @@ class SoundCloudService : public InternetService {
 
  signals:
   void SimpleSearchResults(int id, SongList songs);
+  void Connected();
+
+ public slots:
+  void ShowConfig();
 
  private slots:
+  void ConnectFinished(OAuthenticator* oauth);
+  void UserTracksRetrieved(QNetworkReply* reply);
+  void UserActivitiesRetrieved(QNetworkReply* reply);
+  void UserPlaylistsRetrieved(QNetworkReply* reply);
+  void PlaylistRetrieved(QNetworkReply* reply, int request_id);
   void Search(const QString& text, bool now = false);
   void DoSearch();
   void SearchFinished(QNetworkReply* reply, int task);
@@ -59,18 +73,43 @@ class SoundCloudService : public InternetService {
   void Homepage();
 
  private:
+  struct PlaylistInfo {
+    PlaylistInfo() {}
+    PlaylistInfo(int id, QStandardItem* item)
+        : id_(id), item_(item) {}
+
+    int id_;
+    QStandardItem* item_;
+  };
+
+  // Try to load "access_token" from preferences if the current access_token's
+  // value is empty
+  void LoadAccessTokenIfEmpty();
+  void RetrieveUserData();
+  void RetrieveUserTracks();
+  void RetrieveUserActivities();
+  void RetrieveUserPlaylists();
+  void RetrievePlaylist(int playlist_id, QStandardItem* playlist_item);
   void ClearSearchResults();
   void EnsureItemsCreated();
   void EnsureMenuCreated();
+
+  QStandardItem* CreatePlaylistItem(const QString& playlist_name);
+
   QNetworkReply* CreateRequest(const QString& ressource_name,
                                const QList<QPair<QString, QString> >& params);
   // Convenient function for extracting result from reply
   QVariant ExtractResult(QNetworkReply* reply);
+  // Returns items directly, as activities can be playlists or songs
+  QList<QStandardItem*> ExtractActivities(const QVariant& result);
   SongList ExtractSongs(const QVariant& result);
   Song ExtractSong(const QVariantMap& result_song);
 
   QStandardItem* root_;
   QStandardItem* search_;
+  QStandardItem* user_tracks_;
+  QStandardItem* user_playlists_;
+  QStandardItem* user_activities_;
 
   NetworkAccessManager* network_;
 
@@ -78,12 +117,21 @@ class SoundCloudService : public InternetService {
   SearchBoxWidget* search_box_;
   QTimer* search_delay_;
   QString pending_search_;
+  // Request IDs
   int next_pending_search_id_;
+  int next_retrieve_playlist_id_;
+
+  QMap<int, PlaylistInfo> pending_playlists_requests_;
 
   QByteArray api_key_;
 
+  QString access_token_;
+  QDateTime expiry_time_;
+
   static const char* kUrl;
-  static const char* kUrlCover;
+  static const char* kOAuthEndpoint;
+  static const char* kOAuthTokenEndpoint;
+  static const char* kOAuthScope;
   static const char* kHomepage;
 
   static const int kSongSearchLimit;
@@ -91,7 +139,7 @@ class SoundCloudService : public InternetService {
   static const int kSearchDelayMsec;
 
   static const char* kApiClientId;
+  static const char* kApiClientSecret;
 };
 
-
-#endif // SOUNDCLOUDSERVICE_H
+#endif  // SOUNDCLOUDSERVICE_H

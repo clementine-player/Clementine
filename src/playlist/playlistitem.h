@@ -18,26 +18,26 @@
 #ifndef PLAYLISTITEM_H
 #define PLAYLISTITEM_H
 
+#include <memory>
+
 #include <QMap>
 #include <QMetaType>
 #include <QStandardItem>
 #include <QUrl>
-
-#include <boost/enable_shared_from_this.hpp>
 
 #include "core/song.h"
 
 class QAction;
 class SqlRow;
 
-class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
+class PlaylistItem : public std::enable_shared_from_this<PlaylistItem> {
  public:
-  PlaylistItem(const QString& type)
-    : type_(type) {}
+  PlaylistItem(const QString& type) : should_skip_(false), type_(type) {}
   virtual ~PlaylistItem();
 
   static PlaylistItem* NewFromType(const QString& type);
-  static PlaylistItem* NewFromSongsTable(const QString& table, const Song& song);
+  static PlaylistItem* NewFromSongsTable(const QString& table,
+                                         const Song& song);
 
   enum Option {
     Default = 0x00,
@@ -91,15 +91,17 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   // invalid so you might want to check that its id is not equal to -1
   // before actually using it.
   virtual bool IsLocalLibraryItem() const { return false; }
+  void SetShouldSkip(bool val);
+  bool GetShouldSkip() const;
 
  protected:
-  enum DatabaseColumn {
-    Column_LibraryId,
-    Column_InternetService,
-  };
+  bool should_skip_;
+
+  enum DatabaseColumn { Column_LibraryId, Column_InternetService, };
 
   virtual QVariant DatabaseValue(DatabaseColumn) const {
-    return QVariant(QVariant::String); }
+    return QVariant(QVariant::String);
+  }
   virtual Song DatabaseSongMetadata() const { return Song(); }
 
   QString type_;
@@ -109,11 +111,11 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   QMap<short, QColor> background_colors_;
   QMap<short, QColor> foreground_colors_;
 };
-typedef boost::shared_ptr<PlaylistItem> PlaylistItemPtr;
+typedef std::shared_ptr<PlaylistItem> PlaylistItemPtr;
 typedef QList<PlaylistItemPtr> PlaylistItemList;
 
 Q_DECLARE_METATYPE(PlaylistItemPtr)
 Q_DECLARE_METATYPE(QList<PlaylistItemPtr>)
 Q_DECLARE_OPERATORS_FOR_FLAGS(PlaylistItem::Options)
 
-#endif // PLAYLISTITEM_H
+#endif  // PLAYLISTITEM_H

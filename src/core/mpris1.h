@@ -27,18 +27,15 @@
 class Application;
 class Playlist;
 
-struct DBusStatus {    // From Amarok.
+struct DBusStatus {  // From Amarok.
   DBusStatus()
-    : play(Mpris_Stopped),
-      random(0),
-      repeat(0),
-      repeat_playlist(0)
-  {}
-  
-  int play;            // Playing = 0, Paused = 1, Stopped = 2
-  int random;          // Linearly = 0, Randomly = 1
-  int repeat;          // Go_To_Next = 0, Repeat_Current = 1
-  int repeat_playlist; // Stop_When_Finished = 0, Never_Give_Up_Playing = 1, Never_Let_You_Down = 42
+      : play(Mpris_Stopped), random(0), repeat(0), repeat_playlist(0) {}
+
+  int play;             // Playing = 0, Paused = 1, Stopped = 2
+  int random;           // Linearly = 0, Randomly = 1
+  int repeat;           // Go_To_Next = 0, Repeat_Current = 1
+  int repeat_playlist;  // Stop_When_Finished = 0, Never_Give_Up_Playing = 1,
+                        // Never_Let_You_Down = 42
 
   enum MprisPlayState {
     Mpris_Playing = 0,
@@ -48,9 +45,8 @@ struct DBusStatus {    // From Amarok.
 };
 Q_DECLARE_METATYPE(DBusStatus);
 
-QDBusArgument& operator <<(QDBusArgument& arg, const DBusStatus& status);
-const QDBusArgument& operator >>(const QDBusArgument& arg, DBusStatus& status);
-
+QDBusArgument& operator<<(QDBusArgument& arg, const DBusStatus& status);
+const QDBusArgument& operator>>(const QDBusArgument& arg, DBusStatus& status);
 
 struct Version {
   quint16 minor;
@@ -58,32 +54,31 @@ struct Version {
 };
 Q_DECLARE_METATYPE(Version);
 
-QDBusArgument& operator <<(QDBusArgument& arg, const Version& version);
-const QDBusArgument& operator >>(const QDBusArgument& arg, Version& version);
+QDBusArgument& operator<<(QDBusArgument& arg, const Version& version);
+const QDBusArgument& operator>>(const QDBusArgument& arg, Version& version);
 
 namespace mpris {
 
 enum DBusCaps {
-  NONE                 = 0,
-  CAN_GO_NEXT          = 1 << 0,
-  CAN_GO_PREV          = 1 << 1,
-  CAN_PAUSE            = 1 << 2,
-  CAN_PLAY             = 1 << 3,
-  CAN_SEEK             = 1 << 4,
+  NONE = 0,
+  CAN_GO_NEXT = 1 << 0,
+  CAN_GO_PREV = 1 << 1,
+  CAN_PAUSE = 1 << 2,
+  CAN_PLAY = 1 << 3,
+  CAN_SEEK = 1 << 4,
   CAN_PROVIDE_METADATA = 1 << 5,
-  CAN_HAS_TRACKLIST    = 1 << 6,
+  CAN_HAS_TRACKLIST = 1 << 6,
 };
 
 class Mpris1Root;
 class Mpris1Player;
 class Mpris1TrackList;
 
-
 class Mpris1 : public QObject {
   Q_OBJECT
 
-public:
-  Mpris1(Application* app, QObject* parent = 0,
+ public:
+  Mpris1(Application* app, QObject* parent = nullptr,
          const QString& dbus_service_name = QString());
   ~Mpris1();
 
@@ -93,7 +88,7 @@ public:
   Mpris1Player* player() const { return player_; }
   Mpris1TrackList* tracklist() const { return tracklist_; }
 
-private:
+ private:
   static const char* kDefaultDbusServiceName;
 
   QString dbus_service_name_;
@@ -103,27 +98,25 @@ private:
   Mpris1TrackList* tracklist_;
 };
 
-
 class Mpris1Root : public QObject {
   Q_OBJECT
 
-public:
-  Mpris1Root(Application* app, QObject* parent = 0);
+ public:
+  Mpris1Root(Application* app, QObject* parent = nullptr);
 
   QString Identity();
   void Quit();
   Version MprisVersion();
 
-private:
+ private:
   Application* app_;
 };
-
 
 class Mpris1Player : public QObject {
   Q_OBJECT
 
-public:
-  Mpris1Player(Application* app, QObject* parent = 0);
+ public:
+  Mpris1Player(Application* app, QObject* parent = nullptr);
 
   void Pause();
   void Stop();
@@ -132,7 +125,8 @@ public:
   void Next();
   void Repeat(bool);
 
-  // those methods will use engine's state obtained with player->GetState() method
+  // those methods will use engine's state obtained with player->GetState()
+  // method
   DBusStatus GetStatus() const;
   int GetCaps() const;
   // those methods will use engine's state provided as an argument
@@ -151,34 +145,33 @@ public:
   void Mute();
   void ShowOSD();
 
-public slots:
-  void CurrentSongChanged(
-      const Song& song, const QString& art_uri, const QImage&);
+ public slots:
+  void CurrentSongChanged(const Song& song, const QString& art_uri,
+                          const QImage&);
 
 signals:
   void CapsChange(int);
   void TrackChange(const QVariantMap&);
   void StatusChange(DBusStatus);
 
-private slots:
+ private slots:
   void PlaylistManagerInitialized();
 
   void EngineStateChanged(Engine::State state);
   void ShuffleModeChanged();
   void RepeatModeChanged();
 
-private:
+ private:
   Application* app_;
 
   QVariantMap last_metadata_;
 };
 
-
 class Mpris1TrackList : public QObject {
   Q_OBJECT
 
-public:
-  Mpris1TrackList(Application* app, QObject* parent = 0);
+ public:
+  Mpris1TrackList(Application* app, QObject* parent = nullptr);
 
   int AddTrack(const QString&, bool);
   void DelTrack(int index);
@@ -194,13 +187,13 @@ public:
 signals:
   void TrackListChange(int i);
 
-private slots:
+ private slots:
   void PlaylistChanged(Playlist* playlist);
 
-private:
+ private:
   Application* app_;
 };
 
-} // namespace mpris
+}  // namespace mpris
 
-#endif // MPRIS1_H
+#endif  // MPRIS1_H

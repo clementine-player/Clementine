@@ -22,20 +22,19 @@
 
 class LibraryBackendInterface;
 
-
 class LibrarySearchProvider : public BlockingSearchProvider {
-public:
+ public:
   LibrarySearchProvider(LibraryBackendInterface* backend, const QString& name,
                         const QString& id, const QIcon& icon,
-                        bool enabled_by_default,
-                        Application* app, QObject* parent = 0);
+                        bool enabled_by_default, Application* app,
+                        QObject* parent = nullptr);
 
   ResultList Search(int id, const QString& query);
   MimeData* LoadTracks(const ResultList& results);
   QStringList GetSuggestions(int count);
 
-private:
+ private:
   LibraryBackendInterface* backend_;
 };
 
-#endif // LIBRARYSEARCHPROVIDER_H
+#endif  // LIBRARYSEARCHPROVIDER_H

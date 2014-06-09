@@ -29,19 +29,19 @@ class QVBoxLayout;
 class CoverSearchStatisticsDialog : public QDialog {
   Q_OBJECT
 
-public:
-  CoverSearchStatisticsDialog(QWidget* parent = 0);
+ public:
+  CoverSearchStatisticsDialog(QWidget* parent = nullptr);
   ~CoverSearchStatisticsDialog();
 
   void Show(const CoverSearchStatistics& statistics);
 
-private:
+ private:
   void AddLine(const QString& label, const QString& value);
   void AddSpacer();
 
-private:
+ private:
   Ui_CoverSearchStatisticsDialog* ui_;
   QVBoxLayout* details_layout_;
 };
 
-#endif // COVERSEARCHSTATISTICSDIALOG_H
+#endif  // COVERSEARCHSTATISTICSDIALOG_H

@@ -18,8 +18,9 @@
 #ifndef WIIMOTEDEV_SHORTCUTS_H
 #define WIIMOTEDEV_SHORTCUTS_H
 
+#include <memory>
+
 #include <QWidget>
-#include <boost/scoped_ptr.hpp>
 
 #include "dbus/wiimotedev.h"
 #include "core/player.h"
@@ -27,13 +28,13 @@
 
 class QSettings;
 
-class WiimotedevShortcuts :public QObject {
+class WiimotedevShortcuts : public QObject {
   Q_OBJECT
-public:
+ public:
   static const char* kActionsGroup;
   static const char* kSettingsGroup;
 
-  WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* parent = 0);
+  WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* parent = nullptr);
 
   enum Action {
     WiimotedevActiveDeactive = 0,
@@ -50,20 +51,20 @@ public:
     PlayerSeekForward,
     PlayerStopAfter,
     PlayerShowOSD,
-    ActionNone  = 0xff
+    ActionNone = 0xff
   };
 
-public slots:
+ public slots:
   void SetWiimotedevInterfaceActived(bool actived);
   void ReloadSettings();
 
-private slots:
+ private slots:
   void DbusWiimoteBatteryLife(uint id, uchar life);
   void DbusWiimoteConnected(uint id);
   void DbusWiimoteDisconnected(uint id);
   void DbusWiimoteGeneralButtons(uint id, qulonglong value);
 
-private:
+ private:
   OSD* osd_;
   QWidget* main_window_;
   Player* player_;
@@ -77,10 +78,10 @@ private:
   quint32 wiimotedev_device_;
   bool wiimotedev_enable_;
   bool wiimotedev_focus_;
-  boost::scoped_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
+  std::unique_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
   bool wiimotedev_notification_;
 
-  QHash <quint64, quint32> actions_;
+  QHash<quint64, quint32> actions_;
   QSettings settings_;
 
 signals:
@@ -92,4 +93,4 @@ signals:
   void WiiremoteCriticalBattery(int, int);
 };
 
-#endif // WIIMOTEDEV_SHORTCUTS_H
+#endif  // WIIMOTEDEV_SHORTCUTS_H

@@ -25,15 +25,15 @@ class Ui_TranscoderSettingsPage;
 class TranscoderSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   TranscoderSettingsPage(SettingsDialog* dialog);
   ~TranscoderSettingsPage();
 
   void Load();
   void Save();
 
-private:
+ private:
   Ui_TranscoderSettingsPage* ui_;
 };
 
-#endif // TRANSCODERSETTINGSPAGE_H
+#endif  // TRANSCODERSETTINGSPAGE_H

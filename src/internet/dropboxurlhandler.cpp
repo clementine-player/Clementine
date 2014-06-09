@@ -2,12 +2,8 @@
 
 #include "internet/dropboxservice.h"
 
-DropboxUrlHandler::DropboxUrlHandler(
-    DropboxService* service,
-    QObject* parent)
-  : UrlHandler(parent),
-    service_(service) {
-}
+DropboxUrlHandler::DropboxUrlHandler(DropboxService* service, QObject* parent)
+    : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult DropboxUrlHandler::StartLoading(const QUrl& url) {
   return LoadResult(url, LoadResult::TrackAvailable,

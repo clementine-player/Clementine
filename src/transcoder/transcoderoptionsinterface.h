@@ -21,7 +21,7 @@
 #include <QWidget>
 
 class TranscoderOptionsInterface : public QWidget {
-public:
+ public:
   TranscoderOptionsInterface(QWidget* parent) : QWidget(parent) {}
   virtual ~TranscoderOptionsInterface() {}
 
@@ -29,4 +29,4 @@ public:
   virtual void Save() = 0;
 };
 
-#endif // TRANSCODEROPTIONSINTERFACE_H
+#endif  // TRANSCODEROPTIONSINTERFACE_H

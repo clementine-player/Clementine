@@ -23,7 +23,7 @@
 
 template <typename T>
 class CachedList {
-public:
+ public:
   // Use a CachedList when you want to download and save a list of things from a
   // remote service, updating it only periodically.
   // T must be a registered metatype and must support being stored in
@@ -34,10 +34,9 @@ public:
 
   CachedList(const QString& settings_group, const QString& name,
              int cache_duration_secs)
-    : settings_group_(settings_group),
-      name_(name),
-      cache_duration_secs_(cache_duration_secs) {
-  }
+      : settings_group_(settings_group),
+        name_(name),
+        cache_duration_secs_(cache_duration_secs) {}
 
   void Load() {
     QSettings s;
@@ -47,7 +46,7 @@ public:
     data_.clear();
 
     const int count = s.beginReadArray(name_ + "_data");
-    for (int i=0 ; i<count ; ++i) {
+    for (int i = 0; i < count; ++i) {
       s.setArrayIndex(i);
       data_ << s.value("value").value<T>();
     }
@@ -61,7 +60,7 @@ public:
     s.setValue("last_refreshed_" + name_, last_updated_);
 
     s.beginWriteArray(name_ + "_data", data_.size());
-    for (int i=0 ; i<data_.size() ; ++i) {
+    for (int i = 0; i < data_.size(); ++i) {
       s.setArrayIndex(i);
       s.setValue("value", QVariant::fromValue(data_[i]));
     }
@@ -76,12 +75,11 @@ public:
 
   bool IsStale() const {
     return last_updated_.isNull() ||
-           last_updated_.secsTo(QDateTime::currentDateTime()) > cache_duration_secs_;
+           last_updated_.secsTo(QDateTime::currentDateTime()) >
+               cache_duration_secs_;
   }
 
-  void Sort() {
-    qSort(data_);
-  }
+  void Sort() { qSort(data_); }
 
   const ListType& Data() const { return data_; }
   operator ListType() const { return data_; }
@@ -91,7 +89,7 @@ public:
   const_iterator begin() const { return data_.begin(); }
   const_iterator end() const { return data_.end(); }
 
-private:
+ private:
   const QString settings_group_;
   const QString name_;
   const int cache_duration_secs_;
@@ -100,4 +98,4 @@ private:
   ListType data_;
 };
 
-#endif // CACHEDLIST_H
+#endif  // CACHEDLIST_H

@@ -29,27 +29,25 @@
 
 const int InternetViewContainer::kAnimationDuration = 500;
 
-InternetViewContainer::InternetViewContainer(QWidget *parent)
-  : QWidget(parent),
-    ui_(new Ui_InternetViewContainer),
-    app_(NULL),
-    current_service_(NULL),
-    current_header_(NULL)
-{
+InternetViewContainer::InternetViewContainer(QWidget* parent)
+    : QWidget(parent),
+      ui_(new Ui_InternetViewContainer),
+      app_(nullptr),
+      current_service_(nullptr),
+      current_header_(nullptr) {
   ui_->setupUi(this);
 
-  connect(ui_->tree, SIGNAL(collapsed(QModelIndex)), SLOT(Collapsed(QModelIndex)));
-  connect(ui_->tree, SIGNAL(expanded(QModelIndex)), SLOT(Expanded(QModelIndex)));
-  connect(ui_->tree, SIGNAL(FocusOnFilterSignal(QKeyEvent*)), SLOT(FocusOnFilter(QKeyEvent*)));
+  connect(ui_->tree, SIGNAL(collapsed(QModelIndex)),
+          SLOT(Collapsed(QModelIndex)));
+  connect(ui_->tree, SIGNAL(expanded(QModelIndex)),
+          SLOT(Expanded(QModelIndex)));
+  connect(ui_->tree, SIGNAL(FocusOnFilterSignal(QKeyEvent*)),
+          SLOT(FocusOnFilter(QKeyEvent*)));
 }
 
-InternetViewContainer::~InternetViewContainer() {
-  delete ui_;
-}
+InternetViewContainer::~InternetViewContainer() { delete ui_; }
 
-InternetView* InternetViewContainer::tree() const {
-  return ui_->tree;
-}
+InternetView* InternetViewContainer::tree() const { return ui_->tree; }
 
 void InternetViewContainer::SetApplication(Application* app) {
   app_ = app;
@@ -57,14 +55,14 @@ void InternetViewContainer::SetApplication(Application* app) {
   ui_->tree->setModel(app_->internet_model()->merged_model());
 
   connect(ui_->tree->selectionModel(),
-          SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+          SIGNAL(currentChanged(QModelIndex, QModelIndex)),
           SLOT(CurrentIndexChanged(QModelIndex)));
 }
 
 void InternetViewContainer::ServiceChanged(const QModelIndex& index) {
-  InternetService* service = index.data(InternetModel::Role_Service).value<InternetService*>();
-  if (!service || service == current_service_)
-    return;
+  InternetService* service =
+      index.data(InternetModel::Role_Service).value<InternetService*>();
+  if (!service || service == current_service_) return;
   current_service_ = service;
 
   QWidget* header = service->HeaderWidget();
@@ -78,7 +76,8 @@ void InternetViewContainer::ServiceChanged(const QModelIndex& index) {
     d.visible_ = false;
     d.animation_ = new QTimeLine(kAnimationDuration, this);
     d.animation_->setFrameRange(0, header->sizeHint().height());
-    connect(d.animation_, SIGNAL(frameChanged(int)), SLOT(SetHeaderHeight(int)));
+    connect(d.animation_, SIGNAL(frameChanged(int)),
+            SLOT(SetHeaderHeight(int)));
 
     headers_.insert(header, d);
   }
@@ -93,11 +92,12 @@ void InternetViewContainer::CurrentIndexChanged(const QModelIndex& index) {
 }
 
 void InternetViewContainer::Collapsed(const QModelIndex& index) {
-  if (app_->internet_model()->merged_model()->mapToSource(index).model() == app_->internet_model()
-      && index.data(InternetModel::Role_Type) == InternetModel::Type_Service)  {
+  if (app_->internet_model()->merged_model()->mapToSource(index).model() ==
+          app_->internet_model() &&
+      index.data(InternetModel::Role_Type) == InternetModel::Type_Service) {
     SetHeaderVisible(current_header_, false);
-    current_service_ = NULL;
-    current_header_ = NULL;
+    current_service_ = nullptr;
+    current_header_ = nullptr;
   }
 }
 
@@ -106,15 +106,14 @@ void InternetViewContainer::Expanded(const QModelIndex& index) {
 }
 
 void InternetViewContainer::SetHeaderVisible(QWidget* header, bool visible) {
-  if (!header)
-    return;
+  if (!header) return;
 
   HeaderData& d = headers_[header];
-  if (d.visible_ == visible)
-    return;
+  if (d.visible_ == visible) return;
   d.visible_ = visible;
 
-  d.animation_->setDirection(visible ? QTimeLine::Forward : QTimeLine::Backward);
+  d.animation_->setDirection(visible ? QTimeLine::Forward
+                                     : QTimeLine::Backward);
   d.animation_->start();
 }
 
@@ -123,26 +122,25 @@ void InternetViewContainer::FocusOnFilter(QKeyEvent* event) {
 
   if (current_header_) {
     int slot = current_header_->metaObject()->indexOfSlot(
-          QMetaObject::normalizedSignature("FocusOnFilter(QKeyEvent*)"));
+        QMetaObject::normalizedSignature("FocusOnFilter(QKeyEvent*)"));
     if (slot != -1) {
       current_header_->metaObject()->method(slot).invoke(
-            current_header_, Q_ARG(QKeyEvent*, event));
+          current_header_, Q_ARG(QKeyEvent*, event));
     }
   }
 }
 
 void InternetViewContainer::SetHeaderHeight(int height) {
   QTimeLine* animation = qobject_cast<QTimeLine*>(sender());
-  QWidget* header = NULL;
-  foreach (QWidget* h, headers_.keys()) {
+  QWidget* header = nullptr;
+  for (QWidget* h : headers_.keys()) {
     if (headers_[h].animation_ == animation) {
       header = h;
       break;
     }
   }
 
-  if (header)
-    header->setMaximumHeight(height);
+  if (header) header->setMaximumHeight(height);
 }
 
 void InternetViewContainer::ScrollToIndex(const QModelIndex& index) {

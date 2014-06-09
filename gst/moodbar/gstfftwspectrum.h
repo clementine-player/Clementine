@@ -54,11 +54,15 @@ struct _GstFFTWSpectrum
   /* Properties */
   gint32   def_size, def_step;
   gboolean hi_q;
+
+  GMutex* mutex;
 };
 
 struct _GstFFTWSpectrumClass 
 {
   GstElementClass parent_class;
+
+  GMutex mutex;
 };
 
 GType gst_fftwspectrum_get_type (void);

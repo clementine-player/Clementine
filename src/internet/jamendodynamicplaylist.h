@@ -22,10 +22,11 @@
 
 class JamendoDynamicPlaylist : public smart_playlists::Generator {
   Q_OBJECT
-  friend QDataStream& operator <<(QDataStream& s, const JamendoDynamicPlaylist& p);
-  friend QDataStream& operator >>(QDataStream& s, JamendoDynamicPlaylist& p);
+  friend QDataStream& operator<<(QDataStream& s,
+                                 const JamendoDynamicPlaylist& p);
+  friend QDataStream& operator>>(QDataStream& s, JamendoDynamicPlaylist& p);
 
-public:
+ public:
   // These values are persisted - only add to the end
   enum OrderBy {
     OrderBy_Rating = 0,
@@ -35,10 +36,7 @@ public:
   };
 
   // These values are persisted - only add to the end
-  enum OrderDirection {
-    Order_Ascending = 0,
-    Order_Descending = 1,
-  };
+  enum OrderDirection { Order_Ascending = 0, Order_Descending = 1, };
 
   JamendoDynamicPlaylist();
   JamendoDynamicPlaylist(const QString& name, OrderBy order_by);
@@ -46,7 +44,8 @@ public:
   QString type() const { return "Jamendo"; }
 
   void Load(const QByteArray& data);
-  void Load(OrderBy order_by, OrderDirection order_direction = Order_Descending);
+  void Load(OrderBy order_by,
+            OrderDirection order_direction = Order_Descending);
   QByteArray Save() const;
 
   PlaylistItemList Generate();
@@ -54,11 +53,11 @@ public:
   bool is_dynamic() const { return true; }
   PlaylistItemList GenerateMore(int count);
 
-private:
+ private:
   void Fetch();
   static QString OrderSpec(OrderBy by, OrderDirection dir);
 
-private:
+ private:
   OrderBy order_by_;
   OrderDirection order_direction_;
 
@@ -71,7 +70,7 @@ private:
   static const char* kUrl;
 };
 
-QDataStream& operator <<(QDataStream& s, const JamendoDynamicPlaylist& p);
-QDataStream& operator >>(QDataStream& s, JamendoDynamicPlaylist& p);
+QDataStream& operator<<(QDataStream& s, const JamendoDynamicPlaylist& p);
+QDataStream& operator>>(QDataStream& s, JamendoDynamicPlaylist& p);
 
 #endif

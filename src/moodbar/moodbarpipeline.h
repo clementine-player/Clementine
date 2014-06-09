@@ -28,7 +28,7 @@
 class MoodbarPipeline : public QObject {
   Q_OBJECT
 
-public:
+ public:
   MoodbarPipeline(const QUrl& local_filename);
   ~MoodbarPipeline();
 
@@ -37,13 +37,13 @@ public:
   bool success() const { return success_; }
   const QByteArray& data() const { return data_; }
 
-public slots:
+ public slots:
   void Start();
 
 signals:
   void Finished(bool success);
 
-private:
+ private:
   GstElement* CreateElement(const QString& factory_name);
 
   void ReportError(GstMessage* message);
@@ -53,9 +53,10 @@ private:
   static void NewPadCallback(GstElement*, GstPad* pad, gpointer data);
   static GstFlowReturn NewBufferCallback(GstAppSink* app_sink, gpointer self);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
-  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg, gpointer data);
+  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
+                                         gpointer data);
 
-private:
+ private:
   static bool sIsAvailable;
 
   QUrl local_filename_;
@@ -66,4 +67,4 @@ private:
   QByteArray data_;
 };
 
-#endif // MOODBARPIPELINE_H
+#endif  // MOODBARPIPELINE_H

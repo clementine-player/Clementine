@@ -18,14 +18,17 @@
 #ifndef ORGANISEDIALOG_H
 #define ORGANISEDIALOG_H
 
+#include <memory>
+
 #include <QDialog>
 #include <QMap>
 #include <QUrl>
 
+#include "gtest/gtest_prod.h"
+
+#include "core/organise.h"
 #include "core/organiseformat.h"
 #include "core/song.h"
-
-#include <boost/scoped_ptr.hpp>
 
 class LibraryWatcher;
 class OrganiseErrorDialog;
@@ -37,11 +40,10 @@ class QAbstractItemModel;
 class OrganiseDialog : public QDialog {
   Q_OBJECT
 
-public:
-  OrganiseDialog(TaskManager* task_manager, QWidget* parent = 0);
+ public:
+  OrganiseDialog(TaskManager* task_manager, QWidget* parent = nullptr);
   ~OrganiseDialog();
 
-  static const int kNumberOfPreviews;
   static const char* kDefaultFormat;
   static const char* kSettingsGroup;
 
@@ -49,40 +51,52 @@ public:
 
   void SetDestinationModel(QAbstractItemModel* model, bool devices = false);
 
-  int SetSongs(const SongList& songs);
-  int SetUrls(const QList<QUrl>& urls, quint64 total_size = 0);
-  int SetFilenames(const QStringList& filenames, quint64 total_size = 0);
+  // These functions return true if any songs were actually added to the dialog.
+  // SetSongs returns immediately, SetUrls and SetFilenames load the songs in
+  // the background.
+  bool SetSongs(const SongList& songs);
+  bool SetUrls(const QList<QUrl>& urls);
+  bool SetFilenames(const QStringList& filenames);
+
   void SetCopy(bool copy);
 
-public slots:
+ public slots:
   void accept();
 
-protected:
+ protected:
   void showEvent(QShowEvent*);
   void resizeEvent(QResizeEvent*);
 
-private slots:
+ private slots:
   void Reset();
 
   void InsertTag(const QString& tag);
-  void LoadPreviewSongs(const QString& filename);
   void UpdatePreviews();
 
   void OrganiseFinished(const QStringList& files_with_errors);
 
-private:
+ private:
+  SongList LoadSongsBlocking(const QStringList& filenames);
+  void SetLoadingSongs(bool loading);
+
+  static Organise::NewSongInfoList ComputeNewSongsFilenames(
+      const SongList& songs, const OrganiseFormat& format);
+
   Ui_OrganiseDialog* ui_;
   TaskManager* task_manager_;
 
   OrganiseFormat format_;
 
-  QStringList filenames_;
-  SongList preview_songs_;
+  QFuture<SongList> songs_future_;
+  SongList songs_;
+  Organise::NewSongInfoList new_songs_info_;
   quint64 total_size_;
 
-  boost::scoped_ptr<OrganiseErrorDialog> error_dialog_;
+  std::unique_ptr<OrganiseErrorDialog> error_dialog_;
 
   bool resized_by_user_;
+
+  FRIEND_TEST(OrganiseDialogTest, ComputeNewSongsFilenamesTest);
 };
 
-#endif // ORGANISEDIALOG_H
+#endif  // ORGANISEDIALOG_H

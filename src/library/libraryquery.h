@@ -31,18 +31,14 @@ class LibraryBackend;
 struct QueryOptions {
   // Modes of LibraryQuery:
   // - use the all songs table
-  // - use the duplicated songs view; by duplicated we mean those songs 
-  //   for which the (artist, album, title) tuple is found more than once 
+  // - use the duplicated songs view; by duplicated we mean those songs
+  //   for which the (artist, album, title) tuple is found more than once
   //   in the songs table
   // - use the untagged songs view; by untagged we mean those for which
   //   at least one of the (artist, album, title) tags is empty
   // Please note that additional filtering based on fts table (the filter
   // attribute) won't work in Duplicates and Untagged modes.
-  enum QueryMode {
-    QueryMode_All,
-    QueryMode_Duplicates,
-    QueryMode_Untagged
-  };
+  enum QueryMode { QueryMode_All, QueryMode_Duplicates, QueryMode_Untagged };
 
   QueryOptions();
 
@@ -81,17 +77,21 @@ class LibraryQuery {
   // Adds a fragment of WHERE clause. When executed, this Query will connect all
   // the fragments with AND operator.
   // Please note that IN operator expects a QStringList as value.
-  void AddWhere(const QString& column, const QVariant& value, const QString& op = "=");
+  void AddWhere(const QString& column, const QVariant& value,
+                const QString& op = "=");
 
   void AddCompilationRequirement(bool compilation);
   void SetLimit(int limit) { limit_ = limit; }
-  void SetIncludeUnavailable(bool include_unavailable) { include_unavailable_ = include_unavailable; }
+  void SetIncludeUnavailable(bool include_unavailable) {
+    include_unavailable_ = include_unavailable;
+  }
 
-  QSqlQuery Exec(QSqlDatabase db, const QString& songs_table, const QString& fts_table);
+  QSqlQuery Exec(QSqlDatabase db, const QString& songs_table,
+                 const QString& fts_table);
   bool Next();
   QVariant Value(int column) const;
 
-  operator const QSqlQuery& () const { return query_; }
+  operator const QSqlQuery&() const { return query_; }
 
  private:
   QString GetInnerQuery();
@@ -108,4 +108,4 @@ class LibraryQuery {
   QSqlQuery query_;
 };
 
-#endif // LIBRARYQUERY_H
+#endif  // LIBRARYQUERY_H

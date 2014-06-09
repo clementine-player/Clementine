@@ -29,11 +29,10 @@ class QPropertyAnimation;
 
 class TagWidgetTag : public QWidget {
   Q_OBJECT
-  Q_PROPERTY(float background_opacity
-             READ background_opacity
-             WRITE set_background_opacity);
+  Q_PROPERTY(float background_opacity READ background_opacity WRITE
+                 set_background_opacity);
 
-public:
+ public:
   TagWidgetTag(const QIcon& icon, const QString& text, QWidget* parent);
 
   static const int kIconSize;
@@ -50,14 +49,14 @@ public:
 signals:
   void Clicked();
 
-protected:
+ protected:
   void enterEvent(QEvent*);
   void leaveEvent(QEvent*);
   void paintEvent(QPaintEvent*);
   void mouseReleaseEvent(QMouseEvent*);
   void contextMenuEvent(QContextMenuEvent*);
 
-private:
+ private:
   QString text_;
   QIcon icon_;
   float opacity_;
@@ -68,13 +67,10 @@ private:
 class TagWidget : public QWidget {
   Q_OBJECT
 
-public:
-  enum Type {
-    Type_Tags,
-    Type_Artists,
-  };
+ public:
+  enum Type { Type_Tags, Type_Artists, };
 
-  TagWidget(Type type, QWidget* parent = 0);
+  TagWidget(Type type, QWidget* parent = nullptr);
 
   void SetIcon(const QIcon& icon) { icon_ = icon; }
   void AddTag(const QString& tag);
@@ -85,16 +81,16 @@ signals:
   void AddToPlaylist(QMimeData* data);
   void DoGlobalSearch(const QString& query);
 
-private slots:
+ private slots:
   void TagClicked();
 
-private:
+ private:
   void PlayLastFm(const QString& url_pattern);
 
-private:
+ private:
   Type type_;
   QIcon icon_;
   QList<TagWidgetTag*> tags_;
 };
 
-#endif // TAGWIDGET_H
+#endif  // TAGWIDGET_H

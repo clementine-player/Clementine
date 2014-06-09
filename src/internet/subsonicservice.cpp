@@ -36,32 +36,28 @@ const char* SubsonicService::kFtsTable = "subsonic_songs_fts";
 const int SubsonicService::kMaxRedirects = 10;
 
 SubsonicService::SubsonicService(Application* app, InternetModel* parent)
-  : InternetService(kServiceName, app, parent, parent),
-    network_(new QNetworkAccessManager(this)),
-    url_handler_(new SubsonicUrlHandler(this, this)),
-    scanner_(new SubsonicLibraryScanner(this, this)),
-    load_database_task_id_(0),
-    context_menu_(NULL),
-    root_(NULL),
-    library_backend_(NULL),
-    library_model_(NULL),
-    library_filter_(NULL),
-    library_sort_model_(new QSortFilterProxyModel(this)),
-    total_song_count_(0),
-    login_state_(LoginState_OtherError),
-    redirect_count_(0) {
+    : InternetService(kServiceName, app, parent, parent),
+      network_(new QNetworkAccessManager(this)),
+      url_handler_(new SubsonicUrlHandler(this, this)),
+      scanner_(new SubsonicLibraryScanner(this, this)),
+      load_database_task_id_(0),
+      context_menu_(nullptr),
+      root_(nullptr),
+      library_backend_(nullptr),
+      library_model_(nullptr),
+      library_filter_(nullptr),
+      library_sort_model_(new QSortFilterProxyModel(this)),
+      total_song_count_(0),
+      login_state_(LoginState_OtherError),
+      redirect_count_(0) {
   app_->player()->RegisterUrlHandler(url_handler_);
 
-  connect(scanner_, SIGNAL(ScanFinished()),
-          SLOT(ReloadDatabaseFinished()));
+  connect(scanner_, SIGNAL(ScanFinished()), SLOT(ReloadDatabaseFinished()));
 
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
-  library_backend_->Init(app_->database(),
-                         kSongsTable,
-                         QString::null,
-                         QString::null,
-                         kFtsTable);
+  library_backend_->Init(app_->database(), kSongsTable, QString::null,
+                         QString::null, kFtsTable);
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
 
@@ -87,29 +83,23 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   context_menu_ = new QMenu;
   context_menu_->addActions(GetPlaylistActions());
   context_menu_->addSeparator();
-  context_menu_->addAction(
-      IconLoader::Load("view-refresh"),
-      tr("Refresh catalogue"),
-      this, SLOT(ReloadDatabase()));
+  context_menu_->addAction(IconLoader::Load("view-refresh"),
+                           tr("Refresh catalogue"), this,
+                           SLOT(ReloadDatabase()));
   QAction* config_action = context_menu_->addAction(
-      IconLoader::Load("configure"),
-      tr("Configure Subsonic..."),
-      this, SLOT(ShowConfig()));
+      IconLoader::Load("configure"), tr("Configure Subsonic..."), this,
+      SLOT(ShowConfig()));
   context_menu_->addSeparator();
   context_menu_->addMenu(library_filter_->menu());
 
   library_filter_->AddMenuAction(config_action);
 
   app_->global_search()->AddProvider(new LibrarySearchProvider(
-      library_backend_,
-      tr("Subsonic"),
-      "subsonic",
-      QIcon(":/providers/subsonic.png"),
-      true, app_, this));
+      library_backend_, tr("Subsonic"), "subsonic",
+      QIcon(":/providers/subsonic.png"), true, app_, this));
 }
 
-SubsonicService::~SubsonicService() {
-}
+SubsonicService::~SubsonicService() {}
 
 QStandardItem* SubsonicService::CreateRootItem() {
   root_ = new QStandardItem(QIcon(":providers/subsonic.png"), kServiceName);
@@ -143,9 +133,7 @@ void SubsonicService::ShowContextMenu(const QPoint& global_pos) {
   context_menu_->popup(global_pos);
 }
 
-QWidget* SubsonicService::HeaderWidget() const {
-  return library_filter_;
-}
+QWidget* SubsonicService::HeaderWidget() const { return library_filter_; }
 
 void SubsonicService::ReloadSettings() {
   QSettings s;
@@ -160,13 +148,13 @@ void SubsonicService::ReloadSettings() {
 }
 
 bool SubsonicService::IsConfigured() const {
-  return !configured_server_.isEmpty() &&
-         !username_.isEmpty() &&
+  return !configured_server_.isEmpty() && !username_.isEmpty() &&
          !password_.isEmpty();
 }
 
 void SubsonicService::Login() {
-  // Recreate fresh network state, otherwise old HTTPS settings seem to get reused
+  // Recreate fresh network state, otherwise old HTTPS settings seem to get
+  // reused
   network_->deleteLater();
   network_ = new QNetworkAccessManager(this);
   network_->setCookieJar(new QNetworkCookieJar(network_));
@@ -182,8 +170,8 @@ void SubsonicService::Login() {
   }
 }
 
-void SubsonicService::Login(
-    const QString& server, const QString& username, const QString& password, const bool& usesslv3) {
+void SubsonicService::Login(const QString& server, const QString& username,
+                            const QString& password, const bool& usesslv3) {
   UpdateServer(server);
   username_ = username;
   password_ = password;
@@ -193,9 +181,8 @@ void SubsonicService::Login(
 
 void SubsonicService::Ping() {
   QNetworkReply* reply = Send(BuildRequestUrl("ping"));
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(OnPingFinished(QNetworkReply*)),
-             reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(OnPingFinished(QNetworkReply*)), reply);
 }
 
 QUrl SubsonicService::BuildRequestUrl(const QString& view) const {
@@ -227,7 +214,7 @@ QNetworkReply* SubsonicService::Send(const QUrl& url) {
     sslconfig.setProtocol(QSsl::SslV3);
   }
   request.setSslConfiguration(sslconfig);
-  QNetworkReply *reply = network_->get(request);
+  QNetworkReply* reply = network_->get(request);
   return reply;
 }
 
@@ -237,8 +224,8 @@ void SubsonicService::UpdateTotalSongCount(int count) {
 
 void SubsonicService::ReloadDatabase() {
   if (!load_database_task_id_) {
-    load_database_task_id_ = app_->task_manager()->StartTask(
-        tr("Fetching Subsonic library"));
+    load_database_task_id_ =
+        app_->task_manager()->StartTask(tr("Fetching Subsonic library"));
   }
   scanner_->Scan();
 }
@@ -252,7 +239,8 @@ void SubsonicService::ReloadDatabaseFinished() {
   library_model_->Reset();
 }
 
-void SubsonicService::OnLoginStateChanged(SubsonicService::LoginState newstate) {
+void SubsonicService::OnLoginStateChanged(
+    SubsonicService::LoginState newstate) {
   // TODO: library refresh logic?
 }
 
@@ -260,7 +248,7 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
-    switch(reply->error()) {
+    switch (reply->error()) {
       case QNetworkReply::ConnectionRefusedError:
         login_state_ = LoginState_ConnectionRefused;
         break;
@@ -273,18 +261,20 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
       case QNetworkReply::SslHandshakeFailedError:
         login_state_ = LoginState_SslError;
         break;
-      default: //Treat uncaught error types here as generic
+      default:  // Treat uncaught error types here as generic
         login_state_ = LoginState_BadServer;
         break;
     }
     qLog(Error) << "Failed to connect ("
-                << Utilities::EnumToString(QNetworkReply::staticMetaObject, "NetworkError", reply->error())
+                << Utilities::EnumToString(QNetworkReply::staticMetaObject,
+                                           "NetworkError", reply->error())
                 << "):" << reply->errorString();
   } else {
     QXmlStreamReader reader(reply);
     reader.readNextStartElement();
     QStringRef status = reader.attributes().value("status");
-    int http_status_code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    int http_status_code =
+        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if (status == "ok") {
       login_state_ = LoginState_Loggedin;
     } else if (http_status_code >= 300 && http_status_code <= 399) {
@@ -292,18 +282,19 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
       QUrl redirect_url =
           reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
       if (redirect_url.isEmpty()) {
-        qLog(Debug) << "Received HTTP code " << http_status_code << ", but no URL";
+        qLog(Debug) << "Received HTTP code " << http_status_code
+                    << ", but no URL";
         login_state_ = LoginState_RedirectNoUrl;
       } else {
         redirect_count_++;
         qLog(Debug) << "Redirect receieved to "
                     << redirect_url.toString(QUrl::RemoveQuery)
-                    << ", current redirect count is "
-                    << redirect_count_;
+                    << ", current redirect count is " << redirect_count_;
         if (redirect_count_ <= kMaxRedirects) {
           working_server_ = ScrubUrl(redirect_url).toString(QUrl::RemoveQuery);
           Ping();
-          // To avoid the LoginStateChanged, as it will come from the recursive request.
+          // To avoid the LoginStateChanged, as it will come from the recursive
+          // request.
           return;
         } else {
           // Redirect limit exceeded
@@ -314,7 +305,8 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
       reader.readNextStartElement();
       int error = reader.attributes().value("code").toString().toInt();
       qLog(Error) << "Subsonic error ("
-                  << Utilities::EnumToString(SubsonicService::staticMetaObject, "ApiError", error)
+                  << Utilities::EnumToString(SubsonicService::staticMetaObject,
+                                             "ApiError", error)
                   << "):" << reader.attributes().value("message").toString();
       switch (error) {
         // "Parameter missing" for "ping" is always blank username or password
@@ -338,7 +330,8 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
     }
   }
   qLog(Debug) << "Login state changed:"
-              << Utilities::EnumToString(SubsonicService::staticMetaObject, "LoginState", login_state_);
+              << Utilities::EnumToString(SubsonicService::staticMetaObject,
+                                         "LoginState", login_state_);
   emit LoginStateChanged(login_state_);
 }
 
@@ -352,19 +345,14 @@ void SubsonicService::UpdateServer(const QString& server) {
   redirect_count_ = 0;
 }
 
-
 const int SubsonicLibraryScanner::kAlbumChunkSize = 500;
 const int SubsonicLibraryScanner::kConcurrentRequests = 8;
 
-SubsonicLibraryScanner::SubsonicLibraryScanner(
-    SubsonicService* service, QObject* parent)
-  : QObject(parent),
-    service_(service),
-    scanning_(false) {
-}
+SubsonicLibraryScanner::SubsonicLibraryScanner(SubsonicService* service,
+                                               QObject* parent)
+    : QObject(parent), service_(service), scanning_(false) {}
 
-SubsonicLibraryScanner::~SubsonicLibraryScanner() {
-}
+SubsonicLibraryScanner::~SubsonicLibraryScanner() {}
 
 void SubsonicLibraryScanner::Scan() {
   if (scanning_) {
@@ -378,8 +366,8 @@ void SubsonicLibraryScanner::Scan() {
   GetAlbumList(0);
 }
 
-void SubsonicLibraryScanner::OnGetAlbumListFinished(
-    QNetworkReply* reply, int offset) {
+void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
+                                                    int offset) {
   reply->deleteLater();
 
   QXmlStreamReader reader(reply);
@@ -408,7 +396,8 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(
     scanning_ = false;
   } else {
     // Empty reply but we have some albums, time to start fetching songs
-    // Start up the maximum number of concurrent requests, finished requests get replaced with new ones
+    // Start up the maximum number of concurrent requests, finished requests get
+    // replaced with new ones
     for (int i = 0; i < kConcurrentRequests && !album_queue_.empty(); ++i) {
       GetAlbum(album_queue_.dequeue());
     }
@@ -478,17 +467,15 @@ void SubsonicLibraryScanner::GetAlbumList(int offset) {
   url.addQueryItem("size", QString::number(kAlbumChunkSize));
   url.addQueryItem("offset", QString::number(offset));
   QNetworkReply* reply = service_->Send(url);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(OnGetAlbumListFinished(QNetworkReply*,int)),
-             reply, offset);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(OnGetAlbumListFinished(QNetworkReply*, int)), reply, offset);
 }
 
 void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   QUrl url = service_->BuildRequestUrl("getAlbum");
   url.addQueryItem("id", id);
   QNetworkReply* reply = service_->Send(url);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(OnGetAlbumFinished(QNetworkReply*)),
-             reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(OnGetAlbumFinished(QNetworkReply*)), reply);
   pending_requests_.insert(reply);
 }

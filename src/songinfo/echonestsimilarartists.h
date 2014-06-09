@@ -25,14 +25,14 @@ class QNetworkReply;
 class EchoNestSimilarArtists : public SongInfoProvider {
   Q_OBJECT
 
-public:
+ public:
   void FetchInfo(int id, const Song& metadata);
 
-private slots:
+ private slots:
   void RequestFinished();
 
-private:
+ private:
   QMap<QNetworkReply*, int> requests_;
 };
 
-#endif // ECHONESTSIMILARARTISTS_H
+#endif  // ECHONESTSIMILARARTISTS_H

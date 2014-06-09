@@ -32,7 +32,7 @@ class AlbumCoverExporter : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverExporter(QObject* parent = 0);
+  AlbumCoverExporter(QObject* parent = nullptr);
   virtual ~AlbumCoverExporter() {}
 
   static const int kMaxConcurrentRequests;
@@ -44,7 +44,7 @@ class AlbumCoverExporter : public QObject {
 
   int request_count() { return requests_.size(); }
 
- signals:
+signals:
   void AlbumCoversExportUpdate(int exported, int skipped, int all);
 
  private slots:

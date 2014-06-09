@@ -28,16 +28,21 @@ class M3UParser : public ParserBase {
   Q_OBJECT
 
  public:
-  M3UParser(LibraryBackendInterface* library, QObject* parent = 0);
+  M3UParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "M3U"; }
-  QStringList file_extensions() const { return QStringList() << "m3u" << "m3u8"; }
+  QStringList file_extensions() const {
+    return QStringList() << "m3u"
+                         << "m3u8";
+  }
   QString mime_type() const { return "text/uri-list"; }
 
-  bool TryMagic(const QByteArray &data) const;
+  bool TryMagic(const QByteArray& data) const;
 
-  SongList Load(QIODevice* device, const QString& playlist_path = "", const QDir& dir = QDir()) const;
-  void Save(const SongList &songs, QIODevice* device, const QDir& dir = QDir()) const;
+  SongList Load(QIODevice* device, const QString& playlist_path = "",
+                const QDir& dir = QDir()) const;
+  void Save(const SongList& songs, QIODevice* device,
+            const QDir& dir = QDir()) const;
 
  private:
   enum M3UType {

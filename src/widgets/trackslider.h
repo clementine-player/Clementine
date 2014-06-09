@@ -30,7 +30,7 @@ class TrackSlider : public QWidget {
   Q_OBJECT
 
  public:
-  TrackSlider(QWidget* parent = 0);
+  TrackSlider(QWidget* parent = nullptr);
   ~TrackSlider();
 
   void SetApplication(Application* app);
@@ -39,7 +39,7 @@ class TrackSlider : public QWidget {
   QSize sizeHint() const;
 
   // QObject
-  bool event(QEvent *);
+  bool event(QEvent*);
 
   MoodbarProxyStyle* moodbar_style() const { return moodbar_style_; }
 
@@ -51,8 +51,9 @@ class TrackSlider : public QWidget {
   void SetCanSeek(bool can_seek);
   void Seek(int gap);
 
- signals:
+signals:
   void ValueChanged(int value);
+  void ValueChangedSeconds(int value);
 
  private slots:
   void ValueMaybeChanged(int value);
@@ -70,7 +71,7 @@ class TrackSlider : public QWidget {
 
   bool setting_value_;
   bool show_remaining_time_;
-  int slider_maximum_value_; //we cache it to avoid unnecessary updates
+  int slider_maximum_value_;  // we cache it to avoid unnecessary updates
 };
 
-#endif // TRACKSLIDER_H
+#endif  // TRACKSLIDER_H

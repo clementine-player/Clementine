@@ -31,7 +31,8 @@ namespace utilities {
 
 QString GetCacheDirectory() {
   QString user_cache = GetUserDataDirectory();
-  return user_cache + "/" + QCoreApplication::applicationName() + "/spotify-cache";
+  return user_cache + "/" + QCoreApplication::applicationName() +
+         "/spotify-cache";
 }
 
 #ifndef Q_OS_DARWIN  // See spotify_utilities.mm for Mac implementation.
@@ -47,10 +48,11 @@ QString GetSettingsDirectory() {
   QString ret;
 
 #ifdef Q_OS_WIN32
-  ret = GetUserDataDirectory() + "/" + QCoreApplication::applicationName() + "/spotify-settings";
+  ret = GetUserDataDirectory() + "/" + QCoreApplication::applicationName() +
+        "/spotify-settings";
 #else
   ret = QFileInfo(QSettings().fileName()).absolutePath() + "/spotify-settings";
-#endif // Q_OS_WIN32
+#endif  // Q_OS_WIN32
 
   // Create the directory
   QDir dir;
@@ -59,6 +61,6 @@ QString GetSettingsDirectory() {
   return ret;
 }
 
-#endif // Q_OS_DARWIN
+#endif  // Q_OS_DARWIN
 
 }  // namespace utilities

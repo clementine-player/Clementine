@@ -17,12 +17,12 @@
 
 #include "macglobalshortcutbackend.h"
 
-#include "config.h"
-#include "globalshortcuts.h"
-#include "mac_startup.h"
-#import "mac_utilities.h"
-
 #include <boost/noncopyable.hpp>
+
+#include <AppKit/NSEvent.h>
+#include <AppKit/NSWorkspace.h>
+#include <Foundation/NSString.h>
+#include <IOKit/hidsystem/ev_keymap.h>
 
 #include <QAction>
 #include <QList>
@@ -30,29 +30,35 @@
 #include <QPushButton>
 #include <QtDebug>
 
-#include <AppKit/NSEvent.h>
-#include <AppKit/NSWorkspace.h>
-#include <Foundation/NSString.h>
-#include <IOKit/hidsystem/ev_keymap.h>
+#include "config.h"
+#include "core/globalshortcuts.h"
+#include "core/logging.h"
+#include "core/mac_startup.h"
+#include "core/utilities.h"
+
+#import "core/mac_utilities.h"
+#import "mac/SBSystemPreferences.h"
 
 class MacGlobalShortcutBackendPrivate : boost::noncopyable {
  public:
   explicit MacGlobalShortcutBackendPrivate(MacGlobalShortcutBackend* backend)
-      : global_monitor_(nil),
-        local_monitor_(nil),
-        backend_(backend) {
-  }
+      : global_monitor_(nil), local_monitor_(nil), backend_(backend) {}
 
   bool Register() {
-    global_monitor_ = [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
-        handler:^(NSEvent* event) {
-      HandleKeyEvent(event);
-    }];
-    local_monitor_ = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
-        handler:^(NSEvent* event) {
-      // Filter event if we handle it as a global shortcut.
-      return HandleKeyEvent(event) ? nil : event;
-    }];
+    global_monitor_ =
+        [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
+                                               handler:^(NSEvent* event) {
+                                                   HandleKeyEvent(event);
+                                               }];
+    local_monitor_ =
+        [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
+                                              handler:^(NSEvent* event) {
+                                                  // Filter event if we handle
+                                                  // it as a global shortcut.
+                                                  return HandleKeyEvent(event)
+                                                             ? nil
+                                                             : event;
+                                              }];
     return true;
   }
 
@@ -67,26 +73,24 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
     return backend_->KeyPressed(sequence);
   }
 
-
   id global_monitor_;
   id local_monitor_;
   MacGlobalShortcutBackend* backend_;
 };
 
 MacGlobalShortcutBackend::MacGlobalShortcutBackend(GlobalShortcuts* parent)
-  : GlobalShortcutBackend(parent),
-    p_(new MacGlobalShortcutBackendPrivate(this)) {
-}
+    : GlobalShortcutBackend(parent),
+      p_(new MacGlobalShortcutBackendPrivate(this)) {}
 
-MacGlobalShortcutBackend::~MacGlobalShortcutBackend() {
-}
+MacGlobalShortcutBackend::~MacGlobalShortcutBackend() {}
 
 bool MacGlobalShortcutBackend::DoRegister() {
   // Always enable media keys.
   mac::SetShortcutHandler(this);
 
   if (AXAPIEnabled()) {
-    foreach (const GlobalShortcuts::Shortcut& shortcut, manager_->shortcuts().values()) {
+    for (const GlobalShortcuts::Shortcut& shortcut :
+         manager_->shortcuts().values()) {
       shortcuts_[shortcut.action->shortcut()] = shortcut.action;
     }
     return p_->Register();
@@ -134,8 +138,34 @@ void MacGlobalShortcutBackend::ShowAccessibilityDialog() {
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
       NSPreferencePanesDirectory, NSSystemDomainMask, YES);
   if ([paths count] == 1) {
-    NSURL* prefpane_url = [NSURL fileURLWithPath:
-        [[paths objectAtIndex:0] stringByAppendingPathComponent:@"UniversalAccessPref.prefPane"]];
-    [[NSWorkspace sharedWorkspace] openURL:prefpane_url];
+    NSURL* prefpane_url = nil;
+    if (Utilities::GetMacVersion() < 9) {
+      prefpane_url =
+          [NSURL fileURLWithPath:[[paths objectAtIndex:0]
+                                     stringByAppendingPathComponent:
+                                         @"UniversalAccessPref.prefPane"]];
+      [[NSWorkspace sharedWorkspace] openURL:prefpane_url];
+    } else {
+      SBSystemPreferencesApplication* system_prefs = [SBApplication
+          applicationWithBundleIdentifier:@"com.apple.systempreferences"];
+      [system_prefs activate];
+
+      SBElementArray* panes = [system_prefs panes];
+      SBSystemPreferencesPane* security_pane = nil;
+      for (SBSystemPreferencesPane* pane : panes) {
+        if ([[pane id] isEqualToString:@"com.apple.preference.security"]) {
+          security_pane = pane;
+          break;
+        }
+      }
+      [system_prefs setCurrentPane:security_pane];
+
+      SBElementArray* anchors = [security_pane anchors];
+      for (SBSystemPreferencesAnchor* anchor : anchors) {
+        if ([[anchor name] isEqualToString:@"Privacy_Accessibility"]) {
+          [anchor reveal];
+        }
+      }
+    }
   }
 }

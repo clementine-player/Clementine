@@ -23,21 +23,16 @@
 
 namespace smart_playlists {
 
-Search::Search() {
-  Reset();
-}
+Search::Search() { Reset(); }
 
-Search::Search(
-    SearchType type, TermList terms, SortType sort_type,
-    SearchTerm::Field sort_field, int limit)
-  : search_type_(type),
-    terms_(terms),
-    sort_type_(sort_type),
-    sort_field_(sort_field),
-    limit_(limit),
-    first_item_(0)
-{
-}
+Search::Search(SearchType type, TermList terms, SortType sort_type,
+               SearchTerm::Field sort_field, int limit)
+    : search_type_(type),
+      terms_(terms),
+      sort_type_(sort_type),
+      sort_field_(sort_field),
+      limit_(limit),
+      first_item_(0) {}
 
 void Search::Reset() {
   search_type_ = Type_And;
@@ -54,7 +49,7 @@ QString Search::ToSql(const QString& songs_table) const {
   // Add search terms
   QStringList where_clauses;
   QStringList term_where_clauses;
-  foreach (const SearchTerm& term, terms_) {
+  for (const SearchTerm& term : terms_) {
     term_where_clauses << term.ToSql();
   }
 
@@ -66,7 +61,7 @@ QString Search::ToSql(const QString& songs_table) const {
   // Restrict the IDs of songs if we're making a dynamic playlist
   if (!id_not_in_.isEmpty()) {
     QString numbers;
-    foreach (int id, id_not_in_) {
+    for (int id : id_not_in_) {
       numbers += (numbers.isEmpty() ? "" : ",") + QString::number(id);
     }
     where_clauses << "(ROWID NOT IN (" + numbers + "))";
@@ -85,8 +80,8 @@ QString Search::ToSql(const QString& songs_table) const {
   if (sort_type_ == Sort_Random) {
     sql += " ORDER BY random()";
   } else {
-    sql += " ORDER BY " + SearchTerm::FieldColumnName(sort_field_)
-        + (sort_type_ == Sort_FieldAsc ? " ASC" : " DESC");
+    sql += " ORDER BY " + SearchTerm::FieldColumnName(sort_field_) +
+           (sort_type_ == Sort_FieldAsc ? " ASC" : " DESC");
   }
 
   // Add limit
@@ -101,22 +96,19 @@ QString Search::ToSql(const QString& songs_table) const {
 }
 
 bool Search::is_valid() const {
-  if (search_type_ == Type_All)
-    return true;
+  if (search_type_ == Type_All) return true;
   return !terms_.isEmpty();
 }
 
-bool Search::operator ==(const Search& other) const {
-  return search_type_ == other.search_type_ &&
-         terms_ == other.terms_ &&
-         sort_type_ == other.sort_type_ &&
-         sort_field_ == other.sort_field_ &&
+bool Search::operator==(const Search& other) const {
+  return search_type_ == other.search_type_ && terms_ == other.terms_ &&
+         sort_type_ == other.sort_type_ && sort_field_ == other.sort_field_ &&
          limit_ == other.limit_;
 }
 
-} // namespace
+}  // namespace
 
-QDataStream& operator <<(QDataStream& s, const smart_playlists::Search& search) {
+QDataStream& operator<<(QDataStream& s, const smart_playlists::Search& search) {
   s << search.terms_;
   s << quint8(search.sort_type_);
   s << quint8(search.sort_field_);
@@ -125,7 +117,7 @@ QDataStream& operator <<(QDataStream& s, const smart_playlists::Search& search) 
   return s;
 }
 
-QDataStream& operator >>(QDataStream& s, smart_playlists::Search& search) {
+QDataStream& operator>>(QDataStream& s, smart_playlists::Search& search) {
   quint8 sort_type, sort_field, search_type;
   qint32 limit;
 

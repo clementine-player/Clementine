@@ -28,7 +28,7 @@ class Ui_WiimoteSettingsPage;
 class WiimoteSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   WiimoteSettingsPage(SettingsDialog* dialog);
 
   void Load();
@@ -40,14 +40,14 @@ public:
 signals:
   void SetWiimotedevInterfaceActived(bool);
 
-private slots:
+ private slots:
   void AddAction();
   void AddShortcut(quint64 button, quint32 action);
   void DefaultSettings();
   void DeleteAction();
   void ItemClicked(QTreeWidgetItem*);
 
-private:
+ private:
   struct Shortcut {
     QTreeWidgetItem* object;
     quint64 button;
@@ -65,4 +65,4 @@ private:
   QTreeWidgetItem* selected_item_;
 };
 
-#endif // WIIMOTESETTINGSPAGE_H
+#endif  // WIIMOTESETTINGSPAGE_H

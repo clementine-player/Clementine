@@ -20,10 +20,7 @@
 #include <QPainter>
 
 PlaylistListView::PlaylistListView(QWidget* parent)
-  : AutoExpandingTreeView(parent)
-{
-}
-
+    : AutoExpandingTreeView(parent) {}
 
 void PlaylistListView::paintEvent(QPaintEvent* event) {
   if (model()->rowCount() <= 0) {
@@ -36,9 +33,11 @@ void PlaylistListView::paintEvent(QPaintEvent* event) {
     bold_font.setBold(true);
     p.setFont(bold_font);
 
-    p.drawText(rect, Qt::AlignHCenter | Qt::TextWordWrap, tr("\n\n"
-        "You can favorite playlists by clicking the star icon next to a playlist name\n\n"
-        "Favorited playlists will be saved here"));
+    p.drawText(rect, Qt::AlignHCenter | Qt::TextWordWrap,
+               tr("\n\n"
+                  "You can favorite playlists by clicking the star icon next "
+                  "to a playlist name\n\n"
+                  "Favorited playlists will be saved here"));
   } else {
     AutoExpandingTreeView::paintEvent(event);
   }

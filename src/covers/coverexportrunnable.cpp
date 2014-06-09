@@ -22,39 +22,36 @@
 #include <QFile>
 #include <QUrl>
 
-CoverExportRunnable::CoverExportRunnable(const AlbumCoverExport::DialogResult& dialog_result,
-                                         const Song& song)
-    : dialog_result_(dialog_result),
-      song_(song)
-{
-}
+CoverExportRunnable::CoverExportRunnable(
+    const AlbumCoverExport::DialogResult& dialog_result, const Song& song)
+    : dialog_result_(dialog_result), song_(song) {}
 
 void CoverExportRunnable::run() {
   QString cover_path = GetCoverPath();
 
   // manually unset?
-  if(cover_path.isEmpty()) {
+  if (cover_path.isEmpty()) {
     EmitCoverSkipped();
   } else {
-    if(dialog_result_.RequiresCoverProcessing()) {
+    if (dialog_result_.RequiresCoverProcessing()) {
       ProcessAndExportCover();
     } else {
       ExportCover();
     }
-
   }
 }
 
 QString CoverExportRunnable::GetCoverPath() {
-  if(song_.has_manually_unset_cover()) {
+  if (song_.has_manually_unset_cover()) {
     return QString();
-  // Export downloaded covers?
-  } else if(!song_.art_manual().isEmpty() && dialog_result_.export_downloaded_) {
+    // Export downloaded covers?
+  } else if (!song_.art_manual().isEmpty() &&
+             dialog_result_.export_downloaded_) {
     return song_.art_manual();
-  // Export embedded covers?
-  } else if(!song_.art_automatic().isEmpty()
-          && song_.art_automatic() == Song::kEmbeddedCover
-          && dialog_result_.export_embedded_) {
+    // Export embedded covers?
+  } else if (!song_.art_automatic().isEmpty() &&
+             song_.art_automatic() == Song::kEmbeddedCover &&
+             dialog_result_.export_embedded_) {
     return song_.art_automatic();
   } else {
     return QString();
@@ -78,10 +75,11 @@ void CoverExportRunnable::ProcessAndExportCover() {
   QImage disk_cover;
 
   // load embedded cover if any
-  if(song_.has_embedded_cover()) {
-    embedded_cover = TagReaderClient::Instance()->LoadEmbeddedArtBlocking(song_.url().toLocalFile());
+  if (song_.has_embedded_cover()) {
+    embedded_cover = TagReaderClient::Instance()->LoadEmbeddedArtBlocking(
+        song_.url().toLocalFile());
 
-    if(embedded_cover.isNull()) {
+    if (embedded_cover.isNull()) {
       EmitCoverSkipped();
       return;
     }
@@ -91,8 +89,8 @@ void CoverExportRunnable::ProcessAndExportCover() {
   // load a file cover which iss mandatory if there's no embedded cover
   disk_cover.load(cover_path);
 
-  if(embedded_cover.isNull()) {
-    if(disk_cover.isNull()) {
+  if (embedded_cover.isNull()) {
+    if (disk_cover.isNull()) {
       EmitCoverSkipped();
       return;
     }
@@ -100,49 +98,51 @@ void CoverExportRunnable::ProcessAndExportCover() {
   }
 
   // rescale if necessary
-  if(dialog_result_.IsSizeForced()) {
-    cover = cover.scaled(QSize(dialog_result_.width_, dialog_result_.height_), Qt::IgnoreAspectRatio);
+  if (dialog_result_.IsSizeForced()) {
+    cover = cover.scaled(QSize(dialog_result_.width_, dialog_result_.height_),
+                         Qt::IgnoreAspectRatio);
   }
 
   QString dir = song_.url().toLocalFile().section('/', 0, -2);
   QString extension = cover_path.section('.', -1);
 
   QString new_file = dir + '/' + dialog_result_.fileName_ + '.' +
-                         (cover_path == Song::kEmbeddedCover
-                            ? "jpg"
-                            : extension);
+                     (cover_path == Song::kEmbeddedCover ? "jpg" : extension);
 
   // If the file exists, do not override!
-  if(dialog_result_.overwrite_ == AlbumCoverExport::OverwriteMode_None && QFile::exists(new_file)) {
+  if (dialog_result_.overwrite_ == AlbumCoverExport::OverwriteMode_None &&
+      QFile::exists(new_file)) {
     EmitCoverSkipped();
     return;
   }
 
-  // we're handling overwrite as remove + copy so we need to delete the old file first
-  if(QFile::exists(new_file) && dialog_result_.overwrite_ != AlbumCoverExport::OverwriteMode_None) {
+  // we're handling overwrite as remove + copy so we need to delete the old file
+  // first
+  if (QFile::exists(new_file) &&
+      dialog_result_.overwrite_ != AlbumCoverExport::OverwriteMode_None) {
 
     // if the mode is "overwrite smaller" then skip the cover if a bigger one
     // is already available in the folder
-    if(dialog_result_.overwrite_ == AlbumCoverExport::OverwriteMode_Smaller) {
+    if (dialog_result_.overwrite_ == AlbumCoverExport::OverwriteMode_Smaller) {
       QImage existing;
       existing.load(new_file);
 
-      if(existing.isNull() || existing.size().height() >= cover.size().height()
-           || existing.size().width() >= cover.size().width()) {
+      if (existing.isNull() ||
+          existing.size().height() >= cover.size().height() ||
+          existing.size().width() >= cover.size().width()) {
 
         EmitCoverSkipped();
         return;
-
       }
     }
 
-    if(!QFile::remove(new_file)) {
+    if (!QFile::remove(new_file)) {
       EmitCoverSkipped();
       return;
     }
   }
 
-  if(cover.save(new_file)) {
+  if (cover.save(new_file)) {
     EmitCoverExported();
   } else {
     EmitCoverSkipped();
@@ -157,34 +157,36 @@ void CoverExportRunnable::ExportCover() {
   QString extension = cover_path.section('.', -1);
 
   QString new_file = dir + '/' + dialog_result_.fileName_ + '.' +
-                         (cover_path == Song::kEmbeddedCover
-                            ? "jpg"
-                            : extension);
+                     (cover_path == Song::kEmbeddedCover ? "jpg" : extension);
 
   // If the file exists, do not override!
-  if(dialog_result_.overwrite_ == AlbumCoverExport::OverwriteMode_None && QFile::exists(new_file)) {
+  if (dialog_result_.overwrite_ == AlbumCoverExport::OverwriteMode_None &&
+      QFile::exists(new_file)) {
     EmitCoverSkipped();
     return;
   }
 
-  // we're handling overwrite as remove + copy so we need to delete the old file first
-  if(dialog_result_.overwrite_ != AlbumCoverExport::OverwriteMode_None && QFile::exists(new_file)) {
-    if(!QFile::remove(new_file)) {
+  // we're handling overwrite as remove + copy so we need to delete the old file
+  // first
+  if (dialog_result_.overwrite_ != AlbumCoverExport::OverwriteMode_None &&
+      QFile::exists(new_file)) {
+    if (!QFile::remove(new_file)) {
       EmitCoverSkipped();
       return;
     }
   }
 
-  if(cover_path == Song::kEmbeddedCover) {
+  if (cover_path == Song::kEmbeddedCover) {
     // an embedded cover
-    QImage embedded = TagReaderClient::Instance()->LoadEmbeddedArtBlocking(song_.url().toLocalFile());
-    if(!embedded.save(new_file)) {
+    QImage embedded = TagReaderClient::Instance()->LoadEmbeddedArtBlocking(
+        song_.url().toLocalFile());
+    if (!embedded.save(new_file)) {
       EmitCoverSkipped();
       return;
     }
   } else {
     // automatic or manual cover, available in an image file
-    if(!QFile::copy(cover_path, new_file)) {
+    if (!QFile::copy(cover_path, new_file)) {
       EmitCoverSkipped();
       return;
     }
@@ -192,11 +194,6 @@ void CoverExportRunnable::ExportCover() {
   EmitCoverExported();
 }
 
-void CoverExportRunnable::EmitCoverExported() {
-  emit CoverExported();
-}
+void CoverExportRunnable::EmitCoverExported() { emit CoverExported(); }
 
-
-void CoverExportRunnable::EmitCoverSkipped() {
-  emit CoverSkipped();
-}
+void CoverExportRunnable::EmitCoverSkipped() { emit CoverSkipped(); }

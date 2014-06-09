@@ -20,8 +20,9 @@
 
 #include <QHash>
 #include <QObject>
+#include <QUrl>
 
-#include <boost/scoped_ptr.hpp>
+#include "core/song.h"
 
 class Application;
 class Database;
@@ -47,7 +48,9 @@ class Library : public QObject {
   LibraryBackend* backend() const { return backend_; }
   LibraryModel* model() const { return model_; }
 
-  QString full_rescan_reason(int schema_version) const { return full_rescan_revisions_.value(schema_version, QString()); }
+  QString full_rescan_reason(int schema_version) const {
+    return full_rescan_revisions_.value(schema_version, QString());
+  }
 
   void WriteAllSongsStatisticsToFiles();
 
@@ -62,6 +65,14 @@ class Library : public QObject {
  private slots:
   void IncrementalScan();
 
+  void SongsStatisticsChanged(const SongList& songs);
+  void SongsRatingChanged(const SongList& songs);
+  void CurrentSongChanged(const Song& song);
+  void Stopped();
+
+ private:
+  SongList FilterCurrentWMASong(SongList songs, Song* queued);
+
  private:
   Application* app_;
   LibraryBackend* backend_;
@@ -70,8 +81,18 @@ class Library : public QObject {
   LibraryWatcher* watcher_;
   QThread* watcher_thread_;
 
-  // DB schema versions which should trigger a full library rescan (each of those with
-  // a short reason why).
+  bool save_statistics_in_files_;
+  bool save_ratings_in_files_;
+
+  // Hack: Gstreamer doesn't cope well with WMA files being rewritten while
+  // being played, so we delay statistics and rating changes until the current
+  // song has finished playing.
+  QUrl current_wma_song_url_;
+  Song queued_statistics_;
+  Song queued_rating_;
+
+  // DB schema versions which should trigger a full library rescan (each of
+  // those with a short reason why).
   QHash<int, QString> full_rescan_revisions_;
 };
 

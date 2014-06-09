@@ -29,10 +29,7 @@ const qreal SongInfoTextView::kDefaultFontSize = 8.5;
 const char* SongInfoTextView::kSettingsGroup = "SongInfo";
 
 SongInfoTextView::SongInfoTextView(QWidget* parent)
-  : QTextBrowser(parent),
-    last_width_(-1),
-    recursion_filter_(false)
-{
+    : QTextBrowser(parent), last_width_(-1), recursion_filter_(false) {
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -52,14 +49,11 @@ QFont SongInfoTextView::Font() {
   return font;
 }
 
-void SongInfoTextView::ReloadSettings() {
-  document()->setDefaultFont(Font());
-}
+void SongInfoTextView::ReloadSettings() { document()->setDefaultFont(Font()); }
 
 void SongInfoTextView::resizeEvent(QResizeEvent* e) {
   const int w = qMax(100, width());
-  if (w == last_width_)
-    return;
+  if (w == last_width_) return;
   last_width_ = w;
 
   document()->setTextWidth(w);
@@ -68,19 +62,16 @@ void SongInfoTextView::resizeEvent(QResizeEvent* e) {
   QTextBrowser::resizeEvent(e);
 }
 
-QSize SongInfoTextView::sizeHint() const {
-  return minimumSize();
-}
+QSize SongInfoTextView::sizeHint() const { return minimumSize(); }
 
-void SongInfoTextView::wheelEvent(QWheelEvent* e) {
-  e->ignore();
-}
+void SongInfoTextView::wheelEvent(QWheelEvent* e) { e->ignore(); }
 
 void SongInfoTextView::contextMenuEvent(QContextMenuEvent* e) {
   QMenu* menu = createStandardContextMenu(e->pos());
   menu->setAttribute(Qt::WA_DeleteOnClose);
 
-  menu->addAction(tr("Change font size..."), this, SIGNAL(ShowSettingsDialog()));
+  menu->addAction(tr("Change font size..."), this,
+                  SIGNAL(ShowSettingsDialog()));
 
   menu->popup(e->globalPos());
 }
@@ -93,7 +84,8 @@ void SongInfoTextView::SetHtml(const QString& html) {
   copy.replace(QRegExp("([^>])[\\t ]*\\n"), "\\1<p>");
 
   // Strip any newlines from the end
-  copy.replace(QRegExp("((<\\s*br\\s*/?\\s*>)|(<\\s*/?\\s*p\\s*/?\\s*>))+$"), "");
+  copy.replace(QRegExp("((<\\s*br\\s*/?\\s*>)|(<\\s*/?\\s*p\\s*/?\\s*>))+$"),
+               "");
 
   setHtml(copy);
 }

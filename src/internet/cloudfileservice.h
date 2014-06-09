@@ -3,6 +3,8 @@
 
 #include "internetservice.h"
 
+#include <memory>
+
 #include <QMenu>
 
 #include "core/tagreaderclient.h"
@@ -18,40 +20,39 @@ class PlaylistManager;
 class CloudFileService : public InternetService {
   Q_OBJECT
  public:
-  CloudFileService(
-      Application* app,
-      InternetModel* parent,
-      const QString& service_name,
-      const QString& service_id,
-      const QIcon& icon,
-      SettingsDialog::Page settings_page);
+  CloudFileService(Application* app, InternetModel* parent,
+                   const QString& service_name, const QString& service_id,
+                   const QIcon& icon, SettingsDialog::Page settings_page);
 
   // InternetService
   virtual QStandardItem* CreateRootItem();
   virtual void LazyPopulate(QStandardItem* item);
   virtual void ShowContextMenu(const QPoint& point);
 
- protected:
   virtual bool has_credentials() const = 0;
+  bool is_indexing() const { return indexing_task_id_ != -1; }
+
+ signals:
+  void AllIndexingTasksFinished();
+
+ public slots:
+  void ShowSettingsDialog();
+
+ protected:
   virtual void Connect() = 0;
   virtual bool ShouldIndexFile(const QUrl& url, const QString& mime_type) const;
-  virtual void MaybeAddFileToDatabase(
-      const Song& metadata,
-      const QString& mime_type,
-      const QUrl& download_url,
-      const QString& authorisation);
+  virtual void MaybeAddFileToDatabase(const Song& metadata,
+                                      const QString& mime_type,
+                                      const QUrl& download_url,
+                                      const QString& authorisation);
   virtual bool IsSupportedMimeType(const QString& mime_type) const;
   QString GuessMimeTypeForFile(const QString& filename) const;
-
 
  protected slots:
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
-  void ShowSettingsDialog();
-  void ReadTagsFinished(
-      TagReaderClient::ReplyType* reply,
-      const Song& metadata,
-      const int task_id);
+  void ReadTagsFinished(TagReaderClient::ReplyType* reply,
+                        const Song& metadata);
 
  protected:
   QStandardItem* root_;
@@ -61,14 +62,18 @@ class CloudFileService : public InternetService {
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;
 
-  boost::scoped_ptr<QMenu> context_menu_;
-  boost::scoped_ptr<AlbumCoverManager> cover_manager_;
+  std::unique_ptr<QMenu> context_menu_;
+  std::unique_ptr<AlbumCoverManager> cover_manager_;
   PlaylistManager* playlist_manager_;
   TaskManager* task_manager_;
 
  private:
   QIcon icon_;
   SettingsDialog::Page settings_page_;
+
+  int indexing_task_id_;
+  int indexing_task_progress_;
+  int indexing_task_max_;
 };
 
 #endif  // CLOUDFILESERVICE_H

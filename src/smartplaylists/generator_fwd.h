@@ -18,14 +18,14 @@
 #ifndef PLAYLISTGENERATOR_FWD_H
 #define PLAYLISTGENERATOR_FWD_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace smart_playlists {
 
 class Generator;
 
-typedef boost::shared_ptr<Generator> GeneratorPtr;
+typedef std::shared_ptr<Generator> GeneratorPtr;
 
-} // namespace
+}  // namespace
 
-#endif // PLAYLISTGENERATOR_FWD_H
+#endif  // PLAYLISTGENERATOR_FWD_H

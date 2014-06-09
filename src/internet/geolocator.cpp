@@ -32,18 +32,14 @@ const char* Geolocator::kUrl = "http://data.clementine-player.org/geolocate";
 using std::numeric_limits;
 
 Geolocator::LatLng::LatLng()
-  : lat_e6_(numeric_limits<int>::min()),
-    lng_e6_(numeric_limits<int>::min()) {
-}
+    : lat_e6_(numeric_limits<int>::min()),
+      lng_e6_(numeric_limits<int>::min()) {}
 
 Geolocator::LatLng::LatLng(int lat_e6, int lng_e6)
-  : lat_e6_(lat_e6),
-    lng_e6_(lng_e6) {
-}
+    : lat_e6_(lat_e6), lng_e6_(lng_e6) {}
 
 Geolocator::LatLng::LatLng(const QString& latlng)
-  : lat_e6_(numeric_limits<int>::min()),
-    lng_e6_(numeric_limits<int>::min()) {
+    : lat_e6_(numeric_limits<int>::min()), lng_e6_(numeric_limits<int>::min()) {
   QStringList split = latlng.split(",");
   if (split.length() != 2) {
     return;
@@ -83,14 +79,13 @@ bool Geolocator::LatLng::IsValid() const {
          lng_e6_ != numeric_limits<int>::min();
 }
 
-Geolocator::Geolocator(QObject* parent)
-  : QObject(parent) {
-}
+Geolocator::Geolocator(QObject* parent) : QObject(parent) {}
 
 void Geolocator::Geolocate() {
   QNetworkRequest req = QNetworkRequest(QUrl(kUrl));
   QNetworkReply* reply = network_.get(req);
-  NewClosure(reply, SIGNAL(finished()), this, SLOT(RequestFinished(QNetworkReply*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RequestFinished(QNetworkReply*)), reply);
 }
 
 void Geolocator::RequestFinished(QNetworkReply* reply) {

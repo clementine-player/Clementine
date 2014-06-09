@@ -18,9 +18,10 @@
 #ifndef GPODLOADER_H
 #define GPODLOADER_H
 
+#include <memory>
+
 #include <QObject>
 
-#include <boost/shared_ptr.hpp>
 #include <gpod/itdb.h>
 
 #include "core/song.h"
@@ -32,15 +33,15 @@ class TaskManager;
 class GPodLoader : public QObject {
   Q_OBJECT
 
-public:
+ public:
   GPodLoader(const QString& mount_point, TaskManager* task_manager,
-             LibraryBackend* backend, boost::shared_ptr<ConnectedDevice> device);
+             LibraryBackend* backend, std::shared_ptr<ConnectedDevice> device);
   ~GPodLoader();
 
   void set_music_path_prefix(const QString& prefix) { path_prefix_ = prefix; }
   void set_song_type(Song::FileType type) { type_ = type; }
 
-public slots:
+ public slots:
   void LoadDatabase();
 
 signals:
@@ -48,8 +49,8 @@ signals:
   void TaskStarted(int task_id);
   void LoadFinished(Itdb_iTunesDB* db);
 
-private:
-  boost::shared_ptr<ConnectedDevice> device_;
+ private:
+  std::shared_ptr<ConnectedDevice> device_;
   QThread* original_thread_;
 
   QString mount_point_;
@@ -59,4 +60,4 @@ private:
   LibraryBackend* backend_;
 };
 
-#endif // GPODLOADER_H
+#endif  // GPODLOADER_H

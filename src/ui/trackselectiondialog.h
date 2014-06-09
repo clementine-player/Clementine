@@ -30,17 +30,18 @@ class QTreeWidget;
 class TrackSelectionDialog : public QDialog {
   Q_OBJECT
 
-public:
-  TrackSelectionDialog(QWidget *parent = 0);
+ public:
+  TrackSelectionDialog(QWidget* parent = nullptr);
   ~TrackSelectionDialog();
 
   void set_save_on_close(bool save_on_close) { save_on_close_ = save_on_close; }
 
   void Init(const SongList& songs);
 
-public slots:
+ public slots:
   void FetchTagProgress(const Song& original_song, const QString& progress);
-  void FetchTagFinished(const Song& original_song, const SongList& songs_guessed);
+  void FetchTagFinished(const Song& original_song,
+                        const SongList& songs_guessed);
 
   // QDialog
   void accept();
@@ -48,7 +49,7 @@ public slots:
 signals:
   void SongChosen(const Song& original_song, const Song& new_metadata);
 
-private slots:
+ private slots:
   void UpdateStack();
 
   void NextSong();
@@ -57,7 +58,7 @@ private slots:
   void ResultSelected();
   void AcceptFinished();
 
-private:
+ private:
   Ui_TrackSelectionDialog* ui_;
 
   struct Data {
@@ -76,7 +77,7 @@ private:
   void SetLoading(const QString& message);
   static void SaveData(const QList<Data>& data);
 
-private:
+ private:
   QList<Data> data_;
 
   QPushButton* previous_button_;
@@ -85,6 +86,4 @@ private:
   bool save_on_close_;
 };
 
-#endif // TRACKSELECTIONDIALOG_H
-
-
+#endif  // TRACKSELECTIONDIALOG_H

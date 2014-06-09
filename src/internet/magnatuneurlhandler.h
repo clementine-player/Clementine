@@ -22,17 +22,16 @@
 
 class MagnatuneService;
 
-
 class MagnatuneUrlHandler : public UrlHandler {
-public:
+ public:
   MagnatuneUrlHandler(MagnatuneService* service, QObject* parent);
 
   QString scheme() const { return "magnatune"; }
   QIcon icon() const { return QIcon(":providers/magnatune.png"); }
   LoadResult StartLoading(const QUrl& url);
 
-private:
+ private:
   MagnatuneService* service_;
 };
 
-#endif // MAGNATUNEURLHANDLER_H
+#endif  // MAGNATUNEURLHANDLER_H

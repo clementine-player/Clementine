@@ -30,8 +30,8 @@ class QNetworkRequest;
 class DigitallyImportedClient : public QObject {
   Q_OBJECT
 
-public:
-  DigitallyImportedClient(const QString& service_name, QObject* parent = 0);
+ public:
+  DigitallyImportedClient(const QString& service_name, QObject* parent = nullptr);
 
   static const char* kApiUsername;
   static const char* kApiPassword;
@@ -59,7 +59,7 @@ public:
     QString name_;
     QString key_;
 
-    bool operator <(const Channel& other) const { return name_ < other.name_; }
+    bool operator<(const Channel& other) const { return name_ < other.name_; }
   };
   typedef QList<Channel> ChannelList;
 
@@ -69,17 +69,19 @@ public:
   QNetworkReply* GetChannelList();
   ChannelList ParseChannelList(QNetworkReply* reply) const;
 
-private:
+ private:
   void SetAuthorisationHeader(QNetworkRequest* req) const;
 
-private:
+ private:
   QNetworkAccessManager* network_;
 
   QString service_name_;
 };
 
-QDataStream& operator<<(QDataStream& out, const DigitallyImportedClient::Channel& channel);
-QDataStream& operator>>(QDataStream& in, DigitallyImportedClient::Channel& channel);
+QDataStream& operator<<(QDataStream& out,
+                        const DigitallyImportedClient::Channel& channel);
+QDataStream& operator>>(QDataStream& in,
+                        DigitallyImportedClient::Channel& channel);
 Q_DECLARE_METATYPE(DigitallyImportedClient::Channel)
 
-#endif // DIGITALLYIMPORTEDCLIENT_H
+#endif  // DIGITALLYIMPORTEDCLIENT_H

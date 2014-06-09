@@ -17,26 +17,23 @@
 
 #include "settingsprovider.h"
 
-SettingsProvider::SettingsProvider() {
-}
+SettingsProvider::SettingsProvider() {}
 
-DefaultSettingsProvider::DefaultSettingsProvider() {
-}
+DefaultSettingsProvider::DefaultSettingsProvider() {}
 
-void DefaultSettingsProvider::set_group(const char *group) {
-  while (!backend_.group().isEmpty())
-    backend_.endGroup();
+void DefaultSettingsProvider::set_group(const char* group) {
+  while (!backend_.group().isEmpty()) backend_.endGroup();
 
   backend_.beginGroup(group);
 }
 
-QVariant DefaultSettingsProvider::value(
-    const QString &key, const QVariant &default_value) const {
+QVariant DefaultSettingsProvider::value(const QString& key,
+                                        const QVariant& default_value) const {
   return backend_.value(key, default_value);
 }
 
-void DefaultSettingsProvider::setValue(
-    const QString &key, const QVariant &value) {
+void DefaultSettingsProvider::setValue(const QString& key,
+                                       const QVariant& value) {
   backend_.setValue(key, value);
 }
 
@@ -52,6 +49,4 @@ void DefaultSettingsProvider::setArrayIndex(int i) {
   backend_.setArrayIndex(i);
 }
 
-void DefaultSettingsProvider::endArray() {
-  backend_.endArray();
-}
+void DefaultSettingsProvider::endArray() { backend_.endArray(); }

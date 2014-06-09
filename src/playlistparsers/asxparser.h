@@ -24,16 +24,17 @@ class ASXParser : public XMLParser {
   Q_OBJECT
 
  public:
-  ASXParser(LibraryBackendInterface* library, QObject* parent = 0);
+  ASXParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "ASX"; }
   QStringList file_extensions() const { return QStringList() << "asx"; }
 
-  bool TryMagic(const QByteArray &data) const;
+  bool TryMagic(const QByteArray& data) const;
 
-  SongList Load(QIODevice *device, const QString& playlist_path = "",
+  SongList Load(QIODevice* device, const QString& playlist_path = "",
                 const QDir& dir = QDir()) const;
-  void Save(const SongList &songs, QIODevice *device, const QDir &dir = QDir()) const;
+  void Save(const SongList& songs, QIODevice* device,
+            const QDir& dir = QDir()) const;
 
  private:
   Song ParseTrack(QXmlStreamReader* reader, const QDir& dir) const;

@@ -18,31 +18,31 @@
 #ifndef ECHONESTBIOGRAPHIES_H
 #define ECHONESTBIOGRAPHIES_H
 
-#include "songinfoprovider.h"
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
+#include "songinfoprovider.h"
 
 class QNetworkReply;
 
 class EchoNestBiographies : public SongInfoProvider {
   Q_OBJECT
 
-public:
+ public:
   EchoNestBiographies();
 
   void FetchInfo(int id, const Song& metadata);
 
-private slots:
+ private slots:
   void RequestFinished();
 
-private:
+ private:
   QMap<QString, int> site_relevance_;
   QMap<QString, QIcon> site_icons_;
 
   struct Request;
-  typedef boost::shared_ptr<Request> RequestPtr;
+  typedef std::shared_ptr<Request> RequestPtr;
 
   QMap<QNetworkReply*, RequestPtr> requests_;
 };
 
-#endif // ECHONESTBIOGRAPHIES_H
+#endif  // ECHONESTBIOGRAPHIES_H

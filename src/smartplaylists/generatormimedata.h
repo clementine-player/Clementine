@@ -28,13 +28,12 @@ namespace smart_playlists {
 class GeneratorMimeData : public MimeData {
   Q_OBJECT
 
-public:
-  GeneratorMimeData(GeneratorPtr generator)
-    : generator_(generator) {}
+ public:
+  GeneratorMimeData(GeneratorPtr generator) : generator_(generator) {}
 
   GeneratorPtr generator_;
 };
 
-} // namespace
+}  // namespace
 
-#endif // GENERATORMIMEDATA_H
+#endif  // GENERATORMIMEDATA_H

@@ -11,35 +11,35 @@
 @author Max Howell
 */
 
-class BoomAnalyzer : public Analyzer::Base
-{
-Q_OBJECT
-public:
-    Q_INVOKABLE BoomAnalyzer( QWidget* );
+class BoomAnalyzer : public Analyzer::Base {
+  Q_OBJECT
+ public:
+  Q_INVOKABLE BoomAnalyzer(QWidget*);
 
-    static const char* kName;
+  static const char* kName;
 
-    virtual void init();
-    virtual void transform( Scope &s );
-    virtual void analyze( QPainter& p, const Scope&, bool new_frame);
+  virtual void init();
+  virtual void transform(Analyzer::Scope& s);
+  virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
 
-public slots:
-    void changeK_barHeight( int );
-    void changeF_peakSpeed( int );
+ public slots:
+  void changeK_barHeight(int);
+  void changeF_peakSpeed(int);
 
-protected:
-    void resizeEvent( QResizeEvent * e);
+ protected:
+  void resizeEvent(QResizeEvent* e);
 
-    static const uint COLUMN_WIDTH = 4;
-    static const uint BAND_COUNT = 32;
+  static const uint COLUMN_WIDTH = 4;
+  static const uint BAND_COUNT = 32;
 
-    double K_barHeight, F_peakSpeed, F;
+  double K_barHeight, F_peakSpeed, F;
 
-    std::vector<float> bar_height;
-    std::vector<float> peak_height;
-    std::vector<float> peak_speed;
+  std::vector<float> bar_height;
+  std::vector<float> peak_height;
+  std::vector<float> peak_speed;
 
-    QPixmap barPixmap;
+  QPixmap barPixmap;
+  QPixmap canvas_;
 };
 
 #endif

@@ -42,16 +42,14 @@ static const char* kOAuthTokenEndpoint =
 static const char* kOAuthScope =
     "https://www.googleapis.com/auth/drive.readonly "
     "https://www.googleapis.com/auth/userinfo.email";
-static const char* kClientId =
-    "679260893280.apps.googleusercontent.com";
-static const char* kClientSecret =
-    "l3cWb8efUZsrBI4wmY3uKl6i";
+static const char* kClientId = "679260893280.apps.googleusercontent.com";
+static const char* kClientSecret = "l3cWb8efUZsrBI4wmY3uKl6i";
 }
 
 QStringList File::parent_ids() const {
   QStringList ret;
 
-  foreach (const QVariant& var, data_["parents"].toList()) {
+  for (const QVariant& var : data_["parents"].toList()) {
     QVariantMap map(var.toMap());
 
     if (map["isRoot"].toBool()) {
@@ -64,28 +62,16 @@ QStringList File::parent_ids() const {
   return ret;
 }
 
-ConnectResponse::ConnectResponse(QObject* parent)
-  : QObject(parent)
-{
-}
+ConnectResponse::ConnectResponse(QObject* parent) : QObject(parent) {}
 
 GetFileResponse::GetFileResponse(const QString& file_id, QObject* parent)
-  : QObject(parent),
-    file_id_(file_id)
-{
-}
+    : QObject(parent), file_id_(file_id) {}
 
 ListChangesResponse::ListChangesResponse(const QString& cursor, QObject* parent)
-  : QObject(parent),
-    cursor_(cursor)
-{
-}
+    : QObject(parent), cursor_(cursor) {}
 
 Client::Client(QObject* parent)
-  : QObject(parent),
-    network_(new NetworkAccessManager(this))
-{
-}
+    : QObject(parent), network_(new NetworkAccessManager(this)) {}
 
 ConnectResponse* Client::Connect(const QString& refresh_token) {
   ConnectResponse* ret = new ConnectResponse(this);
@@ -93,17 +79,14 @@ ConnectResponse* Client::Connect(const QString& refresh_token) {
       kClientId, kClientSecret, OAuthenticator::RedirectStyle::LOCALHOST, this);
 
   if (refresh_token.isEmpty()) {
-    oauth->StartAuthorisation(
-        kOAuthEndpoint,
-        kOAuthTokenEndpoint,
-        kOAuthScope);
+    oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
   } else {
     oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token);
   }
 
-  NewClosure(oauth, SIGNAL(Finished()),
-             this, SLOT(ConnectFinished(ConnectResponse*,OAuthenticator*)),
-             ret, oauth);
+  NewClosure(oauth, SIGNAL(Finished()), this,
+             SLOT(ConnectFinished(ConnectResponse*, OAuthenticator*)), ret,
+             oauth);
   return ret;
 }
 
@@ -118,13 +101,13 @@ void Client::ConnectFinished(ConnectResponse* response, OAuthenticator* oauth) {
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-      this, SLOT(FetchUserInfoFinished(ConnectResponse*, QNetworkReply*)),
-      response, reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(FetchUserInfoFinished(ConnectResponse*, QNetworkReply*)),
+             response, reply);
 }
 
-void Client::FetchUserInfoFinished(
-    ConnectResponse* response, QNetworkReply* reply) {
+void Client::FetchUserInfoFinished(ConnectResponse* response,
+                                   QNetworkReply* reply) {
   reply->deleteLater();
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) != 200) {
     qLog(Warning) << "Failed to get user info" << reply->readAll();
@@ -146,8 +129,8 @@ void Client::FetchUserInfoFinished(
 }
 
 void Client::AddAuthorizationHeader(QNetworkRequest* request) const {
-  request->setRawHeader(
-      "Authorization", QString("Bearer %1").arg(access_token_).toUtf8());
+  request->setRawHeader("Authorization",
+                        QString("Bearer %1").arg(access_token_).toUtf8());
 }
 
 GetFileResponse* Client::GetFile(const QString& file_id) {
@@ -158,13 +141,13 @@ GetFileResponse* Client::GetFile(const QString& file_id) {
   QNetworkRequest request = QNetworkRequest(url);
   AddAuthorizationHeader(&request);
   // Never cache these requests as we will get out of date download URLs.
-  request.setAttribute(
-      QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
+  request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                       QNetworkRequest::AlwaysNetwork);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(GetFileFinished(GetFileResponse*,QNetworkReply*)),
-             ret, reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(GetFileFinished(GetFileResponse*, QNetworkReply*)), ret,
+             reply);
 
   return ret;
 }
@@ -191,7 +174,8 @@ ListChangesResponse* Client::ListChanges(const QString& cursor) {
   return ret;
 }
 
-void Client::MakeListChangesRequest(ListChangesResponse* response, const QString& page_token) {
+void Client::MakeListChangesRequest(ListChangesResponse* response,
+                                    const QString& page_token) {
   QUrl url(kGoogleDriveChanges);
   if (!response->cursor().isEmpty()) {
     url.addQueryItem("startChangeId", response->cursor());
@@ -206,12 +190,13 @@ void Client::MakeListChangesRequest(ListChangesResponse* response, const QString
   AddAuthorizationHeader(&request);
 
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(ListChangesFinished(ListChangesResponse*,QNetworkReply*)),
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(ListChangesFinished(ListChangesResponse*, QNetworkReply*)),
              response, reply);
 }
 
-void Client::ListChangesFinished(ListChangesResponse* response, QNetworkReply* reply) {
+void Client::ListChangesFinished(ListChangesResponse* response,
+                                 QNetworkReply* reply) {
   reply->deleteLater();
 
   QJson::Parser parser;
@@ -231,15 +216,16 @@ void Client::ListChangesFinished(ListChangesResponse* response, QNetworkReply* r
   // Emit the FilesFound signal for the files in the response.
   FileList files;
   QList<QUrl> files_deleted;
-  foreach (const QVariant& v, result["items"].toList()) {
+  for (const QVariant& v : result["items"].toList()) {
     QVariantMap change = v.toMap();
-    if (!change["deleted"].toBool()) {
-      files << File(change["file"].toMap());
-    } else {
+    if (change["deleted"].toBool() ||
+        change["file"].toMap()["labels"].toMap()["trashed"].toBool()) {
       QUrl url;
       url.setScheme("googledrive");
       url.setPath(change["fileId"].toString());
       files_deleted << url;
+    } else {
+      files << File(change["file"].toMap());
     }
   }
 
@@ -256,7 +242,7 @@ void Client::ListChangesFinished(ListChangesResponse* response, QNetworkReply* r
 
 bool Client::is_authenticated() const {
   return !access_token_.isEmpty() &&
-      QDateTime::currentDateTime().secsTo(expiry_time_) > 0;
+         QDateTime::currentDateTime().secsTo(expiry_time_) > 0;
 }
 
 void Client::ForgetCredentials() {

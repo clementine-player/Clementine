@@ -18,11 +18,11 @@
 #ifndef PROJECTMVISUALISATION_H
 #define PROJECTMVISUALISATION_H
 
+#include <memory>
+
 #include <QGraphicsScene>
 #include <QBasicTimer>
 #include <QSet>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "engines/bufferconsumer.h"
 
@@ -34,14 +34,11 @@ class QTemporaryFile;
 
 class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   Q_OBJECT
-public:
-  ProjectMVisualisation(QObject *parent = 0);
+ public:
+  ProjectMVisualisation(QObject* parent = nullptr);
   ~ProjectMVisualisation();
 
-  enum Mode {
-    Random = 0,
-    FromList = 1,
-  };
+  enum Mode { Random = 0, FromList = 1, };
 
   QString preset_url() const;
   ProjectMPresetModel* preset_model() const { return preset_model_; }
@@ -50,9 +47,9 @@ public:
   int duration() const { return duration_; }
 
   // BufferConsumer
-  void ConsumeBuffer(GstBuffer *buffer, int);
+  void ConsumeBuffer(GstBuffer* buffer, int);
 
-public slots:
+ public slots:
   void SetTextureSize(int size);
   void SetDuration(int seconds);
 
@@ -63,31 +60,31 @@ public slots:
 
   void Lock(bool lock);
 
-protected:
+ protected:
   // QGraphicsScene
-  void drawBackground(QPainter *painter, const QRectF &rect);
+  void drawBackground(QPainter* painter, const QRectF& rect);
 
-private slots:
+ private slots:
   void SceneRectChanged(const QRectF& rect);
 
-private:
+ private:
   void InitProjectM();
   void Load();
   void Save();
 
   int IndexOfPreset(const QString& path) const;
 
-private:
-  boost::scoped_ptr<projectM> projectm_;
+ private:
+  std::unique_ptr<projectM> projectm_;
   ProjectMPresetModel* preset_model_;
   Mode mode_;
   int duration_;
 
-  boost::scoped_ptr<QTemporaryFile> temporary_font_;
+  std::unique_ptr<QTemporaryFile> temporary_font_;
 
   std::vector<int> default_rating_list_;
 
   int texture_size_;
 };
 
-#endif // PROJECTMVISUALISATION_H
+#endif  // PROJECTMVISUALISATION_H

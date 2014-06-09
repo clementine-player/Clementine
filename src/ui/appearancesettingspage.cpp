@@ -35,51 +35,54 @@
 #include "ui/albumcoverchoicecontroller.h"
 
 #ifdef HAVE_MOODBAR
-# include "moodbar/moodbarrenderer.h"
+#include "moodbar/moodbarrenderer.h"
 #endif
 
 const int AppearanceSettingsPage::kMoodbarPreviewWidth = 150;
 const int AppearanceSettingsPage::kMoodbarPreviewHeight = 18;
 
 AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
-  : SettingsPage(dialog),
-    ui_(new Ui_AppearanceSettingsPage),
-    original_use_a_custom_color_set_(false),
-    playlist_view_background_image_type_(PlaylistView::Default),
-    initialised_moodbar_previews_(false)
-{
+    : SettingsPage(dialog),
+      ui_(new Ui_AppearanceSettingsPage),
+      original_use_a_custom_color_set_(false),
+      playlist_view_background_image_type_(PlaylistView::Default),
+      initialised_moodbar_previews_(false) {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("view-media-visualization"));
 
-  connect(ui_->blur_slider, SIGNAL(valueChanged(int)), SLOT(BlurLevelChanged(int)));
-  connect(ui_->opacity_slider, SIGNAL(valueChanged(int)), SLOT(OpacityLevelChanged(int)));
+  connect(ui_->blur_slider, SIGNAL(valueChanged(int)),
+          SLOT(BlurLevelChanged(int)));
+  connect(ui_->opacity_slider, SIGNAL(valueChanged(int)),
+          SLOT(OpacityLevelChanged(int)));
 
   Load();
 
-  connect(ui_->select_foreground_color, SIGNAL(pressed()), SLOT(SelectForegroundColor()));
-  connect(ui_->select_background_color, SIGNAL(pressed()), SLOT(SelectBackgroundColor()));
-  connect(ui_->use_a_custom_color_set, SIGNAL(toggled(bool)), SLOT(UseCustomColorSetOptionChanged(bool)));
+  connect(ui_->select_foreground_color, SIGNAL(pressed()),
+          SLOT(SelectForegroundColor()));
+  connect(ui_->select_background_color, SIGNAL(pressed()),
+          SLOT(SelectBackgroundColor()));
+  connect(ui_->use_a_custom_color_set, SIGNAL(toggled(bool)),
+          SLOT(UseCustomColorSetOptionChanged(bool)));
 
-  connect(ui_->select_background_image_filename_button, SIGNAL(pressed()), SLOT(SelectBackgroundImage()));
+  connect(ui_->select_background_image_filename_button, SIGNAL(pressed()),
+          SLOT(SelectBackgroundImage()));
   connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
-      ui_->background_image_filename, SLOT(setEnabled(bool)));
+          ui_->background_image_filename, SLOT(setEnabled(bool)));
   connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
-      ui_->select_background_image_filename_button, SLOT(setEnabled(bool)));
+          ui_->select_background_image_filename_button, SLOT(setEnabled(bool)));
 
   connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
-      ui_->blur_slider, SLOT(setEnabled(bool)));
+          ui_->blur_slider, SLOT(setEnabled(bool)));
   connect(ui_->use_album_cover_background, SIGNAL(toggled(bool)),
-      ui_->blur_slider, SLOT(setEnabled(bool)));
+          ui_->blur_slider, SLOT(setEnabled(bool)));
 
   connect(ui_->use_default_background, SIGNAL(toggled(bool)),
-      SLOT(DisableBlurAndOpacitySliders(bool)));
+          SLOT(DisableBlurAndOpacitySliders(bool)));
   connect(ui_->use_no_background, SIGNAL(toggled(bool)),
-      SLOT(DisableBlurAndOpacitySliders(bool)));
+          SLOT(DisableBlurAndOpacitySliders(bool)));
 }
 
-AppearanceSettingsPage::~AppearanceSettingsPage() {
-  delete ui_;
-}
+AppearanceSettingsPage::~AppearanceSettingsPage() { delete ui_; }
 
 void AppearanceSettingsPage::Load() {
   QSettings s;
@@ -89,14 +92,17 @@ void AppearanceSettingsPage::Load() {
 
   // Keep in mind originals colors, in case the user clicks on Cancel, to be
   // able to restore colors
-  original_use_a_custom_color_set_ = s.value(Appearance::kUseCustomColorSet, false).toBool();
+  original_use_a_custom_color_set_ =
+      s.value(Appearance::kUseCustomColorSet, false).toBool();
 
-  original_foreground_color_  = s.value(Appearance::kForegroundColor,
-                                        p.color(QPalette::WindowText)).value<QColor>();
-  current_foreground_color_   = original_foreground_color_;
-  original_background_color_  = s.value(Appearance::kBackgroundColor,
-                                        p.color(QPalette::Window)).value<QColor>();
-  current_background_color_   = original_background_color_;
+  original_foreground_color_ =
+      s.value(Appearance::kForegroundColor, p.color(QPalette::WindowText))
+          .value<QColor>();
+  current_foreground_color_ = original_foreground_color_;
+  original_background_color_ =
+      s.value(Appearance::kBackgroundColor, p.color(QPalette::Window))
+          .value<QColor>();
+  current_background_color_ = original_background_color_;
 
   InitColorSelectorsColors();
   s.endGroup();
@@ -106,7 +112,7 @@ void AppearanceSettingsPage::Load() {
   playlist_view_background_image_type_ =
       static_cast<PlaylistView::BackgroundImageType>(
           s.value(PlaylistView::kSettingBackgroundImageType).toInt());
-  playlist_view_background_image_filename_  =
+  playlist_view_background_image_filename_ =
       s.value(PlaylistView::kSettingBackgroundImageFilename).toString();
 
   ui_->use_system_color_set->setChecked(!original_use_a_custom_color_set_);
@@ -128,7 +134,8 @@ void AppearanceSettingsPage::Load() {
       ui_->use_default_background->setChecked(true);
       DisableBlurAndOpacitySliders(true);
   }
-  ui_->background_image_filename->setText(playlist_view_background_image_filename_);
+  ui_->background_image_filename->setText(
+      playlist_view_background_image_filename_);
   ui_->blur_slider->setValue(
       s.value("blur_radius", PlaylistView::kDefaultBlurRadius).toInt());
   ui_->opacity_slider->setValue(
@@ -141,7 +148,8 @@ void AppearanceSettingsPage::Load() {
   ui_->moodbar_show->setChecked(s.value("show", true).toBool());
   ui_->moodbar_style->setCurrentIndex(s.value("style", 0).toInt());
   ui_->moodbar_calculate->setChecked(!s.value("calculate", true).toBool());
-  ui_->moodbar_save->setChecked(s.value("save_alongside_originals", false).toBool());
+  ui_->moodbar_save->setChecked(
+      s.value("save_alongside_originals", false).toBool());
   s.endGroup();
 
   InitMoodbarPreviews();
@@ -162,7 +170,8 @@ void AppearanceSettingsPage::Save() {
 
   // Playlist settings
   s.beginGroup(Playlist::kSettingsGroup);
-  playlist_view_background_image_filename_ = ui_->background_image_filename->text();
+  playlist_view_background_image_filename_ =
+      ui_->background_image_filename->text();
   if (ui_->use_no_background->isChecked()) {
     playlist_view_background_image_type_ = PlaylistView::None;
   } else if (ui_->use_album_cover_background->isChecked()) {
@@ -172,7 +181,7 @@ void AppearanceSettingsPage::Save() {
   } else if (ui_->use_custom_background_image->isChecked()) {
     playlist_view_background_image_type_ = PlaylistView::Custom;
     s.setValue(PlaylistView::kSettingBackgroundImageFilename,
-        playlist_view_background_image_filename_);
+               playlist_view_background_image_filename_);
   }
   s.setValue(PlaylistView::kSettingBackgroundImageType,
              playlist_view_background_image_type_);
@@ -200,8 +209,7 @@ void AppearanceSettingsPage::Cancel() {
 
 void AppearanceSettingsPage::SelectForegroundColor() {
   QColor color_selected = QColorDialog::getColor(current_foreground_color_);
-  if (!color_selected.isValid())
-    return;
+  if (!color_selected.isValid()) return;
 
   current_foreground_color_ = color_selected;
   dialog()->appearance()->ChangeForegroundColor(color_selected);
@@ -211,8 +219,7 @@ void AppearanceSettingsPage::SelectForegroundColor() {
 
 void AppearanceSettingsPage::SelectBackgroundColor() {
   QColor color_selected = QColorDialog::getColor(current_background_color_);
-  if (!color_selected.isValid())
-    return;
+  if (!color_selected.isValid()) return;
 
   current_background_color_ = color_selected;
   dialog()->appearance()->ChangeBackgroundColor(color_selected);
@@ -230,28 +237,32 @@ void AppearanceSettingsPage::UseCustomColorSetOptionChanged(bool checked) {
 }
 
 void AppearanceSettingsPage::InitColorSelectorsColors() {
-  UpdateColorSelectorColor(ui_->select_foreground_color, current_foreground_color_);
-  UpdateColorSelectorColor(ui_->select_background_color, current_background_color_);
+  UpdateColorSelectorColor(ui_->select_foreground_color,
+                           current_foreground_color_);
+  UpdateColorSelectorColor(ui_->select_background_color,
+                           current_background_color_);
 }
 
-void AppearanceSettingsPage::UpdateColorSelectorColor(QWidget* color_selector, const QColor& color) {
-  QString css = QString("background-color: rgb(%1, %2, %3); color: rgb(255, 255, 255)")
-      .arg(color.red())
-      .arg(color.green())
-      .arg(color.blue());
+void AppearanceSettingsPage::UpdateColorSelectorColor(QWidget* color_selector,
+                                                      const QColor& color) {
+  QString css =
+      QString("background-color: rgb(%1, %2, %3); color: rgb(255, 255, 255)")
+          .arg(color.red())
+          .arg(color.green())
+          .arg(color.blue());
   color_selector->setStyleSheet(css);
 }
 
 void AppearanceSettingsPage::SelectBackgroundImage() {
-  QString selected_filename =
-    QFileDialog::getOpenFileName(this, tr("Select background image"),
+  QString selected_filename = QFileDialog::getOpenFileName(
+      this, tr("Select background image"),
       playlist_view_background_image_filename_,
       tr(AlbumCoverChoiceController::kLoadImageFileFilter) + ";;" +
-        tr(AlbumCoverChoiceController::kAllFilesFilter));
-  if (selected_filename.isEmpty())
-    return;
+          tr(AlbumCoverChoiceController::kAllFilesFilter));
+  if (selected_filename.isEmpty()) return;
   playlist_view_background_image_filename_ = selected_filename;
-  ui_->background_image_filename->setText(playlist_view_background_image_filename_);
+  ui_->background_image_filename->setText(
+      playlist_view_background_image_filename_);
 }
 
 void AppearanceSettingsPage::BlurLevelChanged(int value) {
@@ -264,8 +275,7 @@ void AppearanceSettingsPage::OpacityLevelChanged(int percent) {
 
 void AppearanceSettingsPage::InitMoodbarPreviews() {
 #ifdef HAVE_MOODBAR
-  if (initialised_moodbar_previews_)
-    return;
+  if (initialised_moodbar_previews_) return;
   initialised_moodbar_previews_ = true;
 
   const QSize preview_size(kMoodbarPreviewWidth, kMoodbarPreviewHeight);
@@ -280,7 +290,7 @@ void AppearanceSettingsPage::InitMoodbarPreviews() {
   QByteArray data(file.readAll());
 
   // Render and set each preview
-  for (int i=0 ; i<MoodbarRenderer::StyleCount ; ++i) {
+  for (int i = 0; i < MoodbarRenderer::StyleCount; ++i) {
     const MoodbarRenderer::MoodbarStyle style =
         MoodbarRenderer::MoodbarStyle(i);
     const ColorVector colors = MoodbarRenderer::Colors(data, style, palette());

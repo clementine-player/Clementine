@@ -36,22 +36,22 @@ const int AlbumCoverFetcherSearch::kImageLoadTimeoutMs = 2500;
 const int AlbumCoverFetcherSearch::kTargetSize = 500;
 const float AlbumCoverFetcherSearch::kGoodScore = 1.85;
 
-AlbumCoverFetcherSearch::AlbumCoverFetcherSearch(const CoverSearchRequest& request,
-                                                 QNetworkAccessManager* network,
-                                                 QObject* parent)
-  : QObject(parent),
-    request_(request),
-    image_load_timeout_(new NetworkTimeouts(kImageLoadTimeoutMs, this)),
-    network_(network),
-    cancel_requested_(false)
-{
-  // we will terminate the search after kSearchTimeoutMs miliseconds if we are not
+AlbumCoverFetcherSearch::AlbumCoverFetcherSearch(
+    const CoverSearchRequest& request, QNetworkAccessManager* network,
+    QObject* parent)
+    : QObject(parent),
+      request_(request),
+      image_load_timeout_(new NetworkTimeouts(kImageLoadTimeoutMs, this)),
+      network_(network),
+      cancel_requested_(false) {
+  // we will terminate the search after kSearchTimeoutMs miliseconds if we are
+  // not
   // able to find all of the results before that point in time
   QTimer::singleShot(kSearchTimeoutMs, this, SLOT(TerminateSearch()));
 }
 
 void AlbumCoverFetcherSearch::TerminateSearch() {
-  foreach (int id, pending_requests_.keys()) {
+  for (int id : pending_requests_.keys()) {
     pending_requests_.take(id)->CancelSearch(id);
   }
 
@@ -59,21 +59,21 @@ void AlbumCoverFetcherSearch::TerminateSearch() {
 }
 
 void AlbumCoverFetcherSearch::Start(CoverProviders* cover_providers) {
-  foreach(CoverProvider* provider, cover_providers->List()) {
-    connect(provider, SIGNAL(SearchFinished(int,QList<CoverSearchResult>)),
-            SLOT(ProviderSearchFinished(int,QList<CoverSearchResult>)));
+  for (CoverProvider* provider : cover_providers->List()) {
+    connect(provider, SIGNAL(SearchFinished(int, QList<CoverSearchResult>)),
+            SLOT(ProviderSearchFinished(int, QList<CoverSearchResult>)));
     const int id = cover_providers->NextId();
-    const bool success = provider->StartSearch(
-          request_.artist, request_.album, id);
+    const bool success =
+        provider->StartSearch(request_.artist, request_.album, id);
 
     if (success) {
       pending_requests_[id] = provider;
-      statistics_.network_requests_made_ ++;
+      statistics_.network_requests_made_++;
     }
   }
 
   // end this search before it even began if there are no providers...
-  if(pending_requests_.isEmpty()) {
+  if (pending_requests_.isEmpty()) {
     TerminateSearch();
   }
 }
@@ -85,23 +85,22 @@ static bool CompareProviders(const CoverSearchResult& a,
 
 void AlbumCoverFetcherSearch::ProviderSearchFinished(
     int id, const QList<CoverSearchResult>& results) {
-  if (!pending_requests_.contains(id))
-    return;
+  if (!pending_requests_.contains(id)) return;
 
   CoverProvider* provider = pending_requests_.take(id);
 
   CoverSearchResults results_copy(results);
   // Set categories on the results
-  for (int i=0 ; i<results_copy.count() ; ++i) {
+  for (int i = 0; i < results_copy.count(); ++i) {
     results_copy[i].provider = provider->name();
   }
 
   // Add results from the current provider to our pool
   results_.append(results_copy);
-  statistics_.total_images_by_provider_[provider->name()] ++;
+  statistics_.total_images_by_provider_[provider->name()]++;
 
   // do we have more providers left?
-  if(!pending_requests_.isEmpty()) {
+  if (!pending_requests_.isEmpty()) {
     return;
   }
 
@@ -121,7 +120,7 @@ void AlbumCoverFetcherSearch::AllProvidersFinished() {
 
   // no results?
   if (results_.isEmpty()) {
-    statistics_.missing_images_ ++;
+    statistics_.missing_images_++;
     emit AlbumCoverFetched(request_.id, QImage());
     return;
   }
@@ -138,7 +137,7 @@ void AlbumCoverFetcherSearch::AllProvidersFinished() {
 void AlbumCoverFetcherSearch::FetchMoreImages() {
   // Try the first one in each category.
   QString last_provider;
-  for (int i=0 ; i<results_.count() ; ++i) {
+  for (int i = 0; i < results_.count(); ++i) {
     if (results_[i].provider == last_provider) {
       continue;
     }
@@ -148,14 +147,15 @@ void AlbumCoverFetcherSearch::FetchMoreImages() {
 
     qLog(Debug) << "Loading" << result.image_url << "from" << result.provider;
 
-    RedirectFollower* image_reply = new RedirectFollower(
-        network_->get(QNetworkRequest(result.image_url)));
+    RedirectFollower* image_reply =
+        new RedirectFollower(network_->get(QNetworkRequest(result.image_url)));
     NewClosure(image_reply, SIGNAL(finished()), this,
-               SLOT(ProviderCoverFetchFinished(RedirectFollower*)), image_reply);
+               SLOT(ProviderCoverFetchFinished(RedirectFollower*)),
+               image_reply);
     pending_image_loads_[image_reply] = result.provider;
     image_load_timeout_->AddReply(image_reply);
 
-    statistics_.network_requests_made_ ++;
+    statistics_.network_requests_made_++;
   }
 
   if (pending_image_loads_.isEmpty()) {
@@ -164,7 +164,8 @@ void AlbumCoverFetcherSearch::FetchMoreImages() {
   }
 }
 
-void AlbumCoverFetcherSearch::ProviderCoverFetchFinished(RedirectFollower* reply) {
+void AlbumCoverFetcherSearch::ProviderCoverFetchFinished(
+    RedirectFollower* reply) {
   reply->deleteLater();
   const QString provider = pending_image_loads_.take(reply);
 
@@ -213,11 +214,12 @@ float AlbumCoverFetcherSearch::ScoreImage(const QImage& image) const {
   }
 
   // A 500x500px image scores 1.0, bigger scores higher
-  const float size_score = std::sqrt(float(image.width() * image.height())) / kTargetSize;
+  const float size_score =
+      std::sqrt(float(image.width() * image.height())) / kTargetSize;
 
   // A 1:1 image scores 1.0, anything else scores less
   const float aspect_score = 1.0 - float(image.height() - image.width()) /
-                                   std::max(image.height(), image.width());
+                                       std::max(image.height(), image.width());
 
   return size_score + aspect_score;
 }
@@ -229,12 +231,12 @@ void AlbumCoverFetcherSearch::SendBestImage() {
     const CandidateImage best_image = candidate_images_.values().back();
     image = best_image.second;
 
-    statistics_.chosen_images_by_provider_[best_image.first] ++;
-    statistics_.chosen_images_ ++;
+    statistics_.chosen_images_by_provider_[best_image.first]++;
+    statistics_.chosen_images_++;
     statistics_.chosen_width_ += image.width();
     statistics_.chosen_height_ += image.height();
   } else {
-    statistics_.missing_images_ ++;
+    statistics_.missing_images_++;
   }
 
   emit AlbumCoverFetched(request_.id, image);
@@ -246,7 +248,7 @@ void AlbumCoverFetcherSearch::Cancel() {
   if (!pending_requests_.isEmpty()) {
     TerminateSearch();
   } else if (!pending_image_loads_.isEmpty()) {
-    foreach (RedirectFollower* reply, pending_image_loads_.keys()) {
+    for (RedirectFollower* reply : pending_image_loads_.keys()) {
       reply->abort();
     }
     pending_image_loads_.clear();

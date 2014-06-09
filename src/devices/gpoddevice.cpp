@@ -30,17 +30,14 @@
 
 #include <gpod/itdb.h>
 
-GPodDevice::GPodDevice(
-    const QUrl& url, DeviceLister* lister,
-    const QString& unique_id, DeviceManager* manager,
-    Application* app,
-    int database_id, bool first_time)
-      : ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
-        loader_thread_(new QThread(this)),
-        loader_(NULL),
-        db_(NULL)
-{
-}
+GPodDevice::GPodDevice(const QUrl& url, DeviceLister* lister,
+                       const QString& unique_id, DeviceManager* manager,
+                       Application* app, int database_id, bool first_time)
+    : ConnectedDevice(url, lister, unique_id, manager, app, database_id,
+                      first_time),
+      loader_thread_(new QThread(this)),
+      loader_(nullptr),
+      db_(nullptr) {}
 
 void GPodDevice::Init() {
   InitBackendDirectory(url_.path(), first_time_);
@@ -52,13 +49,13 @@ void GPodDevice::Init() {
 
   connect(loader_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
   connect(loader_, SIGNAL(TaskStarted(int)), SIGNAL(TaskStarted(int)));
-  connect(loader_, SIGNAL(LoadFinished(Itdb_iTunesDB*)), SLOT(LoadFinished(Itdb_iTunesDB*)));
+  connect(loader_, SIGNAL(LoadFinished(Itdb_iTunesDB*)),
+          SLOT(LoadFinished(Itdb_iTunesDB*)));
   connect(loader_thread_, SIGNAL(started()), loader_, SLOT(LoadDatabase()));
   loader_thread_->start();
 }
 
-GPodDevice::~GPodDevice() {
-}
+GPodDevice::~GPodDevice() {}
 
 void GPodDevice::LoadFinished(Itdb_iTunesDB* db) {
   QMutexLocker l(&db_mutex_);
@@ -66,22 +63,20 @@ void GPodDevice::LoadFinished(Itdb_iTunesDB* db) {
   db_wait_cond_.wakeAll();
 
   loader_->deleteLater();
-  loader_ = NULL;
+  loader_ = nullptr;
 }
 
 bool GPodDevice::StartCopy(QList<Song::FileType>* supported_filetypes) {
   {
     // Wait for the database to be loaded
     QMutexLocker l(&db_mutex_);
-    if (!db_)
-      db_wait_cond_.wait(&db_mutex_);
+    if (!db_) db_wait_cond_.wait(&db_mutex_);
   }
 
   // Ensure only one "organise files" can be active at any one time
   db_busy_.lock();
 
-  if (supported_filetypes)
-    GetSupportedFiletypes(supported_filetypes);
+  if (supported_filetypes) GetSupportedFiletypes(supported_filetypes);
   return true;
 }
 
@@ -113,9 +108,10 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
   Itdb_Track* track = AddTrackToITunesDb(job.metadata_);
 
   // Copy the file
-  GError* error = NULL;
-  itdb_cp_track_to_ipod(track, QDir::toNativeSeparators(job.source_)
-                        .toLocal8Bit().constData(), &error);
+  GError* error = nullptr;
+  itdb_cp_track_to_ipod(
+      track, QDir::toNativeSeparators(job.source_).toLocal8Bit().constData(),
+      &error);
   if (error) {
     qLog(Error) << "copying failed:" << error->message;
     app_->AddError(QString::fromUtf8(error->message));
@@ -139,7 +135,7 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
 void GPodDevice::WriteDatabase(bool success) {
   if (success) {
     // Write the itunes database
-    GError* error = NULL;
+    GError* error = nullptr;
     itdb_write(db_, &error);
     if (error) {
       qLog(Error) << "writing database failed:" << error->message;
@@ -149,10 +145,8 @@ void GPodDevice::WriteDatabase(bool success) {
       FinaliseDatabase();
 
       // Update the library model
-      if (!songs_to_add_.isEmpty())
-        backend_->AddOrUpdateSongs(songs_to_add_);
-      if (!songs_to_remove_.isEmpty())
-        backend_->DeleteSongs(songs_to_remove_);
+      if (!songs_to_add_.isEmpty()) backend_->AddOrUpdateSongs(songs_to_add_);
+      if (!songs_to_remove_.isEmpty()) backend_->DeleteSongs(songs_to_remove_);
     }
   }
 
@@ -166,20 +160,20 @@ void GPodDevice::FinishCopy(bool success) {
   ConnectedDevice::FinishCopy(success);
 }
 
-void GPodDevice::StartDelete() {
-  StartCopy(NULL);
-}
+void GPodDevice::StartDelete() { StartCopy(nullptr); }
 
-bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& relative_to) {
+bool GPodDevice::RemoveTrackFromITunesDb(const QString& path,
+                                         const QString& relative_to) {
   QString ipod_filename = path;
   if (!relative_to.isEmpty() && path.startsWith(relative_to))
-    ipod_filename.remove(0, relative_to.length() + (relative_to.endsWith('/') ? -1 : 0));
+    ipod_filename.remove(
+        0, relative_to.length() + (relative_to.endsWith('/') ? -1 : 0));
 
   ipod_filename.replace('/', ':');
 
   // Find the track in the itdb, identify it by its filename
-  Itdb_Track* track = NULL;
-  for (GList* tracks = db_->tracks ; tracks != NULL ; tracks = tracks->next) {
+  Itdb_Track* track = nullptr;
+  for (GList* tracks = db_->tracks; tracks != nullptr; tracks = tracks->next) {
     Itdb_Track* t = static_cast<Itdb_Track*>(tracks->data);
 
     if (t->ipod_path == ipod_filename) {
@@ -188,13 +182,14 @@ bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& rel
     }
   }
 
-  if (track == NULL) {
+  if (track == nullptr) {
     qLog(Warning) << "Couldn't find song" << path << "in iTunesDB";
     return false;
   }
 
   // Remove the track from all playlists
-  for (GList* playlists = db_->playlists ; playlists != NULL ; playlists = playlists->next) {
+  for (GList* playlists = db_->playlists; playlists != nullptr;
+       playlists = playlists->next) {
     Itdb_Playlist* playlist = static_cast<Itdb_Playlist*>(playlists->data);
 
     if (itdb_playlist_contains_track(playlist, track)) {
@@ -215,8 +210,7 @@ bool GPodDevice::DeleteFromStorage(const DeleteJob& job) {
     return false;
 
   // Remove the file
-  if (!QFile::remove(job.metadata_.url().toLocalFile()))
-    return false;
+  if (!QFile::remove(job.metadata_.url().toLocalFile())) return false;
 
   // Remove it from our library model
   songs_to_remove_ << job.metadata_;
