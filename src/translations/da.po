@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-# Sappe, 2013
+# Anders J. Sørensen, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Runkeldunk <generallangsohm@gmail.com>, 2014
 # Runkeldunk <generallangsohm@gmail.com>, 2012
 # Jens E. Jensen <jens.e.jensen@gmail.com>, 2012
-# GoatRider1505 <johan.olesen97@gmail.com>, 2013
+# Johan Olesen <johan.olesen97@gmail.com>, 2013
 # Morten Anton Bach Sjøgren <m_abs@mabs.dk>, 2010
 # Peter Jespersen <flywheeldk@gmail.com>, 2012-2014
-# tommycarstensen <tommy.carstensen@gmail.com>, 2012
+# Tommy Carstensen <tommy.carstensen@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-24 04:16+0000\n"
+"PO-Revision-Date: 2014-06-05 15:16+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/clementine/language/da/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -276,7 +276,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:62
+#: library/library.cpp:65
 msgid "50 random tracks"
 msgstr "50 tilfældige numre"
 
@@ -391,8 +391,9 @@ msgstr "Om Qt..."
 
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:208 ../bin/src/ui_vksettingspage.h:211
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_seafilesettingspage.h:169
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
 msgid "Account details"
 msgstr "Kontodetaljer"
 
@@ -575,7 +576,7 @@ msgstr "Føj til Grooveshark afspilningsliste"
 
 #: internet/vkservice.cpp:306
 msgid "Add to My Music"
-msgstr ""
+msgstr "Tilføj til Min Musik"
 
 #: ui/mainwindow.cpp:1646
 msgid "Add to another playlist"
@@ -650,7 +651,7 @@ msgstr "Efter kopiering..."
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
-#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
 msgid "Album"
 msgstr "Album"
@@ -661,7 +662,7 @@ msgstr "Album (ideel lydstyrke for alle spor)"
 
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "Albummets kunstner"
 
@@ -711,7 +712,7 @@ msgstr "Alle spillelister (%1)"
 msgid "All the translators"
 msgstr "Alle oversætterne"
 
-#: library/library.cpp:98
+#: library/library.cpp:101
 msgid "All tracks"
 msgstr "Alle numre"
 
@@ -817,7 +818,7 @@ msgstr ""
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
-#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "Kunstner"
@@ -885,7 +886,7 @@ msgid "BBC Podcasts"
 msgstr "BBC Podcasts"
 
 #: playlist/playlist.cpp:1335 ui/organisedialog.cpp:70
-#: ../bin/src/ui_edittagdialog.h:668
+#: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
 
@@ -911,7 +912,7 @@ msgstr "Sikkerhedskopierer database"
 
 #: ../bin/src/ui_equalizer.h:173
 msgid "Balance"
-msgstr ""
+msgstr "Balance"
 
 #: analyzers/baranalyzer.cpp:22
 msgid "Bar analyzer"
@@ -938,7 +939,7 @@ msgstr "Bedst"
 msgid "Biography from %1"
 msgstr "Biografi fra %1"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Bitrate"
 
@@ -954,7 +955,7 @@ msgstr "Bitrate"
 #: ui/organisedialog.cpp:75
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitrate"
 
 #: analyzers/blockanalyzer.cpp:23
 msgid "Block analyzer"
@@ -1010,7 +1011,7 @@ msgstr ""
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:118
+#: library/library.cpp:121
 msgid "CUE sheet support"
 msgstr "Understøttelse af indeksark"
 
@@ -1037,7 +1038,7 @@ msgid ""
 "Try to login into Vk.com with your browser,to fix this problem."
 msgstr ""
 
-#: ../bin/src/ui_edittagdialog.h:664
+#: ../bin/src/ui_edittagdialog.h:667
 msgid "Change cover art"
 msgstr "Skift omslag"
 
@@ -1070,6 +1071,10 @@ msgstr "Ændring af mono afspilningspræference vil først træde i kraft for de
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
 msgstr "Søg efter nye episoder"
+
+#: internet/googledriveservice.cpp:202
+msgid "Check for updates"
+msgstr ""
 
 #: ui/mainwindow.cpp:714
 msgid "Check for updates..."
@@ -1214,10 +1219,10 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Klik for at skifte mellem tilbageværende tid og total tid"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
-#: ../bin/src/ui_googledrivesettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1256,7 +1261,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komma-separeret liste af klasse:level, level er 0-3"
 
 #: playlist/playlist.cpp:1354 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:694
+#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -1264,7 +1269,7 @@ msgstr "Kommentar"
 msgid "Community Radio"
 msgstr ""
 
-#: ../bin/src/ui_edittagdialog.h:693
+#: ../bin/src/ui_edittagdialog.h:696
 msgid "Complete tags automatically"
 msgstr "Fuldfør mærker automatisk"
 
@@ -1274,7 +1279,7 @@ msgstr "Fuldfør mærker automatisk..."
 
 #: playlist/playlist.cpp:1317 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
+#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "Komponist"
 
@@ -1322,7 +1327,7 @@ msgstr "Konfigurer podcasts ..."
 #: internet/cloudfileservice.cpp:85
 #: internet/digitallyimportedservicebase.cpp:178
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:198
+#: internet/googledriveservice.cpp:210
 msgid "Configure..."
 msgstr "Indstil..."
 
@@ -1429,7 +1434,7 @@ msgstr "Kunne ikke åbne output fil %1"
 
 #: internet/cloudfileservice.cpp:82 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:673
-#: internet/googledriveservice.cpp:196
+#: internet/googledriveservice.cpp:208
 msgid "Cover Manager"
 msgstr "Omslagshåndtering"
 
@@ -1575,11 +1580,11 @@ msgid ""
 "recover your database"
 msgstr "Database korruption opdaget. Læs https://code.google.com/p/clementine-player/wiki/DatabaseCorruption for at få instruktioner om, hvordan du gendanner din database"
 
-#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Oprettelsesdato"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Ændringsdato"
 
@@ -1704,9 +1709,9 @@ msgstr "Enhedsindstillinger..."
 msgid "Devices"
 msgstr "Enhed"
 
-#: ../bin/src/ui_vksearchdialog.h:61 ../bin/src/ui_ripcd.h:300
+#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
-msgstr ""
+msgstr "Dialog"
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1749,10 +1754,10 @@ msgstr "Deaktiveret"
 #: globalsearch/searchproviderstatuswidget.cpp:46
 msgctxt "Refers to search provider's status."
 msgid "Disabled"
-msgstr ""
+msgstr "Deaktiver"
 
 #: playlist/playlist.cpp:1309 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Disk"
 
@@ -1773,6 +1778,14 @@ msgstr "Vis on-screen-display"
 msgid "Do a full library rescan"
 msgstr "Genindlæs hele biblioteket"
 
+#: internet/googledriveservice.cpp:250 internet/googledriveservice.cpp:257
+msgid "Do a full rescan"
+msgstr ""
+
+#: internet/googledriveservice.cpp:205
+msgid "Do a full rescan..."
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
 msgstr "Konverter ikke noget musik"
@@ -1780,6 +1793,13 @@ msgstr "Konverter ikke noget musik"
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr "Overskriv ikke"
+
+#: internet/googledriveservice.cpp:251
+msgid ""
+"Doing a full rescan will lose any metadata you've saved in Clementine such "
+"as cover art, play counts and ratings.  Clementine will rescan all your "
+"music in Google Drive which may take some time."
+msgstr ""
 
 #: widgets/osd.cpp:302 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1894,13 +1914,13 @@ msgstr ""
 
 #: ../bin/src/ui_ripcd.h:309
 msgid "Duration"
-msgstr ""
+msgstr "Varighed"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
 msgstr "Dynamisk tilstand er aktiveret"
 
-#: internet/jamendoservice.cpp:121 library/library.cpp:112
+#: internet/jamendoservice.cpp:121 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Dynamisk tilfældig mix"
 
@@ -1917,11 +1937,11 @@ msgstr ""
 msgid "Edit tag..."
 msgstr "Redigér mærke..."
 
-#: ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit tags"
 msgstr "Rediger mærker"
 
-#: ../bin/src/ui_edittagdialog.h:662
+#: ../bin/src/ui_edittagdialog.h:665
 msgid "Edit track information"
 msgstr "Redigér sporinformation"
 
@@ -1937,6 +1957,10 @@ msgstr "Rediger information om sporet"
 #: internet/savedradio.cpp:103
 msgid "Edit..."
 msgstr "Rediger..."
+
+#: ../bin/src/ui_seafilesettingspage.h:172
+msgid "Email"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
@@ -2047,7 +2071,7 @@ msgstr "Fejl"
 
 #: ui/ripcd.cpp:295
 msgid "Error Ripping CD"
-msgstr ""
+msgstr "Fejl ved CD Ripning"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2084,7 +2108,7 @@ msgstr "Kunne ikke behandle %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Kunne ikke indlæse lyd-CD"
 
-#: library/library.cpp:66
+#: library/library.cpp:69
 msgid "Ever played"
 msgstr "Nogensinde afspillet"
 
@@ -2236,7 +2260,7 @@ msgstr "Hurtig"
 msgid "Favorites"
 msgstr "Favoritter"
 
-#: library/library.cpp:88
+#: library/library.cpp:91
 msgid "Favourite tracks"
 msgstr "Favoritspor"
 
@@ -2262,7 +2286,7 @@ msgstr "Kunne ikke hente omslag"
 
 #: ../bin/src/ui_ripcd.h:320
 msgid "File Format"
-msgstr ""
+msgstr "Filformat"
 
 #: ui/organisedialog.cpp:77
 msgid "File extension"
@@ -2272,7 +2296,7 @@ msgstr "File suffiks"
 msgid "File formats"
 msgstr "Filformater"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "Filnavn"
 
@@ -2284,13 +2308,13 @@ msgstr "Filnavn (uden sti)"
 msgid "File name pattern:"
 msgstr ""
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "Filstørrelse"
 
 #: playlist/playlist.cpp:1347 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
-#: ../bin/src/ui_edittagdialog.h:676
+#: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "Filtype"
 
@@ -2312,7 +2336,7 @@ msgstr "Find sange i biblioteket, baseret på de kriterier du opgiver."
 
 #: internet/vkservice.cpp:302
 msgid "Find this artist"
-msgstr ""
+msgstr "Find denne kunstner"
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
@@ -2328,7 +2352,7 @@ msgstr "Første niveau"
 
 #: widgets/nowplayingwidget.cpp:105
 msgid "Fit cover to width"
-msgstr ""
+msgstr "Tilpas cover til i bredden"
 
 #: core/song.cpp:379 transcoder/transcoder.cpp:230
 msgid "Flac"
@@ -2410,7 +2434,7 @@ msgstr "Fuld bas + diskant"
 msgid "Full Treble"
 msgstr "Fuld diskant"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:139
 msgid "General"
 msgstr "Generelt"
 
@@ -2420,7 +2444,7 @@ msgstr "Generelle indstillinger"
 
 #: playlist/playlist.cpp:1313 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Genre"
@@ -2528,7 +2552,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Gruppér efter genre/kunstner/album"
 
 #: playlist/playlist.cpp:1321 ui/organisedialog.cpp:67
-#: ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Gruppering "
 
@@ -2702,7 +2726,7 @@ msgstr "Integritetskontrol"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:161
 msgid "Internet providers"
 msgstr "Internet udbydere"
 
@@ -2740,7 +2764,7 @@ msgstr "Ugyldigt brugernavn og/eller adgangskode"
 
 #: ../bin/src/ui_ripcd.h:312
 msgid "Invert Selection"
-msgstr ""
+msgstr "Inverter Udvælgelse"
 
 #: internet/jamendoservice.cpp:133
 msgid "Jamendo"
@@ -2819,11 +2843,11 @@ msgstr ""
 msgid "Large sidebar"
 msgstr "Stort sidepanel"
 
-#: library/library.cpp:80
+#: library/library.cpp:83
 msgid "Last played"
 msgstr "Sidst afspillet"
 
-#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:671
+#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Sidst afspillet"
@@ -2856,7 +2880,7 @@ msgstr "Last.fm-brugernavn"
 msgid "Last.fm wiki"
 msgstr "Last.fm wiki"
 
-#: library/library.cpp:102
+#: library/library.cpp:105
 msgid "Least favourite tracks"
 msgstr "Spor med færreste stemmer"
 
@@ -2865,11 +2889,12 @@ msgid "Left"
 msgstr "Venstre"
 
 #: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
-#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:666
+#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Længde"
 
 #: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "Bibliotek"
 
@@ -2957,9 +2982,9 @@ msgstr "Henter information om spor"
 
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
-#: internet/vkservice.cpp:485 internet/vksettingspage.cpp:122
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
+#: internet/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "Åbner..."
 
@@ -2967,18 +2992,19 @@ msgstr "Åbner..."
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Indlæser filer/URL'er og erstatter nuværende spilleliste"
 
-#: internet/vksettingspage.cpp:110
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
-#: ../bin/src/ui_dropboxsettingspage.h:105
-#: ../bin/src/ui_skydrivesettingspage.h:105
-#: ../bin/src/ui_boxsettingspage.h:105 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_seafilesettingspage.h:173
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_skydrivesettingspage.h:105
+#: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
+#: ../bin/src/ui_vksettingspage.h:213
 msgid "Login"
 msgstr "Log ind"
 
@@ -2988,7 +3014,7 @@ msgstr "Login mislykkedes"
 
 #: internet/vksettingspage.cpp:121
 msgid "Logout"
-msgstr ""
+msgstr "Log ud"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
@@ -3023,7 +3049,7 @@ msgstr "Sangtekster fra %1"
 
 #: transcoder/transcoder.cpp:232
 msgid "M4A AAC"
-msgstr ""
+msgstr "M4A AAC"
 
 #: core/song.cpp:385 transcoder/transcoder.cpp:235
 #: ../bin/src/ui_transcodersettingspage.h:175
@@ -3177,9 +3203,9 @@ msgstr "Stemningslinier"
 
 #: internet/vkservice.cpp:489
 msgid "More"
-msgstr ""
+msgstr "Mere"
 
-#: library/library.cpp:84
+#: library/library.cpp:87
 msgid "Most played"
 msgstr "Mest afspillede"
 
@@ -3257,7 +3283,7 @@ msgstr "Netværks Remote"
 msgid "Never"
 msgstr "Aldrig"
 
-#: library/library.cpp:73
+#: library/library.cpp:76
 msgid "Never played"
 msgstr "Aldrig afspillet"
 
@@ -3288,7 +3314,7 @@ msgstr "Nye sange"
 msgid "New tracks will be added automatically."
 msgstr "Nye spor vil automatisk blive tilføjet."
 
-#: library/library.cpp:92
+#: library/library.cpp:95
 msgid "Newest tracks"
 msgstr "Nyeste spor"
 
@@ -3386,7 +3412,7 @@ msgstr "Ikke monteret - dobbeltklik for at montere"
 
 #: internet/vksearchdialog.cpp:94
 msgid "Nothing found"
-msgstr ""
+msgstr "Intet fundet"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Notification type"
@@ -3482,7 +3508,7 @@ msgstr "Åbn enhed"
 msgid "Open file..."
 msgstr "Åben fil..."
 
-#: internet/googledriveservice.cpp:193
+#: internet/googledriveservice.cpp:198
 msgid "Open in Google Drive"
 msgstr "Åbn på Google Drev"
 
@@ -3499,7 +3525,7 @@ msgstr ""
 
 #: songinfo/echonestbiographies.cpp:97
 msgid "Open in your browser"
-msgstr ""
+msgstr "Åben i netlæser"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:178
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
@@ -3588,6 +3614,7 @@ msgstr "Party"
 #: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
+#: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
 msgstr "Kodeord"
 
@@ -3605,7 +3632,7 @@ msgid "Paused"
 msgstr "På pause"
 
 #: playlist/playlist.cpp:1319 ui/organisedialog.cpp:66
-#: ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "Kunstner"
 
@@ -3624,7 +3651,7 @@ msgstr "Simpelt sidepanel"
 msgid "Play"
 msgstr "Afspil"
 
-#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Antal gange afspillet"
 
@@ -3717,11 +3744,15 @@ msgstr "Port"
 msgid "Pre-amp"
 msgstr "For-forstærker"
 
+#: ../bin/src/ui_seafilesettingspage.h:177
+msgid "Preference"
+msgstr ""
+
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_vksettingspage.h:214 ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
 msgid "Preferences"
 msgstr "Indstillinger"
 
@@ -3804,7 +3835,7 @@ msgstr ""
 
 #: ui/equalizer.cpp:138
 msgid "Psychedelic"
-msgstr ""
+msgstr "Psykedelisk"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 #: wiimotedev/wiimotesettingspage.cpp:239
@@ -3826,7 +3857,7 @@ msgstr "Kvalitet"
 #: visualisations/visualisationcontainer.cpp:118
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "Kvalitet"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
@@ -3890,7 +3921,7 @@ msgstr "Giv 4 stjerner til denne sang"
 msgid "Rate the current song 5 stars"
 msgstr "Giv 5 stjerner til denne sang"
 
-#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Pointgivning"
 
@@ -4055,7 +4086,7 @@ msgstr "Forlang autentificeringskode"
 msgid "Reset"
 msgstr "Nulstil"
 
-#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:665
+#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:668
 msgid "Reset play counts"
 msgstr "Nulstil afspilningstæller"
 
@@ -4094,15 +4125,15 @@ msgstr "Højre"
 
 #: ../bin/src/ui_ripcd.h:303
 msgid "Rip"
-msgstr ""
+msgstr "Rip"
 
 #: ui/ripcd.cpp:114
 msgid "Rip CD"
-msgstr ""
+msgstr "Rip CD"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Rip audio CD..."
-msgstr ""
+msgstr "Rip lyd CD..."
 
 #: ui/equalizer.cpp:142
 msgid "Rock"
@@ -4130,7 +4161,7 @@ msgstr "Sikker fjernelse af enhed"
 msgid "Safely remove the device after copying"
 msgstr "Sikker fjernelse af enhed efter kopiering"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Samplingsrate"
 
@@ -4184,7 +4215,7 @@ msgstr ""
 msgid "Save this stream in the Internet tab"
 msgstr "Gem denne kanal i et Internet-faneblad"
 
-#: library/library.cpp:177
+#: library/library.cpp:196
 msgid "Saving songs statistics into songs files"
 msgstr ""
 
@@ -4200,7 +4231,7 @@ msgstr "Skalerbar samplingsfrekvens-profil (SSR)"
 msgid "Scale size"
 msgstr "Skaler størrelse"
 
-#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Karakter"
 
@@ -4208,9 +4239,13 @@ msgstr "Karakter"
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobble-spor som jeg lytter til"
 
+#: ../bin/src/ui_seafilesettingspage.h:165
+msgid "Seafile"
+msgstr ""
+
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
-#: internet/vkservice.cpp:512 ../bin/src/ui_gpoddersearchpage.h:78
-#: ../bin/src/ui_itunessearchpage.h:78 ../bin/src/ui_albumcoversearcher.h:114
+#: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:512
 msgid "Search"
 msgstr "Søg"
 
@@ -4237,7 +4272,7 @@ msgstr "Søg Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
-msgstr ""
+msgstr "Søg automatisk"
 
 #: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
@@ -4331,11 +4366,15 @@ msgstr "Vælg visualiseringer..."
 
 #: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
-msgstr ""
+msgstr "Vælg..."
 
 #: devices/devicekitlister.cpp:126
 msgid "Serial number"
 msgstr "Serienummer"
+
+#: ../bin/src/ui_seafilesettingspage.h:174
+msgid "Server"
+msgstr ""
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
@@ -4452,7 +4491,7 @@ msgstr "Vis i filbrowser"
 
 #: ui/mainwindow.cpp:622
 msgid "Show in library..."
-msgstr ""
+msgstr "Vis i biblioteket..."
 
 #: library/libraryview.cpp:417
 msgid "Show in various artists"
@@ -4546,7 +4585,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Skip tilbage i spillelisten"
 
-#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Antal gange sprunget over"
 
@@ -4556,11 +4595,11 @@ msgstr "Skip fremad i spillelisten"
 
 #: ui/mainwindow.cpp:1582
 msgid "Skip selected tracks"
-msgstr ""
+msgstr "Skip valgte spor"
 
 #: ui/mainwindow.cpp:1580
 msgid "Skip track"
-msgstr ""
+msgstr "Skip spor"
 
 #: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
@@ -4767,7 +4806,7 @@ msgstr "Skrev %1"
 msgid "Suggested tags"
 msgstr "Foreslåede mærker"
 
-#: ../bin/src/ui_edittagdialog.h:681
+#: ../bin/src/ui_edittagdialog.h:684
 #: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Summary"
 msgstr "Sammendrag"
@@ -4977,7 +5016,7 @@ msgstr "Denne enhedstype (%1) er ikke understøttet."
 
 #: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
-#: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "Titel"
@@ -5026,7 +5065,7 @@ msgstr "Bedste musiknumre"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
-msgstr ""
+msgstr "Totalt antal albums:"
 
 #: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total bytes transferred"
@@ -5037,14 +5076,14 @@ msgid "Total network requests made"
 msgstr "Totalt antal forespørgsler over nettet"
 
 #: playlist/playlist.cpp:1307 ui/organisedialog.cpp:68
-#: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
+#: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
 msgstr "Spor"
 
 #: internet/soundcloudservice.cpp:134
 msgid "Tracks"
-msgstr ""
+msgstr "Spor"
 
 #: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:683
 msgid "Transcode Music"
@@ -5091,6 +5130,10 @@ msgstr "URL'er"
 msgid "Ultra wide band (UWB)"
 msgstr "Ultra wide band (UWB)"
 
+#: internet/seafilesettingspage.cpp:129 internet/seafilesettingspage.cpp:130
+msgid "Unable to connect"
+msgstr ""
+
 #: internet/magnatunedownloaddialog.cpp:147
 #, qt-format
 msgid "Unable to download %1 (%2)"
@@ -5118,11 +5161,11 @@ msgstr "Fravælg omslag"
 
 #: ui/mainwindow.cpp:1578
 msgid "Unskip selected tracks"
-msgstr ""
+msgstr "Skip valgte spor"
 
 #: ui/mainwindow.cpp:1576
 msgid "Unskip track"
-msgstr ""
+msgstr "Skip ikke spor"
 
 #: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
 msgid "Unsubscribe"
@@ -5255,7 +5298,7 @@ msgstr "Brugt"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Brugeren %1 har ikke en Grooveshark Anywhere-konto"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:153
 msgid "User interface"
 msgstr "Brugergrænseflade"
 
@@ -5309,7 +5352,7 @@ msgstr "Indstilling af visualiseringer"
 
 #: ../bin/src/ui_vksettingspage.h:210
 msgid "Vk.com"
-msgstr ""
+msgstr "Vk.com"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
@@ -5445,7 +5488,7 @@ msgstr "Forkert brugernavn og/eller password."
 
 #: playlist/playlist.cpp:1311 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
+#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "År"

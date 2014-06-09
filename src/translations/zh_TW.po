@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-# brli7848 <rainman59118@gmail.com>, 2013-2014
+# BrLi <rainman59118@gmail.com>, 2013-2014
 # Cheng-Hong Wu <stu2731652@gmail.com>, 2012
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # taijuin lee <taijuin@gmail.com>, 2011-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-24 04:16+0000\n"
+"PO-Revision-Date: 2014-06-05 15:16+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -271,7 +271,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr ""
 
-#: library/library.cpp:62
+#: library/library.cpp:65
 msgid "50 random tracks"
 msgstr "50 隨機歌曲"
 
@@ -386,8 +386,9 @@ msgstr "關於 Qt..."
 
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:208 ../bin/src/ui_vksettingspage.h:211
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_seafilesettingspage.h:169
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
 msgid "Account details"
 msgstr "帳戶詳情"
 
@@ -645,7 +646,7 @@ msgstr "複製後 ..."
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
-#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
 msgid "Album"
 msgstr "專輯"
@@ -656,7 +657,7 @@ msgstr "專輯 (為所有歌曲取得理想音量)"
 
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "專輯演出者"
 
@@ -706,7 +707,7 @@ msgstr "所有播放清單 (%1)"
 msgid "All the translators"
 msgstr "所有翻譯者"
 
-#: library/library.cpp:98
+#: library/library.cpp:101
 msgid "All tracks"
 msgstr "所有曲目"
 
@@ -812,7 +813,7 @@ msgstr ""
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
-#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "演出者"
@@ -880,7 +881,7 @@ msgid "BBC Podcasts"
 msgstr "BBC Podcasts"
 
 #: playlist/playlist.cpp:1335 ui/organisedialog.cpp:70
-#: ../bin/src/ui_edittagdialog.h:668
+#: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
 
@@ -933,7 +934,7 @@ msgstr "最佳"
 msgid "Biography from %1"
 msgstr "%1的傳記"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "位元率"
 
@@ -1005,7 +1006,7 @@ msgstr ""
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:118
+#: library/library.cpp:121
 msgid "CUE sheet support"
 msgstr "CUE 表單支援"
 
@@ -1032,7 +1033,7 @@ msgid ""
 "Try to login into Vk.com with your browser,to fix this problem."
 msgstr ""
 
-#: ../bin/src/ui_edittagdialog.h:664
+#: ../bin/src/ui_edittagdialog.h:667
 msgid "Change cover art"
 msgstr "更換封面圖片"
 
@@ -1065,6 +1066,10 @@ msgstr ""
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
 msgstr "檢查是否有新的片斷內容"
+
+#: internet/googledriveservice.cpp:202
+msgid "Check for updates"
+msgstr ""
 
 #: ui/mainwindow.cpp:714
 msgid "Check for updates..."
@@ -1209,10 +1214,10 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "點擊以切換剩餘時間/全部時間"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
-#: ../bin/src/ui_googledrivesettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1251,7 +1256,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "用逗號化分類別清單:等級為0-3"
 
 #: playlist/playlist.cpp:1354 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:694
+#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "評論"
 
@@ -1259,7 +1264,7 @@ msgstr "評論"
 msgid "Community Radio"
 msgstr ""
 
-#: ../bin/src/ui_edittagdialog.h:693
+#: ../bin/src/ui_edittagdialog.h:696
 msgid "Complete tags automatically"
 msgstr "標籤完全自動分類"
 
@@ -1269,7 +1274,7 @@ msgstr "標籤完全自動分類..."
 
 #: playlist/playlist.cpp:1317 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
+#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "作曲家"
 
@@ -1317,7 +1322,7 @@ msgstr "設定 podcasts..."
 #: internet/cloudfileservice.cpp:85
 #: internet/digitallyimportedservicebase.cpp:178
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:198
+#: internet/googledriveservice.cpp:210
 msgid "Configure..."
 msgstr "設定..."
 
@@ -1424,7 +1429,7 @@ msgstr "無法開啟輸出檔 %1"
 
 #: internet/cloudfileservice.cpp:82 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:673
-#: internet/googledriveservice.cpp:196
+#: internet/googledriveservice.cpp:208
 msgid "Cover Manager"
 msgstr "封面管理員"
 
@@ -1570,11 +1575,11 @@ msgid ""
 "recover your database"
 msgstr ""
 
-#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "創建的日期"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "修改的日期"
 
@@ -1699,7 +1704,7 @@ msgstr "裝置屬性..."
 msgid "Devices"
 msgstr "裝置"
 
-#: ../bin/src/ui_vksearchdialog.h:61 ../bin/src/ui_ripcd.h:300
+#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
 msgstr ""
 
@@ -1747,7 +1752,7 @@ msgid "Disabled"
 msgstr ""
 
 #: playlist/playlist.cpp:1309 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "唱片"
 
@@ -1768,12 +1773,27 @@ msgstr "顯示螢幕上的顯示"
 msgid "Do a full library rescan"
 msgstr "做一個完整的音樂庫重新掃描"
 
+#: internet/googledriveservice.cpp:250 internet/googledriveservice.cpp:257
+msgid "Do a full rescan"
+msgstr ""
+
+#: internet/googledriveservice.cpp:205
+msgid "Do a full rescan..."
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
 msgstr "沒有轉換任何音樂"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
+msgstr ""
+
+#: internet/googledriveservice.cpp:251
+msgid ""
+"Doing a full rescan will lose any metadata you've saved in Clementine such "
+"as cover art, play counts and ratings.  Clementine will rescan all your "
+"music in Google Drive which may take some time."
 msgstr ""
 
 #: widgets/osd.cpp:302 ../bin/src/ui_playlistsequence.h:103
@@ -1895,7 +1915,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "動態模式開啟"
 
-#: internet/jamendoservice.cpp:121 library/library.cpp:112
+#: internet/jamendoservice.cpp:121 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "動態隨機混合"
 
@@ -1912,11 +1932,11 @@ msgstr ""
 msgid "Edit tag..."
 msgstr "編輯標籤 ..."
 
-#: ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit tags"
 msgstr "編輯標籤"
 
-#: ../bin/src/ui_edittagdialog.h:662
+#: ../bin/src/ui_edittagdialog.h:665
 msgid "Edit track information"
 msgstr "編輯歌曲資訊"
 
@@ -1932,6 +1952,10 @@ msgstr "編輯音軌資訊..."
 #: internet/savedradio.cpp:103
 msgid "Edit..."
 msgstr "編輯..."
+
+#: ../bin/src/ui_seafilesettingspage.h:172
+msgid "Email"
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
@@ -2079,7 +2103,7 @@ msgstr "處理 %1 錯誤: %2"
 msgid "Error while loading audio CD"
 msgstr "載入音樂CD時，出現錯誤"
 
-#: library/library.cpp:66
+#: library/library.cpp:69
 msgid "Ever played"
 msgstr "曾經播放的"
 
@@ -2231,7 +2255,7 @@ msgstr "快速"
 msgid "Favorites"
 msgstr "我的最愛"
 
-#: library/library.cpp:88
+#: library/library.cpp:91
 msgid "Favourite tracks"
 msgstr "最喜愛的歌曲"
 
@@ -2267,7 +2291,7 @@ msgstr "副檔名"
 msgid "File formats"
 msgstr "檔案格式"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "檔名"
 
@@ -2279,13 +2303,13 @@ msgstr "檔名(不含路徑)"
 msgid "File name pattern:"
 msgstr ""
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "檔案大小"
 
 #: playlist/playlist.cpp:1347 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
-#: ../bin/src/ui_edittagdialog.h:676
+#: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "檔案型態"
 
@@ -2405,7 +2429,7 @@ msgstr "全部低音+高音"
 msgid "Full Treble"
 msgstr "全部高音"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:139
 msgid "General"
 msgstr "一般"
 
@@ -2415,7 +2439,7 @@ msgstr "一般設定"
 
 #: playlist/playlist.cpp:1313 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "風格"
@@ -2523,7 +2547,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "依風格/演出者/專輯歸類"
 
 #: playlist/playlist.cpp:1321 ui/organisedialog.cpp:67
-#: ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr ""
 
@@ -2697,7 +2721,7 @@ msgstr ""
 msgid "Internet"
 msgstr "網路"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:161
 msgid "Internet providers"
 msgstr "網際網路服務供應商"
 
@@ -2814,11 +2838,11 @@ msgstr ""
 msgid "Large sidebar"
 msgstr "大型側邊欄"
 
-#: library/library.cpp:80
+#: library/library.cpp:83
 msgid "Last played"
 msgstr "最近播放"
 
-#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:671
+#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr ""
@@ -2851,7 +2875,7 @@ msgstr "Last.fm 帳號"
 msgid "Last.fm wiki"
 msgstr "Last.fm 維基百科"
 
-#: library/library.cpp:102
+#: library/library.cpp:105
 msgid "Least favourite tracks"
 msgstr "最不喜歡的曲目"
 
@@ -2860,11 +2884,12 @@ msgid "Left"
 msgstr ""
 
 #: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
-#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:666
+#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "長度"
 
 #: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "音樂庫"
 
@@ -2952,9 +2977,9 @@ msgstr "載入曲目資訊"
 
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
-#: internet/vkservice.cpp:485 internet/vksettingspage.cpp:122
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
+#: internet/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "載入中..."
 
@@ -2962,18 +2987,19 @@ msgstr "載入中..."
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "載入檔案/網址，取代目前的播放清單"
 
-#: internet/vksettingspage.cpp:110
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
-#: ../bin/src/ui_dropboxsettingspage.h:105
-#: ../bin/src/ui_skydrivesettingspage.h:105
-#: ../bin/src/ui_boxsettingspage.h:105 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_seafilesettingspage.h:173
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_skydrivesettingspage.h:105
+#: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
+#: ../bin/src/ui_vksettingspage.h:213
 msgid "Login"
 msgstr "登錄"
 
@@ -3174,7 +3200,7 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: library/library.cpp:84
+#: library/library.cpp:87
 msgid "Most played"
 msgstr "最常播放的"
 
@@ -3252,7 +3278,7 @@ msgstr ""
 msgid "Never"
 msgstr "從未"
 
-#: library/library.cpp:73
+#: library/library.cpp:76
 msgid "Never played"
 msgstr "從未播放"
 
@@ -3283,7 +3309,7 @@ msgstr "新的歌曲"
 msgid "New tracks will be added automatically."
 msgstr "新曲目將被自動加入。"
 
-#: library/library.cpp:92
+#: library/library.cpp:95
 msgid "Newest tracks"
 msgstr "最新曲目"
 
@@ -3477,7 +3503,7 @@ msgstr "開啟裝置"
 msgid "Open file..."
 msgstr "開啟檔案..."
 
-#: internet/googledriveservice.cpp:193
+#: internet/googledriveservice.cpp:198
 msgid "Open in Google Drive"
 msgstr ""
 
@@ -3583,6 +3609,7 @@ msgstr "派對"
 #: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
+#: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
 msgstr "密碼"
 
@@ -3600,7 +3627,7 @@ msgid "Paused"
 msgstr "已暫停"
 
 #: playlist/playlist.cpp:1319 ui/organisedialog.cpp:66
-#: ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr ""
 
@@ -3619,7 +3646,7 @@ msgstr "樸素的側邊欄"
 msgid "Play"
 msgstr "播放"
 
-#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "播放計數"
 
@@ -3712,11 +3739,15 @@ msgstr "連接埠"
 msgid "Pre-amp"
 msgstr "前置放大"
 
+#: ../bin/src/ui_seafilesettingspage.h:177
+msgid "Preference"
+msgstr ""
+
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_vksettingspage.h:214 ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
 msgid "Preferences"
 msgstr "偏好設定"
 
@@ -3885,7 +3916,7 @@ msgstr "評價目前的歌曲 4 顆星"
 msgid "Rate the current song 5 stars"
 msgstr "評價目前的歌曲 5 顆星"
 
-#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "評分"
 
@@ -4050,7 +4081,7 @@ msgstr ""
 msgid "Reset"
 msgstr "重置"
 
-#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:665
+#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:668
 msgid "Reset play counts"
 msgstr "重置播放計數"
 
@@ -4125,7 +4156,7 @@ msgstr "安全地移除裝置"
 msgid "Safely remove the device after copying"
 msgstr "在複製之後，安全的移除裝置"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "取樣頻率"
 
@@ -4179,7 +4210,7 @@ msgstr ""
 msgid "Save this stream in the Internet tab"
 msgstr "儲存這個串流網址到「網路」這個分頁標籤"
 
-#: library/library.cpp:177
+#: library/library.cpp:196
 msgid "Saving songs statistics into songs files"
 msgstr ""
 
@@ -4195,7 +4226,7 @@ msgstr "可變取樣率規格 (SSR)"
 msgid "Scale size"
 msgstr ""
 
-#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "分數"
 
@@ -4203,9 +4234,13 @@ msgstr "分數"
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobble 我在聽的曲目"
 
+#: ../bin/src/ui_seafilesettingspage.h:165
+msgid "Seafile"
+msgstr ""
+
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
-#: internet/vkservice.cpp:512 ../bin/src/ui_gpoddersearchpage.h:78
-#: ../bin/src/ui_itunessearchpage.h:78 ../bin/src/ui_albumcoversearcher.h:114
+#: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:512
 msgid "Search"
 msgstr "搜尋"
 
@@ -4331,6 +4366,10 @@ msgstr ""
 #: devices/devicekitlister.cpp:126
 msgid "Serial number"
 msgstr "序號"
+
+#: ../bin/src/ui_seafilesettingspage.h:174
+msgid "Server"
+msgstr ""
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
@@ -4541,7 +4580,7 @@ msgstr "強節奏流行音樂"
 msgid "Skip backwards in playlist"
 msgstr "跳至播放清單開頭"
 
-#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "略過計數"
 
@@ -4762,7 +4801,7 @@ msgstr "成功寫入 %1"
 msgid "Suggested tags"
 msgstr "建議標籤"
 
-#: ../bin/src/ui_edittagdialog.h:681
+#: ../bin/src/ui_edittagdialog.h:684
 #: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Summary"
 msgstr "摘要"
@@ -4972,7 +5011,7 @@ msgstr "這種裝置不被支援： %1"
 
 #: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
-#: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "標題"
@@ -5032,7 +5071,7 @@ msgid "Total network requests made"
 msgstr "總發送網路請求"
 
 #: playlist/playlist.cpp:1307 ui/organisedialog.cpp:68
-#: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
+#: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
 msgstr "歌曲"
@@ -5085,6 +5124,10 @@ msgstr "URL(s)"
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
 msgstr "超寬頻 (UWB)"
+
+#: internet/seafilesettingspage.cpp:129 internet/seafilesettingspage.cpp:130
+msgid "Unable to connect"
+msgstr ""
 
 #: internet/magnatunedownloaddialog.cpp:147
 #, qt-format
@@ -5250,7 +5293,7 @@ msgstr "已用"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "使用者 %1 並沒有 Grooveshark Anywhere 帳號"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:153
 msgid "User interface"
 msgstr "使用者介面"
 
@@ -5440,7 +5483,7 @@ msgstr ""
 
 #: playlist/playlist.cpp:1311 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
+#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "年份"

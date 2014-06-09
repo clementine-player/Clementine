@@ -3,24 +3,24 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-# salmora8 <shorterfire@gmail.com>, 2013-2014
-# amiltonpc <amiltonpc@gmail.com>, 2013
+# Alexandro Casanova <shorterfire@gmail.com>, 2013-2014
+# Amilton Pereira cavalcante <amiltonpc@gmail.com>, 2013
 # bedi1982 <bedi.com@gmail.com>, 2012
-# carlo_valente <carlo.gt.valente@gmail.com>, 2014
-# carlo_valente <carlo.gt.valente@gmail.com>, 2014
+# carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>, 2014
+# carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Gustavo Brito <gbritosampaio@gmail.com>, 2014
-# Israel IsraeLins <israelins85@yahoo.com.br>, 2012
+# Gustavo Brito Sampaio <gbritosampaio@gmail.com>, 2014
+# Israel Lins Albuquerque <israelins85@yahoo.com.br>, 2012
 # aramaicus <maico.sertorio@gmail.com>, 2013
 # Marco Tulio Costa <mmarcottulio@gmail.com>, 2012
-# rcpp <rcappellano@gmail.com>, 2013
-# salmora8 <shorterfire@gmail.com>, 2012
+# Ricardo Cappellano <rcappellano@gmail.com>, 2013
+# Alexandro Casanova <shorterfire@gmail.com>, 2012
 # Weiller Cardoso <>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-24 16:33+0000\n"
-"Last-Translator: carlo_valente <carlo.gt.valente@gmail.com>\n"
+"PO-Revision-Date: 2014-06-05 15:53+0000\n"
+"Last-Translator: carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -280,7 +280,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:62
+#: library/library.cpp:65
 msgid "50 random tracks"
 msgstr "50 faixas aleatórias"
 
@@ -395,8 +395,9 @@ msgstr "Sobre o Qt..."
 
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:208 ../bin/src/ui_vksettingspage.h:211
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_seafilesettingspage.h:169
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
 msgid "Account details"
 msgstr "Detalhes da conta"
 
@@ -654,7 +655,7 @@ msgstr "Depois de copiar..."
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
-#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
 msgid "Album"
 msgstr "Álbum"
@@ -665,7 +666,7 @@ msgstr "Álbum (volume ideal para todas as faixas)"
 
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "Artista do álbum"
 
@@ -715,7 +716,7 @@ msgstr "Todas as listas de reprodução (%1)"
 msgid "All the translators"
 msgstr "Todos os tradutores"
 
-#: library/library.cpp:98
+#: library/library.cpp:101
 msgid "All tracks"
 msgstr "Todas as faixas"
 
@@ -821,7 +822,7 @@ msgstr "Tem certeza de que deseja escrever estatísticas de música em arquivo d
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
-#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "Artista"
@@ -889,7 +890,7 @@ msgid "BBC Podcasts"
 msgstr "Podcasts BBC"
 
 #: playlist/playlist.cpp:1335 ui/organisedialog.cpp:70
-#: ../bin/src/ui_edittagdialog.h:668
+#: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
 
@@ -942,7 +943,7 @@ msgstr "Melhor"
 msgid "Biography from %1"
 msgstr "Biografia de %1"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Taxa de bits"
 
@@ -1014,7 +1015,7 @@ msgstr "Por padrão, o Grooveshark ordena as músicas pela data de adição"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:118
+#: library/library.cpp:121
 msgid "CUE sheet support"
 msgstr "Suporte a lista CUE"
 
@@ -1041,7 +1042,7 @@ msgid ""
 "Try to login into Vk.com with your browser,to fix this problem."
 msgstr "O Captcha é necessário.\nTente logar no Vk.com com seu navegador para resolver esse problema."
 
-#: ../bin/src/ui_edittagdialog.h:664
+#: ../bin/src/ui_edittagdialog.h:667
 msgid "Change cover art"
 msgstr "Alterar capa"
 
@@ -1074,6 +1075,10 @@ msgstr "Alterar a saída mono terá efeito para as próximas músicas a serem to
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
 msgstr "Procurar por novos episódios"
+
+#: internet/googledriveservice.cpp:202
+msgid "Check for updates"
+msgstr "Verificar se há atualizações"
 
 #: ui/mainwindow.cpp:714
 msgid "Check for updates..."
@@ -1218,10 +1223,10 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Clique para alternar entre tempo restante e tempo total"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
-#: ../bin/src/ui_googledrivesettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1260,7 +1265,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista separada por vírgulas de classe: o nível, o nível é 0-3"
 
 #: playlist/playlist.cpp:1354 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:694
+#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Comentário"
 
@@ -1268,7 +1273,7 @@ msgstr "Comentário"
 msgid "Community Radio"
 msgstr "Rádio da comunidade"
 
-#: ../bin/src/ui_edittagdialog.h:693
+#: ../bin/src/ui_edittagdialog.h:696
 msgid "Complete tags automatically"
 msgstr "Completar tags automaticamente"
 
@@ -1278,7 +1283,7 @@ msgstr "Preencher tags automaticamente..."
 
 #: playlist/playlist.cpp:1317 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
+#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "Compositor"
 
@@ -1326,7 +1331,7 @@ msgstr "Configurar podcasts"
 #: internet/cloudfileservice.cpp:85
 #: internet/digitallyimportedservicebase.cpp:178
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:198
+#: internet/googledriveservice.cpp:210
 msgid "Configure..."
 msgstr "Configurar..."
 
@@ -1433,7 +1438,7 @@ msgstr "Não foi possível abrir o arquivo de saída %1"
 
 #: internet/cloudfileservice.cpp:82 ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:673
-#: internet/googledriveservice.cpp:196
+#: internet/googledriveservice.cpp:208
 msgid "Cover Manager"
 msgstr "Gerenciador de capas"
 
@@ -1579,11 +1584,11 @@ msgid ""
 "recover your database"
 msgstr "Banco de dados corrompido detectado. Por favor, leia https://code.google.com/p/clementine-player/wiki/Database para instruções de como recuperar seu banco de dados"
 
-#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Data de criação"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Data de modificação"
 
@@ -1708,7 +1713,7 @@ msgstr "Propriedades do dispositivo..."
 msgid "Devices"
 msgstr "Dispositivos"
 
-#: ../bin/src/ui_vksearchdialog.h:61 ../bin/src/ui_ripcd.h:300
+#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
 msgstr "Diálogo"
 
@@ -1756,7 +1761,7 @@ msgid "Disabled"
 msgstr "Desativado"
 
 #: playlist/playlist.cpp:1309 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Disco"
 
@@ -1777,6 +1782,14 @@ msgstr "Mostrar na tela"
 msgid "Do a full library rescan"
 msgstr "Reescanear por completo a biblioteca"
 
+#: internet/googledriveservice.cpp:250 internet/googledriveservice.cpp:257
+msgid "Do a full rescan"
+msgstr "Reescanear completamente"
+
+#: internet/googledriveservice.cpp:205
+msgid "Do a full rescan..."
+msgstr "Reescanear completamente..."
+
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
 msgstr "Não converter nenhuma música"
@@ -1784,6 +1797,13 @@ msgstr "Não converter nenhuma música"
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
 msgstr "Não substituir"
+
+#: internet/googledriveservice.cpp:251
+msgid ""
+"Doing a full rescan will lose any metadata you've saved in Clementine such "
+"as cover art, play counts and ratings.  Clementine will rescan all your "
+"music in Google Drive which may take some time."
+msgstr "Ao reescanear por completo, você perderá quaisquer metadados salvos no Clementine, como capas de discos, contagem de reprodução e avaliações. O Clementine reescaneará todas as suas músicas no Google Drive, o que pode demorar algum tempo."
 
 #: widgets/osd.cpp:302 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1904,7 +1924,7 @@ msgstr "Duração"
 msgid "Dynamic mode is on"
 msgstr "Modo dinâmico ligado"
 
-#: internet/jamendoservice.cpp:121 library/library.cpp:112
+#: internet/jamendoservice.cpp:121 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Mix aleatório dinâmico"
 
@@ -1921,11 +1941,11 @@ msgstr "Editar tag \"%1\"..."
 msgid "Edit tag..."
 msgstr "Editar tag..."
 
-#: ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit tags"
 msgstr "Editar tag"
 
-#: ../bin/src/ui_edittagdialog.h:662
+#: ../bin/src/ui_edittagdialog.h:665
 msgid "Edit track information"
 msgstr "Editar informações da faixa"
 
@@ -1941,6 +1961,10 @@ msgstr "Editar informações da faixa..."
 #: internet/savedradio.cpp:103
 msgid "Edit..."
 msgstr "Editar..."
+
+#: ../bin/src/ui_seafilesettingspage.h:172
+msgid "Email"
+msgstr "E-mail"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
@@ -2088,7 +2112,7 @@ msgstr "Erro processando %1:%2"
 msgid "Error while loading audio CD"
 msgstr "Erro ao carregar o CD de áudio"
 
-#: library/library.cpp:66
+#: library/library.cpp:69
 msgid "Ever played"
 msgstr "Já reproduzido"
 
@@ -2240,7 +2264,7 @@ msgstr "Rápida"
 msgid "Favorites"
 msgstr "Favoritos"
 
-#: library/library.cpp:88
+#: library/library.cpp:91
 msgid "Favourite tracks"
 msgstr "Faixas preferidas"
 
@@ -2276,7 +2300,7 @@ msgstr "Extensão de arquivo"
 msgid "File formats"
 msgstr "Formatos de arquivo"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "Nome de arquivo"
 
@@ -2288,13 +2312,13 @@ msgstr "Nome do arquivo (sem pasta)"
 msgid "File name pattern:"
 msgstr "Padrão do nome de arquivo:"
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "Tamanho do arquivo"
 
 #: playlist/playlist.cpp:1347 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
-#: ../bin/src/ui_edittagdialog.h:676
+#: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "Tipo de arquivo"
 
@@ -2414,7 +2438,7 @@ msgstr "Graves + Agudos"
 msgid "Full Treble"
 msgstr "Muito Agudo"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:139
 msgid "General"
 msgstr "Geral"
 
@@ -2424,7 +2448,7 @@ msgstr "Configurações gerais"
 
 #: playlist/playlist.cpp:1313 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Gênero"
@@ -2532,7 +2556,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Organizar por Gênero/Artista/Álbum"
 
 #: playlist/playlist.cpp:1321 ui/organisedialog.cpp:67
-#: ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Agrupamento"
 
@@ -2706,7 +2730,7 @@ msgstr "Verificar integridade"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:161
 msgid "Internet providers"
 msgstr "Dados da Internet"
 
@@ -2823,11 +2847,11 @@ msgstr "Capa grande de disco (detalhes abaixo)"
 msgid "Large sidebar"
 msgstr "Barra lateral grande"
 
-#: library/library.cpp:80
+#: library/library.cpp:83
 msgid "Last played"
 msgstr "Última reprodução"
 
-#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:671
+#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Reproduzida por último"
@@ -2860,7 +2884,7 @@ msgstr "Nome de usuário do Last.fm"
 msgid "Last.fm wiki"
 msgstr "Wiki do last.fm"
 
-#: library/library.cpp:102
+#: library/library.cpp:105
 msgid "Least favourite tracks"
 msgstr "Faixas menos preferidas"
 
@@ -2869,11 +2893,12 @@ msgid "Left"
 msgstr "Esquerda"
 
 #: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
-#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:666
+#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Duração"
 
 #: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "Biblioteca"
 
@@ -2961,9 +2986,9 @@ msgstr "Carregando informações da faixa"
 
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
-#: internet/vkservice.cpp:485 internet/vksettingspage.cpp:122
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255
+#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
+#: internet/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "Carregando..."
 
@@ -2971,18 +2996,19 @@ msgstr "Carregando..."
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carregar arquivos/sites, substiuindo a lista de reprodução atual"
 
-#: internet/vksettingspage.cpp:110
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
-#: ../bin/src/ui_dropboxsettingspage.h:105
-#: ../bin/src/ui_skydrivesettingspage.h:105
-#: ../bin/src/ui_boxsettingspage.h:105 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_seafilesettingspage.h:173
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_skydrivesettingspage.h:105
+#: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
+#: ../bin/src/ui_vksettingspage.h:213
 msgid "Login"
 msgstr "Login"
 
@@ -3183,7 +3209,7 @@ msgstr "Moodbars"
 msgid "More"
 msgstr "Mais"
 
-#: library/library.cpp:84
+#: library/library.cpp:87
 msgid "Most played"
 msgstr "Mais tocadas"
 
@@ -3261,7 +3287,7 @@ msgstr "Rede Remota"
 msgid "Never"
 msgstr "Nunca"
 
-#: library/library.cpp:73
+#: library/library.cpp:76
 msgid "Never played"
 msgstr "Nunca tocado"
 
@@ -3292,7 +3318,7 @@ msgstr "Novas músicas"
 msgid "New tracks will be added automatically."
 msgstr "Novas faixas serão adicionadas automaticamente."
 
-#: library/library.cpp:92
+#: library/library.cpp:95
 msgid "Newest tracks"
 msgstr "Faixas mais recentes"
 
@@ -3486,7 +3512,7 @@ msgstr "Abrir dispositivo"
 msgid "Open file..."
 msgstr "Abrir arquivo..."
 
-#: internet/googledriveservice.cpp:193
+#: internet/googledriveservice.cpp:198
 msgid "Open in Google Drive"
 msgstr "Abrir no Google Drive"
 
@@ -3592,6 +3618,7 @@ msgstr "Festa"
 #: ../bin/src/ui_subsonicsettingspage.h:128
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
+#: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
 msgstr "Senha"
 
@@ -3609,7 +3636,7 @@ msgid "Paused"
 msgstr "Pausado"
 
 #: playlist/playlist.cpp:1319 ui/organisedialog.cpp:66
-#: ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "Artista"
 
@@ -3628,7 +3655,7 @@ msgstr "Barra lateral simples"
 msgid "Play"
 msgstr "Reproduzir"
 
-#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Número de reproduções"
 
@@ -3721,11 +3748,15 @@ msgstr "Porta"
 msgid "Pre-amp"
 msgstr "Pré-amplificação"
 
+#: ../bin/src/ui_seafilesettingspage.h:177
+msgid "Preference"
+msgstr "Preferência"
+
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_vksettingspage.h:214 ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
 msgid "Preferences"
 msgstr "Preferências"
 
@@ -3894,7 +3925,7 @@ msgstr "Classificar a música atual com 4 estrelas"
 msgid "Rate the current song 5 stars"
 msgstr "Classificar a música atual com 5 estrelas"
 
-#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Avaliação"
 
@@ -4059,7 +4090,7 @@ msgstr "Exigir código de autenticação"
 msgid "Reset"
 msgstr "Redefinir"
 
-#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:665
+#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:668
 msgid "Reset play counts"
 msgstr "Limpar contador de reprodução"
 
@@ -4134,7 +4165,7 @@ msgstr "Remover o dispositivo com segurança"
 msgid "Safely remove the device after copying"
 msgstr "Remover o dispositivo com segurança após copiar"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Taxa de amostragem"
 
@@ -4188,7 +4219,7 @@ msgstr "Salvar estatísticas em tags de arquivos quando possível"
 msgid "Save this stream in the Internet tab"
 msgstr "Salvar esta transmissão na aba de Internet"
 
-#: library/library.cpp:177
+#: library/library.cpp:196
 msgid "Saving songs statistics into songs files"
 msgstr "Salvando estatísticas de músicas em arquivos de músicas"
 
@@ -4204,7 +4235,7 @@ msgstr "Perfil evolutivo taxa de amostragem (SSR)"
 msgid "Scale size"
 msgstr "Tamanho de escala"
 
-#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Pontuação"
 
@@ -4212,9 +4243,13 @@ msgstr "Pontuação"
 msgid "Scrobble tracks that I listen to"
 msgstr "Adicionar ao meu perfil os dados das músicas que eu ouvir"
 
+#: ../bin/src/ui_seafilesettingspage.h:165
+msgid "Seafile"
+msgstr "Seafile"
+
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
-#: internet/vkservice.cpp:512 ../bin/src/ui_gpoddersearchpage.h:78
-#: ../bin/src/ui_itunessearchpage.h:78 ../bin/src/ui_albumcoversearcher.h:114
+#: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:512
 msgid "Search"
 msgstr "Pesquisar"
 
@@ -4340,6 +4375,10 @@ msgstr "Selecionar..."
 #: devices/devicekitlister.cpp:126
 msgid "Serial number"
 msgstr "Número de série"
+
+#: ../bin/src/ui_seafilesettingspage.h:174
+msgid "Server"
+msgstr "Servidor"
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
@@ -4550,7 +4589,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Pular para a música anterior da lista"
 
-#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Número de pulos"
 
@@ -4771,7 +4810,7 @@ msgstr "%1 gravado com sucesso"
 msgid "Suggested tags"
 msgstr "Tags sugeridas"
 
-#: ../bin/src/ui_edittagdialog.h:681
+#: ../bin/src/ui_edittagdialog.h:684
 #: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Summary"
 msgstr "Resumo"
@@ -4981,7 +5020,7 @@ msgstr "Este tipo de dispositivo não é suportado: %1"
 
 #: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
-#: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "Tí­tulo"
@@ -5041,7 +5080,7 @@ msgid "Total network requests made"
 msgstr "Total de requisições de rede feitas"
 
 #: playlist/playlist.cpp:1307 ui/organisedialog.cpp:68
-#: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
+#: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
 msgstr "Faixa"
@@ -5094,6 +5133,10 @@ msgstr "Site(s)"
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
 msgstr "Banda ultralarga (UWB)"
+
+#: internet/seafilesettingspage.cpp:129 internet/seafilesettingspage.cpp:130
+msgid "Unable to connect"
+msgstr "Incapaz de conectar"
 
 #: internet/magnatunedownloaddialog.cpp:147
 #, qt-format
@@ -5259,7 +5302,7 @@ msgstr "Usado"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Usuário %1 não tem uma conta Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:153
 msgid "User interface"
 msgstr "Interface"
 
@@ -5449,7 +5492,7 @@ msgstr "Nome de usuário ou senha incorreta."
 
 #: playlist/playlist.cpp:1311 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
+#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "Ano"
