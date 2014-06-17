@@ -71,6 +71,8 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
   AddShortcut("toggle_last_fm_scrobbling",
               tr("Enable/disable Last.fm scrobbling"),
               SIGNAL(ToggleScrobbling()));
+  AddShortcut("delete_selected_playlist_files", tr("Delete selected playlist files"),
+      SIGNAL(DeletePlaylistSelected()));
 
   AddRatingShortcut("rate_zero_star", tr("Rate the current song 0 stars"),
                     rating_signals_mapper_, 0);

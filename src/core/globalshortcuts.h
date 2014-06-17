@@ -75,6 +75,7 @@ signals:
   void CycleShuffleMode();
   void CycleRepeatMode();
   void ToggleScrobbling();
+  void DeletePlaylistSelected();
 
  private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,
