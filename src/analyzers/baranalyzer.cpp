@@ -25,7 +25,7 @@ BarAnalyzer::BarAnalyzer(QWidget* parent) : Analyzer::Base(parent, 8) {
   // roof pixmaps don't depend on size() so we do in the ctor
   m_bg = parent->palette().color(QPalette::Background);
 
-  QColor fg(0xff, 0x50, 0x70);
+  QColor fg(parent->palette().color(QPalette::Highlight).lighter(150));
 
   double dr = double(m_bg.red() - fg.red()) /
               (NUM_ROOFS - 1);  //-1 because we start loop below at 0
@@ -69,7 +69,9 @@ void BarAnalyzer::init() {
   canvas_.fill(palette().color(QPalette::Background));
 
   QPainter p(&m_pixBarGradient);
-  for (int x = 0, r = 0x40, g = 0x30, b = 0xff, r2 = 255 - r; x < height();
+  QColor rgb(palette().color(QPalette::Highlight));
+
+  for (int x = 0, r = rgb.red(), g = rgb.green(), b = rgb.blue(), r2 = 255 - r; x < height();
        ++x) {
     for (int y = x; y > 0; --y) {
       const double fraction = (double)y / height();
