@@ -38,12 +38,12 @@ class RainbowDashAnalyzer : public Analyzer::Base {
   void resizeEvent(QResizeEvent* e);
 
  private:
-  static const int kDashHeight = 30;
-  static const int kDashWidth = 54;
+  static const int kDashHeight = 33;
+  static const int kDashWidth = 53;
   static const int kRainbowHeight = 16;
-  static const int kDashFrameCount = 1;
+  static const int kDashFrameCount = 16;
   static const int kRainbowOverlap = 15;
-  static const int kSleepingDashHeight = 30;
+  static const int kSleepingDashHeight = 33;
 
   static const int kHistorySize = 128;
   static const int kRainbowBands = 6;
