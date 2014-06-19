@@ -202,6 +202,8 @@ void SetGstreamerEnvironment() {
   SetEnv("GIO_EXTRA_MODULES",
          QCoreApplication::applicationDirPath() + "/../PlugIns/gio-modules");
 #endif
+
+  SetEnv("PULSE_PROP_media.role", "music");
 }
 
 void ParseAProto() {
