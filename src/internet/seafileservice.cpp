@@ -1,4 +1,6 @@
-﻿#include "seafileservice.h"
+#include "seafileservice.h"
+
+#include <cmath>
 
 #include <qjson/parser.h>
 #include <QTimer>
@@ -550,7 +552,7 @@ bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
         seconds_to_wait =
             ((*reply)->rawHeader("X-Throttle-Wait-Seconds").toInt() + 1) * 1000;
       } else {
-        seconds_to_wait = pow(tries, 2) * 1000;
+        seconds_to_wait = std::pow(tries, 2) * 1000;
       }
 
       QTimer timer;
