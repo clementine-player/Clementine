@@ -534,6 +534,13 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   menu_->popup(mapToGlobal(e->pos()));
 }
 
+void NowPlayingWidget::mouseReleaseEvent(QMouseEvent *) {
+    //Same behaviour as right-click > Show Fullsize
+    if((!aww_) && !(static_cast<bool>(hypnotoad_))){
+        ShowCover();
+    }
+}
+
 void NowPlayingWidget::ShowAboveStatusBar(bool above) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
