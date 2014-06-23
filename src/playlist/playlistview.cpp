@@ -1109,6 +1109,11 @@ void PlaylistView::ReloadSettings() {
     emit BackgroundPropertyChanged();
     force_background_redraw_ = true;
   }
+
+  if(!s.value("click_edit_inline", true).toBool())
+      setEditTriggers(editTriggers() & ~QAbstractItemView::SelectedClicked);
+  else
+      setEditTriggers(editTriggers() | QAbstractItemView::SelectedClicked);
 }
 
 void PlaylistView::SaveSettings() {

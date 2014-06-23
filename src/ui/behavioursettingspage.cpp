@@ -131,6 +131,8 @@ void BehaviourSettingsPage::Load() {
   s.beginGroup(Playlist::kSettingsGroup);
   ui_->b_grey_out_deleted_->setChecked(
       s.value("greyoutdeleted", false).toBool());
+  ui_->b_click_edit_inline_->setChecked(
+      s.value("click_edit_inline", true).toBool());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
@@ -179,6 +181,7 @@ void BehaviourSettingsPage::Save() {
 
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
+  s.setValue("click_edit_inline", ui_->b_click_edit_inline_->isChecked());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
