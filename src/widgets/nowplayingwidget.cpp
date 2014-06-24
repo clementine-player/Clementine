@@ -269,7 +269,7 @@ void NowPlayingWidget::UpdateDetailsText() {
     case LargeSongDetailsBelow:
       details_->setTextWidth(cover_loader_options_.desired_height_);
       if (fit_width_) {
-         details_->setDefaultStyleSheet(
+        details_->setDefaultStyleSheet(
             "p {"
             "  font-size: small;"
             "}");
@@ -534,11 +534,11 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   menu_->popup(mapToGlobal(e->pos()));
 }
 
-void NowPlayingWidget::mouseReleaseEvent(QMouseEvent *) {
-    //Same behaviour as right-click > Show Fullsize
-    if((!aww_) && !(static_cast<bool>(hypnotoad_))){
-        ShowCover();
-    }
+void NowPlayingWidget::mouseReleaseEvent(QMouseEvent*) {
+  // Same behaviour as right-click > Show Fullsize
+  if (!aww_ && !hypnotoad_.get()) {
+    ShowCover();
+  }
 }
 
 void NowPlayingWidget::ShowAboveStatusBar(bool above) {
