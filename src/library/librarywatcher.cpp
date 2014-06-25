@@ -126,22 +126,20 @@ void LibraryWatcher::ScanTransaction::AddToProgressMax(int n) {
   watcher_->task_manager_->SetTaskProgress(task_id_, progress_, progress_max_);
 }
 
-void LibraryWatcher::ScanTransaction::CommitNewOrUpdatedSongs()
-{
-    qDebug() << Q_FUNC_INFO << "got " << new_songs.size() << " new or updated songs";
-    if (!new_songs.isEmpty()) emit watcher_->NewOrUpdatedSongs(new_songs);
-    new_songs.clear();
-    if (!touched_songs.isEmpty()) emit watcher_->SongsMTimeUpdated(touched_songs);
-    touched_songs.clear();
-    if (!deleted_songs.isEmpty()) emit watcher_->SongsDeleted(deleted_songs);
-    deleted_songs.clear();
-    if (!readded_songs.isEmpty()) emit watcher_->SongsReadded(readded_songs);
-    readded_songs.clear();
-    if (!new_subdirs.isEmpty()) emit watcher_->SubdirsDiscovered(new_subdirs);
-    new_subdirs.clear();
-    if (!touched_subdirs.isEmpty())
-        emit watcher_->SubdirsMTimeUpdated(touched_subdirs);
-    touched_subdirs.clear();
+void LibraryWatcher::ScanTransaction::CommitNewOrUpdatedSongs() {
+  if (!new_songs.isEmpty()) emit watcher_->NewOrUpdatedSongs(new_songs);
+  new_songs.clear();
+  if (!touched_songs.isEmpty()) emit watcher_->SongsMTimeUpdated(touched_songs);
+  touched_songs.clear();
+  if (!deleted_songs.isEmpty()) emit watcher_->SongsDeleted(deleted_songs);
+  deleted_songs.clear();
+  if (!readded_songs.isEmpty()) emit watcher_->SongsReadded(readded_songs);
+  readded_songs.clear();
+  if (!new_subdirs.isEmpty()) emit watcher_->SubdirsDiscovered(new_subdirs);
+  new_subdirs.clear();
+  if (!touched_subdirs.isEmpty())
+    emit watcher_->SubdirsMTimeUpdated(touched_subdirs);
+  touched_subdirs.clear();
 }
 
 SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(
