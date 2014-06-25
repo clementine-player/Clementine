@@ -48,6 +48,8 @@ class EditTagDialog : public QDialog {
 
   static const char* kHintText;
   static const char* kSettingsGroup;
+  static const char* multipleSpinbBoxStyle;
+  static const char* multipleSpinBoxText;
 
   void SetSongs(const SongList& songs,
                 const PlaylistItemList& items = PlaylistItemList());

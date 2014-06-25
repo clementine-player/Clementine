@@ -48,6 +48,8 @@
 const char* EditTagDialog::kHintText =
     QT_TR_NOOP("(different across multiple songs)");
 const char* EditTagDialog::kSettingsGroup = "EditTagDialog";
+const char* EditTagDialog::multipleSpinbBoxStyle = "QSpinBox { color: gray; }";
+const char* EditTagDialog::multipleSpinBoxText = "--";
 
 EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
     : QDialog(parent),
@@ -349,6 +351,7 @@ void EditTagDialog::InitFieldValue(const FieldData& field,
                                    const QModelIndexList& sel) {
   const bool varies = DoesValueVary(sel, field.id_);
   const bool modified = IsValueModified(sel, field.id_);
+  const bool multiple = sel.count() > 1;
 
   if (ExtendedEditor* editor = dynamic_cast<ExtendedEditor*>(field.editor_)) {
     editor->clear();
@@ -357,6 +360,20 @@ void EditTagDialog::InitFieldValue(const FieldData& field,
       editor->set_hint(tr(EditTagDialog::kHintText));
     } else {
       editor->set_text(data_[sel[0].row()].current_value(field.id_).toString());
+    }
+    //if we are a spinbox (disc,track,year) set_hint does not work so
+    //we need some trick to show multiple select
+    if (QSpinBox* sbox = dynamic_cast<QSpinBox*>(field.editor_)) {
+      if (multiple && varies) {
+          sbox->setMinimum(-1);
+          sbox->setSpecialValueText(multipleSpinBoxText);
+          sbox->setStyleSheet(multipleSpinbBoxStyle);
+          sbox->setValue(-1);
+      } else {
+          sbox->setMinimum(0);
+          sbox->setSpecialValueText("");
+          sbox->setStyleSheet("");
+      }
     }
   }
 
