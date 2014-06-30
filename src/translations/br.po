@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:16+0000\n"
+"PO-Revision-Date: 2014-06-24 20:50+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Breton (http://www.transifex.com/projects/p/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -585,7 +585,7 @@ msgstr ""
 msgid "Add to playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Ouzhpennañ d'al listenn c'hortoz"
 
@@ -727,16 +727,16 @@ msgstr "Aotren an enkodiñ mid/side"
 msgid "Alongside the originals"
 msgstr "E-kichen ar reoù orin"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Atav kuzhat ar prenestr pennañ"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Atav diskouez ar prenestr pennañ"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Atav kregin da lenn"
 
@@ -782,7 +782,7 @@ msgstr "Ouzhpennañ restroù pe liammoù internet d'ar roll seniñ"
 msgid "Append to current playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ lennet"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ"
 
@@ -921,7 +921,7 @@ msgstr "Glas boutin"
 msgid "Basic audio type"
 msgstr "Stumm audio boaz"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Emzalc'h"
 
@@ -1820,7 +1820,7 @@ msgstr "Reiñ arc'hant"
 msgid "Double click to open"
 msgstr "Daouglikañ evit digeriñ"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Daouglikañ war un ton..."
 
@@ -1972,6 +1972,10 @@ msgstr "Aktivañ ar c'hevataler"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Aotren ar beradennoù pa vez enaouet prenestr Clementine nemetken"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2490,7 +2494,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Kavet %1 golo diwar %2 (%3 c'hwitet)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Grisaat an tonioù n'int ket mui em roll seniñ"
 
@@ -2617,6 +2621,12 @@ msgstr "Arlunioù en uhelañ"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Anaoudadur an ton"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2801,7 +2811,7 @@ msgstr "Pouezhit war ar bouton e-pad %1 eilenn..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Pouezhit war ar boutoñn e-pad %1 eilenn..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Leuskel da dreiñ pa 'z eo serret ar prenstr"
 
@@ -2814,7 +2824,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Yezh"
 
@@ -3282,8 +3292,8 @@ msgstr "Morse"
 msgid "Never played"
 msgstr "Morse sonet"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Morse kregiñ da lenn"
 
@@ -3513,7 +3523,7 @@ msgstr "Digeriñ e-barzh Google Drive"
 msgid "Open in new playlist"
 msgstr "Digerin en ur roll seniñ nevez"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3654,8 +3664,8 @@ msgstr "Konter selaouadennoù"
 msgid "Play if stopped, pause if playing"
 msgstr "Lenn pe ehan, hervez ar stad"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Lenn ma vez netra all o vezañ lennet"
 
@@ -3957,7 +3967,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Kaout soñj eus fiñv ar Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Kaout soñj eus ar wech diwezhañ"
 
@@ -4053,7 +4063,7 @@ msgstr "Adlenn an ton"
 msgid "Replace current playlist"
 msgstr "Eillec'hiañ ar roll seniñ lennet"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Eillec'hiañ ar roll seniñ"
 
@@ -4094,7 +4104,7 @@ msgstr "Adkregiñ ar roud, pe lenn ar roud a-raok m'eo kroget abaoe 8 eilenn pe 
 msgid "Restrict to ASCII characters"
 msgstr "Bevenniñ ouzh an arouezennoù ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Kenderc'hel da seniñ pa grog ar poellad"
 
@@ -4516,7 +4526,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Diskouez ar bouton scrobbling er prenestr pennañ"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Diskouez an ikon er zonenn kemenadennoù"
 
@@ -5268,7 +5278,7 @@ msgstr "Implij ar c'hemennadennoù evit embann stad ar wiimote"
 msgid "Use temporal noise shaping"
 msgstr "Implij ar mod kemmañ ar sonioù evit ur mare"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Implij yezh dre ziouer ar reizhad"
 
@@ -5306,7 +5316,7 @@ msgstr "Etrefas implijer"
 msgid "Username"
 msgstr "Lezanv"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Implij ar roll evit ouzhpennañ un ton a..."
 
@@ -5371,7 +5381,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Gervel ac'hanon pa vez serret un ivinell roll seniñ"
 
@@ -5387,7 +5397,7 @@ msgstr "Lec'hienn web"
 msgid "Weeks"
 msgstr "Sizhunvezhioù"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Pa grog Clementine"
 
@@ -5604,7 +5614,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Ret eo deoc'h lañsañ Gwellvezioù ar reizhiad ha gweredekaat an dibab \"<span style=\" font-style:italic;\">Gweredekaat evit an trevnadoù sikour</span>\"  evit implijout ar berradennoù hollek e Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Ezhomm a vo adloc'hañ Clementine ma cheñchit ar yezh."
 

@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:16+0000\n"
+"PO-Revision-Date: 2014-06-24 20:50+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -590,7 +590,7 @@ msgstr ""
 msgid "Add to playlist"
 msgstr "Προσθήκη στη λίστα"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Προσθήκη στην λίστα αναμονής"
 
@@ -732,16 +732,16 @@ msgstr "Επιτρέψτε μέση/πλάγια κωδικοποίηση"
 msgid "Alongside the originals"
 msgstr "Παράλληλα με τα πρωτότυπα"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Να κρύβεις πάντα το κύριο παράθυρο"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Να εμφανίζεις πάντα το κύριο παράθυρο"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Έναρξη αναπαραγωγής πάντα"
 
@@ -787,7 +787,7 @@ msgstr "Προσάρτηση αρχείων/URLs στην λίστα αναπα�
 msgid "Append to current playlist"
 msgstr "Προσάρτηση στην τρέχουσα λίστα αναπαραγωγής"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Προσάρτηση στην λίστα αναπαραγωγής"
 
@@ -926,7 +926,7 @@ msgstr "Βασικό μπλε"
 msgid "Basic audio type"
 msgstr "Βασικός τύπος ήχου"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Συμπεριφορά"
 
@@ -1825,7 +1825,7 @@ msgstr "Δωρεά"
 msgid "Double click to open"
 msgstr "Διπλό «κλικ» για άνοιγμα"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Διπλό \"κλικ\" σε ένα τραγούδι θα..."
 
@@ -1977,6 +1977,10 @@ msgstr "Ενεργοποίηση του ισοσταθμιστή"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Ενεργοποίηση των συντομεύσεων μόνο όταν ο Clementine είναι στο προσκήνιο"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2495,7 +2499,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Έγινε λήψη %1 εξώφυλλων από τα %2 (%3 απέτυχαν)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Σκίαση στην λίστα τραγουδιών που δεν υπάρχουν"
 
@@ -2622,6 +2626,12 @@ msgstr "Εικονίδια στην κορυφή"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Ταυτοποίηση τραγουδιού"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2806,7 +2816,7 @@ msgstr "Κράτημα των κουμπιών για %1 δευτερόλεπτ�
 msgid "Keep buttons for %1 seconds..."
 msgstr "Κράτημα των κουμπιών για %1 δευτερόλεπτα..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Συνέχιση της εκτέλεσης στο παρασκήνιο όταν το παράθυρο κλείσει"
 
@@ -2819,7 +2829,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Γατάκια"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Γλώσσα"
 
@@ -3287,8 +3297,8 @@ msgstr "Ποτέ"
 msgid "Never played"
 msgstr "Ποτέ δεν έπαιξαν"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Ποτέ μην ξεκινά η αναπαραγωγή"
 
@@ -3518,7 +3528,7 @@ msgstr "Άνοιγμα στο Google Drive"
 msgid "Open in new playlist"
 msgstr "Άνοιγμα σε νέα λίστα"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Άνοιγμα σε νέα λίστα"
@@ -3659,8 +3669,8 @@ msgstr "Μετρητής εκτελέσεων"
 msgid "Play if stopped, pause if playing"
 msgstr "Αναπαραγωγή αν είναι σταματημένο, αλλιώς παύση"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Αναπαραγωγή εάν δεν παίζει κάτι άλλο"
 
@@ -3962,7 +3972,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Απομνημόνευσε την ταλάντευση του χειριστηρίου του Wii"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Υπενθύμιση από την τελευταία φορά"
 
@@ -4058,7 +4068,7 @@ msgstr "Επανάληψη κομματιού"
 msgid "Replace current playlist"
 msgstr "Αντικατάσταση της τρέχουσας λίστας αναπαραγωγής"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Αντικατάσταση της λίστας αναπαραγωγής"
 
@@ -4099,7 +4109,7 @@ msgstr "Επανεκκίνηση του κομμάτιου, ή αναπαραγ�
 msgid "Restrict to ASCII characters"
 msgstr "Περιορισμός σε χαρακτήρες ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Συνέχιση της αναπαραγωγής στην εκκίνηση"
 
@@ -4521,7 +4531,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Εμφάνισε του κουμπιού scrobble στο κυρίως παράθυρο"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Εμφάνιση εικονιδίου συστήματος"
 
@@ -5273,7 +5283,7 @@ msgstr "Χρήση των ειδοποιήσεων για την αναφορά 
 msgid "Use temporal noise shaping"
 msgstr "Χρήση προσωρινής διαμόρφωση θορύβου"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Χρήση προκαθορισμένου του συστήματος"
 
@@ -5311,7 +5321,7 @@ msgstr "Διασύνδεση χρήστη"
 msgid "Username"
 msgstr "Όνομα χρήστη"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Η χρήση του μενού για την προσθήκη ενός τραγουδιού θα..."
 
@@ -5376,7 +5386,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Προειδοποίηση κατά το κλείσιμο μίας λίστας αναπαραγωγής"
 
@@ -5392,7 +5402,7 @@ msgstr "Website"
 msgid "Weeks"
 msgstr "Εβδομάδες"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Όταν ξεκινά το Clementine"
 
@@ -5609,7 +5619,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Πρέπει να πάτε στις ρυθμίσεις συστήματος και να ενεργοποιήσετε το \"<span style=\" font-style:italic;\">\nΕνεργοποίηση πρόσβασης σε βοηθητικές συσκευές</span>\" για να χρησιμοποιήσετε καθολικές συντομεύσεις στον Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Πρέπει να ξεκινήσετε πάλι τον Clementine αν αλλάξετε την γλώσσα."
 

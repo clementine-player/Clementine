@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:16+0000\n"
+"PO-Revision-Date: 2014-06-24 20:50+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -586,7 +586,7 @@ msgstr ""
 msgid "Add to playlist"
 msgstr "Gehitu erreprodukzio-zerrendara"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Gehitu ilarara"
 
@@ -728,16 +728,16 @@ msgstr "Mid/side kodeketa baimendu"
 msgid "Alongside the originals"
 msgstr "Jatorrizkoekin batera"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Leiho nagusia beti ezkutatu"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Leiho nagusia beti erakutsi"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Beti hasi erreproduzitzen"
 
@@ -783,7 +783,7 @@ msgstr "Erantsi Fitxategiak/URL-ak erreprodukzio-zerrendari"
 msgid "Append to current playlist"
 msgstr "Erantsi oraingo erreprodukzio-zerrendari"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Erantsi erreprodukzio-zerrendari"
 
@@ -922,7 +922,7 @@ msgstr "Oinarrizko urdina"
 msgid "Basic audio type"
 msgstr "Oinarrizko audio mota"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Portaera"
 
@@ -1821,7 +1821,7 @@ msgstr ""
 msgid "Double click to open"
 msgstr "Klik bikoitza irekitzeko"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Abesti batean klik bikoitza eginez gero..."
 
@@ -1973,6 +1973,10 @@ msgstr "Gaitu ekualizadorea"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Gaitu lasterbideak Clementine fokaturik dagoenean bakarrik"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2491,7 +2495,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2-(e)tik %1 azal eskuratu dira (%3-(e)k huts egin dute)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Existitzen ez diren abestiak ilundu erreprodukzio-zerrendetan"
 
@@ -2618,6 +2622,12 @@ msgstr "Ikonoak goian"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Abestia identifikatzen"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2802,7 +2812,7 @@ msgstr "Sakatu botoiak segundu %1-ez..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Sakatu botoiak %1 segunduz..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Jarraitu atzealdean exekutatzen leihoa ixten denean"
 
@@ -2815,7 +2825,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Hizkuntza"
 
@@ -3283,8 +3293,8 @@ msgstr "Inoiz ez"
 msgid "Never played"
 msgstr "Inoiz ez erreproduzituak"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Inoiz ez hasi erreproduzitzen"
 
@@ -3514,7 +3524,7 @@ msgstr "Google Drive-n iriki"
 msgid "Open in new playlist"
 msgstr "Ireki erreprodukzio-zerrenda berrian"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3655,8 +3665,8 @@ msgstr "Erreprodukzio kopurua"
 msgid "Play if stopped, pause if playing"
 msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Erreproduzitu ez badago ezer aurretik erreproduzitzen"
 
@@ -3958,7 +3968,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Wiimote-aren mugimendua gogoratu"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Azken alditik gogoratu"
 
@@ -4054,7 +4064,7 @@ msgstr "Errepikatu pista"
 msgid "Replace current playlist"
 msgstr "Ordeztu oraingo erreprodukzio-zerrenda"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Ordeztu erreprodukzio-zerrenda"
 
@@ -4095,7 +4105,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Mugatu ASCII karaktereetara"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4517,7 +4527,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Erakutsi partekatu botoia leiho nagusian"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Erakutsi erretilu-ikonoa"
 
@@ -5269,7 +5279,7 @@ msgstr "Erabili jakinarazpenak Wii-ko urruneko kontrolaren egoera jakinarazteko"
 msgid "Use temporal noise shaping"
 msgstr "Erabili zarata karrakaketa behin-behinekoa"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Erabili sistemako lehenetsia"
 
@@ -5307,7 +5317,7 @@ msgstr "Erabiltzaile-interfazea"
 msgid "Username"
 msgstr "Erabiltzaile-izena"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Abesti bat gehitzeko menua erabiltzeak ondorengoa egingo du..."
 
@@ -5372,7 +5382,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5388,7 +5398,7 @@ msgstr "Webgunea"
 msgid "Weeks"
 msgstr "Aste"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Clementine abiaraztean"
 
@@ -5605,7 +5615,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Lasterbide globalak Clementinen erabiltzeko, sistemaren hobespenetan \"<span style=\"font-style:italic;\">laguntza-gailuen sarbidea baimendu</span>\" behar da."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Hizkuntzaz aldatuz gero, Clementine berrabiarazi behar da."
 

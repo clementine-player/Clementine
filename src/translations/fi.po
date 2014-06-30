@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:45+0000\n"
+"PO-Revision-Date: 2014-06-25 04:11+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -587,7 +587,7 @@ msgstr "Lisää kirjanmerkkeihin"
 msgid "Add to playlist"
 msgstr "Lisää soittolistaan"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Lisää jonoon"
 
@@ -729,16 +729,16 @@ msgstr ""
 msgid "Alongside the originals"
 msgstr "Yhteen alkuperäisten kanssa"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Piilota aina pääikkuna"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Näytä pääikkuna aina"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Aloita aina toisto"
 
@@ -784,7 +784,7 @@ msgstr "Lisää tiedostoja/verkko-osoitteita soittolistalle"
 msgid "Append to current playlist"
 msgstr "Lisää nykyiselle soittolistalle"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Lisää soittolistalle"
 
@@ -923,7 +923,7 @@ msgstr "Perussininen"
 msgid "Basic audio type"
 msgstr "Äänityyppi, perus"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Toiminta"
 
@@ -1822,7 +1822,7 @@ msgstr "Lahjoita"
 msgid "Double click to open"
 msgstr "Kaksoisnapsauta avataksesi"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Kappaleen kaksoisnapsautus..."
 
@@ -1974,6 +1974,10 @@ msgstr "Käytä taajuuskorjainta"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Käytä pikanäppäimiä vain Clementinen ollessa avoinna"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2492,7 +2496,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Löydetty %1 / %2 kansikuvaa (%3 epäonnistui)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Muuta poistetut kappaleet harmaan värisiksi soittolistalla"
 
@@ -2619,6 +2623,12 @@ msgstr "Kuvakkeet ylhäällä"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Tunnistetaan kappaletta"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr "Jos käytössä, kappaleen napsauttaminen soittolistanäkymässä sallii tunnistearvon muokkauksen suoraan."
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2803,7 +2813,7 @@ msgstr "Paina painikkeita %1 sekunti..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Paina painikkeita %1 sekuntia..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Pidä käynnissä taustalla, kun ikkuna suljetaan"
 
@@ -2816,7 +2826,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kissanpentuja"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Kieli"
 
@@ -3284,8 +3294,8 @@ msgstr "Ei koskaan"
 msgid "Never played"
 msgstr "Ei koskaan soitettu"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Älä koskaan aloita toistoa"
 
@@ -3515,7 +3525,7 @@ msgstr "Avaa Google Drivessa"
 msgid "Open in new playlist"
 msgstr "Avaa uudessa soittolistassa"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Avaa uudessa soittolistassa"
@@ -3656,8 +3666,8 @@ msgstr "Soittokertoja"
 msgid "Play if stopped, pause if playing"
 msgstr "Aloittaa tai pysäyttää soittamisen"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Aloita toisto, jos mikään ei soi parhaillaan"
 
@@ -3959,7 +3969,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Muista Wii Remoten heilautus"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Muista viime kerrasta"
 
@@ -4055,7 +4065,7 @@ msgstr "Kertaa kappale"
 msgid "Replace current playlist"
 msgstr "Korvaa nykyinen soittolista"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Korvaa soittolista"
 
@@ -4096,7 +4106,7 @@ msgstr "Toista kappale uudelleen, tai toista edellinen kappale, jos alle 8 sekun
 msgid "Restrict to ASCII characters"
 msgstr "Rajoita ASCII-merkkeihin"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Jatka toistoa sovelluksen käynnistyttyä"
 
@@ -4518,7 +4528,7 @@ msgstr "Näytä \"Tykkää\"-painike"
 msgid "Show the scrobble button in the main window"
 msgstr "Näytä lähetyspainike (scrobble) pääikkunnassa"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Näytä ilmoitusalueen kuvake"
 
@@ -5270,7 +5280,7 @@ msgstr "Käytä ilmoituksia Wii-ohjaimen tilan raportoimiseen"
 msgid "Use temporal noise shaping"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Käytä järjestelmän oletusta"
 
@@ -5308,7 +5318,7 @@ msgstr "Käyttöliittymä"
 msgid "Username"
 msgstr "Käyttäjätunnus"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Valikon avulla kappaleen lisäys..."
 
@@ -5373,7 +5383,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Varoita suljettaessa soittolistan sisältävää välilehteä"
 
@@ -5389,7 +5399,7 @@ msgstr "Verkkosivu"
 msgid "Weeks"
 msgstr "Viikkoa"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Clementinen käynnistyessä"
 
@@ -5606,7 +5616,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Avaa Järjestelmäasetukset -> Käyttöapu ja ota käyttön \"<span style=\" font-style:italic;\">Salli pääsy apulaitteisiin</span>\" käyttääksesi Clementinen yleisiä pikanäppäimiä."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Clementine tulee käynnistää uudelleen, jos vaihdat kieltä."
 

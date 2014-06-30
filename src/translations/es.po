@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-07 07:29+0000\n"
+"PO-Revision-Date: 2014-06-24 23:36+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -603,7 +603,7 @@ msgstr "Añadir a marcadores"
 msgid "Add to playlist"
 msgstr "Añadir a la lista de reproducción"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Añadir a la cola"
 
@@ -745,16 +745,16 @@ msgstr "Permitir codificación mid/side"
 msgid "Alongside the originals"
 msgstr "Junto a los originales"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Siempre ocultar la ventana principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Siempre mostrar la ventana principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Siempre empezar a reproducir"
 
@@ -800,7 +800,7 @@ msgstr "Añadir archivos/URL a la lista de reproducción"
 msgid "Append to current playlist"
 msgstr "Añadir a la lista de reproducción actual"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Añadir a la lista de reproducción"
 
@@ -939,7 +939,7 @@ msgstr "Azul básico"
 msgid "Basic audio type"
 msgstr "Tipo de audio básico"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Comportamiento"
 
@@ -1838,7 +1838,7 @@ msgstr "Donar"
 msgid "Double click to open"
 msgstr "Pulse dos veces para abrir"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Al pulsar dos veces sobre una canción…"
 
@@ -1990,6 +1990,10 @@ msgstr "Activar el ecualizador"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Activar atajos solo cuando Clementine tenga el foco"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr "Editar metadatos de canciones directamente"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2508,7 +2512,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Se obtuvieron %1 carátulas de %2 (%3 fallaron)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Oscurecer canciones inexistentes de mis listas de reproducción"
 
@@ -2635,6 +2639,12 @@ msgstr "Iconos en la parte superior"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Identificando la canción"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr "Al activar esta opción, podrá pulsar en la canción seleccionada de la lista de reproducción y editar los valores directamente"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2819,7 +2829,7 @@ msgstr "Oprima los botones por %1 segundo…"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Oprima los botones por %1 segundos…"
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Seguir ejecutando el programa en el fondo al cerrar la ventana"
 
@@ -2832,7 +2842,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Gatitos"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Idioma"
 
@@ -3300,8 +3310,8 @@ msgstr "Nunca"
 msgid "Never played"
 msgstr "Nunca reproducidas"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Nunca comenzar la reproducción"
 
@@ -3531,7 +3541,7 @@ msgstr "Abrir en Google Drive"
 msgid "Open in new playlist"
 msgstr "Abrir en una lista de reproducción nueva"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Abrir en una lista nueva"
@@ -3672,8 +3682,8 @@ msgstr "N.º de reproducciones"
 msgid "Play if stopped, pause if playing"
 msgstr "Reproducir si está detenida, pausar si se está reproduciendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Reproducir si no hay nada en reproducción"
 
@@ -3975,7 +3985,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Recordar el movimiento del Wii Remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Recordar la última vez"
 
@@ -4071,7 +4081,7 @@ msgstr "Repetir pista"
 msgid "Replace current playlist"
 msgstr "Reemplazar lista de reproducción actual"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Reemplazar la lista de reproducción"
 
@@ -4112,7 +4122,7 @@ msgstr "Reiniciar la pista, o cambiar a la anterior si no han transcurrido 8 seg
 msgid "Restrict to ASCII characters"
 msgstr "Restringir a caracteres ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Reanudar la reproducción al iniciar"
 
@@ -4534,7 +4544,7 @@ msgstr "Mostrar el botón «Me encanta»"
 msgid "Show the scrobble button in the main window"
 msgstr "Mostrar el botón para hacer scrobbling en la ventana principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Mostrar icono en el área de notificación"
 
@@ -5286,7 +5296,7 @@ msgstr "Usar notificaciones para informar del estado del Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr "Usar modelado de ruido temporal"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Usar los ajustes predeterminados del sistema"
 
@@ -5324,7 +5334,7 @@ msgstr "Interfaz de usuario"
 msgid "Username"
 msgstr "Nombre de usuario"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Al usar el menú para añadir una canción…"
 
@@ -5389,7 +5399,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisarme antes de cerrar una pestaña de lista de reproducción"
 
@@ -5405,7 +5415,7 @@ msgstr "Sitio web"
 msgid "Weeks"
 msgstr "Semanas"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Cuando Clementine inicia"
 
@@ -5622,7 +5632,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Necesita ejecutar Preferencias del sistema y activar «<span style=\"font-style: italic;\">Activar acceso para dispositivos de asistencia</span>» para utilizar los atajos de teclado globales en Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Necesitará reiniciar Clementine si cambia el idioma."
 

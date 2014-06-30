@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:16+0000\n"
+"PO-Revision-Date: 2014-06-24 20:50+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -586,7 +586,7 @@ msgstr ""
 msgid "Add to playlist"
 msgstr "Thêm vào danh sách"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Thêm vào danh sách đợi"
 
@@ -728,16 +728,16 @@ msgstr "Cho phép mã hóa song song"
 msgid "Alongside the originals"
 msgstr "Thư mục chứa tập tin gốc"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Luôn ẩn cửa sổ chính"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Luôn hiện cửa sổ chính"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Bắt đầu phát nhạc"
 
@@ -783,7 +783,7 @@ msgstr "Thêm tập tin/URLs vào danh sách"
 msgid "Append to current playlist"
 msgstr "Thêm vào danh sách hiện tại"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Thêm vào danh sách"
 
@@ -922,7 +922,7 @@ msgstr "Xanh dương"
 msgid "Basic audio type"
 msgstr "Âm bình thường"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Hành động"
 
@@ -1821,7 +1821,7 @@ msgstr "Quyên góp"
 msgid "Double click to open"
 msgstr "Nhấn đúp chuột để mở"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Nhấn đúp chuột vào một bài hát sẽ..."
 
@@ -1973,6 +1973,10 @@ msgstr "Bật bộ cân chỉnh âm"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Bật các phím tắt chỉ khi cửa sổ Clementine đang được chọn"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2491,7 +2495,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Đã tải %1 ảnh bìa trong số %2 (thất bại %3)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Loại bỏ những bài hát không tồn tại khỏi các danh sách"
 
@@ -2618,6 +2622,12 @@ msgstr "Biểu tượng trên cùng"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Đang nhận diện bài hát"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2802,7 +2812,7 @@ msgstr "Giữ nút trong %1 giây..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Giữ nút trong %1 giây..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Chạy nền khi đã đóng cửa sổ chính"
 
@@ -2815,7 +2825,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Ngôn ngữ"
 
@@ -3283,8 +3293,8 @@ msgstr "Chưa bao giờ"
 msgid "Never played"
 msgstr "Chưa bao giờ phát"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Không phát nhạc"
 
@@ -3514,7 +3524,7 @@ msgstr "Mở trong Google Drive"
 msgid "Open in new playlist"
 msgstr "Mở trong danh sách mới"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3655,8 +3665,8 @@ msgstr "Số lần phát"
 msgid "Play if stopped, pause if playing"
 msgstr "Phát nếu như đang dừng, tạm dừng nếu như đang phát"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Phát nhạc nếu không có bài khác đang phát"
 
@@ -3958,7 +3968,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Ghi nhớ dao động của tay cầm Wii"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Nhớ từ lần trước"
 
@@ -4054,7 +4064,7 @@ msgstr "Lặp lại bài hát"
 msgid "Replace current playlist"
 msgstr "Thay thế danh sách hiện tại"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Thay thế danh sách"
 
@@ -4095,7 +4105,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Phải dùng kí tự mã ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Tiếp tục phát nhạc khi khởi động"
 
@@ -4517,7 +4527,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Hiện nút chuyển thông tin trong cửa sổ chính"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Hiện biểu tượng dưới khay hệ thống"
 
@@ -5269,7 +5279,7 @@ msgstr "Dùng thông báo để cập nhật trạng thái của tay cầm Wii"
 msgid "Use temporal noise shaping"
 msgstr "Tạo tiếng ồn tạm thời"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Mặc định của hệ thống"
 
@@ -5307,7 +5317,7 @@ msgstr "Giao diện người dùng"
 msgid "Username"
 msgstr "Tên người dùng"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Sử dụng trình đơn để thêm một bài hát sẽ..."
 
@@ -5372,7 +5382,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5388,7 +5398,7 @@ msgstr "Trang web"
 msgid "Weeks"
 msgstr "Tuần"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Khi Clementine khởi động"
 
@@ -5605,7 +5615,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Bạn cần mở Tùy chỉnh hệ thống và bật \"<span style=\" font-style:italic;\"> Cho phép truy cập vào thiết bị bổ trợ</span>\" để sử dụng toàn bộ phím tắt trong Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Bạn cần khởi động lại Clementine khi thay đổi ngôn ngữ."
 

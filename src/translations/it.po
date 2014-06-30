@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 18:41+0000\n"
+"PO-Revision-Date: 2014-06-26 17:50+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/clementine/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -586,7 +586,7 @@ msgstr "Aggiungi ai segnalibri"
 msgid "Add to playlist"
 msgstr "Aggiungi alla scaletta"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Aggiungi alla coda"
 
@@ -728,16 +728,16 @@ msgstr "Consenti codifica mid/side"
 msgid "Alongside the originals"
 msgstr "Insieme agli originali"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Nascondi sempre la finestra principale"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Mostra sempre la finestra principale"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Inizia sempre la riproduzione"
 
@@ -783,7 +783,7 @@ msgstr "Aggiungi file/URL alla scaletta"
 msgid "Append to current playlist"
 msgstr "Aggiungi alla scaletta attuale"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Aggiungi alla scaletta"
 
@@ -922,7 +922,7 @@ msgstr "Blu di base"
 msgid "Basic audio type"
 msgstr "Tipo audio Base"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Comportamento"
 
@@ -1821,7 +1821,7 @@ msgstr "Donazione"
 msgid "Double click to open"
 msgstr "Doppio clic per aprire"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Al doppio clic su un brano..."
 
@@ -1973,6 +1973,10 @@ msgstr "Abilita equalizzatore"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Abilita le scorciatoie solo quando Clementine è in primo piano"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr "Abilita la modifica in linea dei metadati di un brano con un clic"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2491,7 +2495,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Ottenute %1 copertine di %2 (%3 non riuscito)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Colora di grigio i brani della scaletta non esistenti"
 
@@ -2618,6 +2622,12 @@ msgstr "Icone in alto"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Identificazione del brano in corso"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr "Se attivata, il clic su un brano selezionato nella vista della scaletta ti consentirà di modificare direttamente il valore di un tag"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2802,7 +2812,7 @@ msgstr "Trattieni i pulsanti per %1 secondo..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Trattieni i pulsanti per %1 secondi..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Mantieni l'esecuzione sullo sfondo quando la finestra è chiusa"
 
@@ -2815,7 +2825,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Gattini"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Lingua"
 
@@ -3283,8 +3293,8 @@ msgstr "Mai"
 msgid "Never played"
 msgstr "Mai riprodotte"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Non iniziare mai la riproduzione"
 
@@ -3514,7 +3524,7 @@ msgstr "Apri in Google Drive"
 msgid "Open in new playlist"
 msgstr "Apri in nuova scaletta"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Apri in una nuova scaletta"
@@ -3655,8 +3665,8 @@ msgstr "Contatore di riproduzione"
 msgid "Play if stopped, pause if playing"
 msgstr "Riproduci se fermata, sospendi se in riproduzione"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Riproduci se non c'è altro in riproduzione"
 
@@ -3958,7 +3968,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Ricorda il movimento del Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Ricorda l'ultima sessione"
 
@@ -4054,7 +4064,7 @@ msgstr "Ripeti traccia"
 msgid "Replace current playlist"
 msgstr "Sostituisci la scaletta attuale"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Sostituisci la scaletta"
 
@@ -4095,7 +4105,7 @@ msgstr "Riavvia la traccia, o riproduci la traccia precedente se entro 8 secondi
 msgid "Restrict to ASCII characters"
 msgstr "Limita ai caratteri ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Riprendi la riproduzione all'avvio"
 
@@ -4517,7 +4527,7 @@ msgstr "Mostra il pulsante \"Mi piace\""
 msgid "Show the scrobble button in the main window"
 msgstr "Mostra il pulsante di scrobble nella finestra principale"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Mostra icona nel vassoio"
 
@@ -5269,7 +5279,7 @@ msgstr "Utilizza le notifiche per segnalare lo stato del Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr "Usa modellazione temporale del rumore"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Usa i valori predefiniti di sistema"
 
@@ -5307,7 +5317,7 @@ msgstr "Interfaccia utente"
 msgid "Username"
 msgstr "Nome utente"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "L'utilizzo del menu per aggiungere un brano..."
 
@@ -5372,7 +5382,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Avvisami alla chiusura di una scheda della scaletta"
 
@@ -5388,7 +5398,7 @@ msgstr "Sito web"
 msgid "Weeks"
 msgstr "Settimane"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "All'avvio di Clementine"
 
@@ -5605,7 +5615,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Devi aprire le preferenze di sistema e attivare \"<span style=\" font-style:italic;\">Abilita l'accesso per i dispositivi di assistenza</span>\" per utilizzare le scorciatoie globali in Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dovrai riavviare Clementine se cambi la lingua."
 

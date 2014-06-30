@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Anders J. Sørensen, 2013
+# andersrh.arh <andersr@freepages.dk>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Runkeldunk <generallangsohm@gmail.com>, 2014
 # Runkeldunk <generallangsohm@gmail.com>, 2012
@@ -15,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-12 22:39+0000\n"
-"Last-Translator: Peter Jespersen <flywheeldk@gmail.com>\n"
+"PO-Revision-Date: 2014-06-28 15:07+0000\n"
+"Last-Translator: andersrh.arh <andersr@freepages.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/clementine/language/da/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -548,7 +549,7 @@ msgstr "Tilføj sangtitel-mærke"
 
 #: internet/vkservice.cpp:314
 msgid "Add song to cache"
-msgstr ""
+msgstr "Tilføj sang til cache"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song track tag"
@@ -590,7 +591,7 @@ msgstr "Tilføj til bogmærker"
 msgid "Add to playlist"
 msgstr "Føj til spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Tilføj til køen"
 
@@ -732,16 +733,16 @@ msgstr "Tillad mid/side kodning"
 msgid "Alongside the originals"
 msgstr "Ved siden af originalerne"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Skjul altid hovedvinduet"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Vis altid hovedvinduet"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Start altid afspilning"
 
@@ -787,7 +788,7 @@ msgstr "Tilføj filer/URL'er til spillelisten"
 msgid "Append to current playlist"
 msgstr "Tilføj til nuværende playliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Tilføj til playlisten"
 
@@ -926,7 +927,7 @@ msgstr "Basal blå"
 msgid "Basic audio type"
 msgstr "Basal lydtype"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Adfærd"
 
@@ -1411,7 +1412,7 @@ msgstr "Kunne ikke oprette GStreamer elementet \\\"%1\\\" - sørg for at du har 
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
-msgstr ""
+msgstr "Kunne ikke oprette afspilningsliste"
 
 #: transcoder/transcoder.cpp:428
 #, qt-format
@@ -1825,7 +1826,7 @@ msgstr "Bidrag"
 msgid "Double click to open"
 msgstr "Dobbeltklik for at åbne"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Når jeg dobbeltklikker på en sang..."
 
@@ -1977,6 +1978,10 @@ msgstr "Aktivér equalizer"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Brug kun genveje når Clementine har fokus"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2495,7 +2500,7 @@ msgstr "Google Drev"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Hentede %1 af %2 omslag (%3 mislykkedes)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Giv ikke-eksisterende sange gråtone i mine spillelister"
 
@@ -2622,6 +2627,12 @@ msgstr "Ikoner på toppen"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Identificerer sang"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2806,7 +2817,7 @@ msgstr "Hold knappen nede i %1 sekund(er)..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Hold knappen nede i %1 sekund(er)..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Fortsæt i baggrunden selv om du lukker vinduet"
 
@@ -2819,7 +2830,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Sprog"
 
@@ -3287,8 +3298,8 @@ msgstr "Aldrig"
 msgid "Never played"
 msgstr "Aldrig afspillet"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Begynd aldrig afspilning"
 
@@ -3518,10 +3529,10 @@ msgstr "Åbn på Google Drev"
 msgid "Open in new playlist"
 msgstr "Åbn i ny spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
-msgstr ""
+msgstr "Åbn i ny afspilningsliste"
 
 #: songinfo/echonestbiographies.cpp:97
 msgid "Open in your browser"
@@ -3659,8 +3670,8 @@ msgstr "Antal gange afspillet"
 msgid "Play if stopped, pause if playing"
 msgstr "Spil hvis der er stoppet, hold pause hvis der spilles"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Afspil hvis der ikke er noget andet som afspilles i øjeblikket"
 
@@ -3891,7 +3902,7 @@ msgstr "Regn"
 #: ../bin/src/ui_mainwindow.h:674
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
-msgstr ""
+msgstr "Regn"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
@@ -3962,7 +3973,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Husk Wii-remote-bevægelse"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Husk fra sidste gang"
 
@@ -4058,7 +4069,7 @@ msgstr "Gentag spor"
 msgid "Replace current playlist"
 msgstr "Erstat nuværende spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Erstat spillelisten"
 
@@ -4099,7 +4110,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Begræns til ASCII-tegn"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Genoptag afspilning ved programstart"
 
@@ -4188,7 +4199,7 @@ msgstr "Gem billede"
 #: playlist/playlistlistcontainer.cpp:72
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr ""
+msgstr "Gem afspilningsliste"
 
 #: playlist/playlistmanager.cpp:223
 msgctxt "Title of the playlist save dialog."
@@ -4521,7 +4532,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Vis scrobble-knappen i hovedvinduet"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Vis statusikon"
 
@@ -5132,7 +5143,7 @@ msgstr "Ultra wide band (UWB)"
 
 #: internet/seafilesettingspage.cpp:129 internet/seafilesettingspage.cpp:130
 msgid "Unable to connect"
-msgstr ""
+msgstr "Kunne ikke oprette forbindelse"
 
 #: internet/magnatunedownloaddialog.cpp:147
 #, qt-format
@@ -5273,7 +5284,7 @@ msgstr "Vis meddelelser om Wii Remote-status"
 msgid "Use temporal noise shaping"
 msgstr "Brug midlertidig larm formning"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Brug systemstandarder"
 
@@ -5311,7 +5322,7 @@ msgstr "Brugergrænseflade"
 msgid "Username"
 msgstr "Brugernavn"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Brug af menuen for at tilføje en sang vil ..."
 
@@ -5376,7 +5387,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Advar ved nedlukning af en spillelistes fane"
 
@@ -5392,7 +5403,7 @@ msgstr "Hjemmeside"
 msgid "Weeks"
 msgstr "Uger"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Når Clementine starter"
 
@@ -5609,7 +5620,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "I Systemindstillinger er du nødt til at slå \"<span style=\" font-style:italic;\">Adgang til hjælpemidler</span>\" til, for at kunne bruge globale genveje i Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "For at skifte sprog, skal du genstarte Clementine"
 

@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-09 12:59+0000\n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"PO-Revision-Date: 2014-06-24 20:50+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -586,7 +586,7 @@ msgstr "Dodaj u zabilješku"
 msgid "Add to playlist"
 msgstr "Dodajte u popis izvođenja"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Odaberite za reprodukciju i dodajte na popis izvođenja"
 
@@ -728,16 +728,16 @@ msgstr "Dopusti mid/side enkôdiranje"
 msgid "Alongside the originals"
 msgstr "Pokraj orginala"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Uvijek sakrij glavni prozor"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Uvijek prikaži glavni prozor"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Uvijek započinji reprodukciju glazbe"
 
@@ -783,7 +783,7 @@ msgstr "Dodajte datoteku/URL u popis izvođenja"
 msgid "Append to current playlist"
 msgstr "Dodajte na trenutni popis izvođenja"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Pjesma će biti dodana na popis izvođenja"
 
@@ -922,7 +922,7 @@ msgstr "Osnovno plava"
 msgid "Basic audio type"
 msgstr "Osnovni zvučni format"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Ponašanje"
 
@@ -1821,7 +1821,7 @@ msgstr "Donirajte"
 msgid "Double click to open"
 msgstr "Za otvaranje kliknite dva puta"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Dvostrukim klikom pjesma će..."
 
@@ -1973,6 +1973,10 @@ msgstr "Omogući ekvalizator"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Omogući prečac samo ako je Clementine fokusiran"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2491,7 +2495,7 @@ msgstr "Google Disk"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Preuzeto %1 omota od %2 (%3 nije preuzeto)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Posivi pjesme kojih nema na popisu izvođenja"
 
@@ -2618,6 +2622,12 @@ msgstr "Ikona na vrh"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Prepoznavanje pjesme"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2802,7 +2812,7 @@ msgstr "Držite tipke za %1 sekundu..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Držite tipke za %1 sekundu..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Nastavi izvođenje u pozadini kada je prozor zatvoren"
 
@@ -2815,7 +2825,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Mačići"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Jezik"
 
@@ -3283,8 +3293,8 @@ msgstr "Nikada"
 msgid "Never played"
 msgstr "Nikada reproducirano"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Nikada ne započinji reprodukciju glazbe"
 
@@ -3514,7 +3524,7 @@ msgstr "Otvori u Google Disku"
 msgid "Open in new playlist"
 msgstr "Otvorite u novom popisu izvođenja"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Otvorite u novom popisu izvođenja"
@@ -3655,8 +3665,8 @@ msgstr "Broj izvođenja"
 msgid "Play if stopped, pause if playing"
 msgstr "Reproduciraj ako se zaustavi, pauziraj ako svira"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Reproduciraj glazbu ako se trenutno ništa ne reproducira"
 
@@ -3958,7 +3968,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Zapamti wiiremote zamah"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Zapamti od prošlog pokretanja"
 
@@ -4054,7 +4064,7 @@ msgstr "Ponovi pjesmu"
 msgid "Replace current playlist"
 msgstr "Zamijenite trenutni popis izvođenja"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Zamijenite popis izvođenja"
 
@@ -4095,7 +4105,7 @@ msgstr "Ponovno pokreni pjesmu ili sviraj prijašnju pjesmu unutar 8 sekundi od 
 msgid "Restrict to ASCII characters"
 msgstr "Ograniči na ASCII znakove"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Nastavi reprodukciju od prošloga pokretanja"
 
@@ -4517,7 +4527,7 @@ msgstr "Prikaži \"Sviđa mi se\" tipku"
 msgid "Show the scrobble button in the main window"
 msgstr "Prikaži tipku scrobblanja u glavnom prozoru"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Prikaži ikonu u traci sustava"
 
@@ -5269,7 +5279,7 @@ msgstr "Koristi obavijesti za prijavu statusa Wii Daljinskog upravljača"
 msgid "Use temporal noise shaping"
 msgstr "Koristi vremensko oblikovanje šuma"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Koristi zadano sustavom"
 
@@ -5307,7 +5317,7 @@ msgstr "Korisničko sučelje"
 msgid "Username"
 msgstr "Korisničko ime"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Korištenje izbornika pri dodavanju pjesme će..."
 
@@ -5372,7 +5382,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Upozori me pri zatvaranju kartice popisa izvođenja"
 
@@ -5388,7 +5398,7 @@ msgstr "Web stranica"
 msgid "Weeks"
 msgstr "Tjedni"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Kada je Clementine pokrenut"
 
@@ -5605,7 +5615,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Morate pokrenuti mogućnosti sustava i uključiti ih \"<span style=\" font-style:italic;\">Omogući pristup za pomoćne uređaje</span>\" da koriste globalne prečace u Clementine"
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Morate ponovno pokrenuti Clementine ako mijenjate jezik."
 

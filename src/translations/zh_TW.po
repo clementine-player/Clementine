@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:16+0000\n"
+"PO-Revision-Date: 2014-06-24 20:50+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -585,7 +585,7 @@ msgstr ""
 msgid "Add to playlist"
 msgstr "加入播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "加入到佇列中"
 
@@ -727,16 +727,16 @@ msgstr "允許 M/S (Mid/Side) 編碼技術"
 msgid "Alongside the originals"
 msgstr "與原本的一起"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "總是隱藏主要視窗"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "總是顯示主要視窗"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "總是開始播放"
 
@@ -782,7 +782,7 @@ msgstr "附加檔案或網址到播放清單"
 msgid "Append to current playlist"
 msgstr "附加到目前的播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "附加到播放清單"
 
@@ -921,7 +921,7 @@ msgstr "基本的藍色"
 msgid "Basic audio type"
 msgstr "基本音訊類型"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "行為"
 
@@ -1820,7 +1820,7 @@ msgstr ""
 msgid "Double click to open"
 msgstr "雙擊打開"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "雙擊一首歌曲將..."
 
@@ -1972,6 +1972,10 @@ msgstr "啟用等化器"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "只在 Clemetine 是處於聚焦時才啟用快捷鍵"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2490,7 +2494,7 @@ msgstr "Google 雲端硬碟"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "獲得 %1 涵蓋了 %2 ( %3 失敗 )"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "用灰色顯示在我播放清單有,但不存在的歌曲"
 
@@ -2617,6 +2621,12 @@ msgstr "圖示在上面"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "辨識歌曲"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2801,7 +2811,7 @@ msgstr "按住按鈕 %1 秒..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "按住按鈕 %1 秒..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "當視窗關閉時,保持在背景運轉"
 
@@ -2814,7 +2824,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "語言"
 
@@ -3282,8 +3292,8 @@ msgstr "從未"
 msgid "Never played"
 msgstr "從未播放"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "永不開始播放"
 
@@ -3513,7 +3523,7 @@ msgstr ""
 msgid "Open in new playlist"
 msgstr "開啟在新的播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3654,8 +3664,8 @@ msgstr "播放計數"
 msgid "Play if stopped, pause if playing"
 msgstr "停止的話就開始播放，播放中的就暫停"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "播放如果沒有歌曲是正在播放中"
 
@@ -3957,7 +3967,7 @@ msgstr "雷鬼"
 msgid "Remember Wii remote swing"
 msgstr "記住Wii遙控器揮動"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "記得上一次的狀態"
 
@@ -4053,7 +4063,7 @@ msgstr "循環播放單曲"
 msgid "Replace current playlist"
 msgstr "取代目前播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "取代播放清單"
 
@@ -4094,7 +4104,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "限制為 ASCII 字符"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4516,7 +4526,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "在主視窗顯示 scrobble 的按鈕"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "顯示工作列圖示"
 
@@ -5268,7 +5278,7 @@ msgstr "使用通知信息以報告 Wii 遙控器的狀態"
 msgid "Use temporal noise shaping"
 msgstr "使用時域雜訊重整"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "使用系統預設"
 
@@ -5306,7 +5316,7 @@ msgstr "使用者介面"
 msgid "Username"
 msgstr "使用者名稱"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "使用選單加入的歌曲將..."
 
@@ -5371,7 +5381,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5387,7 +5397,7 @@ msgstr "網站"
 msgid "Weeks"
 msgstr "星期"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "當 Clementine 啟動"
 
@@ -5604,7 +5614,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "您將需要重新啟動 Clementine ，如果您變更了本程式使用者介面所用的語言。"
 

@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:16+0000\n"
+"PO-Revision-Date: 2014-06-24 20:50+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -594,7 +594,7 @@ msgstr "Lägg till i bokmärken"
 msgid "Add to playlist"
 msgstr "Lägg till i spellistan"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Lägg till kön"
 
@@ -736,16 +736,16 @@ msgstr "Tillåt mellan-/sidokodning"
 msgid "Alongside the originals"
 msgstr "Tillsammans med originalen"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Dölj alltid huvudfönstret"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Visa alltid huvudfönstret"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Starta alltid uppspelning"
 
@@ -791,7 +791,7 @@ msgstr "Lägg till filer/webbadresser till spellistan"
 msgid "Append to current playlist"
 msgstr "Lägg till i den aktuella spellistan"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Lägg till i spellistan"
 
@@ -930,7 +930,7 @@ msgstr "Basblå"
 msgid "Basic audio type"
 msgstr "Grundläggande ljudtyp"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Beteende"
 
@@ -1829,7 +1829,7 @@ msgstr "Donera"
 msgid "Double click to open"
 msgstr "Dubbelklicka för att öppna"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Dubbelklicka på en låt kommer ..."
 
@@ -1981,6 +1981,10 @@ msgstr "Aktivera equalizer"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Aktivera endast snabbknappar när Clementine är fokuserat"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2499,7 +2503,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Erhöll %1 omslagsbild utav %2 (%3 misslyckades)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Gråa ut icke-existerande låtar i mina spellistor"
 
@@ -2626,6 +2630,12 @@ msgstr "Ikoner längst upp"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Identifierar låt"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2810,7 +2820,7 @@ msgstr "Behåll knappar i %1 sekund..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Behåll knappar i %1 sekunder..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Fortsätt köra i bakgrunden när fönstret är stängt"
 
@@ -2823,7 +2833,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kattungar"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Språk"
 
@@ -3291,8 +3301,8 @@ msgstr "Aldrig"
 msgid "Never played"
 msgstr "Aldrig spelade"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Starta aldrig uppspelning"
 
@@ -3522,7 +3532,7 @@ msgstr "Öppna i Google Drive"
 msgid "Open in new playlist"
 msgstr "Öppna i ny spellista"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Öppna i en ny spellista"
@@ -3663,8 +3673,8 @@ msgstr "Antal uppspelningar"
 msgid "Play if stopped, pause if playing"
 msgstr "Spela upp om stoppad, gör paus vid uppspelning"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Spela om ingenting redan spelas"
 
@@ -3966,7 +3976,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Kom ihåg Wii-kontrollens rörelse"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Kom ihåg från förra gången"
 
@@ -4062,7 +4072,7 @@ msgstr "Upprepa spår"
 msgid "Replace current playlist"
 msgstr "Ersätt den aktuella spellistan"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Ersätt spellistan"
 
@@ -4103,7 +4113,7 @@ msgstr "Starta om spåret, eller spela föregående spår om inom 8 sekunder sed
 msgid "Restrict to ASCII characters"
 msgstr "Begränsa till ASCII-tecken"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Fortsätt uppspelning vid start"
 
@@ -4525,7 +4535,7 @@ msgstr "Visa knappen \"Älska\""
 msgid "Show the scrobble button in the main window"
 msgstr "Visa skrobbelknappen i huvudfönstret"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Visa notifieringsikon"
 
@@ -5277,7 +5287,7 @@ msgstr "Använd notifieringar för rapportering av Wii-kontrollstatus"
 msgid "Use temporal noise shaping"
 msgstr "Använd tidsbaserad brusformning"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Använd systemets standard"
 
@@ -5315,7 +5325,7 @@ msgstr "Användargränssnitt"
 msgid "Username"
 msgstr "Användarnamn"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Använda menyn för att lägga till en låt kommer att ..."
 
@@ -5380,7 +5390,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Varna mig när jag stänger en spellistsflik"
 
@@ -5396,7 +5406,7 @@ msgstr "Webbsida"
 msgid "Weeks"
 msgstr "Veckor"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "När Clementine startar"
 
@@ -5613,7 +5623,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Du behöver starta Systeminställningar och slå på \"<span style=\" font-style:italic;\">Aktivera åtkomst för assisterande enheter</span>\" för att använda globala snabbtangenter i Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Du måste starta om Clementine om du ändrar språket."
 

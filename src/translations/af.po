@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:16+0000\n"
+"PO-Revision-Date: 2014-06-24 20:50+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Afrikaans (http://www.transifex.com/projects/p/clementine/language/af/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -584,7 +584,7 @@ msgstr ""
 msgid "Add to playlist"
 msgstr "Voeg by 'n afspeellys by"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Voeg aan die einde van die tou by"
 
@@ -726,16 +726,16 @@ msgstr "Laat \"mid/side\"-enkodering toe."
 msgid "Alongside the originals"
 msgstr "Naas die oorspronlikes"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Steek altyd die hoofvenster weg"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Wys altyd die hoofvenster"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Begin altyd dadelik speel"
 
@@ -781,7 +781,7 @@ msgstr "Voeg lêers/URLs by die afspeellys by"
 msgid "Append to current playlist"
 msgstr "Voeg by huidige afspeellys by"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Voeg by afspeellys by"
 
@@ -920,7 +920,7 @@ msgstr "Eenvoudig Blou"
 msgid "Basic audio type"
 msgstr "Basies oudio tipe"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Gedrag"
 
@@ -1819,7 +1819,7 @@ msgstr "Maak 'n skenking"
 msgid "Double click to open"
 msgstr "Dubbelkliek om oop te maak"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Dubbelkliek op 'n liedjie sal..."
 
@@ -1971,6 +1971,10 @@ msgstr "Skakel grafiese effenaar aan"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Laat kortskakels slegs toe wanneer Clementine in fokus is"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2489,7 +2493,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 van %2 omslae is verky (%3 onsuksesvol)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Maak onbestaande liedjies in my afspeellys grys"
 
@@ -2616,6 +2620,12 @@ msgstr "Ikone bo"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Liedjies word geïdentifiseer"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2800,7 +2810,7 @@ msgstr "Hou knoppies vir %1 sekonde vas"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Hou knoppies vir %1 sekondes vas"
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Hou aan uitvoer in die agtergrond al word die venster gesluit"
 
@@ -2813,7 +2823,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Taal"
 
@@ -3281,8 +3291,8 @@ msgstr "Nooit"
 msgid "Never played"
 msgstr "Nooit deurgespeel"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Nooit begin afspeel"
 
@@ -3512,7 +3522,7 @@ msgstr "Maak oop in Google Drive."
 msgid "Open in new playlist"
 msgstr "Maak in nuwe afspeellys oop"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3653,8 +3663,8 @@ msgstr "Afspeeltelling"
 msgid "Play if stopped, pause if playing"
 msgstr "Speel indien gepauseerd, pauseer indien speel"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Speel as daar niks anders tans speel nie"
 
@@ -3956,7 +3966,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Onthou die Wii-afstandsbeheer se swaai"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Herinner vorige keer s'n"
 
@@ -4052,7 +4062,7 @@ msgstr "Herhaal snit"
 msgid "Replace current playlist"
 msgstr "Vervang huidige afspeellys"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Vervang die afspeellys"
 
@@ -4093,7 +4103,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Beperk tot ASCII karakters"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4515,7 +4525,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Wys die noteer knoppie in die hoofvenster"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Wys in stelselbalk"
 
@@ -5267,7 +5277,7 @@ msgstr "Gebruik kennisgewings om die Wii-afstandsbeheer se status te toon"
 msgid "Use temporal noise shaping"
 msgstr "Gebruik tydgebasseerde ruis vervorming"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Gebruik die stelsel se standaard waarde"
 
@@ -5305,7 +5315,7 @@ msgstr "Gebruikerskoppelvlak"
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Deur van die kieslys gebruik te maak om 'n liedjie by te voeg sal..."
 
@@ -5370,7 +5380,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5386,7 +5396,7 @@ msgstr "Webtuiste"
 msgid "Weeks"
 msgstr "Weke"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Wanneer Clementine oopgemaak word"
 
@@ -5603,7 +5613,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Jy moet toegang vir hulp toestelle aanskakel in jou stelsel se instellings sodat globale kortskakels sal werk."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Jy moet Clementine van voor af oopmaak om die taal te verander."
 

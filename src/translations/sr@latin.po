@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:16+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-06-25 08:41+0000\n"
+"Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
 "Language-Team: Serbian (Latin) (http://www.transifex.com/projects/p/clementine/language/sr@latin/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -585,7 +585,7 @@ msgstr "Dodaj u obeleživače"
 msgid "Add to playlist"
 msgstr "Dodaj u listu numera"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "stavi u red"
 
@@ -727,16 +727,16 @@ msgstr "Dozvoli „mid/side“ kodiranje"
 msgid "Alongside the originals"
 msgstr "pored originala"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "uvek sakrij glavni prozor"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "uvek prikaži glavni prozor"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "uvek će početi puštanje"
 
@@ -782,7 +782,7 @@ msgstr "Dodaj numere/URL tokove u listu numera"
 msgid "Append to current playlist"
 msgstr "Dodaj u tekuću listu numera"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "doda u listu numera"
 
@@ -921,7 +921,7 @@ msgstr "osnovna plava"
 msgid "Basic audio type"
 msgstr "Tip zvuka (osnovno)"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Ponašanje"
 
@@ -1069,7 +1069,7 @@ msgstr "Traži nove epizode"
 
 #: internet/googledriveservice.cpp:202
 msgid "Check for updates"
-msgstr ""
+msgstr "Potraži nadogradnje"
 
 #: ui/mainwindow.cpp:714
 msgid "Check for updates..."
@@ -1775,11 +1775,11 @@ msgstr "Ponovo skeniraj biblioteku"
 
 #: internet/googledriveservice.cpp:250 internet/googledriveservice.cpp:257
 msgid "Do a full rescan"
-msgstr ""
+msgstr "Ponovi skeniranje"
 
 #: internet/googledriveservice.cpp:205
 msgid "Do a full rescan..."
-msgstr ""
+msgstr "Ponovi skeniranje..."
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
@@ -1794,7 +1794,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in Google Drive which may take some time."
-msgstr ""
+msgstr "Ponovnim skeniranjem ćete izgubiti sve metapodatke sačuvane u Klementini, npr. omote albuma, broj puštanja i ocene. Klementina će ponovo skenirati svu vašu muziku sa Guglovog Drajva što može potrajati."
 
 #: widgets/osd.cpp:302 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1820,7 +1820,7 @@ msgstr "Doniraj"
 msgid "Double click to open"
 msgstr "Kliknite dvaput da otvorite"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Dvoklik na pesmu će da je..."
 
@@ -1955,7 +1955,7 @@ msgstr "Uredi..."
 
 #: ../bin/src/ui_seafilesettingspage.h:172
 msgid "Email"
-msgstr ""
+msgstr "E-adresa"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
@@ -1972,6 +1972,10 @@ msgstr "Uključi ekvilajzer"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Omogući prečice samo kad je Klementina u fokusu"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr "Omogući utkano uređivanje metapodataka pesme klikom"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2490,7 +2494,7 @@ msgstr "Gugl Drajv"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Dobavljeno %1 omota od %2 (%3 neuspešno)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Posivi nepostojeće pesme u listi numera"
 
@@ -2617,6 +2621,12 @@ msgstr "Ikone na vrhu"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Identifikujem pesmu"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr "Дозвољава уређивање ознаке директно у приказу листе нумера кликом на песму"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2801,7 +2811,7 @@ msgstr "Držite tastere %1 sekundu..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Držite tastere %1 sekundi..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Nastavi rad u pozadini kad se prozor zatvori"
 
@@ -2814,7 +2824,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Mačići"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Jezik"
 
@@ -3282,8 +3292,8 @@ msgstr "Nikad"
 msgid "Never played"
 msgstr "Nikad puštano"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "neće početi puštanje"
 
@@ -3513,7 +3523,7 @@ msgstr "Otvori u Gugl Drajvu"
 msgid "Open in new playlist"
 msgstr "Otvori u novoj listi"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "otvori u novoj listi"
@@ -3654,8 +3664,8 @@ msgstr "broj puštanja"
 msgid "Play if stopped, pause if playing"
 msgstr "Pusti ako je zaustavljeno, zaustavi ako se pušta"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "počeće puštanje ako trenutno ništa nije pušteno"
 
@@ -3741,7 +3751,7 @@ msgstr "Pretpojačanje"
 
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Preference"
-msgstr ""
+msgstr "Postavka"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_groovesharksettingspage.h:145
@@ -3957,7 +3967,7 @@ msgstr "rege"
 msgid "Remember Wii remote swing"
 msgstr "Zapamti zamah"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "seti se od prošlog puta"
 
@@ -4053,7 +4063,7 @@ msgstr "Ponavljaj numeru"
 msgid "Replace current playlist"
 msgstr "Zameni tekuću listu"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "zameni listu numera"
 
@@ -4094,7 +4104,7 @@ msgstr "Ponovo pusti numeru ili pusti prethodnu ako je tekuća unutar početnih 
 msgid "Restrict to ASCII characters"
 msgstr "Ograniči se na ASKI znakove"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Nastavi puštanje po pokretanju"
 
@@ -4236,7 +4246,7 @@ msgstr "Skrobluj numere koje puštam"
 
 #: ../bin/src/ui_seafilesettingspage.h:165
 msgid "Seafile"
-msgstr ""
+msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
@@ -4369,7 +4379,7 @@ msgstr "Serijski broj"
 
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
@@ -4516,7 +4526,7 @@ msgstr "Prikaži „volim“ dugme"
 msgid "Show the scrobble button in the main window"
 msgstr "Prikaži dugme skroblovanja u glavnom prozoru"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Usidri u sistemsku kasetu"
 
@@ -5127,7 +5137,7 @@ msgstr "ultra široki opseg (UWB)"
 
 #: internet/seafilesettingspage.cpp:129 internet/seafilesettingspage.cpp:130
 msgid "Unable to connect"
-msgstr ""
+msgstr "Ne mogu da se povežem"
 
 #: internet/magnatunedownloaddialog.cpp:147
 #, qt-format
@@ -5268,7 +5278,7 @@ msgstr "Koristite obaveštenja za prijavu stanja Wii daljinskog"
 msgid "Use temporal noise shaping"
 msgstr "Vremensko oblikovanje šuma"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "sistemski podrazumevan"
 
@@ -5306,7 +5316,7 @@ msgstr "Korisničko sučelje"
 msgid "Username"
 msgstr "Korisničko ime"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Radnja menija za dodavanje pesme..."
 
@@ -5371,7 +5381,7 @@ msgstr "VAV"
 msgid "WMA"
 msgstr "VMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Upozori me prilikom zatvaranja jezička liste numera"
 
@@ -5387,7 +5397,7 @@ msgstr "Vebsajt"
 msgid "Weeks"
 msgstr "sedmica"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Kada se Klementina pokrene"
 
@@ -5604,7 +5614,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Da biste koristili opšte prečice u Klementini morate da uključite opciju „<span style=\" font-style:italic;\">Omogući pristup pomoćnim uređajima</span>“ u podešavanjima sistema."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Morate ponovo da pokrenete Klementinu da biste promenili jezik."
 

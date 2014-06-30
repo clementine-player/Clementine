@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:26+0000\n"
+"PO-Revision-Date: 2014-06-24 21:08+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -584,7 +584,7 @@ msgstr "Pridať do záložiek"
 msgid "Add to playlist"
 msgstr "Pridať do playlistu"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "ju pridá do poradia"
 
@@ -726,16 +726,16 @@ msgstr "Povoliť stred/kraj enkódovanie"
 msgid "Alongside the originals"
 msgstr "Po boku originálov"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Vždy skryť hlavné okno"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Vždy zobrazovať hlavné okno"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Hneď začne hrať"
 
@@ -781,7 +781,7 @@ msgstr "Pridať súbory/URL adresy do playlistu"
 msgid "Append to current playlist"
 msgstr "Pridať do aktuálneho playlistu"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "ju pridá do playlistu"
 
@@ -920,7 +920,7 @@ msgstr "Základná modrá"
 msgid "Basic audio type"
 msgstr "Základný typ zvuku"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Správanie"
 
@@ -1819,7 +1819,7 @@ msgstr "Prispieť"
 msgid "Double click to open"
 msgstr "Otvoríte dvojklikom"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Dvojklik na pieseň..."
 
@@ -1971,6 +1971,10 @@ msgstr "Povoliť ekvalizér"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Povoliť skratky len keď je Clementine zameraný"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr "Povoliť upravovanie metadát piesní kliknutím na riadok"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2489,7 +2493,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Získaných %1 obalov z %2 (%3 zlyhalo)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Zošednúť neexistujúce piesne v playlistoch"
 
@@ -2616,6 +2620,12 @@ msgstr "Ikony na vrchu"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Identifikuje sa pieseň"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr "Ak je aktivované, kliknutím na vybratú pieseň v playliste priamo upravíte tagy"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2800,7 +2810,7 @@ msgstr "Držte tlačidlá %1 sekundu..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Držte tlačidlá %1 sekúnd..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Nechať bežať na pozadí, keď sa zavrie hlavné okno"
 
@@ -2813,7 +2823,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Mačiatka"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Jazyk"
 
@@ -3281,8 +3291,8 @@ msgstr "Nikdy"
 msgid "Never played"
 msgstr "Nikdy nehrané"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Nezačne sa prehrávať"
 
@@ -3512,7 +3522,7 @@ msgstr "Otvoriť v Google Drive"
 msgid "Open in new playlist"
 msgstr "ju otvorí v novom playliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "ju otvorí v novom playliste"
@@ -3653,8 +3663,8 @@ msgstr "Počet prehraní"
 msgid "Play if stopped, pause if playing"
 msgstr "Hrať ak je zastavené, pozastaviť ak hrá"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Začne hrať, ak sa nič neprehráva"
 
@@ -3956,7 +3966,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Pamätať si kývnutie Wii diaľkového"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Zapamätať z naposledy"
 
@@ -4052,7 +4062,7 @@ msgstr "Opakovať skladbu"
 msgid "Replace current playlist"
 msgstr "Nahradiť aktuálny playlist"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "ňou nahradí playlist"
 
@@ -4093,7 +4103,7 @@ msgstr "Spustiť znovu prehrávanie skladby, alebo prehrať predchádzajúcu skl
 msgid "Restrict to ASCII characters"
 msgstr "Obmedziť na ASCII písmená"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Obnoviť prehrávanie pri spustení"
 
@@ -4235,7 +4245,7 @@ msgstr "Skroblovať skladby, ktoré počúvam"
 
 #: ../bin/src/ui_seafilesettingspage.h:165
 msgid "Seafile"
-msgstr ""
+msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
@@ -4515,7 +4525,7 @@ msgstr "Zobraziť tlačidlo \"Obľúbené\""
 msgid "Show the scrobble button in the main window"
 msgstr "Zobraziť tlačidlo skroblovania v hlavnom okne"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Zobrazovať tray ikonu"
 
@@ -5267,7 +5277,7 @@ msgstr "Použiť upozornenia na oznamovanie stavu Wii diaľkového"
 msgid "Use temporal noise shaping"
 msgstr "Použiť časové tvarovanie šumu"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Použiť základný systémový"
 
@@ -5305,7 +5315,7 @@ msgstr "Používateľské rozhranie"
 msgid "Username"
 msgstr "Meno používateľa"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Použitie menu na pridanie piesne..."
 
@@ -5370,7 +5380,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovať ma pri zatvorení karty s playlistom"
 
@@ -5386,7 +5396,7 @@ msgstr "Webstránka"
 msgid "Weeks"
 msgstr "Týždne"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Pri zapnutí Clementine"
 
@@ -5603,7 +5613,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Potrebujete otvoriť Systémové nastavenia a zapnúť \"<span style=\" font-style:italic;\">Povoliť prístup pre pomocné zariadenia</span>\" na použitie globálnych skratiek v Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Musíte reštartovať Clementine ak chcete zmeniť jazyk."
 

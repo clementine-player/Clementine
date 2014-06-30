@@ -24,7 +24,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 19:43+0000\n"
+"PO-Revision-Date: 2014-06-25 17:08+0000\n"
 "Last-Translator: Volkan Gezer <volkangezer@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -599,7 +599,7 @@ msgstr "Yer imlerine ekle"
 msgid "Add to playlist"
 msgstr "Çalma listesine ekle"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Kuyruğa ekle"
 
@@ -741,16 +741,16 @@ msgstr "Mid/side kodlamaya izin ver"
 msgid "Alongside the originals"
 msgstr "Orijinallerin yanına"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Ana pencereyi her zaman gizle"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Ana pencereyi her zaman göster"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Her zaman çalarak başlat"
 
@@ -796,7 +796,7 @@ msgstr "Çalma listesine dosya/URL ekle"
 msgid "Append to current playlist"
 msgstr "Şu anki çalma listesine ekle"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Çalma listesine ekle"
 
@@ -935,7 +935,7 @@ msgstr "Temel Mavi"
 msgid "Basic audio type"
 msgstr "Temel ses tipi"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Davranış"
 
@@ -1834,7 +1834,7 @@ msgstr "Bağış Yap"
 msgid "Double click to open"
 msgstr "Açmak için çift tıkla"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Bir şarkıyı çift tıklamak..."
 
@@ -1986,6 +1986,10 @@ msgstr "Ekolayzırı etkinleştir"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Kısayolları sadece Clementine odaktayken etkinleştir"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr "Tıklama ile şarkı üst veri satır içi sürümünü etkinleştir"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2504,7 +2508,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2 kapaktan %1 tanesi alındı (%3 tanesi başarısız)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Çalma listemde olmayan şarkıları gri göster"
 
@@ -2631,6 +2635,12 @@ msgstr "Üstteki simgeler"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Şarkı teşhis ediliyor"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr "Etkinleştirildiğinde, çalma listesi içerisinde bir şarkı seçmek doğrudan etiket değerini düzenlemenizi sağlayacak"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2815,7 +2825,7 @@ msgstr "Düğmeleri %1 saniye tut..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Düğmeleri %1 saniye tut..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Pencere kapandığında arkaplanda çalışmaya devam et"
 
@@ -2828,7 +2838,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kedicikler"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Dil"
 
@@ -3296,8 +3306,8 @@ msgstr "Hiçbir zaman"
 msgid "Never played"
 msgstr "Hiç çalınmamış"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Asla çalarak başlama"
 
@@ -3527,7 +3537,7 @@ msgstr "Google Drive'da aç"
 msgid "Open in new playlist"
 msgstr "Yeni çalma listesinde aç"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Yeni çalma listesinde aç"
@@ -3668,8 +3678,8 @@ msgstr "Çalma sayısı"
 msgid "Play if stopped, pause if playing"
 msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Çalan bir şey yoksa çal"
 
@@ -3971,7 +3981,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Wii kumanda sallamayı hatırla"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Son seferkinden hatırla"
 
@@ -4067,7 +4077,7 @@ msgstr "Parçayı tekrarla"
 msgid "Replace current playlist"
 msgstr "Şu anki çalma listesinin yerine geç"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Çalma listesinin yerine geç"
 
@@ -4108,7 +4118,7 @@ msgstr "Eğer başlangıçtan en fazla 8 saniye geçmişse parçayı yeniden ba�
 msgid "Restrict to ASCII characters"
 msgstr "ASCII karakterler olarak kısıtla"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Başlarken çalmaya devam et"
 
@@ -4530,7 +4540,7 @@ msgstr "\"Beğen\" düğmesini göster"
 msgid "Show the scrobble button in the main window"
 msgstr "Ana pencerede skroplama düğmesini göster"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Sistem çekmecesi simgesini göster"
 
@@ -5282,7 +5292,7 @@ msgstr "Wii kumanda durumunu raporlamak için bildirimleri kullan"
 msgid "Use temporal noise shaping"
 msgstr "Temporal noise shaping kullan"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Sistem öntanımlısını kullan"
 
@@ -5320,7 +5330,7 @@ msgstr "Kullanıcı arayüzü"
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Menü kullanarak şarkı eklemek..."
 
@@ -5385,7 +5395,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Bir çalma listesi sekmesini kapatırken beni uyar"
 
@@ -5401,7 +5411,7 @@ msgstr "İnternet sitesi"
 msgid "Weeks"
 msgstr "Haftalar"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Clementine başladığında"
 
@@ -5618,7 +5628,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Clementine'da genel kısayolları kullanabilmek için Sistem Ayarlarına girin ve \"<span style=\" font-style:italic;\">Yardımcı aygıtlara erişimi etkinleştir</span>\" seçeneğini açın."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dili değiştirdiyseniz programı yeniden başlatmanız gerekmektedir."
 

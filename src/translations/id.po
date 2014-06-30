@@ -8,6 +8,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Hassan Aly <me@hasssan.com>, 2014
 # Muhammad Iqbal <tydushikari@gmail.com>, 2013
+# L1Nus <multazam_ali@me.com>, 2014
 # nix.Lilium <nix.lilium@gmail.com>, 2012
 # Rizki Aulia Rachman <rizkiaulia.r@gmail.com>, 2013
 # Tjung Steven <tjung.steven@gmail.com>, 2012-2013
@@ -17,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-05 15:16+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-06-27 07:19+0000\n"
+"Last-Translator: L1Nus <multazam_ali@me.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -592,7 +593,7 @@ msgstr "Tambah ke markah"
 msgid "Add to playlist"
 msgstr "Tambah ke daftar putar"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:230
 msgid "Add to the queue"
 msgstr "Tambah ke antrian"
 
@@ -734,16 +735,16 @@ msgstr "Biarkan pengkodean sampingan/pertengahan"
 msgid "Alongside the originals"
 msgstr "Bersama dengan original"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Always hide the main window"
 msgstr "Selalu sembunyikan jendela utama"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Always show the main window"
 msgstr "Selalu tunjukkan jendela utama"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:222
+#: ../bin/src/ui_behavioursettingspage.h:236
 msgid "Always start playing"
 msgstr "Selalu mulai memutar"
 
@@ -789,7 +790,7 @@ msgstr "Bubuhkan berkas/URL ke daftar putar"
 msgid "Append to current playlist"
 msgstr "Bubuhkan ke daftar putar saat ini"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:227
 msgid "Append to the playlist"
 msgstr "Bubuhkan ke daftar putar"
 
@@ -928,7 +929,7 @@ msgstr "Biru Dasar"
 msgid "Basic audio type"
 msgstr "tipe audio dasar"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:197
 msgid "Behavior"
 msgstr "Perilaku"
 
@@ -1827,7 +1828,7 @@ msgstr "Donasi"
 msgid "Double click to open"
 msgstr "Kilk ganda untuk buka"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:224
 msgid "Double clicking a song will..."
 msgstr "Klik ganda lagu akan ..."
 
@@ -1912,7 +1913,7 @@ msgstr "Dropbox"
 
 #: ui/equalizer.cpp:119
 msgid "Dubstep"
-msgstr ""
+msgstr "Dubstep"
 
 #: ../bin/src/ui_ripcd.h:309
 msgid "Duration"
@@ -1962,7 +1963,7 @@ msgstr "Sunting..."
 
 #: ../bin/src/ui_seafilesettingspage.h:172
 msgid "Email"
-msgstr ""
+msgstr "Surel"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
@@ -1979,6 +1980,10 @@ msgstr "Aktifkan ekualiser"
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Aktifkan jalan pintas hanya ketika Clementine difokuskan"
+
+#: ../bin/src/ui_behavioursettingspage.h:216
+msgid "Enable song metadata inline edition with click"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2497,7 +2502,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Punya %1 mencakup dari %2 ( %3 gagal)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:212
 msgid "Grey out non existent songs in my playlists"
 msgstr "Pengabuan lagu yang sudah tidak ada dalam daftar putar saya"
 
@@ -2624,6 +2629,12 @@ msgstr "Ikon di atas"
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
 msgstr "Mengidentifikasi lagu"
+
+#: ../bin/src/ui_behavioursettingspage.h:214
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2808,7 +2819,7 @@ msgstr "Jaga tombol selama %1 detik..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Jaga tombol selama %1 detik..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:199
 msgid "Keep running in the background when the window is closed"
 msgstr "Tetap jalankan di belakang layar ketika jendela ditutup"
 
@@ -2821,7 +2832,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Anak kucing"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Language"
 msgstr "Bahasa"
 
@@ -3289,8 +3300,8 @@ msgstr "Tidak Pernah"
 msgid "Never played"
 msgstr "Tidak pernah diputar"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:234
 msgid "Never start playing"
 msgstr "Tidak pernah diputar"
 
@@ -3520,7 +3531,7 @@ msgstr "Buka di Google Drive"
 msgid "Open in new playlist"
 msgstr "Buka daftar putar baru"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:229
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Buka dalam daftar putar baru"
@@ -3661,8 +3672,8 @@ msgstr "Jumlah putar"
 msgid "Play if stopped, pause if playing"
 msgstr "Putar jika berhenti, jeda jika berputar"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:221
+#: ../bin/src/ui_behavioursettingspage.h:235
 msgid "Play if there is nothing already playing"
 msgstr "Putar jika sudah tidak ada yang harus diputar"
 
@@ -3748,7 +3759,7 @@ msgstr "Pre-amp"
 
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Preference"
-msgstr ""
+msgstr "Pilihan"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_groovesharksettingspage.h:145
@@ -3837,7 +3848,7 @@ msgstr "Gerak maju"
 
 #: ui/equalizer.cpp:138
 msgid "Psychedelic"
-msgstr ""
+msgstr "Psychedelic"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 #: wiimotedev/wiimotesettingspage.cpp:239
@@ -3964,7 +3975,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Ingat ayunan Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
 msgstr "Ingat dari waktu terakhir"
 
@@ -4060,7 +4071,7 @@ msgstr "Ulang trek"
 msgid "Replace current playlist"
 msgstr "Ganti daftar putar saat ini"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:228
 msgid "Replace the playlist"
 msgstr "Ganti daftar putar"
 
@@ -4101,7 +4112,7 @@ msgstr "Mulai ulang trek, atau putar trek sebelumnya jika dalam 8 detik tidak mu
 msgid "Restrict to ASCII characters"
 msgstr "Batasi ke karakter ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:211
 msgid "Resume playback on start"
 msgstr "Lanjutkan pemutaran saat memulai Clementine"
 
@@ -4376,7 +4387,7 @@ msgstr "Nomor seri"
 
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Server"
-msgstr ""
+msgstr "Peladen"
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
@@ -4523,7 +4534,7 @@ msgstr "Tunjukkan tombol \"love\""
 msgid "Show the scrobble button in the main window"
 msgstr "Tampilkan tombol scrobble pada jendela utama"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Show tray icon"
 msgstr "Tampilkan ikon tray"
 
@@ -5134,7 +5145,7 @@ msgstr "Lebar pita ultra (UWB)"
 
 #: internet/seafilesettingspage.cpp:129 internet/seafilesettingspage.cpp:130
 msgid "Unable to connect"
-msgstr ""
+msgstr "Tidak dapat menghubungi."
 
 #: internet/magnatunedownloaddialog.cpp:147
 #, qt-format
@@ -5275,7 +5286,7 @@ msgstr "Gunakan notifikasi untuk melaporkan status Remote Wii"
 msgid "Use temporal noise shaping"
 msgstr "Gunakan pembentuk bising temporal"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Use the system default"
 msgstr "Gunakan standar sistem"
 
@@ -5313,7 +5324,7 @@ msgstr "Antarmuka"
 msgid "Username"
 msgstr "Nama pengguna"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:217
 msgid "Using the menu to add a song will..."
 msgstr "Menggunakan menu untuk menambah lagu akan..."
 
@@ -5378,7 +5389,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
 msgid "Warn me when closing a playlist tab"
 msgstr "Peringatkan saya ketika menutup tab daftar putar"
 
@@ -5394,7 +5405,7 @@ msgstr "Situs web"
 msgid "Weeks"
 msgstr "Mingguan"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:207
 msgid "When Clementine starts"
 msgstr "Saat Clementine dimulai"
 
@@ -5611,7 +5622,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Anda perlu untuk memulai Sistem Preferensi dan menyalakan \"<span style=\" font-style:italic;\">Aktifkasi akses untuk perangkat bantu</span>\" untuk menggunakan cara pintas global di Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Anda perlu memulai ulang Clementine jika mengubah bahasa."
 
