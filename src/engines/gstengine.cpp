@@ -301,7 +301,7 @@ void GstEngine::UpdateScope(int chunk_length) {
   typedef Engine::Scope::value_type sample_type;
 
   // prevent dbz or invalid chunk size
-  if (!GST_CLOCK_TIME_IS_VALID(GST_BUFFER_DURATION(latest_buffer_))) return;
+  if (!latest_buffer_ || !GST_CLOCK_TIME_IS_VALID(GST_BUFFER_DURATION(latest_buffer_))) return;
   if (GST_BUFFER_DURATION(latest_buffer_) == 0) return;
 
   GstMapInfo map;
