@@ -25,7 +25,7 @@ if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-find_package(Qt4 4.5.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
+find_package(Qt4 4.7.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
 
 if(NOT APPLE)
   find_package(Qt4 COMPONENTS QtWebKit)
