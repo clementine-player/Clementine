@@ -32,7 +32,6 @@ ExtendedEditor::ExtendedEditor(QWidget* widget, int extra_right_padding,
       reset_button_(new QToolButton(widget)),
       extra_right_padding_(extra_right_padding),
       draw_hint_(draw_hint),
-      font_point_size_(widget->font().pointSizeF() - 1),
       is_rtl_(false) {
   clear_button_->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
   clear_button_->setIconSize(QSize(16, 16));
@@ -61,7 +60,8 @@ ExtendedEditor::ExtendedEditor(QWidget* widget, int extra_right_padding,
 
 void ExtendedEditor::set_hint(const QString& hint) {
   hint_ = hint;
-  widget_->update();
+  this->clear();
+  this->set_place_holder(hint_);
 }
 
 void ExtendedEditor::set_clear_button(bool visible) {
@@ -105,25 +105,9 @@ void ExtendedEditor::Paint(QPaintDevice* device) {
   if (!widget_->hasFocus() && is_empty() && !hint_.isEmpty()) {
     clear_button_->hide();
 
-    if (draw_hint_) {
-      QPainter p(device);
-
-      QFont font;
-      font.setBold(false);
-      font.setPointSizeF(font_point_size_);
-
-      QFontMetrics m(font);
-      const int kBorder = (device->height() - m.height()) / 2;
-
-      p.setPen(widget_->palette().color(QPalette::Disabled, QPalette::Text));
-      p.setFont(font);
-
-      QRect r(5, kBorder, device->width() - 10, device->height() - kBorder * 2);
-      p.drawText(r, Qt::AlignLeft | Qt::AlignVCenter,
-                 m.elidedText(hint_, Qt::ElideRight, r.width()));
+    if (!draw_hint_) {
+      clear_button_->setVisible(has_clear_button_);
     }
-  } else {
-    clear_button_->setVisible(has_clear_button_);
   }
 }
 
@@ -182,6 +166,27 @@ TextEdit::TextEdit(QWidget* parent)
 void TextEdit::paintEvent(QPaintEvent* e) {
   QPlainTextEdit::paintEvent(e);
   Paint(viewport());
+
+  if (!widget_->hasFocus() && is_empty() && !hint_.isEmpty() && draw_hint_) {
+    QPainter p(viewport());
+
+    QFont font;
+    font.setBold(false);
+    font.setPointSizeF(widget_->font().pointSizeF());
+
+    QFontMetrics m(font);
+    const int kBorder = (viewport()->height() - m.height()) / 2;
+
+    //the color of PlaceHolderText is hardcoded in Qt to be text color at 128 alpha
+    QColor col = widget_->palette().text().color();
+    col.setAlpha(128);
+    p.setPen(col);
+    p.setFont(font);
+
+    QRect r(5, kBorder, viewport()->width() - 10, viewport()->height() - kBorder * 2);
+    p.drawText(r, Qt::AlignLeft | Qt::AlignVCenter,
+               m.elidedText(hint_, Qt::ElideRight, r.width()));
+  }
 }
 
 void TextEdit::resizeEvent(QResizeEvent* e) {
@@ -189,9 +194,21 @@ void TextEdit::resizeEvent(QResizeEvent* e) {
   Resize();
 }
 
+const char* SpinBox::abbrev_hint = "-";
+
 SpinBox::SpinBox(QWidget* parent)
-    : QSpinBox(parent), ExtendedEditor(this, 14, false) {
+    : QSpinBox(parent), ExtendedEditor(this, 14, true) {
   connect(reset_button_, SIGNAL(clicked()), SIGNAL(Reset()));
+}
+
+void SpinBox::set_hint(const QString& hint) {
+  if (hint.isEmpty()) {
+    hint_ = "";
+  } else {
+    hint_ = abbrev_hint;
+    lineEdit()->clear();
+    set_place_holder(abbrev_hint);
+  }
 }
 
 void SpinBox::paintEvent(QPaintEvent* e) {
@@ -202,6 +219,14 @@ void SpinBox::paintEvent(QPaintEvent* e) {
 void SpinBox::resizeEvent(QResizeEvent* e) {
   QSpinBox::resizeEvent(e);
   Resize();
+}
+
+void SpinBox::focusOutEvent(QFocusEvent* event) {
+  QSpinBox::focusOutEvent(event);
+  if (!hint_.isEmpty() && value() <=0) {
+    lineEdit()->clear();
+    set_place_holder(hint_);
+  }
 }
 
 QString SpinBox::textFromValue(int val) const {

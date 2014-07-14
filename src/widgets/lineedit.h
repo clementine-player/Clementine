@@ -42,6 +42,7 @@ class LineEditInterface {
   virtual QString hint() const = 0;
   virtual void set_hint(const QString& hint) = 0;
   virtual void clear_hint() = 0;
+  virtual void set_place_holder(const QString& text) = 0;
 
   virtual void set_enabled(bool enabled) = 0;
 
@@ -60,6 +61,7 @@ class ExtendedEditor : public LineEditInterface {
   QString hint() const { return hint_; }
   void set_hint(const QString& hint);
   void clear_hint() { set_hint(QString()); }
+  virtual void set_place_holder(const QString& text) = 0;
 
   bool has_clear_button() const { return has_clear_button_; }
   void set_clear_button(bool visible);
@@ -67,11 +69,9 @@ class ExtendedEditor : public LineEditInterface {
   bool has_reset_button() const;
   void set_reset_button(bool visible);
 
-  qreal font_point_size() const { return font_point_size_; }
-  void set_font_point_size(qreal size) { font_point_size_ = size; }
-
  protected:
   void Paint(QPaintDevice* device);
+  void PaintHint(QPaintDevice* device);
   void Resize();
 
  private:
@@ -93,8 +93,6 @@ class ExtendedEditor : public LineEditInterface {
 class LineEdit : public QLineEdit, public ExtendedEditor {
   Q_OBJECT
   Q_PROPERTY(QString hint READ hint WRITE set_hint);
-  Q_PROPERTY(qreal font_point_size READ font_point_size WRITE
-                 set_font_point_size);
   Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
                  set_clear_button);
   Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
@@ -108,6 +106,7 @@ class LineEdit : public QLineEdit, public ExtendedEditor {
   QString text() const { return QLineEdit::text(); }
   void set_text(const QString& text) { QLineEdit::setText(text); }
   void set_enabled(bool enabled) { QLineEdit::setEnabled(enabled); }
+  void set_place_holder(const QString& text) { setPlaceholderText(text); };
 
  protected:
   void paintEvent(QPaintEvent*);
@@ -140,6 +139,7 @@ class TextEdit : public QPlainTextEdit, public ExtendedEditor {
   QString text() const { return QPlainTextEdit::toPlainText(); }
   void set_text(const QString& text) { QPlainTextEdit::setPlainText(text); }
   void set_enabled(bool enabled) { QPlainTextEdit::setEnabled(enabled); }
+  void set_place_holder(const QString& text) {}; // QT5> give us native placeholder text, at the moment we have do to this with paintevent
 
  protected:
   void paintEvent(QPaintEvent*);
@@ -164,18 +164,24 @@ class SpinBox : public QSpinBox, public ExtendedEditor {
   QString textFromValue(int val) const;
 
   // ExtendedEditor
+  void set_hint(const QString& hint);
   bool is_empty() const { return text().isEmpty() || text() == "0"; }
   void set_focus() { QSpinBox::setFocus(); }
   QString text() const { return QSpinBox::text(); }
   void set_text(const QString& text) { QSpinBox::setValue(text.toInt()); }
   void set_enabled(bool enabled) { QSpinBox::setEnabled(enabled); }
+  void set_place_holder(const QString& text) { lineEdit()->setPlaceholderText(text); };
 
  protected:
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
+  void focusOutEvent(QFocusEvent* event);
 
 signals:
   void Reset();
+
+ private:
+  static const char* abbrev_hint;
 };
 
 #endif  // LINEEDIT_H
