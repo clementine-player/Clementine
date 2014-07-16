@@ -60,7 +60,7 @@ ExtendedEditor::ExtendedEditor(QWidget* widget, int extra_right_padding,
 
 void ExtendedEditor::set_hint(const QString& hint) {
   hint_ = hint;
-  this->clear();
+  clear();
   this->set_place_holder(hint_);
 }
 
