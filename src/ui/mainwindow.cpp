@@ -751,6 +751,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ShowOSD()));
   connect(global_shortcuts_, SIGNAL(TogglePrettyOSD()), app_->player(),
           SLOT(TogglePrettyOSD()));
+  connect(global_shortcuts_, SIGNAL(DeletePlaylistSelected()),
+          SLOT(PlaylistDelete()));
 #ifdef HAVE_LIBLASTFM
   connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), app_->scrobbler(),
           SLOT(ToggleScrobbling()));
