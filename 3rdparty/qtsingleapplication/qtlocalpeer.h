@@ -81,4 +81,5 @@ protected:
 
 private:
     static const char* ack;
+    bool lockFileCreated;
 };
