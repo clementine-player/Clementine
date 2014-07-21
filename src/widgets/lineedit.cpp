@@ -60,7 +60,6 @@ ExtendedEditor::ExtendedEditor(QWidget* widget, int extra_right_padding,
 
 void ExtendedEditor::set_hint(const QString& hint) {
   hint_ = hint;
-  clear();
   this->set_place_holder(hint_);
 }
 
@@ -144,6 +143,7 @@ void LineEdit::text_changed(const QString& text) {
     set_rtl(QString(text.at(0)).isRightToLeft());
   }
   Resize();
+  clear_hint();
 }
 
 void LineEdit::paintEvent(QPaintEvent* e) {
@@ -159,8 +159,8 @@ void LineEdit::resizeEvent(QResizeEvent* e) {
 TextEdit::TextEdit(QWidget* parent)
     : QPlainTextEdit(parent), ExtendedEditor(this) {
   connect(reset_button_, SIGNAL(clicked()), SIGNAL(Reset()));
-  connect(this, SIGNAL(textChanged()), viewport(),
-          SLOT(update()));  // To clear the hint
+  connect(this, SIGNAL(textChanged()), this,
+          SLOT(text_changed()));  // To clear the hint*/
 }
 
 void TextEdit::paintEvent(QPaintEvent* e) {
@@ -199,11 +199,13 @@ const char* SpinBox::abbrev_hint = "-";
 SpinBox::SpinBox(QWidget* parent)
     : QSpinBox(parent), ExtendedEditor(this, 14, true) {
   connect(reset_button_, SIGNAL(clicked()), SIGNAL(Reset()));
+  connect(this, SIGNAL(valueChanged(QString)), this, SLOT(value_changed()));
 }
 
 void SpinBox::set_hint(const QString& hint) {
   if (hint.isEmpty()) {
     hint_ = "";
+    set_place_holder("");
   } else {
     hint_ = abbrev_hint;
     lineEdit()->clear();

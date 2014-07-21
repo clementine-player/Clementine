@@ -60,7 +60,7 @@ class ExtendedEditor : public LineEditInterface {
 
   QString hint() const { return hint_; }
   void set_hint(const QString& hint);
-  void clear_hint() { set_hint(QString()); }
+  void clear_hint() { if (!hint_.isEmpty()) this->set_hint(QString()); }
   virtual void set_place_holder(const QString& text) = 0;
 
   bool has_clear_button() const { return has_clear_button_; }
@@ -145,6 +145,9 @@ class TextEdit : public QPlainTextEdit, public ExtendedEditor {
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
 
+ private slots:
+  void text_changed() { clear_hint(); };
+
 signals:
   void Reset();
 };
@@ -177,7 +180,10 @@ class SpinBox : public QSpinBox, public ExtendedEditor {
   void resizeEvent(QResizeEvent*);
   void focusOutEvent(QFocusEvent* event);
 
-signals:
+ private slots:
+  void value_changed() { clear_hint(); };
+
+ signals:
   void Reset();
 
  private:
