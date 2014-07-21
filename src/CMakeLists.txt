@@ -892,11 +892,6 @@ optional_source(LINUX SOURCES widgets/osd_x11.cpp)
 if(HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
 
-  # Hack to get it to generate interfaces without namespaces - required
-  # because otherwise org::freedesktop::UDisks and
-  # org::freedesktop::UDisks::Device conflict.
-  list(APPEND QT_DBUSXML2CPP_EXECUTABLE -N)
-
   # MPRIS DBUS interfaces
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.player.xml
@@ -964,6 +959,10 @@ if(HAVE_DBUS)
 
   # DeviceKit DBUS interfaces
   if(HAVE_DEVICEKIT)
+    set_source_files_properties(dbus/org.freedesktop.UDisks.xml
+        PROPERTIES NO_NAMESPACE dbus/udisks)
+    set_source_files_properties(dbus/org.freedesktop.UDisks.Device.xml
+        PROPERTIES NO_NAMESPACE dbus/udisksdevice)
     qt4_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.xml
         dbus/udisks)
