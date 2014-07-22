@@ -333,6 +333,10 @@ signals:
 
   void LoadTracksError(const QString& message);
 
+  // Signals that the queue has changed, meaning that the remaining queued
+  // items should update their position.
+  void QueueChanged();
+
  private:
   void SetCurrentIsPaused(bool paused);
   void UpdateScrobblePoint();

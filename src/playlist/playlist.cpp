@@ -1984,6 +1984,7 @@ void Playlist::TracksDequeued() {
     emit dataChanged(index, index);
   }
   temp_dequeue_change_indexes_.clear();
+  emit QueueChanged();
 }
 
 void Playlist::TracksEnqueued(const QModelIndex&, int begin, int end) {
