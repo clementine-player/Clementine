@@ -105,9 +105,6 @@ class PlaylistView : public QTreeView {
                           const QImage& cover_art);
   void PlayerStopped();
 
-  // General slot to update the whole playlistview
-  void UpdateView();
-
 signals:
   void PlayItem(const QModelIndex& index);
   void PlayPause();
