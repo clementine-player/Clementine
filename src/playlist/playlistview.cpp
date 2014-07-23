@@ -256,6 +256,7 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
     disconnect(playlist_, SIGNAL(DynamicModeChanged(bool)), this,
                SLOT(DynamicModeChanged(bool)));
     disconnect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
+    disconnect(playlist_, SIGNAL(QueueChanged()), this, SLOT(UpdateView()));
 
     disconnect(dynamic_controls_, SIGNAL(Expand()), playlist_,
                SLOT(ExpandDynamicPlaylist()));
@@ -273,11 +274,12 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
   read_only_settings_ = false;
 
   connect(playlist_, SIGNAL(RestoreFinished()), SLOT(JumpToLastPlayedTrack()));
-
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
   connect(playlist_, SIGNAL(DynamicModeChanged(bool)),
           SLOT(DynamicModeChanged(bool)));
   connect(playlist_, SIGNAL(destroyed()), SLOT(PlaylistDestroyed()));
+  connect(playlist_, SIGNAL(QueueChanged()), SLOT(UpdateView()));
+
   connect(dynamic_controls_, SIGNAL(Expand()), playlist_,
           SLOT(ExpandDynamicPlaylist()));
   connect(dynamic_controls_, SIGNAL(Repopulate()), playlist_,
@@ -1318,4 +1320,8 @@ void PlaylistView::focusInEvent(QFocusEvent* event) {
       selectionModel()->select(new_selection, QItemSelectionModel::Select);
     }
   }
+}
+
+void PlaylistView::UpdateView() {
+  update();
 }
