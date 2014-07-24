@@ -361,9 +361,15 @@ void PlaylistContainer::UpdateNoMatchesLabel() {
 
   QString text;
   if (has_rows && !has_results) {
-    text =
-        tr("No matches found.  Clear the search box to show the whole playlist "
-           "again.");
+    if (ui_->filter->text().trimmed().compare("the answer to life the universe "
+                                              "and everything",
+                                              Qt::CaseInsensitive) == 0) {
+      text = "42";
+    } else {
+      text =
+          tr("No matches found.  Clear the search box to show the whole playlist "
+             "again.");
+    }
   }
 
   if (!text.isEmpty()) {
