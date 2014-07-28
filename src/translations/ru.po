@@ -32,7 +32,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-29 06:24+0000\n"
+"PO-Revision-Date: 2014-07-23 09:16+0000\n"
 "Last-Translator: Andrei Stepanov\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -541,7 +541,7 @@ msgstr "Добавить тег \"Группа\""
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
-msgstr "Добавить тег \"Время\""
+msgstr "Добавить тег \"Длина\""
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
@@ -1069,7 +1069,7 @@ msgstr "Изменить режим повторения"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:189
 msgid "Change shortcut..."
-msgstr "Изменить комбинацию клавиш..."
+msgstr "Изменить клавиши"
 
 #: core/globalshortcuts.cpp:67
 msgid "Change shuffle mode"
@@ -1993,7 +1993,7 @@ msgstr "Включить эквалайзер"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr "Включить комбинации клавиш только когда окно в фокусе"
+msgstr "Включить горячие клавиши, только когда окно в фокусе"
 
 #: ../bin/src/ui_behavioursettingspage.h:216
 msgid "Enable song metadata inline edition with click"
@@ -2918,7 +2918,7 @@ msgstr "Левый канал"
 #: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
-msgstr "Длительность"
+msgstr "Длина"
 
 #: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
 #: ../bin/src/ui_seafilesettingspage.h:178
@@ -3374,7 +3374,7 @@ msgstr "Нет обложек для экспорта."
 msgid "No long blocks"
 msgstr "Без длинных блоков"
 
-#: playlist/playlistcontainer.cpp:365
+#: playlist/playlistcontainer.cpp:370
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Совпадений не найдено. Очистите строку поиска, чтобы увидеть плейлист снова."
@@ -3991,7 +3991,7 @@ msgstr "Запомнить движение ульта Wii"
 
 #: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Remember from last time"
-msgstr "Запомнить последнее"
+msgstr "Вернуть предыдущее состояние"
 
 #: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_transcodedialog.h:210
@@ -4434,18 +4434,18 @@ msgstr "Настройки"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:183
 msgid "Shortcut"
-msgstr "Комбинация клавиш"
+msgstr "Сочетание клавиш"
 
 #: ui/globalshortcutssettingspage.cpp:144
 #: ../bin/src/ui_globalshortcutssettingspage.h:185
 #, qt-format
 msgid "Shortcut for %1"
-msgstr "Комбинация клавиш для %1"
+msgstr "Сочетание клавиш для %1"
 
 #: wiimotedev/wiimotesettingspage.cpp:133
 #, qt-format
 msgid "Shortcut for %1 already exists"
-msgstr "Комбинация клавиш для %1 уже существует"
+msgstr "Сочетание клавиш для %1 уже существует"
 
 #: library/libraryfilterwidget.cpp:69
 msgid "Show"
@@ -5254,7 +5254,7 @@ msgstr "По возможности использовать тег «Испол
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Use Gnome's shortcut keys"
-msgstr "Использовать комбинации клавиш Gnome"
+msgstr "Использовать сочетания клавиш Gnome"
 
 #: ../bin/src/ui_playbacksettingspage.h:323
 msgid "Use Replay Gain metadata if it is available"
@@ -5634,7 +5634,7 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr "Откройте Настройки системы и включите функцию \"Разрешить доступ для вспомогательных устройств\" для использования глобальных комбинаций клавиш в Clementine."
+msgstr "Откройте Настройки системы и включите функцию \"<span style=\" font-style:italic;\">Разрешить доступ для вспомогательных устройств</span>\" для использования глобальных горячих клавиш в Clementine."
 
 #: ../bin/src/ui_behavioursettingspage.h:206
 msgid "You will need to restart Clementine if you change the language."
