@@ -1915,7 +1915,7 @@ void Playlist::ReshuffleIndices() {
                           shuffled_album_keys.end());
 
       // If the user is currently playing a song, force its album to be first
-      // Or if the song was not playing but it is selected, force its album
+      // Or if the song was not playing but it was selected, force its album
       // to be first.
       if (current_virtual_index_ != -1 || current_row() != -1) {
         const QString key = items_[current_row()]->Metadata().AlbumKey();
