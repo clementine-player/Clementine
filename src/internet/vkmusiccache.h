@@ -30,7 +30,7 @@ class Application;
 class VkMusicCache : public QObject {
   Q_OBJECT
 
-public:
+ public:
   explicit VkMusicCache(Application* app, VkService* service);
   ~VkMusicCache() {}
   // Return file path if file in cache otherwise
@@ -40,19 +40,19 @@ public:
   void BreakCurrentCaching();
   bool InCache(const QUrl& url);
 
-private slots:
+ private slots:
   void AddToQueue(const QString& filename, const QUrl& download_url);
   void DownloadNext();
   void DownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
   void DownloadReadyToRead();
   void Downloaded();
 
-private:
+ private:
   struct DownloadItem {
     QString filename;
     QUrl url;
 
-    bool operator ==(const DownloadItem& rhv) {
+    bool operator==(const DownloadItem& rhv) {
       return filename == rhv.filename;
     }
   };

@@ -1026,7 +1026,7 @@ Vreen::AudioItem VkService::GetAudioItemFromUrl(const QUrl& url) {
   return Vreen::AudioItem();
 }
 
-UrlHandler::LoadResult VkService::GetSongResult(const QUrl&url) {
+UrlHandler::LoadResult VkService::GetSongResult(const QUrl& url) {
   // Try get from cache
   QUrl media_url = cache_->Get(url);
   if (media_url.isValid()) {
@@ -1093,13 +1093,13 @@ void VkService::SongStarting(const QUrl& url) {
   SongStarting(SongFromUrl(url));
 }
 
-void VkService::SongStarting(const Song &song)
-{
+void VkService::SongStarting(const Song& song) {
   current_song_ = song;
 
   if (isBroadcasting() && HasAccount()) {
     auto id = ExtractIds(song.url());
-    auto reply = audio_provider_->setBroadcast(id.audio_id, id.owner_id, IdList());
+    auto reply =
+        audio_provider_->setBroadcast(id.audio_id, id.owner_id, IdList());
     NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
                SLOT(BroadcastChangeReceived(Vreen::IntReply*)), reply);
     connect(app_->player(), SIGNAL(Stopped()), this, SLOT(SongStoped()),
@@ -1113,8 +1113,7 @@ void VkService::SongSkiped() {
   cache_->BreakCurrentCaching();
 }
 
-void VkService::SongStoped()
-{
+void VkService::SongStoped() {
   current_song_.set_valid(false);
 
   if (isBroadcasting() && HasAccount()) {
@@ -1126,8 +1125,7 @@ void VkService::SongStoped()
   }
 }
 
-void VkService::BroadcastChangeReceived(Vreen::IntReply *reply)
-{
+void VkService::BroadcastChangeReceived(Vreen::IntReply* reply) {
   qLog(Debug) << "Broadcast changed for " << reply->result();
 }
 
@@ -1298,8 +1296,8 @@ void VkService::ReloadSettings() {
   groups_in_global_search_ = s.value("groups_in_global_search", false).toBool();
 
   if (!s.contains("enable_broadcast")) {
-      // Need to update premissions
-      Logout();
+    // Need to update premissions
+    Logout();
   }
   enable_broadcast_ = s.value("enable_broadcast", false).toBool();
 }

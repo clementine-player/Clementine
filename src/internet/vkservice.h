@@ -44,11 +44,8 @@ class VkSearchDialog;
  * using in bookmarks.
  */
 class MusicOwner {
-public:
-  MusicOwner() :
-    songs_count_(0),
-    id_(0)
-  {}
+ public:
+  MusicOwner() : songs_count_(0), id_(0) {}
 
   explicit MusicOwner(const QUrl& group_url);
   Song toOwnerRadio() const;
@@ -58,7 +55,7 @@ public:
   int song_count() const { return songs_count_; }
   static QList<MusicOwner> parseMusicOwnerList(const QVariant& request_result);
 
-private:
+ private:
   friend QDataStream& operator<<(QDataStream& stream, const MusicOwner& val);
   friend QDataStream& operator>>(QDataStream& stream, MusicOwner& val);
   friend QDebug operator<<(QDebug d, const MusicOwner& owner);
@@ -66,7 +63,8 @@ private:
   int songs_count_;
   int id_;  // if id > 0 is user otherwise id group
   QString name_;
-  // name used in url http://vk.com/<screen_name> for example: http://vk.com/shedward
+  // name used in url http://vk.com/<screen_name> for example:
+  // http://vk.com/shedward
   QString screen_name_;
   QUrl photo_;
 };
@@ -84,20 +82,13 @@ QDebug operator<<(QDebug d, const MusicOwner& owner);
  * how to react to the received request or quickly skip unwanted.
  */
 struct SearchID {
-  enum Type {
-    GlobalSearch,
-    LocalSearch,
-    MoreLocalSearch,
-    UserOrGroup
-  };
+  enum Type { GlobalSearch, LocalSearch, MoreLocalSearch, UserOrGroup };
 
-  explicit SearchID(Type type)
-    : type_(type) {
-    id_= last_id_++;
-  }
+  explicit SearchID(Type type) : type_(type) { id_ = last_id_++; }
   int id() const { return id_; }
   Type type() const { return type_; }
-private:
+
+ private:
   static uint last_id_;
   int id_;
   Type type_;
@@ -109,7 +100,7 @@ private:
 class VkService : public InternetService {
   Q_OBJECT
 
-public:
+ public:
   explicit VkService(Application* app, InternetModel* parent);
   ~VkService();
 
@@ -133,8 +124,10 @@ public:
     Type_Search
   };
 
-  enum Role { Role_MusicOwnerMetadata = InternetModel::RoleCount,
-              Role_AlbumMetadata };
+  enum Role {
+    Role_MusicOwnerMetadata = InternetModel::RoleCount,
+    Role_AlbumMetadata
+  };
 
   Application* app() const { return app_; }
 
@@ -165,7 +158,8 @@ public:
   // Return random song result from group playlist.
   UrlHandler::LoadResult GetGroupNextSongUrl(const QUrl& url);
 
-  void SongSearch(SearchID id, const QString& query, int count = 50, int offset = 0);
+  void SongSearch(SearchID id, const QString& query, int count = 50,
+                  int offset = 0);
   void GroupSearch(SearchID id, const QString& query);
 
   /* Settings */
@@ -184,15 +178,16 @@ signals:
   void LoginSuccess(bool success);
   void SongSearchResult(const SearchID& id, const SongList& songs);
   void GroupSearchResult(const SearchID& id, const MusicOwnerList& groups);
-  void UserOrGroupSearchResult(const SearchID& id, const MusicOwnerList& owners);
+  void UserOrGroupSearchResult(const SearchID& id,
+                               const MusicOwnerList& owners);
   void StopWaiting();
 
-public slots:
+ public slots:
   void UpdateRoot();
   void ShowConfig();
   void FindUserOrGroup(const QString& q);
 
-private slots:
+ private slots:
   /* Interface */
   void UpdateItem();
 
@@ -231,9 +226,10 @@ private slots:
   void RecommendationsLoaded(Vreen::AudioItemListReply* reply);
   void SearchResultLoaded(const SearchID& id, const SongList& songs);
 
-private:
+ private:
   /* Interface */
-  QStandardItem* CreateAndAppendRow(QStandardItem* parent, VkService::ItemType type);
+  QStandardItem* CreateAndAppendRow(QStandardItem* parent,
+                                    VkService::ItemType type);
   void ClearStandardItem(QStandardItem* item);
   QStandardItem* GetBookmarkItemById(int id);
   void EnsureMenuCreated();
@@ -286,7 +282,7 @@ private:
   uint last_search_id_;
   QString last_query_;
   Song selected_song_;  // Store for context menu actions.
-  Song current_song_;  // Store for actions with now playing song.
+  Song current_song_;   // Store for actions with now playing song.
   // Store current group url for actions with it.
   QUrl current_group_url_;
 

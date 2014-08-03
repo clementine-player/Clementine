@@ -25,18 +25,17 @@
 #include "vkmusiccache.h"
 
 VkUrlHandler::VkUrlHandler(VkService* service, QObject* parent)
-  : UrlHandler(parent),
-    service_(service) {
-}
+    : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult VkUrlHandler::StartLoading(const QUrl& url) {
   QStringList args = url.path().split("/");
   LoadResult result;
 
   if (args.size() < 2) {
-    qLog(Error) << "Invalid Vk.com URL: " << url
-                << "Url format should be vk://<source>/<id>."
-                << "For example vk://song/61145020_166946521/Daughtry/Gone Too Soon";
+    qLog(Error)
+        << "Invalid Vk.com URL: " << url
+        << "Url format should be vk://<source>/<id>."
+        << "For example vk://song/61145020_166946521/Daughtry/Gone Too Soon";
   } else {
     QString action = url.host();
 
@@ -52,9 +51,7 @@ UrlHandler::LoadResult VkUrlHandler::StartLoading(const QUrl& url) {
   return result;
 }
 
-void VkUrlHandler::TrackSkipped() {
-  service_->SongSkiped();
-}
+void VkUrlHandler::TrackSkipped() { service_->SongSkiped(); }
 
 UrlHandler::LoadResult VkUrlHandler::LoadNext(const QUrl& url) {
   if (url.host() == "group") {
