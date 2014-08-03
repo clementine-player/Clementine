@@ -34,7 +34,6 @@ public:
   QIcon icon() const { return QIcon(":providers/vk.png"); }
   LoadResult StartLoading(const QUrl& url);
   void TrackSkipped();
-  void ForceAddToCache(const QUrl& url);
   LoadResult LoadNext(const QUrl& url);
 
 private:

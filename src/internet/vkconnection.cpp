@@ -40,7 +40,8 @@ static const VkConnection::Scopes kScopes =
   VkConnection::Offline |
   VkConnection::Audio |
   VkConnection::Friends |
-  VkConnection::Groups;
+  VkConnection::Groups |
+  VkConnection::Status;
 
 static const char* kSettingsGroup = "Vk.com/oauth";
 

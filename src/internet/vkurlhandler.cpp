@@ -19,6 +19,7 @@
 
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/player.h"
 
 #include "vkservice.h"
 #include "vkmusiccache.h"
@@ -40,23 +41,19 @@ UrlHandler::LoadResult VkUrlHandler::StartLoading(const QUrl& url) {
     QString action = url.host();
 
     if (action == "song") {
-      service_->SetCurrentSongFromUrl(url);
-      result = LoadResult(url, LoadResult::TrackAvailable, service_->cache()->Get(url));
+      result = service_->GetSongResult(url);
     } else if (action == "group") {
       result = service_->GetGroupNextSongUrl(url);
     } else {
       qLog(Error) << "Invalid vk.com url action:" << action;
     }
   }
+
   return result;
 }
 
 void VkUrlHandler::TrackSkipped() {
-  service_->cache()->BreakCurrentCaching();
-}
-
-void VkUrlHandler::ForceAddToCache(const QUrl& url) {
-  service_->cache()->ForceCache(url);
+  service_->SongSkiped();
 }
 
 UrlHandler::LoadResult VkUrlHandler::LoadNext(const QUrl& url) {

@@ -28,7 +28,7 @@ VkMusicCache::VkMusicCache(Application* app, VkService* service)
   : QObject(service),
     app_(app),
     service_(service),
-    current_cashing_index(0),
+    current_song_index(0),
     is_downloading(false),
     is_aborted(false),
     task_id(0),
@@ -38,31 +38,27 @@ VkMusicCache::VkMusicCache(Application* app, VkService* service)
 }
 
 QUrl VkMusicCache::Get(const QUrl& url) {
-  QString cached_filename = CachedFilename(url);
   QUrl result;
-  if (InCache(cached_filename)) {
+  if (InCache(url)) {
+    QString cached_filename = CachedFilename(url);
     qLog(Info) << "Use cashed file" << cached_filename;
     result = QUrl::fromLocalFile(cached_filename);
-  } else {
-    result = service_->GetSongPlayUrl(url, false);
-
-    if (service_->isCachingEnabled()) {
-      AddToQueue(cached_filename, result);
-      current_cashing_index = queue_.size();
-    }
   }
   return result;
 }
 
-void VkMusicCache::ForceCache(const QUrl& url) {
-  AddToQueue(CachedFilename(url), service_->GetSongPlayUrl(url));
+void VkMusicCache::AddToCache(const QUrl& url, const QUrl&media_url, bool force) {
+  AddToQueue(CachedFilename(url), media_url);
+  if (!force) {
+    current_song_index = queue_.size();
+  }
 }
 
 void VkMusicCache::BreakCurrentCaching() {
-  if (current_cashing_index > 0) {
+  if (current_song_index > 0) {
     // Current song in queue
-    queue_.removeAt(current_cashing_index - 1);
-  } else if (current_cashing_index == 0) {
+    queue_.removeAt(current_song_index - 1);
+  } else if (current_song_index == 0) {
     // Current song is downloading
     if (reply_) {
       reply_->abort();
@@ -93,7 +89,7 @@ void VkMusicCache::DownloadNext() {
   } else {
     current_download = queue_.first();
     queue_.pop_front();
-    current_cashing_index--;
+    current_song_index--;
 
     // Check file path and file existance first
     if (QFile::exists(current_download.filename)) {
@@ -181,12 +177,8 @@ void VkMusicCache::Downloaded() {
 * Utils
 */
 
-bool VkMusicCache::InCache(const QString& filename) {
-  return QFile::exists(filename);
-}
-
 bool VkMusicCache::InCache(const QUrl& url) {
-  return InCache(CachedFilename(url));
+  return QFile::exists(CachedFilename(url));
 }
 
 QString VkMusicCache::CachedFilename(const QUrl& url) {

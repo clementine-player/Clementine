@@ -136,6 +136,8 @@ public:
   enum Role { Role_MusicOwnerMetadata = InternetModel::RoleCount,
               Role_AlbumMetadata };
 
+  Application* app() const { return app_; }
+
   /* InternetService interface */
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
@@ -155,9 +157,11 @@ public:
   bool WaitForReply(Vreen::Reply* reply);
 
   /* Music */
-  VkMusicCache* cache() const { return cache_; }
-  void SetCurrentSongFromUrl(const QUrl& url);  // Used if song taked from cache.
-  QUrl GetSongPlayUrl(const QUrl& url, bool is_playing = true);
+  void SongStarting(const Song& song);
+  void SongStarting(const QUrl& url);  // Used if song taked from cache.
+  void SongSkiped();
+  UrlHandler::LoadResult GetSongResult(const QUrl& url);
+  Vreen::AudioItem GetAudioItemFromUrl(const QUrl& url);
   // Return random song result from group playlist.
   UrlHandler::LoadResult GetGroupNextSongUrl(const QUrl& url);
 
@@ -169,6 +173,7 @@ public:
   int maxGlobalSearch() const { return maxGlobalSearch_; }
   bool isCachingEnabled() const { return cachingEnabled_; }
   bool isGroupsInGlobalSearch() const { return groups_in_global_search_; }
+  bool isBroadcasting() const { return enable_broadcast_; }
   QString cacheDir() const { return cacheDir_; }
   QString cacheFilename() const { return cacheFilename_; }
   bool isLoveAddToMyMusic() const { return love_is_add_to_mymusic_; }
@@ -197,6 +202,7 @@ private slots:
   void Error(Vreen::Client::Error error);
 
   /* Music */
+  void SongStoped();
   void UpdateMyMusic();
   void UpdateBookmarkSongs(QStandardItem* item);
   void UpdateAlbumSongs(QStandardItem* item);
@@ -208,7 +214,7 @@ private slots:
   void AddToMyMusic();
   void AddToMyMusicCurrent();
   void RemoveFromMyMusic();
-  void AddToCache();
+  void AddSelectedToCache();
   void CopyShareUrl();
   void ShowSearchDialog();
 
@@ -219,6 +225,7 @@ private slots:
   void GroupSearchReceived(const SearchID& id, Vreen::Reply* reply);
   void UserOrGroupReceived(const SearchID& id, Vreen::Reply* reply);
   void AlbumListReceived(Vreen::AudioAlbumItemListReply* reply);
+  void BroadcastChangeReceived(Vreen::IntReply* reply);
 
   void AppendLoadedSongs(QStandardItem* item, Vreen::AudioItemListReply* reply);
   void RecommendationsLoaded(Vreen::AudioItemListReply* reply);
@@ -288,6 +295,7 @@ private:
   bool cachingEnabled_;
   bool love_is_add_to_mymusic_;
   bool groups_in_global_search_;
+  bool enable_broadcast_;
   QString cacheDir_;
   QString cacheFilename_;
 };
