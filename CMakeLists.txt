@@ -23,6 +23,7 @@ endif ()
 
 find_program(CCACHE_EXECUTABLE NAMES ccache)
 if (CCACHE_EXECUTABLE)
+  message(STATUS "ccache found: will be used for compilation and linkage")
   SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ${CCACHE_EXECUTABLE})
   SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_LINK ${CCACHE_EXECUTABLE})
 endif ()

@@ -356,7 +356,7 @@ QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorVector& colors,
   // Draw the outer bit
   p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Background),
                 kMarginSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-  // First: a rectangle around the slier
+  // First: a rectangle around the slider
   p.drawRect(rect.adjusted(1, 1, -2, -2));
   // Then, thicker border on left and right, because of the margins.
   p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Background),
