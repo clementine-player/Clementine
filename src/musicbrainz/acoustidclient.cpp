@@ -19,6 +19,7 @@
 
 #include <QCoreApplication>
 #include <QNetworkReply>
+#include <QStringList>
 
 #include <qjson/parser.h>
 
@@ -45,7 +46,7 @@ void AcoustidClient::Start(int id, const QString& fingerprint,
   QList<Param> parameters;
   parameters << Param("format", "json") << Param("client", kClientId)
              << Param("duration", QString::number(duration_msec / kMsecPerSec))
-             << Param("meta", "recordingids")
+             << Param("meta", "recordingids+sources")
              << Param("fingerprint", fingerprint);
 
   QUrl url(kUrl);
@@ -67,13 +68,29 @@ void AcoustidClient::CancelAll() {
   requests_.clear();
 }
 
-void AcoustidClient::RequestFinished(QNetworkReply* reply, int id) {
+namespace {
+// Struct used when extracting results in RequestFinished
+struct IdSource {
+  IdSource(const QString& id, int source)
+    : id_(id), nb_sources_(source) {}
+
+  bool operator<(const IdSource& other) const {
+    // We want the items with more sources to be at the beginning of the list
+    return nb_sources_ > other.nb_sources_;
+  }
+
+  QString id_;
+  int nb_sources_;
+};
+}
+
+void AcoustidClient::RequestFinished(QNetworkReply* reply, int request_id) {
   reply->deleteLater();
-  requests_.remove(id);
+  requests_.remove(request_id);
 
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() !=
       200) {
-    emit Finished(id, QString());
+    emit Finished(request_id, QStringList());
     return;
   }
 
@@ -81,16 +98,26 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int id) {
   bool ok = false;
   QVariantMap result = parser.parse(reply, &ok).toMap();
   if (!ok) {
-    emit Finished(id, QString());
+    emit Finished(request_id, QStringList());
     return;
   }
 
   QString status = result["status"].toString();
   if (status != "ok") {
-    emit Finished(id, QString());
+    emit Finished(request_id, QStringList());
     return;
   }
+
+  // Get the results:
+  // -in a first step, gather ids and their corresponding number of sources
+  // -then sort results by number of sources (the results are originally
+  //  unsorted but results with more sources are likely to be more accurate)
+  // -keep only the ids, as sources where useful only to sort the results
   QVariantList results = result["results"].toList();
+
+  // List of <id, nb of sources> pairs
+  QList<IdSource> id_source_list;
+
   for (const QVariant& v : results) {
     QVariantMap r = v.toMap();
     if (r.contains("recordings")) {
@@ -98,12 +125,18 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int id) {
       for (const QVariant& recording : recordings) {
         QVariantMap o = recording.toMap();
         if (o.contains("id")) {
-          emit Finished(id, o["id"].toString());
-          return;
+          id_source_list << IdSource(o["id"].toString(), o["sources"].toInt());
         }
       }
     }
   }
 
-  emit Finished(id, QString());
+  qStableSort(id_source_list);
+
+  QList<QString> id_list;
+  for (const IdSource& is : id_source_list) {
+    id_list << is.id_;
+  }
+
+  emit Finished(request_id, id_list);
 }

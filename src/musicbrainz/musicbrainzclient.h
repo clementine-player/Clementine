@@ -19,7 +19,7 @@
 #define MUSICBRAINZCLIENT_H
 
 #include <QHash>
-#include <QMap>
+#include <QMultiMap>
 #include <QObject>
 #include <QXmlStreamReader>
 
@@ -78,7 +78,7 @@ class MusicBrainzClient : public QObject {
 
   // Starts a request and returns immediately.  Finished() will be emitted
   // later with the same ID.
-  void Start(int id, const QString& mbid);
+  void Start(int id, const QStringList& mbid);
   void StartDiscIdRequest(const QString& discid);
 
   // Cancels the request with the given ID.  Finished() will never be emitted
@@ -97,7 +97,9 @@ signals:
                 const MusicBrainzClient::ResultList& result);
 
  private slots:
-  void RequestFinished(QNetworkReply* reply, int id);
+  // id identifies the track, and request_number means it's the
+  // 'request_number'th request for this track
+  void RequestFinished(QNetworkReply* reply, int id, int request_number);
   void DiscIdRequestFinished(const QString& discid, QNetworkReply* reply);
 
  private:
@@ -117,13 +119,26 @@ signals:
     int year_;
   };
 
+  struct PendingResults {
+    PendingResults(int sort_id, const ResultList& results)
+      : sort_id_(sort_id), results_(results) {}
+
+    bool operator<(const PendingResults& other) const {
+      return sort_id_ < other.sort_id_;
+    }
+
+    int sort_id_;
+    ResultList results_;
+  };
+
   static bool MediumHasDiscid(const QString& discid, QXmlStreamReader* reader);
   static ResultList ParseMedium(QXmlStreamReader* reader);
   static Result ParseTrackFromDisc(QXmlStreamReader* reader);
   static ResultList ParseTrack(QXmlStreamReader* reader);
   static void ParseArtist(QXmlStreamReader* reader, QString* artist);
   static Release ParseRelease(QXmlStreamReader* reader);
-  static ResultList UniqueResults(const ResultList& results);
+  // Remove duplicate from the list. Returns a reference to the input parameter
+  static ResultList& UniqueResults(ResultList& results);
 
  private:
   static const char* kTrackUrl;
@@ -133,7 +148,9 @@ signals:
 
   QNetworkAccessManager* network_;
   NetworkTimeouts* timeouts_;
-  QMap<int, QNetworkReply*> requests_;
+  QMultiMap<int, QNetworkReply*> requests_;
+  // Results we received so far, kept here until all the replies are finished
+  QMap<int, QList<PendingResults>> pending_results_;
 };
 
 inline uint qHash(const MusicBrainzClient::Result& result) {

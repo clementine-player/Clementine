@@ -40,22 +40,26 @@ MusicBrainzClient::MusicBrainzClient(QObject* parent,
       network_(network ? network : new NetworkAccessManager(this)),
       timeouts_(new NetworkTimeouts(kDefaultTimeout, this)) {}
 
-void MusicBrainzClient::Start(int id, const QString& mbid) {
+void MusicBrainzClient::Start(int id, const QStringList& mbid_list) {
   typedef QPair<QString, QString> Param;
 
-  QList<Param> parameters;
-  parameters << Param("inc", "artists+releases+media");
+  int request_number = 0;
+  for (const QString& mbid : mbid_list) {
+    QList<Param> parameters;
+    parameters << Param("inc", "artists+releases+media");
 
-  QUrl url(kTrackUrl + mbid);
-  url.setQueryItems(parameters);
-  QNetworkRequest req(url);
+    QUrl url(kTrackUrl + mbid);
+    url.setQueryItems(parameters);
+    QNetworkRequest req(url);
 
-  QNetworkReply* reply = network_->get(req);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RequestFinished(QNetworkReply*, int)), reply, id);
-  requests_[id] = reply;
+    QNetworkReply* reply = network_->get(req);
+    NewClosure(reply, SIGNAL(finished()), this,
+               SLOT(RequestFinished(QNetworkReply*, int, int)),
+               reply, id, request_number++);
+    requests_.insert(id, reply);
 
-  timeouts_->AddReply(reply);
+    timeouts_->AddReply(reply);
+  }
 }
 
 void MusicBrainzClient::StartDiscIdRequest(const QString& discid) {
@@ -141,31 +145,46 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
   emit Finished(artist, album, UniqueResults(ret));
 }
 
-void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id) {
+void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int request_number) {
   reply->deleteLater();
-  requests_.remove(id);
-  ResultList ret;
 
-  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() !=
-      200) {
-    emit Finished(id, ret);
-    return;
+  const int nb_removed = requests_.remove(id, reply);
+  if (nb_removed != 1) {
+    qLog(Error) << "Error: unknown reply received:" << nb_removed <<
+        "requests removed, while only one was supposed to be removed";
   }
 
-  QXmlStreamReader reader(reply);
-  while (!reader.atEnd()) {
-    if (reader.readNext() == QXmlStreamReader::StartElement &&
-        reader.name() == "recording") {
-      ResultList tracks = ParseTrack(&reader);
-      for (const Result& track : tracks) {
-        if (!track.title_.isEmpty()) {
-          ret << track;
+
+  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() ==
+      200) {
+    QXmlStreamReader reader(reply);
+    ResultList res;
+    while (!reader.atEnd()) {
+      if (reader.readNext() == QXmlStreamReader::StartElement &&
+          reader.name() == "recording") {
+        ResultList tracks = ParseTrack(&reader);
+        for (const Result& track : tracks) {
+          if (!track.title_.isEmpty()) {
+            res << track;
+          }
         }
       }
     }
+    qSort(res);
+    pending_results_[id] << PendingResults(request_number, res);
   }
 
-  emit Finished(id, UniqueResults(ret));
+  // No more pending requests for this id: emit the results we have.
+  if (!requests_.contains(id)) {
+    // Merge the results we have
+    ResultList ret;
+    QList<PendingResults> result_list_list = pending_results_.take(id);
+    qSort(result_list_list);
+    for (const PendingResults& result_list : result_list_list) {
+      ret << result_list.results_;
+    }
+    emit Finished(id, UniqueResults(ret));
+  }
 }
 
 bool MusicBrainzClient::MediumHasDiscid(const QString& discid,
@@ -326,9 +345,8 @@ MusicBrainzClient::Release MusicBrainzClient::ParseRelease(
   return ret;
 }
 
-MusicBrainzClient::ResultList MusicBrainzClient::UniqueResults(
-    const ResultList& results) {
-  ResultList ret = QSet<Result>::fromList(results).toList();
-  qSort(ret);
-  return ret;
+MusicBrainzClient::ResultList& MusicBrainzClient::UniqueResults(ResultList& results) {
+  qStableSort(results);
+  results.erase(std::unique(results.begin(), results.end()), results.end());
+  return results;
 }

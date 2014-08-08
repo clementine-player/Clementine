@@ -32,8 +32,8 @@ TagFetcher::TagFetcher(QObject* parent)
       fingerprint_watcher_(nullptr),
       acoustid_client_(new AcoustidClient(this)),
       musicbrainz_client_(new MusicBrainzClient(this)) {
-  connect(acoustid_client_, SIGNAL(Finished(int, QString)),
-          SLOT(PuidFound(int, QString)));
+  connect(acoustid_client_, SIGNAL(Finished(int, QStringList)),
+          SLOT(PuidsFound(int, QStringList)));
   connect(musicbrainz_client_,
           SIGNAL(Finished(int, MusicBrainzClient::ResultList)),
           SLOT(TagsFetched(int, MusicBrainzClient::ResultList)));
@@ -92,20 +92,20 @@ void TagFetcher::FingerprintFound(int index) {
                           song.length_nanosec() / kNsecPerMsec);
 }
 
-void TagFetcher::PuidFound(int index, const QString& puid) {
+void TagFetcher::PuidsFound(int index, const QStringList& puid_list) {
   if (index >= songs_.count()) {
     return;
   }
 
   const Song& song = songs_[index];
 
-  if (puid.isEmpty()) {
+  if (puid_list.isEmpty()) {
     emit ResultAvailable(song, SongList());
     return;
   }
 
   emit Progress(song, tr("Downloading metadata"));
-  musicbrainz_client_->Start(index, puid);
+  musicbrainz_client_->Start(index, puid_list);
 }
 
 void TagFetcher::TagsFetched(int index,

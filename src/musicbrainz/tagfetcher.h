@@ -47,7 +47,7 @@ signals:
 
  private slots:
   void FingerprintFound(int index);
-  void PuidFound(int index, const QString& puid);
+  void PuidsFound(int index, const QStringList& puid_list);
   void TagsFetched(int index, const MusicBrainzClient::ResultList& result);
 
  private:
