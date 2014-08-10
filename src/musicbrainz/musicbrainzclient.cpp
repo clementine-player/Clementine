@@ -170,7 +170,6 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int reques
         }
       }
     }
-    qSort(res);
     pending_results_[id] << PendingResults(request_number, res);
   }
 
