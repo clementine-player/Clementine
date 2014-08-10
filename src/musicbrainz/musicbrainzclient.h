@@ -152,6 +152,7 @@ signals:
   static const char* kDiscUrl;
   static const char* kDateRegex;
   static const int kDefaultTimeout;
+  static const int kMaxRequestPerTrack;
 
   QNetworkAccessManager* network_;
   NetworkTimeouts* timeouts_;

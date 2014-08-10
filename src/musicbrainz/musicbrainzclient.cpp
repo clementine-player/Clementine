@@ -33,6 +33,7 @@ const char* MusicBrainzClient::kDiscUrl =
     "https://musicbrainz.org/ws/2/discid/";
 const char* MusicBrainzClient::kDateRegex = "^[12]\\d{3}";
 const int MusicBrainzClient::kDefaultTimeout = 5000;  // msec
+const int MusicBrainzClient::kMaxRequestPerTrack = 3;
 
 MusicBrainzClient::MusicBrainzClient(QObject* parent,
                                      QNetworkAccessManager* network)
@@ -59,6 +60,10 @@ void MusicBrainzClient::Start(int id, const QStringList& mbid_list) {
     requests_.insert(id, reply);
 
     timeouts_->AddReply(reply);
+
+    if (request_number >= kMaxRequestPerTrack) {
+      break;
+    }
   }
 }
 
@@ -154,7 +159,6 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int reques
         "requests removed, while only one was supposed to be removed";
   }
 
-
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() ==
       200) {
     QXmlStreamReader reader(reply);
@@ -171,6 +175,10 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int reques
       }
     }
     pending_results_[id] << PendingResults(request_number, res);
+  } else {
+    qLog(Error) << "Error:" <<  reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <<
+        "http status code received";
+    qLog(Error) << reply->readAll();
   }
 
   // No more pending requests for this id: emit the results we have.
