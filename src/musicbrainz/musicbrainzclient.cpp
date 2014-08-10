@@ -142,7 +142,9 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
     }
   }
 
-  emit Finished(artist, album, UniqueResults(ret));
+  ResultList unique_ret = UniqueResults(ret);
+  qSort(unique_ret);
+  emit Finished(artist, album, unique_ret);
 }
 
 void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int request_number) {
@@ -345,8 +347,7 @@ MusicBrainzClient::Release MusicBrainzClient::ParseRelease(
   return ret;
 }
 
-MusicBrainzClient::ResultList& MusicBrainzClient::UniqueResults(ResultList& results) {
-  qStableSort(results);
-  results.erase(std::unique(results.begin(), results.end()), results.end());
-  return results;
+MusicBrainzClient::ResultList MusicBrainzClient::UniqueResults(const ResultList& results) {
+  ResultList ret = QSet<Result>::fromList(results).toList();
+  return ret;
 }

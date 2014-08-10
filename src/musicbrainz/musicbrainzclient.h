@@ -137,8 +137,7 @@ signals:
   static ResultList ParseTrack(QXmlStreamReader* reader);
   static void ParseArtist(QXmlStreamReader* reader, QString* artist);
   static Release ParseRelease(QXmlStreamReader* reader);
-  // Remove duplicate from the list. Returns a reference to the input parameter
-  static ResultList& UniqueResults(ResultList& results);
+  static ResultList UniqueResults(const ResultList& results);
 
  private:
   static const char* kTrackUrl;
