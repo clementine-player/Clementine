@@ -386,6 +386,15 @@ const siteDescriptors = {
     extract: [["</div>","</div>"]],
     invalidIndicator: "Verifique se o nome do seu arquivo e sua",
   },
+   "lololyrics.com": {
+     charset: "utf-8",
+     url: "http://api.lololyrics.com/0.5/getLyric?artist={artist}&track={title}",
+     urlFormat : [
+        {rep: "_", punct: "_@,;&\\/\"#" },
+     ],
+     extract: '<response>',
+     invalidIndicator: "ERROR",
+  },
 }
 
 //	--------------------------------------------------------------------------------------------------------------------------------
