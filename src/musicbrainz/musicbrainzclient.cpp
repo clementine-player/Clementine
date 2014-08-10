@@ -142,9 +142,7 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
     }
   }
 
-  ResultList unique_ret = UniqueResults(ret);
-  qSort(unique_ret);
-  emit Finished(artist, album, unique_ret);
+  emit Finished(artist, album, UniqueResults(ret, SortResults));
 }
 
 void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int request_number) {
@@ -185,7 +183,7 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int reques
     for (const PendingResults& result_list : result_list_list) {
       ret << result_list.results_;
     }
-    emit Finished(id, UniqueResults(ret));
+    emit Finished(id, UniqueResults(ret, KeepOriginalOrder));
   }
 }
 
@@ -347,7 +345,23 @@ MusicBrainzClient::Release MusicBrainzClient::ParseRelease(
   return ret;
 }
 
-MusicBrainzClient::ResultList MusicBrainzClient::UniqueResults(const ResultList& results) {
-  ResultList ret = QSet<Result>::fromList(results).toList();
+MusicBrainzClient::ResultList MusicBrainzClient::UniqueResults(
+    const ResultList& results, UniqueResultsSortOption opt) {
+
+  ResultList ret;
+  if (opt == SortResults) {
+    ret = QSet<Result>::fromList(results).toList();
+    qSort(ret);
+  } else {  // KeepOriginalOrder
+    // Qt doesn't provide a ordered set (QSet "stores values in an unspecified
+    // order" according to Qt documentation).
+    // We might use std::set instead, but it's probably faster to use ResultList
+    // directly to avoid converting from one structure to another.
+    for (const Result& res : results) {
+      if (!ret.contains(res)) {
+        ret << res;
+      }
+    }
+  }
   return ret;
 }
