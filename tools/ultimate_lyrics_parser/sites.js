@@ -376,25 +376,25 @@ const siteDescriptors = {
 		charset: "utf-8",
 		extract: [['</a>?','<div']]
 	},
-  "letras.mus.br": {
-    charset: "iso-8859-1",
-    url: "http://letras.terra.com.br/winamp.php?musica={title}&artista={artist}",
-    urlFormat : [
-      {rep: "_", punct: "_@,;&\\/\"" },
-      {rep: "+", punct: " " },
-    ],
-    extract: [["</div>","</div>"]],
-    invalidIndicator: "Verifique se o nome do seu arquivo e sua",
-  },
-   "lololyrics.com": {
-     charset: "utf-8",
-     url: "http://api.lololyrics.com/0.5/getLyric?artist={artist}&track={title}",
-     urlFormat : [
-        {rep: "_", punct: "_@,;&\\/\"#" },
-     ],
-     extract: '<response>',
-     invalidIndicator: "ERROR",
-  },
+	"letras.mus.br": {
+		charset: "iso-8859-1",
+		url: "http://letras.terra.com.br/winamp.php?musica={title}&artista={artist}",
+		urlFormat : [
+			{rep: "_", punct: "_@,;&\\/\"" },
+			{rep: "+", punct: " " },
+		],
+		extract: [["</div>","</div>"]],
+		invalidIndicator: "Verifique se o nome do seu arquivo e sua",
+	},
+	"lololyrics.com": {
+		charset: "utf-8",
+		url: "http://api.lololyrics.com/0.5/getLyric?artist={artist}&track={title}",
+		urlFormat : [
+			{rep: "_", punct: "_@,;&\\/\"#" },
+		],
+		extract: '<response>',
+		invalidIndicator: "ERROR",
+	},
 }
 
 //	--------------------------------------------------------------------------------------------------------------------------------

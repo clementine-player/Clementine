@@ -59,6 +59,13 @@
     </extract>
     <invalidIndicator value="Verifique se o nome do seu arquivo e sua"/>
   </provider>
+  <provider name="lololyrics.com" title="" charset="utf-8" url="http://api.lololyrics.com/0.5/getLyric?artist={artist}&amp;track={title}">
+    <urlFormat replace="_@,;&amp;\/&quot;#" with="_"/>
+    <extract>
+      <item tag="&lt;response&gt;"/>
+    </extract>
+    <invalidIndicator value="ERROR"/>
+  </provider>
   <provider name="loudson.gs" title="" charset="utf-8" url="http://www.loudson.gs/{a}/{artist}/{album}/{title}">
     <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
     <urlFormat replace="." with=""/>
