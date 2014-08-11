@@ -32,7 +32,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-07-28 17:01+0000\n"
+"PO-Revision-Date: 2014-08-09 22:41+0000\n"
 "Last-Translator: Andrei Stepanov\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -465,11 +465,11 @@ msgstr "Добавить файл"
 
 #: ../bin/src/ui_mainwindow.h:709
 msgid "Add file to transcoder"
-msgstr "Добавить файл для конвертации"
+msgstr "Конвертировать файл"
 
 #: ../bin/src/ui_mainwindow.h:707
 msgid "Add file(s) to transcoder"
-msgstr "Добавить файлы для конвертации"
+msgstr "Конвертировать файл(ы)"
 
 #: ../bin/src/ui_mainwindow.h:667
 msgid "Add file..."
@@ -477,7 +477,7 @@ msgstr "Добавить файл..."
 
 #: transcoder/transcodedialog.cpp:215
 msgid "Add files to transcode"
-msgstr "Добавить для конвертации"
+msgstr "Конвертировать файлы"
 
 #: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1852 ui/ripcd.cpp:408
 msgid "Add folder"
@@ -1099,7 +1099,7 @@ msgstr "Проверить обновления..."
 
 #: internet/vksettingspage.cpp:97
 msgid "Choose Vk.com cache directory"
-msgstr "Выбрать путь кэша для Vk.com"
+msgstr "Выберите путь кэша для Vk.com"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
@@ -1127,12 +1127,12 @@ msgstr "Настройка сортировки плейлиста и колич
 
 #: podcasts/podcastsettingspage.cpp:133
 msgid "Choose podcast download directory"
-msgstr "Выбрать каталог для загрузки подкастов"
+msgstr "Выберите каталог для загрузки подкастов"
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Выберите сайты, которые Clementine будет использовать для поиска текстов песен."
+msgstr "Выберите сайты, которые будут использоваться для поиска текстов песен."
 
 #: ui/equalizer.cpp:112
 msgid "Classical"
@@ -1201,7 +1201,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr "Clementine может синхронизировать выши подписки с другими компьютерами и приложениями. <a href=\"https://gpodder.net/register/\">Создать аккаунт</a>."
+msgstr "Clementine может синхронизировать ваши подписки с другими компьютерами и приложениями. <a href=\"https://gpodder.net/register/\">Создать аккаунт</a>."
 
 #: visualisations/projectmvisualisation.cpp:132
 msgid ""
@@ -1948,15 +1948,15 @@ msgstr "Изменить умный плейлист…"
 #: ui/mainwindow.cpp:1609
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "Редактировать тег \"%1\"..."
+msgstr "Изменить тег \"%1\""
 
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit tag..."
-msgstr "Редактировать тег..."
+msgstr "Изменить тег"
 
 #: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit tags"
-msgstr "Редактировать теги"
+msgstr "Изменить теги"
 
 #: ../bin/src/ui_edittagdialog.h:665
 msgid "Edit track information"
@@ -2003,7 +2003,7 @@ msgstr "Включить редактирование метаданных пе�
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr "Укажите источники, включаемые в результаты поиска. Результаты будут отображаться в этом порядке."
+msgstr "Укажите источники, включаемые в результаты поиска. Результаты будут отображаться в данном порядке."
 
 #: core/globalshortcuts.cpp:72
 msgid "Enable/disable Last.fm scrobbling"
@@ -2044,7 +2044,7 @@ msgstr "Введите условия поиска музыки на компь�
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
-msgstr "Введите ключевые слова для поиска в iTunes Store"
+msgstr "Введите ключевые слова для поиска подкастов в iTunes Store"
 
 #: ../bin/src/ui_gpoddersearchpage.h:77
 msgid "Enter search terms below to find podcasts on gpodder.net"
@@ -2648,7 +2648,7 @@ msgstr "Определение песни"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr "Если включить, то клик по выбранной песне в плейлисте позволит редактировать тэг напрямую"
+msgstr "Если включить, то клик по выбранной песне в плейлисте позволит редактировать тег напрямую"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -3193,7 +3193,7 @@ msgstr "Минимальный битрейт"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr "Минимальное заполнение буфера"
+msgstr "Минимум заполнения буфера"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3537,7 +3537,7 @@ msgstr "Открыть файл..."
 
 #: internet/googledriveservice.cpp:198
 msgid "Open in Google Drive"
-msgstr "Открыть в Google Диск"
+msgstr "Открыть в Диске Google"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:460
 #: internet/internetservice.cpp:75 library/libraryview.cpp:375
@@ -3648,7 +3648,7 @@ msgstr "Пароль"
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1025 ui/mainwindow.cpp:1476
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
-msgstr "Приостановить"
+msgstr "Пауза"
 
 #: core/commandlineoptions.cpp:146
 msgid "Pause playback"
@@ -4514,7 +4514,7 @@ msgstr "Показывать группы в результатах глобал
 #: library/libraryview.cpp:413 ui/mainwindow.cpp:619
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
-msgstr "Показать в обозревателе файлов"
+msgstr "Показать в диспетчере файлов"
 
 #: ui/mainwindow.cpp:622
 msgid "Show in library..."
@@ -4554,7 +4554,7 @@ msgstr "Показывать значок в системном лотке"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr "Показать какие источники включены и отключены"
+msgstr "Показать включенные и отключеные источники"
 
 #: core/globalshortcuts.cpp:62
 msgid "Show/Hide"
@@ -5499,7 +5499,7 @@ msgstr "Без обложек:"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr "Переместить другие композиции из этого альбома в Разные исполнители?"
+msgstr "Хотите ли вы переместить и другие песни из этого альбома в Разные исполнители?"
 
 #: ui/mainwindow.cpp:2408
 msgid "Would you like to run a full rescan right now?"
