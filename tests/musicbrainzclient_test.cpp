@@ -26,15 +26,14 @@
 #include <QMetaType>
 #include <QSignalSpy>
 #include <QString>
+#include <QStringList>
 
 #include "mock_networkaccessmanager.h"
 #include "gtest/gtest.h"
 #include "test_utils.h"
 
-namespace {
 typedef QList<MusicBrainzClient::Result> ResultList;
 Q_DECLARE_METATYPE(ResultList);
-};
 
 class MusicBrainzClientTest : public ::testing::Test {
  protected:
@@ -193,7 +192,7 @@ TEST_F(MusicBrainzClientTest, ParseTrack) {
   // Start the request and get a result.
   // The mbid argument doesn't matter in the test.
   const int sent_id = 0;
-  musicbrainz_client.Start(sent_id, "fooMbid");
+  musicbrainz_client.Start(sent_id, QStringList() << "fooMbid");
   discid_reply->Done();
   QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
   EXPECT_EQ(1, spy.count());
@@ -236,7 +235,7 @@ TEST_F(MusicBrainzClientTest, ParseTrackWithMultipleReleases) {
   // Start the request and get a result.
   // The mbid argument doesn't matter in the test.
   const int sent_id = 0;
-  musicbrainz_client.Start(sent_id, "fooMbid");
+  musicbrainz_client.Start(sent_id, QStringList() << "fooMbid");
   discid_reply->Done();
   QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
   EXPECT_EQ(1, spy.count());
