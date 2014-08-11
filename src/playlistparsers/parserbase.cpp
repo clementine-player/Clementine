@@ -91,7 +91,7 @@ QString ParserBase::URLOrRelativeFilename(const QUrl& url,
   if (QDir::isAbsolutePath(filename)) {
     const QString relative = dir.relativeFilePath(filename);
 
-    if (!relative.contains("..")) return relative;
+    return relative;
   }
   return filename;
 }
