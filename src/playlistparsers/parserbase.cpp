@@ -46,8 +46,10 @@ void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
     }
   }
 
-  // Convert native separators for Windows paths
-  filename = QDir::fromNativeSeparators(filename);
+  // Clementine always wants / separators internally.  Using
+  // QDir::fromNativeSeparators() only works on the same platform the playlist
+  // was created on/for, using replace() lets playlists work on any platform.
+  filename = filename.replace('\\', '/')
 
   // Make the path absolute
   if (!QDir::isAbsolutePath(filename)) {
