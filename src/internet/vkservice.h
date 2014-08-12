@@ -152,7 +152,7 @@ class VkService : public InternetService {
   /* Music */
   void SongStarting(const Song& song);
   void SongStarting(const QUrl& url);  // Used if song taked from cache.
-  void SongSkiped();
+  void SongSkipped();
   UrlHandler::LoadResult GetSongResult(const QUrl& url);
   Vreen::AudioItem GetAudioItemFromUrl(const QUrl& url);
   // Return random song result from group playlist.
@@ -197,7 +197,7 @@ signals:
   void Error(Vreen::Client::Error error);
 
   /* Music */
-  void SongStoped();
+  void SongStopped();
   void UpdateMyMusic();
   void UpdateBookmarkSongs(QStandardItem* item);
   void UpdateAlbumSongs(QStandardItem* item);

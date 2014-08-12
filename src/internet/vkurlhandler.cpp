@@ -51,7 +51,7 @@ UrlHandler::LoadResult VkUrlHandler::StartLoading(const QUrl& url) {
   return result;
 }
 
-void VkUrlHandler::TrackSkipped() { service_->SongSkiped(); }
+void VkUrlHandler::TrackSkipped() { service_->SongSkipped(); }
 
 UrlHandler::LoadResult VkUrlHandler::LoadNext(const QUrl& url) {
   if (url.host() == "group") {

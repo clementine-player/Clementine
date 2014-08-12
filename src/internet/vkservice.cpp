@@ -1102,25 +1102,25 @@ void VkService::SongStarting(const Song& song) {
         audio_provider_->setBroadcast(id.audio_id, id.owner_id, IdList());
     NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
                SLOT(BroadcastChangeReceived(Vreen::IntReply*)), reply);
-    connect(app_->player(), SIGNAL(Stopped()), this, SLOT(SongStoped()),
+    connect(app_->player(), SIGNAL(Stopped()), this, SLOT(SongStopped()),
             Qt::UniqueConnection);
     qLog(Debug) << "Broadcasting" << song.artist() << "-" << song.title();
   }
 }
 
-void VkService::SongSkiped() {
+void VkService::SongSkipped() {
   current_song_.set_valid(false);
   cache_->BreakCurrentCaching();
 }
 
-void VkService::SongStoped() {
+void VkService::SongStopped() {
   current_song_.set_valid(false);
 
   if (isBroadcasting() && HasAccount()) {
     auto reply = audio_provider_->resetBroadcast(IdList());
     NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
                SLOT(BroadcastChangeReceived(Vreen::IntReply*)), reply);
-    disconnect(app_->player(), SIGNAL(Stopped()), this, SLOT(SongStoped()));
+    disconnect(app_->player(), SIGNAL(Stopped()), this, SLOT(SongStopped()));
     qLog(Debug) << "End of broadcasting";
   }
 }
