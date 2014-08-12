@@ -312,7 +312,7 @@ void VkService::EnsureMenuCreated() {
 
     add_song_to_cache_ = context_menu_->addAction(QIcon(":vk/download.png"),
                                                   tr("Add song to cache"), this,
-                                                  SLOT(AddToCache()));
+                                                  SLOT(AddSelectedToCache()));
 
     copy_share_url_ = context_menu_->addAction(
         QIcon(":vk/link.png"), tr("Copy share url to clipboard"), this,
@@ -367,7 +367,7 @@ void VkService::ShowContextMenu(const QPoint& global_pos) {
         current.data(InternetModel::Role_SongMetadata).value<Song>();
     is_in_mymusic = is_my_music_item ||
                     ExtractIds(selected_song_.url()).owner_id == UserID();
-    is_cached = cache()->InCache(selected_song_.url());
+    is_cached = cache_->InCache(selected_song_.url());
   }
 
   update_item_->setVisible(is_updatable);
@@ -443,7 +443,7 @@ QList<QAction*> VkService::playlistitem_actions(const Song& song) {
   copy_share_url_->setVisible(true);
   actions << copy_share_url_;
 
-  if (!cache()->InCache(selected_song_.url())) {
+  if (!cache_->InCache(selected_song_.url())) {
     add_song_to_cache_->setVisible(true);
     actions << add_song_to_cache_;
   }
@@ -835,7 +835,7 @@ void VkService::AddToMyMusic() {
 }
 
 void VkService::AddToMyMusicCurrent() {
-  if (isLoveAddToMyMusic()) {
+  if (isLoveAddToMyMusic() && current_song_.is_valid()) {
     selected_song_ = current_song_;
     AddToMyMusic();
   }
@@ -852,8 +852,10 @@ void VkService::RemoveFromMyMusic() {
   }
 }
 
-void VkService::AddToCache() {
-  url_handler_->ForceAddToCache(selected_song_.url());
+void VkService::AddSelectedToCache() {
+  QUrl selected_song_media_url =
+      GetAudioItemFromUrl(selected_song_.url()).url();
+  cache_->AddToCache(selected_song_.url(), selected_song_media_url, true);
 }
 
 void VkService::CopyShareUrl() {
@@ -999,12 +1001,12 @@ SongList VkService::FromAudioList(const Vreen::AudioItemList& list) {
  * Url handling
  */
 
-QUrl VkService::GetSongPlayUrl(const QUrl& url, bool is_playing) {
+Vreen::AudioItem VkService::GetAudioItemFromUrl(const QUrl& url) {
   QStringList tokens = url.path().split('/');
 
   if (tokens.count() < 2) {
     qLog(Error) << "Wrong song url" << url;
-    return QUrl();
+    return Vreen::AudioItem();
   }
 
   QString song_id = tokens[1];
@@ -1016,17 +1018,35 @@ QUrl VkService::GetSongPlayUrl(const QUrl& url, bool is_playing) {
     bool success = WaitForReply(song_request);
 
     if (success && !song_request->result().isEmpty()) {
-      Vreen::AudioItem song = song_request->result()[0];
-      if (is_playing) {
-        current_song_ = FromAudioItem(song);
-        current_song_.set_url(url);
-      }
-      return song.url();
+      return song_request->result()[0];
     }
   }
 
   qLog(Info) << "Unresolved url by id" << song_id;
-  return QUrl();
+  return Vreen::AudioItem();
+}
+
+UrlHandler::LoadResult VkService::GetSongResult(const QUrl& url) {
+  // Try get from cache
+  QUrl media_url = cache_->Get(url);
+  if (media_url.isValid()) {
+    SongStarting(url);
+    return UrlHandler::LoadResult(url, UrlHandler::LoadResult::TrackAvailable,
+                                  media_url);
+  }
+
+  // Otherwise get fresh link
+  auto audio_item = GetAudioItemFromUrl(url);
+  media_url = audio_item.url();
+  if (media_url.isValid()) {
+    Song song = FromAudioItem(audio_item);
+    SongStarting(song);
+    cache_->AddToCache(url, media_url);
+    return UrlHandler::LoadResult(url, UrlHandler::LoadResult::TrackAvailable,
+                                  media_url, song.length_nanosec());
+  }
+
+  return UrlHandler::LoadResult();
 }
 
 UrlHandler::LoadResult VkService::GetGroupNextSongUrl(const QUrl& url) {
@@ -1054,7 +1074,7 @@ UrlHandler::LoadResult VkService::GetGroupNextSongUrl(const QUrl& url) {
     if (success && !song_request->result().isEmpty()) {
       Vreen::AudioItem song = song_request->result()[0];
       current_group_url_ = url;
-      current_song_ = FromAudioItem(song);
+      SongStarting(FromAudioItem(song));
       emit StreamMetadataFound(url, current_song_);
       return UrlHandler::LoadResult(url, UrlHandler::LoadResult::TrackAvailable,
                                     song.url(), current_song_.length_nanosec());
@@ -1065,8 +1085,48 @@ UrlHandler::LoadResult VkService::GetGroupNextSongUrl(const QUrl& url) {
   return UrlHandler::LoadResult();
 }
 
-void VkService::SetCurrentSongFromUrl(const QUrl& url) {
-  current_song_ = SongFromUrl(url);
+/***
+ * Song playing
+ */
+
+void VkService::SongStarting(const QUrl& url) {
+  SongStarting(SongFromUrl(url));
+}
+
+void VkService::SongStarting(const Song& song) {
+  current_song_ = song;
+
+  if (isBroadcasting() && HasAccount()) {
+    auto id = ExtractIds(song.url());
+    auto reply =
+        audio_provider_->setBroadcast(id.audio_id, id.owner_id, IdList());
+    NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
+               SLOT(BroadcastChangeReceived(Vreen::IntReply*)), reply);
+    connect(app_->player(), SIGNAL(Stopped()), this, SLOT(SongStopped()),
+            Qt::UniqueConnection);
+    qLog(Debug) << "Broadcasting" << song.artist() << "-" << song.title();
+  }
+}
+
+void VkService::SongSkipped() {
+  current_song_.set_valid(false);
+  cache_->BreakCurrentCaching();
+}
+
+void VkService::SongStopped() {
+  current_song_.set_valid(false);
+
+  if (isBroadcasting() && HasAccount()) {
+    auto reply = audio_provider_->resetBroadcast(IdList());
+    NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
+               SLOT(BroadcastChangeReceived(Vreen::IntReply*)), reply);
+    disconnect(app_->player(), SIGNAL(Stopped()), this, SLOT(SongStopped()));
+    qLog(Debug) << "End of broadcasting";
+  }
+}
+
+void VkService::BroadcastChangeReceived(Vreen::IntReply* reply) {
+  qLog(Debug) << "Broadcast changed for " << reply->result();
 }
 
 /***
@@ -1234,6 +1294,12 @@ void VkService::ReloadSettings() {
   cacheFilename_ = s.value("cache_filename", kDefCacheFilename).toString();
   love_is_add_to_mymusic_ = s.value("love_is_add_to_my_music", false).toBool();
   groups_in_global_search_ = s.value("groups_in_global_search", false).toBool();
+
+  if (!s.contains("enable_broadcast")) {
+    // Need to update premissions
+    Logout();
+  }
+  enable_broadcast_ = s.value("enable_broadcast", false).toBool();
 }
 
 void VkService::ClearStandardItem(QStandardItem* item) {

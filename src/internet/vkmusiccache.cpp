@@ -25,44 +25,40 @@
 #include "core/taskmanager.h"
 
 VkMusicCache::VkMusicCache(Application* app, VkService* service)
-  : QObject(service),
-    app_(app),
-    service_(service),
-    current_cashing_index(0),
-    is_downloading(false),
-    is_aborted(false),
-    task_id(0),
-    file_(NULL),
-    network_manager_(new QNetworkAccessManager),
-    reply_(NULL) {
-}
+    : QObject(service),
+      app_(app),
+      service_(service),
+      current_song_index(0),
+      is_downloading(false),
+      is_aborted(false),
+      task_id(0),
+      file_(NULL),
+      network_manager_(new QNetworkAccessManager),
+      reply_(NULL) {}
 
 QUrl VkMusicCache::Get(const QUrl& url) {
-  QString cached_filename = CachedFilename(url);
   QUrl result;
-  if (InCache(cached_filename)) {
+  if (InCache(url)) {
+    QString cached_filename = CachedFilename(url);
     qLog(Info) << "Use cashed file" << cached_filename;
     result = QUrl::fromLocalFile(cached_filename);
-  } else {
-    result = service_->GetSongPlayUrl(url, false);
-
-    if (service_->isCachingEnabled()) {
-      AddToQueue(cached_filename, result);
-      current_cashing_index = queue_.size();
-    }
   }
   return result;
 }
 
-void VkMusicCache::ForceCache(const QUrl& url) {
-  AddToQueue(CachedFilename(url), service_->GetSongPlayUrl(url));
+void VkMusicCache::AddToCache(const QUrl& url, const QUrl& media_url,
+                              bool force) {
+  AddToQueue(CachedFilename(url), media_url);
+  if (!force) {
+    current_song_index = queue_.size();
+  }
 }
 
 void VkMusicCache::BreakCurrentCaching() {
-  if (current_cashing_index > 0) {
+  if (current_song_index > 0) {
     // Current song in queue
-    queue_.removeAt(current_cashing_index - 1);
-  } else if (current_cashing_index == 0) {
+    queue_.removeAt(current_song_index - 1);
+  } else if (current_song_index == 0) {
     // Current song is downloading
     if (reply_) {
       reply_->abort();
@@ -75,7 +71,8 @@ void VkMusicCache::BreakCurrentCaching() {
 * Queue operations
 */
 
-void VkMusicCache::AddToQueue(const QString& filename, const QUrl& download_url) {
+void VkMusicCache::AddToQueue(const QString& filename,
+                              const QUrl& download_url) {
   DownloadItem item;
   item.filename = filename;
   item.url = download_url;
@@ -93,11 +90,12 @@ void VkMusicCache::DownloadNext() {
   } else {
     current_download = queue_.first();
     queue_.pop_front();
-    current_cashing_index--;
+    current_song_index--;
 
     // Check file path and file existance first
     if (QFile::exists(current_download.filename)) {
-      qLog(Warning) << "Tried to overwrite already cached file" << current_download.filename;
+      qLog(Warning) << "Tried to overwrite already cached file"
+                    << current_download.filename;
       return;
     }
 
@@ -117,14 +115,15 @@ void VkMusicCache::DownloadNext() {
     // Start downloading
     is_aborted = false;
     is_downloading = true;
-    task_id = app_->task_manager()->
-              StartTask(tr("Caching %1")
-                        .arg(QFileInfo(current_download.filename).baseName()));
+    task_id = app_->task_manager()->StartTask(
+        tr("Caching %1").arg(QFileInfo(current_download.filename).baseName()));
     reply_ = network_manager_->get(QNetworkRequest(current_download.url));
     connect(reply_, SIGNAL(finished()), SLOT(Downloaded()));
     connect(reply_, SIGNAL(readyRead()), SLOT(DownloadReadyToRead()));
-    connect(reply_, SIGNAL(downloadProgress(qint64, qint64)), SLOT(DownloadProgress(qint64, qint64)));
-    qLog(Info)<< "Start cashing" << current_download.filename  << "from" << current_download.url;
+    connect(reply_, SIGNAL(downloadProgress(qint64, qint64)),
+            SLOT(DownloadProgress(qint64, qint64)));
+    qLog(Info) << "Start cashing" << current_download.filename << "from"
+               << current_download.url;
   }
 }
 
@@ -154,13 +153,13 @@ void VkMusicCache::Downloaded() {
 
     QString path = service_->cacheDir();
 
-    if (file_->size()  >  0) {
+    if (file_->size() > 0) {
       QDir(path).mkpath(QFileInfo(current_download.filename).path());
       if (file_->copy(current_download.filename)) {
         qLog(Info) << "Cached" << current_download.filename;
       } else {
-        qLog(Error) << "Unable to save" << current_download.filename
-                    << ":" << file_->errorString();
+        qLog(Error) << "Unable to save" << current_download.filename << ":"
+                    << file_->errorString();
       }
     } else {
       qLog(Error) << "File" << current_download.filename << "is empty";
@@ -181,12 +180,8 @@ void VkMusicCache::Downloaded() {
 * Utils
 */
 
-bool VkMusicCache::InCache(const QString& filename) {
-  return QFile::exists(filename);
-}
-
 bool VkMusicCache::InCache(const QUrl& url) {
-  return InCache(CachedFilename(url));
+  return QFile::exists(CachedFilename(url));
 }
 
 QString VkMusicCache::CachedFilename(const QUrl& url) {
@@ -198,7 +193,8 @@ QString VkMusicCache::CachedFilename(const QUrl& url) {
     cache_filename.replace("%artist", args[2]);
     cache_filename.replace("%title", args[3]);
   } else {
-    qLog(Warning) << "Song url with args" << args << "does not contain artist and title"
+    qLog(Warning) << "Song url with args" << args
+                  << "does not contain artist and title"
                   << "use id as file name for cache.";
     cache_filename = args[1];
   }
@@ -209,5 +205,5 @@ QString VkMusicCache::CachedFilename(const QUrl& url) {
     return "";
   }
   // TODO(Vk): Maybe use extenstion from link? Seems it's always mp3.
-  return cache_dir+QDir::separator()+cache_filename+".mp3";
+  return cache_dir + QDir::separator() + cache_filename + ".mp3";
 }
