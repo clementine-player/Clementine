@@ -30,7 +30,7 @@ class ParserBase : public QObject {
   Q_OBJECT
 
  public:
-  ParserBase(LibraryBackendInterface* library, QSettings* settings, QObject* parent = nullptr);
+  ParserBase(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   virtual QString name() const = 0;
   virtual QStringList file_extensions() const = 0;
@@ -70,9 +70,6 @@ class ParserBase : public QObject {
   // directory.  Otherwise returns the URL as is.
   // This function should always be used when saving a playlist.
   QString URLOrRelativeFilename(const QUrl& url, const QDir& dir) const;
-
-  Playlist::Path path;
-  bool writeMetadata;
 
  private:
   LibraryBackendInterface* library_;
