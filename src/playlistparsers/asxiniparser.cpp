@@ -56,7 +56,7 @@ void AsxIniParser::Save(const SongList& songs, QIODevice* device, const QDir& di
 
   int n = 1;
   for (const Song& song : songs) {
-    s << "Ref" << n << "=" << URLOrRelativeFilename(song.url(), dir, options) << endl;
+    s << "Ref" << n << "=" << URLOrFilename(song.url(), dir, options) << endl;
     ++n;
   }
 }
