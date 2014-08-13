@@ -134,6 +134,12 @@ class Playlist : public QAbstractListModel {
     LastFM_Queued,     // Track added to the queue for scrobbling
   };
 
+  enum Path {
+    Path_Automatic = 0,  // Automatically select path type
+    Path_Absolute,       // Always use absolute paths
+    Path_Relative,       // Always use relative paths
+  };
+
   static const char* kCddaMimeType;
   static const char* kRowsMimetype;
   static const char* kPlayNowMimetype;
