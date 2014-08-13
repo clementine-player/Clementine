@@ -1914,8 +1914,10 @@ void Playlist::ReshuffleIndices() {
       std::random_shuffle(shuffled_album_keys.begin(),
                           shuffled_album_keys.end());
 
-      // If the user is currently playing a song, force its album to be first.
-      if (current_virtual_index_ != -1) {
+      // If the user is currently playing a song, force its album to be first
+      // Or if the song was not playing but it was selected, force its album
+      // to be first.
+      if (current_virtual_index_ != -1 || current_row() != -1) {
         const QString key = items_[current_row()]->Metadata().AlbumKey();
         const int pos = shuffled_album_keys.indexOf(key);
         if (pos >= 1) {
