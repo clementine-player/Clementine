@@ -20,11 +20,12 @@
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
+#include "playlist/playlist.h"
 
 #include <QUrl>
 
-ParserBase::ParserBase(LibraryBackendInterface* library, QObject* parent)
-    : QObject(parent), library_(library) {}
+ParserBase::ParserBase(LibraryBackendInterface* library, QSettings *settings, QObject* parent)
+    : QObject(parent), settings_(settings), library_(library) {}
 
 void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
                           const QDir& dir, Song* song) const {
@@ -90,10 +91,13 @@ QString ParserBase::URLOrRelativeFilename(const QUrl& url,
   if (url.scheme() != "file") return url.toString();
 
   const QString filename = url.toLocalFile();
-  if (QDir::isAbsolutePath(filename)) {
+  const Playlist::Path path = settings->value("path_type", Playlist::Path_Automatic);
+
+  if (path != Playlist::Path_Absolute && QDir::isAbsolutePath(filename)) {
     const QString relative = dir.relativeFilePath(filename);
 
-    if (!relative.startsWith("../")) return relative;
+    if (!relative.startsWith("../") || path == Playlist::Path_Relative)
+      return relative;
   }
   return filename;
 }
