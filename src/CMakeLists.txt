@@ -247,6 +247,7 @@ set(SOURCES
   playlist/playlistlistmodel.cpp
   playlist/playlistlistview.cpp
   playlist/playlistmanager.cpp
+  playlist/playlistsaveoptionsdialog.cpp
   playlist/playlistsequence.cpp
   playlist/playlisttabbar.cpp
   playlist/playlistundocommands.cpp
@@ -544,6 +545,7 @@ set(HEADERS
   playlist/playlistlistmodel.h
   playlist/playlistlistview.h
   playlist/playlistmanager.h
+  playlist/playlistsaveoptionsdialog.h
   playlist/playlistsequence.h
   playlist/playlisttabbar.h
   playlist/playlistview.h
@@ -708,6 +710,7 @@ set(UI
   playlist/dynamicplaylistcontrols.ui
   playlist/playlistcontainer.ui
   playlist/playlistlistcontainer.ui
+  playlist/playlistsaveoptionsdialog.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
 
