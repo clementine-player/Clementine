@@ -25,7 +25,10 @@
 #include <QUrl>
 
 ParserBase::ParserBase(LibraryBackendInterface* library, QSettings *settings, QObject* parent)
-    : QObject(parent), settings_(settings), library_(library) {}
+    : QObject(parent), library_(library) {
+  path = settings->value("path_type", Playlist::Path_Automatic);
+  writeMetadata = settings->value("write_metadata", true).toBool();
+}
 
 void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
                           const QDir& dir, Song* song) const {
@@ -91,7 +94,6 @@ QString ParserBase::URLOrRelativeFilename(const QUrl& url,
   if (url.scheme() != "file") return url.toString();
 
   const QString filename = url.toLocalFile();
-  const Playlist::Path path = settings->value("path_type", Playlist::Path_Automatic);
 
   if (path != Playlist::Path_Absolute && QDir::isAbsolutePath(filename)) {
     const QString relative = dir.relativeFilePath(filename);
