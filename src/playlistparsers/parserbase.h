@@ -71,9 +71,11 @@ class ParserBase : public QObject {
   // This function should always be used when saving a playlist.
   QString URLOrRelativeFilename(const QUrl& url, const QDir& dir) const;
 
+  Playlist::Path path;
+  bool writeMetadata;
+
  private:
   LibraryBackendInterface* library_;
-  QSettings* settings_;
 };
 
 #endif  // PARSERBASE_H

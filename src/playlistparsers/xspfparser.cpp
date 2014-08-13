@@ -124,41 +124,45 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
 
     StreamElement track("track", &writer);
     writer.writeTextElement("location", filename_or_url);
-    writer.writeTextElement("title", song.title());
-    if (!song.artist().isEmpty()) {
-      writer.writeTextElement("creator", song.artist());
-    }
-    if (!song.album().isEmpty()) {
-      writer.writeTextElement("album", song.album());
-    }
-    if (song.length_nanosec() != -1) {
-      writer.writeTextElement(
-          "duration", QString::number(song.length_nanosec() / kNsecPerMsec));
-    }
 
-    QString art =
-        song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
-    // Ignore images that are in our resource bundle.
-    if (!art.startsWith(":") && !art.isEmpty()) {
-      QString art_filename;
-      if (!art.contains("://")) {
-        art_filename = art;
-      } else if (QUrl(art).scheme() == "file") {
-        art_filename = QUrl(art).toLocalFile();
+    if (writeMetadata) {
+      writer.writeTextElement("title", song.title());
+      if (!song.artist().isEmpty()) {
+        writer.writeTextElement("creator", song.artist());
+      }
+      if (!song.album().isEmpty()) {
+        writer.writeTextElement("album", song.album());
+      }
+      if (song.length_nanosec() != -1) {
+        writer.writeTextElement(
+            "duration", QString::number(song.length_nanosec() / kNsecPerMsec));
       }
 
-      if (!art_filename.isEmpty()) {
-        // Make this filename relative to the directory we're saving the
-        // playlist.
-        art_filename = dir.relativeFilePath(
-            QFileInfo(art_filename).absoluteFilePath());
-      } else {
-        // Just use whatever URL was in the Song.
-        art_filename = art;
-      }
+      QString art =
+          song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
+      // Ignore images that are in our resource bundle.
+      if (!art.startsWith(":") && !art.isEmpty()) {
+        QString art_filename;
+        if (!art.contains("://")) {
+          art_filename = art;
+        } else if (QUrl(art).scheme() == "file") {
+          art_filename = QUrl(art).toLocalFile();
+        }
 
-      writer.writeTextElement("image", art_filename);
+        if (!art_filename.isEmpty()) {
+          // Make this filename relative to the directory we're saving the
+          // playlist.
+          art_filename = dir.relativeFilePath(
+              QFileInfo(art_filename).absoluteFilePath());
+        } else {
+          // Just use whatever URL was in the Song.
+          art_filename = art;
+        }
+
+        writer.writeTextElement("image", art_filename);
+      }
     }
+
   }
   writer.writeEndDocument();
 }
