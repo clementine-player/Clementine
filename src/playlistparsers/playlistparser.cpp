@@ -130,8 +130,7 @@ SongList PlaylistParser::LoadFromDevice(QIODevice* device,
   return parser->Load(device, path_hint, dir_hint);
 }
 
-void PlaylistParser::Save(const SongList& songs,
-                          const QString& filename,
+void PlaylistParser::Save(const SongList& songs, const QString& filename,
                           const PlaylistSaveOptions& options) const {
   QFileInfo info(filename);
 

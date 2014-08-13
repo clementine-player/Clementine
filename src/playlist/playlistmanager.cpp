@@ -175,7 +175,8 @@ void PlaylistManager::Load(const QString& filename) {
   playlist->InsertUrls(urls << QUrl::fromLocalFile(filename));
 }
 
-void PlaylistManager::Save(int id, const QString& filename, const PlaylistSaveOptions& options) {
+void PlaylistManager::Save(int id, const QString& filename,
+                           const PlaylistSaveOptions& options) {
   if (playlists_.contains(id)) {
     parser_->Save(playlist(id)->GetAllSongs(), filename, options);
   } else {
@@ -187,15 +188,15 @@ void PlaylistManager::Save(int id, const QString& filename, const PlaylistSaveOp
     watcher->setFuture(future);
 
     NewClosure(watcher, SIGNAL(finished()), this,
-               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString, PlaylistSaveOptions)),
+               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString,
+                                               PlaylistSaveOptions)),
                watcher, filename, options);
   }
 }
 
-void PlaylistManager::ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
-                                                 const QString& filename,
-                                                 const PlaylistSaveOptions& options) {
-
+void PlaylistManager::ItemsLoadedForSavePlaylist(
+    QFutureWatcher<Song>* watcher, const QString& filename,
+    const PlaylistSaveOptions& options) {
   SongList song_list = watcher->future().results();
   parser_->Save(song_list, filename, options);
 }

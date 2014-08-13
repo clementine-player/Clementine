@@ -26,12 +26,11 @@ namespace Ui {
 class PlaylistSaveOptionsDialog;
 }
 
-class PlaylistSaveOptionsDialog : public QDialog
-{
+class PlaylistSaveOptionsDialog : public QDialog {
   Q_OBJECT
 
  public:
-  explicit PlaylistSaveOptionsDialog(QWidget *parent = 0);
+  explicit PlaylistSaveOptionsDialog(QWidget* parent = 0);
   ~PlaylistSaveOptionsDialog();
 
   void accept();
@@ -40,7 +39,7 @@ class PlaylistSaveOptionsDialog : public QDialog
  private:
   static const char* kSettingsGroup;
 
-  Ui::PlaylistSaveOptionsDialog *ui;
+  Ui::PlaylistSaveOptionsDialog* ui;
 };
 
-#endif // PLAYLISTSAVEOPTIONSDIALOG_H
+#endif  // PLAYLISTSAVEOPTIONSDIALOG_H
