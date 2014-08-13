@@ -90,8 +90,8 @@ class ParserBase : public QObject {
   void LoadSong(const QString& filename_or_url, qint64 beginning,
                 const QDir& dir, Song* song) const;
 
-  // If the URL is a file:// URL then returns its path relative to the
-  // directory.  Otherwise returns the URL as is.
+  // If the URL is a file:// URL then returns its path (according to the
+  // PlaylistSaveOptions).  Otherwise returns the URL as is.
   // This function should always be used when saving a playlist.
   QString URLOrRelativeFilename(const QUrl& url, const QDir& dir,
                                 const PlaylistSaveOptions& options) const;
