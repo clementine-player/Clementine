@@ -38,9 +38,8 @@ class XSPFParser : public XMLParser {
 
   SongList Load(QIODevice* device, const QString& playlist_path = "",
                 const QDir& dir = QDir()) const;
-  void Save(const SongList& songs, QIODevice* device,
-            const QDir& dir = QDir()) const;
-
+  void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
+            const PlaylistSaveOptions& options = PlaylistSaveOptions()) const;
  private:
   Song ParseTrack(QXmlStreamReader* reader, const QDir& dir) const;
 };

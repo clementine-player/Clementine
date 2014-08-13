@@ -33,8 +33,8 @@ class PLSParser : public ParserBase {
 
   SongList Load(QIODevice* device, const QString& playlist_path = "",
                 const QDir& dir = QDir()) const;
-  void Save(const SongList& songs, QIODevice* device,
-            const QDir& dir = QDir()) const;
+  void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
+            const PlaylistSaveOptions& options = PlaylistSaveOptions()) const;
 };
 
 #endif  // PLSPARSER_H
