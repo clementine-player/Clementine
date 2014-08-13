@@ -25,6 +25,31 @@
 
 class LibraryBackendInterface;
 
+struct PlaylistSaveOptions {
+  enum FilePathStyle {
+    Paths_Automatic = 0,
+    Paths_Relative,
+    Paths_Absolute,
+  };
+
+  enum PathSeparatorStyle {
+    Separators_Automatic = 0,
+    Separators_Windows,
+    Separators_Unix,
+  };
+
+  PlaylistSaveOptions()
+    : filePathStyle(Paths_Automatic),
+      pathSeparatorStyle(Separators_Automatic) {}
+  PlaylistSaveOptions(FilePathStyle _filePathStyle,
+                      PathSeparatorStyle _pathSeparatorStyle)
+    : filePathStyle(_filePathStyle),
+      pathSeparatorStyle(_pathSeparatorStyle) {}
+
+  FilePathStyle filePathStyle;
+  PathSeparatorStyle pathSeparatorStyle;
+};
+
 class ParserBase : public QObject {
   Q_OBJECT
 

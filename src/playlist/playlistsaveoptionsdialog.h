@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+struct PlaylistSaveOptions;
+
 namespace Ui {
 class PlaylistSaveOptionsDialog;
 }
@@ -15,7 +17,12 @@ class PlaylistSaveOptionsDialog : public QDialog
   explicit PlaylistSaveOptionsDialog(QWidget *parent = 0);
   ~PlaylistSaveOptionsDialog();
 
+  void accept();
+  PlaylistSaveOptions options() const;
+
  private:
+  static const char* kSettingsGroup;
+
   Ui::PlaylistSaveOptionsDialog *ui;
 };
 
