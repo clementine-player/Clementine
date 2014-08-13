@@ -134,7 +134,7 @@ void BehaviourSettingsPage::Load() {
   ui_->b_click_edit_inline_->setChecked(
       s.value("click_edit_inline", true).toBool());
 
-  Playlist::Path path = Playlist::Path(s.value("pathtype", Playlist::Path_Automatic).toInt());
+  Playlist::Path path = Playlist::Path(s.value("path_type", Playlist::Path_Automatic).toInt());
   switch(path) {
     case Playlist::Path_Automatic:
       ui_->b_automatic_path->setChecked(true);
@@ -146,7 +146,7 @@ void BehaviourSettingsPage::Load() {
       ui_->b_relative_path->setChecked(true);
       break;
   }
-  ui_->b_write_metadata->setChecked(s.value("writemetadata", true).toBool());
+  ui_->b_write_metadata->setChecked(s.value("write_metadata", true).toBool());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
@@ -204,8 +204,8 @@ void BehaviourSettingsPage::Save() {
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
   s.setValue("click_edit_inline", ui_->b_click_edit_inline_->isChecked());
-  s.setValue("pathtype", int(path));
-  s.setValue("writemetadata", ui_->b_write_metadata->isChecked());
+  s.setValue("path_type", int(path));
+  s.setValue("write_metadata", ui_->b_write_metadata->isChecked());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
