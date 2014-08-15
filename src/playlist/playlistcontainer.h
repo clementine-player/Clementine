@@ -21,6 +21,8 @@
 #include <QWidget>
 #include <QSettings>
 
+#include "playlist.h"
+
 class Ui_PlaylistContainer;
 
 class LineEditInterface;
@@ -114,6 +116,8 @@ signals:
   QLabel* no_matches_label_;
 
   QTimer* filter_timer_;
+
+  Playlist::Path path_;
 };
 
 #endif  // PLAYLISTCONTAINER_H

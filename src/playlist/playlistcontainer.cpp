@@ -48,7 +48,8 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
       tab_bar_visible_(false),
       tab_bar_animation_(new QTimeLine(500, this)),
       no_matches_label_(nullptr),
-      filter_timer_(new QTimer(this)) {
+      filter_timer_(new QTimer(this)),
+      path_(Playlist::Path_Automatic) {
   ui_->setupUi(this);
 
   no_matches_label_ = new QLabel(ui_->playlist);
