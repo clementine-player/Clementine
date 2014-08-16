@@ -253,6 +253,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   PlaylistParser* parser_;
   PlaylistContainer* playlist_container_;
 
+  QSettings settings_;
+
   // key = id
   QMap<int, Data> playlists_;
 

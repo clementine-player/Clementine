@@ -48,9 +48,15 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
       tab_bar_visible_(false),
       tab_bar_animation_(new QTimeLine(500, this)),
       no_matches_label_(nullptr),
-      filter_timer_(new QTimer(this)),
-      path_(Playlist::Path_Automatic) {
+      filter_timer_(new QTimer(this)) {
   ui_->setupUi(this);
+
+  ui_->file_path_box->addItem("Automatic");
+  ui_->file_path_box->addItem("Absolute");
+  ui_->file_path_box->addItem("Relative");
+
+  connect(ui_->file_path_box, SIGNAL(currentIndexChanged(int)),
+          SLOT(PathSettingChanged()));
 
   no_matches_label_ = new QLabel(ui_->playlist);
   no_matches_label_->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
@@ -75,6 +81,8 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   no_matches_label_->setFont(no_matches_font);
 
   settings_.beginGroup(kSettingsGroup);
+
+  ReloadSettings();
 
   // Tab bar
   ui_->tab_bar->setExpanding(false);
@@ -101,6 +109,28 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
 }
 
 PlaylistContainer::~PlaylistContainer() { delete ui_; }
+
+void PlaylistContainer::ReloadSettings() {
+
+  bool show_menu = settings_.value(Playlist::kQuickChangeMenu, true).toBool();
+  ui_->line->setVisible(show_menu);
+  ui_->file_path_label->setVisible(show_menu);
+  ui_->file_path_box->setVisible(show_menu);
+
+  int value = settings_.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
+  Playlist::Path path = static_cast<Playlist::Path>(value);
+  switch (path) {
+    case Playlist::Path_Automatic:
+      ui_->file_path_box->setCurrentIndex(0);
+      break;
+    case Playlist::Path_Absolute:
+      ui_->file_path_box->setCurrentIndex(1);
+      break;
+    case Playlist::Path_Relative:
+      ui_->file_path_box->setCurrentIndex(2);
+      break;
+  }
+}
 
 PlaylistView* PlaylistContainer::view() const { return ui_->playlist; }
 
@@ -438,4 +468,10 @@ bool PlaylistContainer::eventFilter(QObject* objectWatched, QEvent* event) {
     }
   }
   return QWidget::eventFilter(objectWatched, event);
+}
+
+void PlaylistContainer::PathSettingChanged() {
+  int value = ui_->file_path_box->currentIndex();
+  Playlist::Path path = static_cast<Playlist::Path>(value);
+  settings_.setValue(Playlist::kPathType, int(path));
 }

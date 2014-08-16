@@ -50,6 +50,8 @@ PlaylistManager::PlaylistManager(Application* app, QObject* parent)
   connect(app_->player(), SIGNAL(Paused()), SLOT(SetActivePaused()));
   connect(app_->player(), SIGNAL(Playing()), SLOT(SetActivePlaying()));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(SetActiveStopped()));
+
+  settings_.beginGroup(Playlist::kSettingsGroup);
 }
 
 PlaylistManager::~PlaylistManager() {
@@ -196,10 +198,7 @@ void PlaylistManager::ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
 }
 
 void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
-  QSettings settings;
-  settings.beginGroup(Playlist::kSettingsGroup);
-  QString filename = settings.value("last_save_playlist").toString();
-  settings.endGroup();
+  QString filename = settings_.value("last_save_playlist").toString();
 
   // We want to use the playlist tab name as a default filename, but in the
   // same directory as the last saved file.
@@ -224,13 +223,9 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
       nullptr, tr("Save playlist", "Title of the playlist save dialog."),
       filename, parser()->filters(), &default_filter);
 
-  if (filename.isNull()) {
-    settings.endGroup();
-    return;
-  }
+  if (filename.isNull()) return;
 
-  settings.setValue("last_save_playlist", filename);
-  settings.endGroup();
+  settings_.setValue("last_save_playlist", filename);
 
   Save(id == -1 ? current_id() : id, filename);
 }

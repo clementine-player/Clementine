@@ -48,6 +48,8 @@ class PlaylistContainer : public QWidget {
                   QAction* previous_playlist);
   void SetManager(PlaylistManager* manager);
 
+  void ReloadSettings();
+
   PlaylistView* view() const;
 
   bool eventFilter(QObject* objectWatched, QEvent* event);
@@ -92,6 +94,8 @@ signals:
 
   void UpdateNoMatchesLabel();
 
+  void PathSettingChanged();
+
  private:
   void UpdateActiveIcon(const QIcon& icon);
   void RepositionNoMatchesLabel(bool force = false);
@@ -116,8 +120,6 @@ signals:
   QLabel* no_matches_label_;
 
   QTimer* filter_timer_;
-
-  Playlist::Path path_;
 };
 
 #endif  // PLAYLISTCONTAINER_H
