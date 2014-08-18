@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-24 20:50+0000\n"
+"PO-Revision-Date: 2014-08-12 21:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -393,7 +393,7 @@ msgstr "عن QT..."
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 msgid "Account details"
 msgstr "معلومات الحساب"
 
@@ -558,7 +558,7 @@ msgstr "أضف وسم للمقطع"
 msgid "Add song year tag"
 msgstr "أضف وسم سنة المقطع"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "أضف الأغاني إلى \"الموسيقى\" حين أنقر زر \"حب\""
 
@@ -1015,15 +1015,15 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "دعم CUE"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
 msgstr "مسار التخزين المؤقت:"
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
 msgstr "تخزين مؤقت"
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
 msgstr "تخزين مؤقت %1"
@@ -1354,7 +1354,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "تم تجاوز مدة الانتظار، تأكد من رابط الخادم. مثال: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:963
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "مشكلة في الاتصال أو أن الصوت معطل من المالك"
 
@@ -1966,7 +1966,7 @@ msgstr ""
 msgid "Enable Wii Remote support"
 msgstr "فعل دعم أداة التحكم عن بعد لـ Wii"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr "مكن التخزين المؤقت الذاتي"
 
@@ -2308,7 +2308,7 @@ msgstr "اسم الملف"
 msgid "File name (without path)"
 msgstr "اسم الملف (من دون المسار)"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
 msgstr "نمط اسم الملف:"
 
@@ -2994,7 +2994,7 @@ msgstr "جاري تحميل معلومات المقاطع"
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
-#: internet/vksettingspage.cpp:122
+#: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "جاري التحميل"
 
@@ -3014,7 +3014,7 @@ msgstr "تحميل ملفات/روابط، استبدال قائمة التشغ�
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_vksettingspage.h:219
 msgid "Login"
 msgstr "تسجيل الدخول"
 
@@ -3022,7 +3022,7 @@ msgstr "تسجيل الدخول"
 msgid "Login failed"
 msgstr "فشل الولوج"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vksettingspage.cpp:120
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
@@ -3144,7 +3144,7 @@ msgstr "طابق كل كلمة بحث (و)"
 msgid "Match one or more search terms (OR)"
 msgstr "طابق كلمة بحث أو عدة كلمات (أو)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
 msgstr "كل نتائج البحث الشامل"
 
@@ -3762,7 +3762,7 @@ msgstr ""
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "التفضيلات"
 
@@ -4092,7 +4092,7 @@ msgstr "أعد ملأه من جديد"
 msgid "Require authentication code"
 msgstr "يتطلب كود التحقق"
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "استرجاع الحالة البدئية"
 
@@ -4490,7 +4490,7 @@ msgstr "أظهر الفواصل"
 msgid "Show fullsize..."
 msgstr "أظهر الحجم الأصلي..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr "أظهر المجموعات في نتائج البحث الشامل"
 
@@ -4518,6 +4518,10 @@ msgstr "أظهر المقاطع المكررة فقط"
 #: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "أظهر المقطاع غير الموسومة فقط"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -5360,7 +5364,7 @@ msgstr "التأثيرات المرئية"
 msgid "Visualizations Settings"
 msgstr "إعدادات التأثيرات المرئية"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
 msgstr "VK.com"
 

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-24 20:50+0000\n"
+"PO-Revision-Date: 2014-08-12 21:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/projects/p/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -386,7 +386,7 @@ msgstr "Perihal Qt..."
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 msgid "Account details"
 msgstr "Butir-butir akaun"
 
@@ -551,7 +551,7 @@ msgstr "Tambah tag trek lagu"
 msgid "Add song year tag"
 msgstr "Tambah tag tahun lagu"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr ""
 
@@ -1008,15 +1008,15 @@ msgstr ""
 msgid "CUE sheet support"
 msgstr ""
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
 msgstr ""
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
 msgstr ""
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
 msgstr ""
@@ -1347,7 +1347,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr ""
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:963
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1959,7 +1959,7 @@ msgstr ""
 msgid "Enable Wii Remote support"
 msgstr "Bolehkan sokongan Wii Remote"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr ""
 
@@ -2301,7 +2301,7 @@ msgstr "Nama fail"
 msgid "File name (without path)"
 msgstr ""
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
 msgstr ""
 
@@ -2987,7 +2987,7 @@ msgstr "Memuat info trek-trek"
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
-#: internet/vksettingspage.cpp:122
+#: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Memuat..."
 
@@ -3007,7 +3007,7 @@ msgstr "Memuat fail-fail/URL, menggantikan senarai main semasa"
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_vksettingspage.h:219
 msgid "Login"
 msgstr "Log masuk"
 
@@ -3015,7 +3015,7 @@ msgstr "Log masuk"
 msgid "Login failed"
 msgstr ""
 
-#: internet/vksettingspage.cpp:121
+#: internet/vksettingspage.cpp:120
 msgid "Logout"
 msgstr ""
 
@@ -3137,7 +3137,7 @@ msgstr ""
 msgid "Match one or more search terms (OR)"
 msgstr ""
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
 msgstr ""
 
@@ -3755,7 +3755,7 @@ msgstr ""
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr ""
 
@@ -4085,7 +4085,7 @@ msgstr ""
 msgid "Require authentication code"
 msgstr ""
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr ""
 
@@ -4483,7 +4483,7 @@ msgstr "Tunjukkan pembahagi"
 msgid "Show fullsize..."
 msgstr "Tunjukkan saiz penuh..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr ""
 
@@ -4511,6 +4511,10 @@ msgstr ""
 #: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "Tunjukkan hanya yang tidak ditag"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -5353,7 +5357,7 @@ msgstr ""
 msgid "Visualizations Settings"
 msgstr ""
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
 msgstr ""
 

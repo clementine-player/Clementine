@@ -26,14 +26,15 @@
 # KazimirSpontaliku <spontaliku@gmail.com>, 2012
 # Stanislav Hanzhin <hanzhin.stas@gmail.com>, 2012
 # Vyacheslav Blinov <blinov.vyacheslav@gmail.com>, 2012
+# Анатолий Валерианович <ffox909@mail.ru>, 2014
 # vlodimer <v.pahomchik@gmail.com>, 2012
 # Владислав <split7fire@yandex.ru>, 2013
 # Павел Малеев <rolland39@gmail.com>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-08-09 22:41+0000\n"
-"Last-Translator: Andrei Stepanov\n"
+"PO-Revision-Date: 2014-08-14 10:08+0000\n"
+"Last-Translator: Анатолий Валерианович <ffox909@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -410,7 +411,7 @@ msgstr "Информация о Qt"
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 msgid "Account details"
 msgstr "Данные учётной записи"
 
@@ -575,7 +576,7 @@ msgstr "Добавить тег \"Номер дорожки\""
 msgid "Add song year tag"
 msgstr "Добавить тег \"Год\""
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "Добавить композиции в \"Мою музыку\", если нажата кнопка \"В любимые\""
 
@@ -1032,15 +1033,15 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Поддержка файлов разметки CUE"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
 msgstr "Путь кэша:"
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
 msgstr "Кэширование"
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
 msgstr "Кэширование %1"
@@ -1371,7 +1372,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Превышено время ожидания при установке соединения, проверьте адрес сервера. Пример: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:963
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Ошибка подключения или аудио удалено владельцем"
 
@@ -1983,7 +1984,7 @@ msgstr "Email"
 msgid "Enable Wii Remote support"
 msgstr "Включить поддержку пульта Wii"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr "Включить автоматическое кэширование"
 
@@ -2325,7 +2326,7 @@ msgstr "Полное имя файла"
 msgid "File name (without path)"
 msgstr "Имя файла"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
 msgstr "Шаблон имени файла:"
 
@@ -3011,7 +3012,7 @@ msgstr "Загрузка сведений о композициях"
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
-#: internet/vksettingspage.cpp:122
+#: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Загрузка..."
 
@@ -3031,7 +3032,7 @@ msgstr "Загрузка файлов или ссылок с заменой те
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_vksettingspage.h:219
 msgid "Login"
 msgstr "Вход"
 
@@ -3039,7 +3040,7 @@ msgstr "Вход"
 msgid "Login failed"
 msgstr "Ошибка входа"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vksettingspage.cpp:120
 msgid "Logout"
 msgstr "Выйти"
 
@@ -3161,7 +3162,7 @@ msgstr "Совпадает с каждым условием поиска (И)"
 msgid "Match one or more search terms (OR)"
 msgstr "Совпадает с одним или несколькими условиями (ИЛИ)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
 msgstr "Максимизировать результаты глобального поиска"
 
@@ -3779,7 +3780,7 @@ msgstr "Настройки"
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "Настройки"
 
@@ -4109,7 +4110,7 @@ msgstr "Перезаполнить"
 msgid "Require authentication code"
 msgstr "Требовать код аутентификации."
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "Сброс"
 
@@ -4507,7 +4508,7 @@ msgstr "Показывать разделители"
 msgid "Show fullsize..."
 msgstr "Показать в полный размер..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr "Показывать группы в результатах глобального поиска"
 
@@ -4535,6 +4536,10 @@ msgstr "Показывать только повторяющиеся"
 #: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "Показывать только без тегов"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr "Показать проигрываемую песню на Вашей странице"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -5377,7 +5382,7 @@ msgstr "Визуализации"
 msgid "Visualizations Settings"
 msgstr "Настройки визуализации"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
 msgstr "Vk.com"
 

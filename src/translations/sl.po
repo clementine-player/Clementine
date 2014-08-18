@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-07-14 11:27+0000\n"
-"Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"PO-Revision-Date: 2014-08-12 21:30+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -391,7 +391,7 @@ msgstr "O Qt ..."
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 msgid "Account details"
 msgstr "Podrobnosti računa"
 
@@ -556,7 +556,7 @@ msgstr "Dodaj oznako: številka skladbe"
 msgid "Add song year tag"
 msgstr "Dodaj oznako: leto"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "Dodaj skladbe med \"Moja glasba\", ko kliknem na gumb \"Priljubljena\""
 
@@ -1013,15 +1013,15 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Podpora predlogam CUE"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
 msgstr "Pot do predpomnilnika:"
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
 msgstr "Predpomnjenje"
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
 msgstr "Predpomnjenje %1"
@@ -1352,7 +1352,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Povezava je časovno pretekla, preverite naslov URL strežnika. Primer: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:963
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Težava s povezavo ali pa je lastnik onemogočil zvok"
 
@@ -1964,7 +1964,7 @@ msgstr "E-pošta"
 msgid "Enable Wii Remote support"
 msgstr "Omogoči podporo Wii Remote"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr "Omogoči samodejno predpomnjenje"
 
@@ -2306,7 +2306,7 @@ msgstr "Ime datoteke"
 msgid "File name (without path)"
 msgstr "Ime datoteke (brez poti)"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
 msgstr "Vzorec imena datoteke:"
 
@@ -2992,7 +2992,7 @@ msgstr "Nalaganje podrobnosti o skladbah"
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
-#: internet/vksettingspage.cpp:122
+#: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Nalaganje ..."
 
@@ -3012,7 +3012,7 @@ msgstr "Naloži datoteke/naslove URL in zamenjaj trenutni seznam predvajanja"
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_vksettingspage.h:219
 msgid "Login"
 msgstr "Prijava"
 
@@ -3020,7 +3020,7 @@ msgstr "Prijava"
 msgid "Login failed"
 msgstr "Prijava je spodletela"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vksettingspage.cpp:120
 msgid "Logout"
 msgstr "Odjava"
 
@@ -3142,7 +3142,7 @@ msgstr "Ujemanje s vsakim pogojem iskanja (IN)"
 msgid "Match one or more search terms (OR)"
 msgstr "Ujemanje enega ali več pogojev iskanja (ALI)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
 msgstr "Največ rezultatov splošnega iskanja"
 
@@ -3760,7 +3760,7 @@ msgstr "Možnost"
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "Možnosti"
 
@@ -4090,7 +4090,7 @@ msgstr "Znova napolni"
 msgid "Require authentication code"
 msgstr "Zahtevaj overitveno kodo"
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "Ponastavi"
 
@@ -4488,7 +4488,7 @@ msgstr "Pokaži razdelilnike"
 msgid "Show fullsize..."
 msgstr "Pokaži v polni velikosti ..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr "Pokaži skupine v rezultatih splošnega iskanja"
 
@@ -4516,6 +4516,10 @@ msgstr "Pokaži samo podvojene"
 #: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "Pokaži samo tiste brez oznak"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -5358,7 +5362,7 @@ msgstr "Predočenja"
 msgid "Visualizations Settings"
 msgstr "Nastavitve predočenja"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
 msgstr "Vk.com"
 

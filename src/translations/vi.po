@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-24 20:50+0000\n"
+"PO-Revision-Date: 2014-08-12 21:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -389,7 +389,7 @@ msgstr "Giới thiệu Qt..."
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 msgid "Account details"
 msgstr "Chi tiết tài khoản"
 
@@ -554,7 +554,7 @@ msgstr "Thêm thẻ bài hát"
 msgid "Add song year tag"
 msgstr "Thêm thẻ năm của bài hát"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr ""
 
@@ -1011,15 +1011,15 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Hỗ trợ danh sách CUE"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
 msgstr ""
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
 msgstr ""
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
 msgstr ""
@@ -1350,7 +1350,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Hết thời gian kết nối, kiểm tra URL máy chủ. Ví dụ: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:963
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1962,7 +1962,7 @@ msgstr ""
 msgid "Enable Wii Remote support"
 msgstr "Bật hỗ trợ tay cầm Wii"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr ""
 
@@ -2304,7 +2304,7 @@ msgstr "Tên tập tin"
 msgid "File name (without path)"
 msgstr "Tên tập tin (không có đường dẫn)"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
 msgstr ""
 
@@ -2990,7 +2990,7 @@ msgstr "Đang nạp thông tin bài hát"
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
-#: internet/vksettingspage.cpp:122
+#: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Đang nạp..."
 
@@ -3010,7 +3010,7 @@ msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_vksettingspage.h:219
 msgid "Login"
 msgstr "Đăng nhập"
 
@@ -3018,7 +3018,7 @@ msgstr "Đăng nhập"
 msgid "Login failed"
 msgstr "Đăng nhập thất bại"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vksettingspage.cpp:120
 msgid "Logout"
 msgstr ""
 
@@ -3140,7 +3140,7 @@ msgstr "Tất cả các điều kiện đều khớp (AND)"
 msgid "Match one or more search terms (OR)"
 msgstr "Một hay nhiều điều kiện khớp (OR)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
 msgstr ""
 
@@ -3758,7 +3758,7 @@ msgstr ""
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "Tùy chỉnh"
 
@@ -4088,7 +4088,7 @@ msgstr "Phục hồi số lượng"
 msgid "Require authentication code"
 msgstr ""
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "Thiết lập lại"
 
@@ -4486,7 +4486,7 @@ msgstr "Hiện đường phân cách"
 msgid "Show fullsize..."
 msgstr "Hiện với kích thước gốc..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr ""
 
@@ -4514,6 +4514,10 @@ msgstr "Chỉ hiện những mục bị trùng"
 #: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "Chỉ hiện những mục không được gán thẻ"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -5356,7 +5360,7 @@ msgstr "Hình ảnh ảo"
 msgid "Visualizations Settings"
 msgstr "Thiết đặt hiệu ứng hình ảnh ảo"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
 msgstr ""
 

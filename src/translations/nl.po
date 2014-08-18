@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-08-01 19:23+0000\n"
+"PO-Revision-Date: 2014-08-17 15:34+0000\n"
 "Last-Translator: Senno Kaasjager <senno.kaasjager@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -393,7 +393,7 @@ msgstr "Over Qt…"
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 msgid "Account details"
 msgstr "Account gegevens"
 
@@ -558,7 +558,7 @@ msgstr "Nummer-label toevoegen"
 msgid "Add song year tag"
 msgstr "Jaar-label toevoegen"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "Nummers toevoegen aan \"Mijn Muziek\" als de \"Mooi\" knop is aangeklikt"
 
@@ -1015,15 +1015,15 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "CUE-sheet ondersteuning"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
 msgstr "Cachepad:"
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
 msgstr "Bezig met cachen"
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
 msgstr "Bezig met %1 cachen"
@@ -1354,7 +1354,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Time-out van verbinding, controleer de URL van de server. Bijvoorbeeld: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:963
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Connetieprobleem of audio is uitgeschakeld door eigenaar"
 
@@ -1966,7 +1966,7 @@ msgstr "E-mail"
 msgid "Enable Wii Remote support"
 msgstr "Ondersteuning voor Wii Remote inschakelen"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr "Automatisch cachen inschakelen"
 
@@ -2308,7 +2308,7 @@ msgstr "Bestandsnaam"
 msgid "File name (without path)"
 msgstr "Bestandsnaam (zonder pad)"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
 msgstr "Bestandsnaampatroon:"
 
@@ -2994,7 +2994,7 @@ msgstr "Nummerinformatie laden"
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
-#: internet/vksettingspage.cpp:122
+#: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Laden…"
 
@@ -3014,7 +3014,7 @@ msgstr "Bestanden/URLs laden, en vervangt de huidige afspeellijst"
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_vksettingspage.h:219
 msgid "Login"
 msgstr "Inloggen"
 
@@ -3022,7 +3022,7 @@ msgstr "Inloggen"
 msgid "Login failed"
 msgstr "Inloggen mislukt"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vksettingspage.cpp:120
 msgid "Logout"
 msgstr "Uitloggen"
 
@@ -3144,7 +3144,7 @@ msgstr "Match op alle zoektermen (EN)"
 msgid "Match one or more search terms (OR)"
 msgstr "Match op een of meer zoektermen (OF)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
 msgstr "Max aantal zoekresultaten"
 
@@ -3762,7 +3762,7 @@ msgstr "Voorkeur"
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "Voorkeuren"
 
@@ -4092,7 +4092,7 @@ msgstr "Opnieuw vullen"
 msgid "Require authentication code"
 msgstr "Autorisatiecode vereist"
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "Herstel"
 
@@ -4490,7 +4490,7 @@ msgstr "Verdelers tonen"
 msgid "Show fullsize..."
 msgstr "Volledig weergeven..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr "Toon groepen in globale zoekresultaat"
 
@@ -4518,6 +4518,10 @@ msgstr "Alleen dubbelen tonen"
 #: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "Nummers zonder labels tonen"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr "Toon nummer dat wordt afgespeeld op je pagina"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -5360,7 +5364,7 @@ msgstr "Visualisaties"
 msgid "Visualizations Settings"
 msgstr "Visualisatie-instellingen"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
 msgstr "Vk.com"
 

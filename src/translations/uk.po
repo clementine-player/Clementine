@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-06-25 03:33+0000\n"
+"PO-Revision-Date: 2014-08-13 05:04+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -387,7 +387,7 @@ msgstr "Про Qt…"
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 msgid "Account details"
 msgstr "Параметри облікового запису"
 
@@ -552,7 +552,7 @@ msgstr "Додати мітку номеру доріжки"
 msgid "Add song year tag"
 msgstr "Додати мітку року пісні"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "Додавати композиції до теки «Моя музика», якщо натиснуто кнопку «Уподобати»"
 
@@ -1009,15 +1009,15 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Підтримка листів CUE"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
 msgstr "Каталог кешу:"
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
 msgstr "Кешування"
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
 msgstr "Кешування %1"
@@ -1348,7 +1348,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Вичерпано строк очікування на з’єднання. Переконайтеся, що адресу сервера вказано правильно. Приклад: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:963
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Проблеми зі з’єднанням або надсилання звукових даних вимкнено власником"
 
@@ -1960,7 +1960,7 @@ msgstr "Ел. пошта"
 msgid "Enable Wii Remote support"
 msgstr "Увімкнути підтримку Wii Remote"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr "Увімкнути автоматичне кешування"
 
@@ -2302,7 +2302,7 @@ msgstr "Назва файлу"
 msgid "File name (without path)"
 msgstr "Назва файлу (без шляху)"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
 msgstr "Зразок назви файла:"
 
@@ -2988,7 +2988,7 @@ msgstr "Завантажую дані доріжок"
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
-#: internet/vksettingspage.cpp:122
+#: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Завантаження…"
 
@@ -3008,7 +3008,7 @@ msgstr "Завантажити файли/адреси, замінюючи по�
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_vksettingspage.h:219
 msgid "Login"
 msgstr "Увійти"
 
@@ -3016,7 +3016,7 @@ msgstr "Увійти"
 msgid "Login failed"
 msgstr "Не вдалося увійти"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vksettingspage.cpp:120
 msgid "Logout"
 msgstr "Вийти"
 
@@ -3138,7 +3138,7 @@ msgstr "Враховувати кожний пошуковий термін (AND
 msgid "Match one or more search terms (OR)"
 msgstr "Враховувати один чи більше пошукових термінів (OR)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
 msgstr "Максимальна кількість результатів загального пошуку"
 
@@ -3756,7 +3756,7 @@ msgstr "Пріоритет"
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "Параметри"
 
@@ -4086,7 +4086,7 @@ msgstr "Знов наповнити"
 msgid "Require authentication code"
 msgstr "Потрібен код розпізнавання"
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "Скинути"
 
@@ -4484,7 +4484,7 @@ msgstr "Показати розділювачі"
 msgid "Show fullsize..."
 msgstr "Показати на повний розмір…"
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr "Показувати групи у результатах загального пошуку"
 
@@ -4512,6 +4512,10 @@ msgstr "Показати тільки дублікати"
 #: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "Показати тільки без міток"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr "Показувати відтворювану композицію на вашій сторінці"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -5354,7 +5358,7 @@ msgstr "Візуалізації"
 msgid "Visualizations Settings"
 msgstr "Налаштування візуалізацій"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
 msgstr "Vk.com"
 

@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-07-02 08:46+0000\n"
-"Last-Translator: orange2141 <ataraxia90@gmail.com>\n"
+"PO-Revision-Date: 2014-08-12 21:30+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -395,7 +395,7 @@ msgstr "Qt 정보"
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 msgid "Account details"
 msgstr "계정 정보"
 
@@ -560,7 +560,7 @@ msgstr "트랙 태그 추가"
 msgid "Add song year tag"
 msgstr "연도 태그 추가"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "\"좋아요\" 버튼을 클릭하면 노래가 \"내 음악\"에 추가됩니다."
 
@@ -1017,15 +1017,15 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "큐 시트 지원"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
 msgstr "캐시 경로:"
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
 msgstr "캐시 중"
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
 msgstr "%1 캐시 중"
@@ -1356,7 +1356,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "연결 시간이 초과되었습니다. 서버의 주소를 확인하세요. 예)http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:963
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "연결 문제 또는 오디오가 사용자에 의한 비활성화"
 
@@ -1968,7 +1968,7 @@ msgstr "이메일"
 msgid "Enable Wii Remote support"
 msgstr "Wii 리모컨 모드 사용"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr "자동 캐싱 허용"
 
@@ -2310,7 +2310,7 @@ msgstr "파일 "
 msgid "File name (without path)"
 msgstr "파일 이름 (경로 제외)"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
 msgstr "파일 명 규칙:"
 
@@ -2996,7 +2996,7 @@ msgstr "트랙 정보 불러오는중"
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
-#: internet/vksettingspage.cpp:122
+#: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "여는 중..."
 
@@ -3016,7 +3016,7 @@ msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_vksettingspage.h:219
 msgid "Login"
 msgstr "로그인"
 
@@ -3024,7 +3024,7 @@ msgstr "로그인"
 msgid "Login failed"
 msgstr "로그인 실패"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vksettingspage.cpp:120
 msgid "Logout"
 msgstr "로그아웃"
 
@@ -3146,7 +3146,7 @@ msgstr "모든 검색조건 일치 (AND)"
 msgid "Match one or more search terms (OR)"
 msgstr "하나 이상의 검색조건 일치 (OR)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
 msgstr ""
 
@@ -3764,7 +3764,7 @@ msgstr "설정"
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "환경설정"
 
@@ -4094,7 +4094,7 @@ msgstr "다시 채우기"
 msgid "Require authentication code"
 msgstr "인증 코드 "
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "초기화"
 
@@ -4492,7 +4492,7 @@ msgstr "분할 표시"
 msgid "Show fullsize..."
 msgstr "전체화면 보기..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr "글로벌 검색 결과에서 그룹 보기"
 
@@ -4520,6 +4520,10 @@ msgstr "복사본만 보기"
 #: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "태그되지 않은 것만 보기"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -5362,7 +5366,7 @@ msgstr "시각화"
 msgid "Visualizations Settings"
 msgstr "시각화 설정"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
 msgstr "Vk.com"
 

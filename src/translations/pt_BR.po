@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-07-24 16:13+0000\n"
+"PO-Revision-Date: 2014-08-13 00:59+0000\n"
 "Last-Translator: carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -397,7 +397,7 @@ msgstr "Sobre o Qt..."
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_seafilesettingspage.h:169
-#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:211
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 msgid "Account details"
 msgstr "Detalhes da conta"
 
@@ -562,7 +562,7 @@ msgstr "Adicionar a tag faixa da música"
 msgid "Add song year tag"
 msgstr "Adicionar a tag ano da música"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "Adicionar músicas às \"Minhas músicas\" quando o botão \"Curtir\" for clicado"
 
@@ -1019,15 +1019,15 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Suporte a lista CUE"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
 msgstr "Localização do cache:"
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
 msgstr "Caching"
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
 msgstr "Caching %1"
@@ -1358,7 +1358,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Conexão expirou, verifique a URL do servidor. Exemplo: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:963
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Problemas com a conexão ou o áudio foi desabilitado pelo proprietário"
 
@@ -1970,7 +1970,7 @@ msgstr "E-mail"
 msgid "Enable Wii Remote support"
 msgstr "Habilitar suporte a controle remoto do Wii"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr "Habilitar caching automático"
 
@@ -2312,7 +2312,7 @@ msgstr "Nome de arquivo"
 msgid "File name (without path)"
 msgstr "Nome do arquivo (sem pasta)"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
 msgstr "Padrão do nome de arquivo:"
 
@@ -2998,7 +2998,7 @@ msgstr "Carregando informações da faixa"
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
-#: internet/vksettingspage.cpp:122
+#: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Carregando..."
 
@@ -3018,7 +3018,7 @@ msgstr "Carregar arquivos/sites, substiuindo a lista de reprodução atual"
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_vksettingspage.h:219
 msgid "Login"
 msgstr "Login"
 
@@ -3026,7 +3026,7 @@ msgstr "Login"
 msgid "Login failed"
 msgstr "Falha ao conectar"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vksettingspage.cpp:120
 msgid "Logout"
 msgstr "Logout"
 
@@ -3148,7 +3148,7 @@ msgstr "Buscar por todos os termos de pesquisa juntos (E)"
 msgid "Match one or more search terms (OR)"
 msgstr "Buscar um ou mais termos de pesquisa (OU)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
 msgstr "Número máximo de resultados da busca global"
 
@@ -3766,7 +3766,7 @@ msgstr "Preferência"
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:214
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "Preferências"
 
@@ -4096,7 +4096,7 @@ msgstr "Repovoar"
 msgid "Require authentication code"
 msgstr "Exigir código de autenticação"
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "Redefinir"
 
@@ -4494,7 +4494,7 @@ msgstr "Mostrar divisores"
 msgid "Show fullsize..."
 msgstr "Exibir em tamanho real..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr "Exibir grupos no resultado da busca global"
 
@@ -4522,6 +4522,10 @@ msgstr "Mostrar somente os duplicados"
 #: ui/mainwindow.cpp:554
 msgid "Show only untagged"
 msgstr "Mostrar somente os sem tag"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr "Exibe a música em execução em sua página"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -5364,7 +5368,7 @@ msgstr "Visualizações"
 msgid "Visualizations Settings"
 msgstr "Configurações de visualização"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
 msgstr "Vk.com"
 
