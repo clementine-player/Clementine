@@ -56,7 +56,7 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   ui_->file_path_box->addItem("Relative");
 
   connect(ui_->file_path_box, SIGNAL(currentIndexChanged(int)),
-          SLOT(PathSettingChanged()));
+          SLOT(PathSettingChanged(int)));
 
   no_matches_label_ = new QLabel(ui_->playlist);
   no_matches_label_->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
@@ -470,8 +470,6 @@ bool PlaylistContainer::eventFilter(QObject* objectWatched, QEvent* event) {
   return QWidget::eventFilter(objectWatched, event);
 }
 
-void PlaylistContainer::PathSettingChanged() {
-  int value = ui_->file_path_box->currentIndex();
-  Playlist::Path path = static_cast<Playlist::Path>(value);
-  settings_.setValue(Playlist::kPathType, int(path));
+void PlaylistContainer::PathSettingChanged(int index) {
+  settings_.setValue(Playlist::kPathType, index);
 }

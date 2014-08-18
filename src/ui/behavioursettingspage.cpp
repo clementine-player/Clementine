@@ -148,7 +148,7 @@ void BehaviourSettingsPage::Load() {
       break;
   }
   ui_->b_write_metadata->setChecked(s.value(Playlist::kWriteMetadata, true).toBool());
-  ui_->b_quickchange_menu->setChecked(s.value(Playlist::kQuickChangeMenu, true).toBool());
+  ui_->b_quickchange_menu->setChecked(s.value(Playlist::kQuickChangeMenu, false).toBool());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
@@ -179,12 +179,15 @@ void BehaviourSettingsPage::Save() {
       ui_->menu_playmode->itemData(ui_->menu_playmode->currentIndex()).toInt());
 
   Playlist::Path path = Playlist::Path_Automatic;
-  if (ui_->b_automatic_path->isChecked())
+  if (ui_->b_automatic_path->isChecked()) {
     path = Playlist::Path_Automatic;
-  if (ui_->b_absolute_path->isChecked())
+  }
+   else if (ui_->b_absolute_path->isChecked()) {
     path = Playlist::Path_Absolute;
-  if (ui_->b_relative_path->isChecked())
+  }
+  else if (ui_->b_relative_path->isChecked()) {
     path = Playlist::Path_Relative;
+  }
 
   s.beginGroup(MainWindow::kSettingsGroup);
   s.setValue("showtray", ui_->b_show_tray_icon_->isChecked());
@@ -206,7 +209,7 @@ void BehaviourSettingsPage::Save() {
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
   s.setValue("click_edit_inline", ui_->b_click_edit_inline_->isChecked());
-  s.setValue(Playlist::kPathType, int(path));
+  s.setValue(Playlist::kPathType, static_cast<int>(path));
   s.setValue(Playlist::kWriteMetadata, ui_->b_write_metadata->isChecked());
   s.setValue(Playlist::kQuickChangeMenu, ui_->b_quickchange_menu->isChecked());
   s.endGroup();

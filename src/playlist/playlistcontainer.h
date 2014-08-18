@@ -94,7 +94,7 @@ signals:
 
   void UpdateNoMatchesLabel();
 
-  void PathSettingChanged();
+  void PathSettingChanged(int index);
 
  private:
   void UpdateActiveIcon(const QIcon& icon);

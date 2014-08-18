@@ -108,7 +108,7 @@ void M3UParser::Save(const SongList& songs, QIODevice* device,
 
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
-  bool writeMetadata = s.value("write_metadata", true).toBool();
+  bool writeMetadata = s.value(Playlist::kWriteMetadata, true).toBool();
   s.endGroup();
 
   for (const Song& song : songs) {
