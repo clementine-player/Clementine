@@ -111,13 +111,13 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
 PlaylistContainer::~PlaylistContainer() { delete ui_; }
 
 void PlaylistContainer::ReloadSettings() {
-
   bool show_menu = settings_.value(Playlist::kQuickChangeMenu, true).toBool();
   ui_->line->setVisible(show_menu);
   ui_->file_path_label->setVisible(show_menu);
   ui_->file_path_box->setVisible(show_menu);
 
-  int value = settings_.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
+  int value =
+      settings_.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
   Playlist::Path path = static_cast<Playlist::Path>(value);
   switch (path) {
     case Playlist::Path_Automatic:
@@ -392,14 +392,15 @@ void PlaylistContainer::UpdateNoMatchesLabel() {
 
   QString text;
   if (has_rows && !has_results) {
-    if (ui_->filter->text().trimmed().compare("the answer to life the universe "
-                                              "and everything",
-                                              Qt::CaseInsensitive) == 0) {
+    if (ui_->filter->text().trimmed().compare(
+            "the answer to life the universe "
+            "and everything",
+            Qt::CaseInsensitive) == 0) {
       text = "42";
     } else {
-      text =
-          tr("No matches found.  Clear the search box to show the whole playlist "
-             "again.");
+      text = tr(
+          "No matches found.  Clear the search box to show the whole playlist "
+          "again.");
     }
   }
 

@@ -136,8 +136,8 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
             "duration", QString::number(song.length_nanosec() / kNsecPerMsec));
       }
 
-      QString art =
-          song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
+      QString art = song.art_manual().isEmpty() ? song.art_automatic()
+                                                : song.art_manual();
       // Ignore images that are in our resource bundle.
       if (!art.startsWith(":") && !art.isEmpty()) {
         QString art_filename;
@@ -151,7 +151,7 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
           // Make this filename relative to the directory we're saving the
           // playlist.
           QUrl url = QUrl(art_filename);
-          url.setScheme("file");        // Need to explicitly set this.
+          url.setScheme("file");  // Need to explicitly set this.
           art_filename = URLOrRelativeFilename(url, dir).toUtf8();
         } else {
           // Just use whatever URL was in the Song.
@@ -161,7 +161,6 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
         writer.writeTextElement("image", art_filename);
       }
     }
-
   }
   writer.writeEndDocument();
 }

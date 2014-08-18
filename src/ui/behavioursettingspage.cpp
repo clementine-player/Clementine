@@ -134,9 +134,9 @@ void BehaviourSettingsPage::Load() {
   ui_->b_click_edit_inline_->setChecked(
       s.value("click_edit_inline", true).toBool());
 
-  Playlist::Path path = Playlist::Path(s.value(Playlist::kPathType,
-                                               Playlist::Path_Automatic).toInt());
-  switch(path) {
+  Playlist::Path path = Playlist::Path(
+      s.value(Playlist::kPathType, Playlist::Path_Automatic).toInt());
+  switch (path) {
     case Playlist::Path_Automatic:
       ui_->b_automatic_path->setChecked(true);
       break;
@@ -147,8 +147,10 @@ void BehaviourSettingsPage::Load() {
       ui_->b_relative_path->setChecked(true);
       break;
   }
-  ui_->b_write_metadata->setChecked(s.value(Playlist::kWriteMetadata, true).toBool());
-  ui_->b_quickchange_menu->setChecked(s.value(Playlist::kQuickChangeMenu, false).toBool());
+  ui_->b_write_metadata->setChecked(
+      s.value(Playlist::kWriteMetadata, true).toBool());
+  ui_->b_quickchange_menu->setChecked(
+      s.value(Playlist::kQuickChangeMenu, false).toBool());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
@@ -181,11 +183,9 @@ void BehaviourSettingsPage::Save() {
   Playlist::Path path = Playlist::Path_Automatic;
   if (ui_->b_automatic_path->isChecked()) {
     path = Playlist::Path_Automatic;
-  }
-   else if (ui_->b_absolute_path->isChecked()) {
+  } else if (ui_->b_absolute_path->isChecked()) {
     path = Playlist::Path_Absolute;
-  }
-  else if (ui_->b_relative_path->isChecked()) {
+  } else if (ui_->b_relative_path->isChecked()) {
     path = Playlist::Path_Relative;
   }
 

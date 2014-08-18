@@ -1101,9 +1101,8 @@ void Playlist::InsertInternetItems(const InternetModel* model,
     switch (item.data(InternetModel::Role_PlayBehaviour).toInt()) {
       case InternetModel::PlayBehaviour_SingleItem:
         playlist_items << shared_ptr<PlaylistItem>(new InternetPlaylistItem(
-                              model->ServiceForIndex(item),
-                              item.data(InternetModel::Role_SongMetadata)
-                                  .value<Song>()));
+            model->ServiceForIndex(item),
+            item.data(InternetModel::Role_SongMetadata).value<Song>()));
         break;
 
       case InternetModel::PlayBehaviour_UseSongLoader:
@@ -1126,7 +1125,7 @@ void Playlist::InsertInternetItems(InternetService* service,
   PlaylistItemList playlist_items;
   for (const Song& song : songs) {
     playlist_items << shared_ptr<PlaylistItem>(
-                          new InternetPlaylistItem(service, song));
+        new InternetPlaylistItem(service, song));
   }
 
   InsertItems(playlist_items, pos, play_now, enqueue);
@@ -1406,10 +1405,10 @@ void Playlist::ReOrderWithoutUndo(const PlaylistItemList& new_items) {
     new_rows[new_items[i].get()] = i;
   }
 
-  for (const QModelIndex& idx: persistentIndexList()) {
+  for (const QModelIndex& idx : persistentIndexList()) {
     const PlaylistItem* item = old_items[idx.row()].get();
-    changePersistentIndex(
-        idx, index(new_rows[item], idx.column(), idx.parent()));
+    changePersistentIndex(idx,
+                          index(new_rows[item], idx.column(), idx.parent()));
   }
 
   layoutChanged();

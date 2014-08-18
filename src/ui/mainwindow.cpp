@@ -161,8 +161,8 @@ const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kAllFilesFilterSpec = QT_TR_NOOP("All Files (*)");
 
 namespace {
-  const int kTrackSliderUpdateTimeMs = 40;
-  const int kTrackPositionUpdateTimeMs = 1000;
+const int kTrackSliderUpdateTimeMs = 40;
+const int kTrackPositionUpdateTimeMs = 1000;
 }
 
 MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
