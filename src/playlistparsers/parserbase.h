@@ -25,6 +25,31 @@
 
 class LibraryBackendInterface;
 
+struct PlaylistSaveOptions {
+  enum FilePathStyle {
+    Paths_Automatic = 0,
+    Paths_Relative,
+    Paths_Absolute,
+  };
+
+  enum PathSeparatorStyle {
+    Separators_Automatic = 0,
+    Separators_Windows,
+    Separators_Unix,
+  };
+
+  PlaylistSaveOptions()
+      : filePathStyle(Paths_Automatic),
+        pathSeparatorStyle(Separators_Automatic) {}
+  PlaylistSaveOptions(FilePathStyle _filePathStyle,
+                      PathSeparatorStyle _pathSeparatorStyle)
+      : filePathStyle(_filePathStyle),
+        pathSeparatorStyle(_pathSeparatorStyle) {}
+
+  FilePathStyle filePathStyle;
+  PathSeparatorStyle pathSeparatorStyle;
+};
+
 class ParserBase : public QObject {
   Q_OBJECT
 
@@ -50,8 +75,9 @@ class ParserBase : public QObject {
   // from the parser's point of view).
   virtual SongList Load(QIODevice* device, const QString& playlist_path = "",
                         const QDir& dir = QDir()) const = 0;
-  virtual void Save(const SongList& songs, QIODevice* device,
-                    const QDir& dir = QDir()) const = 0;
+  virtual void Save(
+      const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
+      const PlaylistSaveOptions& options = PlaylistSaveOptions()) const = 0;
 
  protected:
   // Loads a song.  If filename_or_url is a URL (with a scheme other than
@@ -65,10 +91,11 @@ class ParserBase : public QObject {
   void LoadSong(const QString& filename_or_url, qint64 beginning,
                 const QDir& dir, Song* song) const;
 
-  // If the URL is a file:// URL then returns its path relative to the
-  // directory.  Otherwise returns the URL as is.
+  // If the URL is a file:// URL then returns its path (according to the
+  // PlaylistSaveOptions).  Otherwise returns the URL as is.
   // This function should always be used when saving a playlist.
-  QString URLOrRelativeFilename(const QUrl& url, const QDir& dir) const;
+  QString URLOrFilename(const QUrl& url, const QDir& dir,
+                        const PlaylistSaveOptions& options) const;
 
  private:
   LibraryBackendInterface* library_;

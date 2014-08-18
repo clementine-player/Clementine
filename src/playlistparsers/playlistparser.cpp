@@ -130,8 +130,8 @@ SongList PlaylistParser::LoadFromDevice(QIODevice* device,
   return parser->Load(device, path_hint, dir_hint);
 }
 
-void PlaylistParser::Save(const SongList& songs,
-                          const QString& filename) const {
+void PlaylistParser::Save(const SongList& songs, const QString& filename,
+                          const PlaylistSaveOptions& options) const {
   QFileInfo info(filename);
 
   // Find a parser that supports this file extension
@@ -145,5 +145,5 @@ void PlaylistParser::Save(const SongList& songs,
   QFile file(filename);
   file.open(QIODevice::WriteOnly);
 
-  return parser->Save(songs, &file, info.absolutePath());
+  return parser->Save(songs, &file, info.absolutePath(), options);
 }

@@ -15,34 +15,31 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef XSPFPARSER_H
-#define XSPFPARSER_H
+#ifndef PLAYLISTSAVEOPTIONSDIALOG_H
+#define PLAYLISTSAVEOPTIONSDIALOG_H
 
-#include "xmlparser.h"
+#include <QDialog>
 
-#include <QXmlStreamReader>
+struct PlaylistSaveOptions;
 
-class QDomDocument;
-class QDomNode;
+namespace Ui {
+class PlaylistSaveOptionsDialog;
+}
 
-class XSPFParser : public XMLParser {
+class PlaylistSaveOptionsDialog : public QDialog {
   Q_OBJECT
 
  public:
-  XSPFParser(LibraryBackendInterface* library, QObject* parent = nullptr);
+  explicit PlaylistSaveOptionsDialog(QWidget* parent = 0);
+  ~PlaylistSaveOptionsDialog();
 
-  QString name() const { return "XSPF"; }
-  QStringList file_extensions() const { return QStringList() << "xspf"; }
-
-  bool TryMagic(const QByteArray& data) const;
-
-  SongList Load(QIODevice* device, const QString& playlist_path = "",
-                const QDir& dir = QDir()) const;
-  void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
-            const PlaylistSaveOptions& options = PlaylistSaveOptions()) const;
+  void accept();
+  PlaylistSaveOptions options() const;
 
  private:
-  Song ParseTrack(QXmlStreamReader* reader, const QDir& dir) const;
+  static const char* kSettingsGroup;
+
+  Ui::PlaylistSaveOptionsDialog* ui;
 };
 
-#endif
+#endif  // PLAYLISTSAVEOPTIONSDIALOG_H

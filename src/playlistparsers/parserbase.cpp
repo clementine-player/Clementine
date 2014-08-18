@@ -85,15 +85,53 @@ Song ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
   return song;
 }
 
-QString ParserBase::URLOrRelativeFilename(const QUrl& url,
-                                          const QDir& dir) const {
+QString ParserBase::URLOrFilename(const QUrl& url, const QDir& dir,
+                                  const PlaylistSaveOptions& options) const {
   if (url.scheme() != "file") return url.toString();
 
-  const QString filename = url.toLocalFile();
-  if (QDir::isAbsolutePath(filename)) {
-    const QString relative = dir.relativeFilePath(filename);
+  QString filename = url.toLocalFile();
 
-    if (!relative.startsWith("../")) return relative;
+  switch (options.filePathStyle) {
+    // Force relative paths
+    case PlaylistSaveOptions::Paths_Relative:
+      filename = dir.relativeFilePath(filename);
+      break;
+
+    // Force absolute paths
+    case PlaylistSaveOptions::Paths_Absolute:
+      // Can a path in Clementine ever be relative at this point?
+      if (!QDir::isAbsolutePath(filename)) {
+        filename = dir.absoluteFilePath(filename);
+      }
+      break;
+
+    // Use relative path only if it's inside the directory
+    case PlaylistSaveOptions::Paths_Automatic:
+    default:
+      const QString relative = dir.relativeFilePath(filename);
+      // absoluteFilePath() if not using relative?
+      if (!relative.startsWith("../")) {
+        filename = relative;
+      }
+      break;
   }
+
+  switch (options.pathSeparatorStyle) {
+    // Use Windows path separators \like\this
+    case PlaylistSaveOptions::Separators_Windows:
+      filename = filename.replace('/', '\\');
+      break;
+
+    // Use Unix path separators /like/this
+    case PlaylistSaveOptions::Separators_Unix:
+      // Clementine always uses Unix path separators internally
+      break;
+
+    // Use native path separators
+    case PlaylistSaveOptions::Separators_Automatic:
+      filename = QDir::toNativeSeparators(filename);
+      break;
+  }
+
   return filename;
 }

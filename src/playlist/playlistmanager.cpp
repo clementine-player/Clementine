@@ -18,6 +18,7 @@
 #include "playlistbackend.h"
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
+#include "playlistsaveoptionsdialog.h"
 #include "playlistview.h"
 #include "core/application.h"
 #include "core/logging.h"
@@ -27,6 +28,7 @@
 #include "library/librarybackend.h"
 #include "library/libraryplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
+#include "playlistparsers/parserbase.h"
 #include "smartplaylists/generator.h"
 
 #include <QFileDialog>
@@ -173,9 +175,10 @@ void PlaylistManager::Load(const QString& filename) {
   playlist->InsertUrls(urls << QUrl::fromLocalFile(filename));
 }
 
-void PlaylistManager::Save(int id, const QString& filename) {
+void PlaylistManager::Save(int id, const QString& filename,
+                           const PlaylistSaveOptions& options) {
   if (playlists_.contains(id)) {
-    parser_->Save(playlist(id)->GetAllSongs(), filename);
+    parser_->Save(playlist(id)->GetAllSongs(), filename, options);
   } else {
     // Playlist is not in the playlist manager: probably save action was
     // triggered
@@ -185,16 +188,17 @@ void PlaylistManager::Save(int id, const QString& filename) {
     watcher->setFuture(future);
 
     NewClosure(watcher, SIGNAL(finished()), this,
-               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString)),
-               watcher, filename);
+               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString,
+                                               PlaylistSaveOptions)),
+               watcher, filename, options);
   }
 }
 
-void PlaylistManager::ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
-                                                 const QString& filename) {
-
+void PlaylistManager::ItemsLoadedForSavePlaylist(
+    QFutureWatcher<Song>* watcher, const QString& filename,
+    const PlaylistSaveOptions& options) {
   SongList song_list = watcher->future().results();
-  parser_->Save(song_list, filename);
+  parser_->Save(song_list, filename, options);
 }
 
 void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
@@ -225,9 +229,16 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
 
   if (filename.isNull()) return;
 
+  PlaylistSaveOptionsDialog optionsDialog(nullptr);
+  optionsDialog.setModal(true);
+  if (optionsDialog.exec() != QDialog::Accepted) {
+    return;
+  }
+  PlaylistSaveOptions options = optionsDialog.options();
+
   settings_.setValue("last_save_playlist", filename);
 
-  Save(id == -1 ? current_id() : id, filename);
+  Save(id == -1 ? current_id() : id, filename, options);
 }
 
 void PlaylistManager::Rename(int id, const QString& new_name) {

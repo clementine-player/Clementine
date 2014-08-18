@@ -100,8 +100,8 @@ return_song:
   return song;
 }
 
-void XSPFParser::Save(const SongList& songs, QIODevice* device,
-                      const QDir& dir) const {
+void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
+                      const PlaylistSaveOptions& options) const {
   QFileInfo file;
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
