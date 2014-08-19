@@ -19,6 +19,8 @@
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
+#include "playlist/playlist.h"
+
 #include <QBuffer>
 #include <QtDebug>
 

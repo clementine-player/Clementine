@@ -51,9 +51,9 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
       filter_timer_(new QTimer(this)) {
   ui_->setupUi(this);
 
-  ui_->file_path_box->addItem("Automatic");
-  ui_->file_path_box->addItem("Absolute");
-  ui_->file_path_box->addItem("Relative");
+  ui_->file_path_box->addItem(tr("Automatic"));
+  ui_->file_path_box->addItem(tr("Absolute"));
+  ui_->file_path_box->addItem(tr("Relative"));
 
   connect(ui_->file_path_box, SIGNAL(currentIndexChanged(int)),
           SLOT(PathSettingChanged(int)));
@@ -111,7 +111,7 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
 PlaylistContainer::~PlaylistContainer() { delete ui_; }
 
 void PlaylistContainer::ReloadSettings() {
-  bool show_menu = settings_.value(Playlist::kQuickChangeMenu, true).toBool();
+  bool show_menu = settings_.value(Playlist::kQuickChangeMenu, false).toBool();
   ui_->line->setVisible(show_menu);
   ui_->file_path_label->setVisible(show_menu);
   ui_->file_path_box->setVisible(show_menu);
