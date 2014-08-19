@@ -105,15 +105,23 @@ bool M3UParser::ParseMetadata(const QString& line,
 void M3UParser::Save(const SongList& songs, QIODevice* device,
                      const QDir& dir) const {
   device->write("#EXTM3U\n");
+
+  QSettings s;
+  s.beginGroup(Playlist::kSettingsGroup);
+  bool writeMetadata = s.value(Playlist::kWriteMetadata, true).toBool();
+  s.endGroup();
+
   for (const Song& song : songs) {
     if (song.url().isEmpty()) {
       continue;
     }
-    QString meta = QString("#EXTINF:%1,%2 - %3\n")
-                       .arg(song.length_nanosec() / kNsecPerSec)
-                       .arg(song.artist())
-                       .arg(song.title());
-    device->write(meta.toUtf8());
+    if (writeMetadata) {
+      QString meta = QString("#EXTINF:%1,%2 - %3\n")
+                         .arg(song.length_nanosec() / kNsecPerSec)
+                         .arg(song.artist())
+                         .arg(song.title());
+      device->write(meta.toUtf8());
+    }
     device->write(URLOrRelativeFilename(song.url(), dir).toUtf8());
     device->write("\n");
   }
