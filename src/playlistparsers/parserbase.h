@@ -22,7 +22,6 @@
 #include <QDir>
 
 #include "core/song.h"
-#include "playlist/playlist.h"
 
 class LibraryBackendInterface;
 

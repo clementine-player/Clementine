@@ -19,6 +19,8 @@
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 
+#include "playlist/playlist.h"
+
 #include <QDomDocument>
 #include <QFile>
 #include <QIODevice>
@@ -113,7 +115,7 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
 
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
-  bool writeMetadata = s.value("write_metadata", true).toBool();
+  bool writeMetadata = s.value(Playlist::kWriteMetadata, true).toBool();
   s.endGroup();
 
   StreamElement tracklist("trackList", &writer);

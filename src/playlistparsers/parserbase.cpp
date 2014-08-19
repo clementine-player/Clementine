@@ -92,7 +92,7 @@ QString ParserBase::URLOrRelativeFilename(const QUrl& url,
 
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
-  int p = s.value("path_type", Playlist::Path_Automatic).toInt();
+  int p = s.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
   const Playlist::Path path = static_cast<Playlist::Path>(p);
   s.endGroup();
 
