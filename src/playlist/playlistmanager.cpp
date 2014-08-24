@@ -336,6 +336,10 @@ void PlaylistManager::RemoveDuplicatesCurrent() {
   current()->RemoveDuplicateSongs();
 }
 
+void PlaylistManager::RemoveUnavailableCurrent() {
+  current()->RemoveUnavailableSongs();
+}
+
 void PlaylistManager::SetActivePlaying() { active()->Playing(); }
 
 void PlaylistManager::SetActivePaused() { active()->Paused(); }

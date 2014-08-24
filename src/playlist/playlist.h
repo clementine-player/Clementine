@@ -314,6 +314,7 @@ class Playlist : public QAbstractListModel {
 
   void Clear();
   void RemoveDuplicateSongs();
+  void RemoveUnavailableSongs();
   void Shuffle();
 
   void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
