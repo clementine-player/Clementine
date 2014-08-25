@@ -33,8 +33,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-08-14 10:08+0000\n"
-"Last-Translator: Анатолий Валерианович <ffox909@mail.ru>\n"
+"PO-Revision-Date: 2014-08-21 09:09+0000\n"
+"Last-Translator: Andrei Stepanov\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -79,7 +79,7 @@ msgstr " пунктов"
 #: ../bin/src/ui_notificationssettingspage.h:439
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
-msgstr "с"
+msgstr "секунд"
 
 #: ../bin/src/ui_querysortpage.h:144
 msgid " songs"
@@ -407,11 +407,15 @@ msgstr "О Clementine"
 msgid "About Qt..."
 msgstr "Информация о Qt"
 
+#: playlist/playlistcontainer.cpp:55 ../bin/src/ui_behavioursettingspage.h:286
+msgid "Absolute"
+msgstr "Абсолютные"
+
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
-#: ../bin/src/ui_seafilesettingspage.h:169
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_seafilesettingspage.h:169
 msgid "Account details"
 msgstr "Данные учётной записи"
 
@@ -460,7 +464,7 @@ msgstr "Добавить другой поток…"
 msgid "Add directory..."
 msgstr "Добавить каталог…"
 
-#: ui/mainwindow.cpp:1825
+#: ui/mainwindow.cpp:1826
 msgid "Add file"
 msgstr "Добавить файл"
 
@@ -480,7 +484,7 @@ msgstr "Добавить файл..."
 msgid "Add files to transcode"
 msgstr "Конвертировать файлы"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1852 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1853 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "Добавить папку"
 
@@ -596,7 +600,7 @@ msgstr "Добавить в плейлисты Grooveshark"
 msgid "Add to My Music"
 msgstr "Добавить в Мою музыку"
 
-#: ui/mainwindow.cpp:1646
+#: ui/mainwindow.cpp:1647
 msgid "Add to another playlist"
 msgstr "Добавить в другой плейлист"
 
@@ -608,7 +612,7 @@ msgstr "Добавить в закладки"
 msgid "Add to playlist"
 msgstr "Добавить в плейлист"
 
-#: ../bin/src/ui_behavioursettingspage.h:230
+#: ../bin/src/ui_behavioursettingspage.h:276
 msgid "Add to the queue"
 msgstr "Добавить в очередь"
 
@@ -665,7 +669,7 @@ msgstr "После "
 msgid "After copying..."
 msgstr "После копирования..."
 
-#: playlist/playlist.cpp:1303 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -678,7 +682,7 @@ msgstr "Альбом"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (идеальная громкость всех дорожек)"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
@@ -750,16 +754,16 @@ msgstr "Разрешить mid/side кодирование"
 msgid "Alongside the originals"
 msgstr "Вместе с оригиналами"
 
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:255
 msgid "Always hide the main window"
 msgstr "Всегда скрывать главное окно"
 
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:254
 msgid "Always show the main window"
 msgstr "Всегда показывать главное окно"
 
-#: ../bin/src/ui_behavioursettingspage.h:222
-#: ../bin/src/ui_behavioursettingspage.h:236
+#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:282
 msgid "Always start playing"
 msgstr "Всегда начинать воспроизведение"
 
@@ -805,7 +809,7 @@ msgstr "Добавить файлы/URLs в плейлист"
 msgid "Append to current playlist"
 msgstr "Добавить в текущий плейлист"
 
-#: ../bin/src/ui_behavioursettingspage.h:227
+#: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Append to the playlist"
 msgstr "Добавить в плейлист"
 
@@ -832,7 +836,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Вы действительно хотите записывать статистику во все файлы композиций вашей фонотеки?"
 
-#: playlist/playlist.cpp:1301 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -879,6 +883,10 @@ msgstr "Авторы"
 msgid "Auto"
 msgstr "Авто"
 
+#: playlist/playlistcontainer.cpp:54 ../bin/src/ui_behavioursettingspage.h:285
+msgid "Automatic"
+msgstr "Автоматические"
+
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Автоматическое обновление"
@@ -903,7 +911,7 @@ msgstr "Примерный размер изображения"
 msgid "BBC Podcasts"
 msgstr "Подкасты BBC"
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1338 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
@@ -944,7 +952,7 @@ msgstr "Стандартный голубой"
 msgid "Basic audio type"
 msgstr "Базовый тип аудио"
 
-#: ../bin/src/ui_behavioursettingspage.h:197
+#: ../bin/src/ui_behavioursettingspage.h:243
 msgid "Behavior"
 msgstr "Поведение"
 
@@ -957,7 +965,7 @@ msgstr "Наилучший"
 msgid "Biography from %1"
 msgstr "Биография из %1"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Скорость передачи данных"
 
@@ -1278,7 +1286,7 @@ msgstr "Цвета"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделенный запятыми список \"класс:уровень\", где уровень от 0 до 3"
 
-#: playlist/playlist.cpp:1354 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1357 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Комментарий"
@@ -1295,7 +1303,7 @@ msgstr "Заполнить поля автоматически"
 msgid "Complete tags automatically..."
 msgstr "Заполнить поля автоматически..."
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
@@ -1598,11 +1606,11 @@ msgid ""
 "recover your database"
 msgstr "Обнаружен сбой в базе данных. Инструкции по восстановлению можно прочитать по адресу https://code.google.com/p/clementine-player/wiki/DatabaseCorruption"
 
-#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Дата создания"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1352 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Дата изменения"
 
@@ -1657,7 +1665,7 @@ msgid "Delete downloaded data"
 msgstr "Удалить загруженные данные"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2188 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2189 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Удалить файлы"
 
@@ -1690,11 +1698,11 @@ msgstr "Удалить оригинальные файлы"
 msgid "Deleting files"
 msgstr "Удаление файлов"
 
-#: ui/mainwindow.cpp:1567
+#: ui/mainwindow.cpp:1568
 msgid "Dequeue selected tracks"
 msgstr "Убрать из очереди выбранные композиции"
 
-#: ui/mainwindow.cpp:1565
+#: ui/mainwindow.cpp:1566
 msgid "Dequeue track"
 msgstr "Убрать из очереди композицию"
 
@@ -1774,7 +1782,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Отключено"
 
-#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Диск"
@@ -1843,9 +1851,9 @@ msgstr "Пожертвования"
 msgid "Double click to open"
 msgstr "Двойной щелчок для открытия"
 
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:270
 msgid "Double clicking a song will..."
-msgstr "Двойной щелчок на песне..."
+msgstr "Двойной щелчок по песне..."
 
 #: podcasts/podcastservice.cpp:437
 #, c-format, qt-plural-format
@@ -1946,7 +1954,7 @@ msgstr "Случайный динамичный микс"
 msgid "Edit smart playlist..."
 msgstr "Изменить умный плейлист…"
 
-#: ui/mainwindow.cpp:1609
+#: ui/mainwindow.cpp:1610
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Изменить тег \"%1\""
@@ -1996,7 +2004,7 @@ msgstr "Включить эквалайзер"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Включить горячие клавиши, только когда окно в фокусе"
 
-#: ../bin/src/ui_behavioursettingspage.h:216
+#: ../bin/src/ui_behavioursettingspage.h:262
 msgid "Enable song metadata inline edition with click"
 msgstr "Включить редактирование метаданных песни по клику"
 
@@ -2086,7 +2094,7 @@ msgstr "Аналогично --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1891 ui/mainwindow.cpp:2138 ui/mainwindow.cpp:2286
+#: ui/mainwindow.cpp:1892 ui/mainwindow.cpp:2139 ui/mainwindow.cpp:2287
 #: internet/vkservice.cpp:621
 msgid "Error"
 msgstr "Ошибка"
@@ -2251,7 +2259,7 @@ msgstr "Затухание звука"
 msgid "Fading duration"
 msgstr "Длительность затухания"
 
-#: ui/mainwindow.cpp:1892
+#: ui/mainwindow.cpp:1893
 msgid "Failed reading CD drive"
 msgstr "Не удалось прочесть CD-привод"
 
@@ -2310,6 +2318,10 @@ msgstr "Ошибка получения обложки"
 msgid "File Format"
 msgstr "Формат файла"
 
+#: ../bin/src/ui_playlistcontainer.h:173
+msgid "File Paths:"
+msgstr "Пути файлов:"
+
 #: ui/organisedialog.cpp:77
 msgid "File extension"
 msgstr "Расширение файла"
@@ -2318,11 +2330,11 @@ msgstr "Расширение файла"
 msgid "File formats"
 msgstr "Форматы файлов"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "Полное имя файла"
 
-#: playlist/playlist.cpp:1343
+#: playlist/playlist.cpp:1346
 msgid "File name (without path)"
 msgstr "Имя файла"
 
@@ -2330,11 +2342,11 @@ msgstr "Имя файла"
 msgid "File name pattern:"
 msgstr "Шаблон имени файла:"
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "Размер файла"
 
-#: playlist/playlist.cpp:1347 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1350 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
@@ -2409,7 +2421,7 @@ msgstr "Команда \"Забыть носитель\", удалит носи�
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:143
+#: ../bin/src/ui_playlistcontainer.h:172
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:137 ../bin/src/ui_searchpreview.h:104
@@ -2464,7 +2476,7 @@ msgstr "Общие"
 msgid "General settings"
 msgstr "Общие настройки"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
@@ -2517,7 +2529,7 @@ msgstr "Диск Google"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Получено %1 обложек из %2 (%3 загрузить не удалось)"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
+#: ../bin/src/ui_behavioursettingspage.h:258
 msgid "Grey out non existent songs in my playlists"
 msgstr "Отмечать серым не существующие песни в моих плейлистах"
 
@@ -2573,7 +2585,7 @@ msgstr "Группировать по жанру/альбому"
 msgid "Group by Genre/Artist/Album"
 msgstr "Группировать по жанру/исполнителю/альбому"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Группа"
@@ -2645,7 +2657,7 @@ msgstr "Значки сверху"
 msgid "Identifying song"
 msgstr "Определение песни"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:260
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2834,7 +2846,7 @@ msgstr "Отображать кнопки в течении %1 секунд"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Отображать кнопки в течении %1 секунд…"
 
-#: ../bin/src/ui_behavioursettingspage.h:199
+#: ../bin/src/ui_behavioursettingspage.h:245
 msgid "Keep running in the background when the window is closed"
 msgstr "Продолжить работу в фоновом режиме при закрытии окна"
 
@@ -2847,7 +2859,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Котята"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:247
 msgid "Language"
 msgstr "Язык"
 
@@ -2875,7 +2887,7 @@ msgstr "Широкая боковая панель"
 msgid "Last played"
 msgstr "Последнее прослушивание"
 
-#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Последнее прослушивание"
@@ -2916,7 +2928,7 @@ msgstr "Нелюбимые треки"
 msgid "Left"
 msgstr "Левый канал"
 
-#: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Длина"
@@ -2930,7 +2942,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Расширенная группировка фонотеки"
 
-#: ui/mainwindow.cpp:2410
+#: ui/mainwindow.cpp:2411
 msgid "Library rescan notice"
 msgstr "Уведомление о сканировании фонотеки"
 
@@ -2971,7 +2983,7 @@ msgstr "Загрузить обложку с диска"
 msgid "Load cover from disk..."
 msgstr "Загрузить обложку с диска..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:317
 msgid "Load playlist"
 msgstr "Загрузить плейлист"
 
@@ -3026,13 +3038,12 @@ msgstr "Загрузка файлов или ссылок с заменой те
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
-#: ../bin/src/ui_seafilesettingspage.h:173
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:219 ../bin/src/ui_seafilesettingspage.h:173
 msgid "Login"
 msgstr "Вход"
 
@@ -3216,7 +3227,7 @@ msgstr "Режим моно"
 msgid "Months"
 msgstr "Месяцев"
 
-#: playlist/playlist.cpp:1358
+#: playlist/playlist.cpp:1361
 msgid "Mood"
 msgstr "Настроение"
 
@@ -3259,7 +3270,7 @@ msgstr "Переместить в фонотеку..."
 msgid "Move up"
 msgstr "Переместить вверх"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1826
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1827
 msgid "Music"
 msgstr "Музыка"
 
@@ -3315,8 +3326,8 @@ msgstr "Никогда"
 msgid "Never played"
 msgstr "Никогда не прослушивались"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
-#: ../bin/src/ui_behavioursettingspage.h:234
+#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:280
 msgid "Never start playing"
 msgstr "Никогда не начинать проигрывать"
 
@@ -3326,7 +3337,7 @@ msgstr "Никогда не начинать проигрывать"
 msgid "New folder"
 msgstr "Новая папка"
 
-#: ui/mainwindow.cpp:1663 ../bin/src/ui_mainwindow.h:687
+#: ui/mainwindow.cpp:1664 ../bin/src/ui_mainwindow.h:687
 msgid "New playlist"
 msgstr "Новый плейлист"
 
@@ -3375,7 +3386,7 @@ msgstr "Нет обложек для экспорта."
 msgid "No long blocks"
 msgstr "Без длинных блоков"
 
-#: playlist/playlistcontainer.cpp:370
+#: playlist/playlistcontainer.cpp:402
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Совпадений не найдено. Очистите строку поиска, чтобы увидеть плейлист снова."
@@ -3389,7 +3400,7 @@ msgstr "Без коротких блоков"
 msgid "None"
 msgstr "Ничего"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2139 ui/mainwindow.cpp:2287
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2140 ui/mainwindow.cpp:2288
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ни одна из выбранных песен не будет скопирована на устройство"
 
@@ -3546,7 +3557,7 @@ msgstr "Открыть в Диске Google"
 msgid "Open in new playlist"
 msgstr "Открыть в новом плейлисте"
 
-#: ../bin/src/ui_behavioursettingspage.h:229
+#: ../bin/src/ui_behavioursettingspage.h:275
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Открыть в новом плейлисте"
@@ -3646,7 +3657,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Пароль"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1025 ui/mainwindow.cpp:1476
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1026 ui/mainwindow.cpp:1477
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Пауза"
@@ -3659,7 +3670,7 @@ msgstr "Приостановить воспроизведение"
 msgid "Paused"
 msgstr "Приостановлен"
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "Исполнитель"
@@ -3672,14 +3683,14 @@ msgstr "Пиксель"
 msgid "Plain sidebar"
 msgstr "Нормальная боковая панель"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:582 ui/mainwindow.cpp:993
-#: ui/mainwindow.cpp:1011 ui/mainwindow.cpp:1479 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:582 ui/mainwindow.cpp:994
+#: ui/mainwindow.cpp:1012 ui/mainwindow.cpp:1480 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:638
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
 msgstr "Воспроизвести"
 
-#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Количество проигрываний"
 
@@ -3687,8 +3698,8 @@ msgstr "Количество проигрываний"
 msgid "Play if stopped, pause if playing"
 msgstr "Воспроизвести если остановлено, приостановить если воспроизводится"
 
-#: ../bin/src/ui_behavioursettingspage.h:221
-#: ../bin/src/ui_behavioursettingspage.h:235
+#: ../bin/src/ui_behavioursettingspage.h:267
+#: ../bin/src/ui_behavioursettingspage.h:281
 msgid "Play if there is nothing already playing"
 msgstr "Проиграть, если ничего не проигрывается"
 
@@ -3708,7 +3719,7 @@ msgstr "Проигрывание"
 msgid "Player options"
 msgstr "Настройки проигрывателя"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:313 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
@@ -3895,12 +3906,12 @@ msgstr "Опрашиваем устройство..."
 msgid "Queue Manager"
 msgstr "Управление очередью"
 
-#: ui/mainwindow.cpp:1571
+#: ui/mainwindow.cpp:1572
 msgid "Queue selected tracks"
 msgstr "Добавить в очередь выбранные композиции"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1569
+#: ui/mainwindow.cpp:1570
 msgid "Queue track"
 msgstr "Добавить в очередь композицию"
 
@@ -3949,7 +3960,7 @@ msgstr "Оценка текущей песни 4 звезды"
 msgid "Rate the current song 5 stars"
 msgstr "Оценка текущей песни 5 звёзд"
 
-#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1327 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Рейтинг"
 
@@ -3986,11 +3997,15 @@ msgstr "Обновить потоки"
 msgid "Reggae"
 msgstr "Reggae"
 
+#: playlist/playlistcontainer.cpp:56 ../bin/src/ui_behavioursettingspage.h:287
+msgid "Relative"
+msgstr "Относительные"
+
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
 msgstr "Запомнить движение ульта Wii"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:256
 msgid "Remember from last time"
 msgstr "Вернуть предыдущее состояние"
 
@@ -4086,7 +4101,7 @@ msgstr "Повторять композицию"
 msgid "Replace current playlist"
 msgstr "Заменить текущий плейлист"
 
-#: ../bin/src/ui_behavioursettingspage.h:228
+#: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Replace the playlist"
 msgstr "Заменить плейлист"
 
@@ -4127,7 +4142,7 @@ msgstr "Перезапустить композицию, или воспроиз
 msgid "Restrict to ASCII characters"
 msgstr "Ограничить только символами ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
+#: ../bin/src/ui_behavioursettingspage.h:257
 msgid "Resume playback on start"
 msgstr "Продолжить воспроизведение при запуске"
 
@@ -4189,7 +4204,7 @@ msgstr "Безопасно извлечь устройство"
 msgid "Safely remove the device after copying"
 msgstr "Безопасно извлечь устройство после копирования"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Частота"
 
@@ -4259,7 +4274,7 @@ msgstr "Профиль Scalable sampling rate (SSR)"
 msgid "Scale size"
 msgstr "Масштаб"
 
-#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Счет"
 
@@ -4416,7 +4431,7 @@ msgstr "Параметры сервера"
 msgid "Service offline"
 msgstr "Служба недоступна"
 
-#: ui/mainwindow.cpp:1608
+#: ui/mainwindow.cpp:1609
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Установить %1 в \"%2\"..."
@@ -4541,6 +4556,10 @@ msgstr "Показывать только без тегов"
 msgid "Show playing song on your page"
 msgstr "Показать проигрываемую песню на Вашей странице"
 
+#: ../bin/src/ui_behavioursettingspage.h:288
+msgid "Show quick change menu"
+msgstr "Показывать меню быстрой правки"
+
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
 msgstr "Показать поисковые подсказки"
@@ -4553,7 +4572,7 @@ msgstr "Показывать кнопку \"В любимые\""
 msgid "Show the scrobble button in the main window"
 msgstr "Показывать кнопку скробблинга в главном окне"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:244
 msgid "Show tray icon"
 msgstr "Показывать значок в системном лотке"
 
@@ -4617,7 +4636,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Переместить назад в плейлисте"
 
-#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Пропустить подсчет"
 
@@ -4625,11 +4644,11 @@ msgstr "Пропустить подсчет"
 msgid "Skip forwards in playlist"
 msgstr "Переместить вперед в плейлисте"
 
-#: ui/mainwindow.cpp:1582
+#: ui/mainwindow.cpp:1583
 msgid "Skip selected tracks"
 msgstr "Пропустить выбранные композиции"
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1581
 msgid "Skip track"
 msgstr "Пропустить композицию"
 
@@ -4701,7 +4720,7 @@ msgstr "Сортировка"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1356
+#: playlist/playlist.cpp:1359
 msgid "Source"
 msgstr "Источник"
 
@@ -4827,7 +4846,7 @@ msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:36
 msgid "Success!"
-msgstr "Успешно!"
+msgstr "Успех!"
 
 #: transcoder/transcoder.cpp:188
 #, qt-format
@@ -4933,7 +4952,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Пробный период для сервера Subsonic закончен. Пожалуйста, поддержите разработчика, чтобы получить лицензионный ключ. Посетите subsonic.org для подробной информации."
 
-#: ui/mainwindow.cpp:2401
+#: ui/mainwindow.cpp:2402
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4974,7 +4993,7 @@ msgid ""
 "continue?"
 msgstr "Эти файлы будут удалены с устройства. Вы действительно хотите продолжить?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2189 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2190 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5046,7 +5065,7 @@ msgstr "Поток только для платных подписчиков"
 msgid "This type of device is not supported: %1"
 msgstr "Не поддерживаемый тип устройства: %1"
 
-#: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1302 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -5071,7 +5090,7 @@ msgstr "Включить OSD"
 msgid "Toggle fullscreen"
 msgstr "Развернуть на весь экран"
 
-#: ui/mainwindow.cpp:1573
+#: ui/mainwindow.cpp:1574
 msgid "Toggle queue status"
 msgstr "Переключить состояние очереди"
 
@@ -5107,7 +5126,7 @@ msgstr "Всего передано байт"
 msgid "Total network requests made"
 msgstr "Всего выполнено сетевых запросов"
 
-#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -5191,11 +5210,11 @@ msgstr "Неизвестная ошибка"
 msgid "Unset cover"
 msgstr "Удалить обложку"
 
-#: ui/mainwindow.cpp:1578
+#: ui/mainwindow.cpp:1579
 msgid "Unskip selected tracks"
 msgstr "Не пропускать выбранные композиции"
 
-#: ui/mainwindow.cpp:1576
+#: ui/mainwindow.cpp:1577
 msgid "Unskip track"
 msgstr "Не пропускать композицию"
 
@@ -5305,7 +5324,7 @@ msgstr "Уведомлять о статусе пульта Wii"
 msgid "Use temporal noise shaping"
 msgstr "Использовать временнóе сглаживание шумов"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:250
 msgid "Use the system default"
 msgstr "Использовать стандарт системы"
 
@@ -5343,9 +5362,9 @@ msgstr "Интерфейс"
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Using the menu to add a song will..."
-msgstr "Использование Меню для добавления песни...."
+msgstr "После добавления песни через меню..."
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:173
@@ -5408,7 +5427,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Оповещать при закрытии вкладки плейлиста"
 
@@ -5424,7 +5443,7 @@ msgstr "Веб-сайт"
 msgid "Weeks"
 msgstr "Недель"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:253
 msgid "When Clementine starts"
 msgstr "При запуске Clementine"
 
@@ -5433,6 +5452,10 @@ msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr "При поиске обложек альбомов Clementine будет сначала искать файлы изображений, которые содержат одно из этих слов.\nПри отсутствии совпадений будет использовано наибольшее изображение в каталоге."
+
+#: ../bin/src/ui_behavioursettingspage.h:284
+msgid "When saving a playlist, file paths should be"
+msgstr "При сохранении плейлистов пути файлов должны быть:"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
@@ -5506,7 +5529,7 @@ msgid ""
 "well?"
 msgstr "Хотите ли вы переместить и другие песни из этого альбома в Разные исполнители?"
 
-#: ui/mainwindow.cpp:2408
+#: ui/mainwindow.cpp:2409
 msgid "Would you like to run a full rescan right now?"
 msgstr "Желаете запустить повторное сканирование?"
 
@@ -5514,11 +5537,15 @@ msgstr "Желаете запустить повторное сканирова�
 msgid "Write all songs statistics into songs' files"
 msgstr "Записать все статистические данные в файлы композиций"
 
+#: ../bin/src/ui_behavioursettingspage.h:289
+msgid "Write metadata"
+msgstr "Записывать мета-данные"
+
 #: internet/subsonicsettingspage.cpp:80
 msgid "Wrong username or password."
 msgstr "Неверное имя или пароль"
 
-#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5641,7 +5668,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Откройте Настройки системы и включите функцию \"<span style=\" font-style:italic;\">Разрешить доступ для вспомогательных устройств</span>\" для использования глобальных горячих клавиш в Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:252
 msgid "You will need to restart Clementine if you change the language."
 msgstr "После смены языка потребуется перезапуск"
 

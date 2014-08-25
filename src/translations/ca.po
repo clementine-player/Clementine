@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-08-12 21:30+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-08-21 01:45+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -386,11 +386,15 @@ msgstr "Quant al Clementine…"
 msgid "About Qt..."
 msgstr "Quant al Qt…"
 
+#: playlist/playlistcontainer.cpp:55 ../bin/src/ui_behavioursettingspage.h:286
+msgid "Absolute"
+msgstr "Absoluts"
+
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
-#: ../bin/src/ui_seafilesettingspage.h:169
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_seafilesettingspage.h:169
 msgid "Account details"
 msgstr "Detalls del compte"
 
@@ -439,7 +443,7 @@ msgstr "Afegeix un altre flux…"
 msgid "Add directory..."
 msgstr "Afegeix un directori…"
 
-#: ui/mainwindow.cpp:1825
+#: ui/mainwindow.cpp:1826
 msgid "Add file"
 msgstr "Afegeix un fitxer"
 
@@ -459,7 +463,7 @@ msgstr "Afegeix un fitxer…"
 msgid "Add files to transcode"
 msgstr "Afegeix fitxers per convertir-los"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1852 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1853 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "Afegeix una carpeta"
 
@@ -575,7 +579,7 @@ msgstr "Afegeix a les llistes de reproducció de Grooveshark"
 msgid "Add to My Music"
 msgstr "Afegeix a La meva música"
 
-#: ui/mainwindow.cpp:1646
+#: ui/mainwindow.cpp:1647
 msgid "Add to another playlist"
 msgstr "Afegeix a una altra llista de reproducció"
 
@@ -587,7 +591,7 @@ msgstr "Afegeix als preferits"
 msgid "Add to playlist"
 msgstr "Afegeix a la llista de reproducció"
 
-#: ../bin/src/ui_behavioursettingspage.h:230
+#: ../bin/src/ui_behavioursettingspage.h:276
 msgid "Add to the queue"
 msgstr "Afegeix a la cua"
 
@@ -644,7 +648,7 @@ msgstr "Després de"
 msgid "After copying..."
 msgstr "Després de copiar…"
 
-#: playlist/playlist.cpp:1303 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -657,7 +661,7 @@ msgstr "Àlbum"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Àlbum (volum ideal per a totes les pistes)"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
@@ -729,16 +733,16 @@ msgstr "Permet la codificació centre/costats"
 msgid "Alongside the originals"
 msgstr "Al costat dels originals"
 
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:255
 msgid "Always hide the main window"
 msgstr "Oculta sempre la finestra principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:254
 msgid "Always show the main window"
 msgstr "Mostra sempre la finestra principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:222
-#: ../bin/src/ui_behavioursettingspage.h:236
+#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:282
 msgid "Always start playing"
 msgstr "Comença sempre la reproducció"
 
@@ -784,7 +788,7 @@ msgstr "Afegeix fitxers/URL a la llista de reproducció"
 msgid "Append to current playlist"
 msgstr "Afegeix a la llista de reproducció actual"
 
-#: ../bin/src/ui_behavioursettingspage.h:227
+#: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Append to the playlist"
 msgstr "Afegeix a la llista de reproducció"
 
@@ -811,7 +815,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Esteu segur que voleu escriure les estadístiques de les cançons en tots els fitxers de la vostra col·lecció?"
 
-#: playlist/playlist.cpp:1301 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -858,6 +862,10 @@ msgstr "Autors"
 msgid "Auto"
 msgstr "Auto"
 
+#: playlist/playlistcontainer.cpp:54 ../bin/src/ui_behavioursettingspage.h:285
+msgid "Automatic"
+msgstr "Automàtic"
+
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Actualització automàtica"
@@ -882,7 +890,7 @@ msgstr "Mida d’imatge mitjà"
 msgid "BBC Podcasts"
 msgstr "Podcasts de la BBC"
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1338 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "PPM"
@@ -923,7 +931,7 @@ msgstr "Blau bàsic"
 msgid "Basic audio type"
 msgstr "Tipus d’àudio bàsic"
 
-#: ../bin/src/ui_behavioursettingspage.h:197
+#: ../bin/src/ui_behavioursettingspage.h:243
 msgid "Behavior"
 msgstr "Comportament"
 
@@ -936,7 +944,7 @@ msgstr "Millor"
 msgid "Biography from %1"
 msgstr "Biografia de %1"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Taxa de bits"
 
@@ -1257,7 +1265,7 @@ msgstr "Colors"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Llista separada per comes de classe:nivell, el nivell és 0-3"
 
-#: playlist/playlist.cpp:1354 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1357 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Comentari"
@@ -1274,7 +1282,7 @@ msgstr "Completa les etiquetes automàticament"
 msgid "Complete tags automatically..."
 msgstr "Completa les etiquetes automàticament…"
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
@@ -1577,11 +1585,11 @@ msgid ""
 "recover your database"
 msgstr "S’ha detectat un dany en la base de dades. Consulteu https://code.google.com/p/clementine-player/wiki/DatabaseCorruption per obtenir instruccions per recuperar la base de dades"
 
-#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Data de creació"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1352 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Data de modificació"
 
@@ -1636,7 +1644,7 @@ msgid "Delete downloaded data"
 msgstr "Esborra les dades baixades"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2188 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2189 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Suprimeix els fitxers"
 
@@ -1669,11 +1677,11 @@ msgstr "Suprimeix els fitxers originals"
 msgid "Deleting files"
 msgstr "S’estan suprimint els fitxers"
 
-#: ui/mainwindow.cpp:1567
+#: ui/mainwindow.cpp:1568
 msgid "Dequeue selected tracks"
 msgstr "Treure de la cua les pistes seleccionades"
 
-#: ui/mainwindow.cpp:1565
+#: ui/mainwindow.cpp:1566
 msgid "Dequeue track"
 msgstr "Treure de la cua la pista"
 
@@ -1753,7 +1761,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Inhabilitat"
 
-#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Disc"
@@ -1822,7 +1830,7 @@ msgstr "Feu una donació"
 msgid "Double click to open"
 msgstr "Feu doble clic per obrir"
 
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:270
 msgid "Double clicking a song will..."
 msgstr "En fer doble clic a una cançó..."
 
@@ -1925,7 +1933,7 @@ msgstr "Mescla dinàmica aleatòria"
 msgid "Edit smart playlist..."
 msgstr "Edita la llista de reproducció intel·ligent"
 
-#: ui/mainwindow.cpp:1609
+#: ui/mainwindow.cpp:1610
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Edita l’etiqueta «%1»…"
@@ -1975,7 +1983,7 @@ msgstr "Activa l’equalitzador"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Activa les dreceres només quan el Clementine tingui el focus"
 
-#: ../bin/src/ui_behavioursettingspage.h:216
+#: ../bin/src/ui_behavioursettingspage.h:262
 msgid "Enable song metadata inline edition with click"
 msgstr "Edita les metadades d’una cançó amb un clic"
 
@@ -2065,7 +2073,7 @@ msgstr "Equivalent a --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1891 ui/mainwindow.cpp:2138 ui/mainwindow.cpp:2286
+#: ui/mainwindow.cpp:1892 ui/mainwindow.cpp:2139 ui/mainwindow.cpp:2287
 #: internet/vkservice.cpp:621
 msgid "Error"
 msgstr "Error"
@@ -2230,7 +2238,7 @@ msgstr "Esvaïment"
 msgid "Fading duration"
 msgstr "Durada de l’esvaïment"
 
-#: ui/mainwindow.cpp:1892
+#: ui/mainwindow.cpp:1893
 msgid "Failed reading CD drive"
 msgstr "Ha fallat la lectura de la unitat de CD"
 
@@ -2289,6 +2297,10 @@ msgstr "S’ha produït un error en obtenir la caràtula"
 msgid "File Format"
 msgstr "Format del fitxer"
 
+#: ../bin/src/ui_playlistcontainer.h:173
+msgid "File Paths:"
+msgstr "Camins dels fitxers:"
+
 #: ui/organisedialog.cpp:77
 msgid "File extension"
 msgstr "Extensió del fitxer"
@@ -2297,11 +2309,11 @@ msgstr "Extensió del fitxer"
 msgid "File formats"
 msgstr "Format dels fitxers"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "Nom del fitxer"
 
-#: playlist/playlist.cpp:1343
+#: playlist/playlist.cpp:1346
 msgid "File name (without path)"
 msgstr "Nom del fitxer (sense camí)"
 
@@ -2309,11 +2321,11 @@ msgstr "Nom del fitxer (sense camí)"
 msgid "File name pattern:"
 msgstr "Patró del nom del fitxer:"
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "Mida del fitxer"
 
-#: playlist/playlist.cpp:1347 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1350 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
@@ -2388,7 +2400,7 @@ msgstr "Oblidar un dispositiu l'eliminarà de la llista i Clementine haurà de t
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:143
+#: ../bin/src/ui_playlistcontainer.h:172
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:137 ../bin/src/ui_searchpreview.h:104
@@ -2443,7 +2455,7 @@ msgstr "General"
 msgid "General settings"
 msgstr "Configuració general"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
@@ -2496,7 +2508,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "S’han trobat %1 caràtules de %2 (%3 han fallat)"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
+#: ../bin/src/ui_behavioursettingspage.h:258
 msgid "Grey out non existent songs in my playlists"
 msgstr "Enfosqueix les cançons de les llistes de reproducció que no es puguin trobar"
 
@@ -2552,7 +2564,7 @@ msgstr "Agrupa per gènere/àlbum"
 msgid "Group by Genre/Artist/Album"
 msgstr "Agrupa per gènere/artista/àlbum"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Agrupació"
@@ -2624,7 +2636,7 @@ msgstr "Icones a la part superior"
 msgid "Identifying song"
 msgstr "S’està identificant la cançó"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:260
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2813,7 +2825,7 @@ msgstr "Premeu els botons per %1 segon…"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Premeu els botons per %1 segons…"
 
-#: ../bin/src/ui_behavioursettingspage.h:199
+#: ../bin/src/ui_behavioursettingspage.h:245
 msgid "Keep running in the background when the window is closed"
 msgstr "Conserva l’aplicació executant-se en segon pla quan tanqueu la finestra"
 
@@ -2826,7 +2838,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Gatets"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:247
 msgid "Language"
 msgstr "Idioma"
 
@@ -2854,7 +2866,7 @@ msgstr "Barra lateral gran"
 msgid "Last played"
 msgstr "Reproduïdes l’última vegada"
 
-#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Darrera reproducció"
@@ -2895,7 +2907,7 @@ msgstr "Cançons menys preferides"
 msgid "Left"
 msgstr "Esquerra"
 
-#: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Durada"
@@ -2909,7 +2921,7 @@ msgstr "Col·lecció"
 msgid "Library advanced grouping"
 msgstr "Agrupació avançada de la col·lecció"
 
-#: ui/mainwindow.cpp:2410
+#: ui/mainwindow.cpp:2411
 msgid "Library rescan notice"
 msgstr "Avís de reescaneig de la col·lecció"
 
@@ -2950,7 +2962,7 @@ msgstr "Carrega la portada des del disc dur"
 msgid "Load cover from disk..."
 msgstr "Carrega la caràtula des del disc…"
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:317
 msgid "Load playlist"
 msgstr "Carrega la llista de reproducció"
 
@@ -3005,13 +3017,12 @@ msgstr "Carregar fitxers/URLs, substituïnt l'actual llista de reproducció"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
-#: ../bin/src/ui_seafilesettingspage.h:173
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:219 ../bin/src/ui_seafilesettingspage.h:173
 msgid "Login"
 msgstr "Entra"
 
@@ -3195,7 +3206,7 @@ msgstr "Reproducció monofònica"
 msgid "Months"
 msgstr "Mesos"
 
-#: playlist/playlist.cpp:1358
+#: playlist/playlist.cpp:1361
 msgid "Mood"
 msgstr "Estat d’ànim"
 
@@ -3238,7 +3249,7 @@ msgstr "Mou a la col·lecció…"
 msgid "Move up"
 msgstr "Mou cap amunt"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1826
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1827
 msgid "Music"
 msgstr "Música"
 
@@ -3294,8 +3305,8 @@ msgstr "Mai"
 msgid "Never played"
 msgstr "Mai reproduïdes"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
-#: ../bin/src/ui_behavioursettingspage.h:234
+#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:280
 msgid "Never start playing"
 msgstr "Mai comencis a reproduir"
 
@@ -3305,7 +3316,7 @@ msgstr "Mai comencis a reproduir"
 msgid "New folder"
 msgstr "Carpeta nova"
 
-#: ui/mainwindow.cpp:1663 ../bin/src/ui_mainwindow.h:687
+#: ui/mainwindow.cpp:1664 ../bin/src/ui_mainwindow.h:687
 msgid "New playlist"
 msgstr "Llista de reproducció nova"
 
@@ -3354,7 +3365,7 @@ msgstr "No hi ha cap caràtula que exportar."
 msgid "No long blocks"
 msgstr "No utilitzis blocs llargs"
 
-#: playlist/playlistcontainer.cpp:370
+#: playlist/playlistcontainer.cpp:402
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "No s’han trobat coincidències. Netegeu el quadre de cerca per mostrar de nou la llista de reproducció completa."
@@ -3368,7 +3379,7 @@ msgstr "No utilitzis blocs curs"
 msgid "None"
 msgstr "Cap"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2139 ui/mainwindow.cpp:2287
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2140 ui/mainwindow.cpp:2288
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Cap de les cançons seleccionades són adequades per copiar-les a un dispositiu"
 
@@ -3525,7 +3536,7 @@ msgstr "Obre-ho a Google Drive"
 msgid "Open in new playlist"
 msgstr "Obre en una llista de reproducció nova"
 
-#: ../bin/src/ui_behavioursettingspage.h:229
+#: ../bin/src/ui_behavioursettingspage.h:275
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Obre en una llista nova"
@@ -3625,7 +3636,7 @@ msgstr "Festa"
 msgid "Password"
 msgstr "Contrasenya"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1025 ui/mainwindow.cpp:1476
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1026 ui/mainwindow.cpp:1477
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pausa"
@@ -3638,7 +3649,7 @@ msgstr "Pausa la reproducció"
 msgid "Paused"
 msgstr "En pausa"
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "Intèrpret"
@@ -3651,14 +3662,14 @@ msgstr "Píxel"
 msgid "Plain sidebar"
 msgstr "Barra lateral senzilla"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:582 ui/mainwindow.cpp:993
-#: ui/mainwindow.cpp:1011 ui/mainwindow.cpp:1479 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:582 ui/mainwindow.cpp:994
+#: ui/mainwindow.cpp:1012 ui/mainwindow.cpp:1480 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:638
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
 msgstr "Reprodueix"
 
-#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Comptador de reproduccions"
 
@@ -3666,8 +3677,8 @@ msgstr "Comptador de reproduccions"
 msgid "Play if stopped, pause if playing"
 msgstr "Reprodueix si esta parat, pausa si esta reproduïnt"
 
-#: ../bin/src/ui_behavioursettingspage.h:221
-#: ../bin/src/ui_behavioursettingspage.h:235
+#: ../bin/src/ui_behavioursettingspage.h:267
+#: ../bin/src/ui_behavioursettingspage.h:281
 msgid "Play if there is nothing already playing"
 msgstr "Reprodueix si encara no hi ha res reproduint-se"
 
@@ -3687,7 +3698,7 @@ msgstr "Reproducció"
 msgid "Player options"
 msgstr "Opcions del reproductor"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:313 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
@@ -3708,7 +3719,7 @@ msgstr "Tipus de llista de reproducció"
 #: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
 #: ui/mainwindow.cpp:241
 msgid "Playlists"
-msgstr "Llistes rep."
+msgstr "Llistes"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
@@ -3874,12 +3885,12 @@ msgstr "S'està consultant el dispositiu..."
 msgid "Queue Manager"
 msgstr "Gestor de la cua"
 
-#: ui/mainwindow.cpp:1571
+#: ui/mainwindow.cpp:1572
 msgid "Queue selected tracks"
 msgstr "Afegeix les pistes seleccionades a la cua"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1569
+#: ui/mainwindow.cpp:1570
 msgid "Queue track"
 msgstr "Afegeix la pista a la cua"
 
@@ -3928,7 +3939,7 @@ msgstr "Puntua la cançó actual amb 4 estrelles"
 msgid "Rate the current song 5 stars"
 msgstr "Puntua la cançó actual amb 5 estrelles"
 
-#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1327 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Puntuació"
 
@@ -3965,11 +3976,15 @@ msgstr "Refresca els fluxes"
 msgid "Reggae"
 msgstr "Reggae"
 
+#: playlist/playlistcontainer.cpp:56 ../bin/src/ui_behavioursettingspage.h:287
+msgid "Relative"
+msgstr "Relatius"
+
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
 msgstr "Recorda el moviment del Wiimote"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:256
 msgid "Remember from last time"
 msgstr "Recorda de l'últim cop"
 
@@ -4065,7 +4080,7 @@ msgstr "Repeteix la pista"
 msgid "Replace current playlist"
 msgstr "Substitueix la llista de reproducció actual"
 
-#: ../bin/src/ui_behavioursettingspage.h:228
+#: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Replace the playlist"
 msgstr "Substitueix la llista de reproducció"
 
@@ -4106,7 +4121,7 @@ msgstr "Reinicia la pista, o canvia a l’anterior si no han transcorregut 8 seg
 msgid "Restrict to ASCII characters"
 msgstr "Limitar als caràcters ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
+#: ../bin/src/ui_behavioursettingspage.h:257
 msgid "Resume playback on start"
 msgstr "Reprèn la reproducció en l’inici"
 
@@ -4168,7 +4183,7 @@ msgstr "Treure el dispositiu amb seguretat"
 msgid "Safely remove the device after copying"
 msgstr "Treure el dispositiu amb seguretat després de copiar"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Freqüència de mostreig"
 
@@ -4238,7 +4253,7 @@ msgstr "Perfil de freqüència de mostreig escalable (SSR)"
 msgid "Scale size"
 msgstr "Mida de l’escala"
 
-#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Puntuació"
 
@@ -4395,7 +4410,7 @@ msgstr "Detalls del servidor"
 msgid "Service offline"
 msgstr "Servei fora de línia"
 
-#: ui/mainwindow.cpp:1608
+#: ui/mainwindow.cpp:1609
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Estableix %1 a «%2»…"
@@ -4518,7 +4533,11 @@ msgstr "Mostra només les pistes sense etiquetar"
 
 #: ../bin/src/ui_vksettingspage.h:224
 msgid "Show playing song on your page"
-msgstr ""
+msgstr "Mostra la cançó en reproducció a la pàgina personal"
+
+#: ../bin/src/ui_behavioursettingspage.h:288
+msgid "Show quick change menu"
+msgstr "Mostra el menú de canvi ràpid"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -4532,7 +4551,7 @@ msgstr "Mostra el botó «M’encanta»"
 msgid "Show the scrobble button in the main window"
 msgstr "Mostra el botó de compartir a la finestra principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:244
 msgid "Show tray icon"
 msgstr "Mostrar la icona a la safata"
 
@@ -4596,7 +4615,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Salta enrere en la llista de reproducció"
 
-#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Comptador d’omissions"
 
@@ -4604,11 +4623,11 @@ msgstr "Comptador d’omissions"
 msgid "Skip forwards in playlist"
 msgstr "Salta endavant en la llista de reproducció"
 
-#: ui/mainwindow.cpp:1582
+#: ui/mainwindow.cpp:1583
 msgid "Skip selected tracks"
 msgstr "Omet les pistes seleccionades"
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1581
 msgid "Skip track"
 msgstr "Omet la pista"
 
@@ -4680,7 +4699,7 @@ msgstr "Ordenació"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1356
+#: playlist/playlist.cpp:1359
 msgid "Source"
 msgstr "Font"
 
@@ -4912,7 +4931,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Ha acabat el període de prova del servidor de Subsonic. Fareu una donació per obtenir una clau de llicència. Visiteu subsonic.org para més detalls."
 
-#: ui/mainwindow.cpp:2401
+#: ui/mainwindow.cpp:2402
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4953,7 +4972,7 @@ msgid ""
 "continue?"
 msgstr "Se suprimiran aquests fitxers del dispositiu, esteu segur que voleu continuar?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2189 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2190 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5025,7 +5044,7 @@ msgstr "Aquest flux es sol per als subscriptors que paguen"
 msgid "This type of device is not supported: %1"
 msgstr "Aquest tipus de dispositiu no és compatible: %1"
 
-#: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1302 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -5050,7 +5069,7 @@ msgstr "Activa la visualització per pantalla elegant"
 msgid "Toggle fullscreen"
 msgstr "Commuta a pantalla completa"
 
-#: ui/mainwindow.cpp:1573
+#: ui/mainwindow.cpp:1574
 msgid "Toggle queue status"
 msgstr "Commuta l’estat de la cua"
 
@@ -5086,7 +5105,7 @@ msgstr "Bytes totals transferits"
 msgid "Total network requests made"
 msgstr "Total de sol·licituds de xarxa fetes"
 
-#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -5170,11 +5189,11 @@ msgstr "Error desconegut"
 msgid "Unset cover"
 msgstr "Esborra'n la portada"
 
-#: ui/mainwindow.cpp:1578
+#: ui/mainwindow.cpp:1579
 msgid "Unskip selected tracks"
 msgstr "No ometis les pistes seleccionades"
 
-#: ui/mainwindow.cpp:1576
+#: ui/mainwindow.cpp:1577
 msgid "Unskip track"
 msgstr "No ometis la pista"
 
@@ -5284,7 +5303,7 @@ msgstr "Utilitza les notificacions per informar sobre l'estat del Wiimote"
 msgid "Use temporal noise shaping"
 msgstr "Usa el modelatge de soroll temporal"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:250
 msgid "Use the system default"
 msgstr "Utilitza el valor per defecte del sistema"
 
@@ -5322,7 +5341,7 @@ msgstr "Interfície d’usuari"
 msgid "Username"
 msgstr "﻿Nom d’usuari"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Using the menu to add a song will..."
 msgstr "En emprar el menú per afegir una cançó…"
 
@@ -5387,7 +5406,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisa’m abans de tancar una pestanya de llista de reproducció"
 
@@ -5403,7 +5422,7 @@ msgstr "Lloc web"
 msgid "Weeks"
 msgstr "Setmanes"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:253
 msgid "When Clementine starts"
 msgstr "Quan s’inicia el Clementine"
 
@@ -5412,6 +5431,10 @@ msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr "En la cerca de caràtules d’àlbum, Clementine primer cercarà imatges que contenen una d’aquestes paraules.\nSi no hi ha resultats, s’usarà la imatge més gran en el directori."
+
+#: ../bin/src/ui_behavioursettingspage.h:284
+msgid "When saving a playlist, file paths should be"
+msgstr "En desar una llista de reproducció, els camins dels fitxers han de ser"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
@@ -5485,7 +5508,7 @@ msgid ""
 "well?"
 msgstr "Voleu moure també les altres cançons d’aquest àlbum a Artistes diversos?"
 
-#: ui/mainwindow.cpp:2408
+#: ui/mainwindow.cpp:2409
 msgid "Would you like to run a full rescan right now?"
 msgstr "Voleu fer de nou un escaneig complet ara?"
 
@@ -5493,11 +5516,15 @@ msgstr "Voleu fer de nou un escaneig complet ara?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Escriu totes les estadístiques en els fitxers de les cançons"
 
+#: ../bin/src/ui_behavioursettingspage.h:289
+msgid "Write metadata"
+msgstr ""
+
 #: internet/subsonicsettingspage.cpp:80
 msgid "Wrong username or password."
 msgstr "Nom d’usuari o contrasenya incorrectes."
 
-#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5620,7 +5647,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Necessiteu obrir les Preferències del sistema i activar «<span style=\" font-style:italic;\">Habilita l’accés per dispositius d’ajuda</span>» per utilitzar dreceres globals a Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:252
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Si canvieu l'idioma haureu de reiniciar el Clementine."
 

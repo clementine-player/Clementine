@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-08-12 21:30+0000\n"
+"PO-Revision-Date: 2014-08-20 22:12+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Serbian (Latin) (http://www.transifex.com/projects/p/clementine/language/sr@latin/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -384,11 +384,15 @@ msgstr "O Klementini..."
 msgid "About Qt..."
 msgstr "Više o Kutu..."
 
+#: playlist/playlistcontainer.cpp:55 ../bin/src/ui_behavioursettingspage.h:286
+msgid "Absolute"
+msgstr ""
+
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
-#: ../bin/src/ui_seafilesettingspage.h:169
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_seafilesettingspage.h:169
 msgid "Account details"
 msgstr "Detalji o nalogu"
 
@@ -437,7 +441,7 @@ msgstr "Dodaj drugi tok..."
 msgid "Add directory..."
 msgstr "Dodaj fasciklu..."
 
-#: ui/mainwindow.cpp:1825
+#: ui/mainwindow.cpp:1826
 msgid "Add file"
 msgstr "Dodavanje fajla"
 
@@ -457,7 +461,7 @@ msgstr "Dodaj fajl..."
 msgid "Add files to transcode"
 msgstr "Dodavanje fajlova za prekodiranje"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1852 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1853 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "Dodavanje fascikle"
 
@@ -573,7 +577,7 @@ msgstr "Dodaj u Gruvšarkove liste numera"
 msgid "Add to My Music"
 msgstr "Dodaj u Moju muziku"
 
-#: ui/mainwindow.cpp:1646
+#: ui/mainwindow.cpp:1647
 msgid "Add to another playlist"
 msgstr "Dodaj u drugu listu"
 
@@ -585,7 +589,7 @@ msgstr "Dodaj u obeleživače"
 msgid "Add to playlist"
 msgstr "Dodaj u listu numera"
 
-#: ../bin/src/ui_behavioursettingspage.h:230
+#: ../bin/src/ui_behavioursettingspage.h:276
 msgid "Add to the queue"
 msgstr "stavi u red"
 
@@ -642,7 +646,7 @@ msgstr "nakon "
 msgid "After copying..."
 msgstr "Nakon kopiranja:"
 
-#: playlist/playlist.cpp:1303 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -655,7 +659,7 @@ msgstr "album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "album (idealna jačina za sve pesme)"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
@@ -727,16 +731,16 @@ msgstr "Dozvoli „mid/side“ kodiranje"
 msgid "Alongside the originals"
 msgstr "pored originala"
 
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:255
 msgid "Always hide the main window"
 msgstr "uvek sakrij glavni prozor"
 
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:254
 msgid "Always show the main window"
 msgstr "uvek prikaži glavni prozor"
 
-#: ../bin/src/ui_behavioursettingspage.h:222
-#: ../bin/src/ui_behavioursettingspage.h:236
+#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:282
 msgid "Always start playing"
 msgstr "uvek će početi puštanje"
 
@@ -782,7 +786,7 @@ msgstr "Dodaj numere/URL tokove u listu numera"
 msgid "Append to current playlist"
 msgstr "Dodaj u tekuću listu numera"
 
-#: ../bin/src/ui_behavioursettingspage.h:227
+#: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Append to the playlist"
 msgstr "doda u listu numera"
 
@@ -809,7 +813,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Želite li zaista da upišete statistiku pesme u fajl pesme za sve pesme iz vaše biblioteke?"
 
-#: playlist/playlist.cpp:1301 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -856,6 +860,10 @@ msgstr "Autori"
 msgid "Auto"
 msgstr "automatski"
 
+#: playlist/playlistcontainer.cpp:54 ../bin/src/ui_behavioursettingspage.h:285
+msgid "Automatic"
+msgstr ""
+
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Automatsko ažuriranje"
@@ -880,7 +888,7 @@ msgstr "Prosečna veličina slike"
 msgid "BBC Podcasts"
 msgstr "BBC-ijevi podkasti"
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1338 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "tempo"
@@ -921,7 +929,7 @@ msgstr "osnovna plava"
 msgid "Basic audio type"
 msgstr "Tip zvuka (osnovno)"
 
-#: ../bin/src/ui_behavioursettingspage.h:197
+#: ../bin/src/ui_behavioursettingspage.h:243
 msgid "Behavior"
 msgstr "Ponašanje"
 
@@ -934,7 +942,7 @@ msgstr "najbolji"
 msgid "Biography from %1"
 msgstr "Biografija sa %1"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "bitski protok"
 
@@ -1255,7 +1263,7 @@ msgstr "Boje"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Zarez razdvaja listu od klasa: nivo, nivo je 0-3"
 
-#: playlist/playlist.cpp:1354 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1357 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "komentar"
@@ -1272,7 +1280,7 @@ msgstr "Popuni oznake automatski"
 msgid "Complete tags automatically..."
 msgstr "Popuni oznake automatski..."
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
@@ -1575,11 +1583,11 @@ msgid ""
 "recover your database"
 msgstr "Otkriveno oštećenje baze podataka. Pogledajte https://code.google.com/p/clementine-player/wiki/DatabaseCorruption za uputstva kako da povratite vašu bazu podataka"
 
-#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "napravljen"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1352 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "izmenjen"
 
@@ -1634,7 +1642,7 @@ msgid "Delete downloaded data"
 msgstr "Obriši preuzete podatke"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2188 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2189 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Brisanje fajlova"
 
@@ -1667,11 +1675,11 @@ msgstr "obriši originalne fajlove"
 msgid "Deleting files"
 msgstr "Brišem fajlove"
 
-#: ui/mainwindow.cpp:1567
+#: ui/mainwindow.cpp:1568
 msgid "Dequeue selected tracks"
 msgstr "Izbaci izabrane numere iz reda"
 
-#: ui/mainwindow.cpp:1565
+#: ui/mainwindow.cpp:1566
 msgid "Dequeue track"
 msgstr "Izbaci numeru iz reda"
 
@@ -1751,7 +1759,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Onemogućen"
 
-#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "disk"
@@ -1820,7 +1828,7 @@ msgstr "Doniraj"
 msgid "Double click to open"
 msgstr "Kliknite dvaput da otvorite"
 
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:270
 msgid "Double clicking a song will..."
 msgstr "Dvoklik na pesmu će da je..."
 
@@ -1923,7 +1931,7 @@ msgstr "Dinamički nasumični miks"
 msgid "Edit smart playlist..."
 msgstr "Uredi pametnu listu..."
 
-#: ui/mainwindow.cpp:1609
+#: ui/mainwindow.cpp:1610
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Uredi oznaku „%1“..."
@@ -1973,7 +1981,7 @@ msgstr "Uključi ekvilajzer"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Omogući prečice samo kad je Klementina u fokusu"
 
-#: ../bin/src/ui_behavioursettingspage.h:216
+#: ../bin/src/ui_behavioursettingspage.h:262
 msgid "Enable song metadata inline edition with click"
 msgstr "Omogući utkano uređivanje metapodataka pesme klikom"
 
@@ -2063,7 +2071,7 @@ msgstr "Isto kao i --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1891 ui/mainwindow.cpp:2138 ui/mainwindow.cpp:2286
+#: ui/mainwindow.cpp:1892 ui/mainwindow.cpp:2139 ui/mainwindow.cpp:2287
 #: internet/vkservice.cpp:621
 msgid "Error"
 msgstr "Greška"
@@ -2228,7 +2236,7 @@ msgstr "Utapanje"
 msgid "Fading duration"
 msgstr "Trajanje pretapanja"
 
-#: ui/mainwindow.cpp:1892
+#: ui/mainwindow.cpp:1893
 msgid "Failed reading CD drive"
 msgstr "Neuspeh čitanja CD uređaja"
 
@@ -2287,6 +2295,10 @@ msgstr "Greška dobavljanja omota"
 msgid "File Format"
 msgstr "Format fajla"
 
+#: ../bin/src/ui_playlistcontainer.h:173
+msgid "File Paths:"
+msgstr ""
+
 #: ui/organisedialog.cpp:77
 msgid "File extension"
 msgstr "nastavak fajla"
@@ -2295,11 +2307,11 @@ msgstr "nastavak fajla"
 msgid "File formats"
 msgstr "Formati fajlova"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "ime fajla"
 
-#: playlist/playlist.cpp:1343
+#: playlist/playlist.cpp:1346
 msgid "File name (without path)"
 msgstr "ime fajla (bez putanje)"
 
@@ -2307,11 +2319,11 @@ msgstr "ime fajla (bez putanje)"
 msgid "File name pattern:"
 msgstr "Šablon imena fajla:"
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "veličina fajla"
 
-#: playlist/playlist.cpp:1347 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1350 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
@@ -2386,7 +2398,7 @@ msgstr "Zaboravljanjem uređaja uklonićete ga sa spiska i Klementina će morati
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:143
+#: ../bin/src/ui_playlistcontainer.h:172
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:137 ../bin/src/ui_searchpreview.h:104
@@ -2441,7 +2453,7 @@ msgstr "Opšte"
 msgid "General settings"
 msgstr "Opšte postavke"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
@@ -2494,7 +2506,7 @@ msgstr "Gugl Drajv"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Dobavljeno %1 omota od %2 (%3 neuspešno)"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
+#: ../bin/src/ui_behavioursettingspage.h:258
 msgid "Grey out non existent songs in my playlists"
 msgstr "Posivi nepostojeće pesme u listi numera"
 
@@ -2550,7 +2562,7 @@ msgstr "žanr/album"
 msgid "Group by Genre/Artist/Album"
 msgstr "žanr/izvođač/album"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "grupisanje"
@@ -2622,7 +2634,7 @@ msgstr "Ikone na vrhu"
 msgid "Identifying song"
 msgstr "Identifikujem pesmu"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:260
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2811,7 +2823,7 @@ msgstr "Držite tastere %1 sekundu..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Držite tastere %1 sekundi..."
 
-#: ../bin/src/ui_behavioursettingspage.h:199
+#: ../bin/src/ui_behavioursettingspage.h:245
 msgid "Keep running in the background when the window is closed"
 msgstr "Nastavi rad u pozadini kad se prozor zatvori"
 
@@ -2824,7 +2836,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Mačići"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:247
 msgid "Language"
 msgstr "Jezik"
 
@@ -2852,7 +2864,7 @@ msgstr "Široka traka"
 msgid "Last played"
 msgstr "Poslednji put puštano"
 
-#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "poslednji put puštena"
@@ -2893,7 +2905,7 @@ msgstr "Najmanje omiljene numere"
 msgid "Left"
 msgstr "Levo"
 
-#: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "dužina"
@@ -2907,7 +2919,7 @@ msgstr "Biblioteka"
 msgid "Library advanced grouping"
 msgstr "Napredno grupisanje biblioteke"
 
-#: ui/mainwindow.cpp:2410
+#: ui/mainwindow.cpp:2411
 msgid "Library rescan notice"
 msgstr "Obaveštenje o ponovnom skeniranju biblioteke"
 
@@ -2948,7 +2960,7 @@ msgstr "Učitavanje omota sa diska"
 msgid "Load cover from disk..."
 msgstr "Učitaj omot sa diska..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:317
 msgid "Load playlist"
 msgstr "Učitavanje liste numera"
 
@@ -3003,13 +3015,12 @@ msgstr "Učitava datoteke/URL-ove, zamenjujući tekuću listu"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
-#: ../bin/src/ui_seafilesettingspage.h:173
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
 #: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:219 ../bin/src/ui_seafilesettingspage.h:173
 msgid "Login"
 msgstr "Prijava"
 
@@ -3193,7 +3204,7 @@ msgstr "Mono reprodukcija"
 msgid "Months"
 msgstr "meseci"
 
-#: playlist/playlist.cpp:1358
+#: playlist/playlist.cpp:1361
 msgid "Mood"
 msgstr "raspoloženje"
 
@@ -3236,7 +3247,7 @@ msgstr "Premesti u biblioteku"
 msgid "Move up"
 msgstr "Pomeri gore"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1826
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1827
 msgid "Music"
 msgstr "Muzika"
 
@@ -3292,8 +3303,8 @@ msgstr "Nikad"
 msgid "Never played"
 msgstr "Nikad puštano"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
-#: ../bin/src/ui_behavioursettingspage.h:234
+#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:280
 msgid "Never start playing"
 msgstr "neće početi puštanje"
 
@@ -3303,7 +3314,7 @@ msgstr "neće početi puštanje"
 msgid "New folder"
 msgstr "Nova fascikla"
 
-#: ui/mainwindow.cpp:1663 ../bin/src/ui_mainwindow.h:687
+#: ui/mainwindow.cpp:1664 ../bin/src/ui_mainwindow.h:687
 msgid "New playlist"
 msgstr "Nova lista numera"
 
@@ -3352,7 +3363,7 @@ msgstr "Nema omota za izvoz."
 msgid "No long blocks"
 msgstr "bez dugih blokova"
 
-#: playlist/playlistcontainer.cpp:370
+#: playlist/playlistcontainer.cpp:402
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nema poklapanja.  Očistite polje pretrage da biste prikazali celu listu ponovo."
@@ -3366,7 +3377,7 @@ msgstr "bez kratkih blokova"
 msgid "None"
 msgstr "ništa"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2139 ui/mainwindow.cpp:2287
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2140 ui/mainwindow.cpp:2288
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nijedna od izabranih pesama nije pogodna za kopiranje na uređaj"
 
@@ -3523,7 +3534,7 @@ msgstr "Otvori u Gugl Drajvu"
 msgid "Open in new playlist"
 msgstr "Otvori u novoj listi"
 
-#: ../bin/src/ui_behavioursettingspage.h:229
+#: ../bin/src/ui_behavioursettingspage.h:275
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "otvori u novoj listi"
@@ -3623,7 +3634,7 @@ msgstr "žurka"
 msgid "Password"
 msgstr "Lozinka"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1025 ui/mainwindow.cpp:1476
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1026 ui/mainwindow.cpp:1477
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pauziraj"
@@ -3636,7 +3647,7 @@ msgstr "Pauziraj puštanje"
 msgid "Paused"
 msgstr "Pauzirano"
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "izvođač"
@@ -3649,14 +3660,14 @@ msgstr "piksela"
 msgid "Plain sidebar"
 msgstr "Obična traka"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:582 ui/mainwindow.cpp:993
-#: ui/mainwindow.cpp:1011 ui/mainwindow.cpp:1479 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:582 ui/mainwindow.cpp:994
+#: ui/mainwindow.cpp:1012 ui/mainwindow.cpp:1480 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:638
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
 msgstr "Pusti"
 
-#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "broj puštanja"
 
@@ -3664,8 +3675,8 @@ msgstr "broj puštanja"
 msgid "Play if stopped, pause if playing"
 msgstr "Pusti ako je zaustavljeno, zaustavi ako se pušta"
 
-#: ../bin/src/ui_behavioursettingspage.h:221
-#: ../bin/src/ui_behavioursettingspage.h:235
+#: ../bin/src/ui_behavioursettingspage.h:267
+#: ../bin/src/ui_behavioursettingspage.h:281
 msgid "Play if there is nothing already playing"
 msgstr "počeće puštanje ako trenutno ništa nije pušteno"
 
@@ -3685,7 +3696,7 @@ msgstr "Puštanje"
 msgid "Player options"
 msgstr "Opcije plejera"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:313 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
@@ -3872,12 +3883,12 @@ msgstr "Ispitujem uređaj..."
 msgid "Queue Manager"
 msgstr "Menadžer redosleda"
 
-#: ui/mainwindow.cpp:1571
+#: ui/mainwindow.cpp:1572
 msgid "Queue selected tracks"
 msgstr "Stavi u red izabrane numere"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1569
+#: ui/mainwindow.cpp:1570
 msgid "Queue track"
 msgstr "Stavi numeru u red"
 
@@ -3926,7 +3937,7 @@ msgstr "Oceni tekuću pesmu sa 4 zvezde"
 msgid "Rate the current song 5 stars"
 msgstr "Oceni tekuću pesmu sa 5 zvezda"
 
-#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1327 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "ocena"
 
@@ -3963,11 +3974,15 @@ msgstr "Osveži tokove"
 msgid "Reggae"
 msgstr "rege"
 
+#: playlist/playlistcontainer.cpp:56 ../bin/src/ui_behavioursettingspage.h:287
+msgid "Relative"
+msgstr ""
+
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
 msgstr "Zapamti zamah"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:256
 msgid "Remember from last time"
 msgstr "seti se od prošlog puta"
 
@@ -4063,7 +4078,7 @@ msgstr "Ponavljaj numeru"
 msgid "Replace current playlist"
 msgstr "Zameni tekuću listu"
 
-#: ../bin/src/ui_behavioursettingspage.h:228
+#: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Replace the playlist"
 msgstr "zameni listu numera"
 
@@ -4104,7 +4119,7 @@ msgstr "Ponovo pusti numeru ili pusti prethodnu ako je tekuća unutar početnih 
 msgid "Restrict to ASCII characters"
 msgstr "Ograniči se na ASKI znakove"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
+#: ../bin/src/ui_behavioursettingspage.h:257
 msgid "Resume playback on start"
 msgstr "Nastavi puštanje po pokretanju"
 
@@ -4166,7 +4181,7 @@ msgstr "Bezbedno izvadi uređaj"
 msgid "Safely remove the device after copying"
 msgstr "Bezbedno izvadi uređaj posle kopiranja"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "uzorkovanje"
 
@@ -4236,7 +4251,7 @@ msgstr "skalabilno uzorkovanje (SSR)"
 msgid "Scale size"
 msgstr "Promeni veličinu"
 
-#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "skor"
 
@@ -4393,7 +4408,7 @@ msgstr "Detalji servera"
 msgid "Service offline"
 msgstr "Servis van mreže"
 
-#: ui/mainwindow.cpp:1608
+#: ui/mainwindow.cpp:1609
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Promeni %1 u „%2“..."
@@ -4518,6 +4533,10 @@ msgstr "Prikaži samo neoznačene"
 msgid "Show playing song on your page"
 msgstr ""
 
+#: ../bin/src/ui_behavioursettingspage.h:288
+msgid "Show quick change menu"
+msgstr ""
+
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
 msgstr "prikaži predloge pretrage"
@@ -4530,7 +4549,7 @@ msgstr "Prikaži „volim“ dugme"
 msgid "Show the scrobble button in the main window"
 msgstr "Prikaži dugme skroblovanja u glavnom prozoru"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:244
 msgid "Show tray icon"
 msgstr "Usidri u sistemsku kasetu"
 
@@ -4594,7 +4613,7 @@ msgstr "ska"
 msgid "Skip backwards in playlist"
 msgstr "Preskoči unazad u listi numera"
 
-#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "broj preskakanja"
 
@@ -4602,11 +4621,11 @@ msgstr "broj preskakanja"
 msgid "Skip forwards in playlist"
 msgstr "Preskoči unapred u listi numera"
 
-#: ui/mainwindow.cpp:1582
+#: ui/mainwindow.cpp:1583
 msgid "Skip selected tracks"
 msgstr "Preskoči izabrane numere"
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1581
 msgid "Skip track"
 msgstr "Preskoči numeru"
 
@@ -4678,7 +4697,7 @@ msgstr "Ređanje"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1356
+#: playlist/playlist.cpp:1359
 msgid "Source"
 msgstr "izvor"
 
@@ -4910,7 +4929,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Probni period za Subsonikov server je istekao. Donirajte da biste dobili licencni ključ. Posetite subsonic.org za više detalja."
 
-#: ui/mainwindow.cpp:2401
+#: ui/mainwindow.cpp:2402
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4951,7 +4970,7 @@ msgid ""
 "continue?"
 msgstr "Ovi fajlovi će biti obrisani sa uređaja, želite li zaista da nastavite?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2189 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2190 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5023,7 +5042,7 @@ msgstr "Ovaj tok je samo za pretplatnike"
 msgid "This type of device is not supported: %1"
 msgstr "Ovaj tip uređaja nije podržan: %1"
 
-#: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1302 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -5048,7 +5067,7 @@ msgstr "Lepi OSD"
 msgid "Toggle fullscreen"
 msgstr "Ceo ekran"
 
-#: ui/mainwindow.cpp:1573
+#: ui/mainwindow.cpp:1574
 msgid "Toggle queue status"
 msgstr "Menjaj stanje redosleda"
 
@@ -5084,7 +5103,7 @@ msgstr "Ukupno bajtova prebačeno"
 msgid "Total network requests made"
 msgstr "Ukupno napravljenih mrežnih zahteva"
 
-#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -5168,11 +5187,11 @@ msgstr "Nepoznata greška"
 msgid "Unset cover"
 msgstr "Ukloni omot"
 
-#: ui/mainwindow.cpp:1578
+#: ui/mainwindow.cpp:1579
 msgid "Unskip selected tracks"
 msgstr "Ukloni preskakanje numera"
 
-#: ui/mainwindow.cpp:1576
+#: ui/mainwindow.cpp:1577
 msgid "Unskip track"
 msgstr "Ukloni preskakanje"
 
@@ -5282,7 +5301,7 @@ msgstr "Koristite obaveštenja za prijavu stanja Wii daljinskog"
 msgid "Use temporal noise shaping"
 msgstr "Vremensko oblikovanje šuma"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:250
 msgid "Use the system default"
 msgstr "sistemski podrazumevan"
 
@@ -5320,7 +5339,7 @@ msgstr "Korisničko sučelje"
 msgid "Username"
 msgstr "Korisničko ime"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Using the menu to add a song will..."
 msgstr "Radnja menija za dodavanje pesme..."
 
@@ -5385,7 +5404,7 @@ msgstr "VAV"
 msgid "WMA"
 msgstr "VMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:200
+#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Upozori me prilikom zatvaranja jezička liste numera"
 
@@ -5401,7 +5420,7 @@ msgstr "Vebsajt"
 msgid "Weeks"
 msgstr "sedmica"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:253
 msgid "When Clementine starts"
 msgstr "Kada se Klementina pokrene"
 
@@ -5410,6 +5429,10 @@ msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Prilikom traženja omota albuma Klementina će najpre da traži fajlove slika koji sadrže neke od ovih reči.\nAko nema poklapanja onda će da koristi najveću sliku u direktorijumu."
+
+#: ../bin/src/ui_behavioursettingspage.h:284
+msgid "When saving a playlist, file paths should be"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
@@ -5483,7 +5506,7 @@ msgid ""
 "well?"
 msgstr "Želite li da pomerite i ostale pesme iz ovog albuma u razne izvođače takođe?"
 
-#: ui/mainwindow.cpp:2408
+#: ui/mainwindow.cpp:2409
 msgid "Would you like to run a full rescan right now?"
 msgstr "Želite li sada da pokrenete potpuno skeniranje?"
 
@@ -5491,11 +5514,15 @@ msgstr "Želite li sada da pokrenete potpuno skeniranje?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Upisivanje statistika svih pesama u fajlove pesama"
 
+#: ../bin/src/ui_behavioursettingspage.h:289
+msgid "Write metadata"
+msgstr ""
+
 #: internet/subsonicsettingspage.cpp:80
 msgid "Wrong username or password."
 msgstr "Pogrešno korisničko ime ili lozinka."
 
-#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5618,7 +5645,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Da biste koristili opšte prečice u Klementini morate da uključite opciju „<span style=\" font-style:italic;\">Omogući pristup pomoćnim uređajima</span>“ u podešavanjima sistema."
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:252
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Morate ponovo da pokrenete Klementinu da biste promenili jezik."
 
