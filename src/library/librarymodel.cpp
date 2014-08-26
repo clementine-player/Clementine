@@ -464,7 +464,7 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
   }
 
   // Try to load it from the disk cache
-  std::unique_ptr<QIODevice> cache (icon_cache_->data(QUrl(cache_key)));
+  std::unique_ptr<QIODevice> cache(icon_cache_->data(QUrl(cache_key)));
   if (cache) {
     QImage cached_pixmap;
     if (cached_pixmap.load(cache.get(), "XPM")) {
@@ -508,7 +508,7 @@ void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
   }
 
   // if not already in the disk cache
-  std::unique_ptr<QIODevice> cached_img (icon_cache_->data(QUrl(cache_key)));
+  std::unique_ptr<QIODevice> cached_img(icon_cache_->data(QUrl(cache_key)));
   if (!cached_img) {
     QNetworkCacheMetaData item_metadata;
     item_metadata.setSaveToDisk(true);
@@ -1073,11 +1073,9 @@ QString LibraryModel::SortTextForArtist(QString artist) {
 
   if (artist.startsWith("the ")) {
     artist = artist.right(artist.length() - 4) + ", the";
-  }
-  else if (artist.startsWith("a ")) {
+  } else if (artist.startsWith("a ")) {
     artist = artist.right(artist.length() - 2) + ", a";
-  }
-  else if (artist.startsWith("an ")) {
+  } else if (artist.startsWith("an ")) {
     artist = artist.right(artist.length() - 3) + ", an";
   }
 
