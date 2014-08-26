@@ -1074,6 +1074,12 @@ QString LibraryModel::SortTextForArtist(QString artist) {
   if (artist.startsWith("the ")) {
     artist = artist.right(artist.length() - 4) + ", the";
   }
+  else if (artist.startsWith("a ")) {
+    artist = artist.right(artist.length() - 2) + ", a";
+  }
+  else if (artist.startsWith("an ")) {
+    artist = artist.right(artist.length() - 3) + ", an";
+  }
 
   return artist;
 }
