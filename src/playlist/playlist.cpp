@@ -2109,6 +2109,21 @@ void Playlist::RemoveDuplicateSongs() {
   removeRows(rows_to_remove);
 }
 
+void Playlist::RemoveUnavailableSongs() {
+  QList<int> rows_to_remove;
+  for (int row = 0; row < items_.count(); ++row) {
+    PlaylistItemPtr item = items_[row];
+    const Song& song = item->Metadata();
+
+    // check only local files
+    if (song.url().isLocalFile() && !QFile::exists(song.url().toLocalFile())) {
+      rows_to_remove.append(row);
+    }
+  }
+
+  removeRows(rows_to_remove);
+}
+
 bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {
   PlaylistItemPtr current = current_item();
 
