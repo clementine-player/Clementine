@@ -94,7 +94,7 @@ bool M3UParser::ParseMetadata(const QString& line,
   metadata->length = length * kNsecPerSec;
 
   QString track_info = info.section(',', 1);
-  QStringList list = track_info.split('-');
+  QStringList list = track_info.split(" - ");
   if (list.size() <= 1) {
     metadata->title = track_info;
     return true;
