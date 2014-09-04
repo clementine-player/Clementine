@@ -33,6 +33,7 @@ const char* MusicBrainzClient::kDiscUrl =
     "https://musicbrainz.org/ws/2/discid/";
 const char* MusicBrainzClient::kDateRegex = "^[12]\\d{3}";
 const int MusicBrainzClient::kDefaultTimeout = 5000;  // msec
+const int MusicBrainzClient::kMaxRequestPerTrack = 3;
 
 MusicBrainzClient::MusicBrainzClient(QObject* parent,
                                      QNetworkAccessManager* network)
@@ -59,6 +60,10 @@ void MusicBrainzClient::Start(int id, const QStringList& mbid_list) {
     requests_.insert(id, reply);
 
     timeouts_->AddReply(reply);
+
+    if (request_number >= kMaxRequestPerTrack) {
+      break;
+    }
   }
 }
 
@@ -142,7 +147,7 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
     }
   }
 
-  emit Finished(artist, album, UniqueResults(ret));
+  emit Finished(artist, album, UniqueResults(ret, SortResults));
 }
 
 void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int request_number) {
@@ -153,7 +158,6 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int reques
     qLog(Error) << "Error: unknown reply received:" << nb_removed <<
         "requests removed, while only one was supposed to be removed";
   }
-
 
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() ==
       200) {
@@ -170,8 +174,11 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int reques
         }
       }
     }
-    qSort(res);
     pending_results_[id] << PendingResults(request_number, res);
+  } else {
+    qLog(Error) << "Error:" <<  reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <<
+        "http status code received";
+    qLog(Error) << reply->readAll();
   }
 
   // No more pending requests for this id: emit the results we have.
@@ -183,7 +190,7 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int reques
     for (const PendingResults& result_list : result_list_list) {
       ret << result_list.results_;
     }
-    emit Finished(id, UniqueResults(ret));
+    emit Finished(id, UniqueResults(ret, KeepOriginalOrder));
   }
 }
 
@@ -345,8 +352,23 @@ MusicBrainzClient::Release MusicBrainzClient::ParseRelease(
   return ret;
 }
 
-MusicBrainzClient::ResultList& MusicBrainzClient::UniqueResults(ResultList& results) {
-  qStableSort(results);
-  results.erase(std::unique(results.begin(), results.end()), results.end());
-  return results;
+MusicBrainzClient::ResultList MusicBrainzClient::UniqueResults(
+    const ResultList& results, UniqueResultsSortOption opt) {
+
+  ResultList ret;
+  if (opt == SortResults) {
+    ret = QSet<Result>::fromList(results).toList();
+    qSort(ret);
+  } else {  // KeepOriginalOrder
+    // Qt doesn't provide a ordered set (QSet "stores values in an unspecified
+    // order" according to Qt documentation).
+    // We might use std::set instead, but it's probably faster to use ResultList
+    // directly to avoid converting from one structure to another.
+    for (const Result& res : results) {
+      if (!ret.contains(res)) {
+        ret << res;
+      }
+    }
+  }
+  return ret;
 }

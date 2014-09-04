@@ -95,6 +95,7 @@ class PlaylistManagerInterface : public QObject {
   virtual void ClearCurrent() = 0;
   virtual void ShuffleCurrent() = 0;
   virtual void RemoveDuplicatesCurrent() = 0;
+  virtual void RemoveUnavailableCurrent() = 0;
   virtual void SetActivePlaying() = 0;
   virtual void SetActivePaused() = 0;
   virtual void SetActiveStopped() = 0;
@@ -204,6 +205,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   void ClearCurrent();
   void ShuffleCurrent();
   void RemoveDuplicatesCurrent();
+  void RemoveUnavailableCurrent();
   void SetActiveStreamMetadata(const QUrl& url, const Song& song);
   // Rate current song using 0.0 - 1.0 scale.
   void RateCurrentSong(double rating);

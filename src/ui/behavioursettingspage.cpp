@@ -133,6 +133,24 @@ void BehaviourSettingsPage::Load() {
       s.value("greyoutdeleted", false).toBool());
   ui_->b_click_edit_inline_->setChecked(
       s.value("click_edit_inline", true).toBool());
+
+  Playlist::Path path = Playlist::Path(
+      s.value(Playlist::kPathType, Playlist::Path_Automatic).toInt());
+  switch (path) {
+    case Playlist::Path_Automatic:
+      ui_->b_automatic_path->setChecked(true);
+      break;
+    case Playlist::Path_Absolute:
+      ui_->b_absolute_path->setChecked(true);
+      break;
+    case Playlist::Path_Relative:
+      ui_->b_relative_path->setChecked(true);
+      break;
+  }
+  ui_->b_write_metadata->setChecked(
+      s.value(Playlist::kWriteMetadata, true).toBool());
+  ui_->b_quickchange_menu->setChecked(
+      s.value(Playlist::kQuickChangeMenu, false).toBool());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
@@ -162,6 +180,15 @@ void BehaviourSettingsPage::Save() {
   MainWindow::PlayBehaviour menu_playmode = MainWindow::PlayBehaviour(
       ui_->menu_playmode->itemData(ui_->menu_playmode->currentIndex()).toInt());
 
+  Playlist::Path path = Playlist::Path_Automatic;
+  if (ui_->b_automatic_path->isChecked()) {
+    path = Playlist::Path_Automatic;
+  } else if (ui_->b_absolute_path->isChecked()) {
+    path = Playlist::Path_Absolute;
+  } else if (ui_->b_relative_path->isChecked()) {
+    path = Playlist::Path_Relative;
+  }
+
   s.beginGroup(MainWindow::kSettingsGroup);
   s.setValue("showtray", ui_->b_show_tray_icon_->isChecked());
   s.setValue("keeprunning", ui_->b_keep_running_->isChecked());
@@ -182,6 +209,9 @@ void BehaviourSettingsPage::Save() {
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
   s.setValue("click_edit_inline", ui_->b_click_edit_inline_->isChecked());
+  s.setValue(Playlist::kPathType, static_cast<int>(path));
+  s.setValue(Playlist::kWriteMetadata, ui_->b_write_metadata->isChecked());
+  s.setValue(Playlist::kQuickChangeMenu, ui_->b_quickchange_menu->isChecked());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);

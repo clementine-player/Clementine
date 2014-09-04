@@ -103,6 +103,12 @@ signals:
   void DiscIdRequestFinished(const QString& discid, QNetworkReply* reply);
 
  private:
+  // Used as parameter for UniqueResults
+  enum UniqueResultsSortOption {
+    SortResults = 0,
+    KeepOriginalOrder
+  };
+
   struct Release {
     Release() : track_(0), year_(0) {}
 
@@ -137,14 +143,16 @@ signals:
   static ResultList ParseTrack(QXmlStreamReader* reader);
   static void ParseArtist(QXmlStreamReader* reader, QString* artist);
   static Release ParseRelease(QXmlStreamReader* reader);
-  // Remove duplicate from the list. Returns a reference to the input parameter
-  static ResultList& UniqueResults(ResultList& results);
+  static ResultList UniqueResults(const ResultList& results,
+      UniqueResultsSortOption opt = SortResults);
+
 
  private:
   static const char* kTrackUrl;
   static const char* kDiscUrl;
   static const char* kDateRegex;
   static const int kDefaultTimeout;
+  static const int kMaxRequestPerTrack;
 
   QNetworkAccessManager* network_;
   NetworkTimeouts* timeouts_;

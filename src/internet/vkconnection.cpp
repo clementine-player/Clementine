@@ -30,32 +30,31 @@
 static const QUrl kVkOAuthEndpoint("https://oauth.vk.com/authorize");
 static const QUrl kVkOAuthTokenEndpoint("https://oauth.vk.com/access_token");
 static const QUrl kApiUrl("https://api.vk.com/method/");
-static const char *kScopeNames[] = { "notify", "friends", "photos", "audio",
-  "video", "docs", "notes", "pages", "status", "offers", "questions", "wall",
-  "groups", "messages", "notifications", "stats", "ads", "offline" };
+static const char* kScopeNames[] = {
+    "notify", "friends",  "photos",        "audio",  "video",     "docs",
+    "notes",  "pages",    "status",        "offers", "questions", "wall",
+    "groups", "messages", "notifications", "stats",  "ads",       "offline"};
 
 static const QString kAppID = "3421812";
 static const QString kAppSecret = "cY7KMyX46Fq3nscZlbdo";
 static const VkConnection::Scopes kScopes =
-  VkConnection::Offline |
-  VkConnection::Audio |
-  VkConnection::Friends |
-  VkConnection::Groups;
+    VkConnection::Offline | VkConnection::Audio | VkConnection::Friends |
+    VkConnection::Groups | VkConnection::Status;
 
 static const char* kSettingsGroup = "Vk.com/oauth";
 
 VkConnection::VkConnection(QObject* parent)
-  : Connection(parent),
-    state_(Vreen::Client::StateOffline),
-    expires_in_(0),
-    uid_(0) {
+    : Connection(parent),
+      state_(Vreen::Client::StateOffline),
+      expires_in_(0),
+      uid_(0) {
   loadToken();
 }
 
-VkConnection::~VkConnection() {
-}
+VkConnection::~VkConnection() {}
 
-void VkConnection::connectToHost(const QString& login, const QString& password) {
+void VkConnection::connectToHost(const QString& login,
+                                 const QString& password) {
   Q_UNUSED(login)
   Q_UNUSED(password)
   if (hasAccount()) {
@@ -84,16 +83,17 @@ void VkConnection::clear() {
 }
 
 bool VkConnection::hasAccount() {
-  return !access_token_.isNull()
-      && (expires_in_ > static_cast<time_t>(QDateTime::currentDateTime().toTime_t()));
+  return !access_token_.isNull() &&
+         (expires_in_ >
+          static_cast<time_t>(QDateTime::currentDateTime().toTime_t()));
 }
 
-QNetworkRequest VkConnection::makeRequest(const QString& method, const QVariantMap& args) {
+QNetworkRequest VkConnection::makeRequest(const QString& method,
+                                          const QVariantMap& args) {
   QUrl url = kApiUrl;
   url.setPath(url.path() % QLatin1Literal("/") % method);
   for (auto it = args.constBegin(); it != args.constEnd(); ++it) {
-    url.addQueryItem(it.key(),
-                     it.value().toString());
+    url.addQueryItem(it.key(), it.value().toString());
   }
   url.addEncodedQueryItem("access_token", access_token_);
   return QNetworkRequest(url);
@@ -118,9 +118,9 @@ void VkConnection::requestAccessToken() {
 
   qLog(Debug) << "Try to login to Vk.com" << url;
 
-  NewClosure(server, SIGNAL(Finished()),
-             this, SLOT(codeRecived(LocalRedirectServer*, QUrl)),
-             server, server->url());
+  NewClosure(server, SIGNAL(Finished()), this,
+             SLOT(codeRecived(LocalRedirectServer*, QUrl)), server,
+             server->url());
   QDesktopServices::openUrl(url);
 }
 

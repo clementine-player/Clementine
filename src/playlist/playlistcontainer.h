@@ -21,6 +21,8 @@
 #include <QWidget>
 #include <QSettings>
 
+#include "playlist.h"
+
 class Ui_PlaylistContainer;
 
 class LineEditInterface;
@@ -45,6 +47,8 @@ class PlaylistContainer : public QWidget {
                   QAction* save_playlist, QAction* next_playlist,
                   QAction* previous_playlist);
   void SetManager(PlaylistManager* manager);
+
+  void ReloadSettings();
 
   PlaylistView* view() const;
 
@@ -89,6 +93,8 @@ signals:
   void FocusOnFilter(QKeyEvent* event);
 
   void UpdateNoMatchesLabel();
+
+  void PathSettingChanged(int index);
 
  private:
   void UpdateActiveIcon(const QIcon& icon);

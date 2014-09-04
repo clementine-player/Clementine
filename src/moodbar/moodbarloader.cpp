@@ -156,6 +156,10 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
     metadata.setUrl(url);
 
     QIODevice* cache_file = cache_->prepare(metadata);
+    if (!cache_file) {
+      qLog(Warning) << "Error writing to moodbar cache";
+      return;
+    }
     cache_file->write(request->data());
     cache_->insert(cache_file);
 

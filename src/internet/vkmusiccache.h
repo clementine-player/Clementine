@@ -30,30 +30,29 @@ class Application;
 class VkMusicCache : public QObject {
   Q_OBJECT
 
-public:
+ public:
   explicit VkMusicCache(Application* app, VkService* service);
   ~VkMusicCache() {}
   // Return file path if file in cache otherwise
   // return internet url and add song to caching queue
   QUrl Get(const QUrl& url);
-  void ForceCache(const QUrl& url);
+  void AddToCache(const QUrl& url, const QUrl& media_url, bool force = false);
   void BreakCurrentCaching();
   bool InCache(const QUrl& url);
 
-private slots:
-  bool InCache(const QString& filename);
+ private slots:
   void AddToQueue(const QString& filename, const QUrl& download_url);
   void DownloadNext();
   void DownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
   void DownloadReadyToRead();
   void Downloaded();
 
-private:
+ private:
   struct DownloadItem {
     QString filename;
     QUrl url;
 
-    bool operator ==(const DownloadItem& rhv) {
+    bool operator==(const DownloadItem& rhv) {
       return filename == rhv.filename;
     }
   };
@@ -63,9 +62,10 @@ private:
   Application* app_;
   VkService* service_;
   QList<DownloadItem> queue_;
-  // Contain index of current song in queue, need for removing if song was skipped.
-  // Is zero if song downloading now, and less that zero if current song not caching or cached.
-  int current_cashing_index;
+  // Contain index of current song in queue, need for removing if song was
+  // skipped. It's zero if song downloading now, and less that zero
+  // if current song not caching or cached.
+  int current_song_index;
   DownloadItem current_download;
   bool is_downloading;
   bool is_aborted;

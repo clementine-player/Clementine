@@ -51,6 +51,13 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
       filter_timer_(new QTimer(this)) {
   ui_->setupUi(this);
 
+  ui_->file_path_box->addItem(tr("Automatic"));
+  ui_->file_path_box->addItem(tr("Absolute"));
+  ui_->file_path_box->addItem(tr("Relative"));
+
+  connect(ui_->file_path_box, SIGNAL(currentIndexChanged(int)),
+          SLOT(PathSettingChanged(int)));
+
   no_matches_label_ = new QLabel(ui_->playlist);
   no_matches_label_->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
   no_matches_label_->setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -74,6 +81,8 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   no_matches_label_->setFont(no_matches_font);
 
   settings_.beginGroup(kSettingsGroup);
+
+  ReloadSettings();
 
   // Tab bar
   ui_->tab_bar->setExpanding(false);
@@ -100,6 +109,28 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
 }
 
 PlaylistContainer::~PlaylistContainer() { delete ui_; }
+
+void PlaylistContainer::ReloadSettings() {
+  bool show_menu = settings_.value(Playlist::kQuickChangeMenu, false).toBool();
+  ui_->line->setVisible(show_menu);
+  ui_->file_path_label->setVisible(show_menu);
+  ui_->file_path_box->setVisible(show_menu);
+
+  int value =
+      settings_.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
+  Playlist::Path path = static_cast<Playlist::Path>(value);
+  switch (path) {
+    case Playlist::Path_Automatic:
+      ui_->file_path_box->setCurrentIndex(0);
+      break;
+    case Playlist::Path_Absolute:
+      ui_->file_path_box->setCurrentIndex(1);
+      break;
+    case Playlist::Path_Relative:
+      ui_->file_path_box->setCurrentIndex(2);
+      break;
+  }
+}
 
 PlaylistView* PlaylistContainer::view() const { return ui_->playlist; }
 
@@ -361,14 +392,15 @@ void PlaylistContainer::UpdateNoMatchesLabel() {
 
   QString text;
   if (has_rows && !has_results) {
-    if (ui_->filter->text().trimmed().compare("the answer to life the universe "
-                                              "and everything",
-                                              Qt::CaseInsensitive) == 0) {
+    if (ui_->filter->text().trimmed().compare(
+            "the answer to life the universe "
+            "and everything",
+            Qt::CaseInsensitive) == 0) {
       text = "42";
     } else {
-      text =
-          tr("No matches found.  Clear the search box to show the whole playlist "
-             "again.");
+      text = tr(
+          "No matches found.  Clear the search box to show the whole playlist "
+          "again.");
     }
   }
 
@@ -437,4 +469,8 @@ bool PlaylistContainer::eventFilter(QObject* objectWatched, QEvent* event) {
     }
   }
   return QWidget::eventFilter(objectWatched, event);
+}
+
+void PlaylistContainer::PathSettingChanged(int index) {
+  settings_.setValue(Playlist::kPathType, index);
 }

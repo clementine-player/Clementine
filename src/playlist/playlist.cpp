@@ -89,6 +89,10 @@ const QRgb Playlist::kDynamicHistoryColor = qRgb(0x80, 0x80, 0x80);
 
 const char* Playlist::kSettingsGroup = "Playlist";
 
+const char* Playlist::kPathType = "path_type";
+const char* Playlist::kWriteMetadata = "write_metadata";
+const char* Playlist::kQuickChangeMenu = "quick_change_menu";
+
 const int Playlist::kUndoStackSize = 20;
 const int Playlist::kUndoItemLimit = 500;
 
@@ -1097,9 +1101,8 @@ void Playlist::InsertInternetItems(const InternetModel* model,
     switch (item.data(InternetModel::Role_PlayBehaviour).toInt()) {
       case InternetModel::PlayBehaviour_SingleItem:
         playlist_items << shared_ptr<PlaylistItem>(new InternetPlaylistItem(
-                              model->ServiceForIndex(item),
-                              item.data(InternetModel::Role_SongMetadata)
-                                  .value<Song>()));
+            model->ServiceForIndex(item),
+            item.data(InternetModel::Role_SongMetadata).value<Song>()));
         break;
 
       case InternetModel::PlayBehaviour_UseSongLoader:
@@ -1122,7 +1125,7 @@ void Playlist::InsertInternetItems(InternetService* service,
   PlaylistItemList playlist_items;
   for (const Song& song : songs) {
     playlist_items << shared_ptr<PlaylistItem>(
-                          new InternetPlaylistItem(service, song));
+        new InternetPlaylistItem(service, song));
   }
 
   InsertItems(playlist_items, pos, play_now, enqueue);
@@ -1402,10 +1405,10 @@ void Playlist::ReOrderWithoutUndo(const PlaylistItemList& new_items) {
     new_rows[new_items[i].get()] = i;
   }
 
-  for (const QModelIndex& idx: persistentIndexList()) {
+  for (const QModelIndex& idx : persistentIndexList()) {
     const PlaylistItem* item = old_items[idx.row()].get();
-    changePersistentIndex(
-        idx, index(new_rows[item], idx.column(), idx.parent()));
+    changePersistentIndex(idx,
+                          index(new_rows[item], idx.column(), idx.parent()));
   }
 
   layoutChanged();
@@ -1914,8 +1917,10 @@ void Playlist::ReshuffleIndices() {
       std::random_shuffle(shuffled_album_keys.begin(),
                           shuffled_album_keys.end());
 
-      // If the user is currently playing a song, force its album to be first.
-      if (current_virtual_index_ != -1) {
+      // If the user is currently playing a song, force its album to be first
+      // Or if the song was not playing but it was selected, force its album
+      // to be first.
+      if (current_virtual_index_ != -1 || current_row() != -1) {
         const QString key = items_[current_row()]->Metadata().AlbumKey();
         const int pos = shuffled_album_keys.indexOf(key);
         if (pos >= 1) {
@@ -2098,6 +2103,21 @@ void Playlist::RemoveDuplicateSongs() {
 
     if (!found_duplicate) {
       unique_songs.insert(std::make_pair(song, row));
+    }
+  }
+
+  removeRows(rows_to_remove);
+}
+
+void Playlist::RemoveUnavailableSongs() {
+  QList<int> rows_to_remove;
+  for (int row = 0; row < items_.count(); ++row) {
+    PlaylistItemPtr item = items_[row];
+    const Song& song = item->Metadata();
+
+    // check only local files
+    if (song.url().isLocalFile() && !QFile::exists(song.url().toLocalFile())) {
+      rows_to_remove.append(row);
     }
   }
 
