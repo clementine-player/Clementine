@@ -128,6 +128,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   void BrowseAlbum(const QString& uri);
   void BrowseToplist(const pb::spotify::BrowseToplistRequest& req);
   void SetPlaybackSettings(const pb::spotify::PlaybackSettings& req);
+  void SetPaused(const pb::spotify::PauseRequest& req);
 
   void SendPlaylistList();
 

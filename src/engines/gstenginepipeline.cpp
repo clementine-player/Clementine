@@ -917,6 +917,23 @@ GstState GstEnginePipeline::state() const {
 }
 
 QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
+  if (url_.scheme() == "spotify" && !buffering_) {
+      const GstState current_state = this->state();
+
+      if (state == GST_STATE_PAUSED && current_state == GST_STATE_PLAYING) {
+        SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+
+        // Need to schedule this in the spotify service's thread
+        QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
+                                  Q_ARG(bool, true));
+      } else if (state == GST_STATE_PLAYING && current_state == GST_STATE_PAUSED) {
+        SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+
+        // Need to schedule this in the spotify service's thread
+        QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
+                                  Q_ARG(bool, false));
+      }
+  }
   return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
       &set_state_threadpool_, &gst_element_set_state, pipeline_, state);
 }

@@ -59,6 +59,7 @@ class SpotifyService : public InternetService {
   void Logout();
   void Login(const QString& username, const QString& password);
   Q_INVOKABLE void LoadImage(const QString& id);
+  Q_INVOKABLE void SetPaused(const bool paused);
 
   SpotifyServer* server() const;
 

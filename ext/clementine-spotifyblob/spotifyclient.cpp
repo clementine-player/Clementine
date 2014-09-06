@@ -292,6 +292,8 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
     SetPlaybackSettings(message.set_playback_settings_request());
   } else if (message.has_browse_toplist_request()) {
     BrowseToplist(message.browse_toplist_request());
+  } else if (message.has_pause_request()) {
+    SetPaused(message.pause_request());
   }
 }
 
@@ -1015,6 +1017,10 @@ void SpotifyClient::BrowseToplist(
       SP_TOPLIST_REGION_EVERYWHERE,      // TODO: Support other regions.
       nullptr, &ToplistBrowseComplete, this);
   pending_toplist_browses_[browse] = req;
+}
+
+void SpotifyClient::SetPaused(const pb::spotify::PauseRequest& req) {
+  sp_session_player_play(session_, !req.paused());
 }
 
 void SpotifyClient::ToplistBrowseComplete(sp_toplistbrowse* result,

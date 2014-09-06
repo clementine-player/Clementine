@@ -265,3 +265,10 @@ void SpotifyServer::LoadToplist() {
 
   SendOrQueueMessage(message);
 }
+
+void SpotifyServer::SetPaused(const bool paused) {
+  pb::spotify::Message message;
+  pb::spotify::PauseRequest* req = message.mutable_pause_request();
+  req->set_paused(paused);
+  SendOrQueueMessage(message);
+}

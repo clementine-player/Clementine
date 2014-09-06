@@ -529,7 +529,7 @@ void SpotifyService::SongFromProtobuf(const pb::spotify::Track& track,
 }
 
 PlaylistItem::Options SpotifyService::playlistitem_options() const {
-  return PlaylistItem::PauseDisabled | PlaylistItem::SeekDisabled;
+  return PlaylistItem::SeekDisabled;
 }
 
 QWidget* SpotifyService::HeaderWidget() const {
@@ -695,6 +695,11 @@ void SpotifyService::DropMimeData(const QMimeData* data,
 void SpotifyService::LoadImage(const QString& id) {
   EnsureServerCreated();
   server_->LoadImage(id);
+}
+
+void SpotifyService::SetPaused(const bool paused) {
+  EnsureServerCreated();
+  server_->SetPaused(paused);
 }
 
 void SpotifyService::SyncPlaylistProgress(

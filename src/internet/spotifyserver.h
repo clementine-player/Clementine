@@ -50,6 +50,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   void SetPlaybackSettings(pb::spotify::Bitrate bitrate,
                            bool volume_normalisation);
   void LoadToplist();
+  void SetPaused(const bool paused);
 
   int server_port() const;
 

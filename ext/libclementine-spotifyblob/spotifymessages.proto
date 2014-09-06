@@ -184,6 +184,10 @@ message PlaybackSettings {
   optional bool volume_normalisation = 2 [default = false];
 }
 
+message PauseRequest {
+  optional bool paused = 1 [default = false];
+}
+
 // NEXT_ID: 21
 message Message {
   // Not currently used
@@ -208,4 +212,5 @@ message Message {
   optional PlaybackSettings set_playback_settings_request = 17;
   optional BrowseToplistRequest browse_toplist_request = 19;
   optional BrowseToplistResponse browse_toplist_response = 20;
+  optional PauseRequest pause_request = 21;
 }
