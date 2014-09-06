@@ -729,7 +729,7 @@ void PlaylistView::leaveEvent(QEvent* e) {
 }
 
 void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
-  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+  if (editTriggers() & QAbstractItemView::NoEditTriggers) {
     return;
   }
 
@@ -752,7 +752,7 @@ void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
 }
 
 void PlaylistView::RatingHoverOut() {
-  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+  if (editTriggers() & QAbstractItemView::NoEditTriggers) {
     return;
   }
 
@@ -773,7 +773,7 @@ void PlaylistView::RatingHoverOut() {
 }
 
 void PlaylistView::mousePressEvent(QMouseEvent* event) {
-  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+  if (editTriggers() & QAbstractItemView::NoEditTriggers) {
     QTreeView::mousePressEvent(event);
     return;
   }
