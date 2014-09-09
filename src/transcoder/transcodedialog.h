@@ -45,6 +45,7 @@ class TranscodeDialog : public QDialog {
 
  private slots:
   void Add();
+  void Import();
   void Remove();
   void Start();
   void Cancel();
@@ -74,6 +75,7 @@ class TranscodeDialog : public QDialog {
   QPushButton* close_button_;
 
   QString last_add_dir_;
+  QString last_import_dir_;
 
   Transcoder* transcoder_;
   int queued_;

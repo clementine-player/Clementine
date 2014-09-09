@@ -26,6 +26,7 @@
 
 #include <QPushButton>
 #include <QFileDialog>
+#include <QLinkedList>
 #include <QSettings>
 #include <QDateTime>
 
@@ -73,6 +74,7 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   QSettings s;
   s.beginGroup(kSettingsGroup);
   last_add_dir_ = s.value("last_add_dir", QDir::homePath()).toString();
+  last_import_dir_ = s.value("last_import_dir", QDir::homePath()).toString();
 
   QString last_output_format = s.value("last_output_format", "ogg").toString();
   for (int i = 0; i < ui_->format->count(); ++i) {
@@ -97,6 +99,7 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
 
   // Connect stuff
   connect(ui_->add, SIGNAL(clicked()), SLOT(Add()));
+  connect(ui_->import, SIGNAL(clicked()), SLOT(Import()));
   connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));
   connect(start_button_, SIGNAL(clicked()), SLOT(Start()));
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
@@ -224,6 +227,51 @@ void TranscodeDialog::Add() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("last_add_dir", last_add_dir_);
+}
+
+void TranscodeDialog::Import() {
+  QString rootPath = QFileDialog::getExistingDirectory(
+      this, tr("Open music directory to recursively import"),
+      last_import_dir_, QFileDialog::ShowDirsOnly);
+  
+  if(rootPath.isEmpty()) return;
+  
+  QStringList filenames;
+  QStringList audioTypes = QString(FileView::kFileFilter).split(" ", 
+      QString::SkipEmptyParts);
+  
+  QLinkedList<QString> dirs;
+  dirs.append(rootPath);
+  QString current;
+  
+  do {
+    current = dirs.first();
+    QDir dir(current);
+    
+    // Don't follow symlinks to avoid looping
+    QStringList subdirs = dir.entryList(
+        QDir::Dirs | QDir::NoSymLinks | 
+        QDir::Readable | QDir::NoDotAndDotDot);
+    
+    for (QString& subdir : subdirs) {
+      dirs.append(current + '/' + subdir);
+    }
+    
+    QStringList songNames = dir.entryList(audioTypes, 
+        QDir::Files | QDir::Readable);
+    for(QString& songName : songNames) {
+      filenames.append(current + '/' + songName); 
+    }
+    
+    dirs.removeFirst();
+  } while(!dirs.empty());
+  
+  SetFilenames(filenames);
+  
+  last_import_dir_ = rootPath;
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+  settings.setValue("last_import_dir", last_import_dir_);
 }
 
 void TranscodeDialog::SetFilenames(const QStringList& filenames) {
