@@ -236,8 +236,11 @@ void GlobalSearchModel::GetChildResults(
       GetChildResults(itemFromIndex(index), results, visited);
     }
   } else {
-    // No - it's a song, add its result
-    results->append(item->data(Role_Result).value<SearchProvider::Result>());
+    // No - maybe it's a song, add its result if valid
+    QVariant result = item->data(Role_Result);
+    if (result.isValid()) {
+      results->append(result.value<SearchProvider::Result>());
+    }
   }
 }
 
