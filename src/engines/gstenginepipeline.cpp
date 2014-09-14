@@ -841,22 +841,11 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
       instance->url().host().contains("grooveshark")) {
     // Grooveshark streaming servers will answer with a 400 error 'Bad request'
     // if we don't specify 'Range' field in HTTP header.
-    // Maybe it could be usefull in some other cases, but for now, I prefer to
+    // Maybe it could be useful in some other cases, but for now, I prefer to
     // keep this grooveshark specific.
     GstStructure* headers;
     headers = gst_structure_new("extra-headers", "Range", G_TYPE_STRING,
                                 "bytes=0-", nullptr);
-    g_object_set(element, "extra-headers", headers, nullptr);
-    gst_structure_free(headers);
-  }
-
-  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element),
-                                   "extra-headers") &&
-      instance->url().host().contains("files.one.ubuntu.com")) {
-    GstStructure* headers;
-    headers =
-        gst_structure_new("extra-headers", "Authorization", G_TYPE_STRING,
-                          instance->url().fragment().toAscii().data(), nullptr);
     g_object_set(element, "extra-headers", headers, nullptr);
     gst_structure_free(headers);
   }
