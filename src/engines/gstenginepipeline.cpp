@@ -170,11 +170,6 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
     gst_element_add_pad(GST_ELEMENT(new_bin), gst_ghost_pad_new("src", pad));
     gst_object_unref(GST_OBJECT(pad));
 
-//    g_object_set(G_OBJECT(new_bin), "max-size-time", 100,
-//                   nullptr);
-//    g_object_set(G_OBJECT(new_bin), "use-buffering", true, nullptr);
-
-
     // Tell spotify to start sending data to us.
     InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(
         url.toString(), port);

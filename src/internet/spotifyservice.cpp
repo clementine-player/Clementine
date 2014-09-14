@@ -703,7 +703,6 @@ void SpotifyService::Seek(const int offset /* in msec */) {
   server_->Seek(offset);
 }
 
-
 void SpotifyService::SyncPlaylistProgress(
     const pb::spotify::SyncPlaylistProgress& progress) {
   qLog(Debug) << "Sync progress:" << progress.sync_progress();
