@@ -26,7 +26,7 @@
 
 #include <QPushButton>
 #include <QFileDialog>
-#include <QLinkedList>
+#include <QDirIterator>
 #include <QSettings>
 #include <QDateTime>
 
@@ -239,32 +239,12 @@ void TranscodeDialog::Import() {
   QStringList filenames;
   QStringList audioTypes = QString(FileView::kFileFilter).split(" ", 
       QString::SkipEmptyParts);
+  QDirIterator files(rootPath, audioTypes, QDir::Files | QDir::Readable, 
+      QDirIterator::Subdirectories);
   
-  QLinkedList<QString> dirs;
-  dirs.append(rootPath);
-  QString current;
-  
-  do {
-    current = dirs.first();
-    QDir dir(current);
-    
-    // Don't follow symlinks to avoid looping
-    QStringList subdirs = dir.entryList(
-        QDir::Dirs | QDir::NoSymLinks | 
-        QDir::Readable | QDir::NoDotAndDotDot);
-    
-    for (QString& subdir : subdirs) {
-      dirs.append(current + '/' + subdir);
-    }
-    
-    QStringList songNames = dir.entryList(audioTypes, 
-        QDir::Files | QDir::Readable);
-    for(QString& songName : songNames) {
-      filenames.append(current + '/' + songName); 
-    }
-    
-    dirs.removeFirst();
-  } while(!dirs.empty());
+  while(files.hasNext()) {
+    filenames << files.next();
+  }
   
   SetFilenames(filenames);
   
