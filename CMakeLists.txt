@@ -275,7 +275,7 @@ optional_component(VISUALISATIONS ON "Visualisations")
 if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_FOUND)
   message(FATAL_ERROR "Either QCA must be available or the non-GPL Spotify "
           "code must be compiled in")
-elseif(QCA_FOUND)
+elseif(QCA_FOUND AND SPOTIFY_BLOB)
   set(HAVE_SPOTIFY_DOWNLOADER ON)
 endif()
 
