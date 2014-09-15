@@ -252,6 +252,8 @@ optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
+option(ENABLE_SPOTIFY_SUPPORT "Spotify support" ON)
+
 optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
   DEPENDS "libspotify" SPOTIFY_FOUND
@@ -272,12 +274,14 @@ optional_component(LIBPULSE ON "Pulse audio integration"
 
 optional_component(VISUALISATIONS ON "Visualisations")
 
-if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_FOUND)
-  message(FATAL_ERROR "Either QCA must be available or the non-GPL Spotify "
-          "code must be compiled in")
-elseif(QCA_FOUND)
-  set(HAVE_SPOTIFY_DOWNLOADER ON)
-endif()
+if(ENABLE_SPOTIFY_SUPPORT)
+  if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_FOUND)
+    message(FATAL_ERROR "Either QCA must be available or the non-GPL Spotify "
+            "code must be compiled in")
+  elseif(QCA_FOUND)
+    set(HAVE_SPOTIFY_DOWNLOADER ON)
+  endif()
+endif(ENABLE_SPOTIFY_SUPPORT)
 
 # Find DBus if it's enabled
 if (HAVE_DBUS)
