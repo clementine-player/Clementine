@@ -286,7 +286,6 @@ void SpotifyService::EnsureServerCreated(const QString& username,
 }
 
 void SpotifyService::StartBlobProcess() {
-
   if (!enabled) {
     qLog(Info) << "Spotify disabled" << endl;
     return;
@@ -342,7 +341,6 @@ bool SpotifyService::IsBlobInstalled() const {
 }
 
 void SpotifyService::InstallBlob() {
-
   if (!enabled) {
     qLog(Info) << "Spotify disabled" << endl;
     return;
@@ -431,8 +429,8 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   }
 }
 
-bool SpotifyService::DoPlaylistsDiffer(const pb::spotify::Playlists& response)
-    const {
+bool SpotifyService::DoPlaylistsDiffer(
+    const pb::spotify::Playlists& response) const {
   if (playlists_.count() != response.playlist_size()) {
     return true;
   }

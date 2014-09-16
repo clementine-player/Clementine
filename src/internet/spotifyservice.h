@@ -29,7 +29,9 @@ class SpotifyService : public InternetService {
     Type_Toplist,
   };
 
-  enum Role { Role_UserPlaylistIndex = InternetModel::RoleCount, };
+  enum Role {
+    Role_UserPlaylistIndex = InternetModel::RoleCount,
+  };
 
   // Values are persisted - don't change.
   enum LoginState {
