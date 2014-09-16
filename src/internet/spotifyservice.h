@@ -44,6 +44,7 @@ class SpotifyService : public InternetService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
   static const char* kBlobDownloadUrl;
+  static const char* kEnabled;
   static const int kSearchDelayMsec;
 
   void ReloadSettings();
@@ -146,6 +147,7 @@ signals:
   LoginState login_state_;
   pb::spotify::Bitrate bitrate_;
   bool volume_normalisation_;
+  bool enabled;
 };
 
 #endif

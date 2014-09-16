@@ -40,6 +40,7 @@ const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
 const char* SpotifyService::kBlobDownloadUrl =
     "http://spotify.clementine-player.org/";
+const char* SpotifyService::kEnabled = "spotify_enabled";
 const int SpotifyService::kSearchDelayMsec = 400;
 
 SpotifyService::SpotifyService(Application* app, InternetModel* parent)
@@ -224,6 +225,8 @@ void SpotifyService::ReloadSettings() {
   if (server_ && blob_process_) {
     server_->SetPlaybackSettings(bitrate_, volume_normalisation_);
   }
+
+  enabled = s.value(SpotifyService::kEnabled, true).toBool();
 }
 
 void SpotifyService::EnsureServerCreated(const QString& username,
@@ -283,6 +286,12 @@ void SpotifyService::EnsureServerCreated(const QString& username,
 }
 
 void SpotifyService::StartBlobProcess() {
+
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   // Try to find an executable to run
   QString blob_path;
   QProcessEnvironment env(QProcessEnvironment::systemEnvironment());
@@ -333,6 +342,12 @@ bool SpotifyService::IsBlobInstalled() const {
 }
 
 void SpotifyService::InstallBlob() {
+
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
 #ifdef HAVE_SPOTIFY_DOWNLOADER
   // The downloader deletes itself when it finishes
   SpotifyBlobDownloader* downloader = new SpotifyBlobDownloader(
