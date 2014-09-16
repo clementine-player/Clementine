@@ -52,7 +52,12 @@ class OSD : public QObject {
 
   static const char* kSettingsGroup;
 
-  enum Behaviour { Disabled = 0, Native, TrayPopup, Pretty, };
+  enum Behaviour {
+    Disabled = 0,
+    Native,
+    TrayPopup,
+    Pretty,
+  };
 
   // Implemented in the OS-specific files
   static bool SupportsNativeNotifications();
@@ -113,6 +118,7 @@ class OSD : public QObject {
   bool show_on_volume_change_;
   bool show_art_;
   bool show_on_play_mode_change_;
+  bool show_on_pause_;
   bool use_custom_text_;
   QString custom_text1_;
   QString custom_text2_;
