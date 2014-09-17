@@ -139,6 +139,11 @@ void SpotifyService::LazyPopulate(QStandardItem* item) {
 }
 
 void SpotifyService::Login(const QString& username, const QString& password) {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   Logout();
   EnsureServerCreated(username, password);
 }
@@ -146,6 +151,11 @@ void SpotifyService::Login(const QString& username, const QString& password) {
 void SpotifyService::LoginCompleted(
     bool success, const QString& error,
     pb::spotify::LoginResponse_Error error_code) {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   if (login_task_id_) {
     app_->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
@@ -231,6 +241,11 @@ void SpotifyService::ReloadSettings() {
 
 void SpotifyService::EnsureServerCreated(const QString& username,
                                          const QString& password) {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   if (server_ && blob_process_) {
     return;
   }
@@ -359,6 +374,11 @@ void SpotifyService::InstallBlob() {
 void SpotifyService::BlobDownloadFinished() { EnsureServerCreated(); }
 
 void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   if (login_task_id_) {
     app_->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
