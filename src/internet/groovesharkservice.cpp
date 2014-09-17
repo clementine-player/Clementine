@@ -1111,8 +1111,7 @@ QList<QAction*> GroovesharkService::playlistitem_actions(const Song& song) {
   // Clear previous actions
   while (!playlistitem_actions_.isEmpty()) {
     QAction* action = playlistitem_actions_.takeFirst();
-    QMenu* menu = action->menu();
-    if (menu) delete menu;
+    delete action->menu();
     delete action;
   }
 
