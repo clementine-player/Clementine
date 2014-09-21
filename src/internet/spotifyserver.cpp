@@ -224,11 +224,11 @@ void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
   SendOrQueueMessage(message);
 }
 
-void SpotifyServer::Seek(qint64 offset_bytes) {
+void SpotifyServer::Seek(qint64 offset_nsec) {
   pb::spotify::Message message;
   pb::spotify::SeekRequest* req = message.mutable_seek_request();
 
-  req->set_offset_bytes(offset_bytes);
+  req->set_offset_nsec(offset_nsec);
   SendOrQueueMessage(message);
 }
 

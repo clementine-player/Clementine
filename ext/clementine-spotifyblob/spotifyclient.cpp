@@ -30,6 +30,7 @@
 
 #include "core/arraysize.h"
 #include "core/logging.h"
+#include "core/timeconstants.h"
 #include "mediapipeline.h"
 #include "spotifykey.h"
 #include "spotifymessages.pb.h"
@@ -279,7 +280,7 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
   } else if (message.has_playback_request()) {
     StartPlayback(message.playback_request());
   } else if (message.has_seek_request()) {
-    Seek(message.seek_request().offset_bytes());
+    Seek(message.seek_request().offset_nsec());
   } else if (message.has_search_request()) {
     Search(message.search_request());
   } else if (message.has_image_request()) {
@@ -844,8 +845,9 @@ void SpotifyClient::StartPlayback(const pb::spotify::PlaybackRequest& req) {
   TryPlaybackAgain(pending_playback);
 }
 
-void SpotifyClient::Seek(qint64 offset_bytes) {
-  if (sp_session_player_seek(session_, offset_bytes) != SP_ERROR_OK) {
+void SpotifyClient::Seek(qint64 offset_nsec) {
+  if (sp_session_player_seek(session_, offset_nsec / kNsecPerMsec)
+      != SP_ERROR_OK) {
     qLog(Error) << "Seek error";
     return;
   }

@@ -947,11 +947,10 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
     SpotifyService* spotify = InternetModel::Service<SpotifyService>();
     // Need to schedule this in the spotify service's thread
     QMetaObject::invokeMethod(spotify, "Seek", Qt::QueuedConnection,
-                              Q_ARG(int, nanosec / kNsecPerMsec));
+                              Q_ARG(qint64, nanosec));
     // Need to reset spotify_offset_ to get the real pipeline position, as it is
     // used in position()
-    spotify_offset_ = 0;
-    spotify_offset_ = nanosec - position() ;
+    spotify_offset_ = nanosec - position();
     return true;
   }
 

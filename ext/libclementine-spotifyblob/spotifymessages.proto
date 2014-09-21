@@ -170,7 +170,7 @@ message BrowseToplistResponse {
 }
 
 message SeekRequest {
-  optional int64 offset_bytes = 1;
+  optional int64 offset_nsec = 1;
 }
 
 message SeekCompleted {

@@ -56,7 +56,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
 
  public slots:
   void StartPlayback(const QString& uri, quint16 port);
-  void Seek(qint64 offset_bytes);
+  void Seek(qint64 offset_nsec);
 
 signals:
   void LoginCompleted(bool success, const QString& error,

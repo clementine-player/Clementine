@@ -693,14 +693,14 @@ void SpotifyService::LoadImage(const QString& id) {
   server_->LoadImage(id);
 }
 
-void SpotifyService::SetPaused(const bool paused) {
+void SpotifyService::SetPaused(bool paused) {
   EnsureServerCreated();
   server_->SetPaused(paused);
 }
 
-void SpotifyService::Seek(const int offset /* in msec */) {
+void SpotifyService::Seek(qint64 offset_nsec) {
   EnsureServerCreated();
-  server_->Seek(offset);
+  server_->Seek(offset_nsec);
 }
 
 void SpotifyService::SyncPlaylistProgress(
