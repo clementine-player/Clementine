@@ -165,7 +165,7 @@ if (WIN32)
   SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -o <OBJECT> <SOURCE> -I ${CMAKE_SOURCE_DIR}/dist/windows")
 endif(WIN32)
 
-add_definitions(-DQT_NO_CAST_TO_ASCII -DQT_STRICT_ITERATORS)
+add_definitions(-DQT_NO_CAST_TO_ASCII -DQT_STRICT_ITERATORS -D__STRICT_ANSI__)
 
 # Translations stuff
 find_program(GETTEXT_XGETTEXT_EXECUTABLE xgettext PATHS /target/bin)
