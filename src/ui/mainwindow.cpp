@@ -165,8 +165,8 @@ const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kAllFilesFilterSpec = QT_TR_NOOP("All Files (*)");
 
 namespace {
-  const int kTrackSliderUpdateTimeMs = 40;
-  const int kTrackPositionUpdateTimeMs = 1000;
+const int kTrackSliderUpdateTimeMs = 40;
+const int kTrackPositionUpdateTimeMs = 1000;
 }
 
 MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
@@ -372,6 +372,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           app_->playlist_manager(), SLOT(ClearCurrent()));
   connect(ui_->action_remove_duplicates, SIGNAL(triggered()),
           app_->playlist_manager(), SLOT(RemoveDuplicatesCurrent()));
+  connect(ui_->action_remove_unavailable, SIGNAL(triggered()),
+          app_->playlist_manager(), SLOT(RemoveUnavailableCurrent()));
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()),
           SLOT(PlaylistRemoveCurrent()));
   connect(ui_->action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
@@ -630,6 +632,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_menu_->addAction(ui_->action_clear_playlist);
   playlist_menu_->addAction(ui_->action_shuffle);
   playlist_menu_->addAction(ui_->action_remove_duplicates);
+  playlist_menu_->addAction(ui_->action_remove_unavailable);
 
 #ifdef Q_OS_DARWIN
   ui_->action_shuffle->setShortcut(QKeySequence());
@@ -980,6 +983,7 @@ void MainWindow::ReloadAllSettings() {
   library_view_->ReloadSettings();
   song_info_view_->ReloadSettings();
   app_->player()->engine()->ReloadSettings();
+  ui_->playlist->ReloadSettings();
   ui_->playlist->view()->ReloadSettings();
   app_->internet_model()->ReloadSettings();
 #ifdef HAVE_WIIMOTEDEV

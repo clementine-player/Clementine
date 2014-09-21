@@ -26,6 +26,7 @@
 #define VK_AUDIO_H
 
 #include <QAbstractListModel>
+#include "vk_global.h"
 #include "audioitem.h"
 #include "abstractlistmodel.h"
 #include "reply.h"
@@ -35,6 +36,7 @@ namespace Vreen {
 class Client;
 typedef ReplyBase<AudioItemList> AudioItemListReply;
 typedef ReplyBase<AudioAlbumItemList> AudioAlbumItemListReply;
+typedef ReplyBase<QList<int>> IdListReply;
 
 class AudioProviderPrivate;
 class VK_SHARED_EXPORT AudioProvider : public QObject
@@ -60,6 +62,8 @@ public:
     IntReply *getCount(int oid = 0);
     IntReply *addToLibrary(int aid, int oid, int gid = 0);
     IntReply *removeFromLibrary(int aid, int oid);
+    IdListReply *setBroadcast(int aid, int oid, const IdList& targetIds);
+    IdListReply *resetBroadcast(const IdList& targetIds);
 protected:
     QScopedPointer<AudioProviderPrivate> d_ptr;
 };

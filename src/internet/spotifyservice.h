@@ -53,12 +53,13 @@ class SpotifyService : public InternetService {
   void ShowContextMenu(const QPoint& global_pos);
   void ItemDoubleClicked(QStandardItem* item);
   void DropMimeData(const QMimeData* data, const QModelIndex& index);
-  PlaylistItem::Options playlistitem_options() const;
   QWidget* HeaderWidget() const;
 
   void Logout();
   void Login(const QString& username, const QString& password);
   Q_INVOKABLE void LoadImage(const QString& id);
+  Q_INVOKABLE void SetPaused(const bool paused);
+  Q_INVOKABLE void Seek(const int offset /* in msec */);
 
   SpotifyServer* server() const;
 

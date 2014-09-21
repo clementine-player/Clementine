@@ -39,7 +39,7 @@ RainbowDashAnalyzer::RainbowDashAnalyzer(QWidget* parent)
       available_rainbow_width_(0),
       px_per_frame_(0),
       x_offset_(0),
-      background_brush_(QColor(0x38, 0x88, 0x00)) {
+      background_brush_(QColor(0x0f, 0x43, 0x73)) {
   memset(history_, 0, sizeof(history_));
 
   for (int i = 0; i < kRainbowBands; ++i) {

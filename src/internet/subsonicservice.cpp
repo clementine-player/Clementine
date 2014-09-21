@@ -374,8 +374,18 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "subsonic-response");
   if (reader.attributes().value("status") != "ok") {
-    // TODO: error handling
-    return;
+    reader.readNextStartElement();
+    int error = reader.attributes().value("code").toString().toInt();
+
+    // Compatibility with Ampache :
+    // When there is no data, Ampache returns NotFound
+    // whereas Subsonic returns empty albumList2 tag
+    switch (error) {
+      case SubsonicService::ApiError_NotFound:
+        break;
+      default:
+        return;
+    }
   }
 
   int albums_added = 0;

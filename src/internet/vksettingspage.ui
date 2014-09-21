@@ -64,12 +64,12 @@
            <string>Max global search results</string>
           </property>
           <property name="buddy">
-           <cstring>maxGlobalSearch</cstring>
+           <cstring>max_global_search</cstring>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="maxGlobalSearch">
+         <widget class="QSpinBox" name="max_global_search">
           <property name="minimum">
            <number>50</number>
           </property>
@@ -107,6 +107,13 @@
        <widget class="QCheckBox" name="groups_in_global_search">
         <property name="text">
          <string>Show groups in global search result</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="enable_broadcast">
+        <property name="text">
+         <string>Show playing song on your page</string>
         </property>
        </widget>
       </item>

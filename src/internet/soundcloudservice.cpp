@@ -495,10 +495,14 @@ Song SoundCloudService::ExtractSong(const QVariantMap& result_song) {
 
     QVariant cover = result_song["artwork_url"];
     if (cover.isValid()) {
+      // Increase cover size.
+      // See https://developers.soundcloud.com/docs/api/reference#artwork_url
+      QString big_cover = cover.toString().replace("large", "t500x500");
+      QUrl cover_url(big_cover, QUrl::StrictMode);
+
       // SoundCloud covers URL are https, but our cover loader doesn't seem to
       // deal well with https URL. Anyway, we don't need a secure connection to
       // get a cover image.
-      QUrl cover_url = cover.toUrl();
       cover_url.setScheme("http");
       song.set_art_automatic(cover_url.toEncoded());
     }

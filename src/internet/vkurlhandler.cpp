@@ -19,45 +19,39 @@
 
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/player.h"
 
 #include "vkservice.h"
 #include "vkmusiccache.h"
 
 VkUrlHandler::VkUrlHandler(VkService* service, QObject* parent)
-  : UrlHandler(parent),
-    service_(service) {
-}
+    : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult VkUrlHandler::StartLoading(const QUrl& url) {
   QStringList args = url.path().split("/");
   LoadResult result;
 
   if (args.size() < 2) {
-    qLog(Error) << "Invalid Vk.com URL: " << url
-                << "Url format should be vk://<source>/<id>."
-                << "For example vk://song/61145020_166946521/Daughtry/Gone Too Soon";
+    qLog(Error)
+        << "Invalid Vk.com URL: " << url
+        << "Url format should be vk://<source>/<id>."
+        << "For example vk://song/61145020_166946521/Daughtry/Gone Too Soon";
   } else {
     QString action = url.host();
 
     if (action == "song") {
-      service_->SetCurrentSongFromUrl(url);
-      result = LoadResult(url, LoadResult::TrackAvailable, service_->cache()->Get(url));
+      result = service_->GetSongResult(url);
     } else if (action == "group") {
       result = service_->GetGroupNextSongUrl(url);
     } else {
       qLog(Error) << "Invalid vk.com url action:" << action;
     }
   }
+
   return result;
 }
 
-void VkUrlHandler::TrackSkipped() {
-  service_->cache()->BreakCurrentCaching();
-}
-
-void VkUrlHandler::ForceAddToCache(const QUrl& url) {
-  service_->cache()->ForceCache(url);
-}
+void VkUrlHandler::TrackSkipped() { service_->SongSkipped(); }
 
 UrlHandler::LoadResult VkUrlHandler::LoadNext(const QUrl& url) {
   if (url.host() == "group") {

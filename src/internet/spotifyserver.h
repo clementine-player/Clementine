@@ -50,6 +50,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   void SetPlaybackSettings(pb::spotify::Bitrate bitrate,
                            bool volume_normalisation);
   void LoadToplist();
+  void SetPaused(const bool paused);
 
   int server_port() const;
 
@@ -71,6 +72,7 @@ signals:
   void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
   void AlbumBrowseResults(const pb::spotify::BrowseAlbumResponse& response);
   void ToplistBrowseResults(const pb::spotify::BrowseToplistResponse& response);
+  void SeekCompleted();
 
  protected:
   void MessageArrived(const pb::spotify::Message& message);

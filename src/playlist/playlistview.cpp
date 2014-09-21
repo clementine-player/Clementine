@@ -256,6 +256,7 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
     disconnect(playlist_, SIGNAL(DynamicModeChanged(bool)), this,
                SLOT(DynamicModeChanged(bool)));
     disconnect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
+    disconnect(playlist_, SIGNAL(QueueChanged()), this, SLOT(update()));
 
     disconnect(dynamic_controls_, SIGNAL(Expand()), playlist_,
                SLOT(ExpandDynamicPlaylist()));
@@ -273,11 +274,12 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
   read_only_settings_ = false;
 
   connect(playlist_, SIGNAL(RestoreFinished()), SLOT(JumpToLastPlayedTrack()));
-
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
   connect(playlist_, SIGNAL(DynamicModeChanged(bool)),
           SLOT(DynamicModeChanged(bool)));
   connect(playlist_, SIGNAL(destroyed()), SLOT(PlaylistDestroyed()));
+  connect(playlist_, SIGNAL(QueueChanged()), SLOT(update()));
+
   connect(dynamic_controls_, SIGNAL(Expand()), playlist_,
           SLOT(ExpandDynamicPlaylist()));
   connect(dynamic_controls_, SIGNAL(Repopulate()), playlist_,
@@ -727,7 +729,7 @@ void PlaylistView::leaveEvent(QEvent* e) {
 }
 
 void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
-  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+  if (editTriggers() & QAbstractItemView::NoEditTriggers) {
     return;
   }
 
@@ -750,7 +752,7 @@ void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
 }
 
 void PlaylistView::RatingHoverOut() {
-  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+  if (editTriggers() & QAbstractItemView::NoEditTriggers) {
     return;
   }
 
@@ -771,7 +773,7 @@ void PlaylistView::RatingHoverOut() {
 }
 
 void PlaylistView::mousePressEvent(QMouseEvent* event) {
-  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+  if (editTriggers() & QAbstractItemView::NoEditTriggers) {
     QTreeView::mousePressEvent(event);
     return;
   }
@@ -1109,6 +1111,11 @@ void PlaylistView::ReloadSettings() {
     emit BackgroundPropertyChanged();
     force_background_redraw_ = true;
   }
+
+  if(!s.value("click_edit_inline", true).toBool())
+      setEditTriggers(editTriggers() & ~QAbstractItemView::SelectedClicked);
+  else
+      setEditTriggers(editTriggers() | QAbstractItemView::SelectedClicked);
 }
 
 void PlaylistView::SaveSettings() {

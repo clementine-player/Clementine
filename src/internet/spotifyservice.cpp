@@ -528,10 +528,6 @@ void SpotifyService::SongFromProtobuf(const pb::spotify::Track& track,
   song->set_filesize(0);
 }
 
-PlaylistItem::Options SpotifyService::playlistitem_options() const {
-  return PlaylistItem::PauseDisabled | PlaylistItem::SeekDisabled;
-}
-
 QWidget* SpotifyService::HeaderWidget() const {
   if (IsLoggedIn()) return search_box_;
   return nullptr;
@@ -695,6 +691,16 @@ void SpotifyService::DropMimeData(const QMimeData* data,
 void SpotifyService::LoadImage(const QString& id) {
   EnsureServerCreated();
   server_->LoadImage(id);
+}
+
+void SpotifyService::SetPaused(const bool paused) {
+  EnsureServerCreated();
+  server_->SetPaused(paused);
+}
+
+void SpotifyService::Seek(const int offset /* in msec */) {
+  EnsureServerCreated();
+  server_->Seek(offset);
 }
 
 void SpotifyService::SyncPlaylistProgress(

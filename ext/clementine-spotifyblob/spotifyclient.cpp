@@ -292,6 +292,8 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
     SetPlaybackSettings(message.set_playback_settings_request());
   } else if (message.has_browse_toplist_request()) {
     BrowseToplist(message.browse_toplist_request());
+  } else if (message.has_pause_request()) {
+    SetPaused(message.pause_request());
   }
 }
 
@@ -682,6 +684,9 @@ int SpotifyClient::MusicDeliveryCallback(sp_session* session,
   }
 
   if (num_frames == 0) {
+    // According to libspotify documentation, this occurs when a discontinuity
+    // has occurred (such as after a seek). Maybe should clear buffers here as
+    // well? (in addition of clearing buffers in gstenginepipeline.cpp)
     return 0;
   }
 
@@ -840,8 +845,16 @@ void SpotifyClient::StartPlayback(const pb::spotify::PlaybackRequest& req) {
 }
 
 void SpotifyClient::Seek(qint64 offset_bytes) {
-  // TODO
-  qLog(Error) << "TODO seeking";
+  if (sp_session_player_seek(session_, offset_bytes) != SP_ERROR_OK) {
+    qLog(Error) << "Seek error";
+    return;
+  }
+
+  pb::spotify::Message message;
+
+  pb::spotify::SeekCompleted* response = message.mutable_seek_completed();
+  Q_UNUSED(response);
+  SendMessage(message);
 }
 
 void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
@@ -1015,6 +1028,10 @@ void SpotifyClient::BrowseToplist(
       SP_TOPLIST_REGION_EVERYWHERE,      // TODO: Support other regions.
       nullptr, &ToplistBrowseComplete, this);
   pending_toplist_browses_[browse] = req;
+}
+
+void SpotifyClient::SetPaused(const pb::spotify::PauseRequest& req) {
+  sp_session_player_play(session_, !req.paused());
 }
 
 void SpotifyClient::ToplistBrowseComplete(sp_toplistbrowse* result,

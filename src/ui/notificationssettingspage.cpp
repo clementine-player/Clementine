@@ -154,6 +154,8 @@ void NotificationsSettingsPage::Load() {
       s.value("ShowOnVolumeChange", false).toBool());
   ui_->notifications_play_mode->setChecked(
       s.value("ShowOnPlayModeChange", true).toBool());
+  ui_->notifications_pause->setChecked(
+      s.value("ShowOnPausePlayback", true).toBool());
   ui_->notifications_art->setChecked(s.value("ShowArt", true).toBool());
   ui_->notifications_custom_text_enabled->setChecked(
       s.value("CustomTextEnabled", false).toBool());
@@ -203,6 +205,7 @@ void NotificationsSettingsPage::Save() {
   s.setValue("Timeout", ui_->notifications_duration->value() * 1000);
   s.setValue("ShowOnVolumeChange", ui_->notifications_volume->isChecked());
   s.setValue("ShowOnPlayModeChange", ui_->notifications_play_mode->isChecked());
+  s.setValue("ShowOnPausePlayback", ui_->notifications_pause->isChecked());
   s.setValue("ShowArt", ui_->notifications_art->isChecked());
   s.setValue("CustomTextEnabled",
              ui_->notifications_custom_text_enabled->isChecked());

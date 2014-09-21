@@ -173,6 +173,9 @@ message SeekRequest {
   optional int64 offset_bytes = 1;
 }
 
+message SeekCompleted {
+}
+
 enum Bitrate {
   Bitrate96k = 1;
   Bitrate160k = 2;
@@ -184,7 +187,11 @@ message PlaybackSettings {
   optional bool volume_normalisation = 2 [default = false];
 }
 
-// NEXT_ID: 21
+message PauseRequest {
+  optional bool paused = 1 [default = false];
+}
+
+// NEXT_ID: 23
 message Message {
   // Not currently used
   optional int32 id = 18;
@@ -208,4 +215,6 @@ message Message {
   optional PlaybackSettings set_playback_settings_request = 17;
   optional BrowseToplistRequest browse_toplist_request = 19;
   optional BrowseToplistResponse browse_toplist_response = 20;
+  optional PauseRequest pause_request = 21;
+  optional SeekCompleted seek_completed = 22;
 }

@@ -236,8 +236,28 @@ void GlobalSearchModel::GetChildResults(
       GetChildResults(itemFromIndex(index), results, visited);
     }
   } else {
-    // No - it's a song, add its result
-    results->append(item->data(Role_Result).value<SearchProvider::Result>());
+    // No - maybe it's a song, add its result if valid
+    QVariant result = item->data(Role_Result);
+    if (result.isValid()) {
+      results->append(result.value<SearchProvider::Result>());
+    } else {
+      // Maybe it's a provider then?
+      bool is_provider;
+      const int sort_index = item->data(Role_ProviderIndex).toInt(&is_provider);
+      if (is_provider) {
+        // Go through all the items (through the proxy to keep them ordered) and
+        // add the ones belonging to this provider to our list
+        for (int i = 0; i < proxy_->rowCount(invisibleRootItem()->index()); ++i) {
+          QModelIndex child_index =
+              proxy_->index(i, 0, invisibleRootItem()->index());
+          const QStandardItem* child_item =
+              itemFromIndex(proxy_->mapToSource(child_index));
+          if (child_item->data(Role_ProviderIndex).toInt() == sort_index) {
+            GetChildResults(child_item, results, visited);
+          }
+        }
+      }
+    }
   }
 }
 

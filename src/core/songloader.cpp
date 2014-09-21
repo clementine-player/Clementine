@@ -31,7 +31,6 @@
 #endif
 
 #include "config.h"
-#include "core/concurrentrun.h"
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/signalchecker.h"

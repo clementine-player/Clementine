@@ -210,6 +210,29 @@ IntReply *AudioProvider::removeFromLibrary(int aid, int oid)
     return reply;
 }
 
+IdListReply *AudioProvider::setBroadcast(int aid, int oid, const IdList &targetIds)
+{
+    Q_D(AudioProvider);
+
+    QVariantMap args;
+    args.insert("audio", QString("%1_%2").arg(oid).arg(aid));
+    args.insert("target_ids", join(targetIds));
+
+    auto reply = d->client->request<IdListReply>("audio.setBroadcast", args, ReplyPrivate::handleIdList);
+    return reply;
+}
+
+IdListReply *AudioProvider::resetBroadcast(const IdList &targetIds)
+{
+    Q_D(AudioProvider);
+
+    QVariantMap args;
+    args.insert("audio","");
+    args.insert("target_ids", join(targetIds));
+    auto reply = d->client->request<IdListReply>("audio.setBroadcast", args, ReplyPrivate::handleIdList);
+    return reply;
+}
+
 AudioItemListReply *AudioProvider::getAudiosByIds(const QString &ids)
 {
     Q_D(AudioProvider);

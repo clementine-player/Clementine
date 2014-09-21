@@ -122,6 +122,16 @@ void ReplyPrivate::_q_network_reply_error(QNetworkReply::NetworkError code)
     emit q->resultReady(response);
 }
 
+QVariant ReplyPrivate::handleIdList(const QVariant &response)
+{
+    IdList ids;
+    auto list = response.toList();
+    foreach (auto item, list) {
+        ids.append(item.toInt());
+    }
+    return QVariant::fromValue(ids);
+}
+
 
 QVariant MessageListHandler::operator()(const QVariant &response)
 {

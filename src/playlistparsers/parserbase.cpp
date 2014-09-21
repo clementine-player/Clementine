@@ -20,6 +20,7 @@
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
+#include "playlist/playlist.h"
 
 #include <QUrl>
 
@@ -46,8 +47,10 @@ void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
     }
   }
 
-  // Convert native separators for Windows paths
-  filename = QDir::fromNativeSeparators(filename);
+  // Clementine always wants / separators internally.  Using
+  // QDir::fromNativeSeparators() only works on the same platform the playlist
+  // was created on/for, using replace() lets playlists work on any platform.
+  filename = filename.replace('\\', '/');
 
   // Make the path absolute
   if (!QDir::isAbsolutePath(filename)) {
@@ -87,11 +90,19 @@ QString ParserBase::URLOrRelativeFilename(const QUrl& url,
                                           const QDir& dir) const {
   if (url.scheme() != "file") return url.toString();
 
+  QSettings s;
+  s.beginGroup(Playlist::kSettingsGroup);
+  int p = s.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
+  const Playlist::Path path = static_cast<Playlist::Path>(p);
+  s.endGroup();
+
   const QString filename = url.toLocalFile();
-  if (QDir::isAbsolutePath(filename)) {
+
+  if (path != Playlist::Path_Absolute && QDir::isAbsolutePath(filename)) {
     const QString relative = dir.relativeFilePath(filename);
 
-    if (!relative.contains("..")) return relative;
+    if (!relative.startsWith("../") || path == Playlist::Path_Relative)
+      return relative;
   }
   return filename;
 }

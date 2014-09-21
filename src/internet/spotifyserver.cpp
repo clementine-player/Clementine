@@ -154,6 +154,8 @@ void SpotifyServer::MessageArrived(const pb::spotify::Message& message) {
     emit AlbumBrowseResults(message.browse_album_response());
   } else if (message.has_browse_toplist_response()) {
     emit ToplistBrowseResults(message.browse_toplist_response());
+  } else if (message.has_seek_completed()) {
+    emit SeekCompleted();
   }
 }
 
@@ -263,5 +265,12 @@ void SpotifyServer::LoadToplist() {
   req->set_type(pb::spotify::BrowseToplistRequest::Tracks);
   req->set_region(pb::spotify::BrowseToplistRequest::Everywhere);
 
+  SendOrQueueMessage(message);
+}
+
+void SpotifyServer::SetPaused(const bool paused) {
+  pb::spotify::Message message;
+  pb::spotify::PauseRequest* req = message.mutable_pause_request();
+  req->set_paused(paused);
   SendOrQueueMessage(message);
 }
