@@ -111,6 +111,7 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
                                       "format", G_TYPE_STRING, format,
                                       "rate", G_TYPE_INT, sample_rate,
                                       "channels", G_TYPE_INT, channels,
+                                      "layout", G_TYPE_STRING, "interleaved",
                                       nullptr);
 
   gst_app_src_set_caps(appsrc_, caps);
@@ -129,7 +130,7 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
 void MediaPipeline::WriteData(const char* data, qint64 length) {
   if (!is_initialised()) return;
 
-  GstBuffer* buffer = gst_buffer_new_and_alloc(length);
+  GstBuffer* buffer = gst_buffer_new_allocate(nullptr, length, nullptr);
   GstMapInfo map_info;
   gst_buffer_map(buffer, &map_info, GST_MAP_WRITE);
 
@@ -137,12 +138,10 @@ void MediaPipeline::WriteData(const char* data, qint64 length) {
 
   gst_buffer_unmap(buffer, &map_info);
 
-  GST_BUFFER_OFFSET(buffer) = offset_bytes_;
-  GST_BUFFER_TIMESTAMP(buffer) = offset_bytes_ * kNsecPerSec / byte_rate_;
+  GST_BUFFER_PTS(buffer) = offset_bytes_ * kNsecPerSec / byte_rate_;
   GST_BUFFER_DURATION(buffer) = length * kNsecPerSec / byte_rate_;
 
   offset_bytes_ += length;
-  GST_BUFFER_OFFSET_END(buffer) = offset_bytes_;
 
   gst_app_src_push_buffer(appsrc_, buffer);
 }

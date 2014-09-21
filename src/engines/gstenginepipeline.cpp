@@ -367,27 +367,15 @@ bool GstEnginePipeline::Init() {
     g_object_set(G_OBJECT(queue_), "use-buffering", true, nullptr);
   }
 
-  gst_element_link(queue_, audioconvert_);
+  gst_element_link_many(queue_, audioconvert_, convert_sink, nullptr);
 
-  // Create the caps to put in each path in the tee.  The scope path gets 16-bit
-  // ints and the audiosink path gets float32.
+  // Link the elements with special caps
+  // The scope path through the tee gets 16-bit ints.
   GstCaps* caps16 = gst_caps_new_simple ("audio/x-raw",
                                          "format", G_TYPE_STRING, "S16LE",
                                          NULL);
-
-  GstCaps* caps32 = gst_caps_new_simple ("audio/x-raw",
-                                         "format", G_TYPE_STRING, "F32LE",
-                                         NULL);
-
-  if (mono_playback_) {
-    gst_caps_set_simple(caps32, "channels", G_TYPE_INT, 1, nullptr);
-  }
-
-  // Link the elements with special caps
   gst_element_link_filtered(probe_converter, probe_sink, caps16);
-  gst_element_link_filtered(audioconvert_, convert_sink, caps32);
   gst_caps_unref(caps16);
-  gst_caps_unref(caps32);
 
   // Link the outputs of tee to the queues on each path.
   gst_pad_link(gst_element_get_request_pad(tee, "src_%u"),
