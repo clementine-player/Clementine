@@ -384,9 +384,9 @@ bool GstEnginePipeline::Init() {
   gst_caps_unref(caps32);
 
   // Link the outputs of tee to the queues on each path.
-  gst_pad_link(gst_element_get_request_pad(tee, "src_%d"),
+  gst_pad_link(gst_element_get_request_pad(tee, "src_%u"),
                gst_element_get_static_pad(probe_queue, "sink"));
-  gst_pad_link(gst_element_get_request_pad(tee, "src_%d"),
+  gst_pad_link(gst_element_get_request_pad(tee, "src_%u"),
                gst_element_get_static_pad(audio_queue, "sink"));
 
   // Link replaygain elements if enabled.
@@ -401,13 +401,13 @@ bool GstEnginePipeline::Init() {
                         audiosink_, nullptr);
 
   // Add probes and handlers.
-  gst_pad_add_buffer_probe(gst_element_get_static_pad(probe_converter, "src"),
-                           GST_PAD_PROBE_TYPE_BUFFER,
-                           HandoffCallback, this, nullptr);
+  gst_pad_add_probe(gst_element_get_static_pad(probe_converter, "src"),
+                    GST_PAD_PROBE_TYPE_BUFFER,
+                    HandoffCallback, this, nullptr);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
                            BusCallbackSync, this, nullptr);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
-                                 BusCallback, this, nullptr);
+                                 BusCallback, this);
 
   MaybeLinkDecodeToAudio();
 

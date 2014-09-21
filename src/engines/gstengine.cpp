@@ -281,8 +281,11 @@ void GstEngine::UpdateScope(int chunk_length) {
   if (!GST_CLOCK_TIME_IS_VALID(GST_BUFFER_DURATION(latest_buffer_))) return;
   if (GST_BUFFER_DURATION(latest_buffer_) == 0) return;
 
+  GstMapInfo map;
+  gst_buffer_map(latest_buffer_, &map, GST_MAP_READ);
+
   // determine where to split the buffer
-  int chunk_density = (GST_BUFFER_SIZE(latest_buffer_) * kNsecPerMsec) /
+  int chunk_density = (map.size * kNsecPerMsec) /
                       GST_BUFFER_DURATION(latest_buffer_);
 
   int chunk_size = chunk_length * chunk_density;
@@ -293,7 +296,6 @@ void GstEngine::UpdateScope(int chunk_length) {
     return;
   }
 
-  gst_buffer_map(latest_buffer_, &map, GST_MAP_READ);
   const sample_type* source = reinterpret_cast<sample_type*>(map.data);
   sample_type* dest = scope_.data();
   source += (chunk_size / sizeof(sample_type)) * scope_chunk_;
@@ -733,7 +735,7 @@ GstEngine::PluginDetailsList GstEngine::GetPluginList(
     GstElementFactory* factory = GST_ELEMENT_FACTORY(p->data);
     if (QString(gst_element_factory_get_klass(factory)).contains(classname)) {
       PluginDetails details;
-      details.name = QString::fromUtf8(GST_PLUGIN_FEATURE_NAME(p->data));
+      details.name = QString::fromUtf8(gst_plugin_feature_get_name(p->data));
       details.description = QString::fromUtf8(
           gst_element_factory_get_metadata(factory,
                                            GST_ELEMENT_METADATA_DESCRIPTION));

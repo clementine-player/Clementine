@@ -156,9 +156,7 @@
 
 #include <cmath>
 
-#include <gst/cdda/gstcddabasesrc.h>
-#endif
-
+#ifdef Q_OS_DARWIN
 // Non exported mac-specific function.
 void qt_mac_set_dock_menu(QMenu*);
 #endif
