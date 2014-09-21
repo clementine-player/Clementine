@@ -49,7 +49,7 @@
 #include "core/utilities.h"
 
 #ifdef HAVE_MOODBAR
-#include "gst/moodbar/spectrum.h"
+#include "gst/moodbar/plugin.h"
 #endif
 
 #ifdef HAVE_LIBPULSE
@@ -128,7 +128,7 @@ void GstEngine::InitialiseGstreamer() {
   gst_init(nullptr, nullptr);
 
 #ifdef HAVE_MOODBAR
-  gstmoodbar_register_static();
+  gstfastspectrum_register_static();
 #endif
 
   QSet<QString> plugin_names;

@@ -23,9 +23,14 @@
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "moodbar/moodbarbuilder.h"
+
+#include "gst/moodbar/gstfastspectrum.h"
 
 bool MoodbarPipeline::sIsAvailable = false;
+const int MoodbarPipeline::kBands = 128;
 
 MoodbarPipeline::MoodbarPipeline(const QUrl& local_filename)
     : QObject(nullptr),
@@ -39,12 +44,6 @@ MoodbarPipeline::~MoodbarPipeline() { Cleanup(); }
 bool MoodbarPipeline::IsAvailable() {
   if (!sIsAvailable) {
     GstElementFactory* factory = gst_element_factory_find("fftwspectrum");
-    if (!factory) {
-      return false;
-    }
-    gst_object_unref(factory);
-
-    factory = gst_element_factory_find("moodbar");
     if (!factory) {
       return false;
     }
@@ -82,40 +81,44 @@ void MoodbarPipeline::Start() {
 
   GstElement* decodebin = CreateElement("uridecodebin");
   convert_element_ = CreateElement("audioconvert");
-  GstElement* fftwspectrum = CreateElement("fftwspectrum");
-  GstElement* moodbar = CreateElement("moodbar");
-  GstElement* appsink = CreateElement("appsink");
+  GstElement* spectrum = CreateElement("fastspectrum");
+  GstElement* fakesink = CreateElement("fakesink");
 
-  if (!decodebin || !convert_element_ || !fftwspectrum || !moodbar ||
-      !appsink) {
+  if (!decodebin || !convert_element_ || !spectrum || !fakesink) {
     pipeline_ = nullptr;
     emit Finished(false);
     return;
   }
 
   // Join them together
-  gst_element_link_many(convert_element_, fftwspectrum, moodbar, appsink,
-                        nullptr);
+  if (!gst_element_link(convert_element_, spectrum) ||
+      !gst_element_link(spectrum, fakesink)) {
+    qLog(Error) << "Failed to link elements";
+    pipeline_ = nullptr;
+    emit Finished(false);
+    return;
+  }
+
+  builder_.reset(new MoodbarBuilder);
 
   // Set properties
-  g_object_set(decodebin, "uri", local_filename_.toEncoded().constData(),
+  g_object_set(decodebin,
+               "uri", local_filename_.toEncoded().constData(),
                nullptr);
-  g_object_set(fftwspectrum, "def-size", 2048, "def-step", 1024, "hiquality",
-               true, nullptr);
-  g_object_set(moodbar, "height", 1, "max-width", 1000, nullptr);
+  g_object_set(spectrum,
+               "bands", kBands,
+               nullptr);
+
+  GstFastSpectrum* fast_spectrum = GST_FASTSPECTRUM(spectrum);
+  fast_spectrum->output_callback = [this](double* magnitudes, int size) {
+    builder_->AddFrame(magnitudes, size);
+  };
 
   // Connect signals
   CHECKED_GCONNECT(decodebin, "pad-added", &NewPadCallback, this);
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
-                           BusCallbackSync, this, nullptr);
-
-  // Set appsink callbacks
-  GstAppSinkCallbacks callbacks;
-  memset(&callbacks, 0, sizeof(callbacks));
-  callbacks.new_sample = NewBufferCallback;
-
-  gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(appsink), &callbacks,
-                             this, nullptr);
+  GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
+  gst_bus_set_sync_handler(bus, BusCallbackSync, this, nullptr);
+  gst_object_unref(bus);
 
   // Start playing
   gst_element_set_state(pipeline_, GST_STATE_PLAYING);
@@ -146,21 +149,14 @@ void MoodbarPipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
 
   gst_pad_link(pad, audiopad);
   gst_object_unref(audiopad);
-}
 
-GstFlowReturn MoodbarPipeline::NewBufferCallback(GstAppSink* app_sink,
-                                                 gpointer data) {
-  MoodbarPipeline* self = reinterpret_cast<MoodbarPipeline*>(data);
+  int rate = 0;
+  GstCaps* caps = gst_pad_get_current_caps(pad);
+  GstStructure* structure = gst_caps_get_structure(caps, 0);
+  gst_structure_get_int(structure, "rate", &rate);
+  gst_caps_unref(caps);
 
-  GstSample* sample = gst_app_sink_pull_sample(app_sink);
-  GstBuffer* buffer = gst_sample_get_buffer(sample);
-  GstMapInfo map;
-  gst_buffer_map(buffer, &map, GST_MAP_READ);
-  self->data_.append(reinterpret_cast<const char*>(map.data), map.size);
-  gst_buffer_unmap(buffer, &map);
-  gst_buffer_unref(buffer);
-
-  return GST_FLOW_OK;
+  self->builder_->Init(kBands, rate);
 }
 
 GstBusSyncReply MoodbarPipeline::BusCallbackSync(GstBus*, GstMessage* msg,
@@ -185,6 +181,9 @@ GstBusSyncReply MoodbarPipeline::BusCallbackSync(GstBus*, GstMessage* msg,
 
 void MoodbarPipeline::Stop(bool success) {
   success_ = success;
+  data_ = builder_->Finish(1000);
+  builder_.reset();
+
   emit Finished(success);
 }
 

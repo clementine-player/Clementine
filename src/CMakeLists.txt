@@ -1056,6 +1056,7 @@ optional_source(HAVE_LIBMTP
 # Moodbar support
 optional_source(HAVE_MOODBAR
   SOURCES
+    moodbar/moodbarbuilder.cpp
     moodbar/moodbarcontroller.cpp
     moodbar/moodbaritemdelegate.cpp
     moodbar/moodbarloader.cpp
