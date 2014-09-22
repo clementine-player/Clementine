@@ -41,7 +41,9 @@
 #include <qtsparkle/Updater>
 #endif
 
+#ifdef HAVE_AUDIOCD
 #include <gst/cdda/gstcddabasesrc.h>
+#endif
 
 #include "core/appearance.h"
 #include "core/application.h"
@@ -151,6 +153,8 @@
 #ifdef HAVE_VK
 #include "internet/vkservice.h"
 #endif
+
+#include <cmath>
 
 #ifdef Q_OS_DARWIN
 // Non exported mac-specific function.

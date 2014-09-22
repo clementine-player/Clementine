@@ -49,7 +49,7 @@
 #include "core/utilities.h"
 
 #ifdef HAVE_MOODBAR
-#include "gst/moodbar/spectrum.h"
+#include "gst/moodbar/plugin.h"
 #endif
 
 #ifdef HAVE_LIBPULSE
@@ -128,7 +128,7 @@ void GstEngine::InitialiseGstreamer() {
   gst_init(nullptr, nullptr);
 
 #ifdef HAVE_MOODBAR
-  gstmoodbar_register_static();
+  gstfastspectrum_register_static();
 #endif
 
   QSet<QString> plugin_names;
@@ -281,20 +281,14 @@ void GstEngine::UpdateScope(int chunk_length) {
   if (!GST_CLOCK_TIME_IS_VALID(GST_BUFFER_DURATION(latest_buffer_))) return;
   if (GST_BUFFER_DURATION(latest_buffer_) == 0) return;
 
+  GstMapInfo map;
+  gst_buffer_map(latest_buffer_, &map, GST_MAP_READ);
+
   // determine where to split the buffer
-  int chunk_density = (GST_BUFFER_SIZE(latest_buffer_) * kNsecPerMsec) /
+  int chunk_density = (map.size * kNsecPerMsec) /
                       GST_BUFFER_DURATION(latest_buffer_);
 
   int chunk_size = chunk_length * chunk_density;
-
-  // determine the number of channels
-  GstStructure* structure =
-      gst_caps_get_structure(GST_BUFFER_CAPS(latest_buffer_), 0);
-  int channels = 2;
-  gst_structure_get_int(structure, "channels", &channels);
-
-  // scope does not support >2 channels
-  if (channels > 2) return;
 
   // in case a buffer doesn't arrive in time
   if (scope_chunk_ >= scope_chunks_) {
@@ -302,11 +296,9 @@ void GstEngine::UpdateScope(int chunk_length) {
     return;
   }
 
-  // set the starting point in the buffer to take data from
-  const sample_type* source =
-      reinterpret_cast<sample_type*>(GST_BUFFER_DATA(latest_buffer_));
-  source += (chunk_size / sizeof(sample_type)) * scope_chunk_;
+  const sample_type* source = reinterpret_cast<sample_type*>(map.data);
   sample_type* dest = scope_.data();
+  source += (chunk_size / sizeof(sample_type)) * scope_chunk_;
 
   int bytes = 0;
 
@@ -314,7 +306,7 @@ void GstEngine::UpdateScope(int chunk_length) {
   if (scope_chunk_ == scope_chunks_ - 1) {
     bytes =
         qMin(static_cast<Engine::Scope::size_type>(
-                 GST_BUFFER_SIZE(latest_buffer_) - (chunk_size * scope_chunk_)),
+                 map.size - (chunk_size * scope_chunk_)),
              scope_.size() * sizeof(sample_type));
   } else {
     bytes = qMin(static_cast<Engine::Scope::size_type>(chunk_size),
@@ -322,8 +314,11 @@ void GstEngine::UpdateScope(int chunk_length) {
   }
 
   scope_chunk_++;
-
   memcpy(dest, source, bytes);
+
+  gst_buffer_unmap(latest_buffer_, &map);
+  gst_buffer_unref(latest_buffer_);
+  latest_buffer_ = NULL;
 }
 
 void GstEngine::StartPreloading(const QUrl& url, bool force_stop_at_end,
@@ -731,17 +726,19 @@ GstEngine::PluginDetailsList GstEngine::GetPluginList(
     const QString& classname) const {
   PluginDetailsList ret;
 
-  GstRegistry* registry = gst_registry_get_default();
+  GstRegistry* registry = gst_registry_get();
   GList* const features =
       gst_registry_get_feature_list(registry, GST_TYPE_ELEMENT_FACTORY);
 
   GList* p = features;
   while (p) {
     GstElementFactory* factory = GST_ELEMENT_FACTORY(p->data);
-    if (QString(factory->details.klass).contains(classname)) {
+    if (QString(gst_element_factory_get_klass(factory)).contains(classname)) {
       PluginDetails details;
-      details.name = QString::fromUtf8(GST_PLUGIN_FEATURE_NAME(p->data));
-      details.description = QString::fromUtf8(factory->details.longname);
+      details.name = QString::fromUtf8(gst_plugin_feature_get_name(p->data));
+      details.description = QString::fromUtf8(
+          gst_element_factory_get_metadata(factory,
+                                           GST_ELEMENT_METADATA_DESCRIPTION));
       ret << details;
     }
     p = g_list_next(p);

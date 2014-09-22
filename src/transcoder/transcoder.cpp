@@ -94,7 +94,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   // The caps we're trying to find
   GstCaps* target_caps = gst_caps_from_string(mime_type.toUtf8().constData());
 
-  GstRegistry* registry = gst_registry_get_default();
+  GstRegistry* registry = gst_registry_get();
   GList* const features =
       gst_registry_get_feature_list(registry, GST_TYPE_ELEMENT_FACTORY);
 
@@ -102,7 +102,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
     GstElementFactory* factory = GST_ELEMENT_FACTORY(p->data);
 
     // Is this the right type of plugin?
-    if (QString(factory->details.klass).contains(element_type)) {
+    if (QString(gst_element_factory_get_klass(factory)).contains(element_type)) {
       const GList* const templates =
           gst_element_factory_get_static_pad_templates(factory);
       for (const GList* p = templates; p; p = g_list_next(p)) {
@@ -118,7 +118,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
         if (intersection) {
           if (!gst_caps_is_empty(intersection)) {
             int rank = gst_plugin_feature_get_rank(GST_PLUGIN_FEATURE(factory));
-            QString name = GST_PLUGIN_FEATURE_NAME(factory);
+            QString name = GST_OBJECT_NAME(factory);
 
             if (name.startsWith("ffmux") || name.startsWith("ffenc"))
               rank = -1;  // ffmpeg usually sucks
@@ -448,10 +448,10 @@ bool Transcoder::StartJob(const Job& job) {
 
   CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, state.get());
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
-                           BusCallbackSync, state.get());
-  state->bus_callback_id_ =
-      gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
-                        BusCallback, state.get());
+                           BusCallbackSync, state.get(), nullptr);
+  state->bus_callback_id_ = gst_bus_add_watch(
+      gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
+                           BusCallback, state.get());
 
   // Start the pipeline
   gst_element_set_state(state->pipeline_, GST_STATE_PLAYING);
@@ -493,7 +493,7 @@ bool Transcoder::event(QEvent* e) {
     // called after the pipeline is shutting down
     gst_bus_set_sync_handler(
         gst_pipeline_get_bus(GST_PIPELINE(finished_event->state_->pipeline_)),
-        nullptr, nullptr);
+        nullptr, nullptr, nullptr);
     g_source_remove(finished_event->state_->bus_callback_id_);
 
     // Remove it from the list - this will also destroy the GStreamer pipeline
@@ -522,8 +522,8 @@ void Transcoder::Cancel() {
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
-    gst_bus_set_sync_handler(
-        gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)), nullptr, nullptr);
+    gst_bus_set_sync_handler(gst_pipeline_get_bus(
+        GST_PIPELINE(state->pipeline_)), nullptr, nullptr, nullptr);
     g_source_remove(state->bus_callback_id_);
 
     // Stop the pipeline
@@ -547,10 +547,9 @@ QMap<QString, float> Transcoder::GetProgress() const {
 
     gint64 position = 0;
     gint64 duration = 0;
-    GstFormat format = GST_FORMAT_TIME;
 
-    gst_element_query_position(state->pipeline_, &format, &position);
-    gst_element_query_duration(state->pipeline_, &format, &duration);
+    gst_element_query_position(state->pipeline_, GST_FORMAT_TIME, &position);
+    gst_element_query_duration(state->pipeline_, GST_FORMAT_TIME, &duration);
 
     ret[state->job_.input] = float(position) / duration;
   }

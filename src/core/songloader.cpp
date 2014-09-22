@@ -27,7 +27,7 @@
 #include <QtDebug>
 
 #ifdef HAVE_AUDIOCD
-#include <gst/cdda/gstcddabasesrc.h>
+#include <gst/audio/gstaudiocdsrc.h>
 #endif
 
 #include "config.h"
@@ -138,7 +138,8 @@ SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
 SongLoader::Result SongLoader::LoadAudioCD() {
 #ifdef HAVE_AUDIOCD
   // Create gstreamer cdda element
-  GstElement* cdda = gst_element_make_from_uri(GST_URI_SRC, "cdda://", nullptr);
+  GstElement* cdda = gst_element_make_from_uri(
+      GST_URI_SRC, "cdda://", nullptr, nullptr);
   if (cdda == nullptr) {
     qLog(Error) << "Error while creating CDDA GstElement";
     return Error;
@@ -157,10 +158,8 @@ SongLoader::Result SongLoader::LoadAudioCD() {
 
   // Get number of tracks
   GstFormat fmt = gst_format_get_by_nick("track");
-  GstFormat out_fmt = fmt;
   gint64 num_tracks = 0;
-  if (!gst_element_query_duration(cdda, &out_fmt, &num_tracks) ||
-      out_fmt != fmt) {
+  if (!gst_element_query_duration(cdda, fmt, &num_tracks)) {
     qLog(Error) << "Error while querying cdda GstElement";
     gst_object_unref(GST_OBJECT(cdda));
     return Error;
@@ -461,7 +460,7 @@ void SongLoader::LoadRemote() {
 
   // Create the source element automatically based on the URL
   GstElement* source = gst_element_make_from_uri(
-      GST_URI_SRC, url_.toEncoded().constData(), nullptr);
+      GST_URI_SRC, url_.toEncoded().constData(), nullptr, nullptr);
   if (!source) {
     qLog(Warning) << "Couldn't create gstreamer source element for"
                   << url_.toString();
@@ -479,12 +478,13 @@ void SongLoader::LoadRemote() {
   // Connect callbacks
   GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline.get()));
   CHECKED_GCONNECT(typefind, "have-type", &TypeFound, this);
-  gst_bus_set_sync_handler(bus, BusCallbackSync, this);
+  gst_bus_set_sync_handler(bus, BusCallbackSync, this, NULL);
   gst_bus_add_watch(bus, BusCallback, this);
 
   // Add a probe to the sink so we can capture the data if it's a playlist
   GstPad* pad = gst_element_get_static_pad(fakesink, "sink");
-  gst_pad_add_buffer_probe(pad, G_CALLBACK(DataReady), this);
+  gst_pad_add_probe(
+      pad, GST_PAD_PROBE_TYPE_BUFFER, &DataReady, this, NULL);
   gst_object_unref(pad);
 
   QEventLoop loop;
@@ -520,15 +520,21 @@ void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
   instance->StopTypefindAsync(true);
 }
 
-gboolean SongLoader::DataReady(GstPad*, GstBuffer* buf, void* self) {
-  SongLoader* instance = static_cast<SongLoader*>(self);
+GstPadProbeReturn SongLoader::DataReady(
+    GstPad*, GstPadProbeInfo* info, gpointer self) {
+  SongLoader* instance = reinterpret_cast<SongLoader*>(self);
 
-  if (instance->state_ == Finished) return true;
+  if (instance->state_ == Finished)
+    return GST_PAD_PROBE_OK;
+
+  GstBuffer* buffer = gst_pad_probe_info_get_buffer(info);
+  GstMapInfo map;
+  gst_buffer_map(buffer, &map, GST_MAP_READ);
 
   // Append the data to the buffer
-  instance->buffer_.append(reinterpret_cast<const char*>(GST_BUFFER_DATA(buf)),
-                           GST_BUFFER_SIZE(buf));
+  instance->buffer_.append(reinterpret_cast<const char*>(map.data), map.size);
   qLog(Debug) << "Received total" << instance->buffer_.size() << "bytes";
+  gst_buffer_unmap(buffer, &map);
 
   if (instance->state_ == WaitingForMagic &&
       (instance->buffer_.size() >= PlaylistParser::kMagicSize ||
@@ -537,7 +543,7 @@ gboolean SongLoader::DataReady(GstPad*, GstBuffer* buf, void* self) {
     instance->MagicReady();
   }
 
-  return true;
+  return GST_PAD_PROBE_OK;
 }
 
 gboolean SongLoader::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
