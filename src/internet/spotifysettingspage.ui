@@ -18,6 +18,13 @@
     <widget class="LoginStateWidget" name="login_state" native="true"/>
    </item>
    <item>
+    <widget class="QCheckBox" name="enable_box">
+     <property name="text">
+      <string>Enable Spotify</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="account_group">
      <property name="title">
       <string>Account details</string>
@@ -29,7 +36,16 @@
          <bool>true</bool>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item row="1" column="0">

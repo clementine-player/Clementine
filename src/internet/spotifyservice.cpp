@@ -40,6 +40,7 @@ const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
 const char* SpotifyService::kBlobDownloadUrl =
     "http://spotify.clementine-player.org/";
+const char* SpotifyService::kEnabled = "spotify_enabled";
 const int SpotifyService::kSearchDelayMsec = 400;
 
 SpotifyService::SpotifyService(Application* app, InternetModel* parent)
@@ -138,6 +139,11 @@ void SpotifyService::LazyPopulate(QStandardItem* item) {
 }
 
 void SpotifyService::Login(const QString& username, const QString& password) {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   Logout();
   EnsureServerCreated(username, password);
 }
@@ -145,6 +151,11 @@ void SpotifyService::Login(const QString& username, const QString& password) {
 void SpotifyService::LoginCompleted(
     bool success, const QString& error,
     pb::spotify::LoginResponse_Error error_code) {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   if (login_task_id_) {
     app_->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
@@ -224,10 +235,17 @@ void SpotifyService::ReloadSettings() {
   if (server_ && blob_process_) {
     server_->SetPlaybackSettings(bitrate_, volume_normalisation_);
   }
+
+  enabled = s.value(SpotifyService::kEnabled, true).toBool();
 }
 
 void SpotifyService::EnsureServerCreated(const QString& username,
                                          const QString& password) {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   if (server_ && blob_process_) {
     return;
   }
@@ -283,6 +301,11 @@ void SpotifyService::EnsureServerCreated(const QString& username,
 }
 
 void SpotifyService::StartBlobProcess() {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   // Try to find an executable to run
   QString blob_path;
   QProcessEnvironment env(QProcessEnvironment::systemEnvironment());
@@ -333,6 +356,11 @@ bool SpotifyService::IsBlobInstalled() const {
 }
 
 void SpotifyService::InstallBlob() {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
 #ifdef HAVE_SPOTIFY_DOWNLOADER
   // The downloader deletes itself when it finishes
   SpotifyBlobDownloader* downloader = new SpotifyBlobDownloader(
@@ -346,6 +374,11 @@ void SpotifyService::InstallBlob() {
 void SpotifyService::BlobDownloadFinished() { EnsureServerCreated(); }
 
 void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
+  if (!enabled) {
+    qLog(Info) << "Spotify disabled" << endl;
+    return;
+  }
+
   if (login_task_id_) {
     app_->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
@@ -416,8 +449,8 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   }
 }
 
-bool SpotifyService::DoPlaylistsDiffer(const pb::spotify::Playlists& response)
-    const {
+bool SpotifyService::DoPlaylistsDiffer(
+    const pb::spotify::Playlists& response) const {
   if (playlists_.count() != response.playlist_size()) {
     return true;
   }

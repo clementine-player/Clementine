@@ -29,7 +29,9 @@ class SpotifyService : public InternetService {
     Type_Toplist,
   };
 
-  enum Role { Role_UserPlaylistIndex = InternetModel::RoleCount, };
+  enum Role {
+    Role_UserPlaylistIndex = InternetModel::RoleCount,
+  };
 
   // Values are persisted - don't change.
   enum LoginState {
@@ -44,6 +46,7 @@ class SpotifyService : public InternetService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
   static const char* kBlobDownloadUrl;
+  static const char* kEnabled;
   static const int kSearchDelayMsec;
 
   void ReloadSettings();
@@ -146,6 +149,7 @@ signals:
   LoginState login_state_;
   pb::spotify::Bitrate bitrate_;
   bool volume_normalisation_;
+  bool enabled;
 };
 
 #endif
