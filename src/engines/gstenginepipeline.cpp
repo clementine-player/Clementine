@@ -96,8 +96,10 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   for (int i = 0; i < kEqBandCount; ++i) eq_band_gains_ << 0;
 
   // Spotify hack
-  connect(InternetModel::Service<SpotifyService>()->server(), SIGNAL(SeekCompleted()),
-      SLOT(SpotifySeekCompleted()));
+  if (InternetModel::Service<SpotifyService>()->IsBlobInstalled()) {
+    connect(InternetModel::Service<SpotifyService>()->server(), SIGNAL(SeekCompleted()),
+        SLOT(SpotifySeekCompleted()));
+  }
 }
 
 void GstEnginePipeline::set_output_device(const QString& sink,
