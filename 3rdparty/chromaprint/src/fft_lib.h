@@ -22,7 +22,7 @@
 #define CHROMAPRINT_FFT_LIB_H_
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include <chromaprint_config.h>
 #endif
 
 #ifdef WITH_AVFFT

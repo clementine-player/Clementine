@@ -103,7 +103,7 @@ if(WITH_FFTW3)
 	message(STATUS "Using FFTW3 for FFT calculations")
 endif(WITH_FFTW3)
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/chromaprint_config.h)
 
 add_subdirectory(src)
 

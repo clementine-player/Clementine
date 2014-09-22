@@ -24,6 +24,10 @@
 #include <gst/gst.h>
 #include <gst/app/gstappsink.h>
 
+#include <memory>
+
+class MoodbarBuilder;
+
 // Creates moodbar data for a single local music file.
 class MoodbarPipeline : public QObject {
   Q_OBJECT
@@ -40,7 +44,7 @@ class MoodbarPipeline : public QObject {
  public slots:
   void Start();
 
-signals:
+ signals:
   void Finished(bool success);
 
  private:
@@ -58,10 +62,13 @@ signals:
 
  private:
   static bool sIsAvailable;
+  static const int kBands;
 
   QUrl local_filename_;
   GstElement* pipeline_;
   GstElement* convert_element_;
+
+  std::unique_ptr<MoodbarBuilder> builder_;
 
   bool success_;
   QByteArray data_;
