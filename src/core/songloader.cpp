@@ -27,7 +27,7 @@
 #include <QtDebug>
 
 #ifdef HAVE_AUDIOCD
-#include <gst/cdda/gstcddabasesrc.h>
+#include <gst/audio/gstaudiocdsrc.h>
 #endif
 
 #include "config.h"
@@ -158,10 +158,8 @@ SongLoader::Result SongLoader::LoadAudioCD() {
 
   // Get number of tracks
   GstFormat fmt = gst_format_get_by_nick("track");
-  GstFormat out_fmt = fmt;
   gint64 num_tracks = 0;
-  if (!gst_element_query_duration(cdda, &out_fmt, &num_tracks) ||
-      out_fmt != fmt) {
+  if (!gst_element_query_duration(cdda, fmt, &num_tracks)) {
     qLog(Error) << "Error while querying cdda GstElement";
     gst_object_unref(GST_OBJECT(cdda));
     return Error;

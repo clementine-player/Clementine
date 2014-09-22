@@ -22,7 +22,7 @@
 
 // These must come after Qt includes (issue 3247)
 #include <cdio/cdio.h>
-#include <gst/cdda/gstcddabasesrc.h>
+#include <gst/audio/gstaudiocdsrc.h>
 
 #include "connecteddevice.h"
 #include "core/song.h"

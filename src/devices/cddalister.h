@@ -18,8 +18,6 @@
 #ifndef CDDALISTER_H
 #define CDDALISTER_H
 
-#include <gst/cdda/gstcddabasesrc.h>
-
 #include <QStringList>
 
 #include "devicelister.h"

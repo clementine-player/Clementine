@@ -1269,7 +1269,6 @@ endif(HAVE_GIO)
 
 if(HAVE_AUDIOCD)
   target_link_libraries(clementine_lib ${CDIO_LIBRARIES})
-  target_link_libraries(clementine_lib ${GSTREAMER_CDDA_LIBRARIES})
 endif(HAVE_AUDIOCD)
 
 if(HAVE_MOODBAR)
