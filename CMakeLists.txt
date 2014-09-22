@@ -215,7 +215,8 @@ optional_component(SEAFILE ON "Seafile support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(AUDIOCD ON "Devices: Audio CD support"
+# Note: broken with gstreamer-1.0 - API changes in the audiocdsrc element.
+optional_component(AUDIOCD OFF "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )
 
