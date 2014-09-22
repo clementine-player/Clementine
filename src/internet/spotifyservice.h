@@ -29,7 +29,10 @@ class SpotifyService : public InternetService {
     Type_Toplist,
   };
 
-  enum Role { Role_UserPlaylistIndex = InternetModel::RoleCount, };
+  enum Role {
+    Role_UserPlaylistIndex = InternetModel::RoleCount,
+    Role_UserPlaylistIsMine, // Is this playlist owned by the user currently logged-in?
+  };
 
   // Values are persisted - don't change.
   enum LoginState {
@@ -53,6 +56,7 @@ class SpotifyService : public InternetService {
   void ShowContextMenu(const QPoint& global_pos);
   void ItemDoubleClicked(QStandardItem* item);
   void DropMimeData(const QMimeData* data, const QModelIndex& index);
+  QList<QAction*> playlistitem_actions(const Song& song) override;
   QWidget* HeaderWidget() const;
 
   void Logout();
@@ -88,6 +92,7 @@ signals:
       const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks);
   void FillPlaylist(QStandardItem* item,
                     const pb::spotify::LoadPlaylistResponse& response);
+  void AddSongsToPlaylist(int playlist_index, const QList<QUrl>& songs_urls);
   void EnsureMenuCreated();
   void ClearSearchResults();
 
@@ -100,6 +105,7 @@ signals:
   void BlobProcessError(QProcess::ProcessError error);
   void LoginCompleted(bool success, const QString& error,
                       pb::spotify::LoginResponse_Error error_code);
+  void AddCurrentSongToPlaylist(QAction* action);
   void PlaylistsUpdated(const pb::spotify::Playlists& response);
   void InboxLoaded(const pb::spotify::LoadPlaylistResponse& response);
   void StarredLoaded(const pb::spotify::LoadPlaylistResponse& response);
@@ -134,6 +140,8 @@ signals:
   QMenu* context_menu_;
   QMenu* playlist_context_menu_;
   QAction* playlist_sync_action_;
+  QList<QAction*> playlistitem_actions_;
+  QUrl current_song_url_;
 
   SearchBoxWidget* search_box_;
 

@@ -21,6 +21,7 @@
 #include "spotifyclient.h"
 
 #include <algorithm>
+#include <memory>
 
 #include <QCoreApplication>
 #include <QDir>
@@ -295,6 +296,8 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
     BrowseToplist(message.browse_toplist_request());
   } else if (message.has_pause_request()) {
     SetPaused(message.pause_request());
+  } else if (message.has_add_tracks_to_playlist()) {
+    AddTracksToPlaylist(message.add_tracks_to_playlist());
   }
 }
 
@@ -438,6 +441,9 @@ void SpotifyClient::SendPlaylistList() {
     pb::spotify::Playlists::Playlist* msg = response->add_playlist();
     msg->set_index(i);
     msg->set_name(sp_playlist_name(playlist));
+    sp_user* playlist_owner = sp_playlist_owner(playlist);
+    msg->set_is_mine(sp_session_user(session_) == playlist_owner);
+    msg->set_owner(sp_user_display_name(playlist_owner));
 
     sp_playlist_offline_status offline_status =
         sp_playlist_get_offline_status(session_, playlist);
@@ -449,6 +455,7 @@ void SpotifyClient::SendPlaylistList() {
     } else if (offline_status == SP_PLAYLIST_OFFLINE_STATUS_WAITING) {
       msg->set_download_progress(0);
     }
+    msg->set_nb_tracks(sp_playlist_num_tracks(playlist));
   }
 
   SendMessage(message);
@@ -591,6 +598,45 @@ void SpotifyClient::PlaylistStateChangedForGetPlaylists(sp_playlist* pl,
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
 
   me->SendPlaylistList();
+}
+
+void SpotifyClient::AddTracksToPlaylist(
+    const pb::spotify::AddTracksToPlaylistRequest& req) {
+
+  // Get the playlist we want to update
+  int playlist_index = req.playlist_index();
+  sp_playlist* playlist =
+      GetPlaylist(pb::spotify::UserPlaylist, playlist_index);
+  if (!playlist) {
+    qLog(Error) << "Playlist " << playlist_index << "not found";
+    return;
+  }
+
+  // Get the tracks we want to add
+  std::unique_ptr<sp_track*[]> tracks_array (new sp_track*[req.track_uri_size()]);
+  for (int i = 0; i < req.track_uri_size(); ++i) {
+    sp_link* track_link = sp_link_create_from_string(req.track_uri(i).c_str());
+    sp_track* track = sp_link_as_track(track_link);
+    sp_track_add_ref(track);
+    sp_link_release(track_link);
+    if (!track) {
+      qLog(Error) << "Track" << QString::fromStdString(req.track_uri(i)) << "not found";
+    }
+    tracks_array[i] = track;
+  }
+
+  // Actually add the tracks to the playlist
+  if (sp_playlist_add_tracks(playlist, tracks_array.get(),
+                             req.track_uri_size(),
+                             0 /* TODO: don't insert at a hardcoded position */,
+                             session_) != SP_ERROR_OK) {
+    qLog(Error) << "Error when adding tracks!";
+  }
+
+  // Clean everything
+  for (int i = 0; i < req.track_uri_size(); ++i) {
+    sp_track_release(tracks_array[i]);
+  }
 }
 
 void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {

@@ -46,9 +46,12 @@ message Playlists {
   message Playlist {
     required int32 index = 1;
     required string name = 2;
-    required bool is_offline = 3;
+    required int32 nb_tracks = 3;
+    required bool is_mine = 4;
+    required string owner= 5;
+    required bool is_offline = 6;
     // Offline sync progress between 0-100.
-    optional int32 download_progress = 4;
+    optional int32 download_progress = 7;
   }
 
   repeated Playlist playlist = 1;
@@ -191,7 +194,12 @@ message PauseRequest {
   optional bool paused = 1 [default = false];
 }
 
-// NEXT_ID: 23
+message AddTracksToPlaylistRequest {
+  required int64 playlist_index = 1;
+  repeated string track_uri = 2;
+}
+
+// NEXT_ID: 24
 message Message {
   // Not currently used
   optional int32 id = 18;
@@ -217,4 +225,5 @@ message Message {
   optional BrowseToplistResponse browse_toplist_response = 20;
   optional PauseRequest pause_request = 21;
   optional SeekCompleted seek_completed = 22;
+  optional AddTracksToPlaylistRequest add_tracks_to_playlist = 23;
 }

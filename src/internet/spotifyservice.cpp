@@ -345,6 +345,17 @@ void SpotifyService::InstallBlob() {
 
 void SpotifyService::BlobDownloadFinished() { EnsureServerCreated(); }
 
+void SpotifyService::AddCurrentSongToPlaylist(QAction* action) {
+  int playlist_index = action->data().toInt();
+  AddSongsToPlaylist(playlist_index, QList<QUrl>() << current_song_url_);
+}
+
+void SpotifyService::AddSongsToPlaylist(int playlist_index,
+                                        const QList<QUrl>& songs_urls) {
+  EnsureServerCreated();
+  server_->AddSongsToPlaylist(playlist_index, songs_urls);
+}
+
 void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   if (login_task_id_) {
     app_->task_manager()->SetTaskFinished(login_task_id_);
@@ -391,6 +402,7 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     qLog(Debug) << "Playlists haven't changed - not updating";
     return;
   }
+  qLog(Debug) << "Playlist have changed: updating";
 
   // Remove and recreate the other playlists
   for (QStandardItem* item : playlists_) {
@@ -401,10 +413,16 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   for (int i = 0; i < response.playlist_size(); ++i) {
     const pb::spotify::Playlists::Playlist& msg = response.playlist(i);
 
-    QStandardItem* item = new QStandardItem(QStringFromStdString(msg.name()));
+    QString playlist_title = QStringFromStdString(msg.name());
+    if (!msg.is_mine()) {
+      const std::string& owner = msg.owner();
+      playlist_title += tr(", by ") + QString::fromUtf8(owner.c_str(), owner.size());
+    }
+    QStandardItem* item = new QStandardItem(playlist_title);
     item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
     item->setData(true, InternetModel::Role_CanLazyLoad);
     item->setData(msg.index(), Role_UserPlaylistIndex);
+    item->setData(msg.is_mine(), Role_UserPlaylistIsMine);
     item->setData(InternetModel::PlayBehaviour_MultipleItems,
                   InternetModel::Role_PlayBehaviour);
 
@@ -416,8 +434,8 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   }
 }
 
-bool SpotifyService::DoPlaylistsDiffer(const pb::spotify::Playlists& response)
-    const {
+bool SpotifyService::DoPlaylistsDiffer(
+    const pb::spotify::Playlists& response) const {
   if (playlists_.count() != response.playlist_size()) {
     return true;
   }
@@ -431,6 +449,10 @@ bool SpotifyService::DoPlaylistsDiffer(const pb::spotify::Playlists& response)
     }
 
     if (QStringFromStdString(msg.name()) != item->text()) {
+      return true;
+    }
+
+    if (msg.nb_tracks() != item->rowCount()) {
       return true;
     }
   }
@@ -526,6 +548,37 @@ void SpotifyService::SongFromProtobuf(const pb::spotify::Track& track,
   song->set_mtime(0);
   song->set_ctime(0);
   song->set_filesize(0);
+}
+
+QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
+  // Clear previous actions
+  while (!playlistitem_actions_.isEmpty()) {
+    QAction* action = playlistitem_actions_.takeFirst();
+    delete action->menu();
+    delete action;
+  }
+
+  // Create a menu with 'add to playlist' actions for each Spotify playlist
+  QAction* add_to_playlists = new QAction(IconLoader::Load("list-add"),
+                                          tr("Add to Spotify playlists"), this);
+  QMenu* playlists_menu = new QMenu();
+  for (const QStandardItem* playlist_item : playlists_) {
+    if (!playlist_item->data(Role_UserPlaylistIsMine).toBool()) {
+      continue;
+    }
+    QAction* add_to_playlist = new QAction(playlist_item->text(), this);
+    add_to_playlist->setData(playlist_item->data(Role_UserPlaylistIndex));
+    playlists_menu->addAction(add_to_playlist);
+  }
+  connect(playlists_menu, SIGNAL(triggered(QAction*)),
+          SLOT(AddCurrentSongToPlaylist(QAction*)));
+  add_to_playlists->setMenu(playlists_menu);
+  playlistitem_actions_.append(add_to_playlists);
+
+  // Keep in mind the current song URL
+  current_song_url_ = song.url();
+
+  return playlistitem_actions_;
 }
 
 QWidget* SpotifyService::HeaderWidget() const {

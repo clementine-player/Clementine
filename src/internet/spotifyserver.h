@@ -43,6 +43,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   void SyncInbox();
   void LoadUserPlaylist(int index);
   void SyncUserPlaylist(int index);
+  void AddSongsToPlaylist(int playlist_index, const QList<QUrl>& songs_urls);
   void StartPlaybackLater(const QString& uri, quint16 port);
   void Search(const QString& text, int limit, int limit_album = 0);
   void LoadImage(const QString& id);

@@ -123,6 +123,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   void Search(const pb::spotify::SearchRequest& req);
   void LoadPlaylist(const pb::spotify::LoadPlaylistRequest& req);
   void SyncPlaylist(const pb::spotify::SyncPlaylistRequest& req);
+  void AddTracksToPlaylist(const pb::spotify::AddTracksToPlaylistRequest& req);
   void StartPlayback(const pb::spotify::PlaybackRequest& req);
   void Seek(qint64 offset_nsec);
   void LoadImage(const QString& id_b64);

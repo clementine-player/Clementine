@@ -24,6 +24,7 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QTimer>
+#include <QUrl>
 
 SpotifyServer::SpotifyServer(QObject* parent)
     : AbstractMessageHandler<pb::spotify::Message>(nullptr, parent),
@@ -204,6 +205,18 @@ void SpotifyServer::LoadStarred() { LoadPlaylist(pb::spotify::Starred); }
 void SpotifyServer::LoadUserPlaylist(int index) {
   Q_ASSERT(index >= 0);
   LoadPlaylist(pb::spotify::UserPlaylist, index);
+}
+
+void SpotifyServer::AddSongsToPlaylist(int playlist_index,
+                                       const QList<QUrl>& songs_urls) {
+  pb::spotify::Message message;
+  pb::spotify::AddTracksToPlaylistRequest* req =
+      message.mutable_add_tracks_to_playlist();
+  req->set_playlist_index(playlist_index);
+  for (const QUrl& song_url : songs_urls) {
+    req->add_track_uri(DataCommaSizeFromQString(song_url.toString()));
+  }
+  SendOrQueueMessage(message);
 }
 
 void SpotifyServer::StartPlaybackLater(const QString& uri, quint16 port) {
