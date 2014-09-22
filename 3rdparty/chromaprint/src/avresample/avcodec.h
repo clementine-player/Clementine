@@ -26,7 +26,7 @@
  * modification -- Lennart */
 
 #if defined(HAVE_CONFIG_H)
-#include <config.h>
+#include <chromaprint_config.h>
 #endif
 
 #include <sys/types.h>
