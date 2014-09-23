@@ -477,7 +477,11 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
+<<<<<<< HEAD
      <height>23</height>
+=======
+     <height>20</height>
+>>>>>>> Support for aborting library scan gracefully.
     </rect>
    </property>
    <widget class="QMenu" name="menu_music">
@@ -551,6 +555,7 @@
     <addaction name="separator"/>
     <addaction name="action_update_library"/>
     <addaction name="action_full_library_scan"/>
+    <addaction name="action_abort_library_scan"/>
     <addaction name="separator"/>
     <addaction name="action_configure"/>
     <addaction name="separator"/>
@@ -942,6 +947,11 @@
    </property>
    <property name="toolTip">
     <string>Show or hide the sidebar</string>
+   </property>
+  </action>
+  <action name="action_abort_library_scan">
+   <property name="text">
+    <string>Abort library scan</string>
    </property>
   </action>
  </widget>

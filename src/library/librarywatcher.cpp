@@ -102,11 +102,12 @@ LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
 
 LibraryWatcher::ScanTransaction::~ScanTransaction() {
   // If we're stopping then don't commit the transaction
+  watcher_->task_manager_->SetTaskFinished(task_id_);
+
   if (watcher_->stop_requested_) return;
 
   CommitNewOrUpdatedSongs();
 
-  watcher_->task_manager_->SetTaskFinished(task_id_);
 
   if (watcher_->monitor_) {
     // Watch the new subdirectories
@@ -118,6 +119,7 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
 
 void LibraryWatcher::ScanTransaction::AddToProgress(int n) {
   progress_ += n;
+  // @TODO this can crash - task_manager_ is not accessible.
   watcher_->task_manager_->SetTaskProgress(task_id_, progress_, progress_max_);
 }
 
@@ -213,7 +215,7 @@ void LibraryWatcher::AddDirectory(const Directory& dir,
     transaction.SetKnownSubdirs(subdirs);
     transaction.AddToProgressMax(subdirs.count());
     for (const Subdirectory& subdir : subdirs) {
-      if (stop_requested_) return;
+      if (stop_requested_) break;
 
       if (scan_on_startup_) ScanSubdirectory(subdir.path, subdir, &transaction);
 
@@ -228,6 +230,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
                                       const Subdirectory& subdir,
                                       ScanTransaction* t,
                                       bool force_noincremental) {
+  qDebug() << Q_FUNC_INFO << path;
   QFileInfo path_info(path);
   QDir      path_dir(path);
 
@@ -640,7 +643,7 @@ void LibraryWatcher::RescanPathsNow() {
     transaction.AddToProgressMax(rescan_queue_[dir].count());
 
     for (const QString& path : rescan_queue_[dir]) {
-      if (stop_requested_) return;
+      if (stop_requested_) break;
       Subdirectory subdir;
       subdir.directory_id = dir;
       subdir.mtime = 0;
@@ -771,13 +774,15 @@ void LibraryWatcher::IncrementalScanNow() { PerformScan(true, false); }
 void LibraryWatcher::FullScanNow() { PerformScan(false, false); } // Why would you ignore mtimes?
 
 void LibraryWatcher::PerformScan(bool incremental, bool ignore_mtimes) {
+  stop_requested_ = false;
   for (const Directory& dir : watched_dirs_.values()) {
+    if (stop_requested_) break;
     ScanTransaction transaction(this, dir.id, incremental, ignore_mtimes);
     SubdirectoryList subdirs(transaction.GetAllSubdirs());
     transaction.AddToProgressMax(subdirs.count());
 
     for (const Subdirectory& subdir : subdirs) {
-      if (stop_requested_) return;
+      if (stop_requested_) break;
 
       ScanSubdirectory(subdir.path, subdir, &transaction);
     }

@@ -171,6 +171,8 @@ void Library::IncrementalScan() { watcher_->IncrementalScanAsync(); }
 
 void Library::FullScan() { watcher_->FullScanAsync(); }
 
+void Library::AbortScan() { watcher_->Stop(); }
+
 void Library::PauseWatcher() { watcher_->SetRescanPausedAsync(true); }
 
 void Library::ResumeWatcher() { watcher_->SetRescanPausedAsync(false); }

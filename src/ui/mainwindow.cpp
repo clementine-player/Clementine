@@ -467,6 +467,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(IncrementalScan()));
   connect(ui_->action_full_library_scan, SIGNAL(triggered()), app_->library(),
           SLOT(FullScan()));
+  connect(ui_->action_abort_library_scan, SIGNAL(triggered()), app_->library(),
+          SLOT(AbortScan()));
   connect(ui_->action_queue_manager, SIGNAL(triggered()),
           SLOT(ShowQueueManager()));
   connect(ui_->action_add_files_to_transcoder, SIGNAL(triggered()),

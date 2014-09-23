@@ -54,8 +54,9 @@ class LibraryWatcher : public QObject {
   void FullScanAsync();
   void SetRescanPausedAsync(bool pause);
   void ReloadSettingsAsync();
-
-  void Stop() { stop_requested_ = true; }
+  void Stop() {
+      stop_requested_ = true;
+  }
 
 signals:
   void NewOrUpdatedSongs(const SongList& songs);

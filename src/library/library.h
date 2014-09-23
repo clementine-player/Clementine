@@ -62,6 +62,7 @@ class Library : public QObject {
   void ResumeWatcher();
 
   void FullScan();
+  void AbortScan();
 
  private slots:
   void IncrementalScan();
