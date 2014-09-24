@@ -230,16 +230,16 @@ void TranscodeDialog::Add() {
 }
 
 void TranscodeDialog::Import() {
-  QString rootPath = QFileDialog::getExistingDirectory(
-      this, tr("Open music directory to recursively import"),
+  QString path = QFileDialog::getExistingDirectory(
+      this, tr("Open a directory to import music from"),
       last_import_dir_, QFileDialog::ShowDirsOnly);
   
-  if(rootPath.isEmpty()) return;
+  if(path.isEmpty()) return;
   
   QStringList filenames;
   QStringList audioTypes = QString(FileView::kFileFilter).split(" ", 
       QString::SkipEmptyParts);
-  QDirIterator files(rootPath, audioTypes, QDir::Files | QDir::Readable, 
+  QDirIterator files(path, audioTypes, QDir::Files | QDir::Readable, 
       QDirIterator::Subdirectories);
   
   while(files.hasNext()) {
@@ -248,7 +248,7 @@ void TranscodeDialog::Import() {
   
   SetFilenames(filenames);
   
-  last_import_dir_ = rootPath;
+  last_import_dir_ = path;
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
   settings.setValue("last_import_dir", last_import_dir_);
