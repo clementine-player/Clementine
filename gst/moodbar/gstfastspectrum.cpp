@@ -505,7 +505,7 @@ gst_fastspectrum_transform_ip (GstBaseTransform * trans, GstBuffer * buffer)
 
       if (spectrum->output_callback) {
         // Calculate average
-        for (uint i = 0; i < spectrum->bands; i++) {
+        for (guint i = 0; i < spectrum->bands; i++) {
           spectrum->spect_magnitude[i] /= spectrum->num_fft;
         }
 
