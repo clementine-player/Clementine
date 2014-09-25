@@ -407,7 +407,7 @@ bool Transcoder::StartJob(const Job& job) {
 
   // Create all the elements
   GstElement* src = CreateElement("filesrc", state->pipeline_);
-  GstElement* decode = CreateElement("decodebin2", state->pipeline_);
+  GstElement* decode = CreateElement("decodebin", state->pipeline_);
   GstElement* convert = CreateElement("audioconvert", state->pipeline_);
   GstElement* resample = CreateElement("audioresample", state->pipeline_);
   GstElement* codec = CreateElementForMimeType(
