@@ -52,6 +52,7 @@ class LibraryWatcher : public QObject {
 
   void IncrementalScanAsync();
   void FullScanAsync();
+  void RescanTracksAsync(SongList songs);
   void SetRescanPausedAsync(bool pause);
   void ReloadSettingsAsync();
   void Stop() {
@@ -147,6 +148,7 @@ signals:
   void DirectoryChanged(const QString& path);
   void IncrementalScanNow();
   void FullScanNow();
+  void RescanTracksNow();
   void RescanPathsNow();
   void ScanSubdirectory(const QString& path, const Subdirectory& subdir,
                         ScanTransaction* t, bool force_noincremental = false);
@@ -218,6 +220,8 @@ signals:
   CueParser* cue_parser_;
 
   static QStringList sValidImages;
+
+  SongList song_rescan_queue_; // Set by ui thread
 };
 
 inline QString LibraryWatcher::NoExtensionPart(const QString& fileName) {

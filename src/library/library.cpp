@@ -173,6 +173,12 @@ void Library::FullScan() { watcher_->FullScanAsync(); }
 
 void Library::AbortScan() { watcher_->Stop(); }
 
+void Library::Rescan(SongList songs) {
+    qDebug() << Q_FUNC_INFO << "rescan " << songs.size() << " songs";
+    if(!songs.isEmpty())
+        watcher_->RescanTracksAsync(songs);
+}
+
 void Library::PauseWatcher() { watcher_->SetRescanPausedAsync(true); }
 
 void Library::ResumeWatcher() { watcher_->SetRescanPausedAsync(false); }

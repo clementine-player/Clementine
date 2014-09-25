@@ -45,6 +45,7 @@
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
+#include "library/library.h"
 
 using smart_playlists::Wizard;
 
@@ -418,6 +419,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
     edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::Base),
                                             tr("Edit tracks information..."),
                                             this, SLOT(EditTracks()));
+    rescan_files_ = context_menu_->addAction(tr("Rescan files"),
+                                            this, SLOT(RescanTracks()));
     show_in_browser_ = context_menu_->addAction(
         IconLoader::Load("document-open-folder", IconLoader::Base), 
         tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
@@ -501,6 +504,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   // edit_track element
   edit_track_->setVisible(!smart_playlists_only && (regular_editable <= 1));
   edit_track_->setEnabled(regular_editable == 1);
+  rescan_files_->setVisible(edit_track_->isVisible());
+  rescan_files_->setEnabled(true);
 
   // only when no smart playlists selected
   organise_->setVisible(regular_elements_only);
@@ -671,6 +676,10 @@ void LibraryView::EditTracks() {
   }
   edit_tag_dialog_->SetSongs(GetSelectedSongs());
   edit_tag_dialog_->show();
+}
+
+void LibraryView::RescanTracks() {
+    app_->library()->Rescan(GetSelectedSongs());
 }
 
 void LibraryView::CopyToDevice() {

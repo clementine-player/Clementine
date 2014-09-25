@@ -719,6 +719,15 @@ void EditTagDialog::accept() {
 void EditTagDialog::AcceptFinished() {
   if (!SetLoading(QString())) return;
 
+  // Ask library to rescan the edited tracks to update
+  // GUI.
+  SongList editedTracks;
+  for(Data d: data_) {
+      editedTracks << d.current_;
+      qDebug() << Q_FUNC_INFO << " edited " << d.current_.url().path();
+  }
+  app_->library()->Rescan(editedTracks);
+
   QDialog::accept();
 }
 

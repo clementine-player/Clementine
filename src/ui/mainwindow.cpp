@@ -430,6 +430,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_toggle_show_sidebar, SIGNAL(toggled(bool)),
           ui_->sidebar_layout, SLOT(setShown(bool)));
   connect(ui_->action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
+  connect(ui_->action_rescan_track, SIGNAL(triggered()), SLOT(RescanTracks()));
   connect(ui_->action_renumber_tracks, SIGNAL(triggered()),
           SLOT(RenumberTracks()));
   connect(ui_->action_selection_set_value, SIGNAL(triggered()),
@@ -683,6 +684,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_undoredo_ = playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_edit_track);
   playlist_menu_->addAction(ui_->action_view_stream_details);
+  playlist_menu_->addAction(ui_->action_rescan_track);
   playlist_menu_->addAction(ui_->action_edit_value);
   playlist_menu_->addAction(ui_->action_renumber_tracks);
   playlist_menu_->addAction(ui_->action_selection_set_value);
@@ -1708,6 +1710,11 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   ui_->action_edit_track->setVisible(editable);
   ui_->action_auto_complete_tags->setEnabled(editable);
   ui_->action_auto_complete_tags->setVisible(editable);
+
+
+  ui_->action_rescan_track->setEnabled(true);
+  ui_->action_rescan_track->setVisible(true);
+
   // the rest of the read / write actions work only when there are no CUEs
   // involved
   if (cue_selected) editable = 0;
@@ -1854,6 +1861,26 @@ void MainWindow::PlaylistPlay() {
 
 void MainWindow::PlaylistStopAfter() {
   app_->playlist_manager()->current()->StopAfter(playlist_menu_index_.row());
+}
+
+
+void MainWindow::RescanTracks() {
+  SongList songs;
+  PlaylistItemList items;
+
+  for (const QModelIndex& index :
+       ui_->playlist->view()->selectionModel()->selection().indexes()) {
+    if (index.column() != 0) continue;
+    int row =
+        app_->playlist_manager()->current()->proxy()->mapToSource(index).row();
+    PlaylistItemPtr item(app_->playlist_manager()->current()->item_at(row));
+    Song song = item->Metadata();
+
+    songs << song;
+    items << item;
+  }
+
+  app_->library()->Rescan(songs);
 }
 
 void MainWindow::EditTracks() {
