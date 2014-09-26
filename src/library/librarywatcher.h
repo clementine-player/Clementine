@@ -208,6 +208,7 @@ signals:
   bool stop_requested_;
   bool scan_on_startup_;
   bool monitor_;
+  bool rescan_in_progress_; // True if RescanTracksNow() has been called and is working.
 
   QMap<int, Directory> watched_dirs_;
   QTimer* rescan_timer_;

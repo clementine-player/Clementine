@@ -60,6 +60,7 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
       stop_requested_(false),
       scan_on_startup_(true),
       monitor_(true),
+      rescan_in_progress_(false),
       rescan_timer_(new QTimer(this)),
       rescan_paused_(false),
       total_watches_(0),
@@ -770,8 +771,12 @@ void LibraryWatcher::FullScanAsync() {
 }
 
 void LibraryWatcher::RescanTracksAsync(SongList songs) {
+    // Is List thread safe? if not, this may crash.
     song_rescan_queue_.append(songs);
-    QMetaObject::invokeMethod(this, "RescanTracksNow", Qt::QueuedConnection);
+
+    // Call only if it's not already running
+    if(!rescan_in_progress_)
+        QMetaObject::invokeMethod(this, "RescanTracksNow", Qt::QueuedConnection);
 }
 
 void LibraryWatcher::IncrementalScanNow() { PerformScan(true, false); }
@@ -779,28 +784,28 @@ void LibraryWatcher::IncrementalScanNow() { PerformScan(true, false); }
 void LibraryWatcher::FullScanNow() { PerformScan(false, false); }
 
 void LibraryWatcher::RescanTracksNow() {
+    Q_ASSERT(!rescan_in_progress_);
     stop_requested_ = false;
 
     // Currently we are too stupid to rescan one file at a time, so
     // we'll just scan the full directiories
-
-    // @ BTW this doesn't work!! This function can be called several times and will break!
     QStringList scanned_dirs; // To avoid double scans
-
-    for(Song song : song_rescan_queue_) {
+    while(!song_rescan_queue_.isEmpty()) {
         if(stop_requested_) break;
+        Song song = song_rescan_queue_.takeFirst();
         QString songdir = song.url().toLocalFile().section('/', 0, -2);
         if(!scanned_dirs.contains(songdir)) {
             qDebug() << Q_FUNC_INFO << "Song " << song.title() << " dir id " << song.directory_id() << " dir " << songdir;
             ScanTransaction transaction(this, song.directory_id(), false);
             ScanSubdirectory(songdir, Subdirectory(), &transaction);
             scanned_dirs << songdir;
+            emit CompilationsNeedUpdating();
         } else {
             qDebug() << Q_FUNC_INFO << "Directory " << songdir << " already scanned - skipping.";
         }
     }
-    song_rescan_queue_.clear();
-    emit CompilationsNeedUpdating();
+    Q_ASSERT(song_rescan_queue_.isEmpty());
+    rescan_in_progress_ = false;
 }
 // Why would you ignore mtimes?
 
