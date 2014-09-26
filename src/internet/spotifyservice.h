@@ -56,7 +56,7 @@ class SpotifyService : public InternetService {
   void ShowContextMenu(const QPoint& global_pos);
   void ItemDoubleClicked(QStandardItem* item);
   void DropMimeData(const QMimeData* data, const QModelIndex& index);
-  QList<QAction*> playlistitem_actions(const Song& song);
+  QList<QAction*> playlistitem_actions(const Song& song) override;
   QWidget* HeaderWidget() const;
 
   void Logout();

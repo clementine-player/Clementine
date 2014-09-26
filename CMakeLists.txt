@@ -3,6 +3,7 @@ cmake_policy(SET CMP0011 OLD)
 
 include(CheckCXXCompilerFlag)
 include(FindPkgConfig)
+include(cmake/C++11Compat.cmake)
 include(cmake/Summary.cmake)
 include(cmake/Version.cmake)
 include(cmake/Deb.cmake)
