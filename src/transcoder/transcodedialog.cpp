@@ -234,7 +234,7 @@ void TranscodeDialog::Import() {
       this, tr("Open a directory to import music from"),
       last_import_dir_, QFileDialog::ShowDirsOnly);
   
-  if(path.isEmpty()) return;
+  if (path.isEmpty()) return;
   
   QStringList filenames;
   QStringList audioTypes = QString(FileView::kFileFilter).split(" ", 
@@ -242,7 +242,7 @@ void TranscodeDialog::Import() {
   QDirIterator files(path, audioTypes, QDir::Files | QDir::Readable, 
       QDirIterator::Subdirectories);
   
-  while(files.hasNext()) {
+  while (files.hasNext()) {
     filenames << files.next();
   }
   
