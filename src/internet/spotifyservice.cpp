@@ -53,6 +53,10 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
       toplist_(nullptr),
       login_task_id_(0),
       context_menu_(nullptr),
+      playlist_context_menu_(nullptr),
+      song_context_menu_(nullptr),
+      playlist_sync_action_(nullptr),
+      remove_from_playlist_(nullptr),
       search_box_(new SearchBoxWidget(this)),
       search_delay_(new QTimer(this)),
       login_state_(LoginState_OtherError),
@@ -590,9 +594,7 @@ void SpotifyService::EnsureMenuCreated() {
   if (context_menu_) return;
 
   context_menu_ = new QMenu;
-  context_menu_->addAction(IconLoader::Load("configure"),
-                           tr("Configure Spotify..."), this,
-                           SLOT(ShowConfig()));
+  context_menu_->addAction(GetNewShowConfigAction());
 
   playlist_context_menu_ = new QMenu;
   playlist_context_menu_->addActions(GetPlaylistActions());
@@ -601,9 +603,15 @@ void SpotifyService::EnsureMenuCreated() {
       IconLoader::Load("view-refresh"), tr("Make playlist available offline"),
       this, SLOT(SyncPlaylist()));
   playlist_context_menu_->addSeparator();
-  playlist_context_menu_->addAction(IconLoader::Load("configure"),
-                                    tr("Configure Spotify..."), this,
-                                    SLOT(ShowConfig()));
+  playlist_context_menu_->addAction(GetNewShowConfigAction());
+
+  song_context_menu_ = new QMenu;
+  remove_from_playlist_ = song_context_menu_->addAction(
+      IconLoader::Load("list-remove"),
+      tr("Remove from playlist"), this,
+      SLOT(RemoveCurrentFromPlaylist()));
+
+  song_context_menu_->addAction(GetNewShowConfigAction());
 }
 
 void SpotifyService::ClearSearchResults() {
@@ -728,6 +736,14 @@ void SpotifyService::ShowContextMenu(const QPoint& global_pos) {
       playlist_sync_action_->setData(qVariantFromValue(item));
       playlist_context_menu_->popup(global_pos);
       return;
+    } else if (type == InternetModel::Type_Track) {
+      // Is this track contained in a playlist we can modify?
+      bool is_playlist_modifiable = item->parent() &&
+          item->parent()->data(Role_UserPlaylistIsMine).toBool();
+      remove_from_playlist_->setVisible(is_playlist_modifiable);
+
+      song_context_menu_->popup(global_pos);
+      return;
     }
   }
 
@@ -791,8 +807,47 @@ void SpotifyService::SyncPlaylistProgress(
   }
 }
 
+QAction* SpotifyService::GetNewShowConfigAction() {
+  QAction* action = new QAction(
+      IconLoader::Load("configure"),
+      tr("Configure Spotify..."), this);
+  connect(action, SIGNAL(triggered()), this, SLOT(ShowConfig()));
+  return action;
+}
+
 void SpotifyService::ShowConfig() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Spotify);
+}
+
+void SpotifyService::RemoveCurrentFromPlaylist() {
+  const QModelIndexList& indexes(model()->selected_indexes());
+  QMap<int, QList<int> > playlists_songs_indices;
+  for (const QModelIndex& index : indexes) {
+    if (index.parent().data(InternetModel::Role_Type).toInt() !=
+        InternetModel::Type_UserPlaylist) {
+      continue;
+    }
+
+    if (index.data(InternetModel::Role_Type).toInt() != InternetModel::Type_Track) {
+      continue;
+    }
+
+    int playlist_index = index.parent().data(Role_UserPlaylistIndex).toInt();
+    int song_index = index.row();
+    playlists_songs_indices[playlist_index] << song_index;
+  }
+
+  for (QMap<int, QList<int> >::const_iterator it =
+       playlists_songs_indices.constBegin();
+       it != playlists_songs_indices.constEnd(); ++it) {
+    RemoveSongsFromPlaylist(it.key(), it.value());
+  }
+}
+
+void SpotifyService::RemoveSongsFromPlaylist(
+    int playlist_index, const QList<int>& songs_indices_to_remove) {
+
+  server_->RemoveSongsFromPlaylist(playlist_index, songs_indices_to_remove);
 }
 
 void SpotifyService::Logout() {

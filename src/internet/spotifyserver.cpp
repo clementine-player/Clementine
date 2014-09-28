@@ -219,6 +219,18 @@ void SpotifyServer::AddSongsToPlaylist(int playlist_index,
   SendOrQueueMessage(message);
 }
 
+void SpotifyServer::RemoveSongsFromPlaylist(
+    int playlist_index, const QList<int>& songs_indices_to_remove) {
+  pb::spotify::Message message;
+  pb::spotify::RemoveTracksFromPlaylistRequest* req =
+      message.mutable_remove_tracks_from_playlist();
+  req->set_playlist_index(playlist_index);
+  for (int song_index : songs_indices_to_remove) {
+    req->add_track_index(song_index);
+  }
+  SendOrQueueMessage(message);
+}
+
 void SpotifyServer::StartPlaybackLater(const QString& uri, quint16 port) {
   QTimer* timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), timer, SLOT(deleteLater()));

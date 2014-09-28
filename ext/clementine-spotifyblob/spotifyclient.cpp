@@ -298,6 +298,8 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
     SetPaused(message.pause_request());
   } else if (message.has_add_tracks_to_playlist()) {
     AddTracksToPlaylist(message.add_tracks_to_playlist());
+  } else if (message.has_remove_tracks_from_playlist()) {
+    RemoveTracksFromPlaylist(message.remove_tracks_from_playlist());
   }
 }
 
@@ -638,6 +640,31 @@ void SpotifyClient::AddTracksToPlaylist(
     sp_track_release(tracks_array[i]);
   }
 }
+
+void SpotifyClient::RemoveTracksFromPlaylist(
+    const pb::spotify::RemoveTracksFromPlaylistRequest& req) {
+
+  // Get the playlist we want to update
+  int playlist_index = req.playlist_index();
+  sp_playlist* playlist =
+      GetPlaylist(pb::spotify::UserPlaylist, playlist_index);
+  if (!playlist) {
+    qLog(Error) << "Playlist " << playlist_index << "not found";
+    return;
+  }
+
+  // Get the position of the tracks we want to remove
+  std::unique_ptr<int[]> tracks_indices_array (new int[req.track_index_size()]);
+  for (int i = 0; i < req.track_index_size(); ++i) {
+    tracks_indices_array[i] = req.track_index(i);
+  }
+
+  if (sp_playlist_remove_tracks(playlist, tracks_indices_array.get(),
+                             req.track_index_size()) != SP_ERROR_OK) {
+    qLog(Error) << "Error when removing tracks!";
+  }
+}
+
 
 void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {
   sp_album* album = sp_track_album(track);

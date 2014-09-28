@@ -199,7 +199,12 @@ message AddTracksToPlaylistRequest {
   repeated string track_uri = 2;
 }
 
-// NEXT_ID: 24
+message RemoveTracksFromPlaylistRequest {
+  required int64 playlist_index = 1;
+  repeated int64 track_index = 2;
+}
+
+// NEXT_ID: 25
 message Message {
   // Not currently used
   optional int32 id = 18;
@@ -226,4 +231,5 @@ message Message {
   optional PauseRequest pause_request = 21;
   optional SeekCompleted seek_completed = 22;
   optional AddTracksToPlaylistRequest add_tracks_to_playlist = 23;
+  optional RemoveTracksFromPlaylistRequest remove_tracks_from_playlist = 24;
 }
