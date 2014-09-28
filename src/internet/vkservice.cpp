@@ -546,8 +546,6 @@ void VkService::Logout() {
     client_->disconnectFromHost();
     connection_->clear();
   }
-
-  UpdateRoot();
 }
 
 bool VkService::HasAccount() const { return connection_->hasAccount(); }
