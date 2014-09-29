@@ -205,9 +205,9 @@ void OSD::ShowMessage(const QString& summary, const QString& message,
     switch (behaviour_) {
       case Native:
         if (image.isNull()) {
-          ShowMessageNative(summary, message, icon, QImage());
+          ShowMessageNative(summary, message, "application-x-clementine", QImage());
         } else {
-          ShowMessageNative(summary, message, QString(), image);
+          ShowMessageNative(summary, message, "application-x-clementine", image);
         }
         break;
 
