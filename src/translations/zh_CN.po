@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-09-16 11:53+0000\n"
+"PO-Revision-Date: 2014-09-26 10:37+0000\n"
 "Last-Translator: zhangmin <zm1990s@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,12 +80,12 @@ msgstr "%1 (%2 首歌)"
 msgid "%1 albums"
 msgstr "%1 个专辑"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 #, qt-format
 msgid "%1 days"
 msgstr "%1 天"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 天前"
@@ -246,6 +246,10 @@ msgstr "工具(&T)"
 msgid "(different across multiple songs)"
 msgstr "(多个曲目间不同)"
 
+#: internet/spotifyservice.cpp:423
+msgid ", by "
+msgstr ", - "
+
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
 msgstr "...和所有 Amarok 的贡献者"
@@ -262,7 +266,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 msgid "1 day"
 msgstr "1 天"
 
@@ -449,7 +453,7 @@ msgstr "添加其他流媒体..."
 msgid "Add directory..."
 msgstr "添加目录..."
 
-#: ui/mainwindow.cpp:1829
+#: ui/mainwindow.cpp:1833
 msgid "Add file"
 msgstr "添加文件"
 
@@ -469,7 +473,7 @@ msgstr "添加文件..."
 msgid "Add files to transcode"
 msgstr "添加需转码文件"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1856 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1860 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "添加文件夹"
 
@@ -573,11 +577,11 @@ msgstr "当点击\"喜欢\"按钮后将歌曲添加到\"我的音乐\""
 msgid "Add stream..."
 msgstr "添加流媒体..."
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/groovesharkservice.cpp:1120
 msgid "Add to Grooveshark favorites"
 msgstr "添加到 Grooveshark 收藏夹"
 
-#: internet/groovesharkservice.cpp:1136
+#: internet/groovesharkservice.cpp:1135
 msgid "Add to Grooveshark playlists"
 msgstr "添加到 Grooveshark 播放列表"
 
@@ -585,7 +589,11 @@ msgstr "添加到 Grooveshark 播放列表"
 msgid "Add to My Music"
 msgstr "添加到我的音乐"
 
-#: ui/mainwindow.cpp:1650
+#: internet/spotifyservice.cpp:567
+msgid "Add to Spotify playlists"
+msgstr "添加到 Spotify 播放列表"
+
+#: ui/mainwindow.cpp:1654
 msgid "Add to another playlist"
 msgstr "添加到另一播放列表"
 
@@ -634,11 +642,11 @@ msgstr "今日加入"
 msgid "Added within three months"
 msgstr "于三个月内加入"
 
-#: internet/groovesharkservice.cpp:1435
+#: internet/groovesharkservice.cpp:1434
 msgid "Adding song to My Music"
 msgstr "添加到我的音乐"
 
-#: internet/groovesharkservice.cpp:1412
+#: internet/groovesharkservice.cpp:1411
 msgid "Adding song to favorites"
 msgstr "添加歌曲到收藏夹"
 
@@ -689,7 +697,7 @@ msgstr "有封面的专辑"
 msgid "Albums without covers"
 msgstr "无封面的专辑"
 
-#: ui/mainwindow.cpp:161
+#: ui/mainwindow.cpp:165
 msgid "All Files (*)"
 msgstr "全部文件 (*)"
 
@@ -807,7 +815,7 @@ msgstr "允许压缩以阻止剪切"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "您确定要删除预设 %1 吗？"
 
-#: internet/groovesharkservice.cpp:1334
+#: internet/groovesharkservice.cpp:1333
 msgid "Are you sure you want to delete this playlist?"
 msgstr "您确定要删除这个播放列表吗？"
 
@@ -830,7 +838,7 @@ msgstr "您确定要将媒体库中所有歌曲的统计信息写入相应的歌
 msgid "Artist"
 msgstr "艺人"
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:255
 msgid "Artist info"
 msgstr "艺人信息"
 
@@ -1002,7 +1010,7 @@ msgstr "浏览..."
 msgid "Buffer duration"
 msgstr "缓冲时长"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "缓冲中"
 
@@ -1043,7 +1051,7 @@ msgstr "缓存 %1 中"
 msgid "Cancel"
 msgstr "取消"
 
-#: internet/vkservice.cpp:622
+#: internet/vkservice.cpp:620
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1087,7 +1095,7 @@ msgstr "检测新节目"
 msgid "Check for updates"
 msgstr "检查更新"
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:721
 msgid "Check for updates..."
 msgstr "检查更新..."
 
@@ -1099,7 +1107,7 @@ msgstr "选择 VK.com 缓存目录"
 msgid "Choose a name for your smart playlist"
 msgstr "为您的智能播放列表起名"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "自动选择"
 
@@ -1311,7 +1319,7 @@ msgstr "配置 Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "配置快捷键"
 
-#: internet/spotifyservice.cpp:541 internet/spotifyservice.cpp:552
+#: internet/spotifyservice.cpp:813
 msgid "Configure Spotify..."
 msgstr "配置Spotify..."
 
@@ -1327,7 +1335,7 @@ msgstr "配置 VK.com"
 msgid "Configure global search..."
 msgstr "配置全局搜索…"
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:571
 msgid "Configure library..."
 msgstr "配置媒体库..."
 
@@ -1350,7 +1358,7 @@ msgstr "连接 Wii 遥控器"
 msgid "Connect device"
 msgstr "连接设备"
 
-#: internet/spotifyservice.cpp:266
+#: internet/spotifyservice.cpp:270
 msgid "Connecting to Spotify"
 msgstr "连接Spotify"
 
@@ -1365,7 +1373,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "连接超时，请检查服务器链接。例如: http://localhost:4040/"
 
-#: internet/vkservice.cpp:963
+#: internet/vkservice.cpp:961
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "连接出错或用户已禁用音频"
 
@@ -1389,16 +1397,16 @@ msgstr "转换设备不能播放的音乐"
 msgid "Copy share url to clipboard"
 msgstr "复制分享链接"
 
-#: internet/groovesharkservice.cpp:1210
+#: internet/groovesharkservice.cpp:1209
 msgid "Copy to clipboard"
 msgstr "复制到剪切板"
 
 #: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:620 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "复制到设备..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:610
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "复制到媒体库..."
@@ -1476,7 +1484,7 @@ msgstr "从 %1 中设置封面"
 msgid "Covers from %1"
 msgstr "来自%1的封面"
 
-#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1286
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1285
 msgid "Create a new Grooveshark playlist"
 msgstr "创建一个新的 Grooveshark 播放列表"
 
@@ -1623,7 +1631,7 @@ msgstr "降低音量"
 msgid "Default background image"
 msgstr "默认背景图片"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "%1 的默认设备"
@@ -1641,7 +1649,7 @@ msgstr "在两个视觉化效果间延迟切换"
 msgid "Delete"
 msgstr "删除"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1333
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1332
 msgid "Delete Grooveshark playlist"
 msgstr "删除 Grooveshark 播放列表"
 
@@ -1650,7 +1658,7 @@ msgid "Delete downloaded data"
 msgstr "删除已下载的数据"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2192 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2196 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "删除文件"
 
@@ -1658,7 +1666,7 @@ msgstr "删除文件"
 msgid "Delete from device..."
 msgstr "从设备删除..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:622
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "从硬盘删除..."
@@ -1683,11 +1691,11 @@ msgstr "删除原始文件"
 msgid "Deleting files"
 msgstr "删除文件"
 
-#: ui/mainwindow.cpp:1571
+#: ui/mainwindow.cpp:1575
 msgid "Dequeue selected tracks"
 msgstr "移除选定曲目"
 
-#: ui/mainwindow.cpp:1569
+#: ui/mainwindow.cpp:1573
 msgid "Dequeue track"
 msgstr "移除曲目"
 
@@ -1716,7 +1724,7 @@ msgstr "设备名称"
 msgid "Device properties..."
 msgstr "设备属性..."
 
-#: ui/mainwindow.cpp:246
+#: ui/mainwindow.cpp:250
 msgid "Devices"
 msgstr "设备"
 
@@ -1939,7 +1947,7 @@ msgstr "动态随机混音"
 msgid "Edit smart playlist..."
 msgstr "编辑智能播放列表..."
 
-#: ui/mainwindow.cpp:1613
+#: ui/mainwindow.cpp:1617
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "编辑标签 \"%1\"..."
@@ -2079,8 +2087,8 @@ msgstr "相当于 --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1895 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
-#: internet/vkservice.cpp:621
+#: ui/mainwindow.cpp:1899 ui/mainwindow.cpp:2146 ui/mainwindow.cpp:2294
+#: internet/vkservice.cpp:619
 msgid "Error"
 msgstr "错误"
 
@@ -2244,7 +2252,7 @@ msgstr "淡出"
 msgid "Fading duration"
 msgstr "淡出时长"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1900
 msgid "Failed reading CD drive"
 msgstr "读取 CD 失败"
 
@@ -2341,7 +2349,7 @@ msgstr "文件类型"
 msgid "Filename"
 msgstr "文件名"
 
-#: ui/mainwindow.cpp:239
+#: ui/mainwindow.cpp:243
 msgid "Files"
 msgstr "文件"
 
@@ -2472,7 +2480,7 @@ msgstr "流派"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "获取一个分享该 Grooveshark 播放列表的地址"
 
-#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1149
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1148
 msgid "Get a URL to share this Grooveshark song"
 msgstr "获取一个分享该 Grooveshark 音乐的地址"
 
@@ -2526,7 +2534,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Grooveshark 登录错误"
 
-#: internet/groovesharkservice.cpp:1200
+#: internet/groovesharkservice.cpp:1199
 msgid "Grooveshark playlist's URL"
 msgstr "Grooveshark 的播放列表地址"
 
@@ -2534,7 +2542,7 @@ msgstr "Grooveshark 的播放列表地址"
 msgid "Grooveshark radio"
 msgstr "Grooveshark 电台"
 
-#: internet/groovesharkservice.cpp:1178
+#: internet/groovesharkservice.cpp:1177
 msgid "Grooveshark song's URL"
 msgstr "Grooveshark 歌曲地址"
 
@@ -2670,12 +2678,12 @@ msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:142
 #, qt-format
 msgid "In %1 days"
 msgstr "在 %1 天内"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 周内"
@@ -2686,7 +2694,7 @@ msgid ""
 "time a song finishes."
 msgstr "在动态模式中, 每次歌曲播放完之后会被选择并添加新歌曲到播放列表.使用动态模式将忽略您的播放列表大小设定值。"
 
-#: internet/spotifyservice.cpp:371
+#: internet/spotifyservice.cpp:386
 msgid "Inbox"
 msgstr "收件夹"
 
@@ -2747,7 +2755,7 @@ msgstr "已安装"
 msgid "Integrity check"
 msgstr "完整性检验"
 
-#: ui/mainwindow.cpp:243
+#: ui/mainwindow.cpp:247
 msgid "Internet"
 msgstr "互联网"
 
@@ -2918,7 +2926,7 @@ msgstr "左"
 msgid "Length"
 msgstr "长度"
 
-#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:229 ui/mainwindow.cpp:242
 #: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "媒体库"
@@ -2927,7 +2935,7 @@ msgstr "媒体库"
 msgid "Library advanced grouping"
 msgstr "媒体库高级分组"
 
-#: ui/mainwindow.cpp:2414
+#: ui/mainwindow.cpp:2418
 msgid "Library rescan notice"
 msgstr "重新扫描媒体库提示"
 
@@ -3121,7 +3129,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "努力去实现它！"
 
-#: internet/spotifyservice.cpp:548
+#: internet/spotifyservice.cpp:603
 msgid "Make playlist available offline"
 msgstr "播放列表离线可用"
 
@@ -3246,7 +3254,7 @@ msgstr "挂载点"
 msgid "Move down"
 msgstr "下移"
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:613 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "移动至媒体库..."
 
@@ -3255,7 +3263,7 @@ msgstr "移动至媒体库..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1830
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1834
 msgid "Music"
 msgstr "音乐"
 
@@ -3276,7 +3284,7 @@ msgstr "我的音乐"
 msgid "My Recommendations"
 msgstr "我的推荐"
 
-#: internet/groovesharkservice.cpp:1287 internet/groovesharkservice.cpp:1382
+#: internet/groovesharkservice.cpp:1286 internet/groovesharkservice.cpp:1381
 #: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
@@ -3322,7 +3330,7 @@ msgstr "从未播放"
 msgid "New folder"
 msgstr "创建新文件夹"
 
-#: ui/mainwindow.cpp:1667 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1671 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "新建播放列表"
 
@@ -3351,7 +3359,7 @@ msgstr "下一首"
 msgid "Next track"
 msgstr "下一个曲目"
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:143
 msgid "Next week"
 msgstr "下一周"
 
@@ -3385,7 +3393,7 @@ msgstr "无短块"
 msgid "None"
 msgstr "无"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2143 ui/mainwindow.cpp:2291
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2147 ui/mainwindow.cpp:2295
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "已选择的曲目均不适合复制到设备"
 
@@ -3580,7 +3588,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "组织文件"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:616
 msgid "Organise files..."
 msgstr "组织文件..."
 
@@ -3642,7 +3650,7 @@ msgstr "晚会"
 msgid "Password"
 msgstr "密码"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1029 ui/mainwindow.cpp:1480
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1033 ui/mainwindow.cpp:1484
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "暂停"
@@ -3668,8 +3676,8 @@ msgstr "像素"
 msgid "Plain sidebar"
 msgstr "普通侧边栏"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:584 ui/mainwindow.cpp:997
-#: ui/mainwindow.cpp:1015 ui/mainwindow.cpp:1483 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:588 ui/mainwindow.cpp:1001
+#: ui/mainwindow.cpp:1019 ui/mainwindow.cpp:1487 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3723,7 +3731,7 @@ msgid "Playlist type"
 msgstr "播放列表类型"
 
 #: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:245
 msgid "Playlists"
 msgstr "播放列表"
 
@@ -3891,12 +3899,12 @@ msgstr "正在查询设备..."
 msgid "Queue Manager"
 msgstr "队列管理器"
 
-#: ui/mainwindow.cpp:1575
+#: ui/mainwindow.cpp:1579
 msgid "Queue selected tracks"
 msgstr "将选定曲目加入队列"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1573
+#: ui/mainwindow.cpp:1577
 msgid "Queue track"
 msgstr "加入队列"
 
@@ -4023,7 +4031,8 @@ msgstr "从书签移除"
 msgid "Remove from favorites"
 msgstr "从收藏夹的中删除"
 
-#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:685
+#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:611
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "从播放列表中移除"
 
@@ -4039,15 +4048,15 @@ msgstr "删除播放列表"
 msgid "Remove unavailable tracks from playlist"
 msgstr "从播放列表中移除不可用项"
 
-#: internet/groovesharkservice.cpp:1584
+#: internet/groovesharkservice.cpp:1583
 msgid "Removing songs from My Music"
 msgstr "正在从我的音乐中移出"
 
-#: internet/groovesharkservice.cpp:1531
+#: internet/groovesharkservice.cpp:1530
 msgid "Removing songs from favorites"
 msgstr "正在从收藏夹中删除歌曲"
 
-#: internet/groovesharkservice.cpp:1381
+#: internet/groovesharkservice.cpp:1380
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "重命名 \"%1\" 播放列表"
@@ -4281,7 +4290,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "搜索"
 
-#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "搜索"
@@ -4331,7 +4340,7 @@ msgid "Search options"
 msgstr "搜索选项"
 
 #: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
-#: internet/spotifyservice.cpp:357
+#: internet/spotifyservice.cpp:372
 msgid "Search results"
 msgstr "搜索结果"
 
@@ -4420,7 +4429,7 @@ msgstr "服务器详情"
 msgid "Service offline"
 msgstr "服务离线"
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1616
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "将 %1 设置为 %2..."
@@ -4496,7 +4505,7 @@ msgstr "显示漂亮的 OSD"
 msgid "Show above status bar"
 msgstr "在状态栏之上显示"
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:556
 msgid "Show all songs"
 msgstr "显示所有歌曲"
 
@@ -4520,12 +4529,12 @@ msgstr "显示完整尺寸..."
 msgid "Show groups in global search result"
 msgstr "在全局搜索结果中显示分组"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:625
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "在文件管理器中打开..."
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:628
 msgid "Show in library..."
 msgstr "在媒体库中显示"
 
@@ -4537,11 +4546,11 @@ msgstr "在群星中显示"
 msgid "Show moodbar"
 msgstr "显示心情指示条"
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:558
 msgid "Show only duplicates"
 msgstr "只显示重复"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:560
 msgid "Show only untagged"
 msgstr "只显示未加标签的"
 
@@ -4637,11 +4646,11 @@ msgstr "跳过计数"
 msgid "Skip forwards in playlist"
 msgstr "在播放列表中前进"
 
-#: ui/mainwindow.cpp:1586
+#: ui/mainwindow.cpp:1590
 msgid "Skip selected tracks"
 msgstr "跳过所选择的曲目"
 
-#: ui/mainwindow.cpp:1584
+#: ui/mainwindow.cpp:1588
 msgid "Skip track"
 msgstr "跳过曲目"
 
@@ -4673,7 +4682,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "曲目信息"
 
-#: ui/mainwindow.cpp:249
+#: ui/mainwindow.cpp:253
 msgid "Song info"
 msgstr "曲目信息"
 
@@ -4729,7 +4738,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:190
+#: internet/spotifyservice.cpp:194
 msgid "Spotify login error"
 msgstr "Spotify 登录失败"
 
@@ -4745,7 +4754,7 @@ msgstr "potify 插件未安装"
 msgid "Standard"
 msgstr "标准"
 
-#: internet/spotifyservice.cpp:365
+#: internet/spotifyservice.cpp:380
 msgid "Starred"
 msgstr "用星号标记"
 
@@ -4762,7 +4771,7 @@ msgid "Start transcoding"
 msgstr "开始转换"
 
 #: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
-#: internet/spotifyservice.cpp:359
+#: internet/spotifyservice.cpp:374
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4790,7 +4799,7 @@ msgstr "停止"
 msgid "Stop after"
 msgstr "后停止"
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:591 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "在此曲目后停止"
 
@@ -4873,15 +4882,15 @@ msgstr "支持的格式"
 msgid "Synchronize statistics to files now"
 msgstr "立即同步统计数据至文件"
 
-#: internet/spotifyservice.cpp:575
+#: internet/spotifyservice.cpp:636
 msgid "Syncing Spotify inbox"
 msgstr "同步 Spotify 收件箱"
 
-#: internet/spotifyservice.cpp:569
+#: internet/spotifyservice.cpp:630
 msgid "Syncing Spotify playlist"
 msgstr "同步 Spotify 播放列表"
 
-#: internet/spotifyservice.cpp:580
+#: internet/spotifyservice.cpp:641
 msgid "Syncing Spotify starred tracks"
 msgstr "同步 Spotify 星号标记的曲目"
 
@@ -4945,7 +4954,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic 服务器的试用期已过。请捐助来获得许可文件。详情请访问 subsonic.org 。"
 
-#: ui/mainwindow.cpp:2405
+#: ui/mainwindow.cpp:2409
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4986,7 +4995,7 @@ msgid ""
 "continue?"
 msgstr "将从设备中删除这些文件.确定删除吗?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2193 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2197 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5071,7 +5080,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "在开始收听 Grooveshark 电台之前，您需要收听几首 Grooveshark 的歌曲"
 
-#: core/utilities.cpp:127 core/utilities.cpp:139
+#: core/utilities.cpp:128 core/utilities.cpp:140
 msgid "Today"
 msgstr "今日"
 
@@ -5083,7 +5092,7 @@ msgstr "切换漂亮的 OSD"
 msgid "Toggle fullscreen"
 msgstr "切换全屏"
 
-#: ui/mainwindow.cpp:1577
+#: ui/mainwindow.cpp:1581
 msgid "Toggle queue status"
 msgstr "切换队列状态"
 
@@ -5095,7 +5104,7 @@ msgstr "切换歌曲记录"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "切换 OSD 可见性"
 
-#: core/utilities.cpp:140
+#: core/utilities.cpp:141
 msgid "Tomorrow"
 msgstr "明天"
 
@@ -5103,7 +5112,7 @@ msgstr "明天"
 msgid "Too many redirects"
 msgstr "太多的重定向"
 
-#: internet/spotifyservice.cpp:377
+#: internet/spotifyservice.cpp:392
 msgid "Top tracks"
 msgstr "热门曲目"
 
@@ -5203,11 +5212,11 @@ msgstr "未知错误"
 msgid "Unset cover"
 msgstr "撤销封面"
 
-#: ui/mainwindow.cpp:1582
+#: ui/mainwindow.cpp:1586
 msgid "Unskip selected tracks"
 msgstr "取消略过的选定曲目"
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1584
 msgid "Unskip track"
 msgstr "取消掠过曲目"
 
@@ -5223,7 +5232,7 @@ msgstr "近期音乐会"
 msgid "Update"
 msgstr "更新"
 
-#: internet/groovesharkservice.cpp:1238
+#: internet/groovesharkservice.cpp:1237
 msgid "Update Grooveshark playlist"
 msgstr "更新 Grooveshark 播放列表"
 
@@ -5522,7 +5531,7 @@ msgid ""
 "well?"
 msgstr "您想要把此专辑的其它歌曲移动到 群星?"
 
-#: ui/mainwindow.cpp:2412
+#: ui/mainwindow.cpp:2416
 msgid "Would you like to run a full rescan right now?"
 msgstr "您要立即做个全部重新扫描？"
 
@@ -5554,7 +5563,7 @@ msgstr "年份 - 专辑"
 msgid "Years"
 msgstr "年"
 
-#: core/utilities.cpp:128
+#: core/utilities.cpp:129
 msgid "Yesterday"
 msgstr "昨天"
 
@@ -5633,7 +5642,7 @@ msgid ""
 "stream."
 msgstr "你不需要登录就可以搜索或聆听 SoundCloud 上的音乐。但是只有登录后才能获取您自己的播放列表和流"
 
-#: internet/spotifyservice.cpp:175
+#: internet/spotifyservice.cpp:179
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."

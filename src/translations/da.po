@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-09-16 11:39+0000\n"
+"PO-Revision-Date: 2014-09-26 10:24+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/clementine/language/da/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,12 +78,12 @@ msgstr ""
 msgid "%1 albums"
 msgstr "%1 album"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dage"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 dage siden"
@@ -244,6 +244,10 @@ msgstr "Værktøjer"
 msgid "(different across multiple songs)"
 msgstr "(forskelligt over flere sange)"
 
+#: internet/spotifyservice.cpp:423
+msgid ", by "
+msgstr ""
+
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
 msgstr "...og alle Amarok-bidragsyderne"
@@ -260,7 +264,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 msgid "1 day"
 msgstr "1 dag"
 
@@ -447,7 +451,7 @@ msgstr "Henter streams"
 msgid "Add directory..."
 msgstr "Tilføj mappe..."
 
-#: ui/mainwindow.cpp:1829
+#: ui/mainwindow.cpp:1833
 msgid "Add file"
 msgstr "Tilføj fil"
 
@@ -467,7 +471,7 @@ msgstr "Tilføj fil..."
 msgid "Add files to transcode"
 msgstr "Tilføj fil til omkodning"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1856 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1860 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "Tilføj mappe"
 
@@ -571,11 +575,11 @@ msgstr ""
 msgid "Add stream..."
 msgstr "Genopfrisk streams"
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/groovesharkservice.cpp:1120
 msgid "Add to Grooveshark favorites"
 msgstr "Føj til Grooveshark favoritter"
 
-#: internet/groovesharkservice.cpp:1136
+#: internet/groovesharkservice.cpp:1135
 msgid "Add to Grooveshark playlists"
 msgstr "Føj til Grooveshark afspilningsliste"
 
@@ -583,7 +587,11 @@ msgstr "Føj til Grooveshark afspilningsliste"
 msgid "Add to My Music"
 msgstr "Tilføj til Min Musik"
 
-#: ui/mainwindow.cpp:1650
+#: internet/spotifyservice.cpp:567
+msgid "Add to Spotify playlists"
+msgstr ""
+
+#: ui/mainwindow.cpp:1654
 msgid "Add to another playlist"
 msgstr "Tilføj til en anden playliste"
 
@@ -632,11 +640,11 @@ msgstr "Tilføjet i dag"
 msgid "Added within three months"
 msgstr "Tilføjet indenfor de seneste tre måneder"
 
-#: internet/groovesharkservice.cpp:1435
+#: internet/groovesharkservice.cpp:1434
 msgid "Adding song to My Music"
 msgstr "Tilføj sang til Min Musik"
 
-#: internet/groovesharkservice.cpp:1412
+#: internet/groovesharkservice.cpp:1411
 msgid "Adding song to favorites"
 msgstr "Tilføj sang til favoritter"
 
@@ -687,7 +695,7 @@ msgstr "Albummer med omslag"
 msgid "Albums without covers"
 msgstr "Albummer uden omslag"
 
-#: ui/mainwindow.cpp:161
+#: ui/mainwindow.cpp:165
 msgid "All Files (*)"
 msgstr "Alle Filer (*)"
 
@@ -805,7 +813,7 @@ msgstr "Påfør kompression for at undgå klipping"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Vil du slettet \"%1\"-forudindstilling?"
 
-#: internet/groovesharkservice.cpp:1334
+#: internet/groovesharkservice.cpp:1333
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Er du sikker på at du vil slette denne spilleliste?"
 
@@ -828,7 +836,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Kunstner"
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:255
 msgid "Artist info"
 msgstr "Kunstnerinfo"
 
@@ -1000,7 +1008,7 @@ msgstr "Gennemse..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Buffering"
 
@@ -1041,7 +1049,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Annuller"
 
-#: internet/vkservice.cpp:622
+#: internet/vkservice.cpp:620
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1085,7 +1093,7 @@ msgstr "Søg efter nye episoder"
 msgid "Check for updates"
 msgstr "Tjek for opdateringer"
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:721
 msgid "Check for updates..."
 msgstr "Tjek efter opdateringer..."
 
@@ -1097,7 +1105,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Vælg et navn til den smarte spilleliste"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Vælg automatisk"
 
@@ -1309,7 +1317,7 @@ msgstr "Konfigurér Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Konfigurér Genveje"
 
-#: internet/spotifyservice.cpp:541 internet/spotifyservice.cpp:552
+#: internet/spotifyservice.cpp:813
 msgid "Configure Spotify..."
 msgstr "Indstil Spotify..."
 
@@ -1325,7 +1333,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr "Indstil Global søgning ..."
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:571
 msgid "Configure library..."
 msgstr "Indstil bibliotek..."
 
@@ -1348,7 +1356,7 @@ msgstr "Forbind til Wii Remotes med aktiver/deaktiver handling"
 msgid "Connect device"
 msgstr "Forbind til enhed"
 
-#: internet/spotifyservice.cpp:266
+#: internet/spotifyservice.cpp:270
 msgid "Connecting to Spotify"
 msgstr "Forbinder til Spotify"
 
@@ -1363,7 +1371,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr ""
 
-#: internet/vkservice.cpp:963
+#: internet/vkservice.cpp:961
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1387,16 +1395,16 @@ msgstr "Konverter musik som enheden ikke kan afspille"
 msgid "Copy share url to clipboard"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1210
+#: internet/groovesharkservice.cpp:1209
 msgid "Copy to clipboard"
 msgstr "Kopier til udklipsholder"
 
 #: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:620 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Koper til enhed..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:610
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Kopiér til bibliotek..."
@@ -1474,7 +1482,7 @@ msgstr "Omslag angivet fra %1"
 msgid "Covers from %1"
 msgstr "Omslag fra %1"
 
-#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1286
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1285
 msgid "Create a new Grooveshark playlist"
 msgstr "Opret ny Grooveshark afspilningsliste"
 
@@ -1621,7 +1629,7 @@ msgstr "Dæmp lydstyrke"
 msgid "Default background image"
 msgstr "Standard baggrundsbillede"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1639,7 +1647,7 @@ msgstr "Pause mellem visualiseringer"
 msgid "Delete"
 msgstr "Slet"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1333
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1332
 msgid "Delete Grooveshark playlist"
 msgstr "Slet Grooveshark afspilningsliste"
 
@@ -1648,7 +1656,7 @@ msgid "Delete downloaded data"
 msgstr "Sletter hentet data"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2192 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2196 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Slet filer"
 
@@ -1656,7 +1664,7 @@ msgstr "Slet filer"
 msgid "Delete from device..."
 msgstr "Slet fra enhed..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:622
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Slet fra disk..."
@@ -1681,11 +1689,11 @@ msgstr "Slet de originale filer"
 msgid "Deleting files"
 msgstr "Sletter filer"
 
-#: ui/mainwindow.cpp:1571
+#: ui/mainwindow.cpp:1575
 msgid "Dequeue selected tracks"
 msgstr "Fjern valgte spor fra afspilningskøen"
 
-#: ui/mainwindow.cpp:1569
+#: ui/mainwindow.cpp:1573
 msgid "Dequeue track"
 msgstr "Fjern sporet fra afspilningskøen"
 
@@ -1714,7 +1722,7 @@ msgstr "Enhedsnavn"
 msgid "Device properties..."
 msgstr "Enhedsindstillinger..."
 
-#: ui/mainwindow.cpp:246
+#: ui/mainwindow.cpp:250
 msgid "Devices"
 msgstr "Enhed"
 
@@ -1937,7 +1945,7 @@ msgstr "Dynamisk tilfældig mix"
 msgid "Edit smart playlist..."
 msgstr "Rediger smart spilleliste..."
 
-#: ui/mainwindow.cpp:1613
+#: ui/mainwindow.cpp:1617
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2077,8 +2085,8 @@ msgstr "Svarende til --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1895 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
-#: internet/vkservice.cpp:621
+#: ui/mainwindow.cpp:1899 ui/mainwindow.cpp:2146 ui/mainwindow.cpp:2294
+#: internet/vkservice.cpp:619
 msgid "Error"
 msgstr "Fejl"
 
@@ -2242,7 +2250,7 @@ msgstr "Fading"
 msgid "Fading duration"
 msgstr "Varighed af fade"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1900
 msgid "Failed reading CD drive"
 msgstr "Fejl ved læsning af CD-drev"
 
@@ -2339,7 +2347,7 @@ msgstr "Filtype"
 msgid "Filename"
 msgstr "Filnavn"
 
-#: ui/mainwindow.cpp:239
+#: ui/mainwindow.cpp:243
 msgid "Files"
 msgstr "Filer"
 
@@ -2470,7 +2478,7 @@ msgstr "Genre"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Få en webadresse til at dele denne Grooveshark afspilningsliste"
 
-#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1149
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1148
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Få en webadresse til at dele denne Grooveshark sang"
 
@@ -2524,7 +2532,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Kunne ikke logge ind på Grooveshark"
 
-#: internet/groovesharkservice.cpp:1200
+#: internet/groovesharkservice.cpp:1199
 msgid "Grooveshark playlist's URL"
 msgstr "Webadresse til Grooveshark afspilningsliste"
 
@@ -2532,7 +2540,7 @@ msgstr "Webadresse til Grooveshark afspilningsliste"
 msgid "Grooveshark radio"
 msgstr "Grooveshark radio"
 
-#: internet/groovesharkservice.cpp:1178
+#: internet/groovesharkservice.cpp:1177
 msgid "Grooveshark song's URL"
 msgstr "URL til Grooveshark sange"
 
@@ -2668,12 +2676,12 @@ msgstr "Billeder (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Billeder (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:142
 #, qt-format
 msgid "In %1 days"
 msgstr "Om %1 dage"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Om %1 uger"
@@ -2684,7 +2692,7 @@ msgid ""
 "time a song finishes."
 msgstr "I dynamisk tilstand vil nye spor blive valgt og lagt til spillelisten hver gang en sang slutter."
 
-#: internet/spotifyservice.cpp:371
+#: internet/spotifyservice.cpp:386
 msgid "Inbox"
 msgstr "Indboks"
 
@@ -2745,7 +2753,7 @@ msgstr "Installeret"
 msgid "Integrity check"
 msgstr "Integritetskontrol"
 
-#: ui/mainwindow.cpp:243
+#: ui/mainwindow.cpp:247
 msgid "Internet"
 msgstr "Internet"
 
@@ -2916,7 +2924,7 @@ msgstr "Venstre"
 msgid "Length"
 msgstr "Længde"
 
-#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:229 ui/mainwindow.cpp:242
 #: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "Bibliotek"
@@ -2925,7 +2933,7 @@ msgstr "Bibliotek"
 msgid "Library advanced grouping"
 msgstr "Avanceret bibliotektsgruppering"
 
-#: ui/mainwindow.cpp:2414
+#: ui/mainwindow.cpp:2418
 msgid "Library rescan notice"
 msgstr "Meddelelse om genindlæsning af biblioteket"
 
@@ -3119,7 +3127,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotifyservice.cpp:548
+#: internet/spotifyservice.cpp:603
 msgid "Make playlist available offline"
 msgstr "Gør spillelisten tilgængelig offline"
 
@@ -3244,7 +3252,7 @@ msgstr "Monteringspunkter"
 msgid "Move down"
 msgstr "Flyt ned"
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:613 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Flyt til bibliotek..."
 
@@ -3253,7 +3261,7 @@ msgstr "Flyt til bibliotek..."
 msgid "Move up"
 msgstr "Flyt op"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1830
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1834
 msgid "Music"
 msgstr "Musik"
 
@@ -3274,7 +3282,7 @@ msgstr "Min Musik"
 msgid "My Recommendations"
 msgstr "Mine anbefalinger"
 
-#: internet/groovesharkservice.cpp:1287 internet/groovesharkservice.cpp:1382
+#: internet/groovesharkservice.cpp:1286 internet/groovesharkservice.cpp:1381
 #: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
@@ -3320,7 +3328,7 @@ msgstr "Begynd aldrig afspilning"
 msgid "New folder"
 msgstr "Ny folder"
 
-#: ui/mainwindow.cpp:1667 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1671 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "Ny spilleliste"
 
@@ -3349,7 +3357,7 @@ msgstr "Næste"
 msgid "Next track"
 msgstr "Næste spor"
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:143
 msgid "Next week"
 msgstr "Næste uge"
 
@@ -3383,7 +3391,7 @@ msgstr "Ingen korte blokke"
 msgid "None"
 msgstr "Ingen"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2143 ui/mainwindow.cpp:2291
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2147 ui/mainwindow.cpp:2295
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Kunne ikke kopiere nogen af de valgte sange til enheden"
 
@@ -3578,7 +3586,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organiser filer"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:616
 msgid "Organise files..."
 msgstr "Organiser filer..."
 
@@ -3640,7 +3648,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Kodeord"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1029 ui/mainwindow.cpp:1480
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1033 ui/mainwindow.cpp:1484
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pause"
@@ -3666,8 +3674,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Simpelt sidepanel"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:584 ui/mainwindow.cpp:997
-#: ui/mainwindow.cpp:1015 ui/mainwindow.cpp:1483 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:588 ui/mainwindow.cpp:1001
+#: ui/mainwindow.cpp:1019 ui/mainwindow.cpp:1487 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3721,7 +3729,7 @@ msgid "Playlist type"
 msgstr "Spillelistetype"
 
 #: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:245
 msgid "Playlists"
 msgstr "Afspilningslister"
 
@@ -3889,12 +3897,12 @@ msgstr "Forespørger enhed..."
 msgid "Queue Manager"
 msgstr "Køhåndterer"
 
-#: ui/mainwindow.cpp:1575
+#: ui/mainwindow.cpp:1579
 msgid "Queue selected tracks"
 msgstr "Sæt valgte spor i kø"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1573
+#: ui/mainwindow.cpp:1577
 msgid "Queue track"
 msgstr "Sæt spor i kø"
 
@@ -4021,7 +4029,8 @@ msgstr "Fjern fra bogmærker"
 msgid "Remove from favorites"
 msgstr "Fjern fra favoritter"
 
-#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:685
+#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:611
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Fjern fra spilleliste"
 
@@ -4037,15 +4046,15 @@ msgstr "Fjern spillelister"
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1584
+#: internet/groovesharkservice.cpp:1583
 msgid "Removing songs from My Music"
 msgstr "Fjerner sange fra Min Musik"
 
-#: internet/groovesharkservice.cpp:1531
+#: internet/groovesharkservice.cpp:1530
 msgid "Removing songs from favorites"
 msgstr "Fjerner sange fra favoritter"
 
-#: internet/groovesharkservice.cpp:1381
+#: internet/groovesharkservice.cpp:1380
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Omdøb \"%1\" afspilningsliste"
@@ -4279,7 +4288,7 @@ msgstr ""
 msgid "Search"
 msgstr "Søg"
 
-#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Søg"
@@ -4329,7 +4338,7 @@ msgid "Search options"
 msgstr "Søgeindstillinger"
 
 #: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
-#: internet/spotifyservice.cpp:357
+#: internet/spotifyservice.cpp:372
 msgid "Search results"
 msgstr "Søgeresultater"
 
@@ -4418,7 +4427,7 @@ msgstr "Server detaljer"
 msgid "Service offline"
 msgstr "Tjeneste offline"
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1616
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Sæt %1 til \"%2\"..."
@@ -4494,7 +4503,7 @@ msgstr "Vis en køn OSD"
 msgid "Show above status bar"
 msgstr "Vis over statuslinjen"
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:556
 msgid "Show all songs"
 msgstr "Vis alle sange"
 
@@ -4518,12 +4527,12 @@ msgstr "Vis i fuld størrelse..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:625
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Vis i filbrowser"
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:628
 msgid "Show in library..."
 msgstr "Vis i biblioteket..."
 
@@ -4535,11 +4544,11 @@ msgstr "Vis under Diverse kunstnere"
 msgid "Show moodbar"
 msgstr "Vis stemningslinie"
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:558
 msgid "Show only duplicates"
 msgstr "Vis kun dubletter"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:560
 msgid "Show only untagged"
 msgstr "Vis kun filer uden mærker"
 
@@ -4635,11 +4644,11 @@ msgstr "Antal gange sprunget over"
 msgid "Skip forwards in playlist"
 msgstr "Skip fremad i spillelisten"
 
-#: ui/mainwindow.cpp:1586
+#: ui/mainwindow.cpp:1590
 msgid "Skip selected tracks"
 msgstr "Skip valgte spor"
 
-#: ui/mainwindow.cpp:1584
+#: ui/mainwindow.cpp:1588
 msgid "Skip track"
 msgstr "Skip spor"
 
@@ -4671,7 +4680,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Information om sangen"
 
-#: ui/mainwindow.cpp:249
+#: ui/mainwindow.cpp:253
 msgid "Song info"
 msgstr "Info om sangen"
 
@@ -4727,7 +4736,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:190
+#: internet/spotifyservice.cpp:194
 msgid "Spotify login error"
 msgstr "Kunne ikke logge på Spotify"
 
@@ -4743,7 +4752,7 @@ msgstr "Spotify-udvidelsesmodulet er ikke installeret"
 msgid "Standard"
 msgstr "Standard"
 
-#: internet/spotifyservice.cpp:365
+#: internet/spotifyservice.cpp:380
 msgid "Starred"
 msgstr "Har stjerner"
 
@@ -4760,7 +4769,7 @@ msgid "Start transcoding"
 msgstr "Start omkodning"
 
 #: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
-#: internet/spotifyservice.cpp:359
+#: internet/spotifyservice.cpp:374
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4788,7 +4797,7 @@ msgstr "Stop"
 msgid "Stop after"
 msgstr "Stop efter"
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:591 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "Stop efter dette spor"
 
@@ -4871,15 +4880,15 @@ msgstr "Understøttede formater"
 msgid "Synchronize statistics to files now"
 msgstr "Synkroniser statistik til filer nu"
 
-#: internet/spotifyservice.cpp:575
+#: internet/spotifyservice.cpp:636
 msgid "Syncing Spotify inbox"
 msgstr "Synkroniserer Spotify indbox"
 
-#: internet/spotifyservice.cpp:569
+#: internet/spotifyservice.cpp:630
 msgid "Syncing Spotify playlist"
 msgstr "Synkroniser Spotify afspilningsliste"
 
-#: internet/spotifyservice.cpp:580
+#: internet/spotifyservice.cpp:641
 msgid "Syncing Spotify starred tracks"
 msgstr "Synkroniserer stjernemarkerede spor i Spotify"
 
@@ -4943,7 +4952,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Prøveperioden for Subsonic-serveren er ovre. Doner venligst for at få en licens-nøgle. Besøg subsonic.org for flere detaljer."
 
-#: ui/mainwindow.cpp:2405
+#: ui/mainwindow.cpp:2409
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4984,7 +4993,7 @@ msgid ""
 "continue?"
 msgstr "Disse filer vil blive slettet fra disken, er du sikker på at du vil fortsætte?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2193 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2197 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5069,7 +5078,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "For at starte Grooveshark radio, skal du først lytte til et par andre Grooveshark sange"
 
-#: core/utilities.cpp:127 core/utilities.cpp:139
+#: core/utilities.cpp:128 core/utilities.cpp:140
 msgid "Today"
 msgstr "Idag"
 
@@ -5081,7 +5090,7 @@ msgstr "Slå pæn OSD til/fra"
 msgid "Toggle fullscreen"
 msgstr "Slå fuldskærmstilstand til/fra"
 
-#: ui/mainwindow.cpp:1577
+#: ui/mainwindow.cpp:1581
 msgid "Toggle queue status"
 msgstr "Slå køstatus til/fra"
 
@@ -5093,7 +5102,7 @@ msgstr "Slå scrobbling til/fra"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Klik for at justere synlighed på OSD"
 
-#: core/utilities.cpp:140
+#: core/utilities.cpp:141
 msgid "Tomorrow"
 msgstr "I morgen"
 
@@ -5101,7 +5110,7 @@ msgstr "I morgen"
 msgid "Too many redirects"
 msgstr "For mange omdirigeringer"
 
-#: internet/spotifyservice.cpp:377
+#: internet/spotifyservice.cpp:392
 msgid "Top tracks"
 msgstr "Bedste musiknumre"
 
@@ -5201,11 +5210,11 @@ msgstr "Ukendt fejl"
 msgid "Unset cover"
 msgstr "Fravælg omslag"
 
-#: ui/mainwindow.cpp:1582
+#: ui/mainwindow.cpp:1586
 msgid "Unskip selected tracks"
 msgstr "Skip valgte spor"
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1584
 msgid "Unskip track"
 msgstr "Skip ikke spor"
 
@@ -5221,7 +5230,7 @@ msgstr "Kommende Koncerter"
 msgid "Update"
 msgstr "Opdater"
 
-#: internet/groovesharkservice.cpp:1238
+#: internet/groovesharkservice.cpp:1237
 msgid "Update Grooveshark playlist"
 msgstr "Opdater Grooveshark afspilningslister"
 
@@ -5520,7 +5529,7 @@ msgid ""
 "well?"
 msgstr "Vil du også flytte de andre sange i dette album til Diverse kunstnere?"
 
-#: ui/mainwindow.cpp:2412
+#: ui/mainwindow.cpp:2416
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vil du genindlæse hele biblioteket nu?"
 
@@ -5552,7 +5561,7 @@ msgstr "År - Album"
 msgid "Years"
 msgstr "Årstal"
 
-#: core/utilities.cpp:128
+#: core/utilities.cpp:129
 msgid "Yesterday"
 msgstr "I går"
 
@@ -5631,7 +5640,7 @@ msgid ""
 "stream."
 msgstr ""
 
-#: internet/spotifyservice.cpp:175
+#: internet/spotifyservice.cpp:179
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."

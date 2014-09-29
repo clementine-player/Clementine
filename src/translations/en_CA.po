@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-09-16 11:39+0000\n"
+"PO-Revision-Date: 2014-09-26 10:24+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: English (Canada) (http://www.transifex.com/projects/p/clementine/language/en_CA/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,12 +70,12 @@ msgstr ""
 msgid "%1 albums"
 msgstr ""
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 #, qt-format
 msgid "%1 days"
 msgstr ""
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr ""
@@ -236,6 +236,10 @@ msgstr "&Tools"
 msgid "(different across multiple songs)"
 msgstr ""
 
+#: internet/spotifyservice.cpp:423
+msgid ", by "
+msgstr ""
+
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
 msgstr "...and all the Amarok contributors"
@@ -252,7 +256,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr ""
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 msgid "1 day"
 msgstr ""
 
@@ -439,7 +443,7 @@ msgstr "Add another stream..."
 msgid "Add directory..."
 msgstr "Add directory..."
 
-#: ui/mainwindow.cpp:1829
+#: ui/mainwindow.cpp:1833
 msgid "Add file"
 msgstr ""
 
@@ -459,7 +463,7 @@ msgstr "Add file..."
 msgid "Add files to transcode"
 msgstr "Add files to transcode"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1856 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1860 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "Add folder"
 
@@ -563,11 +567,11 @@ msgstr ""
 msgid "Add stream..."
 msgstr "Add stream..."
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/groovesharkservice.cpp:1120
 msgid "Add to Grooveshark favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1136
+#: internet/groovesharkservice.cpp:1135
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -575,7 +579,11 @@ msgstr ""
 msgid "Add to My Music"
 msgstr ""
 
-#: ui/mainwindow.cpp:1650
+#: internet/spotifyservice.cpp:567
+msgid "Add to Spotify playlists"
+msgstr ""
+
+#: ui/mainwindow.cpp:1654
 msgid "Add to another playlist"
 msgstr ""
 
@@ -624,11 +632,11 @@ msgstr "Added today"
 msgid "Added within three months"
 msgstr "Added within three months"
 
-#: internet/groovesharkservice.cpp:1435
+#: internet/groovesharkservice.cpp:1434
 msgid "Adding song to My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1412
+#: internet/groovesharkservice.cpp:1411
 msgid "Adding song to favorites"
 msgstr ""
 
@@ -679,7 +687,7 @@ msgstr "Albums with covers"
 msgid "Albums without covers"
 msgstr "Albums without covers"
 
-#: ui/mainwindow.cpp:161
+#: ui/mainwindow.cpp:165
 msgid "All Files (*)"
 msgstr "All Files (*)"
 
@@ -797,7 +805,7 @@ msgstr "Apply compression to prevent clipping"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Are you sure you want to delete the \"%1\" preset?"
 
-#: internet/groovesharkservice.cpp:1334
+#: internet/groovesharkservice.cpp:1333
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -820,7 +828,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Artist"
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:255
 msgid "Artist info"
 msgstr ""
 
@@ -992,7 +1000,7 @@ msgstr ""
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr ""
 
@@ -1033,7 +1041,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: internet/vkservice.cpp:622
+#: internet/vkservice.cpp:620
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1077,7 +1085,7 @@ msgstr ""
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:721
 msgid "Check for updates..."
 msgstr "Check for updates..."
 
@@ -1089,7 +1097,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr ""
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Choose automatically"
 
@@ -1301,7 +1309,7 @@ msgstr ""
 msgid "Configure Shortcuts"
 msgstr "Configure Shortcuts"
 
-#: internet/spotifyservice.cpp:541 internet/spotifyservice.cpp:552
+#: internet/spotifyservice.cpp:813
 msgid "Configure Spotify..."
 msgstr ""
 
@@ -1317,7 +1325,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:571
 msgid "Configure library..."
 msgstr "Configure library..."
 
@@ -1340,7 +1348,7 @@ msgstr ""
 msgid "Connect device"
 msgstr ""
 
-#: internet/spotifyservice.cpp:266
+#: internet/spotifyservice.cpp:270
 msgid "Connecting to Spotify"
 msgstr ""
 
@@ -1355,7 +1363,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr ""
 
-#: internet/vkservice.cpp:963
+#: internet/vkservice.cpp:961
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1379,16 +1387,16 @@ msgstr ""
 msgid "Copy share url to clipboard"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1210
+#: internet/groovesharkservice.cpp:1209
 msgid "Copy to clipboard"
 msgstr ""
 
 #: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:620 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr ""
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:610
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Copy to library..."
@@ -1466,7 +1474,7 @@ msgstr ""
 msgid "Covers from %1"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1286
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1285
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1613,7 +1621,7 @@ msgstr "Decrease volume"
 msgid "Default background image"
 msgstr ""
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1631,7 +1639,7 @@ msgstr "Delay between visualisations"
 msgid "Delete"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1333
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1332
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1640,7 +1648,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2192 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2196 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr ""
 
@@ -1648,7 +1656,7 @@ msgstr ""
 msgid "Delete from device..."
 msgstr ""
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:622
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr ""
@@ -1673,11 +1681,11 @@ msgstr ""
 msgid "Deleting files"
 msgstr ""
 
-#: ui/mainwindow.cpp:1571
+#: ui/mainwindow.cpp:1575
 msgid "Dequeue selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1569
+#: ui/mainwindow.cpp:1573
 msgid "Dequeue track"
 msgstr ""
 
@@ -1706,7 +1714,7 @@ msgstr ""
 msgid "Device properties..."
 msgstr ""
 
-#: ui/mainwindow.cpp:246
+#: ui/mainwindow.cpp:250
 msgid "Devices"
 msgstr ""
 
@@ -1929,7 +1937,7 @@ msgstr ""
 msgid "Edit smart playlist..."
 msgstr ""
 
-#: ui/mainwindow.cpp:1613
+#: ui/mainwindow.cpp:1617
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2069,8 +2077,8 @@ msgstr ""
 
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1895 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
-#: internet/vkservice.cpp:621
+#: ui/mainwindow.cpp:1899 ui/mainwindow.cpp:2146 ui/mainwindow.cpp:2294
+#: internet/vkservice.cpp:619
 msgid "Error"
 msgstr ""
 
@@ -2234,7 +2242,7 @@ msgstr "Fading"
 msgid "Fading duration"
 msgstr "Fading duration"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1900
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2331,7 +2339,7 @@ msgstr "File type"
 msgid "Filename"
 msgstr "Filename"
 
-#: ui/mainwindow.cpp:239
+#: ui/mainwindow.cpp:243
 msgid "Files"
 msgstr "Files"
 
@@ -2462,7 +2470,7 @@ msgstr "Genre"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1149
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1148
 msgid "Get a URL to share this Grooveshark song"
 msgstr ""
 
@@ -2516,7 +2524,7 @@ msgstr ""
 msgid "Grooveshark login error"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1200
+#: internet/groovesharkservice.cpp:1199
 msgid "Grooveshark playlist's URL"
 msgstr ""
 
@@ -2524,7 +2532,7 @@ msgstr ""
 msgid "Grooveshark radio"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1178
+#: internet/groovesharkservice.cpp:1177
 msgid "Grooveshark song's URL"
 msgstr ""
 
@@ -2660,12 +2668,12 @@ msgstr ""
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr ""
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:142
 #, qt-format
 msgid "In %1 days"
 msgstr ""
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 #, qt-format
 msgid "In %1 weeks"
 msgstr ""
@@ -2676,7 +2684,7 @@ msgid ""
 "time a song finishes."
 msgstr ""
 
-#: internet/spotifyservice.cpp:371
+#: internet/spotifyservice.cpp:386
 msgid "Inbox"
 msgstr ""
 
@@ -2737,7 +2745,7 @@ msgstr ""
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:243
+#: ui/mainwindow.cpp:247
 msgid "Internet"
 msgstr "Internet"
 
@@ -2908,7 +2916,7 @@ msgstr ""
 msgid "Length"
 msgstr "Length"
 
-#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:229 ui/mainwindow.cpp:242
 #: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "Library"
@@ -2917,7 +2925,7 @@ msgstr "Library"
 msgid "Library advanced grouping"
 msgstr "Library advanced grouping"
 
-#: ui/mainwindow.cpp:2414
+#: ui/mainwindow.cpp:2418
 msgid "Library rescan notice"
 msgstr ""
 
@@ -3111,7 +3119,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotifyservice.cpp:548
+#: internet/spotifyservice.cpp:603
 msgid "Make playlist available offline"
 msgstr ""
 
@@ -3236,7 +3244,7 @@ msgstr ""
 msgid "Move down"
 msgstr ""
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:613 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Move to library..."
 
@@ -3245,7 +3253,7 @@ msgstr "Move to library..."
 msgid "Move up"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1830
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1834
 msgid "Music"
 msgstr ""
 
@@ -3266,7 +3274,7 @@ msgstr ""
 msgid "My Recommendations"
 msgstr "My Recommendations"
 
-#: internet/groovesharkservice.cpp:1287 internet/groovesharkservice.cpp:1382
+#: internet/groovesharkservice.cpp:1286 internet/groovesharkservice.cpp:1381
 #: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
@@ -3312,7 +3320,7 @@ msgstr ""
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1667 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1671 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "New playlist"
 
@@ -3341,7 +3349,7 @@ msgstr ""
 msgid "Next track"
 msgstr "Next track"
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:143
 msgid "Next week"
 msgstr ""
 
@@ -3375,7 +3383,7 @@ msgstr ""
 msgid "None"
 msgstr "None"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2143 ui/mainwindow.cpp:2291
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2147 ui/mainwindow.cpp:2295
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
@@ -3570,7 +3578,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr ""
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:616
 msgid "Organise files..."
 msgstr ""
 
@@ -3632,7 +3640,7 @@ msgstr "Party"
 msgid "Password"
 msgstr ""
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1029 ui/mainwindow.cpp:1480
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1033 ui/mainwindow.cpp:1484
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pause"
@@ -3658,8 +3666,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr ""
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:584 ui/mainwindow.cpp:997
-#: ui/mainwindow.cpp:1015 ui/mainwindow.cpp:1483 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:588 ui/mainwindow.cpp:1001
+#: ui/mainwindow.cpp:1019 ui/mainwindow.cpp:1487 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3713,7 +3721,7 @@ msgid "Playlist type"
 msgstr ""
 
 #: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:245
 msgid "Playlists"
 msgstr ""
 
@@ -3881,12 +3889,12 @@ msgstr ""
 msgid "Queue Manager"
 msgstr ""
 
-#: ui/mainwindow.cpp:1575
+#: ui/mainwindow.cpp:1579
 msgid "Queue selected tracks"
 msgstr ""
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1573
+#: ui/mainwindow.cpp:1577
 msgid "Queue track"
 msgstr ""
 
@@ -4013,7 +4021,8 @@ msgstr ""
 msgid "Remove from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:685
+#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:611
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Remove from playlist"
 
@@ -4029,15 +4038,15 @@ msgstr ""
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1584
+#: internet/groovesharkservice.cpp:1583
 msgid "Removing songs from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1531
+#: internet/groovesharkservice.cpp:1530
 msgid "Removing songs from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1381
+#: internet/groovesharkservice.cpp:1380
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr ""
@@ -4271,7 +4280,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr ""
@@ -4321,7 +4330,7 @@ msgid "Search options"
 msgstr ""
 
 #: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
-#: internet/spotifyservice.cpp:357
+#: internet/spotifyservice.cpp:372
 msgid "Search results"
 msgstr ""
 
@@ -4410,7 +4419,7 @@ msgstr ""
 msgid "Service offline"
 msgstr "Service offline"
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1616
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Set %1 to \"%2\"..."
@@ -4486,7 +4495,7 @@ msgstr "Show a pretty OSD"
 msgid "Show above status bar"
 msgstr ""
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:556
 msgid "Show all songs"
 msgstr ""
 
@@ -4510,12 +4519,12 @@ msgstr "Show fullsize..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:625
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr ""
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:628
 msgid "Show in library..."
 msgstr ""
 
@@ -4527,11 +4536,11 @@ msgstr "Show in various artists"
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:558
 msgid "Show only duplicates"
 msgstr ""
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:560
 msgid "Show only untagged"
 msgstr ""
 
@@ -4627,11 +4636,11 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr "Skip forwards in playlist"
 
-#: ui/mainwindow.cpp:1586
+#: ui/mainwindow.cpp:1590
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1584
+#: ui/mainwindow.cpp:1588
 msgid "Skip track"
 msgstr ""
 
@@ -4663,7 +4672,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr ""
 
-#: ui/mainwindow.cpp:249
+#: ui/mainwindow.cpp:253
 msgid "Song info"
 msgstr ""
 
@@ -4719,7 +4728,7 @@ msgstr ""
 msgid "Spotify"
 msgstr ""
 
-#: internet/spotifyservice.cpp:190
+#: internet/spotifyservice.cpp:194
 msgid "Spotify login error"
 msgstr ""
 
@@ -4735,7 +4744,7 @@ msgstr ""
 msgid "Standard"
 msgstr ""
 
-#: internet/spotifyservice.cpp:365
+#: internet/spotifyservice.cpp:380
 msgid "Starred"
 msgstr ""
 
@@ -4752,7 +4761,7 @@ msgid "Start transcoding"
 msgstr "Start transcoding"
 
 #: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
-#: internet/spotifyservice.cpp:359
+#: internet/spotifyservice.cpp:374
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4780,7 +4789,7 @@ msgstr "Stop"
 msgid "Stop after"
 msgstr ""
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:591 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "Stop after this track"
 
@@ -4863,15 +4872,15 @@ msgstr ""
 msgid "Synchronize statistics to files now"
 msgstr ""
 
-#: internet/spotifyservice.cpp:575
+#: internet/spotifyservice.cpp:636
 msgid "Syncing Spotify inbox"
 msgstr ""
 
-#: internet/spotifyservice.cpp:569
+#: internet/spotifyservice.cpp:630
 msgid "Syncing Spotify playlist"
 msgstr ""
 
-#: internet/spotifyservice.cpp:580
+#: internet/spotifyservice.cpp:641
 msgid "Syncing Spotify starred tracks"
 msgstr ""
 
@@ -4935,7 +4944,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2405
+#: ui/mainwindow.cpp:2409
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4976,7 +4985,7 @@ msgid ""
 "continue?"
 msgstr ""
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2193 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2197 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5061,7 +5070,7 @@ msgid ""
 "Grooveshark songs"
 msgstr ""
 
-#: core/utilities.cpp:127 core/utilities.cpp:139
+#: core/utilities.cpp:128 core/utilities.cpp:140
 msgid "Today"
 msgstr ""
 
@@ -5073,7 +5082,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: ui/mainwindow.cpp:1577
+#: ui/mainwindow.cpp:1581
 msgid "Toggle queue status"
 msgstr ""
 
@@ -5085,7 +5094,7 @@ msgstr ""
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
-#: core/utilities.cpp:140
+#: core/utilities.cpp:141
 msgid "Tomorrow"
 msgstr ""
 
@@ -5093,7 +5102,7 @@ msgstr ""
 msgid "Too many redirects"
 msgstr ""
 
-#: internet/spotifyservice.cpp:377
+#: internet/spotifyservice.cpp:392
 msgid "Top tracks"
 msgstr ""
 
@@ -5193,11 +5202,11 @@ msgstr "Unknown error"
 msgid "Unset cover"
 msgstr "Unset cover"
 
-#: ui/mainwindow.cpp:1582
+#: ui/mainwindow.cpp:1586
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1584
 msgid "Unskip track"
 msgstr ""
 
@@ -5213,7 +5222,7 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1238
+#: internet/groovesharkservice.cpp:1237
 msgid "Update Grooveshark playlist"
 msgstr ""
 
@@ -5512,7 +5521,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2412
+#: ui/mainwindow.cpp:2416
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -5544,7 +5553,7 @@ msgstr "Year - Album"
 msgid "Years"
 msgstr ""
 
-#: core/utilities.cpp:128
+#: core/utilities.cpp:129
 msgid "Yesterday"
 msgstr ""
 
@@ -5623,7 +5632,7 @@ msgid ""
 "stream."
 msgstr ""
 
-#: internet/spotifyservice.cpp:175
+#: internet/spotifyservice.cpp:179
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."

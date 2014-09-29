@@ -20,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-09-16 11:49+0000\n"
-"Last-Translator: fri\n"
+"PO-Revision-Date: 2014-09-26 10:25+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -82,12 +82,12 @@ msgstr "%1 (%2 písní)"
 msgid "%1 albums"
 msgstr "%1 alb"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dnů"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:130
 #, qt-format
 msgid "%1 days ago"
 msgstr "před %1 dny"
@@ -248,6 +248,10 @@ msgstr "Nástroje"
 msgid "(different across multiple songs)"
 msgstr "(liší se u jednotlivých písní)"
 
+#: internet/spotifyservice.cpp:423
+msgid ", by "
+msgstr ""
+
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
 msgstr "...a všichni, kdo přispěli k vývoji přehrávače Amarok"
@@ -264,7 +268,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0 px"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 msgid "1 day"
 msgstr "1 den"
 
@@ -451,7 +455,7 @@ msgstr "Přidat další proud..."
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
-#: ui/mainwindow.cpp:1829
+#: ui/mainwindow.cpp:1833
 msgid "Add file"
 msgstr "Přidat soubor"
 
@@ -471,7 +475,7 @@ msgstr "Přidat soubor..."
 msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1856 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1860 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "Přidat složku"
 
@@ -575,11 +579,11 @@ msgstr "Přidat písně do Moje hudba, když je klepnuto na tlačítko Oblíbit"
 msgid "Add stream..."
 msgstr "Přidat proud..."
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/groovesharkservice.cpp:1120
 msgid "Add to Grooveshark favorites"
 msgstr "Přidat do oblíbených Grooveshark"
 
-#: internet/groovesharkservice.cpp:1136
+#: internet/groovesharkservice.cpp:1135
 msgid "Add to Grooveshark playlists"
 msgstr "Přidat do seznamu skladeb Grooveshark"
 
@@ -587,7 +591,11 @@ msgstr "Přidat do seznamu skladeb Grooveshark"
 msgid "Add to My Music"
 msgstr "Přidat do Moje hudba"
 
-#: ui/mainwindow.cpp:1650
+#: internet/spotifyservice.cpp:567
+msgid "Add to Spotify playlists"
+msgstr ""
+
+#: ui/mainwindow.cpp:1654
 msgid "Add to another playlist"
 msgstr "Přidat do jiného seznamu skladeb"
 
@@ -636,11 +644,11 @@ msgstr "Přidána dnes"
 msgid "Added within three months"
 msgstr "Přidána během tří měsíců"
 
-#: internet/groovesharkservice.cpp:1435
+#: internet/groovesharkservice.cpp:1434
 msgid "Adding song to My Music"
 msgstr "Přidává se píseň do Moje hudba"
 
-#: internet/groovesharkservice.cpp:1412
+#: internet/groovesharkservice.cpp:1411
 msgid "Adding song to favorites"
 msgstr "Přidává se píseň do oblíbených"
 
@@ -691,7 +699,7 @@ msgstr "Alba s obaly"
 msgid "Albums without covers"
 msgstr "Alba bez obalů"
 
-#: ui/mainwindow.cpp:161
+#: ui/mainwindow.cpp:165
 msgid "All Files (*)"
 msgstr "Všechny soubory (*)"
 
@@ -809,7 +817,7 @@ msgstr "Použít kompresi, aby se zabránilo ořezávání zvuku (clippingu)"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Opravdu chcete smazat nastavení \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1334
+#: internet/groovesharkservice.cpp:1333
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Opravdu chcete smazat tento seznam skladeb?"
 
@@ -832,7 +840,7 @@ msgstr "Opravdu chcete ukládat statistiky písní do souboru písně u všech p
 msgid "Artist"
 msgstr "Umělec"
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:255
 msgid "Artist info"
 msgstr "Umělec"
 
@@ -1004,7 +1012,7 @@ msgstr "Procházet…"
 msgid "Buffer duration"
 msgstr "Délka vyrovnávací paměti"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Ukládá se do vyrovnávací paměti"
 
@@ -1045,7 +1053,7 @@ msgstr "%1 se ukládá do vyrovnávací paměti"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: internet/vkservice.cpp:622
+#: internet/vkservice.cpp:620
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1089,7 +1097,7 @@ msgstr "Podívat se po nových dílech"
 msgid "Check for updates"
 msgstr "Podívat se po aktualizacích"
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:721
 msgid "Check for updates..."
 msgstr "Zkontrolovat aktualizace"
 
@@ -1101,7 +1109,7 @@ msgstr "Vyberte adresář pro vyrovnávací paměť Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Vyberte název pro svůj chytrý seznam skladeb"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Vybrat automaticky"
 
@@ -1313,7 +1321,7 @@ msgstr "Nastavit Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Nastavit klávesové zkratky"
 
-#: internet/spotifyservice.cpp:541 internet/spotifyservice.cpp:552
+#: internet/spotifyservice.cpp:813
 msgid "Configure Spotify..."
 msgstr "Nastavit Spotify..."
 
@@ -1329,7 +1337,7 @@ msgstr "Nastavit Vk.com..."
 msgid "Configure global search..."
 msgstr "Nastavit celkové hledání..."
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:571
 msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
@@ -1352,7 +1360,7 @@ msgstr "Připojit dálkový ovladač Wii pomocí činnosti zapnout/vypnout"
 msgid "Connect device"
 msgstr "Připojit zařízení"
 
-#: internet/spotifyservice.cpp:266
+#: internet/spotifyservice.cpp:270
 msgid "Connecting to Spotify"
 msgstr "Připojuje se k Spotify"
 
@@ -1367,7 +1375,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Spojení vypršelo, prověřte adresu serveru (URL). Příklad: http://localhost:4040/"
 
-#: internet/vkservice.cpp:963
+#: internet/vkservice.cpp:961
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Potíže se spojením nebo je zvuk vlastníkem zakázán"
 
@@ -1391,16 +1399,16 @@ msgstr "Převést veškerou hudbu, kterou zařízení nedokáže přehrát"
 msgid "Copy share url to clipboard"
 msgstr "Kopírovat sdílenou adresu (URL) do schránky"
 
-#: internet/groovesharkservice.cpp:1210
+#: internet/groovesharkservice.cpp:1209
 msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
 #: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:620 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Zkopírovat do zařízení..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:610
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Zkopírovat do sbírky..."
@@ -1478,7 +1486,7 @@ msgstr "Obal nastaven z %1"
 msgid "Covers from %1"
 msgstr "Obaly od %1"
 
-#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1286
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1285
 msgid "Create a new Grooveshark playlist"
 msgstr "Vytvořit nový seznam skladeb Grooveshark"
 
@@ -1625,7 +1633,7 @@ msgstr "Snížit hlasitost"
 msgid "Default background image"
 msgstr "Výchozí obrázek na pozadí"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Výchozí zařízení na %1"
@@ -1643,7 +1651,7 @@ msgstr "Prodleva mezi vizualizacemi"
 msgid "Delete"
 msgstr "Smazat"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1333
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1332
 msgid "Delete Grooveshark playlist"
 msgstr "Smazat seznam skladeb Grooveshark"
 
@@ -1652,7 +1660,7 @@ msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2192 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2196 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Smazat soubory"
 
@@ -1660,7 +1668,7 @@ msgstr "Smazat soubory"
 msgid "Delete from device..."
 msgstr "Smazat ze zařízení..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:622
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Smazat z disku..."
@@ -1685,11 +1693,11 @@ msgstr "Smazat původní soubory"
 msgid "Deleting files"
 msgstr "Probíhá mazání souborů"
 
-#: ui/mainwindow.cpp:1571
+#: ui/mainwindow.cpp:1575
 msgid "Dequeue selected tracks"
 msgstr "Odstranit vybrané skladby z řady"
 
-#: ui/mainwindow.cpp:1569
+#: ui/mainwindow.cpp:1573
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
@@ -1718,7 +1726,7 @@ msgstr "Název zařízení"
 msgid "Device properties..."
 msgstr "Vlastnosti zařízení..."
 
-#: ui/mainwindow.cpp:246
+#: ui/mainwindow.cpp:250
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -1941,7 +1949,7 @@ msgstr "Dynamický náhodný výběr"
 msgid "Edit smart playlist..."
 msgstr "Upravit chytrý seznam skladeb..."
 
-#: ui/mainwindow.cpp:1613
+#: ui/mainwindow.cpp:1617
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upravit značku \"%1\"..."
@@ -2081,8 +2089,8 @@ msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1895 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
-#: internet/vkservice.cpp:621
+#: ui/mainwindow.cpp:1899 ui/mainwindow.cpp:2146 ui/mainwindow.cpp:2294
+#: internet/vkservice.cpp:619
 msgid "Error"
 msgstr "Chyba"
 
@@ -2246,7 +2254,7 @@ msgstr "Slábnutí"
 msgid "Fading duration"
 msgstr "Doba slábnutí"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1900
 msgid "Failed reading CD drive"
 msgstr "Nepodařilo se číst z CD v mechanice"
 
@@ -2343,7 +2351,7 @@ msgstr "Typ souboru"
 msgid "Filename"
 msgstr "Název souboru"
 
-#: ui/mainwindow.cpp:239
+#: ui/mainwindow.cpp:243
 msgid "Files"
 msgstr "Soubory"
 
@@ -2474,7 +2482,7 @@ msgstr "Žánr"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Získat adresu pro sdílení tohoto seznamu skladeb Grooveshark"
 
-#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1149
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1148
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Získat adresu pro sdílení této písně Grooveshark"
 
@@ -2528,7 +2536,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Chyba přihlášení Grooveshark"
 
-#: internet/groovesharkservice.cpp:1200
+#: internet/groovesharkservice.cpp:1199
 msgid "Grooveshark playlist's URL"
 msgstr "Adresa Grooveshark"
 
@@ -2536,7 +2544,7 @@ msgstr "Adresa Grooveshark"
 msgid "Grooveshark radio"
 msgstr "Rádio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1178
+#: internet/groovesharkservice.cpp:1177
 msgid "Grooveshark song's URL"
 msgstr "Adresa písně Grooveshark"
 
@@ -2672,12 +2680,12 @@ msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:142
 #, qt-format
 msgid "In %1 days"
 msgstr "Za %1 dny(ů)"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Za %1 týdny(ů)"
@@ -2688,7 +2696,7 @@ msgid ""
 "time a song finishes."
 msgstr "V dynamickém režimu budou nové skladby vybrány a přidány do seznamu skladeb pokaždé, když píseň skončí."
 
-#: internet/spotifyservice.cpp:371
+#: internet/spotifyservice.cpp:386
 msgid "Inbox"
 msgstr "Doručená pošta"
 
@@ -2749,7 +2757,7 @@ msgstr "Nainstalován"
 msgid "Integrity check"
 msgstr "Ověření celistvosti"
 
-#: ui/mainwindow.cpp:243
+#: ui/mainwindow.cpp:247
 msgid "Internet"
 msgstr "Internet"
 
@@ -2920,7 +2928,7 @@ msgstr "Vlevo"
 msgid "Length"
 msgstr "Délka"
 
-#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:229 ui/mainwindow.cpp:242
 #: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "Sbírka"
@@ -2929,7 +2937,7 @@ msgstr "Sbírka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé seskupování sbírky"
 
-#: ui/mainwindow.cpp:2414
+#: ui/mainwindow.cpp:2418
 msgid "Library rescan notice"
 msgstr "Zpráva o prohledání sbírky"
 
@@ -3123,7 +3131,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Udělej to tak!"
 
-#: internet/spotifyservice.cpp:548
+#: internet/spotifyservice.cpp:603
 msgid "Make playlist available offline"
 msgstr "Zajistit, že seznam skladeb bude dostupný, i když počítač nebude připojen k internetu"
 
@@ -3248,7 +3256,7 @@ msgstr "Přípojné body"
 msgid "Move down"
 msgstr "Posunout dolů"
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:613 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Přesunout do sbírky..."
 
@@ -3257,7 +3265,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1830
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1834
 msgid "Music"
 msgstr "Hudba"
 
@@ -3278,7 +3286,7 @@ msgstr "Moje hudba"
 msgid "My Recommendations"
 msgstr "Má doporučení"
 
-#: internet/groovesharkservice.cpp:1287 internet/groovesharkservice.cpp:1382
+#: internet/groovesharkservice.cpp:1286 internet/groovesharkservice.cpp:1381
 #: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
@@ -3324,7 +3332,7 @@ msgstr "Nikdy nezačít přehrávání"
 msgid "New folder"
 msgstr "Nová složka"
 
-#: ui/mainwindow.cpp:1667 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1671 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "Nový seznam skladeb"
 
@@ -3353,7 +3361,7 @@ msgstr "Další"
 msgid "Next track"
 msgstr "Další skladba"
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:143
 msgid "Next week"
 msgstr "Příští týden"
 
@@ -3387,7 +3395,7 @@ msgstr "Žádné krátké bloky"
 msgid "None"
 msgstr "Žádná"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2143 ui/mainwindow.cpp:2291
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2147 ui/mainwindow.cpp:2295
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žádná z vybraných písní nebyla vhodná ke zkopírování do zařízení"
 
@@ -3582,7 +3590,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Uspořádat soubory"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:616
 msgid "Organise files..."
 msgstr "Uspořádat soubory..."
 
@@ -3644,7 +3652,7 @@ msgstr "Oslava"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1029 ui/mainwindow.cpp:1480
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1033 ui/mainwindow.cpp:1484
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pozastavit"
@@ -3670,8 +3678,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Prostý postranní panel"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:584 ui/mainwindow.cpp:997
-#: ui/mainwindow.cpp:1015 ui/mainwindow.cpp:1483 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:588 ui/mainwindow.cpp:1001
+#: ui/mainwindow.cpp:1019 ui/mainwindow.cpp:1487 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3725,7 +3733,7 @@ msgid "Playlist type"
 msgstr "Typ seznamu skladeb"
 
 #: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:245
 msgid "Playlists"
 msgstr "Seznamy"
 
@@ -3893,12 +3901,12 @@ msgstr "Dotazování se zařízení..."
 msgid "Queue Manager"
 msgstr "Správce řady"
 
-#: ui/mainwindow.cpp:1575
+#: ui/mainwindow.cpp:1579
 msgid "Queue selected tracks"
 msgstr "Přidat vybrané skladby do řady"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1573
+#: ui/mainwindow.cpp:1577
 msgid "Queue track"
 msgstr "Přidat skladbu do řady"
 
@@ -4025,7 +4033,8 @@ msgstr "Odstranit ze záložek"
 msgid "Remove from favorites"
 msgstr "Odstranit z oblíbených"
 
-#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:685
+#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:611
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Odstranit ze seznamu skladeb"
 
@@ -4041,15 +4050,15 @@ msgstr "Odstranit seznamy skladeb"
 msgid "Remove unavailable tracks from playlist"
 msgstr "Odstranit nedostupné skladby ze seznamu skladeb"
 
-#: internet/groovesharkservice.cpp:1584
+#: internet/groovesharkservice.cpp:1583
 msgid "Removing songs from My Music"
 msgstr "Odstraňují se písně z Moje hudba"
 
-#: internet/groovesharkservice.cpp:1531
+#: internet/groovesharkservice.cpp:1530
 msgid "Removing songs from favorites"
 msgstr "Odstraňují se písně z oblíbených"
 
-#: internet/groovesharkservice.cpp:1381
+#: internet/groovesharkservice.cpp:1380
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Přejmenovat \"%1\" seznam skladeb"
@@ -4283,7 +4292,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Hledat"
 
-#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Hledat"
@@ -4333,7 +4342,7 @@ msgid "Search options"
 msgstr "Možnosti vyhledávání"
 
 #: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
-#: internet/spotifyservice.cpp:357
+#: internet/spotifyservice.cpp:372
 msgid "Search results"
 msgstr "Hledat výsledky"
 
@@ -4422,7 +4431,7 @@ msgstr "Podrobnosti o serveru"
 msgid "Service offline"
 msgstr "Služba není dostupná"
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1616
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
@@ -4498,7 +4507,7 @@ msgstr "Ukazovat OSD"
 msgid "Show above status bar"
 msgstr "Ukazovat nad stavovým řádkem"
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:556
 msgid "Show all songs"
 msgstr "Ukázat všechny písně"
 
@@ -4522,12 +4531,12 @@ msgstr "Ukázat v plné velikosti..."
 msgid "Show groups in global search result"
 msgstr "Ukázat skupiny ve výsledcích celkového hledání"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:625
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Ukázat v prohlížeči souborů..."
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:628
 msgid "Show in library..."
 msgstr "Ukazovat ve sbírce..."
 
@@ -4539,11 +4548,11 @@ msgstr "Ukázat pod různými umělci"
 msgid "Show moodbar"
 msgstr "Ukázat náladový proužek"
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:558
 msgid "Show only duplicates"
 msgstr "Ukázat pouze zdvojené"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:560
 msgid "Show only untagged"
 msgstr "Ukázat pouze neoznačené"
 
@@ -4639,11 +4648,11 @@ msgstr "Počet přeskočení"
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
-#: ui/mainwindow.cpp:1586
+#: ui/mainwindow.cpp:1590
 msgid "Skip selected tracks"
 msgstr "Přeskočit vybrané skladby"
 
-#: ui/mainwindow.cpp:1584
+#: ui/mainwindow.cpp:1588
 msgid "Skip track"
 msgstr "Přeskočit skladbu"
 
@@ -4675,7 +4684,7 @@ msgstr "Soft rock"
 msgid "Song Information"
 msgstr "Informace o písni"
 
-#: ui/mainwindow.cpp:249
+#: ui/mainwindow.cpp:253
 msgid "Song info"
 msgstr "Píseň"
 
@@ -4731,7 +4740,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:190
+#: internet/spotifyservice.cpp:194
 msgid "Spotify login error"
 msgstr "Chyba přihlášení k Spotify"
 
@@ -4747,7 +4756,7 @@ msgstr "Přídavný modul Spotify není nainstalován"
 msgid "Standard"
 msgstr "Obvyklý"
 
-#: internet/spotifyservice.cpp:365
+#: internet/spotifyservice.cpp:380
 msgid "Starred"
 msgstr "S hvězdičkou"
 
@@ -4764,7 +4773,7 @@ msgid "Start transcoding"
 msgstr "Převést"
 
 #: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
-#: internet/spotifyservice.cpp:359
+#: internet/spotifyservice.cpp:374
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4792,7 +4801,7 @@ msgstr "Zastavit"
 msgid "Stop after"
 msgstr "Zastavit po"
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:591 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "Zastavit po této skladbě"
 
@@ -4875,15 +4884,15 @@ msgstr "Podporované formáty"
 msgid "Synchronize statistics to files now"
 msgstr "Seřídit statistiky se soubory nyní"
 
-#: internet/spotifyservice.cpp:575
+#: internet/spotifyservice.cpp:636
 msgid "Syncing Spotify inbox"
 msgstr "Synchronizuje se schránka Spotify"
 
-#: internet/spotifyservice.cpp:569
+#: internet/spotifyservice.cpp:630
 msgid "Syncing Spotify playlist"
 msgstr "Synchronizuje se seznam skladeb Spotify"
 
-#: internet/spotifyservice.cpp:580
+#: internet/spotifyservice.cpp:641
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronizují se skladby označené hvězdičkou na Spotify"
 
@@ -4947,7 +4956,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Lhůta na vyzkoušení serveru Subsonic uplynula. Dejte, prosím, dar, abyste dostali licenční klíč. Navštivte subsonic.org kvůli podrobnostem."
 
-#: ui/mainwindow.cpp:2405
+#: ui/mainwindow.cpp:2409
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4988,7 +4997,7 @@ msgid ""
 "continue?"
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2193 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2197 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5073,7 +5082,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Abyste začali poslouchat rádio Grooveshark, měli byste si nejprve poslechnout několik jiných písní Grooveshark"
 
-#: core/utilities.cpp:127 core/utilities.cpp:139
+#: core/utilities.cpp:128 core/utilities.cpp:140
 msgid "Today"
 msgstr "Dnes"
 
@@ -5085,7 +5094,7 @@ msgstr "Přepnout OSD"
 msgid "Toggle fullscreen"
 msgstr "Zapnout/Vypnout zobrazení na celou obrazovku"
 
-#: ui/mainwindow.cpp:1577
+#: ui/mainwindow.cpp:1581
 msgid "Toggle queue status"
 msgstr "Přepnout stav řady"
 
@@ -5097,7 +5106,7 @@ msgstr "Přepnout odesílání informací o přehrávání"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Přepnout viditelnost hezkých oznámení na obrazovce (OSD)"
 
-#: core/utilities.cpp:140
+#: core/utilities.cpp:141
 msgid "Tomorrow"
 msgstr "Zítra"
 
@@ -5105,7 +5114,7 @@ msgstr "Zítra"
 msgid "Too many redirects"
 msgstr "Příliš mnoho přesměrování"
 
-#: internet/spotifyservice.cpp:377
+#: internet/spotifyservice.cpp:392
 msgid "Top tracks"
 msgstr "Nejlepší skladby"
 
@@ -5205,11 +5214,11 @@ msgstr "Neznámá chyba"
 msgid "Unset cover"
 msgstr "Odebrat obal"
 
-#: ui/mainwindow.cpp:1582
+#: ui/mainwindow.cpp:1586
 msgid "Unskip selected tracks"
 msgstr "Zrušit přeskočení vybraných skladeb"
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1584
 msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
@@ -5225,7 +5234,7 @@ msgstr "Připravované koncerty"
 msgid "Update"
 msgstr "Aktualizovat"
 
-#: internet/groovesharkservice.cpp:1238
+#: internet/groovesharkservice.cpp:1237
 msgid "Update Grooveshark playlist"
 msgstr "Obnovit seznam skladeb Grooveshark"
 
@@ -5524,7 +5533,7 @@ msgid ""
 "well?"
 msgstr "Chcete další písně na tomto albu přesunout do Různí umělci?"
 
-#: ui/mainwindow.cpp:2412
+#: ui/mainwindow.cpp:2416
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
 
@@ -5556,7 +5565,7 @@ msgstr "Rok - Album"
 msgid "Years"
 msgstr "Roky"
 
-#: core/utilities.cpp:128
+#: core/utilities.cpp:129
 msgid "Yesterday"
 msgstr "Včera"
 
@@ -5635,7 +5644,7 @@ msgid ""
 "stream."
 msgstr "Nemusíte být přihlášen, abyste mohl hledat a poslouchat hudbu na SoundCloud. Musíte ale být přihlášen, abyste mohl přistupovat ke svým seznamům skladeb a ke svým proudům."
 
-#: internet/spotifyservice.cpp:175
+#: internet/spotifyservice.cpp:179
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
