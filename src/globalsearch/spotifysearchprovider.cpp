@@ -46,6 +46,9 @@ SpotifyServer* SpotifySearchProvider::server() {
   if (service_->login_state() != SpotifyService::LoginState_LoggedIn)
     return nullptr;
 
+  if (!service_->IsBlobInstalled())
+    return nullptr;
+
   server_ = service_->server();
   connect(server_, SIGNAL(SearchResults(pb::spotify::SearchResponse)),
           SLOT(SearchFinishedSlot(pb::spotify::SearchResponse)));
