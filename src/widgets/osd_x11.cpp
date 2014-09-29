@@ -111,6 +111,9 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
     hints["image_data"] = QVariant(image);
   }
 
+  hints["resident"] = QVariant(true);
+  hints["desktop-entry"] = QVariant("clementine");
+
   int id = 0;
   if (last_notification_time_.secsTo(QDateTime::currentDateTime()) * 1000 <
       timeout_msec_) {
