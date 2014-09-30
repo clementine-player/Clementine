@@ -43,10 +43,10 @@ GSTREAMER_PLUGINS=[
     'libgstaudioresample.so',
     'libgstautodetect.so',
     'libgstcoreelements.so',
-    'libgstdecodebin2.so',
     'libgstequalizer.so',
     'libgstgdp.so',
     'libgstosxaudio.so',
+    'libgstplayback.so',
     'libgsttcp.so',
     'libgsttypefindfunctions.so',
     'libgstudp.so',
@@ -55,19 +55,19 @@ GSTREAMER_PLUGINS=[
     # Codecs
     'libgstapetag.so',
     'libgstasf.so',
+    'libgstaudioparsers.so',
     'libgstfaac.so',
     'libgstfaad.so',
-    'libgstffmpeg.so',
     'libgstflac.so',
     'libgstid3demux.so',
+    'libgstisomp4.so',
     'libgstlame.so',
+    'libgstlibav.so',
     'libgstmad.so',
     'libgstmms.so',
-    'libgstmpegaudioparse.so',
-    'libgstmusepack.so',
+    # TODO: Bring back Musepack support.
     'libgstogg.so',
     'libgstopus.so',
-    'libgstqtdemux.so',
     'libgstreplaygain.so',
     'libgstspeex.so',
     'libgsttaglib.so',
@@ -91,6 +91,7 @@ GSTREAMER_PLUGINS=[
 
 GSTREAMER_SEARCH_PATH=[
     '/target/lib/gstreamer-1.0',
+    '/target/libexec/gstreamer-1.0',
 ]
 
 QT_PLUGINS = [
