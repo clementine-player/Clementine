@@ -107,6 +107,7 @@ class OSD : public QObject {
 
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);
+  void NotificationClosed(uint id, uint reason);
   void AlbumArtLoaded(const Song& song, const QString& uri,
                       const QImage& image);
 
@@ -136,7 +137,6 @@ class OSD : public QObject {
 #ifdef HAVE_DBUS
   std::unique_ptr<OrgFreedesktopNotificationsInterface> interface_;
   uint notification_id_;
-  QDateTime last_notification_time_;
 #endif
 };
 

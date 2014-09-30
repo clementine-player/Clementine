@@ -114,21 +114,14 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
   hints["resident"] = QVariant(true);
   hints["desktop-entry"] = QVariant("clementine");
 
-  int id = 0;
-  if (last_notification_time_.secsTo(QDateTime::currentDateTime()) * 1000 <
-      timeout_msec_) {
-    // Reuse the existing popup if it's still open.  The reason we don't always
-    // reuse the popup is because the notification daemon on KDE4 won't re-show
-    // the bubble if it's already gone to the tray.  See issue #118
-    id = notification_id_;
-  }
-
   QDBusPendingReply<uint> reply =
-      interface_->Notify(QCoreApplication::applicationName(), id, icon, summary,
+      interface_->Notify(QCoreApplication::applicationName(), notification_id_, icon, summary,
                          message, QStringList(), hints, timeout_msec_);
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
   connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
           SLOT(CallFinished(QDBusPendingCallWatcher*)));
+  connect(dynamic_cast<OrgFreedesktopNotificationsInterface*>(interface_.get()), SIGNAL(NotificationClosed(uint, uint)),
+          this, SLOT(NotificationClosed(uint, uint)));
 #else   // HAVE_DBUS
   qLog(Warning) << "not implemented";
 #endif  // HAVE_DBUS
@@ -147,7 +140,12 @@ void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
   uint id = reply.value();
   if (id != 0) {
     notification_id_ = id;
-    last_notification_time_ = QDateTime::currentDateTime();
+  }
+}
+
+void OSD::NotificationClosed(uint id, uint reason) {
+  if (notification_id_ == id) {
+    notification_id_ = 0;
   }
 }
 #endif
