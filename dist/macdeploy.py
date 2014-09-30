@@ -90,10 +90,7 @@ GSTREAMER_PLUGINS=[
 ]
 
 GSTREAMER_SEARCH_PATH=[
-    '/target/lib/gstreamer-0.10',
-    '/target/libexec/gstreamer-0.10',
-    '/sw/lib/gstreamer-0.10',
-    '/usr/local/lib/gstreamer-0.10',
+    '/target/lib/gstreamer-1.0',
 ]
 
 QT_PLUGINS = [
