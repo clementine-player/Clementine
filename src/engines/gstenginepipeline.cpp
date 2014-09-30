@@ -95,11 +95,18 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
 
   for (int i = 0; i < kEqBandCount; ++i) eq_band_gains_ << 0;
 
-  // Spotify hack
-  if (InternetModel::Service<SpotifyService>()->IsBlobInstalled()) {
-    connect(InternetModel::Service<SpotifyService>()->server(), SIGNAL(SeekCompleted()),
-        SLOT(SpotifySeekCompleted()));
-  }
+  // FIXME Currently useless Spotify hack: we currently don't know what to do
+  // when the seek is completed. We should flush the current buffers, but see
+  // comments in SpotifySeekCompleted for why that doesn't work.
+  // If we fix and reactivate this code, we will have another problem though:
+  // calling server() try to login the user. If the user doesn't use Spotify, it
+  // will receive an error message. We should have a lightweight version of
+  // server() that just return it (or NULL) without trying to create it IMO to
+  // avoid this issue.
+  //if (InternetModel::Service<SpotifyService>()->IsBlobInstalled()) {
+  //  connect(InternetModel::Service<SpotifyService>()->server(), SIGNAL(SeekCompleted()),
+  //      SLOT(SpotifySeekCompleted()));
+  //}
 }
 
 void GstEnginePipeline::set_output_device(const QString& sink,
@@ -963,6 +970,7 @@ void GstEnginePipeline::SpotifySeekCompleted() {
   // to do this without breaking the streaming completely...
   // Funny thing to notice: for me the delay varies when changing buffer size,
   // but a larger buffer doesn't necessary increase the delay.
+  // FIXME: also, this method is never called currently (see constructor)
 }
 
 void GstEnginePipeline::SetEqualizerEnabled(bool enabled) {
