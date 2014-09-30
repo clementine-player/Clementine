@@ -31,6 +31,7 @@
 
 class Application;
 class OrgFreedesktopNotificationsInterface;
+class OrgMprisMediaPlayer2PlayerInterface;
 class OSDPretty;
 class SystemTrayIcon;
 
@@ -108,6 +109,7 @@ class OSD : public QObject {
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);
   void NotificationClosed(uint id, uint reason);
+  void NotificationAction(uint id, QString reason);
   void AlbumArtLoaded(const Song& song, const QString& uri,
                       const QImage& image);
 
@@ -136,7 +138,9 @@ class OSD : public QObject {
 
 #ifdef HAVE_DBUS
   std::unique_ptr<OrgFreedesktopNotificationsInterface> interface_;
+  std::unique_ptr<OrgMprisMediaPlayer2PlayerInterface> player_;
   uint notification_id_;
+  QStringList capabilities_;
 #endif
 };
 
