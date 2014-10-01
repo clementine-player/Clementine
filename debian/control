@@ -45,8 +45,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
          libsqlite3-0,
          gstreamer1.0-plugins-base,
          gstreamer1.0-plugins-good,
-         gstreamer1.0-alsa | gstreamer1.0-audiosink,
          gstreamer1.0-plugins-ugly,
+         gstreamer1.0-pulseaudio,
          libprojectm-data | projectm-data,
          libqca2-plugin-ossl
 Description: Modern music player and library organiser inspired by Amarok 1.4
