@@ -1414,19 +1414,19 @@ if (APPLE)
   endif (HAVE_SPARKLE)
 
   install(FILES "${QT_QTCORE_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtCore.framework/Contents")
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtCore.framework/Versions/4/Resources")
   install(FILES "${QT_QTGUI_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtGui.framework/Contents")
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtGui.framework/Versions/4/Resources")
   install(FILES "${QT_QTNETWORK_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtNetwork.framework/Contents")
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtNetwork.framework/Versions/4/Resources")
   install(FILES "${QT_QTOPENGL_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtOpenGL.framework/Contents")
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtOpenGL.framework/Versions/4/Resources")
   install(FILES "${QT_QTSQL_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSql.framework/Contents")
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSql.framework/Versions/4/Resources")
   install(FILES "${QT_QTSVG_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSvg.framework/Contents")
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSvg.framework/Versions/4/Resources")
   install(FILES "${QT_QTXML_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtXml.framework/Contents")
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtXml.framework/Versions/4/Resources")
 
   if (HAVE_BREAKPAD)
     install(DIRECTORY
