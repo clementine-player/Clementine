@@ -1402,6 +1402,8 @@ if (APPLE)
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   install(FILES ../dist/sparkle_pub.pem
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
+  install(FILES ../dist/cacert.pem
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
   install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")

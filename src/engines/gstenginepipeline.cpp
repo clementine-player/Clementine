@@ -18,6 +18,7 @@
 #include <limits>
 
 #include <QCoreApplication>
+#include <QDir>
 #include <QUuid>
 
 #include "bufferconsumer.h"
@@ -27,6 +28,7 @@
 #include "gstenginepipeline.h"
 #include "core/concurrentrun.h"
 #include "core/logging.h"
+#include "core/mac_startup.h"
 #include "core/signalchecker.h"
 #include "core/utilities.h"
 #include "internet/internetmodel.h"
@@ -857,6 +859,14 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
                              QCoreApplication::applicationVersion());
     g_object_set(element, "user-agent", user_agent.toUtf8().constData(),
                  nullptr);
+
+#ifdef Q_OS_DARWIN
+    // Override the CA cert path for Soup on Mac to our shipped version.
+    QDir resources_dir(mac::GetResourcesPath());
+    QString ca_cert_path = resources_dir.filePath("cacert.pem");
+    g_object_set(element, "ssl-use-system-ca-file", false, nullptr);
+    g_object_set(element, "ssl-ca-file", ca_cert_path.toUtf8().data(), nullptr);
+#endif
   }
 }
 
