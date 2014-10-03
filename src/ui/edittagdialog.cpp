@@ -696,6 +696,15 @@ void EditTagDialog::ButtonClicked(QAbstractButton* button) {
 void EditTagDialog::SaveData(const QList<Data>& data) {
   for (int i = 0; i < data.count(); ++i) {
     const Data& ref = data[i];
+
+    // Remove the item from list to show progress
+    for(int i=0;i < ui_->song_list->count();i++) {
+        if(ui_->song_list->item(i)->text() == ref.current_.basefilename()) {
+           ui_->song_list->takeItem(i);
+           break;
+        }
+    }
+    // No changes
     if (ref.current_.IsMetadataEqual(ref.original_)) continue;
 
     if (!TagReaderClient::Instance()->SaveFileBlocking(
