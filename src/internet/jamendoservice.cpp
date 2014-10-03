@@ -71,7 +71,7 @@ const char* JamendoService::kTrackIdsColumn = "track_id";
 const char* JamendoService::kSettingsGroup = "Jamendo";
 
 const int JamendoService::kBatchSize = 10000;
-const int JamendoService::kApproxDatabaseSize = 300000;
+const int JamendoService::kApproxDatabaseSize = 450000;
 
 JamendoService::JamendoService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
