@@ -286,13 +286,13 @@ int main(int argc, char* argv[]) {
 
   RegisterMetaTypes();
 
-  CommandlineOptions options(argc, argv);
-
-  // Initialise logging
+  // Initialise logging.  Log levels are set after the commandline options are
+  // parsed below.
   logging::Init();
-  logging::SetLevels(options.log_levels());
   g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog),
                             nullptr);
+
+  CommandlineOptions options(argc, argv);
 
   {
     // Only start a core application now so we can check if there's another
@@ -306,6 +306,7 @@ int main(int argc, char* argv[]) {
     // Parse commandline options - need to do this before starting the
     // full QApplication so it works without an X server
     if (!options.Parse()) return 1;
+    logging::SetLevels(options.log_levels());
 
     if (a.isRunning()) {
       if (options.is_empty()) {
