@@ -53,7 +53,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       sink_(GstEngine::kAutoSink),
       segment_start_(0),
       segment_start_received_(false),
-      emit_track_ended_on_segment_start_(false),
+      emit_track_ended_on_stream_start_(false),
       emit_track_ended_on_time_discontinuity_(false),
       last_buffer_offset_(0),
       eq_enabled_(false),
@@ -540,6 +540,15 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg,
       instance->StreamStatusMessageReceived(msg);
       break;
 
+    case GST_MESSAGE_STREAM_START:
+      if (instance->emit_track_ended_on_stream_start_) {
+        qLog(Debug) << "New segment started, EOS will signal on next buffer "
+                       "discontinuity";
+        instance->emit_track_ended_on_stream_start_ = false;
+        instance->emit_track_ended_on_time_discontinuity_ = true;
+      }
+      break;
+
     default:
       break;
   }
@@ -792,21 +801,20 @@ GstPadProbeReturn GstEnginePipeline::EventHandoffCallback(GstPad*,
 
   qLog(Debug) << instance->id() << "event" << GST_EVENT_TYPE_NAME(e);
 
-  if (GST_EVENT_TYPE(e) == GST_EVENT_SEGMENT &&
-      !instance->segment_start_received_) {
-    // The segment start time is used to calculate the proper offset of data
-    // buffers from the start of the stream
-    const GstSegment* segment = nullptr;
-    gst_event_parse_segment(e, &segment);
-    instance->segment_start_ = segment->start;
-    instance->segment_start_received_ = true;
+  switch (GST_EVENT_TYPE(e)) {
+    case GST_EVENT_SEGMENT:
+      if (!instance->segment_start_received_) {
+        // The segment start time is used to calculate the proper offset of data
+        // buffers from the start of the stream
+        const GstSegment* segment = nullptr;
+        gst_event_parse_segment(e, &segment);
+        instance->segment_start_ = segment->start;
+        instance->segment_start_received_ = true;
+      }
+      break;
 
-    if (instance->emit_track_ended_on_segment_start_) {
-      qLog(Debug) << "New segment started, EOS will signal on next buffer "
-                     "discontinuity";
-      instance->emit_track_ended_on_segment_start_ = false;
-      instance->emit_track_ended_on_time_discontinuity_ = true;
-    }
+    default:
+      break;
   }
 
   return GST_PAD_PROBE_OK;
@@ -886,9 +894,9 @@ void GstEnginePipeline::TransitionToNext() {
   next_end_offset_nanosec_ = 0;
 
   // This function gets called when the source has been drained, even if the
-  // song hasn't finished playing yet.  We'll get a new segment when it really
+  // song hasn't finished playing yet.  We'll get a new stream when it really
   // does finish, so emit TrackEnded then.
-  emit_track_ended_on_segment_start_ = true;
+  emit_track_ended_on_stream_start_ = true;
 
   // This has to happen *after* the gst_element_set_state on the new bin to
   // fix an occasional race condition deadlock.
