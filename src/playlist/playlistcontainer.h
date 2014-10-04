@@ -21,8 +21,6 @@
 #include <QWidget>
 #include <QSettings>
 
-#include "playlist.h"
-
 class Ui_PlaylistContainer;
 
 class LineEditInterface;
