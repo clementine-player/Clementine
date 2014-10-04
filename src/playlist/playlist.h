@@ -152,10 +152,6 @@ class Playlist : public QAbstractListModel {
 
   static const char* kSettingsGroup;
 
-  static const char* kPathType;
-  static const char* kWriteMetadata;
-  static const char* kQuickChangeMenu;
-
   static const int kUndoStackSize;
   static const int kUndoItemLimit;
 

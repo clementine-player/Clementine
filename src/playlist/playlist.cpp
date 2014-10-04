@@ -89,10 +89,6 @@ const QRgb Playlist::kDynamicHistoryColor = qRgb(0x80, 0x80, 0x80);
 
 const char* Playlist::kSettingsGroup = "Playlist";
 
-const char* Playlist::kPathType = "path_type";
-const char* Playlist::kWriteMetadata = "write_metadata";
-const char* Playlist::kQuickChangeMenu = "quick_change_menu";
-
 const int Playlist::kUndoStackSize = 20;
 const int Playlist::kUndoItemLimit = 500;
 

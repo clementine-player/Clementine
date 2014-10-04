@@ -149,8 +149,6 @@ void BehaviourSettingsPage::Load() {
   }
   ui_->b_write_metadata->setChecked(
       s.value(Playlist::kWriteMetadata, true).toBool());
-  ui_->b_quickchange_menu->setChecked(
-      s.value(Playlist::kQuickChangeMenu, false).toBool());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
@@ -211,7 +209,6 @@ void BehaviourSettingsPage::Save() {
   s.setValue("click_edit_inline", ui_->b_click_edit_inline_->isChecked());
   s.setValue(Playlist::kPathType, static_cast<int>(path));
   s.setValue(Playlist::kWriteMetadata, ui_->b_write_metadata->isChecked());
-  s.setValue(Playlist::kQuickChangeMenu, ui_->b_quickchange_menu->isChecked());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
