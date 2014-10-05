@@ -684,6 +684,13 @@ void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
     return;
   }
 
+  // If we are loading new next track, we don't have to pause the playback.
+  // The buffering is for the next track and not the current one.
+  if (emit_track_ended_on_stream_start_) {
+    qLog(Debug) << "Buffering next track";
+    return;
+  }
+
   int percent = 0;
   gst_message_parse_buffering(msg, &percent);
 
