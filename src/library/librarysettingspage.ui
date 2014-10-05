@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>509</width>
-    <height>452</height>
+    <height>486</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -178,6 +178,13 @@ If there are no matches then it will use the largest image in the directory.</st
        <widget class="QCheckBox" name="show_dividers">
         <property name="text">
          <string>Show dividers</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="show_album_year">
+        <property name="text">
+         <string>Show year next to album</string>
         </property>
        </widget>
       </item>

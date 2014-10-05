@@ -65,7 +65,8 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
       search_icon_(IconLoader::Load("search")),
       warning_icon_(IconLoader::Load("dialog-warning")),
       show_providers_(true),
-      show_suggestions_(true) {
+      show_suggestions_(true),
+      show_album_year_(false) {
   ui_->setupUi(this);
 
   front_model_->set_proxy(front_proxy_);
@@ -203,6 +204,9 @@ void GlobalSearchView::ReloadSettings() {
   back_model_->set_provider_order(provider_order);
   show_providers_ = s.value("show_providers", true).toBool();
   show_suggestions_ = s.value("show_suggestions", true).toBool();
+  show_album_year_ = s.value("show_album_year", false).toBool();
+  front_model_->set_show_album_year(show_album_year_);
+  back_model_->set_show_album_year(show_album_year_);
   SetGroupBy(LibraryModel::Grouping(
       LibraryModel::GroupBy(
           s.value("group_by1", int(LibraryModel::GroupBy_Artist)).toInt()),

@@ -80,6 +80,8 @@ void GlobalSearchSettingsPage::Load() {
 
   ui_->show_providers->setChecked(s.value("show_providers", true).toBool());
   ui_->show_suggestions->setChecked(s.value("show_suggestions", true).toBool());
+
+  ui_->show_album_year->setChecked(s.value("show_album_year", false).toBool());
 }
 
 void GlobalSearchSettingsPage::AddProviderItem(GlobalSearch* engine,
@@ -143,6 +145,8 @@ void GlobalSearchSettingsPage::Save() {
   s.setValue("provider_order", provider_order);
   s.setValue("show_providers", ui_->show_providers->isChecked());
   s.setValue("show_suggestions", ui_->show_suggestions->isChecked());
+
+  s.setValue("show_album_year", ui_->show_album_year->isChecked());
 }
 
 void GlobalSearchSettingsPage::MoveUp() { MoveCurrentItem(-1); }

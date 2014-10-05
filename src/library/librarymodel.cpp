@@ -83,6 +83,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
       dir_model_(new LibraryDirectoryModel(backend, this)),
       show_smart_playlists_(false),
       show_various_artists_(true),
+      show_album_year_(false),
       total_song_count_(0),
       artist_icon_(":/icons/22x22/x-clementine-artist.png"),
       album_icon_(":/icons/22x22/x-clementine-album.png"),
@@ -757,6 +758,10 @@ void LibraryModel::BeginReset() {
   // Smart playlists?
   if (show_smart_playlists_ && query_options_.filter().isEmpty())
     CreateSmartPlaylists();
+
+  QSettings s;
+  s.beginGroup(LibraryView::kSettingsGroup);
+  show_album_year_ = s.value("show_album_year", false).toBool();
 }
 
 void LibraryModel::Reset() {
@@ -775,7 +780,7 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
       q->SetColumnSpec("DISTINCT artist");
       break;
     case GroupBy_Album:
-      q->SetColumnSpec("DISTINCT album");
+      q->SetColumnSpec("DISTINCT album, MAX(year)");
       break;
     case GroupBy_Composer:
       q->SetColumnSpec("DISTINCT composer");
@@ -914,11 +919,21 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
       item->sort_text = SortTextForYear(year) + " ";
       break;
 
+    case GroupBy_Album:
+      item->key = row.value(0).toString();
+      year = qMax(0, row.value(1).toInt());
+      if (show_album_year_ && year != 0) {
+        item->display_text = QString("%1 (%2)").arg(TextOrUnknown(item->key)).arg(year);
+      } else {
+        item->display_text = TextOrUnknown(item->key);
+      }
+      item->sort_text = SortTextForArtist(item->key);
+      break;
+
     case GroupBy_Composer:
     case GroupBy_Performer:
     case GroupBy_Grouping:
     case GroupBy_Genre:
-    case GroupBy_Album:
     case GroupBy_AlbumArtist:
       item->key = row.value(0).toString();
       item->display_text = TextOrUnknown(item->key);

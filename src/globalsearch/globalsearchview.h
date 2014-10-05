@@ -128,6 +128,8 @@ signals:
 
   bool show_providers_;
   bool show_suggestions_;
+
+  bool show_album_year_;
 };
 
 #endif  // GLOBALSEARCHVIEW_H

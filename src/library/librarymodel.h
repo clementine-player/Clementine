@@ -256,6 +256,7 @@ signals:
   bool show_smart_playlists_;
   DefaultGenerators default_smart_playlists_;
   bool show_various_artists_;
+  bool show_album_year_;
 
   int total_song_count_;
 
