@@ -88,7 +88,6 @@ void LibrarySettingsPage::Save() {
   s.setValue("auto_open", ui_->auto_open->isChecked());
   s.setValue("pretty_covers", ui_->pretty_covers->isChecked());
   s.setValue("show_dividers", ui_->show_dividers->isChecked());
-  s.setValue("show_album_year", ui_->show_album_year->isChecked());
   s.endGroup();
 
   s.beginGroup(LibraryWatcher::kSettingsGroup);
@@ -129,7 +128,6 @@ void LibrarySettingsPage::Load() {
   ui_->auto_open->setChecked(s.value("auto_open", true).toBool());
   ui_->pretty_covers->setChecked(s.value("pretty_covers", true).toBool());
   ui_->show_dividers->setChecked(s.value("show_dividers", true).toBool());
-  ui_->show_album_year->setChecked(s.value("show_album_year", false).toBool());
   s.endGroup();
 
   s.beginGroup(LibraryWatcher::kSettingsGroup);

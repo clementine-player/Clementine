@@ -51,7 +51,6 @@ class GlobalSearchModel : public QStandardItemModel {
     provider_order_ = provider_order;
   }
   void SetGroupBy(const LibraryModel::Grouping& grouping, bool regroup_now);
-  void set_show_album_year(bool show) { show_album_year_ = show; }
 
   void Clear();
 
@@ -88,7 +87,6 @@ class GlobalSearchModel : public QStandardItemModel {
   QIcon artist_icon_;
   QIcon album_icon_;
   QPixmap no_cover_icon_;
-  bool show_album_year_;
 };
 
 inline uint qHash(const GlobalSearchModel::ContainerKey& key) {

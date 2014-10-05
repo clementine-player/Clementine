@@ -27,8 +27,7 @@ GlobalSearchModel::GlobalSearchModel(GlobalSearch* engine, QObject* parent)
       proxy_(nullptr),
       use_pretty_covers_(true),
       artist_icon_(":/icons/22x22/x-clementine-artist.png"),
-      album_icon_(":/icons/22x22/x-clementine-album.png"),
-      show_album_year_(false) {
+      album_icon_(":/icons/22x22/x-clementine-album.png") {
   group_by_[0] = LibraryModel::GroupBy_Artist;
   group_by_[1] = LibraryModel::GroupBy_Album;
   group_by_[2] = LibraryModel::GroupBy_None;
@@ -138,11 +137,7 @@ QStandardItem* GlobalSearchModel::BuildContainers(const Song& s,
     case LibraryModel::GroupBy_Album:
       unique_tag = s.album_id();
       if (display_text.isNull()) {
-        if (show_album_year_) {
-          display_text = QString("%1 (%2)").arg(s.album()).arg(s.year());
-        } else {
-          display_text = s.album();
-        }
+        display_text = s.album();
       }
     // fallthrough
     case LibraryModel::GroupBy_AlbumArtist:
