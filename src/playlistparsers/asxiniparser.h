@@ -34,7 +34,8 @@ class AsxIniParser : public ParserBase {
   SongList Load(QIODevice* device, const QString& playlist_path = "",
                 const QDir& dir = QDir()) const;
   void Save(const SongList& songs, QIODevice* device,
-            const QDir& dir = QDir()) const;
+            const QDir& dir = QDir(),
+            Playlist::Path path_type = Playlist::Path_Automatic) const;
 };
 
 #endif  // ASXINIPARSER_H

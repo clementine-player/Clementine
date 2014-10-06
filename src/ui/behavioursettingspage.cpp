@@ -146,6 +146,8 @@ void BehaviourSettingsPage::Load() {
     case Playlist::Path_Relative:
       ui_->b_relative_path->setChecked(true);
       break;
+    case Playlist::Path_Ask_User:
+      ui_->b_ask_path->setChecked(true);
   }
   ui_->b_write_metadata->setChecked(
       s.value(Playlist::kWriteMetadata, true).toBool());
@@ -185,6 +187,8 @@ void BehaviourSettingsPage::Save() {
     path = Playlist::Path_Absolute;
   } else if (ui_->b_relative_path->isChecked()) {
     path = Playlist::Path_Relative;
+  } else if (ui_->b_ask_path->isChecked()) {
+    path = Playlist::Path_Ask_User;
   }
 
   s.beginGroup(MainWindow::kSettingsGroup);

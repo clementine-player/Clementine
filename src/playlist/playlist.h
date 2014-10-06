@@ -138,6 +138,8 @@ class Playlist : public QAbstractListModel {
     Path_Automatic = 0,  // Automatically select path type
     Path_Absolute,       // Always use absolute paths
     Path_Relative,       // Always use relative paths
+    Path_Ask_User,       // Only used in preferences: to ask user which of the
+                         // previous values he wants to use.
   };
 
   static const char* kCddaMimeType;

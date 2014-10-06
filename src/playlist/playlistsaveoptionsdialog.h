@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2014, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 
 #include <QDialog>
 
-struct PlaylistSaveOptions;
+#include "playlist.h"
 
 namespace Ui {
 class PlaylistSaveOptionsDialog;
@@ -34,7 +34,7 @@ class PlaylistSaveOptionsDialog : public QDialog {
   ~PlaylistSaveOptionsDialog();
 
   void accept();
-  PlaylistSaveOptions options() const;
+  Playlist::Path path_type() const;
 
  private:
   static const char* kSettingsGroup;

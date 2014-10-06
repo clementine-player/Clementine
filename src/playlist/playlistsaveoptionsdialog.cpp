@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2014, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -29,44 +29,24 @@ PlaylistSaveOptionsDialog::PlaylistSaveOptionsDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::PlaylistSaveOptionsDialog) {
   ui->setupUi(this);
 
-  ui->filePaths->addItem(tr("Automatic"), PlaylistSaveOptions::Paths_Automatic);
-  ui->filePaths->addItem(tr("Relative"), PlaylistSaveOptions::Paths_Relative);
-  ui->filePaths->addItem(tr("Absolute"), PlaylistSaveOptions::Paths_Absolute);
-
-  ui->pathSeparators->addItem(tr("Automatic"),
-                              PlaylistSaveOptions::Separators_Automatic);
-  ui->pathSeparators->addItem(tr("Windows-style") + " (\\)",
-                              PlaylistSaveOptions::Separators_Windows);
-  ui->pathSeparators->addItem(tr("Unix-style") + " (/)",
-                              PlaylistSaveOptions::Separators_Unix);
-
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  ui->filePaths->setCurrentIndex(ui->filePaths->findData(
-      s.value("file_paths", PlaylistSaveOptions::Paths_Automatic)));
-  ui->pathSeparators->setCurrentIndex(ui->pathSeparators->findData(
-      s.value("path_separators", PlaylistSaveOptions::Separators_Automatic)));
+  ui->filePaths->addItem(tr("Automatic"), Playlist::Path_Automatic);
+  ui->filePaths->addItem(tr("Relative"), Playlist::Path_Relative);
+  ui->filePaths->addItem(tr("Absolute"), Playlist::Path_Absolute);
 }
 
 PlaylistSaveOptionsDialog::~PlaylistSaveOptionsDialog() { delete ui; }
 
 void PlaylistSaveOptionsDialog::accept() {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  s.setValue("file_paths",
-             ui->filePaths->itemData(ui->filePaths->currentIndex()).toInt());
-  s.setValue(
-      "path_separators",
-      ui->pathSeparators->itemData(ui->pathSeparators->currentIndex()).toInt());
+  if (ui->remember_user_choice->isChecked()) {
+    QSettings s;
+    s.beginGroup(Playlist::kSettingsGroup);
+    s.setValue(Playlist::kPathType,
+               ui->filePaths->itemData(ui->filePaths->currentIndex()).toInt());
+  }
 
   QDialog::accept();
 }
 
-PlaylistSaveOptions PlaylistSaveOptionsDialog::options() const {
-  PlaylistSaveOptions o;
-  o.filePathStyle = static_cast<PlaylistSaveOptions::FilePathStyle>(
-      ui->filePaths->itemData(ui->filePaths->currentIndex()).toInt());
-  o.pathSeparatorStyle = static_cast<PlaylistSaveOptions::PathSeparatorStyle>(
-      ui->pathSeparators->itemData(ui->pathSeparators->currentIndex()).toInt());
-  return o;
+Playlist::Path PlaylistSaveOptionsDialog::path_type() const {
+  return static_cast<Playlist::Path>(ui->filePaths->itemData(ui->filePaths->currentIndex()).toInt());
 }
