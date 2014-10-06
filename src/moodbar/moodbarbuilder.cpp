@@ -158,13 +158,15 @@ void MoodbarBuilder::Normalize(QList<Rgb>* vals, double Rgb::*member) {
 }
 
 QByteArray MoodbarBuilder::Finish(int width) {
-  Normalize(&frames_, &Rgb::r);
-  Normalize(&frames_, &Rgb::g);
-  Normalize(&frames_, &Rgb::b);
-
   QByteArray ret;
   ret.resize(width * 3);
   char* data = ret.data();
+  if (frames_.count() == 0)
+    return ret;
+
+  Normalize(&frames_, &Rgb::r);
+  Normalize(&frames_, &Rgb::g);
+  Normalize(&frames_, &Rgb::b);
 
   for (int i = 0; i < width; ++i) {
     Rgb rgb;
