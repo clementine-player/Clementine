@@ -45,6 +45,7 @@ PlaylistManager::PlaylistManager(Application* app, QObject* parent)
       library_backend_(nullptr),
       sequence_(nullptr),
       parser_(nullptr),
+      playlist_container_(nullptr),
       current_(-1),
       active_(-1) {
   connect(app_->player(), SIGNAL(Paused()), SLOT(SetActivePaused()));
