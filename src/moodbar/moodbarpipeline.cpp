@@ -181,8 +181,10 @@ GstBusSyncReply MoodbarPipeline::BusCallbackSync(GstBus*, GstMessage* msg,
 
 void MoodbarPipeline::Stop(bool success) {
   success_ = success;
-  data_ = builder_->Finish(1000);
-  builder_.reset();
+  if (builder_ != nullptr) {
+    data_ = builder_->Finish(1000);
+    builder_.reset();
+  }
 
   emit Finished(success);
 }
