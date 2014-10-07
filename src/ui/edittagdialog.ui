@@ -925,6 +925,25 @@
    </item>
    <item>
     <widget class="BusyIndicator" name="loading_label" native="true"/>
+    <layout class="QHBoxLayout" name="loadingLabelAndAbortButton">
+     <item>
+      <widget class="BusyIndicator" name="loading_label" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>8</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="abortSaveButton">
+       <property name="text">
+        <string>Abort</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="button_box">

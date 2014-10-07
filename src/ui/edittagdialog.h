@@ -107,6 +107,7 @@ signals:
   void PreviousSong();
   void NextSong();
 
+  void abortSave();
  private:
   struct FieldData {
     FieldData(QLabel* label = nullptr, QWidget* editor = nullptr,
@@ -149,6 +150,7 @@ signals:
   AlbumCoverChoiceController* album_cover_choice_controller_;
 
   bool loading_;
+  bool abortRequested_;
 
   PlaylistItemList playlist_items_;
   QList<Data> data_;
