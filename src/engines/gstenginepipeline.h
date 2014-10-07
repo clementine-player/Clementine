@@ -37,7 +37,7 @@ class GstEngine;
 class BufferConsumer;
 
 struct GstQueue;
-struct GstURIDecodeBin;
+struct GstPlayBin;
 
 class GstEnginePipeline : public QObject {
   Q_OBJECT
@@ -95,7 +95,6 @@ class GstEnginePipeline : public QObject {
   // Returns this pipeline's state. May return GST_STATE_NULL if the state check
   // timed out. The timeout value is a reasonable default.
   GstState state() const;
-  qint64 segment_start() const { return segment_start_; }
 
   // Don't allow the user to change the playback state (playing/paused) while
   // the pipeline is buffering.
@@ -132,8 +131,8 @@ signals:
   static void NewPadCallback(GstElement*, GstPad*, gpointer);
   static GstPadProbeReturn HandoffCallback(GstPad*, GstPadProbeInfo*, gpointer);
   static GstPadProbeReturn EventHandoffCallback(GstPad*, GstPadProbeInfo*, gpointer);
-  static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
-  static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec* pspec,
+  static void AboutToFinishCallback(GstPlayBin*, gpointer);
+  static void SourceSetupCallback(GstPlayBin*, GParamSpec* pspec,
                                   gpointer);
   static void TaskEnterCallback(GstTask*, GThread*, gpointer);
 
@@ -143,23 +142,18 @@ signals:
   void StateChangedMessageReceived(GstMessage*);
   void BufferingMessageReceived(GstMessage*);
   void StreamStatusMessageReceived(GstMessage*);
+  void StreamStartMessageReceived();
 
   QString ParseTag(GstTagList* list, const char* tag) const;
 
-  bool Init();
+  bool InitDecodeBin(GstElement* new_bin);
+  bool InitAudioBin();
+  GstElement* CreateSpotifyBin(const QUrl& url);
   GstElement* CreateDecodeBinFromString(const char* pipeline);
 
   void UpdateVolume();
   void UpdateEqualizer();
   void UpdateStereoBalance();
-  bool ReplaceDecodeBin(GstElement* new_bin);
-  bool ReplaceDecodeBin(const QUrl& url);
-
-  void TransitionToNext();
-
-  // If the decodebin is special (ie. not really a uridecodebin) then it'll have
-  // a src pad immediately and we can link it after everything's created.
-  void MaybeLinkDecodeToAudio();
 
  private slots:
   void FaderTimelineFinished();
@@ -193,9 +187,6 @@ signals:
   QMutex buffer_consumers_mutex_;
   qint64 segment_start_;
   bool segment_start_received_;
-  bool emit_track_ended_on_stream_start_;
-  bool emit_track_ended_on_time_discontinuity_;
-  qint64 last_buffer_offset_;
 
   // Equalizer
   bool eq_enabled_;
@@ -264,6 +255,9 @@ signals:
   bool pipeline_is_connected_;
   qint64 pending_seek_nanosec_;
 
+  // Complete the transition to the next song when it starts playing
+  bool next_uri_set_;
+
   int volume_percent_;
   qreal volume_modifier_;
 
@@ -272,10 +266,8 @@ signals:
   bool use_fudge_timer_;
 
   GstElement* pipeline_;
-
-  // Bins
-  // uridecodebin ! audiobin
-  GstElement* uridecodebin_;
+  // The audiobin is either linked with a decodebin or set as sink of the
+  // playbin pipeline.
   GstElement* audiobin_;
 
   // Elements in the audiobin.  See comments in Init()'s definition.
