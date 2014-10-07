@@ -1,3 +1,30 @@
+Clementine, the music collector's edition
+=========================================
+
+This is Ville Ranki's fork of Clementine located at:
+
+https://github.com/vranki/Clementine
+
+This fork exists, because i wanted to improve the collection management
+features of Clementine. My pull requests were not accepted to upstream 
+without explanation, so i decided to fork. Clementine devs are welcome to
+import my changes to the upstream version. 
+
+New features
+------------
+
+Scanning:
+- Abort scanning process (found in the Tools menu)
+- Rescan any directory manually from right-click context menu
+
+Tag editor:
+- Tagged files are re-scanned and updated to the GUI
+- Tagged files are removed from the list (to display progress)
+- It is now possible to abort the tagging process
+
+
+
+
 Clementine
 ==========
 

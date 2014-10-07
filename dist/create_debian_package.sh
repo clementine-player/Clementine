@@ -7,8 +7,7 @@
 #
 
 
-cd ..
-mkdir -p bin
+mkdir -p ../bin
 cmake ../ -DWITH_DEBIAN=ON -DDEB_ARCH=amd64 -DDEB_DIST=ubuntu -DENABLE_SPOTIFY_BLOB=OFF
 make deb
 
