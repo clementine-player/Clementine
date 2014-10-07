@@ -590,6 +590,19 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
   g_error_free(error);
   free(debugs);
 
+  if (pipeline_is_initialised_ && next_uri_set_ &&
+      (domain == GST_RESOURCE_ERROR || domain == GST_STREAM_ERROR)) {
+    // A track is still playing and the next uri is not playable. We ignore the
+    // error here so it can play until the end.
+    // But there is no message send to the bus when the current track finishes,
+    // we have to add an EOS ourself.
+    qLog(Debug) << "Ignoring error when loading next track";
+    GstPad* sinkpad = gst_element_get_static_pad(audiobin_, "sink");
+    gst_pad_send_event(sinkpad, gst_event_new_eos());
+    gst_object_unref(sinkpad);
+    return;
+  }
+
   if (!redirect_url_.isEmpty() &&
       debugstr.contains(
           "A redirect message was posted on the bus and should have been "
