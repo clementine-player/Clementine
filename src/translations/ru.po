@@ -30,6 +30,7 @@
 # vlodimer <v.pahomchik@gmail.com>, 2012
 # Владислав <split7fire@yandex.ru>, 2013
 # Павел Малеев <rolland39@gmail.com>, 2010
+# Андрей Демин <Andrei.Demin1996@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
@@ -325,7 +326,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr "<html><head/><body><p>Допишите название поле, чтобы ограничить поиск по этому полю, например <span style=\" font-weight:600;\">Исполнитель:</span><span style=\" font-style:italic;\">Bode</span> ищет фонотеке всех исполнителей со словом \"Bode\".</p><p><span style=\" font-weight:600;\">Доступные поля: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
+msgstr "<html><head/><body><p>Допишите название поля, чтобы ограничить поиск по этому полю, например <span style=\" font-weight:600;\">Исполнитель:</span><span style=\" font-style:italic;\">Bode</span> ищет фонотеке всех исполнителей со словом \"Bode\".</p><p><span style=\" font-weight:600;\">Доступные поля: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -518,7 +519,7 @@ msgstr "Добавить тег \"Альбом\""
 
 #: ../bin/src/ui_notificationssettingspage.h:392
 msgid "Add song albumartist tag"
-msgstr "Добавить тег \"Исполнитель альбома\""
+msgstr "Добавить тег \"Артист альбома\""
 
 #: ../bin/src/ui_notificationssettingspage.h:383
 msgid "Add song artist tag"
@@ -694,7 +695,7 @@ msgstr "Альбом (идеальная громкость всех дорож�
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
-msgstr "Исполнитель альбома"
+msgstr "Артист альбома"
 
 #: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
@@ -727,7 +728,7 @@ msgstr "Все альбомы"
 
 #: ui/albumcovermanager.cpp:268
 msgid "All artists"
-msgstr "Все исполнители"
+msgstr "Все артисты"
 
 #: ui/albumcoverchoicecontroller.cpp:48
 msgid "All files (*)"
@@ -851,7 +852,7 @@ msgstr "Вы действительно хотите записывать ста
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
-msgstr "Исполнитель"
+msgstr "Артист"
 
 #: ui/mainwindow.cpp:255
 msgid "Artist info"
@@ -859,11 +860,11 @@ msgstr "Артист"
 
 #: songinfo/echonesttags.cpp:61
 msgid "Artist tags"
-msgstr "Теги испольнителя"
+msgstr "Теги артиста"
 
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
-msgstr "Инициалы исполнителя"
+msgstr "Инициалы артиста"
 
 #: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
@@ -1841,7 +1842,7 @@ msgstr "Не повторять"
 
 #: library/libraryview.cpp:420
 msgid "Don't show in various artists"
-msgstr "Не показывать в \"Разных исполнителях\""
+msgstr "Не показывать в \"Разных артистах\""
 
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
@@ -2378,7 +2379,7 @@ msgstr "Найти композиции в фонотеке по указанн�
 
 #: internet/vkservice.cpp:302
 msgid "Find this artist"
-msgstr "Найти этого исполнителя"
+msgstr "Найти этого артиста"
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
@@ -2575,15 +2576,15 @@ msgstr "Группировать по альбомам"
 
 #: library/libraryfilterwidget.cpp:120
 msgid "Group by Artist"
-msgstr "Группировать по исполнителям"
+msgstr "Группировать по артистам"
 
 #: library/libraryfilterwidget.cpp:123
 msgid "Group by Artist/Album"
-msgstr "Группировать по исполнителям/альбомам"
+msgstr "Группировать по артистам/альбомам"
 
 #: library/libraryfilterwidget.cpp:127
 msgid "Group by Artist/Year - Album"
-msgstr "Группировать по исполнителю/году — альбому"
+msgstr "Группировать по артисту/году — альбому"
 
 #: library/libraryfilterwidget.cpp:134
 msgid "Group by Genre/Album"
@@ -2591,7 +2592,7 @@ msgstr "Группировать по жанру/альбому"
 
 #: library/libraryfilterwidget.cpp:138
 msgid "Group by Genre/Artist/Album"
-msgstr "Группировать по жанру/исполнителю/альбому"
+msgstr "Группировать по жанру/артисту/альбому"
 
 #: playlist/playlist.cpp:1324 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
@@ -2683,7 +2684,7 @@ msgstr "Если вы знаете адрес подкаста, введите �
 
 #: ../bin/src/ui_organisedialog.h:250
 msgid "Ignore \"The\" in artist names"
-msgstr "Игнорировать \"The\" в именах исполнителей"
+msgstr "Игнорировать \"The\" в именах артистов"
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -4555,7 +4556,7 @@ msgstr "Показать в фонотеке..."
 
 #: library/libraryview.cpp:417
 msgid "Show in various artists"
-msgstr "Показать в \"Разных исполнителях\""
+msgstr "Показать в \"Разных артистах\""
 
 #: moodbar/moodbarproxystyle.cpp:377
 msgid "Show moodbar"
@@ -4635,7 +4636,7 @@ msgstr "Выполняется вход..."
 
 #: songinfo/echonestsimilarartists.cpp:58
 msgid "Similar artists"
-msgstr "Похожие исполнители"
+msgstr "Похожие артисты"
 
 #: ../bin/src/ui_albumcoverexport.h:212
 msgid "Size"
@@ -5291,7 +5292,7 @@ msgstr "Использование"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr "По возможности использовать тег «Исполнитель альбома»"
+msgstr "По возможности использовать тег «Артист альбома»"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "Use Gnome's shortcut keys"
@@ -5395,7 +5396,7 @@ msgstr "Переменный битрейт"
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:278
 #: playlist/playlistmanager.cpp:489 ui/albumcovermanager.cpp:270
 msgid "Various artists"
-msgstr "Разные исполнители"
+msgstr "Разные артисты"
 
 #: ui/about.cpp:33
 #, qt-format
@@ -5544,7 +5545,7 @@ msgstr "Без обложек:"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr "Хотите ли вы переместить и другие песни из этого альбома в Разные исполнители?"
+msgstr "Хотите ли вы переместить и другие песни из этого альбома в "Разные артисты"?"
 
 #: ui/mainwindow.cpp:2416
 msgid "Would you like to run a full rescan right now?"
