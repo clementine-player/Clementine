@@ -26,6 +26,7 @@
 
 #include <QPushButton>
 #include <QFileDialog>
+#include <QDirIterator>
 #include <QSettings>
 #include <QDateTime>
 
@@ -73,6 +74,7 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   QSettings s;
   s.beginGroup(kSettingsGroup);
   last_add_dir_ = s.value("last_add_dir", QDir::homePath()).toString();
+  last_import_dir_ = s.value("last_import_dir", QDir::homePath()).toString();
 
   QString last_output_format = s.value("last_output_format", "ogg").toString();
   for (int i = 0; i < ui_->format->count(); ++i) {
@@ -97,6 +99,7 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
 
   // Connect stuff
   connect(ui_->add, SIGNAL(clicked()), SLOT(Add()));
+  connect(ui_->import, SIGNAL(clicked()), SLOT(Import()));
   connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));
   connect(start_button_, SIGNAL(clicked()), SLOT(Start()));
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
@@ -224,6 +227,31 @@ void TranscodeDialog::Add() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("last_add_dir", last_add_dir_);
+}
+
+void TranscodeDialog::Import() {
+  QString path = QFileDialog::getExistingDirectory(
+      this, tr("Open a directory to import music from"),
+      last_import_dir_, QFileDialog::ShowDirsOnly);
+  
+  if (path.isEmpty()) return;
+  
+  QStringList filenames;
+  QStringList audioTypes = QString(FileView::kFileFilter).split(" ", 
+      QString::SkipEmptyParts);
+  QDirIterator files(path, audioTypes, QDir::Files | QDir::Readable, 
+      QDirIterator::Subdirectories);
+  
+  while (files.hasNext()) {
+    filenames << files.next();
+  }
+  
+  SetFilenames(filenames);
+  
+  last_import_dir_ = path;
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+  settings.setValue("last_import_dir", last_import_dir_);
 }
 
 void TranscodeDialog::SetFilenames(const QStringList& filenames) {
