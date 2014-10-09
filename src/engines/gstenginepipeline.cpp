@@ -811,7 +811,8 @@ GstPadProbeReturn GstEnginePipeline::EventHandoffCallback(GstPad*,
 
 void GstEnginePipeline::AboutToFinishCallback(GstPlayBin* bin, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
-  if (instance->has_next_valid_url() && instance->url_.scheme() != "spotify") {
+  if (instance->has_next_valid_url() && !instance->next_uri_set_ &&
+      instance->url_.scheme() != "spotify") {
     // Set the next uri. When the current song ends it will be played
     // automatically and a STREAM_START message is send to the bus.
     // When the next uri is not playable an error message is send when the
@@ -820,12 +821,6 @@ void GstEnginePipeline::AboutToFinishCallback(GstPlayBin* bin, gpointer self) {
     instance->next_uri_set_ = true;
     g_object_set(G_OBJECT(instance->pipeline_), "uri",
                  instance->next_url_.toEncoded().constData(), nullptr);
-    // If the pipeline is currently buffering we can stop that now.
-    if (instance->buffering_) {
-      instance->buffering_ = false;
-      emit instance->BufferingFinished();
-      instance->SetState(GST_STATE_PLAYING);
-    }
   }
 }
 
@@ -875,6 +870,13 @@ void GstEnginePipeline::SourceSetupCallback(GstPlayBin* bin, GParamSpec* pspec,
     g_object_set(element, "ssl-use-system-ca-file", false, nullptr);
     g_object_set(element, "ssl-ca-file", ca_cert_path.toUtf8().data(), nullptr);
 #endif
+  }
+
+  // If the pipeline was buffering we stop that now.
+  if (instance->buffering_) {
+    instance->buffering_ = false;
+    emit instance->BufferingFinished();
+    instance->SetState(GST_STATE_PLAYING);
   }
 }
 
