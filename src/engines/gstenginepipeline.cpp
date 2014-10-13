@@ -53,9 +53,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       sink_(GstEngine::kAutoSink),
       segment_start_(0),
       segment_start_received_(false),
-      emit_track_ended_on_stream_start_(false),
-      emit_track_ended_on_time_discontinuity_(false),
-      last_buffer_offset_(0),
       eq_enabled_(false),
       eq_preamp_(0),
       stereo_balance_(0.0f),
@@ -76,10 +73,10 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       pipeline_is_initialised_(false),
       pipeline_is_connected_(false),
       pending_seek_nanosec_(-1),
+      next_uri_set_(false),
       volume_percent_(100),
       volume_modifier_(1.0),
       pipeline_(nullptr),
-      uridecodebin_(nullptr),
       audiobin_(nullptr),
       queue_(nullptr),
       audioconvert_(nullptr),
@@ -138,65 +135,48 @@ void GstEnginePipeline::set_mono_playback(bool enabled) {
   mono_playback_ = enabled;
 }
 
-bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
-  if (!new_bin) return false;
+bool GstEnginePipeline::InitDecodeBin(GstElement* decode_bin) {
+  if (!decode_bin) return false;
 
-  // Destroy the old elements if they are set
-  // Note that the caller to this function MUST schedule the old uridecodebin_
-  // for deletion in the main thread.
-  if (uridecodebin_) {
-    gst_bin_remove(GST_BIN(pipeline_), uridecodebin_);
-  }
+  pipeline_ = gst_pipeline_new("pipeline");
 
-  uridecodebin_ = new_bin;
-  segment_start_ = 0;
-  segment_start_received_ = false;
-  pipeline_is_connected_ = false;
-  gst_bin_add(GST_BIN(pipeline_), uridecodebin_);
+  gst_bin_add(GST_BIN(pipeline_), decode_bin);
+
+  if (!InitAudioBin()) return false;
+  gst_bin_add(GST_BIN(pipeline_), audiobin_);
+
+  gst_element_link(decode_bin, audiobin_);
 
   return true;
 }
 
-bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
-  GstElement* new_bin = nullptr;
+GstElement* GstEnginePipeline::CreateSpotifyBin(const QUrl& url) {
+  GstElement* new_bin = gst_bin_new("spotify_bin");
 
-  if (url.scheme() == "spotify") {
-    new_bin = gst_bin_new("spotify_bin");
+  // Create elements
+  GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
+  GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
+  if (!src || !gdp) return nullptr;
 
-    // Create elements
-    GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
-    GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
-    if (!src || !gdp) return false;
+  // Pick a port number
+  const int port = Utilities::PickUnusedPort();
+  g_object_set(G_OBJECT(src), "host", "127.0.0.1", nullptr);
+  g_object_set(G_OBJECT(src), "port", port, nullptr);
 
-    // Pick a port number
-    const int port = Utilities::PickUnusedPort();
-    g_object_set(G_OBJECT(src), "host", "127.0.0.1", nullptr);
-    g_object_set(G_OBJECT(src), "port", port, nullptr);
+  // Link the elements
+  gst_element_link(src, gdp);
 
-    // Link the elements
-    gst_element_link(src, gdp);
+  // Add a ghost pad
+  GstPad* pad = gst_element_get_static_pad(gdp, "src");
+  gst_element_add_pad(GST_ELEMENT(new_bin), gst_ghost_pad_new("src", pad));
+  gst_object_unref(GST_OBJECT(pad));
 
-    // Add a ghost pad
-    GstPad* pad = gst_element_get_static_pad(gdp, "src");
-    gst_element_add_pad(GST_ELEMENT(new_bin), gst_ghost_pad_new("src", pad));
-    gst_object_unref(GST_OBJECT(pad));
+  // Tell spotify to start sending data to us.
+  InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(
+      url.toString(), port);
+  spotify_offset_ = 0;
 
-    // Tell spotify to start sending data to us.
-    InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(
-        url.toString(), port);
-    spotify_offset_ = 0;
-  } else {
-    new_bin = engine_->CreateElement("uridecodebin");
-    g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
-                 nullptr);
-    CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
-                     this);
-    CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);
-    CHECKED_GCONNECT(G_OBJECT(new_bin), "notify::source", &SourceSetupCallback,
-                     this);
-  }
-
-  return ReplaceDecodeBin(new_bin);
+  return new_bin;
 }
 
 GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
@@ -218,7 +198,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
   }
 }
 
-bool GstEnginePipeline::Init() {
+bool GstEnginePipeline::InitAudioBin() {
   // Here we create all the parts of the gstreamer pipeline - from the source
   // to the sink.  The parts of the pipeline are split up into bins:
   //   uri decode bin -> audio bin
@@ -239,7 +219,6 @@ bool GstEnginePipeline::Init() {
 
   // Audio bin
   audiobin_ = gst_bin_new("audiobin");
-  gst_bin_add(GST_BIN(pipeline_), audiobin_);
 
   // Create the sink
   if (!(audiosink_ = engine_->CreateElement(sink_, audiobin_))) return false;
@@ -414,39 +393,17 @@ bool GstEnginePipeline::Init() {
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
                                  BusCallback, this);
 
-  MaybeLinkDecodeToAudio();
-
   return true;
 }
 
-void GstEnginePipeline::MaybeLinkDecodeToAudio() {
-  if (!uridecodebin_ || !audiobin_) return;
-
-  GstPad* pad = gst_element_get_static_pad(uridecodebin_, "src");
-  if (!pad) return;
-
-  gst_object_unref(pad);
-  gst_element_link(uridecodebin_, audiobin_);
-}
-
 bool GstEnginePipeline::InitFromString(const QString& pipeline) {
-  pipeline_ = gst_pipeline_new("pipeline");
-
   GstElement* new_bin =
       CreateDecodeBinFromString(pipeline.toAscii().constData());
-  if (!new_bin) {
-    return false;
-  }
 
-  if (!ReplaceDecodeBin(new_bin)) return false;
-
-  if (!Init()) return false;
-  return gst_element_link(new_bin, audiobin_);
+  return InitDecodeBin(new_bin);
 }
 
 bool GstEnginePipeline::InitFromUrl(const QUrl& url, qint64 end_nanosec) {
-  pipeline_ = gst_pipeline_new("pipeline");
-
   if (url.scheme() == "cdda" && !url.path().isEmpty()) {
     // Currently, Gstreamer can't handle input CD devices inside cdda URL. So
     // we handle them ourselve: we extract the track number and re-create an
@@ -461,10 +418,27 @@ bool GstEnginePipeline::InitFromUrl(const QUrl& url, qint64 end_nanosec) {
   }
   end_offset_nanosec_ = end_nanosec;
 
-  // Decode bin
-  if (!ReplaceDecodeBin(url_)) return false;
+  if (url_.scheme() == "spotify") {
+    GstElement* new_bin = CreateSpotifyBin(url_);
+    return InitDecodeBin(new_bin);
+  }
 
-  return Init();
+  pipeline_ = engine_->CreateElement("playbin");
+  g_object_set(G_OBJECT(pipeline_), "uri", url_.toEncoded().constData(),
+               nullptr);
+  CHECKED_GCONNECT(G_OBJECT(pipeline_), "about-to-finish",
+                   &AboutToFinishCallback, this);
+
+  CHECKED_GCONNECT(G_OBJECT(pipeline_), "pad-added", &NewPadCallback, this);
+  CHECKED_GCONNECT(G_OBJECT(pipeline_), "notify::source", &SourceSetupCallback,
+                   this);
+
+  if (!InitAudioBin()) return false;
+
+  // Set playbin's sink to be our costum audio-sink.
+  g_object_set(GST_OBJECT(pipeline_), "audio-sink", audiobin_, NULL);
+  pipeline_is_connected_ = true;
+  return true;
 }
 
 GstEnginePipeline::~GstEnginePipeline() {
@@ -541,12 +515,7 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg,
       break;
 
     case GST_MESSAGE_STREAM_START:
-      if (instance->emit_track_ended_on_stream_start_) {
-        qLog(Debug) << "New segment started, EOS will signal on next buffer "
-                       "discontinuity";
-        instance->emit_track_ended_on_stream_start_ = false;
-        instance->emit_track_ended_on_time_discontinuity_ = true;
-      }
+      instance->StreamStartMessageReceived();
       break;
 
     default:
@@ -567,6 +536,20 @@ void GstEnginePipeline::StreamStatusMessageReceived(GstMessage* msg) {
       GstTask* task = static_cast<GstTask*>(g_value_get_object(val));
       gst_task_set_enter_callback(task, &TaskEnterCallback, this, NULL);
     }
+  }
+}
+
+void GstEnginePipeline::StreamStartMessageReceived() {
+  if (next_uri_set_) {
+    next_uri_set_ = false;
+
+    url_ = next_url_;
+    end_offset_nanosec_ = next_end_offset_nanosec_;
+    next_url_ = QUrl();
+    next_beginning_offset_nanosec_ = 0;
+    next_end_offset_nanosec_ = 0;
+
+    emit EndOfStreamReached(id(), true);
   }
 }
 
@@ -606,6 +589,19 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
   int code = error->code;
   g_error_free(error);
   free(debugs);
+
+  if (pipeline_is_initialised_ && next_uri_set_ &&
+      (domain == GST_RESOURCE_ERROR || domain == GST_STREAM_ERROR)) {
+    // A track is still playing and the next uri is not playable. We ignore the
+    // error here so it can play until the end.
+    // But there is no message send to the bus when the current track finishes,
+    // we have to add an EOS ourself.
+    qLog(Debug) << "Ignoring error when loading next track";
+    GstPad* sinkpad = gst_element_get_static_pad(audiobin_, "sink");
+    gst_pad_send_event(sinkpad, gst_event_new_eos());
+    gst_object_unref(sinkpad);
+    return;
+  }
 
   if (!redirect_url_.isEmpty() &&
       debugstr.contains(
@@ -674,6 +670,14 @@ void GstEnginePipeline::StateChangedMessageReceived(GstMessage* msg) {
   if (pipeline_is_initialised_ && new_state != GST_STATE_PAUSED &&
       new_state != GST_STATE_PLAYING) {
     pipeline_is_initialised_ = false;
+
+    if (next_uri_set_ && new_state == GST_STATE_READY) {
+      // Revert uri and go back to PLAY state again
+      next_uri_set_ = false;
+      g_object_set(G_OBJECT(pipeline_), "uri", url_.toEncoded().constData(),
+                   nullptr);
+      SetState(GST_STATE_PLAYING);
+    }
   }
 }
 
@@ -681,13 +685,6 @@ void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
   // Only handle buffering messages from the queue2 element in audiobin - not
   // the one that's created automatically by uridecodebin.
   if (GST_ELEMENT(GST_MESSAGE_SRC(msg)) != queue_) {
-    return;
-  }
-
-  // If we are loading new next track, we don't have to pause the playback.
-  // The buffering is for the next track and not the current one.
-  if (emit_track_ended_on_stream_start_) {
-    qLog(Debug) << "Buffering next track";
     return;
   }
 
@@ -760,42 +757,27 @@ GstPadProbeReturn GstEnginePipeline::HandoffCallback(GstPad*,
     quint64 end_time = start_time + duration;
 
     if (end_time > instance->end_offset_nanosec_) {
-      if (instance->has_next_valid_url()) {
-        if (instance->next_url_ == instance->url_ &&
-            instance->next_beginning_offset_nanosec_ ==
-                instance->end_offset_nanosec_) {
-          // The "next" song is actually the next segment of this file - so
-          // cheat and keep on playing, but just tell the Engine we've moved on.
-          instance->end_offset_nanosec_ = instance->next_end_offset_nanosec_;
-          instance->next_url_ = QUrl();
-          instance->next_beginning_offset_nanosec_ = 0;
-          instance->next_end_offset_nanosec_ = 0;
+      if (instance->has_next_valid_url() &&
+          instance->next_url_ == instance->url_ &&
+          instance->next_beginning_offset_nanosec_ ==
+              instance->end_offset_nanosec_) {
+        // The "next" song is actually the next segment of this file - so
+        // cheat and keep on playing, but just tell the Engine we've moved on.
+        instance->end_offset_nanosec_ = instance->next_end_offset_nanosec_;
+        instance->next_url_ = QUrl();
+        instance->next_beginning_offset_nanosec_ = 0;
+        instance->next_end_offset_nanosec_ = 0;
 
-          // GstEngine will try to seek to the start of the new section, but
-          // we're already there so ignore it.
-          instance->ignore_next_seek_ = true;
-          emit instance->EndOfStreamReached(instance->id(), true);
-        } else {
-          // We have a next song but we can't cheat, so move to it normally.
-          instance->TransitionToNext();
-        }
+        // GstEngine will try to seek to the start of the new section, but
+        // we're already there so ignore it.
+        instance->ignore_next_seek_ = true;
+        emit instance->EndOfStreamReached(instance->id(), true);
       } else {
-        // There's no next song
+        // There's no next song or we can't keep on playing.
         emit instance->EndOfStreamReached(instance->id(), false);
       }
     }
   }
-
-  if (instance->emit_track_ended_on_time_discontinuity_) {
-    if (GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DISCONT) ||
-        GST_BUFFER_OFFSET(buf) < instance->last_buffer_offset_) {
-      qLog(Debug) << "Buffer discontinuity - emitting EOS";
-      instance->emit_track_ended_on_time_discontinuity_ = false;
-      emit instance->EndOfStreamReached(instance->id(), true);
-    }
-  }
-
-  instance->last_buffer_offset_ = GST_BUFFER_OFFSET(buf);
 
   return GST_PAD_PROBE_OK;
 }
@@ -827,17 +809,23 @@ GstPadProbeReturn GstEnginePipeline::EventHandoffCallback(GstPad*,
   return GST_PAD_PROBE_OK;
 }
 
-void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin,
-                                              gpointer self) {
+void GstEnginePipeline::AboutToFinishCallback(GstPlayBin* bin, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
-
-  if (instance->has_next_valid_url()) {
-    instance->TransitionToNext();
+  if (instance->has_next_valid_url() && !instance->next_uri_set_ &&
+      instance->url_.scheme() != "spotify") {
+    // Set the next uri. When the current song ends it will be played
+    // automatically and a STREAM_START message is send to the bus.
+    // When the next uri is not playable an error message is send when the
+    // pipeline goes to PLAY (or PAUSE) state or immediately if it is currently
+    // in PLAY state.
+    instance->next_uri_set_ = true;
+    g_object_set(G_OBJECT(instance->pipeline_), "uri",
+                 instance->next_url_.toEncoded().constData(), nullptr);
   }
 }
 
-void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
-                                            GParamSpec* pspec, gpointer self) {
+void GstEnginePipeline::SourceSetupCallback(GstPlayBin* bin, GParamSpec* pspec,
+                                            gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
   GstElement* element;
   g_object_get(bin, "source", &element, nullptr);
@@ -883,33 +871,13 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
     g_object_set(element, "ssl-ca-file", ca_cert_path.toUtf8().data(), nullptr);
 #endif
   }
-}
 
-void GstEnginePipeline::TransitionToNext() {
-  GstElement* old_decode_bin = uridecodebin_;
-
-  ignore_tags_ = true;
-
-  ReplaceDecodeBin(next_url_);
-  gst_element_set_state(uridecodebin_, GST_STATE_PLAYING);
-  MaybeLinkDecodeToAudio();
-
-  url_ = next_url_;
-  end_offset_nanosec_ = next_end_offset_nanosec_;
-  next_url_ = QUrl();
-  next_beginning_offset_nanosec_ = 0;
-  next_end_offset_nanosec_ = 0;
-
-  // This function gets called when the source has been drained, even if the
-  // song hasn't finished playing yet.  We'll get a new stream when it really
-  // does finish, so emit TrackEnded then.
-  emit_track_ended_on_stream_start_ = true;
-
-  // This has to happen *after* the gst_element_set_state on the new bin to
-  // fix an occasional race condition deadlock.
-  sElementDeleter->DeleteElementLater(old_decode_bin);
-
-  ignore_tags_ = false;
+  // If the pipeline was buffering we stop that now.
+  if (instance->buffering_) {
+    instance->buffering_ = false;
+    emit instance->BufferingFinished();
+    instance->SetState(GST_STATE_PLAYING);
+  }
 }
 
 qint64 GstEnginePipeline::position() const {
@@ -941,21 +909,22 @@ GstState GstEnginePipeline::state() const {
 
 QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
   if (url_.scheme() == "spotify" && !buffering_) {
-      const GstState current_state = this->state();
+    const GstState current_state = this->state();
 
-      if (state == GST_STATE_PAUSED && current_state == GST_STATE_PLAYING) {
-        SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+    if (state == GST_STATE_PAUSED && current_state == GST_STATE_PLAYING) {
+      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
-        // Need to schedule this in the spotify service's thread
-        QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
-                                  Q_ARG(bool, true));
-      } else if (state == GST_STATE_PLAYING && current_state == GST_STATE_PAUSED) {
-        SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+      // Need to schedule this in the spotify service's thread
+      QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
+                                Q_ARG(bool, true));
+    } else if (state == GST_STATE_PLAYING &&
+               current_state == GST_STATE_PAUSED) {
+      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
-        // Need to schedule this in the spotify service's thread
-        QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
-                                  Q_ARG(bool, false));
-      }
+      // Need to schedule this in the spotify service's thread
+      QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
+                                Q_ARG(bool, false));
+    }
   }
   return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
       &set_state_threadpool_, &gst_element_set_state, pipeline_, state);
@@ -980,6 +949,14 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
 
   if (!pipeline_is_connected_ || !pipeline_is_initialised_) {
     pending_seek_nanosec_ = nanosec;
+    return true;
+  }
+
+  if (next_uri_set_) {
+    qDebug() << "MYTODO: gstenginepipeline.seek: seeking after Transition";
+
+    pending_seek_nanosec_ = nanosec;
+    SetState(GST_STATE_READY);
     return true;
   }
 
