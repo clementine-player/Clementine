@@ -132,6 +132,7 @@ signals:
   static void NewPadCallback(GstElement*, GstPad*, gpointer);
   static GstPadProbeReturn HandoffCallback(GstPad*, GstPadProbeInfo*, gpointer);
   static GstPadProbeReturn EventHandoffCallback(GstPad*, GstPadProbeInfo*, gpointer);
+  static GstPadProbeReturn DecodebinProbe(GstPad*, GstPadProbeInfo*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
   static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec* pspec,
                                   gpointer);
@@ -294,6 +295,8 @@ signals:
   uint bus_cb_id_;
 
   QThreadPool set_state_threadpool_;
+
+  GstSegment last_decodebin_segment_;
 };
 
 #endif  // GSTENGINEPIPELINE_H

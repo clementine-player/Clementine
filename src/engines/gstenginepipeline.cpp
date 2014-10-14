@@ -237,6 +237,8 @@ bool GstEnginePipeline::Init() {
   //   tee2 ! audio_queue ! equalizer_preamp ! equalizer ! volume ! audioscale
   //        ! convert ! audiosink
 
+  gst_segment_init(&last_decodebin_segment_, GST_FORMAT_TIME);
+
   // Audio bin
   audiobin_ = gst_bin_new("audiobin");
   gst_bin_add(GST_BIN(pipeline_), audiobin_);
@@ -717,6 +719,7 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
   GstPad* const audiopad =
       gst_element_get_static_pad(instance->audiobin_, "sink");
 
+  // Link decodebin's sink pad to audiobin's src pad.
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Warning) << instance->id()
                   << "audiopad is already linked, unlinking old pad";
@@ -724,8 +727,27 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
   }
 
   gst_pad_link(pad, audiopad);
-
   gst_object_unref(audiopad);
+
+  // Offset the timestamps on all the buffers coming out of the decodebin so
+  // they line up exactly with the end of the last buffer from the old
+  // decodebin.
+  // "Running time" is the time since the last flushing seek.
+  GstClockTime running_time = gst_segment_to_running_time(
+      &instance->last_decodebin_segment_,
+      GST_FORMAT_TIME,
+      instance->last_decodebin_segment_.position);
+  gst_pad_set_offset(pad, running_time);
+
+  // Add a probe to the pad so we can update last_decodebin_segment_.
+  gst_pad_add_probe(pad,
+                    static_cast<GstPadProbeType>(
+                        GST_PAD_PROBE_TYPE_BUFFER |
+                        GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM |
+                        GST_PAD_PROBE_TYPE_EVENT_FLUSH),
+                    DecodebinProbe,
+                    instance,
+                    nullptr);
 
   instance->pipeline_is_connected_ = true;
   if (instance->pending_seek_nanosec_ != -1 &&
@@ -733,6 +755,47 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
     QMetaObject::invokeMethod(instance, "Seek", Qt::QueuedConnection,
                               Q_ARG(qint64, instance->pending_seek_nanosec_));
   }
+}
+
+GstPadProbeReturn GstEnginePipeline::DecodebinProbe(GstPad* pad,
+                                                    GstPadProbeInfo* info,
+                                                    gpointer data) {
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(data);
+  const GstPadProbeType info_type = GST_PAD_PROBE_INFO_TYPE(info);
+
+  if (info_type & GST_PAD_PROBE_TYPE_BUFFER) {
+    // The decodebin produced a buffer.  Record its end time, so we can offset
+    // the buffers produced by the next decodebin when transitioning to the next
+    // song.
+    GstBuffer* buffer = GST_PAD_PROBE_INFO_BUFFER(info);
+
+    GstClockTime timestamp = GST_BUFFER_TIMESTAMP(buffer);
+    GstClockTime duration = GST_BUFFER_DURATION(buffer);
+    if (timestamp == GST_CLOCK_TIME_NONE) {
+      timestamp = instance->last_decodebin_segment_.position;
+    }
+
+    if (duration != GST_CLOCK_TIME_NONE) {
+      timestamp += duration;
+    }
+
+    instance->last_decodebin_segment_.position = timestamp;
+  } else if (info_type & GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM) {
+    GstEvent* event = GST_PAD_PROBE_INFO_EVENT(info);
+    GstEventType event_type = GST_EVENT_TYPE(event);
+
+    if (event_type == GST_EVENT_SEGMENT) {
+      // A new segment started, we need to save this to calculate running time
+      // offsets later.
+      gst_event_copy_segment(event, &instance->last_decodebin_segment_);
+    } else if (event_type == GST_EVENT_FLUSH_START) {
+      // A flushing seek resets the running time to 0, so remove any offset
+      // we set on this pad before.
+      gst_pad_set_offset(pad, 0);
+    }
+  }
+
+  return GST_PAD_PROBE_OK;
 }
 
 GstPadProbeReturn GstEnginePipeline::HandoffCallback(GstPad*,
