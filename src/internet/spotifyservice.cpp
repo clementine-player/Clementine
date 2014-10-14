@@ -585,6 +585,10 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
   return playlistitem_actions_;
 }
 
+PlaylistItem::Options SpotifyService::playlistitem_options() const {
+  return PlaylistItem::SeekDisabled;
+}
+
 QWidget* SpotifyService::HeaderWidget() const {
   if (IsLoggedIn()) return search_box_;
   return nullptr;
@@ -765,11 +769,6 @@ void SpotifyService::LoadImage(const QString& id) {
 void SpotifyService::SetPaused(bool paused) {
   EnsureServerCreated();
   server_->SetPaused(paused);
-}
-
-void SpotifyService::Seek(qint64 offset_nsec) {
-  EnsureServerCreated();
-  server_->Seek(offset_nsec);
 }
 
 void SpotifyService::SyncPlaylistProgress(

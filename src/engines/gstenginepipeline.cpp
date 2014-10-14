@@ -68,7 +68,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       buffering_(false),
       mono_playback_(false),
       end_offset_nanosec_(-1),
-      spotify_offset_(0),
       next_beginning_offset_nanosec_(-1),
       next_end_offset_nanosec_(-1),
       ignore_next_seek_(false),
@@ -96,19 +95,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   }
 
   for (int i = 0; i < kEqBandCount; ++i) eq_band_gains_ << 0;
-
-  // FIXME Currently useless Spotify hack: we currently don't know what to do
-  // when the seek is completed. We should flush the current buffers, but see
-  // comments in SpotifySeekCompleted for why that doesn't work.
-  // If we fix and reactivate this code, we will have another problem though:
-  // calling server() try to login the user. If the user doesn't use Spotify, it
-  // will receive an error message. We should have a lightweight version of
-  // server() that just return it (or NULL) without trying to create it IMO to
-  // avoid this issue.
-  //if (InternetModel::Service<SpotifyService>()->IsBlobInstalled()) {
-  //  connect(InternetModel::Service<SpotifyService>()->server(), SIGNAL(SeekCompleted()),
-  //      SLOT(SpotifySeekCompleted()));
-  //}
 }
 
 void GstEnginePipeline::set_output_device(const QString& sink,
@@ -184,7 +170,6 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
     // Tell spotify to start sending data to us.
     InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(
         url.toString(), port);
-    spotify_offset_ = 0;
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
@@ -979,10 +964,6 @@ qint64 GstEnginePipeline::position() const {
   gint64 value = 0;
   gst_element_query_position(pipeline_, GST_FORMAT_TIME, &value);
 
-  if (url_.scheme() == "spotify") {
-    value += spotify_offset_;
-  }
-
   return value;
 }
 
@@ -1030,17 +1011,6 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
     return true;
   }
 
-  if (url_.scheme() == "spotify" && !buffering_) {
-    SpotifyService* spotify = InternetModel::Service<SpotifyService>();
-    // Need to schedule this in the spotify service's thread
-    QMetaObject::invokeMethod(spotify, "Seek", Qt::QueuedConnection,
-                              Q_ARG(qint64, nanosec));
-    // Need to reset spotify_offset_ to get the real pipeline position, as it is
-    // used in position()
-    spotify_offset_ = nanosec - position();
-    return true;
-  }
-
   if (!pipeline_is_connected_ || !pipeline_is_initialised_) {
     pending_seek_nanosec_ = nanosec;
     return true;
@@ -1049,16 +1019,6 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
   pending_seek_nanosec_ = -1;
   return gst_element_seek_simple(pipeline_, GST_FORMAT_TIME,
                                  GST_SEEK_FLAG_FLUSH, nanosec);
-}
-
-void GstEnginePipeline::SpotifySeekCompleted() {
-  qLog(Debug) << "Spotify Seek completed";
-  // FIXME: we should clear buffers to start playing data from seek point right
-  // now (currently there is small delay) but I didn't managed to tell gstreamer
-  // to do this without breaking the streaming completely...
-  // Funny thing to notice: for me the delay varies when changing buffer size,
-  // but a larger buffer doesn't necessary increase the delay.
-  // FIXME: also, this method is never called currently (see constructor)
 }
 
 void GstEnginePipeline::SetEqualizerEnabled(bool enabled) {

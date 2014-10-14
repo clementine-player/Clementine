@@ -176,9 +176,6 @@ message SeekRequest {
   optional int64 offset_nsec = 1;
 }
 
-message SeekCompleted {
-}
-
 enum Bitrate {
   Bitrate96k = 1;
   Bitrate160k = 2;
@@ -229,7 +226,7 @@ message Message {
   optional BrowseToplistRequest browse_toplist_request = 19;
   optional BrowseToplistResponse browse_toplist_response = 20;
   optional PauseRequest pause_request = 21;
-  optional SeekCompleted seek_completed = 22;
+  // ID 22 unused.
   optional AddTracksToPlaylistRequest add_tracks_to_playlist = 23;
   optional RemoveTracksFromPlaylistRequest remove_tracks_from_playlist = 24;
 }

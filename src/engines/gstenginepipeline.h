@@ -164,7 +164,6 @@ signals:
 
  private slots:
   void FaderTimelineFinished();
-  void SpotifySeekCompleted();
 
  private:
   static const int kGstStateTimeoutNanosecs;
@@ -229,13 +228,6 @@ signals:
   // If this is > 0 then the pipeline will be forced to stop when playback goes
   // past this position.
   qint64 end_offset_nanosec_;
-
-  // Another Spotify hack...
-  // Used in position(). We need this because when seeking Spotify tracks, we
-  // don't actually seek the pipeline, but ask libspotify to send us data with
-  // a seek offset instead. So querying the pipeline to get track's position
-  // wouldn't make sense.
-  qint64 spotify_offset_;
 
   // We store the beginning and end for the preloading song too, so we can just
   // carry on without reloading the file if the sections carry on from each
