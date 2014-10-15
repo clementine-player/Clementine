@@ -183,6 +183,7 @@ set(SOURCES
   internet/internetmodel.cpp
   internet/internetplaylistitem.cpp
   internet/internetservice.cpp
+  internet/internetshowsettingspage.cpp
   internet/internetview.cpp
   internet/internetviewcontainer.cpp
   internet/jamendodynamicplaylist.cpp
@@ -488,6 +489,7 @@ set(HEADERS
   internet/internetmimedata.h
   internet/internetmodel.h
   internet/internetservice.h
+  internet/internetshowsettingspage.h
   internet/internetsongmimedata.h
   internet/internetview.h
   internet/internetviewcontainer.h
@@ -694,6 +696,7 @@ set(UI
   internet/digitallyimportedsettingspage.ui
   internet/groovesharksettingspage.ui
   internet/icecastfilterwidget.ui
+  internet/internetshowsettingspage.ui
   internet/internetviewcontainer.ui
   internet/magnatunedownloaddialog.ui
   internet/magnatunesettingspage.ui

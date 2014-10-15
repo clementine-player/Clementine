@@ -114,8 +114,14 @@ class InternetModel : public QStandardItemModel {
     PlayBehaviour_DoubleClickAction,
   };
 
+  struct ServiceItem {
+    QStandardItem *item;
+    bool shown;
+  };
+
   // Needs to be static for InternetPlaylistItem::restore
   static InternetService* ServiceByName(const QString& name);
+  static const char* kSettingsGroup;
 
   template <typename T>
   static T* Service() {
@@ -127,6 +133,10 @@ class InternetModel : public QStandardItemModel {
   // removed from the model.
   void AddService(InternetService* service);
   void RemoveService(InternetService* service);
+  void HideService(InternetService* service);
+  void ShowService(InternetService* service);
+  // Add or remove the services according to the setting file
+  void UpdateServices();
 
   // Returns the service that is a parent of this item.  Works by walking up
   // the tree until it finds an item with Role_Service set.
@@ -155,6 +165,9 @@ class InternetModel : public QStandardItemModel {
 
   const QModelIndex& current_index() const { return current_index_; }
   const QModelIndexList& selected_indexes() const { return selected_indexes_; }
+  const QMap<InternetService*, ServiceItem> shown_services() const {
+    return shown_services_;
+  }
 
 signals:
   void StreamError(const QString& message);
@@ -167,6 +180,9 @@ signals:
   void ServiceDeleted();
 
  private:
+
+  QMap<InternetService*, ServiceItem> shown_services_;
+
   static QMap<QString, InternetService*>* sServices;
 
   Application* app_;

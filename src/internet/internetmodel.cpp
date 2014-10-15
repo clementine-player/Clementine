@@ -63,6 +63,8 @@ using smart_playlists::GeneratorPtr;
 
 QMap<QString, InternetService*>* InternetModel::sServices = nullptr;
 
+const char* InternetModel::kSettingsGroup = "InternetModel";
+
 InternetModel::InternetModel(Application* app, QObject* parent)
     : QStandardItemModel(parent),
       app_(app),
@@ -108,7 +110,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new VkService(app, this));
 #endif
 
-  invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);
+  UpdateServices();
 }
 
 void InternetModel::AddService(InternetService* service) {
@@ -125,6 +127,12 @@ void InternetModel::AddService(InternetService* service) {
   invisibleRootItem()->appendRow(root);
   qLog(Debug) << "Adding internet service:" << service->name();
   sServices->insert(service->name(), service);
+
+  ServiceItem service_item;
+  service_item.item = root;
+  service_item.shown = true;
+
+  shown_services_.insert(service, service_item);
 
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
   connect(service, SIGNAL(StreamMetadataFound(QUrl, Song)),
@@ -153,6 +161,9 @@ void InternetModel::RemoveService(InternetService* service) {
 
   // Remove the service from the list
   sServices->remove(service->name());
+
+  // Don't forget to delete from shown_services too
+  shown_services_.remove(service);
 
   // Disconnect the service
   disconnect(service, 0, this, 0);
@@ -314,4 +325,50 @@ void InternetModel::ReloadSettings() {
   for (InternetService* service : sServices->values()) {
     service->ReloadSettings();
   }
+}
+
+void InternetModel::UpdateServices() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  QStringList keys = s.childKeys();
+
+  for (QString service_name : keys) {
+    InternetService* internet_service = ServiceByName(service_name);
+    bool setting_val = s.value(service_name).toBool();
+
+    // Only update if values are different
+    if (setting_val == true && shown_services_[internet_service].shown == false) {
+      ShowService(internet_service);
+    } else if (setting_val == false &&
+               shown_services_[internet_service].shown == true) {
+      HideService(internet_service);
+    }
+  }
+
+  s.endGroup();
+
+  invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);
+}
+
+void InternetModel::ShowService(InternetService* service) {
+  if(shown_services_[service].shown != true) {
+    invisibleRootItem()->appendRow(shown_services_[service].item);
+    shown_services_[service].shown = true;
+  }
+}
+
+void InternetModel::HideService(InternetService* service) {
+  // Find and remove the root item that this service created
+  for (int i = 0; i < invisibleRootItem()->rowCount(); ++i) {
+    QStandardItem* item = invisibleRootItem()->child(i);
+    if (!item ||
+        item->data(Role_Service).value<InternetService*>() == service) {
+      // Don't remove the standarditem behind the row
+      invisibleRootItem()->takeRow(i);
+      break;
+    }
+  }
+
+  shown_services_[service].shown = false;
 }

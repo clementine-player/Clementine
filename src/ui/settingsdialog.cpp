@@ -37,6 +37,7 @@
 #include "globalsearch/globalsearchsettingspage.h"
 #include "internet/digitallyimportedsettingspage.h"
 #include "internet/groovesharksettingspage.h"
+#include "internet/internetshowsettingspage.h"
 #include "internet/magnatunesettingspage.h"
 #include "internet/soundcloudsettingspage.h"
 #include "internet/spotifysettingspage.h"
@@ -82,7 +83,6 @@
 #ifdef HAVE_SEAFILE
 #include "internet/seafilesettingspage.h"
 #endif
-
 
 
 #include <QAbstractButton>
@@ -156,6 +156,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_Appearance, new AppearanceSettingsPage(this), iface);
   AddPage(Page_SongInformation, new SongInfoSettingsPage(this), iface);
   AddPage(Page_Notifications, new NotificationsSettingsPage(this), iface);
+  AddPage(Page_InternetShow, new InternetShowSettingsPage(this), iface);
 
   // Internet providers
   QTreeWidgetItem* providers = AddCategory(tr("Internet providers"));
