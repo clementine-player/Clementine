@@ -84,7 +84,6 @@
 #include "internet/seafilesettingspage.h"
 #endif
 
-
 #include <QAbstractButton>
 #include <QDesktopWidget>
 #include <QPainter>
@@ -193,8 +192,6 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 #ifdef HAVE_SEAFILE
   AddPage(Page_Seafile, new SeafileSettingsPage(this), providers);
 #endif
-
-
 
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
   AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this),

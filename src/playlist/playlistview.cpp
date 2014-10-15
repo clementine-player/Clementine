@@ -967,8 +967,9 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       if (model()->rowCount() == 0)
         drop_pos = 1;
       else
-        drop_pos = 1 + visualRect(model()->index(model()->rowCount() - 1,
-                                                 first_column)).bottom();
+        drop_pos = 1 +
+                   visualRect(model()->index(model()->rowCount() - 1,
+                                             first_column)).bottom();
       break;
   }
 
@@ -1112,10 +1113,10 @@ void PlaylistView::ReloadSettings() {
     force_background_redraw_ = true;
   }
 
-  if(!s.value("click_edit_inline", true).toBool())
-      setEditTriggers(editTriggers() & ~QAbstractItemView::SelectedClicked);
+  if (!s.value("click_edit_inline", true).toBool())
+    setEditTriggers(editTriggers() & ~QAbstractItemView::SelectedClicked);
   else
-      setEditTriggers(editTriggers() | QAbstractItemView::SelectedClicked);
+    setEditTriggers(editTriggers() | QAbstractItemView::SelectedClicked);
 }
 
 void PlaylistView::SaveSettings() {

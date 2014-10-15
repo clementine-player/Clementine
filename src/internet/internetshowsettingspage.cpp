@@ -38,7 +38,8 @@ void InternetShowSettingsPage::Load() {
 
   ui_->sources->clear();
 
-  for (QMap<InternetService*, InternetModel::ServiceItem>::iterator service = shown_services.begin();
+  for (QMap<InternetService*, InternetModel::ServiceItem>::iterator service =
+           shown_services.begin();
        service != shown_services.end(); ++service) {
     QTreeWidgetItem* item = new QTreeWidgetItem;
 
@@ -46,7 +47,8 @@ void InternetShowSettingsPage::Load() {
     item->setText(0, service.value().item->text());
     item->setIcon(0, service.value().item->icon());
 
-    Qt::CheckState check_state = service.value().shown == true ? Qt::Checked : Qt::Unchecked;
+    Qt::CheckState check_state =
+        service.value().shown == true ? Qt::Checked : Qt::Unchecked;
     item->setData(0, Qt::CheckStateRole, check_state);
     /* We have to store the constant name of the service */
     item->setData(1, Qt::UserRole, service.key()->name());

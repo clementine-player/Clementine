@@ -102,8 +102,8 @@ return_song:
   return song;
 }
 
-void XSPFParser::Save(const SongList& songs, QIODevice* device,
-                      const QDir& dir, Playlist::Path path_type) const {
+void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
+                      Playlist::Path path_type) const {
   QFileInfo file;
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
@@ -120,7 +120,8 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device,
 
   StreamElement tracklist("trackList", &writer);
   for (const Song& song : songs) {
-    QString filename_or_url = URLOrFilename(song.url(), dir, path_type).toUtf8();
+    QString filename_or_url =
+        URLOrFilename(song.url(), dir, path_type).toUtf8();
 
     StreamElement track("track", &writer);
     writer.writeTextElement("location", filename_or_url);
