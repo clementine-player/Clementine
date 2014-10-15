@@ -338,7 +338,8 @@ void InternetModel::UpdateServices() {
     bool setting_val = s.value(service_name).toBool();
 
     // Only update if values are different
-    if (setting_val == true && shown_services_[internet_service].shown == false) {
+    if (setting_val == true &&
+        shown_services_[internet_service].shown == false) {
       ShowService(internet_service);
     } else if (setting_val == false &&
                shown_services_[internet_service].shown == true) {
@@ -352,7 +353,7 @@ void InternetModel::UpdateServices() {
 }
 
 void InternetModel::ShowService(InternetService* service) {
-  if(shown_services_[service].shown != true) {
+  if (shown_services_[service].shown != true) {
     invisibleRootItem()->appendRow(shown_services_[service].item);
     shown_services_[service].shown = true;
   }

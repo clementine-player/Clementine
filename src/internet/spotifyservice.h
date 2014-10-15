@@ -30,7 +30,8 @@ class SpotifyService : public InternetService {
 
   enum Role {
     Role_UserPlaylistIndex = InternetModel::RoleCount,
-    Role_UserPlaylistIsMine, // Is this playlist owned by the user currently logged-in?
+    Role_UserPlaylistIsMine,  // Is this playlist owned by the user currently
+                              // logged-in?
   };
 
   // Values are persisted - don't change.

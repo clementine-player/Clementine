@@ -115,7 +115,7 @@ class InternetModel : public QStandardItemModel {
   };
 
   struct ServiceItem {
-    QStandardItem *item;
+    QStandardItem* item;
     bool shown;
   };
 
@@ -180,7 +180,6 @@ signals:
   void ServiceDeleted();
 
  private:
-
   QMap<InternetService*, ServiceItem> shown_services_;
 
   static QMap<QString, InternetService*>* sServices;
