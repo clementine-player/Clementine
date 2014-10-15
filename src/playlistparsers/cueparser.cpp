@@ -63,6 +63,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
 
   // -- whole file
   while (!text_stream.atEnd()) {
+
     QString album_artist;
     QString album;
     QString album_composer;
@@ -85,18 +86,22 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
 
       // PERFORMER
       if (line_name == kPerformer) {
+
         album_artist = line_value;
 
         // TITLE
       } else if (line_name == kTitle) {
+
         album = line_value;
 
         // SONGWRITER
       } else if (line_name == kSongWriter) {
+
         album_composer = line_value;
 
         // FILE
       } else if (line_name == kFile) {
+
         file = QDir::isAbsolutePath(line_value)
                    ? line_value
                    : dir.absoluteFilePath(line_value);
@@ -122,6 +127,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
 
         // end of the header -> go into the track mode
       } else if (line_name == kTrack) {
+
         files++;
         break;
       }
@@ -160,6 +166,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
           splitted.size() > 2 ? splitted[2].toLower() : "";
 
       if (line_name == kTrack) {
+
         // the beginning of another track's definition - we're saving the
         // current one
         // for later (if it's valid of course)
@@ -180,26 +187,33 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
         }
 
       } else if (line_name == kIndex) {
+
         // we need the index's position field
         if (!line_additional.isEmpty()) {
+
           // if there's none "01" index, we'll just take the first one
           // also, we'll take the "01" index even if it's the last one
           if (line_value == "01" || index.isEmpty()) {
+
             index = line_additional;
           }
         }
 
       } else if (line_name == kPerformer) {
+
         artist = line_value;
 
       } else if (line_name == kTitle) {
+
         title = line_value;
 
       } else if (line_name == kSongWriter) {
+
         composer = line_value;
 
         // end of track's for the current file -> parse next one
       } else if (line_name == kFile) {
+
         break;
       }
 
@@ -337,7 +351,8 @@ qint64 CueParser::IndexToMarker(const QString& index) const {
   return (frames * kNsecPerSec) / 75;
 }
 
-void CueParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
+void CueParser::Save(const SongList& songs, QIODevice* device,
+                     const QDir& dir,
                      Playlist::Path path_type) const {
   // TODO
 }

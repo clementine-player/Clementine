@@ -102,13 +102,17 @@ void MoodbarPipeline::Start() {
   builder_.reset(new MoodbarBuilder);
 
   // Set properties
-  g_object_set(decodebin, "uri", local_filename_.toEncoded().constData(),
+  g_object_set(decodebin,
+               "uri", local_filename_.toEncoded().constData(),
                nullptr);
-  g_object_set(spectrum, "bands", kBands, nullptr);
+  g_object_set(spectrum,
+               "bands", kBands,
+               nullptr);
 
   GstFastSpectrum* fast_spectrum = GST_FASTSPECTRUM(spectrum);
-  fast_spectrum->output_callback = [this](
-      double* magnitudes, int size) { builder_->AddFrame(magnitudes, size); };
+  fast_spectrum->output_callback = [this](double* magnitudes, int size) {
+    builder_->AddFrame(magnitudes, size);
+  };
 
   // Connect signals
   CHECKED_GCONNECT(decodebin, "pad-added", &NewPadCallback, this);

@@ -231,23 +231,23 @@ void TranscodeDialog::Add() {
 
 void TranscodeDialog::Import() {
   QString path = QFileDialog::getExistingDirectory(
-      this, tr("Open a directory to import music from"), last_import_dir_,
-      QFileDialog::ShowDirsOnly);
-
+      this, tr("Open a directory to import music from"),
+      last_import_dir_, QFileDialog::ShowDirsOnly);
+  
   if (path.isEmpty()) return;
-
+  
   QStringList filenames;
-  QStringList audioTypes =
-      QString(FileView::kFileFilter).split(" ", QString::SkipEmptyParts);
-  QDirIterator files(path, audioTypes, QDir::Files | QDir::Readable,
-                     QDirIterator::Subdirectories);
-
+  QStringList audioTypes = QString(FileView::kFileFilter).split(" ", 
+      QString::SkipEmptyParts);
+  QDirIterator files(path, audioTypes, QDir::Files | QDir::Readable, 
+      QDirIterator::Subdirectories);
+  
   while (files.hasNext()) {
     filenames << files.next();
   }
-
+  
   SetFilenames(filenames);
-
+  
   last_import_dir_ = path;
   QSettings settings;
   settings.beginGroup(kSettingsGroup);

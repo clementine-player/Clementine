@@ -167,8 +167,7 @@ void PlaylistManager::Load(const QString& filename) {
     return;
   }
 
-  Playlist* playlist =
-      AddPlaylist(id, info.baseName(), QString(), QString(), false);
+  Playlist* playlist = AddPlaylist(id, info.baseName(), QString(), QString(), false);
 
   QList<QUrl> urls;
   playlist->InsertUrls(urls << QUrl::fromLocalFile(filename));
@@ -196,6 +195,7 @@ void PlaylistManager::Save(int id, const QString& filename,
 void PlaylistManager::ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
                                                  const QString& filename,
                                                  Playlist::Path path_type) {
+
   SongList song_list = watcher->future().results();
   parser_->Save(song_list, filename, path_type);
 }
@@ -263,6 +263,7 @@ void PlaylistManager::Rename(int id, const QString& new_name) {
 }
 
 void PlaylistManager::Favorite(int id, bool favorite) {
+
   if (playlists_.contains(id)) {
     // If playlists_ contains this playlist, its means it's opened: star or
     // unstar it.
