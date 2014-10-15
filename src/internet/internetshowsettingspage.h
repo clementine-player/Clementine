@@ -37,7 +37,6 @@ class InternetShowSettingsPage : public SettingsPage {
 
  private:
   std::unique_ptr<Ui_InternetShowSettingsPage> ui_;
-  QIcon warning_icon_;
 };
 
 #endif  // INTERNETSHOWSETTINGSPAGE_H
