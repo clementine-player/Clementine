@@ -81,9 +81,8 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
 
   // Try to send 5 seconds of audio in advance to initially fill Clementine's
   // buffer.
-  // Commented for now as otherwise the seek will take too long.
-  //g_object_set(G_OBJECT(tcpsink_), "ts-offset", qint64(-5 * kNsecPerSec),
-  //             nullptr);
+  g_object_set(G_OBJECT(tcpsink_), "ts-offset", qint64(-5 * kNsecPerSec),
+               nullptr);
 
   // We know the time of each buffer
   g_object_set(G_OBJECT(appsrc_), "format", GST_FORMAT_TIME, nullptr);

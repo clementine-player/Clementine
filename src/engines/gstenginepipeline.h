@@ -132,6 +132,7 @@ signals:
   static void NewPadCallback(GstElement*, GstPad*, gpointer);
   static GstPadProbeReturn HandoffCallback(GstPad*, GstPadProbeInfo*, gpointer);
   static GstPadProbeReturn EventHandoffCallback(GstPad*, GstPadProbeInfo*, gpointer);
+  static GstPadProbeReturn DecodebinProbe(GstPad*, GstPadProbeInfo*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
   static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec* pspec,
                                   gpointer);
@@ -163,7 +164,6 @@ signals:
 
  private slots:
   void FaderTimelineFinished();
-  void SpotifySeekCompleted();
 
  private:
   static const int kGstStateTimeoutNanosecs;
@@ -229,13 +229,6 @@ signals:
   // past this position.
   qint64 end_offset_nanosec_;
 
-  // Another Spotify hack...
-  // Used in position(). We need this because when seeking Spotify tracks, we
-  // don't actually seek the pipeline, but ask libspotify to send us data with
-  // a seek offset instead. So querying the pipeline to get track's position
-  // wouldn't make sense.
-  qint64 spotify_offset_;
-
   // We store the beginning and end for the preloading song too, so we can just
   // carry on without reloading the file if the sections carry on from each
   // other.
@@ -294,6 +287,8 @@ signals:
   uint bus_cb_id_;
 
   QThreadPool set_state_threadpool_;
+
+  GstSegment last_decodebin_segment_;
 };
 
 #endif  // GSTENGINEPIPELINE_H

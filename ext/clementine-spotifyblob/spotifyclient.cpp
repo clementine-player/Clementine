@@ -758,9 +758,6 @@ int SpotifyClient::MusicDeliveryCallback(sp_session* session,
   }
 
   if (num_frames == 0) {
-    // According to libspotify documentation, this occurs when a discontinuity
-    // has occurred (such as after a seek). Maybe should clear buffers here as
-    // well? (in addition of clearing buffers in gstenginepipeline.cpp)
     return 0;
   }
 
@@ -919,17 +916,8 @@ void SpotifyClient::StartPlayback(const pb::spotify::PlaybackRequest& req) {
 }
 
 void SpotifyClient::Seek(qint64 offset_nsec) {
-  if (sp_session_player_seek(session_, offset_nsec / kNsecPerMsec)
-      != SP_ERROR_OK) {
-    qLog(Error) << "Seek error";
-    return;
-  }
-
-  pb::spotify::Message message;
-
-  pb::spotify::SeekCompleted* response = message.mutable_seek_completed();
-  Q_UNUSED(response);
-  SendMessage(message);
+  // TODO
+  qLog(Error) << "TODO seeking";
 }
 
 void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
