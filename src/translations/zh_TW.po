@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-08 11:25+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-10-19 10:25+0000\n"
+"Last-Translator: BrLi <rainman59118@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,7 +25,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\n您可以經由點選名稱旁的星形符號來收藏播放列表\n\n已收藏的播放列表將顯示於此"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -65,7 +65,7 @@ msgstr " 歌曲"
 #: internet/vkservice.cpp:145
 #, qt-format
 msgid "%1 (%2 songs)"
-msgstr ""
+msgstr "%1 (%2 個歌曲)"
 
 #: widgets/osd.cpp:194
 #, qt-format
@@ -85,7 +85,7 @@ msgstr "%1 天前"
 #: podcasts/gpoddersync.cpp:81
 #, qt-format
 msgid "%1 on %2"
-msgstr ""
+msgstr "%2 的 %1"
 
 #: playlistparsers/playlistparser.cpp:76
 #, qt-format
@@ -240,7 +240,7 @@ msgstr "(在多首歌曲的差異)"
 
 #: internet/spotifyservice.cpp:423
 msgid ", by "
-msgstr ""
+msgstr "，由"
 
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
@@ -248,7 +248,7 @@ msgstr "...和所有的 Amarok 的貢獻者"
 
 #: ../bin/src/ui_albumcovermanager.h:223 ../bin/src/ui_albumcovermanager.h:224
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
@@ -256,7 +256,7 @@ msgstr "0:00:00"
 
 #: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
-msgstr ""
+msgstr "0px"
 
 #: core/utilities.cpp:111
 msgid "1 day"
@@ -273,7 +273,7 @@ msgstr "128k MP3"
 
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
-msgstr ""
+msgstr "40%"
 
 #: library/library.cpp:65
 msgid "50 random tracks"
@@ -291,7 +291,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>若無勾選， Clementine 將儲存您的評價雨其他統計資料於獨立的資料庫檔案中，而不影響您的媒體檔案。</p><p>若有勾選，當有修改時，本軟體將同時更新這些統計資料於資料庫以及媒體檔案中。</p><p>請注意：這不一定適用於所有檔案格式，且，由於沒有實現這項功能的通用規範，其他音樂播放器將無法順利讀取這些資料。</p></body></html>"
 
 #: ../bin/src/ui_libraryfilterwidget.h:97
 #, qt-format
@@ -1321,7 +1321,7 @@ msgstr "設定 Magnatune ..."
 msgid "Configure Shortcuts"
 msgstr "設定快速鍵"
 
-#: internet/spotifyservice.cpp:813
+#: internet/spotifyservice.cpp:812
 msgid "Configure Spotify..."
 msgstr "設定 Spotify..."
 
@@ -2864,7 +2864,7 @@ msgstr "語言"
 
 #: ui/equalizer.cpp:127
 msgid "Laptop/Headphones"
-msgstr "筆記本電腦 /耳機"
+msgstr "筆記型電腦 /耳機"
 
 #: ui/equalizer.cpp:129
 msgid "Large Hall"
@@ -3135,7 +3135,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotifyservice.cpp:603
+#: internet/spotifyservice.cpp:607
 msgid "Make playlist available offline"
 msgstr "使播放清單可離線使用"
 
@@ -4047,7 +4047,7 @@ msgstr ""
 msgid "Remove from favorites"
 msgstr "從我的最愛中刪除"
 
-#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:611
+#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:615
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "從播放清單移除"
@@ -4894,15 +4894,15 @@ msgstr "支持格式"
 msgid "Synchronize statistics to files now"
 msgstr ""
 
-#: internet/spotifyservice.cpp:636
+#: internet/spotifyservice.cpp:640
 msgid "Syncing Spotify inbox"
 msgstr "同步 Spotify 的收件匣"
 
-#: internet/spotifyservice.cpp:630
+#: internet/spotifyservice.cpp:634
 msgid "Syncing Spotify playlist"
 msgstr "同步 Spotify 的播放清單"
 
-#: internet/spotifyservice.cpp:641
+#: internet/spotifyservice.cpp:645
 msgid "Syncing Spotify starred tracks"
 msgstr "同步 Spotify 的星號標記曲目"
 

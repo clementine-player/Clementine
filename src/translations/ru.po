@@ -34,8 +34,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-08 15:09+0000\n"
-"Last-Translator: Andrei Demin <Andrei.Demin1996@gmail.com>\n"
+"PO-Revision-Date: 2014-10-19 10:28+0000\n"
+"Last-Translator: Andrei Stepanov\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -861,7 +861,7 @@ msgstr "Артист"
 
 #: ui/mainwindow.cpp:255
 msgid "Artist info"
-msgstr "Информация об артисте"
+msgstr "Артист"
 
 #: songinfo/echonesttags.cpp:61
 msgid "Artist tags"
@@ -1214,7 +1214,7 @@ msgstr "Clementine может проигрывать музыку, загруж�
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "Clementine может проигрывать музыку с Диска Google"
+msgstr "Clementine может проигрывать музыку с Google Диска"
 
 #: ../bin/src/ui_skydrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to OneDrive"
@@ -1345,7 +1345,7 @@ msgstr "Настройка Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Горячие клавиши"
 
-#: internet/spotifyservice.cpp:813
+#: internet/spotifyservice.cpp:812
 msgid "Configure Spotify..."
 msgstr "Настройка Spotify..."
 
@@ -1844,7 +1844,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in Google Drive which may take some time."
-msgstr "После полного пересканирования потеряется все мета данные, сохраненные в Clementine, такие как обложки, счетчик воспроизведений и рейтинги. Clementine так же пересканирует всю вашу музыку в  Google Drive, что может потребовать некоторое время."
+msgstr "После полного пересканирования потеряются все метаданные, сохраненные в Clementine, такие как обложки, счетчик воспроизведений и рейтинги. Clementine так же пересканирует всю вашу музыку в Google Диск, что может потребовать некоторое время."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1902,7 +1902,7 @@ msgstr "Загрузка добавлена в очередь"
 
 #: ../bin/src/ui_networkremotesettingspage.h:202
 msgid "Download the Android app"
-msgstr "Загрузить приложение для Android"
+msgstr "Загрузите приложение для Android"
 
 #: internet/magnatuneservice.cpp:272
 msgid "Download this album"
@@ -1997,7 +1997,7 @@ msgstr "Изменить информацию о треке"
 
 #: library/libraryview.cpp:410
 msgid "Edit tracks information..."
-msgstr "Изменить информацию о треке"
+msgstr "Изменить информацию о треках"
 
 #: internet/savedradio.cpp:103
 msgid "Edit..."
@@ -2540,7 +2540,7 @@ msgstr "Перейти к предудыщему плейлисту"
 
 #: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
-msgstr "Диск Google"
+msgstr "Google Диск"
 
 #: covers/coversearchstatisticsdialog.cpp:51 ui/albumcovermanager.cpp:460
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2921,7 +2921,7 @@ msgstr "Last.fm"
 
 #: internet/lastfmservice.cpp:241
 msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr "Last.fm в данный момент занят, попробуйте через некоторое время"
+msgstr "Last.fm в данный момент занят, попробуйте позже"
 
 #: ../bin/src/ui_lastfmsettingspage.h:154
 msgid "Last.fm password"
@@ -2929,7 +2929,7 @@ msgstr "Пароль Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
-msgstr "Количество прослушиваний на Last.fm"
+msgstr "Счётчики Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
@@ -3159,7 +3159,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Да будет так!"
 
-#: internet/spotifyservice.cpp:603
+#: internet/spotifyservice.cpp:607
 msgid "Make playlist available offline"
 msgstr "Сделать плейлист доступным автономно"
 
@@ -3576,7 +3576,7 @@ msgstr "Открыть файл..."
 
 #: internet/googledriveservice.cpp:198
 msgid "Open in Google Drive"
-msgstr "Открыть в Диске Google"
+msgstr "Открыть в Google Диске"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:460
 #: internet/internetservice.cpp:75 library/libraryview.cpp:375
@@ -4071,7 +4071,7 @@ msgstr "Удалить из закладок"
 msgid "Remove from favorites"
 msgstr "Удалить из избранных"
 
-#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:611
+#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:615
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Удалить из плейлиста"
@@ -4174,7 +4174,7 @@ msgstr "Сбросить счётчики воспроизведения"
 #: core/commandlineoptions.cpp:158
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr "Перезапустить композицию, или воспроизвести предыдущую, если не прошло 8 секунд от начала."
+msgstr "Перезапустить композицию или воспроизвести предыдущую, если не прошло 8 секунд от начала."
 
 #: ../bin/src/ui_organisedialog.h:252
 msgid "Restrict to ASCII characters"
@@ -4918,15 +4918,15 @@ msgstr "Поддерживаемые форматы"
 msgid "Synchronize statistics to files now"
 msgstr "Синхронизировать статистику в файлы прямо сейчас"
 
-#: internet/spotifyservice.cpp:636
+#: internet/spotifyservice.cpp:640
 msgid "Syncing Spotify inbox"
 msgstr "Синхронизация входящих Spotify"
 
-#: internet/spotifyservice.cpp:630
+#: internet/spotifyservice.cpp:634
 msgid "Syncing Spotify playlist"
 msgstr "Синхронизация плейлистов Spotify"
 
-#: internet/spotifyservice.cpp:641
+#: internet/spotifyservice.cpp:645
 msgid "Syncing Spotify starred tracks"
 msgstr "Синхронизация оцененных треков Spotify"
 
