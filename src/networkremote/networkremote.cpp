@@ -169,6 +169,11 @@ void NetworkRemote::AcceptConnection() {
 
     connect(incoming_data_parser_.get(), SIGNAL(SendLibrary(RemoteClient*)),
             outgoing_data_creator_.get(), SLOT(SendLibrary(RemoteClient*)));
+
+    connect(incoming_data_parser_.get(),
+            SIGNAL(DoGlobalSearch(QString, RemoteClient*)),
+            outgoing_data_creator_.get(),
+            SLOT(DoGlobalSearch(QString, RemoteClient*)));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());

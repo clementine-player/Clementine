@@ -52,6 +52,8 @@ signals:
   void SendLibrary(RemoteClient* client);
   void RateCurrentSong(double);
 
+  void DoGlobalSearch(QString, RemoteClient*);
+
  private:
   Application* app_;
   bool close_connection_;
@@ -67,6 +69,7 @@ signals:
   void OpenPlaylist(const pb::remote::Message& msg);
   void ClosePlaylist(const pb::remote::Message& msg);
   void RateSong(const pb::remote::Message& msg);
+  void GlobalSearch(RemoteClient* client, const pb::remote::Message& msg);
 };
 
 #endif  // INCOMINGDATAPARSER_H

@@ -68,6 +68,16 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   }
 
   CheckEnabledProviders();
+
+  // Setup global search
+  connect(app_->global_search(),
+          SIGNAL(ResultsAvailable(int, SearchProvider::ResultList)),
+          SLOT(ResultsAvailable(int, SearchProvider::ResultList)),
+          Qt::QueuedConnection);
+
+  connect(app_->global_search(),
+          SIGNAL(SearchFinished(int)),
+          SLOT(SearchFinished(int)));
 }
 
 void OutgoingDataCreator::CheckEnabledProviders() {
@@ -859,4 +869,38 @@ void OutgoingDataCreator::SendKitten(const QImage& kitten) {
     current_image_ = kitten;
     SendSongMetadata();
   }
+}
+
+void OutgoingDataCreator::DoGlobalSearch(QString &query, RemoteClient *client) {
+  int id = app_->global_search()->SearchAsync(query);
+
+  GlobalSearchRequest request(id, query, client);
+  global_search_result_map_.insert(id, request);
+}
+
+void OutgoingDataCreator::ResultsAvailable(int id, SearchProvider::ResultList results) {
+  if (!global_search_result_map_.contains(id)) return;
+
+  GlobalSearchRequest search_request = global_search_result_map_.value(id);
+  RemoteClient* client = search_request.client_;
+  QImage null_img;
+
+  pb::remote::Message msg;
+  pb::remote::ResponseGlobalSearch* response = msg.mutable_response_global_search();
+
+  msg.set_type(pb::remote::GLOBAL_SEARCH_RESULT);
+  response->set_id(search_request.id_);
+  response->set_query(DataCommaSizeFromQString(search_request.query_));
+  response->set_search_provider(DataCommaSizeFromQString(results.first().provider_->name()));
+
+  for (const SearchProvider::Result& result : results) {
+    pb::remote::SongMetadata* pb_song = response->add_song_metadata();
+    CreateSong(result.metadata_, null_img, 0, pb_song);
+  }
+
+  client->SendData(&msg);
+}
+
+void OutgoingDataCreator::SearchFinished(int id) {
+  global_search_result_map_.remove(id);
 }
