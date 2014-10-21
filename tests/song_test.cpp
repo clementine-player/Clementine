@@ -27,6 +27,7 @@
 
 #include "test_utils.h"
 
+#include <QStringList>
 #include <QTemporaryFile>
 #include <QTextCodec>
 
