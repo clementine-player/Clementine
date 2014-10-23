@@ -43,8 +43,8 @@ struct GlobalSearchRequest {
   QString query_;
   RemoteClient* client_;
   GlobalSearchRequest()
-    : id_(-1), query_(""), client_(nullptr) {}
-  GlobalSearchRequest(int i, QString q, RemoteClient* c)
+    : id_(-1), client_(nullptr) {}
+  GlobalSearchRequest(int i, const QString& q, RemoteClient* c)
     : id_(i), query_(q), client_(c) {}
 };
 
@@ -89,8 +89,8 @@ class OutgoingDataCreator : public QObject {
   void EnableKittens(bool aww);
   void SendKitten(const QImage& kitten);
 
-  void DoGlobalSearch(QString& query, RemoteClient* client);
-  void ResultsAvailable(int id, SearchProvider::ResultList results);
+  void DoGlobalSearch(const QString& query, RemoteClient* client);
+  void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void SearchFinished(int id);
 
  private:

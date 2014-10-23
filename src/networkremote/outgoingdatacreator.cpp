@@ -871,14 +871,14 @@ void OutgoingDataCreator::SendKitten(const QImage& kitten) {
   }
 }
 
-void OutgoingDataCreator::DoGlobalSearch(QString &query, RemoteClient *client) {
+void OutgoingDataCreator::DoGlobalSearch(const QString &query, RemoteClient *client) {
   int id = app_->global_search()->SearchAsync(query);
 
   GlobalSearchRequest request(id, query, client);
   global_search_result_map_.insert(id, request);
 }
 
-void OutgoingDataCreator::ResultsAvailable(int id, SearchProvider::ResultList results) {
+void OutgoingDataCreator::ResultsAvailable(int id, const SearchProvider::ResultList& results) {
   if (!global_search_result_map_.contains(id)) return;
 
   GlobalSearchRequest search_request = global_search_result_map_.value(id);
