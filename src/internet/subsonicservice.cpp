@@ -190,7 +190,7 @@ QUrl SubsonicService::BuildRequestUrl(const QString& view) const {
   url.addQueryItem("v", kApiVersion);
   url.addQueryItem("c", kApiClientName);
   url.addQueryItem("u", username_);
-  url.addQueryItem("p", password_);
+  url.addQueryItem("p", QString("enc:" + password_.toAscii().toHex()));
   return url;
 }
 
