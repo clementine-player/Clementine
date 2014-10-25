@@ -41,10 +41,6 @@
 #include <qtsparkle/Updater>
 #endif
 
-#ifdef HAVE_AUDIOCD
-#include <gst/cdda/gstcddabasesrc.h>
-#endif
-
 #include "core/appearance.h"
 #include "core/application.h"
 #include "core/backgroundstreams.h"
