@@ -37,6 +37,7 @@
 #include "core/song.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
+#include "devices/cddasongloader.h"
 #include "internet/fixlastfm.h"
 #include "internet/internetmodel.h"
 #include "library/librarybackend.h"
@@ -136,113 +137,32 @@ SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
 }
 
 SongLoader::Result SongLoader::LoadAudioCD() {
-//#ifdef HAVE_AUDIOCD
-//  // Create gstreamer cdda element
-//  GstElement* cdda = gst_element_make_from_uri(
-//      GST_URI_SRC, "cdda://", nullptr, nullptr);
-//  if (cdda == nullptr) {
-//    qLog(Error) << "Error while creating CDDA GstElement";
-//    return Error;
-//  }
-//
-//  // Change the element's state to ready and paused, to be able to query it
-//  if (gst_element_set_state(cdda, GST_STATE_READY) ==
-//          GST_STATE_CHANGE_FAILURE ||
-//      gst_element_set_state(cdda, GST_STATE_PAUSED) ==
-//          GST_STATE_CHANGE_FAILURE) {
-//    qLog(Error) << "Error while changing CDDA GstElement's state";
-//    gst_element_set_state(cdda, GST_STATE_NULL);
-//    gst_object_unref(GST_OBJECT(cdda));
-//    return Error;
-//  }
-//
-//  // Get number of tracks
-//  GstFormat fmt = gst_format_get_by_nick("track");
-//  gint64 num_tracks = 0;
-//  if (!gst_element_query_duration(cdda, fmt, &num_tracks)) {
-//    qLog(Error) << "Error while querying cdda GstElement";
-//    gst_object_unref(GST_OBJECT(cdda));
-//    return Error;
-//  }
-//
-//  for (int track_number = 1; track_number <= num_tracks; track_number++) {
-//    // Init song
-//    Song song;
-//    guint64 duration = 0;
-//    // quint64 == ulonglong and guint64 == ulong, therefore we must cast
-//    if (gst_tag_list_get_uint64(
-//            GST_CDDA_BASE_SRC(cdda)->tracks[track_number - 1].tags,
-//            GST_TAG_DURATION, &duration)) {
-//      song.set_length_nanosec((quint64)duration);
-//    }
-//    song.set_valid(true);
-//    song.set_filetype(Song::Type_Cdda);
-//    song.set_url(QUrl(QString("cdda://%1").arg(track_number)));
-//    song.set_title(QString("Track %1").arg(track_number));
-//    song.set_track(track_number);
-//    songs_ << song;
-//  }
-//
-//  // Generate MusicBrainz DiscId
-//  gst_tag_register_musicbrainz_tags();
-//  GstElement* pipe = gst_pipeline_new("pipeline");
-//  gst_bin_add(GST_BIN(pipe), cdda);
-//  gst_element_set_state(pipe, GST_STATE_READY);
-//  gst_element_set_state(pipe, GST_STATE_PAUSED);
-//  GstMessage* msg = gst_bus_timed_pop_filtered(
-//      GST_ELEMENT_BUS(pipe), GST_CLOCK_TIME_NONE, GST_MESSAGE_TAG);
-//  GstTagList* tags = nullptr;
-//  gst_message_parse_tag(msg, &tags);
-//  char* string_mb = nullptr;
-//  if (gst_tag_list_get_string(tags, GST_TAG_CDDA_MUSICBRAINZ_DISCID,
-//                              &string_mb)) {
-//    QString musicbrainz_discid(string_mb);
-//    qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
-//
-//    MusicBrainzClient* musicbrainz_client = new MusicBrainzClient(this);
-//    connect(musicbrainz_client, SIGNAL(Finished(const QString&, const QString&,
-//                                                MusicBrainzClient::ResultList)),
-//            SLOT(AudioCDTagsLoaded(const QString&, const QString&,
-//                                   MusicBrainzClient::ResultList)));
-//    musicbrainz_client->StartDiscIdRequest(musicbrainz_discid);
-//    g_free(string_mb);
-//  }
-//
-//  // Clean all the Gstreamer objects we have used: we don't need them anymore
-//  gst_object_unref(GST_OBJECT(cdda));
-//  gst_element_set_state(pipe, GST_STATE_NULL);
-//  gst_object_unref(GST_OBJECT(pipe));
-//  gst_object_unref(GST_OBJECT(msg));
-//  gst_object_unref(GST_OBJECT(tags));
-//
-//  return Success;
-//#else  // HAVE_AUDIOCD
+#ifdef HAVE_AUDIOCD
+  CddaSongLoader* cdda_song_loader = new CddaSongLoader;
+  connect(cdda_song_loader, SIGNAL(SongsDurationLoaded(SongList)),
+          this, SLOT(AudioCDTracksLoadedSlot(SongList)));
+  connect(cdda_song_loader, SIGNAL(SongsMetadataLoaded(SongList)),
+          this, SLOT(AudioCDTracksTagsLoaded(SongList)));
+  cdda_song_loader->LoadSongs();
+  return Success;
+#else  // HAVE_AUDIOCD
   return Error;
-//#endif
+#endif
 }
 
-void SongLoader::AudioCDTagsLoaded(
-    const QString& artist, const QString& album,
-    const MusicBrainzClient::ResultList& results) {
-  // Remove previously added songs metadata, because there are not needed
-  // and that we are going to fill it with new (more complete) ones
-  songs_.clear();
-  int track_number = 1;
-  for (const MusicBrainzClient::Result& ret : results) {
-    Song song;
-    song.set_artist(artist);
-    song.set_album(album);
-    song.set_title(ret.title_);
-    song.set_length_nanosec(ret.duration_msec_ * kNsecPerMsec);
-    song.set_track(track_number);
-    song.set_year(ret.year_);
-    // We need to set url: that's how playlist will find the correct item to
-    // update
-    song.set_url(QUrl(QString("cdda://%1").arg(track_number++)));
-    songs_ << song;
-  }
+#ifdef HAVE_AUDIOCD
+void SongLoader::AudioCDTracksLoadedSlot(const SongList& songs) {
+  songs_ = songs;
+  emit AudioCDTracksLoaded();
+}
+
+void SongLoader::AudioCDTracksTagsLoaded(const SongList& songs) {
+  CddaSongLoader* cdda_song_loader = qobject_cast<CddaSongLoader*>(sender());
+  cdda_song_loader->deleteLater();
+  songs_ = songs;
   emit LoadAudioCDFinished(true);
 }
+#endif // HAVE_AUDIOCD
 
 SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   qLog(Debug) << "Loading local file" << filename;

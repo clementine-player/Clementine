@@ -1034,10 +1034,12 @@ optional_source(HAVE_AUDIOCD
   SOURCES
     devices/cddadevice.cpp
     devices/cddalister.cpp
+    devices/cddasongloader.cpp
     ui/ripcd.cpp
   HEADERS
     devices/cddadevice.h
     devices/cddalister.h
+    devices/cddasongloader.h
     ui/ripcd.h
   UI
     ui/ripcd.ui

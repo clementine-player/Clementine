@@ -1151,7 +1151,9 @@ void Playlist::UpdateItems(const SongList& songs) {
       if (item->Metadata().url() == song.url() &&
           (item->Metadata().filetype() == Song::Type_Unknown ||
            // Stream may change and may need to be updated too
-           item->Metadata().filetype() == Song::Type_Stream)) {
+           item->Metadata().filetype() == Song::Type_Stream ||
+           // And CD tracks as well (tags are loaded in a second step)
+           item->Metadata().filetype() == Song::Type_Cdda)) {
         PlaylistItemPtr new_item;
         if (song.id() == -1) {
           new_item = PlaylistItemPtr(new SongPlaylistItem(song));

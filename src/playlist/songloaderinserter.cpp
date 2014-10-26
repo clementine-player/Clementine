@@ -85,19 +85,24 @@ void SongLoaderInserter::LoadAudioCD(Playlist* destination, int row,
   enqueue_ = enqueue;
 
   SongLoader* loader = new SongLoader(library_, player_, this);
+  NewClosure(loader, SIGNAL(AudioCDTracksLoaded()),
+      this, SLOT(AudioCDTracksLoaded(SongLoader*)), loader);
   connect(loader, SIGNAL(LoadAudioCDFinished(bool)), SLOT(AudioCDTagsLoaded(bool)));
   qLog(Info) << "Loading audio CD...";
   SongLoader::Result ret = loader->LoadAudioCD();
   if (ret == SongLoader::Error) {
     emit Error(tr("Error while loading audio CD"));
     delete loader;
-  } else {
-    songs_ = loader->songs();
-    InsertSongs();
   }
+  // Songs will be loaded later: see AudioCDTracksLoaded and AudioCDTagsLoaded slots
 }
 
 void SongLoaderInserter::DestinationDestroyed() { destination_ = nullptr; }
+
+void SongLoaderInserter::AudioCDTracksLoaded(SongLoader* loader) {
+  songs_ = loader->songs();
+  InsertSongs();
+}
 
 void SongLoaderInserter::AudioCDTagsLoaded(bool success) {
   SongLoader* loader = qobject_cast<SongLoader*>(sender());
