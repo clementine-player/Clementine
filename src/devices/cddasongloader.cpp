@@ -17,9 +17,6 @@
 
 #include <gst/gst.h>
 #include <gst/tag/tag.h>
-//#include <gst/audio/gstaudiocdsrc.h>
-
-#include <QtConcurrentRun>
 
 #include "core/logging.h"
 #include "core/timeconstants.h"

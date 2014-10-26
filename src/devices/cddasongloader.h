@@ -64,6 +64,4 @@ class CddaSongLoader : public QObject {
   QMutex mutex_load_;
 };
 
-
-
 #endif // CDDASONGLOADER_H
