@@ -192,6 +192,8 @@ class Song {
   FileType filetype() const;
   bool is_stream() const;
   bool is_cdda() const;
+  // Guess if it is a library song using fields set. Might not be 100% reliable.
+  bool is_library_song() const;
 
   const QString& art_automatic() const;
   const QString& art_manual() const;

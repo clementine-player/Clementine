@@ -182,8 +182,8 @@ void CddaSongLoader::AudioCDTagsLoaded(
       qobject_cast<MusicBrainzClient*>(sender());
   musicbrainz_client->deleteLater();
   SongList songs;
-  int track_number = 1;
   if (results.size() == 0) return;
+  int track_number = 1;
   for (const MusicBrainzClient::Result& ret : results) {
     Song song;
     song.set_artist(artist);
@@ -193,6 +193,8 @@ void CddaSongLoader::AudioCDTagsLoaded(
     song.set_track(track_number);
     song.set_year(ret.year_);
     song.set_id(track_number);
+    song.set_filetype(Song::Type_Cdda);
+    song.set_valid(true);
     // We need to set url: that's how playlist will find the correct item to
     // update
     song.set_url(GetUrlFromTrack(track_number++));

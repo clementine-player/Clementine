@@ -299,6 +299,9 @@ int Song::filesize() const { return d->filesize_; }
 Song::FileType Song::filetype() const { return d->filetype_; }
 bool Song::is_stream() const { return d->filetype_ == Type_Stream; }
 bool Song::is_cdda() const { return d->filetype_ == Type_Cdda; }
+bool Song::is_library_song() const {
+  return !is_cdda() && !is_stream() && id() != -1;
+}
 const QString& Song::art_automatic() const { return d->art_automatic_; }
 const QString& Song::art_manual() const { return d->art_manual_; }
 const QString& Song::etag() const { return d->etag_; }
