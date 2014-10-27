@@ -317,8 +317,11 @@ void GstEngine::UpdateScope(int chunk_length) {
   memcpy(dest, source, bytes);
 
   gst_buffer_unmap(latest_buffer_, &map);
-  gst_buffer_unref(latest_buffer_);
-  latest_buffer_ = NULL;
+
+  if (scope_chunk_ == scope_chunks_) {
+    gst_buffer_unref(latest_buffer_);
+    latest_buffer_ = nullptr;
+  }
 }
 
 void GstEngine::StartPreloading(const QUrl& url, bool force_stop_at_end,
