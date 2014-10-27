@@ -203,9 +203,9 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
           case GroupBy_Composer:
             key = song.composer();
             break;
-          // case GroupBy_Performer:
-          //   key = song.performer();
-          //   break;
+          case GroupBy_Performer:
+            key = song.performer();
+            break;
           case GroupBy_Disc:
             key = song.disc();
             break;
@@ -298,7 +298,7 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
     case GroupBy_Album:
     case GroupBy_Artist:
     case GroupBy_Composer:
-    // case GroupBy_Performer:
+    case GroupBy_Performer:
     case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
@@ -337,7 +337,7 @@ QString LibraryModel::DividerDisplayText(GroupBy type,
     case GroupBy_Album:
     case GroupBy_Artist:
     case GroupBy_Composer:
-    // case GroupBy_Performer:
+    case GroupBy_Performer:
     case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
@@ -785,9 +785,9 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
     case GroupBy_Composer:
       q->SetColumnSpec("DISTINCT composer");
       break;
-    // case GroupBy_Performer:
-    //   q->SetColumnSpec("DISTINCT performer");
-    //   break;
+    case GroupBy_Performer:
+      q->SetColumnSpec("DISTINCT performer");
+      break;
     case GroupBy_Disc:
       q->SetColumnSpec("DISTINCT disc");
       break;
@@ -846,9 +846,9 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item,
     case GroupBy_Composer:
       q->AddWhere("composer", item->key);
       break;
-    // case GroupBy_Performer:
-    //   q->AddWhere("performer", item->key);
-    //   break;
+    case GroupBy_Performer:
+      q->AddWhere("performer", item->key);
+      break;
     case GroupBy_Disc:
       q->AddWhere("disc", item->key);
       break;
@@ -926,7 +926,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
       break;
 
     case GroupBy_Composer:
-    // case GroupBy_Performer:
+    case GroupBy_Performer:
     case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
@@ -991,9 +991,9 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
 
     case GroupBy_Composer:
       item->key = s.composer();
-    // case GroupBy_Performer:
-    //   item->key = s.performer();
-        case GroupBy_Disc:
+    case GroupBy_Performer:
+      item->key = s.performer();
+    case GroupBy_Disc:
       item->key = s.disc();
     case GroupBy_Grouping:
       item->key = s.grouping();

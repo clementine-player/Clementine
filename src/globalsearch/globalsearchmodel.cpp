@@ -128,8 +128,8 @@ QStandardItem* GlobalSearchModel::BuildContainers(const Song& s,
 
     case LibraryModel::GroupBy_Composer:
       display_text = s.composer();
-    // case LibraryModel::GroupBy_Performer:
-    //   display_text = s.performer();
+    case LibraryModel::GroupBy_Performer:
+      display_text = s.performer();
     case LibraryModel::GroupBy_Disc:
       display_text = s.disc();
     case LibraryModel::GroupBy_Grouping:
