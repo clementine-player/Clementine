@@ -14,6 +14,7 @@
 #include "core/application.h"
 #include "engines/enginebase.h"
 #include "engines/engine_fwd.h"
+#include "globalsearch/globalsearch.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistbackend.h"
@@ -35,6 +36,16 @@ struct DownloadItem {
   int song_count_;
   DownloadItem(Song s, int no, int count)
       : song_(s), song_no_(no), song_count_(count) {}
+};
+
+struct GlobalSearchRequest {
+  int id_;
+  QString query_;
+  RemoteClient* client_;
+  GlobalSearchRequest()
+    : id_(-1), client_(nullptr) {}
+  GlobalSearchRequest(int i, const QString& q, RemoteClient* c)
+    : id_(i), query_(q), client_(c) {}
 };
 
 class OutgoingDataCreator : public QObject {
@@ -78,6 +89,10 @@ class OutgoingDataCreator : public QObject {
   void EnableKittens(bool aww);
   void SendKitten(const QImage& kitten);
 
+  void DoGlobalSearch(const QString& query, RemoteClient* client);
+  void ResultsAvailable(int id, const SearchProvider::ResultList& results);
+  void SearchFinished(int id);
+
  private:
   Application* app_;
   QList<RemoteClient*>* clients_;
@@ -96,6 +111,8 @@ class OutgoingDataCreator : public QObject {
   ProviderList provider_list_;
   QMap<int, SongInfoFetcher::Result> results_;
   SongInfoFetcher* fetcher_;
+
+  QMap<int, GlobalSearchRequest> global_search_result_map_;
 
   void SendDataToClients(pb::remote::Message* msg);
   void SetEngineState(pb::remote::ResponseClementineInfo* msg);

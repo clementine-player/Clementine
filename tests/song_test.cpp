@@ -27,6 +27,7 @@
 
 #include "test_utils.h"
 
+#include <QStringList>
 #include <QTemporaryFile>
 #include <QTextCodec>
 
@@ -151,6 +152,38 @@ TEST_F(SongTest, FMPSPlayCountBoth) {
   TemporaryResource r(":/testdata/fmpsplaycountboth.mp3");
   Song song = ReadSongFromFile(r.fileName());
   EXPECT_EQ(123, song.playcount());
+}
+
+TEST_F(SongTest, FMPSUnrated) {
+  QStringList files_to_test;
+  files_to_test <<
+      ":/testdata/beep.m4a" <<
+      ":/testdata/beep.mp3" <<
+      ":/testdata/beep.flac" <<
+      ":/testdata/beep.ogg" <<
+      ":/testdata/beep.spx" <<
+      ":/testdata/beep.wav" <<
+      ":/testdata/beep.wma";
+  for (const QString& test_filename : files_to_test) {
+    TemporaryResource r(test_filename);
+    Song song = ReadSongFromFile(r.fileName());
+    // beep files don't contain rating info, so they should be considered as
+    // "unrated" i.e. rating == -1
+    EXPECT_EQ(-1, song.rating());
+    // Writing -1 i.e. "unrated" to a file shouldn't write anything
+    WriteSongRatingToFile(song, r.fileName());
+
+    // Compare files
+    QFile orig_file(test_filename);
+    orig_file.open(QIODevice::ReadOnly);
+    QByteArray orig_file_data = orig_file.readAll();
+    QFile temp_file(r.fileName());
+    temp_file.open(QIODevice::ReadOnly);
+    QByteArray temp_file_data = temp_file.readAll();
+    EXPECT_TRUE(!orig_file_data.isEmpty());
+    EXPECT_TRUE(!temp_file_data.isEmpty());
+    EXPECT_TRUE(orig_file_data == temp_file_data);
+  }
 }
 
 TEST_F(SongTest, FMPSScore) {

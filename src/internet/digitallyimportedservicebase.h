@@ -38,6 +38,7 @@ class DigitallyImportedServiceBase : public InternetService {
                                const QUrl& homepage_url, const QIcon& icon,
                                const QString& api_service_name,
                                Application* app, InternetModel* model,
+                               bool has_premium,
                                QObject* parent = nullptr);
   ~DigitallyImportedServiceBase();
 
@@ -97,6 +98,7 @@ signals:
   int premium_audio_type_;
   QString username_;
   QString listen_hash_;
+  bool has_premium_; // Does the service has premium features?
 
   QStandardItem* root_;
 

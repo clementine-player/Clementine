@@ -37,6 +37,7 @@ class ParserBase;
 class Player;
 class PlaylistParser;
 class PodcastParser;
+class CddaSongLoader;
 
 class SongLoader : public QObject {
   Q_OBJECT
@@ -73,14 +74,17 @@ class SongLoader : public QObject {
   Result LoadAudioCD();
 
 signals:
+  void AudioCDTracksLoaded();
   void LoadAudioCDFinished(bool success);
   void LoadRemoteFinished();
 
  private slots:
   void Timeout();
   void StopTypefind();
-  void AudioCDTagsLoaded(const QString& artist, const QString& album,
-                         const MusicBrainzClient::ResultList& results);
+#ifdef HAVE_AUDIOCD
+  void AudioCDTracksLoadedSlot(const SongList& songs);
+  void AudioCDTracksTagsLoaded(const SongList& songs);
+#endif // HAVE_AUDIOCD
 
  private:
   enum State { WaitingForType, WaitingForMagic, WaitingForData, Finished, };

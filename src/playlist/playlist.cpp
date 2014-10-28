@@ -1082,10 +1082,11 @@ void Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos,
                                          bool play_now, bool enqueue) {
   PlaylistItemList items;
   for (const Song& song : songs) {
-    if (song.id() == -1)
-      items << PlaylistItemPtr(new SongPlaylistItem(song));
-    else
+    if (song.is_library_song()) {
       items << PlaylistItemPtr(new LibraryPlaylistItem(song));
+    } else {
+      items << PlaylistItemPtr(new SongPlaylistItem(song));
+    }
   }
   InsertItems(items, pos, play_now, enqueue);
 }
@@ -1151,13 +1152,15 @@ void Playlist::UpdateItems(const SongList& songs) {
       if (item->Metadata().url() == song.url() &&
           (item->Metadata().filetype() == Song::Type_Unknown ||
            // Stream may change and may need to be updated too
-           item->Metadata().filetype() == Song::Type_Stream)) {
+           item->Metadata().filetype() == Song::Type_Stream ||
+           // And CD tracks as well (tags are loaded in a second step)
+           item->Metadata().filetype() == Song::Type_Cdda)) {
         PlaylistItemPtr new_item;
-        if (song.id() == -1) {
-          new_item = PlaylistItemPtr(new SongPlaylistItem(song));
-        } else {
+        if (song.is_library_song()) {
           new_item = PlaylistItemPtr(new LibraryPlaylistItem(song));
           library_items_by_id_.insertMulti(song.id(), new_item);
+        } else {
+          new_item = PlaylistItemPtr(new SongPlaylistItem(song));
         }
         items_[i] = new_item;
         emit dataChanged(index(i, 0), index(i, ColumnCount - 1));

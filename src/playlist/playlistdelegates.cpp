@@ -475,6 +475,8 @@ QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url,
       icon = QIcon(":/providers/jamendo.png");
     } else if (url.host() == "api.soundcloud.com") {
       icon = QIcon(":/providers/soundcloud.png");
+    } else if (url.scheme() == "cdda") {
+      icon = IconLoader::Load("media-optical");
     }
   }
   pixmap = icon.pixmap(size.height());
