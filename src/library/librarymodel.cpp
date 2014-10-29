@@ -206,6 +206,9 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
           case GroupBy_Performer:
             key = song.performer();
             break;
+          case GroupBy_Disc:
+            key = song.disc();
+            break;
           case GroupBy_Grouping:
             key = song.grouping();
             break;
@@ -296,6 +299,7 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
     case GroupBy_Artist:
     case GroupBy_Composer:
     case GroupBy_Performer:
+    case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
     case GroupBy_AlbumArtist:
@@ -334,6 +338,7 @@ QString LibraryModel::DividerDisplayText(GroupBy type,
     case GroupBy_Artist:
     case GroupBy_Composer:
     case GroupBy_Performer:
+    case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
     case GroupBy_AlbumArtist:
@@ -783,11 +788,14 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
     case GroupBy_Performer:
       q->SetColumnSpec("DISTINCT performer");
       break;
+    case GroupBy_Disc:
+      q->SetColumnSpec("DISTINCT disc");
+      break;
     case GroupBy_Grouping:
       q->SetColumnSpec("DISTINCT grouping");
       break;
     case GroupBy_YearAlbum:
-      q->SetColumnSpec("DISTINCT year, album");
+      q->SetColumnSpec("DISTINCT year, album, grouping");
       break;
     case GroupBy_Year:
       q->SetColumnSpec("DISTINCT year");
@@ -831,6 +839,7 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item,
     case GroupBy_YearAlbum:
       q->AddWhere("year", item->metadata.year());
       q->AddWhere("album", item->metadata.album());
+      q->AddWhere("grouping", item->metadata.grouping());
       break;
     case GroupBy_Year:
       q->AddWhere("year", item->key);
@@ -840,6 +849,9 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item,
       break;
     case GroupBy_Performer:
       q->AddWhere("performer", item->key);
+      break;
+    case GroupBy_Disc:
+      q->AddWhere("disc", item->key);
       break;
     case GroupBy_Grouping:
       q->AddWhere("grouping", item->key);
@@ -904,8 +916,9 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
       year = qMax(0, row.value(0).toInt());
       item->metadata.set_year(row.value(0).toInt());
       item->metadata.set_album(row.value(1).toString());
+      item->metadata.set_grouping(row.value(2).toString());
       item->key = PrettyYearAlbum(year, item->metadata.album());
-      item->sort_text = SortTextForYear(year) + item->metadata.album();
+      item->sort_text = SortTextForYear(year) + item->metadata.grouping() + item->metadata.album();
       break;
 
     case GroupBy_Year:
@@ -916,6 +929,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
 
     case GroupBy_Composer:
     case GroupBy_Performer:
+    case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
     case GroupBy_Album:
@@ -968,7 +982,7 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
       item->metadata.set_year(year);
       item->metadata.set_album(s.album());
       item->key = PrettyYearAlbum(year, s.album());
-      item->sort_text = SortTextForYear(year) + s.album();
+      item->sort_text = SortTextForYear(year) + s.grouping() + s.album();
       break;
 
     case GroupBy_Year:
@@ -981,6 +995,8 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
       item->key = s.composer();
     case GroupBy_Performer:
       item->key = s.performer();
+    case GroupBy_Disc:
+      item->key = s.disc();
     case GroupBy_Grouping:
       item->key = s.grouping();
     case GroupBy_Genre:
