@@ -795,7 +795,7 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
       q->SetColumnSpec("DISTINCT grouping");
       break;
     case GroupBy_YearAlbum:
-      q->SetColumnSpec("DISTINCT year, album");
+      q->SetColumnSpec("DISTINCT year, album, grouping");
       break;
     case GroupBy_Year:
       q->SetColumnSpec("DISTINCT year");
@@ -839,6 +839,7 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item,
     case GroupBy_YearAlbum:
       q->AddWhere("year", item->metadata.year());
       q->AddWhere("album", item->metadata.album());
+      q->AddWhere("grouping", item->metadata.grouping());
       break;
     case GroupBy_Year:
       q->AddWhere("year", item->key);
@@ -915,8 +916,9 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
       year = qMax(0, row.value(0).toInt());
       item->metadata.set_year(row.value(0).toInt());
       item->metadata.set_album(row.value(1).toString());
+      item->metadata.set_grouping(row.value(2).toString());
       item->key = PrettyYearAlbum(year, item->metadata.album());
-      item->sort_text = SortTextForYear(year) + item->metadata.album();
+      item->sort_text = SortTextForYear(year) + item->metadata.grouping() + item->metadata.album();
       break;
 
     case GroupBy_Year:
@@ -980,7 +982,7 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
       item->metadata.set_year(year);
       item->metadata.set_album(s.album());
       item->key = PrettyYearAlbum(year, s.album());
-      item->sort_text = SortTextForYear(year) + s.album();
+      item->sort_text = SortTextForYear(year) + s.grouping() + s.album();
       break;
 
     case GroupBy_Year:
