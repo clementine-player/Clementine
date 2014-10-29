@@ -54,6 +54,9 @@ class MusicOwner {
   int id() const { return id_; }
   int song_count() const { return songs_count_; }
   static QList<MusicOwner> parseMusicOwnerList(const QVariant& request_result);
+  // quick and dirty solution for creating MusicOwner instance for
+  // logged in user
+  void setId(int id) { id_ = id; }
 
  private:
   friend QDataStream& operator<<(QDataStream& stream, const MusicOwner& val);
@@ -110,6 +113,7 @@ class VkService : public InternetService {
   static const char* kDefCacheFilename;
   static QString DefaultCacheDir();
   static const int kMaxVkSongList;
+  static const int kMaxVkWallPostList;
   static const int kCustomSongCount;
 
   enum ItemType {
@@ -117,16 +121,19 @@ class VkService : public InternetService {
     Type_More,
 
     Type_Recommendations,
-    Type_MyMusic,
+    Type_Music,
     Type_Bookmark,
     Type_Album,
+    Type_Wall,
+    Type_AlbumList,
 
     Type_Search
   };
 
   enum Role {
     Role_MusicOwnerMetadata = InternetModel::RoleCount,
-    Role_AlbumMetadata
+    Role_AlbumMetadata,
+    Role_MoreMetadata
   };
 
   Application* app() const { return app_; }
@@ -198,9 +205,11 @@ signals:
 
   /* Music */
   void SongStopped();
-  void UpdateMyMusic();
-  void UpdateBookmarkSongs(QStandardItem* item);
+  void UpdateMusic(QStandardItem* item);
+  void UpdateAlbumList(QStandardItem* item);
   void UpdateAlbumSongs(QStandardItem* item);
+  void UpdateWallSongs(QStandardItem* item);
+  void MoreWallSongs(QStandardItem* item);
   void FindSongs(const QString& query);
   void FindMore();
   void UpdateRecommendations();
@@ -219,14 +228,20 @@ signals:
   void SongSearchReceived(const SearchID& id, Vreen::AudioItemListReply* reply);
   void GroupSearchReceived(const SearchID& id, Vreen::Reply* reply);
   void UserOrGroupReceived(const SearchID& id, Vreen::Reply* reply);
-  void AlbumListReceived(Vreen::AudioAlbumItemListReply* reply);
+  void AlbumListReceived(QStandardItem* parent,
+                         Vreen::AudioAlbumItemListReply* reply);
   void BroadcastChangeReceived(Vreen::IntReply* reply);
 
   void AppendLoadedSongs(QStandardItem* item, Vreen::AudioItemListReply* reply);
   void RecommendationsLoaded(Vreen::AudioItemListReply* reply);
   void SearchResultLoaded(const SearchID& id, const SongList& songs);
+  void WallPostsLoaded(QStandardItem* item, Vreen::Reply* reply, int offset);
 
  private:
+  bool isItemBusy(const QStandardItem* item);
+  int TypeOfItem(const QStandardItem* item);
+  Vreen::AudioItemList handleWallPosts(const QVariant& response);
+
   /* Interface */
   QStandardItem* CreateAndAppendRow(QStandardItem* parent,
                                     VkService::ItemType type);
@@ -236,6 +251,8 @@ signals:
 
   /* Music */
   void LoadAndAppendSongList(QStandardItem* item, int uid, int album_id = -1);
+  void LoadAndAppendWallSongList(QStandardItem* item, const MusicOwner& owner,
+                                 int offset = 0);
   Song FromAudioItem(const Vreen::AudioItem& item);
   SongList FromAudioList(const Vreen::AudioItemList& list);
   void AppendSongs(QStandardItem* parent, const SongList& songs);
@@ -244,19 +261,24 @@ signals:
   void SaveBookmarks();
   void LoadBookmarks();
 
-  void LoadAlbums();
-  QStandardItem* AppendAlbum(const Vreen::AudioAlbumItem& album);
+  void LoadAlbums(QStandardItem* parent, const MusicOwner& owner);
+  QStandardItem* AppendAlbum(QStandardItem* parent,
+                             const Vreen::AudioAlbumItem& album);
+  QStandardItem* AppendAlbumList(QStandardItem* parent, bool myself = false);
+
+  QStandardItem* AppendWall(QStandardItem* parent);
+  QStandardItem* AppendMusic(QStandardItem* parent, bool myself = false);
 
   /* Interface */
   QStandardItem* root_item_;
   QStandardItem* recommendations_item_;
   QStandardItem* my_music_item_;
+  QStandardItem* my_albums_item_;
   QStandardItem* search_result_item_;
 
   QMenu* context_menu_;
 
   QAction* update_item_;
-  QAction* update_recommendations_;
   QAction* find_this_artist_;
   QAction* add_to_my_music_;
   QAction* remove_from_my_music_;
