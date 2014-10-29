@@ -205,11 +205,11 @@ signals:
 
   /* Music */
   void SongStopped();
-  void UpdateMusic(QStandardItem *item);
+  void UpdateMusic(QStandardItem* item);
   void UpdateAlbumList(QStandardItem* item);
   void UpdateAlbumSongs(QStandardItem* item);
   void UpdateWallSongs(QStandardItem* item);
-  void MoreWallSongs(QStandardItem *item);
+  void MoreWallSongs(QStandardItem* item);
   void FindSongs(const QString& query);
   void FindMore();
   void UpdateRecommendations();
@@ -228,18 +228,19 @@ signals:
   void SongSearchReceived(const SearchID& id, Vreen::AudioItemListReply* reply);
   void GroupSearchReceived(const SearchID& id, Vreen::Reply* reply);
   void UserOrGroupReceived(const SearchID& id, Vreen::Reply* reply);
-  void AlbumListReceived(QStandardItem* parent, Vreen::AudioAlbumItemListReply* reply);
+  void AlbumListReceived(QStandardItem* parent,
+                         Vreen::AudioAlbumItemListReply* reply);
   void BroadcastChangeReceived(Vreen::IntReply* reply);
 
   void AppendLoadedSongs(QStandardItem* item, Vreen::AudioItemListReply* reply);
   void RecommendationsLoaded(Vreen::AudioItemListReply* reply);
   void SearchResultLoaded(const SearchID& id, const SongList& songs);
-  void WallPostsLoaded(QStandardItem *item, Vreen::Reply *reply, int offset);
+  void WallPostsLoaded(QStandardItem* item, Vreen::Reply* reply, int offset);
 
  private:
-  bool isItemBusy(QStandardItem *item);
-  int TypeOfItem(QStandardItem *item);
-  Vreen::AudioItemList handleWallPosts(const QVariant &response);
+  bool isItemBusy(const QStandardItem* item);
+  int TypeOfItem(const QStandardItem* item);
+  Vreen::AudioItemList handleWallPosts(const QVariant& response);
 
   /* Interface */
   QStandardItem* CreateAndAppendRow(QStandardItem* parent,
@@ -250,7 +251,8 @@ signals:
 
   /* Music */
   void LoadAndAppendSongList(QStandardItem* item, int uid, int album_id = -1);
-  void LoadAndAppendWallSongList(QStandardItem *item, const MusicOwner &owner, int offset = 0);
+  void LoadAndAppendWallSongList(QStandardItem* item, const MusicOwner& owner,
+                                 int offset = 0);
   Song FromAudioItem(const Vreen::AudioItem& item);
   SongList FromAudioList(const Vreen::AudioItemList& list);
   void AppendSongs(QStandardItem* parent, const SongList& songs);
@@ -260,11 +262,12 @@ signals:
   void LoadBookmarks();
 
   void LoadAlbums(QStandardItem* parent, const MusicOwner& owner);
-  QStandardItem* AppendAlbum(QStandardItem* parent, const Vreen::AudioAlbumItem& album);
+  QStandardItem* AppendAlbum(QStandardItem* parent,
+                             const Vreen::AudioAlbumItem& album);
   QStandardItem* AppendAlbumList(QStandardItem* parent, bool myself = false);
 
-  QStandardItem* AppendWall(QStandardItem *parent);
-  QStandardItem* AppendMusic(QStandardItem *parent, bool myself = false);
+  QStandardItem* AppendWall(QStandardItem* parent);
+  QStandardItem* AppendMusic(QStandardItem* parent, bool myself = false);
 
   /* Interface */
   QStandardItem* root_item_;

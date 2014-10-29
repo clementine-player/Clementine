@@ -261,7 +261,6 @@ QStandardItem* VkService::CreateRootItem() {
 }
 
 void VkService::LazyPopulate(QStandardItem* parent) {
-    qLog(Debug) << "LazyPopulate";
   switch (parent->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
       UpdateRoot();
@@ -342,7 +341,7 @@ void VkService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
 
   QModelIndex current(model()->current_index());
-  QStandardItem *current_item = model()->itemFromIndex(current);
+  QStandardItem* current_item = model()->itemFromIndex(current);
 
   const int item_type = current.data(InternetModel::Role_Type).toInt();
   const int parent_type =
@@ -356,17 +355,17 @@ void VkService::ShowContextMenu(const QPoint& global_pos) {
   const bool is_bookmark = item_type == Type_Bookmark;
 
   const bool is_updatable =
-      item_type != Type_Bookmark &&
-      item_type != Type_Loading &&
-      item_type != Type_More &&
-      item_type != Type_Search &&
+      item_type != Type_Bookmark && item_type != Type_Loading &&
+      item_type != Type_More && item_type != Type_Search &&
       parent_type != Type_Search;
 
   const bool is_update_enable =
-      //To prevent call LazyPopulate twice when we try to Update not populated item
+      // To prevent call LazyPopulate twice when we try to Update not populated
+      // item
       !current.data(InternetModel::Role_CanLazyLoad).toBool() &&
       !current.parent().data(InternetModel::Role_CanLazyLoad).toBool() &&
-      //disable update action until all of item's children have finished updating
+      // disable update action until all of item's children have finished
+      // updating
       !isItemBusy(model()->itemFromIndex(current));
 
   bool is_in_mymusic = false;
@@ -645,8 +644,7 @@ void VkService::Error(Vreen::Client::Error error) {
  * My Music
  */
 
-void VkService::UpdateMusic(QStandardItem *item)
-{
+void VkService::UpdateMusic(QStandardItem* item) {
   if (item) {
     MusicOwner owner = item->data(Role_MusicOwnerMetadata).value<MusicOwner>();
     LoadAndAppendSongList(item, owner.id());
@@ -770,19 +768,15 @@ QStandardItem* VkService::AppendBookmark(const MusicOwner& owner) {
 
 void VkService::UpdateItem() {
   QModelIndex current(model()->current_index());
-  QStandardItem *item;
-
-  if (current.data(InternetModel::Role_Type).toInt() == InternetModel::Type_Track) {
-    item = model()->itemFromIndex(current.parent());
-  } else {
-    item = model()->itemFromIndex(current);
-  }
+  QStandardItem* item = current.data(InternetModel::Role_Type).toInt() ==
+                                InternetModel::Type_Track
+                            ? model()->itemFromIndex(current.parent())
+                            : model()->itemFromIndex(current);
 
   LazyPopulate(item);
 }
 
 void VkService::UpdateAlbumList(QStandardItem* item) {
-  qLog(Debug) << "Update album list";
   MusicOwner owner = item->data(Role_MusicOwnerMetadata).value<MusicOwner>();
   ClearStandardItem(item);
   CreateAndAppendRow(item, Type_Loading);
@@ -795,12 +789,14 @@ void VkService::UpdateAlbumList(QStandardItem* item) {
 
 void VkService::LoadAlbums(QStandardItem* parent, const MusicOwner& owner) {
   auto albums_request = audio_provider_->getAlbums(owner.id());
-  NewClosure(albums_request, SIGNAL(resultReady(QVariant)), this,
-             SLOT(AlbumListReceived(QStandardItem*, Vreen::AudioAlbumItemListReply*)),
-             parent, albums_request);
+  NewClosure(
+      albums_request, SIGNAL(resultReady(QVariant)), this,
+      SLOT(AlbumListReceived(QStandardItem*, Vreen::AudioAlbumItemListReply*)),
+      parent, albums_request);
 }
 
-QStandardItem* VkService::AppendAlbum(QStandardItem* parent, const Vreen::AudioAlbumItem& album) {
+QStandardItem* VkService::AppendAlbum(QStandardItem* parent,
+                                      const Vreen::AudioAlbumItem& album) {
   QStandardItem* item =
       new QStandardItem(QIcon(":vk/playlist.png"), album.title());
 
@@ -814,14 +810,15 @@ QStandardItem* VkService::AppendAlbum(QStandardItem* parent, const Vreen::AudioA
   return item;
 }
 
-QStandardItem *VkService::AppendAlbumList(QStandardItem *parent, bool myself)
-{
+QStandardItem* VkService::AppendAlbumList(QStandardItem* parent, bool myself) {
   MusicOwner owner;
   QStandardItem* item;
 
   if (myself) {
     item = new QStandardItem(QIcon(":vk/discography.png"), tr("My Albums"));
-    owner.setId(UserID()); //TODO: do this better
+    // TODO: Do this better. We have incomplete MusicOwner instance
+    // for logged in user.
+    owner.setId(UserID());
     my_albums_item_ = item;
   } else {
     owner = parent->data(Role_MusicOwnerMetadata).value<MusicOwner>();
@@ -836,7 +833,8 @@ QStandardItem *VkService::AppendAlbumList(QStandardItem *parent, bool myself)
   return item;
 }
 
-void VkService::AlbumListReceived(QStandardItem* parent, Vreen::AudioAlbumItemListReply* reply) {
+void VkService::AlbumListReceived(QStandardItem* parent,
+                                  Vreen::AudioAlbumItemListReply* reply) {
   Vreen::AudioAlbumItemList albums = reply->result();
   RemoveLastRow(parent, Type_Loading);
   for (const auto& album : albums) {
@@ -855,11 +853,10 @@ void VkService::UpdateAlbumSongs(QStandardItem* item) {
  * Wall
  */
 
-QStandardItem* VkService::AppendWall(QStandardItem *parent) {
+QStandardItem* VkService::AppendWall(QStandardItem* parent) {
   QStandardItem* item =
       new QStandardItem(QIcon(":vk/playlist.png"), tr("Wall"));
-  MusicOwner owner =
-      parent->data(Role_MusicOwnerMetadata).value<MusicOwner>();
+  MusicOwner owner = parent->data(Role_MusicOwnerMetadata).value<MusicOwner>();
 
   item->setData(QVariant::fromValue(owner), Role_MusicOwnerMetadata);
   item->setData(Type_Wall, InternetModel::Role_Type);
@@ -871,14 +868,15 @@ QStandardItem* VkService::AppendWall(QStandardItem *parent) {
   return item;
 }
 
-QStandardItem *VkService::AppendMusic(QStandardItem *parent, bool myself)
-{
+QStandardItem* VkService::AppendMusic(QStandardItem* parent, bool myself) {
   MusicOwner owner;
   QStandardItem* item;
 
   if (myself) {
     item = new QStandardItem(QIcon(":vk/my_music.png"), tr("My Music"));
-    owner.setId(UserID()); //TODO: do this better
+    // TODO: Do this better. We have incomplete MusicOwner instance
+    // for logged in user.
+    owner.setId(UserID());
     my_music_item_ = item;
   } else {
     item = new QStandardItem(QIcon(":vk/playlist.png"), tr("Music"));
@@ -895,16 +893,14 @@ QStandardItem *VkService::AppendMusic(QStandardItem *parent, bool myself)
   return item;
 }
 
-void VkService::UpdateWallSongs(QStandardItem *item)
-{
+void VkService::UpdateWallSongs(QStandardItem* item) {
   MusicOwner owner = item->data(Role_MusicOwnerMetadata).value<MusicOwner>();
   ClearStandardItem(item);
   LoadAndAppendWallSongList(item, owner);
 }
 
-void VkService::MoreWallSongs(QStandardItem *item)
-{
-  QStandardItem *parent = item->parent();
+void VkService::MoreWallSongs(QStandardItem* item) {
+  QStandardItem* parent = item->parent();
   MusicOwner owner = parent->data(Role_MusicOwnerMetadata).value<MusicOwner>();
   int offset = item->data(Role_MoreMetadata).value<int>();
 
@@ -912,11 +908,12 @@ void VkService::MoreWallSongs(QStandardItem *item)
   LoadAndAppendWallSongList(parent, owner, offset);
 }
 
-void VkService::WallPostsLoaded(QStandardItem *item, Vreen::Reply *reply, int offset) {
-  auto _response = reply->response().toMap();
-  int count = _response.value("count").toInt();
+void VkService::WallPostsLoaded(QStandardItem* item, Vreen::Reply* reply,
+                                int offset) {
+  auto response = reply->response().toMap();
+  int count = response.value("count").toInt();
 
-  SongList songs = FromAudioList(handleWallPosts(_response.value("items")));
+  SongList songs = FromAudioList(handleWallPosts(response.value("items")));
 
   RemoveLastRow(item, Type_Loading);
   AppendSongs(item, songs);
@@ -926,7 +923,8 @@ void VkService::WallPostsLoaded(QStandardItem *item, Vreen::Reply *reply, int of
   }
 }
 
-void VkService::LoadAndAppendWallSongList(QStandardItem* item, const MusicOwner &owner, int offset) {
+void VkService::LoadAndAppendWallSongList(QStandardItem* item,
+                                          const MusicOwner& owner, int offset) {
   if (item) {
     CreateAndAppendRow(item, Type_Loading);
     QVariantMap args;
@@ -946,8 +944,8 @@ void VkService::LoadAndAppendWallSongList(QStandardItem* item, const MusicOwner 
 
     auto reply = client_->request("execute", args);
     NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
-               SLOT(WallPostsLoaded(QStandardItem*,Vreen::Reply*, int)),
-               item, reply, offset + kMaxVkWallPostList);
+               SLOT(WallPostsLoaded(QStandardItem*, Vreen::Reply*, int)), item,
+               reply, offset + kMaxVkWallPostList);
   }
 }
 
@@ -962,7 +960,8 @@ void VkService::FindThisArtist() {
 void VkService::AddToMyMusic() {
   SongId id = ExtractIds(selected_song_.url());
   auto reply = audio_provider_->addToLibrary(id.audio_id, id.owner_id);
-  connect(reply, SIGNAL(resultReady(QVariant)), this, SLOT(UpdateMusic(my_music_item_)));
+  connect(reply, SIGNAL(resultReady(QVariant)), this,
+          SLOT(UpdateMusic(my_music_item_)));
 }
 
 void VkService::AddToMyMusicCurrent() {
@@ -976,7 +975,8 @@ void VkService::RemoveFromMyMusic() {
   SongId id = ExtractIds(selected_song_.url());
   if (id.owner_id == UserID()) {
     auto reply = audio_provider_->removeFromLibrary(id.audio_id, id.owner_id);
-    connect(reply, SIGNAL(resultReady(QVariant)), this, SLOT(UpdateMusic(my_music_item_)));
+    connect(reply, SIGNAL(resultReady(QVariant)), this,
+            SLOT(UpdateMusic(my_music_item_)));
   } else {
     qLog(Error) << "Tried to delete song that not owned by user (" << UserID()
                 << selected_song_.url();
@@ -1409,27 +1409,24 @@ void VkService::UserOrGroupReceived(const SearchID& id, Vreen::Reply* reply) {
  * Utils
  */
 
-int VkService::TypeOfItem(QStandardItem *item)
-{
+int VkService::TypeOfItem(const QStandardItem* item) {
   return item->data(InternetModel::Role_Type).toInt();
 }
 
-bool VkService::isItemBusy(QStandardItem *item)
-{
-  if (TypeOfItem(item) == InternetModel::Type_Track)
-      item = item->parent();
+bool VkService::isItemBusy(const QStandardItem* item) {
+  const QStandardItem* cur_item =
+      TypeOfItem(item) == InternetModel::Type_Track ? item->parent() : item;
 
-  int r_count = item->rowCount();
+  int r_count = cur_item->rowCount();
   bool flag = false;
 
   if (r_count) {
-    if (TypeOfItem(item->child(r_count - 1)) == Type_Loading)
-      return true;
+    if (TypeOfItem(cur_item->child(r_count - 1)) == Type_Loading) return true;
 
-    int t = TypeOfItem(item);
-    if (item == root_item_ || t == Type_Bookmark || t == Type_AlbumList) {
+    int t = TypeOfItem(cur_item);
+    if (cur_item == root_item_ || t == Type_Bookmark || t == Type_AlbumList) {
       for (int i = 0; i < r_count; i++) {
-          flag |= isItemBusy(item->child(i));
+        flag |= isItemBusy(cur_item->child(i));
       }
     }
   }
@@ -1481,30 +1478,29 @@ bool VkService::WaitForReply(Vreen::Reply* reply) {
   return true;
 }
 
-Vreen::AudioItemList VkService::handleWallPosts(const QVariant &response)
-{
-    Vreen::AudioItemList items;
-    auto list = response.toList();
-    foreach (auto i, list) {
-        auto attachments = i.toList();
-        foreach(auto ii, attachments) {
-            auto item = ii.toMap();
-            if (item.value("type") == "audio") {
-                auto map = item.value("audio").toMap();
-                Vreen::AudioItem audio;
+Vreen::AudioItemList VkService::handleWallPosts(const QVariant& response) {
+  Vreen::AudioItemList items;
+  auto list = response.toList();
+  for (const auto& i : list) {
+    auto attachments = i.toList();
+    for (const auto& j : attachments) {
+      auto item = j.toMap();
+      if (item.value("type") == "audio") {
+        auto map = item.value("audio").toMap();
+        Vreen::AudioItem audio;
 
-                audio.setId(map.value("id").toInt());
-                audio.setOwnerId(map.value("owner_id").toInt());
-                audio.setArtist(map.value("artist").toString());
-                audio.setTitle(map.value("title").toString());
-                audio.setDuration(map.value("duration").toReal());
-                audio.setAlbumId(map.value("album").toInt());
-                audio.setLyricsId(map.value("lyrics_id").toInt());
-                audio.setUrl(map.value("url").toUrl());
+        audio.setId(map.value("id").toInt());
+        audio.setOwnerId(map.value("owner_id").toInt());
+        audio.setArtist(map.value("artist").toString());
+        audio.setTitle(map.value("title").toString());
+        audio.setDuration(map.value("duration").toReal());
+        audio.setAlbumId(map.value("album").toInt());
+        audio.setLyricsId(map.value("lyrics_id").toInt());
+        audio.setUrl(map.value("url").toUrl());
 
-                items.append(audio);
-            }
-        }
+        items.append(audio);
+      }
     }
-    return items;
+  }
+  return items;
 }

@@ -93,7 +93,8 @@ QNetworkRequest VkConnection::makeRequest(const QString& method,
   QUrl url = kApiUrl;
   url.setPath(url.path() % QLatin1Literal("/") % method);
   for (auto it = args.constBegin(); it != args.constEnd(); ++it) {
-    url.addEncodedQueryItem(QUrl::toPercentEncoding(it.key()), QUrl::toPercentEncoding(it.value().toString()));
+    url.addEncodedQueryItem(QUrl::toPercentEncoding(it.key()),
+                            QUrl::toPercentEncoding(it.value().toString()));
   }
   url.addEncodedQueryItem("access_token", access_token_);
   return QNetworkRequest(url);
