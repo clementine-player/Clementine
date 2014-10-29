@@ -45,8 +45,7 @@ SpotifyServer* SpotifySearchProvider::server() {
   if (service_->login_state() != SpotifyService::LoginState_LoggedIn)
     return nullptr;
 
-  if (!service_->IsBlobInstalled())
-    return nullptr;
+  if (!service_->IsBlobInstalled()) return nullptr;
 
   server_ = service_->server();
   connect(server_, SIGNAL(SearchResults(pb::spotify::SearchResponse)),
@@ -90,28 +89,58 @@ void SpotifySearchProvider::SearchFinishedSlot(
   PendingState state = it.value();
   queries_.erase(it);
 
+  QMap<std::string, std::string> album_dedup;
   ResultList ret;
-  for (int i = 0; i < response.result_size(); ++i) {
-    const pb::spotify::Track& track = response.result(i);
-
-    Result result(this);
-    SpotifyService::SongFromProtobuf(track, &result.metadata_);
-
-    ret << result;
-  }
 
   for (int i = 0; i < response.album_size(); ++i) {
     const pb::spotify::Album& album = response.album(i);
 
+    QHash<QString, int> artist_count;
+    QString artist, majority_artist;
+    int majority_count = 0;
+
+    // Choose an album artist
     for (int j = 0; j < album.track_size(); ++j) {
+      for (int k = 0; k < album.track(j).artist_size(); ++k) {
+        artist = QStringFromStdString(album.track(j).artist(k));
+        if (artist_count.contains(artist)) {
+          artist_count[artist]++;
+        } else {
+          artist_count[artist] = 1;
+        }
+        if (artist_count[artist] > majority_count) {
+          majority_count = artist_count[artist];
+          majority_artist = artist;
+        }
+      }
+    }
+
+    for (int j = 0; j < album.track_size(); ++j) {
+      album_dedup.insertMulti(album.track(j).album(), album.track(j).title());
+
       Result result(this);
       SpotifyService::SongFromProtobuf(album.track(j), &result.metadata_);
 
       // Just use the album index as an id.
       result.metadata_.set_album_id(i);
+      result.metadata_.set_albumartist(majority_artist);
 
       ret << result;
     }
+  }
+
+  for (int i = 0; i < response.result_size(); ++i) {
+    const pb::spotify::Track& track = response.result(i);
+
+    if (album_dedup.contains(track.album()) &&
+        album_dedup.values(track.album()).contains(track.title())) {
+      continue;
+    }
+
+    Result result(this);
+    SpotifyService::SongFromProtobuf(track, &result.metadata_);
+
+    ret << result;
   }
 
   emit ResultsAvailable(state.orig_id_, ret);
