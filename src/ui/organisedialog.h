@@ -41,13 +41,13 @@ class OrganiseDialog : public QDialog {
   Q_OBJECT
 
  public:
-  OrganiseDialog(TaskManager* task_manager, QWidget* parent = nullptr);
+  OrganiseDialog(TaskManager* task_manager, QWidget* parent = nullptr, QObject* caller = nullptr);
   ~OrganiseDialog();
 
   static const char* kDefaultFormat;
   static const char* kSettingsGroup;
-
   QSize sizeHint() const;
+  QObject* caller_;
 
   void SetDestinationModel(QAbstractItemModel* model, bool devices = false);
 

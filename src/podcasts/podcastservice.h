@@ -65,6 +65,7 @@ class PodcastService : public InternetService {
 
  public slots:
   void AddPodcast();
+  void FileCopied(int database_id);
 
  private slots:
   void UpdateSelectedPodcast();

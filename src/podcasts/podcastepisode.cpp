@@ -179,6 +179,7 @@ Song PodcastEpisode::ToSong(const Podcast& podcast) const {
   ret.set_length_nanosec(kNsecPerSec * duration_secs());
   ret.set_year(publication_date().date().year());
   ret.set_comment(description());
+  ret.set_id(database_id());
 
   if (ret.length_nanosec() < 0) {
     ret.set_length_nanosec(-1);

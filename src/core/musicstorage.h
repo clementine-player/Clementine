@@ -51,6 +51,7 @@ class MusicStorage {
     QString destination_;
     Song metadata_;
     bool overwrite_;
+    bool mark_as_listened_;
     bool remove_original_;
     ProgressFunction progress_;
   };
