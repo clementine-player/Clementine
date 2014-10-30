@@ -46,8 +46,9 @@ class OrganiseDialog : public QDialog {
 
   static const char* kDefaultFormat;
   static const char* kSettingsGroup;
-  QSize sizeHint() const;
   QObject* caller_;
+
+  QSize sizeHint() const;
 
   void SetDestinationModel(QAbstractItemModel* model, bool devices = false);
 

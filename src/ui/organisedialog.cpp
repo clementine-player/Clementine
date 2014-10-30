@@ -45,12 +45,12 @@ const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
 
 OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent, QObject* caller)
     : QDialog(parent),
+      caller_(caller),
       ui_(new Ui_OrganiseDialog),
       task_manager_(task_manager),
       total_size_(0),
       resized_by_user_(false) {
   ui_->setupUi(this);
-  caller_=caller;
   connect(ui_->button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));
 
@@ -351,9 +351,11 @@ void OrganiseDialog::accept() {
   Organise* organise = new Organise(
       task_manager_, storage, format_, copy, ui_->overwrite->isChecked(),
       ui_->mark_as_listened->isChecked(),
-      new_songs_info_, ui_->eject_after->isChecked(), caller_);
+      new_songs_info_, ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)),
           SLOT(OrganiseFinished(QStringList)));
+  connect(organise, SIGNAL(FileCopied(int)),
+          caller_, SLOT(FileCopied(int)));
   organise->Start();
 
   QDialog::accept();

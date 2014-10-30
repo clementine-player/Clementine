@@ -40,7 +40,7 @@ Organise::Organise(TaskManager* task_manager,
                    std::shared_ptr<MusicStorage> destination,
                    const OrganiseFormat& format, bool copy, bool overwrite,
                    bool mark_as_listened,
-                   const NewSongInfoList& songs_info, bool eject_after, QObject* caller)
+                   const NewSongInfoList& songs_info, bool eject_after)
     : thread_(nullptr),
       task_manager_(task_manager),
       transcoder_(new Transcoder(this)),
@@ -61,12 +61,6 @@ Organise::Organise(TaskManager* task_manager,
   for (const NewSongInfo& song_info : songs_info) {
     tasks_pending_ << Task(song_info);
   }
-  connect(this, SIGNAL(FileCopied(int)), caller, SLOT(FileCopied(int)));
-}
-
-Organise::~Organise()
-{
-  disconnect(SIGNAL(FileCopied(int)));
 }
 
 void Organise::Start() {
