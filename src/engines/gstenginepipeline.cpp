@@ -235,25 +235,20 @@ bool GstEnginePipeline::Init() {
       !device_.toString().isEmpty()) {
     switch (device_.type()) {
       case QVariant::Int:
-        g_object_set(G_OBJECT(audiosink_),
-                     "device", device_.toInt(),
-                     nullptr);
+        g_object_set(G_OBJECT(audiosink_), "device", device_.toInt(), nullptr);
         break;
       case QVariant::String:
-        g_object_set(G_OBJECT(audiosink_),
-                     "device", device_.toString().toUtf8().constData(),
-                     nullptr);
+        g_object_set(G_OBJECT(audiosink_), "device",
+                     device_.toString().toUtf8().constData(), nullptr);
         break;
 
-      #ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
       case QVariant::ByteArray: {
         GUID guid = QUuid(device_.toByteArray());
-        g_object_set(G_OBJECT(audiosink_),
-                     "device", &guid,
-                     nullptr);
+        g_object_set(G_OBJECT(audiosink_), "device", &guid, nullptr);
         break;
       }
-      #endif  // Q_OS_WIN32
+#endif  // Q_OS_WIN32
 
       default:
         qLog(Warning) << "Unknown device type" << device_;
@@ -322,8 +317,8 @@ bool GstEnginePipeline::Init() {
   // We do it here because we want pre-equalized and pre-volume samples
   // so that our visualization are not be affected by them.
   pad = gst_element_get_static_pad(event_probe, "src");
-  gst_pad_add_probe(
-      pad, GST_PAD_PROBE_TYPE_EVENT_UPSTREAM, &EventHandoffCallback, this, NULL);
+  gst_pad_add_probe(pad, GST_PAD_PROBE_TYPE_EVENT_UPSTREAM,
+                    &EventHandoffCallback, this, NULL);
   gst_object_unref(pad);
 
   // Configure the fakesink properly
@@ -334,8 +329,8 @@ bool GstEnginePipeline::Init() {
 
   int last_band_frequency = 0;
   for (int i = 0; i < kEqBandCount; ++i) {
-    GstObject* band = GST_OBJECT(gst_child_proxy_get_child_by_index(
-        GST_CHILD_PROXY(equalizer_), i));
+    GstObject* band = GST_OBJECT(
+        gst_child_proxy_get_child_by_index(GST_CHILD_PROXY(equalizer_), i));
 
     const float frequency = kEqBandFrequencies[i];
     const float bandwidth = frequency - last_band_frequency;
@@ -369,9 +364,8 @@ bool GstEnginePipeline::Init() {
 
   // Link the elements with special caps
   // The scope path through the tee gets 16-bit ints.
-  GstCaps* caps16 = gst_caps_new_simple ("audio/x-raw",
-                                         "format", G_TYPE_STRING, "S16LE",
-                                         NULL);
+  GstCaps* caps16 = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
+                                        "S16LE", NULL);
   gst_element_link_filtered(probe_converter, probe_sink, caps16);
   gst_caps_unref(caps16);
 
@@ -394,8 +388,7 @@ bool GstEnginePipeline::Init() {
 
   // Add probes and handlers.
   gst_pad_add_probe(gst_element_get_static_pad(probe_converter, "src"),
-                    GST_PAD_PROBE_TYPE_BUFFER,
-                    HandoffCallback, this, nullptr);
+                    GST_PAD_PROBE_TYPE_BUFFER, HandoffCallback, this, nullptr);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
                            BusCallbackSync, this, nullptr);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
@@ -456,9 +449,8 @@ bool GstEnginePipeline::InitFromUrl(const QUrl& url, qint64 end_nanosec) {
 
 GstEnginePipeline::~GstEnginePipeline() {
   if (pipeline_) {
-    gst_bus_set_sync_handler(
-        gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
-        nullptr, nullptr, nullptr);
+    gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
+                             nullptr, nullptr, nullptr);
     g_source_remove(bus_cb_id_);
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(GST_OBJECT(pipeline_));
@@ -719,20 +711,16 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
   // decodebin.
   // "Running time" is the time since the last flushing seek.
   GstClockTime running_time = gst_segment_to_running_time(
-      &instance->last_decodebin_segment_,
-      GST_FORMAT_TIME,
+      &instance->last_decodebin_segment_, GST_FORMAT_TIME,
       instance->last_decodebin_segment_.position);
   gst_pad_set_offset(pad, running_time);
 
   // Add a probe to the pad so we can update last_decodebin_segment_.
-  gst_pad_add_probe(pad,
-                    static_cast<GstPadProbeType>(
-                        GST_PAD_PROBE_TYPE_BUFFER |
-                        GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM |
-                        GST_PAD_PROBE_TYPE_EVENT_FLUSH),
-                    DecodebinProbe,
-                    instance,
-                    nullptr);
+  gst_pad_add_probe(
+      pad, static_cast<GstPadProbeType>(GST_PAD_PROBE_TYPE_BUFFER |
+                                        GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM |
+                                        GST_PAD_PROBE_TYPE_EVENT_FLUSH),
+      DecodebinProbe, instance, nullptr);
 
   instance->pipeline_is_connected_ = true;
   if (instance->pending_seek_nanosec_ != -1 &&
@@ -985,21 +973,22 @@ GstState GstEnginePipeline::state() const {
 
 QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
   if (url_.scheme() == "spotify" && !buffering_) {
-      const GstState current_state = this->state();
+    const GstState current_state = this->state();
 
-      if (state == GST_STATE_PAUSED && current_state == GST_STATE_PLAYING) {
-        SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+    if (state == GST_STATE_PAUSED && current_state == GST_STATE_PLAYING) {
+      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
-        // Need to schedule this in the spotify service's thread
-        QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
-                                  Q_ARG(bool, true));
-      } else if (state == GST_STATE_PLAYING && current_state == GST_STATE_PAUSED) {
-        SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+      // Need to schedule this in the spotify service's thread
+      QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
+                                Q_ARG(bool, true));
+    } else if (state == GST_STATE_PLAYING &&
+               current_state == GST_STATE_PAUSED) {
+      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
-        // Need to schedule this in the spotify service's thread
-        QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
-                                  Q_ARG(bool, false));
-      }
+      // Need to schedule this in the spotify service's thread
+      QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
+                                Q_ARG(bool, false));
+    }
   }
   return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
       &set_state_threadpool_, &gst_element_set_state, pipeline_, state);

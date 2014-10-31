@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,26 +15,28 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PLSPARSER_H
-#define PLSPARSER_H
+#ifndef INTERNETSHOWSETTINGSPAGE_H
+#define INTERNETSHOWSETTINGSPAGE_H
 
-#include "parserbase.h"
+#include "ui/settingspage.h"
+#include "ui_internetshowsettingspage.h"
 
-class PLSParser : public ParserBase {
+#include <QIcon>
+
+class QTreeWidgetItem;
+class Ui_InternetShowSettingsPage;
+
+class InternetShowSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  PLSParser(LibraryBackendInterface* library, QObject* parent = nullptr);
+  InternetShowSettingsPage(SettingsDialog* dialog);
 
-  QString name() const { return "PLS"; }
-  QStringList file_extensions() const { return QStringList() << "pls"; }
+  void Load();
+  void Save();
 
-  bool TryMagic(const QByteArray& data) const;
-
-  SongList Load(QIODevice* device, const QString& playlist_path = "",
-                const QDir& dir = QDir()) const;
-  void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
-            Playlist::Path path_type = Playlist::Path_Automatic) const;
+ private:
+  std::unique_ptr<Ui_InternetShowSettingsPage> ui_;
 };
 
-#endif  // PLSPARSER_H
+#endif  // INTERNETSHOWSETTINGSPAGE_H

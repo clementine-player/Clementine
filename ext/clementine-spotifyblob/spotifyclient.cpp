@@ -604,7 +604,6 @@ void SpotifyClient::PlaylistStateChangedForGetPlaylists(sp_playlist* pl,
 
 void SpotifyClient::AddTracksToPlaylist(
     const pb::spotify::AddTracksToPlaylistRequest& req) {
-
   // Get the playlist we want to update
   int playlist_index = req.playlist_index();
   sp_playlist* playlist =
@@ -615,21 +614,22 @@ void SpotifyClient::AddTracksToPlaylist(
   }
 
   // Get the tracks we want to add
-  std::unique_ptr<sp_track*[]> tracks_array (new sp_track*[req.track_uri_size()]);
+  std::unique_ptr<sp_track* []> tracks_array(
+      new sp_track* [req.track_uri_size()]);
   for (int i = 0; i < req.track_uri_size(); ++i) {
     sp_link* track_link = sp_link_create_from_string(req.track_uri(i).c_str());
     sp_track* track = sp_link_as_track(track_link);
     sp_track_add_ref(track);
     sp_link_release(track_link);
     if (!track) {
-      qLog(Error) << "Track" << QString::fromStdString(req.track_uri(i)) << "not found";
+      qLog(Error) << "Track" << QString::fromStdString(req.track_uri(i))
+                  << "not found";
     }
     tracks_array[i] = track;
   }
 
   // Actually add the tracks to the playlist
-  if (sp_playlist_add_tracks(playlist, tracks_array.get(),
-                             req.track_uri_size(),
+  if (sp_playlist_add_tracks(playlist, tracks_array.get(), req.track_uri_size(),
                              0 /* TODO: don't insert at a hardcoded position */,
                              session_) != SP_ERROR_OK) {
     qLog(Error) << "Error when adding tracks!";
@@ -643,7 +643,6 @@ void SpotifyClient::AddTracksToPlaylist(
 
 void SpotifyClient::RemoveTracksFromPlaylist(
     const pb::spotify::RemoveTracksFromPlaylistRequest& req) {
-
   // Get the playlist we want to update
   int playlist_index = req.playlist_index();
   sp_playlist* playlist =
@@ -654,17 +653,16 @@ void SpotifyClient::RemoveTracksFromPlaylist(
   }
 
   // Get the position of the tracks we want to remove
-  std::unique_ptr<int[]> tracks_indices_array (new int[req.track_index_size()]);
+  std::unique_ptr<int[]> tracks_indices_array(new int[req.track_index_size()]);
   for (int i = 0; i < req.track_index_size(); ++i) {
     tracks_indices_array[i] = req.track_index(i);
   }
 
   if (sp_playlist_remove_tracks(playlist, tracks_indices_array.get(),
-                             req.track_index_size()) != SP_ERROR_OK) {
+                                req.track_index_size()) != SP_ERROR_OK) {
     qLog(Error) << "Error when removing tracks!";
   }
 }
-
 
 void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {
   sp_album* album = sp_track_album(track);

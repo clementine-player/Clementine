@@ -23,18 +23,14 @@
 namespace {
 
 static const int sBarkBands[] = {
-    100,  200,  300,  400,  510,  630,  770,   920,
-    1080, 1270, 1480, 1720, 2000, 2320, 2700,  3150,
-    3700, 4400, 5300, 6400, 7700, 9500, 12000, 15500 };
+    100,  200,  300,  400,  510,  630,  770,  920,  1080, 1270, 1480,  1720,
+    2000, 2320, 2700, 3150, 3700, 4400, 5300, 6400, 7700, 9500, 12000, 15500};
 
 static const int sBarkBandCount = arraysize(sBarkBands);
 
 }  // namespace
 
-MoodbarBuilder::MoodbarBuilder()
-    : bands_(0),
-      rate_hz_(0) {
-}
+MoodbarBuilder::MoodbarBuilder() : bands_(0), rate_hz_(0) {}
 
 int MoodbarBuilder::BandFrequency(int band) const {
   return ((rate_hz_ / 2) * band + rate_hz_ / 4) / bands_;
@@ -151,9 +147,8 @@ void MoodbarBuilder::Normalize(QList<Rgb>* vals, double Rgb::*member) {
 
   for (auto it = vals->begin(); it != vals->end(); ++it) {
     double* value = &((*it).*member);
-    *value = std::isfinite(*value)
-        ? qBound(0.0, (*value - mini) / delta, 1.0)
-        : 0;
+    *value =
+        std::isfinite(*value) ? qBound(0.0, (*value - mini) / delta, 1.0) : 0;
   }
 }
 
@@ -161,8 +156,7 @@ QByteArray MoodbarBuilder::Finish(int width) {
   QByteArray ret;
   ret.resize(width * 3);
   char* data = ret.data();
-  if (frames_.count() == 0)
-    return ret;
+  if (frames_.count() == 0) return ret;
 
   Normalize(&frames_, &Rgb::r);
   Normalize(&frames_, &Rgb::g);

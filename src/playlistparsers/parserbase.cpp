@@ -86,8 +86,7 @@ Song ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
   return song;
 }
 
-QString ParserBase::URLOrFilename(const QUrl& url,
-                                  const QDir& dir,
+QString ParserBase::URLOrFilename(const QUrl& url, const QDir& dir,
                                   Playlist::Path path_type) const {
   if (url.scheme() != "file") return url.toString();
 

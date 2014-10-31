@@ -76,7 +76,8 @@ class PlaylistManagerInterface : public QObject {
   virtual void New(const QString& name, const SongList& songs = SongList(),
                    const QString& special_type = QString()) = 0;
   virtual void Load(const QString& filename) = 0;
-  virtual void Save(int id, const QString& filename, Playlist::Path path_type) = 0;
+  virtual void Save(int id, const QString& filename,
+                    Playlist::Path path_type) = 0;
   virtual void Rename(int id, const QString& new_name) = 0;
   virtual void Delete(int id) = 0;
   virtual bool Close(int id) = 0;

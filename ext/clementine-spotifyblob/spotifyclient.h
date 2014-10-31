@@ -123,7 +123,8 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   void LoadPlaylist(const pb::spotify::LoadPlaylistRequest& req);
   void SyncPlaylist(const pb::spotify::SyncPlaylistRequest& req);
   void AddTracksToPlaylist(const pb::spotify::AddTracksToPlaylistRequest& req);
-  void RemoveTracksFromPlaylist(const pb::spotify::RemoveTracksFromPlaylistRequest& req);
+  void RemoveTracksFromPlaylist(
+      const pb::spotify::RemoveTracksFromPlaylistRequest& req);
   void StartPlayback(const pb::spotify::PlaybackRequest& req);
   void Seek(qint64 offset_nsec);
   void LoadImage(const QString& id_b64);
@@ -194,7 +195,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   QMap<sp_toplistbrowse*, pb::spotify::BrowseToplistRequest>
       pending_toplist_browses_;
 
-  QMap<sp_search*, QList<sp_albumbrowse*> > pending_search_album_browses_;
+  QMap<sp_search*, QList<sp_albumbrowse*>> pending_search_album_browses_;
   QMap<sp_albumbrowse*, sp_search*> pending_search_album_browse_responses_;
 
   QScopedPointer<MediaPipeline> media_pipeline_;
