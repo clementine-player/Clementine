@@ -58,11 +58,11 @@ void FHT::makeCasTable(void) {
 }
 
 float* FHT::copy(float* d, float* s) {
-  return (float*)memcpy(d, s, m_num * sizeof(float));
+  return static_cast<float*>(memcpy(d, s, m_num * sizeof(float)));
 }
 
 float* FHT::clear(float* d) {
-  return (float*)memset(d, 0, m_num * sizeof(float));
+  return static_cast<float*>(memset(d, 0, m_num * sizeof(float)));
 }
 
 void FHT::scale(float* p, float d) {
@@ -77,9 +77,9 @@ void FHT::logSpectrum(float* out, float* p) {
   int n = m_num / 2, i, j, k, *r;
   if (!m_log) {
     m_log = new int[n];
-    float f = n / log10((double)n);
+    float f = n / log10(static_cast<double>(n));
     for (i = 0, r = m_log; i < n; i++, r++) {
-      j = int(rint(log10(i + 1.0) * f));
+      j = static_cast<int>(rint(log10(i + 1.0) * f));
       *r = j >= n ? n - 1 : j;
     }
   }
@@ -87,9 +87,9 @@ void FHT::logSpectrum(float* out, float* p) {
   *out++ = *p = *p / 100;
   for (k = i = 1, r = m_log; i < n; i++) {
     j = *r++;
-    if (i == j)
+    if (i == j) {
       *out++ = p[i];
-    else {
+    } else {
       float base = p[k - 1];
       float step = (p[j] - base) / (j - (k - 1));
       for (float corr = 0; k <= j; k++, corr += step) *out++ = base + corr;
@@ -108,7 +108,7 @@ void FHT::semiLogSpectrum(float* p) {
 
 void FHT::spectrum(float* p) {
   power2(p);
-  for (int i = 0; i < (m_num / 2); i++, p++) *p = (float)sqrt(*p * .5);
+  for (int i = 0; i < (m_num / 2); i++, p++) *p = static_cast<float>(sqrt(*p * .5));
 }
 
 void FHT::power(float* p) {

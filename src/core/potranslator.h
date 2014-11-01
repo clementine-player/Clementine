@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef POTRANSLATOR_H
-#define POTRANSLATOR_H
+#ifndef CORE_POTRANSLATOR_H_
+#define CORE_POTRANSLATOR_H_
 
 #include <QTranslator>
 
@@ -34,4 +34,4 @@ class PoTranslator : public QTranslator {
   }
 };
 
-#endif  // POTRANSLATOR_H
+#endif  // CORE_POTRANSLATOR_H_

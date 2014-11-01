@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CACHEDLIST_H
-#define CACHEDLIST_H
+#ifndef CORE_CACHEDLIST_H_
+#define CORE_CACHEDLIST_H_
 
 #include <QDateTime>
 #include <QSettings>
@@ -98,4 +98,4 @@ class CachedList {
   ListType data_;
 };
 
-#endif  // CACHEDLIST_H
+#endif  // CORE_CACHEDLIST_H_

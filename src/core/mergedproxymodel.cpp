@@ -44,7 +44,7 @@ std::size_t hash_value(const QModelIndex& index) { return qHash(index); }
 namespace {
 
 struct Mapping {
-  Mapping(const QModelIndex& _source_index) : source_index(_source_index) {}
+  explicit Mapping(const QModelIndex& _source_index) : source_index(_source_index) {}
 
   QModelIndex source_index;
 };
@@ -190,7 +190,7 @@ void MergedProxyModel::SourceModelReset() {
 void MergedProxyModel::SubModelReset() {
   QAbstractItemModel* submodel = static_cast<QAbstractItemModel*>(sender());
 
-  // TODO: When we require Qt 4.6, use beginResetModel() and endResetModel()
+  // TODO(David Sansome): When we require Qt 4.6, use beginResetModel() and endResetModel()
   // in LibraryModel and catch those here - that will let us do away with this
   // std::numeric_limits<int>::max() hack.
 

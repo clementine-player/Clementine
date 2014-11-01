@@ -162,7 +162,7 @@ void SongLoader::AudioCDTracksTagsLoaded(const SongList& songs) {
   songs_ = songs;
   emit LoadAudioCDFinished(true);
 }
-#endif // HAVE_AUDIOCD
+#endif  // HAVE_AUDIOCD
 
 SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   qLog(Debug) << "Loading local file" << filename;
@@ -195,7 +195,6 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
 }
 
 void SongLoader::LoadLocalAsync(const QString& filename) {
-
   // First check to see if it's a directory - if so we will load all the songs
   // inside right away.
   if (QFileInfo(filename).isDir()) {
@@ -233,7 +232,7 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
 
     SongList song_list = cue_parser_->Load(&cue, matching_cue,
                                            QDir(filename.section('/', 0, -2)));
-    for (Song song: song_list){
+    for (Song song : song_list) {
       if (song.is_valid()) songs_ << song;
     }
     return;
@@ -242,7 +241,9 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
   // Assume it's just a normal file
   Song song;
   song.InitFromFilePartial(filename);
-  if (song.is_valid()) songs_ << song;
+  if (song.is_valid()) {
+    songs_ << song;
+  }
 }
 
 void SongLoader::LoadMetadataBlocking() {

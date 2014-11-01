@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SIMPLETREEMODEL_H
-#define SIMPLETREEMODEL_H
+#ifndef CORE_SIMPLETREEMODEL_H_
+#define CORE_SIMPLETREEMODEL_H_
 
 #include <QAbstractItemModel>
 
@@ -148,4 +148,4 @@ void SimpleTreeModel<T>::EmitDataChanged(T* item) {
   emit dataChanged(index, index);
 }
 
-#endif  // SIMPLETREEMODEL_H
+#endif  // CORE_SIMPLETREEMODEL_H_

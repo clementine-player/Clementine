@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GNOMEGLOBALSHORTCUTBACKEND_H
-#define GNOMEGLOBALSHORTCUTBACKEND_H
+#ifndef CORE_GNOMEGLOBALSHORTCUTBACKEND_H_
+#define CORE_GNOMEGLOBALSHORTCUTBACKEND_H_
 
 #include "globalshortcutbackend.h"
 
@@ -28,7 +28,7 @@ class GnomeGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
 
  public:
-  GnomeGlobalShortcutBackend(GlobalShortcuts* parent);
+  explicit GnomeGlobalShortcutBackend(GlobalShortcuts* parent);
 
   static const char* kGsdService;
   static const char* kGsdPath;
@@ -49,4 +49,4 @@ class GnomeGlobalShortcutBackend : public GlobalShortcutBackend {
   bool is_connected_;
 };
 
-#endif  // GNOMEGLOBALSHORTCUTBACKEND_H
+#endif  // CORE_GNOMEGLOBALSHORTCUTBACKEND_H_

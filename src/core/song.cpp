@@ -614,7 +614,7 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
 void Song::InitFromFilePartial(const QString& filename) {
   set_url(QUrl::fromLocalFile(filename));
   // We currently rely on filename suffix to know if it's a music file or not.
-  // TODO: I know this is not satisfying, but currently, we rely on TagLib
+  // TODO(Arnaud Bienner): I know this is not satisfying, but currently, we rely on TagLib
   // which seems to have the behavior (filename checks). Someday, it would be
   // nice to perform some magic tests everywhere.
   QFileInfo info(filename);
@@ -680,7 +680,7 @@ void Song::InitFromItdb(const Itdb_Track* track, const QString& prefix) {
   d->ctime_ = track->time_added;
   d->filesize_ = track->size;
   d->filetype_ = track->type2 ? Type_Mpeg : Type_Mp4;
-  d->rating_ = float(track->rating) / 100;  // 100 = 20 * 5 stars
+  d->rating_ = static_cast<float>(track->rating) / 100;  // 100 = 20 * 5 stars
   d->playcount_ = track->playcount;
   d->skipcount_ = track->skipcount;
   d->lastplayed_ = track->time_played;
@@ -747,7 +747,7 @@ void Song::InitFromMTP(const LIBMTP_track_t* track, const QString& host) {
   d->mtime_ = track->modificationdate;
   d->ctime_ = track->modificationdate;
 
-  d->rating_ = float(track->rating) / 100;
+  d->rating_ = static_cast<float>(track->rating) / 100;
   d->playcount_ = track->usecount;
 
   switch (track->filetype) {
@@ -1043,7 +1043,7 @@ bool Song::IsEditable() const {
 }
 
 bool Song::operator==(const Song& other) const {
-  // TODO: this isn't working for radios
+  // TODO(Paweł Bara): this isn't working for radios
   return url() == other.url() &&
          beginning_nanosec() == other.beginning_nanosec();
 }

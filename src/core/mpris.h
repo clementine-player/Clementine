@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MPRIS_H
-#define MPRIS_H
+#ifndef CORE_MPRIS_H_
+#define CORE_MPRIS_H_
 
 #include <QObject>
 
@@ -33,7 +33,7 @@ class Mpris : public QObject {
  public:
   Mpris(Application* app, QObject* parent = nullptr);
 
-signals:
+ signals:
   void RaiseMainWindow();
 
  private:
@@ -43,4 +43,4 @@ signals:
 
 }  // namespace mpris
 
-#endif  // MPRIS_H
+#endif  // CORE_MPRIS_H_

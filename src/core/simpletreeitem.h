@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SIMPLETREEITEM_H
-#define SIMPLETREEITEM_H
+#ifndef CORE_SIMPLETREEITEM_H_
+#define CORE_SIMPLETREEITEM_H_
 
 #include "simpletreemodel.h"
 
@@ -154,4 +154,4 @@ T* SimpleTreeItem<T>::ChildByKey(const QString& key) const {
   return nullptr;
 }
 
-#endif  // SIMPLETREEITEM_H
+#endif  // CORE_SIMPLETREEITEM_H_

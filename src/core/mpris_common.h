@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MPRIS_COMMON_H
-#define MPRIS_COMMON_H
+#ifndef CORE_MPRIS_COMMON_H_
+#define CORE_MPRIS_COMMON_H_
 
 #include <QDateTime>
 #include <QObject>
@@ -58,4 +58,4 @@ inline QString AsMPRISDateTimeType(uint time) {
 
 }  // namespace mpris
 
-#endif  // MPRIS_COMMON_H
+#endif  // CORE_MPRIS_COMMON_H_

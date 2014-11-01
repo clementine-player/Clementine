@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef QTFSLISTENER_H
-#define QTFSLISTENER_H
+#ifndef CORE_QTFSLISTENER_H_
+#define CORE_QTFSLISTENER_H_
 
 #include "filesystemwatcherinterface.h"
 
@@ -25,7 +25,7 @@
 class QtFSListener : public FileSystemWatcherInterface {
   Q_OBJECT
  public:
-  QtFSListener(QObject* parent);
+  explicit QtFSListener(QObject* parent);
   virtual void AddPath(const QString& path);
   virtual void RemovePath(const QString& path);
   virtual void Clear();
@@ -34,4 +34,4 @@ class QtFSListener : public FileSystemWatcherInterface {
   QFileSystemWatcher watcher_;
 };
 
-#endif
+#endif  // CORE_QTFSLISTENER_H_

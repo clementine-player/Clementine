@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SONGLOADER_H
-#define SONGLOADER_H
+#ifndef CORE_SONGLOADER_H_
+#define CORE_SONGLOADER_H_
 
 #include <functional>
 #include <memory>
@@ -41,6 +41,7 @@ class CddaSongLoader;
 
 class SongLoader : public QObject {
   Q_OBJECT
+
  public:
   SongLoader(LibraryBackendInterface* library, const Player* player,
              QObject* parent = nullptr);
@@ -73,7 +74,7 @@ class SongLoader : public QObject {
   void LoadMetadataBlocking();
   Result LoadAudioCD();
 
-signals:
+ signals:
   void AudioCDTracksLoaded();
   void LoadAudioCDFinished(bool success);
   void LoadRemoteFinished();
@@ -84,7 +85,7 @@ signals:
 #ifdef HAVE_AUDIOCD
   void AudioCDTracksLoadedSlot(const SongList& songs);
   void AudioCDTracksTagsLoaded(const SongList& songs);
-#endif // HAVE_AUDIOCD
+#endif  // HAVE_AUDIOCD
 
  private:
   enum State { WaitingForType, WaitingForMagic, WaitingForData, Finished, };
@@ -142,4 +143,4 @@ signals:
   QThreadPool thread_pool_;
 };
 
-#endif  // SONGLOADER_H
+#endif  // CORE_SONGLOADER_H_

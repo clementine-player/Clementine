@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SETTINGSPROVIDER_H
-#define SETTINGSPROVIDER_H
+#ifndef CORE_SETTINGSPROVIDER_H_
+#define CORE_SETTINGSPROVIDER_H_
 
 #include <QVariant>
 #include <QSettings>
@@ -55,4 +55,4 @@ class DefaultSettingsProvider : public SettingsProvider {
   QSettings backend_;
 };
 
-#endif  // SETTINGSPROVIDER_H
+#endif  // CORE_SETTINGSPROVIDER_H_

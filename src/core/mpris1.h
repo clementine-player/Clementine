@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MPRIS1_H
-#define MPRIS1_H
+#ifndef CORE_MPRIS1_H_
+#define CORE_MPRIS1_H_
 
 #include "core/player.h"
 
@@ -149,7 +149,7 @@ class Mpris1Player : public QObject {
   void CurrentSongChanged(const Song& song, const QString& art_uri,
                           const QImage&);
 
-signals:
+ signals:
   void CapsChange(int);
   void TrackChange(const QVariantMap&);
   void StatusChange(DBusStatus);
@@ -184,7 +184,7 @@ class Mpris1TrackList : public QObject {
   // Amarok extension
   void PlayTrack(int index);
 
-signals:
+ signals:
   void TrackListChange(int i);
 
  private slots:
@@ -196,4 +196,4 @@ signals:
 
 }  // namespace mpris
 
-#endif  // MPRIS1_H
+#endif  // CORE_MPRIS1_H_

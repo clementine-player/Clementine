@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TAGREADERCLIENT_H
-#define TAGREADERCLIENT_H
+#ifndef CORE_TAGREADERCLIENT_H_
+#define CORE_TAGREADERCLIENT_H_
 
 #include "song.h"
 #include "tagreadermessages.pb.h"
@@ -32,7 +32,7 @@ class TagReaderClient : public QObject {
   Q_OBJECT
 
  public:
-  TagReaderClient(QObject* parent = nullptr);
+  explicit TagReaderClient(QObject* parent = nullptr);
 
   typedef AbstractMessageHandler<pb::tagreader::Message> HandlerType;
   typedef HandlerType::ReplyType ReplyType;
@@ -61,7 +61,7 @@ class TagReaderClient : public QObject {
   bool IsMediaFileBlocking(const QString& filename);
   QImage LoadEmbeddedArtBlocking(const QString& filename);
 
-  // TODO: Make this not a singleton
+  // TODO(David Sansome): Make this not a singleton
   static TagReaderClient* Instance() { return sInstance; }
 
  public slots:
@@ -80,4 +80,4 @@ class TagReaderClient : public QObject {
 
 typedef TagReaderClient::ReplyType TagReaderReply;
 
-#endif  // TAGREADERCLIENT_H
+#endif  // CORE_TAGREADERCLIENT_H_

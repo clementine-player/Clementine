@@ -232,7 +232,7 @@ QString OrganiseFormat::TagValue(const QString& tag, const Song& song) const {
 
 OrganiseFormat::Validator::Validator(QObject* parent) : QValidator(parent) {}
 
-QValidator::State OrganiseFormat::Validator::validate(QString& input,
+QValidator::State OrganiseFormat::Validator::validate(const QString& input,
                                                       int&) const {
   QRegExp tag_regexp(kTagPattern);
 

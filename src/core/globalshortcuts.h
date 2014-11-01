@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GLOBALSHORTCUTS_H
-#define GLOBALSHORTCUTS_H
+#ifndef CORE_GLOBALSHORTCUTS_H_
+#define CORE_GLOBALSHORTCUTS_H_
 
 #include <QKeySequence>
 #include <QMap>
@@ -33,7 +33,7 @@ class GlobalShortcuts : public QWidget {
   Q_OBJECT
 
  public:
-  GlobalShortcuts(QWidget* parent = nullptr);
+  explicit GlobalShortcuts(QWidget* parent = nullptr);
 
   static const char* kSettingsGroup;
 
@@ -55,7 +55,7 @@ class GlobalShortcuts : public QWidget {
   void Unregister();
   void Register();
 
-signals:
+ signals:
   void Play();
   void Pause();
   void PlayPause();
@@ -96,4 +96,4 @@ signals:
   QSignalMapper* rating_signals_mapper_;
 };
 
-#endif
+#endif  // CORE_GLOBALSHORTCUTS_H_

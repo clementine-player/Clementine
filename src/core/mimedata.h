@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MIMEDATA_H
-#define MIMEDATA_H
+#ifndef CORE_MIMEDATA_H_
+#define CORE_MIMEDATA_H_
 
 #include <QMimeData>
 
@@ -72,4 +72,4 @@ class MimeData : public QMimeData {
   }
 };
 
-#endif  // MIMEDATA_H
+#endif  // CORE_MIMEDATA_H_

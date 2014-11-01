@@ -345,7 +345,7 @@ void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
 
 double Mpris2::Volume() const {
   if (mpris1_->player()) {
-    return double(mpris1_->player()->VolumeGet()) / 100;
+    return static_cast<double>(mpris1_->player()->VolumeGet()) / 100;
   } else {
     return 0.0;
   }
@@ -458,28 +458,28 @@ void Mpris2::OpenUri(const QString& uri) {
 }
 
 TrackIds Mpris2::Tracks() const {
-  // TODO
+  // TODO(John Maguire): ?
   return TrackIds();
 }
 
 bool Mpris2::CanEditTracks() const { return false; }
 
 TrackMetadata Mpris2::GetTracksMetadata(const TrackIds& tracks) const {
-  // TODO
+  // TODO(John Maguire): ?
   return TrackMetadata();
 }
 
 void Mpris2::AddTrack(const QString& uri, const QDBusObjectPath& afterTrack,
                       bool setAsCurrent) {
-  // TODO
+  // TODO(John Maguire): ?
 }
 
 void Mpris2::RemoveTrack(const QDBusObjectPath& trackId) {
-  // TODO
+  // TODO(John Maguire): ?
 }
 
 void Mpris2::GoTo(const QDBusObjectPath& trackId) {
-  // TODO
+  // TODO(John Maguire): ?
 }
 
 quint32 Mpris2::PlaylistCount() const {
@@ -529,7 +529,7 @@ void Mpris2::ActivatePlaylist(const QDBusObjectPath& playlist_id) {
   app_->player()->Next();
 }
 
-// TODO: Support sort orders.
+// TODO(John Maguire): Support sort orders.
 MprisPlaylistList Mpris2::GetPlaylists(quint32 index, quint32 max_count,
                                        const QString& order,
                                        bool reverse_order) {

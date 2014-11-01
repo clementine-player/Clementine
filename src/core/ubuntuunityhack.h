@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef UBUNTUUNITYHACK_H
-#define UBUNTUUNITYHACK_H
+#ifndef CORE_UBUNTUUNITYHACK_H_
+#define CORE_UBUNTUUNITYHACK_H_
 
 #include <QObject>
 
@@ -25,7 +25,7 @@ class QProcess;
 class UbuntuUnityHack : public QObject {
   Q_OBJECT
  public:
-  UbuntuUnityHack(QObject* parent = nullptr);
+  explicit UbuntuUnityHack(QObject* parent = nullptr);
 
  private slots:
   void GetFinished(int exit_code);
@@ -37,4 +37,4 @@ class UbuntuUnityHack : public QObject {
   static const char* kUnitySystrayWhitelist;
 };
 
-#endif  // UBUNTUUNITYHACK_H
+#endif  // CORE_UBUNTUUNITYHACK_H_

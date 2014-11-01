@@ -91,9 +91,9 @@ QString PrettyTime(int seconds) {
 
   QString ret;
   if (hours)
-    ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);
+    ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);  // NOLINT(runtime/printf)
   else
-    ret.sprintf("%d:%02d", minutes, seconds);
+    ret.sprintf("%d:%02d", minutes, seconds);  // NOLINT(runtime/printf)
 
   return ret;
 }
@@ -105,7 +105,7 @@ QString PrettyTimeNanosec(qint64 nanoseconds) {
 QString WordyTime(quint64 seconds) {
   quint64 days = seconds / (60 * 60 * 24);
 
-  // TODO: Make the plural rules translatable
+  // TODO(David Sansome): Make the plural rules translatable
   QStringList parts;
 
   if (days) parts << (days == 1 ? tr("1 day") : tr("%1 days").arg(days));
@@ -152,11 +152,11 @@ QString PrettySize(quint64 bytes) {
     if (bytes <= 1000)
       ret = QString::number(bytes) + " bytes";
     else if (bytes <= 1000 * 1000)
-      ret.sprintf("%.1f KB", float(bytes) / 1000);
+      ret.sprintf("%.1f KB", static_cast<float>(bytes) / 1000);  // NOLINT(runtime/printf)
     else if (bytes <= 1000 * 1000 * 1000)
-      ret.sprintf("%.1f MB", float(bytes) / (1000 * 1000));
+      ret.sprintf("%.1f MB", static_cast<float>(bytes) / (1000 * 1000));  // NOLINT(runtime/printf)
     else
-      ret.sprintf("%.1f GB", float(bytes) / (1000 * 1000 * 1000));
+      ret.sprintf("%.1f GB", static_cast<float>(bytes) / (1000 * 1000 * 1000));  // NOLINT(runtime/printf)
   }
   return ret;
 }
@@ -419,8 +419,8 @@ QByteArray Hmac(const QByteArray& key, const QByteArray& data,
   const int kBlockSize = 64;  // bytes
   Q_ASSERT(key.length() <= kBlockSize);
 
-  QByteArray inner_padding(kBlockSize, char(0x36));
-  QByteArray outer_padding(kBlockSize, char(0x5c));
+  QByteArray inner_padding(kBlockSize, static_cast<char>(0x36));
+  QByteArray outer_padding(kBlockSize, static_cast<char>(0x5c));
 
   for (int i = 0; i < key.length(); ++i) {
     inner_padding[i] = inner_padding[i] ^ key[i];
@@ -475,7 +475,7 @@ QByteArray Sha256(const QByteArray& data) {
 }
 
 // File must not be open and will be closed afterwards!
-QByteArray Sha1File(QFile& file) {
+QByteArray Sha1File(const QFile& file) {
   file.open(QIODevice::ReadOnly);
   QCryptographicHash hash(QCryptographicHash::Sha1);
   QByteArray data;

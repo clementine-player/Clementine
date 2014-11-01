@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MERGEDPROXYMODEL_H
-#define MERGEDPROXYMODEL_H
+#ifndef CORE_MERGEDPROXYMODEL_H_
+#define CORE_MERGEDPROXYMODEL_H_
 
 #include <memory>
 
@@ -30,7 +30,7 @@ class MergedProxyModel : public QAbstractProxyModel {
   Q_OBJECT
 
  public:
-  MergedProxyModel(QObject* parent = nullptr);
+  explicit MergedProxyModel(QObject* parent = nullptr);
   ~MergedProxyModel();
 
   // Make another model appear as a child of the given item in the source model.
@@ -73,7 +73,7 @@ class MergedProxyModel : public QAbstractProxyModel {
   QModelIndexList mapFromSource(const QModelIndexList& source_indexes) const;
   QModelIndexList mapToSource(const QModelIndexList& proxy_indexes) const;
 
-signals:
+ signals:
   void SubModelReset(const QModelIndex& root, QAbstractItemModel* model);
 
  private slots:
@@ -107,4 +107,4 @@ signals:
   std::unique_ptr<MergedProxyModelPrivate> p_;
 };
 
-#endif  // MERGEDPROXYMODEL_H
+#endif  // CORE_MERGEDPROXYMODEL_H_

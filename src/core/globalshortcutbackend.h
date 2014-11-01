@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GLOBALSHORTCUTBACKEND_H
-#define GLOBALSHORTCUTBACKEND_H
+#ifndef CORE_GLOBALSHORTCUTBACKEND_H_
+#define CORE_GLOBALSHORTCUTBACKEND_H_
 
 #include <QObject>
 
@@ -26,7 +26,7 @@ class GlobalShortcutBackend : public QObject {
   Q_OBJECT
 
  public:
-  GlobalShortcutBackend(GlobalShortcuts* parent = nullptr);
+  explicit GlobalShortcutBackend(GlobalShortcuts* parent = nullptr);
   virtual ~GlobalShortcutBackend() {}
 
   bool is_active() const { return active_; }
@@ -34,7 +34,7 @@ class GlobalShortcutBackend : public QObject {
   bool Register();
   void Unregister();
 
-signals:
+ signals:
   void RegisterFinished(bool success);
 
  protected:
@@ -45,4 +45,4 @@ signals:
   bool active_;
 };
 
-#endif  // GLOBALSHORTCUTBACKEND_H
+#endif  // CORE_GLOBALSHORTCUTBACKEND_H_

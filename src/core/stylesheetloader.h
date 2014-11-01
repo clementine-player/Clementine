@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STYLESHEETLOADER_H
-#define STYLESHEETLOADER_H
+#ifndef CORE_STYLESHEETLOADER_H_
+#define CORE_STYLESHEETLOADER_H_
 
 #include <QString>
 #include <QPalette>
@@ -25,7 +25,7 @@
 
 class StyleSheetLoader : public QObject {
  public:
-  StyleSheetLoader(QObject* parent = nullptr);
+  explicit StyleSheetLoader(QObject* parent = nullptr);
 
   // Sets the given stylesheet on the given widget.
   // If the stylesheet contains strings like %palette-[role], these get replaced
@@ -45,4 +45,4 @@ class StyleSheetLoader : public QObject {
   QMap<QWidget*, QString> filenames_;
 };
 
-#endif  // STYLESHEETLOADER_H
+#endif  // CORE_STYLESHEETLOADER_H_

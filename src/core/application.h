@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef CORE_APPLICATION_H_
+#define CORE_APPLICATION_H_
 
 #include "ui/settingsdialog.h"
 
@@ -54,7 +54,7 @@ class Application : public QObject {
  public:
   static bool kIsPortable;
 
-  Application(QObject* parent = nullptr);
+  explicit Application(QObject* parent = nullptr);
   ~Application();
 
   const QString& language_name() const { return language_name_; }
@@ -100,7 +100,7 @@ class Application : public QObject {
   void ReloadSettings();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
 
-signals:
+ signals:
   void ErrorAdded(const QString& message);
   void SettingsChanged();
   void SettingsDialogRequested(SettingsDialog::Page page);
@@ -136,4 +136,4 @@ signals:
   QList<QThread*> threads_;
 };
 
-#endif  // APPLICATION_H
+#endif  // CORE_APPLICATION_H_

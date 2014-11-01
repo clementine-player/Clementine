@@ -15,14 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMMUSICSTORAGE_H
-#define FILESYSTEMMUSICSTORAGE_H
+#ifndef CORE_FILESYSTEMMUSICSTORAGE_H_
+#define CORE_FILESYSTEMMUSICSTORAGE_H_
 
 #include "musicstorage.h"
 
 class FilesystemMusicStorage : public virtual MusicStorage {
  public:
-  FilesystemMusicStorage(const QString& root);
+  explicit FilesystemMusicStorage(const QString& root);
   ~FilesystemMusicStorage() {}
 
   QString LocalPath() const { return root_; }
@@ -34,4 +34,4 @@ class FilesystemMusicStorage : public virtual MusicStorage {
   QString root_;
 };
 
-#endif  // FILESYSTEMMUSICSTORAGE_H
+#endif  // CORE_FILESYSTEMMUSICSTORAGE_H_

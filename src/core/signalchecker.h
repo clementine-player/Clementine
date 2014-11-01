@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SIGNALCHECKER_H
-#define SIGNALCHECKER_H
+#ifndef CORE_SIGNALCHECKER_H_
+#define CORE_SIGNALCHECKER_H_
 
 #include <glib-object.h>
 
@@ -34,4 +34,4 @@ bool CheckedGConnect(gpointer source, const char* signal, GCallback callback,
   CheckedGConnect(source, signal, G_CALLBACK(callback), data, \
                   FUNCTION_ARITY(callback));
 
-#endif  // SIGNALCHECKER_H
+#endif  // CORE_SIGNALCHECKER_H_

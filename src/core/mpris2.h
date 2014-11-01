@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MPRIS2_H
-#define MPRIS2_H
+#ifndef CORE_MPRIS2_H_
+#define CORE_MPRIS2_H_
 
 #include "playlist/playlistitem.h"
 
@@ -175,7 +175,7 @@ class Mpris2 : public QObject {
   QList<MprisPlaylist> GetPlaylists(quint32 index, quint32 max_count,
                                     const QString& order, bool reverse_order);
 
-signals:
+ signals:
   // Player
   void Seeked(qlonglong position);
 
@@ -228,4 +228,4 @@ signals:
 
 }  // namespace mpris
 
-#endif
+#endif  // CORE_MPRIS2_H_

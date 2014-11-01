@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MACFSLISTENER_H
-#define MACFSLISTENER_H
+#ifndef CORE_MACFSLISTENER_H_
+#define CORE_MACFSLISTENER_H_
 
 #include <CoreServices/CoreServices.h>
 
@@ -36,7 +36,7 @@ class MacFSListener : public FileSystemWatcherInterface {
   void RemovePath(const QString& path);
   void Clear();
 
-signals:
+ signals:
   void PathChanged(const QString& path);
 
  private slots:
@@ -57,4 +57,4 @@ signals:
   QTimer update_timer_;
 };
 
-#endif
+#endif  // CORE_MACFSLISTENER_H_

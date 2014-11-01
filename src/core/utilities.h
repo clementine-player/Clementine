@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#ifndef CORE_UTILITIES_H_
+#define CORE_UTILITIES_H_
 
 #include <memory>
 
@@ -64,7 +64,7 @@ QByteArray HmacMd5(const QByteArray& key, const QByteArray& data);
 QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
 QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
 QByteArray Sha256(const QByteArray& data);
-QByteArray Sha1File(QFile& file);
+QByteArray Sha1File(const QFile& file);
 QByteArray Sha1CoverHash(const QString& artist, const QString& album);
 
 // Picks an unused ephemeral port number.  Doesn't hold the port open so
@@ -145,11 +145,11 @@ int GetThreadId();
 bool IsLaptop();
 
 QString SystemLanguageName();
-}
+}  // namespace Utilities
 
 class ScopedWCharArray {
  public:
-  ScopedWCharArray(const QString& str);
+  explicit ScopedWCharArray(const QString& str);
 
   QString ToString() const { return QString::fromWCharArray(data_.get()); }
 
@@ -166,4 +166,4 @@ class ScopedWCharArray {
   std::unique_ptr<wchar_t[]> data_;
 };
 
-#endif  // UTILITIES_H
+#endif  // CORE_UTILITIES_H_

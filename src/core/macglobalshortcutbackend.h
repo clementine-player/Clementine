@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MACGLOBALSHORTCUTBACKEND_H
-#define MACGLOBALSHORTCUTBACKEND_H
+#ifndef CORE_MACGLOBALSHORTCUTBACKEND_H_
+#define CORE_MACGLOBALSHORTCUTBACKEND_H_
 
 #include <memory>
 
@@ -32,7 +32,7 @@ class MacGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
 
  public:
-  MacGlobalShortcutBackend(GlobalShortcuts* parent);
+  explicit MacGlobalShortcutBackend(GlobalShortcuts* parent);
   virtual ~MacGlobalShortcutBackend();
 
   bool IsAccessibilityEnabled() const;
@@ -53,4 +53,4 @@ class MacGlobalShortcutBackend : public GlobalShortcutBackend {
   std::unique_ptr<MacGlobalShortcutBackendPrivate> p_;
 };
 
-#endif  // MACGLOBALSHORTCUTBACKEND_H
+#endif  // CORE_MACGLOBALSHORTCUTBACKEND_H_

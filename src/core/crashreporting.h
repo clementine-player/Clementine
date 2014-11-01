@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CRASHREPORTING_H
-#define CRASHREPORTING_H
+#ifndef CORE_CRASHREPORTING_H_
+#define CORE_CRASHREPORTING_H_
 
 #include <memory>
 
@@ -70,7 +70,7 @@ class CrashSender : public QObject {
   Q_OBJECT
 
  public:
-  CrashSender(const QString& path);
+  explicit CrashSender(const QString& path);
 
   // Returns false if the user doesn't want to send the crash report (caller
   // should exit), or true if he does (caller should start the Qt event loop).
@@ -90,4 +90,4 @@ class CrashSender : public QObject {
   QProgressDialog* progress_;
 };
 
-#endif  // CRASHREPORTING_H
+#endif  // CORE_CRASHREPORTING_H_

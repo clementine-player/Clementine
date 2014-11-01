@@ -189,9 +189,8 @@ void Organise::ProcessSomeFiles() {
 
     if (!destination_->CopyToStorage(job)) {
       files_with_errors_ << task.song_info_.song_.basefilename();
-    }
-    else {
-      if(job.mark_as_listened_) {
+    } else {
+      if (job.mark_as_listened_) {
         emit FileCopied(job.metadata_.id());
       }
     }

@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef CORE_PLAYER_H_
+#define CORE_PLAYER_H_
 
 #include <memory>
 
@@ -37,7 +37,7 @@ class PlayerInterface : public QObject {
   Q_OBJECT
 
  public:
-  PlayerInterface(QObject* parent = nullptr) : QObject(parent) {}
+  explicit PlayerInterface(QObject* parent = nullptr) : QObject(parent) {}
 
   virtual EngineBase* engine() const = 0;
   virtual Engine::State GetState() const = 0;
@@ -82,7 +82,7 @@ class PlayerInterface : public QObject {
   virtual void Play() = 0;
   virtual void ShowOSD() = 0;
 
-signals:
+ signals:
   void Playing();
   void Paused();
   void Stopped();
@@ -190,4 +190,4 @@ class Player : public PlayerInterface {
   int volume_before_mute_;
 };
 
-#endif  // PLAYER_H
+#endif  // CORE_PLAYER_H_

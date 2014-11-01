@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SONG_H
-#define SONG_H
+#ifndef CORE_SONG_H_
+#define CORE_SONG_H_
 
 #include <QFuture>
 #include <QImage>
@@ -301,4 +301,4 @@ uint qHash(const Song& song);
 // Hash function using field checked in IsSimilar function
 uint HashSimilar(const Song& song);
 
-#endif  // SONG_H
+#endif  // CORE_SONG_H_

@@ -18,8 +18,8 @@
 //
 // $Id$
 
-#ifndef FHT_H
-#define FHT_H
+#ifndef CORE_FHT_H_
+#define CORE_FHT_H_
 
 /**
  * Implementation of the Hartley Transform after Bracewell's discrete
@@ -54,7 +54,7 @@ class FHT {
   * should be at least 3. Values of more than 3 need a trigonometry table.
   * @see makeCasTable()
   */
-  FHT(int);
+  explicit FHT(int);
 
   ~FHT();
   inline int sizeExp() const { return m_exp2; }
@@ -115,4 +115,4 @@ class FHT {
   void transform(float*);
 };
 
-#endif
+#endif  // CORE_FHT_H_

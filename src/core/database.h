@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DATABASE_H
-#define DATABASE_H
+#ifndef CORE_DATABASE_H_
+#define CORE_DATABASE_H_
 
 #include <QMap>
 #include <QMutex>
@@ -30,7 +30,6 @@
 #include "gtest/gtest_prod.h"
 
 extern "C" {
-
 struct sqlite3_tokenizer;
 struct sqlite3_tokenizer_cursor;
 struct sqlite3_tokenizer_module;
@@ -65,7 +64,7 @@ class Database : public QObject {
   QMutex* Mutex() { return &mutex_; }
 
   void RecreateAttachedDb(const QString& database_name);
-  void ExecSchemaCommands(QSqlDatabase& db, const QString& schema,
+  void ExecSchemaCommands(const QSqlDatabase& db, const QString& schema,
                           int schema_version, bool in_transaction = false);
 
   int startup_schema_version() const { return startup_schema_version_; }
@@ -75,10 +74,10 @@ class Database : public QObject {
                       const AttachedDatabase& database);
   void AttachDatabaseOnDbConnection(const QString& database_name,
                                     const AttachedDatabase& database,
-                                    QSqlDatabase& db);
+                                    const QSqlDatabase& db);
   void DetachDatabase(const QString& database_name);
 
-signals:
+ signals:
   void Error(const QString& message);
 
  public slots:
@@ -87,16 +86,16 @@ signals:
  private:
   void UpdateMainSchema(QSqlDatabase* db);
 
-  void ExecSchemaCommandsFromFile(QSqlDatabase& db, const QString& filename,
+  void ExecSchemaCommandsFromFile(const QSqlDatabase& db, const QString& filename,
                                   int schema_version,
                                   bool in_transaction = false);
-  void ExecSongTablesCommands(QSqlDatabase& db, const QStringList& song_tables,
+  void ExecSongTablesCommands(const QSqlDatabase& db, const QStringList& song_tables,
                               const QStringList& commands);
 
-  void UpdateDatabaseSchema(int version, QSqlDatabase& db);
-  void UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db);
-  QStringList SongsTables(QSqlDatabase& db, int schema_version) const;
-  bool IntegrityCheck(QSqlDatabase db);
+  void UpdateDatabaseSchema(int version, const QSqlDatabase& db);
+  void UrlEncodeFilenameColumn(const QString& table, const QSqlDatabase& db);
+  QStringList SongsTables(const QSqlDatabase& db, int schema_version) const;
+  bool IntegrityCheck(const QSqlDatabase db);
   void BackupFile(const QString& filename);
   bool OpenDatabase(const QString& filename, sqlite3** connection) const;
 
@@ -183,4 +182,4 @@ class MemoryDatabase : public Database {
   }
 };
 
-#endif  // DATABASE_H
+#endif  // CORE_DATABASE_H_

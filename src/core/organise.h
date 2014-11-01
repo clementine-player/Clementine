@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ORGANISE_H
-#define ORGANISE_H
+#ifndef CORE_ORGANISE_H_
+#define CORE_ORGANISE_H_
 
 #include <memory>
 
@@ -52,7 +52,7 @@ class Organise : public QObject {
 
   void Start();
 
-signals:
+ signals:
   void Finished(const QStringList& files_with_errors);
   void FileCopied(int database_id);
 
@@ -111,4 +111,4 @@ signals:
   QStringList files_with_errors_;
 };
 
-#endif  // ORGANISE_H
+#endif  // CORE_ORGANISE_H_

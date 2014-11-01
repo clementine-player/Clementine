@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TASKMANAGER_H
-#define TASKMANAGER_H
+#ifndef CORE_TASKMANAGER_H_
+#define CORE_TASKMANAGER_H_
 
 #include <QMap>
 #include <QMutex>
@@ -26,7 +26,7 @@ class TaskManager : public QObject {
   Q_OBJECT
 
  public:
-  TaskManager(QObject* parent = nullptr);
+  explicit TaskManager(QObject* parent = nullptr);
 
   struct Task {
     int id;
@@ -60,7 +60,7 @@ class TaskManager : public QObject {
   void SetTaskFinished(int id);
   int GetTaskProgress(int id);
 
-signals:
+ signals:
   void TasksChanged();
 
   void PauseLibraryWatchers();
@@ -74,4 +74,4 @@ signals:
   Q_DISABLE_COPY(TaskManager);
 };
 
-#endif  // TASKMANAGER_H
+#endif  // CORE_TASKMANAGER_H_

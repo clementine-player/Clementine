@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef QHASH_QURL_H
-#define QHASH_QURL_H
+#ifndef CORE_QHASH_QURL_H_
+#define CORE_QHASH_QURL_H_
 
 #include <QUrl>
 
@@ -24,4 +24,4 @@
 inline uint qHash(const QUrl& url) { return qHash(url.toEncoded()); }
 #endif
 
-#endif  // QHASH_QURL_H
+#endif  // CORE_QHASH_QURL_H_

@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COMMANDLINEOPTIONS_H
-#define COMMANDLINEOPTIONS_H
+#ifndef CORE_COMMANDLINEOPTIONS_H_
+#define CORE_COMMANDLINEOPTIONS_H_
 
 #include <QList>
 #include <QUrl>
@@ -114,4 +114,4 @@ class CommandlineOptions {
 QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a);
 QDataStream& operator>>(QDataStream& s, CommandlineOptions& a);
 
-#endif  // COMMANDLINEOPTIONS_H
+#endif  // CORE_COMMANDLINEOPTIONS_H_

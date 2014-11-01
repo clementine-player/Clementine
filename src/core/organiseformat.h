@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SRC_CORE_ORGANISEFORMAT_H_
-#define SRC_CORE_ORGANISEFORMAT_H_
+#ifndef CORE_ORGANISEFORMAT_H_
+#define CORE_ORGANISEFORMAT_H_
 
 #include <QSyntaxHighlighter>
 #include <QValidator>
@@ -51,7 +51,7 @@ class OrganiseFormat {
   class Validator : public QValidator {
    public:
     explicit Validator(QObject* parent = nullptr);
-    QValidator::State validate(QString& format, int& pos) const;
+    QValidator::State validate(const QString& format, const int& pos) const;
   };
 
   class SyntaxHighlighter : public QSyntaxHighlighter {
@@ -80,4 +80,4 @@ class OrganiseFormat {
   bool replace_the_;
 };
 
-#endif  // SRC_CORE_ORGANISEFORMAT_H_
+#endif  // CORE_ORGANISEFORMAT_H_

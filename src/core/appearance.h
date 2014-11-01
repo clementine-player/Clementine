@@ -15,15 +15,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef APPEARANCE_H
-#define APPEARANCE_H
+#ifndef CORE_APPEARANCE_H_
+#define CORE_APPEARANCE_H_
 
 #include <QColor>
 #include <QPalette>
 
 class Appearance : public QObject {
  public:
-  Appearance(QObject* parent = nullptr);
+  explicit Appearance(QObject* parent = nullptr);
   // Load the user preferred theme, which could the default system theme or a
   // custom set of colors that user has chosen
   void LoadUserTheme();
@@ -42,4 +42,4 @@ class Appearance : public QObject {
   QColor background_color_;
 };
 
-#endif  // APPEARANCE_H
+#endif  // CORE_APPEARANCE_H_

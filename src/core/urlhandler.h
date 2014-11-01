@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef URLHANDLER_H
-#define URLHANDLER_H
+#ifndef CORE_URLHANDLER_H_
+#define CORE_URLHANDLER_H_
 
 #include <QIcon>
 #include <QObject>
@@ -26,7 +26,7 @@ class UrlHandler : public QObject {
   Q_OBJECT
 
  public:
-  UrlHandler(QObject* parent = nullptr);
+  explicit UrlHandler(QObject* parent = nullptr);
 
   // The URL scheme that this handler handles.
   virtual QString scheme() const = 0;
@@ -75,11 +75,11 @@ class UrlHandler : public QObject {
 
   // Functions to be warned when something happen to a track handled by
   // UrlHandler.
-  virtual void TrackAboutToEnd() {};
-  virtual void TrackSkipped() {};
+  virtual void TrackAboutToEnd() {}
+  virtual void TrackSkipped() {}
 
-signals:
+ signals:
   void AsyncLoadComplete(const UrlHandler::LoadResult& result);
 };
 
-#endif  // URLHANDLER_H
+#endif  // CORE_URLHANDLER_H_
