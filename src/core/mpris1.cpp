@@ -2,6 +2,7 @@
    Copyright 2011, Paweł Bara <keirangtp@gmail.com>
    Copyright 2011-2012, David Sansome <me@davidsansome.com>
    Copyright 2013, Uwe Klotz <uwe.klotz@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
    Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
