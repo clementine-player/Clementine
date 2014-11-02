@@ -30,7 +30,7 @@ class SimpleTreeItem {
  public:
   SimpleTreeItem(int _type, SimpleTreeModel<T>* _model);  // For the root item
   SimpleTreeItem(int _type, const QString& _key, T* _parent = nullptr);
-  SimpleTreeItem(int _type, T* _parent = nullptr);
+  explicit SimpleTreeItem(int _type, T* _parent = nullptr);
   virtual ~SimpleTreeItem();
 
   void InsertNotify(T* _parent);

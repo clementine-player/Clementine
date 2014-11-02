@@ -29,7 +29,7 @@ class AddPodcastPage : public QWidget {
   Q_OBJECT
 
  public:
-  AddPodcastPage(Application* app, QWidget* parent = nullptr);
+  explicit AddPodcastPage(Application* app, QWidget* parent = nullptr);
 
   PodcastDiscoveryModel* model() const { return model_; }
 

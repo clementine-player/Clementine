@@ -25,7 +25,7 @@
 template <typename T>
 class ModelFutureWatcher : public QFutureWatcher<T> {
  public:
-  ModelFutureWatcher(const QModelIndex& index, QObject* parent = nullptr)
+  explicit ModelFutureWatcher(const QModelIndex& index, QObject* parent = nullptr)
       : QFutureWatcher<T>(parent), index_(index) {}
 
   ~ModelFutureWatcher() {}

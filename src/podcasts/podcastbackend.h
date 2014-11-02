@@ -31,7 +31,7 @@ class PodcastBackend : public QObject {
   Q_OBJECT
 
  public:
-  PodcastBackend(Application* app, QObject* parent = nullptr);
+  explicit PodcastBackend(Application* app, QObject* parent = nullptr);
 
   // Adds the podcast and any included Episodes to the database.  Updates the
   // podcast with a database ID.  If this podcast already has an ID set, this

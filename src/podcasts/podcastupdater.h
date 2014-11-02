@@ -36,7 +36,7 @@ class PodcastUpdater : public QObject {
   Q_OBJECT
 
  public:
-  PodcastUpdater(Application* app, QObject* parent = nullptr);
+  explicit PodcastUpdater(Application* app, QObject* parent = nullptr);
 
   static const char* kSettingsGroup;
 

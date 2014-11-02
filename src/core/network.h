@@ -61,7 +61,7 @@ class RedirectFollower : public QObject {
   Q_OBJECT
 
  public:
-  RedirectFollower(QNetworkReply* first_reply, int max_redirects = 5);
+  explicit RedirectFollower(QNetworkReply* first_reply, int max_redirects = 5);
 
   bool hit_redirect_limit() const { return redirects_remaining_ < 0; }
   QNetworkReply* reply() const { return current_reply_; }
@@ -106,7 +106,7 @@ class NetworkTimeouts : public QObject {
   Q_OBJECT
 
  public:
-  NetworkTimeouts(int timeout_msec, QObject* parent = nullptr);
+  explicit NetworkTimeouts(int timeout_msec, QObject* parent = nullptr);
 
   // TODO(John Maguire): Template this to avoid code duplication.
   void AddReply(QNetworkReply* reply);

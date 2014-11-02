@@ -116,7 +116,7 @@ class Player : public PlayerInterface {
   Q_OBJECT
 
  public:
-  Player(Application* app, QObject* parent = nullptr);
+  explicit Player(Application* app, QObject* parent = nullptr);
   ~Player();
 
   void Init();

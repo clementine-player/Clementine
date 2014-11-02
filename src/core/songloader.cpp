@@ -217,7 +217,8 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
   if (!parser) {
     // Check the file extension as well, maybe the magic failed, or it was a
     // basic M3U file which is just a plain list of filenames.
-    parser = playlist_parser_->ParserForExtension(QFileInfo(filename).suffix().toLower());
+    parser = playlist_parser_->
+      ParserForExtension(QFileInfo(filename).suffix().toLower());
   }
 
   if (parser) {

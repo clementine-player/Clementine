@@ -44,7 +44,7 @@ class PodcastDownloader : public QObject {
   Q_OBJECT
 
  public:
-  PodcastDownloader(Application* app, QObject* parent = nullptr);
+  explicit PodcastDownloader(Application* app, QObject* parent = nullptr);
 
   enum State { NotDownloading, Queued, Downloading, Finished };
 

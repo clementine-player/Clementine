@@ -177,6 +177,8 @@ QString OrganiseFormat::ParseBlock(QString block, const Song& song,
 QString OrganiseFormat::TagValue(const QString& tag, const Song& song) const {
   QString value;
 
+  // TODO(sobkas): What about nice switch statement?
+
   if (tag == "title")
     value = song.title();
   else if (tag == "album")

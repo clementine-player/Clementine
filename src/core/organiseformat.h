@@ -27,7 +27,7 @@
 
 class OrganiseFormat {
  public:
-  OrganiseFormat(const QString& format = QString());
+  explicit OrganiseFormat(const QString& format = QString());
 
   static const char* kTagPattern;
   static const char* kBlockPattern;

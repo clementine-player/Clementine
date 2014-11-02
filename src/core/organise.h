@@ -47,8 +47,9 @@ class Organise : public QObject {
   typedef QList<NewSongInfo> NewSongInfoList;
 
   Organise(TaskManager* task_manager, std::shared_ptr<MusicStorage> destination,
-           const OrganiseFormat& format, bool copy, bool overwrite, bool mark_as_listened,
-           const NewSongInfoList& songs, bool eject_after);
+           const OrganiseFormat& format, bool copy, bool overwrite,
+           bool mark_as_listened, const NewSongInfoList& songs,
+           bool eject_after);
 
   static const int kBatchSize;
   static const int kTranscodeProgressInterval;

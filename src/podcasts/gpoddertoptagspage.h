@@ -32,7 +32,7 @@ class GPodderTopTagsPage : public AddPodcastPage {
   Q_OBJECT
 
  public:
-  GPodderTopTagsPage(Application* app, QWidget* parent = nullptr);
+  explicit GPodderTopTagsPage(Application* app, QWidget* parent = nullptr);
   ~GPodderTopTagsPage();
 
   static const int kMaxTagCount;

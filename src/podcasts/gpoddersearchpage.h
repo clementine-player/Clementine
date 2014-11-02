@@ -32,7 +32,7 @@ class GPodderSearchPage : public AddPodcastPage {
   Q_OBJECT
 
  public:
-  GPodderSearchPage(Application* app, QWidget* parent = nullptr);
+  explicit GPodderSearchPage(Application* app, QWidget* parent = nullptr);
   ~GPodderSearchPage();
 
   void Show();

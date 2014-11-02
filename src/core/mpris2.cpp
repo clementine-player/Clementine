@@ -175,7 +175,7 @@ void Mpris2::EmitNotification(const QString& name) {
   if (value.isValid()) EmitNotification(name, value);
 }
 
-//------------------Root Interface--------------------------//
+  // ------------------Root Interface--------------- //
 
 bool Mpris2::CanQuit() const { return true; }
 

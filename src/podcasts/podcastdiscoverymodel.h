@@ -34,7 +34,7 @@ class PodcastDiscoveryModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  PodcastDiscoveryModel(Application* app, QObject* parent = nullptr);
+  explicit PodcastDiscoveryModel(Application* app, QObject* parent = nullptr);
 
   enum Type { Type_Folder, Type_Podcast, Type_LoadingIndicator };
 

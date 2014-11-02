@@ -34,7 +34,7 @@ class AddPodcastByUrl : public AddPodcastPage {
   Q_OBJECT
 
  public:
-  AddPodcastByUrl(Application* app, QWidget* parent = nullptr);
+  explicit AddPodcastByUrl(Application* app, QWidget* parent = nullptr);
   ~AddPodcastByUrl();
 
   void Show();

@@ -123,6 +123,7 @@ def change_file(filename):
         copyrights=gen_copyrights(filename)
                 
         if -1 == content[0].find("/* This file is part of Clementine."):
+                print("File {} have no Clementine copyright info".format(filename))
                 return 0
 
         for i in content:
