@@ -33,7 +33,7 @@ class BackgroundStreams : public QObject {
   Q_OBJECT
 
  public:
-  BackgroundStreams(EngineBase* engine, QObject* parent = nullptr);
+  explicit BackgroundStreams(EngineBase* engine, QObject* parent = nullptr);
   ~BackgroundStreams();
 
   void LoadStreams();

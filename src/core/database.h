@@ -70,7 +70,7 @@ class Database : public QObject {
   QMutex* Mutex() { return &mutex_; }
 
   void RecreateAttachedDb(const QString& database_name);
-  void ExecSchemaCommands(const QSqlDatabase& db, const QString& schema,
+  void ExecSchemaCommands(QSqlDatabase& db, const QString& schema,
                           int schema_version, bool in_transaction = false);
 
   int startup_schema_version() const { return startup_schema_version_; }
@@ -80,7 +80,7 @@ class Database : public QObject {
                       const AttachedDatabase& database);
   void AttachDatabaseOnDbConnection(const QString& database_name,
                                     const AttachedDatabase& database,
-                                    const QSqlDatabase& db);
+                                    QSqlDatabase& db);
   void DetachDatabase(const QString& database_name);
 
  signals:
@@ -92,16 +92,16 @@ class Database : public QObject {
  private:
   void UpdateMainSchema(QSqlDatabase* db);
 
-  void ExecSchemaCommandsFromFile(const QSqlDatabase& db, const QString& filename,
+  void ExecSchemaCommandsFromFile(QSqlDatabase& db, const QString& filename,
                                   int schema_version,
                                   bool in_transaction = false);
-  void ExecSongTablesCommands(const QSqlDatabase& db, const QStringList& song_tables,
+  void ExecSongTablesCommands(QSqlDatabase& db, const QStringList& song_tables,
                               const QStringList& commands);
 
-  void UpdateDatabaseSchema(int version, const QSqlDatabase& db);
-  void UrlEncodeFilenameColumn(const QString& table, const QSqlDatabase& db);
-  QStringList SongsTables(const QSqlDatabase& db, int schema_version) const;
-  bool IntegrityCheck(const QSqlDatabase db);
+  void UpdateDatabaseSchema(int version, QSqlDatabase& db);
+  void UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db);
+  QStringList SongsTables(QSqlDatabase& db, int schema_version) const;
+  bool IntegrityCheck(QSqlDatabase db);
   void BackupFile(const QString& filename);
   bool OpenDatabase(const QString& filename, sqlite3** connection) const;
 

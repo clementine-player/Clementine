@@ -387,7 +387,7 @@ void Database::AttachDatabase(const QString& database_name,
 
 void Database::AttachDatabaseOnDbConnection(const QString& database_name,
                                             const AttachedDatabase& database,
-                                            const QSqlDatabase& db) {
+                                            QSqlDatabase& db) {
   AttachDatabase(database_name, database);
 
   // Attach the db
@@ -416,7 +416,7 @@ void Database::DetachDatabase(const QString& database_name) {
   attached_databases_.remove(database_name);
 }
 
-void Database::UpdateDatabaseSchema(int version, const QSqlDatabase& db) {
+void Database::UpdateDatabaseSchema(int version, QSqlDatabase& db) {
   QString filename;
   if (version == 0)
     filename = ":/schema/schema.sql";
@@ -447,7 +447,7 @@ void Database::UpdateDatabaseSchema(int version, const QSqlDatabase& db) {
   }
 }
 
-void Database::UrlEncodeFilenameColumn(const QString& table, const QSqlDatabase& db) {
+void Database::UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db) {
   QSqlQuery select(QString("SELECT ROWID, filename FROM %1").arg(table), db);
   QSqlQuery update(
       QString("UPDATE %1 SET filename=:filename WHERE ROWID=:id").arg(table),
@@ -471,7 +471,7 @@ void Database::UrlEncodeFilenameColumn(const QString& table, const QSqlDatabase&
   }
 }
 
-void Database::ExecSchemaCommandsFromFile(const QSqlDatabase& db,
+void Database::ExecSchemaCommandsFromFile(QSqlDatabase& db,
                                           const QString& filename,
                                           int schema_version,
                                           bool in_transaction) {
@@ -483,7 +483,7 @@ void Database::ExecSchemaCommandsFromFile(const QSqlDatabase& db,
                      schema_version, in_transaction);
 }
 
-void Database::ExecSchemaCommands(const QSqlDatabase& db, const QString& schema,
+void Database::ExecSchemaCommands(QSqlDatabase& db, const QString& schema,
                                   int schema_version, bool in_transaction) {
   // Run each command
   const QStringList commands(schema.split(QRegExp("; *\n\n")));
@@ -505,7 +505,7 @@ void Database::ExecSchemaCommands(const QSqlDatabase& db, const QString& schema,
   }
 }
 
-void Database::ExecSongTablesCommands(const QSqlDatabase& db,
+void Database::ExecSongTablesCommands(QSqlDatabase& db,
                                       const QStringList& song_tables,
                                       const QStringList& commands) {
   for (const QString& command : commands) {
@@ -535,7 +535,7 @@ void Database::ExecSongTablesCommands(const QSqlDatabase& db,
   }
 }
 
-QStringList Database::SongsTables(const QSqlDatabase& db, int schema_version) const {
+QStringList Database::SongsTables(QSqlDatabase& db, int schema_version) const {
   QStringList ret;
 
   // look for the tables in the main db

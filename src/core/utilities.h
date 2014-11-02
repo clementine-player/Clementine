@@ -64,7 +64,7 @@ QByteArray HmacMd5(const QByteArray& key, const QByteArray& data);
 QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
 QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
 QByteArray Sha256(const QByteArray& data);
-QByteArray Sha1File(const QFile& file);
+QByteArray Sha1File(QFile& file);
 QByteArray Sha1CoverHash(const QString& artist, const QString& album);
 
 // Picks an unused ephemeral port number.  Doesn't hold the port open so

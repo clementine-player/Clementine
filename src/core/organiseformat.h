@@ -51,7 +51,7 @@ class OrganiseFormat {
   class Validator : public QValidator {
    public:
     explicit Validator(QObject* parent = nullptr);
-    QValidator::State validate(const QString& format, const int& pos) const;
+    QValidator::State validate(QString& format, int& pos) const;
   };
 
   class SyntaxHighlighter : public QSyntaxHighlighter {

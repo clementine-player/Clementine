@@ -614,9 +614,9 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
 void Song::InitFromFilePartial(const QString& filename) {
   set_url(QUrl::fromLocalFile(filename));
   // We currently rely on filename suffix to know if it's a music file or not.
-  // TODO(Arnaud Bienner): I know this is not satisfying, but currently, we rely on TagLib
-  // which seems to have the behavior (filename checks). Someday, it would be
-  // nice to perform some magic tests everywhere.
+  // TODO(Arnaud Bienner): I know this is not satisfying, but currently,
+  // we rely on TagLib which seems to have the behavior (filename checks).
+  // Someday, it would be nice to perform some magic tests everywhere.
   QFileInfo info(filename);
   d->basefilename_ = info.fileName();
   QString suffix = info.suffix().toLower();
@@ -888,7 +888,8 @@ void Song::BindToQuery(QSqlQuery* query) const {
   if (Application::kIsPortable &&
       Utilities::UrlOnSameDriveAsClementine(d->url_)) {
     query->bindValue(":filename",
-                     Utilities::GetRelativePathToClementineBin(d->url_).toEncoded());
+                     Utilities::
+                     GetRelativePathToClementineBin(d->url_).toEncoded());
   } else {
     query->bindValue(":filename", d->url_.toEncoded());
   }

@@ -108,7 +108,8 @@ void FHT::semiLogSpectrum(float* p) {
 
 void FHT::spectrum(float* p) {
   power2(p);
-  for (int i = 0; i < (m_num / 2); i++, p++) *p = static_cast<float>(sqrt(*p * .5));
+  for (int i = 0; i < (m_num / 2); i++, p++)
+    *p = static_cast<float>(sqrt(*p * .5));
 }
 
 void FHT::power(float* p) {
