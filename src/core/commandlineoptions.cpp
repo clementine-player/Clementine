@@ -5,6 +5,7 @@
    Copyright 2013, Kevin Cox <kevincox.ca@gmail.com>
    Copyright 2013, Mateusz Kowalczyk <fuuzetsu@fuuzetsu.co.uk>
    Copyright 2014, Alexander Bikadorov <abiku@cs.tu-berlin.de>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by

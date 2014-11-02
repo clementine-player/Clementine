@@ -1,5 +1,10 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2011, Angus Gratton <gus@projectgus.com>
+   Copyright 2012, Mateusz Kowalczyk <mk440@bath.ac.uk>
+   Copyright 2013-2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by

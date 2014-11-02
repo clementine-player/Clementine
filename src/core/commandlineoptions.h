@@ -1,6 +1,6 @@
 /* This file is part of Clementine.
    Copyright 2010-2011, David Sansome <davidsansome@gmail.com>
-   Copyright 2011, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, John Maguire <john.maguire@gmail.com>
    Copyright 2011, Andrea Decorte <adecorte@gmail.com>
    Copyright 2013, Kevin Cox <kevincox.ca@gmail.com>
    Copyright 2013, Mateusz Kowalczyk <fuuzetsu@fuuzetsu.co.uk>

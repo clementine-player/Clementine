@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
