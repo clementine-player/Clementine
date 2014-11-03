@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-26 14:49+0000\n"
-"Last-Translator: 0bytetest_green <xenolith0bytetestcomgreen@gmail.com>\n"
+"PO-Revision-Date: 2014-10-31 11:46+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -66,7 +66,7 @@ msgstr " 秒"
 msgid " songs"
 msgstr " 曲"
 
-#: internet/vkservice.cpp:145
+#: internet/vkservice.cpp:146
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 曲)"
@@ -96,7 +96,7 @@ msgstr ""
 msgid "%1 playlists (%2)"
 msgstr "%1 プレイリスト (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:407
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 個選択中"
@@ -121,7 +121,7 @@ msgstr "%1 曲見つかりました"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 曲見つかりました (%2 曲を表示中)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 トラック"
@@ -242,7 +242,7 @@ msgstr "ツール(&T)"
 msgid "(different across multiple songs)"
 msgstr "(複数の曲で一致しません)"
 
-#: internet/spotifyservice.cpp:423
+#: internet/spotifyservice.cpp:424
 msgid ", by "
 msgstr ""
 
@@ -266,7 +266,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 日"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 msgid "1 track"
 msgstr "1 トラック"
 
@@ -558,7 +558,7 @@ msgstr "曲のスキップ回数を追加"
 msgid "Add song title tag"
 msgstr "曲のタイトルタグを追加"
 
-#: internet/vkservice.cpp:314
+#: internet/vkservice.cpp:318
 msgid "Add song to cache"
 msgstr "曲をキャッシュに追加する"
 
@@ -586,11 +586,11 @@ msgstr "Grooveshark のお気に入りに追加"
 msgid "Add to Grooveshark playlists"
 msgstr "Grooveshark のプレイリストに追加する"
 
-#: internet/vkservice.cpp:306
+#: internet/vkservice.cpp:310
 msgid "Add to My Music"
 msgstr "マイミュージックに追加する"
 
-#: internet/spotifyservice.cpp:567
+#: internet/spotifyservice.cpp:568
 msgid "Add to Spotify playlists"
 msgstr ""
 
@@ -598,7 +598,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "別のプレイリストに追加する"
 
-#: internet/vkservice.cpp:292
+#: internet/vkservice.cpp:296
 msgid "Add to bookmarks"
 msgstr "ブックマークに追加する"
 
@@ -610,7 +610,7 @@ msgstr "プレイリストに追加する"
 msgid "Add to the queue"
 msgstr "キューに追加する"
 
-#: internet/vkservice.cpp:322
+#: internet/vkservice.cpp:326
 msgid "Add user/group to bookmarks"
 msgstr "ユーザー/グループをブックマークに追加する"
 
@@ -665,7 +665,7 @@ msgstr "コピー後..."
 
 #: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
@@ -677,8 +677,8 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "アルバム (すべてのトラックで最適な音量)"
 
 #: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "アルバムアーティスト"
 
@@ -689,6 +689,10 @@ msgstr "アルバムカバー"
 #: internet/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
 msgstr "jamendo.com のアルバム情報..."
+
+#: internet/vkservice.cpp:825
+msgid "Albums"
+msgstr ""
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -832,7 +836,7 @@ msgstr "ライブラリーのすべての曲の統計情報を曲ファイルに
 
 #: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
@@ -968,8 +972,8 @@ msgstr "%1 からのバイオグラフィ"
 msgid "Bit rate"
 msgstr "ビットレート"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -1016,7 +1020,7 @@ msgstr "参照..."
 msgid "Buffer duration"
 msgstr "バッファーの長さ"
 
-#: engines/gstengine.cpp:873
+#: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "バッファ中"
 
@@ -1057,7 +1061,7 @@ msgstr "%1 キャッシュ中"
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: internet/vkservice.cpp:620
+#: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1113,7 +1117,7 @@ msgstr "Vk.com のキャッシュディレクトリーを選択する"
 msgid "Choose a name for your smart playlist"
 msgstr "スマートプレイリストの名前を選択してください"
 
-#: engines/gstengine.cpp:894
+#: engines/gstengine.cpp:897
 msgid "Choose automatically"
 msgstr "自動的に選択する"
 
@@ -1136,6 +1140,10 @@ msgstr "プレイリストの並び順と、プレイリスト内に何曲含め
 #: podcasts/podcastsettingspage.cpp:133
 msgid "Choose podcast download directory"
 msgstr "ポッドキャストのダウンロードディレクトリを選択してください"
+
+#: ../bin/src/ui_internetshowsettingspage.h:89
+msgid "Choose the internet services you want to show."
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1290,7 +1298,7 @@ msgstr "コンマ区切りの クラス:レベル のリスト、レベルは 0-
 msgid "Comment"
 msgstr "コメント"
 
-#: internet/vkservice.cpp:151
+#: internet/vkservice.cpp:152
 msgid "Community Radio"
 msgstr "コミュニティラジオ"
 
@@ -1303,8 +1311,8 @@ msgid "Complete tags automatically..."
 msgstr "タグを自動補完..."
 
 #: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "作曲者"
 
@@ -1379,7 +1387,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "接続がタイムアウトしました。サーバーの URL を確認してください。例: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:1093
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "接続の問題またはオーディオが所有者により無効化されています"
 
@@ -1399,7 +1407,7 @@ msgstr "すべての曲を変換する"
 msgid "Convert any music that the device can't play"
 msgstr "デバイスが再生できないすべての曲を変換する"
 
-#: internet/vkservice.cpp:318
+#: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "URL をクリップボードにコピーする"
 
@@ -1637,7 +1645,7 @@ msgstr "音量を下げる"
 msgid "Default background image"
 msgstr "既定の背景画像"
 
-#: engines/gstengine.cpp:919
+#: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
 msgstr "デフォルトのデバイス %1"
@@ -1782,7 +1790,9 @@ msgid "Disabled"
 msgstr "無効"
 
 #: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "ディスク"
 
@@ -2094,7 +2104,7 @@ msgstr "--log-levels *:3 と同じ"
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
 #: ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141 ui/mainwindow.cpp:2289
-#: internet/vkservice.cpp:619
+#: internet/vkservice.cpp:623
 msgid "Error"
 msgstr "エラー"
 
@@ -2346,7 +2356,7 @@ msgid "File size"
 msgstr "ファイルサイズ"
 
 #: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
+#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "ファイルの種類"
@@ -2367,7 +2377,7 @@ msgstr "トランスコードするファイル"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "指定する条件に一致するライブラリから曲を検索します。"
 
-#: internet/vkservice.cpp:302
+#: internet/vkservice.cpp:306
 msgid "Find this artist"
 msgstr "このアーティストを検索する"
 
@@ -2467,7 +2477,7 @@ msgstr "Full Bass + Treble"
 msgid "Full Treble"
 msgstr "Full Treble"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:138
 msgid "General"
 msgstr "全般"
 
@@ -2476,8 +2486,8 @@ msgid "General settings"
 msgstr "全般設定"
 
 #: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "ジャンル"
@@ -2773,6 +2783,11 @@ msgstr "インターネット"
 msgid "Internet providers"
 msgstr "インターネットプロバイダ"
 
+#: ../bin/src/ui_internetshowsettingspage.h:87
+msgctxt "Global search settings dialog title."
+msgid "Internet services"
+msgstr ""
+
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
 msgstr "不正な API キーです"
@@ -3026,7 +3041,7 @@ msgstr "トラック情報の読み込み中"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
+#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "読み込んでいます..."
@@ -3139,7 +3154,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotifyservice.cpp:607
+#: internet/spotifyservice.cpp:608
 msgid "Make playlist available offline"
 msgstr "プレイリストをオフラインで利用可能にする"
 
@@ -3243,7 +3258,7 @@ msgstr "ムードバーの形式"
 msgid "Moodbars"
 msgstr "ムードバー"
 
-#: internet/vkservice.cpp:489
+#: internet/vkservice.cpp:501
 msgid "More"
 msgstr "もっと"
 
@@ -3274,6 +3289,7 @@ msgid "Move up"
 msgstr "上へ移動"
 
 #: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: internet/vkservice.cpp:882
 msgid "Music"
 msgstr "ミュージック"
 
@@ -3286,11 +3302,15 @@ msgstr "ミュージックライブラリ"
 msgid "Mute"
 msgstr "ミュート"
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
+#: internet/vkservice.cpp:818
+msgid "My Albums"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
 msgid "My Music"
 msgstr "マイミュージック"
 
-#: internet/vkservice.cpp:496
+#: internet/vkservice.cpp:508
 msgid "My Recommendations"
 msgstr "おすすめ"
 
@@ -3398,8 +3418,8 @@ msgstr "見つかりません。再びプレイリスト全体を表示するに
 msgid "No short blocks"
 msgstr "短いブロックなし"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
-#: ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
+#: ../bin/src/ui_groupbydialog.h:158
 msgid "None"
 msgstr "なし"
 
@@ -3728,7 +3748,7 @@ msgstr "プレーヤーのオプション"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:493 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "プレイリスト"
 
@@ -4039,11 +4059,11 @@ msgstr "重複するものをプレイリストから削除"
 msgid "Remove folder"
 msgstr "フォルダーの削除"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:310
+#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
 msgid "Remove from My Music"
 msgstr "マイミュージックから削除する"
 
-#: internet/vkservice.cpp:296
+#: internet/vkservice.cpp:300
 msgid "Remove from bookmarks"
 msgstr "ブックマークから削除する"
 
@@ -4306,7 +4326,7 @@ msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:512
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:516
 msgid "Search"
 msgstr "検索"
 
@@ -4373,7 +4393,7 @@ msgstr "検索条件"
 msgid "Searching on Grooveshark"
 msgstr "Grooveshark を検索中"
 
-#: ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
 msgstr "第 2 階層"
 
@@ -4682,7 +4702,7 @@ msgstr "小さいサイドバー"
 msgid "Smart playlist"
 msgstr "スマートプレイリスト"
 
-#: library/librarymodel.cpp:1264
+#: library/librarymodel.cpp:1280
 msgid "Smart playlists"
 msgstr "スマートプレイリスト"
 
@@ -4743,6 +4763,7 @@ msgid "Source"
 msgstr "ソース"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
+#: ../bin/src/ui_internetshowsettingspage.h:88
 msgid "Sources"
 msgstr "ソース"
 
@@ -5027,7 +5048,7 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "以下の設定は「ミュージックのトランスコード」ダイアログや、音楽を変換してデバイスへコピーする前に使われます。"
 
-#: ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:155
 msgid "Third level"
 msgstr "第 3 階層"
 
@@ -5212,10 +5233,10 @@ msgstr "接続できません"
 msgid "Unable to download %1 (%2)"
 msgstr "%1 をダウンロードできません (%2)"
 
-#: core/song.cpp:411 library/librarymodel.cpp:345 library/librarymodel.cpp:349
-#: library/librarymodel.cpp:353 library/librarymodel.cpp:1050
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:500
-#: playlist/playlistmanager.cpp:501 ui/albumcoverchoicecontroller.cpp:124
+#: core/song.cpp:411 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
+#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "不明"
@@ -5248,7 +5269,7 @@ msgstr "購読解除"
 msgid "Upcoming Concerts"
 msgstr "次のコンサート"
 
-#: internet/vkservice.cpp:326 internet/vkservice.cpp:330
+#: internet/vkservice.cpp:330
 msgid "Update"
 msgstr "更新"
 
@@ -5371,7 +5392,7 @@ msgstr "使用中"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "ユーザー %1 には Grooveshark Anywhere のアカウントがありません。"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:152
 msgid "User interface"
 msgstr "ユーザーインターフェース"
 
@@ -5397,8 +5418,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "可変ビットレート"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:278
-#: playlist/playlistmanager.cpp:512 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
+#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "さまざまなアーティスト"
 
@@ -5448,6 +5469,10 @@ msgstr "WAV"
 #: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
+
+#: internet/vkservice.cpp:858
+msgid "Wall"
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
@@ -5568,14 +5593,14 @@ msgid "Wrong username or password."
 msgstr "ユーザー名またはパスワードが違います。"
 
 #: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "年"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:164
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:166
 msgid "Year - Album"
 msgstr "年 - アルバム"
 

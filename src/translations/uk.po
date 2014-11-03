@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-08 11:54+0000\n"
+"PO-Revision-Date: 2014-10-31 14:12+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr " секунд"
 msgid " songs"
 msgstr " композицій"
 
-#: internet/vkservice.cpp:145
+#: internet/vkservice.cpp:146
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 композицій)"
@@ -91,7 +91,7 @@ msgstr "%1 на %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 списків відтворення (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:407
 #, qt-format
 msgid "%1 selected of"
 msgstr "обрано %1 з"
@@ -116,7 +116,7 @@ msgstr "Знайдено %1 пісень"
 msgid "%1 songs found (showing %2)"
 msgstr "Знайдено %1 пісень (показано %2)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 доріжок"
@@ -237,7 +237,7 @@ msgstr "&Інструменти"
 msgid "(different across multiple songs)"
 msgstr "(відрізняється поміж багатьма піснями)"
 
-#: internet/spotifyservice.cpp:423
+#: internet/spotifyservice.cpp:424
 msgid ", by "
 msgstr ", "
 
@@ -261,7 +261,7 @@ msgstr "0 т."
 msgid "1 day"
 msgstr "1 день"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 msgid "1 track"
 msgstr "1 доріжка"
 
@@ -553,7 +553,7 @@ msgstr "Додати мітку кількості пропусків"
 msgid "Add song title tag"
 msgstr "Додати мітку назви пісні"
 
-#: internet/vkservice.cpp:314
+#: internet/vkservice.cpp:318
 msgid "Add song to cache"
 msgstr "Додати композицію до кешу"
 
@@ -581,11 +581,11 @@ msgstr "Додати до улюблених на Grooveshark"
 msgid "Add to Grooveshark playlists"
 msgstr "Додати до списків відтворення Grooveshark"
 
-#: internet/vkservice.cpp:306
+#: internet/vkservice.cpp:310
 msgid "Add to My Music"
 msgstr "Додати до «Моєї музики»"
 
-#: internet/spotifyservice.cpp:567
+#: internet/spotifyservice.cpp:568
 msgid "Add to Spotify playlists"
 msgstr "Додати до списків відтворення Spotify"
 
@@ -593,7 +593,7 @@ msgstr "Додати до списків відтворення Spotify"
 msgid "Add to another playlist"
 msgstr "Додати до іншого списку відтворення"
 
-#: internet/vkservice.cpp:292
+#: internet/vkservice.cpp:296
 msgid "Add to bookmarks"
 msgstr "Додати до закладок"
 
@@ -605,7 +605,7 @@ msgstr "Додати до списку відтворення"
 msgid "Add to the queue"
 msgstr "Додати до черги"
 
-#: internet/vkservice.cpp:322
+#: internet/vkservice.cpp:326
 msgid "Add user/group to bookmarks"
 msgstr "Додати користувача/групу до закладок"
 
@@ -660,7 +660,7 @@ msgstr "Після копіювання…"
 
 #: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
@@ -672,8 +672,8 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (ідеальна гучність для всіх композицій)"
 
 #: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "Виконавець альбому"
 
@@ -684,6 +684,10 @@ msgstr "Обкладинка альбому"
 #: internet/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
 msgstr "Дані про альбом на jamendo.com…"
+
+#: internet/vkservice.cpp:825
+msgid "Albums"
+msgstr "Альбоми"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -827,7 +831,7 @@ msgstr "Ви справді хочете записати статистичні
 
 #: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
@@ -963,8 +967,8 @@ msgstr "Біографія з %1"
 msgid "Bit rate"
 msgstr "Бітова швидкість"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -1011,7 +1015,7 @@ msgstr "Огляд…"
 msgid "Buffer duration"
 msgstr "Місткість буфера"
 
-#: engines/gstengine.cpp:873
+#: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "Буферизація"
 
@@ -1052,7 +1056,7 @@ msgstr "Кешування %1"
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: internet/vkservice.cpp:620
+#: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1108,7 +1112,7 @@ msgstr "Виберіть каталог кешування даних Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Оберіть ім’я для вашого розумного списку відтворення"
 
-#: engines/gstengine.cpp:894
+#: engines/gstengine.cpp:897
 msgid "Choose automatically"
 msgstr "Вибрати автоматично"
 
@@ -1131,6 +1135,10 @@ msgstr "Вибрати спосіб сортування списку та кі�
 #: podcasts/podcastsettingspage.cpp:133
 msgid "Choose podcast download directory"
 msgstr "Обрати теку для завантаження подкастів"
+
+#: ../bin/src/ui_internetshowsettingspage.h:89
+msgid "Choose the internet services you want to show."
+msgstr "Виберіть інтернет-служби, дані яких слід показувати."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1285,7 +1293,7 @@ msgstr "Список, розділений комами, виду клас:рі�
 msgid "Comment"
 msgstr "Коментар"
 
-#: internet/vkservice.cpp:151
+#: internet/vkservice.cpp:152
 msgid "Community Radio"
 msgstr "Громадське радіо"
 
@@ -1298,8 +1306,8 @@ msgid "Complete tags automatically..."
 msgstr "Заповнити мітки автоматично…"
 
 #: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "Композитор"
 
@@ -1374,7 +1382,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Вичерпано строк очікування на з’єднання. Переконайтеся, що адресу сервера вказано правильно. Приклад: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:1093
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Проблеми зі з’єднанням або надсилання звукових даних вимкнено власником"
 
@@ -1394,7 +1402,7 @@ msgstr "Конвертувати всю музику"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертувати всю музику, яку не може відтворити пристрій"
 
-#: internet/vkservice.cpp:318
+#: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "Копіювати адресу оприлюднення до буфера"
 
@@ -1632,7 +1640,7 @@ msgstr "Зменшити гучність"
 msgid "Default background image"
 msgstr "Типове зображення тла"
 
-#: engines/gstengine.cpp:919
+#: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
 msgstr "Типовий пристрій у %1"
@@ -1777,7 +1785,9 @@ msgid "Disabled"
 msgstr "Вимкнено"
 
 #: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Диск"
 
@@ -2089,7 +2099,7 @@ msgstr "Відповідає --log-levels *:3"
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
 #: ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141 ui/mainwindow.cpp:2289
-#: internet/vkservice.cpp:619
+#: internet/vkservice.cpp:623
 msgid "Error"
 msgstr "Помилка"
 
@@ -2341,7 +2351,7 @@ msgid "File size"
 msgstr "Розмір файлу"
 
 #: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
+#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "Тип файлу"
@@ -2362,7 +2372,7 @@ msgstr "Файли для перекодування"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Знайти композиції у фонотеці, що відповідають вказаним вами критеріям."
 
-#: internet/vkservice.cpp:302
+#: internet/vkservice.cpp:306
 msgid "Find this artist"
 msgstr "Знайти цього виконавця"
 
@@ -2462,7 +2472,7 @@ msgstr "Повні баси + верхи"
 msgid "Full Treble"
 msgstr "Повні верхи"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:138
 msgid "General"
 msgstr "Загальне"
 
@@ -2471,8 +2481,8 @@ msgid "General settings"
 msgstr "Загальні налаштування"
 
 #: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Жанр"
@@ -2768,6 +2778,11 @@ msgstr "Інтернет"
 msgid "Internet providers"
 msgstr "Інтернет-джерела"
 
+#: ../bin/src/ui_internetshowsettingspage.h:87
+msgctxt "Global search settings dialog title."
+msgid "Internet services"
+msgstr "Інтернет-служби"
+
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
 msgstr "Неправильний ключ API"
@@ -3021,7 +3036,7 @@ msgstr "Завантажую дані доріжок"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
+#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Завантаження…"
@@ -3134,7 +3149,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Гаразд!"
 
-#: internet/spotifyservice.cpp:607
+#: internet/spotifyservice.cpp:608
 msgid "Make playlist available offline"
 msgstr "Зробити список відтворення доступним онлайн"
 
@@ -3238,7 +3253,7 @@ msgstr "Стиль смужки настрою"
 msgid "Moodbars"
 msgstr "Смужки настрою"
 
-#: internet/vkservice.cpp:489
+#: internet/vkservice.cpp:501
 msgid "More"
 msgstr "Більше"
 
@@ -3269,6 +3284,7 @@ msgid "Move up"
 msgstr "Перемістити вгору"
 
 #: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: internet/vkservice.cpp:882
 msgid "Music"
 msgstr "Музика"
 
@@ -3281,11 +3297,15 @@ msgstr "Фонотека"
 msgid "Mute"
 msgstr "Вимкнути звук"
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
+#: internet/vkservice.cpp:818
+msgid "My Albums"
+msgstr "Альбоми"
+
+#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
 msgid "My Music"
 msgstr "Моя музика"
 
-#: internet/vkservice.cpp:496
+#: internet/vkservice.cpp:508
 msgid "My Recommendations"
 msgstr "Мої рекомендації"
 
@@ -3393,8 +3413,8 @@ msgstr "Нічого не знайдено. Очистіть вікно пошу
 msgid "No short blocks"
 msgstr "Без коротких блоків"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
-#: ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
+#: ../bin/src/ui_groupbydialog.h:158
 msgid "None"
 msgstr "Немає"
 
@@ -3723,7 +3743,7 @@ msgstr "Налаштування програвача"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:493 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Список відтворення"
 
@@ -4034,11 +4054,11 @@ msgstr "Вилучити повтори зі списку відтворення
 msgid "Remove folder"
 msgstr "Вилучити теку"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:310
+#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
 msgid "Remove from My Music"
 msgstr "Вилучити з теки Моя музика"
 
-#: internet/vkservice.cpp:296
+#: internet/vkservice.cpp:300
 msgid "Remove from bookmarks"
 msgstr "Вилучити із закладок"
 
@@ -4301,7 +4321,7 @@ msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:512
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:516
 msgid "Search"
 msgstr "Пошук"
 
@@ -4368,7 +4388,7 @@ msgstr "Умови пошуку"
 msgid "Searching on Grooveshark"
 msgstr "Пошук на Grooveshark"
 
-#: ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
 msgstr "Другий рівень"
 
@@ -4677,7 +4697,7 @@ msgstr "Маленька бічна панель"
 msgid "Smart playlist"
 msgstr "«Розумний» список відтворення"
 
-#: library/librarymodel.cpp:1264
+#: library/librarymodel.cpp:1280
 msgid "Smart playlists"
 msgstr "«Розумні» списки відтворення"
 
@@ -4738,6 +4758,7 @@ msgid "Source"
 msgstr "Джерело"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
+#: ../bin/src/ui_internetshowsettingspage.h:88
 msgid "Sources"
 msgstr "Джерела"
 
@@ -5022,7 +5043,7 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "Ці налаштування використовуються у діалозі «Перекодування музики» та при перетворенні музики перед її копіюванням на пристрій."
 
-#: ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:155
 msgid "Third level"
 msgstr "Третій рівень"
 
@@ -5207,10 +5228,10 @@ msgstr "Не вдалося з’єднатися"
 msgid "Unable to download %1 (%2)"
 msgstr "Не вдалось завантажити %1 (%2)"
 
-#: core/song.cpp:411 library/librarymodel.cpp:345 library/librarymodel.cpp:349
-#: library/librarymodel.cpp:353 library/librarymodel.cpp:1050
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:500
-#: playlist/playlistmanager.cpp:501 ui/albumcoverchoicecontroller.cpp:124
+#: core/song.cpp:411 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
+#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Невідомо"
@@ -5243,7 +5264,7 @@ msgstr "Відписатися"
 msgid "Upcoming Concerts"
 msgstr "Найближчі виступи"
 
-#: internet/vkservice.cpp:326 internet/vkservice.cpp:330
+#: internet/vkservice.cpp:330
 msgid "Update"
 msgstr "Оновити"
 
@@ -5366,7 +5387,7 @@ msgstr "Використано"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "У користувача %1 немає облікового запису Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:152
 msgid "User interface"
 msgstr "Інтерфейс користувача"
 
@@ -5392,8 +5413,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Змінна бітова швидкість"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:278
-#: playlist/playlistmanager.cpp:512 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
+#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Різні виконавці"
 
@@ -5443,6 +5464,10 @@ msgstr "WAV"
 #: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
+
+#: internet/vkservice.cpp:858
+msgid "Wall"
+msgstr "Стіна"
 
 #: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
@@ -5563,14 +5588,14 @@ msgid "Wrong username or password."
 msgstr "Помилкове ім’я користувача або пароль."
 
 #: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "Рік"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:164
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:166
 msgid "Year - Album"
 msgstr "Рік - Альбом"
 

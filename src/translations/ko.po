@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-09 13:59+0000\n"
-"Last-Translator: 박정용 <kladess@gmail.com>\n"
+"PO-Revision-Date: 2014-10-31 11:46+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -69,7 +69,7 @@ msgstr " 초"
 msgid " songs"
 msgstr " 노래"
 
-#: internet/vkservice.cpp:145
+#: internet/vkservice.cpp:146
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 곡)"
@@ -99,7 +99,7 @@ msgstr ""
 msgid "%1 playlists (%2)"
 msgstr "%1 재생목록 (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:407
 #, qt-format
 msgid "%1 selected of"
 msgstr "다음 중 %1개 선택됨"
@@ -124,7 +124,7 @@ msgstr "%1개 노래 찾음"
 msgid "%1 songs found (showing %2)"
 msgstr "%1개 노래 찾음 (%2개 표시 중)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1개 트랙"
@@ -245,7 +245,7 @@ msgstr "도구(&T)"
 msgid "(different across multiple songs)"
 msgstr "(전반적으로 다양한 곡)"
 
-#: internet/spotifyservice.cpp:423
+#: internet/spotifyservice.cpp:424
 msgid ", by "
 msgstr ""
 
@@ -269,7 +269,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1일"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 msgid "1 track"
 msgstr "1개 트랙"
 
@@ -561,7 +561,7 @@ msgstr "무시 횟수 추가"
 msgid "Add song title tag"
 msgstr "제목 태그 추가"
 
-#: internet/vkservice.cpp:314
+#: internet/vkservice.cpp:318
 msgid "Add song to cache"
 msgstr "캐시에 음악 추가"
 
@@ -589,11 +589,11 @@ msgstr "Grooveshark 즐겨찾기에 추가"
 msgid "Add to Grooveshark playlists"
 msgstr "Grooveshark 재생목록에 추가"
 
-#: internet/vkservice.cpp:306
+#: internet/vkservice.cpp:310
 msgid "Add to My Music"
 msgstr "내 음악에 추가"
 
-#: internet/spotifyservice.cpp:567
+#: internet/spotifyservice.cpp:568
 msgid "Add to Spotify playlists"
 msgstr ""
 
@@ -601,7 +601,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "다른 재생목록에 추가"
 
-#: internet/vkservice.cpp:292
+#: internet/vkservice.cpp:296
 msgid "Add to bookmarks"
 msgstr "북마크에 추가"
 
@@ -613,7 +613,7 @@ msgstr "재생목록에 추가"
 msgid "Add to the queue"
 msgstr "대기열에 추가"
 
-#: internet/vkservice.cpp:322
+#: internet/vkservice.cpp:326
 msgid "Add user/group to bookmarks"
 msgstr "북마크에 사용자/그룹 추가"
 
@@ -668,7 +668,7 @@ msgstr "복사 한 후...."
 
 #: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
@@ -680,8 +680,8 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "앨범 (모든 트랙에 이상적인 음량)"
 
 #: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "앨범 가수"
 
@@ -692,6 +692,10 @@ msgstr "앨범 표지"
 #: internet/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
 msgstr " jamendo.com 앨범 정보..."
+
+#: internet/vkservice.cpp:825
+msgid "Albums"
+msgstr ""
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -835,7 +839,7 @@ msgstr "라이브러리의 모든 곡의 해당하는 음악 파일에 음악 �
 
 #: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
@@ -971,8 +975,8 @@ msgstr "%1의 바이오그래피"
 msgid "Bit rate"
 msgstr "비트 전송률"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -1019,7 +1023,7 @@ msgstr "찾아보기..."
 msgid "Buffer duration"
 msgstr "버퍼 시간"
 
-#: engines/gstengine.cpp:873
+#: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "버퍼링"
 
@@ -1060,7 +1064,7 @@ msgstr "%1 캐시 중"
 msgid "Cancel"
 msgstr "취소"
 
-#: internet/vkservice.cpp:620
+#: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1116,7 +1120,7 @@ msgstr "Vk.com 캐시 디렉터리 선택"
 msgid "Choose a name for your smart playlist"
 msgstr "스마트 재생목록에 이름 추가"
 
-#: engines/gstengine.cpp:894
+#: engines/gstengine.cpp:897
 msgid "Choose automatically"
 msgstr "자동 선택"
 
@@ -1139,6 +1143,10 @@ msgstr "재생목록의 정렬 방식과 최대 곡수를 선택하세요."
 #: podcasts/podcastsettingspage.cpp:133
 msgid "Choose podcast download directory"
 msgstr "팟케스트 다운로드 경로를 선택하세요"
+
+#: ../bin/src/ui_internetshowsettingspage.h:89
+msgid "Choose the internet services you want to show."
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1293,7 +1301,7 @@ msgstr "콤마로 클래스:단계의 목록을 나눔, 단계는 0-3"
 msgid "Comment"
 msgstr "설명"
 
-#: internet/vkservice.cpp:151
+#: internet/vkservice.cpp:152
 msgid "Community Radio"
 msgstr "커뮤니티 라디오"
 
@@ -1306,8 +1314,8 @@ msgid "Complete tags automatically..."
 msgstr "자동으로 태그 저장..."
 
 #: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "작곡가"
 
@@ -1382,7 +1390,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "연결 시간이 초과되었습니다. 서버의 주소를 확인하세요. 예)http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:1093
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "연결 문제 또는 오디오가 사용자에 의한 비활성화"
 
@@ -1402,7 +1410,7 @@ msgstr "모든 곡 변환"
 msgid "Convert any music that the device can't play"
 msgstr "장치가 재생할 수 없는 곡 변환"
 
-#: internet/vkservice.cpp:318
+#: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "공유 URL 복사"
 
@@ -1640,7 +1648,7 @@ msgstr "음량 줄이기"
 msgid "Default background image"
 msgstr "기본 배경 그림"
 
-#: engines/gstengine.cpp:919
+#: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1785,7 +1793,9 @@ msgid "Disabled"
 msgstr "사용 안함"
 
 #: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "디스크"
 
@@ -2097,7 +2107,7 @@ msgstr "동등한 --log-level *:3"
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
 #: ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141 ui/mainwindow.cpp:2289
-#: internet/vkservice.cpp:619
+#: internet/vkservice.cpp:623
 msgid "Error"
 msgstr "오류"
 
@@ -2349,7 +2359,7 @@ msgid "File size"
 msgstr "파일 크기"
 
 #: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
+#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "파일 형태"
@@ -2370,7 +2380,7 @@ msgstr "변환할 파일들"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "라이브러리에서 지정한 기준과 일치하는 노래를 찾습니다."
 
-#: internet/vkservice.cpp:302
+#: internet/vkservice.cpp:306
 msgid "Find this artist"
 msgstr "이 음악가 찾기"
 
@@ -2470,7 +2480,7 @@ msgstr "베이스+고음 강화"
 msgid "Full Treble"
 msgstr "고음 강화"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:138
 msgid "General"
 msgstr "일반 "
 
@@ -2479,8 +2489,8 @@ msgid "General settings"
 msgstr "일반 "
 
 #: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "장르"
@@ -2776,6 +2786,11 @@ msgstr "인터넷"
 msgid "Internet providers"
 msgstr "인터넷 "
 
+#: ../bin/src/ui_internetshowsettingspage.h:87
+msgctxt "Global search settings dialog title."
+msgid "Internet services"
+msgstr ""
+
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
 msgstr "잘못된 API "
@@ -3029,7 +3044,7 @@ msgstr "트랙 정보 불러오는중"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
+#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "여는 중..."
@@ -3142,7 +3157,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotifyservice.cpp:607
+#: internet/spotifyservice.cpp:608
 msgid "Make playlist available offline"
 msgstr "재생목록을 오프라인에서 재생 가능하도록 설정"
 
@@ -3246,7 +3261,7 @@ msgstr "분위기 막대 "
 msgid "Moodbars"
 msgstr "분위기 막대"
 
-#: internet/vkservice.cpp:489
+#: internet/vkservice.cpp:501
 msgid "More"
 msgstr "더 "
 
@@ -3277,6 +3292,7 @@ msgid "Move up"
 msgstr "위로 이동"
 
 #: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: internet/vkservice.cpp:882
 msgid "Music"
 msgstr "음악"
 
@@ -3289,11 +3305,15 @@ msgstr "음악 라이브러리"
 msgid "Mute"
 msgstr "음소거"
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
+#: internet/vkservice.cpp:818
+msgid "My Albums"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
 msgid "My Music"
 msgstr "내 음악"
 
-#: internet/vkservice.cpp:496
+#: internet/vkservice.cpp:508
 msgid "My Recommendations"
 msgstr "내 추천목록"
 
@@ -3401,8 +3421,8 @@ msgstr "일치하는 결과를 찾을 수 없습니다. 검색창을 비우시�
 msgid "No short blocks"
 msgstr "짧은 블록 "
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
-#: ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
+#: ../bin/src/ui_groupbydialog.h:158
 msgid "None"
 msgstr "없음"
 
@@ -3731,7 +3751,7 @@ msgstr "플레이어 옵션"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:493 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "재생목록"
 
@@ -4042,11 +4062,11 @@ msgstr "재생목록에서 중복 제거"
 msgid "Remove folder"
 msgstr "폴더 제거"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:310
+#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
 msgid "Remove from My Music"
 msgstr "내 음악에서 제거"
 
-#: internet/vkservice.cpp:296
+#: internet/vkservice.cpp:300
 msgid "Remove from bookmarks"
 msgstr "북마크에서 제거"
 
@@ -4309,7 +4329,7 @@ msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:512
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:516
 msgid "Search"
 msgstr "검색"
 
@@ -4376,7 +4396,7 @@ msgstr "검색 조건"
 msgid "Searching on Grooveshark"
 msgstr "Grooveshark에서 검색"
 
-#: ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
 msgstr "두 번째 단계"
 
@@ -4685,7 +4705,7 @@ msgstr "작은 사이드바"
 msgid "Smart playlist"
 msgstr "스마트 재생목록"
 
-#: library/librarymodel.cpp:1264
+#: library/librarymodel.cpp:1280
 msgid "Smart playlists"
 msgstr "스마트 재생목록"
 
@@ -4746,6 +4766,7 @@ msgid "Source"
 msgstr "출처"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
+#: ../bin/src/ui_internetshowsettingspage.h:88
 msgid "Sources"
 msgstr "출처"
 
@@ -5030,7 +5051,7 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "여기 있는 설정들은 \"음악 변환\" 대화상자에서 사용되며, 장치에 음악을 복사하기전 변환에서도 사용됩니다."
 
-#: ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:155
 msgid "Third level"
 msgstr "세 번째 단계"
 
@@ -5215,10 +5236,10 @@ msgstr "연결할 수 없음"
 msgid "Unable to download %1 (%2)"
 msgstr "%1(%2)를 다운로드 할 수 없습니다"
 
-#: core/song.cpp:411 library/librarymodel.cpp:345 library/librarymodel.cpp:349
-#: library/librarymodel.cpp:353 library/librarymodel.cpp:1050
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:500
-#: playlist/playlistmanager.cpp:501 ui/albumcoverchoicecontroller.cpp:124
+#: core/song.cpp:411 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
+#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "알 수 없는"
@@ -5251,7 +5272,7 @@ msgstr "구독 안함"
 msgid "Upcoming Concerts"
 msgstr "다가오는 콘서트"
 
-#: internet/vkservice.cpp:326 internet/vkservice.cpp:330
+#: internet/vkservice.cpp:330
 msgid "Update"
 msgstr "갱신"
 
@@ -5374,7 +5395,7 @@ msgstr "사용 됨"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "사용자 %1 은(는) Grooveshark Anywhere 계정이 아닙니다"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:152
 msgid "User interface"
 msgstr "사용자 인터페이스"
 
@@ -5400,8 +5421,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "가변 비트 전송률"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:278
-#: playlist/playlistmanager.cpp:512 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
+#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "다양한 음악가"
 
@@ -5451,6 +5472,10 @@ msgstr "WAV"
 #: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
+
+#: internet/vkservice.cpp:858
+msgid "Wall"
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
@@ -5571,14 +5596,14 @@ msgid "Wrong username or password."
 msgstr "잘못된 사용자명 또는 비밀번호 입니다."
 
 #: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "년도"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:164
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:166
 msgid "Year - Album"
 msgstr "년도 - 앨범"
 

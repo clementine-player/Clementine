@@ -24,7 +24,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-08 17:32+0000\n"
+"PO-Revision-Date: 2014-11-01 23:04+0000\n"
 "Last-Translator: Volkan Gezer <volkangezer@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,7 +76,7 @@ msgstr " saniye"
 msgid " songs"
 msgstr " şarkılar"
 
-#: internet/vkservice.cpp:145
+#: internet/vkservice.cpp:146
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 şarkı)"
@@ -106,7 +106,7 @@ msgstr "%2 üzerinde %1"
 msgid "%1 playlists (%2)"
 msgstr "%1 çalma listesi (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:407
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 seçili"
@@ -131,7 +131,7 @@ msgstr "%1 şarkı bulundu"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 şarkı bulundu (%2 tanesi gösteriliyor)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 parça"
@@ -252,7 +252,7 @@ msgstr "&Araçlar"
 msgid "(different across multiple songs)"
 msgstr "(her şarkı için farklı)"
 
-#: internet/spotifyservice.cpp:423
+#: internet/spotifyservice.cpp:424
 msgid ", by "
 msgstr ", "
 
@@ -276,7 +276,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 gün"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 msgid "1 track"
 msgstr "1 parça"
 
@@ -568,7 +568,7 @@ msgstr "Şarkı atlama sayısı ekle"
 msgid "Add song title tag"
 msgstr "Şarkı adı etiketi ekle"
 
-#: internet/vkservice.cpp:314
+#: internet/vkservice.cpp:318
 msgid "Add song to cache"
 msgstr "Şarkıyı önbelleğe ekle"
 
@@ -596,11 +596,11 @@ msgstr "Grooveshark'i favorilere ekle"
 msgid "Add to Grooveshark playlists"
 msgstr "Grooveshark'i müzik listelerine ekle"
 
-#: internet/vkservice.cpp:306
+#: internet/vkservice.cpp:310
 msgid "Add to My Music"
 msgstr "Müziklerime Ekle"
 
-#: internet/spotifyservice.cpp:567
+#: internet/spotifyservice.cpp:568
 msgid "Add to Spotify playlists"
 msgstr "Spotify çalma listelerine ekle"
 
@@ -608,7 +608,7 @@ msgstr "Spotify çalma listelerine ekle"
 msgid "Add to another playlist"
 msgstr "Başka bir çalma listesine ekle"
 
-#: internet/vkservice.cpp:292
+#: internet/vkservice.cpp:296
 msgid "Add to bookmarks"
 msgstr "Yer imlerine ekle"
 
@@ -620,7 +620,7 @@ msgstr "Çalma listesine ekle"
 msgid "Add to the queue"
 msgstr "Kuyruğa ekle"
 
-#: internet/vkservice.cpp:322
+#: internet/vkservice.cpp:326
 msgid "Add user/group to bookmarks"
 msgstr "Kullanıcı/grubu yer imlerine ekle"
 
@@ -675,7 +675,7 @@ msgstr "Kopyalandıktan sonra..."
 
 #: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
@@ -687,8 +687,8 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Albüm (tüm parçalar için ideal ses yüksekliği)"
 
 #: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "Albüm sanatçısı"
 
@@ -699,6 +699,10 @@ msgstr "Albüm kapağı"
 #: internet/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
 msgstr "Jamendo.com'daki albüm bilgileri..."
+
+#: internet/vkservice.cpp:825
+msgid "Albums"
+msgstr "Albümler"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -842,7 +846,7 @@ msgstr "Şarkıların istatistiklerini, kütüphanenizdeki tüm şarkıların ke
 
 #: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
@@ -978,8 +982,8 @@ msgstr "%1 sitesinden biyografi"
 msgid "Bit rate"
 msgstr "Bit oranı"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -1026,7 +1030,7 @@ msgstr "Gözat..."
 msgid "Buffer duration"
 msgstr "Önbellek süresi"
 
-#: engines/gstengine.cpp:873
+#: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "Arabelleğe alınıyor"
 
@@ -1067,7 +1071,7 @@ msgstr "Önbelleklenen %1"
 msgid "Cancel"
 msgstr "İptal"
 
-#: internet/vkservice.cpp:620
+#: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1123,7 +1127,7 @@ msgstr "Vk.com önbellek dizinini seç"
 msgid "Choose a name for your smart playlist"
 msgstr "Akıllı çalma listesi için isim seçin"
 
-#: engines/gstengine.cpp:894
+#: engines/gstengine.cpp:897
 msgid "Choose automatically"
 msgstr "Otomatik seç"
 
@@ -1146,6 +1150,10 @@ msgstr "Çalma listesinin nasıl dizildiğini ve kaç şarkı içereceğini seç
 #: podcasts/podcastsettingspage.cpp:133
 msgid "Choose podcast download directory"
 msgstr "Podcast indirme dizinini seç"
+
+#: ../bin/src/ui_internetshowsettingspage.h:89
+msgid "Choose the internet services you want to show."
+msgstr "Göstermek istediğiniz İnternet hizmetlerini seçin."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1300,7 +1308,7 @@ msgstr "Virgülle ayrılmış sınıf:seviye listesi, sınıf 0-3 arasında olab
 msgid "Comment"
 msgstr "Yorum"
 
-#: internet/vkservice.cpp:151
+#: internet/vkservice.cpp:152
 msgid "Community Radio"
 msgstr "Topluluk Radyosu"
 
@@ -1313,8 +1321,8 @@ msgid "Complete tags automatically..."
 msgstr "Etiketleri otomatik tamamla..."
 
 #: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "Besteci"
 
@@ -1389,7 +1397,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Bağlantı zaman aşımına uğradı, sunucu adresini denetleyin. Örnek: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:1093
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Bağlantı sorunu veya ses sahibi tarafından devre dışı bırakılmış"
 
@@ -1409,7 +1417,7 @@ msgstr "Tüm müzikleri dönüştür"
 msgid "Convert any music that the device can't play"
 msgstr "Aygıtın çalamadığı müzikleri dönüştür"
 
-#: internet/vkservice.cpp:318
+#: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "Paylaşım adresini panoya kopyala"
 
@@ -1647,7 +1655,7 @@ msgstr "Sesi azalt"
 msgid "Default background image"
 msgstr "Varsayılan arkaplan resmi"
 
-#: engines/gstengine.cpp:919
+#: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
 msgstr "%1 üzerinde öntanımlı aygıt"
@@ -1792,7 +1800,9 @@ msgid "Disabled"
 msgstr "Devre Dışı"
 
 #: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Disk"
 
@@ -2104,7 +2114,7 @@ msgstr "--log-levels *:3'e eşdeğer"
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
 #: ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141 ui/mainwindow.cpp:2289
-#: internet/vkservice.cpp:619
+#: internet/vkservice.cpp:623
 msgid "Error"
 msgstr "Hata"
 
@@ -2356,7 +2366,7 @@ msgid "File size"
 msgstr "Dosya boyutu"
 
 #: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
+#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "Dosya türü"
@@ -2377,7 +2387,7 @@ msgstr "Dönüştürülecek dosyalar"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Kütüphanenizde belirttiğiniz kriterlerle eşleşen şarkıları bulun."
 
-#: internet/vkservice.cpp:302
+#: internet/vkservice.cpp:306
 msgid "Find this artist"
 msgstr "Bu sanatçıyı bul"
 
@@ -2477,7 +2487,7 @@ msgstr "Full Bass + Tiz"
 msgid "Full Treble"
 msgstr "Yüksek tiz"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:138
 msgid "General"
 msgstr "Genel"
 
@@ -2486,8 +2496,8 @@ msgid "General settings"
 msgstr "Genel ayarlar"
 
 #: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Tür"
@@ -2783,6 +2793,11 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "İnternet sağlayıcılar"
 
+#: ../bin/src/ui_internetshowsettingspage.h:87
+msgctxt "Global search settings dialog title."
+msgid "Internet services"
+msgstr "İnternet hizmetleri"
+
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
 msgstr "Geçersiz API anahtarı"
@@ -3036,7 +3051,7 @@ msgstr "Parça bilgileri yükleniyor"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
+#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Yükleniyor..."
@@ -3149,7 +3164,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Yap gitsin!"
 
-#: internet/spotifyservice.cpp:607
+#: internet/spotifyservice.cpp:608
 msgid "Make playlist available offline"
 msgstr "Çalma listesini çevrim dışındayken kullanılabilir yap"
 
@@ -3253,7 +3268,7 @@ msgstr "Atmosfer çubuğu tasarımı"
 msgid "Moodbars"
 msgstr "Atmosfer çubukları"
 
-#: internet/vkservice.cpp:489
+#: internet/vkservice.cpp:501
 msgid "More"
 msgstr "Daha fazla"
 
@@ -3284,6 +3299,7 @@ msgid "Move up"
 msgstr "Yukarı taşı"
 
 #: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: internet/vkservice.cpp:882
 msgid "Music"
 msgstr "Müzik"
 
@@ -3296,11 +3312,15 @@ msgstr "Müzik Kütüphanesi"
 msgid "Mute"
 msgstr "Sessiz"
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
+#: internet/vkservice.cpp:818
+msgid "My Albums"
+msgstr "Albümlerim"
+
+#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
 msgid "My Music"
 msgstr "Müziğim"
 
-#: internet/vkservice.cpp:496
+#: internet/vkservice.cpp:508
 msgid "My Recommendations"
 msgstr "Önerdiklerim"
 
@@ -3408,8 +3428,8 @@ msgstr "Eşleşen bulunmadı. Çalma listesini tekrar görmek için arama çubu�
 msgid "No short blocks"
 msgstr "Kısa blok yok"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
-#: ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
+#: ../bin/src/ui_groupbydialog.h:158
 msgid "None"
 msgstr "Hiçbiri"
 
@@ -3738,7 +3758,7 @@ msgstr "Oynatıcı seçenekleri"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:493 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Çalma Listesi"
 
@@ -4049,11 +4069,11 @@ msgstr "Şarkı listesindeki çiftleri birleştir"
 msgid "Remove folder"
 msgstr "Klasörü kaldır..."
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:310
+#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
 msgid "Remove from My Music"
 msgstr "Müziklerimden sil"
 
-#: internet/vkservice.cpp:296
+#: internet/vkservice.cpp:300
 msgid "Remove from bookmarks"
 msgstr "Yer imlerinden kaldır"
 
@@ -4316,7 +4336,7 @@ msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:512
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:516
 msgid "Search"
 msgstr "Ara"
 
@@ -4383,7 +4403,7 @@ msgstr "Arama terimleri"
 msgid "Searching on Grooveshark"
 msgstr "Grooveshark'da Ara"
 
-#: ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
 msgstr "İkinci seviye"
 
@@ -4692,7 +4712,7 @@ msgstr "Küçük kenar çubuğu"
 msgid "Smart playlist"
 msgstr "Akıllı çalma listesi"
 
-#: library/librarymodel.cpp:1264
+#: library/librarymodel.cpp:1280
 msgid "Smart playlists"
 msgstr "Akıllı çalma listeleri"
 
@@ -4753,6 +4773,7 @@ msgid "Source"
 msgstr "Kaynak"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
+#: ../bin/src/ui_internetshowsettingspage.h:88
 msgid "Sources"
 msgstr "Kaynaklar"
 
@@ -5037,7 +5058,7 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "Bu seçenekler \"Müzik Dönüştür\" penceresinde ve aygıta müzik kopyalamadan önce dönüştürme işleminde kullanılır."
 
-#: ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:155
 msgid "Third level"
 msgstr "Üçüncü seviye"
 
@@ -5222,10 +5243,10 @@ msgstr "Bağlanılamadı"
 msgid "Unable to download %1 (%2)"
 msgstr "%1 indirilemedi (%2)"
 
-#: core/song.cpp:411 library/librarymodel.cpp:345 library/librarymodel.cpp:349
-#: library/librarymodel.cpp:353 library/librarymodel.cpp:1050
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:500
-#: playlist/playlistmanager.cpp:501 ui/albumcoverchoicecontroller.cpp:124
+#: core/song.cpp:411 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
+#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Bilinmeyen"
@@ -5258,7 +5279,7 @@ msgstr "Abonelikten çık"
 msgid "Upcoming Concerts"
 msgstr "Yaklaşan Konserler"
 
-#: internet/vkservice.cpp:326 internet/vkservice.cpp:330
+#: internet/vkservice.cpp:330
 msgid "Update"
 msgstr "Güncelle"
 
@@ -5381,7 +5402,7 @@ msgstr "Kullanılan"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "%1 Kullanicinin Grooveshark Anywhere hasabi yok"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:152
 msgid "User interface"
 msgstr "Kullanıcı arayüzü"
 
@@ -5407,8 +5428,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Değişken bit oranı"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:278
-#: playlist/playlistmanager.cpp:512 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
+#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Çeşitli sanatçılar"
 
@@ -5458,6 +5479,10 @@ msgstr "WAV"
 #: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
+
+#: internet/vkservice.cpp:858
+msgid "Wall"
+msgstr "Duvar"
 
 #: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
@@ -5578,14 +5603,14 @@ msgid "Wrong username or password."
 msgstr "Yanlış kullanıcı adı veya parola."
 
 #: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "Yıl"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:164
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:166
 msgid "Year - Album"
 msgstr "Yıl - Albüm"
 

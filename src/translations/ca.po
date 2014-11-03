@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-08 11:25+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-11-01 07:16+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fito@libreoffice.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,7 +65,7 @@ msgstr " segons"
 msgid " songs"
 msgstr " cançons"
 
-#: internet/vkservice.cpp:145
+#: internet/vkservice.cpp:146
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 cançons)"
@@ -95,7 +95,7 @@ msgstr "%1 a %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 llistes de reproducció (%2)"
 
-#: playlist/playlistmanager.cpp:408
+#: playlist/playlistmanager.cpp:407
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 seleccionades de"
@@ -120,7 +120,7 @@ msgstr "%1 cançons trobades"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 cançons trobades (mostrant %2)"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 temes"
@@ -241,7 +241,7 @@ msgstr "&Eines"
 msgid "(different across multiple songs)"
 msgstr "(diferents a les diverses cançons)"
 
-#: internet/spotifyservice.cpp:423
+#: internet/spotifyservice.cpp:424
 msgid ", by "
 msgstr ", per"
 
@@ -265,7 +265,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:414
+#: playlist/playlistmanager.cpp:413
 msgid "1 track"
 msgstr "1 pista"
 
@@ -443,7 +443,7 @@ msgstr "Afegeix una acció"
 
 #: ../bin/src/ui_transcodedialog.h:218
 msgid "Add all tracks from a directory and all its subdirectories"
-msgstr ""
+msgstr "Afegeix totes les pistes des d’una carpeta y las seves subcarpetes"
 
 #: internet/savedradio.cpp:106
 msgid "Add another stream..."
@@ -557,7 +557,7 @@ msgstr "Afegeix comptador de passades de cançó"
 msgid "Add song title tag"
 msgstr "Afegeix l’etiqueta de títol a la cançó"
 
-#: internet/vkservice.cpp:314
+#: internet/vkservice.cpp:318
 msgid "Add song to cache"
 msgstr "Afegeix la cançó a la memòria cau"
 
@@ -585,11 +585,11 @@ msgstr "Afegeix als favorits del Grooveshark"
 msgid "Add to Grooveshark playlists"
 msgstr "Afegeix a les llistes de reproducció de Grooveshark"
 
-#: internet/vkservice.cpp:306
+#: internet/vkservice.cpp:310
 msgid "Add to My Music"
 msgstr "Afegeix a La meva música"
 
-#: internet/spotifyservice.cpp:567
+#: internet/spotifyservice.cpp:568
 msgid "Add to Spotify playlists"
 msgstr "Afegeix a les llistes de l’Spotify"
 
@@ -597,7 +597,7 @@ msgstr "Afegeix a les llistes de l’Spotify"
 msgid "Add to another playlist"
 msgstr "Afegeix a una altra llista de reproducció"
 
-#: internet/vkservice.cpp:292
+#: internet/vkservice.cpp:296
 msgid "Add to bookmarks"
 msgstr "Afegeix als preferits"
 
@@ -609,7 +609,7 @@ msgstr "Afegeix a la llista de reproducció"
 msgid "Add to the queue"
 msgstr "Afegeix a la cua"
 
-#: internet/vkservice.cpp:322
+#: internet/vkservice.cpp:326
 msgid "Add user/group to bookmarks"
 msgstr "Afegeix l’usuari/grup als preferits"
 
@@ -664,7 +664,7 @@ msgstr "Després de copiar…"
 
 #: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
@@ -676,8 +676,8 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Àlbum (volum ideal per a totes les pistes)"
 
 #: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "Artista de l’àlbum"
 
@@ -688,6 +688,10 @@ msgstr "Caràtula de l’àlbum"
 #: internet/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
 msgstr "Informació de l’àlbum en jamendo.com…"
+
+#: internet/vkservice.cpp:825
+msgid "Albums"
+msgstr "Àlbums"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -831,7 +835,7 @@ msgstr "Esteu segur que voleu escriure les estadístiques de les cançons en tot
 
 #: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
@@ -967,8 +971,8 @@ msgstr "Biografia de %1"
 msgid "Bit rate"
 msgstr "Taxa de bits"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -1015,7 +1019,7 @@ msgstr "Explora…"
 msgid "Buffer duration"
 msgstr "Durada de la memòria intermèdia"
 
-#: engines/gstengine.cpp:873
+#: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "Emplenant la memòria intermèdia"
 
@@ -1056,7 +1060,7 @@ msgstr "Emmagatzemant %1 a la memòria cau"
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: internet/vkservice.cpp:620
+#: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1112,7 +1116,7 @@ msgstr "Trieu la carpeta de memòria cau del Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Trieu un nom per a la llista de reproducció intel·ligent"
 
-#: engines/gstengine.cpp:894
+#: engines/gstengine.cpp:897
 msgid "Choose automatically"
 msgstr "Tria automàticament"
 
@@ -1135,6 +1139,10 @@ msgstr "Trieu com ordenar la llista de reproducció i quantes cançons contindr�
 #: podcasts/podcastsettingspage.cpp:133
 msgid "Choose podcast download directory"
 msgstr "Escolliu el directori de baixada dels podcasts"
+
+#: ../bin/src/ui_internetshowsettingspage.h:89
+msgid "Choose the internet services you want to show."
+msgstr "Trieu els serveis en Internet que voleu mostrar."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1289,7 +1297,7 @@ msgstr "Llista separada per comes de classe:nivell, el nivell és 0-3"
 msgid "Comment"
 msgstr "Comentari"
 
-#: internet/vkservice.cpp:151
+#: internet/vkservice.cpp:152
 msgid "Community Radio"
 msgstr "Ràdio de la comunitat"
 
@@ -1302,8 +1310,8 @@ msgid "Complete tags automatically..."
 msgstr "Completa les etiquetes automàticament…"
 
 #: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "Compositor"
 
@@ -1378,7 +1386,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "S’ha esgotat el temps d’espera de la connexió, comproveu l’URL del servidor. Exemple: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:1093
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Hi ha un problema en la connexió o el propietari ha inhabilitat l’àudio"
 
@@ -1398,7 +1406,7 @@ msgstr "Converteix tota la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir qualsevol música que el dispositiu no pugui reproduir"
 
-#: internet/vkservice.cpp:318
+#: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "Copia l’URL per compartir en el porta-retalls"
 
@@ -1636,7 +1644,7 @@ msgstr "Redueix el volum"
 msgid "Default background image"
 msgstr "Imatge de fons per defecte"
 
-#: engines/gstengine.cpp:919
+#: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositiu per defecte a %1"
@@ -1781,7 +1789,9 @@ msgid "Disabled"
 msgstr "Inhabilitat"
 
 #: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Disc"
 
@@ -2093,7 +2103,7 @@ msgstr "Equivalent a --log-levels *:3"
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
 #: ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141 ui/mainwindow.cpp:2289
-#: internet/vkservice.cpp:619
+#: internet/vkservice.cpp:623
 msgid "Error"
 msgstr "Error"
 
@@ -2345,7 +2355,7 @@ msgid "File size"
 msgstr "Mida del fitxer"
 
 #: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
+#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "Tipus de fitxer"
@@ -2366,7 +2376,7 @@ msgstr "Fitxers per convertir"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Troba cançons en la vostra col·lecció que coincideixen amb el criteri especificat."
 
-#: internet/vkservice.cpp:302
+#: internet/vkservice.cpp:306
 msgid "Find this artist"
 msgstr "Troba a aquest artista"
 
@@ -2466,7 +2476,7 @@ msgstr "Baixos i aguts complets"
 msgid "Full Treble"
 msgstr "Aguts complets"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:138
 msgid "General"
 msgstr "General"
 
@@ -2475,8 +2485,8 @@ msgid "General settings"
 msgstr "Configuració general"
 
 #: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Estil"
@@ -2685,7 +2695,7 @@ msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
 #: ../bin/src/ui_transcodedialog.h:220
 msgid "Import..."
-msgstr ""
+msgstr "Importa…"
 
 #: core/utilities.cpp:142
 #, qt-format
@@ -2771,6 +2781,11 @@ msgstr "Internet"
 #: ui/settingsdialog.cpp:161
 msgid "Internet providers"
 msgstr "Proveïdors d’Internet"
+
+#: ../bin/src/ui_internetshowsettingspage.h:87
+msgctxt "Global search settings dialog title."
+msgid "Internet services"
+msgstr "Serveis en Internet"
 
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
@@ -3025,7 +3040,7 @@ msgstr "S’està carregant la informació de les pistes"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
+#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "S’està carregant…"
@@ -3138,7 +3153,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Fes-ho doncs!"
 
-#: internet/spotifyservice.cpp:607
+#: internet/spotifyservice.cpp:608
 msgid "Make playlist available offline"
 msgstr "Fes la llista de reproducció disponible fora de línia"
 
@@ -3242,7 +3257,7 @@ msgstr "Estil de barres d’ànim"
 msgid "Moodbars"
 msgstr "Barres d’ànim"
 
-#: internet/vkservice.cpp:489
+#: internet/vkservice.cpp:501
 msgid "More"
 msgstr "Més"
 
@@ -3273,6 +3288,7 @@ msgid "Move up"
 msgstr "Mou cap amunt"
 
 #: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: internet/vkservice.cpp:882
 msgid "Music"
 msgstr "Música"
 
@@ -3285,11 +3301,15 @@ msgstr "Col·lecció de música"
 msgid "Mute"
 msgstr "Silenci"
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
+#: internet/vkservice.cpp:818
+msgid "My Albums"
+msgstr "Els meus àlbums"
+
+#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
 msgid "My Music"
 msgstr "La meva música"
 
-#: internet/vkservice.cpp:496
+#: internet/vkservice.cpp:508
 msgid "My Recommendations"
 msgstr "Les meves recomanacions"
 
@@ -3397,8 +3417,8 @@ msgstr "No s’han trobat coincidències. Netegeu el quadre de cerca per mostrar
 msgid "No short blocks"
 msgstr "No utilitzis blocs curs"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
-#: ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
+#: ../bin/src/ui_groupbydialog.h:158
 msgid "None"
 msgstr "Cap"
 
@@ -3543,7 +3563,7 @@ msgstr "Obre un fitxer OPML…"
 
 #: transcoder/transcodedialog.cpp:234
 msgid "Open a directory to import music from"
-msgstr ""
+msgstr "Obriu una carpeta des d’on s’importarà la música"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3727,7 +3747,7 @@ msgstr "Opcions del reproductor"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:493 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Llista de reproducció"
 
@@ -4038,11 +4058,11 @@ msgstr "Esborra els duplicats de la llista de reproducció"
 msgid "Remove folder"
 msgstr "Suprimeix carpeta"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:310
+#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
 msgid "Remove from My Music"
 msgstr "Esborra-ho de La meva música"
 
-#: internet/vkservice.cpp:296
+#: internet/vkservice.cpp:300
 msgid "Remove from bookmarks"
 msgstr "Suprimeix dels preferits"
 
@@ -4305,7 +4325,7 @@ msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:512
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:516
 msgid "Search"
 msgstr "Cerca"
 
@@ -4372,7 +4392,7 @@ msgstr "Termes de cerca"
 msgid "Searching on Grooveshark"
 msgstr "Cercant a Grooveshark"
 
-#: ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
 msgstr "Segon nivell"
 
@@ -4681,7 +4701,7 @@ msgstr "Barra lateral petita"
 msgid "Smart playlist"
 msgstr "Llista de reproducció intel·ligent"
 
-#: library/librarymodel.cpp:1264
+#: library/librarymodel.cpp:1280
 msgid "Smart playlists"
 msgstr "Llistes de reproducció intel·ligents"
 
@@ -4742,6 +4762,7 @@ msgid "Source"
 msgstr "Font"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
+#: ../bin/src/ui_internetshowsettingspage.h:88
 msgid "Sources"
 msgstr "Fonts"
 
@@ -5026,7 +5047,7 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "Aquesta configuració s’usa en el diàleg «Converteix música», i quan es converteix la música abans de copiar-la a un dispositiu."
 
-#: ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:155
 msgid "Third level"
 msgstr "Tercer nivell"
 
@@ -5211,10 +5232,10 @@ msgstr "No s’ha pogut connectar"
 msgid "Unable to download %1 (%2)"
 msgstr "No es pot baixar %1 (%2)"
 
-#: core/song.cpp:411 library/librarymodel.cpp:345 library/librarymodel.cpp:349
-#: library/librarymodel.cpp:353 library/librarymodel.cpp:1050
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:500
-#: playlist/playlistmanager.cpp:501 ui/albumcoverchoicecontroller.cpp:124
+#: core/song.cpp:411 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
+#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Desconegut"
@@ -5247,7 +5268,7 @@ msgstr "Canceleu la subscripció"
 msgid "Upcoming Concerts"
 msgstr "Propers concerts"
 
-#: internet/vkservice.cpp:326 internet/vkservice.cpp:330
+#: internet/vkservice.cpp:330
 msgid "Update"
 msgstr "Actualitza"
 
@@ -5370,7 +5391,7 @@ msgstr "Usat"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L’usuari %1 no té un compte Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:152
 msgid "User interface"
 msgstr "Interfície d’usuari"
 
@@ -5396,8 +5417,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Taxa de bits variable"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:278
-#: playlist/playlistmanager.cpp:512 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
+#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Artistes diversos"
 
@@ -5447,6 +5468,10 @@ msgstr "WAV"
 #: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
+
+#: internet/vkservice.cpp:858
+msgid "Wall"
+msgstr "Mur"
 
 #: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
@@ -5567,14 +5592,14 @@ msgid "Wrong username or password."
 msgstr "Nom d’usuari o contrasenya incorrectes."
 
 #: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "Any"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:164
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:166
 msgid "Year - Album"
 msgstr "Any - Àlbum"
 
