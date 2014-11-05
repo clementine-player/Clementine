@@ -38,7 +38,8 @@ class DigitallyImportedServiceBase : public InternetService {
                                const QUrl& homepage_url, const QIcon& icon,
                                const QString& api_service_name,
                                Application* app, InternetModel* model,
-                               bool has_premium, QObject* parent = nullptr);
+                               bool has_premium,
+                               QObject* parent = nullptr);
   ~DigitallyImportedServiceBase();
 
   static const char* kSettingsGroup;
@@ -97,7 +98,7 @@ signals:
   int premium_audio_type_;
   QString username_;
   QString listen_hash_;
-  bool has_premium_;  // Does the service has premium features?
+  bool has_premium_; // Does the service has premium features?
 
   QStandardItem* root_;
 
@@ -117,8 +118,7 @@ class DigitallyImportedService : public DigitallyImportedServiceBase {
 
 class SkyFmService : public DigitallyImportedServiceBase {
  public:
-  SkyFmService(Application* app, InternetModel* model,
-               QObject* parent = nullptr);
+  SkyFmService(Application* app, InternetModel* model, QObject* parent = nullptr);
 };
 
 class JazzRadioService : public DigitallyImportedServiceBase {

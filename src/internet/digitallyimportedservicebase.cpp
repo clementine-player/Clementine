@@ -249,14 +249,16 @@ SkyFmService::SkyFmService(Application* app, InternetModel* model,
 
 JazzRadioService::JazzRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
-    : DigitallyImportedServiceBase("JazzRadio", "JAZZRADIO.com",
-                                   QUrl("http://www.jazzradio.com"),
-                                   QIcon(":/providers/jazzradio.png"),
-                                   "jazzradio", app, model, true, parent) {}
+    : DigitallyImportedServiceBase(
+          "JazzRadio", "JAZZRADIO.com", QUrl("http://www.jazzradio.com"),
+          QIcon(":/providers/jazzradio.png"), "jazzradio", app, model, true,
+          parent) {
+}
 
 RockRadioService::RockRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
-    : DigitallyImportedServiceBase("RockRadio", "ROCKRADIO.com",
-                                   QUrl("http://www.rockradio.com"),
-                                   QIcon(":/providers/rockradio.png"),
-                                   "rockradio", app, model, false, parent) {}
+    : DigitallyImportedServiceBase(
+          "RockRadio", "ROCKRADIO.com", QUrl("http://www.rockradio.com"),
+          QIcon(":/providers/rockradio.png"), "rockradio", app, model, false,
+          parent) {
+}

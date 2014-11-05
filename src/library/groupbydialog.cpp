@@ -54,10 +54,10 @@ class GroupByDialogPrivate {
       Mapping,
       indexed_by<
           ordered_unique<tag<tag_index>,
-                         member<Mapping, int, &Mapping::combo_box_index>>,
+                         member<Mapping, int, &Mapping::combo_box_index> >,
           ordered_unique<tag<tag_group_by>,
                          member<Mapping, LibraryModel::GroupBy,
-                                &Mapping::group_by>>>> MappingContainer;
+                                &Mapping::group_by> > > > MappingContainer;
 
  public:
   MappingContainer mapping_;

@@ -295,8 +295,7 @@ void IncomingDataParser::RateSong(const pb::remote::Message& msg) {
   emit RateCurrentSong(rating);
 }
 
-void IncomingDataParser::GlobalSearch(RemoteClient* client,
-                                      const pb::remote::Message& msg) {
+void IncomingDataParser::GlobalSearch(RemoteClient *client, const pb::remote::Message &msg) {
   emit DoGlobalSearch(QStringFromStdString(msg.request_global_search().query()),
                       client);
 }

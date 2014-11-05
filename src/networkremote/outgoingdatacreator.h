@@ -42,9 +42,10 @@ struct GlobalSearchRequest {
   int id_;
   QString query_;
   RemoteClient* client_;
-  GlobalSearchRequest() : id_(-1), client_(nullptr) {}
+  GlobalSearchRequest()
+    : id_(-1), client_(nullptr) {}
   GlobalSearchRequest(int i, const QString& q, RemoteClient* c)
-      : id_(i), query_(q), client_(c) {}
+    : id_(i), query_(q), client_(c) {}
 };
 
 class OutgoingDataCreator : public QObject {
@@ -102,7 +103,7 @@ class OutgoingDataCreator : public QObject {
   QTimer* keep_alive_timer_;
   QTimer* track_position_timer_;
   int keep_alive_timeout_;
-  QMap<RemoteClient*, QQueue<DownloadItem>> download_queue_;
+  QMap<RemoteClient*, QQueue<DownloadItem> > download_queue_;
   int last_track_position_;
   bool aww_;
 
@@ -123,8 +124,7 @@ class OutgoingDataCreator : public QObject {
                       int song_count);
   void SendAlbum(RemoteClient* client, const Song& song);
   void SendPlaylist(RemoteClient* client, int playlist_id);
-  void SendUrls(RemoteClient* client,
-                const pb::remote::RequestDownloadSongs& request);
+  void SendUrls(RemoteClient* client, const pb::remote::RequestDownloadSongs& request);
   void OfferNextSong(RemoteClient* client);
   void SendTotalFileSize(RemoteClient* client);
 };

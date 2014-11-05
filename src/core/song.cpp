@@ -534,7 +534,7 @@ void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
   pb->set_filesize(d->filesize_);
   pb->set_suspicious_tags(d->suspicious_tags_);
   pb->set_art_automatic(DataCommaSizeFromQString(d->art_automatic_));
-  pb->set_type(static_cast<::pb::tagreader::SongMetadata_Type>(d->filetype_));
+  pb->set_type(static_cast< ::pb::tagreader::SongMetadata_Type>(d->filetype_));
 }
 
 void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
@@ -887,8 +887,8 @@ void Song::BindToQuery(QSqlQuery* query) const {
 
   if (Application::kIsPortable &&
       Utilities::UrlOnSameDriveAsClementine(d->url_)) {
-    query->bindValue(":filename", Utilities::GetRelativePathToClementineBin(
-                                      d->url_).toEncoded());
+    query->bindValue(":filename",
+                     Utilities::GetRelativePathToClementineBin(d->url_).toEncoded());
   } else {
     query->bindValue(":filename", d->url_.toEncoded());
   }
