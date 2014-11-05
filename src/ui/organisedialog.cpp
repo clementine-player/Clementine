@@ -353,15 +353,11 @@ void OrganiseDialog::accept() {
       new_songs_info_, ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)),
           SLOT(OrganiseFinished(QStringList)));
-  connect(organise, SIGNAL(FileCopied_(int)),
-          this, SLOT(FileCopied_(int)));
+  connect(organise, SIGNAL(FileCopied(int)),
+          this, SIGNAL(FileCopied(int)));
   organise->Start();
 
   QDialog::accept();
-}
-
-void OrganiseDialog::FileCopied_(int database_id) {
-  emit FileCopied(database_id);
 }
 
 void OrganiseDialog::OrganiseFinished(const QStringList& files_with_errors) {

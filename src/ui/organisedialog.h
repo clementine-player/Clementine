@@ -65,7 +65,6 @@ class OrganiseDialog : public QDialog {
 
  public slots:
   void accept();
-  void FileCopied_(int);
 
  protected:
   void showEvent(QShowEvent*);
