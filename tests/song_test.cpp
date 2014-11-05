@@ -19,7 +19,7 @@
 #include "tagreader.h"
 #include "core/song.h"
 #ifdef HAVE_LIBLASTFM
-  #include "internet/lastfmcompat.h"
+#include "internet/lastfmcompat.h"
 #endif
 
 #include "gmock/gmock.h"
@@ -64,7 +64,8 @@ class SongTest : public ::testing::Test {
     tag_reader.SaveFile(filename, pb_song);
   }
 
-  static void WriteSongStatisticsToFile(const Song& song, const QString& filename) {
+  static void WriteSongStatisticsToFile(const Song& song,
+                                        const QString& filename) {
     TagReader tag_reader;
     ::pb::tagreader::SongMetadata pb_song;
     song.ToProtobuf(&pb_song);
@@ -78,7 +79,6 @@ class SongTest : public ::testing::Test {
     tag_reader.SaveSongRatingToFile(filename, pb_song);
   }
 };
-
 
 #ifdef HAVE_LIBLASTFM
 TEST_F(SongTest, InitsFromLastFM) {
@@ -95,7 +95,7 @@ TEST_F(SongTest, InitsFromLastFM) {
   EXPECT_EQ("Baz", song.album());
   EXPECT_EQ("Bar", song.artist());
 }
-#endif // HAVE_LIBLASTFM
+#endif  // HAVE_LIBLASTFM
 
 /*TEST_F(SongTest, InitsFromFile) {
   QTemporaryFile temp;
@@ -156,14 +156,13 @@ TEST_F(SongTest, FMPSPlayCountBoth) {
 
 TEST_F(SongTest, FMPSUnrated) {
   QStringList files_to_test;
-  files_to_test <<
-      ":/testdata/beep.m4a" <<
-      ":/testdata/beep.mp3" <<
-      ":/testdata/beep.flac" <<
-      ":/testdata/beep.ogg" <<
-      ":/testdata/beep.spx" <<
-      ":/testdata/beep.wav" <<
-      ":/testdata/beep.wma";
+  files_to_test << ":/testdata/beep.m4a"
+                << ":/testdata/beep.mp3"
+                << ":/testdata/beep.flac"
+                << ":/testdata/beep.ogg"
+                << ":/testdata/beep.spx"
+                << ":/testdata/beep.wav"
+                << ":/testdata/beep.wma";
   for (const QString& test_filename : files_to_test) {
     TemporaryResource r(test_filename);
     Song song = ReadSongFromFile(r.fileName());
@@ -295,7 +294,7 @@ TEST_F(SongTest, StatisticsASF) {
   EXPECT_EQ(1337, new_song.playcount());
   EXPECT_EQ(87, new_song.score());
 }
-#endif // TAGLIB_WITH_ASF
+#endif  // TAGLIB_WITH_ASF
 
 TEST_F(SongTest, RatingMP4) {
   TemporaryResource r(":/testdata/beep.m4a");

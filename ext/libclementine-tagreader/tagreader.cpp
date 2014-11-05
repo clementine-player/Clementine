@@ -502,10 +502,9 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
                     100);
 }
 
-void TagReader::SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
-                                  const pb::tagreader::SongMetadata& song)
-    const {
-
+void TagReader::SetVorbisComments(
+    TagLib::Ogg::XiphComment* vorbis_comments,
+    const pb::tagreader::SongMetadata& song) const {
   vorbis_comments->addField("COMPOSER",
                             StdStringToTaglibString(song.composer()), true);
   vorbis_comments->addField("PERFORMER",
@@ -540,7 +539,6 @@ void TagReader::SetFMPSStatisticsVorbisComments(
 void TagReader::SetFMPSRatingVorbisComments(
     TagLib::Ogg::XiphComment* vorbis_comments,
     const pb::tagreader::SongMetadata& song) const {
-
   vorbis_comments->addField(
       "FMPS_RATING", QStringToTaglibString(QString::number(song.rating())));
 }
@@ -953,8 +951,8 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                               pb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Loading tags from" << title;
 
-  std::unique_ptr<CloudStream> stream(
-        new CloudStream(download_url, title, size, authorisation_header, network_));
+  std::unique_ptr<CloudStream> stream(new CloudStream(
+      download_url, title, size, authorisation_header, network_));
   stream->Precache();
   std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {
@@ -963,8 +961,8 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                                      TagLib::AudioProperties::Accurate));
   } else if (mime_type == "audio/mp4" ||
              (mime_type == "audio/mpeg" && title.endsWith(".m4a"))) {
-    tag.reset(
-        new TagLib::MP4::File(stream.get(), true, TagLib::AudioProperties::Accurate));
+    tag.reset(new TagLib::MP4::File(stream.get(), true,
+                                    TagLib::AudioProperties::Accurate));
   }
 #ifdef TAGLIB_HAS_OPUS
   else if ((mime_type == "application/opus" || mime_type == "audio/opus" ||
@@ -983,8 +981,8 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                                      TagLib::ID3v2::FrameFactory::instance(),
                                      true, TagLib::AudioProperties::Accurate));
   } else if (mime_type == "audio/x-ms-wma") {
-    tag.reset(
-        new TagLib::ASF::File(stream.get(), true, TagLib::AudioProperties::Accurate));
+    tag.reset(new TagLib::ASF::File(stream.get(), true,
+                                    TagLib::AudioProperties::Accurate));
   } else {
     qLog(Debug) << "Unknown mime type for tagging:" << mime_type;
     return false;

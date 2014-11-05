@@ -421,7 +421,6 @@ void TagCompleter::ModelReady() {
 QWidget* TagCompletionItemDelegate::createEditor(QWidget* parent,
                                                  const QStyleOptionViewItem&,
                                                  const QModelIndex&) const {
-
   QLineEdit* editor = new QLineEdit(parent);
   new TagCompleter(backend_, column_, editor);
 

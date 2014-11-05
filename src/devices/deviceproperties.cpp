@@ -253,13 +253,13 @@ void DeviceProperties::accept() {
           .toInt());
 
   // By default no icon is selected and thus no current item is selected
-  QString icon_name = "";
-  if(ui_->icon->currentItem() != nullptr) {
+  QString icon_name;
+  if (ui_->icon->currentItem() != nullptr) {
     icon_name = ui_->icon->currentItem()->data(Qt::UserRole).toString();
   }
 
-  manager_->SetDeviceOptions(
-        index_.row(), ui_->name->text(), icon_name, mode,format);
+  manager_->SetDeviceOptions(index_.row(), ui_->name->text(), icon_name, mode,
+                             format);
 }
 
 void DeviceProperties::OpenDevice() { manager_->Connect(index_.row()); }

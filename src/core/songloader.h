@@ -84,10 +84,15 @@ signals:
 #ifdef HAVE_AUDIOCD
   void AudioCDTracksLoadedSlot(const SongList& songs);
   void AudioCDTracksTagsLoaded(const SongList& songs);
-#endif // HAVE_AUDIOCD
+#endif  // HAVE_AUDIOCD
 
  private:
-  enum State { WaitingForType, WaitingForMagic, WaitingForData, Finished, };
+  enum State {
+    WaitingForType,
+    WaitingForMagic,
+    WaitingForData,
+    Finished,
+  };
 
   Result LoadLocal(const QString& filename);
   void LoadLocalAsync(const QString& filename);

@@ -139,10 +139,10 @@ SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
 SongLoader::Result SongLoader::LoadAudioCD() {
 #ifdef HAVE_AUDIOCD
   CddaSongLoader* cdda_song_loader = new CddaSongLoader;
-  connect(cdda_song_loader, SIGNAL(SongsDurationLoaded(SongList)),
-          this, SLOT(AudioCDTracksLoadedSlot(SongList)));
-  connect(cdda_song_loader, SIGNAL(SongsMetadataLoaded(SongList)),
-          this, SLOT(AudioCDTracksTagsLoaded(SongList)));
+  connect(cdda_song_loader, SIGNAL(SongsDurationLoaded(SongList)), this,
+          SLOT(AudioCDTracksLoadedSlot(SongList)));
+  connect(cdda_song_loader, SIGNAL(SongsMetadataLoaded(SongList)), this,
+          SLOT(AudioCDTracksTagsLoaded(SongList)));
   cdda_song_loader->LoadSongs();
   return Success;
 #else  // HAVE_AUDIOCD
@@ -162,7 +162,7 @@ void SongLoader::AudioCDTracksTagsLoaded(const SongList& songs) {
   songs_ = songs;
   emit LoadAudioCDFinished(true);
 }
-#endif // HAVE_AUDIOCD
+#endif  // HAVE_AUDIOCD
 
 SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   qLog(Debug) << "Loading local file" << filename;
@@ -189,13 +189,11 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   }
 
   // It's not in the database, load it asynchronously.
-  preload_func_ =
-      std::bind(&SongLoader::LoadLocalAsync, this, filename);
+  preload_func_ = std::bind(&SongLoader::LoadLocalAsync, this, filename);
   return BlockingLoadRequired;
 }
 
 void SongLoader::LoadLocalAsync(const QString& filename) {
-
   // First check to see if it's a directory - if so we will load all the songs
   // inside right away.
   if (QFileInfo(filename).isDir()) {
@@ -213,7 +211,8 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
   if (!parser) {
     // Check the file extension as well, maybe the magic failed, or it was a
     // basic M3U file which is just a plain list of filenames.
-    parser = playlist_parser_->ParserForExtension(QFileInfo(filename).suffix().toLower());
+    parser = playlist_parser_->ParserForExtension(
+        QFileInfo(filename).suffix().toLower());
   }
 
   if (parser) {
@@ -233,7 +232,7 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
 
     SongList song_list = cue_parser_->Load(&cue, matching_cue,
                                            QDir(filename.section('/', 0, -2)));
-    for (Song song: song_list){
+    for (Song song : song_list) {
       if (song.is_valid()) songs_ << song;
     }
     return;
@@ -403,8 +402,7 @@ void SongLoader::LoadRemote() {
 
   // Add a probe to the sink so we can capture the data if it's a playlist
   GstPad* pad = gst_element_get_static_pad(fakesink, "sink");
-  gst_pad_add_probe(
-      pad, GST_PAD_PROBE_TYPE_BUFFER, &DataReady, this, NULL);
+  gst_pad_add_probe(pad, GST_PAD_PROBE_TYPE_BUFFER, &DataReady, this, NULL);
   gst_object_unref(pad);
 
   QEventLoop loop;
@@ -440,12 +438,11 @@ void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
   instance->StopTypefindAsync(true);
 }
 
-GstPadProbeReturn SongLoader::DataReady(
-    GstPad*, GstPadProbeInfo* info, gpointer self) {
+GstPadProbeReturn SongLoader::DataReady(GstPad*, GstPadProbeInfo* info,
+                                        gpointer self) {
   SongLoader* instance = reinterpret_cast<SongLoader*>(self);
 
-  if (instance->state_ == Finished)
-    return GST_PAD_PROBE_OK;
+  if (instance->state_ == Finished) return GST_PAD_PROBE_OK;
 
   GstBuffer* buffer = gst_pad_probe_info_get_buffer(info);
   GstMapInfo map;
