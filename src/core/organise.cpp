@@ -192,7 +192,7 @@ void Organise::ProcessSomeFiles() {
     }
     else {
       if(job.mark_as_listened_) {
-        emit FileCopied(job.metadata_.id());
+        emit FileCopied_(job.metadata_.id());
       }
     }
 

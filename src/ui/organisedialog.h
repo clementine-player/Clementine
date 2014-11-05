@@ -41,12 +41,11 @@ class OrganiseDialog : public QDialog {
   Q_OBJECT
 
  public:
-  OrganiseDialog(TaskManager* task_manager, QWidget* parent = nullptr, QObject* caller = nullptr);
+  OrganiseDialog(TaskManager* task_manager, QWidget* parent = nullptr);
   ~OrganiseDialog();
 
   static const char* kDefaultFormat;
   static const char* kSettingsGroup;
-  QObject* caller_;
 
   QSize sizeHint() const;
 
@@ -61,8 +60,12 @@ class OrganiseDialog : public QDialog {
 
   void SetCopy(bool copy);
 
+ signals:
+  void FileCopied(int);
+
  public slots:
   void accept();
+  void FileCopied_(int);
 
  protected:
   void showEvent(QShowEvent*);

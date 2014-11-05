@@ -43,9 +43,8 @@ const char* OrganiseDialog::kDefaultFormat =
     "%artist/%album{ (Disc %disc)}/{%track - }%title.%extension";
 const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
 
-OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent, QObject* caller)
+OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent)
     : QDialog(parent),
-      caller_(caller),
       ui_(new Ui_OrganiseDialog),
       task_manager_(task_manager),
       total_size_(0),
@@ -354,11 +353,15 @@ void OrganiseDialog::accept() {
       new_songs_info_, ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)),
           SLOT(OrganiseFinished(QStringList)));
-  connect(organise, SIGNAL(FileCopied(int)),
-          caller_, SLOT(FileCopied(int)));
+  connect(organise, SIGNAL(FileCopied_(int)),
+          this, SLOT(FileCopied_(int)));
   organise->Start();
 
   QDialog::accept();
+}
+
+void OrganiseDialog::FileCopied_(int database_id) {
+  emit FileCopied(database_id);
 }
 
 void OrganiseDialog::OrganiseFinished(const QStringList& files_with_errors) {

@@ -54,7 +54,7 @@ class Organise : public QObject {
 
 signals:
   void Finished(const QStringList& files_with_errors);
-  void FileCopied(int database_id);
+  void FileCopied_(int database_id);
 
  protected:
   void timerEvent(QTimerEvent* e);
