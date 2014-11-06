@@ -44,7 +44,7 @@ class Organise : public QObject {
   typedef QList<NewSongInfo> NewSongInfoList;
 
   Organise(TaskManager* task_manager, std::shared_ptr<MusicStorage> destination,
-           const OrganiseFormat& format, bool copy, bool overwrite,
+           const OrganiseFormat& format, bool copy, bool overwrite, bool mark_as_listened,
            const NewSongInfoList& songs, bool eject_after);
 
   static const int kBatchSize;
@@ -54,6 +54,7 @@ class Organise : public QObject {
 
 signals:
   void Finished(const QStringList& files_with_errors);
+  void FileCopied(int database_id);
 
  protected:
   void timerEvent(QTimerEvent* e);
@@ -90,6 +91,7 @@ signals:
   const OrganiseFormat format_;
   const bool copy_;
   const bool overwrite_;
+  const bool mark_as_listened_;
   const bool eject_after_;
   int task_count_;
 

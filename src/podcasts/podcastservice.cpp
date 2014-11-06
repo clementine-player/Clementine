@@ -58,7 +58,8 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
       proxy_(new PodcastSortProxyModel(this)),
       context_menu_(nullptr),
       root_(nullptr),
-      organise_dialog_(new OrganiseDialog(app_->task_manager())) {
+      organise_dialog_(new OrganiseDialog(app_->task_manager(),
+                                          nullptr)) {
   icon_loader_->SetModel(model_);
   proxy_->setSourceModel(model_);
   proxy_->setDynamicSortFilter(true);
@@ -75,6 +76,8 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
 
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
           SLOT(CurrentSongChanged(Song)));
+  connect(organise_dialog_.get(), SIGNAL(FileCopied(int)),
+          this, SLOT(FileCopied(int)));
 }
 
 PodcastService::~PodcastService() {}
@@ -474,6 +477,11 @@ void PodcastService::EnsureAddPodcastDialogCreated() {
 void PodcastService::AddPodcast() {
   EnsureAddPodcastDialogCreated();
   add_podcast_dialog_->show();
+}
+
+void PodcastService::FileCopied(int database_id) {
+  SetListened(PodcastEpisodeList() << backend_->GetEpisodeById(database_id),
+              true);
 }
 
 void PodcastService::SubscriptionAdded(const Podcast& podcast) {

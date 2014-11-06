@@ -39,6 +39,7 @@ const int Organise::kTranscodeProgressInterval = 500;
 Organise::Organise(TaskManager* task_manager,
                    std::shared_ptr<MusicStorage> destination,
                    const OrganiseFormat& format, bool copy, bool overwrite,
+                   bool mark_as_listened,
                    const NewSongInfoList& songs_info, bool eject_after)
     : thread_(nullptr),
       task_manager_(task_manager),
@@ -47,6 +48,7 @@ Organise::Organise(TaskManager* task_manager,
       format_(format),
       copy_(copy),
       overwrite_(overwrite),
+      mark_as_listened_(mark_as_listened),
       eject_after_(eject_after),
       task_count_(songs_info.count()),
       transcode_suffix_(1),
@@ -180,12 +182,18 @@ void Organise::ProcessSomeFiles() {
     job.destination_ = task.song_info_.new_filename_;
     job.metadata_ = song;
     job.overwrite_ = overwrite_;
+    job.mark_as_listened_ = mark_as_listened_;
     job.remove_original_ = !copy_;
     job.progress_ = std::bind(&Organise::SetSongProgress, this, _1,
                               !task.transcoded_filename_.isEmpty());
 
     if (!destination_->CopyToStorage(job)) {
       files_with_errors_ << task.song_info_.song_.basefilename();
+    }
+    else {
+      if(job.mark_as_listened_) {
+        emit FileCopied(job.metadata_.id());
+      }
     }
 
     // Clean up the temporary transcoded file
