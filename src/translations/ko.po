@@ -319,7 +319,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -493,7 +493,7 @@ msgstr "새로운 폴더 추가..."
 msgid "Add podcast"
 msgstr "팟케스트 추가"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "팟케스트 추가..."
 
@@ -662,7 +662,7 @@ msgstr "고급 그룹화..."
 msgid "After "
 msgstr "이후"
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "복사 한 후...."
 
@@ -1356,7 +1356,7 @@ msgstr "글로벌 검색 설정..."
 msgid "Configure library..."
 msgstr "라이브러리 설정..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "팟케스트 설정..."
 
@@ -1418,7 +1418,7 @@ msgstr "공유 URL 복사"
 msgid "Copy to clipboard"
 msgstr "클립보드로 복사"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "장치에 복사..."
@@ -1670,7 +1670,7 @@ msgstr "삭제"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark 재생목록 지우기"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "다운로드된 데이터 삭제"
 
@@ -1700,7 +1700,7 @@ msgstr "프리셋 삭제"
 msgid "Delete smart playlist"
 msgstr "스마트 재생목록 지우기"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "원본 파일 삭제"
 
@@ -1716,7 +1716,7 @@ msgstr "선택한 트랙을 대기열에서 해제"
 msgid "Dequeue track"
 msgstr "트랙을 대기열에서 해제"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "대상"
@@ -1867,7 +1867,7 @@ msgstr "열려면 더블클릭하세요"
 msgid "Double clicking a song will..."
 msgstr "노래를 더블클릭하면..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1889,7 +1889,7 @@ msgstr "멤버십 다운로드"
 msgid "Download new episodes automatically"
 msgstr "자동으로 새로운 에피소드 다운로드"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "다운로드 대기열 추가됨"
 
@@ -1905,7 +1905,7 @@ msgstr "이 앨범 다운로드"
 msgid "Download this album..."
 msgstr "이 앨범 다운로드..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "이 에피소드 다운로드"
 
@@ -1913,7 +1913,7 @@ msgstr "이 에피소드 다운로드"
 msgid "Download..."
 msgstr "다운로드..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "다운로드 중 (%1%)..."
@@ -2685,7 +2685,7 @@ msgstr "계속 한다면, 이 장치는 느리고 복사된 음악들이 작동 
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "팟케스트에 URL을 알고 있다면, 아래에 입력하고 버튼을 누르세요."
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "음악가 이름에서 \"The\" 제거"
 
@@ -2766,7 +2766,7 @@ msgstr "정보"
 msgid "Input options"
 msgstr "옵션 "
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "추가..."
 
@@ -2871,7 +2871,7 @@ msgstr "%1 초 동안 버튼 유지..."
 msgid "Keep running in the background when the window is closed"
 msgstr "창을 닫을 때 백그라운드에서 계속 실행"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "원본 파일들 "
 
@@ -3044,7 +3044,7 @@ msgstr "트랙 정보 불러오는중"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "여는 중..."
@@ -3178,11 +3178,11 @@ msgstr "수동적"
 msgid "Manufacturer"
 msgstr "제조회사"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "들음으로 기록"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "새로 기록"
 
@@ -3328,7 +3328,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "이름"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "명명 옵션"
 
@@ -3621,7 +3621,7 @@ msgstr "옵션..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "파일 정리"
 
@@ -3629,7 +3629,7 @@ msgstr "파일 정리"
 msgid "Organise files..."
 msgstr "파일 정리..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "파일 정리 중..."
 
@@ -3657,7 +3657,7 @@ msgstr "저장 옵션"
 msgid "Overwrite all"
 msgstr "모두 덮어쓰기"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "기존 파일들 "
 
@@ -3781,7 +3781,7 @@ msgstr "브라우저를 닫고 Clementine으로 돌아오세요"
 msgid "Plugin status:"
 msgstr "플러그인 상태:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "팟케스트"
 
@@ -3873,7 +3873,7 @@ msgstr "예쁜 OSD 옵션"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "미리보기"
 
@@ -4146,7 +4146,7 @@ msgstr "현재 재생목록 교체"
 msgid "Replace the playlist"
 msgstr "재생목록 교체"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "공백을 및줄로 대체"
 
@@ -4179,7 +4179,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "ASCII 문자로 제한"
 
@@ -4241,7 +4241,7 @@ msgstr ""
 msgid "Safely remove device"
 msgstr "안전하게 장치 제거"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "복사 후 안전하게 장치 제거"
 
@@ -5264,7 +5264,7 @@ msgstr "선택된 트랙들 넘기기 "
 msgid "Unskip track"
 msgstr "트랙 넘기기 "
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "구독 안함"
 
@@ -5280,7 +5280,7 @@ msgstr "갱신"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark 재생목록 업데이트"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "모든 팟케스트 업데이트"
 
@@ -5292,7 +5292,7 @@ msgstr "변경된 라이브러리 폴더 업데이트"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine이 시작될 때 라이브러리 업데이트"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "이 팟케스트 업데이트"
 

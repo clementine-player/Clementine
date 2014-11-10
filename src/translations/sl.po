@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-31 11:47+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-11-06 16:24+0000\n"
+"Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -315,7 +315,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>To bo zapisalo vse ocene in statistike v oznake datotek za vse vaše skladbe v knjižnici.</p><p>To ni zahtevano, če je vedno vklopljena možnost &quot;Shrani ocene in statistike v oznake datotek&quot;.</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -489,7 +489,7 @@ msgstr "Dodaj novo mapo ..."
 msgid "Add podcast"
 msgstr "Dodaj podcast"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Dodaj podcast ..."
 
@@ -658,7 +658,7 @@ msgstr "Napredno združevanje ..."
 msgid "After "
 msgstr "Po "
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "Po kopiranju ..."
 
@@ -1142,7 +1142,7 @@ msgstr "Izberi mapo za prejeme podcastov"
 
 #: ../bin/src/ui_internetshowsettingspage.h:89
 msgid "Choose the internet services you want to show."
-msgstr ""
+msgstr "Izberite internetne storitve, ki bi jih želeli prikazati."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1352,7 +1352,7 @@ msgstr "Nastavi splošno iskanje"
 msgid "Configure library..."
 msgstr "Nastavi knjižnico ..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "Nastavi podcaste ..."
 
@@ -1414,7 +1414,7 @@ msgstr "Kopiraj naslov URL za deljenje v odložišče"
 msgid "Copy to clipboard"
 msgstr "Kopiraj v odložišče"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiraj na napravo ..."
@@ -1666,7 +1666,7 @@ msgstr "Izbriši"
 msgid "Delete Grooveshark playlist"
 msgstr "Izbriši seznam predvajanja Grooveshark"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "Izbriši prejete podatke"
 
@@ -1696,7 +1696,7 @@ msgstr "Izbriši predlogo nastavitev"
 msgid "Delete smart playlist"
 msgstr "Izbriši pameten seznam predvajanja"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "Izbriši izvorne datoteke"
 
@@ -1712,7 +1712,7 @@ msgstr "Odstrani izbrane skladbe iz vrste"
 msgid "Dequeue track"
 msgstr "Odstrani skladbo iz vrste"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Cilj"
@@ -1863,7 +1863,7 @@ msgstr "Dvoklik za odpiranje"
 msgid "Double clicking a song will..."
 msgstr "Dvoklik skladbe bo povzročil sledeče ..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1885,7 +1885,7 @@ msgstr "Članstvo prejemanja"
 msgid "Download new episodes automatically"
 msgstr "Samodejno prejmi nove epizode"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "Prejem je v čakalni vrsti"
 
@@ -1901,7 +1901,7 @@ msgstr "Prejmi ta album"
 msgid "Download this album..."
 msgstr "Prejmi ta album ..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "Prejmi to epizodo"
 
@@ -1909,7 +1909,7 @@ msgstr "Prejmi to epizodo"
 msgid "Download..."
 msgstr "Prejmi ..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Prejemanje (%1 %) ..."
@@ -2681,7 +2681,7 @@ msgstr "Če boste nadaljevali, bo naprava delovala počasi in skladbe, ki ste ji
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Če poznate naslov URL podcasta, ga vnesite spodaj in pritisnite Pojdi"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "Prezri \"The\" v imenih izvajalcev"
 
@@ -2762,7 +2762,7 @@ msgstr "Podrobnosti"
 msgid "Input options"
 msgstr "Možnosti vhoda"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "Vstavi ..."
 
@@ -2785,7 +2785,7 @@ msgstr "Ponudniki interneta"
 #: ../bin/src/ui_internetshowsettingspage.h:87
 msgctxt "Global search settings dialog title."
 msgid "Internet services"
-msgstr ""
+msgstr "Internetne storitve"
 
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
@@ -2867,7 +2867,7 @@ msgstr "Ohrani gumbe za %1 sekund ..."
 msgid "Keep running in the background when the window is closed"
 msgstr "Ostani zagnan v ozadju dokler se ne zapre okno"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "Ohrani izvorne datoteke"
 
@@ -3040,7 +3040,7 @@ msgstr "Nalaganje podrobnosti o skladbah"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Nalaganje ..."
@@ -3174,11 +3174,11 @@ msgstr "Ročno"
 msgid "Manufacturer"
 msgstr "Proizvajalec"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Označi kot poslušano"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "Označi kot novo"
 
@@ -3324,7 +3324,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Ime"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "Možnosti poimenovanja"
 
@@ -3617,7 +3617,7 @@ msgstr "Možnosti ..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "Organiziraj datoteke"
 
@@ -3625,7 +3625,7 @@ msgstr "Organiziraj datoteke"
 msgid "Organise files..."
 msgstr "Organiziraj datoteke ..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "Organiziranje datotek"
 
@@ -3653,7 +3653,7 @@ msgstr "Možnosti izhoda"
 msgid "Overwrite all"
 msgstr "Prepiši vse"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "Prepiši obstoječe datoteke"
 
@@ -3777,7 +3777,7 @@ msgstr "Zaprite vaš brskalnik in se vrnite v Clementine."
 msgid "Plugin status:"
 msgstr "Stanje vstavka:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcasti"
 
@@ -3869,7 +3869,7 @@ msgstr "Možnosti za lep prikaz na zaslonu"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "Predogled"
 
@@ -4142,7 +4142,7 @@ msgstr "Zamenjaj trenuten seznam predvajanja"
 msgid "Replace the playlist"
 msgstr "Zamenjaj seznam predvajanja"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "Zamenja presledke s podčrtaji"
 
@@ -4175,7 +4175,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Znova zaženi skladbo ali predvajaj predhodno skladbo, če je znotraj 8 sekund začetka."
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "Omeji na znake ASCII"
 
@@ -4237,7 +4237,7 @@ msgstr "Napaka med rokovanjem SSH, preverite nastavitev strežnika. Za nekatere 
 msgid "Safely remove device"
 msgstr "Varno odstrani napravo"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Varno odstrani napravo po kopiranju"
 
@@ -5260,7 +5260,7 @@ msgstr "Ne preskoči izbranih skladb"
 msgid "Unskip track"
 msgstr "Ne preskoči skladbe"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "Ukini naročnino"
 
@@ -5276,7 +5276,7 @@ msgstr "Posodobi"
 msgid "Update Grooveshark playlist"
 msgstr "Posodobi seznam predvajanja Grooveshark"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "Posodobi vse podcaste"
 
@@ -5288,7 +5288,7 @@ msgstr "Posodobi spremenjene mape v knjižnici"
 msgid "Update the library when Clementine starts"
 msgstr "Posodobi knjižnico ob zagonu Clementine"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "Posodobi ta podcast"
 

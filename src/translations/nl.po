@@ -317,7 +317,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>Dit zal alle waarderingen en statistiek wegschrijven in de bestanden van uw muziekbibliotheek.</p><p>Dit is niet nodig als de optie &quot;Sla waarderingen op in bestand, indien mogellijk&quot; altijd aan gestaan heeft.</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -491,7 +491,7 @@ msgstr "Nieuwe map toevoegen…"
 msgid "Add podcast"
 msgstr "Voeg podcast toe"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Voeg podcast toe..."
 
@@ -660,7 +660,7 @@ msgstr "Geavanceerd groeperen…"
 msgid "After "
 msgstr "Na"
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "Na het kopiëren…"
 
@@ -1354,7 +1354,7 @@ msgstr "Globaal zoeken instellen..."
 msgid "Configure library..."
 msgstr "Bibliotheek configureren…"
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "Podcasts configureren"
 
@@ -1416,7 +1416,7 @@ msgstr "Kopieer url om te delen naar klembord"
 msgid "Copy to clipboard"
 msgstr "Kopieer naar klembord"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Naar apparaat kopiëren…"
@@ -1668,7 +1668,7 @@ msgstr "Verwijderen"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark afspeellijst wissen"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "Verwijder gedownloadde gegevens"
 
@@ -1698,7 +1698,7 @@ msgstr "Voorinstelling verwijderen"
 msgid "Delete smart playlist"
 msgstr "Slimme-afspeellijst verwijderen"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "Oorspronkelijke bestanden verwijderen"
 
@@ -1714,7 +1714,7 @@ msgstr "Geselecteerde nummers uit wachtrij verwijderen"
 msgid "Dequeue track"
 msgstr "Nummer uit wachtrij verwijderen"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Bestemming"
@@ -1865,7 +1865,7 @@ msgstr "Dubbeklik om te openen"
 msgid "Double clicking a song will..."
 msgstr "Dubbelklikken op een nummer zal…"
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1887,7 +1887,7 @@ msgstr "Lidmaatschap downloaden"
 msgid "Download new episodes automatically"
 msgstr "Download nieuwe afleveringen automatisch"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "Download in wachtrij gezet"
 
@@ -1903,7 +1903,7 @@ msgstr "Dit album downloaden"
 msgid "Download this album..."
 msgstr "Dit album downloaden…"
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "Download deze aflevering"
 
@@ -1911,7 +1911,7 @@ msgstr "Download deze aflevering"
 msgid "Download..."
 msgstr "Downloaden…"
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Bezig met downloaden (%1%)..."
@@ -2683,7 +2683,7 @@ msgstr "Als u verder gaat zal dit apparaat traag zijn en de nummers die ernaar g
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Als u de URL van een podcast weet, typ deze hieronder en klik op Ga"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "\"The\" in artiestennamen negeren"
 
@@ -2764,7 +2764,7 @@ msgstr "Informatie"
 msgid "Input options"
 msgstr "Invoeropties"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "Invoegen…"
 
@@ -2869,7 +2869,7 @@ msgstr "Hou de toetsen voor %1 seconden ingedrukt…"
 msgid "Keep running in the background when the window is closed"
 msgstr "In de achtergrond laten draaien als het venter gesloten wordt"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "De originele bestanden behouden"
 
@@ -3042,7 +3042,7 @@ msgstr "Nummerinformatie laden"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Laden…"
@@ -3176,11 +3176,11 @@ msgstr "Handmatig"
 msgid "Manufacturer"
 msgstr "Fabrikant"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Markeer als beluisterd"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "Markeer als nieuw"
 
@@ -3326,7 +3326,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Naam"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "Benoemingsopties"
 
@@ -3619,7 +3619,7 @@ msgstr "Opties…"
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "Bestanden sorteren"
 
@@ -3627,7 +3627,7 @@ msgstr "Bestanden sorteren"
 msgid "Organise files..."
 msgstr "Bestanden sorteren..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "Bestanden sorteren"
 
@@ -3655,7 +3655,7 @@ msgstr "Uitvoeropties"
 msgid "Overwrite all"
 msgstr "Alles overschrijven"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "Overschrijf bestaande bestanden"
 
@@ -3779,7 +3779,7 @@ msgstr "Sluit uw browser en keer terug naar Clementine."
 msgid "Plugin status:"
 msgstr "Plug-in status:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcasts"
 
@@ -3871,7 +3871,7 @@ msgstr "Opties mooi infoschermvenster"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "Voorbeeld"
 
@@ -4144,7 +4144,7 @@ msgstr "Huidige afspeellijst vervangen"
 msgid "Replace the playlist"
 msgstr "Afspeellijst vervangen"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "Vervangt spaties door underscores"
 
@@ -4177,7 +4177,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Herstart het afspelen van track, of speel het vorige nummer af bij 8 seconden van start."
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "Beperken tot ASCII karakters"
 
@@ -4239,7 +4239,7 @@ msgstr "Foout bij SSL handshake, controleer server instellingen. De SSLv3 optie 
 msgid "Safely remove device"
 msgstr "Apparaat veilig verwijderen"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Apparaat veilig verwijderen na het kopiëren"
 
@@ -5262,7 +5262,7 @@ msgstr "Geselecteerde nummers niet overslaan"
 msgid "Unskip track"
 msgstr "Nummer niet overslaan"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "Uitschrijven"
 
@@ -5278,7 +5278,7 @@ msgstr "Bijwerken"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark afspeellijsten bijwerken"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "Vernieuw alle podcasts"
 
@@ -5290,7 +5290,7 @@ msgstr "Aangepaste databasemappen updaten"
 msgid "Update the library when Clementine starts"
 msgstr "Bibliotheek bijwerken zodra Clementine gestart wordt"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "Vernieuw deze podcast"
 

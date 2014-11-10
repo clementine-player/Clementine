@@ -322,7 +322,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>Detta kommer att skriva låtbetyg och statistik till filetiketter i hela ditt musikbibliotek.</p><p>Detta är inte nödvändigt om &quot;Spara betyg och statistik i filetiketter&quot; alltid är aktiverat.</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -496,7 +496,7 @@ msgstr "Lägg till mapp..."
 msgid "Add podcast"
 msgstr "Lägg till podsändning"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Lägg till podsändning..."
 
@@ -665,7 +665,7 @@ msgstr "Avancerad gruppering..."
 msgid "After "
 msgstr "Efter "
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "Efter kopiering..."
 
@@ -1359,7 +1359,7 @@ msgstr "Ställ in Global sökning..."
 msgid "Configure library..."
 msgstr "Konfigurera biblioteket..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "Konfigurera podcasts..."
 
@@ -1421,7 +1421,7 @@ msgstr "Kopiera delad url till urklipp"
 msgid "Copy to clipboard"
 msgstr "Kopiera till klippbordet"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiera till enhet..."
@@ -1673,7 +1673,7 @@ msgstr "Ta bort"
 msgid "Delete Grooveshark playlist"
 msgstr "Ta bort Grooveshark spellista"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "Ta bort nedladdad data"
 
@@ -1703,7 +1703,7 @@ msgstr "Ta bort förinställning"
 msgid "Delete smart playlist"
 msgstr "Radera smart spellista"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "Ta bort originalfilerna"
 
@@ -1719,7 +1719,7 @@ msgstr "Avköa valda spår"
 msgid "Dequeue track"
 msgstr "Avköa spår"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Mål"
@@ -1870,7 +1870,7 @@ msgstr "Dubbelklicka för att öppna"
 msgid "Double clicking a song will..."
 msgstr "Dubbelklicka på en låt kommer ..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1892,7 +1892,7 @@ msgstr "Hämta medlemskap"
 msgid "Download new episodes automatically"
 msgstr "Ladda ner nya avsnitt automatiskt"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "Nedladdning köad"
 
@@ -1908,7 +1908,7 @@ msgstr "Hämta detta album"
 msgid "Download this album..."
 msgstr "Ladda ner det här albumet ..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "Ladda ner detta avsnitt"
 
@@ -1916,7 +1916,7 @@ msgstr "Ladda ner detta avsnitt"
 msgid "Download..."
 msgstr "Ladda ner..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Laddar ner (%1%)..."
@@ -2688,7 +2688,7 @@ msgstr "Om du fortsätter kommer denna enhet att arbeta långsamt och låtar som
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Om du känner till en adress till en podsändnin, ange den här under och tryck Starta"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorera \"The\" i artistnamn"
 
@@ -2769,7 +2769,7 @@ msgstr "Information"
 msgid "Input options"
 msgstr "Indataalternativ"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "Infoga..."
 
@@ -2874,7 +2874,7 @@ msgstr "Behåll knappar i %1 sekunder..."
 msgid "Keep running in the background when the window is closed"
 msgstr "Fortsätt köra i bakgrunden när fönstret är stängt"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "Behåll originalfilerna"
 
@@ -3047,7 +3047,7 @@ msgstr "Laddar låtinformation"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Läser in..."
@@ -3181,11 +3181,11 @@ msgstr "Manuellt"
 msgid "Manufacturer"
 msgstr "Tillverkare"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Markera som lyssnad"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "Markera som ny"
 
@@ -3331,7 +3331,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Namn"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "Namngivningsalternativ"
 
@@ -3624,7 +3624,7 @@ msgstr "Alternativ..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "Organisera filer"
 
@@ -3632,7 +3632,7 @@ msgstr "Organisera filer"
 msgid "Organise files..."
 msgstr "Organisera filer..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "Organiserar filer..."
 
@@ -3660,7 +3660,7 @@ msgstr "Utdataalternativ"
 msgid "Overwrite all"
 msgstr "Skriv över alla"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "Skriv över befintliga filer"
 
@@ -3784,7 +3784,7 @@ msgstr "Var god och stäng din webbläsare och återgå till Clementine."
 msgid "Plugin status:"
 msgstr "Instickstatus:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podsändning"
 
@@ -3876,7 +3876,7 @@ msgstr "Alternativ för Skön notifiering"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "Förhandsvisning"
 
@@ -4149,7 +4149,7 @@ msgstr "Ersätt den aktuella spellistan"
 msgid "Replace the playlist"
 msgstr "Ersätt spellistan"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "Ersätter mellanslag med understreck"
 
@@ -4182,7 +4182,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Starta om spåret, eller spela föregående spår om inom 8 sekunder sedan start."
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "Begränsa till ASCII-tecken"
 
@@ -4244,7 +4244,7 @@ msgstr "SSL handslaget misslyckades, verifiera serverkonfigurationen. SSLv3 alte
 msgid "Safely remove device"
 msgstr "Säker borttagning av enhet"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Säker borttagning av enheten efter kopiering"
 
@@ -5267,7 +5267,7 @@ msgstr "Hoppa inte över valda spår"
 msgid "Unskip track"
 msgstr "Hoppa inte över valt spår"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "Avprenumerera"
 
@@ -5283,7 +5283,7 @@ msgstr "Uppdatering"
 msgid "Update Grooveshark playlist"
 msgstr "Uppdatera Groovesharkspellista "
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "Uppdatera alla podsändningar"
 
@@ -5295,7 +5295,7 @@ msgstr "Uppdatera ändrade bibliotekskataloger"
 msgid "Update the library when Clementine starts"
 msgstr "Uppdatera biblioteket när Clementine startar"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "Uppdatera denna podsändning"
 

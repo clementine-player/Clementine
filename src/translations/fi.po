@@ -314,7 +314,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>Tämä kirjoittaa kappaleiden arvosanat ja tilastot suoraan tiedostoihisi.</p><p>Tätä ei tarvita jos &quot;Tallenna arvostelut ja tilastot tiedostojen tageihin&quot; on valittuna.</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -488,7 +488,7 @@ msgstr "Lisää uusi kansio..."
 msgid "Add podcast"
 msgstr "Lisää podcast"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Lisää podcast..."
 
@@ -657,7 +657,7 @@ msgstr "Kirjaston tarkempi järjestely..."
 msgid "After "
 msgstr "Jälkeen"
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "Kopioinnin jälkeen..."
 
@@ -1351,7 +1351,7 @@ msgstr "Muokkaa hakua..."
 msgid "Configure library..."
 msgstr "Kirjaston asetukset..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "Muokkaa podcasteja..."
 
@@ -1413,7 +1413,7 @@ msgstr "Kopioi jakamisosoite leikepöydälle"
 msgid "Copy to clipboard"
 msgstr "Kopioi leikepöydälle"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopioi laitteelle..."
@@ -1665,7 +1665,7 @@ msgstr "Poista"
 msgid "Delete Grooveshark playlist"
 msgstr "Poista Grooveshark-soittolista"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "Poista ladattu data"
 
@@ -1695,7 +1695,7 @@ msgstr "Poista asetus"
 msgid "Delete smart playlist"
 msgstr "Poista älykäs soittolista"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "Poista alkuperäiset tiedostot"
 
@@ -1711,7 +1711,7 @@ msgstr "Poista valitut kappaleet jonosta"
 msgid "Dequeue track"
 msgstr "Poista kappale jonosta"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Kohde"
@@ -1862,7 +1862,7 @@ msgstr "Kaksoisnapsauta avataksesi"
 msgid "Double clicking a song will..."
 msgstr "Kappaleen kaksoisnapsautus..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1884,7 +1884,7 @@ msgstr "Latausjäsenyys"
 msgid "Download new episodes automatically"
 msgstr "Lataa uudet jaksot automaattisesti"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "Lataus asetettu jonoon"
 
@@ -1900,7 +1900,7 @@ msgstr "Lataa tämä levy"
 msgid "Download this album..."
 msgstr "Lataa tämä levy..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "Lataa tämä jakso"
 
@@ -1908,7 +1908,7 @@ msgstr "Lataa tämä jakso"
 msgid "Download..."
 msgstr "Lataa..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Ladataan (%1%)..."
@@ -2680,7 +2680,7 @@ msgstr "Jos jatkat, laite toimii hitaasti ja sille kopioidut kappaleet eivät v�
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Jos tiedät podcastin verkko-osoitteen, kirjoita se alle ja napsauta Mene."
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "Älä huomioi sanaa \"The\" esiintyjien nimissä"
 
@@ -2761,7 +2761,7 @@ msgstr "Tiedot"
 msgid "Input options"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "Lisää..."
 
@@ -2866,7 +2866,7 @@ msgstr "Paina painikkeita %1 sekuntia..."
 msgid "Keep running in the background when the window is closed"
 msgstr "Pidä käynnissä taustalla, kun ikkuna suljetaan"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "Säilytä alkuperäiset tiedostot"
 
@@ -3039,7 +3039,7 @@ msgstr "Lataa kappaleen tietoja"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Ladataan..."
@@ -3173,11 +3173,11 @@ msgstr "Käsin"
 msgid "Manufacturer"
 msgstr "Valmistaja"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Merkitse kuunnelluksi"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "Merkitse uudeksi"
 
@@ -3323,7 +3323,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Nimi"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "Nimeämisvalinnat"
 
@@ -3616,7 +3616,7 @@ msgstr "Valinnat..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "Hallitse tiedostoja"
 
@@ -3624,7 +3624,7 @@ msgstr "Hallitse tiedostoja"
 msgid "Organise files..."
 msgstr "Hallitse tiedostoja..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "Hallinnoidaan tiedostoja"
 
@@ -3652,7 +3652,7 @@ msgstr "Muunnoksen asetukset"
 msgid "Overwrite all"
 msgstr "Korvaa kaikki"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "Korvaa olemassa olevat tiedostot"
 
@@ -3776,7 +3776,7 @@ msgstr "Sulje selain ja palaa Clementineen."
 msgid "Plugin status:"
 msgstr "Liitännäisen tila:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcastit"
 
@@ -3868,7 +3868,7 @@ msgstr "Kuvaruutunäytön valinnat"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "Esikatselu"
 
@@ -4141,7 +4141,7 @@ msgstr "Korvaa nykyinen soittolista"
 msgid "Replace the playlist"
 msgstr "Korvaa soittolista"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "Korvaa välilyönnit alaviivoilla"
 
@@ -4174,7 +4174,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Toista kappale uudelleen, tai toista edellinen kappale, jos alle 8 sekunnin päästä alusta."
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "Rajoita ASCII-merkkeihin"
 
@@ -4236,7 +4236,7 @@ msgstr "SSL-käsittelyvirhe, tarkista palvelimen asetukset. SSLv3-valinta alla s
 msgid "Safely remove device"
 msgstr "Poista laite turvallisesti"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Poista laite turvallisesti kopioinnin jälkeen"
 
@@ -5259,7 +5259,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "Poista tilaus"
 
@@ -5275,7 +5275,7 @@ msgstr "Päivitä"
 msgid "Update Grooveshark playlist"
 msgstr "Päivitä Grooveshark-soittolista"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "Päivitä kaikki podcastit"
 
@@ -5287,7 +5287,7 @@ msgstr "Päivitä muuttuneet kirjastokansiot"
 msgid "Update the library when Clementine starts"
 msgstr "Päivitä kirjasto Clementine käynnistyessä"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "Päivitä tämä podcast"
 

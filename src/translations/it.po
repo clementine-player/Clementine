@@ -313,7 +313,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>Scriverà le valutazioni e le statistiche nei tag dei brani della tua raccolta di brani.</p><p>Non è necessaria se l'opzione &quot;Salva le valutazioni e le statistiche nei tag dei brani&quot; è sempre stata attiva."
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -487,7 +487,7 @@ msgstr "Aggiungi nuova cartella..."
 msgid "Add podcast"
 msgstr "Aggiungi podcast"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Aggiungi podcast..."
 
@@ -656,7 +656,7 @@ msgstr "Raggruppamento avanzato..."
 msgid "After "
 msgstr "Dopo "
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "Dopo la copia..."
 
@@ -1350,7 +1350,7 @@ msgstr "Configura la ricerca globale..."
 msgid "Configure library..."
 msgstr "Configura raccolta..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "Configura podcast..."
 
@@ -1412,7 +1412,7 @@ msgstr "Copia l'URL di condivisione negli appunti"
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copia su dispositivo..."
@@ -1664,7 +1664,7 @@ msgstr "Elimina"
 msgid "Delete Grooveshark playlist"
 msgstr "Elimina scaletta di Grooveshark"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "Elimina i dati scaricati"
 
@@ -1694,7 +1694,7 @@ msgstr "Elimina la preimpostazione"
 msgid "Delete smart playlist"
 msgstr "Elimina la scaletta veloce"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "Elimina i file originali"
 
@@ -1710,7 +1710,7 @@ msgstr "Rimuovi le tracce selezionate dalla coda"
 msgid "Dequeue track"
 msgstr "Rimuovi tracce dalla coda"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Destinazione"
@@ -1861,7 +1861,7 @@ msgstr "Doppio clic per aprire"
 msgid "Double clicking a song will..."
 msgstr "Al doppio clic su un brano..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1883,7 +1883,7 @@ msgstr "Scaricamento"
 msgid "Download new episodes automatically"
 msgstr "Scarica automaticamente le nuove puntate"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "Scaricamento accodato"
 
@@ -1899,7 +1899,7 @@ msgstr "Scarica questo album"
 msgid "Download this album..."
 msgstr "Scarica questo album..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "Scarica questa puntata"
 
@@ -1907,7 +1907,7 @@ msgstr "Scarica questa puntata"
 msgid "Download..."
 msgstr "Scarica..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Scaricamento in corso (%1%)..."
@@ -2679,7 +2679,7 @@ msgstr "Se continui, il dispositivo funzionerà lentamente e i brani copiati su 
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Se conosci l'URL di un podcast, digitalo qui sotto e premi Vai."
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignora \"The\" nei nomi degli artisti"
 
@@ -2760,7 +2760,7 @@ msgstr "Informazioni"
 msgid "Input options"
 msgstr "Opzioni di ingresso"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "Inserisci..."
 
@@ -2865,7 +2865,7 @@ msgstr "Trattieni i pulsanti per %1 secondi..."
 msgid "Keep running in the background when the window is closed"
 msgstr "Mantieni l'esecuzione sullo sfondo quando la finestra è chiusa"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "Mantieni i file originali"
 
@@ -3038,7 +3038,7 @@ msgstr "Caricamento informazioni della traccia"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Caricamento in corso..."
@@ -3172,11 +3172,11 @@ msgstr "Manualmente"
 msgid "Manufacturer"
 msgstr "Produttore"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Marca come ascoltata"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "Marca come nuova"
 
@@ -3322,7 +3322,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Nome"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "Opzioni di assegnazione dei nomi"
 
@@ -3615,7 +3615,7 @@ msgstr "Opzioni..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "Organizza file"
 
@@ -3623,7 +3623,7 @@ msgstr "Organizza file"
 msgid "Organise files..."
 msgstr "Organizza file..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "Organizzazione file"
 
@@ -3651,7 +3651,7 @@ msgstr "Opzioni di uscita"
 msgid "Overwrite all"
 msgstr "Sovrascrivi tutte"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "Sovrascrivi i file esistenti"
 
@@ -3775,7 +3775,7 @@ msgstr "Chiudi il browser e ritorna a Clementine."
 msgid "Plugin status:"
 msgstr "Stato del plugin:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcast"
 
@@ -3867,7 +3867,7 @@ msgstr "Opzioni OSD gradevole"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "Anteprima"
 
@@ -4140,7 +4140,7 @@ msgstr "Sostituisci la scaletta attuale"
 msgid "Replace the playlist"
 msgstr "Sostituisci la scaletta"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "Sostituisci gli spazi con trattini bassi"
 
@@ -4173,7 +4173,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Riavvia la traccia, o riproduci la traccia precedente se entro 8 secondi dall'avvio."
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "Limita ai caratteri ASCII"
 
@@ -4235,7 +4235,7 @@ msgstr "Errore di handshake SSL, verifica la configurazione del server. L'opzion
 msgid "Safely remove device"
 msgstr "Rimuovi il dispositivo in sicurezza"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Rimuovi il dispositivo in sicurezza al termine della copia"
 
@@ -5258,7 +5258,7 @@ msgstr "Ripristina le tracce selezionate"
 msgid "Unskip track"
 msgstr "Ripristina la traccia"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "Rimuovi sottoscrizione"
 
@@ -5274,7 +5274,7 @@ msgstr "Aggiorna"
 msgid "Update Grooveshark playlist"
 msgstr "Aggiorna la scaletta di Grooveshark"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "Aggiorna tutti i podcast"
 
@@ -5286,7 +5286,7 @@ msgstr "Aggiorna le cartelle modificate della raccolta"
 msgid "Update the library when Clementine starts"
 msgstr "Aggiorna la raccolta all'avvio di Clementine"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "Aggiorna questo podcast"
 

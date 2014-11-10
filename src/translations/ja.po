@@ -316,7 +316,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -490,7 +490,7 @@ msgstr "新しいフォルダーを追加..."
 msgid "Add podcast"
 msgstr "ポッドキャストを追加"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "ポッドキャストを追加..."
 
@@ -659,7 +659,7 @@ msgstr "高度なグループ化..."
 msgid "After "
 msgstr "後"
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "コピー後..."
 
@@ -1353,7 +1353,7 @@ msgstr "全体検索の設定..."
 msgid "Configure library..."
 msgstr "ライブラリの設定..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "ポッドキャストの設定..."
 
@@ -1415,7 +1415,7 @@ msgstr "URL をクリップボードにコピーする"
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "デバイスへコピー..."
@@ -1667,7 +1667,7 @@ msgstr "削除"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark プレイリストの削除"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "ダウンロード済みデータを削除"
 
@@ -1697,7 +1697,7 @@ msgstr "プリセットの削除"
 msgid "Delete smart playlist"
 msgstr "スマートプレイリストを削除"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "元のファイルを削除する"
 
@@ -1713,7 +1713,7 @@ msgstr "選択されたトラックをキューから削除する"
 msgid "Dequeue track"
 msgstr "トラックをキューから削除"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "フォルダー"
@@ -1864,7 +1864,7 @@ msgstr "ダブルクリックで開く"
 msgid "Double clicking a song will..."
 msgstr "曲をダブルクリックした際の動作..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1886,7 +1886,7 @@ msgstr "メンバーシップのダウンロード"
 msgid "Download new episodes automatically"
 msgstr "新しいエピソードを自動的にダウンロードする"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "ダウンロードがキューに追加されました"
 
@@ -1902,7 +1902,7 @@ msgstr "このアルバムのダウンロード"
 msgid "Download this album..."
 msgstr "このアルバムをダウンロード..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "このエピソードをダウンロード"
 
@@ -1910,7 +1910,7 @@ msgstr "このエピソードをダウンロード"
 msgid "Download..."
 msgstr "ダウンロード..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "ダウンロード中 (%1%)..."
@@ -2682,7 +2682,7 @@ msgstr "続行すると、このデバイスは低速で動作しコピーされ
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "ポッドキャストの URL がある場合は、下に入力して進むを押してください。"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "アーティスト名の「The」を無視する"
 
@@ -2763,7 +2763,7 @@ msgstr "情報"
 msgid "Input options"
 msgstr "入力オプション"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "挿入..."
 
@@ -2868,7 +2868,7 @@ msgstr "ボタンを %1 秒長押し..."
 msgid "Keep running in the background when the window is closed"
 msgstr "ウィンドウを閉じたときバックグラウンドで起動し続ける"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "元のファイルを保持する"
 
@@ -3041,7 +3041,7 @@ msgstr "トラック情報の読み込み中"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "読み込んでいます..."
@@ -3175,11 +3175,11 @@ msgstr "手動"
 msgid "Manufacturer"
 msgstr "製造元"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "視聴済みマークを付ける"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "新曲マークを付ける"
 
@@ -3325,7 +3325,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "名前"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "名前のオプション"
 
@@ -3618,7 +3618,7 @@ msgstr "オプション..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "ファイルの整理"
 
@@ -3626,7 +3626,7 @@ msgstr "ファイルの整理"
 msgid "Organise files..."
 msgstr "ファイルの整理..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "ファイルの整理中"
 
@@ -3654,7 +3654,7 @@ msgstr "出力のオプション"
 msgid "Overwrite all"
 msgstr "すべて上書きする"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "既存のファイルを上書きする"
 
@@ -3778,7 +3778,7 @@ msgstr "ブラウザーを閉じて Clementine に戻ってください。"
 msgid "Plugin status:"
 msgstr "プラグインの状態:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "ポッドキャスト"
 
@@ -3870,7 +3870,7 @@ msgstr "Pretty OSD のオプション"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "プレビュー"
 
@@ -4143,7 +4143,7 @@ msgstr "現在のプレイリストを置き換える"
 msgid "Replace the playlist"
 msgstr "プレイリストを置き換える"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "スペースをアンダースコアに置換する"
 
@@ -4176,7 +4176,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "トラックを再開 (開始8秒以内なら前のトラックを再生)"
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "ASCII 文字に限定する"
 
@@ -4238,7 +4238,7 @@ msgstr "SSL ハンドシェークエラーです。サーバーの設定を確�
 msgid "Safely remove device"
 msgstr "デバイスを安全に取り外す"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "コピー後にデバイスを安全に取り外す"
 
@@ -5261,7 +5261,7 @@ msgstr "選択したトラックをスキップしない"
 msgid "Unskip track"
 msgstr "トラックをスキップしない"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "購読解除"
 
@@ -5277,7 +5277,7 @@ msgstr "更新"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark のプレイリストを更新"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "すべてのポッドキャストを更新"
 
@@ -5289,7 +5289,7 @@ msgstr "変更されたライブラリフォルダーを更新"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine の起動時にライブラリを更新する"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "このポッドキャストを更新"
 

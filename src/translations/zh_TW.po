@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-02 05:03+0000\n"
+"PO-Revision-Date: 2014-11-09 03:11+0000\n"
 "Last-Translator: BrLi <rainman59118@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -302,7 +302,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>前綴範圍單詞已縮小搜尋範圍，例如：<span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> 將會搜尋所有演出者為 Bode 的專輯。</p><p><span style=\" font-weight:600;\">可用的範圍：</span><span style=\" font-style:italic;\">%1</span>。</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -312,7 +312,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -486,7 +486,7 @@ msgstr "新增資料夾..."
 msgid "Add podcast"
 msgstr "加入 Podcast"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "加入 Podcast..."
 
@@ -508,7 +508,7 @@ msgstr "加入歌曲演出者標籤"
 
 #: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Add song auto score"
-msgstr ""
+msgstr "新增歌曲自動評分"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song composer tag"
@@ -528,7 +528,7 @@ msgstr "加入歌曲風格標籤"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "新增歌曲群組標籤"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song length tag"
@@ -655,7 +655,7 @@ msgstr "進階歸類..."
 msgid "After "
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "複製後 ..."
 
@@ -1349,7 +1349,7 @@ msgstr ""
 msgid "Configure library..."
 msgstr "設定音樂庫"
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "設定 podcasts..."
 
@@ -1411,7 +1411,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "複製到剪貼簿"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "複製到裝置..."
@@ -1663,7 +1663,7 @@ msgstr ""
 msgid "Delete Grooveshark playlist"
 msgstr "刪除 Grooveshark 播放清單"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "刪除下載的資料"
 
@@ -1693,7 +1693,7 @@ msgstr "刪除預設"
 msgid "Delete smart playlist"
 msgstr "刪除智慧型播放清單"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "刪除原本的檔案"
 
@@ -1709,7 +1709,7 @@ msgstr "將選取的歌曲移出佇列中"
 msgid "Dequeue track"
 msgstr "將歌曲移出佇列中"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "目的地"
@@ -1860,7 +1860,7 @@ msgstr "雙擊打開"
 msgid "Double clicking a song will..."
 msgstr "雙擊一首歌曲將..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1882,7 +1882,7 @@ msgstr "下載會員"
 msgid "Download new episodes automatically"
 msgstr "自動下載新的片斷內容"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr ""
 
@@ -1898,7 +1898,7 @@ msgstr "下載此專輯"
 msgid "Download this album..."
 msgstr "下載此專輯..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "下載這個片斷內容"
 
@@ -1906,7 +1906,7 @@ msgstr "下載這個片斷內容"
 msgid "Download..."
 msgstr "下載..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr ""
@@ -2678,7 +2678,7 @@ msgstr "如果您要繼續，此裝置將會變慢且可能無法複製歌曲"
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "如果您知道一個 podcast 的網址，在下面輸入並按下「前往」。"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "忽視在演出者名字中的“The”"
 
@@ -2759,7 +2759,7 @@ msgstr "資訊"
 msgid "Input options"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "插入..."
 
@@ -2864,7 +2864,7 @@ msgstr "按住按鈕 %1 秒..."
 msgid "Keep running in the background when the window is closed"
 msgstr "當視窗關閉時,保持在背景運轉"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "保留原本的檔案"
 
@@ -2975,7 +2975,7 @@ msgstr "聽取 Grooveshark 歌曲，根據您先前已經聽過的"
 
 #: ui/equalizer.cpp:131
 msgid "Live"
-msgstr "即時"
+msgstr "現場"
 
 #: ../bin/src/ui_albumcovermanager.h:217
 msgid "Load"
@@ -3037,7 +3037,7 @@ msgstr "載入曲目資訊"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "載入中..."
@@ -3171,11 +3171,11 @@ msgstr "手動"
 msgid "Manufacturer"
 msgstr "製造商"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "標記為聽過的"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr ""
 
@@ -3321,7 +3321,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "命名選項"
 
@@ -3614,7 +3614,7 @@ msgstr "選擇..."
 msgid "Opus"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "組織檔案"
 
@@ -3622,7 +3622,7 @@ msgstr "組織檔案"
 msgid "Organise files..."
 msgstr "組織檔案..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "組織檔案中"
 
@@ -3650,7 +3650,7 @@ msgstr "輸出選項"
 msgid "Overwrite all"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "覆寫現有的檔案"
 
@@ -3774,7 +3774,7 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "插件狀態："
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcasts"
 
@@ -3866,7 +3866,7 @@ msgstr "漂亮的 OSD 選項"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "預覽"
 
@@ -4139,7 +4139,7 @@ msgstr "取代目前播放清單"
 msgid "Replace the playlist"
 msgstr "取代播放清單"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "用底線取代空格"
 
@@ -4172,7 +4172,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "限制為 ASCII 字符"
 
@@ -4234,7 +4234,7 @@ msgstr ""
 msgid "Safely remove device"
 msgstr "安全地移除裝置"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "在複製之後，安全的移除裝置"
 
@@ -5257,7 +5257,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr ""
 
@@ -5273,7 +5273,7 @@ msgstr ""
 msgid "Update Grooveshark playlist"
 msgstr "更新 Grooveshark 播放清單"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "更新全部的 podcasts"
 
@@ -5285,7 +5285,7 @@ msgstr "更新改變的音樂庫資料夾"
 msgid "Update the library when Clementine starts"
 msgstr "當啟動 Clementine 時，更新音樂庫"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "更新這個 podcast"
 

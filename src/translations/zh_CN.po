@@ -320,7 +320,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>这会将每首歌曲的评级和统计信息写入您所有歌曲库中歌曲的文件标记中。</p><p>如果 &quot;保存评级和统计到文件标记中&quot; 选项始终开启，本操作没有必要执行。</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -494,7 +494,7 @@ msgstr "添加新文件夹..."
 msgid "Add podcast"
 msgstr "添加播客"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "添加播客..."
 
@@ -663,7 +663,7 @@ msgstr "高级分组..."
 msgid "After "
 msgstr "之后 "
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "复制后..."
 
@@ -1357,7 +1357,7 @@ msgstr "配置全局搜索…"
 msgid "Configure library..."
 msgstr "配置媒体库..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "正在设置播客..."
 
@@ -1419,7 +1419,7 @@ msgstr "复制分享链接"
 msgid "Copy to clipboard"
 msgstr "复制到剪切板"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "复制到设备..."
@@ -1671,7 +1671,7 @@ msgstr "删除"
 msgid "Delete Grooveshark playlist"
 msgstr "删除 Grooveshark 播放列表"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "删除已下载的数据"
 
@@ -1701,7 +1701,7 @@ msgstr "删除预设"
 msgid "Delete smart playlist"
 msgstr "删除智能播放列表"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "删除原始文件"
 
@@ -1717,7 +1717,7 @@ msgstr "移除选定曲目"
 msgid "Dequeue track"
 msgstr "移除曲目"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "目标"
@@ -1868,7 +1868,7 @@ msgstr "双击打开"
 msgid "Double clicking a song will..."
 msgstr "双击歌曲将..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1890,7 +1890,7 @@ msgstr "下载会员"
 msgid "Download new episodes automatically"
 msgstr "自动下载新的节目"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "下载队列"
 
@@ -1906,7 +1906,7 @@ msgstr "下载此专辑"
 msgid "Download this album..."
 msgstr "下载此专辑..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "下载此节目"
 
@@ -1914,7 +1914,7 @@ msgstr "下载此节目"
 msgid "Download..."
 msgstr "下载..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "下载中 (%1%)..."
@@ -2686,7 +2686,7 @@ msgstr "如果您选择继续,设备运行将会变慢并且复制歌曲工作�
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "如果您知道播客地址，请在下面填入地址并且点击 Go。"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "忽略艺人名称中的“The”"
 
@@ -2767,7 +2767,7 @@ msgstr "信息"
 msgid "Input options"
 msgstr "输入选项"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "插入..."
 
@@ -2872,7 +2872,7 @@ msgstr "保持按钮 %1 秒..."
 msgid "Keep running in the background when the window is closed"
 msgstr "当窗口关闭时仍在后台运行"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "保留原始文件"
 
@@ -3045,7 +3045,7 @@ msgstr "正在加载曲目信息"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "正在载入..."
@@ -3179,11 +3179,11 @@ msgstr "手动"
 msgid "Manufacturer"
 msgstr "生产商"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "标记为已听"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "标记为新的"
 
@@ -3329,7 +3329,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "名字"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "命名选项"
 
@@ -3622,7 +3622,7 @@ msgstr "选项..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "组织文件"
 
@@ -3630,7 +3630,7 @@ msgstr "组织文件"
 msgid "Organise files..."
 msgstr "组织文件..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "组织文件"
 
@@ -3658,7 +3658,7 @@ msgstr "输出选项"
 msgid "Overwrite all"
 msgstr "覆盖全部"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "覆盖已存在的文件"
 
@@ -3782,7 +3782,7 @@ msgstr "请关闭你的浏览器，回到 Clementine。"
 msgid "Plugin status:"
 msgstr "插件状态:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "播客"
 
@@ -3874,7 +3874,7 @@ msgstr "漂亮的 OSD 选项"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "预览"
 
@@ -4147,7 +4147,7 @@ msgstr "移除当前播放列表"
 msgid "Replace the playlist"
 msgstr "移除播放列表"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "以下划线代替空格"
 
@@ -4180,7 +4180,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "重播当前曲目，如果曲目开播不足8秒钟则播放上一曲。"
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "仅使用 ASCII 字符"
 
@@ -4242,7 +4242,7 @@ msgstr "SSL 握手出错，请验证服务器配置。下面的 SSLv3 选项可�
 msgid "Safely remove device"
 msgstr "安全移除设备"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "复制后安全移除设备"
 
@@ -5265,7 +5265,7 @@ msgstr "取消略过的选定曲目"
 msgid "Unskip track"
 msgstr "取消掠过曲目"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "取消订阅"
 
@@ -5281,7 +5281,7 @@ msgstr "更新"
 msgid "Update Grooveshark playlist"
 msgstr "更新 Grooveshark 播放列表"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "更新所有播客"
 
@@ -5293,7 +5293,7 @@ msgstr "更新改变的媒体库文件夹"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine 启动时更新媒体库"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "更新此播客"
 

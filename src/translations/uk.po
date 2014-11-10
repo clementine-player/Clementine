@@ -311,7 +311,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>За допомогою цього пункту можна наказати програмі записувати для всіх композицій у вашій бібліотеці оцінки та статистичні дані щодо композицій до міток у файлі.</p><p>Потреби у використанні цього пункту немає, якщо постійно позначено пункт «Зберігати дані щодо оцінки та статистичні дані у мітках файлів».</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -485,7 +485,7 @@ msgstr "Додати нову теку…"
 msgid "Add podcast"
 msgstr "Додати подкаст"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Додати подкаст..."
 
@@ -654,7 +654,7 @@ msgstr "Розширене групування…"
 msgid "After "
 msgstr "Після "
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "Після копіювання…"
 
@@ -1348,7 +1348,7 @@ msgstr "Налаштувати загальні правила пошуку…"
 msgid "Configure library..."
 msgstr "Налаштувати фонотеку"
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "Налаштувати подкасти..."
 
@@ -1410,7 +1410,7 @@ msgstr "Копіювати адресу оприлюднення до буфер
 msgid "Copy to clipboard"
 msgstr "Копіювати до буфера"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Копіювати до пристрою…"
@@ -1662,7 +1662,7 @@ msgstr "Вилучити"
 msgid "Delete Grooveshark playlist"
 msgstr "Вилучити список відтворення Grooveshark"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "Видалити завантажені дані"
 
@@ -1692,7 +1692,7 @@ msgstr "Скинути налаштування"
 msgid "Delete smart playlist"
 msgstr "Видалити розумний список відтворення"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "Вилучити оригінальні файли"
 
@@ -1708,7 +1708,7 @@ msgstr "Вилучити з черги вибрані доріжки"
 msgid "Dequeue track"
 msgstr "Вилучити з черги доріжки"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Призначення"
@@ -1859,7 +1859,7 @@ msgstr "Подвійне клацання, щоб відкрити"
 msgid "Double clicking a song will..."
 msgstr "Подвійне клацання на пісні:"
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1881,7 +1881,7 @@ msgstr "Завантажити членство"
 msgid "Download new episodes automatically"
 msgstr "Завантажувати нові епізоди автоматично"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "Завантаження поставлено в чергу"
 
@@ -1897,7 +1897,7 @@ msgstr "Завантажити цей альбом"
 msgid "Download this album..."
 msgstr "Завантажити цей альбом…"
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "Завантажити цей випуск"
 
@@ -1905,7 +1905,7 @@ msgstr "Завантажити цей випуск"
 msgid "Download..."
 msgstr "Звантажити…"
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Завантажую (%1%)..."
@@ -2677,7 +2677,7 @@ msgstr "Якщо продовжите, цей пристрій буде прац
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Якщо ви знаєте URL подкасту, введіть його та натисніть Вперед."
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "Ігнорувати «The» в іменах виконавців"
 
@@ -2758,7 +2758,7 @@ msgstr "Інформація"
 msgid "Input options"
 msgstr "Налаштування вхідних даних"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "Вставити…"
 
@@ -2863,7 +2863,7 @@ msgstr "Тримати кнопки %1 секунд…"
 msgid "Keep running in the background when the window is closed"
 msgstr "Продовжувати виконання у фоні коли вікно зачинено"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "Зберегти оригінальні файли"
 
@@ -3036,7 +3036,7 @@ msgstr "Завантажую дані доріжок"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Завантаження…"
@@ -3170,11 +3170,11 @@ msgstr "Вручну"
 msgid "Manufacturer"
 msgstr "Виробник"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Позначити як прослуханий"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "Позначити як новий"
 
@@ -3320,7 +3320,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Назва"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "Налаштування найменування"
 
@@ -3613,7 +3613,7 @@ msgstr "Налаштування…"
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "Упорядкування файлів"
 
@@ -3621,7 +3621,7 @@ msgstr "Упорядкування файлів"
 msgid "Organise files..."
 msgstr "Упорядкування файлів…"
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "Упорядкування файлів"
 
@@ -3649,7 +3649,7 @@ msgstr "Налаштування виведення"
 msgid "Overwrite all"
 msgstr "Перезаписати все"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "Перезаписати існуючі файли"
 
@@ -3773,7 +3773,7 @@ msgstr "Будь ласка, закрийте вікно програми для
 msgid "Plugin status:"
 msgstr "Статус модуля:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Подкасти"
 
@@ -3865,7 +3865,7 @@ msgstr "Налаштування OSD"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "Перегляд"
 
@@ -4138,7 +4138,7 @@ msgstr "Замінити список відтворення"
 msgid "Replace the playlist"
 msgstr "Замінити список відтворення"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "Замінити пробіли підкресленнями"
 
@@ -4171,7 +4171,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Повторно відтворити композицію або відтворити попередню композицію, якщо було відтворено не більше 8 секунд поточної композиції."
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "Обмежитись символами ASCII"
 
@@ -4233,7 +4233,7 @@ msgstr "Помилка під час спроби встановлення з’
 msgid "Safely remove device"
 msgstr "Безпечно вилучити пристрій"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Безпечне вилучення пристрою після копіювання"
 
@@ -5256,7 +5256,7 @@ msgstr "Не пропускати позначені композиції"
 msgid "Unskip track"
 msgstr "Не пропускати композицію"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "Відписатися"
 
@@ -5272,7 +5272,7 @@ msgstr "Оновити"
 msgid "Update Grooveshark playlist"
 msgstr "Оновити список відтворення на Grooveshark"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "Оновити всі подкасти"
 
@@ -5284,7 +5284,7 @@ msgstr "Оновити змінені теки у фонотеці"
 msgid "Update the library when Clementine starts"
 msgstr "Оновлювати фонотеку під час запуску Clementine"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "Оновити цей подкаст"
 

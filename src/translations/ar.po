@@ -317,7 +317,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>سيتم كتابة تقييمات المقاطع والاحصائيات في وسوم الملفات لكل المقاطع التي بمكتبتك الصوتية.</p><p> هذا ليس ضرويا إن كان قد تم تفعيل خياري \"احفظ التقييمات والاحصائيات في وسوم الملف إن أمكن ذلك\".</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -491,7 +491,7 @@ msgstr "أضف مجلد جديد..."
 msgid "Add podcast"
 msgstr "إضافة بودكاست"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "إضافة بودكاست..."
 
@@ -660,7 +660,7 @@ msgstr "تجميع متقدم..."
 msgid "After "
 msgstr "بعد"
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "بعد النسخ..."
 
@@ -1354,7 +1354,7 @@ msgstr "إعدادات البحث العامة..."
 msgid "Configure library..."
 msgstr "إعدادات المكتبة"
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
 msgid "Configure podcasts..."
 msgstr "إعدادات بودكاست..."
 
@@ -1416,7 +1416,7 @@ msgstr "انسخ الرابط إلى الحافظة"
 msgid "Copy to clipboard"
 msgstr "نسخ إلى المكتبة..."
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "نسخ إلى جهاز..."
@@ -1668,7 +1668,7 @@ msgstr "احذف"
 msgid "Delete Grooveshark playlist"
 msgstr "احذف قائمة تسغيل Grooveshark"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:348
 msgid "Delete downloaded data"
 msgstr "حذف البيانات المحملة"
 
@@ -1698,7 +1698,7 @@ msgstr "احذف ملف الإعدادات"
 msgid "Delete smart playlist"
 msgstr "احذف لائحة التشغيل الذكية"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "احذف الملفات الأصلية"
 
@@ -1714,7 +1714,7 @@ msgstr "أزل المختارة من لائحة الانتظار"
 msgid "Dequeue track"
 msgstr "أزل المقطع من لائحة الانتظار"
 
-#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "الوجهة"
@@ -1865,7 +1865,7 @@ msgstr "النقر مرتين للتشغيل"
 msgid "Double clicking a song will..."
 msgstr "النقر مرتين على مقطع سـ..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:440
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1887,7 +1887,7 @@ msgstr "عضوية التحميل"
 msgid "Download new episodes automatically"
 msgstr "حمل الحلقات الجديدة تلقائيا"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:256
 msgid "Download queued"
 msgstr "حمل مقاطع لائحة الانتظار"
 
@@ -1903,7 +1903,7 @@ msgstr "حمل هذا الألبوم"
 msgid "Download this album..."
 msgstr "حمل هذا الألبوم..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:442
 msgid "Download this episode"
 msgstr "حمل هذه الحلقة"
 
@@ -1911,7 +1911,7 @@ msgstr "حمل هذه الحلقة"
 msgid "Download..."
 msgstr "حمل..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:264
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "تحميل (%1%)..."
@@ -2683,7 +2683,7 @@ msgstr "إذا قررت الاستمرار، سيشتغل هذا الجهاز ب
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "إن كنت تتوفر على رابط البودكاست، أدخله أسفله واضغط اذهب."
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "تجاهل \"The\" في أسماء الفنانين"
 
@@ -2764,7 +2764,7 @@ msgstr "معلومات"
 msgid "Input options"
 msgstr "خيارات المدخل"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "إدارج..."
 
@@ -2869,7 +2869,7 @@ msgstr "أبق الأزار لمدة %1 ثواني"
 msgid "Keep running in the background when the window is closed"
 msgstr "تابع التشغيل في الخلفية عند إغلاق النافذة"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "أبقي على الملفات الأصلية"
 
@@ -3042,7 +3042,7 @@ msgstr "جاري تحميل معلومات المقاطع"
 #: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:497
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "جاري التحميل"
@@ -3176,11 +3176,11 @@ msgstr "يدويا"
 msgid "Manufacturer"
 msgstr "المصنع"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "علم كمستمع إليه"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:359
 msgid "Mark as new"
 msgstr "علم كجديد"
 
@@ -3326,7 +3326,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "الاسم"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "إعدادات التسمية"
 
@@ -3619,7 +3619,7 @@ msgstr "الإعدادات..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "ترتيب الملفات"
 
@@ -3627,7 +3627,7 @@ msgstr "ترتيب الملفات"
 msgid "Organise files..."
 msgstr "ترتيب الملفات..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:69
 msgid "Organising files"
 msgstr "ترتيب الملفات"
 
@@ -3655,7 +3655,7 @@ msgstr "خيارات المخرج"
 msgid "Overwrite all"
 msgstr "استبدل الكل"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "أكتب على الملفات الموجودة"
 
@@ -3779,7 +3779,7 @@ msgstr "الرجاء إغلاق متصفحك والعودة إلى كلمنتا�
 msgid "Plugin status:"
 msgstr "حالة الملحق:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "بودكاست"
 
@@ -3871,7 +3871,7 @@ msgstr "إعدادات تنبيهات كلمنتاين"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "المعاينة"
 
@@ -4144,7 +4144,7 @@ msgstr "استبدل قائمة التشغيل الحالية"
 msgid "Replace the playlist"
 msgstr "استبدل قائمة التشغيل"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "استبدل الفراغات برمز \"_\""
 
@@ -4177,7 +4177,7 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "أعد تشغيل المقطع، أو شغل المقطع السابق إن كان لم يتجاوز 8 ثوانٍ من بدء التشغيل."
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "اكتف بأحرف ASCII"
 
@@ -4239,7 +4239,7 @@ msgstr "حدث خطأ بتبادل SSL، تحقق من إعدادات الخاد
 msgid "Safely remove device"
 msgstr "احذف الجهاز بأمان"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "احذف الجهاز بأمان بعد انتهاء النسخ"
 
@@ -5262,7 +5262,7 @@ msgstr "إلغاء تجاوز المسارات المختارة"
 msgid "Unskip track"
 msgstr "إلغاء تجاوز المسار"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
 msgid "Unsubscribe"
 msgstr "ألغ الاشتراك"
 
@@ -5278,7 +5278,7 @@ msgstr "تحديث"
 msgid "Update Grooveshark playlist"
 msgstr "حدّث قائمة تشغيل Grooveshark"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:334
 msgid "Update all podcasts"
 msgstr "حدّث جميع البودكاست"
 
@@ -5290,7 +5290,7 @@ msgstr "حدّث المجلدات التي تغيرت في المكتبة"
 msgid "Update the library when Clementine starts"
 msgstr "حدّث المكتبة عند بدء كلمنتاين"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:342
 msgid "Update this podcast"
 msgstr "حدّث هذا البودكاست"
 
