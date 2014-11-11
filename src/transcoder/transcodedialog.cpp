@@ -76,10 +76,10 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   last_add_dir_ = s.value("last_add_dir", QDir::homePath()).toString();
   last_import_dir_ = s.value("last_import_dir", QDir::homePath()).toString();
 
-  QString last_output_format = s.value("last_output_format", "ogg").toString();
+  QString last_output_format = s.value("last_output_format", "audio/x-vorbis").toString();
   for (int i = 0; i < ui_->format->count(); ++i) {
     if (last_output_format ==
-        ui_->format->itemData(i).value<TranscoderPreset>().extension_) {
+        ui_->format->itemData(i).value<TranscoderPreset>().codec_mimetype_) {
       ui_->format->setCurrentIndex(i);
       break;
     }
@@ -163,7 +163,7 @@ void TranscodeDialog::Start() {
   // Save the last output format
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue("last_output_format", preset.extension_);
+  s.setValue("last_output_format", preset.codec_mimetype_);
 }
 
 void TranscodeDialog::Cancel() {
