@@ -24,7 +24,10 @@
 #include <QSettings>
 
 RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
-    : app_(app), downloader_(false), client_(client) {
+    : app_(app),
+      downloader_(false),
+      client_(client),
+      song_sender_(new SongSender(app, this)) {
   // Open the buffer
   buffer_.setData(QByteArray());
   buffer_.open(QIODevice::ReadWrite);

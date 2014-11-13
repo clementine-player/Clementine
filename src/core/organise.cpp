@@ -71,8 +71,8 @@ void Organise::Start() {
 
   thread_ = new QThread;
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));
-  connect(transcoder_, SIGNAL(JobComplete(QString, bool)),
-          SLOT(FileTranscoded(QString, bool)));
+  connect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)),
+          SLOT(FileTranscoded(QString, QString, bool)));
 
   moveToThread(thread_);
   thread_->start();
@@ -272,13 +272,13 @@ void Organise::UpdateProgress() {
   task_manager_->SetTaskProgress(task_id_, progress, total);
 }
 
-void Organise::FileTranscoded(const QString& filename, bool success) {
-  qLog(Info) << "File finished" << filename << success;
+void Organise::FileTranscoded(const QString& input, const QString& output, bool success) {
+  qLog(Info) << "File finished" << input << success;
   transcode_progress_timer_.stop();
 
-  Task task = tasks_transcoding_.take(filename);
+  Task task = tasks_transcoding_.take(input);
   if (!success) {
-    files_with_errors_ << filename;
+    files_with_errors_ << input;
   } else {
     tasks_pending_ << task;
   }

@@ -75,6 +75,7 @@ class Song {
 
   // Don't change these values - they're stored in the database, and defined
   // in the tag reader protobuf.
+  // If a new lossless file is added, also add it to IsFileLossless().
   enum FileType {
     Type_Unknown = 0,
     Type_Asf = 1,
@@ -94,6 +95,7 @@ class Song {
   };
   static QString TextForFiletype(FileType type);
   QString TextForFiletype() const { return TextForFiletype(filetype()); }
+  bool IsFileLossless() const;
 
   // Sort songs alphabetically using their pretty title
   static void SortSongsListAlphabetically(QList<Song>* songs);

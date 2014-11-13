@@ -108,8 +108,8 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
 
-  connect(transcoder_, SIGNAL(JobComplete(QString, bool)),
-          SLOT(JobComplete(QString, bool)));
+  connect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)),
+          SLOT(JobComplete(QString, QString, bool)));
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
 }
@@ -171,7 +171,7 @@ void TranscodeDialog::Cancel() {
   SetWorking(false);
 }
 
-void TranscodeDialog::JobComplete(const QString& filename, bool success) {
+void TranscodeDialog::JobComplete(const QString& input, const QString& output, bool success) {
   (*(success ? &finished_success_ : &finished_failed_))++;
   queued_--;
 

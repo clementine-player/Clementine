@@ -55,6 +55,7 @@ enum MsgType {
   LIBRARY_CHUNK = 52;
   DOWNLOAD_TOTAL_SIZE = 53;
   GLOBAL_SEARCH_RESULT = 54;
+  TRANSCODING_FILES = 55;
 }
 
 // Valid Engine states
@@ -297,9 +298,14 @@ message ResponseGlobalSearch {
   repeated SongMetadata song_metadata = 4;
 }
 
+message ResponseTranscoderStatus {
+  optional int32 processed = 1;
+  optional int32 total = 2;
+}
+
 // The message itself
 message Message {
-  optional int32 version = 1 [default=17];
+  optional int32 version = 1 [default=18];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
@@ -333,4 +339,5 @@ message Message {
   optional ResponseLibraryChunk response_library_chunk = 34;
   optional ResponseDownloadTotalSize response_download_total_size = 36;
   optional ResponseGlobalSearch response_global_search = 38;
+  optional ResponseTranscoderStatus response_transcoder_status = 39;
 }

@@ -233,6 +233,7 @@ set(SOURCES
   networkremote/networkremotehelper.cpp
   networkremote/outgoingdatacreator.cpp
   networkremote/remoteclient.cpp
+  networkremote/songsender.cpp
   networkremote/zeroconf.cpp
 
   playlist/dynamicplaylistcontrols.cpp
@@ -534,6 +535,7 @@ set(HEADERS
   networkremote/incomingdataparser.h
   networkremote/outgoingdatacreator.h
   networkremote/remoteclient.h
+  networkremote/songsender.h
 
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h

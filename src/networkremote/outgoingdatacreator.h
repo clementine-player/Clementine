@@ -30,14 +30,6 @@
 
 typedef QList<SongInfoProvider*> ProviderList;
 
-struct DownloadItem {
-  Song song_;
-  int song_no_;
-  int song_count_;
-  DownloadItem(Song s, int no, int count)
-      : song_(s), song_no_(no), song_count_(count) {}
-};
-
 struct GlobalSearchRequest {
   int id_;
   QString query_;
@@ -57,6 +49,9 @@ class OutgoingDataCreator : public QObject {
   static const quint32 kFileChunkSize;
 
   void SetClients(QList<RemoteClient*>* clients);
+
+  static void CreateSong(const Song& song, const QImage& art, const int index,
+                  pb::remote::SongMetadata* song_metadata);
 
  public slots:
   void SendClementineInfo();
@@ -82,9 +77,6 @@ class OutgoingDataCreator : public QObject {
   void DisconnectAllClients();
   void GetLyrics();
   void SendLyrics(int id, const SongInfoFetcher::Result& result);
-  void SendSongs(const pb::remote::RequestDownloadSongs& request,
-                 RemoteClient* client);
-  void ResponseSongOffer(RemoteClient* client, bool accepted);
   void SendLibrary(RemoteClient* client);
   void EnableKittens(bool aww);
   void SendKitten(const QImage& kitten);
@@ -103,7 +95,6 @@ class OutgoingDataCreator : public QObject {
   QTimer* keep_alive_timer_;
   QTimer* track_position_timer_;
   int keep_alive_timeout_;
-  QMap<RemoteClient*, QQueue<DownloadItem> > download_queue_;
   int last_track_position_;
   bool aww_;
 
@@ -116,17 +107,8 @@ class OutgoingDataCreator : public QObject {
 
   void SendDataToClients(pb::remote::Message* msg);
   void SetEngineState(pb::remote::ResponseClementineInfo* msg);
-  void CreateSong(const Song& song, const QImage& art, const int index,
-                  pb::remote::SongMetadata* song_metadata);
   void CheckEnabledProviders();
   SongInfoProvider* ProviderByName(const QString& name) const;
-  void SendSingleSong(RemoteClient* client, const Song& song, int song_no,
-                      int song_count);
-  void SendAlbum(RemoteClient* client, const Song& song);
-  void SendPlaylist(RemoteClient* client, int playlist_id);
-  void SendUrls(RemoteClient* client, const pb::remote::RequestDownloadSongs& request);
-  void OfferNextSong(RemoteClient* client);
-  void SendTotalFileSize(RemoteClient* client);
 };
 
 #endif  // OUTGOINGDATACREATOR_H

@@ -213,6 +213,8 @@ QString GetTemporaryFileName() {
   QString file;
   {
     QTemporaryFile tempfile;
+    // Do not delete the file, we want to do something with it
+    tempfile.setAutoRemove(false);
     tempfile.open();
     file = tempfile.fileName();
   }

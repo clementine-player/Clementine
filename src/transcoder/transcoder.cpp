@@ -28,6 +28,7 @@
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
+#include "core/utilities.h"
 
 using std::shared_ptr;
 
@@ -193,14 +194,16 @@ void Transcoder::JobState::PostFinished(bool success) {
                               new Transcoder::JobFinishedEvent(this, success));
 }
 
-Transcoder::Transcoder(QObject* parent)
-    : QObject(parent), max_threads_(QThread::idealThreadCount()) {
+Transcoder::Transcoder(QObject* parent, const QString& settings_postfix)
+    : QObject(parent),
+      max_threads_(QThread::idealThreadCount()),
+      settings_postfix_(settings_postfix) {
   if (JobFinishedEvent::sEventType == -1)
     JobFinishedEvent::sEventType = QEvent::registerEventType();
 
   // Initialise some settings for the lamemp3enc element.
   QSettings s;
-  s.beginGroup("Transcoder/lamemp3enc");
+  s.beginGroup("Transcoder/lamemp3enc" + settings_postfix_);
 
   if (s.value("target").isNull()) {
     s.setValue("target", 1);  // 1 == bitrate
@@ -301,6 +304,15 @@ void Transcoder::AddJob(const QString& input, const TranscoderPreset& preset,
   queued_jobs_ << job;
 }
 
+void Transcoder::AddTemporaryJob(const QString &input, const TranscoderPreset &preset) {
+  Job job;
+  job.input = input;
+  job.output = Utilities::GetTemporaryFileName();
+  job.preset = preset;
+
+  queued_jobs_ << job;
+}
+
 void Transcoder::Start() {
   emit LogLine(tr("Transcoding %1 files using %2 threads")
                    .arg(queued_jobs_.count())
@@ -327,11 +339,11 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
     return StartedSuccessfully;
   }
 
-  emit JobComplete(job.input, false);
+  emit JobComplete(job.input, job.output, false);
   return FailedToStart;
 }
 
-void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gboolean,
+void Transcoder::NewPadCallback(GstElement*, GstPad* pad,
                                 gpointer data) {
   JobState* state = reinterpret_cast<JobState*>(data);
   GstPad* const audiopad =
@@ -446,7 +458,7 @@ bool Transcoder::StartJob(const Job& job) {
   // Set callbacks
   state->convert_element_ = convert;
 
-  CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, state.get());
+  CHECKED_GCONNECT(decode, "pad-added", &NewPadCallback, state.get());
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
                            BusCallbackSync, state.get(), nullptr);
   state->bus_callback_id_ = gst_bus_add_watch(
@@ -487,7 +499,8 @@ bool Transcoder::event(QEvent* e) {
       return true;
     }
 
-    QString filename = (*it)->job_.input;
+    QString input = (*it)->job_.input;
+    QString output = (*it)->job_.output;
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
@@ -500,7 +513,7 @@ bool Transcoder::event(QEvent* e) {
     current_jobs_.erase(it);
 
     // Emit the finished signal
-    emit JobComplete(filename, finished_event->success_);
+    emit JobComplete(input, output, finished_event->success_);
 
     // Start some more jobs
     MaybeStartNextJob();
@@ -559,7 +572,7 @@ QMap<QString, float> Transcoder::GetProgress() const {
 
 void Transcoder::SetElementProperties(const QString& name, GObject* object) {
   QSettings s;
-  s.beginGroup("Transcoder/" + name);
+  s.beginGroup("Transcoder/" + name + settings_postfix_);
 
   guint properties_count = 0;
   GParamSpec** properties = g_object_class_list_properties(

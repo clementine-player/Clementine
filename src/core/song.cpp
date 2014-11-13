@@ -412,6 +412,18 @@ QString Song::TextForFiletype(FileType type) {
   }
 }
 
+bool Song::IsFileLossless() const {
+  switch (filetype()) {
+    case Song::Type_Aiff:
+    case Song::Type_Flac:
+    case Song::Type_OggFlac:
+    case Song::Type_Wav:
+      return true;
+    default:
+      return false;
+  }
+}
+
 int CompareSongsName(const Song& song1, const Song& song2) {
   return song1.PrettyTitleWithArtist().localeAwareCompare(
              song2.PrettyTitleWithArtist()) < 0;

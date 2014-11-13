@@ -61,7 +61,7 @@ signals:
 
  private slots:
   void ProcessSomeFiles();
-  void FileTranscoded(const QString& filename, bool success);
+  void FileTranscoded(const QString& input, const QString& output, bool success);
 
  private:
   void SetSongProgress(float progress, bool transcoded = false);

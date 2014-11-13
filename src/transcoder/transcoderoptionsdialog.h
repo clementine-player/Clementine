@@ -36,6 +36,8 @@ class TranscoderOptionsDialog : public QDialog {
 
   void accept();
 
+  void set_settings_postfix(const QString& settings_postfix);
+
  protected:
   void showEvent(QShowEvent* e);
 

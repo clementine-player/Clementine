@@ -46,9 +46,6 @@ signals:
                   bool enqueue);
   void RemoveSongs(int id, const QList<int>& indices);
   void SeekTo(int seconds);
-  void SendSongs(const pb::remote::RequestDownloadSongs& request,
-                 RemoteClient* client);
-  void ResponseSongOffer(RemoteClient* client, bool accepted);
   void SendLibrary(RemoteClient* client);
   void RateCurrentSong(double);
 

@@ -35,6 +35,9 @@ class NetworkRemoteSettingsPage : public SettingsPage {
  protected:
   bool eventFilter(QObject* object, QEvent* event);
 
+ private slots:
+  void Options();
+
  private:
   static const char* kPlayStoreUrl;
 

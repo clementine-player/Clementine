@@ -31,14 +31,14 @@ TranscoderOptionsWma::~TranscoderOptionsWma() { delete ui_; }
 
 void TranscoderOptionsWma::Load() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
 
   ui_->bitrate_slider->setValue(s.value("bitrate", 128000).toInt() / 1000);
 }
 
 void TranscoderOptionsWma::Save() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
 
   s.setValue("bitrate", ui_->bitrate_slider->value() * 1000);
 }
