@@ -358,21 +358,6 @@ void Transcoder::NewPadCallback(GstElement*, GstPad* pad,
   gst_object_unref(audiopad);
 }
 
-gboolean Transcoder::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
-  JobState* state = reinterpret_cast<JobState*>(data);
-
-  switch (GST_MESSAGE_TYPE(msg)) {
-    case GST_MESSAGE_ERROR:
-      state->ReportError(msg);
-      state->PostFinished(false);
-      break;
-
-    default:
-      break;
-  }
-  return GST_BUS_DROP;
-}
-
 GstBusSyncReply Transcoder::BusCallbackSync(GstBus*, GstMessage* msg,
                                             gpointer data) {
   JobState* state = reinterpret_cast<JobState*>(data);
@@ -461,9 +446,6 @@ bool Transcoder::StartJob(const Job& job) {
   CHECKED_GCONNECT(decode, "pad-added", &NewPadCallback, state.get());
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
                            BusCallbackSync, state.get(), nullptr);
-  state->bus_callback_id_ = gst_bus_add_watch(
-      gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
-                           BusCallback, state.get());
 
   // Start the pipeline
   gst_element_set_state(state->pipeline_, GST_STATE_PLAYING);
@@ -507,7 +489,6 @@ bool Transcoder::event(QEvent* e) {
     gst_bus_set_sync_handler(
         gst_pipeline_get_bus(GST_PIPELINE(finished_event->state_->pipeline_)),
         nullptr, nullptr, nullptr);
-    g_source_remove(finished_event->state_->bus_callback_id_);
 
     // Remove it from the list - this will also destroy the GStreamer pipeline
     current_jobs_.erase(it);
@@ -537,7 +518,6 @@ void Transcoder::Cancel() {
     // called after the pipeline is shutting down
     gst_bus_set_sync_handler(gst_pipeline_get_bus(
         GST_PIPELINE(state->pipeline_)), nullptr, nullptr, nullptr);
-    g_source_remove(state->bus_callback_id_);
 
     // Stop the pipeline
     if (gst_element_set_state(state->pipeline_, GST_STATE_NULL) ==

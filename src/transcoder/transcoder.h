@@ -90,8 +90,7 @@ signals:
         : job_(job),
           parent_(parent),
           pipeline_(nullptr),
-          convert_element_(nullptr),
-          bus_callback_id_(0) {}
+          convert_element_(nullptr) {}
     ~JobState();
 
     void PostFinished(bool success);
@@ -101,7 +100,6 @@ signals:
     Transcoder* parent_;
     GstElement* pipeline_;
     GstElement* convert_element_;
-    int bus_callback_id_;
   };
 
   // Event passed from a GStreamer callback to the Transcoder when a job
@@ -134,7 +132,6 @@ signals:
   void SetElementProperties(const QString& name, GObject* element);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gpointer data);
-  static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
                                          gpointer data);
 
