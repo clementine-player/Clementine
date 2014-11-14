@@ -149,7 +149,13 @@ void SongSender::SendTotalFileSize() {
 
   int total = 0;
   for (DownloadItem item : download_queue_) {
-    total += item.song_.filesize();
+    QString local_file = item.song_.url().toLocalFile();
+    bool is_transcoded = transcoder_map_.contains(local_file);
+
+    if (is_transcoded) {
+      local_file = transcoder_map_.value(local_file);
+    }
+    total += QFileInfo(local_file).size();
   }
 
   response->set_total_size(total);
