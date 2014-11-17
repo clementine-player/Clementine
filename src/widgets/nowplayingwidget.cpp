@@ -99,6 +99,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   CreateModeAction(LargeSongDetailsBelow,
                    tr("Large album cover (details below)"), mode_group,
                    mode_mapper);
+  CreateModeAction(NoCoverDetails, tr("No album cover (details only)"),
+                   mode_group, mode_mapper);
 
   menu_->addActions(mode_group->actions());
 
@@ -228,6 +230,8 @@ void NowPlayingWidget::UpdateHeight() {
       total_height_ = kTopBorder + cover_loader_options_.desired_height_ +
                       kBottomOffset + details_->size().height();
       break;
+    case NoCoverDetails:
+      return;
   }
 
   // Update the animation settings and resize the widget now if we're visible
@@ -267,6 +271,22 @@ void NowPlayingWidget::UpdateDetailsText() {
       break;
 
     case LargeSongDetailsBelow:
+      details_->setTextWidth(cover_loader_options_.desired_height_);
+      if (fit_width_) {
+        details_->setDefaultStyleSheet(
+            "p {"
+            "  font-size: small;"
+            "}");
+      } else {
+        details_->setDefaultStyleSheet(
+            "p {"
+            "  font-size: small;"
+            "  color: white;"
+            "}");
+      }
+      html += "<p align=center>";
+      break;
+    case NoCoverDetails:
       details_->setTextWidth(cover_loader_options_.desired_height_);
       if (fit_width_) {
         details_->setDefaultStyleSheet(
@@ -436,7 +456,7 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
       break;
     }
 
-    case LargeSongDetailsBelow:
+    case LargeSongDetailsBelow: {
       // Work out how high the text is going to be
       const int text_height = details_->size().height();
 
@@ -468,6 +488,32 @@ void NowPlayingWidget::DrawContents(QPainter* p) {
       details_->drawContents(p);
       p->translate(-x_offset, -height() + text_height);
       break;
+    }
+    case NoCoverDetails: {
+      const int x_offset =
+          (width() - cover_loader_options_.desired_height_) / 2;
+      // Work out how high the text is going to be
+      const int text_height = details_->size().height();
+      const int gradient_mid = height() - qMax(text_height, kBottomOffset);
+
+      // Draw the black fade
+      QLinearGradient gradient(0, gradient_mid - kGradientHead, 0,
+                               gradient_mid + kGradientTail);
+      gradient.setColorAt(0, QColor(0, 0, 0, 0));
+      gradient.setColorAt(1, QColor(0, 0, 0, 255));
+
+      p->fillRect(0, gradient_mid - kGradientHead, width(),
+                  height() - (gradient_mid - kGradientHead), gradient);
+
+      // Draw the text on top
+      p->translate(x_offset, height() - text_height);
+      details_->drawContents(p);
+      p->translate(-x_offset, -height() + text_height);
+
+      // Set container height to be text only
+      SetHeight(text_height);
+      break;
+    }
   }
 }
 
