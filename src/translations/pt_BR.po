@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-01 16:17+0000\n"
+"PO-Revision-Date: 2014-11-13 22:28+0000\n"
 "Last-Translator: carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -336,7 +336,7 @@ msgstr "É necessário ter uma conta Grooveshark Anywhere."
 msgid "A Spotify Premium account is required."
 msgstr "É necessária uma conta Premium Spotify."
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Um cliente só pode se conectar se o código correto for digitado."
 
@@ -741,11 +741,11 @@ msgstr "Todos os tradutores"
 msgid "All tracks"
 msgstr "Todas as faixas"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "Permitir que um cliente baixe músicas desse computador."
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "Permitir downloads"
 
@@ -864,7 +864,8 @@ msgstr "Inicial do artista"
 msgid "Ask when saving"
 msgstr "Perguntar ao salvar"
 
-#: ../bin/src/ui_transcodedialog.h:222 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Formato de áudio"
 
@@ -1412,6 +1413,14 @@ msgstr "Converter todas as músicas"
 msgid "Convert any music that the device can't play"
 msgstr "Converter qualquer música que o dispositivo não puder tocar"
 
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr "Converter arquivos de áudio sem perda antes de enviá-los remotamente."
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr "Converter arquivos sem perda"
+
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "Copiar url compartilhada para a área de transferência"
@@ -1440,7 +1449,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Não foi possível conectar-se a Subsonic, verificar a URL do servidor. Exemplo: http://localhost:4040/ "
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1451,14 +1460,14 @@ msgstr "Incapaz de criar o elemento GStreamer \"%1\" - confira se você possui t
 msgid "Couldn't create playlist"
 msgstr "Não foi possível criar a lista de reprodução"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Não foi possível encontrar um multiplexador para %1, verifique se você tem os plugins corretos do GStreamer instalados"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1895,7 +1904,11 @@ msgstr "Baixar automaticamente novos episódios"
 msgid "Download queued"
 msgstr "Download na fila"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr "Configurações de download"
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "Baixar o aplicativo Android"
 
@@ -2086,7 +2099,7 @@ msgstr "Forneça o endereço do site de transmissão de rádio:"
 msgid "Enter the name of the folder"
 msgstr "Digite o nome da pasta"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Digite este IP no Aplicativo para conectar ao Clementine."
 
@@ -2143,7 +2156,7 @@ msgstr "Erro carregando %1"
 msgid "Error loading di.fm playlist"
 msgstr "Erro carregando a lista de reprodução: di.fm"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Erro processando %1:%2"
@@ -2402,7 +2415,7 @@ msgstr "Primeiro nível"
 msgid "Fit cover to width"
 msgstr "Ajustar capa à largura"
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:230
+#: core/song.cpp:382 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -3109,11 +3122,11 @@ msgstr "Letras de música"
 msgid "Lyrics from %1"
 msgstr "Letras de %1"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:235
+#: core/song.cpp:388 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3342,7 +3355,7 @@ msgstr "Banda baixa (NB)"
 msgid "Network Proxy"
 msgstr "Proxy da Rede"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "Rede Remota"
 
@@ -3501,19 +3514,19 @@ msgstr "Pré-visualização de informações na tela"
 msgid "Off"
 msgstr "Desligado"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:241
+#: core/song.cpp:390 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:247
+#: core/song.cpp:396 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:244
+#: core/song.cpp:392 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:238
+#: core/song.cpp:394 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3527,7 +3540,7 @@ msgstr "Ligado"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3535,7 +3548,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Aceitar apenas conexões de clientes dentro das faixas de ip:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "Permitir somente conexões da rede local"
 
@@ -3615,7 +3628,8 @@ msgstr "Otimizar por taxa de bits"
 msgid "Optimize for quality"
 msgstr "Otimizar por qualidade"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Opções..."
 
@@ -3808,7 +3822,7 @@ msgid "Popup duration"
 msgstr "Duração do aviso"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "Porta"
 
@@ -4164,7 +4178,7 @@ msgstr "Modo ReplayGain"
 msgid "Repopulate"
 msgstr "Repovoar"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "Exigir código de autenticação"
 
@@ -4487,7 +4501,7 @@ msgstr "Mudar volume para <value> por cento"
 msgid "Set value for all selected tracks..."
 msgstr "Mudar o valor para todas as faixas selecionadas..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr "Configurações"
 
@@ -4819,7 +4833,7 @@ msgid ""
 "list"
 msgstr "Comece a digitar algo na caixa de pesquisa para preencher esta lista de resultados."
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "Iniciando %1"
@@ -4892,7 +4906,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Êxito!"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 gravado com sucesso"
@@ -5196,7 +5210,7 @@ msgstr "Log do conversor"
 msgid "Transcoding"
 msgstr "Conversão"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Convertendo %1 arquivos usando %2 núcleos"
@@ -5348,7 +5362,7 @@ msgstr "Usar cores personalizadas"
 msgid "Use a custom message for notifications"
 msgstr "Usar uma mensagem personalizada para notificações"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "Usar um controle remoto de rede"
 
@@ -5483,7 +5497,7 @@ msgstr "Muro"
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisar-me quando fechar uma guia de lista de reprodução"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:253
+#: core/song.cpp:400 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5567,7 +5581,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:250
+#: core/song.cpp:380 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Áudio do Windows Media"
 
@@ -5724,7 +5738,7 @@ msgstr "Você precisa acessar as Preferências de Sistema e habilitar a opção 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Você precisará reiniciar o Clementine se mudar o idioma."
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "Seu endereço de IP:"
 
@@ -5899,7 +5913,7 @@ msgstr "ligado"
 msgid "options"
 msgstr "opções"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "ou escanear um código QR!"
 

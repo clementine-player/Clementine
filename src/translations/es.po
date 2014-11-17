@@ -31,8 +31,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-01 07:11+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fito@libreoffice.org>\n"
+"PO-Revision-Date: 2014-11-13 22:18+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -348,7 +348,7 @@ msgstr "Se necesita una cuenta de Grooveshark Anywhere."
 msgid "A Spotify Premium account is required."
 msgstr "Se necesita una cuenta Premium de Spotify."
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Solo se puede conectar un cliente si se introduce el código correcto."
 
@@ -753,11 +753,11 @@ msgstr "Todos los traductores"
 msgid "All tracks"
 msgstr "Todas las pistas"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "Permitir que un cliente descargue música de este equipo."
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "Permitir descargas"
 
@@ -876,7 +876,8 @@ msgstr "Iniciales del artista"
 msgid "Ask when saving"
 msgstr "Preguntar al guardar"
 
-#: ../bin/src/ui_transcodedialog.h:222 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Formato de audio"
 
@@ -1424,6 +1425,14 @@ msgstr "Convertir toda la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir cualquier música que el dispositivo no pueda reproducir"
 
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr ""
+
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "Copiar URL para compartir en portapapeles"
@@ -1452,7 +1461,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "No se pudo conectar a Subsonic. Compruebe el URL del servidor. Ejemplo: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1463,14 +1472,14 @@ msgstr "No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener in
 msgid "Couldn't create playlist"
 msgstr "No se pudo crear la lista de reproducción"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "No se pudo encontrar un muxer para %1, compruebe que tiene instalados los complementos correctos de GStreamer"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1907,7 +1916,11 @@ msgstr "Descargar episodios nuevos automáticamente"
 msgid "Download queued"
 msgstr "Descarga en cola"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "Descargue la aplicación para Android"
 
@@ -2098,7 +2111,7 @@ msgstr "Escriba el URL de un flujo de radio por Internet:"
 msgid "Enter the name of the folder"
 msgstr "Escriba el nombre de la carpeta"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Escriba esta IP en la aplicación para conectarse con Clementine."
 
@@ -2155,7 +2168,7 @@ msgstr "Error al cargar %1"
 msgid "Error loading di.fm playlist"
 msgstr "Error al cargar la lista de reproducción de di.fm"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Error al procesar %1: %2"
@@ -2414,7 +2427,7 @@ msgstr "Primer nivel"
 msgid "Fit cover to width"
 msgstr "Ajustar carátula a anchura"
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:230
+#: core/song.cpp:382 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -3121,11 +3134,11 @@ msgstr "Letra"
 msgid "Lyrics from %1"
 msgstr "Letra de %1"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:235
+#: core/song.cpp:388 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3354,7 +3367,7 @@ msgstr "Banda estrecha (NB)"
 msgid "Network Proxy"
 msgstr "Proxy de la red"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "Control remoto de red"
 
@@ -3513,19 +3526,19 @@ msgstr "Previsualización del OSD"
 msgid "Off"
 msgstr "Desactivado"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:241
+#: core/song.cpp:390 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:247
+#: core/song.cpp:396 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:244
+#: core/song.cpp:392 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:238
+#: core/song.cpp:394 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3539,7 +3552,7 @@ msgstr "Activado"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3547,7 +3560,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Solo aceptar conexiones de clientes en los rangos de IP:\n10.x.x.x\n172.16.0.0 – 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "Solo permitir conexiones provenientes de la red local"
 
@@ -3627,7 +3640,8 @@ msgstr "Optimizar para tasa de bits"
 msgid "Optimize for quality"
 msgstr "Optimizar para calidad"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Opciones…"
 
@@ -3820,7 +3834,7 @@ msgid "Popup duration"
 msgstr "Duración de la notificación"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "Puerto"
 
@@ -4176,7 +4190,7 @@ msgstr "Modo de regulación de volumen"
 msgid "Repopulate"
 msgstr "Rellenar"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "Solicitar un código de autenticación"
 
@@ -4499,7 +4513,7 @@ msgstr "Establecer el volumen en <valor> por ciento"
 msgid "Set value for all selected tracks..."
 msgstr "Establecer valor para todas las pistas seleccionadas…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr "Configuración"
 
@@ -4831,7 +4845,7 @@ msgid ""
 "list"
 msgstr "Comience a escribir en el cuadro de búsqueda anterior para obtener resultados en esta lista"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "Iniciando %1"
@@ -4904,7 +4918,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Exitoso"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 se ha escrito correctamente"
@@ -5208,7 +5222,7 @@ msgstr "Registro del convertidor"
 msgid "Transcoding"
 msgstr "Conversión"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Convirtiendo %1 archivos usando %2 procesos"
@@ -5360,7 +5374,7 @@ msgstr "Usar un conjunto de colores personalizado"
 msgid "Use a custom message for notifications"
 msgstr "Usar un mensaje personalizado para las notificaciones"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "Usar un control remoto de red"
 
@@ -5495,7 +5509,7 @@ msgstr "Muro"
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisarme antes de cerrar una pestaña de lista de reproducción"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:253
+#: core/song.cpp:400 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5579,7 +5593,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:250
+#: core/song.cpp:380 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Audio de Windows Media"
 
@@ -5736,7 +5750,7 @@ msgstr "Necesita ejecutar Preferencias del sistema y activar «<span style=\"fon
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Necesitará reiniciar Clementine si cambia el idioma."
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "Su dirección IP:"
 
@@ -5911,7 +5925,7 @@ msgstr "en"
 msgid "options"
 msgstr "opciones"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "o escanee el código QR"
 

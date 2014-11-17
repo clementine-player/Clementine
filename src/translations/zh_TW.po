@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-09 03:11+0000\n"
-"Last-Translator: BrLi <rainman59118@gmail.com>\n"
+"PO-Revision-Date: 2014-11-13 22:18+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -327,7 +327,7 @@ msgstr "必須為Grooveshark Anywhere會員。"
 msgid "A Spotify Premium account is required."
 msgstr "必須為 Spotify 的高級帳戶。"
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -732,11 +732,11 @@ msgstr "所有翻譯者"
 msgid "All tracks"
 msgstr "所有曲目"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr ""
 
@@ -855,7 +855,8 @@ msgstr "演唱者簽署"
 msgid "Ask when saving"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:222 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "音頻格式"
 
@@ -1403,6 +1404,14 @@ msgstr "轉換所有音樂"
 msgid "Convert any music that the device can't play"
 msgstr "轉換任何裝置無法播放的音樂"
 
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr ""
+
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr ""
@@ -1431,7 +1440,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr ""
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1442,14 +1451,14 @@ msgstr "無法建立 GStreamer 元件「%1」- 請確認您安裝了所有需要
 msgid "Couldn't create playlist"
 msgstr ""
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "無法為%1找到混合器，請確認已正確安裝 GStreamer 外掛。"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1886,7 +1895,11 @@ msgstr "自動下載新的片斷內容"
 msgid "Download queued"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr ""
 
@@ -2077,7 +2090,7 @@ msgstr "輸入網路廣播串流的網址(URL)："
 msgid "Enter the name of the folder"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr ""
 
@@ -2134,7 +2147,7 @@ msgstr "錯誤載入 %1"
 msgid "Error loading di.fm playlist"
 msgstr "載入 di.fm 播放清單錯誤"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "處理 %1 錯誤: %2"
@@ -2393,7 +2406,7 @@ msgstr "第一層次"
 msgid "Fit cover to width"
 msgstr ""
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:230
+#: core/song.cpp:382 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -3100,11 +3113,11 @@ msgstr "歌詞"
 msgid "Lyrics from %1"
 msgstr "歌詞來自 %1"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr ""
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:235
+#: core/song.cpp:388 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3333,7 +3346,7 @@ msgstr "窄頻 (NB)"
 msgid "Network Proxy"
 msgstr "網路代理伺服器"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr ""
 
@@ -3492,19 +3505,19 @@ msgstr "OSD 的預覽"
 msgid "Off"
 msgstr ""
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:241
+#: core/song.cpp:390 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:247
+#: core/song.cpp:396 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr ""
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:244
+#: core/song.cpp:392 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:238
+#: core/song.cpp:394 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3518,7 +3531,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3526,7 +3539,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3606,7 +3619,8 @@ msgstr "最佳化位元率"
 msgid "Optimize for quality"
 msgstr "最佳化品質"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "選擇..."
 
@@ -3799,7 +3813,7 @@ msgid "Popup duration"
 msgstr "彈出持續時間"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "連接埠"
 
@@ -4155,7 +4169,7 @@ msgstr "播放增益模式"
 msgid "Repopulate"
 msgstr "重新填充"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr ""
 
@@ -4478,7 +4492,7 @@ msgstr "設定音量到百分之<value>"
 msgid "Set value for all selected tracks..."
 msgstr "為所有選擇的歌曲設定音量..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr ""
 
@@ -4810,7 +4824,7 @@ msgid ""
 "list"
 msgstr ""
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "標記星號 %1"
@@ -4883,7 +4897,7 @@ msgstr ""
 msgid "Success!"
 msgstr ""
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "成功寫入 %1"
@@ -5187,7 +5201,7 @@ msgstr "轉碼日誌"
 msgid "Transcoding"
 msgstr "轉碼"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "轉碼 %1 個檔案使用 %2 個進程"
@@ -5339,7 +5353,7 @@ msgstr "使用自訂顏色組合"
 msgid "Use a custom message for notifications"
 msgstr "使用自訂訊息的通知"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5474,7 +5488,7 @@ msgstr ""
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:253
+#: core/song.cpp:400 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5558,7 +5572,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:250
+#: core/song.cpp:380 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media 音訊"
 
@@ -5715,7 +5729,7 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "您將需要重新啟動 Clementine ，如果您變更了本程式使用者介面所用的語言。"
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr ""
 
@@ -5890,7 +5904,7 @@ msgstr "在"
 msgid "options"
 msgstr "選項"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr ""
 

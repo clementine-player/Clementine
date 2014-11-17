@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-01 13:31+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"PO-Revision-Date: 2014-11-13 22:18+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/projects/p/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -326,7 +326,7 @@ msgstr "Akaun Grooveshark Anywhere diperlukan."
 msgid "A Spotify Premium account is required."
 msgstr "Akaun Spotify Premium diperlukan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Hanya satu klien boleh disambungkan, jika kod yang betul dimasukkan."
 
@@ -731,11 +731,11 @@ msgstr "Semua penterjemah"
 msgid "All tracks"
 msgstr "Semua trek"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "Benarkan klien memuat turun muzik dari komputer ini."
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "Benarkan muat turun"
 
@@ -854,7 +854,8 @@ msgstr "Nama awal artis"
 msgid "Ask when saving"
 msgstr "Tanya bila menyimpan"
 
-#: ../bin/src/ui_transcodedialog.h:222 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Format audio"
 
@@ -1402,6 +1403,14 @@ msgstr "Tukar semua muzik"
 msgid "Convert any music that the device can't play"
 msgstr "Tukar mana-mana muzik yang tidak boleh dimainkan oleh peranti"
 
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr ""
+
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "Salin url kongsi ke papan keratan"
@@ -1430,7 +1439,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Tidak dapat sambung ke Subsonic, periksa URL pelayan. Contoh: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1441,14 +1450,14 @@ msgstr "Tidak dapat cipta unsur GStreamer \"%1\" - pastikan anda telah mempunyai
 msgid "Couldn't create playlist"
 msgstr "Tidak dapat cipta senarai main"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Tidak dapat cari muxer untuk %1. Periksa sama ada anda mempunyai pemalam GStreamer yang betul dipasang"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1885,7 +1894,11 @@ msgstr "Muat turun episod baharu secara automatik"
 msgid "Download queued"
 msgstr "Muat turun dibaris gilir"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "Muat turun apl Android"
 
@@ -2076,7 +2089,7 @@ msgstr "Masukkan URL satu strim radio internet:"
 msgid "Enter the name of the folder"
 msgstr "Masukkan nama folder"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Masukkan IP ini dalam Apl untuk menyambung ke Clementine."
 
@@ -2133,7 +2146,7 @@ msgstr "Ralat memuatkan %1"
 msgid "Error loading di.fm playlist"
 msgstr "Ralat memuatkan senarai main di.fm"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Ralat memproses %1: %2"
@@ -2392,7 +2405,7 @@ msgstr "Aras pertama"
 msgid "Fit cover to width"
 msgstr "Suai muat kulit muka mengikut lebar"
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:230
+#: core/song.cpp:382 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -3099,11 +3112,11 @@ msgstr "Lirik"
 msgid "Lyrics from %1"
 msgstr "Lirik dari %1"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:235
+#: core/song.cpp:388 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3332,7 +3345,7 @@ msgstr "Jalur sempit (NB)"
 msgid "Network Proxy"
 msgstr "Proksi Rangkaian"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "Jauh Rangkaian"
 
@@ -3491,19 +3504,19 @@ msgstr "Pratonton"
 msgid "Off"
 msgstr "Mati"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:241
+#: core/song.cpp:390 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Flac Ogg"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:247
+#: core/song.cpp:396 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:244
+#: core/song.cpp:392 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Speex Ogg"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:238
+#: core/song.cpp:394 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3517,7 +3530,7 @@ msgstr "Hidup"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3525,7 +3538,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Hanya terima sambungan daripada klien dengan jula ip:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "Hanya benarkan sambungan dari rangkaian setempat"
 
@@ -3605,7 +3618,8 @@ msgstr "Optimumkan untuk kadar bit"
 msgid "Optimize for quality"
 msgstr "Optimumkan untuk kualiti"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Pilihan..."
 
@@ -3798,7 +3812,7 @@ msgid "Popup duration"
 msgstr "Jangkamasa timbul"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "Port"
 
@@ -4154,7 +4168,7 @@ msgstr "Mod Gandaan Main Semula"
 msgid "Repopulate"
 msgstr "Diami semula"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "Perlukan kod pengesahihan"
 
@@ -4477,7 +4491,7 @@ msgstr "Tetapkan volum ke <value> peratus"
 msgid "Set value for all selected tracks..."
 msgstr "Tetapkan nilai untuk semua trek terpilih..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr "Tetapan"
 
@@ -4809,7 +4823,7 @@ msgid ""
 "list"
 msgstr "Mula menaip sesuatu pada kotak gelintar di ata untuk mengisi senarai keputusan gelintar ini"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "Memulakan %1"
@@ -4882,7 +4896,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Berjaya"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Berjaya menulis %1"
@@ -5186,7 +5200,7 @@ msgstr "Log Transkoder"
 msgid "Transcoding"
 msgstr "Membuat transkod"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Membuat transkod %1 fail menggunakan bebenang %2"
@@ -5338,7 +5352,7 @@ msgstr "Guna set warna suai"
 msgid "Use a custom message for notifications"
 msgstr "Guna mesej suai untuk pemberitahuan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "Guna kawalan jauh rangkaian"
 
@@ -5473,7 +5487,7 @@ msgstr "Dinding"
 msgid "Warn me when closing a playlist tab"
 msgstr "Beri amaran bila menutup tab senarai main"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:253
+#: core/song.cpp:400 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5557,7 +5571,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:250
+#: core/song.cpp:380 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Audio Windows Media"
 
@@ -5714,7 +5728,7 @@ msgstr "Anda perlu lancar Keutamaan Sistem dan hidupkan \"<span style=\" font-st
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Anda perlu mulakan semula Clementine jika anda ubah bahasa."
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "Alamat IP anda:"
 
@@ -5889,7 +5903,7 @@ msgstr "hidup"
 msgid "options"
 msgstr "pilihan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "atau imbas kod QR!"
 

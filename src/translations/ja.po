@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-31 11:46+0000\n"
+"PO-Revision-Date: 2014-11-13 22:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -331,7 +331,7 @@ msgstr "Grooveshark Anywhere のアカウントが必要です。"
 msgid "A Spotify Premium account is required."
 msgstr "Spotify のプレミアムアカウントが必要です。"
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "正しいコードを入力したクライアントだけ接続できます。"
 
@@ -592,7 +592,7 @@ msgstr "マイミュージックに追加する"
 
 #: internet/spotifyservice.cpp:568
 msgid "Add to Spotify playlists"
-msgstr ""
+msgstr "Spotify のプレイリストに追加する"
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -692,7 +692,7 @@ msgstr "jamendo.com のアルバム情報..."
 
 #: internet/vkservice.cpp:825
 msgid "Albums"
-msgstr ""
+msgstr "アルバム"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -736,11 +736,11 @@ msgstr "すべての翻訳者"
 msgid "All tracks"
 msgstr "すべてのトラック"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "クライアントがこのコンピューターから曲をダウンロードするのを許可する"
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "ダウンロードを許可する"
 
@@ -859,7 +859,8 @@ msgstr "アーティストの頭文字"
 msgid "Ask when saving"
 msgstr "保存時に尋ねる"
 
-#: ../bin/src/ui_transcodedialog.h:222 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "オーディオ形式"
 
@@ -1407,6 +1408,14 @@ msgstr "すべての曲を変換する"
 msgid "Convert any music that the device can't play"
 msgstr "デバイスが再生できないすべての曲を変換する"
 
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr ""
+
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "URL をクリップボードにコピーする"
@@ -1435,7 +1444,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Subsonic に接続できませんでした。サーバーの URL を確認してください。例: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1446,14 +1455,14 @@ msgstr "GStreamer 要素「%1」を作成できませんでした。必要な GS
 msgid "Couldn't create playlist"
 msgstr "プレイリストを作成できません"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "%1 のミュクサーを見つけることができませんでした。正しい GStreamer プラグインがインストールされていることをチェックしてください"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1890,7 +1899,11 @@ msgstr "新しいエピソードを自動的にダウンロードする"
 msgid "Download queued"
 msgstr "ダウンロードがキューに追加されました"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "Android アプリをダウンロードする"
 
@@ -2081,7 +2094,7 @@ msgstr "インターネットラジオストリームの URL を入力してく�
 msgid "Enter the name of the folder"
 msgstr "フォルダ名を入力してください"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "この IP アドレスをアプリケーションに入力して Clementine に接続してください。"
 
@@ -2138,7 +2151,7 @@ msgstr "%1 の読み込みエラー"
 msgid "Error loading di.fm playlist"
 msgstr "di.fm プレイリストの読み込みエラー"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "%1 の処理エラー: %2"
@@ -2349,7 +2362,7 @@ msgstr "ファイル名パターン:"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:96
 msgid "File paths"
-msgstr ""
+msgstr "ファイルのパス"
 
 #: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
@@ -2397,7 +2410,7 @@ msgstr "第 1 階層"
 msgid "Fit cover to width"
 msgstr "カバーの大きさを幅に合わせる"
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:230
+#: core/song.cpp:382 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2786,7 +2799,7 @@ msgstr "インターネットプロバイダ"
 #: ../bin/src/ui_internetshowsettingspage.h:87
 msgctxt "Global search settings dialog title."
 msgid "Internet services"
-msgstr ""
+msgstr "インターネットサービス"
 
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
@@ -3104,11 +3117,11 @@ msgstr "歌詞"
 msgid "Lyrics from %1"
 msgstr "%1 からの歌詞"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:235
+#: core/song.cpp:388 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3337,7 +3350,7 @@ msgstr "低速回線 (NB)"
 msgid "Network Proxy"
 msgstr "ネットワークプロキシ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "Network Remote"
 
@@ -3496,19 +3509,19 @@ msgstr "OSD のプレビュー"
 msgid "Off"
 msgstr "オフ"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:241
+#: core/song.cpp:390 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:247
+#: core/song.cpp:396 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:244
+#: core/song.cpp:392 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:238
+#: core/song.cpp:394 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3522,7 +3535,7 @@ msgstr "オン"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3530,7 +3543,7 @@ msgid ""
 "192.168.x.x"
 msgstr "以下の IP アドレス範囲のクライアントからのみ接続を受け付けます:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "ローカルネットワークからのみ接続を許可する"
 
@@ -3610,7 +3623,8 @@ msgstr "ビットレートを最適化"
 msgid "Optimize for quality"
 msgstr "品質を最適化"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "オプション..."
 
@@ -3803,7 +3817,7 @@ msgid "Popup duration"
 msgstr "ポップアップの長さ"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "ポート"
 
@@ -4159,7 +4173,7 @@ msgstr "リプレイゲインモード"
 msgid "Repopulate"
 msgstr "再装着"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "認証コードを要求する"
 
@@ -4482,7 +4496,7 @@ msgstr "音量を <value> パーセントへ設定しました"
 msgid "Set value for all selected tracks..."
 msgstr "すべての選択されたトラックの音量を設定しました..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr "設定"
 
@@ -4814,7 +4828,7 @@ msgid ""
 "list"
 msgstr "この検索結果のリストを補完するには、上の検索ボックスに何か入力してください。"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 の開始中"
@@ -4887,7 +4901,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "成功!"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 の書き込みに成功しました"
@@ -5191,7 +5205,7 @@ msgstr "トランスコーダーのログ"
 msgid "Transcoding"
 msgstr "トランスコード"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "%2 個のスレッドを使用して %1 個のファイルをトランスコードしています"
@@ -5343,7 +5357,7 @@ msgstr "カスタム色設定を使用する"
 msgid "Use a custom message for notifications"
 msgstr "通知にカスタムメッセージを使用する"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "ネットワークリモコンを使用する"
 
@@ -5478,7 +5492,7 @@ msgstr ""
 msgid "Warn me when closing a playlist tab"
 msgstr "プレイリストタブを閉じるときに警告する"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:253
+#: core/song.cpp:400 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5562,7 +5576,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:250
+#: core/song.cpp:380 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media オーディオ"
 
@@ -5719,7 +5733,7 @@ msgstr "Clementine でグローバルショートカットを使用するには 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "言語を変更するには Clementine の再起動が必要です。"
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "あなたの IP アドレス:"
 
@@ -5894,7 +5908,7 @@ msgstr "が次の日付"
 msgid "options"
 msgstr "オプション"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "または QR コードをスキャン!"
 

@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-02 00:39+0000\n"
-"Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
+"PO-Revision-Date: 2014-11-13 22:18+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -326,7 +326,7 @@ msgstr "Je vyžadovaný Grooveshark Anywhere účet."
 msgid "A Spotify Premium account is required."
 msgstr "Je vyžadovaný prémium účet na Spotify."
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Klient sa môže pripojiť len vtedy, ak bol zadaný správny kód."
 
@@ -731,11 +731,11 @@ msgstr "DAG Software (Ďanovský Ján), všetkým ostatným prekladateľom"
 msgid "All tracks"
 msgstr "Všetky skladby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "Povoliť klientu stiahnuť hudbu z tohto počítača."
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "Povoliť sťahovania"
 
@@ -854,7 +854,8 @@ msgstr "Iniciálky interpréta"
 msgid "Ask when saving"
 msgstr "Opýtať sa pri ukladaní"
 
-#: ../bin/src/ui_transcodedialog.h:222 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Audio formát"
 
@@ -1402,6 +1403,14 @@ msgstr "Konvertovať všetku hudbu"
 msgid "Convert any music that the device can't play"
 msgstr "Konvertovať hudbu ktorú zariadenie nemôže prehrať"
 
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr ""
+
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "Kopírovať zdieľanú URL adresu do schránky"
@@ -1430,7 +1439,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Nedalo sa pripojiť na Subsonic, skontrolujte URL servera. Napríklad: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1441,14 +1450,14 @@ msgstr "Nedal sa vytvoriť GStreamer element \"%1\" - uistite sa, že máte nain
 msgid "Couldn't create playlist"
 msgstr "Nepodarilo sa vytvoriť playlist"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nedal sa nájsť muxer pre %1, skontrolujte či máte korektne nainštalované GStreamer pluginy"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1885,7 +1894,11 @@ msgstr "Sťahovať nové časti automaticky"
 msgid "Download queued"
 msgstr "Sťahovanie zaradené"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "Stiahnuť Android aplikáciu"
 
@@ -2076,7 +2089,7 @@ msgstr "Vložte URL internetového rádio streamu:"
 msgid "Enter the name of the folder"
 msgstr "Vložte názov priečinka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Zadajte túto IP adresu v programe na spojenie s Clementine."
 
@@ -2133,7 +2146,7 @@ msgstr "Chyba pri načítavaní %1"
 msgid "Error loading di.fm playlist"
 msgstr "Chyba pri načítavaní di.fm playlistu"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Chyba spracovania %1: %2"
@@ -2392,7 +2405,7 @@ msgstr "Prvá úroveň"
 msgid "Fit cover to width"
 msgstr "Prispôsobiť obal šírke"
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:230
+#: core/song.cpp:382 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -3099,11 +3112,11 @@ msgstr "Texty piesní"
 msgid "Lyrics from %1"
 msgstr "Texty z %1"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:235
+#: core/song.cpp:388 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3332,7 +3345,7 @@ msgstr "Úzke pásmo"
 msgid "Network Proxy"
 msgstr "Sieťové proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "Diaľkové ovládanie cez sieť"
 
@@ -3491,19 +3504,19 @@ msgstr "OSD ukážka"
 msgid "Off"
 msgstr "Vypnuté"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:241
+#: core/song.cpp:390 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:247
+#: core/song.cpp:396 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:244
+#: core/song.cpp:392 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:238
+#: core/song.cpp:394 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3517,7 +3530,7 @@ msgstr "Zapnuté"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3525,7 +3538,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Akceptovať iba spojenia z klientov s rozsahom ip adries:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "Povoliť spojenie iba z lokálnej siete"
 
@@ -3605,7 +3618,8 @@ msgstr "Optimalizovať na dátový tok"
 msgid "Optimize for quality"
 msgstr "Optimalizovať na kvalitu"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Možnosti..."
 
@@ -3798,7 +3812,7 @@ msgid "Popup duration"
 msgstr "Trvanie upozornenia"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "Port"
 
@@ -4154,7 +4168,7 @@ msgstr "Režim normalizovania hlasitosti"
 msgid "Repopulate"
 msgstr "Znovu naplniť"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "Vyžadovať overovací kód"
 
@@ -4477,7 +4491,7 @@ msgstr "Nastaviť hlasitosť na <value> percent"
 msgid "Set value for all selected tracks..."
 msgstr "Nastaviť hodnotu pre všetky vybraté skladby..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr "Nastavenia"
 
@@ -4809,7 +4823,7 @@ msgid ""
 "list"
 msgstr "Začnite písať niečo do vyhľadávacieho políčka vyššie, aby ste naplnili tento zoznam výsledkov hľadania"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "Začína sa %1"
@@ -4882,7 +4896,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Hotovo!"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Úspešne zapísané %1"
@@ -5186,7 +5200,7 @@ msgstr "Výpis transkódera"
 msgid "Transcoding"
 msgstr "Transkódovanie"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Transkódovanie %1 súborov použitím %2 vlákien."
@@ -5338,7 +5352,7 @@ msgstr "Použiť vlastný set farieb"
 msgid "Use a custom message for notifications"
 msgstr "Používať vlastnú správu pre upozornenia"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "Použiť sieťové diaľkové ovládanie"
 
@@ -5473,7 +5487,7 @@ msgstr "Stena"
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovať ma pri zatvorení karty s playlistom"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:253
+#: core/song.cpp:400 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5557,7 +5571,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:250
+#: core/song.cpp:380 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "WMa"
 
@@ -5714,7 +5728,7 @@ msgstr "Potrebujete otvoriť Systémové nastavenia a zapnúť \"<span style=\" 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Musíte reštartovať Clementine ak chcete zmeniť jazyk."
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "Vaša IP adresa:"
 
@@ -5889,7 +5903,7 @@ msgstr "na"
 msgid "options"
 msgstr "možnosti"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "alebo oskenovať QR kód!"
 

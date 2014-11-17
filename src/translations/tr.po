@@ -24,7 +24,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-01 23:04+0000\n"
+"PO-Revision-Date: 2014-11-16 18:08+0000\n"
 "Last-Translator: Volkan Gezer <volkangezer@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -341,7 +341,7 @@ msgstr "Bir Grooveshark Anywhere hesabı gereklidir."
 msgid "A Spotify Premium account is required."
 msgstr "Bir Spotify Premium hesabı gereklidir."
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Kod doğru girilmişse, yalnızca bir istemciye bağlanabilirsiniz."
 
@@ -746,11 +746,11 @@ msgstr "Tüm çevirmenler"
 msgid "All tracks"
 msgstr "Tüm parçalar"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "Bir istemciye bu bilgisayardan müzik indirmesine izin ver."
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "İndirmelere izin ver"
 
@@ -869,7 +869,8 @@ msgstr "Sanatçının kısaltması"
 msgid "Ask when saving"
 msgstr "Kaydederken sor"
 
-#: ../bin/src/ui_transcodedialog.h:222 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Ses biçimi"
 
@@ -1417,6 +1418,14 @@ msgstr "Tüm müzikleri dönüştür"
 msgid "Convert any music that the device can't play"
 msgstr "Aygıtın çalamadığı müzikleri dönüştür"
 
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr "Uzağa göndermeden önce kayıpsız ses dosyalarını dönüştür."
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr "Kayıpsız dosyaları dönüştür"
+
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "Paylaşım adresini panoya kopyala"
@@ -1445,7 +1454,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Subsonic'e bağlanılamadı, sunucu adresini kontrol edin. Örnek: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1456,14 +1465,14 @@ msgstr "GStreamer elementi  \"%1\" oluşturulamadı - tüm Gstreamer eklentileri
 msgid "Couldn't create playlist"
 msgstr "Çalma listesi oluşturulamadı"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "%1 için ayrıştırıcı bulunamadı, gerekli GStreamer eklentilerinin kurulu olup olmadığını kontrol edin"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1900,7 +1909,11 @@ msgstr "Yeni bölümleri otomatik olarak indir"
 msgid "Download queued"
 msgstr "Sıradakileri indir"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr "İndirme ayarları"
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "Android uygulamasını indir"
 
@@ -2091,7 +2104,7 @@ msgstr "Bir internet radyo yayın akışının URL'sini girin"
 msgid "Enter the name of the folder"
 msgstr "Klasör ismini girin"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "App Clementine için bağlanmak için IP girin."
 
@@ -2148,7 +2161,7 @@ msgstr "%1 yüklenirken hata"
 msgid "Error loading di.fm playlist"
 msgstr "di.fm çalma listesi yüklenirken hata oluştu"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "%1 işlenirken hata: %2"
@@ -2407,7 +2420,7 @@ msgstr "İlk Seviye"
 msgid "Fit cover to width"
 msgstr "Kapağı genişliğe sığdır"
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:230
+#: core/song.cpp:382 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -3114,11 +3127,11 @@ msgstr "Şarkı sözleri"
 msgid "Lyrics from %1"
 msgstr "%1 sitesinden şarkı sözleri"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:235
+#: core/song.cpp:388 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3347,7 +3360,7 @@ msgstr "Dar band (NB)"
 msgid "Network Proxy"
 msgstr "Vekil Sunucu"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "Ağ Denetimi"
 
@@ -3506,19 +3519,19 @@ msgstr "OSD Önizleme"
 msgid "Off"
 msgstr "Kapalı"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:241
+#: core/song.cpp:390 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:247
+#: core/song.cpp:396 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:244
+#: core/song.cpp:392 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:238
+#: core/song.cpp:394 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3532,7 +3545,7 @@ msgstr "Açık"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3540,7 +3553,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Sadece bu IP aralıklarındaki istemcilerden bağlantı kabul et:\\n 10.x.x.x\\n 172.16.0.0 - 172.31.255.255\\n 192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "Sadece yerel ağdan bağlantılara izin ver"
 
@@ -3620,7 +3633,8 @@ msgstr "Bit oranı için eniyileştir"
 msgid "Optimize for quality"
 msgstr "Kalite için eniyileştir"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Seçenekler..."
 
@@ -3813,7 +3827,7 @@ msgid "Popup duration"
 msgstr "Açılır pencere süresi"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "Port"
 
@@ -4169,7 +4183,7 @@ msgstr "Yeniden Oynatma Kazanç kipi"
 msgid "Repopulate"
 msgstr "Yeniden doldur"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "Doğrulama kodu iste"
 
@@ -4492,7 +4506,7 @@ msgstr "Ses seviyesini yüzde <value> yap"
 msgid "Set value for all selected tracks..."
 msgstr "Seçili tüm parçalar için değeri ayarla..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr "Ayarlar"
 
@@ -4824,7 +4838,7 @@ msgid ""
 "list"
 msgstr "Arama sonucunu görmek için arama kutusuna bir şeyler yazmaya başlayın."
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 Başlatılıyor"
@@ -4897,7 +4911,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Başarılı!"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 başarıyla yazıldı"
@@ -5201,7 +5215,7 @@ msgstr "Dönüştürücü Kaydı"
 msgid "Transcoding"
 msgstr "Kod çevrimi"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "%1 adet dosya %2 adet thread ile dönüştürülüyor"
@@ -5353,7 +5367,7 @@ msgstr "Özel bir renk düzeni kullan"
 msgid "Use a custom message for notifications"
 msgstr "Bildirimler için özel bir mesaj kullan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "Bir ağ uzak denetimi kullan"
 
@@ -5488,7 +5502,7 @@ msgstr "Duvar"
 msgid "Warn me when closing a playlist tab"
 msgstr "Bir çalma listesi sekmesini kapatırken beni uyar"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:253
+#: core/song.cpp:400 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5572,7 +5586,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Medya 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:250
+#: core/song.cpp:380 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -5729,7 +5743,7 @@ msgstr "Clementine'da genel kısayolları kullanabilmek için Sistem Ayarlarına
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dili değiştirdiyseniz programı yeniden başlatmanız gerekmektedir."
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "IP adresiniz:"
 
@@ -5904,7 +5918,7 @@ msgstr "açık"
 msgid "options"
 msgstr "seçenekler"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "veya QR kodunu tara!"
 

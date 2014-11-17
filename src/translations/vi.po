@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-31 11:46+0000\n"
+"PO-Revision-Date: 2014-11-13 22:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -328,7 +328,7 @@ msgstr "Cần có tài khoản Grooveshark Anywhere."
 msgid "A Spotify Premium account is required."
 msgstr "Cần có tài khoản cao cấp của Spotify."
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Máy khách được kết nối chỉ khi nhập đúng mã."
 
@@ -733,11 +733,11 @@ msgstr "Tất cả những người dịch"
 msgid "All tracks"
 msgstr "Tất cả bài hát"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "Cho phép tải về"
 
@@ -856,7 +856,8 @@ msgstr "Tên viết tắt của nghệ sĩ"
 msgid "Ask when saving"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:222 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Định dạng"
 
@@ -1404,6 +1405,14 @@ msgstr "Chuyển đổi toàn bộ nhạc"
 msgid "Convert any music that the device can't play"
 msgstr "Chuyển đổi bất kì bản nhạc nào mà thiết bị không thể chơi"
 
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr ""
+
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr ""
@@ -1432,7 +1441,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Không thể kết nối đến Subsonic, kiểm tra URL của máy chủ. Ví dụ: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1443,14 +1452,14 @@ msgstr "Không thể tạo phần tử GStreamer \"%1\" - hãy chắc chắn là
 msgid "Couldn't create playlist"
 msgstr ""
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Không tìm thấy thiết bị ghép kênh cho %1, hãy chắn chắn là bạn đã cài đặt đủ các phần bổ sung của GStreamer"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1887,7 +1896,11 @@ msgstr "Tự động tải về các tập mới"
 msgid "Download queued"
 msgstr "Đợi tải về"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr ""
 
@@ -2078,7 +2091,7 @@ msgstr "Nhập địa chỉ của kênh phát thanh trên internet:"
 msgid "Enter the name of the folder"
 msgstr "Nhập tên thư mục"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Nhập IP này vào ứng dụng để kết nối đến Clementine."
 
@@ -2135,7 +2148,7 @@ msgstr "Lỗi nạp %1"
 msgid "Error loading di.fm playlist"
 msgstr "Lỗi khi nạp danh sách di.fm"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Lỗi xử lý %1: %2"
@@ -2394,7 +2407,7 @@ msgstr "Mức độ đầu"
 msgid "Fit cover to width"
 msgstr ""
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:230
+#: core/song.cpp:382 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -3101,11 +3114,11 @@ msgstr "Lời bài hát"
 msgid "Lyrics from %1"
 msgstr "Lời bài hát từ %1"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr ""
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:235
+#: core/song.cpp:388 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3334,7 +3347,7 @@ msgstr "Băng hẹp (NB)"
 msgid "Network Proxy"
 msgstr "Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "Điều khiển qua mạng"
 
@@ -3493,19 +3506,19 @@ msgstr "Xem trước hộp thông báo"
 msgid "Off"
 msgstr ""
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:241
+#: core/song.cpp:390 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:247
+#: core/song.cpp:396 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:244
+#: core/song.cpp:392 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:238
+#: core/song.cpp:394 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3519,7 +3532,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3527,7 +3540,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Chỉ chấp nhận kết nối từ máy khách có ip trong các khoảng:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3607,7 +3620,8 @@ msgstr "Tối ưu cho bitrate"
 msgid "Optimize for quality"
 msgstr "Tối ưu cho chất lượng"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Tuỳ chọn..."
 
@@ -3800,7 +3814,7 @@ msgid "Popup duration"
 msgstr "Thời gian xuất hiện"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "Cổng"
 
@@ -4156,7 +4170,7 @@ msgstr ""
 msgid "Repopulate"
 msgstr "Phục hồi số lượng"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr ""
 
@@ -4479,7 +4493,7 @@ msgstr "Đặt âm lượng ở mức <value> phần trăm"
 msgid "Set value for all selected tracks..."
 msgstr "Đặt giá trị cho tất cả những bài được chọn..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr ""
 
@@ -4811,7 +4825,7 @@ msgid ""
 "list"
 msgstr "Gõ gì đó vào ô tìm kiếm"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "Bắt đầu %1"
@@ -4884,7 +4898,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Thành công!"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Đã ghi vào %1"
@@ -5188,7 +5202,7 @@ msgstr "Nhật kí chuyển mã"
 msgid "Transcoding"
 msgstr "Chuyển mã"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Đang chuyển mã %1 tập tin sử dụng %2 luồng"
@@ -5340,7 +5354,7 @@ msgstr "Chọn màu"
 msgid "Use a custom message for notifications"
 msgstr "Tùy chọn tin nhắn thông báo"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5475,7 +5489,7 @@ msgstr ""
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:253
+#: core/song.cpp:400 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5559,7 +5573,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:250
+#: core/song.cpp:380 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Âm thanh Windows Media"
 
@@ -5716,7 +5730,7 @@ msgstr "Bạn cần mở Tùy chỉnh hệ thống và bật \"<span style=\" fo
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Bạn cần khởi động lại Clementine khi thay đổi ngôn ngữ."
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "Địa chỉ IP của bạn:"
 
@@ -5891,7 +5905,7 @@ msgstr "vào"
 msgid "options"
 msgstr "tùy chọn"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr ""
 

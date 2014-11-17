@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-10-31 11:46+0000\n"
+"PO-Revision-Date: 2014-11-13 22:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/projects/p/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -324,7 +324,7 @@ msgstr " ဂရုရှက်အန်နီးဝဲစာရင်းတစ�
 msgid "A Spotify Premium account is required."
 msgstr "စပေါ့တီဖိုင်းအရစ်ကျစနစ်စာရင်းတစ်ခုလိုအပ်။"
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "မှန်ကန်သောကုဒ်ထည့်သွင်းနိုင်မှသာအသံုးပြုသူဆက်သွယ်နိုင်။"
 
@@ -729,11 +729,11 @@ msgstr "ဘာသာပြန်များအားလံုး"
 msgid "All tracks"
 msgstr "တေးသံလမ်းကြောများအားလံုး"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "ယခုကွန်ပျုတာမှသီချင်းကူးဆွဲရန်အသုံးပြုသူကိုခွင့်ပြု။"
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "ကူးဆွဲများခွင့်ပြု"
 
@@ -852,7 +852,8 @@ msgstr "အနုပညာရှင်အမည်၏အစ"
 msgid "Ask when saving"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:222 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "အသံပုံစံ"
 
@@ -1400,6 +1401,14 @@ msgstr "ဂီတအားလံုးကူးပြောင်း"
 msgid "Convert any music that the device can't play"
 msgstr "ယခုပစ္စည်းမဖွင့်နိုင်သောဂီတမျိုးစံုကူးပြောင်း"
 
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr ""
+
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr ""
@@ -1428,7 +1437,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "ဆပ်ဆိုးနစ်သို့မဆက်သွယ်နိုင်၊ ဆာဗာယူအာအယ်ပြန်စစ်ဆေးပါ။ ဥပမာ: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1439,14 +1448,14 @@ msgstr "ဂျီသီချင်းစီးကြောင်းအစိတ
 msgid "Couldn't create playlist"
 msgstr ""
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "%1 အတွက်မြုစာမရှာဖွေနိင်၊ ဂျီသီချင်းစီးကြောင်းလိုအပ်သောဖြည့်စွက်ပရိုဂရမ်များသွင်းပြီးမပြီးစစ်ဆေး"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1883,7 +1892,11 @@ msgstr "တွဲအသစ်များအလိုအလျောက်ကူ
 msgid "Download queued"
 msgstr "စီတန်းပြီးကူးဆွဲ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "စက်ရုပ်အပ်များကူးဆွဲ"
 
@@ -2074,7 +2087,7 @@ msgstr "အင်တာနက်ရေဒီယိုသီချင်းစီ
 msgid "Enter the name of the folder"
 msgstr "ဒီဖိုင်တွဲအတွက်နာမည်အသစ်တစ်ခုရွေး"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "ကလီမန်တိုင်းသို့ချိတ်ဆက်ရန်ယခုအပ်တွင်အိုင်ပီထည့်သွင်းပါ။"
 
@@ -2131,7 +2144,7 @@ msgstr "ထည့်သွင်းခြင်းအမှားပြ %1"
 msgid "Error loading di.fm playlist"
 msgstr "ဒီအိုင်.အက်ဖ်အမ်သီချင်းစာရင်းထည့်သွင်းအမှားပြ"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "ဆောင်ရွက်ခြင်းအမှားပြ %1: %2"
@@ -2390,7 +2403,7 @@ msgstr "ပထမဆံုးအဆင့်"
 msgid "Fit cover to width"
 msgstr ""
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:230
+#: core/song.cpp:382 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "အက်ဖ်အယ်အေစီ"
 
@@ -3097,11 +3110,11 @@ msgstr "သီချင်းစာသားများ"
 msgid "Lyrics from %1"
 msgstr "%1 မှသီချင်းစာသားများ"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:235
+#: core/song.cpp:388 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "အမ်ပီသရီး"
@@ -3330,7 +3343,7 @@ msgstr "ရေဒီယိုလှိုင်းကျဉ်း (အန်ဘ�
 msgid "Network Proxy"
 msgstr "ကွန်ရက်ပရောက်ဇီ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "ကွန်ရက်အဝေးထိန်း"
 
@@ -3489,19 +3502,19 @@ msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ကြိ
 msgid "Off"
 msgstr "ပိတ်"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:241
+#: core/song.cpp:390 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "အောဖ့်အက်ဖ်အယ်အေစီ"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:247
+#: core/song.cpp:396 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "အောဖ့်တေး"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:244
+#: core/song.cpp:392 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "အောဖ့်စဖိစ်"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:238
+#: core/song.cpp:394 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3515,7 +3528,7 @@ msgstr "ဖွင့်"
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3523,7 +3536,7 @@ msgid ""
 "192.168.x.x"
 msgstr "အိုင်ပီအတွင်းရှိအသံုးပြုသူများဆက်သွယ်မှုများကိုသာလက်ခံ:⏎ ၁၀.x.x.x⏎ ၁၇၂.၁၆.၀.၀ - ၁၇၂.၃၁.၂၅၅.၂၅၅⏎ ၁၉၂.၁၆၈.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "ကွန်ယက်တွင်းရှိဆက်သွယ်ချက်များကိုသာခွင့်ပြု"
 
@@ -3603,7 +3616,8 @@ msgstr "ဘစ်နှုန်းအတွက်ဆောင်ရွက်"
 msgid "Optimize for quality"
 msgstr "အရည်အသွေးအတွက်ဆောင်ရွက်"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "ရွေးပိုင်ခွင့်များ..."
 
@@ -3796,7 +3810,7 @@ msgid "Popup duration"
 msgstr "ထွက်ပေါ်ကြာချိန်"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "နံပါတ်ပေါက်"
 
@@ -4152,7 +4166,7 @@ msgstr "ဂိမ်းစနစ်ပြန်ဖွင့်"
 msgid "Repopulate"
 msgstr "ပြန်လည်ရွှေ့ပြောင်း"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "အထောက်အထားစစ်ဆေးခြင်းကုဒ်လိုအပ်"
 
@@ -4475,7 +4489,7 @@ msgstr "အသံပမာဏ <value> ရာခိုင်နှုန်းခ
 msgid "Set value for all selected tracks..."
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများအားလံုးအတွက်တန်ဖိုးထိန်းညှိ..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr "ချိန်ညှိချက်"
 
@@ -4807,7 +4821,7 @@ msgid ""
 "list"
 msgstr "ရှာဖွေရလဒ်များစာရင်းများကိုဖြည့်ရန်ရှာဖွေနေရာတွင်တစ်ခုခုရိုက်ထည့်ပါ"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 စတင်နေ"
@@ -4880,7 +4894,7 @@ msgstr "ဆပ်ဆိုးနစ်"
 msgid "Success!"
 msgstr "ရရိုသွားပြီ!"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 အောင်အောင်မြင်မြင်ဖြည့်သွင်းပြီး"
@@ -5184,7 +5198,7 @@ msgstr "ပံုစံပြောင်းလဲခြင်းမှတ်တ
 msgid "Transcoding"
 msgstr "ပံုစံပြောင်းလဲခြင်း"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "%2 ပရိုဂရမ်များအသံုးပြုပြီး %1 ဖိုင်များပြောင်းလဲခြင်း"
@@ -5336,7 +5350,7 @@ msgstr "စိတ်ကြိုက်အရောင်သတ်မှတ်သ
 msgid "Use a custom message for notifications"
 msgstr "သတိပေးချက်များအတွက်စိတ်ကြိုက်မှာကြားချက်သံုး"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "ကွန်ရက်အဝေးထိန်းတစ်ခုအသုံးပြု"
 
@@ -5471,7 +5485,7 @@ msgstr ""
 msgid "Warn me when closing a playlist tab"
 msgstr "သီချင်းစာရင်းမျက်နှာစာကိုပိတ်နေတုန်းသတိပေး"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:253
+#: core/song.cpp:400 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "တပလူအေဗီ"
 
@@ -5555,7 +5569,7 @@ msgstr "ဝင်းဒိုးမီဒီယာ၄၀ကီလို"
 msgid "Windows Media 64k"
 msgstr "ဝင်းဒိုးမီဒီယာ၆၄ကီလို"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:250
+#: core/song.cpp:380 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "ဝင်းဒိုးမီဒီယာအသံ"
 
@@ -5712,7 +5726,7 @@ msgstr "စနစ်လိုလားချက်များကိုဆော
 msgid "You will need to restart Clementine if you change the language."
 msgstr "ဘာသာစကားပြောင်းလဲပါကကလီမန်တိုင်းကိုပြန်လည်စတင်ပါ။"
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "သင့်ရဲ့အိုင်ပီလိပ်စာ:"
 
@@ -5887,7 +5901,7 @@ msgstr "အပေါ်မှာ"
 msgid "options"
 msgstr "ရွေးပိုင်ခွင့်များ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "(သို့)ကျုအာကုဒ်ကိုဖတ်"
 
