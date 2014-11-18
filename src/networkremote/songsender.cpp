@@ -56,6 +56,13 @@ SongSender::SongSender(Application* app, RemoteClient* client)
   total_transcode_ = 0;
 }
 
+SongSender::~SongSender() {
+  disconnect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)), this,
+          SLOT(TranscodeJobComplete(QString, QString, bool)));
+  disconnect(transcoder_, SIGNAL(AllJobsComplete()), this, SLOT(StartTransfer()));
+  transcoder_->Cancel();
+}
+
 void SongSender::SendSongs(const pb::remote::RequestDownloadSongs& request) {
   Song current_song = app_->player()->GetCurrentItem()->Metadata();
   switch (request.download_item()) {

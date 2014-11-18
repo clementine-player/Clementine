@@ -26,6 +26,7 @@ class SongSender : public QObject {
   Q_OBJECT
  public:
   SongSender(Application* app, RemoteClient* client);
+  ~SongSender();
 
   static const quint32 kFileChunkSize;
 
