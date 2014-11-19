@@ -1145,8 +1145,6 @@ Vreen::AudioItem VkService::GetAudioItemFromUrl(const QUrl& url) {
     Vreen::AudioItemListReply* song_request =
         audio_provider_->getAudiosByIds(song_id);
     emit StopWaiting();  // Stop all previous requests.
-    // To prevent object destruction in nested event loop
-    song_request->deleteLater();
     bool success = WaitForReply(song_request);
 
     if (success && !song_request->result().isEmpty()) {
@@ -1467,6 +1465,8 @@ void VkService::ClearStandardItem(QStandardItem* item) {
 bool VkService::WaitForReply(Vreen::Reply* reply) {
   QEventLoop event_loop;
   QTimer timeout_timer;
+  // To prevent object destruction in nested event loop
+  reply->deleteLater();
   timeout_timer.setSingleShot(true);
   connect(this, SIGNAL(StopWaiting()), &timeout_timer, SLOT(stop()));
   connect(this, SIGNAL(StopWaiting()), &event_loop, SLOT(quit()));
