@@ -26,10 +26,6 @@
 #include <QUrl>
 #include <QtDebug>
 
-#ifdef HAVE_AUDIOCD
-#include <gst/audio/gstaudiocdsrc.h>
-#endif
-
 #include "config.h"
 #include "core/logging.h"
 #include "core/player.h"
@@ -37,7 +33,6 @@
 #include "core/song.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
-#include "devices/cddasongloader.h"
 #include "internet/fixlastfm.h"
 #include "internet/internetmodel.h"
 #include "library/librarybackend.h"
@@ -48,6 +43,11 @@
 #include "podcasts/podcastparser.h"
 #include "podcasts/podcastservice.h"
 #include "podcasts/podcasturlloader.h"
+
+#ifdef HAVE_AUDIOCD
+#include <gst/audio/gstaudiocdsrc.h>
+#include "devices/cddasongloader.h"
+#endif
 
 using std::placeholders::_1;
 
