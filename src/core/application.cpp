@@ -75,12 +75,12 @@ Application::Application(QObject* parent)
       network_remote_(nullptr),
       network_remote_helper_(nullptr),
       scrobbler_(nullptr) {
-  tag_reader_client_ = new TagReaderClient(this);
-  MoveToNewThread(tag_reader_client_);
-  tag_reader_client_->Start();
-
   database_ = new Database(this, this);
   MoveToNewThread(database_);
+
+  tag_reader_client_ = new TagReaderClient(this, this);
+  MoveToNewThread(tag_reader_client_);
+  tag_reader_client_->Start();
 
   album_cover_loader_ = new AlbumCoverLoader(this);
   MoveToNewThread(album_cover_loader_);

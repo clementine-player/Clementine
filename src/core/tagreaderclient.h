@@ -25,6 +25,7 @@
 
 #include <QStringList>
 
+class Application;
 class QLocalServer;
 class QProcess;
 
@@ -32,7 +33,7 @@ class TagReaderClient : public QObject {
   Q_OBJECT
 
  public:
-  TagReaderClient(QObject* parent = nullptr);
+  TagReaderClient(Application* app, QObject* parent = nullptr);
 
   typedef AbstractMessageHandler<pb::tagreader::Message> HandlerType;
   typedef HandlerType::ReplyType ReplyType;
@@ -65,6 +66,7 @@ class TagReaderClient : public QObject {
   static TagReaderClient* Instance() { return sInstance; }
 
  public slots:
+  void SongSaveComplete(TagReaderClient::ReplyType* reply, const QString& filename, const Song& song);
   void UpdateSongsStatistics(const SongList& songs);
   void UpdateSongsRating(const SongList& songs);
 
@@ -74,6 +76,7 @@ class TagReaderClient : public QObject {
  private:
   static TagReaderClient* sInstance;
 
+  Application* app_;
   WorkerPool<HandlerType>* worker_pool_;
   QList<pb::tagreader::Message> message_queue_;
 };

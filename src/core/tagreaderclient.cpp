@@ -15,11 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/application.h"
+#include "library/librarybackend.h"
+#include "playlist/playlistmanager.h"
 #include "tagreaderclient.h"
 
 #include <QCoreApplication>
 #include <QFile>
+#include <QMutexLocker>
 #include <QProcess>
+#include <QtConcurrentRun>
 #include <QTcpServer>
 #include <QThread>
 #include <QUrl>
@@ -27,8 +32,8 @@
 const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
 TagReaderClient* TagReaderClient::sInstance = nullptr;
 
-TagReaderClient::TagReaderClient(QObject* parent)
-    : QObject(parent), worker_pool_(new WorkerPool<HandlerType>(this)) {
+TagReaderClient::TagReaderClient(Application* app, QObject* parent)
+    : QObject(parent), app_(app), worker_pool_(new WorkerPool<HandlerType>(this)) {
   sInstance = this;
 
   worker_pool_->SetExecutableName(kWorkerExecutableName);
@@ -62,7 +67,11 @@ TagReaderReply* TagReaderClient::SaveFile(const QString& filename,
   req->set_filename(DataCommaSizeFromQString(filename));
   metadata.ToProtobuf(req->mutable_metadata());
 
-  return worker_pool_->SendMessageWithReply(&message);
+  TagReaderReply* reply = worker_pool_->SendMessageWithReply(&message);
+  
+  SongSaveComplete(reply, filename, metadata); //this might be not instant
+  
+  return reply;
 }
 
 TagReaderReply* TagReaderClient::UpdateSongStatistics(const Song& metadata) {
@@ -219,4 +228,13 @@ QImage TagReaderClient::LoadEmbeddedArtBlocking(const QString& filename) {
   reply->deleteLater();
 
   return ret;
+}
+
+void TagReaderClient::SongSaveComplete(TagReaderClient::ReplyType* reply, const QString& filename, const Song& song) {
+  LibraryBackend* be = app_->library_backend();
+  SongList slist;
+  slist << song;
+  if (song.directory_id() !=-1) { //if we are in a collection directory
+    be->AddOrUpdateSongs(slist);
+  }
 }
