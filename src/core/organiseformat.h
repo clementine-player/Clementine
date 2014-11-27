@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2013-2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SRC_CORE_ORGANISEFORMAT_H_
-#define SRC_CORE_ORGANISEFORMAT_H_
+#ifndef CORE_ORGANISEFORMAT_H_
+#define CORE_ORGANISEFORMAT_H_
 
 #include <QSyntaxHighlighter>
 #include <QValidator>
@@ -25,7 +27,7 @@
 
 class OrganiseFormat {
  public:
-  OrganiseFormat(const QString& format = QString());
+  explicit OrganiseFormat(const QString& format = QString());
 
   static const char* kTagPattern;
   static const char* kBlockPattern;
@@ -80,4 +82,4 @@ class OrganiseFormat {
   bool replace_the_;
 };
 
-#endif  // SRC_CORE_ORGANISEFORMAT_H_
+#endif  // CORE_ORGANISEFORMAT_H_

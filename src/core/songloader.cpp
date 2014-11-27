@@ -1,5 +1,10 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2014, David Sansome <me@davidsansome.com>
+   Copyright 2010-2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2014, Alexander Bikadorov <abiku@cs.tu-berlin.de>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -162,7 +167,7 @@ void SongLoader::AudioCDTracksTagsLoaded(const SongList& songs) {
   songs_ = songs;
   emit LoadAudioCDFinished(true);
 }
-#endif // HAVE_AUDIOCD
+#endif  // HAVE_AUDIOCD
 
 SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   qLog(Debug) << "Loading local file" << filename;
@@ -195,7 +200,6 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
 }
 
 void SongLoader::LoadLocalAsync(const QString& filename) {
-
   // First check to see if it's a directory - if so we will load all the songs
   // inside right away.
   if (QFileInfo(filename).isDir()) {
@@ -213,7 +217,8 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
   if (!parser) {
     // Check the file extension as well, maybe the magic failed, or it was a
     // basic M3U file which is just a plain list of filenames.
-    parser = playlist_parser_->ParserForExtension(QFileInfo(filename).suffix().toLower());
+    parser = playlist_parser_->
+      ParserForExtension(QFileInfo(filename).suffix().toLower());
   }
 
   if (parser) {
@@ -233,7 +238,7 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
 
     SongList song_list = cue_parser_->Load(&cue, matching_cue,
                                            QDir(filename.section('/', 0, -2)));
-    for (Song song: song_list){
+    for (Song song : song_list) {
       if (song.is_valid()) songs_ << song;
     }
     return;
@@ -242,7 +247,9 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
   // Assume it's just a normal file
   Song song;
   song.InitFromFilePartial(filename);
-  if (song.is_valid()) songs_ << song;
+  if (song.is_valid()) {
+    songs_ << song;
+  }
 }
 
 void SongLoader::LoadMetadataBlocking() {

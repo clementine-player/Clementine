@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -18,8 +20,8 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-#ifndef TIMECONSTANTS_H
-#define TIMECONSTANTS_H
+#ifndef CORE_TIMECONSTANTS_H_
+#define CORE_TIMECONSTANTS_H_
 
 #include <QtGlobal>
 
@@ -33,4 +35,4 @@ const qint64 kNsecPerSec = 1000000000ll;
 
 const qint64 kSecsPerDay = 24 * 60 * 60;
 
-#endif  // TIMECONSTANTS_H
+#endif  // CORE_TIMECONSTANTS_H_

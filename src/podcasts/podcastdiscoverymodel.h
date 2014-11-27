@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -32,7 +34,7 @@ class PodcastDiscoveryModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  PodcastDiscoveryModel(Application* app, QObject* parent = nullptr);
+  explicit PodcastDiscoveryModel(Application* app, QObject* parent = nullptr);
 
   enum Type { Type_Folder, Type_Podcast, Type_LoadingIndicator };
 

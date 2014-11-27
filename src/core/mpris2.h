@@ -1,5 +1,9 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2010-2012, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2013, Aggelos Biboudis <biboudis@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MPRIS2_H
-#define MPRIS2_H
+#ifndef CORE_MPRIS2_H_
+#define CORE_MPRIS2_H_
 
 #include "playlist/playlistitem.h"
 
@@ -175,7 +179,7 @@ class Mpris2 : public QObject {
   QList<MprisPlaylist> GetPlaylists(quint32 index, quint32 max_count,
                                     const QString& order, bool reverse_order);
 
-signals:
+ signals:
   // Player
   void Seeked(qlonglong position);
 
@@ -228,4 +232,4 @@ signals:
 
 }  // namespace mpris
 
-#endif
+#endif  // CORE_MPRIS2_H_

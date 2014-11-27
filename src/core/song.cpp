@@ -1,5 +1,16 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2012, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2010, 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011, Angus Gratton <gus@projectgus.com>
+   Copyright 2012, Kacper "mattrick" Banasik <mattrick@jabster.pl>
+   Copyright 2013, Martin Brodbeck <martin@brodbeck-online.de>
+   Copyright 2013, Andreas <asfa194@gmail.com>
+   Copyright 2013, Joel Bradshaw <cincodenada@gmail.com>
+   Copyright 2013, Uwe Klotz <uwe.klotz@gmail.com>
+   Copyright 2013, Mateusz Kowalczyk <fuuzetsu@fuuzetsu.co.uk>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -626,9 +637,9 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
 void Song::InitFromFilePartial(const QString& filename) {
   set_url(QUrl::fromLocalFile(filename));
   // We currently rely on filename suffix to know if it's a music file or not.
-  // TODO: I know this is not satisfying, but currently, we rely on TagLib
-  // which seems to have the behavior (filename checks). Someday, it would be
-  // nice to perform some magic tests everywhere.
+  // TODO(Arnaud Bienner): I know this is not satisfying, but currently,
+  // we rely on TagLib which seems to have the behavior (filename checks).
+  // Someday, it would be nice to perform some magic tests everywhere.
   QFileInfo info(filename);
   d->basefilename_ = info.fileName();
   QString suffix = info.suffix().toLower();
@@ -692,7 +703,7 @@ void Song::InitFromItdb(const Itdb_Track* track, const QString& prefix) {
   d->ctime_ = track->time_added;
   d->filesize_ = track->size;
   d->filetype_ = track->type2 ? Type_Mpeg : Type_Mp4;
-  d->rating_ = float(track->rating) / 100;  // 100 = 20 * 5 stars
+  d->rating_ = static_cast<float>(track->rating) / 100;  // 100 = 20 * 5 stars
   d->playcount_ = track->playcount;
   d->skipcount_ = track->skipcount;
   d->lastplayed_ = track->time_played;
@@ -759,7 +770,7 @@ void Song::InitFromMTP(const LIBMTP_track_t* track, const QString& host) {
   d->mtime_ = track->modificationdate;
   d->ctime_ = track->modificationdate;
 
-  d->rating_ = float(track->rating) / 100;
+  d->rating_ = static_cast<float>(track->rating) / 100;
   d->playcount_ = track->usecount;
 
   switch (track->filetype) {
@@ -900,7 +911,8 @@ void Song::BindToQuery(QSqlQuery* query) const {
   if (Application::kIsPortable &&
       Utilities::UrlOnSameDriveAsClementine(d->url_)) {
     query->bindValue(":filename",
-                     Utilities::GetRelativePathToClementineBin(d->url_).toEncoded());
+                     Utilities::
+                     GetRelativePathToClementineBin(d->url_).toEncoded());
   } else {
     query->bindValue(":filename", d->url_.toEncoded());
   }
@@ -1055,7 +1067,7 @@ bool Song::IsEditable() const {
 }
 
 bool Song::operator==(const Song& other) const {
-  // TODO: this isn't working for radios
+  // TODO(Paweł Bara): this isn't working for radios
   return url() == other.url() &&
          beginning_nanosec() == other.beginning_nanosec();
 }

@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GNOMEGLOBALSHORTCUTBACKEND_H
-#define GNOMEGLOBALSHORTCUTBACKEND_H
+#ifndef CORE_GNOMEGLOBALSHORTCUTBACKEND_H_
+#define CORE_GNOMEGLOBALSHORTCUTBACKEND_H_
 
 #include "globalshortcutbackend.h"
 
@@ -28,7 +30,7 @@ class GnomeGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
 
  public:
-  GnomeGlobalShortcutBackend(GlobalShortcuts* parent);
+  explicit GnomeGlobalShortcutBackend(GlobalShortcuts* parent);
 
   static const char* kGsdService;
   static const char* kGsdPath;
@@ -49,4 +51,4 @@ class GnomeGlobalShortcutBackend : public GlobalShortcutBackend {
   bool is_connected_;
 };
 
-#endif  // GNOMEGLOBALSHORTCUTBACKEND_H
+#endif  // CORE_GNOMEGLOBALSHORTCUTBACKEND_H_

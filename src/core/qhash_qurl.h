@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef QHASH_QURL_H
-#define QHASH_QURL_H
+#ifndef CORE_QHASH_QURL_H_
+#define CORE_QHASH_QURL_H_
 
 #include <QUrl>
 
@@ -24,4 +26,4 @@
 inline uint qHash(const QUrl& url) { return qHash(url.toEncoded()); }
 #endif
 
-#endif  // QHASH_QURL_H
+#endif  // CORE_QHASH_QURL_H_

@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GLOBALSHORTCUTBACKEND_H
-#define GLOBALSHORTCUTBACKEND_H
+#ifndef CORE_GLOBALSHORTCUTBACKEND_H_
+#define CORE_GLOBALSHORTCUTBACKEND_H_
 
 #include <QObject>
 
@@ -26,7 +28,7 @@ class GlobalShortcutBackend : public QObject {
   Q_OBJECT
 
  public:
-  GlobalShortcutBackend(GlobalShortcuts* parent = nullptr);
+  explicit GlobalShortcutBackend(GlobalShortcuts* parent = nullptr);
   virtual ~GlobalShortcutBackend() {}
 
   bool is_active() const { return active_; }
@@ -34,7 +36,7 @@ class GlobalShortcutBackend : public QObject {
   bool Register();
   void Unregister();
 
-signals:
+ signals:
   void RegisterFinished(bool success);
 
  protected:
@@ -45,4 +47,4 @@ signals:
   bool active_;
 };
 
-#endif  // GLOBALSHORTCUTBACKEND_H
+#endif  // CORE_GLOBALSHORTCUTBACKEND_H_

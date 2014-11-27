@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MUSICSTORAGE_H
-#define MUSICSTORAGE_H
+#ifndef CORE_MUSICSTORAGE_H_
+#define CORE_MUSICSTORAGE_H_
 
 #include "song.h"
 
@@ -86,4 +88,4 @@ class MusicStorage {
 Q_DECLARE_METATYPE(MusicStorage*);
 Q_DECLARE_METATYPE(std::shared_ptr<MusicStorage>);
 
-#endif  // MUSICSTORAGE_H
+#endif  // CORE_MUSICSTORAGE_H_

@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ORGANISE_H
-#define ORGANISE_H
+#ifndef CORE_ORGANISE_H_
+#define CORE_ORGANISE_H_
 
 #include <memory>
 
@@ -44,15 +47,16 @@ class Organise : public QObject {
   typedef QList<NewSongInfo> NewSongInfoList;
 
   Organise(TaskManager* task_manager, std::shared_ptr<MusicStorage> destination,
-           const OrganiseFormat& format, bool copy, bool overwrite, bool mark_as_listened,
-           const NewSongInfoList& songs, bool eject_after);
+           const OrganiseFormat& format, bool copy, bool overwrite,
+           bool mark_as_listened, const NewSongInfoList& songs,
+           bool eject_after);
 
   static const int kBatchSize;
   static const int kTranscodeProgressInterval;
 
   void Start();
 
-signals:
+ signals:
   void Finished(const QStringList& files_with_errors);
   void FileCopied(int database_id);
 
@@ -111,4 +115,4 @@ signals:
   QStringList files_with_errors_;
 };
 
-#endif  // ORGANISE_H
+#endif  // CORE_ORGANISE_H_

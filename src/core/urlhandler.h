@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef URLHANDLER_H
-#define URLHANDLER_H
+#ifndef CORE_URLHANDLER_H_
+#define CORE_URLHANDLER_H_
 
 #include <QIcon>
 #include <QObject>
@@ -26,7 +29,7 @@ class UrlHandler : public QObject {
   Q_OBJECT
 
  public:
-  UrlHandler(QObject* parent = nullptr);
+  explicit UrlHandler(QObject* parent = nullptr);
 
   // The URL scheme that this handler handles.
   virtual QString scheme() const = 0;
@@ -75,11 +78,11 @@ class UrlHandler : public QObject {
 
   // Functions to be warned when something happen to a track handled by
   // UrlHandler.
-  virtual void TrackAboutToEnd() {};
-  virtual void TrackSkipped() {};
+  virtual void TrackAboutToEnd() {}
+  virtual void TrackSkipped() {}
 
-signals:
+ signals:
   void AsyncLoadComplete(const UrlHandler::LoadResult& result);
 };
 
-#endif  // URLHANDLER_H
+#endif  // CORE_URLHANDLER_H_

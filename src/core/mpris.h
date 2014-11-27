@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MPRIS_H
-#define MPRIS_H
+#ifndef CORE_MPRIS_H_
+#define CORE_MPRIS_H_
 
 #include <QObject>
 
@@ -31,9 +33,9 @@ class Mpris : public QObject {
   Q_OBJECT
 
  public:
-  Mpris(Application* app, QObject* parent = nullptr);
+  explicit Mpris(Application* app, QObject* parent = nullptr);
 
-signals:
+ signals:
   void RaiseMainWindow();
 
  private:
@@ -43,4 +45,4 @@ signals:
 
 }  // namespace mpris
 
-#endif  // MPRIS_H
+#endif  // CORE_MPRIS_H_
