@@ -44,11 +44,11 @@ BoomAnalyzer::BoomAnalyzer(QWidget* parent)
       barPixmap(COLUMN_WIDTH, 50) {}
 
 void BoomAnalyzer::changeK_barHeight(int newValue) {
-  K_barHeight = static_cast<double>newValue / 1000;
+  K_barHeight = static_cast<double>(newValue) / 1000;
 }
 
 void BoomAnalyzer::changeF_peakSpeed(int newValue) {
-  F_peakSpeed = static_cast<double>newValue / 1000;
+  F_peakSpeed = static_cast<double>(newValue) / 1000;
 }
 
 void BoomAnalyzer::resizeEvent(QResizeEvent*) { init(); }
@@ -65,7 +65,7 @@ void BoomAnalyzer::init() {
 
   QPainter p(&barPixmap);
   for (uint y = 0; y < HEIGHT; ++y) {
-    const double F = static_cast<double>y * h;
+    const double F = static_cast<double>(y) * h;
 
     p.setPen(QColor(qMax(0, 255 - static_cast<int>(229.0 * F)),
                     qMax(0, 255 - static_cast<int>(229.0 * F)),

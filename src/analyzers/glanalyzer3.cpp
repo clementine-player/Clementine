@@ -163,7 +163,7 @@ void GLAnalyzer3::resizeGL(int w, int h) {
   glFrustum(-0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 4.5f);
 
   // Get the aspect ratio of the screen to draw 'circular' particles
-  float ratio = static_cast<float>w / static_cast<float>h;
+  float ratio = static_cast<float>(w) / static_cast<float>(h);
   if (ratio >= 1.0) {
     unitX = 0.34 / ratio;
     unitY = 0.34;
@@ -175,7 +175,7 @@ void GLAnalyzer3::resizeGL(int w, int h) {
   // Get current timestamp.
   timeval tv;
   gettimeofday(&tv, nullptr);
-  show.timeStamp = static_cast<double>tv.tv_sec + static_cast<double>tv.tv_usec / 1000000.0;
+  show.timeStamp = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
 }
 
 void GLAnalyzer3::paused() { analyze(Scope()); }
@@ -184,7 +184,7 @@ void GLAnalyzer3::analyze(const Scope& s) {
   // compute the dTime since the last call
   timeval tv;
   gettimeofday(&tv, nullptr);
-  double currentTime = static_cast<double>tv.tv_sec + static_cast<double>tv.tv_usec / 1000000.0;
+  double currentTime = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
   show.dT = currentTime - show.timeStamp;
   show.timeStamp = currentTime;
 
@@ -198,7 +198,7 @@ void GLAnalyzer3::analyze(const Scope& s) {
       currentEnergy += value;
       if (value > maxValue) maxValue = value;
     }
-    currentEnergy *= 100.0 / static_cast<float>bands;
+    currentEnergy *= 100.0 / static_cast<float>(bands);
     // emulate a peak detector: currentEnergy -> peakEnergy (3tau = 30 seconds)
     show.peakEnergy = 1.0 + (show.peakEnergy - 1.0) * exp(-show.dT / 10.0);
     if (currentEnergy > show.peakEnergy) show.peakEnergy = currentEnergy;

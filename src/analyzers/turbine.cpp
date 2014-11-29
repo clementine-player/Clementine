@@ -87,7 +87,7 @@ void TurbineAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
     canvas_painter.setPen(palette().color(QPalette::Highlight));
     if (bar_height[i] > 0)
       canvas_painter.drawRect(x, y, COLUMN_WIDTH - 1,
-                              static_cast<int>bar_height[i] * 2 - 1);
+                              static_cast<int>(bar_height[i]) * 2 - 1);
 
     const uint x2 = x + COLUMN_WIDTH - 1;
     canvas_painter.setPen(palette().color(QPalette::Base));

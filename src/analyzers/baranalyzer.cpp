@@ -87,7 +87,7 @@ void BarAnalyzer::init() {
   for (int x = 0, r = rgb.red(), g = rgb.green(), b = rgb.blue(), r2 = 255 - r; x < height();
        ++x) {
     for (int y = x; y > 0; --y) {
-      const double fraction = static_cast<double>y / height();
+      const double fraction = static_cast<double>(y) / height();
 
       //          p.setPen( QColor( r + (int)(r2 * fraction), g, b - (int)(255 *
       // fraction) ) );
@@ -137,8 +137,8 @@ void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
                                                                                    MAX_DOWN)
       y2 = barVector[i] + MAX_DOWN;
 
-    if (static_cast<int>y2 > roofVector[i]) {
-      roofVector[i] = static_cast<int>y2;
+    if (static_cast<int>(y2) > roofVector[i]) {
+      roofVector[i] = static_cast<int>(y2);
       roofVelocityVector[i] = 1;
     }
 

@@ -25,6 +25,7 @@
 #include "analyzerbase.h"
 
 #include <cmath>
+#include <cstdint>
 
 #include <QEvent>
 #include <QPainter>
@@ -184,13 +185,13 @@ void Analyzer::interpolate(const Scope& inVec, Scope& outVec) {
 
   for (uint i = 0; i < outVec.size(); ++i, pos += step) {
     const double error = pos - std::floor(pos);
-    const unsigned int64 offset = static_cast<unsigned int64>(pos);
+    const uint64_t offset = static_cast<uint64_t>(pos);
 
-    unsigned int64 indexLeft = offset + 0;
+    uint64_t indexLeft = offset + 0;
 
     if (indexLeft >= inVec.size()) indexLeft = inVec.size() - 1;
 
-    unsigned int64 indexRight = offset + 1;
+    uint64_t indexRight = offset + 1;
 
     if (indexRight >= inVec.size()) indexRight = inVec.size() - 1;
 

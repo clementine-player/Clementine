@@ -172,7 +172,7 @@ void BlockAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
 
     // this is opposite to what you'd think, higher than y
     // means the bar is lower than y (physically)
-    if (static_cast<float>y > m_store[x])
+    if (static_cast<float>(y) > m_store[x])
       y = static_cast<int>(m_store[x] += m_step);
     else
       m_store[x] = y;
@@ -339,7 +339,7 @@ void BlockAnalyzer::paletteChange(const QPalette&) {
   bar()->fill(bg);
 
   QPainter p(bar());
-  for (int y = 0; static_cast<uint>y < m_rows; ++y)
+  for (int y = 0; static_cast<uint>(y) < m_rows; ++y)
     // graduate the fg color
     p.fillRect(0, y * (HEIGHT + 1), WIDTH, HEIGHT,
     QColor(r + static_cast<int>(dr * y), g + static_cast<int>(dg * y),
@@ -363,7 +363,7 @@ void BlockAnalyzer::paletteChange(const QPalette&) {
     for (uint y = 0; y < FADE_SIZE; ++y) {
       m_fade_bars[y].fill(palette().color(QPalette::Background));
       QPainter f(&m_fade_bars[y]);
-      for (int z = 0; static_cast<uint>z < m_rows; ++z) {
+      for (int z = 0; static_cast<uint>(z) < m_rows; ++z) {
         const double Y = 1.0 - (log10(FADE_SIZE - y) / log10(FADE_SIZE));
         f.fillRect(0, z * (HEIGHT + 1), WIDTH, HEIGHT,
                    QColor(r + static_cast<int>(dr * Y), g + static_cast<int>(dg * Y), b + static_cast<int>(db * Y)));

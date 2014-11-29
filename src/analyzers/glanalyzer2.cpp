@@ -77,7 +77,7 @@ void GLAnalyzer2::resizeGL(int w, int h) {
   glOrtho(-10.0f, 10.0f, -10.0f, 10.0f, -5.0f, 5.0f);
 
   // Get the aspect ratio of the screen to draw 'cicular' particles
-  float ratio = static_cast<float>w / static_cast<float>h, eqPixH = 60, eqPixW = 80;
+  float ratio = static_cast<float>(w) / static_cast<float>(h), eqPixH = 60, eqPixW = 80;
   if (ratio >= (4.0 / 3.0)) {
     unitX = 10.0 / (eqPixH * ratio);
     unitY = 10.0 / eqPixH;
@@ -89,7 +89,7 @@ void GLAnalyzer2::resizeGL(int w, int h) {
   // Get current timestamp.
   timeval tv;
   gettimeofday(&tv, nullptr);
-  show.timeStamp = static_cast<double>tv.tv_sec + static_cast<double>tv.tv_usec / 1000000.0;
+  show.timeStamp = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
 }
 
 void GLAnalyzer2::paused() { analyze(Scope()); }
@@ -109,13 +109,13 @@ void GLAnalyzer2::analyze(const Scope& s) {
     for (int i = 0; i < bands; i++) {
       float value = s[i];
       currentEnergy += value;
-      currentMeanBand += static_cast<float>i * value;
+      currentMeanBand += static_cast<float>(i) * value;
       if (value > maxValue) maxValue = value;
     }
     frame.silence = currentEnergy < 0.001;
     if (!frame.silence) {
       frame.meanBand = 100.0 * currentMeanBand / (currentEnergy * bands);
-      currentEnergy = 100.0 * currentEnergy / static_cast<float>bands;
+      currentEnergy = 100.0 * currentEnergy / static_cast<float>(bands);
       frame.dEnergy = currentEnergy - frame.energy;
       frame.energy = currentEnergy;
       //            printf( "%d  [%f :: %f ]\t%f \n", bands, frame.energy,
@@ -133,7 +133,7 @@ void GLAnalyzer2::paintGL() {
   // Compute the dT since the last call to paintGL and update timings
   timeval tv;
   gettimeofday(&tv, nullptr);
-  double currentTime = static_cast<double>tv.tv_sec + static_cast<double>tv.tv_usec / 1000000.0;
+  double currentTime = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
   show.dT = currentTime - show.timeStamp;
   show.timeStamp = currentTime;
 
