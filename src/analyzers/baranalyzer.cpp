@@ -1,18 +1,31 @@
-//
-//
-// C++ Implementation: $MODULE$
-//
-// Description:
-//
-//
-// Author: Mark Kretschmann <markey@web.de>, (C) 2003
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+/* This file is part of Clementine.
+   Copyright 2003, Mark Kretschmann <markey@web.de>
+   Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Alibek Omarov <a1ba.omarov@gmail.com>
+   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Mark Kretschmann  <markey@web.de>  2003
+*/
+
 
 #include "baranalyzer.h"
-#include <cmath>  //log10(), etc.
+#include <cmath>
 #include <QtDebug>
 #include <QPainter>
 
@@ -27,15 +40,15 @@ BarAnalyzer::BarAnalyzer(QWidget* parent) : Analyzer::Base(parent, 8) {
 
   QColor fg(parent->palette().color(QPalette::Highlight).lighter(150));
 
-  double dr = double(m_bg.red() - fg.red()) /
-              (NUM_ROOFS - 1);  //-1 because we start loop below at 0
-  double dg = double(m_bg.green() - fg.green()) / (NUM_ROOFS - 1);
-  double db = double(m_bg.blue() - fg.blue()) / (NUM_ROOFS - 1);
+  double dr = static_cast<double>(m_bg.red() - fg.red()) /
+              (NUM_ROOFS - 1);  // -1 because we start loop below at 0
+  double dg = static_cast<double>(m_bg.green() - fg.green()) / (NUM_ROOFS - 1);
+  double db = static_cast<double>(m_bg.blue() - fg.blue()) / (NUM_ROOFS - 1);
 
   for (uint i = 0; i < NUM_ROOFS; ++i) {
     m_pixRoof[i] = QPixmap(COLUMN_WIDTH, 1);
-    m_pixRoof[i].fill(QColor(fg.red() + int(dr * i), fg.green() + int(dg * i),
-                             fg.blue() + int(db * i)));
+    m_pixRoof[i].fill(QColor(fg.red() + static_cast<int>(dr * i), fg.green() + static_cast<int>(dg * i),
+                             fg.blue() + static_cast<int>(db * i)));
   }
 }
 
@@ -45,11 +58,11 @@ void BarAnalyzer::resizeEvent(QResizeEvent* e) { init(); }
 
 void BarAnalyzer::init() {
   const double MAX_AMPLITUDE = 1.0;
-  const double F = double(height() - 2) / (log10(255) * MAX_AMPLITUDE);
+  const double F = static_cast<double>(height() - 2) / (log10(255) * MAX_AMPLITUDE);
 
   BAND_COUNT = width() / 5;
-  MAX_DOWN = int(0 - (qMax(1, height() / 50)));
-  MAX_UP = int(qMax(1, height() / 25));
+  MAX_DOWN = static_cast<int>(0 - (qMax(1, height() / 50)));
+  MAX_UP = static_cast<int>(qMax(1, height() / 25));
 
   barVector.resize(BAND_COUNT, 0);
   roofVector.resize(BAND_COUNT, height() - 5);
@@ -60,7 +73,7 @@ void BarAnalyzer::init() {
   // generate a list of values that express amplitudes in range 0-MAX_AMP as
   // ints from 0-height() on log scale
   for (uint x = 0; x < 256; ++x) {
-    m_lvlMapper[x] = uint(F * log10(x + 1));
+    m_lvlMapper[x] = static_cast<uint>(F * log10(x + 1));
   }
 
   m_pixBarGradient = QPixmap(height() * COLUMN_WIDTH, height());
@@ -74,11 +87,11 @@ void BarAnalyzer::init() {
   for (int x = 0, r = rgb.red(), g = rgb.green(), b = rgb.blue(), r2 = 255 - r; x < height();
        ++x) {
     for (int y = x; y > 0; --y) {
-      const double fraction = (double)y / height();
+      const double fraction = static_cast<double>y / height();
 
       //          p.setPen( QColor( r + (int)(r2 * fraction), g, b - (int)(255 *
       // fraction) ) );
-      p.setPen(QColor(r + (int)(r2 * fraction), g, b));
+      p.setPen(QColor(r + static_cast<int>(r2 * fraction), g, b));
       p.drawLine(x * COLUMN_WIDTH, height() - y, (x + 1) * COLUMN_WIDTH,
                  height() - y);
     }
@@ -102,8 +115,8 @@ void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
 
   for (uint i = 0, x = 0, y2; i < v.size(); ++i, x += COLUMN_WIDTH + 1) {
     // assign pre[log10]'d value
-    y2 = uint(v[i] *
-              256);  // 256 will be optimised to a bitshift //no, it's a float
+    y2 = static_cast<uint>(v[i] *
+                           256);  // 256 will be optimised to a bitshift //no, it's a float
     y2 = m_lvlMapper[(y2 > 255) ? 255 : y2];  // lvlMapper is array of ints with
                                               // values 0 to height()
 
@@ -124,8 +137,8 @@ void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
                                                                                    MAX_DOWN)
       y2 = barVector[i] + MAX_DOWN;
 
-    if ((int)y2 > roofVector[i]) {
-      roofVector[i] = (int)y2;
+    if (static_cast<int>y2 > roofVector[i]) {
+      roofVector[i] = static_cast<int>y2;
       roofVelocityVector[i] = 1;
     }
 
@@ -162,8 +175,9 @@ void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
       if (roofVector[i] < 0) {
         roofVector[i] = 0;  // not strictly necessary
         roofVelocityVector[i] = 0;
-      } else
+      } else {
         ++roofVelocityVector[i];
+      }
     }
   }
 

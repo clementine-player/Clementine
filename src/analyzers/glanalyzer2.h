@@ -1,22 +1,28 @@
-/***************************************************************************
-                        glanalyzer2.h  -  description
-                             -------------------
-    begin                : Feb 16 2004
-    copyright            : (C) 2004 by Enrico Ros
-    email                : eros.kde@email.it
- ***************************************************************************/
+/* This file is part of Clementine.
+   Copyright 2004, Enrico Ros <eros.kde@email.it>
+   Copyright 2009, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-#ifndef GLSTARVIEW_H
-#define GLSTARVIEW_H
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Enrico Ros  <eros.kde@email.it>  2004
+ */
+
+#ifndef ANALYZERS_GLANALYZER2_H_
+#define ANALYZERS_GLANALYZER2_H_
 
 #include <config.h>
 #ifdef HAVE_QGLWIDGET
@@ -27,7 +33,7 @@
 
 class GLAnalyzer2 : public Analyzer::Base3D {
  public:
-  GLAnalyzer2(QWidget*);
+  explicit GLAnalyzer2(QWidget*);
   ~GLAnalyzer2();
   void analyze(const Scope&);
   void paused();
@@ -68,4 +74,4 @@ class GLAnalyzer2 : public Analyzer::Base3D {
 };
 
 #endif
-#endif
+#endif  // ANALYZERS_GLANALYZER2_H_
