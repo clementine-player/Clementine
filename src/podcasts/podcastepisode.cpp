@@ -182,6 +182,13 @@ Song PodcastEpisode::ToSong(const Podcast& podcast) const {
   ret.set_year(publication_date().date().year());
   ret.set_comment(description());
   ret.set_id(database_id());
+  ret.set_ctime(publication_date().toTime_t());
+
+  if (listened()) {
+    ret.set_mtime(listened_date().toTime_t());
+  } else {
+    ret.set_mtime(publication_date().toTime_t());
+  }
 
   if (ret.length_nanosec() < 0) {
     ret.set_length_nanosec(-1);
