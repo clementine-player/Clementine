@@ -80,7 +80,15 @@ def gen_copyrights(f):
 		elif ln.startswith("author-tz "):
 			data["author-tz"] = ln[9:].strip()
 
-	by_author = {}
+        with open(f,'r') as fi:
+                fil = fi.readlines()
+                for i in fil:
+                        if -1 < i.find("Original Author"):
+                                da = i.split("  ")
+                                print f
+                                copyrights.append("   Copyright %s, %s %s\n" % (da[3].strip(), da[1], da[2]))
+
+        by_author = {}
 
 	for c in commits:
 		try:

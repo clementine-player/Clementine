@@ -1,5 +1,26 @@
-// Author: Max Howell <max.howell@methylblue.com>, (C) 2004
-// Copyright: See COPYING file that comes with this distribution
+/* This file is part of Clementine.
+   Copyright 2004, Max Howell <max.howell@methylblue.com>
+   Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Max Howell  <max.howell@methylblue.com>  2004
+ */
 
 #include "boomanalyzer.h"
 #include <cmath>
@@ -23,11 +44,11 @@ BoomAnalyzer::BoomAnalyzer(QWidget* parent)
       barPixmap(COLUMN_WIDTH, 50) {}
 
 void BoomAnalyzer::changeK_barHeight(int newValue) {
-  K_barHeight = (double)newValue / 1000;
+  K_barHeight = static_cast<double>(newValue) / 1000;
 }
 
 void BoomAnalyzer::changeF_peakSpeed(int newValue) {
-  F_peakSpeed = (double)newValue / 1000;
+  F_peakSpeed = static_cast<double>(newValue) / 1000;
 }
 
 void BoomAnalyzer::resizeEvent(QResizeEvent*) { init(); }
@@ -36,7 +57,7 @@ void BoomAnalyzer::init() {
   const uint HEIGHT = height() - 2;
   const double h = 1.2 / HEIGHT;
 
-  F = double(HEIGHT) / (log10(256) * 1.1 /*<- max. amplitude*/);
+  F = static_cast<double>(HEIGHT) / (log10(256) * 1.1 /*<- max. amplitude*/);
 
   barPixmap = QPixmap(COLUMN_WIDTH - 2, HEIGHT);
   canvas_ = QPixmap(size());
@@ -44,11 +65,11 @@ void BoomAnalyzer::init() {
 
   QPainter p(&barPixmap);
   for (uint y = 0; y < HEIGHT; ++y) {
-    const double F = (double)y * h;
+    const double F = static_cast<double>(y) * h;
 
-    p.setPen(QColor(qMax(0, 255 - int(229.0 * F)),
-                    qMax(0, 255 - int(229.0 * F)),
-                    qMax(0, 255 - int(191.0 * F))));
+    p.setPen(QColor(qMax(0, 255 - static_cast<int>(229.0 * F)),
+                    qMax(0, 255 - static_cast<int>(229.0 * F)),
+                    qMax(0, 255 - static_cast<int>(191.0 * F))));
     p.drawLine(0, y, COLUMN_WIDTH - 2, y);
   }
 }
@@ -94,8 +115,9 @@ void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
       if (h > peak_height[i]) {
         peak_height[i] = h;
         peak_speed[i] = 0.01;
-      } else
+      } else {
         goto peak_handling;
+      }
     } else {
       if (bar_height[i] > 0.0) {
         bar_height[i] -= K_barHeight;  // 1.4

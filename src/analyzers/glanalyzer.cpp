@@ -1,19 +1,25 @@
-/***************************************************************************
-                          gloscope.cpp  -  description
-                             -------------------
-    begin                : Jan 17 2004
-    copyright            : (C) 2004 by Adam Pigg
-    email                : adam@piggz.co.uk
- ***************************************************************************/
+/* This file is part of Clementine.
+   Copyright 2004, Adam Pigg <adam@piggz.co.uk>
+   Copyright 2009, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Adam Pigg  <adam@piggz.co.uk>  2004
+ */
 
 #include <config.h>
 
@@ -27,8 +33,6 @@ GLAnalyzer::GLAnalyzer(QWidget* parent)
     : Analyzer::Base3D(parent, 15), m_oldy(32, -10.0f), m_peaks(32) {}
 
 GLAnalyzer::~GLAnalyzer() {}
-
-// METHODS =====================================================
 
 void GLAnalyzer::analyze(const Scope& s) {
   // kdDebug() << "Scope Size: " << s.size() << endl;
@@ -66,16 +70,13 @@ void GLAnalyzer::analyze(const Scope& s) {
 
   mfactor = 20 / peak;
   for (uint i = 0; i < 32; i++) {
-
-    // kdDebug() << "Scope item " << i << " value: " << s[i] << endl;
-
     // Calculate new horizontal position (x) depending on number of samples
     x = -16.0f + i;
 
     // Calculating new vertical position (y) depending on the data passed by
     // amarok
-    y = float(s[i + offset] * mfactor);  // This make it kinda dynamically
-                                         // resize depending on the data
+    y = static_cast<float>(s[i + offset] * mfactor);  // This make it kinda dynamically
+                                                      // resize depending on the data
 
     // Some basic bounds checking
     if (y > 30)
@@ -83,10 +84,10 @@ void GLAnalyzer::analyze(const Scope& s) {
     else if (y < 0)
       y = 0;
 
-    if ((y - m_oldy[i]) < -0.6f)  // Going Down Too Much
-    {
+    if ((y - m_oldy[i]) < -0.6f) {
       y = m_oldy[i] - 0.7f;
     }
+
     if (y < 0.0f) {
       y = 0.0f;
     }
@@ -145,9 +146,6 @@ void GLAnalyzer::resizeGL(int w, int h) {
 
 void GLAnalyzer::paintGL() {
   glMatrixMode(GL_MODELVIEW);
-#if 0
-        glClear( GL_COLOR_BUFFER_BIT |  GL_DEPTH_BUFFER_BIT );
-#else
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);
   glPushMatrix();

@@ -78,6 +78,7 @@ set(SOURCES
   analyzers/rainbowdashanalyzer.cpp
   analyzers/sonogram.cpp
   analyzers/turbine.cpp
+  analyzers/fht.cpp
 
   core/appearance.cpp
   core/application.cpp
@@ -88,7 +89,6 @@ set(SOURCES
   core/deletefiles.cpp
   core/filesystemmusicstorage.cpp
   core/filesystemwatcherinterface.cpp
-  core/fht.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
