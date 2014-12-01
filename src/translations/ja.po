@@ -76,17 +76,17 @@ msgstr "%1 (%2 曲)"
 msgid "%1 albums"
 msgstr "%1 枚のアルバム"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 日"
 
-#: core/utilities.cpp:130
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 日前"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:83
 #, qt-format
 msgid "%1 on %2"
 msgstr ""
@@ -262,7 +262,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "1 日"
 
@@ -367,7 +367,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:398
+#: core/song.cpp:409
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -426,7 +426,7 @@ msgstr "Wii リモコンのアクティブ・非アクティブを切り替え�
 msgid "Activities stream"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:59
+#: podcasts/addpodcastdialog.cpp:61
 msgid "Add Podcast"
 msgstr "ポッドキャストの追加"
 
@@ -490,7 +490,7 @@ msgstr "新しいフォルダーを追加..."
 msgid "Add podcast"
 msgstr "ポッドキャストを追加"
 
-#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "ポッドキャストを追加..."
 
@@ -797,7 +797,7 @@ msgstr "怒り"
 msgid "Appearance"
 msgstr "外観"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
 msgstr "ファイル・URL をプレイリストに追加する"
 
@@ -911,7 +911,7 @@ msgstr "平均ビットレート"
 msgid "Average image size"
 msgstr "平均画像サイズ"
 
-#: podcasts/addpodcastdialog.cpp:84
+#: podcasts/addpodcastdialog.cpp:86
 msgid "BBC Podcasts"
 msgstr "BBC ポッドキャスト"
 
@@ -936,7 +936,7 @@ msgstr "背景画像"
 msgid "Background opacity"
 msgstr "背景の不透明度"
 
-#: core/database.cpp:640
+#: core/database.cpp:648
 msgid "Backing up database"
 msgstr "データベースをバックアップ中"
 
@@ -1037,7 +1037,7 @@ msgstr "ボタン"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr "既定では Grooveshark は追加した日付で曲をソートします"
 
-#: core/song.cpp:404
+#: core/song.cpp:415
 msgid "CDDA"
 msgstr "オーディオ CD"
 
@@ -1076,7 +1076,7 @@ msgstr "カバーアートの変更"
 msgid "Change font size..."
 msgstr "フォントサイズの変更..."
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:73
 msgid "Change repeat mode"
 msgstr "リピートモードの変更"
 
@@ -1084,11 +1084,11 @@ msgstr "リピートモードの変更"
 msgid "Change shortcut..."
 msgstr "ショートカットの変更..."
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:71
 msgid "Change shuffle mode"
 msgstr "シャッフルモードの変更"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "言語の変更"
 
@@ -1138,7 +1138,7 @@ msgstr "一覧から選択する"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "プレイリストの並び順と、プレイリスト内に何曲含めるかを選択してください。"
 
-#: podcasts/podcastsettingspage.cpp:133
+#: podcasts/podcastsettingspage.cpp:135
 msgid "Choose podcast download directory"
 msgstr "ポッドキャストのダウンロードディレクトリを選択してください"
 
@@ -1290,7 +1290,7 @@ msgstr "クラブ"
 msgid "Colors"
 msgstr "色"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "コンマ区切りの クラス:レベル のリスト、レベルは 0-3"
 
@@ -1354,7 +1354,7 @@ msgstr "全体検索の設定..."
 msgid "Configure library..."
 msgstr "ライブラリの設定..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
+#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
 msgid "Configure podcasts..."
 msgstr "ポッドキャストの設定..."
 
@@ -1424,7 +1424,7 @@ msgstr "URL をクリップボードにコピーする"
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "デバイスへコピー..."
@@ -1615,7 +1615,7 @@ msgstr "DBus のパス"
 msgid "Dance"
 msgstr "ダンス"
 
-#: core/database.cpp:593
+#: core/database.cpp:601
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1638,15 +1638,15 @@ msgstr "日"
 msgid "De&fault"
 msgstr "既定(&F)"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "音量を 4% 下げます"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by <value> percent"
 msgstr "音量を <value> % 下げる"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "音量を下げる"
 
@@ -1676,7 +1676,7 @@ msgstr "削除"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark プレイリストの削除"
 
-#: podcasts/podcastservice.cpp:348
+#: podcasts/podcastservice.cpp:350
 msgid "Delete downloaded data"
 msgstr "ダウンロード済みデータを削除"
 
@@ -1710,7 +1710,7 @@ msgstr "スマートプレイリストを削除"
 msgid "Delete the original files"
 msgstr "元のファイルを削除する"
 
-#: core/deletefiles.cpp:48
+#: core/deletefiles.cpp:50
 msgid "Deleting files"
 msgstr "ファイルの削除中"
 
@@ -1814,7 +1814,7 @@ msgstr "不連続送信 (DTX)"
 msgid "Display options"
 msgstr "画面のオプション"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "OSD を表示する"
 
@@ -1873,7 +1873,7 @@ msgstr "ダブルクリックで開く"
 msgid "Double clicking a song will..."
 msgstr "曲をダブルクリックした際の動作..."
 
-#: podcasts/podcastservice.cpp:440
+#: podcasts/podcastservice.cpp:442
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1895,7 +1895,7 @@ msgstr "メンバーシップのダウンロード"
 msgid "Download new episodes automatically"
 msgstr "新しいエピソードを自動的にダウンロードする"
 
-#: podcasts/podcastservice.cpp:256
+#: podcasts/podcastservice.cpp:258
 msgid "Download queued"
 msgstr "ダウンロードがキューに追加されました"
 
@@ -1915,7 +1915,7 @@ msgstr "このアルバムのダウンロード"
 msgid "Download this album..."
 msgstr "このアルバムをダウンロード..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:444
 msgid "Download this episode"
 msgstr "このエピソードをダウンロード"
 
@@ -1923,7 +1923,7 @@ msgstr "このエピソードをダウンロード"
 msgid "Download..."
 msgstr "ダウンロード..."
 
-#: podcasts/podcastservice.cpp:264
+#: podcasts/podcastservice.cpp:266
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "ダウンロード中 (%1%)..."
@@ -2036,7 +2036,7 @@ msgid ""
 "displayed in this order."
 msgstr "下のソースを有効にすると検索結果に含まれます。結果はこの並び順で表示されます。"
 
-#: core/globalshortcuts.cpp:72
+#: core/globalshortcuts.cpp:76
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm の scrobbling を有効・無効にする"
 
@@ -2106,11 +2106,11 @@ msgstr "コレクション全体"
 msgid "Equalizer"
 msgstr "イコライザー"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1 と同じ"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3 と同じ"
 
@@ -2285,21 +2285,21 @@ msgstr "フェードの長さ"
 msgid "Failed reading CD drive"
 msgstr "CD ドライブの読み込みが失敗しました"
 
-#: podcasts/gpoddertoptagspage.cpp:69
+#: podcasts/gpoddertoptagspage.cpp:71
 msgid "Failed to fetch directory"
 msgstr "ディレクトリの取得に失敗しました"
 
-#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
-#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
-#: podcasts/itunessearchpage.cpp:81
+#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
+#: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "ポッドキャストの取得に失敗しました"
 
-#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
+#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
 msgstr "ポッドキャストの読み込みに失敗しました"
 
-#: podcasts/podcasturlloader.cpp:173
+#: podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "この RSS フィードの XML の分析に失敗しました"
 
@@ -2410,7 +2410,7 @@ msgstr "第 1 階層"
 msgid "Fit cover to width"
 msgstr "カバーの大きさを幅に合わせる"
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:233
+#: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2612,7 +2612,7 @@ msgstr "ジャンル/アーティスト/アルバムでグループ化"
 msgid "Grouping"
 msgstr "分類"
 
-#: podcasts/podcasturlloader.cpp:204
+#: podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML ページに RSS フィードが含まれていませんでした"
 
@@ -2659,7 +2659,7 @@ msgstr "ホストが見つかりません。サーバーの URL を確認して�
 msgid "Hours"
 msgstr "時間"
 
-#: core/backgroundstreams.cpp:27
+#: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
 
@@ -2711,12 +2711,12 @@ msgstr "画像 (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid "Import..."
 msgstr "インポート..."
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 日以内"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 週以内"
@@ -2751,15 +2751,15 @@ msgstr "Subsonic REST プロトコルバージョンの互換性がありませ�
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "設定は完了していません。すべての入力欄を埋めてください。"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "音量を 4% 上げます"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by <value> percent"
 msgstr "音量を <value> % 上げる"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "音量を上げる"
 
@@ -2784,7 +2784,7 @@ msgstr "挿入..."
 msgid "Installed"
 msgstr "インストール済み"
 
-#: core/database.cpp:577
+#: core/database.cpp:585
 msgid "Integrity check"
 msgstr "整合性の検査"
 
@@ -3051,7 +3051,7 @@ msgstr "トラックの読み込み中"
 msgid "Loading tracks info"
 msgstr "トラック情報の読み込み中"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3059,7 +3059,7 @@ msgstr "トラック情報の読み込み中"
 msgid "Loading..."
 msgstr "読み込んでいます..."
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "ファイル・URL を読み込んで、現在のプレイリストを置き換えます"
 
@@ -3078,7 +3078,7 @@ msgstr "ファイル・URL を読み込んで、現在のプレイリストを�
 msgid "Login"
 msgstr "ログイン"
 
-#: podcasts/podcastsettingspage.cpp:120
+#: podcasts/podcastsettingspage.cpp:122
 msgid "Login failed"
 msgstr "ログインは失敗しました"
 
@@ -3121,7 +3121,7 @@ msgstr "%1 からの歌詞"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:238
+#: core/song.cpp:399 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3134,11 +3134,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:384
+#: core/song.cpp:395
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:386
+#: core/song.cpp:397
 msgid "MPC"
 msgstr "MPC"
 
@@ -3158,7 +3158,7 @@ msgstr "Magnatune ダウンロードが完了しました"
 msgid "Main profile (MAIN)"
 msgstr "Main プロファイル (MAIN)"
 
-#: core/backgroundstreams.cpp:33
+#: core/backgroundstreams.cpp:52
 msgid "Make it so!"
 msgstr "Make it so!"
 
@@ -3188,11 +3188,11 @@ msgstr "手動"
 msgid "Manufacturer"
 msgstr "製造元"
 
-#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "視聴済みマークを付ける"
 
-#: podcasts/podcastservice.cpp:359
+#: podcasts/podcastservice.cpp:361
 msgid "Mark as new"
 msgstr "新曲マークを付ける"
 
@@ -3310,7 +3310,7 @@ msgstr "ミュージック"
 msgid "Music Library"
 msgstr "ミュージックライブラリ"
 
-#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:703
+#: core/globalshortcuts.cpp:63 ../bin/src/ui_mainwindow.h:703
 #: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "ミュート"
@@ -3397,12 +3397,12 @@ msgstr "最新のトラック"
 msgid "Next"
 msgstr "次へ"
 
-#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:646
+#: core/globalshortcuts.cpp:57 ../bin/src/ui_mainwindow.h:646
 #: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "次のトラック"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "次週"
 
@@ -3509,19 +3509,19 @@ msgstr "OSD のプレビュー"
 msgid "Off"
 msgstr "オフ"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:244
+#: core/song.cpp:401 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:250
+#: core/song.cpp:407 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:247
+#: core/song.cpp:403 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:241
+#: core/song.cpp:405 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3567,11 +3567,11 @@ msgstr "%1 をブラウザーで開く"
 msgid "Open &audio CD..."
 msgstr "オーディオ CD を開く(&A)..."
 
-#: podcasts/addpodcastdialog.cpp:235
+#: podcasts/addpodcastdialog.cpp:237
 msgid "Open OPML file"
 msgstr "OPML ファイルを開く"
 
-#: podcasts/addpodcastdialog.cpp:77
+#: podcasts/addpodcastdialog.cpp:79
 msgid "Open OPML file..."
 msgstr "OPML ファイルを開く..."
 
@@ -3640,7 +3640,7 @@ msgstr "ファイルの整理"
 msgid "Organise files..."
 msgstr "ファイルの整理..."
 
-#: core/organise.cpp:69
+#: core/organise.cpp:72
 msgid "Organising files"
 msgstr "ファイルの整理中"
 
@@ -3648,7 +3648,7 @@ msgstr "ファイルの整理中"
 msgid "Original tags"
 msgstr "元のタグ"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Other options"
 msgstr "その他のオプション"
 
@@ -3698,12 +3698,12 @@ msgstr "パーティー"
 msgid "Password"
 msgstr "パスワード"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "一時停止"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Pause playback"
 msgstr "再生を一時停止します"
 
@@ -3724,7 +3724,7 @@ msgstr "ピクセル"
 msgid "Plain sidebar"
 msgstr "プレーンサイドバー"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
 #: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
@@ -3735,7 +3735,7 @@ msgstr "再生"
 msgid "Play count"
 msgstr "再生回数"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:151
 msgid "Play if stopped, pause if playing"
 msgstr "停止中は再生し、再生中は一時停止します"
 
@@ -3744,11 +3744,11 @@ msgstr "停止中は再生し、再生中は一時停止します"
 msgid "Play if there is nothing already playing"
 msgstr "再生中の曲がない場合は再生する"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
 msgstr "プレイリストの <n> 番目のトラックを再生する"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "再生・一時停止"
 
@@ -3756,7 +3756,7 @@ msgstr "再生・一時停止"
 msgid "Playback"
 msgstr "再生"
 
-#: core/commandlineoptions.cpp:143
+#: core/commandlineoptions.cpp:149
 msgid "Player options"
 msgstr "プレーヤーのオプション"
 
@@ -3770,7 +3770,7 @@ msgstr "プレイリスト"
 msgid "Playlist finished"
 msgstr "プレイリストが完了しました"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:95
 msgid "Playlist options"
 msgstr "プレイリストのオプション"
@@ -3792,7 +3792,7 @@ msgstr "ブラウザーを閉じて Clementine に戻ってください。"
 msgid "Plugin status:"
 msgstr "プラグインの状態:"
 
-#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "ポッドキャスト"
 
@@ -3892,12 +3892,12 @@ msgstr "プレビュー"
 msgid "Previous"
 msgstr "前へ"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:640
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "前のトラック"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "バージョン情報を出力"
 
@@ -3965,7 +3965,7 @@ msgstr "ラジオ (すべてのトラックで均一の音量)"
 msgid "Radios"
 msgstr "ラジオ"
 
-#: core/backgroundstreams.cpp:28
+#: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Rain"
 
@@ -3978,27 +3978,27 @@ msgstr "Rain"
 msgid "Random visualization"
 msgstr "ランダムなビジュアライゼーション"
 
-#: core/globalshortcuts.cpp:75
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 0 stars"
 msgstr "現在の曲を星 0 つと評価する"
 
-#: core/globalshortcuts.cpp:77
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 1 star"
 msgstr "現在の曲を星 1 つと評価する"
 
-#: core/globalshortcuts.cpp:79
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 2 stars"
 msgstr "現在の曲を星 2 つと評価する"
 
-#: core/globalshortcuts.cpp:81
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 3 stars"
 msgstr "現在の曲を星 3 つと評価する"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 4 stars"
 msgstr "現在の曲を星 4 つと評価する"
 
-#: core/globalshortcuts.cpp:85
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 5 stars"
 msgstr "現在の曲を星 5 つと評価する"
 
@@ -4185,7 +4185,7 @@ msgstr "リセット"
 msgid "Reset play counts"
 msgstr "再生回数のリセット"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "トラックを再開 (開始8秒以内なら前のトラックを再生)"
@@ -4411,19 +4411,19 @@ msgstr "Grooveshark を検索中"
 msgid "Second level"
 msgstr "第 2 階層"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr "後方へシーク"
 
-#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr "前方へシーク"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track by a relative amount"
 msgstr "現在再生中のトラックを相対値でシークする"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "現在再生中のトラックの絶対的な位置へシークする"
 
@@ -4488,7 +4488,7 @@ msgstr "サービスがオフラインです"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 を「%2」に設定します..."
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "音量を <value> パーセントへ設定しました"
 
@@ -4519,7 +4519,7 @@ msgstr "%1 のショートカットは既に存在します"
 msgid "Show"
 msgstr "表示"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "OSD の表示"
 
@@ -4632,7 +4632,7 @@ msgstr "トレイアイコンを表示する"
 msgid "Show which sources are enabled and disabled"
 msgstr "有効および無効になっているソースを表示する"
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:66
 msgid "Show/Hide"
 msgstr "表示・非表示の切り替え"
 
@@ -4684,7 +4684,7 @@ msgstr "サイズ:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "プレイリストで後ろにスキップ"
 
@@ -4692,7 +4692,7 @@ msgstr "プレイリストで後ろにスキップ"
 msgid "Skip count"
 msgstr "スキップ回数"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "プレイリストで前にスキップ"
 
@@ -4813,7 +4813,7 @@ msgstr "星付き"
 msgid "Start ripping"
 msgstr "リッピングを開始する"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
 msgstr "現在再生中のプレイリストを開始する"
 
@@ -4841,7 +4841,7 @@ msgstr "開始しています..."
 msgid "Stations"
 msgstr "局"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:644
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "停止"
@@ -4854,11 +4854,11 @@ msgstr "次で停止"
 msgid "Stop after this track"
 msgstr "このトラック後に停止"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "再生の停止"
 
-#: core/globalshortcuts.cpp:51
+#: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
 msgstr "現在のトラック後に停止"
 
@@ -4871,7 +4871,7 @@ msgstr "現在のトラック後に停止: %1"
 msgid "Stopped"
 msgstr "停止しました"
 
-#: core/song.cpp:407
+#: core/song.cpp:418
 msgid "Stream"
 msgstr "ストリーム"
 
@@ -5015,8 +5015,8 @@ msgstr "更新したこのバージョンの Clementine は、次の新機能に
 msgid "There are other songs in this album"
 msgstr "このアルバムにはほかの曲があります"
 
-#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
-#: podcasts/gpoddertoptagspage.cpp:70
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "There was a problem communicating with gpodder.net"
 msgstr "gpodder.net との通信に問題がありました"
 
@@ -5024,7 +5024,7 @@ msgstr "gpodder.net との通信に問題がありました"
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Magnatune からのメタデータ取得に問題がありました"
 
-#: podcasts/itunessearchpage.cpp:75
+#: podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "iTunes Store からの応答の分析に問題がありました"
 
@@ -5135,11 +5135,11 @@ msgid ""
 "Grooveshark songs"
 msgstr "Grooveshark のラジオを開始するには、まず始めに他の Grooveshark の曲をいくつか聴くとよいでしょう"
 
-#: core/utilities.cpp:128 core/utilities.cpp:140
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "今日"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:69
 msgid "Toggle Pretty OSD"
 msgstr "Pretty OSD の切り替え"
 
@@ -5155,15 +5155,15 @@ msgstr "キュー状態の切り替え"
 msgid "Toggle scrobbling"
 msgstr "scrobbling の切り替え"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "pretty OSD 表示の切り替え"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "明日"
 
-#: podcasts/podcasturlloader.cpp:115
+#: podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "リダイレクトが多すぎます"
 
@@ -5214,7 +5214,7 @@ msgstr "%2 個のスレッドを使用して %1 個のファイルをトラン�
 msgid "Transcoding options"
 msgstr "トランスコードのオプション"
 
-#: core/song.cpp:402
+#: core/song.cpp:413
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5230,7 +5230,7 @@ msgstr "オフにする"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL"
 
@@ -5247,7 +5247,7 @@ msgstr "接続できません"
 msgid "Unable to download %1 (%2)"
 msgstr "%1 をダウンロードできません (%2)"
 
-#: core/song.cpp:411 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
 #: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
@@ -5255,7 +5255,7 @@ msgstr "%1 をダウンロードできません (%2)"
 msgid "Unknown"
 msgstr "不明"
 
-#: podcasts/podcasturlloader.cpp:206
+#: podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "不明なコンテンツタイプ"
 
@@ -5275,7 +5275,7 @@ msgstr "選択したトラックをスキップしない"
 msgid "Unskip track"
 msgstr "トラックをスキップしない"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
+#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
 msgid "Unsubscribe"
 msgstr "購読解除"
 
@@ -5291,7 +5291,7 @@ msgstr "更新"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark のプレイリストを更新"
 
-#: podcasts/podcastservice.cpp:334
+#: podcasts/podcastservice.cpp:336
 msgid "Update all podcasts"
 msgstr "すべてのポッドキャストを更新"
 
@@ -5303,7 +5303,7 @@ msgstr "変更されたライブラリフォルダーを更新"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine の起動時にライブラリを更新する"
 
-#: podcasts/podcastservice.cpp:342
+#: podcasts/podcastservice.cpp:344
 msgid "Update this podcast"
 msgstr "このポッドキャストを更新"
 
@@ -5325,7 +5325,7 @@ msgstr "更新しています %1%..."
 msgid "Updating library"
 msgstr "ライブラリの更新中"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "使用量"
 
@@ -5492,7 +5492,7 @@ msgstr ""
 msgid "Warn me when closing a playlist tab"
 msgstr "プレイリストタブを閉じるときに警告する"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:256
+#: core/song.cpp:411 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5576,7 +5576,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:253
+#: core/song.cpp:391 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media オーディオ"
 
@@ -5622,7 +5622,7 @@ msgstr "年 - アルバム"
 msgid "Years"
 msgstr "年"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "昨日"
 
@@ -5844,7 +5844,7 @@ msgstr "が次に一致する"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:32
+#: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
 msgstr "gpodder.net ディレクトリ"
 
@@ -5904,7 +5904,7 @@ msgstr "古い順"
 msgid "on"
 msgstr "が次の日付"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "オプション"
 

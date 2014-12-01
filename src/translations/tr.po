@@ -86,17 +86,17 @@ msgstr "%1 (%2 şarkı)"
 msgid "%1 albums"
 msgstr "%1 albüm"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 gün"
 
-#: core/utilities.cpp:130
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 gün önce"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:83
 #, qt-format
 msgid "%1 on %2"
 msgstr "%2 üzerinde %1"
@@ -272,7 +272,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "1 gün"
 
@@ -377,7 +377,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:398
+#: core/song.cpp:409
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -436,7 +436,7 @@ msgstr "Wiiremote etkinleştir/devre dışı bırak"
 msgid "Activities stream"
 msgstr "Etkinlik akışı"
 
-#: podcasts/addpodcastdialog.cpp:59
+#: podcasts/addpodcastdialog.cpp:61
 msgid "Add Podcast"
 msgstr "Podcast Ekle"
 
@@ -500,7 +500,7 @@ msgstr "Yeni klasör ekle..."
 msgid "Add podcast"
 msgstr "Podcast ekle"
 
-#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Podcast ekle..."
 
@@ -807,7 +807,7 @@ msgstr "Öfkeli"
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
 msgstr "Çalma listesine dosya/URL ekle"
 
@@ -921,7 +921,7 @@ msgstr "Ortalama bit oranı"
 msgid "Average image size"
 msgstr "Ortalama resim boyutu"
 
-#: podcasts/addpodcastdialog.cpp:84
+#: podcasts/addpodcastdialog.cpp:86
 msgid "BBC Podcasts"
 msgstr "BBC Podcastları"
 
@@ -946,7 +946,7 @@ msgstr "Arkaplan resmi"
 msgid "Background opacity"
 msgstr "Artalan saydamlığı"
 
-#: core/database.cpp:640
+#: core/database.cpp:648
 msgid "Backing up database"
 msgstr "Veritabanını yedekliyor"
 
@@ -1047,7 +1047,7 @@ msgstr "Düğmeler"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr "Öntanımlı olarak, Grooveshark şarkıları eklenme tarihine göre sıralar"
 
-#: core/song.cpp:404
+#: core/song.cpp:415
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1086,7 +1086,7 @@ msgstr "Kapak resmini değiştir"
 msgid "Change font size..."
 msgstr "Yazı boyutunu değiştir..."
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:73
 msgid "Change repeat mode"
 msgstr "Tekrar kipin değiştir"
 
@@ -1094,11 +1094,11 @@ msgstr "Tekrar kipin değiştir"
 msgid "Change shortcut..."
 msgstr "Kısayolu değiştir..."
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:71
 msgid "Change shuffle mode"
 msgstr "Karıştırma kipini değiştir"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Dili değiştir"
 
@@ -1148,7 +1148,7 @@ msgstr "Listeden seç"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Çalma listesinin nasıl dizildiğini ve kaç şarkı içereceğini seçin."
 
-#: podcasts/podcastsettingspage.cpp:133
+#: podcasts/podcastsettingspage.cpp:135
 msgid "Choose podcast download directory"
 msgstr "Podcast indirme dizinini seç"
 
@@ -1300,7 +1300,7 @@ msgstr "Kulüp"
 msgid "Colors"
 msgstr "Renk"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Virgülle ayrılmış sınıf:seviye listesi, sınıf 0-3 arasında olabilir "
 
@@ -1364,7 +1364,7 @@ msgstr "Genel aramayı düzenle..."
 msgid "Configure library..."
 msgstr "Kütüphaneyi düzenle..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
+#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
 msgid "Configure podcasts..."
 msgstr "Podcastları ayarla..."
 
@@ -1434,7 +1434,7 @@ msgstr "Paylaşım adresini panoya kopyala"
 msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Aygıta kopyala..."
@@ -1625,7 +1625,7 @@ msgstr "DBus yolu"
 msgid "Dance"
 msgstr "Dans"
 
-#: core/database.cpp:593
+#: core/database.cpp:601
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1648,15 +1648,15 @@ msgstr "Gün"
 msgid "De&fault"
 msgstr "&Öntanımlı"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Ses seviyesini 4% azalt"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by <value> percent"
 msgstr "<value> oranında sesi azaltın"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "Sesi azalt"
 
@@ -1686,7 +1686,7 @@ msgstr "Sil"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark müzik listesini sil"
 
-#: podcasts/podcastservice.cpp:348
+#: podcasts/podcastservice.cpp:350
 msgid "Delete downloaded data"
 msgstr "İndirilmiş veriyi sil"
 
@@ -1720,7 +1720,7 @@ msgstr "Akıllı çalma listesini silin"
 msgid "Delete the original files"
 msgstr "Orijinal dosyaları sil"
 
-#: core/deletefiles.cpp:48
+#: core/deletefiles.cpp:50
 msgid "Deleting files"
 msgstr "Dosyalar siliniyor"
 
@@ -1824,7 +1824,7 @@ msgstr "Kesikli aktarma"
 msgid "Display options"
 msgstr "Gösterim seçenekleri"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Ekran görselini göster"
 
@@ -1883,7 +1883,7 @@ msgstr "Açmak için çift tıkla"
 msgid "Double clicking a song will..."
 msgstr "Bir şarkıyı çift tıklamak..."
 
-#: podcasts/podcastservice.cpp:440
+#: podcasts/podcastservice.cpp:442
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1905,7 +1905,7 @@ msgstr "İndirme üyeliği"
 msgid "Download new episodes automatically"
 msgstr "Yeni bölümleri otomatik olarak indir"
 
-#: podcasts/podcastservice.cpp:256
+#: podcasts/podcastservice.cpp:258
 msgid "Download queued"
 msgstr "Sıradakileri indir"
 
@@ -1925,7 +1925,7 @@ msgstr "Bu albümü indir"
 msgid "Download this album..."
 msgstr "Bu albümü indirin..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:444
 msgid "Download this episode"
 msgstr "Bu bölümü indir"
 
@@ -1933,7 +1933,7 @@ msgstr "Bu bölümü indir"
 msgid "Download..."
 msgstr "İndir..."
 
-#: podcasts/podcastservice.cpp:264
+#: podcasts/podcastservice.cpp:266
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "İndiriyor (%1%)..."
@@ -2046,7 +2046,7 @@ msgid ""
 "displayed in this order."
 msgstr "Arama sonuçlarına dahil etmek için aşağıdaki kaynakları aktifleştirin. Sonuçlar bu sırayla gösterilecektir."
 
-#: core/globalshortcuts.cpp:72
+#: core/globalshortcuts.cpp:76
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm skroplamayı aç/kapa"
 
@@ -2116,11 +2116,11 @@ msgstr "Tüm koleksiyon"
 msgid "Equalizer"
 msgstr "Ekolayzır"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1'e eşdeğer"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3'e eşdeğer"
 
@@ -2295,21 +2295,21 @@ msgstr "Yumuşak geçiş süresi"
 msgid "Failed reading CD drive"
 msgstr "CD sürücünü okuma başarısız"
 
-#: podcasts/gpoddertoptagspage.cpp:69
+#: podcasts/gpoddertoptagspage.cpp:71
 msgid "Failed to fetch directory"
 msgstr "Dizin getirme başarısız oldu"
 
-#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
-#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
-#: podcasts/itunessearchpage.cpp:81
+#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
+#: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Podcastların indirilmesi başarısız oldu"
 
-#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
+#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
 msgstr "Podcastların yüklenmesi başarısız oldu"
 
-#: podcasts/podcasturlloader.cpp:173
+#: podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "Bu RSS beslemesinin XML ayıklaması başarısız oldu"
 
@@ -2420,7 +2420,7 @@ msgstr "İlk Seviye"
 msgid "Fit cover to width"
 msgstr "Kapağı genişliğe sığdır"
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:233
+#: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2622,7 +2622,7 @@ msgstr "Tür/Sanatçı/Albüme göre grupla"
 msgid "Grouping"
 msgstr "Gruplandırma"
 
-#: podcasts/podcasturlloader.cpp:204
+#: podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML sayfası herhangi bir RSS beslemesi içermiyor"
 
@@ -2669,7 +2669,7 @@ msgstr "Sunucu bulunamadı, sunucu adresini denetleyin. Örnek: http://localhost
 msgid "Hours"
 msgstr "Saat"
 
-#: core/backgroundstreams.cpp:27
+#: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
 
@@ -2721,12 +2721,12 @@ msgstr "Resimler (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid "Import..."
 msgstr "İçe aktar..."
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 günde"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 haftada"
@@ -2761,15 +2761,15 @@ msgstr "Uyumsuz Subsonic REST protokol sürümü. Sunucu yükseltilmeli."
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Tamamlanmamış yapılandırma, lütfen tüm alanların dolduğundan emin olun"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Ses seviyesini 4% arttır"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by <value> percent"
 msgstr "<value> oranında sesi artırın"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Sesi arttır"
 
@@ -2794,7 +2794,7 @@ msgstr "Ekle..."
 msgid "Installed"
 msgstr "Kuruldu"
 
-#: core/database.cpp:577
+#: core/database.cpp:585
 msgid "Integrity check"
 msgstr "Bütünlük doğrulaması"
 
@@ -3061,7 +3061,7 @@ msgstr "Parçalar yükleniyor"
 msgid "Loading tracks info"
 msgstr "Parça bilgileri yükleniyor"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3069,7 +3069,7 @@ msgstr "Parça bilgileri yükleniyor"
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 
@@ -3088,7 +3088,7 @@ msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 msgid "Login"
 msgstr "Oturum aç"
 
-#: podcasts/podcastsettingspage.cpp:120
+#: podcasts/podcastsettingspage.cpp:122
 msgid "Login failed"
 msgstr "Giriş başarısız oldu."
 
@@ -3131,7 +3131,7 @@ msgstr "%1 sitesinden şarkı sözleri"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:238
+#: core/song.cpp:399 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3144,11 +3144,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:384
+#: core/song.cpp:395
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:386
+#: core/song.cpp:397
 msgid "MPC"
 msgstr "MPC"
 
@@ -3168,7 +3168,7 @@ msgstr "Magnatune indirme bitti"
 msgid "Main profile (MAIN)"
 msgstr "Ana profil (MAIN)"
 
-#: core/backgroundstreams.cpp:33
+#: core/backgroundstreams.cpp:52
 msgid "Make it so!"
 msgstr "Yap gitsin!"
 
@@ -3198,11 +3198,11 @@ msgstr "El ile"
 msgid "Manufacturer"
 msgstr "Üretici"
 
-#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Dinlenmiş olarak işaretle"
 
-#: podcasts/podcastservice.cpp:359
+#: podcasts/podcastservice.cpp:361
 msgid "Mark as new"
 msgstr "Yeni olarak işaretle"
 
@@ -3320,7 +3320,7 @@ msgstr "Müzik"
 msgid "Music Library"
 msgstr "Müzik Kütüphanesi"
 
-#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:703
+#: core/globalshortcuts.cpp:63 ../bin/src/ui_mainwindow.h:703
 #: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "Sessiz"
@@ -3407,12 +3407,12 @@ msgstr "En yeni parçalar"
 msgid "Next"
 msgstr "İleri"
 
-#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:646
+#: core/globalshortcuts.cpp:57 ../bin/src/ui_mainwindow.h:646
 #: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "Sonraki parça"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "Gelecek hafta"
 
@@ -3519,19 +3519,19 @@ msgstr "OSD Önizleme"
 msgid "Off"
 msgstr "Kapalı"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:244
+#: core/song.cpp:401 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:250
+#: core/song.cpp:407 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:247
+#: core/song.cpp:403 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:241
+#: core/song.cpp:405 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3577,11 +3577,11 @@ msgstr "Tarayıcıda aç: %1"
 msgid "Open &audio CD..."
 msgstr "&Ses CD'si aç..."
 
-#: podcasts/addpodcastdialog.cpp:235
+#: podcasts/addpodcastdialog.cpp:237
 msgid "Open OPML file"
 msgstr "OPML dosyası aç"
 
-#: podcasts/addpodcastdialog.cpp:77
+#: podcasts/addpodcastdialog.cpp:79
 msgid "Open OPML file..."
 msgstr "OPML dosyasını aç..."
 
@@ -3650,7 +3650,7 @@ msgstr "Dosyaları Düzenle"
 msgid "Organise files..."
 msgstr "Dosyaları düzenle..."
 
-#: core/organise.cpp:69
+#: core/organise.cpp:72
 msgid "Organising files"
 msgstr "Dosyalar düzenleniyor"
 
@@ -3658,7 +3658,7 @@ msgstr "Dosyalar düzenleniyor"
 msgid "Original tags"
 msgstr "Özgün etiketler"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Other options"
 msgstr "Diğer seçenekler"
 
@@ -3708,12 +3708,12 @@ msgstr "Parti"
 msgid "Password"
 msgstr "Parola"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Duraklat"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Pause playback"
 msgstr "Beklet"
 
@@ -3734,7 +3734,7 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Düz kenar çubuğu"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
 #: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
@@ -3745,7 +3745,7 @@ msgstr "Çal"
 msgid "Play count"
 msgstr "Çalma sayısı"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:151
 msgid "Play if stopped, pause if playing"
 msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 
@@ -3754,11 +3754,11 @@ msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 msgid "Play if there is nothing already playing"
 msgstr "Çalan bir şey yoksa çal"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
 msgstr "Listedeki <n> numaralı parçayı çal"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "Çal/Duraklat"
 
@@ -3766,7 +3766,7 @@ msgstr "Çal/Duraklat"
 msgid "Playback"
 msgstr "Oynat"
 
-#: core/commandlineoptions.cpp:143
+#: core/commandlineoptions.cpp:149
 msgid "Player options"
 msgstr "Oynatıcı seçenekleri"
 
@@ -3780,7 +3780,7 @@ msgstr "Çalma Listesi"
 msgid "Playlist finished"
 msgstr "Parça listesi tamamlandı"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:95
 msgid "Playlist options"
 msgstr "Çalma listesi seçenekleri"
@@ -3802,7 +3802,7 @@ msgstr "Lütfen tarayıcınızı kapatıp Clementine'e geri dönün."
 msgid "Plugin status:"
 msgstr "Eklenti durumu:"
 
-#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcastlar"
 
@@ -3902,12 +3902,12 @@ msgstr "Önizleme"
 msgid "Previous"
 msgstr "Önceki"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:640
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "Önceki parça"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Sürüm bilgisini bastır"
 
@@ -3975,7 +3975,7 @@ msgstr "Radyo (tüm parçalar için eşit ses seviyesi)"
 msgid "Radios"
 msgstr "Radyolar"
 
-#: core/backgroundstreams.cpp:28
+#: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Yağmur"
 
@@ -3988,27 +3988,27 @@ msgstr "Yağmur"
 msgid "Random visualization"
 msgstr "Karışık görseller"
 
-#: core/globalshortcuts.cpp:75
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 0 stars"
 msgstr "Geçerli şarkıyı 0 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:77
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 1 star"
 msgstr "Geçerli şarkıyı 1 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:79
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 2 stars"
 msgstr "Geçerli şarkıyı 2 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:81
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 3 stars"
 msgstr "Geçerli şarkıyı 3 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 4 stars"
 msgstr "Geçerli şarkıyı 4 yıldızla oyla"
 
-#: core/globalshortcuts.cpp:85
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 5 stars"
 msgstr "Geçerli şarkıyı 5 yıldızla oyla"
 
@@ -4195,7 +4195,7 @@ msgstr "Sıfırla"
 msgid "Reset play counts"
 msgstr "Çalma sayısını sıfırla"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Eğer başlangıçtan en fazla 8 saniye geçmişse parçayı yeniden başlat veya önceki parçayı çal."
@@ -4421,19 +4421,19 @@ msgstr "Grooveshark'da Ara"
 msgid "Second level"
 msgstr "İkinci seviye"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr "Geriye doğru ara"
 
-#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr "İleri doğru ara"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Çalan parçayı görece miktara göre ara"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Çalan parçayı kesin bir konuma göre ara"
 
@@ -4498,7 +4498,7 @@ msgstr "Hizmet çevrim dışı"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1'i \"%2\" olarak ayarla"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Ses seviyesini yüzde <value> yap"
 
@@ -4529,7 +4529,7 @@ msgstr "%1 için kısayol zaten tanımlı"
 msgid "Show"
 msgstr "Göster"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "OSD göster"
 
@@ -4642,7 +4642,7 @@ msgstr "Sistem çekmecesi simgesini göster"
 msgid "Show which sources are enabled and disabled"
 msgstr "Hangi kaynakların aktif ya da devre dışı olduğunu göster"
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:66
 msgid "Show/Hide"
 msgstr "Göster/Gizle"
 
@@ -4694,7 +4694,7 @@ msgstr "Boyut:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Parça listesinde geri git"
 
@@ -4702,7 +4702,7 @@ msgstr "Parça listesinde geri git"
 msgid "Skip count"
 msgstr "Atlama sayısı"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Parça listesinde ileri git"
 
@@ -4823,7 +4823,7 @@ msgstr "Yıldızlı"
 msgid "Start ripping"
 msgstr "Dönüştürmeyi başlat"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
 msgstr "Çalma listesini mevcut çalınanla başlat"
 
@@ -4851,7 +4851,7 @@ msgstr "Başlatılıyor..."
 msgid "Stations"
 msgstr "İstasyonlar"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:644
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "Durdur"
@@ -4864,11 +4864,11 @@ msgstr "Şundan sonra durdur"
 msgid "Stop after this track"
 msgstr "Bu parçadan sonra durdur"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Duraklat"
 
-#: core/globalshortcuts.cpp:51
+#: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
 msgstr "Bu parçadan sonra durdur"
 
@@ -4881,7 +4881,7 @@ msgstr "Şu parçadan sonra çalmayı durdur: %1"
 msgid "Stopped"
 msgstr "Durduruldu"
 
-#: core/song.cpp:407
+#: core/song.cpp:418
 msgid "Stream"
 msgstr "Akış"
 
@@ -5025,8 +5025,8 @@ msgstr "Güncellediğiniz Clementine sürümü, aşağıda listelenen yeni özel
 msgid "There are other songs in this album"
 msgstr "Bu albümde başka şarkılar da var"
 
-#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
-#: podcasts/gpoddertoptagspage.cpp:70
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "There was a problem communicating with gpodder.net"
 msgstr "gpodder.net ile iletişimde bir sorun oluştu."
 
@@ -5034,7 +5034,7 @@ msgstr "gpodder.net ile iletişimde bir sorun oluştu."
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Magnatude servisinden veri alınırken hata oluştu"
 
-#: podcasts/itunessearchpage.cpp:75
+#: podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "iTunes Store'dan gelen yanıtı ayıklamada bir sorun oluştu"
 
@@ -5145,11 +5145,11 @@ msgid ""
 "Grooveshark songs"
 msgstr "Grooveshark radyosu dinleyebilmeniz için öncelikle birkaç tane Grooveshark şarkısı dinlemelisiniz."
 
-#: core/utilities.cpp:128 core/utilities.cpp:140
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Bugün"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:69
 msgid "Toggle Pretty OSD"
 msgstr "Şirin OSD'yi Aç/Kapa"
 
@@ -5165,15 +5165,15 @@ msgstr "Kuyruk durumunu göster/gizle"
 msgid "Toggle scrobbling"
 msgstr "Skroplamayı aç/kapa"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Şirin OSD görünürlüğünü aç/kapa"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "Yarın"
 
-#: podcasts/podcasturlloader.cpp:115
+#: podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "Çok fazla yeniden yönlendirme"
 
@@ -5224,7 +5224,7 @@ msgstr "%1 adet dosya %2 adet thread ile dönüştürülüyor"
 msgid "Transcoding options"
 msgstr "Kod çevrimi seçenekleri"
 
-#: core/song.cpp:402
+#: core/song.cpp:413
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5240,7 +5240,7 @@ msgstr "Kapat"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL(ler)"
 
@@ -5257,7 +5257,7 @@ msgstr "Bağlanılamadı"
 msgid "Unable to download %1 (%2)"
 msgstr "%1 indirilemedi (%2)"
 
-#: core/song.cpp:411 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
 #: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
@@ -5265,7 +5265,7 @@ msgstr "%1 indirilemedi (%2)"
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: podcasts/podcasturlloader.cpp:206
+#: podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "Bilinmeyen içerik türü"
 
@@ -5285,7 +5285,7 @@ msgstr "Seçili parçaları atlama"
 msgid "Unskip track"
 msgstr "Parçayı atlama"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
+#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
 msgid "Unsubscribe"
 msgstr "Abonelikten çık"
 
@@ -5301,7 +5301,7 @@ msgstr "Güncelle"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark çalma listesini güncelle"
 
-#: podcasts/podcastservice.cpp:334
+#: podcasts/podcastservice.cpp:336
 msgid "Update all podcasts"
 msgstr "Bütün podcastları güncelle"
 
@@ -5313,7 +5313,7 @@ msgstr "Değişen kütüphane klasörlerini güncelle"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine başladığında kütüphaneyi güncelle"
 
-#: podcasts/podcastservice.cpp:342
+#: podcasts/podcastservice.cpp:344
 msgid "Update this podcast"
 msgstr "Bu podcast'ı güncelle"
 
@@ -5335,7 +5335,7 @@ msgstr "%1% Güncelleniyor..."
 msgid "Updating library"
 msgstr "Kütüphane güncelleniyor"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Kullanım"
 
@@ -5502,7 +5502,7 @@ msgstr "Duvar"
 msgid "Warn me when closing a playlist tab"
 msgstr "Bir çalma listesi sekmesini kapatırken beni uyar"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:256
+#: core/song.cpp:411 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5586,7 +5586,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Medya 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:253
+#: core/song.cpp:391 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -5632,7 +5632,7 @@ msgstr "Yıl - Albüm"
 msgid "Years"
 msgstr "Yıl"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "Dün"
 
@@ -5854,7 +5854,7 @@ msgstr "eşittir"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:32
+#: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
 msgstr "gpodder.net dizini"
 
@@ -5914,7 +5914,7 @@ msgstr "ilk önce en eskisi"
 msgid "on"
 msgstr "açık"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "seçenekler"
 

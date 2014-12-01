@@ -73,17 +73,17 @@ msgstr ""
 msgid "%1 albums"
 msgstr "%1 album"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 egun"
 
-#: core/utilities.cpp:130
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "duela %1 egun"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:83
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 %2-tik"
@@ -259,7 +259,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "Egun 1"
 
@@ -364,7 +364,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64K"
 
-#: core/song.cpp:398
+#: core/song.cpp:409
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -423,7 +423,7 @@ msgstr "Wiiremote-a aktibatu/desaktibatu"
 msgid "Activities stream"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:59
+#: podcasts/addpodcastdialog.cpp:61
 msgid "Add Podcast"
 msgstr "Podcast-a gehitu"
 
@@ -487,7 +487,7 @@ msgstr "Gehitu karpeta berria..."
 msgid "Add podcast"
 msgstr "Podcast-a gehitu"
 
-#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Podcast-a gehitu..."
 
@@ -794,7 +794,7 @@ msgstr "Haserre"
 msgid "Appearance"
 msgstr "Itxura"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
 msgstr "Erantsi Fitxategiak/URL-ak erreprodukzio-zerrendari"
 
@@ -908,7 +908,7 @@ msgstr "Batez besteko bit-tasa"
 msgid "Average image size"
 msgstr "Batez besteko irudi-tamaina"
 
-#: podcasts/addpodcastdialog.cpp:84
+#: podcasts/addpodcastdialog.cpp:86
 msgid "BBC Podcasts"
 msgstr "BBC-ko podcast-ak"
 
@@ -933,7 +933,7 @@ msgstr "Atzeko planoko irudia"
 msgid "Background opacity"
 msgstr "Atzeko planoko opakotasuna"
 
-#: core/database.cpp:640
+#: core/database.cpp:648
 msgid "Backing up database"
 msgstr "Datu-basearen babeskopia burutzen"
 
@@ -1034,7 +1034,7 @@ msgstr "Botoiak"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr ""
 
-#: core/song.cpp:404
+#: core/song.cpp:415
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1073,7 +1073,7 @@ msgstr "Aldatu azala"
 msgid "Change font size..."
 msgstr "Aldatu letra-tipo tamaina..."
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:73
 msgid "Change repeat mode"
 msgstr "Aldatu errepikatze-modua"
 
@@ -1081,11 +1081,11 @@ msgstr "Aldatu errepikatze-modua"
 msgid "Change shortcut..."
 msgstr "Aldatu laster-tekla..."
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:71
 msgid "Change shuffle mode"
 msgstr "Aldatu ausazko modua"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Aldatu hizkuntza"
 
@@ -1135,7 +1135,7 @@ msgstr "Hautatu zerrendatik"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Hautatu zerrendaren ordena eta izango duen abesti kopurua."
 
-#: podcasts/podcastsettingspage.cpp:133
+#: podcasts/podcastsettingspage.cpp:135
 msgid "Choose podcast download directory"
 msgstr "Podcast-a deskargatzeko direktorioa aukeratu"
 
@@ -1287,7 +1287,7 @@ msgstr "Club-a"
 msgid "Colors"
 msgstr "Koloreak"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komaz banaturiko klase-zerrenda:maila, maila 0-3 da"
 
@@ -1351,7 +1351,7 @@ msgstr "Bilaketa globala konfiguratu..."
 msgid "Configure library..."
 msgstr "Konfiguratu bilduma..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
+#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
 msgid "Configure podcasts..."
 msgstr "Podcast-ak konfiguratu"
 
@@ -1421,7 +1421,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "Kopiatu arbelean"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiatu gailura..."
@@ -1612,7 +1612,7 @@ msgstr "DBus bide-izena"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:593
+#: core/database.cpp:601
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1635,15 +1635,15 @@ msgstr "Egun"
 msgid "De&fault"
 msgstr "&Lehenetsia"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Bolumena % 4 jaitsi"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "Bolumena jaitsi"
 
@@ -1673,7 +1673,7 @@ msgstr "Ezabatu"
 msgid "Delete Grooveshark playlist"
 msgstr "Ezabatu Grooveshark-eko erreprodukzio-zerrenda"
 
-#: podcasts/podcastservice.cpp:348
+#: podcasts/podcastservice.cpp:350
 msgid "Delete downloaded data"
 msgstr "Ezabatu deskargatutako datuak"
 
@@ -1707,7 +1707,7 @@ msgstr "Ezabatu erreprodukzio-zerrenda adimenduna"
 msgid "Delete the original files"
 msgstr "Ezabatu jatorrizko fitxategiak"
 
-#: core/deletefiles.cpp:48
+#: core/deletefiles.cpp:50
 msgid "Deleting files"
 msgstr "Fitxategiak ezabatzen"
 
@@ -1811,7 +1811,7 @@ msgstr "Transmisio ez-jarraitua"
 msgid "Display options"
 msgstr "Erakutsi aukerak"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Erakutsi pantailako bistaratzailea"
 
@@ -1870,7 +1870,7 @@ msgstr "Klik bikoitza irekitzeko"
 msgid "Double clicking a song will..."
 msgstr "Abesti batean klik bikoitza eginez gero..."
 
-#: podcasts/podcastservice.cpp:440
+#: podcasts/podcastservice.cpp:442
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1892,7 +1892,7 @@ msgstr "Deskargarako bazkidetza"
 msgid "Download new episodes automatically"
 msgstr "Atal berriak automatikoki deskargatu"
 
-#: podcasts/podcastservice.cpp:256
+#: podcasts/podcastservice.cpp:258
 msgid "Download queued"
 msgstr "Deskarga zerrendaren zain"
 
@@ -1912,7 +1912,7 @@ msgstr "Deskargatu album hau"
 msgid "Download this album..."
 msgstr "Deskargatu album hau..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:444
 msgid "Download this episode"
 msgstr "Atal hau deskargatu"
 
@@ -1920,7 +1920,7 @@ msgstr "Atal hau deskargatu"
 msgid "Download..."
 msgstr "Deskargatu..."
 
-#: podcasts/podcastservice.cpp:264
+#: podcasts/podcastservice.cpp:266
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Deskargatzen (%%1)..."
@@ -2033,7 +2033,7 @@ msgid ""
 "displayed in this order."
 msgstr "Gaitu beheko iturriak bilaketa emaitzetan aurkezteko. Erantzunak orden berdinean erakutsiko dira."
 
-#: core/globalshortcuts.cpp:72
+#: core/globalshortcuts.cpp:76
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Gaitu/desgaitu Last.fm-ko partekatzea"
 
@@ -2103,11 +2103,11 @@ msgstr "Bilduma osoa"
 msgid "Equalizer"
 msgstr "Ekualizadorea"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1-en baliokidea"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3-en baliokidea"
 
@@ -2282,21 +2282,21 @@ msgstr "Iraungitzearen iraupena"
 msgid "Failed reading CD drive"
 msgstr ""
 
-#: podcasts/gpoddertoptagspage.cpp:69
+#: podcasts/gpoddertoptagspage.cpp:71
 msgid "Failed to fetch directory"
 msgstr "Direktorioa ezin izan da eskuratu"
 
-#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
-#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
-#: podcasts/itunessearchpage.cpp:81
+#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
+#: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Podcast-ak ezin izan dira lortu"
 
-#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
+#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
 msgstr "Podcast-a ezin izan da kargatu"
 
-#: podcasts/podcasturlloader.cpp:173
+#: podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "RSS kanal honen XML ezin izan da parseatu"
 
@@ -2407,7 +2407,7 @@ msgstr "Lehen maila"
 msgid "Fit cover to width"
 msgstr ""
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:233
+#: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2609,7 +2609,7 @@ msgstr "Taldekatu generoa/artista/albumaren arabera"
 msgid "Grouping"
 msgstr ""
 
-#: podcasts/podcasturlloader.cpp:204
+#: podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML orriak ez du inongo RSS kanalik"
 
@@ -2656,7 +2656,7 @@ msgstr ""
 msgid "Hours"
 msgstr "Orduak"
 
-#: core/backgroundstreams.cpp:27
+#: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
 msgstr "Hipnoapoa"
 
@@ -2708,12 +2708,12 @@ msgstr "Irudiak (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid "Import..."
 msgstr ""
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 egunetan"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 asteetan"
@@ -2748,15 +2748,15 @@ msgstr ""
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Bolumena % 4 igo"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by <value> percent"
 msgstr ""
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Bolumena igo"
 
@@ -2781,7 +2781,7 @@ msgstr "Txertatu"
 msgid "Installed"
 msgstr "Instalatuta"
 
-#: core/database.cpp:577
+#: core/database.cpp:585
 msgid "Integrity check"
 msgstr "Osotasunaren egiaztapena"
 
@@ -3048,7 +3048,7 @@ msgstr "Pistak kargatzen"
 msgid "Loading tracks info"
 msgstr "Pisten informazioa kargatzen"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3056,7 +3056,7 @@ msgstr "Pisten informazioa kargatzen"
 msgid "Loading..."
 msgstr "Kargatzen..."
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordezkatuz"
 
@@ -3075,7 +3075,7 @@ msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordez
 msgid "Login"
 msgstr "Saio-hasiera"
 
-#: podcasts/podcastsettingspage.cpp:120
+#: podcasts/podcastsettingspage.cpp:122
 msgid "Login failed"
 msgstr "Saio hasieraren huts egitea"
 
@@ -3118,7 +3118,7 @@ msgstr "%1-eko letrak"
 msgid "M4A AAC"
 msgstr ""
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:238
+#: core/song.cpp:399 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3131,11 +3131,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:384
+#: core/song.cpp:395
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:386
+#: core/song.cpp:397
 msgid "MPC"
 msgstr "MPC"
 
@@ -3155,7 +3155,7 @@ msgstr "Magnatune deskarga eginda"
 msgid "Main profile (MAIN)"
 msgstr "Profil nagusia (MAIN)"
 
-#: core/backgroundstreams.cpp:33
+#: core/backgroundstreams.cpp:52
 msgid "Make it so!"
 msgstr "Egin ezazu!"
 
@@ -3185,11 +3185,11 @@ msgstr "Eskuz"
 msgid "Manufacturer"
 msgstr "Fabrikatzailea"
 
-#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Entzunda bezala markatu"
 
-#: podcasts/podcastservice.cpp:359
+#: podcasts/podcastservice.cpp:361
 msgid "Mark as new"
 msgstr "Berri bezala markatu"
 
@@ -3307,7 +3307,7 @@ msgstr "Musika"
 msgid "Music Library"
 msgstr "Musika-bilduma"
 
-#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:703
+#: core/globalshortcuts.cpp:63 ../bin/src/ui_mainwindow.h:703
 #: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "Mututu"
@@ -3394,12 +3394,12 @@ msgstr "Pista berrienak"
 msgid "Next"
 msgstr "Hurrengoa"
 
-#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:646
+#: core/globalshortcuts.cpp:57 ../bin/src/ui_mainwindow.h:646
 #: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "Hurrengo pista"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "Hurrengo astea"
 
@@ -3506,19 +3506,19 @@ msgstr "OSD aurrebista"
 msgid "Off"
 msgstr ""
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:244
+#: core/song.cpp:401 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:250
+#: core/song.cpp:407 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:247
+#: core/song.cpp:403 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:241
+#: core/song.cpp:405 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3564,11 +3564,11 @@ msgstr "%1 nabigatzailean ireki"
 msgid "Open &audio CD..."
 msgstr "Ireki &audio CDa..."
 
-#: podcasts/addpodcastdialog.cpp:235
+#: podcasts/addpodcastdialog.cpp:237
 msgid "Open OPML file"
 msgstr "OPML fitxategia ireki"
 
-#: podcasts/addpodcastdialog.cpp:77
+#: podcasts/addpodcastdialog.cpp:79
 msgid "Open OPML file..."
 msgstr "OPML fitxategia ireki"
 
@@ -3637,7 +3637,7 @@ msgstr "Antolatu fitxategiak"
 msgid "Organise files..."
 msgstr "Antolatu fitxategiak..."
 
-#: core/organise.cpp:69
+#: core/organise.cpp:72
 msgid "Organising files"
 msgstr "Fitxategiak antolatzen"
 
@@ -3645,7 +3645,7 @@ msgstr "Fitxategiak antolatzen"
 msgid "Original tags"
 msgstr "Jatorrizko etiketak"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Other options"
 msgstr "Bestelako aukerak"
 
@@ -3695,12 +3695,12 @@ msgstr "Jaia"
 msgid "Password"
 msgstr "Pasahitza"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pausarazi"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Pause playback"
 msgstr "Erreprodukzioa pausatu"
 
@@ -3721,7 +3721,7 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "Albo-barra sinplea"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
 #: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
@@ -3732,7 +3732,7 @@ msgstr "Erreproduzitu"
 msgid "Play count"
 msgstr "Erreprodukzio kopurua"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:151
 msgid "Play if stopped, pause if playing"
 msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 
@@ -3741,11 +3741,11 @@ msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 msgid "Play if there is nothing already playing"
 msgstr "Erreproduzitu ez badago ezer aurretik erreproduzitzen"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
 msgstr "Erreproduzitu erreprodukzio-zerrendako <n>. pista"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "Erreproduzitu/Pausarazi"
 
@@ -3753,7 +3753,7 @@ msgstr "Erreproduzitu/Pausarazi"
 msgid "Playback"
 msgstr "Erreprodukzioa"
 
-#: core/commandlineoptions.cpp:143
+#: core/commandlineoptions.cpp:149
 msgid "Player options"
 msgstr "Erreproduzitzailearen aukerak"
 
@@ -3767,7 +3767,7 @@ msgstr "Erreprodukzio-zerrenda"
 msgid "Playlist finished"
 msgstr "Erreprodukzio-zerrenda amaituta"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:95
 msgid "Playlist options"
 msgstr "Erreprodukzio-zerrendaren aukerak"
@@ -3789,7 +3789,7 @@ msgstr "Mesedez, itxi nabigatzailea eta itzuli Clementine-ra."
 msgid "Plugin status:"
 msgstr "Pluginaren egoera:"
 
-#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcast-ak"
 
@@ -3889,12 +3889,12 @@ msgstr "Aurrebista"
 msgid "Previous"
 msgstr "Aurrekoa"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:640
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "Aurreko pista"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Bertsio-informazioa erakutsi"
 
@@ -3962,7 +3962,7 @@ msgstr "Irratia (ozentasun berdina pista denentzat)"
 msgid "Radios"
 msgstr "Irratiak"
 
-#: core/backgroundstreams.cpp:28
+#: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Euria"
 
@@ -3975,27 +3975,27 @@ msgstr ""
 msgid "Random visualization"
 msgstr "Ausazko bistaratzea"
 
-#: core/globalshortcuts.cpp:75
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 0 stars"
 msgstr "Oraingo kantari 0 izarretako balioa eman"
 
-#: core/globalshortcuts.cpp:77
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 1 star"
 msgstr "Oraingo kantari izar 1eko balioa eman"
 
-#: core/globalshortcuts.cpp:79
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 2 stars"
 msgstr "Oraingo kantari 2 izarretako balioa eman"
 
-#: core/globalshortcuts.cpp:81
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 3 stars"
 msgstr "Oraingo kantari 3 izarretako balioa eman"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 4 stars"
 msgstr "Oraingo kantari 4 izarretako balioa eman"
 
-#: core/globalshortcuts.cpp:85
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 5 stars"
 msgstr "Oraingo kantari 5 izarretako balioa eman"
 
@@ -4182,7 +4182,7 @@ msgstr "Berrezarri"
 msgid "Reset play counts"
 msgstr "Berrezarri erreprodukzio kopurua"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4408,19 +4408,19 @@ msgstr "Grooveshark-en bilatzen"
 msgid "Second level"
 msgstr "Bigarren maila"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr "Atzera egin"
 
-#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr "Aurrera egin"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Oraingo pistan mugitu posizio erlatibo baten arabera"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Oraingo pistan mugitu posizio absolutu baten arabera"
 
@@ -4485,7 +4485,7 @@ msgstr "Zerbitzua lineaz kanpo"
 msgid "Set %1 to \"%2\"..."
 msgstr "Ezarri %1 \"%2\"-(e)ra..."
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Ezarri bolumena ehuneko <value>-ra"
 
@@ -4516,7 +4516,7 @@ msgstr "%1-(r)en laster-tekla existitzen da jada"
 msgid "Show"
 msgstr "Erakutsi"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "Erakutsi OSD"
 
@@ -4629,7 +4629,7 @@ msgstr "Erakutsi erretilu-ikonoa"
 msgid "Show which sources are enabled and disabled"
 msgstr "Erakutsi zein iturri dauden gaiturik/desgaiturik"
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:66
 msgid "Show/Hide"
 msgstr "Erakutsi/Ezkutatu"
 
@@ -4681,7 +4681,7 @@ msgstr ""
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Saltatu atzerantz erreprodukzio-zerrendan"
 
@@ -4689,7 +4689,7 @@ msgstr "Saltatu atzerantz erreprodukzio-zerrendan"
 msgid "Skip count"
 msgstr "Saltatu kontagailua"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Saltatu aurrerantz erreprodukzio-zerrendan"
 
@@ -4810,7 +4810,7 @@ msgstr "Izarduna(k)"
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
 msgstr "Hasi oraingo erreprodukzio-zerrenda"
 
@@ -4838,7 +4838,7 @@ msgstr "Hasten..."
 msgid "Stations"
 msgstr "Irratiak"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:644
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "Gelditu"
@@ -4851,11 +4851,11 @@ msgstr "Ondoren gelditu"
 msgid "Stop after this track"
 msgstr "Gelditu pista honen ondoren"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Gelditu erreprodukzioa"
 
-#: core/globalshortcuts.cpp:51
+#: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
 msgstr "Gelditu oraingo pistaren ondoren"
 
@@ -4868,7 +4868,7 @@ msgstr ""
 msgid "Stopped"
 msgstr "Geldituta"
 
-#: core/song.cpp:407
+#: core/song.cpp:418
 msgid "Stream"
 msgstr "Jarioa"
 
@@ -5012,8 +5012,8 @@ msgstr "Clementine-ren bertsio berriak bildumaren berreskaneo osoa egin behar du
 msgid "There are other songs in this album"
 msgstr "Album honetan beste abesti batzuk daude"
 
-#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
-#: podcasts/gpoddertoptagspage.cpp:70
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Arazo bat gertatu da gpodder.net-ekin komunikatzerakoan"
 
@@ -5021,7 +5021,7 @@ msgstr "Arazo bat gertatu da gpodder.net-ekin komunikatzerakoan"
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Arazo bat egon da Magnatune-ko metadatuak eskuratzean"
 
-#: podcasts/itunessearchpage.cpp:75
+#: podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Arazo bat gertatu da iTunes dendako erantzuna aztertzerakoan"
 
@@ -5132,11 +5132,11 @@ msgid ""
 "Grooveshark songs"
 msgstr "Grooveshark irratia hasteko, aurretik beste Grooveshark abesti batzuk entzun behar dituzu"
 
-#: core/utilities.cpp:128 core/utilities.cpp:140
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Gaur"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:69
 msgid "Toggle Pretty OSD"
 msgstr "Txandakatu OSD itxurosoa"
 
@@ -5152,15 +5152,15 @@ msgstr "Txandakatu ilara-egoera"
 msgid "Toggle scrobbling"
 msgstr "Txandakatu partekatzea"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Txandakatu pantailako bistaratze itxurosoaren ikuspena"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "Bihar"
 
-#: podcasts/podcasturlloader.cpp:115
+#: podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "Redirekzio gehiegi"
 
@@ -5211,7 +5211,7 @@ msgstr "%1 fitxategi %2 hari erabiliz transkodetzen"
 msgid "Transcoding options"
 msgstr "Transkodetze-aukerak"
 
-#: core/song.cpp:402
+#: core/song.cpp:413
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5227,7 +5227,7 @@ msgstr "Itzali"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URLa(k)"
 
@@ -5244,7 +5244,7 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "Ezin izan da %1 deskargatu (%2)"
 
-#: core/song.cpp:411 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
 #: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
@@ -5252,7 +5252,7 @@ msgstr "Ezin izan da %1 deskargatu (%2)"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: podcasts/podcasturlloader.cpp:206
+#: podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "Eduki-mota ezezaguna"
 
@@ -5272,7 +5272,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
+#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
 msgid "Unsubscribe"
 msgstr "Harpidetza kendu"
 
@@ -5288,7 +5288,7 @@ msgstr ""
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark erreprodukzio-zerrenda eguneratu"
 
-#: podcasts/podcastservice.cpp:334
+#: podcasts/podcastservice.cpp:336
 msgid "Update all podcasts"
 msgstr "Eguneratu podcast guztiak"
 
@@ -5300,7 +5300,7 @@ msgstr "Eguneratu bildumako aldatutako karpetak"
 msgid "Update the library when Clementine starts"
 msgstr "Eguneratu bilduma Clementine abiaraztean"
 
-#: podcasts/podcastservice.cpp:342
+#: podcasts/podcastservice.cpp:344
 msgid "Update this podcast"
 msgstr "Podcast hau eguneratu"
 
@@ -5322,7 +5322,7 @@ msgstr "%1 eguneratzen..."
 msgid "Updating library"
 msgstr "Bilduma eguneratzen"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Erabilera"
 
@@ -5489,7 +5489,7 @@ msgstr ""
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:256
+#: core/song.cpp:411 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5573,7 +5573,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:253
+#: core/song.cpp:391 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -5619,7 +5619,7 @@ msgstr "Urtea - Albuma"
 msgid "Years"
 msgstr "Urte"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "Atzo"
 
@@ -5841,7 +5841,7 @@ msgstr "berdin"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:32
+#: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
 msgstr "gpodder.net direktorioa"
 
@@ -5901,7 +5901,7 @@ msgstr "zaharrenak arinago"
 msgid "on"
 msgstr "honen barruan"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "aukerak"
 

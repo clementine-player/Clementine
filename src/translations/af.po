@@ -72,17 +72,17 @@ msgstr "%1 (%2 liedjies)"
 msgid "%1 albums"
 msgstr "%1 albums"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dae"
 
-#: core/utilities.cpp:130
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 dae terug"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:83
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 op %2"
@@ -258,7 +258,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "1 dag"
 
@@ -363,7 +363,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:398
+#: core/song.cpp:409
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -422,7 +422,7 @@ msgstr "Aktiveer/Deaktiveer Wii-afstandsbeheer"
 msgid "Activities stream"
 msgstr "Aktiewe strome"
 
-#: podcasts/addpodcastdialog.cpp:59
+#: podcasts/addpodcastdialog.cpp:61
 msgid "Add Podcast"
 msgstr "Voeg potgooi by"
 
@@ -486,7 +486,7 @@ msgstr "Voeg nuwe gids by..."
 msgid "Add podcast"
 msgstr "Voeg potgooi by"
 
-#: podcasts/podcastservice.cpp:331 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Voeg potgooi by..."
 
@@ -793,7 +793,7 @@ msgstr "Kwaai"
 msgid "Appearance"
 msgstr "Voorkoms"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
 msgstr "Voeg lêers/URLs by die speellys by"
 
@@ -907,7 +907,7 @@ msgstr "Gemiddelde bistempo"
 msgid "Average image size"
 msgstr "Gemiddelde beeldgrootte"
 
-#: podcasts/addpodcastdialog.cpp:84
+#: podcasts/addpodcastdialog.cpp:86
 msgid "BBC Podcasts"
 msgstr "BBC potgooi"
 
@@ -932,7 +932,7 @@ msgstr "Agtergrond prentjie"
 msgid "Background opacity"
 msgstr "Agtergrond deurskynendheid"
 
-#: core/database.cpp:640
+#: core/database.cpp:648
 msgid "Backing up database"
 msgstr "Databasis word gerugsteun"
 
@@ -1033,7 +1033,7 @@ msgstr "Knoppies"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr "Grooveshark sorteer by verstek die liedjies op die datum van byvoeging."
 
-#: core/song.cpp:404
+#: core/song.cpp:415
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1072,7 +1072,7 @@ msgstr "Verander omslag"
 msgid "Change font size..."
 msgstr "Verander lettergrootte"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:73
 msgid "Change repeat mode"
 msgstr "Verander herhalingsmodus"
 
@@ -1080,11 +1080,11 @@ msgstr "Verander herhalingsmodus"
 msgid "Change shortcut..."
 msgstr "Verander kortskakel"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:71
 msgid "Change shuffle mode"
 msgstr "Verander skommel modus"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Verander die taal"
 
@@ -1134,7 +1134,7 @@ msgstr "Kies uit die lys"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Kies hoe die speellys gesorteer word en hoeveel liedjies dit moet bevat."
 
-#: podcasts/podcastsettingspage.cpp:133
+#: podcasts/podcastsettingspage.cpp:135
 msgid "Choose podcast download directory"
 msgstr "Kies potgooi aflaaigids"
 
@@ -1286,7 +1286,7 @@ msgstr "Klub"
 msgid "Colors"
 msgstr "Kleure"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komma geskeide lys van klas:vlak, vlak is 0-3"
 
@@ -1350,7 +1350,7 @@ msgstr "Globale soek instellings..."
 msgid "Configure library..."
 msgstr "Stel my versameling op..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:365
+#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
 msgid "Configure podcasts..."
 msgstr "Stel potgooie op..."
 
@@ -1420,7 +1420,7 @@ msgstr "Kopieër die deel URL na die klipbord"
 msgid "Copy to clipboard"
 msgstr "Kopiëer na knipbord"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:352
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiëer na die toestel..."
@@ -1611,7 +1611,7 @@ msgstr "DBus lêergids"
 msgid "Dance"
 msgstr "Dans"
 
-#: core/database.cpp:593
+#: core/database.cpp:601
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1634,15 +1634,15 @@ msgstr "Dae"
 msgid "De&fault"
 msgstr "&Verstek"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Verlaag die volume met 4%"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by <value> percent"
 msgstr "Verlaag die volume met <value>%"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "Verlaag die volume"
 
@@ -1672,7 +1672,7 @@ msgstr "Skrap"
 msgid "Delete Grooveshark playlist"
 msgstr "Verwyder Grooveshark speellys"
 
-#: podcasts/podcastservice.cpp:348
+#: podcasts/podcastservice.cpp:350
 msgid "Delete downloaded data"
 msgstr "Vee afgelaaide data uit"
 
@@ -1706,7 +1706,7 @@ msgstr "Skrap slimspeellys"
 msgid "Delete the original files"
 msgstr "Skrap die oorspronklike lêers"
 
-#: core/deletefiles.cpp:48
+#: core/deletefiles.cpp:50
 msgid "Deleting files"
 msgstr "Lêers word geskrap"
 
@@ -1810,7 +1810,7 @@ msgstr "Uitsending met onderbrekings"
 msgid "Display options"
 msgstr "Vertoon keuses"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Toon skermbeeld"
 
@@ -1869,7 +1869,7 @@ msgstr "Dubbelkliek om oop te maak"
 msgid "Double clicking a song will..."
 msgstr "Dubbelkliek op 'n liedjie sal..."
 
-#: podcasts/podcastservice.cpp:440
+#: podcasts/podcastservice.cpp:442
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1891,7 +1891,7 @@ msgstr "Laai lidmaatskap af"
 msgid "Download new episodes automatically"
 msgstr "Laai nuwe episodes outomaties af"
 
-#: podcasts/podcastservice.cpp:256
+#: podcasts/podcastservice.cpp:258
 msgid "Download queued"
 msgstr "Aflaai tou"
 
@@ -1911,7 +1911,7 @@ msgstr "Laai hierdie album af"
 msgid "Download this album..."
 msgstr "Laai hierdie album af..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:444
 msgid "Download this episode"
 msgstr "Laai hierdie episode af"
 
@@ -1919,7 +1919,7 @@ msgstr "Laai hierdie episode af"
 msgid "Download..."
 msgstr "Laai af..."
 
-#: podcasts/podcastservice.cpp:264
+#: podcasts/podcastservice.cpp:266
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Besig met aflaai (%1%)..."
@@ -2032,7 +2032,7 @@ msgid ""
 "displayed in this order."
 msgstr "Skakel 'n bron hier onder aan om dit in te sluit in die soektog. Resultate sal in hierdie volgorde vertoon word."
 
-#: core/globalshortcuts.cpp:72
+#: core/globalshortcuts.cpp:76
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Skakel die opteken van geluisterde musiek op Last.fm aan/af"
 
@@ -2102,11 +2102,11 @@ msgstr "Hele versameling"
 msgid "Equalizer"
 msgstr "Grafiese effenaar"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ekwivalent aan --log-levels *:1"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ekwivalent aan --log-levels *:3"
 
@@ -2281,21 +2281,21 @@ msgstr "Duur van uitdowing"
 msgid "Failed reading CD drive"
 msgstr "Kan nie van die CD-dryf lees nie"
 
-#: podcasts/gpoddertoptagspage.cpp:69
+#: podcasts/gpoddertoptagspage.cpp:71
 msgid "Failed to fetch directory"
 msgstr "Gids kon nie gehaal word nie"
 
-#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
-#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
-#: podcasts/itunessearchpage.cpp:81
+#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
+#: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Kan nie die potgooi gaan haal nie"
 
-#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
+#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
 msgstr "Die potgooi kan nie gelaai word nie"
 
-#: podcasts/podcasturlloader.cpp:173
+#: podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "Onsuksesvol met die analisering van die XML vir hierdie RSS voer"
 
@@ -2406,7 +2406,7 @@ msgstr "Eerste vlak"
 msgid "Fit cover to width"
 msgstr "Pas die omslag in die breedte"
 
-#: core/song.cpp:382 transcoder/transcoder.cpp:233
+#: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2608,7 +2608,7 @@ msgstr "Groeppeer volgens Genre/Kunstenaar/Album"
 msgid "Grouping"
 msgstr "Groepering"
 
-#: podcasts/podcasturlloader.cpp:204
+#: podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML bladsy bevat nie enige RSS voer nie"
 
@@ -2655,7 +2655,7 @@ msgstr "Gasheer nie gevind nie.  Beaam die bediener URL.  Byvoorbeeld:  http://l
 msgid "Hours"
 msgstr "Ure"
 
-#: core/backgroundstreams.cpp:27
+#: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
 
@@ -2707,12 +2707,12 @@ msgstr "Beelde (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid "Import..."
 msgstr "Voer in..."
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "Oor %1 dae"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Oor %1 weke"
@@ -2747,15 +2747,15 @@ msgstr "Onversoenbare Subsonic REST protokol weergawe.  Die bediener moet opgrad
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Onvoltooide konfigurasie.  Verseker asseblief dat al die velde ingevul is."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Verhoog die volume met 4%"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by <value> percent"
 msgstr "Verhoog die volume met <value>%"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Verhoog die volume"
 
@@ -2780,7 +2780,7 @@ msgstr "Voeg in..."
 msgid "Installed"
 msgstr "Geïnstalleer"
 
-#: core/database.cpp:577
+#: core/database.cpp:585
 msgid "Integrity check"
 msgstr "Integriteitstoets"
 
@@ -3047,7 +3047,7 @@ msgstr "Snitte word gelaai"
 msgid "Loading tracks info"
 msgstr "Snitinligting word gelaai"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3055,7 +3055,7 @@ msgstr "Snitinligting word gelaai"
 msgid "Loading..."
 msgstr "Besig om te laai..."
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Laai lêers/URLs en vervang huidige speellys"
 
@@ -3074,7 +3074,7 @@ msgstr "Laai lêers/URLs en vervang huidige speellys"
 msgid "Login"
 msgstr "Teken aan"
 
-#: podcasts/podcastsettingspage.cpp:120
+#: podcasts/podcastsettingspage.cpp:122
 msgid "Login failed"
 msgstr "Aanteken onsuksesvol"
 
@@ -3117,7 +3117,7 @@ msgstr "Lirieke vanaf %1"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:388 transcoder/transcoder.cpp:238
+#: core/song.cpp:399 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3130,11 +3130,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:384
+#: core/song.cpp:395
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:386
+#: core/song.cpp:397
 msgid "MPC"
 msgstr "MPC"
 
@@ -3154,7 +3154,7 @@ msgstr "Klaar afgelaai vanaf Magnatune"
 msgid "Main profile (MAIN)"
 msgstr "Hoofprofiel (MAIN)"
 
-#: core/backgroundstreams.cpp:33
+#: core/backgroundstreams.cpp:52
 msgid "Make it so!"
 msgstr "Maak dit so!"
 
@@ -3184,11 +3184,11 @@ msgstr "Handmatig"
 msgid "Manufacturer"
 msgstr "Vervaardiger"
 
-#: podcasts/podcastservice.cpp:360 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Merk as geluister"
 
-#: podcasts/podcastservice.cpp:359
+#: podcasts/podcastservice.cpp:361
 msgid "Mark as new"
 msgstr "Merk as nuut"
 
@@ -3306,7 +3306,7 @@ msgstr "Musiek"
 msgid "Music Library"
 msgstr "Musiekversameling"
 
-#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:703
+#: core/globalshortcuts.cpp:63 ../bin/src/ui_mainwindow.h:703
 #: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "Maak stil"
@@ -3393,12 +3393,12 @@ msgstr "Nuutste snitte"
 msgid "Next"
 msgstr "Volgende"
 
-#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:646
+#: core/globalshortcuts.cpp:57 ../bin/src/ui_mainwindow.h:646
 #: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "Volgende snit"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "Volgende week"
 
@@ -3505,19 +3505,19 @@ msgstr "Skermbeeld voorskou"
 msgid "Off"
 msgstr "Af"
 
-#: core/song.cpp:390 transcoder/transcoder.cpp:244
+#: core/song.cpp:401 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:396 transcoder/transcoder.cpp:250
+#: core/song.cpp:407 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:392 transcoder/transcoder.cpp:247
+#: core/song.cpp:403 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:394 transcoder/transcoder.cpp:241
+#: core/song.cpp:405 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3563,11 +3563,11 @@ msgstr "Maak %1 in webblaaier oop"
 msgid "Open &audio CD..."
 msgstr "Maak &oudio CD oop..."
 
-#: podcasts/addpodcastdialog.cpp:235
+#: podcasts/addpodcastdialog.cpp:237
 msgid "Open OPML file"
 msgstr "Maak OPML lêer oop"
 
-#: podcasts/addpodcastdialog.cpp:77
+#: podcasts/addpodcastdialog.cpp:79
 msgid "Open OPML file..."
 msgstr "Maak OPML lêer oop..."
 
@@ -3636,7 +3636,7 @@ msgstr "Sorteer Lêers"
 msgid "Organise files..."
 msgstr "Sorteer Lêers..."
 
-#: core/organise.cpp:69
+#: core/organise.cpp:72
 msgid "Organising files"
 msgstr "Lêers word gesorteer"
 
@@ -3644,7 +3644,7 @@ msgstr "Lêers word gesorteer"
 msgid "Original tags"
 msgstr "Oorspronklike etikette"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Other options"
 msgstr "Ander keuses"
 
@@ -3694,12 +3694,12 @@ msgstr "Partytjie"
 msgid "Password"
 msgstr "Wagwoord"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Vries"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Pause playback"
 msgstr "Vries terugspel"
 
@@ -3720,7 +3720,7 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Gewone sykieslys"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
 #: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
@@ -3731,7 +3731,7 @@ msgstr "Speel"
 msgid "Play count"
 msgstr "Speeltelling"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:151
 msgid "Play if stopped, pause if playing"
 msgstr "Speel indien gestop, vries indien aan die speel"
 
@@ -3740,11 +3740,11 @@ msgstr "Speel indien gestop, vries indien aan die speel"
 msgid "Play if there is nothing already playing"
 msgstr "Speel as daar niks anders tans speel nie"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
 msgstr "Speel die <n>de snit in die speellys"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "Speel/Vries"
 
@@ -3752,7 +3752,7 @@ msgstr "Speel/Vries"
 msgid "Playback"
 msgstr "Terugspeel"
 
-#: core/commandlineoptions.cpp:143
+#: core/commandlineoptions.cpp:149
 msgid "Player options"
 msgstr "Speler keuses"
 
@@ -3766,7 +3766,7 @@ msgstr "Speellys"
 msgid "Playlist finished"
 msgstr "Speellys deurgewerk"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:95
 msgid "Playlist options"
 msgstr "Speellys keuses"
@@ -3788,7 +3788,7 @@ msgstr "Kies jou webblaaier en kom dan terug na Clementine."
 msgid "Plugin status:"
 msgstr "Uitbreiding toestand:"
 
-#: podcasts/podcastservice.cpp:123 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Potgooie"
 
@@ -3888,12 +3888,12 @@ msgstr "Voorskou"
 msgid "Previous"
 msgstr "Vorige"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:640
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "Vorige snit"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Toon weergawe inligting"
 
@@ -3961,7 +3961,7 @@ msgstr "Radio (selfde hardheid vir alle snitte)"
 msgid "Radios"
 msgstr "Radio's"
 
-#: core/backgroundstreams.cpp:28
+#: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Reën"
 
@@ -3974,27 +3974,27 @@ msgstr "Reën"
 msgid "Random visualization"
 msgstr "Lukrake visualisasie"
 
-#: core/globalshortcuts.cpp:75
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 0 stars"
 msgstr "Gee die huidige liedjie 0 sterre"
 
-#: core/globalshortcuts.cpp:77
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 1 star"
 msgstr "Gee die huidige liedjie 1 ster"
 
-#: core/globalshortcuts.cpp:79
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 2 stars"
 msgstr "Gee die huidige liedjie 2 sterre"
 
-#: core/globalshortcuts.cpp:81
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 3 stars"
 msgstr "Gee die huidige liedjie 3 sterre"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 4 stars"
 msgstr "Gee die huidige liedjie 4 sterre"
 
-#: core/globalshortcuts.cpp:85
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 5 stars"
 msgstr "Gee die huidige liedjie 5 sterre"
 
@@ -4181,7 +4181,7 @@ msgstr "Herstel"
 msgid "Reset play counts"
 msgstr "Herstel afspeeltelling"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Hervat die snit, of speel die vorige snit indien binne 8 sekondes van die opening."
@@ -4407,19 +4407,19 @@ msgstr "Grooveshark word deursoek"
 msgid "Second level"
 msgstr "Tweede vlak"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr "Streef terugwaarts"
 
-#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr "Streef vorentoe"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Streef 'n relatiewe hoeveelheid deur die huidige snit"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Streef na 'n spesifieke posisie in die huidige snit"
 
@@ -4484,7 +4484,7 @@ msgstr "Diens aflyn"
 msgid "Set %1 to \"%2\"..."
 msgstr "Stel %1 na \"%2\"..."
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Stel die volume na <value> persent"
 
@@ -4515,7 +4515,7 @@ msgstr "Kortskakel vir %1 bestaan reeds"
 msgid "Show"
 msgstr "Wys"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "Wys skermbeeld"
 
@@ -4628,7 +4628,7 @@ msgstr "Wys in stelselbalk"
 msgid "Show which sources are enabled and disabled"
 msgstr "Wys watter bronne is aan- en afgeskakel"
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:66
 msgid "Show/Hide"
 msgstr "Wys/Steek weg"
 
@@ -4680,7 +4680,7 @@ msgstr "Grootte:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Spring terugwaarts in speellys"
 
@@ -4688,7 +4688,7 @@ msgstr "Spring terugwaarts in speellys"
 msgid "Skip count"
 msgstr "Aantal keer oorgeslaan"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Spring voorentoe in speellys"
 
@@ -4809,7 +4809,7 @@ msgstr "Gegradeer"
 msgid "Start ripping"
 msgstr "Bigin om te \"rip\""
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
 msgstr "Begin die huidige speellys speel"
 
@@ -4837,7 +4837,7 @@ msgstr "In aanvang..."
 msgid "Stations"
 msgstr "Stasies"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:644
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "Stop"
@@ -4850,11 +4850,11 @@ msgstr "Stop na"
 msgid "Stop after this track"
 msgstr "Stop na hierdie snit"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Beëindig terugspel"
 
-#: core/globalshortcuts.cpp:51
+#: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
 msgstr "Hou op speel na die huidige snit"
 
@@ -4867,7 +4867,7 @@ msgstr "Beëindig die terugspel na snit: %1"
 msgid "Stopped"
 msgstr "Terugspeel is gestop"
 
-#: core/song.cpp:407
+#: core/song.cpp:418
 msgid "Stream"
 msgstr "Stroom"
 
@@ -5011,8 +5011,8 @@ msgstr "Die weergawe van Clementine waarheen jy sopas opgradeer het benodig 'n v
 msgid "There are other songs in this album"
 msgstr "Daar is ander liedjies in hierdie album"
 
-#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
-#: podcasts/gpoddertoptagspage.cpp:70
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Fout tydens kommunikasie met gpodder.net"
 
@@ -5020,7 +5020,7 @@ msgstr "Fout tydens kommunikasie met gpodder.net"
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Daar was 'n probleem met die haal van metadata vanaf Magnatune"
 
-#: podcasts/itunessearchpage.cpp:75
+#: podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Fout tydens analisering van iTunes winkel se antwoord"
 
@@ -5131,11 +5131,11 @@ msgid ""
 "Grooveshark songs"
 msgstr "Om Grooveshark radio te begin moet jy eers na 'n paar ander Grooveshark liedjies luister"
 
-#: core/utilities.cpp:128 core/utilities.cpp:140
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Vandag"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:69
 msgid "Toggle Pretty OSD"
 msgstr "Skakel mooi skermbeeld aan/af"
 
@@ -5151,15 +5151,15 @@ msgstr "Skakel tou-status aan/af"
 msgid "Toggle scrobbling"
 msgstr "Skakel log van geluisterde musiek aanlyn aan/af"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Skakel mooi skermbeeld aan/af"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "Môre"
 
-#: podcasts/podcasturlloader.cpp:115
+#: podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "Te veel aansture"
 
@@ -5210,7 +5210,7 @@ msgstr "Lêer %1 word met %2 prosesse getranskodeer"
 msgid "Transcoding options"
 msgstr "Transkodering instellings"
 
-#: core/song.cpp:402
+#: core/song.cpp:413
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5226,7 +5226,7 @@ msgstr "Skakel af"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -5243,7 +5243,7 @@ msgstr "Kan nie konnekteer nie"
 msgid "Unable to download %1 (%2)"
 msgstr "Kan nie %1 aflaai nie (%2)"
 
-#: core/song.cpp:411 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
 #: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
@@ -5251,7 +5251,7 @@ msgstr "Kan nie %1 aflaai nie (%2)"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: podcasts/podcasturlloader.cpp:206
+#: podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "Onbekende inhoudtipe"
 
@@ -5271,7 +5271,7 @@ msgstr "Moet nie geselekteerde snitte spring nie"
 msgid "Unskip track"
 msgstr "Moet nie snit spring nie"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:354
+#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
 msgid "Unsubscribe"
 msgstr "Teken uit"
 
@@ -5287,7 +5287,7 @@ msgstr "Dateeer op"
 msgid "Update Grooveshark playlist"
 msgstr "Dateer Grooveshark speellys op"
 
-#: podcasts/podcastservice.cpp:334
+#: podcasts/podcastservice.cpp:336
 msgid "Update all podcasts"
 msgstr "Dateer alle potgooie op"
 
@@ -5299,7 +5299,7 @@ msgstr "Gaan versameling na vir veranderinge"
 msgid "Update the library when Clementine starts"
 msgstr "Gaan die versameling vir veranderings na elke keer as Clementine oopgemaak word"
 
-#: podcasts/podcastservice.cpp:342
+#: podcasts/podcastservice.cpp:344
 msgid "Update this podcast"
 msgstr "Dateer hierdie potgooi op"
 
@@ -5321,7 +5321,7 @@ msgstr "%1% word opgedateer..."
 msgid "Updating library"
 msgstr "Jou versameling word nagegaan"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Gebruik"
 
@@ -5488,7 +5488,7 @@ msgstr "Muur"
 msgid "Warn me when closing a playlist tab"
 msgstr "Waarsku my met die sluit van 'n speellys oortjie"
 
-#: core/song.cpp:400 transcoder/transcoder.cpp:256
+#: core/song.cpp:411 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5572,7 +5572,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:380 transcoder/transcoder.cpp:253
+#: core/song.cpp:391 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media oudio"
 
@@ -5618,7 +5618,7 @@ msgstr "Jaar -Album"
 msgid "Years"
 msgstr "Jare"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "Gister"
 
@@ -5840,7 +5840,7 @@ msgstr "gelyk aan"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:32
+#: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
 msgstr "gpodder.net gids"
 
@@ -5900,7 +5900,7 @@ msgstr "oudste eerste"
 msgid "on"
 msgstr "volgens"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "instellings"
 
