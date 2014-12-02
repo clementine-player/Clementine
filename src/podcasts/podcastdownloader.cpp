@@ -36,8 +36,6 @@
 #include <QTimer>
 
 const char* PodcastDownloader::kSettingsGroup = "Podcasts";
-const int PodcastDownloader::kAutoDeleteCheckIntervalMsec =
-    15 * 60 * kMsecPerSec;  // 15 minutes
 
 struct PodcastDownloader::Task {
   Task() : file(nullptr) {}
@@ -56,17 +54,12 @@ PodcastDownloader::PodcastDownloader(Application* app, QObject* parent)
       auto_download_(false),
       delete_after_secs_(0),
       current_task_(nullptr),
-      last_progress_signal_(0),
-      auto_delete_timer_(new QTimer(this)) {
+      last_progress_signal_(0) {
   connect(backend_, SIGNAL(EpisodesAdded(PodcastEpisodeList)),
           SLOT(EpisodesAdded(PodcastEpisodeList)));
   connect(backend_, SIGNAL(SubscriptionAdded(Podcast)),
           SLOT(SubscriptionAdded(Podcast)));
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
-  connect(auto_delete_timer_, SIGNAL(timeout()), SLOT(AutoDelete()));
-
-  auto_delete_timer_->setInterval(kAutoDeleteCheckIntervalMsec);
-  auto_delete_timer_->start();
 
   ReloadSettings();
 }
@@ -291,23 +284,3 @@ void PodcastDownloader::EpisodesAdded(const PodcastEpisodeList& episodes) {
   }
 }
 
-void PodcastDownloader::AutoDelete() {
-  if (delete_after_secs_ <= 0) {
-    return;
-  }
-
-  QDateTime max_date = QDateTime::currentDateTime();
-  max_date.addSecs(-delete_after_secs_);
-
-  PodcastEpisodeList old_episodes =
-      backend_->GetOldDownloadedEpisodes(max_date);
-  if (old_episodes.isEmpty()) return;
-
-  qLog(Info) << "Deleting" << old_episodes.count()
-             << "episodes because they were last listened to"
-             << (delete_after_secs_ / kSecsPerDay) << "days ago";
-
-  for (const PodcastEpisode& episode : old_episodes) {
-    DeleteEpisode(episode);
-  }
-}

@@ -74,8 +74,6 @@ class PodcastDownloader : public QObject {
   void ReplyFinished();
   void ReplyDownloadProgress(qint64 received, qint64 total);
 
-  void AutoDelete();
-
  private:
   struct Task;
 
@@ -103,8 +101,6 @@ class PodcastDownloader : public QObject {
   QSet<int> downloading_episode_ids_;
 
   time_t last_progress_signal_;
-
-  QTimer* auto_delete_timer_;
 };
 
 #endif  // PODCASTS_PODCASTDOWNLOADER_H_
