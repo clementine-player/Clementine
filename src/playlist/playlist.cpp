@@ -657,23 +657,26 @@ void Playlist::set_current_row(int i, bool is_stopping) {
   if (dynamic_playlist_ && current_item_index_.isValid()) {
     using smart_playlists::Generator;
 
-    // Move the new item one position ahead of the last item in the history.
-    MoveItemWithoutUndo(current_item_index_.row(), dynamic_history_length());
+    // When advancing to the next track
+    if (i > old_current_item_index.row()) {
+      // Move the new item one position ahead of the last item in the history.
+      MoveItemWithoutUndo(current_item_index_.row(), dynamic_history_length());
 
-    // Compute the number of new items that have to be inserted. This is not
-    // necessarily 1 because the user might have added or removed items
-    // manually. Note that the future excludes the current item.
-    const int count = dynamic_history_length() + 1 +
-                      dynamic_playlist_->GetDynamicFuture() - items_.count();
-    if (count > 0) {
-      InsertDynamicItems(count);
+      // Compute the number of new items that have to be inserted. This is not
+      // necessarily 1 because the user might have added or removed items
+      // manually. Note that the future excludes the current item.
+      const int count = dynamic_history_length() + 1 +
+                        dynamic_playlist_->GetDynamicFuture() - items_.count();
+      if (count > 0) {
+        InsertDynamicItems(count);
+      }
+
+      // Shrink the history, again this is not necessarily by 1, because the
+      // user might have moved items by hand.
+      const int remove_count =
+          dynamic_history_length() - dynamic_playlist_->GetDynamicHistory();
+      if (0 < remove_count) RemoveItemsWithoutUndo(0, remove_count);
     }
-
-    // Shrink the history, again this is not necessarily by 1, because the user
-    // might have moved items by hand.
-    const int remove_count =
-        dynamic_history_length() - dynamic_playlist_->GetDynamicHistory();
-    if (0 < remove_count) RemoveItemsWithoutUndo(0, remove_count);
 
     // the above actions make all commands on the undo stack invalid, so we
     // better clear it.
