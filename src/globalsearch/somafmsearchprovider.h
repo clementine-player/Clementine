@@ -19,13 +19,14 @@
 #define SOMAFMSEARCHPROVIDER_H
 
 #include "simplesearchprovider.h"
-
-class SomaFMServiceBase;
+#include "internet/somafmservice.h"
 
 class SomaFMSearchProvider : public SimpleSearchProvider {
  public:
   SomaFMSearchProvider(SomaFMServiceBase* service, Application* app,
                        QObject* parent);
+  // SearchProvider
+  InternetService* internet_service() override { return service_; }
 
   void LoadArtAsync(int id, const Result& result);
 

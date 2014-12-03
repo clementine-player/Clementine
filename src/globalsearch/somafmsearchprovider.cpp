@@ -16,7 +16,6 @@
 */
 
 #include "somafmsearchprovider.h"
-#include "internet/somafmservice.h"
 
 SomaFMSearchProvider::SomaFMSearchProvider(SomaFMServiceBase* service,
                                            Application* app, QObject* parent)
