@@ -300,7 +300,8 @@ bool InternetModel::dropMimeData(const QMimeData* data, Qt::DropAction action,
   if (action == Qt::IgnoreAction) {
     return false;
   }
-  if (parent.data(Role_CanBeModified).toBool()) {
+  if (parent.data(Role_CanBeModified).toBool() ||
+      parent.parent().data(Role_CanBeModified).toBool()) {
     InternetModel::ServiceForIndex(parent)->DropMimeData(data, parent);
   }
 

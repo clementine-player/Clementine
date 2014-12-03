@@ -427,7 +427,7 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
     item->setData(true, InternetModel::Role_CanLazyLoad);
     item->setData(msg.index(), Role_UserPlaylistIndex);
-    item->setData(msg.is_mine(), Role_UserPlaylistIsMine);
+    item->setData(msg.is_mine(), InternetModel::Role_CanBeModified);
     item->setData(InternetModel::PlayBehaviour_MultipleItems,
                   InternetModel::Role_PlayBehaviour);
 
@@ -568,7 +568,7 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
                                           tr("Add to Spotify playlists"), this);
   QMenu* playlists_menu = new QMenu();
   for (const QStandardItem* playlist_item : playlists_) {
-    if (!playlist_item->data(Role_UserPlaylistIsMine).toBool()) {
+    if (!playlist_item->data(InternetModel::Role_CanBeModified).toBool()) {
       continue;
     }
     QAction* add_to_playlist = new QAction(playlist_item->text(), this);
@@ -744,7 +744,7 @@ void SpotifyService::ShowContextMenu(const QPoint& global_pos) {
       // Is this track contained in a playlist we can modify?
       bool is_playlist_modifiable =
           item->parent() &&
-          item->parent()->data(Role_UserPlaylistIsMine).toBool();
+          item->parent()->data(InternetModel::Role_CanBeModified).toBool();
       remove_from_playlist_->setVisible(is_playlist_modifiable);
 
       song_context_menu_->popup(global_pos);
@@ -759,7 +759,15 @@ void SpotifyService::ItemDoubleClicked(QStandardItem* item) {}
 
 void SpotifyService::DropMimeData(const QMimeData* data,
                                   const QModelIndex& index) {
-  qLog(Debug) << Q_FUNC_INFO << data->urls();
+  QVariant q_playlist_index = index.data(Role_UserPlaylistIndex);
+  if (!q_playlist_index.isValid()) {
+    // In case song was dropped on a playlist item, not on the playlist title/root element
+    q_playlist_index = index.parent().data(Role_UserPlaylistIndex);
+  }
+  if (!q_playlist_index.isValid())
+    return;
+
+  AddSongsToPlaylist(q_playlist_index.toInt(), data->urls());
 }
 
 void SpotifyService::LoadImage(const QString& id) {
