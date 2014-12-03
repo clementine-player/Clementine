@@ -20,9 +20,9 @@
 
 #include "searchprovider.h"
 #include "spotifymessages.pb.h"
+#include "internet/spotifyservice.h"
 
 class SpotifyServer;
-class SpotifyService;
 
 class SpotifySearchProvider : public SearchProvider {
   Q_OBJECT
@@ -34,8 +34,10 @@ class SpotifySearchProvider : public SearchProvider {
   void LoadArtAsync(int id, const Result& result);
   QStringList GetSuggestions(int count);
 
-  bool IsLoggedIn();
-  void ShowConfig();
+  // SearchProvider
+  bool IsLoggedIn() override;
+  void ShowConfig() override;
+  InternetService* internet_service() override { return service_; }
 
  private slots:
   void ServerDestroyed();

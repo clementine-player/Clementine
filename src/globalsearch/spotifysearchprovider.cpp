@@ -23,7 +23,6 @@
 #include "core/logging.h"
 #include "internet/internetmodel.h"
 #include "internet/spotifyserver.h"
-#include "internet/spotifyservice.h"
 #include "playlist/songmimedata.h"
 
 namespace {
