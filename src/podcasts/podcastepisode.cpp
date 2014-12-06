@@ -183,8 +183,10 @@ Song PodcastEpisode::ToSong(const Podcast& podcast) const {
   ret.set_comment(description());
   ret.set_id(database_id());
   ret.set_ctime(publication_date().toTime_t());
+  ret.set_genre(QString("Podcast"));
+  ret.set_genre_id3(186);
 
-  if (listened()) {
+  if (listened() && listened_date().isValid()) {
     ret.set_mtime(listened_date().toTime_t());
   } else {
     ret.set_mtime(publication_date().toTime_t());

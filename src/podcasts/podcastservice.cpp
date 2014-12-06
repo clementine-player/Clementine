@@ -20,6 +20,7 @@
 #include "addpodcastdialog.h"
 #include "opmlcontainer.h"
 #include "podcastbackend.h"
+#include "podcastdeleter.h"
 #include "podcastdownloader.h"
 #include "podcastservice.h"
 #include "podcastservicemodel.h"
@@ -192,8 +193,8 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
   // Do this here since the downloader won't be created yet in the ctor.
   connect(
       app_->podcast_downloader(),
-      SIGNAL(ProgressChanged(PodcastEpisode, PodcastDownloader::State, int)),
-      SLOT(DownloadProgressChanged(PodcastEpisode, PodcastDownloader::State,
+      SIGNAL(ProgressChanged(PodcastEpisode, PodcastDownload::State, int)),
+      SLOT(DownloadProgressChanged(PodcastEpisode, PodcastDownload::State,
                                    int)));
 
   if (default_icon_.isNull()) {
@@ -225,7 +226,7 @@ void PodcastService::UpdatePodcastText(QStandardItem* item,
 }
 
 void PodcastService::UpdateEpisodeText(QStandardItem* item,
-                                       PodcastDownloader::State state,
+                                       PodcastDownload::State state,
                                        int percent) {
   const PodcastEpisode episode =
       item->data(Role_Episode).value<PodcastEpisode>();
@@ -250,7 +251,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
 
   // Queued or downloading episodes get icons, tooltips, and maybe a title.
   switch (state) {
-    case PodcastDownloader::Queued:
+    case PodcastDownload::Queued:
       if (queued_icon_.isNull()) {
         queued_icon_ = QIcon(":icons/22x22/user-away.png");
       }
@@ -258,7 +259,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
       tooltip = tr("Download queued");
       break;
 
-    case PodcastDownloader::Downloading:
+  case PodcastDownload::Downloading:
       if (downloading_icon_.isNull()) {
         downloading_icon_ = IconLoader::Load("go-down");
       }
@@ -268,14 +269,54 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
           QString("[ %1% ] %2").arg(QString::number(percent), episode.title());
       break;
 
-    case PodcastDownloader::Finished:
-    case PodcastDownloader::NotDownloading:
+  case PodcastDownload::Finished:
+  case PodcastDownload::NotDownloading:
       break;
   }
 
   item->setFont(font);
   item->setText(title);
   item->setIcon(icon);
+}
+
+void PodcastService::UpdatePodcastText(QStandardItem* item,
+                                       PodcastDownload::State state,
+                                       int percent) {
+  const Podcast podcast =
+      item->data(Role_Podcast).value<Podcast>();
+
+  QString tooltip;
+  QIcon icon;
+
+  // Queued or downloading podcasts get icons, tooltips, and maybe a title.
+  switch (state) {
+    case PodcastDownload::Queued:
+      if (queued_icon_.isNull()) {
+        queued_icon_ = QIcon(":icons/22x22/user-away.png");
+      }
+      icon = queued_icon_;
+      item->setIcon(icon);
+      tooltip = tr("Download queued");
+      break;
+
+  case PodcastDownload::Downloading:
+      if (downloading_icon_.isNull()) {
+        downloading_icon_ = IconLoader::Load("go-down");
+      }
+      icon = downloading_icon_;
+      item->setIcon(icon);
+      tooltip = tr("Downloading (%1%)...").arg(percent);
+      break;
+
+  case PodcastDownload::Finished:
+  case PodcastDownload::NotDownloading:
+      if (podcast.ImageUrlSmall().isValid()) {
+        icon_loader_->LoadIcon(podcast.ImageUrlSmall().toString(), QString(), item);
+      } else {
+        item->setIcon(default_icon_);
+      }
+      break;
+  }
 }
 
 QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
@@ -583,18 +624,20 @@ void PodcastService::DownloadSelectedEpisode() {
 
 void PodcastService::DeleteDownloadedData() {
   for (const QModelIndex& index : selected_episodes_) {
-    app_->podcast_downloader()->DeleteEpisode(
+    app_->podcast_deleter()->DeleteEpisode(
         index.data(Role_Episode).value<PodcastEpisode>());
   }
 }
 
 void PodcastService::DownloadProgressChanged(const PodcastEpisode& episode,
-                                             PodcastDownloader::State state,
+                                             PodcastDownload::State state,
                                              int percent) {
   QStandardItem* item = episodes_by_database_id_[episode.database_id()];
-  if (!item) return;
+  QStandardItem* item2 = podcasts_by_database_id_[episode.podcast_database_id()];
+  if (!item || !item2) return;
 
   UpdateEpisodeText(item, state, percent);
+  UpdatePodcastText(item2, state, percent);
 }
 
 void PodcastService::ShowConfig() {

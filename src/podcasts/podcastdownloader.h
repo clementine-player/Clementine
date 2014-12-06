@@ -20,9 +20,11 @@
 #ifndef PODCASTS_PODCASTDOWNLOADER_H_
 #define PODCASTS_PODCASTDOWNLOADER_H_
 
+#include "core/network.h"
 #include "podcast.h"
 #include "podcastepisode.h"
 
+#include <QFile>
 #include <QList>
 #include <QObject>
 #include <QQueue>
@@ -40,16 +42,44 @@ class PodcastBackend;
 
 class QNetworkAccessManager;
 
+namespace PodcastDownload {
+  enum State { NotDownloading, Queued, Downloading, Finished };
+}
+
+class Task : public QObject {
+  Q_OBJECT
+
+ public:
+  Task(PodcastEpisode episode, QFile* file, PodcastBackend* backend);
+  ~Task();
+  PodcastEpisode episode();
+
+ signals:
+  void ProgressChanged(const PodcastEpisode& episode,
+                       PodcastDownload::State state, int percent);
+  void finished();
+
+ private slots:
+  void reading();
+  void finished_();
+  void downloadProgress_(qint64 received, qint64 total);
+
+ private:
+  QFile* file_;
+  PodcastEpisode episode_;
+  QNetworkRequest req_;
+  PodcastBackend* backend_;
+  NetworkAccessManager* network_;
+  RedirectFollower* repl;
+};
+
 class PodcastDownloader : public QObject {
   Q_OBJECT
 
  public:
   explicit PodcastDownloader(Application* app, QObject* parent = nullptr);
 
-  enum State { NotDownloading, Queued, Downloading, Finished };
-
   static const char* kSettingsGroup;
-  static const int kAutoDeleteCheckIntervalMsec;
 
   QString DefaultDownloadDir() const;
 
@@ -57,12 +87,9 @@ class PodcastDownloader : public QObject {
   // Adds the episode to the download queue
   void DownloadEpisode(const PodcastEpisode& episode);
 
-  // Deletes downloaded data for this episode
-  void DeleteEpisode(const PodcastEpisode& episode);
-
  signals:
   void ProgressChanged(const PodcastEpisode& episode,
-                       PodcastDownloader::State state, int percent);
+                       PodcastDownload::State state, int percent);
 
  private slots:
   void ReloadSettings();
@@ -70,17 +97,9 @@ class PodcastDownloader : public QObject {
   void SubscriptionAdded(const Podcast& podcast);
   void EpisodesAdded(const PodcastEpisodeList& episodes);
 
-  void ReplyReadyRead();
   void ReplyFinished();
-  void ReplyDownloadProgress(qint64 received, qint64 total);
 
  private:
-  struct Task;
-
-  void StartDownloading(Task* task);
-  void NextTask();
-  void FinishAndDelete(Task* task);
-
   QString FilenameForEpisode(const QString& directory,
                              const PodcastEpisode& episode) const;
   QString SanitiseFilenameComponent(const QString& text) const;
@@ -94,13 +113,8 @@ class PodcastDownloader : public QObject {
 
   bool auto_download_;
   QString download_dir_;
-  int delete_after_secs_;
 
-  Task* current_task_;
-  QQueue<Task*> queued_tasks_;
-  QSet<int> downloading_episode_ids_;
-
-  time_t last_progress_signal_;
+  QList<Task*> list_tasks_;
 };
 
 #endif  // PODCASTS_PODCASTDOWNLOADER_H_

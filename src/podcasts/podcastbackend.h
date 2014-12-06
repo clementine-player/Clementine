@@ -56,6 +56,7 @@ class PodcastBackend : public QObject {
   PodcastEpisode GetEpisodeById(int id);
   PodcastEpisode GetEpisodeByUrl(const QUrl& url);
   PodcastEpisode GetEpisodeByUrlOrLocalUrl(const QUrl& url);
+  PodcastEpisode GetOldestDownloadedListenedEpisode();
 
   // Returns a list of episodes that have local data (downloaded=true) but were
   // last listened to before the given QDateTime.  This query is NOT indexed so

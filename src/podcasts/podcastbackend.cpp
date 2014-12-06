@@ -322,6 +322,27 @@ PodcastEpisodeList PodcastBackend::GetOldDownloadedEpisodes(
   return ret;
 }
 
+PodcastEpisode PodcastBackend::GetOldestDownloadedListenedEpisode() {
+  PodcastEpisode ret;
+  PodcastEpisodeList list_;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+                  " FROM podcast_episodes"
+                  " WHERE downloaded = 'true'"
+                  " AND listened = 'true'"
+                  " ORDER BY listened_date ASC",
+              db);
+  q.exec();
+  if (db_->CheckErrors(q)) return ret;
+  q.next();
+  ret.InitFromQuery(q);
+
+  return ret;
+}
+
 PodcastEpisodeList PodcastBackend::GetNewDownloadedEpisodes() {
   PodcastEpisodeList ret;
 

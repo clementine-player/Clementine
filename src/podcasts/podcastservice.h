@@ -20,6 +20,7 @@
 #ifndef PODCASTS_PODCASTSERVICE_H_
 #define PODCASTS_PODCASTSERVICE_H_
 
+#include "podcastdeleter.h"
 #include "podcastdownloader.h"
 #include "internet/internetmodel.h"
 #include "internet/internetservice.h"
@@ -84,7 +85,7 @@ class PodcastService : public InternetService {
   void EpisodesUpdated(const PodcastEpisodeList& episodes);
 
   void DownloadProgressChanged(const PodcastEpisode& episode,
-                               PodcastDownloader::State state, int percent);
+                               PodcastDownload::State state, int percent);
 
   void CurrentSongChanged(const Song& metadata);
 
@@ -101,7 +102,11 @@ class PodcastService : public InternetService {
   void UpdatePodcastText(QStandardItem* item, int unlistened_count) const;
   void UpdateEpisodeText(
       QStandardItem* item,
-      PodcastDownloader::State state = PodcastDownloader::NotDownloading,
+      PodcastDownload::State state = PodcastDownload::NotDownloading,
+      int percent = 0);
+  void UpdatePodcastText(
+      QStandardItem* item,
+      PodcastDownload::State state = PodcastDownload::NotDownloading,
       int percent = 0);
 
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
