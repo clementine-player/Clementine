@@ -1,25 +1,27 @@
-// FHT - Fast Hartley Transform Class
-//
-// Copyright (C) 2004  Melchior FRANZ - mfranz@kde.org
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License as
-// published by the Free Software Foundation; either version 2 of the
-// License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, 51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA
-//
-// $Id$
+/* This file is part of Clementine.
+   Copyright 2004, Melchior FRANZ <mfranz@kde.org>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
-#ifndef FHT_H
-#define FHT_H
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Melchior FRANZ  <mfranz@kde.org>  2004
+*/
+
+#ifndef ANALYZERS_FHT_H_
+#define ANALYZERS_FHT_H_
 
 /**
  * Implementation of the Hartley Transform after Bracewell's discrete
@@ -54,7 +56,7 @@ class FHT {
   * should be at least 3. Values of more than 3 need a trigonometry table.
   * @see makeCasTable()
   */
-  FHT(int);
+  explicit FHT(int);
 
   ~FHT();
   inline int sizeExp() const { return m_exp2; }
@@ -115,4 +117,4 @@ class FHT {
   void transform(float*);
 };
 
-#endif
+#endif  // ANALYZERS_FHT_H_

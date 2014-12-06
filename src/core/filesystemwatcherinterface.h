@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,15 +17,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMWATCHERINTERFACE_H
-#define FILESYSTEMWATCHERINTERFACE_H
+#ifndef CORE_FILESYSTEMWATCHERINTERFACE_H_
+#define CORE_FILESYSTEMWATCHERINTERFACE_H_
 
 #include <QObject>
 
 class FileSystemWatcherInterface : public QObject {
   Q_OBJECT
  public:
-  FileSystemWatcherInterface(QObject* parent = nullptr);
+  explicit FileSystemWatcherInterface(QObject* parent = nullptr);
   virtual void Init() {}
   virtual void AddPath(const QString& path) = 0;
   virtual void RemovePath(const QString& path) = 0;
@@ -31,8 +33,8 @@ class FileSystemWatcherInterface : public QObject {
 
   static FileSystemWatcherInterface* Create(QObject* parent = nullptr);
 
-signals:
+ signals:
   void PathChanged(const QString& path);
 };
 
-#endif
+#endif  // CORE_FILESYSTEMWATCHERINTERFACE_H_

@@ -155,8 +155,6 @@ void SpotifyServer::MessageArrived(const pb::spotify::Message& message) {
     emit AlbumBrowseResults(message.browse_album_response());
   } else if (message.has_browse_toplist_response()) {
     emit ToplistBrowseResults(message.browse_toplist_response());
-  } else if (message.has_seek_completed()) {
-    emit SeekCompleted();
   }
 }
 

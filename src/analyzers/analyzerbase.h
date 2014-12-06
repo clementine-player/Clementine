@@ -1,27 +1,49 @@
-// Maintainer: Max Howell <max.howell@methylblue.com>, (C) 2004
-// Copyright:  See COPYING file that comes with this distribution
+/* This file is part of Clementine.
+   Copyright 2004, Max Howell <max.howell@methylblue.com>
+   Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
-#ifndef ANALYZERBASE_H
-#define ANALYZERBASE_H
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Max Howell  <max.howell@methylblue.com>  2004
+*/
+
+#ifndef ANALYZERS_ANALYZERBASE_H_
+#define ANALYZERS_ANALYZERBASE_H_
 
 #ifdef __FreeBSD__
 #include <sys/types.h>
 #endif
 
-#include "core/fht.h"  //stack allocated and convenience
+#include "fht.h"
 #include "engines/engine_fwd.h"
-#include <QPixmap>      //stack allocated and convenience
-#include <QBasicTimer>  //stack allocated
-#include <QWidget>      //baseclass
-#include <vector>       //included for convenience
+#include <QPixmap>
+#include <QBasicTimer>
+#include <QWidget>
+#include <vector>
 
-#include <QGLWidget>  //baseclass
+#include <QGLWidget>
 #ifdef Q_WS_MACX
-#include <OpenGL/gl.h>   //included for convenience
-#include <OpenGL/glu.h>  //included for convenience
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
 #else
-#include <GL/gl.h>   //included for convenience
-#include <GL/glu.h>  //included for convenience
+#include <GL/gl.h>
+#include <GL/glu.h>
 #endif
 
 class QEvent;
@@ -53,7 +75,7 @@ class Base : public QWidget {
   virtual void framerateChanged() {}
 
  protected:
-  Base(QWidget*, uint scopeSize = 7);
+  explicit Base(QWidget*, uint scopeSize = 7);
 
   void hideEvent(QHideEvent*);
   void showEvent(QShowEvent*);
@@ -86,4 +108,4 @@ void initSin(Scope&, const uint = 6000);
 
 }  // END namespace Analyzer
 
-#endif
+#endif  // ANALYZERS_ANALYZERBASE_H_

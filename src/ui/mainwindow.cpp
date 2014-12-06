@@ -41,10 +41,6 @@
 #include <qtsparkle/Updater>
 #endif
 
-#ifdef HAVE_AUDIOCD
-#include <gst/cdda/gstcddabasesrc.h>
-#endif
-
 #include "core/appearance.h"
 #include "core/application.h"
 #include "core/backgroundstreams.h"
@@ -983,7 +979,6 @@ void MainWindow::ReloadAllSettings() {
   library_view_->ReloadSettings();
   song_info_view_->ReloadSettings();
   app_->player()->engine()->ReloadSettings();
-  ui_->playlist->ReloadSettings();
   ui_->playlist->view()->ReloadSettings();
   app_->internet_model()->ReloadSettings();
 #ifdef HAVE_WIIMOTEDEV

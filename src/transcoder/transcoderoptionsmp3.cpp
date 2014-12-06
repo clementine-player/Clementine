@@ -36,7 +36,7 @@ TranscoderOptionsMP3::~TranscoderOptionsMP3() { delete ui_; }
 
 void TranscoderOptionsMP3::Load() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
   ;
 
   if (s.value("target", 1).toInt() == 0) {
@@ -55,7 +55,7 @@ void TranscoderOptionsMP3::Load() {
 
 void TranscoderOptionsMP3::Save() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
 
   s.setValue("target", ui_->target_quality->isChecked() ? 0 : 1);
   s.setValue("quality", ui_->quality_spinbox->value());

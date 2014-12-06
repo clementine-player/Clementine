@@ -75,7 +75,6 @@ signals:
   void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
   void AlbumBrowseResults(const pb::spotify::BrowseAlbumResponse& response);
   void ToplistBrowseResults(const pb::spotify::BrowseToplistResponse& response);
-  void SeekCompleted();
 
  protected:
   void MessageArrived(const pb::spotify::Message& message);

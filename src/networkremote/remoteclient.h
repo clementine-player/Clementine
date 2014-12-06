@@ -5,6 +5,8 @@
 #include <QTcpSocket>
 #include <QBuffer>
 
+#include "songsender.h"
+
 #include "core/application.h"
 #include "remotecontrolmessages.pb.h"
 
@@ -20,6 +22,8 @@ class RemoteClient : public QObject {
   void setDownloader(bool downloader);
   bool isDownloader() { return downloader_; }
   void DisconnectClient(pb::remote::ReasonDisconnect reason);
+
+  SongSender* song_sender() { return song_sender_; }
 
  private slots:
   void IncomingData();
@@ -45,6 +49,7 @@ signals:
   bool reading_protobuf_;
   quint32 expected_length_;
   QBuffer buffer_;
+  SongSender* song_sender_;
 };
 
 #endif  // REMOTECLIENT_H

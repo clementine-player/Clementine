@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -42,7 +44,7 @@ class PodcastDownloader : public QObject {
   Q_OBJECT
 
  public:
-  PodcastDownloader(Application* app, QObject* parent = nullptr);
+  explicit PodcastDownloader(Application* app, QObject* parent = nullptr);
 
   enum State { NotDownloading, Queued, Downloading, Finished };
 

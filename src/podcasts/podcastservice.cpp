@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2012-2013, David Sansome <me@davidsansome.com>
+   Copyright 2013-2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -58,7 +60,8 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
       proxy_(new PodcastSortProxyModel(this)),
       context_menu_(nullptr),
       root_(nullptr),
-      organise_dialog_(new OrganiseDialog(app_->task_manager())) {
+      organise_dialog_(new OrganiseDialog(app_->task_manager(),
+                                          nullptr)) {
   icon_loader_->SetModel(model_);
   proxy_->setSourceModel(model_);
   proxy_->setDynamicSortFilter(true);
@@ -75,6 +78,8 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
 
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
           SLOT(CurrentSongChanged(Song)));
+  connect(organise_dialog_.get(), SIGNAL(FileCopied(int)),
+          this, SLOT(FileCopied(int)));
 }
 
 PodcastService::~PodcastService() {}
@@ -474,6 +479,11 @@ void PodcastService::EnsureAddPodcastDialogCreated() {
 void PodcastService::AddPodcast() {
   EnsureAddPodcastDialogCreated();
   add_podcast_dialog_->show();
+}
+
+void PodcastService::FileCopied(int database_id) {
+  SetListened(PodcastEpisodeList() << backend_->GetEpisodeById(database_id),
+              true);
 }
 
 void PodcastService::SubscriptionAdded(const Podcast& podcast) {

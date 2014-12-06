@@ -1,15 +1,26 @@
-//
-//
-// C++ Implementation: Sonogram
-//
-// Description:
-//
-//
-// Author: Melchior FRANZ <mfranz@kde.org>, (C) 2004
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+/* This file is part of Clementine.
+   Copyright 2004, Melchior FRANZ <mfranz@kde.org>
+   Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Melchior FRANZ  <mfranz@kde.org>  2004
+ */
 
 #include "sonogram.h"
 
@@ -53,9 +64,9 @@ void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
     if (it >= end || *it < .005)
       c = palette().color(QPalette::Background);
     else if (*it < .05)
-      c.setHsv(95, 255, 255 - int(*it * 4000.0));
+      c.setHsv(95, 255, 255 - static_cast<int>(*it * 4000.0));
     else if (*it < 1.0)
-      c.setHsv(95 - int(*it * 90.0), 255, 255);
+      c.setHsv(95 - static_cast<int>(*it * 90.0), 255, 255);
     else
       c = Qt::red;
 

@@ -18,6 +18,7 @@
 #include "playlistbackend.h"
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
+#include "playlistsaveoptionsdialog.h"
 #include "playlistview.h"
 #include "core/application.h"
 #include "core/logging.h"
@@ -45,13 +46,12 @@ PlaylistManager::PlaylistManager(Application* app, QObject* parent)
       library_backend_(nullptr),
       sequence_(nullptr),
       parser_(nullptr),
+      playlist_container_(nullptr),
       current_(-1),
       active_(-1) {
   connect(app_->player(), SIGNAL(Paused()), SLOT(SetActivePaused()));
   connect(app_->player(), SIGNAL(Playing()), SLOT(SetActivePlaying()));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(SetActiveStopped()));
-
-  settings_.beginGroup(Playlist::kSettingsGroup);
 }
 
 PlaylistManager::~PlaylistManager() {
@@ -167,15 +167,17 @@ void PlaylistManager::Load(const QString& filename) {
     return;
   }
 
-  Playlist* playlist = AddPlaylist(id, info.baseName(), QString(), QString(), false);
+  Playlist* playlist =
+      AddPlaylist(id, info.baseName(), QString(), QString(), false);
 
   QList<QUrl> urls;
   playlist->InsertUrls(urls << QUrl::fromLocalFile(filename));
 }
 
-void PlaylistManager::Save(int id, const QString& filename) {
+void PlaylistManager::Save(int id, const QString& filename,
+                           Playlist::Path path_type) {
   if (playlists_.contains(id)) {
-    parser_->Save(playlist(id)->GetAllSongs(), filename);
+    parser_->Save(playlist(id)->GetAllSongs(), filename, path_type);
   } else {
     // Playlist is not in the playlist manager: probably save action was
     // triggered
@@ -185,20 +187,24 @@ void PlaylistManager::Save(int id, const QString& filename) {
     watcher->setFuture(future);
 
     NewClosure(watcher, SIGNAL(finished()), this,
-               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString)),
+               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString,
+                                               Playlist::Path)),
                watcher, filename);
   }
 }
 
 void PlaylistManager::ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
-                                                 const QString& filename) {
-
+                                                 const QString& filename,
+                                                 Playlist::Path path_type) {
   SongList song_list = watcher->future().results();
-  parser_->Save(song_list, filename);
+  parser_->Save(song_list, filename, path_type);
 }
 
 void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
-  QString filename = settings_.value("last_save_playlist").toString();
+  QSettings settings;
+  settings.beginGroup(Playlist::kSettingsGroup);
+  QString filename = settings.value("last_save_playlist").toString();
+  settings.endGroup();
 
   // We want to use the playlist tab name as a default filename, but in the
   // same directory as the last saved file.
@@ -223,11 +229,28 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
       nullptr, tr("Save playlist", "Title of the playlist save dialog."),
       filename, parser()->filters(), &default_filter);
 
-  if (filename.isNull()) return;
+  if (filename.isNull()) {
+    settings.endGroup();
+    return;
+  }
 
-  settings_.setValue("last_save_playlist", filename);
+  QSettings s;
+  s.beginGroup(Playlist::kSettingsGroup);
+  int p = s.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
+  Playlist::Path path = static_cast<Playlist::Path>(p);
+  if (path == Playlist::Path_Ask_User) {
+    PlaylistSaveOptionsDialog optionsDialog(nullptr);
+    optionsDialog.setModal(true);
+    if (optionsDialog.exec() != QDialog::Accepted) {
+      return;
+    }
+    path = optionsDialog.path_type();
+  }
 
-  Save(id == -1 ? current_id() : id, filename);
+  settings.setValue("last_save_playlist", filename);
+  settings.endGroup();
+
+  Save(id == -1 ? current_id() : id, filename, path);
 }
 
 void PlaylistManager::Rename(int id, const QString& new_name) {
@@ -240,7 +263,6 @@ void PlaylistManager::Rename(int id, const QString& new_name) {
 }
 
 void PlaylistManager::Favorite(int id, bool favorite) {
-
   if (playlists_.contains(id)) {
     // If playlists_ contains this playlist, its means it's opened: star or
     // unstar it.

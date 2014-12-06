@@ -1,5 +1,15 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2012, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2010, 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011, Angus Gratton <gus@projectgus.com>
+   Copyright 2012, Kacper "mattrick" Banasik <mattrick@jabster.pl>
+   Copyright 2013, Martin Brodbeck <martin@brodbeck-online.de>
+   Copyright 2013, Joel Bradshaw <cincodenada@gmail.com>
+   Copyright 2013, Uwe Klotz <uwe.klotz@gmail.com>
+   Copyright 2013, Mateusz Kowalczyk <fuuzetsu@fuuzetsu.co.uk>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +25,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SONG_H
-#define SONG_H
+#ifndef CORE_SONG_H_
+#define CORE_SONG_H_
 
 #include <QFuture>
 #include <QImage>
@@ -75,6 +85,7 @@ class Song {
 
   // Don't change these values - they're stored in the database, and defined
   // in the tag reader protobuf.
+  // If a new lossless file is added, also add it to IsFileLossless().
   enum FileType {
     Type_Unknown = 0,
     Type_Asf = 1,
@@ -94,6 +105,7 @@ class Song {
   };
   static QString TextForFiletype(FileType type);
   QString TextForFiletype() const { return TextForFiletype(filetype()); }
+  bool IsFileLossless() const;
 
   // Sort songs alphabetically using their pretty title
   static void SortSongsListAlphabetically(QList<Song>* songs);
@@ -192,6 +204,8 @@ class Song {
   FileType filetype() const;
   bool is_stream() const;
   bool is_cdda() const;
+  // Guess if it is a library song using fields set. Might not be 100% reliable.
+  bool is_library_song() const;
 
   const QString& art_automatic() const;
   const QString& art_manual() const;
@@ -299,4 +313,4 @@ uint qHash(const Song& song);
 // Hash function using field checked in IsSimilar function
 uint HashSimilar(const Song& song);
 
-#endif  // SONG_H
+#endif  // CORE_SONG_H_

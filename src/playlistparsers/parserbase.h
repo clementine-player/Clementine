@@ -22,6 +22,7 @@
 #include <QDir>
 
 #include "core/song.h"
+#include "playlist/playlist.h"
 
 class LibraryBackendInterface;
 
@@ -50,8 +51,9 @@ class ParserBase : public QObject {
   // from the parser's point of view).
   virtual SongList Load(QIODevice* device, const QString& playlist_path = "",
                         const QDir& dir = QDir()) const = 0;
-  virtual void Save(const SongList& songs, QIODevice* device,
-                    const QDir& dir = QDir()) const = 0;
+  virtual void Save(
+      const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
+      Playlist::Path path_type = Playlist::Path_Automatic) const = 0;
 
  protected:
   // Loads a song.  If filename_or_url is a URL (with a scheme other than
@@ -65,10 +67,12 @@ class ParserBase : public QObject {
   void LoadSong(const QString& filename_or_url, qint64 beginning,
                 const QDir& dir, Song* song) const;
 
-  // If the URL is a file:// URL then returns its path relative to the
-  // directory.  Otherwise returns the URL as is.
+  // If the URL is a file:// URL then returns its path, absolute or relative to
+  // the directory depending on the path_type option.
+  // Otherwise returns the URL as is.
   // This function should always be used when saving a playlist.
-  QString URLOrRelativeFilename(const QUrl& url, const QDir& dir) const;
+  QString URLOrFilename(const QUrl& url, const QDir& dir,
+                        Playlist::Path path_type) const;
 
  private:
   LibraryBackendInterface* library_;

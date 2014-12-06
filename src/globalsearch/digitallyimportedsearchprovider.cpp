@@ -17,7 +17,6 @@
 
 #include "digitallyimportedsearchprovider.h"
 #include "core/logging.h"
-#include "internet/digitallyimportedservicebase.h"
 
 DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
     DigitallyImportedServiceBase* service, Application* app, QObject* parent)

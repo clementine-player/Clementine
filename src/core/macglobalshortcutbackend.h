@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MACGLOBALSHORTCUTBACKEND_H
-#define MACGLOBALSHORTCUTBACKEND_H
+#ifndef CORE_MACGLOBALSHORTCUTBACKEND_H_
+#define CORE_MACGLOBALSHORTCUTBACKEND_H_
 
 #include <memory>
 
@@ -32,7 +34,7 @@ class MacGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
 
  public:
-  MacGlobalShortcutBackend(GlobalShortcuts* parent);
+  explicit MacGlobalShortcutBackend(GlobalShortcuts* parent);
   virtual ~MacGlobalShortcutBackend();
 
   bool IsAccessibilityEnabled() const;
@@ -53,4 +55,4 @@ class MacGlobalShortcutBackend : public GlobalShortcutBackend {
   std::unique_ptr<MacGlobalShortcutBackendPrivate> p_;
 };
 
-#endif  // MACGLOBALSHORTCUTBACKEND_H
+#endif  // CORE_MACGLOBALSHORTCUTBACKEND_H_

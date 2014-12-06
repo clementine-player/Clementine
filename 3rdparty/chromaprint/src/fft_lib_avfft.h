@@ -21,9 +21,7 @@
 #ifndef CHROMAPRINT_FFT_LIB_AVFFT_H_
 #define CHROMAPRINT_FFT_LIB_AVFFT_H_
 
-#include <math.h>
 extern "C" {
-#include <libavcodec/avcodec.h>
 #include <libavcodec/avfft.h>
 }
 #include "combined_buffer.h"

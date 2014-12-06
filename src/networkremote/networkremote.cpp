@@ -29,6 +29,7 @@
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
 const quint16 NetworkRemote::kDefaultServerPort = 5500;
+const char* NetworkRemote::kTranscoderSettingPostfix = "/NetworkRemote";
 
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
     : QObject(parent), signals_connected_(false), app_(app) {}
@@ -158,17 +159,13 @@ void NetworkRemote::AcceptConnection() {
     connect(incoming_data_parser_.get(), SIGNAL(GetLyrics()),
             outgoing_data_creator_.get(), SLOT(GetLyrics()));
 
-    connect(incoming_data_parser_.get(),
-            SIGNAL(SendSongs(pb::remote::RequestDownloadSongs, RemoteClient*)),
-            outgoing_data_creator_.get(),
-            SLOT(SendSongs(pb::remote::RequestDownloadSongs, RemoteClient*)));
-    connect(incoming_data_parser_.get(),
-            SIGNAL(ResponseSongOffer(RemoteClient*, bool)),
-            outgoing_data_creator_.get(),
-            SLOT(ResponseSongOffer(RemoteClient*, bool)));
-
     connect(incoming_data_parser_.get(), SIGNAL(SendLibrary(RemoteClient*)),
             outgoing_data_creator_.get(), SLOT(SendLibrary(RemoteClient*)));
+
+    connect(incoming_data_parser_.get(),
+            SIGNAL(DoGlobalSearch(QString, RemoteClient*)),
+            outgoing_data_creator_.get(),
+            SLOT(DoGlobalSearch(QString, RemoteClient*)));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());

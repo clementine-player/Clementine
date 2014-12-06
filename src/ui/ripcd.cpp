@@ -100,8 +100,8 @@ RipCD::RipCD(QWidget* parent)
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
 
-  connect(transcoder_, SIGNAL(JobComplete(QString, bool)),
-          SLOT(TranscodingJobComplete(QString, bool)));
+  connect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)),
+          SLOT(TranscodingJobComplete(QString, QString, bool)));
   connect(transcoder_, SIGNAL(AllJobsComplete()),
           SLOT(AllTranscodingJobsComplete()));
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
@@ -334,7 +334,7 @@ void RipCD::AddTrack(int track_number, const QString& title,
   tracks_.append(track);
 }
 
-void RipCD::TranscodingJobComplete(const QString& filename, bool success) {
+void RipCD::TranscodingJobComplete(const QString& input, const QString& output, bool success) {
   (*(success ? &finished_success_ : &finished_failed_))++;
   emit(SignalUpdateProgress());
 }

@@ -1,5 +1,14 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2014, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2012, Alan Briolat <alan.briolat@gmail.com>
+   Copyright 2012, Veniamin Gvozdikov <G.Veniamin@gmail.com>
+   Copyright 2013-2014, Andreas <asfa194@gmail.com>
+   Copyright 2013, Glad Olus <gladolus@gmx.com>
+   Copyright 2013, graehl <graehl@gmail.com>
+   Copyright 2014, vkrishtal <krishtalhost@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -91,9 +100,9 @@ QString PrettyTime(int seconds) {
 
   QString ret;
   if (hours)
-    ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);
+    ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);  // NOLINT(runtime/printf)
   else
-    ret.sprintf("%d:%02d", minutes, seconds);
+    ret.sprintf("%d:%02d", minutes, seconds);  // NOLINT(runtime/printf)
 
   return ret;
 }
@@ -105,7 +114,7 @@ QString PrettyTimeNanosec(qint64 nanoseconds) {
 QString WordyTime(quint64 seconds) {
   quint64 days = seconds / (60 * 60 * 24);
 
-  // TODO: Make the plural rules translatable
+  // TODO(David Sansome): Make the plural rules translatable
   QStringList parts;
 
   if (days) parts << (days == 1 ? tr("1 day") : tr("%1 days").arg(days));
@@ -152,11 +161,11 @@ QString PrettySize(quint64 bytes) {
     if (bytes <= 1000)
       ret = QString::number(bytes) + " bytes";
     else if (bytes <= 1000 * 1000)
-      ret.sprintf("%.1f KB", float(bytes) / 1000);
+      ret.sprintf("%.1f KB", static_cast<float>(bytes) / 1000);  // NOLINT(runtime/printf)
     else if (bytes <= 1000 * 1000 * 1000)
-      ret.sprintf("%.1f MB", float(bytes) / (1000 * 1000));
+      ret.sprintf("%.1f MB", static_cast<float>(bytes) / (1000 * 1000));  // NOLINT(runtime/printf)
     else
-      ret.sprintf("%.1f GB", float(bytes) / (1000 * 1000 * 1000));
+      ret.sprintf("%.1f GB", static_cast<float>(bytes) / (1000 * 1000 * 1000));  // NOLINT(runtime/printf)
   }
   return ret;
 }
@@ -213,6 +222,8 @@ QString GetTemporaryFileName() {
   QString file;
   {
     QTemporaryFile tempfile;
+    // Do not delete the file, we want to do something with it
+    tempfile.setAutoRemove(false);
     tempfile.open();
     file = tempfile.fileName();
   }
@@ -419,8 +430,8 @@ QByteArray Hmac(const QByteArray& key, const QByteArray& data,
   const int kBlockSize = 64;  // bytes
   Q_ASSERT(key.length() <= kBlockSize);
 
-  QByteArray inner_padding(kBlockSize, char(0x36));
-  QByteArray outer_padding(kBlockSize, char(0x5c));
+  QByteArray inner_padding(kBlockSize, static_cast<char>(0x36));
+  QByteArray outer_padding(kBlockSize, static_cast<char>(0x5c));
 
   for (int i = 0; i < key.length(); ++i) {
     inner_padding[i] = inner_padding[i] ^ key[i];

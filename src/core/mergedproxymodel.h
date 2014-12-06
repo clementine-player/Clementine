@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MERGEDPROXYMODEL_H
-#define MERGEDPROXYMODEL_H
+#ifndef CORE_MERGEDPROXYMODEL_H_
+#define CORE_MERGEDPROXYMODEL_H_
 
 #include <memory>
 
@@ -30,7 +32,7 @@ class MergedProxyModel : public QAbstractProxyModel {
   Q_OBJECT
 
  public:
-  MergedProxyModel(QObject* parent = nullptr);
+  explicit MergedProxyModel(QObject* parent = nullptr);
   ~MergedProxyModel();
 
   // Make another model appear as a child of the given item in the source model.
@@ -73,7 +75,7 @@ class MergedProxyModel : public QAbstractProxyModel {
   QModelIndexList mapFromSource(const QModelIndexList& source_indexes) const;
   QModelIndexList mapToSource(const QModelIndexList& proxy_indexes) const;
 
-signals:
+ signals:
   void SubModelReset(const QModelIndex& root, QAbstractItemModel* model);
 
  private slots:
@@ -107,4 +109,4 @@ signals:
   std::unique_ptr<MergedProxyModelPrivate> p_;
 };
 
-#endif  // MERGEDPROXYMODEL_H
+#endif  // CORE_MERGEDPROXYMODEL_H_

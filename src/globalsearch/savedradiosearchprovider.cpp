@@ -17,7 +17,6 @@
 
 #include "savedradiosearchprovider.h"
 #include "core/mimedata.h"
-#include "internet/savedradio.h"
 #include "ui/iconloader.h"
 
 SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service,

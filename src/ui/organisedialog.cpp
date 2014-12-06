@@ -301,6 +301,7 @@ void OrganiseDialog::Reset() {
   ui_->replace_spaces->setChecked(false);
   ui_->replace_the->setChecked(false);
   ui_->overwrite->setChecked(false);
+  ui_->mark_as_listened->setChecked(false);
   ui_->eject_after->setChecked(false);
 }
 
@@ -314,6 +315,7 @@ void OrganiseDialog::showEvent(QShowEvent*) {
   ui_->replace_spaces->setChecked(s.value("replace_spaces", false).toBool());
   ui_->replace_the->setChecked(s.value("replace_the", false).toBool());
   ui_->overwrite->setChecked(s.value("overwrite", false).toBool());
+  ui_->mark_as_listened->setChecked(s.value("mark_as_listened", false).toBool());
   ui_->eject_after->setChecked(s.value("eject_after", false).toBool());
 
   QString destination = s.value("destination").toString();
@@ -331,6 +333,7 @@ void OrganiseDialog::accept() {
   s.setValue("replace_spaces", ui_->replace_spaces->isChecked());
   s.setValue("replace_the", ui_->replace_the->isChecked());
   s.setValue("overwrite", ui_->overwrite->isChecked());
+  s.setValue("mark_as_listened", ui_->overwrite->isChecked());
   s.setValue("destination", ui_->destination->currentText());
   s.setValue("eject_after", ui_->eject_after->isChecked());
 
@@ -346,9 +349,12 @@ void OrganiseDialog::accept() {
   const bool copy = ui_->aftercopying->currentIndex() == 0;
   Organise* organise = new Organise(
       task_manager_, storage, format_, copy, ui_->overwrite->isChecked(),
+      ui_->mark_as_listened->isChecked(),
       new_songs_info_, ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)),
           SLOT(OrganiseFinished(QStringList)));
+  connect(organise, SIGNAL(FileCopied(int)),
+          this, SIGNAL(FileCopied(int)));
   organise->Start();
 
   QDialog::accept();

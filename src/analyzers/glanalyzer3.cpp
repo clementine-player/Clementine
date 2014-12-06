@@ -1,19 +1,25 @@
-/***************************************************************************
-                      glanalyzer3.cpp  -  Bouncing Ballzz
-                             -------------------
-    begin                : Feb 19 2004
-    copyright            : (C) 2004 by Enrico Ros
-    email                : eros.kde@email.it
- ***************************************************************************/
+/* This file is part of Clementine.
+   Copyright 2004, Enrico Ros <eros.kde@email.it>
+   Copyright 2009, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Enrico Ros  <eros.kde@email.it>  2004
+ */
 
 #include <config.h>
 
@@ -40,16 +46,8 @@ class Ball {
         vx(0.0),
         vy(0.0),
         vz(0.0),
-        mass(0.01 + drand48() / 10.0)
-        //,color( (float[3]) { 0.0, drand48()*0.5, 0.7 + drand48() * 0.3 } )
-  {
-    // this is because GCC < 3.3 can't compile the above line, we aren't sure
-    // why though
-    color[0] = 0.0;
-    color[1] = drand48() * 0.5;
-    color[2] = 0.7 + drand48() * 0.3;
-  };
-
+        mass(0.01 + drand48() / 10.0),
+        color((float[3]) { 0.0, drand48()*0.5, 0.7 + drand48() * 0.3 }) {}
   float x, y, z, vx, vy, vz, mass;
   float color[3];
 
@@ -70,8 +68,8 @@ class Ball {
 
 class Paddle {
  public:
-  Paddle(float xPos)
-      : onLeft(xPos < 0), mass(1.0), X(xPos), x(xPos), vx(0.0) {};
+  explicit Paddle(float xPos)
+    : onLeft(xPos < 0), mass(1.0), X(xPos), x(xPos), vx(0.0) {}
 
   void updatePhysics(float dT) {
     x += vx * dT;                        // posision
@@ -165,7 +163,7 @@ void GLAnalyzer3::resizeGL(int w, int h) {
   glFrustum(-0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 4.5f);
 
   // Get the aspect ratio of the screen to draw 'circular' particles
-  float ratio = (float)w / (float)h;
+  float ratio = static_cast<float>(w) / static_cast<float>(h);
   if (ratio >= 1.0) {
     unitX = 0.34 / ratio;
     unitY = 0.34;
@@ -177,7 +175,7 @@ void GLAnalyzer3::resizeGL(int w, int h) {
   // Get current timestamp.
   timeval tv;
   gettimeofday(&tv, nullptr);
-  show.timeStamp = (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
+  show.timeStamp = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
 }
 
 void GLAnalyzer3::paused() { analyze(Scope()); }
@@ -186,7 +184,7 @@ void GLAnalyzer3::analyze(const Scope& s) {
   // compute the dTime since the last call
   timeval tv;
   gettimeofday(&tv, nullptr);
-  double currentTime = (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
+  double currentTime = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
   show.dT = currentTime - show.timeStamp;
   show.timeStamp = currentTime;
 
@@ -200,7 +198,7 @@ void GLAnalyzer3::analyze(const Scope& s) {
       currentEnergy += value;
       if (value > maxValue) maxValue = value;
     }
-    currentEnergy *= 100.0 / (float)bands;
+    currentEnergy *= 100.0 / static_cast<float>(bands);
     // emulate a peak detector: currentEnergy -> peakEnergy (3tau = 30 seconds)
     show.peakEnergy = 1.0 + (show.peakEnergy - 1.0) * exp(-show.dT / 10.0);
     if (currentEnergy > show.peakEnergy) show.peakEnergy = currentEnergy;
@@ -210,8 +208,9 @@ void GLAnalyzer3::analyze(const Scope& s) {
     currentEnergy /= show.peakEnergy;
     frame.dEnergy = currentEnergy - frame.energy;
     frame.energy = currentEnergy;
-  } else
+  } else {
     frame.silence = true;
+  }
 
   // update the frame
   updateGL();
@@ -259,8 +258,10 @@ void GLAnalyzer3::paintGL() {
   if (ballTexture) {
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, ballTexture);
-  } else
+  } else {
     glDisable(GL_TEXTURE_2D);
+  }
+
   glEnable(GL_BLEND);
   Ball* ball = balls.first();
   for (; ball; ball = balls.next()) {

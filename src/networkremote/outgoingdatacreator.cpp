@@ -68,6 +68,16 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   }
 
   CheckEnabledProviders();
+
+  // Setup global search
+  connect(app_->global_search(),
+          SIGNAL(ResultsAvailable(int, SearchProvider::ResultList)),
+          SLOT(ResultsAvailable(int, SearchProvider::ResultList)),
+          Qt::QueuedConnection);
+
+  connect(app_->global_search(),
+          SIGNAL(SearchFinished(int)),
+          SLOT(SearchFinished(int)));
 }
 
 void OutgoingDataCreator::CheckEnabledProviders() {
@@ -142,7 +152,6 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     if (client->isDownloader()) {
       if (client->State() != QTcpSocket::ConnectedState) {
         clients_->removeAt(clients_->indexOf(client));
-        download_queue_.remove(client);
         delete client;
       }
       continue;
@@ -569,224 +578,6 @@ void OutgoingDataCreator::SendLyrics(int id,
   results_.take(id);
 }
 
-void OutgoingDataCreator::SendSongs(
-    const pb::remote::RequestDownloadSongs& request, RemoteClient* client) {
-
-  if (!download_queue_.contains(client)) {
-    download_queue_.insert(client, QQueue<DownloadItem>());
-  }
-
-  switch (request.download_item()) {
-    case pb::remote::CurrentItem: {
-      DownloadItem item(current_song_, 1, 1);
-      download_queue_[client].append(item);
-      break;
-    }
-    case pb::remote::ItemAlbum:
-      SendAlbum(client, current_song_);
-      break;
-    case pb::remote::APlaylist:
-      SendPlaylist(client, request.playlist_id());
-      break;
-    case pb::remote::Urls:
-      SendUrls(client, request);
-      break;
-    default:
-      break;
-  }
-
-  // Send total file size & file count
-  SendTotalFileSize(client);
-
-  // Send first file
-  OfferNextSong(client);
-}
-
-void OutgoingDataCreator::SendTotalFileSize(RemoteClient *client) {
-  if (!download_queue_.contains(client)) return;
-
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::DOWNLOAD_TOTAL_SIZE);
-
-  pb::remote::ResponseDownloadTotalSize* response =
-      msg.mutable_response_download_total_size();
-
-  response->set_file_count(download_queue_[client].size());
-
-  int total = 0;
-  for (DownloadItem item : download_queue_[client]) {
-    total += item.song_.filesize();
-  }
-
-  response->set_total_size(total);
-
-  client->SendData(&msg);
-}
-
-void OutgoingDataCreator::OfferNextSong(RemoteClient* client) {
-  if (!download_queue_.contains(client)) return;
-
-  pb::remote::Message msg;
-
-  if (download_queue_.value(client).isEmpty()) {
-    // We sent all songs, tell the client the queue is empty
-    msg.set_type(pb::remote::DOWNLOAD_QUEUE_EMPTY);
-  } else {
-    // Get the item and send the single song
-    DownloadItem item = download_queue_[client].head();
-
-    msg.set_type(pb::remote::SONG_FILE_CHUNK);
-    pb::remote::ResponseSongFileChunk* chunk =
-        msg.mutable_response_song_file_chunk();
-
-    // Song offer is chunk no 0
-    chunk->set_chunk_count(0);
-    chunk->set_chunk_number(0);
-    chunk->set_file_count(item.song_count_);
-    chunk->set_file_number(item.song_no_);
-
-    CreateSong(item.song_, QImage(), -1, chunk->mutable_song_metadata());
-  }
-
-  client->SendData(&msg);
-}
-
-void OutgoingDataCreator::ResponseSongOffer(RemoteClient* client,
-                                            bool accepted) {
-  if (!download_queue_.contains(client)) return;
-
-  if (download_queue_.value(client).isEmpty()) return;
-
-  // Get the item and send the single song
-  DownloadItem item = download_queue_[client].dequeue();
-  if (accepted)
-    SendSingleSong(client, item.song_, item.song_no_, item.song_count_);
-
-  // And offer the next song
-  OfferNextSong(client);
-}
-
-void OutgoingDataCreator::SendSingleSong(RemoteClient* client, const Song& song,
-                                         int song_no, int song_count) {
-  // Only local files!!!
-  if (!(song.url().scheme() == "file")) return;
-
-  // Open the file
-  QFile file(song.url().toLocalFile());
-
-  // Get sha1 for file
-  QByteArray sha1 = Utilities::Sha1File(file).toHex();
-  qLog(Debug) << "sha1 for file" << song.url().toLocalFile() << "=" << sha1;
-
-  file.open(QIODevice::ReadOnly);
-
-  QByteArray data;
-  pb::remote::Message msg;
-  pb::remote::ResponseSongFileChunk* chunk =
-      msg.mutable_response_song_file_chunk();
-  msg.set_type(pb::remote::SONG_FILE_CHUNK);
-
-  QImage null_image;
-
-  // Calculate the number of chunks
-  int chunk_count = qRound((file.size() / kFileChunkSize) + 0.5);
-  int chunk_number = 1;
-
-  while (!file.atEnd()) {
-    // Read file chunk
-    data = file.read(kFileChunkSize);
-
-    // Set chunk data
-    chunk->set_chunk_count(chunk_count);
-    chunk->set_chunk_number(chunk_number);
-    chunk->set_file_count(song_count);
-    chunk->set_file_number(song_no);
-    chunk->set_size(file.size());
-    chunk->set_data(data.data(), data.size());
-    chunk->set_file_hash(sha1.data(), sha1.size());
-
-    // On the first chunk send the metadata, so the client knows
-    // what file it receives.
-    if (chunk_number == 1) {
-      int i = app_->playlist_manager()->active()->current_row();
-      CreateSong(
-          song, null_image, i,
-          msg.mutable_response_song_file_chunk()->mutable_song_metadata());
-    }
-
-    // Send data directly to the client
-    client->SendData(&msg);
-
-    // Clear working data
-    chunk->Clear();
-    data.clear();
-
-    chunk_number++;
-  }
-
-  file.close();
-}
-
-void OutgoingDataCreator::SendAlbum(RemoteClient* client, const Song& song) {
-  // No streams!
-  if (song.url().scheme() != "file") return;
-
-  SongList album = app_->library_backend()->GetSongsByAlbum(song.album());
-
-  for (Song s : album) {
-    DownloadItem item(s, album.indexOf(s) + 1, album.size());
-    download_queue_[client].append(item);
-  }
-}
-
-void OutgoingDataCreator::SendPlaylist(RemoteClient* client, int playlist_id) {
-  Playlist* playlist = app_->playlist_manager()->playlist(playlist_id);
-  if (!playlist) {
-    qLog(Info) << "Could not find playlist with id = " << playlist_id;
-    return;
-  }
-  SongList song_list = playlist->GetAllSongs();
-
-  // Count the local songs
-  int count = 0;
-  for (Song s : song_list) {
-    if (s.url().scheme() == "file") {
-      count++;
-    }
-  }
-
-  for (Song s : song_list) {
-    // Only local files!
-    if (s.url().scheme() == "file") {
-      DownloadItem item(s, song_list.indexOf(s) + 1, count);
-      download_queue_[client].append(item);
-    }
-  }
-}
-
-void OutgoingDataCreator::SendUrls(RemoteClient *client,
-                                   const pb::remote::RequestDownloadSongs &request) {
-  SongList song_list;
-
-  // First gather all valid songs
-  for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
-    std::string s = *it;
-    QUrl url = QUrl(QStringFromStdString(s));
-
-    Song song = app_->library_backend()->GetSongByUrl(url);
-
-    if (song.is_valid() && song.url().scheme() == "file") {
-      song_list.append(song);
-    }
-  }
-
-  // Then send them to Clementine Remote
-  for (Song s : song_list) {
-    DownloadItem item(s, song_list.indexOf(s) + 1, song_list.count());
-    download_queue_[client].append(item);
-  }
-}
-
 void OutgoingDataCreator::SendLibrary(RemoteClient* client) {
   // Get a temporary file name
   QString temp_file_name = Utilities::GetTemporaryFileName();
@@ -859,4 +650,38 @@ void OutgoingDataCreator::SendKitten(const QImage& kitten) {
     current_image_ = kitten;
     SendSongMetadata();
   }
+}
+
+void OutgoingDataCreator::DoGlobalSearch(const QString &query, RemoteClient *client) {
+  int id = app_->global_search()->SearchAsync(query);
+
+  GlobalSearchRequest request(id, query, client);
+  global_search_result_map_.insert(id, request);
+}
+
+void OutgoingDataCreator::ResultsAvailable(int id, const SearchProvider::ResultList& results) {
+  if (!global_search_result_map_.contains(id)) return;
+
+  GlobalSearchRequest search_request = global_search_result_map_.value(id);
+  RemoteClient* client = search_request.client_;
+  QImage null_img;
+
+  pb::remote::Message msg;
+  pb::remote::ResponseGlobalSearch* response = msg.mutable_response_global_search();
+
+  msg.set_type(pb::remote::GLOBAL_SEARCH_RESULT);
+  response->set_id(search_request.id_);
+  response->set_query(DataCommaSizeFromQString(search_request.query_));
+  response->set_search_provider(DataCommaSizeFromQString(results.first().provider_->name()));
+
+  for (const SearchProvider::Result& result : results) {
+    pb::remote::SongMetadata* pb_song = response->add_song_metadata();
+    CreateSong(result.metadata_, null_img, 0, pb_song);
+  }
+
+  client->SendData(&msg);
+}
+
+void OutgoingDataCreator::SearchFinished(int id) {
+  global_search_result_map_.remove(id);
 }

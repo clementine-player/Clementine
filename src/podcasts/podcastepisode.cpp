@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012-2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof A. Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -179,6 +181,14 @@ Song PodcastEpisode::ToSong(const Podcast& podcast) const {
   ret.set_length_nanosec(kNsecPerSec * duration_secs());
   ret.set_year(publication_date().date().year());
   ret.set_comment(description());
+  ret.set_id(database_id());
+  ret.set_ctime(publication_date().toTime_t());
+
+  if (listened()) {
+    ret.set_mtime(listened_date().toTime_t());
+  } else {
+    ret.set_mtime(publication_date().toTime_t());
+  }
 
   if (ret.length_nanosec() < 0) {
     ret.set_length_nanosec(-1);

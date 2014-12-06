@@ -42,7 +42,7 @@ const int DigitallyImportedServiceBase::kStreamsCacheDurationSecs =
 DigitallyImportedServiceBase::DigitallyImportedServiceBase(
     const QString& name, const QString& description, const QUrl& homepage_url,
     const QIcon& icon, const QString& api_service_name, Application* app,
-    InternetModel* model, QObject* parent)
+    InternetModel* model, bool has_premium, QObject* parent)
     : InternetService(name, app, model, parent),
       homepage_url_(homepage_url),
       icon_(icon),
@@ -52,6 +52,7 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
       url_handler_(new DigitallyImportedUrlHandler(app, this)),
       basic_audio_type_(1),
       premium_audio_type_(2),
+      has_premium_(has_premium),
       root_(nullptr),
       saved_channels_(kSettingsGroup, api_service_name,
                       kStreamsCacheDurationSecs),
@@ -183,7 +184,7 @@ void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
 }
 
 bool DigitallyImportedServiceBase::is_premium_account() const {
-  return !listen_hash_.isEmpty();
+  return has_premium_ && !listen_hash_.isEmpty();
 }
 
 void DigitallyImportedServiceBase::LoadPlaylistFinished(QNetworkReply* reply) {
@@ -238,24 +239,26 @@ DigitallyImportedService::DigitallyImportedService(Application* app,
     : DigitallyImportedServiceBase("DigitallyImported", "Digitally Imported",
                                    QUrl("http://www.di.fm"),
                                    QIcon(":/providers/digitallyimported.png"),
-                                   "di", app, model, parent) {}
+                                   "di", app, model, true, parent) {}
 
 SkyFmService::SkyFmService(Application* app, InternetModel* model,
                            QObject* parent)
     : DigitallyImportedServiceBase(
           "SKY.fm", "SKY.fm", QUrl("http://www.sky.fm"),
-          QIcon(":/providers/skyfm.png"), "sky", app, model, parent) {}
+          QIcon(":/providers/skyfm.png"), "sky", app, model, true, parent) {}
 
 JazzRadioService::JazzRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
     : DigitallyImportedServiceBase(
           "JazzRadio", "JAZZRADIO.com", QUrl("http://www.jazzradio.com"),
-          QIcon(":/providers/jazzradio.png"), "jazzradio", app, model, parent) {
+          QIcon(":/providers/jazzradio.png"), "jazzradio", app, model, true,
+          parent) {
 }
 
 RockRadioService::RockRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
     : DigitallyImportedServiceBase(
           "RockRadio", "ROCKRADIO.com", QUrl("http://www.rockradio.com"),
-          QIcon(":/providers/rockradio.png"), "rockradio", app, model, parent) {
+          QIcon(":/providers/rockradio.png"), "rockradio", app, model, false,
+          parent) {
 }

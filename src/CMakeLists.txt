@@ -78,6 +78,7 @@ set(SOURCES
   analyzers/rainbowdashanalyzer.cpp
   analyzers/sonogram.cpp
   analyzers/turbine.cpp
+  analyzers/fht.cpp
 
   core/appearance.cpp
   core/application.cpp
@@ -88,7 +89,6 @@ set(SOURCES
   core/deletefiles.cpp
   core/filesystemmusicstorage.cpp
   core/filesystemwatcherinterface.cpp
-  core/fht.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
@@ -183,6 +183,7 @@ set(SOURCES
   internet/internetmodel.cpp
   internet/internetplaylistitem.cpp
   internet/internetservice.cpp
+  internet/internetshowsettingspage.cpp
   internet/internetview.cpp
   internet/internetviewcontainer.cpp
   internet/jamendodynamicplaylist.cpp
@@ -232,6 +233,7 @@ set(SOURCES
   networkremote/networkremotehelper.cpp
   networkremote/outgoingdatacreator.cpp
   networkremote/remoteclient.cpp
+  networkremote/songsender.cpp
   networkremote/zeroconf.cpp
 
   playlist/dynamicplaylistcontrols.cpp
@@ -247,6 +249,7 @@ set(SOURCES
   playlist/playlistlistmodel.cpp
   playlist/playlistlistview.cpp
   playlist/playlistmanager.cpp
+  playlist/playlistsaveoptionsdialog.cpp
   playlist/playlistsequence.cpp
   playlist/playlisttabbar.cpp
   playlist/playlistundocommands.cpp
@@ -487,6 +490,7 @@ set(HEADERS
   internet/internetmimedata.h
   internet/internetmodel.h
   internet/internetservice.h
+  internet/internetshowsettingspage.h
   internet/internetsongmimedata.h
   internet/internetview.h
   internet/internetviewcontainer.h
@@ -531,6 +535,7 @@ set(HEADERS
   networkremote/incomingdataparser.h
   networkremote/outgoingdatacreator.h
   networkremote/remoteclient.h
+  networkremote/songsender.h
 
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h
@@ -544,6 +549,7 @@ set(HEADERS
   playlist/playlistlistmodel.h
   playlist/playlistlistview.h
   playlist/playlistmanager.h
+  playlist/playlistsaveoptionsdialog.h
   playlist/playlistsequence.h
   playlist/playlisttabbar.h
   playlist/playlistview.h
@@ -692,6 +698,7 @@ set(UI
   internet/digitallyimportedsettingspage.ui
   internet/groovesharksettingspage.ui
   internet/icecastfilterwidget.ui
+  internet/internetshowsettingspage.ui
   internet/internetviewcontainer.ui
   internet/magnatunedownloaddialog.ui
   internet/magnatunesettingspage.ui
@@ -707,6 +714,7 @@ set(UI
 
   playlist/dynamicplaylistcontrols.ui
   playlist/playlistcontainer.ui
+  playlist/playlistsaveoptionsdialog.ui
   playlist/playlistlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
@@ -1031,10 +1039,12 @@ optional_source(HAVE_AUDIOCD
   SOURCES
     devices/cddadevice.cpp
     devices/cddalister.cpp
+    devices/cddasongloader.cpp
     ui/ripcd.cpp
   HEADERS
     devices/cddadevice.h
     devices/cddalister.h
+    devices/cddasongloader.h
     ui/ripcd.h
   UI
     ui/ripcd.ui

@@ -68,7 +68,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       buffering_(false),
       mono_playback_(false),
       end_offset_nanosec_(-1),
-      spotify_offset_(0),
       next_beginning_offset_nanosec_(-1),
       next_end_offset_nanosec_(-1),
       ignore_next_seek_(false),
@@ -96,19 +95,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   }
 
   for (int i = 0; i < kEqBandCount; ++i) eq_band_gains_ << 0;
-
-  // FIXME Currently useless Spotify hack: we currently don't know what to do
-  // when the seek is completed. We should flush the current buffers, but see
-  // comments in SpotifySeekCompleted for why that doesn't work.
-  // If we fix and reactivate this code, we will have another problem though:
-  // calling server() try to login the user. If the user doesn't use Spotify, it
-  // will receive an error message. We should have a lightweight version of
-  // server() that just return it (or NULL) without trying to create it IMO to
-  // avoid this issue.
-  //if (InternetModel::Service<SpotifyService>()->IsBlobInstalled()) {
-  //  connect(InternetModel::Service<SpotifyService>()->server(), SIGNAL(SeekCompleted()),
-  //      SLOT(SpotifySeekCompleted()));
-  //}
 }
 
 void GstEnginePipeline::set_output_device(const QString& sink,
@@ -184,7 +170,6 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
     // Tell spotify to start sending data to us.
     InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(
         url.toString(), port);
-    spotify_offset_ = 0;
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
@@ -237,6 +222,8 @@ bool GstEnginePipeline::Init() {
   //   tee2 ! audio_queue ! equalizer_preamp ! equalizer ! volume ! audioscale
   //        ! convert ! audiosink
 
+  gst_segment_init(&last_decodebin_segment_, GST_FORMAT_TIME);
+
   // Audio bin
   audiobin_ = gst_bin_new("audiobin");
   gst_bin_add(GST_BIN(pipeline_), audiobin_);
@@ -248,25 +235,20 @@ bool GstEnginePipeline::Init() {
       !device_.toString().isEmpty()) {
     switch (device_.type()) {
       case QVariant::Int:
-        g_object_set(G_OBJECT(audiosink_),
-                     "device", device_.toInt(),
-                     nullptr);
+        g_object_set(G_OBJECT(audiosink_), "device", device_.toInt(), nullptr);
         break;
       case QVariant::String:
-        g_object_set(G_OBJECT(audiosink_),
-                     "device", device_.toString().toUtf8().constData(),
-                     nullptr);
+        g_object_set(G_OBJECT(audiosink_), "device",
+                     device_.toString().toUtf8().constData(), nullptr);
         break;
 
-      #ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
       case QVariant::ByteArray: {
         GUID guid = QUuid(device_.toByteArray());
-        g_object_set(G_OBJECT(audiosink_),
-                     "device", &guid,
-                     nullptr);
+        g_object_set(G_OBJECT(audiosink_), "device", &guid, nullptr);
         break;
       }
-      #endif  // Q_OS_WIN32
+#endif  // Q_OS_WIN32
 
       default:
         qLog(Warning) << "Unknown device type" << device_;
@@ -335,8 +317,8 @@ bool GstEnginePipeline::Init() {
   // We do it here because we want pre-equalized and pre-volume samples
   // so that our visualization are not be affected by them.
   pad = gst_element_get_static_pad(event_probe, "src");
-  gst_pad_add_probe(
-      pad, GST_PAD_PROBE_TYPE_EVENT_UPSTREAM, &EventHandoffCallback, this, NULL);
+  gst_pad_add_probe(pad, GST_PAD_PROBE_TYPE_EVENT_UPSTREAM,
+                    &EventHandoffCallback, this, NULL);
   gst_object_unref(pad);
 
   // Configure the fakesink properly
@@ -347,8 +329,8 @@ bool GstEnginePipeline::Init() {
 
   int last_band_frequency = 0;
   for (int i = 0; i < kEqBandCount; ++i) {
-    GstObject* band = GST_OBJECT(gst_child_proxy_get_child_by_index(
-        GST_CHILD_PROXY(equalizer_), i));
+    GstObject* band = GST_OBJECT(
+        gst_child_proxy_get_child_by_index(GST_CHILD_PROXY(equalizer_), i));
 
     const float frequency = kEqBandFrequencies[i];
     const float bandwidth = frequency - last_band_frequency;
@@ -382,9 +364,8 @@ bool GstEnginePipeline::Init() {
 
   // Link the elements with special caps
   // The scope path through the tee gets 16-bit ints.
-  GstCaps* caps16 = gst_caps_new_simple ("audio/x-raw",
-                                         "format", G_TYPE_STRING, "S16LE",
-                                         NULL);
+  GstCaps* caps16 = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
+                                        "S16LE", NULL);
   gst_element_link_filtered(probe_converter, probe_sink, caps16);
   gst_caps_unref(caps16);
 
@@ -407,8 +388,7 @@ bool GstEnginePipeline::Init() {
 
   // Add probes and handlers.
   gst_pad_add_probe(gst_element_get_static_pad(probe_converter, "src"),
-                    GST_PAD_PROBE_TYPE_BUFFER,
-                    HandoffCallback, this, nullptr);
+                    GST_PAD_PROBE_TYPE_BUFFER, HandoffCallback, this, nullptr);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
                            BusCallbackSync, this, nullptr);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
@@ -469,9 +449,8 @@ bool GstEnginePipeline::InitFromUrl(const QUrl& url, qint64 end_nanosec) {
 
 GstEnginePipeline::~GstEnginePipeline() {
   if (pipeline_) {
-    gst_bus_set_sync_handler(
-        gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
-        nullptr, nullptr, nullptr);
+    gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
+                             nullptr, nullptr, nullptr);
     g_source_remove(bus_cb_id_);
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(GST_OBJECT(pipeline_));
@@ -684,6 +663,13 @@ void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
     return;
   }
 
+  // If we are loading new next track, we don't have to pause the playback.
+  // The buffering is for the next track and not the current one.
+  if (emit_track_ended_on_stream_start_) {
+    qLog(Debug) << "Buffering next track";
+    return;
+  }
+
   int percent = 0;
   gst_message_parse_buffering(msg, &percent);
 
@@ -710,6 +696,7 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
   GstPad* const audiopad =
       gst_element_get_static_pad(instance->audiobin_, "sink");
 
+  // Link decodebin's sink pad to audiobin's src pad.
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Warning) << instance->id()
                   << "audiopad is already linked, unlinking old pad";
@@ -717,8 +704,23 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
   }
 
   gst_pad_link(pad, audiopad);
-
   gst_object_unref(audiopad);
+
+  // Offset the timestamps on all the buffers coming out of the decodebin so
+  // they line up exactly with the end of the last buffer from the old
+  // decodebin.
+  // "Running time" is the time since the last flushing seek.
+  GstClockTime running_time = gst_segment_to_running_time(
+      &instance->last_decodebin_segment_, GST_FORMAT_TIME,
+      instance->last_decodebin_segment_.position);
+  gst_pad_set_offset(pad, running_time);
+
+  // Add a probe to the pad so we can update last_decodebin_segment_.
+  gst_pad_add_probe(
+      pad, static_cast<GstPadProbeType>(GST_PAD_PROBE_TYPE_BUFFER |
+                                        GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM |
+                                        GST_PAD_PROBE_TYPE_EVENT_FLUSH),
+      DecodebinProbe, instance, nullptr);
 
   instance->pipeline_is_connected_ = true;
   if (instance->pending_seek_nanosec_ != -1 &&
@@ -726,6 +728,47 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
     QMetaObject::invokeMethod(instance, "Seek", Qt::QueuedConnection,
                               Q_ARG(qint64, instance->pending_seek_nanosec_));
   }
+}
+
+GstPadProbeReturn GstEnginePipeline::DecodebinProbe(GstPad* pad,
+                                                    GstPadProbeInfo* info,
+                                                    gpointer data) {
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(data);
+  const GstPadProbeType info_type = GST_PAD_PROBE_INFO_TYPE(info);
+
+  if (info_type & GST_PAD_PROBE_TYPE_BUFFER) {
+    // The decodebin produced a buffer.  Record its end time, so we can offset
+    // the buffers produced by the next decodebin when transitioning to the next
+    // song.
+    GstBuffer* buffer = GST_PAD_PROBE_INFO_BUFFER(info);
+
+    GstClockTime timestamp = GST_BUFFER_TIMESTAMP(buffer);
+    GstClockTime duration = GST_BUFFER_DURATION(buffer);
+    if (timestamp == GST_CLOCK_TIME_NONE) {
+      timestamp = instance->last_decodebin_segment_.position;
+    }
+
+    if (duration != GST_CLOCK_TIME_NONE) {
+      timestamp += duration;
+    }
+
+    instance->last_decodebin_segment_.position = timestamp;
+  } else if (info_type & GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM) {
+    GstEvent* event = GST_PAD_PROBE_INFO_EVENT(info);
+    GstEventType event_type = GST_EVENT_TYPE(event);
+
+    if (event_type == GST_EVENT_SEGMENT) {
+      // A new segment started, we need to save this to calculate running time
+      // offsets later.
+      gst_event_copy_segment(event, &instance->last_decodebin_segment_);
+    } else if (event_type == GST_EVENT_FLUSH_START) {
+      // A flushing seek resets the running time to 0, so remove any offset
+      // we set on this pad before.
+      gst_pad_set_offset(pad, 0);
+    }
+  }
+
+  return GST_PAD_PROBE_OK;
 }
 
 GstPadProbeReturn GstEnginePipeline::HandoffCallback(GstPad*,
@@ -909,10 +952,6 @@ qint64 GstEnginePipeline::position() const {
   gint64 value = 0;
   gst_element_query_position(pipeline_, GST_FORMAT_TIME, &value);
 
-  if (url_.scheme() == "spotify") {
-    value += spotify_offset_;
-  }
-
   return value;
 }
 
@@ -934,21 +973,22 @@ GstState GstEnginePipeline::state() const {
 
 QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
   if (url_.scheme() == "spotify" && !buffering_) {
-      const GstState current_state = this->state();
+    const GstState current_state = this->state();
 
-      if (state == GST_STATE_PAUSED && current_state == GST_STATE_PLAYING) {
-        SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+    if (state == GST_STATE_PAUSED && current_state == GST_STATE_PLAYING) {
+      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
-        // Need to schedule this in the spotify service's thread
-        QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
-                                  Q_ARG(bool, true));
-      } else if (state == GST_STATE_PLAYING && current_state == GST_STATE_PAUSED) {
-        SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+      // Need to schedule this in the spotify service's thread
+      QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
+                                Q_ARG(bool, true));
+    } else if (state == GST_STATE_PLAYING &&
+               current_state == GST_STATE_PAUSED) {
+      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
-        // Need to schedule this in the spotify service's thread
-        QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
-                                  Q_ARG(bool, false));
-      }
+      // Need to schedule this in the spotify service's thread
+      QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
+                                Q_ARG(bool, false));
+    }
   }
   return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
       &set_state_threadpool_, &gst_element_set_state, pipeline_, state);
@@ -960,17 +1000,6 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
     return true;
   }
 
-  if (url_.scheme() == "spotify" && !buffering_) {
-    SpotifyService* spotify = InternetModel::Service<SpotifyService>();
-    // Need to schedule this in the spotify service's thread
-    QMetaObject::invokeMethod(spotify, "Seek", Qt::QueuedConnection,
-                              Q_ARG(qint64, nanosec));
-    // Need to reset spotify_offset_ to get the real pipeline position, as it is
-    // used in position()
-    spotify_offset_ = nanosec - position();
-    return true;
-  }
-
   if (!pipeline_is_connected_ || !pipeline_is_initialised_) {
     pending_seek_nanosec_ = nanosec;
     return true;
@@ -979,16 +1008,6 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
   pending_seek_nanosec_ = -1;
   return gst_element_seek_simple(pipeline_, GST_FORMAT_TIME,
                                  GST_SEEK_FLAG_FLUSH, nanosec);
-}
-
-void GstEnginePipeline::SpotifySeekCompleted() {
-  qLog(Debug) << "Spotify Seek completed";
-  // FIXME: we should clear buffers to start playing data from seek point right
-  // now (currently there is small delay) but I didn't managed to tell gstreamer
-  // to do this without breaking the streaming completely...
-  // Funny thing to notice: for me the delay varies when changing buffer size,
-  // but a larger buffer doesn't necessary increase the delay.
-  // FIXME: also, this method is never called currently (see constructor)
 }
 
 void GstEnginePipeline::SetEqualizerEnabled(bool enabled) {

@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,14 +17,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMMUSICSTORAGE_H
-#define FILESYSTEMMUSICSTORAGE_H
+#ifndef CORE_FILESYSTEMMUSICSTORAGE_H_
+#define CORE_FILESYSTEMMUSICSTORAGE_H_
 
 #include "musicstorage.h"
 
 class FilesystemMusicStorage : public virtual MusicStorage {
  public:
-  FilesystemMusicStorage(const QString& root);
+  explicit FilesystemMusicStorage(const QString& root);
   ~FilesystemMusicStorage() {}
 
   QString LocalPath() const { return root_; }
@@ -34,4 +36,4 @@ class FilesystemMusicStorage : public virtual MusicStorage {
   QString root_;
 };
 
-#endif  // FILESYSTEMMUSICSTORAGE_H
+#endif  // CORE_FILESYSTEMMUSICSTORAGE_H_

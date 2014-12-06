@@ -1,22 +1,24 @@
-// FHT - Fast Hartley Transform Class
-//
-// Copyright (C) 2004  Melchior FRANZ - mfranz@kde.org
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License as
-// published by the Free Software Foundation; either version 2 of the
-// License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, 51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA
-//
-// $Id$
+/* This file is part of Clementine.
+   Copyright 2004, Melchior FRANZ <mfranz@kde.org>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Melchior FRANZ  <mfranz@kde.org>  2004
+*/
 
 #include <math.h>
 #include <string.h>
@@ -58,11 +60,11 @@ void FHT::makeCasTable(void) {
 }
 
 float* FHT::copy(float* d, float* s) {
-  return (float*)memcpy(d, s, m_num * sizeof(float));
+  return static_cast<float*>(memcpy(d, s, m_num * sizeof(float)));
 }
 
 float* FHT::clear(float* d) {
-  return (float*)memset(d, 0, m_num * sizeof(float));
+  return static_cast<float*>(memset(d, 0, m_num * sizeof(float)));
 }
 
 void FHT::scale(float* p, float d) {
@@ -77,9 +79,9 @@ void FHT::logSpectrum(float* out, float* p) {
   int n = m_num / 2, i, j, k, *r;
   if (!m_log) {
     m_log = new int[n];
-    float f = n / log10((double)n);
+    float f = n / log10(static_cast<double>(n));
     for (i = 0, r = m_log; i < n; i++, r++) {
-      j = int(rint(log10(i + 1.0) * f));
+      j = static_cast<int>(rint(log10(i + 1.0) * f));
       *r = j >= n ? n - 1 : j;
     }
   }
@@ -87,9 +89,9 @@ void FHT::logSpectrum(float* out, float* p) {
   *out++ = *p = *p / 100;
   for (k = i = 1, r = m_log; i < n; i++) {
     j = *r++;
-    if (i == j)
+    if (i == j) {
       *out++ = p[i];
-    else {
+    } else {
       float base = p[k - 1];
       float step = (p[j] - base) / (j - (k - 1));
       for (float corr = 0; k <= j; k++, corr += step) *out++ = base + corr;
@@ -108,7 +110,8 @@ void FHT::semiLogSpectrum(float* p) {
 
 void FHT::spectrum(float* p) {
   power2(p);
-  for (int i = 0; i < (m_num / 2); i++, p++) *p = (float)sqrt(*p * .5);
+  for (int i = 0; i < (m_num / 2); i++, p++)
+    *p = static_cast<float>(sqrt(*p * .5));
 }
 
 void FHT::power(float* p) {

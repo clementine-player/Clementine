@@ -47,7 +47,7 @@ class Transcoder : public QObject {
   Q_OBJECT
 
  public:
-  Transcoder(QObject* parent = nullptr);
+  Transcoder(QObject* parent = nullptr, const QString& settings_postfix = "");
 
   static TranscoderPreset PresetForFileType(Song::FileType type);
   static QList<TranscoderPreset> GetAllPresets();
@@ -58,6 +58,7 @@ class Transcoder : public QObject {
 
   void AddJob(const QString& input, const TranscoderPreset& preset,
               const QString& output = QString());
+  void AddTemporaryJob(const QString& input, const TranscoderPreset& preset);
 
   QMap<QString, float> GetProgress() const;
   int QueuedJobsCount() const { return queued_jobs_.count(); }
@@ -67,7 +68,7 @@ class Transcoder : public QObject {
   void Cancel();
 
 signals:
-  void JobComplete(const QString& filename, bool success);
+  void JobComplete(const QString& input, const QString& output, bool success);
   void LogLine(const QString& message);
   void AllJobsComplete();
 
@@ -89,8 +90,7 @@ signals:
         : job_(job),
           parent_(parent),
           pipeline_(nullptr),
-          convert_element_(nullptr),
-          bus_callback_id_(0) {}
+          convert_element_(nullptr) {}
     ~JobState();
 
     void PostFinished(bool success);
@@ -100,7 +100,6 @@ signals:
     Transcoder* parent_;
     GstElement* pipeline_;
     GstElement* convert_element_;
-    int bus_callback_id_;
   };
 
   // Event passed from a GStreamer callback to the Transcoder when a job
@@ -132,8 +131,7 @@ signals:
                                        GstElement* bin = nullptr);
   void SetElementProperties(const QString& name, GObject* element);
 
-  static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
-  static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
+  static void NewPadCallback(GstElement*, GstPad* pad, gpointer data);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
                                          gpointer data);
 
@@ -143,6 +141,7 @@ signals:
   int max_threads_;
   QList<Job> queued_jobs_;
   JobStateList current_jobs_;
+  QString settings_postfix_;
 };
 
 #endif  // TRANSCODER_H

@@ -158,16 +158,19 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
       emit GetLyrics();
       break;
     case pb::remote::DOWNLOAD_SONGS:
-      emit SendSongs(msg.request_download_songs(), client);
+      client->song_sender()->SendSongs(msg.request_download_songs());
       break;
     case pb::remote::SONG_OFFER_RESPONSE:
-      emit ResponseSongOffer(client, msg.response_song_offer().accepted());
+      client->song_sender()->ResponseSongOffer(msg.response_song_offer().accepted());
       break;
     case pb::remote::GET_LIBRARY:
       emit SendLibrary(client);
       break;
     case pb::remote::RATE_SONG:
       RateSong(msg);
+      break;
+    case pb::remote::GLOBAL_SEARCH:
+      GlobalSearch(client, msg);
       break;
     default:
       break;
@@ -290,4 +293,9 @@ void IncomingDataParser::ClosePlaylist(const pb::remote::Message& msg) {
 void IncomingDataParser::RateSong(const pb::remote::Message& msg) {
   double rating = (double)msg.request_rate_song().rating();
   emit RateCurrentSong(rating);
+}
+
+void IncomingDataParser::GlobalSearch(RemoteClient *client, const pb::remote::Message &msg) {
+  emit DoGlobalSearch(QStringFromStdString(msg.request_global_search().query()),
+                      client);
 }

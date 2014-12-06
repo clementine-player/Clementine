@@ -91,7 +91,6 @@ const char* Playlist::kSettingsGroup = "Playlist";
 
 const char* Playlist::kPathType = "path_type";
 const char* Playlist::kWriteMetadata = "write_metadata";
-const char* Playlist::kQuickChangeMenu = "quick_change_menu";
 
 const int Playlist::kUndoStackSize = 20;
 const int Playlist::kUndoItemLimit = 500;
@@ -658,23 +657,26 @@ void Playlist::set_current_row(int i, bool is_stopping) {
   if (dynamic_playlist_ && current_item_index_.isValid()) {
     using smart_playlists::Generator;
 
-    // Move the new item one position ahead of the last item in the history.
-    MoveItemWithoutUndo(current_item_index_.row(), dynamic_history_length());
+    // When advancing to the next track
+    if (i > old_current_item_index.row()) {
+      // Move the new item one position ahead of the last item in the history.
+      MoveItemWithoutUndo(current_item_index_.row(), dynamic_history_length());
 
-    // Compute the number of new items that have to be inserted. This is not
-    // necessarily 1 because the user might have added or removed items
-    // manually. Note that the future excludes the current item.
-    const int count = dynamic_history_length() + 1 +
-                      dynamic_playlist_->GetDynamicFuture() - items_.count();
-    if (count > 0) {
-      InsertDynamicItems(count);
+      // Compute the number of new items that have to be inserted. This is not
+      // necessarily 1 because the user might have added or removed items
+      // manually. Note that the future excludes the current item.
+      const int count = dynamic_history_length() + 1 +
+                        dynamic_playlist_->GetDynamicFuture() - items_.count();
+      if (count > 0) {
+        InsertDynamicItems(count);
+      }
+
+      // Shrink the history, again this is not necessarily by 1, because the
+      // user might have moved items by hand.
+      const int remove_count =
+          dynamic_history_length() - dynamic_playlist_->GetDynamicHistory();
+      if (0 < remove_count) RemoveItemsWithoutUndo(0, remove_count);
     }
-
-    // Shrink the history, again this is not necessarily by 1, because the user
-    // might have moved items by hand.
-    const int remove_count =
-        dynamic_history_length() - dynamic_playlist_->GetDynamicHistory();
-    if (0 < remove_count) RemoveItemsWithoutUndo(0, remove_count);
 
     // the above actions make all commands on the undo stack invalid, so we
     // better clear it.
@@ -1083,10 +1085,11 @@ void Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos,
                                          bool play_now, bool enqueue) {
   PlaylistItemList items;
   for (const Song& song : songs) {
-    if (song.id() == -1)
-      items << PlaylistItemPtr(new SongPlaylistItem(song));
-    else
+    if (song.is_library_song()) {
       items << PlaylistItemPtr(new LibraryPlaylistItem(song));
+    } else {
+      items << PlaylistItemPtr(new SongPlaylistItem(song));
+    }
   }
   InsertItems(items, pos, play_now, enqueue);
 }
@@ -1152,13 +1155,15 @@ void Playlist::UpdateItems(const SongList& songs) {
       if (item->Metadata().url() == song.url() &&
           (item->Metadata().filetype() == Song::Type_Unknown ||
            // Stream may change and may need to be updated too
-           item->Metadata().filetype() == Song::Type_Stream)) {
+           item->Metadata().filetype() == Song::Type_Stream ||
+           // And CD tracks as well (tags are loaded in a second step)
+           item->Metadata().filetype() == Song::Type_Cdda)) {
         PlaylistItemPtr new_item;
-        if (song.id() == -1) {
-          new_item = PlaylistItemPtr(new SongPlaylistItem(song));
-        } else {
+        if (song.is_library_song()) {
           new_item = PlaylistItemPtr(new LibraryPlaylistItem(song));
           library_items_by_id_.insertMulti(song.id(), new_item);
+        } else {
+          new_item = PlaylistItemPtr(new SongPlaylistItem(song));
         }
         items_[i] = new_item;
         emit dataChanged(index(i, 0), index(i, ColumnCount - 1));

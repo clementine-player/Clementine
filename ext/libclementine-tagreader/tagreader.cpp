@@ -723,6 +723,14 @@ bool TagReader::SaveSongRatingToFile(
   if (filename.isNull()) return false;
 
   qLog(Debug) << "Saving song rating tags to" << filename;
+  if (song.rating() < 0) {
+    // The FMPS spec says unrated == "tag not present". For us, no rating
+    // results in rating being -1, so don't write anything in that case.
+    // Actually, we should also remove tag set in this case, but in
+    // Clementine it is not possible to unset rating i.e. make a song "unrated".
+    qLog(Debug) << "Unrated: do nothing";
+    return true;
+  }
 
   std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
 

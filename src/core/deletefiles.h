@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DELETEFILES_H
-#define DELETEFILES_H
+#ifndef CORE_DELETEFILES_H_
+#define CORE_DELETEFILES_H_
 
 #include <memory>
 
@@ -39,7 +41,7 @@ class DeleteFiles : public QObject {
   void Start(const SongList& songs);
   void Start(const QStringList& filenames);
 
-signals:
+ signals:
   void Finished(const SongList& songs_with_errors);
 
  private slots:
@@ -61,4 +63,4 @@ signals:
   SongList songs_with_errors_;
 };
 
-#endif  // DELETEFILES_H
+#endif  // CORE_DELETEFILES_H_

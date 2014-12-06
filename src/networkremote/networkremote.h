@@ -17,6 +17,7 @@ class NetworkRemote : public QObject {
  public:
   static const char* kSettingsGroup;
   static const quint16 kDefaultServerPort;
+  static const char* kTranscoderSettingPostfix;
 
   explicit NetworkRemote(Application* app, QObject* parent = nullptr);
   ~NetworkRemote();

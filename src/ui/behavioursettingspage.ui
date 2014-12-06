@@ -266,6 +266,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QRadioButton" name="b_ask_path">
+        <property name="text">
+         <string>Ask when saving</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer_7">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -280,13 +287,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="b_quickchange_menu">
-        <property name="text">
-         <string>Show quick change menu</string>
-        </property>
-       </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="b_write_metadata">

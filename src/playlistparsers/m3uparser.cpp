@@ -104,8 +104,8 @@ bool M3UParser::ParseMetadata(const QString& line,
   return true;
 }
 
-void M3UParser::Save(const SongList& songs, QIODevice* device,
-                     const QDir& dir) const {
+void M3UParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
+                     Playlist::Path path_type) const {
   device->write("#EXTM3U\n");
 
   QSettings s;
@@ -124,7 +124,7 @@ void M3UParser::Save(const SongList& songs, QIODevice* device,
                          .arg(song.title());
       device->write(meta.toUtf8());
     }
-    device->write(URLOrRelativeFilename(song.url(), dir).toUtf8());
+    device->write(URLOrFilename(song.url(), dir, path_type).toUtf8());
     device->write("\n");
   }
 }

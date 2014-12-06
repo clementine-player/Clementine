@@ -1,5 +1,10 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2012-2014, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2014, Alexander Bikadorov <abiku@cs.tu-berlin.de>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +20,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SONGLOADER_H
-#define SONGLOADER_H
+#ifndef CORE_SONGLOADER_H_
+#define CORE_SONGLOADER_H_
 
 #include <functional>
 #include <memory>
@@ -37,9 +42,11 @@ class ParserBase;
 class Player;
 class PlaylistParser;
 class PodcastParser;
+class CddaSongLoader;
 
 class SongLoader : public QObject {
   Q_OBJECT
+
  public:
   SongLoader(LibraryBackendInterface* library, const Player* player,
              QObject* parent = nullptr);
@@ -72,15 +79,18 @@ class SongLoader : public QObject {
   void LoadMetadataBlocking();
   Result LoadAudioCD();
 
-signals:
+ signals:
+  void AudioCDTracksLoaded();
   void LoadAudioCDFinished(bool success);
   void LoadRemoteFinished();
 
  private slots:
   void Timeout();
   void StopTypefind();
-  void AudioCDTagsLoaded(const QString& artist, const QString& album,
-                         const MusicBrainzClient::ResultList& results);
+#ifdef HAVE_AUDIOCD
+  void AudioCDTracksLoadedSlot(const SongList& songs);
+  void AudioCDTracksTagsLoaded(const SongList& songs);
+#endif  // HAVE_AUDIOCD
 
  private:
   enum State { WaitingForType, WaitingForMagic, WaitingForData, Finished, };
@@ -138,4 +148,4 @@ signals:
   QThreadPool thread_pool_;
 };
 
-#endif  // SONGLOADER_H
+#endif  // CORE_SONGLOADER_H_

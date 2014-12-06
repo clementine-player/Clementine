@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-09-27 21:22+0000\n"
+"PO-Revision-Date: 2014-11-18 10:11+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr " sekúnd"
 msgid " songs"
 msgstr " piesne"
 
-#: internet/vkservice.cpp:145
+#: internet/vkservice.cpp:146
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 piesne)"
@@ -71,17 +71,17 @@ msgstr "%1 (%2 piesne)"
 msgid "%1 albums"
 msgstr "%1 albumov"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dní"
 
-#: core/utilities.cpp:130
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "Pred %1 dňami"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:83
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 na %2"
@@ -91,7 +91,7 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 playlistov (%2)"
 
-#: playlist/playlistmanager.cpp:385
+#: playlist/playlistmanager.cpp:407
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 vybratých z"
@@ -116,7 +116,7 @@ msgstr "nájdených %1 piesní"
 msgid "%1 songs found (showing %2)"
 msgstr "nájdených %1 piesní (zobrazuje sa %2)"
 
-#: playlist/playlistmanager.cpp:391
+#: playlist/playlistmanager.cpp:413
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladieb"
@@ -146,19 +146,19 @@ msgstr "%L1 spolu prehraní"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:205
+#: transcoder/transcodedialog.cpp:208
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n zlyhalo"
 
-#: transcoder/transcodedialog.cpp:200
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n dokončených"
 
-#: transcoder/transcodedialog.cpp:194
+#: transcoder/transcodedialog.cpp:197
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -237,7 +237,7 @@ msgstr "Nástroje"
 msgid "(different across multiple songs)"
 msgstr "(odlišné naprieč mnohými piesňami)"
 
-#: internet/spotifyservice.cpp:423
+#: internet/spotifyservice.cpp:424
 msgid ", by "
 msgstr ", od "
 
@@ -257,11 +257,11 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "1 deň"
 
-#: playlist/playlistmanager.cpp:391
+#: playlist/playlistmanager.cpp:413
 msgid "1 track"
 msgstr "1 skladba"
 
@@ -311,7 +311,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>Toto zapíše hodnotenie piesní a štatistiky do tagov piesní pri všetkých piesňach vo vašej zbierke.</p><p>Toto nie je potrebné, ak bola možnosť &quot;Ukladať hodnotenie piesní a štatistiky do tagov piesní&quot; vždy zapnutá.</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -326,7 +326,7 @@ msgstr "Je vyžadovaný Grooveshark Anywhere účet."
 msgid "A Spotify Premium account is required."
 msgstr "Je vyžadovaný prémium účet na Spotify."
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Klient sa môže pripojiť len vtedy, ak bol zadaný správny kód."
 
@@ -362,7 +362,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:395
+#: core/song.cpp:409
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -387,7 +387,8 @@ msgstr "O Clemetine..."
 msgid "About Qt..."
 msgstr "O Qt.."
 
-#: playlist/playlistcontainer.cpp:55 ../bin/src/ui_behavioursettingspage.h:286
+#: playlist/playlistsaveoptionsdialog.cpp:34
+#: ../bin/src/ui_behavioursettingspage.h:286
 msgid "Absolute"
 msgstr "absolútne"
 
@@ -420,7 +421,7 @@ msgstr "Aktivovať/deaktivovať Wiiremote"
 msgid "Activities stream"
 msgstr "Stream činností"
 
-#: podcasts/addpodcastdialog.cpp:59
+#: podcasts/addpodcastdialog.cpp:61
 msgid "Add Podcast"
 msgstr "Pridať podcast"
 
@@ -436,6 +437,10 @@ msgstr "Pridať nový riadok, ak je to podporované typom upozornení"
 msgid "Add action"
 msgstr "Pridať činnosť"
 
+#: ../bin/src/ui_transcodedialog.h:218
+msgid "Add all tracks from a directory and all its subdirectories"
+msgstr "Pridať všetky skladby z priečinka a všetkých jeho podpriečinkov"
+
 #: internet/savedradio.cpp:106
 msgid "Add another stream..."
 msgstr "Pridať ďalší stream..."
@@ -444,7 +449,7 @@ msgstr "Pridať ďalší stream..."
 msgid "Add directory..."
 msgstr "Pridať priečinok..."
 
-#: ui/mainwindow.cpp:1833
+#: ui/mainwindow.cpp:1828
 msgid "Add file"
 msgstr "Pridať súbor"
 
@@ -460,11 +465,11 @@ msgstr "Pridať súbor(y) na prekódovanie"
 msgid "Add file..."
 msgstr "Pridať súbor..."
 
-#: transcoder/transcodedialog.cpp:215
+#: transcoder/transcodedialog.cpp:218
 msgid "Add files to transcode"
 msgstr "Pridať súbory na transkódovanie"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1860 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:300 ui/mainwindow.cpp:1855 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "Pridať priečinok"
 
@@ -480,7 +485,7 @@ msgstr "Pridať nový priečinok..."
 msgid "Add podcast"
 msgstr "Pridať podcast"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Pridať podcast..."
 
@@ -548,7 +553,7 @@ msgstr "Pridať počet preskočení piesne"
 msgid "Add song title tag"
 msgstr "Pridať tag názvu piesne"
 
-#: internet/vkservice.cpp:314
+#: internet/vkservice.cpp:318
 msgid "Add song to cache"
 msgstr "Pridať pieseň do vyrovnávacej pamäte"
 
@@ -576,19 +581,19 @@ msgstr "Pridať k obľúbeným na Grooveshark"
 msgid "Add to Grooveshark playlists"
 msgstr "Pridať do Grooveshark playlistov"
 
-#: internet/vkservice.cpp:306
+#: internet/vkservice.cpp:310
 msgid "Add to My Music"
 msgstr "Pridať do Moja hudba"
 
-#: internet/spotifyservice.cpp:567
+#: internet/spotifyservice.cpp:568
 msgid "Add to Spotify playlists"
 msgstr "Pridať do Spotify playlistov"
 
-#: ui/mainwindow.cpp:1654
+#: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
 msgstr "Pridať do iného playlistu"
 
-#: internet/vkservice.cpp:292
+#: internet/vkservice.cpp:296
 msgid "Add to bookmarks"
 msgstr "Pridať do záložiek"
 
@@ -600,7 +605,7 @@ msgstr "Pridať do playlistu"
 msgid "Add to the queue"
 msgstr "ju pridá do poradia"
 
-#: internet/vkservice.cpp:322
+#: internet/vkservice.cpp:326
 msgid "Add user/group to bookmarks"
 msgstr "Pridať používateľa/skupinu do záložiek"
 
@@ -608,7 +613,7 @@ msgstr "Pridať používateľa/skupinu do záložiek"
 msgid "Add wiimotedev action"
 msgstr "Pridať wiimotedev činnosť"
 
-#: ../bin/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:215
 msgid "Add..."
 msgstr "Pridať..."
 
@@ -649,13 +654,13 @@ msgstr "Pokročilé zoraďovanie..."
 msgid "After "
 msgstr "Po "
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "Po kopírovaní..."
 
-#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
@@ -666,9 +671,9 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideálna hlasitosť pre všetky skladby)"
 
-#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:691
+#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "Interprét albumu"
 
@@ -680,6 +685,10 @@ msgstr "Obal albumu"
 msgid "Album info on jamendo.com..."
 msgstr "Informácie o albume na jamendo.com..."
 
+#: internet/vkservice.cpp:825
+msgid "Albums"
+msgstr "Albumy"
+
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
 msgstr "Albumy s obalmi"
@@ -688,7 +697,7 @@ msgstr "Albumy s obalmi"
 msgid "Albums without covers"
 msgstr "Albumy bez obalov"
 
-#: ui/mainwindow.cpp:165
+#: ui/mainwindow.cpp:161
 msgid "All Files (*)"
 msgstr "Všetky súbory (*)"
 
@@ -722,11 +731,11 @@ msgstr "DAG Software (Ďanovský Ján), všetkým ostatným prekladateľom"
 msgid "All tracks"
 msgstr "Všetky skladby"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "Povoliť klientu stiahnuť hudbu z tohto počítača."
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "Povoliť sťahovania"
 
@@ -734,7 +743,7 @@ msgstr "Povoliť sťahovania"
 msgid "Allow mid/side encoding"
 msgstr "Povoliť stred/kraj enkódovanie"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Alongside the originals"
 msgstr "Po boku originálov"
 
@@ -783,7 +792,7 @@ msgstr "Zlostný"
 msgid "Appearance"
 msgstr "Vzhľad"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
 msgstr "Pridať súbory/URL adresy do playlistu"
 
@@ -820,16 +829,16 @@ msgid ""
 "the songs of your library?"
 msgstr "Ste si istý, že chcete ukladať štatistiky piesní do súboru piesne pri všetkých piesňach vo vašej zbierke?"
 
-#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "Interprét"
 
-#: ui/mainwindow.cpp:255
+#: ui/mainwindow.cpp:251
 msgid "Artist info"
 msgstr "Interprét"
 
@@ -841,7 +850,12 @@ msgstr "Tagy interpréta"
 msgid "Artist's initial"
 msgstr "Iniciálky interpréta"
 
-#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_behavioursettingspage.h:288
+msgid "Ask when saving"
+msgstr "Opýtať sa pri ukladaní"
+
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Audio formát"
 
@@ -867,7 +881,8 @@ msgstr "Autori"
 msgid "Auto"
 msgstr "Automaticky"
 
-#: playlist/playlistcontainer.cpp:54 ../bin/src/ui_behavioursettingspage.h:285
+#: playlist/playlistsaveoptionsdialog.cpp:32
+#: ../bin/src/ui_behavioursettingspage.h:285
 msgid "Automatic"
 msgstr "Automaticky"
 
@@ -891,11 +906,11 @@ msgstr "Priemerný dátový tok"
 msgid "Average image size"
 msgstr "Priemerná veľkosť obrázku"
 
-#: podcasts/addpodcastdialog.cpp:84
+#: podcasts/addpodcastdialog.cpp:86
 msgid "BBC Podcasts"
 msgstr "Podcasty BBC"
 
-#: playlist/playlist.cpp:1338 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1340 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
@@ -916,7 +931,7 @@ msgstr "Obrázok na pozadí"
 msgid "Background opacity"
 msgstr "Priehľadnosť pozadia"
 
-#: core/database.cpp:640
+#: core/database.cpp:648
 msgid "Backing up database"
 msgstr "Zálohuje sa databáza"
 
@@ -949,12 +964,12 @@ msgstr "Najlepšia"
 msgid "Biography from %1"
 msgstr "Životopis z %1"
 
-#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Bit rate"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -1001,7 +1016,7 @@ msgstr "Prehľadávať..."
 msgid "Buffer duration"
 msgstr "Dĺžka vyrovnávacej pamäte"
 
-#: engines/gstengine.cpp:873
+#: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "Ukladá sa do vyrovnávacej pamäte"
 
@@ -1017,7 +1032,7 @@ msgstr "Tlačidlá"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr "Štandardne Grooveshark radí piesne podľa dátumu pridania"
 
-#: core/song.cpp:401
+#: core/song.cpp:415
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1042,7 +1057,7 @@ msgstr "%1 sa ukladá do vyrovnávacej pamäte"
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: internet/vkservice.cpp:620
+#: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1056,7 +1071,7 @@ msgstr "Zmeniť obal albumu"
 msgid "Change font size..."
 msgstr "Zmeniť veľkosť písma..."
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:73
 msgid "Change repeat mode"
 msgstr "Zmeniť režim opakovania"
 
@@ -1064,11 +1079,11 @@ msgstr "Zmeniť režim opakovania"
 msgid "Change shortcut..."
 msgstr "Zmeniť skratku..."
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:71
 msgid "Change shuffle mode"
 msgstr "Zmeniť režim zamiešavania"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Zmeniť jazyk"
 
@@ -1086,7 +1101,7 @@ msgstr "Skontrolovať, či sú nové časti"
 msgid "Check for updates"
 msgstr "Skontrolovať aktualizácie"
 
-#: ui/mainwindow.cpp:721
+#: ui/mainwindow.cpp:717
 msgid "Check for updates..."
 msgstr "Skontrolovať aktualizácie..."
 
@@ -1098,7 +1113,7 @@ msgstr "Vyberte priečinok vyrovnávacej pamäte na Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Vyberte názov pre váš inteligentný playlist"
 
-#: engines/gstengine.cpp:894
+#: engines/gstengine.cpp:897
 msgid "Choose automatically"
 msgstr "Vybrať automaticky"
 
@@ -1118,9 +1133,13 @@ msgstr "Vybrať zo zoznamu"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Vyberte, ako má byť playlist usporiadaný a koľko piesní má obsahovať."
 
-#: podcasts/podcastsettingspage.cpp:133
+#: podcasts/podcastsettingspage.cpp:135
 msgid "Choose podcast download directory"
 msgstr "Vybrať pričinok na sťahovanie podcastu"
+
+#: ../bin/src/ui_internetshowsettingspage.h:89
+msgid "Choose the internet services you want to show."
+msgstr "Vyberte internetové služby, ktoré chcete zobraziť."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1135,7 +1154,7 @@ msgstr "Classical"
 msgid "Cleaning up"
 msgstr "Upratovanie"
 
-#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
+#: transcoder/transcodedialog.cpp:61 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Vyprázdniť"
@@ -1266,16 +1285,16 @@ msgstr "Club"
 msgid "Colors"
 msgstr "Farby"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čiarkou oddelený zoznam class:level, level je 0-3"
 
-#: playlist/playlist.cpp:1357 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1359 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Komentár"
 
-#: internet/vkservice.cpp:151
+#: internet/vkservice.cpp:152
 msgid "Community Radio"
 msgstr "Komunitné rádio"
 
@@ -1287,9 +1306,9 @@ msgstr "Vyplniť tagy automaticky"
 msgid "Complete tags automatically..."
 msgstr "Vyplniť tagy automaticky..."
 
-#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:692
+#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "Skladateľ"
 
@@ -1310,7 +1329,7 @@ msgstr "Nastaviť Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Klávesové skratky"
 
-#: internet/spotifyservice.cpp:813
+#: internet/spotifyservice.cpp:812
 msgid "Configure Spotify..."
 msgstr "Nastaviť Spotify..."
 
@@ -1326,16 +1345,16 @@ msgstr "Nastaviť Vk.com..."
 msgid "Configure global search..."
 msgstr "Nastaviť globálne vyhľadávanie..."
 
-#: ui/mainwindow.cpp:571
+#: ui/mainwindow.cpp:567
 msgid "Configure library..."
 msgstr "Nastaviť zbierku..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
 msgid "Configure podcasts..."
 msgstr "Nastaviť podcasty..."
 
 #: internet/cloudfileservice.cpp:85
-#: internet/digitallyimportedservicebase.cpp:178
+#: internet/digitallyimportedservicebase.cpp:179
 #: ../bin/src/ui_globalsearchsettingspage.h:150
 #: internet/googledriveservice.cpp:210
 msgid "Configure..."
@@ -1364,7 +1383,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Čas na spojenie vypršal, skontrolujte URL adresu serveru. Príklad: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vkservice.cpp:1093
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Problémy s pripojením, alebo je zvuk zakázaný vlastníkom"
 
@@ -1384,7 +1403,15 @@ msgstr "Konvertovať všetku hudbu"
 msgid "Convert any music that the device can't play"
 msgstr "Konvertovať hudbu ktorú zariadenie nemôže prehrať"
 
-#: internet/vkservice.cpp:318
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr "Konvertovať bezstratové zvukové súbory pred ich odoslaním do vzdialeného úložiska."
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr "Konvertovať bezstratové súbory"
+
+#: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
 msgstr "Kopírovať zdieľanú URL adresu do schránky"
 
@@ -1392,12 +1419,12 @@ msgstr "Kopírovať zdieľanú URL adresu do schránky"
 msgid "Copy to clipboard"
 msgstr "Kopírovať do schránky"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
-#: ui/mainwindow.cpp:620 widgets/fileviewlist.cpp:43
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Skopírovať na zariadenie..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:610
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Skopírovať do zbierky..."
@@ -1412,7 +1439,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "Nedalo sa pripojiť na Subsonic, skontrolujte URL servera. Napríklad: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1423,14 +1450,14 @@ msgstr "Nedal sa vytvoriť GStreamer element \"%1\" - uistite sa, že máte nain
 msgid "Couldn't create playlist"
 msgstr "Nepodarilo sa vytvoriť playlist"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nedal sa nájsť muxer pre %1, skontrolujte či máte korektne nainštalované GStreamer pluginy"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1583,18 +1610,18 @@ msgstr "DBus cesta"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:593
+#: core/database.cpp:601
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
 msgstr "Bolo zistené porušenie databázy. Prosím, prečítajte si https://code.google.com/p/clementine-player/wiki/DatabaseCorruption pre inštrukcie, ako zotaviť vašu databázu"
 
-#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Dátum vytvorenia"
 
-#: playlist/playlist.cpp:1352 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Dátum zmeny"
 
@@ -1606,15 +1633,15 @@ msgstr "Dni"
 msgid "De&fault"
 msgstr "Pôvo&dná"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Znížiť hlasitosť o 4%"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by <value> percent"
 msgstr "Znížiť hlasitosť o <value>%"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "Znížiť hlasitosť"
 
@@ -1622,7 +1649,7 @@ msgstr "Znížiť hlasitosť"
 msgid "Default background image"
 msgstr "Štandardný obrázok na pozadí"
 
-#: engines/gstengine.cpp:919
+#: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
 msgstr "Východzie zariadenie na %1"
@@ -1644,12 +1671,12 @@ msgstr "Vymazať"
 msgid "Delete Grooveshark playlist"
 msgstr "Vymazať Grooveshark playlist"
 
-#: podcasts/podcastservice.cpp:345
+#: podcasts/podcastservice.cpp:350
 msgid "Delete downloaded data"
 msgstr "Vymazať stiahnuté dáta"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2196 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Vymazať súbory"
 
@@ -1657,7 +1684,7 @@ msgstr "Vymazať súbory"
 msgid "Delete from device..."
 msgstr "Vymazať zo zariadenia..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:622
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Vymazať z disku..."
@@ -1674,28 +1701,28 @@ msgstr "Vymazať predvoľbu"
 msgid "Delete smart playlist"
 msgstr "Vymazať inteligentný playlist"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "Vymazať pôvodné súbory"
 
-#: core/deletefiles.cpp:48
+#: core/deletefiles.cpp:50
 msgid "Deleting files"
 msgstr "Odstraňujú sa súbory"
 
-#: ui/mainwindow.cpp:1575
+#: ui/mainwindow.cpp:1570
 msgid "Dequeue selected tracks"
 msgstr "Vybrať z radu vybrané skladby"
 
-#: ui/mainwindow.cpp:1573
+#: ui/mainwindow.cpp:1568
 msgid "Dequeue track"
 msgstr "Vybrať z radu skladbu"
 
-#: ../bin/src/ui_transcodedialog.h:214 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Cieľ"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:231
 msgid "Details..."
 msgstr "Podrobnosti..."
 
@@ -1715,7 +1742,7 @@ msgstr "Názov zariadenia"
 msgid "Device properties..."
 msgstr "Vlastnosti zariadenia..."
 
-#: ui/mainwindow.cpp:250
+#: ui/mainwindow.cpp:246
 msgid "Devices"
 msgstr "Zariadenia"
 
@@ -1744,7 +1771,7 @@ msgid "Direct internet connection"
 msgstr "Priame pripojenie na internet"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
-#: ../bin/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_transcodedialog.h:213
 msgid "Directory"
 msgstr "Priečinok"
 
@@ -1766,8 +1793,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Zakázané"
 
-#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:688 ../bin/src/ui_ripcd.h:314
+#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Disk"
 
@@ -1780,7 +1809,7 @@ msgstr "Nesúvislý prenos"
 msgid "Display options"
 msgstr "Možnosti zobrazovania"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Zobrazovať OSD"
 
@@ -1839,7 +1868,7 @@ msgstr "Otvoríte dvojklikom"
 msgid "Double clicking a song will..."
 msgstr "Dvojklik na pieseň..."
 
-#: podcasts/podcastservice.cpp:437
+#: podcasts/podcastservice.cpp:442
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1861,11 +1890,15 @@ msgstr "Členstvo sťahovania"
 msgid "Download new episodes automatically"
 msgstr "Sťahovať nové časti automaticky"
 
-#: podcasts/podcastservice.cpp:253
+#: podcasts/podcastservice.cpp:258
 msgid "Download queued"
 msgstr "Sťahovanie zaradené"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr "Nastavenia sťahovania"
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "Stiahnuť Android aplikáciu"
 
@@ -1877,7 +1910,7 @@ msgstr "Stiahnuť tento album"
 msgid "Download this album..."
 msgstr "Stiahnuť tento album..."
 
-#: podcasts/podcastservice.cpp:439
+#: podcasts/podcastservice.cpp:444
 msgid "Download this episode"
 msgstr "Stiahnuť túto časť"
 
@@ -1885,7 +1918,7 @@ msgstr "Stiahnuť túto časť"
 msgid "Download..."
 msgstr "Stiahnuť..."
 
-#: podcasts/podcastservice.cpp:261
+#: podcasts/podcastservice.cpp:266
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Sťahovanie (%1%)..."
@@ -1938,7 +1971,7 @@ msgstr "Dynamicky náhodná zmes"
 msgid "Edit smart playlist..."
 msgstr "Upraviť inteligentný playlist..."
 
-#: ui/mainwindow.cpp:1617
+#: ui/mainwindow.cpp:1612
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upraviť tag \"%1\"..."
@@ -1998,7 +2031,7 @@ msgid ""
 "displayed in this order."
 msgstr "Povoľte zdroje nižšie, aby boli zahrnuté do výsledkov vyhľadávania. Výsledky budú zobrazené v tomto poradí."
 
-#: core/globalshortcuts.cpp:72
+#: core/globalshortcuts.cpp:76
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Povoliť/zakázať Last.fm skroblovanie"
 
@@ -2056,7 +2089,7 @@ msgstr "Vložte URL internetového rádio streamu:"
 msgid "Enter the name of the folder"
 msgstr "Vložte názov priečinka"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Zadajte túto IP adresu v programe na spojenie s Clementine."
 
@@ -2068,18 +2101,18 @@ msgstr "Celá zbierka"
 msgid "Equalizer"
 msgstr "Ekvalizér"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ekvivalent k --log-levels *:1"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ekvivalent k --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1048
 #: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1899 ui/mainwindow.cpp:2146 ui/mainwindow.cpp:2294
-#: internet/vkservice.cpp:619
+#: ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141 ui/mainwindow.cpp:2289
+#: internet/vkservice.cpp:623
 msgid "Error"
 msgstr "Chyba"
 
@@ -2108,17 +2141,17 @@ msgstr "Chyba pri sťahovaní Spotify pluginu."
 msgid "Error loading %1"
 msgstr "Chyba pri načítavaní %1"
 
-#: internet/digitallyimportedservicebase.cpp:196
+#: internet/digitallyimportedservicebase.cpp:197
 #: internet/digitallyimportedurlhandler.cpp:85
 msgid "Error loading di.fm playlist"
 msgstr "Chyba pri načítavaní di.fm playlistu"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Chyba spracovania %1: %2"
 
-#: playlist/songloaderinserter.cpp:92
+#: playlist/songloaderinserter.cpp:94
 msgid "Error while loading audio CD"
 msgstr "Chyba pri čítaní zvukového CD"
 
@@ -2243,25 +2276,25 @@ msgstr "Zoslabovanie"
 msgid "Fading duration"
 msgstr "Trvanie zoslabovania"
 
-#: ui/mainwindow.cpp:1900
+#: ui/mainwindow.cpp:1895
 msgid "Failed reading CD drive"
 msgstr "Zlyhalo čítanie CD v mechanike"
 
-#: podcasts/gpoddertoptagspage.cpp:69
+#: podcasts/gpoddertoptagspage.cpp:71
 msgid "Failed to fetch directory"
 msgstr "Zlyhalo získanie priečinka"
 
-#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
-#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
-#: podcasts/itunessearchpage.cpp:81
+#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
+#: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Zlyhalo získanie podcastov"
 
-#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
+#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
 msgstr "Zlyhalo načítanie podcastu"
 
-#: podcasts/podcasturlloader.cpp:173
+#: podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "Zlyhalo spracovanie XML pre tento RSS kanál"
 
@@ -2302,10 +2335,6 @@ msgstr "Chyba pri získavaní obalu"
 msgid "File Format"
 msgstr "Formát súboru"
 
-#: ../bin/src/ui_playlistcontainer.h:173
-msgid "File Paths:"
-msgstr "Súborové cesty:"
-
 #: ui/organisedialog.cpp:77
 msgid "File extension"
 msgstr "Prípona súboru"
@@ -2314,11 +2343,11 @@ msgstr "Prípona súboru"
 msgid "File formats"
 msgstr "Formáty súborov"
 
-#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "Názov súboru"
 
-#: playlist/playlist.cpp:1346
+#: playlist/playlist.cpp:1348
 msgid "File name (without path)"
 msgstr "Názov súboru (bez cesty)"
 
@@ -2326,25 +2355,29 @@ msgstr "Názov súboru (bez cesty)"
 msgid "File name pattern:"
 msgstr "Vzor pre názov súboru:"
 
-#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:677
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:96
+msgid "File paths"
+msgstr "Cesty k súborom"
+
+#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "Veľkosť súboru"
 
-#: playlist/playlist.cpp:1350 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
+#: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
+#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "Typ súboru"
 
-#: ../bin/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Filename"
 msgstr "Názov súboru"
 
-#: ui/mainwindow.cpp:243
+#: ui/mainwindow.cpp:239
 msgid "Files"
 msgstr "Súbory"
 
-#: ../bin/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:211
 msgid "Files to transcode"
 msgstr "Súbory na transkódovanie"
 
@@ -2352,7 +2385,7 @@ msgstr "Súbory na transkódovanie"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Nájsť piesne vo vašej zbierke ktoré spĺňajú kritériá ktoré ste zadali."
 
-#: internet/vkservice.cpp:302
+#: internet/vkservice.cpp:306
 msgid "Find this artist"
 msgstr "Nájsť tohto interpréta"
 
@@ -2372,7 +2405,7 @@ msgstr "Prvá úroveň"
 msgid "Fit cover to width"
 msgstr "Prispôsobiť obal šírke"
 
-#: core/song.cpp:379 transcoder/transcoder.cpp:230
+#: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2405,7 +2438,7 @@ msgstr "Zabudnutie zariadenia ho odstráni z tohto zoznamu a Clementine bude mus
 #: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:172
+#: ../bin/src/ui_playlistcontainer.h:143
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_podcastinfowidget.h:191 ../bin/src/ui_querysearchpage.h:112
 #: ../bin/src/ui_querysortpage.h:137 ../bin/src/ui_searchpreview.h:104
@@ -2452,7 +2485,7 @@ msgstr "Plné basy a výšky"
 msgid "Full Treble"
 msgstr "Plné výšky"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:138
 msgid "General"
 msgstr "Všeobecné"
 
@@ -2460,9 +2493,9 @@ msgstr "Všeobecné"
 msgid "General settings"
 msgstr "Všeobecné nastavenia"
 
-#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:695
+#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Žáner"
@@ -2483,7 +2516,7 @@ msgstr "Získavajú sa populárne piesne z Grooveshark"
 msgid "Getting channels"
 msgstr "Preberanie kanálov"
 
-#: internet/digitallyimportedservicebase.cpp:101
+#: internet/digitallyimportedservicebase.cpp:102
 msgid "Getting streams"
 msgstr "Získavanie streamov"
 
@@ -2569,12 +2602,12 @@ msgstr "Zoradiť podľa žáner/album"
 msgid "Group by Genre/Artist/Album"
 msgstr "Zoradiť podľa žáner/interprét/album"
 
-#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1326 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Zoskupenie"
 
-#: podcasts/podcasturlloader.cpp:204
+#: podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML stránka neobsahuje žiadne RSS kanály"
 
@@ -2621,7 +2654,7 @@ msgstr "Hostiteľ nenájdený, skontrolujte URL adresu serveru. Príklad: http:/
 msgid "Hours"
 msgstr "Hodiny"
 
-#: core/backgroundstreams.cpp:27
+#: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
 
@@ -2657,7 +2690,7 @@ msgstr "Ak budete pokračovať, toto zariadenie bude pracovať pomaly a skopíro
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Ak poznáte URL podcastu, zadajte ju nižšie a kliknite na Prejsť."
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorovať „The“ v menách interprétov"
 
@@ -2669,12 +2702,16 @@ msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:142
+#: ../bin/src/ui_transcodedialog.h:220
+msgid "Import..."
+msgstr "Importovať..."
+
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "Za %1 dní"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Za %1 týždňov"
@@ -2709,15 +2746,15 @@ msgstr "Nekompatibilná verzia Subsonic REST protokolu. Server musíte aktualizo
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Neúplné nastavenie. Zabezpečte, prosím, aby boli všetky políčka vyplnené."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Zvýšiť hlasitosť o 4%"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by <value> percent"
 msgstr "Znížiť hlasitosť o <value>%"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Zvýšiť hlasitosť"
 
@@ -2734,7 +2771,7 @@ msgstr "Informácie"
 msgid "Input options"
 msgstr "Možnosti vstupu"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "Vložiť..."
 
@@ -2742,17 +2779,22 @@ msgstr "Vložiť..."
 msgid "Installed"
 msgstr "Nainštalované"
 
-#: core/database.cpp:577
+#: core/database.cpp:585
 msgid "Integrity check"
 msgstr "Kontrola integrity"
 
-#: ui/mainwindow.cpp:247
+#: ui/mainwindow.cpp:243
 msgid "Internet"
 msgstr "Internet"
 
 #: ui/settingsdialog.cpp:161
 msgid "Internet providers"
 msgstr "Internetoví poskytovatelia"
+
+#: ../bin/src/ui_internetshowsettingspage.h:87
+msgctxt "Global search settings dialog title."
+msgid "Internet services"
+msgstr "Internetové služby"
 
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
@@ -2834,7 +2876,7 @@ msgstr "Držte tlačidlá %1 sekúnd..."
 msgid "Keep running in the background when the window is closed"
 msgstr "Nechať bežať na pozadí, keď sa zavrie hlavné okno"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "Zachovať pôvodné súbory"
 
@@ -2871,7 +2913,7 @@ msgstr "Veľký bočný panel"
 msgid "Last played"
 msgstr "Naposledy prehrávané"
 
-#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Naposledy prehrávané"
@@ -2912,12 +2954,12 @@ msgstr "Najmenej obľúbené skladby"
 msgid "Left"
 msgstr "Ľavý"
 
-#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Dĺžka"
 
-#: ui/mainwindow.cpp:229 ui/mainwindow.cpp:242
+#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
 #: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "Zbierka"
@@ -2926,7 +2968,7 @@ msgstr "Zbierka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé zoraďovanie zbierky"
 
-#: ui/mainwindow.cpp:2418
+#: ui/mainwindow.cpp:2413
 msgid "Library rescan notice"
 msgstr "Poznámka k preskenovaniu zbierky"
 
@@ -2967,7 +3009,7 @@ msgstr "Načítať obal z disku"
 msgid "Load cover from disk..."
 msgstr "Načítať obal z disku..."
 
-#: playlist/playlistcontainer.cpp:317
+#: playlist/playlistcontainer.cpp:286
 msgid "Load playlist"
 msgstr "Načítať playlist"
 
@@ -2996,23 +3038,23 @@ msgstr "Načítavanie piesní"
 msgid "Loading stream"
 msgstr "Načítava sa stream"
 
-#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "Načítavajú sa skladby"
 
-#: playlist/songloaderinserter.cpp:144
+#: playlist/songloaderinserter.cpp:149
 msgid "Loading tracks info"
 msgstr "Načítavajú sa informácie o skladbe"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:102
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255 internet/vkservice.cpp:485
+#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
 #: internet/vksettingspage.cpp:121
 msgid "Loading..."
 msgstr "Načítava sa..."
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Načítať súbory/URL adresy, nahradiť nimi aktuálny playlist"
 
@@ -3031,7 +3073,7 @@ msgstr "Načítať súbory/URL adresy, nahradiť nimi aktuálny playlist"
 msgid "Login"
 msgstr "Prihlásiť sa"
 
-#: podcasts/podcastsettingspage.cpp:120
+#: podcasts/podcastsettingspage.cpp:122
 msgid "Login failed"
 msgstr "Prihlásenie zlyhalo"
 
@@ -3070,11 +3112,11 @@ msgstr "Texty piesní"
 msgid "Lyrics from %1"
 msgstr "Texty z %1"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:385 transcoder/transcoder.cpp:235
+#: core/song.cpp:399 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3087,11 +3129,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:381
+#: core/song.cpp:395
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:383
+#: core/song.cpp:397
 msgid "MPC"
 msgstr "MPC"
 
@@ -3111,7 +3153,7 @@ msgstr "Magnatune sťahovanie dokončené"
 msgid "Main profile (MAIN)"
 msgstr "Hlavný profil (MAIN)"
 
-#: core/backgroundstreams.cpp:33
+#: core/backgroundstreams.cpp:52
 msgid "Make it so!"
 msgstr "Make it so!"
 
@@ -3120,7 +3162,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotifyservice.cpp:603
+#: internet/spotifyservice.cpp:608
 msgid "Make playlist available offline"
 msgstr "Urobiť playlist dostupný offline"
 
@@ -3141,11 +3183,11 @@ msgstr "Ručne"
 msgid "Manufacturer"
 msgstr "Výrobca"
 
-#: podcasts/podcastservice.cpp:357
+#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Označiť ako vypočuté"
 
-#: podcasts/podcastservice.cpp:356
+#: podcasts/podcastservice.cpp:361
 msgid "Mark as new"
 msgstr "Označiť ako nové"
 
@@ -3211,7 +3253,7 @@ msgstr "Mono prehrávanie"
 msgid "Months"
 msgstr "Mesiace"
 
-#: playlist/playlist.cpp:1361
+#: playlist/playlist.cpp:1363
 msgid "Mood"
 msgstr "Nálada"
 
@@ -3224,7 +3266,7 @@ msgstr "Štýl panelu nálady"
 msgid "Moodbars"
 msgstr "Panel nálady"
 
-#: internet/vkservice.cpp:489
+#: internet/vkservice.cpp:501
 msgid "More"
 msgstr "Viac"
 
@@ -3245,7 +3287,7 @@ msgstr "Body pripojenia"
 msgid "Move down"
 msgstr "Posunúť nižšie"
 
-#: ui/mainwindow.cpp:613 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Presunúť do zbierky..."
 
@@ -3254,7 +3296,8 @@ msgstr "Presunúť do zbierky..."
 msgid "Move up"
 msgstr "Posunúť vyššie"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1834
+#: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: internet/vkservice.cpp:882
 msgid "Music"
 msgstr "Hudba"
 
@@ -3262,16 +3305,20 @@ msgstr "Hudba"
 msgid "Music Library"
 msgstr "Hudobná zbierka"
 
-#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:703
+#: core/globalshortcuts.cpp:63 ../bin/src/ui_mainwindow.h:703
 #: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "Stlmiť"
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
+#: internet/vkservice.cpp:818
+msgid "My Albums"
+msgstr "Moje albumy"
+
+#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
 msgid "My Music"
 msgstr "Moja hudba"
 
-#: internet/vkservice.cpp:496
+#: internet/vkservice.cpp:508
 msgid "My Recommendations"
 msgstr "Moje odporúčania"
 
@@ -3286,7 +3333,7 @@ msgctxt "Category label"
 msgid "Name"
 msgstr "Názov"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "Možnosti pomenovávania"
 
@@ -3298,7 +3345,7 @@ msgstr "Úzke pásmo"
 msgid "Network Proxy"
 msgstr "Sieťové proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "Diaľkové ovládanie cez sieť"
 
@@ -3321,7 +3368,7 @@ msgstr "Nezačne sa prehrávať"
 msgid "New folder"
 msgstr "Nový playlist"
 
-#: ui/mainwindow.cpp:1671 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1666 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "Nový playlist"
 
@@ -3345,12 +3392,12 @@ msgstr "Najnovšie skladby"
 msgid "Next"
 msgstr "Ďalšia"
 
-#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:646
+#: core/globalshortcuts.cpp:57 ../bin/src/ui_mainwindow.h:646
 #: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "Nasledujúca skladba"
 
-#: core/utilities.cpp:143
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "Budúci týždeň"
 
@@ -3370,7 +3417,7 @@ msgstr "Žiadne obaly na exportovanie."
 msgid "No long blocks"
 msgstr "Žiadne dlhé bloky"
 
-#: playlist/playlistcontainer.cpp:402
+#: playlist/playlistcontainer.cpp:371
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nenájdené. Vymažte políčko hľadania pre opätovné zobrazenie celého playlistu."
@@ -3379,12 +3426,12 @@ msgstr "Nenájdené. Vymažte políčko hľadania pre opätovné zobrazenie cel�
 msgid "No short blocks"
 msgstr "Žiadne krátke bloky"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
-#: ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
+#: ../bin/src/ui_groupbydialog.h:158
 msgid "None"
 msgstr "Nijako"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2147 ui/mainwindow.cpp:2295
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žiadna z vybratých piesní nieje vhodná na kopírovanie do zariadenia"
 
@@ -3457,19 +3504,19 @@ msgstr "OSD ukážka"
 msgid "Off"
 msgstr "Vypnuté"
 
-#: core/song.cpp:387 transcoder/transcoder.cpp:241
+#: core/song.cpp:401 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:393 transcoder/transcoder.cpp:247
+#: core/song.cpp:407 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:389 transcoder/transcoder.cpp:244
+#: core/song.cpp:403 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:391 transcoder/transcoder.cpp:238
+#: core/song.cpp:405 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3483,7 +3530,7 @@ msgstr "Zapnuté"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3491,7 +3538,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Akceptovať iba spojenia z klientov s rozsahom ip adries:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "Povoliť spojenie iba z lokálnej siete"
 
@@ -3503,7 +3550,7 @@ msgstr "Iba prvé zobraziť"
 msgid "Opacity"
 msgstr "Nepriehľadnosť"
 
-#: internet/digitallyimportedservicebase.cpp:172
+#: internet/digitallyimportedservicebase.cpp:173
 #: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
 #: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
@@ -3515,13 +3562,17 @@ msgstr "Otvoriť %1 v prehliadači"
 msgid "Open &audio CD..."
 msgstr "Otvoriť &zvukové CD..."
 
-#: podcasts/addpodcastdialog.cpp:235
+#: podcasts/addpodcastdialog.cpp:237
 msgid "Open OPML file"
 msgstr "Otvoriť OPML súbor"
 
-#: podcasts/addpodcastdialog.cpp:77
+#: podcasts/addpodcastdialog.cpp:79
 msgid "Open OPML file..."
 msgstr "Otvoriť OPML súbor..."
+
+#: transcoder/transcodedialog.cpp:234
+msgid "Open a directory to import music from"
+msgstr "Otvoriť priečinok na importovanie hudby z neho"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3567,7 +3618,8 @@ msgstr "Optimalizovať na dátový tok"
 msgid "Optimize for quality"
 msgstr "Optimalizovať na kvalitu"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Možnosti..."
 
@@ -3575,15 +3627,15 @@ msgstr "Možnosti..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "Organizovať súbory"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:616
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
 msgid "Organise files..."
 msgstr "Spravovať súbory..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:72
 msgid "Organising files"
 msgstr "Spravovanie súborov"
 
@@ -3591,7 +3643,7 @@ msgstr "Spravovanie súborov"
 msgid "Original tags"
 msgstr "Pôvodné tagy"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Other options"
 msgstr "Ostatné možnosti"
 
@@ -3603,7 +3655,7 @@ msgstr "Výstup"
 msgid "Output device"
 msgstr "Výstupné zariadenie"
 
-#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_ripcd.h:318
+#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcd.h:318
 msgid "Output options"
 msgstr "Možnosti výstupu"
 
@@ -3611,7 +3663,7 @@ msgstr "Možnosti výstupu"
 msgid "Overwrite all"
 msgstr "Prepísať všetko"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "Prepísať existujúce súbory"
 
@@ -3641,12 +3693,12 @@ msgstr "Party"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1033 ui/mainwindow.cpp:1484
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pozastaviť"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Pause playback"
 msgstr "Pozastaviť prehrávanie"
 
@@ -3654,7 +3706,7 @@ msgstr "Pozastaviť prehrávanie"
 msgid "Paused"
 msgstr "Pozastavené"
 
-#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "Účinkujúci"
@@ -3667,18 +3719,18 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Obyčajný bočný panel"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:588 ui/mainwindow.cpp:1001
-#: ui/mainwindow.cpp:1019 ui/mainwindow.cpp:1487 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
+#: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
 msgstr "Hrať"
 
-#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Počet prehraní"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:151
 msgid "Play if stopped, pause if playing"
 msgstr "Hrať ak je zastavené, pozastaviť ak hrá"
 
@@ -3687,11 +3739,11 @@ msgstr "Hrať ak je zastavené, pozastaviť ak hrá"
 msgid "Play if there is nothing already playing"
 msgstr "Začne hrať, ak sa nič neprehráva"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
 msgstr "Hrať <n>. skladbu v playliste"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "Hrať/Pozastaviť"
 
@@ -3699,13 +3751,13 @@ msgstr "Hrať/Pozastaviť"
 msgid "Playback"
 msgstr "Prehrávanie"
 
-#: core/commandlineoptions.cpp:143
+#: core/commandlineoptions.cpp:149
 msgid "Player options"
 msgstr "Možnosti prehrávača"
 
-#: playlist/playlistcontainer.cpp:313 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:470 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
 msgid "Playlist"
 msgstr "Playlist"
 
@@ -3713,7 +3765,8 @@ msgstr "Playlist"
 msgid "Playlist finished"
 msgstr "Playlist dokončený"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:95
 msgid "Playlist options"
 msgstr "Možnosti playlistu"
 
@@ -3722,7 +3775,7 @@ msgid "Playlist type"
 msgstr "Typ playlistu"
 
 #: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:245
+#: ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Playlisty"
 
@@ -3734,7 +3787,7 @@ msgstr "Prosím zatvorte váš internetový prehliadač a vráťte sa do Clement
 msgid "Plugin status:"
 msgstr "Stav pluginu:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcasty"
 
@@ -3759,7 +3812,7 @@ msgid "Popup duration"
 msgstr "Trvanie upozornenia"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "Port"
 
@@ -3826,7 +3879,7 @@ msgstr "Možnosti krásneho OSD"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
 #: ../bin/src/ui_notificationssettingspage.h:453
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "Ukážka"
 
@@ -3834,12 +3887,12 @@ msgstr "Ukážka"
 msgid "Previous"
 msgstr "Predchádzajúca"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:640
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "Predchádzajúca skladba"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Vypísať informáciu o verzii"
 
@@ -3847,7 +3900,7 @@ msgstr "Vypísať informáciu o verzii"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcd.h:324
+#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcd.h:324
 msgid "Progress"
 msgstr "Priebeh"
 
@@ -3890,12 +3943,12 @@ msgstr "Zaraďuje sa zariadenie..."
 msgid "Queue Manager"
 msgstr "Správca poradia"
 
-#: ui/mainwindow.cpp:1579
+#: ui/mainwindow.cpp:1574
 msgid "Queue selected tracks"
 msgstr "Zaradiť vybrané skladby"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1577
+#: ui/mainwindow.cpp:1572
 msgid "Queue track"
 msgstr "Zaradiť skladbu"
 
@@ -3907,7 +3960,7 @@ msgstr "Rádio (rovnaká hlasitosť pre všetky skladby)"
 msgid "Radios"
 msgstr "Rádiá"
 
-#: core/backgroundstreams.cpp:28
+#: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Dážď"
 
@@ -3920,31 +3973,31 @@ msgstr "Dážď"
 msgid "Random visualization"
 msgstr "Náhodná vizualizácia"
 
-#: core/globalshortcuts.cpp:75
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 0 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 0 hviezdičkami"
 
-#: core/globalshortcuts.cpp:77
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 1 star"
 msgstr "Ohodnotiť aktuálnu pieseň 1 hviezdičkou"
 
-#: core/globalshortcuts.cpp:79
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 2 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 2 hviezdičkami"
 
-#: core/globalshortcuts.cpp:81
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 3 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 3 hviezdičkami"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 4 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 4 hviezdičkami"
 
-#: core/globalshortcuts.cpp:85
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 5 stars"
 msgstr "Ohodnotiť aktuálnu pieseň 5 hviezdičkami"
 
-#: playlist/playlist.cpp:1327 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Hodnotenie"
 
@@ -3973,7 +4026,7 @@ msgstr "Obnoviť kanály"
 msgid "Refresh station list"
 msgstr "Obnoviť zoznam staníc"
 
-#: internet/digitallyimportedservicebase.cpp:175
+#: internet/digitallyimportedservicebase.cpp:176
 msgid "Refresh streams"
 msgstr "Obnoviť streamy"
 
@@ -3981,7 +4034,8 @@ msgstr "Obnoviť streamy"
 msgid "Reggae"
 msgstr "Reggae"
 
-#: playlist/playlistcontainer.cpp:56 ../bin/src/ui_behavioursettingspage.h:287
+#: playlist/playlistsaveoptionsdialog.cpp:33
+#: ../bin/src/ui_behavioursettingspage.h:287
 msgid "Relative"
 msgstr "relatívne"
 
@@ -3993,8 +4047,12 @@ msgstr "Pamätať si kývnutie Wii diaľkového"
 msgid "Remember from last time"
 msgstr "Zapamätať z naposledy"
 
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:100
+msgid "Remember my choice"
+msgstr "Pamätať môj výber"
+
 #: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Remove"
 msgstr "Odstrániť"
 
@@ -4010,11 +4068,11 @@ msgstr "Odstrániť duplikáty z playlistu"
 msgid "Remove folder"
 msgstr "Odstrániť priečinok"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:310
+#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
 msgid "Remove from My Music"
 msgstr "Odstrániť z Mojej hudby"
 
-#: internet/vkservice.cpp:296
+#: internet/vkservice.cpp:300
 msgid "Remove from bookmarks"
 msgstr "Odstrániť zo záložiek"
 
@@ -4022,7 +4080,7 @@ msgstr "Odstrániť zo záložiek"
 msgid "Remove from favorites"
 msgstr "Odstrániť z obľúbených"
 
-#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:611
+#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:615
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Odstrániť z playlistu"
@@ -4094,7 +4152,7 @@ msgstr "Nahradiť aktuálny playlist"
 msgid "Replace the playlist"
 msgstr "ňou nahradí playlist"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "Nahradiť medzery podčiarknutiami"
 
@@ -4110,7 +4168,7 @@ msgstr "Režim normalizovania hlasitosti"
 msgid "Repopulate"
 msgstr "Znovu naplniť"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "Vyžadovať overovací kód"
 
@@ -4122,12 +4180,12 @@ msgstr "Zresetovať"
 msgid "Reset play counts"
 msgstr "Vynulovať počet prehraní"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Spustiť znovu prehrávanie skladby, alebo prehrať predchádzajúcu skladbu, ak ešte neprešlo 8 sekúnd od začiatku skladby."
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "Obmedziť na ASCII písmená"
 
@@ -4189,11 +4247,11 @@ msgstr "Chyba pri SSL handshakeu, overte nastavenie serveru. Možnosť SSLv3 ni�
 msgid "Safely remove device"
 msgstr "Bezpečne odpojiť zariadenie"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Bezpečne odpojiť zariadenie po skončení kopírovania"
 
-#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Rýchlosť vzorkovania"
 
@@ -4222,7 +4280,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Uložiť playlist"
 
-#: playlist/playlistmanager.cpp:223
+#: playlist/playlistmanager.cpp:229
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Uložiť playlist"
@@ -4263,7 +4321,7 @@ msgstr "Profil so škálovateľnou vzorkovacou frekvenciou"
 msgid "Scale size"
 msgstr "Veľkosť škály"
 
-#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Skóre"
 
@@ -4277,11 +4335,11 @@ msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:512
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:516
 msgid "Search"
 msgstr "Hľadať"
 
-#: ui/mainwindow.cpp:240 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:145
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Hľadať"
@@ -4344,23 +4402,23 @@ msgstr "Výrazy na hľadanie"
 msgid "Searching on Grooveshark"
 msgstr "Hľadanie na Grooveshak"
 
-#: ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
 msgstr "Druhá úroveň"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr "Posunúť vzad"
 
-#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr "Posunúť vpred"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Pretočiť súčasnú skladbu o určitý čas"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Pretočiť súčasnú skladbu na presné miesto"
 
@@ -4396,7 +4454,7 @@ msgstr "Vybrať vizualizácie"
 msgid "Select visualizations..."
 msgstr "Vybrať vizualizácie..."
 
-#: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
+#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
 msgstr "Vybrať..."
 
@@ -4420,12 +4478,12 @@ msgstr "Podrobnosti servera"
 msgid "Service offline"
 msgstr "Služba je offline"
 
-#: ui/mainwindow.cpp:1616
+#: ui/mainwindow.cpp:1611
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastaviť %1 do \"%2\"..."
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Nastaviť hlasitosť na <value> percent"
 
@@ -4433,7 +4491,7 @@ msgstr "Nastaviť hlasitosť na <value> percent"
 msgid "Set value for all selected tracks..."
 msgstr "Nastaviť hodnotu pre všetky vybraté skladby..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr "Nastavenia"
 
@@ -4456,7 +4514,7 @@ msgstr "Skratka pre %1 už existuje"
 msgid "Show"
 msgstr "Zobraziť"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "Zobraziť OSD"
 
@@ -4496,7 +4554,7 @@ msgstr "Zobrazovať krásne OSD"
 msgid "Show above status bar"
 msgstr "Zobraziť nad stavovou lištou"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:552
 msgid "Show all songs"
 msgstr "Zobraziť všetky piesne"
 
@@ -4520,12 +4578,12 @@ msgstr "Zobraziť celú veľkosť..."
 msgid "Show groups in global search result"
 msgstr "Zobraziť skupiny vo výsledkoch globálneho vyhľadávania"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:625
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Zobraziť v prehliadači súborov..."
 
-#: ui/mainwindow.cpp:628
+#: ui/mainwindow.cpp:624
 msgid "Show in library..."
 msgstr "Zobraziť v zbierke..."
 
@@ -4537,21 +4595,17 @@ msgstr "Zobrazovať v rôznych interprétoch"
 msgid "Show moodbar"
 msgstr "Zobraziť panel nálady"
 
-#: ui/mainwindow.cpp:558
+#: ui/mainwindow.cpp:554
 msgid "Show only duplicates"
 msgstr "Zobraziť iba duplikáty"
 
-#: ui/mainwindow.cpp:560
+#: ui/mainwindow.cpp:556
 msgid "Show only untagged"
 msgstr "Zobraziť iba neotagované"
 
 #: ../bin/src/ui_vksettingspage.h:224
 msgid "Show playing song on your page"
 msgstr "Zobraziť prehrávanú pieseň na vašej stránke"
-
-#: ../bin/src/ui_behavioursettingspage.h:288
-msgid "Show quick change menu"
-msgstr "Zobraziť menu rýchlej zmeny"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -4573,7 +4627,7 @@ msgstr "Zobrazovať tray ikonu"
 msgid "Show which sources are enabled and disabled"
 msgstr "Zobraziť, ktoré zdroje sú povolené, a ktoré zakázané"
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:66
 msgid "Show/Hide"
 msgstr "Zobraziť/Skryť"
 
@@ -4625,23 +4679,23 @@ msgstr "Veľkosť:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Preskočiť dozadu v playliste"
 
-#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Počet preskočení"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Preskočiť dopredu v playliste"
 
-#: ui/mainwindow.cpp:1590
+#: ui/mainwindow.cpp:1585
 msgid "Skip selected tracks"
 msgstr "Preskočiť vybrané skladby"
 
-#: ui/mainwindow.cpp:1588
+#: ui/mainwindow.cpp:1583
 msgid "Skip track"
 msgstr "Preskočiť skladbu"
 
@@ -4657,7 +4711,7 @@ msgstr "Malý bočný panel"
 msgid "Smart playlist"
 msgstr "Inteligentný playlist"
 
-#: library/librarymodel.cpp:1264
+#: library/librarymodel.cpp:1280
 msgid "Smart playlists"
 msgstr "Inteligentné playlisty"
 
@@ -4673,7 +4727,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Informácie o piesni"
 
-#: ui/mainwindow.cpp:253
+#: ui/mainwindow.cpp:249
 msgid "Song info"
 msgstr "Pieseň"
 
@@ -4713,11 +4767,12 @@ msgstr "Triedenie"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1359
+#: playlist/playlist.cpp:1361
 msgid "Source"
 msgstr "Zdroj"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
+#: ../bin/src/ui_internetshowsettingspage.h:88
 msgid "Sources"
 msgstr "Zdroje"
 
@@ -4753,11 +4808,11 @@ msgstr "S hviezdičkou"
 msgid "Start ripping"
 msgstr "Začať ripovanie"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
 msgstr "Začať playlist práve prehrávanou"
 
-#: transcoder/transcodedialog.cpp:87
+#: transcoder/transcodedialog.cpp:89
 msgid "Start transcoding"
 msgstr "Začať transkódovanie"
 
@@ -4768,7 +4823,7 @@ msgid ""
 "list"
 msgstr "Začnite písať niečo do vyhľadávacieho políčka vyššie, aby ste naplnili tento zoznam výsledkov hľadania"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "Začína sa %1"
@@ -4781,7 +4836,7 @@ msgstr "Začína sa ..."
 msgid "Stations"
 msgstr "Stanice"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:644
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "Zastaviť"
@@ -4790,15 +4845,15 @@ msgstr "Zastaviť"
 msgid "Stop after"
 msgstr "Zastaviť po"
 
-#: ui/mainwindow.cpp:591 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "Zastaviť po tejto skladbe"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Zastaviť prehrávanie"
 
-#: core/globalshortcuts.cpp:51
+#: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
 msgstr "Zastaviť prehrávanie po aktuálnej skladbe"
 
@@ -4811,7 +4866,7 @@ msgstr "Zastaviť prehrávanie po skladbe: %1"
 msgid "Stopped"
 msgstr "Zastavené"
 
-#: core/song.cpp:404
+#: core/song.cpp:418
 msgid "Stream"
 msgstr "Stream"
 
@@ -4841,7 +4896,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Hotovo!"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Úspešne zapísané %1"
@@ -4873,15 +4928,15 @@ msgstr "Podporované formáty"
 msgid "Synchronize statistics to files now"
 msgstr "Synchronizovať štatistiky do súborov teraz"
 
-#: internet/spotifyservice.cpp:636
+#: internet/spotifyservice.cpp:640
 msgid "Syncing Spotify inbox"
 msgstr "Synchronizuje sa Spotify schránka"
 
-#: internet/spotifyservice.cpp:630
+#: internet/spotifyservice.cpp:634
 msgid "Syncing Spotify playlist"
 msgstr "Synchronizuje sa Spotify playlist"
 
-#: internet/spotifyservice.cpp:641
+#: internet/spotifyservice.cpp:645
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronizujú sa skladby ohviezdičkované na Spotify"
 
@@ -4945,7 +5000,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Skúšobná verzia Subsonic servera uplynula. Prosím prispejte, aby ste získali licenčný kľúč. Navštívte subsonic.org pre detaily."
 
-#: ui/mainwindow.cpp:2409
+#: ui/mainwindow.cpp:2404
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4955,8 +5010,8 @@ msgstr "Verzia Clementine, na ktorú sa práve aktualizovali, vyžaduje preskeno
 msgid "There are other songs in this album"
 msgstr "V tomto albume sú ďalšie piesne"
 
-#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
-#: podcasts/gpoddertoptagspage.cpp:70
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Bol tu problém s komunikáciou s gpodder.net"
 
@@ -4964,7 +5019,7 @@ msgstr "Bol tu problém s komunikáciou s gpodder.net"
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Nastal problém pri získavaní metadát z Magnatune"
 
-#: podcasts/itunessearchpage.cpp:75
+#: podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Bol tu problém so spracovaním odpovede z iTunes Store"
 
@@ -4986,7 +5041,7 @@ msgid ""
 "continue?"
 msgstr "Tieto súbory budú vymazané zo zariadenia, ste si istý, že chcete pokračovať?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2197 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2192 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5002,7 +5057,7 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "Tieto nastavenia sú použité v dialógu \"Transkódovať hudbu\", a keď sa konvertuje hudba pred skopírovaním na zariadenie."
 
-#: ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:155
 msgid "Third level"
 msgstr "Tretia úroveň"
 
@@ -5015,6 +5070,10 @@ msgstr "Táto činnosť vytvorí databázu ktorá môže byť veľká aj 150MB.\
 #: internet/magnatunedownloaddialog.cpp:188
 msgid "This album is not available in the requested format"
 msgstr "Tento album nieje dostupný v požadovanom formáte"
+
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:98
+msgid "This can be changed later through the preferences"
+msgstr "Toto sa dá zmeniť neskôr v nastaveniach"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
@@ -5058,7 +5117,7 @@ msgstr "Tento stream je len pre platiacich predplatiteľov"
 msgid "This type of device is not supported: %1"
 msgstr "Tento typ zariadení nieje podporovaný: %1"
 
-#: playlist/playlist.cpp:1302 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -5071,11 +5130,11 @@ msgid ""
 "Grooveshark songs"
 msgstr "Pred spustením Grooveshark rádia, by ste si mali najprv vypočuť niekoľko ďalších Grooveshark piesní"
 
-#: core/utilities.cpp:128 core/utilities.cpp:140
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Dnes"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:69
 msgid "Toggle Pretty OSD"
 msgstr "Prepnúť Krásne OSD"
 
@@ -5083,7 +5142,7 @@ msgstr "Prepnúť Krásne OSD"
 msgid "Toggle fullscreen"
 msgstr "Prepnúť na celú obrazovku"
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1576
 msgid "Toggle queue status"
 msgstr "Prepínať stav radu"
 
@@ -5091,15 +5150,15 @@ msgstr "Prepínať stav radu"
 msgid "Toggle scrobbling"
 msgstr "Prepnúť skroblovanie"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Prepnúť viditeľnosť Krásneho OSD"
 
-#: core/utilities.cpp:141
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "Zajtra"
 
-#: podcasts/podcasturlloader.cpp:115
+#: podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "Príliš veľa presmerování"
 
@@ -5119,7 +5178,7 @@ msgstr "Spolu prenesených bytov"
 msgid "Total network requests made"
 msgstr "Spolu urobených požiadavok cez sieť"
 
-#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -5129,7 +5188,7 @@ msgstr "Č."
 msgid "Tracks"
 msgstr "Skladby"
 
-#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_transcodedialog.h:210 ../bin/src/ui_mainwindow.h:687
 msgid "Transcode Music"
 msgstr "Transkódovať hudbu"
 
@@ -5141,7 +5200,7 @@ msgstr "Výpis transkódera"
 msgid "Transcoding"
 msgstr "Transkódovanie"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Transkódovanie %1 súborov použitím %2 vlákien."
@@ -5150,7 +5209,7 @@ msgstr "Transkódovanie %1 súborov použitím %2 vlákien."
 msgid "Transcoding options"
 msgstr "Možnosti transkódovania"
 
-#: core/song.cpp:399
+#: core/song.cpp:413
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5166,7 +5225,7 @@ msgstr "Vypnúť"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL(y)"
 
@@ -5183,15 +5242,15 @@ msgstr "Nepodarilo sa pripojiť"
 msgid "Unable to download %1 (%2)"
 msgstr "Nedá sa stiahnuť %1 (%2)"
 
-#: core/song.cpp:408 library/librarymodel.cpp:345 library/librarymodel.cpp:349
-#: library/librarymodel.cpp:353 library/librarymodel.cpp:1050
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:477
-#: playlist/playlistmanager.cpp:478 ui/albumcoverchoicecontroller.cpp:124
+#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
+#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "neznámy"
 
-#: podcasts/podcasturlloader.cpp:206
+#: podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "Neznámy typ obsahu"
 
@@ -5203,15 +5262,15 @@ msgstr "Neznáma chyba"
 msgid "Unset cover"
 msgstr "Nenastavený obal"
 
-#: ui/mainwindow.cpp:1586
+#: ui/mainwindow.cpp:1581
 msgid "Unskip selected tracks"
 msgstr "Nepreskočiť vybraté skladby"
 
-#: ui/mainwindow.cpp:1584
+#: ui/mainwindow.cpp:1579
 msgid "Unskip track"
 msgstr "Nepreskočiť skladbu"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
 msgid "Unsubscribe"
 msgstr "Zrušiť predplatné"
 
@@ -5219,7 +5278,7 @@ msgstr "Zrušiť predplatné"
 msgid "Upcoming Concerts"
 msgstr "Pripravované koncerty"
 
-#: internet/vkservice.cpp:326 internet/vkservice.cpp:330
+#: internet/vkservice.cpp:330
 msgid "Update"
 msgstr "Aktualizovať"
 
@@ -5227,7 +5286,7 @@ msgstr "Aktualizovať"
 msgid "Update Grooveshark playlist"
 msgstr "Aktualizovať Grooveshark playlist"
 
-#: podcasts/podcastservice.cpp:331
+#: podcasts/podcastservice.cpp:336
 msgid "Update all podcasts"
 msgstr "Aktualizovať všetky podcasty"
 
@@ -5239,7 +5298,7 @@ msgstr "Aktualizovať zmenené priečinky v zbierke"
 msgid "Update the library when Clementine starts"
 msgstr "Aktualizovať zbierku pri zapnutí Clementine"
 
-#: podcasts/podcastservice.cpp:339
+#: podcasts/podcastservice.cpp:344
 msgid "Update this podcast"
 msgstr "Aktualizovať tento podcast"
 
@@ -5261,7 +5320,7 @@ msgstr "Aktualizovanie %1%..."
 msgid "Updating library"
 msgstr "Aktualizovanie zbierky"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Využitie"
 
@@ -5293,7 +5352,7 @@ msgstr "Použiť vlastný set farieb"
 msgid "Use a custom message for notifications"
 msgstr "Používať vlastnú správu pre upozornenia"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "Použiť sieťové diaľkové ovládanie"
 
@@ -5342,7 +5401,7 @@ msgstr "Použitých"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Používateľ %1 nemá Grooveshark Anywhere účet"
 
-#: ui/settingsdialog.cpp:153
+#: ui/settingsdialog.cpp:152
 msgid "User interface"
 msgstr "Používateľské rozhranie"
 
@@ -5368,8 +5427,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Premenlivý dátový tok"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:278
-#: playlist/playlistmanager.cpp:489 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
+#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Rôzni interpréti"
 
@@ -5420,11 +5479,15 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
+#: internet/vkservice.cpp:858
+msgid "Wall"
+msgstr "Stena"
+
 #: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovať ma pri zatvorení karty s playlistom"
 
-#: core/song.cpp:397 transcoder/transcoder.cpp:253
+#: core/song.cpp:411 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5508,7 +5571,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:377 transcoder/transcoder.cpp:250
+#: core/song.cpp:391 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "WMa"
 
@@ -5522,7 +5585,7 @@ msgid ""
 "well?"
 msgstr "Chceli by ste presunúť tiež ostatné piesne v tomto albume do rôznych interprétov?"
 
-#: ui/mainwindow.cpp:2416
+#: ui/mainwindow.cpp:2411
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete teraz spustiť úplné preskenovanie?"
 
@@ -5538,15 +5601,15 @@ msgstr "Zapísať metadáta"
 msgid "Wrong username or password."
 msgstr "Nesprávne meno používateľa alebo heslo."
 
-#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:71
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:690
+#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "Rok"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:164
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:166
 msgid "Year - Album"
 msgstr "Rok - Album"
 
@@ -5554,7 +5617,7 @@ msgstr "Rok - Album"
 msgid "Years"
 msgstr "Roky"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "Včera"
 
@@ -5665,7 +5728,7 @@ msgstr "Potrebujete otvoriť Systémové nastavenia a zapnúť \"<span style=\" 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Musíte reštartovať Clementine ak chcete zmeniť jazyk."
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "Vaša IP adresa:"
 
@@ -5776,7 +5839,7 @@ msgstr "rovná sa"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:32
+#: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
 msgstr "gpodder.net priečinok"
 
@@ -5836,11 +5899,11 @@ msgstr "najprv najstaršie"
 msgid "on"
 msgstr "na"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "možnosti"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "alebo oskenovať QR kód!"
 

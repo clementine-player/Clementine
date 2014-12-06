@@ -84,6 +84,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     GroupBy_Performer = 9,
     GroupBy_Grouping = 10,
     GroupBy_Bitrate = 11,
+    GroupBy_Disc = 12,
   };
 
   struct Grouping {

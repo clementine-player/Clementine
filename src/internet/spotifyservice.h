@@ -28,10 +28,7 @@ class SpotifyService : public InternetService {
     Type_Toplist,
   };
 
-  enum Role {
-    Role_UserPlaylistIndex = InternetModel::RoleCount,
-    Role_UserPlaylistIsMine, // Is this playlist owned by the user currently logged-in?
-  };
+  enum Role { Role_UserPlaylistIndex = InternetModel::RoleCount, };
 
   // Values are persisted - don't change.
   enum LoginState {
@@ -48,21 +45,21 @@ class SpotifyService : public InternetService {
   static const char* kBlobDownloadUrl;
   static const int kSearchDelayMsec;
 
-  void ReloadSettings();
+  void ReloadSettings() override;
 
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* parent);
-  void ShowContextMenu(const QPoint& global_pos);
-  void ItemDoubleClicked(QStandardItem* item);
-  void DropMimeData(const QMimeData* data, const QModelIndex& index);
+  QStandardItem* CreateRootItem() override;
+  void LazyPopulate(QStandardItem* parent) override;
+  void ShowContextMenu(const QPoint& global_pos) override;
+  void ItemDoubleClicked(QStandardItem* item) override;
+  void DropMimeData(const QMimeData* data, const QModelIndex& index) override;
   QList<QAction*> playlistitem_actions(const Song& song) override;
-  QWidget* HeaderWidget() const;
+  PlaylistItem::Options playlistitem_options() const override;
+  QWidget* HeaderWidget() const override;
 
   void Logout();
   void Login(const QString& username, const QString& password);
   Q_INVOKABLE void LoadImage(const QString& id);
   Q_INVOKABLE void SetPaused(bool paused);
-  Q_INVOKABLE void Seek(qint64 offset_nsec);
 
   SpotifyServer* server() const;
 

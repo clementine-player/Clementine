@@ -23,6 +23,7 @@ enum MsgType {
   STOP_AFTER = 17;
   GET_LIBRARY = 18;
   RATE_SONG = 19;
+  GLOBAL_SEARCH = 100;
 
   // Messages send by both
   DISCONNECT = 2;
@@ -53,6 +54,8 @@ enum MsgType {
   DOWNLOAD_QUEUE_EMPTY = 51;
   LIBRARY_CHUNK = 52;
   DOWNLOAD_TOTAL_SIZE = 53;
+  GLOBAL_SEARCH_RESULT = 54;
+  TRANSCODING_FILES = 55;
 }
 
 // Valid Engine states
@@ -284,9 +287,25 @@ message ResponseDownloadTotalSize {
   optional int32 file_count = 2;
 }
 
+message RequestGlobalSearch {
+  optional string query = 1;
+}
+
+message ResponseGlobalSearch {
+  optional int32 id = 1;
+  optional string query = 2;
+  optional string search_provider = 3;
+  repeated SongMetadata song_metadata = 4;
+}
+
+message ResponseTranscoderStatus {
+  optional int32 processed = 1;
+  optional int32 total = 2;
+}
+
 // The message itself
 message Message {
-  optional int32 version = 1 [default=16];
+  optional int32 version = 1 [default=18];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
@@ -301,6 +320,7 @@ message Message {
   optional RequestClosePlaylist request_close_playlist = 29;
   optional RequestDownloadSongs request_download_songs = 31;
   optional RequestRateSong request_rate_song = 35;
+  optional RequestGlobalSearch request_global_search = 37;
   
   optional Repeat repeat = 13;
   optional Shuffle shuffle = 14;
@@ -318,4 +338,6 @@ message Message {
   optional ResponseSongOffer response_song_offer = 33;
   optional ResponseLibraryChunk response_library_chunk = 34;
   optional ResponseDownloadTotalSize response_download_total_size = 36;
+  optional ResponseGlobalSearch response_global_search = 38;
+  optional ResponseTranscoderStatus response_transcoder_status = 39;
 }

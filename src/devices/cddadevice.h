@@ -24,6 +24,7 @@
 #include <cdio/cdio.h>
 #include <gst/audio/gstaudiocdsrc.h>
 
+#include "cddasongloader.h"
 #include "connecteddevice.h"
 #include "core/song.h"
 #include "musicbrainz/musicbrainzclient.h"
@@ -48,13 +49,10 @@ signals:
   void SongsDiscovered(const SongList& songs);
 
  private slots:
-  void AudioCDTagsLoaded(const QString& artist, const QString& album,
-                         const MusicBrainzClient::ResultList& results);
+  void SongsLoaded(const SongList& songs);
 
  private:
-  GstElement* cdda_;
-  CdIo_t* cdio_;
-  QMutex mutex_init_;
+  CddaSongLoader cdda_song_loader_;
 };
 
 #endif

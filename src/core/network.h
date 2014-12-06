@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef NETWORK_H
-#define NETWORK_H
+#ifndef CORE_NETWORK_H_
+#define CORE_NETWORK_H_
 
 #include <QAbstractNetworkCache>
 #include <QMutex>
@@ -27,7 +29,7 @@ class QNetworkDiskCache;
 
 class ThreadSafeNetworkDiskCache : public QAbstractNetworkCache {
  public:
-  ThreadSafeNetworkDiskCache(QObject* parent);
+  explicit ThreadSafeNetworkDiskCache(QObject* parent);
 
   qint64 cacheSize() const;
   QIODevice* data(const QUrl& url);
@@ -48,7 +50,7 @@ class NetworkAccessManager : public QNetworkAccessManager {
   Q_OBJECT
 
  public:
-  NetworkAccessManager(QObject* parent = nullptr);
+  explicit NetworkAccessManager(QObject* parent = nullptr);
 
  protected:
   QNetworkReply* createRequest(Operation op, const QNetworkRequest& request,
@@ -59,7 +61,7 @@ class RedirectFollower : public QObject {
   Q_OBJECT
 
  public:
-  RedirectFollower(QNetworkReply* first_reply, int max_redirects = 5);
+  explicit RedirectFollower(QNetworkReply* first_reply, int max_redirects = 5);
 
   bool hit_redirect_limit() const { return redirects_remaining_ < 0; }
   QNetworkReply* reply() const { return current_reply_; }
@@ -78,7 +80,7 @@ class RedirectFollower : public QObject {
   QByteArray readAll() { return current_reply_->readAll(); }
   void abort() { current_reply_->abort(); }
 
-signals:
+ signals:
   // These are all forwarded from the current reply.
   void readyRead();
   void error(QNetworkReply::NetworkError);
@@ -104,9 +106,9 @@ class NetworkTimeouts : public QObject {
   Q_OBJECT
 
  public:
-  NetworkTimeouts(int timeout_msec, QObject* parent = nullptr);
+  explicit NetworkTimeouts(int timeout_msec, QObject* parent = nullptr);
 
-  // TODO: Template this to avoid code duplication.
+  // TODO(John Maguire): Template this to avoid code duplication.
   void AddReply(QNetworkReply* reply);
   void AddReply(RedirectFollower* reply);
   void SetTimeout(int msec) { timeout_msec_ = msec; }
@@ -124,4 +126,4 @@ class NetworkTimeouts : public QObject {
   QMap<RedirectFollower*, int> redirect_timers_;
 };
 
-#endif  // NETWORK_H
+#endif  // CORE_NETWORK_H_
