@@ -82,6 +82,8 @@ signals:
   // Used when playlist's favorite flag isn't changed from the favorite widget
   // (e.g. from the playlistlistcontainer): will update the favorite widget
   void PlaylistFavoritedSlot(int id, bool favorite);
+  // Used to signal that the playlist manager is done starting up
+  void PlaylistManagerInitialized();
   void TabMoved();
   void Save();
 
@@ -99,6 +101,7 @@ signals:
   int drag_hover_tab_;
 
   bool suppress_current_changed_;
+  bool initialized_;
 
   // Editor for inline renaming
   RenameTabLineEdit* rename_editor_;
