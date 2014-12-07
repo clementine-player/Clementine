@@ -110,7 +110,16 @@ signals:
   };
 
   struct Release {
-    Release() : track_(0), year_(0) {}
+
+    enum Status {
+      Status_Unknown = 0,
+      Status_PseudoRelease,
+      Status_Bootleg,
+      Status_Promotional,
+      Status_Official
+    };
+
+    Release() : track_(0), year_(0), status_(Status_Unknown) {}
 
     Result CopyAndMergeInto(const Result& orig) const {
       Result ret(orig);
@@ -120,9 +129,30 @@ signals:
       return ret;
     }
 
+    void SetStatusFromString(const QString& s) {
+      if (s.compare("Official", Qt::CaseInsensitive) == 0) {
+        status_ = Status_Official;
+      } else if (s.compare("Promotion", Qt::CaseInsensitive) == 0) {
+        status_ = Status_Promotional;
+      } else if (s.compare("Bootleg", Qt::CaseInsensitive) == 0) {
+        status_ = Status_Bootleg;
+      } else if (s.compare("Pseudo-release", Qt::CaseInsensitive) == 0) {
+        status_ = Status_PseudoRelease;
+      } else {
+        status_ = Status_Unknown;
+      }
+    }
+
+    bool operator<(const Release& other) const {
+      // Compare status so that "best" status (e.g. Official) will be first
+      // when sorting a list of releases.
+      return status_ > other.status_;
+    }
+
     QString album_;
     int track_;
     int year_;
+    Status status_;
   };
 
   struct PendingResults {

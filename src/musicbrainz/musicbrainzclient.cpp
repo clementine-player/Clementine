@@ -295,6 +295,7 @@ MusicBrainzClient::ResultList MusicBrainzClient::ParseTrack(
   if (releases.isEmpty()) {
     ret << result;
   } else {
+    qStableSort(releases);
     for (const Release& release : releases) {
       ret << release.CopyAndMergeInto(result);
     }
@@ -336,6 +337,8 @@ MusicBrainzClient::Release MusicBrainzClient::ParseRelease(
       QStringRef name = reader->name();
       if (name == "title") {
         ret.album_ = reader->readElementText();
+      } else if (name == "status") {
+        ret.SetStatusFromString(reader->readElementText());
       } else if (name == "date") {
         QRegExp regex(kDateRegex);
         if (regex.indexIn(reader->readElementText()) == 0) {

@@ -19,6 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#include <QMutex>
+
 #include <cstring>
 #include <cmath>
 #include "gstfastspectrum.h"
@@ -47,6 +49,8 @@ enum {
   PROP_INTERVAL,
   PROP_BANDS
 };
+
+static QMutex fftw_mutex;
 
 #define gst_fastspectrum_parent_class parent_class
 G_DEFINE_TYPE (GstFastSpectrum, gst_fastspectrum, GST_TYPE_AUDIO_FILTER);
@@ -123,6 +127,8 @@ gst_fastspectrum_init (GstFastSpectrum * spectrum)
 static void
 gst_fastspectrum_alloc_channel_data (GstFastSpectrum * spectrum)
 {
+  fftw_mutex.lock();
+
   guint bands = spectrum->bands;
   guint nfft = 2 * bands - 2;
 
@@ -139,12 +145,16 @@ gst_fastspectrum_alloc_channel_data (GstFastSpectrum * spectrum)
       spectrum->fft_output,
       FFTW_ESTIMATE);
   spectrum->channel_data_initialised = true;
+
+  fftw_mutex.unlock();
 }
 
 static void
 gst_fastspectrum_free_channel_data (GstFastSpectrum * spectrum)
 {
   if (spectrum->channel_data_initialised) {
+    fftw_mutex.lock();
+
     fftw_destroy_plan(spectrum->plan);
     fftw_free(spectrum->fft_input);
     fftw_free(spectrum->fft_output);
@@ -152,6 +162,8 @@ gst_fastspectrum_free_channel_data (GstFastSpectrum * spectrum)
     delete[] spectrum->spect_magnitude;
 
     spectrum->channel_data_initialised = false;
+
+    fftw_mutex.unlock();
   }
 }
 
@@ -373,6 +385,8 @@ gst_fastspectrum_run_fft (GstFastSpectrum * spectrum, guint input_pos)
   guint bands = spectrum->bands;
   guint nfft = 2 * bands - 2;
 
+  fftw_mutex.lock();
+
   for (i = 0; i < nfft; i++)
     spectrum->fft_input[i] =
         spectrum->input_ring_buffer[(input_pos + i) % nfft];
@@ -387,6 +401,8 @@ gst_fastspectrum_run_fft (GstFastSpectrum * spectrum, guint input_pos)
     val /= nfft * nfft;
     spectrum->spect_magnitude[i] += val;
   }
+
+  fftw_mutex.unlock();
 }
 
 static GstFlowReturn
