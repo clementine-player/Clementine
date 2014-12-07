@@ -54,6 +54,8 @@ RemoteClient::~RemoteClient() {
   client_->close();
   if (client_->state() == QAbstractSocket::ConnectedState)
     client_->waitForDisconnected(2000);
+
+  song_sender_->deleteLater();
 }
 
 void RemoteClient::setDownloader(bool downloader) { downloader_ = downloader; }
