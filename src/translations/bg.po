@@ -664,7 +664,7 @@ msgstr "След "
 msgid "After copying..."
 msgstr "След копиране..."
 
-#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -677,7 +677,7 @@ msgstr "Албум"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Албум (идеална сила на звука за всички песни)"
 
-#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
@@ -835,7 +835,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Сигурни ли сте, че искате да запишете статистиките на песните във файловете на всички песни в библиотеката си?"
 
-#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -916,7 +916,7 @@ msgstr "Среден размер на изображение"
 msgid "BBC Podcasts"
 msgstr "BBC подкасти"
 
-#: playlist/playlist.cpp:1340 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "Темпо"
@@ -945,7 +945,7 @@ msgstr "Архивиране на базата данни"
 msgid "Balance"
 msgstr "Баланс"
 
-#: analyzers/baranalyzer.cpp:22
+#: analyzers/baranalyzer.cpp:35
 msgid "Bar analyzer"
 msgstr "Колонков анализатор"
 
@@ -970,7 +970,7 @@ msgstr "Най-добро"
 msgid "Biography from %1"
 msgstr "Биография от %1"
 
-#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Поток в битове"
 
@@ -988,7 +988,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Поток в битове"
 
-#: analyzers/blockanalyzer.cpp:23
+#: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
 msgstr "Блоков анализатор"
 
@@ -1004,7 +1004,7 @@ msgstr "Количество на замъгляване"
 msgid "Body"
 msgstr "Тяло"
 
-#: analyzers/boomanalyzer.cpp:11
+#: analyzers/boomanalyzer.cpp:32
 msgid "Boom analyzer"
 msgstr "Бум анализатор"
 
@@ -1295,7 +1295,7 @@ msgstr "Цветове"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделен със запетаи списък с class:level, level (ниво) е 0-3"
 
-#: playlist/playlist.cpp:1359 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Коментар"
@@ -1312,7 +1312,7 @@ msgstr "Автоматично довършване на етикетите"
 msgid "Complete tags automatically..."
 msgstr "Автоматично довършване на етикетите..."
 
-#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
@@ -1335,7 +1335,7 @@ msgstr "Настройване на Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Настройване на бързите клавиши"
 
-#: internet/spotifyservice.cpp:812
+#: internet/spotifyservice.cpp:820
 msgid "Configure Spotify..."
 msgstr "Настройване на Spotify..."
 
@@ -1623,11 +1623,11 @@ msgid ""
 "recover your database"
 msgstr "Забелязана е повреда в базата данни. Моля, вижте https://code.google.com/p/clementine-player/wiki/DatabaseCorruption за инструкции за възстановяването на Вашата база данни"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Дата на създаване"
 
-#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Дата на променяне"
 
@@ -1799,7 +1799,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Изключено"
 
-#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
 #: ../bin/src/ui_ripcd.h:314
@@ -2349,11 +2349,11 @@ msgstr "Файлово разширение"
 msgid "File formats"
 msgstr "Файлови формати"
 
-#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "Име на файл"
 
-#: playlist/playlist.cpp:1348
+#: playlist/playlist.cpp:1351
 msgid "File name (without path)"
 msgstr "Име на файл (без път)"
 
@@ -2365,11 +2365,11 @@ msgstr "Шаблон за име на файла:"
 msgid "File paths"
 msgstr "Пътища към файл"
 
-#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "Размер на файла"
 
-#: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1355 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
@@ -2466,7 +2466,7 @@ msgstr "Форма"
 msgid "Format"
 msgstr "Формат"
 
-#: analyzers/analyzercontainer.cpp:47
+#: analyzers/analyzercontainer.cpp:52
 #: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Скорост"
@@ -2499,7 +2499,7 @@ msgstr "Общи"
 msgid "General settings"
 msgstr "Общи настройки"
 
-#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
@@ -2608,7 +2608,7 @@ msgstr "Групиране по Жанр/Албум"
 msgid "Group by Genre/Artist/Album"
 msgstr "Групиране по Жанр/Изпълнител/Албум"
 
-#: playlist/playlist.cpp:1326 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Групиране"
@@ -2642,7 +2642,7 @@ msgstr "Хардуерна информация е налична единств
 msgid "High"
 msgstr "Високо"
 
-#: analyzers/analyzercontainer.cpp:64
+#: analyzers/analyzercontainer.cpp:69
 #: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
@@ -2919,7 +2919,7 @@ msgstr "Голяма странична лента"
 msgid "Last played"
 msgstr "Последно изпълнение"
 
-#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Последно изпълнение"
@@ -2960,7 +2960,7 @@ msgstr "Най-малко любими песни"
 msgid "Left"
 msgstr "Ляво"
 
-#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Дължина"
@@ -3095,7 +3095,7 @@ msgstr "Long term prediction profile (LTP)"
 msgid "Love"
 msgstr "Любима"
 
-#: analyzers/analyzercontainer.cpp:62
+#: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
@@ -3217,7 +3217,7 @@ msgstr "Максимален битов поток"
 msgid "Media has changed. Reloading"
 msgstr "Медията се промени. Презареждам"
 
-#: analyzers/analyzercontainer.cpp:63
+#: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
@@ -3259,7 +3259,7 @@ msgstr "Моно възпроизвеждане"
 msgid "Months"
 msgstr "Месеца"
 
-#: playlist/playlist.cpp:1363
+#: playlist/playlist.cpp:1366
 msgid "Mood"
 msgstr "Статус"
 
@@ -3407,7 +3407,7 @@ msgstr "Следваща песен"
 msgid "Next week"
 msgstr "Следващата седмица"
 
-#: analyzers/analyzercontainer.cpp:81
+#: analyzers/analyzercontainer.cpp:86
 msgid "No analyzer"
 msgstr "Без анализатор"
 
@@ -3712,7 +3712,7 @@ msgstr "На пауза"
 msgid "Paused"
 msgstr "На пауза"
 
-#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "Изпълнител"
@@ -3732,7 +3732,7 @@ msgstr "Стандартна странична лента"
 msgid "Play"
 msgstr "Възпроизвеждане"
 
-#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1334 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Брой изпълнения"
 
@@ -4003,7 +4003,7 @@ msgstr "Задай рейтинг на текущата песен 4 звезд�
 msgid "Rate the current song 5 stars"
 msgstr "Задай рейтинг на текущата песен 5 звезди"
 
-#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Рейтинг"
 
@@ -4257,7 +4257,7 @@ msgstr "Безопасно премахване на устройството"
 msgid "Safely remove the device after copying"
 msgstr "Безопасно премахване на устройството след приключване на копирането"
 
-#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Дискретизация"
 
@@ -4327,7 +4327,7 @@ msgstr "Scalable sampling rate profile (SSR)"
 msgid "Scale size"
 msgstr "Размер на омащабяването"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Резултат"
 
@@ -4689,7 +4689,7 @@ msgstr "Ска"
 msgid "Skip backwards in playlist"
 msgstr "Прескачане назад в списъка с песни"
 
-#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Презключи броя"
 
@@ -4737,7 +4737,7 @@ msgstr "Информация за песен"
 msgid "Song info"
 msgstr "Информация за песен"
 
-#: analyzers/sonogram.cpp:21
+#: analyzers/sonogram.cpp:32
 msgid "Sonogram"
 msgstr "Сонограма"
 
@@ -4773,7 +4773,7 @@ msgstr "Сортиране"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1361
+#: playlist/playlist.cpp:1364
 msgid "Source"
 msgstr "Източник"
 
@@ -4916,7 +4916,7 @@ msgstr "Предложени етикети"
 msgid "Summary"
 msgstr "Резюме"
 
-#: analyzers/analyzercontainer.cpp:65
+#: analyzers/analyzercontainer.cpp:70
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
@@ -5123,7 +5123,7 @@ msgstr "Този поток е само за платени регистраци
 msgid "This type of device is not supported: %1"
 msgstr "Този тип устройство не е подържано:%1"
 
-#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -5184,7 +5184,7 @@ msgstr "Общо прехвърлени байта"
 msgid "Total network requests made"
 msgstr "Общ брой направени мрежови заявки"
 
-#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -5219,7 +5219,7 @@ msgstr "Настройки на прекодиране"
 msgid "TrueAudio"
 msgstr "Инстинско Аудио"
 
-#: analyzers/turbine.cpp:18
+#: analyzers/turbine.cpp:35
 msgid "Turbine"
 msgstr "Турбина"
 
@@ -5607,7 +5607,7 @@ msgstr "Запиши метадата"
 msgid "Wrong username or password."
 msgstr "Грешно потребителско име или парола."
 
-#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5750,7 +5750,7 @@ msgstr "Вашите данни за достъп за Magnatune бяха гре
 msgid "Your library is empty!"
 msgstr "Вашата библиотека е празна!"
 
-#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26 internet/savedradio.cpp:47
 msgid "Your radio streams"
 msgstr "Вашите радио потоци"
 

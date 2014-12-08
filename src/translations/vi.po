@@ -660,7 +660,7 @@ msgstr "Sau "
 msgid "After copying..."
 msgstr "Sau khi sao chép..."
 
-#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -673,7 +673,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (âm lượng lớn cho mọi bài hát)"
 
-#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
@@ -831,7 +831,7 @@ msgid ""
 "the songs of your library?"
 msgstr ""
 
-#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -912,7 +912,7 @@ msgstr "Kích thước ảnh trung bình"
 msgid "BBC Podcasts"
 msgstr "Podcast BBC"
 
-#: playlist/playlist.cpp:1340 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
@@ -941,7 +941,7 @@ msgstr "Đang sao lưu cơ sở dữ liệu"
 msgid "Balance"
 msgstr ""
 
-#: analyzers/baranalyzer.cpp:22
+#: analyzers/baranalyzer.cpp:35
 msgid "Bar analyzer"
 msgstr "Phân tích theo các thanh"
 
@@ -966,7 +966,7 @@ msgstr "Tốt nhất"
 msgid "Biography from %1"
 msgstr "Thông tin từ %1"
 
-#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Bit rate"
 
@@ -984,7 +984,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr ""
 
-#: analyzers/blockanalyzer.cpp:23
+#: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
 msgstr "Phân tích theo các khối vuông"
 
@@ -1000,7 +1000,7 @@ msgstr ""
 msgid "Body"
 msgstr "Nội dung"
 
-#: analyzers/boomanalyzer.cpp:11
+#: analyzers/boomanalyzer.cpp:32
 msgid "Boom analyzer"
 msgstr "Phân tích theo dạng cây"
 
@@ -1291,7 +1291,7 @@ msgstr "Màu"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Dấu phẩy phân cách danh sách lớp:mức độ, mức độ từ 0-3"
 
-#: playlist/playlist.cpp:1359 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Lời bình"
@@ -1308,7 +1308,7 @@ msgstr "Điền thông tin bài hát"
 msgid "Complete tags automatically..."
 msgstr "Điền thông tin bài hát..."
 
-#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
@@ -1331,7 +1331,7 @@ msgstr "Cấu hình Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Phím tắt"
 
-#: internet/spotifyservice.cpp:812
+#: internet/spotifyservice.cpp:820
 msgid "Configure Spotify..."
 msgstr "Cấu hình Spotify..."
 
@@ -1619,11 +1619,11 @@ msgid ""
 "recover your database"
 msgstr "Cơ sở dữ liệu bị hỏng. Xem trang https://code.google.com/p/clementine-player/wiki/DatabaseCorruption để biết các chỉ dẫn phục hồi cho cơ sở dữ liệu"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Ngày tạo"
 
-#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Ngày chỉnh sửa"
 
@@ -1795,7 +1795,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr ""
 
-#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
 #: ../bin/src/ui_ripcd.h:314
@@ -2345,11 +2345,11 @@ msgstr "Phần mở rộng tập tin"
 msgid "File formats"
 msgstr "Định dạng tập tin"
 
-#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "Tên tập tin"
 
-#: playlist/playlist.cpp:1348
+#: playlist/playlist.cpp:1351
 msgid "File name (without path)"
 msgstr "Tên tập tin (không có đường dẫn)"
 
@@ -2361,11 +2361,11 @@ msgstr ""
 msgid "File paths"
 msgstr ""
 
-#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "Dung lượng"
 
-#: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1355 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
@@ -2462,7 +2462,7 @@ msgstr "Biểu mẫu"
 msgid "Format"
 msgstr "Định dạng"
 
-#: analyzers/analyzercontainer.cpp:47
+#: analyzers/analyzercontainer.cpp:52
 #: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Tần số khung hình"
@@ -2495,7 +2495,7 @@ msgstr "Tổng quát"
 msgid "General settings"
 msgstr "Thiết lập chung"
 
-#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
@@ -2604,7 +2604,7 @@ msgstr "Nhóm theo Thể loại/Album"
 msgid "Group by Genre/Artist/Album"
 msgstr "Nhóm theo Thể loại/Nghệ sĩ/Album"
 
-#: playlist/playlist.cpp:1326 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Nhóm"
@@ -2638,7 +2638,7 @@ msgstr "Chỉ xem được thông tin phần cứng khi đã kết nối thiết
 msgid "High"
 msgstr "Cao"
 
-#: analyzers/analyzercontainer.cpp:64
+#: analyzers/analyzercontainer.cpp:69
 #: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
@@ -2915,7 +2915,7 @@ msgstr "Thanh bên cỡ lớn"
 msgid "Last played"
 msgstr "Lần phát cuối"
 
-#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr ""
@@ -2956,7 +2956,7 @@ msgstr "Những bài hát ít được yêu thích nhất"
 msgid "Left"
 msgstr "Trái"
 
-#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Thời lượng"
@@ -3091,7 +3091,7 @@ msgstr "Hồ sơ dự báo lâu dài (LTP)"
 msgid "Love"
 msgstr "Yêu thích"
 
-#: analyzers/analyzercontainer.cpp:62
+#: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
@@ -3213,7 +3213,7 @@ msgstr "Bitrate tối đa"
 msgid "Media has changed. Reloading"
 msgstr ""
 
-#: analyzers/analyzercontainer.cpp:63
+#: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
@@ -3255,7 +3255,7 @@ msgstr "Phát đơn kênh"
 msgid "Months"
 msgstr "Tháng"
 
-#: playlist/playlist.cpp:1363
+#: playlist/playlist.cpp:1366
 msgid "Mood"
 msgstr "Sắc thái"
 
@@ -3403,7 +3403,7 @@ msgstr "Phát bài tiếp theo"
 msgid "Next week"
 msgstr "Tuần sau"
 
-#: analyzers/analyzercontainer.cpp:81
+#: analyzers/analyzercontainer.cpp:86
 msgid "No analyzer"
 msgstr "Không phân tích"
 
@@ -3708,7 +3708,7 @@ msgstr "Tạm dừng phát"
 msgid "Paused"
 msgstr "Đã tạm dừng"
 
-#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr ""
@@ -3728,7 +3728,7 @@ msgstr "Thanh bên đơn giản"
 msgid "Play"
 msgstr "Phát"
 
-#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1334 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Số lần phát"
 
@@ -3999,7 +3999,7 @@ msgstr "Đánh giá 4 sao cho bài hiện tại"
 msgid "Rate the current song 5 stars"
 msgstr "Đánh giá 5 sao cho bài hiện tại"
 
-#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Đánh giá"
 
@@ -4253,7 +4253,7 @@ msgstr "Tháo gỡ thiết bị an toàn"
 msgid "Safely remove the device after copying"
 msgstr "Tháo gỡ thiết bị an toàn sau khi sao chép"
 
-#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Tần số âm"
 
@@ -4323,7 +4323,7 @@ msgstr "Hồ sơ tỉ lệ mẫu có thể mở rộng (SSR)"
 msgid "Scale size"
 msgstr ""
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Điểm"
 
@@ -4685,7 +4685,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Không cho lùi lại trong danh sách"
 
-#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Không đếm"
 
@@ -4733,7 +4733,7 @@ msgstr "Thông tin bài hát"
 msgid "Song info"
 msgstr "Bài hát"
 
-#: analyzers/sonogram.cpp:21
+#: analyzers/sonogram.cpp:32
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4769,7 +4769,7 @@ msgstr "Sắp xếp"
 msgid "SoundCloud"
 msgstr ""
 
-#: playlist/playlist.cpp:1361
+#: playlist/playlist.cpp:1364
 msgid "Source"
 msgstr "Nguồn"
 
@@ -4912,7 +4912,7 @@ msgstr "Thẻ được đề nghị"
 msgid "Summary"
 msgstr "Tóm tắt"
 
-#: analyzers/analyzercontainer.cpp:65
+#: analyzers/analyzercontainer.cpp:70
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
@@ -5119,7 +5119,7 @@ msgstr "Luồng này chỉ dành cho người trả phí"
 msgid "This type of device is not supported: %1"
 msgstr "Loại thiết bị này không được hỗ trợ: %1"
 
-#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -5180,7 +5180,7 @@ msgstr "Số byte đã truyền tải"
 msgid "Total network requests made"
 msgstr "Số lần gửi yêu cầu"
 
-#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -5215,7 +5215,7 @@ msgstr "Tùy chỉnh chuyển mã"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:18
+#: analyzers/turbine.cpp:35
 msgid "Turbine"
 msgstr "Turbine"
 
@@ -5603,7 +5603,7 @@ msgstr ""
 msgid "Wrong username or password."
 msgstr "Sai tên người dùng hoặc mật khẩu."
 
-#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5746,7 +5746,7 @@ msgstr "Thông tin tài khoản Magnatune không đúng"
 msgid "Your library is empty!"
 msgstr "Thư viện của bạn chưa có gì!"
 
-#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26 internet/savedradio.cpp:47
 msgid "Your radio streams"
 msgstr "Kênh phát thanh của bạn"
 
