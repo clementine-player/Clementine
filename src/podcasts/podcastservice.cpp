@@ -39,6 +39,7 @@
 
 #include <QMenu>
 #include <QSortFilterProxyModel>
+#include <QtConcurrentRun>
 
 const char* PodcastService::kServiceName = "Podcasts";
 const char* PodcastService::kSettingsGroup = "Podcasts";
@@ -60,8 +61,7 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
       proxy_(new PodcastSortProxyModel(this)),
       context_menu_(nullptr),
       root_(nullptr),
-      organise_dialog_(new OrganiseDialog(app_->task_manager(),
-                                          nullptr)) {
+      organise_dialog_(new OrganiseDialog(app_->task_manager(), nullptr)) {
   icon_loader_->SetModel(model_);
   proxy_->setSourceModel(model_);
   proxy_->setDynamicSortFilter(true);
@@ -78,8 +78,8 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
 
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
           SLOT(CurrentSongChanged(Song)));
-  connect(organise_dialog_.get(), SIGNAL(FileCopied(int)),
-          this, SLOT(FileCopied(int)));
+  connect(organise_dialog_.get(), SIGNAL(FileCopied(int)), this,
+          SLOT(FileCopied(int)));
 }
 
 PodcastService::~PodcastService() {}
@@ -602,6 +602,13 @@ void PodcastService::ShowConfig() {
 }
 
 void PodcastService::CurrentSongChanged(const Song& metadata) {
+  // This does two db queries, and we are called on every song change, so run
+  // this off the main thread.
+  QtConcurrent::run(this, &PodcastService::UpdatePodcastListenedStateAsync,
+                    metadata);
+}
+
+void PodcastService::UpdatePodcastListenedStateAsync(const Song& metadata) {
   // Check whether this song is one of our podcast episodes.
   PodcastEpisode episode = backend_->GetEpisodeByUrlOrLocalUrl(metadata.url());
   if (!episode.is_valid()) return;
