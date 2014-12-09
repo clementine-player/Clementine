@@ -44,6 +44,7 @@ PlaylistTabBar::PlaylistTabBar(QWidget* parent)
       menu_(new QMenu(this)),
       menu_index_(-1),
       suppress_current_changed_(false),
+      initialized_(false),
       rename_editor_(new RenameTabLineEdit(this)) {
   setAcceptDrops(true);
   setElideMode(Qt::ElideRight);
@@ -79,6 +80,16 @@ void PlaylistTabBar::SetManager(PlaylistManager* manager) {
   manager_ = manager;
   connect(manager_, SIGNAL(PlaylistFavorited(int, bool)),
           SLOT(PlaylistFavoritedSlot(int, bool)));
+  connect(manager_, SIGNAL(PlaylistManagerInitialized()), this,
+          SLOT(PlaylistManagerInitialized()));
+}
+
+void PlaylistTabBar::PlaylistManagerInitialized() {
+  // Signal that we are done loading and thus further changes should be
+  // committed to the db.
+  initialized_ = true;
+  disconnect(manager_, SIGNAL(PlaylistManagerInitialized()), this,
+             SLOT(PlaylistManagerInitialized()));
 }
 
 void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
@@ -281,6 +292,7 @@ void PlaylistTabBar::InsertTab(int id, int index, const QString& text,
   insertTab(index, text);
   setTabData(index, id);
   setTabToolTip(index, text);
+
   FavoriteWidget* widget = new FavoriteWidget(id, favorite);
   widget->setToolTip(
       tr("Click here to favorite this playlist so it will be saved and remain "
@@ -291,14 +303,19 @@ void PlaylistTabBar::InsertTab(int id, int index, const QString& text,
   setTabButton(index, QTabBar::LeftSide, widget);
   suppress_current_changed_ = false;
 
-  if (currentIndex() == index) emit CurrentIdChanged(id);
+  // If we are still starting up, we don't need to do this, as the
+  // tab ordering after startup will be the same as was already in the db.
+  if (initialized_) {
+    if (currentIndex() == index) emit CurrentIdChanged(id);
 
-  // Update playlist tab order/visibility
-  TabMoved();
+    // Update playlist tab order/visibility
+    TabMoved();
+  }
 }
 
 void PlaylistTabBar::TabMoved() {
   QList<int> ids;
+
   for (int i = 0; i < count(); ++i) {
     ids << tabData(i).toInt();
   }

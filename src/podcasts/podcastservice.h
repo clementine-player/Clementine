@@ -96,6 +96,7 @@ class PodcastService : public InternetService {
  private:
   void EnsureAddPodcastDialogCreated();
 
+  void UpdatePodcastListenedStateAsync(const Song& metadata);
   void PopulatePodcastList(QStandardItem* parent);
   void UpdatePodcastText(QStandardItem* item, int unlistened_count) const;
   void UpdateEpisodeText(

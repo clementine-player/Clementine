@@ -232,7 +232,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   void OneOfPlaylistsChanged();
   void UpdateSummaryText();
   void SongsDiscovered(const SongList& songs);
-  void ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
+  void ItemsLoadedForSavePlaylist(QFutureWatcher<SongList>* watcher,
                                   const QString& filename,
                                   Playlist::Path path_type);
 

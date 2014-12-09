@@ -18,7 +18,6 @@
 #ifndef PLAYLISTBACKEND_H
 #define PLAYLISTBACKEND_H
 
-#include <QFuture>
 #include <QHash>
 #include <QList>
 #include <QMutex>
@@ -53,7 +52,6 @@ class PlaylistBackend : public QObject {
     QString special_type;
   };
   typedef QList<Playlist> PlaylistList;
-  typedef QFuture<PlaylistItemPtr> PlaylistItemFuture;
 
   static const int kSongTableJoins;
 
@@ -61,8 +59,9 @@ class PlaylistBackend : public QObject {
   PlaylistList GetAllOpenPlaylists();
   PlaylistList GetAllFavoritePlaylists();
   PlaylistBackend::Playlist GetPlaylist(int id);
-  PlaylistItemFuture GetPlaylistItems(int playlist);
-  QFuture<Song> GetPlaylistSongs(int playlist);
+
+  QList<PlaylistItemPtr> GetPlaylistItems(int playlist);
+  QList<Song> GetPlaylistSongs(int playlist);
 
   void SetPlaylistOrder(const QList<int>& ids);
   void SetPlaylistUiPath(int id, const QString& path);
@@ -87,7 +86,7 @@ class PlaylistBackend : public QObject {
     QMutex mutex_;
   };
 
-  QList<SqlRow> GetPlaylistRows(int playlist);
+  QSqlQuery GetPlaylistRows(int playlist);
 
   Song NewSongFromQuery(const SqlRow& row,
                         std::shared_ptr<NewSongFromQueryState> state);
