@@ -324,7 +324,6 @@ PodcastEpisodeList PodcastBackend::GetOldDownloadedEpisodes(
 
 PodcastEpisode PodcastBackend::GetOldestDownloadedListenedEpisode() {
   PodcastEpisode ret;
-  PodcastEpisodeList list_;
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());

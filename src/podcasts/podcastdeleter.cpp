@@ -15,14 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podcastbackend.h"
-#include "podcastdeleter.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
+#include "podcastbackend.h"
+#include "podcastdeleter.h"
 
 #include <QDateTime>
 #include <QDir>
@@ -43,6 +43,7 @@ PodcastDeleter::PodcastDeleter(Application* app, QObject* parent)
       auto_delete_timer_(new QTimer(this)) {
 
   ReloadSettings();
+  auto_delete_timer_->setSingleShot(true);
   AutoDelete();
   connect(auto_delete_timer_, SIGNAL(timeout()), SLOT(AutoDelete()));
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
@@ -76,7 +77,7 @@ void PodcastDeleter::AutoDelete() {
   }
   auto_delete_timer_->stop();
   QDateTime max_date = QDateTime::currentDateTime();
-  QDateTime time_out;
+  qint64 time_out;
   PodcastEpisode oldest_episode;
   QDateTime oldest_episode_time;
   max_date = max_date.addSecs(-delete_after_secs_);
@@ -99,11 +100,11 @@ void PodcastDeleter::AutoDelete() {
     oldest_episode_time = oldest_episode.listened_date();
   }
 
-  time_out = QDateTime::currentDateTime();
-  time_out = time_out.addMSecs(-oldest_episode_time.toMSecsSinceEpoch());
-  time_out.setTime_t(delete_after_secs_ - time_out.toTime_t());
-  if (time_out.isValid()) {
-    auto_delete_timer_->setInterval(time_out.toMSecsSinceEpoch());
+  time_out = QDateTime::currentDateTime().toMSecsSinceEpoch();
+  time_out -= oldest_episode_time.toMSecsSinceEpoch();
+  time_out = (delete_after_secs_ * kMsecPerSec) - time_out;
+  if (time_out >= 0) {
+    auto_delete_timer_->setInterval(time_out);
   } else {
     auto_delete_timer_->setInterval(kAutoDeleteCheckIntervalMsec);
   }

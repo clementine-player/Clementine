@@ -24,6 +24,7 @@
 #include "podcast.h"
 #include "podcastepisode.h"
 
+#include <memory>
 #include <QFile>
 #include <QList>
 #include <QObject>
@@ -51,8 +52,7 @@ class Task : public QObject {
 
  public:
   Task(PodcastEpisode episode, QFile* file, PodcastBackend* backend);
-  ~Task();
-  PodcastEpisode episode();
+  const PodcastEpisode episode();
 
  signals:
   void ProgressChanged(const PodcastEpisode& episode,
@@ -61,16 +61,16 @@ class Task : public QObject {
 
  private slots:
   void reading();
-  void finished_();
+  void finishedInternal();
   void downloadProgress_(qint64 received, qint64 total);
 
  private:
-  QFile* file_;
+  std::unique_ptr<QFile> file_;
   PodcastEpisode episode_;
   QNetworkRequest req_;
   PodcastBackend* backend_;
-  NetworkAccessManager* network_;
-  RedirectFollower* repl;
+  std::unique_ptr<NetworkAccessManager> network_;
+  std::unique_ptr<RedirectFollower> repl;
 };
 
 class PodcastDownloader : public QObject {

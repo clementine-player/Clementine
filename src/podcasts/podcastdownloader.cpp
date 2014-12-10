@@ -17,8 +17,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podcastbackend.h"
-#include "podcastdownloader.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/network.h"
@@ -27,6 +25,8 @@
 #include "core/utilities.h"
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
+#include "podcastbackend.h"
+#include "podcastdownloader.h"
 
 #include <QDateTime>
 #include <QDir>
@@ -40,24 +40,18 @@ const char* PodcastDownloader::kSettingsGroup = "Podcasts";
 Task::Task(PodcastEpisode episode, QFile* file, PodcastBackend* backend)
   : file_(file),
     episode_(episode),
+    req_(QNetworkRequest(episode.url())),
     backend_(backend),
-    network_(new NetworkAccessManager(this)) {
-  req_ = QNetworkRequest(episode_.url());
-  repl = new RedirectFollower(network_->get(req_));
-  connect(repl, SIGNAL(readyRead()), SLOT(reading()));
-  connect(repl, SIGNAL(finished()), SLOT(finished_()));
-  connect(repl, SIGNAL(downloadProgress(qint64, qint64)),
+    network_(new NetworkAccessManager(this)),
+    repl(new RedirectFollower(network_->get(req_))) {
+  connect(repl.get(), SIGNAL(readyRead()), SLOT(reading()));
+  connect(repl.get(), SIGNAL(finished()), SLOT(finishedInternal()));
+  connect(repl.get(), SIGNAL(downloadProgress(qint64, qint64)),
           SLOT(downloadProgress_(qint64, qint64)));
   emit ProgressChanged(episode_, PodcastDownload::Downloading, 0);
 }
 
-Task::~Task() {
-  delete repl;
-  delete file_;
-  delete network_;
-}
-
-PodcastEpisode Task::episode() {
+const PodcastEpisode Task::episode() {
   return episode_;
 }
 
@@ -71,7 +65,7 @@ void Task::reading() {
   }
 }
 
-void Task::finished_() {
+void Task::finishedInternal() {
   if (repl->error() != QNetworkReply::NoError) {
     qLog(Warning) << "Error downloading episode:" << repl->errorString();
     emit ProgressChanged(episode_, PodcastDownload::NotDownloading, 0);
@@ -177,9 +171,6 @@ QString PodcastDownloader::FilenameForEpisode(const QString& directory,
 }
 
 void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
-  QFile* file = nullptr;
-  Task* task = nullptr;
-
   for ( Task* tas : list_tasks_ ) {
     if (tas->episode().database_id() == episode.database_id()) {
       return;
@@ -189,7 +180,7 @@ void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
   Podcast podcast =
       backend_->GetSubscriptionById(episode.podcast_database_id());
   if (!podcast.is_valid()) {
-    qLog(Warning) << "The podcast that contains episode" << task->episode().url()
+    qLog(Warning) << "The podcast that contains episode" << episode.url()
                   << "doesn't exist any more";
     return;
   }
@@ -199,13 +190,13 @@ void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
 
   // Open the output file
   QDir().mkpath(directory);
-  file = new QFile(filepath);
+  QFile* file = new QFile(filepath);
   if (!file->open(QIODevice::WriteOnly)) {
     qLog(Warning) << "Could not open the file" << filepath << "for writing";
     return;
   }
 
-  task = new Task(episode, file, backend_);
+  Task* task = new Task(episode, file, backend_);
 
   list_tasks_ << task;
   qLog(Info) << "Downloading" << task->episode().url() << "to" << filepath;
