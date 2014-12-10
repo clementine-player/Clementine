@@ -228,4 +228,3 @@ void PodcastDownloader::EpisodesAdded(const PodcastEpisodeList& episodes) {
     }
   }
 }
-
