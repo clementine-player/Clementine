@@ -192,11 +192,9 @@ void PodcastService::LazyPopulate(QStandardItem* parent) {
 
 void PodcastService::PopulatePodcastList(QStandardItem* parent) {
   // Do this here since the downloader won't be created yet in the ctor.
-  connect(
-      app_->podcast_downloader(),
-      SIGNAL(ProgressChanged(PodcastEpisode, PodcastDownload::State, int)),
-      SLOT(DownloadProgressChanged(PodcastEpisode, PodcastDownload::State,
-                                   int)));
+  connect(app_->podcast_downloader(),
+          SIGNAL(ProgressChanged(PodcastEpisode, PodcastDownload::State, int)),
+          SLOT(DownloadProgressChanged(PodcastEpisode, PodcastDownload::State, int)));
 
   if (default_icon_.isNull()) {
     default_icon_ = QIcon(":providers/podcast16.png");
@@ -260,7 +258,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
       tooltip = tr("Download queued");
       break;
 
-  case PodcastDownload::Downloading:
+    case PodcastDownload::Downloading:
       if (downloading_icon_.isNull()) {
         downloading_icon_ = IconLoader::Load("go-down");
       }
@@ -270,8 +268,8 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
           QString("[ %1% ] %2").arg(QString::number(percent), episode.title());
       break;
 
-  case PodcastDownload::Finished:
-  case PodcastDownload::NotDownloading:
+    case PodcastDownload::Finished:
+    case PodcastDownload::NotDownloading:
       break;
   }
 
@@ -283,8 +281,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
 void PodcastService::UpdatePodcastText(QStandardItem* item,
                                        PodcastDownload::State state,
                                        int percent) {
-  const Podcast podcast =
-      item->data(Role_Podcast).value<Podcast>();
+  const Podcast podcast = item->data(Role_Podcast).value<Podcast>();
 
   QString tooltip;
   QIcon icon;
@@ -300,7 +297,7 @@ void PodcastService::UpdatePodcastText(QStandardItem* item,
       tooltip = tr("Download queued");
       break;
 
-  case PodcastDownload::Downloading:
+    case PodcastDownload::Downloading:
       if (downloading_icon_.isNull()) {
         downloading_icon_ = IconLoader::Load("go-down");
       }
@@ -309,8 +306,8 @@ void PodcastService::UpdatePodcastText(QStandardItem* item,
       tooltip = tr("Downloading (%1%)...").arg(percent);
       break;
 
-  case PodcastDownload::Finished:
-  case PodcastDownload::NotDownloading:
+    case PodcastDownload::Finished:
+    case PodcastDownload::NotDownloading:
       if (podcast.ImageUrlSmall().isValid()) {
         icon_loader_->LoadIcon(podcast.ImageUrlSmall().toString(), QString(), item);
       } else {

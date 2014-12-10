@@ -41,7 +41,6 @@ PodcastDeleter::PodcastDeleter(Application* app, QObject* parent)
       backend_(app_->podcast_backend()),
       delete_after_secs_(0),
       auto_delete_timer_(new QTimer(this)) {
-
   ReloadSettings();
   auto_delete_timer_->setSingleShot(true);
   AutoDelete();

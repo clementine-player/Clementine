@@ -38,12 +38,12 @@
 const char* PodcastDownloader::kSettingsGroup = "Podcasts";
 
 Task::Task(PodcastEpisode episode, QFile* file, PodcastBackend* backend)
-  : file_(file),
-    episode_(episode),
-    req_(QNetworkRequest(episode.url())),
-    backend_(backend),
-    network_(new NetworkAccessManager(this)),
-    repl(new RedirectFollower(network_->get(req_))) {
+    : file_(file),
+      episode_(episode),
+      req_(QNetworkRequest(episode.url())),
+      backend_(backend),
+      network_(new NetworkAccessManager(this)),
+      repl(new RedirectFollower(network_->get(req_))) {
   connect(repl.get(), SIGNAL(readyRead()), SLOT(reading()));
   connect(repl.get(), SIGNAL(finished()), SLOT(finishedInternal()));
   connect(repl.get(), SIGNAL(downloadProgress(qint64, qint64)),
@@ -51,9 +51,7 @@ Task::Task(PodcastEpisode episode, QFile* file, PodcastBackend* backend)
   emit ProgressChanged(episode_, PodcastDownload::Downloading, 0);
 }
 
-const PodcastEpisode Task::episode() {
-  return episode_;
-}
+const PodcastEpisode Task::episode() { return episode_; }
 
 void Task::reading() {
   qint64 bytes = 0;
@@ -84,7 +82,7 @@ void Task::finishedInternal() {
   episode.set_local_url(QUrl::fromLocalFile(file_->fileName()));
   backend_->UpdateEpisodes(PodcastEpisodeList() << episode);
   Podcast podcast =
-     backend_->GetSubscriptionById(episode.podcast_database_id());
+      backend_->GetSubscriptionById(episode.podcast_database_id());
   Song song = episode_.ToSong(podcast);
 
   emit ProgressChanged(episode_, PodcastDownload::Finished, 0);
@@ -171,7 +169,7 @@ QString PodcastDownloader::FilenameForEpisode(const QString& directory,
 }
 
 void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
-  for ( Task* tas : list_tasks_ ) {
+  for (Task* tas : list_tasks_) {
     if (tas->episode().database_id() == episode.database_id()) {
       return;
     }
