@@ -1717,7 +1717,15 @@ QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
 
 namespace {
 bool CompareSongs(const QVariant& song1, const QVariant& song2) {
-  return song1.toMap()["Sort"].toInt() < song1.toMap()["Sort"].toInt();
+  QMap<QString, QVariant> song1_map = song1.toMap();
+  QMap<QString, QVariant> song2_map = song2.toMap();
+  int song1_sort = song1_map["Sort"].toInt();
+  int song2_sort = song2_map["Sort"].toInt();
+  if (song1_sort == song2_sort) {
+    // Favorite songs have a "TSFavorited" and (currently) no "Sort" field
+    return song1_map["TSFavorited"].toString() < song2_map["TSFavorited"].toString();
+  }
+  return song1_sort < song2_sort;
 }
 }
 
