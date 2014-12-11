@@ -58,10 +58,10 @@ class PodcastService : public InternetService {
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
-
+  bool hasLoadSettings() const { return true; }
   void ShowContextMenu(const QPoint& global_pos);
   void ReloadSettings();
-
+  void LoadSettings();
   // Called by SongLoader when the user adds a Podcast URL directly.  Adds a
   // subscription to the podcast and displays it in the UI.  If the QVariant
   // contains an OPML file then this displays it in the Add Podcast dialog.
@@ -73,6 +73,7 @@ class PodcastService : public InternetService {
 
  private slots:
   void UpdateSelectedPodcast();
+  void ReloadPodcast(const Podcast& podcast);
   void RemoveSelectedPodcast();
   void DownloadSelectedEpisode();
   void DeleteDownloadedData();
@@ -103,6 +104,7 @@ class PodcastService : public InternetService {
 
   void UpdatePodcastListenedStateAsync(const Song& metadata);
   void PopulatePodcastList(QStandardItem* parent);
+  void ClearPodcastList(QStandardItem* parent);
   void UpdatePodcastText(QStandardItem* item, int unlistened_count) const;
   void UpdateEpisodeText(
       QStandardItem* item,
@@ -126,6 +128,8 @@ class PodcastService : public InternetService {
 
  private:
   bool use_pretty_covers_;
+  bool hide_listened_;
+  qint64 show_episodes_;
   StandardItemIconLoader* icon_loader_;
 
   // The podcast icon

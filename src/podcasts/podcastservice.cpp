@@ -58,6 +58,8 @@ class PodcastSortProxyModel : public QSortFilterProxyModel {
 PodcastService::PodcastService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       use_pretty_covers_(true),
+      hide_listened_(false),
+      show_episodes_(0),
       icon_loader_(new StandardItemIconLoader(app->album_cover_loader(), this)),
       backend_(app->podcast_backend()),
       model_(new PodcastServiceModel(this)),
@@ -232,6 +234,10 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
   }
 }
 
+void PodcastService::ClearPodcastList(QStandardItem* parent) {
+  parent->removeRows(0, parent->rowCount());
+}
+
 void PodcastService::UpdatePodcastText(QStandardItem* item,
                                        int unlistened_count) const {
   const Podcast podcast = item->data(Role_Podcast).value<Podcast>();
@@ -349,13 +355,23 @@ QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
 
   // Add the episodes in this podcast and gather aggregate stats.
   int unlistened_count = 0;
+  qint64 number = 0;
   for (const PodcastEpisode& episode :
        backend_->GetEpisodes(podcast.database_id())) {
     if (!episode.listened()) {
       unlistened_count++;
     }
 
-    item->appendRow(CreatePodcastEpisodeItem(episode));
+    if (episode.listened() && hide_listened_) {
+      continue;
+    } else {
+      item->appendRow(CreatePodcastEpisodeItem(episode));
+      ++number;
+    }
+
+    if ((number >= show_episodes_) && (show_episodes_ != 0)) {
+      break;
+    }
   }
 
   item->setIcon(default_icon_);
@@ -535,10 +551,20 @@ void PodcastService::RemoveSelectedPodcast() {
 }
 
 void PodcastService::ReloadSettings() {
+  LoadSettings();
+  ClearPodcastList(model_->invisibleRootItem());
+  PopulatePodcastList(model_->invisibleRootItem());
+}
+
+void PodcastService::LoadSettings() {
   QSettings s;
   s.beginGroup(LibraryView::kSettingsGroup);
-
   use_pretty_covers_ = s.value("pretty_covers", true).toBool();
+  s.endGroup();
+  s.beginGroup(kSettingsGroup);
+  hide_listened_ = s.value("hide_listened", false).toBool();
+  show_episodes_ = s.value("show_episodes", 0).toInt();
+  s.endGroup();
   // TODO(notme): reload the podcast icons that are already loaded?
 }
 
@@ -598,7 +624,6 @@ void PodcastService::EpisodesAdded(const PodcastEpisodeList& episodes) {
     if (!parent) continue;
 
     parent->appendRow(CreatePodcastEpisodeItem(episode));
-
     if (!seen_podcast_ids.contains(database_id)) {
       // Update the unlistened count text once for each podcast
       int unlistened_count = 0;
@@ -611,6 +636,8 @@ void PodcastService::EpisodesAdded(const PodcastEpisodeList& episodes) {
       UpdatePodcastText(parent, unlistened_count);
       seen_podcast_ids.insert(database_id);
     }
+    const Podcast podcast = parent->data(Role_Podcast).value<Podcast>();
+    ReloadPodcast(podcast);
   }
 }
 
@@ -622,7 +649,6 @@ void PodcastService::EpisodesUpdated(const PodcastEpisodeList& episodes) {
     QStandardItem* item = episodes_by_database_id_[episode.database_id()];
     QStandardItem* parent = podcasts_by_database_id_[podcast_database_id];
     if (!item || !parent) continue;
-
     // Update the episode data on the item, and update the item's text.
     item->setData(QVariant::fromValue(episode), Role_Episode);
     UpdateEpisodeText(item);
@@ -641,6 +667,8 @@ void PodcastService::EpisodesUpdated(const PodcastEpisodeList& episodes) {
       UpdatePodcastText(parent, unlistened_count);
       seen_podcast_ids.insert(podcast_database_id);
     }
+    const Podcast podcast = parent->data(Role_Podcast).value<Podcast>();
+    ReloadPodcast(podcast);
   }
 }
 
@@ -779,4 +807,14 @@ void PodcastService::SubscribeAndShow(const QVariant& podcast_or_opml) {
 
     add_podcast_dialog_->ShowWithOpml(podcast_or_opml.value<OpmlContainer>());
   }
+}
+
+void PodcastService::ReloadPodcast(const Podcast& podcast) {
+  if (!(hide_listened_ || (show_episodes_ > 0))) {
+    return;
+  }
+  QStandardItem* item = podcasts_by_database_id_[podcast.database_id()];
+
+  model_->invisibleRootItem()->removeRow(item->row());
+  model_->invisibleRootItem()->appendRow(CreatePodcastItem(podcast));
 }

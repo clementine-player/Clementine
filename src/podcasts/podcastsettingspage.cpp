@@ -75,7 +75,9 @@ void PodcastSettingsPage::Load() {
       s.value("download_dir", default_download_dir).toString()));
 
   ui_->auto_download->setChecked(s.value("auto_download", false).toBool());
+  ui_->hide_listened->setChecked(s.value("hide_listened", false).toBool());
   ui_->delete_after->setValue(s.value("delete_after", 0).toInt() / kSecsPerDay);
+  ui_->show_episodes->setValue(s.value("show_episodes", 0).toInt());
   ui_->username->setText(s.value("gpodder_username").toString());
   ui_->device_name->setText(
       s.value("gpodder_device_name", GPodderSync::DefaultDeviceName())
@@ -98,7 +100,9 @@ void PodcastSettingsPage::Save() {
   s.setValue("download_dir",
              QDir::fromNativeSeparators(ui_->download_dir->text()));
   s.setValue("auto_download", ui_->auto_download->isChecked());
+  s.setValue("hide_listened", ui_->hide_listened->isChecked());
   s.setValue("delete_after", ui_->delete_after->value() * kSecsPerDay);
+  s.setValue("show_episodes", ui_->show_episodes->value());
   s.setValue("gpodder_device_name", ui_->device_name->text());
 }
 
