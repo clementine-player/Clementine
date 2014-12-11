@@ -571,17 +571,43 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
 QDateTime ParseRFC822DateTime(const QString& text) {
   // This sucks but we need it because some podcasts don't quite follow the
   // spec properly - they might have 1-digit hour numbers for example.
-
+  QDateTime ret;
   QRegExp re(
       "([a-zA-Z]{3}),? (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) "
       "(\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
-  if (re.indexIn(text) == -1) return QDateTime();
-
-  return QDateTime(
+  if (re.indexIn(text) != -1) {
+    ret = QDateTime(
       QDate::fromString(QString("%1 %2 %3 %4")
-                            .arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)),
+                        .arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)),
                         Qt::TextDate),
       QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
+  }
+  if (ret.isValid()) return ret;
+  // Because http://feeds.feedburner.com/reasonabledoubts/Msxh?format=xml
+  QRegExp re2(
+      "(\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) "
+      "(\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
+
+  QMap<QString, int> monthmap;
+  monthmap["Jan"] = 1;
+  monthmap["Feb"] = 2;
+  monthmap["Mar"] = 3;
+  monthmap["Apr"] = 4;
+  monthmap["May"] = 5;
+  monthmap["Jun"] = 6;
+  monthmap["Jul"] = 7;
+  monthmap["Aug"] = 8;
+  monthmap["Sep"] = 9;
+  monthmap["Oct"] = 10;
+  monthmap["Nov"] = 11;
+  monthmap["Dec"] = 12;
+
+  if (re2.indexIn(text) != -1) {
+    QDate date(re2.cap(3).toInt(), monthmap[re2.cap(2)], re2.cap(1).toInt());
+    ret = QDateTime(date,
+                    QTime(re2.cap(4).toInt(), re2.cap(5).toInt(), re2.cap(6).toInt()));
+  }
+  return ret;
 }
 
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {

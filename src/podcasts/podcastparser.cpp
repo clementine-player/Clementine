@@ -211,8 +211,12 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
         } else if (name == "description") {
           episode.set_description(reader->readElementText());
         } else if (name == "pubDate") {
-          episode.set_publication_date(
-              Utilities::ParseRFC822DateTime(reader->readElementText()));
+          QString date = reader->readElementText();
+          episode.set_publication_date(Utilities::ParseRFC822DateTime(date));
+          if (!episode.publication_date().isValid()) {
+            qLog(Error) << "Unable to parse date:" << date
+                        << "Pleas submit it to https://github.com/clementine-player/Clementine/issues/new";
+          }
         } else if (name == "duration" && lower_namespace == kItunesNamespace) {
           // http://www.apple.com/itunes/podcasts/specs.html
           QStringList parts = reader->readElementText().split(':');
@@ -238,6 +242,9 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
       }
 
       case QXmlStreamReader::EndElement:
+        if (!episode.publication_date().isValid()) {
+          episode.set_publication_date(QDateTime::currentDateTime());
+        }
         if (!episode.url().isEmpty()) {
           ret->add_episode(episode);
         }
