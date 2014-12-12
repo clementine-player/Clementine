@@ -17,16 +17,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podcast.h"
 #include "podcastepisode.h"
-#include "core/logging.h"
-#include "core/timeconstants.h"
-#include "core/utilities.h"
 
 #include <QDataStream>
 #include <QDateTime>
 #include <QFile>
 #include <QFileInfo>
+
+#include "podcast.h"
+#include "core/logging.h"
+#include "core/timeconstants.h"
+#include "core/utilities.h"
 
 const QStringList PodcastEpisode::kColumns = QStringList() << "podcast_id"
                                                            << "title"

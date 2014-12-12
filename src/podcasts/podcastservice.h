@@ -94,6 +94,9 @@ class PodcastService : public InternetService {
   void CopyToDevice(const PodcastEpisodeList& episodes_list);
   void CopyToDevice(const QModelIndexList& episode_indexes,
                     const QModelIndexList& podcast_indexes);
+  void CancelDownload();
+  void CancelDownload(const QModelIndexList& episode_indexes,
+                      const QModelIndexList& podcast_indexes);
 
  private:
   void EnsureAddPodcastDialogCreated();
@@ -145,6 +148,7 @@ class PodcastService : public InternetService {
   QAction* set_new_action_;
   QAction* set_listened_action_;
   QAction* copy_to_device_;
+  QAction* cancel_download_;
   QStandardItem* root_;
   std::unique_ptr<OrganiseDialog> organise_dialog_;
 

@@ -52,17 +52,20 @@ class Task : public QObject {
 
  public:
   Task(PodcastEpisode episode, QFile* file, PodcastBackend* backend);
-  const PodcastEpisode episode();
+  PodcastEpisode episode() const;
 
  signals:
   void ProgressChanged(const PodcastEpisode& episode,
                        PodcastDownload::State state, int percent);
   void finished();
 
+ public slots:
+  void finishedPublic();
+
  private slots:
   void reading();
+  void downloadProgressInternal(qint64 received, qint64 total);
   void finishedInternal();
-  void downloadProgress_(qint64 received, qint64 total);
 
  private:
   std::unique_ptr<QFile> file_;
@@ -80,12 +83,13 @@ class PodcastDownloader : public QObject {
   explicit PodcastDownloader(Application* app, QObject* parent = nullptr);
 
   static const char* kSettingsGroup;
-
+  PodcastEpisodeList EpisodesDownloading(const PodcastEpisodeList& episodes);
   QString DefaultDownloadDir() const;
 
  public slots:
   // Adds the episode to the download queue
   void DownloadEpisode(const PodcastEpisode& episode);
+  void cancelDownload(const PodcastEpisodeList& episodes);
 
  signals:
   void ProgressChanged(const PodcastEpisode& episode,

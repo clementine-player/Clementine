@@ -18,12 +18,13 @@
 */
 
 #include "podcastbackend.h"
+
+#include <QMutexLocker>
+
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/scopedtransaction.h"
-
-#include <QMutexLocker>
 
 PodcastBackend::PodcastBackend(Application* app, QObject* parent)
     : QObject(parent), app_(app), db_(app->database()) {}

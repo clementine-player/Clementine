@@ -18,12 +18,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "podcastservice.h"
+
+#include <QMenu>
+#include <QSortFilterProxyModel>
+#include <QtConcurrentRun>
+
 #include "addpodcastdialog.h"
 #include "opmlcontainer.h"
 #include "podcastbackend.h"
 #include "podcastdeleter.h"
 #include "podcastdownloader.h"
-#include "podcastservice.h"
 #include "podcastservicemodel.h"
 #include "podcastupdater.h"
 #include "core/application.h"
@@ -38,10 +43,6 @@
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
 #include "ui/standarditemiconloader.h"
-
-#include <QMenu>
-#include <QSortFilterProxyModel>
-#include <QtConcurrentRun>
 
 const char* PodcastService::kServiceName = "Podcasts";
 const char* PodcastService::kSettingsGroup = "Podcasts";
@@ -179,6 +180,32 @@ void PodcastService::CopyToDevice(const QModelIndexList& episode_indexes,
       app_->device_manager()->connected_devices_model(), true);
   organise_dialog_->SetCopy(true);
   if (organise_dialog_->SetSongs(songs)) organise_dialog_->show();
+}
+
+void PodcastService::CancelDownload() {
+  CancelDownload(selected_episodes_, explicitly_selected_podcasts_);
+}
+
+void PodcastService::CancelDownload(const QModelIndexList& episode_indexes,
+                                    const QModelIndexList& podcast_indexes) {
+  PodcastEpisode episode_tmp;
+  SongList songs;
+  PodcastEpisodeList episodes;
+  Podcast podcast;
+  for (const QModelIndex& index : episode_indexes) {
+    episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
+    episodes << episode_tmp;
+  }
+
+  for (const QModelIndex& podcast : podcast_indexes) {
+    for (int i = 0; i < podcast.model()->rowCount(podcast); ++i) {
+      const QModelIndex& index = podcast.child(i, 0);
+      episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
+      episodes << episode_tmp;
+    }
+  }
+  episodes = app_->podcast_downloader()->EpisodesDownloading(episodes);
+  app_->podcast_downloader()->cancelDownload(episodes);
 }
 
 void PodcastService::LazyPopulate(QStandardItem* parent) {
@@ -391,6 +418,9 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
     copy_to_device_ = context_menu_->addAction(
         IconLoader::Load("multimedia-player-ipod-mini-blue"),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
+    cancel_download_ = context_menu_->addAction(
+        IconLoader::Load("cancel"),
+        tr("Cancel download"), this, SLOT(CancelDownload()));
     remove_selected_action_ = context_menu_->addAction(
         IconLoader::Load("list-remove"), tr("Unsubscribe"), this,
         SLOT(RemoveSelectedPodcast()));
@@ -452,6 +482,7 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   remove_selected_action_->setEnabled(podcasts);
   set_new_action_->setEnabled(episodes || podcasts);
   set_listened_action_->setEnabled(episodes || podcasts);
+  cancel_download_->setEnabled(episodes || podcasts);
 
   if (selected_episodes_.count() == 1) {
     const PodcastEpisode episode =
