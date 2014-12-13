@@ -41,6 +41,7 @@
 #include "playlist/playlistmanager.h"
 #include "podcasts/gpoddersync.h"
 #include "podcasts/podcastbackend.h"
+#include "podcasts/podcastdeleter.h"
 #include "podcasts/podcastdownloader.h"
 #include "podcasts/podcastupdater.h"
 
@@ -73,6 +74,7 @@ Application::Application(QObject* parent)
       library_(nullptr),
       device_manager_(nullptr),
       podcast_updater_(nullptr),
+      podcast_deleter_(nullptr),
       podcast_downloader_(nullptr),
       gpodder_sync_(nullptr),
       moodbar_loader_(nullptr),
@@ -107,6 +109,10 @@ Application::Application(QObject* parent)
   library_ = new Library(this, this);
   device_manager_ = new DeviceManager(this, this);
   podcast_updater_ = new PodcastUpdater(this, this);
+
+  podcast_deleter_ = new PodcastDeleter(this, this);
+  MoveToNewThread(podcast_deleter_);
+
   podcast_downloader_ = new PodcastDownloader(this, this);
   gpodder_sync_ = new GPodderSync(this, this);
 

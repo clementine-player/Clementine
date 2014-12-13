@@ -282,6 +282,7 @@ set(SOURCES
   podcasts/podcast.cpp
   podcasts/podcastbackend.cpp
   podcasts/podcastdiscoverymodel.cpp
+  podcasts/podcastdeleter.cpp
   podcasts/podcastdownloader.cpp
   podcasts/podcastepisode.cpp
   podcasts/podcastinfowidget.cpp
@@ -578,6 +579,7 @@ set(HEADERS
   podcasts/itunessearchpage.h
   podcasts/podcastbackend.h
   podcasts/podcastdiscoverymodel.h
+  podcasts/podcastdeleter.h
   podcasts/podcastdownloader.h
   podcasts/podcastinfowidget.h
   podcasts/podcastservice.h

@@ -18,12 +18,12 @@
 */
 
 #include "podcast.h"
-#include "core/utilities.h"
 
 #include <QDataStream>
 #include <QDateTime>
-
 #include <Podcast.h>
+
+#include "core/utilities.h"
 
 const QStringList Podcast::kColumns = QStringList() << "url"
                                                     << "title"

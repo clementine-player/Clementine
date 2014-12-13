@@ -17,16 +17,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podcast.h"
 #include "podcastepisode.h"
-#include "core/logging.h"
-#include "core/timeconstants.h"
-#include "core/utilities.h"
 
 #include <QDataStream>
 #include <QDateTime>
 #include <QFile>
 #include <QFileInfo>
+
+#include "podcast.h"
+#include "core/logging.h"
+#include "core/timeconstants.h"
+#include "core/utilities.h"
 
 const QStringList PodcastEpisode::kColumns = QStringList() << "podcast_id"
                                                            << "title"
@@ -183,8 +184,10 @@ Song PodcastEpisode::ToSong(const Podcast& podcast) const {
   ret.set_comment(description());
   ret.set_id(database_id());
   ret.set_ctime(publication_date().toTime_t());
+  ret.set_genre(QString("Podcast"));
+  ret.set_genre_id3(186);
 
-  if (listened()) {
+  if (listened() && listened_date().isValid()) {
     ret.set_mtime(listened_date().toTime_t());
   } else {
     ret.set_mtime(publication_date().toTime_t());

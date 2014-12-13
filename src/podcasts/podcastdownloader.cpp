@@ -17,16 +17,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podcastbackend.h"
 #include "podcastdownloader.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/network.h"
-#include "core/tagreaderclient.h"
-#include "core/timeconstants.h"
-#include "core/utilities.h"
-#include "library/librarydirectorymodel.h"
-#include "library/librarymodel.h"
 
 #include <QDateTime>
 #include <QDir>
@@ -35,17 +26,90 @@
 #include <QSettings>
 #include <QTimer>
 
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "core/tagreaderclient.h"
+#include "core/timeconstants.h"
+#include "core/utilities.h"
+#include "library/librarydirectorymodel.h"
+#include "library/librarymodel.h"
+#include "podcastbackend.h"
+
 const char* PodcastDownloader::kSettingsGroup = "Podcasts";
-const int PodcastDownloader::kAutoDeleteCheckIntervalMsec =
-    15 * 60 * kMsecPerSec;  // 15 minutes
 
-struct PodcastDownloader::Task {
-  Task() : file(nullptr) {}
-  ~Task() { delete file; }
+Task::Task(PodcastEpisode episode, QFile* file, PodcastBackend* backend)
+    : file_(file),
+      episode_(episode),
+      req_(QNetworkRequest(episode.url())),
+      backend_(backend),
+      network_(new NetworkAccessManager(this)),
+      repl(new RedirectFollower(network_->get(req_))) {
+  connect(repl.get(), SIGNAL(readyRead()), SLOT(reading()));
+  connect(repl.get(), SIGNAL(finished()), SLOT(finishedInternal()));
+  connect(repl.get(), SIGNAL(downloadProgress(qint64, qint64)),
+          SLOT(downloadProgressInternal(qint64, qint64)));
+  emit ProgressChanged(episode_, PodcastDownload::Downloading, 0);
+}
 
-  PodcastEpisode episode;
-  QFile* file;
-};
+PodcastEpisode Task::episode() const { return episode_; }
+
+void Task::reading() {
+  qint64 bytes = 0;
+  forever {
+    bytes = repl->bytesAvailable();
+    if (bytes <= 0) break;
+
+    file_->write(repl->reply()->read(bytes));
+  }
+}
+void Task::finishedPublic() {
+    disconnect(repl.get(), SIGNAL(readyRead()), 0, 0);
+    disconnect(repl.get(), SIGNAL(downloadProgress(qint64, qint64)), 0, 0);
+    disconnect(repl.get(), SIGNAL(finished()), 0, 0);
+    emit ProgressChanged(episode_, PodcastDownload::NotDownloading, 0);
+    // Delete the file
+    file_->remove();
+    emit finished(this);
+}
+
+void Task::finishedInternal() {
+  if (repl->error() != QNetworkReply::NoError) {
+    qLog(Warning) << "Error downloading episode:" << repl->errorString();
+    emit ProgressChanged(episode_, PodcastDownload::NotDownloading, 0);
+    // Delete the file
+    file_->remove();
+    emit finished(this);
+    return;
+  }
+
+  qLog(Info) << "Download of" << file_->fileName() << "finished";
+
+  // Tell the database the episode has been updated.  Get it from the DB again
+  // in case the listened field changed in the mean time.
+  PodcastEpisode episode = episode_;
+  episode.set_downloaded(true);
+  episode.set_local_url(QUrl::fromLocalFile(file_->fileName()));
+  backend_->UpdateEpisodes(PodcastEpisodeList() << episode);
+  Podcast podcast =
+      backend_->GetSubscriptionById(episode.podcast_database_id());
+  Song song = episode_.ToSong(podcast);
+
+  emit ProgressChanged(episode_, PodcastDownload::Finished, 0);
+
+  // I didn't ecountered even a single podcast with a corect metadata
+  TagReaderClient::Instance()->SaveFileBlocking(file_->fileName(), song);
+  emit finished(this);
+}
+
+void Task::downloadProgressInternal(qint64 received, qint64 total) {
+  if (total <= 0) {
+    emit ProgressChanged(episode_, PodcastDownload::Downloading, 0);
+  } else {
+    emit ProgressChanged(episode_, PodcastDownload::Downloading,
+                         static_cast<float>(received) / total * 100);
+  }
+}
 
 PodcastDownloader::PodcastDownloader(Application* app, QObject* parent)
     : QObject(parent),
@@ -53,20 +117,12 @@ PodcastDownloader::PodcastDownloader(Application* app, QObject* parent)
       backend_(app_->podcast_backend()),
       network_(new NetworkAccessManager(this)),
       disallowed_filename_characters_("[^a-zA-Z0-9_~ -]"),
-      auto_download_(false),
-      delete_after_secs_(0),
-      current_task_(nullptr),
-      last_progress_signal_(0),
-      auto_delete_timer_(new QTimer(this)) {
+      auto_download_(false) {
   connect(backend_, SIGNAL(EpisodesAdded(PodcastEpisodeList)),
           SLOT(EpisodesAdded(PodcastEpisodeList)));
   connect(backend_, SIGNAL(SubscriptionAdded(Podcast)),
           SLOT(SubscriptionAdded(Podcast)));
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
-  connect(auto_delete_timer_, SIGNAL(timeout()), SLOT(AutoDelete()));
-
-  auto_delete_timer_->setInterval(kAutoDeleteCheckIntervalMsec);
-  auto_delete_timer_->start();
 
   ReloadSettings();
 }
@@ -89,61 +145,10 @@ void PodcastDownloader::ReloadSettings() {
 
   auto_download_ = s.value("auto_download", false).toBool();
   download_dir_ = s.value("download_dir", DefaultDownloadDir()).toString();
-  delete_after_secs_ = s.value("delete_after", 0).toInt();
 }
 
-void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
-  if (downloading_episode_ids_.contains(episode.database_id())) return;
-  downloading_episode_ids_.insert(episode.database_id());
-
-  Task* task = new Task;
-  task->episode = episode;
-
-  if (current_task_) {
-    // Add it to the queue
-    queued_tasks_.enqueue(task);
-    emit ProgressChanged(episode, Queued, 0);
-  } else {
-    // Start downloading now
-    StartDownloading(task);
-  }
-}
-
-void PodcastDownloader::DeleteEpisode(const PodcastEpisode& episode) {
-  if (!episode.downloaded() ||
-      downloading_episode_ids_.contains(episode.database_id()))
-    return;
-
-  // Delete the local file
-  if (!QFile::remove(episode.local_url().toLocalFile())) {
-    qLog(Warning) << "The local file" << episode.local_url().toLocalFile()
-                  << "could not be removed";
-  }
-
-  // Update the episode in the DB
-  PodcastEpisode episode_copy(episode);
-  episode_copy.set_downloaded(false);
-  episode_copy.set_local_url(QUrl());
-  backend_->UpdateEpisodes(PodcastEpisodeList() << episode_copy);
-}
-
-void PodcastDownloader::FinishAndDelete(Task* task) {
-  Podcast podcast =
-      backend_->GetSubscriptionById(task->episode.podcast_database_id());
-  Song song = task->episode.ToSong(podcast);
-
-  downloading_episode_ids_.remove(task->episode.database_id());
-  emit ProgressChanged(task->episode, Finished, 0);
-
-  // I didn't ecountered even a single podcast with a corect metadata
-  TagReaderClient::Instance()->SaveFileBlocking(task->file->fileName(), song);
-  delete task;
-
-  NextTask();
-}
-
-QString PodcastDownloader::FilenameForEpisode(
-    const QString& directory, const PodcastEpisode& episode) const {
+QString PodcastDownloader::FilenameForEpisode(const QString& directory,
+                                              const PodcastEpisode& episode) const {
   const QString file_extension = QFileInfo(episode.url().path()).suffix();
   int count = 0;
 
@@ -173,103 +178,46 @@ QString PodcastDownloader::FilenameForEpisode(
   }
 }
 
-void PodcastDownloader::StartDownloading(Task* task) {
-  current_task_ = task;
-
-  // Need to get the name of the podcast to use in the directory name.
-  Podcast podcast =
-      backend_->GetSubscriptionById(task->episode.podcast_database_id());
-  if (!podcast.is_valid()) {
-    qLog(Warning) << "The podcast that contains episode" << task->episode.url()
-                  << "doesn't exist any more";
-    FinishAndDelete(task);
-    return;
+void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
+  for (Task* tas : list_tasks_) {
+    if (tas->episode().database_id() == episode.database_id()) {
+      return;
+    }
   }
 
+  Podcast podcast =
+      backend_->GetSubscriptionById(episode.podcast_database_id());
+  if (!podcast.is_valid()) {
+    qLog(Warning) << "The podcast that contains episode" << episode.url()
+                  << "doesn't exist any more";
+    return;
+  }
   const QString directory =
       download_dir_ + "/" + SanitiseFilenameComponent(podcast.title());
-  const QString filepath = FilenameForEpisode(directory, task->episode);
+  const QString filepath = FilenameForEpisode(directory, episode);
 
   // Open the output file
   QDir().mkpath(directory);
-  task->file = new QFile(filepath);
-  if (!task->file->open(QIODevice::WriteOnly)) {
+  QFile* file = new QFile(filepath);
+  if (!file->open(QIODevice::WriteOnly)) {
     qLog(Warning) << "Could not open the file" << filepath << "for writing";
-    FinishAndDelete(task);
     return;
   }
 
-  qLog(Info) << "Downloading" << task->episode.url() << "to" << filepath;
+  Task* task = new Task(episode, file, backend_);
 
-  // Get the URL
-  QNetworkRequest req(task->episode.url());
-  RedirectFollower* reply = new RedirectFollower(network_->get(req));
-  connect(reply, SIGNAL(readyRead()), SLOT(ReplyReadyRead()));
-  connect(reply, SIGNAL(finished()), SLOT(ReplyFinished()));
-  connect(reply, SIGNAL(downloadProgress(qint64, qint64)),
-          SLOT(ReplyDownloadProgress(qint64, qint64)));
-
-  emit ProgressChanged(task->episode, Downloading, 0);
+  list_tasks_ << task;
+  qLog(Info) << "Downloading" << task->episode().url() << "to" << filepath;
+  connect(task, SIGNAL(finished(Task*)), SLOT(ReplyFinished(Task*)));
+  connect(task, SIGNAL(ProgressChanged(const PodcastEpisode&,
+                                       PodcastDownload::State, int)),
+          SIGNAL(ProgressChanged(const PodcastEpisode&,
+                                 PodcastDownload::State, int)));
 }
 
-void PodcastDownloader::NextTask() {
-  current_task_ = nullptr;
-
-  if (!queued_tasks_.isEmpty()) {
-    StartDownloading(queued_tasks_.dequeue());
-  }
-}
-
-void PodcastDownloader::ReplyReadyRead() {
-  QNetworkReply* reply = qobject_cast<RedirectFollower*>(sender())->reply();
-  if (!reply || !current_task_ || !current_task_->file) return;
-
-  forever {
-    const qint64 bytes = reply->bytesAvailable();
-    if (bytes <= 0) break;
-
-    current_task_->file->write(reply->read(bytes));
-  }
-}
-
-void PodcastDownloader::ReplyDownloadProgress(qint64 received, qint64 total) {
-  if (!current_task_ || !current_task_->file || total < 1024) return;
-
-  const time_t current_time = QDateTime::currentDateTime().toTime_t();
-  if (last_progress_signal_ == current_time) return;
-  last_progress_signal_ = current_time;
-
-  emit ProgressChanged(current_task_->episode, Downloading,
-                       static_cast<float>(received) / total * 100);
-}
-
-void PodcastDownloader::ReplyFinished() {
-  RedirectFollower* reply = qobject_cast<RedirectFollower*>(sender());
-  if (!reply || !current_task_ || !current_task_->file) return;
-
-  reply->deleteLater();
-
-  if (reply->error() != QNetworkReply::NoError) {
-    qLog(Warning) << "Error downloading episode:" << reply->errorString();
-
-    // Delete the file
-    current_task_->file->remove();
-
-    FinishAndDelete(current_task_);
-    return;
-  }
-
-  qLog(Info) << "Download of" << current_task_->file->fileName() << "finished";
-
-  // Tell the database the episode has been updated.  Get it from the DB again
-  // in case the listened field changed in the mean time.
-  PodcastEpisode episode =
-      backend_->GetEpisodeById(current_task_->episode.database_id());
-  episode.set_downloaded(true);
-  episode.set_local_url(QUrl::fromLocalFile(current_task_->file->fileName()));
-  backend_->UpdateEpisodes(PodcastEpisodeList() << episode);
-
-  FinishAndDelete(current_task_);
+void PodcastDownloader::ReplyFinished(Task* task) {
+  list_tasks_.removeAll(task);
+  delete task;
 }
 
 QString PodcastDownloader::SanitiseFilenameComponent(const QString& text)
@@ -291,23 +239,29 @@ void PodcastDownloader::EpisodesAdded(const PodcastEpisodeList& episodes) {
   }
 }
 
-void PodcastDownloader::AutoDelete() {
-  if (delete_after_secs_ <= 0) {
-    return;
+PodcastEpisodeList PodcastDownloader::EpisodesDownloading(const PodcastEpisodeList& episodes) {
+  PodcastEpisodeList ret;
+  for (Task* tas : list_tasks_) {
+    for (PodcastEpisode episode : episodes) {
+      if (tas->episode().database_id() == episode.database_id()) {
+        ret << episode;
+      }
+    }
   }
+  return ret;
+}
 
-  QDateTime max_date = QDateTime::currentDateTime();
-  max_date.addSecs(-delete_after_secs_);
-
-  PodcastEpisodeList old_episodes =
-      backend_->GetOldDownloadedEpisodes(max_date);
-  if (old_episodes.isEmpty()) return;
-
-  qLog(Info) << "Deleting" << old_episodes.count()
-             << "episodes because they were last listened to"
-             << (delete_after_secs_ / kSecsPerDay) << "days ago";
-
-  for (const PodcastEpisode& episode : old_episodes) {
-    DeleteEpisode(episode);
+void PodcastDownloader::cancelDownload(const PodcastEpisodeList& episodes) {
+  QList<Task*> ta;
+  for (Task* tas : list_tasks_) {
+    for (PodcastEpisode episode : episodes) {
+      if (tas->episode().database_id() == episode.database_id()) {
+        ta << tas;
+      }
+    }
+  }
+  for (Task* tas : ta) {
+    tas->finishedPublic();
+    list_tasks_.removeAll(tas);
   }
 }

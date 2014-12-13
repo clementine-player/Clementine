@@ -18,13 +18,13 @@
 */
 
 #include "gpoddertoptagsmodel.h"
+
+#include <ApiRequest.h>
+#include <QMessageBox>
+
 #include "gpoddertoptagspage.h"
 #include "podcast.h"
 #include "core/closure.h"
-
-#include <ApiRequest.h>
-
-#include <QMessageBox>
 
 GPodderTopTagsModel::GPodderTopTagsModel(mygpo::ApiRequest* api,
                                          Application* app, QObject* parent)

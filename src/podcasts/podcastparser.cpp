@@ -17,13 +17,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "opmlcontainer.h"
 #include "podcastparser.h"
-#include "core/logging.h"
-#include "core/utilities.h"
 
 #include <QDateTime>
 #include <QXmlStreamReader>
+
+#include "core/logging.h"
+#include "core/utilities.h"
+#include "opmlcontainer.h"
 
 // Namespace constants must be lower case.
 const char* PodcastParser::kAtomNamespace = "http://www.w3.org/2005/atom";

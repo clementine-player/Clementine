@@ -44,6 +44,7 @@ class NetworkRemote;
 class NetworkRemoteHelper;
 class Player;
 class PlaylistBackend;
+class PodcastDeleter;
 class PodcastDownloader;
 class PlaylistManager;
 class PodcastBackend;
@@ -83,6 +84,7 @@ class Application : public QObject {
   Library* library() const { return library_; }
   DeviceManager* device_manager() const { return device_manager_; }
   PodcastUpdater* podcast_updater() const { return podcast_updater_; }
+  PodcastDeleter* podcast_deleter() const { return podcast_deleter_; }
   PodcastDownloader* podcast_downloader() const { return podcast_downloader_; }
   GPodderSync* gpodder_sync() const { return gpodder_sync_; }
   MoodbarLoader* moodbar_loader() const { return moodbar_loader_; }
@@ -128,6 +130,7 @@ class Application : public QObject {
   Library* library_;
   DeviceManager* device_manager_;
   PodcastUpdater* podcast_updater_;
+  PodcastDeleter* podcast_deleter_;
   PodcastDownloader* podcast_downloader_;
   GPodderSync* gpodder_sync_;
   MoodbarLoader* moodbar_loader_;

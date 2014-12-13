@@ -18,6 +18,13 @@
 */
 
 #include "gpoddersync.h"
+
+#include <QCoreApplication>
+#include <QHostInfo>
+#include <QNetworkAccessManager>
+#include <QSettings>
+#include <QTimer>
+
 #include "podcastbackend.h"
 #include "podcasturlloader.h"
 #include "core/application.h"
@@ -27,12 +34,6 @@
 #include "core/qhash_qurl.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
-
-#include <QCoreApplication>
-#include <QHostInfo>
-#include <QNetworkAccessManager>
-#include <QSettings>
-#include <QTimer>
 
 const char* GPodderSync::kSettingsGroup = "Podcasts";
 const int GPodderSync::kFlushUpdateQueueDelay = 30 * kMsecPerSec;  // 30 seconds

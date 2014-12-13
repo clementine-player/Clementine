@@ -1,7 +1,8 @@
 /* This file is part of Clementine.
    Copyright 2012-2013, David Sansome <me@davidsansome.com>
-   Copyright 2013-2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2013-2014, Krzysztof A. Sobiecki <sobkas@gmail.com>
    Copyright 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Simeon Bird <sbird@andrew.cmu.edu>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,6 +21,7 @@
 #ifndef PODCASTS_PODCASTSERVICE_H_
 #define PODCASTS_PODCASTSERVICE_H_
 
+#include "podcastdeleter.h"
 #include "podcastdownloader.h"
 #include "internet/internetmodel.h"
 #include "internet/internetservice.h"
@@ -84,7 +86,7 @@ class PodcastService : public InternetService {
   void EpisodesUpdated(const PodcastEpisodeList& episodes);
 
   void DownloadProgressChanged(const PodcastEpisode& episode,
-                               PodcastDownloader::State state, int percent);
+                               PodcastDownload::State state, int percent);
 
   void CurrentSongChanged(const Song& metadata);
 
@@ -92,6 +94,9 @@ class PodcastService : public InternetService {
   void CopyToDevice(const PodcastEpisodeList& episodes_list);
   void CopyToDevice(const QModelIndexList& episode_indexes,
                     const QModelIndexList& podcast_indexes);
+  void CancelDownload();
+  void CancelDownload(const QModelIndexList& episode_indexes,
+                      const QModelIndexList& podcast_indexes);
 
  private:
   void EnsureAddPodcastDialogCreated();
@@ -101,7 +106,11 @@ class PodcastService : public InternetService {
   void UpdatePodcastText(QStandardItem* item, int unlistened_count) const;
   void UpdateEpisodeText(
       QStandardItem* item,
-      PodcastDownloader::State state = PodcastDownloader::NotDownloading,
+      PodcastDownload::State state = PodcastDownload::NotDownloading,
+      int percent = 0);
+  void UpdatePodcastText(
+      QStandardItem* item,
+      PodcastDownload::State state = PodcastDownload::NotDownloading,
       int percent = 0);
 
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
@@ -139,6 +148,7 @@ class PodcastService : public InternetService {
   QAction* set_new_action_;
   QAction* set_listened_action_;
   QAction* copy_to_device_;
+  QAction* cancel_download_;
   QStandardItem* root_;
   std::unique_ptr<OrganiseDialog> organise_dialog_;
 

@@ -18,13 +18,14 @@
 */
 
 #include "gpoddersearchpage.h"
+
+#include <QMessageBox>
+
 #include "podcast.h"
 #include "podcastdiscoverymodel.h"
 #include "ui_gpoddersearchpage.h"
 #include "core/closure.h"
 #include "core/network.h"
-
-#include <QMessageBox>
 
 GPodderSearchPage::GPodderSearchPage(Application* app, QWidget* parent)
     : AddPodcastPage(app, parent),

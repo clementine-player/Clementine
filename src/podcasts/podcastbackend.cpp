@@ -18,12 +18,13 @@
 */
 
 #include "podcastbackend.h"
+
+#include <QMutexLocker>
+
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/scopedtransaction.h"
-
-#include <QMutexLocker>
 
 PodcastBackend::PodcastBackend(Application* app, QObject* parent)
     : QObject(parent), app_(app), db_(app->database()) {}
@@ -318,6 +319,26 @@ PodcastEpisodeList PodcastBackend::GetOldDownloadedEpisodes(
     episode.InitFromQuery(q);
     ret << episode;
   }
+
+  return ret;
+}
+
+PodcastEpisode PodcastBackend::GetOldestDownloadedListenedEpisode() {
+  PodcastEpisode ret;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+                  " FROM podcast_episodes"
+                  " WHERE downloaded = 'true'"
+                  " AND listened = 'true'"
+                  " ORDER BY listened_date ASC",
+              db);
+  q.exec();
+  if (db_->CheckErrors(q)) return ret;
+  q.next();
+  ret.InitFromQuery(q);
 
   return ret;
 }
