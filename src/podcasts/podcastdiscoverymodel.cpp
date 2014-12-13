@@ -17,15 +17,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "opmlcontainer.h"
-#include "podcast.h"
 #include "podcastdiscoverymodel.h"
-#include "core/application.h"
-#include "ui/iconloader.h"
-#include "ui/standarditemiconloader.h"
 
 #include <QIcon>
 #include <QSet>
+
+#include "core/application.h"
+#include "opmlcontainer.h"
+#include "podcast.h"
+#include "ui/iconloader.h"
+#include "ui/standarditemiconloader.h"
 
 PodcastDiscoveryModel::PodcastDiscoveryModel(Application* app, QObject* parent)
     : QStandardItemModel(parent),

@@ -17,17 +17,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podcastbackend.h"
 #include "podcastupdater.h"
-#include "podcasturlloader.h"
+
+#include <QSettings>
+#include <QTimer>
+
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/qhash_qurl.h"
 #include "core/timeconstants.h"
-
-#include <QSettings>
-#include <QTimer>
+#include "podcastbackend.h"
+#include "podcasturlloader.h"
 
 const char* PodcastUpdater::kSettingsGroup = "Podcasts";
 

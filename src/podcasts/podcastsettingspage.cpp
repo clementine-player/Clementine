@@ -17,20 +17,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gpoddersync.h"
-#include "podcastdownloader.h"
 #include "podcastsettingspage.h"
 #include "ui_podcastsettingspage.h"
-#include "core/application.h"
-#include "core/closure.h"
-#include "core/timeconstants.h"
-#include "library/librarydirectorymodel.h"
-#include "library/librarymodel.h"
-#include "ui/settingsdialog.h"
 
 #include <QFileDialog>
 #include <QNetworkReply>
 #include <QSettings>
+
+#include "core/application.h"
+#include "core/closure.h"
+#include "core/timeconstants.h"
+#include "gpoddersync.h"
+#include "library/librarydirectorymodel.h"
+#include "library/librarymodel.h"
+#include "podcastdownloader.h"
+#include "ui/settingsdialog.h"
 
 const char* PodcastSettingsPage::kSettingsGroup = "Podcasts";
 

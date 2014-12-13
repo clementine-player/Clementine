@@ -17,12 +17,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gpoddertoptagsmodel.h"
 #include "gpoddertoptagspage.h"
-#include "core/closure.h"
-#include "core/network.h"
 
 #include <QMessageBox>
+
+#include "gpoddertoptagsmodel.h"
+#include "core/closure.h"
+#include "core/network.h"
 
 const int GPodderTopTagsPage::kMaxTagCount = 100;
 

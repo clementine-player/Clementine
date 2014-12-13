@@ -18,16 +18,16 @@
 */
 
 #include "itunessearchpage.h"
+
+#include <qjson/parser.h>
+#include <QMessageBox>
+#include <QNetworkReply>
+
+#include "core/closure.h"
+#include "core/network.h"
 #include "podcast.h"
 #include "podcastdiscoverymodel.h"
 #include "ui_itunessearchpage.h"
-#include "core/closure.h"
-#include "core/network.h"
-
-#include <qjson/parser.h>
-
-#include <QMessageBox>
-#include <QNetworkReply>
 
 const char* ITunesSearchPage::kUrlBase =
     "http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStoreServices.woa/"

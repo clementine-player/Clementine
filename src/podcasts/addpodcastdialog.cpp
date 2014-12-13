@@ -18,6 +18,11 @@
 */
 
 #include "addpodcastdialog.h"
+
+#include <QFileDialog>
+#include <QPushButton>
+#include <QTimer>
+
 #include "addpodcastbyurl.h"
 #include "fixedopmlpage.h"
 #include "gpoddersearchpage.h"
@@ -29,10 +34,6 @@
 #include "core/application.h"
 #include "ui/iconloader.h"
 #include "widgets/widgetfadehelper.h"
-
-#include <QFileDialog>
-#include <QPushButton>
-#include <QTimer>
 
 const char* AddPodcastDialog::kBbcOpmlUrl =
     "http://www.bbc.co.uk/podcasts.opml";

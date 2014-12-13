@@ -18,11 +18,12 @@
 */
 
 #include "fixedopmlpage.h"
+
+#include <QMessageBox>
+
 #include "podcastdiscoverymodel.h"
 #include "podcasturlloader.h"
 #include "core/closure.h"
-
-#include <QMessageBox>
 
 FixedOpmlPage::FixedOpmlPage(const QUrl& opml_url, const QString& title,
                              const QIcon& icon, Application* app,
