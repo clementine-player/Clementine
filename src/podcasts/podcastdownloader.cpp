@@ -17,6 +17,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "podcastdownloader.h"
+
+#include <QDateTime>
+#include <QDir>
+#include <QFile>
+#include <QNetworkReply>
+#include <QSettings>
+#include <QTimer>
+
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/network.h"
@@ -26,14 +35,6 @@
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
 #include "podcastbackend.h"
-#include "podcastdownloader.h"
-
-#include <QDateTime>
-#include <QDir>
-#include <QFile>
-#include <QNetworkReply>
-#include <QSettings>
-#include <QTimer>
 
 const char* PodcastDownloader::kSettingsGroup = "Podcasts";
 
