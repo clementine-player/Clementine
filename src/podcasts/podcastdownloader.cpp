@@ -70,7 +70,7 @@ void Task::finishedPublic() {
     emit ProgressChanged(episode_, PodcastDownload::NotDownloading, 0);
     // Delete the file
     file_->remove();
-    emit finished();
+    emit finished(this);
 }
 
 void Task::finishedInternal() {
@@ -79,7 +79,7 @@ void Task::finishedInternal() {
     emit ProgressChanged(episode_, PodcastDownload::NotDownloading, 0);
     // Delete the file
     file_->remove();
-    emit finished();
+    emit finished(this);
     return;
   }
 
@@ -99,7 +99,7 @@ void Task::finishedInternal() {
 
   // I didn't ecountered even a single podcast with a corect metadata
   TagReaderClient::Instance()->SaveFileBlocking(file_->fileName(), song);
-  emit finished();
+  emit finished(this);
 }
 
 void Task::downloadProgressInternal(qint64 received, qint64 total) {
@@ -208,15 +208,14 @@ void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
 
   list_tasks_ << task;
   qLog(Info) << "Downloading" << task->episode().url() << "to" << filepath;
-  connect(task, SIGNAL(finished()), SLOT(ReplyFinished()));
+  connect(task, SIGNAL(finished(Task*)), SLOT(ReplyFinished(Task*)));
   connect(task, SIGNAL(ProgressChanged(const PodcastEpisode&,
                                        PodcastDownload::State, int)),
           SIGNAL(ProgressChanged(const PodcastEpisode&,
                                  PodcastDownload::State, int)));
 }
 
-void PodcastDownloader::ReplyFinished() {
-  Task* task = qobject_cast<Task*>(sender());
+void PodcastDownloader::ReplyFinished(Task* task) {
   list_tasks_.removeAll(task);
   delete task;
 }

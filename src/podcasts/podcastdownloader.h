@@ -57,7 +57,7 @@ class Task : public QObject {
  signals:
   void ProgressChanged(const PodcastEpisode& episode,
                        PodcastDownload::State state, int percent);
-  void finished();
+  void finished(Task* task);
 
  public slots:
   void finishedPublic();
@@ -101,7 +101,7 @@ class PodcastDownloader : public QObject {
   void SubscriptionAdded(const Podcast& podcast);
   void EpisodesAdded(const PodcastEpisodeList& episodes);
 
-  void ReplyFinished();
+  void ReplyFinished(Task* task);
 
  private:
   QString FilenameForEpisode(const QString& directory,
