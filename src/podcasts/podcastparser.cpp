@@ -123,8 +123,7 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
           ParseImage(reader, ret);
         } else if (name == "copyright") {
           ret->set_copyright(reader->readElementText());
-        } else if (name == "link" &&
-                   lower_namespace == kAtomNamespace &&
+        } else if (name == "link" && lower_namespace == kAtomNamespace &&
                    ret->url().isEmpty() &&
                    reader->attributes().value("rel") == "self") {
           ret->set_url(QUrl::fromEncoded(reader->readElementText().toAscii()));
@@ -215,7 +214,9 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
           episode.set_publication_date(Utilities::ParseRFC822DateTime(date));
           if (!episode.publication_date().isValid()) {
             qLog(Error) << "Unable to parse date:" << date
-                        << "Pleas submit it to https://github.com/clementine-player/Clementine/issues/new";
+                        << "Pleas submit it to "
+                           "https://github.com/clementine-player/Clementine/"
+                           "issues/new";
           }
         } else if (name == "duration" && lower_namespace == kItunesNamespace) {
           // http://www.apple.com/itunes/podcasts/specs.html

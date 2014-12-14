@@ -434,9 +434,9 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
     copy_to_device_ = context_menu_->addAction(
         IconLoader::Load("multimedia-player-ipod-mini-blue"),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
-    cancel_download_ = context_menu_->addAction(
-        IconLoader::Load("cancel"),
-        tr("Cancel download"), this, SLOT(CancelDownload()));
+    cancel_download_ = context_menu_->addAction(IconLoader::Load("cancel"),
+                                                tr("Cancel download"), this,
+                                                SLOT(CancelDownload()));
     remove_selected_action_ = context_menu_->addAction(
         IconLoader::Load("list-remove"), tr("Unsubscribe"), this,
         SLOT(RemoveSelectedPodcast()));
