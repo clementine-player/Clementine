@@ -58,10 +58,10 @@ class PodcastService : public InternetService {
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
-  bool hasLoadSettings() const { return true; }
+  bool has_initial_load_settings() const { return true; }
   void ShowContextMenu(const QPoint& global_pos);
   void ReloadSettings();
-  void LoadSettings();
+  void InitialLoadSettings();
   // Called by SongLoader when the user adds a Podcast URL directly.  Adds a
   // subscription to the podcast and displays it in the UI.  If the QVariant
   // contains an OPML file then this displays it in the Add Podcast dialog.

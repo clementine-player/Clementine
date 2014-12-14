@@ -143,8 +143,8 @@ void InternetModel::AddService(InternetService* service) {
           SIGNAL(ScrollToIndex(QModelIndex)));
   connect(service, SIGNAL(destroyed()), SLOT(ServiceDeleted()));
 
-  if (service->hasLoadSettings()) {
-    service->LoadSettings();
+  if (service->has_initial_load_settings()) {
+    service->InitialLoadSettings();
   } else {
     service->ReloadSettings();
   }

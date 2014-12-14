@@ -551,12 +551,12 @@ void PodcastService::RemoveSelectedPodcast() {
 }
 
 void PodcastService::ReloadSettings() {
-  LoadSettings();
+  InitialLoadSettings();
   ClearPodcastList(model_->invisibleRootItem());
   PopulatePodcastList(model_->invisibleRootItem());
 }
 
-void PodcastService::LoadSettings() {
+void PodcastService::InitialLoadSettings() {
   QSettings s;
   s.beginGroup(LibraryView::kSettingsGroup);
   use_pretty_covers_ = s.value("pretty_covers", true).toBool();

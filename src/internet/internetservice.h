@@ -48,8 +48,8 @@ class InternetService : public QObject {
 
   virtual QStandardItem* CreateRootItem() = 0;
   virtual void LazyPopulate(QStandardItem* parent) = 0;
-  virtual bool hasLoadSettings() const { return false; }
-  virtual void LoadSettings() {}
+  virtual bool has_initial_load_settings() const { return false; }
+  virtual void InitialLoadSettings() {}
   virtual void ShowContextMenu(const QPoint& global_pos) {}
   virtual void ItemDoubleClicked(QStandardItem* item) {}
   // Create a generator for smart playlists
