@@ -1465,7 +1465,11 @@ void VkService::ClearStandardItem(QStandardItem* item) {
 bool VkService::WaitForReply(Vreen::Reply* reply) {
   QEventLoop event_loop;
   QTimer timeout_timer;
+  // To prevent object destruction in nested event loop
+  reply->deleteLater();
+  timeout_timer.setSingleShot(true);
   connect(this, SIGNAL(StopWaiting()), &timeout_timer, SLOT(stop()));
+  connect(this, SIGNAL(StopWaiting()), &event_loop, SLOT(quit()));
   connect(&timeout_timer, SIGNAL(timeout()), &event_loop, SLOT(quit()));
   connect(reply, SIGNAL(resultReady(QVariant)), &event_loop, SLOT(quit()));
   timeout_timer.start(10000);
