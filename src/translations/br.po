@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-13 22:18+0000\n"
+"PO-Revision-Date: 2014-12-14 00:43+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Breton (http://www.transifex.com/projects/p/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,7 +83,7 @@ msgstr "%1 devezh"
 msgid "%1 days ago"
 msgstr "%1 devezh 'zo"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 war %2"
@@ -93,7 +93,7 @@ msgstr "%1 war %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 roll seniñ (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 diuzet eus"
@@ -118,7 +118,7 @@ msgstr "%1 ton kavet"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 ton kavet (%2 diskouezet)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 ton"
@@ -263,7 +263,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 devezh"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1 ton"
 
@@ -423,7 +423,7 @@ msgstr "Gweredekaat/Diweredekaat Wiiremote"
 msgid "Activities stream"
 msgstr "Red obererezhioù"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Ouzhpennañ ar podkast"
 
@@ -487,7 +487,7 @@ msgstr "Ouzhpennañ un teuliad nevez..."
 msgid "Add podcast"
 msgstr "Ouzhpennañ ar podkast"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Ouzhpennañ ur podkast..."
 
@@ -908,7 +908,7 @@ msgstr "Fonnder keidennek"
 msgid "Average image size"
 msgstr "Ment keidennek ar skeudenn"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "Podkastoù BBC"
 
@@ -1059,6 +1059,10 @@ msgstr "Krubuilhiñ %1"
 msgid "Cancel"
 msgstr "Nullañ"
 
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr ""
+
 #: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
@@ -1135,7 +1139,7 @@ msgstr "Choaz el listenn"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Choazit penaos emañ urzhiet ar roll seniñ hag an niver a donioù a zo e-barzh."
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "Choaz an teuliad pellgargañ podkastoù"
 
@@ -1239,7 +1243,7 @@ msgstr "Clementine a gavo ar sonerezh e :"
 msgid "Click here to add some music"
 msgstr "Klikit aze evit krouiñ ho levraoueg sonerezh"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1263,7 +1267,7 @@ msgstr "Pouezhit war ar bouton Login evit digeriñ ur merdeer web. Ret e vo deoc
 msgid "Close"
 msgstr "Serriñ"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "Serriñ ar roll seniñ"
 
@@ -1351,7 +1355,7 @@ msgstr "Kefluniañ an enklsak hollek..."
 msgid "Configure library..."
 msgstr "Kefluniañ ar sonaoueg..."
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "Kefluniañ ar podkastoù"
 
@@ -1421,7 +1425,7 @@ msgstr "Kopiañ an url kenrannañ er golver"
 msgid "Copy to clipboard"
 msgstr "Kopiañ d'ar golver"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiañ war an drobarzhell"
@@ -1448,7 +1452,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Dibosubl eo krouiñ an elfenn GStreamer \"%1\" - gwiriekait ez eo staliet an enlugadelloù GStreamer diavaez"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "N'eus ket bet tu krouiñ ar roll-seniñ"
 
@@ -1673,7 +1677,7 @@ msgstr "Diverkañ"
 msgid "Delete Grooveshark playlist"
 msgstr "Diverkañ ur roll seniñ Grooveshark"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "Diverkañ ar roadennoù pellgarget"
 
@@ -1870,7 +1874,7 @@ msgstr "Daouglikañ evit digeriñ"
 msgid "Double clicking a song will..."
 msgstr "Daouglikañ war un ton..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1892,7 +1896,7 @@ msgstr "Kevreañ d'ar pellgargadenn"
 msgid "Download new episodes automatically"
 msgstr "Pellgargañ pennadoù nevez ent emgefreek"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "Pellgargadur e steuad"
 
@@ -1912,7 +1916,7 @@ msgstr "Pellgargañ an albom"
 msgid "Download this album..."
 msgstr "Pellgargañ an albom..."
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "Pellgargañ ar pennad-mañ"
 
@@ -1920,7 +1924,7 @@ msgstr "Pellgargañ ar pennad-mañ"
 msgid "Download..."
 msgstr "Pellgargañ"
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "O pellgargañ (%1%)..."
@@ -2061,7 +2065,7 @@ msgstr "Lakait un URL evit pellgargañ ur golo adalek internet"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Lakait anv ur restr evit ar goloioù ezporzhiet (askouezhadenn ebet) :"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Lakait un anv evit ar roll seniñ"
 
@@ -2282,17 +2286,17 @@ msgstr "Padelezh an arveuz"
 msgid "Failed reading CD drive"
 msgstr "Kudenn en ul lenn ar CD"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "C'hwited eo bet adtapadenn an teuliad"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "C'hwitet eo bet gant tapadenn ar podkastoù"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "C'hwitet e bet gant kargadenn ar podkastoù"
 
@@ -3048,7 +3052,7 @@ msgstr "O kargan roudoù"
 msgid "Loading tracks info"
 msgstr "O kargañ titouroù ar roud"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3075,7 +3079,7 @@ msgstr "Kargañ restroù pe liammoù internet, hag eilec'hiañ ar roll seniñ"
 msgid "Login"
 msgstr "Kennaskañ"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "C'hwitet eo bet ar c'hennaskañ"
 
@@ -3185,11 +3189,11 @@ msgstr "Gant an dorn"
 msgid "Manufacturer"
 msgstr "Aozer"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Merkañ evel selaouet"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "Merkañ evel nevez"
 
@@ -3564,11 +3568,11 @@ msgstr "Digeriñ %1 er merdeer"
 msgid "Open &audio CD..."
 msgstr "Lenn ur CD &audio"
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Digeriñ ur restr OPML"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Digeriñ ur restr OPML..."
 
@@ -3637,7 +3641,7 @@ msgstr "Aozañ ar restroù"
 msgid "Organise files..."
 msgstr "Aozañ ar restroù..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Oc'h aozañ ar restroù"
 
@@ -3758,8 +3762,8 @@ msgid "Player options"
 msgstr "Dibarzhioù al lenner"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Roll seniñ"
 
@@ -3789,7 +3793,7 @@ msgstr "Klozit ho merdeer ha deuit en-dro war Clementine mar plij."
 msgid "Plugin status:"
 msgstr "Stad an enlugellad"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podkastoù"
 
@@ -4087,7 +4091,7 @@ msgstr "Tennañ eus an tonioù karetañ"
 msgid "Remove from playlist"
 msgstr "Tennañ kuit eus ar roll seniñ"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Tennañ ar roll seniñ"
 
@@ -4116,11 +4120,11 @@ msgstr "Cheñch anv \"%1\" ar roll seniñ."
 msgid "Rename Grooveshark playlist"
 msgstr "Cheñch anv roll seniñ Grooveshark"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Adenvel ar roll seniñ"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Adenvel ar roll seniñ..."
 
@@ -4282,12 +4286,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Enrollañ ar roll-seniñ"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Enrollañ ar roll seniñ"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Enrollañ ar roll seniñ..."
 
@@ -5012,8 +5016,8 @@ msgstr "Handelv nevez Clementine a c'houlenn ma vefe hizivaet ho sonaoueg evit k
 msgid "There are other songs in this album"
 msgstr "Tonioù all a zo en album-mañ"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Ur gudenn a zo bet e-pad an eskemm gant gpodder.net"
 
@@ -5106,7 +5110,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Ar wech kentañ eo e liammit un drobarzhell-mañ. Clementine a skanno an drobarzhell a-benn kavout sonerezh - gellout a ra kemer amzer."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Ar arventenn-mañ a c'hell bezañ kemmet e rann \"Emzalc'h\" ar gwellvezioù"
 
@@ -5246,8 +5250,8 @@ msgstr "N'eus ket tu pellgargañ %1 (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Dianav"
@@ -5272,7 +5276,7 @@ msgstr "Nullañ tremen ar roudoù diuzet"
 msgid "Unskip track"
 msgstr "Nullañ tremen ar roud"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "Digoumanantiñ"
 
@@ -5288,7 +5292,7 @@ msgstr "Hizivaat"
 msgid "Update Grooveshark playlist"
 msgstr "O hizivaat roll seniñ Grooveshark"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "Hizivaat ar podkastoù"
 
@@ -5300,7 +5304,7 @@ msgstr "Hizivaat teuliadoù kemmet ar sonaoueg"
 msgid "Update the library when Clementine starts"
 msgstr "Hizivaat ar sonaoueg pa grog Clementine"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "Hizivaat ar podkast-mañ"
 
@@ -5430,7 +5434,7 @@ msgid "Variable bit rate"
 msgstr "Fonnder kemmus"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Arzourien Liesseurt"
 
@@ -5485,7 +5489,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Gervel ac'hanon pa vez serret un ivinell roll seniñ"
 
@@ -5633,7 +5637,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Ha sur oc'h kaout c'hoant diverkañ %1 roll seniñ eus ho reoù karetañ ?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5841,7 +5845,7 @@ msgstr "zo kevatal da"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "Teuliad gpodder.net"
 

@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-13 22:18+0000\n"
+"PO-Revision-Date: 2014-12-14 00:43+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,7 +92,7 @@ msgstr "%1 dagar"
 msgid "%1 days ago"
 msgstr "%1 dagar sedan"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 av %2"
@@ -102,7 +102,7 @@ msgstr "%1 av %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 spellistor (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 vald(a) av"
@@ -127,7 +127,7 @@ msgstr "%1 låtar hittades"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 låtar hittades (visar %2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 spår"
@@ -272,7 +272,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 dag"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1 spår"
 
@@ -432,7 +432,7 @@ msgstr "Aktivera/inaktivera Wiiremote"
 msgid "Activities stream"
 msgstr "Aktivitetsström"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Lägg till podsändning"
 
@@ -496,7 +496,7 @@ msgstr "Lägg till mapp..."
 msgid "Add podcast"
 msgstr "Lägg till podsändning"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Lägg till podsändning..."
 
@@ -917,7 +917,7 @@ msgstr "Genomsnittlig bithastighet"
 msgid "Average image size"
 msgstr "Genomsnittlig bildstorlek"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "BBC podsändningar"
 
@@ -1068,6 +1068,10 @@ msgstr "Cachar %1"
 msgid "Cancel"
 msgstr "Avbryt"
 
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr ""
+
 #: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
@@ -1144,7 +1148,7 @@ msgstr "Välj från listan"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Välj hur spellistan ska sorteras och hur många låtar den ska innehålla."
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "Välj nedladdningsmapp för podsändningar"
 
@@ -1248,7 +1252,7 @@ msgstr "Clementine kommer att söka musik i:"
 msgid "Click here to add some music"
 msgstr "Klicka här för att lägga till musik"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1272,7 +1276,7 @@ msgstr "Att klicka på Login kommer att öppna en webbläsare. Du bör återgå 
 msgid "Close"
 msgstr "Stäng"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "Stäng spellista"
 
@@ -1360,7 +1364,7 @@ msgstr "Ställ in Global sökning..."
 msgid "Configure library..."
 msgstr "Konfigurera biblioteket..."
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "Konfigurera podcasts..."
 
@@ -1430,7 +1434,7 @@ msgstr "Kopiera delad url till urklipp"
 msgid "Copy to clipboard"
 msgstr "Kopiera till klippbordet"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiera till enhet..."
@@ -1457,7 +1461,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Kunde inte skapa GStreamer-elementet \"%1\" - kontrollera att du har alla GStreamer-insticken som krävs installerade"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "Kunde inte skapa spellista"
 
@@ -1682,7 +1686,7 @@ msgstr "Ta bort"
 msgid "Delete Grooveshark playlist"
 msgstr "Ta bort Grooveshark spellista"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "Ta bort nedladdad data"
 
@@ -1879,7 +1883,7 @@ msgstr "Dubbelklicka för att öppna"
 msgid "Double clicking a song will..."
 msgstr "Dubbelklicka på en låt kommer ..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1901,7 +1905,7 @@ msgstr "Hämta medlemskap"
 msgid "Download new episodes automatically"
 msgstr "Ladda ner nya avsnitt automatiskt"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "Nedladdning köad"
 
@@ -1921,7 +1925,7 @@ msgstr "Hämta detta album"
 msgid "Download this album..."
 msgstr "Ladda ner det här albumet ..."
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "Ladda ner detta avsnitt"
 
@@ -1929,7 +1933,7 @@ msgstr "Ladda ner detta avsnitt"
 msgid "Download..."
 msgstr "Ladda ner..."
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Laddar ner (%1%)..."
@@ -2070,7 +2074,7 @@ msgstr "Ange en URL för att ladda ner ett omslag från Internet:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Ange ett filnamn för exporterade omslag (utan ändelse):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Ange ett nytt namn för denna spellista"
 
@@ -2291,17 +2295,17 @@ msgstr "Toningslängd"
 msgid "Failed reading CD drive"
 msgstr "Fel vid läsning av CD-enhet"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "Misslyckades hämta katalog"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Misslyckades att hämta podsändning"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Misslyckades att ladda podsändning"
 
@@ -3057,7 +3061,7 @@ msgstr "Läser in spår"
 msgid "Loading tracks info"
 msgstr "Laddar låtinformation"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3084,7 +3088,7 @@ msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 msgid "Login"
 msgstr "Inloggning"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "Misslyckad inloggning"
 
@@ -3194,11 +3198,11 @@ msgstr "Manuellt"
 msgid "Manufacturer"
 msgstr "Tillverkare"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Markera som lyssnad"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "Markera som ny"
 
@@ -3573,11 +3577,11 @@ msgstr "Öppna %1 i webbläsare"
 msgid "Open &audio CD..."
 msgstr "Öppna &ljud-CD..."
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Öppna OPML fil"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Öppna OPML fil..."
 
@@ -3646,7 +3650,7 @@ msgstr "Organisera filer"
 msgid "Organise files..."
 msgstr "Organisera filer..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Organiserar filer..."
 
@@ -3767,8 +3771,8 @@ msgid "Player options"
 msgstr "Spelaralternativ"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Spellista"
 
@@ -3798,7 +3802,7 @@ msgstr "Var god och stäng din webbläsare och återgå till Clementine."
 msgid "Plugin status:"
 msgstr "Instickstatus:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podsändning"
 
@@ -4096,7 +4100,7 @@ msgstr "Ta bort från favoriter"
 msgid "Remove from playlist"
 msgstr "Ta bort från spellistan"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Ta bort spellista"
 
@@ -4125,11 +4129,11 @@ msgstr "Byt namn på %1 spellista"
 msgid "Rename Grooveshark playlist"
 msgstr "Byt namn på Groovesharkspellista"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Döp om spellista"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Döp om spellistan..."
 
@@ -4291,12 +4295,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Spara spellista"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Spara spellista"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Spara spellistan..."
 
@@ -5021,8 +5025,8 @@ msgstr "Den version av Clementine du precis uppdaterade till kräver en fullstä
 msgid "There are other songs in this album"
 msgstr "Det finns 'andra låtar' i det här albumet."
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Det uppstod ett fel med kommunikationen till gpodder.net"
 
@@ -5115,7 +5119,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Detta är första gången du ansluter denna enhet. Clementine kommer nu att söka igenom enheten för att hitta musikfiler - detta kan ta lite tid."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Detta alternativ kan ändras i \"Beteende\"  i Inställningar"
 
@@ -5255,8 +5259,8 @@ msgstr "Det går inte att hämta %1 (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Okänt"
@@ -5281,7 +5285,7 @@ msgstr "Hoppa inte över valda spår"
 msgid "Unskip track"
 msgstr "Hoppa inte över valt spår"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "Avprenumerera"
 
@@ -5297,7 +5301,7 @@ msgstr "Uppdatering"
 msgid "Update Grooveshark playlist"
 msgstr "Uppdatera Groovesharkspellista "
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "Uppdatera alla podsändningar"
 
@@ -5309,7 +5313,7 @@ msgstr "Uppdatera ändrade bibliotekskataloger"
 msgid "Update the library when Clementine starts"
 msgstr "Uppdatera biblioteket när Clementine startar"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "Uppdatera denna podsändning"
 
@@ -5439,7 +5443,7 @@ msgid "Variable bit rate"
 msgstr "Variabel bithastighet"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Diverse artister"
 
@@ -5494,7 +5498,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Varna mig när jag stänger en spellistsflik"
 
@@ -5642,7 +5646,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Du är på väg att ta bort %1 spellista från dina favoriter, är du säker?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5850,7 +5854,7 @@ msgstr "som är lika med"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "gpodder.net katalog"
 

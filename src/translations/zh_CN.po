@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-22 03:13+0000\n"
+"PO-Revision-Date: 2014-12-14 03:56+0000\n"
 "Last-Translator: zhangmin <zm1990s@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,7 +90,7 @@ msgstr "%1 天"
 msgid "%1 days ago"
 msgstr "%1 天前"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 在 %2"
@@ -100,7 +100,7 @@ msgstr "%1 在 %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 播放列表 (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 选定"
@@ -125,7 +125,7 @@ msgstr "找到 %1 首歌"
 msgid "%1 songs found (showing %2)"
 msgstr "找到 %1 首(显示 %2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 首"
@@ -270,7 +270,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 天"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1 个曲目"
 
@@ -430,7 +430,7 @@ msgstr "启用/禁用 Wii 遥控器"
 msgid "Activities stream"
 msgstr "热门音频"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "添加播客"
 
@@ -494,7 +494,7 @@ msgstr "添加新文件夹..."
 msgid "Add podcast"
 msgstr "添加播客"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "添加播客..."
 
@@ -915,7 +915,7 @@ msgstr "平均位速率"
 msgid "Average image size"
 msgstr "图片平均大小"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "BBC 播客"
 
@@ -1066,6 +1066,10 @@ msgstr "缓存 %1 中"
 msgid "Cancel"
 msgstr "取消"
 
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr "取消下载"
+
 #: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
@@ -1142,7 +1146,7 @@ msgstr "从列表中选择"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "选择播放列表的排序方式和包含歌曲数量。"
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "选择播客下载目录"
 
@@ -1246,7 +1250,7 @@ msgstr "Clementine 将在这些地方搜索音乐："
 msgid "Click here to add some music"
 msgstr "点击此处添加一些音乐"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1270,7 +1274,7 @@ msgstr "点击登录按钮将会打开网络浏览器。 登录之后将回到 C
 msgid "Close"
 msgstr "关闭"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "关闭播放列表"
 
@@ -1358,7 +1362,7 @@ msgstr "配置全局搜索…"
 msgid "Configure library..."
 msgstr "配置媒体库..."
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "正在设置播客..."
 
@@ -1428,7 +1432,7 @@ msgstr "复制分享链接"
 msgid "Copy to clipboard"
 msgstr "复制到剪切板"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "复制到设备..."
@@ -1455,7 +1459,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "无法创建GStreamer元素 \"%1\" - 请确认您已安装了所需GStreamer插件"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "无法创建列表"
 
@@ -1680,7 +1684,7 @@ msgstr "删除"
 msgid "Delete Grooveshark playlist"
 msgstr "删除 Grooveshark 播放列表"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "删除已下载的数据"
 
@@ -1877,7 +1881,7 @@ msgstr "双击打开"
 msgid "Double clicking a song will..."
 msgstr "双击歌曲将..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1899,7 +1903,7 @@ msgstr "下载会员"
 msgid "Download new episodes automatically"
 msgstr "自动下载新的节目"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "下载队列"
 
@@ -1919,7 +1923,7 @@ msgstr "下载此专辑"
 msgid "Download this album..."
 msgstr "下载此专辑..."
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "下载此节目"
 
@@ -1927,7 +1931,7 @@ msgstr "下载此节目"
 msgid "Download..."
 msgstr "下载..."
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "下载中 (%1%)..."
@@ -2068,7 +2072,7 @@ msgstr "输入 URL 以便从网络下载封面："
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "输入导出封面的文件名(不含扩展名):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "输入播放列表的新名称"
 
@@ -2289,17 +2293,17 @@ msgstr "淡出时长"
 msgid "Failed reading CD drive"
 msgstr "读取 CD 失败"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "无法获取目录"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "无法获取播客"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "无法读取播客"
 
@@ -3055,7 +3059,7 @@ msgstr "正在载入曲目"
 msgid "Loading tracks info"
 msgstr "正在加载曲目信息"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3082,7 +3086,7 @@ msgstr "载入文件或URL，替换当前播放列表"
 msgid "Login"
 msgstr "登录"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "登录失败"
 
@@ -3192,11 +3196,11 @@ msgstr "手动"
 msgid "Manufacturer"
 msgstr "生产商"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "标记为已听"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "标记为新的"
 
@@ -3571,11 +3575,11 @@ msgstr "在浏览器中打开%1"
 msgid "Open &audio CD..."
 msgstr "打开音频CD...(&a)"
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "打开 OPML 文件"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "打开 OPML 文件…"
 
@@ -3644,7 +3648,7 @@ msgstr "组织文件"
 msgid "Organise files..."
 msgstr "组织文件..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "组织文件"
 
@@ -3765,8 +3769,8 @@ msgid "Player options"
 msgstr "播放器选项"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "播放列表"
 
@@ -3796,7 +3800,7 @@ msgstr "请关闭你的浏览器，回到 Clementine。"
 msgid "Plugin status:"
 msgstr "插件状态:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "播客"
 
@@ -4094,7 +4098,7 @@ msgstr "从收藏夹的中删除"
 msgid "Remove from playlist"
 msgstr "从播放列表中移除"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "删除播放列表"
 
@@ -4123,11 +4127,11 @@ msgstr "重命名 \"%1\" 播放列表"
 msgid "Rename Grooveshark playlist"
 msgstr "重命名 Grooveshark 播放列表"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "重命名播放列表"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "重命名播放列表..."
 
@@ -4289,12 +4293,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "保存播放列表"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "保存播放列表"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "保存播放列表..."
 
@@ -5019,8 +5023,8 @@ msgstr "已更新Clementine，由于添加了如下特性，您需要更新您�
 msgid "There are other songs in this album"
 msgstr "此专辑中还有其它歌曲"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "与 gpodder.net 通讯时出现了问题"
 
@@ -5113,7 +5117,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "这是您第一次连接该设备。Clementine 将扫描设备上的音乐文件-这需要花费一些时间。"
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "这些选项可以在“行为”设置中修改"
 
@@ -5253,8 +5257,8 @@ msgstr "无法下载 %1 (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "未知"
@@ -5279,7 +5283,7 @@ msgstr "取消略过的选定曲目"
 msgid "Unskip track"
 msgstr "取消掠过曲目"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "取消订阅"
 
@@ -5295,7 +5299,7 @@ msgstr "更新"
 msgid "Update Grooveshark playlist"
 msgstr "更新 Grooveshark 播放列表"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "更新所有播客"
 
@@ -5307,7 +5311,7 @@ msgstr "更新改变的媒体库文件夹"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine 启动时更新媒体库"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "更新此播客"
 
@@ -5437,7 +5441,7 @@ msgid "Variable bit rate"
 msgstr "可变比特率"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "群星"
 
@@ -5492,7 +5496,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "墙"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "关闭播放列表标签时，提示我"
 
@@ -5640,7 +5644,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "您正试图从收藏夹中删除播放列表 %1 ，确定要这样做吗?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5848,7 +5852,7 @@ msgstr "等于"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "gpodder.net 目录"
 

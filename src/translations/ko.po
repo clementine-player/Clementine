@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-13 22:18+0000\n"
+"PO-Revision-Date: 2014-12-14 00:43+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,7 +89,7 @@ msgstr "%1일"
 msgid "%1 days ago"
 msgstr "%1일 전"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr ""
@@ -99,7 +99,7 @@ msgstr ""
 msgid "%1 playlists (%2)"
 msgstr "%1 재생목록 (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "다음 중 %1개 선택됨"
@@ -124,7 +124,7 @@ msgstr "%1개 노래 찾음"
 msgid "%1 songs found (showing %2)"
 msgstr "%1개 노래 찾음 (%2개 표시 중)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1개 트랙"
@@ -269,7 +269,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1일"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1개 트랙"
 
@@ -429,7 +429,7 @@ msgstr "Wii 리모컨 사용/중지"
 msgid "Activities stream"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "팟케스트 추가"
 
@@ -493,7 +493,7 @@ msgstr "새로운 폴더 추가..."
 msgid "Add podcast"
 msgstr "팟케스트 추가"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "팟케스트 추가..."
 
@@ -914,7 +914,7 @@ msgstr "평균 비트 전송률"
 msgid "Average image size"
 msgstr "평균 이미지 크기"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "BBC 팟케스트"
 
@@ -1065,6 +1065,10 @@ msgstr "%1 캐시 중"
 msgid "Cancel"
 msgstr "취소"
 
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr ""
+
 #: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
@@ -1141,7 +1145,7 @@ msgstr "목록에서 선택"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "재생목록의 정렬 방식과 최대 곡수를 선택하세요."
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "팟케스트 다운로드 경로를 선택하세요"
 
@@ -1245,7 +1249,7 @@ msgstr "Clementine이 음악을 찾을 수 있습니다."
 msgid "Click here to add some music"
 msgstr "음악을 추가하려면 여기를 클릭하세요"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1269,7 +1273,7 @@ msgstr "로그인 버튼을 클릭하면 웹 브라우저가 열립니다. 당�
 msgid "Close"
 msgstr "닫기"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "재생목록 닫기"
 
@@ -1357,7 +1361,7 @@ msgstr "글로벌 검색 설정..."
 msgid "Configure library..."
 msgstr "라이브러리 설정..."
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "팟케스트 설정..."
 
@@ -1427,7 +1431,7 @@ msgstr "공유 URL 복사"
 msgid "Copy to clipboard"
 msgstr "클립보드로 복사"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "장치에 복사..."
@@ -1454,7 +1458,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "GStreamer 요소 \"%1\"를 찾을 수 없습니다  - 필요한 모든 GStreamer 플러그인이 설치되어 있는지 확인하세요"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "재생목록을 생성할수 없습니다."
 
@@ -1679,7 +1683,7 @@ msgstr "삭제"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark 재생목록 지우기"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "다운로드된 데이터 삭제"
 
@@ -1876,7 +1880,7 @@ msgstr "열려면 더블클릭하세요"
 msgid "Double clicking a song will..."
 msgstr "노래를 더블클릭하면..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1898,7 +1902,7 @@ msgstr "멤버십 다운로드"
 msgid "Download new episodes automatically"
 msgstr "자동으로 새로운 에피소드 다운로드"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "다운로드 대기열 추가됨"
 
@@ -1918,7 +1922,7 @@ msgstr "이 앨범 다운로드"
 msgid "Download this album..."
 msgstr "이 앨범 다운로드..."
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "이 에피소드 다운로드"
 
@@ -1926,7 +1930,7 @@ msgstr "이 에피소드 다운로드"
 msgid "Download..."
 msgstr "다운로드..."
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "다운로드 중 (%1%)..."
@@ -2067,7 +2071,7 @@ msgstr "인터넷에서 다운로드할 커버의 URL 주소를 입력하세요"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "내보낼 커버의 파일이름을 입력(확장자 제외):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "새로운 재생목록 이름을 입력하세요"
 
@@ -2288,17 +2292,17 @@ msgstr "페이드 아웃 시간"
 msgid "Failed reading CD drive"
 msgstr "CD 드라이브 읽기 실패"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "폴더 가져오기 실패"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "팟케스트 가져오기 실패"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "팟케스트 열기 실패"
 
@@ -3054,7 +3058,7 @@ msgstr "트랙 여는 중"
 msgid "Loading tracks info"
 msgstr "트랙 정보 불러오는중"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3081,7 +3085,7 @@ msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 msgid "Login"
 msgstr "로그인"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "로그인 실패"
 
@@ -3191,11 +3195,11 @@ msgstr "수동적"
 msgid "Manufacturer"
 msgstr "제조회사"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "들음으로 기록"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "새로 기록"
 
@@ -3570,11 +3574,11 @@ msgstr "브라우저에서 %1 열기"
 msgid "Open &audio CD..."
 msgstr "오디오 CD 열기(&a)..."
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "OPML 파일 열기"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "OPML 파일 열기"
 
@@ -3643,7 +3647,7 @@ msgstr "파일 정리"
 msgid "Organise files..."
 msgstr "파일 정리..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "파일 정리 중..."
 
@@ -3764,8 +3768,8 @@ msgid "Player options"
 msgstr "플레이어 옵션"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "재생목록"
 
@@ -3795,7 +3799,7 @@ msgstr "브라우저를 닫고 Clementine으로 돌아오세요"
 msgid "Plugin status:"
 msgstr "플러그인 상태:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "팟케스트"
 
@@ -4093,7 +4097,7 @@ msgstr "즐겨찾기에서 제거"
 msgid "Remove from playlist"
 msgstr "재생목록에서 제거"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "재생목록 삭제"
 
@@ -4122,11 +4126,11 @@ msgstr "재생목록 \"%1\" 이름 바꾸기"
 msgid "Rename Grooveshark playlist"
 msgstr "Grooveshark 재생목록 이름 바꾸기"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "재생목록 이름 바꾸기"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "재생목록 이름 바꾸기..."
 
@@ -4288,12 +4292,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "재생목록 저장"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "재생목록 저장"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "재생목록 저장..."
 
@@ -5018,8 +5022,8 @@ msgstr "아래의 새 기능이 추가되었기 때문에, 전체 라이브러�
 msgid "There are other songs in this album"
 msgstr "이 앨범과 다른 음악"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "gpodder.net과 통신하는데 문제가 발생하였습니다."
 
@@ -5112,7 +5116,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "이 장치는 처음 연결 되었습니다. Clementine은 지금 장치에서 음악 파일들을 탐색할 것 입니다. - 시간이 조금 걸릴수 도 있습니다."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "이 옵션은 환경설정의 \"행동\" 에서 변경할 수 있습니다."
 
@@ -5252,8 +5256,8 @@ msgstr "%1(%2)를 다운로드 할 수 없습니다"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "알 수 없는"
@@ -5278,7 +5282,7 @@ msgstr "선택된 트랙들 넘기기 "
 msgid "Unskip track"
 msgstr "트랙 넘기기 "
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "구독 안함"
 
@@ -5294,7 +5298,7 @@ msgstr "갱신"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark 재생목록 업데이트"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "모든 팟케스트 업데이트"
 
@@ -5306,7 +5310,7 @@ msgstr "변경된 라이브러리 폴더 업데이트"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine이 시작될 때 라이브러리 업데이트"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "이 팟케스트 업데이트"
 
@@ -5436,7 +5440,7 @@ msgid "Variable bit rate"
 msgstr "가변 비트 전송률"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "다양한 음악가"
 
@@ -5491,7 +5495,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "재생목록 탭을 닫으면 알림"
 
@@ -5639,7 +5643,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "즐겨찾기에서 재생목록 %1(을)를 제거합니다. 계속하시겠습니까?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5847,7 +5851,7 @@ msgstr "같음"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "gpodder.net 디렉토리"
 

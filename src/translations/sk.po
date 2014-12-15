@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-18 10:11+0000\n"
+"PO-Revision-Date: 2014-12-14 07:51+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,7 +81,7 @@ msgstr "%1 dní"
 msgid "%1 days ago"
 msgstr "Pred %1 dňami"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 na %2"
@@ -91,7 +91,7 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 playlistov (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 vybratých z"
@@ -116,7 +116,7 @@ msgstr "nájdených %1 piesní"
 msgid "%1 songs found (showing %2)"
 msgstr "nájdených %1 piesní (zobrazuje sa %2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladieb"
@@ -261,7 +261,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 deň"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1 skladba"
 
@@ -421,7 +421,7 @@ msgstr "Aktivovať/deaktivovať Wiiremote"
 msgid "Activities stream"
 msgstr "Stream činností"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Pridať podcast"
 
@@ -485,7 +485,7 @@ msgstr "Pridať nový priečinok..."
 msgid "Add podcast"
 msgstr "Pridať podcast"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Pridať podcast..."
 
@@ -906,7 +906,7 @@ msgstr "Priemerný dátový tok"
 msgid "Average image size"
 msgstr "Priemerná veľkosť obrázku"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "Podcasty BBC"
 
@@ -1057,6 +1057,10 @@ msgstr "%1 sa ukladá do vyrovnávacej pamäte"
 msgid "Cancel"
 msgstr "Zrušiť"
 
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr "Zrušiť sťahovanie"
+
 #: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
@@ -1133,7 +1137,7 @@ msgstr "Vybrať zo zoznamu"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Vyberte, ako má byť playlist usporiadaný a koľko piesní má obsahovať."
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "Vybrať pričinok na sťahovanie podcastu"
 
@@ -1237,7 +1241,7 @@ msgstr "Clementine bude hľadať hudbu na:"
 msgid "Click here to add some music"
 msgstr "Kliknite sem aby ste pridali nejakú hudbu"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1261,7 +1265,7 @@ msgstr "Kliknutie na tlačítko Prihlásiť otvorí internetový prehliadač.\nP
 msgid "Close"
 msgstr "Zatvoriť"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "Zatvoriť playlist"
 
@@ -1349,7 +1353,7 @@ msgstr "Nastaviť globálne vyhľadávanie..."
 msgid "Configure library..."
 msgstr "Nastaviť zbierku..."
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "Nastaviť podcasty..."
 
@@ -1419,7 +1423,7 @@ msgstr "Kopírovať zdieľanú URL adresu do schránky"
 msgid "Copy to clipboard"
 msgstr "Kopírovať do schránky"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Skopírovať na zariadenie..."
@@ -1446,7 +1450,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Nedal sa vytvoriť GStreamer element \"%1\" - uistite sa, že máte nainštalované všetky potrebné pluginy GStreamera."
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "Nepodarilo sa vytvoriť playlist"
 
@@ -1671,7 +1675,7 @@ msgstr "Vymazať"
 msgid "Delete Grooveshark playlist"
 msgstr "Vymazať Grooveshark playlist"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "Vymazať stiahnuté dáta"
 
@@ -1868,7 +1872,7 @@ msgstr "Otvoríte dvojklikom"
 msgid "Double clicking a song will..."
 msgstr "Dvojklik na pieseň..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1890,7 +1894,7 @@ msgstr "Členstvo sťahovania"
 msgid "Download new episodes automatically"
 msgstr "Sťahovať nové časti automaticky"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "Sťahovanie zaradené"
 
@@ -1910,7 +1914,7 @@ msgstr "Stiahnuť tento album"
 msgid "Download this album..."
 msgstr "Stiahnuť tento album..."
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "Stiahnuť túto časť"
 
@@ -1918,7 +1922,7 @@ msgstr "Stiahnuť túto časť"
 msgid "Download..."
 msgstr "Stiahnuť..."
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Sťahovanie (%1%)..."
@@ -2059,7 +2063,7 @@ msgstr "Zadajte URL adresu na stiahnutie obalu z internetu:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Zadajte názov súboru pre exportované obaly (bez prípony):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Zadajte nový názov pre tento playlist"
 
@@ -2280,17 +2284,17 @@ msgstr "Trvanie zoslabovania"
 msgid "Failed reading CD drive"
 msgstr "Zlyhalo čítanie CD v mechanike"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "Zlyhalo získanie priečinka"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Zlyhalo získanie podcastov"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Zlyhalo načítanie podcastu"
 
@@ -3046,7 +3050,7 @@ msgstr "Načítavajú sa skladby"
 msgid "Loading tracks info"
 msgstr "Načítavajú sa informácie o skladbe"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3073,7 +3077,7 @@ msgstr "Načítať súbory/URL adresy, nahradiť nimi aktuálny playlist"
 msgid "Login"
 msgstr "Prihlásiť sa"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "Prihlásenie zlyhalo"
 
@@ -3183,11 +3187,11 @@ msgstr "Ručne"
 msgid "Manufacturer"
 msgstr "Výrobca"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Označiť ako vypočuté"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "Označiť ako nové"
 
@@ -3562,11 +3566,11 @@ msgstr "Otvoriť %1 v prehliadači"
 msgid "Open &audio CD..."
 msgstr "Otvoriť &zvukové CD..."
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Otvoriť OPML súbor"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Otvoriť OPML súbor..."
 
@@ -3635,7 +3639,7 @@ msgstr "Organizovať súbory"
 msgid "Organise files..."
 msgstr "Spravovať súbory..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Spravovanie súborov"
 
@@ -3756,8 +3760,8 @@ msgid "Player options"
 msgstr "Možnosti prehrávača"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Playlist"
 
@@ -3787,7 +3791,7 @@ msgstr "Prosím zatvorte váš internetový prehliadač a vráťte sa do Clement
 msgid "Plugin status:"
 msgstr "Stav pluginu:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcasty"
 
@@ -4085,7 +4089,7 @@ msgstr "Odstrániť z obľúbených"
 msgid "Remove from playlist"
 msgstr "Odstrániť z playlistu"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Odstrániť playlist"
 
@@ -4114,11 +4118,11 @@ msgstr "Premenovať playlist \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Premenovať Grooveshark playlist"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Premenovať playlist"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Premenovať playlist..."
 
@@ -4280,12 +4284,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Uložiť playlist"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Uložiť playlist"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Uložiť playlist..."
 
@@ -5010,8 +5014,8 @@ msgstr "Verzia Clementine, na ktorú sa práve aktualizovali, vyžaduje preskeno
 msgid "There are other songs in this album"
 msgstr "V tomto albume sú ďalšie piesne"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Bol tu problém s komunikáciou s gpodder.net"
 
@@ -5104,7 +5108,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Prvý krát ste pripojili toto zariadenie. Clementine teraz prehľadá zariadenie aby našlo hudobné súbory - môže to zabrať nejaký čas."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Táto možnosť sa dá zmeniť v nastaveniach, v časti Správanie"
 
@@ -5244,8 +5248,8 @@ msgstr "Nedá sa stiahnuť %1 (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "neznámy"
@@ -5270,7 +5274,7 @@ msgstr "Nepreskočiť vybraté skladby"
 msgid "Unskip track"
 msgstr "Nepreskočiť skladbu"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "Zrušiť predplatné"
 
@@ -5286,7 +5290,7 @@ msgstr "Aktualizovať"
 msgid "Update Grooveshark playlist"
 msgstr "Aktualizovať Grooveshark playlist"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "Aktualizovať všetky podcasty"
 
@@ -5298,7 +5302,7 @@ msgstr "Aktualizovať zmenené priečinky v zbierke"
 msgid "Update the library when Clementine starts"
 msgstr "Aktualizovať zbierku pri zapnutí Clementine"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "Aktualizovať tento podcast"
 
@@ -5428,7 +5432,7 @@ msgid "Variable bit rate"
 msgstr "Premenlivý dátový tok"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Rôzni interpréti"
 
@@ -5483,7 +5487,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Stena"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovať ma pri zatvorení karty s playlistom"
 
@@ -5631,7 +5635,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Chystáte sa odstrániť %1 playlistov z vašich obľúbených, ste si istí?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5839,7 +5843,7 @@ msgstr "rovná sa"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "gpodder.net priečinok"
 

@@ -24,8 +24,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-16 18:08+0000\n"
-"Last-Translator: Volkan Gezer <volkangezer@gmail.com>\n"
+"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -96,7 +96,7 @@ msgstr "%1 gün"
 msgid "%1 days ago"
 msgstr "%1 gün önce"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%2 üzerinde %1"
@@ -106,7 +106,7 @@ msgstr "%2 üzerinde %1"
 msgid "%1 playlists (%2)"
 msgstr "%1 çalma listesi (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 seçili"
@@ -131,7 +131,7 @@ msgstr "%1 şarkı bulundu"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 şarkı bulundu (%2 tanesi gösteriliyor)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 parça"
@@ -276,7 +276,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 gün"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1 parça"
 
@@ -436,7 +436,7 @@ msgstr "Wiiremote etkinleştir/devre dışı bırak"
 msgid "Activities stream"
 msgstr "Etkinlik akışı"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Podcast Ekle"
 
@@ -500,7 +500,7 @@ msgstr "Yeni klasör ekle..."
 msgid "Add podcast"
 msgstr "Podcast ekle"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Podcast ekle..."
 
@@ -921,7 +921,7 @@ msgstr "Ortalama bit oranı"
 msgid "Average image size"
 msgstr "Ortalama resim boyutu"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "BBC Podcastları"
 
@@ -1072,6 +1072,10 @@ msgstr "Önbelleklenen %1"
 msgid "Cancel"
 msgstr "İptal"
 
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr ""
+
 #: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
@@ -1148,7 +1152,7 @@ msgstr "Listeden seç"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Çalma listesinin nasıl dizildiğini ve kaç şarkı içereceğini seçin."
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "Podcast indirme dizinini seç"
 
@@ -1252,7 +1256,7 @@ msgstr "Clementine müzikleri şurada bulacak:"
 msgid "Click here to add some music"
 msgstr "Parça eklemek için buraya tıklayın"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1276,7 +1280,7 @@ msgstr "Oturum Aç düğmesini tıklayınca yeni internet sayfası açılır. Ot
 msgid "Close"
 msgstr "Kapat"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "oynatma lis"
 
@@ -1364,7 +1368,7 @@ msgstr "Genel aramayı düzenle..."
 msgid "Configure library..."
 msgstr "Kütüphaneyi düzenle..."
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "Podcastları ayarla..."
 
@@ -1434,7 +1438,7 @@ msgstr "Paylaşım adresini panoya kopyala"
 msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Aygıta kopyala..."
@@ -1461,7 +1465,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "GStreamer elementi  \"%1\" oluşturulamadı - tüm Gstreamer eklentilerinin kurulu olduğundan emin olun"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "Çalma listesi oluşturulamadı"
 
@@ -1686,7 +1690,7 @@ msgstr "Sil"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark müzik listesini sil"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "İndirilmiş veriyi sil"
 
@@ -1883,7 +1887,7 @@ msgstr "Açmak için çift tıkla"
 msgid "Double clicking a song will..."
 msgstr "Bir şarkıyı çift tıklamak..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1905,7 +1909,7 @@ msgstr "İndirme üyeliği"
 msgid "Download new episodes automatically"
 msgstr "Yeni bölümleri otomatik olarak indir"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "Sıradakileri indir"
 
@@ -1925,7 +1929,7 @@ msgstr "Bu albümü indir"
 msgid "Download this album..."
 msgstr "Bu albümü indirin..."
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "Bu bölümü indir"
 
@@ -1933,7 +1937,7 @@ msgstr "Bu bölümü indir"
 msgid "Download..."
 msgstr "İndir..."
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "İndiriyor (%1%)..."
@@ -2074,7 +2078,7 @@ msgstr "Kapağı Internet'ten indirmek için URL girin:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Dışa aktarılan kapaklar için bir dosya adı girin (uzantı yok):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Bu çalma listesi için yeni bir isim gir"
 
@@ -2295,17 +2299,17 @@ msgstr "Yumuşak geçiş süresi"
 msgid "Failed reading CD drive"
 msgstr "CD sürücünü okuma başarısız"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "Dizin getirme başarısız oldu"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Podcastların indirilmesi başarısız oldu"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Podcastların yüklenmesi başarısız oldu"
 
@@ -3061,7 +3065,7 @@ msgstr "Parçalar yükleniyor"
 msgid "Loading tracks info"
 msgstr "Parça bilgileri yükleniyor"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3088,7 +3092,7 @@ msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 msgid "Login"
 msgstr "Oturum aç"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "Giriş başarısız oldu."
 
@@ -3198,11 +3202,11 @@ msgstr "El ile"
 msgid "Manufacturer"
 msgstr "Üretici"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Dinlenmiş olarak işaretle"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "Yeni olarak işaretle"
 
@@ -3577,11 +3581,11 @@ msgstr "Tarayıcıda aç: %1"
 msgid "Open &audio CD..."
 msgstr "&Ses CD'si aç..."
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "OPML dosyası aç"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "OPML dosyasını aç..."
 
@@ -3650,7 +3654,7 @@ msgstr "Dosyaları Düzenle"
 msgid "Organise files..."
 msgstr "Dosyaları düzenle..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Dosyalar düzenleniyor"
 
@@ -3771,8 +3775,8 @@ msgid "Player options"
 msgstr "Oynatıcı seçenekleri"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Çalma Listesi"
 
@@ -3802,7 +3806,7 @@ msgstr "Lütfen tarayıcınızı kapatıp Clementine'e geri dönün."
 msgid "Plugin status:"
 msgstr "Eklenti durumu:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcastlar"
 
@@ -4100,7 +4104,7 @@ msgstr "Favorilerden kaldır"
 msgid "Remove from playlist"
 msgstr "Çalma listesinden kaldır"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Çalma listesini kaldır"
 
@@ -4129,11 +4133,11 @@ msgstr "\"%1\" çalma listesini yeniden adlandır"
 msgid "Rename Grooveshark playlist"
 msgstr "Grooveshark çalma listesini yeniden adlandır"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Çalma listesini yeniden adlandır"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Çalma listesini yeniden adlandır..."
 
@@ -4295,12 +4299,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Çalma listesini kaydet"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Çalma listesini kaydet"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Çalma listesini kaydet..."
 
@@ -5025,8 +5029,8 @@ msgstr "Güncellediğiniz Clementine sürümü, aşağıda listelenen yeni özel
 msgid "There are other songs in this album"
 msgstr "Bu albümde başka şarkılar da var"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "gpodder.net ile iletişimde bir sorun oluştu."
 
@@ -5119,7 +5123,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Bu aygıtı ilk defa bağlıyorsunuz.  Clementine müzik dosyalarını bulmak için aygıtı tarayacak - bu işlem biraz zaman alabilir."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Bu seçenek \"Davranış\" tercihlerinden değiştirilebilir"
 
@@ -5259,8 +5263,8 @@ msgstr "%1 indirilemedi (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Bilinmeyen"
@@ -5285,7 +5289,7 @@ msgstr "Seçili parçaları atlama"
 msgid "Unskip track"
 msgstr "Parçayı atlama"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "Abonelikten çık"
 
@@ -5301,7 +5305,7 @@ msgstr "Güncelle"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark çalma listesini güncelle"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "Bütün podcastları güncelle"
 
@@ -5313,7 +5317,7 @@ msgstr "Değişen kütüphane klasörlerini güncelle"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine başladığında kütüphaneyi güncelle"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "Bu podcast'ı güncelle"
 
@@ -5443,7 +5447,7 @@ msgid "Variable bit rate"
 msgstr "Değişken bit oranı"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Çeşitli sanatçılar"
 
@@ -5498,7 +5502,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Duvar"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Bir çalma listesi sekmesini kapatırken beni uyar"
 
@@ -5646,7 +5650,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Beğenilenlerinizden %1 oynatma listesini kaldırmak üzeresiniz. Emin misiniz?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5854,7 +5858,7 @@ msgstr "eşittir"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "gpodder.net dizini"
 

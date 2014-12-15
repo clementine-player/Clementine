@@ -31,8 +31,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-24 03:45+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fito@libreoffice.org>\n"
+"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -103,7 +103,7 @@ msgstr "%1 días"
 msgid "%1 days ago"
 msgstr "hace %1 días"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 en %2"
@@ -113,7 +113,7 @@ msgstr "%1 en %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reproducción (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 seleccionadas de"
@@ -138,7 +138,7 @@ msgstr "Se encontraron %1 canciones"
 msgid "%1 songs found (showing %2)"
 msgstr "Se encontraron %1 canciones (%2 visibles)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pistas"
@@ -283,7 +283,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 día"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1 pista"
 
@@ -443,7 +443,7 @@ msgstr "Activar/desactivar Wiiremote"
 msgid "Activities stream"
 msgstr "Lista de actividades"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Añadir un podcast"
 
@@ -507,7 +507,7 @@ msgstr "Añadir carpeta nueva…"
 msgid "Add podcast"
 msgstr "Añadir un podcast"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Añadir un podcast…"
 
@@ -928,7 +928,7 @@ msgstr "Tasa de bits promedio"
 msgid "Average image size"
 msgstr "Tamaño promedio de imagen"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "Podcasts de BBC"
 
@@ -1079,6 +1079,10 @@ msgstr "Almacenando %1 en caché"
 msgid "Cancel"
 msgstr "Cancelar"
 
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr ""
+
 #: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
@@ -1155,7 +1159,7 @@ msgstr "Elegir de la lista"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Elija cómo ordenar la lista de reproducción y cuantas canciones contendrá."
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "Elegir directorio de descarga de podcasts"
 
@@ -1259,7 +1263,7 @@ msgstr "Clementine buscará música en:"
 msgid "Click here to add some music"
 msgstr "Pulse aquí para añadir música"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1283,7 +1287,7 @@ msgstr "Al pulsar Iniciar sesión se abrirá un navegador web.  Una vez que inic
 msgid "Close"
 msgstr "Cerrar"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "Cerrar lista de reproducción"
 
@@ -1371,7 +1375,7 @@ msgstr "Configurar búsqueda global…"
 msgid "Configure library..."
 msgstr "Configurar colección…"
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "Configurar podcasts…"
 
@@ -1441,7 +1445,7 @@ msgstr "Copiar URL para compartir en portapapeles"
 msgid "Copy to clipboard"
 msgstr "Copiar en el portapapeles"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copiar en un dispositivo…"
@@ -1468,7 +1472,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener instalados todos los complementos necesarios de GStreamer."
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "No se pudo crear la lista de reproducción"
 
@@ -1693,7 +1697,7 @@ msgstr "Eliminar"
 msgid "Delete Grooveshark playlist"
 msgstr "Eliminar lista de reproducción de Grooveshark"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "Eliminar datos descargados"
 
@@ -1890,7 +1894,7 @@ msgstr "Pulse dos veces para abrir"
 msgid "Double clicking a song will..."
 msgstr "Al pulsar dos veces sobre una canción…"
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1912,7 +1916,7 @@ msgstr "Membresía para descarga"
 msgid "Download new episodes automatically"
 msgstr "Descargar episodios nuevos automáticamente"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "Descarga en cola"
 
@@ -1932,7 +1936,7 @@ msgstr "Descargar este álbum"
 msgid "Download this album..."
 msgstr "Descargar este álbum…"
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "Descargar este episodio"
 
@@ -1940,7 +1944,7 @@ msgstr "Descargar este episodio"
 msgid "Download..."
 msgstr "Descargar…"
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Descargando (%1%)…"
@@ -2081,7 +2085,7 @@ msgstr "Escriba un URL para descargar una carátula de la Internet:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Escriba un nombre de archivo para las carátulas exportadas (sin extensión):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Escriba un nombre nuevo para esta lista de reproducción"
 
@@ -2302,17 +2306,17 @@ msgstr "Duración del fundido"
 msgid "Failed reading CD drive"
 msgstr "Falló la lectura de la unidad de CD"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "No se pudo obtener el directorio"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "No se pudieron obtener los podcasts"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "No se pudo cargar el podcast"
 
@@ -3068,7 +3072,7 @@ msgstr "Cargando las pistas"
 msgid "Loading tracks info"
 msgstr "Cargando información de pistas"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3095,7 +3099,7 @@ msgstr "Carga archivos/URL, reemplazando la lista de reproducción actual"
 msgid "Login"
 msgstr "Acceder"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "Falló el inicio de sesión"
 
@@ -3205,11 +3209,11 @@ msgstr "Manualmente"
 msgid "Manufacturer"
 msgstr "Fabricante"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Marcar como escuchado"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "Marcar como nuevo"
 
@@ -3584,11 +3588,11 @@ msgstr "Abrir %1 en el navegador"
 msgid "Open &audio CD..."
 msgstr "Abrir un &CD de sonido…"
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Abrir un archivo OPML"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Abrir un archivo OPML…"
 
@@ -3657,7 +3661,7 @@ msgstr "Organizar archivos"
 msgid "Organise files..."
 msgstr "Organizar archivos…"
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Organizando los archivos"
 
@@ -3778,8 +3782,8 @@ msgid "Player options"
 msgstr "Opciones del reproductor"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Lista de reproducción"
 
@@ -3809,7 +3813,7 @@ msgstr "Cierre el navegador y regrese a Clementine."
 msgid "Plugin status:"
 msgstr "Estado del complemento:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcasts"
 
@@ -4107,7 +4111,7 @@ msgstr "Quitar de favoritos"
 msgid "Remove from playlist"
 msgstr "Eliminar de la lista de reproducción"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Eliminar lista de reproducción"
 
@@ -4136,11 +4140,11 @@ msgstr "Renombrar lista de reproducción «%1»"
 msgid "Rename Grooveshark playlist"
 msgstr "Renombrar lista de reproducción de Grooveshark"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Renombrar lista de reproducción"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Renombrar lista de reproducción…"
 
@@ -4302,12 +4306,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Guardar lista de reproducción…"
 
@@ -5032,8 +5036,8 @@ msgstr "La versión de Clementine a la que se acaba de actualizar necesita volve
 msgid "There are other songs in this album"
 msgstr "Hay otras canciones en este álbum"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Hubo un problema al comunicarse con gpodder.net"
 
@@ -5126,7 +5130,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Esta es la primera vez que conecta este dispositivo.  Clementine analizará el dispositivo ahora para encontrar archivos de música; esto podría tomar algo de tiempo."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Puede modificar esta opción en la pestaña «Comportamiento» en Preferencias"
 
@@ -5266,8 +5270,8 @@ msgstr "No se puede descargar %1 (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Desconocido"
@@ -5292,7 +5296,7 @@ msgstr "No omitir pistas seleccionadas"
 msgid "Unskip track"
 msgstr "No omitir pista"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "Cancelar suscripción"
 
@@ -5308,7 +5312,7 @@ msgstr "Actualizar"
 msgid "Update Grooveshark playlist"
 msgstr "Actualizar lista de reproducción de Grooveshark"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "Actualizar todos los podcasts"
 
@@ -5320,7 +5324,7 @@ msgstr "Actualizar carpetas de la colección modificadas"
 msgid "Update the library when Clementine starts"
 msgstr "Actualizar la colección cuando inicie Clementine"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "Actualizar este podcast"
 
@@ -5450,7 +5454,7 @@ msgid "Variable bit rate"
 msgstr "Tasa de bits variable"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Varios artistas"
 
@@ -5505,7 +5509,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Muro"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisarme antes de cerrar una pestaña de lista de reproducción"
 
@@ -5653,7 +5657,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "¿Está seguro de que quiere eliminar %1 listas de reproducción de sus favoritos?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5861,7 +5865,7 @@ msgstr "es igual a"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "Directorio de gpodder.net"
 

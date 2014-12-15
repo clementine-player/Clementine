@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-02 17:21+0000\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -67,7 +67,7 @@ msgstr " dainos"
 #: internet/vkservice.cpp:146
 #, qt-format
 msgid "%1 (%2 songs)"
-msgstr ""
+msgstr "%1 (%2 dainos)"
 
 #: widgets/osd.cpp:194
 #, qt-format
@@ -84,7 +84,7 @@ msgstr "%1 dienų"
 msgid "%1 days ago"
 msgstr "prieš %1 dienų"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 šaltinyje %2"
@@ -94,7 +94,7 @@ msgstr "%1 šaltinyje %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 grojaraščiai (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 pažymėta iš"
@@ -119,7 +119,7 @@ msgstr "%1 rasta dainų"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 rasta dainų (rodoma %2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 takeliai"
@@ -242,7 +242,7 @@ msgstr "(skirtinga daugelyje dainų)"
 
 #: internet/spotifyservice.cpp:424
 msgid ", by "
-msgstr ""
+msgstr ", pagal "
 
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
@@ -264,7 +264,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 diena"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1 daina"
 
@@ -304,7 +304,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Naudokite lauko pavadinimą kaip priešdelį, norėdami apriboti paiešką to lauko reikšme, pvz., <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> ieškos fonotekoje visų atlikėjų, su žodžiu Bode.</p><p><span style=\" font-weight:600;\">Prieinami laukai: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -393,7 +393,7 @@ msgstr "Apie Qt..."
 #: playlist/playlistsaveoptionsdialog.cpp:34
 #: ../bin/src/ui_behavioursettingspage.h:286
 msgid "Absolute"
-msgstr ""
+msgstr "Absoliutūs"
 
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -414,7 +414,7 @@ msgstr "Veiksmas"
 #: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgctxt "Category label"
 msgid "Action"
-msgstr ""
+msgstr "Veiksmas"
 
 #: wiimotedev/wiimotesettingspage.cpp:96
 msgid "Active/deactive Wiiremote"
@@ -422,9 +422,9 @@ msgstr "Aktyvuoti/Deaktyvuoti Wii pultą"
 
 #: internet/soundcloudservice.cpp:124
 msgid "Activities stream"
-msgstr ""
+msgstr "Aktyvumo srautas"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Pridėti srautą"
 
@@ -488,7 +488,7 @@ msgstr "Pridėti naują aplankalą..."
 msgid "Add podcast"
 msgstr "Pridėti srautą"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Pridėti srautą..."
 
@@ -598,7 +598,7 @@ msgstr "Pridėti prie kito grojaraščio"
 
 #: internet/vkservice.cpp:296
 msgid "Add to bookmarks"
-msgstr ""
+msgstr "Pridėti į adresyną"
 
 #: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
@@ -610,7 +610,7 @@ msgstr "Įdėti į eilę"
 
 #: internet/vkservice.cpp:326
 msgid "Add user/group to bookmarks"
-msgstr ""
+msgstr "Pridėti vartotoją/grupę į adresyną"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
@@ -887,7 +887,7 @@ msgstr "Automatiškai"
 #: playlist/playlistsaveoptionsdialog.cpp:32
 #: ../bin/src/ui_behavioursettingspage.h:285
 msgid "Automatic"
-msgstr ""
+msgstr "Automatiniai"
 
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
@@ -909,7 +909,7 @@ msgstr "Vidutinis bitų dažnis"
 msgid "Average image size"
 msgstr "Vidutinis paveikslo dydis"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "BBC srautas"
 
@@ -1033,7 +1033,7 @@ msgstr "Mygtukai"
 
 #: ../bin/src/ui_groovesharksettingspage.h:139
 msgid "By default, Grooveshark sorts songs on date added"
-msgstr ""
+msgstr "Pagal nutylėjimą, Grooveshark rikiuoja dainas pagal pridėjimo datą"
 
 #: core/song.cpp:415
 msgid "CDDA"
@@ -1049,16 +1049,20 @@ msgstr "Talpyklos vieta:"
 
 #: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
-msgstr ""
+msgstr "Talpinama"
 
 #: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
-msgstr ""
+msgstr "Talpinama %1"
 
 #: internet/spotifyblobdownloader.cpp:50
 msgid "Cancel"
 msgstr "Atšaukti"
+
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr ""
 
 #: internet/vkservice.cpp:624
 msgid ""
@@ -1136,7 +1140,7 @@ msgstr "Parinkti iš sąrašo"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Pasirinkite kaip grojaraštis bus rikiuojamas ir kiek dainų turės"
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "Pasirinkite srauto siutimo vietą"
 
@@ -1240,7 +1244,7 @@ msgstr "Clementine ras muziką:"
 msgid "Click here to add some music"
 msgstr "Paspauskite čia, kad pridėti muziką"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1264,7 +1268,7 @@ msgstr "Spaudžiant prisijungimo mygtuką atsivers interneto naršyklė. Jūs tu
 msgid "Close"
 msgstr "Uždaryti"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "Užverti grojaraštį"
 
@@ -1299,7 +1303,7 @@ msgstr "Komentaras"
 
 #: internet/vkservice.cpp:152
 msgid "Community Radio"
-msgstr ""
+msgstr "Bendruomeninis Radijas"
 
 #: ../bin/src/ui_edittagdialog.h:696
 msgid "Complete tags automatically"
@@ -1352,7 +1356,7 @@ msgstr "Nustatyti visuotinę paiešką..."
 msgid "Configure library..."
 msgstr "Konfigūruoti fonoteką..."
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "Konfigūruojamas srautas... "
 
@@ -1388,7 +1392,7 @@ msgstr "Baigėsi prisijungimo laikas, patikrinkite serverio URL. Pavyzdys: http:
 
 #: internet/vkservice.cpp:1093
 msgid "Connection trouble or audio is disabled by owner"
-msgstr ""
+msgstr "Ryšio problemos arba savininkas išjungė garso įrašą"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:682
 msgid "Console"
@@ -1408,7 +1412,7 @@ msgstr "Konvertuoti visą įrenginio nepalaikomą muziką"
 
 #: ../bin/src/ui_networkremotesettingspage.h:248
 msgid "Convert lossless audiofiles before sending them to the remote."
-msgstr ""
+msgstr "Konvertuoti nenuostolingus garso įrašų failus prieš išsiunčiant juos į nuotolinę vietą."
 
 #: ../bin/src/ui_networkremotesettingspage.h:250
 msgid "Convert lossless files"
@@ -1416,13 +1420,13 @@ msgstr "Konvertuoti nenuostolingus failus"
 
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
-msgstr ""
+msgstr "Kopijuoti dalinimosi url į iškarpinę"
 
 #: internet/groovesharkservice.cpp:1209
 msgid "Copy to clipboard"
 msgstr "Kopijuoti į atmintinę"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopijuoti į įrenginį..."
@@ -1449,7 +1453,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Nepavyko sukurti „GStreamer“ elemento \"%1\" - įsitikinkite ar įdiegti visi reikalingi „GStreamer“ plėtiniai"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "Nepavyko sukurti grojaraščio"
 
@@ -1674,7 +1678,7 @@ msgstr "Trinti"
 msgid "Delete Grooveshark playlist"
 msgstr "Šalinti Grooveshark grojaraštį"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
@@ -1818,15 +1822,15 @@ msgstr "Rodyti OSD"
 
 #: ../bin/src/ui_mainwindow.h:705
 msgid "Do a full library rescan"
-msgstr "Pilnai perskanuoti fonoteką"
+msgstr "Pilnai perskenuoti fonoteką"
 
 #: internet/googledriveservice.cpp:250 internet/googledriveservice.cpp:257
 msgid "Do a full rescan"
-msgstr ""
+msgstr "Atlikti pilną perskenavimą"
 
 #: internet/googledriveservice.cpp:205
 msgid "Do a full rescan..."
-msgstr ""
+msgstr "Atlikti pilną perskenavimą..."
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
@@ -1841,7 +1845,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in Google Drive which may take some time."
-msgstr ""
+msgstr "Atlikę pilną perskenavimą, prarasite visus meta duomenis, kuriuos išsaugojote Clementine, tokius kaip viršelio paveikslėliai, grojimo skaitiklis ir įvertinimai. Clementine iš naujo perskenuos visą jūsų muziką Google Drive, o tai gali užtrukti kažkiek laiko."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1871,7 +1875,7 @@ msgstr "Du kart spustelėkite norėdami atverti"
 msgid "Double clicking a song will..."
 msgstr "Du kartus spūstelėjus dainą..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1893,7 +1897,7 @@ msgstr "Atsiųsti narystę"
 msgid "Download new episodes automatically"
 msgstr "Atsisiųsti naujus epizodus automatiškai"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "Atsiuntimas eilėje"
 
@@ -1913,7 +1917,7 @@ msgstr "Atsisiųsti šį albumą"
 msgid "Download this album..."
 msgstr "Atsisiunčiamas šis albumas"
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "Atsiųsti šį epizodą"
 
@@ -1921,7 +1925,7 @@ msgstr "Atsiųsti šį epizodą"
 msgid "Download..."
 msgstr "Atsisiųsti..."
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Atsiunčiama (%1%)..."
@@ -2014,7 +2018,7 @@ msgstr "Įgalinti Wii nuotolinio pulto palaikymą"
 
 #: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
-msgstr ""
+msgstr "Įjungti automatinį talpinimą"
 
 #: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
@@ -2026,7 +2030,7 @@ msgstr "Įgalinti kombinacijas tik tada kai Clementine yra aktyvus"
 
 #: ../bin/src/ui_behavioursettingspage.h:262
 msgid "Enable song metadata inline edition with click"
-msgstr ""
+msgstr "Spustelėjimu įjungti tiesioginį dainos meta duomenų redagavimą"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2062,7 +2066,7 @@ msgstr "Įveskite URL, kad atsisiųsti viršelį iš interneto:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Įrašykite failo vardą eksportuotiems viršeliams (be plėtinio):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Įveskite naują pavadinimą šiam grojaraščiui"
 
@@ -2121,7 +2125,7 @@ msgstr "Klaida"
 
 #: ui/ripcd.cpp:295
 msgid "Error Ripping CD"
-msgstr ""
+msgstr "Klaida Perrašant CD"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2281,19 +2285,19 @@ msgstr "Suliejimo trukmė"
 
 #: ui/mainwindow.cpp:1895
 msgid "Failed reading CD drive"
-msgstr ""
+msgstr "Nepavyko perskaityti CD disko"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "Nepavyko atsiųsti direktorijos"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Nepavyko atsiųsti garso prenumeratos"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Nepavyko įkelti garso prenumeratos"
 
@@ -2360,7 +2364,7 @@ msgstr "Failo pavadinimo šablonas:"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:96
 msgid "File paths"
-msgstr ""
+msgstr "Failų keliai"
 
 #: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
@@ -2406,7 +2410,7 @@ msgstr "Pirmas lygis"
 
 #: widgets/nowplayingwidget.cpp:105
 msgid "Fit cover to width"
-msgstr ""
+msgstr "Pritaikyti viršelį prie pločio"
 
 #: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
@@ -2433,7 +2437,7 @@ msgstr "Pamiršti įrenginį"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "Pamirštant įrenginys bus pašalintas iš šio sąrašo ir Clementine turės vėl  skenuoti visas dainas kai kitą kartą prijungsite šį įrenginį."
+msgstr "Pamirštant, įrenginys bus pašalintas iš šio sąrašo ir Clementine turės vėl  skenuoti visas dainas kai kitą kartą prijungsite šį įrenginį."
 
 #: ../bin/src/ui_deviceviewcontainer.h:98
 #: ../bin/src/ui_searchproviderstatuswidget.h:94
@@ -2681,7 +2685,7 @@ msgstr "Nustatoma daina"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr ""
+msgstr "Jei aktyvuota, spustelėjimas ant dainos grojarašyje, leis jums tiesiogiai redaguoti žymių reikšmes"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2772,7 +2776,7 @@ msgstr "Informacija"
 
 #: ../bin/src/ui_ripcd.h:301
 msgid "Input options"
-msgstr ""
+msgstr "Įvesties parinktys"
 
 #: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
@@ -2797,7 +2801,7 @@ msgstr "Interneto tiekėjai"
 #: ../bin/src/ui_internetshowsettingspage.h:87
 msgctxt "Global search settings dialog title."
 msgid "Internet services"
-msgstr ""
+msgstr "Internetinės paslaugos"
 
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
@@ -2833,7 +2837,7 @@ msgstr "Neteisingas naudotojo vardas ir/arba slaptažodis"
 
 #: ../bin/src/ui_ripcd.h:312
 msgid "Invert Selection"
-msgstr ""
+msgstr "Invertuoti Pasirinkimą"
 
 #: internet/jamendoservice.cpp:133
 msgid "Jamendo"
@@ -2906,7 +2910,7 @@ msgstr "Didelis albumo viršelio paveikslėlis"
 
 #: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover (details below)"
-msgstr ""
+msgstr "Dideli albumų viršeliai (išsamiau žr. žemiau)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -2973,7 +2977,7 @@ msgstr "Sudėtingesnis fonotekos grupavimas"
 
 #: ui/mainwindow.cpp:2413
 msgid "Library rescan notice"
-msgstr "Fonotekos perskanavimo žinutė"
+msgstr "Fonotekos perskenavimo žinutė"
 
 #: smartplaylists/querywizardplugin.cpp:79
 msgid "Library search"
@@ -3049,7 +3053,7 @@ msgstr "Įkeliami takeliai"
 msgid "Loading tracks info"
 msgstr "Užkraunama kūrinio informacija"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3076,7 +3080,7 @@ msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 msgid "Login"
 msgstr "Prisijungti"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "Prisijungimas nepavyko"
 
@@ -3186,11 +3190,11 @@ msgstr "Rankiniu būdu"
 msgid "Manufacturer"
 msgstr "Gamintojas"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Pažymėti kaip klausytą"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "Pažymėti kaip naują"
 
@@ -3204,7 +3208,7 @@ msgstr "Atitinka vieną ar daugiau paieškos frazių (ARBA)"
 
 #: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
-msgstr ""
+msgstr "Maksimalus visuotinės paieškos rezultatų skaičius"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
@@ -3212,7 +3216,7 @@ msgstr "Maksimalus bitrate"
 
 #: ui/ripcd.cpp:296
 msgid "Media has changed. Reloading"
-msgstr ""
+msgstr "Media pasikeitė. Įkeliama iš naujo"
 
 #: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:109
@@ -3234,7 +3238,7 @@ msgstr "Minimalus bitrate"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr ""
+msgstr "Minimalus buferio užpildas"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3505,7 +3509,7 @@ msgstr "OSD peržiūra"
 
 #: widgets/osd.cpp:173
 msgid "Off"
-msgstr ""
+msgstr "Išjungta"
 
 #: core/song.cpp:401 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
@@ -3527,7 +3531,7 @@ msgstr "Ogg Vorbis"
 
 #: widgets/osd.cpp:173
 msgid "On"
-msgstr ""
+msgstr "Įjungta"
 
 #: ../bin/src/ui_skydrivesettingspage.h:103
 msgid "OneDrive"
@@ -3565,11 +3569,11 @@ msgstr "Atverti %1 naršyklėje"
 msgid "Open &audio CD..."
 msgstr "Atverti &audio CD..."
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Atverti OPML failą"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Atverti OPML failą..."
 
@@ -3638,7 +3642,7 @@ msgstr "Tvarkyti failus"
 msgid "Organise files..."
 msgstr "Tvarkyti failus..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Tvarkomi failai"
 
@@ -3759,8 +3763,8 @@ msgid "Player options"
 msgstr "Leistuvo parinktys"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Grojaraštis"
 
@@ -3790,7 +3794,7 @@ msgstr "Prašome uždaryti Jūsų naršyklę, kad grįžti į Clementine."
 msgid "Plugin status:"
 msgstr "Plėtinio būklė:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcast"
 
@@ -4077,7 +4081,7 @@ msgstr "Pašalinti iš Mano muzika"
 
 #: internet/vkservice.cpp:300
 msgid "Remove from bookmarks"
-msgstr ""
+msgstr "Pašalinti iš adresyno"
 
 #: internet/groovesharkservice.cpp:541
 msgid "Remove from favorites"
@@ -4088,7 +4092,7 @@ msgstr "Pašalinti iš mėgstamiausių"
 msgid "Remove from playlist"
 msgstr "Ištrinti iš grojaraščio"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Pašalinti grojaraštį"
 
@@ -4098,7 +4102,7 @@ msgstr "Pašalinti grojaraščius"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
-msgstr ""
+msgstr "Pašalinti neprieinamus takelius iš grojaraščio"
 
 #: internet/groovesharkservice.cpp:1583
 msgid "Removing songs from My Music"
@@ -4117,11 +4121,11 @@ msgstr "Pervardinti %1 grojaraštį"
 msgid "Rename Grooveshark playlist"
 msgstr "Pervardinti Grooveshark grojaraštį"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Pervadinti grojaraštį"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Pervadinti grojaraštį..."
 
@@ -4218,15 +4222,15 @@ msgstr "Dešinė"
 
 #: ../bin/src/ui_ripcd.h:303
 msgid "Rip"
-msgstr ""
+msgstr "Perrašyti"
 
 #: ui/ripcd.cpp:114
 msgid "Rip CD"
-msgstr ""
+msgstr "Perrašyti CD"
 
 #: ../bin/src/ui_mainwindow.h:716
 msgid "Rip audio CD..."
-msgstr ""
+msgstr "Perrašyti audio CD..."
 
 #: ui/equalizer.cpp:142
 msgid "Rock"
@@ -4283,12 +4287,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Išsaugoti grojaraštį"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Išsaugoti grojaraštį"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Įrašyti grojaraštį..."
 
@@ -4459,7 +4463,7 @@ msgstr "Parinkti vaizdinius"
 
 #: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
-msgstr ""
+msgstr "Pasirinkti..."
 
 #: devices/devicekitlister.cpp:126
 msgid "Serial number"
@@ -4467,7 +4471,7 @@ msgstr "Serijos numeris"
 
 #: ../bin/src/ui_seafilesettingspage.h:174
 msgid "Server"
-msgstr ""
+msgstr "Serveris"
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
@@ -4579,7 +4583,7 @@ msgstr "Rodyti viso dydžio..."
 
 #: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
-msgstr ""
+msgstr "Rodyti grupes visuotinės paieškos rezultatuose"
 
 #: library/libraryview.cpp:413 ui/mainwindow.cpp:621
 #: widgets/fileviewlist.cpp:51
@@ -4608,7 +4612,7 @@ msgstr "Rodyti tik be žymių"
 
 #: ../bin/src/ui_vksettingspage.h:224
 msgid "Show playing song on your page"
-msgstr ""
+msgstr "Rodyti grojamą dainą jūsų puslapyje"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -4756,7 +4760,7 @@ msgstr "Rikiuoti stoties pavadinimą"
 
 #: ../bin/src/ui_groovesharksettingspage.h:146
 msgid "Sort playlists songs alphabetically"
-msgstr ""
+msgstr "Rikiuoti grojaraščio dainas pagal abėcėlę"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
@@ -4809,7 +4813,7 @@ msgstr "Su žvaigždute"
 
 #: ui/ripcd.cpp:86
 msgid "Start ripping"
-msgstr ""
+msgstr "Pradėti perrašymą"
 
 #: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
@@ -5007,14 +5011,14 @@ msgstr "Bandomasis subsonic laikotarpis baigėsi. Paaukokite ir gaukite licencij
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "Clementine versija, į kurią atsinaujinote reikalauja pilno fonotekos perskanavimo dėl savybių išdėstytų žemiau:"
+msgstr "Clementine versija, į kurią atsinaujinote reikalauja pilno fonotekos perskenavimo dėl savybių išdėstytų žemiau:"
 
 #: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "Čia yra kitų dainų iš šio albumo"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Problema jungiantis su gpodder.net"
 
@@ -5076,7 +5080,7 @@ msgstr "Albumas yra negalimas prašomu formatu"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:98
 msgid "This can be changed later through the preferences"
-msgstr ""
+msgstr "Vėliau tai gali būti pakeista per nustatymus"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
@@ -5107,7 +5111,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Tai pirmas kartas kai prijungėte šį įrenginį. Clementine dabar nuskenuos įrenginį, kad rastų muzikinius failus - tai gali šiek tiek užtrukti."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Ši pasirinktis gali būti pakeista „Elgsena“ dalyje"
 
@@ -5247,8 +5251,8 @@ msgstr "Nepavyko atsiųsti %1 (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Nežinomas"
@@ -5267,13 +5271,13 @@ msgstr "Pašalinti viršelį"
 
 #: ui/mainwindow.cpp:1581
 msgid "Unskip selected tracks"
-msgstr ""
+msgstr "Nepraleisti pasirinktų takelių"
 
 #: ui/mainwindow.cpp:1579
 msgid "Unskip track"
-msgstr ""
+msgstr "Nepraleisti takelio"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "Nebeprenumeruoti"
 
@@ -5289,7 +5293,7 @@ msgstr "Atnaujinti"
 msgid "Update Grooveshark playlist"
 msgstr "Atnaujinti Grooveshark grojaraštį"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "Atnaujinti visas garso prenumeratas"
 
@@ -5301,7 +5305,7 @@ msgstr "Atnaujinti pakeistus fonotekos katalogus"
 msgid "Update the library when Clementine starts"
 msgstr "Atnaujinti fonoteką paleidžiant Clementine"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "Atnaujinti šią garso prenumeratą"
 
@@ -5431,7 +5435,7 @@ msgid "Variable bit rate"
 msgstr "Kintamas bitrate"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Įvairūs atlikėjai"
 
@@ -5484,9 +5488,9 @@ msgstr "WMA"
 
 #: internet/vkservice.cpp:858
 msgid "Wall"
-msgstr ""
+msgstr "Siena"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Perspėti mane, kai uždaroma grijaraščio kortelė."
 
@@ -5514,7 +5518,7 @@ msgstr "Ieškant albumo viršelių Clementine pirmiausia ieško paveikslėlių f
 
 #: ../bin/src/ui_behavioursettingspage.h:284
 msgid "When saving a playlist, file paths should be"
-msgstr ""
+msgstr "Išsaugant grojaraštį, failų keliai turėtų būti"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
@@ -5598,7 +5602,7 @@ msgstr "Rašyti visą dainų statistiką į dainų failus"
 
 #: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Write metadata"
-msgstr ""
+msgstr "Įrašyti meta duomenis"
 
 #: internet/subsonicsettingspage.cpp:80
 msgid "Wrong username or password."
@@ -5634,7 +5638,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Jūs ruošiatės pašalinti %1 grojaraščius iš savo mėgstamiausių, ar esate tikri?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5697,7 +5701,7 @@ msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud. However, you need to login to access your playlists and your "
 "stream."
-msgstr ""
+msgstr "Jums nebūtina prisijungti, norint ieškoti ir klausytis muzikos sistemoje SoundCloud. Tačiau, norėdami pasiekti savo grojaraščius ir savo srautą, privalote prisijungti."
 
 #: internet/spotifyservice.cpp:179
 msgid ""
@@ -5718,7 +5722,7 @@ msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Norėdami visuotinai naudoti Clementine sparčiuosius klavišus, privalote paleisti Sistemos Nuostatas ir leisti Clementine \"<span style=\"font-style:italic\">valdyti jūsų kompiuterį</span>\"."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid ""
@@ -5842,7 +5846,7 @@ msgstr "lygus"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "gpodder.net direktorija"
 
