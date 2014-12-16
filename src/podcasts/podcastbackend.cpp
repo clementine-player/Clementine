@@ -225,7 +225,8 @@ PodcastEpisodeList PodcastBackend::GetEpisodes(int podcast_id) {
 
   QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
-                  " WHERE podcast_id = :id",
+                  " WHERE podcast_id = :id"
+                  " ORDER BY publication_date DESC",
               db);
   q.bindValue(":db", podcast_id);
   q.exec();

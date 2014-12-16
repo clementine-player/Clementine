@@ -123,8 +123,7 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
           ParseImage(reader, ret);
         } else if (name == "copyright") {
           ret->set_copyright(reader->readElementText());
-        } else if (name == "link" &&
-                   lower_namespace == kAtomNamespace &&
+        } else if (name == "link" && lower_namespace == kAtomNamespace &&
                    ret->url().isEmpty() &&
                    reader->attributes().value("rel") == "self") {
           ret->set_url(QUrl::fromEncoded(reader->readElementText().toAscii()));
@@ -211,8 +210,15 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
         } else if (name == "description") {
           episode.set_description(reader->readElementText());
         } else if (name == "pubDate") {
-          episode.set_publication_date(
-              Utilities::ParseRFC822DateTime(reader->readElementText()));
+          QString date = reader->readElementText();
+          episode.set_publication_date(Utilities::ParseRFC822DateTime(date));
+          if (!episode.publication_date().isValid()) {
+            qLog(Error) << "Unable to parse date:" << date
+                        << "Please submit it to "
+                        << QUrl::toPercentEncoding(QString("https://github.com/clementine-player/Clementine/"
+                                                           "issues/new?title=[podcast]"
+                                                           " Unable to parse date: %1").arg(date));
+          }
         } else if (name == "duration" && lower_namespace == kItunesNamespace) {
           // http://www.apple.com/itunes/podcasts/specs.html
           QStringList parts = reader->readElementText().split(':');
@@ -238,6 +244,9 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
       }
 
       case QXmlStreamReader::EndElement:
+        if (!episode.publication_date().isValid()) {
+          episode.set_publication_date(QDateTime::currentDateTime());
+        }
         if (!episode.url().isEmpty()) {
           ret->add_episode(episode);
         }
