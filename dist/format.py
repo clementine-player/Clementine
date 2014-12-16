@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import argparse
 import difflib
 import os
@@ -20,6 +21,9 @@ def main():
       help='file extensions to reformat')
   parser.add_argument('-i', dest='inplace', action='store_true',
       help='edit files inplace instead of showing a diff')
+  parser.add_argument('--files', nargs='*', metavar='FIL',
+      default=[],
+      help='get files as arguments insted of git')
   args = parser.parse_args()
 
   try:
@@ -35,7 +39,13 @@ def main():
 
   if not changed_files:
     print >> sys.stderr, 'No changes from %s' % args.ref
+
+  if not args.files and not changed_files:
+    print >> sys.stderr, "Use --files to select files for reformat"
     return
+
+  if args.files:
+    changed_files = args.files
 
   for filename in changed_files:
     if not os.path.splitext(filename)[1][1:] in args.extension:
