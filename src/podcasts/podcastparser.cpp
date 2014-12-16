@@ -215,9 +215,9 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
           if (!episode.publication_date().isValid()) {
             qLog(Error) << "Unable to parse date:" << date
                         << "Please submit it to "
-                           "> https://github.com/clementine-player/Clementine/"
-                           "issues/new?title=[podcast] Unable to parse date:"
-                        << date <<" <";
+                        << QUrl::toPercentEncoding(QString("https://github.com/clementine-player/Clementine/"
+                                                           "issues/new?title=[podcast]"
+                                                           " Unable to parse date: %1").arg(date));
           }
         } else if (name == "duration" && lower_namespace == kItunesNamespace) {
           // http://www.apple.com/itunes/podcasts/specs.html
