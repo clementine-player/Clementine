@@ -170,7 +170,7 @@ void GPodderSync::DeviceUpdatesFailed(mygpo::DeviceUpdatesPtr reply) {
 void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
   // Remember episode actions for each podcast, so when we add a new podcast
   // we can apply the actions immediately.
-  QMap<QUrl, QList<mygpo::EpisodePtr> > episodes_by_podcast;
+  QMap<QUrl, QList<mygpo::EpisodePtr>> episodes_by_podcast;
   for (mygpo::EpisodePtr episode : reply->updateList()) {
     episodes_by_podcast[episode->podcastUrl()].append(episode);
   }
@@ -235,7 +235,7 @@ void GPodderSync::NewPodcastLoaded(PodcastUrlLoaderReply* reply,
 }
 
 void GPodderSync::ApplyActions(
-    const QList<QSharedPointer<mygpo::Episode> >& actions,
+    const QList<QSharedPointer<mygpo::Episode>>& actions,
     PodcastEpisodeList* episodes) {
   for (PodcastEpisodeList::iterator it = episodes->begin();
        it != episodes->end(); ++it) {

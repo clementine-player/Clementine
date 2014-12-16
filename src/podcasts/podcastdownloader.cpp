@@ -64,13 +64,13 @@ void Task::reading() {
   }
 }
 void Task::finishedPublic() {
-    disconnect(repl.get(), SIGNAL(readyRead()), 0, 0);
-    disconnect(repl.get(), SIGNAL(downloadProgress(qint64, qint64)), 0, 0);
-    disconnect(repl.get(), SIGNAL(finished()), 0, 0);
-    emit ProgressChanged(episode_, PodcastDownload::NotDownloading, 0);
-    // Delete the file
-    file_->remove();
-    emit finished(this);
+  disconnect(repl.get(), SIGNAL(readyRead()), 0, 0);
+  disconnect(repl.get(), SIGNAL(downloadProgress(qint64, qint64)), 0, 0);
+  disconnect(repl.get(), SIGNAL(finished()), 0, 0);
+  emit ProgressChanged(episode_, PodcastDownload::NotDownloading, 0);
+  // Delete the file
+  file_->remove();
+  emit finished(this);
 }
 
 void Task::finishedInternal() {
