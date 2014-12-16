@@ -242,8 +242,8 @@ namespace TagLib {
        * if there is no valid ID3v2 tag.  If \a create is true it will create
        * an ID3v2 tag if one does not exist and returns a valid pointer.
        *
-       * \note This may return a valid pointer regardless of whether or not the 
-       * file on disk has an ID3v2 tag.  Use hasID3v2Tag() to check if the file 
+       * \note This may return a valid pointer regardless of whether or not the
+       * file on disk has an ID3v2 tag.  Use hasID3v2Tag() to check if the file
        * on disk actually has an ID3v2 tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
@@ -261,8 +261,8 @@ namespace TagLib {
        * if there is no valid ID3v1 tag.  If \a create is true it will create
        * an ID3v1 tag if one does not exist and returns a valid pointer.
        *
-       * \note This may return a valid pointer regardless of whether or not the 
-       * file on disk has an ID3v1 tag.  Use hasID3v1Tag() to check if the file 
+       * \note This may return a valid pointer regardless of whether or not the
+       * file on disk has an ID3v1 tag.  Use hasID3v1Tag() to check if the file
        * on disk actually has an ID3v1 tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
@@ -280,8 +280,8 @@ namespace TagLib {
        * if there is no valid APE tag.  If \a create is true it will create
        * an APE tag if one does not exist and returns a valid pointer.
        *
-       * \note This may return a valid pointer regardless of whether or not the 
-       * file on disk has an APE tag.  Use hasAPETag() to check if the file 
+       * \note This may return a valid pointer regardless of whether or not the
+       * file on disk has an APE tag.  Use hasAPETag() to check if the file
        * on disk actually has an APE tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
@@ -370,7 +370,7 @@ namespace TagLib {
       File &operator=(const File &);
 
       void read(bool readProperties, Properties::ReadStyle propertiesStyle);
-      long findID3v2();
+      long findID3v2(long offset);
       long findID3v1();
       void findAPE();
 
