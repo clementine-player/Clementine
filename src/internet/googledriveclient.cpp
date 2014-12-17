@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2012, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -44,7 +46,7 @@ static const char* kOAuthScope =
     "https://www.googleapis.com/auth/userinfo.email";
 static const char* kClientId = "679260893280.apps.googleusercontent.com";
 static const char* kClientSecret = "l3cWb8efUZsrBI4wmY3uKl6i";
-}
+}  // namespace
 
 QStringList File::parent_ids() const {
   QStringList ret;
@@ -201,7 +203,7 @@ void Client::ListChangesFinished(ListChangesResponse* response,
 
   QJson::Parser parser;
   bool ok = false;
-  // TODO: Put this on a separate thread as the response could be large.
+  // TODO(John Maguire): Put this on a separate thread as the response could be large.
   QVariantMap result = parser.parse(reply, &ok).toMap();
   if (!ok) {
     qLog(Error) << "Failed to fetch changes" << response->cursor();

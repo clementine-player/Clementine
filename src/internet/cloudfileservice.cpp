@@ -1,3 +1,23 @@
+/* This file is part of Clementine.
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2013, Martin Brodbeck <martin@brodbeck-online.de>
+   Copyright 2013-2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "cloudfileservice.h"
 
 #include <QMenu>
@@ -129,35 +149,34 @@ void CloudFileService::MaybeAddFileToDatabase(const Song& metadata,
   }
 
   if (indexing_task_id_ == -1) {
-    indexing_task_id_ =
-        task_manager_->StartTask(tr("Indexing %1").arg(name()));
+    indexing_task_id_ = task_manager_->StartTask(tr("Indexing %1").arg(name()));
     indexing_task_progress_ = 0;
     indexing_task_max_ = 0;
   }
-  indexing_task_max_ ++;
-  task_manager_->SetTaskProgress(
-      indexing_task_id_, indexing_task_progress_, indexing_task_max_);
+  indexing_task_max_++;
+  task_manager_->SetTaskProgress(indexing_task_id_, indexing_task_progress_,
+                                 indexing_task_max_);
 
   TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
       download_url, metadata.title(), metadata.filesize(), mime_type,
       authorisation);
   NewClosure(reply, SIGNAL(Finished(bool)), this,
-             SLOT(ReadTagsFinished(TagReaderClient::ReplyType*, Song)),
-             reply, metadata);
+             SLOT(ReadTagsFinished(TagReaderClient::ReplyType*, Song)), reply,
+             metadata);
 }
 
 void CloudFileService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
                                         const Song& metadata) {
   reply->deleteLater();
 
-  indexing_task_progress_ ++;
+  indexing_task_progress_++;
   if (indexing_task_progress_ == indexing_task_max_) {
     task_manager_->SetTaskFinished(indexing_task_id_);
     indexing_task_id_ = -1;
     emit AllIndexingTasksFinished();
   } else {
-    task_manager_->SetTaskProgress(
-        indexing_task_id_, indexing_task_progress_, indexing_task_max_);
+    task_manager_->SetTaskProgress(indexing_task_id_, indexing_task_progress_,
+                                   indexing_task_max_);
   }
 
   const pb::tagreader::ReadCloudFileResponse& message =

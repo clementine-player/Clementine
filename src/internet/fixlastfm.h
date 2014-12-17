@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FIXLASTFM_H
-#define FIXLASTFM_H
+#ifndef INTERNET_FIXLASTFM_H_
+#define INTERNET_FIXLASTFM_H_
 
 // Include this before <lastfm/Track> to fix a compile error in release mode
 
@@ -27,4 +29,4 @@
 QDebug& operator<<(QDebug&, const QUrl&);
 #endif
 
-#endif
+#endif  // INTERNET_FIXLASTFM_H_

@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DROPBOXSETTINGSPAGE_H
-#define DROPBOXSETTINGSPAGE_H
+#ifndef INTERNET_DROPBOXSETTINGSPAGE_H_
+#define INTERNET_DROPBOXSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -31,7 +32,7 @@ class DropboxSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  DropboxSettingsPage(SettingsDialog* parent = nullptr);
+  explicit DropboxSettingsPage(SettingsDialog* parent = nullptr);
   ~DropboxSettingsPage();
 
   void Load();
@@ -51,4 +52,4 @@ class DropboxSettingsPage : public SettingsPage {
   DropboxService* service_;
 };
 
-#endif  // DROPBOXSETTINGSPAGE_H
+#endif  // INTERNET_DROPBOXSETTINGSPAGE_H_

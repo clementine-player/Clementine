@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ICECASTMODEL_H
-#define ICECASTMODEL_H
+#ifndef INTERNET_ICECASTMODEL_H_
+#define INTERNET_ICECASTMODEL_H_
 
 #include "icecastitem.h"
 #include "core/simpletreemodel.h"
@@ -30,7 +32,7 @@ class IcecastModel : public SimpleTreeModel<IcecastItem> {
   Q_OBJECT
 
  public:
-  IcecastModel(IcecastBackend* backend, QObject* parent = nullptr);
+  explicit IcecastModel(IcecastBackend* backend, QObject* parent = nullptr);
   ~IcecastModel();
 
   // These values get saved in QSettings - don't change them
@@ -40,7 +42,9 @@ class IcecastModel : public SimpleTreeModel<IcecastItem> {
     SortMode_StationAlphabetical = 2,
   };
 
-  enum Role { Role_IsDivider = LibraryModel::Role_IsDivider, };
+  enum Role {
+    Role_IsDivider = LibraryModel::Role_IsDivider,
+  };
 
   IcecastBackend* backend() const { return backend_; }
 
@@ -81,4 +85,4 @@ class IcecastModel : public SimpleTreeModel<IcecastItem> {
   QIcon station_icon_;
 };
 
-#endif  // ICECASTMODEL_H
+#endif  // INTERNET_ICECASTMODEL_H_

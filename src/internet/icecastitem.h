@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,22 +17,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ICECASTITEM_H
-#define ICECASTITEM_H
+#ifndef INTERNET_ICECASTITEM_H_
+#define INTERNET_ICECASTITEM_H_
 
 #include "icecastbackend.h"
 #include "core/simpletreeitem.h"
 
 class IcecastItem : public SimpleTreeItem<IcecastItem> {
  public:
-  enum Type { Type_Root, Type_Genre, Type_Station, Type_Divider, };
+  enum Type {
+    Type_Root,
+    Type_Genre,
+    Type_Station,
+    Type_Divider,
+  };
 
-  IcecastItem(SimpleTreeModel<IcecastItem>* model)
-      : SimpleTreeItem<IcecastItem>(Type_Root, model) {}
-  IcecastItem(Type type, IcecastItem* parent = nullptr)
-      : SimpleTreeItem<IcecastItem>(type, parent) {}
+  explicit IcecastItem(SimpleTreeModel<IcecastItem>* model)
+    : SimpleTreeItem<IcecastItem>(Type_Root, model) {}
+  explicit IcecastItem(Type type, IcecastItem* parent = nullptr)
+    : SimpleTreeItem<IcecastItem>(type, parent) {}
 
   IcecastBackend::Station station;
 };
 
-#endif  // ICECASTITEM_H
+#endif  // INTERNET_ICECASTITEM_H_

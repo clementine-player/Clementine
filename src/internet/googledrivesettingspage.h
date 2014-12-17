@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GOOGLEDRIVESETTINGSPAGE_H
-#define GOOGLEDRIVESETTINGSPAGE_H
+#ifndef INTERNET_GOOGLEDRIVESETTINGSPAGE_H_
+#define INTERNET_GOOGLEDRIVESETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -30,7 +32,7 @@ class GoogleDriveSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  GoogleDriveSettingsPage(SettingsDialog* parent = nullptr);
+  explicit GoogleDriveSettingsPage(SettingsDialog* parent = nullptr);
   ~GoogleDriveSettingsPage();
 
   void Load();
@@ -50,4 +52,4 @@ class GoogleDriveSettingsPage : public SettingsPage {
   GoogleDriveService* service_;
 };
 
-#endif  // GOOGLEDRIVESETTINGSPAGE_H
+#endif  // INTERNET_GOOGLEDRIVESETTINGSPAGE_H_

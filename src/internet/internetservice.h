@@ -1,5 +1,10 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2012, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +20,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNETSERVICE_H
-#define INTERNETSERVICE_H
+#ifndef INTERNET_INTERNETSERVICE_H_
+#define INTERNET_INTERNETSERVICE_H_
 
 #include <QObject>
 #include <QList>
@@ -74,7 +79,7 @@ class InternetService : public QObject {
 
   virtual QString Icon() { return QString(); }
 
-signals:
+ signals:
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
@@ -134,4 +139,4 @@ signals:
 
 Q_DECLARE_METATYPE(InternetService*);
 
-#endif  // INTERNETSERVICE_H
+#endif  // INTERNET_INTERNETSERVICE_H_

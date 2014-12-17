@@ -1,5 +1,9 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2013, David Sansome <me@davidsansome.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -124,7 +128,7 @@ void SomaFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
-    // TODO: Error handling
+    // TODO(David Sansome): Error handling
     qLog(Error) << reply->errorString();
     return;
   }

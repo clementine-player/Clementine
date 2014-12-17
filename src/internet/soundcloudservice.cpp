@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, maximko <me@maximko.org>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -74,7 +77,6 @@ SoundCloudService::SoundCloudService(Application* app, InternetModel* parent)
       search_box_(new SearchBoxWidget(this)),
       search_delay_(new QTimer(this)),
       next_pending_search_id_(0) {
-
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);
   connect(search_delay_, SIGNAL(timeout()), SLOT(DoSearch()));
@@ -119,30 +121,26 @@ void SoundCloudService::EnsureItemsCreated() {
                      InternetModel::Role_PlayBehaviour);
     root_->appendRow(search_);
   }
-  if (!user_tracks_ && !user_activities_ &&!user_playlists_ && IsLoggedIn()) {
-    user_activities_ =
-        new QStandardItem(tr("Activities stream"));
+  if (!user_tracks_ && !user_activities_ && !user_playlists_ && IsLoggedIn()) {
+    user_activities_ = new QStandardItem(tr("Activities stream"));
     user_activities_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                     InternetModel::Role_PlayBehaviour);
+                              InternetModel::Role_PlayBehaviour);
     root_->appendRow(user_activities_);
 
-    user_playlists_ =
-        new QStandardItem(tr("Playlists"));
+    user_playlists_ = new QStandardItem(tr("Playlists"));
     root_->appendRow(user_playlists_);
 
-    user_tracks_ =
-        new QStandardItem(tr("Tracks"));
+    user_tracks_ = new QStandardItem(tr("Tracks"));
     user_tracks_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                     InternetModel::Role_PlayBehaviour);
+                          InternetModel::Role_PlayBehaviour);
     root_->appendRow(user_tracks_);
 
-    RetrieveUserData(); // at least, try to (this will do nothing if user isn't logged)
+    RetrieveUserData();  // at least, try to (this will do nothing if user isn't
+                         // logged)
   }
 }
 
-QWidget* SoundCloudService::HeaderWidget() const {
-  return search_box_;
-}
+QWidget* SoundCloudService::HeaderWidget() const { return search_box_; }
 
 void SoundCloudService::ShowConfig() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_SoundCloud);
@@ -154,7 +152,8 @@ void SoundCloudService::Homepage() {
 
 void SoundCloudService::Connect() {
   OAuthenticator* oauth = new OAuthenticator(
-      kApiClientId, kApiClientSecret, OAuthenticator::RedirectStyle::REMOTE_WITH_STATE, this);
+      kApiClientId, kApiClientSecret,
+      OAuthenticator::RedirectStyle::REMOTE_WITH_STATE, this);
 
   oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
 
@@ -200,12 +199,9 @@ void SoundCloudService::Logout() {
   access_token_.clear();
   s.remove("access_token");
   pending_playlists_requests_.clear();
-  if (user_activities_)
-    root_->removeRow(user_activities_->row());
-  if (user_tracks_)
-    root_->removeRow(user_tracks_->row());
-  if (user_playlists_)
-    root_->removeRow(user_playlists_->row());
+  if (user_activities_) root_->removeRow(user_activities_->row());
+  if (user_tracks_) root_->removeRow(user_tracks_->row());
+  if (user_playlists_) root_->removeRow(user_playlists_->row());
   user_activities_ = nullptr;
   user_tracks_ = nullptr;
   user_playlists_ = nullptr;
@@ -261,7 +257,6 @@ void SoundCloudService::RetrieveUserPlaylists() {
   QNetworkReply* reply = CreateRequest("me/playlists", parameters);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(UserPlaylistsRetrieved(QNetworkReply*)), reply);
-
 }
 
 void SoundCloudService::UserPlaylistsRetrieved(QNetworkReply* reply) {
@@ -374,7 +369,6 @@ QStandardItem* SoundCloudService::CreatePlaylistItem(const QString& playlist_nam
 
 QNetworkReply* SoundCloudService::CreateRequest(const QString& ressource_name,
                                                 const QList<Param>& params) {
-
   QUrl url(kUrl);
 
   url.setPath(ressource_name);
@@ -394,7 +388,8 @@ QNetworkReply* SoundCloudService::CreateRequest(const QString& ressource_name,
 
 QVariant SoundCloudService::ExtractResult(QNetworkReply* reply) {
   if (reply->error() != QNetworkReply::NoError) {
-    qLog(Error) << "Error when retrieving SoundCloud results:" << reply->errorString() << QString(" (%1)").arg(reply->error());
+    qLog(Error) << "Error when retrieving SoundCloud results:"
+                << reply->errorString() << QString(" (%1)").arg(reply->error());
     if (reply->error() == QNetworkReply::ContentAccessDenied ||
         reply->error() == QNetworkReply::ContentOperationNotPermittedError ||
         reply->error() == QNetworkReply::ContentNotFoundError ||
@@ -413,21 +408,22 @@ QVariant SoundCloudService::ExtractResult(QNetworkReply* reply) {
   return result;
 }
 
-void SoundCloudService::RetrievePlaylist(int playlist_id, QStandardItem* playlist_item) {
+void SoundCloudService::RetrievePlaylist(int playlist_id,
+                                         QStandardItem* playlist_item) {
   const int request_id = next_retrieve_playlist_id_++;
-  pending_playlists_requests_.insert(
-      request_id,
-      PlaylistInfo(playlist_id, playlist_item));
+  pending_playlists_requests_.insert(request_id,
+                                     PlaylistInfo(playlist_id, playlist_item));
   QList<Param> parameters;
   parameters << Param("oauth_token", access_token_);
-  QNetworkReply* reply = CreateRequest("playlists/" + QString::number(playlist_id), parameters);
+  QNetworkReply* reply =
+      CreateRequest("playlists/" + QString::number(playlist_id), parameters);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(PlaylistRetrieved(QNetworkReply*, int)), reply, request_id);
 }
 
-void SoundCloudService::PlaylistRetrieved(QNetworkReply* reply, int request_id) {
-  if (!pending_playlists_requests_.contains(request_id))
-    return;
+void SoundCloudService::PlaylistRetrieved(QNetworkReply* reply,
+                                          int request_id) {
+  if (!pending_playlists_requests_.contains(request_id)) return;
   PlaylistInfo playlist_info = pending_playlists_requests_.take(request_id);
   QVariant res = ExtractResult(reply);
   SongList songs = ExtractSongs(res.toMap()["tracks"]);

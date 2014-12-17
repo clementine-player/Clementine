@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -249,16 +252,14 @@ SkyFmService::SkyFmService(Application* app, InternetModel* model,
 
 JazzRadioService::JazzRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
-    : DigitallyImportedServiceBase(
-          "JazzRadio", "JAZZRADIO.com", QUrl("http://www.jazzradio.com"),
-          QIcon(":/providers/jazzradio.png"), "jazzradio", app, model, true,
-          parent) {
-}
+    : DigitallyImportedServiceBase("JazzRadio", "JAZZRADIO.com",
+                                   QUrl("http://www.jazzradio.com"),
+                                   QIcon(":/providers/jazzradio.png"),
+                                   "jazzradio", app, model, true, parent) {}
 
 RockRadioService::RockRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
-    : DigitallyImportedServiceBase(
-          "RockRadio", "ROCKRADIO.com", QUrl("http://www.rockradio.com"),
-          QIcon(":/providers/rockradio.png"), "rockradio", app, model, false,
-          parent) {
-}
+    : DigitallyImportedServiceBase("RockRadio", "ROCKRADIO.com",
+                                   QUrl("http://www.rockradio.com"),
+                                   QIcon(":/providers/rockradio.png"),
+                                   "rockradio", app, model, false, parent) {}

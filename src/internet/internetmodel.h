@@ -1,5 +1,10 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2012, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2014, Chocobozzz <florian.bigard@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +20,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNETMODEL_H
-#define INTERNETMODEL_H
+#ifndef INTERNET_INTERNETMODEL_H_
+#define INTERNET_INTERNETMODEL_H_
 
 #include "core/song.h"
 #include "library/librarymodel.h"
@@ -42,7 +47,7 @@ class InternetModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
-  InternetModel(Application* app, QObject* parent = nullptr);
+  explicit InternetModel(Application* app, QObject* parent = nullptr);
 
   enum Role {
     // Services can use this role to distinguish between different types of
@@ -169,7 +174,7 @@ class InternetModel : public QStandardItemModel {
     return shown_services_;
   }
 
-signals:
+ signals:
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
@@ -193,4 +198,4 @@ signals:
   QModelIndex current_index_;
 };
 
-#endif  // INTERNETMODEL_H
+#endif  // INTERNET_INTERNETMODEL_H_

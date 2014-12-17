@@ -1,5 +1,10 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2013, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Andrea Decorte <adecorte@gmail.com>
+   Copyright 2012, Kacper "mattrick" Banasik <mattrick@jabster.pl>
+   Copyright 2012, Harald Sitter <sitter@kde.org>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +20,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LASTFMSERVICE_H
-#define LASTFMSERVICE_H
+#ifndef INTERNET_LASTFMSERVICE_H_
+#define INTERNET_LASTFMSERVICE_H_
 
 #include <memory>
 
@@ -41,7 +46,7 @@ class LastFMService : public Scrobbler {
   Q_OBJECT
 
  public:
-  LastFMService(Application* app, QObject* parent = nullptr);
+  explicit LastFMService(Application* app, QObject* parent = nullptr);
   ~LastFMService();
 
   static const char* kServiceName;
@@ -75,7 +80,7 @@ class LastFMService : public Scrobbler {
   void ShowConfig();
   void ToggleScrobbling();
 
-signals:
+ signals:
   void AuthenticationComplete(bool success, const QString& error_message);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
@@ -122,4 +127,4 @@ signals:
   Application* app_;
 };
 
-#endif  // LASTFMSERVICE_H
+#endif  // INTERNET_LASTFMSERVICE_H_

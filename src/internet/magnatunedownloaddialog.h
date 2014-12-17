@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAGNATUNEDOWNLOADDIALOG_H
-#define MAGNATUNEDOWNLOADDIALOG_H
+#ifndef INTERNET_MAGNATUNEDOWNLOADDIALOG_H_
+#define INTERNET_MAGNATUNEDOWNLOADDIALOG_H_
 
 #include <memory>
 
@@ -34,13 +36,14 @@ class QXmlStreamReader;
 
 class MagnatuneDownloadDialog : public QDialog {
   Q_OBJECT
+
  public:
-  MagnatuneDownloadDialog(MagnatuneService* service, QWidget* parent = nullptr);
+  explicit MagnatuneDownloadDialog(MagnatuneService* service, QWidget* parent = nullptr);
   ~MagnatuneDownloadDialog();
 
   void Show(const SongList& songs);
 
-signals:
+ signals:
   void Finished(const QStringList& albums);
 
  public slots:
@@ -76,4 +79,4 @@ signals:
   int next_row_;
 };
 
-#endif  // MAGNATUNEDOWNLOADDIALOG_H
+#endif  // INTERNET_MAGNATUNEDOWNLOADDIALOG_H_

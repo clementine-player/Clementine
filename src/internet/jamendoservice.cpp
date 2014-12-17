@@ -1,5 +1,11 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2013, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2011, Andrea Decorte <adecorte@gmail.com>
+   Copyright 2014, Chocobozzz <florian.bigard@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -116,12 +122,11 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
           << GeneratorPtr(new JamendoDynamicPlaylist(
                  tr("Jamendo Most Listened Tracks"),
                  JamendoDynamicPlaylist::OrderBy_Listened)))
-      << (LibraryModel::GeneratorList()
-          << GeneratorPtr(new QueryGenerator(
-                 tr("Dynamic random mix"),
-                 Search(Search::Type_All, Search::TermList(),
-                        Search::Sort_Random, SearchTerm::Field_Title),
-                 true))));
+      << (LibraryModel::GeneratorList() << GeneratorPtr(new QueryGenerator(
+              tr("Dynamic random mix"),
+              Search(Search::Type_All, Search::TermList(), Search::Sort_Random,
+                     SearchTerm::Field_Title),
+              true))));
 
   library_sort_model_->setSourceModel(library_model_);
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
@@ -197,9 +202,10 @@ void JamendoService::DownloadDirectory() {
 }
 
 void JamendoService::DownloadDirectoryProgress(qint64 received, qint64 total) {
-  float progress = float(received) / total;
+  float progress = static_cast<float>(received) / total;
   app_->task_manager()->SetTaskProgress(load_database_task_id_,
-                                        int(progress * 100), 100);
+                                        static_cast<int>(progress * 100),
+                                        100);
 }
 
 void JamendoService::DownloadDirectoryFinished() {
@@ -209,7 +215,7 @@ void JamendoService::DownloadDirectoryFinished() {
   app_->task_manager()->SetTaskFinished(load_database_task_id_);
   load_database_task_id_ = 0;
 
-  // TODO: Not leak reply.
+  // TODO(John Maguire): Not leak reply.
   QtIOCompressor* gzip = new QtIOCompressor(reply);
   gzip->setStreamFormat(QtIOCompressor::GzipFormat);
   if (!gzip->open(QIODevice::ReadOnly)) {

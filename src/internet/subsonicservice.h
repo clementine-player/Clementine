@@ -1,5 +1,26 @@
-#ifndef SUBSONICSERVICE_H
-#define SUBSONICSERVICE_H
+/* This file is part of Clementine.
+   Copyright 2011-2013, Alan Briolat <alan.briolat@gmail.com>
+   Copyright 2013, Ross Wolfson <ross.wolfson@gmail.com>
+   Copyright 2013, David Sansome <me@davidsansome.com>
+   Copyright 2013-2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef INTERNET_SUBSONICSERVICE_H_
+#define INTERNET_SUBSONICSERVICE_H_
 
 #include <QQueue>
 
@@ -52,9 +73,15 @@ class SubsonicService : public InternetService {
     ApiError_NotFound = 70,
   };
 
-  enum Type { Type_Artist = InternetModel::TypeCount, Type_Album, Type_Track, };
+  enum Type {
+    Type_Artist = InternetModel::TypeCount,
+    Type_Album,
+    Type_Track,
+  };
 
-  enum Role { Role_Id = InternetModel::RoleCount, };
+  enum Role {
+    Role_Id = InternetModel::RoleCount,
+  };
 
   typedef QMap<QString, QString> RequestOptions;
 
@@ -92,7 +119,7 @@ class SubsonicService : public InternetService {
 
   static const int kMaxRedirects;
 
-signals:
+ signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
  private:
@@ -140,7 +167,7 @@ class SubsonicLibraryScanner : public QObject {
   Q_OBJECT
 
  public:
-  SubsonicLibraryScanner(SubsonicService* service, QObject* parent = nullptr);
+  explicit SubsonicLibraryScanner(SubsonicService* service, QObject* parent = nullptr);
   ~SubsonicLibraryScanner();
 
   void Scan();
@@ -149,7 +176,7 @@ class SubsonicLibraryScanner : public QObject {
   static const int kAlbumChunkSize;
   static const int kConcurrentRequests;
 
-signals:
+ signals:
   void ScanFinished();
 
  private slots:
@@ -169,4 +196,4 @@ signals:
   SongList songs_;
 };
 
-#endif  // SUBSONICSERVICE_H
+#endif  // INTERNET_SUBSONICSERVICE_H_

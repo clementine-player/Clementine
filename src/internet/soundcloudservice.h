@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SOUNDCLOUDSERVICE_H
-#define SOUNDCLOUDSERVICE_H
+#ifndef INTERNET_SOUNDCLOUDSERVICE_H_
+#define INTERNET_SOUNDCLOUDSERVICE_H_
 
 #include "internetmodel.h"
 #include "internetservice.h"
@@ -30,6 +32,7 @@ class QNetworkReply;
 
 class SoundCloudService : public InternetService {
   Q_OBJECT
+
  public:
   SoundCloudService(Application* app, InternetModel* parent);
   ~SoundCloudService();
@@ -38,7 +41,7 @@ class SoundCloudService : public InternetService {
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
 
-  // TODO
+  // TODO(Arnaud Bienner)
   // QList<QAction*> playlistitem_actions(const Song& song);
   void ShowContextMenu(const QPoint& global_pos);
   QWidget* HeaderWidget() const;
@@ -75,8 +78,7 @@ class SoundCloudService : public InternetService {
  private:
   struct PlaylistInfo {
     PlaylistInfo() {}
-    PlaylistInfo(int id, QStandardItem* item)
-        : id_(id), item_(item) {}
+    PlaylistInfo(int id, QStandardItem* item) : id_(id), item_(item) {}
 
     int id_;
     QStandardItem* item_;
@@ -97,7 +99,7 @@ class SoundCloudService : public InternetService {
   QStandardItem* CreatePlaylistItem(const QString& playlist_name);
 
   QNetworkReply* CreateRequest(const QString& ressource_name,
-                               const QList<QPair<QString, QString> >& params);
+                               const QList<QPair<QString, QString>>& params);
   // Convenient function for extracting result from reply
   QVariant ExtractResult(QNetworkReply* reply);
   // Returns items directly, as activities can be playlists or songs
@@ -142,4 +144,4 @@ class SoundCloudService : public InternetService {
   static const char* kApiClientSecret;
 };
 
-#endif  // SOUNDCLOUDSERVICE_H
+#endif  // INTERNET_SOUNDCLOUDSERVICE_H_

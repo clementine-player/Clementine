@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, David Sansome <me@davidsansome.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAGNATUNESERVICE_H
-#define MAGNATUNESERVICE_H
+#ifndef INTERNET_MAGNATUNESERVICE_H_
+#define INTERNET_MAGNATUNESERVICE_H_
 
 #include <QXmlStreamReader>
 
@@ -86,7 +88,7 @@ class MagnatuneService : public InternetService {
 
   QUrl ModifyUrl(const QUrl& url) const;
 
-signals:
+ signals:
   void DownloadFinished(const QStringList& albums);
 
  private slots:
@@ -127,4 +129,4 @@ signals:
   QNetworkAccessManager* network_;
 };
 
-#endif  // MAGNATUNESERVICE_H
+#endif  // INTERNET_MAGNATUNESERVICE_H_

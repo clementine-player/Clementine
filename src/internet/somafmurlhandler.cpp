@@ -1,5 +1,9 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011-2013, David Sansome <me@davidsansome.com>
+   Copyright 2012, Olaf Christ <olafc81@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -60,7 +64,7 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
   original_url.setScheme(scheme());
 
   if (reply->error() != QNetworkReply::NoError) {
-    // TODO: Error handling
+    // TODO((David Sansome): Error handling
     qLog(Error) << reply->errorString();
     emit AsyncLoadComplete(LoadResult(original_url, LoadResult::NoMoreTracks));
     return;

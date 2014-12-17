@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNETVIEW_H
-#define INTERNETVIEW_H
+#ifndef INTERNET_INTERNETVIEW_H_
+#define INTERNET_INTERNETVIEW_H_
 
 #include "widgets/autoexpandingtreeview.h"
 
@@ -24,7 +27,7 @@ class InternetView : public AutoExpandingTreeView {
   Q_OBJECT
 
  public:
-  InternetView(QWidget* parent = nullptr);
+  explicit InternetView(QWidget* parent = nullptr);
 
   // QWidget
   void contextMenuEvent(QContextMenuEvent* e);
@@ -33,8 +36,8 @@ class InternetView : public AutoExpandingTreeView {
   void currentChanged(const QModelIndex& current, const QModelIndex& previous);
   void setModel(QAbstractItemModel* model);
 
-signals:
+ signals:
   void CurrentIndexChanged(const QModelIndex& index);
 };
 
-#endif  // INTERNETVIEW_H
+#endif  // INTERNET_INTERNETVIEW_H_

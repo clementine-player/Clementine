@@ -1,5 +1,9 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, pie.or.paj <pie.or.paj@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SPOTIFYSERVER_H
-#define SPOTIFYSERVER_H
+#ifndef INTERNET_SPOTIFYSERVER_H_
+#define INTERNET_SPOTIFYSERVER_H_
 
 #include "spotifymessages.pb.h"
 #include "core/messagehandler.h"
@@ -31,7 +35,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   Q_OBJECT
 
  public:
-  SpotifyServer(QObject* parent = nullptr);
+  explicit SpotifyServer(QObject* parent = nullptr);
 
   void Init();
   void Login(const QString& username, const QString& password,
@@ -61,7 +65,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   void StartPlayback(const QString& uri, quint16 port);
   void Seek(qint64 offset_nsec);
 
-signals:
+ signals:
   void LoginCompleted(bool success, const QString& error,
                       pb::spotify::LoginResponse_Error error_code);
   void PlaylistsUpdated(const pb::spotify::Playlists& playlists);
@@ -94,4 +98,4 @@ signals:
   QList<pb::spotify::Message> queued_messages_;
 };
 
-#endif  // SPOTIFYSERVER_H
+#endif  // INTERNET_SPOTIFYSERVER_H_

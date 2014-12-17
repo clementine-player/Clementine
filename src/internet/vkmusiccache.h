@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2013, Vlad Maltsev <shedwardx@gmail.com>
+   Copyright 2014, Maltsev Vlad <shedwardx@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VKMUSICCACHE_H
-#define VKMUSICCACHE_H
+#ifndef INTERNET_VKMUSICCACHE_H_
+#define INTERNET_VKMUSICCACHE_H_
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -75,4 +76,4 @@ class VkMusicCache : public QObject {
   QNetworkReply* reply_;
 };
 
-#endif  // VKMUSICCACHE_H
+#endif  // INTERNET_VKMUSICCACHE_H_

@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, David Sansome <me@davidsansome.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SAVEDRADIO_H
-#define SAVEDRADIO_H
+#ifndef INTERNET_SAVEDRADIO_H_
+#define INTERNET_SAVEDRADIO_H_
 
 #include <memory>
 
@@ -33,11 +36,13 @@ class SavedRadio : public InternetService {
   SavedRadio(Application* app, InternetModel* parent);
   ~SavedRadio();
 
-  enum ItemType { Type_Stream = 2000, };
+  enum ItemType {
+    Type_Stream = 2000,
+  };
 
   struct Stream {
-    Stream(const QUrl& url, const QString& name = QString())
-        : url_(url), name_(name) {}
+    explicit Stream(const QUrl& url, const QString& name = QString())
+      : url_(url), name_(name) {}
 
     // For QList::contains
     bool operator==(const Stream& other) const { return url_ == other.url_; }
@@ -59,7 +64,7 @@ class SavedRadio : public InternetService {
 
   StreamList Streams() const { return streams_; }
 
-signals:
+ signals:
   void ShowAddStreamDialog();
   void StreamsChanged();
 
@@ -84,4 +89,4 @@ signals:
   std::unique_ptr<AddStreamDialog> edit_dialog_;
 };
 
-#endif  // SAVEDRADIO_H
+#endif  // INTERNET_SAVEDRADIO_H_

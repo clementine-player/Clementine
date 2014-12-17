@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GOOGLEDRIVECLIENT_H
-#define GOOGLEDRIVECLIENT_H
+#ifndef INTERNET_GOOGLEDRIVECLIENT_H_
+#define INTERNET_GOOGLEDRIVECLIENT_H_
 
 #include <QDateTime>
 #include <QList>
@@ -37,7 +39,7 @@ class Client;
 // Holds the metadata for a file on Google Drive.
 class File {
  public:
-  File(const QVariantMap& data = QVariantMap()) : data_(data) {}
+  explicit File(const QVariantMap& data = QVariantMap()) : data_(data) {}
 
   static const char* kFolderMimeType;
 
@@ -46,7 +48,7 @@ class File {
   QString title() const { return data_["title"].toString(); }
   QString mime_type() const { return data_["mimeType"].toString(); }
   QString description() const { return data_["description"].toString(); }
-  long size() const { return data_["fileSize"].toUInt(); }
+  qint64 size() const { return data_["fileSize"].toUInt(); }
   QUrl download_url() const { return data_["downloadUrl"].toUrl(); }
   QUrl alternate_link() const { return data_["alternateLink"].toUrl(); }
 
@@ -85,11 +87,11 @@ class ConnectResponse : public QObject {
   const QString& refresh_token() const { return refresh_token_; }
   const QString& user_email() const { return user_email_; }
 
-signals:
+ signals:
   void Finished();
 
  private:
-  ConnectResponse(QObject* parent);
+  explicit ConnectResponse(QObject* parent);
   QString refresh_token_;
   QString user_email_;
 };
@@ -102,7 +104,7 @@ class GetFileResponse : public QObject {
   const QString& file_id() const { return file_id_; }
   const File& file() const { return file_; }
 
-signals:
+ signals:
   void Finished();
 
  private:
@@ -119,7 +121,7 @@ class ListChangesResponse : public QObject {
   const QString& cursor() const { return cursor_; }
   const QString& next_cursor() const { return next_cursor_; }
 
-signals:
+ signals:
   void FilesFound(const QList<google_drive::File>& files);
   void FilesDeleted(const QList<QUrl>& files);
   void Finished();
@@ -134,7 +136,7 @@ class Client : public QObject {
   Q_OBJECT
 
  public:
-  Client(QObject* parent = nullptr);
+  explicit Client(QObject* parent = nullptr);
 
   bool is_authenticated() const;
   const QString& access_token() const { return access_token_; }
@@ -145,7 +147,7 @@ class Client : public QObject {
   GetFileResponse* GetFile(const QString& file_id);
   ListChangesResponse* ListChanges(const QString& cursor);
 
-signals:
+ signals:
   void Authenticated();
 
  private slots:
@@ -166,6 +168,6 @@ signals:
   QDateTime expiry_time_;
 };
 
-}  // namespace
+}  // namespace google_drive
 
-#endif  // GOOGLEDRIVECLIENT_H
+#endif  // INTERNET_GOOGLEDRIVECLIENT_H_

@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DIGITALLYIMPORTEDSERVICEBASE_H
-#define DIGITALLYIMPORTEDSERVICEBASE_H
+#ifndef INTERNET_DIGITALLYIMPORTEDSERVICEBASE_H_
+#define INTERNET_DIGITALLYIMPORTEDSERVICEBASE_H_
 
 #include <memory>
 
@@ -38,8 +40,7 @@ class DigitallyImportedServiceBase : public InternetService {
                                const QUrl& homepage_url, const QIcon& icon,
                                const QString& api_service_name,
                                Application* app, InternetModel* model,
-                               bool has_premium,
-                               QObject* parent = nullptr);
+                               bool has_premium, QObject* parent = nullptr);
   ~DigitallyImportedServiceBase();
 
   static const char* kSettingsGroup;
@@ -66,7 +67,7 @@ class DigitallyImportedServiceBase : public InternetService {
  public slots:
   void ShowSettingsDialog();
 
-signals:
+ signals:
   void StreamsChanged();
 
  private slots:
@@ -98,7 +99,7 @@ signals:
   int premium_audio_type_;
   QString username_;
   QString listen_hash_;
-  bool has_premium_; // Does the service has premium features?
+  bool has_premium_;  // Does the service has premium features?
 
   QStandardItem* root_;
 
@@ -118,7 +119,8 @@ class DigitallyImportedService : public DigitallyImportedServiceBase {
 
 class SkyFmService : public DigitallyImportedServiceBase {
  public:
-  SkyFmService(Application* app, InternetModel* model, QObject* parent = nullptr);
+  SkyFmService(Application* app, InternetModel* model,
+               QObject* parent = nullptr);
 };
 
 class JazzRadioService : public DigitallyImportedServiceBase {
@@ -133,4 +135,4 @@ class RockRadioService : public DigitallyImportedServiceBase {
                    QObject* parent = nullptr);
 };
 
-#endif  // DIGITALLYIMPORTEDSERVICEBASE_H
+#endif  // INTERNET_DIGITALLYIMPORTEDSERVICEBASE_H_

@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011-2013, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SOMAFMURLHANDLER_H
-#define SOMAFMURLHANDLER_H
+#ifndef INTERNET_SOMAFMURLHANDLER_H_
+#define INTERNET_SOMAFMURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -44,4 +46,4 @@ class SomaFMUrlHandler : public UrlHandler {
   int task_id_;
 };
 
-#endif  // SOMAFMURLHANDLER_H
+#endif  // INTERNET_SOMAFMURLHANDLER_H_

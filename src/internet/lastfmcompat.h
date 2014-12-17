@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LASTFMCOMPAT_H
-#define LASTFMCOMPAT_H
+#ifndef INTERNET_LASTFMCOMPAT_H_
+#define INTERNET_LASTFMCOMPAT_H_
 
 #include "config.h"
 #include "fixlastfm.h"
@@ -58,7 +60,7 @@ typedef lastfm::User AuthenticatedUser;
 typedef ::ScrobbleCache ScrobbleCache;
 typedef lastfm::AuthenticatedUser AuthenticatedUser;
 #endif
-}
-}
+}  // namespace compat
+}  // namespace lastfm
 
-#endif  // LASTFMCOMPAT_H
+#endif  // INTERNET_LASTFMCOMPAT_H_

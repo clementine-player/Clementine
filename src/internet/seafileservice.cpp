@@ -1,3 +1,23 @@
+/* This file is part of Clementine.
+   Copyright 2014, Chocobozzz <djidane14ff@hotmail.fr>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "seafileservice.h"
 
 #include <cmath>
@@ -26,7 +46,7 @@ static const char* kFileUrl = "/api2/repos/%1/file/";
 static const char* kFileContentUrl = "/api2/repos/%1/file/detail/";
 
 static const int kMaxTries = 10;
-}
+}  // namespace
 
 SeafileService::SeafileService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kSettingsGroup,
@@ -212,9 +232,8 @@ void SeafileService::UpdateLibrariesInProgress(
           SeafileTree::Entry(library.value(), library.key(),
                              SeafileTree::Entry::LIBRARY),
           "/");
-    }
     // If not, we can destroy the library from the tree
-    else {
+    } else {
       // If the library was not in the tree, it's not a problem because
       // DeleteEntry won't do anything
       DeleteEntry(library.key(), "/",
@@ -531,8 +550,7 @@ void SeafileService::DeleteEntry(const QString& library, const QString& path,
 bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
   if (!(*reply)) {
     return false;
-  }
-  else if (tries > kMaxTries) {
+  } else if (tries > kMaxTries) {
     (*reply)->deleteLater();
     return false;
   }

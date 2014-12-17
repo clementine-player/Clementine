@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2014, Chocobozzz <florian.bigard@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by

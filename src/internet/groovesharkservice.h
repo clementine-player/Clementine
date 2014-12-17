@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2011-2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GROOVESHARKSERVICE_H
-#define GROOVESHARKSERVICE_H
+#ifndef INTERNET_GROOVESHARKSERVICE_H_
+#define INTERNET_GROOVESHARKSERVICE_H_
 
 #include "internetmodel.h"
 #include "internetservice.h"
@@ -35,6 +38,7 @@ class QSortFilterProxyModel;
 
 class GroovesharkService : public InternetService {
   Q_OBJECT
+
  public:
   GroovesharkService(Application* app, InternetModel* parent);
   ~GroovesharkService();
@@ -123,7 +127,7 @@ class GroovesharkService : public InternetService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
 
-signals:
+ signals:
   void LoginFinished(bool success);
   void SimpleSearchResults(int id, SongList songs);
   // AlbumSearchResult emits the search id and the Grooveshark ids of the
@@ -222,7 +226,7 @@ signals:
   // If need_authentication is true, add session_id to params.
   // Returns the reply object created
   QNetworkReply* CreateRequest(const QString& method_name,
-                               const QList<QPair<QString, QVariant> >& params,
+                               const QList<QPair<QString, QVariant>>& params,
                                bool use_https = false);
   // Convenient function which block until 'reply' replies, or timeout after 10
   // seconds. Returns false if reply has timeouted
@@ -332,4 +336,4 @@ signals:
   static const char* kApiSecret;
 };
 
-#endif  // GROOVESHARKSERVICE_H
+#endif  // INTERNET_GROOVESHARKSERVICE_H_

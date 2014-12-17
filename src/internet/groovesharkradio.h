@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2011, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,20 +17,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GROOVESHARKRADIO_H
-#define GROOVESHARKRADIO_H
+#ifndef INTERNET_GROOVESHARKRADIO_H_
+#define INTERNET_GROOVESHARKRADIO_H_
 
 #include "smartplaylists/generator.h"
 
 class GroovesharkService;
 
 class GroovesharkRadio : public smart_playlists::Generator {
-
  public:
   // Start Grooveshark radio for a particular type of music
   GroovesharkRadio(GroovesharkService* service, int tag_id);
   // Start Grooveshark radio based on last artists and songs you listen to
-  GroovesharkRadio(GroovesharkService* service);
+  explicit GroovesharkRadio(GroovesharkService* service);
 
   QString type() const { return "Grooveshark"; }
   void Load(const QByteArray& data);
@@ -48,4 +49,4 @@ class GroovesharkRadio : public smart_playlists::Generator {
   QVariantMap autoplay_state_;
 };
 
-#endif  // GROOVESHARKRADIO_H
+#endif  // INTERNET_GROOVESHARKRADIO_H_

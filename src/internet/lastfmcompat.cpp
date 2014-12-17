@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012-2013, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,8 +32,9 @@ bool ParseQuery(const QByteArray& data, XmlQuery* query,
   const bool ret = query->parse(data);
 
   if (connection_problems) {
-    *connection_problems = !ret && query->parseError().enumValue() ==
-                                       lastfm::ws::MalformedResponse;
+    *connection_problems =
+        !ret &&
+        query->parseError().enumValue() == lastfm::ws::MalformedResponse;
   }
 
   return ret;
@@ -65,15 +68,13 @@ bool ParseQuery(const QByteArray& data, XmlQuery* query,
       return false;
     }
 #endif  // Q_OS_WIN32
-  }
-  catch (lastfm::ws::ParseError e) {
+  } catch (lastfm::ws::ParseError e) {
     qLog(Error) << "Last.fm parse error: " << e.enumValue();
     if (connection_problems) {
       *connection_problems = e.enumValue() == lastfm::ws::MalformedResponse;
     }
     return false;
-  }
-  catch (std::runtime_error& e) {
+  } catch (std::runtime_error& e) {
     qLog(Error) << e.what();
     return false;
   }
@@ -98,8 +99,7 @@ bool ParseUserList(QNetworkReply* reply, QList<User>* users) {
       return false;
     }
 #endif  // Q_OS_WIN32
-  }
-  catch (std::runtime_error& e) {
+  } catch (std::runtime_error& e) {
     qLog(Error) << e.what();
     return false;
   }
@@ -109,5 +109,5 @@ bool ParseUserList(QNetworkReply* reply, QList<User>* users) {
 uint ScrobbleTimeMin() { return ScrobblePoint::kScrobbleMinLength; }
 
 #endif  // HAVE_LIBLASTFM1
-}
-}
+}  // namespace compat
+}  // namespace lastfm

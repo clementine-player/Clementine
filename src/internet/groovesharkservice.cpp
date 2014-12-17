@@ -1,5 +1,10 @@
 /* This file is part of Clementine.
-   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2011-2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, HYPNOTOAD <hypnotoad@clementine.org>
+   Copyright 2011-2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Antonio Nicolás Pina <antonio@antonionicolaspina.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -118,7 +123,6 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel* parent)
       task_popular_id_(0),
       task_playlists_id_(0),
       task_search_id_(0) {
-
   app_->player()->RegisterUrlHandler(url_handler_);
 
   search_delay_->setInterval(kSearchDelayMsec);
@@ -442,7 +446,8 @@ void GroovesharkService::RemoveItems() {
   playlists_.clear();
   subscribed_playlists_parent_ = nullptr;
   subscribed_playlists_.clear();
-  // Cancel any pending requests and mark tasks as finished, in case they weren't
+  // Cancel any pending requests and mark tasks as finished, in case they
+  // weren't
   // finished yet.
   pending_retrieve_playlists_.clear();
   app_->task_manager()->SetTaskFinished(task_playlists_id_);
@@ -719,7 +724,8 @@ void GroovesharkService::UserPlaylistsRetrieved(QNetworkReply* reply) {
 }
 
 void GroovesharkService::PlaylistSongsRetrieved(QNetworkReply* reply,
-    int playlist_id, int request_id) {
+                                                int playlist_id,
+                                                int request_id) {
   reply->deleteLater();
 
   if (!pending_retrieve_playlists_.remove(request_id)) {
@@ -1273,9 +1279,9 @@ void GroovesharkService::RefreshPlaylist(int playlist_id) {
   parameters << Param("playlistID", playlist_id);
   QNetworkReply* reply = CreateRequest("getPlaylistSongs", parameters);
   int id = next_pending_playlist_retrieve_id_++;
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(PlaylistSongsRetrieved(QNetworkReply*, int, int)),
-             reply, playlist_id, id);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(PlaylistSongsRetrieved(QNetworkReply*, int, int)), reply,
+             playlist_id, id);
 
   pending_retrieve_playlists_.insert(id);
 }
@@ -1468,9 +1474,8 @@ void GroovesharkService::UserLibrarySongAdded(QNetworkReply* reply,
 
 void GroovesharkService::RemoveCurrentFromPlaylist() {
   const QModelIndexList& indexes(model()->selected_indexes());
-  QMap<int, QList<int> > playlists_songs_ids;
+  QMap<int, QList<int>> playlists_songs_ids;
   for (const QModelIndex& index : indexes) {
-
     if (index.parent().data(InternetModel::Role_Type).toInt() !=
         InternetModel::Type_UserPlaylist) {
       continue;
@@ -1483,7 +1488,7 @@ void GroovesharkService::RemoveCurrentFromPlaylist() {
     }
   }
 
-  for (QMap<int, QList<int> >::const_iterator it =
+  for (QMap<int, QList<int>>::const_iterator it =
            playlists_songs_ids.constBegin();
        it != playlists_songs_ids.constEnd(); ++it) {
     RemoveFromPlaylist(it.key(), it.value());
@@ -1508,7 +1513,6 @@ void GroovesharkService::RemoveCurrentFromFavorites() {
   const QModelIndexList& indexes(model()->selected_indexes());
   QList<int> songs_ids;
   for (const QModelIndex& index : indexes) {
-
     if (index.parent().data(Role_PlaylistType).toInt() != UserFavorites) {
       continue;
     }
@@ -1561,7 +1565,6 @@ void GroovesharkService::RemoveCurrentFromLibrary() {
   QList<int> songs_ids;
 
   for (const QModelIndex& index : indexes) {
-
     if (index.parent().data(Role_PlaylistType).toInt() != UserLibrary) {
       continue;
     }
@@ -1619,7 +1622,6 @@ void GroovesharkService::SongsRemovedFromLibrary(QNetworkReply* reply,
 QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name,
                                                  const QList<Param>& params,
                                                  bool use_https) {
-
   QVariantMap request_params;
   request_params.insert("method", method_name);
 
@@ -1650,9 +1652,8 @@ QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name,
     url.setScheme("https");
   }
   url.setQueryItems(
-      QList<QPair<QString, QString> >()
-      << QPair<QString, QString>(
-             "sig", Utilities::HmacMd5(api_key_, post_params).toHex()));
+      QList<QPair<QString, QString>>() << QPair<QString, QString>(
+          "sig", Utilities::HmacMd5(api_key_, post_params).toHex()));
   QNetworkRequest req(url);
   QNetworkReply* reply = network_->post(req, post_params);
 
@@ -1723,11 +1724,12 @@ bool CompareSongs(const QVariant& song1, const QVariant& song2) {
   int song2_sort = song2_map["Sort"].toInt();
   if (song1_sort == song2_sort) {
     // Favorite songs have a "TSFavorited" and (currently) no "Sort" field
-    return song1_map["TSFavorited"].toString() < song2_map["TSFavorited"].toString();
+    return song1_map["TSFavorited"].toString() <
+           song2_map["TSFavorited"].toString();
   }
   return song1_sort < song2_sort;
 }
-}
+}  // namespace
 
 SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
   QVariantList result_songs = result["songs"].toList();

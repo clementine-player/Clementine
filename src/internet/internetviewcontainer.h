@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, David Sansome <me@davidsansome.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNETVIEWCONTAINER_H
-#define INTERNETVIEWCONTAINER_H
+#ifndef INTERNET_INTERNETVIEWCONTAINER_H_
+#define INTERNET_INTERNETVIEWCONTAINER_H_
 
 #include <QWidget>
 #include <QMap>
@@ -34,7 +36,7 @@ class InternetViewContainer : public QWidget {
   Q_OBJECT
 
  public:
-  InternetViewContainer(QWidget* parent = nullptr);
+  explicit InternetViewContainer(QWidget* parent = nullptr);
   ~InternetViewContainer();
 
   static const int kAnimationDuration;
@@ -72,4 +74,4 @@ class InternetViewContainer : public QWidget {
   QMap<QWidget*, HeaderData> headers_;
 };
 
-#endif  // INTERNETVIEWCONTAINER_H
+#endif  // INTERNET_INTERNETVIEWCONTAINER_H_

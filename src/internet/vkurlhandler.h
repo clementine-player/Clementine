@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2013, Vlad Maltsev <shedwardx@gmail.com>
+   Copyright 2014, Maltsev Vlad <shedwardx@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VKURLHANDLER_H
-#define VKURLHANDLER_H
+#ifndef INTERNET_VKURLHANDLER_H_
+#define INTERNET_VKURLHANDLER_H_
 
 #include "core/urlhandler.h"
 #include <QFile>
@@ -40,4 +41,4 @@ class VkUrlHandler : public UrlHandler {
   VkService* service_;
 };
 
-#endif  // VKURLHANDLER_H
+#endif  // INTERNET_VKURLHANDLER_H_

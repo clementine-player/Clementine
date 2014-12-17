@@ -1,3 +1,23 @@
+/* This file is part of Clementine.
+   Copyright 2012-2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2012, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "oauthenticator.h"
 
 #include <QDesktopServices>
@@ -10,7 +30,8 @@
 #include "core/logging.h"
 #include "internet/localredirectserver.h"
 
-const char* OAuthenticator::kRemoteURL = "https://clementine-data.appspot.com/skydrive";
+const char* OAuthenticator::kRemoteURL =
+    "https://clementine-data.appspot.com/skydrive";
 
 OAuthenticator::OAuthenticator(const QString& client_id,
                                const QString& client_secret,
@@ -73,8 +94,7 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code,
                                         const QUrl& url) {
   typedef QPair<QString, QString> Param;
   QList<Param> parameters;
-  parameters << Param("code", code)
-             << Param("client_id", client_id_)
+  parameters << Param("code", code) << Param("client_id", client_id_)
              << Param("client_secret", client_secret_)
              << Param("grant_type", "authorization_code")
              // Even though we don't use this URI anymore, it must match the

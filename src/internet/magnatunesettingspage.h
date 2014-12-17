@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, David Sansome <me@davidsansome.com>
+   Copyright 2011, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAGNATUNESETTINGSPAGE_H
-#define MAGNATUNESETTINGSPAGE_H
+#ifndef INTERNET_MAGNATUNESETTINGSPAGE_H_
+#define INTERNET_MAGNATUNESETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -29,7 +31,7 @@ class Ui_MagnatuneSettingsPage;
 class MagnatuneSettingsPage : public SettingsPage {
   Q_OBJECT
  public:
-  MagnatuneSettingsPage(SettingsDialog* dialog);
+  explicit MagnatuneSettingsPage(SettingsDialog* dialog);
   ~MagnatuneSettingsPage();
 
   void Load();
@@ -52,4 +54,4 @@ class MagnatuneSettingsPage : public SettingsPage {
   bool logged_in_;
 };
 
-#endif  // MAGNATUNESETTINGSPAGE_H
+#endif  // INTERNET_MAGNATUNESETTINGSPAGE_H_

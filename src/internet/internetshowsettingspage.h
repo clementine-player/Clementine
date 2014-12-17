@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2014, Chocobozzz <florian.bigard@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNETSHOWSETTINGSPAGE_H
-#define INTERNETSHOWSETTINGSPAGE_H
+#ifndef INTERNET_INTERNETSHOWSETTINGSPAGE_H_
+#define INTERNET_INTERNETSHOWSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 #include "ui_internetshowsettingspage.h"
@@ -30,7 +31,7 @@ class InternetShowSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  InternetShowSettingsPage(SettingsDialog* dialog);
+  explicit InternetShowSettingsPage(SettingsDialog* dialog);
 
   void Load();
   void Save();
@@ -39,4 +40,4 @@ class InternetShowSettingsPage : public SettingsPage {
   std::unique_ptr<Ui_InternetShowSettingsPage> ui_;
 };
 
-#endif  // INTERNETSHOWSETTINGSPAGE_H
+#endif  // INTERNET_INTERNETSHOWSETTINGSPAGE_H_

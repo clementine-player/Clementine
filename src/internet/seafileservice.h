@@ -1,3 +1,22 @@
+/* This file is part of Clementine.
+   Copyright 2014, Chocobozzz <djidane14ff@hotmail.fr>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, David Sansome <me@davidsansome.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /* Contacts (for explanations, congratulations, insults) :
  *  - <florian.bigard@gmail.com>
  *
@@ -23,8 +42,8 @@
  *  - Stop Tagreader when user changes the library
 */
 
-#ifndef SEAFILESERVICE_H
-#define SEAFILESERVICE_H
+#ifndef INTERNET_SEAFILESERVICE_H_
+#define INTERNET_SEAFILESERVICE_H_
 
 #include "cloudfileservice.h"
 
@@ -39,6 +58,7 @@ class QNetworkRequest;
 // Interface between the seafile server and Clementine
 class SeafileService : public CloudFileService {
   Q_OBJECT
+
  public:
   enum ApiError { NO_ERROR = 200, NOT_FOUND = 404, TOO_MANY_REQUESTS = 429 };
 
@@ -62,7 +82,7 @@ class SeafileService : public CloudFileService {
   void Connect();
   void ForgetCredentials();
 
-signals:
+ signals:
   void Connected();
   // QMap, key : library's id, value : library's name
   void GetLibrariesFinishedSignal(QMap<QString, QString>);
@@ -129,4 +149,4 @@ signals:
   QString library_updated_;
 };
 
-#endif  // SEAFILESERVICE_H
+#endif  // INTERNET_SEAFILESERVICE_H_

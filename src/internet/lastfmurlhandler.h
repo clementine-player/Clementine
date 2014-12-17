@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LASTFMURLHANDLER_H
-#define LASTFMURLHANDLER_H
+#ifndef INTERNET_LASTFMURLHANDLER_H_
+#define INTERNET_LASTFMURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -40,4 +42,4 @@ class LastFMUrlHandler : public UrlHandler {
   LastFMService* service_;
 };
 
-#endif  // LASTFMURLHANDLER_H
+#endif  // INTERNET_LASTFMURLHANDLER_H_

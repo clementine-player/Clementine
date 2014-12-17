@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2014, Chocobozzz <djidane14ff@hotmail.fr>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SEAFILESETTINGSPAGE_H
-#define SEAFILESETTINGSPAGE_H
+#ifndef INTERNET_SEAFILESETTINGSPAGE_H_
+#define INTERNET_SEAFILESETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -30,7 +31,7 @@ class SeafileSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  SeafileSettingsPage(SettingsDialog* dialog);
+  explicit SeafileSettingsPage(SettingsDialog* dialog);
   ~SeafileSettingsPage();
 
   void Load();
@@ -47,4 +48,4 @@ class SeafileSettingsPage : public SettingsPage {
   SeafileService* service_;
 };
 
-#endif  // SEAFILESETTINGSPAGE_H
+#endif  // INTERNET_SEAFILESETTINGSPAGE_H_

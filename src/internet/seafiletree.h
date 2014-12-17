@@ -1,9 +1,27 @@
+/* This file is part of Clementine.
+   Copyright 2014, Chocobozzz <djidane14ff@hotmail.fr>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /* Contacts (for explanations, congratulations, insults) :
  *  - <florian.bigard@gmail.com>
 */
 
-#ifndef SEAFILETREE_H
-#define SEAFILETREE_H
+#ifndef INTERNET_SEAFILETREE_H_
+#define INTERNET_SEAFILETREE_H_
 
 #include <QObject>
 #include <QString>
@@ -30,7 +48,7 @@ class SeafileTree : public QObject {
           const Type& type = NONE)
         : name_(name), id_(id), type_(type) {}
     Entry(const Entry& entry)
-      : name_(entry.name()), id_(entry.id()), type_(entry.type()) {}
+        : name_(entry.name()), id_(entry.id()), type_(entry.type()) {}
     ~Entry();
 
     QString name() const;
@@ -72,7 +90,7 @@ class SeafileTree : public QObject {
              const QList<TreeItem*>& children = QList<TreeItem*>())
         : entry_(entry), children_(children) {}
     TreeItem(const TreeItem& copy)
-      : entry_(copy.entry()), children_(copy.children()) {}
+        : entry_(copy.entry()), children_(copy.children()) {}
     ~TreeItem();
 
     TreeItem* child(int i) const;
@@ -137,7 +155,7 @@ class SeafileTree : public QObject {
   // Print the tree in the debug log
   void Print() const;
 
-signals:
+ signals:
   // Entry to delete in the tree
   void ToDelete(const QString& library, const QString& path,
                 const SeafileTree::Entry& entry);
@@ -164,4 +182,4 @@ QDataStream& operator>>(QDataStream& in, SeafileTree::Entry& entry);
 QDataStream& operator<<(QDataStream& out, SeafileTree::TreeItem* item);
 QDataStream& operator>>(QDataStream& in, SeafileTree::TreeItem*& item);
 
-#endif  // SEAFILETREE_H
+#endif  // INTERNET_SEAFILETREE_H_

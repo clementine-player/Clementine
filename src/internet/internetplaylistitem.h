@@ -1,5 +1,9 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2011, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNETPLAYLISTITEM_H
-#define INTERNETPLAYLISTITEM_H
+#ifndef INTERNET_INTERNETPLAYLISTITEM_H_
+#define INTERNET_INTERNETPLAYLISTITEM_H_
 
 #include "core/song.h"
 #include "playlist/playlistitem.h"
@@ -27,7 +31,7 @@ class InternetService;
 
 class InternetPlaylistItem : public PlaylistItem {
  public:
-  InternetPlaylistItem(const QString& type);
+  explicit InternetPlaylistItem(const QString& type);
   InternetPlaylistItem(InternetService* service, const Song& metadata);
 
   Options options() const;
@@ -55,4 +59,4 @@ class InternetPlaylistItem : public PlaylistItem {
   Song metadata_;
 };
 
-#endif  // INTERNETPLAYLISTITEM_H
+#endif  // INTERNET_INTERNETPLAYLISTITEM_H_

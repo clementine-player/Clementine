@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2013, Vlad Maltsev <shedwardx@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, Maltsev Vlad <shedwardx@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,10 +25,10 @@
 #include "ui_vksearchdialog.h"
 
 VkSearchDialog::VkSearchDialog(VkService* service, QWidget* parent)
-  : QDialog(parent),
-    ui(new Ui::VkSearchDialog),
-    service_(service),
-    last_search_(SearchID(SearchID::UserOrGroup)) {
+    : QDialog(parent),
+      ui(new Ui::VkSearchDialog),
+      service_(service),
+      last_search_(SearchID(SearchID::UserOrGroup)) {
   ui->setupUi(this);
 
   timer = new QTimer(this);
@@ -53,12 +54,11 @@ VkSearchDialog::VkSearchDialog(VkService* service, QWidget* parent)
   popup->setFocusPolicy(Qt::NoFocus);
   popup->setFocusProxy(parent);
 
-  connect(popup, SIGNAL(itemSelectionChanged()),
-          SLOT(selectionChanged()));
-  connect(popup, SIGNAL(clicked(QModelIndex)),
-          SLOT(selected()));
+  connect(popup, SIGNAL(itemSelectionChanged()), SLOT(selectionChanged()));
+  connect(popup, SIGNAL(clicked(QModelIndex)), SLOT(selected()));
 
-  connect(this, SIGNAL(Find(QString)), service_, SLOT(FindUserOrGroup(QString)));
+  connect(this, SIGNAL(Find(QString)), service_,
+          SLOT(FindUserOrGroup(QString)));
   connect(service_, SIGNAL(UserOrGroupSearchResult(SearchID, MusicOwnerList)),
           this, SLOT(ReceiveResults(SearchID, MusicOwnerList)));
 
@@ -70,9 +70,7 @@ VkSearchDialog::~VkSearchDialog() {
   delete popup;
 }
 
-void VkSearchDialog::suggest() {
-  emit Find(ui->searchLine->text());
-}
+void VkSearchDialog::suggest() { emit Find(ui->searchLine->text()); }
 
 void VkSearchDialog::selected() {
   selectionChanged();
@@ -81,13 +79,14 @@ void VkSearchDialog::selected() {
   popup->hide();
 }
 
-void VkSearchDialog::ReceiveResults(const SearchID& id, const MusicOwnerList& owners) {
+void VkSearchDialog::ReceiveResults(const SearchID& id,
+                                    const MusicOwnerList& owners) {
   if (id.id() > last_search_.id()) {
     popup->setUpdatesEnabled(false);
     popup->clear();
 
     if (owners.count() > 0) {
-      for (const MusicOwner &own : owners) {
+      for (const MusicOwner& own : owners) {
         popup->addTopLevelItem(createItem(own));
       }
     } else {
@@ -98,8 +97,8 @@ void VkSearchDialog::ReceiveResults(const SearchID& id, const MusicOwnerList& ow
 
     popup->resizeColumnToContents(0);
     int ch = popup->columnWidth(0);
-    if (ch > 0.8*ui->searchLine->width()) {
-      popup->setColumnWidth(0, qRound(0.8*ui->searchLine->width()));
+    if (ch > 0.8 * ui->searchLine->width()) {
+      popup->setColumnWidth(0, qRound(0.8 * ui->searchLine->width()));
     }
     popup->resizeColumnToContents(1);
     popup->adjustSize();
@@ -151,29 +150,29 @@ bool VkSearchDialog::eventFilter(QObject* obj, QEvent* ev) {
     int key = static_cast<QKeyEvent*>(ev)->key();
 
     switch (key) {
-    case Qt::Key_Enter:
-    case Qt::Key_Return:
-      selected();
-      break;
+      case Qt::Key_Enter:
+      case Qt::Key_Return:
+        selected();
+        break;
 
-    case Qt::Key_Escape:
-      ui->searchLine->setFocus();
-      popup->hide();
-      consumed = true;
-      break;
+      case Qt::Key_Escape:
+        ui->searchLine->setFocus();
+        popup->hide();
+        consumed = true;
+        break;
 
-    case Qt::Key_Up:
-    case Qt::Key_Down:
-    case Qt::Key_Home:
-    case Qt::Key_End:
-    case Qt::Key_PageUp:
-    case Qt::Key_PageDown:
-      break;
+      case Qt::Key_Up:
+      case Qt::Key_Down:
+      case Qt::Key_Home:
+      case Qt::Key_End:
+      case Qt::Key_PageUp:
+      case Qt::Key_PageDown:
+        break;
 
-    default:
-      ui->searchLine->setFocus();
-      ui->searchLine->event(ev);
-      break;
+      default:
+        ui->searchLine->setFocus();
+        ui->searchLine->event(ev);
+        break;
     }
 
     return consumed;

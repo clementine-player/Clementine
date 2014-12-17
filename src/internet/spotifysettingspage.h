@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SPOTIFYSETTINGSPAGE_H
-#define SPOTIFYSETTINGSPAGE_H
+#ifndef INTERNET_SPOTIFYSETTINGSPAGE_H_
+#define INTERNET_SPOTIFYSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -28,7 +30,7 @@ class SpotifySettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  SpotifySettingsPage(SettingsDialog* dialog);
+  explicit SpotifySettingsPage(SettingsDialog* dialog);
   ~SpotifySettingsPage();
 
   void Load();
@@ -55,4 +57,4 @@ class SpotifySettingsPage : public SettingsPage {
   QString original_password_;
 };
 
-#endif  // SPOTIFYSETTINGSPAGE_H
+#endif  // INTERNET_SPOTIFYSETTINGSPAGE_H_

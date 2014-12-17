@@ -1,5 +1,23 @@
-#ifndef SCROBBLER_H
-#define SCROBBLER_H
+/* This file is part of Clementine.
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef INTERNET_SCROBBLER_H_
+#define INTERNET_SCROBBLER_H_
 
 #include <QObject>
 
@@ -9,7 +27,7 @@ class Scrobbler : public QObject {
   Q_OBJECT
 
  public:
-  Scrobbler(QObject* parent = nullptr) {}
+  explicit Scrobbler(QObject* parent = nullptr) {}
 
   virtual bool IsAuthenticated() const = 0;
   virtual bool IsScrobblingEnabled() const = 0;
@@ -24,7 +42,7 @@ class Scrobbler : public QObject {
   virtual void ToggleScrobbling() = 0;
   virtual void ShowConfig() = 0;
 
-signals:
+ signals:
   void AuthenticationComplete(bool success, const QString& error_message);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
@@ -33,4 +51,4 @@ signals:
   void ScrobbleError(int value);
 };
 
-#endif  // SCROBBLER_H
+#endif  // INTERNET_SCROBBLER_H_

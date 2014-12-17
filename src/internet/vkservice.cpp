@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2013, Vlad Maltsev <shedwardx@gmail.com>
+   Copyright 2014, Vlad Maltsev <shedwardx@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, Ivan Leontiev <leont.ivan@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -816,7 +818,7 @@ QStandardItem* VkService::AppendAlbumList(QStandardItem* parent, bool myself) {
 
   if (myself) {
     item = new QStandardItem(QIcon(":vk/discography.png"), tr("My Albums"));
-    // TODO: Do this better. We have incomplete MusicOwner instance
+    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner instance
     // for logged in user.
     owner.setId(UserID());
     my_albums_item_ = item;
@@ -874,7 +876,7 @@ QStandardItem* VkService::AppendMusic(QStandardItem* parent, bool myself) {
 
   if (myself) {
     item = new QStandardItem(QIcon(":vk/my_music.png"), tr("My Music"));
-    // TODO: Do this better. We have incomplete MusicOwner instance
+    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner instance
     // for logged in user.
     owner.setId(UserID());
     my_music_item_ = item;

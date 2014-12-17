@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GEOLOCATOR_H
-#define GEOLOCATOR_H
+#ifndef INTERNET_GEOLOCATOR_H_
+#define INTERNET_GEOLOCATOR_H_
 
 #include <QObject>
 
@@ -24,6 +26,7 @@
 
 class Geolocator : public QObject {
   Q_OBJECT
+
  public:
   explicit Geolocator(QObject* parent = nullptr);
 
@@ -47,7 +50,7 @@ class Geolocator : public QObject {
     int lng_e6_;
   };
 
-signals:
+ signals:
   void Finished(Geolocator::LatLng latlng);
 
  private slots:
@@ -62,4 +65,4 @@ signals:
 QDebug operator<<(QDebug dbg, const Geolocator::LatLng& ll);
 Q_DECLARE_METATYPE(Geolocator::LatLng);
 
-#endif  // GEOLOCATOR_H
+#endif  // INTERNET_GEOLOCATOR_H_

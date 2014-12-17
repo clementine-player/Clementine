@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2013, Vlad Maltsev <shedwardx@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, Maltsev Vlad <shedwardx@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VKSEARCHDIALOG_H
-#define VKSEARCHDIALOG_H
+#ifndef INTERNET_VKSEARCHDIALOG_H_
+#define INTERNET_VKSEARCHDIALOG_H_
 
 #include <QDialog>
 #include <QTreeWidget>
@@ -31,26 +32,26 @@ class VkSearchDialog;
 class VkSearchDialog : public QDialog {
   Q_OBJECT
 
-public:
+ public:
   explicit VkSearchDialog(VkService* service, QWidget* parent = 0);
   ~VkSearchDialog();
   MusicOwner found() const;
 
-signals:
+ signals:
   void Find(const QString& query);
 
-public slots:
+ public slots:
   void ReceiveResults(const SearchID& id, const MusicOwnerList& owners);
 
-protected:
+ protected:
   void showEvent(QShowEvent*);
 
-private slots:
+ private slots:
   void selectionChanged();
   void suggest();
   void selected();
 
-private:
+ private:
   bool eventFilter(QObject* obj, QEvent* ev);
   QTreeWidgetItem* createItem(const MusicOwner& own);
 
@@ -62,4 +63,4 @@ private:
   QTimer* timer;
 };
 
-#endif  // VKSEARCHDIALOG_H
+#endif  // INTERNET_VKSEARCHDIALOG_H_

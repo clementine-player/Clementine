@@ -1,5 +1,26 @@
-#ifndef SPOTIFYSERVICE_H
-#define SPOTIFYSERVICE_H
+/* This file is part of Clementine.
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011-2012, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef INTERNET_SPOTIFYSERVICE_H_
+#define INTERNET_SPOTIFYSERVICE_H_
 
 #include "internetmodel.h"
 #include "internetservice.h"
@@ -28,7 +49,9 @@ class SpotifyService : public InternetService {
     Type_Toplist,
   };
 
-  enum Role { Role_UserPlaylistIndex = InternetModel::RoleCount, };
+  enum Role {
+    Role_UserPlaylistIndex = InternetModel::RoleCount,
+  };
 
   // Values are persisted - don't change.
   enum LoginState {
@@ -72,7 +95,7 @@ class SpotifyService : public InternetService {
 
   static void SongFromProtobuf(const pb::spotify::Track& track, Song* song);
 
-signals:
+ signals:
   void BlobStateChanged();
   void LoginFinished(bool success);
   void ImageLoaded(const QString& id, const QImage& image);
@@ -161,4 +184,4 @@ signals:
   bool volume_normalisation_;
 };
 
-#endif
+#endif  // INTERNET_SPOTIFYSERVICE_H_

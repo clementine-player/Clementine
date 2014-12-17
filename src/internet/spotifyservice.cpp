@@ -1,3 +1,26 @@
+/* This file is part of Clementine.
+   Copyright 2011-2014, David Sansome <me@davidsansome.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2012, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Chocobozzz <florian.bigard@gmail.com>
+   Copyright 2014, pie.or.paj <pie.or.paj@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "blobversion.h"
 #include "config.h"
 #include "internetmodel.h"
@@ -761,11 +784,11 @@ void SpotifyService::DropMimeData(const QMimeData* data,
                                   const QModelIndex& index) {
   QVariant q_playlist_index = index.data(Role_UserPlaylistIndex);
   if (!q_playlist_index.isValid()) {
-    // In case song was dropped on a playlist item, not on the playlist title/root element
+    // In case song was dropped on a playlist item, not on the playlist
+    // title/root element
     q_playlist_index = index.parent().data(Role_UserPlaylistIndex);
   }
-  if (!q_playlist_index.isValid())
-    return;
+  if (!q_playlist_index.isValid()) return;
 
   AddSongsToPlaylist(q_playlist_index.toInt(), data->urls());
 }

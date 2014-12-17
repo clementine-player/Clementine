@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2013, John Maguire <john.maguire@gmail.com>
+   Copyright 2013-2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOXSETTINGSPAGE_H
-#define BOXSETTINGSPAGE_H
+#ifndef INTERNET_BOXSETTINGSPAGE_H_
+#define INTERNET_BOXSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -30,7 +31,7 @@ class BoxSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  BoxSettingsPage(SettingsDialog* parent = nullptr);
+  explicit BoxSettingsPage(SettingsDialog* parent = nullptr);
   ~BoxSettingsPage();
 
   void Load();
@@ -50,4 +51,4 @@ class BoxSettingsPage : public SettingsPage {
   BoxService* service_;
 };
 
-#endif  // BOXSETTINGSPAGE_H
+#endif  // INTERNET_BOXSETTINGSPAGE_H_

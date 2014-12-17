@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2011, David Sansome <davidsansome@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNETMIMEDATA_H
-#define INTERNETMIMEDATA_H
+#ifndef INTERNET_INTERNETMIMEDATA_H_
+#define INTERNET_INTERNETMIMEDATA_H_
 
 #include "core/mimedata.h"
 
@@ -29,10 +32,10 @@ class InternetMimeData : public MimeData {
   Q_OBJECT
 
  public:
-  InternetMimeData(const InternetModel* _model) : model(_model) {}
+  explicit InternetMimeData(const InternetModel* _model) : model(_model) {}
 
   const InternetModel* model;
   QModelIndexList indexes;
 };
 
-#endif  // INTERNETMIMEDATA_H
+#endif  // INTERNET_INTERNETMIMEDATA_H_

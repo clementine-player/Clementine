@@ -1,5 +1,11 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2013, David Sansome <me@davidsansome.com>
+   Copyright 2011, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2013, Alan Briolat <alan.briolat@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -159,7 +165,7 @@ void MagnatuneService::ReloadDatabaseFinished() {
   load_database_task_id_ = 0;
 
   if (reply->error() != QNetworkReply::NoError) {
-    // TODO: Error handling
+    // TODO(David Sansome): Error handling
     qLog(Error) << reply->errorString();
     return;
   }
@@ -238,7 +244,7 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
   return song;
 }
 
-// TODO: Replace with readElementText(SkipChildElements) in Qt 4.6
+// TODO(David Sansome): Replace with readElementText(SkipChildElements) in Qt 4.6
 QString MagnatuneService::ReadElementText(QXmlStreamReader& reader) {
   int level = 1;
   QString ret;

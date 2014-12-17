@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ICECASTBACKEND_H
-#define ICECASTBACKEND_H
+#ifndef INTERNET_ICECASTBACKEND_H_
+#define INTERNET_ICECASTBACKEND_H_
 
 #include "core/song.h"
 
@@ -29,7 +31,7 @@ class IcecastBackend : public QObject {
   Q_OBJECT
 
  public:
-  IcecastBackend(QObject* parent = nullptr);
+  explicit IcecastBackend(QObject* parent = nullptr);
   void Init(Database* db);
 
   static const char* kTableName;
@@ -58,11 +60,11 @@ class IcecastBackend : public QObject {
 
   bool IsEmpty();
 
-signals:
+ signals:
   void DatabaseReset();
 
  private:
   Database* db_;
 };
 
-#endif  // ICECASTBACKEND_H
+#endif  // INTERNET_ICECASTBACKEND_H_

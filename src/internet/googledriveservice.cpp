@@ -1,3 +1,22 @@
+/* This file is part of Clementine.
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2012, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "googledriveservice.h"
 
 #include <QDesktopServices>
@@ -92,9 +111,8 @@ void GoogleDriveService::ListChangesFinished(
   if (is_indexing()) {
     // Only save the cursor after all the songs have been indexed - that way if
     // Clementine is closed it'll resume next time.
-    NewClosure(this, SIGNAL(AllIndexingTasksFinished()),
-               this, SLOT(SaveCursor(QString)),
-               cursor);
+    NewClosure(this, SIGNAL(AllIndexingTasksFinished()), this,
+               SLOT(SaveCursor(QString)), cursor);
   } else {
     SaveCursor(cursor);
   }
@@ -198,12 +216,12 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
         QIcon(":/providers/googledrive.png"), tr("Open in Google Drive"), this,
         SLOT(OpenWithDrive()));
     context_menu_->addSeparator();
-    update_action_ = context_menu_->addAction(
-        IconLoader::Load("view-refresh"), tr("Check for updates"),
-        this, SLOT(CheckForUpdates()));
+    update_action_ = context_menu_->addAction(IconLoader::Load("view-refresh"),
+                                              tr("Check for updates"), this,
+                                              SLOT(CheckForUpdates()));
     full_rescan_action_ = context_menu_->addAction(
-        IconLoader::Load("view-refresh"), tr("Do a full rescan..."),
-        this, SLOT(ConfirmFullRescan()));
+        IconLoader::Load("view-refresh"), tr("Do a full rescan..."), this,
+        SLOT(ConfirmFullRescan()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("download"), tr("Cover Manager"),
                              this, SLOT(ShowCoverManager()));
@@ -246,15 +264,14 @@ void GoogleDriveService::OpenWithDrive() {
 
 void GoogleDriveService::ConfirmFullRescan() {
   QMessageBox* message_box = new QMessageBox(
-      QMessageBox::Warning,
-      tr("Do a full rescan"),
+      QMessageBox::Warning, tr("Do a full rescan"),
       tr("Doing a full rescan will lose any metadata you've saved in "
          "Clementine such as cover art, play counts and ratings.  Clementine "
          "will rescan all your music in Google Drive which may take some "
          "time."),
       QMessageBox::NoButton);
-  QPushButton* button = message_box->addButton(
-      tr("Do a full rescan"), QMessageBox::DestructiveRole);
+  QPushButton* button = message_box->addButton(tr("Do a full rescan"),
+                                               QMessageBox::DestructiveRole);
   connect(button, SIGNAL(clicked()), SLOT(DoFullRescan()));
 
   message_box->addButton(QMessageBox::Cancel);

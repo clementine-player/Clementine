@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2013, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SOMAFMSERVICE_H
-#define SOMAFMSERVICE_H
+#ifndef INTERNET_SOMAFMSERVICE_H_
+#define INTERNET_SOMAFMSERVICE_H_
 
 #include <QXmlStreamReader>
 
@@ -39,7 +42,9 @@ class SomaFMServiceBase : public InternetService {
                     const QIcon& icon);
   ~SomaFMServiceBase();
 
-  enum ItemType { Type_Stream = 2000, };
+  enum ItemType {
+    Type_Stream = 2000,
+  };
 
   struct Stream {
     QString title_;
@@ -67,7 +72,7 @@ class SomaFMServiceBase : public InternetService {
   bool IsStreamListStale() const { return streams_.IsStale(); }
   StreamList Streams();
 
-signals:
+ signals:
   void StreamsChanged();
 
  private slots:
@@ -114,4 +119,4 @@ QDataStream& operator<<(QDataStream& out, const SomaFMService::Stream& stream);
 QDataStream& operator>>(QDataStream& in, SomaFMService::Stream& stream);
 Q_DECLARE_METATYPE(SomaFMService::Stream)
 
-#endif  // SOMAFMSERVICE_H
+#endif  // INTERNET_SOMAFMSERVICE_H_

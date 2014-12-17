@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2013, Vlad Maltsev <shedwardx@gmail.com>
+   Copyright 2014, Vlad Maltsev <shedwardx@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, Ivan Leontiev <leont.ivan@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VKSERVICE_H
-#define VKSERVICE_H
+#ifndef INTERNET_VKSERVICE_H_
+#define INTERNET_VKSERVICE_H_
 
 #include <memory>
 
@@ -179,7 +181,7 @@ class VkService : public InternetService {
   QString cacheFilename() const { return cacheFilename_; }
   bool isLoveAddToMyMusic() const { return love_is_add_to_mymusic_; }
 
-signals:
+ signals:
   void NameUpdated(const QString& name);
   void ConnectionStateChanged(Vreen::Client::State state);
   void LoginSuccess(bool success);
@@ -318,4 +320,4 @@ signals:
   QString cacheFilename_;
 };
 
-#endif  // VKSERVICE_H
+#endif  // INTERNET_VKSERVICE_H_

@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2013, Vlad Maltsev <shedwardx@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, Maltsev Vlad <shedwardx@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VKSETTINGSPAGE_H
-#define VKSETTINGSPAGE_H
+#ifndef INTERNET_VKSETTINGSPAGE_H_
+#define INTERNET_VKSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -29,14 +30,14 @@ class Ui_VkSettingsPage;
 class VkSettingsPage : public SettingsPage {
   Q_OBJECT
 
-public:
+ public:
   explicit VkSettingsPage(SettingsDialog* parent);
   ~VkSettingsPage();
 
   void Load();
   void Save();
 
-private slots:
+ private slots:
   void LoginSuccess(bool success);
 
   void Login();
@@ -45,11 +46,11 @@ private slots:
   void CacheDirBrowse();
   void ResetCasheFilenames();
 
-private:
+ private:
   void LoginWidgets();
   void LogoutWidgets();
   Ui_VkSettingsPage* ui_;
   VkService* service_;
 };
 
-#endif  // VKSETTINGSPAGE_H
+#endif  // INTERNET_VKSETTINGSPAGE_H_

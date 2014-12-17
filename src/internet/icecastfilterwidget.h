@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ICECASTFILTERWIDGET_H
-#define ICECASTFILTERWIDGET_H
+#ifndef INTERNET_ICECASTFILTERWIDGET_H_
+#define INTERNET_ICECASTFILTERWIDGET_H_
 
 #include "icecastmodel.h"
 
@@ -33,7 +35,7 @@ class IcecastFilterWidget : public QWidget {
   Q_OBJECT
 
  public:
-  IcecastFilterWidget(QWidget* parent = nullptr);
+  explicit IcecastFilterWidget(QWidget* parent = nullptr);
   ~IcecastFilterWidget();
 
   static const char* kSettingsGroup;
@@ -60,4 +62,4 @@ class IcecastFilterWidget : public QWidget {
   QSignalMapper* sort_mode_mapper_;
 };
 
-#endif  // ICECASTFILTERWIDGET_H
+#endif  // INTERNET_ICECASTFILTERWIDGET_H_

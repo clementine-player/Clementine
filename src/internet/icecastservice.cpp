@@ -1,5 +1,9 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,6 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "icecastservice.h"
+
 #include <algorithm>
 
 #include <QDesktopServices>
@@ -28,7 +34,6 @@
 #include "icecastbackend.h"
 #include "icecastfilterwidget.h"
 #include "icecastmodel.h"
-#include "icecastservice.h"
 #include "internetmodel.h"
 #include "core/application.h"
 #include "core/closure.h"
@@ -134,7 +139,7 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply) {
 namespace {
 template <typename T>
 struct GenreSorter {
-  GenreSorter(const QMultiHash<QString, T>& genres) : genres_(genres) {}
+  explicit GenreSorter(const QMultiHash<QString, T>& genres) : genres_(genres) {}
 
   bool operator()(const QString& a, const QString& b) const {
     return genres_.count(a) > genres_.count(b);
@@ -184,7 +189,7 @@ QStringList FilterGenres(const QStringList& genres) {
   }
   return ret;
 }
-}
+}  // namespace
 
 void IcecastService::ParseDirectoryFinished(
     QFuture<IcecastBackend::StationList> future) {

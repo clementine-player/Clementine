@@ -1,5 +1,23 @@
-#ifndef DROPBOXSERVICE_H
-#define DROPBOXSERVICE_H
+/* This file is part of Clementine.
+   Copyright 2012-2013, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef INTERNET_DROPBOXSERVICE_H_
+#define INTERNET_DROPBOXSERVICE_H_
 
 #include "internet/cloudfileservice.h"
 
@@ -11,6 +29,7 @@ class QNetworkReply;
 
 class DropboxService : public CloudFileService {
   Q_OBJECT
+
  public:
   DropboxService(Application* app, InternetModel* parent);
 
@@ -21,7 +40,7 @@ class DropboxService : public CloudFileService {
 
   QUrl GetStreamingUrlFromSongId(const QUrl& url);
 
-signals:
+ signals:
   void Connected();
 
  public slots:
@@ -46,4 +65,4 @@ signals:
   NetworkAccessManager* network_;
 };
 
-#endif  // DROPBOXSERVICE_H
+#endif  // INTERNET_DROPBOXSERVICE_H_

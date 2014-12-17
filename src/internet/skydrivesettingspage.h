@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2013, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SKYDRIVESETTINGSPAGE_H
-#define SKYDRIVESETTINGSPAGE_H
+#ifndef INTERNET_SKYDRIVESETTINGSPAGE_H_
+#define INTERNET_SKYDRIVESETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -30,7 +31,7 @@ class SkydriveSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  SkydriveSettingsPage(SettingsDialog* parent = nullptr);
+  explicit SkydriveSettingsPage(SettingsDialog* parent = nullptr);
   ~SkydriveSettingsPage();
 
   void Load();
@@ -50,4 +51,4 @@ class SkydriveSettingsPage : public SettingsPage {
   SkydriveService* service_;
 };
 
-#endif  // SKYDRIVESETTINGSPAGE_H
+#endif  // INTERNET_SKYDRIVESETTINGSPAGE_H_

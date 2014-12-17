@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,13 +18,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ICECASTSERVICE_H
-#define ICECASTSERVICE_H
+#ifndef INTERNET_ICECASTSERVICE_H_
+#define INTERNET_ICECASTSERVICE_H_
+
+#include "internetservice.h"
 
 #include <QXmlStreamReader>
 
 #include "icecastbackend.h"
-#include "internetservice.h"
 
 class IcecastFilterWidget;
 class IcecastModel;
@@ -33,6 +37,7 @@ class QNetworkReply;
 
 class IcecastService : public InternetService {
   Q_OBJECT
+
  public:
   IcecastService(Application* app, InternetModel* parent);
   ~IcecastService();
@@ -41,7 +46,10 @@ class IcecastService : public InternetService {
   static const char* kDirectoryUrl;
   static const char* kHomepage;
 
-  enum ItemType { Type_Stream = 3000, Type_Genre, };
+  enum ItemType {
+    Type_Stream = 3000,
+    Type_Genre,
+  };
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
@@ -73,4 +81,4 @@ class IcecastService : public InternetService {
   int load_directory_task_id_;
 };
 
-#endif
+#endif  // INTERNET_ICECASTSERVICE_H_
