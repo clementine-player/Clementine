@@ -1131,15 +1131,15 @@ optional_source(HAVE_SKYDRIVE
 # Box support
 optional_source(HAVE_BOX
   SOURCES
-    internet/boxservice.cpp
-    internet/boxsettingspage.cpp
-    internet/boxurlhandler.cpp
+    internet/box/boxservice.cpp
+    internet/box/boxsettingspage.cpp
+    internet/box/boxurlhandler.cpp
   HEADERS
-    internet/boxservice.h
-    internet/boxsettingspage.h
-    internet/boxurlhandler.h
+    internet/box/boxservice.h
+    internet/box/boxsettingspage.h
+    internet/box/boxurlhandler.h
   UI
-    internet/boxsettingspage.ui
+    internet/box/boxsettingspage.ui
 )
 
 # Vk.com support

@@ -22,7 +22,7 @@
 
 #include "ui_boxsettingspage.h"
 #include "core/application.h"
-#include "internet/boxservice.h"
+#include "internet/box/boxservice.h"
 #include "internet/internetmodel.h"
 #include "ui/settingsdialog.h"
 

@@ -56,7 +56,7 @@
 #include "skydriveservice.h"
 #endif
 #ifdef HAVE_BOX
-#include "boxservice.h"
+#include "internet/box/boxservice.h"
 #endif
 #ifdef HAVE_VK
 #include "vkservice.h"
