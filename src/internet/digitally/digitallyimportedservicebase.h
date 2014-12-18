@@ -1,4 +1,3 @@
-
 /* This file is part of Clementine.
    Copyright 2011-2012, David Sansome <me@davidsansome.com>
    Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>

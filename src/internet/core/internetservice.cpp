@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2009-2012, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, David Sansome <me@davidsansome.com>
    Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
    Copyright 2011, Paweł Bara <keirangtp@gmail.com>
    Copyright 2012, Arnaud Bienner <arnaud.bienner@gmail.com>
