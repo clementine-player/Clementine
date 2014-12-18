@@ -20,7 +20,7 @@
 */
 
 #include "internetview.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "core/mergedproxymodel.h"
 #include "library/libraryview.h"
 

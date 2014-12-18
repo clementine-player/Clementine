@@ -20,7 +20,7 @@
 
 #include "groovesharkservice.h"
 #include "groovesharksettingspage.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "ui_groovesharksettingspage.h"

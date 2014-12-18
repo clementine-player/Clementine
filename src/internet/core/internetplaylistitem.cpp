@@ -19,9 +19,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internetplaylistitem.h"
-#include "internetservice.h"
-#include "internetmodel.h"
+#include "internet/core/internetplaylistitem.h"
+#include "internet/core/internetservice.h"
+#include "internet/core/internetmodel.h"
 #include "core/settingsprovider.h"
 #include "library/sqlrow.h"
 #include "playlist/playlistbackend.h"

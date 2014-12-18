@@ -23,7 +23,7 @@
 
 #include <memory>
 
-#include "internetservice.h"
+#include "internet/core/internetservice.h"
 
 class QMenu;
 

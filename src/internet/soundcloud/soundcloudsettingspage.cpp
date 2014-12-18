@@ -20,7 +20,7 @@
 #include "soundcloudsettingspage.h"
 #include "ui_soundcloudsettingspage.h"
 #include "core/application.h"
-#include "internet/internetmodel.h"
+#include "internet/core/internetmodel.h"
 
 SoundCloudSettingsPage::SoundCloudSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),

@@ -20,7 +20,7 @@
 #ifndef INTERNET_CLOUDFILESERVICE_H_
 #define INTERNET_CLOUDFILESERVICE_H_
 
-#include "internetservice.h"
+#include "internet/core/internetservice.h"
 
 #include <memory>
 

@@ -28,7 +28,7 @@
 #include <QSettings>
 
 #include "lastfmservice.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "ui/iconloader.h"
 

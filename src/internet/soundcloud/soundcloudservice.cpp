@@ -29,9 +29,9 @@
 #include <qjson/parser.h>
 #include <qjson/serializer.h>
 
-#include "internetmodel.h"
-#include "oauthenticator.h"
-#include "searchboxwidget.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/oauthenticator.h"
+#include "internet/core/searchboxwidget.h"
 
 #include "core/application.h"
 #include "core/closure.h"

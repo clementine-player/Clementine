@@ -21,8 +21,8 @@
 #ifndef INTERNET_GROOVESHARKSERVICE_H_
 #define INTERNET_GROOVESHARKSERVICE_H_
 
-#include "internetmodel.h"
-#include "internetservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetservice.h"
 
 #include <QSslError>
 

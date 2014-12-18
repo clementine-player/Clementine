@@ -23,7 +23,7 @@
 
 #include "core/network.h"
 #include "magnatuneservice.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "ui_magnatunesettingspage.h"
 
 #include <QMessageBox>

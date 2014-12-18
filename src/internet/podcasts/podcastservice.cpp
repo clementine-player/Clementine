@@ -18,7 +18,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podcastservice.h"
+#include "internet/podcasts/podcastservice.h"
 
 #include <QMenu>
 #include <QSortFilterProxyModel>
@@ -31,13 +31,13 @@
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
 #include "devices/deviceview.h"
-#include "internet/internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "library/libraryview.h"
 #include "opmlcontainer.h"
 #include "podcastbackend.h"
 #include "podcastdeleter.h"
 #include "podcastdownloader.h"
-#include "podcastservicemodel.h"
+#include "internet/podcasts/podcastservicemodel.h"
 #include "podcastupdater.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"

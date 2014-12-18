@@ -23,46 +23,46 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 
 #include <QMimeData>
 #include <QtDebug>
 
-#include "digitallyimportedservicebase.h"
-#include "groovesharkservice.h"
-#include "icecastservice.h"
-#include "internetmimedata.h"
-#include "internetservice.h"
-#include "jamendoservice.h"
-#include "magnatuneservice.h"
-#include "savedradio.h"
-#include "somafmservice.h"
-#include "soundcloudservice.h"
-#include "spotifyservice.h"
-#include "subsonicservice.h"
+#include "internet/digitally/digitallyimportedservicebase.h"
+#include "internet/grooveshark/groovesharkservice.h"
+#include "internet/icecast/icecastservice.h"
+#include "internet/core/internetmimedata.h"
+#include "internet/core/internetservice.h"
+#include "internet/jamendo/jamendoservice.h"
+#include "internet/magnatune/magnatuneservice.h"
+#include "internet/internetradio/savedradio.h"
+#include "internet/somafm/somafmservice.h"
+#include "internet/soundcloud/soundcloudservice.h"
+#include "internet/spotify/spotifyservice.h"
+#include "internet/subsonic/subsonicservice.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
-#include "podcasts/podcastservice.h"
+#include "internet/podcasts/podcastservice.h"
 #include "smartplaylists/generatormimedata.h"
 
 #ifdef HAVE_GOOGLE_DRIVE
-#include "googledriveservice.h"
+#include "internet/googledrive/googledriveservice.h"
 #endif
 #ifdef HAVE_DROPBOX
-#include "dropboxservice.h"
+#include "internet/dropbox/dropboxservice.h"
 #endif
 #ifdef HAVE_SKYDRIVE
-#include "skydriveservice.h"
+#include "internet/skydrive/skydriveservice.h"
 #endif
 #ifdef HAVE_BOX
 #include "internet/box/boxservice.h"
 #endif
 #ifdef HAVE_VK
-#include "vkservice.h"
+#include "internet/vk/vkservice.h"
 #endif
 #ifdef HAVE_SEAFILE
-#include "seafileservice.h"
+#include "internet/seafile/seafileservice.h"
 #endif
 
 using smart_playlists::Generator;

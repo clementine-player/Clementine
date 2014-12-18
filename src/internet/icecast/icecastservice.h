@@ -21,7 +21,7 @@
 #ifndef INTERNET_ICECASTSERVICE_H_
 #define INTERNET_ICECASTSERVICE_H_
 
-#include "internetservice.h"
+#include "internet/core/internetservice.h"
 
 #include <QXmlStreamReader>
 

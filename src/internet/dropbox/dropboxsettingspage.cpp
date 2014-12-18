@@ -20,9 +20,9 @@
 #include "ui_dropboxsettingspage.h"
 
 #include "core/application.h"
-#include "internet/dropboxauthenticator.h"
-#include "internet/dropboxservice.h"
-#include "internet/internetmodel.h"
+#include "internet/dropbox/dropboxauthenticator.h"
+#include "internet/dropbox/dropboxservice.h"
+#include "internet/core/internetmodel.h"
 #include "ui/settingsdialog.h"
 
 DropboxSettingsPage::DropboxSettingsPage(SettingsDialog* parent)

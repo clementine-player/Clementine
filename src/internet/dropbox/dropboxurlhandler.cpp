@@ -18,7 +18,7 @@
 
 #include "dropboxurlhandler.h"
 
-#include "internet/dropboxservice.h"
+#include "internet/dropbox/dropboxservice.h"
 
 DropboxUrlHandler::DropboxUrlHandler(DropboxService* service, QObject* parent)
     : UrlHandler(parent), service_(service) {}

@@ -33,7 +33,7 @@
 #include <QXmlStreamReader>
 
 #include "magnatuneservice.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "ui_magnatunedownloaddialog.h"
 #include "core/logging.h"
 #include "core/network.h"

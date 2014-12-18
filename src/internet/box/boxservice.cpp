@@ -23,8 +23,8 @@
 #include "core/application.h"
 #include "core/player.h"
 #include "core/waitforsignal.h"
-#include "internet/boxurlhandler.h"
-#include "internet/oauthenticator.h"
+#include "internet/box/boxurlhandler.h"
+#include "internet/core/oauthenticator.h"
 #include "library/librarybackend.h"
 
 const char* BoxService::kServiceName = "Box";

@@ -24,7 +24,7 @@
 
 #include "core/closure.h"
 #include "core/logging.h"
-#include "internet/localredirectserver.h"
+#include "internet/core/localredirectserver.h"
 #include "vreen/utils.h"
 
 #include "vkservice.h"

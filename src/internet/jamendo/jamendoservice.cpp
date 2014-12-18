@@ -25,7 +25,7 @@
 
 #include "jamendodynamicplaylist.h"
 #include "jamendoplaylistitem.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"

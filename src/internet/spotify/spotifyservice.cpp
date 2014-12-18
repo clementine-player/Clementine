@@ -23,8 +23,8 @@
 
 #include "blobversion.h"
 #include "config.h"
-#include "internetmodel.h"
-#include "searchboxwidget.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/searchboxwidget.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
 #include "core/application.h"

@@ -20,8 +20,8 @@
 #ifndef INTERNET_SOUNDCLOUDSERVICE_H_
 #define INTERNET_SOUNDCLOUDSERVICE_H_
 
-#include "internetmodel.h"
-#include "internetservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetservice.h"
 
 class NetworkAccessManager;
 class OAuthenticator;

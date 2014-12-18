@@ -20,7 +20,7 @@
 #ifndef INTERNET_GOOGLEDRIVESERVICE_H_
 #define INTERNET_GOOGLEDRIVESERVICE_H_
 
-#include "cloudfileservice.h"
+#include "internet/core/cloudfileservice.h"
 
 namespace google_drive {
 class Client;

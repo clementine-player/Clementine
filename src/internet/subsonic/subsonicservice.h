@@ -24,8 +24,8 @@
 
 #include <QQueue>
 
-#include "internet/internetmodel.h"
-#include "internet/internetservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetservice.h"
 
 class QNetworkAccessManager;
 class QNetworkReply;

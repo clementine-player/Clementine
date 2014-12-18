@@ -44,9 +44,9 @@
 #include "widgets/didyoumean.h"
 
 #include "globalsearch/globalsearch.h"
-#include "internetmodel.h"
-#include "internetplaylistitem.h"
-#include "searchboxwidget.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetplaylistitem.h"
+#include "internet/core/searchboxwidget.h"
 
 #include "vreen/audio.h"
 #include "vreen/contact.h"

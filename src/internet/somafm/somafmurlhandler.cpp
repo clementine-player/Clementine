@@ -19,7 +19,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "somafmservice.h"
 #include "somafmurlhandler.h"
 #include "core/application.h"

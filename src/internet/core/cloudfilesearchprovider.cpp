@@ -16,9 +16,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internet/cloudfilesearchprovider.h"
-#include "internet/cloudfileservice.h"
-#include "internet/internetmodel.h"
+#include "internet/core/cloudfilesearchprovider.h"
+#include "internet/core/cloudfileservice.h"
+#include "internet/core/internetmodel.h"
 
 CloudFileSearchProvider::CloudFileSearchProvider(
     LibraryBackendInterface* backend, const QString& id, const QIcon& icon,

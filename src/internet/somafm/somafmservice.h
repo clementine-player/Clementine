@@ -23,7 +23,7 @@
 
 #include <QXmlStreamReader>
 
-#include "internetservice.h"
+#include "internet/core/internetservice.h"
 #include "core/cachedlist.h"
 
 class SomaFMUrlHandler;

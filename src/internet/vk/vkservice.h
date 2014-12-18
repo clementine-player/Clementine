@@ -22,8 +22,8 @@
 
 #include <memory>
 
-#include "internetservice.h"
-#include "internetmodel.h"
+#include "internet/core/internetservice.h"
+#include "internet/core/internetmodel.h"
 #include "core/song.h"
 
 #include "vreen/audio.h"

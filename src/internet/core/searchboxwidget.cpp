@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internetservice.h"
-#include "searchboxwidget.h"
+#include "internet/core/internetservice.h"
+#include "internet/core/searchboxwidget.h"
 #include "ui_searchboxwidget.h"
 #include "ui/iconloader.h"
 #include "widgets/didyoumean.h"

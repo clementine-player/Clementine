@@ -17,7 +17,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "podcastsettingspage.h"
+#include "internet/podcasts/podcastsettingspage.h"
 #include "ui_podcastsettingspage.h"
 
 #include <QFileDialog>

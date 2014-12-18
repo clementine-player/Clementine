@@ -30,8 +30,8 @@
 #include "core/player.h"
 #include "core/utilities.h"
 #include "core/waitforsignal.h"
-#include "internet/dropboxauthenticator.h"
-#include "internet/dropboxurlhandler.h"
+#include "internet/dropbox/dropboxauthenticator.h"
+#include "internet/dropbox/dropboxurlhandler.h"
 #include "library/librarybackend.h"
 
 using Utilities::ParseRFC822DateTime;

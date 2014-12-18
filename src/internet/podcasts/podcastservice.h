@@ -23,8 +23,8 @@
 
 #include "podcastdeleter.h"
 #include "podcastdownloader.h"
-#include "internet/internetmodel.h"
-#include "internet/internetservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetservice.h"
 
 #include <memory>
 #include <QScopedPointer>

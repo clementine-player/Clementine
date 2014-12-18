@@ -22,7 +22,7 @@
 
 #include "core/network.h"
 #include "core/override.h"
-#include "internet/geolocator.h"
+#include "internet/core/geolocator.h"
 
 class QNetworkReply;
 class SongInfoTextView;

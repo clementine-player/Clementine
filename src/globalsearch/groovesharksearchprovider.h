@@ -20,7 +20,7 @@
 
 #include "searchprovider.h"
 #include "covers/albumcoverloaderoptions.h"
-#include "internet/groovesharkservice.h"
+#include "internet/grooveshark/groovesharkservice.h"
 
 class AlbumCoverLoader;
 

@@ -22,8 +22,8 @@
 #ifndef INTERNET_SPOTIFYSERVICE_H_
 #define INTERNET_SPOTIFYSERVICE_H_
 
-#include "internetmodel.h"
-#include "internetservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetservice.h"
 #include "spotifymessages.pb.h"
 
 #include <QProcess>

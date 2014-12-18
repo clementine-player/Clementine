@@ -42,7 +42,7 @@
 #include "ui/iconloader.h"
 #include "googledriveclient.h"
 #include "googledriveurlhandler.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 
 const char* GoogleDriveService::kServiceName = "Google Drive";
 const char* GoogleDriveService::kSettingsGroup = "GoogleDrive";

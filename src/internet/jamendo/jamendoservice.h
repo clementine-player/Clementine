@@ -22,7 +22,7 @@
 #ifndef INTERNET_JAMENDOSERVICE_H_
 #define INTERNET_JAMENDOSERVICE_H_
 
-#include "internetservice.h"
+#include "internet/core/internetservice.h"
 
 #include <QXmlStreamReader>
 

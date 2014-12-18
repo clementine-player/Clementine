@@ -21,7 +21,7 @@
 
 #include "groovesharkservice.h"
 #include "core/logging.h"
-#include "internet/internetplaylistitem.h"
+#include "internet/core/internetplaylistitem.h"
 
 GroovesharkRadio::GroovesharkRadio(GroovesharkService* service)
     : service_(service), tag_id_(0), use_tag_(false), first_time_(true) {}

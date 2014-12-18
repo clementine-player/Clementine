@@ -20,8 +20,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internetservice.h"
-#include "internetmodel.h"
+#include "internet/core/internetservice.h"
+#include "internet/core/internetmodel.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "core/mimedata.h"

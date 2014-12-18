@@ -24,7 +24,7 @@
 #include "ui_vksettingspage.h"
 #include "core/application.h"
 #include "core/logging.h"
-#include "internet/vkservice.h"
+#include "internet/vk/vkservice.h"
 
 VkSettingsPage::VkSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),

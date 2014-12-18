@@ -20,7 +20,7 @@
 
 #include "searchprovider.h"
 #include "covers/albumcoverloaderoptions.h"
-#include "internet/soundcloudservice.h"
+#include "internet/soundcloud/soundcloudservice.h"
 
 class AlbumCoverLoader;
 

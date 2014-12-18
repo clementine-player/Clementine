@@ -19,8 +19,8 @@
 */
 
 #include "internetviewcontainer.h"
-#include "internetmodel.h"
-#include "internetservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetservice.h"
 #include "ui_internetviewcontainer.h"
 #include "core/application.h"
 #include "core/mergedproxymodel.h"

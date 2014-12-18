@@ -45,7 +45,7 @@
 #ifndef INTERNET_SEAFILESERVICE_H_
 #define INTERNET_SEAFILESERVICE_H_
 
-#include "cloudfileservice.h"
+#include "internet/core/cloudfileservice.h"
 
 #include <QDateTime>
 #include <QMutex>

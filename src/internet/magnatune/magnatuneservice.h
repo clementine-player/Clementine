@@ -22,7 +22,7 @@
 
 #include <QXmlStreamReader>
 
-#include "internetservice.h"
+#include "internet/core/internetservice.h"
 
 class QNetworkAccessManager;
 class QSortFilterProxyModel;

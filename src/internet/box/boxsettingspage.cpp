@@ -23,7 +23,7 @@
 #include "ui_boxsettingspage.h"
 #include "core/application.h"
 #include "internet/box/boxservice.h"
-#include "internet/internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "ui/settingsdialog.h"
 
 BoxSettingsPage::BoxSettingsPage(SettingsDialog* parent)

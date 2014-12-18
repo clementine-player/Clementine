@@ -28,7 +28,7 @@
 #include <QList>
 #include <QPair>
 
-#include "cloudfileservice.h"
+#include "internet/core/cloudfileservice.h"
 
 // Reproduce the file system of Seafile server libraries
 // Analog to a tree

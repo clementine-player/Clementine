@@ -22,8 +22,8 @@
 
 #include "ui_skydrivesettingspage.h"
 #include "core/application.h"
-#include "internet/skydriveservice.h"
-#include "internet/internetmodel.h"
+#include "internet/skydrive/skydriveservice.h"
+#include "internet/core/internetmodel.h"
 #include "ui/settingsdialog.h"
 
 SkydriveSettingsPage::SkydriveSettingsPage(SettingsDialog* parent)

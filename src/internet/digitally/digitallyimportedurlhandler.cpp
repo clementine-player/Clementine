@@ -20,7 +20,7 @@
 
 #include "digitallyimportedservicebase.h"
 #include "digitallyimportedurlhandler.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"

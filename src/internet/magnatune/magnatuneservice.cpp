@@ -25,7 +25,7 @@
 #include "magnatuneplaylistitem.h"
 #include "magnatuneservice.h"
 #include "magnatuneurlhandler.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"

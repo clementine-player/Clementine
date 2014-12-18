@@ -29,7 +29,7 @@
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
-#include "internet/localredirectserver.h"
+#include "internet/core/localredirectserver.h"
 
 namespace {
 static const char* kAppKey = "qh6ca27eclt9p2k";

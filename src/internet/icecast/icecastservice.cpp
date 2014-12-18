@@ -34,7 +34,7 @@
 #include "icecastbackend.h"
 #include "icecastfilterwidget.h"
 #include "icecastmodel.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/database.h"

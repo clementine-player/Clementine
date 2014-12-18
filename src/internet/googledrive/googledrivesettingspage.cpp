@@ -22,7 +22,7 @@
 #include "googledrivesettingspage.h"
 #include "ui_googledrivesettingspage.h"
 #include "core/application.h"
-#include "internet/internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "ui/settingsdialog.h"
 
 #include <QSortFilterProxyModel>

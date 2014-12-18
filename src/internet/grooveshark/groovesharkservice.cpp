@@ -41,10 +41,10 @@
 
 #include "qtiocompressor.h"
 
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "groovesharkradio.h"
 #include "groovesharkurlhandler.h"
-#include "searchboxwidget.h"
+#include "internet/core/searchboxwidget.h"
 
 #include "core/application.h"
 #include "core/closure.h"

@@ -18,7 +18,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "cloudfileservice.h"
+#include "internet/core/cloudfileservice.h"
 
 #include <QMenu>
 #include <QSortFilterProxyModel>
@@ -30,8 +30,8 @@
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "globalsearch/globalsearch.h"
-#include "internet/cloudfilesearchprovider.h"
-#include "internet/internetmodel.h"
+#include "internet/core/cloudfilesearchprovider.h"
+#include "internet/core/internetmodel.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 #include "playlist/playlist.h"

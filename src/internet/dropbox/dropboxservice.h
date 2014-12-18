@@ -19,7 +19,7 @@
 #ifndef INTERNET_DROPBOXSERVICE_H_
 #define INTERNET_DROPBOXSERVICE_H_
 
-#include "internet/cloudfileservice.h"
+#include "internet/core/cloudfileservice.h"
 
 #include "core/tagreaderclient.h"
 

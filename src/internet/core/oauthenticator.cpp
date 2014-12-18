@@ -18,7 +18,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "oauthenticator.h"
+#include "internet/core/oauthenticator.h"
 
 #include <QDesktopServices>
 #include <QStringList>
@@ -28,7 +28,7 @@
 
 #include "core/closure.h"
 #include "core/logging.h"
-#include "internet/localredirectserver.h"
+#include "internet/core/localredirectserver.h"
 
 const char* OAuthenticator::kRemoteURL =
     "https://clementine-data.appspot.com/skydrive";

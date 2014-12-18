@@ -26,8 +26,8 @@
 #include "core/application.h"
 #include "core/player.h"
 #include "core/waitforsignal.h"
-#include "internet/oauthenticator.h"
-#include "internet/skydriveurlhandler.h"
+#include "internet/core/oauthenticator.h"
+#include "internet/skydrive/skydriveurlhandler.h"
 
 namespace {
 

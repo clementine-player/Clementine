@@ -89,7 +89,7 @@
 #endif
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/lastfmservice.h"
+#include "internet/lastfm/lastfmservice.h"
 #else
 class LastFMService;
 #endif

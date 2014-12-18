@@ -18,7 +18,7 @@
 #include "generator.h"
 #include "querygenerator.h"
 #include "core/logging.h"
-#include "internet/jamendodynamicplaylist.h"
+#include "internet/jamendo/jamendodynamicplaylist.h"
 
 #include <QSettings>
 

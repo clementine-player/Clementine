@@ -20,8 +20,8 @@
 
 #include "core/application.h"
 #include "ui/settingsdialog.h"
-#include "internetservice.h"
-#include "internetmodel.h"
+#include "internet/core/internetservice.h"
+#include "internet/core/internetmodel.h"
 
 #include <QSettings>
 

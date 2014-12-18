@@ -21,7 +21,7 @@
 
 #include <qjson/parser.h>
 
-#include "oauthenticator.h"
+#include "internet/core/oauthenticator.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"

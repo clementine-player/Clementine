@@ -24,7 +24,7 @@
 #include "config.h"
 #include "spotifymessages.pb.h"
 #include "spotifyservice.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "ui_spotifysettingspage.h"
 #include "core/network.h"
 #include "ui/iconloader.h"

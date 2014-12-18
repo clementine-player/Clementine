@@ -34,7 +34,7 @@ uint qHash(const lastfm::Track& track);
 
 #include "lastfmcompat.h"
 
-#include "internet/scrobbler.h"
+#include "internet/core/scrobbler.h"
 
 class Application;
 class LastFMUrlHandler;

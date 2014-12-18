@@ -21,7 +21,7 @@
 #include "subsonicsettingspage.h"
 #include "ui_subsonicsettingspage.h"
 #include "core/logging.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 
 #include <QSettings>
 

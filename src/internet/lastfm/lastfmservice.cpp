@@ -50,8 +50,8 @@
 #endif
 
 #include "lastfmcompat.h"
-#include "internetmodel.h"
-#include "internetplaylistitem.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetplaylistitem.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"

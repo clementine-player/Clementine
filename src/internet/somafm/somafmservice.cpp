@@ -21,7 +21,7 @@
 
 #include "somafmservice.h"
 #include "somafmurlhandler.h"
-#include "internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"

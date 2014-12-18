@@ -28,9 +28,9 @@
 #include "core/application.h"
 #include "core/player.h"
 #include "core/waitforsignal.h"
-#include "internet/seafileurlhandler.h"
+#include "internet/seafile/seafileurlhandler.h"
 #include "library/librarybackend.h"
-#include "internet/oauthenticator.h"
+#include "internet/core/oauthenticator.h"
 
 const char* SeafileService::kServiceName = "Seafile";
 const char* SeafileService::kSettingsGroup = "Seafile";

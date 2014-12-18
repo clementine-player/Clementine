@@ -16,9 +16,9 @@
 */
 
 #include "tagwidget.h"
-#include "internet/lastfmservice.h"
-#include "internet/internetmimedata.h"
-#include "internet/internetmodel.h"
+#include "internet/lastfm/lastfmservice.h"
+#include "internet/core/internetmimedata.h"
+#include "internet/core/internetmodel.h"
 #include "playlist/playlistitemmimedata.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
