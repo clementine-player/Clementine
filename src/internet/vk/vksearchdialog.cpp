@@ -16,13 +16,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "vksearchdialog.h"
+#include "ui_vksearchdialog.h"
+
 #include <QKeyEvent>
 #include <QPushButton>
 
 #include "vkservice.h"
-
-#include "vksearchdialog.h"
-#include "ui_vksearchdialog.h"
 
 VkSearchDialog::VkSearchDialog(VkService* service, QWidget* parent)
     : QDialog(parent),

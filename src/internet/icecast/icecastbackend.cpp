@@ -20,11 +20,12 @@
 */
 
 #include "icecastbackend.h"
-#include "core/database.h"
-#include "core/scopedtransaction.h"
 
 #include <QSqlQuery>
 #include <QVariant>
+
+#include "core/database.h"
+#include "core/scopedtransaction.h"
 
 const char* IcecastBackend::kTableName = "icecast_stations";
 

@@ -17,15 +17,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "digitallyimportedclient.h"
-#include "digitallyimportedservicebase.h"
 #include "digitallyimportedsettingspage.h"
 #include "ui_digitallyimportedsettingspage.h"
-#include "core/closure.h"
 
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QSettings>
+
+#include "digitallyimportedclient.h"
+#include "digitallyimportedservicebase.h"
+#include "core/closure.h"
 
 DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(
     SettingsDialog* dialog)

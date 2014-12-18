@@ -17,15 +17,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "icecastmodel.h"
 #include "icecastfilterwidget.h"
-#include "ui_icecastfilterwidget.h"
-#include "ui/iconloader.h"
 
 #include <QKeyEvent>
 #include <QMenu>
 #include <QSettings>
 #include <QSignalMapper>
+
+#include "icecastmodel.h"
+#include "ui_icecastfilterwidget.h"
+#include "ui/iconloader.h"
 
 const char* IcecastFilterWidget::kSettingsGroup = "Icecast";
 

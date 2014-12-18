@@ -20,15 +20,16 @@
 */
 
 #include "spotifyserver.h"
-#include "core/closure.h"
-#include "core/logging.h"
-
-#include "spotifymessages.pb.h"
 
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QTimer>
 #include <QUrl>
+
+#include "core/closure.h"
+#include "core/logging.h"
+
+#include "spotifymessages.pb.h"
 
 SpotifyServer::SpotifyServer(QObject* parent)
     : AbstractMessageHandler<pb::spotify::Message>(nullptr, parent),

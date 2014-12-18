@@ -21,9 +21,6 @@
 
 #include "jamendodynamicplaylist.h"
 
-#include "jamendoplaylistitem.h"
-#include "jamendoservice.h"
-
 #include <QEventLoop>
 #include <QHttp>
 #include <QHttpRequestHeader>
@@ -31,7 +28,10 @@
 
 #include "core/logging.h"
 #include "core/network.h"
+#include "jamendoplaylistitem.h"
+#include "jamendoservice.h"
 #include "library/librarybackend.h"
+
 
 const char* JamendoDynamicPlaylist::kUrl =
     "http://api.jamendo.com/get2/id/track/plain/";

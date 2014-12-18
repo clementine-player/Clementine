@@ -23,6 +23,16 @@
 
 #include "jamendoservice.h"
 
+#include <QDesktopServices>
+#include <QFutureWatcher>
+#include <QMenu>
+#include <QMessageBox>
+#include <QNetworkReply>
+#include <QSortFilterProxyModel>
+#include <QtConcurrentRun>
+#include <QXmlStreamReader>
+#include "qtiocompressor.h"
+
 #include "jamendodynamicplaylist.h"
 #include "jamendoplaylistitem.h"
 #include "internet/core/internetmodel.h"
@@ -42,16 +52,6 @@
 #include "smartplaylists/generator.h"
 #include "smartplaylists/querygenerator.h"
 #include "ui/iconloader.h"
-
-#include <QDesktopServices>
-#include <QFutureWatcher>
-#include <QMenu>
-#include <QMessageBox>
-#include <QNetworkReply>
-#include <QSortFilterProxyModel>
-#include <QtConcurrentRun>
-#include <QXmlStreamReader>
-#include "qtiocompressor.h"
 
 const char* JamendoService::kServiceName = "Jamendo";
 const char* JamendoService::kDirectoryUrl =

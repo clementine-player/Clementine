@@ -21,14 +21,15 @@
 */
 
 #include "internet/core/internetservice.h"
+
+#include <QMenu>
+#include <QStandardItem>
+
 #include "internet/core/internetmodel.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "core/mimedata.h"
 #include "ui/iconloader.h"
-
-#include <QMenu>
-#include <QStandardItem>
 
 InternetService::InternetService(const QString& name, Application* app,
                                  InternetModel* model, QObject* parent)

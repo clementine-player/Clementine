@@ -20,6 +20,15 @@
 */
 
 #include "somafmservice.h"
+
+#include <QCoreApplication>
+#include <QDesktopServices>
+#include <QMenu>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QXmlStreamReader>
+#include <QtDebug>
+
 #include "somafmurlhandler.h"
 #include "internet/core/internetmodel.h"
 #include "core/application.h"
@@ -32,14 +41,6 @@
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/somafmsearchprovider.h"
 #include "ui/iconloader.h"
-
-#include <QCoreApplication>
-#include <QDesktopServices>
-#include <QMenu>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QXmlStreamReader>
-#include <QtDebug>
 
 const int SomaFMServiceBase::kStreamsCacheDurationSecs =
     60 * 60 * 24 * 28;  // 4 weeks

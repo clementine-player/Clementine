@@ -20,10 +20,11 @@
 
 #include "subsonicsettingspage.h"
 #include "ui_subsonicsettingspage.h"
-#include "core/logging.h"
-#include "internet/core/internetmodel.h"
 
 #include <QSettings>
+
+#include "core/logging.h"
+#include "internet/core/internetmodel.h"
 
 SubsonicSettingsPage::SubsonicSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),

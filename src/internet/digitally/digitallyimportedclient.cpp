@@ -18,13 +18,14 @@
 */
 
 #include "digitallyimportedclient.h"
-#include "core/logging.h"
-#include "core/network.h"
 
 #include <qjson/parser.h>
 
 #include <QNetworkReply>
 #include <QNetworkRequest>
+
+#include "core/logging.h"
+#include "core/network.h"
 
 // The API used here is undocumented - it was reverse engineered by watching
 // calls made by the sky.fm android app:

@@ -20,20 +20,20 @@
 */
 
 #include "spotifysettingspage.h"
-
-#include "config.h"
-#include "spotifymessages.pb.h"
-#include "spotifyservice.h"
-#include "internet/core/internetmodel.h"
 #include "ui_spotifysettingspage.h"
-#include "core/network.h"
-#include "ui/iconloader.h"
 
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QSettings>
 #include <QtDebug>
+
+#include "config.h"
+#include "spotifymessages.pb.h"
+#include "spotifyservice.h"
+#include "internet/core/internetmodel.h"
+#include "core/network.h"
+#include "ui/iconloader.h"
 
 SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),

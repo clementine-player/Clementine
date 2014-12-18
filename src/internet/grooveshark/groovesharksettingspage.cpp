@@ -18,19 +18,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "groovesharkservice.h"
 #include "groovesharksettingspage.h"
-#include "internet/core/internetmodel.h"
-#include "core/logging.h"
-#include "core/network.h"
 #include "ui_groovesharksettingspage.h"
-#include "ui/iconloader.h"
 
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QSettings>
 #include <QtDebug>
+
+#include "groovesharkservice.h"
+#include "internet/core/internetmodel.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "ui/iconloader.h"
 
 GroovesharkSettingsPage::GroovesharkSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),

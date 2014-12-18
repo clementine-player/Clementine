@@ -19,18 +19,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internet/core/internetmodel.h"
-#include "somafmservice.h"
 #include "somafmurlhandler.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/taskmanager.h"
-#include "playlistparsers/playlistparser.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QSettings>
 #include <QTemporaryFile>
+
+#include "internet/core/internetmodel.h"
+#include "somafmservice.h"
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/taskmanager.h"
+#include "playlistparsers/playlistparser.h"
 
 SomaFMUrlHandler::SomaFMUrlHandler(Application* app, SomaFMServiceBase* service,
                                    QObject* parent)

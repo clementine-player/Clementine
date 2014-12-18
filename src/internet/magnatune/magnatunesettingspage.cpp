@@ -21,16 +21,16 @@
 
 #include "magnatunesettingspage.h"
 
-#include "core/network.h"
-#include "magnatuneservice.h"
-#include "internet/core/internetmodel.h"
-#include "ui_magnatunesettingspage.h"
-
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QSettings>
 #include <QtDebug>
+
+#include "core/network.h"
+#include "magnatuneservice.h"
+#include "internet/core/internetmodel.h"
+#include "ui_magnatunesettingspage.h"
 
 MagnatuneSettingsPage::MagnatuneSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),

@@ -16,7 +16,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "vkmusiccache.h"
-#include "vkservice.h"
 
 #include <qmath.h>
 #include <QDir>
@@ -24,6 +23,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
+#include "vkservice.h"
 
 VkMusicCache::VkMusicCache(Application* app, VkService* service)
     : QObject(service),

@@ -18,8 +18,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "digitallyimportedservicebase.h"
 #include "digitallyimportedurlhandler.h"
+
+#include "digitallyimportedservicebase.h"
 #include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/logging.h"

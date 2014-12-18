@@ -21,9 +21,25 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "magnatuneservice.h"
+
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QXmlStreamReader>
+#include <QSortFilterProxyModel>
+#include <QMenu>
+#include <QDesktopServices>
+#include <QCoreApplication>
+#include <QSettings>
+
+#include <QtDebug>
+
+#include "qtiocompressor.h"
+
+
 #include "magnatunedownloaddialog.h"
 #include "magnatuneplaylistitem.h"
-#include "magnatuneservice.h"
 #include "magnatuneurlhandler.h"
 #include "internet/core/internetmodel.h"
 #include "core/application.h"
@@ -42,20 +58,6 @@
 #include "library/libraryfilterwidget.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
-
-#include "qtiocompressor.h"
-
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QXmlStreamReader>
-#include <QSortFilterProxyModel>
-#include <QMenu>
-#include <QDesktopServices>
-#include <QCoreApplication>
-#include <QSettings>
-
-#include <QtDebug>
 
 const char* MagnatuneService::kServiceName = "Magnatune";
 const char* MagnatuneService::kSettingsGroup = "Magnatune";

@@ -20,17 +20,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internet/core/internetmodel.h"
 #include "savedradio.h"
+
+#include <QSettings>
+#include <QMenu>
+
+#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/mimedata.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/savedradiosearchprovider.h"
 #include "ui/addstreamdialog.h"
 #include "ui/iconloader.h"
-
-#include <QSettings>
-#include <QMenu>
 
 const char* SavedRadio::kServiceName = "SavedRadio";
 const char* SavedRadio::kSettingsGroup = "SavedRadio";

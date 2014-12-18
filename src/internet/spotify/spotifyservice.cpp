@@ -21,12 +21,23 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "spotifyservice.h"
+
+#include <QCoreApplication>
+#include <QFile>
+#include <QFileInfo>
+#include <QMenu>
+#include <QMessageBox>
+#include <QMimeData>
+#include <QProcess>
+#include <QSettings>
+#include <QVariant>
+
 #include "blobversion.h"
 #include "config.h"
 #include "internet/core/internetmodel.h"
 #include "internet/core/searchboxwidget.h"
 #include "spotifyserver.h"
-#include "spotifyservice.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
@@ -42,16 +53,6 @@
 #include "playlist/playlistmanager.h"
 #include "ui/iconloader.h"
 #include "widgets/didyoumean.h"
-
-#include <QCoreApplication>
-#include <QFile>
-#include <QFileInfo>
-#include <QMenu>
-#include <QMessageBox>
-#include <QMimeData>
-#include <QProcess>
-#include <QSettings>
-#include <QVariant>
 
 #ifdef HAVE_SPOTIFY_DOWNLOADER
 #include "spotifyblobdownloader.h"

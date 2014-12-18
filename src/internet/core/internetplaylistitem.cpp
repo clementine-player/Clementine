@@ -20,15 +20,16 @@
 */
 
 #include "internet/core/internetplaylistitem.h"
+
+#include <QSettings>
+#include <QApplication>
+#include <QtDebug>
+
 #include "internet/core/internetservice.h"
 #include "internet/core/internetmodel.h"
 #include "core/settingsprovider.h"
 #include "library/sqlrow.h"
 #include "playlist/playlistbackend.h"
-
-#include <QSettings>
-#include <QApplication>
-#include <QtDebug>
 
 InternetPlaylistItem::InternetPlaylistItem(const QString& type)
     : PlaylistItem(type), set_service_icon_(false) {}

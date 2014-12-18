@@ -18,14 +18,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internet/core/internetservice.h"
 #include "internet/core/searchboxwidget.h"
 #include "ui_searchboxwidget.h"
-#include "ui/iconloader.h"
-#include "widgets/didyoumean.h"
 
 #include <QKeyEvent>
 #include <QMenu>
+
+#include "internet/core/internetservice.h"
+#include "ui/iconloader.h"
+#include "widgets/didyoumean.h"
 
 SearchBoxWidget::SearchBoxWidget(InternetService* service)
     : service_(service),

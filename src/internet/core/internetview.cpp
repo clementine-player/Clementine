@@ -20,11 +20,12 @@
 */
 
 #include "internetview.h"
+
+#include <QContextMenuEvent>
+
 #include "internet/core/internetmodel.h"
 #include "core/mergedproxymodel.h"
 #include "library/libraryview.h"
-
-#include <QContextMenuEvent>
 
 InternetView::InternetView(QWidget* parent) : AutoExpandingTreeView(parent) {
   setItemDelegate(new LibraryItemDelegate(this));

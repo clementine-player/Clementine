@@ -17,6 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "vkconnection.h"
+
 #include <QDateTime>
 #include <QDesktopServices>
 
