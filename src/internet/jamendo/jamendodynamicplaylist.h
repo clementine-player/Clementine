@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_JAMENDODYNAMICPLAYLIST_H_
-#define INTERNET_JAMENDODYNAMICPLAYLIST_H_
+#ifndef INTERNET_JAMENDO_JAMENDODYNAMICPLAYLIST_H_
+#define INTERNET_JAMENDO_JAMENDODYNAMICPLAYLIST_H_
 
 #include "smartplaylists/generator.h"
 
@@ -79,4 +79,4 @@ class JamendoDynamicPlaylist : public smart_playlists::Generator {
 QDataStream& operator<<(QDataStream& s, const JamendoDynamicPlaylist& p);
 QDataStream& operator>>(QDataStream& s, JamendoDynamicPlaylist& p);
 
-#endif  // INTERNET_JAMENDODYNAMICPLAYLIST_H_
+#endif  // INTERNET_JAMENDO_JAMENDODYNAMICPLAYLIST_H_

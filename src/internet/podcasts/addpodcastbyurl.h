@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_ADDPODCASTBYURL_H_
-#define PODCASTS_ADDPODCASTBYURL_H_
+#ifndef INTERNET_PODCASTS_ADDPODCASTBYURL_H_
+#define INTERNET_PODCASTS_ADDPODCASTBYURL_H_
 
 #include "addpodcastpage.h"
 
@@ -51,4 +51,4 @@ class AddPodcastByUrl : public AddPodcastPage {
   PodcastUrlLoader* loader_;
 };
 
-#endif  // PODCASTS_ADDPODCASTBYURL_H_
+#endif  // INTERNET_PODCASTS_ADDPODCASTBYURL_H_

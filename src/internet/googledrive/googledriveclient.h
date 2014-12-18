@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_GOOGLEDRIVECLIENT_H_
-#define INTERNET_GOOGLEDRIVECLIENT_H_
+#ifndef INTERNET_GOOGLEDRIVE_GOOGLEDRIVECLIENT_H_
+#define INTERNET_GOOGLEDRIVE_GOOGLEDRIVECLIENT_H_
 
 #include <QDateTime>
 #include <QList>
@@ -170,4 +170,4 @@ class Client : public QObject {
 
 }  // namespace google_drive
 
-#endif  // INTERNET_GOOGLEDRIVECLIENT_H_
+#endif  // INTERNET_GOOGLEDRIVE_GOOGLEDRIVECLIENT_H_

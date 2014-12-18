@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SUBSONICURLHANDLER_H_
-#define INTERNET_SUBSONICURLHANDLER_H_
+#ifndef INTERNET_SUBSONIC_SUBSONICURLHANDLER_H_
+#define INTERNET_SUBSONIC_SUBSONICURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -39,4 +39,4 @@ class SubsonicUrlHandler : public UrlHandler {
   SubsonicService* service_;
 };
 
-#endif  // INTERNET_SUBSONICURLHANDLER_H_
+#endif  // INTERNET_SUBSONIC_SUBSONICURLHANDLER_H_

@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_LASTFMCOMPAT_H_
-#define INTERNET_LASTFMCOMPAT_H_
+#ifndef INTERNET_LASTFM_LASTFMCOMPAT_H_
+#define INTERNET_LASTFM_LASTFMCOMPAT_H_
 
 #include "config.h"
 #include "fixlastfm.h"
@@ -63,4 +63,4 @@ typedef lastfm::AuthenticatedUser AuthenticatedUser;
 }  // namespace compat
 }  // namespace lastfm
 
-#endif  // INTERNET_LASTFMCOMPAT_H_
+#endif  // INTERNET_LASTFM_LASTFMCOMPAT_H_

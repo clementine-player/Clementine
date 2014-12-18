@@ -20,8 +20,8 @@
  *  - <florian.bigard@gmail.com>
 */
 
-#ifndef INTERNET_SEAFILETREE_H_
-#define INTERNET_SEAFILETREE_H_
+#ifndef INTERNET_SEAFILE_SEAFILETREE_H_
+#define INTERNET_SEAFILE_SEAFILETREE_H_
 
 #include <QObject>
 #include <QString>
@@ -182,4 +182,4 @@ QDataStream& operator>>(QDataStream& in, SeafileTree::Entry& entry);
 QDataStream& operator<<(QDataStream& out, SeafileTree::TreeItem* item);
 QDataStream& operator>>(QDataStream& in, SeafileTree::TreeItem*& item);
 
-#endif  // INTERNET_SEAFILETREE_H_
+#endif  // INTERNET_SEAFILE_SEAFILETREE_H_

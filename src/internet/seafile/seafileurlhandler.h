@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SEAFILEURLHANDLER_H_
-#define INTERNET_SEAFILEURLHANDLER_H_
+#ifndef INTERNET_SEAFILE_SEAFILEURLHANDLER_H_
+#define INTERNET_SEAFILE_SEAFILEURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -36,4 +36,4 @@ class SeafileUrlHandler : public UrlHandler {
   SeafileService* service_;
 };
 
-#endif  // INTERNET_SEAFILEURLHANDLER_H_
+#endif  // INTERNET_SEAFILE_SEAFILEURLHANDLER_H_

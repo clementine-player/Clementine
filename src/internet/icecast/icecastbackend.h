@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_ICECASTBACKEND_H_
-#define INTERNET_ICECASTBACKEND_H_
+#ifndef INTERNET_ICECAST_ICECASTBACKEND_H_
+#define INTERNET_ICECAST_ICECASTBACKEND_H_
 
 #include "core/song.h"
 
@@ -67,4 +67,4 @@ class IcecastBackend : public QObject {
   Database* db_;
 };
 
-#endif  // INTERNET_ICECASTBACKEND_H_
+#endif  // INTERNET_ICECAST_ICECASTBACKEND_H_

@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SEAFILESETTINGSPAGE_H_
-#define INTERNET_SEAFILESETTINGSPAGE_H_
+#ifndef INTERNET_SEAFILE_SEAFILESETTINGSPAGE_H_
+#define INTERNET_SEAFILE_SEAFILESETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -48,4 +48,4 @@ class SeafileSettingsPage : public SettingsPage {
   SeafileService* service_;
 };
 
-#endif  // INTERNET_SEAFILESETTINGSPAGE_H_
+#endif  // INTERNET_SEAFILE_SEAFILESETTINGSPAGE_H_

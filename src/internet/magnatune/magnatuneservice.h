@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_MAGNATUNESERVICE_H_
-#define INTERNET_MAGNATUNESERVICE_H_
+#ifndef INTERNET_MAGNATUNE_MAGNATUNESERVICE_H_
+#define INTERNET_MAGNATUNE_MAGNATUNESERVICE_H_
 
 #include <QXmlStreamReader>
 
@@ -129,4 +129,4 @@ class MagnatuneService : public InternetService {
   QNetworkAccessManager* network_;
 };
 
-#endif  // INTERNET_MAGNATUNESERVICE_H_
+#endif  // INTERNET_MAGNATUNE_MAGNATUNESERVICE_H_

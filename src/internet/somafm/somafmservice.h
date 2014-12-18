@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SOMAFMSERVICE_H_
-#define INTERNET_SOMAFMSERVICE_H_
+#ifndef INTERNET_SOMAFM_SOMAFMSERVICE_H_
+#define INTERNET_SOMAFM_SOMAFMSERVICE_H_
 
 #include <QXmlStreamReader>
 
@@ -119,4 +119,4 @@ QDataStream& operator<<(QDataStream& out, const SomaFMService::Stream& stream);
 QDataStream& operator>>(QDataStream& in, SomaFMService::Stream& stream);
 Q_DECLARE_METATYPE(SomaFMService::Stream)
 
-#endif  // INTERNET_SOMAFMSERVICE_H_
+#endif  // INTERNET_SOMAFM_SOMAFMSERVICE_H_

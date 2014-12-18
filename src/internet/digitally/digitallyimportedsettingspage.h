@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_DIGITALLYIMPORTEDSETTINGSPAGE_H_
-#define INTERNET_DIGITALLYIMPORTEDSETTINGSPAGE_H_
+#ifndef INTERNET_DIGITALLY_DIGITALLYIMPORTEDSETTINGSPAGE_H_
+#define INTERNET_DIGITALLY_DIGITALLYIMPORTEDSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -53,4 +53,4 @@ class DigitallyImportedSettingsPage : public SettingsPage {
   DigitallyImportedClient* client_;
 };
 
-#endif  // INTERNET_DIGITALLYIMPORTEDSETTINGSPAGE_H_
+#endif  // INTERNET_DIGITALLY_DIGITALLYIMPORTEDSETTINGSPAGE_H_

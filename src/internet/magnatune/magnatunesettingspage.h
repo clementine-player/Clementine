@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_MAGNATUNESETTINGSPAGE_H_
-#define INTERNET_MAGNATUNESETTINGSPAGE_H_
+#ifndef INTERNET_MAGNATUNE_MAGNATUNESETTINGSPAGE_H_
+#define INTERNET_MAGNATUNE_MAGNATUNESETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -54,4 +54,4 @@ class MagnatuneSettingsPage : public SettingsPage {
   bool logged_in_;
 };
 
-#endif  // INTERNET_MAGNATUNESETTINGSPAGE_H_
+#endif  // INTERNET_MAGNATUNE_MAGNATUNESETTINGSPAGE_H_

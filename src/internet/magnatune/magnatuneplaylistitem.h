@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_MAGNATUNEPLAYLISTITEM_H_
-#define INTERNET_MAGNATUNEPLAYLISTITEM_H_
+#ifndef INTERNET_MAGNATUNE_MAGNATUNEPLAYLISTITEM_H_
+#define INTERNET_MAGNATUNE_MAGNATUNEPLAYLISTITEM_H_
 
 #include "library/libraryplaylistitem.h"
 
@@ -32,4 +32,4 @@ class MagnatunePlaylistItem : public LibraryPlaylistItem {
   QUrl Url() const;
 };
 
-#endif  // INTERNET_MAGNATUNEPLAYLISTITEM_H_
+#endif  // INTERNET_MAGNATUNE_MAGNATUNEPLAYLISTITEM_H_

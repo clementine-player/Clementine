@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_ICECASTSERVICE_H_
-#define INTERNET_ICECASTSERVICE_H_
+#ifndef INTERNET_ICECAST_ICECASTSERVICE_H_
+#define INTERNET_ICECAST_ICECASTSERVICE_H_
 
 #include "internet/core/internetservice.h"
 
@@ -81,4 +81,4 @@ class IcecastService : public InternetService {
   int load_directory_task_id_;
 };
 
-#endif  // INTERNET_ICECASTSERVICE_H_
+#endif  // INTERNET_ICECAST_ICECASTSERVICE_H_

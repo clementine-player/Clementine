@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INTERNET_GROOVESHARKSERVICE_H_
-#define INTERNET_GROOVESHARKSERVICE_H_
+#ifndef INTERNET_GROOVESHARK_GROOVESHARKSERVICE_H_
+#define INTERNET_GROOVESHARK_GROOVESHARKSERVICE_H_
 
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetservice.h"
@@ -336,4 +336,4 @@ class GroovesharkService : public InternetService {
   static const char* kApiSecret;
 };
 
-#endif  // INTERNET_GROOVESHARKSERVICE_H_
+#endif  // INTERNET_GROOVESHARK_GROOVESHARKSERVICE_H_

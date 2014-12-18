@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_GOOGLEDRIVESETTINGSPAGE_H_
-#define INTERNET_GOOGLEDRIVESETTINGSPAGE_H_
+#ifndef INTERNET_GOOGLEDRIVE_GOOGLEDRIVESETTINGSPAGE_H_
+#define INTERNET_GOOGLEDRIVE_GOOGLEDRIVESETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -52,4 +52,4 @@ class GoogleDriveSettingsPage : public SettingsPage {
   GoogleDriveService* service_;
 };
 
-#endif  // INTERNET_GOOGLEDRIVESETTINGSPAGE_H_
+#endif  // INTERNET_GOOGLEDRIVE_GOOGLEDRIVESETTINGSPAGE_H_

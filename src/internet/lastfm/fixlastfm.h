@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_FIXLASTFM_H_
-#define INTERNET_FIXLASTFM_H_
+#ifndef INTERNET_LASTFM_FIXLASTFM_H_
+#define INTERNET_LASTFM_FIXLASTFM_H_
 
 // Include this before <lastfm/Track> to fix a compile error in release mode
 
@@ -29,4 +29,4 @@
 QDebug& operator<<(QDebug&, const QUrl&);
 #endif
 
-#endif  // INTERNET_FIXLASTFM_H_
+#endif  // INTERNET_LASTFM_FIXLASTFM_H_

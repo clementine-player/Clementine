@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_VKURLHANDLER_H_
-#define INTERNET_VKURLHANDLER_H_
+#ifndef INTERNET_VK_VKURLHANDLER_H_
+#define INTERNET_VK_VKURLHANDLER_H_
 
 #include "core/urlhandler.h"
 #include <QFile>
@@ -41,4 +41,4 @@ class VkUrlHandler : public UrlHandler {
   VkService* service_;
 };
 
-#endif  // INTERNET_VKURLHANDLER_H_
+#endif  // INTERNET_VK_VKURLHANDLER_H_

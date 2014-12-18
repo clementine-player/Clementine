@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SKYDRIVESETTINGSPAGE_H_
-#define INTERNET_SKYDRIVESETTINGSPAGE_H_
+#ifndef INTERNET_SKYDRIVE_SKYDRIVESETTINGSPAGE_H_
+#define INTERNET_SKYDRIVE_SKYDRIVESETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -51,4 +51,4 @@ class SkydriveSettingsPage : public SettingsPage {
   SkydriveService* service_;
 };
 
-#endif  // INTERNET_SKYDRIVESETTINGSPAGE_H_
+#endif  // INTERNET_SKYDRIVE_SKYDRIVESETTINGSPAGE_H_

@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_GPODDERSYNC_H_
-#define PODCASTS_GPODDERSYNC_H_
+#ifndef INTERNET_PODCASTS_GPODDERSYNC_H_
+#define INTERNET_PODCASTS_GPODDERSYNC_H_
 
 #include "podcastepisode.h"
 
@@ -117,4 +117,4 @@ class GPodderSync : public QObject {
   bool flushing_queue_;
 };
 
-#endif  // PODCASTS_GPODDERSYNC_H_
+#endif  // INTERNET_PODCASTS_GPODDERSYNC_H_

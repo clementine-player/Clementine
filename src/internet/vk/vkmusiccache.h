@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_VKMUSICCACHE_H_
-#define INTERNET_VKMUSICCACHE_H_
+#ifndef INTERNET_VK_VKMUSICCACHE_H_
+#define INTERNET_VK_VKMUSICCACHE_H_
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -76,4 +76,4 @@ class VkMusicCache : public QObject {
   QNetworkReply* reply_;
 };
 
-#endif  // INTERNET_VKMUSICCACHE_H_
+#endif  // INTERNET_VK_VKMUSICCACHE_H_

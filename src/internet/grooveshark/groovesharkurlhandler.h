@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_GROOVESHARKURLHANDLER_H_
-#define INTERNET_GROOVESHARKURLHANDLER_H_
+#ifndef INTERNET_GROOVESHARK_GROOVESHARKURLHANDLER_H_
+#define INTERNET_GROOVESHARK_GROOVESHARKURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -49,4 +49,4 @@ class GroovesharkUrlHandler : public UrlHandler {
   QString last_stream_key_;
 };
 
-#endif  // INTERNET_GROOVESHARKURLHANDLER_H_
+#endif  // INTERNET_GROOVESHARK_GROOVESHARKURLHANDLER_H_

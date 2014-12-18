@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SPOTIFYBLOBDOWNLOADER_H_
-#define INTERNET_SPOTIFYBLOBDOWNLOADER_H_
+#ifndef INTERNET_SPOTIFY_SPOTIFYBLOBDOWNLOADER_H_
+#define INTERNET_SPOTIFY_SPOTIFYBLOBDOWNLOADER_H_
 
 #include <QObject>
 
@@ -62,4 +62,4 @@ class SpotifyBlobDownloader : public QObject {
   QProgressDialog* progress_;
 };
 
-#endif  // INTERNET_SPOTIFYBLOBDOWNLOADER_H_
+#endif  // INTERNET_SPOTIFY_SPOTIFYBLOBDOWNLOADER_H_

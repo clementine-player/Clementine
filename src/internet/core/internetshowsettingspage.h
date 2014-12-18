@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_INTERNETSHOWSETTINGSPAGE_H_
-#define INTERNET_INTERNETSHOWSETTINGSPAGE_H_
+#ifndef INTERNET_CORE_INTERNETSHOWSETTINGSPAGE_H_
+#define INTERNET_CORE_INTERNETSHOWSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 #include "ui_internetshowsettingspage.h"
@@ -40,4 +40,4 @@ class InternetShowSettingsPage : public SettingsPage {
   std::unique_ptr<Ui_InternetShowSettingsPage> ui_;
 };
 
-#endif  // INTERNET_INTERNETSHOWSETTINGSPAGE_H_
+#endif  // INTERNET_CORE_INTERNETSHOWSETTINGSPAGE_H_

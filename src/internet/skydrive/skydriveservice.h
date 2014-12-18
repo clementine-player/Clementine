@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SKYDRIVESERVICE_H_
-#define INTERNET_SKYDRIVESERVICE_H_
+#ifndef INTERNET_SKYDRIVE_SKYDRIVESERVICE_H_
+#define INTERNET_SKYDRIVE_SKYDRIVESERVICE_H_
 
 #include "internet/core/cloudfileservice.h"
 
@@ -62,4 +62,4 @@ class SkydriveService : public CloudFileService {
   QDateTime expiry_time_;
 };
 
-#endif  // INTERNET_SKYDRIVESERVICE_H_
+#endif  // INTERNET_SKYDRIVE_SKYDRIVESERVICE_H_

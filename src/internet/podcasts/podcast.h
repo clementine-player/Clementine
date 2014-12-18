@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCAST_H_
-#define PODCASTS_PODCAST_H_
+#ifndef INTERNET_PODCASTS_PODCAST_H_
+#define INTERNET_PODCASTS_PODCAST_H_
 
 #include "podcastepisode.h"
 
@@ -109,4 +109,4 @@ Q_DECLARE_METATYPE(Podcast)
 typedef QList<Podcast> PodcastList;
 Q_DECLARE_METATYPE(QList<Podcast>)
 
-#endif  // PODCASTS_PODCAST_H_
+#endif  // INTERNET_PODCASTS_PODCAST_H_

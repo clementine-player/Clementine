@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_MAGNATUNEDOWNLOADDIALOG_H_
-#define INTERNET_MAGNATUNEDOWNLOADDIALOG_H_
+#ifndef INTERNET_MAGNATUNE_MAGNATUNEDOWNLOADDIALOG_H_
+#define INTERNET_MAGNATUNE_MAGNATUNEDOWNLOADDIALOG_H_
 
 #include <memory>
 
@@ -79,4 +79,4 @@ class MagnatuneDownloadDialog : public QDialog {
   int next_row_;
 };
 
-#endif  // INTERNET_MAGNATUNEDOWNLOADDIALOG_H_
+#endif  // INTERNET_MAGNATUNE_MAGNATUNEDOWNLOADDIALOG_H_

@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SAVEDRADIO_H_
-#define INTERNET_SAVEDRADIO_H_
+#ifndef INTERNET_INTERNETRADIO_SAVEDRADIO_H_
+#define INTERNET_INTERNETRADIO_SAVEDRADIO_H_
 
 #include <memory>
 
@@ -89,4 +89,4 @@ class SavedRadio : public InternetService {
   std::unique_ptr<AddStreamDialog> edit_dialog_;
 };
 
-#endif  // INTERNET_SAVEDRADIO_H_
+#endif  // INTERNET_INTERNETRADIO_SAVEDRADIO_H_

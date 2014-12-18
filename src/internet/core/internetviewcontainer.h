@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_INTERNETVIEWCONTAINER_H_
-#define INTERNET_INTERNETVIEWCONTAINER_H_
+#ifndef INTERNET_CORE_INTERNETVIEWCONTAINER_H_
+#define INTERNET_CORE_INTERNETVIEWCONTAINER_H_
 
 #include <QWidget>
 #include <QMap>
@@ -74,4 +74,4 @@ class InternetViewContainer : public QWidget {
   QMap<QWidget*, HeaderData> headers_;
 };
 
-#endif  // INTERNET_INTERNETVIEWCONTAINER_H_
+#endif  // INTERNET_CORE_INTERNETVIEWCONTAINER_H_

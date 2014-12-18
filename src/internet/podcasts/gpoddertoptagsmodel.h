@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_GPODDERTOPTAGSMODEL_H_
-#define PODCASTS_GPODDERTOPTAGSMODEL_H_
+#ifndef INTERNET_PODCASTS_GPODDERTOPTAGSMODEL_H_
+#define INTERNET_PODCASTS_GPODDERTOPTAGSMODEL_H_
 
 #include "podcastdiscoverymodel.h"
 
@@ -52,4 +52,4 @@ class GPodderTopTagsModel : public PodcastDiscoveryModel {
   mygpo::ApiRequest* api_;
 };
 
-#endif  // PODCASTS_GPODDERTOPTAGSMODEL_H_
+#endif  // INTERNET_PODCASTS_GPODDERTOPTAGSMODEL_H_

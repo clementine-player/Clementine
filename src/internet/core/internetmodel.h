@@ -20,8 +20,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_INTERNETMODEL_H_
-#define INTERNET_INTERNETMODEL_H_
+#ifndef INTERNET_CORE_INTERNETMODEL_H_
+#define INTERNET_CORE_INTERNETMODEL_H_
 
 #include "core/song.h"
 #include "library/librarymodel.h"
@@ -198,4 +198,4 @@ class InternetModel : public QStandardItemModel {
   QModelIndex current_index_;
 };
 
-#endif  // INTERNET_INTERNETMODEL_H_
+#endif  // INTERNET_CORE_INTERNETMODEL_H_

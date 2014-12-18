@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCASTSERVICE_H_
-#define PODCASTS_PODCASTSERVICE_H_
+#ifndef INTERNET_PODCASTS_PODCASTSERVICE_H_
+#define INTERNET_PODCASTS_PODCASTSERVICE_H_
 
 #include "podcastdeleter.h"
 #include "podcastdownloader.h"
@@ -166,4 +166,4 @@ class PodcastService : public InternetService {
   std::unique_ptr<AddPodcastDialog> add_podcast_dialog_;
 };
 
-#endif  // PODCASTS_PODCASTSERVICE_H_
+#endif  // INTERNET_PODCASTS_PODCASTSERVICE_H_

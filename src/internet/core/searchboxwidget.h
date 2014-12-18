@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SEARCHBOXWIDGET_H_
-#define INTERNET_SEARCHBOXWIDGET_H_
+#ifndef INTERNET_CORE_SEARCHBOXWIDGET_H_
+#define INTERNET_CORE_SEARCHBOXWIDGET_H_
 
 #include <QWidget>
 
@@ -56,4 +56,4 @@ class SearchBoxWidget : public QWidget {
   DidYouMean* did_you_mean_;
 };
 
-#endif  // INTERNET_SEARCHBOXWIDGET_H_
+#endif  // INTERNET_CORE_SEARCHBOXWIDGET_H_

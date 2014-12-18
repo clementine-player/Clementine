@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SOMAFMURLHANDLER_H_
-#define INTERNET_SOMAFMURLHANDLER_H_
+#ifndef INTERNET_SOMAFM_SOMAFMURLHANDLER_H_
+#define INTERNET_SOMAFM_SOMAFMURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -46,4 +46,4 @@ class SomaFMUrlHandler : public UrlHandler {
   int task_id_;
 };
 
-#endif  // INTERNET_SOMAFMURLHANDLER_H_
+#endif  // INTERNET_SOMAFM_SOMAFMURLHANDLER_H_

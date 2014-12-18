@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_VKCONNECTION_H_
-#define INTERNET_VKCONNECTION_H_
+#ifndef INTERNET_VK_VKCONNECTION_H_
+#define INTERNET_VK_VKCONNECTION_H_
 
 #include "vreen/client.h"
 #include "vreen/connection.h"
@@ -87,4 +87,4 @@ class VkConnection : public Vreen::Connection {
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(VkConnection::Scopes)
 
-#endif  // INTERNET_VKCONNECTION_H_
+#endif  // INTERNET_VK_VKCONNECTION_H_

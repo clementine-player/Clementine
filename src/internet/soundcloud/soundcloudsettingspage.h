@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SOUNDCLOUDSETTINGSPAGE_H_
-#define INTERNET_SOUNDCLOUDSETTINGSPAGE_H_
+#ifndef INTERNET_SOUNDCLOUD_SOUNDCLOUDSETTINGSPAGE_H_
+#define INTERNET_SOUNDCLOUD_SOUNDCLOUDSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -48,4 +48,4 @@ class SoundCloudSettingsPage : public SettingsPage {
   SoundCloudService* service_;
 };
 
-#endif  // INTERNET_SOUNDCLOUDSETTINGSPAGE_H_
+#endif  // INTERNET_SOUNDCLOUD_SOUNDCLOUDSETTINGSPAGE_H_

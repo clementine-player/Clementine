@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCASTDOWNLOADER_H_
-#define PODCASTS_PODCASTDOWNLOADER_H_
+#ifndef INTERNET_PODCASTS_PODCASTDOWNLOADER_H_
+#define INTERNET_PODCASTS_PODCASTDOWNLOADER_H_
 
 #include "core/network.h"
 #include "podcast.h"
@@ -121,4 +121,4 @@ class PodcastDownloader : public QObject {
   QList<Task*> list_tasks_;
 };
 
-#endif  // PODCASTS_PODCASTDOWNLOADER_H_
+#endif  // INTERNET_PODCASTS_PODCASTDOWNLOADER_H_

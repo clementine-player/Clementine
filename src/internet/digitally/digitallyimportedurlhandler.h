@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_DIGITALLYIMPORTEDURLHANDLER_H_
-#define INTERNET_DIGITALLYIMPORTEDURLHANDLER_H_
+#ifndef INTERNET_DIGITALLY_DIGITALLYIMPORTEDURLHANDLER_H_
+#define INTERNET_DIGITALLY_DIGITALLYIMPORTEDURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -45,4 +45,4 @@ class DigitallyImportedUrlHandler : public UrlHandler {
   QUrl last_original_url_;
 };
 
-#endif  // INTERNET_DIGITALLYIMPORTEDURLHANDLER_H_
+#endif  // INTERNET_DIGITALLY_DIGITALLYIMPORTEDURLHANDLER_H_

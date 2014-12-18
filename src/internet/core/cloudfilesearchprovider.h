@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_CLOUDFILESEARCHPROVIDER_H_
-#define INTERNET_CLOUDFILESEARCHPROVIDER_H_
+#ifndef INTERNET_CORE_CLOUDFILESEARCHPROVIDER_H_
+#define INTERNET_CORE_CLOUDFILESEARCHPROVIDER_H_
 
 #include "globalsearch/librarysearchprovider.h"
 
@@ -36,4 +36,4 @@ class CloudFileSearchProvider : public LibrarySearchProvider {
   CloudFileService* service_;
 };
 
-#endif  // INTERNET_CLOUDFILESEARCHPROVIDER_H_
+#endif  // INTERNET_CORE_CLOUDFILESEARCHPROVIDER_H_

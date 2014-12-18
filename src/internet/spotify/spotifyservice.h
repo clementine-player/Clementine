@@ -19,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SPOTIFYSERVICE_H_
-#define INTERNET_SPOTIFYSERVICE_H_
+#ifndef INTERNET_SPOTIFY_SPOTIFYSERVICE_H_
+#define INTERNET_SPOTIFY_SPOTIFYSERVICE_H_
 
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetservice.h"
@@ -184,4 +184,4 @@ class SpotifyService : public InternetService {
   bool volume_normalisation_;
 };
 
-#endif  // INTERNET_SPOTIFYSERVICE_H_
+#endif  // INTERNET_SPOTIFY_SPOTIFYSERVICE_H_

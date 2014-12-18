@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_BOXURLHANDLER_H_
-#define INTERNET_BOXURLHANDLER_H_
+#ifndef INTERNET_BOX_BOXURLHANDLER_H_
+#define INTERNET_BOX_BOXURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -37,4 +37,4 @@ class BoxUrlHandler : public UrlHandler {
   BoxService* service_;
 };
 
-#endif  // INTERNET_BOXURLHANDLER_H_
+#endif  // INTERNET_BOX_BOXURLHANDLER_H_

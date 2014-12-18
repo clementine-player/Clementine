@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCASTDELETER_H_
-#define PODCASTS_PODCASTDELETER_H_
+#ifndef INTERNET_PODCASTS_PODCASTDELETER_H_
+#define INTERNET_PODCASTS_PODCASTDELETER_H_
 
 #include "core/network.h"
 #include "podcast.h"
@@ -61,4 +61,4 @@ class PodcastDeleter : public QObject {
   QTimer* auto_delete_timer_;
 };
 
-#endif  // PODCASTS_PODCASTDELETER_H_
+#endif  // INTERNET_PODCASTS_PODCASTDELETER_H_

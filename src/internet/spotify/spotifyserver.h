@@ -19,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SPOTIFYSERVER_H_
-#define INTERNET_SPOTIFYSERVER_H_
+#ifndef INTERNET_SPOTIFY_SPOTIFYSERVER_H_
+#define INTERNET_SPOTIFY_SPOTIFYSERVER_H_
 
 #include "spotifymessages.pb.h"
 #include "core/messagehandler.h"
@@ -98,4 +98,4 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   QList<pb::spotify::Message> queued_messages_;
 };
 
-#endif  // INTERNET_SPOTIFYSERVER_H_
+#endif  // INTERNET_SPOTIFY_SPOTIFYSERVER_H_

@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_GROOVESHARKSETTINGSPAGE_H_
-#define INTERNET_GROOVESHARKSETTINGSPAGE_H_
+#ifndef INTERNET_GROOVESHARK_GROOVESHARKSETTINGSPAGE_H_
+#define INTERNET_GROOVESHARK_GROOVESHARKSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -53,4 +53,4 @@ class GroovesharkSettingsPage : public SettingsPage {
   QString original_password_;
 };
 
-#endif  // INTERNET_GROOVESHARKSETTINGSPAGE_H_
+#endif  // INTERNET_GROOVESHARK_GROOVESHARKSETTINGSPAGE_H_

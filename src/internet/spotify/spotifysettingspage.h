@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SPOTIFYSETTINGSPAGE_H_
-#define INTERNET_SPOTIFYSETTINGSPAGE_H_
+#ifndef INTERNET_SPOTIFY_SPOTIFYSETTINGSPAGE_H_
+#define INTERNET_SPOTIFY_SPOTIFYSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -57,4 +57,4 @@ class SpotifySettingsPage : public SettingsPage {
   QString original_password_;
 };
 
-#endif  // INTERNET_SPOTIFYSETTINGSPAGE_H_
+#endif  // INTERNET_SPOTIFY_SPOTIFYSETTINGSPAGE_H_

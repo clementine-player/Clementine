@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_BOXSETTINGSPAGE_H_
-#define INTERNET_BOXSETTINGSPAGE_H_
+#ifndef INTERNET_BOX_BOXSETTINGSPAGE_H_
+#define INTERNET_BOX_BOXSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -51,4 +51,4 @@ class BoxSettingsPage : public SettingsPage {
   BoxService* service_;
 };
 
-#endif  // INTERNET_BOXSETTINGSPAGE_H_
+#endif  // INTERNET_BOX_BOXSETTINGSPAGE_H_

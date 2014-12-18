@@ -19,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SUBSONICSERVICE_H_
-#define INTERNET_SUBSONICSERVICE_H_
+#ifndef INTERNET_SUBSONIC_SUBSONICSERVICE_H_
+#define INTERNET_SUBSONIC_SUBSONICSERVICE_H_
 
 #include <QQueue>
 
@@ -196,4 +196,4 @@ class SubsonicLibraryScanner : public QObject {
   SongList songs_;
 };
 
-#endif  // INTERNET_SUBSONICSERVICE_H_
+#endif  // INTERNET_SUBSONIC_SUBSONICSERVICE_H_

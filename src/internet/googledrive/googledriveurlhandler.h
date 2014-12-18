@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_GOOGLEDRIVEURLHANDLER_H_
-#define INTERNET_GOOGLEDRIVEURLHANDLER_H_
+#ifndef INTERNET_GOOGLEDRIVE_GOOGLEDRIVEURLHANDLER_H_
+#define INTERNET_GOOGLEDRIVE_GOOGLEDRIVEURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -37,4 +37,4 @@ class GoogleDriveUrlHandler : public UrlHandler {
   GoogleDriveService* service_;
 };
 
-#endif  // INTERNET_GOOGLEDRIVEURLHANDLER_H_
+#endif  // INTERNET_GOOGLEDRIVE_GOOGLEDRIVEURLHANDLER_H_

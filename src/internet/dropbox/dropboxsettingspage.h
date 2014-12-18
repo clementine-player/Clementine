@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_DROPBOXSETTINGSPAGE_H_
-#define INTERNET_DROPBOXSETTINGSPAGE_H_
+#ifndef INTERNET_DROPBOX_DROPBOXSETTINGSPAGE_H_
+#define INTERNET_DROPBOX_DROPBOXSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -52,4 +52,4 @@ class DropboxSettingsPage : public SettingsPage {
   DropboxService* service_;
 };
 
-#endif  // INTERNET_DROPBOXSETTINGSPAGE_H_
+#endif  // INTERNET_DROPBOX_DROPBOXSETTINGSPAGE_H_

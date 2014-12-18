@@ -20,8 +20,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_INTERNETSERVICE_H_
-#define INTERNET_INTERNETSERVICE_H_
+#ifndef INTERNET_CORE_INTERNETSERVICE_H_
+#define INTERNET_CORE_INTERNETSERVICE_H_
 
 #include <QObject>
 #include <QList>
@@ -139,4 +139,4 @@ class InternetService : public QObject {
 
 Q_DECLARE_METATYPE(InternetService*);
 
-#endif  // INTERNET_INTERNETSERVICE_H_
+#endif  // INTERNET_CORE_INTERNETSERVICE_H_

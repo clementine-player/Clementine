@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_DROPBOXURLHANDLER_H_
-#define INTERNET_DROPBOXURLHANDLER_H_
+#ifndef INTERNET_DROPBOX_DROPBOXURLHANDLER_H_
+#define INTERNET_DROPBOX_DROPBOXURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -36,4 +36,4 @@ class DropboxUrlHandler : public UrlHandler {
   DropboxService* service_;
 };
 
-#endif  // INTERNET_DROPBOXURLHANDLER_H_
+#endif  // INTERNET_DROPBOX_DROPBOXURLHANDLER_H_

@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCASTSERVICEMODEL_H_
-#define PODCASTS_PODCASTSERVICEMODEL_H_
+#ifndef INTERNET_PODCASTS_PODCASTSERVICEMODEL_H_
+#define INTERNET_PODCASTS_PODCASTSERVICEMODEL_H_
 
 #include <QStandardItemModel>
 
@@ -39,4 +39,4 @@ class PodcastServiceModel : public QStandardItemModel {
                           QList<QUrl>* urls) const;
 };
 
-#endif  // PODCASTS_PODCASTSERVICEMODEL_H_
+#endif  // INTERNET_PODCASTS_PODCASTSERVICEMODEL_H_

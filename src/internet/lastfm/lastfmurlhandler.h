@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_LASTFMURLHANDLER_H_
-#define INTERNET_LASTFMURLHANDLER_H_
+#ifndef INTERNET_LASTFM_LASTFMURLHANDLER_H_
+#define INTERNET_LASTFM_LASTFMURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -42,4 +42,4 @@ class LastFMUrlHandler : public UrlHandler {
   LastFMService* service_;
 };
 
-#endif  // INTERNET_LASTFMURLHANDLER_H_
+#endif  // INTERNET_LASTFM_LASTFMURLHANDLER_H_

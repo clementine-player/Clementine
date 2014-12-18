@@ -19,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_INTERNETPLAYLISTITEM_H_
-#define INTERNET_INTERNETPLAYLISTITEM_H_
+#ifndef INTERNET_CORE_INTERNETPLAYLISTITEM_H_
+#define INTERNET_CORE_INTERNETPLAYLISTITEM_H_
 
 #include "core/song.h"
 #include "playlist/playlistitem.h"
@@ -59,4 +59,4 @@ class InternetPlaylistItem : public PlaylistItem {
   Song metadata_;
 };
 
-#endif  // INTERNET_INTERNETPLAYLISTITEM_H_
+#endif  // INTERNET_CORE_INTERNETPLAYLISTITEM_H_

@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_ICECASTMODEL_H_
-#define INTERNET_ICECASTMODEL_H_
+#ifndef INTERNET_ICECAST_ICECASTMODEL_H_
+#define INTERNET_ICECAST_ICECASTMODEL_H_
 
 #include "icecastitem.h"
 #include "core/simpletreemodel.h"
@@ -85,4 +85,4 @@ class IcecastModel : public SimpleTreeModel<IcecastItem> {
   QIcon station_icon_;
 };
 
-#endif  // INTERNET_ICECASTMODEL_H_
+#endif  // INTERNET_ICECAST_ICECASTMODEL_H_

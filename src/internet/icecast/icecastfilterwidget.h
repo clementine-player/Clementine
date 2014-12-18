@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_ICECASTFILTERWIDGET_H_
-#define INTERNET_ICECASTFILTERWIDGET_H_
+#ifndef INTERNET_ICECAST_ICECASTFILTERWIDGET_H_
+#define INTERNET_ICECAST_ICECASTFILTERWIDGET_H_
 
 #include "icecastmodel.h"
 
@@ -62,4 +62,4 @@ class IcecastFilterWidget : public QWidget {
   QSignalMapper* sort_mode_mapper_;
 };
 
-#endif  // INTERNET_ICECASTFILTERWIDGET_H_
+#endif  // INTERNET_ICECAST_ICECASTFILTERWIDGET_H_

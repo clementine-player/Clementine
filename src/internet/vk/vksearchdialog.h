@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_VKSEARCHDIALOG_H_
-#define INTERNET_VKSEARCHDIALOG_H_
+#ifndef INTERNET_VK_VKSEARCHDIALOG_H_
+#define INTERNET_VK_VKSEARCHDIALOG_H_
 
 #include <QDialog>
 #include <QTreeWidget>
@@ -63,4 +63,4 @@ class VkSearchDialog : public QDialog {
   QTimer* timer;
 };
 
-#endif  // INTERNET_VKSEARCHDIALOG_H_
+#endif  // INTERNET_VK_VKSEARCHDIALOG_H_

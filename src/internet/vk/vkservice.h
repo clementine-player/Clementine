@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_VKSERVICE_H_
-#define INTERNET_VKSERVICE_H_
+#ifndef INTERNET_VK_VKSERVICE_H_
+#define INTERNET_VK_VKSERVICE_H_
 
 #include <memory>
 
@@ -320,4 +320,4 @@ class VkService : public InternetService {
   QString cacheFilename_;
 };
 
-#endif  // INTERNET_VKSERVICE_H_
+#endif  // INTERNET_VK_VKSERVICE_H_

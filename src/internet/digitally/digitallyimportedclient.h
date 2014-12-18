@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_DIGITALLYIMPORTEDCLIENT_H_
-#define INTERNET_DIGITALLYIMPORTEDCLIENT_H_
+#ifndef INTERNET_DIGITALLY_DIGITALLYIMPORTEDCLIENT_H_
+#define INTERNET_DIGITALLY_DIGITALLYIMPORTEDCLIENT_H_
 
 #include <QDateTime>
 #include <QObject>
@@ -86,4 +86,4 @@ QDataStream& operator>>(QDataStream& in,
                         DigitallyImportedClient::Channel& channel);
 Q_DECLARE_METATYPE(DigitallyImportedClient::Channel)
 
-#endif  // INTERNET_DIGITALLYIMPORTEDCLIENT_H_
+#endif  // INTERNET_DIGITALLY_DIGITALLYIMPORTEDCLIENT_H_

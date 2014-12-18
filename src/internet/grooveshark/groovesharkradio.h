@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_GROOVESHARKRADIO_H_
-#define INTERNET_GROOVESHARKRADIO_H_
+#ifndef INTERNET_GROOVESHARK_GROOVESHARKRADIO_H_
+#define INTERNET_GROOVESHARK_GROOVESHARKRADIO_H_
 
 #include "smartplaylists/generator.h"
 
@@ -49,4 +49,4 @@ class GroovesharkRadio : public smart_playlists::Generator {
   QVariantMap autoplay_state_;
 };
 
-#endif  // INTERNET_GROOVESHARKRADIO_H_
+#endif  // INTERNET_GROOVESHARK_GROOVESHARKRADIO_H_

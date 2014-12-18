@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SCROBBLER_H_
-#define INTERNET_SCROBBLER_H_
+#ifndef INTERNET_CORE_SCROBBLER_H_
+#define INTERNET_CORE_SCROBBLER_H_
 
 #include <QObject>
 
@@ -51,4 +51,4 @@ class Scrobbler : public QObject {
   void ScrobbleError(int value);
 };
 
-#endif  // INTERNET_SCROBBLER_H_
+#endif  // INTERNET_CORE_SCROBBLER_H_

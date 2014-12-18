@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_CLOUDFILESERVICE_H_
-#define INTERNET_CLOUDFILESERVICE_H_
+#ifndef INTERNET_CORE_CLOUDFILESERVICE_H_
+#define INTERNET_CORE_CLOUDFILESERVICE_H_
 
 #include "internet/core/internetservice.h"
 
@@ -96,4 +96,4 @@ class CloudFileService : public InternetService {
   int indexing_task_max_;
 };
 
-#endif  // INTERNET_CLOUDFILESERVICE_H_
+#endif  // INTERNET_CORE_CLOUDFILESERVICE_H_

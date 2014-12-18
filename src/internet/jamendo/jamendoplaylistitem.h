@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_JAMENDOPLAYLISTITEM_H_
-#define INTERNET_JAMENDOPLAYLISTITEM_H_
+#ifndef INTERNET_JAMENDO_JAMENDOPLAYLISTITEM_H_
+#define INTERNET_JAMENDO_JAMENDOPLAYLISTITEM_H_
 
 #include "library/libraryplaylistitem.h"
 
@@ -32,4 +32,4 @@ class JamendoPlaylistItem : public LibraryPlaylistItem {
   QUrl Url() const;
 };
 
-#endif  // INTERNET_JAMENDOPLAYLISTITEM_H_
+#endif  // INTERNET_JAMENDO_JAMENDOPLAYLISTITEM_H_

@@ -20,8 +20,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_LASTFMSERVICE_H_
-#define INTERNET_LASTFMSERVICE_H_
+#ifndef INTERNET_LASTFM_LASTFMSERVICE_H_
+#define INTERNET_LASTFM_LASTFMSERVICE_H_
 
 #include <memory>
 
@@ -127,4 +127,4 @@ class LastFMService : public Scrobbler {
   Application* app_;
 };
 
-#endif  // INTERNET_LASTFMSERVICE_H_
+#endif  // INTERNET_LASTFM_LASTFMSERVICE_H_

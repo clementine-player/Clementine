@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCASTUPDATER_H_
-#define PODCASTS_PODCASTUPDATER_H_
+#ifndef INTERNET_PODCASTS_PODCASTUPDATER_H_
+#define INTERNET_PODCASTS_PODCASTUPDATER_H_
 
 #include <QDateTime>
 #include <QObject>
@@ -66,4 +66,4 @@ class PodcastUpdater : public QObject {
   int pending_replies_;
 };
 
-#endif  // PODCASTS_PODCASTUPDATER_H_
+#endif  // INTERNET_PODCASTS_PODCASTUPDATER_H_

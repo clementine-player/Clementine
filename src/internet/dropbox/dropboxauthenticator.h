@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_DROPBOXAUTHENTICATOR_H_
-#define INTERNET_DROPBOXAUTHENTICATOR_H_
+#ifndef INTERNET_DROPBOX_DROPBOXAUTHENTICATOR_H_
+#define INTERNET_DROPBOX_DROPBOXAUTHENTICATOR_H_
 
 #include <QObject>
 #include <QTcpServer>
@@ -73,4 +73,4 @@ class DropboxAuthenticator : public QObject {
   QString name_;
 };
 
-#endif  // INTERNET_DROPBOXAUTHENTICATOR_H_
+#endif  // INTERNET_DROPBOX_DROPBOXAUTHENTICATOR_H_

@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SUBSONICSETTINGSPAGE_H_
-#define INTERNET_SUBSONICSETTINGSPAGE_H_
+#ifndef INTERNET_SUBSONIC_SUBSONICSETTINGSPAGE_H_
+#define INTERNET_SUBSONIC_SUBSONICSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 #include "subsonicservice.h"
@@ -48,4 +48,4 @@ class SubsonicSettingsPage : public SettingsPage {
   SubsonicService* service_;
 };
 
-#endif  // INTERNET_SUBSONICSETTINGSPAGE_H_
+#endif  // INTERNET_SUBSONIC_SUBSONICSETTINGSPAGE_H_

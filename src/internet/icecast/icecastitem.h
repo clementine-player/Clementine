@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_ICECASTITEM_H_
-#define INTERNET_ICECASTITEM_H_
+#ifndef INTERNET_ICECAST_ICECASTITEM_H_
+#define INTERNET_ICECAST_ICECASTITEM_H_
 
 #include "icecastbackend.h"
 #include "core/simpletreeitem.h"
@@ -40,4 +40,4 @@ class IcecastItem : public SimpleTreeItem<IcecastItem> {
   IcecastBackend::Station station;
 };
 
-#endif  // INTERNET_ICECASTITEM_H_
+#endif  // INTERNET_ICECAST_ICECASTITEM_H_

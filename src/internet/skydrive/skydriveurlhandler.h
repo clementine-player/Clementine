@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_SKYDRIVEURLHANDLER_H_
-#define INTERNET_SKYDRIVEURLHANDLER_H_
+#ifndef INTERNET_SKYDRIVE_SKYDRIVEURLHANDLER_H_
+#define INTERNET_SKYDRIVE_SKYDRIVEURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -37,4 +37,4 @@ class SkydriveUrlHandler : public UrlHandler {
   SkydriveService* service_;
 };
 
-#endif  // INTERNET_SKYDRIVEURLHANDLER_H_
+#endif  // INTERNET_SKYDRIVE_SKYDRIVEURLHANDLER_H_

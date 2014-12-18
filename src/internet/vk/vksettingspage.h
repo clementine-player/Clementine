@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_VKSETTINGSPAGE_H_
-#define INTERNET_VKSETTINGSPAGE_H_
+#ifndef INTERNET_VK_VKSETTINGSPAGE_H_
+#define INTERNET_VK_VKSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -53,4 +53,4 @@ class VkSettingsPage : public SettingsPage {
   VkService* service_;
 };
 
-#endif  // INTERNET_VKSETTINGSPAGE_H_
+#endif  // INTERNET_VK_VKSETTINGSPAGE_H_

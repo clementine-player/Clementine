@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_BOXSERVICE_H_
-#define INTERNET_BOXSERVICE_H_
+#ifndef INTERNET_BOX_BOXSERVICE_H_
+#define INTERNET_BOX_BOXSERVICE_H_
 
 #include "internet/core/cloudfileservice.h"
 
@@ -71,4 +71,4 @@ class BoxService : public CloudFileService {
   QDateTime expiry_time_;
 };
 
-#endif  // INTERNET_BOXSERVICE_H_
+#endif  // INTERNET_BOX_BOXSERVICE_H_

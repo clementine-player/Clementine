@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCASTSETTINGSPAGE_H_
-#define PODCASTS_PODCASTSETTINGSPAGE_H_
+#ifndef INTERNET_PODCASTS_PODCASTSETTINGSPAGE_H_
+#define INTERNET_PODCASTS_PODCASTSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -49,4 +49,4 @@ class PodcastSettingsPage : public SettingsPage {
   Ui_PodcastSettingsPage* ui_;
 };
 
-#endif  // PODCASTS_PODCASTSETTINGSPAGE_H_
+#endif  // INTERNET_PODCASTS_PODCASTSETTINGSPAGE_H_

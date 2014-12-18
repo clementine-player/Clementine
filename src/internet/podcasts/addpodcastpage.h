@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_ADDPODCASTPAGE_H_
-#define PODCASTS_ADDPODCASTPAGE_H_
+#ifndef INTERNET_PODCASTS_ADDPODCASTPAGE_H_
+#define INTERNET_PODCASTS_ADDPODCASTPAGE_H_
 
 #include <QWidget>
 
@@ -46,4 +46,4 @@ class AddPodcastPage : public QWidget {
   PodcastDiscoveryModel* model_;
 };
 
-#endif  // PODCASTS_ADDPODCASTPAGE_H_
+#endif  // INTERNET_PODCASTS_ADDPODCASTPAGE_H_

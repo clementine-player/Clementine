@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_INTERNETMIMEDATA_H_
-#define INTERNET_INTERNETMIMEDATA_H_
+#ifndef INTERNET_CORE_INTERNETMIMEDATA_H_
+#define INTERNET_CORE_INTERNETMIMEDATA_H_
 
 #include "core/mimedata.h"
 
@@ -38,4 +38,4 @@ class InternetMimeData : public MimeData {
   QModelIndexList indexes;
 };
 
-#endif  // INTERNET_INTERNETMIMEDATA_H_
+#endif  // INTERNET_CORE_INTERNETMIMEDATA_H_

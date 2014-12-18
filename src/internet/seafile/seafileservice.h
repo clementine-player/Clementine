@@ -42,8 +42,8 @@
  *  - Stop Tagreader when user changes the library
 */
 
-#ifndef INTERNET_SEAFILESERVICE_H_
-#define INTERNET_SEAFILESERVICE_H_
+#ifndef INTERNET_SEAFILE_SEAFILESERVICE_H_
+#define INTERNET_SEAFILE_SEAFILESERVICE_H_
 
 #include "internet/core/cloudfileservice.h"
 
@@ -149,4 +149,4 @@ class SeafileService : public CloudFileService {
   QString library_updated_;
 };
 
-#endif  // INTERNET_SEAFILESERVICE_H_
+#endif  // INTERNET_SEAFILE_SEAFILESERVICE_H_

@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCASTBACKEND_H_
-#define PODCASTS_PODCASTBACKEND_H_
+#ifndef INTERNET_PODCASTS_PODCASTBACKEND_H_
+#define INTERNET_PODCASTS_PODCASTBACKEND_H_
 
 #include <QObject>
 
@@ -93,4 +93,4 @@ class PodcastBackend : public QObject {
   Database* db_;
 };
 
-#endif  // PODCASTS_PODCASTBACKEND_H_
+#endif  // INTERNET_PODCASTS_PODCASTBACKEND_H_

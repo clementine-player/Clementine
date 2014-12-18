@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_LASTFMSETTINGSPAGE_H_
-#define INTERNET_LASTFMSETTINGSPAGE_H_
+#ifndef INTERNET_LASTFM_LASTFMSETTINGSPAGE_H_
+#define INTERNET_LASTFM_LASTFMSETTINGSPAGE_H_
 
 #include "ui/settingspage.h"
 
@@ -50,4 +50,4 @@ class LastFMSettingsPage : public SettingsPage {
   void RefreshControls(bool authenticated);
 };
 
-#endif  // INTERNET_LASTFMSETTINGSPAGE_H_
+#endif  // INTERNET_LASTFM_LASTFMSETTINGSPAGE_H_

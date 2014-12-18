@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_GEOLOCATOR_H_
-#define INTERNET_GEOLOCATOR_H_
+#ifndef INTERNET_CORE_GEOLOCATOR_H_
+#define INTERNET_CORE_GEOLOCATOR_H_
 
 #include <QObject>
 
@@ -65,4 +65,4 @@ class Geolocator : public QObject {
 QDebug operator<<(QDebug dbg, const Geolocator::LatLng& ll);
 Q_DECLARE_METATYPE(Geolocator::LatLng);
 
-#endif  // INTERNET_GEOLOCATOR_H_
+#endif  // INTERNET_CORE_GEOLOCATOR_H_

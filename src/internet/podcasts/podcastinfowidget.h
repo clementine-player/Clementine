@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCASTINFOWIDGET_H_
-#define PODCASTS_PODCASTINFOWIDGET_H_
+#ifndef INTERNET_PODCASTS_PODCASTINFOWIDGET_H_
+#define INTERNET_PODCASTS_PODCASTINFOWIDGET_H_
 
 #include "podcast.h"
 #include "covers/albumcoverloaderoptions.h"
@@ -57,4 +57,4 @@ class PodcastInfoWidget : public QWidget {
   quint64 image_id_;
 };
 
-#endif  // PODCASTS_PODCASTINFOWIDGET_H_
+#endif  // INTERNET_PODCASTS_PODCASTINFOWIDGET_H_

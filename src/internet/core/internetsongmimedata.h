@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_INTERNETSONGMIMEDATA_H_
-#define INTERNET_INTERNETSONGMIMEDATA_H_
+#ifndef INTERNET_CORE_INTERNETSONGMIMEDATA_H_
+#define INTERNET_CORE_INTERNETSONGMIMEDATA_H_
 
 #include "core/mimedata.h"
 #include "core/song.h"
@@ -35,4 +35,4 @@ class InternetSongMimeData : public MimeData {
   SongList songs;
 };
 
-#endif  // INTERNET_INTERNETSONGMIMEDATA_H_
+#endif  // INTERNET_CORE_INTERNETSONGMIMEDATA_H_

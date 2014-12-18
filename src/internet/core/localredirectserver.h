@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_LOCALREDIRECTSERVER_H_
-#define INTERNET_LOCALREDIRECTSERVER_H_
+#ifndef INTERNET_CORE_LOCALREDIRECTSERVER_H_
+#define INTERNET_CORE_LOCALREDIRECTSERVER_H_
 
 #include <QByteArray>
 #include <QObject>
@@ -58,4 +58,4 @@ class LocalRedirectServer : public QObject {
   QUrl request_url_;
 };
 
-#endif  // INTERNET_LOCALREDIRECTSERVER_H_
+#endif  // INTERNET_CORE_LOCALREDIRECTSERVER_H_

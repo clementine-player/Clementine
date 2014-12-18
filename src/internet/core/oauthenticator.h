@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_OAUTHENTICATOR_H_
-#define INTERNET_OAUTHENTICATOR_H_
+#ifndef INTERNET_CORE_OAUTHENTICATOR_H_
+#define INTERNET_CORE_OAUTHENTICATOR_H_
 
 #include <QDateTime>
 #include <QObject>
@@ -88,4 +88,4 @@ class OAuthenticator : public QObject {
   RedirectStyle redirect_style_;
 };
 
-#endif  // INTERNET_OAUTHENTICATOR_H_
+#endif  // INTERNET_CORE_OAUTHENTICATOR_H_

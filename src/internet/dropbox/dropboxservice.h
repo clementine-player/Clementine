@@ -16,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_DROPBOXSERVICE_H_
-#define INTERNET_DROPBOXSERVICE_H_
+#ifndef INTERNET_DROPBOX_DROPBOXSERVICE_H_
+#define INTERNET_DROPBOX_DROPBOXSERVICE_H_
 
 #include "internet/core/cloudfileservice.h"
 
@@ -65,4 +65,4 @@ class DropboxService : public CloudFileService {
   NetworkAccessManager* network_;
 };
 
-#endif  // INTERNET_DROPBOXSERVICE_H_
+#endif  // INTERNET_DROPBOX_DROPBOXSERVICE_H_

@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PODCASTS_PODCASTURLLOADER_H_
-#define PODCASTS_PODCASTURLLOADER_H_
+#ifndef INTERNET_PODCASTS_PODCASTURLLOADER_H_
+#define INTERNET_PODCASTS_PODCASTURLLOADER_H_
 
 #include <QObject>
 #include <QRegExp>
@@ -111,4 +111,4 @@ class PodcastUrlLoader : public QObject {
   QRegExp html_link_href_re_;
 };
 
-#endif  // PODCASTS_PODCASTURLLOADER_H_
+#endif  // INTERNET_PODCASTS_PODCASTURLLOADER_H_

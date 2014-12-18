@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_MAGNATUNEURLHANDLER_H_
-#define INTERNET_MAGNATUNEURLHANDLER_H_
+#ifndef INTERNET_MAGNATUNE_MAGNATUNEURLHANDLER_H_
+#define INTERNET_MAGNATUNE_MAGNATUNEURLHANDLER_H_
 
 #include "core/urlhandler.h"
 
@@ -36,4 +36,4 @@ class MagnatuneUrlHandler : public UrlHandler {
   MagnatuneService* service_;
 };
 
-#endif  // INTERNET_MAGNATUNEURLHANDLER_H_
+#endif  // INTERNET_MAGNATUNE_MAGNATUNEURLHANDLER_H_

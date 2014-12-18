@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_INTERNETVIEW_H_
-#define INTERNET_INTERNETVIEW_H_
+#ifndef INTERNET_CORE_INTERNETVIEW_H_
+#define INTERNET_CORE_INTERNETVIEW_H_
 
 #include "widgets/autoexpandingtreeview.h"
 
@@ -40,4 +40,4 @@ class InternetView : public AutoExpandingTreeView {
   void CurrentIndexChanged(const QModelIndex& index);
 };
 
-#endif  // INTERNET_INTERNETVIEW_H_
+#endif  // INTERNET_CORE_INTERNETVIEW_H_

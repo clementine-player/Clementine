@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INTERNET_SOUNDCLOUDSERVICE_H_
-#define INTERNET_SOUNDCLOUDSERVICE_H_
+#ifndef INTERNET_SOUNDCLOUD_SOUNDCLOUDSERVICE_H_
+#define INTERNET_SOUNDCLOUD_SOUNDCLOUDSERVICE_H_
 
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetservice.h"
@@ -144,4 +144,4 @@ class SoundCloudService : public InternetService {
   static const char* kApiClientSecret;
 };
 
-#endif  // INTERNET_SOUNDCLOUDSERVICE_H_
+#endif  // INTERNET_SOUNDCLOUD_SOUNDCLOUDSERVICE_H_

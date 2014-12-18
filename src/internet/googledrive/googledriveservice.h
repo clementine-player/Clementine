@@ -17,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_GOOGLEDRIVESERVICE_H_
-#define INTERNET_GOOGLEDRIVESERVICE_H_
+#ifndef INTERNET_GOOGLEDRIVE_GOOGLEDRIVESERVICE_H_
+#define INTERNET_GOOGLEDRIVE_GOOGLEDRIVESERVICE_H_
 
 #include "internet/core/cloudfileservice.h"
 
@@ -78,4 +78,4 @@ class GoogleDriveService : public CloudFileService {
   QAction* full_rescan_action_;
 };
 
-#endif  // INTERNET_GOOGLEDRIVESERVICE_H_
+#endif  // INTERNET_GOOGLEDRIVE_GOOGLEDRIVESERVICE_H_

@@ -19,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_JAMENDOSERVICE_H_
-#define INTERNET_JAMENDOSERVICE_H_
+#ifndef INTERNET_JAMENDO_JAMENDOSERVICE_H_
+#define INTERNET_JAMENDO_JAMENDOSERVICE_H_
 
 #include "internet/core/internetservice.h"
 
@@ -123,4 +123,4 @@ class JamendoService : public InternetService {
   bool accepted_download_;
 };
 
-#endif  // INTERNET_JAMENDOSERVICE_H_
+#endif  // INTERNET_JAMENDO_JAMENDOSERVICE_H_

@@ -18,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_DIGITALLYIMPORTEDSERVICEBASE_H_
-#define INTERNET_DIGITALLYIMPORTEDSERVICEBASE_H_
+#ifndef INTERNET_DIGITALLY_DIGITALLYIMPORTEDSERVICEBASE_H_
+#define INTERNET_DIGITALLY_DIGITALLYIMPORTEDSERVICEBASE_H_
 
 #include <memory>
 
@@ -136,4 +136,4 @@ class RockRadioService : public DigitallyImportedServiceBase {
                    QObject* parent = nullptr);
 };
 
-#endif  // INTERNET_DIGITALLYIMPORTEDSERVICEBASE_H_
+#endif  // INTERNET_DIGITALLY_DIGITALLYIMPORTEDSERVICEBASE_H_
