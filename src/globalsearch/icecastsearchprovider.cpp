@@ -16,7 +16,7 @@
 */
 
 #include "icecastsearchprovider.h"
-#include "internet/icecastbackend.h"
+#include "internet/icecast/icecastbackend.h"
 
 IcecastSearchProvider::IcecastSearchProvider(IcecastBackend* backend,
                                              Application* app, QObject* parent)

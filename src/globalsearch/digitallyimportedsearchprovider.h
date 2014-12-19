@@ -19,7 +19,7 @@
 #define DIGITALLYIMPORTEDSEARCHPROVIDER_H
 
 #include "simplesearchprovider.h"
-#include "internet/digitallyimportedservicebase.h"
+#include "internet/digitally/digitallyimportedservicebase.h"
 
 class DigitallyImportedSearchProvider : public SimpleSearchProvider {
  public:

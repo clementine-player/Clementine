@@ -43,7 +43,7 @@
 #include <QtConcurrentRun>
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/fixlastfm.h"
+#include "internet/lastfm/fixlastfm.h"
 #ifdef HAVE_LIBLASTFM1
 #include <lastfm/Track.h>
 #else

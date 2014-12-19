@@ -20,7 +20,7 @@
 
 #include "searchprovider.h"
 #include "spotifymessages.pb.h"
-#include "internet/spotifyservice.h"
+#include "internet/spotify/spotifyservice.h"
 
 class SpotifyServer;
 

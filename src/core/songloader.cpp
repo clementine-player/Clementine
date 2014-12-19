@@ -38,16 +38,16 @@
 #include "core/song.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
-#include "internet/fixlastfm.h"
-#include "internet/internetmodel.h"
+#include "internet/lastfm/fixlastfm.h"
+#include "internet/core/internetmodel.h"
 #include "library/librarybackend.h"
 #include "library/sqlrow.h"
 #include "playlistparsers/cueparser.h"
 #include "playlistparsers/parserbase.h"
 #include "playlistparsers/playlistparser.h"
-#include "podcasts/podcastparser.h"
-#include "podcasts/podcastservice.h"
-#include "podcasts/podcasturlloader.h"
+#include "internet/podcasts/podcastparser.h"
+#include "internet/podcasts/podcastservice.h"
+#include "internet/podcasts/podcasturlloader.h"
 
 #ifdef HAVE_AUDIOCD
 #include <gst/audio/gstaudiocdsrc.h>

@@ -21,8 +21,8 @@
 #include <random>
 
 #include "core/logging.h"
-#include "internet/internetmodel.h"
-#include "internet/spotifyserver.h"
+#include "internet/core/internetmodel.h"
+#include "internet/spotify/spotifyserver.h"
 #include "playlist/songmimedata.h"
 
 namespace {
