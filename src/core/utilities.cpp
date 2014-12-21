@@ -235,18 +235,15 @@ bool RemoveRecursive(const QString& path) {
   QDir dir(path);
   for (const QString& child :
        dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden)) {
-    if (!RemoveRecursive(path + "/" + child))
-      return false;
+    if (!RemoveRecursive(path + "/" + child)) return false;
   }
 
   for (const QString& child :
        dir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Hidden)) {
-    if (!QFile::remove(path + "/" + child))
-      return false;
+    if (!QFile::remove(path + "/" + child)) return false;
   }
 
-  if (!dir.rmdir(path))
-    return false;
+  if (!dir.rmdir(path)) return false;
 
   return true;
 }
@@ -465,19 +462,18 @@ QByteArray HmacSha1(const QByteArray& key, const QByteArray& data) {
 }
 
 QByteArray Sha256(const QByteArray& data) {
-  #ifndef USE_SYSTEM_SHA2
-    using clementine_sha2::SHA256_CTX;
-    using clementine_sha2::SHA256_Init;
-    using clementine_sha2::SHA256_Update;
-    using clementine_sha2::SHA256_Final;
-    using clementine_sha2::SHA256_DIGEST_LENGTH;
-  #endif
+#ifndef USE_SYSTEM_SHA2
+  using clementine_sha2::SHA256_CTX;
+  using clementine_sha2::SHA256_Init;
+  using clementine_sha2::SHA256_Update;
+  using clementine_sha2::SHA256_Final;
+  using clementine_sha2::SHA256_DIGEST_LENGTH;
+#endif
 
   SHA256_CTX context;
   SHA256_Init(&context);
-  SHA256_Update(
-      &context, reinterpret_cast<const quint8*>(data.constData()),
-      data.length());
+  SHA256_Update(&context, reinterpret_cast<const quint8*>(data.constData()),
+                data.length());
 
   QByteArray ret(SHA256_DIGEST_LENGTH, '\0');
   SHA256_Final(reinterpret_cast<quint8*>(ret.data()), &context);
@@ -571,17 +567,43 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
 QDateTime ParseRFC822DateTime(const QString& text) {
   // This sucks but we need it because some podcasts don't quite follow the
   // spec properly - they might have 1-digit hour numbers for example.
-
+  QDateTime ret;
   QRegExp re(
       "([a-zA-Z]{3}),? (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) "
       "(\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
-  if (re.indexIn(text) == -1) return QDateTime();
+  if (re.indexIn(text) != -1) {
+    ret = QDateTime(
+        QDate::fromString(QString("%1 %2 %3 %4")
+                              .arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)),
+                          Qt::TextDate),
+        QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
+  }
+  if (ret.isValid()) return ret;
+  // Because http://feeds.feedburner.com/reasonabledoubts/Msxh?format=xml
+  QRegExp re2(
+      "(\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) "
+      "(\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
 
-  return QDateTime(
-      QDate::fromString(QString("%1 %2 %3 %4")
-                            .arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)),
-                        Qt::TextDate),
-      QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
+  QMap<QString, int> monthmap;
+  monthmap["Jan"] = 1;
+  monthmap["Feb"] = 2;
+  monthmap["Mar"] = 3;
+  monthmap["Apr"] = 4;
+  monthmap["May"] = 5;
+  monthmap["Jun"] = 6;
+  monthmap["Jul"] = 7;
+  monthmap["Aug"] = 8;
+  monthmap["Sep"] = 9;
+  monthmap["Oct"] = 10;
+  monthmap["Nov"] = 11;
+  monthmap["Dec"] = 12;
+
+  if (re2.indexIn(text) != -1) {
+    QDate date(re2.cap(3).toInt(), monthmap[re2.cap(2)], re2.cap(1).toInt());
+    ret = QDateTime(date, QTime(re2.cap(4).toInt(), re2.cap(5).toInt(),
+                                re2.cap(6).toInt()));
+  }
+  return ret;
 }
 
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {

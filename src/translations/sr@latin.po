@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-14 17:36+0000\n"
+"PO-Revision-Date: 2014-12-14 08:55+0000\n"
 "Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
 "Language-Team: Serbian (Latin) (http://www.transifex.com/projects/p/clementine/language/sr@latin/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,7 +82,7 @@ msgstr "%1 dana"
 msgid "%1 days ago"
 msgstr "pre %1 dana"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 na %2"
@@ -92,7 +92,7 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listi numera (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 izabrano od"
@@ -117,7 +117,7 @@ msgstr "%1 pesama pronađeno"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 pesama pronađeno (prikazujem %2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 numera"
@@ -262,7 +262,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 dan"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1 numera"
 
@@ -422,7 +422,7 @@ msgstr "Uključi/isključi Wii daljinski"
 msgid "Activities stream"
 msgstr "Tok aktivnosti"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Dodaj podkast"
 
@@ -486,7 +486,7 @@ msgstr "Dodaj novu fasciklu..."
 msgid "Add podcast"
 msgstr "Dodavanje podkasta"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Dodaj podkast..."
 
@@ -659,7 +659,7 @@ msgstr "nakon "
 msgid "After copying..."
 msgstr "Nakon kopiranja:"
 
-#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -672,7 +672,7 @@ msgstr "album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "album (idealna jačina za sve pesme)"
 
-#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
@@ -830,7 +830,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Želite li zaista da upišete statistiku pesme u fajl pesme za sve pesme iz vaše biblioteke?"
 
-#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -907,11 +907,11 @@ msgstr "Prosečni bitski protok"
 msgid "Average image size"
 msgstr "Prosečna veličina slike"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "BBC-ijevi podkasti"
 
-#: playlist/playlist.cpp:1340 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "tempo"
@@ -940,7 +940,7 @@ msgstr "Bekapujem bazu podataka"
 msgid "Balance"
 msgstr "Ravnoteža"
 
-#: analyzers/baranalyzer.cpp:22
+#: analyzers/baranalyzer.cpp:35
 msgid "Bar analyzer"
 msgstr "Trakasti analizator"
 
@@ -965,7 +965,7 @@ msgstr "najbolji"
 msgid "Biography from %1"
 msgstr "Biografija sa %1"
 
-#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "bitski protok"
 
@@ -983,7 +983,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "bitski protok"
 
-#: analyzers/blockanalyzer.cpp:23
+#: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
 msgstr "Blok analizator"
 
@@ -999,7 +999,7 @@ msgstr "Zamućenje"
 msgid "Body"
 msgstr "Telo"
 
-#: analyzers/boomanalyzer.cpp:11
+#: analyzers/boomanalyzer.cpp:32
 msgid "Boom analyzer"
 msgstr "Bum analizator"
 
@@ -1057,6 +1057,10 @@ msgstr "Keširam %1"
 #: internet/spotifyblobdownloader.cpp:50
 msgid "Cancel"
 msgstr "Odustani"
+
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr "Prekini preuzimanje"
 
 #: internet/vkservice.cpp:624
 msgid ""
@@ -1134,7 +1138,7 @@ msgstr "izbor sa spiska"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Odredite sortiranje liste numera i koliko pesama će da sadrži."
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "Izbor fascikle preuzimanja za podkast"
 
@@ -1238,7 +1242,7 @@ msgstr "Klementina će tražiti muziku u:"
 msgid "Click here to add some music"
 msgstr "Kliknite ovde da dodate muziku"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1262,7 +1266,7 @@ msgstr "Klikom na dugme prijave otvorićete veb pregledač.  Vratite se na Kleme
 msgid "Close"
 msgstr "Zatvori"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "Zatvori listu numera"
 
@@ -1290,7 +1294,7 @@ msgstr "Boje"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Zarez razdvaja listu od klasa: nivo, nivo je 0-3"
 
-#: playlist/playlist.cpp:1359 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "komentar"
@@ -1307,7 +1311,7 @@ msgstr "Popuni oznake automatski"
 msgid "Complete tags automatically..."
 msgstr "Popuni oznake automatski..."
 
-#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
@@ -1330,7 +1334,7 @@ msgstr "Podesi Magnatjun..."
 msgid "Configure Shortcuts"
 msgstr "Postavke prečica"
 
-#: internet/spotifyservice.cpp:812
+#: internet/spotifyservice.cpp:820
 msgid "Configure Spotify..."
 msgstr "Podesi Spotifaj..."
 
@@ -1350,7 +1354,7 @@ msgstr "Podesi opštu pretragu..."
 msgid "Configure library..."
 msgstr "Podesi biblioteku..."
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "Podesi podkaste..."
 
@@ -1420,7 +1424,7 @@ msgstr "Kopiraj URL deljenja na klipbord"
 msgid "Copy to clipboard"
 msgstr "Kopiraj na klipbord"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiraj na uređaj...."
@@ -1447,7 +1451,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Ne mogu da napravim Gstrimer element „%1“ - proverite da li su instalirani svi potrebni Gstrimer priključci"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "Ne mogu da napravim listu numera"
 
@@ -1618,11 +1622,11 @@ msgid ""
 "recover your database"
 msgstr "Otkriveno oštećenje baze podataka. Pogledajte https://code.google.com/p/clementine-player/wiki/DatabaseCorruption za uputstva kako da povratite vašu bazu podataka"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "napravljen"
 
-#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "izmenjen"
 
@@ -1672,7 +1676,7 @@ msgstr "Obriši"
 msgid "Delete Grooveshark playlist"
 msgstr "Obriši Gruvšarkovu listu numera"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "Obriši preuzete podatke"
 
@@ -1794,7 +1798,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Onemogućen"
 
-#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
 #: ../bin/src/ui_ripcd.h:314
@@ -1869,7 +1873,7 @@ msgstr "Kliknite dvaput da otvorite"
 msgid "Double clicking a song will..."
 msgstr "Dvoklik na pesmu će da je..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1891,7 +1895,7 @@ msgstr "preuzimanja sadržaja"
 msgid "Download new episodes automatically"
 msgstr "Preuzimaj nove epizode automatski"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "Preuzimanje je na čekanju"
 
@@ -1911,7 +1915,7 @@ msgstr "Preuzmi ovaj album"
 msgid "Download this album..."
 msgstr "Preuzmi ovaj album..."
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "Preuzmi ovu epizodu"
 
@@ -1919,7 +1923,7 @@ msgstr "Preuzmi ovu epizodu"
 msgid "Download..."
 msgstr "Preuzmi..."
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Preuzimam (%1%)..."
@@ -2060,7 +2064,7 @@ msgstr "Unesite URL za preuzimanje omota sa interneta:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Unesite ime za izvezene omote (bez nastavka):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Unesite novo ime za ovu listu numera"
 
@@ -2281,17 +2285,17 @@ msgstr "Trajanje pretapanja"
 msgid "Failed reading CD drive"
 msgstr "Neuspeh čitanja CD uređaja"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "Neuspeh dobavljanja direktorijuma"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Neuspeh dobavljanja podkasta"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Neuspeh učitavanja podkasta"
 
@@ -2344,11 +2348,11 @@ msgstr "nastavak fajla"
 msgid "File formats"
 msgstr "Formati fajlova"
 
-#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "ime fajla"
 
-#: playlist/playlist.cpp:1348
+#: playlist/playlist.cpp:1351
 msgid "File name (without path)"
 msgstr "ime fajla (bez putanje)"
 
@@ -2360,11 +2364,11 @@ msgstr "Šablon imena fajla:"
 msgid "File paths"
 msgstr "Putanje fajlova"
 
-#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "veličina fajla"
 
-#: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1355 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
@@ -2461,7 +2465,7 @@ msgstr "Obrazac"
 msgid "Format"
 msgstr "Format"
 
-#: analyzers/analyzercontainer.cpp:47
+#: analyzers/analyzercontainer.cpp:52
 #: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Broj kadrova"
@@ -2494,7 +2498,7 @@ msgstr "Opšte"
 msgid "General settings"
 msgstr "Opšte postavke"
 
-#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
@@ -2603,7 +2607,7 @@ msgstr "žanr/album"
 msgid "Group by Genre/Artist/Album"
 msgstr "žanr/izvođač/album"
 
-#: playlist/playlist.cpp:1326 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "grupisanje"
@@ -2637,7 +2641,7 @@ msgstr "Podaci o hardveru su dostupni samo dok je uređaj povezan."
 msgid "High"
 msgstr "visok"
 
-#: analyzers/analyzercontainer.cpp:64
+#: analyzers/analyzercontainer.cpp:69
 #: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
@@ -2914,7 +2918,7 @@ msgstr "Široka traka"
 msgid "Last played"
 msgstr "Poslednji put puštano"
 
-#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "poslednji put puštena"
@@ -2955,7 +2959,7 @@ msgstr "Najmanje omiljene numere"
 msgid "Left"
 msgstr "Levo"
 
-#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "dužina"
@@ -3047,7 +3051,7 @@ msgstr "Učitavam numere"
 msgid "Loading tracks info"
 msgstr "Učitavam podatke o numerama"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3074,7 +3078,7 @@ msgstr "Učitava datoteke/URL-ove, zamenjujući tekuću listu"
 msgid "Login"
 msgstr "Prijava"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "Prijava nije uspela"
 
@@ -3090,7 +3094,7 @@ msgstr "dugoročno predviđanje (LTP)"
 msgid "Love"
 msgstr "Volim"
 
-#: analyzers/analyzercontainer.cpp:62
+#: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
@@ -3184,11 +3188,11 @@ msgstr "ručno"
 msgid "Manufacturer"
 msgstr "Proizvođač"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Označi kao preslušano"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "Označi kao novo"
 
@@ -3212,7 +3216,7 @@ msgstr "Najveći bitski protok"
 msgid "Media has changed. Reloading"
 msgstr "Medij je promenjen. Učitavam ponovo"
 
-#: analyzers/analyzercontainer.cpp:63
+#: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
@@ -3254,7 +3258,7 @@ msgstr "Mono reprodukcija"
 msgid "Months"
 msgstr "meseci"
 
-#: playlist/playlist.cpp:1363
+#: playlist/playlist.cpp:1366
 msgid "Mood"
 msgstr "raspoloženje"
 
@@ -3402,7 +3406,7 @@ msgstr "Sledeća numera"
 msgid "Next week"
 msgstr "sledeće sedmice"
 
-#: analyzers/analyzercontainer.cpp:81
+#: analyzers/analyzercontainer.cpp:86
 msgid "No analyzer"
 msgstr "Bez analizatora"
 
@@ -3563,11 +3567,11 @@ msgstr "Otvori %1 u pregledaču"
 msgid "Open &audio CD..."
 msgstr "Otvori &audio CD..."
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Otvaranje OPML fajla"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Otvori OPML fajl..."
 
@@ -3636,7 +3640,7 @@ msgstr "Organizovanje fajlova"
 msgid "Organise files..."
 msgstr "Organizuj fajlove..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Organizujem fajlove"
 
@@ -3707,7 +3711,7 @@ msgstr "Pauziraj puštanje"
 msgid "Paused"
 msgstr "Pauzirano"
 
-#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "izvođač"
@@ -3727,7 +3731,7 @@ msgstr "Obična traka"
 msgid "Play"
 msgstr "Pusti"
 
-#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1334 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "broj puštanja"
 
@@ -3757,8 +3761,8 @@ msgid "Player options"
 msgstr "Opcije plejera"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Lista numera"
 
@@ -3788,7 +3792,7 @@ msgstr "Zatvorite vaš pregledač i vratite se na Klementinu."
 msgid "Plugin status:"
 msgstr "Stanje priključka:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podkasti"
 
@@ -3998,7 +4002,7 @@ msgstr "Oceni tekuću pesmu sa 4 zvezde"
 msgid "Rate the current song 5 stars"
 msgstr "Oceni tekuću pesmu sa 5 zvezda"
 
-#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "ocena"
 
@@ -4086,7 +4090,7 @@ msgstr "Ukloni iz omiljenih"
 msgid "Remove from playlist"
 msgstr "Ukloni sa liste numera"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Uklanjanje liste numera"
 
@@ -4115,11 +4119,11 @@ msgstr "Preimenovanje „%1“ liste"
 msgid "Rename Grooveshark playlist"
 msgstr "Preimenuj Gruvšarkovu listu numera"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Preimenovanje liste numera"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Preimenuj listu numera..."
 
@@ -4252,7 +4256,7 @@ msgstr "Bezbedno izvadi uređaj"
 msgid "Safely remove the device after copying"
 msgstr "Bezbedno izvadi uređaj posle kopiranja"
 
-#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "uzorkovanje"
 
@@ -4281,12 +4285,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Sačuvaj listu numera"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Upis liste numera"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Sačuvaj listu numera..."
 
@@ -4322,7 +4326,7 @@ msgstr "skalabilno uzorkovanje (SSR)"
 msgid "Scale size"
 msgstr "Promeni veličinu"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "skor"
 
@@ -4684,7 +4688,7 @@ msgstr "ska"
 msgid "Skip backwards in playlist"
 msgstr "Preskoči unazad u listi numera"
 
-#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "broj preskakanja"
 
@@ -4732,7 +4736,7 @@ msgstr "Podaci o pesmi"
 msgid "Song info"
 msgstr "Podaci o pesmi"
 
-#: analyzers/sonogram.cpp:21
+#: analyzers/sonogram.cpp:32
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4768,7 +4772,7 @@ msgstr "Ređanje"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1361
+#: playlist/playlist.cpp:1364
 msgid "Source"
 msgstr "izvor"
 
@@ -4911,7 +4915,7 @@ msgstr "Predložene oznake"
 msgid "Summary"
 msgstr "Rezime"
 
-#: analyzers/analyzercontainer.cpp:65
+#: analyzers/analyzercontainer.cpp:70
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
@@ -5011,8 +5015,8 @@ msgstr "Izdanje Klementine koje ste upravo nadogradili zahteva potpuno skeniranj
 msgid "There are other songs in this album"
 msgstr "Ima još pesama u ovom albumu"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Problem prilikom komunikacije sa gpodder.net"
 
@@ -5105,7 +5109,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Ovo je prvi put da ste povezali ovaj uređaj. Klementina će sad da skenira uređaj da bi našla muziku - to može da potraje."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Ovu opciju možete izmeniti u postavkama „Ponašanja“"
 
@@ -5118,7 +5122,7 @@ msgstr "Ovaj tok je samo za pretplatnike"
 msgid "This type of device is not supported: %1"
 msgstr "Ovaj tip uređaja nije podržan: %1"
 
-#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -5179,7 +5183,7 @@ msgstr "Ukupno bajtova prebačeno"
 msgid "Total network requests made"
 msgstr "Ukupno napravljenih mrežnih zahteva"
 
-#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -5214,7 +5218,7 @@ msgstr "Opcije prekodiranja"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:18
+#: analyzers/turbine.cpp:35
 msgid "Turbine"
 msgstr "Turbina"
 
@@ -5245,8 +5249,8 @@ msgstr "Ne mogu da preuzmem %1 (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Nepoznato"
@@ -5271,7 +5275,7 @@ msgstr "Ukloni preskakanje numera"
 msgid "Unskip track"
 msgstr "Ukloni preskakanje"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "Ukloni pretplatu"
 
@@ -5287,7 +5291,7 @@ msgstr "Ažuriraj"
 msgid "Update Grooveshark playlist"
 msgstr "Ažuriraj Gruvšarkovu listu numera"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "Ažuriraj sve podkaste"
 
@@ -5299,7 +5303,7 @@ msgstr "Ažuriraj izmenjene fascikle biblioteke"
 msgid "Update the library when Clementine starts"
 msgstr "Ažuriraj biblioteku pri pokretanju Klementine"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "Ažuriraj ovaj podkast"
 
@@ -5429,7 +5433,7 @@ msgid "Variable bit rate"
 msgstr "Promenjiv bitski protok"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Razni izvođači"
 
@@ -5484,7 +5488,7 @@ msgstr "VMA"
 msgid "Wall"
 msgstr "Zid"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Upozori me prilikom zatvaranja jezička liste numera"
 
@@ -5602,7 +5606,7 @@ msgstr "Upisuj metapodatke"
 msgid "Wrong username or password."
 msgstr "Pogrešno korisničko ime ili lozinka."
 
-#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5632,7 +5636,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Želite li zaista da uklonite %1 listi numera iz omiljenih?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5745,7 +5749,7 @@ msgstr "Vaši akreditivi za Magnatjun su netačni"
 msgid "Your library is empty!"
 msgstr "Vaša biblioteka je prazna!"
 
-#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26 internet/savedradio.cpp:47
 msgid "Your radio streams"
 msgstr "Vaši radio tokovi"
 
@@ -5840,7 +5844,7 @@ msgstr "jednak"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "gpodder.net direktorijum"
 

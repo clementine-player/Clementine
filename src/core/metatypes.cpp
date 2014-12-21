@@ -30,17 +30,17 @@
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "globalsearch/searchprovider.h"
-#include "internet/digitallyimportedclient.h"
-#include "internet/geolocator.h"
-#include "internet/somafmservice.h"
+#include "internet/digitally/digitallyimportedclient.h"
+#include "internet/core/geolocator.h"
+#include "internet/somafm/somafmservice.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
-#include "podcasts/podcastepisode.h"
-#include "podcasts/podcast.h"
+#include "internet/podcasts/podcastepisode.h"
+#include "internet/podcasts/podcast.h"
 #include "ui/equalizer.h"
 
 #ifdef HAVE_VK
-#include "internet/vkservice.h"
+#include "internet/vk/vkservice.h"
 #endif
 
 #ifdef HAVE_DBUS

@@ -45,7 +45,7 @@
 #include "playlist/playlistmanager.h"
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/lastfmservice.h"
+#include "internet/lastfm/lastfmservice.h"
 #endif
 
 using std::shared_ptr;

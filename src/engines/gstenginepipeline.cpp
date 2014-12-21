@@ -31,9 +31,9 @@
 #include "core/mac_startup.h"
 #include "core/signalchecker.h"
 #include "core/utilities.h"
-#include "internet/internetmodel.h"
-#include "internet/spotifyserver.h"
-#include "internet/spotifyservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/spotify/spotifyserver.h"
+#include "internet/spotify/spotifyservice.h"
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
 const int GstEnginePipeline::kFaderFudgeMsec = 2000;

@@ -35,6 +35,7 @@
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QMessageBox>
+#include <QtConcurrentRun>
 #include <QtDebug>
 
 using smart_playlists::GeneratorPtr;
@@ -182,21 +183,22 @@ void PlaylistManager::Save(int id, const QString& filename,
     // Playlist is not in the playlist manager: probably save action was
     // triggered
     // from the left side bar and the playlist isn't loaded.
-    QFuture<Song> future = playlist_backend_->GetPlaylistSongs(id);
-    QFutureWatcher<Song>* watcher = new QFutureWatcher<Song>(this);
+    QFuture<QList<Song>> future = QtConcurrent::run(
+        playlist_backend_, &PlaylistBackend::GetPlaylistSongs, id);
+    QFutureWatcher<SongList>* watcher = new QFutureWatcher<SongList>(this);
     watcher->setFuture(future);
 
     NewClosure(watcher, SIGNAL(finished()), this,
-               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<Song>*, QString,
-                                               Playlist::Path)),
+               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<SongList>*,
+                                               QString, Playlist::Path)),
                watcher, filename);
   }
 }
 
-void PlaylistManager::ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
-                                                 const QString& filename,
-                                                 Playlist::Path path_type) {
-  SongList song_list = watcher->future().results();
+void PlaylistManager::ItemsLoadedForSavePlaylist(
+    QFutureWatcher<SongList>* watcher, const QString& filename,
+    Playlist::Path path_type) {
+  SongList song_list = watcher->future().result();
   parser_->Save(song_list, filename, path_type);
 }
 

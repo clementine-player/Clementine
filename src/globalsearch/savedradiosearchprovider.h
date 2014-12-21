@@ -19,7 +19,7 @@
 #define SAVEDRADIOSEARCHPROVIDER_H
 
 #include "simplesearchprovider.h"
-#include "internet/savedradio.h"
+#include "internet/internetradio/savedradio.h"
 
 class SavedRadioSearchProvider : public SimpleSearchProvider {
  public:

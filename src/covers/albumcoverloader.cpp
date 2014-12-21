@@ -29,8 +29,8 @@
 #include "core/network.h"
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
-#include "internet/internetmodel.h"
-#include "internet/spotifyservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/spotify/spotifyservice.h"
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
     : QObject(parent),

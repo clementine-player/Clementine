@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-14 21:39+0000\n"
+"PO-Revision-Date: 2014-12-14 07:35+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/clementine/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,7 +84,7 @@ msgstr "%1 giorni"
 msgid "%1 days ago"
 msgstr "%1 giorni fa"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 di %2"
@@ -94,7 +94,7 @@ msgstr "%1 di %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 scalette (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 selezionate di"
@@ -119,7 +119,7 @@ msgstr "%1 brani trovati"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 brani trovati (mostrati %2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 tracce"
@@ -264,7 +264,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "un giorno"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "una traccia"
 
@@ -424,7 +424,7 @@ msgstr "Attiva/disattiva Wiiremote"
 msgid "Activities stream"
 msgstr "Flussi di attività"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Aggiungi podcast"
 
@@ -488,7 +488,7 @@ msgstr "Aggiungi nuova cartella..."
 msgid "Add podcast"
 msgstr "Aggiungi podcast"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Aggiungi podcast..."
 
@@ -661,7 +661,7 @@ msgstr "Dopo "
 msgid "After copying..."
 msgstr "Dopo la copia..."
 
-#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -674,7 +674,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (volume ideale per tutte le tracce)"
 
-#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
@@ -832,7 +832,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Sei sicuro di voler scrivere le statistiche nei file dei brani della tua scaletta?"
 
-#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -909,11 +909,11 @@ msgstr "Bitrate medio"
 msgid "Average image size"
 msgstr "Dimensione immagine media"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "Podcast BBC"
 
-#: playlist/playlist.cpp:1340 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
@@ -942,7 +942,7 @@ msgstr "Copia di sicurezza del database"
 msgid "Balance"
 msgstr "Bilanciamento"
 
-#: analyzers/baranalyzer.cpp:22
+#: analyzers/baranalyzer.cpp:35
 msgid "Bar analyzer"
 msgstr "Analizzatore a barre"
 
@@ -967,7 +967,7 @@ msgstr "Migliore"
 msgid "Biography from %1"
 msgstr "Biografia da %1"
 
-#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Bitrate"
 
@@ -985,7 +985,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Bitrate"
 
-#: analyzers/blockanalyzer.cpp:23
+#: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
 msgstr "Analizzatore a blocchi"
 
@@ -1001,7 +1001,7 @@ msgstr "Sfocatura"
 msgid "Body"
 msgstr "Corpo"
 
-#: analyzers/boomanalyzer.cpp:11
+#: analyzers/boomanalyzer.cpp:32
 msgid "Boom analyzer"
 msgstr "Analizzatore Boom"
 
@@ -1059,6 +1059,10 @@ msgstr "Memorizzazione in cache di %1"
 #: internet/spotifyblobdownloader.cpp:50
 msgid "Cancel"
 msgstr "Annulla"
+
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr "Annulla lo scaricamento"
 
 #: internet/vkservice.cpp:624
 msgid ""
@@ -1136,13 +1140,13 @@ msgstr "Scegli dall'elenco"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Scegli l'ordinamento della scaletta e quanti brani conterrà."
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "Scegli la cartella di destinazione dei podcast"
 
 #: ../bin/src/ui_internetshowsettingspage.h:89
 msgid "Choose the internet services you want to show."
-msgstr "Scegli is servizi internet che vuoi mostrare."
+msgstr "Scegli i servizi Internet che vuoi mostrare."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1240,7 +1244,7 @@ msgstr "Clementine troverà la musica in:"
 msgid "Click here to add some music"
 msgstr "Fai clic qui per aggiungere della musica"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1264,7 +1268,7 @@ msgstr "Un clic sul pulsante Accedi aprirà un browser web. Torna a Clementine d
 msgid "Close"
 msgstr "Chiudi"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "Chiudi la scaletta"
 
@@ -1292,7 +1296,7 @@ msgstr "Colori"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Elenco separato da virgole di classe:livello, livello è 0-3"
 
-#: playlist/playlist.cpp:1359 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Commento"
@@ -1309,7 +1313,7 @@ msgstr "Completa automaticamente i tag"
 msgid "Complete tags automatically..."
 msgstr "Completa automaticamente i tag..."
 
-#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
@@ -1332,7 +1336,7 @@ msgstr "Configura Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Configura scorciatoie"
 
-#: internet/spotifyservice.cpp:812
+#: internet/spotifyservice.cpp:820
 msgid "Configure Spotify..."
 msgstr "Configura Spotify..."
 
@@ -1352,7 +1356,7 @@ msgstr "Configura la ricerca globale..."
 msgid "Configure library..."
 msgstr "Configura raccolta..."
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "Configura podcast..."
 
@@ -1422,7 +1426,7 @@ msgstr "Copia l'URL di condivisione negli appunti"
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copia su dispositivo..."
@@ -1449,7 +1453,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Impossibile creare l'elemento «%1» di GStreamer - assicurati che tutti i plugin necessari siano installati"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "Impossibile creare la scaletta"
 
@@ -1620,11 +1624,11 @@ msgid ""
 "recover your database"
 msgstr "Il database risulta danneggiato. Leggi https://code.google.com/p/clementine-player/wiki/DatabaseCorruption per le istruzioni su come ripristinare il database"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Data di modifica"
 
-#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Data di creazione"
 
@@ -1674,7 +1678,7 @@ msgstr "Elimina"
 msgid "Delete Grooveshark playlist"
 msgstr "Elimina scaletta di Grooveshark"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "Elimina i dati scaricati"
 
@@ -1796,7 +1800,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Disabilitata"
 
-#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
 #: ../bin/src/ui_ripcd.h:314
@@ -1871,7 +1875,7 @@ msgstr "Doppio clic per aprire"
 msgid "Double clicking a song will..."
 msgstr "Al doppio clic su un brano..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1893,7 +1897,7 @@ msgstr "Scaricamento"
 msgid "Download new episodes automatically"
 msgstr "Scarica automaticamente le nuove puntate"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
 msgstr "Scaricamento accodato"
 
@@ -1913,7 +1917,7 @@ msgstr "Scarica questo album"
 msgid "Download this album..."
 msgstr "Scarica questo album..."
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "Scarica questa puntata"
 
@@ -1921,7 +1925,7 @@ msgstr "Scarica questa puntata"
 msgid "Download..."
 msgstr "Scarica..."
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Scaricamento in corso (%1%)..."
@@ -2062,7 +2066,7 @@ msgstr "Inserisci un URL per scaricare una copertina da Internet:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Digita un nome file per le copertine esportate (nessuna estensione):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Inserisci un nuovo nome per questa scaletta"
 
@@ -2283,17 +2287,17 @@ msgstr "Durata della dissolvenza"
 msgid "Failed reading CD drive"
 msgstr "Lettura del CD non riuscita"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "Recupero della cartella non riuscito"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Recupero del podcast non riuscito"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Caricamento del podcast non riuscito"
 
@@ -2346,11 +2350,11 @@ msgstr "Estensione file"
 msgid "File formats"
 msgstr "Formati dei file"
 
-#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "Nome file"
 
-#: playlist/playlist.cpp:1348
+#: playlist/playlist.cpp:1351
 msgid "File name (without path)"
 msgstr "Nome file (senza percorso)"
 
@@ -2362,11 +2366,11 @@ msgstr "Modello di nome del file:"
 msgid "File paths"
 msgstr "Percorsi dei file"
 
-#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "Dimensione file"
 
-#: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1355 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
@@ -2463,7 +2467,7 @@ msgstr "Modulo"
 msgid "Format"
 msgstr "Formato"
 
-#: analyzers/analyzercontainer.cpp:47
+#: analyzers/analyzercontainer.cpp:52
 #: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Velocità fotogrammi"
@@ -2496,7 +2500,7 @@ msgstr "Generale"
 msgid "General settings"
 msgstr "Impostazioni generali"
 
-#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
@@ -2605,7 +2609,7 @@ msgstr "Raggruppa per genere/album"
 msgid "Group by Genre/Artist/Album"
 msgstr "Raggruppa per genere/artista/album"
 
-#: playlist/playlist.cpp:1326 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Gruppo"
@@ -2639,7 +2643,7 @@ msgstr "Le informazioni hardware sono disponibili solo quando il dispositivo è 
 msgid "High"
 msgstr "Alto"
 
-#: analyzers/analyzercontainer.cpp:64
+#: analyzers/analyzercontainer.cpp:69
 #: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
@@ -2916,7 +2920,7 @@ msgstr "Pannello laterale grande"
 msgid "Last played"
 msgstr "Ultima riproduzione"
 
-#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Ultima riproduzione"
@@ -2957,7 +2961,7 @@ msgstr "Tracce meno apprezzate"
 msgid "Left"
 msgstr "Sinistra"
 
-#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Durata"
@@ -3049,7 +3053,7 @@ msgstr "Caricamento delle tracce"
 msgid "Loading tracks info"
 msgstr "Caricamento informazioni della traccia"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3076,7 +3080,7 @@ msgstr "Carica file/URL, sostituendo la scaletta attuale"
 msgid "Login"
 msgstr "Accedi"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "Accesso non riuscito"
 
@@ -3092,7 +3096,7 @@ msgstr "Profilo con predizione di lungo termine (LTP)"
 msgid "Love"
 msgstr "Mi piace"
 
-#: analyzers/analyzercontainer.cpp:62
+#: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
@@ -3186,11 +3190,11 @@ msgstr "Manualmente"
 msgid "Manufacturer"
 msgstr "Produttore"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Marca come ascoltata"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "Marca come nuova"
 
@@ -3214,7 +3218,7 @@ msgstr "Bitrate massimo"
 msgid "Media has changed. Reloading"
 msgstr "Il media è cambiato. Aggiornamento in corso"
 
-#: analyzers/analyzercontainer.cpp:63
+#: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
@@ -3256,7 +3260,7 @@ msgstr "Riproduzione mono"
 msgid "Months"
 msgstr "Mesi"
 
-#: playlist/playlist.cpp:1363
+#: playlist/playlist.cpp:1366
 msgid "Mood"
 msgstr "Atmosfera"
 
@@ -3404,7 +3408,7 @@ msgstr "Traccia successiva"
 msgid "Next week"
 msgstr "Settimana prossima"
 
-#: analyzers/analyzercontainer.cpp:81
+#: analyzers/analyzercontainer.cpp:86
 msgid "No analyzer"
 msgstr "Nessun analizzatore"
 
@@ -3565,11 +3569,11 @@ msgstr "Apri %1 nel browser"
 msgid "Open &audio CD..."
 msgstr "Apri CD &audio..."
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Apri file OPML"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Apri file OPML..."
 
@@ -3638,7 +3642,7 @@ msgstr "Organizza file"
 msgid "Organise files..."
 msgstr "Organizza file..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Organizzazione file"
 
@@ -3709,7 +3713,7 @@ msgstr "Sospendi riproduzione"
 msgid "Paused"
 msgstr "In pausa"
 
-#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "Musicista"
@@ -3729,7 +3733,7 @@ msgstr "Barra laterale semplice"
 msgid "Play"
 msgstr "Riproduci"
 
-#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1334 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Contatore di riproduzione"
 
@@ -3759,8 +3763,8 @@ msgid "Player options"
 msgstr "Opzioni del lettore"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Scaletta"
 
@@ -3790,7 +3794,7 @@ msgstr "Chiudi il browser e ritorna a Clementine."
 msgid "Plugin status:"
 msgstr "Stato del plugin:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcast"
 
@@ -4000,7 +4004,7 @@ msgstr "Valuta il brano corrente con 4 stelle"
 msgid "Rate the current song 5 stars"
 msgstr "Valuta il brano corrente con 5 stelle"
 
-#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Valutazione"
 
@@ -4088,7 +4092,7 @@ msgstr "Rimuovi dai preferiti"
 msgid "Remove from playlist"
 msgstr "Rimuovi dalla scaletta"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Rimuovi la scaletta"
 
@@ -4117,11 +4121,11 @@ msgstr "Rinomina la scaletta \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Rinomina scaletta di Grooveshark"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Rinomina la scaletta"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Rinomina la scaletta..."
 
@@ -4254,7 +4258,7 @@ msgstr "Rimuovi il dispositivo in sicurezza"
 msgid "Safely remove the device after copying"
 msgstr "Rimuovi il dispositivo in sicurezza al termine della copia"
 
-#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Campionamento"
 
@@ -4283,12 +4287,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Salva la scaletta"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Salva la scaletta"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Salva la scaletta..."
 
@@ -4324,7 +4328,7 @@ msgstr "Profilo con campionamento scalabile (SSR)"
 msgid "Scale size"
 msgstr "Riscala le dimensioni"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Punteggio"
 
@@ -4686,7 +4690,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Salta indietro nella scaletta"
 
-#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Salta il conteggio"
 
@@ -4734,7 +4738,7 @@ msgstr "Informazioni brano"
 msgid "Song info"
 msgstr "Info brano"
 
-#: analyzers/sonogram.cpp:21
+#: analyzers/sonogram.cpp:32
 msgid "Sonogram"
 msgstr "Sonogramma"
 
@@ -4770,7 +4774,7 @@ msgstr "Ordinamento"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1361
+#: playlist/playlist.cpp:1364
 msgid "Source"
 msgstr "Fonte"
 
@@ -4913,7 +4917,7 @@ msgstr "Tag consigliati"
 msgid "Summary"
 msgstr "Riepilogo"
 
-#: analyzers/analyzercontainer.cpp:65
+#: analyzers/analyzercontainer.cpp:70
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
@@ -5013,8 +5017,8 @@ msgstr "La versione di Clementine appena aggiornata richiedere una scansione com
 msgid "There are other songs in this album"
 msgstr "Ci sono altri brani in questo album"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Si è verificato un problema durante la comunicazione con gpodder.net"
 
@@ -5107,7 +5111,7 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "È la prima volta che si connette questo dispositivo. Clementine effettuerà una scansione del dispositivo alla ricerca di file musicali - l'operazione potrebbe richiedere del tempo."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Questa opzione può essere modificata nelle preferenze di \"Comportamento\""
 
@@ -5120,7 +5124,7 @@ msgstr "Questo flusso è riservato ai soli abbonati"
 msgid "This type of device is not supported: %1"
 msgstr "Questi tipo di dispositivo non è supportato: %1"
 
-#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -5181,7 +5185,7 @@ msgstr "Totale byte trasferiti"
 msgid "Total network requests made"
 msgstr "Totale richieste di rete effettuate"
 
-#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
@@ -5216,7 +5220,7 @@ msgstr "Opzioni di transcodifica"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:18
+#: analyzers/turbine.cpp:35
 msgid "Turbine"
 msgstr "Turbina"
 
@@ -5247,8 +5251,8 @@ msgstr "Impossibile scaricare %1 (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Sconosciuto"
@@ -5273,7 +5277,7 @@ msgstr "Ripristina le tracce selezionate"
 msgid "Unskip track"
 msgstr "Ripristina la traccia"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "Rimuovi sottoscrizione"
 
@@ -5289,7 +5293,7 @@ msgstr "Aggiorna"
 msgid "Update Grooveshark playlist"
 msgstr "Aggiorna la scaletta di Grooveshark"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "Aggiorna tutti i podcast"
 
@@ -5301,7 +5305,7 @@ msgstr "Aggiorna le cartelle modificate della raccolta"
 msgid "Update the library when Clementine starts"
 msgstr "Aggiorna la raccolta all'avvio di Clementine"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "Aggiorna questo podcast"
 
@@ -5431,7 +5435,7 @@ msgid "Variable bit rate"
 msgstr "Bitrate variabile"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Artisti vari"
 
@@ -5486,7 +5490,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Muro"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Avvisami alla chiusura di una scheda della scaletta"
 
@@ -5604,7 +5608,7 @@ msgstr "Scrivi i metadati"
 msgid "Wrong username or password."
 msgstr "Nome utente o password non validi."
 
-#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5634,7 +5638,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Stai per rimuovere %1 scalette dai preferiti, sei sicuro?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5747,7 +5751,7 @@ msgstr "Le credenziali fornite per Magnatune non erano corrette"
 msgid "Your library is empty!"
 msgstr "La raccolta è vuota!"
 
-#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26 internet/savedradio.cpp:47
 msgid "Your radio streams"
 msgstr "I tuoi flussi radio"
 
@@ -5842,7 +5846,7 @@ msgstr "uguale a"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "gpodder.net directory"
 

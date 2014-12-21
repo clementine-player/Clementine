@@ -43,6 +43,8 @@ G_BEGIN_DECLS
 #define GST_FASTSPECTRUM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass), GST_TYPE_FASTSPECTRUM,GstFastSpectrumClass))
 #define GST_IS_FASTSPECTRUM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), GST_TYPE_FASTSPECTRUM))
 
+class QMutex;
+
 typedef void (*GstFastSpectrumInputData)(const guint8* in, double* out,
     guint len, double max_value, guint op, guint nfft);
 
@@ -84,6 +86,9 @@ struct GstFastSpectrum {
 
 struct GstFastSpectrumClass {
   GstAudioFilterClass parent_class;
+
+  // Static lock for creating & destroying FFTW plans.
+  QMutex* fftw_lock;
 };
 
 GType gst_fastspectrum_get_type (void);

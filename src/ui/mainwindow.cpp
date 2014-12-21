@@ -71,11 +71,11 @@
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchview.h"
 #include "globalsearch/librarysearchprovider.h"
-#include "internet/magnatuneservice.h"
-#include "internet/internetmodel.h"
-#include "internet/internetview.h"
-#include "internet/internetviewcontainer.h"
-#include "internet/savedradio.h"
+#include "internet/magnatune/magnatuneservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetview.h"
+#include "internet/core/internetviewcontainer.h"
+#include "internet/internetradio/savedradio.h"
 #include "library/groupbydialog.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -94,7 +94,7 @@
 #include "playlist/queuemanager.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
-#include "podcasts/podcastservice.h"
+#include "internet/podcasts/podcastservice.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
@@ -130,7 +130,7 @@
 #endif
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/lastfmservice.h"
+#include "internet/lastfm/lastfmservice.h"
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
@@ -147,7 +147,7 @@
 #endif
 
 #ifdef HAVE_VK
-#include "internet/vkservice.h"
+#include "internet/vk/vkservice.h"
 #endif
 
 #include <cmath>

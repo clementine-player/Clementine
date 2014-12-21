@@ -6,7 +6,7 @@
    Copyright 2011, Angus Gratton <gus@projectgus.com>
    Copyright 2012, Kacper "mattrick" Banasik <mattrick@jabster.pl>
    Copyright 2013, Martin Brodbeck <martin@brodbeck-online.de>
-   Copyright 2013, Andreas <asfa194@gmail.com>
+   Copyright 2013-2014, Andreas <asfa194@gmail.com>
    Copyright 2013, Joel Bradshaw <cincodenada@gmail.com>
    Copyright 2013, Uwe Klotz <uwe.klotz@gmail.com>
    Copyright 2013, Mateusz Kowalczyk <fuuzetsu@fuuzetsu.co.uk>
@@ -43,7 +43,7 @@
 #include <QtConcurrentRun>
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/fixlastfm.h"
+#include "internet/lastfm/fixlastfm.h"
 #ifdef HAVE_LIBLASTFM1
 #include <lastfm/Track.h>
 #else

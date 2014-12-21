@@ -19,7 +19,7 @@
 #ifndef VKSEARCHPROVIDER_H
 #define VKSEARCHPROVIDER_H
 
-#include "internet/vkservice.h"
+#include "internet/vk/vkservice.h"
 
 #include "searchprovider.h"
 

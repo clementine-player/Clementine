@@ -51,15 +51,15 @@
 #include "core/qhash_qurl.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
-#include "internet/jamendoplaylistitem.h"
-#include "internet/jamendoservice.h"
-#include "internet/magnatuneplaylistitem.h"
-#include "internet/magnatuneservice.h"
-#include "internet/internetmimedata.h"
-#include "internet/internetmodel.h"
-#include "internet/internetplaylistitem.h"
-#include "internet/internetsongmimedata.h"
-#include "internet/savedradio.h"
+#include "internet/jamendo/jamendoplaylistitem.h"
+#include "internet/jamendo/jamendoservice.h"
+#include "internet/magnatune/magnatuneplaylistitem.h"
+#include "internet/magnatune/magnatuneservice.h"
+#include "internet/core/internetmimedata.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetplaylistitem.h"
+#include "internet/core/internetsongmimedata.h"
+#include "internet/internetradio/savedradio.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
@@ -1446,7 +1446,7 @@ void Playlist::Save() const {
 }
 
 namespace {
-typedef QFutureWatcher<shared_ptr<PlaylistItem>> PlaylistItemFutureWatcher;
+typedef QFutureWatcher<QList<PlaylistItemPtr>> PlaylistItemFutureWatcher;
 }
 
 void Playlist::Restore() {
@@ -1456,7 +1456,8 @@ void Playlist::Restore() {
   virtual_items_.clear();
   library_items_by_id_.clear();
 
-  PlaylistBackend::PlaylistItemFuture future = backend_->GetPlaylistItems(id_);
+  QFuture<QList<PlaylistItemPtr>> future =
+      QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
   PlaylistItemFutureWatcher* watcher = new PlaylistItemFutureWatcher(this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(ItemsLoaded()));
@@ -1467,7 +1468,7 @@ void Playlist::ItemsLoaded() {
       static_cast<PlaylistItemFutureWatcher*>(sender());
   watcher->deleteLater();
 
-  PlaylistItemList items = watcher->future().results();
+  PlaylistItemList items = watcher->future().result();
 
   // backend returns empty elements for library items which it couldn't
   // match (because they got deleted); we don't need those

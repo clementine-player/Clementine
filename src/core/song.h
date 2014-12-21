@@ -9,6 +9,7 @@
    Copyright 2013, Joel Bradshaw <cincodenada@gmail.com>
    Copyright 2013, Uwe Klotz <uwe.klotz@gmail.com>
    Copyright 2013, Mateusz Kowalczyk <fuuzetsu@fuuzetsu.co.uk>
+   Copyright 2014, Andreas <asfa194@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify

@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-11-13 22:18+0000\n"
+"PO-Revision-Date: 2014-12-14 00:43+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,13 +51,13 @@ msgstr " hari"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:211
 #: ../bin/src/ui_transcoderoptionswma.h:80
 msgid " kbps"
-msgstr " kbps"
+msgstr " kbpd"
 
 #: ../bin/src/ui_playbacksettingspage.h:318
 #: ../bin/src/ui_playbacksettingspage.h:321
 #: ../bin/src/ui_playbacksettingspage.h:335
 msgid " ms"
-msgstr " ms"
+msgstr " md"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
@@ -92,7 +92,7 @@ msgstr "%1 hari"
 msgid "%1 days ago"
 msgstr "%1 hari yang lalu"
 
-#: podcasts/gpoddersync.cpp:83
+#: podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 pada %2"
@@ -102,7 +102,7 @@ msgstr "%1 pada %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 daftar putar (%2)"
 
-#: playlist/playlistmanager.cpp:407
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 terpilih dari"
@@ -127,10 +127,10 @@ msgstr "%1 lagu ditemukan"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 lagu ditemukan (menunjukkan %2)"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
-msgstr "%1 trek"
+msgstr "%1 track"
 
 #: ui/albumcovermanager.cpp:466
 #, qt-format
@@ -155,7 +155,7 @@ msgstr "%L1 total putaran"
 
 #: ../bin/src/ui_notificationssettingspage.h:433
 msgid "%filename%"
-msgstr "nama %berkas"
+msgstr "%nama berkas%"
 
 #: transcoder/transcodedialog.cpp:208
 #, c-format, qt-plural-format
@@ -181,7 +181,7 @@ msgstr "&Luruskan teks"
 
 #: playlist/playlistheader.cpp:40
 msgid "&Center"
-msgstr "&Tengah"
+msgstr "&Pusat"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:188
 msgid "&Custom"
@@ -234,7 +234,7 @@ msgstr "&Kanan"
 
 #: ../bin/src/ui_mainwindow.h:683
 msgid "&Shuffle mode"
-msgstr "Mode peng&acakan"
+msgstr "Mode peng&ocokan"
 
 #: playlist/playlistheader.cpp:33
 msgid "&Stretch columns to fit window"
@@ -250,7 +250,7 @@ msgstr "(berbeda diantara berbagai lagu)"
 
 #: internet/spotifyservice.cpp:424
 msgid ", by "
-msgstr ""
+msgstr ", oleh"
 
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
@@ -272,9 +272,9 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 Hari"
 
-#: playlist/playlistmanager.cpp:413
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
-msgstr "1 trek"
+msgstr "1 track"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
@@ -287,7 +287,7 @@ msgstr "40%"
 
 #: library/library.cpp:65
 msgid "50 random tracks"
-msgstr "50 trek acak"
+msgstr "50 track acak"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -301,7 +301,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr "<html><head/><body><p>Jika tidak dicek, Clementine akan mencoba untuk menyimpan data rating anda dan statistik lainya hanya dalam sebuah database terpisah dan tidak akan merubah berkas anda.</p><p>Jika dicek, Clementine akan menyimpan statistik di database dan langsung keberkas setiap berkas-berkas itu berubah.</p><p>Tolong catat bahwa hal tersebut mungkin tidak akan bekerja pada setiap format, dan tidak ada anjuran untuk melakukan hal tersebut, pemutar musik lain mungkin tidak akan bisa membacanya.</p></body></html>"
+msgstr "<html><head/><body><p>Jika tidak dicentang, Clementine akan mencoba untuk menyimpan data rating anda dan statistik lainya hanya dalam sebuah database terpisah dan tidak akan mengubahsuai berkas anda.</p><p>Jika dicentang, Clementine akan menyimpan statistik di database dan langsung ke berkas setiap berkas-berkas itu berubah.</p><p>Tolong catat bahwa hal tersebut mungkin tidak akan bekerja pada setiap format, dan tidak ada anjuran untuk melakukan hal tersebut, pemutar musik lain mungkin tidak akan bisa membacanya.</p></body></html>"
 
 #: ../bin/src/ui_libraryfilterwidget.h:97
 #, qt-format
@@ -320,7 +320,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr "<html><head/><body><p> Ini akan menulis peringkat lagu dan statistik ke dalam file tag untuk semua lagu perpustakaan anda.</p><p> Hal ini tidak diperlukan jika opsi &quot;Simpan peringkat dan statistik dalam berkas tag&quot; akan selalu diaktifkan.</p></body></html>"
+msgstr "<html><head/><body><p> Ini akan menulis peringkat lagu dan statistik ke dalam berkas tag untuk semua lagu perpustakaan anda.</p><p> Hal ini tidak diperlukan jika opsi &quot;Simpan peringkat dan statistik dalam berkas tag&quot; akan selalu diaktifkan.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:251
 msgid ""
@@ -401,7 +401,7 @@ msgstr "Tentang Qt..."
 #: playlist/playlistsaveoptionsdialog.cpp:34
 #: ../bin/src/ui_behavioursettingspage.h:286
 msgid "Absolute"
-msgstr ""
+msgstr "Absolut"
 
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -409,7 +409,7 @@ msgstr ""
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
 #: ../bin/src/ui_seafilesettingspage.h:169
 msgid "Account details"
-msgstr "Detail akun"
+msgstr "Rincian akun"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:161
 msgid "Account details (Premium)"
@@ -430,9 +430,9 @@ msgstr "Wiiremote aktif/tidak aktif"
 
 #: internet/soundcloudservice.cpp:124
 msgid "Activities stream"
-msgstr "Aktivitas aliran"
+msgstr "Aktivitas stream"
 
-#: podcasts/addpodcastdialog.cpp:61
+#: podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Tambah Podcast"
 
@@ -450,7 +450,7 @@ msgstr "Tambah aksi"
 
 #: ../bin/src/ui_transcodedialog.h:218
 msgid "Add all tracks from a directory and all its subdirectories"
-msgstr ""
+msgstr "Tambahkan semua track dari sebuah direktori dan termasuk semua subdirektorinya"
 
 #: internet/savedradio.cpp:106
 msgid "Add another stream..."
@@ -496,7 +496,7 @@ msgstr "Tambah folder baru..."
 msgid "Add podcast"
 msgstr "Tambah podcast"
 
-#: podcasts/podcastservice.cpp:333 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Tambah podcast..."
 
@@ -542,7 +542,7 @@ msgstr "Tambahkan tag pengelompokan pada lagu"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song length tag"
-msgstr "Tambah tag panjang lagu"
+msgstr "Tambahkan tag panjang lagu"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song performer tag"
@@ -550,11 +550,11 @@ msgstr "Tambahkan tag penyanyi lagu"
 
 #: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song play count"
-msgstr "Tambah nilai jumlah putar pada lagu"
+msgstr "Tambahkan nilai jumlah putar pada lagu"
 
 #: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Add song rating"
-msgstr "tambahkan rating pada lagu"
+msgstr "Tambahkan rating pada lagu"
 
 #: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Add song skip count"
@@ -570,7 +570,7 @@ msgstr "Tambah lagu ke cache"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song track tag"
-msgstr "Tambah tag trek lagu"
+msgstr "Tambah tag track lagu"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song year tag"
@@ -594,11 +594,11 @@ msgstr "Tambah ke daftar putar Grooveshark"
 
 #: internet/vkservice.cpp:310
 msgid "Add to My Music"
-msgstr "Tambah ke Musik Saya"
+msgstr "Tambahkan ke MusikKu"
 
 #: internet/spotifyservice.cpp:568
 msgid "Add to Spotify playlists"
-msgstr ""
+msgstr "Tambahkan ke daftar putar Spotify"
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -606,7 +606,7 @@ msgstr "Tambah ke daftar putar lainnya"
 
 #: internet/vkservice.cpp:296
 msgid "Add to bookmarks"
-msgstr "Tambah ke markah"
+msgstr "Tambah ke penanda"
 
 #: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
@@ -618,7 +618,7 @@ msgstr "Tambah ke antrian"
 
 #: internet/vkservice.cpp:326
 msgid "Add user/group to bookmarks"
-msgstr "Tambah pengguna/kelompok ke markah"
+msgstr "Tambah pengguna/kelompok ke penanda"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
@@ -669,7 +669,7 @@ msgstr "Setelah "
 msgid "After copying..."
 msgstr "Setelah menyalin..."
 
-#: playlist/playlist.cpp:1308 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -680,9 +680,9 @@ msgstr "Album"
 
 #: ../bin/src/ui_playbacksettingspage.h:328
 msgid "Album (ideal loudness for all tracks)"
-msgstr "Album (kenyaringan ideal untuk semua trek)"
+msgstr "Album (kenyaringan ideal untuk semua track)"
 
-#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
@@ -698,7 +698,7 @@ msgstr "Info album di jamendo.com..."
 
 #: internet/vkservice.cpp:825
 msgid "Albums"
-msgstr ""
+msgstr "Album"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -715,7 +715,7 @@ msgstr "Semua Berkas (*)"
 #: ../bin/src/ui_mainwindow.h:679
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
-msgstr ""
+msgstr "All Glory to the Hypnotoad!"
 
 #: ui/albumcovermanager.cpp:134
 msgid "All albums"
@@ -740,7 +740,7 @@ msgstr "Semua translator"
 
 #: library/library.cpp:101
 msgid "All tracks"
-msgstr "Semua trek"
+msgstr "Semua track"
 
 #: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
@@ -775,7 +775,7 @@ msgstr "Selalu mulai memutar"
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr "Plugin tambahan dibutukan untuk menggunakan Spotify di Clementine. Apakah anda ingin mendownload dang menginstallnya sekarang?"
+msgstr "Plugin tambahan dibutukan untuk menggunakan Spotify di Clementine. Apakah anda ingin mengunduh dan memasangnya sekarang?"
 
 #: devices/gpodloader.cpp:60
 msgid "An error occurred loading the iTunes database"
@@ -788,7 +788,7 @@ msgstr "Kesalahan terjadi saat menulis metadata ke '%1'"
 
 #: internet/subsonicsettingspage.cpp:102
 msgid "An unspecified error occurred."
-msgstr "Telah terjadi error tak spesifik"
+msgstr "Telah terjadi kesalahan tak spesifik"
 
 #: ui/about.cpp:84
 msgid "And:"
@@ -801,21 +801,21 @@ msgstr "Marah"
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
-msgstr "Tampilan"
+msgstr "Penampilan"
 
 #: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
-msgstr "Bubuhkan berkas/URL ke daftar putar"
+msgstr "Lampirkan berkas/URL ke daftar putar"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:452
 #: internet/internetservice.cpp:53 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
-msgstr "Bubuhkan ke daftar putar saat ini"
+msgstr "Lampirkan ke daftar putar saat ini"
 
 #: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Append to the playlist"
-msgstr "Bubuhkan ke daftar putar"
+msgstr "Lampirkan ke daftar putar"
 
 #: ../bin/src/ui_playbacksettingspage.h:331
 msgid "Apply compression to prevent clipping"
@@ -840,7 +840,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Apa anda yakin ingin menuliskan statistik lagu kedalam berkas lagu untuk semua lagu di perpustakan anda?"
 
-#: playlist/playlist.cpp:1306 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -863,7 +863,7 @@ msgstr "Inisial Artis"
 
 #: ../bin/src/ui_behavioursettingspage.h:288
 msgid "Ask when saving"
-msgstr ""
+msgstr "Konfirmasi ketika menyimpan"
 
 #: ../bin/src/ui_transcodedialog.h:222
 #: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
@@ -917,18 +917,18 @@ msgstr "Bitrate rata-rata"
 msgid "Average image size"
 msgstr "Ukuran rata-rata gambar"
 
-#: podcasts/addpodcastdialog.cpp:86
+#: podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "Podcast BBC"
 
-#: playlist/playlist.cpp:1340 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "Background Streams"
-msgstr "Stream latar belakang"
+msgstr "Stream Latar Belakang"
 
 #: ../bin/src/ui_notificationssettingspage.h:460
 msgid "Background color"
@@ -950,7 +950,7 @@ msgstr "Buat cadangan database"
 msgid "Balance"
 msgstr "Seimbang"
 
-#: analyzers/baranalyzer.cpp:22
+#: analyzers/baranalyzer.cpp:35
 msgid "Bar analyzer"
 msgstr "Penganalisa batang"
 
@@ -975,7 +975,7 @@ msgstr "Terbaik"
 msgid "Biography from %1"
 msgstr "Biografi dari %1"
 
-#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Bit rate"
 
@@ -993,7 +993,7 @@ msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Laju Bit"
 
-#: analyzers/blockanalyzer.cpp:23
+#: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
 msgstr "Penganalisa blok"
 
@@ -1009,7 +1009,7 @@ msgstr "Jumlah blur"
 msgid "Body"
 msgstr "Badan"
 
-#: analyzers/boomanalyzer.cpp:11
+#: analyzers/boomanalyzer.cpp:32
 msgid "Boom analyzer"
 msgstr "Penganalisa dentuman"
 
@@ -1053,26 +1053,30 @@ msgstr "Dukungan lembar CUE"
 
 #: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
-msgstr ""
+msgstr "Lokasi cache:"
 
 #: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
-msgstr ""
+msgstr "Men-cache"
 
 #: internet/vkmusiccache.cpp:119
 #, qt-format
 msgid "Caching %1"
-msgstr ""
+msgstr "Men-cache %1"
 
 #: internet/spotifyblobdownloader.cpp:50
 msgid "Cancel"
 msgstr "Batal"
 
+#: podcasts/podcastservice.cpp:423
+msgid "Cancel download"
+msgstr ""
+
 #: internet/vkservice.cpp:624
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
-msgstr ""
+msgstr "Captcha dibutuhkan.\nMencoba login ke Vk.com dengan browser Anda untuk menyelesaikan masalah ini."
 
 #: ../bin/src/ui_edittagdialog.h:667
 msgid "Change cover art"
@@ -1092,7 +1096,7 @@ msgstr "Ubah shortcut..."
 
 #: core/globalshortcuts.cpp:71
 msgid "Change shuffle mode"
-msgstr "Ubah mode pengacakan"
+msgstr "Ubah mode pengocokan"
 
 #: core/commandlineoptions.cpp:172
 msgid "Change the language"
@@ -1118,7 +1122,7 @@ msgstr "Cek pembaruan..."
 
 #: internet/vksettingspage.cpp:97
 msgid "Choose Vk.com cache directory"
-msgstr ""
+msgstr "Pilih direktori cache Vk.com"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
@@ -1144,13 +1148,13 @@ msgstr "Pilih dari daftar"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Pilih bagaiman daftar putar diurutkan dan berapa banyak lagu di dalamnya."
 
-#: podcasts/podcastsettingspage.cpp:135
+#: podcasts/podcastsettingspage.cpp:136
 msgid "Choose podcast download directory"
 msgstr "Pilih direktori unduhan podcast"
 
 #: ../bin/src/ui_internetshowsettingspage.h:89
 msgid "Choose the internet services you want to show."
-msgstr ""
+msgstr "Pilih layanan internet yang Anda ingin tampilkan."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1182,7 +1186,7 @@ msgstr "Clementine"
 
 #: ../bin/src/ui_errordialog.h:93
 msgid "Clementine Error"
-msgstr "Error Clementine"
+msgstr "Clementine Error"
 
 #: ../bin/src/ui_notificationssettingspage.h:464
 msgid "Clementine Orange"
@@ -1217,7 +1221,7 @@ msgstr "Clementine akan putar musik yang akan anda unggah itu ke OneDrive"
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Clementine can show a message when the track changes."
-msgstr "Clementine dapat menunjukkan pesan ketika ubah trek."
+msgstr "Clementine dapat menunjukkan pesan ketika perubahan track."
 
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid ""
@@ -1230,7 +1234,7 @@ msgstr "Clementine dapat menyinkronkan daftar langganan Anda dengan komputer lai
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr "Clementine tidak dapat memuat semua visualisasi projectM. Periksa apakah Anda telah menginstal Clementine dengan benar."
+msgstr "Clementine tidak dapat memuat semua visualisasi projectM. Periksa apakah Clementine Anda telah terpasang dengan benar."
 
 #: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
@@ -1238,7 +1242,7 @@ msgstr "Penampil gambar Clementine"
 
 #: ../bin/src/ui_trackselectiondialog.h:206
 msgid "Clementine was unable to find results for this file"
-msgstr "Clementine tidak dapat menemukan hasil untuk file ini"
+msgstr "Clementine tidak dapat menemukan hasil untuk berkas ini"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
@@ -1248,7 +1252,7 @@ msgstr "Clementine akan mencari musik di:"
 msgid "Click here to add some music"
 msgstr "Klik di sini untuk menambahkan musik"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1272,7 +1276,7 @@ msgstr "Mengklik tombol Masuk akan membuka browser web.  Anda harus kembali ke C
 msgid "Close"
 msgstr "Tutup"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "Tutup daftar putar"
 
@@ -1300,7 +1304,7 @@ msgstr "Warna-warna"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Daftar koma terpisah dari kelas: tingkat, tingkat ini adalah 0-3"
 
-#: playlist/playlist.cpp:1359 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Komentar"
@@ -1317,7 +1321,7 @@ msgstr "Isi tag secara otomatis"
 msgid "Complete tags automatically..."
 msgstr "Isi tag secara otomatis..."
 
-#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
@@ -1340,7 +1344,7 @@ msgstr "Konfigurasi Magnature"
 msgid "Configure Shortcuts"
 msgstr "Konfigurasi Jalan Pintas"
 
-#: internet/spotifyservice.cpp:812
+#: internet/spotifyservice.cpp:820
 msgid "Configure Spotify..."
 msgstr "Konfigurasi Spotify"
 
@@ -1360,7 +1364,7 @@ msgstr "Konfigurasi pencarian global..."
 msgid "Configure library..."
 msgstr "Konfigurasi Pustaka"
 
-#: podcasts/addpodcastdialog.cpp:73 podcasts/podcastservice.cpp:367
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
 msgid "Configure podcasts..."
 msgstr "Konfigurasi podcast..."
 
@@ -1416,11 +1420,11 @@ msgstr "Konversi semua musik yang tidak dapat dimainkan oleh perangkat itu."
 
 #: ../bin/src/ui_networkremotesettingspage.h:248
 msgid "Convert lossless audiofiles before sending them to the remote."
-msgstr ""
+msgstr "Konversi berkas audio lossless sebelum mengirim mereka ke remote."
 
 #: ../bin/src/ui_networkremotesettingspage.h:250
 msgid "Convert lossless files"
-msgstr ""
+msgstr "Konversi berkas lossless"
 
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
@@ -1430,7 +1434,7 @@ msgstr "Salin bagi url ke papan klip"
 msgid "Copy to clipboard"
 msgstr "Salin ke papan klip"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:354
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Salin ke perangkat..."
@@ -1455,9 +1459,9 @@ msgstr "Tidak dapat melakukan koneksi ke Subsonic, cek URL server. Contoh:\nhttp
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr "Tidak dapat membuat elemen GStreamer \"%1\" - pastikan Anda memiliki semua pengaya GStreamer yang telah terinstal"
+msgstr "Tidak dapat membuat elemen GStreamer \"%1\" - pastikan Anda memiliki semua plugin GStreamer yang telah terpasang"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr "Tidak bisa membuat daftar putar"
 
@@ -1466,14 +1470,14 @@ msgstr "Tidak bisa membuat daftar putar"
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr "Tidak dapat menemukan muxer untuk %1, periksa Anda memiliki pengaya GStreamer terinstal dengan benar"
+msgstr "Tidak dapat menemukan muxer untuk %1, periksa apakah Anda memiliki plugin GStreamer yang tepasang dengan benar"
 
 #: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr "Tidak dapat menemukan enkoder untuk %1, periksa Anda memiliki pengaya GStreamer terinstal dengan benar"
+msgstr "Tidak dapat menemukan enkoder untuk %1, periksa apakah Anda memiliki plugin GStreamer yang terpasang dengan benar"
 
 #: internet/magnatunedownloaddialog.cpp:218
 #, qt-format
@@ -1519,11 +1523,11 @@ msgstr "Buat sebuah daftar putar Grooveshark baru"
 
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
-msgstr "Pudaran-suara ketika mengubah trek secara otomatis"
+msgstr "Pudar-suara ketika mengubah track secara otomatis"
 
 #: ../bin/src/ui_playbacksettingspage.h:314
 msgid "Cross-fade when changing tracks manually"
-msgstr "Pudaran-suara ketika mengubah trek secara manual"
+msgstr "Pudar-suara ketika mengubah track secara manual"
 
 #: ../bin/src/ui_mainwindow.h:651
 msgid "Ctrl+Alt+V"
@@ -1628,11 +1632,11 @@ msgid ""
 "recover your database"
 msgstr "Kerusakan database terdeteksi. Harap baca https://code.google.com/p/clementine-player/wiki/DatabaseCorruption untuk instruksi bagaimana cara untuk mendapatkan kembali database Anda"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Tanggal dibuat"
 
-#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Tanggal dimodifikasi"
 
@@ -1682,14 +1686,14 @@ msgstr "Hapus"
 msgid "Delete Grooveshark playlist"
 msgstr "Hapus daftar putar Grooveshark"
 
-#: podcasts/podcastservice.cpp:350
+#: podcasts/podcastservice.cpp:416
 msgid "Delete downloaded data"
 msgstr "Hapus data yang sudah diunduh"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
 msgid "Delete files"
-msgstr "Hapus file"
+msgstr "Hapus berkas"
 
 #: devices/deviceview.cpp:228
 msgid "Delete from device..."
@@ -1714,19 +1718,19 @@ msgstr "Hapus daftar putar pintar"
 
 #: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
-msgstr "Hapus file asli"
+msgstr "Hapus berkas asli"
 
 #: core/deletefiles.cpp:50
 msgid "Deleting files"
-msgstr "Menghapus file"
+msgstr "Menghapus berkas"
 
 #: ui/mainwindow.cpp:1570
 msgid "Dequeue selected tracks"
-msgstr "Batalkan antrian trek terpilih"
+msgstr "Batalkan antrian track terpilih"
 
 #: ui/mainwindow.cpp:1568
 msgid "Dequeue track"
-msgstr "Batalkan antrian trek"
+msgstr "Batalkan antrian track"
 
 #: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
@@ -1735,7 +1739,7 @@ msgstr "Tujuan"
 
 #: ../bin/src/ui_transcodedialog.h:231
 msgid "Details..."
-msgstr "Detail..."
+msgstr "Rincian..."
 
 #: devices/devicekitlister.cpp:128 devices/giolister.cpp:156
 msgid "Device"
@@ -1804,7 +1808,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Dinonaktifkan"
 
-#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
 #: ../bin/src/ui_ripcd.h:314
@@ -1813,7 +1817,7 @@ msgstr "Piringan"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Discontinuous transmission"
-msgstr "Transmisi diskontinu"
+msgstr "Transmisi terputus-putus"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
 #: library/libraryfilterwidget.cpp:104 ../bin/src/ui_librarysettingspage.h:207
@@ -1826,7 +1830,7 @@ msgstr "Tampilkan pada layar-tampilan"
 
 #: ../bin/src/ui_mainwindow.h:705
 msgid "Do a full library rescan"
-msgstr "Lakukan scan ulang pustaka keseluruhan"
+msgstr "Lakukan pindai ulang pustaka keseluruhan"
 
 #: internet/googledriveservice.cpp:250 internet/googledriveservice.cpp:257
 msgid "Do a full rescan"
@@ -1842,14 +1846,14 @@ msgstr "Jangan ubah jenis musik apa pun"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Do not overwrite"
-msgstr "Jangan tulis timpa"
+msgstr "Jangan timpa"
 
 #: internet/googledriveservice.cpp:251
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in Google Drive which may take some time."
-msgstr "Melakukan pemindaian ulang secara keseluruhan akan menghilangkan segala metadata yang Anda simpan di Clementine, seperti cover art, banyaknya dimainkan, dan peringkat. Clementine akan memindai ulang semua musik Anda di Google Drive yang mungkin memerlukan beberapa waktu."
+msgstr "Melakukan pemindaian ulang secara keseluruhan akan menghilangkan segala metadata yang Anda simpan di Clementine, seperti seni sampul, banyaknya diputar, dan peringkat. Clementine akan memindai ulang semua musik Anda di Google Drive yang mungkin memerlukan beberapa waktu."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1861,7 +1865,7 @@ msgstr "Jangan menunjukkan berbagai artis"
 
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
-msgstr "Jangan acak"
+msgstr "Jangan kocok"
 
 #: internet/magnatunedownloaddialog.cpp:306 ui/albumcovermanager.cpp:221
 msgid "Don't stop!"
@@ -1879,7 +1883,7 @@ msgstr "Kilk ganda untuk buka"
 msgid "Double clicking a song will..."
 msgstr "Klik ganda lagu akan ..."
 
-#: podcasts/podcastservice.cpp:442
+#: podcasts/podcastservice.cpp:512
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1901,17 +1905,17 @@ msgstr "Unduh keanggotaan"
 msgid "Download new episodes automatically"
 msgstr "Unduh episode baru secara otomatis"
 
-#: podcasts/podcastservice.cpp:258
+#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
 msgid "Download queued"
-msgstr "Antri unduh"
+msgstr "Antrian unduh"
 
 #: ../bin/src/ui_networkremotesettingspage.h:246
 msgid "Download settings"
-msgstr ""
+msgstr "Pengaturan unduhan"
 
 #: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
-msgstr "Unduh Android app"
+msgstr "Unduh apl Android"
 
 #: internet/magnatuneservice.cpp:272
 msgid "Download this album"
@@ -1921,7 +1925,7 @@ msgstr "Unduh album ini"
 msgid "Download this album..."
 msgstr "Unduh album ini..."
 
-#: podcasts/podcastservice.cpp:444
+#: podcasts/podcastservice.cpp:514
 msgid "Download this episode"
 msgstr "Unduh episode ini"
 
@@ -1929,14 +1933,14 @@ msgstr "Unduh episode ini"
 msgid "Download..."
 msgstr "Unduh..."
 
-#: podcasts/podcastservice.cpp:266
+#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
 #, qt-format
 msgid "Downloading (%1%)..."
-msgstr "Memuat (%1%)..."
+msgstr "Mengunduh (%1%)..."
 
 #: internet/icecastservice.cpp:101
 msgid "Downloading Icecast directory"
-msgstr "Unduh direktori Icecast"
+msgstr "Menunduh direktori Icecast"
 
 #: internet/jamendoservice.cpp:195
 msgid "Downloading Jamendo catalogue"
@@ -1944,15 +1948,15 @@ msgstr "Mengunduh katalok Jamendo"
 
 #: internet/magnatuneservice.cpp:152
 msgid "Downloading Magnatune catalogue"
-msgstr "Unduh katalog Magnatune"
+msgstr "Mengunduh katalog Magnatune"
 
 #: internet/spotifyblobdownloader.cpp:49
 msgid "Downloading Spotify plugin"
-msgstr "Unduh pengaya Spotify"
+msgstr "Mengunduh plugin Spotify"
 
 #: musicbrainz/tagfetcher.cpp:107
 msgid "Downloading metadata"
-msgstr "Unduh metadata"
+msgstr "Mengunduh metadata"
 
 #: ui/notificationssettingspage.cpp:36
 msgid "Drag to reposition"
@@ -1972,11 +1976,11 @@ msgstr "Durasi"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
-msgstr "Mode dinamik berjalan"
+msgstr "Mode dinamis nyala"
 
 #: internet/jamendoservice.cpp:121 library/library.cpp:115
 msgid "Dynamic random mix"
-msgstr "Campuran random dinamik"
+msgstr "Campuran acak dinamis"
 
 #: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
@@ -1997,16 +2001,16 @@ msgstr "Sunting label-label"
 
 #: ../bin/src/ui_edittagdialog.h:665
 msgid "Edit track information"
-msgstr "Sunting informasi trek"
+msgstr "Sunting informasi track"
 
 #: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
-msgstr "Sunting informasi trek..."
+msgstr "Sunting informasi track..."
 
 #: library/libraryview.cpp:410
 msgid "Edit tracks information..."
-msgstr "Sunting informasi trek..."
+msgstr "Sunting informasi track..."
 
 #: internet/savedradio.cpp:103
 msgid "Edit..."
@@ -2014,7 +2018,7 @@ msgstr "Sunting..."
 
 #: ../bin/src/ui_seafilesettingspage.h:172
 msgid "Email"
-msgstr "Surel"
+msgstr "Email"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
@@ -2022,11 +2026,11 @@ msgstr "Aktifkan dukungan Remote Wii"
 
 #: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
-msgstr "Aktifkan cache otomatis"
+msgstr "Aktifkan men-cache otomatis"
 
 #: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
-msgstr "Aktifkan ekualiser"
+msgstr "Aktifkan equalizer"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -2034,7 +2038,7 @@ msgstr "Aktifkan jalan pintas hanya ketika Clementine difokuskan"
 
 #: ../bin/src/ui_behavioursettingspage.h:262
 msgid "Enable song metadata inline edition with click"
-msgstr ""
+msgstr "Aktifkan edisi metadata lagu dalam baris dengan mengekliknya"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2070,7 +2074,7 @@ msgstr "Masukkan URL untuk mengunduh sampul dari Internet:"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Masukkan nama berkas untuk eksport sampul (tanpa ekstensi):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Masukkan nama baru untuk daftar putar ini"
 
@@ -2094,7 +2098,7 @@ msgstr "Masukkan pencarian istilah di sini"
 
 #: ../bin/src/ui_addstreamdialog.h:114
 msgid "Enter the URL of an internet radio stream:"
-msgstr "Masukkan URL aliran radio internet:"
+msgstr "Masukkan URL radio stream internet:"
 
 #: playlist/playlistlistcontainer.cpp:169
 msgid "Enter the name of the folder"
@@ -2110,7 +2114,7 @@ msgstr "Semua koleksi"
 
 #: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:686
 msgid "Equalizer"
-msgstr "Ekualiser"
+msgstr "Equalizer"
 
 #: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
@@ -2129,7 +2133,7 @@ msgstr "Kesalahan"
 
 #: ui/ripcd.cpp:295
 msgid "Error Ripping CD"
-msgstr ""
+msgstr "Kesalahan Mencabik CD"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2145,7 +2149,7 @@ msgstr "Kesalahan saat menghapus lagu"
 
 #: internet/spotifyblobdownloader.cpp:220
 msgid "Error downloading Spotify plugin"
-msgstr "Kesalahan pengunduhan pengaya Spotify"
+msgstr "Kesalahan pengunduhan plugin Spotify"
 
 #: playlist/songloaderinserter.cpp:64
 #, qt-format
@@ -2200,7 +2204,7 @@ msgstr "Setiap jam"
 
 #: ../bin/src/ui_playbacksettingspage.h:316
 msgid "Except between tracks on the same album or in the same CUE sheet"
-msgstr "Kecuali antara trek pada album yang sama atau di lembar CUE yang sama"
+msgstr "Kecuali antara track pada album yang sama atau di lembar CUE yang sama"
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
@@ -2225,7 +2229,7 @@ msgstr "Eksport sampul"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export downloaded covers"
-msgstr "Eksport unduhan sampul"
+msgstr "Ekspor sampul yang sudah diunduh"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Export embedded covers"
@@ -2291,17 +2295,17 @@ msgstr "Durasi memudar"
 msgid "Failed reading CD drive"
 msgstr "Gagal membaca CD drive"
 
-#: podcasts/gpoddertoptagspage.cpp:71
+#: podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "Gagal mengambil direktori"
 
-#: podcasts/gpoddersearchpage.cpp:74 podcasts/gpoddertoptagsmodel.cpp:103
+#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
 #: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
 #: podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Gagal mengambil podcast"
 
-#: podcasts/addpodcastbyurl.cpp:68 podcasts/fixedopmlpage.cpp:54
+#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Gagal memuat podcast"
 
@@ -2320,7 +2324,7 @@ msgstr "Favorit"
 
 #: library/library.cpp:91
 msgid "Favourite tracks"
-msgstr "Trek kesukaan"
+msgstr "Track faforit"
 
 #: ../bin/src/ui_albumcovermanager.h:225
 msgid "Fetch Missing Covers"
@@ -2348,17 +2352,17 @@ msgstr "Format Berkas"
 
 #: ui/organisedialog.cpp:77
 msgid "File extension"
-msgstr "Ekstensi file"
+msgstr "Ekstensi berkas"
 
 #: ../bin/src/ui_deviceproperties.h:384
 msgid "File formats"
-msgstr "Format file"
+msgstr "Format berkas"
 
-#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
-msgstr "Nama file"
+msgstr "Nama berkas"
 
-#: playlist/playlist.cpp:1348
+#: playlist/playlist.cpp:1351
 msgid "File name (without path)"
 msgstr "Nama berkas (tanpa jalur)"
 
@@ -2368,25 +2372,25 @@ msgstr "Susunan nama berkas:"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:96
 msgid "File paths"
-msgstr ""
+msgstr "Lokasi berkas"
 
-#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
-msgstr "Ukuran file"
+msgstr "Ukuran berkas"
 
-#: playlist/playlist.cpp:1352 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1355 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
-msgstr "Tipe file"
+msgstr "Tipe berkas"
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Filename"
-msgstr "Nama file"
+msgstr "Nama berkas"
 
 #: ui/mainwindow.cpp:239
 msgid "Files"
-msgstr "File"
+msgstr "Berkas"
 
 #: ../bin/src/ui_transcodedialog.h:211
 msgid "Files to transcode"
@@ -2441,7 +2445,7 @@ msgstr "Lupakan perangkat"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "Melupakan perangkat akan menghapusnya dari daftar ini dan Clementine harus pemindaian ulang semua lagu lagi dilain waktu ketika Anda menghubungkannya."
+msgstr "Melupakan perangkat akan membuangnya dari daftar ini dan Clementine harus memindai ulang semua lagu lagi dilain waktu ketika Anda menghubungkannya."
 
 #: ../bin/src/ui_deviceviewcontainer.h:98
 #: ../bin/src/ui_searchproviderstatuswidget.h:94
@@ -2471,7 +2475,7 @@ msgstr "Formulir"
 msgid "Format"
 msgstr "Format"
 
-#: analyzers/analyzercontainer.cpp:47
+#: analyzers/analyzercontainer.cpp:52
 #: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Laju bingkai"
@@ -2504,7 +2508,7 @@ msgstr "Umum"
 msgid "General settings"
 msgstr "Pengaturan umum"
 
-#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
@@ -2529,7 +2533,7 @@ msgstr "Mendapatkan saluran"
 
 #: internet/digitallyimportedservicebase.cpp:102
 msgid "Getting streams"
-msgstr "Mendapatkan aliran"
+msgstr "Mendapatkan stream"
 
 #: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
@@ -2613,7 +2617,7 @@ msgstr "Kelompokkan menurut Genre/Album"
 msgid "Group by Genre/Artist/Album"
 msgstr "Kelompokkan menurut Genre/Artis/Album"
 
-#: playlist/playlist.cpp:1326 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Pengelompokan"
@@ -2647,7 +2651,7 @@ msgstr "Informasi hardware hanya tersedia ketika perangkat terhubung."
 msgid "High"
 msgstr "Tinggi"
 
-#: analyzers/analyzercontainer.cpp:64
+#: analyzers/analyzercontainer.cpp:69
 #: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
@@ -2689,7 +2693,7 @@ msgstr "Mengidentifikasi lagu"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr "Jika diaktifkan, mengeklik lagu yang dipilih di dalam tampilan playlist anda dapat mengedit nilai tag secara langsung"
+msgstr "Jika diaktifkan, mengeklik lagu yang dipilih di dalam tampilan daftar putar anda dapat menyunting nilai tag secara langsung"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2715,7 +2719,7 @@ msgstr "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
 #: ../bin/src/ui_transcodedialog.h:220
 msgid "Import..."
-msgstr ""
+msgstr "Import..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -2731,7 +2735,7 @@ msgstr "Dalam %1 minggu"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "Dalam mode dinamis trek baru akan dipilih dan ditambahkan ke daftar putar setiap lagu selesai."
+msgstr "Dalam mode dinamis track baru akan dipilih dan ditambahkan ke daftar putar setiap lagu selesai."
 
 #: internet/spotifyservice.cpp:386
 msgid "Inbox"
@@ -2788,7 +2792,7 @@ msgstr "sisipkan"
 
 #: internet/spotifysettingspage.cpp:72
 msgid "Installed"
-msgstr "Terinstall"
+msgstr "Terpasang"
 
 #: core/database.cpp:585
 msgid "Integrity check"
@@ -2805,7 +2809,7 @@ msgstr "penyedia layanan internet"
 #: ../bin/src/ui_internetshowsettingspage.h:87
 msgctxt "Global search settings dialog title."
 msgid "Internet services"
-msgstr ""
+msgstr "Layanan internet"
 
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
@@ -2849,19 +2853,19 @@ msgstr "Jamendo"
 
 #: internet/jamendoservice.cpp:117
 msgid "Jamendo Most Listened Tracks"
-msgstr "Trek Jamendo yang Paling Sering Didengar"
+msgstr "Track Jamendo yang Paling Sering Didengar"
 
 #: internet/jamendoservice.cpp:114
 msgid "Jamendo Top Tracks"
-msgstr "Trek Jamendo Terpopuler"
+msgstr "Track Jamendo Terpopuler"
 
 #: internet/jamendoservice.cpp:108
 msgid "Jamendo Top Tracks of the Month"
-msgstr "Trek Jamendo Terpopuler Bulanan"
+msgstr "Track Jamendo Terpopuler Bulanan"
 
 #: internet/jamendoservice.cpp:111
 msgid "Jamendo Top Tracks of the Week"
-msgstr "Trek Jamendo Terpopuler Mingguan"
+msgstr "Track Jamendo Terpopuler Mingguan"
 
 #: internet/jamendoservice.cpp:175
 msgid "Jamendo database"
@@ -2869,7 +2873,7 @@ msgstr "database Jamendo"
 
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
-msgstr "Lompat ke trek yang sedang didengarkan sekarang"
+msgstr "Lompat ke track yang sedang didengarkan sekarang"
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:69
 #, qt-format
@@ -2924,7 +2928,7 @@ msgstr "Bilah samping besar"
 msgid "Last played"
 msgstr "Terakhir dimainkan"
 
-#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Terakhir diputar"
@@ -2959,13 +2963,13 @@ msgstr "Wiki Last.fm"
 
 #: library/library.cpp:105
 msgid "Least favourite tracks"
-msgstr "Trek paling tidak disukai"
+msgstr "Track paling tidak disukai"
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Left"
 msgstr "Kiri"
 
-#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Durasi"
@@ -3047,17 +3051,17 @@ msgstr "Pemuatan lagu-lagu"
 #: internet/digitallyimportedurlhandler.cpp:63
 #: internet/somafmurlhandler.cpp:49
 msgid "Loading stream"
-msgstr "Pemuatan aliran"
+msgstr "Memuat stream"
 
 #: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
-msgstr "Pemuatan trek"
+msgstr "Memuat track"
 
 #: playlist/songloaderinserter.cpp:149
 msgid "Loading tracks info"
-msgstr "Pemuatan info trek"
+msgstr "Memuat info track"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:104
+#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 #: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
@@ -3084,7 +3088,7 @@ msgstr "Pemuatan berkas/URL, menggantikan daftar putar saat ini"
 msgid "Login"
 msgstr "Masuk"
 
-#: podcasts/podcastsettingspage.cpp:122
+#: podcasts/podcastsettingspage.cpp:123
 msgid "Login failed"
 msgstr "Gagal masuk"
 
@@ -3100,7 +3104,7 @@ msgstr "Profil prediksi jangka panjang (LTP)"
 msgid "Love"
 msgstr "Suka"
 
-#: analyzers/analyzercontainer.cpp:62
+#: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
@@ -3194,11 +3198,11 @@ msgstr "Secara manual"
 msgid "Manufacturer"
 msgstr "Produsen"
 
-#: podcasts/podcastservice.cpp:362 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Tandai sebagai sudah mendengar"
 
-#: podcasts/podcastservice.cpp:361
+#: podcasts/podcastservice.cpp:430
 msgid "Mark as new"
 msgstr "Tandai sebagai baru"
 
@@ -3222,7 +3226,7 @@ msgstr "Laju bit maksimum"
 msgid "Media has changed. Reloading"
 msgstr "Media telah diubah. Memuat ulang"
 
-#: analyzers/analyzercontainer.cpp:63
+#: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
@@ -3264,7 +3268,7 @@ msgstr "Pemutaran mono"
 msgid "Months"
 msgstr "Bulan"
 
-#: playlist/playlist.cpp:1363
+#: playlist/playlist.cpp:1366
 msgid "Mood"
 msgstr "Mood"
 
@@ -3323,7 +3327,7 @@ msgstr "Bisu"
 
 #: internet/vkservice.cpp:818
 msgid "My Albums"
-msgstr ""
+msgstr "Album Saya"
 
 #: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
 msgid "My Music"
@@ -3393,11 +3397,11 @@ msgstr "Lagu-lagu baru"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
-msgstr "Trek baru akan ditambah secara otomatis."
+msgstr "Track baru akan ditambah secara otomatis."
 
 #: library/library.cpp:95
 msgid "Newest tracks"
-msgstr "Trek terbaru"
+msgstr "Track terbaru"
 
 #: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
 msgid "Next"
@@ -3406,13 +3410,13 @@ msgstr "Lanjut"
 #: core/globalshortcuts.cpp:57 ../bin/src/ui_mainwindow.h:646
 #: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
-msgstr "Trek selanjutnya"
+msgstr "Track selanjutnya"
 
 #: core/utilities.cpp:152
 msgid "Next week"
 msgstr "Pekan depan"
 
-#: analyzers/analyzercontainer.cpp:81
+#: analyzers/analyzercontainer.cpp:86
 msgid "No analyzer"
 msgstr "Tidak ada penganalisa"
 
@@ -3480,7 +3484,7 @@ msgstr "Tetangga tidak cukup"
 
 #: internet/spotifysettingspage.cpp:72
 msgid "Not installed"
-msgstr "Tidak terinstall"
+msgstr "Tidak terpasang"
 
 #: globalsearch/globalsearchsettingspage.cpp:119
 #: globalsearch/searchproviderstatuswidget.cpp:47
@@ -3573,17 +3577,17 @@ msgstr "Buka %1 di browser"
 msgid "Open &audio CD..."
 msgstr "Buka &audio CD..."
 
-#: podcasts/addpodcastdialog.cpp:237
+#: podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Buka berkas OPML"
 
-#: podcasts/addpodcastdialog.cpp:79
+#: podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Buka berkas OPML..."
 
 #: transcoder/transcodedialog.cpp:234
 msgid "Open a directory to import music from"
-msgstr ""
+msgstr "Buka sebuah direktori untuk mengimpor musik dari"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3646,7 +3650,7 @@ msgstr "Mengatur Berkas"
 msgid "Organise files..."
 msgstr "Mengatur Berkas..."
 
-#: core/organise.cpp:72
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Mengorganisir berkas"
 
@@ -3717,7 +3721,7 @@ msgstr "Jeda pemutaran"
 msgid "Paused"
 msgstr "Jeda"
 
-#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "Penyanyi"
@@ -3737,7 +3741,7 @@ msgstr "Bilah samping polos"
 msgid "Play"
 msgstr "Putar"
 
-#: playlist/playlist.cpp:1331 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1334 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Jumlah putar"
 
@@ -3752,7 +3756,7 @@ msgstr "Putar jika sudah tidak ada yang harus diputar"
 
 #: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
-msgstr "Putar trek ke <n> dalam daftar putar"
+msgstr "Putar <n> trek ke dalam daftar putar"
 
 #: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
@@ -3767,8 +3771,8 @@ msgid "Player options"
 msgstr "Opsi pemutar"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:492 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Daftar putar"
 
@@ -3798,7 +3802,7 @@ msgstr "Silakan tutup browser Anda dan kembali ke Clementine."
 msgid "Plugin status:"
 msgstr "Status plugin:"
 
-#: podcasts/podcastservice.cpp:125 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
 msgstr "Podcast"
 
@@ -3901,7 +3905,7 @@ msgstr "Sebelumnya"
 #: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
-msgstr "Trek sebelumnya"
+msgstr "Track sebelumnya"
 
 #: core/commandlineoptions.cpp:176
 msgid "Print out version information"
@@ -3956,16 +3960,16 @@ msgstr "Manajer antrian"
 
 #: ui/mainwindow.cpp:1574
 msgid "Queue selected tracks"
-msgstr "Antri trek terpilih"
+msgstr "Antri track terpilih"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1572
 msgid "Queue track"
-msgstr "Antri trek"
+msgstr "Antri track"
 
 #: ../bin/src/ui_playbacksettingspage.h:327
 msgid "Radio (equal loudness for all tracks)"
-msgstr "Radio (samakan kenyaringan  untuk semua trek)"
+msgstr "Radio (samakan kenyaringan untuk semua track)"
 
 #: internet/groovesharkservice.cpp:608
 msgid "Radios"
@@ -4008,7 +4012,7 @@ msgstr "Nilai lagu saat ini 4 bintang"
 msgid "Rate the current song 5 stars"
 msgstr "Nilai lagu saat ini 5 bintang"
 
-#: playlist/playlist.cpp:1329 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Penilaian"
 
@@ -4018,7 +4022,7 @@ msgstr "Benar-benar membatalkan?"
 
 #: internet/subsonicsettingspage.cpp:136
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "Redirect melampaui batas, memverifikasi konfigurasi server."
 
 #: internet/groovesharkservice.cpp:556
 msgid "Refresh"
@@ -4039,7 +4043,7 @@ msgstr "Segarkan daftar stasiun"
 
 #: internet/digitallyimportedservicebase.cpp:176
 msgid "Refresh streams"
-msgstr "Segarkan aliran"
+msgstr "Segarkan stream"
 
 #: ui/equalizer.cpp:140
 msgid "Reggae"
@@ -4060,32 +4064,32 @@ msgstr "Ingat dari waktu terakhir"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:100
 msgid "Remember my choice"
-msgstr ""
+msgstr "Ingat pilihan saya"
 
 #: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_transcodedialog.h:216
 msgid "Remove"
-msgstr "Hapus"
+msgstr "Buang"
 
 #: ../bin/src/ui_wiimotesettingspage.h:194
 msgid "Remove action"
-msgstr "Hilangkan tindakan"
+msgstr "Buang aksi"
 
 #: ../bin/src/ui_mainwindow.h:710
 msgid "Remove duplicates from playlist"
-msgstr "Buang duplikasi daftar putar"
+msgstr "Buang duplikat dari daftar putar"
 
 #: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
-msgstr "Hapus folder"
+msgstr "Buang folder"
 
 #: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
 msgid "Remove from My Music"
-msgstr "Buang dari Musik Ku"
+msgstr "Buang dari MusikKu"
 
 #: internet/vkservice.cpp:300
 msgid "Remove from bookmarks"
-msgstr "Buang dari markah"
+msgstr "Buang dari penanda"
 
 #: internet/groovesharkservice.cpp:541
 msgid "Remove from favorites"
@@ -4094,9 +4098,9 @@ msgstr "Buang dari favorit"
 #: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:615
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
-msgstr "Hapus dari daftar putar"
+msgstr "Buang dari daftar putar"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Buang daftar putar"
 
@@ -4106,7 +4110,7 @@ msgstr "Buang daftar putar"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
-msgstr "Hapus trek yang tidak tersedia dari daftar putar"
+msgstr "Buang track yang tidak tersedia dari daftar putar"
 
 #: internet/groovesharkservice.cpp:1583
 msgid "Removing songs from My Music"
@@ -4125,17 +4129,17 @@ msgstr "Ubah nama daftar putar \"%1\""
 msgid "Rename Grooveshark playlist"
 msgstr "Ubah nama daftar putar Grooveshark"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Ubah nama daftar putar"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Ubah nama daftar lagu..."
 
 #: ../bin/src/ui_mainwindow.h:661
 msgid "Renumber tracks in this order..."
-msgstr "Memberi nomor baru trek dalam urutan ini ..."
+msgstr "Memberi nomor baru track dalam urutan ini..."
 
 #: playlist/playlistsequence.cpp:193 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat"
@@ -4151,7 +4155,7 @@ msgstr "Ulang daftar pitar"
 
 #: widgets/osd.cpp:309 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
-msgstr "Ulang trek"
+msgstr "Ulang track"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:456
 #: internet/internetservice.cpp:64 library/libraryview.cpp:372
@@ -4194,7 +4198,7 @@ msgstr "Set ulang jumlah putaran"
 #: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr "Mulai ulang trek, atau putar trek sebelumnya jika dalam 8 detik tidak mulai."
+msgstr "Restart track, atau putar track sebelumnya jika dalam 8 detik tidak mulai."
 
 #: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
@@ -4226,15 +4230,15 @@ msgstr "Kanan"
 
 #: ../bin/src/ui_ripcd.h:303
 msgid "Rip"
-msgstr ""
+msgstr "Cabik"
 
 #: ui/ripcd.cpp:114
 msgid "Rip CD"
-msgstr ""
+msgstr "Cabik CD "
 
 #: ../bin/src/ui_mainwindow.h:716
 msgid "Rip audio CD..."
-msgstr ""
+msgstr "Cabik audio CD..."
 
 #: ui/equalizer.cpp:142
 msgid "Rock"
@@ -4252,17 +4256,17 @@ msgstr "Proxy SOCKS"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "Galat jabat tangan SSL, memverifikasi konfigurasi server. Pilihan SSLv3 di bawah ini mungkin solusi beberapa masalah."
 
 #: devices/deviceview.cpp:203
 msgid "Safely remove device"
-msgstr "Aman untuk melepas perangkat"
+msgstr "Dengan aman melepas perangkat"
 
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
-msgstr "Aman untuk melepas perangkat setelah menyalin"
+msgstr "Dengan aman melepas perangkat setelah menyalin"
 
-#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Laju sampel"
 
@@ -4291,12 +4295,12 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Simpan daftar putar"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Simpan daftar putar"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:693
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Simpan daftar putar..."
 
@@ -4314,7 +4318,7 @@ msgstr "Simpan statistik dalam berkas tag bila memungkinkan"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
-msgstr "Simpan aliran ini di tab Internet"
+msgstr "Simpan stream ini di tab Internet"
 
 #: library/library.cpp:196
 msgid "Saving songs statistics into songs files"
@@ -4322,7 +4326,7 @@ msgstr "Menyimpan statistik lagu kedalam berkas lagu"
 
 #: ui/edittagdialog.cpp:687 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
-msgstr "Menyimpan trek"
+msgstr "Menyimpan track"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
@@ -4332,13 +4336,13 @@ msgstr "Profil Laju Sampel Terukur (LST)"
 msgid "Scale size"
 msgstr "Skala ukuran"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Nilai"
 
 #: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
-msgstr "Trek Scrobble yang saya dengar"
+msgstr "Track scrobble yang saya dengar"
 
 #: ../bin/src/ui_seafilesettingspage.h:165
 msgid "Seafile"
@@ -4427,11 +4431,11 @@ msgstr "Mencari maju"
 
 #: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track by a relative amount"
-msgstr "Carilah trek yang sedang diputar dengan jumlah relatif"
+msgstr "Mencari track yang sedang memutar dengan jumlah relatif"
 
 #: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
-msgstr "Carilah trek yang sedang diputar ke posisi sesungguhnya"
+msgstr "Mencari track yang sedang memutar ke posisi sesungguhnya"
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
 msgid "Select All"
@@ -4483,7 +4487,7 @@ msgstr "Server URL"
 
 #: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server details"
-msgstr "Detil-detil server"
+msgstr "Rincian server"
 
 #: internet/lastfmservice.cpp:236
 msgid "Service offline"
@@ -4500,7 +4504,7 @@ msgstr "Atur volume ke <value> persen"
 
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Set value for all selected tracks..."
-msgstr "Atur nilai untuk semua trek terpilih..."
+msgstr "Setel nilai untuk semua track terpilih..."
 
 #: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
@@ -4531,11 +4535,11 @@ msgstr "Tunjukkan OSD"
 
 #: ../bin/src/ui_playbacksettingspage.h:311
 msgid "Show a glowing animation on the current track"
-msgstr "Tampilkan animasi bersinar di trek saat ini"
+msgstr "Tampilkan animasi bersinar di track saat ini"
 
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
-msgstr "Tampilkan moodbar dalam batang gerak maju trek"
+msgstr "Tampilkan moodbar dalam batang kemajuan track"
 
 #: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Show a native desktop notification"
@@ -4543,7 +4547,7 @@ msgstr "Tampilkan notifikasi desktop yang asli"
 
 #: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr "Tampilkan notifikasi ketika saya mengubah mode ulang/acak"
+msgstr "Tampilkan notifikasi ketika saya mengubah mode ulang/kocok"
 
 #: ../bin/src/ui_notificationssettingspage.h:447
 msgid "Show a notification when I change the volume"
@@ -4551,7 +4555,7 @@ msgstr "Tampilkan notifikasi ketika saya mengubah volume"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Show a notification when I pause playback"
-msgstr ""
+msgstr "Tampilkan sebuah notifikasi ketika saya menjeda pemutaran"
 
 #: ../bin/src/ui_notificationssettingspage.h:442
 msgid "Show a popup from the system tray"
@@ -4616,7 +4620,7 @@ msgstr "Tampilkan hanya yang tak berlabel"
 
 #: ../bin/src/ui_vksettingspage.h:224
 msgid "Show playing song on your page"
-msgstr ""
+msgstr "Tampilkan lagu yang dimainkan di halaman Anda"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -4644,15 +4648,15 @@ msgstr "Tampilkan/Sembunyikan"
 
 #: playlist/playlistsequence.cpp:192 ../bin/src/ui_playlistsequence.h:115
 msgid "Shuffle"
-msgstr "Acak"
+msgstr "Kocok"
 
 #: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
-msgstr "Acak album"
+msgstr "Kocok album"
 
 #: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
-msgstr "Acak Semua"
+msgstr "Kocok semua"
 
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Shuffle playlist"
@@ -4660,7 +4664,7 @@ msgstr "Kocok daftar putar"
 
 #: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
-msgstr "Acak trek dalam album ini"
+msgstr "Kocok track dalam album ini"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
@@ -4694,7 +4698,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Lewati daftar putar mundur"
 
-#: playlist/playlist.cpp:1333 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Lewati hitungan"
 
@@ -4704,11 +4708,11 @@ msgstr "Lewati daftar putar maju"
 
 #: ui/mainwindow.cpp:1585
 msgid "Skip selected tracks"
-msgstr "Lewati trek yang dipilih"
+msgstr "Lewati track yang dipilih"
 
 #: ui/mainwindow.cpp:1583
 msgid "Skip track"
-msgstr "Lewati trek"
+msgstr "Lewati track"
 
 #: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
@@ -4742,7 +4746,7 @@ msgstr "Informasi Lagu"
 msgid "Song info"
 msgstr "Info lagu"
 
-#: analyzers/sonogram.cpp:21
+#: analyzers/sonogram.cpp:32
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4778,7 +4782,7 @@ msgstr "Mengurutkan"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1361
+#: playlist/playlist.cpp:1364
 msgid "Source"
 msgstr "Sumber"
 
@@ -4797,7 +4801,7 @@ msgstr "Spotify"
 
 #: internet/spotifyservice.cpp:194
 msgid "Spotify login error"
-msgstr "Spotify masuk error"
+msgstr "Kesalahan masuk Spotify"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
@@ -4805,7 +4809,7 @@ msgstr "Plugin Spotify"
 
 #: internet/spotifyblobdownloader.cpp:64
 msgid "Spotify plugin not installed"
-msgstr "Plugin Spotify tidak terinstal"
+msgstr "Plugin Spotify tidak terpasang"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
@@ -4817,7 +4821,7 @@ msgstr "Berbintang"
 
 #: ui/ripcd.cpp:86
 msgid "Start ripping"
-msgstr ""
+msgstr "Mulai mencabik"
 
 #: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
@@ -4858,7 +4862,7 @@ msgstr "Berhenti setelah"
 
 #: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
-msgstr "Berhenti setelah trek ini"
+msgstr "Berhenti setelah track ini"
 
 #: core/commandlineoptions.cpp:152
 msgid "Stop playback"
@@ -4866,12 +4870,12 @@ msgstr "Hentikan pemutaran"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
-msgstr "Hentikan putaran setelah trek yang ini"
+msgstr "Hentikan putaran setelah track yang ini"
 
 #: widgets/osd.cpp:173
 #, qt-format
 msgid "Stop playing after track: %1"
-msgstr "Berhenti memutar setelah trek: %1"
+msgstr "Hentikan puutaran setelah track: %1"
 
 #: widgets/osd.cpp:167
 msgid "Stopped"
@@ -4921,7 +4925,7 @@ msgstr "Label yang disarankan"
 msgid "Summary"
 msgstr "Ringkasan"
 
-#: analyzers/analyzercontainer.cpp:65
+#: analyzers/analyzercontainer.cpp:70
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
@@ -4949,7 +4953,7 @@ msgstr "Sinkronisasi daftar putar Spotify"
 
 #: internet/spotifyservice.cpp:645
 msgid "Syncing Spotify starred tracks"
-msgstr "Sinkronisasi trek Spotify berbintang"
+msgstr "Sinkronisasi Spotify track berbintang"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5009,7 +5013,7 @@ msgstr "Situs yang Anda minta bukan gambar!"
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr "Masa uji coba untuk server Subsonic sudah berakhir. Silakan donasi untuk mendapatkan kunci lisensi. Kunjungi subsonic.org untuk lebih detil."
+msgstr "Masa uji coba untuk server Subsonic sudah berakhir. Silakan donasi untuk mendapatkan kunci lisensi. Kunjungi subsonic.org untuk lebih rinci."
 
 #: ui/mainwindow.cpp:2404
 msgid ""
@@ -5021,8 +5025,8 @@ msgstr "Versi Clementine yang baru saja Anda diperbarui memerlukan pemindaian ul
 msgid "There are other songs in this album"
 msgstr "Ada lagu lainnya dalam album ini"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:72
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
+#: podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Ada masalah komunikasi dengan gpodder.net"
 
@@ -5084,7 +5088,7 @@ msgstr "Album ini tidak tersedia dalam format yang diminta"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:98
 msgid "This can be changed later through the preferences"
-msgstr ""
+msgstr "Ini dapat diubah kemudian melalu preferensi"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
@@ -5094,7 +5098,7 @@ msgstr "Perangkat ini harus terhubung dan dibuka sebelum Clementine dapat meliha
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
-msgstr "Perangkat ini mendukung format file berikut:"
+msgstr "Perangkat ini mendukung format fberkas berikut:"
 
 #: devices/devicemanager.cpp:563 devices/devicemanager.cpp:574
 msgid "This device will not work properly"
@@ -5113,9 +5117,9 @@ msgstr "Ini adalah iPod, tetapi Anda mengkompilasi Clementine tanpa dukungan lib
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "Ini adalah pertama kalinya Anda telah menghubungkan perangkat ini. Clementine sekarang akan memindai perangkat untuk mencari file musik - ini mungkin memakan waktu."
+msgstr "Ini adalah pertama kalinya Anda telah menghubungkan perangkat ini. Clementine sekarang akan memindai perangkat untuk mencari berkas musik - ini mungkin memakan waktu."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Pilihan ini dapat diubah di pengaturan \"Sifat\""
 
@@ -5128,7 +5132,7 @@ msgstr "Stream ini hanya untuk pelanggan berbayar"
 msgid "This type of device is not supported: %1"
 msgstr "Tipe perangkat ini tidak didukung: %1"
 
-#: playlist/playlist.cpp:1304 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
@@ -5175,7 +5179,7 @@ msgstr "Terlalu banyak pengalihan"
 
 #: internet/spotifyservice.cpp:392
 msgid "Top tracks"
-msgstr "Trek puncak"
+msgstr "Track puncak"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
@@ -5189,15 +5193,15 @@ msgstr "Jumlah byte yang ditransfer"
 msgid "Total network requests made"
 msgstr "Total permintaan jaringan yang dibuat"
 
-#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
-msgstr "Trek"
+msgstr "Track"
 
 #: internet/soundcloudservice.cpp:134
 msgid "Tracks"
-msgstr "Trek"
+msgstr "Track"
 
 #: ../bin/src/ui_transcodedialog.h:210 ../bin/src/ui_mainwindow.h:687
 msgid "Transcode Music"
@@ -5224,7 +5228,7 @@ msgstr "Pilihan transcoding"
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:18
+#: analyzers/turbine.cpp:35
 msgid "Turbine"
 msgstr "Turbin"
 
@@ -5255,8 +5259,8 @@ msgstr "Tidak dapat mengunduh %1 (%2)"
 
 #: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:499
-#: playlist/playlistmanager.cpp:500 ui/albumcoverchoicecontroller.cpp:124
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Tidak diketahui"
@@ -5275,13 +5279,13 @@ msgstr "Batalkan setingan sampul"
 
 #: ui/mainwindow.cpp:1581
 msgid "Unskip selected tracks"
-msgstr "Nonlewati trek yang dipilih"
+msgstr "Tidak lewati trek yang dipilih"
 
 #: ui/mainwindow.cpp:1579
 msgid "Unskip track"
-msgstr "Nonlewati trek"
+msgstr "Tidak lewati track"
 
-#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:356
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
 msgid "Unsubscribe"
 msgstr "Berhenti berlangganan"
 
@@ -5297,7 +5301,7 @@ msgstr "Perbarui"
 msgid "Update Grooveshark playlist"
 msgstr "Perbarui daftar putar Grooveshark"
 
-#: podcasts/podcastservice.cpp:336
+#: podcasts/podcastservice.cpp:402
 msgid "Update all podcasts"
 msgstr "Perbarui semua podcast"
 
@@ -5309,7 +5313,7 @@ msgstr "Perbarui perubahan folder pustaka "
 msgid "Update the library when Clementine starts"
 msgstr "Perbarui pustaka ketika memulai Clementine"
 
-#: podcasts/podcastservice.cpp:344
+#: podcasts/podcastservice.cpp:410
 msgid "Update this podcast"
 msgstr "Perbarui podcast ini"
 
@@ -5439,7 +5443,7 @@ msgid "Variable bit rate"
 msgstr "Variabel laju bit"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:511 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Berbagai artis"
 
@@ -5492,9 +5496,9 @@ msgstr "WMA"
 
 #: internet/vkservice.cpp:858
 msgid "Wall"
-msgstr ""
+msgstr "Dinding"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Peringatkan saya ketika menutup tab daftar putar"
 
@@ -5518,11 +5522,11 @@ msgstr "Saat Clementine dimulai"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "Clementine akan mencari file gambar yang berisi salah satu dari kata-kata berikut ketika mencari sampul album. \nJika tidak ada yang cocok maka akan menggunakan gambar terbesar dalam direktori."
+msgstr "Clementine akan mencari berkas gambar yang berisi salah satu dari kata-kata berikut ketika mencari sampul album. \nJika tidak ada yang cocok maka akan menggunakan gambar terbesar dalam direktori."
 
 #: ../bin/src/ui_behavioursettingspage.h:284
 msgid "When saving a playlist, file paths should be"
-msgstr ""
+msgstr "Ketika menyimpan sebuah daftar putar, lokasi berkas sebaiknya"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
@@ -5606,13 +5610,13 @@ msgstr "Tulis semua statistik lagu kedalam berkas lagu"
 
 #: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Write metadata"
-msgstr ""
+msgstr "Menulis metadata"
 
 #: internet/subsonicsettingspage.cpp:80
 msgid "Wrong username or password."
 msgstr "Nama pengguna dan kata sandi salah."
 
-#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
@@ -5640,9 +5644,9 @@ msgstr "Anda akan mendownload album-album berikut"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr "Anda akan membuang daftar putar %1 dari favorit, Anda yakin?"
+msgstr "Anda akan membuang %1 daftar putar dari favorit, apakah Anda yakin?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5669,17 +5673,17 @@ msgstr "Anda dapat mengubah cara pengaturan lagu di perpustakaan."
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr "Anda dapat mendengarkan secara gratis tanpa akun, tetapi anggota Premium dapat mendengarkan aliran berkualitas tinggi tanpa iklan."
+msgstr "Anda dapat mendengarkan secara gratis tanpa akun, tetapi anggota Premium dapat mendengarkan stream berkualitas tinggi tanpa iklan."
 
 #: internet/magnatunesettingspage.cpp:54
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr "Anda dapat mendengarkan lagu Magnatune secara gratis tanpa akun. Pembelian keanggotaan menghapus pesan pada akhir setiap trek."
+msgstr "Anda dapat mendengarkan lagu Magnatune secara gratis tanpa akun. Pembelian keanggotaan membuang pesan pada akhir setiap track."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
-msgstr "Anda dapat mendengarkan aliran latar belakang pada saat yang sama sebagai musik lainnya."
+msgstr "Anda dapat mendengarkan stream latar belakang pada saat yang sama sebagai musik lainnya."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
@@ -5705,7 +5709,7 @@ msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud. However, you need to login to access your playlists and your "
 "stream."
-msgstr "Anda tidak perlu harus log in untuk mencari dan mendengarkan musik di SoundCloud. Namun, anda perlu login untuk mengakses daftar putar dan aliran anda."
+msgstr "Anda tidak perlu harus terlog in untuk mencari dan mendengarkan musik di SoundCloud. Namun, anda perlu login untuk mengakses daftar putar dan stream anda."
 
 #: internet/spotifyservice.cpp:179
 msgid ""
@@ -5719,7 +5723,7 @@ msgstr "Anda sudah keluar dari Spotify, harap masukkan kembali kata sandi Anda."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:85
 msgid "You love this track"
-msgstr "Anda suka trek ini"
+msgstr "Anda suka trackk ini"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:180
 msgid ""
@@ -5755,9 +5759,9 @@ msgstr "Identitas Magnatune Anda tidak benar"
 msgid "Your library is empty!"
 msgstr "Pustaka Anda kosong!"
 
-#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26 internet/savedradio.cpp:47
 msgid "Your radio streams"
-msgstr "Aliran radio Anda"
+msgstr "Stream radio Anda"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 #, qt-format
@@ -5850,7 +5854,7 @@ msgstr "sama"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:34
+#: podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "Direktori gpodder.net"
 
@@ -5926,7 +5930,7 @@ msgstr "tekan enter"
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "remove %n songs"
-msgstr "hapus %n lagu"
+msgstr "buang %n lagu"
 
 #: smartplaylists/searchterm.cpp:370
 msgid "shortest first"
@@ -5934,7 +5938,7 @@ msgstr "pertama terpendek"
 
 #: playlist/playlistundocommands.cpp:106
 msgid "shuffle songs"
-msgstr "Acak lagu"
+msgstr "Kocok lagu"
 
 #: smartplaylists/searchterm.cpp:374
 msgid "smallest first"
@@ -5955,4 +5959,4 @@ msgstr "berhenti"
 #: widgets/osd.cpp:113
 #, qt-format
 msgid "track %1"
-msgstr "trek %1"
+msgstr "track %1"

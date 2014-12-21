@@ -22,7 +22,7 @@
 #include "albumcoverfetcher.h"
 #include "coverprovider.h"
 #include "core/closure.h"
-#include "internet/lastfmcompat.h"
+#include "internet/lastfm/lastfmcompat.h"
 
 LastFmCoverProvider::LastFmCoverProvider(QObject* parent)
     : CoverProvider("last.fm", parent) {}

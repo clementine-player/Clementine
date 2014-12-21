@@ -31,7 +31,7 @@
 #include "covers/coverproviders.h"
 #include "covers/currentartloader.h"
 #include "devices/devicemanager.h"
-#include "internet/internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "globalsearch/globalsearch.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -39,13 +39,14 @@
 #include "networkremote/networkremotehelper.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
-#include "podcasts/gpoddersync.h"
-#include "podcasts/podcastbackend.h"
-#include "podcasts/podcastdownloader.h"
-#include "podcasts/podcastupdater.h"
+#include "internet/podcasts/gpoddersync.h"
+#include "internet/podcasts/podcastbackend.h"
+#include "internet/podcasts/podcastdeleter.h"
+#include "internet/podcasts/podcastdownloader.h"
+#include "internet/podcasts/podcastupdater.h"
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/lastfmservice.h"
+#include "internet/lastfm/lastfmservice.h"
 #endif  // HAVE_LIBLASTFM
 
 #ifdef HAVE_MOODBAR
@@ -73,6 +74,7 @@ Application::Application(QObject* parent)
       library_(nullptr),
       device_manager_(nullptr),
       podcast_updater_(nullptr),
+      podcast_deleter_(nullptr),
       podcast_downloader_(nullptr),
       gpodder_sync_(nullptr),
       moodbar_loader_(nullptr),
@@ -107,6 +109,10 @@ Application::Application(QObject* parent)
   library_ = new Library(this, this);
   device_manager_ = new DeviceManager(this, this);
   podcast_updater_ = new PodcastUpdater(this, this);
+
+  podcast_deleter_ = new PodcastDeleter(this, this);
+  MoveToNewThread(podcast_deleter_);
+
   podcast_downloader_ = new PodcastDownloader(this, this);
   gpodder_sync_ = new GPodderSync(this, this);
 

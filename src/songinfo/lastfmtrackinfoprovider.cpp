@@ -19,7 +19,7 @@
 #include "songinfotextview.h"
 #include "songplaystats.h"
 #include "tagwidget.h"
-#include "internet/lastfmcompat.h"
+#include "internet/lastfm/lastfmcompat.h"
 #include "ui/iconloader.h"
 
 void LastfmTrackInfoProvider::FetchInfo(int id, const Song& metadata) {

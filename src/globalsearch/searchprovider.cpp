@@ -17,7 +17,7 @@
 
 #include "searchprovider.h"
 #include "core/boundfuturewatcher.h"
-#include "internet/internetsongmimedata.h"
+#include "internet/core/internetsongmimedata.h"
 #include "playlist/songmimedata.h"
 
 #include <QPainter>

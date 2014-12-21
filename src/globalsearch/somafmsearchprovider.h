@@ -19,7 +19,7 @@
 #define SOMAFMSEARCHPROVIDER_H
 
 #include "simplesearchprovider.h"
-#include "internet/somafmservice.h"
+#include "internet/somafm/somafmservice.h"
 
 class SomaFMSearchProvider : public SimpleSearchProvider {
  public:

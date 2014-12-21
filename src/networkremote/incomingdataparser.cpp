@@ -21,13 +21,13 @@
 
 #include "core/logging.h"
 #include "engines/enginebase.h"
-#include "internet/internetmodel.h"
+#include "internet/core/internetmodel.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "playlist/playlist.h"
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/lastfmservice.h"
+#include "internet/lastfm/lastfmservice.h"
 #endif
 
 IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {

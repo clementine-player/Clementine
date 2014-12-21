@@ -22,7 +22,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
-#include "internet/soundcloudservice.h"
+#include "internet/soundcloud/soundcloudservice.h"
 
 SoundCloudSearchProvider::SoundCloudSearchProvider(Application* app,
                                                    QObject* parent)
