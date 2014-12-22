@@ -139,6 +139,7 @@ gst_fastspectrum_alloc_channel_data (GstFastSpectrum * spectrum)
       fftw_malloc(sizeof(fftw_complex) * (nfft/2+1)));
 
   spectrum->spect_magnitude = new double[bands];
+  memset(spectrum->spect_magnitude, 0, spectrum->bands * sizeof(double));
 
   GstFastSpectrumClass* klass = reinterpret_cast<GstFastSpectrumClass*>(
       G_OBJECT_GET_CLASS(spectrum));
