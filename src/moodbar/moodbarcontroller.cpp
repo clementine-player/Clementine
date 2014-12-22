@@ -69,6 +69,17 @@ void MoodbarController::AsyncLoadComplete(MoodbarPipeline* pipeline,
   if (current_item && current_item->Url() != url) {
     return;
   }
+  // Did we stop the song?
+  switch(app_->player()->GetState()) {
+    case Engine::Error:
+    case Engine::Empty:
+    case Engine::Idle:
+      return;
+      break;
+
+    default:
+      break;
+  }
 
   emit CurrentMoodbarDataChanged(pipeline->data());
 }
