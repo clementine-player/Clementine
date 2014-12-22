@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\n您可以經由點選名稱旁的星形符號來收藏播放列表\n\n已收藏的播放列表將顯示於此"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "天"
 
@@ -486,7 +486,7 @@ msgstr "新增資料夾..."
 msgid "Add podcast"
 msgstr "加入 Podcast"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "加入 Podcast..."
 
@@ -651,7 +651,7 @@ msgstr "將歌曲新增至最愛"
 msgid "Advanced grouping..."
 msgstr "進階歸類..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr ""
 
@@ -697,6 +697,10 @@ msgstr "有封面的專輯"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "無封面的專輯"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -788,6 +792,7 @@ msgstr "以及:"
 msgid "Angry"
 msgstr "生氣"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1008,7 +1013,7 @@ msgid "Box"
 msgstr ""
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "瀏覽..."
@@ -1058,7 +1063,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "取消"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1098,7 +1103,7 @@ msgid ""
 "songs"
 msgstr ""
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "檢查是否有新的片斷內容"
 
@@ -1138,7 +1143,7 @@ msgstr "從清單中選擇"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "選擇此播放清單將要如何分類以及擁有多少歌曲"
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "選擇 podcast 下載目錄"
 
@@ -1155,7 +1160,7 @@ msgstr "選擇您想要 Clementine 使用來搜尋歌詞的網站。"
 msgid "Classical"
 msgstr "古典"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "清除"
 
@@ -1213,7 +1218,7 @@ msgstr ""
 msgid "Clementine can show a message when the track changes."
 msgstr "當曲目變更時，Clementine 可以顯示一個訊息。"
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1354,7 +1359,7 @@ msgstr ""
 msgid "Configure library..."
 msgstr "設定音樂庫"
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "設定 podcasts..."
 
@@ -1424,7 +1429,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "複製到剪貼簿"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "複製到裝置..."
@@ -1676,7 +1681,7 @@ msgstr ""
 msgid "Delete Grooveshark playlist"
 msgstr "刪除 Grooveshark 播放清單"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "刪除下載的資料"
 
@@ -1694,7 +1699,7 @@ msgstr "從裝置中刪除..."
 msgid "Delete from disk..."
 msgstr "從硬碟中刪除 ..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "刪除播放過的片斷內容"
 
@@ -1739,7 +1744,7 @@ msgstr "裝置"
 msgid "Device Properties"
 msgstr "裝置屬性"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "裝置名稱"
 
@@ -1853,6 +1858,10 @@ msgstr "不要循環播放"
 msgid "Don't show in various artists"
 msgstr "不要顯示不同的演出者"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "不要隨機播放"
@@ -1873,7 +1882,7 @@ msgstr "雙擊打開"
 msgid "Double clicking a song will..."
 msgstr "雙擊一首歌曲將..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1883,7 +1892,7 @@ msgstr "下載 %n 片斷內容"
 msgid "Download directory"
 msgstr "下載目錄"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "下載片斷內容到"
 
@@ -1891,11 +1900,11 @@ msgstr "下載片斷內容到"
 msgid "Download membership"
 msgstr "下載會員"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "自動下載新的片斷內容"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr ""
 
@@ -1915,7 +1924,7 @@ msgstr "下載此專輯"
 msgid "Download this album..."
 msgstr "下載此專輯..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "下載這個片斷內容"
 
@@ -1923,7 +1932,7 @@ msgstr "下載這個片斷內容"
 msgid "Download..."
 msgstr "下載..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr ""
@@ -2164,31 +2173,31 @@ msgstr "載入音樂CD時，出現錯誤"
 msgid "Ever played"
 msgstr "曾經播放的"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "每隔10分鐘"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "每隔12小時"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "每隔二小時"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "每隔20分鐘"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "每隔30分鐘"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "每隔六小時"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "每隔一小時"
 
@@ -3078,7 +3087,7 @@ msgstr "載入檔案/網址，取代目前的播放清單"
 msgid "Login"
 msgstr "登錄"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "登錄失敗"
 
@@ -3179,8 +3188,8 @@ msgstr "格式不正確的反應"
 msgid "Manual proxy configuration"
 msgstr "手動代理伺服器設定"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "手動"
 
@@ -3188,11 +3197,11 @@ msgstr "手動"
 msgid "Manufacturer"
 msgstr "製造商"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "標記為聽過的"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr ""
 
@@ -3501,6 +3510,10 @@ msgstr "通知"
 msgid "Now Playing"
 msgstr "現在正播放"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "OSD 的預覽"
@@ -3692,7 +3705,7 @@ msgstr "派對"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3792,7 +3805,7 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "插件狀態："
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcasts"
 
@@ -4656,7 +4669,7 @@ msgstr "隨機排列播放清單"
 msgid "Shuffle tracks in this album"
 msgstr "隨機播放這張專輯中的曲目"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "登錄"
 
@@ -5275,7 +5288,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr ""
 
@@ -5291,7 +5304,7 @@ msgstr ""
 msgid "Update Grooveshark playlist"
 msgstr "更新 Grooveshark 播放清單"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "更新全部的 podcasts"
 
@@ -5303,11 +5316,11 @@ msgstr "更新改變的音樂庫資料夾"
 msgid "Update the library when Clementine starts"
 msgstr "當啟動 Clementine 時，更新音樂庫"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "更新這個 podcast"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "更新"
 
@@ -5414,7 +5427,7 @@ msgstr "使用者介面"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "使用者名稱"
@@ -5840,7 +5853,7 @@ msgstr "以...結尾"
 msgid "equals"
 msgstr "相等"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

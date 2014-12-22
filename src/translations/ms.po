@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-12-16 17:11+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/projects/p/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +26,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nAnda jadikan senarai main kegemaran dengan mengklik ikon bintang disebelah nama senarai main\n\nSenarai main kegemaran akan disimpan di sini"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "hari"
 
@@ -485,7 +485,7 @@ msgstr "Tambah folder baharu..."
 msgid "Add podcast"
 msgstr "Tambah podcast"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Tambah podcast..."
 
@@ -650,7 +650,7 @@ msgstr "Menambah lagu ke kegemaran"
 msgid "Advanced grouping..."
 msgstr "Pengelompokan lanjutan..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Selepas"
 
@@ -696,6 +696,10 @@ msgstr "Album dengan kulit muka"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Album tanpa kulit muka"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr "Semua"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -787,6 +791,7 @@ msgstr "Dan:"
 msgid "Angry"
 msgstr "Marah"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1007,7 +1012,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Layar..."
@@ -1057,9 +1062,9 @@ msgstr "Membuat cache %1"
 msgid "Cancel"
 msgstr "Batal"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
-msgstr ""
+msgstr "Batal muat turun"
 
 #: internet/vkservice.cpp:624
 msgid ""
@@ -1097,7 +1102,7 @@ msgid ""
 "songs"
 msgstr "Perubahan keutamaan main balik mono akan berkesan pada lagu seterusnya yang dimainkan"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Periksa episod baharu"
 
@@ -1137,7 +1142,7 @@ msgstr "Pilih dari senarai"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Pilih bagaimana senarai main diisih dan berapa banyak lagu akan diisi."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Pilih direktori muat turun podcast"
 
@@ -1154,7 +1159,7 @@ msgstr "Pilih laman sesawang yang anda mahu Clementine gunakan semasa mencari li
 msgid "Classical"
 msgstr "Klasik"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Membersihkan"
 
@@ -1212,7 +1217,7 @@ msgstr "Clementine boleh mainkan muzik yang anda muat naik dalam OneDrive"
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine boleh paparkan mesej apabila trek berubah."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1353,7 +1358,7 @@ msgstr "Konfigure gelintar sejagat..."
 msgid "Configure library..."
 msgstr "Konfigur pustaka..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Konfigur podcast..."
 
@@ -1423,7 +1428,7 @@ msgstr "Salin url kongsi ke papan keratan"
 msgid "Copy to clipboard"
 msgstr "Salin ke papan keratan"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Salin ke peranti..."
@@ -1675,7 +1680,7 @@ msgstr "Padam"
 msgid "Delete Grooveshark playlist"
 msgstr "Padam senarai main Grooveshark"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "Padam data dimuat turun"
 
@@ -1693,7 +1698,7 @@ msgstr "Padam dari peranti..."
 msgid "Delete from disk..."
 msgstr "Padam dari cakera..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Padam episod telah dimain"
 
@@ -1738,7 +1743,7 @@ msgstr "Peranti"
 msgid "Device Properties"
 msgstr "Sifat Peranti"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Nama peranti"
 
@@ -1852,6 +1857,10 @@ msgstr "Jangan ulang"
 msgid "Don't show in various artists"
 msgstr "Jangan tunjuk dalam artis pelbagai"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr "Jangan tunjuk episod yang telah didengari"
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Jangan kocok"
@@ -1872,7 +1881,7 @@ msgstr "Dwi klik untuk buka"
 msgid "Double clicking a song will..."
 msgstr "Dwi klik sesuatu lagu akan..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1882,7 +1891,7 @@ msgstr "Muat turun %n episod"
 msgid "Download directory"
 msgstr "Direktori muat turun"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Muat turun episod ke"
 
@@ -1890,11 +1899,11 @@ msgstr "Muat turun episod ke"
 msgid "Download membership"
 msgstr "Keahlian muat turun"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Muat turun episod baharu secara automatik"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Muat turun dibaris gilir"
 
@@ -1914,7 +1923,7 @@ msgstr "Muat turun album ini"
 msgid "Download this album..."
 msgstr "Muat turun album ini..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Muat turun episod ini"
 
@@ -1922,7 +1931,7 @@ msgstr "Muat turun episod ini"
 msgid "Download..."
 msgstr "Muat Turun..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Memuat turun (%1%)..."
@@ -2163,31 +2172,31 @@ msgstr "Ralat ketika memuatkan CD audio"
 msgid "Ever played"
 msgstr "Pernah dimainkan"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "Setiap 10 minit"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "Setiap 12 jam"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "Setiap 2 jam"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "Setiap 20 minit"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "Setiap 30 minit"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "Setiap 6 jam"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Setiap jam"
 
@@ -3077,7 +3086,7 @@ msgstr "Memuat fail/URL, menggantikan senarai main semasa"
 msgid "Login"
 msgstr "Daftar masuk"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Daftar masuk gagal"
 
@@ -3178,8 +3187,8 @@ msgstr "Respon cacat"
 msgid "Manual proxy configuration"
 msgstr "Konfigurasi proksi manual"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Secara manual"
 
@@ -3187,11 +3196,11 @@ msgstr "Secara manual"
 msgid "Manufacturer"
 msgstr "Pengeluar"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Tanda sebagai didengar"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Tanda sebagai baharu"
 
@@ -3500,6 +3509,10 @@ msgstr "Pemberitahuan"
 msgid "Now Playing"
 msgstr "Sekarang Dimainkan"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr "Bilangan episod yang ditunjukkan"
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Pratonton"
@@ -3691,7 +3704,7 @@ msgstr "Parti"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3791,7 +3804,7 @@ msgstr "Sila tutup pelayar anda dan kembali ke Clementine."
 msgid "Plugin status:"
 msgstr "Status pemalam:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcats"
 
@@ -4655,7 +4668,7 @@ msgstr "Kocok senarai main"
 msgid "Shuffle tracks in this album"
 msgstr "Kocok trek dalam album ini"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Daftar masuk"
 
@@ -5274,7 +5287,7 @@ msgstr "Jangan langkau trek terpilih"
 msgid "Unskip track"
 msgstr "Jangan langkau trek"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Jangan langgan"
 
@@ -5290,7 +5303,7 @@ msgstr "Kemaskini"
 msgid "Update Grooveshark playlist"
 msgstr "Kemaskini senarai main Grooveshark"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Kemaskini semua podcast"
 
@@ -5302,11 +5315,11 @@ msgstr "Kemaskini folder pustaka yang berubah"
 msgid "Update the library when Clementine starts"
 msgstr "Kemaskini pustaka bila Clemetine bermula"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Kemaskini podcast ini"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Mengemaskini"
 
@@ -5413,7 +5426,7 @@ msgstr "Antaramuka pengguna"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Nama pengguna"
@@ -5839,7 +5852,7 @@ msgstr "berakhir dengan"
 msgid "equals"
 msgstr "sama dengan"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

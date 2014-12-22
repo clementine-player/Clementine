@@ -5,15 +5,15 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Kiprianas Spiridonovas <k.spiridonovas@gmail.com>, 2012
-# Liudas Ališauskas <liudas.alisauskas@gmail.com>, 2012-2013
+# Liudas Ališauskas <liudas.alisauskas@gmail.com>, 2012-2014
 # Moo, 2014
 # pencininkas4 <pencininkas4@gmail.com>, 2012
 # pencininkas4 <pencininkas4@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-12-19 06:38+0000\n"
+"Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,7 +29,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nGalite įvertinti grojaraščius spaudžiant žvaigždės piktogramą šalia pavadinimo\n\nĮvertinti grojaraščiai bus išsaugoti čia"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "dienos"
 
@@ -488,7 +488,7 @@ msgstr "Pridėti naują aplankalą..."
 msgid "Add podcast"
 msgstr "Pridėti srautą"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Pridėti srautą..."
 
@@ -653,7 +653,7 @@ msgstr "Daina pridedama į mėgstamiausius"
 msgid "Advanced grouping..."
 msgstr "Platesnis grupavimas..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Po"
 
@@ -700,6 +700,10 @@ msgstr "Albumai su viršeliais"
 msgid "Albums without covers"
 msgstr "Albumai be viršelių"
 
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr "Visi"
+
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
 msgstr "Visi Failai (*)"
@@ -707,7 +711,7 @@ msgstr "Visi Failai (*)"
 #: ../bin/src/ui_mainwindow.h:679
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
-msgstr ""
+msgstr "Visa šlovė Hypnotoad'ui!"
 
 #: ui/albumcovermanager.cpp:134
 msgid "All albums"
@@ -790,6 +794,7 @@ msgstr "Ir:"
 msgid "Angry"
 msgstr "Piktas"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1010,7 +1015,7 @@ msgid "Box"
 msgstr "„Box“"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Naršyti..."
@@ -1060,9 +1065,9 @@ msgstr "Talpinama %1"
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
-msgstr ""
+msgstr "Atšaukti atsiuntimą"
 
 #: internet/vkservice.cpp:624
 msgid ""
@@ -1100,7 +1105,7 @@ msgid ""
 "songs"
 msgstr "Mono perklausos nustatymų keitimas suveiks kitoms grojamoms dainoms."
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Tikrinti, ar nėra naujų epizodų"
 
@@ -1140,7 +1145,7 @@ msgstr "Parinkti iš sąrašo"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Pasirinkite kaip grojaraštis bus rikiuojamas ir kiek dainų turės"
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Pasirinkite srauto siutimo vietą"
 
@@ -1157,7 +1162,7 @@ msgstr "Parinkite tinklapius, kuriuose „Clementine“ galėtų ieškoti lyriko
 msgid "Classical"
 msgstr "Klasika"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Valoma"
 
@@ -1215,7 +1220,7 @@ msgstr "Clementine gali groti muziką, kurią išsiuntėte į OneDrive"
 msgid "Clementine can show a message when the track changes."
 msgstr "„Clementine“ gali rodyti pranešimą besikeičiant dainoms"
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1356,7 +1361,7 @@ msgstr "Nustatyti visuotinę paiešką..."
 msgid "Configure library..."
 msgstr "Konfigūruoti fonoteką..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Konfigūruojamas srautas... "
 
@@ -1426,7 +1431,7 @@ msgstr "Kopijuoti dalinimosi url į iškarpinę"
 msgid "Copy to clipboard"
 msgstr "Kopijuoti į atmintinę"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopijuoti į įrenginį..."
@@ -1659,7 +1664,7 @@ msgstr "Numatytasis fono paveikslėlis"
 #: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
-msgstr ""
+msgstr "Numatytas įrenginys esantis %1"
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
@@ -1678,7 +1683,7 @@ msgstr "Trinti"
 msgid "Delete Grooveshark playlist"
 msgstr "Šalinti Grooveshark grojaraštį"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
@@ -1696,7 +1701,7 @@ msgstr "Ištrinti iš įrenginio..."
 msgid "Delete from disk..."
 msgstr "Ištrinti iš disko..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Ištrinti atliktus epizodus"
 
@@ -1741,7 +1746,7 @@ msgstr "Įrenginys"
 msgid "Device Properties"
 msgstr "Įrenginio savybės"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Įrenginio pavadinimas"
 
@@ -1755,7 +1760,7 @@ msgstr "Įrenginiai"
 
 #: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
-msgstr ""
+msgstr "Dialogas"
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1855,6 +1860,10 @@ msgstr "Nekartoti"
 msgid "Don't show in various artists"
 msgstr "Nerodyti įvairiuose atlikėjuose"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr "Nerodyti klausytų epizodų"
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Nemaišyti"
@@ -1875,7 +1884,7 @@ msgstr "Du kart spustelėkite norėdami atverti"
 msgid "Double clicking a song will..."
 msgstr "Du kartus spūstelėjus dainą..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1885,7 +1894,7 @@ msgstr "Atsiųsti %n epizodus"
 msgid "Download directory"
 msgstr "Atsisiuntimų aplankas"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Atsiųsti epizodus į"
 
@@ -1893,11 +1902,11 @@ msgstr "Atsiųsti epizodus į"
 msgid "Download membership"
 msgstr "Atsiųsti narystę"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Atsisiųsti naujus epizodus automatiškai"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Atsiuntimas eilėje"
 
@@ -1917,7 +1926,7 @@ msgstr "Atsisiųsti šį albumą"
 msgid "Download this album..."
 msgstr "Atsisiunčiamas šis albumas"
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Atsiųsti šį epizodą"
 
@@ -1925,7 +1934,7 @@ msgstr "Atsiųsti šį epizodą"
 msgid "Download..."
 msgstr "Atsisiųsti..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Atsiunčiama (%1%)..."
@@ -1960,7 +1969,7 @@ msgstr "Dropbox"
 
 #: ui/equalizer.cpp:119
 msgid "Dubstep"
-msgstr ""
+msgstr "Dubstep"
 
 #: ../bin/src/ui_ripcd.h:309
 msgid "Duration"
@@ -2166,31 +2175,31 @@ msgstr "Klaida įkeliant audio CD"
 msgid "Ever played"
 msgstr "Bet kada grota"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "Kas 10 minučių"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "Kas 12 valandų"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "Kas 2 valandas"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "Kas 20 minučių"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "Kas 30 minučių"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "Kas 6 valandas"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Kiekvieną valandą"
 
@@ -3080,7 +3089,7 @@ msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 msgid "Login"
 msgstr "Prisijungti"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Prisijungimas nepavyko"
 
@@ -3181,8 +3190,8 @@ msgstr "Netinkamas atsakymas"
 msgid "Manual proxy configuration"
 msgstr "Rankinis tarpinės stoties konfigūravimas"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Rankiniu būdu"
 
@@ -3190,11 +3199,11 @@ msgstr "Rankiniu būdu"
 msgid "Manufacturer"
 msgstr "Gamintojas"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Pažymėti kaip klausytą"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Pažymėti kaip naują"
 
@@ -3503,6 +3512,10 @@ msgstr "Pranešimai"
 msgid "Now Playing"
 msgstr "Dabar leidžiama"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr "Rodytinų epizodų skaičius"
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "OSD peržiūra"
@@ -3694,7 +3707,7 @@ msgstr "Vakarėlis"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3794,7 +3807,7 @@ msgstr "Prašome uždaryti Jūsų naršyklę, kad grįžti į Clementine."
 msgid "Plugin status:"
 msgstr "Plėtinio būklė:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcast"
 
@@ -3829,7 +3842,7 @@ msgstr "Sustiprinti"
 
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Preference"
-msgstr ""
+msgstr "Nustatymas"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_groovesharksettingspage.h:145
@@ -3918,7 +3931,7 @@ msgstr "Eiga"
 
 #: ui/equalizer.cpp:138
 msgid "Psychedelic"
-msgstr ""
+msgstr "Psichodelinis"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 #: wiimotedev/wiimotesettingspage.cpp:239
@@ -4044,7 +4057,7 @@ msgstr "Regis"
 #: playlist/playlistsaveoptionsdialog.cpp:33
 #: ../bin/src/ui_behavioursettingspage.h:287
 msgid "Relative"
-msgstr ""
+msgstr "Susijęs"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
@@ -4338,7 +4351,7 @@ msgstr "Pateikti klausomų takelių informaciją"
 
 #: ../bin/src/ui_seafilesettingspage.h:165
 msgid "Seafile"
-msgstr ""
+msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
@@ -4658,7 +4671,7 @@ msgstr "Maišyti grojaraštį"
 msgid "Shuffle tracks in this album"
 msgstr "Maišyti takelius šiame albume"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Prisijungti"
 
@@ -5277,7 +5290,7 @@ msgstr "Nepraleisti pasirinktų takelių"
 msgid "Unskip track"
 msgstr "Nepraleisti takelio"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Nebeprenumeruoti"
 
@@ -5293,7 +5306,7 @@ msgstr "Atnaujinti"
 msgid "Update Grooveshark playlist"
 msgstr "Atnaujinti Grooveshark grojaraštį"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Atnaujinti visas garso prenumeratas"
 
@@ -5305,11 +5318,11 @@ msgstr "Atnaujinti pakeistus fonotekos katalogus"
 msgid "Update the library when Clementine starts"
 msgstr "Atnaujinti fonoteką paleidžiant Clementine"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Atnaujinti šią garso prenumeratą"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Atnaujinama"
 
@@ -5416,7 +5429,7 @@ msgstr "Naudotojo sąsaja"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Naudotojo vardas"
@@ -5842,7 +5855,7 @@ msgstr "baigiasi iš"
 msgid "equals"
 msgstr "lygus"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

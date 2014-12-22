@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 07:35+0000\n"
+"PO-Revision-Date: 2014-12-16 17:58+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/clementine/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nPuoi creare scalette preferite facendo clic sulla stella accanto al nome della scaletta\n\nLe scalette preferite saranno salvate qui"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "giorni"
 
@@ -488,7 +488,7 @@ msgstr "Aggiungi nuova cartella..."
 msgid "Add podcast"
 msgstr "Aggiungi podcast"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Aggiungi podcast..."
 
@@ -653,7 +653,7 @@ msgstr "Aggiungere brani ai preferiti"
 msgid "Advanced grouping..."
 msgstr "Raggruppamento avanzato..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Dopo "
 
@@ -699,6 +699,10 @@ msgstr "Album con copertina"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Album senza copertina"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr "Tutto"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -790,6 +794,7 @@ msgstr "E:"
 msgid "Angry"
 msgstr "Arrabbiato"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1010,7 +1015,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Sfoglia..."
@@ -1060,7 +1065,7 @@ msgstr "Memorizzazione in cache di %1"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr "Annulla lo scaricamento"
 
@@ -1100,7 +1105,7 @@ msgid ""
 "songs"
 msgstr "La modifica dell'impostazione di riproduzione mono avrà effetto per i prossimi brani riprodotti"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Verifica la presenza di nuove puntate"
 
@@ -1140,7 +1145,7 @@ msgstr "Scegli dall'elenco"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Scegli l'ordinamento della scaletta e quanti brani conterrà."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Scegli la cartella di destinazione dei podcast"
 
@@ -1157,7 +1162,7 @@ msgstr "Scegli i i siti web che Clementine utilizzerà durante la ricerca dei te
 msgid "Classical"
 msgstr "Classica"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Svuota"
 
@@ -1215,7 +1220,7 @@ msgstr "Clementine può riprodurre musica che hai caricato su OneDrive"
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine può mostrare un messaggio al cambiamento di traccia."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1356,7 +1361,7 @@ msgstr "Configura la ricerca globale..."
 msgid "Configure library..."
 msgstr "Configura raccolta..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Configura podcast..."
 
@@ -1426,7 +1431,7 @@ msgstr "Copia l'URL di condivisione negli appunti"
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copia su dispositivo..."
@@ -1678,7 +1683,7 @@ msgstr "Elimina"
 msgid "Delete Grooveshark playlist"
 msgstr "Elimina scaletta di Grooveshark"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "Elimina i dati scaricati"
 
@@ -1696,7 +1701,7 @@ msgstr "Elimina da dispositivo..."
 msgid "Delete from disk..."
 msgstr "Elimina dal disco..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Elimina le puntate scaricate"
 
@@ -1741,7 +1746,7 @@ msgstr "Dispositivo"
 msgid "Device Properties"
 msgstr "Proprietà del dispositivo"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Nome del dispositivo"
 
@@ -1855,6 +1860,10 @@ msgstr "Non ripetere"
 msgid "Don't show in various artists"
 msgstr "Non mostrare in artisti vari"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr "Non mostrare le puntate ascoltate"
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Non mescolare"
@@ -1875,7 +1884,7 @@ msgstr "Doppio clic per aprire"
 msgid "Double clicking a song will..."
 msgstr "Al doppio clic su un brano..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1885,7 +1894,7 @@ msgstr "Scarica %n puntate"
 msgid "Download directory"
 msgstr "Cartella degli scaricamenti"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Scarica le puntate in "
 
@@ -1893,11 +1902,11 @@ msgstr "Scarica le puntate in "
 msgid "Download membership"
 msgstr "Scaricamento"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Scarica automaticamente le nuove puntate"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Scaricamento accodato"
 
@@ -1917,7 +1926,7 @@ msgstr "Scarica questo album"
 msgid "Download this album..."
 msgstr "Scarica questo album..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Scarica questa puntata"
 
@@ -1925,7 +1934,7 @@ msgstr "Scarica questa puntata"
 msgid "Download..."
 msgstr "Scarica..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Scaricamento in corso (%1%)..."
@@ -2166,31 +2175,31 @@ msgstr "Errore nel caricamento del CD audio"
 msgid "Ever played"
 msgstr "Mai riprodotte"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "Ogni 10 minuti"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "Ogni 12 ore"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "Ogni 2 ore"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "Ogni 20 minuti"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "Ogni 30 minuti"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "Ogni 6 ore"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Ogni ora"
 
@@ -3080,7 +3089,7 @@ msgstr "Carica file/URL, sostituendo la scaletta attuale"
 msgid "Login"
 msgstr "Accedi"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Accesso non riuscito"
 
@@ -3181,8 +3190,8 @@ msgstr "Risposta non corretta"
 msgid "Manual proxy configuration"
 msgstr "Configurazione manuale del proxy"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Manualmente"
 
@@ -3190,11 +3199,11 @@ msgstr "Manualmente"
 msgid "Manufacturer"
 msgstr "Produttore"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Marca come ascoltata"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Marca come nuova"
 
@@ -3503,6 +3512,10 @@ msgstr "Notifiche"
 msgid "Now Playing"
 msgstr "In riproduzione"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr "Numero di puntate da mostrare"
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Anteprima OSD"
@@ -3694,7 +3707,7 @@ msgstr "Festa"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3794,7 +3807,7 @@ msgstr "Chiudi il browser e ritorna a Clementine."
 msgid "Plugin status:"
 msgstr "Stato del plugin:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcast"
 
@@ -4658,7 +4671,7 @@ msgstr "Mescola la scaletta"
 msgid "Shuffle tracks in this album"
 msgstr "Mescola le tracce di questo album"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Registrati"
 
@@ -5277,7 +5290,7 @@ msgstr "Ripristina le tracce selezionate"
 msgid "Unskip track"
 msgstr "Ripristina la traccia"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Rimuovi sottoscrizione"
 
@@ -5293,7 +5306,7 @@ msgstr "Aggiorna"
 msgid "Update Grooveshark playlist"
 msgstr "Aggiorna la scaletta di Grooveshark"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Aggiorna tutti i podcast"
 
@@ -5305,11 +5318,11 @@ msgstr "Aggiorna le cartelle modificate della raccolta"
 msgid "Update the library when Clementine starts"
 msgstr "Aggiorna la raccolta all'avvio di Clementine"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Aggiorna questo podcast"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Aggiornamento in corso"
 
@@ -5416,7 +5429,7 @@ msgstr "Interfaccia utente"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Nome utente"
@@ -5842,7 +5855,7 @@ msgstr "finisce con"
 msgid "equals"
 msgstr "uguale a"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

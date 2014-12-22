@@ -20,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-12-17 22:54+0000\n"
+"Last-Translator: Kristian <kristianm24@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,7 +37,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nDu kan göra spellistor till favoriter genom att klicka på stjärnikonen intill ett namn på en spellista\n\nFavoriserade spellistor kommer att sparas här"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr " dagar"
 
@@ -250,7 +250,7 @@ msgstr "(olika på flera låtar)"
 
 #: internet/spotifyservice.cpp:424
 msgid ", by "
-msgstr ""
+msgstr ", av"
 
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
@@ -450,7 +450,7 @@ msgstr "Lägg till åtgärd"
 
 #: ../bin/src/ui_transcodedialog.h:218
 msgid "Add all tracks from a directory and all its subdirectories"
-msgstr ""
+msgstr "Lägg till alla låtar från en katalog och alla dess underkataloger"
 
 #: internet/savedradio.cpp:106
 msgid "Add another stream..."
@@ -496,7 +496,7 @@ msgstr "Lägg till mapp..."
 msgid "Add podcast"
 msgstr "Lägg till podsändning"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Lägg till podsändning..."
 
@@ -598,7 +598,7 @@ msgstr "Lägg till i Min Musik"
 
 #: internet/spotifyservice.cpp:568
 msgid "Add to Spotify playlists"
-msgstr ""
+msgstr "Lägg till i Spotify's spellistor"
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -661,7 +661,7 @@ msgstr "Lägg till låtar till favoriter"
 msgid "Advanced grouping..."
 msgstr "Avancerad gruppering..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Efter "
 
@@ -698,7 +698,7 @@ msgstr "Album information från jamendo.com..."
 
 #: internet/vkservice.cpp:825
 msgid "Albums"
-msgstr ""
+msgstr "Album"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -707,6 +707,10 @@ msgstr "Album med omslag"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Album utan omslag"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr "Alla"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -798,6 +802,7 @@ msgstr "Och:"
 msgid "Angry"
 msgstr "Arg"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -863,7 +868,7 @@ msgstr "Artistens initialer"
 
 #: ../bin/src/ui_behavioursettingspage.h:288
 msgid "Ask when saving"
-msgstr ""
+msgstr "Fråga vid sparande"
 
 #: ../bin/src/ui_transcodedialog.h:222
 #: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
@@ -1018,7 +1023,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Bläddra..."
@@ -1068,9 +1073,9 @@ msgstr "Cachar %1"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
-msgstr ""
+msgstr "Avbryt nedladdning"
 
 #: internet/vkservice.cpp:624
 msgid ""
@@ -1108,7 +1113,7 @@ msgid ""
 "songs"
 msgstr "Byte från/till Monoljud börjar gälla från nästa låt"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Kolla efter nya avsnitt"
 
@@ -1148,13 +1153,13 @@ msgstr "Välj från listan"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Välj hur spellistan ska sorteras och hur många låtar den ska innehålla."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Välj nedladdningsmapp för podsändningar"
 
 #: ../bin/src/ui_internetshowsettingspage.h:89
 msgid "Choose the internet services you want to show."
-msgstr ""
+msgstr "Välj internet-tjänsterna du vill ha synliga."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1165,7 +1170,7 @@ msgstr "Välj webbplatserna du vill att Clementine ska använda vid sökning eft
 msgid "Classical"
 msgstr "Klassisk"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Rensar upp"
 
@@ -1223,7 +1228,7 @@ msgstr "Clementine kan spela musik som du laddat upp till OneDrive"
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine kan visa ett meddelande vid byte av spår."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1364,7 +1369,7 @@ msgstr "Ställ in Global sökning..."
 msgid "Configure library..."
 msgstr "Konfigurera biblioteket..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Konfigurera podcasts..."
 
@@ -1420,11 +1425,11 @@ msgstr "Konvertera all musik som enheten inte kan spela upp"
 
 #: ../bin/src/ui_networkremotesettingspage.h:248
 msgid "Convert lossless audiofiles before sending them to the remote."
-msgstr ""
+msgstr "Konvertera förlustfria ljudfiler innan dom sänds till fjärrkontrollen."
 
 #: ../bin/src/ui_networkremotesettingspage.h:250
 msgid "Convert lossless files"
-msgstr ""
+msgstr "Konvertera förlustfria filer"
 
 #: internet/vkservice.cpp:322
 msgid "Copy share url to clipboard"
@@ -1434,7 +1439,7 @@ msgstr "Kopiera delad url till urklipp"
 msgid "Copy to clipboard"
 msgstr "Kopiera till klippbordet"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiera till enhet..."
@@ -1686,7 +1691,7 @@ msgstr "Ta bort"
 msgid "Delete Grooveshark playlist"
 msgstr "Ta bort Grooveshark spellista"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "Ta bort nedladdad data"
 
@@ -1704,7 +1709,7 @@ msgstr "Ta bort från enhet..."
 msgid "Delete from disk..."
 msgstr "Ta bort från disk..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Ta bort uppspelade avsnitt"
 
@@ -1749,7 +1754,7 @@ msgstr "Enhet"
 msgid "Device Properties"
 msgstr "Enhetsinställningar"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Enhetsnamn"
 
@@ -1863,6 +1868,10 @@ msgstr "Upprepa inte"
 msgid "Don't show in various artists"
 msgstr "Visa inte i diverse artister"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr "Visa inte redan hörda episoder"
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Blanda inte"
@@ -1883,7 +1892,7 @@ msgstr "Dubbelklicka för att öppna"
 msgid "Double clicking a song will..."
 msgstr "Dubbelklicka på en låt kommer ..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1893,7 +1902,7 @@ msgstr "Ladda ner %n avsnitt"
 msgid "Download directory"
 msgstr "Nedladdningskatalog"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Ladda ner avsnitt till"
 
@@ -1901,17 +1910,17 @@ msgstr "Ladda ner avsnitt till"
 msgid "Download membership"
 msgstr "Hämta medlemskap"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Ladda ner nya avsnitt automatiskt"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Nedladdning köad"
 
 #: ../bin/src/ui_networkremotesettingspage.h:246
 msgid "Download settings"
-msgstr ""
+msgstr "Ladda ner inställningar"
 
 #: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
@@ -1925,7 +1934,7 @@ msgstr "Hämta detta album"
 msgid "Download this album..."
 msgstr "Ladda ner det här albumet ..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Ladda ner detta avsnitt"
 
@@ -1933,7 +1942,7 @@ msgstr "Ladda ner detta avsnitt"
 msgid "Download..."
 msgstr "Ladda ner..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Laddar ner (%1%)..."
@@ -2174,31 +2183,31 @@ msgstr "Fel vid läsning av ljud-CD"
 msgid "Ever played"
 msgstr "Någonsin spelade"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "Var tionde minut"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "Var tolfte timma"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "Varannan timme"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "Var tjugonde minut"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "Varje halvtimma"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "Var sjätte timma"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Varje timma"
 
@@ -2372,7 +2381,7 @@ msgstr "Filnamnsmönster:"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:96
 msgid "File paths"
-msgstr ""
+msgstr "Filsökvägar"
 
 #: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
@@ -2719,7 +2728,7 @@ msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
 #: ../bin/src/ui_transcodedialog.h:220
 msgid "Import..."
-msgstr ""
+msgstr "Importera..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -2809,7 +2818,7 @@ msgstr "Internetoperatörer"
 #: ../bin/src/ui_internetshowsettingspage.h:87
 msgctxt "Global search settings dialog title."
 msgid "Internet services"
-msgstr ""
+msgstr "Internet-tjänster"
 
 #: internet/lastfmservice.cpp:234
 msgid "Invalid API key"
@@ -3088,7 +3097,7 @@ msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 msgid "Login"
 msgstr "Inloggning"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Misslyckad inloggning"
 
@@ -3189,8 +3198,8 @@ msgstr "Felformaterat svar"
 msgid "Manual proxy configuration"
 msgstr "Manuell proxykonfiguration"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Manuellt"
 
@@ -3198,11 +3207,11 @@ msgstr "Manuellt"
 msgid "Manufacturer"
 msgstr "Tillverkare"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Markera som lyssnad"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Markera som ny"
 
@@ -3327,7 +3336,7 @@ msgstr "Tyst"
 
 #: internet/vkservice.cpp:818
 msgid "My Albums"
-msgstr ""
+msgstr "Mina Album"
 
 #: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
 msgid "My Music"
@@ -3511,6 +3520,10 @@ msgstr "Notifieringar"
 msgid "Now Playing"
 msgstr "Spelas just nu"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr "Antal episoder att visa"
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Förhandsvisning av notifiering"
@@ -3587,7 +3600,7 @@ msgstr "Öppna OPML fil..."
 
 #: transcoder/transcodedialog.cpp:234
 msgid "Open a directory to import music from"
-msgstr ""
+msgstr "Öppna en katalog att importera musik från"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3702,7 +3715,7 @@ msgstr "Party"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3802,7 +3815,7 @@ msgstr "Var god och stäng din webbläsare och återgå till Clementine."
 msgid "Plugin status:"
 msgstr "Instickstatus:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podsändning"
 
@@ -4064,7 +4077,7 @@ msgstr "Kom ihåg från förra gången"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:100
 msgid "Remember my choice"
-msgstr ""
+msgstr "Kom ihåg mitt val"
 
 #: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_transcodedialog.h:216
@@ -4555,7 +4568,7 @@ msgstr "Visa en notifiering när jag ändrar volymen"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Show a notification when I pause playback"
-msgstr ""
+msgstr "Visa en avisering när jag pausar uppspelningen"
 
 #: ../bin/src/ui_notificationssettingspage.h:442
 msgid "Show a popup from the system tray"
@@ -4666,7 +4679,7 @@ msgstr "Blanda spellistan"
 msgid "Shuffle tracks in this album"
 msgstr "Blanda låtar i detta album"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Logga in"
 
@@ -5088,7 +5101,7 @@ msgstr "Detta album är inte tillgängligt i det begärda formatet"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:98
 msgid "This can be changed later through the preferences"
-msgstr ""
+msgstr "Detta kan ändras senare genom inställningar"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
@@ -5285,7 +5298,7 @@ msgstr "Hoppa inte över valda spår"
 msgid "Unskip track"
 msgstr "Hoppa inte över valt spår"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Avprenumerera"
 
@@ -5301,7 +5314,7 @@ msgstr "Uppdatering"
 msgid "Update Grooveshark playlist"
 msgstr "Uppdatera Groovesharkspellista "
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Uppdatera alla podsändningar"
 
@@ -5313,11 +5326,11 @@ msgstr "Uppdatera ändrade bibliotekskataloger"
 msgid "Update the library when Clementine starts"
 msgstr "Uppdatera biblioteket när Clementine startar"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Uppdatera denna podsändning"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Uppdatera"
 
@@ -5424,7 +5437,7 @@ msgstr "Användargränssnitt"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Användarnamn"
@@ -5496,7 +5509,7 @@ msgstr "WMA"
 
 #: internet/vkservice.cpp:858
 msgid "Wall"
-msgstr ""
+msgstr "Vägg"
 
 #: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
@@ -5850,7 +5863,7 @@ msgstr "som slutar med"
 msgid "equals"
 msgstr "som är lika med"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/projects/p/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\nသီချင်းစာရင်းနာမည်ဘေးရှိကြယ်ပံုစံသင်္ကေတကိုနှိပ်ခါအနှစ်သက်ဆုံးသီချင်းစာရင်းများကိုလုပ်ဆောင်နိုင်\n\nအနှစ်သက်ဆံုးသီချင်းစာရင်းများကိုယခုနေရာတွေမှတ်သားထား"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "နေ့များ"
 
@@ -483,7 +483,7 @@ msgstr "ဖိုင်တွဲအသစ်ထည့်..."
 msgid "Add podcast"
 msgstr "ပို့စ်ကဒ်ထည့်"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "ပို့စ်ကဒ်ထည့်..."
 
@@ -648,7 +648,7 @@ msgstr "အနှစ်သက်ဆုံးများသို့သီချ
 msgid "Advanced grouping..."
 msgstr "အဆင့်မြင့်အုပ်စုဖွဲ့ခြင်း..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "ပြီးနောက်"
 
@@ -694,6 +694,10 @@ msgstr "အဖုံးများနဲ့အယ်လဘမ်များ"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "အဖုံးများနဲ့အယ်လဘမ်များ"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -785,6 +789,7 @@ msgstr "နှင့်:"
 msgid "Angry"
 msgstr "ဒေါသထွက်"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1005,7 +1010,7 @@ msgid "Box"
 msgstr "သေတ္တာ"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "လျှောက်ကြည့်..."
@@ -1055,7 +1060,7 @@ msgstr "မှတ်ဉာဏ်ဝှက်ခြင်း %1"
 msgid "Cancel"
 msgstr "ပယ်ဖျက်"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1095,7 +1100,7 @@ msgid ""
 "songs"
 msgstr "ပြန်ဖွင့်လိုလားချက်များပြောင်းလဲခြင်းသည်နောက်ဖွင့်ဆဲသီချင်းများတွင်သက်ရောက်မှုရှိ"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "တွဲအသစ်များစစ်ဆေးခြင်း"
 
@@ -1135,7 +1140,7 @@ msgstr "စာရင်းမှရွေး"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "သီချင်းစာရင်းကိုဘယ်သို့မျိုးတူစုမည်၊ ပြီးနောက်သီချင်းဘယ်နှစ်ပုဒ်ပါဝင်မည်ဟုရွေးချယ်ပါ"
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "ပို့စ်ကဒ်ကူးဆွဲဖိုင်လမ်းညွှန်ရွေးချယ်"
 
@@ -1152,7 +1157,7 @@ msgstr "သီချင်းစာသားများရှာဖွေရန
 msgid "Classical"
 msgstr "ဂန္တဝင်"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "ရှင်းထုတ်ဖြစ်"
 
@@ -1210,7 +1215,7 @@ msgstr ""
 msgid "Clementine can show a message when the track changes."
 msgstr "တေးသံလမ်းကြောင်းပြောင်းလဲသွားသောအခါကလီမန်တိုင်းသည်မှာကြားချက်ပြသနိုင်"
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1351,7 +1356,7 @@ msgstr "အနှံ့ရှာဖွေပုံစံပြင်..."
 msgid "Configure library..."
 msgstr "သီချင်းတိုက်ပုံစံပြင်..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "ပို့စ်ကဒ်များပုံစံပြင်..."
 
@@ -1421,7 +1426,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "အောက်ခံကတ်ပြားသို့ကူးယူ"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "ပစ္စည်းသို့ကူးယူ"
@@ -1673,7 +1678,7 @@ msgstr "ပယ်ဖျက်"
 msgid "Delete Grooveshark playlist"
 msgstr "ဂရုရှက်သီချင်းစာရင်းပယ်ဖျက်"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "ကူးဆွဲပြီးအချက်အလက်ပယ်ဖျက်"
 
@@ -1691,7 +1696,7 @@ msgstr "ပစ္စည်းမှပယ်ဖျက်..."
 msgid "Delete from disk..."
 msgstr "ဓာတ်ပြားမှပယ်ဖျက်..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "ဖွင့်ပြီးတွဲများပယ်ဖျက်"
 
@@ -1736,7 +1741,7 @@ msgstr "ပစ္စည်း"
 msgid "Device Properties"
 msgstr "ပစ္စည်းဂုဏ်သတ္တိများ"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "ပစ္စည်းနာမည်"
 
@@ -1850,6 +1855,10 @@ msgstr "မပြန်ဆို"
 msgid "Don't show in various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုးမပြသ"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "ကုလားဖန်မထိုး"
@@ -1870,7 +1879,7 @@ msgstr "ဖွင့်ရန်ကလစ်နှစ်ခါနှိပ်"
 msgid "Double clicking a song will..."
 msgstr "ကလစ်နှစ်ခါနှိပ်ခြင်းဖြင့်သီချင်းဟာ..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1880,7 +1889,7 @@ msgstr "တွဲများ %n ကူးဆွဲ"
 msgid "Download directory"
 msgstr "ဖိုင်လမ်းညွှန်ကူးဆွဲ"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "သို့တွဲများကူးဆွဲ"
 
@@ -1888,11 +1897,11 @@ msgstr "သို့တွဲများကူးဆွဲ"
 msgid "Download membership"
 msgstr "အသင်းဝင်ကူးဆွဲ"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "တွဲအသစ်များအလိုအလျောက်ကူးဆွဲ"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "စီတန်းပြီးကူးဆွဲ"
 
@@ -1912,7 +1921,7 @@ msgstr "ဒီအယ်လဘမ်ကူးဆွဲ"
 msgid "Download this album..."
 msgstr "ဒီအယ်လဘမ်ကူးဆွဲ..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "ဒီတွဲကူးဆွဲ"
 
@@ -1920,7 +1929,7 @@ msgstr "ဒီတွဲကူးဆွဲ"
 msgid "Download..."
 msgstr "ကူးဆွဲ..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "ကူးဆွဲ(%1%)..."
@@ -2161,31 +2170,31 @@ msgstr "အသံဓာတ်ပြားထည့်သွင်းနေခြ
 msgid "Ever played"
 msgstr "သီချင်းဖွင့်ခဲ့သမျှ"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "၁၀မိနစ်တိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "၁၂နာရီတိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "၂နာရီတိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "မိနစ်၂၀တိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "မိနစ်၃၀တိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "၆နာရီတိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "နာရီတိုင်း"
 
@@ -3075,7 +3084,7 @@ msgstr "ဖိုင်များ/ယူအာအလ်များထည့�
 msgid "Login"
 msgstr "ဖွင့်ဝင်"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "ဖွင့်ဝင်၍မရ"
 
@@ -3176,8 +3185,8 @@ msgstr "တုံ့ပြန်မှုပုံမမှန်"
 msgid "Manual proxy configuration"
 msgstr "ပရောက်ဇီပုံစံလက်အားသံုးပြင်ခြင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "လက်အားသံုး"
 
@@ -3185,11 +3194,11 @@ msgstr "လက်အားသံုး"
 msgid "Manufacturer"
 msgstr "ထုတ်လုပ်သူ"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "နားထောင်ပြီးကဲ့သို့မတ်သား"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "အသစ်ကဲ့သို့မတ်သား"
 
@@ -3498,6 +3507,10 @@ msgstr "သတိပေးချက်များ"
 msgid "Now Playing"
 msgstr "ယခုသီချင်းဖွင့်ဆဲ"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ကြိုတင်ကြည့်ရှု"
@@ -3689,7 +3702,7 @@ msgstr "အဖွဲ့"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3789,7 +3802,7 @@ msgstr "ဘရောက်ဇာကိုပိတ်ပြီးကလီမန
 msgid "Plugin status:"
 msgstr "ဖြည့်စွက်ပရိုဂရမ်အခြေအနေ:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "ပို့စ်ကဒ်များ"
 
@@ -4653,7 +4666,7 @@ msgstr "သီချင်းစာရင်းကုလားဖန်ထို
 msgid "Shuffle tracks in this album"
 msgstr "ယခုအယ်လဘမ်တွင်တေးသံလမ်းကြောများကုလားဖန်ထိုး"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "အတွင်းသို့ဝင်"
 
@@ -5272,7 +5285,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "မမှာယူ"
 
@@ -5288,7 +5301,7 @@ msgstr "မွမ်းမံ"
 msgid "Update Grooveshark playlist"
 msgstr "ဂရုရှက်သီချင်းစာရင်းစစ်ဆေးခြင်း"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "ပို့စ်ကဒ်များစစ်ဆေးခြင်း"
 
@@ -5300,11 +5313,11 @@ msgstr "ပြောင်းလဲပြီးသီချင်းတိုက
 msgid "Update the library when Clementine starts"
 msgstr "ကလီမန်တိုင်းစတင်သောအခါသီချင်းတိုက်မွမ်းမံ"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "ဒီပို့စ်ကဒ်စစ်ဆေးခြင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "မွမ်းမံနေ"
 
@@ -5411,7 +5424,7 @@ msgstr "အသံုးပြုသူမျက်နှာပြင်"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "အသင်းဝင်အမည်"
@@ -5837,7 +5850,7 @@ msgstr "ဖြင့်အဆုံး"
 msgid "equals"
 msgstr "ညီမျှ"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "ဂျီပေါ့တာ.နက်"
 

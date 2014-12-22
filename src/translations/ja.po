@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nプレイリスト名の横にある星アイコンをクリックするとプレイリストをお気に入りにできます。\n\nお気に入りにしたプレイリストはここに保存されます"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr " 日"
 
@@ -490,7 +490,7 @@ msgstr "新しいフォルダーを追加..."
 msgid "Add podcast"
 msgstr "ポッドキャストを追加"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "ポッドキャストを追加..."
 
@@ -655,7 +655,7 @@ msgstr "曲をお気に入りに追加中"
 msgid "Advanced grouping..."
 msgstr "高度なグループ化..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "後"
 
@@ -701,6 +701,10 @@ msgstr "カバー付きのアルバム"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "カバーなしのアルバム数"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -792,6 +796,7 @@ msgstr "そして:"
 msgid "Angry"
 msgstr "怒り"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1012,7 +1017,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "参照..."
@@ -1062,7 +1067,7 @@ msgstr "%1 キャッシュ中"
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1102,7 +1107,7 @@ msgid ""
 "songs"
 msgstr "モノラル再生の設定変更は次に再生する曲から反映されます"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "新しいエピソードのチェック"
 
@@ -1142,7 +1147,7 @@ msgstr "一覧から選択する"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "プレイリストの並び順と、プレイリスト内に何曲含めるかを選択してください。"
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "ポッドキャストのダウンロードディレクトリを選択してください"
 
@@ -1159,7 +1164,7 @@ msgstr "歌詞の検索時に Clementine が使用する Web サイトを選択�
 msgid "Classical"
 msgstr "クラシック"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "整理"
 
@@ -1217,7 +1222,7 @@ msgstr "Clementine は OneDrive にアップロードしたミュージックを
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine はトラックの変更時にメッセージを表示できます。"
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1358,7 +1363,7 @@ msgstr "全体検索の設定..."
 msgid "Configure library..."
 msgstr "ライブラリの設定..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "ポッドキャストの設定..."
 
@@ -1428,7 +1433,7 @@ msgstr "URL をクリップボードにコピーする"
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "デバイスへコピー..."
@@ -1680,7 +1685,7 @@ msgstr "削除"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark プレイリストの削除"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "ダウンロード済みデータを削除"
 
@@ -1698,7 +1703,7 @@ msgstr "デバイスから削除..."
 msgid "Delete from disk..."
 msgstr "ディスクから削除..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "再生したエピソードの削除"
 
@@ -1743,7 +1748,7 @@ msgstr "デバイス"
 msgid "Device Properties"
 msgstr "デバイスのプロパティ"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "デバイス名"
 
@@ -1857,6 +1862,10 @@ msgstr "リピートしない"
 msgid "Don't show in various artists"
 msgstr "さまざまなアーティストに表示しない"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "シャッフルしない"
@@ -1877,7 +1886,7 @@ msgstr "ダブルクリックで開く"
 msgid "Double clicking a song will..."
 msgstr "曲をダブルクリックした際の動作..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1887,7 +1896,7 @@ msgstr "%n 個のエピソードをダウンロード"
 msgid "Download directory"
 msgstr "ダウンロードディレクトリ"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "エピソードのダウンロード先"
 
@@ -1895,11 +1904,11 @@ msgstr "エピソードのダウンロード先"
 msgid "Download membership"
 msgstr "メンバーシップのダウンロード"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "新しいエピソードを自動的にダウンロードする"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "ダウンロードがキューに追加されました"
 
@@ -1919,7 +1928,7 @@ msgstr "このアルバムのダウンロード"
 msgid "Download this album..."
 msgstr "このアルバムをダウンロード..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "このエピソードをダウンロード"
 
@@ -1927,7 +1936,7 @@ msgstr "このエピソードをダウンロード"
 msgid "Download..."
 msgstr "ダウンロード..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "ダウンロード中 (%1%)..."
@@ -2168,31 +2177,31 @@ msgstr "音楽 CD を読み込み中にエラーが発生しました"
 msgid "Ever played"
 msgstr "再生したことがある"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "10 分おき"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "12 時間おき"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "2 時間おき"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "20 分おき"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "30 分おき"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "6 時間おき"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "1 時間おき"
 
@@ -3082,7 +3091,7 @@ msgstr "ファイル・URL を読み込んで、現在のプレイリストを�
 msgid "Login"
 msgstr "ログイン"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "ログインは失敗しました"
 
@@ -3183,8 +3192,8 @@ msgstr "不正な応答です"
 msgid "Manual proxy configuration"
 msgstr "プロキシの手動構成"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "手動"
 
@@ -3192,11 +3201,11 @@ msgstr "手動"
 msgid "Manufacturer"
 msgstr "製造元"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "視聴済みマークを付ける"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "新曲マークを付ける"
 
@@ -3505,6 +3514,10 @@ msgstr "通知"
 msgid "Now Playing"
 msgstr "再生中"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "OSD のプレビュー"
@@ -3696,7 +3709,7 @@ msgstr "パーティー"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3796,7 +3809,7 @@ msgstr "ブラウザーを閉じて Clementine に戻ってください。"
 msgid "Plugin status:"
 msgstr "プラグインの状態:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "ポッドキャスト"
 
@@ -4660,7 +4673,7 @@ msgstr "プレイリストをシャッフル"
 msgid "Shuffle tracks in this album"
 msgstr "このアルバムのトラックをシャッフル"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "サインイン"
 
@@ -5279,7 +5292,7 @@ msgstr "選択したトラックをスキップしない"
 msgid "Unskip track"
 msgstr "トラックをスキップしない"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "購読解除"
 
@@ -5295,7 +5308,7 @@ msgstr "更新"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark のプレイリストを更新"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "すべてのポッドキャストを更新"
 
@@ -5307,11 +5320,11 @@ msgstr "変更されたライブラリフォルダーを更新"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine の起動時にライブラリを更新する"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "このポッドキャストを更新"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "更新"
 
@@ -5418,7 +5431,7 @@ msgstr "ユーザーインターフェース"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "ユーザー名"
@@ -5844,7 +5857,7 @@ msgstr "が次で終わる"
 msgid "equals"
 msgstr "が次に一致する"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

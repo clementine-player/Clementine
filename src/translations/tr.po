@@ -24,7 +24,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +41,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nÇalma listelerini bir çalma listesi adının anındaki yıldız simgesi ile beğenilenlere ekleyebilirsiniz\n\nBeğenilen çalma listeleri buraya kaydedilecek"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr " günler"
 
@@ -500,7 +500,7 @@ msgstr "Yeni klasör ekle..."
 msgid "Add podcast"
 msgstr "Podcast ekle"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Podcast ekle..."
 
@@ -665,7 +665,7 @@ msgstr "Şarkı favorilere ekleniyor"
 msgid "Advanced grouping..."
 msgstr "Gelişmiş gruplama..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Sonra "
 
@@ -711,6 +711,10 @@ msgstr "Kapak resmine olan albümler"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Kapak resmi olmayan albümler"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -802,6 +806,7 @@ msgstr "Ve:"
 msgid "Angry"
 msgstr "Öfkeli"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1022,7 +1027,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Gözat..."
@@ -1072,7 +1077,7 @@ msgstr "Önbelleklenen %1"
 msgid "Cancel"
 msgstr "İptal"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1112,7 +1117,7 @@ msgid ""
 "songs"
 msgstr "Mono çalma ayarını değiştirmek sonraki şarkılarda da etkili olur"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Yeni bölümler için kontrol et"
 
@@ -1152,7 +1157,7 @@ msgstr "Listeden seç"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Çalma listesinin nasıl dizildiğini ve kaç şarkı içereceğini seçin."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Podcast indirme dizinini seç"
 
@@ -1169,7 +1174,7 @@ msgstr "Şarkı sözü ararken Clementine'in kullanacağı siteleri seçin."
 msgid "Classical"
 msgstr "Klasik"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Temizliyor"
 
@@ -1227,7 +1232,7 @@ msgstr "Clementine, OneDrive'a yüklediğiniz müziği oynatabilir"
 msgid "Clementine can show a message when the track changes."
 msgstr "Parça değiştiğinde Clementine bir ileti gösterebilir."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1368,7 +1373,7 @@ msgstr "Genel aramayı düzenle..."
 msgid "Configure library..."
 msgstr "Kütüphaneyi düzenle..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Podcastları ayarla..."
 
@@ -1438,7 +1443,7 @@ msgstr "Paylaşım adresini panoya kopyala"
 msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Aygıta kopyala..."
@@ -1690,7 +1695,7 @@ msgstr "Sil"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark müzik listesini sil"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "İndirilmiş veriyi sil"
 
@@ -1708,7 +1713,7 @@ msgstr "Aygıttan sil..."
 msgid "Delete from disk..."
 msgstr "Diskten sil..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Çalımış bölümleri sil"
 
@@ -1753,7 +1758,7 @@ msgstr "Aygıt"
 msgid "Device Properties"
 msgstr "Aygıt Özellikleri"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Aygıt adı"
 
@@ -1867,6 +1872,10 @@ msgstr "Tekrarlama"
 msgid "Don't show in various artists"
 msgstr "Çeşitli sanatçılarda gösterme"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Karıştırma"
@@ -1887,7 +1896,7 @@ msgstr "Açmak için çift tıkla"
 msgid "Double clicking a song will..."
 msgstr "Bir şarkıyı çift tıklamak..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1897,7 +1906,7 @@ msgstr "%n bölüm indir"
 msgid "Download directory"
 msgstr "İndirme dizini"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Bölümleri şuraya indir"
 
@@ -1905,11 +1914,11 @@ msgstr "Bölümleri şuraya indir"
 msgid "Download membership"
 msgstr "İndirme üyeliği"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Yeni bölümleri otomatik olarak indir"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Sıradakileri indir"
 
@@ -1929,7 +1938,7 @@ msgstr "Bu albümü indir"
 msgid "Download this album..."
 msgstr "Bu albümü indirin..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Bu bölümü indir"
 
@@ -1937,7 +1946,7 @@ msgstr "Bu bölümü indir"
 msgid "Download..."
 msgstr "İndir..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "İndiriyor (%1%)..."
@@ -2178,31 +2187,31 @@ msgstr "Ses CD'si yüklenirken hata"
 msgid "Ever played"
 msgstr "Önceden çalınmış"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "Her 10 dakikada"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "Her 12 saatte"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "Her 2 saatte"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "Her 20 dakikada"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "Her 30 dakikada"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "Her 6 saatte"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Her saat"
 
@@ -3092,7 +3101,7 @@ msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 msgid "Login"
 msgstr "Oturum aç"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Giriş başarısız oldu."
 
@@ -3193,8 +3202,8 @@ msgstr "Bozuk yanıt"
 msgid "Manual proxy configuration"
 msgstr "Elle vekil sunucu yapılandırma"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "El ile"
 
@@ -3202,11 +3211,11 @@ msgstr "El ile"
 msgid "Manufacturer"
 msgstr "Üretici"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Dinlenmiş olarak işaretle"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Yeni olarak işaretle"
 
@@ -3515,6 +3524,10 @@ msgstr "Bildirimler"
 msgid "Now Playing"
 msgstr "Şimdi Çalıyor"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "OSD Önizleme"
@@ -3706,7 +3719,7 @@ msgstr "Parti"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3806,7 +3819,7 @@ msgstr "Lütfen tarayıcınızı kapatıp Clementine'e geri dönün."
 msgid "Plugin status:"
 msgstr "Eklenti durumu:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcastlar"
 
@@ -4670,7 +4683,7 @@ msgstr "Çalma listesini karıştır"
 msgid "Shuffle tracks in this album"
 msgstr "Bu albümdeki şarkıları karıştır"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Giriş yap"
 
@@ -5289,7 +5302,7 @@ msgstr "Seçili parçaları atlama"
 msgid "Unskip track"
 msgstr "Parçayı atlama"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Abonelikten çık"
 
@@ -5305,7 +5318,7 @@ msgstr "Güncelle"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark çalma listesini güncelle"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Bütün podcastları güncelle"
 
@@ -5317,11 +5330,11 @@ msgstr "Değişen kütüphane klasörlerini güncelle"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine başladığında kütüphaneyi güncelle"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Bu podcast'ı güncelle"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Güncelliyor"
 
@@ -5428,7 +5441,7 @@ msgstr "Kullanıcı arayüzü"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Kullanıcı Adı"
@@ -5854,7 +5867,7 @@ msgstr "şununla bitiyor"
 msgid "equals"
 msgstr "eşittir"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 10:52+0000\n"
+"PO-Revision-Date: 2014-12-16 10:19+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nVoit lisätä soittolistan suosikkeihin napsauttamalla tähteä soittolistan nimen vierestä\n\nSuosikkeihin lisätyt soittolistat tallennetaan tänne"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr " päivää"
 
@@ -488,7 +488,7 @@ msgstr "Lisää uusi kansio..."
 msgid "Add podcast"
 msgstr "Lisää podcast"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Lisää podcast..."
 
@@ -653,7 +653,7 @@ msgstr "Lisätään kappale suosikkeihin"
 msgid "Advanced grouping..."
 msgstr "Kirjaston tarkempi järjestely..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Jälkeen"
 
@@ -699,6 +699,10 @@ msgstr "Levyt kansikuvineen"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Levyt vailla kansikuvia"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr "Kaikki"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -790,6 +794,7 @@ msgstr "Ja:"
 msgid "Angry"
 msgstr "Vihainen"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1010,7 +1015,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Selaa..."
@@ -1060,7 +1065,7 @@ msgstr "Asetetaan välimuistiin %1"
 msgid "Cancel"
 msgstr "Peru"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr "Peru lataaminen"
 
@@ -1100,7 +1105,7 @@ msgid ""
 "songs"
 msgstr "Mono-toistoasetuksen tilan vaihtaminen tulee voimaan seuraavassa kappaleessa"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Tarkista uudet jaksot"
 
@@ -1140,7 +1145,7 @@ msgstr "Valitse listalta"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Valitse kuinka soittolista lajitellaan ja kuinka monta kappaletta se sisältää."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Valitse podcastien latauskansio"
 
@@ -1157,7 +1162,7 @@ msgstr "Valitse sivustot, joilta haluat Clementinen etsivän sanoituksia."
 msgid "Classical"
 msgstr "Classical"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Siivoaminen"
 
@@ -1215,7 +1220,7 @@ msgstr "Clementine voi toistaa OneDriveen tallennettua musiikkia"
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine voi ilmoittaa, kun kappale vaihtuu."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1356,7 +1361,7 @@ msgstr "Muokkaa hakua..."
 msgid "Configure library..."
 msgstr "Kirjaston asetukset..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Muokkaa podcasteja..."
 
@@ -1426,7 +1431,7 @@ msgstr "Kopioi jakamisosoite leikepöydälle"
 msgid "Copy to clipboard"
 msgstr "Kopioi leikepöydälle"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopioi laitteelle..."
@@ -1678,7 +1683,7 @@ msgstr "Poista"
 msgid "Delete Grooveshark playlist"
 msgstr "Poista Grooveshark-soittolista"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "Poista ladattu data"
 
@@ -1696,7 +1701,7 @@ msgstr "Poista laitteelta..."
 msgid "Delete from disk..."
 msgstr "Poista levyltä..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Poista soitetut jaksot"
 
@@ -1741,7 +1746,7 @@ msgstr "Laite"
 msgid "Device Properties"
 msgstr "Laitteen ominaisuudet"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Laitteen nimi"
 
@@ -1855,6 +1860,10 @@ msgstr "Älä kertaa"
 msgid "Don't show in various artists"
 msgstr "Älä näytä kohdassa \"Useita esittäjiä\""
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr "Älä näytä kuunneltuja jaksoja"
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Älä sekoita"
@@ -1875,7 +1884,7 @@ msgstr "Kaksoisnapsauta avataksesi"
 msgid "Double clicking a song will..."
 msgstr "Kappaleen kaksoisnapsautus..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1885,7 +1894,7 @@ msgstr "Poista %n jaksoa"
 msgid "Download directory"
 msgstr "Latauskansio"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Lataa jaksot sijaintiin"
 
@@ -1893,11 +1902,11 @@ msgstr "Lataa jaksot sijaintiin"
 msgid "Download membership"
 msgstr "Latausjäsenyys"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Lataa uudet jaksot automaattisesti"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Lataus asetettu jonoon"
 
@@ -1917,7 +1926,7 @@ msgstr "Lataa tämä levy"
 msgid "Download this album..."
 msgstr "Lataa tämä levy..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Lataa tämä jakso"
 
@@ -1925,7 +1934,7 @@ msgstr "Lataa tämä jakso"
 msgid "Download..."
 msgstr "Lataa..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Ladataan (%1%)..."
@@ -2166,31 +2175,31 @@ msgstr "Virhe ladattaessa CD"
 msgid "Ever played"
 msgstr "Aina soitetut"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "10 minuutin välein"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "12 tunnin välein"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "2 tunnin välein"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "20 minuutin välein"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "30 minuutin välein"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "6 tunnin välein"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Joka tunti"
 
@@ -3080,7 +3089,7 @@ msgstr "Lataa tiedostoja tai verkko-osoitteita, korvaa samalla nykyinen soittoli
 msgid "Login"
 msgstr "Kirjaudu sisään"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Kirjautuminen epäonnistui"
 
@@ -3181,8 +3190,8 @@ msgstr "Virheellinen vastaus"
 msgid "Manual proxy configuration"
 msgstr "Määritä välityspalvelin itse"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Käsin"
 
@@ -3190,11 +3199,11 @@ msgstr "Käsin"
 msgid "Manufacturer"
 msgstr "Valmistaja"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Merkitse kuunnelluksi"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Merkitse uudeksi"
 
@@ -3503,6 +3512,10 @@ msgstr "Ilmoitukset"
 msgid "Now Playing"
 msgstr "Nyt soi"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr "Näytettävien jaksojen määrä"
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Kuvaruutunäytön esikatselu"
@@ -3694,7 +3707,7 @@ msgstr "Party"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3794,7 +3807,7 @@ msgstr "Sulje selain ja palaa Clementineen."
 msgid "Plugin status:"
 msgstr "Liitännäisen tila:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcastit"
 
@@ -4658,7 +4671,7 @@ msgstr "Sekoita soittolista"
 msgid "Shuffle tracks in this album"
 msgstr "Sekoita tämän levyn kappaleet"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Kirjaudu"
 
@@ -5277,7 +5290,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Poista tilaus"
 
@@ -5293,7 +5306,7 @@ msgstr "Päivitä"
 msgid "Update Grooveshark playlist"
 msgstr "Päivitä Grooveshark-soittolista"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Päivitä kaikki podcastit"
 
@@ -5305,11 +5318,11 @@ msgstr "Päivitä muuttuneet kirjastokansiot"
 msgid "Update the library when Clementine starts"
 msgstr "Päivitä kirjasto Clementine käynnistyessä"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Päivitä tämä podcast"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Päivittäminen"
 
@@ -5416,7 +5429,7 @@ msgstr "Käyttöliittymä"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Käyttäjätunnus"
@@ -5842,7 +5855,7 @@ msgstr "päättyy"
 msgid "equals"
 msgstr "yhtä kuin"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

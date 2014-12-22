@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nPuteți adăuga listele de redare la favorite apăsând miniatura stea de lângă numele listei de redare\n\nListele de redare favorite vor fi salvate aici"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "zile"
 
@@ -493,7 +493,7 @@ msgstr "Adaugă dosar nou..."
 msgid "Add podcast"
 msgstr "Adaugă podcast"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Adaugă podcast..."
 
@@ -658,7 +658,7 @@ msgstr "Adăugare melodie la favorite"
 msgid "Advanced grouping..."
 msgstr "Grupare avansată..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "După"
 
@@ -704,6 +704,10 @@ msgstr "Albume cu coperți"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Albume fără coperți"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -795,6 +799,7 @@ msgstr "Și:"
 msgid "Angry"
 msgstr "Furios"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1015,7 +1020,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Navighează..."
@@ -1065,7 +1070,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Anulare"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1105,7 +1110,7 @@ msgid ""
 "songs"
 msgstr "Modificările preferinței redării mono vor avea efect pentru melodiile redate ulterior"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Verifică după episoade noi"
 
@@ -1145,7 +1150,7 @@ msgstr "Alegeți din listă"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Alegeți cum este sortată lista de redare și câte melodii va conține."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Alegeți directorulo de descărcare pentru podcast-uri"
 
@@ -1162,7 +1167,7 @@ msgstr "Alegeți paginile web pe care doriți ca Clementine să le folosească p
 msgid "Classical"
 msgstr "Clasic"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Curățare"
 
@@ -1220,7 +1225,7 @@ msgstr "Clementine poate reda muzica pe care ați încărcat-o pe OneDrive"
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine poate afișa un mesaj când se schimbă pista."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1361,7 +1366,7 @@ msgstr "Configurați căutarea globală..."
 msgid "Configure library..."
 msgstr "Configurați biblioteca..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Configurați podcast-uri..."
 
@@ -1431,7 +1436,7 @@ msgstr "Copiază în memoria temporară url-ul partajat"
 msgid "Copy to clipboard"
 msgstr "Copiază în memoria temporară"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copiază pe dispozitiv..."
@@ -1683,7 +1688,7 @@ msgstr "Șterge"
 msgid "Delete Grooveshark playlist"
 msgstr "Șterge lista de redare Grooveshark"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "Șterge datele descărcate"
 
@@ -1701,7 +1706,7 @@ msgstr "Șterge de pe dispozitiv..."
 msgid "Delete from disk..."
 msgstr "Șterge de pe disc..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Șterge episoadele redate"
 
@@ -1746,7 +1751,7 @@ msgstr "Dispozitiv"
 msgid "Device Properties"
 msgstr "Proprietățile dispozitivului"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Nume dispozitiv"
 
@@ -1860,6 +1865,10 @@ msgstr "Nu repeta"
 msgid "Don't show in various artists"
 msgstr "Nu arăta în artiști diferiți"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Nu amesteca"
@@ -1880,7 +1889,7 @@ msgstr "Dublu clic pentru a deschide"
 msgid "Double clicking a song will..."
 msgstr "Dublu clic pe o melodie va..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1890,7 +1899,7 @@ msgstr "Descarcă %n episoade"
 msgid "Download directory"
 msgstr "Descarcă directorul"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Descarcă episoadele la"
 
@@ -1898,11 +1907,11 @@ msgstr "Descarcă episoadele la"
 msgid "Download membership"
 msgstr "Descarcă membru"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Descarcă automat noile episoade"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Descarcă coada"
 
@@ -1922,7 +1931,7 @@ msgstr "Descarcă acest album"
 msgid "Download this album..."
 msgstr "Descarcă acest album..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Descarcă acest episod"
 
@@ -1930,7 +1939,7 @@ msgstr "Descarcă acest episod"
 msgid "Download..."
 msgstr "Descărcare..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Se descarcă (%1%)..."
@@ -2171,31 +2180,31 @@ msgstr "Eroare la încărcarea CD-ului audio"
 msgid "Ever played"
 msgstr "Redate vreodată"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "La fiecare 10 minute"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "La fiecare 12 ore"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "La fiecare 2 ore"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "La fiecare 20 de minute"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "La fiecare 30 de minute"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "La fiecare 6 ore"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "La fiecare oră"
 
@@ -3085,7 +3094,7 @@ msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 msgid "Login"
 msgstr "Autentificare"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Autentificare eșuată"
 
@@ -3186,8 +3195,8 @@ msgstr "Răspuns incorect"
 msgid "Manual proxy configuration"
 msgstr "Configurare proxy manuală"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Manual"
 
@@ -3195,11 +3204,11 @@ msgstr "Manual"
 msgid "Manufacturer"
 msgstr "Producător"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Marchează ca ascultat"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Marchează ca nou"
 
@@ -3508,6 +3517,10 @@ msgstr "Notificări"
 msgid "Now Playing"
 msgstr "Se redă acum"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Previzualizare OSD"
@@ -3699,7 +3712,7 @@ msgstr "Petrecere"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3799,7 +3812,7 @@ msgstr "Închideți navigatorul și reveniți la Clementine."
 msgid "Plugin status:"
 msgstr "Stare modul:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcast-uri"
 
@@ -4663,7 +4676,7 @@ msgstr "Amestecă lista de redare"
 msgid "Shuffle tracks in this album"
 msgstr "Amestecă pistele din acest album"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Autentificare"
 
@@ -5282,7 +5295,7 @@ msgstr "Nu omite pistele selectate"
 msgid "Unskip track"
 msgstr "Nu omite pista"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Dezabonare"
 
@@ -5298,7 +5311,7 @@ msgstr "Actualizare"
 msgid "Update Grooveshark playlist"
 msgstr "Actualizare listă de redare Grooveshark"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Actualizează toate podcasturile"
 
@@ -5310,11 +5323,11 @@ msgstr "Actualizează dosarele modificate ale bibliotecii"
 msgid "Update the library when Clementine starts"
 msgstr "Actualizează biblioteca atunci când pornește Clementine"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Actualizează acest podcast"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Se actualizează"
 
@@ -5421,7 +5434,7 @@ msgstr "Interfață utilizator "
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Nume utilizator"
@@ -5847,7 +5860,7 @@ msgstr "se termină cu"
 msgid "equals"
 msgstr "egale"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +33,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nΜπορείτε να κανετε αγαπημένα τα playlists σας κάνοντας κλικ στο εικονίδιο του αστεριού δίπλα σε ένα όνομα λίστας αναπαραγωγής ⏎\n⏎\nΑγαπημένες λίστες αναπαραγωγής θα αποθηκεύονται εδώ"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr " ημέρες"
 
@@ -492,7 +492,7 @@ msgstr "Προσθήκη νέου φακέλου..."
 msgid "Add podcast"
 msgstr "Προσθήκη podcast"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Προσθήκη podcast..."
 
@@ -657,7 +657,7 @@ msgstr "Προσθήκη τραγουδιού στα αγαπημένα"
 msgid "Advanced grouping..."
 msgstr "Προχωρημένη ομαδοποίηση..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Μετά "
 
@@ -703,6 +703,10 @@ msgstr "Άλμπουμ με εξώφυλλα"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Άλμπουμ χωρίς εξώφυλλα"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -794,6 +798,7 @@ msgstr "Και:"
 msgid "Angry"
 msgstr "Angry"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1014,7 +1019,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Αναζήτηση..."
@@ -1064,7 +1069,7 @@ msgstr "Προσωρινή αποθήκευση #1"
 msgid "Cancel"
 msgstr "Άκυρο"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1104,7 +1109,7 @@ msgid ""
 "songs"
 msgstr "Η αλλαγή αναπαραγωγής mono θα ενεργοποιηθεί για τα επόμενα τραγούδια "
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Έλεγχος για νέα επεισόδια"
 
@@ -1144,7 +1149,7 @@ msgstr "Επιλογή από τη λίστα"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Επιλέξτε πως θα ταξινομηθεί η λίστα αναπαραγωγής και πόσα τραγούδια θα περιέχει."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Επιλογή φακέλου για αποθήκευση του podcast"
 
@@ -1161,7 +1166,7 @@ msgstr "Επιλέξτε τις ιστοσελίδες που θέλετε να 
 msgid "Classical"
 msgstr "Κλασσική"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Καθάρισμα"
 
@@ -1219,7 +1224,7 @@ msgstr ""
 msgid "Clementine can show a message when the track changes."
 msgstr "Το Clementine μπορεί να δείχνει ένα μήνυμα όταν το κομμάτι αλλάζει."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1360,7 +1365,7 @@ msgstr "Ρύθμιση καθολικής αναζήτησης..."
 msgid "Configure library..."
 msgstr "Παραμετροποίηση της βιβλιοθήκης"
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Ρύθμιση των podcasts..."
 
@@ -1430,7 +1435,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Αντιγραφή στην συσκευή..."
@@ -1682,7 +1687,7 @@ msgstr "Διαγραφή"
 msgid "Delete Grooveshark playlist"
 msgstr "Διαγραφή της λίστας αναπαραγωγής "
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "Διαγραφή δεδομένων που έχουν \"κατέβει\""
 
@@ -1700,7 +1705,7 @@ msgstr "Διαγραφή από την συσκευή..."
 msgid "Delete from disk..."
 msgstr "Διαγραφή από τον δίσκο..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Διαγραφή επεισοδίων που έχουν αναπαραχθεί"
 
@@ -1745,7 +1750,7 @@ msgstr "Συσκευή"
 msgid "Device Properties"
 msgstr "Ιδιότητες συσκευής"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Όνομα συσκευής"
 
@@ -1859,6 +1864,10 @@ msgstr "Χωρίς επανάληψη"
 msgid "Don't show in various artists"
 msgstr "Αφαίρεση από τους διάφορους καλλιτέχνες"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Χωρίς ανακάτεμα"
@@ -1879,7 +1888,7 @@ msgstr "Διπλό «κλικ» για άνοιγμα"
 msgid "Double clicking a song will..."
 msgstr "Διπλό \"κλικ\" σε ένα τραγούδι θα..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1889,7 +1898,7 @@ msgstr "Λήψη %n επεισοδίων"
 msgid "Download directory"
 msgstr "Φάκελος λήψης"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Αποθήκευση επεισοδίων στο"
 
@@ -1897,11 +1906,11 @@ msgstr "Αποθήκευση επεισοδίων στο"
 msgid "Download membership"
 msgstr "\"Κατέβασμα\" συνδρομής"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Αυτόματη λήψη νέων επεισοδίων"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Η λήψη μπήκε στην αναμονή"
 
@@ -1921,7 +1930,7 @@ msgstr "Λήψη αυτού του άλμπουμ"
 msgid "Download this album..."
 msgstr "Μεταφόρτωση αυτού του άλμπουμ..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Λήψη αυτού του επεισοδίου"
 
@@ -1929,7 +1938,7 @@ msgstr "Λήψη αυτού του επεισοδίου"
 msgid "Download..."
 msgstr "Λήψη..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Λήψη του (%1%)..."
@@ -2170,31 +2179,31 @@ msgstr "Σφάλμα κατά την φόρτωση CD ήχου"
 msgid "Ever played"
 msgstr "Ενίοτε έπαιξαν"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "Κάθε 10 λεπτά"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "Κάθε 12 ώρες"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "Κάθε 2 ώρες"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "Κάθε 20 λεπτά"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "Κάθε 30 λεπτά"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "Κάθε 6 ώρες"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Κάθε ώρα"
 
@@ -3084,7 +3093,7 @@ msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας τη�
 msgid "Login"
 msgstr "Είσοδος"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Αποτυχία εισόδου"
 
@@ -3185,8 +3194,8 @@ msgstr "Παραμορφωμένη απάντηση"
 msgid "Manual proxy configuration"
 msgstr "Χειροκίνητη ρύθμιση διαμεσολαβητή"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Χειροκίνητα"
 
@@ -3194,11 +3203,11 @@ msgstr "Χειροκίνητα"
 msgid "Manufacturer"
 msgstr "Κατασκευαστής"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Επισήμανση ως έχει ακουστεί"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Επισήμανση ως νέο"
 
@@ -3507,6 +3516,10 @@ msgstr "Ειδοποιήσεις"
 msgid "Now Playing"
 msgstr "Τρέχουσα αναπαραγωγή"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Προ-επισκόπηση OSD"
@@ -3698,7 +3711,7 @@ msgstr "Πάρτι"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3798,7 +3811,7 @@ msgstr "Παρακαλώ κλείστε τον περιηγητή σας και 
 msgid "Plugin status:"
 msgstr "Κατάσταση πρόσθετου:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcasts"
 
@@ -4662,7 +4675,7 @@ msgstr "Ανακάτεμα λίστας"
 msgid "Shuffle tracks in this album"
 msgstr "Ανακάτεμα των κομματιών σε αυτό το άλμπουμ"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Είσοδος"
 
@@ -5281,7 +5294,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Ακύρωση συνδρομής"
 
@@ -5297,7 +5310,7 @@ msgstr "Ενημέρωση"
 msgid "Update Grooveshark playlist"
 msgstr "Ενημέρωση λίστας αναπαραγωγής του Grooveshark"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Ενημέρωση όλων των podcasts"
 
@@ -5309,11 +5322,11 @@ msgstr "Ενημέρωση φακέλων βιβλιοθήκης που άλλα
 msgid "Update the library when Clementine starts"
 msgstr "Ενημέρωση της βιβλιοθήκης κατά την εκκίνηση του Clementine"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Ενημέρωσε αυτό το podcast"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Ενημέρωση"
 
@@ -5420,7 +5433,7 @@ msgstr "Διασύνδεση χρήστη"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Όνομα χρήστη"
@@ -5846,7 +5859,7 @@ msgstr "τελειώνει με"
 msgid "equals"
 msgstr "ισούται"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

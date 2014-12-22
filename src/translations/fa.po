@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr ""
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr " روز"
 
@@ -487,7 +487,7 @@ msgstr "افزودن پوشه‌ی نو..."
 msgid "Add podcast"
 msgstr "افزودن پادکست"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "افزودن پادکست..."
 
@@ -652,7 +652,7 @@ msgstr "اضافه کردن آهنگ به پسندیده‌ها"
 msgid "Advanced grouping..."
 msgstr "دسته‌بندی پیشرفته..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "پس از"
 
@@ -698,6 +698,10 @@ msgstr "آلبوم‌های با جلد"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "آلبوم‌های بدون جلد"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -789,6 +793,7 @@ msgstr "و:"
 msgid "Angry"
 msgstr "خشمگین"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1009,7 +1014,7 @@ msgid "Box"
 msgstr "باکس"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "مرور..."
@@ -1059,7 +1064,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "کنسل"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1099,7 +1104,7 @@ msgid ""
 "songs"
 msgstr "تغییر ترجیح‌های بازپخش مونو برای آهنگ‌های پسین کاراست"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "بررسی برای داستان‌های تازه"
 
@@ -1139,7 +1144,7 @@ msgstr "گزینش از لیست"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "گزینش روش مرتب‌سازی لیست و تعداد آهنگهای آن"
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "گزیدن پوشه‌ی بارگیری پادکست"
 
@@ -1156,7 +1161,7 @@ msgstr "پایگاه اینترنتی را برگزینید که می‌خواه
 msgid "Classical"
 msgstr "کلاسیک"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "پالایش"
 
@@ -1214,7 +1219,7 @@ msgstr ""
 msgid "Clementine can show a message when the track changes."
 msgstr "کلمنتاین می‌تواند پیامی در صورت تغییر ترک بنمایاند."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1355,7 +1360,7 @@ msgstr "پیکربندی جستجوی سراسری..."
 msgid "Configure library..."
 msgstr "پیکربندی کتابخانه..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "پیکربندی پادکست..."
 
@@ -1425,7 +1430,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "کپی به کلیپ‌بورد"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "کپی‌کردن در دستگاه..."
@@ -1677,7 +1682,7 @@ msgstr "پاک‌کردن"
 msgid "Delete Grooveshark playlist"
 msgstr "پاک‌کردن لیست پخش گرووشارک"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "پاک‌کردن دانستنی‌های بارگیری شده"
 
@@ -1695,7 +1700,7 @@ msgstr "پاک کردن از دستگاه..."
 msgid "Delete from disk..."
 msgstr "پاک کردن از دیسک..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "پاک‌کردن داستانهای پخش‌شده"
 
@@ -1740,7 +1745,7 @@ msgstr "دستگاه"
 msgid "Device Properties"
 msgstr "ویژگی‌های دستگاه"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "نام دستگاه"
 
@@ -1854,6 +1859,10 @@ msgstr "تکرار نکن"
 msgid "Don't show in various artists"
 msgstr "در هنرمندان گوناگون نشان نده"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "پخش مرتب"
@@ -1874,7 +1883,7 @@ msgstr "برای گشودن دو بار کلیک کنید"
 msgid "Double clicking a song will..."
 msgstr "دو بار کلیک یک آهنگ باعث..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1884,7 +1893,7 @@ msgstr "بارگیری %n داستان"
 msgid "Download directory"
 msgstr "بارگیری پوشه"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "بارگیری داستان‌های تا"
 
@@ -1892,11 +1901,11 @@ msgstr "بارگیری داستان‌های تا"
 msgid "Download membership"
 msgstr "بارگیری هموندی"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "بارگیری خودکار داستان‌های تازه"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "صف بارگیری"
 
@@ -1916,7 +1925,7 @@ msgstr "بارگیری این آلبوم"
 msgid "Download this album..."
 msgstr "بارگیری این آلبوم..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "بارگیری این داستان"
 
@@ -1924,7 +1933,7 @@ msgstr "بارگیری این داستان"
 msgid "Download..."
 msgstr "بارگیری..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "درحال بارگیری (%1%)..."
@@ -2165,31 +2174,31 @@ msgstr "خطا هنگام فراخوانی سی‌دی آوایی"
 msgid "Ever played"
 msgstr "همواره پخش‌شده"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "هر ۱۰ دقیقه"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "هر ۱۲ دقیقه"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "هر ۲ ساعت"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "هر ۲۰ دقیقه"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "هر ۳۰ دقیقه"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "هر ۶ ساعت"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "هر ساعت"
 
@@ -3079,7 +3088,7 @@ msgstr "بارگیری پرونده‌ها/نشانی‌ها، جانشانی د
 msgid "Login"
 msgstr "ورود به سیستم"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "ورود شکست خورد"
 
@@ -3180,8 +3189,8 @@ msgstr "پاسخ ناهنجار"
 msgid "Manual proxy configuration"
 msgstr "پیکربندی  دستی پراکسی"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "دستی"
 
@@ -3189,11 +3198,11 @@ msgstr "دستی"
 msgid "Manufacturer"
 msgstr "تولید‌کننده"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "نشان‌گذاری شنیده شده"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "نشان‌گذاری تازه"
 
@@ -3502,6 +3511,10 @@ msgstr "آگاه‌سازی‌ها"
 msgid "Now Playing"
 msgstr "در حال پخش"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "پیش‌مشاهده‌ی OSD"
@@ -3693,7 +3706,7 @@ msgstr "مهمانی"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3793,7 +3806,7 @@ msgstr "خواهشمندم مرورگر را ببندید و به کلمنتای
 msgid "Plugin status:"
 msgstr "وضعیت افزونه"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "پادکست"
 
@@ -4657,7 +4670,7 @@ msgstr "پخش درهم لیست‌پخش"
 msgid "Shuffle tracks in this album"
 msgstr "برزدن ترک‌های این آلبوم"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "راه‌یابی"
 
@@ -5276,7 +5289,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "لغو هموندی"
 
@@ -5292,7 +5305,7 @@ msgstr ""
 msgid "Update Grooveshark playlist"
 msgstr "به‌روز رسانی لیست‌پخش گرووشارک"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "به‌روز رسانی همه‌ی پادکست‌ها"
 
@@ -5304,11 +5317,11 @@ msgstr "تغییرات پوشه‌های کتابخانه را به‌روز ب�
 msgid "Update the library when Clementine starts"
 msgstr "زمانی که کلمنتاین شروع می‌شود کتابخانه را به‌روز کن"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "به‌روز رسانی این پادکست"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "به‌روز رسانی"
 
@@ -5415,7 +5428,7 @@ msgstr "رابط کاربری"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "شناسه"
@@ -5841,7 +5854,7 @@ msgstr "پایان می‌یابد با"
 msgid "equals"
 msgstr "برابر است با"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "جی‌پادر (gpodder.net)"
 

@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr ""
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr " napok"
 
@@ -491,7 +491,7 @@ msgstr "Új mappa hozzáadása…"
 msgid "Add podcast"
 msgstr "Podcast hozzáadása"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Podcast hozzáadása..."
 
@@ -656,7 +656,7 @@ msgstr "Számok hozzáadása a kedvencekhez"
 msgid "Advanced grouping..."
 msgstr "Egyedi csoportosítás…"
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Utána"
 
@@ -702,6 +702,10 @@ msgstr "Albumok borítóval"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Albumok bórító nélkül"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -793,6 +797,7 @@ msgstr "És:"
 msgid "Angry"
 msgstr "Mérges"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1013,7 +1018,7 @@ msgid "Box"
 msgstr ""
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Tallózás…"
@@ -1063,7 +1068,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1103,7 +1108,7 @@ msgid ""
 "songs"
 msgstr "A mono lejátszás bekapcsolása csak a következő zeneszámnál lesz érvényes"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Új epizódok keresése"
 
@@ -1143,7 +1148,7 @@ msgstr "Választás a listáról"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Válaszd ki, hogy a lejátszási lista hogyan legyen rendezve és hány számot tartalmazzon."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Válassza ki podcastok letöltési helyét"
 
@@ -1160,7 +1165,7 @@ msgstr "Válaszd ki a weboldalakat, amelyekről a Clementine dalszövegeket kere
 msgid "Classical"
 msgstr "Klasszikus"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Tisztítás"
 
@@ -1218,7 +1223,7 @@ msgstr ""
 msgid "Clementine can show a message when the track changes."
 msgstr "A Clementine felbukkanó üzenetben tudja jelezni, ha számot vált."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1359,7 +1364,7 @@ msgstr "Globális keresés beállítása..."
 msgid "Configure library..."
 msgstr "Zenetár beállítása..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Podcastok beállítása…"
 
@@ -1429,7 +1434,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "Másolás vágólapra"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Másolás eszközre..."
@@ -1681,7 +1686,7 @@ msgstr "Törlés"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark lejátszólista törlése"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "Letöltött adatok törlése"
 
@@ -1699,7 +1704,7 @@ msgstr "Törlés az eszközről..."
 msgid "Delete from disk..."
 msgstr "Törlés a lemezről..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Lejátszott epizódok törlése"
 
@@ -1744,7 +1749,7 @@ msgstr "Eszköz"
 msgid "Device Properties"
 msgstr "Eszköztulajdonságok"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Eszköznév"
 
@@ -1858,6 +1863,10 @@ msgstr "Ne ismételjen"
 msgid "Don't show in various artists"
 msgstr "Ne mutassa a különböző előadók között"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Ne keverje össze"
@@ -1878,7 +1887,7 @@ msgstr "Dupla kattintás a megnyitáshoz"
 msgid "Double clicking a song will..."
 msgstr "Dupla kattintásra egy számon..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1888,7 +1897,7 @@ msgstr "%n epizód letöltése"
 msgid "Download directory"
 msgstr "Letöltési mappa"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Epizódok letöltése ide"
 
@@ -1896,11 +1905,11 @@ msgstr "Epizódok letöltése ide"
 msgid "Download membership"
 msgstr "Tagsági információk betöltése"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Új epizódok automatikus letöltése"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Letöltés sorba állítva"
 
@@ -1920,7 +1929,7 @@ msgstr "Album letöltése"
 msgid "Download this album..."
 msgstr "Album letöltése..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Epizód letöltése"
 
@@ -1928,7 +1937,7 @@ msgstr "Epizód letöltése"
 msgid "Download..."
 msgstr "Letöltés…"
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Letöltés (%1%)..."
@@ -2169,31 +2178,31 @@ msgstr "Hiba az hang CD betöltése közben"
 msgid "Ever played"
 msgstr "Valaha játszott"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "Minden 10. percben"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "Minden 12. órában"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "Minden 2."
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "Minden 20. percben"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "Minden 30. percben"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "Minden 6. órában"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Minden órában"
 
@@ -3083,7 +3092,7 @@ msgstr "Fájlok/URL-ek betöltése, lejátszási lista cseréje"
 msgid "Login"
 msgstr "Bejelentkezés"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Sikertelen bejelentkezés"
 
@@ -3184,8 +3193,8 @@ msgstr "Hibásan formázott válasz"
 msgid "Manual proxy configuration"
 msgstr "Kézi proxybeállítás"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Manuálisan"
 
@@ -3193,11 +3202,11 @@ msgstr "Manuálisan"
 msgid "Manufacturer"
 msgstr "Gyártó"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Megjelölés meghallgatottként"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Megjelölés újként"
 
@@ -3506,6 +3515,10 @@ msgstr "Értesítések"
 msgid "Now Playing"
 msgstr "Most játszott"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "OSD Előnézet"
@@ -3697,7 +3710,7 @@ msgstr "Party"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3797,7 +3810,7 @@ msgstr "Zárja be a böngészőjét, és térjen vissza a Clementine-be"
 msgid "Plugin status:"
 msgstr "Beépülő állapot:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcastok"
 
@@ -4661,7 +4674,7 @@ msgstr "Lejátszási lista véletlenszerűen"
 msgid "Shuffle tracks in this album"
 msgstr "Zeneszámok összekeverése az albumokban"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Bejelentkezés"
 
@@ -5280,7 +5293,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Leiratkozás"
 
@@ -5296,7 +5309,7 @@ msgstr ""
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark lejátszólisták frissítése"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Összes podcast frissítése"
 
@@ -5308,11 +5321,11 @@ msgstr "Megváltozott zenetárbeli könyvtárak frissítése"
 msgid "Update the library when Clementine starts"
 msgstr "Zenetár frissítése a Clementine indításakor"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Podcast frissítése"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Frissítés"
 
@@ -5419,7 +5432,7 @@ msgstr "Kezelőfelület"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Felhasználónév"
@@ -5845,7 +5858,7 @@ msgstr "végződik"
 msgid "equals"
 msgstr "egyenlő"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

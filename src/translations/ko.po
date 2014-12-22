@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr ""
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "일"
 
@@ -493,7 +493,7 @@ msgstr "새로운 폴더 추가..."
 msgid "Add podcast"
 msgstr "팟케스트 추가"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "팟케스트 추가..."
 
@@ -658,7 +658,7 @@ msgstr "즐겨찾기에 곡 추가"
 msgid "Advanced grouping..."
 msgstr "고급 그룹화..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "이후"
 
@@ -704,6 +704,10 @@ msgstr "앨범 표지가 있는 앨범"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "앨범 표지가 없는 앨범"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -795,6 +799,7 @@ msgstr "그리고:"
 msgid "Angry"
 msgstr "화난"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1015,7 +1020,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "찾아보기..."
@@ -1065,7 +1070,7 @@ msgstr "%1 캐시 중"
 msgid "Cancel"
 msgstr "취소"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1105,7 +1110,7 @@ msgid ""
 "songs"
 msgstr ""
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "새로운 에피소드 확인"
 
@@ -1145,7 +1150,7 @@ msgstr "목록에서 선택"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "재생목록의 정렬 방식과 최대 곡수를 선택하세요."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "팟케스트 다운로드 경로를 선택하세요"
 
@@ -1162,7 +1167,7 @@ msgstr "Clementine이 가사를 찾기위해 이용할 사이트를 선택하세
 msgid "Classical"
 msgstr "클래식"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "자동 정리"
 
@@ -1220,7 +1225,7 @@ msgstr "클레멘타인은 당신이 One드라이브에 업로드한 음악을 �
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine은 트랙이 변할 때 메시지를 표시할 수 있습니다."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1361,7 +1366,7 @@ msgstr "글로벌 검색 설정..."
 msgid "Configure library..."
 msgstr "라이브러리 설정..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "팟케스트 설정..."
 
@@ -1431,7 +1436,7 @@ msgstr "공유 URL 복사"
 msgid "Copy to clipboard"
 msgstr "클립보드로 복사"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "장치에 복사..."
@@ -1683,7 +1688,7 @@ msgstr "삭제"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark 재생목록 지우기"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "다운로드된 데이터 삭제"
 
@@ -1701,7 +1706,7 @@ msgstr "장치에서 삭제..."
 msgid "Delete from disk..."
 msgstr "디스크에서 삭제..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "재생된 에피소드 삭제"
 
@@ -1746,7 +1751,7 @@ msgstr "장치"
 msgid "Device Properties"
 msgstr "장치 속성"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "장치 이름"
 
@@ -1860,6 +1865,10 @@ msgstr "반복하지 않기"
 msgid "Don't show in various artists"
 msgstr "다양한 음악가에 표시하지 않기"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "섞지 않기"
@@ -1880,7 +1889,7 @@ msgstr "열려면 더블클릭하세요"
 msgid "Double clicking a song will..."
 msgstr "노래를 더블클릭하면..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1890,7 +1899,7 @@ msgstr "에피소드 %n 다운로드"
 msgid "Download directory"
 msgstr "디렉토리 다운로드"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "에피스도 다운로드"
 
@@ -1898,11 +1907,11 @@ msgstr "에피스도 다운로드"
 msgid "Download membership"
 msgstr "멤버십 다운로드"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "자동으로 새로운 에피소드 다운로드"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "다운로드 대기열 추가됨"
 
@@ -1922,7 +1931,7 @@ msgstr "이 앨범 다운로드"
 msgid "Download this album..."
 msgstr "이 앨범 다운로드..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "이 에피소드 다운로드"
 
@@ -1930,7 +1939,7 @@ msgstr "이 에피소드 다운로드"
 msgid "Download..."
 msgstr "다운로드..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "다운로드 중 (%1%)..."
@@ -2171,31 +2180,31 @@ msgstr "오디오 CD 불러오기 오류"
 msgid "Ever played"
 msgstr "재생한 적 있음"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "매 10분"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "매 12시간"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "매 2시간"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "매 20분"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "매 30분"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "매 6시간"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "매 시간"
 
@@ -3085,7 +3094,7 @@ msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 msgid "Login"
 msgstr "로그인"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "로그인 실패"
 
@@ -3186,8 +3195,8 @@ msgstr "잘못된 응답"
 msgid "Manual proxy configuration"
 msgstr "수동 프록시 설정"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "수동적"
 
@@ -3195,11 +3204,11 @@ msgstr "수동적"
 msgid "Manufacturer"
 msgstr "제조회사"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "들음으로 기록"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "새로 기록"
 
@@ -3508,6 +3517,10 @@ msgstr "알림"
 msgid "Now Playing"
 msgstr "지금 재생중"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "OSD 미리보기"
@@ -3699,7 +3712,7 @@ msgstr "파티"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3799,7 +3812,7 @@ msgstr "브라우저를 닫고 Clementine으로 돌아오세요"
 msgid "Plugin status:"
 msgstr "플러그인 상태:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "팟케스트"
 
@@ -4663,7 +4676,7 @@ msgstr "재생 목록 섞기"
 msgid "Shuffle tracks in this album"
 msgstr "이 앨범에 있는 곡 섞기"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "로그인"
 
@@ -5282,7 +5295,7 @@ msgstr "선택된 트랙들 넘기기 "
 msgid "Unskip track"
 msgstr "트랙 넘기기 "
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "구독 안함"
 
@@ -5298,7 +5311,7 @@ msgstr "갱신"
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark 재생목록 업데이트"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "모든 팟케스트 업데이트"
 
@@ -5310,11 +5323,11 @@ msgstr "변경된 라이브러리 폴더 업데이트"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine이 시작될 때 라이브러리 업데이트"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "이 팟케스트 업데이트"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "업데이트 중"
 
@@ -5421,7 +5434,7 @@ msgstr "사용자 인터페이스"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "사용자명"
@@ -5847,7 +5860,7 @@ msgstr ""
 msgid "equals"
 msgstr "같음"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

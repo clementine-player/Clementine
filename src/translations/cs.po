@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 08:57+0000\n"
+"PO-Revision-Date: 2014-12-16 06:50+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nSeznamy skladeb můžete označit jako oblíbené klepnutím na hvězdičku vedle názvu seznamu skladeb\n\nOblíbené seznamy skladeb budou uloženy zde"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "dnů"
 
@@ -496,7 +496,7 @@ msgstr "Přidat novou složku..."
 msgid "Add podcast"
 msgstr "Přidat záznam"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Přidat zvukový záznam..."
 
@@ -661,7 +661,7 @@ msgstr "Přidává se píseň do oblíbených"
 msgid "Advanced grouping..."
 msgstr "Pokročilé seskupování..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Po "
 
@@ -707,6 +707,10 @@ msgstr "Alba s obaly"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "Alba bez obalů"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr "Vše"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -798,6 +802,7 @@ msgstr "A:"
 msgid "Angry"
 msgstr "Rozlobený"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1018,7 +1023,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Procházet…"
@@ -1068,7 +1073,7 @@ msgstr "%1 se ukládá do vyrovnávací paměti"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr "Zrušit stahování"
 
@@ -1108,7 +1113,7 @@ msgid ""
 "songs"
 msgstr "Změna nastavení jednokanálového přehrávání začne platit s dalšími přehrávanými skladbami"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Podívat se po nových dílech"
 
@@ -1148,7 +1153,7 @@ msgstr "Vybrat ze seznamu"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Zvolte počet písní v seznamu skladeb a způsob jejich řazení."
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Vyberte adresář pro stažení zvukového záznamu (podcastu)"
 
@@ -1165,7 +1170,7 @@ msgstr "Vyberte stránky, na kterých má Clementine hledat texty písní."
 msgid "Classical"
 msgstr "Klasická"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "Úklid"
 
@@ -1223,7 +1228,7 @@ msgstr "Clementine může přehrávat hudbu vámi nahranou na OneDrive"
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine může při změně skladby ukázat zprávu."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1364,7 +1369,7 @@ msgstr "Nastavit celkové hledání..."
 msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "Nastavit záznamy..."
 
@@ -1434,7 +1439,7 @@ msgstr "Kopírovat sdílenou adresu (URL) do schránky"
 msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Zkopírovat do zařízení..."
@@ -1686,7 +1691,7 @@ msgstr "Smazat"
 msgid "Delete Grooveshark playlist"
 msgstr "Smazat seznam skladeb Grooveshark"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
@@ -1704,7 +1709,7 @@ msgstr "Smazat ze zařízení..."
 msgid "Delete from disk..."
 msgstr "Smazat z disku..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Smazat přehrané díly"
 
@@ -1749,7 +1754,7 @@ msgstr "Zařízení"
 msgid "Device Properties"
 msgstr "Vlastnosti zařízení"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Název zařízení"
 
@@ -1863,6 +1868,10 @@ msgstr "Neopakovat"
 msgid "Don't show in various artists"
 msgstr "Nezobrazovat pod různými umělci"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr "Neukazovat poslechnuté díly"
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Nemíchat"
@@ -1883,7 +1892,7 @@ msgstr "Klepnout dvakrát pro otevření"
 msgid "Double clicking a song will..."
 msgstr "Dvojité klepnutí na píseň..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1893,7 +1902,7 @@ msgstr "Stáhnout %n dílů"
 msgid "Download directory"
 msgstr "Stáhnout složku"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Stáhnout díly do"
 
@@ -1901,11 +1910,11 @@ msgstr "Stáhnout díly do"
 msgid "Download membership"
 msgstr "Stáhnout členství"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Stáhnout nové díly automaticky"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "Stahování zařazeno"
 
@@ -1925,7 +1934,7 @@ msgstr "Stáhnout toto album"
 msgid "Download this album..."
 msgstr "Stáhnout toto album..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "Stáhnout tento díl"
 
@@ -1933,7 +1942,7 @@ msgstr "Stáhnout tento díl"
 msgid "Download..."
 msgstr "Stáhnout..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Stahuje se (%1%)..."
@@ -2174,31 +2183,31 @@ msgstr "Chyba  při nahrávání zvukového CD"
 msgid "Ever played"
 msgstr "Přehrané skladby"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "Každých 10 minut"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "Každých 12 hodin"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "Každé 2 hodiny"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "Každých 20 minut"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "Každých 30 minut"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "Každých 6 hodin"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Každou hodinu"
 
@@ -3088,7 +3097,7 @@ msgstr "Nahraje soubory/adresy (URL), nahradí současný seznam skladeb"
 msgid "Login"
 msgstr "Přihlášení"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Přihlášení se nezdařilo"
 
@@ -3189,8 +3198,8 @@ msgstr "Poškozená odpověď"
 msgid "Manual proxy configuration"
 msgstr "Ruční nastavení proxy"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Ručně"
 
@@ -3198,11 +3207,11 @@ msgstr "Ručně"
 msgid "Manufacturer"
 msgstr "Výrobce"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Označit jako poslechnuté"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "Označit jako nové"
 
@@ -3511,6 +3520,10 @@ msgstr "Oznámení"
 msgid "Now Playing"
 msgstr "Právě se přehrává"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr "Čísla dílů k ukázání"
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Náhled OSD"
@@ -3702,7 +3715,7 @@ msgstr "Oslava"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3802,7 +3815,7 @@ msgstr "Zavřete, prosím, svůj prohlížeč a vraťte se do Clementine."
 msgid "Plugin status:"
 msgstr "Stav přídavného modulu:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Zvukové záznamy"
 
@@ -4666,7 +4679,7 @@ msgstr "Zamíchat seznam skladeb"
 msgid "Shuffle tracks in this album"
 msgstr "Zamíchat skladby na tomto albu"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Přihlásit se"
 
@@ -5285,7 +5298,7 @@ msgstr "Zrušit přeskočení vybraných skladeb"
 msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "Zrušit odběr"
 
@@ -5301,7 +5314,7 @@ msgstr "Aktualizovat"
 msgid "Update Grooveshark playlist"
 msgstr "Obnovit seznam skladeb Grooveshark"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "Obnovit všechny zvukovové záznamy"
 
@@ -5313,11 +5326,11 @@ msgstr "Obnovit změněné složky sbírky"
 msgid "Update the library when Clementine starts"
 msgstr "Při spuštění Clementine obnovit hudební sbírku"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "Obnovit tento zvukový záznam"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Obnovuje se"
 
@@ -5424,7 +5437,7 @@ msgstr "Uživatelské rozhraní"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Uživatelské jméno"
@@ -5850,7 +5863,7 @@ msgstr "končí na"
 msgid "equals"
 msgstr "rovná se"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 

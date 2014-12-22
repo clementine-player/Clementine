@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-14 00:43+0000\n"
+"PO-Revision-Date: 2014-12-16 02:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr ""
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "ימים"
 
@@ -489,7 +489,7 @@ msgstr "הוספת תיקייה חדשה..."
 msgid "Add podcast"
 msgstr "הוספת פודקאסט"
 
-#: podcasts/podcastservice.cpp:399 ../bin/src/ui_mainwindow.h:709
+#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "הוספת פודקאסט..."
 
@@ -654,7 +654,7 @@ msgstr "הוספת שיר למועדפים"
 msgid "Advanced grouping..."
 msgstr "קיבוץ מתקדם..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "לאחר "
 
@@ -700,6 +700,10 @@ msgstr "אלבומים עם עטיפה"
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
 msgstr "אלבומים ללא עטיפה"
+
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -791,6 +795,7 @@ msgstr "וגם:"
 msgid "Angry"
 msgstr "כָּעוּס"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
@@ -1011,7 +1016,7 @@ msgid "Box"
 msgstr "קופסא"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "עיון..."
@@ -1061,7 +1066,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "ביטול"
 
-#: podcasts/podcastservice.cpp:423
+#: podcasts/podcastservice.cpp:438
 msgid "Cancel download"
 msgstr ""
 
@@ -1101,7 +1106,7 @@ msgid ""
 "songs"
 msgstr "שינוי העדפת השמעת מונו יהיה יעיל לניגון השירים הבאים"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "בדיקת פרקים חדשים"
 
@@ -1141,7 +1146,7 @@ msgstr "בחירה מהרשימה"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "נא לבחור כיצד רשימת ההשמעה תסודר וכמה שירים יהיו בה"
 
-#: podcasts/podcastsettingspage.cpp:136
+#: podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "בחירת תיקיית יעד להורדת פודקאסט"
 
@@ -1158,7 +1163,7 @@ msgstr "ניתן לבחור באתרים שבהם Clementine יחפש אחר מ�
 msgid "Classical"
 msgstr "קלסית"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "מנקה"
 
@@ -1216,7 +1221,7 @@ msgstr ""
 msgid "Clementine can show a message when the track changes."
 msgstr "באפשרות Clementine להציג הודעה כשהרצועה משתנה."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1357,7 +1362,7 @@ msgstr "מגדיר חיפוש "
 msgid "Configure library..."
 msgstr "הגדרת הספרייה..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:436
+#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
 msgid "Configure podcasts..."
 msgstr "הגדרת פודקאסטים..."
 
@@ -1427,7 +1432,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "העתקה אל הלוח"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:420
+#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "העתקה להתקן.."
@@ -1679,7 +1684,7 @@ msgstr "מחיקה"
 msgid "Delete Grooveshark playlist"
 msgstr "מחיקת רשימת השמעה של Grooveshark"
 
-#: podcasts/podcastservice.cpp:416
+#: podcasts/podcastservice.cpp:432
 msgid "Delete downloaded data"
 msgstr "מחיקת מידע שהתקבל"
 
@@ -1697,7 +1702,7 @@ msgstr "מחיקה מתוך התקן..."
 msgid "Delete from disk..."
 msgstr "מחיקה מתוך דיסק..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "מחיקת פרקים שנוגנו"
 
@@ -1742,7 +1747,7 @@ msgstr "התקן"
 msgid "Device Properties"
 msgstr "מאפייני ההתקן"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "שם ההתקן"
 
@@ -1856,6 +1861,10 @@ msgstr "ללא חזרה"
 msgid "Don't show in various artists"
 msgstr "לא להציג באמנים שונים"
 
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "ללא קפיצות"
@@ -1876,7 +1885,7 @@ msgstr "לחיצה כפולה לפתיחה"
 msgid "Double clicking a song will..."
 msgstr "לחיצה כפולה על שיר לביצוע..."
 
-#: podcasts/podcastservice.cpp:512
+#: podcasts/podcastservice.cpp:528
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1886,7 +1895,7 @@ msgstr "ירדו %n פרקים"
 msgid "Download directory"
 msgstr "הורדת תיקייה"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "הורדת פרקים אל"
 
@@ -1894,11 +1903,11 @@ msgstr "הורדת פרקים אל"
 msgid "Download membership"
 msgstr "חברות המאפשרת הורדה"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "הורדת פרקים חדשים אוטומטית"
 
-#: podcasts/podcastservice.cpp:285 podcasts/podcastservice.cpp:324
+#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
 msgid "Download queued"
 msgstr "ההורדה נכנסה לתור"
 
@@ -1918,7 +1927,7 @@ msgstr "הורדת האלבום הזה"
 msgid "Download this album..."
 msgstr "הורדת האלבום הזה..."
 
-#: podcasts/podcastservice.cpp:514
+#: podcasts/podcastservice.cpp:530
 msgid "Download this episode"
 msgstr "הורדת הפרק הזה"
 
@@ -1926,7 +1935,7 @@ msgstr "הורדת הפרק הזה"
 msgid "Download..."
 msgstr "בהורדה..."
 
-#: podcasts/podcastservice.cpp:293 podcasts/podcastservice.cpp:333
+#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "בהורדה (%1%)..."
@@ -2167,31 +2176,31 @@ msgstr "שגיאה בטעינת דיסק מוזיקה"
 msgid "Ever played"
 msgstr "לא נוגן אף פעם"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "בכל 10 דקות"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "בכל 12 שעות"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "בכל שעתיים"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "בכל 20 דקות"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "בכל חצי שעה"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "בכל 6 שעות"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "בכל שעה"
 
@@ -3081,7 +3090,7 @@ msgstr "טעינת קבצים/כתובות, תוך החלפת רשימת ההש�
 msgid "Login"
 msgstr "כניסה"
 
-#: podcasts/podcastsettingspage.cpp:123
+#: podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "ההתחברות נכשלה"
 
@@ -3182,8 +3191,8 @@ msgstr "תגובה שגויה"
 msgid "Manual proxy configuration"
 msgstr "הגדרה ידנית של שרת מתווך"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "ידני"
 
@@ -3191,11 +3200,11 @@ msgstr "ידני"
 msgid "Manufacturer"
 msgstr "יצרן"
 
-#: podcasts/podcastservice.cpp:431 ../bin/src/ui_organisedialog.h:260
+#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "סימון כהושמע"
 
-#: podcasts/podcastservice.cpp:430
+#: podcasts/podcastservice.cpp:446
 msgid "Mark as new"
 msgstr "סימון כחדש"
 
@@ -3504,6 +3513,10 @@ msgstr "התרעות"
 msgid "Now Playing"
 msgstr "מתנגן עכשיו"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "תצוגה מקדימה של חיווי המסך"
@@ -3695,7 +3708,7 @@ msgstr "מסיבה"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
 #: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
@@ -3795,7 +3808,7 @@ msgstr "נא לסגור את הדפדפן ולחזור ל Clementine"
 msgid "Plugin status:"
 msgstr "מצב התוסף:"
 
-#: podcasts/podcastservice.cpp:128 ../bin/src/ui_podcastsettingspage.h:226
+#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "פודקאסטים"
 
@@ -4659,7 +4672,7 @@ msgstr "ערבוב רשימת ההשמעה"
 msgid "Shuffle tracks in this album"
 msgstr "ערבוב שירים באלבום זה"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "כניסה"
 
@@ -5278,7 +5291,7 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:425
+#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
 msgid "Unsubscribe"
 msgstr "הסרת מינוי"
 
@@ -5294,7 +5307,7 @@ msgstr ""
 msgid "Update Grooveshark playlist"
 msgstr "עדכון רשימת ההשמעה ב־Grooveshark"
 
-#: podcasts/podcastservice.cpp:402
+#: podcasts/podcastservice.cpp:418
 msgid "Update all podcasts"
 msgstr "עדכון כל הפודקאסטים"
 
@@ -5306,11 +5319,11 @@ msgstr "עדכון תיקיות שהשתנו בספרייה"
 msgid "Update the library when Clementine starts"
 msgstr "עדכון הספרייה בזמן הפעלת Clementine"
 
-#: podcasts/podcastservice.cpp:410
+#: podcasts/podcastservice.cpp:426
 msgid "Update this podcast"
 msgstr "עדכון פודקאסט זה"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "מתבצע עדכון"
 
@@ -5417,7 +5430,7 @@ msgstr "מנשק משתמש"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "שם משתמש"
@@ -5843,7 +5856,7 @@ msgstr "מסתיים ב־"
 msgid "equals"
 msgstr "שווה ל־"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
