@@ -19,7 +19,7 @@
 #include "tagreader.h"
 #include "core/song.h"
 #ifdef HAVE_LIBLASTFM
-  #include "internet/lastfmcompat.h"
+  #include "internet/lastfm/lastfmcompat.h"
 #endif
 
 #include "gmock/gmock.h"
