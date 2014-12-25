@@ -646,7 +646,7 @@ void Song::InitFromFilePartial(const QString& filename) {
   if (suffix == "mp3" || suffix == "ogg" || suffix == "flac" ||
       suffix == "mpc" || suffix == "m4a" || suffix == "aac" ||
       suffix == "wma" || suffix == "mp4" || suffix == "spx" ||
-      suffix == "wav" || suffix == "opus") {
+      suffix == "wav" || suffix == "opus" || suffix == "m4b") {
     d->valid_ = true;
   } else {
     d->valid_ = false;

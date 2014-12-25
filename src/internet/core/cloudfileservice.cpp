@@ -208,7 +208,7 @@ bool CloudFileService::IsSupportedMimeType(const QString& mime_type) const {
 QString CloudFileService::GuessMimeTypeForFile(const QString& filename) const {
   if (filename.endsWith(".mp3")) {
     return "audio/mpeg";
-  } else if (filename.endsWith(".m4a")) {
+  } else if (filename.endsWith(".m4a") || filename.endsWith(".m4b")) {
     return "audio/mpeg";
   } else if (filename.endsWith(".ogg") || filename.endsWith(".opus")) {
     return "application/ogg";

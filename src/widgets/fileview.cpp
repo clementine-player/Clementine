@@ -30,7 +30,7 @@
 #include <QScrollBar>
 
 const char* FileView::kFileFilter =
-    "*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma "
+    "*.mp3 *.ogg *.flac *.mpc *.m4a *.m4b *.aac *.wma "
     "*.mp4 *.spx *.wav *.m3u *.m3u8 *.pls *.xspf "
     "*.asx *.asxini *.cue *.ape *.wv *.mka *.opus "
     "*.oga *.mka *.mp2";
