@@ -1425,20 +1425,22 @@ if (APPLE)
       DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
   endif (HAVE_SPARKLE)
 
-  install(FILES "${QT_QTCORE_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtCore.framework/Versions/4/Resources")
-  install(FILES "${QT_QTGUI_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtGui.framework/Versions/4/Resources")
-  install(FILES "${QT_QTNETWORK_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtNetwork.framework/Versions/4/Resources")
-  install(FILES "${QT_QTOPENGL_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtOpenGL.framework/Versions/4/Resources")
-  install(FILES "${QT_QTSQL_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSql.framework/Versions/4/Resources")
-  install(FILES "${QT_QTSVG_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSvg.framework/Versions/4/Resources")
-  install(FILES "${QT_QTXML_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtXml.framework/Versions/4/Resources")
+  foreach (plist_destination Versions/4/Resources Resources)
+    install(FILES "${QT_QTCORE_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtCore.framework/${plist_destination}")
+    install(FILES "${QT_QTGUI_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtGui.framework/${plist_destination}")
+    install(FILES "${QT_QTNETWORK_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtNetwork.framework/${plist_destination}")
+    install(FILES "${QT_QTOPENGL_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtOpenGL.framework/${plist_destination}")
+    install(FILES "${QT_QTSQL_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSql.framework/${plist_destination}")
+    install(FILES "${QT_QTSVG_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSvg.framework/${plist_destination}")
+    install(FILES "${QT_QTXML_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtXml.framework/${plist_destination}")
+  endforeach()
 
   if (HAVE_BREAKPAD)
     install(DIRECTORY
