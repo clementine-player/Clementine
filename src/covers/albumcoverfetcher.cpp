@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2011-2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -83,9 +86,7 @@ void AlbumCoverFetcher::StartRequests() {
     return;
   }
 
-  while (!queued_requests_.isEmpty() &&
-         active_requests_.size() < kMaxConcurrentRequests) {
-
+  while (!queued_requests_.isEmpty() && active_requests_.size() < kMaxConcurrentRequests) {
     CoverSearchRequest request = queued_requests_.dequeue();
 
     // search objects are this fetcher's children so worst case scenario - they

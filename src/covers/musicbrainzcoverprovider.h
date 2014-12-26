@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MUSICBRAINZCOVERPROVIDER_H
-#define MUSICBRAINZCOVERPROVIDER_H
+#ifndef COVERS_MUSICBRAINZCOVERPROVIDER_H_
+#define COVERS_MUSICBRAINZCOVERPROVIDER_H_
 
 #include "coverprovider.h"
 
@@ -28,7 +29,7 @@ class QNetworkReply;
 class MusicbrainzCoverProvider : public CoverProvider {
   Q_OBJECT
  public:
-  MusicbrainzCoverProvider(QObject* parent = nullptr);
+  explicit MusicbrainzCoverProvider(QObject* parent = nullptr);
 
   // CoverProvider
   virtual bool StartSearch(const QString& artist, const QString& album, int id);
@@ -44,4 +45,4 @@ class MusicbrainzCoverProvider : public CoverProvider {
   QMap<int, QString> cover_names_;
 };
 
-#endif  // MUSICBRAINZCOVERPROVIDER_H
+#endif  // COVERS_MUSICBRAINZCOVERPROVIDER_H_

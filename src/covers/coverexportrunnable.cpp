@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2013, Andreas <asfa194@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -110,27 +112,22 @@ void CoverExportRunnable::ProcessAndExportCover() {
                      (cover_path == Song::kEmbeddedCover ? "jpg" : extension);
 
   // If the file exists, do not override!
-  if (dialog_result_.overwrite_ == AlbumCoverExport::OverwriteMode_None &&
-      QFile::exists(new_file)) {
+  if (dialog_result_.overwrite_ == AlbumCoverExport::OverwriteMode_None && QFile::exists(new_file)) {
     EmitCoverSkipped();
     return;
   }
 
   // we're handling overwrite as remove + copy so we need to delete the old file
   // first
-  if (QFile::exists(new_file) &&
-      dialog_result_.overwrite_ != AlbumCoverExport::OverwriteMode_None) {
-
+  if (QFile::exists(new_file) && dialog_result_.overwrite_ != AlbumCoverExport::OverwriteMode_None) {
     // if the mode is "overwrite smaller" then skip the cover if a bigger one
     // is already available in the folder
     if (dialog_result_.overwrite_ == AlbumCoverExport::OverwriteMode_Smaller) {
       QImage existing;
       existing.load(new_file);
 
-      if (existing.isNull() ||
-          existing.size().height() >= cover.size().height() ||
+      if (existing.isNull() || existing.size().height() >= cover.size().height() ||
           existing.size().width() >= cover.size().width()) {
-
         EmitCoverSkipped();
         return;
       }

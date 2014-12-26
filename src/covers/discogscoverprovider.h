@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, Martin Björklund <mbj4668@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DISCOGSCOVERPROVIDER_H
-#define DISCOGSCOVERPROVIDER_H
+#ifndef COVERS_DISCOGSCOVERPROVIDER_H_
+#define COVERS_DISCOGSCOVERPROVIDER_H_
 
 #include "coverprovider.h"
 #include <QVariant>
@@ -45,7 +47,7 @@ class DiscogsCoverProvider : public CoverProvider {
   Q_OBJECT
 
  public:
-  DiscogsCoverProvider(QObject* parent = nullptr);
+  explicit DiscogsCoverProvider(QObject* parent = nullptr);
 
   static const char* kSearchUrl;
 
@@ -63,4 +65,4 @@ class DiscogsCoverProvider : public CoverProvider {
   void EndSearch(DiscogsCoverSearchContext* ctx);
 };
 
-#endif  // DISCOGSCOVERPROVIDER_H
+#endif  // COVERS_DISCOGSCOVERPROVIDER_H_
