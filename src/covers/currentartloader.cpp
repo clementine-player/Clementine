@@ -18,13 +18,14 @@
 */
 
 #include "currentartloader.h"
-#include "core/application.h"
-#include "covers/albumcoverloader.h"
-#include "playlist/playlistmanager.h"
 
 #include <QDir>
 #include <QTemporaryFile>
 #include <QUrl>
+
+#include "core/application.h"
+#include "covers/albumcoverloader.h"
+#include "playlist/playlistmanager.h"
 
 CurrentArtLoader::CurrentArtLoader(Application* app, QObject* parent)
     : QObject(parent),

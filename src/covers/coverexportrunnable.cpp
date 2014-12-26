@@ -17,12 +17,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcoverexporter.h"
-#include "core/song.h"
-#include "core/tagreaderclient.h"
+#include "coverexportrunnable.h"
 
 #include <QFile>
 #include <QUrl>
+
+#include "albumcoverexporter.h"
+#include "core/song.h"
+#include "core/tagreaderclient.h"
 
 CoverExportRunnable::CoverExportRunnable(
     const AlbumCoverExport::DialogResult& dialog_result, const Song& song)

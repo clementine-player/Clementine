@@ -19,15 +19,16 @@
 */
 
 #include "amazoncoverprovider.h"
-#include "core/closure.h"
-#include "core/logging.h"
-#include "core/network.h"
-#include "core/utilities.h"
 
 #include <QDateTime>
 #include <QNetworkReply>
 #include <QStringList>
 #include <QXmlStreamReader>
+
+#include "core/closure.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "core/utilities.h"
 
 // Amazon has a web crawler that looks for access keys in public source code,
 // so we apply some sophisticated encryption to these keys.

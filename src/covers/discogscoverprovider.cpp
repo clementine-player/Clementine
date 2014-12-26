@@ -18,13 +18,14 @@
 */
 
 #include "discogscoverprovider.h"
+
+#include <QNetworkReply>
+#include <qjson/parser.h>
+
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
-
-#include <QNetworkReply>
-#include <qjson/parser.h>
 
 const char* DiscogsCoverProvider::kSearchUrl =
     "http://api.discogs.com/database/search";

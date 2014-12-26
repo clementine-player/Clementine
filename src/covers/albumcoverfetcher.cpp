@@ -19,10 +19,11 @@
 */
 
 #include "albumcoverfetcher.h"
-#include "albumcoverfetchersearch.h"
-#include "core/network.h"
 
 #include <QTimer>
+
+#include "albumcoverfetchersearch.h"
+#include "core/network.h"
 
 const int AlbumCoverFetcher::kMaxConcurrentRequests = 5;
 

@@ -18,9 +18,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "coverproviders.h"
 #include "config.h"
 #include "coverprovider.h"
-#include "coverproviders.h"
 #include "core/logging.h"
 
 CoverProviders::CoverProviders(QObject* parent) : QObject(parent) {}
