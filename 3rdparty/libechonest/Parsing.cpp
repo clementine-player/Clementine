@@ -27,6 +27,8 @@
 #include <QDateTime>
 #include <QStringBuilder>
 
+#include<QDebug>
+
 void Echonest::Parser::checkForErrors( QNetworkReply* reply ) throw( Echonest::ParseError )
 {
     if( !reply )
@@ -457,6 +459,8 @@ void Echonest::Parser::parseArtistInfo( QXmlStreamReader& xml, Echonest::Artist&
         artist.setName( xml.readElementText() );
     }  else if( xml.name() == "id" ) {
         artist.setId( xml.readElementText().toLatin1() );
+    } else if ( xml.name() == "twitter" ) {
+        artist.setTwitter(xml.readElementText());
     }
 }
 

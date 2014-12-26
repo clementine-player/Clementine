@@ -180,6 +180,12 @@ namespace Echonest{
         void setTerms( const TermList& );
 
         /**
+         * Twitter username
+         */
+        QString twitter() const;
+        void setTwitter( const QString& );
+
+        /**
          * Urls pointing to this artists' basic information around the web.
          */
         QUrl lastFmUrl() const;
@@ -266,6 +272,11 @@ namespace Echonest{
          * Fetch a list of the most descriptive terms for this artist.
          */
         QNetworkReply* fetchTerms( TermSorting sorting = Frequency ) const;
+
+        /**
+         * Fetch artist's twitter handle.
+         */
+        QNetworkReply* fetchTwitter() const;
 
         /**
          * Fetch links to the artist's official site, MusicBrainz site, MySpace site, Wikipedia article, Amazon list, and iTunes page.

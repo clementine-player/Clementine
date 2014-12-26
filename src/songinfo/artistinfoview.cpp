@@ -20,6 +20,7 @@
 #include "echonestimages.h"
 #include "songinfofetcher.h"
 #include "songkickconcerts.h"
+#include "twitterstatuses.h"
 #include "widgets/prettyimageview.h"
 
 #ifdef HAVE_LIBLASTFM
@@ -31,6 +32,7 @@ ArtistInfoView::ArtistInfoView(QWidget* parent) : SongInfoBase(parent) {
   fetcher_->AddProvider(new EchoNestBiographies);
   fetcher_->AddProvider(new EchoNestImages);
   fetcher_->AddProvider(new SongkickConcerts);
+  fetcher_->AddProvider(new TwitterStatuses);
 #ifdef HAVE_LIBLASTFM
   fetcher_->AddProvider(new EchoNestSimilarArtists);
   fetcher_->AddProvider(new EchoNestTags);
