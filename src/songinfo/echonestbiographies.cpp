@@ -93,7 +93,11 @@ void EchoNestBiographies::RequestFinished() {
     QString text;
     // Add a link to the bio webpage at the top if we have one
     if (!bio.url().isEmpty()) {
-      text += "<p><a href=\"" + bio.url().toEncoded() + "\">" +
+      QString bio_url = bio.url().toEncoded();
+      if (bio.site() == "facebook") {
+        bio_url.replace("graph.facebook.com", "www.facebook.com");
+      }
+      text += "<p><a href=\"" + bio_url + "\">" +
               tr("Open in your browser") + "</a></p>";
     }
 
