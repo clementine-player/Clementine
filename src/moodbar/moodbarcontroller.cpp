@@ -75,7 +75,6 @@ void MoodbarController::AsyncLoadComplete(MoodbarPipeline* pipeline,
     case Engine::Empty:
     case Engine::Idle:
       return;
-      break;
 
     default:
       break;

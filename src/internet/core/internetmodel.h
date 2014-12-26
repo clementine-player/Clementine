@@ -142,6 +142,9 @@ class InternetModel : public QStandardItemModel {
   void ShowService(InternetService* service);
   // Add or remove the services according to the setting file
   void UpdateServices();
+  // Find the position where to insert this item. The list of services is
+  // supposed to be alphabetically sorted.
+  int FindItemPosition(const QString& text);
 
   // Returns the service that is a parent of this item.  Works by walking up
   // the tree until it finds an item with Role_Service set.

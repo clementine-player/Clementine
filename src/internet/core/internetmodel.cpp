@@ -118,6 +118,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new VkService(app, this));
 #endif
 
+  invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);
   UpdateServices();
 }
 
@@ -361,13 +362,27 @@ void InternetModel::UpdateServices() {
   }
 
   s.endGroup();
+}
 
-  invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);
+int InternetModel::FindItemPosition(const QString& text) {
+  int a = 0;
+  int b = invisibleRootItem()->rowCount() - 1;
+  while (a <= b) {
+    int mid = a + (b - a)/2;
+    if (invisibleRootItem()->child(mid, 0)->text() < text) {
+      a = mid + 1;
+    } else {
+      b = mid - 1;
+    }
+  }
+  return a;
 }
 
 void InternetModel::ShowService(InternetService* service) {
   if (shown_services_[service].shown != true) {
-    invisibleRootItem()->appendRow(shown_services_[service].item);
+    QStandardItem* item = shown_services_[service].item;
+    int pos = FindItemPosition(item->text());
+    invisibleRootItem()->insertRow(pos, item);
     shown_services_[service].shown = true;
   }
 }
