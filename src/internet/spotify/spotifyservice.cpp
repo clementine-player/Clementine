@@ -80,6 +80,7 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
       playlist_context_menu_(nullptr),
       song_context_menu_(nullptr),
       playlist_sync_action_(nullptr),
+      get_url_to_share_playlist_(nullptr),
       remove_from_playlist_(nullptr),
       search_box_(new SearchBoxWidget(this)),
       search_delay_(new QTimer(this)),
@@ -454,6 +455,7 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     item->setData(msg.is_mine(), InternetModel::Role_CanBeModified);
     item->setData(InternetModel::PlayBehaviour_MultipleItems,
                   InternetModel::Role_PlayBehaviour);
+    item->setData(QUrl(QStringFromStdString(msg.uri())), InternetModel::Role_Url);
 
     root_->appendRow(item);
     playlists_ << item;
@@ -636,6 +638,9 @@ void SpotifyService::EnsureMenuCreated() {
   playlist_sync_action_ = playlist_context_menu_->addAction(
       IconLoader::Load("view-refresh"), tr("Make playlist available offline"),
       this, SLOT(SyncPlaylist()));
+  get_url_to_share_playlist_ =
+      playlist_context_menu_->addAction(tr("Get a URL to share this playlist"),
+          this, SLOT(GetCurrentPlaylistUrlToShare()));
   playlist_context_menu_->addSeparator();
   playlist_context_menu_->addAction(GetNewShowConfigAction());
 
@@ -770,6 +775,8 @@ void SpotifyService::ShowContextMenu(const QPoint& global_pos) {
         type == InternetModel::Type_UserPlaylist) {
       playlist_sync_action_->setData(qVariantFromValue(item));
       playlist_context_menu_->popup(global_pos);
+      current_playlist_url_ = item->data(InternetModel::Role_Url).toUrl();
+      get_url_to_share_playlist_->setVisible(type == InternetModel::Type_UserPlaylist);
       return;
     } else if (type == InternetModel::Type_Track) {
       current_song_url_ = item->data(InternetModel::Role_Url).toUrl();
@@ -793,6 +800,15 @@ void SpotifyService::GetCurrentSongUrlToShare() const {
   // better to give website links instead.
   url.replace("spotify:track:", "https://play.spotify.com/track/");
   InternetService::ShowUrlBox(tr("Spotify song's URL"), url);
+}
+
+void SpotifyService::GetCurrentPlaylistUrlToShare() const {
+  QString url = current_playlist_url_.toEncoded();
+  // URLs we use can be opened with Spotify application, but I believe it's
+  // better to give website links instead.
+  url.replace(QRegExp("spotify:user:([^:]*):playlist:([^:]*)"),
+      "https://play.spotify.com/user/\\1/playlist/\\2");
+  InternetService::ShowUrlBox(tr("Spotify playlist's URL"), url);
 }
 
 void SpotifyService::ItemDoubleClicked(QStandardItem* item) {}

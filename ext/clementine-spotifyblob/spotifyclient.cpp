@@ -458,6 +458,12 @@ void SpotifyClient::SendPlaylistList() {
       msg->set_download_progress(0);
     }
     msg->set_nb_tracks(sp_playlist_num_tracks(playlist));
+    // URI - Blugh
+    char uri[256];
+    sp_link* link = sp_link_create_from_playlist(playlist);
+    sp_link_as_string(link, uri, arraysize(uri));
+    sp_link_release(link);
+    msg->set_uri(uri);
   }
 
   SendMessage(message);

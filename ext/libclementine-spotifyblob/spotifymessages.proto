@@ -50,8 +50,9 @@ message Playlists {
     required bool is_mine = 4;
     required string owner= 5;
     required bool is_offline = 6;
+    required string uri = 7;
     // Offline sync progress between 0-100.
-    optional int32 download_progress = 7;
+    optional int32 download_progress = 8;
   }
 
   repeated Playlist playlist = 1;

@@ -140,6 +140,7 @@ class SpotifyService : public InternetService {
   void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
   void ToplistLoaded(const pb::spotify::BrowseToplistResponse& response);
   void GetCurrentSongUrlToShare() const;
+  void GetCurrentPlaylistUrlToShare() const;
 
   void DoSearch();
 
@@ -168,9 +169,11 @@ class SpotifyService : public InternetService {
   QMenu* playlist_context_menu_;
   QMenu* song_context_menu_;
   QAction* playlist_sync_action_;
+  QAction* get_url_to_share_playlist_;
   QList<QAction*> playlistitem_actions_;
   QAction* remove_from_playlist_;
   QUrl current_song_url_;
+  QUrl current_playlist_url_;
 
   SearchBoxWidget* search_box_;
 
