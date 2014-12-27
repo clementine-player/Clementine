@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -16,13 +18,14 @@
 */
 
 #include "currentartloader.h"
-#include "core/application.h"
-#include "covers/albumcoverloader.h"
-#include "playlist/playlistmanager.h"
 
 #include <QDir>
 #include <QTemporaryFile>
 #include <QUrl>
+
+#include "core/application.h"
+#include "covers/albumcoverloader.h"
+#include "playlist/playlistmanager.h"
 
 CurrentArtLoader::CurrentArtLoader(Application* app, QObject* parent)
     : QObject(parent),

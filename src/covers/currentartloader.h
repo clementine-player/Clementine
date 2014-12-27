@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CURRENTARTLOADER_H
-#define CURRENTARTLOADER_H
+#ifndef COVERS_CURRENTARTLOADER_H_
+#define COVERS_CURRENTARTLOADER_H_
 
 #include <memory>
 
@@ -34,7 +36,7 @@ class CurrentArtLoader : public QObject {
   Q_OBJECT
 
  public:
-  CurrentArtLoader(Application* app, QObject* parent = nullptr);
+  explicit CurrentArtLoader(Application* app, QObject* parent = nullptr);
   ~CurrentArtLoader();
 
   const AlbumCoverLoaderOptions& options() const { return options_; }
@@ -43,7 +45,7 @@ class CurrentArtLoader : public QObject {
  public slots:
   void LoadArt(const Song& song);
 
-signals:
+ signals:
   void ArtLoaded(const Song& song, const QString& uri, const QImage& image);
   void ThumbnailLoaded(const Song& song, const QString& uri,
                        const QImage& image);
@@ -64,4 +66,4 @@ signals:
   Song last_song_;
 };
 
-#endif  // CURRENTARTLOADER_H
+#endif  // COVERS_CURRENTARTLOADER_H_

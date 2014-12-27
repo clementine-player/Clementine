@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -215,10 +218,10 @@ float AlbumCoverFetcherSearch::ScoreImage(const QImage& image) const {
 
   // A 500x500px image scores 1.0, bigger scores higher
   const float size_score =
-      std::sqrt(float(image.width() * image.height())) / kTargetSize;
+      std::sqrt(static_cast<float>(image.width() * image.height())) / kTargetSize;
 
   // A 1:1 image scores 1.0, anything else scores less
-  const float aspect_score = 1.0 - float(image.height() - image.width()) /
+  const float aspect_score = 1.0 - static_cast<float>(image.height() - image.width()) /
                                        std::max(image.height(), image.width());
 
   return size_score + aspect_score;

@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ALBUMCOVERFETCHER_H
-#define ALBUMCOVERFETCHER_H
+#ifndef COVERS_ALBUMCOVERFETCHER_H_
+#define COVERS_ALBUMCOVERFETCHER_H_
 
 #include "coversearchstatistics.h"
 
@@ -89,7 +92,7 @@ class AlbumCoverFetcher : public QObject {
 
   void Clear();
 
-signals:
+ signals:
   void AlbumCoverFetched(quint64, const QImage& cover,
                          const CoverSearchStatistics& statistics);
   void SearchFinished(quint64, const CoverSearchResults& results,
@@ -113,4 +116,4 @@ signals:
   QTimer* request_starter_;
 };
 
-#endif  // ALBUMCOVERFETCHER_H
+#endif  // COVERS_ALBUMCOVERFETCHER_H_

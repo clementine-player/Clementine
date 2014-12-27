@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COVERSEARCHSTATISTICSDIALOG_H
-#define COVERSEARCHSTATISTICSDIALOG_H
+#ifndef COVERS_COVERSEARCHSTATISTICSDIALOG_H_
+#define COVERS_COVERSEARCHSTATISTICSDIALOG_H_
 
 #include <QDialog>
 
@@ -30,7 +32,7 @@ class CoverSearchStatisticsDialog : public QDialog {
   Q_OBJECT
 
  public:
-  CoverSearchStatisticsDialog(QWidget* parent = nullptr);
+  explicit CoverSearchStatisticsDialog(QWidget* parent = nullptr);
   ~CoverSearchStatisticsDialog();
 
   void Show(const CoverSearchStatistics& statistics);
@@ -44,4 +46,4 @@ class CoverSearchStatisticsDialog : public QDialog {
   QVBoxLayout* details_layout_;
 };
 
-#endif  // COVERSEARCHSTATISTICSDIALOG_H
+#endif  // COVERS_COVERSEARCHSTATISTICSDIALOG_H_
