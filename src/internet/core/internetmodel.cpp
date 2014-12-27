@@ -347,8 +347,11 @@ void InternetModel::UpdateServices() {
 
   QStringList keys = s.childKeys();
 
-  for (QString service_name : keys) {
+  for (const QString& service_name : keys) {
     InternetService* internet_service = ServiceByName(service_name);
+    if (internet_service == nullptr) {
+      continue;
+    }
     bool setting_val = s.value(service_name).toBool();
 
     // Only update if values are different
