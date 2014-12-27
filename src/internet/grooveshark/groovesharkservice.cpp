@@ -1205,22 +1205,6 @@ void GroovesharkService::PlaylistUrlToShareReceived(QNetworkReply* reply) {
   ShowUrlBox(tr("Grooveshark playlist's URL"), url);
 }
 
-void GroovesharkService::ShowUrlBox(const QString& title, const QString& url) {
-  QMessageBox url_box;
-  url_box.setWindowTitle(title);
-  url_box.setWindowIcon(QIcon(":/icon.png"));
-  url_box.setText(url);
-  url_box.setStandardButtons(QMessageBox::Ok);
-  QPushButton* copy_to_clipboard_button =
-      url_box.addButton(tr("Copy to clipboard"), QMessageBox::ActionRole);
-
-  url_box.exec();
-
-  if (url_box.clickedButton() == copy_to_clipboard_button) {
-    QApplication::clipboard()->setText(url);
-  }
-}
-
 void GroovesharkService::AddCurrentSongToPlaylist(QAction* action) {
   int playlist_id = action->data().toInt();
   if (!playlists_.contains(playlist_id)) {

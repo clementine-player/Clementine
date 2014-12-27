@@ -48,6 +48,10 @@ class InternetService : public QObject {
                   QObject* parent = nullptr);
   virtual ~InternetService() {}
 
+  // Convenient method that shows URL in a QMessageBox. Used by several Internet
+  // services
+  static void ShowUrlBox(const QString& title, const QString& url);
+
   QString name() const { return name_; }
   InternetModel* model() const { return model_; }
 

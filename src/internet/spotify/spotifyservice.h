@@ -139,6 +139,7 @@ class SpotifyService : public InternetService {
   void SearchResults(const pb::spotify::SearchResponse& response);
   void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
   void ToplistLoaded(const pb::spotify::BrowseToplistResponse& response);
+  void GetCurrentSongUrlToShare() const;
 
   void DoSearch();
 

@@ -22,7 +22,12 @@
 
 #include "internet/core/internetservice.h"
 
+#include <QApplication>
+#include <QClipboard>
+#include <QIcon>
 #include <QMenu>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QStandardItem>
 
 #include "internet/core/internetmodel.h"
@@ -41,6 +46,22 @@ InternetService::InternetService(const QString& name, Application* app,
       replace_playlist_(nullptr),
       open_in_new_playlist_(nullptr),
       separator_(nullptr) {}
+
+void InternetService::ShowUrlBox(const QString& title, const QString& url) {
+  QMessageBox url_box;
+  url_box.setWindowTitle(title);
+  url_box.setWindowIcon(QIcon(":/icon.png"));
+  url_box.setText(url);
+  url_box.setStandardButtons(QMessageBox::Ok);
+  QPushButton* copy_to_clipboard_button =
+      url_box.addButton(tr("Copy to clipboard"), QMessageBox::ActionRole);
+
+  url_box.exec();
+
+  if (url_box.clickedButton() == copy_to_clipboard_button) {
+    QApplication::clipboard()->setText(url);
+  }
+}
 
 QList<QAction*> InternetService::GetPlaylistActions() {
   if (!separator_) {

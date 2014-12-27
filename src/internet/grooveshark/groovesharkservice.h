@@ -231,7 +231,6 @@ class GroovesharkService : public InternetService {
   // Convenient function which block until 'reply' replies, or timeout after 10
   // seconds. Returns false if reply has timeouted
   bool WaitForReply(QNetworkReply* reply);
-  void ShowUrlBox(const QString& title, const QString& url);
   // Convenient function for extracting result from reply
   QVariantMap ExtractResult(QNetworkReply* reply);
   // Convenient function for extracting songs from grooveshark result. result

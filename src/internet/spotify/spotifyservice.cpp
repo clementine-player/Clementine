@@ -604,6 +604,11 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
   add_to_playlists->setMenu(playlists_menu);
   playlistitem_actions_.append(add_to_playlists);
 
+  QAction* share_song =
+      new QAction(tr("Get a URL to share this Spotify song"), this);
+  connect(share_song, SIGNAL(triggered()), SLOT(GetCurrentSongUrlToShare()));
+  playlistitem_actions_.append(share_song);
+
   // Keep in mind the current song URL
   current_song_url_ = song.url();
 
@@ -638,6 +643,8 @@ void SpotifyService::EnsureMenuCreated() {
   remove_from_playlist_ = song_context_menu_->addAction(
       IconLoader::Load("list-remove"), tr("Remove from playlist"), this,
       SLOT(RemoveCurrentFromPlaylist()));
+  song_context_menu_->addAction(tr("Get a URL to share this Spotify song"),
+      this, SLOT(GetCurrentSongUrlToShare()));
 
   song_context_menu_->addAction(GetNewShowConfigAction());
 }
@@ -765,6 +772,7 @@ void SpotifyService::ShowContextMenu(const QPoint& global_pos) {
       playlist_context_menu_->popup(global_pos);
       return;
     } else if (type == InternetModel::Type_Track) {
+      current_song_url_ = item->data(InternetModel::Role_Url).toUrl();
       // Is this track contained in a playlist we can modify?
       bool is_playlist_modifiable =
           item->parent() &&
@@ -777,6 +785,14 @@ void SpotifyService::ShowContextMenu(const QPoint& global_pos) {
   }
 
   context_menu_->popup(global_pos);
+}
+
+void SpotifyService::GetCurrentSongUrlToShare() const {
+  QString url = current_song_url_.toEncoded();
+  // URLs we use can be opened with Spotify application, but I believe it's
+  // better to give website links instead.
+  url.replace("spotify:track:", "https://play.spotify.com/track/");
+  InternetService::ShowUrlBox(tr("Spotify song's URL"), url);
 }
 
 void SpotifyService::ItemDoubleClicked(QStandardItem* item) {}
