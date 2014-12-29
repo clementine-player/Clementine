@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-16 02:17+0000\n"
+"PO-Revision-Date: 2014-12-27 18:00+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,7 @@ msgstr " שניות"
 msgid " songs"
 msgstr " שירים"
 
-#: internet/vkservice.cpp:146
+#: internet/vk/vkservice.cpp:148
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 שירים)"
@@ -85,7 +85,7 @@ msgstr "%1 ימים"
 msgid "%1 days ago"
 msgstr "לפני %1 ימים"
 
-#: podcasts/gpoddersync.cpp:84
+#: internet/podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 על %2"
@@ -241,7 +241,7 @@ msgstr "&כלים"
 msgid "(different across multiple songs)"
 msgstr "(באופן שונה על פני מספר שירים)"
 
-#: internet/spotifyservice.cpp:424
+#: internet/spotify/spotifyservice.cpp:449
 msgid ", by "
 msgstr ""
 
@@ -322,11 +322,11 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>מילים שמורות מתחילות ב־%, לדוגמה: %artist %album %title </p>\n\n<p>סגירת טקסט בסוגריים מסולסלות משני צדיו תגרום להסתרתו במקרה שהטקסט מכיל מילה שמורה אשר לא מכילה כלום.</p>"
 
-#: internet/groovesharksettingspage.cpp:119
+#: internet/grooveshark/groovesharksettingspage.cpp:123
 msgid "A Grooveshark Anywhere account is required."
 msgstr "נדרש חשבון Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:163
+#: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "נדרש חשבון פרימיום של Spotify."
 
@@ -421,11 +421,11 @@ msgstr "פעולה"
 msgid "Active/deactive Wiiremote"
 msgstr "הפעלה/כיבוי של Wiiremote"
 
-#: internet/soundcloudservice.cpp:124
+#: internet/soundcloud/soundcloudservice.cpp:125
 msgid "Activities stream"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:62
+#: internet/podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "הוספת פודקאסט"
 
@@ -445,7 +445,7 @@ msgstr "הוספת פעולה"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
-#: internet/savedradio.cpp:106
+#: internet/internetradio/savedradio.cpp:112
 msgid "Add another stream..."
 msgstr "הוספת תזרים אחר..."
 
@@ -489,7 +489,7 @@ msgstr "הוספת תיקייה חדשה..."
 msgid "Add podcast"
 msgstr "הוספת פודקאסט"
 
-#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
+#: internet/podcasts/podcastservice.cpp:416 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "הוספת פודקאסט..."
 
@@ -557,7 +557,7 @@ msgstr "הוספת מספר דילוגים לשיר"
 msgid "Add song title tag"
 msgstr "הוספת תג כותרת לשיר"
 
-#: internet/vkservice.cpp:318
+#: internet/vk/vkservice.cpp:320
 msgid "Add song to cache"
 msgstr "הוסף שיר למטמון"
 
@@ -577,19 +577,19 @@ msgstr "הוסף שירים ל-\"שירים שלי\" אם כפתור ה-\"אוה
 msgid "Add stream..."
 msgstr "הוספת תזרים"
 
-#: internet/groovesharkservice.cpp:1120
+#: internet/grooveshark/groovesharkservice.cpp:1126
 msgid "Add to Grooveshark favorites"
 msgstr "הוספה לרשימת המועדפים של Grooveshark"
 
-#: internet/groovesharkservice.cpp:1135
+#: internet/grooveshark/groovesharkservice.cpp:1141
 msgid "Add to Grooveshark playlists"
 msgstr "הוספה לרשימת ההשמה של Grooveshark"
 
-#: internet/vkservice.cpp:310
+#: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr "הוסף לשירים שלי"
 
-#: internet/spotifyservice.cpp:568
+#: internet/spotify/spotifyservice.cpp:594
 msgid "Add to Spotify playlists"
 msgstr ""
 
@@ -597,7 +597,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "הוספה לרשימת השמעה אחרת"
 
-#: internet/vkservice.cpp:296
+#: internet/vk/vkservice.cpp:298
 msgid "Add to bookmarks"
 msgstr "הוסף לסימניות"
 
@@ -609,7 +609,7 @@ msgstr "הוספה לרשימת ההשמעה"
 msgid "Add to the queue"
 msgstr "הוספה לתור"
 
-#: internet/vkservice.cpp:326
+#: internet/vk/vkservice.cpp:328
 msgid "Add user/group to bookmarks"
 msgstr ""
 
@@ -642,11 +642,11 @@ msgstr "התווסף היום"
 msgid "Added within three months"
 msgstr "התווסף בשלושה החודשים האחרונים"
 
-#: internet/groovesharkservice.cpp:1434
+#: internet/grooveshark/groovesharkservice.cpp:1424
 msgid "Adding song to My Music"
 msgstr "הוספת שירים למוסיקה שלי"
 
-#: internet/groovesharkservice.cpp:1411
+#: internet/grooveshark/groovesharkservice.cpp:1401
 msgid "Adding song to favorites"
 msgstr "הוספת שיר למועדפים"
 
@@ -685,11 +685,11 @@ msgstr "אמן אלבום"
 msgid "Album cover"
 msgstr "עטיפת אלבום"
 
-#: internet/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:427
 msgid "Album info on jamendo.com..."
 msgstr "מידע על האלבום ב־jamendo.com..."
 
-#: internet/vkservice.cpp:825
+#: internet/vk/vkservice.cpp:827
 msgid "Albums"
 msgstr ""
 
@@ -768,7 +768,7 @@ msgstr "תמיד יש להציג את החלון המרכזי"
 msgid "Always start playing"
 msgstr "תמיד להתחיל לנגן"
 
-#: internet/spotifyblobdownloader.cpp:65
+#: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -783,7 +783,7 @@ msgstr "אירעה שגיאה בטעינת מסד הנתונים של iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "אירעה שגיאה בכתיבת המידע הנוסף לתוך '%1'"
 
-#: internet/subsonicsettingspage.cpp:102
+#: internet/subsonic/subsonicsettingspage.cpp:123
 msgid "An unspecified error occurred."
 msgstr "אירעה שגיאה לא מוגדרת"
 
@@ -806,7 +806,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "הוסף קבצים/כתובות לסוף רשימת ההשמעה"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:452
-#: internet/internetservice.cpp:53 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "הוספה לרשימת ההשמעה הנוכחית"
@@ -824,7 +824,7 @@ msgstr "הפעלת כיווץ כדי למנוע חיתוך"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "האם למחוק את האפשרות הקבועה „%1“?"
 
-#: internet/groovesharkservice.cpp:1333
+#: internet/grooveshark/groovesharkservice.cpp:1323
 msgid "Are you sure you want to delete this playlist?"
 msgstr "האם למחוק רשימת השמעה זו?"
 
@@ -872,9 +872,10 @@ msgstr "להמיר לתבנית"
 msgid "Audio output"
 msgstr ""
 
-#: internet/digitallyimportedsettingspage.cpp:80
-#: internet/magnatunesettingspage.cpp:112 internet/lastfmservice.cpp:222
-#: internet/lastfmsettingspage.cpp:80
+#: internet/digitally/digitallyimportedsettingspage.cpp:83
+#: internet/magnatune/magnatunesettingspage.cpp:116
+#: internet/lastfm/lastfmservice.cpp:228
+#: internet/lastfm/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
 msgstr "האימות נכשל"
 
@@ -911,11 +912,11 @@ msgstr "פנוי"
 msgid "Average bitrate"
 msgstr "קצב סיביות ממוצע"
 
-#: covers/coversearchstatisticsdialog.cpp:67
+#: covers/coversearchstatisticsdialog.cpp:69
 msgid "Average image size"
 msgstr "גודל תמונה ממוצע"
 
-#: podcasts/addpodcastdialog.cpp:87
+#: internet/podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "BBC פודקאסט"
 
@@ -1057,20 +1058,20 @@ msgstr ""
 msgid "Caching"
 msgstr ""
 
-#: internet/vkmusiccache.cpp:119
+#: internet/vk/vkmusiccache.cpp:120
 #, qt-format
 msgid "Caching %1"
 msgstr ""
 
-#: internet/spotifyblobdownloader.cpp:50
+#: internet/spotify/spotifyblobdownloader.cpp:52
 msgid "Cancel"
 msgstr "ביטול"
 
-#: podcasts/podcastservice.cpp:438
+#: internet/podcasts/podcastservice.cpp:439
 msgid "Cancel download"
 msgstr ""
 
-#: internet/vkservice.cpp:624
+#: internet/vk/vkservice.cpp:626
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1110,7 +1111,7 @@ msgstr "שינוי העדפת השמעת מונו יהיה יעיל לניגון
 msgid "Check for new episodes"
 msgstr "בדיקת פרקים חדשים"
 
-#: internet/googledriveservice.cpp:202
+#: internet/googledrive/googledriveservice.cpp:220
 msgid "Check for updates"
 msgstr ""
 
@@ -1118,7 +1119,7 @@ msgstr ""
 msgid "Check for updates..."
 msgstr "בדיקת עדכונים..."
 
-#: internet/vksettingspage.cpp:97
+#: internet/vk/vksettingspage.cpp:98
 msgid "Choose Vk.com cache directory"
 msgstr ""
 
@@ -1146,7 +1147,7 @@ msgstr "בחירה מהרשימה"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "נא לבחור כיצד רשימת ההשמעה תסודר וכמה שירים יהיו בה"
 
-#: podcasts/podcastsettingspage.cpp:140
+#: internet/podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "בחירת תיקיית יעד להורדת פודקאסט"
 
@@ -1282,7 +1283,7 @@ msgstr "סגירת רשימת השמעה"
 msgid "Close visualization"
 msgstr "סגירת האפקטים החזותיים"
 
-#: internet/magnatunedownloaddialog.cpp:304
+#: internet/magnatune/magnatunedownloaddialog.cpp:306
 msgid "Closing this window will cancel the download."
 msgstr "סגירת חלון זה תבטל את ההורדה."
 
@@ -1307,7 +1308,7 @@ msgstr "רשימה מופרדת בפסיקים של class:level,level יכול �
 msgid "Comment"
 msgstr "הערה"
 
-#: internet/vkservice.cpp:152
+#: internet/vk/vkservice.cpp:154
 msgid "Community Radio"
 msgstr ""
 
@@ -1325,16 +1326,16 @@ msgstr "השלמת תגים אוטומטית..."
 msgid "Composer"
 msgstr "מלחין"
 
-#: internet/searchboxwidget.cpp:41
+#: internet/core/searchboxwidget.cpp:45
 #, qt-format
 msgid "Configure %1..."
 msgstr "הגדרת "
 
-#: internet/groovesharkservice.cpp:560
+#: internet/grooveshark/groovesharkservice.cpp:565
 msgid "Configure Grooveshark..."
 msgstr "הגדרת Grooveshark..."
 
-#: internet/magnatuneservice.cpp:282
+#: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "הגדרת Magnatune..."
 
@@ -1342,15 +1343,15 @@ msgstr "הגדרת Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "הגדרת קיצורי מקשים"
 
-#: internet/spotifyservice.cpp:820
+#: internet/spotify/spotifyservice.cpp:876
 msgid "Configure Spotify..."
 msgstr "הגדרת Spotify..."
 
-#: internet/subsonicservice.cpp:90
+#: internet/subsonic/subsonicservice.cpp:112
 msgid "Configure Subsonic..."
 msgstr "הגדרת תת קולי"
 
-#: internet/vkservice.cpp:335
+#: internet/vk/vkservice.cpp:337
 msgid "Configure Vk.com..."
 msgstr ""
 
@@ -1362,14 +1363,15 @@ msgstr "מגדיר חיפוש "
 msgid "Configure library..."
 msgstr "הגדרת הספרייה..."
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
+#: internet/podcasts/addpodcastdialog.cpp:74
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Configure podcasts..."
 msgstr "הגדרת פודקאסטים..."
 
-#: internet/cloudfileservice.cpp:85
-#: internet/digitallyimportedservicebase.cpp:179
+#: internet/core/cloudfileservice.cpp:105
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:210
+#: internet/googledrive/googledriveservice.cpp:228
 msgid "Configure..."
 msgstr "הגדרה..."
 
@@ -1381,22 +1383,22 @@ msgstr "חיבור Wii Remotes בעזרת פעולת הפעלה/כיבוי"
 msgid "Connect device"
 msgstr "חיבור התקן"
 
-#: internet/spotifyservice.cpp:270
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "בהתחברות אל Spotify"
 
-#: internet/subsonicsettingspage.cpp:107
+#: internet/subsonic/subsonicsettingspage.cpp:128
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:119
+#: internet/subsonic/subsonicsettingspage.cpp:140
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr ""
 
-#: internet/vkservice.cpp:1093
+#: internet/vk/vkservice.cpp:1095
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1424,15 +1426,15 @@ msgstr ""
 msgid "Convert lossless files"
 msgstr ""
 
-#: internet/vkservice.cpp:322
+#: internet/vk/vkservice.cpp:324
 msgid "Copy share url to clipboard"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1209
+#: internet/core/internetservice.cpp:57
 msgid "Copy to clipboard"
 msgstr "העתקה אל הלוח"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "העתקה להתקן.."
@@ -1446,7 +1448,7 @@ msgstr "העתקה לספרייה..."
 msgid "Copyright"
 msgstr "זכויות יוצרים"
 
-#: internet/subsonicsettingspage.cpp:75
+#: internet/subsonic/subsonicsettingspage.cpp:96
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1477,14 +1479,15 @@ msgid ""
 "plugins installed"
 msgstr "לא ניתן למצוא מקודד עבור %1, נא לוודא שתוספי ה־GStreamer הנכונים מותקנים כראוי"
 
-#: internet/magnatunedownloaddialog.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:220
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "לא ניתן לפתוח את קובץ הפלט %1"
 
-#: internet/cloudfileservice.cpp:82 ../bin/src/ui_albumcovermanager.h:215
+#: internet/core/cloudfileservice.cpp:102
+#: ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:677
-#: internet/googledriveservice.cpp:208
+#: internet/googledrive/googledriveservice.cpp:226
 msgid "Cover Manager"
 msgstr "מנהל העטיפות"
 
@@ -1510,12 +1513,13 @@ msgstr "לא נבחרה עטיפת אלבום"
 msgid "Cover art set from %1"
 msgstr "עטיפת אלבום נבחרה מתוך %1"
 
-#: covers/coversearchstatisticsdialog.cpp:57 ui/albumcoversearcher.cpp:100
+#: covers/coversearchstatisticsdialog.cpp:59 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
 msgstr "עטיפות מ־%1"
 
-#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1285
+#: internet/grooveshark/groovesharkservice.cpp:533
+#: internet/grooveshark/groovesharkservice.cpp:1275
 msgid "Create a new Grooveshark playlist"
 msgstr "יצירת רשימת השמעה חדשה מ־Grooveshark"
 
@@ -1680,11 +1684,12 @@ msgstr "הפסקה בין אפקטים חזותיים"
 msgid "Delete"
 msgstr "מחיקה"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1332
+#: internet/grooveshark/groovesharkservice.cpp:536
+#: internet/grooveshark/groovesharkservice.cpp:1322
 msgid "Delete Grooveshark playlist"
 msgstr "מחיקת רשימת השמעה של Grooveshark"
 
-#: podcasts/podcastservice.cpp:432
+#: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
 msgstr "מחיקת מידע שהתקבל"
 
@@ -1817,8 +1822,9 @@ msgstr "דיסק"
 msgid "Discontinuous transmission"
 msgstr "תמסורת רציפה"
 
-#: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:104 ../bin/src/ui_librarysettingspage.h:207
+#: internet/icecast/icecastfilterwidget.cpp:36
+#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:104
+#: ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "הגדרות תצוגה"
 
@@ -1830,11 +1836,12 @@ msgstr "הצגת חיווי מסך"
 msgid "Do a full library rescan"
 msgstr "ביצוע סריקה חוזרת לכל הספרייה"
 
-#: internet/googledriveservice.cpp:250 internet/googledriveservice.cpp:257
+#: internet/googledrive/googledriveservice.cpp:267
+#: internet/googledrive/googledriveservice.cpp:273
 msgid "Do a full rescan"
 msgstr ""
 
-#: internet/googledriveservice.cpp:205
+#: internet/googledrive/googledriveservice.cpp:223
 msgid "Do a full rescan..."
 msgstr ""
 
@@ -1846,7 +1853,7 @@ msgstr "אין להמיר שום מוזיקה"
 msgid "Do not overwrite"
 msgstr "אל תדרוס"
 
-#: internet/googledriveservice.cpp:251
+#: internet/googledrive/googledriveservice.cpp:268
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
@@ -1869,11 +1876,12 @@ msgstr ""
 msgid "Don't shuffle"
 msgstr "ללא קפיצות"
 
-#: internet/magnatunedownloaddialog.cpp:306 ui/albumcovermanager.cpp:221
+#: internet/magnatune/magnatunedownloaddialog.cpp:308
+#: ui/albumcovermanager.cpp:221
 msgid "Don't stop!"
 msgstr "לא להפסיק!"
 
-#: internet/somafmservice.cpp:101
+#: internet/somafm/somafmservice.cpp:106
 msgid "Donate"
 msgstr "לתרום"
 
@@ -1885,13 +1893,13 @@ msgstr "לחיצה כפולה לפתיחה"
 msgid "Double clicking a song will..."
 msgstr "לחיצה כפולה על שיר לביצוע..."
 
-#: podcasts/podcastservice.cpp:528
+#: internet/podcasts/podcastservice.cpp:529
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
 msgstr "ירדו %n פרקים"
 
-#: internet/magnatunedownloaddialog.cpp:266
+#: internet/magnatune/magnatunedownloaddialog.cpp:268
 msgid "Download directory"
 msgstr "הורדת תיקייה"
 
@@ -1907,7 +1915,8 @@ msgstr "חברות המאפשרת הורדה"
 msgid "Download new episodes automatically"
 msgstr "הורדת פרקים חדשים אוטומטית"
 
-#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
+#: internet/podcasts/podcastservice.cpp:292
+#: internet/podcasts/podcastservice.cpp:331
 msgid "Download queued"
 msgstr "ההורדה נכנסה לתור"
 
@@ -1919,15 +1928,15 @@ msgstr ""
 msgid "Download the Android app"
 msgstr "הורדת אפליקציית אנדרויד"
 
-#: internet/magnatuneservice.cpp:272
+#: internet/magnatune/magnatuneservice.cpp:280
 msgid "Download this album"
 msgstr "הורדת האלבום הזה"
 
-#: internet/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:430
 msgid "Download this album..."
 msgstr "הורדת האלבום הזה..."
 
-#: podcasts/podcastservice.cpp:530
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Download this episode"
 msgstr "הורדת הפרק הזה"
 
@@ -1935,24 +1944,25 @@ msgstr "הורדת הפרק הזה"
 msgid "Download..."
 msgstr "בהורדה..."
 
-#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
+#: internet/podcasts/podcastservice.cpp:300
+#: internet/podcasts/podcastservice.cpp:340
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "בהורדה (%1%)..."
 
-#: internet/icecastservice.cpp:101
+#: internet/icecast/icecastservice.cpp:106
 msgid "Downloading Icecast directory"
 msgstr "תיקיית Icecast בהורדה"
 
-#: internet/jamendoservice.cpp:195
+#: internet/jamendo/jamendoservice.cpp:200
 msgid "Downloading Jamendo catalogue"
 msgstr "הקטלוג של Jamendo מתקבל"
 
-#: internet/magnatuneservice.cpp:152
+#: internet/magnatune/magnatuneservice.cpp:160
 msgid "Downloading Magnatune catalogue"
 msgstr "הקטלוג של Magnatune מתקבל"
 
-#: internet/spotifyblobdownloader.cpp:49
+#: internet/spotify/spotifyblobdownloader.cpp:51
 msgid "Downloading Spotify plugin"
 msgstr "התוסף של Spotify מתקבל"
 
@@ -1980,7 +1990,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "מצב דינמי פעיל"
 
-#: internet/jamendoservice.cpp:121 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "מיקס דינמי אקראי"
 
@@ -2014,7 +2024,7 @@ msgstr "עריכת פרטי הרצועה..."
 msgid "Edit tracks information..."
 msgstr "עריכת פרטי רצועות..."
 
-#: internet/savedradio.cpp:103
+#: internet/internetradio/savedradio.cpp:109
 msgid "Edit..."
 msgstr "עריכה..."
 
@@ -2126,10 +2136,10 @@ msgstr "זהה לאפשרות --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "זהה לאפשרות--log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1048
-#: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141 ui/mainwindow.cpp:2289
-#: internet/vkservice.cpp:623
+#: internet/grooveshark/groovesharkservice.cpp:1054
+#: internet/magnatune/magnatunedownloaddialog.cpp:242
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
+#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "שגיאה"
 
@@ -2149,7 +2159,7 @@ msgstr "שגיאה בהעתקת שירים"
 msgid "Error deleting songs"
 msgstr "שגיאה במחיקת שירים"
 
-#: internet/spotifyblobdownloader.cpp:220
+#: internet/spotify/spotifyblobdownloader.cpp:222
 msgid "Error downloading Spotify plugin"
 msgstr "שגיאה בהורדת תוסף Spotify"
 
@@ -2158,8 +2168,8 @@ msgstr "שגיאה בהורדת תוסף Spotify"
 msgid "Error loading %1"
 msgstr "שגיאה בטעינת %1"
 
-#: internet/digitallyimportedservicebase.cpp:197
-#: internet/digitallyimportedurlhandler.cpp:85
+#: internet/digitally/digitallyimportedservicebase.cpp:200
+#: internet/digitally/digitallyimportedurlhandler.cpp:89
 msgid "Error loading di.fm playlist"
 msgstr "שגיאה בטעינת רשימת ההשמעה של di.fm"
 
@@ -2297,21 +2307,24 @@ msgstr "משך זמן עמעום המוזיקה"
 msgid "Failed reading CD drive"
 msgstr ""
 
-#: podcasts/gpoddertoptagspage.cpp:72
+#: internet/podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "אחזור התיקייה נכשל"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
-#: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
-#: podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/gpoddersearchpage.cpp:75
+#: internet/podcasts/gpoddertoptagsmodel.cpp:103
+#: internet/podcasts/itunessearchpage.cpp:65
+#: internet/podcasts/itunessearchpage.cpp:76
+#: internet/podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "אחזור הפודקאסטים נכשל"
 
-#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
+#: internet/podcasts/addpodcastbyurl.cpp:69
+#: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "בטעינת הפודקאסט נכשלה"
 
-#: podcasts/podcasturlloader.cpp:175
+#: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "ניתוח קובץ ה־XML להזנת ה־RSS נכשל"
 
@@ -2320,7 +2333,7 @@ msgstr "ניתוח קובץ ה־XML להזנת ה־RSS נכשל"
 msgid "Fast"
 msgstr "מהר"
 
-#: internet/groovesharkservice.cpp:639
+#: internet/grooveshark/groovesharkservice.cpp:644
 msgid "Favorites"
 msgstr "מועדפים"
 
@@ -2340,7 +2353,7 @@ msgstr "אחזור אוטומטי"
 msgid "Fetch completed"
 msgstr "אחזור המידע הושלם"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonic/subsonicservice.cpp:250
 msgid "Fetching Subsonic library"
 msgstr "טעינת ספרית Subsonic"
 
@@ -2402,7 +2415,7 @@ msgstr "קובצי מוזיקה להמרה"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "חיפוש שירים בספרייה על פי קריטריונים מוגדרים."
 
-#: internet/vkservice.cpp:306
+#: internet/vk/vkservice.cpp:308
 msgid "Find this artist"
 msgstr ""
 
@@ -2517,23 +2530,33 @@ msgstr "הגדרות כלליות"
 msgid "Genre"
 msgstr "סגנון"
 
-#: internet/groovesharkservice.cpp:550
+#: internet/grooveshark/groovesharkservice.cpp:555
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "הצגת הכתובת על מנת לשתף את רשימת ההשמעה הזו מ־Grooveshark"
 
-#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1148
+#: internet/grooveshark/groovesharkservice.cpp:552
+#: internet/grooveshark/groovesharkservice.cpp:1154
 msgid "Get a URL to share this Grooveshark song"
 msgstr "הצגת הכתובת על מנת לשתף את השיר הזה מ־Grooveshark"
 
-#: internet/groovesharkservice.cpp:823
+#: internet/spotify/spotifyservice.cpp:610
+#: internet/spotify/spotifyservice.cpp:651
+msgid "Get a URL to share this Spotify song"
+msgstr ""
+
+#: internet/spotify/spotifyservice.cpp:642
+msgid "Get a URL to share this playlist"
+msgstr ""
+
+#: internet/grooveshark/groovesharkservice.cpp:829
 msgid "Getting Grooveshark popular songs"
 msgstr "רשימת השירים הפופולריים ב־Grooveshark מתקבלת"
 
-#: internet/somafmservice.cpp:115
+#: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
 msgstr "ערוצים מתקבלים"
 
-#: internet/digitallyimportedservicebase.cpp:102
+#: internet/digitally/digitallyimportedservicebase.cpp:105
 msgid "Getting streams"
 msgstr "הזרמות מתקבלות"
 
@@ -2557,7 +2580,7 @@ msgstr "מעבר ללשונית רשימת ההשמעה הקודמת"
 msgid "Google Drive"
 msgstr "גוגל דרייב"
 
-#: covers/coversearchstatisticsdialog.cpp:51 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2571,19 +2594,19 @@ msgstr "ברשימת ההשמעה, סימון שירים שאינם קיימים
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:408
+#: internet/grooveshark/groovesharkservice.cpp:412
 msgid "Grooveshark login error"
 msgstr "שגיאה בהתחברות ל־Grooveshark"
 
-#: internet/groovesharkservice.cpp:1199
+#: internet/grooveshark/groovesharkservice.cpp:1205
 msgid "Grooveshark playlist's URL"
 msgstr "הכתובת לרשימת ההשמעה ב־Grooveshark"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/grooveshark/groovesharkservice.cpp:624
 msgid "Grooveshark radio"
 msgstr "רדיו Grooveshark"
 
-#: internet/groovesharkservice.cpp:1177
+#: internet/grooveshark/groovesharkservice.cpp:1183
 msgid "Grooveshark song's URL"
 msgstr "הכתובת השיר ב־Grooveshark"
 
@@ -2624,11 +2647,11 @@ msgstr "קיבוץ על פי סגנון/אמן/אלבום"
 msgid "Grouping"
 msgstr "קיבוץ"
 
-#: podcasts/podcasturlloader.cpp:206
+#: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "דף ה־HTML לא כלל שום הזנת RSS"
 
-#: internet/subsonicsettingspage.cpp:141
+#: internet/subsonic/subsonicsettingspage.cpp:162
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr ""
@@ -2663,7 +2686,7 @@ msgstr "גבוה (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "גבוה (1024x1024)"
 
-#: internet/subsonicsettingspage.cpp:113
+#: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr ""
 
@@ -2739,7 +2762,7 @@ msgid ""
 "time a song finishes."
 msgstr "במצב דינמי שירים חדשים יבחרו ויתווספו לרשימת ההשמעה בכל פעם ששיר יסתיים"
 
-#: internet/spotifyservice.cpp:386
+#: internet/spotify/spotifyservice.cpp:411
 msgid "Inbox"
 msgstr "תיבת נכנסת"
 
@@ -2751,15 +2774,15 @@ msgstr "אומנות אלבום בתוך ההתרעה"
 msgid "Include all songs"
 msgstr "הכללת כל השירים"
 
-#: internet/subsonicsettingspage.cpp:85
+#: internet/subsonic/subsonicsettingspage.cpp:106
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "גרסת סותרת של פרוטוקול Subsonic REST . לקוח חייב שדרוג."
 
-#: internet/subsonicsettingspage.cpp:90
+#: internet/subsonic/subsonicsettingspage.cpp:111
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "גרסת סותרת של פרוטוקול Subsonic REST . שרת חייב שדרוג."
 
-#: internet/subsonicsettingspage.cpp:131
+#: internet/subsonic/subsonicsettingspage.cpp:152
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
@@ -2775,7 +2798,7 @@ msgstr "הגבר את עוצמת השמע ב־<value> אחוזים"
 msgid "Increase volume"
 msgstr "הגברת עוצמת השמע"
 
-#: internet/cloudfileservice.cpp:133
+#: internet/core/cloudfileservice.cpp:152
 #, qt-format
 msgid "Indexing %1"
 msgstr "יצירת מפתחות "
@@ -2792,7 +2815,7 @@ msgstr ""
 msgid "Insert..."
 msgstr "הוספה..."
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Installed"
 msgstr "הותקן"
 
@@ -2813,35 +2836,35 @@ msgctxt "Global search settings dialog title."
 msgid "Internet services"
 msgstr ""
 
-#: internet/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
 msgstr "מפתח API לא תקין"
 
-#: internet/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:230
 msgid "Invalid format"
 msgstr "תבנית לא תקינה"
 
-#: internet/lastfmservice.cpp:220
+#: internet/lastfm/lastfmservice.cpp:226
 msgid "Invalid method"
 msgstr "שיטה לא תקינה"
 
-#: internet/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:232
 msgid "Invalid parameters"
 msgstr "פרמטרים לא תקינים"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfm/lastfmservice.cpp:234
 msgid "Invalid resource specified"
 msgstr "צויין משאב לא תקין"
 
-#: internet/lastfmservice.cpp:218
+#: internet/lastfm/lastfmservice.cpp:224
 msgid "Invalid service"
 msgstr "שירות לא תקין"
 
-#: internet/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "מפתח הפעלה לא תקין"
 
-#: internet/groovesharkservice.cpp:400
+#: internet/grooveshark/groovesharkservice.cpp:404
 msgid "Invalid username and/or password"
 msgstr "משתמש ו/או ססמה שגויים"
 
@@ -2849,27 +2872,27 @@ msgstr "משתמש ו/או ססמה שגויים"
 msgid "Invert Selection"
 msgstr ""
 
-#: internet/jamendoservice.cpp:133
+#: internet/jamendo/jamendoservice.cpp:138
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:117
+#: internet/jamendo/jamendoservice.cpp:123
 msgid "Jamendo Most Listened Tracks"
 msgstr "הרצועות הכי מושמעות ב־Jamendo"
 
-#: internet/jamendoservice.cpp:114
+#: internet/jamendo/jamendoservice.cpp:120
 msgid "Jamendo Top Tracks"
 msgstr "הרצועות המדורגות ביותר ב־Jamendo"
 
-#: internet/jamendoservice.cpp:108
+#: internet/jamendo/jamendoservice.cpp:114
 msgid "Jamendo Top Tracks of the Month"
 msgstr "הרצועות החמות ביותר החודש ב-־amendo"
 
-#: internet/jamendoservice.cpp:111
+#: internet/jamendo/jamendoservice.cpp:117
 msgid "Jamendo Top Tracks of the Week"
 msgstr "הרצועות החמות ביותר השבוע ב־Jamendo"
 
-#: internet/jamendoservice.cpp:175
+#: internet/jamendo/jamendoservice.cpp:180
 msgid "Jamendo database"
 msgstr "מסד הנתונים של Jamendo"
 
@@ -2939,7 +2962,7 @@ msgstr ""
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:241
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm עסוק כרגע, מומלץ לנסות שוב מאוחר יותר"
 
@@ -2997,7 +3020,7 @@ msgstr "חיפוש בספרייה"
 msgid "Limits"
 msgstr "הגבלות"
 
-#: internet/groovesharkservice.cpp:621
+#: internet/grooveshark/groovesharkservice.cpp:626
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "האזנה לשירים מ־Grooveshark בהתבסס על שירים שהושמעו בעבר"
@@ -3050,8 +3073,8 @@ msgstr "רשימת השמעה חכמה נטענת"
 msgid "Loading songs"
 msgstr "השירים נטענים"
 
-#: internet/digitallyimportedurlhandler.cpp:63
-#: internet/somafmurlhandler.cpp:49
+#: internet/digitally/digitallyimportedurlhandler.cpp:67
+#: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "מדיה זורמת בטעינה"
 
@@ -3063,11 +3086,11 @@ msgstr "הרצועות נטענות"
 msgid "Loading tracks info"
 msgstr "נטען מידע אודות השירים"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
-#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
-#: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
-#: internet/vksettingspage.cpp:121
+#: library/librarymodel.cpp:152
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
+#: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
+#: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
+#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "בטעינה..."
 
@@ -3085,16 +3108,16 @@ msgstr "טעינת קבצים/כתובות, תוך החלפת רשימת ההש�
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
-#: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
+#: ../bin/src/ui_boxsettingspage.h:105 internet/vk/vksettingspage.cpp:111
 #: ../bin/src/ui_vksettingspage.h:219 ../bin/src/ui_seafilesettingspage.h:173
 msgid "Login"
 msgstr "כניסה"
 
-#: podcasts/podcastsettingspage.cpp:127
+#: internet/podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "ההתחברות נכשלה"
 
-#: internet/vksettingspage.cpp:120
+#: internet/vk/vksettingspage.cpp:121
 msgid "Logout"
 msgstr ""
 
@@ -3154,7 +3177,8 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:101 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatune/magnatuneservice.cpp:109
+#: ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -3179,11 +3203,11 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotifyservice.cpp:608
+#: internet/spotify/spotifyservice.cpp:639
 msgid "Make playlist available offline"
 msgstr "הפיכת רשימת ההשמעה לזמינה גם ללא חיבור רשת"
 
-#: internet/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Malformed response"
 msgstr "תגובה שגויה"
 
@@ -3200,11 +3224,11 @@ msgstr "ידני"
 msgid "Manufacturer"
 msgstr "יצרן"
 
-#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
+#: internet/podcasts/podcastservice.cpp:448 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "סימון כהושמע"
 
-#: podcasts/podcastservice.cpp:446
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Mark as new"
 msgstr "סימון כחדש"
 
@@ -3283,7 +3307,7 @@ msgstr "סגנון סרגל האווירה"
 msgid "Moodbars"
 msgstr "סרגלי אווירה"
 
-#: internet/vkservice.cpp:501
+#: internet/vk/vkservice.cpp:503
 msgid "More"
 msgstr ""
 
@@ -3314,7 +3338,7 @@ msgid "Move up"
 msgstr "הזזה מעלה"
 
 #: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
-#: internet/vkservice.cpp:882
+#: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "מוזיקה"
 
@@ -3327,21 +3351,22 @@ msgstr "ספריית המוזיקה"
 msgid "Mute"
 msgstr "השתקה"
 
-#: internet/vkservice.cpp:818
+#: internet/vk/vkservice.cpp:820
 msgid "My Albums"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
+#: internet/grooveshark/groovesharkservice.cpp:633
+#: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "המוסיקה שלי"
 
-#: internet/vkservice.cpp:508
+#: internet/vk/vkservice.cpp:510
 msgid "My Recommendations"
 msgstr "ההמלצות שלי"
 
-#: internet/groovesharkservice.cpp:1286 internet/groovesharkservice.cpp:1381
-#: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
-#: ../bin/src/ui_wizardfinishpage.h:84
+#: internet/grooveshark/groovesharkservice.cpp:1276
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "שם"
 
@@ -3468,23 +3493,23 @@ msgstr "לא זמין בזמן שימוש ברשימת השמעה דינמית"
 msgid "Not connected"
 msgstr "לא מחובר"
 
-#: internet/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:250
 msgid "Not enough content"
 msgstr "אין מספיק תוכן"
 
-#: internet/lastfmservice.cpp:248
+#: internet/lastfm/lastfmservice.cpp:254
 msgid "Not enough fans"
 msgstr "אין מספיק מעריצים"
 
-#: internet/lastfmservice.cpp:246
+#: internet/lastfm/lastfmservice.cpp:252
 msgid "Not enough members"
 msgstr "אין מספיק חברים"
 
-#: internet/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:256
 msgid "Not enough neighbors"
 msgstr "אין מספיק שכנים"
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Not installed"
 msgstr "לא מותקן"
 
@@ -3497,7 +3522,7 @@ msgstr "לא מחובר"
 msgid "Not mounted - double click to mount"
 msgstr "לא מעוגן - יש ללחוץ לחיצה כפולה כדי לעגן"
 
-#: internet/vksearchdialog.cpp:94
+#: internet/vk/vksearchdialog.cpp:93
 msgid "Nothing found"
 msgstr ""
 
@@ -3571,10 +3596,13 @@ msgstr "הצגת הראשון בלבד"
 msgid "Opacity"
 msgstr "שקיפות"
 
-#: internet/digitallyimportedservicebase.cpp:173
-#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
-#: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
+#: internet/digitally/digitallyimportedservicebase.cpp:176
+#: internet/grooveshark/groovesharkservice.cpp:559
+#: internet/icecast/icecastservice.cpp:302
+#: internet/jamendo/jamendoservice.cpp:434
+#: internet/magnatune/magnatuneservice.cpp:284
+#: internet/somafm/somafmservice.cpp:102
+#: internet/soundcloud/soundcloudservice.cpp:351
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "פתיחת %1 בדפדפן"
@@ -3583,11 +3611,11 @@ msgstr "פתיחת %1 בדפדפן"
 msgid "Open &audio CD..."
 msgstr "פתיחת &דיסק שמע..."
 
-#: podcasts/addpodcastdialog.cpp:238
+#: internet/podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "פתיחת קובץ "
 
-#: podcasts/addpodcastdialog.cpp:80
+#: internet/podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "פתיחת קובץ "
 
@@ -3603,12 +3631,12 @@ msgstr "פתיחת התקן"
 msgid "Open file..."
 msgstr "פתיחת קובץ..."
 
-#: internet/googledriveservice.cpp:198
+#: internet/googledrive/googledriveservice.cpp:216
 msgid "Open in Google Drive"
 msgstr "פתיחה ב "
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:460
-#: internet/internetservice.cpp:75 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "פתיחה ברשימת השמעה חדשה"
@@ -3618,7 +3646,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
 
-#: songinfo/echonestbiographies.cpp:97
+#: songinfo/echonestbiographies.cpp:101
 msgid "Open in your browser"
 msgstr ""
 
@@ -3627,7 +3655,7 @@ msgstr ""
 msgid "Open..."
 msgstr "פתיחה..."
 
-#: internet/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:236
 msgid "Operation failed"
 msgstr "הפעולה נכשלה"
 
@@ -3696,7 +3724,7 @@ msgstr ""
 msgid "Owner"
 msgstr "בעלים"
 
-#: internet/jamendoservice.cpp:222
+#: internet/jamendo/jamendoservice.cpp:228
 msgid "Parsing Jamendo catalogue"
 msgstr "הקטלוג של Jamendo מפוענח"
 
@@ -3795,8 +3823,8 @@ msgstr "אפשרויות רשימת ההשמעה"
 msgid "Playlist type"
 msgstr "סוג רשימת ההשמעה"
 
-#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:241
+#: internet/grooveshark/groovesharkservice.cpp:654
+#: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "רשימות השמעה"
 
@@ -3808,7 +3836,8 @@ msgstr "נא לסגור את הדפדפן ולחזור ל Clementine"
 msgid "Plugin status:"
 msgstr "מצב התוסף:"
 
-#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
+#: internet/podcasts/podcastservice.cpp:131
+#: ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "פודקאסטים"
 
@@ -3816,15 +3845,15 @@ msgstr "פודקאסטים"
 msgid "Pop"
 msgstr "פופ"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/grooveshark/groovesharkservice.cpp:591
 msgid "Popular songs"
 msgstr "שירים פופולריים"
 
-#: internet/groovesharkservice.cpp:590
+#: internet/grooveshark/groovesharkservice.cpp:595
 msgid "Popular songs of the Month"
 msgstr "שירים פופולריים החודש"
 
-#: internet/groovesharkservice.cpp:599
+#: internet/grooveshark/groovesharkservice.cpp:604
 msgid "Popular songs today"
 msgstr "שירים פופולריים היום"
 
@@ -3977,7 +4006,7 @@ msgstr "הוספת הרצועה לתור"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "רדיו (עצמה זהה לכל הרצועות)"
 
-#: internet/groovesharkservice.cpp:608
+#: internet/grooveshark/groovesharkservice.cpp:613
 msgid "Radios"
 msgstr "רדיו"
 
@@ -4022,32 +4051,34 @@ msgstr "דירוג השיר הנוכחי עם 5 כוכבים"
 msgid "Rating"
 msgstr "דירוג"
 
-#: internet/magnatunedownloaddialog.cpp:303 ui/albumcovermanager.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:305
+#: ui/albumcovermanager.cpp:218
 msgid "Really cancel?"
 msgstr "האם לבטל?"
 
-#: internet/subsonicsettingspage.cpp:136
+#: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:556
+#: internet/grooveshark/groovesharkservice.cpp:561
 msgid "Refresh"
 msgstr "רענון"
 
-#: internet/jamendoservice.cpp:431 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:87
+#: internet/jamendo/jamendoservice.cpp:437
+#: internet/magnatune/magnatuneservice.cpp:287
+#: internet/subsonic/subsonicservice.cpp:109
 msgid "Refresh catalogue"
 msgstr "רענון הקטלוג"
 
-#: internet/somafmservice.cpp:106
+#: internet/somafm/somafmservice.cpp:111
 msgid "Refresh channels"
 msgstr "רענון הערוצים"
 
-#: internet/icecastservice.cpp:300
+#: internet/icecast/icecastservice.cpp:305
 msgid "Refresh station list"
 msgstr "רענון רשימת התחנות"
 
-#: internet/digitallyimportedservicebase.cpp:176
+#: internet/digitally/digitallyimportedservicebase.cpp:179
 msgid "Refresh streams"
 msgstr "רענון ההזרמות"
 
@@ -4072,7 +4103,7 @@ msgstr "שמירה מהפעם הקודמת"
 msgid "Remember my choice"
 msgstr ""
 
-#: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
+#: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_transcodedialog.h:216
 msgid "Remove"
 msgstr "הסרה"
@@ -4089,20 +4120,21 @@ msgstr "הסרת כפילויות מרשימת ההשמעה"
 msgid "Remove folder"
 msgstr "הסרת תיקייה"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
+#: internet/grooveshark/groovesharkservice.cpp:549
+#: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "הסרה מהמוסיקה שלי"
 
-#: internet/vkservice.cpp:300
+#: internet/vk/vkservice.cpp:302
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:541
+#: internet/grooveshark/groovesharkservice.cpp:546
 msgid "Remove from favorites"
 msgstr "הסרה מרשימת המועדפים"
 
-#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:615
-#: ../bin/src/ui_mainwindow.h:685
+#: internet/grooveshark/groovesharkservice.cpp:543
+#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "הסרה מרשימת ההשמעה"
 
@@ -4118,20 +4150,20 @@ msgstr "הסר רשימות השמעה"
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1583
+#: internet/grooveshark/groovesharkservice.cpp:1570
 msgid "Removing songs from My Music"
 msgstr "הסרת שירים מהמוסיקה שלי"
 
-#: internet/groovesharkservice.cpp:1530
+#: internet/grooveshark/groovesharkservice.cpp:1518
 msgid "Removing songs from favorites"
 msgstr "הסרת שירים מרשימת המועדפים"
 
-#: internet/groovesharkservice.cpp:1380
+#: internet/grooveshark/groovesharkservice.cpp:1370
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "שינוי שם רשימת ההשמעה %1 "
 
-#: internet/groovesharkservice.cpp:534
+#: internet/grooveshark/groovesharkservice.cpp:539
 msgid "Rename Grooveshark playlist"
 msgstr "שינוי שם רשימת ההשמעה מ־Grooveshark"
 
@@ -4164,7 +4196,7 @@ msgid "Repeat track"
 msgstr "חזרה על הרצועה"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:456
-#: internet/internetservice.cpp:64 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "החלפת רשימת ההשמעה הנוכחית"
@@ -4214,15 +4246,15 @@ msgstr "הגבלה לתווי ASCII"
 msgid "Resume playback on start"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:789
+#: internet/grooveshark/groovesharkservice.cpp:795
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "מאחזר מ-Grooveshark את השירים שלי"
 
-#: internet/groovesharkservice.cpp:756
+#: internet/grooveshark/groovesharkservice.cpp:762
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "מתקבלת רשימת השירים המועדפים מ־Grooveshark"
 
-#: internet/groovesharkservice.cpp:688
+#: internet/grooveshark/groovesharkservice.cpp:693
 msgid "Retrieving Grooveshark playlists"
 msgstr "מתקבלות רשימות ההשמעה מ־Grooveshark"
 
@@ -4258,7 +4290,7 @@ msgstr "הרצה"
 msgid "SOCKS proxy"
 msgstr "מתווך SOCKS"
 
-#: internet/subsonicsettingspage.cpp:125
+#: internet/subsonic/subsonicsettingspage.cpp:146
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
@@ -4356,7 +4388,7 @@ msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:516
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
 msgid "Search"
 msgstr "חיפוש"
 
@@ -4369,15 +4401,15 @@ msgstr ""
 msgid "Search Icecast stations"
 msgstr "חיפוש תחנות Icecast"
 
-#: internet/jamendoservice.cpp:438
+#: internet/jamendo/jamendoservice.cpp:444
 msgid "Search Jamendo"
 msgstr "חיפוש ב־Jamendo"
 
-#: internet/magnatuneservice.cpp:288
+#: internet/magnatune/magnatuneservice.cpp:296
 msgid "Search Magnatune"
 msgstr "חיפוש ב־Magnatune"
 
-#: internet/subsonicservice.cpp:71
+#: internet/subsonic/subsonicservice.cpp:93
 msgid "Search Subsonic"
 msgstr "חיפוש Subsonic"
 
@@ -4409,8 +4441,9 @@ msgstr "מצב חיפוש"
 msgid "Search options"
 msgstr "אפשרויות חיפוש"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
-#: internet/spotifyservice.cpp:372
+#: internet/grooveshark/groovesharkservice.cpp:582
+#: internet/soundcloud/soundcloudservice.cpp:116
+#: internet/spotify/spotifyservice.cpp:397
 msgid "Search results"
 msgstr "תוצאות החיפוש"
 
@@ -4419,7 +4452,7 @@ msgstr "תוצאות החיפוש"
 msgid "Search terms"
 msgstr "מונחי חיפוש"
 
-#: internet/groovesharkservice.cpp:271
+#: internet/grooveshark/groovesharkservice.cpp:275
 msgid "Searching on Grooveshark"
 msgstr "מתבצע חיפוש ב־Grooveshark"
 
@@ -4495,7 +4528,7 @@ msgstr "כתובת שרת"
 msgid "Server details"
 msgstr "פרטי שרת"
 
-#: internet/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:242
 msgid "Service offline"
 msgstr "שירות לא מקוון"
 
@@ -4805,23 +4838,31 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:194
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "שגיאה בהתחברות ל־Spotify"
+
+#: internet/spotify/spotifyservice.cpp:811
+msgid "Spotify playlist's URL"
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "תוסף Spotify"
 
-#: internet/spotifyblobdownloader.cpp:64
+#: internet/spotify/spotifyblobdownloader.cpp:66
 msgid "Spotify plugin not installed"
 msgstr "תוסף Spotify אינו מותקן"
+
+#: internet/spotify/spotifyservice.cpp:802
+msgid "Spotify song's URL"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
 msgstr "סטנדרטי"
 
-#: internet/spotifyservice.cpp:380
+#: internet/spotify/spotifyservice.cpp:405
 msgid "Starred"
 msgstr "מסומן בכוכב"
 
@@ -4837,8 +4878,9 @@ msgstr "התחלת רשימת ההשמעה המתנגנת כעת"
 msgid "Start transcoding"
 msgstr "התחלת ההתמרה"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
-#: internet/spotifyservice.cpp:374
+#: internet/grooveshark/groovesharkservice.cpp:584
+#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/spotify/spotifyservice.cpp:399
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4849,11 +4891,11 @@ msgstr "נא להקליד משהו בתיבת החיפוש למעלה כדי ל�
 msgid "Starting %1"
 msgstr "התחלת המרת %1"
 
-#: internet/magnatunedownloaddialog.cpp:122
+#: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "מופעל..."
 
-#: internet/groovesharkservice.cpp:612
+#: internet/grooveshark/groovesharkservice.cpp:617
 msgid "Stations"
 msgstr "תחנות"
 
@@ -4891,7 +4933,7 @@ msgstr "בעצירה"
 msgid "Stream"
 msgstr "מדיה זורמת"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonic/subsonicsettingspage.cpp:50
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4901,7 +4943,7 @@ msgstr "השידור משרת Subsonic דורש חשבון פעיל לאחר ת�
 msgid "Streaming membership"
 msgstr "חברות המאפשרת הזרמת מדיה"
 
-#: internet/groovesharkservice.cpp:653
+#: internet/grooveshark/groovesharkservice.cpp:658
 msgid "Subscribed playlists"
 msgstr "מינוי על רשימות ההשמעה"
 
@@ -4909,7 +4951,8 @@ msgstr "מינוי על רשימות ההשמעה"
 msgid "Subscribers"
 msgstr "מנויים"
 
-#: internet/subsonicservice.cpp:98 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonic/subsonicservice.cpp:120
+#: ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr ""
 
@@ -4949,15 +4992,15 @@ msgstr "תבניות נתמכות"
 msgid "Synchronize statistics to files now"
 msgstr "מסנכרן סטטיסטיות לתוך קובץ"
 
-#: internet/spotifyservice.cpp:640
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Syncing Spotify inbox"
 msgstr "התיבה הנכנסת ב־Spotify מסונכרנת"
 
-#: internet/spotifyservice.cpp:634
+#: internet/spotify/spotifyservice.cpp:670
 msgid "Syncing Spotify playlist"
 msgstr "רשימת ההשמעה מ־Spotify מסונכרנת"
 
-#: internet/spotifyservice.cpp:645
+#: internet/spotify/spotifyservice.cpp:681
 msgid "Syncing Spotify starred tracks"
 msgstr "השירים המסומנים בכוכב ב‏־Spotify מסונכרנים"
 
@@ -4998,7 +5041,7 @@ msgstr "לא ניתן להפעיל את הפקודה „%1“."
 msgid "The album cover of the currently playing song"
 msgstr "עטיפת האלבום של השיר המתנגן כעת"
 
-#: internet/magnatunedownloaddialog.cpp:92
+#: internet/magnatune/magnatunedownloaddialog.cpp:94
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "התיקייה %1 לא חוקית"
@@ -5015,7 +5058,7 @@ msgstr "האתר שביקשת לא קיים!"
 msgid "The site you requested is not an image!"
 msgstr "האתר אותו ביקשת אינו תמונה!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonic/subsonicsettingspage.cpp:116
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
@@ -5031,16 +5074,17 @@ msgstr "הגרסה החדשה של Clementine אליה שדרגת דורשת ס�
 msgid "There are other songs in this album"
 msgstr "אין שירים נוספים באלבום זה"
 
-#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:73
+#: internet/podcasts/gpoddersearchpage.cpp:76
+#: internet/podcasts/gpoddertoptagsmodel.cpp:104
+#: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "אירעה תקלה בתקשורת עם gpodder.net"
 
-#: internet/magnatunedownloaddialog.cpp:161
+#: internet/magnatune/magnatunedownloaddialog.cpp:163
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "אירעה תקלה בקבלת המידע הנוסף מתוך Magnatune"
 
-#: podcasts/itunessearchpage.cpp:77
+#: internet/podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "אירעה תקלה בניתוח התגובה מ־iTunes "
 
@@ -5082,13 +5126,13 @@ msgstr "אפשרויות אלו בשימוש במסך \"המרת מוזיקה\",
 msgid "Third level"
 msgstr "רמה שלישית"
 
-#: internet/jamendoservice.cpp:176
+#: internet/jamendo/jamendoservice.cpp:181
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr "פעולה זו עשויה ליצור בסיס נתונים שעלול להיות בגודל של 150 מגה-בייט.\nהאם להמשיך בכל זאת?"
 
-#: internet/magnatunedownloaddialog.cpp:188
+#: internet/magnatune/magnatunedownloaddialog.cpp:190
 msgid "This album is not available in the requested format"
 msgstr "אלבום זה לא זמין בפורמט המבוקש"
 
@@ -5129,7 +5173,7 @@ msgstr "זוהי הפעם הראשונה שחיברת את ההתקן הזה. Cl
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr ""
 
-#: internet/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:244
 msgid "This stream is for paid subscribers only"
 msgstr "המדיה הזורמת הזו היא עבור חברות בתשלום בלבד"
 
@@ -5145,7 +5189,7 @@ msgstr "סוג התקן זה לא נתמך: %1"
 msgid "Title"
 msgstr "כותרת"
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/grooveshark/groovesharkservice.cpp:1055
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -5179,11 +5223,11 @@ msgstr "הפעלה או כיבוי נראות ההצגה היפה על המסך"
 msgid "Tomorrow"
 msgstr "מחר"
 
-#: podcasts/podcasturlloader.cpp:117
+#: internet/podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "הפניות רבות מדי"
 
-#: internet/spotifyservice.cpp:392
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Top tracks"
 msgstr "מסלול עליון"
 
@@ -5191,11 +5235,11 @@ msgstr "מסלול עליון"
 msgid "Total albums:"
 msgstr "סך הכל אלבומים:"
 
-#: covers/coversearchstatisticsdialog.cpp:68
+#: covers/coversearchstatisticsdialog.cpp:70
 msgid "Total bytes transferred"
 msgstr "סך הכל בתים שהועברו"
 
-#: covers/coversearchstatisticsdialog.cpp:65
+#: covers/coversearchstatisticsdialog.cpp:67
 msgid "Total network requests made"
 msgstr "סך הכל בקשות שנשלחו"
 
@@ -5205,7 +5249,7 @@ msgstr "סך הכל בקשות שנשלחו"
 msgid "Track"
 msgstr "רצועה"
 
-#: internet/soundcloudservice.cpp:134
+#: internet/soundcloud/soundcloudservice.cpp:133
 msgid "Tracks"
 msgstr ""
 
@@ -5254,11 +5298,12 @@ msgstr "URL(s)"
 msgid "Ultra wide band (UWB)"
 msgstr "Ultra wide band (UWB)"
 
-#: internet/seafilesettingspage.cpp:129 internet/seafilesettingspage.cpp:130
+#: internet/seafile/seafilesettingspage.cpp:131
+#: internet/seafile/seafilesettingspage.cpp:132
 msgid "Unable to connect"
 msgstr ""
 
-#: internet/magnatunedownloaddialog.cpp:147
+#: internet/magnatune/magnatunedownloaddialog.cpp:149
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "לא ניתן להוריד %1 (%2)"
@@ -5271,11 +5316,12 @@ msgstr "לא ניתן להוריד %1 (%2)"
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: podcasts/podcasturlloader.cpp:208
+#: internet/podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "סוג התוכן לא ידוע"
 
-#: internet/digitallyimportedclient.cpp:71 internet/lastfmservice.cpp:257
+#: internet/digitally/digitallyimportedclient.cpp:74
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Unknown error"
 msgstr "שגיאה לא ידועה"
 
@@ -5291,7 +5337,8 @@ msgstr ""
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
+#: internet/podcasts/addpodcastdialog.cpp:68
+#: internet/podcasts/podcastservice.cpp:442
 msgid "Unsubscribe"
 msgstr "הסרת מינוי"
 
@@ -5299,15 +5346,15 @@ msgstr "הסרת מינוי"
 msgid "Upcoming Concerts"
 msgstr "קונצרטים צפויים"
 
-#: internet/vkservice.cpp:330
+#: internet/vk/vkservice.cpp:332
 msgid "Update"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1237
+#: internet/grooveshark/groovesharkservice.cpp:1227
 msgid "Update Grooveshark playlist"
 msgstr "עדכון רשימת ההשמעה ב־Grooveshark"
 
-#: podcasts/podcastservice.cpp:418
+#: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "עדכון כל הפודקאסטים"
 
@@ -5319,7 +5366,7 @@ msgstr "עדכון תיקיות שהשתנו בספרייה"
 msgid "Update the library when Clementine starts"
 msgstr "עדכון הספרייה בזמן הפעלת Clementine"
 
-#: podcasts/podcastservice.cpp:426
+#: internet/podcasts/podcastservice.cpp:427
 msgid "Update this podcast"
 msgstr "עדכון פודקאסט זה"
 
@@ -5417,7 +5464,7 @@ msgstr "שימוש בנורמליזציה של עצמת השמע"
 msgid "Used"
 msgstr "בשימוש"
 
-#: internet/groovesharkservice.cpp:403
+#: internet/grooveshark/groovesharkservice.cpp:407
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "למשתמש %1 אין חשבון Grooveshark Anywhere"
@@ -5500,7 +5547,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vkservice.cpp:858
+#: internet/vk/vkservice.cpp:860
 msgid "Wall"
 msgstr ""
 
@@ -5618,7 +5665,7 @@ msgstr "רשום את כל הסטטיסטיקות עבור השירים לתוך
 msgid "Write metadata"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:80
+#: internet/subsonic/subsonicsettingspage.cpp:101
 msgid "Wrong username or password."
 msgstr "שם משתמש או סיסמא שגויים"
 
@@ -5675,13 +5722,13 @@ msgstr "מחובר"
 msgid "You can change the way the songs in the library are organised."
 msgstr "ניתן לשנות את הדרך שבה השירים מסודרים בספרייה שלך."
 
-#: internet/digitallyimportedsettingspage.cpp:45
+#: internet/digitally/digitallyimportedsettingspage.cpp:48
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "ניתן להאזין בחינם ללא חשבון, אך בעלי חשבון פרימיום יכולים להאזין להזרמות באיכות גבוהה יותר וללא פרסומות."
 
-#: internet/magnatunesettingspage.cpp:54
+#: internet/magnatune/magnatunesettingspage.cpp:58
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5698,15 +5745,15 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "ניתן להשתמש ב־Wii Remote כשלט רחוק ל־Clementine. <a href=\"http://www.clementine-player.org/wiimote\">ניתן לקרוא את העמוד בוויקי של Clementine</a> לקבלת מידע נוסף.\n"
 
-#: internet/groovesharksettingspage.cpp:109
+#: internet/grooveshark/groovesharksettingspage.cpp:113
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "אין לך חשבון Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:146
+#: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "אין לך חשבון פרימיום ב־Spotify."
 
-#: internet/digitallyimportedclient.cpp:93
+#: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "אינך בעל מנוי פעיל"
 
@@ -5717,13 +5764,13 @@ msgid ""
 "stream."
 msgstr ""
 
-#: internet/spotifyservice.cpp:179
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr "נותקת מ־Spotify, נא להכניס מחדש את הססמה בחלון ההגדרות."
 
-#: internet/spotifysettingspage.cpp:157
+#: internet/spotify/spotifysettingspage.cpp:160
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr "נותקת מ־Spotify, נא להכניס מחדש את הססמה."
 
@@ -5753,11 +5800,11 @@ msgstr "יש להפעיל מחדש את Clementine לאחר שינוי השפה.
 msgid "Your IP address:"
 msgstr "כתובת ה-IP שלך:"
 
-#: internet/lastfmsettingspage.cpp:76
+#: internet/lastfm/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
 msgstr "הפרטים שהוקלדו עבור Last.fm אינם נכונים"
 
-#: internet/magnatunesettingspage.cpp:113
+#: internet/magnatune/magnatunesettingspage.cpp:117
 msgid "Your Magnatune credentials were incorrect"
 msgstr "פרטי החיבור שלך ל־Magnatune שגויים."
 
@@ -5765,7 +5812,8 @@ msgstr "פרטי החיבור שלך ל־Magnatune שגויים."
 msgid "Your library is empty!"
 msgstr "הספרייה שלך ריקה!"
 
-#: globalsearch/savedradiosearchprovider.cpp:26 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26
+#: internet/internetradio/savedradio.cpp:53
 msgid "Your radio streams"
 msgstr "רדיו המדיות הזורמות שלך"
 
@@ -5778,8 +5826,8 @@ msgstr "ה־scrobbles שלך: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "למערכת שלך חסרה תמיכה ב־OpenGL, אפקטים חזותיים אינם זמינים."
 
-#: internet/groovesharksettingspage.cpp:114
-#: internet/spotifysettingspage.cpp:152
+#: internet/grooveshark/groovesharksettingspage.cpp:118
+#: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "שם המשתמש או הססמה שגויים"
 
@@ -5860,7 +5908,7 @@ msgstr "שווה ל־"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:35
+#: internet/podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "ספריית gpodder.net "
 
@@ -5876,8 +5924,9 @@ msgstr ""
 msgid "in the last"
 msgstr "באחרון"
 
-#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
-#: internet/spotifysettingspage.cpp:61 playlist/playlistview.cpp:232
+#: internet/spotify/spotifysettingspage.cpp:62
+#: internet/spotify/spotifysettingspage.cpp:63
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
 #: ui/edittagdialog.cpp:478
 msgid "kbps"
 msgstr "קילוסיביות לשניה"

@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-16 02:17+0000\n"
+"PO-Revision-Date: 2014-12-27 18:00+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +72,7 @@ msgstr " detik"
 msgid " songs"
 msgstr " lagu"
 
-#: internet/vkservice.cpp:146
+#: internet/vk/vkservice.cpp:148
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 lagu)"
@@ -92,7 +92,7 @@ msgstr "%1 hari"
 msgid "%1 days ago"
 msgstr "%1 hari yang lalu"
 
-#: podcasts/gpoddersync.cpp:84
+#: internet/podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 pada %2"
@@ -248,7 +248,7 @@ msgstr "&Peralatan"
 msgid "(different across multiple songs)"
 msgstr "(berbeda diantara berbagai lagu)"
 
-#: internet/spotifyservice.cpp:424
+#: internet/spotify/spotifyservice.cpp:449
 msgid ", by "
 msgstr ", oleh"
 
@@ -329,11 +329,11 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Tanda dimulai dengan %, sebagai contoh: %artis %album %judul </p>\n\n<p>Apabila anda mengelilingi bagian dari teks yang mengandung tanda kurung kurawal, maka bagian tersebut akan tersembunyi bila tanda tersebut kosong.</p>"
 
-#: internet/groovesharksettingspage.cpp:119
+#: internet/grooveshark/groovesharksettingspage.cpp:123
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Akun Grooveshark Anywhere diperlukan"
 
-#: internet/spotifysettingspage.cpp:163
+#: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Akun Premium Spotify diperlukan."
 
@@ -428,11 +428,11 @@ msgstr "Aksi"
 msgid "Active/deactive Wiiremote"
 msgstr "Wiiremote aktif/tidak aktif"
 
-#: internet/soundcloudservice.cpp:124
+#: internet/soundcloud/soundcloudservice.cpp:125
 msgid "Activities stream"
 msgstr "Aktivitas stream"
 
-#: podcasts/addpodcastdialog.cpp:62
+#: internet/podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Tambah Podcast"
 
@@ -452,7 +452,7 @@ msgstr "Tambah aksi"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Tambahkan semua track dari sebuah direktori dan termasuk semua subdirektorinya"
 
-#: internet/savedradio.cpp:106
+#: internet/internetradio/savedradio.cpp:112
 msgid "Add another stream..."
 msgstr "Tambah stream lainnya..."
 
@@ -496,7 +496,7 @@ msgstr "Tambah folder baru..."
 msgid "Add podcast"
 msgstr "Tambah podcast"
 
-#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
+#: internet/podcasts/podcastservice.cpp:416 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Tambah podcast..."
 
@@ -564,7 +564,7 @@ msgstr "Tambah nilai jumlah lewat pada lagu"
 msgid "Add song title tag"
 msgstr "Tambah tag judul pada lagu"
 
-#: internet/vkservice.cpp:318
+#: internet/vk/vkservice.cpp:320
 msgid "Add song to cache"
 msgstr "Tambah lagu ke cache"
 
@@ -584,19 +584,19 @@ msgstr "Tambah lagu ke \"Musik Saya\" ketika tombol \"Cinta\" diklik"
 msgid "Add stream..."
 msgstr "Tambah stream..."
 
-#: internet/groovesharkservice.cpp:1120
+#: internet/grooveshark/groovesharkservice.cpp:1126
 msgid "Add to Grooveshark favorites"
 msgstr "Tambah ke favorit Grooveshark"
 
-#: internet/groovesharkservice.cpp:1135
+#: internet/grooveshark/groovesharkservice.cpp:1141
 msgid "Add to Grooveshark playlists"
 msgstr "Tambah ke daftar putar Grooveshark"
 
-#: internet/vkservice.cpp:310
+#: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr "Tambahkan ke MusikKu"
 
-#: internet/spotifyservice.cpp:568
+#: internet/spotify/spotifyservice.cpp:594
 msgid "Add to Spotify playlists"
 msgstr "Tambahkan ke daftar putar Spotify"
 
@@ -604,7 +604,7 @@ msgstr "Tambahkan ke daftar putar Spotify"
 msgid "Add to another playlist"
 msgstr "Tambah ke daftar putar lainnya"
 
-#: internet/vkservice.cpp:296
+#: internet/vk/vkservice.cpp:298
 msgid "Add to bookmarks"
 msgstr "Tambah ke penanda"
 
@@ -616,7 +616,7 @@ msgstr "Tambah ke daftar putar"
 msgid "Add to the queue"
 msgstr "Tambah ke antrian"
 
-#: internet/vkservice.cpp:326
+#: internet/vk/vkservice.cpp:328
 msgid "Add user/group to bookmarks"
 msgstr "Tambah pengguna/kelompok ke penanda"
 
@@ -649,11 +649,11 @@ msgstr "Ditambah hari ini"
 msgid "Added within three months"
 msgstr "Ditambah pada tiga bulan terakhir"
 
-#: internet/groovesharkservice.cpp:1434
+#: internet/grooveshark/groovesharkservice.cpp:1424
 msgid "Adding song to My Music"
 msgstr "Menambah lagu ke Musik Saya"
 
-#: internet/groovesharkservice.cpp:1411
+#: internet/grooveshark/groovesharkservice.cpp:1401
 msgid "Adding song to favorites"
 msgstr "Menambah lagu ke favorit"
 
@@ -692,11 +692,11 @@ msgstr "Album penyanyi"
 msgid "Album cover"
 msgstr "Sampul album"
 
-#: internet/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:427
 msgid "Album info on jamendo.com..."
 msgstr "Info album di jamendo.com..."
 
-#: internet/vkservice.cpp:825
+#: internet/vk/vkservice.cpp:827
 msgid "Albums"
 msgstr "Album"
 
@@ -775,7 +775,7 @@ msgstr "Selalu tunjukkan jendela utama"
 msgid "Always start playing"
 msgstr "Selalu mulai memutar"
 
-#: internet/spotifyblobdownloader.cpp:65
+#: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -790,7 +790,7 @@ msgstr "Kesalahan terjadi saat memuat database iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Kesalahan terjadi saat menulis metadata ke '%1'"
 
-#: internet/subsonicsettingspage.cpp:102
+#: internet/subsonic/subsonicsettingspage.cpp:123
 msgid "An unspecified error occurred."
 msgstr "Telah terjadi kesalahan tak spesifik"
 
@@ -813,7 +813,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Lampirkan berkas/URL ke daftar putar"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:452
-#: internet/internetservice.cpp:53 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Lampirkan ke daftar putar saat ini"
@@ -831,7 +831,7 @@ msgstr "Terapkan kompresi untuk mencegah clipping"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Anda yakin untuk menghapus preset \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1333
+#: internet/grooveshark/groovesharkservice.cpp:1323
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Apakah anda yakin ingin menghapus daftar putar ini?"
 
@@ -879,9 +879,10 @@ msgstr "Format audio"
 msgid "Audio output"
 msgstr "Output suara"
 
-#: internet/digitallyimportedsettingspage.cpp:80
-#: internet/magnatunesettingspage.cpp:112 internet/lastfmservice.cpp:222
-#: internet/lastfmsettingspage.cpp:80
+#: internet/digitally/digitallyimportedsettingspage.cpp:83
+#: internet/magnatune/magnatunesettingspage.cpp:116
+#: internet/lastfm/lastfmservice.cpp:228
+#: internet/lastfm/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
 msgstr "Otentifikasi gagal"
 
@@ -918,11 +919,11 @@ msgstr "Tersedia"
 msgid "Average bitrate"
 msgstr "Bitrate rata-rata"
 
-#: covers/coversearchstatisticsdialog.cpp:67
+#: covers/coversearchstatisticsdialog.cpp:69
 msgid "Average image size"
 msgstr "Ukuran rata-rata gambar"
 
-#: podcasts/addpodcastdialog.cpp:87
+#: internet/podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "Podcast BBC"
 
@@ -1064,20 +1065,20 @@ msgstr "Lokasi cache:"
 msgid "Caching"
 msgstr "Men-cache"
 
-#: internet/vkmusiccache.cpp:119
+#: internet/vk/vkmusiccache.cpp:120
 #, qt-format
 msgid "Caching %1"
 msgstr "Men-cache %1"
 
-#: internet/spotifyblobdownloader.cpp:50
+#: internet/spotify/spotifyblobdownloader.cpp:52
 msgid "Cancel"
 msgstr "Batal"
 
-#: podcasts/podcastservice.cpp:438
+#: internet/podcasts/podcastservice.cpp:439
 msgid "Cancel download"
 msgstr ""
 
-#: internet/vkservice.cpp:624
+#: internet/vk/vkservice.cpp:626
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1117,7 +1118,7 @@ msgstr "Mengubah pemutaran mono akan berlaku saat memutar lagu selanjutnya"
 msgid "Check for new episodes"
 msgstr "Perbarui episode baru"
 
-#: internet/googledriveservice.cpp:202
+#: internet/googledrive/googledriveservice.cpp:220
 msgid "Check for updates"
 msgstr "Cek pembaruan"
 
@@ -1125,7 +1126,7 @@ msgstr "Cek pembaruan"
 msgid "Check for updates..."
 msgstr "Cek pembaruan..."
 
-#: internet/vksettingspage.cpp:97
+#: internet/vk/vksettingspage.cpp:98
 msgid "Choose Vk.com cache directory"
 msgstr "Pilih direktori cache Vk.com"
 
@@ -1153,7 +1154,7 @@ msgstr "Pilih dari daftar"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Pilih bagaiman daftar putar diurutkan dan berapa banyak lagu di dalamnya."
 
-#: podcasts/podcastsettingspage.cpp:140
+#: internet/podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Pilih direktori unduhan podcast"
 
@@ -1289,7 +1290,7 @@ msgstr "Tutup daftar putar"
 msgid "Close visualization"
 msgstr "Tutup visualisasi"
 
-#: internet/magnatunedownloaddialog.cpp:304
+#: internet/magnatune/magnatunedownloaddialog.cpp:306
 msgid "Closing this window will cancel the download."
 msgstr "Menutup jendela ini akan membatalkan semua download."
 
@@ -1314,7 +1315,7 @@ msgstr "Daftar koma terpisah dari kelas: tingkat, tingkat ini adalah 0-3"
 msgid "Comment"
 msgstr "Komentar"
 
-#: internet/vkservice.cpp:152
+#: internet/vk/vkservice.cpp:154
 msgid "Community Radio"
 msgstr "Komunitas Radio"
 
@@ -1332,16 +1333,16 @@ msgstr "Isi tag secara otomatis..."
 msgid "Composer"
 msgstr "Pengarang"
 
-#: internet/searchboxwidget.cpp:41
+#: internet/core/searchboxwidget.cpp:45
 #, qt-format
 msgid "Configure %1..."
 msgstr "Konfigurasi %1..."
 
-#: internet/groovesharkservice.cpp:560
+#: internet/grooveshark/groovesharkservice.cpp:565
 msgid "Configure Grooveshark..."
 msgstr "Konfigurasi Grooveshark..."
 
-#: internet/magnatuneservice.cpp:282
+#: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "Konfigurasi Magnature"
 
@@ -1349,15 +1350,15 @@ msgstr "Konfigurasi Magnature"
 msgid "Configure Shortcuts"
 msgstr "Konfigurasi Jalan Pintas"
 
-#: internet/spotifyservice.cpp:820
+#: internet/spotify/spotifyservice.cpp:876
 msgid "Configure Spotify..."
 msgstr "Konfigurasi Spotify"
 
-#: internet/subsonicservice.cpp:90
+#: internet/subsonic/subsonicservice.cpp:112
 msgid "Configure Subsonic..."
 msgstr "Konfigurasi Subsonic..."
 
-#: internet/vkservice.cpp:335
+#: internet/vk/vkservice.cpp:337
 msgid "Configure Vk.com..."
 msgstr "Konfigurasi Vk.com..."
 
@@ -1369,14 +1370,15 @@ msgstr "Konfigurasi pencarian global..."
 msgid "Configure library..."
 msgstr "Konfigurasi Pustaka"
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
+#: internet/podcasts/addpodcastdialog.cpp:74
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Configure podcasts..."
 msgstr "Konfigurasi podcast..."
 
-#: internet/cloudfileservice.cpp:85
-#: internet/digitallyimportedservicebase.cpp:179
+#: internet/core/cloudfileservice.cpp:105
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:210
+#: internet/googledrive/googledriveservice.cpp:228
 msgid "Configure..."
 msgstr "Konfigurasi..."
 
@@ -1388,22 +1390,22 @@ msgstr "Sambungkan Remote Wii menggunakan aksi aktif/non-aktif"
 msgid "Connect device"
 msgstr "Hubungkan perangkat"
 
-#: internet/spotifyservice.cpp:270
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "Menghubungkan ke Spotify"
 
-#: internet/subsonicsettingspage.cpp:107
+#: internet/subsonic/subsonicsettingspage.cpp:128
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "Koneksi ditolak oleh server, periksa URL server. Contoh: http://localhost:4040/"
 
-#: internet/subsonicsettingspage.cpp:119
+#: internet/subsonic/subsonicsettingspage.cpp:140
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Koneksi melewati batas waktu, periksa URL server. Contoh: http://localhost:4040/"
 
-#: internet/vkservice.cpp:1093
+#: internet/vk/vkservice.cpp:1095
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Koneksi bermasalah atau audio dinonaktifkan oleh pemiliknya"
 
@@ -1431,15 +1433,15 @@ msgstr "Konversi berkas audio lossless sebelum mengirim mereka ke remote."
 msgid "Convert lossless files"
 msgstr "Konversi berkas lossless"
 
-#: internet/vkservice.cpp:322
+#: internet/vk/vkservice.cpp:324
 msgid "Copy share url to clipboard"
 msgstr "Salin bagi url ke papan klip"
 
-#: internet/groovesharkservice.cpp:1209
+#: internet/core/internetservice.cpp:57
 msgid "Copy to clipboard"
 msgstr "Salin ke papan klip"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Salin ke perangkat..."
@@ -1453,7 +1455,7 @@ msgstr "Salin ke Pustaka ..."
 msgid "Copyright"
 msgstr "Hak cipta"
 
-#: internet/subsonicsettingspage.cpp:75
+#: internet/subsonic/subsonicsettingspage.cpp:96
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1484,14 +1486,15 @@ msgid ""
 "plugins installed"
 msgstr "Tidak dapat menemukan enkoder untuk %1, periksa apakah Anda memiliki plugin GStreamer yang terpasang dengan benar"
 
-#: internet/magnatunedownloaddialog.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:220
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Tidak dapat membuka berkas keluaran %1"
 
-#: internet/cloudfileservice.cpp:82 ../bin/src/ui_albumcovermanager.h:215
+#: internet/core/cloudfileservice.cpp:102
+#: ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:677
-#: internet/googledriveservice.cpp:208
+#: internet/googledrive/googledriveservice.cpp:226
 msgid "Cover Manager"
 msgstr "Sampul Manajer"
 
@@ -1517,12 +1520,13 @@ msgstr "Sampul tidak diatur"
 msgid "Cover art set from %1"
 msgstr "Sampul diatur dari %1"
 
-#: covers/coversearchstatisticsdialog.cpp:57 ui/albumcoversearcher.cpp:100
+#: covers/coversearchstatisticsdialog.cpp:59 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
 msgstr "Sampul mulai dari %1"
 
-#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1285
+#: internet/grooveshark/groovesharkservice.cpp:533
+#: internet/grooveshark/groovesharkservice.cpp:1275
 msgid "Create a new Grooveshark playlist"
 msgstr "Buat sebuah daftar putar Grooveshark baru"
 
@@ -1687,11 +1691,12 @@ msgstr "Penundaan antar visualisasi"
 msgid "Delete"
 msgstr "Hapus"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1332
+#: internet/grooveshark/groovesharkservice.cpp:536
+#: internet/grooveshark/groovesharkservice.cpp:1322
 msgid "Delete Grooveshark playlist"
 msgstr "Hapus daftar putar Grooveshark"
 
-#: podcasts/podcastservice.cpp:432
+#: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
 msgstr "Hapus data yang sudah diunduh"
 
@@ -1824,8 +1829,9 @@ msgstr "Piringan"
 msgid "Discontinuous transmission"
 msgstr "Transmisi terputus-putus"
 
-#: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:104 ../bin/src/ui_librarysettingspage.h:207
+#: internet/icecast/icecastfilterwidget.cpp:36
+#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:104
+#: ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Opsi tampilan"
 
@@ -1837,11 +1843,12 @@ msgstr "Tampilkan pada layar-tampilan"
 msgid "Do a full library rescan"
 msgstr "Lakukan pindai ulang pustaka keseluruhan"
 
-#: internet/googledriveservice.cpp:250 internet/googledriveservice.cpp:257
+#: internet/googledrive/googledriveservice.cpp:267
+#: internet/googledrive/googledriveservice.cpp:273
 msgid "Do a full rescan"
 msgstr "Lakukan pemindaian ulang secara keseluruhan"
 
-#: internet/googledriveservice.cpp:205
+#: internet/googledrive/googledriveservice.cpp:223
 msgid "Do a full rescan..."
 msgstr "Lakukan pemindaian ulang secara keseluruhan..."
 
@@ -1853,7 +1860,7 @@ msgstr "Jangan ubah jenis musik apa pun"
 msgid "Do not overwrite"
 msgstr "Jangan timpa"
 
-#: internet/googledriveservice.cpp:251
+#: internet/googledrive/googledriveservice.cpp:268
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
@@ -1876,11 +1883,12 @@ msgstr ""
 msgid "Don't shuffle"
 msgstr "Jangan kocok"
 
-#: internet/magnatunedownloaddialog.cpp:306 ui/albumcovermanager.cpp:221
+#: internet/magnatune/magnatunedownloaddialog.cpp:308
+#: ui/albumcovermanager.cpp:221
 msgid "Don't stop!"
 msgstr "Jangan berhenti"
 
-#: internet/somafmservice.cpp:101
+#: internet/somafm/somafmservice.cpp:106
 msgid "Donate"
 msgstr "Donasi"
 
@@ -1892,13 +1900,13 @@ msgstr "Kilk ganda untuk buka"
 msgid "Double clicking a song will..."
 msgstr "Klik ganda lagu akan ..."
 
-#: podcasts/podcastservice.cpp:528
+#: internet/podcasts/podcastservice.cpp:529
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
 msgstr "Memuat %n episode"
 
-#: internet/magnatunedownloaddialog.cpp:266
+#: internet/magnatune/magnatunedownloaddialog.cpp:268
 msgid "Download directory"
 msgstr "Unduh direktori"
 
@@ -1914,7 +1922,8 @@ msgstr "Unduh keanggotaan"
 msgid "Download new episodes automatically"
 msgstr "Unduh episode baru secara otomatis"
 
-#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
+#: internet/podcasts/podcastservice.cpp:292
+#: internet/podcasts/podcastservice.cpp:331
 msgid "Download queued"
 msgstr "Antrian unduh"
 
@@ -1926,15 +1935,15 @@ msgstr "Pengaturan unduhan"
 msgid "Download the Android app"
 msgstr "Unduh apl Android"
 
-#: internet/magnatuneservice.cpp:272
+#: internet/magnatune/magnatuneservice.cpp:280
 msgid "Download this album"
 msgstr "Unduh album ini"
 
-#: internet/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:430
 msgid "Download this album..."
 msgstr "Unduh album ini..."
 
-#: podcasts/podcastservice.cpp:530
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Download this episode"
 msgstr "Unduh episode ini"
 
@@ -1942,24 +1951,25 @@ msgstr "Unduh episode ini"
 msgid "Download..."
 msgstr "Unduh..."
 
-#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
+#: internet/podcasts/podcastservice.cpp:300
+#: internet/podcasts/podcastservice.cpp:340
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Mengunduh (%1%)..."
 
-#: internet/icecastservice.cpp:101
+#: internet/icecast/icecastservice.cpp:106
 msgid "Downloading Icecast directory"
 msgstr "Menunduh direktori Icecast"
 
-#: internet/jamendoservice.cpp:195
+#: internet/jamendo/jamendoservice.cpp:200
 msgid "Downloading Jamendo catalogue"
 msgstr "Mengunduh katalok Jamendo"
 
-#: internet/magnatuneservice.cpp:152
+#: internet/magnatune/magnatuneservice.cpp:160
 msgid "Downloading Magnatune catalogue"
 msgstr "Mengunduh katalog Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:49
+#: internet/spotify/spotifyblobdownloader.cpp:51
 msgid "Downloading Spotify plugin"
 msgstr "Mengunduh plugin Spotify"
 
@@ -1987,7 +1997,7 @@ msgstr "Durasi"
 msgid "Dynamic mode is on"
 msgstr "Mode dinamis nyala"
 
-#: internet/jamendoservice.cpp:121 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Campuran acak dinamis"
 
@@ -2021,7 +2031,7 @@ msgstr "Sunting informasi track..."
 msgid "Edit tracks information..."
 msgstr "Sunting informasi track..."
 
-#: internet/savedradio.cpp:103
+#: internet/internetradio/savedradio.cpp:109
 msgid "Edit..."
 msgstr "Sunting..."
 
@@ -2133,10 +2143,10 @@ msgstr "Setara dengan --log-level *: 1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Setara dengan --log-level *: 3"
 
-#: internet/groovesharkservice.cpp:1048
-#: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141 ui/mainwindow.cpp:2289
-#: internet/vkservice.cpp:623
+#: internet/grooveshark/groovesharkservice.cpp:1054
+#: internet/magnatune/magnatunedownloaddialog.cpp:242
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
+#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "Kesalahan"
 
@@ -2156,7 +2166,7 @@ msgstr "Kesalahan saat menyalin lagu"
 msgid "Error deleting songs"
 msgstr "Kesalahan saat menghapus lagu"
 
-#: internet/spotifyblobdownloader.cpp:220
+#: internet/spotify/spotifyblobdownloader.cpp:222
 msgid "Error downloading Spotify plugin"
 msgstr "Kesalahan pengunduhan plugin Spotify"
 
@@ -2165,8 +2175,8 @@ msgstr "Kesalahan pengunduhan plugin Spotify"
 msgid "Error loading %1"
 msgstr "Kesalahan pemuatan %1"
 
-#: internet/digitallyimportedservicebase.cpp:197
-#: internet/digitallyimportedurlhandler.cpp:85
+#: internet/digitally/digitallyimportedservicebase.cpp:200
+#: internet/digitally/digitallyimportedurlhandler.cpp:89
 msgid "Error loading di.fm playlist"
 msgstr "Kesalahan pemuatan daftar putar di.fm"
 
@@ -2304,21 +2314,24 @@ msgstr "Durasi memudar"
 msgid "Failed reading CD drive"
 msgstr "Gagal membaca CD drive"
 
-#: podcasts/gpoddertoptagspage.cpp:72
+#: internet/podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "Gagal mengambil direktori"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
-#: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
-#: podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/gpoddersearchpage.cpp:75
+#: internet/podcasts/gpoddertoptagsmodel.cpp:103
+#: internet/podcasts/itunessearchpage.cpp:65
+#: internet/podcasts/itunessearchpage.cpp:76
+#: internet/podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "Gagal mengambil podcast"
 
-#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
+#: internet/podcasts/addpodcastbyurl.cpp:69
+#: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Gagal memuat podcast"
 
-#: podcasts/podcasturlloader.cpp:175
+#: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "Gagal mengurai XML untuk penyuap RSS ini"
 
@@ -2327,7 +2340,7 @@ msgstr "Gagal mengurai XML untuk penyuap RSS ini"
 msgid "Fast"
 msgstr "Cepat"
 
-#: internet/groovesharkservice.cpp:639
+#: internet/grooveshark/groovesharkservice.cpp:644
 msgid "Favorites"
 msgstr "Favorit"
 
@@ -2347,7 +2360,7 @@ msgstr "Pengambilkan secara otomatis"
 msgid "Fetch completed"
 msgstr "Pengambilan telah selesai"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonic/subsonicservice.cpp:250
 msgid "Fetching Subsonic library"
 msgstr "Ambil pustaka Subsonic"
 
@@ -2409,7 +2422,7 @@ msgstr "Transcode berkas"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Cari lagu di perpustakaan Anda yang sesuai dengan kriteria yang Anda tentukan."
 
-#: internet/vkservice.cpp:306
+#: internet/vk/vkservice.cpp:308
 msgid "Find this artist"
 msgstr "Cari artis ini"
 
@@ -2524,23 +2537,33 @@ msgstr "Pengaturan umum"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/groovesharkservice.cpp:550
+#: internet/grooveshark/groovesharkservice.cpp:555
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Dapatkan URL untuk bagikan daftar putar Grooveshark ini"
 
-#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1148
+#: internet/grooveshark/groovesharkservice.cpp:552
+#: internet/grooveshark/groovesharkservice.cpp:1154
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Dapatkan URL untuk bagikan lagu Grooveshark ini"
 
-#: internet/groovesharkservice.cpp:823
+#: internet/spotify/spotifyservice.cpp:610
+#: internet/spotify/spotifyservice.cpp:651
+msgid "Get a URL to share this Spotify song"
+msgstr ""
+
+#: internet/spotify/spotifyservice.cpp:642
+msgid "Get a URL to share this playlist"
+msgstr ""
+
+#: internet/grooveshark/groovesharkservice.cpp:829
 msgid "Getting Grooveshark popular songs"
 msgstr "Mendapatkan lagu populer Grooveshark"
 
-#: internet/somafmservice.cpp:115
+#: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
 msgstr "Mendapatkan saluran"
 
-#: internet/digitallyimportedservicebase.cpp:102
+#: internet/digitally/digitallyimportedservicebase.cpp:105
 msgid "Getting streams"
 msgstr "Mendapatkan stream"
 
@@ -2564,7 +2587,7 @@ msgstr "Buka tab daftar putar sebelumnya"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:51 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2578,19 +2601,19 @@ msgstr "Pengabuan lagu yang sudah tidak ada dalam daftar putar saya"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:408
+#: internet/grooveshark/groovesharkservice.cpp:412
 msgid "Grooveshark login error"
 msgstr "Kesalahan saat login Grooveshark"
 
-#: internet/groovesharkservice.cpp:1199
+#: internet/grooveshark/groovesharkservice.cpp:1205
 msgid "Grooveshark playlist's URL"
 msgstr "URL daftar putar Grooveshark"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/grooveshark/groovesharkservice.cpp:624
 msgid "Grooveshark radio"
 msgstr "Radio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1177
+#: internet/grooveshark/groovesharkservice.cpp:1183
 msgid "Grooveshark song's URL"
 msgstr "URL lagu Grooveshark"
 
@@ -2631,11 +2654,11 @@ msgstr "Kelompokkan menurut Genre/Artis/Album"
 msgid "Grouping"
 msgstr "Pengelompokan"
 
-#: podcasts/podcasturlloader.cpp:206
+#: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "Halaman HTML tidak memiliki penyuap RSS apa pun"
 
-#: internet/subsonicsettingspage.cpp:141
+#: internet/subsonic/subsonicsettingspage.cpp:162
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr "HTTP 3xx status kode diterima tanpa URL, verifikasi konfigurasi server."
@@ -2670,7 +2693,7 @@ msgstr "Tinggi (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Tinggi (1024x1024)"
 
-#: internet/subsonicsettingspage.cpp:113
+#: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Tidk bisa menemukan host, periksa kembali URL server. Contoh: http://localhost:4040/"
 
@@ -2746,7 +2769,7 @@ msgid ""
 "time a song finishes."
 msgstr "Dalam mode dinamis track baru akan dipilih dan ditambahkan ke daftar putar setiap lagu selesai."
 
-#: internet/spotifyservice.cpp:386
+#: internet/spotify/spotifyservice.cpp:411
 msgid "Inbox"
 msgstr "Kotak masuk"
 
@@ -2758,15 +2781,15 @@ msgstr "Sertakan sampul album dalam pemberitahuan"
 msgid "Include all songs"
 msgstr "Libatkan semua lagu"
 
-#: internet/subsonicsettingspage.cpp:85
+#: internet/subsonic/subsonicsettingspage.cpp:106
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Versi protokol Subsonic REST tak kompatibel. Klien harus diperbarui."
 
-#: internet/subsonicsettingspage.cpp:90
+#: internet/subsonic/subsonicsettingspage.cpp:111
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Versi protokol Subsonic REST tak kompatibel. Server harus diperbarui."
 
-#: internet/subsonicsettingspage.cpp:131
+#: internet/subsonic/subsonicsettingspage.cpp:152
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Konfigurasi lengkap, harap dipastikan semua bidang akan diisi."
 
@@ -2782,7 +2805,7 @@ msgstr "Naikkan volume <value> persen"
 msgid "Increase volume"
 msgstr "Naikkan volume"
 
-#: internet/cloudfileservice.cpp:133
+#: internet/core/cloudfileservice.cpp:152
 #, qt-format
 msgid "Indexing %1"
 msgstr "Mengindeks %1"
@@ -2799,7 +2822,7 @@ msgstr "Opsi masukan"
 msgid "Insert..."
 msgstr "sisipkan"
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Installed"
 msgstr "Terpasang"
 
@@ -2820,35 +2843,35 @@ msgctxt "Global search settings dialog title."
 msgid "Internet services"
 msgstr "Layanan internet"
 
-#: internet/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
 msgstr "Kunci API tidak sah"
 
-#: internet/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:230
 msgid "Invalid format"
 msgstr "Format tidak sah"
 
-#: internet/lastfmservice.cpp:220
+#: internet/lastfm/lastfmservice.cpp:226
 msgid "Invalid method"
 msgstr "Metode tidak sah"
 
-#: internet/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:232
 msgid "Invalid parameters"
 msgstr "Parameter tidak sah"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfm/lastfmservice.cpp:234
 msgid "Invalid resource specified"
 msgstr "Sumber daya khusus tidak sah"
 
-#: internet/lastfmservice.cpp:218
+#: internet/lastfm/lastfmservice.cpp:224
 msgid "Invalid service"
 msgstr "Layanan tidak sah"
 
-#: internet/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "Sesi kunci tidak sah"
 
-#: internet/groovesharkservice.cpp:400
+#: internet/grooveshark/groovesharkservice.cpp:404
 msgid "Invalid username and/or password"
 msgstr "Nama pengguna dan/atau kata sandi tidak sah"
 
@@ -2856,27 +2879,27 @@ msgstr "Nama pengguna dan/atau kata sandi tidak sah"
 msgid "Invert Selection"
 msgstr "Masukkan Pilihan"
 
-#: internet/jamendoservice.cpp:133
+#: internet/jamendo/jamendoservice.cpp:138
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:117
+#: internet/jamendo/jamendoservice.cpp:123
 msgid "Jamendo Most Listened Tracks"
 msgstr "Track Jamendo yang Paling Sering Didengar"
 
-#: internet/jamendoservice.cpp:114
+#: internet/jamendo/jamendoservice.cpp:120
 msgid "Jamendo Top Tracks"
 msgstr "Track Jamendo Terpopuler"
 
-#: internet/jamendoservice.cpp:108
+#: internet/jamendo/jamendoservice.cpp:114
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Track Jamendo Terpopuler Bulanan"
 
-#: internet/jamendoservice.cpp:111
+#: internet/jamendo/jamendoservice.cpp:117
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Track Jamendo Terpopuler Mingguan"
 
-#: internet/jamendoservice.cpp:175
+#: internet/jamendo/jamendoservice.cpp:180
 msgid "Jamendo database"
 msgstr "database Jamendo"
 
@@ -2946,7 +2969,7 @@ msgstr "Terakhir diputar"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:241
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm sekarang sedang sibuk, cobalah beberapa saat kemudian"
 
@@ -3004,7 +3027,7 @@ msgstr "Pencarian pustaka"
 msgid "Limits"
 msgstr "Batas"
 
-#: internet/groovesharkservice.cpp:621
+#: internet/grooveshark/groovesharkservice.cpp:626
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Mendengarkan lagu di Grooveshark berdasarkan jenis lagu yang Anda dengar sebelumnya"
@@ -3057,8 +3080,8 @@ msgstr "Memuat daftar putar pintar"
 msgid "Loading songs"
 msgstr "Pemuatan lagu-lagu"
 
-#: internet/digitallyimportedurlhandler.cpp:63
-#: internet/somafmurlhandler.cpp:49
+#: internet/digitally/digitallyimportedurlhandler.cpp:67
+#: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "Memuat stream"
 
@@ -3070,11 +3093,11 @@ msgstr "Memuat track"
 msgid "Loading tracks info"
 msgstr "Memuat info track"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
-#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
-#: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
-#: internet/vksettingspage.cpp:121
+#: library/librarymodel.cpp:152
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
+#: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
+#: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
+#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "Pemuatan..."
 
@@ -3092,16 +3115,16 @@ msgstr "Pemuatan berkas/URL, menggantikan daftar putar saat ini"
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
-#: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
+#: ../bin/src/ui_boxsettingspage.h:105 internet/vk/vksettingspage.cpp:111
 #: ../bin/src/ui_vksettingspage.h:219 ../bin/src/ui_seafilesettingspage.h:173
 msgid "Login"
 msgstr "Masuk"
 
-#: podcasts/podcastsettingspage.cpp:127
+#: internet/podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "Gagal masuk"
 
-#: internet/vksettingspage.cpp:120
+#: internet/vk/vksettingspage.cpp:121
 msgid "Logout"
 msgstr "Keluar"
 
@@ -3161,7 +3184,8 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:101 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatune/magnatuneservice.cpp:109
+#: ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -3186,11 +3210,11 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Buatlah begitu!"
 
-#: internet/spotifyservice.cpp:608
+#: internet/spotify/spotifyservice.cpp:639
 msgid "Make playlist available offline"
 msgstr "Buat daftar putar tersedia offline"
 
-#: internet/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Malformed response"
 msgstr "Tanggapan cacat"
 
@@ -3207,11 +3231,11 @@ msgstr "Secara manual"
 msgid "Manufacturer"
 msgstr "Produsen"
 
-#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
+#: internet/podcasts/podcastservice.cpp:448 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Tandai sebagai sudah mendengar"
 
-#: podcasts/podcastservice.cpp:446
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Mark as new"
 msgstr "Tandai sebagai baru"
 
@@ -3290,7 +3314,7 @@ msgstr "Gaya moodbar"
 msgid "Moodbars"
 msgstr "Moodbars"
 
-#: internet/vkservice.cpp:501
+#: internet/vk/vkservice.cpp:503
 msgid "More"
 msgstr "Tambah lagi"
 
@@ -3321,7 +3345,7 @@ msgid "Move up"
 msgstr "Pindah ke atas"
 
 #: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
-#: internet/vkservice.cpp:882
+#: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Musik"
 
@@ -3334,21 +3358,22 @@ msgstr "Pustaka Musik"
 msgid "Mute"
 msgstr "Bisu"
 
-#: internet/vkservice.cpp:818
+#: internet/vk/vkservice.cpp:820
 msgid "My Albums"
 msgstr "Album Saya"
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
+#: internet/grooveshark/groovesharkservice.cpp:633
+#: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Musik Ku"
 
-#: internet/vkservice.cpp:508
+#: internet/vk/vkservice.cpp:510
 msgid "My Recommendations"
 msgstr "Rekomendasi Saya"
 
-#: internet/groovesharkservice.cpp:1286 internet/groovesharkservice.cpp:1381
-#: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
-#: ../bin/src/ui_wizardfinishpage.h:84
+#: internet/grooveshark/groovesharkservice.cpp:1276
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Nama"
 
@@ -3475,23 +3500,23 @@ msgstr "Tidak tersedia saat menggunakan daftar putar dinamis"
 msgid "Not connected"
 msgstr "Tidak terhubung"
 
-#: internet/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:250
 msgid "Not enough content"
 msgstr "Konten tidak cukup"
 
-#: internet/lastfmservice.cpp:248
+#: internet/lastfm/lastfmservice.cpp:254
 msgid "Not enough fans"
 msgstr "Penggemar tidak cukup"
 
-#: internet/lastfmservice.cpp:246
+#: internet/lastfm/lastfmservice.cpp:252
 msgid "Not enough members"
 msgstr "Anggota tidak cukup"
 
-#: internet/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:256
 msgid "Not enough neighbors"
 msgstr "Tetangga tidak cukup"
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Not installed"
 msgstr "Tidak terpasang"
 
@@ -3504,7 +3529,7 @@ msgstr "Belum masuk"
 msgid "Not mounted - double click to mount"
 msgstr "Tidak terpasang - klik dua kali untuk memasang"
 
-#: internet/vksearchdialog.cpp:94
+#: internet/vk/vksearchdialog.cpp:93
 msgid "Nothing found"
 msgstr "Tidak menemukan apapun"
 
@@ -3578,10 +3603,13 @@ msgstr "Hanya tunjukkan yang pertama"
 msgid "Opacity"
 msgstr "Opasitas"
 
-#: internet/digitallyimportedservicebase.cpp:173
-#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
-#: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
+#: internet/digitally/digitallyimportedservicebase.cpp:176
+#: internet/grooveshark/groovesharkservice.cpp:559
+#: internet/icecast/icecastservice.cpp:302
+#: internet/jamendo/jamendoservice.cpp:434
+#: internet/magnatune/magnatuneservice.cpp:284
+#: internet/somafm/somafmservice.cpp:102
+#: internet/soundcloud/soundcloudservice.cpp:351
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Buka %1 di browser"
@@ -3590,11 +3618,11 @@ msgstr "Buka %1 di browser"
 msgid "Open &audio CD..."
 msgstr "Buka &audio CD..."
 
-#: podcasts/addpodcastdialog.cpp:238
+#: internet/podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Buka berkas OPML"
 
-#: podcasts/addpodcastdialog.cpp:80
+#: internet/podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Buka berkas OPML..."
 
@@ -3610,12 +3638,12 @@ msgstr "Buka perangkat"
 msgid "Open file..."
 msgstr "Buka berkas..."
 
-#: internet/googledriveservice.cpp:198
+#: internet/googledrive/googledriveservice.cpp:216
 msgid "Open in Google Drive"
 msgstr "Buka di Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:460
-#: internet/internetservice.cpp:75 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Buka daftar putar baru"
@@ -3625,7 +3653,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Buka dalam daftar putar baru"
 
-#: songinfo/echonestbiographies.cpp:97
+#: songinfo/echonestbiographies.cpp:101
 msgid "Open in your browser"
 msgstr "Buka di penjelajah Anda"
 
@@ -3634,7 +3662,7 @@ msgstr "Buka di penjelajah Anda"
 msgid "Open..."
 msgstr "Buka..."
 
-#: internet/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:236
 msgid "Operation failed"
 msgstr "Proses gagal"
 
@@ -3703,7 +3731,7 @@ msgstr "Hanya tulis ulang yang lebih kecil"
 msgid "Owner"
 msgstr "Pemilik"
 
-#: internet/jamendoservice.cpp:222
+#: internet/jamendo/jamendoservice.cpp:228
 msgid "Parsing Jamendo catalogue"
 msgstr "Menguraikan katalog Jamendo"
 
@@ -3802,8 +3830,8 @@ msgstr "Opsi daftar putar"
 msgid "Playlist type"
 msgstr "Tipe daftar putar"
 
-#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:241
+#: internet/grooveshark/groovesharkservice.cpp:654
+#: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Daftar putar"
 
@@ -3815,7 +3843,8 @@ msgstr "Silakan tutup browser Anda dan kembali ke Clementine."
 msgid "Plugin status:"
 msgstr "Status plugin:"
 
-#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
+#: internet/podcasts/podcastservice.cpp:131
+#: ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podcast"
 
@@ -3823,15 +3852,15 @@ msgstr "Podcast"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/grooveshark/groovesharkservice.cpp:591
 msgid "Popular songs"
 msgstr "Lagu populer"
 
-#: internet/groovesharkservice.cpp:590
+#: internet/grooveshark/groovesharkservice.cpp:595
 msgid "Popular songs of the Month"
 msgstr "Lagu populer bulan ini"
 
-#: internet/groovesharkservice.cpp:599
+#: internet/grooveshark/groovesharkservice.cpp:604
 msgid "Popular songs today"
 msgstr "Lagu populer bulan ini"
 
@@ -3984,7 +4013,7 @@ msgstr "Antri track"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (samakan kenyaringan untuk semua track)"
 
-#: internet/groovesharkservice.cpp:608
+#: internet/grooveshark/groovesharkservice.cpp:613
 msgid "Radios"
 msgstr "Radio-radio"
 
@@ -4029,32 +4058,34 @@ msgstr "Nilai lagu saat ini 5 bintang"
 msgid "Rating"
 msgstr "Penilaian"
 
-#: internet/magnatunedownloaddialog.cpp:303 ui/albumcovermanager.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:305
+#: ui/albumcovermanager.cpp:218
 msgid "Really cancel?"
 msgstr "Benar-benar membatalkan?"
 
-#: internet/subsonicsettingspage.cpp:136
+#: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Redirect melampaui batas, memverifikasi konfigurasi server."
 
-#: internet/groovesharkservice.cpp:556
+#: internet/grooveshark/groovesharkservice.cpp:561
 msgid "Refresh"
 msgstr "Segarkan"
 
-#: internet/jamendoservice.cpp:431 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:87
+#: internet/jamendo/jamendoservice.cpp:437
+#: internet/magnatune/magnatuneservice.cpp:287
+#: internet/subsonic/subsonicservice.cpp:109
 msgid "Refresh catalogue"
 msgstr "Segarkan katalog"
 
-#: internet/somafmservice.cpp:106
+#: internet/somafm/somafmservice.cpp:111
 msgid "Refresh channels"
 msgstr "Segarkan saluran"
 
-#: internet/icecastservice.cpp:300
+#: internet/icecast/icecastservice.cpp:305
 msgid "Refresh station list"
 msgstr "Segarkan daftar stasiun"
 
-#: internet/digitallyimportedservicebase.cpp:176
+#: internet/digitally/digitallyimportedservicebase.cpp:179
 msgid "Refresh streams"
 msgstr "Segarkan stream"
 
@@ -4079,7 +4110,7 @@ msgstr "Ingat dari waktu terakhir"
 msgid "Remember my choice"
 msgstr "Ingat pilihan saya"
 
-#: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
+#: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_transcodedialog.h:216
 msgid "Remove"
 msgstr "Buang"
@@ -4096,20 +4127,21 @@ msgstr "Buang duplikat dari daftar putar"
 msgid "Remove folder"
 msgstr "Buang folder"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
+#: internet/grooveshark/groovesharkservice.cpp:549
+#: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Buang dari MusikKu"
 
-#: internet/vkservice.cpp:300
+#: internet/vk/vkservice.cpp:302
 msgid "Remove from bookmarks"
 msgstr "Buang dari penanda"
 
-#: internet/groovesharkservice.cpp:541
+#: internet/grooveshark/groovesharkservice.cpp:546
 msgid "Remove from favorites"
 msgstr "Buang dari favorit"
 
-#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:615
-#: ../bin/src/ui_mainwindow.h:685
+#: internet/grooveshark/groovesharkservice.cpp:543
+#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Buang dari daftar putar"
 
@@ -4125,20 +4157,20 @@ msgstr "Buang daftar putar"
 msgid "Remove unavailable tracks from playlist"
 msgstr "Buang track yang tidak tersedia dari daftar putar"
 
-#: internet/groovesharkservice.cpp:1583
+#: internet/grooveshark/groovesharkservice.cpp:1570
 msgid "Removing songs from My Music"
 msgstr "Buang lagu dari Musik Ku"
 
-#: internet/groovesharkservice.cpp:1530
+#: internet/grooveshark/groovesharkservice.cpp:1518
 msgid "Removing songs from favorites"
 msgstr "Buang lagu dari favorit"
 
-#: internet/groovesharkservice.cpp:1380
+#: internet/grooveshark/groovesharkservice.cpp:1370
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Ubah nama daftar putar \"%1\""
 
-#: internet/groovesharkservice.cpp:534
+#: internet/grooveshark/groovesharkservice.cpp:539
 msgid "Rename Grooveshark playlist"
 msgstr "Ubah nama daftar putar Grooveshark"
 
@@ -4171,7 +4203,7 @@ msgid "Repeat track"
 msgstr "Ulang track"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:456
-#: internet/internetservice.cpp:64 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Ganti daftar putar saat ini"
@@ -4221,15 +4253,15 @@ msgstr "Batasi ke karakter ASCII"
 msgid "Resume playback on start"
 msgstr "Lanjutkan pemutaran saat memulai Clementine"
 
-#: internet/groovesharkservice.cpp:789
+#: internet/grooveshark/groovesharkservice.cpp:795
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Ambil lagu Grooveshark Musik Ku "
 
-#: internet/groovesharkservice.cpp:756
+#: internet/grooveshark/groovesharkservice.cpp:762
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Mengambil lagu favorit Grooveshark"
 
-#: internet/groovesharkservice.cpp:688
+#: internet/grooveshark/groovesharkservice.cpp:693
 msgid "Retrieving Grooveshark playlists"
 msgstr "Mengambil daftar putar Grooveshark"
 
@@ -4265,7 +4297,7 @@ msgstr "Jalankan"
 msgid "SOCKS proxy"
 msgstr "Proxy SOCKS"
 
-#: internet/subsonicsettingspage.cpp:125
+#: internet/subsonic/subsonicsettingspage.cpp:146
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
@@ -4363,7 +4395,7 @@ msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:516
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
 msgid "Search"
 msgstr "Cari"
 
@@ -4376,15 +4408,15 @@ msgstr "Cari"
 msgid "Search Icecast stations"
 msgstr "Cari stasiun Icecast"
 
-#: internet/jamendoservice.cpp:438
+#: internet/jamendo/jamendoservice.cpp:444
 msgid "Search Jamendo"
 msgstr "Cari Jamendo"
 
-#: internet/magnatuneservice.cpp:288
+#: internet/magnatune/magnatuneservice.cpp:296
 msgid "Search Magnatune"
 msgstr "Cari Magnatune"
 
-#: internet/subsonicservice.cpp:71
+#: internet/subsonic/subsonicservice.cpp:93
 msgid "Search Subsonic"
 msgstr "Pencarian Subsonic"
 
@@ -4416,8 +4448,9 @@ msgstr "Mode pencarian"
 msgid "Search options"
 msgstr "Cari pilihan"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
-#: internet/spotifyservice.cpp:372
+#: internet/grooveshark/groovesharkservice.cpp:582
+#: internet/soundcloud/soundcloudservice.cpp:116
+#: internet/spotify/spotifyservice.cpp:397
 msgid "Search results"
 msgstr "Hasil pencarian"
 
@@ -4426,7 +4459,7 @@ msgstr "Hasil pencarian"
 msgid "Search terms"
 msgstr "Cari istilah"
 
-#: internet/groovesharkservice.cpp:271
+#: internet/grooveshark/groovesharkservice.cpp:275
 msgid "Searching on Grooveshark"
 msgstr "Mencari di Grooveshark"
 
@@ -4502,7 +4535,7 @@ msgstr "Server URL"
 msgid "Server details"
 msgstr "Rincian server"
 
-#: internet/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:242
 msgid "Service offline"
 msgstr "Layanan offline"
 
@@ -4812,23 +4845,31 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:194
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "Kesalahan masuk Spotify"
+
+#: internet/spotify/spotifyservice.cpp:811
+msgid "Spotify playlist's URL"
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Plugin Spotify"
 
-#: internet/spotifyblobdownloader.cpp:64
+#: internet/spotify/spotifyblobdownloader.cpp:66
 msgid "Spotify plugin not installed"
 msgstr "Plugin Spotify tidak terpasang"
+
+#: internet/spotify/spotifyservice.cpp:802
+msgid "Spotify song's URL"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
 msgstr "Standar"
 
-#: internet/spotifyservice.cpp:380
+#: internet/spotify/spotifyservice.cpp:405
 msgid "Starred"
 msgstr "Berbintang"
 
@@ -4844,8 +4885,9 @@ msgstr "Mulai putar daftar putar terkini"
 msgid "Start transcoding"
 msgstr "Mulai transcoding"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
-#: internet/spotifyservice.cpp:374
+#: internet/grooveshark/groovesharkservice.cpp:584
+#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/spotify/spotifyservice.cpp:399
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4856,11 +4898,11 @@ msgstr "Mulai mengetik sesuatu di kotak pencarian di atas untuk mengisi daftar h
 msgid "Starting %1"
 msgstr "Memulai %1"
 
-#: internet/magnatunedownloaddialog.cpp:122
+#: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "Memulai..."
 
-#: internet/groovesharkservice.cpp:612
+#: internet/grooveshark/groovesharkservice.cpp:617
 msgid "Stations"
 msgstr "Stasiun-stasiun"
 
@@ -4898,7 +4940,7 @@ msgstr "Berhenti"
 msgid "Stream"
 msgstr "Stream"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonic/subsonicsettingspage.cpp:50
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4908,7 +4950,7 @@ msgstr "Streaming dari server Subsonic memerlukan lisensi server yang sah setela
 msgid "Streaming membership"
 msgstr "Stream keanggotaan"
 
-#: internet/groovesharkservice.cpp:653
+#: internet/grooveshark/groovesharkservice.cpp:658
 msgid "Subscribed playlists"
 msgstr "Daftar putar langganan"
 
@@ -4916,7 +4958,8 @@ msgstr "Daftar putar langganan"
 msgid "Subscribers"
 msgstr "Pelanggan"
 
-#: internet/subsonicservice.cpp:98 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonic/subsonicservice.cpp:120
+#: ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4956,15 +4999,15 @@ msgstr "Format yang didukung"
 msgid "Synchronize statistics to files now"
 msgstr "Sinkronisasi statistik ke berkas sekarang"
 
-#: internet/spotifyservice.cpp:640
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Syncing Spotify inbox"
 msgstr "Sinkronisasi inbox Spotify"
 
-#: internet/spotifyservice.cpp:634
+#: internet/spotify/spotifyservice.cpp:670
 msgid "Syncing Spotify playlist"
 msgstr "Sinkronisasi daftar putar Spotify"
 
-#: internet/spotifyservice.cpp:645
+#: internet/spotify/spotifyservice.cpp:681
 msgid "Syncing Spotify starred tracks"
 msgstr "Sinkronisasi Spotify track berbintang"
 
@@ -5005,7 +5048,7 @@ msgstr "Perintah \"%1\" tidak dapat dimulai"
 msgid "The album cover of the currently playing song"
 msgstr "Sampul album dari lagu yang sedang dimainkan"
 
-#: internet/magnatunedownloaddialog.cpp:92
+#: internet/magnatune/magnatunedownloaddialog.cpp:94
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Direktori %1 tidak sah"
@@ -5022,7 +5065,7 @@ msgstr "Situs yang Anda minta tidak ada!"
 msgid "The site you requested is not an image!"
 msgstr "Situs yang Anda minta bukan gambar!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonic/subsonicsettingspage.cpp:116
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
@@ -5038,16 +5081,17 @@ msgstr "Versi Clementine yang baru saja Anda diperbarui memerlukan pemindaian ul
 msgid "There are other songs in this album"
 msgstr "Ada lagu lainnya dalam album ini"
 
-#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:73
+#: internet/podcasts/gpoddersearchpage.cpp:76
+#: internet/podcasts/gpoddertoptagsmodel.cpp:104
+#: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Ada masalah komunikasi dengan gpodder.net"
 
-#: internet/magnatunedownloaddialog.cpp:161
+#: internet/magnatune/magnatunedownloaddialog.cpp:163
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Ada masalah pengambilan metadata dari Magnatune"
 
-#: podcasts/itunessearchpage.cpp:77
+#: internet/podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Ada masalah dalam respon penguraian dari Toko iTunes"
 
@@ -5089,13 +5133,13 @@ msgstr "Pengaturan ini digunakan dalam dialog \"Transcode Music\", dan ketika me
 msgid "Third level"
 msgstr "Tingkat ketiga"
 
-#: internet/jamendoservice.cpp:176
+#: internet/jamendo/jamendoservice.cpp:181
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr "Tindakan ini akan membuat database yang bisa menjadi sebesar 150 MB. \nApakah Anda ingin melanjutkan?"
 
-#: internet/magnatunedownloaddialog.cpp:188
+#: internet/magnatune/magnatunedownloaddialog.cpp:190
 msgid "This album is not available in the requested format"
 msgstr "Album ini tidak tersedia dalam format yang diminta"
 
@@ -5136,7 +5180,7 @@ msgstr "Ini adalah pertama kalinya Anda telah menghubungkan perangkat ini. Cleme
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Pilihan ini dapat diubah di pengaturan \"Sifat\""
 
-#: internet/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:244
 msgid "This stream is for paid subscribers only"
 msgstr "Stream ini hanya untuk pelanggan berbayar"
 
@@ -5152,7 +5196,7 @@ msgstr "Tipe perangkat ini tidak didukung: %1"
 msgid "Title"
 msgstr "Judul"
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/grooveshark/groovesharkservice.cpp:1055
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -5186,11 +5230,11 @@ msgstr "Alihkan visibilitas tampilan layar cantik"
 msgid "Tomorrow"
 msgstr "Besok"
 
-#: podcasts/podcasturlloader.cpp:117
+#: internet/podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "Terlalu banyak pengalihan"
 
-#: internet/spotifyservice.cpp:392
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Top tracks"
 msgstr "Track puncak"
 
@@ -5198,11 +5242,11 @@ msgstr "Track puncak"
 msgid "Total albums:"
 msgstr "Total album:"
 
-#: covers/coversearchstatisticsdialog.cpp:68
+#: covers/coversearchstatisticsdialog.cpp:70
 msgid "Total bytes transferred"
 msgstr "Jumlah byte yang ditransfer"
 
-#: covers/coversearchstatisticsdialog.cpp:65
+#: covers/coversearchstatisticsdialog.cpp:67
 msgid "Total network requests made"
 msgstr "Total permintaan jaringan yang dibuat"
 
@@ -5212,7 +5256,7 @@ msgstr "Total permintaan jaringan yang dibuat"
 msgid "Track"
 msgstr "Track"
 
-#: internet/soundcloudservice.cpp:134
+#: internet/soundcloud/soundcloudservice.cpp:133
 msgid "Tracks"
 msgstr "Track"
 
@@ -5261,11 +5305,12 @@ msgstr "URL(s)"
 msgid "Ultra wide band (UWB)"
 msgstr "Lebar pita ultra (UWB)"
 
-#: internet/seafilesettingspage.cpp:129 internet/seafilesettingspage.cpp:130
+#: internet/seafile/seafilesettingspage.cpp:131
+#: internet/seafile/seafilesettingspage.cpp:132
 msgid "Unable to connect"
 msgstr "Tidak dapat menghubungi."
 
-#: internet/magnatunedownloaddialog.cpp:147
+#: internet/magnatune/magnatunedownloaddialog.cpp:149
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "Tidak dapat mengunduh %1 (%2)"
@@ -5278,11 +5323,12 @@ msgstr "Tidak dapat mengunduh %1 (%2)"
 msgid "Unknown"
 msgstr "Tidak diketahui"
 
-#: podcasts/podcasturlloader.cpp:208
+#: internet/podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "Tipe-isi tidak diketahui"
 
-#: internet/digitallyimportedclient.cpp:71 internet/lastfmservice.cpp:257
+#: internet/digitally/digitallyimportedclient.cpp:74
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Unknown error"
 msgstr "Kesalahan tidak diketahui"
 
@@ -5298,7 +5344,8 @@ msgstr "Tidak lewati trek yang dipilih"
 msgid "Unskip track"
 msgstr "Tidak lewati track"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
+#: internet/podcasts/addpodcastdialog.cpp:68
+#: internet/podcasts/podcastservice.cpp:442
 msgid "Unsubscribe"
 msgstr "Berhenti berlangganan"
 
@@ -5306,15 +5353,15 @@ msgstr "Berhenti berlangganan"
 msgid "Upcoming Concerts"
 msgstr "Konser mendatang"
 
-#: internet/vkservice.cpp:330
+#: internet/vk/vkservice.cpp:332
 msgid "Update"
 msgstr "Perbarui"
 
-#: internet/groovesharkservice.cpp:1237
+#: internet/grooveshark/groovesharkservice.cpp:1227
 msgid "Update Grooveshark playlist"
 msgstr "Perbarui daftar putar Grooveshark"
 
-#: podcasts/podcastservice.cpp:418
+#: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "Perbarui semua podcast"
 
@@ -5326,7 +5373,7 @@ msgstr "Perbarui perubahan folder pustaka "
 msgid "Update the library when Clementine starts"
 msgstr "Perbarui pustaka ketika memulai Clementine"
 
-#: podcasts/podcastservice.cpp:426
+#: internet/podcasts/podcastservice.cpp:427
 msgid "Update this podcast"
 msgstr "Perbarui podcast ini"
 
@@ -5424,7 +5471,7 @@ msgstr "Gunakan normalisasi volume"
 msgid "Used"
 msgstr "Bekas"
 
-#: internet/groovesharkservice.cpp:403
+#: internet/grooveshark/groovesharkservice.cpp:407
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Pengguna %1 tidak memiliki akun Grooveshark dimana pun"
@@ -5507,7 +5554,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vkservice.cpp:858
+#: internet/vk/vkservice.cpp:860
 msgid "Wall"
 msgstr "Dinding"
 
@@ -5625,7 +5672,7 @@ msgstr "Tulis semua statistik lagu kedalam berkas lagu"
 msgid "Write metadata"
 msgstr "Menulis metadata"
 
-#: internet/subsonicsettingspage.cpp:80
+#: internet/subsonic/subsonicsettingspage.cpp:101
 msgid "Wrong username or password."
 msgstr "Nama pengguna dan kata sandi salah."
 
@@ -5682,13 +5729,13 @@ msgstr "Anda sudah terdaftar."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Anda dapat mengubah cara pengaturan lagu di perpustakaan."
 
-#: internet/digitallyimportedsettingspage.cpp:45
+#: internet/digitally/digitallyimportedsettingspage.cpp:48
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "Anda dapat mendengarkan secara gratis tanpa akun, tetapi anggota Premium dapat mendengarkan stream berkualitas tinggi tanpa iklan."
 
-#: internet/magnatunesettingspage.cpp:54
+#: internet/magnatune/magnatunesettingspage.cpp:58
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5705,15 +5752,15 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Anda dapat menggunakan Remote Wii sebagai remote control untuk Clementine. <a href=\"http://www.clementine-player.org/wiimote\">Lihat halaman pada wiki Clementine</ a>untuk informasi lebih lanjut.\n"
 
-#: internet/groovesharksettingspage.cpp:109
+#: internet/grooveshark/groovesharksettingspage.cpp:113
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "Anda tidak memiliki akun Grooveshark dimana pun."
 
-#: internet/spotifysettingspage.cpp:146
+#: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Anda tidak memiliki akun Spotify Premium"
 
-#: internet/digitallyimportedclient.cpp:93
+#: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "Anda tidak memiliki langganan yang aktif"
 
@@ -5724,13 +5771,13 @@ msgid ""
 "stream."
 msgstr "Anda tidak perlu harus terlog in untuk mencari dan mendengarkan musik di SoundCloud. Namun, anda perlu login untuk mengakses daftar putar dan stream anda."
 
-#: internet/spotifyservice.cpp:179
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr "Anda sudah keluar dari Spotify, harap masukkan kembali kata sandi Anda di dialog pengaturan."
 
-#: internet/spotifysettingspage.cpp:157
+#: internet/spotify/spotifysettingspage.cpp:160
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr "Anda sudah keluar dari Spotify, harap masukkan kembali kata sandi Anda."
 
@@ -5760,11 +5807,11 @@ msgstr "Anda perlu memulai ulang Clementine jika mengubah bahasa."
 msgid "Your IP address:"
 msgstr "Alamat IP anda:"
 
-#: internet/lastfmsettingspage.cpp:76
+#: internet/lastfm/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Identitas Last.fm Anda tidak benar"
 
-#: internet/magnatunesettingspage.cpp:113
+#: internet/magnatune/magnatunesettingspage.cpp:117
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Identitas Magnatune Anda tidak benar"
 
@@ -5772,7 +5819,8 @@ msgstr "Identitas Magnatune Anda tidak benar"
 msgid "Your library is empty!"
 msgstr "Pustaka Anda kosong!"
 
-#: globalsearch/savedradiosearchprovider.cpp:26 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26
+#: internet/internetradio/savedradio.cpp:53
 msgid "Your radio streams"
 msgstr "Stream radio Anda"
 
@@ -5785,8 +5833,8 @@ msgstr "Scrobble Anda: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Sistem Anda kehilangan dukungan OpenGL, visualisasi tidak tersedia."
 
-#: internet/groovesharksettingspage.cpp:114
-#: internet/spotifysettingspage.cpp:152
+#: internet/grooveshark/groovesharksettingspage.cpp:118
+#: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "Username atau passwor anda salah."
 
@@ -5867,7 +5915,7 @@ msgstr "sama"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:35
+#: internet/podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "Direktori gpodder.net"
 
@@ -5883,8 +5931,9 @@ msgstr "iPod dan perangkat USB saat ini tidak bekerja pada Windows. Maaf!"
 msgid "in the last"
 msgstr "yang terakhir"
 
-#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
-#: internet/spotifysettingspage.cpp:61 playlist/playlistview.cpp:232
+#: internet/spotify/spotifysettingspage.cpp:62
+#: internet/spotify/spotifysettingspage.cpp:63
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
 #: ui/edittagdialog.cpp:478
 msgid "kbps"
 msgstr "kbps"

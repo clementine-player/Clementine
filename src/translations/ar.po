@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-16 02:17+0000\n"
+"PO-Revision-Date: 2014-12-27 18:00+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,7 +67,7 @@ msgstr "ثانية"
 msgid " songs"
 msgstr "المقاطع"
 
-#: internet/vkservice.cpp:146
+#: internet/vk/vkservice.cpp:148
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "1% (2% أغنية)"
@@ -87,7 +87,7 @@ msgstr "%1 أيام"
 msgid "%1 days ago"
 msgstr "%1 مند أيام"
 
-#: podcasts/gpoddersync.cpp:84
+#: internet/podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 من %2"
@@ -243,7 +243,7 @@ msgstr "&أدوات"
 msgid "(different across multiple songs)"
 msgstr "(مختلفة عبر أغنيات متعددة)"
 
-#: internet/spotifyservice.cpp:424
+#: internet/spotify/spotifyservice.cpp:449
 msgid ", by "
 msgstr ""
 
@@ -324,11 +324,11 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>النطاقات تبدأ بـ %، مثلا: %artist %album %title </p>\n<p>إن استخدمت معقوفات للإحاطة بقطعة نص تحتوي على نطاق ما، سيتم إخفاء تلك القطعة النصية إن كان النطاق فارغا.</p>"
 
-#: internet/groovesharksettingspage.cpp:119
+#: internet/grooveshark/groovesharksettingspage.cpp:123
 msgid "A Grooveshark Anywhere account is required."
 msgstr " Grooveshark   يجب التوفر على حساب في "
 
-#: internet/spotifysettingspage.cpp:163
+#: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "يجب أن تتوفر على حساب في Spotify"
 
@@ -423,11 +423,11 @@ msgstr ""
 msgid "Active/deactive Wiiremote"
 msgstr "تفعيل\\إلغاء تفعيل أداة التحكم عن بعد لـ Wii"
 
-#: internet/soundcloudservice.cpp:124
+#: internet/soundcloud/soundcloudservice.cpp:125
 msgid "Activities stream"
 msgstr "سجل النشاطات"
 
-#: podcasts/addpodcastdialog.cpp:62
+#: internet/podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "إضافة بودكاست"
 
@@ -447,7 +447,7 @@ msgstr "إضافة عمل"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
-#: internet/savedradio.cpp:106
+#: internet/internetradio/savedradio.cpp:112
 msgid "Add another stream..."
 msgstr "إضافة Stream أخر"
 
@@ -491,7 +491,7 @@ msgstr "أضف مجلد جديد..."
 msgid "Add podcast"
 msgstr "إضافة بودكاست"
 
-#: podcasts/podcastservice.cpp:415 ../bin/src/ui_mainwindow.h:709
+#: internet/podcasts/podcastservice.cpp:416 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "إضافة بودكاست..."
 
@@ -559,7 +559,7 @@ msgstr "أضف عدد مرات تجاوز تشغيل المقطع"
 msgid "Add song title tag"
 msgstr "أضف وسم عنوان المقطع"
 
-#: internet/vkservice.cpp:318
+#: internet/vk/vkservice.cpp:320
 msgid "Add song to cache"
 msgstr "أضف أغنية إلى التخزين المؤقت"
 
@@ -579,19 +579,19 @@ msgstr "أضف الأغاني إلى \"الموسيقى\" حين أنقر زر \
 msgid "Add stream..."
 msgstr "أضف رابط انترنت..."
 
-#: internet/groovesharkservice.cpp:1120
+#: internet/grooveshark/groovesharkservice.cpp:1126
 msgid "Add to Grooveshark favorites"
 msgstr "أضف إلى المفضلة في Grooveshark"
 
-#: internet/groovesharkservice.cpp:1135
+#: internet/grooveshark/groovesharkservice.cpp:1141
 msgid "Add to Grooveshark playlists"
 msgstr "أضف إلى قوائم التشغيل في Grooveshark"
 
-#: internet/vkservice.cpp:310
+#: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr "أضف إلى الموسيقى"
 
-#: internet/spotifyservice.cpp:568
+#: internet/spotify/spotifyservice.cpp:594
 msgid "Add to Spotify playlists"
 msgstr ""
 
@@ -599,7 +599,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "أضف إلى قائمة تشغيل أخرى"
 
-#: internet/vkservice.cpp:296
+#: internet/vk/vkservice.cpp:298
 msgid "Add to bookmarks"
 msgstr "أضف إلى الإشارات المرجعية"
 
@@ -611,7 +611,7 @@ msgstr "إضافة لقائمة التشغيل"
 msgid "Add to the queue"
 msgstr "أضف إلى لائحة الانتظار"
 
-#: internet/vkservice.cpp:326
+#: internet/vk/vkservice.cpp:328
 msgid "Add user/group to bookmarks"
 msgstr "أضف مستخدما\\مجموعة إلى الإشارات المرجعية"
 
@@ -644,11 +644,11 @@ msgstr "أُضيفَ اليوم"
 msgid "Added within three months"
 msgstr "أُضيفَ خلال ثلاثة أشهر"
 
-#: internet/groovesharkservice.cpp:1434
+#: internet/grooveshark/groovesharkservice.cpp:1424
 msgid "Adding song to My Music"
 msgstr "إضافة مقاطع صوتية إلى مقاطعي"
 
-#: internet/groovesharkservice.cpp:1411
+#: internet/grooveshark/groovesharkservice.cpp:1401
 msgid "Adding song to favorites"
 msgstr "أضف إلى المفضلة"
 
@@ -687,11 +687,11 @@ msgstr "فنان الألبوم"
 msgid "Album cover"
 msgstr "غلاف الألبوم"
 
-#: internet/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:427
 msgid "Album info on jamendo.com..."
 msgstr "معلومات الألبوم على Jamendo.com..."
 
-#: internet/vkservice.cpp:825
+#: internet/vk/vkservice.cpp:827
 msgid "Albums"
 msgstr ""
 
@@ -770,7 +770,7 @@ msgstr "أظهر النافذة الرئيسية دائما"
 msgid "Always start playing"
 msgstr "ابدأ التشغيل دائما"
 
-#: internet/spotifyblobdownloader.cpp:65
+#: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -785,7 +785,7 @@ msgstr "حدث خطأ أثناء تحميل قاعدة بيانات iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "حدث خطأ أثناء حفظ المعلومات في '%1'"
 
-#: internet/subsonicsettingspage.cpp:102
+#: internet/subsonic/subsonicsettingspage.cpp:123
 msgid "An unspecified error occurred."
 msgstr "حدث خطأ عير محدد."
 
@@ -808,7 +808,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "أضف الملفات/العناوين إلى قائمة التشغيل"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:452
-#: internet/internetservice.cpp:53 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "أضف إلى قائمة التشغيل الحالية"
@@ -826,7 +826,7 @@ msgstr "اجعل المقاطع مضغوطة لتفادي أخطاء القص"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "هل أنت متأكد من رغبتك بحذف ملف الإعدادات \"%1\"؟"
 
-#: internet/groovesharkservice.cpp:1333
+#: internet/grooveshark/groovesharkservice.cpp:1323
 msgid "Are you sure you want to delete this playlist?"
 msgstr "هل أنت متأكد من رغبتك بحذف هذه القائمة؟"
 
@@ -874,9 +874,10 @@ msgstr "صيغة الصوت"
 msgid "Audio output"
 msgstr "مخرج الصوت"
 
-#: internet/digitallyimportedsettingspage.cpp:80
-#: internet/magnatunesettingspage.cpp:112 internet/lastfmservice.cpp:222
-#: internet/lastfmsettingspage.cpp:80
+#: internet/digitally/digitallyimportedsettingspage.cpp:83
+#: internet/magnatune/magnatunesettingspage.cpp:116
+#: internet/lastfm/lastfmservice.cpp:228
+#: internet/lastfm/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
 msgstr "فشلت عملية التحقق"
 
@@ -913,11 +914,11 @@ msgstr "متاح"
 msgid "Average bitrate"
 msgstr "صبيب متوسط"
 
-#: covers/coversearchstatisticsdialog.cpp:67
+#: covers/coversearchstatisticsdialog.cpp:69
 msgid "Average image size"
 msgstr "القياس المتوسط للصور"
 
-#: podcasts/addpodcastdialog.cpp:87
+#: internet/podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "بودكاست BBC"
 
@@ -1059,20 +1060,20 @@ msgstr "مسار التخزين المؤقت:"
 msgid "Caching"
 msgstr "تخزين مؤقت"
 
-#: internet/vkmusiccache.cpp:119
+#: internet/vk/vkmusiccache.cpp:120
 #, qt-format
 msgid "Caching %1"
 msgstr "تخزين مؤقت %1"
 
-#: internet/spotifyblobdownloader.cpp:50
+#: internet/spotify/spotifyblobdownloader.cpp:52
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: podcasts/podcastservice.cpp:438
+#: internet/podcasts/podcastservice.cpp:439
 msgid "Cancel download"
 msgstr ""
 
-#: internet/vkservice.cpp:624
+#: internet/vk/vkservice.cpp:626
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1112,7 +1113,7 @@ msgstr "تغيير إعدادات تشغيل مونو سيأخذ بعين الا
 msgid "Check for new episodes"
 msgstr "التمس حلقات جديدة"
 
-#: internet/googledriveservice.cpp:202
+#: internet/googledrive/googledriveservice.cpp:220
 msgid "Check for updates"
 msgstr ""
 
@@ -1120,7 +1121,7 @@ msgstr ""
 msgid "Check for updates..."
 msgstr "التمس التحديثات"
 
-#: internet/vksettingspage.cpp:97
+#: internet/vk/vksettingspage.cpp:98
 msgid "Choose Vk.com cache directory"
 msgstr "اختر مستار تخزين VK.com المؤقت"
 
@@ -1148,7 +1149,7 @@ msgstr "الاختيار من اللائحة"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "اختيار طريقة ترتيب قائمة التشغيل وكم من مقطع ستتضمن"
 
-#: podcasts/podcastsettingspage.cpp:140
+#: internet/podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "اختر مجلد تحميل البودكاست"
 
@@ -1284,7 +1285,7 @@ msgstr "أغلق قائمة التشغيل"
 msgid "Close visualization"
 msgstr "غلق التأثيرات المرئية"
 
-#: internet/magnatunedownloaddialog.cpp:304
+#: internet/magnatune/magnatunedownloaddialog.cpp:306
 msgid "Closing this window will cancel the download."
 msgstr "إغلاق هذه النافذة سيلغي التحميل."
 
@@ -1309,7 +1310,7 @@ msgstr "لائحة عناصر مفروقة بفاصلة لـ \"class:level\"، �
 msgid "Comment"
 msgstr "تعليق"
 
-#: internet/vkservice.cpp:152
+#: internet/vk/vkservice.cpp:154
 msgid "Community Radio"
 msgstr "الإذاعة المجتمعية"
 
@@ -1327,16 +1328,16 @@ msgstr "أكمل الوسوم تلقائيا..."
 msgid "Composer"
 msgstr "الملحّن"
 
-#: internet/searchboxwidget.cpp:41
+#: internet/core/searchboxwidget.cpp:45
 #, qt-format
 msgid "Configure %1..."
 msgstr "إعدادات %1..."
 
-#: internet/groovesharkservice.cpp:560
+#: internet/grooveshark/groovesharkservice.cpp:565
 msgid "Configure Grooveshark..."
 msgstr "إعدادات Grooveshark..."
 
-#: internet/magnatuneservice.cpp:282
+#: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "إعدادات Magnature"
 
@@ -1344,15 +1345,15 @@ msgstr "إعدادات Magnature"
 msgid "Configure Shortcuts"
 msgstr "إعدادات اختصارات لوحة المفاتيح"
 
-#: internet/spotifyservice.cpp:820
+#: internet/spotify/spotifyservice.cpp:876
 msgid "Configure Spotify..."
 msgstr "إعدادات Spotify..."
 
-#: internet/subsonicservice.cpp:90
+#: internet/subsonic/subsonicservice.cpp:112
 msgid "Configure Subsonic..."
 msgstr "إعدادات Subsonic..."
 
-#: internet/vkservice.cpp:335
+#: internet/vk/vkservice.cpp:337
 msgid "Configure Vk.com..."
 msgstr "ضبط VK.com..."
 
@@ -1364,14 +1365,15 @@ msgstr "إعدادات البحث العامة..."
 msgid "Configure library..."
 msgstr "إعدادات المكتبة"
 
-#: podcasts/addpodcastdialog.cpp:74 podcasts/podcastservice.cpp:452
+#: internet/podcasts/addpodcastdialog.cpp:74
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Configure podcasts..."
 msgstr "إعدادات بودكاست..."
 
-#: internet/cloudfileservice.cpp:85
-#: internet/digitallyimportedservicebase.cpp:179
+#: internet/core/cloudfileservice.cpp:105
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:210
+#: internet/googledrive/googledriveservice.cpp:228
 msgid "Configure..."
 msgstr "إعدادات..."
 
@@ -1383,22 +1385,22 @@ msgstr "أوصل بأداة التحكم عن بعد لـ Wii بواسطة عم�
 msgid "Connect device"
 msgstr "وصل الجهاز"
 
-#: internet/spotifyservice.cpp:270
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr " جاري الاتصال بـ Spotify"
 
-#: internet/subsonicsettingspage.cpp:107
+#: internet/subsonic/subsonicsettingspage.cpp:128
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "تم رفض الاتصال من الخادم، تأكد من رابط الخادم. مثال: http://localhost:4040/"
 
-#: internet/subsonicsettingspage.cpp:119
+#: internet/subsonic/subsonicsettingspage.cpp:140
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "تم تجاوز مدة الانتظار، تأكد من رابط الخادم. مثال: http://localhost:4040/"
 
-#: internet/vkservice.cpp:1093
+#: internet/vk/vkservice.cpp:1095
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "مشكلة في الاتصال أو أن الصوت معطل من المالك"
 
@@ -1426,15 +1428,15 @@ msgstr ""
 msgid "Convert lossless files"
 msgstr ""
 
-#: internet/vkservice.cpp:322
+#: internet/vk/vkservice.cpp:324
 msgid "Copy share url to clipboard"
 msgstr "انسخ الرابط إلى الحافظة"
 
-#: internet/groovesharkservice.cpp:1209
+#: internet/core/internetservice.cpp:57
 msgid "Copy to clipboard"
 msgstr "نسخ إلى المكتبة..."
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:436
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "نسخ إلى جهاز..."
@@ -1448,7 +1450,7 @@ msgstr "نسخ إلى المكتبة..."
 msgid "Copyright"
 msgstr "حفظ الحقوق"
 
-#: internet/subsonicsettingspage.cpp:75
+#: internet/subsonic/subsonicsettingspage.cpp:96
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1479,14 +1481,15 @@ msgid ""
 "plugins installed"
 msgstr "تعذر العثور على محول لـ %1، تأكد من أنك ثبت ملحق GStreamer المناسب"
 
-#: internet/magnatunedownloaddialog.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:220
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "تعذر فتح الملف %1"
 
-#: internet/cloudfileservice.cpp:82 ../bin/src/ui_albumcovermanager.h:215
+#: internet/core/cloudfileservice.cpp:102
+#: ../bin/src/ui_albumcovermanager.h:215
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:677
-#: internet/googledriveservice.cpp:208
+#: internet/googledrive/googledriveservice.cpp:226
 msgid "Cover Manager"
 msgstr "مدير الغلاف"
 
@@ -1512,12 +1515,13 @@ msgstr "الغلاف غير محدد"
 msgid "Cover art set from %1"
 msgstr "الغلاف محدد من %1"
 
-#: covers/coversearchstatisticsdialog.cpp:57 ui/albumcoversearcher.cpp:100
+#: covers/coversearchstatisticsdialog.cpp:59 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
 msgstr "الأغلفة من %1"
 
-#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1285
+#: internet/grooveshark/groovesharkservice.cpp:533
+#: internet/grooveshark/groovesharkservice.cpp:1275
 msgid "Create a new Grooveshark playlist"
 msgstr "أنشئ قائمة تشغيل Grooveshark جديدة"
 
@@ -1682,11 +1686,12 @@ msgstr "المدة بين التأثيرات المرئية"
 msgid "Delete"
 msgstr "احذف"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1332
+#: internet/grooveshark/groovesharkservice.cpp:536
+#: internet/grooveshark/groovesharkservice.cpp:1322
 msgid "Delete Grooveshark playlist"
 msgstr "احذف قائمة تسغيل Grooveshark"
 
-#: podcasts/podcastservice.cpp:432
+#: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
 msgstr "حذف البيانات المحملة"
 
@@ -1819,8 +1824,9 @@ msgstr "قرص مدمج"
 msgid "Discontinuous transmission"
 msgstr "إرسال غير مستمر"
 
-#: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:104 ../bin/src/ui_librarysettingspage.h:207
+#: internet/icecast/icecastfilterwidget.cpp:36
+#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:104
+#: ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "خيارات العرض"
 
@@ -1832,11 +1838,12 @@ msgstr "أظهر قائمة الشاشة"
 msgid "Do a full library rescan"
 msgstr "افحص المكتبة كاملة"
 
-#: internet/googledriveservice.cpp:250 internet/googledriveservice.cpp:257
+#: internet/googledrive/googledriveservice.cpp:267
+#: internet/googledrive/googledriveservice.cpp:273
 msgid "Do a full rescan"
 msgstr ""
 
-#: internet/googledriveservice.cpp:205
+#: internet/googledrive/googledriveservice.cpp:223
 msgid "Do a full rescan..."
 msgstr ""
 
@@ -1848,7 +1855,7 @@ msgstr "لا تحول أي مقطع"
 msgid "Do not overwrite"
 msgstr "لا تستبدل"
 
-#: internet/googledriveservice.cpp:251
+#: internet/googledrive/googledriveservice.cpp:268
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
@@ -1871,11 +1878,12 @@ msgstr ""
 msgid "Don't shuffle"
 msgstr "لا تخلط"
 
-#: internet/magnatunedownloaddialog.cpp:306 ui/albumcovermanager.cpp:221
+#: internet/magnatune/magnatunedownloaddialog.cpp:308
+#: ui/albumcovermanager.cpp:221
 msgid "Don't stop!"
 msgstr "لا تتوقف!"
 
-#: internet/somafmservice.cpp:101
+#: internet/somafm/somafmservice.cpp:106
 msgid "Donate"
 msgstr "تبرع"
 
@@ -1887,13 +1895,13 @@ msgstr "النقر مرتين للتشغيل"
 msgid "Double clicking a song will..."
 msgstr "النقر مرتين على مقطع سـ..."
 
-#: podcasts/podcastservice.cpp:528
+#: internet/podcasts/podcastservice.cpp:529
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
 msgstr "حمل %n حلقات"
 
-#: internet/magnatunedownloaddialog.cpp:266
+#: internet/magnatune/magnatunedownloaddialog.cpp:268
 msgid "Download directory"
 msgstr "مجلد التحميل"
 
@@ -1909,7 +1917,8 @@ msgstr "عضوية التحميل"
 msgid "Download new episodes automatically"
 msgstr "حمل الحلقات الجديدة تلقائيا"
 
-#: podcasts/podcastservice.cpp:291 podcasts/podcastservice.cpp:330
+#: internet/podcasts/podcastservice.cpp:292
+#: internet/podcasts/podcastservice.cpp:331
 msgid "Download queued"
 msgstr "حمل مقاطع لائحة الانتظار"
 
@@ -1921,15 +1930,15 @@ msgstr ""
 msgid "Download the Android app"
 msgstr "حمل تطبيق أندرويد"
 
-#: internet/magnatuneservice.cpp:272
+#: internet/magnatune/magnatuneservice.cpp:280
 msgid "Download this album"
 msgstr "حمل هذا الألبوم"
 
-#: internet/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:430
 msgid "Download this album..."
 msgstr "حمل هذا الألبوم..."
 
-#: podcasts/podcastservice.cpp:530
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Download this episode"
 msgstr "حمل هذه الحلقة"
 
@@ -1937,24 +1946,25 @@ msgstr "حمل هذه الحلقة"
 msgid "Download..."
 msgstr "حمل..."
 
-#: podcasts/podcastservice.cpp:299 podcasts/podcastservice.cpp:339
+#: internet/podcasts/podcastservice.cpp:300
+#: internet/podcasts/podcastservice.cpp:340
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "تحميل (%1%)..."
 
-#: internet/icecastservice.cpp:101
+#: internet/icecast/icecastservice.cpp:106
 msgid "Downloading Icecast directory"
 msgstr "جاري تحميل مجلد Icecast"
 
-#: internet/jamendoservice.cpp:195
+#: internet/jamendo/jamendoservice.cpp:200
 msgid "Downloading Jamendo catalogue"
 msgstr "جاري تحميل فهرس Jamendo"
 
-#: internet/magnatuneservice.cpp:152
+#: internet/magnatune/magnatuneservice.cpp:160
 msgid "Downloading Magnatune catalogue"
 msgstr "جاري تحميل فهرس Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:49
+#: internet/spotify/spotifyblobdownloader.cpp:51
 msgid "Downloading Spotify plugin"
 msgstr "جاري تحميل ملحق Spotify"
 
@@ -1982,7 +1992,7 @@ msgstr "المدة"
 msgid "Dynamic mode is on"
 msgstr "النمط النشيط مفعل"
 
-#: internet/jamendoservice.cpp:121 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "مزج عشوائي تلقائيا"
 
@@ -2016,7 +2026,7 @@ msgstr "تعديل معلومات المقطع..."
 msgid "Edit tracks information..."
 msgstr "تعديل معلومات المقاطع..."
 
-#: internet/savedradio.cpp:103
+#: internet/internetradio/savedradio.cpp:109
 msgid "Edit..."
 msgstr "حرر..."
 
@@ -2128,10 +2138,10 @@ msgstr "يكافئ --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "يكافئ --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1048
-#: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141 ui/mainwindow.cpp:2289
-#: internet/vkservice.cpp:623
+#: internet/grooveshark/groovesharkservice.cpp:1054
+#: internet/magnatune/magnatunedownloaddialog.cpp:242
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
+#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "خطأ"
 
@@ -2151,7 +2161,7 @@ msgstr "خطأ في نسخ المقاطع"
 msgid "Error deleting songs"
 msgstr "خطأ في حذف المقاطع"
 
-#: internet/spotifyblobdownloader.cpp:220
+#: internet/spotify/spotifyblobdownloader.cpp:222
 msgid "Error downloading Spotify plugin"
 msgstr "خطأ أثناء تحميل ملحق Spotify"
 
@@ -2160,8 +2170,8 @@ msgstr "خطأ أثناء تحميل ملحق Spotify"
 msgid "Error loading %1"
 msgstr "خطأ في تحميل %1"
 
-#: internet/digitallyimportedservicebase.cpp:197
-#: internet/digitallyimportedurlhandler.cpp:85
+#: internet/digitally/digitallyimportedservicebase.cpp:200
+#: internet/digitally/digitallyimportedurlhandler.cpp:89
 msgid "Error loading di.fm playlist"
 msgstr "خطأ في تحميل قائمة تشغيل di.fm"
 
@@ -2299,21 +2309,24 @@ msgstr "مدة التلاشي"
 msgid "Failed reading CD drive"
 msgstr "فشل في قراءة القرص CD"
 
-#: podcasts/gpoddertoptagspage.cpp:72
+#: internet/podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "فشل جلب المسار"
 
-#: podcasts/gpoddersearchpage.cpp:75 podcasts/gpoddertoptagsmodel.cpp:103
-#: podcasts/itunessearchpage.cpp:65 podcasts/itunessearchpage.cpp:76
-#: podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/gpoddersearchpage.cpp:75
+#: internet/podcasts/gpoddertoptagsmodel.cpp:103
+#: internet/podcasts/itunessearchpage.cpp:65
+#: internet/podcasts/itunessearchpage.cpp:76
+#: internet/podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "فشل جلب البودكاست"
 
-#: podcasts/addpodcastbyurl.cpp:69 podcasts/fixedopmlpage.cpp:55
+#: internet/podcasts/addpodcastbyurl.cpp:69
+#: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "فشل تحميل البودكاست"
 
-#: podcasts/podcasturlloader.cpp:175
+#: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "تعذر قراءة تلقيمات RSS"
 
@@ -2322,7 +2335,7 @@ msgstr "تعذر قراءة تلقيمات RSS"
 msgid "Fast"
 msgstr "سريع"
 
-#: internet/groovesharkservice.cpp:639
+#: internet/grooveshark/groovesharkservice.cpp:644
 msgid "Favorites"
 msgstr "المفضلة"
 
@@ -2342,7 +2355,7 @@ msgstr "اجلب تلقائيا"
 msgid "Fetch completed"
 msgstr "تم التجلب"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonic/subsonicservice.cpp:250
 msgid "Fetching Subsonic library"
 msgstr "جلب مكتبة Subsonic..."
 
@@ -2404,7 +2417,7 @@ msgstr "الملفات التي ستحول"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "ابحث في المكتبة عن المقاطع التي توافق المعايير التي حددت."
 
-#: internet/vkservice.cpp:306
+#: internet/vk/vkservice.cpp:308
 msgid "Find this artist"
 msgstr "اعثر على هذا الفنان"
 
@@ -2519,23 +2532,33 @@ msgstr "إعدادات عامة"
 msgid "Genre"
 msgstr "النوع"
 
-#: internet/groovesharkservice.cpp:550
+#: internet/grooveshark/groovesharkservice.cpp:555
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "احصل على رابط لمشاركة قائمة تشغيل Grooveshark"
 
-#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1148
+#: internet/grooveshark/groovesharkservice.cpp:552
+#: internet/grooveshark/groovesharkservice.cpp:1154
 msgid "Get a URL to share this Grooveshark song"
 msgstr "احصل على رابط لمشاركة هذا المقطع من Grooveshark"
 
-#: internet/groovesharkservice.cpp:823
+#: internet/spotify/spotifyservice.cpp:610
+#: internet/spotify/spotifyservice.cpp:651
+msgid "Get a URL to share this Spotify song"
+msgstr ""
+
+#: internet/spotify/spotifyservice.cpp:642
+msgid "Get a URL to share this playlist"
+msgstr ""
+
+#: internet/grooveshark/groovesharkservice.cpp:829
 msgid "Getting Grooveshark popular songs"
 msgstr "جلب المقاطع الشعبية على Grooveshark"
 
-#: internet/somafmservice.cpp:115
+#: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
 msgstr "جاري جلب القنوات"
 
-#: internet/digitallyimportedservicebase.cpp:102
+#: internet/digitally/digitallyimportedservicebase.cpp:105
 msgid "Getting streams"
 msgstr "جاري جلب التيارات..."
 
@@ -2559,7 +2582,7 @@ msgstr "انتقل للسان قائمة التشغيل السابق"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:51 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2573,19 +2596,19 @@ msgstr "اجعل المقاطع التي لا توجد في مكتبتي بلو�
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:408
+#: internet/grooveshark/groovesharkservice.cpp:412
 msgid "Grooveshark login error"
 msgstr "خطأ بتسجيل الدخول لـ Grooveshark"
 
-#: internet/groovesharkservice.cpp:1199
+#: internet/grooveshark/groovesharkservice.cpp:1205
 msgid "Grooveshark playlist's URL"
 msgstr "رابط قائمة تشغيل Grooveshark"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/grooveshark/groovesharkservice.cpp:624
 msgid "Grooveshark radio"
 msgstr "راديو Grooveshark"
 
-#: internet/groovesharkservice.cpp:1177
+#: internet/grooveshark/groovesharkservice.cpp:1183
 msgid "Grooveshark song's URL"
 msgstr "رابط المقطع على Grooveshark"
 
@@ -2626,11 +2649,11 @@ msgstr "تجميع حسب النوع/الفنان/الألبوم"
 msgid "Grouping"
 msgstr "تجميع"
 
-#: podcasts/podcasturlloader.cpp:206
+#: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "الصفحة لا تحتوي على أي تلقيم RSS"
 
-#: internet/subsonicsettingspage.cpp:141
+#: internet/subsonic/subsonicsettingspage.cpp:162
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr "تم تلقي رمز الحالة HTTP 3xx دون أي رابط، تحقق من إعدادات الخادم."
@@ -2665,7 +2688,7 @@ msgstr "أعلى (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "أعلى (1024x1024)"
 
-#: internet/subsonicsettingspage.cpp:113
+#: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "تعذر العثور على المضيف، تأكد من رابط الخادم. مثال: http://localhost:4040/"
 
@@ -2741,7 +2764,7 @@ msgid ""
 "time a song finishes."
 msgstr "في النمط الديناميكي سيتم اختيار مقاطع جديدة وإضافتها لقائمة التشغيل كلما انتهى تشغيل المقطع."
 
-#: internet/spotifyservice.cpp:386
+#: internet/spotify/spotifyservice.cpp:411
 msgid "Inbox"
 msgstr "صندوق البريد"
 
@@ -2753,15 +2776,15 @@ msgstr "ضمن غلاف الألبوم في التنبيهات"
 msgid "Include all songs"
 msgstr "ضمن جميع المقاطع"
 
-#: internet/subsonicsettingspage.cpp:85
+#: internet/subsonic/subsonicsettingspage.cpp:106
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "نسخة Subsonic REST غير متوافقة. يجب تحديث العميل."
 
-#: internet/subsonicsettingspage.cpp:90
+#: internet/subsonic/subsonicsettingspage.cpp:111
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "نسخة Subsonic REST غير متوافقة. يجب تحديث الخادم."
 
-#: internet/subsonicsettingspage.cpp:131
+#: internet/subsonic/subsonicsettingspage.cpp:152
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "لم يتم إكمال التهيئة، الرجاء التأكد من أن جميع الحقول مملوئة."
 
@@ -2777,7 +2800,7 @@ msgstr "ارفع الصوت بنسبة <value> مئوية"
 msgid "Increase volume"
 msgstr "ارفع الصوت"
 
-#: internet/cloudfileservice.cpp:133
+#: internet/core/cloudfileservice.cpp:152
 #, qt-format
 msgid "Indexing %1"
 msgstr "فهرسة %1"
@@ -2794,7 +2817,7 @@ msgstr "خيارات المدخل"
 msgid "Insert..."
 msgstr "إدارج..."
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Installed"
 msgstr "مثبت"
 
@@ -2815,35 +2838,35 @@ msgctxt "Global search settings dialog title."
 msgid "Internet services"
 msgstr ""
 
-#: internet/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
 msgstr "مفتاح API غير صالح"
 
-#: internet/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:230
 msgid "Invalid format"
 msgstr "صيغة غير متاحة"
 
-#: internet/lastfmservice.cpp:220
+#: internet/lastfm/lastfmservice.cpp:226
 msgid "Invalid method"
 msgstr "طريقة غير متاحة"
 
-#: internet/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:232
 msgid "Invalid parameters"
 msgstr "إعدادات غير صالحة"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfm/lastfmservice.cpp:234
 msgid "Invalid resource specified"
 msgstr "تم تعيين مصدر غير صالح"
 
-#: internet/lastfmservice.cpp:218
+#: internet/lastfm/lastfmservice.cpp:224
 msgid "Invalid service"
 msgstr "خدمة غير متاحة"
 
-#: internet/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "مفتاح جلسة غير صالح"
 
-#: internet/groovesharkservice.cpp:400
+#: internet/grooveshark/groovesharkservice.cpp:404
 msgid "Invalid username and/or password"
 msgstr "اسم مستخدم أو كلمة سر غير صالحة."
 
@@ -2851,27 +2874,27 @@ msgstr "اسم مستخدم أو كلمة سر غير صالحة."
 msgid "Invert Selection"
 msgstr "اعكس الاختيار"
 
-#: internet/jamendoservice.cpp:133
+#: internet/jamendo/jamendoservice.cpp:138
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:117
+#: internet/jamendo/jamendoservice.cpp:123
 msgid "Jamendo Most Listened Tracks"
 msgstr "المقاطع الأكثر استماعا على Jamendo"
 
-#: internet/jamendoservice.cpp:114
+#: internet/jamendo/jamendoservice.cpp:120
 msgid "Jamendo Top Tracks"
 msgstr "أفضل المقاطع على Jamendo"
 
-#: internet/jamendoservice.cpp:108
+#: internet/jamendo/jamendoservice.cpp:114
 msgid "Jamendo Top Tracks of the Month"
 msgstr "أفضل مقاطع الشهر على Jamendo "
 
-#: internet/jamendoservice.cpp:111
+#: internet/jamendo/jamendoservice.cpp:117
 msgid "Jamendo Top Tracks of the Week"
 msgstr "أفضل مقاطع الأسبوع على Jamendo"
 
-#: internet/jamendoservice.cpp:175
+#: internet/jamendo/jamendoservice.cpp:180
 msgid "Jamendo database"
 msgstr "قاعدة بيانات Jamendo"
 
@@ -2941,7 +2964,7 @@ msgstr "آخر تشغيل"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:241
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm مشغول حاليا، الرجاء إعادة المحاولة بعد دقائق."
 
@@ -2999,7 +3022,7 @@ msgstr "البحث في المكتبة"
 msgid "Limits"
 msgstr "الحدود"
 
-#: internet/groovesharkservice.cpp:621
+#: internet/grooveshark/groovesharkservice.cpp:626
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "استمع لمقاطع Grooveshark اعتمادا على ما استمعت عليه سابقا"
@@ -3052,8 +3075,8 @@ msgstr "تحميل قائمة تشغيل ذكية"
 msgid "Loading songs"
 msgstr "تحميل المقاطع"
 
-#: internet/digitallyimportedurlhandler.cpp:63
-#: internet/somafmurlhandler.cpp:49
+#: internet/digitally/digitallyimportedurlhandler.cpp:67
+#: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "تحميل تيار الانترنت"
 
@@ -3065,11 +3088,11 @@ msgstr "جاري تحميل المقاطع"
 msgid "Loading tracks info"
 msgstr "جاري تحميل معلومات المقاطع"
 
-#: library/librarymodel.cpp:152 podcasts/podcastdiscoverymodel.cpp:105
-#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
-#: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:262 internet/vkservice.cpp:497
-#: internet/vksettingspage.cpp:121
+#: library/librarymodel.cpp:152
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
+#: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
+#: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
+#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "جاري التحميل"
 
@@ -3087,16 +3110,16 @@ msgstr "تحميل ملفات/روابط، استبدال قائمة التشغ�
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
 #: ../bin/src/ui_skydrivesettingspage.h:105
-#: ../bin/src/ui_boxsettingspage.h:105 internet/vksettingspage.cpp:110
+#: ../bin/src/ui_boxsettingspage.h:105 internet/vk/vksettingspage.cpp:111
 #: ../bin/src/ui_vksettingspage.h:219 ../bin/src/ui_seafilesettingspage.h:173
 msgid "Login"
 msgstr "تسجيل الدخول"
 
-#: podcasts/podcastsettingspage.cpp:127
+#: internet/podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "فشل الولوج"
 
-#: internet/vksettingspage.cpp:120
+#: internet/vk/vksettingspage.cpp:121
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
@@ -3156,7 +3179,8 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:101 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatune/magnatuneservice.cpp:109
+#: ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -3181,11 +3205,11 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "اجعلها كذلك!"
 
-#: internet/spotifyservice.cpp:608
+#: internet/spotify/spotifyservice.cpp:639
 msgid "Make playlist available offline"
 msgstr "اجعل قائمة التشغيل متاحة دون اتصال"
 
-#: internet/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Malformed response"
 msgstr "إجابة غير صالحة"
 
@@ -3202,11 +3226,11 @@ msgstr "يدويا"
 msgid "Manufacturer"
 msgstr "المصنع"
 
-#: podcasts/podcastservice.cpp:447 ../bin/src/ui_organisedialog.h:260
+#: internet/podcasts/podcastservice.cpp:448 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "علم كمستمع إليه"
 
-#: podcasts/podcastservice.cpp:446
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Mark as new"
 msgstr "علم كجديد"
 
@@ -3285,7 +3309,7 @@ msgstr "نمط عارضة المزاج"
 msgid "Moodbars"
 msgstr "أشرطة المزاج"
 
-#: internet/vkservice.cpp:501
+#: internet/vk/vkservice.cpp:503
 msgid "More"
 msgstr "المزيد"
 
@@ -3316,7 +3340,7 @@ msgid "Move up"
 msgstr "أعلى"
 
 #: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
-#: internet/vkservice.cpp:882
+#: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "موسيقى"
 
@@ -3329,21 +3353,22 @@ msgstr "مكتبة الصوتيات"
 msgid "Mute"
 msgstr "كتم الصوت"
 
-#: internet/vkservice.cpp:818
+#: internet/vk/vkservice.cpp:820
 msgid "My Albums"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:876
+#: internet/grooveshark/groovesharkservice.cpp:633
+#: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "مقاطعي"
 
-#: internet/vkservice.cpp:508
+#: internet/vk/vkservice.cpp:510
 msgid "My Recommendations"
 msgstr "المقترحة لي"
 
-#: internet/groovesharkservice.cpp:1286 internet/groovesharkservice.cpp:1381
-#: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
-#: ../bin/src/ui_wizardfinishpage.h:84
+#: internet/grooveshark/groovesharkservice.cpp:1276
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "الاسم"
 
@@ -3470,23 +3495,23 @@ msgstr "غير متاح عند استعمال قائمة تشغيل دينامي
 msgid "Not connected"
 msgstr "غير متصل"
 
-#: internet/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:250
 msgid "Not enough content"
 msgstr "لا يوجد محتوى كافي"
 
-#: internet/lastfmservice.cpp:248
+#: internet/lastfm/lastfmservice.cpp:254
 msgid "Not enough fans"
 msgstr "عدد المعجبين غير كافٍ"
 
-#: internet/lastfmservice.cpp:246
+#: internet/lastfm/lastfmservice.cpp:252
 msgid "Not enough members"
 msgstr "عدد الأعضاء غير كافٍ"
 
-#: internet/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:256
 msgid "Not enough neighbors"
 msgstr "عدد الجيران غير كافٍ"
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Not installed"
 msgstr "غير مثبت"
 
@@ -3499,7 +3524,7 @@ msgstr "غير متصل"
 msgid "Not mounted - double click to mount"
 msgstr "غير موصول - انقر مرتين للوصل"
 
-#: internet/vksearchdialog.cpp:94
+#: internet/vk/vksearchdialog.cpp:93
 msgid "Nothing found"
 msgstr "لم يعثر على شيء"
 
@@ -3573,10 +3598,13 @@ msgstr "أظهر الأول فقط"
 msgid "Opacity"
 msgstr "الشفافية"
 
-#: internet/digitallyimportedservicebase.cpp:173
-#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
-#: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
+#: internet/digitally/digitallyimportedservicebase.cpp:176
+#: internet/grooveshark/groovesharkservice.cpp:559
+#: internet/icecast/icecastservice.cpp:302
+#: internet/jamendo/jamendoservice.cpp:434
+#: internet/magnatune/magnatuneservice.cpp:284
+#: internet/somafm/somafmservice.cpp:102
+#: internet/soundcloud/soundcloudservice.cpp:351
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "فتح %1 في المتصفح"
@@ -3585,11 +3613,11 @@ msgstr "فتح %1 في المتصفح"
 msgid "Open &audio CD..."
 msgstr "فتح &قرص CD..."
 
-#: podcasts/addpodcastdialog.cpp:238
+#: internet/podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "فتح ملف OPML"
 
-#: podcasts/addpodcastdialog.cpp:80
+#: internet/podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "فتح ملف OPML..."
 
@@ -3605,12 +3633,12 @@ msgstr "فتح جهاز"
 msgid "Open file..."
 msgstr "فتح ملف..."
 
-#: internet/googledriveservice.cpp:198
+#: internet/googledrive/googledriveservice.cpp:216
 msgid "Open in Google Drive"
 msgstr "فتح في Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:460
-#: internet/internetservice.cpp:75 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "فتح في قائمة تشغيل جديدة"
@@ -3620,7 +3648,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "فتح في قائمة جديدة"
 
-#: songinfo/echonestbiographies.cpp:97
+#: songinfo/echonestbiographies.cpp:101
 msgid "Open in your browser"
 msgstr "افتح في المتصفح"
 
@@ -3629,7 +3657,7 @@ msgstr "افتح في المتصفح"
 msgid "Open..."
 msgstr "فتح..."
 
-#: internet/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:236
 msgid "Operation failed"
 msgstr "فشلت العملية"
 
@@ -3698,7 +3726,7 @@ msgstr "استبدل الملفات الأصغر فقط"
 msgid "Owner"
 msgstr "المالك"
 
-#: internet/jamendoservice.cpp:222
+#: internet/jamendo/jamendoservice.cpp:228
 msgid "Parsing Jamendo catalogue"
 msgstr "تحليل فهرس Jamendo"
 
@@ -3797,8 +3825,8 @@ msgstr "خيارات قائمة التشغيل"
 msgid "Playlist type"
 msgstr "نوع قائمة التشغيل"
 
-#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:241
+#: internet/grooveshark/groovesharkservice.cpp:654
+#: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "قوائم التشغيل"
 
@@ -3810,7 +3838,8 @@ msgstr "الرجاء إغلاق متصفحك والعودة إلى كلمنتا�
 msgid "Plugin status:"
 msgstr "حالة الملحق:"
 
-#: podcasts/podcastservice.cpp:130 ../bin/src/ui_podcastsettingspage.h:254
+#: internet/podcasts/podcastservice.cpp:131
+#: ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "بودكاست"
 
@@ -3818,15 +3847,15 @@ msgstr "بودكاست"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/grooveshark/groovesharkservice.cpp:591
 msgid "Popular songs"
 msgstr "المقاطع الشعبية"
 
-#: internet/groovesharkservice.cpp:590
+#: internet/grooveshark/groovesharkservice.cpp:595
 msgid "Popular songs of the Month"
 msgstr "المقاطع الشعبية لهذا الشهر"
 
-#: internet/groovesharkservice.cpp:599
+#: internet/grooveshark/groovesharkservice.cpp:604
 msgid "Popular songs today"
 msgstr "المقاطع الشعبية اليوم"
 
@@ -3979,7 +4008,7 @@ msgstr "أضف للائحة الانتظار"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "راديو (شدة صوت متساوية لجمع المقاطع)"
 
-#: internet/groovesharkservice.cpp:608
+#: internet/grooveshark/groovesharkservice.cpp:613
 msgid "Radios"
 msgstr "راديو"
 
@@ -4024,32 +4053,34 @@ msgstr "قيم المقطع الحالي ب 5 نجوم"
 msgid "Rating"
 msgstr "تقييم"
 
-#: internet/magnatunedownloaddialog.cpp:303 ui/albumcovermanager.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:305
+#: ui/albumcovermanager.cpp:218
 msgid "Really cancel?"
 msgstr "تريد فعلا الإلغاء؟"
 
-#: internet/subsonicsettingspage.cpp:136
+#: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "تم تجاوز عدد مرات إعادات التوجيه المسوح به، تحقق من إعدادات الخادم."
 
-#: internet/groovesharkservice.cpp:556
+#: internet/grooveshark/groovesharkservice.cpp:561
 msgid "Refresh"
 msgstr "حدث"
 
-#: internet/jamendoservice.cpp:431 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:87
+#: internet/jamendo/jamendoservice.cpp:437
+#: internet/magnatune/magnatuneservice.cpp:287
+#: internet/subsonic/subsonicservice.cpp:109
 msgid "Refresh catalogue"
 msgstr "حدث الفهرس"
 
-#: internet/somafmservice.cpp:106
+#: internet/somafm/somafmservice.cpp:111
 msgid "Refresh channels"
 msgstr "حدث القنوات"
 
-#: internet/icecastservice.cpp:300
+#: internet/icecast/icecastservice.cpp:305
 msgid "Refresh station list"
 msgstr "حدث قائمة المحطة"
 
-#: internet/digitallyimportedservicebase.cpp:176
+#: internet/digitally/digitallyimportedservicebase.cpp:179
 msgid "Refresh streams"
 msgstr "حدث تيارات الانترنت"
 
@@ -4074,7 +4105,7 @@ msgstr "تذكر من اخر مرة"
 msgid "Remember my choice"
 msgstr ""
 
-#: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
+#: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_transcodedialog.h:216
 msgid "Remove"
 msgstr "احذف"
@@ -4091,20 +4122,21 @@ msgstr "احذف المقاطع المكررة من قائمة التشغيل"
 msgid "Remove folder"
 msgstr "أزل الملف"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:314
+#: internet/grooveshark/groovesharkservice.cpp:549
+#: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "حذف من مقاطعي"
 
-#: internet/vkservice.cpp:300
+#: internet/vk/vkservice.cpp:302
 msgid "Remove from bookmarks"
 msgstr "إزالة من الإشارات المرجعية"
 
-#: internet/groovesharkservice.cpp:541
+#: internet/grooveshark/groovesharkservice.cpp:546
 msgid "Remove from favorites"
 msgstr "احذف من المفضلة"
 
-#: internet/groovesharkservice.cpp:538 internet/spotifyservice.cpp:615
-#: ../bin/src/ui_mainwindow.h:685
+#: internet/grooveshark/groovesharkservice.cpp:543
+#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "احذف من قائمة التشغيل"
 
@@ -4120,20 +4152,20 @@ msgstr "احذف قوائم التشغيل"
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1583
+#: internet/grooveshark/groovesharkservice.cpp:1570
 msgid "Removing songs from My Music"
 msgstr "حذف مقاطع صوتية من مقاطعي"
 
-#: internet/groovesharkservice.cpp:1530
+#: internet/grooveshark/groovesharkservice.cpp:1518
 msgid "Removing songs from favorites"
 msgstr "حذف المقاطع من المفضلة"
 
-#: internet/groovesharkservice.cpp:1380
+#: internet/grooveshark/groovesharkservice.cpp:1370
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "أعد تسمية \"%1\" قائمة تشغيل"
 
-#: internet/groovesharkservice.cpp:534
+#: internet/grooveshark/groovesharkservice.cpp:539
 msgid "Rename Grooveshark playlist"
 msgstr "أعد تسمة قائمة Grooveshark"
 
@@ -4166,7 +4198,7 @@ msgid "Repeat track"
 msgstr "كرر المقطع"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:456
-#: internet/internetservice.cpp:64 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "استبدل قائمة التشغيل الحالية"
@@ -4216,15 +4248,15 @@ msgstr "اكتف بأحرف ASCII"
 msgid "Resume playback on start"
 msgstr "تابع التشغيل عند البدء"
 
-#: internet/groovesharkservice.cpp:789
+#: internet/grooveshark/groovesharkservice.cpp:795
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "جلب مقاطعي من Grooveshark"
 
-#: internet/groovesharkservice.cpp:756
+#: internet/grooveshark/groovesharkservice.cpp:762
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "جلب المقاطع المفضلة على Grooveshark"
 
-#: internet/groovesharkservice.cpp:688
+#: internet/grooveshark/groovesharkservice.cpp:693
 msgid "Retrieving Grooveshark playlists"
 msgstr "جلب قوائم تشغيل Grooveshark"
 
@@ -4260,7 +4292,7 @@ msgstr "شغل"
 msgid "SOCKS proxy"
 msgstr "بروكسي SOCKS"
 
-#: internet/subsonicsettingspage.cpp:125
+#: internet/subsonic/subsonicsettingspage.cpp:146
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
@@ -4358,7 +4390,7 @@ msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vkservice.cpp:516
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
 msgid "Search"
 msgstr "البحث"
 
@@ -4371,15 +4403,15 @@ msgstr "بحث"
 msgid "Search Icecast stations"
 msgstr "البحث في محطات Icecast"
 
-#: internet/jamendoservice.cpp:438
+#: internet/jamendo/jamendoservice.cpp:444
 msgid "Search Jamendo"
 msgstr "بحث Jamendo"
 
-#: internet/magnatuneservice.cpp:288
+#: internet/magnatune/magnatuneservice.cpp:296
 msgid "Search Magnatune"
 msgstr "بحث Magnatude"
 
-#: internet/subsonicservice.cpp:71
+#: internet/subsonic/subsonicservice.cpp:93
 msgid "Search Subsonic"
 msgstr "بحث Subsonic"
 
@@ -4411,8 +4443,9 @@ msgstr "نمط البحث"
 msgid "Search options"
 msgstr "إعدادات البحث"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
-#: internet/spotifyservice.cpp:372
+#: internet/grooveshark/groovesharkservice.cpp:582
+#: internet/soundcloud/soundcloudservice.cpp:116
+#: internet/spotify/spotifyservice.cpp:397
 msgid "Search results"
 msgstr "نتائج البحث"
 
@@ -4421,7 +4454,7 @@ msgstr "نتائج البحث"
 msgid "Search terms"
 msgstr "كلمات البحث"
 
-#: internet/groovesharkservice.cpp:271
+#: internet/grooveshark/groovesharkservice.cpp:275
 msgid "Searching on Grooveshark"
 msgstr "البحث في Grooveshark"
 
@@ -4497,7 +4530,7 @@ msgstr "عنوان الخادم"
 msgid "Server details"
 msgstr "معلومات الخادم"
 
-#: internet/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:242
 msgid "Service offline"
 msgstr "خدمة غير متصلة"
 
@@ -4807,23 +4840,31 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:194
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "خطأ بتسجيل الدخول لـ Spotify"
+
+#: internet/spotify/spotifyservice.cpp:811
+msgid "Spotify playlist's URL"
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "ملحق Spotify"
 
-#: internet/spotifyblobdownloader.cpp:64
+#: internet/spotify/spotifyblobdownloader.cpp:66
 msgid "Spotify plugin not installed"
 msgstr "ملحق Spotify غير مثبت."
+
+#: internet/spotify/spotifyservice.cpp:802
+msgid "Spotify song's URL"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
 msgstr "قياسي"
 
-#: internet/spotifyservice.cpp:380
+#: internet/spotify/spotifyservice.cpp:405
 msgid "Starred"
 msgstr "مميز"
 
@@ -4839,8 +4880,9 @@ msgstr "ابدأ قئمة التشغيل اللتي تعمل حالياً"
 msgid "Start transcoding"
 msgstr "ابدأ التحويل"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
-#: internet/spotifyservice.cpp:374
+#: internet/grooveshark/groovesharkservice.cpp:584
+#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/spotify/spotifyservice.cpp:399
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4851,11 +4893,11 @@ msgstr "ابدأ بكتابة شيء ما في خانة البحث أعلاه ل
 msgid "Starting %1"
 msgstr "بدأ %1"
 
-#: internet/magnatunedownloaddialog.cpp:122
+#: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "بدأ..."
 
-#: internet/groovesharkservice.cpp:612
+#: internet/grooveshark/groovesharkservice.cpp:617
 msgid "Stations"
 msgstr "محطات"
 
@@ -4893,7 +4935,7 @@ msgstr "تم الايقاف"
 msgid "Stream"
 msgstr "المجرى"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonic/subsonicsettingspage.cpp:50
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4903,7 +4945,7 @@ msgstr "الاستماع للموسيقى من خادوم Subsonic يتطلب ر
 msgid "Streaming membership"
 msgstr "عضوية الاستماع لتيارات الانترنت"
 
-#: internet/groovesharkservice.cpp:653
+#: internet/grooveshark/groovesharkservice.cpp:658
 msgid "Subscribed playlists"
 msgstr "قوائم التشغيل المشترك بها"
 
@@ -4911,7 +4953,8 @@ msgstr "قوائم التشغيل المشترك بها"
 msgid "Subscribers"
 msgstr "المشتركون"
 
-#: internet/subsonicservice.cpp:98 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonic/subsonicservice.cpp:120
+#: ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4951,15 +4994,15 @@ msgstr "الصيغ المدعومة"
 msgid "Synchronize statistics to files now"
 msgstr "زامن الإحصائيات مع الملفات الآن"
 
-#: internet/spotifyservice.cpp:640
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Syncing Spotify inbox"
 msgstr "مزامنة صندوق بريد Spotify"
 
-#: internet/spotifyservice.cpp:634
+#: internet/spotify/spotifyservice.cpp:670
 msgid "Syncing Spotify playlist"
 msgstr "مزامنة قائمة تشغيل Spotify"
 
-#: internet/spotifyservice.cpp:645
+#: internet/spotify/spotifyservice.cpp:681
 msgid "Syncing Spotify starred tracks"
 msgstr "مزامنة مقاطع Spotify المميزة"
 
@@ -5000,7 +5043,7 @@ msgstr "تعذر تشغيل الأمر %1."
 msgid "The album cover of the currently playing song"
 msgstr "غلاف ألبوم المقطع المشغل حاليا"
 
-#: internet/magnatunedownloaddialog.cpp:92
+#: internet/magnatune/magnatunedownloaddialog.cpp:94
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "المسار %1 غير صالح"
@@ -5017,7 +5060,7 @@ msgstr "الموقع الذي طلبته غير موجود!"
 msgid "The site you requested is not an image!"
 msgstr "الموقع الذي طلبته ليس بصورة!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonic/subsonicsettingspage.cpp:116
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
@@ -5033,16 +5076,17 @@ msgstr "إصدار كلمنتاين الذي حدثت إليه يتطلب الق
 msgid "There are other songs in this album"
 msgstr "هناك مقاطع أخرى في هذا الألبوم"
 
-#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:104
-#: podcasts/gpoddertoptagspage.cpp:73
+#: internet/podcasts/gpoddersearchpage.cpp:76
+#: internet/podcasts/gpoddertoptagsmodel.cpp:104
+#: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "حدث خطأ في الاتصال مع gpodder.net"
 
-#: internet/magnatunedownloaddialog.cpp:161
+#: internet/magnatune/magnatunedownloaddialog.cpp:163
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "واجه كلمنتاين مشاكل عند جلب المعلومات من Magnatune"
 
-#: podcasts/itunessearchpage.cpp:77
+#: internet/podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "حدثت مشكلة أثناء القراءة من متجر iTunes"
 
@@ -5084,13 +5128,13 @@ msgstr "تستخدم هذه الإعدادات في نافذة \"تحويل ال
 msgid "Third level"
 msgstr "المستوى الثالث"
 
-#: internet/jamendoservice.cpp:176
+#: internet/jamendo/jamendoservice.cpp:181
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr "سيترتب عن هذه العملية إنشاء قاعدة بيانات يمكن أن تصل لـ 150 ميجابايت.\nهل تريد الاستمرار رغم ذلك؟"
 
-#: internet/magnatunedownloaddialog.cpp:188
+#: internet/magnatune/magnatunedownloaddialog.cpp:190
 msgid "This album is not available in the requested format"
 msgstr "هذا الألبوم غير متوفر بالصيغة المطلوبة"
 
@@ -5131,7 +5175,7 @@ msgstr "هذه أول مرة تقوم بوصل هذا الجهاز. سيعمل �
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "يمكن تغيير هذه الخاصية من إعدادات \"السلوك\""
 
-#: internet/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:244
 msgid "This stream is for paid subscribers only"
 msgstr "هذا التيار للاشتراكات المدفوعة فقط"
 
@@ -5147,7 +5191,7 @@ msgstr "هذا النوع من الأجهزة غير مدعوم: %1"
 msgid "Title"
 msgstr "العنوان"
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/grooveshark/groovesharkservice.cpp:1055
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -5181,11 +5225,11 @@ msgstr "بدّل حالة الإظهار على الشاشة"
 msgid "Tomorrow"
 msgstr "غدا"
 
-#: podcasts/podcasturlloader.cpp:117
+#: internet/podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "إعادات توجيه كثيرة جدا"
 
-#: internet/spotifyservice.cpp:392
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Top tracks"
 msgstr "أفضل المقاطع"
 
@@ -5193,11 +5237,11 @@ msgstr "أفضل المقاطع"
 msgid "Total albums:"
 msgstr "إجمالي الألبومات:"
 
-#: covers/coversearchstatisticsdialog.cpp:68
+#: covers/coversearchstatisticsdialog.cpp:70
 msgid "Total bytes transferred"
 msgstr "إجمالي البايتات المرسلة"
 
-#: covers/coversearchstatisticsdialog.cpp:65
+#: covers/coversearchstatisticsdialog.cpp:67
 msgid "Total network requests made"
 msgstr "إجمالي طلبات الشبكة "
 
@@ -5207,7 +5251,7 @@ msgstr "إجمالي طلبات الشبكة "
 msgid "Track"
 msgstr "المقطوعة"
 
-#: internet/soundcloudservice.cpp:134
+#: internet/soundcloud/soundcloudservice.cpp:133
 msgid "Tracks"
 msgstr "المسارات"
 
@@ -5256,11 +5300,12 @@ msgstr "رابط(روابط)"
 msgid "Ultra wide band (UWB)"
 msgstr "Ultra wide band (UWB)"
 
-#: internet/seafilesettingspage.cpp:129 internet/seafilesettingspage.cpp:130
+#: internet/seafile/seafilesettingspage.cpp:131
+#: internet/seafile/seafilesettingspage.cpp:132
 msgid "Unable to connect"
 msgstr ""
 
-#: internet/magnatunedownloaddialog.cpp:147
+#: internet/magnatune/magnatunedownloaddialog.cpp:149
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "تعذر تحميل %1 (%2)"
@@ -5273,11 +5318,12 @@ msgstr "تعذر تحميل %1 (%2)"
 msgid "Unknown"
 msgstr "مجهول"
 
-#: podcasts/podcasturlloader.cpp:208
+#: internet/podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "نوع محتوى غير معروف"
 
-#: internet/digitallyimportedclient.cpp:71 internet/lastfmservice.cpp:257
+#: internet/digitally/digitallyimportedclient.cpp:74
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Unknown error"
 msgstr "خطأ مجهول"
 
@@ -5293,7 +5339,8 @@ msgstr "إلغاء تجاوز المسارات المختارة"
 msgid "Unskip track"
 msgstr "إلغاء تجاوز المسار"
 
-#: podcasts/addpodcastdialog.cpp:68 podcasts/podcastservice.cpp:441
+#: internet/podcasts/addpodcastdialog.cpp:68
+#: internet/podcasts/podcastservice.cpp:442
 msgid "Unsubscribe"
 msgstr "ألغ الاشتراك"
 
@@ -5301,15 +5348,15 @@ msgstr "ألغ الاشتراك"
 msgid "Upcoming Concerts"
 msgstr "الحفلات القادمة"
 
-#: internet/vkservice.cpp:330
+#: internet/vk/vkservice.cpp:332
 msgid "Update"
 msgstr "تحديث"
 
-#: internet/groovesharkservice.cpp:1237
+#: internet/grooveshark/groovesharkservice.cpp:1227
 msgid "Update Grooveshark playlist"
 msgstr "حدّث قائمة تشغيل Grooveshark"
 
-#: podcasts/podcastservice.cpp:418
+#: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "حدّث جميع البودكاست"
 
@@ -5321,7 +5368,7 @@ msgstr "حدّث المجلدات التي تغيرت في المكتبة"
 msgid "Update the library when Clementine starts"
 msgstr "حدّث المكتبة عند بدء كلمنتاين"
 
-#: podcasts/podcastservice.cpp:426
+#: internet/podcasts/podcastservice.cpp:427
 msgid "Update this podcast"
 msgstr "حدّث هذا البودكاست"
 
@@ -5419,7 +5466,7 @@ msgstr "استخدم تسوية الصوت"
 msgid "Used"
 msgstr "مستعمل"
 
-#: internet/groovesharkservice.cpp:403
+#: internet/grooveshark/groovesharkservice.cpp:407
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "المستخدم %1 لا يملك حساب Grooveshark Anywhere"
@@ -5502,7 +5549,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vkservice.cpp:858
+#: internet/vk/vkservice.cpp:860
 msgid "Wall"
 msgstr ""
 
@@ -5620,7 +5667,7 @@ msgstr "أكتب جميع إحصائيات المقاطع في ملفات الم
 msgid "Write metadata"
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:80
+#: internet/subsonic/subsonicsettingspage.cpp:101
 msgid "Wrong username or password."
 msgstr "اسم مستخدم أو كلمة سر خاطئة."
 
@@ -5677,13 +5724,13 @@ msgstr "أنت متصل."
 msgid "You can change the way the songs in the library are organised."
 msgstr "يمكنك تغيير طريقة ترتيب المقاطع في المكتبة"
 
-#: internet/digitallyimportedsettingspage.cpp:45
+#: internet/digitally/digitallyimportedsettingspage.cpp:48
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "يمكنك الاستماع للمقاطع دون إنشاء حساب، لكن من له حساب مميز يمكنه الاستماع للمقاطع بجودة أعلى ودون إشهارات."
 
-#: internet/magnatunesettingspage.cpp:54
+#: internet/magnatune/magnatunesettingspage.cpp:58
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5700,15 +5747,15 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "يمكنك استعمال أداة التحكم عن بعد لـ Wii كأداة تحكم عن بعد بكلمنتاين. <a href=\"http://www.clementine-player.org/wiimote\">شاهد هذه الصفحة في توثيق كلمنتاين</a> لمزيد كم المعلومات.\n"
 
-#: internet/groovesharksettingspage.cpp:109
+#: internet/grooveshark/groovesharksettingspage.cpp:113
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "لا تملك حساب Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:146
+#: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "لا تملك حساب Spotify مدفوع."
 
-#: internet/digitallyimportedclient.cpp:93
+#: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "ليس لديك اشتراك مفعل"
 
@@ -5719,13 +5766,13 @@ msgid ""
 "stream."
 msgstr "ليس عليك أن تسجل دخولك حتى تبحث وتستمع إلى SoundCloud. لكن إذا أردت دخول قوائم تشغيلك وسير نشاطك فإنه عليك أن تسجل الدخول."
 
-#: internet/spotifyservice.cpp:179
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr "لقد تم تسجيل خروجك من Spotify، الرجاء إعادة إدخال كلمة السر في نافذة الإعدادات."
 
-#: internet/spotifysettingspage.cpp:157
+#: internet/spotify/spotifysettingspage.cpp:160
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr "لقد تم تسجيل خروجك من Spotify، الرجاء إعادة إدخال كلمة السر."
 
@@ -5755,11 +5802,11 @@ msgstr "سيتوجب عليك إعادة تشغيل كلمنتاين إذا غي
 msgid "Your IP address:"
 msgstr "عنوان الايبي الخاص بك هو:"
 
-#: internet/lastfmsettingspage.cpp:76
+#: internet/lastfm/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
 msgstr "بيانات التعريف الخاصة بحسابك على Last.fm خاطئة"
 
-#: internet/magnatunesettingspage.cpp:113
+#: internet/magnatune/magnatunesettingspage.cpp:117
 msgid "Your Magnatune credentials were incorrect"
 msgstr "بيانات التعريف الخاصة بحسابك على Magnatune خاطئة"
 
@@ -5767,7 +5814,8 @@ msgstr "بيانات التعريف الخاصة بحسابك على Magnatune �
 msgid "Your library is empty!"
 msgstr "مكتبتك فارغة!"
 
-#: globalsearch/savedradiosearchprovider.cpp:26 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26
+#: internet/internetradio/savedradio.cpp:53
 msgid "Your radio streams"
 msgstr "راديو تيارات الانترنت الخاصة بك"
 
@@ -5780,8 +5828,8 @@ msgstr " نقل معلومات الاستماع: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "لا يتوفر نظامك على دعم OpenGL، لهذا التأثيرات المرئية غير متاحة."
 
-#: internet/groovesharksettingspage.cpp:114
-#: internet/spotifysettingspage.cpp:152
+#: internet/grooveshark/groovesharksettingspage.cpp:118
+#: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "اسم المستخدم أو كلمة السر  خاطئة."
 
@@ -5862,7 +5910,7 @@ msgstr "يساوي"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:35
+#: internet/podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "مجلد gpodder.net"
 
@@ -5878,8 +5926,9 @@ msgstr "أجهزة أيبود ووحدات USB لا تشتغل حاليا على
 msgid "in the last"
 msgstr "من بين اخر المقاطع المشغلة"
 
-#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
-#: internet/spotifysettingspage.cpp:61 playlist/playlistview.cpp:232
+#: internet/spotify/spotifysettingspage.cpp:62
+#: internet/spotify/spotifysettingspage.cpp:63
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
 #: ui/edittagdialog.cpp:478
 msgid "kbps"
 msgstr "kbps"
