@@ -146,7 +146,17 @@ void PodcastEpisode::InitFromQuery(const QSqlQuery& query) {
   d->duration_secs_ = query.value(6).toInt();
   d->url_ = QUrl::fromEncoded(query.value(7).toByteArray());
   d->listened_ = query.value(8).toBool();
-  d->listened_date_ = QDateTime::fromTime_t(query.value(9).toUInt());
+
+  // After setting QDateTime to invalid state, it's saved into database as time_t,
+  // when this number std::numeric_limits<unsigned int>::max() (4294967295) is read back
+  // from database, it creates a valid QDateTime.
+  // So to make it behave consistently, this change is needed.
+  if (query.value(9).toUInt() == std::numeric_limits<unsigned int>::max()) {
+    d->listened_date_ = QDateTime();
+  } else {
+    d->listened_date_ = QDateTime::fromTime_t(query.value(9).toUInt());
+  }
+
   d->downloaded_ = query.value(10).toBool();
   d->local_url_ = QUrl::fromEncoded(query.value(11).toByteArray());
 

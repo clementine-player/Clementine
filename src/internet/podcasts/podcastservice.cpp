@@ -512,7 +512,7 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
 
     if (explicitly_selected_podcasts_.isEmpty()) {
       set_new_action_->setEnabled(listened);
-      set_listened_action_->setEnabled(!listened);
+      set_listened_action_->setEnabled(!listened || !episode.listened_date().isValid());
     }
   } else {
     download_selected_action_->setEnabled(episodes);
@@ -719,7 +719,7 @@ void PodcastService::UpdatePodcastListenedStateAsync(const Song& metadata) {
   if (!episode.is_valid()) return;
 
   // Mark it as listened if it's not already
-  if (!episode.listened()) {
+  if (!episode.listened() || !episode.listened_date().isValid()) {
     episode.set_listened(true);
     episode.set_listened_date(QDateTime::currentDateTime());
     backend_->UpdateEpisodes(PodcastEpisodeList() << episode);
