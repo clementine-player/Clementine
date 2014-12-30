@@ -33,7 +33,7 @@ class TwitterStatuses : public SongInfoProvider {
   void FetchInfo(int id, const Song& metadata);
 
  private slots:
-  void RequestFinished();
+  void RequestFinished(QNetworkReply* reply);
 
  private:
   QIcon twitter_icon_;

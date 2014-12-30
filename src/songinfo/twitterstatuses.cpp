@@ -20,6 +20,7 @@
 #include <echonest/Artist.h>
 
 #include "songinfotextview.h"
+#include "core/closure.h"
 #include "core/logging.h"
 
 struct TwitterStatuses::Request {
@@ -34,17 +35,16 @@ TwitterStatuses::TwitterStatuses() {
 }
 
 void TwitterStatuses::FetchInfo(int id, const Song& metadata) {
-  std::shared_ptr<Request> request(new Request(id));
+  RequestPtr request(new Request(id));
   request->artist_->setName(metadata.artist());
 
   QNetworkReply* reply = request->artist_->fetchTwitter();
   qLog(Debug) << reply->request().url();
-  connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
+  NewClosure(reply, SIGNAL(finished()), this, SLOT(RequestFinished(QNetworkReply*)), reply);
   requests_[reply] = request;
 }
 
-void TwitterStatuses::RequestFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+void TwitterStatuses::RequestFinished(QNetworkReply* reply) {
   if (!reply || !requests_.contains(reply)) return;
   reply->deleteLater();
 
