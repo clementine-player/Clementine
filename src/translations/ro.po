@@ -11,14 +11,15 @@
 # Daniel Șerbănescu <daniel@serbanescu.dk>, 2014
 # Daniel Șerbănescu <daniel@serbanescu.dk>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# ilixandr <ilixandr@gmail.com>, 2014
 # Marius <bamse16@yahoo.com>, 2013
 # titus <titus0818@gmail.com>, 2014
 # titus <titus0818@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-27 18:00+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2014-12-30 10:07+0000\n"
+"Last-Translator: ilixandr <ilixandr@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -298,7 +299,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Daca optiunea nu este bifata, Clementine va incerca sa va salvaze ratingurile si alte statistici doar intr-o baza de date separata si nu va va modifica fisierele.</p><p>Daca optiunea este bifata, statisticile vor fi salvate atat in baza de data, cat si direct in fisier de fiecare data cand acestea se modifica.</p><p>Va rugam sa tineti cont ca s-ar putea sa nu functioneze pentru toate formatele si ca, din cauza absentei unui standard, alte playere ar putea sa nu le poata citi.</p></body></html>"
 
 #: ../bin/src/ui_libraryfilterwidget.h:97
 #, qt-format
@@ -309,7 +310,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Asociati un cuvant impreuna cu numele unui camp pentru a limita cautarea strict la acel camp, de exemplu <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> cauta in librarie toti artisti ale caror nume contin cuvantul Bode.</p><p><span style=\" font-weight:600;\">Campuri disponibile: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -317,7 +318,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Aceasta va scrie ratingurile si statisticile melodiilor in etichetele fisierelor pentru toate melodiile din libraria dumneavoastra.</p><p>Aceasta actiune nu este necesara daca optiunea &quot;Salveaza ratingurile si statisticile in etivhetele fisierelor&quot; est activa.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:251
 msgid ""
@@ -707,7 +708,7 @@ msgstr "Albume fără coperți"
 
 #: ../bin/src/ui_podcastsettingspage.h:279
 msgid "All"
-msgstr ""
+msgstr "Toate"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -1006,7 +1007,7 @@ msgstr "Tip bloc"
 
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Blur amount"
-msgstr ""
+msgstr "Valoare neclara"
 
 #: ../bin/src/ui_notificationssettingspage.h:456
 msgid "Body"
@@ -1060,12 +1061,12 @@ msgstr "Cale cache:"
 
 #: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
-msgstr ""
+msgstr "Memorare in cache"
 
 #: internet/vk/vkmusiccache.cpp:120
 #, qt-format
 msgid "Caching %1"
-msgstr ""
+msgstr "Memorare in cache a %1"
 
 #: internet/spotify/spotifyblobdownloader.cpp:52
 msgid "Cancel"
@@ -1073,7 +1074,7 @@ msgstr "Anulare"
 
 #: internet/podcasts/podcastservice.cpp:439
 msgid "Cancel download"
-msgstr ""
+msgstr "Anuleaza decarcarea"
 
 #: internet/vk/vkservice.cpp:626
 msgid ""
@@ -1862,7 +1863,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in Google Drive which may take some time."
-msgstr ""
+msgstr "O rescanare completa va distruge orice metadate pe care le-ati salvat in Clementine, precum coperta, numarul de redari si evaluarile. Clementine va scana toate fisierele muzicale din Google Drive, iar aceasta va dura ceva timp."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1874,7 +1875,7 @@ msgstr "Nu arăta în artiști diferiți"
 
 #: ../bin/src/ui_podcastsettingspage.h:278
 msgid "Don't show listened episodes"
-msgstr ""
+msgstr "Nu arata episoadele ascultate"
 
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
@@ -2042,7 +2043,7 @@ msgstr "Activare suport Wii Remote"
 
 #: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
-msgstr ""
+msgstr "Activeaza cachingul automat"
 
 #: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
@@ -2054,7 +2055,7 @@ msgstr "Activează scurtăturile numai când Clementine este focalizat"
 
 #: ../bin/src/ui_behavioursettingspage.h:262
 msgid "Enable song metadata inline edition with click"
-msgstr ""
+msgstr "Activati editarea inline a melodiilor prin click"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2437,7 +2438,7 @@ msgstr "Primul nivel"
 
 #: widgets/nowplayingwidget.cpp:105
 msgid "Fit cover to width"
-msgstr ""
+msgstr "Ajusteaza coperta in functie de latime"
 
 #: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
@@ -2464,7 +2465,7 @@ msgstr "Uită dispozitivul"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr ""
+msgstr "Uitarea unui dispozitiv va determina inlaturarea lui din aceasta lista, iar Clementine va trebui sa rescaneze toate melodiile atunci cand il veti reconecta."
 
 #: ../bin/src/ui_deviceviewcontainer.h:98
 #: ../bin/src/ui_searchproviderstatuswidget.h:94
@@ -2536,21 +2537,21 @@ msgstr "Gen"
 
 #: internet/grooveshark/groovesharkservice.cpp:555
 msgid "Get a URL to share this Grooveshark playlist"
-msgstr ""
+msgstr "Obtine un URL pentru a distribui aceasta lista de redare Grooveshark"
 
 #: internet/grooveshark/groovesharkservice.cpp:552
 #: internet/grooveshark/groovesharkservice.cpp:1154
 msgid "Get a URL to share this Grooveshark song"
-msgstr ""
+msgstr "Obtine un URL pentru a distribui aceasta melodie Grooveshark"
 
 #: internet/spotify/spotifyservice.cpp:610
 #: internet/spotify/spotifyservice.cpp:651
 msgid "Get a URL to share this Spotify song"
-msgstr ""
+msgstr "Obtine un URL pentru a distribui aceasta melodie Spotify"
 
 #: internet/spotify/spotifyservice.cpp:642
 msgid "Get a URL to share this playlist"
-msgstr ""
+msgstr "Obtine un URL pentru a distribui aceasta lista de redare"
 
 #: internet/grooveshark/groovesharkservice.cpp:829
 msgid "Getting Grooveshark popular songs"
@@ -2588,7 +2589,7 @@ msgstr "Google Drive"
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
-msgstr ""
+msgstr "S-au exportat %1 coperte din %2 (%3 omise) "
 
 #: ../bin/src/ui_behavioursettingspage.h:258
 msgid "Grey out non existent songs in my playlists"
@@ -2658,7 +2659,7 @@ msgstr "Pagina HTML nu conține nici un flux RSS"
 #: internet/subsonic/subsonicsettingspage.cpp:162
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr ""
+msgstr "A fost receptionat codul de stare HTTP 3xx fara URL, verificati configuratia serverului."
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2722,7 +2723,7 @@ msgstr "Identificare melodie"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr ""
+msgstr "Daca aceasta optiune este activa, un click pe melodia selectata in lista de redate va va permite sa editati valoarea etichetei in mod direct"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -3268,7 +3269,7 @@ msgstr "Mediu (512x512)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:156
 msgid "Membership type"
-msgstr ""
+msgstr "Tipul de apartenenta"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
 msgid "Minimum bitrate"
@@ -3276,7 +3277,7 @@ msgstr "Rata de biți minimă"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr ""
+msgstr "Umplere minima a tamponului"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3544,7 +3545,7 @@ msgstr "Se redă acum"
 
 #: ../bin/src/ui_podcastsettingspage.h:280
 msgid "Number of episodes to show"
-msgstr ""
+msgstr "Numarul de episoade afisate"
 
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
@@ -4062,7 +4063,7 @@ msgstr "Sigur anulați?"
 
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "Limita de redirectionari a fost depasita, verificati configuratia serverului."
 
 #: internet/grooveshark/groovesharkservice.cpp:561
 msgid "Refresh"
@@ -4244,7 +4245,7 @@ msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
-msgstr ""
+msgstr "Restricionat la caractere ASCII"
 
 #: ../bin/src/ui_behavioursettingspage.h:257
 msgid "Resume playback on start"
@@ -4252,7 +4253,7 @@ msgstr "Reia redarea la pornire"
 
 #: internet/grooveshark/groovesharkservice.cpp:795
 msgid "Retrieving Grooveshark My Music songs"
-msgstr ""
+msgstr "Se obtin melodiile din Grooveshark Muzica Mea"
 
 #: internet/grooveshark/groovesharkservice.cpp:762
 msgid "Retrieving Grooveshark favorites songs"
@@ -4260,7 +4261,7 @@ msgstr "Obținere melodiile favorite Grooveshark"
 
 #: internet/grooveshark/groovesharkservice.cpp:693
 msgid "Retrieving Grooveshark playlists"
-msgstr ""
+msgstr "Se obtine lista de redare Grooveshark"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4298,7 +4299,7 @@ msgstr "Proxy SOCKS"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "Eroare de handshake SSL, verificati configuratia serverului. Optiunea SSLv3 de mai jos poate inlatura unele probleme."
 
 #: devices/deviceview.cpp:203
 msgid "Safely remove device"
@@ -4848,7 +4849,7 @@ msgstr "Eroare autentificare Spotify"
 
 #: internet/spotify/spotifyservice.cpp:811
 msgid "Spotify playlist's URL"
-msgstr ""
+msgstr "URL-ul listei de redare Spotify"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
@@ -4860,7 +4861,7 @@ msgstr "Modulul Spotify nu este instalat"
 
 #: internet/spotify/spotifyservice.cpp:802
 msgid "Spotify song's URL"
-msgstr ""
+msgstr "URL-ul listei melodiei Spotify"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
@@ -5300,7 +5301,7 @@ msgstr "URL(-uri)"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
-msgstr ""
+msgstr "Banda ultra-larga (BUL)"
 
 #: internet/seafile/seafilesettingspage.cpp:131
 #: internet/seafile/seafilesettingspage.cpp:132
@@ -5418,7 +5419,7 @@ msgstr "Utilizează telecomanda Wii"
 
 #: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
-msgstr ""
+msgstr "Folositi un set de culori personalizat"
 
 #: ../bin/src/ui_notificationssettingspage.h:452
 msgid "Use a custom message for notifications"
@@ -5707,7 +5708,7 @@ msgstr "Sunteți pe cale de a elimina %1 liste de redare de la favorite, sunteț
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "Sunteti pe cale sa inlaturati o lista de redare care nu face parte din listele dumneavoastra de redare favorite: lista de redare va fi stearsa (nu se poate reveni asupra acestei actiuni). \nSigur doriti sa continuati?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5926,7 +5927,7 @@ msgstr "iPod-urile și dispozitivele USB nu funcționează actualmente pe Window
 
 #: smartplaylists/searchterm.cpp:212
 msgid "in the last"
-msgstr ""
+msgstr "in ultimele"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
@@ -5959,11 +5960,11 @@ msgstr "nu sunt egale"
 
 #: smartplaylists/searchterm.cpp:214
 msgid "not in the last"
-msgstr ""
+msgstr "nu se afla in ultimele"
 
 #: smartplaylists/searchterm.cpp:210
 msgid "not on"
-msgstr ""
+msgstr "nu este in"
 
 #: smartplaylists/searchterm.cpp:367
 msgid "oldest first"
