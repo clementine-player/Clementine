@@ -17,6 +17,7 @@
 
 #include "behavioursettingspage.h"
 #include "mainwindow.h"
+#include "core/player.h"
 #include "ui_behavioursettingspage.h"
 #include "playlist/playlist.h"
 #include "playlist/playlisttabbar.h"
@@ -49,6 +50,9 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   ui_->menu_playmode->setItemData(0, MainWindow::PlayBehaviour_Never);
   ui_->menu_playmode->setItemData(1, MainWindow::PlayBehaviour_IfStopped);
   ui_->menu_playmode->setItemData(2, MainWindow::PlayBehaviour_Always);
+
+  ui_->menu_previousmode->setItemData(0, Player::PreviousBehaviour_DontRestart);
+  ui_->menu_previousmode->setItemData(1, Player::PreviousBehaviour_Restart);
 
   // Populate the language combo box.  We do this by looking at all the
   // compiled in translations.
@@ -180,6 +184,10 @@ void BehaviourSettingsPage::Save() {
   MainWindow::PlayBehaviour menu_playmode = MainWindow::PlayBehaviour(
       ui_->menu_playmode->itemData(ui_->menu_playmode->currentIndex()).toInt());
 
+  Player::PreviousBehaviour menu_previousmode = Player::PreviousBehaviour(
+      ui_->menu_previousmode->itemData(ui_->menu_previousmode->currentIndex())
+          .toInt());
+
   Playlist::Path path = Playlist::Path_Automatic;
   if (ui_->b_automatic_path->isChecked()) {
     path = Playlist::Path_Automatic;
@@ -200,6 +208,10 @@ void BehaviourSettingsPage::Save() {
   s.setValue("menu_playmode", menu_playmode);
   s.setValue("resume_playback_after_start",
              ui_->resume_after_start_->isChecked());
+  s.endGroup();
+
+  s.beginGroup(Player::kSettingsGroup);
+  s.setValue("menu_previousmode", menu_previousmode);
   s.endGroup();
 
   s.beginGroup("General");

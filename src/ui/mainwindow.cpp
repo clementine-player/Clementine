@@ -216,6 +216,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   int volume = app_->player()->GetVolume();
   ui_->volume->setValue(volume);
   VolumeChanged(volume);
+  app_->player()->ReloadSettings();
 
   // Initialise the global search widget
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());

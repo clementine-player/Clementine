@@ -31,6 +31,7 @@
 
 #include <QObject>
 #include <QSettings>
+#include <QDateTime>
 
 #include "config.h"
 #include "core/song.h"
@@ -91,7 +92,7 @@ class PlayerInterface : public QObject {
   virtual void Play() = 0;
   virtual void ShowOSD() = 0;
 
- signals:
+signals:
   void Playing();
   void Paused();
   void Stopped();
@@ -118,6 +119,14 @@ class Player : public PlayerInterface {
  public:
   explicit Player(Application* app, QObject* parent = nullptr);
   ~Player();
+
+  static const char* kSettingsGroup;
+
+  // Don't change the values
+  enum PreviousBehaviour {
+    PreviousBehaviour_DontRestart = 1,
+    PreviousBehaviour_Restart = 2
+  };
 
   void Init();
 
@@ -197,6 +206,9 @@ class Player : public PlayerInterface {
   QUrl loading_async_;
 
   int volume_before_mute_;
+
+  QDateTime last_pressed_previous_;
+  PreviousBehaviour menu_previousmode_;
 };
 
 #endif  // CORE_PLAYER_H_
