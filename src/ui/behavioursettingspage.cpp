@@ -59,7 +59,7 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
     // The regex captures the "ru" from "clementine_ru.qm"
     if (!lang_re.exactMatch(filename)) continue;
 
-    QString code = lang_re.cap(1);
+    QString code = lang_re.cap(1).replace("@latin", "_Latn");
     QString language_name = QLocale::languageToString(QLocale(code).language());
 #if QT_VERSION >= 0x040800
     QString native_name = QLocale(code).nativeLanguageName();
