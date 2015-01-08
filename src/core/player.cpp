@@ -29,10 +29,10 @@
 
 #include <memory>
 
+#include <QSettings>
 #include <QSortFilterProxyModel>
 #include <QtDebug>
 #include <QtConcurrentRun>
-#include <QSettings>
 
 #include "config.h"
 #include "core/application.h"
@@ -62,7 +62,8 @@ Player::Player(Application* app, QObject* parent)
       last_state_(Engine::Empty),
       nb_errors_received_(0),
       volume_before_mute_(50),
-      last_pressed_previous_(QDateTime::currentDateTime()) {
+      last_pressed_previous_(QDateTime::currentDateTime()),
+      menu_previousmode_(PreviousBehaviour_DontRestart) {
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());
@@ -88,6 +89,8 @@ void Player::Init() {
           SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
 
   engine_->SetVolume(settings_.value("volume", 50).toInt());
+
+  ReloadSettings();
 
 #ifdef HAVE_LIBLASTFM
   lastfm_ = app_->scrobbler();

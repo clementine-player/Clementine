@@ -29,9 +29,9 @@
 
 #include <memory>
 
+#include <QDateTime>
 #include <QObject>
 #include <QSettings>
-#include <QDateTime>
 
 #include "config.h"
 #include "core/song.h"
