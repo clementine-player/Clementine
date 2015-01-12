@@ -4,7 +4,7 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Jiri Grönroos <jiri.gronroos@iki.fi>, 2012-2014
+# Jiri Grönroos <jiri.gronroos@iki.fi>, 2012-2015
 # J. S. Tuomisto <jstuomisto@gmail.com>, 2013-2014
 # J. S. Tuomisto <jstuomisto@gmail.com>, 2013
 # Lasse Liehu <larso@gmx.com>, 2014
@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-27 18:11+0000\n"
+"PO-Revision-Date: 2015-01-06 12:50+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +72,7 @@ msgstr "%1 (%2 kappaletta)"
 #: widgets/osd.cpp:194
 #, qt-format
 msgid "%1 albums"
-msgstr "%1 levyä"
+msgstr "%1 albumia"
 
 #: core/utilities.cpp:120
 #, qt-format
@@ -518,7 +518,7 @@ msgstr "Lisää tunniste kappaleen säveltäjä"
 
 #: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Add song disc tag"
-msgstr "Lisää tunniste levyn numero"
+msgstr "Lisää levyn numeron tunniste"
 
 #: ../bin/src/ui_notificationssettingspage.h:435
 msgid "Add song filename"
@@ -566,7 +566,7 @@ msgstr "Lisää tunniste "
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song year tag"
-msgstr "Lisää tunniste kappaleen levytys vuosi"
+msgstr "Lisää kappaleen levytysvuoden tunniste"
 
 #: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
@@ -668,7 +668,7 @@ msgstr "Kopioinnin jälkeen..."
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
 msgid "Album"
-msgstr "Levy"
+msgstr "Albumi"
 
 #: ../bin/src/ui_playbacksettingspage.h:328
 msgid "Album (ideal loudness for all tracks)"
@@ -678,7 +678,7 @@ msgstr "Albumi (ihanteellinen voimakkuus kaikille kappaleille)"
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
-msgstr "Levyn esittäjä"
+msgstr "Albumin esittäjä"
 
 #: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
@@ -686,19 +686,19 @@ msgstr "Kansikuva"
 
 #: internet/jamendo/jamendoservice.cpp:427
 msgid "Album info on jamendo.com..."
-msgstr "Levytiedot jamendo.comissa..."
+msgstr "Albumin tiedot jamendo.comissa..."
 
 #: internet/vk/vkservice.cpp:827
 msgid "Albums"
-msgstr "Levyt"
+msgstr "Albumit"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
-msgstr "Levyt kansikuvineen"
+msgstr "Albumit kansikuvineen"
 
 #: ui/albumcovermanager.cpp:136
 msgid "Albums without covers"
-msgstr "Levyt vailla kansikuvia"
+msgstr "Albumit vailla kansikuvia"
 
 #: ../bin/src/ui_podcastsettingspage.h:279
 msgid "All"
@@ -715,7 +715,7 @@ msgstr "Kaikki kunnia Hypnotoadille!"
 
 #: ui/albumcovermanager.cpp:134
 msgid "All albums"
-msgstr "Kaikki levyt"
+msgstr "Kaikki albumit"
 
 #: ui/albumcovermanager.cpp:268
 msgid "All artists"
@@ -1288,7 +1288,7 @@ msgstr "Tämän ikkunan sulkeminen peruu latauksen."
 
 #: ui/albumcovermanager.cpp:219
 msgid "Closing this window will stop searching for album covers."
-msgstr "Tämän ikkunan sulkeminen lopettaa levykansien etsimisen."
+msgstr "Tämän ikkunan sulkeminen lopettaa albumikansien etsimisen."
 
 #: ui/equalizer.cpp:114
 msgid "Club"
@@ -1929,11 +1929,11 @@ msgstr "Lataa Android-sovellus"
 
 #: internet/magnatune/magnatuneservice.cpp:280
 msgid "Download this album"
-msgstr "Lataa tämä levy"
+msgstr "Lataa tämä albumi"
 
 #: internet/jamendo/jamendoservice.cpp:430
 msgid "Download this album..."
-msgstr "Lataa tämä levy..."
+msgstr "Lataa tämä albumi..."
 
 #: internet/podcasts/podcastservice.cpp:531
 msgid "Download this episode"
@@ -2215,7 +2215,7 @@ msgstr "Joka tunti"
 
 #: ../bin/src/ui_playbacksettingspage.h:316
 msgid "Except between tracks on the same album or in the same CUE sheet"
-msgstr "Älä käytä ristihäivytystä samalla levyllä tai samassa CUE-tiedostossa oleville kappaleille"
+msgstr "Älä käytä ristihäivytystä samalla albumilla tai samassa CUE-tiedostossa oleville kappaleille"
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Existing covers"
@@ -2619,7 +2619,7 @@ msgstr "Järjestä"
 
 #: library/libraryfilterwidget.cpp:131
 msgid "Group by Album"
-msgstr "Järjestä levyn mukaan"
+msgstr "Järjestä albumin mukaan"
 
 #: library/libraryfilterwidget.cpp:120
 msgid "Group by Artist"
@@ -2627,19 +2627,19 @@ msgstr "Järjestä esittäjän mukaan"
 
 #: library/libraryfilterwidget.cpp:123
 msgid "Group by Artist/Album"
-msgstr "Järjestä esittäjän/levyn mukaan"
+msgstr "Järjestä esittäjän/albumin mukaan"
 
 #: library/libraryfilterwidget.cpp:127
 msgid "Group by Artist/Year - Album"
-msgstr "Järjestä esittäjän/vuoden - levyn mukaan"
+msgstr "Järjestä esittäjän/vuoden - albumin mukaan"
 
 #: library/libraryfilterwidget.cpp:134
 msgid "Group by Genre/Album"
-msgstr "Järjestä tyylin/levyn mukaan"
+msgstr "Järjestä tyylin/albumin mukaan"
 
 #: library/libraryfilterwidget.cpp:138
 msgid "Group by Genre/Artist/Album"
-msgstr "Järjestä tyylin/esittäjän/levyn mukaan"
+msgstr "Järjestä tyylin/esittäjän/albumin mukaan"
 
 #: playlist/playlist.cpp:1329 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
@@ -2942,7 +2942,7 @@ msgstr "Suuri kansikuva"
 
 #: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover (details below)"
-msgstr "Suuri levyn kansi (tiedot alla)"
+msgstr "Suuri kansikuva (tiedot alla)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3352,7 +3352,7 @@ msgstr "Vaimenna"
 
 #: internet/vk/vkservice.cpp:820
 msgid "My Albums"
-msgstr "Omat levyt"
+msgstr "Omat albumit"
 
 #: internet/grooveshark/groovesharkservice.cpp:633
 #: internet/vk/vkservice.cpp:878
@@ -3887,7 +3887,7 @@ msgstr "Asetukset..."
 
 #: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
-msgstr "Ensisijainen tiedostonimi levykuvitukselle (pilkuin eroteltu)"
+msgstr "Ensisijainen tiedostonimi albumikuvitukselle (pilkuin eroteltu)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:167
 msgid "Preferred audio format"
@@ -4184,7 +4184,7 @@ msgstr "Kertaa"
 
 #: widgets/osd.cpp:312 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
-msgstr "Kertaa levy"
+msgstr "Kertaa albumi"
 
 #: widgets/osd.cpp:315 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
@@ -4317,7 +4317,7 @@ msgstr "Tallenna .mood-tiedostot musiikkikirjastoon"
 
 #: ui/albumcoverchoicecontroller.cpp:127
 msgid "Save album cover"
-msgstr "Tallenna levyn kansikuva"
+msgstr "Tallenna albumin kansikuva"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Save cover to disk..."
@@ -4690,7 +4690,7 @@ msgstr "Sekoita"
 
 #: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
-msgstr "Sekoita levyt"
+msgstr "Sekoita albumit"
 
 #: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
@@ -4702,7 +4702,7 @@ msgstr "Sekoita soittolista"
 
 #: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
-msgstr "Sekoita tämän levyn kappaleet"
+msgstr "Sekoita tämän albumin kappaleet"
 
 #: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
@@ -5038,7 +5038,7 @@ msgstr "\"%1\"-komentoa ei voitu suorittaa."
 
 #: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
-msgstr "Parhaillaan soivan kappaleen levyn kansikuva"
+msgstr "Parhaillaan soivan kappaleen albumin kansikuva"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:94
 #, qt-format
@@ -5133,7 +5133,7 @@ msgstr "Tämä toiminto luo tietokannan, jonka koko voi olla jopa 150 megatavua.
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:190
 msgid "This album is not available in the requested format"
-msgstr "Tämä levy ei ole saatavilla haluamassasi muodossa"
+msgstr "Tämä albumi ei ole saatavilla haluamassasi muodossa"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:98
 msgid "This can be changed later through the preferences"
@@ -5232,7 +5232,7 @@ msgstr "Suosituimmat kappaleet"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
-msgstr "Levyjä yhteensä:"
+msgstr "Albumeja yhteensä:"
 
 #: covers/coversearchstatisticsdialog.cpp:70
 msgid "Total bytes transferred"
@@ -5574,7 +5574,7 @@ msgstr "Clementinen käynnistyessä"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "Levykuvitusta etsiessä Clemetine etsii kuvatiedostoja, jotka sisältävät yhden näistä sanoista.\nJos vastaavia tiedostoja ei löydy, Clemetine käyttää suurinta kansiossa olevaa kuvaa."
+msgstr "Albumikuvitusta etsiessä Clementine etsii kuvatiedostoja, jotka sisältävät yhden näistä sanoista.\nJos vastaavia tiedostoja ei löydy, Clementine käyttää suurinta kansiossa olevaa kuvaa."
 
 #: ../bin/src/ui_behavioursettingspage.h:284
 msgid "When saving a playlist, file paths should be"
@@ -5678,7 +5678,7 @@ msgstr "Vuosi"
 #: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
 #: ../bin/src/ui_groupbydialog.h:166
 msgid "Year - Album"
-msgstr "Vuosi - Levy"
+msgstr "Vuosi - Albumi"
 
 #: smartplaylists/searchterm.cpp:394
 msgid "Years"
@@ -5690,7 +5690,7 @@ msgstr "Eilen"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
-msgstr "Olet aikeissa ladata seuraavat levyt"
+msgstr "Olet aikeissa ladata seuraavat albumit"
 
 #: playlist/playlistlistcontainer.cpp:318
 #, qt-format
