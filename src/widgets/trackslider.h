@@ -52,12 +52,14 @@ class TrackSlider : public QWidget {
   void Seek(int gap);
 
 signals:
-  void ValueChanged(int value);
   void ValueChangedSeconds(int value);
 
  private slots:
-  void ValueMaybeChanged(int value);
+  void HandleSliderMove(int value);
   void ToggleTimeDisplay();
+  void SliderReleased();
+  void SliderPressed();
+  void HandleWheelEvent(int delta);
 
  private:
   void UpdateTimes(int elapsed);
@@ -66,10 +68,11 @@ signals:
 
  private:
   Ui_TrackSlider* ui_;
-
   MoodbarProxyStyle* moodbar_style_;
 
-  bool setting_value_;
+  static const int kWheelStep;
+
+  bool seeking_;
   bool show_remaining_time_;
   int slider_maximum_value_;  // we cache it to avoid unnecessary updates
 };

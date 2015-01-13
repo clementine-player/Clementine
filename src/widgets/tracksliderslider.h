@@ -29,12 +29,16 @@ class TrackSliderSlider : public QSlider {
  public:
   TrackSliderSlider(QWidget* parent = nullptr);
 
+signals:
+  void WheelEvent(int e);
+
  protected:
   void mousePressEvent(QMouseEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
   void mouseMoveEvent(QMouseEvent* e);
   void enterEvent(QEvent*);
   void leaveEvent(QEvent*);
+  void wheelEvent(QWheelEvent*);
 
  private slots:
   void UpdateDeltaTime();

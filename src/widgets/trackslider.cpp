@@ -28,12 +28,13 @@
 #endif
 
 const char* TrackSlider::kSettingsGroup = "MainWindow";
+const int TrackSlider::kWheelStep = 5 * kMsecPerSec;
 
 TrackSlider::TrackSlider(QWidget* parent)
     : QWidget(parent),
       ui_(new Ui_TrackSlider),
       moodbar_style_(nullptr),
-      setting_value_(false),
+      seeking_(false),
       show_remaining_time_(true),
       slider_maximum_value_(0) {
   ui_->setupUi(this);
@@ -45,8 +46,10 @@ TrackSlider::TrackSlider(QWidget* parent)
   s.beginGroup(kSettingsGroup);
   show_remaining_time_ = s.value("show_remaining_time").toBool();
 
-  connect(ui_->slider, SIGNAL(sliderMoved(int)), SIGNAL(ValueChanged(int)));
-  connect(ui_->slider, SIGNAL(valueChanged(int)), SLOT(ValueMaybeChanged(int)));
+  connect(ui_->slider, SIGNAL(WheelEvent(int)), SLOT(HandleWheelEvent(int)));
+  connect(ui_->slider, SIGNAL(sliderMoved(int)), SLOT(HandleSliderMove(int)));
+  connect(ui_->slider, SIGNAL(sliderReleased()), SLOT(SliderReleased()));
+  connect(ui_->slider, SIGNAL(sliderPressed()), SLOT(SliderPressed()));
   connect(ui_->remaining, SIGNAL(Clicked()), SLOT(ToggleTimeDisplay()));
 }
 
@@ -87,11 +90,9 @@ QSize TrackSlider::sizeHint() const {
 }
 
 void TrackSlider::SetValue(int elapsed, int total) {
-  setting_value_ =
-      true;  // This is so we don't emit from QAbstractSlider::valueChanged
   ui_->slider->setMaximum(total);
-  ui_->slider->setValue(elapsed);
-  setting_value_ = false;
+
+  if (!seeking_) ui_->slider->setValue(elapsed);
 
   UpdateTimes(elapsed / kMsecPerSec);
 }
@@ -119,10 +120,8 @@ void TrackSlider::SetStopped() {
   ui_->elapsed->setText("0:00:00");
   ui_->remaining->setText("0:00:00");
 
-  setting_value_ = true;
   ui_->slider->setValue(0);
   slider_maximum_value_ = 0;
-  setting_value_ = false;
 }
 
 void TrackSlider::SetCanSeek(bool can_seek) {
@@ -130,13 +129,13 @@ void TrackSlider::SetCanSeek(bool can_seek) {
 }
 
 void TrackSlider::Seek(int gap) {
-  if (ui_->slider->isEnabled())
+  if (ui_->slider->isEnabled()) {
     ui_->slider->setValue(ui_->slider->value() + gap * kMsecPerSec);
+    HandleSliderMove(ui_->slider->value());
+  }
 }
 
-void TrackSlider::ValueMaybeChanged(int value) {
-  if (setting_value_) return;
-
+void TrackSlider::HandleSliderMove(int value) {
   UpdateTimes(value / kMsecPerSec);
   emit ValueChangedSeconds(value / kMsecPerSec);
 }
@@ -165,4 +164,22 @@ void TrackSlider::ToggleTimeDisplay() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("show_remaining_time", show_remaining_time_);
+}
+
+void TrackSlider::SliderReleased() { seeking_ = false; }
+
+void TrackSlider::SliderPressed() {
+  seeking_ = true;
+  HandleSliderMove(ui_->slider->value());
+}
+
+void TrackSlider::HandleWheelEvent(int delta) {
+  int value = ui_->slider->value();
+
+  if (delta < 0)
+    ui_->slider->setValue(value - kWheelStep);
+  else
+    ui_->slider->setValue(value + kWheelStep);
+
+  HandleSliderMove(ui_->slider->value());
 }

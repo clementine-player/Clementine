@@ -584,10 +584,10 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     emit PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
-    emit SeekTrack(-1);
+    emit SeekTrack(-5);
     event->accept();
   } else if (event->key() == Qt::Key_Right) {
-    emit SeekTrack(1);
+    emit SeekTrack(5);
     event->accept();
   } else if (event->modifiers() ==
                  Qt::NoModifier  // No modifier keys currently pressed...

@@ -2712,10 +2712,10 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
     app_->player()->PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
-    ui_->track_slider->Seek(-1);
+    ui_->track_slider->Seek(-5);
     event->accept();
   } else if (event->key() == Qt::Key_Right) {
-    ui_->track_slider->Seek(1);
+    ui_->track_slider->Seek(5);
     event->accept();
   } else {
     QMainWindow::keyPressEvent(event);
