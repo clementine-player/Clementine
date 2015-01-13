@@ -190,7 +190,9 @@ qint64 GstEngine::position_nanosec() const {
   if (!current_pipeline_) return 0;
 
   const qint64 result = current_pipeline_->position() - beginning_nanosec_;
-  return qint64(qMax(0ll, result));
+
+  // To prevent returning 0 when pipeline is in GST_STATE_PAUSED state.
+  return qint64(qMax(0ll, (result == 0) ? qint64(seek_pos_) : result));
 }
 
 qint64 GstEngine::length_nanosec() const {
@@ -282,8 +284,8 @@ void GstEngine::UpdateScope(int chunk_length) {
   gst_buffer_map(latest_buffer_, &map, GST_MAP_READ);
 
   // determine where to split the buffer
-  int chunk_density = (map.size * kNsecPerMsec) /
-                      GST_BUFFER_DURATION(latest_buffer_);
+  int chunk_density =
+      (map.size * kNsecPerMsec) / GST_BUFFER_DURATION(latest_buffer_);
 
   int chunk_size = chunk_length * chunk_density;
 
@@ -301,10 +303,9 @@ void GstEngine::UpdateScope(int chunk_length) {
 
   // make sure we don't go beyond the end of the buffer
   if (scope_chunk_ == scope_chunks_ - 1) {
-    bytes =
-        qMin(static_cast<Engine::Scope::size_type>(
-                 map.size - (chunk_size * scope_chunk_)),
-             scope_.size() * sizeof(sample_type));
+    bytes = qMin(static_cast<Engine::Scope::size_type>(
+                     map.size - (chunk_size * scope_chunk_)),
+                 scope_.size() * sizeof(sample_type));
   } else {
     bytes = qMin(static_cast<Engine::Scope::size_type>(chunk_size),
                  scope_.size() * sizeof(sample_type));
@@ -428,6 +429,8 @@ bool GstEngine::Play(quint64 offset_nanosec) {
   EnsureInitialised();
 
   if (!current_pipeline_ || current_pipeline_->is_buffering()) return false;
+
+  seek_pos_ = 0;
 
   QFuture<GstStateChangeReturn> future =
       current_pipeline_->SetState(GST_STATE_PLAYING);
@@ -736,9 +739,8 @@ GstEngine::PluginDetailsList GstEngine::GetPluginList(
     if (QString(gst_element_factory_get_klass(factory)).contains(classname)) {
       PluginDetails details;
       details.name = QString::fromUtf8(gst_plugin_feature_get_name(p->data));
-      details.description = QString::fromUtf8(
-          gst_element_factory_get_metadata(factory,
-                                           GST_ELEMENT_METADATA_DESCRIPTION));
+      details.description = QString::fromUtf8(gst_element_factory_get_metadata(
+          factory, GST_ELEMENT_METADATA_DESCRIPTION));
       ret << details;
     }
     p = g_list_next(p);
