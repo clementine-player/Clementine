@@ -193,13 +193,15 @@ message PauseRequest {
 }
 
 message AddTracksToPlaylistRequest {
-  required int64 playlist_index = 1;
-  repeated string track_uri = 2;
+  required PlaylistType playlist_type = 1;
+  optional int64 playlist_index = 2; // Used if playlist_index == UserPlaylist
+  repeated string track_uri = 3;
 }
 
 message RemoveTracksFromPlaylistRequest {
-  required int64 playlist_index = 1;
-  repeated int64 track_index = 2;
+  required PlaylistType playlist_type = 1;
+  optional int64 playlist_index = 2; // Used if playlist_index == UserPlaylist
+  repeated int64 track_index = 3;
 }
 
 // NEXT_ID: 25

@@ -372,6 +372,7 @@ void SpotifyClient::PlaylistContainerLoadedCallback(sp_playlistcontainer* pc,
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
 
   // Install callbacks on all the playlists
+  sp_playlist_add_callbacks(sp_session_starred_create(me->session_), &me->get_playlists_callbacks_, me);
   const int count = sp_playlistcontainer_num_playlists(pc);
   for (int i = 0; i < count; ++i) {
     sp_playlist* playlist = sp_playlistcontainer_playlist(pc, i);
@@ -611,11 +612,10 @@ void SpotifyClient::PlaylistStateChangedForGetPlaylists(sp_playlist* pl,
 void SpotifyClient::AddTracksToPlaylist(
     const pb::spotify::AddTracksToPlaylistRequest& req) {
   // Get the playlist we want to update
-  int playlist_index = req.playlist_index();
-  sp_playlist* playlist =
-      GetPlaylist(pb::spotify::UserPlaylist, playlist_index);
+  sp_playlist* playlist = GetPlaylist(req.playlist_type(), req.playlist_index());
   if (!playlist) {
-    qLog(Error) << "Playlist " << playlist_index << "not found";
+    qLog(Error) << "Playlist " << req.playlist_type() << "," <<
+        req.playlist_index() << "not found";
     return;
   }
 
@@ -650,11 +650,11 @@ void SpotifyClient::AddTracksToPlaylist(
 void SpotifyClient::RemoveTracksFromPlaylist(
     const pb::spotify::RemoveTracksFromPlaylistRequest& req) {
   // Get the playlist we want to update
-  int playlist_index = req.playlist_index();
   sp_playlist* playlist =
-      GetPlaylist(pb::spotify::UserPlaylist, playlist_index);
+      GetPlaylist(req.playlist_type(), req.playlist_index());
   if (!playlist) {
-    qLog(Error) << "Playlist " << playlist_index << "not found";
+    qLog(Error) << "Playlist " << req.playlist_type() << "," <<
+            req.playlist_index() << "not found";
     return;
   }
 
@@ -662,6 +662,15 @@ void SpotifyClient::RemoveTracksFromPlaylist(
   std::unique_ptr<int[]> tracks_indices_array(new int[req.track_index_size()]);
   for (int i = 0; i < req.track_index_size(); ++i) {
     tracks_indices_array[i] = req.track_index(i);
+  }
+
+  // WTF: sp_playlist_remove_tracks indexes start from the end for starred
+  // playlist, not from the beginning like other playlists: reverse them
+  if (req.playlist_type() == pb::spotify::Starred) {
+    int num_tracks = sp_playlist_num_tracks(playlist);
+    for (int i = 0; i < req.track_index_size(); i++) {
+      tracks_indices_array[i] = num_tracks - tracks_indices_array[i] - 1;
+    }
   }
 
   if (sp_playlist_remove_tracks(playlist, tracks_indices_array.get(),

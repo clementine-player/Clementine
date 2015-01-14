@@ -374,15 +374,24 @@ void SpotifyService::InstallBlob() {
 
 void SpotifyService::BlobDownloadFinished() { EnsureServerCreated(); }
 
-void SpotifyService::AddCurrentSongToPlaylist(QAction* action) {
+void SpotifyService::AddCurrentSongToUserPlaylist(QAction* action) {
   int playlist_index = action->data().toInt();
-  AddSongsToPlaylist(playlist_index, QList<QUrl>() << current_song_url_);
+  AddSongsToUserPlaylist(playlist_index, QList<QUrl>() << current_song_url_);
 }
 
-void SpotifyService::AddSongsToPlaylist(int playlist_index,
+void SpotifyService::AddSongsToUserPlaylist(int playlist_index,
                                         const QList<QUrl>& songs_urls) {
   EnsureServerCreated();
-  server_->AddSongsToPlaylist(playlist_index, songs_urls);
+  server_->AddSongsToUserPlaylist(playlist_index, songs_urls);
+}
+
+void SpotifyService::AddCurrentSongToStarredPlaylist() {
+  AddSongsToStarred(QList<QUrl>() << current_song_url_);
+}
+
+void SpotifyService::AddSongsToStarred(const QList<QUrl>& songs_urls) {
+  EnsureMenuCreated();
+  server_->AddSongsToStarred(songs_urls);
 }
 
 void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
@@ -407,6 +416,7 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     starred_->setData(true, InternetModel::Role_CanLazyLoad);
     starred_->setData(InternetModel::PlayBehaviour_MultipleItems,
                       InternetModel::Role_PlayBehaviour);
+    starred_->setData(true, InternetModel::Role_CanBeModified);
 
     inbox_ = new QStandardItem(IconLoader::Load("mail-message"), tr("Inbox"));
     inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
@@ -424,6 +434,12 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     root_->appendRow(toplist_);
     root_->appendRow(starred_);
     root_->appendRow(inbox_);
+  } else {
+    // Always reset starred playlist
+    // TODO: might be improved by including starred playlist in the response,
+    // and reloading it only when needed, like other playlists.
+    starred_->removeRows(0, starred_->rowCount());
+    LazyPopulate(starred_);
   }
 
   // Don't do anything if the playlists haven't changed since last time.
@@ -589,6 +605,12 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
     delete action;
   }
 
+  QAction* add_to_starred = new QAction(QIcon(":/star-on.png"),
+                                        tr("Add to Spotify starred"), this);
+  connect(add_to_starred, SIGNAL(triggered()),
+          SLOT(AddCurrentSongToStarredPlaylist()));
+  playlistitem_actions_.append(add_to_starred);
+
   // Create a menu with 'add to playlist' actions for each Spotify playlist
   QAction* add_to_playlists = new QAction(IconLoader::Load("list-add"),
                                           tr("Add to Spotify playlists"), this);
@@ -602,7 +624,7 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
     playlists_menu->addAction(add_to_playlist);
   }
   connect(playlists_menu, SIGNAL(triggered(QAction*)),
-          SLOT(AddCurrentSongToPlaylist(QAction*)));
+          SLOT(AddCurrentSongToUserPlaylist(QAction*)));
   add_to_playlists->setMenu(playlists_menu);
   playlistitem_actions_.append(add_to_playlists);
 
@@ -823,7 +845,7 @@ void SpotifyService::DropMimeData(const QMimeData* data,
   }
   if (!q_playlist_index.isValid()) return;
 
-  AddSongsToPlaylist(q_playlist_index.toInt(), data->urls());
+  AddSongsToUserPlaylist(q_playlist_index.toInt(), data->urls());
 }
 
 void SpotifyService::LoadImage(const QString& id) {
@@ -885,10 +907,16 @@ void SpotifyService::ShowConfig() {
 void SpotifyService::RemoveCurrentFromPlaylist() {
   const QModelIndexList& indexes(model()->selected_indexes());
   QMap<int, QList<int>> playlists_songs_indices;
+  QList<int> starred_songs_indices;
+
   for (const QModelIndex& index : indexes) {
-    if (index.parent().data(InternetModel::Role_Type).toInt() !=
+    bool is_starred = false;
+    if (index.parent().data(InternetModel::Role_Type).toInt() ==
+        Type_StarredPlaylist) {
+      is_starred = true;
+    } else if (index.parent().data(InternetModel::Role_Type).toInt() !=
         InternetModel::Type_UserPlaylist) {
-      continue;
+        continue;
     }
 
     if (index.data(InternetModel::Role_Type).toInt() !=
@@ -896,21 +924,33 @@ void SpotifyService::RemoveCurrentFromPlaylist() {
       continue;
     }
 
-    int playlist_index = index.parent().data(Role_UserPlaylistIndex).toInt();
     int song_index = index.row();
-    playlists_songs_indices[playlist_index] << song_index;
+    if (is_starred) {
+      starred_songs_indices << song_index;
+    } else {
+      int playlist_index = index.parent().data(Role_UserPlaylistIndex).toInt();
+      playlists_songs_indices[playlist_index] << song_index;
+    }
   }
 
   for (QMap<int, QList<int>>::const_iterator it =
            playlists_songs_indices.constBegin();
        it != playlists_songs_indices.constEnd(); ++it) {
-    RemoveSongsFromPlaylist(it.key(), it.value());
+    RemoveSongsFromUserPlaylist(it.key(), it.value());
+  }
+  if (!starred_songs_indices.isEmpty()) {
+    RemoveSongsFromStarred(starred_songs_indices);
   }
 }
 
-void SpotifyService::RemoveSongsFromPlaylist(
+void SpotifyService::RemoveSongsFromUserPlaylist(
     int playlist_index, const QList<int>& songs_indices_to_remove) {
-  server_->RemoveSongsFromPlaylist(playlist_index, songs_indices_to_remove);
+  server_->RemoveSongsFromUserPlaylist(playlist_index, songs_indices_to_remove);
+}
+
+void SpotifyService::RemoveSongsFromStarred(
+    const QList<int>& songs_indices_to_remove) {
+  server_->RemoveSongsFromStarred(songs_indices_to_remove);
 }
 
 void SpotifyService::Logout() {

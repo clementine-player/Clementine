@@ -47,9 +47,11 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   void SyncInbox();
   void LoadUserPlaylist(int index);
   void SyncUserPlaylist(int index);
-  void AddSongsToPlaylist(int playlist_index, const QList<QUrl>& songs_urls);
-  void RemoveSongsFromPlaylist(int playlist_index,
-                               const QList<int>& songs_indices_to_remove);
+  void AddSongsToStarred(const QList<QUrl>& songs_urls);
+  void AddSongsToUserPlaylist(int playlist_index, const QList<QUrl>& songs_urls);
+  void RemoveSongsFromUserPlaylist(int playlist_index,
+                                   const QList<int>& songs_indices_to_remove);
+  void RemoveSongsFromStarred(const QList<int>& songs_indices_to_remove);
   void StartPlaybackLater(const QString& uri, quint16 port);
   void Search(const QString& text, int limit, int limit_album = 0);
   void LoadImage(const QString& id);
@@ -89,6 +91,14 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
  private:
   void LoadPlaylist(pb::spotify::PlaylistType type, int index = -1);
   void SyncPlaylist(pb::spotify::PlaylistType type, int index, bool offline);
+  void AddSongsToPlaylist(const pb::spotify::PlaylistType playlist_type,
+                          const QList<QUrl>& songs_urls,
+                          // Used iff type is user_playlist
+                          int playlist_index = -1);
+  void RemoveSongsFromPlaylist(const pb::spotify::PlaylistType playlist_type,
+                               const QList<int>& songs_indices_to_remove,
+                               // Used iff type is user_playlist
+                               int playlist_index = -1);
   void SendOrQueueMessage(const pb::spotify::Message& message);
 
   QTcpServer* server_;

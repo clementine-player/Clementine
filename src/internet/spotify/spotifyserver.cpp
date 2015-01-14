@@ -210,11 +210,22 @@ void SpotifyServer::LoadUserPlaylist(int index) {
   LoadPlaylist(pb::spotify::UserPlaylist, index);
 }
 
-void SpotifyServer::AddSongsToPlaylist(int playlist_index,
-                                       const QList<QUrl>& songs_urls) {
+void SpotifyServer::AddSongsToStarred(const QList<QUrl>& songs_urls) {
+  AddSongsToPlaylist(pb::spotify::Starred, songs_urls);
+}
+
+void SpotifyServer::AddSongsToUserPlaylist(int playlist_index,
+                                           const QList<QUrl>& songs_urls) {
+  AddSongsToPlaylist(pb::spotify::UserPlaylist, songs_urls, playlist_index);
+}
+
+void SpotifyServer::AddSongsToPlaylist(const pb::spotify::PlaylistType playlist_type,
+                                       const QList<QUrl>& songs_urls,
+                                       int playlist_index) {
   pb::spotify::Message message;
   pb::spotify::AddTracksToPlaylistRequest* req =
       message.mutable_add_tracks_to_playlist();
+  req->set_playlist_type(playlist_type);
   req->set_playlist_index(playlist_index);
   for (const QUrl& song_url : songs_urls) {
     req->add_track_uri(DataCommaSizeFromQString(song_url.toString()));
@@ -222,12 +233,25 @@ void SpotifyServer::AddSongsToPlaylist(int playlist_index,
   SendOrQueueMessage(message);
 }
 
+void SpotifyServer::RemoveSongsFromStarred(const QList<int>& songs_indices_to_remove) {
+  RemoveSongsFromPlaylist(pb::spotify::Starred, songs_indices_to_remove);
+}
+
+void SpotifyServer::RemoveSongsFromUserPlaylist(int playlist_index,
+                                   const QList<int>& songs_indices_to_remove) {
+  RemoveSongsFromPlaylist(pb::spotify::UserPlaylist, songs_indices_to_remove, playlist_index);
+}
+
 void SpotifyServer::RemoveSongsFromPlaylist(
-    int playlist_index, const QList<int>& songs_indices_to_remove) {
+    const pb::spotify::PlaylistType playlist_type,
+    const QList<int>& songs_indices_to_remove, int playlist_index) {
   pb::spotify::Message message;
   pb::spotify::RemoveTracksFromPlaylistRequest* req =
       message.mutable_remove_tracks_from_playlist();
-  req->set_playlist_index(playlist_index);
+  req->set_playlist_type(playlist_type);
+  if (playlist_type == pb::spotify::UserPlaylist) {
+    req->set_playlist_index(playlist_index);
+  }
   for (int song_index : songs_indices_to_remove) {
     req->add_track_index(song_index);
   }

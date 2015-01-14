@@ -112,7 +112,8 @@ class SpotifyService : public InternetService {
       const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks);
   void FillPlaylist(QStandardItem* item,
                     const pb::spotify::LoadPlaylistResponse& response);
-  void AddSongsToPlaylist(int playlist_index, const QList<QUrl>& songs_urls);
+  void AddSongsToUserPlaylist(int playlist_index, const QList<QUrl>& songs_urls);
+  void AddSongsToStarred(const QList<QUrl>& songs_urls);
   void EnsureMenuCreated();
   // Create a new "show config" action. The caller is responsible for deleting
   // the pointer (or adding it to menu or anything else that will take ownership
@@ -129,9 +130,11 @@ class SpotifyService : public InternetService {
   void BlobProcessError(QProcess::ProcessError error);
   void LoginCompleted(bool success, const QString& error,
                       pb::spotify::LoginResponse_Error error_code);
-  void AddCurrentSongToPlaylist(QAction* action);
-  void RemoveSongsFromPlaylist(int playlist_index,
+  void AddCurrentSongToUserPlaylist(QAction* action);
+  void AddCurrentSongToStarredPlaylist();
+  void RemoveSongsFromUserPlaylist(int playlist_index,
                                const QList<int>& songs_indices_to_remove);
+  void RemoveSongsFromStarred(const QList<int>& songs_indices_to_remove);
   void PlaylistsUpdated(const pb::spotify::Playlists& response);
   void InboxLoaded(const pb::spotify::LoadPlaylistResponse& response);
   void StarredLoaded(const pb::spotify::LoadPlaylistResponse& response);
