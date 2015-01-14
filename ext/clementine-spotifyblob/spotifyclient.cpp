@@ -372,7 +372,8 @@ void SpotifyClient::PlaylistContainerLoadedCallback(sp_playlistcontainer* pc,
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
 
   // Install callbacks on all the playlists
-  sp_playlist_add_callbacks(sp_session_starred_create(me->session_), &me->get_playlists_callbacks_, me);
+  sp_playlist_add_callbacks(sp_session_starred_create(me->session_),
+                            &me->get_playlists_callbacks_, me);
   const int count = sp_playlistcontainer_num_playlists(pc);
   for (int i = 0; i < count; ++i) {
     sp_playlist* playlist = sp_playlistcontainer_playlist(pc, i);
@@ -612,10 +613,11 @@ void SpotifyClient::PlaylistStateChangedForGetPlaylists(sp_playlist* pl,
 void SpotifyClient::AddTracksToPlaylist(
     const pb::spotify::AddTracksToPlaylistRequest& req) {
   // Get the playlist we want to update
-  sp_playlist* playlist = GetPlaylist(req.playlist_type(), req.playlist_index());
+  sp_playlist* playlist =
+      GetPlaylist(req.playlist_type(), req.playlist_index());
   if (!playlist) {
-    qLog(Error) << "Playlist " << req.playlist_type() << "," <<
-        req.playlist_index() << "not found";
+    qLog(Error) << "Playlist " << req.playlist_type() << ","
+                << req.playlist_index() << "not found";
     return;
   }
 
@@ -653,8 +655,8 @@ void SpotifyClient::RemoveTracksFromPlaylist(
   sp_playlist* playlist =
       GetPlaylist(req.playlist_type(), req.playlist_index());
   if (!playlist) {
-    qLog(Error) << "Playlist " << req.playlist_type() << "," <<
-            req.playlist_index() << "not found";
+    qLog(Error) << "Playlist " << req.playlist_type() << ","
+                << req.playlist_index() << "not found";
     return;
   }
 

@@ -219,9 +219,9 @@ void SpotifyServer::AddSongsToUserPlaylist(int playlist_index,
   AddSongsToPlaylist(pb::spotify::UserPlaylist, songs_urls, playlist_index);
 }
 
-void SpotifyServer::AddSongsToPlaylist(const pb::spotify::PlaylistType playlist_type,
-                                       const QList<QUrl>& songs_urls,
-                                       int playlist_index) {
+void SpotifyServer::AddSongsToPlaylist(
+    const pb::spotify::PlaylistType playlist_type,
+    const QList<QUrl>& songs_urls, int playlist_index) {
   pb::spotify::Message message;
   pb::spotify::AddTracksToPlaylistRequest* req =
       message.mutable_add_tracks_to_playlist();
@@ -233,13 +233,15 @@ void SpotifyServer::AddSongsToPlaylist(const pb::spotify::PlaylistType playlist_
   SendOrQueueMessage(message);
 }
 
-void SpotifyServer::RemoveSongsFromStarred(const QList<int>& songs_indices_to_remove) {
+void SpotifyServer::RemoveSongsFromStarred(
+    const QList<int>& songs_indices_to_remove) {
   RemoveSongsFromPlaylist(pb::spotify::Starred, songs_indices_to_remove);
 }
 
-void SpotifyServer::RemoveSongsFromUserPlaylist(int playlist_index,
-                                   const QList<int>& songs_indices_to_remove) {
-  RemoveSongsFromPlaylist(pb::spotify::UserPlaylist, songs_indices_to_remove, playlist_index);
+void SpotifyServer::RemoveSongsFromUserPlaylist(
+    int playlist_index, const QList<int>& songs_indices_to_remove) {
+  RemoveSongsFromPlaylist(pb::spotify::UserPlaylist, songs_indices_to_remove,
+                          playlist_index);
 }
 
 void SpotifyServer::RemoveSongsFromPlaylist(

@@ -48,7 +48,8 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   void LoadUserPlaylist(int index);
   void SyncUserPlaylist(int index);
   void AddSongsToStarred(const QList<QUrl>& songs_urls);
-  void AddSongsToUserPlaylist(int playlist_index, const QList<QUrl>& songs_urls);
+  void AddSongsToUserPlaylist(int playlist_index,
+                              const QList<QUrl>& songs_urls);
   void RemoveSongsFromUserPlaylist(int playlist_index,
                                    const QList<int>& songs_indices_to_remove);
   void RemoveSongsFromStarred(const QList<int>& songs_indices_to_remove);
@@ -67,7 +68,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   void StartPlayback(const QString& uri, quint16 port);
   void Seek(qint64 offset_nsec);
 
- signals:
+signals:
   void LoginCompleted(bool success, const QString& error,
                       pb::spotify::LoginResponse_Error error_code);
   void PlaylistsUpdated(const pb::spotify::Playlists& playlists);

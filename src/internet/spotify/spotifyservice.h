@@ -95,7 +95,7 @@ class SpotifyService : public InternetService {
 
   static void SongFromProtobuf(const pb::spotify::Track& track, Song* song);
 
- signals:
+signals:
   void BlobStateChanged();
   void LoginFinished(bool success);
   void ImageLoaded(const QString& id, const QImage& image);
@@ -112,7 +112,8 @@ class SpotifyService : public InternetService {
       const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks);
   void FillPlaylist(QStandardItem* item,
                     const pb::spotify::LoadPlaylistResponse& response);
-  void AddSongsToUserPlaylist(int playlist_index, const QList<QUrl>& songs_urls);
+  void AddSongsToUserPlaylist(int playlist_index,
+                              const QList<QUrl>& songs_urls);
   void AddSongsToStarred(const QList<QUrl>& songs_urls);
   void EnsureMenuCreated();
   // Create a new "show config" action. The caller is responsible for deleting
@@ -133,7 +134,7 @@ class SpotifyService : public InternetService {
   void AddCurrentSongToUserPlaylist(QAction* action);
   void AddCurrentSongToStarredPlaylist();
   void RemoveSongsFromUserPlaylist(int playlist_index,
-                               const QList<int>& songs_indices_to_remove);
+                                   const QList<int>& songs_indices_to_remove);
   void RemoveSongsFromStarred(const QList<int>& songs_indices_to_remove);
   void PlaylistsUpdated(const pb::spotify::Playlists& response);
   void InboxLoaded(const pb::spotify::LoadPlaylistResponse& response);

@@ -380,7 +380,7 @@ void SpotifyService::AddCurrentSongToUserPlaylist(QAction* action) {
 }
 
 void SpotifyService::AddSongsToUserPlaylist(int playlist_index,
-                                        const QList<QUrl>& songs_urls) {
+                                            const QList<QUrl>& songs_urls) {
   EnsureServerCreated();
   server_->AddSongsToUserPlaylist(playlist_index, songs_urls);
 }
@@ -471,7 +471,8 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     item->setData(msg.is_mine(), InternetModel::Role_CanBeModified);
     item->setData(InternetModel::PlayBehaviour_MultipleItems,
                   InternetModel::Role_PlayBehaviour);
-    item->setData(QUrl(QStringFromStdString(msg.uri())), InternetModel::Role_Url);
+    item->setData(QUrl(QStringFromStdString(msg.uri())),
+                  InternetModel::Role_Url);
 
     root_->appendRow(item);
     playlists_ << item;
@@ -605,8 +606,8 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
     delete action;
   }
 
-  QAction* add_to_starred = new QAction(QIcon(":/star-on.png"),
-                                        tr("Add to Spotify starred"), this);
+  QAction* add_to_starred =
+      new QAction(QIcon(":/star-on.png"), tr("Add to Spotify starred"), this);
   connect(add_to_starred, SIGNAL(triggered()),
           SLOT(AddCurrentSongToStarredPlaylist()));
   playlistitem_actions_.append(add_to_starred);
@@ -660,9 +661,9 @@ void SpotifyService::EnsureMenuCreated() {
   playlist_sync_action_ = playlist_context_menu_->addAction(
       IconLoader::Load("view-refresh"), tr("Make playlist available offline"),
       this, SLOT(SyncPlaylist()));
-  get_url_to_share_playlist_ =
-      playlist_context_menu_->addAction(tr("Get a URL to share this playlist"),
-          this, SLOT(GetCurrentPlaylistUrlToShare()));
+  get_url_to_share_playlist_ = playlist_context_menu_->addAction(
+      tr("Get a URL to share this playlist"), this,
+      SLOT(GetCurrentPlaylistUrlToShare()));
   playlist_context_menu_->addSeparator();
   playlist_context_menu_->addAction(GetNewShowConfigAction());
 
@@ -671,7 +672,7 @@ void SpotifyService::EnsureMenuCreated() {
       IconLoader::Load("list-remove"), tr("Remove from playlist"), this,
       SLOT(RemoveCurrentFromPlaylist()));
   song_context_menu_->addAction(tr("Get a URL to share this Spotify song"),
-      this, SLOT(GetCurrentSongUrlToShare()));
+                                this, SLOT(GetCurrentSongUrlToShare()));
 
   song_context_menu_->addAction(GetNewShowConfigAction());
 }
@@ -798,7 +799,8 @@ void SpotifyService::ShowContextMenu(const QPoint& global_pos) {
       playlist_sync_action_->setData(qVariantFromValue(item));
       playlist_context_menu_->popup(global_pos);
       current_playlist_url_ = item->data(InternetModel::Role_Url).toUrl();
-      get_url_to_share_playlist_->setVisible(type == InternetModel::Type_UserPlaylist);
+      get_url_to_share_playlist_->setVisible(type ==
+                                             InternetModel::Type_UserPlaylist);
       return;
     } else if (type == InternetModel::Type_Track) {
       current_song_url_ = item->data(InternetModel::Role_Url).toUrl();
@@ -829,7 +831,7 @@ void SpotifyService::GetCurrentPlaylistUrlToShare() const {
   // URLs we use can be opened with Spotify application, but I believe it's
   // better to give website links instead.
   url.replace(QRegExp("spotify:user:([^:]*):playlist:([^:]*)"),
-      "https://play.spotify.com/user/\\1/playlist/\\2");
+              "https://play.spotify.com/user/\\1/playlist/\\2");
   InternetService::ShowUrlBox(tr("Spotify playlist's URL"), url);
 }
 
@@ -915,8 +917,8 @@ void SpotifyService::RemoveCurrentFromPlaylist() {
         Type_StarredPlaylist) {
       is_starred = true;
     } else if (index.parent().data(InternetModel::Role_Type).toInt() !=
-        InternetModel::Type_UserPlaylist) {
-        continue;
+               InternetModel::Type_UserPlaylist) {
+      continue;
     }
 
     if (index.data(InternetModel::Role_Type).toInt() !=
