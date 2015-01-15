@@ -94,7 +94,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new RadioGFMService(app, this));
   AddService(new RockRadioService(app, this));
   AddService(new SavedRadio(app, this));
-  AddService(new SkyFmService(app, this));
+  AddService(new RadioTunesService(app, this));
   AddService(new SomaFMService(app, this));
   AddService(new SoundCloudService(app, this));
   AddService(new SpotifyService(app, this));

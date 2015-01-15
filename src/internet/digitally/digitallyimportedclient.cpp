@@ -28,7 +28,7 @@
 #include "core/network.h"
 
 // The API used here is undocumented - it was reverse engineered by watching
-// calls made by the sky.fm android app:
+// calls made by the sky.fm (now RadioTunes) android app:
 // https://market.android.com/details?id=com.audioaddict.sky
 
 const char* DigitallyImportedClient::kApiUsername = "ephemeron";

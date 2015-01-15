@@ -117,9 +117,9 @@ class DigitallyImportedService : public DigitallyImportedServiceBase {
                            QObject* parent = nullptr);
 };
 
-class SkyFmService : public DigitallyImportedServiceBase {
+class RadioTunesService : public DigitallyImportedServiceBase {
  public:
-  SkyFmService(Application* app, InternetModel* model,
+  RadioTunesService(Application* app, InternetModel* model,
                QObject* parent = nullptr);
 };
 
