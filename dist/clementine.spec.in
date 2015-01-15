@@ -22,15 +22,15 @@ Requires:       libgpod protobuf-lite libcdio qjson qca-ossl sqlite
 Requires:       gstreamer1-plugins-ugly
 
 %ifarch x86_64
-Requires:       gstreamer1.0(decoder-audio/x-vorbis)()(64bit)
-Requires:       gstreamer1.0(decoder-audio/x-flac)()(64bit)
-Requires:       gstreamer1.0(decoder-audio/x-speex)()(64bit)
-Requires:       gstreamer1.0(decoder-audio/x-wav)()(64bit)
+Requires:       gstreamer1(decoder-audio/x-vorbis)()(64bit)
+Requires:       gstreamer1(decoder-audio/x-flac)()(64bit)
+Requires:       gstreamer1(decoder-audio/x-speex)()(64bit)
+Requires:       gstreamer1(decoder-audio/x-wav)()(64bit)
 %else
-Requires:       gstreamer1.0(decoder-audio/x-vorbis)
-Requires:       gstreamer1.0(decoder-audio/x-flac)
-Requires:       gstreamer1.0(decoder-audio/x-speex)
-Requires:       gstreamer1.0(decoder-audio/x-wav)
+Requires:       gstreamer1(decoder-audio/x-vorbis)
+Requires:       gstreamer1(decoder-audio/x-flac)
+Requires:       gstreamer1(decoder-audio/x-speex)
+Requires:       gstreamer1(decoder-audio/x-wav)
 %endif
 
 %description
