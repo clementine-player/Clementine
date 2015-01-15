@@ -94,7 +94,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new RadioGFMService(app, this));
   AddService(new RockRadioService(app, this));
   AddService(new SavedRadio(app, this));
-  AddService(new SkyFmService(app, this));
+  AddService(new RadioTunesService(app, this));
   AddService(new SomaFMService(app, this));
   AddService(new SoundCloudService(app, this));
   AddService(new SpotifyService(app, this));
@@ -371,7 +371,7 @@ int InternetModel::FindItemPosition(const QString& text) {
   int a = 0;
   int b = invisibleRootItem()->rowCount() - 1;
   while (a <= b) {
-    int mid = a + (b - a)/2;
+    int mid = a + (b - a) / 2;
     if (invisibleRootItem()->child(mid, 0)->text() < text) {
       a = mid + 1;
     } else {

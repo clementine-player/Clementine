@@ -38,8 +38,8 @@ QString DigitallyImportedUrlHandler::scheme() const {
 QIcon DigitallyImportedUrlHandler::icon() const {
   if (scheme() == "di") {
     return QIcon(":providers/digitallyimported.png");
-  } else if (scheme() == "sky") {
-    return QIcon(":providers/skyfm.png");
+  } else if (scheme() == "radiotunes") {
+    return QIcon(":providers/radiotunes.png");
   } else if (scheme() == "jazzradio") {
     return QIcon(":providers/jazzradio.png");
   } else if (scheme() == "rockradio") {

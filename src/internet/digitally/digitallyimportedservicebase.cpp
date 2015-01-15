@@ -244,11 +244,12 @@ DigitallyImportedService::DigitallyImportedService(Application* app,
                                    QIcon(":/providers/digitallyimported.png"),
                                    "di", app, model, true, parent) {}
 
-SkyFmService::SkyFmService(Application* app, InternetModel* model,
-                           QObject* parent)
-    : DigitallyImportedServiceBase(
-          "SKY.fm", "SKY.fm", QUrl("http://www.sky.fm"),
-          QIcon(":/providers/skyfm.png"), "sky", app, model, true, parent) {}
+RadioTunesService::RadioTunesService(Application* app, InternetModel* model,
+                                     QObject* parent)
+    : DigitallyImportedServiceBase("RadioTunes", "RadioTunes.com",
+                                   QUrl("http://www.radiotunes.com/"),
+                                   QIcon(":/providers/radiotunes.png"),
+                                   "radiotunes", app, model, true, parent) {}
 
 JazzRadioService::JazzRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
