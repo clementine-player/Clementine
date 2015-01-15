@@ -67,7 +67,7 @@ class DigitallyImportedServiceBase : public InternetService {
  public slots:
   void ShowSettingsDialog();
 
- signals:
+signals:
   void StreamsChanged();
 
  private slots:
@@ -120,7 +120,7 @@ class DigitallyImportedService : public DigitallyImportedServiceBase {
 class RadioTunesService : public DigitallyImportedServiceBase {
  public:
   RadioTunesService(Application* app, InternetModel* model,
-               QObject* parent = nullptr);
+                    QObject* parent = nullptr);
 };
 
 class JazzRadioService : public DigitallyImportedServiceBase {

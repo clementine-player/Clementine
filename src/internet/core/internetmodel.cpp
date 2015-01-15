@@ -371,7 +371,7 @@ int InternetModel::FindItemPosition(const QString& text) {
   int a = 0;
   int b = invisibleRootItem()->rowCount() - 1;
   while (a <= b) {
-    int mid = a + (b - a)/2;
+    int mid = a + (b - a) / 2;
     if (invisibleRootItem()->child(mid, 0)->text() < text) {
       a = mid + 1;
     } else {

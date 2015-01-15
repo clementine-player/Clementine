@@ -245,10 +245,11 @@ DigitallyImportedService::DigitallyImportedService(Application* app,
                                    "di", app, model, true, parent) {}
 
 RadioTunesService::RadioTunesService(Application* app, InternetModel* model,
-                           QObject* parent)
-    : DigitallyImportedServiceBase(
-          "RadioTunes", "RadioTunes.com", QUrl("http://www.radiotunes.com/"),
-          QIcon(":/providers/radiotunes.png"), "radiotunes", app, model, true, parent) {}
+                                     QObject* parent)
+    : DigitallyImportedServiceBase("RadioTunes", "RadioTunes.com",
+                                   QUrl("http://www.radiotunes.com/"),
+                                   QIcon(":/providers/radiotunes.png"),
+                                   "radiotunes", app, model, true, parent) {}
 
 JazzRadioService::JazzRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
