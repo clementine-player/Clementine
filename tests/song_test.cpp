@@ -19,7 +19,7 @@
 #include "tagreader.h"
 #include "core/song.h"
 #ifdef HAVE_LIBLASTFM
-  #include "internet/lastfm/lastfmcompat.h"
+#include "internet/lastfm/lastfmcompat.h"
 #endif
 
 #include "gmock/gmock.h"
@@ -64,7 +64,8 @@ class SongTest : public ::testing::Test {
     tag_reader.SaveFile(filename, pb_song);
   }
 
-  static void WriteSongStatisticsToFile(const Song& song, const QString& filename) {
+  static void WriteSongStatisticsToFile(const Song& song,
+                                        const QString& filename) {
     TagReader tag_reader;
     ::pb::tagreader::SongMetadata pb_song;
     song.ToProtobuf(&pb_song);
@@ -78,7 +79,6 @@ class SongTest : public ::testing::Test {
     tag_reader.SaveSongRatingToFile(filename, pb_song);
   }
 };
-
 
 #ifdef HAVE_LIBLASTFM
 TEST_F(SongTest, InitsFromLastFM) {
@@ -95,7 +95,7 @@ TEST_F(SongTest, InitsFromLastFM) {
   EXPECT_EQ("Baz", song.album());
   EXPECT_EQ("Bar", song.artist());
 }
-#endif // HAVE_LIBLASTFM
+#endif  // HAVE_LIBLASTFM
 
 /*TEST_F(SongTest, InitsFromFile) {
   QTemporaryFile temp;
@@ -156,14 +156,13 @@ TEST_F(SongTest, FMPSPlayCountBoth) {
 
 TEST_F(SongTest, FMPSUnrated) {
   QStringList files_to_test;
-  files_to_test <<
-      ":/testdata/beep.m4a" <<
-      ":/testdata/beep.mp3" <<
-      ":/testdata/beep.flac" <<
-      ":/testdata/beep.ogg" <<
-      ":/testdata/beep.spx" <<
-      ":/testdata/beep.wav" <<
-      ":/testdata/beep.wma";
+  files_to_test << ":/testdata/beep.m4a"
+                << ":/testdata/beep.mp3"
+                << ":/testdata/beep.flac"
+                << ":/testdata/beep.ogg"
+                << ":/testdata/beep.spx"
+                << ":/testdata/beep.wav"
+                << ":/testdata/beep.wma";
   for (const QString& test_filename : files_to_test) {
     TemporaryResource r(test_filename);
     Song song = ReadSongFromFile(r.fileName());
@@ -240,6 +239,41 @@ TEST_F(SongTest, StatisticsOgg) {
   EXPECT_EQ(87, new_song.score());
 }
 
+TEST_F(SongTest, TagsOgg) {
+  TemporaryResource r(":/testdata/beep.ogg");
+  {
+    Song song = ReadSongFromFile(r.fileName());
+    song.set_title("beep title");
+    song.set_artist("beep artist");
+    song.set_album("beep album");
+    song.set_albumartist("beep album artist");
+    song.set_composer("beep composer");
+    song.set_performer("beep performer");
+    song.set_grouping("beep grouping");
+    song.set_genre("beep genre");
+    song.set_comment("beep comment");
+    song.set_track(12);
+    song.set_disc(1234);
+    song.set_year(2015);
+
+    WriteSongToFile(song, r.fileName());
+  }
+
+  Song new_song = ReadSongFromFile(r.fileName());
+  EXPECT_EQ("beep title", new_song.title());
+  EXPECT_EQ("beep artist", new_song.artist());
+  EXPECT_EQ("beep album", new_song.album());
+  EXPECT_EQ("beep album artist", new_song.albumartist());
+  EXPECT_EQ("beep composer", new_song.composer());
+  EXPECT_EQ("beep performer", new_song.performer());
+  EXPECT_EQ("beep grouping", new_song.grouping());
+  EXPECT_EQ("beep genre", new_song.genre());
+  EXPECT_EQ("beep comment", new_song.comment());
+  EXPECT_EQ(12, new_song.track());
+  EXPECT_EQ(1234, new_song.disc());
+  EXPECT_EQ(2015, new_song.year());
+}
+
 TEST_F(SongTest, RatingFLAC) {
   TemporaryResource r(":/testdata/beep.flac");
   {
@@ -265,6 +299,41 @@ TEST_F(SongTest, StatisticsFLAC) {
   Song new_song = ReadSongFromFile(r.fileName());
   EXPECT_EQ(1337, new_song.playcount());
   EXPECT_EQ(87, new_song.score());
+}
+
+TEST_F(SongTest, TagsFLAC) {
+  TemporaryResource r(":/testdata/beep.flac");
+  {
+    Song song = ReadSongFromFile(r.fileName());
+    song.set_title("beep title");
+    song.set_artist("beep artist");
+    song.set_album("beep album");
+    song.set_albumartist("beep album artist");
+    song.set_composer("beep composer");
+    song.set_performer("beep performer");
+    song.set_grouping("beep grouping");
+    song.set_genre("beep genre");
+    song.set_comment("beep comment");
+    song.set_track(12);
+    song.set_disc(1234);
+    song.set_year(2015);
+
+    WriteSongToFile(song, r.fileName());
+  }
+
+  Song new_song = ReadSongFromFile(r.fileName());
+  EXPECT_EQ("beep title", new_song.title());
+  EXPECT_EQ("beep artist", new_song.artist());
+  EXPECT_EQ("beep album", new_song.album());
+  EXPECT_EQ("beep album artist", new_song.albumartist());
+  EXPECT_EQ("beep composer", new_song.composer());
+  EXPECT_EQ("beep performer", new_song.performer());
+  EXPECT_EQ("beep grouping", new_song.grouping());
+  EXPECT_EQ("beep genre", new_song.genre());
+  EXPECT_EQ("beep comment", new_song.comment());
+  EXPECT_EQ(12, new_song.track());
+  EXPECT_EQ(1234, new_song.disc());
+  EXPECT_EQ(2015, new_song.year());
 }
 
 #ifdef TAGLIB_WITH_ASF
@@ -295,7 +364,7 @@ TEST_F(SongTest, StatisticsASF) {
   EXPECT_EQ(1337, new_song.playcount());
   EXPECT_EQ(87, new_song.score());
 }
-#endif // TAGLIB_WITH_ASF
+#endif  // TAGLIB_WITH_ASF
 
 TEST_F(SongTest, RatingMP4) {
   TemporaryResource r(":/testdata/beep.m4a");
