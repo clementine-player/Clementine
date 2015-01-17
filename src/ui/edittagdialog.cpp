@@ -314,17 +314,18 @@ QVariant EditTagDialog::Data::value(const Song& song, const QString& id) {
 
 void EditTagDialog::Data::set_value(const QString& id, const QVariant& value) {
   if (id == "title") current_.set_title(value.toString());
-  if (id == "artist") current_.set_artist(value.toString());
-  if (id == "album") current_.set_album(value.toString());
-  if (id == "albumartist") current_.set_albumartist(value.toString());
-  if (id == "composer") current_.set_composer(value.toString());
-  if (id == "performer") current_.set_performer(value.toString());
-  if (id == "grouping") current_.set_grouping(value.toString());
-  if (id == "genre") current_.set_genre(value.toString());
-  if (id == "comment") current_.set_comment(value.toString());
-  if (id == "track") current_.set_track(value.toInt());
-  if (id == "disc") current_.set_disc(value.toInt());
-  if (id == "year") current_.set_year(value.toInt());
+  else if (id == "artist") current_.set_artist(value.toString());
+  else if (id == "album") current_.set_album(value.toString());
+  else if (id == "albumartist") current_.set_albumartist(value.toString());
+  else if (id == "composer") current_.set_composer(value.toString());
+  else if (id == "performer") current_.set_performer(value.toString());
+  else if (id == "grouping") current_.set_grouping(value.toString());
+  else if (id == "genre") current_.set_genre(value.toString());
+  else if (id == "comment") current_.set_comment(value.toString());
+  else if (id == "track") current_.set_track(value.toInt());
+  else if (id == "disc") current_.set_disc(value.toInt());
+  else if (id == "year") current_.set_year(value.toInt());
+  else qLog(Warning) << "Unknown ID" << id;
 }
 
 bool EditTagDialog::DoesValueVary(const QModelIndexList& sel,
