@@ -14,6 +14,7 @@
 #include "core/application.h"
 #include "engines/enginebase.h"
 #include "engines/engine_fwd.h"
+#include "globalsearch/globalsearch.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistbackend.h"
@@ -29,12 +30,14 @@
 
 typedef QList<SongInfoProvider*> ProviderList;
 
-struct DownloadItem {
-  Song song_;
-  int song_no_;
-  int song_count_;
-  DownloadItem(Song s, int no, int count)
-      : song_(s), song_no_(no), song_count_(count) {}
+struct GlobalSearchRequest {
+  int id_;
+  QString query_;
+  RemoteClient* client_;
+  GlobalSearchRequest()
+    : id_(-1), client_(nullptr) {}
+  GlobalSearchRequest(int i, const QString& q, RemoteClient* c)
+    : id_(i), query_(q), client_(c) {}
 };
 
 class OutgoingDataCreator : public QObject {
@@ -46,6 +49,9 @@ class OutgoingDataCreator : public QObject {
   static const quint32 kFileChunkSize;
 
   void SetClients(QList<RemoteClient*>* clients);
+
+  static void CreateSong(const Song& song, const QImage& art, const int index,
+                  pb::remote::SongMetadata* song_metadata);
 
  public slots:
   void SendClementineInfo();
@@ -71,12 +77,13 @@ class OutgoingDataCreator : public QObject {
   void DisconnectAllClients();
   void GetLyrics();
   void SendLyrics(int id, const SongInfoFetcher::Result& result);
-  void SendSongs(const pb::remote::RequestDownloadSongs& request,
-                 RemoteClient* client);
-  void ResponseSongOffer(RemoteClient* client, bool accepted);
   void SendLibrary(RemoteClient* client);
   void EnableKittens(bool aww);
   void SendKitten(const QImage& kitten);
+
+  void DoGlobalSearch(const QString& query, RemoteClient* client);
+  void ResultsAvailable(int id, const SearchProvider::ResultList& results);
+  void SearchFinished(int id);
 
  private:
   Application* app_;
@@ -88,7 +95,6 @@ class OutgoingDataCreator : public QObject {
   QTimer* keep_alive_timer_;
   QTimer* track_position_timer_;
   int keep_alive_timeout_;
-  QMap<RemoteClient*, QQueue<DownloadItem> > download_queue_;
   int last_track_position_;
   bool aww_;
 
@@ -97,19 +103,12 @@ class OutgoingDataCreator : public QObject {
   QMap<int, SongInfoFetcher::Result> results_;
   SongInfoFetcher* fetcher_;
 
+  QMap<int, GlobalSearchRequest> global_search_result_map_;
+
   void SendDataToClients(pb::remote::Message* msg);
   void SetEngineState(pb::remote::ResponseClementineInfo* msg);
-  void CreateSong(const Song& song, const QImage& art, const int index,
-                  pb::remote::SongMetadata* song_metadata);
   void CheckEnabledProviders();
   SongInfoProvider* ProviderByName(const QString& name) const;
-  void SendSingleSong(RemoteClient* client, const Song& song, int song_no,
-                      int song_count);
-  void SendAlbum(RemoteClient* client, const Song& song);
-  void SendPlaylist(RemoteClient* client, int playlist_id);
-  void SendUrls(RemoteClient* client, const pb::remote::RequestDownloadSongs& request);
-  void OfferNextSong(RemoteClient* client);
-  void SendTotalFileSize(RemoteClient* client);
 };
 
 #endif  // OUTGOINGDATACREATOR_H

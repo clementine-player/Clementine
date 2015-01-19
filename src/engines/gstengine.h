@@ -148,7 +148,6 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   typedef QList<PluginDetails> PluginDetailsList;
 
-  static void SetEnv(const char* key, const QString& value);
   PluginDetailsList GetPluginList(const QString& classname) const;
 
   void StartFadeout();

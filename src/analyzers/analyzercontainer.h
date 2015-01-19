@@ -1,5 +1,9 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2013, Vasily Fomin <vasili.fomin@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ANALYZERCONTAINER_H
-#define ANALYZERCONTAINER_H
+#ifndef ANALYZERS_ANALYZERCONTAINER_H_
+#define ANALYZERS_ANALYZERCONTAINER_H_
 
 #include <QWidget>
 #include <QMenu>
@@ -29,15 +33,14 @@ class AnalyzerContainer : public QWidget {
   Q_OBJECT
 
  public:
-  AnalyzerContainer(QWidget* parent);
-
+  explicit AnalyzerContainer(QWidget* parent);
   void SetEngine(EngineBase* engine);
   void SetActions(QAction* visualisation);
 
   static const char* kSettingsGroup;
   static const char* kSettingsFramerate;
 
-signals:
+ signals:
   void WheelEvent(int delta);
 
  protected:
@@ -100,4 +103,4 @@ void AnalyzerContainer::AddAnalyzerType() {
   actions_ << action;
 }
 
-#endif
+#endif  // ANALYZERS_ANALYZERCONTAINER_H_

@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2013, Andreas <asfa194@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COVEREXPORTRUNNABLE_H
-#define COVEREXPORTRUNNABLE_H
+#ifndef COVERS_COVEREXPORTRUNNABLE_H_
+#define COVERS_COVEREXPORTRUNNABLE_H_
 
 #include "core/song.h"
 #include "ui/albumcoverexport.h"
@@ -36,7 +38,7 @@ class CoverExportRunnable : public QObject, public QRunnable {
 
   void run();
 
-signals:
+ signals:
   void CoverExported();
   void CoverSkipped();
 
@@ -53,4 +55,4 @@ signals:
   AlbumCoverExporter* album_cover_exporter_;
 };
 
-#endif  // COVEREXPORTRUNNABLE_H
+#endif  // COVERS_COVEREXPORTRUNNABLE_H_

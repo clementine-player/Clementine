@@ -76,8 +76,8 @@ void WplParser::ParseSeq(const QDir& dir, QXmlStreamReader* reader,
   }
 }
 
-void WplParser::Save(const SongList& songs, QIODevice* device,
-                     const QDir& dir) const {
+void WplParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
+                     Playlist::Path path_type) const {
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
@@ -98,7 +98,7 @@ void WplParser::Save(const SongList& songs, QIODevice* device,
       StreamElement seq("seq", &writer);
       for (const Song& song : songs) {
         writer.writeStartElement("media");
-        writer.writeAttribute("src", URLOrRelativeFilename(song.url(), dir));
+        writer.writeAttribute("src", URLOrFilename(song.url(), dir, path_type));
         writer.writeEndElement();
       }
     }

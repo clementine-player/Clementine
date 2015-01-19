@@ -46,9 +46,13 @@ message Playlists {
   message Playlist {
     required int32 index = 1;
     required string name = 2;
-    required bool is_offline = 3;
+    required int32 nb_tracks = 3;
+    required bool is_mine = 4;
+    required string owner= 5;
+    required bool is_offline = 6;
+    required string uri = 7;
     // Offline sync progress between 0-100.
-    optional int32 download_progress = 4;
+    optional int32 download_progress = 8;
   }
 
   repeated Playlist playlist = 1;
@@ -170,7 +174,7 @@ message BrowseToplistResponse {
 }
 
 message SeekRequest {
-  optional int64 offset_bytes = 1;
+  optional int64 offset_nsec = 1;
 }
 
 enum Bitrate {
@@ -184,7 +188,23 @@ message PlaybackSettings {
   optional bool volume_normalisation = 2 [default = false];
 }
 
-// NEXT_ID: 21
+message PauseRequest {
+  optional bool paused = 1 [default = false];
+}
+
+message AddTracksToPlaylistRequest {
+  required PlaylistType playlist_type = 1;
+  optional int64 playlist_index = 2; // Used if playlist_index == UserPlaylist
+  repeated string track_uri = 3;
+}
+
+message RemoveTracksFromPlaylistRequest {
+  required PlaylistType playlist_type = 1;
+  optional int64 playlist_index = 2; // Used if playlist_index == UserPlaylist
+  repeated int64 track_index = 3;
+}
+
+// NEXT_ID: 25
 message Message {
   // Not currently used
   optional int32 id = 18;
@@ -208,4 +228,8 @@ message Message {
   optional PlaybackSettings set_playback_settings_request = 17;
   optional BrowseToplistRequest browse_toplist_request = 19;
   optional BrowseToplistResponse browse_toplist_response = 20;
+  optional PauseRequest pause_request = 21;
+  // ID 22 unused.
+  optional AddTracksToPlaylistRequest add_tracks_to_playlist = 23;
+  optional RemoveTracksFromPlaylistRequest remove_tracks_from_playlist = 24;
 }

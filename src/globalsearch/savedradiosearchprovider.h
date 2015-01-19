@@ -19,13 +19,15 @@
 #define SAVEDRADIOSEARCHPROVIDER_H
 
 #include "simplesearchprovider.h"
-
-class SavedRadio;
+#include "internet/internetradio/savedradio.h"
 
 class SavedRadioSearchProvider : public SimpleSearchProvider {
  public:
   SavedRadioSearchProvider(SavedRadio* service, Application* app,
                            QObject* parent);
+
+  // SearchProvider
+  InternetService* internet_service() override { return service_; }
 
  protected:
   void RecreateItems();

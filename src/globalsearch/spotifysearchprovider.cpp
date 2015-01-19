@@ -21,9 +21,8 @@
 #include <random>
 
 #include "core/logging.h"
-#include "internet/internetmodel.h"
-#include "internet/spotifyserver.h"
-#include "internet/spotifyservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/spotify/spotifyserver.h"
 #include "playlist/songmimedata.h"
 
 namespace {
@@ -44,6 +43,9 @@ SpotifyServer* SpotifySearchProvider::server() {
   if (!service_) service_ = InternetModel::Service<SpotifyService>();
 
   if (service_->login_state() != SpotifyService::LoginState_LoggedIn)
+    return nullptr;
+
+  if (!service_->IsBlobInstalled())
     return nullptr;
 
   server_ = service_->server();

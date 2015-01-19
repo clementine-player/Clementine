@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef QXTGLOBALSHORTCUTBACKEND_H
-#define QXTGLOBALSHORTCUTBACKEND_H
+#ifndef CORE_QXTGLOBALSHORTCUTBACKEND_H_
+#define CORE_QXTGLOBALSHORTCUTBACKEND_H_
 
 #include "globalshortcutbackend.h"
 
@@ -24,7 +26,7 @@ class QxtGlobalShortcut;
 
 class QxtGlobalShortcutBackend : public GlobalShortcutBackend {
  public:
-  QxtGlobalShortcutBackend(GlobalShortcuts* parent = nullptr);
+  explicit QxtGlobalShortcutBackend(GlobalShortcuts* parent = nullptr);
 
  protected:
   bool DoRegister();
@@ -35,4 +37,4 @@ class QxtGlobalShortcutBackend : public GlobalShortcutBackend {
   QList<QxtGlobalShortcut*> shortcuts_;
 };
 
-#endif  // QXTGLOBALSHORTCUTBACKEND_H
+#endif  // CORE_QXTGLOBALSHORTCUTBACKEND_H_

@@ -41,8 +41,6 @@
 #include <qtsparkle/Updater>
 #endif
 
-#include <gst/cdda/gstcddabasesrc.h>
-
 #include "core/appearance.h"
 #include "core/application.h"
 #include "core/backgroundstreams.h"
@@ -73,11 +71,11 @@
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchview.h"
 #include "globalsearch/librarysearchprovider.h"
-#include "internet/magnatuneservice.h"
-#include "internet/internetmodel.h"
-#include "internet/internetview.h"
-#include "internet/internetviewcontainer.h"
-#include "internet/savedradio.h"
+#include "internet/magnatune/magnatuneservice.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetview.h"
+#include "internet/core/internetviewcontainer.h"
+#include "internet/internetradio/savedradio.h"
 #include "library/groupbydialog.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -96,7 +94,7 @@
 #include "playlist/queuemanager.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
-#include "podcasts/podcastservice.h"
+#include "internet/podcasts/podcastservice.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
@@ -132,7 +130,7 @@
 #endif
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/lastfmservice.h"
+#include "internet/lastfm/lastfmservice.h"
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
@@ -149,8 +147,10 @@
 #endif
 
 #ifdef HAVE_VK
-#include "internet/vkservice.h"
+#include "internet/vk/vkservice.h"
 #endif
+
+#include <cmath>
 
 #ifdef Q_OS_DARWIN
 // Non exported mac-specific function.
@@ -159,6 +159,11 @@ void qt_mac_set_dock_menu(QMenu*);
 
 const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kAllFilesFilterSpec = QT_TR_NOOP("All Files (*)");
+
+namespace {
+const int kTrackSliderUpdateTimeMs = 40;
+const int kTrackPositionUpdateTimeMs = 1000;
+}
 
 MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
                        QWidget* parent)
@@ -186,6 +191,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       playlistitem_actions_separator_(nullptr),
       library_sort_model_(new QSortFilterProxyModel(this)),
       track_position_timer_(new QTimer(this)),
+      track_slider_timer_(new QTimer(this)),
       was_maximized_(false),
       saved_playback_position_(0),
       saved_playback_state_(Engine::Empty),
@@ -249,9 +255,12 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   ui_->tabs->SetBackgroundPixmap(QPixmap(":/sidebar_background.png"));
 
-  track_position_timer_->setInterval(1000);
+  track_position_timer_->setInterval(kTrackPositionUpdateTimeMs);
   connect(track_position_timer_, SIGNAL(timeout()),
           SLOT(UpdateTrackPosition()));
+  track_slider_timer_->setInterval(kTrackSliderUpdateTimeMs);
+  connect(track_slider_timer_, SIGNAL(timeout()),
+          SLOT(UpdateTrackSliderPosition()));
 
   // Start initialising the player
   qLog(Debug) << "Initialising player";
@@ -313,6 +322,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->action_save_playlist->setIcon(IconLoader::Load("document-save"));
   ui_->action_full_library_scan->setIcon(IconLoader::Load("view-refresh"));
   ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
+  ui_->action_hypnotoad->setIcon(IconLoader::Load("hypnotoad"));
+  ui_->action_kittens->setIcon(IconLoader::Load("kittens"));
+  ui_->action_enterprise->setIcon(IconLoader::Load("enterprise"));
 
   // File view connections
   connect(file_view_, SIGNAL(AddToPlaylist(QMimeData*)),
@@ -356,6 +368,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           app_->playlist_manager(), SLOT(ClearCurrent()));
   connect(ui_->action_remove_duplicates, SIGNAL(triggered()),
           app_->playlist_manager(), SLOT(RemoveDuplicatesCurrent()));
+  connect(ui_->action_remove_unavailable, SIGNAL(triggered()),
+          app_->playlist_manager(), SLOT(RemoveUnavailableCurrent()));
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()),
           SLOT(PlaylistRemoveCurrent()));
   connect(ui_->action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
@@ -508,7 +522,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->playlist->view(), SIGNAL(BackgroundPropertyChanged()),
           SLOT(RefreshStyleSheet()));
 
-  connect(ui_->track_slider, SIGNAL(ValueChanged(int)), app_->player(),
+  connect(ui_->track_slider, SIGNAL(ValueChangedSeconds(int)), app_->player(),
           SLOT(SeekTo(int)));
 
   // Library connections
@@ -614,6 +628,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_menu_->addAction(ui_->action_clear_playlist);
   playlist_menu_->addAction(ui_->action_shuffle);
   playlist_menu_->addAction(ui_->action_remove_duplicates);
+  playlist_menu_->addAction(ui_->action_remove_unavailable);
 
 #ifdef Q_OS_DARWIN
   ui_->action_shuffle->setShortcut(QKeySequence());
@@ -869,6 +884,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   file_view_->SetPath(
       settings_.value("file_path", QDir::homePath()).toString());
 
+  // Users often collapse one side of the splitter by mistake and don't know
+  // how to restore it.  This must be set after the state is restored above.
+  ui_->splitter->setChildrenCollapsible(false);
+
   ReloadSettings();
 
   // Reload pretty OSD to avoid issues with fonts
@@ -982,6 +1001,7 @@ void MainWindow::MediaStopped() {
   tray_icon_->LastFMButtonLoveStateChanged(false);
 
   track_position_timer_->stop();
+  track_slider_timer_->stop();
   ui_->track_slider->SetStopped();
   tray_icon_->SetProgress(0);
   tray_icon_->SetStopped();
@@ -996,6 +1016,7 @@ void MainWindow::MediaPaused() {
   ui_->action_play_pause->setEnabled(true);
 
   track_position_timer_->stop();
+  track_slider_timer_->stop();
 
   tray_icon_->SetPaused();
 }
@@ -1024,6 +1045,7 @@ void MainWindow::MediaPlaying() {
 #endif
 
   track_position_timer_->start();
+  track_slider_timer_->start();
   UpdateTrackPosition();
 }
 
@@ -1261,7 +1283,7 @@ void MainWindow::UpdateTrackPosition() {
   PlaylistItemPtr item(app_->player()->GetCurrentItem());
   const int position = std::floor(
       float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
-  const int length = item->Metadata().length_nanosec() / kNsecPerSec;
+  const int length = app_->player()->engine()->length_nanosec() / kNsecPerSec;
   const int scrobble_point = playlist->scrobble_point_nanosec() / kNsecPerSec;
 
   if (length <= 0) {
@@ -1297,9 +1319,6 @@ void MainWindow::UpdateTrackPosition() {
     }
   }
 
-  // Update the slider
-  ui_->track_slider->SetValue(position, length);
-
   // Update the tray icon every 10 seconds
   if (position % 10 == 0) {
     qLog(Debug) << "position" << position << "scrobble point" << scrobble_point
@@ -1316,6 +1335,18 @@ void MainWindow::UpdateTrackPosition() {
     }
 #endif
   }
+}
+
+void MainWindow::UpdateTrackSliderPosition() {
+  PlaylistItemPtr item(app_->player()->GetCurrentItem());
+
+  const int slider_position = std::floor(
+      float(app_->player()->engine()->position_nanosec()) / kNsecPerMsec);
+  const int slider_length =
+      app_->player()->engine()->length_nanosec() / kNsecPerMsec;
+
+  // Update the slider
+  ui_->track_slider->SetValue(slider_position, slider_length);
 }
 
 #ifdef HAVE_LIBLASTFM
@@ -1830,7 +1861,7 @@ void MainWindow::AddFolder() {
   // Add media
   MimeData* data = new MimeData;
   data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(
-                                     QFileInfo(directory).canonicalFilePath()));
+                    QFileInfo(directory).canonicalFilePath()));
   AddToPlaylist(data);
 }
 
@@ -2216,7 +2247,7 @@ void MainWindow::PlaylistQueue() {
   for (const QModelIndex& proxy_index :
        ui_->playlist->view()->selectionModel()->selectedRows()) {
     indexes << app_->playlist_manager()->current()->proxy()->mapToSource(
-                   proxy_index);
+        proxy_index);
   }
 
   app_->playlist_manager()->current()->queue()->ToggleTracks(indexes);
@@ -2227,7 +2258,7 @@ void MainWindow::PlaylistSkip() {
   for (const QModelIndex& proxy_index :
        ui_->playlist->view()->selectionModel()->selectedRows()) {
     indexes << app_->playlist_manager()->current()->proxy()->mapToSource(
-                   proxy_index);
+        proxy_index);
   }
 
   app_->playlist_manager()->current()->SkipTracks(indexes);

@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SIMPLETREEITEM_H
-#define SIMPLETREEITEM_H
+#ifndef CORE_SIMPLETREEITEM_H_
+#define CORE_SIMPLETREEITEM_H_
 
 #include "simpletreemodel.h"
 
@@ -28,7 +30,7 @@ class SimpleTreeItem {
  public:
   SimpleTreeItem(int _type, SimpleTreeModel<T>* _model);  // For the root item
   SimpleTreeItem(int _type, const QString& _key, T* _parent = nullptr);
-  SimpleTreeItem(int _type, T* _parent = nullptr);
+  explicit SimpleTreeItem(int _type, T* _parent = nullptr);
   virtual ~SimpleTreeItem();
 
   void InsertNotify(T* _parent);
@@ -154,4 +156,4 @@ T* SimpleTreeItem<T>::ChildByKey(const QString& key) const {
   return nullptr;
 }
 
-#endif  // SIMPLETREEITEM_H
+#endif  // CORE_SIMPLETREEITEM_H_

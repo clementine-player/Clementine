@@ -1,5 +1,14 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2014, David Sansome <me@davidsansome.com>
+   Copyright 2010-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2012, Alan Briolat <alan.briolat@gmail.com>
+   Copyright 2012, Veniamin Gvozdikov <G.Veniamin@gmail.com>
+   Copyright 2013-2014, Andreas <asfa194@gmail.com>
+   Copyright 2013, Glad Olus <gladolus@gmx.com>
+   Copyright 2013, graehl <graehl@gmail.com>
+   Copyright 2014, vkrishtal <krishtalhost@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -40,6 +49,7 @@
 
 #include "core/application.h"
 #include "core/logging.h"
+#include "config.h"
 #include "timeconstants.h"
 
 #include "sha2.h"
@@ -90,9 +100,9 @@ QString PrettyTime(int seconds) {
 
   QString ret;
   if (hours)
-    ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);
+    ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);  // NOLINT(runtime/printf)
   else
-    ret.sprintf("%d:%02d", minutes, seconds);
+    ret.sprintf("%d:%02d", minutes, seconds);  // NOLINT(runtime/printf)
 
   return ret;
 }
@@ -104,7 +114,7 @@ QString PrettyTimeNanosec(qint64 nanoseconds) {
 QString WordyTime(quint64 seconds) {
   quint64 days = seconds / (60 * 60 * 24);
 
-  // TODO: Make the plural rules translatable
+  // TODO(David Sansome): Make the plural rules translatable
   QStringList parts;
 
   if (days) parts << (days == 1 ? tr("1 day") : tr("%1 days").arg(days));
@@ -151,11 +161,11 @@ QString PrettySize(quint64 bytes) {
     if (bytes <= 1000)
       ret = QString::number(bytes) + " bytes";
     else if (bytes <= 1000 * 1000)
-      ret.sprintf("%.1f KB", float(bytes) / 1000);
+      ret.sprintf("%.1f KB", static_cast<float>(bytes) / 1000);  // NOLINT(runtime/printf)
     else if (bytes <= 1000 * 1000 * 1000)
-      ret.sprintf("%.1f MB", float(bytes) / (1000 * 1000));
+      ret.sprintf("%.1f MB", static_cast<float>(bytes) / (1000 * 1000));  // NOLINT(runtime/printf)
     else
-      ret.sprintf("%.1f GB", float(bytes) / (1000 * 1000 * 1000));
+      ret.sprintf("%.1f GB", static_cast<float>(bytes) / (1000 * 1000 * 1000));  // NOLINT(runtime/printf)
   }
   return ret;
 }
@@ -212,6 +222,8 @@ QString GetTemporaryFileName() {
   QString file;
   {
     QTemporaryFile tempfile;
+    // Do not delete the file, we want to do something with it
+    tempfile.setAutoRemove(false);
     tempfile.open();
     file = tempfile.fileName();
   }
@@ -223,18 +235,15 @@ bool RemoveRecursive(const QString& path) {
   QDir dir(path);
   for (const QString& child :
        dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden)) {
-    if (!RemoveRecursive(path + "/" + child))
-      return false;
+    if (!RemoveRecursive(path + "/" + child)) return false;
   }
 
   for (const QString& child :
        dir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Hidden)) {
-    if (!QFile::remove(path + "/" + child))
-      return false;
+    if (!QFile::remove(path + "/" + child)) return false;
   }
 
-  if (!dir.rmdir(path))
-    return false;
+  if (!dir.rmdir(path)) return false;
 
   return true;
 }
@@ -418,8 +427,8 @@ QByteArray Hmac(const QByteArray& key, const QByteArray& data,
   const int kBlockSize = 64;  // bytes
   Q_ASSERT(key.length() <= kBlockSize);
 
-  QByteArray inner_padding(kBlockSize, char(0x36));
-  QByteArray outer_padding(kBlockSize, char(0x5c));
+  QByteArray inner_padding(kBlockSize, static_cast<char>(0x36));
+  QByteArray outer_padding(kBlockSize, static_cast<char>(0x5c));
 
   for (int i = 0; i < key.length(); ++i) {
     inner_padding[i] = inner_padding[i] ^ key[i];
@@ -453,15 +462,21 @@ QByteArray HmacSha1(const QByteArray& key, const QByteArray& data) {
 }
 
 QByteArray Sha256(const QByteArray& data) {
-  clementine_sha2::SHA256_CTX context;
-  clementine_sha2::SHA256_Init(&context);
-  clementine_sha2::SHA256_Update(
-      &context, reinterpret_cast<const quint8*>(data.constData()),
-      data.length());
+#ifndef USE_SYSTEM_SHA2
+  using clementine_sha2::SHA256_CTX;
+  using clementine_sha2::SHA256_Init;
+  using clementine_sha2::SHA256_Update;
+  using clementine_sha2::SHA256_Final;
+  using clementine_sha2::SHA256_DIGEST_LENGTH;
+#endif
 
-  QByteArray ret(clementine_sha2::SHA256_DIGEST_LENGTH, '\0');
-  clementine_sha2::SHA256_Final(reinterpret_cast<quint8*>(ret.data()),
-                                &context);
+  SHA256_CTX context;
+  SHA256_Init(&context);
+  SHA256_Update(&context, reinterpret_cast<const quint8*>(data.constData()),
+                data.length());
+
+  QByteArray ret(SHA256_DIGEST_LENGTH, '\0');
+  SHA256_Final(reinterpret_cast<quint8*>(ret.data()), &context);
 
   return ret;
 }
@@ -552,17 +567,43 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
 QDateTime ParseRFC822DateTime(const QString& text) {
   // This sucks but we need it because some podcasts don't quite follow the
   // spec properly - they might have 1-digit hour numbers for example.
-
+  QDateTime ret;
   QRegExp re(
       "([a-zA-Z]{3}),? (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) "
       "(\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
-  if (re.indexIn(text) == -1) return QDateTime();
+  if (re.indexIn(text) != -1) {
+    ret = QDateTime(
+        QDate::fromString(QString("%1 %2 %3 %4")
+                              .arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)),
+                          Qt::TextDate),
+        QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
+  }
+  if (ret.isValid()) return ret;
+  // Because http://feeds.feedburner.com/reasonabledoubts/Msxh?format=xml
+  QRegExp re2(
+      "(\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) "
+      "(\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
 
-  return QDateTime(
-      QDate::fromString(QString("%1 %2 %3 %4")
-                            .arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)),
-                        Qt::TextDate),
-      QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
+  QMap<QString, int> monthmap;
+  monthmap["Jan"] = 1;
+  monthmap["Feb"] = 2;
+  monthmap["Mar"] = 3;
+  monthmap["Apr"] = 4;
+  monthmap["May"] = 5;
+  monthmap["Jun"] = 6;
+  monthmap["Jul"] = 7;
+  monthmap["Aug"] = 8;
+  monthmap["Sep"] = 9;
+  monthmap["Oct"] = 10;
+  monthmap["Nov"] = 11;
+  monthmap["Dec"] = 12;
+
+  if (re2.indexIn(text) != -1) {
+    QDate date(re2.cap(3).toInt(), monthmap[re2.cap(2)], re2.cap(1).toInt());
+    ret = QDateTime(date, QTime(re2.cap(4).toInt(), re2.cap(5).toInt(),
+                                re2.cap(6).toInt()));
+  }
+  return ret;
 }
 
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {

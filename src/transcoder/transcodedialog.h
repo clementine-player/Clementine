@@ -45,10 +45,11 @@ class TranscodeDialog : public QDialog {
 
  private slots:
   void Add();
+  void Import();
   void Remove();
   void Start();
   void Cancel();
-  void JobComplete(const QString& filename, bool success);
+  void JobComplete(const QString& input, const QString& output, bool success);
   void LogLine(const QString& message);
   void AllJobsComplete();
   void Options();
@@ -74,6 +75,7 @@ class TranscodeDialog : public QDialog {
   QPushButton* close_button_;
 
   QString last_add_dir_;
+  QString last_import_dir_;
 
   Transcoder* transcoder_;
   int queued_;

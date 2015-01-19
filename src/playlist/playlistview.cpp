@@ -256,6 +256,7 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
     disconnect(playlist_, SIGNAL(DynamicModeChanged(bool)), this,
                SLOT(DynamicModeChanged(bool)));
     disconnect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
+    disconnect(playlist_, SIGNAL(QueueChanged()), this, SLOT(update()));
 
     disconnect(dynamic_controls_, SIGNAL(Expand()), playlist_,
                SLOT(ExpandDynamicPlaylist()));
@@ -273,11 +274,12 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
   read_only_settings_ = false;
 
   connect(playlist_, SIGNAL(RestoreFinished()), SLOT(JumpToLastPlayedTrack()));
-
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
   connect(playlist_, SIGNAL(DynamicModeChanged(bool)),
           SLOT(DynamicModeChanged(bool)));
   connect(playlist_, SIGNAL(destroyed()), SLOT(PlaylistDestroyed()));
+  connect(playlist_, SIGNAL(QueueChanged()), SLOT(update()));
+
   connect(dynamic_controls_, SIGNAL(Expand()), playlist_,
           SLOT(ExpandDynamicPlaylist()));
   connect(dynamic_controls_, SIGNAL(Repopulate()), playlist_,
@@ -577,7 +579,8 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     event->accept();
   } else if (event->modifiers() != Qt::ControlModifier  // Ctrl+Space selects
                                                         // the item
-             && event->key() == Qt::Key_Space) {
+             &&
+             event->key() == Qt::Key_Space) {
     emit PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
@@ -590,7 +593,7 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
                  Qt::NoModifier  // No modifier keys currently pressed...
                  // ... and key pressed is something related to text
              &&
-             ((event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z) ||
+             ((event->key() >= Qt::Key_Exclam && event->key() <= Qt::Key_Z) ||
               event->key() == Qt::Key_Backspace ||
               event->key() == Qt::Key_Escape)) {
     emit FocusOnFilterSignal(event);
@@ -688,7 +691,6 @@ void PlaylistView::closeEditor(QWidget* editor,
     QTreeView::closeEditor(editor, QAbstractItemDelegate::SubmitModelCache);
   } else if (hint == QAbstractItemDelegate::EditNextItem ||
              hint == QAbstractItemDelegate::EditPreviousItem) {
-
     QModelIndex index;
     if (hint == QAbstractItemDelegate::EditNextItem)
       index = NextEditableIndex(currentIndex());
@@ -727,7 +729,7 @@ void PlaylistView::leaveEvent(QEvent* e) {
 }
 
 void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
-  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+  if (editTriggers() & QAbstractItemView::NoEditTriggers) {
     return;
   }
 
@@ -750,7 +752,7 @@ void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
 }
 
 void PlaylistView::RatingHoverOut() {
-  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+  if (editTriggers() & QAbstractItemView::NoEditTriggers) {
     return;
   }
 
@@ -771,7 +773,7 @@ void PlaylistView::RatingHoverOut() {
 }
 
 void PlaylistView::mousePressEvent(QMouseEvent* event) {
-  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+  if (editTriggers() & QAbstractItemView::NoEditTriggers) {
     QTreeView::mousePressEvent(event);
     return;
   }
@@ -785,12 +787,14 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
 
     if (selectedIndexes().contains(index)) {
       // Update all the selected items
+      QModelIndexList src_index_list;
       for (const QModelIndex& index : selectedIndexes()) {
         if (index.data(Playlist::Role_CanSetRating).toBool()) {
-          playlist_->RateSong(playlist_->proxy()->mapToSource(index),
-                              new_rating);
+          QModelIndex src_index = playlist_->proxy()->mapToSource(index);
+          src_index_list << src_index;
         }
       }
+      playlist_->RateSongs(src_index_list, new_rating);
     } else {
       // Update only this item
       playlist_->RateSong(playlist_->proxy()->mapToSource(index), new_rating);
@@ -888,7 +892,6 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       // Check if we should recompute the background image
       if (height() != last_height_ || width() != last_width_ ||
           force_background_redraw_) {
-
         if (background_image_.isNull()) {
           cached_scaled_background_image_ = QPixmap();
         } else {
@@ -964,8 +967,9 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       if (model()->rowCount() == 0)
         drop_pos = 1;
       else
-        drop_pos = 1 + visualRect(model()->index(model()->rowCount() - 1,
-                                                 first_column)).bottom();
+        drop_pos = 1 +
+                   visualRect(model()->index(model()->rowCount() - 1,
+                                             first_column)).bottom();
       break;
   }
 
@@ -1108,6 +1112,11 @@ void PlaylistView::ReloadSettings() {
     emit BackgroundPropertyChanged();
     force_background_redraw_ = true;
   }
+
+  if (!s.value("click_edit_inline", true).toBool())
+    setEditTriggers(editTriggers() & ~QAbstractItemView::SelectedClicked);
+  else
+    setEditTriggers(editTriggers() | QAbstractItemView::SelectedClicked);
 }
 
 void PlaylistView::SaveSettings() {

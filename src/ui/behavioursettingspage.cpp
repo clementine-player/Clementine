@@ -60,9 +60,14 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
     if (!lang_re.exactMatch(filename)) continue;
 
     QString code = lang_re.cap(1);
-    QString language_name = QLocale::languageToString(QLocale(code).language());
+    QString lookup_code = QString(code)
+        .replace("@latin", "_Latn")
+        .replace("_CN", "_Hans_CN")
+        .replace("_TW", "_Hant_TW");
+    QString language_name =
+        QLocale::languageToString(QLocale(lookup_code).language());
 #if QT_VERSION >= 0x040800
-    QString native_name = QLocale(code).nativeLanguageName();
+    QString native_name = QLocale(lookup_code).nativeLanguageName();
     if (!native_name.isEmpty()) {
       language_name = native_name;
     }
@@ -131,6 +136,26 @@ void BehaviourSettingsPage::Load() {
   s.beginGroup(Playlist::kSettingsGroup);
   ui_->b_grey_out_deleted_->setChecked(
       s.value("greyoutdeleted", false).toBool());
+  ui_->b_click_edit_inline_->setChecked(
+      s.value("click_edit_inline", true).toBool());
+
+  Playlist::Path path = Playlist::Path(
+      s.value(Playlist::kPathType, Playlist::Path_Automatic).toInt());
+  switch (path) {
+    case Playlist::Path_Automatic:
+      ui_->b_automatic_path->setChecked(true);
+      break;
+    case Playlist::Path_Absolute:
+      ui_->b_absolute_path->setChecked(true);
+      break;
+    case Playlist::Path_Relative:
+      ui_->b_relative_path->setChecked(true);
+      break;
+    case Playlist::Path_Ask_User:
+      ui_->b_ask_path->setChecked(true);
+  }
+  ui_->b_write_metadata->setChecked(
+      s.value(Playlist::kWriteMetadata, true).toBool());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
@@ -160,6 +185,17 @@ void BehaviourSettingsPage::Save() {
   MainWindow::PlayBehaviour menu_playmode = MainWindow::PlayBehaviour(
       ui_->menu_playmode->itemData(ui_->menu_playmode->currentIndex()).toInt());
 
+  Playlist::Path path = Playlist::Path_Automatic;
+  if (ui_->b_automatic_path->isChecked()) {
+    path = Playlist::Path_Automatic;
+  } else if (ui_->b_absolute_path->isChecked()) {
+    path = Playlist::Path_Absolute;
+  } else if (ui_->b_relative_path->isChecked()) {
+    path = Playlist::Path_Relative;
+  } else if (ui_->b_ask_path->isChecked()) {
+    path = Playlist::Path_Ask_User;
+  }
+
   s.beginGroup(MainWindow::kSettingsGroup);
   s.setValue("showtray", ui_->b_show_tray_icon_->isChecked());
   s.setValue("keeprunning", ui_->b_keep_running_->isChecked());
@@ -179,6 +215,9 @@ void BehaviourSettingsPage::Save() {
 
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
+  s.setValue("click_edit_inline", ui_->b_click_edit_inline_->isChecked());
+  s.setValue(Playlist::kPathType, static_cast<int>(path));
+  s.setValue(Playlist::kWriteMetadata, ui_->b_write_metadata->isChecked());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);

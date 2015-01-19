@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, David Sansome <me@davidsansome.com>
+   Copyright 2011, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TASKMANAGER_H
-#define TASKMANAGER_H
+#ifndef CORE_TASKMANAGER_H_
+#define CORE_TASKMANAGER_H_
 
 #include <QMap>
 #include <QMutex>
@@ -26,7 +29,7 @@ class TaskManager : public QObject {
   Q_OBJECT
 
  public:
-  TaskManager(QObject* parent = nullptr);
+  explicit TaskManager(QObject* parent = nullptr);
 
   struct Task {
     int id;
@@ -60,7 +63,7 @@ class TaskManager : public QObject {
   void SetTaskFinished(int id);
   int GetTaskProgress(int id);
 
-signals:
+ signals:
   void TasksChanged();
 
   void PauseLibraryWatchers();
@@ -74,4 +77,4 @@ signals:
   Q_DISABLE_COPY(TaskManager);
 };
 
-#endif  // TASKMANAGER_H
+#endif  // CORE_TASKMANAGER_H_

@@ -19,6 +19,8 @@
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
+#include "playlist/playlist.h"
+
 #include <QBuffer>
 #include <QtDebug>
 
@@ -92,7 +94,7 @@ bool M3UParser::ParseMetadata(const QString& line,
   metadata->length = length * kNsecPerSec;
 
   QString track_info = info.section(',', 1);
-  QStringList list = track_info.split('-');
+  QStringList list = track_info.split(" - ");
   if (list.size() <= 1) {
     metadata->title = track_info;
     return true;
@@ -102,19 +104,27 @@ bool M3UParser::ParseMetadata(const QString& line,
   return true;
 }
 
-void M3UParser::Save(const SongList& songs, QIODevice* device,
-                     const QDir& dir) const {
+void M3UParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
+                     Playlist::Path path_type) const {
   device->write("#EXTM3U\n");
+
+  QSettings s;
+  s.beginGroup(Playlist::kSettingsGroup);
+  bool writeMetadata = s.value(Playlist::kWriteMetadata, true).toBool();
+  s.endGroup();
+
   for (const Song& song : songs) {
     if (song.url().isEmpty()) {
       continue;
     }
-    QString meta = QString("#EXTINF:%1,%2 - %3\n")
-                       .arg(song.length_nanosec() / kNsecPerSec)
-                       .arg(song.artist())
-                       .arg(song.title());
-    device->write(meta.toUtf8());
-    device->write(URLOrRelativeFilename(song.url(), dir).toUtf8());
+    if (writeMetadata) {
+      QString meta = QString("#EXTINF:%1,%2 - %3\n")
+                         .arg(song.length_nanosec() / kNsecPerSec)
+                         .arg(song.artist())
+                         .arg(song.title());
+      device->write(meta.toUtf8());
+    }
+    device->write(URLOrFilename(song.url(), dir, path_type).toUtf8());
     device->write("\n");
   }
 }

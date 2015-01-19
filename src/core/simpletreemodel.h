@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SIMPLETREEMODEL_H
-#define SIMPLETREEMODEL_H
+#ifndef CORE_SIMPLETREEMODEL_H_
+#define CORE_SIMPLETREEMODEL_H_
 
 #include <QAbstractItemModel>
 
@@ -25,7 +27,7 @@ class QModelIndex;
 template <typename T>
 class SimpleTreeModel : public QAbstractItemModel {
  public:
-  SimpleTreeModel(T* root = 0, QObject* parent = nullptr);
+  explicit SimpleTreeModel(T* root = 0, QObject* parent = nullptr);
   virtual ~SimpleTreeModel() {}
 
   // QAbstractItemModel
@@ -148,4 +150,4 @@ void SimpleTreeModel<T>::EmitDataChanged(T* item) {
   emit dataChanged(index, index);
 }
 
-#endif  // SIMPLETREEMODEL_H
+#endif  // CORE_SIMPLETREEMODEL_H_

@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2011, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +18,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COVERPROVIDER_H
-#define COVERPROVIDER_H
+#ifndef COVERS_COVERPROVIDER_H_
+#define COVERS_COVERPROVIDER_H_
 
 #include "albumcoverfetcher.h"
 #include "coverproviders.h"
@@ -32,7 +35,7 @@ class CoverProvider : public QObject {
   Q_OBJECT
 
  public:
-  CoverProvider(const QString& name, QObject* parent);
+  explicit CoverProvider(const QString& name, QObject* parent);
 
   // A name (very short description) of this provider, like "last.fm".
   QString name() const { return name_; }
@@ -45,11 +48,11 @@ class CoverProvider : public QObject {
 
   virtual void CancelSearch(int id) {}
 
-signals:
+ signals:
   void SearchFinished(int id, const QList<CoverSearchResult>& results);
 
  private:
   QString name_;
 };
 
-#endif  // COVERPROVIDER_H
+#endif  // COVERS_COVERPROVIDER_H_

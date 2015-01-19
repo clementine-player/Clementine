@@ -50,6 +50,7 @@ signals:
 
  private slots:
   void DestinationDestroyed();
+  void AudioCDTracksLoaded(SongLoader* loader);
   void AudioCDTagsLoaded(bool success);
   void InsertSongs();
 

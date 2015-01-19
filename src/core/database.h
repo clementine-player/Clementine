@@ -1,5 +1,11 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2012-2013, David Sansome <me@davidsansome.com>
+   Copyright 2010, 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2012, Marti Raudsepp <marti@juffo.org>
+   Copyright 2013, Andreas <asfa194@gmail.com>
+   Copyright 2013, Uwe Klotz <uwe.klotz@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +21,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DATABASE_H
-#define DATABASE_H
+#ifndef CORE_DATABASE_H_
+#define CORE_DATABASE_H_
 
 #include <QMap>
 #include <QMutex>
@@ -30,7 +36,6 @@
 #include "gtest/gtest_prod.h"
 
 extern "C" {
-
 struct sqlite3_tokenizer;
 struct sqlite3_tokenizer_cursor;
 struct sqlite3_tokenizer_module;
@@ -78,7 +83,7 @@ class Database : public QObject {
                                     QSqlDatabase& db);
   void DetachDatabase(const QString& database_name);
 
-signals:
+ signals:
   void Error(const QString& message);
 
  public slots:
@@ -175,7 +180,7 @@ signals:
 
 class MemoryDatabase : public Database {
  public:
-  MemoryDatabase(Application* app, QObject* parent = nullptr)
+  explicit MemoryDatabase(Application* app, QObject* parent = nullptr)
       : Database(app, parent, ":memory:") {}
   ~MemoryDatabase() {
     // Make sure Qt doesn't reuse the same database
@@ -183,4 +188,4 @@ class MemoryDatabase : public Database {
   }
 };
 
-#endif  // DATABASE_H
+#endif  // CORE_DATABASE_H_

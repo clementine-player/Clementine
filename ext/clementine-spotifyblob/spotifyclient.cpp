@@ -21,6 +21,7 @@
 #include "spotifyclient.h"
 
 #include <algorithm>
+#include <memory>
 
 #include <QCoreApplication>
 #include <QDir>
@@ -30,6 +31,7 @@
 
 #include "core/arraysize.h"
 #include "core/logging.h"
+#include "core/timeconstants.h"
 #include "mediapipeline.h"
 #include "spotifykey.h"
 #include "spotifymessages.pb.h"
@@ -279,7 +281,7 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
   } else if (message.has_playback_request()) {
     StartPlayback(message.playback_request());
   } else if (message.has_seek_request()) {
-    Seek(message.seek_request().offset_bytes());
+    Seek(message.seek_request().offset_nsec());
   } else if (message.has_search_request()) {
     Search(message.search_request());
   } else if (message.has_image_request()) {
@@ -292,6 +294,12 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
     SetPlaybackSettings(message.set_playback_settings_request());
   } else if (message.has_browse_toplist_request()) {
     BrowseToplist(message.browse_toplist_request());
+  } else if (message.has_pause_request()) {
+    SetPaused(message.pause_request());
+  } else if (message.has_add_tracks_to_playlist()) {
+    AddTracksToPlaylist(message.add_tracks_to_playlist());
+  } else if (message.has_remove_tracks_from_playlist()) {
+    RemoveTracksFromPlaylist(message.remove_tracks_from_playlist());
   }
 }
 
@@ -364,6 +372,8 @@ void SpotifyClient::PlaylistContainerLoadedCallback(sp_playlistcontainer* pc,
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
 
   // Install callbacks on all the playlists
+  sp_playlist_add_callbacks(sp_session_starred_create(me->session_),
+                            &me->get_playlists_callbacks_, me);
   const int count = sp_playlistcontainer_num_playlists(pc);
   for (int i = 0; i < count; ++i) {
     sp_playlist* playlist = sp_playlistcontainer_playlist(pc, i);
@@ -432,6 +442,9 @@ void SpotifyClient::SendPlaylistList() {
     pb::spotify::Playlists::Playlist* msg = response->add_playlist();
     msg->set_index(i);
     msg->set_name(sp_playlist_name(playlist));
+    sp_user* playlist_owner = sp_playlist_owner(playlist);
+    msg->set_is_mine(sp_session_user(session_) == playlist_owner);
+    msg->set_owner(sp_user_display_name(playlist_owner));
 
     sp_playlist_offline_status offline_status =
         sp_playlist_get_offline_status(session_, playlist);
@@ -443,6 +456,13 @@ void SpotifyClient::SendPlaylistList() {
     } else if (offline_status == SP_PLAYLIST_OFFLINE_STATUS_WAITING) {
       msg->set_download_progress(0);
     }
+    msg->set_nb_tracks(sp_playlist_num_tracks(playlist));
+    // URI - Blugh
+    char uri[256];
+    sp_link* link = sp_link_create_from_playlist(playlist);
+    sp_link_as_string(link, uri, arraysize(uri));
+    sp_link_release(link);
+    msg->set_uri(uri);
   }
 
   SendMessage(message);
@@ -585,6 +605,77 @@ void SpotifyClient::PlaylistStateChangedForGetPlaylists(sp_playlist* pl,
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
 
   me->SendPlaylistList();
+}
+
+void SpotifyClient::AddTracksToPlaylist(
+    const pb::spotify::AddTracksToPlaylistRequest& req) {
+  // Get the playlist we want to update
+  sp_playlist* playlist =
+      GetPlaylist(req.playlist_type(), req.playlist_index());
+  if (!playlist) {
+    qLog(Error) << "Playlist " << req.playlist_type() << ","
+                << req.playlist_index() << "not found";
+    return;
+  }
+
+  // Get the tracks we want to add
+  std::unique_ptr<sp_track* []> tracks_array(
+      new sp_track* [req.track_uri_size()]);
+  for (int i = 0; i < req.track_uri_size(); ++i) {
+    sp_link* track_link = sp_link_create_from_string(req.track_uri(i).c_str());
+    sp_track* track = sp_link_as_track(track_link);
+    sp_track_add_ref(track);
+    sp_link_release(track_link);
+    if (!track) {
+      qLog(Error) << "Track" << QString::fromStdString(req.track_uri(i))
+                  << "not found";
+    }
+    tracks_array[i] = track;
+  }
+
+  // Actually add the tracks to the playlist
+  if (sp_playlist_add_tracks(playlist, tracks_array.get(), req.track_uri_size(),
+                             0 /* TODO: don't insert at a hardcoded position */,
+                             session_) != SP_ERROR_OK) {
+    qLog(Error) << "Error when adding tracks!";
+  }
+
+  // Clean everything
+  for (int i = 0; i < req.track_uri_size(); ++i) {
+    sp_track_release(tracks_array[i]);
+  }
+}
+
+void SpotifyClient::RemoveTracksFromPlaylist(
+    const pb::spotify::RemoveTracksFromPlaylistRequest& req) {
+  // Get the playlist we want to update
+  sp_playlist* playlist =
+      GetPlaylist(req.playlist_type(), req.playlist_index());
+  if (!playlist) {
+    qLog(Error) << "Playlist " << req.playlist_type() << ","
+                << req.playlist_index() << "not found";
+    return;
+  }
+
+  // Get the position of the tracks we want to remove
+  std::unique_ptr<int[]> tracks_indices_array(new int[req.track_index_size()]);
+  for (int i = 0; i < req.track_index_size(); ++i) {
+    tracks_indices_array[i] = req.track_index(i);
+  }
+
+  // WTF: sp_playlist_remove_tracks indexes start from the end for starred
+  // playlist, not from the beginning like other playlists: reverse them
+  if (req.playlist_type() == pb::spotify::Starred) {
+    int num_tracks = sp_playlist_num_tracks(playlist);
+    for (int i = 0; i < req.track_index_size(); i++) {
+      tracks_indices_array[i] = num_tracks - tracks_indices_array[i] - 1;
+    }
+  }
+
+  if (sp_playlist_remove_tracks(playlist, tracks_indices_array.get(),
+                                req.track_index_size()) != SP_ERROR_OK) {
+    qLog(Error) << "Error when removing tracks!";
+  }
 }
 
 void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {
@@ -836,7 +927,7 @@ void SpotifyClient::StartPlayback(const pb::spotify::PlaybackRequest& req) {
   TryPlaybackAgain(pending_playback);
 }
 
-void SpotifyClient::Seek(qint64 offset_bytes) {
+void SpotifyClient::Seek(qint64 offset_nsec) {
   // TODO
   qLog(Error) << "TODO seeking";
 }
@@ -1012,6 +1103,10 @@ void SpotifyClient::BrowseToplist(
       SP_TOPLIST_REGION_EVERYWHERE,      // TODO: Support other regions.
       nullptr, &ToplistBrowseComplete, this);
   pending_toplist_browses_[browse] = req;
+}
+
+void SpotifyClient::SetPaused(const pb::spotify::PauseRequest& req) {
+  sp_session_player_play(session_, !req.paused());
 }
 
 void SpotifyClient::ToplistBrowseComplete(sp_toplistbrowse* result,

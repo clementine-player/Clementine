@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2012, Martin Björklund <mbj4668@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -16,13 +18,14 @@
 */
 
 #include "discogscoverprovider.h"
+
+#include <QNetworkReply>
+#include <qjson/parser.h>
+
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
-
-#include <QNetworkReply>
-#include <qjson/parser.h>
 
 const char* DiscogsCoverProvider::kSearchUrl =
     "http://api.discogs.com/database/search";

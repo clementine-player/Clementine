@@ -21,7 +21,10 @@
 
 #include <QFuture>
 #include <QFutureWatcher>
+#include <QIODevice>
 #include <QMetaEnum>
+#include <QNetworkCacheMetaData>
+#include <QNetworkDiskCache>
 #include <QPixmapCache>
 #include <QSettings>
 #include <QStringList>
@@ -37,6 +40,7 @@
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
+#include "core/utilities.h"
 #include "covers/albumcoverloader.h"
 #include "playlist/songmimedata.h"
 #include "smartplaylists/generator.h"
@@ -58,7 +62,7 @@ const char* LibraryModel::kSmartPlaylistsSettingsGroup =
     "SerialisedSmartPlaylists";
 const int LibraryModel::kSmartPlaylistsVersion = 4;
 const int LibraryModel::kPrettyCoverSize = 32;
-
+const qint64 LibraryModel::kIconCacheSize = 100000000;  //~100MB
 typedef QFuture<LibraryModel::QueryResult> RootQueryFuture;
 typedef QFutureWatcher<LibraryModel::QueryResult> RootQueryWatcher;
 
@@ -84,6 +88,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
       album_icon_(":/icons/22x22/x-clementine-album.png"),
       playlists_dir_icon_(IconLoader::Load("folder-sound")),
       playlist_icon_(":/icons/22x22/x-clementine-albums.png"),
+      icon_cache_(new QNetworkDiskCache(this)),
       init_task_id_(-1),
       use_pretty_covers_(false),
       show_dividers_(true) {
@@ -99,6 +104,10 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
 
   connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
           SLOT(AlbumArtLoaded(quint64, QImage)));
+
+  icon_cache_->setCacheDirectory(
+      Utilities::GetConfigPath(Utilities::Path_CacheRoot) + "/pixmapcache");
+  icon_cache_->setMaximumCacheSize(LibraryModel::kIconCacheSize);
 
   no_cover_icon_ = QPixmap(":nocover.png")
                        .scaled(kPrettyCoverSize, kPrettyCoverSize,
@@ -197,6 +206,9 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
           case GroupBy_Performer:
             key = song.performer();
             break;
+          case GroupBy_Disc:
+            key = song.disc();
+            break;
           case GroupBy_Grouping:
             key = song.grouping();
             break;
@@ -287,6 +299,7 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
     case GroupBy_Artist:
     case GroupBy_Composer:
     case GroupBy_Performer:
+    case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
     case GroupBy_AlbumArtist:
@@ -325,6 +338,7 @@ QString LibraryModel::DividerDisplayText(GroupBy type,
     case GroupBy_Artist:
     case GroupBy_Composer:
     case GroupBy_Performer:
+    case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
     case GroupBy_AlbumArtist:
@@ -454,6 +468,16 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
     return cached_pixmap;
   }
 
+  // Try to load it from the disk cache
+  std::unique_ptr<QIODevice> cache(icon_cache_->data(QUrl(cache_key)));
+  if (cache) {
+    QImage cached_pixmap;
+    if (cached_pixmap.load(cache.get(), "XPM")) {
+      QPixmapCache::insert(cache_key, QPixmap::fromImage(cached_pixmap));
+      return QPixmap::fromImage(cached_pixmap);
+    }
+  }
+
   // Maybe we're loading a pixmap already?
   if (pending_cache_keys_.contains(cache_key)) {
     return no_cover_icon_;
@@ -486,6 +510,19 @@ void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
     QPixmapCache::insert(cache_key, no_cover_icon_);
   } else {
     QPixmapCache::insert(cache_key, QPixmap::fromImage(image));
+  }
+
+  // if not already in the disk cache
+  std::unique_ptr<QIODevice> cached_img(icon_cache_->data(QUrl(cache_key)));
+  if (!cached_img) {
+    QNetworkCacheMetaData item_metadata;
+    item_metadata.setSaveToDisk(true);
+    item_metadata.setUrl(QUrl(cache_key));
+    QIODevice* cache = icon_cache_->prepare(item_metadata);
+    if (cache) {
+      image.save(cache, "XPM");
+      icon_cache_->insert(cache);
+    }
   }
 
   const QModelIndex index = ItemToIndex(item);
@@ -751,11 +788,14 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
     case GroupBy_Performer:
       q->SetColumnSpec("DISTINCT performer");
       break;
+    case GroupBy_Disc:
+      q->SetColumnSpec("DISTINCT disc");
+      break;
     case GroupBy_Grouping:
       q->SetColumnSpec("DISTINCT grouping");
       break;
     case GroupBy_YearAlbum:
-      q->SetColumnSpec("DISTINCT year, album");
+      q->SetColumnSpec("DISTINCT year, album, grouping");
       break;
     case GroupBy_Year:
       q->SetColumnSpec("DISTINCT year");
@@ -799,6 +839,7 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item,
     case GroupBy_YearAlbum:
       q->AddWhere("year", item->metadata.year());
       q->AddWhere("album", item->metadata.album());
+      q->AddWhere("grouping", item->metadata.grouping());
       break;
     case GroupBy_Year:
       q->AddWhere("year", item->key);
@@ -808,6 +849,9 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item,
       break;
     case GroupBy_Performer:
       q->AddWhere("performer", item->key);
+      break;
+    case GroupBy_Disc:
+      q->AddWhere("disc", item->key);
       break;
     case GroupBy_Grouping:
       q->AddWhere("grouping", item->key);
@@ -872,8 +916,9 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
       year = qMax(0, row.value(0).toInt());
       item->metadata.set_year(row.value(0).toInt());
       item->metadata.set_album(row.value(1).toString());
+      item->metadata.set_grouping(row.value(2).toString());
       item->key = PrettyYearAlbum(year, item->metadata.album());
-      item->sort_text = SortTextForYear(year) + item->metadata.album();
+      item->sort_text = SortTextForYear(year) + item->metadata.grouping() + item->metadata.album();
       break;
 
     case GroupBy_Year:
@@ -884,6 +929,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
 
     case GroupBy_Composer:
     case GroupBy_Performer:
+    case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
     case GroupBy_Album:
@@ -936,7 +982,7 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
       item->metadata.set_year(year);
       item->metadata.set_album(s.album());
       item->key = PrettyYearAlbum(year, s.album());
-      item->sort_text = SortTextForYear(year) + s.album();
+      item->sort_text = SortTextForYear(year) + s.grouping() + s.album();
       break;
 
     case GroupBy_Year:
@@ -949,6 +995,8 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
       item->key = s.composer();
     case GroupBy_Performer:
       item->key = s.performer();
+    case GroupBy_Disc:
+      item->key = s.disc();
     case GroupBy_Grouping:
       item->key = s.grouping();
     case GroupBy_Genre:
@@ -1041,6 +1089,10 @@ QString LibraryModel::SortTextForArtist(QString artist) {
 
   if (artist.startsWith("the ")) {
     artist = artist.right(artist.length() - 4) + ", the";
+  } else if (artist.startsWith("a ")) {
+    artist = artist.right(artist.length() - 2) + ", a";
+  } else if (artist.startsWith("an ")) {
+    artist = artist.right(artist.length() - 3) + ", an";
   }
 
   return artist;

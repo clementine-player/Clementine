@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, David Sansome <me@davidsansome.com>
+   Copyright 2011, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef AMAZONCOVERPROVIDER_H
-#define AMAZONCOVERPROVIDER_H
+#ifndef COVERS_AMAZONCOVERPROVIDER_H_
+#define COVERS_AMAZONCOVERPROVIDER_H_
 
 #include "coverprovider.h"
 
@@ -28,7 +30,7 @@ class AmazonCoverProvider : public CoverProvider {
   Q_OBJECT
 
  public:
-  AmazonCoverProvider(QObject* parent = nullptr);
+  explicit AmazonCoverProvider(QObject* parent = nullptr);
 
   static const char* kAccessKeyB64;
   static const char* kSecretAccessKeyB64;
@@ -48,4 +50,4 @@ class AmazonCoverProvider : public CoverProvider {
   QNetworkAccessManager* network_;
 };
 
-#endif  // AMAZONCOVERPROVIDER_H
+#endif  // COVERS_AMAZONCOVERPROVIDER_H_

@@ -1,9 +1,29 @@
-// Maintainer: Max Howell <mac.howell@methylblue.com>, (C) 2003-5
-// Copyright:  See COPYING file that comes with this distribution
-//
+/* This file is part of Clementine.
+   Copyright 2003-2005, Max Howell <max.howell@methylblue.com>
+   Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014, Krzysztof A. Sobiecki <sobkas@gmail.com>
 
-#ifndef BLOCKANALYZER_H
-#define BLOCKANALYZER_H
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Max Howell  <max.howell@methylblue.com>  2003-2005
+ */
+
+#ifndef ANALYZERS_BLOCKANALYZER_H_
+#define ANALYZERS_BLOCKANALYZER_H_
 
 #include "analyzerbase.h"
 #include <qcolor.h>
@@ -12,12 +32,9 @@ class QResizeEvent;
 class QMouseEvent;
 class QPalette;
 
-/**
- * @author Max Howell
- */
-
 class BlockAnalyzer : public Analyzer::Base {
   Q_OBJECT
+
  public:
   Q_INVOKABLE BlockAnalyzer(QWidget*);
   ~BlockAnalyzer();
@@ -62,4 +79,4 @@ class BlockAnalyzer : public Analyzer::Base {
   float m_step;  // rows to fall per frame
 };
 
-#endif
+#endif  // ANALYZERS_BLOCKANALYZER_H_

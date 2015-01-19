@@ -1,19 +1,25 @@
-/***************************************************************************
-                       glanalyzer2.cpp  -  description
-                             -------------------
-    begin                : Feb 16 2004
-    copyright            : (C) 2004 by Enrico Ros
-    email                : eros.kde@email.it
- ***************************************************************************/
+/* This file is part of Clementine.
+   Copyright 2004, Enrico Ros <eros.kde@email.it>
+   Copyright 2009, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Enrico Ros  <eros.kde@email.it>  2004
+ */
 
 #include <config.h>
 
@@ -71,7 +77,7 @@ void GLAnalyzer2::resizeGL(int w, int h) {
   glOrtho(-10.0f, 10.0f, -10.0f, 10.0f, -5.0f, 5.0f);
 
   // Get the aspect ratio of the screen to draw 'cicular' particles
-  float ratio = (float)w / (float)h, eqPixH = 60, eqPixW = 80;
+  float ratio = static_cast<float>(w) / static_cast<float>(h), eqPixH = 60, eqPixW = 80;
   if (ratio >= (4.0 / 3.0)) {
     unitX = 10.0 / (eqPixH * ratio);
     unitY = 10.0 / eqPixH;
@@ -83,7 +89,7 @@ void GLAnalyzer2::resizeGL(int w, int h) {
   // Get current timestamp.
   timeval tv;
   gettimeofday(&tv, nullptr);
-  show.timeStamp = (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
+  show.timeStamp = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
 }
 
 void GLAnalyzer2::paused() { analyze(Scope()); }
@@ -103,19 +109,20 @@ void GLAnalyzer2::analyze(const Scope& s) {
     for (int i = 0; i < bands; i++) {
       float value = s[i];
       currentEnergy += value;
-      currentMeanBand += (float)i * value;
+      currentMeanBand += static_cast<float>(i) * value;
       if (value > maxValue) maxValue = value;
     }
     frame.silence = currentEnergy < 0.001;
     if (!frame.silence) {
       frame.meanBand = 100.0 * currentMeanBand / (currentEnergy * bands);
-      currentEnergy = 100.0 * currentEnergy / (float)bands;
+      currentEnergy = 100.0 * currentEnergy / static_cast<float>(bands);
       frame.dEnergy = currentEnergy - frame.energy;
       frame.energy = currentEnergy;
       //            printf( "%d  [%f :: %f ]\t%f \n", bands, frame.energy,
       // frame.meanBand, maxValue         );
-    } else
+    } else {
       frame.energy = 0.0;
+    }
   }
 
   // update the frame
@@ -126,7 +133,7 @@ void GLAnalyzer2::paintGL() {
   // Compute the dT since the last call to paintGL and update timings
   timeval tv;
   gettimeofday(&tv, nullptr);
-  double currentTime = (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
+  double currentTime = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
   show.dT = currentTime - show.timeStamp;
   show.timeStamp = currentTime;
 
@@ -202,8 +209,9 @@ void GLAnalyzer2::paintGL() {
   if (dotTexture) {
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, dotTexture);
-  } else
+  } else {
     glDisable(GL_TEXTURE_2D);
+  }
 
   glLoadIdentity();
   //    glRotatef( -frame.rotDegrees, 0,0,1 );

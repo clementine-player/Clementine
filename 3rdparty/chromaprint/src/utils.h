@@ -22,7 +22,7 @@
 #define CHROMAPRINT_UTILS_H_
 
 #if defined(HAVE_CONFIG_H)
-#include <config.h>
+#include <chromaprint_config.h>
 #endif
 
 #include <math.h>

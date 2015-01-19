@@ -42,6 +42,7 @@ OSD::OSD(SystemTrayIcon* tray_icon, Application* app, QObject* parent)
       show_on_volume_change_(false),
       show_art_(true),
       show_on_play_mode_change_(true),
+      show_on_pause_(true),
       use_custom_text_(false),
       custom_text1_(QString()),
       custom_text2_(QString()),
@@ -67,6 +68,7 @@ void OSD::ReloadSettings() {
   show_on_volume_change_ = s.value("ShowOnVolumeChange", false).toBool();
   show_art_ = s.value("ShowArt", true).toBool();
   show_on_play_mode_change_ = s.value("ShowOnPlayModeChange", true).toBool();
+  show_on_pause_ = s.value("ShowOnPausePlayback", true).toBool();
   use_custom_text_ = s.value(("CustomTextEnabled"), false).toBool();
   custom_text1_ = s.value("CustomText1").toString();
   custom_text2_ = s.value("CustomText2").toString();
@@ -150,7 +152,9 @@ void OSD::AlbumArtLoaded(const Song& song, const QString& uri,
 }
 
 void OSD::Paused() {
-  ShowMessage(QCoreApplication::applicationName(), tr("Paused"));
+  if (show_on_pause_) {
+    ShowMessage(QCoreApplication::applicationName(), tr("Paused"));
+  }
 }
 
 void OSD::Stopped() {

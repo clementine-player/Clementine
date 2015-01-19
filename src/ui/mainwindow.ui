@@ -444,6 +444,7 @@
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
     <addaction name="action_remove_duplicates"/>
+    <addaction name="action_remove_unavailable"/>
    </widget>
    <widget class="QMenu" name="menu_help">
     <property name="title">
@@ -847,6 +848,11 @@
   <action name="action_rip_audio_cd">
    <property name="text">
     <string>Rip audio CD...</string>
+   </property>
+  </action>
+  <action name="action_remove_unavailable">
+   <property name="text">
+    <string>Remove unavailable tracks from playlist</string>
    </property>
   </action>
  </widget>

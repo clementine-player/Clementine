@@ -55,7 +55,6 @@ void LibraryBackend::Init(Database* db, const QString& songs_table,
   dirs_table_ = dirs_table;
   subdirs_table_ = subdirs_table;
   fts_table_ = fts_table;
-  ReloadSettings();
 }
 
 void LibraryBackend::LoadDirectoriesAsync() {
@@ -85,6 +84,13 @@ void LibraryBackend::ResetStatisticsAsync(int id) {
 void LibraryBackend::UpdateSongRatingAsync(int id, float rating) {
   metaObject()->invokeMethod(this, "UpdateSongRating", Qt::QueuedConnection,
                              Q_ARG(int, id), Q_ARG(float, rating));
+}
+
+void LibraryBackend::UpdateSongsRatingAsync(const QList<int>& ids,
+                                            float rating) {
+  metaObject()->invokeMethod(this, "UpdateSongsRating", Qt::QueuedConnection,
+                             Q_ARG(const QList<int>&, ids),
+                             Q_ARG(float, rating));
 }
 
 void LibraryBackend::LoadDirectories() {
@@ -1105,20 +1111,32 @@ void LibraryBackend::ResetStatistics(int id) {
 void LibraryBackend::UpdateSongRating(int id, float rating) {
   if (id == -1) return;
 
+  QList<int> id_list;
+  id_list << id;
+  UpdateSongsRating(id_list, rating);
+}
+
+void LibraryBackend::UpdateSongsRating(const QList<int>& id_list,
+                                       float rating) {
+  if (id_list.isEmpty()) return;
+
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
+  QStringList id_str_list;
+  for (int i : id_list) {
+    id_str_list << QString::number(i);
+  }
+  QString ids = id_str_list.join(",");
   QSqlQuery q(QString(
                   "UPDATE %1 SET rating = :rating"
-                  " WHERE ROWID = :id").arg(songs_table_),
+                  " WHERE ROWID IN (%2)").arg(songs_table_, ids),
               db);
   q.bindValue(":rating", rating);
-  q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
-
-  Song new_song = GetSongById(id, db);
-  emit SongsRatingChanged(SongList() << new_song);
+  SongList new_song_list = GetSongsById(id_str_list, db);
+  emit SongsRatingChanged(new_song_list);
 }
 
 void LibraryBackend::DeleteAll() {
@@ -1139,49 +1157,4 @@ void LibraryBackend::DeleteAll() {
   }
 
   emit DatabaseReset();
-}
-
-void LibraryBackend::ReloadSettingsAsync() {
-  QMetaObject::invokeMethod(this, "ReloadSettings", Qt::QueuedConnection);
-}
-
-void LibraryBackend::ReloadSettings() {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  // Statistics
-  {
-    bool save_statistics_in_file =
-        s.value("save_statistics_in_file", false).toBool();
-    // Compare with previous value to know if we should connect, disconnect or
-    // nothing
-    if (save_statistics_in_file_ && !save_statistics_in_file) {
-      disconnect(this, SIGNAL(SongsStatisticsChanged(SongList)),
-                 TagReaderClient::Instance(),
-                 SLOT(UpdateSongsStatistics(SongList)));
-    } else if (!save_statistics_in_file_ && save_statistics_in_file) {
-      connect(this, SIGNAL(SongsStatisticsChanged(SongList)),
-              TagReaderClient::Instance(),
-              SLOT(UpdateSongsStatistics(SongList)));
-    }
-    // Save old value
-    save_statistics_in_file_ = save_statistics_in_file;
-  }
-
-  // Rating
-  {
-    bool save_ratings_in_file = s.value("save_ratings_in_file", false).toBool();
-    // Compare with previous value to know if we should connect, disconnect or
-    // nothing
-    if (save_ratings_in_file_ && !save_ratings_in_file) {
-      disconnect(this, SIGNAL(SongsRatingChanged(SongList)),
-                 TagReaderClient::Instance(),
-                 SLOT(UpdateSongsRating(SongList)));
-    } else if (!save_ratings_in_file_ && save_ratings_in_file) {
-      connect(this, SIGNAL(SongsRatingChanged(SongList)),
-              TagReaderClient::Instance(), SLOT(UpdateSongsRating(SongList)));
-    }
-    // Save old value
-    save_ratings_in_file_ = save_ratings_in_file;
-  }
 }

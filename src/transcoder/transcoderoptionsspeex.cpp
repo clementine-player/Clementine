@@ -31,7 +31,7 @@ TranscoderOptionsSpeex::~TranscoderOptionsSpeex() { delete ui_; }
 
 void TranscoderOptionsSpeex::Load() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
 
   ui_->quality_slider->setValue(s.value("quality", 8).toInt());
   ui_->bitrate_slider->setValue(s.value("bitrate", 0).toInt() / 1000);
@@ -46,7 +46,7 @@ void TranscoderOptionsSpeex::Load() {
 
 void TranscoderOptionsSpeex::Save() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
 
   s.setValue("quality", ui_->quality_slider->value());
   s.setValue("bitrate", ui_->bitrate_slider->value() * 1000);

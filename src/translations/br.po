@@ -7,10 +7,11 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010, 2011
 # Belvar <tornoz@laposte.net>, 2013
 # Belvar <tornoz@laposte.net>, 2011-2012
+# Belvar <tornoz@laposte.net>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2015-01-14 22:31+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Breton (http://www.transifex.com/projects/p/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\n\nTu zo deoc'h merkañ rolloù seniñ en ur glikañ war ar steredennig e-kichen anv ar roll seniñ\n\nAr rolloù seniñ merket a vo enrollet aze"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr " devez"
 
@@ -53,7 +54,7 @@ msgstr " me"
 msgid " pt"
 msgstr " pik"
 
-#: ../bin/src/ui_notificationssettingspage.h:439
+#: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr " eilenn"
@@ -62,27 +63,27 @@ msgstr " eilenn"
 msgid " songs"
 msgstr " ton"
 
-#: internet/vkservice.cpp:145
+#: internet/vk/vkservice.cpp:148
 #, qt-format
 msgid "%1 (%2 songs)"
-msgstr ""
+msgstr "%1 (%2 ton)"
 
-#: widgets/osd.cpp:190
+#: widgets/osd.cpp:194
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 albom"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 devezh"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 devezh 'zo"
 
-#: podcasts/gpoddersync.cpp:81
+#: internet/podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 war %2"
@@ -92,7 +93,7 @@ msgstr "%1 war %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 roll seniñ (%2)"
 
-#: playlist/playlistmanager.cpp:381
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 diuzet eus"
@@ -117,7 +118,7 @@ msgstr "%1 ton kavet"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 ton kavet (%2 diskouezet)"
 
-#: playlist/playlistmanager.cpp:387
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 ton"
@@ -127,8 +128,8 @@ msgstr "%1 ton"
 msgid "%1 transferred"
 msgstr "%1 kaset"
 
-#: widgets/osd.cpp:237 widgets/osd.cpp:243 widgets/osd.cpp:249
-#: widgets/osd.cpp:255 widgets/osd.cpp:261 widgets/osd.cpp:268
+#: widgets/osd.cpp:241 widgets/osd.cpp:247 widgets/osd.cpp:253
+#: widgets/osd.cpp:259 widgets/osd.cpp:265 widgets/osd.cpp:272
 #, qt-format
 msgid "%1: Wiimotedev module"
 msgstr "%1 : enlugellad wiimotedev"
@@ -143,23 +144,23 @@ msgstr "%L1 selaouer all"
 msgid "%L1 total plays"
 msgstr "bet selaouet %L1 gwech"
 
-#: ../bin/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:433
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:205
+#: transcoder/transcodedialog.cpp:208
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n c'hwitet"
 
-#: transcoder/transcodedialog.cpp:200
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n echuet"
 
-#: transcoder/transcodedialog.cpp:194
+#: transcoder/transcodedialog.cpp:197
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -177,11 +178,11 @@ msgstr "E K&reiz"
 msgid "&Custom"
 msgstr "&Personelaat"
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:722
 msgid "&Extras"
 msgstr "Ouzhpenn"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:721
 msgid "&Help"
 msgstr "&Sikour"
 
@@ -198,7 +199,7 @@ msgstr "K&uzhat"
 msgid "&Left"
 msgstr "&Kleiz"
 
-#: ../bin/src/ui_mainwindow.h:714
+#: ../bin/src/ui_mainwindow.h:719
 msgid "&Music"
 msgstr "Sonerezh"
 
@@ -206,15 +207,15 @@ msgstr "Sonerezh"
 msgid "&None"
 msgstr "&Hini ebet"
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:720
 msgid "&Playlist"
 msgstr "Roll Seniñ"
 
-#: ../bin/src/ui_mainwindow.h:644
+#: ../bin/src/ui_mainwindow.h:648
 msgid "&Quit"
 msgstr "&Kuitaat"
 
-#: ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_mainwindow.h:684
 msgid "&Repeat mode"
 msgstr "Doare adlenn"
 
@@ -222,7 +223,7 @@ msgstr "Doare adlenn"
 msgid "&Right"
 msgstr "&Dehou"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:683
 msgid "&Shuffle mode"
 msgstr "Doare meskañ"
 
@@ -230,13 +231,17 @@ msgstr "Doare meskañ"
 msgid "&Stretch columns to fit window"
 msgstr "&Astenn ar bannoù evit klotañ gant ar prenestr"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:723
 msgid "&Tools"
 msgstr "&Ostilhoù"
 
 #: ui/edittagdialog.cpp:49
 msgid "(different across multiple songs)"
 msgstr "(disheñvel a-dreuz kanaouennoù liesseurt)"
+
+#: internet/spotify/spotifyservice.cpp:465
+msgid ", by "
+msgstr ", gant"
 
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
@@ -254,11 +259,11 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "1 devezh"
 
-#: playlist/playlistmanager.cpp:387
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "1 ton"
 
@@ -271,7 +276,7 @@ msgstr "MP3 128k"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:62
+#: library/library.cpp:65
 msgid "50 random tracks"
 msgstr "50 ton dre zegouezh"
 
@@ -298,7 +303,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Lakait anv ur maezienn a-raok ur ger evit bevenniñ an enklask d'ar maezienn-se sk. <span style=\" font-weight:600;\">arzour:</span><span style=\" font-style:italic;\">Bode</span> a glask er sonaoueg an holl arzourien gant ar ger Bode enno.</p><p><span style=\" font-weight:600;\">Maeziennoù a zo tu lakaat : </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -308,22 +313,22 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>Skriv a raio an dra-se notennoù ha stadegoù an ton er c'hlav evit kement ton en ho sonaoueg. </p><p> N'eus ket ezhomm m'eo an arventenn &quot;Enrollañ an notennoù hag ar stadegoù e klav ar restr&quot; atav bet gweredekaet.</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Ar maeziennoù a grog gant %. Da skouer : %artist %album %title </p>\n<p>Ma lakait briataennoù tro-dro d'ul lodenn testenn gant ur maezienn, ne vo ket diskouezet ma n'eo ket resisaet endalc'had ar maezienn."
 
-#: internet/groovesharksettingspage.cpp:119
+#: internet/grooveshark/groovesharksettingspage.cpp:123
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Ur c'hont Grooveshark a zo dleet"
 
-#: internet/spotifysettingspage.cpp:163
+#: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Ret eo deoc'h kaout ur kont Spotify Premium."
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Un arval ne c'hell kennaskañ nemet m'eo bet lakaet ar c'hod mat."
 
@@ -359,11 +364,11 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:395
+#: core/song.cpp:409
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
@@ -376,18 +381,24 @@ msgstr "Dilezel"
 msgid "About %1"
 msgstr "A-zivout %1"
 
-#: ../bin/src/ui_mainwindow.h:663
+#: ../bin/src/ui_mainwindow.h:667
 msgid "About Clementine..."
 msgstr "A-zivout Clementine..."
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:702
 msgid "About Qt..."
 msgstr "A-zivout Qt..."
 
+#: playlist/playlistsaveoptionsdialog.cpp:34
+#: ../bin/src/ui_behavioursettingspage.h:286
+msgid "Absolute"
+msgstr "Absolut"
+
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:208 ../bin/src/ui_vksettingspage.h:211
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_seafilesettingspage.h:169
 msgid "Account details"
 msgstr "Titouroù ar gont"
 
@@ -399,15 +410,20 @@ msgstr "Titouroù ar gont (Premium)"
 msgid "Action"
 msgstr "Oberiadenn"
 
+#: ../bin/src/ui_globalshortcutssettingspage.h:184
+msgctxt "Category label"
+msgid "Action"
+msgstr "Oberenn"
+
 #: wiimotedev/wiimotesettingspage.cpp:96
 msgid "Active/deactive Wiiremote"
 msgstr "Gweredekaat/Diweredekaat Wiiremote"
 
-#: internet/soundcloudservice.cpp:124
+#: internet/soundcloud/soundcloudservice.cpp:125
 msgid "Activities stream"
-msgstr ""
+msgstr "Red obererezhioù"
 
-#: podcasts/addpodcastdialog.cpp:59
+#: internet/podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "Ouzhpennañ ar podkast"
 
@@ -415,7 +431,7 @@ msgstr "Ouzhpennañ ar podkast"
 msgid "Add Stream"
 msgstr "Ouzhpennañ ul lanv"
 
-#: ../bin/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Add a new line if supported by the notification type"
 msgstr "Ouzhpennañ ul linenn nevez, mard eo skoret gant an doare kemenn"
 
@@ -423,7 +439,11 @@ msgstr "Ouzhpennañ ul linenn nevez, mard eo skoret gant an doare kemenn"
 msgid "Add action"
 msgstr "Ouzhpennañ un oberiadenn"
 
-#: internet/savedradio.cpp:106
+#: ../bin/src/ui_transcodedialog.h:218
+msgid "Add all tracks from a directory and all its subdirectories"
+msgstr "Ouzhpennañ an holl roudoù adalek un doser hag an is-doseroù "
+
+#: internet/internetradio/savedradio.cpp:112
 msgid "Add another stream..."
 msgstr "Ouzhpennañ ul lanv all..."
 
@@ -431,31 +451,31 @@ msgstr "Ouzhpennañ ul lanv all..."
 msgid "Add directory..."
 msgstr "Ouzhpennañ un teuliad..."
 
-#: ui/mainwindow.cpp:1797
+#: ui/mainwindow.cpp:1828
 msgid "Add file"
 msgstr "Ouzhpennañ ur restr"
 
-#: ../bin/src/ui_mainwindow.h:709
+#: ../bin/src/ui_mainwindow.h:713
 msgid "Add file to transcoder"
 msgstr "Ouzhpennañ ur restr d'an treuzkemmer"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Add file(s) to transcoder"
 msgstr "Ouzhpennañ ur restr pe muioc'h d'an treuzkemmer"
 
-#: ../bin/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Add file..."
 msgstr "Ouzhpennañ ur restr..."
 
-#: transcoder/transcodedialog.cpp:215
+#: transcoder/transcodedialog.cpp:218
 msgid "Add files to transcode"
 msgstr "Ouzhpennañ restroù da"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1824 ui/ripcd.cpp:389
+#: transcoder/transcodedialog.cpp:300 ui/mainwindow.cpp:1855 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "Ouzhpennañ un teuliad"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Add folder..."
 msgstr "Ouzhpennañ un teuliad..."
 
@@ -467,7 +487,7 @@ msgstr "Ouzhpennañ un teuliad nevez..."
 msgid "Add podcast"
 msgstr "Ouzhpennañ ar podkast"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:705
+#: internet/podcasts/podcastservice.cpp:416 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "Ouzhpennañ ur podkast..."
 
@@ -475,123 +495,131 @@ msgstr "Ouzhpennañ ur podkast..."
 msgid "Add search term"
 msgstr "Ouzhpennañ ur ger klask"
 
-#: ../bin/src/ui_notificationssettingspage.h:380
+#: ../bin/src/ui_notificationssettingspage.h:386
 msgid "Add song album tag"
 msgstr "Ouzhpennañ klav albom an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:386
+#: ../bin/src/ui_notificationssettingspage.h:392
 msgid "Add song albumartist tag"
 msgstr "Ouzhpennañ klav arzour albom an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:377
+#: ../bin/src/ui_notificationssettingspage.h:383
 msgid "Add song artist tag"
 msgstr "Ouzhpennañ klav arzour an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Add song auto score"
 msgstr "Ouzhpennañ poentoù emgefreek an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:392
+#: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song composer tag"
 msgstr "Ouzhpennañ klav sonaozour an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Add song disc tag"
 msgstr "Ouzhpennañ klav pladenn an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:429
+#: ../bin/src/ui_notificationssettingspage.h:435
 msgid "Add song filename"
 msgstr "Ouzhpennañ anv restr an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:407
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song genre tag"
 msgstr "Ouzhpennañ klav doare an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:398
+#: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song grouping tag"
 msgstr "Ouzhpennañ klav rummad ar sonerezh"
 
-#: ../bin/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song length tag"
 msgstr "Ouzhpennañ klav padelezh an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:395
+#: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song performer tag"
 msgstr "Ouzhpennañ klav soner an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song play count"
 msgstr "Ouzhpennañ an niver a wech ma'z eo bet lennet an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:419
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Add song rating"
 msgstr "Ouzhpennañ notenn an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Add song skip count"
 msgstr "Ouzhpennañ an niver a wech ma 'z eo bet lammet an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:383
+#: ../bin/src/ui_notificationssettingspage.h:389
 msgid "Add song title tag"
 msgstr "Ouzhpennañ klav titl an ton"
 
-#: internet/vkservice.cpp:314
+#: internet/vk/vkservice.cpp:320
 msgid "Add song to cache"
-msgstr ""
+msgstr "Ouzhpennañ an ton d'ar grubuilh"
 
-#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song track tag"
 msgstr "Ouzhpennañ klav niverenn an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:389
+#: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song year tag"
 msgstr "Ouzhpennañ klav bloavezh an ton"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
-msgstr ""
+msgstr "Ouzhpennañ tonioù da \"Ma sonerezh\" p'eo kliket ar bouton \"Karout\""
 
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Add stream..."
 msgstr "Ouzhpennan ul lanv..."
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/grooveshark/groovesharkservice.cpp:1126
 msgid "Add to Grooveshark favorites"
 msgstr "Ouzhpennañ da tonioù karetañ Grooveshark"
 
-#: internet/groovesharkservice.cpp:1136
+#: internet/grooveshark/groovesharkservice.cpp:1141
 msgid "Add to Grooveshark playlists"
 msgstr "Ouzhpennañ da rolloù seniñ Grooveshark"
 
-#: internet/vkservice.cpp:306
+#: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
+msgstr "Ouzhpennañ d'am sonerezh"
+
+#: internet/spotify/spotifyservice.cpp:617
+msgid "Add to Spotify playlists"
+msgstr "Ouzhpennañ d'am rolloù-seniñ Spotify"
+
+#: internet/spotify/spotifyservice.cpp:610
+msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1618
+#: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
 msgstr "Ouzhpennañ d'ur roll seniñ all"
 
-#: internet/vkservice.cpp:292
+#: internet/vk/vkservice.cpp:298
 msgid "Add to bookmarks"
-msgstr ""
+msgstr "Ouzhpennañ d'ar merkoù-pajenn"
 
 #: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:276
 msgid "Add to the queue"
 msgstr "Ouzhpennañ d'al listenn c'hortoz"
 
-#: internet/vkservice.cpp:322
+#: internet/vk/vkservice.cpp:328
 msgid "Add user/group to bookmarks"
-msgstr ""
+msgstr "Ouzhpennañ an implijer/strollad d'ar merkoù-pajenn"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
 msgstr "Ouzhpennañ oberadennoù wiimotedev"
 
-#: ../bin/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:215
 msgid "Add..."
 msgstr "Ouzhpennañ..."
 
@@ -616,11 +644,11 @@ msgstr "Ouzhpennet hiziv"
 msgid "Added within three months"
 msgstr "Ouzhpennet e-kerzh an tri miz diwezhañ"
 
-#: internet/groovesharkservice.cpp:1435
+#: internet/grooveshark/groovesharkservice.cpp:1424
 msgid "Adding song to My Music"
 msgstr "Oc'h ouzhpennañ an ton d'an doser sonerezh."
 
-#: internet/groovesharkservice.cpp:1412
+#: internet/grooveshark/groovesharkservice.cpp:1401
 msgid "Adding song to favorites"
 msgstr "Oc'h ouzhpennañ an ton d'ar re karetañ"
 
@@ -628,19 +656,19 @@ msgstr "Oc'h ouzhpennañ an ton d'ar re karetañ"
 msgid "Advanced grouping..."
 msgstr "Strolladur kemplez..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "Goude "
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "Goude an eiladur..."
 
-#: playlist/playlist.cpp:1303 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
-#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
 msgid "Album"
 msgstr "Albom"
@@ -649,9 +677,9 @@ msgstr "Albom"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albom (Ampled peurvat evit an holl roud)"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:64
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "Arzour an albom"
 
@@ -659,9 +687,13 @@ msgstr "Arzour an albom"
 msgid "Album cover"
 msgstr "Golo Albom"
 
-#: internet/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:427
 msgid "Album info on jamendo.com..."
 msgstr "Titouroù an albom war jamendo.com..."
+
+#: internet/vk/vkservice.cpp:827
+msgid "Albums"
+msgstr "Albomoù"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -671,14 +703,18 @@ msgstr "Albomoù gant ur golo"
 msgid "Albums without covers"
 msgstr "Albomoù hep golo"
 
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr "Pep tra"
+
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
 msgstr "Holl restroù (*)"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:679
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
-msgstr ""
+msgstr "All Glory to the Hypnotoad!"
 
 #: ui/albumcovermanager.cpp:134
 msgid "All albums"
@@ -701,15 +737,15 @@ msgstr "Holl rolloù seniñ (%1)"
 msgid "All the translators"
 msgstr "An holl troerien"
 
-#: library/library.cpp:98
+#: library/library.cpp:101
 msgid "All tracks"
 msgstr "An holl roudoù"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "Aotren un arval da bellgargañ sonerezh adalek an urzhiataer-mañ."
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "Aotren ar pellgargadurioù"
 
@@ -717,24 +753,24 @@ msgstr "Aotren ar pellgargadurioù"
 msgid "Allow mid/side encoding"
 msgstr "Aotren an enkodiñ mid/side"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Alongside the originals"
 msgstr "E-kichen ar reoù orin"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:255
 msgid "Always hide the main window"
 msgstr "Atav kuzhat ar prenestr pennañ"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:254
 msgid "Always show the main window"
 msgstr "Atav diskouez ar prenestr pennañ"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:282
 msgid "Always start playing"
 msgstr "Atav kregin da lenn"
 
-#: internet/spotifyblobdownloader.cpp:65
+#: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -749,7 +785,7 @@ msgstr "Ur gudenn a zo savet en ur c'hargañ stlennvon iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ur gudenn a zo savet e-pad enskrivadur ar metaroadennoù e-barzh '%1'"
 
-#: internet/subsonicsettingspage.cpp:102
+#: internet/subsonic/subsonicsettingspage.cpp:123
 msgid "An unspecified error occurred."
 msgstr "Ur gudenn dianav a zo bet."
 
@@ -761,22 +797,23 @@ msgstr "Ha(g) :"
 msgid "Angry"
 msgstr "Fuloret"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Neuz"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
 msgstr "Ouzhpennañ restroù pe liammoù internet d'ar roll seniñ"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:452
-#: internet/internetservice.cpp:53 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ lennet"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Append to the playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ"
 
@@ -789,7 +826,7 @@ msgstr "Koazhañ a-benn mirout ouzh an troc'hadennoù"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ha sur oc'h da gaout c'hoant diverkañ an talvoud raktermenet « %1 »"
 
-#: internet/groovesharkservice.cpp:1334
+#: internet/grooveshark/groovesharkservice.cpp:1323
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ha sur oc'h ho peus c'hoant diverkañ ar roll seniñ ?"
 
@@ -803,16 +840,16 @@ msgid ""
 "the songs of your library?"
 msgstr "Ha sur oc'h da gaout c'hoant enrollañ an stadegoù an ton e-barzh restr an ton evit kement ton en ho sonaoueg ?"
 
-#: playlist/playlist.cpp:1301 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
-#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "Arzour"
 
-#: ui/mainwindow.cpp:245
+#: ui/mainwindow.cpp:251
 msgid "Artist info"
 msgstr "Titouroù war an arzour"
 
@@ -824,17 +861,23 @@ msgstr "Klavioù an arzour"
 msgid "Artist's initial"
 msgstr "Lizherennoù-tal an arzour"
 
-#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_behavioursettingspage.h:288
+msgid "Ask when saving"
+msgstr "Goulenn pa vez savetaet"
+
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "Mentrezh Aodio"
 
 #: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Audio output"
-msgstr ""
+msgstr "Ezkas son"
 
-#: internet/digitallyimportedsettingspage.cpp:80
-#: internet/magnatunesettingspage.cpp:112 internet/lastfmservice.cpp:222
-#: internet/lastfmsettingspage.cpp:80
+#: internet/digitally/digitallyimportedsettingspage.cpp:83
+#: internet/magnatune/magnatunesettingspage.cpp:116
+#: internet/lastfm/lastfmservice.cpp:228
+#: internet/lastfm/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
 msgstr "Dilesadur sac'het"
 
@@ -849,6 +892,11 @@ msgstr "Aozerien"
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Auto"
 msgstr "Emgefreek"
+
+#: playlist/playlistsaveoptionsdialog.cpp:32
+#: ../bin/src/ui_behavioursettingspage.h:285
+msgid "Automatic"
+msgstr "Ent emgefreek"
 
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
@@ -866,16 +914,16 @@ msgstr "Hegerz"
 msgid "Average bitrate"
 msgstr "Fonnder keidennek"
 
-#: covers/coversearchstatisticsdialog.cpp:67
+#: covers/coversearchstatisticsdialog.cpp:69
 msgid "Average image size"
 msgstr "Ment keidennek ar skeudenn"
 
-#: podcasts/addpodcastdialog.cpp:84
+#: internet/podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "Podkastoù BBC"
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:70
-#: ../bin/src/ui_edittagdialog.h:668
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
+#: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
 
@@ -883,7 +931,7 @@ msgstr "BPM"
 msgid "Background Streams"
 msgstr "Lanvioù drekleur"
 
-#: ../bin/src/ui_notificationssettingspage.h:453
+#: ../bin/src/ui_notificationssettingspage.h:460
 msgid "Background color"
 msgstr "Liv an drekleur"
 
@@ -891,11 +939,11 @@ msgstr "Liv an drekleur"
 msgid "Background image"
 msgstr "Skeudenn drekleur"
 
-#: ../bin/src/ui_notificationssettingspage.h:452
+#: ../bin/src/ui_notificationssettingspage.h:459
 msgid "Background opacity"
 msgstr "Divoullder drekleur"
 
-#: core/database.cpp:640
+#: core/database.cpp:648
 msgid "Backing up database"
 msgstr "Enrolladenn ar stlennvon"
 
@@ -903,11 +951,11 @@ msgstr "Enrolladenn ar stlennvon"
 msgid "Balance"
 msgstr "Kempouez ar son"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:35
 msgid "Bar analyzer"
 msgstr "Spektrogram dre varennoù"
 
-#: ../bin/src/ui_notificationssettingspage.h:456
+#: ../bin/src/ui_notificationssettingspage.h:463
 msgid "Basic Blue"
 msgstr "Glas boutin"
 
@@ -915,7 +963,7 @@ msgstr "Glas boutin"
 msgid "Basic audio type"
 msgstr "Stumm audio boaz"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:243
 msgid "Behavior"
 msgstr "Emzalc'h"
 
@@ -928,12 +976,12 @@ msgstr "Gwell"
 msgid "Biography from %1"
 msgstr "Buhezskrid %1"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "Fonnder"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -944,9 +992,9 @@ msgstr "Bitrate"
 #: ui/organisedialog.cpp:75
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
-msgstr ""
+msgstr "Fonnder bit"
 
-#: analyzers/blockanalyzer.cpp:23
+#: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
 msgstr "Spektogram dre vloc'hoù"
 
@@ -958,11 +1006,11 @@ msgstr "Doare bloc'hoù"
 msgid "Blur amount"
 msgstr "Kementad a ruzed"
 
-#: ../bin/src/ui_notificationssettingspage.h:449
+#: ../bin/src/ui_notificationssettingspage.h:456
 msgid "Body"
 msgstr "Korf"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:32
 msgid "Boom analyzer"
 msgstr "Spektogram boom"
 
@@ -971,7 +1019,7 @@ msgid "Box"
 msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Furchal..."
@@ -980,7 +1028,7 @@ msgstr "Furchal..."
 msgid "Buffer duration"
 msgstr "Padelezh ar stoker"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "O lakaat er memor skurzer"
 
@@ -994,40 +1042,44 @@ msgstr "Boutonoù"
 
 #: ../bin/src/ui_groovesharksettingspage.h:139
 msgid "By default, Grooveshark sorts songs on date added"
-msgstr ""
+msgstr "Grooveshark a urzh an tonioù dre an deiziad ouzhpennet dre ziouer"
 
-#: core/song.cpp:401
+#: core/song.cpp:415
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:118
+#: library/library.cpp:121
 msgid "CUE sheet support"
 msgstr "Kemer e kont ar CUE sheet"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
-msgstr ""
+msgstr "Hent ar c'hrubuilh :"
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
-msgstr ""
+msgstr "Krubulhiñ"
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vk/vkmusiccache.cpp:120
 #, qt-format
 msgid "Caching %1"
-msgstr ""
+msgstr "Krubuilhiñ %1"
 
-#: internet/spotifyblobdownloader.cpp:50
+#: internet/spotify/spotifyblobdownloader.cpp:52
 msgid "Cancel"
 msgstr "Nullañ"
 
-#: internet/vkservice.cpp:622
+#: internet/podcasts/podcastservice.cpp:439
+msgid "Cancel download"
+msgstr "Nullañ ar pellgargadur"
+
+#: internet/vk/vkservice.cpp:626
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
-msgstr ""
+msgstr "Ezhomm 'z eus eus ar c'haptcha.\nKlaskit kennaskañ dre Vk.com gant ho merdeer evit renkañ ar gudenn."
 
-#: ../bin/src/ui_edittagdialog.h:664
+#: ../bin/src/ui_edittagdialog.h:667
 msgid "Change cover art"
 msgstr "Kemmañ golo an albom"
 
@@ -1035,7 +1087,7 @@ msgstr "Kemmañ golo an albom"
 msgid "Change font size..."
 msgstr "Kemmañ ment ar font..."
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:73
 msgid "Change repeat mode"
 msgstr "Cheñch an doare adlenn"
 
@@ -1043,11 +1095,11 @@ msgstr "Cheñch an doare adlenn"
 msgid "Change shortcut..."
 msgstr "Kemmañ ar berradenn"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:71
 msgid "Change shuffle mode"
 msgstr "Cheñch an doare meskañ"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "Kemmañ ar yezh"
 
@@ -1057,31 +1109,35 @@ msgid ""
 "songs"
 msgstr "Cheñchamantoù an doare lenn mono a vo gweredekaet evit an tonioù a zeu."
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "Klask pennadoù nevez"
 
-#: ui/mainwindow.cpp:702
+#: internet/googledrive/googledriveservice.cpp:220
+msgid "Check for updates"
+msgstr "Gwiriekaat an hizivadennoù"
+
+#: ui/mainwindow.cpp:717
 msgid "Check for updates..."
 msgstr "Klask hizivadurioù..."
 
-#: internet/vksettingspage.cpp:97
+#: internet/vk/vksettingspage.cpp:98
 msgid "Choose Vk.com cache directory"
-msgstr ""
+msgstr "Dibab doser krubuilh Vk.com"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
 msgstr "Choazit un anv evit ho roll seniñ spredek"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:897
 msgid "Choose automatically"
 msgstr "Choaz ent emgefreek"
 
-#: ../bin/src/ui_notificationssettingspage.h:461
+#: ../bin/src/ui_notificationssettingspage.h:468
 msgid "Choose color..."
 msgstr "Choaz ul liv..."
 
-#: ../bin/src/ui_notificationssettingspage.h:462
+#: ../bin/src/ui_notificationssettingspage.h:469
 msgid "Choose font..."
 msgstr "Choaz ur font..."
 
@@ -1093,9 +1149,13 @@ msgstr "Choaz el listenn"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Choazit penaos emañ urzhiet ar roll seniñ hag an niver a donioù a zo e-barzh."
 
-#: podcasts/podcastsettingspage.cpp:133
+#: internet/podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "Choaz an teuliad pellgargañ podkastoù"
+
+#: ../bin/src/ui_internetshowsettingspage.h:89
+msgid "Choose the internet services you want to show."
+msgstr "Dibabit ar servjioù internet ho 'peus c'hoant gwelet"
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1106,20 +1166,20 @@ msgstr "Lec'hiennoù web ho peus c'hoant implij evit klask komzoù"
 msgid "Classical"
 msgstr "Klasel"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "O naetaat"
 
-#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
+#: transcoder/transcodedialog.cpp:61 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Goullonderiñ"
 
-#: ../bin/src/ui_mainwindow.h:650 ../bin/src/ui_mainwindow.h:652
+#: ../bin/src/ui_mainwindow.h:654 ../bin/src/ui_mainwindow.h:656
 msgid "Clear playlist"
 msgstr "Skarzhañ ar roll seniñ"
 
-#: smartplaylists/searchtermwidget.cpp:341 ../bin/src/ui_mainwindow.h:635
+#: smartplaylists/searchtermwidget.cpp:341 ../bin/src/ui_mainwindow.h:639
 #: visualisations/visualisationcontainer.cpp:215
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1129,7 +1189,7 @@ msgstr "Clementine"
 msgid "Clementine Error"
 msgstr "Kudenn gant Clementine"
 
-#: ../bin/src/ui_notificationssettingspage.h:457
+#: ../bin/src/ui_notificationssettingspage.h:464
 msgid "Clementine Orange"
 msgstr "Oranjez Clementine"
 
@@ -1158,13 +1218,13 @@ msgstr "Gouest eo Clementine da lenn sonerezh bet lakaet war Google Drive."
 
 #: ../bin/src/ui_skydrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to OneDrive"
-msgstr ""
+msgstr "Gellout a ra Clementine seniñ sonerezh bet karget war OneDrive"
 
-#: ../bin/src/ui_notificationssettingspage.h:431
+#: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine a c'hell diskouez ur gemennadenn pa gemm ar roud."
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1193,7 +1253,7 @@ msgstr "Clementine a gavo ar sonerezh e :"
 msgid "Click here to add some music"
 msgstr "Klikit aze evit krouiñ ho levraoueg sonerezh"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1204,10 +1264,10 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Klikit evit kemmañ etre an amzer a chom hag an amzer total"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
-#: ../bin/src/ui_googledrivesettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1217,7 +1277,7 @@ msgstr "Pouezhit war ar bouton Login evit digeriñ ur merdeer web. Ret e vo deoc
 msgid "Close"
 msgstr "Serriñ"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "Serriñ ar roll seniñ"
 
@@ -1225,7 +1285,7 @@ msgstr "Serriñ ar roll seniñ"
 msgid "Close visualization"
 msgstr "Serriñ an hewelaat"
 
-#: internet/magnatunedownloaddialog.cpp:304
+#: internet/magnatune/magnatunedownloaddialog.cpp:306
 msgid "Closing this window will cancel the download."
 msgstr "Serrin ar prenestr-mañ a paouezo ar pellgargadenn"
 
@@ -1241,43 +1301,43 @@ msgstr "Klub"
 msgid "Colors"
 msgstr "Livioù"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listenn dispartiet gant ur virgulenn eus klas:live, live etre 0 ha 3"
 
-#: playlist/playlist.cpp:1354 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:694
+#: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
+#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Evezhiadenn"
 
-#: internet/vkservice.cpp:151
+#: internet/vk/vkservice.cpp:154
 msgid "Community Radio"
-msgstr ""
+msgstr "Skingomz ar gumunelezh "
 
-#: ../bin/src/ui_edittagdialog.h:693
+#: ../bin/src/ui_edittagdialog.h:696
 msgid "Complete tags automatically"
 msgstr "Leuniañ ar c'hlavioù ent emgefreek"
 
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:706
 msgid "Complete tags automatically..."
 msgstr "Leuniañ ar c'hlavioù ent emgefreek..."
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
+#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:65
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "Aozer"
 
-#: internet/searchboxwidget.cpp:41
+#: internet/core/searchboxwidget.cpp:45
 #, qt-format
 msgid "Configure %1..."
 msgstr "Kefluniañ %1..."
 
-#: internet/groovesharkservice.cpp:560
+#: internet/grooveshark/groovesharkservice.cpp:565
 msgid "Configure Grooveshark..."
 msgstr "Kefluniañ Grooveshark"
 
-#: internet/magnatuneservice.cpp:282
+#: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "KefluniañMagnatune..."
 
@@ -1285,34 +1345,35 @@ msgstr "KefluniañMagnatune..."
 msgid "Configure Shortcuts"
 msgstr "Kefluniañ ar Berradennoù"
 
-#: internet/spotifyservice.cpp:545 internet/spotifyservice.cpp:556
+#: internet/spotify/spotifyservice.cpp:900
 msgid "Configure Spotify..."
 msgstr "Kefluniañ Spotify"
 
-#: internet/subsonicservice.cpp:90
+#: internet/subsonic/subsonicservice.cpp:112
 msgid "Configure Subsonic..."
 msgstr "Kefluniañ Subsonic..."
 
-#: internet/vkservice.cpp:335
+#: internet/vk/vkservice.cpp:337
 msgid "Configure Vk.com..."
-msgstr ""
+msgstr "Keflunian Vk.com..."
 
 #: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:472
 msgid "Configure global search..."
 msgstr "Kefluniañ an enklsak hollek..."
 
-#: ui/mainwindow.cpp:553
+#: ui/mainwindow.cpp:567
 msgid "Configure library..."
 msgstr "Kefluniañ ar sonaoueg..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: internet/podcasts/addpodcastdialog.cpp:74
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Configure podcasts..."
 msgstr "Kefluniañ ar podkastoù"
 
-#: internet/cloudfileservice.cpp:85
-#: internet/digitallyimportedservicebase.cpp:178
+#: internet/core/cloudfileservice.cpp:105
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:198
+#: internet/googledrive/googledriveservice.cpp:228
 msgid "Configure..."
 msgstr "Kefluniañ..."
 
@@ -1324,26 +1385,26 @@ msgstr "Kennaskañ Wii Remote en ur implij an oberenn gweredekaat/diweredekaat"
 msgid "Connect device"
 msgstr "An drobarzhell a zo o kennaskañ"
 
-#: internet/spotifyservice.cpp:266
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "O kennaskañ da Spotify"
 
-#: internet/subsonicsettingspage.cpp:107
+#: internet/subsonic/subsonicsettingspage.cpp:128
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "Kennask nac'het gant ar servijer, gwiriekait URL ar servijer. Da skouer : http://localhost:4040/"
 
-#: internet/subsonicsettingspage.cpp:119
+#: internet/subsonic/subsonicsettingspage.cpp:140
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Ar c'hennask a lak re a amzer, gwiriekait URL ar servijer. Da skouer : http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vk/vkservice.cpp:1095
 msgid "Connection trouble or audio is disabled by owner"
-msgstr ""
+msgstr "Kudennoù kennaskañ pe diweredekaet eo bet ar son gant an implijer"
 
-#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:682
 msgid "Console"
 msgstr "Letrin"
 
@@ -1359,20 +1420,28 @@ msgstr "Treuzkemm an holl sonerezh"
 msgid "Convert any music that the device can't play"
 msgstr "Treuzkemm ar sonerezh ne c'hell ket an drobarzhell lenn"
 
-#: internet/vkservice.cpp:318
-msgid "Copy share url to clipboard"
-msgstr ""
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr "Treuzkemm ar restroù son lossless a-raok kas anezhe d'ar pellurzhier."
 
-#: internet/groovesharkservice.cpp:1210
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr "Treuzkemm ar restroù lossless"
+
+#: internet/vk/vkservice.cpp:324
+msgid "Copy share url to clipboard"
+msgstr "Kopiañ an url kenrannañ er golver"
+
+#: internet/core/internetservice.cpp:57
 msgid "Copy to clipboard"
 msgstr "Kopiañ d'ar golver"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
-#: ui/mainwindow.cpp:602 widgets/fileviewlist.cpp:43
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiañ war an drobarzhell"
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:592
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Eilañ er sonaoueg..."
@@ -1381,45 +1450,46 @@ msgstr "Eilañ er sonaoueg..."
 msgid "Copyright"
 msgstr "Gwirioù arzour"
 
-#: internet/subsonicsettingspage.cpp:75
+#: internet/subsonic/subsonicsettingspage.cpp:96
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "Dibosupl kennaskañ ouzh Subsonic, gwiriekait URL ar sevijer. Da skouer : http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr "Dibosubl eo krouiñ an elfenn GStreamer \"%1\" - gwiriekait ez eo staliet an enlugadelloù GStreamer diavaez"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
-msgstr ""
+msgstr "N'eus ket bet tu krouiñ ar roll-seniñ"
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Dibosupl eo kavout ur multiplekser evit %1, gwiriekait ez eo staliet an enlugelladoù a-zere evit GStreamer"
 
-#: transcoder/transcoder.cpp:423
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr "Dibosupl eo kavout un enkoder evit %1, gwiriekait ez eo staliet ar enlugelladoù mat evit GStreamer"
 
-#: internet/magnatunedownloaddialog.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:220
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Dibosubl eo digeriñ ar restr ec'hankañ %1"
 
-#: internet/cloudfileservice.cpp:82 ../bin/src/ui_albumcovermanager.h:215
-#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:673
-#: internet/googledriveservice.cpp:196
+#: internet/core/cloudfileservice.cpp:102
+#: ../bin/src/ui_albumcovermanager.h:215
+#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:677
+#: internet/googledrive/googledriveservice.cpp:226
 msgid "Cover Manager"
 msgstr "Merour ar godeligoù"
 
@@ -1445,12 +1515,13 @@ msgstr "Golo nann diuzet"
 msgid "Cover art set from %1"
 msgstr "Golo diuzet adalek %1"
 
-#: covers/coversearchstatisticsdialog.cpp:57 ui/albumcoversearcher.cpp:100
+#: covers/coversearchstatisticsdialog.cpp:59 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
 msgstr "Goloioù adalek %1"
 
-#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1286
+#: internet/grooveshark/groovesharkservice.cpp:533
+#: internet/grooveshark/groovesharkservice.cpp:1275
 msgid "Create a new Grooveshark playlist"
 msgstr "Krouiñ ur roll seniñ Grooveshak nevez"
 
@@ -1462,7 +1533,7 @@ msgstr "Lakaat un treveuz pa vez kemmet ar roud ent emgefreek"
 msgid "Cross-fade when changing tracks manually"
 msgstr "Lakaat un treveuz pa vez kemmet ar roudoù gant an dorn"
 
-#: ../bin/src/ui_mainwindow.h:647
+#: ../bin/src/ui_mainwindow.h:651
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
 
@@ -1470,63 +1541,63 @@ msgstr "Ctrl+Alt+V"
 msgid "Ctrl+Down"
 msgstr "Ctrl+Down"
 
-#: ../bin/src/ui_mainwindow.h:656
+#: ../bin/src/ui_mainwindow.h:660
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
-#: ../bin/src/ui_mainwindow.h:666
+#: ../bin/src/ui_mainwindow.h:670
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
-#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:654
+#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:658
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_mainwindow.h:649
+#: ../bin/src/ui_mainwindow.h:653
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: ../bin/src/ui_mainwindow.h:688
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:666
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: ../bin/src/ui_mainwindow.h:645
+#: ../bin/src/ui_mainwindow.h:649
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_mainwindow.h:694
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: ../bin/src/ui_mainwindow.h:668
+#: ../bin/src/ui_mainwindow.h:672
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#: ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:696
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
-#: ../bin/src/ui_mainwindow.h:711
+#: ../bin/src/ui_mainwindow.h:715
 msgid "Ctrl+Shift+T"
 msgstr "Ctrl+Shift+T"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:707
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
@@ -1542,11 +1613,11 @@ msgstr "Personalaat"
 msgid "Custom image:"
 msgstr "Skeudenn personelaet :"
 
-#: ../bin/src/ui_notificationssettingspage.h:444
+#: ../bin/src/ui_notificationssettingspage.h:451
 msgid "Custom message settings"
-msgstr "Kemennadenn gwellvezioù personelaet"
+msgstr "Kemennadenn arventennoù personelaet"
 
-#: ../bin/src/ui_notificationssettingspage.h:458
+#: ../bin/src/ui_notificationssettingspage.h:465
 msgid "Custom..."
 msgstr "Personelaat..."
 
@@ -1558,18 +1629,18 @@ msgstr "Hent DBus"
 msgid "Dance"
 msgstr "Dañs"
 
-#: core/database.cpp:593
+#: core/database.cpp:601
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
 msgstr "Goubrenet eo ar stlennvon. Lennit https://code.google.com/p/clementine-player/wiki/DatabaseCorruption evit kaout titouroù a-benn adkavout ho stlennvon."
 
-#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "Deizad krouadur"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "Deizad kemmadur"
 
@@ -1581,15 +1652,15 @@ msgstr "Deizioù"
 msgid "De&fault"
 msgstr "Dre &ziouer"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Digreskiñ an ampled eus 4%"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by <value> percent"
 msgstr "Digreskiñ an ampled eus <value> dre gant."
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "Digreskiñ an ampled"
 
@@ -1597,10 +1668,10 @@ msgstr "Digreskiñ an ampled"
 msgid "Default background image"
 msgstr "Skeudenn drekleur dre ziouer"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
-msgstr ""
+msgstr "Trobarzhell dre ziouer war %1"
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
@@ -1615,16 +1686,17 @@ msgstr "Amzer etre ar heweladurioù"
 msgid "Delete"
 msgstr "Diverkañ"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1333
+#: internet/grooveshark/groovesharkservice.cpp:536
+#: internet/grooveshark/groovesharkservice.cpp:1322
 msgid "Delete Grooveshark playlist"
 msgstr "Diverkañ ur roll seniñ Grooveshark"
 
-#: podcasts/podcastservice.cpp:345
+#: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
 msgstr "Diverkañ ar roadennoù pellgarget"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2160 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Diverkañ restroù"
 
@@ -1632,12 +1704,12 @@ msgstr "Diverkañ restroù"
 msgid "Delete from device..."
 msgstr "Diverkañ eus an drobarzhell"
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:604
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Diverkañ eus ar bladenn"
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "Diverkañ ar pennadoù lennet"
 
@@ -1649,28 +1721,28 @@ msgstr "Diverkañ ar ragarventennoù"
 msgid "Delete smart playlist"
 msgstr "Diverkañ ar roll seniñ speredek"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "Diverkañ ar restroù orin"
 
-#: core/deletefiles.cpp:48
+#: core/deletefiles.cpp:50
 msgid "Deleting files"
 msgstr "O tiverkañ restroù"
 
-#: ui/mainwindow.cpp:1539
+#: ui/mainwindow.cpp:1570
 msgid "Dequeue selected tracks"
 msgstr "Dilemel ar roudoù diuzet diwar al listenn c'hortoz"
 
-#: ui/mainwindow.cpp:1537
+#: ui/mainwindow.cpp:1568
 msgid "Dequeue track"
 msgstr "Dilemel ar roud-mañ diwar al listenn c'hortoz"
 
-#: ../bin/src/ui_transcodedialog.h:214 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "Pal"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:231
 msgid "Details..."
 msgstr "Munudoù..."
 
@@ -1682,7 +1754,7 @@ msgstr "Trobarzhell"
 msgid "Device Properties"
 msgstr "Perzhioù an drobarzhell"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "Anv an drobarzhell"
 
@@ -1690,13 +1762,13 @@ msgstr "Anv an drobarzhell"
 msgid "Device properties..."
 msgstr "Oerzhioù an drobarzhell..."
 
-#: ui/mainwindow.cpp:240
+#: ui/mainwindow.cpp:246
 msgid "Devices"
 msgstr "Trobarzhelloù"
 
-#: ../bin/src/ui_vksearchdialog.h:61 ../bin/src/ui_ripcd.h:300
+#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
-msgstr ""
+msgstr "Kendiviz"
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1719,11 +1791,11 @@ msgid "Direct internet connection"
 msgstr "Kennaskañ eeun da Internet"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
-#: ../bin/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_transcodedialog.h:213
 msgid "Directory"
 msgstr "Teuliad"
 
-#: ../bin/src/ui_notificationssettingspage.h:440
+#: ../bin/src/ui_notificationssettingspage.h:446
 msgid "Disable duration"
 msgstr "Diweredekaat ar padelezh"
 
@@ -1731,18 +1803,20 @@ msgstr "Diweredekaat ar padelezh"
 msgid "Disable moodbar generation"
 msgstr "Diweredekaat ar varenn-imor"
 
-#: ../bin/src/ui_notificationssettingspage.h:433
+#: ../bin/src/ui_notificationssettingspage.h:439
 msgctxt "Refers to a disabled notification type in Notification settings."
 msgid "Disabled"
-msgstr ""
+msgstr "Diwederakaet"
 
 #: globalsearch/searchproviderstatuswidget.cpp:46
 msgctxt "Refers to search provider's status."
 msgid "Disabled"
-msgstr ""
+msgstr "Diwederakaet"
 
-#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "Pladenn"
 
@@ -1750,18 +1824,28 @@ msgstr "Pladenn"
 msgid "Discontinuous transmission"
 msgstr "Treuzkas digendalc'hus"
 
-#: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:104 ../bin/src/ui_librarysettingspage.h:207
+#: internet/icecast/icecastfilterwidget.cpp:36
+#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:104
+#: ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Dibarzhioù ar skrammañ"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "Diskouez ar roll war ar skramm"
 
-#: ../bin/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:705
 msgid "Do a full library rescan"
 msgstr "Ober un adc'hwilervadur eus ar sonaoueg a-bezh"
+
+#: internet/googledrive/googledriveservice.cpp:267
+#: internet/googledrive/googledriveservice.cpp:273
+msgid "Do a full rescan"
+msgstr "Ober un adc'hwilervadur a-bezh"
+
+#: internet/googledrive/googledriveservice.cpp:223
+msgid "Do a full rescan..."
+msgstr "Ober un adc'hwilervadur a-bezh..."
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
@@ -1771,7 +1855,14 @@ msgstr "Chom hep treuzkemm ar sonerezh"
 msgid "Do not overwrite"
 msgstr "Chom hep skrivañ war-c'horre"
 
-#: widgets/osd.cpp:302 ../bin/src/ui_playlistsequence.h:103
+#: internet/googledrive/googledriveservice.cpp:268
+msgid ""
+"Doing a full rescan will lose any metadata you've saved in Clementine such "
+"as cover art, play counts and ratings.  Clementine will rescan all your "
+"music in Google Drive which may take some time."
+msgstr "Ober un adc'hwilervadur a-bezh a diverko an holl meta-roadennoù bet enrollet ganeoc'h e Clementine, evel ar golo, an niver a lennadennoù hag an notennoù. Clementine a adc'hwilervo holl ho sonerezh war ar Google Drive, ar pezh a c'hell kemer un nebeud amzer."
+
+#: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "Chom hep adlenn"
 
@@ -1779,15 +1870,20 @@ msgstr "Chom hep adlenn"
 msgid "Don't show in various artists"
 msgstr "Chom hep diskouez el lodenn \"arzourien liesseurt\""
 
-#: widgets/osd.cpp:281 ../bin/src/ui_playlistsequence.h:107
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr "Chom hep diskouez ar rannoù selaouet"
+
+#: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Chom hep meskañ"
 
-#: internet/magnatunedownloaddialog.cpp:306 ui/albumcovermanager.cpp:221
+#: internet/magnatune/magnatunedownloaddialog.cpp:308
+#: ui/albumcovermanager.cpp:221
 msgid "Don't stop!"
 msgstr "Chom hep paouez!"
 
-#: internet/somafmservice.cpp:101
+#: internet/somafm/somafmservice.cpp:106
 msgid "Donate"
 msgstr "Reiñ arc'hant"
 
@@ -1795,21 +1891,21 @@ msgstr "Reiñ arc'hant"
 msgid "Double click to open"
 msgstr "Daouglikañ evit digeriñ"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:270
 msgid "Double clicking a song will..."
 msgstr "Daouglikañ war un ton..."
 
-#: podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:529
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
 msgstr "Pellgargañ %n pennad"
 
-#: internet/magnatunedownloaddialog.cpp:266
+#: internet/magnatune/magnatunedownloaddialog.cpp:268
 msgid "Download directory"
 msgstr "Teuliad pellgargañ"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "Pellgargañ ar pennadoù davet "
 
@@ -1817,27 +1913,32 @@ msgstr "Pellgargañ ar pennadoù davet "
 msgid "Download membership"
 msgstr "Kevreañ d'ar pellgargadenn"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "Pellgargañ pennadoù nevez ent emgefreek"
 
-#: podcasts/podcastservice.cpp:253
+#: internet/podcasts/podcastservice.cpp:292
+#: internet/podcasts/podcastservice.cpp:331
 msgid "Download queued"
 msgstr "Pellgargadur e steuad"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr "Arventennoù pellgargañ"
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "Pellgargan ar poellad Android"
 
-#: internet/magnatuneservice.cpp:272
+#: internet/magnatune/magnatuneservice.cpp:280
 msgid "Download this album"
 msgstr "Pellgargañ an albom"
 
-#: internet/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:430
 msgid "Download this album..."
 msgstr "Pellgargañ an albom..."
 
-#: podcasts/podcastservice.cpp:439
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Download this episode"
 msgstr "Pellgargañ ar pennad-mañ"
 
@@ -1845,24 +1946,25 @@ msgstr "Pellgargañ ar pennad-mañ"
 msgid "Download..."
 msgstr "Pellgargañ"
 
-#: podcasts/podcastservice.cpp:261
+#: internet/podcasts/podcastservice.cpp:300
+#: internet/podcasts/podcastservice.cpp:340
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "O pellgargañ (%1%)..."
 
-#: internet/icecastservice.cpp:101
+#: internet/icecast/icecastservice.cpp:106
 msgid "Downloading Icecast directory"
 msgstr "O pellgargañ katalog Icecast"
 
-#: internet/jamendoservice.cpp:195
+#: internet/jamendo/jamendoservice.cpp:200
 msgid "Downloading Jamendo catalogue"
 msgstr "O pellgargañ katalog Jamendo"
 
-#: internet/magnatuneservice.cpp:152
+#: internet/magnatune/magnatuneservice.cpp:160
 msgid "Downloading Magnatune catalogue"
 msgstr "O pellgargañ katalog Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:49
+#: internet/spotify/spotifyblobdownloader.cpp:51
 msgid "Downloading Spotify plugin"
 msgstr "O pellgargañ enlugellad Spotify..."
 
@@ -1880,17 +1982,17 @@ msgstr "Dropbox"
 
 #: ui/equalizer.cpp:119
 msgid "Dubstep"
-msgstr ""
+msgstr "Dubstep"
 
 #: ../bin/src/ui_ripcd.h:309
 msgid "Duration"
-msgstr ""
+msgstr "Padelezh"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
 msgstr "Ar stumm dinamikel a zo aktivet"
 
-#: internet/jamendoservice.cpp:121 library/library.cpp:112
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "Meskaj dargouezhek dialuskel"
 
@@ -1898,25 +2000,25 @@ msgstr "Meskaj dargouezhek dialuskel"
 msgid "Edit smart playlist..."
 msgstr "Kemmañ ar roll seniñ speredek..."
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1612
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr ""
+msgstr "Cheñch an tag \"%1\"..."
 
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:663
 msgid "Edit tag..."
 msgstr "Cheñch ar c'hlav..."
 
-#: ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit tags"
 msgstr "Cheñch ar c'hlavioù"
 
-#: ../bin/src/ui_edittagdialog.h:662
+#: ../bin/src/ui_edittagdialog.h:665
 msgid "Edit track information"
 msgstr "Cheñch deskrivadur ar roud"
 
 #: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
-#: ../bin/src/ui_mainwindow.h:655
+#: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Cheñch deskrivadur ar roud..."
 
@@ -1924,17 +2026,21 @@ msgstr "Cheñch deskrivadur ar roud..."
 msgid "Edit tracks information..."
 msgstr "Cheñch deskrivadur ar roudoù..."
 
-#: internet/savedradio.cpp:103
+#: internet/internetradio/savedradio.cpp:109
 msgid "Edit..."
 msgstr "Embann..."
+
+#: ../bin/src/ui_seafilesettingspage.h:172
+msgid "Email"
+msgstr "Postel"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
 msgstr "Aktivañ Wii Remote"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
-msgstr ""
+msgstr "Gweredekaat ar c'hrubuilh emgefreek"
 
 #: ../bin/src/ui_equalizer.h:171
 msgid "Enable equalizer"
@@ -1944,13 +2050,17 @@ msgstr "Aktivañ ar c'hevataler"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Aotren ar beradennoù pa vez enaouet prenestr Clementine nemetken"
 
+#: ../bin/src/ui_behavioursettingspage.h:262
+msgid "Enable song metadata inline edition with click"
+msgstr "Gweredekaat an embann meta-roadennoù eeun gant ur c'hlik"
+
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
 msgstr "Gweredekaat ar mammennoù dindan evit lakaat anezho e disoc'h an enklask. An disoc'h a vo diskouezet en urzh-mañ."
 
-#: core/globalshortcuts.cpp:72
+#: core/globalshortcuts.cpp:76
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "(Di)gweredekaat scrobbling Last.fm"
 
@@ -1978,7 +2088,7 @@ msgstr "Lakait un URL evit pellgargañ ur golo adalek internet"
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "Lakait anv ur restr evit ar goloioù ezporzhiet (askouezhadenn ebet) :"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "Lakait un anv evit ar roll seniñ"
 
@@ -2008,7 +2118,7 @@ msgstr "Lakait chomlec'h red ur skingomz internet"
 msgid "Enter the name of the folder"
 msgstr "Skrivit anv an teuliad"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Lakait an IP-mañ er poellad evit kennaskañ da Clementine"
 
@@ -2016,24 +2126,28 @@ msgstr "Lakait an IP-mañ er poellad evit kennaskañ da Clementine"
 msgid "Entire collection"
 msgstr "Dastumadeg hollek"
 
-#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:686
 msgid "Equalizer"
 msgstr "Kevataler"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "Kenkoulz a --log-levels *:1"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Kenkoulz a --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1048
-#: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1863 ui/mainwindow.cpp:2110 ui/mainwindow.cpp:2258
-#: internet/vkservice.cpp:621
+#: internet/grooveshark/groovesharkservice.cpp:1054
+#: internet/magnatune/magnatunedownloaddialog.cpp:242
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
+#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "Fazi"
+
+#: ui/ripcd.cpp:295
+msgid "Error Ripping CD"
+msgstr "Kudenn en ur eztennañ ar CD"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2047,7 +2161,7 @@ msgstr "Ur gudenn a zo savet e-kerzh kopiadur an tonioù"
 msgid "Error deleting songs"
 msgstr "Ur gudenn a zo savet e-kerzh dilamidigezh an tonioù"
 
-#: internet/spotifyblobdownloader.cpp:220
+#: internet/spotify/spotifyblobdownloader.cpp:222
 msgid "Error downloading Spotify plugin"
 msgstr "Ur gudenn a zo savet o pellgargañ enlugellad Spotify"
 
@@ -2056,49 +2170,49 @@ msgstr "Ur gudenn a zo savet o pellgargañ enlugellad Spotify"
 msgid "Error loading %1"
 msgstr "Ur gudenn a zo savet e-pad kargadur %1"
 
-#: internet/digitallyimportedservicebase.cpp:196
-#: internet/digitallyimportedurlhandler.cpp:85
+#: internet/digitally/digitallyimportedservicebase.cpp:200
+#: internet/digitally/digitallyimportedurlhandler.cpp:89
 msgid "Error loading di.fm playlist"
 msgstr "Kudenn o kargañ roll seniñ di.fm"
 
-#: transcoder/transcoder.cpp:394
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Ur gudenn a zo savet e-pad treterezh %1 : %2"
 
-#: playlist/songloaderinserter.cpp:92
+#: playlist/songloaderinserter.cpp:94
 msgid "Error while loading audio CD"
 msgstr "Kudenn e-pad kargadenn ar CD audio"
 
-#: library/library.cpp:66
+#: library/library.cpp:69
 msgid "Ever played"
 msgstr "Bet lennet dija"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "Bep 10 munutenn"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "Bep 12 eurvezh"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "Bep 2 eurvezh"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "Bep 20 munutenn"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "Bep 30 munutenn"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "Bep 6 eurvezh"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "Bep eurvezh"
 
@@ -2144,27 +2258,27 @@ msgstr "Ezporzhiadur echuet"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Ezporzhiet %1 golo war %2 (%3 tremenet)"
 
-#: ../bin/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:668
 msgid "F1"
 msgstr "F1"
 
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:664
 msgid "F2"
 msgstr "F2"
 
-#: ../bin/src/ui_mainwindow.h:637
+#: ../bin/src/ui_mainwindow.h:641
 msgid "F5"
 msgstr "F5"
 
-#: ../bin/src/ui_mainwindow.h:639
+#: ../bin/src/ui_mainwindow.h:643
 msgid "F6"
 msgstr "F6"
 
-#: ../bin/src/ui_mainwindow.h:641
+#: ../bin/src/ui_mainwindow.h:645
 msgid "F7"
 msgstr "F7"
 
-#: ../bin/src/ui_mainwindow.h:643
+#: ../bin/src/ui_mainwindow.h:647
 msgid "F8"
 msgstr "F8"
 
@@ -2191,25 +2305,28 @@ msgstr "Arveuz"
 msgid "Fading duration"
 msgstr "Padelezh an arveuz"
 
-#: ui/mainwindow.cpp:1864
+#: ui/mainwindow.cpp:1895
 msgid "Failed reading CD drive"
-msgstr ""
+msgstr "Kudenn en ul lenn ar CD"
 
-#: podcasts/gpoddertoptagspage.cpp:69
+#: internet/podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "C'hwited eo bet adtapadenn an teuliad"
 
-#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
-#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
-#: podcasts/itunessearchpage.cpp:81
+#: internet/podcasts/gpoddersearchpage.cpp:75
+#: internet/podcasts/gpoddertoptagsmodel.cpp:103
+#: internet/podcasts/itunessearchpage.cpp:65
+#: internet/podcasts/itunessearchpage.cpp:76
+#: internet/podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "C'hwitet eo bet gant tapadenn ar podkastoù"
 
-#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
+#: internet/podcasts/addpodcastbyurl.cpp:69
+#: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "C'hwitet e bet gant kargadenn ar podkastoù"
 
-#: podcasts/podcasturlloader.cpp:173
+#: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "C'hwitet eo bet o lenn al lanv RSS"
 
@@ -2218,11 +2335,11 @@ msgstr "C'hwitet eo bet o lenn al lanv RSS"
 msgid "Fast"
 msgstr "Trumm"
 
-#: internet/groovesharkservice.cpp:639
+#: internet/grooveshark/groovesharkservice.cpp:644
 msgid "Favorites"
 msgstr "Ma re garetañ"
 
-#: library/library.cpp:88
+#: library/library.cpp:91
 msgid "Favourite tracks"
 msgstr "Roudoù karetañ"
 
@@ -2238,7 +2355,7 @@ msgstr "Kerc'hat ent emgefreek"
 msgid "Fetch completed"
 msgstr "Pellgargadur echu"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonic/subsonicservice.cpp:250
 msgid "Fetching Subsonic library"
 msgstr "O tapout sonaoueg Subsonic"
 
@@ -2248,7 +2365,7 @@ msgstr "Ur gudenn a zo savet e-pad pellgargadur ar golo"
 
 #: ../bin/src/ui_ripcd.h:320
 msgid "File Format"
-msgstr ""
+msgstr "Mentrezh ar restr"
 
 #: ui/organisedialog.cpp:77
 msgid "File extension"
@@ -2258,37 +2375,41 @@ msgstr "Askouzehadenn ar restr"
 msgid "File formats"
 msgstr "Mentrezhoù restroù"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "Anv ar restr"
 
-#: playlist/playlist.cpp:1343
+#: playlist/playlist.cpp:1351
 msgid "File name (without path)"
 msgstr "Anv ar restr (hep an hent)"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
-msgstr ""
+msgstr "Patrom anv ar restr :"
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:674
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:96
+msgid "File paths"
+msgstr "Treugoù ar restr"
+
+#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "Ment ar restr"
 
-#: playlist/playlist.cpp:1347 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
-#: ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1355 ../bin/src/ui_groupbydialog.h:133
+#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
+#: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "Stumm ar restr"
 
-#: ../bin/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Filename"
 msgstr "Anv ar restr"
 
-#: ui/mainwindow.cpp:233
+#: ui/mainwindow.cpp:239
 msgid "Files"
 msgstr "Restroù"
 
-#: ../bin/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:211
 msgid "Files to transcode"
 msgstr "Restroù da treuzkemmañ"
 
@@ -2296,9 +2417,9 @@ msgstr "Restroù da treuzkemmañ"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Kavout an tonioù e-barzh ho sonaoueg a glot gant an dezverkoù bet meneget ganeoc'h."
 
-#: internet/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:308
 msgid "Find this artist"
-msgstr ""
+msgstr "Kavout an arzour-mañ"
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
@@ -2312,7 +2433,11 @@ msgstr "Echuiñ"
 msgid "First level"
 msgstr "Live kentañ"
 
-#: core/song.cpp:379 transcoder/transcoder.cpp:230
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr "Klotañ ar golo gant al ledander"
+
+#: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2357,7 +2482,7 @@ msgstr "Disoñjal un drobarzhell a denn anezhi eus al listenn-mañ ha rediet e v
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
-#: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
+#: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:83
 #: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
 #: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Form"
@@ -2367,7 +2492,7 @@ msgstr "Form"
 msgid "Format"
 msgstr "Mentrezh"
 
-#: analyzers/analyzercontainer.cpp:46
+#: analyzers/analyzercontainer.cpp:52
 #: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Skeudennoù dre eilenn"
@@ -2392,38 +2517,48 @@ msgstr "Fumm Bass + Treble"
 msgid "Full Treble"
 msgstr "Full Treble"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:138
 msgid "General"
 msgstr "Hollek"
 
-#: ../bin/src/ui_notificationssettingspage.h:437
+#: ../bin/src/ui_notificationssettingspage.h:443
 msgid "General settings"
-msgstr "Kefluniadur hollek"
+msgstr "Arventennoù hollek"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "Doare"
 
-#: internet/groovesharkservice.cpp:550
+#: internet/grooveshark/groovesharkservice.cpp:555
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Kaout un URL evit rannañ ar roll seniñ Grooveshark"
 
-#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1149
+#: internet/grooveshark/groovesharkservice.cpp:552
+#: internet/grooveshark/groovesharkservice.cpp:1154
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Kaout un URL evit rannañ an ton Grooveshark"
 
-#: internet/groovesharkservice.cpp:823
+#: internet/spotify/spotifyservice.cpp:633
+#: internet/spotify/spotifyservice.cpp:674
+msgid "Get a URL to share this Spotify song"
+msgstr "Kaout un URL evit rannañ an ton spotify mañ"
+
+#: internet/spotify/spotifyservice.cpp:665
+msgid "Get a URL to share this playlist"
+msgstr "Kaout un URL evit rannañ ar roll-seniñ mañ"
+
+#: internet/grooveshark/groovesharkservice.cpp:829
 msgid "Getting Grooveshark popular songs"
 msgstr "O taspugnat tonioù brudet Grooveshark"
 
-#: internet/somafmservice.cpp:115
+#: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
 msgstr "O taspugn ar c'hanolioù"
 
-#: internet/digitallyimportedservicebase.cpp:101
+#: internet/digitally/digitallyimportedservicebase.cpp:105
 msgid "Getting streams"
 msgstr "O tegemer al lanvioù"
 
@@ -2435,11 +2570,11 @@ msgstr "Reiñ un anv:"
 msgid "Go"
 msgstr "Go"
 
-#: ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:697
 msgid "Go to next playlist tab"
 msgstr "Mont d'ar roll seniñ o tont"
 
-#: ../bin/src/ui_mainwindow.h:694
+#: ../bin/src/ui_mainwindow.h:698
 msgid "Go to previous playlist tab"
 msgstr "Mont d'ar roll seniñ a-raok"
 
@@ -2447,13 +2582,13 @@ msgstr "Mont d'ar roll seniñ a-raok"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:51 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Kavet %1 golo diwar %2 (%3 c'hwitet)"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:258
 msgid "Grey out non existent songs in my playlists"
 msgstr "Grisaat an tonioù n'int ket mui em roll seniñ"
 
@@ -2461,19 +2596,19 @@ msgstr "Grisaat an tonioù n'int ket mui em roll seniñ"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:408
+#: internet/grooveshark/groovesharkservice.cpp:412
 msgid "Grooveshark login error"
 msgstr "Kudenn kennaskañ gant Grooveshark"
 
-#: internet/groovesharkservice.cpp:1200
+#: internet/grooveshark/groovesharkservice.cpp:1205
 msgid "Grooveshark playlist's URL"
 msgstr "URL ar roll seniñ Grooveshark"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/grooveshark/groovesharkservice.cpp:624
 msgid "Grooveshark radio"
 msgstr "Skingomz Grooveshark"
 
-#: internet/groovesharkservice.cpp:1178
+#: internet/grooveshark/groovesharkservice.cpp:1183
 msgid "Grooveshark song's URL"
 msgstr "URL ar ganaouenn Grooveshark"
 
@@ -2509,16 +2644,16 @@ msgstr "Strollañ dre Zoare/Albom"
 msgid "Group by Genre/Artist/Album"
 msgstr "Strollañ dre Zoare/Arzour/Albom"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:67
-#: ../bin/src/ui_edittagdialog.h:691
+#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:67
+#: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "Strolladenn"
 
-#: podcasts/podcasturlloader.cpp:204
+#: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "Ar pajenn HTML a oa hep lanv RSS ebet."
 
-#: internet/subsonicsettingspage.cpp:141
+#: internet/subsonic/subsonicsettingspage.cpp:162
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr "Kod Statud HTTP 3xx resevet hep URL, gwiriekait kefluniadur ar servijer."
@@ -2543,7 +2678,7 @@ msgstr "Tu zo gwelout an titouroù war an dafar nemet ma 'z eo kennasket an drob
 msgid "High"
 msgstr "Uhel"
 
-#: analyzers/analyzercontainer.cpp:63
+#: analyzers/analyzercontainer.cpp:69
 #: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
@@ -2553,7 +2688,7 @@ msgstr "Uhel (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Uhel (1024x1024)"
 
-#: internet/subsonicsettingspage.cpp:113
+#: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "N'eo ket bet kavet an herberc'hier, gwiriekait URL ar servijer. Da skouer : http://localhost:4040/"
 
@@ -2561,7 +2696,7 @@ msgstr "N'eo ket bet kavet an herberc'hier, gwiriekait URL ar servijer. Da skoue
 msgid "Hours"
 msgstr "Eurioù"
 
-#: core/backgroundstreams.cpp:27
+#: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
 
@@ -2581,6 +2716,12 @@ msgstr "Arlunioù en uhelañ"
 msgid "Identifying song"
 msgstr "Anaoudadur an ton"
 
+#: ../bin/src/ui_behavioursettingspage.h:260
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr "M'eo gweredekaet e vo tu deoc'h embann klavioù an tonioù er roll-seniñ war-eeun"
+
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
@@ -2591,7 +2732,7 @@ msgstr "Ma gendalc'hit, an drobarzhell a vo gorek hag an tonioù kopiet a c'hell
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "Ma anavezit URL ur podkast, lakait anezhañ dindan ha pouezit war Go."
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "Ober hep ma vefe \"The\" e anvioù an arzourien"
 
@@ -2603,12 +2744,16 @@ msgstr "Skeudennoù (*.png, *.jpg, *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Skeudennoù (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:141
+#: ../bin/src/ui_transcodedialog.h:220
+msgid "Import..."
+msgstr "Enporzhiañ..."
+
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "A-benn %1 deizh"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "A-benn %1 sizhun"
@@ -2619,11 +2764,11 @@ msgid ""
 "time a song finishes."
 msgstr "E stumm dinamek, roudoù nevez a vo choazet hag ouzhpennet e fin al roll seniñ bep taol ma vo echu gant un ton."
 
-#: internet/spotifyservice.cpp:371
+#: internet/spotify/spotifyservice.cpp:421
 msgid "Inbox"
 msgstr "Boest degemer"
 
-#: ../bin/src/ui_notificationssettingspage.h:443
+#: ../bin/src/ui_notificationssettingspage.h:450
 msgid "Include album art in the notification"
 msgstr "Diskouez an albom er gemenadenn"
 
@@ -2631,31 +2776,31 @@ msgstr "Diskouez an albom er gemenadenn"
 msgid "Include all songs"
 msgstr "Ouzhpennañ an holl tonioù"
 
-#: internet/subsonicsettingspage.cpp:85
+#: internet/subsonic/subsonicsettingspage.cpp:106
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Handelv protokol REST Subsonic digenglotus. Hizivait an arval."
 
-#: internet/subsonicsettingspage.cpp:90
+#: internet/subsonic/subsonicsettingspage.cpp:111
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Handelv protokol REST Subsonic digenglotus. Ret eo d'ar servijer hizivaat."
 
-#: internet/subsonicsettingspage.cpp:131
+#: internet/subsonic/subsonicsettingspage.cpp:152
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Kefluniadur diglok, bezit sur eo leuniet an holl maeziennoù."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Kreskiñ an ampled eus 4%"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by <value> percent"
 msgstr "Kreskiñ an ampled eus <value> dre gant"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "Kreskiñ an ampled"
 
-#: internet/cloudfileservice.cpp:133
+#: internet/core/cloudfileservice.cpp:152
 #, qt-format
 msgid "Indexing %1"
 msgstr "Menegeradur %1"
@@ -2666,89 +2811,94 @@ msgstr "Titouroù"
 
 #: ../bin/src/ui_ripcd.h:301
 msgid "Input options"
-msgstr ""
+msgstr "Dibaboù enkas"
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "Enlakaat..."
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Installed"
 msgstr "Staliaet"
 
-#: core/database.cpp:577
+#: core/database.cpp:585
 msgid "Integrity check"
 msgstr "O gwiriañ an anterinder"
 
-#: ui/mainwindow.cpp:237
+#: ui/mainwindow.cpp:243
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:161
 msgid "Internet providers"
 msgstr "Pourchaserien internet"
 
-#: internet/lastfmservice.cpp:234
+#: ../bin/src/ui_internetshowsettingspage.h:87
+msgctxt "Global search settings dialog title."
+msgid "Internet services"
+msgstr "Servijoù internet"
+
+#: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
 msgstr "Alc'hwez API didalvoudek"
 
-#: internet/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:230
 msgid "Invalid format"
 msgstr "Mentrezh didalvoudek"
 
-#: internet/lastfmservice.cpp:220
+#: internet/lastfm/lastfmservice.cpp:226
 msgid "Invalid method"
 msgstr "Hentenn didalvoudek"
 
-#: internet/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:232
 msgid "Invalid parameters"
 msgstr "Arventennoù didalvoudek"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfm/lastfmservice.cpp:234
 msgid "Invalid resource specified"
 msgstr "Loazioù erspizet didalvoudek"
 
-#: internet/lastfmservice.cpp:218
+#: internet/lastfm/lastfmservice.cpp:224
 msgid "Invalid service"
 msgstr "Servij didalvoudek"
 
-#: internet/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "Kudenn gant alc'hwez an dalc'h"
 
-#: internet/groovesharkservice.cpp:400
+#: internet/grooveshark/groovesharkservice.cpp:404
 msgid "Invalid username and/or password"
 msgstr "Kudenn gant an anv implijer pe ar ger-tremen"
 
 #: ../bin/src/ui_ripcd.h:312
 msgid "Invert Selection"
-msgstr ""
+msgstr "Tuginañ an diuzad"
 
-#: internet/jamendoservice.cpp:133
+#: internet/jamendo/jamendoservice.cpp:138
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:117
+#: internet/jamendo/jamendoservice.cpp:123
 msgid "Jamendo Most Listened Tracks"
 msgstr "Roudoù Jamendo Selaouet an aliesañ"
 
-#: internet/jamendoservice.cpp:114
+#: internet/jamendo/jamendoservice.cpp:120
 msgid "Jamendo Top Tracks"
 msgstr "Top roudoù Jamendo"
 
-#: internet/jamendoservice.cpp:108
+#: internet/jamendo/jamendoservice.cpp:114
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Top ar miz roudoù Jamendo"
 
-#: internet/jamendoservice.cpp:111
+#: internet/jamendo/jamendoservice.cpp:117
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Top ar sizhun roudoù Jamendo"
 
-#: internet/jamendoservice.cpp:175
+#: internet/jamendo/jamendoservice.cpp:180
 msgid "Jamendo database"
 msgstr "Stlennvon Jamendo"
 
-#: ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
 msgstr "Mont d'ar roud lennet bremañ"
 
@@ -2764,20 +2914,20 @@ msgstr "Pouezhit war ar bouton e-pad %1 eilenn..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Pouezhit war ar boutoñn e-pad %1 eilenn..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:245
 msgid "Keep running in the background when the window is closed"
 msgstr "Leuskel da dreiñ pa 'z eo serret ar prenstr"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "Dec'hel ar restroù orin"
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:681
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
-msgstr ""
+msgstr "Bisig"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:247
 msgid "Language"
 msgstr "Yezh"
 
@@ -2789,28 +2939,32 @@ msgstr "Hezoug/Selaouegoù"
 msgid "Large Hall"
 msgstr "Sal bras"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "Golo albom tev"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr "Golo albom ledan (munudoù dindan)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
 msgstr "Barenn gostez ledan"
 
-#: library/library.cpp:80
+#: library/library.cpp:83
 msgid "Last played"
 msgstr "Selaouet e ziwezhañ"
 
-#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:671
+#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
-msgstr ""
+msgstr "Sonet e ziwezhañ"
 
 #: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:241
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm a zo ac'hubet, klaskit en-dro en un nebeut munutennoù"
 
@@ -2834,7 +2988,7 @@ msgstr "Anv implijer Last.fm"
 msgid "Last.fm wiki"
 msgstr "Wiki last.fm"
 
-#: library/library.cpp:102
+#: library/library.cpp:105
 msgid "Least favourite tracks"
 msgstr "Roudoù an nebeutañ plijet"
 
@@ -2842,12 +2996,13 @@ msgstr "Roudoù an nebeutañ plijet"
 msgid "Left"
 msgstr "Kleiz"
 
-#: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
-#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:666
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
+#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Padelezh"
 
-#: ui/mainwindow.cpp:219 ui/mainwindow.cpp:232
+#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "Sonaoueg"
 
@@ -2855,7 +3010,7 @@ msgstr "Sonaoueg"
 msgid "Library advanced grouping"
 msgstr "Strolladur ar sonaoueg kemplesoc'h"
 
-#: ui/mainwindow.cpp:2382
+#: ui/mainwindow.cpp:2413
 msgid "Library rescan notice"
 msgstr "Kemenn hizivadur ar sonaoueg"
 
@@ -2867,7 +3022,7 @@ msgstr "Enklask ar sonaoueg"
 msgid "Limits"
 msgstr "Bevennoù"
 
-#: internet/groovesharkservice.cpp:621
+#: internet/grooveshark/groovesharkservice.cpp:626
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Selaou ouzh tonioù Grooveshark diazezet war ar pezh ho peus selaouet a-raok."
@@ -2900,7 +3055,7 @@ msgstr "Kargañ ar golo adalek ur bladenn..."
 msgid "Load playlist"
 msgstr "Kargañ ar roll seniñ"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:695
 msgid "Load playlist..."
 msgstr "Kargañ ar roll seniñ..."
 
@@ -2916,67 +3071,67 @@ msgstr "O kargañ stlennvon iPod"
 msgid "Loading smart playlist"
 msgstr "Kargañ ar roll seniñ speredek"
 
-#: library/librarymodel.cpp:148
+#: library/librarymodel.cpp:157
 msgid "Loading songs"
 msgstr "O kargañ tonioù"
 
-#: internet/digitallyimportedurlhandler.cpp:63
-#: internet/somafmurlhandler.cpp:49
+#: internet/digitally/digitallyimportedurlhandler.cpp:67
+#: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "O kargañ al lanv"
 
-#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "O kargan roudoù"
 
-#: playlist/songloaderinserter.cpp:144
+#: playlist/songloaderinserter.cpp:149
 msgid "Loading tracks info"
 msgstr "O kargañ titouroù ar roud"
 
-#: library/librarymodel.cpp:143 podcasts/podcastdiscoverymodel.cpp:102
-#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
-#: internet/vkservice.cpp:485 internet/vksettingspage.cpp:122
-#: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255
+#: library/librarymodel.cpp:152
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
+#: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
+#: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
+#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "O kargañ..."
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Kargañ restroù pe liammoù internet, hag eilec'hiañ ar roll seniñ"
 
-#: internet/vksettingspage.cpp:110
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
-#: ../bin/src/ui_dropboxsettingspage.h:105
-#: ../bin/src/ui_skydrivesettingspage.h:105
-#: ../bin/src/ui_boxsettingspage.h:105 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_skydrivesettingspage.h:105
+#: ../bin/src/ui_boxsettingspage.h:105 internet/vk/vksettingspage.cpp:111
+#: ../bin/src/ui_vksettingspage.h:219 ../bin/src/ui_seafilesettingspage.h:173
 msgid "Login"
 msgstr "Kennaskañ"
 
-#: podcasts/podcastsettingspage.cpp:120
+#: internet/podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "C'hwitet eo bet ar c'hennaskañ"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vk/vksettingspage.cpp:121
 msgid "Logout"
-msgstr ""
+msgstr "Digennaksañ"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
 msgstr "Aelad Diougan Padus (ADP)"
 
-#: ../bin/src/ui_mainwindow.h:648
+#: ../bin/src/ui_mainwindow.h:652
 msgid "Love"
 msgstr "Karout"
 
-#: analyzers/analyzercontainer.cpp:61
+#: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
@@ -2999,11 +3154,11 @@ msgstr "Komzoù"
 msgid "Lyrics from %1"
 msgstr "Komzoù eus %1"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
-msgstr ""
+msgstr "M4A AAC"
 
-#: core/song.cpp:385 transcoder/transcoder.cpp:235
+#: core/song.cpp:399 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3016,15 +3171,16 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:381
+#: core/song.cpp:395
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:383
+#: core/song.cpp:397
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:101 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatune/magnatuneservice.cpp:109
+#: ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -3032,7 +3188,7 @@ msgstr "Magnatune"
 msgid "Magnatune Download"
 msgstr "Pellgargañ Magnatune"
 
-#: widgets/osd.cpp:192
+#: widgets/osd.cpp:196
 msgid "Magnatune download finished"
 msgstr "Pellgargadenn Magnatune echuet"
 
@@ -3040,20 +3196,20 @@ msgstr "Pellgargadenn Magnatune echuet"
 msgid "Main profile (MAIN)"
 msgstr "Aelad pennañ (MAIN)"
 
-#: core/backgroundstreams.cpp:33
+#: core/backgroundstreams.cpp:52
 msgid "Make it so!"
 msgstr "Ober evel-se !"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_mainwindow.h:680
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
-msgstr ""
+msgstr "Gra an dra-mañ !"
 
-#: internet/spotifyservice.cpp:552
+#: internet/spotify/spotifyservice.cpp:662
 msgid "Make playlist available offline"
 msgstr "Lakaat ar roll seniñ da vezañ lennus ezlinenn"
 
-#: internet/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Malformed response"
 msgstr "Respont furmed fall"
 
@@ -3061,8 +3217,8 @@ msgstr "Respont furmed fall"
 msgid "Manual proxy configuration"
 msgstr "Kefluniadur dornel ar proksi"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "Gant an dorn"
 
@@ -3070,11 +3226,11 @@ msgstr "Gant an dorn"
 msgid "Manufacturer"
 msgstr "Aozer"
 
-#: podcasts/podcastservice.cpp:357
+#: internet/podcasts/podcastservice.cpp:448 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "Merkañ evel selaouet"
 
-#: podcasts/podcastservice.cpp:356
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Mark as new"
 msgstr "Merkañ evel nevez"
 
@@ -3086,15 +3242,19 @@ msgstr "Implij an holl gerioù enklsask (HA)"
 msgid "Match one or more search terms (OR)"
 msgstr "Implij unan pe meur a gerioù enklask (PE)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
-msgstr ""
+msgstr "Maks an disoc'hoù enklask hollek"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Fonnder uhelañ"
 
-#: analyzers/analyzercontainer.cpp:62
+#: ui/ripcd.cpp:296
+msgid "Media has changed. Reloading"
+msgstr "Kemmet eo bet ar media. Adkargadenn"
+
+#: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
@@ -3114,7 +3274,7 @@ msgstr "Fonnder izelañ"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr ""
+msgstr "Leuniadur minimum ar skurzer"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3136,12 +3296,12 @@ msgstr "Lenn e mono"
 msgid "Months"
 msgstr "Mizioù"
 
-#: playlist/playlist.cpp:1358
+#: playlist/playlist.cpp:1366
 msgid "Mood"
 msgstr "Imor"
 
 #: ../bin/src/ui_appearancesettingspage.h:294
-#: moodbar/moodbarproxystyle.cpp:376
+#: moodbar/moodbarproxystyle.cpp:382
 msgid "Moodbar style"
 msgstr "Doare ar varenn imor"
 
@@ -3149,11 +3309,11 @@ msgstr "Doare ar varenn imor"
 msgid "Moodbars"
 msgstr "Barenn imor"
 
-#: internet/vkservice.cpp:489
+#: internet/vk/vkservice.cpp:503
 msgid "More"
-msgstr ""
+msgstr "Muioc'h"
 
-#: library/library.cpp:84
+#: library/library.cpp:87
 msgid "Most played"
 msgstr "Lennet an aliesañ"
 
@@ -3170,7 +3330,7 @@ msgstr "Poentoù staliañ"
 msgid "Move down"
 msgstr "Dindan"
 
-#: ui/mainwindow.cpp:595 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Dilec'hiañ davit ar sonaoueg..."
 
@@ -3179,7 +3339,8 @@ msgstr "Dilec'hiañ davit ar sonaoueg..."
 msgid "Move up"
 msgstr "A-us"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1798
+#: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Sonerezh"
 
@@ -3187,32 +3348,36 @@ msgstr "Sonerezh"
 msgid "Music Library"
 msgstr "Sonaoueg"
 
-#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:699
+#: core/globalshortcuts.cpp:63 ../bin/src/ui_mainwindow.h:703
 #: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "Mut"
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
+#: internet/vk/vkservice.cpp:820
+msgid "My Albums"
+msgstr "Va albomoù"
+
+#: internet/grooveshark/groovesharkservice.cpp:633
+#: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Ma Sonerezh"
 
-#: internet/vkservice.cpp:496
+#: internet/vk/vkservice.cpp:510
 msgid "My Recommendations"
 msgstr "Ma erbedadennoù"
 
-#: internet/groovesharkservice.cpp:1287 internet/groovesharkservice.cpp:1382
-#: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
-#: ../bin/src/ui_wizardfinishpage.h:84
+#: internet/grooveshark/groovesharkservice.cpp:1276
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Anv"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgctxt "Category label"
 msgid "Name"
-msgstr ""
+msgstr "Anv"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "Dibarzhioù anv"
 
@@ -3224,7 +3389,7 @@ msgstr "Bandenn strizh (NB)"
 msgid "Network Proxy"
 msgstr "Proksi rouedad"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "Rouedad pell"
 
@@ -3232,12 +3397,12 @@ msgstr "Rouedad pell"
 msgid "Never"
 msgstr "Morse"
 
-#: library/library.cpp:73
+#: library/library.cpp:76
 msgid "Never played"
 msgstr "Morse sonet"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:280
 msgid "Never start playing"
 msgstr "Morse kregiñ da lenn"
 
@@ -3247,7 +3412,7 @@ msgstr "Morse kregiñ da lenn"
 msgid "New folder"
 msgstr "Teuliad nevez"
 
-#: ui/mainwindow.cpp:1635 ../bin/src/ui_mainwindow.h:687
+#: ui/mainwindow.cpp:1666 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "Roll seniñ nevez"
 
@@ -3263,7 +3428,7 @@ msgstr "Tonioù nevez"
 msgid "New tracks will be added automatically."
 msgstr "Ar roudoù nevez a vo ouzhpennet ent emgefreek."
 
-#: library/library.cpp:92
+#: library/library.cpp:95
 msgid "Newest tracks"
 msgstr "Roudoù nevesañ"
 
@@ -3271,16 +3436,16 @@ msgstr "Roudoù nevesañ"
 msgid "Next"
 msgstr "Da-heul"
 
-#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:642
+#: core/globalshortcuts.cpp:57 ../bin/src/ui_mainwindow.h:646
 #: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "Roud o tont"
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "Ar sizhun a-zeu"
 
-#: analyzers/analyzercontainer.cpp:79
+#: analyzers/analyzercontainer.cpp:86
 msgid "No analyzer"
 msgstr "Dezrannerez ebet"
 
@@ -3296,7 +3461,7 @@ msgstr "Golo ebet da ezporzhiañ"
 msgid "No long blocks"
 msgstr "Bloc'h hir ebet"
 
-#: playlist/playlistcontainer.cpp:365
+#: playlist/playlistcontainer.cpp:371
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "N'eo bet kavet netra. Diverkañ ar boest enklask evit diskouez ar roll seniñ en e-bezh."
@@ -3305,12 +3470,12 @@ msgstr "N'eo bet kavet netra. Diverkañ ar boest enklask evit diskouez ar roll s
 msgid "No short blocks"
 msgstr "Bloc'h berr ebet"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
-#: ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
+#: ../bin/src/ui_groupbydialog.h:158
 msgid "None"
 msgstr "Hini ebet"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2111 ui/mainwindow.cpp:2259
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ton ebet eus ar reoù diuzet a oa mat evit bezañ kopiet war an drobarzhell"
 
@@ -3330,23 +3495,23 @@ msgstr "N'eus ket tu implij pa vez implijet ur roll seniñ dinamek"
 msgid "Not connected"
 msgstr "Digennasket"
 
-#: internet/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:250
 msgid "Not enough content"
 msgstr "N'eus ket trawalc'h a endalc'h"
 
-#: internet/lastfmservice.cpp:248
+#: internet/lastfm/lastfmservice.cpp:254
 msgid "Not enough fans"
 msgstr "N'eus ket trawalc'h a fans"
 
-#: internet/lastfmservice.cpp:246
+#: internet/lastfm/lastfmservice.cpp:252
 msgid "Not enough members"
 msgstr "N'eus ket izili a-walc'h"
 
-#: internet/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:256
 msgid "Not enough neighbors"
 msgstr "N'eus ket trawalc'h a amezeizen"
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Not installed"
 msgstr "N'eo ket staliet"
 
@@ -3359,15 +3524,15 @@ msgstr "N'eo ket kennasket"
 msgid "Not mounted - double click to mount"
 msgstr "N'est ket savet - daouglikañ evit sevel"
 
-#: internet/vksearchdialog.cpp:94
+#: internet/vk/vksearchdialog.cpp:93
 msgid "Nothing found"
-msgstr ""
+msgstr "N'eo bet kavet netra"
 
-#: ../bin/src/ui_notificationssettingspage.h:432
+#: ../bin/src/ui_notificationssettingspage.h:438
 msgid "Notification type"
 msgstr "Doare kemenn"
 
-#: ../bin/src/ui_notificationssettingspage.h:375
+#: ../bin/src/ui_notificationssettingspage.h:381
 msgid "Notifications"
 msgstr "Kemenadennoù"
 
@@ -3375,41 +3540,45 @@ msgstr "Kemenadennoù"
 msgid "Now Playing"
 msgstr "O seniñ"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr "Niver a rannoù da ziskouez"
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "Rakwel an OSD"
 
-#: widgets/osd.cpp:169
+#: widgets/osd.cpp:173
 msgid "Off"
-msgstr ""
+msgstr "Off"
 
-#: core/song.cpp:387 transcoder/transcoder.cpp:241
+#: core/song.cpp:401 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:393 transcoder/transcoder.cpp:247
+#: core/song.cpp:407 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:389 transcoder/transcoder.cpp:244
+#: core/song.cpp:403 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:391 transcoder/transcoder.cpp:238
+#: core/song.cpp:405 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: widgets/osd.cpp:169
+#: widgets/osd.cpp:173
 msgid "On"
-msgstr ""
+msgstr "On"
 
 #: ../bin/src/ui_skydrivesettingspage.h:103
 msgid "OneDrive"
-msgstr ""
+msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3417,7 +3586,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Asantiñ kennaskadennoù o tont eus an arvalien er rummadoù IP-se hepken :⏎ 10.x.x.x⏎ 172.16.0.0 - 172.31.255.255⏎ 192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "Aotren ar c'hennaskoù eus ar rouedad lec'hel nemetken"
 
@@ -3429,59 +3598,66 @@ msgstr "Diskouez an hini kentañ nemetken"
 msgid "Opacity"
 msgstr "Demerez"
 
-#: internet/digitallyimportedservicebase.cpp:172
-#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
-#: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
+#: internet/digitally/digitallyimportedservicebase.cpp:176
+#: internet/grooveshark/groovesharkservice.cpp:559
+#: internet/icecast/icecastservice.cpp:302
+#: internet/jamendo/jamendoservice.cpp:434
+#: internet/magnatune/magnatuneservice.cpp:284
+#: internet/somafm/somafmservice.cpp:102
+#: internet/soundcloud/soundcloudservice.cpp:351
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Digeriñ %1 er merdeer"
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:676
 msgid "Open &audio CD..."
 msgstr "Lenn ur CD &audio"
 
-#: podcasts/addpodcastdialog.cpp:235
+#: internet/podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "Digeriñ ur restr OPML"
 
-#: podcasts/addpodcastdialog.cpp:77
+#: internet/podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "Digeriñ ur restr OPML..."
+
+#: transcoder/transcodedialog.cpp:234
+msgid "Open a directory to import music from"
+msgstr "Digeriñ ur c'havlec'h evit enporzhiañ ar sonerezh dioutañ"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
 msgstr "Digeriñ an drobarzhell"
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:675
 msgid "Open file..."
 msgstr "Digeriñ ur restr..."
 
-#: internet/googledriveservice.cpp:193
+#: internet/googledrive/googledriveservice.cpp:216
 msgid "Open in Google Drive"
 msgstr "Digeriñ e-barzh Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:460
-#: internet/internetservice.cpp:75 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Digerin en ur roll seniñ nevez"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:275
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
-msgstr ""
+msgstr "Digeriñ en ur roll-seniñ nevez"
 
-#: songinfo/echonestbiographies.cpp:97
+#: songinfo/echonestbiographies.cpp:101
 msgid "Open in your browser"
-msgstr ""
+msgstr "Digeriñ en ho merdeer"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:178
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
 msgid "Open..."
 msgstr "Digeriñ..."
 
-#: internet/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:236
 msgid "Operation failed"
 msgstr "Oberiadenn c'hwitet"
 
@@ -3493,7 +3669,8 @@ msgstr "Gwelladenn ar fonnder"
 msgid "Optimize for quality"
 msgstr "Gwelladenn ar perzhded"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "Dibarzhioù..."
 
@@ -3501,15 +3678,15 @@ msgstr "Dibarzhioù..."
 msgid "Opus"
 msgstr "Opus"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "Aozañ ar restroù"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:598
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
 msgid "Organise files..."
 msgstr "Aozañ ar restroù..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "Oc'h aozañ ar restroù"
 
@@ -3517,7 +3694,7 @@ msgstr "Oc'h aozañ ar restroù"
 msgid "Original tags"
 msgstr "Klavioù orin"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Other options"
 msgstr "Dibarzhioù all"
 
@@ -3529,7 +3706,7 @@ msgstr "Ezkas"
 msgid "Output device"
 msgstr "Trobarzhell ezkas"
 
-#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_ripcd.h:318
+#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcd.h:318
 msgid "Output options"
 msgstr "Dibarzhioù ezkas"
 
@@ -3537,7 +3714,7 @@ msgstr "Dibarzhioù ezkas"
 msgid "Overwrite all"
 msgstr "Skrivañ war pep tra"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "Flastrañ ar restroù a vez diouto dija"
 
@@ -3549,7 +3726,7 @@ msgstr "Skrivañ war ar re bihanoc'h nemetken"
 msgid "Owner"
 msgstr "Perc'henn"
 
-#: internet/jamendoservice.cpp:222
+#: internet/jamendo/jamendoservice.cpp:228
 msgid "Parsing Jamendo catalogue"
 msgstr "O tielfennañ katalog Jamendo"
 
@@ -3561,26 +3738,27 @@ msgstr "Fest"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
+#: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
 msgstr "Ger-tremen"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1007 ui/mainwindow.cpp:1448
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Ehan"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Pause playback"
 msgstr "Ehan al lenn"
 
-#: widgets/osd.cpp:153
+#: widgets/osd.cpp:156
 msgid "Paused"
 msgstr "Ehanet"
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:66
-#: ../bin/src/ui_edittagdialog.h:690
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:66
+#: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "Soner"
 
@@ -3592,31 +3770,31 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Bareen gostez simpl"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:570 ui/mainwindow.cpp:977
-#: ui/mainwindow.cpp:994 ui/mainwindow.cpp:1451 ui/qtsystemtrayicon.cpp:164
-#: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:638
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
+#: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
+#: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
 msgstr "Lenn"
 
-#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1334 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "Konter selaouadennoù"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:151
 msgid "Play if stopped, pause if playing"
 msgstr "Lenn pe ehan, hervez ar stad"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:267
+#: ../bin/src/ui_behavioursettingspage.h:281
 msgid "Play if there is nothing already playing"
 msgstr "Lenn ma vez netra all o vezañ lennet"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
 msgstr "Seniñ an <n>vet roud eus ar roll seniñ"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "Lenn/Ehan"
 
@@ -3624,21 +3802,22 @@ msgstr "Lenn/Ehan"
 msgid "Playback"
 msgstr "Lenn sonerezh"
 
-#: core/commandlineoptions.cpp:143
+#: core/commandlineoptions.cpp:149
 msgid "Player options"
 msgstr "Dibarzhioù al lenner"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Roll seniñ"
 
-#: widgets/osd.cpp:176
+#: widgets/osd.cpp:180
 msgid "Playlist finished"
 msgstr "Roll seniñ echuet"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:95
 msgid "Playlist options"
 msgstr "Dibarzhioù ar roll seniñ"
 
@@ -3646,8 +3825,8 @@ msgstr "Dibarzhioù ar roll seniñ"
 msgid "Playlist type"
 msgstr "Doare ar roll seniñ"
 
-#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:235
+#: internet/grooveshark/groovesharkservice.cpp:654
+#: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Rolloù seniñ"
 
@@ -3659,7 +3838,8 @@ msgstr "Klozit ho merdeer ha deuit en-dro war Clementine mar plij."
 msgid "Plugin status:"
 msgstr "Stad an enlugellad"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: internet/podcasts/podcastservice.cpp:131
+#: ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "Podkastoù"
 
@@ -3667,24 +3847,24 @@ msgstr "Podkastoù"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/grooveshark/groovesharkservice.cpp:591
 msgid "Popular songs"
 msgstr "Tonioù brudet"
 
-#: internet/groovesharkservice.cpp:590
+#: internet/grooveshark/groovesharkservice.cpp:595
 msgid "Popular songs of the Month"
 msgstr "Tonioù brudet ar miz-mañ"
 
-#: internet/groovesharkservice.cpp:599
+#: internet/grooveshark/groovesharkservice.cpp:604
 msgid "Popular songs today"
 msgstr "Tonioù brudet hiziv"
 
-#: ../bin/src/ui_notificationssettingspage.h:438
+#: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Padelezh ar popup"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "Porzh"
 
@@ -3692,15 +3872,19 @@ msgstr "Porzh"
 msgid "Pre-amp"
 msgstr "Rak-ampled"
 
+#: ../bin/src/ui_seafilesettingspage.h:177
+msgid "Preference"
+msgstr "Gwellvezioù"
+
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_vksettingspage.h:214 ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "Gwellvezioù"
 
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:665
 msgid "Preferences..."
 msgstr "Gwellvezioù..."
 
@@ -3741,13 +3925,13 @@ msgstr "Pouezit war un douchenn"
 msgid "Press a key combination to use for %1..."
 msgstr "Pouezit war ur kombinadenn touchennoù evit implij %1"
 
-#: ../bin/src/ui_notificationssettingspage.h:451
+#: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
 msgstr "Dibarzhioù an OSD brav"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
-#: ../bin/src/ui_notificationssettingspage.h:446
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_notificationssettingspage.h:453
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "Rakwel"
 
@@ -3755,12 +3939,12 @@ msgstr "Rakwel"
 msgid "Previous"
 msgstr "A-raok"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:636
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "Roud a-raok"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "Diskouez titouroù an handelv"
 
@@ -3768,18 +3952,18 @@ msgstr "Diskouez titouroù an handelv"
 msgid "Profile"
 msgstr "Aelad"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcd.h:324
+#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcd.h:324
 msgid "Progress"
 msgstr "Enraog"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
 msgctxt "Category label"
 msgid "Progress"
-msgstr ""
+msgstr "Enraog"
 
 #: ui/equalizer.cpp:138
 msgid "Psychedelic"
-msgstr ""
+msgstr "Psykedelik"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 #: wiimotedev/wiimotesettingspage.cpp:239
@@ -3796,27 +3980,27 @@ msgstr "Lakaat an tonioù en un urzh dre zegouezh"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "Perzhded"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "Perzhded"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
 msgstr "Goulennadeg trobarzhell"
 
-#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:701
 msgid "Queue Manager"
 msgstr "Merour listenn c'hortoz"
 
-#: ui/mainwindow.cpp:1543
+#: ui/mainwindow.cpp:1574
 msgid "Queue selected tracks"
 msgstr "Lakaat ar roudoù da heul"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1541
+#: ui/mainwindow.cpp:1572
 msgid "Queue track"
 msgstr "Lakaat ar roud da heul"
 
@@ -3824,77 +4008,79 @@ msgstr "Lakaat ar roud da heul"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Skingomz (Ampled kevatal evit an holl roudoù)"
 
-#: internet/groovesharkservice.cpp:608
+#: internet/grooveshark/groovesharkservice.cpp:613
 msgid "Radios"
 msgstr "Skingomzoù"
 
-#: core/backgroundstreams.cpp:28
+#: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Glav"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:678
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
-msgstr ""
+msgstr "Glav"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
 msgstr "Heweladur dargouezhek"
 
-#: core/globalshortcuts.cpp:75
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 0 stars"
 msgstr "Lakaat 0 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:77
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 1 star"
 msgstr "Lakaat 1 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:79
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 2 stars"
 msgstr "Lakaat 2 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:81
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 3 stars"
 msgstr "Lakaat 3 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 4 stars"
 msgstr "Lakaat 4 steredenn evit an ton lennet"
 
-#: core/globalshortcuts.cpp:85
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 5 stars"
 msgstr "Lakaat 5 steredenn evit an ton lennet"
 
-#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "Notenn"
 
-#: internet/magnatunedownloaddialog.cpp:303 ui/albumcovermanager.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:305
+#: ui/albumcovermanager.cpp:218
 msgid "Really cancel?"
 msgstr "Sur oc'h da gaout c'hoant da nullañ"
 
-#: internet/subsonicsettingspage.cpp:136
+#: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Aet e biou ar vevenn adkas, gwiriekait kefluniadur ar servijer."
 
-#: internet/groovesharkservice.cpp:556
+#: internet/grooveshark/groovesharkservice.cpp:561
 msgid "Refresh"
 msgstr "Azbevaat"
 
-#: internet/jamendoservice.cpp:431 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:87
+#: internet/jamendo/jamendoservice.cpp:437
+#: internet/magnatune/magnatuneservice.cpp:287
+#: internet/subsonic/subsonicservice.cpp:109
 msgid "Refresh catalogue"
 msgstr "Hizivaat ar c'hatalog"
 
-#: internet/somafmservice.cpp:106
+#: internet/somafm/somafmservice.cpp:111
 msgid "Refresh channels"
 msgstr "Hizivaat ar c'hanolioù"
 
-#: internet/icecastservice.cpp:300
+#: internet/icecast/icecastservice.cpp:305
 msgid "Refresh station list"
 msgstr "Hizivat listenn ar savlec'hioù"
 
-#: internet/digitallyimportedservicebase.cpp:175
+#: internet/digitally/digitallyimportedservicebase.cpp:179
 msgid "Refresh streams"
 msgstr "Hizivaat al lanvioù"
 
@@ -3902,16 +4088,25 @@ msgstr "Hizivaat al lanvioù"
 msgid "Reggae"
 msgstr "Reggae"
 
+#: playlist/playlistsaveoptionsdialog.cpp:33
+#: ../bin/src/ui_behavioursettingspage.h:287
+msgid "Relative"
+msgstr "Relativel"
+
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
 msgstr "Kaout soñj eus fiñv ar Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:256
 msgid "Remember from last time"
 msgstr "Kaout soñj eus ar wech diwezhañ"
 
-#: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:100
+msgid "Remember my choice"
+msgstr "Kaout soñj eus va dibab"
+
+#: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:135
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Remove"
 msgstr "Tennañ"
 
@@ -3919,7 +4114,7 @@ msgstr "Tennañ"
 msgid "Remove action"
 msgstr "Tennañ an oberiadenn"
 
-#: ../bin/src/ui_mainwindow.h:706
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Remove duplicates from playlist"
 msgstr "Tennañ an tonioù doubl eus ar roll seniñ"
 
@@ -3927,23 +4122,25 @@ msgstr "Tennañ an tonioù doubl eus ar roll seniñ"
 msgid "Remove folder"
 msgstr "Tennañ an teuliad"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:310
+#: internet/grooveshark/groovesharkservice.cpp:549
+#: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Tennañ eus va sonerezh"
 
-#: internet/vkservice.cpp:296
+#: internet/vk/vkservice.cpp:302
 msgid "Remove from bookmarks"
-msgstr ""
+msgstr "Tennañ eus va merkoù-pajenn"
 
-#: internet/groovesharkservice.cpp:541
+#: internet/grooveshark/groovesharkservice.cpp:546
 msgid "Remove from favorites"
 msgstr "Tennañ eus an tonioù karetañ"
 
-#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:681
+#: internet/grooveshark/groovesharkservice.cpp:543
+#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Tennañ kuit eus ar roll seniñ"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "Tennañ ar roll seniñ"
 
@@ -3951,32 +4148,36 @@ msgstr "Tennañ ar roll seniñ"
 msgid "Remove playlists"
 msgstr "Tennañ ar rolloù seniñ"
 
-#: internet/groovesharkservice.cpp:1584
+#: ../bin/src/ui_mainwindow.h:717
+msgid "Remove unavailable tracks from playlist"
+msgstr "Tennañ an tonioù dihegerz eus ar roll-seniñ"
+
+#: internet/grooveshark/groovesharkservice.cpp:1570
 msgid "Removing songs from My Music"
 msgstr "Diverkañ tonioù eus va sonerezh"
 
-#: internet/groovesharkservice.cpp:1531
+#: internet/grooveshark/groovesharkservice.cpp:1518
 msgid "Removing songs from favorites"
 msgstr "Diverkañ tonioù eus va karetañ"
 
-#: internet/groovesharkservice.cpp:1381
+#: internet/grooveshark/groovesharkservice.cpp:1370
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Cheñch anv \"%1\" ar roll seniñ."
 
-#: internet/groovesharkservice.cpp:534
+#: internet/grooveshark/groovesharkservice.cpp:539
 msgid "Rename Grooveshark playlist"
 msgstr "Cheñch anv roll seniñ Grooveshark"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "Adenvel ar roll seniñ"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "Adenvel ar roll seniñ..."
 
-#: ../bin/src/ui_mainwindow.h:657
+#: ../bin/src/ui_mainwindow.h:661
 msgid "Renumber tracks in this order..."
 msgstr "Adniverenniñ ar roudoù en urzh-mañ..."
 
@@ -3984,29 +4185,29 @@ msgstr "Adniverenniñ ar roudoù en urzh-mañ..."
 msgid "Repeat"
 msgstr "Adlenn"
 
-#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:312 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
 msgstr "Adlenn an albom"
 
-#: widgets/osd.cpp:311 ../bin/src/ui_playlistsequence.h:106
+#: widgets/osd.cpp:315 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
 msgstr "Adlenn ar roll seniñ"
 
-#: widgets/osd.cpp:305 ../bin/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:309 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
 msgstr "Adlenn an ton"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:456
-#: internet/internetservice.cpp:64 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Eillec'hiañ ar roll seniñ lennet"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Replace the playlist"
 msgstr "Eillec'hiañ ar roll seniñ"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "Eillec'hiañ esaoù gant is-linennoù"
 
@@ -4022,40 +4223,40 @@ msgstr "Doare Replay Gain"
 msgid "Repopulate"
 msgstr "Adpoblañ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "Ezhomm 'zo eus ur c'hod kennaskañ"
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "Adderaouiñ"
 
-#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:665
+#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:668
 msgid "Reset play counts"
 msgstr "Adderaouiñ ar konter lennadennoù"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Adkregiñ ar roud, pe lenn ar roud a-raok m'eo kroget abaoe 8 eilenn pe nebeutoc'h."
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "Bevenniñ ouzh an arouezennoù ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:257
 msgid "Resume playback on start"
 msgstr "Kenderc'hel da seniñ pa grog ar poellad"
 
-#: internet/groovesharkservice.cpp:789
+#: internet/grooveshark/groovesharkservice.cpp:795
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Oc'h adkavout tonioù \"My Music\" Grooveshark."
 
-#: internet/groovesharkservice.cpp:756
+#: internet/grooveshark/groovesharkservice.cpp:762
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "O taspugnat ho tonioù Grooveshark karetañ"
 
-#: internet/groovesharkservice.cpp:688
+#: internet/grooveshark/groovesharkservice.cpp:693
 msgid "Retrieving Grooveshark playlists"
 msgstr "O taspugnat rolloù seniñ Grooveshark"
 
@@ -4069,15 +4270,15 @@ msgstr "Dehou"
 
 #: ../bin/src/ui_ripcd.h:303
 msgid "Rip"
-msgstr ""
+msgstr "Eztennañ"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:114
 msgid "Rip CD"
-msgstr ""
+msgstr "Eztennañ ar bladenn"
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:716
 msgid "Rip audio CD..."
-msgstr ""
+msgstr "Eztennan ar bladenn aodio"
 
 #: ui/equalizer.cpp:142
 msgid "Rock"
@@ -4091,7 +4292,7 @@ msgstr "Seveniñ"
 msgid "SOCKS proxy"
 msgstr "SOCKS proksi"
 
-#: internet/subsonicsettingspage.cpp:125
+#: internet/subsonic/subsonicsettingspage.cpp:146
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
@@ -4101,11 +4302,11 @@ msgstr "Kudenn er c'hennask SSL, gwiriekait kefluniadur ar servijer. An arventen
 msgid "Safely remove device"
 msgstr "Tennañ an drobarzhell diarvar"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Tennañ an drobarzhell diarvar goude an eilañ"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "Standilhonañ"
 
@@ -4132,14 +4333,14 @@ msgstr "Enrollañ ar skeudenn"
 #: playlist/playlistlistcontainer.cpp:72
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr ""
+msgstr "Enrollañ ar roll-seniñ"
 
-#: playlist/playlistmanager.cpp:223
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
-msgstr ""
+msgstr "Enrollañ ar roll seniñ"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:689
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "Enrollañ ar roll seniñ..."
 
@@ -4159,7 +4360,7 @@ msgstr "Enrollañ ar stadegoù e klav ar restr pa 'z eo posupl"
 msgid "Save this stream in the Internet tab"
 msgstr "Enrollañ al lanv-mañ en ivinell internet"
 
-#: library/library.cpp:177
+#: library/library.cpp:196
 msgid "Saving songs statistics into songs files"
 msgstr "O enrollañ stadegoù an tonioù e restr an tonioù"
 
@@ -4175,7 +4376,7 @@ msgstr "Aelad ar feur standilhonañ (SSR)"
 msgid "Scale size"
 msgstr "Cheñch ar ment"
 
-#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "Poentoù"
 
@@ -4183,36 +4384,40 @@ msgstr "Poentoù"
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobble ar roudoù selaouet ganin"
 
+#: ../bin/src/ui_seafilesettingspage.h:165
+msgid "Seafile"
+msgstr "Seafile"
+
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
-#: internet/vkservice.cpp:512 ../bin/src/ui_gpoddersearchpage.h:78
-#: ../bin/src/ui_itunessearchpage.h:78 ../bin/src/ui_albumcoversearcher.h:114
+#: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
 msgid "Search"
 msgstr "Klask"
 
-#: ui/mainwindow.cpp:230 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:145
 msgctxt "Global search settings dialog title."
 msgid "Search"
-msgstr ""
+msgstr "Klask"
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
 msgstr "Klask war savlec'hioù Icecast"
 
-#: internet/jamendoservice.cpp:438
+#: internet/jamendo/jamendoservice.cpp:444
 msgid "Search Jamendo"
 msgstr "Klask Jamendo"
 
-#: internet/magnatuneservice.cpp:288
+#: internet/magnatune/magnatuneservice.cpp:296
 msgid "Search Magnatune"
 msgstr "Klask Magnatune"
 
-#: internet/subsonicservice.cpp:71
+#: internet/subsonic/subsonicservice.cpp:93
 msgid "Search Subsonic"
 msgstr "Klask Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search automatically"
-msgstr ""
+msgstr "Klask ent emgefreek"
 
 #: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
@@ -4238,8 +4443,9 @@ msgstr "Doare klask"
 msgid "Search options"
 msgstr "Dibarzhioù klask"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
-#: internet/spotifyservice.cpp:357
+#: internet/grooveshark/groovesharkservice.cpp:582
+#: internet/soundcloud/soundcloudservice.cpp:116
+#: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
 msgstr "Disoc'hoù an enklask"
 
@@ -4248,27 +4454,27 @@ msgstr "Disoc'hoù an enklask"
 msgid "Search terms"
 msgstr "Gerioù enklask"
 
-#: internet/groovesharkservice.cpp:271
+#: internet/grooveshark/groovesharkservice.cpp:275
 msgid "Searching on Grooveshark"
 msgstr "O klask war Grooveshark"
 
-#: ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
 msgstr "EIl live"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr "Mont war gil"
 
-#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr "Mont war-raok"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Klask ar roud lennet gant ur sammad relativel"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Klask ar roud lennet gant ul lec'hiadur absolud"
 
@@ -4304,13 +4510,17 @@ msgstr "Diuzañ heweladurioù"
 msgid "Select visualizations..."
 msgstr "Diuzañ heweladurioù..."
 
-#: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
+#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
-msgstr ""
+msgstr "Diuzañ..."
 
 #: devices/devicekitlister.cpp:126
 msgid "Serial number"
 msgstr "Niver heuliad"
+
+#: ../bin/src/ui_seafilesettingspage.h:174
+msgid "Server"
+msgstr "Servijer"
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
@@ -4320,26 +4530,26 @@ msgstr "URL ar servijer"
 msgid "Server details"
 msgstr "Munudoù ar servijer"
 
-#: internet/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:242
 msgid "Service offline"
 msgstr "Servij ezlinenn"
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1611
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Termeniñ %1 d'an talvoud %2..."
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Termeniñ an ampled da <value> dre gant"
 
-#: ../bin/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:662
 msgid "Set value for all selected tracks..."
 msgstr "Lakaat un talvoud evit an holll roudoù diuzet"
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
-msgstr "Gwellvezioù"
+msgstr "Arventennoù"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:183
 msgid "Shortcut"
@@ -4360,7 +4570,7 @@ msgstr "Berradenn evit %1 a zo dija anezhañ"
 msgid "Show"
 msgstr "Diskouez"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "Diskouez OSD"
 
@@ -4372,31 +4582,35 @@ msgstr "Lugerniñ ar roud o vezañ lennet"
 msgid "Show a moodbar in the track progress bar"
 msgstr "Diskouez ar varenn imor el lenner"
 
-#: ../bin/src/ui_notificationssettingspage.h:434
+#: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Show a native desktop notification"
 msgstr "Implij reizhad kemenadenn ar burev"
 
-#: ../bin/src/ui_notificationssettingspage.h:442
+#: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "Diskouez ur gemennadenn pa cheñchan an doare adlenn/meskañ"
 
-#: ../bin/src/ui_notificationssettingspage.h:441
+#: ../bin/src/ui_notificationssettingspage.h:447
 msgid "Show a notification when I change the volume"
 msgstr "Diskouez ur gemennadenn pa cheñchan an ampled"
 
-#: ../bin/src/ui_notificationssettingspage.h:436
+#: ../bin/src/ui_notificationssettingspage.h:449
+msgid "Show a notification when I pause playback"
+msgstr "Diskouez ur gemennadenn pa ehanan ar sonadenn"
+
+#: ../bin/src/ui_notificationssettingspage.h:442
 msgid "Show a popup from the system tray"
 msgstr "Diskouez ur popup e-kichen ar zonenn kemenadennoù"
 
-#: ../bin/src/ui_notificationssettingspage.h:435
+#: ../bin/src/ui_notificationssettingspage.h:441
 msgid "Show a pretty OSD"
 msgstr "Diskouez un OSD brav"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Diskouez a-us d'ar varenn stad"
 
-#: ui/mainwindow.cpp:538
+#: ui/mainwindow.cpp:552
 msgid "Show all songs"
 msgstr "Diskouez an holl tonioù"
 
@@ -4416,34 +4630,38 @@ msgstr "Diskouez an dispartierien"
 msgid "Show fullsize..."
 msgstr "Diskouez er ment gwirion..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
-msgstr ""
+msgstr "Diskouez ar strolladoù e disoc'hoù an enklask hollek"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:607
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Diskouez er merdeer retroù"
 
-#: ui/mainwindow.cpp:610
+#: ui/mainwindow.cpp:624
 msgid "Show in library..."
-msgstr ""
+msgstr "Diskouez er sonaoueg"
 
 #: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "Diskouez e \"Arzourien Liesseurt\""
 
-#: moodbar/moodbarproxystyle.cpp:371
+#: moodbar/moodbarproxystyle.cpp:377
 msgid "Show moodbar"
 msgstr "Diskouez ar varenn imor"
 
-#: ui/mainwindow.cpp:540
+#: ui/mainwindow.cpp:554
 msgid "Show only duplicates"
 msgstr "Diskouez an doublennoù nemetken"
 
-#: ui/mainwindow.cpp:542
+#: ui/mainwindow.cpp:556
 msgid "Show only untagged"
 msgstr "Diskouez an tonioù hep klav nemetken"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr "Diskouez an ton o vezañ lennet war ho bajenn"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -4451,13 +4669,13 @@ msgstr "Diskouez alioù enklask."
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" button"
-msgstr ""
+msgstr "Diskouez ar bouton \"karout\""
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
 msgstr "Diskouez ar bouton scrobbling er prenestr pennañ"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:244
 msgid "Show tray icon"
 msgstr "Diskouez an ikon er zonenn kemenadennoù"
 
@@ -4465,7 +4683,7 @@ msgstr "Diskouez an ikon er zonenn kemenadennoù"
 msgid "Show which sources are enabled and disabled"
 msgstr "Diskouez peseurt mamenn a zo gweredekaet ha pe re a zo diweredekaet."
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:66
 msgid "Show/Hide"
 msgstr "DIskouez/Kuzhañ"
 
@@ -4473,23 +4691,23 @@ msgstr "DIskouez/Kuzhañ"
 msgid "Shuffle"
 msgstr "Meskañ"
 
-#: widgets/osd.cpp:290 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
 msgstr "Meskañ an albomoù"
 
-#: widgets/osd.cpp:284 ../bin/src/ui_playlistsequence.h:109
+#: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
 msgstr "Meskañ an holl"
 
-#: ../bin/src/ui_mainwindow.h:665
+#: ../bin/src/ui_mainwindow.h:669
 msgid "Shuffle playlist"
 msgstr "Meskañ ar roll seniñ"
 
-#: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:108
+#: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
 msgstr "Meskañ an tonioù war an albom-mañ"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "Kennaskañ"
 
@@ -4517,27 +4735,27 @@ msgstr "Ment:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Mont a-drek er roll seniñ"
 
-#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "Konter tonioù lammet"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Mont dirak er roll seniñ"
 
-#: ui/mainwindow.cpp:1554
+#: ui/mainwindow.cpp:1585
 msgid "Skip selected tracks"
-msgstr ""
+msgstr "Tremen ar roudoù diuzet"
 
-#: ui/mainwindow.cpp:1552
+#: ui/mainwindow.cpp:1583
 msgid "Skip track"
-msgstr ""
+msgstr "Tremen ar roud"
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "Golo album bihan"
 
@@ -4549,7 +4767,7 @@ msgstr "Barenn gostez bihan"
 msgid "Smart playlist"
 msgstr "Roll seniñ speredek"
 
-#: library/librarymodel.cpp:1228
+#: library/librarymodel.cpp:1280
 msgid "Smart playlists"
 msgstr "Rolloù seniñ speredek"
 
@@ -4565,11 +4783,11 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Titouroù an ton"
 
-#: ui/mainwindow.cpp:243
+#: ui/mainwindow.cpp:249
 msgid "Song info"
 msgstr "Titouroù an ton"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:32
 msgid "Sonogram"
 msgstr "Sonogram"
 
@@ -4591,7 +4809,7 @@ msgstr "Urzhian dre anv savlec'h"
 
 #: ../bin/src/ui_groovesharksettingspage.h:146
 msgid "Sort playlists songs alphabetically"
-msgstr ""
+msgstr "Urzhiañ tonioù ar roll-seniñ en urzh alfabetek"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
@@ -4603,13 +4821,14 @@ msgstr "Urzhiañ"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:104
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1356
+#: playlist/playlist.cpp:1364
 msgid "Source"
 msgstr "Mammenn"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
+#: ../bin/src/ui_internetshowsettingspage.h:88
 msgid "Sources"
 msgstr "Mammennoù"
 
@@ -4621,59 +4840,68 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:190
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "Kudenn kennaskañ gant Spotify"
+
+#: internet/spotify/spotifyservice.cpp:835
+msgid "Spotify playlist's URL"
+msgstr "URL roll-seniñ Spotify"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "Enlugellad Spotify"
 
-#: internet/spotifyblobdownloader.cpp:64
+#: internet/spotify/spotifyblobdownloader.cpp:66
 msgid "Spotify plugin not installed"
 msgstr "Enlugellad Spotify n'eo ket staliet"
+
+#: internet/spotify/spotifyservice.cpp:826
+msgid "Spotify song's URL"
+msgstr "URL ton Spotify"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
 msgstr "Boaz"
 
-#: internet/spotifyservice.cpp:365
+#: internet/spotify/spotifyservice.cpp:414
 msgid "Starred"
 msgstr "Karetañ"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:86
 msgid "Start ripping"
-msgstr ""
+msgstr "Kregiñ gant an eztennadenn"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
 msgstr "Kregiñ ar roll seniñ"
 
-#: transcoder/transcodedialog.cpp:87
+#: transcoder/transcodedialog.cpp:89
 msgid "Start transcoding"
 msgstr "Kregin an transkodiñ"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
-#: internet/spotifyservice.cpp:359
+#: internet/grooveshark/groovesharkservice.cpp:584
+#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/spotify/spotifyservice.cpp:408
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
 msgstr "Krogit da skrivañ un dra bennak er boest enklask a-us evit leuniañ listenn an disoc'hoù."
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "O kregiñ %1"
 
-#: internet/magnatunedownloaddialog.cpp:122
+#: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "O kregiñ..."
 
-#: internet/groovesharkservice.cpp:612
+#: internet/grooveshark/groovesharkservice.cpp:617
 msgid "Stations"
 msgstr "Savlec'hioù"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:640
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "Paouez"
@@ -4682,32 +4910,32 @@ msgstr "Paouez"
 msgid "Stop after"
 msgstr "Paouez goude"
 
-#: ui/mainwindow.cpp:573 ../bin/src/ui_mainwindow.h:646
+#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "Paouez goude ar roud-mañ"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Paouez goude vefe lennet an ton"
 
-#: core/globalshortcuts.cpp:51
+#: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
 msgstr "Paouez goude ar roud lennet"
 
-#: widgets/osd.cpp:169
+#: widgets/osd.cpp:173
 #, qt-format
 msgid "Stop playing after track: %1"
-msgstr ""
+msgstr "Paouez da lenn goude ar roud : %1"
 
-#: widgets/osd.cpp:163
+#: widgets/osd.cpp:167
 msgid "Stopped"
 msgstr "Paouezet"
 
-#: core/song.cpp:404
+#: core/song.cpp:418
 msgid "Stream"
 msgstr "Lanv"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonic/subsonicsettingspage.cpp:50
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4717,7 +4945,7 @@ msgstr "Evit implij ar streaming adalek ur servijer Subsonic goude an 30 devezh 
 msgid "Streaming membership"
 msgstr "Izili streaming"
 
-#: internet/groovesharkservice.cpp:653
+#: internet/grooveshark/groovesharkservice.cpp:658
 msgid "Subscribed playlists"
 msgstr "Rollioù seniñ koumanantet"
 
@@ -4725,7 +4953,8 @@ msgstr "Rollioù seniñ koumanantet"
 msgid "Subscribers"
 msgstr "Koumananterien"
 
-#: internet/subsonicservice.cpp:98 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonic/subsonicservice.cpp:120
+#: ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4733,7 +4962,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Berzh !"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 skrivet"
@@ -4742,12 +4971,12 @@ msgstr "%1 skrivet"
 msgid "Suggested tags"
 msgstr "Klavioù atizet"
 
-#: ../bin/src/ui_edittagdialog.h:681
-#: ../bin/src/ui_notificationssettingspage.h:448
+#: ../bin/src/ui_edittagdialog.h:684
+#: ../bin/src/ui_notificationssettingspage.h:455
 msgid "Summary"
 msgstr "Taolenn"
 
-#: analyzers/analyzercontainer.cpp:64
+#: analyzers/analyzercontainer.cpp:70
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
@@ -4765,15 +4994,15 @@ msgstr "Mentrezhoù restr kemeret e kont"
 msgid "Synchronize statistics to files now"
 msgstr "Gourbediñ bremañ ar stadegoù er restroù"
 
-#: internet/spotifyservice.cpp:579
+#: internet/spotify/spotifyservice.cpp:699
 msgid "Syncing Spotify inbox"
 msgstr "Sinkronizadur ar boest degemer Spotify"
 
-#: internet/spotifyservice.cpp:573
+#: internet/spotify/spotifyservice.cpp:693
 msgid "Syncing Spotify playlist"
 msgstr "Sinkronizadur ar roll seniñ Spotify"
 
-#: internet/spotifyservice.cpp:584
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify starred tracks"
 msgstr "Sinkronizadur tonioù gwellañ Spotify"
 
@@ -4797,7 +5026,7 @@ msgstr "Fonnder tizhet"
 msgid "Techno"
 msgstr "Tekno"
 
-#: ../bin/src/ui_notificationssettingspage.h:460
+#: ../bin/src/ui_notificationssettingspage.h:467
 msgid "Text options"
 msgstr "Dibarzhioù an testenn"
 
@@ -4814,7 +5043,7 @@ msgstr "An urzh \"%1\" ne c'hell ket bezañ kroget."
 msgid "The album cover of the currently playing song"
 msgstr "Golo an albom o vezañ lennet"
 
-#: internet/magnatunedownloaddialog.cpp:92
+#: internet/magnatune/magnatunedownloaddialog.cpp:94
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "An teuliad %1 a zo direizh"
@@ -4831,13 +5060,13 @@ msgstr "Ar lec'hienn goulennet n'eus ket dioutañ"
 msgid "The site you requested is not an image!"
 msgstr "Al lec'hienn goulennet n'eo ket ur skeudenn"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonic/subsonicsettingspage.cpp:116
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Ar mare amprouiñ evit ar servijer Subsonic a zo echuet. Roit arc'hant evit kaout un alc'hwez lañvaz mar plij. KIt war subsonic.org evit ar munudoù."
 
-#: ui/mainwindow.cpp:2373
+#: ui/mainwindow.cpp:2404
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4847,16 +5076,17 @@ msgstr "Handelv nevez Clementine a c'houlenn ma vefe hizivaet ho sonaoueg evit k
 msgid "There are other songs in this album"
 msgstr "Tonioù all a zo en album-mañ"
 
-#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
-#: podcasts/gpoddertoptagspage.cpp:70
+#: internet/podcasts/gpoddersearchpage.cpp:76
+#: internet/podcasts/gpoddertoptagsmodel.cpp:104
+#: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Ur gudenn a zo bet e-pad an eskemm gant gpodder.net"
 
-#: internet/magnatunedownloaddialog.cpp:161
+#: internet/magnatune/magnatunedownloaddialog.cpp:163
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Ur gudenn a zo savet evit kaout metaroadennoù adalek Magnatune"
 
-#: podcasts/itunessearchpage.cpp:75
+#: internet/podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Ur gudenn a zo bet o lenn respont ar servij iTunes"
 
@@ -4878,7 +5108,7 @@ msgid ""
 "continue?"
 msgstr "Ar restroù-mañ a vo diverket eus an drobarzhell, sur oc'h da gaout c'hoant kenderc'hel ?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2161 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2192 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4894,19 +5124,23 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "An arventennoù-se a zo implijet e \"Transkodañ ar sonerezh\", ha pa vez treuzkemmet sonerezh a-raok lakaat anezhi war un drobarzhell."
 
-#: ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:155
 msgid "Third level"
 msgstr "Trede live"
 
-#: internet/jamendoservice.cpp:176
+#: internet/jamendo/jamendoservice.cpp:181
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr "Kement-se a krouo ur stlennvon 150Me tamm-pe-damm. Ha sur oc'h kenderc'hel ?"
 
-#: internet/magnatunedownloaddialog.cpp:188
+#: internet/magnatune/magnatunedownloaddialog.cpp:190
 msgid "This album is not available in the requested format"
 msgstr "N'ez eus ket eus an albom er mentrezh goulennet"
+
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:98
+msgid "This can be changed later through the preferences"
+msgstr "Tu vo deoc'h kemmañ an dra-se dre ar gwellvezioù "
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
@@ -4937,11 +5171,11 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "Ar wech kentañ eo e liammit un drobarzhell-mañ. Clementine a skanno an drobarzhell a-benn kavout sonerezh - gellout a ra kemer amzer."
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Ar arventenn-mañ a c'hell bezañ kemmet e rann \"Emzalc'h\" ar gwellvezioù"
 
-#: internet/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:244
 msgid "This stream is for paid subscribers only"
 msgstr "Al lanv-mañ a zo evit an izili o deus paet."
 
@@ -4950,24 +5184,24 @@ msgstr "Al lanv-mañ a zo evit an izili o deus paet."
 msgid "This type of device is not supported: %1"
 msgstr "An doare trobarzhell-mañ n'eo ket meret :%1"
 
-#: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
-#: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "Titl"
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/grooveshark/groovesharkservice.cpp:1055
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
 msgstr "Evit kregiñ ur skingomz Grooveshark, gwelloc'h vefe deoc'h selaou ouzh un nebeud tonioù Grooveshark all"
 
-#: core/utilities.cpp:127 core/utilities.cpp:139
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Hiziv"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:69
 msgid "Toggle Pretty OSD"
 msgstr "Gweredekaat/Diweredekaat an OSD brav"
 
@@ -4975,27 +5209,27 @@ msgstr "Gweredekaat/Diweredekaat an OSD brav"
 msgid "Toggle fullscreen"
 msgstr "Tremen e skramm leun"
 
-#: ui/mainwindow.cpp:1545
+#: ui/mainwindow.cpp:1576
 msgid "Toggle queue status"
 msgstr "Cheñch stad al listenn c'hortoz"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Toggle scrobbling"
 msgstr "Cheñch ar scrobbling"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Gweredekaat/Diweredekaat an OSD brav"
 
-#: core/utilities.cpp:140
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "Warc'hoaz"
 
-#: podcasts/podcasturlloader.cpp:115
+#: internet/podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "Bet adkaset re a wech "
 
-#: internet/spotifyservice.cpp:377
+#: internet/spotify/spotifyservice.cpp:427
 msgid "Top tracks"
 msgstr "Top tonioù"
 
@@ -5003,25 +5237,25 @@ msgstr "Top tonioù"
 msgid "Total albums:"
 msgstr "Hollad an albomoù:"
 
-#: covers/coversearchstatisticsdialog.cpp:68
+#: covers/coversearchstatisticsdialog.cpp:70
 msgid "Total bytes transferred"
 msgstr "Niver a eizhbit treuzkaset"
 
-#: covers/coversearchstatisticsdialog.cpp:65
+#: covers/coversearchstatisticsdialog.cpp:67
 msgid "Total network requests made"
 msgstr "Niver a atersadennoù rouedad"
 
-#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:68
-#: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
+#: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
 msgstr "Roud"
 
-#: internet/soundcloudservice.cpp:134
+#: internet/soundcloud/soundcloudservice.cpp:133
 msgid "Tracks"
-msgstr ""
+msgstr "Roudoù"
 
-#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_transcodedialog.h:210 ../bin/src/ui_mainwindow.h:687
 msgid "Transcode Music"
 msgstr "Treuzkodañ Sonerezh"
 
@@ -5033,7 +5267,7 @@ msgstr "Renabl an transkoder"
 msgid "Transcoding"
 msgstr "Transkodiñ"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "O transkodiñ %1 restr oc'h implij %2 threads"
@@ -5042,11 +5276,11 @@ msgstr "O transkodiñ %1 restr oc'h implij %2 threads"
 msgid "Transcoding options"
 msgstr "Dibarzhioù transkodiñ"
 
-#: core/song.cpp:399
+#: core/song.cpp:413
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:35
 msgid "Turbine"
 msgstr "Turbin"
 
@@ -5058,7 +5292,7 @@ msgstr "Lazhañ"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL(où)"
 
@@ -5066,24 +5300,30 @@ msgstr "URL(où)"
 msgid "Ultra wide band (UWB)"
 msgstr "Bandenn ledan tre (UWB)"
 
-#: internet/magnatunedownloaddialog.cpp:147
+#: internet/seafile/seafilesettingspage.cpp:131
+#: internet/seafile/seafilesettingspage.cpp:132
+msgid "Unable to connect"
+msgstr "Dibosupl kennaskañ"
+
+#: internet/magnatune/magnatunedownloaddialog.cpp:149
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "N'eus ket tu pellgargañ %1 (%2)"
 
-#: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
-#: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
+#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "Dianav"
 
-#: podcasts/podcasturlloader.cpp:206
+#: internet/podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "Doare endalc'h dianavezet"
 
-#: internet/digitallyimportedclient.cpp:71 internet/lastfmservice.cpp:257
+#: internet/digitally/digitallyimportedclient.cpp:74
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Unknown error"
 msgstr "Kudenn dianav"
 
@@ -5091,15 +5331,16 @@ msgstr "Kudenn dianav"
 msgid "Unset cover"
 msgstr "Ar golo n'eo ket bet lakaet"
 
-#: ui/mainwindow.cpp:1550
+#: ui/mainwindow.cpp:1581
 msgid "Unskip selected tracks"
-msgstr ""
+msgstr "Nullañ tremen ar roudoù diuzet"
 
-#: ui/mainwindow.cpp:1548
+#: ui/mainwindow.cpp:1579
 msgid "Unskip track"
-msgstr ""
+msgstr "Nullañ tremen ar roud"
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: internet/podcasts/addpodcastdialog.cpp:68
+#: internet/podcasts/podcastservice.cpp:442
 msgid "Unsubscribe"
 msgstr "Digoumanantiñ"
 
@@ -5107,19 +5348,19 @@ msgstr "Digoumanantiñ"
 msgid "Upcoming Concerts"
 msgstr "Sonadegoù o-tont"
 
-#: internet/vkservice.cpp:326 internet/vkservice.cpp:330
+#: internet/vk/vkservice.cpp:332
 msgid "Update"
-msgstr ""
+msgstr "Hizivaat"
 
-#: internet/groovesharkservice.cpp:1238
+#: internet/grooveshark/groovesharkservice.cpp:1227
 msgid "Update Grooveshark playlist"
 msgstr "O hizivaat roll seniñ Grooveshark"
 
-#: podcasts/podcastservice.cpp:331
+#: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "Hizivaat ar podkastoù"
 
-#: ../bin/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:699
 msgid "Update changed library folders"
 msgstr "Hizivaat teuliadoù kemmet ar sonaoueg"
 
@@ -5127,11 +5368,11 @@ msgstr "Hizivaat teuliadoù kemmet ar sonaoueg"
 msgid "Update the library when Clementine starts"
 msgstr "Hizivaat ar sonaoueg pa grog Clementine"
 
-#: podcasts/podcastservice.cpp:339
+#: internet/podcasts/podcastservice.cpp:427
 msgid "Update this podcast"
 msgstr "Hizivaat ar podkast-mañ"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "Hizivadur"
 
@@ -5149,7 +5390,7 @@ msgstr "Hizivadenn %1%..."
 msgid "Updating library"
 msgstr "O hizivaat ar sonaoueg"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Implij"
 
@@ -5177,11 +5418,11 @@ msgstr "Implij ar Wii Remote"
 msgid "Use a custom color set"
 msgstr "Implij ur roll livioù personelaet"
 
-#: ../bin/src/ui_notificationssettingspage.h:445
+#: ../bin/src/ui_notificationssettingspage.h:452
 msgid "Use a custom message for notifications"
 msgstr "Implij ur kemenadennoù personelaet"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "Implijout ur pellurzhier rouedad"
 
@@ -5205,7 +5446,7 @@ msgstr "Implij ar c'hemennadennoù evit embann stad ar wiimote"
 msgid "Use temporal noise shaping"
 msgstr "Implij ar mod kemmañ ar sonioù evit ur mare"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:250
 msgid "Use the system default"
 msgstr "Implij yezh dre ziouer ar reizhad"
 
@@ -5215,7 +5456,7 @@ msgstr "Implij roll livioù dre ziouer ar reizhad"
 
 #: ../bin/src/ui_networkproxysettingspage.h:158
 msgid "Use the system proxy settings"
-msgstr "Implij dibarzhioù dre ziouer ar proksi"
+msgstr "Implij arventenoù dre ziouer ar proksi"
 
 #: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Use volume normalisation"
@@ -5225,12 +5466,12 @@ msgstr "Implij normalizadur an ampled"
 msgid "Used"
 msgstr "Implijet"
 
-#: internet/groovesharkservice.cpp:403
+#: internet/grooveshark/groovesharkservice.cpp:407
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "An implijer %1 n'en deus ket a kont Grooveshark Anywhere."
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:152
 msgid "User interface"
 msgstr "Etrefas implijer"
 
@@ -5238,12 +5479,12 @@ msgstr "Etrefas implijer"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Lezanv"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Using the menu to add a song will..."
 msgstr "Implij ar roll evit ouzhpennañ un ton a..."
 
@@ -5256,8 +5497,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Fonnder kemmus"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Arzourien Liesseurt"
 
@@ -5274,23 +5515,23 @@ msgstr "Gwelout"
 msgid "Visualization mode"
 msgstr "Doare heweladur"
 
-#: ../bin/src/ui_mainwindow.h:696 ui/dbusscreensaver.cpp:33
+#: ../bin/src/ui_mainwindow.h:700 ui/dbusscreensaver.cpp:33
 msgid "Visualizations"
 msgstr "Heweladurioù"
 
 #: ../bin/src/ui_visualisationoverlay.h:185
 msgid "Visualizations Settings"
-msgstr "Dibarzhioù  heweladurioù"
+msgstr "Arventennoù  heweladurioù"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
-msgstr ""
+msgstr "Vk.com"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
 msgstr "Dinoer aktivelezh mouezh"
 
-#: widgets/osd.cpp:182
+#: widgets/osd.cpp:186
 #, qt-format
 msgid "Volume %1%"
 msgstr "Ampled %1%"
@@ -5308,11 +5549,15 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: internet/vk/vkservice.cpp:860
+msgid "Wall"
+msgstr "Moger"
+
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "Gervel ac'hanon pa vez serret un ivinell roll seniñ"
 
-#: core/song.cpp:397 transcoder/transcoder.cpp:253
+#: core/song.cpp:411 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5324,7 +5569,7 @@ msgstr "Lec'hienn web"
 msgid "Weeks"
 msgstr "Sizhunvezhioù"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:253
 msgid "When Clementine starts"
 msgstr "Pa grog Clementine"
 
@@ -5333,6 +5578,10 @@ msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr "E-pad ma klask Clementine goloioù, implij a raio e penn kentañ ar restroù gant unan eus an anvioù-se. Ma n'eus ket diouto, Clementine a implijo skeudenn brasañ an teuliad."
+
+#: ../bin/src/ui_behavioursettingspage.h:284
+msgid "When saving a playlist, file paths should be"
+msgstr "Pa vez savetaet ur roll-seniñ, ar c'havlec'hioù a rank bezañ"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
@@ -5346,32 +5595,32 @@ msgstr "Tu zo deoc'h klask..."
 msgid "Wide band (WB)"
 msgstr "Bandenn ledan (WB)"
 
-#: widgets/osd.cpp:239
+#: widgets/osd.cpp:243
 #, qt-format
 msgid "Wii Remote %1: actived"
 msgstr "Wiimote %1: gweredekaet"
 
-#: widgets/osd.cpp:251
+#: widgets/osd.cpp:255
 #, qt-format
 msgid "Wii Remote %1: connected"
 msgstr "Wiimote %1: Kennasket"
 
-#: widgets/osd.cpp:270
+#: widgets/osd.cpp:274
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
 msgstr "Wiimote %1: energiezh kritikal (%2%)"
 
-#: widgets/osd.cpp:245
+#: widgets/osd.cpp:249
 #, qt-format
 msgid "Wii Remote %1: disactived"
 msgstr "Wiimote %1: diweredekaet"
 
-#: widgets/osd.cpp:257
+#: widgets/osd.cpp:261
 #, qt-format
 msgid "Wii Remote %1: disconnected"
 msgstr "Wiimote %1: Digennasket"
 
-#: widgets/osd.cpp:263
+#: widgets/osd.cpp:267
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "Wiimote %1: energiezh izel (%2%)"
@@ -5392,7 +5641,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:377 transcoder/transcoder.cpp:250
+#: core/song.cpp:391 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "ausio Windows Media"
 
@@ -5406,7 +5655,7 @@ msgid ""
 "well?"
 msgstr "Ha c'hoant ho peus lakaat tonioù all an albom-mañ e Arzourien Liesseurt ?"
 
-#: ui/mainwindow.cpp:2380
+#: ui/mainwindow.cpp:2411
 msgid "Would you like to run a full rescan right now?"
 msgstr "C'hoant ho peus d'ober ur c'hwilervadenn eus al levraoueg bremañ ?"
 
@@ -5414,19 +5663,23 @@ msgstr "C'hoant ho peus d'ober ur c'hwilervadenn eus al levraoueg bremañ ?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Skrivañ stadegoù an holl tonioù e restroù an tonioù"
 
-#: internet/subsonicsettingspage.cpp:80
+#: ../bin/src/ui_behavioursettingspage.h:289
+msgid "Write metadata"
+msgstr "Skrivañ ar meta-roadennoù"
+
+#: internet/subsonic/subsonicsettingspage.cpp:101
 msgid "Wrong username or password."
 msgstr "Anv-implijer pe ger-tremen fall."
 
-#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:71
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "Bloaz"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:164
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:166
 msgid "Year - Album"
 msgstr "Bloaz - Albom"
 
@@ -5434,7 +5687,7 @@ msgstr "Bloaz - Albom"
 msgid "Years"
 msgstr "Bloaz"
 
-#: core/utilities.cpp:128
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "Dec'h"
 
@@ -5448,7 +5701,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "Ha sur oc'h kaout c'hoant diverkañ %1 roll seniñ eus ho reoù karetañ ?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5471,13 +5724,13 @@ msgstr "Kennasket oc'h."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Tu zo deoc'h kemman an doare ma vo renket an tonioù er sonaoueg."
 
-#: internet/digitallyimportedsettingspage.cpp:45
+#: internet/digitally/digitallyimportedsettingspage.cpp:48
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "Tu zo deoc'h selaou digoust hep kont, met an izili Premium a c'hell selaou gant ur berzhded uheloc'h hag hep bruderezh."
 
-#: internet/magnatunesettingspage.cpp:54
+#: internet/magnatune/magnatunesettingspage.cpp:58
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5494,15 +5747,15 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Tu zo deoc'h implijout ho Wii Remote evel ur pellurzhier evit Clementine, <a href=\"http://www.clementine-player.org/wiimote\">Sellit ar bajenn war wiki Clementine</a> evit muioc'h a ditouroù.\n"
 
-#: internet/groovesharksettingspage.cpp:109
+#: internet/grooveshark/groovesharksettingspage.cpp:113
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "N'ho peus ket a kont Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:146
+#: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "N'ho peus ket a kont Spotify Premium."
 
-#: internet/digitallyimportedclient.cpp:93
+#: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "N'ho peus ket a koumanant gweredekaet"
 
@@ -5511,15 +5764,15 @@ msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud. However, you need to login to access your playlists and your "
 "stream."
-msgstr ""
+msgstr "N'oc'h eus ket ezhomm bezañ kennasket evit selaou ouzh sonerezh war SoundCloud. Hogen, tu zo deoc'h kennaskañ evit tizhout ho rolloù-seniñ hag ho red."
 
-#: internet/spotifyservice.cpp:175
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr "Digennasket oc'h bet diouzh Spotify, adskrivit ho ker-tremen e-barzh prenestr ar c'hefluniadoù."
+msgstr "Digennasket oc'h bet diouzh Spotify, adskrivit ho ker-tremen e-barzh prenestr an arventennoù."
 
-#: internet/spotifysettingspage.cpp:157
+#: internet/spotify/spotifysettingspage.cpp:160
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr "Digennasket oc'h bet diouzh Spotify, adskrivit ho ker-tremen mar plij."
 
@@ -5532,7 +5785,7 @@ msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Ezhomm ho peus da lañsañ ar Gwellvezioù Reizhad ha aotren Clementine da \"<span style=\"font-style:italic\">kontroliñ ho urzhiataer</span>\" evit implij berradennoù hollek e Clementine"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid ""
@@ -5541,19 +5794,19 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Ret eo deoc'h lañsañ Gwellvezioù ar reizhiad ha gweredekaat an dibab \"<span style=\" font-style:italic;\">Gweredekaat evit an trevnadoù sikour</span>\"  evit implijout ar berradennoù hollek e Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:252
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Ezhomm a vo adloc'hañ Clementine ma cheñchit ar yezh."
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "Ho chomlec'h IP a zo :"
 
-#: internet/lastfmsettingspage.cpp:76
+#: internet/lastfm/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Hoc'h aotreoù arveriad evit Last.fm a zo direizh."
 
-#: internet/magnatunesettingspage.cpp:113
+#: internet/magnatune/magnatunesettingspage.cpp:117
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Hoc'h aotreoù arveriad evit Magnatune a zo direizh."
 
@@ -5561,7 +5814,8 @@ msgstr "Hoc'h aotreoù arveriad evit Magnatune a zo direizh."
 msgid "Your library is empty!"
 msgstr "Ho sonaoueg a zo goullo !"
 
-#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26
+#: internet/internetradio/savedradio.cpp:53
 msgid "Your radio streams"
 msgstr "Ho lanvioù skingomz."
 
@@ -5574,8 +5828,8 @@ msgstr "Ho skroble : %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "N'emañ ket OpenGl war ho reizhad, n'eus ket tu deoc'h kaout an heweladurioù."
 
-#: internet/groovesharksettingspage.cpp:114
-#: internet/spotifysettingspage.cpp:152
+#: internet/grooveshark/groovesharksettingspage.cpp:118
+#: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "Hoc'h anv implijer pe ho ger-tremen a zo direizh."
 
@@ -5635,7 +5889,7 @@ msgstr "en deus"
 msgid "disabled"
 msgstr "diweredekaet"
 
-#: widgets/osd.cpp:110
+#: widgets/osd.cpp:112
 #, qt-format
 msgid "disc %1"
 msgstr "pladenn %1"
@@ -5652,11 +5906,11 @@ msgstr "a echu gant"
 msgid "equals"
 msgstr "zo kevatal da"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: podcasts/gpoddertoptagspage.cpp:32
+#: internet/podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "Teuliad gpodder.net"
 
@@ -5666,14 +5920,15 @@ msgstr "brasoc'h eget"
 
 #: ../bin/src/ui_deviceviewcontainer.h:99
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
-msgstr ""
+msgstr "N'ez a ket en-dro an trobarzhelloù iPod hag USB war WIndows evit ar mare. Digarezit !"
 
 #: smartplaylists/searchterm.cpp:212
 msgid "in the last"
 msgstr "etrezek ar re ziwezhañ"
 
-#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
-#: internet/spotifysettingspage.cpp:61 playlist/playlistview.cpp:232
+#: internet/spotify/spotifysettingspage.cpp:62
+#: internet/spotify/spotifysettingspage.cpp:63
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
 #: ui/edittagdialog.cpp:478
 msgid "kbps"
 msgstr "kbde"
@@ -5716,11 +5971,11 @@ msgstr "koshoc'h da gentañ"
 msgid "on"
 msgstr "war"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "dibarzhioù"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "pe skannit ar c'hod QR !"
 
@@ -5758,7 +6013,7 @@ msgstr "a grog gant"
 msgid "stop"
 msgstr "paouez"
 
-#: widgets/osd.cpp:111
+#: widgets/osd.cpp:113
 #, qt-format
 msgid "track %1"
 msgstr "roud %1"

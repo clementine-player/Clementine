@@ -184,10 +184,9 @@ class LibraryBackend : public LibraryBackendInterface {
   void IncrementSkipCountAsync(int id, float progress);
   void ResetStatisticsAsync(int id);
   void UpdateSongRatingAsync(int id, float rating);
+  void UpdateSongsRatingAsync(const QList<int>& ids, float rating);
 
   void DeleteAll();
-
-  void ReloadSettingsAsync();
 
  public slots:
   void LoadDirectories();
@@ -206,7 +205,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void IncrementSkipCount(int id, float progress);
   void ResetStatistics(int id);
   void UpdateSongRating(int id, float rating);
-  void ReloadSettings();
+  void UpdateSongsRating(const QList<int>& id_list, float rating);
 
 signals:
   void DirectoryDiscovered(const Directory& dir,

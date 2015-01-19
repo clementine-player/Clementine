@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-05-11 07:38+0000\n"
+"PO-Revision-Date: 2015-01-14 22:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/projects/p/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgid ""
 "Favorited playlists will be saved here"
 msgstr "\nသီချင်းစာရင်းနာမည်ဘေးရှိကြယ်ပံုစံသင်္ကေတကိုနှိပ်ခါအနှစ်သက်ဆုံးသီချင်းစာရင်းများကိုလုပ်ဆောင်နိုင်\n\nအနှစ်သက်ဆံုးသီချင်းစာရင်းများကိုယခုနေရာတွေမှတ်သားထား"
 
-#: ../bin/src/ui_podcastsettingspage.h:246
+#: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
 msgstr "နေ့များ"
 
@@ -50,7 +50,7 @@ msgstr "မိုက်ခရိုစက္ကန့်"
 msgid " pt"
 msgstr "ပွိုင့်ပမာဏ"
 
-#: ../bin/src/ui_notificationssettingspage.h:439
+#: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr "စက္ကန့်များ"
@@ -59,27 +59,27 @@ msgstr "စက္ကန့်များ"
 msgid " songs"
 msgstr "သီချင်းများ"
 
-#: internet/vkservice.cpp:145
+#: internet/vk/vkservice.cpp:148
 #, qt-format
 msgid "%1 (%2 songs)"
-msgstr ""
+msgstr "%1 (%2 သီချင်းများ)"
 
-#: widgets/osd.cpp:190
+#: widgets/osd.cpp:194
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 အယ်လဘမ်များ"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 နေ့များ"
 
-#: core/utilities.cpp:129
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 လွန်ခဲ့သောနေ့များ"
 
-#: podcasts/gpoddersync.cpp:81
+#: internet/podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 မှအပေါ် %2"
@@ -89,7 +89,7 @@ msgstr "%1 မှအပေါ် %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 သီချင်းစာရင်းများ (%2)"
 
-#: playlist/playlistmanager.cpp:381
+#: playlist/playlistmanager.cpp:409
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 ကိုရွေးချယ်ခဲ့"
@@ -114,7 +114,7 @@ msgstr "%1 သီချင်းများရှာတွေ့"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 သီချင်းများရှာတွေ့ (%2 ပြသနေ)"
 
-#: playlist/playlistmanager.cpp:387
+#: playlist/playlistmanager.cpp:415
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 တေးသံလမ်းကြောများ"
@@ -124,8 +124,8 @@ msgstr "%1 တေးသံလမ်းကြောများ"
 msgid "%1 transferred"
 msgstr "%1 ကူးပြောင်း"
 
-#: widgets/osd.cpp:237 widgets/osd.cpp:243 widgets/osd.cpp:249
-#: widgets/osd.cpp:255 widgets/osd.cpp:261 widgets/osd.cpp:268
+#: widgets/osd.cpp:241 widgets/osd.cpp:247 widgets/osd.cpp:253
+#: widgets/osd.cpp:259 widgets/osd.cpp:265 widgets/osd.cpp:272
 #, qt-format
 msgid "%1: Wiimotedev module"
 msgstr "%1: ဝီမိုတ်ဒပ်မော်ဂျူး"
@@ -140,23 +140,23 @@ msgstr "%L1 အခြားနားဆင်သူများ"
 msgid "%L1 total plays"
 msgstr "%L1 စုစုပေါင်းတင်ဆက်မှုများ"
 
-#: ../bin/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:433
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:205
+#: transcoder/transcodedialog.cpp:208
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n ဖွင့်မရ"
 
-#: transcoder/transcodedialog.cpp:200
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n ပြီးဆံုး"
 
-#: transcoder/transcodedialog.cpp:194
+#: transcoder/transcodedialog.cpp:197
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -174,11 +174,11 @@ msgstr "အလယ်(&C)"
 msgid "&Custom"
 msgstr "စိတ်ကြိုက်(&C)"
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:722
 msgid "&Extras"
 msgstr "အပိုများ(&E)"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:721
 msgid "&Help"
 msgstr "အကူအညီ(&H)"
 
@@ -195,7 +195,7 @@ msgstr "ဖုံးကွယ်(&H)... "
 msgid "&Left"
 msgstr "ဘယ်(&L)"
 
-#: ../bin/src/ui_mainwindow.h:714
+#: ../bin/src/ui_mainwindow.h:719
 msgid "&Music"
 msgstr "ဂီတ(&M)"
 
@@ -203,15 +203,15 @@ msgstr "ဂီတ(&M)"
 msgid "&None"
 msgstr "တစ်ခုမျှ(&N)"
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:720
 msgid "&Playlist"
 msgstr "သီချင်းစာရင်း(&P)"
 
-#: ../bin/src/ui_mainwindow.h:644
+#: ../bin/src/ui_mainwindow.h:648
 msgid "&Quit"
 msgstr "ထွက်(&Q)"
 
-#: ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_mainwindow.h:684
 msgid "&Repeat mode"
 msgstr "စနစ်ပြန်ဆို(&R)"
 
@@ -219,7 +219,7 @@ msgstr "စနစ်ပြန်ဆို(&R)"
 msgid "&Right"
 msgstr "ညာ(&R)"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:683
 msgid "&Shuffle mode"
 msgstr "ကုလားဖန်ထိုးစနစ်(&S)"
 
@@ -227,13 +227,17 @@ msgstr "ကုလားဖန်ထိုးစနစ်(&S)"
 msgid "&Stretch columns to fit window"
 msgstr "ဝင်းဒိုးနဲ့အံကိုက်ကော်လံများကိုဆွဲဆန့်(&S)"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:723
 msgid "&Tools"
 msgstr "ကိရိယာများ(&T)"
 
 #: ui/edittagdialog.cpp:49
 msgid "(different across multiple songs)"
 msgstr "(အမျိုးမျိုးသောသီချင်းများပေါင်းစုံဖြတ်၍)"
+
+#: internet/spotify/spotifyservice.cpp:465
+msgid ", by "
+msgstr ""
 
 #: ui/about.cpp:83
 msgid "...and all the Amarok contributors"
@@ -251,11 +255,11 @@ msgstr "၀:၀၀:၀၀"
 msgid "0px"
 msgstr "၀ပီအိတ်စ်"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "တစ်နေ့"
 
-#: playlist/playlistmanager.cpp:387
+#: playlist/playlistmanager.cpp:415
 msgid "1 track"
 msgstr "တေးသံလမ်းကြောတစ်ခု"
 
@@ -268,7 +272,7 @@ msgstr "၁၂၈ကီလိုအမ်ပီသရီး"
 msgid "40%"
 msgstr "၄၀%"
 
-#: library/library.cpp:62
+#: library/library.cpp:65
 msgid "50 random tracks"
 msgstr "ကျပန်းတေးသံလမ်းကြောများ၅၀"
 
@@ -295,7 +299,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>စာလုံးရိုက်သွင်းကာရှာဖွေပါ ဥပမာ။<span style=\" font-weight:600;\">အနုပညာရှင်:</span><span style=\" font-style:italic;\">ဇော်ပိုင်</span> sဇော်ပိုင်ပါဝင်သောအရာများကိုရှာဖွေ</p><p><span style=\" font-weight:600;\">ရယူနိုင်သောနယ်ပယ်များ: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -305,22 +309,22 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>သီချင်းတိုက်သီချင်းများအားလံုးအတွက်သီချင်းများအဆင့်သတ်မှတ်ချက်များနှင့်ကိန်းဂဏန်းများကိုဖိုင်များအမည်များသို့ရေးလိမ့်မည်။</p><p>&quot;အဆင့်သတ်မှတ်ချက်များနှင့်ကိန်းဂဏန်းများကိုဖိုင်အမည်များ&quot;ရွေးပိုင်ခွင့်ကိုအမြဲတမ်းအသက်သွင်းထားပါကမလိုအပ်ပါ။</p></body></html>"
 
-#: ../bin/src/ui_organisedialog.h:245
+#: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>နှင့်အတူတိုကင်များစတင် %, ဥပမာ: %artist %album %title </p>⏎ ⏎ <p>အကယ်၍သင်တွန့်လိမ်တွန့်ကွင်းများနှင့်တိုကင်ပါဝင်သောစာသားအပိုင်းများကိုဝိုင်းလျှင်၊ အကယ်၍တိုကင်ကအလွတ်ဖြစ်နေလျှင်အဲဒီအပိုင်းကိုဖုံးကွယ်။</p>"
 
-#: internet/groovesharksettingspage.cpp:119
+#: internet/grooveshark/groovesharksettingspage.cpp:123
 msgid "A Grooveshark Anywhere account is required."
 msgstr " ဂရုရှက်အန်နီးဝဲစာရင်းတစ်ခုလိုအပ်။"
 
-#: internet/spotifysettingspage.cpp:163
+#: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "စပေါ့တီဖိုင်းအရစ်ကျစနစ်စာရင်းတစ်ခုလိုအပ်။"
 
-#: ../bin/src/ui_networkremotesettingspage.h:190
+#: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
 msgstr "မှန်ကန်သောကုဒ်ထည့်သွင်းနိုင်မှသာအသံုးပြုသူဆက်သွယ်နိုင်။"
 
@@ -356,11 +360,11 @@ msgstr "အေအေစီ၃၂ကီလို"
 msgid "AAC 64k"
 msgstr "အေအေစီ၆၄ကီလို"
 
-#: core/song.cpp:395
+#: core/song.cpp:409
 msgid "AIFF"
 msgstr "အေအိုင်အက်ဖ်အက်ဖ်"
 
-#: widgets/nowplayingwidget.cpp:131
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "အံ့မခန်းဖွယ်အားလံုးကိုဟိုက်ဖ်နိုဖားသို့"
 
@@ -373,18 +377,24 @@ msgstr "ဖျက်သိမ်း"
 msgid "About %1"
 msgstr "ခန့် %1"
 
-#: ../bin/src/ui_mainwindow.h:663
+#: ../bin/src/ui_mainwindow.h:667
 msgid "About Clementine..."
 msgstr "ကလီမန်တိုင်းအကြောင်း"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:702
 msgid "About Qt..."
 msgstr "ကျူတီအကြောင်း..."
 
+#: playlist/playlistsaveoptionsdialog.cpp:34
+#: ../bin/src/ui_behavioursettingspage.h:286
+msgid "Absolute"
+msgstr "အကြွင်းမဲ့"
+
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
-#: ../bin/src/ui_spotifysettingspage.h:208 ../bin/src/ui_vksettingspage.h:211
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_spotifysettingspage.h:208
+#: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_seafilesettingspage.h:169
 msgid "Account details"
 msgstr "စာရင်းအသေးစိတ်အကြောင်းအရာများ"
 
@@ -396,15 +406,20 @@ msgstr "စာရင်းအသေးစိတ်အကြောင်းအရ
 msgid "Action"
 msgstr "လုပ်ဆောင်ချက်"
 
+#: ../bin/src/ui_globalshortcutssettingspage.h:184
+msgctxt "Category label"
+msgid "Action"
+msgstr "လုပ်ဆောင်ချက်"
+
 #: wiimotedev/wiimotesettingspage.cpp:96
 msgid "Active/deactive Wiiremote"
 msgstr "ဝိုင်ယာမုတ်သက်ဝင်လှုပ်ရှား/သက်ဝင်မလှုပ်ရှား"
 
-#: internet/soundcloudservice.cpp:124
+#: internet/soundcloud/soundcloudservice.cpp:125
 msgid "Activities stream"
-msgstr ""
+msgstr "လှုပ်ရှားမှုများသီချင်းစီးကြောင်း"
 
-#: podcasts/addpodcastdialog.cpp:59
+#: internet/podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
 msgstr "ပို့စ်ကဒ်ထည့်"
 
@@ -412,7 +427,7 @@ msgstr "ပို့စ်ကဒ်ထည့်"
 msgid "Add Stream"
 msgstr "သီချင်းစီးကြောင်းထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Add a new line if supported by the notification type"
 msgstr "သတိပေးချက်ပုံစံလက်ခံပါကလိုင်းအသစ်ထည့်"
 
@@ -420,7 +435,11 @@ msgstr "သတိပေးချက်ပုံစံလက်ခံပါကလ
 msgid "Add action"
 msgstr "လုပ်ဆောင်ချက်ထည့်ပါ"
 
-#: internet/savedradio.cpp:106
+#: ../bin/src/ui_transcodedialog.h:218
+msgid "Add all tracks from a directory and all its subdirectories"
+msgstr ""
+
+#: internet/internetradio/savedradio.cpp:112
 msgid "Add another stream..."
 msgstr "သီချင်းစီးကြောင်းနောက်တစ်ခုထည့်..."
 
@@ -428,31 +447,31 @@ msgstr "သီချင်းစီးကြောင်းနောက်တစ
 msgid "Add directory..."
 msgstr "ဖိုင်လမ်းညွှန်ထည့်..."
 
-#: ui/mainwindow.cpp:1797
+#: ui/mainwindow.cpp:1828
 msgid "Add file"
 msgstr "ဖိုင်ထည့်"
 
-#: ../bin/src/ui_mainwindow.h:709
+#: ../bin/src/ui_mainwindow.h:713
 msgid "Add file to transcoder"
 msgstr "ဖိုင်များကိုပံုစံပြောင်းလဲသူသို့ထည့်ပါ"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Add file(s) to transcoder"
 msgstr "ဖိုင်(များ)ကိုပံုစံပြောင်းလဲသူသို့ထည့်ပါ"
 
-#: ../bin/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Add file..."
 msgstr "ဖိုင်ထည့်..."
 
-#: transcoder/transcodedialog.cpp:215
+#: transcoder/transcodedialog.cpp:218
 msgid "Add files to transcode"
 msgstr "ဖိုင်များကိုပံုစံပြောင်းလဲရန်ထည့်ပါ"
 
-#: transcoder/transcodedialog.cpp:272 ui/mainwindow.cpp:1824 ui/ripcd.cpp:389
+#: transcoder/transcodedialog.cpp:300 ui/mainwindow.cpp:1855 ui/ripcd.cpp:408
 msgid "Add folder"
 msgstr "ဖိုင်တွဲထည့်"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Add folder..."
 msgstr "ဖိုင်တွဲထည့်..."
 
@@ -464,7 +483,7 @@ msgstr "ဖိုင်တွဲအသစ်ထည့်..."
 msgid "Add podcast"
 msgstr "ပို့စ်ကဒ်ထည့်"
 
-#: podcasts/podcastservice.cpp:328 ../bin/src/ui_mainwindow.h:705
+#: internet/podcasts/podcastservice.cpp:416 ../bin/src/ui_mainwindow.h:709
 msgid "Add podcast..."
 msgstr "ပို့စ်ကဒ်ထည့်..."
 
@@ -472,123 +491,131 @@ msgstr "ပို့စ်ကဒ်ထည့်..."
 msgid "Add search term"
 msgstr "ရှာဖွေစကားရပ်ထည့်ပါ"
 
-#: ../bin/src/ui_notificationssettingspage.h:380
+#: ../bin/src/ui_notificationssettingspage.h:386
 msgid "Add song album tag"
 msgstr "သီချင်းတေးသံအမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:386
+#: ../bin/src/ui_notificationssettingspage.h:392
 msgid "Add song albumartist tag"
 msgstr "သီချင်းတေးသံအနုပညာရှင်အမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:377
+#: ../bin/src/ui_notificationssettingspage.h:383
 msgid "Add song artist tag"
 msgstr "သီချင်းအနုပညာရှင်အမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Add song auto score"
 msgstr "အလိုအလျောက်သီချင်းရမှတ်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:392
+#: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song composer tag"
 msgstr "သီချင်းတေးရေးအမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Add song disc tag"
 msgstr "သီချင်းချပ်ပြားဝိုင်းအမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:429
+#: ../bin/src/ui_notificationssettingspage.h:435
 msgid "Add song filename"
 msgstr "သီချင်းဖိုင်အမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:407
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song genre tag"
 msgstr "သီချင်းအမျိုးအစားအမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:398
+#: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song grouping tag"
 msgstr "သီချင်းအုပ်စုခြင်းအမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song length tag"
 msgstr "သီချင်းအရှည်အမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:395
+#: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song performer tag"
 msgstr "တင်ဆင်သူအုပ်စုခြင်းအမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song play count"
 msgstr "သီချင်းဖွင့်သံအရေအတွက်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:419
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Add song rating"
 msgstr "သီချင်းအဆင့်သတ်မှတ်ချက်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Add song skip count"
 msgstr "သီချင်းကျော်သံအရေအတွက်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:383
+#: ../bin/src/ui_notificationssettingspage.h:389
 msgid "Add song title tag"
 msgstr "သီချင်းခေါင်းစဉ်အမည်ထည့်"
 
-#: internet/vkservice.cpp:314
+#: internet/vk/vkservice.cpp:320
 msgid "Add song to cache"
-msgstr ""
+msgstr "မှတ်ဉာဏ်ဝှက်ထဲသို့သီချင်းထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song track tag"
 msgstr "သီချင်းတေးသံလမ်းကြောအမည်ထည့်"
 
-#: ../bin/src/ui_notificationssettingspage.h:389
+#: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song year tag"
 msgstr "သီချင်းနှစ်အမည်ထည့်"
 
-#: ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
-msgstr ""
+msgstr "\"အချစ်\" ခလုပ်ကိုနှိပ်လိုက်သောအခါ \"ငါ့သီချင်း\" ထဲသို့သီချင်းများထည့်"
 
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Add stream..."
 msgstr "သီချင်းစီးကြောင်းထည့်..."
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/grooveshark/groovesharkservice.cpp:1126
 msgid "Add to Grooveshark favorites"
 msgstr "ဂရုရှက်အနှစ်သက်ဆုံးများသို့ထည့်"
 
-#: internet/groovesharkservice.cpp:1136
+#: internet/grooveshark/groovesharkservice.cpp:1141
 msgid "Add to Grooveshark playlists"
 msgstr "ဂရုရှက်သီချင်းစာရင်းများသို့ထည့်"
 
-#: internet/vkservice.cpp:306
+#: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
+msgstr "\"ငါ့သီချင်း\" ထဲသို့ထည့်"
+
+#: internet/spotify/spotifyservice.cpp:617
+msgid "Add to Spotify playlists"
 msgstr ""
 
-#: ui/mainwindow.cpp:1618
+#: internet/spotify/spotifyservice.cpp:610
+msgid "Add to Spotify starred"
+msgstr ""
+
+#: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
 msgstr "သီချင်းစာရင်းနောက်တစ်ခုသို့ထည့်"
 
-#: internet/vkservice.cpp:292
+#: internet/vk/vkservice.cpp:298
 msgid "Add to bookmarks"
-msgstr ""
+msgstr "မှတ်သားခြင်းစာရင်းများသို့ထည့်"
 
 #: ../bin/src/ui_albumcovermanager.h:218
 msgid "Add to playlist"
 msgstr "သီချင်းစာရင်းသို့ထည့်"
 
-#: ../bin/src/ui_behavioursettingspage.h:220
+#: ../bin/src/ui_behavioursettingspage.h:276
 msgid "Add to the queue"
 msgstr "စီတန်းထဲသို့ထည့်ပါ"
 
-#: internet/vkservice.cpp:322
+#: internet/vk/vkservice.cpp:328
 msgid "Add user/group to bookmarks"
-msgstr ""
+msgstr "မှတ်သားခြင်းစာရင်းများသို့အသုံးပြုသူထည့်"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
 msgstr "ဝီမိုတ်ဒပ်လုပ်ဆောင်ချက်ကိုထည့်"
 
-#: ../bin/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:215
 msgid "Add..."
 msgstr "ထည့်..."
 
@@ -613,11 +640,11 @@ msgstr "ယခုနေ့ကိုထည့်သွင်းပြီး"
 msgid "Added within three months"
 msgstr "၃လအတွင်းထည့်သွင်းပြီး"
 
-#: internet/groovesharkservice.cpp:1435
+#: internet/grooveshark/groovesharkservice.cpp:1424
 msgid "Adding song to My Music"
 msgstr "ငါ့ဂီတသို့သီချင်းများထည့်"
 
-#: internet/groovesharkservice.cpp:1412
+#: internet/grooveshark/groovesharkservice.cpp:1401
 msgid "Adding song to favorites"
 msgstr "အနှစ်သက်ဆုံးများသို့သီချင်းများထည့်"
 
@@ -625,19 +652,19 @@ msgstr "အနှစ်သက်ဆုံးများသို့သီချ
 msgid "Advanced grouping..."
 msgstr "အဆင့်မြင့်အုပ်စုဖွဲ့ခြင်း..."
 
-#: ../bin/src/ui_podcastsettingspage.h:247
+#: ../bin/src/ui_podcastsettingspage.h:275
 msgid "After "
 msgstr "ပြီးနောက်"
 
-#: ../bin/src/ui_organisedialog.h:236
+#: ../bin/src/ui_organisedialog.h:242
 msgid "After copying..."
 msgstr "ကူးယူပြီးနောက်..."
 
-#: playlist/playlist.cpp:1303 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
-#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:686
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
 msgid "Album"
 msgstr "အယ်လဘမ်"
@@ -646,9 +673,9 @@ msgstr "အယ်လဘမ်"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "အယ်လဘမ် (တေးသံလမ်းကြောများအားလံုးအတွက်အကောင်းဆုံးအသံကျယ်ကျယ်)"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:145
-#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_edittagdialog.h:688
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:64
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
 msgstr "အယ်လဘမ်အနုပညာရှင်"
 
@@ -656,9 +683,13 @@ msgstr "အယ်လဘမ်အနုပညာရှင်"
 msgid "Album cover"
 msgstr "အယ်လဘမ်အဖုံး"
 
-#: internet/jamendoservice.cpp:421
+#: internet/jamendo/jamendoservice.cpp:427
 msgid "Album info on jamendo.com..."
 msgstr "ဂျမန်ဒို.ကွမ်းမှအယ်လဘမ်အချက်အလက်..."
+
+#: internet/vk/vkservice.cpp:827
+msgid "Albums"
+msgstr ""
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -668,14 +699,18 @@ msgstr "အဖုံးများနဲ့အယ်လဘမ်များ"
 msgid "Albums without covers"
 msgstr "အဖုံးများနဲ့အယ်လဘမ်များ"
 
+#: ../bin/src/ui_podcastsettingspage.h:279
+msgid "All"
+msgstr ""
+
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
 msgstr "ဖိုင်များအားလံုး(*)"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:679
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
-msgstr ""
+msgstr "အံ့မခန်းဖွယ်အားလံုးကိုဟိုက်ဖ်နိုဖားသို့!"
 
 #: ui/albumcovermanager.cpp:134
 msgid "All albums"
@@ -698,15 +733,15 @@ msgstr "သီချင်းစာရင်းများအားလံုး
 msgid "All the translators"
 msgstr "ဘာသာပြန်များအားလံုး"
 
-#: library/library.cpp:98
+#: library/library.cpp:101
 msgid "All tracks"
 msgstr "တေးသံလမ်းကြောများအားလံုး"
 
-#: ../bin/src/ui_networkremotesettingspage.h:195
+#: ../bin/src/ui_networkremotesettingspage.h:243
 msgid "Allow a client to download music from this computer."
 msgstr "ယခုကွန်ပျုတာမှသီချင်းကူးဆွဲရန်အသုံးပြုသူကိုခွင့်ပြု။"
 
-#: ../bin/src/ui_networkremotesettingspage.h:197
+#: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Allow downloads"
 msgstr "ကူးဆွဲများခွင့်ပြု"
 
@@ -714,24 +749,24 @@ msgstr "ကူးဆွဲများခွင့်ပြု"
 msgid "Allow mid/side encoding"
 msgstr "အလယ်/ဘေးကုဒ်ပြောင်းခွင့်ပြု"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:227
 msgid "Alongside the originals"
 msgstr "မူရင်းများနှင့်အတူ"
 
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:255
 msgid "Always hide the main window"
 msgstr "အဓိကဝင်းဒိုးအမြဲတမ်းဖုံးကွယ်"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:254
 msgid "Always show the main window"
 msgstr "အဓိကဝင်းဒိုးအမြဲတမ်းပြသ"
 
-#: ../bin/src/ui_behavioursettingspage.h:212
-#: ../bin/src/ui_behavioursettingspage.h:226
+#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:282
 msgid "Always start playing"
 msgstr "သီချင်းအမြဲတမ်းစတင်ဖွင့်"
 
-#: internet/spotifyblobdownloader.cpp:65
+#: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -746,7 +781,7 @@ msgstr "အိုင်ကျွန်းအချက်အလက်အစုထ
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1' သို့အချက်အလက်ဖွဲ့စည်းမှုရေးနေစဉ်အမှားပြ"
 
-#: internet/subsonicsettingspage.cpp:102
+#: internet/subsonic/subsonicsettingspage.cpp:123
 msgid "An unspecified error occurred."
 msgstr "အမှားသေချာမသိဖြစ်ပေါ်။"
 
@@ -758,22 +793,23 @@ msgstr "နှင့်:"
 msgid "Angry"
 msgstr "ဒေါသထွက်"
 
+#: ../bin/src/ui_podcastsettingspage.h:277
 #: ../bin/src/ui_songinfosettingspage.h:155
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "ပုံပန်းသဏ္ဎာန်"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
 msgstr "ဖိုင်များ/ယူအာအလ်များသီချင်းစာရင်းသို့ဖြည့်စွက်"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:452
-#: internet/internetservice.cpp:53 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "ယခုသီချင်းစာရင်းသို့ဖြည့်စွက်"
 
-#: ../bin/src/ui_behavioursettingspage.h:217
+#: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Append to the playlist"
 msgstr "သီချင်းစာရင်းသို့ဖြည့်စွက်"
 
@@ -786,7 +822,7 @@ msgstr "ဖြတ်ညှပ်ခံရခြင်းကာကွယ်ရန
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "ယခု \"%1\" ကြိုတင်ထိန်းညှိပယ်ဖျက်မှာသေချာသလား?"
 
-#: internet/groovesharkservice.cpp:1334
+#: internet/grooveshark/groovesharkservice.cpp:1323
 msgid "Are you sure you want to delete this playlist?"
 msgstr "ဒီသီချင်းစာရင်းပယ်ဖျက်မှာသေချာသလား?"
 
@@ -800,16 +836,16 @@ msgid ""
 "the songs of your library?"
 msgstr "သီချင်းတိုက်သီချင်းများအားလံုးအတွက်သီချင်းကိန်းဂဏန်းအချက်အလက်များကိုသီချင်းဖိုင်အဖြစ်ရေးလိုပါသလား?"
 
-#: playlist/playlist.cpp:1301 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
-#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:684
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
 msgid "Artist"
 msgstr "အနုပညာရှင်"
 
-#: ui/mainwindow.cpp:245
+#: ui/mainwindow.cpp:251
 msgid "Artist info"
 msgstr "အနုပညာရှင်အချက်အလက်"
 
@@ -821,17 +857,23 @@ msgstr "အနုပညာရှင်အမည်များ"
 msgid "Artist's initial"
 msgstr "အနုပညာရှင်အမည်၏အစ"
 
-#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_behavioursettingspage.h:288
+msgid "Ask when saving"
+msgstr ""
+
+#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
 msgid "Audio format"
 msgstr "အသံပုံစံ"
 
 #: ../bin/src/ui_playbacksettingspage.h:332
 msgid "Audio output"
-msgstr ""
+msgstr "အသံထွက်အား"
 
-#: internet/digitallyimportedsettingspage.cpp:80
-#: internet/magnatunesettingspage.cpp:112 internet/lastfmservice.cpp:222
-#: internet/lastfmsettingspage.cpp:80
+#: internet/digitally/digitallyimportedsettingspage.cpp:83
+#: internet/magnatune/magnatunesettingspage.cpp:116
+#: internet/lastfm/lastfmservice.cpp:228
+#: internet/lastfm/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
 msgstr "အထောက်အထားစစ်ဆေးခြင်းမမှန်"
 
@@ -845,6 +887,11 @@ msgstr "စာဆိုများ"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Auto"
+msgstr "အလိုအလျောက်"
+
+#: playlist/playlistsaveoptionsdialog.cpp:32
+#: ../bin/src/ui_behavioursettingspage.h:285
+msgid "Automatic"
 msgstr "အလိုအလျောက်"
 
 #: ../bin/src/ui_librarysettingspage.h:190
@@ -863,16 +910,16 @@ msgstr "ရနိုင်"
 msgid "Average bitrate"
 msgstr "ပျမ်းမျှဘစ်နှုန်း"
 
-#: covers/coversearchstatisticsdialog.cpp:67
+#: covers/coversearchstatisticsdialog.cpp:69
 msgid "Average image size"
 msgstr "ပျမ်းမျှပုံအရွယ်အစား"
 
-#: podcasts/addpodcastdialog.cpp:84
+#: internet/podcasts/addpodcastdialog.cpp:87
 msgid "BBC Podcasts"
 msgstr "ဘီဘီစီပို့စ်ကဒ်များ"
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:70
-#: ../bin/src/ui_edittagdialog.h:668
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
+#: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "ဘီပီအမ်"
 
@@ -880,7 +927,7 @@ msgstr "ဘီပီအမ်"
 msgid "Background Streams"
 msgstr "နောက်ခံသီချင်းစီးကြောင်းများ"
 
-#: ../bin/src/ui_notificationssettingspage.h:453
+#: ../bin/src/ui_notificationssettingspage.h:460
 msgid "Background color"
 msgstr "နောက်ခံအရောင်"
 
@@ -888,11 +935,11 @@ msgstr "နောက်ခံအရောင်"
 msgid "Background image"
 msgstr "နောက်ခံပုံ"
 
-#: ../bin/src/ui_notificationssettingspage.h:452
+#: ../bin/src/ui_notificationssettingspage.h:459
 msgid "Background opacity"
 msgstr "နောက်ခံအလင်းပိတ်"
 
-#: core/database.cpp:640
+#: core/database.cpp:648
 msgid "Backing up database"
 msgstr "အချက်အလက်အစုအရန်မှတ်သိမ်း"
 
@@ -900,11 +947,11 @@ msgstr "အချက်အလက်အစုအရန်မှတ်သိမ်
 msgid "Balance"
 msgstr "ချိန်ညှိချက်"
 
-#: analyzers/baranalyzer.cpp:20
+#: analyzers/baranalyzer.cpp:35
 msgid "Bar analyzer"
 msgstr "တိုင်စိစစ်သူ"
 
-#: ../bin/src/ui_notificationssettingspage.h:456
+#: ../bin/src/ui_notificationssettingspage.h:463
 msgid "Basic Blue"
 msgstr "အခြေခံအပြာရောင်"
 
@@ -912,7 +959,7 @@ msgstr "အခြေခံအပြာရောင်"
 msgid "Basic audio type"
 msgstr "အခြေခံအသံအမျိုးအစား"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:243
 msgid "Behavior"
 msgstr "လုပ်ဆောင်ပုံ"
 
@@ -925,12 +972,12 @@ msgstr "အကောင်းဆုံး"
 msgid "Biography from %1"
 msgstr "%1 မှအတ္ထုပ္ပတ္တိ"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "ဘစ်နှုန်း"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -941,9 +988,9 @@ msgstr "ဘစ်နှုန်း"
 #: ui/organisedialog.cpp:75
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
-msgstr ""
+msgstr "ဘစ်နှုန်း"
 
-#: analyzers/blockanalyzer.cpp:23
+#: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
 msgstr "ဘလောက်စိစစ်သူ"
 
@@ -955,11 +1002,11 @@ msgstr "ဘလောက်အမျိုးအစား"
 msgid "Blur amount"
 msgstr "မှုန်ဝါးပမာဏ"
 
-#: ../bin/src/ui_notificationssettingspage.h:449
+#: ../bin/src/ui_notificationssettingspage.h:456
 msgid "Body"
 msgstr "စာကိုယ်"
 
-#: analyzers/boomanalyzer.cpp:9
+#: analyzers/boomanalyzer.cpp:32
 msgid "Boom analyzer"
 msgstr "မြည်ဟိန်းသံစိစစ်သူ"
 
@@ -968,7 +1015,7 @@ msgid "Box"
 msgstr "သေတ္တာ"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "လျှောက်ကြည့်..."
@@ -977,7 +1024,7 @@ msgstr "လျှောက်ကြည့်..."
 msgid "Buffer duration"
 msgstr "ကြားခံကြာချိန်"
 
-#: engines/gstengine.cpp:862
+#: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "ကြားခံ"
 
@@ -993,38 +1040,42 @@ msgstr "ခလုတ်များ"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr ""
 
-#: core/song.cpp:401
+#: core/song.cpp:415
 msgid "CDDA"
 msgstr "စီဒီဒီအေ"
 
-#: library/library.cpp:118
+#: library/library.cpp:121
 msgid "CUE sheet support"
 msgstr "ကယူးအပြားအထောက်အကူ"
 
-#: ../bin/src/ui_vksettingspage.h:220
+#: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
-msgstr ""
+msgstr "မှတ်ဉာဏ်ဝှက်လမ်းကြောင်း:"
 
-#: ../bin/src/ui_vksettingspage.h:218
+#: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
-msgstr ""
+msgstr "မှတ်ဉာဏ်ဝှက်ခြင်း"
 
-#: internet/vkmusiccache.cpp:121
+#: internet/vk/vkmusiccache.cpp:120
 #, qt-format
 msgid "Caching %1"
-msgstr ""
+msgstr "မှတ်ဉာဏ်ဝှက်ခြင်း %1"
 
-#: internet/spotifyblobdownloader.cpp:50
+#: internet/spotify/spotifyblobdownloader.cpp:52
 msgid "Cancel"
 msgstr "ပယ်ဖျက်"
 
-#: internet/vkservice.cpp:622
+#: internet/podcasts/podcastservice.cpp:439
+msgid "Cancel download"
+msgstr ""
+
+#: internet/vk/vkservice.cpp:626
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
 msgstr ""
 
-#: ../bin/src/ui_edittagdialog.h:664
+#: ../bin/src/ui_edittagdialog.h:667
 msgid "Change cover art"
 msgstr "အနုပညာအဖုံးပြောင်းလဲ"
 
@@ -1032,7 +1083,7 @@ msgstr "အနုပညာအဖုံးပြောင်းလဲ"
 msgid "Change font size..."
 msgstr "ဖွန်အရွယ်ပြောင်းလဲ"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:73
 msgid "Change repeat mode"
 msgstr "ပြန်ဆိုစနစ်ပြောင်းလဲ"
 
@@ -1040,11 +1091,11 @@ msgstr "ပြန်ဆိုစနစ်ပြောင်းလဲ"
 msgid "Change shortcut..."
 msgstr "အတိုကောက်ပြောင်းလဲ..."
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:71
 msgid "Change shuffle mode"
 msgstr "ကုလားဖန်ထိုးစနစ်ပြောင်းလဲ"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Change the language"
 msgstr "ဒီဘာသာစကားပြောင်းလဲ"
 
@@ -1054,31 +1105,35 @@ msgid ""
 "songs"
 msgstr "ပြန်ဖွင့်လိုလားချက်များပြောင်းလဲခြင်းသည်နောက်ဖွင့်ဆဲသီချင်းများတွင်သက်ရောက်မှုရှိ"
 
-#: ../bin/src/ui_podcastsettingspage.h:228
+#: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
 msgstr "တွဲအသစ်များစစ်ဆေးခြင်း"
 
-#: ui/mainwindow.cpp:702
+#: internet/googledrive/googledriveservice.cpp:220
+msgid "Check for updates"
+msgstr "မွမ်းမံများစစ်ဆေးခြင်း"
+
+#: ui/mainwindow.cpp:717
 msgid "Check for updates..."
 msgstr "မွမ်းမံများစစ်ဆေးခြင်း..."
 
-#: internet/vksettingspage.cpp:97
+#: internet/vk/vksettingspage.cpp:98
 msgid "Choose Vk.com cache directory"
-msgstr ""
+msgstr "Vk.com မှတ်ဉာဏ်ဝှက်ဖိုင်လမ်းညွှန်ရွေးချယ်"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
 msgstr "သင့်ရဲ့ချက်ချာသီချင်းစာရင်းအတွက်နာမည်တစ်ခုရွေး"
 
-#: engines/gstengine.cpp:883
+#: engines/gstengine.cpp:897
 msgid "Choose automatically"
 msgstr "အလိုအလျောက်ရွေးချယ်ခြင်း"
 
-#: ../bin/src/ui_notificationssettingspage.h:461
+#: ../bin/src/ui_notificationssettingspage.h:468
 msgid "Choose color..."
 msgstr "အရောင်ရွေးချယ်..."
 
-#: ../bin/src/ui_notificationssettingspage.h:462
+#: ../bin/src/ui_notificationssettingspage.h:469
 msgid "Choose font..."
 msgstr "ဖွန်ရွေးချယ်..."
 
@@ -1090,9 +1145,13 @@ msgstr "စာရင်းမှရွေး"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "သီချင်းစာရင်းကိုဘယ်သို့မျိုးတူစုမည်၊ ပြီးနောက်သီချင်းဘယ်နှစ်ပုဒ်ပါဝင်မည်ဟုရွေးချယ်ပါ"
 
-#: podcasts/podcastsettingspage.cpp:133
+#: internet/podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
 msgstr "ပို့စ်ကဒ်ကူးဆွဲဖိုင်လမ်းညွှန်ရွေးချယ်"
+
+#: ../bin/src/ui_internetshowsettingspage.h:89
+msgid "Choose the internet services you want to show."
+msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1103,20 +1162,20 @@ msgstr "သီချင်းစာသားများရှာဖွေရန
 msgid "Classical"
 msgstr "ဂန္တဝင်"
 
-#: ../bin/src/ui_podcastsettingspage.h:243
+#: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
 msgstr "ရှင်းထုတ်ဖြစ်"
 
-#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
+#: transcoder/transcodedialog.cpp:61 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "ဖယ်ထုတ်"
 
-#: ../bin/src/ui_mainwindow.h:650 ../bin/src/ui_mainwindow.h:652
+#: ../bin/src/ui_mainwindow.h:654 ../bin/src/ui_mainwindow.h:656
 msgid "Clear playlist"
 msgstr "သီချင်းစာရင်းဖယ်ထုတ်"
 
-#: smartplaylists/searchtermwidget.cpp:341 ../bin/src/ui_mainwindow.h:635
+#: smartplaylists/searchtermwidget.cpp:341 ../bin/src/ui_mainwindow.h:639
 #: visualisations/visualisationcontainer.cpp:215
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1126,7 +1185,7 @@ msgstr "ကလီမန်တိုင်း"
 msgid "Clementine Error"
 msgstr "ကလီမန်တိုင်းအမှားပြ"
 
-#: ../bin/src/ui_notificationssettingspage.h:457
+#: ../bin/src/ui_notificationssettingspage.h:464
 msgid "Clementine Orange"
 msgstr "ကလီမန်တိုင်းလိမ္မော်"
 
@@ -1157,11 +1216,11 @@ msgstr "ဂူဂယ်ဒရိုက်ဗ်သို့ကူးတင်ပ
 msgid "Clementine can play music that you have uploaded to OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:431
+#: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Clementine can show a message when the track changes."
 msgstr "တေးသံလမ်းကြောင်းပြောင်းလဲသွားသောအခါကလီမန်တိုင်းသည်မှာကြားချက်ပြသနိုင်"
 
-#: ../bin/src/ui_podcastsettingspage.h:250
+#: ../bin/src/ui_podcastsettingspage.h:282
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
@@ -1190,7 +1249,7 @@ msgstr "ကလီမန်တိုင်းသည်ဂီတကိုဤတွ
 msgid "Click here to add some music"
 msgstr "ဂီတအနည်းငယ်ထည့်ရန်ဒီမှာကလစ်နှိပ်ပါ"
 
-#: playlist/playlisttabbar.cpp:286
+#: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
@@ -1201,10 +1260,10 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "လက်ကျန်အချိန်နှင့်စုစုပေါင်းအချိန်အကြားဖွင့်ပိတ်လုပ်ရန်ကလစ်နှိပ်"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
 #: ../bin/src/ui_boxsettingspage.h:106
-#: ../bin/src/ui_googledrivesettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1214,7 +1273,7 @@ msgstr "ဖွင့်ဝင်ခလုတ်ကိုနှိပ်လျှ
 msgid "Close"
 msgstr "ပိတ်"
 
-#: playlist/playlisttabbar.cpp:54
+#: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
 msgstr "သီချင်းစာရင်းပိတ်"
 
@@ -1222,7 +1281,7 @@ msgstr "သီချင်းစာရင်းပိတ်"
 msgid "Close visualization"
 msgstr "ပုံဖော်ကြည့်ခြင်းပိတ်"
 
-#: internet/magnatunedownloaddialog.cpp:304
+#: internet/magnatune/magnatunedownloaddialog.cpp:306
 msgid "Closing this window will cancel the download."
 msgstr "ယခုဝင်းဒိုးပိတ်လျှင်ကူးဆွဲပယ်ဖျက်သွားလိမ့်မည်။"
 
@@ -1238,43 +1297,43 @@ msgstr "ကလပ်"
 msgid "Colors"
 msgstr "အရောင်များ"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:175
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "အမျိုးအစားစာရင်းခွဲခြားရန်ပုဒ်ရပ်: အမျိုးအစား, အမျိုးအစားက ၀-၃"
 
-#: playlist/playlist.cpp:1354 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:694
+#: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
+#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "ထင်မြင်ချက်"
 
-#: internet/vkservice.cpp:151
+#: internet/vk/vkservice.cpp:154
 msgid "Community Radio"
-msgstr ""
+msgstr "အသိုင်းအဝိုင်းရေဒီယို"
 
-#: ../bin/src/ui_edittagdialog.h:693
+#: ../bin/src/ui_edittagdialog.h:696
 msgid "Complete tags automatically"
 msgstr "အမည်များအလိုအလျောက်ဖြည့်"
 
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:706
 msgid "Complete tags automatically..."
 msgstr "အမည်များအလိုအလျောက်ဖြည့်..."
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:689
+#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:65
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
 msgstr "တေးရေး"
 
-#: internet/searchboxwidget.cpp:41
+#: internet/core/searchboxwidget.cpp:45
 #, qt-format
 msgid "Configure %1..."
 msgstr "ပုံစံပြင် %1..."
 
-#: internet/groovesharkservice.cpp:560
+#: internet/grooveshark/groovesharkservice.cpp:565
 msgid "Configure Grooveshark..."
 msgstr "ဂရုရှက်ပုံစံပြင်..."
 
-#: internet/magnatuneservice.cpp:282
+#: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "မက်နာကျွန်းပုံစံပြင်..."
 
@@ -1282,34 +1341,35 @@ msgstr "မက်နာကျွန်းပုံစံပြင်..."
 msgid "Configure Shortcuts"
 msgstr "အတိုကောက်များပုံစံပြင်"
 
-#: internet/spotifyservice.cpp:545 internet/spotifyservice.cpp:556
+#: internet/spotify/spotifyservice.cpp:900
 msgid "Configure Spotify..."
 msgstr "စပေါ့တီဖိုင်ပုံစံပြင်..."
 
-#: internet/subsonicservice.cpp:90
+#: internet/subsonic/subsonicservice.cpp:112
 msgid "Configure Subsonic..."
 msgstr "ဆပ်ဆိုးနစ်ပုံစံပြင်..."
 
-#: internet/vkservice.cpp:335
+#: internet/vk/vkservice.cpp:337
 msgid "Configure Vk.com..."
-msgstr ""
+msgstr "Vk.com ပုံစံပြင်..."
 
 #: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:472
 msgid "Configure global search..."
 msgstr "အနှံ့ရှာဖွေပုံစံပြင်..."
 
-#: ui/mainwindow.cpp:553
+#: ui/mainwindow.cpp:567
 msgid "Configure library..."
 msgstr "သီချင်းတိုက်ပုံစံပြင်..."
 
-#: podcasts/addpodcastdialog.cpp:71 podcasts/podcastservice.cpp:362
+#: internet/podcasts/addpodcastdialog.cpp:74
+#: internet/podcasts/podcastservice.cpp:453
 msgid "Configure podcasts..."
 msgstr "ပို့စ်ကဒ်များပုံစံပြင်..."
 
-#: internet/cloudfileservice.cpp:85
-#: internet/digitallyimportedservicebase.cpp:178
+#: internet/core/cloudfileservice.cpp:105
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:198
+#: internet/googledrive/googledriveservice.cpp:228
 msgid "Configure..."
 msgstr "ပုံစံပြင်..."
 
@@ -1321,26 +1381,26 @@ msgstr "သက်ဝင်လှုပ်ရှား/သက်ဝင်မလ�
 msgid "Connect device"
 msgstr "ပစ္စည်းချိတ်ဆက်"
 
-#: internet/spotifyservice.cpp:266
+#: internet/spotify/spotifyservice.cpp:295
 msgid "Connecting to Spotify"
 msgstr "စပေါ့တီဖိုင်သို့ချိတ်ဆက်"
 
-#: internet/subsonicsettingspage.cpp:107
+#: internet/subsonic/subsonicsettingspage.cpp:128
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "ဆာဗာမှဆက်သွယ်ခြင်းငြင်းပယ်၊ဆာဗာယူအာအယ်ပြန်စစ်ဆေးပါ။ ဥပမာ: http://localhost:4040/"
 
-#: internet/subsonicsettingspage.cpp:119
+#: internet/subsonic/subsonicsettingspage.cpp:140
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "ဆက်သွယ်ချိန်ကုန်ဆံုး၊ ဆာဗာယူအာအယ်ပြန်စစ်ဆေးပါ။ ဥပမာ: http://localhost:4040/"
 
-#: internet/vkservice.cpp:961
+#: internet/vk/vkservice.cpp:1095
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
-#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:682
 msgid "Console"
 msgstr "ခလုတ်ခုံ"
 
@@ -1356,20 +1416,28 @@ msgstr "ဂီတအားလံုးကူးပြောင်း"
 msgid "Convert any music that the device can't play"
 msgstr "ယခုပစ္စည်းမဖွင့်နိုင်သောဂီတမျိုးစံုကူးပြောင်း"
 
-#: internet/vkservice.cpp:318
+#: ../bin/src/ui_networkremotesettingspage.h:248
+msgid "Convert lossless audiofiles before sending them to the remote."
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:250
+msgid "Convert lossless files"
+msgstr ""
+
+#: internet/vk/vkservice.cpp:324
 msgid "Copy share url to clipboard"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1210
+#: internet/core/internetservice.cpp:57
 msgid "Copy to clipboard"
 msgstr "အောက်ခံကတ်ပြားသို့ကူးယူ"
 
-#: library/libraryview.cpp:400 podcasts/podcastservice.cpp:349
-#: ui/mainwindow.cpp:602 widgets/fileviewlist.cpp:43
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "ပစ္စည်းသို့ကူးယူ"
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:592
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "သီချင်းတိုက်သို့ကူးယူ..."
@@ -1378,45 +1446,46 @@ msgstr "သီချင်းတိုက်သို့ကူးယူ..."
 msgid "Copyright"
 msgstr "မူပိုင်ခွင့်"
 
-#: internet/subsonicsettingspage.cpp:75
+#: internet/subsonic/subsonicsettingspage.cpp:96
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "ဆပ်ဆိုးနစ်သို့မဆက်သွယ်နိုင်၊ ဆာဗာယူအာအယ်ပြန်စစ်ဆေးပါ။ ဥပမာ: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:57
+#: transcoder/transcoder.cpp:58
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr "ဂျီသီချင်းစီးကြောင်းအစိတ်အပိုင်းမဖန်တီးနိင် \"%1\" - လိုအပ်သောဂျီသီချင်းစီးကြောင်းဖြည့်စွက်ပရိုဂရမ်များအားလံုးသွင်းပြီးပါစေ"
 
-#: playlist/playlistmanager.cpp:166
+#: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
 msgstr ""
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "%1 အတွက်မြုစာမရှာဖွေနိင်၊ ဂျီသီချင်းစီးကြောင်းလိုအပ်သောဖြည့်စွက်ပရိုဂရမ်များသွင်းပြီးမပြီးစစ်ဆေး"
 
-#: transcoder/transcoder.cpp:423
+#: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr "%1 အတွက်သီချင်းပြောင်းသူမရှာဖွေနိင်၊ ဂျီသီချင်းစီးကြောင်းလိုအပ်သောဖြည့်စွက်ပရိုဂရမ်များသွင်းပြီးမပြီးစစ်ဆေး"
 
-#: internet/magnatunedownloaddialog.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:220
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "ပေးပို့ဖိုင်ဖွင့်မရ %1"
 
-#: internet/cloudfileservice.cpp:82 ../bin/src/ui_albumcovermanager.h:215
-#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:673
-#: internet/googledriveservice.cpp:196
+#: internet/core/cloudfileservice.cpp:102
+#: ../bin/src/ui_albumcovermanager.h:215
+#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:677
+#: internet/googledrive/googledriveservice.cpp:226
 msgid "Cover Manager"
 msgstr "အဖုံးမန်နေဂျာ"
 
@@ -1442,12 +1511,13 @@ msgstr "အနုပညာအဖုံးသတ်မှတ်မထား"
 msgid "Cover art set from %1"
 msgstr "%1 မှအနုပညာအဖုံးသတ်မှတ်"
 
-#: covers/coversearchstatisticsdialog.cpp:57 ui/albumcoversearcher.cpp:100
+#: covers/coversearchstatisticsdialog.cpp:59 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
 msgstr "%1 မှအဖုံးများ"
 
-#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1286
+#: internet/grooveshark/groovesharkservice.cpp:533
+#: internet/grooveshark/groovesharkservice.cpp:1275
 msgid "Create a new Grooveshark playlist"
 msgstr "ဂရုရှက်သီချင်းစာရင်းအသစ်တစ်ခုဖန်တီး"
 
@@ -1459,7 +1529,7 @@ msgstr "တေးသံလမ်းကြောများအလိုအလျ
 msgid "Cross-fade when changing tracks manually"
 msgstr "တေးသံလမ်းကြောများလက်အားသံုးပြောင်းလဲသွားသောအခါအရောင်မှိန်ဖြတ်သန်း"
 
-#: ../bin/src/ui_mainwindow.h:647
+#: ../bin/src/ui_mainwindow.h:651
 msgid "Ctrl+Alt+V"
 msgstr "ကွန်+အော်+ဗီ"
 
@@ -1467,63 +1537,63 @@ msgstr "ကွန်+အော်+ဗီ"
 msgid "Ctrl+Down"
 msgstr "ကွန်+အောက်"
 
-#: ../bin/src/ui_mainwindow.h:656
+#: ../bin/src/ui_mainwindow.h:660
 msgid "Ctrl+E"
 msgstr "ကွန်+အီး"
 
-#: ../bin/src/ui_mainwindow.h:666
+#: ../bin/src/ui_mainwindow.h:670
 msgid "Ctrl+H"
 msgstr "ကွန်+အိပ်ရ့်ှ"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Ctrl+J"
 msgstr "ကွန်+ဂျေ"
 
-#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:654
+#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:658
 msgid "Ctrl+K"
 msgstr "ကွန်+ကေ"
 
-#: ../bin/src/ui_mainwindow.h:649
+#: ../bin/src/ui_mainwindow.h:653
 msgid "Ctrl+L"
 msgstr "ကွန်+အယ်လ်"
 
-#: ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Ctrl+M"
 msgstr "ကွန်+အမ်"
 
-#: ../bin/src/ui_mainwindow.h:688
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Ctrl+N"
 msgstr "ကွန်+အန်"
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Ctrl+O"
 msgstr "ကွန်+အို"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:666
 msgid "Ctrl+P"
 msgstr "ကွန်+ပီ"
 
-#: ../bin/src/ui_mainwindow.h:645
+#: ../bin/src/ui_mainwindow.h:649
 msgid "Ctrl+Q"
 msgstr "ကွန်+ကျူ"
 
-#: ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_mainwindow.h:694
 msgid "Ctrl+S"
 msgstr "ကွန်+အက်စ်"
 
-#: ../bin/src/ui_mainwindow.h:668
+#: ../bin/src/ui_mainwindow.h:672
 msgid "Ctrl+Shift+A"
 msgstr "ကွန်+ရှစ်ပ်+အေ"
 
-#: ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:696
 msgid "Ctrl+Shift+O"
 msgstr "ကွန်+ရှစ်ပ်+အို"
 
-#: ../bin/src/ui_mainwindow.h:711
+#: ../bin/src/ui_mainwindow.h:715
 msgid "Ctrl+Shift+T"
 msgstr "Ctrl+Shift+T"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:707
 msgid "Ctrl+T"
 msgstr "ကွန်+တီ"
 
@@ -1539,11 +1609,11 @@ msgstr "စိတ်ကြိုက်"
 msgid "Custom image:"
 msgstr "စိတ်ကြိုက်ပုံ:"
 
-#: ../bin/src/ui_notificationssettingspage.h:444
+#: ../bin/src/ui_notificationssettingspage.h:451
 msgid "Custom message settings"
 msgstr "စိတ်ကြိုက်မှာကြားချက်ချိန်ညှိချက်"
 
-#: ../bin/src/ui_notificationssettingspage.h:458
+#: ../bin/src/ui_notificationssettingspage.h:465
 msgid "Custom..."
 msgstr "စိတ်ကြိုက်..."
 
@@ -1555,18 +1625,18 @@ msgstr "ဒီဘတ်စ်လမ်းကြောင်း"
 msgid "Dance"
 msgstr "အက"
 
-#: core/database.cpp:593
+#: core/database.cpp:601
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
 msgstr "အချက်အလက်အစုပျက်ဆီးနေမှုတွေ့ရှိ။ https://code.google.com/p/clementine-player/wiki/DatabaseCorruption အချက်အလက်အစုမည်သို့ပြန်ယူရန်ဤတွင်ဖတ်ရှု"
 
-#: playlist/playlist.cpp:1351 ../bin/src/ui_edittagdialog.h:679
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "ရက်စွဲဖန်တီးပြီး"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "ရက်စွဲမွမ်းမံပြီး"
 
@@ -1578,15 +1648,15 @@ msgstr "နေ့များ"
 msgid "De&fault"
 msgstr "မူလအခြေအနေ(&f)"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "အသံပမာဏ၄%ခန့်လျှော့ချ"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by <value> percent"
 msgstr "အသံပမာဏ <value> ရာခိုင်နှုန်းခန့်လျှော့ချ"
 
-#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
 msgid "Decrease volume"
 msgstr "အသံပမာဏလျှော့ချ"
 
@@ -1594,7 +1664,7 @@ msgstr "အသံပမာဏလျှော့ချ"
 msgid "Default background image"
 msgstr "မူလပံုစံနောက်ခံပုံ"
 
-#: engines/gstengine.cpp:908
+#: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1612,16 +1682,17 @@ msgstr "ပုံဖော်ကြည့်ခြင်းများအကြ
 msgid "Delete"
 msgstr "ပယ်ဖျက်"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1333
+#: internet/grooveshark/groovesharkservice.cpp:536
+#: internet/grooveshark/groovesharkservice.cpp:1322
 msgid "Delete Grooveshark playlist"
 msgstr "ဂရုရှက်သီချင်းစာရင်းပယ်ဖျက်"
 
-#: podcasts/podcastservice.cpp:345
+#: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
 msgstr "ကူးဆွဲပြီးအချက်အလက်ပယ်ဖျက်"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2160 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "ဖိုင်များပယ်ဖျက်"
 
@@ -1629,12 +1700,12 @@ msgstr "ဖိုင်များပယ်ဖျက်"
 msgid "Delete from device..."
 msgstr "ပစ္စည်းမှပယ်ဖျက်..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:604
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "ဓာတ်ပြားမှပယ်ဖျက်..."
 
-#: ../bin/src/ui_podcastsettingspage.h:244
+#: ../bin/src/ui_podcastsettingspage.h:272
 msgid "Delete played episodes"
 msgstr "ဖွင့်ပြီးတွဲများပယ်ဖျက်"
 
@@ -1646,28 +1717,28 @@ msgstr "ကြိုတင်ထိန်းညှိပယ်ဖျက်"
 msgid "Delete smart playlist"
 msgstr "ချက်ချာသီချင်းစာရင်းပယ်ဖျက်"
 
-#: ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_organisedialog.h:246
 msgid "Delete the original files"
 msgstr "မူရင်းဖိုင်များပယ်ဖျက်"
 
-#: core/deletefiles.cpp:48
+#: core/deletefiles.cpp:50
 msgid "Deleting files"
 msgstr "ဖိုင်များပယ်ဖျက်နေ"
 
-#: ui/mainwindow.cpp:1539
+#: ui/mainwindow.cpp:1570
 msgid "Dequeue selected tracks"
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများမစီတန်း"
 
-#: ui/mainwindow.cpp:1537
+#: ui/mainwindow.cpp:1568
 msgid "Dequeue track"
 msgstr "တေးသံလမ်းကြောမစီတန်း"
 
-#: ../bin/src/ui_transcodedialog.h:214 ../bin/src/ui_organisedialog.h:235
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
 #: ../bin/src/ui_ripcd.h:321
 msgid "Destination"
 msgstr "သွားမည့်နေရာ"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:231
 msgid "Details..."
 msgstr "အသေးစိတ်အကြောင်းအရာများ..."
 
@@ -1679,7 +1750,7 @@ msgstr "ပစ္စည်း"
 msgid "Device Properties"
 msgstr "ပစ္စည်းဂုဏ်သတ္တိများ"
 
-#: ../bin/src/ui_podcastsettingspage.h:254
+#: ../bin/src/ui_podcastsettingspage.h:286
 msgid "Device name"
 msgstr "ပစ္စည်းနာမည်"
 
@@ -1687,13 +1758,13 @@ msgstr "ပစ္စည်းနာမည်"
 msgid "Device properties..."
 msgstr "ပစ္စည်းဂုဏ်သတ္တိများ..."
 
-#: ui/mainwindow.cpp:240
+#: ui/mainwindow.cpp:246
 msgid "Devices"
 msgstr "ပစ္စည်းများ"
 
-#: ../bin/src/ui_vksearchdialog.h:61 ../bin/src/ui_ripcd.h:300
+#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
-msgstr ""
+msgstr "စကားပြော"
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1716,11 +1787,11 @@ msgid "Direct internet connection"
 msgstr "အင်တာနက်တိုက်ရိုက်ဆက်သွယ်မှု"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
-#: ../bin/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_transcodedialog.h:213
 msgid "Directory"
 msgstr "ဖိုင်လမ်းညွှန်"
 
-#: ../bin/src/ui_notificationssettingspage.h:440
+#: ../bin/src/ui_notificationssettingspage.h:446
 msgid "Disable duration"
 msgstr "ကြာချိန်မလုပ်ဆောင်စေ"
 
@@ -1728,18 +1799,20 @@ msgstr "ကြာချိန်မလုပ်ဆောင်စေ"
 msgid "Disable moodbar generation"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းတိုးတက်လာမှုမလုပ်ဆောင်စေ"
 
-#: ../bin/src/ui_notificationssettingspage.h:433
+#: ../bin/src/ui_notificationssettingspage.h:439
 msgctxt "Refers to a disabled notification type in Notification settings."
 msgid "Disabled"
-msgstr ""
+msgstr "မလုပ်ဆောင်စေ"
 
 #: globalsearch/searchproviderstatuswidget.cpp:46
 msgctxt "Refers to search provider's status."
 msgid "Disabled"
-msgstr ""
+msgstr "မလုပ်ဆောင်စေ"
 
-#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_ripcd.h:314
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_ripcd.h:314
 msgid "Disc"
 msgstr "ချပ်ပြားဝိုင်း"
 
@@ -1747,18 +1820,28 @@ msgstr "ချပ်ပြားဝိုင်း"
 msgid "Discontinuous transmission"
 msgstr "ဆက်လက်မထုတ်လွှင့်ခြင်း"
 
-#: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:104 ../bin/src/ui_librarysettingspage.h:207
+#: internet/icecast/icecastfilterwidget.cpp:36
+#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:104
+#: ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "ပြသခြင်းရွေးပိုင်ခွင့်များ"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Display the on-screen-display"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ပြသခြင်း"
 
-#: ../bin/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:705
 msgid "Do a full library rescan"
 msgstr "သီချင်းတိုက်အပြည့်ပြန်လည်ဖတ်ရှု"
+
+#: internet/googledrive/googledriveservice.cpp:267
+#: internet/googledrive/googledriveservice.cpp:273
+msgid "Do a full rescan"
+msgstr ""
+
+#: internet/googledrive/googledriveservice.cpp:223
+msgid "Do a full rescan..."
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
@@ -1768,7 +1851,14 @@ msgstr "ဂီတတစ်ခုမှမကူးပြောင်း"
 msgid "Do not overwrite"
 msgstr "အစားထိုးမရေး"
 
-#: widgets/osd.cpp:302 ../bin/src/ui_playlistsequence.h:103
+#: internet/googledrive/googledriveservice.cpp:268
+msgid ""
+"Doing a full rescan will lose any metadata you've saved in Clementine such "
+"as cover art, play counts and ratings.  Clementine will rescan all your "
+"music in Google Drive which may take some time."
+msgstr ""
+
+#: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "မပြန်ဆို"
 
@@ -1776,15 +1866,20 @@ msgstr "မပြန်ဆို"
 msgid "Don't show in various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုးမပြသ"
 
-#: widgets/osd.cpp:281 ../bin/src/ui_playlistsequence.h:107
+#: ../bin/src/ui_podcastsettingspage.h:278
+msgid "Don't show listened episodes"
+msgstr ""
+
+#: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "ကုလားဖန်မထိုး"
 
-#: internet/magnatunedownloaddialog.cpp:306 ui/albumcovermanager.cpp:221
+#: internet/magnatune/magnatunedownloaddialog.cpp:308
+#: ui/albumcovermanager.cpp:221
 msgid "Don't stop!"
 msgstr "မရပ်ဆိုင်းနဲ့!"
 
-#: internet/somafmservice.cpp:101
+#: internet/somafm/somafmservice.cpp:106
 msgid "Donate"
 msgstr "လှုဒါန်း"
 
@@ -1792,21 +1887,21 @@ msgstr "လှုဒါန်း"
 msgid "Double click to open"
 msgstr "ဖွင့်ရန်ကလစ်နှစ်ခါနှိပ်"
 
-#: ../bin/src/ui_behavioursettingspage.h:214
+#: ../bin/src/ui_behavioursettingspage.h:270
 msgid "Double clicking a song will..."
 msgstr "ကလစ်နှစ်ခါနှိပ်ခြင်းဖြင့်သီချင်းဟာ..."
 
-#: podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:529
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
 msgstr "တွဲများ %n ကူးဆွဲ"
 
-#: internet/magnatunedownloaddialog.cpp:266
+#: internet/magnatune/magnatunedownloaddialog.cpp:268
 msgid "Download directory"
 msgstr "ဖိုင်လမ်းညွှန်ကူးဆွဲ"
 
-#: ../bin/src/ui_podcastsettingspage.h:240
+#: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Download episodes to"
 msgstr "သို့တွဲများကူးဆွဲ"
 
@@ -1814,27 +1909,32 @@ msgstr "သို့တွဲများကူးဆွဲ"
 msgid "Download membership"
 msgstr "အသင်းဝင်ကူးဆွဲ"
 
-#: ../bin/src/ui_podcastsettingspage.h:241
+#: ../bin/src/ui_podcastsettingspage.h:269
 msgid "Download new episodes automatically"
 msgstr "တွဲအသစ်များအလိုအလျောက်ကူးဆွဲ"
 
-#: podcasts/podcastservice.cpp:253
+#: internet/podcasts/podcastservice.cpp:292
+#: internet/podcasts/podcastservice.cpp:331
 msgid "Download queued"
 msgstr "စီတန်းပြီးကူးဆွဲ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:202
+#: ../bin/src/ui_networkremotesettingspage.h:246
+msgid "Download settings"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
 msgstr "စက်ရုပ်အပ်များကူးဆွဲ"
 
-#: internet/magnatuneservice.cpp:272
+#: internet/magnatune/magnatuneservice.cpp:280
 msgid "Download this album"
 msgstr "ဒီအယ်လဘမ်ကူးဆွဲ"
 
-#: internet/jamendoservice.cpp:424
+#: internet/jamendo/jamendoservice.cpp:430
 msgid "Download this album..."
 msgstr "ဒီအယ်လဘမ်ကူးဆွဲ..."
 
-#: podcasts/podcastservice.cpp:439
+#: internet/podcasts/podcastservice.cpp:531
 msgid "Download this episode"
 msgstr "ဒီတွဲကူးဆွဲ"
 
@@ -1842,24 +1942,25 @@ msgstr "ဒီတွဲကူးဆွဲ"
 msgid "Download..."
 msgstr "ကူးဆွဲ..."
 
-#: podcasts/podcastservice.cpp:261
+#: internet/podcasts/podcastservice.cpp:300
+#: internet/podcasts/podcastservice.cpp:340
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "ကူးဆွဲ(%1%)..."
 
-#: internet/icecastservice.cpp:101
+#: internet/icecast/icecastservice.cpp:106
 msgid "Downloading Icecast directory"
 msgstr "အိုင့်ကက်စ်ဖိုင်လမ်းညွှန်ကူးဆွဲနေ"
 
-#: internet/jamendoservice.cpp:195
+#: internet/jamendo/jamendoservice.cpp:200
 msgid "Downloading Jamendo catalogue"
 msgstr "ဂျမန်တိုစာရင်းကူးဆွဲနေ"
 
-#: internet/magnatuneservice.cpp:152
+#: internet/magnatune/magnatuneservice.cpp:160
 msgid "Downloading Magnatune catalogue"
 msgstr "မက်နကျွန်းစာရင်းကူးဆွဲနေ"
 
-#: internet/spotifyblobdownloader.cpp:49
+#: internet/spotify/spotifyblobdownloader.cpp:51
 msgid "Downloading Spotify plugin"
 msgstr "စပေါ့တီဖိုင်ဖြည့်စွက်ပရိုဂရမ်ကူးဆွဲနေ"
 
@@ -1887,7 +1988,7 @@ msgstr "ကြာချိန်"
 msgid "Dynamic mode is on"
 msgstr "စနစ်အရှင်ဖွင့်ထား"
 
-#: internet/jamendoservice.cpp:121 library/library.cpp:112
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
 msgid "Dynamic random mix"
 msgstr "ကျပန်းရောသမမွှေအရှင်"
 
@@ -1895,25 +1996,25 @@ msgstr "ကျပန်းရောသမမွှေအရှင်"
 msgid "Edit smart playlist..."
 msgstr "ချက်ချာသီချင်းစာရင်းပြင်ဆင်..."
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1612
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "အမည်ပြင်ဆင် \"%1\"..."
 
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:663
 msgid "Edit tag..."
 msgstr "အမည်ပြင်ဆင်..."
 
-#: ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit tags"
 msgstr "အမည်များပြင်ဆင်..."
 
-#: ../bin/src/ui_edittagdialog.h:662
+#: ../bin/src/ui_edittagdialog.h:665
 msgid "Edit track information"
 msgstr "တေးသံလမ်းကြောအချက်အလက်ပြင်ဆင်"
 
 #: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
-#: ../bin/src/ui_mainwindow.h:655
+#: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "တေးသံလမ်းကြောအချက်အလက်ပြင်ဆင်..."
 
@@ -1921,15 +2022,19 @@ msgstr "တေးသံလမ်းကြောအချက်အလက်ပြ
 msgid "Edit tracks information..."
 msgstr "တေးသံလမ်းကြောများအချက်အလက်ပြင်ဆင်..."
 
-#: internet/savedradio.cpp:103
+#: internet/internetradio/savedradio.cpp:109
 msgid "Edit..."
 msgstr "ပြင်ဆင်..."
+
+#: ../bin/src/ui_seafilesettingspage.h:172
+msgid "Email"
+msgstr "အီးမေးလ်"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
 msgstr "ဝီအဝေးထိန်းအထောက်အကူလုပ်ဆောင်စေ"
 
-#: ../bin/src/ui_vksettingspage.h:219
+#: ../bin/src/ui_vksettingspage.h:226
 msgid "Enable automatic caching"
 msgstr ""
 
@@ -1941,13 +2046,17 @@ msgstr "အသံထိန်းညှိသူလုပ်ဆောင်စေ
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "ကလီမန်တိုင်းအလုပ်လုပ်နေစဉ်အတိုကောက်များလုပ်ဆောင်စေ"
 
+#: ../bin/src/ui_behavioursettingspage.h:262
+msgid "Enable song metadata inline edition with click"
+msgstr ""
+
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
 msgstr "ရှာဖွေရလဒ်များတွင်ပါဝင်စေရန်အောက်ရှိရင်းမြစ်များကိုလုပ်ဆောက်စေ။ ရလဒ်များအစဉ်အလိုက်ပြသလိမ့်မည်။"
 
-#: core/globalshortcuts.cpp:72
+#: core/globalshortcuts.cpp:76
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "လက်စ်.အက်ဖ်အမ်အလိုအလျောက်သီချင်းနာမည်ပေးပို့ခြင်းလုပ်ဆောင်စေ/မလုပ်ဆောင်စေ"
 
@@ -1975,7 +2084,7 @@ msgstr "အင်တာနက်မှအဖံုးများကူးဆွ
 msgid "Enter a filename for exported covers (no extension):"
 msgstr "တင်ပို့ပြီးအဖံုးများအတွက်ဖိုင်နာမည်ထည့်(နောက်ဆက်တွဲမပါ):"
 
-#: playlist/playlisttabbar.cpp:136
+#: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
 msgstr "ဒီသီချင်းစာရင်းအတွက်နာမည်အသစ်တစ်ခုရွေး"
 
@@ -2005,7 +2114,7 @@ msgstr "အင်တာနက်ရေဒီယိုသီချင်းစီ
 msgid "Enter the name of the folder"
 msgstr "ဒီဖိုင်တွဲအတွက်နာမည်အသစ်တစ်ခုရွေး"
 
-#: ../bin/src/ui_networkremotesettingspage.h:199
+#: ../bin/src/ui_networkremotesettingspage.h:239
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "ကလီမန်တိုင်းသို့ချိတ်ဆက်ရန်ယခုအပ်တွင်အိုင်ပီထည့်သွင်းပါ။"
 
@@ -2013,24 +2122,28 @@ msgstr "ကလီမန်တိုင်းသို့ချိတ်ဆက်
 msgid "Entire collection"
 msgstr "စုပေါင်းမှုတစ်ခုလုံး"
 
-#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_equalizer.h:163 ../bin/src/ui_mainwindow.h:686
 msgid "Equalizer"
 msgstr "အသံထိန်းညှိသူ"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1တူညီ"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:174
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent to --log-levels *:3တူညီ"
 
-#: internet/groovesharkservice.cpp:1048
-#: internet/magnatunedownloaddialog.cpp:240 library/libraryview.cpp:630
-#: ui/mainwindow.cpp:1863 ui/mainwindow.cpp:2110 ui/mainwindow.cpp:2258
-#: internet/vkservice.cpp:621
+#: internet/grooveshark/groovesharkservice.cpp:1054
+#: internet/magnatune/magnatunedownloaddialog.cpp:242
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
+#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "အမှားပြ"
+
+#: ui/ripcd.cpp:295
+msgid "Error Ripping CD"
+msgstr ""
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2044,7 +2157,7 @@ msgstr "သီချင်းများကူးယူမှုအမှား
 msgid "Error deleting songs"
 msgstr "သီချင်းများပယ်ဖျက်မှုအမှားပြ"
 
-#: internet/spotifyblobdownloader.cpp:220
+#: internet/spotify/spotifyblobdownloader.cpp:222
 msgid "Error downloading Spotify plugin"
 msgstr "စပေါ့တီဖိုင်ဖြည့်စွက်ပရိုဂရမ်ကူးဆွဲမှုအမှားပြ"
 
@@ -2053,49 +2166,49 @@ msgstr "စပေါ့တီဖိုင်ဖြည့်စွက်ပရိ
 msgid "Error loading %1"
 msgstr "ထည့်သွင်းခြင်းအမှားပြ %1"
 
-#: internet/digitallyimportedservicebase.cpp:196
-#: internet/digitallyimportedurlhandler.cpp:85
+#: internet/digitally/digitallyimportedservicebase.cpp:200
+#: internet/digitally/digitallyimportedurlhandler.cpp:89
 msgid "Error loading di.fm playlist"
 msgstr "ဒီအိုင်.အက်ဖ်အမ်သီချင်းစာရင်းထည့်သွင်းအမှားပြ"
 
-#: transcoder/transcoder.cpp:394
+#: transcoder/transcoder.cpp:390
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "ဆောင်ရွက်ခြင်းအမှားပြ %1: %2"
 
-#: playlist/songloaderinserter.cpp:92
+#: playlist/songloaderinserter.cpp:94
 msgid "Error while loading audio CD"
 msgstr "အသံဓာတ်ပြားထည့်သွင်းနေခြင်းအမှားပြ"
 
-#: library/library.cpp:66
+#: library/library.cpp:69
 msgid "Ever played"
 msgstr "သီချင်းဖွင့်ခဲ့သမျှ"
 
-#: ../bin/src/ui_podcastsettingspage.h:232
+#: ../bin/src/ui_podcastsettingspage.h:260
 msgid "Every 10 minutes"
 msgstr "၁၀မိနစ်တိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:238
+#: ../bin/src/ui_podcastsettingspage.h:266
 msgid "Every 12 hours"
 msgstr "၁၂နာရီတိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:236
+#: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Every 2 hours"
 msgstr "၂နာရီတိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:233
+#: ../bin/src/ui_podcastsettingspage.h:261
 msgid "Every 20 minutes"
 msgstr "မိနစ်၂၀တိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:234
+#: ../bin/src/ui_podcastsettingspage.h:262
 msgid "Every 30 minutes"
 msgstr "မိနစ်၃၀တိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:237
+#: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Every 6 hours"
 msgstr "၆နာရီတိုင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:235
+#: ../bin/src/ui_podcastsettingspage.h:263
 msgid "Every hour"
 msgstr "နာရီတိုင်း"
 
@@ -2141,27 +2254,27 @@ msgstr "တင်ပို့ခြင်းပြီးဆံုး"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "တင်ပို့ပြီး %1 အဖံုးများရရှိ %2 မှ (%3 ခုန်ကျော်)"
 
-#: ../bin/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:668
 msgid "F1"
 msgstr "အက်ဖ်၁"
 
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:664
 msgid "F2"
 msgstr "အက်ဖ်၂"
 
-#: ../bin/src/ui_mainwindow.h:637
+#: ../bin/src/ui_mainwindow.h:641
 msgid "F5"
 msgstr "အက်ဖ်၅"
 
-#: ../bin/src/ui_mainwindow.h:639
+#: ../bin/src/ui_mainwindow.h:643
 msgid "F6"
 msgstr "အက်ဖ်၆"
 
-#: ../bin/src/ui_mainwindow.h:641
+#: ../bin/src/ui_mainwindow.h:645
 msgid "F7"
 msgstr "အက်ဖ်၇"
 
-#: ../bin/src/ui_mainwindow.h:643
+#: ../bin/src/ui_mainwindow.h:647
 msgid "F8"
 msgstr "အက်ဖ်၈"
 
@@ -2188,25 +2301,28 @@ msgstr "အရောင်မှိန်"
 msgid "Fading duration"
 msgstr "အရောင်မှိန်ကြာချိန်"
 
-#: ui/mainwindow.cpp:1864
+#: ui/mainwindow.cpp:1895
 msgid "Failed reading CD drive"
 msgstr ""
 
-#: podcasts/gpoddertoptagspage.cpp:69
+#: internet/podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
 msgstr "ဖိုင်လမ်းညွှန်များယူဆောင်ခြင်းမရ"
 
-#: podcasts/gpoddersearchpage.cpp:72 podcasts/gpoddertoptagsmodel.cpp:101
-#: podcasts/itunessearchpage.cpp:63 podcasts/itunessearchpage.cpp:74
-#: podcasts/itunessearchpage.cpp:81
+#: internet/podcasts/gpoddersearchpage.cpp:75
+#: internet/podcasts/gpoddertoptagsmodel.cpp:103
+#: internet/podcasts/itunessearchpage.cpp:65
+#: internet/podcasts/itunessearchpage.cpp:76
+#: internet/podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
 msgstr "ပို့စ်ကဒ်များယူဆောင်ခြင်းမရ"
 
-#: podcasts/addpodcastbyurl.cpp:66 podcasts/fixedopmlpage.cpp:52
+#: internet/podcasts/addpodcastbyurl.cpp:69
+#: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "ပို့စ်ကဒ်များထည့်သွင်းခြင်းမရ"
 
-#: podcasts/podcasturlloader.cpp:173
+#: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "အာအက်စ်အက်စ်ဖိဒ်များအတွက်အိက်စ်အမ်အယ်ကိုမရယူနိင်"
 
@@ -2215,11 +2331,11 @@ msgstr "အာအက်စ်အက်စ်ဖိဒ်များအတွက
 msgid "Fast"
 msgstr "မြန်သော"
 
-#: internet/groovesharkservice.cpp:639
+#: internet/grooveshark/groovesharkservice.cpp:644
 msgid "Favorites"
 msgstr "အနှစ်သက်ဆုံးများ"
 
-#: library/library.cpp:88
+#: library/library.cpp:91
 msgid "Favourite tracks"
 msgstr "အနှစ်သက်ဆုံးတေးသံလမ်းကြောများ"
 
@@ -2235,7 +2351,7 @@ msgstr "အလိုအလျောက်ယူဆောင်ခြင်း"
 msgid "Fetch completed"
 msgstr "ယူဆောင်ခြင်းပြီးဆံုး"
 
-#: internet/subsonicservice.cpp:228
+#: internet/subsonic/subsonicservice.cpp:250
 msgid "Fetching Subsonic library"
 msgstr "ဆပ်ဆိုးနစ်သီချင်းတိုက်ယူဆောင်နေ"
 
@@ -2245,7 +2361,7 @@ msgstr "အဖုံးအမှားယူဆောင်နေ"
 
 #: ../bin/src/ui_ripcd.h:320
 msgid "File Format"
-msgstr ""
+msgstr "ဖိုင်ပုံစံ"
 
 #: ui/organisedialog.cpp:77
 msgid "File extension"
@@ -2255,37 +2371,41 @@ msgstr "ဖိုင်နောက်ဆက်တွဲ"
 msgid "File formats"
 msgstr "ဖိုင်ပုံစံများ"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:680
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "ဖိုင်နာမည်"
 
-#: playlist/playlist.cpp:1343
+#: playlist/playlist.cpp:1351
 msgid "File name (without path)"
 msgstr "ဖိုင်နာမည် (လမ်းကြောင်းနှင့်မဟုတ်)"
 
-#: ../bin/src/ui_vksettingspage.h:221
+#: ../bin/src/ui_vksettingspage.h:228
 msgid "File name pattern:"
+msgstr "ဖိုင်နာမည်အညွှန်း:"
+
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:96
+msgid "File paths"
 msgstr ""
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "ဖိုင်ပမာဏ"
 
-#: playlist/playlist.cpp:1347 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:161
-#: ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1355 ../bin/src/ui_groupbydialog.h:133
+#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
+#: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
 msgstr "ဖိုင်အမျိုးအစား"
 
-#: ../bin/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Filename"
 msgstr "ဖိုင်နာမည်"
 
-#: ui/mainwindow.cpp:233
+#: ui/mainwindow.cpp:239
 msgid "Files"
 msgstr "ဖိုင်များ"
 
-#: ../bin/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:211
 msgid "Files to transcode"
 msgstr "ဖိုင်များကိုပံုစံပြောင်းလဲ"
 
@@ -2293,7 +2413,7 @@ msgstr "ဖိုင်များကိုပံုစံပြောင်း
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "သတ်မှတ်ထားသောစံဟပ်စပ်သောသီချင်းများသီချင်းတိုက်တွင်ရှာဖွေ"
 
-#: internet/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:308
 msgid "Find this artist"
 msgstr ""
 
@@ -2309,7 +2429,11 @@ msgstr "ပြီးဆုံး"
 msgid "First level"
 msgstr "ပထမဆံုးအဆင့်"
 
-#: core/song.cpp:379 transcoder/transcoder.cpp:230
+#: widgets/nowplayingwidget.cpp:105
+msgid "Fit cover to width"
+msgstr ""
+
+#: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "အက်ဖ်အယ်အေစီ"
 
@@ -2354,7 +2478,7 @@ msgstr "ပစ္စည်းကိုမေ့ပြစ်ခြင်းသည
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
-#: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
+#: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:83
 #: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
 #: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Form"
@@ -2364,7 +2488,7 @@ msgstr "ပုံစံ"
 msgid "Format"
 msgstr "ပုံစံချ"
 
-#: analyzers/analyzercontainer.cpp:46
+#: analyzers/analyzercontainer.cpp:52
 #: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "ဘောင်နှုန်း"
@@ -2389,38 +2513,48 @@ msgstr "ဘက်စ်အပြည့် + အမြင့်သံ"
 msgid "Full Treble"
 msgstr "အမြင့်သံအပြည့်"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:138
 msgid "General"
 msgstr "အထွေထွေ"
 
-#: ../bin/src/ui_notificationssettingspage.h:437
+#: ../bin/src/ui_notificationssettingspage.h:443
 msgid "General settings"
 msgstr "အထွေထွေချိန်ညှိချက်"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:148
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcd.h:317
 msgid "Genre"
 msgstr "အမျိုးအစား"
 
-#: internet/groovesharkservice.cpp:550
+#: internet/grooveshark/groovesharkservice.cpp:555
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "ဂရုရှက်သီချင်းစာရင်းမျှဝေရန်ယူအာအယ်ရယူ"
 
-#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1149
+#: internet/grooveshark/groovesharkservice.cpp:552
+#: internet/grooveshark/groovesharkservice.cpp:1154
 msgid "Get a URL to share this Grooveshark song"
 msgstr "ဂရုရှက်သီချင်းမျှဝေရန်ယူအာအယ်ရယူ"
 
-#: internet/groovesharkservice.cpp:823
+#: internet/spotify/spotifyservice.cpp:633
+#: internet/spotify/spotifyservice.cpp:674
+msgid "Get a URL to share this Spotify song"
+msgstr ""
+
+#: internet/spotify/spotifyservice.cpp:665
+msgid "Get a URL to share this playlist"
+msgstr ""
+
+#: internet/grooveshark/groovesharkservice.cpp:829
 msgid "Getting Grooveshark popular songs"
 msgstr "ဂရုရှက်ရေပန်းစားဆံုးသီချင်းများရယူခြင်း"
 
-#: internet/somafmservice.cpp:115
+#: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
 msgstr "လေလှိုင်းများရယူခြင်း"
 
-#: internet/digitallyimportedservicebase.cpp:101
+#: internet/digitally/digitallyimportedservicebase.cpp:105
 msgid "Getting streams"
 msgstr "သီချင်းစီးကြောင်းများရယူခြင်း"
 
@@ -2432,11 +2566,11 @@ msgstr "ဒီဟာကိုနာမည်ပေး:"
 msgid "Go"
 msgstr "သွား"
 
-#: ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:697
 msgid "Go to next playlist tab"
 msgstr "နောက်သီချင်းစာရင်းမျက်နှာစာသို့သွား"
 
-#: ../bin/src/ui_mainwindow.h:694
+#: ../bin/src/ui_mainwindow.h:698
 msgid "Go to previous playlist tab"
 msgstr "ယခင်သီချင်းစာရင်းမျက်နှာစာသို့သွား"
 
@@ -2444,13 +2578,13 @@ msgstr "ယခင်သီချင်းစာရင်းမျက်နှာ
 msgid "Google Drive"
 msgstr "ဂူဂယ်ဒရိုက်ဗ်"
 
-#: covers/coversearchstatisticsdialog.cpp:51 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 အဖံုးများရရှိ %2 မှ (%3 ) ဖွင့်မရ"
 
-#: ../bin/src/ui_behavioursettingspage.h:206
+#: ../bin/src/ui_behavioursettingspage.h:258
 msgid "Grey out non existent songs in my playlists"
 msgstr "သီချင်းစာရင်းများတွင်မရှိနေသောသီချင်းများကိုမီးခိုးရောင်ပြ"
 
@@ -2458,19 +2592,19 @@ msgstr "သီချင်းစာရင်းများတွင်မရှ
 msgid "Grooveshark"
 msgstr "ဂရုရှက်"
 
-#: internet/groovesharkservice.cpp:408
+#: internet/grooveshark/groovesharkservice.cpp:412
 msgid "Grooveshark login error"
 msgstr "ဂရုရှက်ဖွင့်ဝင်အမှားပြ"
 
-#: internet/groovesharkservice.cpp:1200
+#: internet/grooveshark/groovesharkservice.cpp:1205
 msgid "Grooveshark playlist's URL"
 msgstr "ဂရုရှက်သီချင်းစာရင်းယူအာအလ်"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/grooveshark/groovesharkservice.cpp:624
 msgid "Grooveshark radio"
 msgstr "ဂရုရှက်ရေဒီယို"
 
-#: internet/groovesharkservice.cpp:1178
+#: internet/grooveshark/groovesharkservice.cpp:1183
 msgid "Grooveshark song's URL"
 msgstr "ဂရုရှက်သီချင်းယူအာအလ်"
 
@@ -2506,16 +2640,16 @@ msgstr "အမျိုးအစား/အယ်လဘမ်အုပ်စု�
 msgid "Group by Genre/Artist/Album"
 msgstr "အမျိုးအစား/အနုပညာရှင်/အယ်လဘမ်အုပ်စုအလိုက်"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:67
-#: ../bin/src/ui_edittagdialog.h:691
+#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:67
+#: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "အုပ်စုအလိုက်စုခြင်း"
 
-#: podcasts/podcasturlloader.cpp:204
+#: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
 msgstr "အာအက်စ်အက်စ်ဖိဒ်တစ်ခုမှဟိတ်စ်တီအမ်အယ်စာမျက်နှာတွင်မရှိပါ"
 
-#: internet/subsonicsettingspage.cpp:141
+#: internet/subsonic/subsonicsettingspage.cpp:162
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr "ယူအာအယ်မရှိပဲအိတ်ပ်တီတီပီ ၃XX အချက်အလက်ပြကုဒ်ကိုလက်ခံရရှိ၊ ဆာဗာပုံစံပြင်ခြင်းကိုလုပ်ပါ။"
@@ -2540,7 +2674,7 @@ msgstr "ပစ္စည်းဆက်သွယ်နေစဉ်မှသာဟ
 msgid "High"
 msgstr "မြင့်"
 
-#: analyzers/analyzercontainer.cpp:63
+#: analyzers/analyzercontainer.cpp:69
 #: visualisations/visualisationcontainer.cpp:111
 #, qt-format
 msgid "High (%1 fps)"
@@ -2550,7 +2684,7 @@ msgstr "မြင့် (%1 အက်ဖ်ပီအက်စ်)"
 msgid "High (1024x1024)"
 msgstr "မြင့် (၁၀၂၄x၁၀၂၄)"
 
-#: internet/subsonicsettingspage.cpp:113
+#: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "လက်ခံရှာမတွေ့၊ဆာဗာယူအာအယ်ပြန်စစ်ဆေးပါ။ ဥပမာ: http://localhost:4040/"
 
@@ -2558,7 +2692,7 @@ msgstr "လက်ခံရှာမတွေ့၊ဆာဗာယူအာအယ
 msgid "Hours"
 msgstr "နာရီများ"
 
-#: core/backgroundstreams.cpp:27
+#: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
 msgstr "ဟိုက်ဖ်နိုဖား"
 
@@ -2578,6 +2712,12 @@ msgstr "သင်္ကေတများကိုအပေါ်သို့"
 msgid "Identifying song"
 msgstr "သီချင်းများစစ်ရွေးနေ"
 
+#: ../bin/src/ui_behavioursettingspage.h:260
+msgid ""
+"If activated, clicking a selected song in the playlist view will let you "
+"edit the tag value directly"
+msgstr ""
+
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
@@ -2588,7 +2728,7 @@ msgstr "ဆက်လက်လုပ်လျှင်ယခုပစ္စည်
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr "ပို့စ်ကဒ်ယူအာအယ်ကိုသိပါကအောက်တွင်ထည့်သွင်းပြီးသွားကိုကလစ်နှိပ်ပါ။"
 
-#: ../bin/src/ui_organisedialog.h:250
+#: ../bin/src/ui_organisedialog.h:256
 msgid "Ignore \"The\" in artist names"
 msgstr "အနုပညာရှင်နာမည်များတွင်\"ဒီ\"ကိုအလေးမပေး"
 
@@ -2600,12 +2740,16 @@ msgstr "ပုံများ (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "ပုံများ (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:141
+#: ../bin/src/ui_transcodedialog.h:220
+msgid "Import..."
+msgstr ""
+
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 နေ့များအတွင်း"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 အပတ်များအတွင်း"
@@ -2616,11 +2760,11 @@ msgid ""
 "time a song finishes."
 msgstr "စနစ်အရှင်ထဲတွင်တေးသံလမ်းကြောများရွေးချယ်ပြီးသီချင်းတစ်ပုဒ်ပြီးတိုင်းတေးသံလမ်းကြောထဲသို့ထည့်သွင်း။"
 
-#: internet/spotifyservice.cpp:371
+#: internet/spotify/spotifyservice.cpp:421
 msgid "Inbox"
 msgstr "စာတိုက်ပံုး"
 
-#: ../bin/src/ui_notificationssettingspage.h:443
+#: ../bin/src/ui_notificationssettingspage.h:450
 msgid "Include album art in the notification"
 msgstr "သတိပေးချက်တွင်အယ်လဘမ်အနုပညာထည့်သွင်းစေ"
 
@@ -2628,31 +2772,31 @@ msgstr "သတိပေးချက်တွင်အယ်လဘမ်အနု
 msgid "Include all songs"
 msgstr "သီချင်းများအားလံုးထည့်သွင်းစေ"
 
-#: internet/subsonicsettingspage.cpp:85
+#: internet/subsonic/subsonicsettingspage.cpp:106
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "ဆပ်ဆိုးနစ်အပ်စ်ပရိုတိုကောပံုစံအံဝင်ခွင်မဖြစ်။ အသံုးပြုသူများအဆင့်မြှင့်သင့်။"
 
-#: internet/subsonicsettingspage.cpp:90
+#: internet/subsonic/subsonicsettingspage.cpp:111
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "ဆပ်ဆိုးနစ်အပ်စ်ပရိုတိုကောပံုစံအံဝင်ခွင်မဖြစ်။ ဆာဗာများအဆင့်မြှင့်သင့်။"
 
-#: internet/subsonicsettingspage.cpp:131
+#: internet/subsonic/subsonicsettingspage.cpp:152
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "ပံုစံပြင်ခြင်းမပြီးဆံုးသေး၊လိုအပ်သောနယ်ပယ်များကိုပြီးအောင်ဖြည့်ပါ။"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "အသံပမာဏ၄%ခန့်တိုးမြင့်"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by <value> percent"
 msgstr "အသံပမာဏ <value> ရာခိုင်နှုန်းခန့်တိုးမြင့်"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "အသံပမာဏတိုးမြင့်"
 
-#: internet/cloudfileservice.cpp:133
+#: internet/core/cloudfileservice.cpp:152
 #, qt-format
 msgid "Indexing %1"
 msgstr "ရည်ညွှန်းခြင်း %1"
@@ -2665,55 +2809,60 @@ msgstr "အချက်အလက်"
 msgid "Input options"
 msgstr ""
 
-#: ../bin/src/ui_organisedialog.h:249
+#: ../bin/src/ui_organisedialog.h:255
 msgid "Insert..."
 msgstr "ထည့်သွင်း..."
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Installed"
 msgstr "သွင်းပြီး"
 
-#: core/database.cpp:577
+#: core/database.cpp:585
 msgid "Integrity check"
 msgstr "ခိုင်မြဲမှုစစ်ဆေး"
 
-#: ui/mainwindow.cpp:237
+#: ui/mainwindow.cpp:243
 msgid "Internet"
 msgstr "အင်တာနက်"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:161
 msgid "Internet providers"
 msgstr "အင်တာနက်ပံ့ပိုးသူများ"
 
-#: internet/lastfmservice.cpp:234
+#: ../bin/src/ui_internetshowsettingspage.h:87
+msgctxt "Global search settings dialog title."
+msgid "Internet services"
+msgstr ""
+
+#: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
 msgstr "အေပီအိုင်သော့မမှန်"
 
-#: internet/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:230
 msgid "Invalid format"
 msgstr "ပုံစံမမှန်"
 
-#: internet/lastfmservice.cpp:220
+#: internet/lastfm/lastfmservice.cpp:226
 msgid "Invalid method"
 msgstr "နည်းလမ်းမမှန်"
 
-#: internet/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:232
 msgid "Invalid parameters"
 msgstr "သတ်မှတ်ချက်များမမှန်"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfm/lastfmservice.cpp:234
 msgid "Invalid resource specified"
 msgstr "သတ်မှတ်အရင်းအမြစ်မမှန်"
 
-#: internet/lastfmservice.cpp:218
+#: internet/lastfm/lastfmservice.cpp:224
 msgid "Invalid service"
 msgstr "ဝန်ဆောင်မှုမမှန်"
 
-#: internet/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "စစ်ဆေးခြင်းသော့မမှန်"
 
-#: internet/groovesharkservice.cpp:400
+#: internet/grooveshark/groovesharkservice.cpp:404
 msgid "Invalid username and/or password"
 msgstr "အသင်းဝင်အမည်နှင့်/သို့စကားဝှက်မမှန်"
 
@@ -2721,31 +2870,31 @@ msgstr "အသင်းဝင်အမည်နှင့်/သို့စက�
 msgid "Invert Selection"
 msgstr ""
 
-#: internet/jamendoservice.cpp:133
+#: internet/jamendo/jamendoservice.cpp:138
 msgid "Jamendo"
 msgstr "ဂျမန်တို"
 
-#: internet/jamendoservice.cpp:117
+#: internet/jamendo/jamendoservice.cpp:123
 msgid "Jamendo Most Listened Tracks"
 msgstr "ဂျမန်တိုနားအထောင်ဆံုးတေးသံလမ်းကြောများ"
 
-#: internet/jamendoservice.cpp:114
+#: internet/jamendo/jamendoservice.cpp:120
 msgid "Jamendo Top Tracks"
 msgstr "ဂျမန်တိုထိပ်တန်းတေးသံများ"
 
-#: internet/jamendoservice.cpp:108
+#: internet/jamendo/jamendoservice.cpp:114
 msgid "Jamendo Top Tracks of the Month"
 msgstr "ဂျမန်တိုယခုလထိပ်တန်းတေးသံများ"
 
-#: internet/jamendoservice.cpp:111
+#: internet/jamendo/jamendoservice.cpp:117
 msgid "Jamendo Top Tracks of the Week"
 msgstr "ဂျမန်တိုယခုအပတ်ထိပ်တန်းတေးသံများ"
 
-#: internet/jamendoservice.cpp:175
+#: internet/jamendo/jamendoservice.cpp:180
 msgid "Jamendo database"
 msgstr "ဂျမန်တိုအချက်အလက်အစု"
 
-#: ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
 msgstr "လက်ရှိဖွင့်ဆဲတေးသံလမ်းကြောသို့"
 
@@ -2761,20 +2910,20 @@ msgstr "ခလုတ်များကို %1 စက္ကန့်ကြာ�
 msgid "Keep buttons for %1 seconds..."
 msgstr "ခလုတ်များကို %1 စက္ကန့်များကြာထိန်းထား..."
 
-#: ../bin/src/ui_behavioursettingspage.h:193
+#: ../bin/src/ui_behavioursettingspage.h:245
 msgid "Keep running in the background when the window is closed"
 msgstr "ဝင်းဒိုးပိတ်နေစဉ်နောက်ခံအလုပ်လုပ်စေခြင်း"
 
-#: ../bin/src/ui_organisedialog.h:239
+#: ../bin/src/ui_organisedialog.h:245
 msgid "Keep the original files"
 msgstr "မူရင်းဖိုင်များထိန်းထား"
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:681
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
-msgstr ""
+msgstr "ကြောင်ပေါက်စများ"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:247
 msgid "Language"
 msgstr "ဘာသာစကား"
 
@@ -2786,19 +2935,23 @@ msgstr "လက်ဆွဲကွန်ပျူတာ/နားကြပ်မ�
 msgid "Large Hall"
 msgstr "ခန်းမကြီး"
 
-#: widgets/nowplayingwidget.cpp:94
+#: widgets/nowplayingwidget.cpp:97
 msgid "Large album cover"
 msgstr "အယ်လဘမ်အဖုံးကြီး"
+
+#: widgets/nowplayingwidget.cpp:100
+msgid "Large album cover (details below)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
 msgstr "ဘေးတိုင်ကြီး"
 
-#: library/library.cpp:80
+#: library/library.cpp:83
 msgid "Last played"
 msgstr "နောက်ဆံုးသီချင်းဖွင့်ခဲ့သမျှ"
 
-#: playlist/playlist.cpp:1330 ../bin/src/ui_edittagdialog.h:671
+#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr ""
@@ -2807,7 +2960,7 @@ msgstr ""
 msgid "Last.fm"
 msgstr "လက်စ်.အက်ဖ်အမ်"
 
-#: internet/lastfmservice.cpp:241
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "လက်စ်.အက်ဖ်အမ်အလုပ်ရှုပ်နေ၊ မကြာမီမိနစ်အနည်းငယ်အတွင်းထပ်စမ်းကြည့်"
 
@@ -2831,7 +2984,7 @@ msgstr "လက်စ်.အက်ဖ်အမ်အသင်းဝင်အမ�
 msgid "Last.fm wiki"
 msgstr "လက်စ်.အက်ဖ်အမ်ဝီကီ"
 
-#: library/library.cpp:102
+#: library/library.cpp:105
 msgid "Least favourite tracks"
 msgstr "အနှစ်သက်ဆုံးတေးသံလမ်းကြောများအနည်းဆုံး"
 
@@ -2839,12 +2992,13 @@ msgstr "အနှစ်သက်ဆုံးတေးသံလမ်းကြေ
 msgid "Left"
 msgstr "ဘယ်"
 
-#: playlist/playlist.cpp:1305 ui/organisedialog.cpp:74
-#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:666
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
+#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "အလျား"
 
-#: ui/mainwindow.cpp:219 ui/mainwindow.cpp:232
+#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ../bin/src/ui_seafilesettingspage.h:178
 msgid "Library"
 msgstr "သီချင်းတိုက်"
 
@@ -2852,7 +3006,7 @@ msgstr "သီချင်းတိုက်"
 msgid "Library advanced grouping"
 msgstr "သီချင်းတိုက်အဆင့်မြင့်အုပ်စုဖွဲ့ခြင်း"
 
-#: ui/mainwindow.cpp:2382
+#: ui/mainwindow.cpp:2413
 msgid "Library rescan notice"
 msgstr "သီချင်းတိုက်ပြန်လည်ဖတ်ရှုအကြောင်းကြားစာ"
 
@@ -2864,7 +3018,7 @@ msgstr "သီချင်းတိုက်ရှာဖွေ"
 msgid "Limits"
 msgstr "ကန့်သတ်ချက်များ"
 
-#: internet/groovesharkservice.cpp:621
+#: internet/grooveshark/groovesharkservice.cpp:626
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "ယခင်နားဆင်မှုများအပေါ်မူတည်၍ဂရုရှက်သီချင်းများကိုနားဆင်"
@@ -2897,7 +3051,7 @@ msgstr "ဓာတ်ပြားမှအဖုံးထည့်သွင်း
 msgid "Load playlist"
 msgstr "သီချင်းစာရင်းထည့်သွင်း"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:695
 msgid "Load playlist..."
 msgstr "သီချင်းစာရင်းထည့်သွင်း..."
 
@@ -2913,67 +3067,67 @@ msgstr "အိုင်ပေါ့အချက်အလက်အစုထည့
 msgid "Loading smart playlist"
 msgstr "ချက်ချာသီချင်းစာရင်းထည့်သွင်းနေ"
 
-#: library/librarymodel.cpp:148
+#: library/librarymodel.cpp:157
 msgid "Loading songs"
 msgstr "သီချင်းများထည့်သွင်းနေ"
 
-#: internet/digitallyimportedurlhandler.cpp:63
-#: internet/somafmurlhandler.cpp:49
+#: internet/digitally/digitallyimportedurlhandler.cpp:67
+#: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "သီချင်းစီးကြောင်းထည့်သွင်းနေ"
 
-#: playlist/songloaderinserter.cpp:124 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:242
 msgid "Loading tracks"
 msgstr "တေးသံလမ်းကြောများထည့်သွင်းနေ"
 
-#: playlist/songloaderinserter.cpp:144
+#: playlist/songloaderinserter.cpp:149
 msgid "Loading tracks info"
 msgstr "တေးသံလမ်းကြောအချက်အလက်များထည့်သွင်းနေ"
 
-#: library/librarymodel.cpp:143 podcasts/podcastdiscoverymodel.cpp:102
-#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:96
-#: internet/vkservice.cpp:485 internet/vksettingspage.cpp:122
-#: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
-#: ../bin/src/ui_organisedialog.h:255
+#: library/librarymodel.cpp:152
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
+#: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
+#: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
+#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "ထည့်သွင်းနေ..."
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "ဖိုင်များ/ယူအာအလ်များထည့်သွင်း၊ ယခုသီချင်းစာရင်းအစားထိုး"
 
-#: internet/vksettingspage.cpp:110
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
-#: ../bin/src/ui_dropboxsettingspage.h:105
-#: ../bin/src/ui_skydrivesettingspage.h:105
-#: ../bin/src/ui_boxsettingspage.h:105 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_skydrivesettingspage.h:105
+#: ../bin/src/ui_boxsettingspage.h:105 internet/vk/vksettingspage.cpp:111
+#: ../bin/src/ui_vksettingspage.h:219 ../bin/src/ui_seafilesettingspage.h:173
 msgid "Login"
 msgstr "ဖွင့်ဝင်"
 
-#: podcasts/podcastsettingspage.cpp:120
+#: internet/podcasts/podcastsettingspage.cpp:127
 msgid "Login failed"
 msgstr "ဖွင့်ဝင်၍မရ"
 
-#: internet/vksettingspage.cpp:121
+#: internet/vk/vksettingspage.cpp:121
 msgid "Logout"
-msgstr ""
+msgstr "ထွက်ခွာ"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
 msgstr "ကာလရှည်ခန့်မှန်းအကြောင်း (အယ်တီပီ)"
 
-#: ../bin/src/ui_mainwindow.h:648
+#: ../bin/src/ui_mainwindow.h:652
 msgid "Love"
 msgstr "နှစ်သက်"
 
-#: analyzers/analyzercontainer.cpp:61
+#: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
@@ -2996,11 +3150,11 @@ msgstr "သီချင်းစာသားများ"
 msgid "Lyrics from %1"
 msgstr "%1 မှသီချင်းစာသားများ"
 
-#: transcoder/transcoder.cpp:232
+#: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
-msgstr ""
+msgstr "MP4 AAC"
 
-#: core/song.cpp:385 transcoder/transcoder.cpp:235
+#: core/song.cpp:399 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "အမ်ပီသရီး"
@@ -3013,15 +3167,16 @@ msgstr "အမ်ပီသရီး၂၅၆ကီလို"
 msgid "MP3 96k"
 msgstr "အမ်ပီသရီး၉၆ကီလို"
 
-#: core/song.cpp:381
+#: core/song.cpp:395
 msgid "MP4 AAC"
 msgstr "အမ်ပီဖိုးအေအေစီ"
 
-#: core/song.cpp:383
+#: core/song.cpp:397
 msgid "MPC"
 msgstr "အမ်ပီစီ"
 
-#: internet/magnatuneservice.cpp:101 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatune/magnatuneservice.cpp:109
+#: ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "မက်နကျွန်း"
 
@@ -3029,7 +3184,7 @@ msgstr "မက်နကျွန်း"
 msgid "Magnatune Download"
 msgstr "မက်နကျွန်းကူးဆွဲ"
 
-#: widgets/osd.cpp:192
+#: widgets/osd.cpp:196
 msgid "Magnatune download finished"
 msgstr "မက်နကျွန်းကူးဆွဲပြီးဆံုး"
 
@@ -3037,20 +3192,20 @@ msgstr "မက်နကျွန်းကူးဆွဲပြီးဆံုး
 msgid "Main profile (MAIN)"
 msgstr "အဓိကအကြောင်း(အဓိက)"
 
-#: core/backgroundstreams.cpp:33
+#: core/backgroundstreams.cpp:52
 msgid "Make it so!"
 msgstr "အဲဒီကဲ့သို့လုပ်"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_mainwindow.h:680
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
-msgstr ""
+msgstr "အဲဒီကဲ့သို့လုပ်"
 
-#: internet/spotifyservice.cpp:552
+#: internet/spotify/spotifyservice.cpp:662
 msgid "Make playlist available offline"
 msgstr "သီချင်းစာရင်းအောဖ့်လိုင်းသုံးလုပ်"
 
-#: internet/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Malformed response"
 msgstr "တုံ့ပြန်မှုပုံမမှန်"
 
@@ -3058,8 +3213,8 @@ msgstr "တုံ့ပြန်မှုပုံမမှန်"
 msgid "Manual proxy configuration"
 msgstr "ပရောက်ဇီပုံစံလက်အားသံုးပြင်ခြင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:231
-#: ../bin/src/ui_podcastsettingspage.h:245
+#: ../bin/src/ui_podcastsettingspage.h:259
+#: ../bin/src/ui_podcastsettingspage.h:273
 msgid "Manually"
 msgstr "လက်အားသံုး"
 
@@ -3067,11 +3222,11 @@ msgstr "လက်အားသံုး"
 msgid "Manufacturer"
 msgstr "ထုတ်လုပ်သူ"
 
-#: podcasts/podcastservice.cpp:357
+#: internet/podcasts/podcastservice.cpp:448 ../bin/src/ui_organisedialog.h:260
 msgid "Mark as listened"
 msgstr "နားထောင်ပြီးကဲ့သို့မတ်သား"
 
-#: podcasts/podcastservice.cpp:356
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Mark as new"
 msgstr "အသစ်ကဲ့သို့မတ်သား"
 
@@ -3083,15 +3238,19 @@ msgstr "ရှာဖွေစကားရပ်တိုင်းဟပ်စပ
 msgid "Match one or more search terms (OR)"
 msgstr "ရှာဖွေစကားရပ်များတစ်ခုသို့အများဟပ်စပ် (သို့)"
 
-#: ../bin/src/ui_vksettingspage.h:215
+#: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
-msgstr ""
+msgstr "အများသုံးရလဒ်များရှာဖွေမှုအများဆုံး"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "အများဆုံးဘစ်နှုန်း"
 
-#: analyzers/analyzercontainer.cpp:62
+#: ui/ripcd.cpp:296
+msgid "Media has changed. Reloading"
+msgstr ""
+
+#: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "Medium (%1 fps)"
@@ -3133,12 +3292,12 @@ msgstr "မိုနိတစ်ခုတည်း"
 msgid "Months"
 msgstr "လများ"
 
-#: playlist/playlist.cpp:1358
+#: playlist/playlist.cpp:1366
 msgid "Mood"
 msgstr "စိတ်နေစိတ်ထား"
 
 #: ../bin/src/ui_appearancesettingspage.h:294
-#: moodbar/moodbarproxystyle.cpp:376
+#: moodbar/moodbarproxystyle.cpp:382
 msgid "Moodbar style"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းပုံစံ"
 
@@ -3146,11 +3305,11 @@ msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းပုံ
 msgid "Moodbars"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းများ"
 
-#: internet/vkservice.cpp:489
+#: internet/vk/vkservice.cpp:503
 msgid "More"
-msgstr ""
+msgstr "နောက်ထပ်"
 
-#: library/library.cpp:84
+#: library/library.cpp:87
 msgid "Most played"
 msgstr "အများဆံုးဖွင့်ခဲ့သမျှ"
 
@@ -3167,7 +3326,7 @@ msgstr "အမှတ်များစီစဉ်"
 msgid "Move down"
 msgstr "အောက်သို့ရွှေ့"
 
-#: ui/mainwindow.cpp:595 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "သီချင်းတိုက်သို့ရွှေ့..."
 
@@ -3176,7 +3335,8 @@ msgstr "သီချင်းတိုက်သို့ရွှေ့..."
 msgid "Move up"
 msgstr "အပေါ်သို့ရွှေ့"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1798
+#: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "ဂီတ"
 
@@ -3184,32 +3344,36 @@ msgstr "ဂီတ"
 msgid "Music Library"
 msgstr "ဂီတတိုက်"
 
-#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:699
+#: core/globalshortcuts.cpp:63 ../bin/src/ui_mainwindow.h:703
 #: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Mute"
 msgstr "အသံအုပ်"
 
-#: internet/groovesharkservice.cpp:628 internet/vkservice.cpp:504
+#: internet/vk/vkservice.cpp:820
+msgid "My Albums"
+msgstr ""
+
+#: internet/grooveshark/groovesharkservice.cpp:633
+#: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "ငါ့ဂီတ"
 
-#: internet/vkservice.cpp:496
+#: internet/vk/vkservice.cpp:510
 msgid "My Recommendations"
 msgstr "ငါ့ထောက်ခံချက်များ"
 
-#: internet/groovesharkservice.cpp:1287 internet/groovesharkservice.cpp:1382
-#: ui/equalizer.cpp:199 ../bin/src/ui_deviceproperties.h:369
-#: ../bin/src/ui_wizardfinishpage.h:84
+#: internet/grooveshark/groovesharkservice.cpp:1276
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "နာမည်"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgctxt "Category label"
 msgid "Name"
-msgstr ""
+msgstr "နာမည်"
 
-#: ../bin/src/ui_organisedialog.h:243
+#: ../bin/src/ui_organisedialog.h:249
 msgid "Naming options"
 msgstr "နာမည်ပေးခြင်းရွေးပိုင်ခွင့်များ"
 
@@ -3221,7 +3385,7 @@ msgstr "ရေဒီယိုလှိုင်းကျဉ်း (အန်ဘ�
 msgid "Network Proxy"
 msgstr "ကွန်ရက်ပရောက်ဇီ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:178
+#: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Network Remote"
 msgstr "ကွန်ရက်အဝေးထိန်း"
 
@@ -3229,12 +3393,12 @@ msgstr "ကွန်ရက်အဝေးထိန်း"
 msgid "Never"
 msgstr "ဘယ်သောအခါမှ"
 
-#: library/library.cpp:73
+#: library/library.cpp:76
 msgid "Never played"
 msgstr "သီချင်းမဖွင့်ခဲ့သမျှ"
 
-#: ../bin/src/ui_behavioursettingspage.h:210
-#: ../bin/src/ui_behavioursettingspage.h:224
+#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:280
 msgid "Never start playing"
 msgstr "သီချင်းလုံးဝစတင်မဖွင့်"
 
@@ -3244,7 +3408,7 @@ msgstr "သီချင်းလုံးဝစတင်မဖွင့်"
 msgid "New folder"
 msgstr "ဖိုင်တွဲအသစ်"
 
-#: ui/mainwindow.cpp:1635 ../bin/src/ui_mainwindow.h:687
+#: ui/mainwindow.cpp:1666 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "သီချင်းစာရင်းအသစ်"
 
@@ -3260,7 +3424,7 @@ msgstr "သီချင်းအသစ်များ"
 msgid "New tracks will be added automatically."
 msgstr "တေးသံလမ်းကြောများအလိုအလျောက်ထည့်။"
 
-#: library/library.cpp:92
+#: library/library.cpp:95
 msgid "Newest tracks"
 msgstr "တေးသံလမ်းကြောအသစ်ဆုံးများ"
 
@@ -3268,16 +3432,16 @@ msgstr "တေးသံလမ်းကြောအသစ်ဆုံးမျာ
 msgid "Next"
 msgstr "နောက်တစ်ခု"
 
-#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:642
+#: core/globalshortcuts.cpp:57 ../bin/src/ui_mainwindow.h:646
 #: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Next track"
 msgstr "နောက်တေးသံလမ်းကြော"
 
-#: core/utilities.cpp:142
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "နောက်အပတ်"
 
-#: analyzers/analyzercontainer.cpp:79
+#: analyzers/analyzercontainer.cpp:86
 msgid "No analyzer"
 msgstr "စိစစ်သူမရှိ"
 
@@ -3293,7 +3457,7 @@ msgstr "တင်ပို့ရန်အဖံုးများမရှိ"
 msgid "No long blocks"
 msgstr "ဘလောက်ရှည်များမရှိ"
 
-#: playlist/playlistcontainer.cpp:365
+#: playlist/playlistcontainer.cpp:371
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "ဟပ်စပ်များရှာမတွေ့။ သီချင်းစာရင်းတစ်ခုလံုးနောက်တစ်ချိန်ပြသရန်ရှာဖွေနေရာကိုဖယ်ရှင်းပါ။ "
@@ -3302,12 +3466,12 @@ msgstr "ဟပ်စပ်များရှာမတွေ့။ သီချ�
 msgid "No short blocks"
 msgstr "ဘလောက်တိုများမရှိ"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:142
-#: ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
+#: ../bin/src/ui_groupbydialog.h:158
 msgid "None"
 msgstr "ဘယ်တစ်ခုမျှ"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2111 ui/mainwindow.cpp:2259
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "ရွေးချယ်ပြီးသီချင်းများတစ်ခုမှပစ္စည်းသို့ကူးယူရန်မသင့်တော်"
 
@@ -3327,23 +3491,23 @@ msgstr "သီချင်းစာရင်းအရှင်သံုးနေ
 msgid "Not connected"
 msgstr "မဆက်သွယ်ထား"
 
-#: internet/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:250
 msgid "Not enough content"
 msgstr "အကြောင်းအရာလုံလောက်မှုမရှိ"
 
-#: internet/lastfmservice.cpp:248
+#: internet/lastfm/lastfmservice.cpp:254
 msgid "Not enough fans"
 msgstr "အားပေးသူများလုံလောက်မှုမရှိ"
 
-#: internet/lastfmservice.cpp:246
+#: internet/lastfm/lastfmservice.cpp:252
 msgid "Not enough members"
 msgstr "အသင်းဝင်များလုံလောက်မှုမရှိ"
 
-#: internet/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:256
 msgid "Not enough neighbors"
 msgstr "အိမ်နီးနားချင်းများလုံလောက်မှုမရှိ"
 
-#: internet/spotifysettingspage.cpp:72
+#: internet/spotify/spotifysettingspage.cpp:75
 msgid "Not installed"
 msgstr "မသွင်းထား"
 
@@ -3356,15 +3520,15 @@ msgstr "မဖွင့်ဝင်ရသေး"
 msgid "Not mounted - double click to mount"
 msgstr "မစီစဉ်ထား - စီစဉ်ရန်ကလစ်နှစ်ခါနှိပ်"
 
-#: internet/vksearchdialog.cpp:94
+#: internet/vk/vksearchdialog.cpp:93
 msgid "Nothing found"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:432
+#: ../bin/src/ui_notificationssettingspage.h:438
 msgid "Notification type"
 msgstr "သတိပေးချက်ပုံစံ"
 
-#: ../bin/src/ui_notificationssettingspage.h:375
+#: ../bin/src/ui_notificationssettingspage.h:381
 msgid "Notifications"
 msgstr "သတိပေးချက်များ"
 
@@ -3372,41 +3536,45 @@ msgstr "သတိပေးချက်များ"
 msgid "Now Playing"
 msgstr "ယခုသီချင်းဖွင့်ဆဲ"
 
+#: ../bin/src/ui_podcastsettingspage.h:280
+msgid "Number of episodes to show"
+msgstr ""
+
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ကြိုတင်ကြည့်ရှု"
 
-#: widgets/osd.cpp:169
+#: widgets/osd.cpp:173
 msgid "Off"
-msgstr ""
+msgstr "ပိတ်"
 
-#: core/song.cpp:387 transcoder/transcoder.cpp:241
+#: core/song.cpp:401 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "အောဖ့်အက်ဖ်အယ်အေစီ"
 
-#: core/song.cpp:393 transcoder/transcoder.cpp:247
+#: core/song.cpp:407 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "အောဖ့်တေး"
 
-#: core/song.cpp:389 transcoder/transcoder.cpp:244
+#: core/song.cpp:403 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "အောဖ့်စဖိစ်"
 
-#: core/song.cpp:391 transcoder/transcoder.cpp:238
+#: core/song.cpp:405 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "အောဖ့်ဗော်ဘစ်စ်"
 
-#: widgets/osd.cpp:169
+#: widgets/osd.cpp:173
 msgid "On"
-msgstr ""
+msgstr "ဖွင့်"
 
 #: ../bin/src/ui_skydrivesettingspage.h:103
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:183
+#: ../bin/src/ui_networkremotesettingspage.h:227
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3414,7 +3582,7 @@ msgid ""
 "192.168.x.x"
 msgstr "အိုင်ပီအတွင်းရှိအသံုးပြုသူများဆက်သွယ်မှုများကိုသာလက်ခံ:⏎ ၁၀.x.x.x⏎ ၁၇၂.၁၆.၀.၀ - ၁၇၂.၃၁.၂၅၅.၂၅၅⏎ ၁၉၂.၁၆၈.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:188
+#: ../bin/src/ui_networkremotesettingspage.h:232
 msgid "Only allow connections from the local network"
 msgstr "ကွန်ယက်တွင်းရှိဆက်သွယ်ချက်များကိုသာခွင့်ပြု"
 
@@ -3426,50 +3594,57 @@ msgstr "ပထမဦးဆုံးကိုသာပြသ"
 msgid "Opacity"
 msgstr "အလင်းပိတ်မှု"
 
-#: internet/digitallyimportedservicebase.cpp:172
-#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:297
-#: internet/jamendoservice.cpp:428 internet/magnatuneservice.cpp:276
-#: internet/somafmservice.cpp:97 internet/soundcloudservice.cpp:356
+#: internet/digitally/digitallyimportedservicebase.cpp:176
+#: internet/grooveshark/groovesharkservice.cpp:559
+#: internet/icecast/icecastservice.cpp:302
+#: internet/jamendo/jamendoservice.cpp:434
+#: internet/magnatune/magnatuneservice.cpp:284
+#: internet/somafm/somafmservice.cpp:102
+#: internet/soundcloud/soundcloudservice.cpp:351
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "ဘရောက်ဇာထဲတွင် %1 ဖွင့်"
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:676
 msgid "Open &audio CD..."
 msgstr "အသံဓာတ်ပြားဖွင့်(&a)..."
 
-#: podcasts/addpodcastdialog.cpp:235
+#: internet/podcasts/addpodcastdialog.cpp:238
 msgid "Open OPML file"
 msgstr "အိုပီအမ်အယ်ဖိုင်ဖွင့်"
 
-#: podcasts/addpodcastdialog.cpp:77
+#: internet/podcasts/addpodcastdialog.cpp:80
 msgid "Open OPML file..."
 msgstr "အိုပီအမ်အယ်ဖိုင်ဖွင့်..."
+
+#: transcoder/transcodedialog.cpp:234
+msgid "Open a directory to import music from"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
 msgstr "ပစ္စည်းဖွင့်"
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:675
 msgid "Open file..."
 msgstr "ဖိုင်ဖွင့်..."
 
-#: internet/googledriveservice.cpp:193
+#: internet/googledrive/googledriveservice.cpp:216
 msgid "Open in Google Drive"
 msgstr "ဂူဂယ်ဒရိုက်ဗ်တွင်ဖွင့်"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:460
-#: internet/internetservice.cpp:75 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "သီချင်းစာရင်းအသစ်တွင်ဖွင့်"
 
-#: ../bin/src/ui_behavioursettingspage.h:219
+#: ../bin/src/ui_behavioursettingspage.h:275
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
 
-#: songinfo/echonestbiographies.cpp:97
+#: songinfo/echonestbiographies.cpp:101
 msgid "Open in your browser"
 msgstr "ဘရောက်ဇာထဲတွင်ဖွင့်"
 
@@ -3478,7 +3653,7 @@ msgstr "ဘရောက်ဇာထဲတွင်ဖွင့်"
 msgid "Open..."
 msgstr "ဖွင့်..."
 
-#: internet/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:236
 msgid "Operation failed"
 msgstr "လည်ပတ်မှုလုပ်မရ"
 
@@ -3490,7 +3665,8 @@ msgstr "ဘစ်နှုန်းအတွက်ဆောင်ရွက်"
 msgid "Optimize for quality"
 msgstr "အရည်အသွေးအတွက်ဆောင်ရွက်"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_transcodedialog.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
 msgid "Options..."
 msgstr "ရွေးပိုင်ခွင့်များ..."
 
@@ -3498,15 +3674,15 @@ msgstr "ရွေးပိုင်ခွင့်များ..."
 msgid "Opus"
 msgstr "တေး"
 
-#: ../bin/src/ui_organisedialog.h:234
+#: ../bin/src/ui_organisedialog.h:240
 msgid "Organise Files"
 msgstr "ဖိုင်များစုစည်း"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:598
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
 msgid "Organise files..."
 msgstr "ဖိုင်များစုစည်း..."
 
-#: core/organise.cpp:67
+#: core/organise.cpp:73
 msgid "Organising files"
 msgstr "ဖိုင်များစုစည်းနေ"
 
@@ -3514,7 +3690,7 @@ msgstr "ဖိုင်များစုစည်းနေ"
 msgid "Original tags"
 msgstr "မူရင်းအမည်များ"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Other options"
 msgstr "အခြားရွေးပိုင်ခွင့်များ"
 
@@ -3526,7 +3702,7 @@ msgstr "ပေးပို့"
 msgid "Output device"
 msgstr "ပေးပို့ပစ္စည်း"
 
-#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_ripcd.h:318
+#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcd.h:318
 msgid "Output options"
 msgstr "ပေးပို့ရွေးပိုင်ခွင့်များ"
 
@@ -3534,7 +3710,7 @@ msgstr "ပေးပို့ရွေးပိုင်ခွင့်မျာ
 msgid "Overwrite all"
 msgstr "အားလံုးအစားထိုးရေး"
 
-#: ../bin/src/ui_organisedialog.h:253
+#: ../bin/src/ui_organisedialog.h:259
 msgid "Overwrite existing files"
 msgstr "တည်ရှိဆဲဖိုင်များထပ်မံဖြည့်သွင်း"
 
@@ -3546,7 +3722,7 @@ msgstr "အသေးစားများကိုသာအစားထိုး
 msgid "Owner"
 msgstr "ပိုင်ရှင်"
 
-#: internet/jamendoservice.cpp:222
+#: internet/jamendo/jamendoservice.cpp:228
 msgid "Parsing Jamendo catalogue"
 msgstr "ဂျမန်တိုစာရင်းစစ်ထုတ်ခြင်း"
 
@@ -3558,26 +3734,27 @@ msgstr "အဖွဲ့"
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
-#: ../bin/src/ui_podcastsettingspage.h:253
+#: ../bin/src/ui_podcastsettingspage.h:285
 #: ../bin/src/ui_networkproxysettingspage.h:169
+#: ../bin/src/ui_seafilesettingspage.h:170
 msgid "Password"
 msgstr "စကားဝှက်"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:1007 ui/mainwindow.cpp:1448
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "ရပ်တန့်"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Pause playback"
 msgstr "ပြန်ဖွင့်ရပ်တန့်"
 
-#: widgets/osd.cpp:153
+#: widgets/osd.cpp:156
 msgid "Paused"
 msgstr "ရပ်တန့်ပြီး"
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:66
-#: ../bin/src/ui_edittagdialog.h:690
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:66
+#: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "တင်ဆင်သူ"
 
@@ -3589,31 +3766,31 @@ msgstr "အစက်အပြောက်"
 msgid "Plain sidebar"
 msgstr "ဘေးတိုင်ရိုးရိုး"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:570 ui/mainwindow.cpp:977
-#: ui/mainwindow.cpp:994 ui/mainwindow.cpp:1451 ui/qtsystemtrayicon.cpp:164
-#: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:638
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
+#: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
+#: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
 msgstr "ဖွင့်"
 
-#: playlist/playlist.cpp:1326 ../bin/src/ui_edittagdialog.h:667
+#: playlist/playlist.cpp:1334 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "ဖွင့်သံအရေအတွက်"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:151
 msgid "Play if stopped, pause if playing"
 msgstr "ရပ်တန့်ပြီးလျှင်ဖွင့်၊ ဖွင့်ပြီးလျှင်ရပ်တန့်"
 
-#: ../bin/src/ui_behavioursettingspage.h:211
-#: ../bin/src/ui_behavioursettingspage.h:225
+#: ../bin/src/ui_behavioursettingspage.h:267
+#: ../bin/src/ui_behavioursettingspage.h:281
 msgid "Play if there is nothing already playing"
 msgstr "ဘယ်သီချင်းမှဖွင့်မနေလျှင်စတင်ဖွင့်"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
 msgstr "သီချင်းစာရင်းတွင်တေးသံလမ်းကြော <n> စတင်ဖွင့်"
 
-#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "ဖွင့်/ရပ်တန့်"
 
@@ -3621,21 +3798,22 @@ msgstr "ဖွင့်/ရပ်တန့်"
 msgid "Playback"
 msgstr "ပြန်ဖွင့်"
 
-#: core/commandlineoptions.cpp:143
+#: core/commandlineoptions.cpp:149
 msgid "Player options"
 msgstr "ဖွင့်စက်ရွေးပိုင်ခွင့်များ"
 
 #: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
-#: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:466 playlist/playlisttabbar.cpp:349
+#: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
+#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "သီချင်းစာရင်း"
 
-#: widgets/osd.cpp:176
+#: widgets/osd.cpp:180
 msgid "Playlist finished"
 msgstr "သီချင်းစာရင်းပြီးဆံုး"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:95
 msgid "Playlist options"
 msgstr "သီချင်းစာရင်းရွေးပိုင်ခွင့်များ"
 
@@ -3643,8 +3821,8 @@ msgstr "သီချင်းစာရင်းရွေးပိုင်ခွ
 msgid "Playlist type"
 msgstr "သီချင်းစာရင်းအမျိုးအစား"
 
-#: internet/groovesharkservice.cpp:649 internet/soundcloudservice.cpp:130
-#: ui/mainwindow.cpp:235
+#: internet/grooveshark/groovesharkservice.cpp:654
+#: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "သီချင်းစာရင်းများ"
 
@@ -3656,7 +3834,8 @@ msgstr "ဘရောက်ဇာကိုပိတ်ပြီးကလီမန
 msgid "Plugin status:"
 msgstr "ဖြည့်စွက်ပရိုဂရမ်အခြေအနေ:"
 
-#: podcasts/podcastservice.cpp:120 ../bin/src/ui_podcastsettingspage.h:226
+#: internet/podcasts/podcastservice.cpp:131
+#: ../bin/src/ui_podcastsettingspage.h:254
 msgid "Podcasts"
 msgstr "ပို့စ်ကဒ်များ"
 
@@ -3664,24 +3843,24 @@ msgstr "ပို့စ်ကဒ်များ"
 msgid "Pop"
 msgstr "ပေါ့ဂီတ"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/grooveshark/groovesharkservice.cpp:591
 msgid "Popular songs"
 msgstr "ရေပန်းစားဆံုးသီချင်းများ"
 
-#: internet/groovesharkservice.cpp:590
+#: internet/grooveshark/groovesharkservice.cpp:595
 msgid "Popular songs of the Month"
 msgstr "ယခုလရေပန်းစားဆံုးသီချင်းများ"
 
-#: internet/groovesharkservice.cpp:599
+#: internet/grooveshark/groovesharkservice.cpp:604
 msgid "Popular songs today"
 msgstr "ယနေ့ရေပန်းစားဆံုးသီချင်းများ"
 
-#: ../bin/src/ui_notificationssettingspage.h:438
+#: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "ထွက်ပေါ်ကြာချိန်"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:181
+#: ../bin/src/ui_networkremotesettingspage.h:225
 msgid "Port"
 msgstr "နံပါတ်ပေါက်"
 
@@ -3689,15 +3868,19 @@ msgstr "နံပါတ်ပေါက်"
 msgid "Pre-amp"
 msgstr "အသံချဲ့အကြို"
 
+#: ../bin/src/ui_seafilesettingspage.h:177
+msgid "Preference"
+msgstr "လိုလားချက်"
+
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
-#: ../bin/src/ui_vksettingspage.h:214 ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
 msgid "Preferences"
 msgstr "လိုလားချက်များ"
 
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:665
 msgid "Preferences..."
 msgstr "လိုလားချက်များ..."
 
@@ -3738,13 +3921,13 @@ msgstr "စာတစ်လံုးခေါက်"
 msgid "Press a key combination to use for %1..."
 msgstr "%1 အတွက်အသုံးပြုရန်ခလုတ်များပေါင်းခေါက်..."
 
-#: ../bin/src/ui_notificationssettingspage.h:451
+#: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှရွေးပိုင်ခွင့်များ"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:158
-#: ../bin/src/ui_notificationssettingspage.h:446
-#: ../bin/src/ui_organisedialog.h:254
+#: ../bin/src/ui_notificationssettingspage.h:453
+#: ../bin/src/ui_organisedialog.h:261
 msgid "Preview"
 msgstr "ကြိုတင်ကြည့်ရှု"
 
@@ -3752,12 +3935,12 @@ msgstr "ကြိုတင်ကြည့်ရှု"
 msgid "Previous"
 msgstr "ယခင်"
 
-#: core/globalshortcuts.cpp:55 ../bin/src/ui_mainwindow.h:636
+#: core/globalshortcuts.cpp:59 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Previous track"
 msgstr "ယခင်တေးသံလမ်းကြော"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:176
 msgid "Print out version information"
 msgstr "ပုံစံအချက်အလက်ဖော်ပြ"
 
@@ -3765,14 +3948,14 @@ msgstr "ပုံစံအချက်အလက်ဖော်ပြ"
 msgid "Profile"
 msgstr "အကြောင်း"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcd.h:324
+#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcd.h:324
 msgid "Progress"
 msgstr "အခြေအနေ"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
 msgctxt "Category label"
 msgid "Progress"
-msgstr ""
+msgstr "အခြေအနေ"
 
 #: ui/equalizer.cpp:138
 msgid "Psychedelic"
@@ -3793,27 +3976,27 @@ msgstr "သီချင်းများကိုကျပန်းစီစဉ
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "အရည်အသွေး"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "အရည်အသွေး"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
 msgstr "ပစ္စည်းမေးမြန်းခြင်း..."
 
-#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:701
 msgid "Queue Manager"
 msgstr "စီတန်းမန်နေဂျာ"
 
-#: ui/mainwindow.cpp:1543
+#: ui/mainwindow.cpp:1574
 msgid "Queue selected tracks"
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများစီတန်း"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1541
+#: ui/mainwindow.cpp:1572
 msgid "Queue track"
 msgstr "တေးသံလမ်းကြောစီတန်း"
 
@@ -3821,77 +4004,79 @@ msgstr "တေးသံလမ်းကြောစီတန်း"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "ရေဒီယို (တေးသံလမ်းကြောများအားလံုးအတွက်တူညီအသံကျယ်ကျယ်)"
 
-#: internet/groovesharkservice.cpp:608
+#: internet/grooveshark/groovesharkservice.cpp:613
 msgid "Radios"
 msgstr "ရေဒီယိုများ"
 
-#: core/backgroundstreams.cpp:28
+#: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "မိုး"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:678
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
-msgstr ""
+msgstr "မိုး"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
 msgstr "ကျပန်းပုံဖော်ကြည့်ခြင်း"
 
-#: core/globalshortcuts.cpp:75
+#: core/globalshortcuts.cpp:79
 msgid "Rate the current song 0 stars"
 msgstr "လက်ရှိသီချင်း၀ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:77
+#: core/globalshortcuts.cpp:81
 msgid "Rate the current song 1 star"
 msgstr "လက်ရှိသီချင်း၁ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:79
+#: core/globalshortcuts.cpp:83
 msgid "Rate the current song 2 stars"
 msgstr "လက်ရှိသီချင်း၂ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:81
+#: core/globalshortcuts.cpp:85
 msgid "Rate the current song 3 stars"
 msgstr "လက်ရှိသီချင်း၃ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 4 stars"
 msgstr "လက်ရှိသီချင်း၄ကြယ်တန်ဖိုးဖြတ်"
 
-#: core/globalshortcuts.cpp:85
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 5 stars"
 msgstr "လက်ရှိသီချင်း၅ကြယ်တန်ဖိုးဖြတ်"
 
-#: playlist/playlist.cpp:1324 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "အဆင့်သတ်မှတ်ချက်များ"
 
-#: internet/magnatunedownloaddialog.cpp:303 ui/albumcovermanager.cpp:218
+#: internet/magnatune/magnatunedownloaddialog.cpp:305
+#: ui/albumcovermanager.cpp:218
 msgid "Really cancel?"
 msgstr "တကယ်ပယ်ဖျက်?"
 
-#: internet/subsonicsettingspage.cpp:136
+#: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "ဦးတည်ရာပြောင်းကန့်သတ်ကျော်လွန်၊ ဆာဗာပုံစံပြင်ခြင်းလုပ်ပါ။"
 
-#: internet/groovesharkservice.cpp:556
+#: internet/grooveshark/groovesharkservice.cpp:561
 msgid "Refresh"
 msgstr "ပြန်လည်"
 
-#: internet/jamendoservice.cpp:431 internet/magnatuneservice.cpp:279
-#: internet/subsonicservice.cpp:87
+#: internet/jamendo/jamendoservice.cpp:437
+#: internet/magnatune/magnatuneservice.cpp:287
+#: internet/subsonic/subsonicservice.cpp:109
 msgid "Refresh catalogue"
 msgstr "စာရင်းပြန်လည်"
 
-#: internet/somafmservice.cpp:106
+#: internet/somafm/somafmservice.cpp:111
 msgid "Refresh channels"
 msgstr "လေလှိုင်းများပြန်လည်"
 
-#: internet/icecastservice.cpp:300
+#: internet/icecast/icecastservice.cpp:305
 msgid "Refresh station list"
 msgstr "ထုတ်လွှင့်မှုဌာနစာရင်းပြန်လည်"
 
-#: internet/digitallyimportedservicebase.cpp:175
+#: internet/digitally/digitallyimportedservicebase.cpp:179
 msgid "Refresh streams"
 msgstr "သီချင်းစီးကြောင်းများပြန်လည်"
 
@@ -3899,16 +4084,25 @@ msgstr "သီချင်းစီးကြောင်းများပြန
 msgid "Reggae"
 msgstr "ရက်ပ်ဂယ်"
 
+#: playlist/playlistsaveoptionsdialog.cpp:33
+#: ../bin/src/ui_behavioursettingspage.h:287
+msgid "Relative"
+msgstr "အဆက်အစပ်"
+
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
 msgstr "ဝီအဝေးထိန်းပြောင်းလဲခြင်းမှတ်သား"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:256
 msgid "Remember from last time"
 msgstr "နောက်ဆံုးအချိန်မှမှတ်သား"
 
-#: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:100
+msgid "Remember my choice"
+msgstr ""
+
+#: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:135
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Remove"
 msgstr "ဖယ်ရှား"
 
@@ -3916,7 +4110,7 @@ msgstr "ဖယ်ရှား"
 msgid "Remove action"
 msgstr "လုပ်ဆောင်ချက်ဖယ်ရှား"
 
-#: ../bin/src/ui_mainwindow.h:706
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Remove duplicates from playlist"
 msgstr "သီချင်းစာရင်းမှပုံတူများဖယ်ရှား"
 
@@ -3924,23 +4118,25 @@ msgstr "သီချင်းစာရင်းမှပုံတူများ
 msgid "Remove folder"
 msgstr "ဖိုင်တွဲဖယ်ရှား"
 
-#: internet/groovesharkservice.cpp:544 internet/vkservice.cpp:310
+#: internet/grooveshark/groovesharkservice.cpp:549
+#: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "ငါ့ဂီတမှဖယ်ရှား"
 
-#: internet/vkservice.cpp:296
+#: internet/vk/vkservice.cpp:302
 msgid "Remove from bookmarks"
-msgstr ""
+msgstr "မှတ်သားခြင်းစာရင်းများမှဖယ်ရှား"
 
-#: internet/groovesharkservice.cpp:541
+#: internet/grooveshark/groovesharkservice.cpp:546
 msgid "Remove from favorites"
 msgstr "အနှစ်သက်ဆုံးများမှဖယ်ရှား"
 
-#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:681
+#: internet/grooveshark/groovesharkservice.cpp:543
+#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "သီချင်းစာရင်းမှဖယ်ရှား"
 
-#: playlist/playlisttabbar.cpp:172
+#: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
 msgstr "သီချင်းစာရင်းဖယ်ရှား"
 
@@ -3948,32 +4144,36 @@ msgstr "သီချင်းစာရင်းဖယ်ရှား"
 msgid "Remove playlists"
 msgstr "သီချင်းစာရင်းများဖယ်ရှား"
 
-#: internet/groovesharkservice.cpp:1584
+#: ../bin/src/ui_mainwindow.h:717
+msgid "Remove unavailable tracks from playlist"
+msgstr ""
+
+#: internet/grooveshark/groovesharkservice.cpp:1570
 msgid "Removing songs from My Music"
 msgstr "ငါ့ဂီတမှသီချင်းများဖယ်ရှား"
 
-#: internet/groovesharkservice.cpp:1531
+#: internet/grooveshark/groovesharkservice.cpp:1518
 msgid "Removing songs from favorites"
 msgstr "အနှစ်သက်ဆုံးများမှသီချင်းများဖယ်ရှား"
 
-#: internet/groovesharkservice.cpp:1381
+#: internet/grooveshark/groovesharkservice.cpp:1370
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "သီချင်းစာရင်း \"%1\" နာမည်ပြန်ရွေး"
 
-#: internet/groovesharkservice.cpp:534
+#: internet/grooveshark/groovesharkservice.cpp:539
 msgid "Rename Grooveshark playlist"
 msgstr "ဂရုရှက်သီချင်းစာရင်းနာမည်ပြန်ရွေး"
 
-#: playlist/playlisttabbar.cpp:135
+#: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "သီချင်းစာရင်းနာမည်ပြန်ရွေး"
 
-#: playlist/playlisttabbar.cpp:56
+#: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
 msgstr "သီချင်းစာရင်းနာမည်ပြန်ရွေး..."
 
-#: ../bin/src/ui_mainwindow.h:657
+#: ../bin/src/ui_mainwindow.h:661
 msgid "Renumber tracks in this order..."
 msgstr "တေးသံလမ်းကြောများယခုအစဉ်အလိုက်နံပါတ်ပြန်ပြောင်းပါ..."
 
@@ -3981,29 +4181,29 @@ msgstr "တေးသံလမ်းကြောများယခုအစဉ်
 msgid "Repeat"
 msgstr "ပြန်ဆို"
 
-#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:312 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
 msgstr "အယ်လဘမ်ပြန်ဆို"
 
-#: widgets/osd.cpp:311 ../bin/src/ui_playlistsequence.h:106
+#: widgets/osd.cpp:315 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
 msgstr "သီချင်းစာရင်းပြန်ဆို"
 
-#: widgets/osd.cpp:305 ../bin/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:309 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
 msgstr "တေးသံလမ်းကြောပြန်ဆို"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:456
-#: internet/internetservice.cpp:64 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "ယခုသီချင်းစာရင်းအစားထိုး"
 
-#: ../bin/src/ui_behavioursettingspage.h:218
+#: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Replace the playlist"
 msgstr "သီချင်းစာရင်းအစားထိုး"
 
-#: ../bin/src/ui_organisedialog.h:251
+#: ../bin/src/ui_organisedialog.h:257
 msgid "Replaces spaces with underscores"
 msgstr "ကွက်လပ်များကိုအောက်မျဉ်းများနှင့်အစားထိုး"
 
@@ -4019,40 +4219,40 @@ msgstr "ဂိမ်းစနစ်ပြန်ဖွင့်"
 msgid "Repopulate"
 msgstr "ပြန်လည်ရွှေ့ပြောင်း"
 
-#: ../bin/src/ui_networkremotesettingspage.h:192
+#: ../bin/src/ui_networkremotesettingspage.h:236
 msgid "Require authentication code"
 msgstr "အထောက်အထားစစ်ဆေးခြင်းကုဒ်လိုအပ်"
 
-#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:222
+#: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:229
 msgid "Reset"
 msgstr "ပြန်လည်ထိန်းညှိ"
 
-#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:665
+#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:668
 msgid "Reset play counts"
 msgstr "ဖွင့်သံအရေအတွက်များပြန်လည်ထိန်းညှိ"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "တေးသံလမ်းကြောပြန်လည်စတင်(သို့)ယခင်တေးသံလမ်းကြောကိုစတင်ချိန်မှ၈စက္ကန့်အတွင်းပြန်ဖွင့်။"
 
-#: ../bin/src/ui_organisedialog.h:252
+#: ../bin/src/ui_organisedialog.h:258
 msgid "Restrict to ASCII characters"
 msgstr "အက်စ်စီအက္ခရာများသို့ကန့်သတ်"
 
-#: ../bin/src/ui_behavioursettingspage.h:205
+#: ../bin/src/ui_behavioursettingspage.h:257
 msgid "Resume playback on start"
 msgstr "ပြန်ဖွင့်ကိုစသံုးတိုင်းပြန်စ"
 
-#: internet/groovesharkservice.cpp:789
+#: internet/grooveshark/groovesharkservice.cpp:795
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "ဂရုရှက်ငါ့ဂီတသီချင်းများပြန်ထုတ်ခြင်း"
 
-#: internet/groovesharkservice.cpp:756
+#: internet/grooveshark/groovesharkservice.cpp:762
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "ဂရုရှက်ရေပန်းစားဆံုးသီချင်းများပြန်ထုတ်ခြင်း"
 
-#: internet/groovesharkservice.cpp:688
+#: internet/grooveshark/groovesharkservice.cpp:693
 msgid "Retrieving Grooveshark playlists"
 msgstr "ဂရုရှက်သီချင်းစာရင်းများပြန်ထုတ်ခြင်း"
 
@@ -4066,15 +4266,15 @@ msgstr "ညာ"
 
 #: ../bin/src/ui_ripcd.h:303
 msgid "Rip"
-msgstr ""
+msgstr "တင်သွင်း"
 
-#: ui/ripcd.cpp:116
+#: ui/ripcd.cpp:114
 msgid "Rip CD"
-msgstr ""
+msgstr "စီဒီတင်သွင်း"
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:716
 msgid "Rip audio CD..."
-msgstr ""
+msgstr "အသံဓာတ်ပြားစီဒီတင်သွင်း"
 
 #: ui/equalizer.cpp:142
 msgid "Rock"
@@ -4088,7 +4288,7 @@ msgstr "စတင်"
 msgid "SOCKS proxy"
 msgstr "ဆော့ပရောက်ဇီ"
 
-#: internet/subsonicsettingspage.cpp:125
+#: internet/subsonic/subsonicsettingspage.cpp:146
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
@@ -4098,11 +4298,11 @@ msgstr "အက်စ်အက်စ်အယ်အမှားပြနေ၊ဆ
 msgid "Safely remove device"
 msgstr "ပစ္စည်းလုံလုံခြုံခြုံဖယ်ရှား"
 
-#: ../bin/src/ui_organisedialog.h:242
+#: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "ကူးယူပြီးနောက်ပစ္စည်းလုံလုံခြုံခြုံဖယ်ရှား"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "နမူနာနှုန်း"
 
@@ -4129,14 +4329,14 @@ msgstr "ပုံမှတ်သား"
 #: playlist/playlistlistcontainer.cpp:72
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr ""
+msgstr "သီချင်းစာရင်းမှတ်သား"
 
-#: playlist/playlistmanager.cpp:223
+#: playlist/playlistmanager.cpp:231
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
-msgstr ""
+msgstr "သီချင်းစာရင်းမှတ်သား"
 
-#: playlist/playlisttabbar.cpp:58 ../bin/src/ui_mainwindow.h:689
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:693
 msgid "Save playlist..."
 msgstr "သီချင်းစာရင်းမှတ်သား..."
 
@@ -4156,7 +4356,7 @@ msgstr "ဖြစ်နိုင်ပါကဖိုင်အမည်မျာ
 msgid "Save this stream in the Internet tab"
 msgstr "အင်တာနက်မျက်နှာစာထဲတွင်ယခုသီချင်းစီးကြောင်းမှတ်သား"
 
-#: library/library.cpp:177
+#: library/library.cpp:196
 msgid "Saving songs statistics into songs files"
 msgstr "သီချင်းဖိုင်များထဲသို့သီချင်းကိန်းဂဏန်းအချက်အလက်များမှတ်သား"
 
@@ -4172,7 +4372,7 @@ msgstr "သတ်မှတ်နမူနာနှုန်းအကြောင
 msgid "Scale size"
 msgstr "အတိုင်းအတာပမာဏ"
 
-#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "ရမှတ်"
 
@@ -4180,30 +4380,34 @@ msgstr "ရမှတ်"
 msgid "Scrobble tracks that I listen to"
 msgstr "နားဆင်နေကြတေးသံလမ်းကြောများလိုလျှောက်နာမည်ပေးပို့"
 
+#: ../bin/src/ui_seafilesettingspage.h:165
+msgid "Seafile"
+msgstr ""
+
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
-#: internet/vkservice.cpp:512 ../bin/src/ui_gpoddersearchpage.h:78
-#: ../bin/src/ui_itunessearchpage.h:78 ../bin/src/ui_albumcoversearcher.h:114
+#: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
 msgid "Search"
 msgstr "ရှာဖွေ"
 
-#: ui/mainwindow.cpp:230 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:145
 msgctxt "Global search settings dialog title."
 msgid "Search"
-msgstr ""
+msgstr "ရှာဖွေ"
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
 msgstr "အိုင့်ကက်စ်ထုတ်လွှင့်မှုဌာနများရှာဖွေ"
 
-#: internet/jamendoservice.cpp:438
+#: internet/jamendo/jamendoservice.cpp:444
 msgid "Search Jamendo"
 msgstr "ဂျမန်တိုရှာဖွေ"
 
-#: internet/magnatuneservice.cpp:288
+#: internet/magnatune/magnatuneservice.cpp:296
 msgid "Search Magnatune"
 msgstr "မက်နကျွန်းရှာဖွေ"
 
-#: internet/subsonicservice.cpp:71
+#: internet/subsonic/subsonicservice.cpp:93
 msgid "Search Subsonic"
 msgstr "ဆပ်ဆိုးနစ်ရှာဖွေ"
 
@@ -4235,8 +4439,9 @@ msgstr "စနစ်ရှာဖွေ"
 msgid "Search options"
 msgstr "ရှာဖွေရွေးပိုင်ခွင့်များ"
 
-#: internet/groovesharkservice.cpp:577 internet/soundcloudservice.cpp:114
-#: internet/spotifyservice.cpp:357
+#: internet/grooveshark/groovesharkservice.cpp:582
+#: internet/soundcloud/soundcloudservice.cpp:116
+#: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
 msgstr "ရလဒ်များရှာဖွေ"
 
@@ -4245,27 +4450,27 @@ msgstr "ရလဒ်များရှာဖွေ"
 msgid "Search terms"
 msgstr "စကားရပ်များရှာဖွေ"
 
-#: internet/groovesharkservice.cpp:271
+#: internet/grooveshark/groovesharkservice.cpp:275
 msgid "Searching on Grooveshark"
 msgstr "ဂရုရှက်တွင်ရှာဖွေခြင်း"
 
-#: ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
 msgstr "ဒုတိယအဆင့်"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Seek backward"
 msgstr "နောက်ပြန်ရှာဖွေ"
 
-#: core/globalshortcuts.cpp:60 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
 msgid "Seek forward"
 msgstr "ရှေ့သို့ရှာဖွေ"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Seek the currently playing track by a relative amount"
 msgstr "လက်ရှိဖွင့်ဆဲတေးသံလမ်းကြောအတိုင်းအတာနှိုင်းယှဉ်ချက်အားဖြင့်ရှာဖွေ"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "လက်ရှိဖွင့်ဆဲတေးသံလမ်းကြောမှပကတိနေရာသို့ရှာဖွေ"
 
@@ -4301,13 +4506,17 @@ msgstr "ပုံဖော်ကြည့်ခြင်းများရွေ
 msgid "Select visualizations..."
 msgstr "ပုံဖော်ကြည့်ခြင်းများရွေးချယ်..."
 
-#: ../bin/src/ui_transcodedialog.h:219 ../bin/src/ui_ripcd.h:319
+#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
 msgid "Select..."
-msgstr ""
+msgstr "ရွေးချယ်..."
 
 #: devices/devicekitlister.cpp:126
 msgid "Serial number"
 msgstr "အမှတ်စဉ်"
+
+#: ../bin/src/ui_seafilesettingspage.h:174
+msgid "Server"
+msgstr "ဆာဗာ"
 
 #: ../bin/src/ui_subsonicsettingspage.h:126
 msgid "Server URL"
@@ -4317,24 +4526,24 @@ msgstr "ဆာဗာယူယူအာအလ်"
 msgid "Server details"
 msgstr "ဆာဗာအသေးစိတ်အကြောင်းအရာများ"
 
-#: internet/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:242
 msgid "Service offline"
 msgstr "အောဖ့်လိုင်းဝန်ဆောင်မှု"
 
-#: ui/mainwindow.cpp:1580
+#: ui/mainwindow.cpp:1611
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 မှ \"%2\" ထိန်းညှိ..."
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "အသံပမာဏ <value> ရာခိုင်နှုန်းခန့်ထိန်းညှိ"
 
-#: ../bin/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:662
 msgid "Set value for all selected tracks..."
 msgstr "ရွေးချယ်တေးသံလမ်းကြောများအားလံုးအတွက်တန်ဖိုးထိန်းညှိ..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:180
+#: ../bin/src/ui_networkremotesettingspage.h:224
 msgid "Settings"
 msgstr "ချိန်ညှိချက်"
 
@@ -4357,7 +4566,7 @@ msgstr "%1 အတွက်အတိုကောက်တည်ရှိပြီ
 msgid "Show"
 msgstr "ပြသ"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Show OSD"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ပြသ"
 
@@ -4369,31 +4578,35 @@ msgstr "လက်ရှိတေးသံလမ်းကြောပေါ်ခ
 msgid "Show a moodbar in the track progress bar"
 msgstr "တေးသံလမ်းကြောအခြေအနေပြဘားမျဉ်းတွင်စိတ်နေစိတ်ထားဘားမျဉ်းပြသ"
 
-#: ../bin/src/ui_notificationssettingspage.h:434
+#: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Show a native desktop notification"
 msgstr "စက်ရှိအလုပ်ခုံသတိပေးချက်ပြသ"
 
-#: ../bin/src/ui_notificationssettingspage.h:442
+#: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "စနစ်ပြန်ဆို/ကုလားဖန်ထိုးတိုင်းသတိပေးချက်ပြသ"
 
-#: ../bin/src/ui_notificationssettingspage.h:441
+#: ../bin/src/ui_notificationssettingspage.h:447
 msgid "Show a notification when I change the volume"
 msgstr "အသံပမာဏပြောင်းလဲတိုင်းသတိပေးချက်ပြသ"
 
-#: ../bin/src/ui_notificationssettingspage.h:436
+#: ../bin/src/ui_notificationssettingspage.h:449
+msgid "Show a notification when I pause playback"
+msgstr ""
+
+#: ../bin/src/ui_notificationssettingspage.h:442
 msgid "Show a popup from the system tray"
 msgstr "စနစ်အသေးမှထွက်ပေါ်ပြသ"
 
-#: ../bin/src/ui_notificationssettingspage.h:435
+#: ../bin/src/ui_notificationssettingspage.h:441
 msgid "Show a pretty OSD"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှတစ်ခုပြသ"
 
-#: widgets/nowplayingwidget.cpp:122
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "အခြေအနေပြတိုင်အပေါ်မှာပြသ"
 
-#: ui/mainwindow.cpp:538
+#: ui/mainwindow.cpp:552
 msgid "Show all songs"
 msgstr "သီချင်းများအားလံုးပြသ"
 
@@ -4413,16 +4626,16 @@ msgstr "ခွဲခြားမှုများပြသ"
 msgid "Show fullsize..."
 msgstr "အရွယ်အပြည့်ပြသ..."
 
-#: ../bin/src/ui_vksettingspage.h:217
+#: ../bin/src/ui_vksettingspage.h:223
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:607
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "ဖိုင်ဘရောက်ဇာထဲမှာပြသ..."
 
-#: ui/mainwindow.cpp:610
+#: ui/mainwindow.cpp:624
 msgid "Show in library..."
 msgstr ""
 
@@ -4430,17 +4643,21 @@ msgstr ""
 msgid "Show in various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုးပြသ"
 
-#: moodbar/moodbarproxystyle.cpp:371
+#: moodbar/moodbarproxystyle.cpp:377
 msgid "Show moodbar"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းပြသ"
 
-#: ui/mainwindow.cpp:540
+#: ui/mainwindow.cpp:554
 msgid "Show only duplicates"
 msgstr "ပုံတူများသာပြသ"
 
-#: ui/mainwindow.cpp:542
+#: ui/mainwindow.cpp:556
 msgid "Show only untagged"
 msgstr "အမည်မရှိများသာပြသ"
+
+#: ../bin/src/ui_vksettingspage.h:224
+msgid "Show playing song on your page"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -4454,7 +4671,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "အဓိကဝင်းဒိုးထဲတွင်လိုလျှောက်နာမည်ပေးပို့ခလုတ်ပြသ"
 
-#: ../bin/src/ui_behavioursettingspage.h:192
+#: ../bin/src/ui_behavioursettingspage.h:244
 msgid "Show tray icon"
 msgstr "စနစ်သင်္ကေတပြသ"
 
@@ -4462,7 +4679,7 @@ msgstr "စနစ်သင်္ကေတပြသ"
 msgid "Show which sources are enabled and disabled"
 msgstr "မည်သည့်ရင်းမြစ်များလုပ်ဆောင်စေမလုပ်ဆောင်စေပြသ"
 
-#: core/globalshortcuts.cpp:62
+#: core/globalshortcuts.cpp:66
 msgid "Show/Hide"
 msgstr "ပြသ/ဖုံးကွယ်"
 
@@ -4470,23 +4687,23 @@ msgstr "ပြသ/ဖုံးကွယ်"
 msgid "Shuffle"
 msgstr "ကုလားဖန်ထိုး"
 
-#: widgets/osd.cpp:290 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
 msgstr "အယ်လဘမ်များကုလားဖန်ထိုး"
 
-#: widgets/osd.cpp:284 ../bin/src/ui_playlistsequence.h:109
+#: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
 msgstr "ကုလားဖန်အားလံုးထိုး"
 
-#: ../bin/src/ui_mainwindow.h:665
+#: ../bin/src/ui_mainwindow.h:669
 msgid "Shuffle playlist"
 msgstr "သီချင်းစာရင်းကုလားဖန်ထိုး"
 
-#: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:108
+#: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
 msgstr "ယခုအယ်လဘမ်တွင်တေးသံလမ်းကြောများကုလားဖန်ထိုး"
 
-#: ../bin/src/ui_podcastsettingspage.h:252
+#: ../bin/src/ui_podcastsettingspage.h:284
 msgid "Sign in"
 msgstr "အတွင်းသို့ဝင်"
 
@@ -4514,27 +4731,27 @@ msgstr "ပမာဏ:"
 msgid "Ska"
 msgstr "စကာဂီတ"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "စာရင်းရှိနောက်ပြန်များခုန်ကျော်"
 
-#: playlist/playlist.cpp:1328 ../bin/src/ui_edittagdialog.h:669
+#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "အရေအတွက်ခုန်ကျော်"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "စာရင်းရှိရှေ့သို့များခုန်ကျော်"
 
-#: ui/mainwindow.cpp:1554
+#: ui/mainwindow.cpp:1585
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1552
+#: ui/mainwindow.cpp:1583
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:92
+#: widgets/nowplayingwidget.cpp:95
 msgid "Small album cover"
 msgstr "အယ်လဘမ်အဖုံးသေး"
 
@@ -4546,7 +4763,7 @@ msgstr "ဘေးတိုင်ငယ်"
 msgid "Smart playlist"
 msgstr "ချက်ချာသီချင်းစာရင်း"
 
-#: library/librarymodel.cpp:1228
+#: library/librarymodel.cpp:1280
 msgid "Smart playlists"
 msgstr "ချက်ချာသီချင်းစာရင်းများ"
 
@@ -4562,11 +4779,11 @@ msgstr "ပျော့ရော့ခ်ဂီတ"
 msgid "Song Information"
 msgstr "သီချင်းအချက်အလက်"
 
-#: ui/mainwindow.cpp:243
+#: ui/mainwindow.cpp:249
 msgid "Song info"
 msgstr "သီချင်းအချက်အလက်"
 
-#: analyzers/sonogram.cpp:19
+#: analyzers/sonogram.cpp:32
 msgid "Sonogram"
 msgstr "အသံလှိုင်းသံုးကျွန်ပျုတာရိုက်ယူပံု"
 
@@ -4602,11 +4819,12 @@ msgstr "မျိုးတူစုခြင်း"
 msgid "SoundCloud"
 msgstr ""
 
-#: playlist/playlist.cpp:1356
+#: playlist/playlist.cpp:1364
 msgid "Source"
 msgstr "ရင်းမြစ်"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
+#: ../bin/src/ui_internetshowsettingspage.h:88
 msgid "Sources"
 msgstr "ရင်းမြစ်များ"
 
@@ -4618,59 +4836,68 @@ msgstr "စဖိစ်"
 msgid "Spotify"
 msgstr "စပေါ့တီဖိုင်"
 
-#: internet/spotifyservice.cpp:190
+#: internet/spotify/spotifyservice.cpp:219
 msgid "Spotify login error"
 msgstr "စပေါ့တီဖိုင်းဖွင့်ဝင်အမှားပြ"
+
+#: internet/spotify/spotifyservice.cpp:835
+msgid "Spotify playlist's URL"
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
 msgstr "စပေါ့တီဖိုင်ဖြည့်စွက်ပရိုဂရမ်"
 
-#: internet/spotifyblobdownloader.cpp:64
+#: internet/spotify/spotifyblobdownloader.cpp:66
 msgid "Spotify plugin not installed"
 msgstr "စပေါ့တီဖိုင်ဖြည့်စွက်ပရိုဂရမ်မသွင်းထား"
+
+#: internet/spotify/spotifyservice.cpp:826
+msgid "Spotify song's URL"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
 msgstr "အဆင့်အတန်း"
 
-#: internet/spotifyservice.cpp:365
+#: internet/spotify/spotifyservice.cpp:414
 msgid "Starred"
 msgstr "ကြည့်ခဲ့ပြီး"
 
-#: ui/ripcd.cpp:88
+#: ui/ripcd.cpp:86
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
 msgstr "လက်ရှိဖွင့်ဆဲသီချင်းစာရင်းစတင်"
 
-#: transcoder/transcodedialog.cpp:87
+#: transcoder/transcodedialog.cpp:89
 msgid "Start transcoding"
 msgstr "ပံုစံပြောင်းလဲခြင်းစတင်"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:116
-#: internet/spotifyservice.cpp:359
+#: internet/grooveshark/groovesharkservice.cpp:584
+#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/spotify/spotifyservice.cpp:408
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
 msgstr "ရှာဖွေရလဒ်များစာရင်းများကိုဖြည့်ရန်ရှာဖွေနေရာတွင်တစ်ခုခုရိုက်ထည့်ပါ"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:397
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 စတင်နေ"
 
-#: internet/magnatunedownloaddialog.cpp:122
+#: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "စတင်နေ..."
 
-#: internet/groovesharkservice.cpp:612
+#: internet/grooveshark/groovesharkservice.cpp:617
 msgid "Stations"
 msgstr "ထုတ်လွှင့်မှုဌာနများ"
 
-#: core/globalshortcuts.cpp:49 ../bin/src/ui_mainwindow.h:640
+#: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
 msgstr "ရပ်"
@@ -4679,32 +4906,32 @@ msgstr "ရပ်"
 msgid "Stop after"
 msgstr "ပြီးနောက်ရပ်"
 
-#: ui/mainwindow.cpp:573 ../bin/src/ui_mainwindow.h:646
+#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "ဒီတေးသံလမ်းကြောပြီးနောက်ရပ်"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "ပြန်ဖွင့်ရပ်"
 
-#: core/globalshortcuts.cpp:51
+#: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
 msgstr "လက်ရှိတေးသံလမ်းကြောပြီးနောက်သီချင်းဖွင့်ခြင်းရပ်"
 
-#: widgets/osd.cpp:169
+#: widgets/osd.cpp:173
 #, qt-format
 msgid "Stop playing after track: %1"
 msgstr ""
 
-#: widgets/osd.cpp:163
+#: widgets/osd.cpp:167
 msgid "Stopped"
 msgstr "ရပ်တန့်ပြီး"
 
-#: core/song.cpp:404
+#: core/song.cpp:418
 msgid "Stream"
 msgstr "သီချင်းစီးကြောင်း"
 
-#: internet/subsonicsettingspage.cpp:29
+#: internet/subsonic/subsonicsettingspage.cpp:50
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4714,7 +4941,7 @@ msgstr "ရက်၃၀အစမ်းသံုးကာလပြီးဆံု
 msgid "Streaming membership"
 msgstr "အသင်းဝင်စီးကြောင်းလွှင့်"
 
-#: internet/groovesharkservice.cpp:653
+#: internet/grooveshark/groovesharkservice.cpp:658
 msgid "Subscribed playlists"
 msgstr "မှာယူပြီးသီချင်းစာရင်းများ"
 
@@ -4722,7 +4949,8 @@ msgstr "မှာယူပြီးသီချင်းစာရင်းမျ
 msgid "Subscribers"
 msgstr "မှာယူသူများ"
 
-#: internet/subsonicservice.cpp:98 ../bin/src/ui_subsonicsettingspage.h:124
+#: internet/subsonic/subsonicservice.cpp:120
+#: ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Subsonic"
 msgstr "ဆပ်ဆိုးနစ်"
 
@@ -4730,7 +4958,7 @@ msgstr "ဆပ်ဆိုးနစ်"
 msgid "Success!"
 msgstr "ရရိုသွားပြီ!"
 
-#: transcoder/transcoder.cpp:188
+#: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 အောင်အောင်မြင်မြင်ဖြည့်သွင်းပြီး"
@@ -4739,12 +4967,12 @@ msgstr "%1 အောင်အောင်မြင်မြင်ဖြည့်
 msgid "Suggested tags"
 msgstr "အကြံပြုအမည်များ"
 
-#: ../bin/src/ui_edittagdialog.h:681
-#: ../bin/src/ui_notificationssettingspage.h:448
+#: ../bin/src/ui_edittagdialog.h:684
+#: ../bin/src/ui_notificationssettingspage.h:455
 msgid "Summary"
 msgstr "အကျဉ်းချုပ်"
 
-#: analyzers/analyzercontainer.cpp:64
+#: analyzers/analyzercontainer.cpp:70
 #: visualisations/visualisationcontainer.cpp:113
 #, qt-format
 msgid "Super high (%1 fps)"
@@ -4762,15 +4990,15 @@ msgstr "လက်ခံပုံစံများ"
 msgid "Synchronize statistics to files now"
 msgstr "ယခုကိန်းဂဏန်းအချက်အလက်များကိုဖိုင်များသို့လိုက်လျောညီထွေဖြစ်ရန်လုပ်"
 
-#: internet/spotifyservice.cpp:579
+#: internet/spotify/spotifyservice.cpp:699
 msgid "Syncing Spotify inbox"
 msgstr "စပေါ့တီဖိုင်စာတိုက်ပံုးညီတူညှိ"
 
-#: internet/spotifyservice.cpp:573
+#: internet/spotify/spotifyservice.cpp:693
 msgid "Syncing Spotify playlist"
 msgstr "စပေါ့တီဖိုင်သီချင်းစာရင်းညီတူညှိ"
 
-#: internet/spotifyservice.cpp:584
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify starred tracks"
 msgstr "စပေါ့တီဖိုင်ကြည့်ခဲ့ပြီးတေးသံလမ်းကြောများညီတူညှိ"
 
@@ -4794,7 +5022,7 @@ msgstr "ရည်မှန်းချက်ဘစ်နှုန်း"
 msgid "Techno"
 msgstr "အီလက်ထရွန်နစ်အက"
 
-#: ../bin/src/ui_notificationssettingspage.h:460
+#: ../bin/src/ui_notificationssettingspage.h:467
 msgid "Text options"
 msgstr "စာသားရွေးပိုင်ခွင့်များ"
 
@@ -4811,7 +5039,7 @@ msgstr "\"%1\" ညွှန်ကြားခြင်းမစတင်နိ�
 msgid "The album cover of the currently playing song"
 msgstr "လက်ရှိဖွင့်ဆဲသီချင်းအယ်လဘမ်အဖုံး"
 
-#: internet/magnatunedownloaddialog.cpp:92
+#: internet/magnatune/magnatunedownloaddialog.cpp:94
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "%1 ယခုဖိုင်လမ်းညွှန်မမှန်"
@@ -4828,13 +5056,13 @@ msgstr "တောင်းဆိုသောဝက်ဘ်ဆိုက်မတ
 msgid "The site you requested is not an image!"
 msgstr "တောင်းဆိုသောဝက်ဘ်ဆိုက်သည်ပံုမဟုတ်!"
 
-#: internet/subsonicsettingspage.cpp:95
+#: internet/subsonic/subsonicsettingspage.cpp:116
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "ဆပ်ဆိုးနစ်ဆာဗာအစမ်းသံုးကာလပြီးဆံုး။ လိုင်စင်ကီးရယူရန်ငွေလှုပါ။ အသေးစိတ်အကြောင်းအရာများအတွက် subsonic.org သို့လည်ပတ်ပါ။"
 
-#: ui/mainwindow.cpp:2373
+#: ui/mainwindow.cpp:2404
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4844,16 +5072,17 @@ msgstr "အောက်ဖော်ပြပါအင်္ဂါရပ်အသ
 msgid "There are other songs in this album"
 msgstr "ယခုအယ်လဘမ်တွင်အခြားသီချင်းများရှိနေ"
 
-#: podcasts/gpoddersearchpage.cpp:73 podcasts/gpoddertoptagsmodel.cpp:102
-#: podcasts/gpoddertoptagspage.cpp:70
+#: internet/podcasts/gpoddersearchpage.cpp:76
+#: internet/podcasts/gpoddertoptagsmodel.cpp:104
+#: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "There was a problem communicating with gpodder.net"
 msgstr "ဂျီပေါ့တာ.နက်နှင့်ဆက်သွယ်ရန်ပြသနာတွေ့"
 
-#: internet/magnatunedownloaddialog.cpp:161
+#: internet/magnatune/magnatunedownloaddialog.cpp:163
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "မက်နကျွန်းမှအချက်အလက်ဖွဲ့စည်းမှုယူဆောင်ရန်ပြသနာတွေ့"
 
-#: podcasts/itunessearchpage.cpp:75
+#: internet/podcasts/itunessearchpage.cpp:77
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "အိုင်ကျွန်းစတိုးမှတုံ့ပြန်မှုယူဆောင်ရန်ပြသနာတွေ့"
 
@@ -4875,7 +5104,7 @@ msgid ""
 "continue?"
 msgstr "ပစ္စည်းမှယခုဖို်င်များအားလံုးပယ်ဖျက်မည်၊ လုပ်ဆောင်မည်လား?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2161 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2192 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -4891,19 +5120,23 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "\"ဂီတပံုစံပြောင်းလဲခြင်း\"အရေးအသားထဲတွင်ပစ္စည်းထဲသို့မကူးယူခင်ဂီတကူးပြောင်းချိန်ယခုချိန်ညှိချက်များအသုံးပြုပြီး။"
 
-#: ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:155
 msgid "Third level"
 msgstr "တတိယအဆင့်"
 
-#: internet/jamendoservice.cpp:176
+#: internet/jamendo/jamendoservice.cpp:181
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr "၁၅၀မီဂါဘိုက်ရှိအချက်အလက်အစုဖန်တီးမည်။ ⏎ လုပ်ဆောင်မည်လား?"
 
-#: internet/magnatunedownloaddialog.cpp:188
+#: internet/magnatune/magnatunedownloaddialog.cpp:190
 msgid "This album is not available in the requested format"
 msgstr "တောင်းဆိုသောပုံစံထဲတွင်ယခုအယ်လဘမ်မရနိုင်"
+
+#: ../bin/src/ui_playlistsaveoptionsdialog.h:98
+msgid "This can be changed later through the preferences"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
@@ -4934,11 +5167,11 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr "ယခုပစ္စည်းကိုပထမဆံုးအကြိမ်ချိတ်ဆက်ခြင်းဖြစ်။ ကလီမန်တိုင်းသည်ဂီတဖိုင်များကိုရှာဖွေရန်ယခုပစ္စည်းကိုဖတ်ရှုမည် - အချိန်အနည်းငယ်ကြာမြင့်လိမ့်မည်။"
 
-#: playlist/playlisttabbar.cpp:186
+#: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "ယခုရွေးပိုင်ခွင့်ကိုလုပ်ဆောင်ပုံလိုလားချက်များတွင်ပြန်ပြောင်းနိုင်"
 
-#: internet/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:244
 msgid "This stream is for paid subscribers only"
 msgstr "ယခုသီချင်းစီးကြောင်းသည်အခကြေးပေးမှာယူသူများအတွက်သာ"
 
@@ -4947,24 +5180,24 @@ msgstr "ယခုသီချင်းစီးကြောင်းသည်အ
 msgid "This type of device is not supported: %1"
 msgstr "ယခုပစ္စည်းအမျိုးအစားမလက်ခံ: %1"
 
-#: playlist/playlist.cpp:1299 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
-#: ../bin/src/ui_edittagdialog.h:682 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcd.h:307
 msgid "Title"
 msgstr "ခေါင်းစဉ်"
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/grooveshark/groovesharkservice.cpp:1055
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
 msgstr "ဂရုရှက်ရေဒီယိုမဖွင့်မီတစ်ခြားဂရုရှက်သီချင်းများအနည်းငယ်ကိုအရင်နားဆင်ပါ။"
 
-#: core/utilities.cpp:127 core/utilities.cpp:139
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "ယနေ့"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:69
 msgid "Toggle Pretty OSD"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှဖွင့်ပိတ်လုပ်"
 
@@ -4972,27 +5205,27 @@ msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလ
 msgid "Toggle fullscreen"
 msgstr "ဖန်သားပြင်အပြည့်ဖွင့်ပိတ်လုပ်"
 
-#: ui/mainwindow.cpp:1545
+#: ui/mainwindow.cpp:1576
 msgid "Toggle queue status"
 msgstr "စီတန်းအခြေအနေဖွင့်ပိတ်လုပ်"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Toggle scrobbling"
 msgstr "သီချင်းနာမည်ပေးပို့ခြင်းဖွင့်ပိတ်လုပ်"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှမြင်ကွင်းပေါ်ရန်ဖွင့်ပိတ်လုပ်"
 
-#: core/utilities.cpp:140
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "မနက်ဖြန်"
 
-#: podcasts/podcasturlloader.cpp:115
+#: internet/podcasts/podcasturlloader.cpp:117
 msgid "Too many redirects"
 msgstr "ဦးတည်ရာပြောင်းများများပြား"
 
-#: internet/spotifyservice.cpp:377
+#: internet/spotify/spotifyservice.cpp:427
 msgid "Top tracks"
 msgstr "ထိပ်တန်းတေးသံများ"
 
@@ -5000,25 +5233,25 @@ msgstr "ထိပ်တန်းတေးသံများ"
 msgid "Total albums:"
 msgstr "စုစုပေါင်းအယ်လဘမ်များ:"
 
-#: covers/coversearchstatisticsdialog.cpp:68
+#: covers/coversearchstatisticsdialog.cpp:70
 msgid "Total bytes transferred"
 msgstr "ဘိုက်စုစုပေါင်းများကူးပြောင်းပြီး"
 
-#: covers/coversearchstatisticsdialog.cpp:65
+#: covers/coversearchstatisticsdialog.cpp:67
 msgid "Total network requests made"
 msgstr "ကွန်ရက်တောင်းခံချက်စုစုပေါင်းများပြုလုပ်ပြီး"
 
-#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:68
-#: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
+#: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcd.h:305
 msgid "Track"
 msgstr "တေးသံလမ်းကြော"
 
-#: internet/soundcloudservice.cpp:134
+#: internet/soundcloud/soundcloudservice.cpp:133
 msgid "Tracks"
-msgstr ""
+msgstr "တေးသံလမ်းကြော"
 
-#: ../bin/src/ui_transcodedialog.h:204 ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_transcodedialog.h:210 ../bin/src/ui_mainwindow.h:687
 msgid "Transcode Music"
 msgstr "ဂီတပံုစံပြောင်းလဲခြင်း"
 
@@ -5030,7 +5263,7 @@ msgstr "ပံုစံပြောင်းလဲခြင်းမှတ်တ
 msgid "Transcoding"
 msgstr "ပံုစံပြောင်းလဲခြင်း"
 
-#: transcoder/transcoder.cpp:305
+#: transcoder/transcoder.cpp:317
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "%2 ပရိုဂရမ်များအသံုးပြုပြီး %1 ဖိုင်များပြောင်းလဲခြင်း"
@@ -5039,11 +5272,11 @@ msgstr "%2 ပရိုဂရမ်များအသံုးပြုပြီ
 msgid "Transcoding options"
 msgstr "ပံုစံပြောင်းလဲခြင်းရွေးပိုင်ခွင့်များ"
 
-#: core/song.cpp:399
+#: core/song.cpp:413
 msgid "TrueAudio"
 msgstr "တီတီအေ"
 
-#: analyzers/turbine.cpp:16
+#: analyzers/turbine.cpp:35
 msgid "Turbine"
 msgstr "တာဗိုင်"
 
@@ -5055,7 +5288,7 @@ msgstr "လှည့်ပိတ်"
 msgid "URI"
 msgstr "ယူအာအိုင်"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "ယူအာအလ်(များ)"
 
@@ -5063,24 +5296,30 @@ msgstr "ယူအာအလ်(များ)"
 msgid "Ultra wide band (UWB)"
 msgstr "အက်တရာလှိုင်းကျယ် (ယူဒဗလူဘီ)"
 
-#: internet/magnatunedownloaddialog.cpp:147
+#: internet/seafile/seafilesettingspage.cpp:131
+#: internet/seafile/seafilesettingspage.cpp:132
+msgid "Unable to connect"
+msgstr ""
+
+#: internet/magnatune/magnatunedownloaddialog.cpp:149
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "မကူးဆွဲနိုင် %1 (%2)"
 
-#: core/song.cpp:408 library/librarymodel.cpp:336 library/librarymodel.cpp:340
-#: library/librarymodel.cpp:344 library/librarymodel.cpp:1018
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:473
-#: playlist/playlistmanager.cpp:474 ui/albumcoverchoicecontroller.cpp:124
+#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
+#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
 msgid "Unknown"
 msgstr "အမည်မသိ"
 
-#: podcasts/podcasturlloader.cpp:206
+#: internet/podcasts/podcasturlloader.cpp:208
 msgid "Unknown content-type"
 msgstr "မသိအကြောင်းအရာအမျိုးအစား"
 
-#: internet/digitallyimportedclient.cpp:71 internet/lastfmservice.cpp:257
+#: internet/digitally/digitallyimportedclient.cpp:74
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Unknown error"
 msgstr "အမည်မသိအမှားပြ"
 
@@ -5088,15 +5327,16 @@ msgstr "အမည်မသိအမှားပြ"
 msgid "Unset cover"
 msgstr "အဖုံးမသတ်မှတ်"
 
-#: ui/mainwindow.cpp:1550
+#: ui/mainwindow.cpp:1581
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1548
+#: ui/mainwindow.cpp:1579
 msgid "Unskip track"
 msgstr ""
 
-#: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:351
+#: internet/podcasts/addpodcastdialog.cpp:68
+#: internet/podcasts/podcastservice.cpp:442
 msgid "Unsubscribe"
 msgstr "မမှာယူ"
 
@@ -5104,19 +5344,19 @@ msgstr "မမှာယူ"
 msgid "Upcoming Concerts"
 msgstr "လာမည့်ဂီတဖြေဖျော်ပွဲများ"
 
-#: internet/vkservice.cpp:326 internet/vkservice.cpp:330
+#: internet/vk/vkservice.cpp:332
 msgid "Update"
-msgstr ""
+msgstr "မွမ်းမံ"
 
-#: internet/groovesharkservice.cpp:1238
+#: internet/grooveshark/groovesharkservice.cpp:1227
 msgid "Update Grooveshark playlist"
 msgstr "ဂရုရှက်သီချင်းစာရင်းစစ်ဆေးခြင်း"
 
-#: podcasts/podcastservice.cpp:331
+#: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "ပို့စ်ကဒ်များစစ်ဆေးခြင်း"
 
-#: ../bin/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:699
 msgid "Update changed library folders"
 msgstr "ပြောင်းလဲပြီးသီချင်းတိုက်ဖိုင်တွဲများမွမ်းမံ"
 
@@ -5124,11 +5364,11 @@ msgstr "ပြောင်းလဲပြီးသီချင်းတိုက
 msgid "Update the library when Clementine starts"
 msgstr "ကလီမန်တိုင်းစတင်သောအခါသီချင်းတိုက်မွမ်းမံ"
 
-#: podcasts/podcastservice.cpp:339
+#: internet/podcasts/podcastservice.cpp:427
 msgid "Update this podcast"
 msgstr "ဒီပို့စ်ကဒ်စစ်ဆေးခြင်း"
 
-#: ../bin/src/ui_podcastsettingspage.h:227
+#: ../bin/src/ui_podcastsettingspage.h:255
 msgid "Updating"
 msgstr "မွမ်းမံနေ"
 
@@ -5146,7 +5386,7 @@ msgstr "မွမ်းမံနေ %1%..."
 msgid "Updating library"
 msgstr "သီချင်းတိုက်မွမ်းမံနေ"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "သုံးစွဲမှု"
 
@@ -5174,11 +5414,11 @@ msgstr "ဝီအဝေးထိန်းအသုံးပြု"
 msgid "Use a custom color set"
 msgstr "စိတ်ကြိုက်အရောင်သတ်မှတ်သံုး"
 
-#: ../bin/src/ui_notificationssettingspage.h:445
+#: ../bin/src/ui_notificationssettingspage.h:452
 msgid "Use a custom message for notifications"
 msgstr "သတိပေးချက်များအတွက်စိတ်ကြိုက်မှာကြားချက်သံုး"
 
-#: ../bin/src/ui_networkremotesettingspage.h:179
+#: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Use a network remote control"
 msgstr "ကွန်ရက်အဝေးထိန်းတစ်ခုအသုံးပြု"
 
@@ -5202,7 +5442,7 @@ msgstr "ဝီအဝေးထိန်းအခြေအနေအစီရင်
 msgid "Use temporal noise shaping"
 msgstr "ယာယီအနှောက်အယှက်ပံုသဏ္ဎာန်သံုး"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:250
 msgid "Use the system default"
 msgstr "မူလစနစ်ပံုစံသံုး"
 
@@ -5222,12 +5462,12 @@ msgstr "အသံပမာဏပုံမှန်ပြုလုပ်မှု
 msgid "Used"
 msgstr "အသုံးပြုပြီး"
 
-#: internet/groovesharkservice.cpp:403
+#: internet/grooveshark/groovesharkservice.cpp:407
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "အသင်းဝင် %1 ဂရုရှက်အန်နီးဝဲစာရင်းတစ်ခုမရှိပါ။"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:152
 msgid "User interface"
 msgstr "အသံုးပြုသူမျက်နှာပြင်"
 
@@ -5235,12 +5475,12 @@ msgstr "အသံုးပြုသူမျက်နှာပြင်"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
-#: ../bin/src/ui_podcastsettingspage.h:251
+#: ../bin/src/ui_podcastsettingspage.h:283
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "အသင်းဝင်အမည်"
 
-#: ../bin/src/ui_behavioursettingspage.h:207
+#: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Using the menu to add a song will..."
 msgstr "သီချင်းထည့်ရန်ဇယားကိုသံုးခြင်းသည်..."
 
@@ -5253,8 +5493,8 @@ msgstr "ဗီဘီအာအမ်ပီသရီး"
 msgid "Variable bit rate"
 msgstr "ဘစ်နှုန်းကိန်းရှင်"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:269
-#: playlist/playlistmanager.cpp:485 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
+#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုး"
 
@@ -5271,7 +5511,7 @@ msgstr "ကြည့်ရှု"
 msgid "Visualization mode"
 msgstr "ပုံဖော်ကြည့်ခြင်းစနစ်"
 
-#: ../bin/src/ui_mainwindow.h:696 ui/dbusscreensaver.cpp:33
+#: ../bin/src/ui_mainwindow.h:700 ui/dbusscreensaver.cpp:33
 msgid "Visualizations"
 msgstr "ပုံဖော်ကြည့်ခြင်းများ"
 
@@ -5279,15 +5519,15 @@ msgstr "ပုံဖော်ကြည့်ခြင်းများ"
 msgid "Visualizations Settings"
 msgstr "ပုံဖော်ကြည့်ခြင်းချိန်ညှိချက်များ"
 
-#: ../bin/src/ui_vksettingspage.h:210
+#: ../bin/src/ui_vksettingspage.h:216
 msgid "Vk.com"
-msgstr ""
+msgstr "Vk.com"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
 msgstr "အသံလှုပ်ရှားမှုရှာဖွေတွေ့ရှိခြင်း"
 
-#: widgets/osd.cpp:182
+#: widgets/osd.cpp:186
 #, qt-format
 msgid "Volume %1%"
 msgstr "အသံပမာဏ %1%"
@@ -5305,11 +5545,15 @@ msgstr "တပလူအေဗီ"
 msgid "WMA"
 msgstr "တပလူအမ်အေ"
 
-#: playlist/playlisttabbar.cpp:181 ../bin/src/ui_behavioursettingspage.h:194
+#: internet/vk/vkservice.cpp:860
+msgid "Wall"
+msgstr ""
+
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
 msgid "Warn me when closing a playlist tab"
 msgstr "သီချင်းစာရင်းမျက်နှာစာကိုပိတ်နေတုန်းသတိပေး"
 
-#: core/song.cpp:397 transcoder/transcoder.cpp:253
+#: core/song.cpp:411 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "တပလူအေဗီ"
 
@@ -5321,7 +5565,7 @@ msgstr "ဝက်ဘ်ဆိုက်"
 msgid "Weeks"
 msgstr "အပတ်များ"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:253
 msgid "When Clementine starts"
 msgstr "ကလီမန်တိုင်းစတင်သောအခါ"
 
@@ -5330,6 +5574,10 @@ msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr "အယ်လဘမ်အနုပညာကိုရှာဖွေသောအခါကလီမန်တိုင်းသည်စကားလံုးပါဝင်သောပံုများကိုအရင်ရှာဖွေ။⏎ ဟက်စပ်မှုမရှိပါကဖိုင်လမ်းညွှန်ထဲရှိအကြီးဆံုးပံုကိုသံုး။"
+
+#: ../bin/src/ui_behavioursettingspage.h:284
+msgid "When saving a playlist, file paths should be"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
@@ -5343,32 +5591,32 @@ msgstr "ဘာလို့မစမ်းကြည့်..."
 msgid "Wide band (WB)"
 msgstr "ရေဒီယိုလှိုင်းကျယ် (ဒဗလူဘီ)"
 
-#: widgets/osd.cpp:239
+#: widgets/osd.cpp:243
 #, qt-format
 msgid "Wii Remote %1: actived"
 msgstr "ဝီအဝေးထိန်း %1: အသက်သွင်းပြီး"
 
-#: widgets/osd.cpp:251
+#: widgets/osd.cpp:255
 #, qt-format
 msgid "Wii Remote %1: connected"
 msgstr "ဝီအဝေးထိန်း %1: ဆက်သွယ်ပြီး"
 
-#: widgets/osd.cpp:270
+#: widgets/osd.cpp:274
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
 msgstr "ဝီအဝေးထိန်း %1: ဓာတ်ခဲအကျပ်အတည်း (%2%)"
 
-#: widgets/osd.cpp:245
+#: widgets/osd.cpp:249
 #, qt-format
 msgid "Wii Remote %1: disactived"
 msgstr "ဝီအဝေးထိန်း %1: အသက်မသွင်းပြီး"
 
-#: widgets/osd.cpp:257
+#: widgets/osd.cpp:261
 #, qt-format
 msgid "Wii Remote %1: disconnected"
 msgstr "ဝီအဝေးထိန်း %1: မဆက်သွယ်ပြီး"
 
-#: widgets/osd.cpp:263
+#: widgets/osd.cpp:267
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "ဝီအဝေးထိန်း %1: ဓာတ်ခဲအားနည်း (%2%)"
@@ -5389,7 +5637,7 @@ msgstr "ဝင်းဒိုးမီဒီယာ၄၀ကီလို"
 msgid "Windows Media 64k"
 msgstr "ဝင်းဒိုးမီဒီယာ၆၄ကီလို"
 
-#: core/song.cpp:377 transcoder/transcoder.cpp:250
+#: core/song.cpp:391 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "ဝင်းဒိုးမီဒီယာအသံ"
 
@@ -5403,7 +5651,7 @@ msgid ""
 "well?"
 msgstr "အနုပညာရှင်များအမျိုးမျိုးသို့ယခုအယ်လဘမ်မှတစ်ခြားသီချင်းများကိုရွှေ့"
 
-#: ui/mainwindow.cpp:2380
+#: ui/mainwindow.cpp:2411
 msgid "Would you like to run a full rescan right now?"
 msgstr "ယခုနောက်တစ်ချိန်အပြည့်ပြန်လည်ဖတ်ရှု?"
 
@@ -5411,19 +5659,23 @@ msgstr "ယခုနောက်တစ်ချိန်အပြည့်ပြ
 msgid "Write all songs statistics into songs' files"
 msgstr "သီချင်းဖိုင်များထဲသို့သီချင်းများကိန်းဂဏန်းအချက်အလက်များရေးသား"
 
-#: internet/subsonicsettingspage.cpp:80
+#: ../bin/src/ui_behavioursettingspage.h:289
+msgid "Write metadata"
+msgstr ""
+
+#: internet/subsonic/subsonicsettingspage.cpp:101
 msgid "Wrong username or password."
 msgstr "အသင်းဝင်အမည်နှင့်/သို့စကားဝှက်မမှန်"
 
-#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:71
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:163 ../bin/src/ui_edittagdialog.h:687
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
 msgid "Year"
 msgstr "နှစ်"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:164
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:166
 msgid "Year - Album"
 msgstr "နှစ် - အယ်လဘမ်"
 
@@ -5431,7 +5683,7 @@ msgstr "နှစ် - အယ်လဘမ်"
 msgid "Years"
 msgstr "နှစ်များ"
 
-#: core/utilities.cpp:128
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "မနေ့က"
 
@@ -5445,7 +5697,7 @@ msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
 msgstr "%1 အနှစ်သက်ဆံုးများမှသီချင်းစာရင်းများဖယ်ရှားမှာသေချာသလား?"
 
-#: playlist/playlisttabbar.cpp:175
+#: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
@@ -5468,13 +5720,13 @@ msgstr "သင်ဝင်ရောက်ပြီး။"
 msgid "You can change the way the songs in the library are organised."
 msgstr "သီချင်းတိုက်ထဲရှိသီချင်းများစုစည်းမှုပံုစံကိုပြောင်းလဲနိုင်။"
 
-#: internet/digitallyimportedsettingspage.cpp:45
+#: internet/digitally/digitallyimportedsettingspage.cpp:48
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "သင်စာရင်းတစ်ခုမှမရှိဘဲအလကားနားဆင်နိုင်ပါသည်၊ သို့သော်အရစ်ကျစနစ်အဖွဲ့ဝင်များသည်ကြော်ငြာများမပါဘဲပို၍အရည်အသွေးကောင်းမွန်သောသီချင်းစီးကြောင်းများကိုနားဆင်နိုင်ပါသည်။"
 
-#: internet/magnatunesettingspage.cpp:54
+#: internet/magnatune/magnatunesettingspage.cpp:58
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5491,15 +5743,15 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "ဝီအဝေးထိန်းကိုကလီမန်တိုင်းတွင်အဝေးထိန်းချုပ်ကိရိယာကဲ့သို့အသံုးပြုနိုင်။ <a href=\"http://www.clementine-player.org/wiimote\">ကလီမန်တိုင်းဝီကီစာမျက်နှာတွင်ကြည့်ရှုပါ</a>အချက်အလက်များအတွက် ⏎\n"
 
-#: internet/groovesharksettingspage.cpp:109
+#: internet/grooveshark/groovesharksettingspage.cpp:113
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "သင့်ဆီမှာဂရုရှက်အန်နီးဝဲစာရင်းတစ်ခုမရှိပါ။"
 
-#: internet/spotifysettingspage.cpp:146
+#: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "သင့်ဆီမှာစပေါ့တီဖိုင်းအရစ်ကျစနစ်စာရင်းတစ်ခုမရှိပါ။"
 
-#: internet/digitallyimportedclient.cpp:93
+#: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
 msgstr "သင့်ဆီတွင်မှာယူနေခြင်းမရှိပါ"
 
@@ -5510,13 +5762,13 @@ msgid ""
 "stream."
 msgstr ""
 
-#: internet/spotifyservice.cpp:175
+#: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr "စပေါ့တီဖိုင်းမှထွက်ပြီးဖြစ်၍ချိန်ညှိချက်အရေးအသားတွင်စကားဝှက်ပြန်ထည့်ပါ။"
 
-#: internet/spotifysettingspage.cpp:157
+#: internet/spotify/spotifysettingspage.cpp:160
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr "စပေါ့တီဖိုင်းမှထွက်ပြီးဖြစ်၍စကားဝှက်ပြန်ထည့်ပါ။"
 
@@ -5538,19 +5790,19 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "စနစ်လိုလားချက်များကိုဆောင်ရွက်ပြီးစာမျက်နှာဖွင့်\"<span style=\" font-style:italic;\">ကူညီနိင်သောပစ္စည်းများကိုဝင်ကြည့်</span>\"ကလီမန်တိုင်းတွင်အများသံုးအတိုကောက်များသံုးရန်"
 
-#: ../bin/src/ui_behavioursettingspage.h:200
+#: ../bin/src/ui_behavioursettingspage.h:252
 msgid "You will need to restart Clementine if you change the language."
 msgstr "ဘာသာစကားပြောင်းလဲပါကကလီမန်တိုင်းကိုပြန်လည်စတင်ပါ။"
 
-#: ../bin/src/ui_networkremotesettingspage.h:201
+#: ../bin/src/ui_networkremotesettingspage.h:241
 msgid "Your IP address:"
 msgstr "သင့်ရဲ့အိုင်ပီလိပ်စာ:"
 
-#: internet/lastfmsettingspage.cpp:76
+#: internet/lastfm/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
 msgstr "သင့်ရဲ့လက်စ်.အက်ဖ်အမ်အထောက်အထားများမမှန်ပါ"
 
-#: internet/magnatunesettingspage.cpp:113
+#: internet/magnatune/magnatunesettingspage.cpp:117
 msgid "Your Magnatune credentials were incorrect"
 msgstr "သင့်ရဲ့မက်နကျွန်းအထောက်အထားများမမှန်ပါ"
 
@@ -5558,7 +5810,8 @@ msgstr "သင့်ရဲ့မက်နကျွန်းအထောက်အ
 msgid "Your library is empty!"
 msgstr "သင့်သီချင်းတိုက်မှာဘာမှမရှိ!"
 
-#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:47
+#: globalsearch/savedradiosearchprovider.cpp:26
+#: internet/internetradio/savedradio.cpp:53
 msgid "Your radio streams"
 msgstr "သင့်ရေဒီယိုသီချင်းစီးကြောင်းများ"
 
@@ -5571,8 +5824,8 @@ msgstr "သင့်လိုလျှောက်နာမည်ပေးပိ
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "အိုးပန်းဂျီအယ်အထောက်အကူသင့်စနစ်တွင်မရှိပုံဖော်ကြည့်ခြင်းများမရနိုင်။"
 
-#: internet/groovesharksettingspage.cpp:114
-#: internet/spotifysettingspage.cpp:152
+#: internet/grooveshark/groovesharksettingspage.cpp:118
+#: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "သင့်အသင်းဝင်အမည်သို့စကားဝှက်မမှန်"
 
@@ -5632,7 +5885,7 @@ msgstr "ပါဝင်"
 msgid "disabled"
 msgstr "မလုပ်ဆောင်စေ"
 
-#: widgets/osd.cpp:110
+#: widgets/osd.cpp:112
 #, qt-format
 msgid "disc %1"
 msgstr "ချပ်ပြားဝိုင်း %1"
@@ -5649,11 +5902,11 @@ msgstr "ဖြင့်အဆုံး"
 msgid "equals"
 msgstr "ညီမျှ"
 
-#: ../bin/src/ui_podcastsettingspage.h:249
+#: ../bin/src/ui_podcastsettingspage.h:281
 msgid "gpodder.net"
 msgstr "ဂျီပေါ့တာ.နက်"
 
-#: podcasts/gpoddertoptagspage.cpp:32
+#: internet/podcasts/gpoddertoptagspage.cpp:35
 msgid "gpodder.net directory"
 msgstr "ဂျီပေါ့တာ.နက်ဖိုင်လမ်းညွှန်"
 
@@ -5669,8 +5922,9 @@ msgstr ""
 msgid "in the last"
 msgstr "နောက်ဆံုးမှာ"
 
-#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
-#: internet/spotifysettingspage.cpp:61 playlist/playlistview.cpp:232
+#: internet/spotify/spotifysettingspage.cpp:62
+#: internet/spotify/spotifysettingspage.cpp:63
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
 #: ui/edittagdialog.cpp:478
 msgid "kbps"
 msgstr "တစ်စက္ကန့်ကီလိုဘိုက်နှုန်း"
@@ -5713,11 +5967,11 @@ msgstr "အအိုဆုံးဦးစားပေး"
 msgid "on"
 msgstr "အပေါ်မှာ"
 
-#: core/commandlineoptions.cpp:142
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "ရွေးပိုင်ခွင့်များ"
 
-#: ../bin/src/ui_networkremotesettingspage.h:203
+#: ../bin/src/ui_networkremotesettingspage.h:254
 msgid "or scan the QR code!"
 msgstr "(သို့)ကျုအာကုဒ်ကိုဖတ်"
 
@@ -5755,7 +6009,7 @@ msgstr "နှင့်စတင်"
 msgid "stop"
 msgstr "ရပ်"
 
-#: widgets/osd.cpp:111
+#: widgets/osd.cpp:113
 #, qt-format
 msgid "track %1"
 msgstr "တေးသံလမ်းကြော %1"

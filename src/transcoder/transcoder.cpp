@@ -28,6 +28,7 @@
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
+#include "core/utilities.h"
 
 using std::shared_ptr;
 
@@ -94,7 +95,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   // The caps we're trying to find
   GstCaps* target_caps = gst_caps_from_string(mime_type.toUtf8().constData());
 
-  GstRegistry* registry = gst_registry_get_default();
+  GstRegistry* registry = gst_registry_get();
   GList* const features =
       gst_registry_get_feature_list(registry, GST_TYPE_ELEMENT_FACTORY);
 
@@ -102,7 +103,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
     GstElementFactory* factory = GST_ELEMENT_FACTORY(p->data);
 
     // Is this the right type of plugin?
-    if (QString(factory->details.klass).contains(element_type)) {
+    if (QString(gst_element_factory_get_klass(factory)).contains(element_type)) {
       const GList* const templates =
           gst_element_factory_get_static_pad_templates(factory);
       for (const GList* p = templates; p; p = g_list_next(p)) {
@@ -118,7 +119,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
         if (intersection) {
           if (!gst_caps_is_empty(intersection)) {
             int rank = gst_plugin_feature_get_rank(GST_PLUGIN_FEATURE(factory));
-            QString name = GST_PLUGIN_FEATURE_NAME(factory);
+            QString name = GST_OBJECT_NAME(factory);
 
             if (name.startsWith("ffmux") || name.startsWith("ffenc"))
               rank = -1;  // ffmpeg usually sucks
@@ -193,14 +194,16 @@ void Transcoder::JobState::PostFinished(bool success) {
                               new Transcoder::JobFinishedEvent(this, success));
 }
 
-Transcoder::Transcoder(QObject* parent)
-    : QObject(parent), max_threads_(QThread::idealThreadCount()) {
+Transcoder::Transcoder(QObject* parent, const QString& settings_postfix)
+    : QObject(parent),
+      max_threads_(QThread::idealThreadCount()),
+      settings_postfix_(settings_postfix) {
   if (JobFinishedEvent::sEventType == -1)
     JobFinishedEvent::sEventType = QEvent::registerEventType();
 
   // Initialise some settings for the lamemp3enc element.
   QSettings s;
-  s.beginGroup("Transcoder/lamemp3enc");
+  s.beginGroup("Transcoder/lamemp3enc" + settings_postfix_);
 
   if (s.value("target").isNull()) {
     s.setValue("target", 1);  // 1 == bitrate
@@ -301,6 +304,15 @@ void Transcoder::AddJob(const QString& input, const TranscoderPreset& preset,
   queued_jobs_ << job;
 }
 
+void Transcoder::AddTemporaryJob(const QString &input, const TranscoderPreset &preset) {
+  Job job;
+  job.input = input;
+  job.output = Utilities::GetTemporaryFileName();
+  job.preset = preset;
+
+  queued_jobs_ << job;
+}
+
 void Transcoder::Start() {
   emit LogLine(tr("Transcoding %1 files using %2 threads")
                    .arg(queued_jobs_.count())
@@ -324,15 +336,14 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
 
   Job job = queued_jobs_.takeFirst();
   if (StartJob(job)) {
-    emit(JobOutputName(job.output));
     return StartedSuccessfully;
   }
 
-  emit JobComplete(job.input, false);
+  emit JobComplete(job.input, job.output, false);
   return FailedToStart;
 }
 
-void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gboolean,
+void Transcoder::NewPadCallback(GstElement*, GstPad* pad,
                                 gpointer data) {
   JobState* state = reinterpret_cast<JobState*>(data);
   GstPad* const audiopad =
@@ -345,21 +356,6 @@ void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gboolean,
 
   gst_pad_link(pad, audiopad);
   gst_object_unref(audiopad);
-}
-
-gboolean Transcoder::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
-  JobState* state = reinterpret_cast<JobState*>(data);
-
-  switch (GST_MESSAGE_TYPE(msg)) {
-    case GST_MESSAGE_ERROR:
-      state->ReportError(msg);
-      state->PostFinished(false);
-      break;
-
-    default:
-      break;
-  }
-  return GST_BUS_DROP;
 }
 
 GstBusSyncReply Transcoder::BusCallbackSync(GstBus*, GstMessage* msg,
@@ -408,7 +404,7 @@ bool Transcoder::StartJob(const Job& job) {
 
   // Create all the elements
   GstElement* src = CreateElement("filesrc", state->pipeline_);
-  GstElement* decode = CreateElement("decodebin2", state->pipeline_);
+  GstElement* decode = CreateElement("decodebin", state->pipeline_);
   GstElement* convert = CreateElement("audioconvert", state->pipeline_);
   GstElement* resample = CreateElement("audioresample", state->pipeline_);
   GstElement* codec = CreateElementForMimeType(
@@ -447,12 +443,9 @@ bool Transcoder::StartJob(const Job& job) {
   // Set callbacks
   state->convert_element_ = convert;
 
-  CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, state.get());
+  CHECKED_GCONNECT(decode, "pad-added", &NewPadCallback, state.get());
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
-                           BusCallbackSync, state.get());
-  state->bus_callback_id_ =
-      gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
-                        BusCallback, state.get());
+                           BusCallbackSync, state.get(), nullptr);
 
   // Start the pipeline
   gst_element_set_state(state->pipeline_, GST_STATE_PLAYING);
@@ -488,20 +481,20 @@ bool Transcoder::event(QEvent* e) {
       return true;
     }
 
-    QString filename = (*it)->job_.input;
+    QString input = (*it)->job_.input;
+    QString output = (*it)->job_.output;
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
     gst_bus_set_sync_handler(
         gst_pipeline_get_bus(GST_PIPELINE(finished_event->state_->pipeline_)),
-        nullptr, nullptr);
-    g_source_remove(finished_event->state_->bus_callback_id_);
+        nullptr, nullptr, nullptr);
 
     // Remove it from the list - this will also destroy the GStreamer pipeline
     current_jobs_.erase(it);
 
     // Emit the finished signal
-    emit JobComplete(filename, finished_event->success_);
+    emit JobComplete(input, output, finished_event->success_);
 
     // Start some more jobs
     MaybeStartNextJob();
@@ -523,9 +516,8 @@ void Transcoder::Cancel() {
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
-    gst_bus_set_sync_handler(
-        gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)), nullptr, nullptr);
-    g_source_remove(state->bus_callback_id_);
+    gst_bus_set_sync_handler(gst_pipeline_get_bus(
+        GST_PIPELINE(state->pipeline_)), nullptr, nullptr, nullptr);
 
     // Stop the pipeline
     if (gst_element_set_state(state->pipeline_, GST_STATE_NULL) ==
@@ -548,10 +540,9 @@ QMap<QString, float> Transcoder::GetProgress() const {
 
     gint64 position = 0;
     gint64 duration = 0;
-    GstFormat format = GST_FORMAT_TIME;
 
-    gst_element_query_position(state->pipeline_, &format, &position);
-    gst_element_query_duration(state->pipeline_, &format, &duration);
+    gst_element_query_position(state->pipeline_, GST_FORMAT_TIME, &position);
+    gst_element_query_duration(state->pipeline_, GST_FORMAT_TIME, &duration);
 
     ret[state->job_.input] = float(position) / duration;
   }
@@ -561,7 +552,7 @@ QMap<QString, float> Transcoder::GetProgress() const {
 
 void Transcoder::SetElementProperties(const QString& name, GObject* object) {
   QSettings s;
-  s.beginGroup("Transcoder/" + name);
+  s.beginGroup("Transcoder/" + name + settings_postfix_);
 
   guint properties_count = 0;
   GParamSpec** properties = g_object_class_list_properties(

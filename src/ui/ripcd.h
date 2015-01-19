@@ -24,8 +24,11 @@
 #include <QFile>
 #include <QMutex>
 #include <cdio/cdio.h>
+#include "core/song.h"
+#include "core/tagreaderclient.h"
 #include "ui_ripcd.h"
 #include <memory>
+
 class Ui_RipCD;
 class Transcoder;
 
@@ -44,6 +47,37 @@ class RipCD : public QDialog {
   void showEvent(QShowEvent* event);
 
  private:
+  struct TrackInformation {
+    TrackInformation(int track_number, const QString& title,
+                     const QString& transcoded_filename)
+        : track_number(track_number),
+          title(title),
+          transcoded_filename(transcoded_filename) {}
+
+    int track_number;
+    QString title;
+    QString transcoded_filename;
+  };
+
+  struct AlbumInformation {
+    AlbumInformation(const QString& album, const QString& artist,
+                     const QString& genre, int year, int disc,
+                     Song::FileType type)
+        : album(album),
+          artist(artist),
+          genre(genre),
+          year(year),
+          disc(disc),
+          type(type) {}
+
+    QString album;
+    QString artist;
+    QString genre;
+    int year;
+    int disc;
+    Song::FileType type;
+  };
+
   static const char* kSettingsGroup;
   static const int kProgressInterval;
   static const int kMaxDestinationItems;
@@ -55,9 +89,8 @@ class RipCD : public QDialog {
   std::unique_ptr<Ui_RipCD> ui_;
   CdIo_t* cdio_;
   QList<QCheckBox*> checkboxes_;
-  QList<QString> generated_files_;
-  QList<int> tracks_to_rip_;
   QList<QLineEdit*> track_names_;
+  QList<TrackInformation> tracks_;
   QString last_add_dir_;
   QPushButton* cancel_button_;
   QPushButton* close_button_;
@@ -65,34 +98,42 @@ class RipCD : public QDialog {
   QString temporary_directory_;
   bool cancel_requested_;
   QMutex mutex_;
+  int files_tagged_;
 
   void WriteWAVHeader(QFile* stream, int32_t i_bytecount);
   int NumTracksToRip();
+  void AddTrack(int track_number, const QString& title,
+                const QString& transcoded_filename);
   void ThreadClickedRipButton();
-  QString TrimPath(const QString& path) const;
-  QString GetOutputFileName(const QString& input,
-                            const TranscoderPreset& preset) const;
+  // Constructs a filename from the given base name with a path taken
+  // from the ui dialog and an extension that corresponds to the audio
+  // format chosen in the ui.
+  QString GetOutputFileName(const QString& basename) const;
   QString ParseFileFormatString(const QString& file_format, int track_no) const;
   void SetWorking(bool working);
   void AddDestinationDirectory(QString dir);
   void RemoveTemporaryDirectory();
+  void TagFiles(const AlbumInformation& album,
+                const QList<TrackInformation>& tracks);
 
 signals:
   void RippingComplete();
   void SignalUpdateProgress();
+
  private slots:
   void UpdateProgress();
   void ThreadedTranscoding();
   void ClickedRipButton();
-  void JobComplete(const QString& filename, bool success);
-  void AllJobsComplete();
-  void AppendOutput(const QString& filename);
+  void TranscodingJobComplete(const QString& input, const QString& output, bool success);
+  void AllTranscodingJobsComplete();
+  void FileTagged(TagReaderReply* reply);
   void Options();
   void AddDestination();
   void Cancel();
   void SelectAll();
   void SelectNone();
   void InvertSelection();
+  void LogLine(const QString& message);
 };
 
 #endif  // SRC_UI_RIPCD_H_

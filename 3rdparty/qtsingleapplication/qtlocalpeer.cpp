@@ -107,6 +107,7 @@ QtLocalPeer::QtLocalPeer(QObject* parent, const QString &appId)
                        + QLatin1Char('/') + socketName
                        + QLatin1String("-lockfile");
     lockFile.setFileName(lockName);
+    lockFileCreated = !lockFile.exists();
     lockFile.open(QIODevice::ReadWrite);
 }
 
@@ -212,5 +213,6 @@ void QtLocalPeer::receiveConnection()
 
 QtLocalPeer::~QtLocalPeer ()
 {
-  lockFile.remove();
+  if (lockFileCreated)
+      lockFile.remove();
 }

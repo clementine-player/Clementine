@@ -156,8 +156,10 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
     metadata.setUrl(url);
 
     QIODevice* cache_file = cache_->prepare(metadata);
-    cache_file->write(request->data());
-    cache_->insert(cache_file);
+    if (cache_file) {
+      cache_file->write(request->data());
+      cache_->insert(cache_file);
+    }
 
     // Save the data alongside the original as well if we're configured to.
     if (save_alongside_originals_) {

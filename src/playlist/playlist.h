@@ -134,6 +134,14 @@ class Playlist : public QAbstractListModel {
     LastFM_Queued,     // Track added to the queue for scrobbling
   };
 
+  enum Path {
+    Path_Automatic = 0,  // Automatically select path type
+    Path_Absolute,       // Always use absolute paths
+    Path_Relative,       // Always use relative paths
+    Path_Ask_User,       // Only used in preferences: to ask user which of the
+                         // previous values he wants to use.
+  };
+
   static const char* kCddaMimeType;
   static const char* kRowsMimetype;
   static const char* kPlayNowMimetype;
@@ -145,6 +153,9 @@ class Playlist : public QAbstractListModel {
   static const QRgb kDynamicHistoryColor;
 
   static const char* kSettingsGroup;
+
+  static const char* kPathType;
+  static const char* kWriteMetadata;
 
   static const int kUndoStackSize;
   static const int kUndoItemLimit;
@@ -258,6 +269,7 @@ class Playlist : public QAbstractListModel {
 
   // Changes rating of a song to the given value asynchronously
   void RateSong(const QModelIndex& index, double rating);
+  void RateSongs(const QModelIndexList& index_list, double rating);
 
   // Registers an object which will get notifications when new songs
   // are about to be inserted into this playlist.
@@ -303,6 +315,7 @@ class Playlist : public QAbstractListModel {
 
   void Clear();
   void RemoveDuplicateSongs();
+  void RemoveUnavailableSongs();
   void Shuffle();
 
   void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
@@ -331,6 +344,10 @@ signals:
   void DynamicModeChanged(bool dynamic);
 
   void LoadTracksError(const QString& message);
+
+  // Signals that the queue has changed, meaning that the remaining queued
+  // items should update their position.
+  void QueueChanged();
 
  private:
   void SetCurrentIsPaused(bool paused);

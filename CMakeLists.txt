@@ -3,6 +3,7 @@ cmake_policy(SET CMP0011 OLD)
 
 include(CheckCXXCompilerFlag)
 include(FindPkgConfig)
+include(cmake/C++11Compat.cmake)
 include(cmake/Summary.cmake)
 include(cmake/Version.cmake)
 include(cmake/Deb.cmake)
@@ -19,6 +20,13 @@ endif ()
 
 if (APPLE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++")
+endif ()
+
+find_program(CCACHE_EXECUTABLE NAMES ccache)
+if (CCACHE_EXECUTABLE)
+  message(STATUS "ccache found: will be used for compilation and linkage")
+  SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ${CCACHE_EXECUTABLE})
+  SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_LINK ${CCACHE_EXECUTABLE})
 endif ()
 
 if (UNIX AND NOT APPLE)
@@ -49,11 +57,11 @@ pkg_check_modules(CHROMAPRINT libchromaprint)
 pkg_check_modules(GIO gio-2.0)
 pkg_check_modules(GLIB glib-2.0)
 pkg_check_modules(GOBJECT gobject-2.0)
-pkg_check_modules(GSTREAMER gstreamer-0.10)
-pkg_check_modules(GSTREAMER_APP gstreamer-app-0.10)
-pkg_check_modules(GSTREAMER_BASE gstreamer-base-0.10)
-pkg_check_modules(GSTREAMER_CDDA gstreamer-cdda-0.10)
-pkg_check_modules(GSTREAMER_TAG gstreamer-tag-0.10)
+pkg_check_modules(GSTREAMER REQUIRED gstreamer-1.0)
+pkg_check_modules(GSTREAMER_APP REQUIRED gstreamer-app-1.0)
+pkg_check_modules(GSTREAMER_AUDIO REQUIRED gstreamer-audio-1.0)
+pkg_check_modules(GSTREAMER_BASE REQUIRED gstreamer-base-1.0)
+pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
@@ -140,8 +148,8 @@ include_directories(${TAGLIB_INCLUDE_DIRS})
 include_directories(${QJSON_INCLUDE_DIRS})
 include_directories(${GSTREAMER_INCLUDE_DIRS})
 include_directories(${GSTREAMER_APP_INCLUDE_DIRS})
+include_directories(${GSTREAMER_AUDIO_INCLUDE_DIRS})
 include_directories(${GSTREAMER_BASE_INCLUDE_DIRS})
-include_directories(${GSTREAMER_CDDA_INCLUDE_DIRS})
 include_directories(${GSTREAMER_TAG_INCLUDE_DIRS})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})
@@ -198,6 +206,11 @@ optional_component(BOX ON "Box support"
 )
 
 optional_component(VK ON "Vk.com support")
+
+optional_component(SEAFILE ON "Seafile support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
 
 optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
@@ -368,10 +381,19 @@ if(GMOCK_INCLUDE_DIRS)
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
 
-# Never use the system's sha2.
-add_subdirectory(3rdparty/sha2)
-set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
-set(SHA2_LIBRARIES sha2)
+# Use the system's sha2 if it's available.
+find_path(SHA2_INCLUDE_DIRS sha2.h)
+find_library(SHA2_LIBRARIES sha2)
+if(SHA2_LIBRARIES AND SHA2_INCLUDE_DIRS)
+  message(STATUS "Using system sha2 library")
+  set(USE_SYSTEM_SHA2 ON)
+else()
+  message(STATUS "Using builtin sha2 library")
+  set(USE_SYSTEM_SHA2 OFF)
+  add_subdirectory(3rdparty/sha2)
+  set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
+  set(SHA2_LIBRARIES sha2)
+endif()
 
 # Use our 3rdparty chromaprint if a system one wasn't found
 if(NOT CHROMAPRINT_FOUND)

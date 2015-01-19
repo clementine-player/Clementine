@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>516</width>
-    <height>516</height>
+    <height>753</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -133,6 +133,16 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QCheckBox" name="b_click_edit_inline_">
+        <property name="toolTip">
+         <string>If activated, clicking a selected song in the playlist view will let you edit the tag value directly</string>
+        </property>
+        <property name="text">
+         <string>Enable song metadata inline edition with click</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -220,6 +230,72 @@
           <string>Always start playing</string>
          </property>
         </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_9">
+     <property name="title">
+      <string>When saving a playlist, file paths should be</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QRadioButton" name="b_automatic_path">
+        <property name="text">
+         <string>Automatic</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="b_absolute_path">
+        <property name="text">
+         <string>Absolute</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="b_relative_path">
+        <property name="text">
+         <string>Relative</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="b_ask_path">
+        <property name="text">
+         <string>Ask when saving</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>10</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="b_write_metadata">
+        <property name="text">
+         <string>Write metadata</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
      </layout>

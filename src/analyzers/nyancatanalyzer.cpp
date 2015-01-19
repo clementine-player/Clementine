@@ -1,5 +1,8 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
+   Copyright 2011-2012, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -40,7 +43,7 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
       px_per_frame_(0),
       x_offset_(0),
       background_brush_(QColor(0x0f, 0x43, 0x73)) {
-  memset(history_, 0, arraysize(history_));
+  memset(history_, 0, sizeof(history_));
 
   for (int i = 0; i < kRainbowBands; ++i) {
     colors_[i] = QPen(QColor::fromHsv(i * 255 / kRainbowBands, 255, 255),
@@ -71,7 +74,7 @@ void NyanCatAnalyzer::resizeEvent(QResizeEvent* e) {
   buffer_[1] = QPixmap();
 
   available_rainbow_width_ = width() - kCatWidth + kRainbowOverlap;
-  px_per_frame_ = float(available_rainbow_width_) / (kHistorySize - 1) + 1;
+  px_per_frame_ = static_cast<float>(available_rainbow_width_) / (kHistorySize - 1) + 1;
   x_offset_ = px_per_frame_ * (kHistorySize - 1) - available_rainbow_width_;
 }
 
@@ -109,11 +112,11 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
     QPointF* dest = polyline;
     float* source = history_;
 
-    const float top_of_cat = float(height()) / 2 - float(kCatHeight) / 2;
+    const float top_of_cat = static_cast<float>(height()) / 2 - static_cast<float>(kCatHeight) / 2;
     for (int band = 0; band < kRainbowBands; ++band) {
       // Calculate the Y position of this band.
       const float y =
-          float(kCatHeight) / (kRainbowBands + 1) * (band + 0.5) + top_of_cat;
+          static_cast<float>(kCatHeight) / (kRainbowBands + 1) * (band + 0.5) + top_of_cat;
 
       // Add each point in the line.
       for (int x = 0; x < kHistorySize; ++x) {

@@ -79,3 +79,9 @@ void TranscoderOptionsDialog::accept() {
   }
   QDialog::accept();
 }
+
+void TranscoderOptionsDialog::set_settings_postfix(const QString &settings_postfix) {
+  if (options_) {
+    options_->settings_postfix_ = settings_postfix;
+  }
+}

@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CRASHREPORTING_H
-#define CRASHREPORTING_H
+#ifndef CORE_CRASHREPORTING_H_
+#define CORE_CRASHREPORTING_H_
 
 #include <memory>
 
@@ -70,7 +72,7 @@ class CrashSender : public QObject {
   Q_OBJECT
 
  public:
-  CrashSender(const QString& path);
+  explicit CrashSender(const QString& path);
 
   // Returns false if the user doesn't want to send the crash report (caller
   // should exit), or true if he does (caller should start the Qt event loop).
@@ -90,4 +92,4 @@ class CrashSender : public QObject {
   QProgressDialog* progress_;
 };
 
-#endif  // CRASHREPORTING_H
+#endif  // CORE_CRASHREPORTING_H_

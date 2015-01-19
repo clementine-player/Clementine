@@ -1,5 +1,10 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, David Sansome <davidsansome@gmail.com>
+   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011-2012, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2013, Vasily Fomin <vasili.fomin@gmail.com>
+   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,6 +25,7 @@
 #include "blockanalyzer.h"
 #include "boomanalyzer.h"
 #include "nyancatanalyzer.h"
+#include "rainbowdashanalyzer.h"
 #include "sonogram.h"
 #include "turbine.h"
 #include "core/logging.h"
@@ -74,6 +80,7 @@ AnalyzerContainer::AnalyzerContainer(QWidget* parent)
   AddAnalyzerType<Sonogram>();
   AddAnalyzerType<TurbineAnalyzer>();
   AddAnalyzerType<NyanCatAnalyzer>();
+  AddAnalyzerType<RainbowDashAnalyzer>();
 
   connect(mapper_, SIGNAL(mapped(int)), SLOT(ChangeAnalyzer(int)));
   disable_action_ = context_menu_->addAction(tr("No analyzer"), this,

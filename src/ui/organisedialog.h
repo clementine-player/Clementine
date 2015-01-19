@@ -60,6 +60,9 @@ class OrganiseDialog : public QDialog {
 
   void SetCopy(bool copy);
 
+ signals:
+  void FileCopied(int);
+
  public slots:
   void accept();
 

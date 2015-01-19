@@ -18,6 +18,7 @@
 #include "config.h"
 #include "trackslider.h"
 #include "ui_trackslider.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
 
 #include <QSettings>
@@ -92,7 +93,7 @@ void TrackSlider::SetValue(int elapsed, int total) {
   ui_->slider->setValue(elapsed);
   setting_value_ = false;
 
-  UpdateTimes(elapsed);
+  UpdateTimes(elapsed / kMsecPerSec);
 }
 
 void TrackSlider::UpdateTimes(int elapsed) {
@@ -100,12 +101,14 @@ void TrackSlider::UpdateTimes(int elapsed) {
   // update normally if showing remaining time
   if (show_remaining_time_) {
     ui_->remaining->setText(
-        "-" + Utilities::PrettyTime(ui_->slider->maximum() - elapsed));
+        "-" + Utilities::PrettyTime((ui_->slider->maximum() / kMsecPerSec) -
+                                    elapsed));
   } else {
     // check if slider maximum value is changed before updating
     if (slider_maximum_value_ != ui_->slider->maximum()) {
       slider_maximum_value_ = ui_->slider->maximum();
-      ui_->remaining->setText(Utilities::PrettyTime(ui_->slider->maximum()));
+      ui_->remaining->setText(
+          Utilities::PrettyTime((ui_->slider->maximum() / kMsecPerSec)));
     }
   }
   setEnabled(true);
@@ -128,14 +131,14 @@ void TrackSlider::SetCanSeek(bool can_seek) {
 
 void TrackSlider::Seek(int gap) {
   if (ui_->slider->isEnabled())
-    ui_->slider->setValue(ui_->slider->value() + gap);
+    ui_->slider->setValue(ui_->slider->value() + gap * kMsecPerSec);
 }
 
 void TrackSlider::ValueMaybeChanged(int value) {
   if (setting_value_) return;
 
-  UpdateTimes(value);
-  emit ValueChanged(value);
+  UpdateTimes(value / kMsecPerSec);
+  emit ValueChangedSeconds(value / kMsecPerSec);
 }
 
 bool TrackSlider::event(QEvent* e) {
@@ -156,7 +159,7 @@ void TrackSlider::ToggleTimeDisplay() {
     // we set the value to -1 because the label must be updated
     slider_maximum_value_ = -1;
   }
-  UpdateTimes(ui_->slider->value());
+  UpdateTimes(ui_->slider->value() / kMsecPerSec);
 
   // save this setting
   QSettings s;

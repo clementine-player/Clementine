@@ -50,15 +50,16 @@ public:
     void _q_reply_finished();
     void _q_network_reply_error(QNetworkReply::NetworkError);
 
-	static QVariant handleInt(const QVariant &response) { return response.toInt(); }
+    static QVariant handleInt(const QVariant &response) { return response.toInt(); }
+    static QVariant handleIdList(const QVariant& response);
 };
 
 
 struct MessageListHandler {
-	MessageListHandler(int clientId) : clientId(clientId) {}
-	QVariant operator()(const QVariant &response);
+    MessageListHandler(int clientId) : clientId(clientId) {}
+    QVariant operator()(const QVariant &response);
 
-	int clientId;
+    int clientId;
 };
 
 } //namespace Vreen

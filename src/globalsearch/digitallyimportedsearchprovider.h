@@ -19,15 +19,16 @@
 #define DIGITALLYIMPORTEDSEARCHPROVIDER_H
 
 #include "simplesearchprovider.h"
-
-class DigitallyImportedServiceBase;
+#include "internet/digitally/digitallyimportedservicebase.h"
 
 class DigitallyImportedSearchProvider : public SimpleSearchProvider {
  public:
   DigitallyImportedSearchProvider(DigitallyImportedServiceBase* service,
                                   Application* app, QObject* parent);
 
-  void ShowConfig();
+  // SearchProvider
+  void ShowConfig() override;
+  InternetService* internet_service() override { return service_; }
 
  protected:
   void RecreateItems();

@@ -1,3 +1,25 @@
+/* This file is part of Clementine.
+   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2013, Andreas <asfa194@gmail.com>
+   Copyright 2013, pie.or.paj <pie.or.paj@gmail.com>
+   Copyright 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, Maltsev Vlad <shedwardx@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "metatypes.h"
 
 #include <QMetaType>
@@ -9,17 +31,17 @@
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "globalsearch/searchprovider.h"
-#include "internet/digitallyimportedclient.h"
-#include "internet/geolocator.h"
-#include "internet/somafmservice.h"
+#include "internet/digitally/digitallyimportedclient.h"
+#include "internet/core/geolocator.h"
+#include "internet/somafm/somafmservice.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
-#include "podcasts/podcastepisode.h"
-#include "podcasts/podcast.h"
+#include "internet/podcasts/podcastepisode.h"
+#include "internet/podcasts/podcast.h"
 #include "ui/equalizer.h"
 
 #ifdef HAVE_VK
-#include "internet/vkservice.h"
+#include "internet/vk/vkservice.h"
 #endif
 
 #ifdef HAVE_DBUS

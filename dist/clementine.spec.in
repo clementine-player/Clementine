@@ -11,8 +11,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel gettext
 BuildRequires:  qt4-devel boost-devel gcc-c++ glew-devel libgpod-devel
-BuildRequires:  cmake gstreamer-devel gstreamer-plugins-base-devel
-BuildRequires:  libplist-devel usbmuxd-devel
+BuildRequires:  cmake gstreamer1-devel gstreamer1-plugins-base-devel
 BuildRequires:  libmtp-devel protobuf-devel protobuf-compiler libcdio-devel
 BuildRequires:  qjson-devel qca2-devel fftw-devel sparsehash-devel
 BuildRequires:  sqlite-devel pulseaudio-libs-devel
@@ -20,18 +19,18 @@ BuildRequires:  sqlite-devel pulseaudio-libs-devel
 Requires:       libgpod protobuf-lite libcdio qjson qca-ossl sqlite
 
 # GStreamer codec dependencies
-Requires:       gstreamer-plugins-ugly
+Requires:       gstreamer1-plugins-ugly
 
 %ifarch x86_64
-Requires:       gstreamer0.10(decoder-audio/x-vorbis)()(64bit)
-Requires:       gstreamer0.10(decoder-audio/x-flac)()(64bit)
-Requires:       gstreamer0.10(decoder-audio/x-speex)()(64bit)
-Requires:       gstreamer0.10(decoder-audio/x-wav)()(64bit)
+Requires:       gstreamer1(decoder-audio/x-vorbis)()(64bit)
+Requires:       gstreamer1(decoder-audio/x-flac)()(64bit)
+Requires:       gstreamer1(decoder-audio/x-speex)()(64bit)
+Requires:       gstreamer1(decoder-audio/x-wav)()(64bit)
 %else
-Requires:       gstreamer0.10(decoder-audio/x-vorbis)
-Requires:       gstreamer0.10(decoder-audio/x-flac)
-Requires:       gstreamer0.10(decoder-audio/x-speex)
-Requires:       gstreamer0.10(decoder-audio/x-wav)
+Requires:       gstreamer1(decoder-audio/x-vorbis)
+Requires:       gstreamer1(decoder-audio/x-flac)
+Requires:       gstreamer1(decoder-audio/x-speex)
+Requires:       gstreamer1(decoder-audio/x-wav)
 %endif
 
 %description
@@ -79,6 +78,7 @@ make clean
 %doc
 %{_bindir}/clementine
 %{_bindir}/clementine-tagreader
+%{_datadir}/appdata/clementine.appdata.xml
 %{_datadir}/applications/clementine.desktop
 %{_datadir}/clementine/projectm-presets
 %{_datadir}/kde4/services/clementine-itms.protocol

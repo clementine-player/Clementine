@@ -21,6 +21,7 @@
 #include "librarybackend.h"
 #include "core/application.h"
 #include "core/database.h"
+#include "core/player.h"
 #include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
 #include "smartplaylists/generator.h"
@@ -40,7 +41,9 @@ Library::Library(Application* app, QObject* parent)
       backend_(nullptr),
       model_(nullptr),
       watcher_(nullptr),
-      watcher_thread_(nullptr) {
+      watcher_thread_(nullptr),
+      save_statistics_in_files_(false),
+      save_ratings_in_files_(false) {
   backend_ = new LibraryBackend;
   backend()->moveToThread(app->database()->thread());
 
@@ -116,6 +119,8 @@ Library::Library(Application* app, QObject* parent)
 
   // full rescan revisions
   full_rescan_revisions_[26] = tr("CUE sheet support");
+
+  ReloadSettings();
 }
 
 Library::~Library() {
@@ -138,6 +143,10 @@ void Library::Init() {
           watcher_, SLOT(AddDirectory(Directory, SubdirectoryList)));
   connect(backend_, SIGNAL(DirectoryDeleted(Directory)), watcher_,
           SLOT(RemoveDirectory(Directory)));
+  connect(backend_, SIGNAL(SongsRatingChanged(SongList)),
+          SLOT(SongsRatingChanged(SongList)));
+  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)),
+          SLOT(SongsStatisticsChanged(SongList)));
   connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)), backend_,
           SLOT(AddOrUpdateSongs(SongList)));
   connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)), backend_,
@@ -152,6 +161,9 @@ void Library::Init() {
           SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
   connect(watcher_, SIGNAL(CompilationsNeedUpdating()), backend_,
           SLOT(UpdateCompilations()));
+  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
+          SLOT(CurrentSongChanged(Song)));
+  connect(app_->player(), SIGNAL(Stopped()), SLOT(Stopped()));
 
   // This will start the watcher checking for updates
   backend_->LoadDirectoriesAsync();
@@ -166,8 +178,15 @@ void Library::PauseWatcher() { watcher_->SetRescanPausedAsync(true); }
 void Library::ResumeWatcher() { watcher_->SetRescanPausedAsync(false); }
 
 void Library::ReloadSettings() {
-  backend_->ReloadSettingsAsync();
   watcher_->ReloadSettingsAsync();
+
+  // These don't belong in LibraryBackend's group but it's too late to change
+  // now.
+  QSettings s;
+  s.beginGroup(LibraryBackend::kSettingsGroup);
+  save_statistics_in_files_ =
+      s.value("save_statistics_in_file", false).toBool();
+  save_ratings_in_files_ = s.value("save_ratings_in_file", false).toBool();
 }
 
 void Library::WriteAllSongsStatisticsToFiles() {
@@ -185,4 +204,53 @@ void Library::WriteAllSongsStatisticsToFiles() {
     app_->task_manager()->SetTaskProgress(task_id, ++i, nb_songs);
   }
   app_->task_manager()->SetTaskFinished(task_id);
+}
+
+void Library::Stopped() {
+  CurrentSongChanged(Song());
+}
+
+void Library::CurrentSongChanged(const Song& song) {
+  TagReaderReply* reply = nullptr;
+  if (queued_rating_.is_valid()) {
+    reply = app_->tag_reader_client()->UpdateSongRating(queued_rating_);
+    queued_rating_ = Song();
+  } else if (queued_statistics_.is_valid()) {
+    reply = app_->tag_reader_client()->UpdateSongStatistics(queued_statistics_);
+    queued_statistics_ = Song();
+  }
+
+  if (reply) {
+    connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
+  }
+
+  if (song.filetype() == Song::Type_Asf) {
+    current_wma_song_url_ = song.url();
+  }
+}
+
+void Library::SongsRatingChanged(const SongList& songs) {
+  if (save_ratings_in_files_) {
+    app_->tag_reader_client()->UpdateSongsRating(
+        FilterCurrentWMASong(songs, &queued_rating_));
+  }
+}
+
+void Library::SongsStatisticsChanged(const SongList& songs) {
+  if (save_statistics_in_files_) {
+    app_->tag_reader_client()->UpdateSongsStatistics(
+        FilterCurrentWMASong(songs, &queued_statistics_));
+  }
+}
+
+SongList Library::FilterCurrentWMASong(SongList songs, Song* queued) {
+  for (SongList::iterator it = songs.begin(); it != songs.end(); ) {
+    if (it->url() == current_wma_song_url_) {
+      *queued = *it;
+      it = songs.erase(it);
+    } else {
+      ++it;
+    }
+  }
+  return songs;
 }

@@ -1,9 +1,29 @@
-// Author: Max Howell <max.howell@methylblue.com>, (C) 2004
-// Copyright: See COPYING file that comes with this distribution
-//
+/* This file is part of Clementine.
+   Copyright 2004, Max Howell <max.howell@methylblue.com>
+   Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
+   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
-#ifndef BOOMANALYZER_H
-#define BOOMANALYZER_H
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Original Author:  Max Howell  <max.howell@methylblue.com>  2004
+ */
+
+#ifndef ANALYZERS_BOOMANALYZER_H_
+#define ANALYZERS_BOOMANALYZER_H_
 
 #include "analyzerbase.h"
 
@@ -13,6 +33,7 @@
 
 class BoomAnalyzer : public Analyzer::Base {
   Q_OBJECT
+
  public:
   Q_INVOKABLE BoomAnalyzer(QWidget*);
 
@@ -42,4 +63,4 @@ class BoomAnalyzer : public Analyzer::Base {
   QPixmap canvas_;
 };
 
-#endif
+#endif  // ANALYZERS_BOOMANALYZER_H_

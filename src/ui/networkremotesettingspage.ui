@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>385</width>
-    <height>528</height>
+    <width>421</width>
+    <height>664</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,6 +30,9 @@
       <string>Settings</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="label_remote_port">
         <property name="minimumSize">
@@ -98,17 +101,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="2">
-       <widget class="QCheckBox" name="allow_downloads">
-        <property name="toolTip">
-         <string>Allow a client to download music from this computer.</string>
-        </property>
-        <property name="text">
-         <string>Allow downloads</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="label_2">
         <property name="toolTip">
          <string>Enter this IP in the App to connect to Clementine.</string>
@@ -118,11 +111,65 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="6" column="1">
        <widget class="QLabel" name="ip_address">
         <property name="text">
          <string notr="true">127.0.0.1</string>
         </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="allow_downloads">
+        <property name="toolTip">
+         <string>Allow a client to download music from this computer.</string>
+        </property>
+        <property name="text">
+         <string>Allow downloads</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QGroupBox" name="download_settings_container">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="title">
+         <string>Download settings</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QCheckBox" name="convert_lossless">
+           <property name="toolTip">
+            <string>Convert lossless audiofiles before sending them to the remote.</string>
+           </property>
+           <property name="text">
+            <string>Convert lossless files</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="format_container">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="title">
+            <string>Audio format</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="1">
+             <widget class="QPushButton" name="options">
+              <property name="text">
+               <string>Options...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QComboBox" name="format"/>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -245,6 +292,38 @@
     <hint type="destinationlabel">
      <x>57</x>
      <y>43</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>allow_downloads</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>download_settings_container</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>196</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>117</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>convert_lossless</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>format_container</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>218</x>
+     <y>212</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>262</y>
     </hint>
    </hints>
   </connection>

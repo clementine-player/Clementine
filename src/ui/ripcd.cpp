@@ -21,7 +21,9 @@
 #include "transcoder/transcoder.h"
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
+#include "core/closure.h"
 #include "core/logging.h"
+#include "core/tagreaderclient.h"
 #include "core/utilities.h"
 
 #include <QSettings>
@@ -35,14 +37,6 @@
 #include <QtDebug>
 #include <QtConcurrentRun>
 #include <cdio/cdio.h>
-#include <tag.h>
-#include <taglib.h>
-#include <tfile.h>
-#include <fileref.h>
-#include <wavfile.h>
-#include <tpropertymap.h>
-#include <tstring.h>
-#include <tstringlist.h>
 
 // winspool.h defines this :(
 #ifdef AddJob
@@ -74,7 +68,8 @@ RipCD::RipCD(QWidget* parent)
       finished_success_(0),
       finished_failed_(0),
       ui_(new Ui_RipCD),
-      cancel_requested_(false) {
+      cancel_requested_(false),
+      files_tagged_(0) {
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   // Init
   ui_->setupUi(this);
@@ -105,11 +100,11 @@ RipCD::RipCD(QWidget* parent)
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
 
-  connect(transcoder_, SIGNAL(JobComplete(QString, bool)),
-          SLOT(JobComplete(QString, bool)));
-  connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
-  connect(transcoder_, SIGNAL(JobOutputName(QString)),
-          SLOT(AppendOutput(QString)));
+  connect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)),
+          SLOT(TranscodingJobComplete(QString, QString, bool)));
+  connect(transcoder_, SIGNAL(AllJobsComplete()),
+          SLOT(AllTranscodingJobsComplete()));
+  connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
   connect(this, SIGNAL(RippingComplete()), SLOT(ThreadedTranscoding()));
   connect(this, SIGNAL(SignalUpdateProgress()), SLOT(UpdateProgress()));
 
@@ -213,20 +208,15 @@ void RipCD::ThreadClickedRipButton() {
 
   // Set up progress bar
   emit(SignalUpdateProgress());
-  tracks_to_rip_.clear();
-  for (int i = 1; i <= i_tracks_; i++) {
-    if (!checkboxes_.value(i - 1)->isChecked()) {
-      continue;
-    }
-    tracks_to_rip_.append(i);
-    QString filename = temporary_directory_ +
-                       ParseFileFormatString(ui_->format_filename->text(), i) +
-                       ".wav";
+
+  for (const TrackInformation& track : tracks_) {
+    QString filename =
+        QString("%1%2.wav").arg(temporary_directory_).arg(track.track_number);
     QFile* destination_file = new QFile(filename);
     destination_file->open(QIODevice::WriteOnly);
 
-    lsn_t i_first_lsn = cdio_get_track_lsn(cdio_, i);
-    lsn_t i_last_lsn = cdio_get_track_last_lsn(cdio_, i);
+    lsn_t i_first_lsn = cdio_get_track_lsn(cdio_, track.track_number);
+    lsn_t i_last_lsn = cdio_get_track_last_lsn(cdio_, track.track_number);
     WriteWAVHeader(destination_file,
                    (i_last_lsn - i_first_lsn + 1) * CDIO_CD_FRAMESIZE_RAW);
 
@@ -253,29 +243,18 @@ void RipCD::ThreadClickedRipButton() {
     TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
                                   .value<TranscoderPreset>();
 
-    QString outfilename = GetOutputFileName(filename, preset);
-    transcoder_->AddJob(filename, preset, outfilename);
+    transcoder_->AddJob(filename, preset, track.transcoded_filename);
   }
   emit(RippingComplete());
 }
 
-// Returns the rightmost non-empty part of 'path'.
-QString RipCD::TrimPath(const QString& path) const {
-  return path.section('/', -1, -1, QString::SectionSkipEmpty);
-}
-
-QString RipCD::GetOutputFileName(const QString& input,
-                                 const TranscoderPreset& preset) const {
+QString RipCD::GetOutputFileName(const QString& basename) const {
   QString path =
       ui_->destination->itemData(ui_->destination->currentIndex()).toString();
-  if (path.isEmpty()) {
-    // Keep the original path.
-    return input.section('.', 0, -2) + '.' + preset.extension_;
-  } else {
-    QString file_name = TrimPath(input);
-    file_name = file_name.section('.', 0, -2);
-    return path + '/' + file_name + '.' + preset.extension_;
-  }
+  QString extension = ui_->format->itemData(ui_->format->currentIndex())
+                          .value<TranscoderPreset>()
+                          .extension_;
+  return path + '/' + basename + '.' + extension;
 }
 
 QString RipCD::ParseFileFormatString(const QString& file_format,
@@ -323,6 +302,24 @@ void RipCD::ClickedRipButton() {
     }
     return;
   }
+
+  // Add tracks to the rip list.
+  tracks_.clear();
+  for (int i = 1; i <= i_tracks_; ++i) {
+    if (!checkboxes_.value(i - 1)->isChecked()) {
+      continue;
+    }
+    QString transcoded_filename = GetOutputFileName(
+        ParseFileFormatString(ui_->format_filename->text(), i));
+    QString title = track_names_.value(i - 1)->text();
+    AddTrack(i, title, transcoded_filename);
+  }
+
+  // Do nothing if no tracks are selected.
+  if (tracks_.isEmpty())
+    return;
+
+  // Start ripping.
   SetWorking(true);
   {
     QMutexLocker l(&mutex_);
@@ -331,42 +328,64 @@ void RipCD::ClickedRipButton() {
   QtConcurrent::run(this, &RipCD::ThreadClickedRipButton);
 }
 
-void RipCD::JobComplete(const QString& filename, bool success) {
+void RipCD::AddTrack(int track_number, const QString& title,
+                     const QString& transcoded_filename) {
+  TrackInformation track(track_number, title, transcoded_filename);
+  tracks_.append(track);
+}
+
+void RipCD::TranscodingJobComplete(const QString& input, const QString& output, bool success) {
   (*(success ? &finished_success_ : &finished_failed_))++;
   emit(SignalUpdateProgress());
 }
 
-void RipCD::AllJobsComplete() {
+void RipCD::AllTranscodingJobsComplete() {
   RemoveTemporaryDirectory();
 
-  // having a little trouble on wav files, works fine on ogg-vorbis
-  qSort(generated_files_);
-
-  for (int i = 0; i < generated_files_.length(); i++) {
-    TagLib::FileRef f(generated_files_.value(i).toUtf8().constData());
-
-    f.tag()->setTitle(track_names_.value(tracks_to_rip_.value(i) - 1)
-                          ->text()
-                          .toUtf8()
-                          .constData());
-    f.tag()->setAlbum(ui_->albumLineEdit->text().toUtf8().constData());
-    f.tag()->setArtist(ui_->artistLineEdit->text().toUtf8().constData());
-    f.tag()->setGenre(ui_->genreLineEdit->text().toUtf8().constData());
-    f.tag()->setYear(ui_->yearLineEdit->text().toInt());
-    f.tag()->setTrack(tracks_to_rip_.value(i) - 1);
-    // Need to check this
-    // f.tag()->setDisc(ui_->discLineEdit->text().toInt());
-    f.save();
-  }
-  // Resets lists
-  generated_files_.clear();
-  tracks_to_rip_.clear();
-
-  SetWorking(false);
+  // Save tags.
+  TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
+                                .value<TranscoderPreset>();
+  AlbumInformation album(
+      ui_->albumLineEdit->text(), ui_->artistLineEdit->text(),
+      ui_->genreLineEdit->text(), ui_->yearLineEdit->text().toInt(),
+      ui_->discLineEdit->text().toInt(), preset.type_);
+  TagFiles(album, tracks_);
 }
 
-void RipCD::AppendOutput(const QString& filename) {
-  generated_files_.append(filename);
+void RipCD::TagFiles(const AlbumInformation& album,
+                     const QList<TrackInformation>& tracks) {
+  files_tagged_ = 0;
+  for (const TrackInformation& track : tracks_) {
+    Song song;
+    song.InitFromFilePartial(track.transcoded_filename);
+    song.set_track(track.track_number);
+    song.set_title(track.title);
+    song.set_album(album.album);
+    song.set_artist(album.artist);
+    song.set_genre(album.genre);
+    song.set_year(album.year);
+    song.set_disc(album.disc);
+    song.set_filetype(album.type);
+
+    TagReaderReply* reply =
+        TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
+    NewClosure(reply, SIGNAL(Finished(bool)), this,
+               SLOT(FileTagged(TagReaderReply*)), reply);
+  }
+}
+
+void RipCD::FileTagged(TagReaderReply* reply) {
+  files_tagged_++;
+  qLog(Debug) << "Tagged" << files_tagged_ << "of" << tracks_.length()
+              << "files";
+
+  // Stop working if all files are tagged.
+  if (files_tagged_ == tracks_.length()) {
+    qLog(Debug) << "CD ripper finished.";
+    SetWorking(false);
+  }
+
+  reply->deleteLater();
 }
 
 void RipCD::Options() {
@@ -473,7 +492,12 @@ void RipCD::RemoveTemporaryDirectory() {
 void RipCD::BuildTrackListTable() {
   checkboxes_.clear();
   track_names_.clear();
+
   i_tracks_ = cdio_get_num_tracks(cdio_);
+  // Build an empty table if there is an error, e.g. no medium found.
+  if (i_tracks_ == CDIO_INVALID_TRACK)
+    i_tracks_ = 0;
+
   ui_->tableWidget->setRowCount(i_tracks_);
   for (int i = 1; i <= i_tracks_; i++) {
     QCheckBox* checkbox_i = new QCheckBox(ui_->tableWidget);
@@ -490,5 +514,7 @@ void RipCD::BuildTrackListTable() {
                                     line_edit_track_title_i);
   }
 }
+
+void RipCD::LogLine(const QString& message) { qLog(Debug) << message; }
 
 void RipCD::showEvent(QShowEvent* event) { BuildTrackListTable(); }

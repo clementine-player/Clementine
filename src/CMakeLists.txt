@@ -75,8 +75,10 @@ set(SOURCES
   analyzers/blockanalyzer.cpp
   analyzers/boomanalyzer.cpp
   analyzers/nyancatanalyzer.cpp
+  analyzers/rainbowdashanalyzer.cpp
   analyzers/sonogram.cpp
   analyzers/turbine.cpp
+  analyzers/fht.cpp
 
   core/appearance.cpp
   core/application.cpp
@@ -87,7 +89,6 @@ set(SOURCES
   core/deletefiles.cpp
   core/filesystemmusicstorage.cpp
   core/filesystemwatcherinterface.cpp
-  core/fht.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
@@ -164,48 +165,49 @@ set(SOURCES
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
-  internet/cloudfilesearchprovider.cpp
-  internet/cloudfileservice.cpp
-  internet/digitallyimportedclient.cpp
-  internet/digitallyimportedservicebase.cpp
-  internet/digitallyimportedsettingspage.cpp
-  internet/digitallyimportedurlhandler.cpp
-  internet/geolocator.cpp
-  internet/groovesharkradio.cpp
-  internet/groovesharkservice.cpp
-  internet/groovesharksettingspage.cpp
-  internet/groovesharkurlhandler.cpp
-  internet/icecastbackend.cpp
-  internet/icecastfilterwidget.cpp
-  internet/icecastmodel.cpp
-  internet/icecastservice.cpp
-  internet/internetmodel.cpp
-  internet/internetplaylistitem.cpp
-  internet/internetservice.cpp
-  internet/internetview.cpp
-  internet/internetviewcontainer.cpp
-  internet/jamendodynamicplaylist.cpp
-  internet/jamendoplaylistitem.cpp
-  internet/jamendoservice.cpp
-  internet/localredirectserver.cpp
-  internet/magnatunedownloaddialog.cpp
-  internet/magnatuneplaylistitem.cpp
-  internet/magnatuneservice.cpp
-  internet/magnatunesettingspage.cpp
-  internet/magnatuneurlhandler.cpp
-  internet/oauthenticator.cpp
-  internet/savedradio.cpp
-  internet/searchboxwidget.cpp
-  internet/somafmservice.cpp
-  internet/somafmurlhandler.cpp
-  internet/soundcloudservice.cpp
-  internet/soundcloudsettingspage.cpp
-  internet/spotifyserver.cpp
-  internet/spotifyservice.cpp
-  internet/spotifysettingspage.cpp
-  internet/subsonicservice.cpp
-  internet/subsonicsettingspage.cpp
-  internet/subsonicurlhandler.cpp
+  internet/core/cloudfilesearchprovider.cpp
+  internet/core/cloudfileservice.cpp
+  internet/digitally/digitallyimportedclient.cpp
+  internet/digitally/digitallyimportedservicebase.cpp
+  internet/digitally/digitallyimportedsettingspage.cpp
+  internet/digitally/digitallyimportedurlhandler.cpp
+  internet/core/geolocator.cpp
+  internet/grooveshark/groovesharkradio.cpp
+  internet/grooveshark/groovesharkservice.cpp
+  internet/grooveshark/groovesharksettingspage.cpp
+  internet/grooveshark/groovesharkurlhandler.cpp
+  internet/icecast/icecastbackend.cpp
+  internet/icecast/icecastfilterwidget.cpp
+  internet/icecast/icecastmodel.cpp
+  internet/icecast/icecastservice.cpp
+  internet/core/internetmodel.cpp
+  internet/core/internetplaylistitem.cpp
+  internet/core/internetservice.cpp
+  internet/core/internetshowsettingspage.cpp
+  internet/core/internetview.cpp
+  internet/core/internetviewcontainer.cpp
+  internet/jamendo/jamendodynamicplaylist.cpp
+  internet/jamendo/jamendoplaylistitem.cpp
+  internet/jamendo/jamendoservice.cpp
+  internet/core/localredirectserver.cpp
+  internet/magnatune/magnatunedownloaddialog.cpp
+  internet/magnatune/magnatuneplaylistitem.cpp
+  internet/magnatune/magnatuneservice.cpp
+  internet/magnatune/magnatunesettingspage.cpp
+  internet/magnatune/magnatuneurlhandler.cpp
+  internet/core/oauthenticator.cpp
+  internet/internetradio/savedradio.cpp
+  internet/core/searchboxwidget.cpp
+  internet/somafm/somafmservice.cpp
+  internet/somafm/somafmurlhandler.cpp
+  internet/soundcloud/soundcloudservice.cpp
+  internet/soundcloud/soundcloudsettingspage.cpp
+  internet/spotify/spotifyserver.cpp
+  internet/spotify/spotifyservice.cpp
+  internet/spotify/spotifysettingspage.cpp
+  internet/subsonic/subsonicservice.cpp
+  internet/subsonic/subsonicsettingspage.cpp
+  internet/subsonic/subsonicurlhandler.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -232,6 +234,7 @@ set(SOURCES
   networkremote/networkremotehelper.cpp
   networkremote/outgoingdatacreator.cpp
   networkremote/remoteclient.cpp
+  networkremote/songsender.cpp
   networkremote/tcpremoteclient.cpp
   networkremote/webremoteclient.cpp
   networkremote/zeroconf.cpp
@@ -249,6 +252,7 @@ set(SOURCES
   playlist/playlistlistmodel.cpp
   playlist/playlistlistview.cpp
   playlist/playlistmanager.cpp
+  playlist/playlistsaveoptionsdialog.cpp
   playlist/playlistsequence.cpp
   playlist/playlisttabbar.cpp
   playlist/playlistundocommands.cpp
@@ -269,27 +273,28 @@ set(SOURCES
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
 
-  podcasts/addpodcastbyurl.cpp
-  podcasts/addpodcastdialog.cpp
-  podcasts/addpodcastpage.cpp
-  podcasts/fixedopmlpage.cpp
-  podcasts/gpoddersearchpage.cpp
-  podcasts/gpoddersync.cpp
-  podcasts/gpoddertoptagsmodel.cpp
-  podcasts/gpoddertoptagspage.cpp
-  podcasts/itunessearchpage.cpp
-  podcasts/podcast.cpp
-  podcasts/podcastbackend.cpp
-  podcasts/podcastdiscoverymodel.cpp
-  podcasts/podcastdownloader.cpp
-  podcasts/podcastepisode.cpp
-  podcasts/podcastinfowidget.cpp
-  podcasts/podcastservice.cpp
-  podcasts/podcastservicemodel.cpp
-  podcasts/podcastsettingspage.cpp
-  podcasts/podcastparser.cpp
-  podcasts/podcastupdater.cpp
-  podcasts/podcasturlloader.cpp
+  internet/podcasts/addpodcastbyurl.cpp
+  internet/podcasts/addpodcastdialog.cpp
+  internet/podcasts/addpodcastpage.cpp
+  internet/podcasts/fixedopmlpage.cpp
+  internet/podcasts/gpoddersearchpage.cpp
+  internet/podcasts/gpoddersync.cpp
+  internet/podcasts/gpoddertoptagsmodel.cpp
+  internet/podcasts/gpoddertoptagspage.cpp
+  internet/podcasts/itunessearchpage.cpp
+  internet/podcasts/podcast.cpp
+  internet/podcasts/podcastbackend.cpp
+  internet/podcasts/podcastdiscoverymodel.cpp
+  internet/podcasts/podcastdeleter.cpp
+  internet/podcasts/podcastdownloader.cpp
+  internet/podcasts/podcastepisode.cpp
+  internet/podcasts/podcastinfowidget.cpp
+  internet/podcasts/podcastservice.cpp
+  internet/podcasts/podcastservicemodel.cpp
+  internet/podcasts/podcastsettingspage.cpp
+  internet/podcasts/podcastparser.cpp
+  internet/podcasts/podcastupdater.cpp
+  internet/podcasts/podcasturlloader.cpp
 
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
@@ -410,6 +415,7 @@ set(HEADERS
   analyzers/blockanalyzer.h
   analyzers/boomanalyzer.h
   analyzers/nyancatanalyzer.h
+  analyzers/rainbowdashanalyzer.h
   analyzers/sonogram.h
   analyzers/turbine.h
 
@@ -473,44 +479,45 @@ set(HEADERS
   globalsearch/spotifysearchprovider.h
   globalsearch/suggestionwidget.h
 
-  internet/cloudfileservice.h
-  internet/digitallyimportedclient.h
-  internet/digitallyimportedservicebase.h
-  internet/digitallyimportedsettingspage.h
-  internet/geolocator.h
-  internet/groovesharkservice.h
-  internet/groovesharksettingspage.h
-  internet/groovesharkurlhandler.h
-  internet/icecastbackend.h
-  internet/icecastfilterwidget.h
-  internet/icecastmodel.h
-  internet/icecastservice.h
-  internet/internetmimedata.h
-  internet/internetmodel.h
-  internet/internetservice.h
-  internet/internetsongmimedata.h
-  internet/internetview.h
-  internet/internetviewcontainer.h
-  internet/jamendodynamicplaylist.h
-  internet/jamendoservice.h
-  internet/localredirectserver.h
-  internet/magnatunedownloaddialog.h
-  internet/magnatuneservice.h
-  internet/magnatunesettingspage.h
-  internet/oauthenticator.h
-  internet/savedradio.h
-  internet/scrobbler.h
-  internet/searchboxwidget.h
-  internet/somafmservice.h
-  internet/somafmurlhandler.h
-  internet/soundcloudservice.h
-  internet/soundcloudsettingspage.h
-  internet/spotifyserver.h
-  internet/spotifyservice.h
-  internet/spotifysettingspage.h
-  internet/subsonicservice.h
-  internet/subsonicsettingspage.h
-  internet/subsonicurlhandler.h
+  internet/core/cloudfileservice.h
+  internet/digitally/digitallyimportedclient.h
+  internet/digitally/digitallyimportedservicebase.h
+  internet/digitally/digitallyimportedsettingspage.h
+  internet/core/geolocator.h
+  internet/grooveshark/groovesharkservice.h
+  internet/grooveshark/groovesharksettingspage.h
+  internet/grooveshark/groovesharkurlhandler.h
+  internet/icecast/icecastbackend.h
+  internet/icecast/icecastfilterwidget.h
+  internet/icecast/icecastmodel.h
+  internet/icecast/icecastservice.h
+  internet/core/internetmimedata.h
+  internet/core/internetmodel.h
+  internet/core/internetservice.h
+  internet/core/internetshowsettingspage.h
+  internet/core/internetsongmimedata.h
+  internet/core/internetview.h
+  internet/core/internetviewcontainer.h
+  internet/jamendo/jamendodynamicplaylist.h
+  internet/jamendo/jamendoservice.h
+  internet/core/localredirectserver.h
+  internet/magnatune/magnatunedownloaddialog.h
+  internet/magnatune/magnatuneservice.h
+  internet/magnatune/magnatunesettingspage.h
+  internet/core/oauthenticator.h
+  internet/internetradio/savedradio.h
+  internet/core/scrobbler.h
+  internet/core/searchboxwidget.h
+  internet/somafm/somafmservice.h
+  internet/somafm/somafmurlhandler.h
+  internet/soundcloud/soundcloudservice.h
+  internet/soundcloud/soundcloudsettingspage.h
+  internet/spotify/spotifyserver.h
+  internet/spotify/spotifyservice.h
+  internet/spotify/spotifysettingspage.h
+  internet/subsonic/subsonicservice.h
+  internet/subsonic/subsonicsettingspage.h
+  internet/subsonic/subsonicurlhandler.h
 
   library/groupbydialog.h
   library/library.h
@@ -528,11 +535,12 @@ set(HEADERS
   musicbrainz/tagfetcher.h
 
   networkremote/clementinewebpage.h
-  networkremote/networkremotehelper.h
-  networkremote/networkremote.h
   networkremote/incomingdataparser.h
+  networkremote/networkremote.h
+  networkremote/networkremotehelper.h
   networkremote/outgoingdatacreator.h
   networkremote/remoteclient.h
+  networkremote/songsender.h
   networkremote/tcpremoteclient.h
   networkremote/webremoteclient.h
 
@@ -548,6 +556,7 @@ set(HEADERS
   playlist/playlistlistmodel.h
   playlist/playlistlistview.h
   playlist/playlistmanager.h
+  playlist/playlistsaveoptionsdialog.h
   playlist/playlistsequence.h
   playlist/playlisttabbar.h
   playlist/playlistview.h
@@ -565,24 +574,25 @@ set(HEADERS
   playlistparsers/plsparser.h
   playlistparsers/xspfparser.h
 
-  podcasts/addpodcastbyurl.h
-  podcasts/addpodcastdialog.h
-  podcasts/addpodcastpage.h
-  podcasts/fixedopmlpage.h
-  podcasts/gpoddersearchpage.h
-  podcasts/gpoddersync.h
-  podcasts/gpoddertoptagsmodel.h
-  podcasts/gpoddertoptagspage.h
-  podcasts/itunessearchpage.h
-  podcasts/podcastbackend.h
-  podcasts/podcastdiscoverymodel.h
-  podcasts/podcastdownloader.h
-  podcasts/podcastinfowidget.h
-  podcasts/podcastservice.h
-  podcasts/podcastservicemodel.h
-  podcasts/podcastsettingspage.h
-  podcasts/podcastupdater.h
-  podcasts/podcasturlloader.h
+  internet/podcasts/addpodcastbyurl.h
+  internet/podcasts/addpodcastdialog.h
+  internet/podcasts/addpodcastpage.h
+  internet/podcasts/fixedopmlpage.h
+  internet/podcasts/gpoddersearchpage.h
+  internet/podcasts/gpoddersync.h
+  internet/podcasts/gpoddertoptagsmodel.h
+  internet/podcasts/gpoddertoptagspage.h
+  internet/podcasts/itunessearchpage.h
+  internet/podcasts/podcastbackend.h
+  internet/podcasts/podcastdiscoverymodel.h
+  internet/podcasts/podcastdeleter.h
+  internet/podcasts/podcastdownloader.h
+  internet/podcasts/podcastinfowidget.h
+  internet/podcasts/podcastservice.h
+  internet/podcasts/podcastservicemodel.h
+  internet/podcasts/podcastsettingspage.h
+  internet/podcasts/podcastupdater.h
+  internet/podcasts/podcasturlloader.h
 
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
@@ -693,16 +703,17 @@ set(UI
   globalsearch/searchproviderstatuswidget.ui
   globalsearch/suggestionwidget.ui
 
-  internet/digitallyimportedsettingspage.ui
-  internet/groovesharksettingspage.ui
-  internet/icecastfilterwidget.ui
-  internet/internetviewcontainer.ui
-  internet/magnatunedownloaddialog.ui
-  internet/magnatunesettingspage.ui
-  internet/searchboxwidget.ui
-  internet/soundcloudsettingspage.ui
-  internet/spotifysettingspage.ui
-  internet/subsonicsettingspage.ui
+  internet/digitally/digitallyimportedsettingspage.ui
+  internet/grooveshark/groovesharksettingspage.ui
+  internet/icecast/icecastfilterwidget.ui
+  internet/core/internetshowsettingspage.ui
+  internet/core/internetviewcontainer.ui
+  internet/magnatune/magnatunedownloaddialog.ui
+  internet/magnatune/magnatunesettingspage.ui
+  internet/core/searchboxwidget.ui
+  internet/soundcloud/soundcloudsettingspage.ui
+  internet/spotify/spotifysettingspage.ui
+  internet/subsonic/subsonicsettingspage.ui
 
   library/groupbydialog.ui
   library/libraryfilterwidget.ui
@@ -711,16 +722,17 @@ set(UI
 
   playlist/dynamicplaylistcontrols.ui
   playlist/playlistcontainer.ui
+  playlist/playlistsaveoptionsdialog.ui
   playlist/playlistlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
 
-  podcasts/addpodcastbyurl.ui
-  podcasts/addpodcastdialog.ui
-  podcasts/gpoddersearchpage.ui
-  podcasts/itunessearchpage.ui
-  podcasts/podcastinfowidget.ui
-  podcasts/podcastsettingspage.ui
+  internet/podcasts/addpodcastbyurl.ui
+  internet/podcasts/addpodcastdialog.ui
+  internet/podcasts/gpoddersearchpage.ui
+  internet/podcasts/itunessearchpage.ui
+  internet/podcasts/podcastinfowidget.ui
+  internet/podcasts/podcastsettingspage.ui
 
   smartplaylists/querysearchpage.ui
   smartplaylists/querysortpage.ui
@@ -826,32 +838,32 @@ optional_source(ENABLE_VISUALISATIONS
 optional_source(HAVE_LIBLASTFM
   SOURCES
     covers/lastfmcoverprovider.cpp
-    internet/fixlastfm.cpp
-    internet/lastfmcompat.cpp
-    internet/lastfmservice.cpp
-    internet/lastfmsettingspage.cpp
+    internet/lastfm/fixlastfm.cpp
+    internet/lastfm/lastfmcompat.cpp
+    internet/lastfm/lastfmservice.cpp
+    internet/lastfm/lastfmsettingspage.cpp
     songinfo/echonestsimilarartists.cpp
     songinfo/echonesttags.cpp
     songinfo/lastfmtrackinfoprovider.cpp
     songinfo/tagwidget.cpp
   HEADERS
     covers/lastfmcoverprovider.h
-    internet/lastfmservice.h
-    internet/lastfmsettingspage.h
+    internet/lastfm/lastfmservice.h
+    internet/lastfm/lastfmsettingspage.h
     songinfo/echonestsimilarartists.h
     songinfo/echonesttags.h
     songinfo/lastfmtrackinfoprovider.h
     songinfo/tagwidget.h
   UI
-    internet/lastfmsettingspage.ui
+    internet/lastfm/lastfmsettingspage.ui
 )
 
 
 optional_source(HAVE_SPOTIFY_DOWNLOADER
   SOURCES
-    internet/spotifyblobdownloader.cpp
+    internet/spotify/spotifyblobdownloader.cpp
   HEADERS
-    internet/spotifyblobdownloader.h
+    internet/spotify/spotifyblobdownloader.h
   INCLUDE_DIRECTORIES
     ${QCA_INCLUDE_DIRS}
 )
@@ -895,11 +907,6 @@ optional_source(LINUX SOURCES widgets/osd_x11.cpp)
 # DBUS and MPRIS - Linux specific
 if(HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
-
-  # Hack to get it to generate interfaces without namespaces - required
-  # because otherwise org::freedesktop::UDisks and
-  # org::freedesktop::UDisks::Device conflict.
-  list(APPEND QT_DBUSXML2CPP_EXECUTABLE -N)
 
   # MPRIS DBUS interfaces
   qt4_add_dbus_adaptor(SOURCES
@@ -968,6 +975,10 @@ if(HAVE_DBUS)
 
   # DeviceKit DBUS interfaces
   if(HAVE_DEVICEKIT)
+    set_source_files_properties(dbus/org.freedesktop.UDisks.xml
+        PROPERTIES NO_NAMESPACE dbus/udisks)
+    set_source_files_properties(dbus/org.freedesktop.UDisks.Device.xml
+        PROPERTIES NO_NAMESPACE dbus/udisksdevice)
     qt4_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.xml
         dbus/udisks)
@@ -1036,10 +1047,12 @@ optional_source(HAVE_AUDIOCD
   SOURCES
     devices/cddadevice.cpp
     devices/cddalister.cpp
+    devices/cddasongloader.cpp
     ui/ripcd.cpp
   HEADERS
     devices/cddadevice.h
     devices/cddalister.h
+    devices/cddasongloader.h
     ui/ripcd.h
   UI
     ui/ripcd.ui
@@ -1060,6 +1073,7 @@ optional_source(HAVE_LIBMTP
 # Moodbar support
 optional_source(HAVE_MOODBAR
   SOURCES
+    moodbar/moodbarbuilder.cpp
     moodbar/moodbarcontroller.cpp
     moodbar/moodbaritemdelegate.cpp
     moodbar/moodbarloader.cpp
@@ -1077,61 +1091,61 @@ optional_source(HAVE_MOODBAR
 # Google Drive support
 optional_source(HAVE_GOOGLE_DRIVE
   SOURCES
-    internet/googledriveclient.cpp
-    internet/googledriveservice.cpp
-    internet/googledrivesettingspage.cpp
-    internet/googledriveurlhandler.cpp
+    internet/googledrive/googledriveclient.cpp
+    internet/googledrive/googledriveservice.cpp
+    internet/googledrive/googledrivesettingspage.cpp
+    internet/googledrive/googledriveurlhandler.cpp
   HEADERS
-    internet/googledriveclient.h
-    internet/googledriveservice.h
-    internet/googledrivesettingspage.h
-    internet/googledriveurlhandler.h
+    internet/googledrive/googledriveclient.h
+    internet/googledrive/googledriveservice.h
+    internet/googledrive/googledrivesettingspage.h
+    internet/googledrive/googledriveurlhandler.h
   UI
-    internet/googledrivesettingspage.ui
+    internet/googledrive/googledrivesettingspage.ui
 )
 
 # Dropbox support
 optional_source(HAVE_DROPBOX
   SOURCES
-    internet/dropboxauthenticator.cpp
-    internet/dropboxservice.cpp
-    internet/dropboxsettingspage.cpp
-    internet/dropboxurlhandler.cpp
+    internet/dropbox/dropboxauthenticator.cpp
+    internet/dropbox/dropboxservice.cpp
+    internet/dropbox/dropboxsettingspage.cpp
+    internet/dropbox/dropboxurlhandler.cpp
   HEADERS
-    internet/dropboxauthenticator.h
-    internet/dropboxservice.h
-    internet/dropboxsettingspage.h
-    internet/dropboxurlhandler.h
+    internet/dropbox/dropboxauthenticator.h
+    internet/dropbox/dropboxservice.h
+    internet/dropbox/dropboxsettingspage.h
+    internet/dropbox/dropboxurlhandler.h
   UI
-    internet/dropboxsettingspage.ui
+    internet/dropbox/dropboxsettingspage.ui
 )
 
 # Skydrive support
 optional_source(HAVE_SKYDRIVE
   SOURCES
-    internet/skydriveservice.cpp
-    internet/skydrivesettingspage.cpp
-    internet/skydriveurlhandler.cpp
+    internet/skydrive/skydriveservice.cpp
+    internet/skydrive/skydrivesettingspage.cpp
+    internet/skydrive/skydriveurlhandler.cpp
   HEADERS
-    internet/skydriveservice.h
-    internet/skydrivesettingspage.h
-    internet/skydriveurlhandler.h
+    internet/skydrive/skydriveservice.h
+    internet/skydrive/skydrivesettingspage.h
+    internet/skydrive/skydriveurlhandler.h
   UI
-    internet/skydrivesettingspage.ui
+    internet/skydrive/skydrivesettingspage.ui
 )
 
 # Box support
 optional_source(HAVE_BOX
   SOURCES
-    internet/boxservice.cpp
-    internet/boxsettingspage.cpp
-    internet/boxurlhandler.cpp
+    internet/box/boxservice.cpp
+    internet/box/boxsettingspage.cpp
+    internet/box/boxurlhandler.cpp
   HEADERS
-    internet/boxservice.h
-    internet/boxsettingspage.h
-    internet/boxurlhandler.h
+    internet/box/boxservice.h
+    internet/box/boxsettingspage.h
+    internet/box/boxurlhandler.h
   UI
-    internet/boxsettingspage.ui
+    internet/box/boxsettingspage.ui
 )
 
 # Vk.com support
@@ -1140,24 +1154,41 @@ optional_source(HAVE_VK
     ${VREEN_INCLUDE_DIRS}
   SOURCES
     globalsearch/vksearchprovider.cpp
-    internet/vkconnection.cpp
-    internet/vkmusiccache.cpp
-    internet/vksearchdialog.cpp
-    internet/vkservice.cpp
-    internet/vksettingspage.cpp
-    internet/vkurlhandler.cpp
+    internet/vk/vkconnection.cpp
+    internet/vk/vkmusiccache.cpp
+    internet/vk/vksearchdialog.cpp
+    internet/vk/vkservice.cpp
+    internet/vk/vksettingspage.cpp
+    internet/vk/vkurlhandler.cpp
   HEADERS
     globalsearch/vksearchprovider.h
-    internet/vkconnection.h
-    internet/vkmusiccache.h
-    internet/vksearchdialog.h
-    internet/vkservice.h
-    internet/vksettingspage.h
-    internet/vkurlhandler.h
+    internet/vk/vkconnection.h
+    internet/vk/vkmusiccache.h
+    internet/vk/vksearchdialog.h
+    internet/vk/vkservice.h
+    internet/vk/vksettingspage.h
+    internet/vk/vkurlhandler.h
   UI
-    internet/vksearchdialog.ui
-    internet/vksettingspage.ui
+    internet/vk/vksearchdialog.ui
+    internet/vk/vksettingspage.ui
 )
+
+# Seafile support
+optional_source(HAVE_SEAFILE
+  SOURCES
+    internet/seafile/seafileservice.cpp
+    internet/seafile/seafilesettingspage.cpp
+    internet/seafile/seafileurlhandler.cpp
+    internet/seafile/seafiletree.cpp
+  HEADERS
+    internet/seafile/seafileservice.h
+    internet/seafile/seafilesettingspage.h
+    internet/seafile/seafileurlhandler.h
+    internet/seafile/seafiletree.h
+  UI
+    internet/seafile/seafilesettingspage.ui
+)
+
 
 # Pulse audio integration
 optional_source(HAVE_LIBPULSE
@@ -1256,7 +1287,6 @@ endif(HAVE_GIO)
 
 if(HAVE_AUDIOCD)
   target_link_libraries(clementine_lib ${CDIO_LIBRARIES})
-  target_link_libraries(clementine_lib ${GSTREAMER_CDDA_LIBRARIES})
 endif(HAVE_AUDIOCD)
 
 if(HAVE_MOODBAR)
@@ -1390,6 +1420,8 @@ if (APPLE)
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   install(FILES ../dist/sparkle_pub.pem
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
+  install(FILES ../dist/cacert.pem
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
   install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
@@ -1399,20 +1431,22 @@ if (APPLE)
       DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
   endif (HAVE_SPARKLE)
 
-  install(FILES "${QT_QTCORE_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtCore.framework/Contents")
-  install(FILES "${QT_QTGUI_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtGui.framework/Contents")
-  install(FILES "${QT_QTNETWORK_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtNetwork.framework/Contents")
-  install(FILES "${QT_QTOPENGL_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtOpenGL.framework/Contents")
-  install(FILES "${QT_QTSQL_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSql.framework/Contents")
-  install(FILES "${QT_QTSVG_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSvg.framework/Contents")
-  install(FILES "${QT_QTXML_LIBRARY_RELEASE}/Contents/Info.plist"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtXml.framework/Contents")
+  foreach (plist_destination Versions/4/Resources Resources)
+    install(FILES "${QT_QTCORE_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtCore.framework/${plist_destination}")
+    install(FILES "${QT_QTGUI_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtGui.framework/${plist_destination}")
+    install(FILES "${QT_QTNETWORK_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtNetwork.framework/${plist_destination}")
+    install(FILES "${QT_QTOPENGL_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtOpenGL.framework/${plist_destination}")
+    install(FILES "${QT_QTSQL_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSql.framework/${plist_destination}")
+    install(FILES "${QT_QTSVG_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSvg.framework/${plist_destination}")
+    install(FILES "${QT_QTXML_LIBRARY_RELEASE}/Contents/Info.plist"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtXml.framework/${plist_destination}")
+  endforeach()
 
   if (HAVE_BREAKPAD)
     install(DIRECTORY

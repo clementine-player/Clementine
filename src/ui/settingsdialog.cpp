@@ -35,15 +35,16 @@
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearchsettingspage.h"
-#include "internet/digitallyimportedsettingspage.h"
-#include "internet/groovesharksettingspage.h"
-#include "internet/magnatunesettingspage.h"
-#include "internet/soundcloudsettingspage.h"
-#include "internet/spotifysettingspage.h"
-#include "internet/subsonicsettingspage.h"
+#include "internet/digitally/digitallyimportedsettingspage.h"
+#include "internet/grooveshark/groovesharksettingspage.h"
+#include "internet/core/internetshowsettingspage.h"
+#include "internet/magnatune/magnatunesettingspage.h"
+#include "internet/soundcloud/soundcloudsettingspage.h"
+#include "internet/spotify/spotifysettingspage.h"
+#include "internet/subsonic/subsonicsettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
-#include "podcasts/podcastsettingspage.h"
+#include "internet/podcasts/podcastsettingspage.h"
 #include "songinfo/songinfosettingspage.h"
 #include "transcoder/transcodersettingspage.h"
 #include "widgets/groupediconview.h"
@@ -52,7 +53,7 @@
 #include "ui_settingsdialog.h"
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/lastfmsettingspage.h"
+#include "internet/lastfm/lastfmsettingspage.h"
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
@@ -60,23 +61,27 @@
 #endif
 
 #ifdef HAVE_GOOGLE_DRIVE
-#include "internet/googledrivesettingspage.h"
+#include "internet/googledrive/googledrivesettingspage.h"
 #endif
 
 #ifdef HAVE_DROPBOX
-#include "internet/dropboxsettingspage.h"
+#include "internet/dropbox/dropboxsettingspage.h"
 #endif
 
 #ifdef HAVE_BOX
-#include "internet/boxsettingspage.h"
+#include "internet/box/boxsettingspage.h"
 #endif
 
 #ifdef HAVE_VK
-#include "internet/vksettingspage.h"
+#include "internet/vk/vksettingspage.h"
 #endif
 
 #ifdef HAVE_SKYDRIVE
-#include "internet/skydrivesettingspage.h"
+#include "internet/skydrive/skydrivesettingspage.h"
+#endif
+
+#ifdef HAVE_SEAFILE
+#include "internet/seafile/seafilesettingspage.h"
 #endif
 
 #include <QAbstractButton>
@@ -150,6 +155,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_Appearance, new AppearanceSettingsPage(this), iface);
   AddPage(Page_SongInformation, new SongInfoSettingsPage(this), iface);
   AddPage(Page_Notifications, new NotificationsSettingsPage(this), iface);
+  AddPage(Page_InternetShow, new InternetShowSettingsPage(this), iface);
 
   // Internet providers
   QTreeWidgetItem* providers = AddCategory(tr("Internet providers"));
@@ -181,6 +187,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 
 #ifdef HAVE_VK
   AddPage(Page_Vk, new VkSettingsPage(this), providers);
+#endif
+
+#ifdef HAVE_SEAFILE
+  AddPage(Page_Seafile, new SeafileSettingsPage(this), providers);
 #endif
 
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);

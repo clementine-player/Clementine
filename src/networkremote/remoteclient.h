@@ -4,6 +4,9 @@
 #include <QAbstractSocket>
 #include <QObject>
 
+#include "songsender.h"
+
+#include "core/application.h"
 #include "remotecontrolmessages.pb.h"
 
 class Application;
@@ -20,6 +23,7 @@ class RemoteClient : public QObject {
 
   void set_downloader(bool downloader) { downloader_ = downloader; }
   bool downloader() const { return downloader_; }
+  SongSender* song_sender() { return song_sender_; }
 
  signals:
   void Parse(const pb::remote::Message& msg);

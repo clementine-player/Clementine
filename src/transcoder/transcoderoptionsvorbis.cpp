@@ -31,7 +31,7 @@ TranscoderOptionsVorbis::~TranscoderOptionsVorbis() { delete ui_; }
 
 void TranscoderOptionsVorbis::Load() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
 
 #define GET_BITRATE(variable, property)         \
   int variable = s.value(property, -1).toInt(); \
@@ -51,7 +51,7 @@ void TranscoderOptionsVorbis::Load() {
 
 void TranscoderOptionsVorbis::Save() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
 
 #define GET_BITRATE(variable, ui_slider) \
   int variable = ui_slider->value();     \

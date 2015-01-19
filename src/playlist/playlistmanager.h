@@ -76,7 +76,8 @@ class PlaylistManagerInterface : public QObject {
   virtual void New(const QString& name, const SongList& songs = SongList(),
                    const QString& special_type = QString()) = 0;
   virtual void Load(const QString& filename) = 0;
-  virtual void Save(int id, const QString& filename) = 0;
+  virtual void Save(int id, const QString& filename,
+                    Playlist::Path path_type) = 0;
   virtual void Rename(int id, const QString& new_name) = 0;
   virtual void Delete(int id) = 0;
   virtual bool Close(int id) = 0;
@@ -95,6 +96,7 @@ class PlaylistManagerInterface : public QObject {
   virtual void ClearCurrent() = 0;
   virtual void ShuffleCurrent() = 0;
   virtual void RemoveDuplicatesCurrent() = 0;
+  virtual void RemoveUnavailableCurrent() = 0;
   virtual void SetActivePlaying() = 0;
   virtual void SetActivePaused() = 0;
   virtual void SetActiveStopped() = 0;
@@ -180,7 +182,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   void New(const QString& name, const SongList& songs = SongList(),
            const QString& special_type = QString());
   void Load(const QString& filename);
-  void Save(int id, const QString& filename);
+  void Save(int id, const QString& filename, Playlist::Path path_type);
   // Display a file dialog to let user choose a file before saving the file
   void SaveWithUI(int id, const QString& suggested_filename);
   void Rename(int id, const QString& new_name);
@@ -204,6 +206,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   void ClearCurrent();
   void ShuffleCurrent();
   void RemoveDuplicatesCurrent();
+  void RemoveUnavailableCurrent();
   void SetActiveStreamMetadata(const QUrl& url, const Song& song);
   // Rate current song using 0.0 - 1.0 scale.
   void RateCurrentSong(double rating);
@@ -229,8 +232,9 @@ class PlaylistManager : public PlaylistManagerInterface {
   void OneOfPlaylistsChanged();
   void UpdateSummaryText();
   void SongsDiscovered(const SongList& songs);
-  void ItemsLoadedForSavePlaylist(QFutureWatcher<Song>* watcher,
-                                  const QString& filename);
+  void ItemsLoadedForSavePlaylist(QFutureWatcher<SongList>* watcher,
+                                  const QString& filename,
+                                  Playlist::Path path_type);
 
  private:
   Playlist* AddPlaylist(int id, const QString& name,
@@ -252,8 +256,6 @@ class PlaylistManager : public PlaylistManagerInterface {
   PlaylistSequence* sequence_;
   PlaylistParser* parser_;
   PlaylistContainer* playlist_container_;
-
-  QSettings settings_;
 
   // key = id
   QMap<int, Data> playlists_;

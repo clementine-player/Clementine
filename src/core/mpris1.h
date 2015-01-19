@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011-2012, David Sansome <me@davidsansome.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MPRIS1_H
-#define MPRIS1_H
+#ifndef CORE_MPRIS1_H_
+#define CORE_MPRIS1_H_
 
 #include "core/player.h"
 
@@ -102,7 +104,7 @@ class Mpris1Root : public QObject {
   Q_OBJECT
 
  public:
-  Mpris1Root(Application* app, QObject* parent = nullptr);
+  explicit Mpris1Root(Application* app, QObject* parent = nullptr);
 
   QString Identity();
   void Quit();
@@ -116,7 +118,7 @@ class Mpris1Player : public QObject {
   Q_OBJECT
 
  public:
-  Mpris1Player(Application* app, QObject* parent = nullptr);
+  explicit Mpris1Player(Application* app, QObject* parent = nullptr);
 
   void Pause();
   void Stop();
@@ -149,7 +151,7 @@ class Mpris1Player : public QObject {
   void CurrentSongChanged(const Song& song, const QString& art_uri,
                           const QImage&);
 
-signals:
+ signals:
   void CapsChange(int);
   void TrackChange(const QVariantMap&);
   void StatusChange(DBusStatus);
@@ -171,7 +173,7 @@ class Mpris1TrackList : public QObject {
   Q_OBJECT
 
  public:
-  Mpris1TrackList(Application* app, QObject* parent = nullptr);
+  explicit Mpris1TrackList(Application* app, QObject* parent = nullptr);
 
   int AddTrack(const QString&, bool);
   void DelTrack(int index);
@@ -184,7 +186,7 @@ class Mpris1TrackList : public QObject {
   // Amarok extension
   void PlayTrack(int index);
 
-signals:
+ signals:
   void TrackListChange(int i);
 
  private slots:
@@ -196,4 +198,4 @@ signals:
 
 }  // namespace mpris
 
-#endif  // MPRIS1_H
+#endif  // CORE_MPRIS1_H_

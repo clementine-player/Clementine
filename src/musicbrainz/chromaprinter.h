@@ -50,7 +50,7 @@ class Chromaprinter {
 
   void ReportError(GstMessage* message);
 
-  static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
+  static void NewPadCallback(GstElement*, GstPad* pad, gpointer data);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
                                          gpointer data);

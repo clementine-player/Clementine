@@ -18,6 +18,10 @@
  * USA
  */
 
+extern "C" {
+#include <libavutil/mem.h>
+}
+
 #include "utils.h"
 #include "fft_lib_avfft.h"
 

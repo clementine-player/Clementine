@@ -1,5 +1,7 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2013, Andreas <asfa194@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -16,11 +18,12 @@
 */
 
 #include "albumcoverexporter.h"
-#include "coverexportrunnable.h"
-#include "core/song.h"
 
 #include <QFile>
 #include <QThreadPool>
+
+#include "coverexportrunnable.h"
+#include "core/song.h"
 
 const int AlbumCoverExporter::kMaxConcurrentRequests = 3;
 

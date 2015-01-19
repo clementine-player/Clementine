@@ -194,6 +194,7 @@ signals:
 
   void Seeked(qlonglong microseconds);
   void UpdateTrackPosition();
+  void UpdateTrackSliderPosition();
 
   // Handle visibility of LastFM icons
   void LastFMButtonVisibilityChanged(bool value);
@@ -351,6 +352,7 @@ signals:
   QSortFilterProxyModel* library_sort_model_;
 
   QTimer* track_position_timer_;
+  QTimer* track_slider_timer_;
   QSettings settings_;
 
   bool was_maximized_;

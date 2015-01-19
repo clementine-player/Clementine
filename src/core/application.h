@@ -1,5 +1,9 @@
 /* This file is part of Clementine.
-   Copyright 2012, David Sansome <me@davidsansome.com>
+   Copyright 2012-2013, Andreas <asfa194@gmail.com>
+   Copyright 2012-2013, David Sansome <me@davidsansome.com>
+   Copyright 2013, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,8 +19,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef CORE_APPLICATION_H_
+#define CORE_APPLICATION_H_
 
 #include "ui/settingsdialog.h"
 
@@ -40,6 +44,7 @@ class NetworkRemote;
 class NetworkRemoteHelper;
 class Player;
 class PlaylistBackend;
+class PodcastDeleter;
 class PodcastDownloader;
 class PlaylistManager;
 class PodcastBackend;
@@ -83,6 +88,7 @@ class Application : public QObject {
   Library* library() const { return library_; }
   DeviceManager* device_manager() const { return device_manager_; }
   PodcastUpdater* podcast_updater() const { return podcast_updater_; }
+  PodcastDeleter* podcast_deleter() const { return podcast_deleter_; }
   PodcastDownloader* podcast_downloader() const { return podcast_downloader_; }
   GPodderSync* gpodder_sync() const { return gpodder_sync_; }
   MoodbarLoader* moodbar_loader() const { return moodbar_loader_; }
@@ -104,7 +110,7 @@ class Application : public QObject {
   void ReloadSettings();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
 
-signals:
+ signals:
   void ErrorAdded(const QString& message);
   void SettingsChanged();
   void SettingsDialogRequested(SettingsDialog::Page page);
@@ -129,6 +135,7 @@ signals:
   Library* library_;
   DeviceManager* device_manager_;
   PodcastUpdater* podcast_updater_;
+  PodcastDeleter* podcast_deleter_;
   PodcastDownloader* podcast_downloader_;
   GPodderSync* gpodder_sync_;
   MoodbarLoader* moodbar_loader_;
@@ -141,4 +148,4 @@ signals:
   QList<QThread*> threads_;
 };
 
-#endif  // APPLICATION_H
+#endif  // CORE_APPLICATION_H_

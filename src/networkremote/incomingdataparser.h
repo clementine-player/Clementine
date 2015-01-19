@@ -46,11 +46,10 @@ signals:
                   bool enqueue);
   void RemoveSongs(int id, const QList<int>& indices);
   void SeekTo(int seconds);
-  void SendSongs(const pb::remote::RequestDownloadSongs& request,
-                 RemoteClient* client);
-  void ResponseSongOffer(RemoteClient* client, bool accepted);
   void SendLibrary(RemoteClient* client);
   void RateCurrentSong(double);
+
+  void DoGlobalSearch(QString, RemoteClient*);
 
  private:
   Application* app_;
@@ -67,6 +66,7 @@ signals:
   void OpenPlaylist(const pb::remote::Message& msg);
   void ClosePlaylist(const pb::remote::Message& msg);
   void RateSong(const pb::remote::Message& msg);
+  void GlobalSearch(RemoteClient* client, const pb::remote::Message& msg);
 };
 
 #endif  // INCOMINGDATAPARSER_H

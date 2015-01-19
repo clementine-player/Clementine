@@ -31,14 +31,14 @@ TranscoderOptionsFlac::~TranscoderOptionsFlac() { delete ui_; }
 
 void TranscoderOptionsFlac::Load() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
 
   ui_->quality->setValue(s.value("quality", 5).toInt());
 }
 
 void TranscoderOptionsFlac::Save() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(kSettingsGroup + settings_postfix_);
 
   s.setValue("quality", ui_->quality->value());
 }

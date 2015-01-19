@@ -20,6 +20,7 @@
 
 #include <QAbstractItemModel>
 #include <QIcon>
+#include <QNetworkDiskCache>
 
 #include "libraryitem.h"
 #include "libraryquery.h"
@@ -47,7 +48,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   Q_ENUMS(GroupBy);
 
  public:
-  LibraryModel(LibraryBackend* backend, Application* app, QObject* parent = nullptr);
+  LibraryModel(LibraryBackend* backend, Application* app,
+               QObject* parent = nullptr);
   ~LibraryModel();
 
   static const char* kSmartPlaylistsMimeType;
@@ -55,6 +57,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   static const char* kSmartPlaylistsArray;
   static const int kSmartPlaylistsVersion;
   static const int kPrettyCoverSize;
+  static const qint64 kIconCacheSize;
 
   enum Role {
     Role_Type = Qt::UserRole + 1,
@@ -81,6 +84,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     GroupBy_Performer = 9,
     GroupBy_Grouping = 10,
     GroupBy_Bitrate = 11,
+    GroupBy_Disc = 12,
   };
 
   struct Grouping {
@@ -278,6 +282,8 @@ signals:
   QPixmap no_cover_icon_;
   QIcon playlists_dir_icon_;
   QIcon playlist_icon_;
+
+  QNetworkDiskCache* icon_cache_;
 
   int init_task_id_;
 

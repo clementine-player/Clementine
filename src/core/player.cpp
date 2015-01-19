@@ -1,5 +1,15 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2009-2012, David Sansome <me@davidsansome.com>
+   Copyright 2010-2011, 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
+   Copyright 2010-2012, 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
+   Copyright 2011, Andrea Decorte <adecorte@gmail.com>
+   Copyright 2012, Anand <anandtp@live.in>
+   Copyright 2012, Arash Abedinzadeh <arash.abedinzadeh@gmail.com>
+   Copyright 2013, Andreas <asfa194@gmail.com>
+   Copyright 2013, Kevin Cox <kevincox.ca@gmail.com>
+   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -35,7 +45,7 @@
 #include "playlist/playlistmanager.h"
 
 #ifdef HAVE_LIBLASTFM
-#include "internet/lastfmservice.h"
+#include "internet/lastfm/lastfmservice.h"
 #endif
 
 using std::shared_ptr;

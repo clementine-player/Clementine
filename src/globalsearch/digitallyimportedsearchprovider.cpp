@@ -17,7 +17,6 @@
 
 #include "digitallyimportedsearchprovider.h"
 #include "core/logging.h"
-#include "internet/digitallyimportedservicebase.h"
 
 DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
     DigitallyImportedServiceBase* service, Application* app, QObject* parent)
@@ -25,8 +24,7 @@ DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
   Init(service_->name(), service->api_service_name(), service_->icon(),
        ArtIsInSongMetadata | CanGiveSuggestions | CanShowConfig);
 
-  set_safe_words(QStringList() << "sky.fm"
-                               << "skyfm"
+  set_safe_words(QStringList() << "radiotunes"
                                << "di.fm"
                                << "difm"
                                << "digitallyimported");
