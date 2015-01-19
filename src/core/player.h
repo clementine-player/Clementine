@@ -122,7 +122,7 @@ class Player : public PlayerInterface {
 
   static const char* kSettingsGroup;
 
-  // Don't change the values
+  // Don't change the values: they are saved in preferences
   enum PreviousBehaviour {
     PreviousBehaviour_DontRestart = 1,
     PreviousBehaviour_Restart = 2
