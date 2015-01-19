@@ -29,6 +29,7 @@
 
 #include <memory>
 
+#include <QSettings>
 #include <QSortFilterProxyModel>
 #include <QtDebug>
 #include <QtConcurrentRun>
@@ -50,6 +51,8 @@
 
 using std::shared_ptr;
 
+const char* Player::kSettingsGroup = "Player";
+
 Player::Player(Application* app, QObject* parent)
     : PlayerInterface(parent),
       app_(app),
@@ -58,7 +61,9 @@ Player::Player(Application* app, QObject* parent)
       stream_change_type_(Engine::First),
       last_state_(Engine::Empty),
       nb_errors_received_(0),
-      volume_before_mute_(50) {
+      volume_before_mute_(50),
+      last_pressed_previous_(QDateTime::currentDateTime()),
+      menu_previousmode_(PreviousBehaviour_DontRestart) {
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());
@@ -85,12 +90,23 @@ void Player::Init() {
 
   engine_->SetVolume(settings_.value("volume", 50).toInt());
 
+  ReloadSettings();
+
 #ifdef HAVE_LIBLASTFM
   lastfm_ = app_->scrobbler();
 #endif
 }
 
-void Player::ReloadSettings() { engine_->ReloadSettings(); }
+void Player::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  menu_previousmode_ = PreviousBehaviour(
+      s.value("menu_previousmode", PreviousBehaviour_DontRestart).toInt());
+  s.endGroup();
+
+  engine_->ReloadSettings();
+}
 
 void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
   switch (result.type_) {
@@ -289,6 +305,18 @@ void Player::Previous() { PreviousItem(Engine::Manual); }
 
 void Player::PreviousItem(Engine::TrackChangeFlags change) {
   const bool ignore_repeat_track = change & Engine::Manual;
+
+  if (menu_previousmode_ == PreviousBehaviour_Restart) {
+    // Check if it has been over two seconds since previous button was pressed
+    QDateTime now = QDateTime::currentDateTime();
+    if (last_pressed_previous_.isValid() &&
+        last_pressed_previous_.secsTo(now) >= 2) {
+      last_pressed_previous_ = now;
+      PlayAt(app_->playlist_manager()->active()->current_row(), change, false);
+      return;
+    }
+    last_pressed_previous_ = now;
+  }
 
   int i = app_->playlist_manager()->active()->previous_row(ignore_repeat_track);
   app_->playlist_manager()->active()->set_current_row(i);

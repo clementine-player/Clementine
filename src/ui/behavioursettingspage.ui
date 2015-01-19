@@ -178,6 +178,32 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="groupBox_previous">
+     <property name="title">
+      <string>Pressing "Previous" in player will...</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_18">
+      <item>
+       <widget class="QComboBox" name="menu_previousmode">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Jump to previous song right away</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Restart song, then jump to previous if pressed again (iPod behavior)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox_7">
      <property name="title">
       <string>Double clicking a song will...</string>
