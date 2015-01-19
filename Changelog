@@ -1,3 +1,101 @@
+Version 1.3:
+  Major features:
+    * Vk.com support
+    * Seafile support
+    * Add Ampache compatibility (through Subsonic service)
+    * Add new analyzer "Rainbow Dash"
+    * Answer to the ultimate question of life, the universe and everything
+
+  Other features:
+    * Add left click to fullsize cover on playing widget
+    * Add m4b support for non-drm files
+    * Ignore english articles for library sorting
+    * Previous track in dynamic random mix
+    * Improve the organize dialog
+    * Add playlist save preference
+    * Add a preference to disable the pause notification
+    * Add a preference tab to hide some internet services
+    * Add an option to disable inline song metadata editing
+    * Use a save dialog option instead of quick change menu
+    * Add ability to fetch lyrics from lololyrics.com
+    * Add support for monitors in portrait mode
+    * Add now playing widget mode
+    * Add icons to extra
+    * Add a source icon for CD tracks
+    * Allow user to remove directories
+    * Add ability to remove unavailable items from playlist
+    * Adds an import button to the transcode UI, allowing the user to pull in
+     all files in a folder heirarchy to be transcoded
+    * Allow user to pull in all files in a folder heirarchy to be transcoded
+    * Make it impossible to collapse either side of the MainWindow splitter
+    * Add menu items for updating and doing a full rescan of Google Drive
+    * Increase Soundcloud cover image size
+    * Ability to pause Spotify tracks
+    * Add the ability to add or remove a Spotify track to a Spotify playlist
+     through context menu
+    * Add Spotify tracks to Spotify playlists by drag and drop
+    * Add ability to get a link to share Spotify playlists and songs
+    * Add ability to automatically set podcast as listened after sucesfully sending
+     it to a device
+    * Add ability to order podcasts by age
+    * Allow user to download multiple podcasts at the same time
+    * Add ability to cancel podcast downloads in progress
+    * Allow user to hide listened podcast episodes
+    * Huge improvement of the speed at startup
+    * Improve performance of mass rating changes
+    * Improve ripping performance
+    * Persistent cache for pixmaps. Huge improvement of the performance when
+     scrolling the library for example
+    * Add AppData file for Clementine (for GNOME and KDE Software Centers)
+
+  Bugfixes:
+    * Fix crash when click on a SoundCloud entry in internet tab
+    * Fix crash when marking podcast as listened
+    * Fix crash after pressing OK in the device properties window
+    * Fix stop after track which doesn't remove now playing
+    * Fix play bleeding into next track after auto stop
+    * Fix analyzer framerate when mouseover play scrubber
+    * Fix issues with buffers sent to analyzer
+    * Fix block analyzer framerate
+    * Fix dbz possibility with small buffers at end of track
+    * Fix dbz possibility in moodbar
+    * Fix oversized album cover art
+    * Fix Grooveshark SSL errors
+    * Clean cover art from /tmp
+    * Fix the rendering of the little numbers in the boxes on queued items in
+     the playlist
+    * Fix parsing of MusicBrainz data for discid
+    * Fix random artifacting on nyanalyzer on startup
+    * Fix podcasts length issues (which caused issues with seeking for example)
+    * Fix too small equalizer window size
+    * Fix labels which don't inherit system text colors in the edit tag dialog
+    * Fix the mess of the queue manager after playlist re-sort
+    * Fix for queue ordering issue in the playlist view when using c-d to
+     dequeue a track
+    * Fix detection of parent-relative paths in playlist saving
+    * Fix path seperators issue when reading playlists
+    * Fix m3u parser issue when an artist's name has a hyphen
+    * Fix bug with percents when fetch the Jamendo catalogue
+    * Fix a little dropout when transition to next track
+    * Fix broken RockRadio.com for premium users
+    * Fix Subsonic login with + characters in the password
+    * Fix accents issue in when save playlist in xspf format
+    * Fix issues with some songs length thanks to Taglib. People with Taglib
+     installed on their system will have to wait a new release of Taglib
+    * Fix moodbars not generating correctly
+    * Fix socket leak in moodbar
+    * Fix memory leak in tagreader
+    * Remove Ubuntu One support
+
+  Build system changes:
+    * Update to gstreamer 1.0
+    * Don't compile vreen with link-time optimizations
+    * Use the system's sha2 library if it's available
+    * (Windows) Add libgmp-10.dll which is required by libgiognutls.dll
+    * (Fedora) Don't depend on libplist or usbmuxd
+
+
+
 Version 1.2.3:
   Bugfixes:
     * Fix compilation with GCC 4.9.
