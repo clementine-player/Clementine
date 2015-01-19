@@ -23,8 +23,11 @@
 
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/player.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
+#include "networkremote/outgoingdatacreator.h"
+#include "networkremote/remoteclient.h"
 #include "playlist/playlistitem.h"
 
 const quint32 SongSender::kFileChunkSize = 100000;  // in Bytes

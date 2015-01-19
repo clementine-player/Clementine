@@ -4,13 +4,11 @@
 #include <QAbstractSocket>
 #include <QObject>
 
-#include "songsender.h"
-
-#include "core/application.h"
 #include "remotecontrolmessages.pb.h"
 
 class Application;
 class QByteArray;
+class SongSender;
 
 class RemoteClient : public QObject {
   Q_OBJECT
@@ -31,6 +29,7 @@ class RemoteClient : public QObject {
  protected:
   Application* app_;
   bool downloader_;
+  SongSender* song_sender_;
 };
 
 #endif  // REMOTECLIENT_H

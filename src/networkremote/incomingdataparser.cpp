@@ -22,6 +22,7 @@
 #include "core/logging.h"
 #include "engines/enginebase.h"
 #include "internet/core/internetmodel.h"
+#include "networkremote/songsender.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "playlist/playlist.h"
