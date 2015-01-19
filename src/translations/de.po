@@ -24,7 +24,7 @@
 # Martin Herkt <luck3r@phicode.de>, 2010
 # Mohamed Sakhri <mohamed.sakhri@gmail.com>, 2013
 # Paul E. <>, 2012
-# Peter B. <pb@das-werkstatt.com>, 2014
+# Peter B. <pb@das-werkstatt.com>, 2014-2015
 # Phillip Schichtel, 2013
 # robfloop <robertbeckmann@fastmail.fm>, 2012
 # Robin Cornelio Thomas <rc.thomas90@gmail.com>, 2012
@@ -39,8 +39,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-01-10 17:06+0000\n"
-"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
+"PO-Revision-Date: 2015-01-14 23:45+0000\n"
+"Last-Translator: Peter B. <pb@das-werkstatt.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -267,7 +267,7 @@ msgstr "&Werkzeuge"
 msgid "(different across multiple songs)"
 msgstr "(unterschiedlich für mehrere Titel)"
 
-#: internet/spotify/spotifyservice.cpp:449
+#: internet/spotify/spotifyservice.cpp:465
 msgid ", by "
 msgstr ", von "
 
@@ -615,9 +615,13 @@ msgstr "Zu Grooveshark-Wiedergabelisten hinzufügen"
 msgid "Add to My Music"
 msgstr "Zu »Meine Musik« hinzufügen"
 
-#: internet/spotify/spotifyservice.cpp:594
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify playlists"
 msgstr "Zur Spotify-Wiedergabeliste hinzufügen"
+
+#: internet/spotify/spotifyservice.cpp:610
+msgid "Add to Spotify starred"
+msgstr "Markierte Stücke von Spotify hinzufügen"
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -1369,7 +1373,7 @@ msgstr "Magnatune einrichten …"
 msgid "Configure Shortcuts"
 msgstr "Tastenkürzel einrichten"
 
-#: internet/spotify/spotifyservice.cpp:876
+#: internet/spotify/spotifyservice.cpp:900
 msgid "Configure Spotify..."
 msgstr "Spotify konfigurieren …"
 
@@ -2565,12 +2569,12 @@ msgstr "Eine Adresse erhalten, um diese Grooveshark-Wiedergabeliste freizugeben.
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Eine Adresse erhalten, um dieses Grooveshark-Lied freizugeben."
 
-#: internet/spotify/spotifyservice.cpp:610
-#: internet/spotify/spotifyservice.cpp:651
+#: internet/spotify/spotifyservice.cpp:633
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
 msgstr "Eine Adresse erhalten, um dieses Spotify-Lied zu teilen"
 
-#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr "Eine Adresse erhalten, um diese Wiedergabeliste zu teilen"
 
@@ -2788,7 +2792,7 @@ msgid ""
 "time a song finishes."
 msgstr "Im dynamischen Modus werden neue Titel automatisch ausgewählt und an die Wiedergabeliste angehängt, sobald ein Titel zu Ende ist."
 
-#: internet/spotify/spotifyservice.cpp:411
+#: internet/spotify/spotifyservice.cpp:421
 msgid "Inbox"
 msgstr "Posteingang"
 
@@ -3229,7 +3233,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Machen Sie es so!"
 
-#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:662
 msgid "Make playlist available offline"
 msgstr "Wiedergabeliste für die Offlinebenutzung verfügbar machen"
 
@@ -4160,7 +4164,7 @@ msgid "Remove from favorites"
 msgstr "Von Favoriten entfernen"
 
 #: internet/grooveshark/groovesharkservice.cpp:543
-#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
+#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Aus der Wiedergabeliste entfernen"
 
@@ -4469,7 +4473,7 @@ msgstr "Suchoptionen"
 
 #: internet/grooveshark/groovesharkservice.cpp:582
 #: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:397
+#: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
 msgstr "Suchergebnisse"
 
@@ -4868,7 +4872,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Fehler beim Anmelden bei Spotify"
 
-#: internet/spotify/spotifyservice.cpp:811
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
 msgstr "Adresse der Spotify-Wiedergabeliste"
 
@@ -4880,7 +4884,7 @@ msgstr "Spotify-Erweiterung"
 msgid "Spotify plugin not installed"
 msgstr "Spotify-Erweiterung nicht installiert"
 
-#: internet/spotify/spotifyservice.cpp:802
+#: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
 msgstr "Adresse des Spotify-Liedes"
 
@@ -4888,7 +4892,7 @@ msgstr "Adresse des Spotify-Liedes"
 msgid "Standard"
 msgstr "Standard"
 
-#: internet/spotify/spotifyservice.cpp:405
+#: internet/spotify/spotifyservice.cpp:414
 msgid "Starred"
 msgstr "Markiert"
 
@@ -4906,7 +4910,7 @@ msgstr "Konvertieren"
 
 #: internet/grooveshark/groovesharkservice.cpp:584
 #: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:399
+#: internet/spotify/spotifyservice.cpp:408
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -5018,15 +5022,15 @@ msgstr "Unterstützte Formate"
 msgid "Synchronize statistics to files now"
 msgstr "Jetzt die Statistiken mit den Dateien synchronisieren"
 
-#: internet/spotify/spotifyservice.cpp:676
+#: internet/spotify/spotifyservice.cpp:699
 msgid "Syncing Spotify inbox"
 msgstr "Spotify-Postfach wird synchronisiert"
 
-#: internet/spotify/spotifyservice.cpp:670
+#: internet/spotify/spotifyservice.cpp:693
 msgid "Syncing Spotify playlist"
 msgstr "Spotify-Wiedergabeliste wird synchronisiert"
 
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify starred tracks"
 msgstr "Markierte Stücke von Spotify werden synchronisiert"
 
@@ -5253,7 +5257,7 @@ msgstr "Morgen"
 msgid "Too many redirects"
 msgstr "Zu viele Umleitungen"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:427
 msgid "Top tracks"
 msgstr "Top-Titel"
 

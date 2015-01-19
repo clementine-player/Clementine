@@ -24,7 +24,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-27 18:00+0000\n"
+"PO-Revision-Date: 2015-01-14 22:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -252,7 +252,7 @@ msgstr "&Araçlar"
 msgid "(different across multiple songs)"
 msgstr "(her şarkı için farklı)"
 
-#: internet/spotify/spotifyservice.cpp:449
+#: internet/spotify/spotifyservice.cpp:465
 msgid ", by "
 msgstr ", "
 
@@ -600,9 +600,13 @@ msgstr "Grooveshark'i müzik listelerine ekle"
 msgid "Add to My Music"
 msgstr "Müziklerime Ekle"
 
-#: internet/spotify/spotifyservice.cpp:594
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify playlists"
 msgstr "Spotify çalma listelerine ekle"
+
+#: internet/spotify/spotifyservice.cpp:610
+msgid "Add to Spotify starred"
+msgstr ""
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -1354,7 +1358,7 @@ msgstr "Magnatune'u Yapılandır..."
 msgid "Configure Shortcuts"
 msgstr "Kısayolları Yapılandır"
 
-#: internet/spotify/spotifyservice.cpp:876
+#: internet/spotify/spotifyservice.cpp:900
 msgid "Configure Spotify..."
 msgstr "Spotify'ı Yapılandır..."
 
@@ -2550,12 +2554,12 @@ msgstr "Bu Grooveshark çalma listesini paylaşmak için bir URL al"
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Bu Grooveshark şarkısını paylaşmak için bir URL al"
 
-#: internet/spotify/spotifyservice.cpp:610
-#: internet/spotify/spotifyservice.cpp:651
+#: internet/spotify/spotifyservice.cpp:633
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2773,7 +2777,7 @@ msgid ""
 "time a song finishes."
 msgstr "Dinamik kipte yeni şarkılar seçilerek, her şarkı bittiğinde çalma listesine eklenecektir."
 
-#: internet/spotify/spotifyservice.cpp:411
+#: internet/spotify/spotifyservice.cpp:421
 msgid "Inbox"
 msgstr "Gelen Kutusu"
 
@@ -3214,7 +3218,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Yap gitsin!"
 
-#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:662
 msgid "Make playlist available offline"
 msgstr "Çalma listesini çevrim dışındayken kullanılabilir yap"
 
@@ -4145,7 +4149,7 @@ msgid "Remove from favorites"
 msgstr "Favorilerden kaldır"
 
 #: internet/grooveshark/groovesharkservice.cpp:543
-#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
+#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Çalma listesinden kaldır"
 
@@ -4454,7 +4458,7 @@ msgstr "Arama seçenekleri"
 
 #: internet/grooveshark/groovesharkservice.cpp:582
 #: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:397
+#: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
 msgstr "Arama sonuçları"
 
@@ -4853,7 +4857,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify giriş hatası"
 
-#: internet/spotify/spotifyservice.cpp:811
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4865,7 +4869,7 @@ msgstr "Spotify eklentisi"
 msgid "Spotify plugin not installed"
 msgstr "Spotify eklentisi kurulu değil"
 
-#: internet/spotify/spotifyservice.cpp:802
+#: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4873,7 +4877,7 @@ msgstr ""
 msgid "Standard"
 msgstr "Standart"
 
-#: internet/spotify/spotifyservice.cpp:405
+#: internet/spotify/spotifyservice.cpp:414
 msgid "Starred"
 msgstr "Yıldızlı"
 
@@ -4891,7 +4895,7 @@ msgstr "Dönüştürmeye başla"
 
 #: internet/grooveshark/groovesharkservice.cpp:584
 #: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:399
+#: internet/spotify/spotifyservice.cpp:408
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -5003,15 +5007,15 @@ msgstr "Desteklenen biçimler"
 msgid "Synchronize statistics to files now"
 msgstr "İstatistikleri dosyalara şimdi eşleştir"
 
-#: internet/spotify/spotifyservice.cpp:676
+#: internet/spotify/spotifyservice.cpp:699
 msgid "Syncing Spotify inbox"
 msgstr "Spotify gelen kutusu eşleniyor"
 
-#: internet/spotify/spotifyservice.cpp:670
+#: internet/spotify/spotifyservice.cpp:693
 msgid "Syncing Spotify playlist"
 msgstr "Spotify çalma listesi eşleniyor"
 
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify starred tracks"
 msgstr "Spotify yıldızlı şarkılar eşleniyor"
 
@@ -5238,7 +5242,7 @@ msgstr "Yarın"
 msgid "Too many redirects"
 msgstr "Çok fazla yeniden yönlendirme"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:427
 msgid "Top tracks"
 msgstr "En çok dinlenen parçalar"
 

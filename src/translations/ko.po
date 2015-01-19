@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-27 18:00+0000\n"
+"PO-Revision-Date: 2015-01-14 22:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -245,7 +245,7 @@ msgstr "도구(&T)"
 msgid "(different across multiple songs)"
 msgstr "(전반적으로 다양한 곡)"
 
-#: internet/spotify/spotifyservice.cpp:449
+#: internet/spotify/spotifyservice.cpp:465
 msgid ", by "
 msgstr ""
 
@@ -593,8 +593,12 @@ msgstr "Grooveshark 재생목록에 추가"
 msgid "Add to My Music"
 msgstr "내 음악에 추가"
 
-#: internet/spotify/spotifyservice.cpp:594
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify playlists"
+msgstr ""
+
+#: internet/spotify/spotifyservice.cpp:610
+msgid "Add to Spotify starred"
 msgstr ""
 
 #: ui/mainwindow.cpp:1649
@@ -1347,7 +1351,7 @@ msgstr "Magnatune 설정..."
 msgid "Configure Shortcuts"
 msgstr "단축키 설정"
 
-#: internet/spotify/spotifyservice.cpp:876
+#: internet/spotify/spotifyservice.cpp:900
 msgid "Configure Spotify..."
 msgstr "Spotify 설정..."
 
@@ -2543,12 +2547,12 @@ msgstr "Grooveshark 재생목록을 공유하기 위한 URL 얻기"
 msgid "Get a URL to share this Grooveshark song"
 msgstr " Grooveshark 음악을 공유하기 위한 URL 얻기"
 
-#: internet/spotify/spotifyservice.cpp:610
-#: internet/spotify/spotifyservice.cpp:651
+#: internet/spotify/spotifyservice.cpp:633
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2766,7 +2770,7 @@ msgid ""
 "time a song finishes."
 msgstr "다이나믹 모드에서는 곡이 끝날 때마다 자동으로 재생목록에 곡이 추가됩니다."
 
-#: internet/spotify/spotifyservice.cpp:411
+#: internet/spotify/spotifyservice.cpp:421
 msgid "Inbox"
 msgstr "수신함"
 
@@ -3207,7 +3211,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:662
 msgid "Make playlist available offline"
 msgstr "재생목록을 오프라인에서 재생 가능하도록 설정"
 
@@ -4138,7 +4142,7 @@ msgid "Remove from favorites"
 msgstr "즐겨찾기에서 제거"
 
 #: internet/grooveshark/groovesharkservice.cpp:543
-#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
+#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "재생목록에서 제거"
 
@@ -4447,7 +4451,7 @@ msgstr "옵션 검색"
 
 #: internet/grooveshark/groovesharkservice.cpp:582
 #: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:397
+#: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
 msgstr "검색 결과"
 
@@ -4846,7 +4850,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify 로그인 에러"
 
-#: internet/spotify/spotifyservice.cpp:811
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4858,7 +4862,7 @@ msgstr "Spotify 플러그인"
 msgid "Spotify plugin not installed"
 msgstr "Spotify 플러그인이 설치되지 않았습니다."
 
-#: internet/spotify/spotifyservice.cpp:802
+#: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4866,7 +4870,7 @@ msgstr ""
 msgid "Standard"
 msgstr "표준"
 
-#: internet/spotify/spotifyservice.cpp:405
+#: internet/spotify/spotifyservice.cpp:414
 msgid "Starred"
 msgstr "볊점"
 
@@ -4884,7 +4888,7 @@ msgstr "변환 시작"
 
 #: internet/grooveshark/groovesharkservice.cpp:584
 #: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:399
+#: internet/spotify/spotifyservice.cpp:408
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4996,15 +5000,15 @@ msgstr "지원가능한 형식"
 msgid "Synchronize statistics to files now"
 msgstr "지금 파일들의 통계들을 동기화"
 
-#: internet/spotify/spotifyservice.cpp:676
+#: internet/spotify/spotifyservice.cpp:699
 msgid "Syncing Spotify inbox"
 msgstr "Spotify inbox와 동기화 중"
 
-#: internet/spotify/spotifyservice.cpp:670
+#: internet/spotify/spotifyservice.cpp:693
 msgid "Syncing Spotify playlist"
 msgstr "Spotify 재생목록 동기화중"
 
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify starred tracks"
 msgstr "Sportify 별점 트랙 동기화 중"
 
@@ -5231,7 +5235,7 @@ msgstr "내일"
 msgid "Too many redirects"
 msgstr "너무 많은 리다이렉트"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:427
 msgid "Top tracks"
 msgstr "상위 트랙"
 

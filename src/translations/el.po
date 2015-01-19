@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-27 18:00+0000\n"
+"PO-Revision-Date: 2015-01-14 22:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -244,7 +244,7 @@ msgstr "Εργαλεία"
 msgid "(different across multiple songs)"
 msgstr "(διαφορετικό ανάμεσα σε πολλαπλά τραγούδια)"
 
-#: internet/spotify/spotifyservice.cpp:449
+#: internet/spotify/spotifyservice.cpp:465
 msgid ", by "
 msgstr ""
 
@@ -592,9 +592,13 @@ msgstr "Προσθήκη στη λίστα του "
 msgid "Add to My Music"
 msgstr "Προσθήκη στη Μουσική Μου"
 
-#: internet/spotify/spotifyservice.cpp:594
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify playlists"
 msgstr "Προσθήκη στην λίστα αναπαραγωγής Spotify"
+
+#: internet/spotify/spotifyservice.cpp:610
+msgid "Add to Spotify starred"
+msgstr ""
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -1346,7 +1350,7 @@ msgstr "Ρύθμιση του Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Ρύθμιση συντομεύσεων"
 
-#: internet/spotify/spotifyservice.cpp:876
+#: internet/spotify/spotifyservice.cpp:900
 msgid "Configure Spotify..."
 msgstr "Ρύθμιση του Spotify..."
 
@@ -2542,12 +2546,12 @@ msgstr "Λήψη URL για να μοιραστείτε αυτή την Groovesh
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Λήψη URL για να μοιραστείτε αυτή το Grooveshark τραγούδι"
 
-#: internet/spotify/spotifyservice.cpp:610
-#: internet/spotify/spotifyservice.cpp:651
+#: internet/spotify/spotifyservice.cpp:633
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2765,7 +2769,7 @@ msgid ""
 "time a song finishes."
 msgstr "Στην δυναμική λειτουργία νέα κομμάτια θα επιλέγονται και τοποθετούνται στην λίστα κάθε φορά που ένα τραγούδι τελειώνει."
 
-#: internet/spotify/spotifyservice.cpp:411
+#: internet/spotify/spotifyservice.cpp:421
 msgid "Inbox"
 msgstr "Εισερχόμενα"
 
@@ -3206,7 +3210,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Κάνε το!"
 
-#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:662
 msgid "Make playlist available offline"
 msgstr "Η λίστα να είναι διαθέσιμη και εκτός σύνδεσης"
 
@@ -4137,7 +4141,7 @@ msgid "Remove from favorites"
 msgstr "Αφαίρεση από τα αγαπημένα"
 
 #: internet/grooveshark/groovesharkservice.cpp:543
-#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
+#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Αφαίρεση από την λίστα"
 
@@ -4446,7 +4450,7 @@ msgstr "Επιλογές εύρεσης"
 
 #: internet/grooveshark/groovesharkservice.cpp:582
 #: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:397
+#: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
 msgstr "Εύρεση αποτελεσμάτων"
 
@@ -4845,7 +4849,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Σφάλμα εισόδου στο Spotify"
 
-#: internet/spotify/spotifyservice.cpp:811
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4857,7 +4861,7 @@ msgstr "Πρόσθετο Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Το πρόσθετο του Spotify μη εγκατεστημένο"
 
-#: internet/spotify/spotifyservice.cpp:802
+#: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4865,7 +4869,7 @@ msgstr ""
 msgid "Standard"
 msgstr "Κανονικό"
 
-#: internet/spotify/spotifyservice.cpp:405
+#: internet/spotify/spotifyservice.cpp:414
 msgid "Starred"
 msgstr "Με αστέρι"
 
@@ -4883,7 +4887,7 @@ msgstr "Εκκίνηση επανακωδικοποίησης"
 
 #: internet/grooveshark/groovesharkservice.cpp:584
 #: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:399
+#: internet/spotify/spotifyservice.cpp:408
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4995,15 +4999,15 @@ msgstr "Υποστηριζόμενες μορφές"
 msgid "Synchronize statistics to files now"
 msgstr "Συγχρονισμός των στατιστικών σε αρχεία τώρα"
 
-#: internet/spotify/spotifyservice.cpp:676
+#: internet/spotify/spotifyservice.cpp:699
 msgid "Syncing Spotify inbox"
 msgstr "Συγχρονισμός εισερχομένων του Spotify"
 
-#: internet/spotify/spotifyservice.cpp:670
+#: internet/spotify/spotifyservice.cpp:693
 msgid "Syncing Spotify playlist"
 msgstr "Συγχρονισμός λίστας του Spotify"
 
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify starred tracks"
 msgstr "Συγχρονισμός κομματιών επισημασμένων με αστέρι του Spotify"
 
@@ -5230,7 +5234,7 @@ msgstr "Αύριο"
 msgid "Too many redirects"
 msgstr "Πάρα πολλές ανακατευθύνσεις"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:427
 msgid "Top tracks"
 msgstr "Κορυφαία κομμάτια"
 

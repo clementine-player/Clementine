@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2014-12-27 18:00+0000\n"
+"PO-Revision-Date: 2015-01-14 22:30+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -242,7 +242,7 @@ msgstr "ツール(&T)"
 msgid "(different across multiple songs)"
 msgstr "(複数の曲で一致しません)"
 
-#: internet/spotify/spotifyservice.cpp:449
+#: internet/spotify/spotifyservice.cpp:465
 msgid ", by "
 msgstr ""
 
@@ -590,9 +590,13 @@ msgstr "Grooveshark のプレイリストに追加する"
 msgid "Add to My Music"
 msgstr "マイミュージックに追加する"
 
-#: internet/spotify/spotifyservice.cpp:594
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify playlists"
 msgstr "Spotify のプレイリストに追加する"
+
+#: internet/spotify/spotifyservice.cpp:610
+msgid "Add to Spotify starred"
+msgstr ""
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -1344,7 +1348,7 @@ msgstr "Magnatune の設定..."
 msgid "Configure Shortcuts"
 msgstr "ショートカットの設定"
 
-#: internet/spotify/spotifyservice.cpp:876
+#: internet/spotify/spotifyservice.cpp:900
 msgid "Configure Spotify..."
 msgstr "Spotify の設定..."
 
@@ -2540,12 +2544,12 @@ msgstr "この Grooveshark プレイリストを共有するための URL の取
 msgid "Get a URL to share this Grooveshark song"
 msgstr "この Grooveshark 曲を共有するための URL の取得"
 
-#: internet/spotify/spotifyservice.cpp:610
-#: internet/spotify/spotifyservice.cpp:651
+#: internet/spotify/spotifyservice.cpp:633
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2763,7 +2767,7 @@ msgid ""
 "time a song finishes."
 msgstr "ダイナミックモードでは、新しいトラックは曲が終わるたびにプレイリストに選択・追加されます。"
 
-#: internet/spotify/spotifyservice.cpp:411
+#: internet/spotify/spotifyservice.cpp:421
 msgid "Inbox"
 msgstr "受信箱"
 
@@ -3204,7 +3208,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:662
 msgid "Make playlist available offline"
 msgstr "プレイリストをオフラインで利用可能にする"
 
@@ -4135,7 +4139,7 @@ msgid "Remove from favorites"
 msgstr "お気に入りから削除する"
 
 #: internet/grooveshark/groovesharkservice.cpp:543
-#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
+#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "プレイリストから削除"
 
@@ -4444,7 +4448,7 @@ msgstr "検索オプション"
 
 #: internet/grooveshark/groovesharkservice.cpp:582
 #: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:397
+#: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
 msgstr "検索結果"
 
@@ -4843,7 +4847,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify ログインエラー"
 
-#: internet/spotify/spotifyservice.cpp:811
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4855,7 +4859,7 @@ msgstr "Spotify プラグイン"
 msgid "Spotify plugin not installed"
 msgstr "Spotify プラグインはインストールされていません"
 
-#: internet/spotify/spotifyservice.cpp:802
+#: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4863,7 +4867,7 @@ msgstr ""
 msgid "Standard"
 msgstr "標準"
 
-#: internet/spotify/spotifyservice.cpp:405
+#: internet/spotify/spotifyservice.cpp:414
 msgid "Starred"
 msgstr "星付き"
 
@@ -4881,7 +4885,7 @@ msgstr "トランスコードの開始"
 
 #: internet/grooveshark/groovesharkservice.cpp:584
 #: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:399
+#: internet/spotify/spotifyservice.cpp:408
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4993,15 +4997,15 @@ msgstr "サポートされている形式"
 msgid "Synchronize statistics to files now"
 msgstr "統計情報をいますぐ同期する"
 
-#: internet/spotify/spotifyservice.cpp:676
+#: internet/spotify/spotifyservice.cpp:699
 msgid "Syncing Spotify inbox"
 msgstr "Spotify の受信箱を同期中"
 
-#: internet/spotify/spotifyservice.cpp:670
+#: internet/spotify/spotifyservice.cpp:693
 msgid "Syncing Spotify playlist"
 msgstr "Spotify のプレイリストを同期中"
 
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify starred tracks"
 msgstr "Spotify の星付きトラックを同期中"
 
@@ -5228,7 +5232,7 @@ msgstr "明日"
 msgid "Too many redirects"
 msgstr "リダイレクトが多すぎます"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:427
 msgid "Top tracks"
 msgstr "上位のトラック"
 

@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-01-09 00:21+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"PO-Revision-Date: 2015-01-14 22:31+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/projects/p/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -237,7 +237,7 @@ msgstr "&Alatan"
 msgid "(different across multiple songs)"
 msgstr "(berbeza dengan pelbagai lagu)"
 
-#: internet/spotify/spotifyservice.cpp:449
+#: internet/spotify/spotifyservice.cpp:465
 msgid ", by "
 msgstr ", oleh"
 
@@ -585,9 +585,13 @@ msgstr "Tambah ke senarai main Grooveshark"
 msgid "Add to My Music"
 msgstr "Tambah ke Muzik Saya"
 
-#: internet/spotify/spotifyservice.cpp:594
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify playlists"
 msgstr "Tambah ke senarai main Spotify"
+
+#: internet/spotify/spotifyservice.cpp:610
+msgid "Add to Spotify starred"
+msgstr ""
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -1339,7 +1343,7 @@ msgstr "Konfigur Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Tetapkan Pintasan"
 
-#: internet/spotify/spotifyservice.cpp:876
+#: internet/spotify/spotifyservice.cpp:900
 msgid "Configure Spotify..."
 msgstr "Konfigur Spotify..."
 
@@ -2535,12 +2539,12 @@ msgstr "Dapatkan URL untuk kongsi senarai main Grooveshark"
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Dapatkan URL untuk kongsi lagu Grooveshark"
 
-#: internet/spotify/spotifyservice.cpp:610
-#: internet/spotify/spotifyservice.cpp:651
+#: internet/spotify/spotifyservice.cpp:633
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
 msgstr "Dapatkan URL untuk kongsikan lagu Spotify ini"
 
-#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr "Dapatkan URL untuk kongsikan senarai main ini"
 
@@ -2758,7 +2762,7 @@ msgid ""
 "time a song finishes."
 msgstr "Dalam mod dinamik trek baharu akan dipilih dan ditambah ke senarai main setiap kali lagu selesai."
 
-#: internet/spotify/spotifyservice.cpp:411
+#: internet/spotify/spotifyservice.cpp:421
 msgid "Inbox"
 msgstr "Peti Masuk"
 
@@ -3199,7 +3203,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:662
 msgid "Make playlist available offline"
 msgstr "Buatkan senarai main tersedia di luar talian"
 
@@ -4130,7 +4134,7 @@ msgid "Remove from favorites"
 msgstr "Buang dari kegemaran"
 
 #: internet/grooveshark/groovesharkservice.cpp:543
-#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
+#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Buang dari senarai main"
 
@@ -4439,7 +4443,7 @@ msgstr "Pilihan gelintar"
 
 #: internet/grooveshark/groovesharkservice.cpp:582
 #: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:397
+#: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
 msgstr "Keputusan gelintar"
 
@@ -4838,7 +4842,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Ralat daftar masuk Spotify"
 
-#: internet/spotify/spotifyservice.cpp:811
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
 msgstr "URL senarai main Spotify"
 
@@ -4850,7 +4854,7 @@ msgstr "Pemalam Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Pemalam Spotify tidak dipasang"
 
-#: internet/spotify/spotifyservice.cpp:802
+#: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
 msgstr "URL lagu Spotify"
 
@@ -4858,7 +4862,7 @@ msgstr "URL lagu Spotify"
 msgid "Standard"
 msgstr "Piawai"
 
-#: internet/spotify/spotifyservice.cpp:405
+#: internet/spotify/spotifyservice.cpp:414
 msgid "Starred"
 msgstr "Disukai"
 
@@ -4876,7 +4880,7 @@ msgstr "Mulakan transkod"
 
 #: internet/grooveshark/groovesharkservice.cpp:584
 #: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:399
+#: internet/spotify/spotifyservice.cpp:408
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4988,15 +4992,15 @@ msgstr "Format disokong"
 msgid "Synchronize statistics to files now"
 msgstr "Segerak statistik ke fail sekarang"
 
-#: internet/spotify/spotifyservice.cpp:676
+#: internet/spotify/spotifyservice.cpp:699
 msgid "Syncing Spotify inbox"
 msgstr "Menyegerak kotak masuk Spotify"
 
-#: internet/spotify/spotifyservice.cpp:670
+#: internet/spotify/spotifyservice.cpp:693
 msgid "Syncing Spotify playlist"
 msgstr "Menyegerak senarai main Spotify"
 
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify starred tracks"
 msgstr "Menyegerak trek terbintang Spotify"
 
@@ -5223,7 +5227,7 @@ msgstr "Esok"
 msgid "Too many redirects"
 msgstr "Terlalu banyak arah semula"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:427
 msgid "Top tracks"
 msgstr "Trek terbaik"
 

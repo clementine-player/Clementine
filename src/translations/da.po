@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-01-10 02:41+0000\n"
-"Last-Translator: Peter Jespersen <flywheeldk@gmail.com>\n"
+"PO-Revision-Date: 2015-01-14 22:30+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/clementine/language/da/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -245,7 +245,7 @@ msgstr "Værktøjer"
 msgid "(different across multiple songs)"
 msgstr "(forskelligt over flere sange)"
 
-#: internet/spotify/spotifyservice.cpp:449
+#: internet/spotify/spotifyservice.cpp:465
 msgid ", by "
 msgstr ""
 
@@ -593,9 +593,13 @@ msgstr "Føj til Grooveshark afspilningsliste"
 msgid "Add to My Music"
 msgstr "Tilføj til Min Musik"
 
-#: internet/spotify/spotifyservice.cpp:594
+#: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify playlists"
 msgstr "Tilføj til Spotify-afspilnignslister"
+
+#: internet/spotify/spotifyservice.cpp:610
+msgid "Add to Spotify starred"
+msgstr ""
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -1347,7 +1351,7 @@ msgstr "Konfigurér Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Konfigurér Genveje"
 
-#: internet/spotify/spotifyservice.cpp:876
+#: internet/spotify/spotifyservice.cpp:900
 msgid "Configure Spotify..."
 msgstr "Indstil Spotify..."
 
@@ -2543,12 +2547,12 @@ msgstr "Få en webadresse til at dele denne Grooveshark afspilningsliste"
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Få en webadresse til at dele denne Grooveshark sang"
 
-#: internet/spotify/spotifyservice.cpp:610
-#: internet/spotify/spotifyservice.cpp:651
+#: internet/spotify/spotifyservice.cpp:633
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2766,7 +2770,7 @@ msgid ""
 "time a song finishes."
 msgstr "I dynamisk tilstand vil nye spor blive valgt og lagt til spillelisten hver gang en sang slutter."
 
-#: internet/spotify/spotifyservice.cpp:411
+#: internet/spotify/spotifyservice.cpp:421
 msgid "Inbox"
 msgstr "Indboks"
 
@@ -3207,7 +3211,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:662
 msgid "Make playlist available offline"
 msgstr "Gør spillelisten tilgængelig offline"
 
@@ -4138,7 +4142,7 @@ msgid "Remove from favorites"
 msgstr "Fjern fra favoritter"
 
 #: internet/grooveshark/groovesharkservice.cpp:543
-#: internet/spotify/spotifyservice.cpp:649 ../bin/src/ui_mainwindow.h:685
+#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Fjern fra spilleliste"
 
@@ -4447,7 +4451,7 @@ msgstr "Søgeindstillinger"
 
 #: internet/grooveshark/groovesharkservice.cpp:582
 #: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:397
+#: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
 msgstr "Søgeresultater"
 
@@ -4846,7 +4850,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Kunne ikke logge på Spotify"
 
-#: internet/spotify/spotifyservice.cpp:811
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4858,7 +4862,7 @@ msgstr "Spotify-udvidelsesmodul"
 msgid "Spotify plugin not installed"
 msgstr "Spotify-udvidelsesmodulet er ikke installeret"
 
-#: internet/spotify/spotifyservice.cpp:802
+#: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4866,7 +4870,7 @@ msgstr ""
 msgid "Standard"
 msgstr "Standard"
 
-#: internet/spotify/spotifyservice.cpp:405
+#: internet/spotify/spotifyservice.cpp:414
 msgid "Starred"
 msgstr "Har stjerner"
 
@@ -4884,7 +4888,7 @@ msgstr "Start omkodning"
 
 #: internet/grooveshark/groovesharkservice.cpp:584
 #: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:399
+#: internet/spotify/spotifyservice.cpp:408
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4996,15 +5000,15 @@ msgstr "Understøttede formater"
 msgid "Synchronize statistics to files now"
 msgstr "Synkroniser statistik til filer nu"
 
-#: internet/spotify/spotifyservice.cpp:676
+#: internet/spotify/spotifyservice.cpp:699
 msgid "Syncing Spotify inbox"
 msgstr "Synkroniserer Spotify indbox"
 
-#: internet/spotify/spotifyservice.cpp:670
+#: internet/spotify/spotifyservice.cpp:693
 msgid "Syncing Spotify playlist"
 msgstr "Synkroniser Spotify afspilningsliste"
 
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify starred tracks"
 msgstr "Synkroniserer stjernemarkerede spor i Spotify"
 
@@ -5231,7 +5235,7 @@ msgstr "I morgen"
 msgid "Too many redirects"
 msgstr "For mange omdirigeringer"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:427
 msgid "Top tracks"
 msgstr "Bedste musiknumre"
 
