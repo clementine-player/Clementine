@@ -216,8 +216,8 @@ bool EditTagDialog::SetLoading(const QString& message) {
   return true;
 }
 
-QList<EditTagDialog::Data> EditTagDialog::LoadData(const SongList& songs)
-    const {
+QList<EditTagDialog::Data> EditTagDialog::LoadData(
+    const SongList& songs) const {
   QList<Data> ret;
 
   for (const Song& song : songs) {
@@ -246,17 +246,16 @@ void EditTagDialog::SetSongs(const SongList& s, const PlaylistItemList& items) {
   ui_->song_list->clear();
 
   // Reload tags in the background
-  QFuture<QList<Data> > future =
+  QFuture<QList<Data>> future =
       QtConcurrent::run(this, &EditTagDialog::LoadData, s);
-  QFutureWatcher<QList<Data> >* watcher =
-      new QFutureWatcher<QList<Data> >(this);
+  QFutureWatcher<QList<Data>>* watcher = new QFutureWatcher<QList<Data>>(this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(SetSongsFinished()));
 }
 
 void EditTagDialog::SetSongsFinished() {
-  QFutureWatcher<QList<Data> >* watcher =
-      dynamic_cast<QFutureWatcher<QList<Data> >*>(sender());
+  QFutureWatcher<QList<Data>>* watcher =
+      dynamic_cast<QFutureWatcher<QList<Data>>*>(sender());
   if (!watcher) return;
   watcher->deleteLater();
 
@@ -313,18 +312,32 @@ QVariant EditTagDialog::Data::value(const Song& song, const QString& id) {
 }
 
 void EditTagDialog::Data::set_value(const QString& id, const QVariant& value) {
-  if (id == "title") current_.set_title(value.toString());
-  if (id == "artist") current_.set_artist(value.toString());
-  if (id == "album") current_.set_album(value.toString());
-  if (id == "albumartist") current_.set_albumartist(value.toString());
-  if (id == "composer") current_.set_composer(value.toString());
-  if (id == "performer") current_.set_performer(value.toString());
-  if (id == "grouping") current_.set_grouping(value.toString());
-  if (id == "genre") current_.set_genre(value.toString());
-  if (id == "comment") current_.set_comment(value.toString());
-  if (id == "track") current_.set_track(value.toInt());
-  if (id == "disc") current_.set_disc(value.toInt());
-  if (id == "year") current_.set_year(value.toInt());
+  if (id == "title")
+    current_.set_title(value.toString());
+  else if (id == "artist")
+    current_.set_artist(value.toString());
+  else if (id == "album")
+    current_.set_album(value.toString());
+  else if (id == "albumartist")
+    current_.set_albumartist(value.toString());
+  else if (id == "composer")
+    current_.set_composer(value.toString());
+  else if (id == "performer")
+    current_.set_performer(value.toString());
+  else if (id == "grouping")
+    current_.set_grouping(value.toString());
+  else if (id == "genre")
+    current_.set_genre(value.toString());
+  else if (id == "comment")
+    current_.set_comment(value.toString());
+  else if (id == "track")
+    current_.set_track(value.toInt());
+  else if (id == "disc")
+    current_.set_disc(value.toInt());
+  else if (id == "year")
+    current_.set_year(value.toInt());
+  else
+    qLog(Warning) << "Unknown ID" << id;
 }
 
 bool EditTagDialog::DoesValueVary(const QModelIndexList& sel,
@@ -675,7 +688,7 @@ void EditTagDialog::SaveData(const QList<Data>& data) {
     if (ref.current_.IsMetadataEqual(ref.original_)) continue;
 
     if (!TagReaderClient::Instance()->SaveFileBlocking(
-             ref.current_.url().toLocalFile(), ref.current_)) {
+            ref.current_.url().toLocalFile(), ref.current_)) {
       emit Error(tr("An error occurred writing metadata to '%1'")
                      .arg(ref.current_.url().toLocalFile()));
     }
