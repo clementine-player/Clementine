@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-01-14 22:30+0000\n"
+"PO-Revision-Date: 2015-01-19 14:52+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -389,7 +389,7 @@ msgid "About Qt..."
 msgstr "關於 Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Absolute"
 msgstr ""
 
@@ -606,7 +606,7 @@ msgstr ""
 msgid "Add to playlist"
 msgstr "加入播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "Add to the queue"
 msgstr "加入到佇列中"
 
@@ -756,16 +756,16 @@ msgstr "允許 M/S (Mid/Side) 編碼技術"
 msgid "Alongside the originals"
 msgstr "與原本的一起"
 
-#: ../bin/src/ui_behavioursettingspage.h:255
+#: ../bin/src/ui_behavioursettingspage.h:271
 msgid "Always hide the main window"
 msgstr "總是隱藏主要視窗"
 
-#: ../bin/src/ui_behavioursettingspage.h:254
+#: ../bin/src/ui_behavioursettingspage.h:270
 msgid "Always show the main window"
 msgstr "總是顯示主要視窗"
 
-#: ../bin/src/ui_behavioursettingspage.h:268
-#: ../bin/src/ui_behavioursettingspage.h:282
+#: ../bin/src/ui_behavioursettingspage.h:284
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Always start playing"
 msgstr "總是開始播放"
 
@@ -779,7 +779,7 @@ msgstr "在 Clementine 中使用 Spotify 需要額外的插件。 \n您想要下
 msgid "An error occurred loading the iTunes database"
 msgstr "讀取 iTunes 資料時發生錯誤"
 
-#: ui/edittagdialog.cpp:679
+#: ui/edittagdialog.cpp:692
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "寫入目標數據至「%1」時發生錯誤"
@@ -812,7 +812,7 @@ msgstr "附加檔案或網址到播放清單"
 msgid "Append to current playlist"
 msgstr "附加到目前的播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:295
 msgid "Append to the playlist"
 msgstr "附加到播放清單"
 
@@ -829,7 +829,7 @@ msgstr "您確定您想要刪除預設的「%1」嗎?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "您確定要刪除這個播放清單？"
 
-#: ui/edittagdialog.cpp:785
+#: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "您確定要重置歌曲的統計嗎?"
 
@@ -860,7 +860,7 @@ msgstr "演出者標籤"
 msgid "Artist's initial"
 msgstr "演唱者簽署"
 
-#: ../bin/src/ui_behavioursettingspage.h:288
+#: ../bin/src/ui_behavioursettingspage.h:310
 msgid "Ask when saving"
 msgstr ""
 
@@ -893,7 +893,7 @@ msgid "Auto"
 msgstr "自動"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:285
+#: ../bin/src/ui_behavioursettingspage.h:307
 msgid "Automatic"
 msgstr ""
 
@@ -962,7 +962,7 @@ msgstr "基本的藍色"
 msgid "Basic audio type"
 msgstr "基本音訊類型"
 
-#: ../bin/src/ui_behavioursettingspage.h:243
+#: ../bin/src/ui_behavioursettingspage.h:259
 msgid "Behavior"
 msgstr "行為"
 
@@ -1492,24 +1492,24 @@ msgstr "無法開啟輸出檔 %1"
 msgid "Cover Manager"
 msgstr "封面管理員"
 
-#: ui/edittagdialog.cpp:460
+#: ui/edittagdialog.cpp:473
 msgid "Cover art from embedded image"
 msgstr "從嵌入式影像取得封面圖片"
 
-#: ui/edittagdialog.cpp:463
+#: ui/edittagdialog.cpp:476
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "封面圖片自動從 %1 載入"
 
-#: ui/edittagdialog.cpp:455
+#: ui/edittagdialog.cpp:468
 msgid "Cover art manually unset"
 msgstr "手動取消設置封面圖片"
 
-#: ui/edittagdialog.cpp:465
+#: ui/edittagdialog.cpp:478
 msgid "Cover art not set"
 msgstr "封面圖片未設置"
 
-#: ui/edittagdialog.cpp:458
+#: ui/edittagdialog.cpp:471
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "從 %1 取得封面圖片"
@@ -1890,7 +1890,7 @@ msgstr ""
 msgid "Double click to open"
 msgstr "雙擊打開"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:292
 msgid "Double clicking a song will..."
 msgstr "雙擊一首歌曲將..."
 
@@ -2049,7 +2049,7 @@ msgstr "啟用等化器"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "只在 Clemetine 是處於聚焦時才啟用快捷鍵"
 
-#: ../bin/src/ui_behavioursettingspage.h:262
+#: ../bin/src/ui_behavioursettingspage.h:278
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2587,7 +2587,7 @@ msgstr "Google 雲端硬碟"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "獲得 %1 涵蓋了 %2 ( %3 失敗 )"
 
-#: ../bin/src/ui_behavioursettingspage.h:258
+#: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "用灰色顯示在我播放清單有,但不存在的歌曲"
 
@@ -2715,7 +2715,7 @@ msgstr "圖示在上面"
 msgid "Identifying song"
 msgstr "辨識歌曲"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:276
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2897,6 +2897,10 @@ msgstr "Jamendo 每週熱門曲目"
 msgid "Jamendo database"
 msgstr "Jamendo 資料庫"
 
+#: ../bin/src/ui_behavioursettingspage.h:289
+msgid "Jump to previous song right away"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
 msgstr "跳轉到目前播放的曲目"
@@ -2913,7 +2917,7 @@ msgstr "按住按鈕 %1 秒..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "按住按鈕 %1 秒..."
 
-#: ../bin/src/ui_behavioursettingspage.h:245
+#: ../bin/src/ui_behavioursettingspage.h:261
 msgid "Keep running in the background when the window is closed"
 msgstr "當視窗關閉時,保持在背景運轉"
 
@@ -2926,7 +2930,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:247
+#: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "語言"
 
@@ -3392,7 +3396,7 @@ msgstr "網路代理伺服器"
 msgid "Network Remote"
 msgstr ""
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:507
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:520
 msgid "Never"
 msgstr "從未"
 
@@ -3400,8 +3404,8 @@ msgstr "從未"
 msgid "Never played"
 msgstr "從未播放"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
-#: ../bin/src/ui_behavioursettingspage.h:280
+#: ../bin/src/ui_behavioursettingspage.h:282
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Never start playing"
 msgstr "永不開始播放"
 
@@ -3642,7 +3646,7 @@ msgstr ""
 msgid "Open in new playlist"
 msgstr "開啟在新的播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:275
+#: ../bin/src/ui_behavioursettingspage.h:297
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3784,8 +3788,8 @@ msgstr "播放計數"
 msgid "Play if stopped, pause if playing"
 msgstr "停止的話就開始播放，播放中的就暫停"
 
-#: ../bin/src/ui_behavioursettingspage.h:267
-#: ../bin/src/ui_behavioursettingspage.h:281
+#: ../bin/src/ui_behavioursettingspage.h:283
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Play if there is nothing already playing"
 msgstr "播放如果沒有歌曲是正在播放中"
 
@@ -3923,6 +3927,10 @@ msgstr "按一個鍵"
 #, qt-format
 msgid "Press a key combination to use for %1..."
 msgstr "按下一組按鍵來操作 %1"
+
+#: ../bin/src/ui_behavioursettingspage.h:286
+msgid "Pressing \"Previous\" in player will..."
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
@@ -4088,7 +4096,7 @@ msgid "Reggae"
 msgstr "雷鬼"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:287
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Relative"
 msgstr ""
 
@@ -4096,7 +4104,7 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr "記住Wii遙控器揮動"
 
-#: ../bin/src/ui_behavioursettingspage.h:256
+#: ../bin/src/ui_behavioursettingspage.h:272
 msgid "Remember from last time"
 msgstr "記得上一次的狀態"
 
@@ -4202,7 +4210,7 @@ msgstr "循環播放單曲"
 msgid "Replace current playlist"
 msgstr "取代目前播放清單"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Replace the playlist"
 msgstr "取代播放清單"
 
@@ -4230,9 +4238,13 @@ msgstr ""
 msgid "Reset"
 msgstr "重置"
 
-#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:668
+#: ui/edittagdialog.cpp:797 ../bin/src/ui_edittagdialog.h:668
 msgid "Reset play counts"
 msgstr "重置播放計數"
+
+#: ../bin/src/ui_behavioursettingspage.h:290
+msgid "Restart song, then jump to previous if pressed again (iPod behavior)"
+msgstr ""
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4243,7 +4255,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "限制為 ASCII 字符"
 
-#: ../bin/src/ui_behavioursettingspage.h:257
+#: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4363,7 +4375,7 @@ msgstr "儲存這個串流網址到「網路」這個分頁標籤"
 msgid "Saving songs statistics into songs files"
 msgstr ""
 
-#: ui/edittagdialog.cpp:687 ui/trackselectiondialog.cpp:254
+#: ui/edittagdialog.cpp:700 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr "儲存曲目"
 
@@ -4674,7 +4686,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "在主視窗顯示 scrobble 的按鈕"
 
-#: ../bin/src/ui_behavioursettingspage.h:244
+#: ../bin/src/ui_behavioursettingspage.h:260
 msgid "Show tray icon"
 msgstr "顯示工作列圖示"
 
@@ -5313,7 +5325,7 @@ msgstr "無法下載 %1 (%2)"
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
-#: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
+#: ui/edittagdialog.cpp:452 ui/edittagdialog.cpp:496
 msgid "Unknown"
 msgstr "未知的"
 
@@ -5445,7 +5457,7 @@ msgstr "使用通知信息以報告 Wii 遙控器的狀態"
 msgid "Use temporal noise shaping"
 msgstr "使用時域雜訊重整"
 
-#: ../bin/src/ui_behavioursettingspage.h:250
+#: ../bin/src/ui_behavioursettingspage.h:266
 msgid "Use the system default"
 msgstr "使用系統預設"
 
@@ -5483,7 +5495,7 @@ msgstr "使用者介面"
 msgid "Username"
 msgstr "使用者名稱"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:279
 msgid "Using the menu to add a song will..."
 msgstr "使用選單加入的歌曲將..."
 
@@ -5552,7 +5564,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5568,7 +5580,7 @@ msgstr "網站"
 msgid "Weeks"
 msgstr "星期"
 
-#: ../bin/src/ui_behavioursettingspage.h:253
+#: ../bin/src/ui_behavioursettingspage.h:269
 msgid "When Clementine starts"
 msgstr "當 Clementine 啟動"
 
@@ -5578,7 +5590,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "在搜尋專輯封面時， Clementine 會優先搜尋包含以下單字的圖片。\n假如沒有任何吻合的項目， Clementine 將使用檔案所在目錄下最大的圖片。"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5662,7 +5674,7 @@ msgstr "您想要立刻執行完整的重新掃描嗎？"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Write metadata"
 msgstr ""
 
@@ -5793,7 +5805,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:252
+#: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."
 msgstr "您將需要重新啟動 Clementine ，如果您變更了本程式使用者介面所用的語言。"
 
@@ -5874,7 +5886,7 @@ msgstr "之間"
 msgid "biggest first"
 msgstr "最大優先"
 
-#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:476
+#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:489
 msgid "bpm"
 msgstr "bpm"
 
@@ -5928,7 +5940,7 @@ msgstr "在最後"
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
 #: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
-#: ui/edittagdialog.cpp:478
+#: ui/edittagdialog.cpp:491
 msgid "kbps"
 msgstr "kbps"
 

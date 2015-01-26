@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-01-15 06:45+0000\n"
+"PO-Revision-Date: 2015-01-19 19:08+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -388,7 +388,7 @@ msgid "About Qt..."
 msgstr "Про Qt…"
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Absolute"
 msgstr "Абсолютними"
 
@@ -605,7 +605,7 @@ msgstr "Додати до закладок"
 msgid "Add to playlist"
 msgstr "Додати до списку відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "Add to the queue"
 msgstr "Додати до черги"
 
@@ -755,16 +755,16 @@ msgstr "Дозволити mid/side кодування"
 msgid "Alongside the originals"
 msgstr "Разом з оригіналами"
 
-#: ../bin/src/ui_behavioursettingspage.h:255
+#: ../bin/src/ui_behavioursettingspage.h:271
 msgid "Always hide the main window"
 msgstr "Завжди приховувати головне вікно"
 
-#: ../bin/src/ui_behavioursettingspage.h:254
+#: ../bin/src/ui_behavioursettingspage.h:270
 msgid "Always show the main window"
 msgstr "Завжди показувати головне вікно"
 
-#: ../bin/src/ui_behavioursettingspage.h:268
-#: ../bin/src/ui_behavioursettingspage.h:282
+#: ../bin/src/ui_behavioursettingspage.h:284
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Always start playing"
 msgstr "Завжди починати відтворення"
 
@@ -778,7 +778,7 @@ msgstr "Для користування Spotify в Clementine, потрібни�
 msgid "An error occurred loading the iTunes database"
 msgstr "Виникла помилка завантаження бази даних iTunes"
 
-#: ui/edittagdialog.cpp:679
+#: ui/edittagdialog.cpp:692
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Трапилася помилка під час запису метаданих до '%1'"
@@ -811,7 +811,7 @@ msgstr "Додати файли/адреси до списку відтворе�
 msgid "Append to current playlist"
 msgstr "Додати до списку відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:295
 msgid "Append to the playlist"
 msgstr "Додати  до списку відтворення"
 
@@ -828,7 +828,7 @@ msgstr "Ви дійсно хочете вилучити задане \"%1\"?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ви справді хочете вилучити цей список відтворення?"
 
-#: ui/edittagdialog.cpp:785
+#: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Впевнені, що бажаєте скинути статистику цієї композиції?"
 
@@ -859,7 +859,7 @@ msgstr "Мітки виконавця"
 msgid "Artist's initial"
 msgstr "Ініціали виконавця"
 
-#: ../bin/src/ui_behavioursettingspage.h:288
+#: ../bin/src/ui_behavioursettingspage.h:310
 msgid "Ask when saving"
 msgstr "Питати під час збереження"
 
@@ -892,7 +892,7 @@ msgid "Auto"
 msgstr "Автоматично"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:285
+#: ../bin/src/ui_behavioursettingspage.h:307
 msgid "Automatic"
 msgstr "Автоматично"
 
@@ -961,7 +961,7 @@ msgstr "Стандартний синій"
 msgid "Basic audio type"
 msgstr "Основний тип звуку"
 
-#: ../bin/src/ui_behavioursettingspage.h:243
+#: ../bin/src/ui_behavioursettingspage.h:259
 msgid "Behavior"
 msgstr "Поведінка"
 
@@ -1491,24 +1491,24 @@ msgstr "Не вдалось відкрити вихідний файл %1"
 msgid "Cover Manager"
 msgstr "Менеджер обкладинок"
 
-#: ui/edittagdialog.cpp:460
+#: ui/edittagdialog.cpp:473
 msgid "Cover art from embedded image"
 msgstr "Обкладинка з вбудованого малюнка"
 
-#: ui/edittagdialog.cpp:463
+#: ui/edittagdialog.cpp:476
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Обкладинку завантажено з %1"
 
-#: ui/edittagdialog.cpp:455
+#: ui/edittagdialog.cpp:468
 msgid "Cover art manually unset"
 msgstr "Обкладинку прибрано вручну"
 
-#: ui/edittagdialog.cpp:465
+#: ui/edittagdialog.cpp:478
 msgid "Cover art not set"
 msgstr "Обкладинку не встановлено"
 
-#: ui/edittagdialog.cpp:458
+#: ui/edittagdialog.cpp:471
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Обкладинку встановлено з %1"
@@ -1889,7 +1889,7 @@ msgstr "Підтримати фінансово"
 msgid "Double click to open"
 msgstr "Подвійне клацання, щоб відкрити"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:292
 msgid "Double clicking a song will..."
 msgstr "Подвійне клацання на пісні:"
 
@@ -2048,7 +2048,7 @@ msgstr "Увімкнути еквалайзер"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Використовувати глобальні скорочення лише коли Clementine у фокусі"
 
-#: ../bin/src/ui_behavioursettingspage.h:262
+#: ../bin/src/ui_behavioursettingspage.h:278
 msgid "Enable song metadata inline edition with click"
 msgstr "Уможливити вбудоване редагування метаданих композиції клацанням"
 
@@ -2586,7 +2586,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Отримано %1 обкладинок з %2 (%3 не вдалось)"
 
-#: ../bin/src/ui_behavioursettingspage.h:258
+#: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "Позначати сірим пісні у списках відтворення, що не існують"
 
@@ -2714,7 +2714,7 @@ msgstr "Значки зверху"
 msgid "Identifying song"
 msgstr "Визначаю пісню"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:276
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2896,6 +2896,10 @@ msgstr "Найпопулярніші композиції тижня в Jamendo"
 msgid "Jamendo database"
 msgstr "База даних Jamendo"
 
+#: ../bin/src/ui_behavioursettingspage.h:289
+msgid "Jump to previous song right away"
+msgstr "Перейти до попередньої композиції негайно"
+
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
 msgstr "Перейти до відтворюваної доріжки"
@@ -2912,7 +2916,7 @@ msgstr "Тримати кнопки %1 секунду…"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Тримати кнопки %1 секунд…"
 
-#: ../bin/src/ui_behavioursettingspage.h:245
+#: ../bin/src/ui_behavioursettingspage.h:261
 msgid "Keep running in the background when the window is closed"
 msgstr "Продовжувати виконання у фоні коли вікно зачинено"
 
@@ -2925,7 +2929,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Кошенята"
 
-#: ../bin/src/ui_behavioursettingspage.h:247
+#: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Мова"
 
@@ -3391,7 +3395,7 @@ msgstr "Проксі мережі"
 msgid "Network Remote"
 msgstr "Дистанційне керування з мережі"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:507
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:520
 msgid "Never"
 msgstr "Ніколи"
 
@@ -3399,8 +3403,8 @@ msgstr "Ніколи"
 msgid "Never played"
 msgstr "Ніколи не відтворені"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
-#: ../bin/src/ui_behavioursettingspage.h:280
+#: ../bin/src/ui_behavioursettingspage.h:282
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Never start playing"
 msgstr "Ніколи не починати відтворення"
 
@@ -3641,7 +3645,7 @@ msgstr "Відкрити у Google Drive"
 msgid "Open in new playlist"
 msgstr "Відкрити у новому списку відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:275
+#: ../bin/src/ui_behavioursettingspage.h:297
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Відкрити у новому списку відтворення"
@@ -3783,8 +3787,8 @@ msgstr "Кількість відтворень"
 msgid "Play if stopped, pause if playing"
 msgstr "Відтворити, якщо зупинено; призупинити, якщо відтворюється"
 
-#: ../bin/src/ui_behavioursettingspage.h:267
-#: ../bin/src/ui_behavioursettingspage.h:281
+#: ../bin/src/ui_behavioursettingspage.h:283
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Play if there is nothing already playing"
 msgstr "Відтворювати, якщо зараз нічого не відтворюється"
 
@@ -3922,6 +3926,10 @@ msgstr "Натисніть клавішу"
 #, qt-format
 msgid "Press a key combination to use for %1..."
 msgstr "Натисніть комбінацію клавіш для %1…"
+
+#: ../bin/src/ui_behavioursettingspage.h:286
+msgid "Pressing \"Previous\" in player will..."
+msgstr "Натискання «Попередня» у програвачі виконує дію…"
 
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
@@ -4087,7 +4095,7 @@ msgid "Reggae"
 msgstr "Реґґі"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:287
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Relative"
 msgstr "Відносними"
 
@@ -4095,7 +4103,7 @@ msgstr "Відносними"
 msgid "Remember Wii remote swing"
 msgstr "Пам’ятати рухи в Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:256
+#: ../bin/src/ui_behavioursettingspage.h:272
 msgid "Remember from last time"
 msgstr "Пам'ятати з минулого разу"
 
@@ -4201,7 +4209,7 @@ msgstr "Повторювати композицію"
 msgid "Replace current playlist"
 msgstr "Замінити список відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Replace the playlist"
 msgstr "Замінити список відтворення"
 
@@ -4229,9 +4237,13 @@ msgstr "Потрібен код розпізнавання"
 msgid "Reset"
 msgstr "Скинути"
 
-#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:668
+#: ui/edittagdialog.cpp:797 ../bin/src/ui_edittagdialog.h:668
 msgid "Reset play counts"
 msgstr "Скинути лічильник відтворень"
+
+#: ../bin/src/ui_behavioursettingspage.h:290
+msgid "Restart song, then jump to previous if pressed again (iPod behavior)"
+msgstr "Перезапустити композицію, потім перейти до попередньої, якщо натиснено ще раз (поведінка iPod)"
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4242,7 +4254,7 @@ msgstr "Повторно відтворити композицію або від
 msgid "Restrict to ASCII characters"
 msgstr "Обмежитись символами ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:257
+#: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr "Відновлювати відтворення після запуску"
 
@@ -4362,7 +4374,7 @@ msgstr "Зберегти цей потік на вкладці «Інтерне�
 msgid "Saving songs statistics into songs files"
 msgstr "Зберігаємо статистичні дані щодо композицій до файлів композицій"
 
-#: ui/edittagdialog.cpp:687 ui/trackselectiondialog.cpp:254
+#: ui/edittagdialog.cpp:700 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr "Зберігаю доріжки"
 
@@ -4673,7 +4685,7 @@ msgstr "Показувати кнопку «love»"
 msgid "Show the scrobble button in the main window"
 msgstr "Показувати кнопку скроблінга в головному вікні"
 
-#: ../bin/src/ui_behavioursettingspage.h:244
+#: ../bin/src/ui_behavioursettingspage.h:260
 msgid "Show tray icon"
 msgstr "Показувати значок в лотку"
 
@@ -5312,7 +5324,7 @@ msgstr "Не вдалось завантажити %1 (%2)"
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
-#: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
+#: ui/edittagdialog.cpp:452 ui/edittagdialog.cpp:496
 msgid "Unknown"
 msgstr "Невідомо"
 
@@ -5444,7 +5456,7 @@ msgstr "Використовувати повідомлення для звіт�
 msgid "Use temporal noise shaping"
 msgstr "Використати тимчасове формування шуму"
 
-#: ../bin/src/ui_behavioursettingspage.h:250
+#: ../bin/src/ui_behavioursettingspage.h:266
 msgid "Use the system default"
 msgstr "Використовувати системну"
 
@@ -5482,7 +5494,7 @@ msgstr "Інтерфейс користувача"
 msgid "Username"
 msgstr "Користувач"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:279
 msgid "Using the menu to add a song will..."
 msgstr "Використання меню для додавання композиції…"
 
@@ -5551,7 +5563,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Стіна"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
 msgid "Warn me when closing a playlist tab"
 msgstr "Попереджати про закриття вкладки списку відтворення"
 
@@ -5567,7 +5579,7 @@ msgstr "Веб-сайт"
 msgid "Weeks"
 msgstr "Тижнів"
 
-#: ../bin/src/ui_behavioursettingspage.h:253
+#: ../bin/src/ui_behavioursettingspage.h:269
 msgid "When Clementine starts"
 msgstr "Під час запуску Clementine"
 
@@ -5577,7 +5589,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Під час пошуку обкладинок, Clementine спочатку шукатиме файли зображень, що містять одне з цих слів.\nЯкщо відповідників не буде, використовуватиметься найбільше зображення в каталозі."
 
-#: ../bin/src/ui_behavioursettingspage.h:284
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "When saving a playlist, file paths should be"
 msgstr "Шляхи під час збереження списків відтворення мають бути"
 
@@ -5661,7 +5673,7 @@ msgstr "Бажаєте зараз виконати повторне сканув
 msgid "Write all songs statistics into songs' files"
 msgstr "Записати статичні дані щодо всіх композицій до файлів композицій"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Write metadata"
 msgstr "Записати метадані"
 
@@ -5792,7 +5804,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Потрібно запустити «Системні налаштування» та увімкнути параметр \"<span style=\" font-style:italic;\">Увімкнути доступ для допоміжних пристроїв</span>\", щоб використовувати глобальні скорочення в Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:252
+#: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Потрібно перезапустити Clementine, щоб змінити мову."
 
@@ -5873,7 +5885,7 @@ msgstr "між"
 msgid "biggest first"
 msgstr "спочатку найбільші"
 
-#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:476
+#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:489
 msgid "bpm"
 msgstr "такт/хв."
 
@@ -5927,7 +5939,7 @@ msgstr "за останні"
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
 #: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
-#: ui/edittagdialog.cpp:478
+#: ui/edittagdialog.cpp:491
 msgid "kbps"
 msgstr "кбіт/с"
 

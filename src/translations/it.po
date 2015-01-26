@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-01-14 22:45+0000\n"
+"PO-Revision-Date: 2015-01-19 21:17+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/clementine/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -391,7 +391,7 @@ msgid "About Qt..."
 msgstr "Informazioni su Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Absolute"
 msgstr "Assoluti"
 
@@ -608,7 +608,7 @@ msgstr "Aggiungi ai segnalibri"
 msgid "Add to playlist"
 msgstr "Aggiungi alla scaletta"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "Add to the queue"
 msgstr "Aggiungi alla coda"
 
@@ -758,16 +758,16 @@ msgstr "Consenti codifica mid/side"
 msgid "Alongside the originals"
 msgstr "Insieme agli originali"
 
-#: ../bin/src/ui_behavioursettingspage.h:255
+#: ../bin/src/ui_behavioursettingspage.h:271
 msgid "Always hide the main window"
 msgstr "Nascondi sempre la finestra principale"
 
-#: ../bin/src/ui_behavioursettingspage.h:254
+#: ../bin/src/ui_behavioursettingspage.h:270
 msgid "Always show the main window"
 msgstr "Mostra sempre la finestra principale"
 
-#: ../bin/src/ui_behavioursettingspage.h:268
-#: ../bin/src/ui_behavioursettingspage.h:282
+#: ../bin/src/ui_behavioursettingspage.h:284
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Always start playing"
 msgstr "Inizia sempre la riproduzione"
 
@@ -781,7 +781,7 @@ msgstr "Un plugin aggiuntivo è richiesto per utilizzare Spotify in Clementine. 
 msgid "An error occurred loading the iTunes database"
 msgstr "Si è verificato un errore durante la il caricamento del database di iTunes"
 
-#: ui/edittagdialog.cpp:679
+#: ui/edittagdialog.cpp:692
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Si è verificato un errore durante la scrittura dei metadati su '%1'"
@@ -814,7 +814,7 @@ msgstr "Aggiungi file/URL alla scaletta"
 msgid "Append to current playlist"
 msgstr "Aggiungi alla scaletta attuale"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:295
 msgid "Append to the playlist"
 msgstr "Aggiungi alla scaletta"
 
@@ -831,7 +831,7 @@ msgstr "Sei sicuro di voler eliminare la preimpostazione \"%1\"?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Sei sicuro di voler eliminare questa scaletta?"
 
-#: ui/edittagdialog.cpp:785
+#: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Sei sicuro di voler azzerare le statistiche del brano?"
 
@@ -862,7 +862,7 @@ msgstr "Tag Artista"
 msgid "Artist's initial"
 msgstr "Iniziale dell'artista"
 
-#: ../bin/src/ui_behavioursettingspage.h:288
+#: ../bin/src/ui_behavioursettingspage.h:310
 msgid "Ask when saving"
 msgstr "Chiedi durante il salvataggio"
 
@@ -895,7 +895,7 @@ msgid "Auto"
 msgstr "Automatica"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:285
+#: ../bin/src/ui_behavioursettingspage.h:307
 msgid "Automatic"
 msgstr "Automatici"
 
@@ -964,7 +964,7 @@ msgstr "Blu di base"
 msgid "Basic audio type"
 msgstr "Tipo audio Base"
 
-#: ../bin/src/ui_behavioursettingspage.h:243
+#: ../bin/src/ui_behavioursettingspage.h:259
 msgid "Behavior"
 msgstr "Comportamento"
 
@@ -1494,24 +1494,24 @@ msgstr "Impossibile aprire il file di uscita %1"
 msgid "Cover Manager"
 msgstr "Gestore delle copertine"
 
-#: ui/edittagdialog.cpp:460
+#: ui/edittagdialog.cpp:473
 msgid "Cover art from embedded image"
 msgstr "Copertina da immagine integrata"
 
-#: ui/edittagdialog.cpp:463
+#: ui/edittagdialog.cpp:476
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Copertina caricata automaticamente da %1"
 
-#: ui/edittagdialog.cpp:455
+#: ui/edittagdialog.cpp:468
 msgid "Cover art manually unset"
 msgstr "Copertina rimossa manualmente"
 
-#: ui/edittagdialog.cpp:465
+#: ui/edittagdialog.cpp:478
 msgid "Cover art not set"
 msgstr "Copertina non impostata"
 
-#: ui/edittagdialog.cpp:458
+#: ui/edittagdialog.cpp:471
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Copertina impostata da %1"
@@ -1892,7 +1892,7 @@ msgstr "Donazione"
 msgid "Double click to open"
 msgstr "Doppio clic per aprire"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:292
 msgid "Double clicking a song will..."
 msgstr "Al doppio clic su un brano..."
 
@@ -2051,7 +2051,7 @@ msgstr "Abilita equalizzatore"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Abilita le scorciatoie solo quando Clementine è in primo piano"
 
-#: ../bin/src/ui_behavioursettingspage.h:262
+#: ../bin/src/ui_behavioursettingspage.h:278
 msgid "Enable song metadata inline edition with click"
 msgstr "Abilita la modifica in linea dei metadati di un brano con un clic"
 
@@ -2589,7 +2589,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Ottenute %1 copertine di %2 (%3 non riuscito)"
 
-#: ../bin/src/ui_behavioursettingspage.h:258
+#: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "Colora di grigio i brani della scaletta non esistenti"
 
@@ -2717,7 +2717,7 @@ msgstr "Icone in alto"
 msgid "Identifying song"
 msgstr "Identificazione del brano in corso"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:276
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2899,6 +2899,10 @@ msgstr "Tracce preferite della settimana di Jamendo"
 msgid "Jamendo database"
 msgstr "Database di Jamendo"
 
+#: ../bin/src/ui_behavioursettingspage.h:289
+msgid "Jump to previous song right away"
+msgstr "Salta subito al brano precedente"
+
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
 msgstr "Salta alla traccia in riproduzione"
@@ -2915,7 +2919,7 @@ msgstr "Trattieni i pulsanti per %1 secondo..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Trattieni i pulsanti per %1 secondi..."
 
-#: ../bin/src/ui_behavioursettingspage.h:245
+#: ../bin/src/ui_behavioursettingspage.h:261
 msgid "Keep running in the background when the window is closed"
 msgstr "Mantieni l'esecuzione sullo sfondo quando la finestra è chiusa"
 
@@ -2928,7 +2932,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Gattini"
 
-#: ../bin/src/ui_behavioursettingspage.h:247
+#: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Lingua"
 
@@ -3394,7 +3398,7 @@ msgstr "Proxy di rete"
 msgid "Network Remote"
 msgstr "Telecomando di rete"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:507
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:520
 msgid "Never"
 msgstr "Mai"
 
@@ -3402,8 +3406,8 @@ msgstr "Mai"
 msgid "Never played"
 msgstr "Mai riprodotte"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
-#: ../bin/src/ui_behavioursettingspage.h:280
+#: ../bin/src/ui_behavioursettingspage.h:282
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Never start playing"
 msgstr "Non iniziare mai la riproduzione"
 
@@ -3644,7 +3648,7 @@ msgstr "Apri in Google Drive"
 msgid "Open in new playlist"
 msgstr "Apri in nuova scaletta"
 
-#: ../bin/src/ui_behavioursettingspage.h:275
+#: ../bin/src/ui_behavioursettingspage.h:297
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Apri in una nuova scaletta"
@@ -3786,8 +3790,8 @@ msgstr "Contatore di riproduzione"
 msgid "Play if stopped, pause if playing"
 msgstr "Riproduci se fermata, sospendi se in riproduzione"
 
-#: ../bin/src/ui_behavioursettingspage.h:267
-#: ../bin/src/ui_behavioursettingspage.h:281
+#: ../bin/src/ui_behavioursettingspage.h:283
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Play if there is nothing already playing"
 msgstr "Riproduci se non c'è altro in riproduzione"
 
@@ -3925,6 +3929,10 @@ msgstr "Premi un tasto"
 #, qt-format
 msgid "Press a key combination to use for %1..."
 msgstr "Premi una combinazione di tasto da utilizzare per %1..."
+
+#: ../bin/src/ui_behavioursettingspage.h:286
+msgid "Pressing \"Previous\" in player will..."
+msgstr "La pressione di \"Precedente\" nel lettore..."
 
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
@@ -4090,7 +4098,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:287
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Relative"
 msgstr "Relativi"
 
@@ -4098,7 +4106,7 @@ msgstr "Relativi"
 msgid "Remember Wii remote swing"
 msgstr "Ricorda il movimento del Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:256
+#: ../bin/src/ui_behavioursettingspage.h:272
 msgid "Remember from last time"
 msgstr "Ricorda l'ultima sessione"
 
@@ -4204,7 +4212,7 @@ msgstr "Ripeti traccia"
 msgid "Replace current playlist"
 msgstr "Sostituisci la scaletta attuale"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Replace the playlist"
 msgstr "Sostituisci la scaletta"
 
@@ -4232,9 +4240,13 @@ msgstr "Richiedi il codice di autenticazione"
 msgid "Reset"
 msgstr "Azzera"
 
-#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:668
+#: ui/edittagdialog.cpp:797 ../bin/src/ui_edittagdialog.h:668
 msgid "Reset play counts"
 msgstr "Azzera i contatori"
+
+#: ../bin/src/ui_behavioursettingspage.h:290
+msgid "Restart song, then jump to previous if pressed again (iPod behavior)"
+msgstr "Riavvia il brano, poi salta alla precedente se premuto ancora (comportamento iPod)"
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4245,7 +4257,7 @@ msgstr "Riavvia la traccia, o riproduci la traccia precedente se entro 8 secondi
 msgid "Restrict to ASCII characters"
 msgstr "Limita ai caratteri ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:257
+#: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr "Riprendi la riproduzione all'avvio"
 
@@ -4365,7 +4377,7 @@ msgstr "Salva questo flusso nella scheda Internet"
 msgid "Saving songs statistics into songs files"
 msgstr "Salvare le statistiche dei brani nei file"
 
-#: ui/edittagdialog.cpp:687 ui/trackselectiondialog.cpp:254
+#: ui/edittagdialog.cpp:700 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr "Salvataggio tracce in corso"
 
@@ -4676,7 +4688,7 @@ msgstr "Mostra il pulsante \"Mi piace\""
 msgid "Show the scrobble button in the main window"
 msgstr "Mostra il pulsante di scrobble nella finestra principale"
 
-#: ../bin/src/ui_behavioursettingspage.h:244
+#: ../bin/src/ui_behavioursettingspage.h:260
 msgid "Show tray icon"
 msgstr "Mostra icona nel vassoio"
 
@@ -5315,7 +5327,7 @@ msgstr "Impossibile scaricare %1 (%2)"
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
-#: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
+#: ui/edittagdialog.cpp:452 ui/edittagdialog.cpp:496
 msgid "Unknown"
 msgstr "Sconosciuto"
 
@@ -5447,7 +5459,7 @@ msgstr "Utilizza le notifiche per segnalare lo stato del Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr "Usa modellazione temporale del rumore"
 
-#: ../bin/src/ui_behavioursettingspage.h:250
+#: ../bin/src/ui_behavioursettingspage.h:266
 msgid "Use the system default"
 msgstr "Usa i valori predefiniti di sistema"
 
@@ -5485,7 +5497,7 @@ msgstr "Interfaccia utente"
 msgid "Username"
 msgstr "Nome utente"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:279
 msgid "Using the menu to add a song will..."
 msgstr "L'utilizzo del menu per aggiungere un brano..."
 
@@ -5554,7 +5566,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Muro"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
 msgid "Warn me when closing a playlist tab"
 msgstr "Avvisami alla chiusura di una scheda della scaletta"
 
@@ -5570,7 +5582,7 @@ msgstr "Sito web"
 msgid "Weeks"
 msgstr "Settimane"
 
-#: ../bin/src/ui_behavioursettingspage.h:253
+#: ../bin/src/ui_behavioursettingspage.h:269
 msgid "When Clementine starts"
 msgstr "All'avvio di Clementine"
 
@@ -5580,7 +5592,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Quando cercherà la copertina di un album, Clementine analizzerà prima le immagini che contengono di una queste parole nel nome del file.\nSe non ci saranno corrispondenze, utilizzerà l'immagine più grande che si trova nella cartella."
 
-#: ../bin/src/ui_behavioursettingspage.h:284
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "When saving a playlist, file paths should be"
 msgstr "Quando salvi una scaletta, i percorsi dei file dovrebbero essere"
 
@@ -5664,7 +5676,7 @@ msgstr "Vuoi eseguire subito una nuova scansione completa?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Scrivi le statistiche dei brani nei file"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Write metadata"
 msgstr "Scrivi i metadati"
 
@@ -5795,7 +5807,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Devi aprire le preferenze di sistema e attivare \"<span style=\" font-style:italic;\">Abilita l'accesso per i dispositivi di assistenza</span>\" per utilizzare le scorciatoie globali in Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:252
+#: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dovrai riavviare Clementine se cambi la lingua."
 
@@ -5876,7 +5888,7 @@ msgstr "compreso tra"
 msgid "biggest first"
 msgstr "prima i più grandi"
 
-#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:476
+#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:489
 msgid "bpm"
 msgstr "bpm"
 
@@ -5930,7 +5942,7 @@ msgstr "negli ultimi"
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
 #: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
-#: ui/edittagdialog.cpp:478
+#: ui/edittagdialog.cpp:491
 msgid "kbps"
 msgstr "kbps"
 

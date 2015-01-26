@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-01-14 22:30+0000\n"
+"PO-Revision-Date: 2015-01-19 14:52+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -393,7 +393,7 @@ msgid "About Qt..."
 msgstr "Qt について..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Absolute"
 msgstr "絶対的"
 
@@ -610,7 +610,7 @@ msgstr "ブックマークに追加する"
 msgid "Add to playlist"
 msgstr "プレイリストに追加する"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "Add to the queue"
 msgstr "キューに追加する"
 
@@ -760,16 +760,16 @@ msgstr "M/S エンコードを許可"
 msgid "Alongside the originals"
 msgstr "元と同じ"
 
-#: ../bin/src/ui_behavioursettingspage.h:255
+#: ../bin/src/ui_behavioursettingspage.h:271
 msgid "Always hide the main window"
 msgstr "メインウィンドウを常に隠す"
 
-#: ../bin/src/ui_behavioursettingspage.h:254
+#: ../bin/src/ui_behavioursettingspage.h:270
 msgid "Always show the main window"
 msgstr "メインウィンドウを常に表示する"
 
-#: ../bin/src/ui_behavioursettingspage.h:268
-#: ../bin/src/ui_behavioursettingspage.h:282
+#: ../bin/src/ui_behavioursettingspage.h:284
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Always start playing"
 msgstr "常に再生を開始する"
 
@@ -783,7 +783,7 @@ msgstr "Clementine で Spotify を利用するには追加のプラグインが�
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes のデータベースを読み込み中にエラーが発生しました"
 
-#: ui/edittagdialog.cpp:679
+#: ui/edittagdialog.cpp:692
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "メタデータを '%1' へ書き込み中にエラーが発生しました"
@@ -816,7 +816,7 @@ msgstr "ファイル・URL をプレイリストに追加する"
 msgid "Append to current playlist"
 msgstr "現在のプレイリストに追加する"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:295
 msgid "Append to the playlist"
 msgstr "プレイリストに追加する"
 
@@ -833,7 +833,7 @@ msgstr "プリセット「%1」を削除してもよろしいですか?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "本当にこのプレイリストを削除しますか?"
 
-#: ui/edittagdialog.cpp:785
+#: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "この曲の統計をリセットしてもよろしいですか?"
 
@@ -864,7 +864,7 @@ msgstr "アーティストタグ"
 msgid "Artist's initial"
 msgstr "アーティストの頭文字"
 
-#: ../bin/src/ui_behavioursettingspage.h:288
+#: ../bin/src/ui_behavioursettingspage.h:310
 msgid "Ask when saving"
 msgstr "保存時に尋ねる"
 
@@ -897,7 +897,7 @@ msgid "Auto"
 msgstr "自動"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:285
+#: ../bin/src/ui_behavioursettingspage.h:307
 msgid "Automatic"
 msgstr "自動"
 
@@ -966,7 +966,7 @@ msgstr "標準のブルー"
 msgid "Basic audio type"
 msgstr "基本のオーディオの種類"
 
-#: ../bin/src/ui_behavioursettingspage.h:243
+#: ../bin/src/ui_behavioursettingspage.h:259
 msgid "Behavior"
 msgstr "動作"
 
@@ -1496,24 +1496,24 @@ msgstr "出力ファイル %1 を開けませんでした"
 msgid "Cover Manager"
 msgstr "カバーマネージャー"
 
-#: ui/edittagdialog.cpp:460
+#: ui/edittagdialog.cpp:473
 msgid "Cover art from embedded image"
 msgstr "埋め込み画像からのカバーアート"
 
-#: ui/edittagdialog.cpp:463
+#: ui/edittagdialog.cpp:476
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "%1 から自動的に読み込まれたカバーアート"
 
-#: ui/edittagdialog.cpp:455
+#: ui/edittagdialog.cpp:468
 msgid "Cover art manually unset"
 msgstr "カバーアートは手動で未設定にされています"
 
-#: ui/edittagdialog.cpp:465
+#: ui/edittagdialog.cpp:478
 msgid "Cover art not set"
 msgstr "カバーアートが設定されていません"
 
-#: ui/edittagdialog.cpp:458
+#: ui/edittagdialog.cpp:471
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "%1 からのカバーアートセット"
@@ -1894,7 +1894,7 @@ msgstr "寄付する"
 msgid "Double click to open"
 msgstr "ダブルクリックで開く"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:292
 msgid "Double clicking a song will..."
 msgstr "曲をダブルクリックした際の動作..."
 
@@ -2053,7 +2053,7 @@ msgstr "イコライザーを有効にする"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Clementine にフォーカスがあるときのみショートカットを有効にする"
 
-#: ../bin/src/ui_behavioursettingspage.h:262
+#: ../bin/src/ui_behavioursettingspage.h:278
 msgid "Enable song metadata inline edition with click"
 msgstr "クリックによる曲のメタデータの直接編集を有効にする"
 
@@ -2591,7 +2591,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2 個中 %1 個のカバーを取得しました (%3 個失敗しました)"
 
-#: ../bin/src/ui_behavioursettingspage.h:258
+#: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "プレイリスト上の存在しない曲をグレーで表示する"
 
@@ -2719,7 +2719,7 @@ msgstr "アイコンを上に配置"
 msgid "Identifying song"
 msgstr "曲の識別中"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:276
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2901,6 +2901,10 @@ msgstr "Jamendo の今週のトップトラック"
 msgid "Jamendo database"
 msgstr "Jamendo のデータベース"
 
+#: ../bin/src/ui_behavioursettingspage.h:289
+msgid "Jump to previous song right away"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
 msgstr "現在再生中のトラックへジャンプ"
@@ -2917,7 +2921,7 @@ msgstr "ボタンを %1 秒長押し..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "ボタンを %1 秒長押し..."
 
-#: ../bin/src/ui_behavioursettingspage.h:245
+#: ../bin/src/ui_behavioursettingspage.h:261
 msgid "Keep running in the background when the window is closed"
 msgstr "ウィンドウを閉じたときバックグラウンドで起動し続ける"
 
@@ -2930,7 +2934,7 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kittens"
 
-#: ../bin/src/ui_behavioursettingspage.h:247
+#: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "言語"
 
@@ -3396,7 +3400,7 @@ msgstr "ネットワークプロキシ"
 msgid "Network Remote"
 msgstr "Network Remote"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:507
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:520
 msgid "Never"
 msgstr "なし"
 
@@ -3404,8 +3408,8 @@ msgstr "なし"
 msgid "Never played"
 msgstr "再生したことがない"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
-#: ../bin/src/ui_behavioursettingspage.h:280
+#: ../bin/src/ui_behavioursettingspage.h:282
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Never start playing"
 msgstr "再生を開始しない"
 
@@ -3646,7 +3650,7 @@ msgstr "Google Drive で開く"
 msgid "Open in new playlist"
 msgstr "新しいプレイリストで開く"
 
-#: ../bin/src/ui_behavioursettingspage.h:275
+#: ../bin/src/ui_behavioursettingspage.h:297
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "新しいプレイリストで開く"
@@ -3788,8 +3792,8 @@ msgstr "再生回数"
 msgid "Play if stopped, pause if playing"
 msgstr "停止中は再生し、再生中は一時停止します"
 
-#: ../bin/src/ui_behavioursettingspage.h:267
-#: ../bin/src/ui_behavioursettingspage.h:281
+#: ../bin/src/ui_behavioursettingspage.h:283
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Play if there is nothing already playing"
 msgstr "再生中の曲がない場合は再生する"
 
@@ -3927,6 +3931,10 @@ msgstr "キーを押してください"
 #, qt-format
 msgid "Press a key combination to use for %1..."
 msgstr "%1 に使用するキーの組み合わせを押してください..."
+
+#: ../bin/src/ui_behavioursettingspage.h:286
+msgid "Pressing \"Previous\" in player will..."
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
@@ -4092,7 +4100,7 @@ msgid "Reggae"
 msgstr "レゲエ"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:287
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Relative"
 msgstr "相対的"
 
@@ -4100,7 +4108,7 @@ msgstr "相対的"
 msgid "Remember Wii remote swing"
 msgstr "Wii リモコンのスイングを記憶する"
 
-#: ../bin/src/ui_behavioursettingspage.h:256
+#: ../bin/src/ui_behavioursettingspage.h:272
 msgid "Remember from last time"
 msgstr "最後から記憶する"
 
@@ -4206,7 +4214,7 @@ msgstr "トラックをリピート"
 msgid "Replace current playlist"
 msgstr "現在のプレイリストを置き換える"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Replace the playlist"
 msgstr "プレイリストを置き換える"
 
@@ -4234,9 +4242,13 @@ msgstr "認証コードを要求する"
 msgid "Reset"
 msgstr "リセット"
 
-#: ui/edittagdialog.cpp:784 ../bin/src/ui_edittagdialog.h:668
+#: ui/edittagdialog.cpp:797 ../bin/src/ui_edittagdialog.h:668
 msgid "Reset play counts"
 msgstr "再生回数のリセット"
+
+#: ../bin/src/ui_behavioursettingspage.h:290
+msgid "Restart song, then jump to previous if pressed again (iPod behavior)"
+msgstr ""
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4247,7 +4259,7 @@ msgstr "トラックを再開 (開始8秒以内なら前のトラックを再生
 msgid "Restrict to ASCII characters"
 msgstr "ASCII 文字に限定する"
 
-#: ../bin/src/ui_behavioursettingspage.h:257
+#: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr "起動時に再生を再開する"
 
@@ -4367,7 +4379,7 @@ msgstr "このストリームを [インターネット] タブに保存する"
 msgid "Saving songs statistics into songs files"
 msgstr "曲の統計情報を曲ファイルに保存中"
 
-#: ui/edittagdialog.cpp:687 ui/trackselectiondialog.cpp:254
+#: ui/edittagdialog.cpp:700 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr "トラックの保存中"
 
@@ -4678,7 +4690,7 @@ msgstr "\"Love\"ボタンを表示する"
 msgid "Show the scrobble button in the main window"
 msgstr "scrobble ボタンをメインウィンドウに表示する"
 
-#: ../bin/src/ui_behavioursettingspage.h:244
+#: ../bin/src/ui_behavioursettingspage.h:260
 msgid "Show tray icon"
 msgstr "トレイアイコンを表示する"
 
@@ -5317,7 +5329,7 @@ msgstr "%1 をダウンロードできません (%2)"
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
-#: ui/edittagdialog.cpp:439 ui/edittagdialog.cpp:483
+#: ui/edittagdialog.cpp:452 ui/edittagdialog.cpp:496
 msgid "Unknown"
 msgstr "不明"
 
@@ -5449,7 +5461,7 @@ msgstr "Wii リモコンの状態の報告に通知を使用する"
 msgid "Use temporal noise shaping"
 msgstr "Temporal Noise Shaping (TNS) を使用する"
 
-#: ../bin/src/ui_behavioursettingspage.h:250
+#: ../bin/src/ui_behavioursettingspage.h:266
 msgid "Use the system default"
 msgstr "システム既定を使用する"
 
@@ -5487,7 +5499,7 @@ msgstr "ユーザーインターフェース"
 msgid "Username"
 msgstr "ユーザー名"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:279
 msgid "Using the menu to add a song will..."
 msgstr "メニューから曲を追加した場合..."
 
@@ -5556,7 +5568,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:246
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
 msgid "Warn me when closing a playlist tab"
 msgstr "プレイリストタブを閉じるときに警告する"
 
@@ -5572,7 +5584,7 @@ msgstr "ウェブサイト"
 msgid "Weeks"
 msgstr "週"
 
-#: ../bin/src/ui_behavioursettingspage.h:253
+#: ../bin/src/ui_behavioursettingspage.h:269
 msgid "When Clementine starts"
 msgstr "Clementine の起動時"
 
@@ -5582,7 +5594,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "アルバム アートの検索時に Clementine はまずこれらの単語の 1 つを含む画像ファイルを探します。\n一致するものがない場合はディレクトリにある最も大きいイメージを使用します。"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5666,7 +5678,7 @@ msgstr "全体の再スキャンを今すぐ実行しますか?"
 msgid "Write all songs statistics into songs' files"
 msgstr "すべての曲の統計情報を曲ファイルに書き込む"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Write metadata"
 msgstr "メタデータの書き込み"
 
@@ -5797,7 +5809,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Clementine でグローバルショートカットを使用するには 「システム設定」を起動して「<span style=\" font-style:italic;\">補助装置にアクセスできるようにする</span>」をオンにする必要があります。"
 
-#: ../bin/src/ui_behavioursettingspage.h:252
+#: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."
 msgstr "言語を変更するには Clementine の再起動が必要です。"
 
@@ -5878,7 +5890,7 @@ msgstr "が次の時間範囲内"
 msgid "biggest first"
 msgstr "大きい順"
 
-#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:476
+#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:489
 msgid "bpm"
 msgstr "bpm"
 
@@ -5932,7 +5944,7 @@ msgstr "が次の時間以内"
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
 #: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
-#: ui/edittagdialog.cpp:478
+#: ui/edittagdialog.cpp:491
 msgid "kbps"
 msgstr "kbps"
 
