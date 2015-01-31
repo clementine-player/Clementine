@@ -40,6 +40,8 @@ class LastFMSettingsPage : public SettingsPage {
   void Login();
   void AuthenticationComplete(bool success, const QString& error_message);
   void Logout();
+  void AdvancedOptionsChanged(int state);
+  void AddHttpServer();
 
  private:
   LastFMService* service_;

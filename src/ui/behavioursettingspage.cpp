@@ -65,9 +65,9 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
 
     QString code = lang_re.cap(1);
     QString lookup_code = QString(code)
-        .replace("@latin", "_Latn")
-        .replace("_CN", "_Hans_CN")
-        .replace("_TW", "_Hant_TW");
+                              .replace("@latin", "_Latn")
+                              .replace("_CN", "_Hans_CN")
+                              .replace("_TW", "_Hant_TW");
     QString language_name =
         QLocale::languageToString(QLocale(lookup_code).language());
 #if QT_VERSION >= 0x040800

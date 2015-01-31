@@ -18,7 +18,7 @@
 #include "core/albumcoverfetcher.h"
 #include "core/networkaccessmanager.h"
 
-#include <lastfm/ws.h>
+#include "lastfm/ws.h"
 
 #include <QCoreApplication>
 #include <QEventLoop>
@@ -39,17 +39,11 @@ class AlbumCoverFetcherTest : public ::testing::Test {
     lastfm::setNetworkAccessManager(mock_network_);
   }
 
-  void SetUp() {
-    network_ = new NetworkAccessManager(nullptr, mock_network_);
-  }
+  void SetUp() { network_ = new NetworkAccessManager(nullptr, mock_network_); }
 
-  void TearDown() {
-    delete network_;
-  }
+  void TearDown() { delete network_; }
 
-  static void TearDownTestCase() {
-    delete mock_network_;
-  }
+  static void TearDownTestCase() { delete mock_network_; }
 
   static MockNetworkAccessManager* mock_network_;
   NetworkAccessManager* network_;
@@ -57,19 +51,22 @@ class AlbumCoverFetcherTest : public ::testing::Test {
 
 MockNetworkAccessManager* AlbumCoverFetcherTest::mock_network_;
 
-
 TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {
-  QByteArray data("<lfm status=\"ok\"><album><name>Bar</name><artist>Foo</artist>"
-                  "<image size=\"large\">http://example.com/image.jpg</image></album></lfm>");
+  QByteArray data(
+      "<lfm status=\"ok\"><album><name>Bar</name><artist>Foo</artist>"
+      "<image "
+      "size=\"large\">http://example.com/image.jpg</image></album></lfm>");
 
   QMap<QString, QString> params;
   params["artist"] = "Foo";
   params["album"] = "Bar";
   params["api_key"] = "foobar";
   params["method"] = "album.getInfo";
-  MockNetworkReply* get_info_reply = mock_network_->ExpectGet("audioscrobbler", params, 200, data);
+  MockNetworkReply* get_info_reply =
+      mock_network_->ExpectGet("audioscrobbler", params, 200, data);
   params.clear();
-  MockNetworkReply* album_reply = mock_network_->ExpectGet("http://example.com/image.jpg", params, 200, "");
+  MockNetworkReply* album_reply =
+      mock_network_->ExpectGet("http://example.com/image.jpg", params, 200, "");
 
   AlbumCoverFetcher fetcher(network_, nullptr);
   QSignalSpy spy(&fetcher, SIGNAL(AlbumCoverFetched(quint64, const QImage&)));

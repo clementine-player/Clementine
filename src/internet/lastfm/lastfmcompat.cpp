@@ -23,8 +23,6 @@
 namespace lastfm {
 namespace compat {
 
-#ifdef HAVE_LIBLASTFM1
-
 XmlQuery EmptyXmlQuery() { return XmlQuery(); }
 
 bool ParseQuery(const QByteArray& data, XmlQuery* query,
@@ -52,62 +50,5 @@ bool ParseUserList(QNetworkReply* reply, QList<User>* users) {
 
 uint ScrobbleTimeMin() { return lastfm::ScrobblePoint::scrobbleTimeMin(); }
 
-#else  // HAVE_LIBLASTFM1
-
-XmlQuery EmptyXmlQuery() {
-  QByteArray dummy;
-  return XmlQuery(dummy);
-}
-
-bool ParseQuery(const QByteArray& data, XmlQuery* query,
-                bool* connection_problems) {
-  try {
-    *query = lastfm::XmlQuery(data);
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError) {
-      return false;
-    }
-#endif  // Q_OS_WIN32
-  } catch (lastfm::ws::ParseError e) {
-    qLog(Error) << "Last.fm parse error: " << e.enumValue();
-    if (connection_problems) {
-      *connection_problems = e.enumValue() == lastfm::ws::MalformedResponse;
-    }
-    return false;
-  } catch (std::runtime_error& e) {
-    qLog(Error) << e.what();
-    return false;
-  }
-
-  if (connection_problems) {
-    *connection_problems = false;
-  }
-
-  // Check for app errors.
-  if (QDomElement(*query).attribute("status") == "failed") {
-    return false;
-  }
-
-  return true;
-}
-
-bool ParseUserList(QNetworkReply* reply, QList<User>* users) {
-  try {
-    *users = lastfm::User::list(reply);
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError) {
-      return false;
-    }
-#endif  // Q_OS_WIN32
-  } catch (std::runtime_error& e) {
-    qLog(Error) << e.what();
-    return false;
-  }
-  return true;
-}
-
-uint ScrobbleTimeMin() { return ScrobblePoint::kScrobbleMinLength; }
-
-#endif  // HAVE_LIBLASTFM1
 }  // namespace compat
 }  // namespace lastfm

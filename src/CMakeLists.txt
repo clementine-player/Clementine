@@ -49,7 +49,7 @@ if(HAVE_LIBINDICATE)
 endif(HAVE_LIBINDICATE)
 
 if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM_INCLUDE_DIRS})
+  include_directories(${LASTFM1_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_BREAKPAD)

@@ -82,9 +82,10 @@ if (WIN32)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 
-find_library(LASTFM_LIBRARIES lastfm)
-find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
-find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
+message(STATUS "Using builtin lastfm to support custom URLs")
+set(LASTFM1_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/liblastfm/;${CMAKE_BINARY_DIR}/3rdparty/liblastfm/lastfm")
+set(LASTFM_LIBRARIES lastfm)
+add_subdirectory(3rdparty/liblastfm)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
@@ -108,10 +109,6 @@ else()
       int main() { char *s; TagLib::Ogg::Opus::File opusfile(s); return 0;}" TAGLIB_HAS_OPUS)
   set(CMAKE_REQUIRED_INCLUDES)
   set(CMAKE_REQUIRED_LIBRARIES)
-endif()
-
-if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
-  set(HAVE_LIBLASTFM1 ON)
 endif()
 
 if (APPLE)
@@ -238,7 +235,7 @@ optional_component(SOUNDMENU ON "Gnome sound menu integration"
 )
 
 optional_component(LIBLASTFM ON "Last.fm support"
-  DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM_INCLUDE_DIRS
+  DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM1_INCLUDE_DIRS
 )
 
 optional_component(DBUS ON "D-Bus support"
