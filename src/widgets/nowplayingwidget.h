@@ -58,6 +58,7 @@ class NowPlayingWidget : public QWidget {
     SmallSongDetails = 0,
     LargeSongDetails = 1,
     LargeSongDetailsBelow = 2,
+    LargeNoSongDetails = 3,
   };
 
   void SetApplication(Application* app);
