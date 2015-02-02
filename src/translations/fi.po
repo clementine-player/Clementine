@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-01-19 14:57+0000\n"
+"PO-Revision-Date: 2015-02-02 08:02+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -369,7 +369,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:146
+#: widgets/nowplayingwidget.cpp:148
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "KAIKKI KUNNIA HYPNOTOADILLE"
 
@@ -2053,7 +2053,7 @@ msgstr "Käytä pikanäppäimiä vain Clementinen ollessa avoinna"
 
 #: ../bin/src/ui_behavioursettingspage.h:278
 msgid "Enable song metadata inline edition with click"
-msgstr ""
+msgstr "Käytä kappaleen metadatan muokkausta napsautuksella"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2434,7 +2434,7 @@ msgstr "Valmis"
 msgid "First level"
 msgstr "Ensimmäinen taso"
 
-#: widgets/nowplayingwidget.cpp:105
+#: widgets/nowplayingwidget.cpp:107
 msgid "Fit cover to width"
 msgstr "Sovita kansi leveyteen"
 
@@ -2952,6 +2952,10 @@ msgstr "Suuri kansikuva"
 msgid "Large album cover (details below)"
 msgstr "Suuri kansikuva (tiedot alla)"
 
+#: widgets/nowplayingwidget.cpp:102
+msgid "Large album cover (no details)"
+msgstr "Suuri kansikuva (ei tietoja)"
+
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
 msgstr "Suuri sivupalkki"
@@ -3279,7 +3283,7 @@ msgstr "Pienin bittinopeus"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr ""
+msgstr "Puskurin vähimmäistäyttö"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -4245,8 +4249,8 @@ msgid "Reset play counts"
 msgstr "Nollaa soittokerrat"
 
 #: ../bin/src/ui_behavioursettingspage.h:290
-msgid "Restart song, then jump to previous if pressed again (iPod behavior)"
-msgstr "Käynnistää kappaleen alusta, siirtyy edelliseen jos painetaan kahdesti (iPodin tapaan)"
+msgid "Restart song, then jump to previous if pressed again"
+msgstr "Käynnistä kappale uudelleen, siirry edelliseen jos painetaan uudellaan"
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4619,7 +4623,7 @@ msgstr "Näytä ponnahdus tehtäväpalkista"
 msgid "Show a pretty OSD"
 msgstr "Näytä kuvaruutunäyttö"
 
-#: widgets/nowplayingwidget.cpp:137
+#: widgets/nowplayingwidget.cpp:139
 msgid "Show above status bar"
 msgstr "Näytä tilapalkin yläpuolella"
 
@@ -5033,7 +5037,7 @@ msgstr "Tunnistenoutaja"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
-msgstr "Tavoite bitrate"
+msgstr "Tavoiteltava bittinopeus"
 
 #: ui/equalizer.cpp:150
 msgid "Techno"
@@ -5457,7 +5461,7 @@ msgstr "Käytä ilmoituksia Wii-ohjaimen tilan raportoimiseen"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
-msgstr ""
+msgstr "Käytä väliaikaista melun muokkausta"
 
 #: ../bin/src/ui_behavioursettingspage.h:266
 msgid "Use the system default"

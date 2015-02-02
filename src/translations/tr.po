@@ -19,12 +19,12 @@
 # Mustafa YILMAZ <apshalasha@gmail.com>, 2013
 # Ömer Faruk Uzun  <farukuzun@mail.com>, 2012
 # zeugma <sunder67@hotmail.com>, 2012
-# Volkan Gezer <volkangezer@gmail.com>, 2013-2014
+# Volkan Gezer <volkangezer@gmail.com>, 2013-2015
 # yusufbesir1 <yusufbesir1@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-01-19 14:52+0000\n"
+"PO-Revision-Date: 2015-02-01 21:34+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -381,7 +381,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:146
+#: widgets/nowplayingwidget.cpp:148
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "TÜM ŞEREF HYPNOTOAD'A GİTSİN"
 
@@ -606,7 +606,7 @@ msgstr "Spotify çalma listelerine ekle"
 
 #: internet/spotify/spotifyservice.cpp:610
 msgid "Add to Spotify starred"
-msgstr ""
+msgstr "Spotify yıldızlılarına ekle"
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -718,7 +718,7 @@ msgstr "Kapak resmi olmayan albümler"
 
 #: ../bin/src/ui_podcastsettingspage.h:279
 msgid "All"
-msgstr ""
+msgstr "Tümü"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -1084,7 +1084,7 @@ msgstr "İptal"
 
 #: internet/podcasts/podcastservice.cpp:439
 msgid "Cancel download"
-msgstr ""
+msgstr "İndirmeyi iptal et"
 
 #: internet/vk/vkservice.cpp:626
 msgid ""
@@ -1885,7 +1885,7 @@ msgstr "Çeşitli sanatçılarda gösterme"
 
 #: ../bin/src/ui_podcastsettingspage.h:278
 msgid "Don't show listened episodes"
-msgstr ""
+msgstr "Dinlenen bölümleri gösterme"
 
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
@@ -2446,7 +2446,7 @@ msgstr "Bitir"
 msgid "First level"
 msgstr "İlk Seviye"
 
-#: widgets/nowplayingwidget.cpp:105
+#: widgets/nowplayingwidget.cpp:107
 msgid "Fit cover to width"
 msgstr "Kapağı genişliğe sığdır"
 
@@ -2557,11 +2557,11 @@ msgstr "Bu Grooveshark şarkısını paylaşmak için bir URL al"
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
-msgstr ""
+msgstr "Bu Spotify şarkısını paylaşmak için URL al"
 
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
-msgstr ""
+msgstr "Bu çalma listesini paylaşmak için URL al"
 
 #: internet/grooveshark/groovesharkservice.cpp:829
 msgid "Getting Grooveshark popular songs"
@@ -2913,7 +2913,7 @@ msgstr "Jamendo veritabanı"
 
 #: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Jump to previous song right away"
-msgstr ""
+msgstr "Hemen bir önceki şarkıya gidecek"
 
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
@@ -2963,6 +2963,10 @@ msgstr "Geniş albüm kapağı"
 #: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover (details below)"
 msgstr "Büyük albüm kapağı (ayrıntılar aşağıda)"
+
+#: widgets/nowplayingwidget.cpp:102
+msgid "Large album cover (no details)"
+msgstr ""
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3559,7 +3563,7 @@ msgstr "Şimdi Çalıyor"
 
 #: ../bin/src/ui_podcastsettingspage.h:280
 msgid "Number of episodes to show"
-msgstr ""
+msgstr "Gösterilecek bölüm sayısı"
 
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
@@ -3944,7 +3948,7 @@ msgstr "%1 için kullanmak için bir tuş kombinasyonun basın..."
 
 #: ../bin/src/ui_behavioursettingspage.h:286
 msgid "Pressing \"Previous\" in player will..."
-msgstr ""
+msgstr "Oynatıcıda \"Önceki\" düğmesine basmak..."
 
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
@@ -4257,8 +4261,8 @@ msgid "Reset play counts"
 msgstr "Çalma sayısını sıfırla"
 
 #: ../bin/src/ui_behavioursettingspage.h:290
-msgid "Restart song, then jump to previous if pressed again (iPod behavior)"
-msgstr ""
+msgid "Restart song, then jump to previous if pressed again"
+msgstr "Şarkıyı yeniden başlatacak, ardından tekrar basılırsa öncekine gidecek"
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4631,7 +4635,7 @@ msgstr "Sistem tepsisinden bir açılır pencere göster"
 msgid "Show a pretty OSD"
 msgstr "Şirin bir OSD göster"
 
-#: widgets/nowplayingwidget.cpp:137
+#: widgets/nowplayingwidget.cpp:139
 msgid "Show above status bar"
 msgstr "Durum çubuğunun üzerinde göster"
 
@@ -4871,7 +4875,7 @@ msgstr "Spotify giriş hatası"
 
 #: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
-msgstr ""
+msgstr "Spotify çalma listesi adresi"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
@@ -4883,7 +4887,7 @@ msgstr "Spotify eklentisi kurulu değil"
 
 #: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
-msgstr ""
+msgstr "Spotify şarkı adresi"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
