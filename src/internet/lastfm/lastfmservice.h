@@ -68,9 +68,12 @@ class LastFMService : public Scrobbler {
   bool PreferAlbumArtist() const { return prefer_albumartist_; }
   bool HasConnectionProblems() const { return connection_problems_; }
 
-  void Authenticate(const QString& username, const QString& password);
+  void Authenticate(const QString& server, const QString& username,
+                    const QString& password);
   void SignOut();
   void UpdateSubscriberStatus();
+
+  QString server();
 
  public slots:
   void NowPlaying(const Song& song);
@@ -80,7 +83,7 @@ class LastFMService : public Scrobbler {
   void ShowConfig();
   void ToggleScrobbling();
 
- signals:
+signals:
   void AuthenticationComplete(bool success, const QString& error_message);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
@@ -94,7 +97,7 @@ class LastFMService : public Scrobbler {
   void SavedItemsChanged();
 
  private slots:
-  void AuthenticateReplyFinished(QNetworkReply* reply);
+  void AuthenticateReplyFinished(QNetworkReply* reply, const QString& host);
   void UpdateSubscriberStatusFinished(QNetworkReply* reply);
 
   void ScrobblerStatus(int value);

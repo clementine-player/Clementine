@@ -23,23 +23,13 @@
 #include "config.h"
 #include "fixlastfm.h"
 
-#ifdef HAVE_LIBLASTFM1
-#include <lastfm/Audioscrobbler.h>
-#include <lastfm/misc.h>
-#include <lastfm/ScrobbleCache.h>
-#include <lastfm/ScrobblePoint.h>
-#include <lastfm/User.h>
-#include <lastfm/ws.h>
-#include <lastfm/XmlQuery.h>
-#else
-#include <lastfm/Audioscrobbler>
-#include <lastfm/misc.h>
-#include <lastfm/ScrobbleCache>
-#include <lastfm/ScrobblePoint>
-#include <lastfm/User>
-#include <lastfm/ws.h>
-#include <lastfm/XmlQuery>
-#endif
+#include "lastfm/Audioscrobbler.h"
+#include "lastfm/misc.h"
+#include "lastfm/ScrobbleCache.h"
+#include "lastfm/ScrobblePoint.h"
+#include "lastfm/User.h"
+#include "lastfm/ws.h"
+#include "lastfm/XmlQuery.h"
 
 namespace lastfm {
 namespace compat {
@@ -53,13 +43,8 @@ bool ParseUserList(QNetworkReply* reply, QList<lastfm::User>* users);
 
 uint ScrobbleTimeMin();
 
-#ifdef HAVE_LIBLASTFM1
 typedef lastfm::ScrobbleCache ScrobbleCache;
 typedef lastfm::User AuthenticatedUser;
-#else
-typedef ::ScrobbleCache ScrobbleCache;
-typedef lastfm::AuthenticatedUser AuthenticatedUser;
-#endif
 }  // namespace compat
 }  // namespace lastfm
 

@@ -22,8 +22,6 @@
 #include "lastfmsettingspage.h"
 #include "ui_lastfmsettingspage.h"
 
-#include <lastfm/ws.h>
-
 #include <QMessageBox>
 #include <QSettings>
 
@@ -47,9 +45,14 @@ LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
   connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
+  connect(ui_->advanced_options, SIGNAL(stateChanged(int)),
+          SLOT(AdvancedOptionsChanged(int)));
+  connect(ui_->server, SIGNAL(editingFinished()), SLOT(AddHttpServer()));
 
+  ui_->login_state->AddCredentialField(ui_->server);
   ui_->login_state->AddCredentialField(ui_->username);
   ui_->login_state->AddCredentialField(ui_->password);
+  ui_->login_state->AddCredentialField(ui_->advanced_options);
   ui_->login_state->AddCredentialGroup(ui_->groupBox);
 
   ui_->username->setMinimumWidth(QFontMetrics(QFont()).width("WWWWWWWWWWWW"));
@@ -62,7 +65,8 @@ void LastFMSettingsPage::Login() {
   waiting_for_auth_ = true;
 
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
-  service_->Authenticate(ui_->username->text(), ui_->password->text());
+  service_->Authenticate(ui_->server->text(), ui_->username->text(),
+                         ui_->password->text());
 }
 
 void LastFMSettingsPage::AuthenticationComplete(bool success,
@@ -77,7 +81,7 @@ void LastFMSettingsPage::AuthenticationComplete(bool success,
     // Save settings
     Save();
   } else {
-    QString dialog_text = tr("Your Last.fm credentials were incorrect");
+    QString dialog_text = tr("Your credentials were incorrect");
     if (!message.isEmpty()) {
       dialog_text = message;
     }
@@ -92,6 +96,14 @@ void LastFMSettingsPage::Load() {
   ui_->love_ban_->setChecked(service_->AreButtonsVisible());
   ui_->scrobble_button->setChecked(service_->IsScrobbleButtonVisible());
   ui_->prefer_albumartist->setChecked(service_->PreferAlbumArtist());
+  ui_->server->setText(service_->server());
+
+  QSettings s;
+  s.beginGroup(LastFMService::kSettingsGroup);
+  bool state = s.value("AdvancedOptions").toBool();
+  ui_->advanced_options->setChecked(state);
+  AdvancedOptionsChanged(state);
+  s.endGroup();
 
   RefreshControls(service_->IsAuthenticated());
 }
@@ -103,6 +115,7 @@ void LastFMSettingsPage::Save() {
   s.setValue("ShowLoveBanButtons", ui_->love_ban_->isChecked());
   s.setValue("ShowScrobbleButton", ui_->scrobble_button->isChecked());
   s.setValue("PreferAlbumArtist", ui_->prefer_albumartist->isChecked());
+  s.setValue("AdvancedOptions", ui_->advanced_options->isChecked());
   s.endGroup();
 
   service_->ReloadSettings();
@@ -111,6 +124,7 @@ void LastFMSettingsPage::Save() {
 void LastFMSettingsPage::Logout() {
   ui_->username->clear();
   ui_->password->clear();
+  ui_->server->clear();
   RefreshControls(false);
 
   service_->SignOut();
@@ -120,4 +134,20 @@ void LastFMSettingsPage::RefreshControls(bool authenticated) {
   ui_->login_state->SetLoggedIn(
       authenticated ? LoginStateWidget::LoggedIn : LoginStateWidget::LoggedOut,
       lastfm::ws::Username);
+}
+
+void LastFMSettingsPage::AdvancedOptionsChanged(int state) {
+  ui_->server->setVisible(state);
+  ui_->label_server->setVisible(state);
+
+  if (ui_->server->isHidden()) {
+    ui_->server->setText("");
+  }
+}
+
+void LastFMSettingsPage::AddHttpServer() {
+  QString server_text = ui_->server->text();
+  if (!server_text.isEmpty() && !server_text.contains(QRegExp("^https?://"))) {
+    ui_->server->setText(QString("http://%1").arg(server_text));
+  }
 }

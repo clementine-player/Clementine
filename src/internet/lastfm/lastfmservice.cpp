@@ -42,11 +42,7 @@
 #include <QMenu>
 #include <QSettings>
 
-#ifdef HAVE_LIBLASTFM1
-#include <lastfm/RadioStation.h>
-#else
-#include <lastfm/RadioStation>
-#endif
+#include "lastfm/RadioStation.h"
 
 #include "lastfmcompat.h"
 #include "internet/core/internetmodel.h"
@@ -99,6 +95,7 @@ void LastFMService::ReloadSettings() {
   settings.beginGroup(kSettingsGroup);
   lastfm::ws::Username = settings.value("Username").toString();
   lastfm::ws::SessionKey = settings.value("Session").toString();
+  lastfm::ws::Server = settings.value("Server").toString();
   scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
   buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
   scrobble_button_visible_ =
@@ -127,7 +124,7 @@ bool LastFMService::IsSubscriber() const {
   return settings.value("Subscriber", false).toBool();
 }
 
-void LastFMService::Authenticate(const QString& username,
+void LastFMService::Authenticate(const QString& server, const QString& username,
                                  const QString& password) {
   QMap<QString, QString> params;
   params["method"] = "auth.getMobileSession";
@@ -135,24 +132,29 @@ void LastFMService::Authenticate(const QString& username,
   params["authToken"] =
       lastfm::md5((username + lastfm::md5(password.toUtf8())).toUtf8());
 
+  lastfm::ws::Server = server;
   QNetworkReply* reply = lastfm::ws::post(params);
   NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
+             SLOT(AuthenticateReplyFinished(QNetworkReply*, QString)), reply,
+             server);
   // If we need more detailed error reporting, handle error(NetworkError) signal
 }
 
 void LastFMService::SignOut() {
   lastfm::ws::Username.clear();
   lastfm::ws::SessionKey.clear();
+  lastfm::ws::Server.clear();
 
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
   settings.setValue("Username", QString());
   settings.setValue("Session", QString());
+  settings.setValue("Server", QString());
 }
 
-void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
+void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply,
+                                              const QString& server) {
   reply->deleteLater();
 
   // Parse the reply
@@ -160,6 +162,7 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
   if (lastfm::compat::ParseQuery(reply->readAll(), &lfm)) {
     lastfm::ws::Username = lfm["session"]["name"].text();
     lastfm::ws::SessionKey = lfm["session"]["key"].text();
+    lastfm::ws::Server = server;
     QString subscribed = lfm["session"]["subscriber"].text();
     const bool is_subscriber = (subscribed.toInt() == 1);
 
@@ -168,6 +171,7 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
     settings.beginGroup(kSettingsGroup);
     settings.setValue("Username", lastfm::ws::Username);
     settings.setValue("Session", lastfm::ws::SessionKey);
+    settings.setValue("Server", lastfm::ws::Server);
     settings.setValue("Subscriber", is_subscriber);
   } else {
     emit AuthenticationComplete(false, lfm["error"].text().trimmed());
@@ -270,15 +274,11 @@ bool LastFMService::InitScrobbler() {
   if (!scrobbler_)
     scrobbler_ = new lastfm::Audioscrobbler(kAudioscrobblerClientId);
 
-// reemit the signal since the sender is private
-#ifdef HAVE_LIBLASTFM1
+  // reemit the signal since the sender is private
   connect(scrobbler_, SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)),
           SIGNAL(ScrobbleSubmitted()));
   connect(scrobbler_, SIGNAL(nowPlayingError(int, QString)),
           SIGNAL(ScrobbleError(int)));
-#else
-  connect(scrobbler_, SIGNAL(status(int)), SLOT(ScrobblerStatus(int)));
-#endif
   return true;
 }
 
@@ -336,18 +336,9 @@ void LastFMService::NowPlaying(const Song& song) {
   already_scrobbled_ = false;
   last_track_ = mtrack;
 
-#ifndef HAVE_LIBLASTFM1
-  // Check immediately if the song is valid
-  Scrobble::Invalidity invalidity;
-  if (!lastfm::Scrobble(last_track_).isValid(&invalidity)) {
-    // for now just notify this, we can also see the cause
-    emit ScrobbleError(-1);
-    return;
-  }
-#else
-// TODO(John Maguire): validity was removed from liblastfm1 but might reappear, it should have
-// no impact as we get a different error when actually trying to scrobble.
-#endif
+  // TODO(John Maguire): validity was removed from liblastfm1 but might
+  // reappear, it should have
+  // no impact as we get a different error when actually trying to scrobble.
 
   scrobbler_->nowPlaying(mtrack);
 }
@@ -402,3 +393,5 @@ void LastFMService::ToggleScrobbling() {
 
   emit ScrobblingEnabledChanged(scrobbling_enabled_);
 }
+
+QString LastFMService::server() { return lastfm::ws::Server; }
