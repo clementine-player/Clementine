@@ -201,6 +201,7 @@ gboolean Chromaprinter::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_ERROR:
       instance->ReportError(msg);
+      instance->finishing_ = true;
       g_main_loop_quit(instance->event_loop_);
       break;
 
@@ -219,11 +220,13 @@ GstBusSyncReply Chromaprinter::BusCallbackSync(GstBus*, GstMessage* msg,
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
+      instance->finishing_ = true;
       g_main_loop_quit(instance->event_loop_);
       break;
 
     case GST_MESSAGE_ERROR:
       instance->ReportError(msg);
+      instance->finishing_ = true;
       g_main_loop_quit(instance->event_loop_);
       break;
 
