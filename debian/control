@@ -32,11 +32,11 @@ Build-Depends: debhelper (>= 7),
                protobuf-compiler,
                libprotobuf-dev,
                libqca2-dev,
-               libchromaprint-dev | libfftw3-dev,
                libfftw3-dev,
                libsparsehash-dev,
                libsqlite3-dev,
-               libpulse-dev
+               libpulse-dev,
+               libmygpo-qt-dev (>= 1.0.7)
 Standards-Version: 3.8.1
 Homepage: http://www.clementine-player.org/
 
