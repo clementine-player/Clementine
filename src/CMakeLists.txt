@@ -125,7 +125,6 @@ set(SOURCES
   covers/coversearchstatistics.cpp
   covers/coversearchstatisticsdialog.cpp
   covers/currentartloader.cpp
-  covers/discogscoverprovider.cpp
   covers/kittenloader.cpp
   covers/musicbrainzcoverprovider.cpp
 
@@ -446,7 +445,6 @@ set(HEADERS
   covers/coverproviders.h
   covers/coversearchstatisticsdialog.h
   covers/currentartloader.h
-  covers/discogscoverprovider.h
   covers/kittenloader.h
   covers/musicbrainzcoverprovider.h
 

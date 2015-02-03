@@ -58,7 +58,6 @@
 #include "core/utilities.h"
 #include "covers/amazoncoverprovider.h"
 #include "covers/coverproviders.h"
-#include "covers/discogscoverprovider.h"
 #include "covers/musicbrainzcoverprovider.h"
 #include "engines/enginebase.h"
 #include "smartplaylists/generator.h"
@@ -463,7 +462,6 @@ int main(int argc, char* argv[]) {
   // Initialize the repository of cover providers.  Last.fm registers itself
   // when its service is created.
   app.cover_providers()->AddProvider(new AmazonCoverProvider);
-  app.cover_providers()->AddProvider(new DiscogsCoverProvider);
   app.cover_providers()->AddProvider(new MusicbrainzCoverProvider);
 
 #ifdef Q_OS_LINUX
