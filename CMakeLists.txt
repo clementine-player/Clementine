@@ -66,7 +66,6 @@ pkg_check_modules(GSTREAMER_APP REQUIRED gstreamer-app-1.0)
 pkg_check_modules(GSTREAMER_AUDIO REQUIRED gstreamer-audio-1.0)
 pkg_check_modules(GSTREAMER_BASE REQUIRED gstreamer-base-1.0)
 pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
-pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
@@ -231,10 +230,6 @@ optional_component(GIO ON "Devices: GIO device backend"
 
 optional_component(LIBMTP ON "Devices: MTP support"
   DEPENDS "libmtp" LIBMTP_FOUND
-)
-
-optional_component(SOUNDMENU ON "Gnome sound menu integration"
-  DEPENDS "indicate-qt" INDICATEQT_FOUND
 )
 
 optional_component(LIBLASTFM ON "Last.fm support"

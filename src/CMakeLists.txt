@@ -43,11 +43,6 @@ include_directories(${MYGPOQT_INCLUDE_DIRS})
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
 
-if(HAVE_LIBINDICATE)
-  link_directories(${INDICATEQT_LIBRARY_DIRS})
-  include_directories(${INDICATEQT_INCLUDE_DIRS})
-endif(HAVE_LIBINDICATE)
-
 if(HAVE_LIBLASTFM)
   include_directories(${LASTFM_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
@@ -1288,10 +1283,6 @@ endif()
 if(HAVE_LIBMTP)
   target_link_libraries(clementine_lib ${LIBMTP_LIBRARIES})
 endif(HAVE_LIBMTP)
-
-if(HAVE_LIBINDICATE)
-  target_link_libraries(clementine_lib ${INDICATEQT_LIBRARIES})
-endif(HAVE_LIBINDICATE)
 
 if(HAVE_BREAKPAD)
   if (LINUX)
