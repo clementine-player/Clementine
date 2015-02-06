@@ -49,7 +49,7 @@ Task::Task(PodcastEpisode episode, QFile* file, PodcastBackend* backend)
   connect(repl.get(), SIGNAL(finished()), SLOT(finishedInternal()));
   connect(repl.get(), SIGNAL(downloadProgress(qint64, qint64)),
           SLOT(downloadProgressInternal(qint64, qint64)));
-  emit ProgressChanged(episode_, PodcastDownload::Downloading, 0);
+  emit ProgressChanged(episode_, PodcastDownload::Queued, 0);
 }
 
 PodcastEpisode Task::episode() const { return episode_; }
