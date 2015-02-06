@@ -358,14 +358,8 @@ else (USE_SYSTEM_QXT)
   endif (NOT APPLE)
 endif (USE_SYSTEM_QXT)
 
-# Use system libechonest if it's available
 find_path(ECHONEST_INCLUDE_DIRS echonest/echonest_export.h)
 find_library(ECHONEST_LIBRARIES echonest)
-if(NOT ECHONEST_INCLUDE_DIRS OR NOT ECHONEST_LIBRARIES)
-  add_subdirectory(3rdparty/libechonest)
-  set(ECHONEST_INCLUDE_DIRS ${CMAKE_BINARY_DIR}/3rdparty/libechonest)
-  set(ECHONEST_LIBRARIES echonest)
-endif(NOT ECHONEST_INCLUDE_DIRS OR NOT ECHONEST_LIBRARIES)
 
 # Use system gmock if it's available
 # We need to look for both gmock and gtest
