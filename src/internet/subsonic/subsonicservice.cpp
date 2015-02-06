@@ -426,6 +426,7 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
   } else if (album_queue_.size() == 0) {
     // Empty reply and no albums means an empty Subsonic server
     scanning_ = false;
+    emit ScanFinished();
   } else {
     // Empty reply but we have some albums, time to start fetching songs
     // Start up the maximum number of concurrent requests, finished requests get
