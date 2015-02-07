@@ -839,15 +839,26 @@ void SpotifyService::ItemDoubleClicked(QStandardItem* item) {}
 
 void SpotifyService::DropMimeData(const QMimeData* data,
                                   const QModelIndex& index) {
-  QVariant q_playlist_index = index.data(Role_UserPlaylistIndex);
-  if (!q_playlist_index.isValid()) {
+
+  QModelIndex playlist_root_index = index;
+  QVariant q_playlist_type = playlist_root_index.data(InternetModel::Role_Type);
+  if (!q_playlist_type.isValid()) {
     // In case song was dropped on a playlist item, not on the playlist
     // title/root element
-    q_playlist_index = index.parent().data(Role_UserPlaylistIndex);
+    playlist_root_index = index.parent();
+    q_playlist_type = playlist_root_index.data(InternetModel::Role_Type);
   }
-  if (!q_playlist_index.isValid()) return;
 
-  AddSongsToUserPlaylist(q_playlist_index.toInt(), data->urls());
+  if (!q_playlist_type.isValid()) return;
+
+  int playlist_type = q_playlist_type.toInt();
+  if (playlist_type == Type_StarredPlaylist) {
+    AddSongsToStarred(data->urls());
+  } else if (playlist_type == InternetModel::Type_UserPlaylist) {
+    QVariant q_playlist_index = playlist_root_index.data(Role_UserPlaylistIndex);
+    if (!q_playlist_index.isValid()) return;
+    AddSongsToUserPlaylist(q_playlist_index.toInt(), data->urls());
+  }
 }
 
 void SpotifyService::LoadImage(const QString& id) {
