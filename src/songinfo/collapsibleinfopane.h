@@ -38,6 +38,7 @@ class CollapsibleInfoPane : public QWidget {
       Type_Similar,
       Type_Biography,
       Type_Lyrics,
+      Type_Twitter,
       TypeCount
     };
 

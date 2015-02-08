@@ -192,6 +192,16 @@ void Echonest::Artist::setTerms(const Echonest::TermList& terms)
     d->terms = terms;
 }
 
+QString Echonest::Artist::twitter() const
+{
+    return d->twitter;
+}
+
+void Echonest::Artist::setTwitter(const QString& twitter)
+{
+    d->twitter = twitter;
+}
+
 QUrl Echonest::Artist::amazonUrl() const
 {
     return d->amazon_url;
@@ -382,6 +392,12 @@ QNetworkReply* Echonest::Artist::fetchTerms( Echonest::Artist::TermSorting sorti
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
+QNetworkReply* Echonest::Artist::fetchTwitter() const
+{
+    QUrl url = setupQuery( "twitter", 0, -1 );
+
+    return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
+}
 
 QNetworkReply* Echonest::Artist::fetchUrls() const
 {
@@ -451,7 +467,6 @@ QNetworkReply* Echonest::Artist::suggest( const QString& name, int results )
 
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
-
 
 int Echonest::Artist::parseProfile( QNetworkReply* reply ) throw( Echonest::ParseError )
 {
