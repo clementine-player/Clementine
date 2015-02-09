@@ -11,14 +11,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # 현구 임 <bradlim980@gmail.com>, 2012
 # 박정용 <kladess@gmail.com>, 2013
-# 박정용 <kladess@gmail.com>, 2014
+# 박정용 <kladess@gmail.com>, 2014-2015
 # Thomas Min <thomas.min.v2@gmail.com>, 2013
 # whdgmawkd <whdgmawkd@naver.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-02-09 01:14+0000\n"
+"Last-Translator: 박정용 <kladess@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -92,7 +92,7 @@ msgstr "%1일 전"
 #: internet/podcasts/gpoddersync.cpp:84
 #, qt-format
 msgid "%1 on %2"
-msgstr ""
+msgstr "%2의 %1"
 
 #: playlistparsers/playlistparser.cpp:76
 #, qt-format
@@ -398,7 +398,7 @@ msgstr "Qt 정보"
 #: playlist/playlistsaveoptionsdialog.cpp:34
 #: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Absolute"
-msgstr ""
+msgstr "절대경로"
 
 #: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -419,7 +419,7 @@ msgstr "동작"
 #: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgctxt "Category label"
 msgid "Action"
-msgstr ""
+msgstr "동작"
 
 #: wiimotedev/wiimotesettingspage.cpp:96
 msgid "Active/deactive Wiiremote"
@@ -427,7 +427,7 @@ msgstr "Wii 리모컨 사용/중지"
 
 #: internet/soundcloud/soundcloudservice.cpp:125
 msgid "Activities stream"
-msgstr ""
+msgstr "활동 스트림"
 
 #: internet/podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
@@ -595,11 +595,11 @@ msgstr "내 음악에 추가"
 
 #: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify playlists"
-msgstr ""
+msgstr "Spotify 재색목록에 추가"
 
 #: internet/spotify/spotifyservice.cpp:610
 msgid "Add to Spotify starred"
-msgstr ""
+msgstr "Spotify 별점에 추가"
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -699,7 +699,7 @@ msgstr " jamendo.com 앨범 정보..."
 
 #: internet/vk/vkservice.cpp:827
 msgid "Albums"
-msgstr ""
+msgstr "앨범(들)"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -711,7 +711,7 @@ msgstr "앨범 표지가 없는 앨범"
 
 #: ../bin/src/ui_podcastsettingspage.h:279
 msgid "All"
-msgstr ""
+msgstr "전체"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -869,7 +869,7 @@ msgstr "음악가 이니셜"
 
 #: ../bin/src/ui_behavioursettingspage.h:310
 msgid "Ask when saving"
-msgstr ""
+msgstr "저장할 때 묻기"
 
 #: ../bin/src/ui_transcodedialog.h:222
 #: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
@@ -902,7 +902,7 @@ msgstr "자동"
 #: playlist/playlistsaveoptionsdialog.cpp:32
 #: ../bin/src/ui_behavioursettingspage.h:307
 msgid "Automatic"
-msgstr ""
+msgstr "자동"
 
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
@@ -1048,7 +1048,7 @@ msgstr "버튼"
 
 #: ../bin/src/ui_groovesharksettingspage.h:139
 msgid "By default, Grooveshark sorts songs on date added"
-msgstr ""
+msgstr "기본적으로 Grooveshark는 추가한 날짜순으로 정렬됨"
 
 #: core/song.cpp:415
 msgid "CDDA"
@@ -1077,7 +1077,7 @@ msgstr "취소"
 
 #: internet/podcasts/podcastservice.cpp:439
 msgid "Cancel download"
-msgstr ""
+msgstr "다운로드 취소"
 
 #: internet/vk/vkservice.cpp:626
 msgid ""
@@ -1351,7 +1351,7 @@ msgstr "Magnatune 설정..."
 msgid "Configure Shortcuts"
 msgstr "단축키 설정"
 
-#: internet/spotify/spotifyservice.cpp:900
+#: internet/spotify/spotifyservice.cpp:911
 msgid "Configure Spotify..."
 msgstr "Spotify 설정..."
 
@@ -1432,7 +1432,7 @@ msgstr ""
 
 #: ../bin/src/ui_networkremotesettingspage.h:250
 msgid "Convert lossless files"
-msgstr ""
+msgstr "무손실 파일 변환"
 
 #: internet/vk/vkservice.cpp:324
 msgid "Copy share url to clipboard"
@@ -1677,7 +1677,7 @@ msgstr "기본 배경 그림"
 #: engines/gstengine.cpp:922
 #, qt-format
 msgid "Default device on %1"
-msgstr ""
+msgstr "%1를 기본 장치로 설정"
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
@@ -2058,7 +2058,7 @@ msgstr "Clementine이 활성화 되었을 때에만 단축키 허용"
 
 #: ../bin/src/ui_behavioursettingspage.h:278
 msgid "Enable song metadata inline edition with click"
-msgstr ""
+msgstr "클릭으로 음악 메타데이터 인라인판 사용"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2395,7 +2395,7 @@ msgstr "파일 명 규칙:"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:96
 msgid "File paths"
-msgstr ""
+msgstr "파일 경로"
 
 #: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
@@ -2752,7 +2752,7 @@ msgstr "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
 #: ../bin/src/ui_transcodedialog.h:220
 msgid "Import..."
-msgstr ""
+msgstr "가져오기..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3288,7 +3288,7 @@ msgstr "최저 비트 전송률"
 
 #: ../bin/src/ui_playbacksettingspage.h:336
 msgid "Minimum buffer fill"
-msgstr ""
+msgstr "최소 버퍼량"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3369,7 +3369,7 @@ msgstr "음소거"
 
 #: internet/vk/vkservice.cpp:820
 msgid "My Albums"
-msgstr ""
+msgstr "나의 앨범"
 
 #: internet/grooveshark/groovesharkservice.cpp:633
 #: internet/vk/vkservice.cpp:878
@@ -3556,7 +3556,7 @@ msgstr "지금 재생중"
 
 #: ../bin/src/ui_podcastsettingspage.h:280
 msgid "Number of episodes to show"
-msgstr ""
+msgstr "에피소드의 수를 표시"
 
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
@@ -3734,7 +3734,7 @@ msgstr "기존 파일들 "
 
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Overwrite smaller ones only"
-msgstr ""
+msgstr "작은 것들만 덮어 쓰기"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -4109,7 +4109,7 @@ msgstr "레게"
 #: playlist/playlistsaveoptionsdialog.cpp:33
 #: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Relative"
-msgstr ""
+msgstr "상대경로"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
@@ -4392,7 +4392,7 @@ msgstr "트랙 저장 중"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
-msgstr "Scalable sampling rate profile (SSR)"
+msgstr "확장 가능한 샘플링 속도 프로파일 (SSR)"
 
 #: ../bin/src/ui_albumcoverexport.h:213
 msgid "Scale size"
@@ -4831,7 +4831,7 @@ msgstr "방송국 이름으로 정렬"
 
 #: ../bin/src/ui_groovesharksettingspage.h:146
 msgid "Sort playlists songs alphabetically"
-msgstr ""
+msgstr "노래제목으로 정렬(철자순)"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
@@ -5237,7 +5237,7 @@ msgstr "대기열 상황 토글"
 
 #: ../bin/src/ui_mainwindow.h:708
 msgid "Toggle scrobbling"
-msgstr ""
+msgstr "잡음 토글"
 
 #: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
@@ -5275,7 +5275,7 @@ msgstr "트랙"
 
 #: internet/soundcloud/soundcloudservice.cpp:133
 msgid "Tracks"
-msgstr ""
+msgstr "트랙"
 
 #: ../bin/src/ui_transcodedialog.h:210 ../bin/src/ui_mainwindow.h:687
 msgid "Transcode Music"
@@ -5603,7 +5603,7 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:306
 msgid "When saving a playlist, file paths should be"
-msgstr ""
+msgstr "재생목록을 저장할 때, 파일경로 처리 방식"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
@@ -5687,7 +5687,7 @@ msgstr "모든 음악에 통계를 작성"
 
 #: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Write metadata"
-msgstr ""
+msgstr "메타데이터 작성"
 
 #: internet/subsonic/subsonicsettingspage.cpp:101
 msgid "Wrong username or password."
