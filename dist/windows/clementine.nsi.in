@@ -225,6 +225,8 @@ Section "Delete old files" oldfiles
 
   ; No longer using built-in libechonest
   Delete "libechonest.dll"
+  ; No longer using built-in chromaprint
+  Delete "libchromaprint.dll"
 SectionEnd
 
 Section "Clementine" Clementine
@@ -236,6 +238,7 @@ Section "Clementine" Clementine
   File "clementine.ico"
   File "glew32.dll"
   File "libcdio-16.dll"
+  File "libchromaprint.dll"
   File "libeay32.dll"
   File "libechonest.dll"
   File "libfaac.dll"
