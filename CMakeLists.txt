@@ -388,17 +388,6 @@ else()
   set(SHA2_LIBRARIES sha2)
 endif()
 
-# Use our 3rdparty chromaprint if a system one wasn't found
-if(NOT CHROMAPRINT_FOUND)
-  add_subdirectory(3rdparty/chromaprint)
-  set(CHROMAPRINT_LIBRARIES chromaprint_p)
-  set(CHROMAPRINT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/chromaprint/src)
-
-  if(WIN32)
-    add_definitions(-DCHROMAPRINT_NODLL)
-  endif(WIN32)
-endif(NOT CHROMAPRINT_FOUND)
-
 # Use the system libmygpo-qt if a recent enough version was found
 if(LIBMYGPO_QT_FOUND)
   set(MYGPOQT_LIBRARIES ${LIBMYGPO_QT_LIBRARIES})
