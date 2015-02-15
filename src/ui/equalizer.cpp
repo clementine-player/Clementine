@@ -124,6 +124,12 @@ void Equalizer::LoadDefaultPresets() {
             Params(-50, -50, -50, -25, 15, 55, 80, 80, 80, 85));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Full Bass + Treble"),
             Params(35, 30, 0, -40, -25, 10, 45, 55, 60, 60));
+  // HipHop equalizer created by Devyn Collier Johnson
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "HipHop"),
+            Params(88, 100, 100, -23, -27, 12, 100, 0, 50, 73, 0));
+  // Kuduro equalizer created by Devyn Collier Johnson
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Kuduro"),
+            Params(65, -100, 15, 62, -38, 88, 100, -46, 23, -100, 0));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Laptop/Headphones"),
             Params(25, 50, 25, -20, 0, -30, -40, -40, 0, 0));
   AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Large Hall"),
