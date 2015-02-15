@@ -250,13 +250,7 @@ static BreakpadRef InitBreakpad() {
   [delegate_ setShortcutHandler:shortcut_handler_];
   [self setDelegate:delegate_];
 
-  Class notification_center_class =
-      NSClassFromString(@"NSUserNotificationCenter");
-  if (notification_center_class) {
-    id notification_center =
-        [notification_center_class defaultUserNotificationCenter];
-    [notification_center setDelegate:delegate_];
-  }
+  [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:delegate_];
 }
 
 - (void)sendEvent:(NSEvent*)event {

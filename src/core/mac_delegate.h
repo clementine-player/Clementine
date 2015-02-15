@@ -29,7 +29,7 @@
 class PlatformInterface;
 @class SPMediaKeyTap;
 
-@interface AppDelegate : NSObject<NSApplicationDelegate> {
+@interface AppDelegate : NSObject<NSApplicationDelegate, NSUserNotificationCenterDelegate> {
   PlatformInterface* application_handler_;
   NSMenu* dock_menu_;
   MacGlobalShortcutBackend* shortcut_handler_;
