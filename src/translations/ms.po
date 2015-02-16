@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-08 12:02+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/projects/p/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -819,7 +819,7 @@ msgstr "Tambah ke senarai main"
 msgid "Apply compression to prevent clipping"
 msgstr "Laksana pemampatan untuk hindari pengeratan"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Anda pasti mahu memadam praset \"%1\"?"
@@ -1711,7 +1711,7 @@ msgstr "Padam dari cakera..."
 msgid "Delete played episodes"
 msgstr "Padam episod telah dimain"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Padam praset"
 
@@ -2686,6 +2686,10 @@ msgstr "Tinggi (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Tinggi (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Hos tidak ditemui, periksa URL pelayan. Contoh: http://localhost:4040/"
@@ -2929,15 +2933,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kittens"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Bahasa"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Komputer Riba/Fon Kepala"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Dewan Besar"
 
@@ -3033,7 +3041,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Dengar lagu Grooveshark berdasarkan apa yang anda dengari sebelum ini"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Langsung"
 
@@ -3373,7 +3381,7 @@ msgid "My Recommendations"
 msgstr "Cadangan Saya"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Nama"
@@ -3736,7 +3744,7 @@ msgstr "Pemilik"
 msgid "Parsing Jamendo catalogue"
 msgstr "Menghurai katalog Jamendo"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Parti"
 
@@ -3849,7 +3857,7 @@ msgstr "Status pemalam:"
 msgid "Podcasts"
 msgstr "Podcats"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3971,7 +3979,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Kemajuan"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psikedelik"
 
@@ -4094,7 +4102,7 @@ msgstr "Segar semula senarai stesen"
 msgid "Refresh streams"
 msgstr "Segar semula strim"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4294,7 +4302,7 @@ msgstr "Retas CD"
 msgid "Rip audio CD..."
 msgstr "Retas CD audio..."
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4358,7 +4366,7 @@ msgstr "Simpan senarai main"
 msgid "Save playlist..."
 msgstr "Simpan senarai main..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Simpan praset"
 
@@ -4745,7 +4753,7 @@ msgstr "Saiz"
 msgid "Size:"
 msgstr "Saiz:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4785,11 +4793,11 @@ msgstr "Senarai main pintar"
 msgid "Smart playlists"
 msgstr "Senarai main pintar"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -5036,7 +5044,7 @@ msgstr "Pengambil tag"
 msgid "Target bitrate"
 msgstr "Kadar bit sasaran"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Tekno"
 
@@ -5851,7 +5859,7 @@ msgstr "Nama pengguna atau kata laluan anda tidak betul."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Sifar"
 

@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 22:00+0000\n"
-"Last-Translator: Senno Kaasjager <senno.kaasjager@gmail.com>\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -826,7 +826,7 @@ msgstr "Aan de afspeellijst toevoegen"
 msgid "Apply compression to prevent clipping"
 msgstr "Compressie toepassen om vervorming te voorkomen"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Weet u zeker dat u voorinstelling ‘%1’ wilt wissen?"
@@ -1718,7 +1718,7 @@ msgstr "Van schijf verwijderen…"
 msgid "Delete played episodes"
 msgstr "Verwijder afgespeelde afleveringen"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Voorinstelling verwijderen"
 
@@ -2693,6 +2693,10 @@ msgstr "Hoog (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Hoog (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Host niet gevonden, controleer de URL van de server. Bijvoorbeeld: http://localhost:4040/"
@@ -2936,15 +2940,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Poesjes"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Taal"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Laptop/koptelefoon"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Grote hal"
 
@@ -3040,7 +3048,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Luister naar Groovshark nummers op basis van je luister historie"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Live"
 
@@ -3380,7 +3388,7 @@ msgid "My Recommendations"
 msgstr "Mijn aanbevelingen"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Naam"
@@ -3743,7 +3751,7 @@ msgstr "Eigenaar"
 msgid "Parsing Jamendo catalogue"
 msgstr "Jamendo-catalogus verwerken"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Party"
 
@@ -3856,7 +3864,7 @@ msgstr "Plug-in status:"
 msgid "Podcasts"
 msgstr "Podcasts"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3978,7 +3986,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Voortgang"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psychedelisch"
 
@@ -4101,7 +4109,7 @@ msgstr "Lijst met stations verversen"
 msgid "Refresh streams"
 msgstr "Lijst met radiostreams verversen"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4301,7 +4309,7 @@ msgstr "Rip CD"
 msgid "Rip audio CD..."
 msgstr "Rip audio CD"
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4365,7 +4373,7 @@ msgstr "Afspeellijst opslaan"
 msgid "Save playlist..."
 msgstr "Afspeellijst opslaan..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Voorinstelling opslaan"
 
@@ -4752,7 +4760,7 @@ msgstr "Groote"
 msgid "Size:"
 msgstr "Groote:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4792,11 +4800,11 @@ msgstr "Slimme afspeellijst"
 msgid "Smart playlists"
 msgstr "Slimme afspeellijsten"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Zacht"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -5043,7 +5051,7 @@ msgstr "Labels ophalen"
 msgid "Target bitrate"
 msgstr "Doelbitrate"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5858,7 +5866,7 @@ msgstr "Uw gebruikersnaam of wachtwoord is niet correct."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Nul"
 

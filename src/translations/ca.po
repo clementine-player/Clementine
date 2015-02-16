@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-02 03:05+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -824,7 +824,7 @@ msgstr "Afegeix a la llista de reproducció"
 msgid "Apply compression to prevent clipping"
 msgstr "Aplica compressió per evitar el «clipping»"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Esteu segur que voleu eliminar la predefinició «%1»?"
@@ -1716,7 +1716,7 @@ msgstr "Suprimeix del disc…"
 msgid "Delete played episodes"
 msgstr "Suprimeix els episodis escoltats"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Elimina la predefinició"
 
@@ -2691,6 +2691,10 @@ msgstr "Alta (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Alta (1024 × 1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "No s’ha trobat l’amfitrió, comproveu l’URL del servidor. Exemple: http://localhost:4040/"
@@ -2934,15 +2938,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Gatets"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Idioma"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Portàtil/auriculars"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Saló gran"
 
@@ -3038,7 +3046,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Escolteu cançons de l’Grooveshark basant-se en allò que s’ha reproduït prèviament "
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "En directe"
 
@@ -3378,7 +3386,7 @@ msgid "My Recommendations"
 msgstr "Les meves recomanacions"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Nom"
@@ -3741,7 +3749,7 @@ msgstr "Propietari"
 msgid "Parsing Jamendo catalogue"
 msgstr "S’està analitzant el catàleg del Jamendo"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Festa"
 
@@ -3854,7 +3862,7 @@ msgstr "Estat del connector"
 msgid "Podcasts"
 msgstr "Podcasts"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3976,7 +3984,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Progrés"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psicodèlic"
 
@@ -4099,7 +4107,7 @@ msgstr "Actualitza la llista d’emissores"
 msgid "Refresh streams"
 msgstr "Refresca els fluxes"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4299,7 +4307,7 @@ msgstr "Captura un CD"
 msgid "Rip audio CD..."
 msgstr "Captura un CD d’àudio…"
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4363,7 +4371,7 @@ msgstr "Desa la llista de reproducció"
 msgid "Save playlist..."
 msgstr "Desa la llista de reproducció..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Desa els valors"
 
@@ -4750,7 +4758,7 @@ msgstr "Mida"
 msgid "Size:"
 msgstr "Mida:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4790,11 +4798,11 @@ msgstr "Llista de reproducció intel·ligent"
 msgid "Smart playlists"
 msgstr "Llistes de reproducció intel·ligents"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Suau"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Rock suau"
 
@@ -5041,7 +5049,7 @@ msgstr "Recolector d'etiquetes"
 msgid "Target bitrate"
 msgstr "Taxa de bits desitjada"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5856,7 +5864,7 @@ msgstr "El vostre nom usuari o la contrasenya són incorrectes"
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Zero"
 

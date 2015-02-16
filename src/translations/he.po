@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -823,7 +823,7 @@ msgstr "הוספת לרשימת ההשמעה"
 msgid "Apply compression to prevent clipping"
 msgstr "הפעלת כיווץ כדי למנוע חיתוך"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "האם למחוק את האפשרות הקבועה „%1“?"
@@ -1715,7 +1715,7 @@ msgstr "מחיקה מתוך דיסק..."
 msgid "Delete played episodes"
 msgstr "מחיקת פרקים שנוגנו"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "מחיקת אפשרות מוגדרת מראש"
 
@@ -2690,6 +2690,10 @@ msgstr "גבוה (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "גבוה (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr ""
@@ -2933,15 +2937,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "שפה"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "מחשב נייד/אוזניות"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "חלל גדול"
 
@@ -3037,7 +3045,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "האזנה לשירים מ־Grooveshark בהתבסס על שירים שהושמעו בעבר"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "חי"
 
@@ -3377,7 +3385,7 @@ msgid "My Recommendations"
 msgstr "ההמלצות שלי"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "שם"
@@ -3740,7 +3748,7 @@ msgstr "בעלים"
 msgid "Parsing Jamendo catalogue"
 msgstr "הקטלוג של Jamendo מפוענח"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "מסיבה"
 
@@ -3853,7 +3861,7 @@ msgstr "מצב התוסף:"
 msgid "Podcasts"
 msgstr "פודקאסטים"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "פופ"
 
@@ -3975,7 +3983,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr ""
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr ""
 
@@ -4098,7 +4106,7 @@ msgstr "רענון רשימת התחנות"
 msgid "Refresh streams"
 msgstr "רענון ההזרמות"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "רגאיי"
 
@@ -4298,7 +4306,7 @@ msgstr ""
 msgid "Rip audio CD..."
 msgstr ""
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "רוק"
 
@@ -4362,7 +4370,7 @@ msgstr ""
 msgid "Save playlist..."
 msgstr "שמירת רשימת ההשמעה..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "שמירה כאפשרות מוגדרת מראש"
 
@@ -4749,7 +4757,7 @@ msgstr "גודל"
 msgid "Size:"
 msgstr "גודל:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "סקא"
 
@@ -4789,11 +4797,11 @@ msgstr "רשימת השמעה חכמה"
 msgid "Smart playlists"
 msgstr "רשימות השמעה חכמות"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "רך"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "רוק קל"
 
@@ -5040,7 +5048,7 @@ msgstr "משיג תגים"
 msgid "Target bitrate"
 msgstr "קצב הסיביות של היעד"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "טכנו"
 
@@ -5855,7 +5863,7 @@ msgstr "שם המשתמש או הססמה שגויים"
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "אפס"
 

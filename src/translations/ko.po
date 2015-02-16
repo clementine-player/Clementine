@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-09 01:14+0000\n"
-"Last-Translator: 박정용 <kladess@gmail.com>\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -827,7 +827,7 @@ msgstr "재생목록에 추가"
 msgid "Apply compression to prevent clipping"
 msgstr "클리핑 방지를 위한 압축 적용"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" 프리셋을 정말 지우시겠습니까?"
@@ -1719,7 +1719,7 @@ msgstr "디스크에서 삭제..."
 msgid "Delete played episodes"
 msgstr "재생된 에피소드 삭제"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "프리셋 삭제"
 
@@ -2694,6 +2694,10 @@ msgstr "높음 (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "높음 (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "호스트가 발견되지 않았습니다. 서버의 주소를 확인하세요. 예)http://localhost:4040/"
@@ -2937,15 +2941,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "고양이"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "언어"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "노트북/헤드폰"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "거대한 홀"
 
@@ -3041,7 +3049,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr ""
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "라이브"
 
@@ -3381,7 +3389,7 @@ msgid "My Recommendations"
 msgstr "내 추천목록"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "이름"
@@ -3744,7 +3752,7 @@ msgstr "소유자"
 msgid "Parsing Jamendo catalogue"
 msgstr "Jamendo 목록 구성 중"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "파티"
 
@@ -3857,7 +3865,7 @@ msgstr "플러그인 상태:"
 msgid "Podcasts"
 msgstr "팟케스트"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "팝"
 
@@ -3979,7 +3987,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "진행"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "사이키델릭"
 
@@ -4102,7 +4110,7 @@ msgstr "방송국 목록 새로고침"
 msgid "Refresh streams"
 msgstr "스트림 새로고침"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "레게"
 
@@ -4302,7 +4310,7 @@ msgstr "CD "
 msgid "Rip audio CD..."
 msgstr "오디오 CD "
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "록"
 
@@ -4366,7 +4374,7 @@ msgstr "재생목록 저장"
 msgid "Save playlist..."
 msgstr "재생목록 저장..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "프리셋 저장"
 
@@ -4753,7 +4761,7 @@ msgstr "크기"
 msgid "Size:"
 msgstr "크기:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "스카"
 
@@ -4793,11 +4801,11 @@ msgstr "스마트 재생목록"
 msgid "Smart playlists"
 msgstr "스마트 재생목록"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "소프트"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "소프트 록"
 
@@ -5044,7 +5052,7 @@ msgstr "태그 가져오기"
 msgid "Target bitrate"
 msgstr "목표 비트 전송률"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "테크노"
 
@@ -5859,7 +5867,7 @@ msgstr "사용자명 또는 비밀번호가 틀렸습니다."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "제로"
 

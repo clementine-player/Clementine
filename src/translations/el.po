@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -826,7 +826,7 @@ msgstr "Προσάρτηση στην λίστα αναπαραγωγής"
 msgid "Apply compression to prevent clipping"
 msgstr "Εφαρμογή συμπίεσης για αποφυγή κολλημάτων"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Είστε σίγουροι πως θέλετε να διαγράψετε τη ρύθμιση \"%1\";"
@@ -1718,7 +1718,7 @@ msgstr "Διαγραφή από τον δίσκο..."
 msgid "Delete played episodes"
 msgstr "Διαγραφή επεισοδίων που έχουν αναπαραχθεί"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Διαγραφή ρύθμισης"
 
@@ -2693,6 +2693,10 @@ msgstr "Υψηλή (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Υψηλή (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "O Host δεν βρέθηκε, ελέγξτε το URL του διακομιστή. Παράδειγμα: http://localhost:4040/"
@@ -2936,15 +2940,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Γατάκια"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Γλώσσα"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Φορητός/ακουστικά"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Μεγάλη αίθουσα"
 
@@ -3040,7 +3048,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Ακούστε τραγούδια από το Grooveshark παρόμοια με αυτά που έχετε ακούσει προηγουμένως"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Ζωντανά"
 
@@ -3380,7 +3388,7 @@ msgid "My Recommendations"
 msgstr "Οι Προτάσεις μου"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Όνομα"
@@ -3743,7 +3751,7 @@ msgstr "Ιδιοκτήτης"
 msgid "Parsing Jamendo catalogue"
 msgstr "Ανάλυση του καταλόγου Jamendo"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Πάρτι"
 
@@ -3856,7 +3864,7 @@ msgstr "Κατάσταση πρόσθετου:"
 msgid "Podcasts"
 msgstr "Podcasts"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3978,7 +3986,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Πρόοδος"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psychedelic"
 
@@ -4101,7 +4109,7 @@ msgstr "ανανέωση της λίστας σταθμών"
 msgid "Refresh streams"
 msgstr "Ανανέωση ροών"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4301,7 +4309,7 @@ msgstr ""
 msgid "Rip audio CD..."
 msgstr ""
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4365,7 +4373,7 @@ msgstr "Αποθήκευση λίστας αναπαραγωγής"
 msgid "Save playlist..."
 msgstr "Αποθήκευση λίστας αναπαραγωγής..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Αποθήκευση ρύθμισης"
 
@@ -4752,7 +4760,7 @@ msgstr "Μέγεθος"
 msgid "Size:"
 msgstr "Μέγεθος:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4792,11 +4800,11 @@ msgstr "Έξυπνη λίστα αναπαραγωγής"
 msgid "Smart playlists"
 msgstr "Έξυπνες λίστες αναπαραγωγής"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Απαλή"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Απαλή Rock"
 
@@ -5043,7 +5051,7 @@ msgstr "Μεταφορτωτής ετικετών"
 msgid "Target bitrate"
 msgstr "Ρυθμός bit στόχου"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5858,7 +5866,7 @@ msgstr "Το όνομα χρήστη ή το συνθηματικό ήταν λ�
 msgid "Z-A"
 msgstr "Ω-Α"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Zero"
 

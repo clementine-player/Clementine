@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-02 09:11+0000\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -822,7 +822,7 @@ msgstr "Įterpti į grojaraštį"
 msgid "Apply compression to prevent clipping"
 msgstr "Pritaikyti suspaudimą, kad išvengti nukirtimų"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ar tikrai norite ištrinti \"%1\" šabloną?"
@@ -1714,7 +1714,7 @@ msgstr "Ištrinti iš disko..."
 msgid "Delete played episodes"
 msgstr "Ištrinti atliktus epizodus"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Ištrinti šabloną"
 
@@ -2689,6 +2689,10 @@ msgstr "Aukšta (%1 kps)"
 msgid "High (1024x1024)"
 msgstr "Aukšta (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Mazgas nerastas, patikrinkite serverio URL. Pavyzdys: http://localhost:4040/"
@@ -2932,15 +2936,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kačiukai"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Kalba"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Nešiojamojo kompiuterio kolonėlės/ausinės"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Didelė salė"
 
@@ -3036,7 +3044,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Klausyti Grooveshark dainų pagal jūsų anksčiau klausytas dainas"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Gyvai"
 
@@ -3376,7 +3384,7 @@ msgid "My Recommendations"
 msgstr "Mano rekomendacijos"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Veiksmas"
@@ -3739,7 +3747,7 @@ msgstr "Savininkas"
 msgid "Parsing Jamendo catalogue"
 msgstr "Apdorojamas Jamendo katalogas"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Vakarėlis"
 
@@ -3852,7 +3860,7 @@ msgstr "Plėtinio būklė:"
 msgid "Podcasts"
 msgstr "Podcast"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3974,7 +3982,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Eiga"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psichodelinis"
 
@@ -4097,7 +4105,7 @@ msgstr "Atnaujinti stočių sąrašą"
 msgid "Refresh streams"
 msgstr "Atnaujinti srautus"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Regis"
 
@@ -4297,7 +4305,7 @@ msgstr "Perrašyti CD"
 msgid "Rip audio CD..."
 msgstr "Perrašyti audio CD..."
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rokas"
 
@@ -4361,7 +4369,7 @@ msgstr "Išsaugoti grojaraštį"
 msgid "Save playlist..."
 msgstr "Įrašyti grojaraštį..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Išsaugoti šabloną"
 
@@ -4748,7 +4756,7 @@ msgstr "Dydis"
 msgid "Size:"
 msgstr "Dydis:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4788,11 +4796,11 @@ msgstr "Išmanusis grojaraštis"
 msgid "Smart playlists"
 msgstr "Išmanūs grojaraščiai"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Rami"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Ramus rokas"
 
@@ -5039,7 +5047,7 @@ msgstr "Žymių gavėjas"
 msgid "Target bitrate"
 msgstr "Numatomas bitrate"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5854,7 +5862,7 @@ msgstr "Jūsų naudotojo vardas arba slaptažodis yra neteisingi."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Nulis"
 

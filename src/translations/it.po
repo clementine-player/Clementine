@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:39+0000\n"
+"PO-Revision-Date: 2015-02-16 01:18+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/clementine/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -822,7 +822,7 @@ msgstr "Aggiungi alla scaletta"
 msgid "Apply compression to prevent clipping"
 msgstr "Applica la compressione per evitare il fruscio"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Sei sicuro di voler eliminare la preimpostazione \"%1\"?"
@@ -1714,7 +1714,7 @@ msgstr "Elimina dal disco..."
 msgid "Delete played episodes"
 msgstr "Elimina le puntate scaricate"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Elimina la preimpostazione"
 
@@ -2689,6 +2689,10 @@ msgstr "Alto (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Alta (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr "HipHop"
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Host non trovato, controlla l'URL del server. Esempio: http://localhost:4040/"
@@ -2932,15 +2936,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Gattini"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr "Kuduro"
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Lingua"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Portatile/Cuffie"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Sala grande"
 
@@ -3036,7 +3044,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Ascolta brani di Grooveshark in base a quello che hai ascoltato in precedenza"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Live"
 
@@ -3376,7 +3384,7 @@ msgid "My Recommendations"
 msgstr "I miei consigli"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Nome"
@@ -3739,7 +3747,7 @@ msgstr "Proprietario"
 msgid "Parsing Jamendo catalogue"
 msgstr "Analisi del catalogo di Jamendo"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Festa"
 
@@ -3852,7 +3860,7 @@ msgstr "Stato del plugin:"
 msgid "Podcasts"
 msgstr "Podcast"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3974,7 +3982,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Avanzamento"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psichedelica"
 
@@ -4097,7 +4105,7 @@ msgstr "Aggiorna l'elenco delle stazioni"
 msgid "Refresh streams"
 msgstr "Aggiorna i flussi"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4297,7 +4305,7 @@ msgstr "Estrai CD"
 msgid "Rip audio CD..."
 msgstr "Estrai CD &audio..."
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4361,7 +4369,7 @@ msgstr "Salva la scaletta"
 msgid "Save playlist..."
 msgstr "Salva la scaletta..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Salva la preimpostazione"
 
@@ -4748,7 +4756,7 @@ msgstr "Dimensioni"
 msgid "Size:"
 msgstr "Dimensioni:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4788,11 +4796,11 @@ msgstr "Scaletta veloce"
 msgid "Smart playlists"
 msgstr "Scalette veloci"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Leggere"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Rock leggero"
 
@@ -5039,7 +5047,7 @@ msgstr "Strumento di recupero dei tag"
 msgid "Target bitrate"
 msgstr "Bitrate finale"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5854,7 +5862,7 @@ msgstr "Nome utente o password non corretta."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Zero"
 

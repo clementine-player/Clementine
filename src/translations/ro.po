@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -828,7 +828,7 @@ msgstr "Adaugă în lista de redare"
 msgid "Apply compression to prevent clipping"
 msgstr "Aplicați compresia pentru a preveni tăierea"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Sigur doriți să ștergeți preconfigurarea \"%1\"?"
@@ -1720,7 +1720,7 @@ msgstr "Șterge de pe disc..."
 msgid "Delete played episodes"
 msgstr "Șterge episoadele redate"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Șterge preconfigurarea"
 
@@ -2695,6 +2695,10 @@ msgstr "Înalt (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Înalt (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Gazda nu a fost găsită, verificați adresa URL a serverului. Exemplu: http://localhost:4040/"
@@ -2938,15 +2942,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Pisicuțe"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Limbă"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Laptop/Căști"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Sală mare"
 
@@ -3042,7 +3050,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Ascultați la Grooveshark melodii bazate pe ce ați ascultat anterior"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "În direct"
 
@@ -3382,7 +3390,7 @@ msgid "My Recommendations"
 msgstr "Recomandările mele"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Nume"
@@ -3745,7 +3753,7 @@ msgstr "Proprietar"
 msgid "Parsing Jamendo catalogue"
 msgstr "Analizare catalog Jamendo"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Petrecere"
 
@@ -3858,7 +3866,7 @@ msgstr "Stare modul:"
 msgid "Podcasts"
 msgstr "Podcast-uri"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3980,7 +3988,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Progres"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psihedelic"
 
@@ -4103,7 +4111,7 @@ msgstr "Reâmprospătare lista stațiilor"
 msgid "Refresh streams"
 msgstr "Reâmprospătare fluxuri"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4303,7 +4311,7 @@ msgstr "Extrage CD"
 msgid "Rip audio CD..."
 msgstr "Extrage CD audio..."
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4367,7 +4375,7 @@ msgstr "Salvează lista de redare"
 msgid "Save playlist..."
 msgstr "Salvează lista de redare..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Salvează preconfigurare"
 
@@ -4754,7 +4762,7 @@ msgstr "Dimensiune"
 msgid "Size:"
 msgstr "Dimensiune:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4794,11 +4802,11 @@ msgstr "Listă de redare inteligentă"
 msgid "Smart playlists"
 msgstr "Liste de redare inteligente"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -5045,7 +5053,7 @@ msgstr ""
 msgid "Target bitrate"
 msgstr "Rată de biți țintă"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5860,7 +5868,7 @@ msgstr "Parola sau numele de utilizator au fost incorecte."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Zero"
 

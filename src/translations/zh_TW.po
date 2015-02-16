@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -820,7 +820,7 @@ msgstr "附加到播放清單"
 msgid "Apply compression to prevent clipping"
 msgstr "使用壓縮，以防止截波失真"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "您確定您想要刪除預設的「%1」嗎?"
@@ -1712,7 +1712,7 @@ msgstr "從硬碟中刪除 ..."
 msgid "Delete played episodes"
 msgstr "刪除播放過的片斷內容"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "刪除預設"
 
@@ -2687,6 +2687,10 @@ msgstr "高 (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "高 (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr ""
@@ -2930,15 +2934,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "語言"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "筆記型電腦 /耳機"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "大型音樂廳"
 
@@ -3034,7 +3042,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "聽取 Grooveshark 歌曲，根據您先前已經聽過的"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "現場"
 
@@ -3374,7 +3382,7 @@ msgid "My Recommendations"
 msgstr "我推薦的電台"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "名稱"
@@ -3737,7 +3745,7 @@ msgstr "擁有者"
 msgid "Parsing Jamendo catalogue"
 msgstr "擷取 Jamendo目錄"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "派對"
 
@@ -3850,7 +3858,7 @@ msgstr "插件狀態："
 msgid "Podcasts"
 msgstr "Podcasts"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "流行音樂"
 
@@ -3972,7 +3980,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr ""
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr ""
 
@@ -4095,7 +4103,7 @@ msgstr "重新整理電台清單"
 msgid "Refresh streams"
 msgstr "重新整理串流"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "雷鬼"
 
@@ -4295,7 +4303,7 @@ msgstr ""
 msgid "Rip audio CD..."
 msgstr ""
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "搖滾"
 
@@ -4359,7 +4367,7 @@ msgstr ""
 msgid "Save playlist..."
 msgstr "儲存播放清單"
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "儲存設定"
 
@@ -4746,7 +4754,7 @@ msgstr ""
 msgid "Size:"
 msgstr ""
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "強節奏流行音樂"
 
@@ -4786,11 +4794,11 @@ msgstr "智慧型播放清單"
 msgid "Smart playlists"
 msgstr "智慧型播放清單"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "輕柔的音樂"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "比較輕柔的搖滾樂"
 
@@ -5037,7 +5045,7 @@ msgstr "標籤擷取器"
 msgid "Target bitrate"
 msgstr "目標位元率"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "電子音樂"
 
@@ -5852,7 +5860,7 @@ msgstr ""
 msgid "Z-A"
 msgstr ""
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Zero"
 

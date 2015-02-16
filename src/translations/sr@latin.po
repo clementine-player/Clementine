@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-02 19:36+0000\n"
+"PO-Revision-Date: 2015-02-15 22:26+0000\n"
 "Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
 "Language-Team: Serbian (Latin) (http://www.transifex.com/projects/p/clementine/language/sr@latin/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -820,7 +820,7 @@ msgstr "doda u listu numera"
 msgid "Apply compression to prevent clipping"
 msgstr "Primeni kompresiju kako bi se sprečilo odsecanje"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Želite li zaista da obrišete prepostavku „%1“?"
@@ -1712,7 +1712,7 @@ msgstr "Obriši sa diska..."
 msgid "Delete played episodes"
 msgstr "Obriši puštene epizode"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Obriši prepostavku"
 
@@ -2687,6 +2687,10 @@ msgstr "visok (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "visok (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr "Hip-hop"
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Domaćin nije nađen, proverite URL servera. Primer: http://localhost:4040/"
@@ -2930,15 +2934,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Mačići"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr "Kuduro"
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Jezik"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "laptop/slušalice"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "velika dvorana"
 
@@ -3034,7 +3042,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Slušajte pesme sa Gruvšarka birane na osnovu ranije preslušanih"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "uživo"
 
@@ -3374,7 +3382,7 @@ msgid "My Recommendations"
 msgstr "Moje preporuke"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Ime"
@@ -3737,7 +3745,7 @@ msgstr "Vlasnik"
 msgid "Parsing Jamendo catalogue"
 msgstr "Raščlanjujem Džamendov katalog"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "žurka"
 
@@ -3850,7 +3858,7 @@ msgstr "Stanje priključka:"
 msgid "Podcasts"
 msgstr "Podkasti"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "pop"
 
@@ -3972,7 +3980,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "napredak"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "psihodelično"
 
@@ -4095,7 +4103,7 @@ msgstr "Osveži spisak stanica"
 msgid "Refresh streams"
 msgstr "Osveži tokove"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "rege"
 
@@ -4295,7 +4303,7 @@ msgstr "Čupanje CD-a"
 msgid "Rip audio CD..."
 msgstr "Čupaj audio CD..."
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "rok"
 
@@ -4359,7 +4367,7 @@ msgstr "Upis liste numera"
 msgid "Save playlist..."
 msgstr "Sačuvaj listu numera..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Sačuvaj prepostavku"
 
@@ -4746,7 +4754,7 @@ msgstr "Veličina"
 msgid "Size:"
 msgstr "Veličina:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "ska"
 
@@ -4786,11 +4794,11 @@ msgstr "Pametna lista"
 msgid "Smart playlists"
 msgstr "Pametne liste"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "lagana"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "lagani rok"
 
@@ -5037,7 +5045,7 @@ msgstr "Dobavljač oznaka"
 msgid "Target bitrate"
 msgstr "Ciljani bitski protok"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "tehno"
 
@@ -5852,7 +5860,7 @@ msgstr "Vaše korisničko ime ili lozinka su netačni."
 msgid "Z-A"
 msgstr "Ž-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "ništa"
 

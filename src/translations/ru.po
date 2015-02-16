@@ -34,7 +34,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-02 06:50+0000\n"
+"PO-Revision-Date: 2015-02-15 22:04+0000\n"
 "Last-Translator: Andrei Stepanov\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -844,7 +844,7 @@ msgstr "Добавить в плейлист"
 msgid "Apply compression to prevent clipping"
 msgstr "Применить сжатие для предотвращения искажений"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Вы действительно хотите удалить профиль \"%1\"?"
@@ -1736,7 +1736,7 @@ msgstr "Удалить с диска..."
 msgid "Delete played episodes"
 msgstr "Удалять прослушанные выпуски"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Удалить профиль"
 
@@ -2711,6 +2711,10 @@ msgstr "Высокая (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Высокое (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr "Хип-хоп"
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Сервер не найден, проверьте адрес сервера. Пример: http://localhost:4040/"
@@ -2954,15 +2958,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Котята"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr "Кудуро"
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Язык"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Наушники/ноутбук"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Большой зал"
 
@@ -3058,7 +3066,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Слушать композиции на сервисе Grooveshark на основе ранее прослушанных"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Лайв"
 
@@ -3398,7 +3406,7 @@ msgid "My Recommendations"
 msgstr "Мои рекомендации"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Имя"
@@ -3761,7 +3769,7 @@ msgstr "Владелец"
 msgid "Parsing Jamendo catalogue"
 msgstr "Анализ каталога Jamendo"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Вечеринка"
 
@@ -3874,7 +3882,7 @@ msgstr "Статус модуля:"
 msgid "Podcasts"
 msgstr "Подкасты"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Поп"
 
@@ -3996,7 +4004,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Ход выполнения"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Психоделия"
 
@@ -4119,7 +4127,7 @@ msgstr "Обновить список станций"
 msgid "Refresh streams"
 msgstr "Обновить потоки"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Регги"
 
@@ -4319,7 +4327,7 @@ msgstr "Конвертировать CD"
 msgid "Rip audio CD..."
 msgstr "Конвертировать аудио-диск"
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Рок"
 
@@ -4383,7 +4391,7 @@ msgstr "Сохранить плейлист"
 msgid "Save playlist..."
 msgstr "Сохранить плейлист..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Сохранить профиль"
 
@@ -4770,7 +4778,7 @@ msgstr "Размер"
 msgid "Size:"
 msgstr "Размер:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ска"
 
@@ -4810,11 +4818,11 @@ msgstr "Умный плейлист"
 msgid "Smart playlists"
 msgstr "Умные плейлисты"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Мягкий"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Софт-рок"
 
@@ -5061,7 +5069,7 @@ msgstr "Сборщик тегов"
 msgid "Target bitrate"
 msgstr "Целевой битрейт"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Техно"
 
@@ -5876,7 +5884,7 @@ msgstr "Имя пользователя или пароль указаны не�
 msgid "Z-A"
 msgstr "Я-А (Z-A)"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "По-умолчанию"
 

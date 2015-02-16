@@ -11,7 +11,7 @@
 # Kristian <kristianm24@gmail.com>, 2012
 # Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>, 2014
 # paperbagcorner <mandersson444@gmail.com>, 2014
-# Patrik Nilsson <asavartzeth@gmail.com>, 2014
+# Patrik Nilsson <asavartzeth@gmail.com>, 2014-2015
 # pieorpaj <pie.or.paj@gmail.com>, 2013
 # pieorpaj <pie.or.paj@gmail.com>, 2012
 # Robin Poulsen <robin@karoko.se>, 2011
@@ -20,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-02-15 21:58+0000\n"
+"Last-Translator: Patrik Nilsson <asavartzeth@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -602,7 +602,7 @@ msgstr "Lägg till i Spotify's spellistor"
 
 #: internet/spotify/spotifyservice.cpp:610
 msgid "Add to Spotify starred"
-msgstr ""
+msgstr "Lägg till under Spotify's stjärnmärkta"
 
 #: ui/mainwindow.cpp:1649
 msgid "Add to another playlist"
@@ -830,7 +830,7 @@ msgstr "Lägg till i spellistan"
 msgid "Apply compression to prevent clipping"
 msgstr "Tillämpa komprimering för att förhindra distorsion"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Är du säker på att du vill ta bort förinställningen \"%1\"?"
@@ -1722,7 +1722,7 @@ msgstr "Ta bort från disk..."
 msgid "Delete played episodes"
 msgstr "Ta bort uppspelade avsnitt"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Ta bort förinställning"
 
@@ -2543,21 +2543,21 @@ msgstr "Genre"
 
 #: internet/grooveshark/groovesharkservice.cpp:555
 msgid "Get a URL to share this Grooveshark playlist"
-msgstr "Hämta adress för att dela Groovesharkspellista"
+msgstr "Hämta en URL för att dela Grooveshark spellista"
 
 #: internet/grooveshark/groovesharkservice.cpp:552
 #: internet/grooveshark/groovesharkservice.cpp:1154
 msgid "Get a URL to share this Grooveshark song"
-msgstr "Hämta adress för att dela Groovesharklåt"
+msgstr "Hämta en URL för att dela Grooveshark låt"
 
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
-msgstr ""
+msgstr "Hämta en URL för att dela Spotify låt"
 
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
-msgstr ""
+msgstr "Hämta en URL för delning av denna spellista"
 
 #: internet/grooveshark/groovesharkservice.cpp:829
 msgid "Getting Grooveshark popular songs"
@@ -2696,6 +2696,10 @@ msgstr "Hög (%1 fps)"
 #: visualisations/visualisationcontainer.cpp:124
 msgid "High (1024x1024)"
 msgstr "Hög (1024x1024)"
+
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr "HipHop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2940,15 +2944,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kattungar"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Språk"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Laptop/hörlurar"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Stor hall"
 
@@ -3044,7 +3052,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Lyssna på Groovesharklåtar som baseras efter vad du tidigare lyssnat på."
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Live"
 
@@ -3384,7 +3392,7 @@ msgid "My Recommendations"
 msgstr "Mina rekommendationer"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Namn"
@@ -3747,7 +3755,7 @@ msgstr "Ägare"
 msgid "Parsing Jamendo catalogue"
 msgstr "Sorterar Jamendos katalog"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Party"
 
@@ -3860,7 +3868,7 @@ msgstr "Instickstatus:"
 msgid "Podcasts"
 msgstr "Podsändning"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3982,7 +3990,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Framgång"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psykadelisk"
 
@@ -4105,7 +4113,7 @@ msgstr "Uppdatera kanallistan"
 msgid "Refresh streams"
 msgstr "Uppdatera strömmar"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4305,7 +4313,7 @@ msgstr "Kopiera CD-skiva"
 msgid "Rip audio CD..."
 msgstr "Kopiera ljudskiva"
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4369,7 +4377,7 @@ msgstr "Spara spellista"
 msgid "Save playlist..."
 msgstr "Spara spellistan..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Spara förinställning"
 
@@ -4756,7 +4764,7 @@ msgstr "Storlek"
 msgid "Size:"
 msgstr "Storlek:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4796,11 +4804,11 @@ msgstr "Smart spellista"
 msgid "Smart playlists"
 msgstr "Smarta spellistor"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -5047,7 +5055,7 @@ msgstr "Etiketthämtare"
 msgid "Target bitrate"
 msgstr "Önskad bithastighet"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5862,7 +5870,7 @@ msgstr "Ditt användarnamn eller lösenord var felaktigt"
 msgid "Z-A"
 msgstr "Ö-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Noll"
 

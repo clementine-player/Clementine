@@ -18,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-02 15:36+0000\n"
-"Last-Translator: zhangmin <zm1990s@gmail.com>\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -828,7 +828,7 @@ msgstr "追加至播放列表"
 msgid "Apply compression to prevent clipping"
 msgstr "允许压缩以阻止剪切"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "您确定要删除预设 %1 吗？"
@@ -1720,7 +1720,7 @@ msgstr "从硬盘删除..."
 msgid "Delete played episodes"
 msgstr "删除收听过的节目"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "删除预设"
 
@@ -2695,6 +2695,10 @@ msgstr "高(%1 fps)"
 msgid "High (1024x1024)"
 msgstr "高(1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "主机未找到，请检查服务器链接。例如: http://localhost:4040/"
@@ -2938,15 +2942,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "小猫咪"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "语言"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "笔记本电脑/耳机"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "大礼堂"
 
@@ -3042,7 +3050,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "以您之前收听过的音乐为基础来收听 Grooveshark 的歌曲"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "直播"
 
@@ -3382,7 +3390,7 @@ msgid "My Recommendations"
 msgstr "我的推荐"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "名称"
@@ -3745,7 +3753,7 @@ msgstr "所有者"
 msgid "Parsing Jamendo catalogue"
 msgstr "正在解析 Jamendo 分类"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "晚会"
 
@@ -3858,7 +3866,7 @@ msgstr "插件状态:"
 msgid "Podcasts"
 msgstr "播客"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "流行"
 
@@ -3980,7 +3988,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "进度"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "迷幻"
 
@@ -4103,7 +4111,7 @@ msgstr "刷新电台列表"
 msgid "Refresh streams"
 msgstr "刷新流"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4303,7 +4311,7 @@ msgstr "CD 抓轨"
 msgid "Rip audio CD..."
 msgstr "音乐 CD 抓轨"
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "摇滚"
 
@@ -4367,7 +4375,7 @@ msgstr "保存播放列表"
 msgid "Save playlist..."
 msgstr "保存播放列表..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "保存预设"
 
@@ -4754,7 +4762,7 @@ msgstr "大小"
 msgid "Size:"
 msgstr "大小:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4794,11 +4802,11 @@ msgstr "智能播放列表"
 msgid "Smart playlists"
 msgstr "智能播放列表"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -5045,7 +5053,7 @@ msgstr "标签提取程序"
 msgid "Target bitrate"
 msgstr "目标位速率"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5860,7 +5868,7 @@ msgstr "您的用户名或密码不正确。"
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "00"
 

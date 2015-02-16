@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-02 07:35+0000\n"
+"PO-Revision-Date: 2015-02-15 21:54+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -830,7 +830,7 @@ msgstr "Přidat do seznamu skladeb"
 msgid "Apply compression to prevent clipping"
 msgstr "Použít kompresi, aby se zabránilo ořezávání zvuku (clippingu)"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Opravdu chcete smazat nastavení \"%1\"?"
@@ -1722,7 +1722,7 @@ msgstr "Smazat z disku..."
 msgid "Delete played episodes"
 msgstr "Smazat přehrané díly"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Smazat předvolbu"
 
@@ -2697,6 +2697,10 @@ msgstr "Vysoký (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Vysoké (1024 x 1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr "Hip hop"
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Hostitel nenalezen, prověřte adresu serveru (URL). Příklad: http://localhost:4040/"
@@ -2940,15 +2944,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Koťátka"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr "Kuduro"
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Jazyk"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Přenosný počítač/Sluchátka"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Velký sál"
 
@@ -3044,7 +3052,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Poslouchejte písně Grooveshark na základě toho, co jste poslouchali předtím"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Živě"
 
@@ -3384,7 +3392,7 @@ msgid "My Recommendations"
 msgstr "Má doporučení"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Název"
@@ -3747,7 +3755,7 @@ msgstr "Vlastník"
 msgid "Parsing Jamendo catalogue"
 msgstr "Zpracovává se katalog pro Jamendo"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Oslava"
 
@@ -3860,7 +3868,7 @@ msgstr "Stav přídavného modulu:"
 msgid "Podcasts"
 msgstr "Zvukové záznamy"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3982,7 +3990,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Postup"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psychedelický"
 
@@ -4105,7 +4113,7 @@ msgstr "Obnovit seznam stanic"
 msgid "Refresh streams"
 msgstr "Obnovit proudy"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4305,7 +4313,7 @@ msgstr "Vytáhnout skladby z CD"
 msgid "Rip audio CD..."
 msgstr "Vytáhnout skladby ze zvukového CD..."
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4369,7 +4377,7 @@ msgstr "Uložit seznam skladeb"
 msgid "Save playlist..."
 msgstr "Uložit seznam skladeb..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Uložit předvolbu"
 
@@ -4756,7 +4764,7 @@ msgstr "Velikost"
 msgid "Size:"
 msgstr "Velikost:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4796,11 +4804,11 @@ msgstr "Chytrý seznam skladeb"
 msgid "Smart playlists"
 msgstr "Chytré seznamy skladeb"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Měkké"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft rock"
 
@@ -5047,7 +5055,7 @@ msgstr "Stahování značek"
 msgid "Target bitrate"
 msgstr "Cílový datový tok"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5862,7 +5870,7 @@ msgstr "Uživatelské jméno nebo heslo bylo nesprávné."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Vynulovat"
 

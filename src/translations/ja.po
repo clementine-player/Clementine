@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -824,7 +824,7 @@ msgstr "プレイリストに追加する"
 msgid "Apply compression to prevent clipping"
 msgstr "クリップ防止のために音量を制限する"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "プリセット「%1」を削除してもよろしいですか?"
@@ -1716,7 +1716,7 @@ msgstr "ディスクから削除..."
 msgid "Delete played episodes"
 msgstr "再生したエピソードの削除"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "プリセットの削除"
 
@@ -2691,6 +2691,10 @@ msgstr "高 (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "高 (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "ホストが見つかりません。サーバーの URL を確認してください。例: http://localhost:4040/"
@@ -2934,15 +2938,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kittens"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "言語"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "ノートパソコン・ヘッドフォン"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "広間"
 
@@ -3038,7 +3046,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "以前聴いた曲をもとに Grooveshark の曲を聴きます"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "ライブ"
 
@@ -3378,7 +3386,7 @@ msgid "My Recommendations"
 msgstr "おすすめ"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "名前"
@@ -3741,7 +3749,7 @@ msgstr "所有者"
 msgid "Parsing Jamendo catalogue"
 msgstr "Jamendo カタログの分析中"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "パーティー"
 
@@ -3854,7 +3862,7 @@ msgstr "プラグインの状態:"
 msgid "Podcasts"
 msgstr "ポッドキャスト"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3976,7 +3984,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "進行状況"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "サイケデリック"
 
@@ -4099,7 +4107,7 @@ msgstr "局の一覧の更新"
 msgid "Refresh streams"
 msgstr "ストリームの更新"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "レゲエ"
 
@@ -4299,7 +4307,7 @@ msgstr "CD をリンピングする"
 msgid "Rip audio CD..."
 msgstr "オーディオ CD をリッピング..."
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "ロック"
 
@@ -4363,7 +4371,7 @@ msgstr "プレイリストを保存する"
 msgid "Save playlist..."
 msgstr "プレイリストの保存..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "プリセットの保存"
 
@@ -4750,7 +4758,7 @@ msgstr "サイズ"
 msgid "Size:"
 msgstr "サイズ:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4790,11 +4798,11 @@ msgstr "スマートプレイリスト"
 msgid "Smart playlists"
 msgstr "スマートプレイリスト"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -5041,7 +5049,7 @@ msgstr "タグ取得ツール"
 msgid "Target bitrate"
 msgstr "目標ビットレート"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "テクノ"
 
@@ -5856,7 +5864,7 @@ msgstr "ユーザー名またはパスワードが間違っています。"
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Zero"
 

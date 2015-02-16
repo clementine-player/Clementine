@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
+"PO-Revision-Date: 2015-02-15 21:38+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/clementine/language/nb/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -821,7 +821,7 @@ msgstr "Legg til i spilleliste"
 msgid "Apply compression to prevent clipping"
 msgstr "Legg til kompressor, for å unngå klipping"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Er du sikker på at du vil slette \"%1\" innstillingen?"
@@ -1713,7 +1713,7 @@ msgstr "Slett fra harddisk..."
 msgid "Delete played episodes"
 msgstr "Slett avspilte episoder"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Slett forhåndsinnstilling"
 
@@ -2688,6 +2688,10 @@ msgstr "Høy (%1 bilder/sekund)"
 msgid "High (1024x1024)"
 msgstr "Høy (1024x1024)"
 
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
+
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Fant ikke tjeneren; sjekk tjener-URL. For eksempel: http://localhost:4040/"
@@ -2931,15 +2935,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Språk"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Laptop/Hodetelefoner"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Storsal"
 
@@ -3035,7 +3043,7 @@ msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Finn sanger på Grooveshark som ligner på de du nylig har spilt av"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Live"
 
@@ -3375,7 +3383,7 @@ msgid "My Recommendations"
 msgstr "Mine anbefalinger"
 
 #: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Navn"
@@ -3738,7 +3746,7 @@ msgstr "Eier"
 msgid "Parsing Jamendo catalogue"
 msgstr "Behandler Jamendo-katalogen"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Fest"
 
@@ -3851,7 +3859,7 @@ msgstr "Modulens status:"
 msgid "Podcasts"
 msgstr "Podcaster"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
@@ -3973,7 +3981,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Fremgang"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psykedelisk"
 
@@ -4096,7 +4104,7 @@ msgstr "Oppfrisk kanallista"
 msgid "Refresh streams"
 msgstr "Oppfrisk bakgrunnslyder"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4296,7 +4304,7 @@ msgstr "Rip CD"
 msgid "Rip audio CD..."
 msgstr "Rip lyd CD..."
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4360,7 +4368,7 @@ msgstr "Lagre spilleliste"
 msgid "Save playlist..."
 msgstr "Lagre spillelista..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Lagre forhåndsinnstilling"
 
@@ -4747,7 +4755,7 @@ msgstr "Størrelse"
 msgid "Size:"
 msgstr "Størrelse:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4787,11 +4795,11 @@ msgstr "Smart spilleliste"
 msgid "Smart playlists"
 msgstr "Smarte spillelister"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Myk"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -5038,7 +5046,7 @@ msgstr "Tagg-henter"
 msgid "Target bitrate"
 msgstr "Ønsket bitrate"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Tekno"
 
@@ -5853,7 +5861,7 @@ msgstr "Feil med din brukerinformasjon"
 msgid "Z-A"
 msgstr "Å-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Null"
 
