@@ -18,8 +18,6 @@
 #ifndef SRC_RIPPER_RIPCDDIALOG_H_
 #define SRC_RIPPER_RIPCDDIALOG_H_
 
-#include <cdio/cdio.h>
-
 #include <memory>
 #include <QDialog>
 #include <QFile>
@@ -77,5 +75,6 @@ class RipCDDialog : public QDialog {
   QPushButton* rip_button_;
   std::unique_ptr<Ui_RipCDDialog> ui_;
   Ripper* ripper_;
+  bool working_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_

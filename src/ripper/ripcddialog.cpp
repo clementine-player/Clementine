@@ -49,7 +49,10 @@ const char* RipCDDialog::kSettingsGroup = "Transcoder";
 const int RipCDDialog::kMaxDestinationItems = 10;
 
 RipCDDialog::RipCDDialog(QWidget* parent)
-    : QDialog(parent), ui_(new Ui_RipCDDialog), ripper_(new Ripper(this)) {
+    : QDialog(parent),
+      ui_(new Ui_RipCDDialog),
+      ripper_(new Ripper(this)),
+      working_(false) {
   // Init
   ui_->setupUi(this);
 
@@ -119,7 +122,12 @@ RipCDDialog::~RipCDDialog() {}
 
 bool RipCDDialog::CheckCDIOIsValid() { return ripper_->CheckCDIOIsValid(); }
 
-void RipCDDialog::showEvent(QShowEvent* event) { BuildTrackListTable(); }
+void RipCDDialog::showEvent(QShowEvent* event) {
+  BuildTrackListTable();
+  if (!working_) {
+    ui_->progress_group->hide();
+  }
+}
 
 void RipCDDialog::ClickedRipButton() {
   if (ripper_->MediaChanged()) {
@@ -236,6 +244,7 @@ void RipCDDialog::UpdateProgressBar(int progress) {
 }
 
 void RipCDDialog::SetWorking(bool working) {
+  working_ = working;
   rip_button_->setVisible(!working);
   cancel_button_->setVisible(working);
   close_button_->setVisible(!working);

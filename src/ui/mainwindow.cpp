@@ -312,6 +312,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->action_quit->setIcon(IconLoader::Load("application-exit"));
   ui_->action_remove_from_playlist->setIcon(IconLoader::Load("list-remove"));
   ui_->action_repeat_mode->setIcon(IconLoader::Load("media-playlist-repeat"));
+  ui_->action_rip_audio_cd->setIcon(IconLoader::Load("media-optical"));
   ui_->action_shuffle->setIcon(IconLoader::Load("x-clementine-shuffle"));
   ui_->action_shuffle_mode->setIcon(IconLoader::Load("media-playlist-shuffle"));
   ui_->action_stop->setIcon(IconLoader::Load("media-playback-stop"));
