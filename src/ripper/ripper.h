@@ -96,6 +96,7 @@ signals:
     QString title;
     QString transcoded_filename;
     TranscoderPreset preset;
+    QString temporary_filename;
   };
 
   struct AlbumInformation {

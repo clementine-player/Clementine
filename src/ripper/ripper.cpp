@@ -135,6 +135,16 @@ void Ripper::TranscodingJobComplete(const QString& input, const QString& output,
                                     bool success) {
   (*(success ? &finished_success_ : &finished_failed_))++;
   UpdateProgress();
+
+  // The the transcoder does not overwrite files. Instead, it changes
+  // the name of the output file. We need to update the transcoded
+  // filename for the corresponding track so that we tag the correct
+  // file later on.
+  for (TrackInformation& track : tracks_) {
+    if (track.temporary_filename == input) {
+      track.transcoded_filename = output;
+    }
+  }
 }
 
 void Ripper::AllTranscodingJobsComplete() {
@@ -199,7 +209,7 @@ void Ripper::Rip() {
   // Set up progress bar
   UpdateProgress();
 
-  for (const TrackInformation& track : tracks_) {
+  for (TrackInformation& track : tracks_) {
     QString filename =
         QString("%1%2.wav").arg(temporary_directory_).arg(track.track_number);
     QFile destination_file(filename);
@@ -231,7 +241,8 @@ void Ripper::Rip() {
     finished_success_++;
     UpdateProgress();
 
-    transcoder_->AddJob(filename, track.preset, track.transcoded_filename);
+    track.temporary_filename = filename;
+    transcoder_->AddJob(track.temporary_filename, track.preset, track.transcoded_filename);
   }
   emit(RippingComplete());
 }
