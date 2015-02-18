@@ -139,33 +139,24 @@ void MacGlobalShortcutBackend::ShowAccessibilityDialog() {
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
       NSPreferencePanesDirectory, NSSystemDomainMask, YES);
   if ([paths count] == 1) {
-    NSURL* prefpane_url = nil;
-    if (Utilities::GetMacVersion() < 9) {
-      prefpane_url =
-          [NSURL fileURLWithPath:[[paths objectAtIndex:0]
-                                     stringByAppendingPathComponent:
-                                         @"UniversalAccessPref.prefPane"]];
-      [[NSWorkspace sharedWorkspace] openURL:prefpane_url];
-    } else {
-      SBSystemPreferencesApplication* system_prefs = [SBApplication
-          applicationWithBundleIdentifier:@"com.apple.systempreferences"];
-      [system_prefs activate];
+    SBSystemPreferencesApplication* system_prefs = [SBApplication
+        applicationWithBundleIdentifier:@"com.apple.systempreferences"];
+    [system_prefs activate];
 
-      SBElementArray* panes = [system_prefs panes];
-      SBSystemPreferencesPane* security_pane = nil;
-      for (SBSystemPreferencesPane* pane : panes) {
-        if ([[pane id] isEqualToString:@"com.apple.preference.security"]) {
-          security_pane = pane;
-          break;
-        }
+    SBElementArray* panes = [system_prefs panes];
+    SBSystemPreferencesPane* security_pane = nil;
+    for (SBSystemPreferencesPane* pane : panes) {
+      if ([[pane id] isEqualToString:@"com.apple.preference.security"]) {
+        security_pane = pane;
+        break;
       }
-      [system_prefs setCurrentPane:security_pane];
+    }
+    [system_prefs setCurrentPane:security_pane];
 
-      SBElementArray* anchors = [security_pane anchors];
-      for (SBSystemPreferencesAnchor* anchor : anchors) {
-        if ([[anchor name] isEqualToString:@"Privacy_Accessibility"]) {
-          [anchor reveal];
-        }
+    SBElementArray* anchors = [security_pane anchors];
+    for (SBSystemPreferencesAnchor* anchor : anchors) {
+      if ([[anchor name] isEqualToString:@"Privacy_Accessibility"]) {
+        [anchor reveal];
       }
     }
   }

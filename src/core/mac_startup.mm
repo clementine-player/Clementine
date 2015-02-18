@@ -250,7 +250,8 @@ static BreakpadRef InitBreakpad() {
   [delegate_ setShortcutHandler:shortcut_handler_];
   [self setDelegate:delegate_];
 
-  [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:delegate_];
+  [[NSUserNotificationCenter defaultUserNotificationCenter]
+      setDelegate:delegate_];
 }
 
 - (void)sendEvent:(NSEvent*)event {
@@ -516,10 +517,7 @@ void EnableFullScreen(const QWidget& main_window) {
 
 float GetDevicePixelRatio(QWidget* widget) {
   NSView* view = reinterpret_cast<NSView*>(widget->winId());
-  if ([[view window] respondsToSelector:@selector(backingScaleFactor)]) {
-    return [[view window] backingScaleFactor];
-  }
-  return 1.0f;
+  return [[view window] backingScaleFactor];
 }
 
 }  // namespace mac

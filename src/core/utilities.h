@@ -62,7 +62,11 @@ bool Copy(QIODevice* source, QIODevice* destination);
 
 void OpenInFileBrowser(const QList<QUrl>& filenames);
 
-enum HashFunction { Md5_Algo, Sha256_Algo, Sha1_Algo, };
+enum HashFunction {
+  Md5_Algo,
+  Sha256_Algo,
+  Sha1_Algo,
+};
 QByteArray Hmac(const QByteArray& key, const QByteArray& data,
                 HashFunction algo);
 QByteArray HmacMd5(const QByteArray& key, const QByteArray& data);
@@ -130,9 +134,6 @@ enum ConfigPath {
 };
 QString GetConfigPath(ConfigPath config);
 
-// Returns the minor version of OS X (ie. 6 for Snow Leopard, 7 for Lion).
-qint32 GetMacVersion();
-
 // Borrowed from schedutils
 enum IoPriority {
   IOPRIO_CLASS_NONE = 0,
@@ -140,7 +141,11 @@ enum IoPriority {
   IOPRIO_CLASS_BE,
   IOPRIO_CLASS_IDLE,
 };
-enum { IOPRIO_WHO_PROCESS = 1, IOPRIO_WHO_PGRP, IOPRIO_WHO_USER, };
+enum {
+  IOPRIO_WHO_PROCESS = 1,
+  IOPRIO_WHO_PGRP,
+  IOPRIO_WHO_USER,
+};
 static const int IOPRIO_CLASS_SHIFT = 13;
 
 int SetThreadIOPriority(IoPriority priority);

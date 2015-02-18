@@ -57,16 +57,7 @@ GlobalShortcutsSettingsPage::GlobalShortcutsSettingsPage(SettingsDialog* dialog)
 
 GlobalShortcutsSettingsPage::~GlobalShortcutsSettingsPage() { delete ui_; }
 
-bool GlobalShortcutsSettingsPage::IsEnabled() const {
-#ifdef Q_OS_MAC
-  qLog(Debug) << Utilities::GetMacVersion();
-  if (Utilities::GetMacVersion() < 6) {  // Leopard and earlier.
-    return false;
-  }
-#endif
-
-  return true;
-}
+bool GlobalShortcutsSettingsPage::IsEnabled() const { return true; }
 
 void GlobalShortcutsSettingsPage::Load() {
   GlobalShortcuts* manager = dialog()->global_shortcuts_manager();
@@ -107,11 +98,6 @@ void GlobalShortcutsSettingsPage::Load() {
   }
 
   ui_->mac_container->setVisible(!manager->IsMacAccessibilityEnabled());
-#ifdef Q_OS_DARWIN
-  qint32 mac_version = Utilities::GetMacVersion();
-  ui_->mac_label->setVisible(mac_version < 9);
-  ui_->mac_label_mavericks->setVisible(mac_version >= 9);
-#endif  // Q_OS_DARWIN
 }
 
 void GlobalShortcutsSettingsPage::SetShortcut(const QString& id,
