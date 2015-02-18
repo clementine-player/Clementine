@@ -111,7 +111,7 @@
 #include "ui/organiseerrordialog.h"
 #include "ui/qtsystemtrayicon.h"
 #ifdef HAVE_AUDIOCD
-#include "ui/ripcd.h"
+#include "ripper/ripcd.h"
 #endif
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
