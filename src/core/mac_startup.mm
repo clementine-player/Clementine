@@ -509,10 +509,6 @@ void DumpDictionary(CFDictionaryRef dict) {
 static const NSUInteger kFullScreenPrimary = 1 << 7;
 
 void EnableFullScreen(const QWidget& main_window) {
-  if (QSysInfo::MacintoshVersion == QSysInfo::MV_SNOWLEOPARD) {
-    return;  // Unsupported on 10.6
-  }
-
   NSView* view = reinterpret_cast<NSView*>(main_window.winId());
   NSWindow* window = [view window];
   [window setCollectionBehavior:kFullScreenPrimary];
