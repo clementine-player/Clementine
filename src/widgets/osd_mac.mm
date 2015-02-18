@@ -17,6 +17,8 @@
 
 #include "osd.h"
 
+#import <Foundation/NSUserNotification.h>
+
 #include <QBuffer>
 #include <QByteArray>
 #include <QFile>
@@ -26,40 +28,31 @@
 
 namespace {
 
-bool NotificationCenterSupported() {
-  return NSClassFromString(@"NSUserNotificationCenter");
-}
-
 void SendNotificationCenterMessage(NSString* title, NSString* subtitle) {
-  Class clazz = NSClassFromString(@"NSUserNotificationCenter");
-  id notification_center = [clazz defaultUserNotificationCenter];
+  NSUserNotificationCenter* notification_center =
+      [NSUserNotificationCenter defaultUserNotificationCenter];
 
-  Class user_notification_class = NSClassFromString(@"NSUserNotification");
-  id notification = [[user_notification_class alloc] init];
+  NSUserNotification* notification = [[NSUserNotification alloc] init];
   [notification setTitle:title];
   [notification setSubtitle:subtitle];
 
   [notification_center deliverNotification:notification];
 }
-}
+
+}  // namespace
 
 void OSD::Init() {}
 
-bool OSD::SupportsNativeNotifications() {
-  return NotificationCenterSupported();
-}
+bool OSD::SupportsNativeNotifications() { return true; }
 
 bool OSD::SupportsTrayPopups() { return false; }
-
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QString& icon, const QImage& image) {
   Q_UNUSED(icon);
-  if (NotificationCenterSupported()) {
-    scoped_nsobject<NSString> mac_message(
-        [[NSString alloc] initWithUTF8String:message.toUtf8().constData()]);
-    scoped_nsobject<NSString> mac_summary(
-        [[NSString alloc] initWithUTF8String:summary.toUtf8().constData()]);
-    SendNotificationCenterMessage(mac_summary.get(), mac_message.get());
-  }
+  scoped_nsobject<NSString> mac_message(
+      [[NSString alloc] initWithUTF8String:message.toUtf8().constData()]);
+  scoped_nsobject<NSString> mac_summary(
+      [[NSString alloc] initWithUTF8String:summary.toUtf8().constData()]);
+  SendNotificationCenterMessage(mac_summary.get(), mac_message.get());
 }
