@@ -60,6 +60,10 @@ Ripper::~Ripper() { cdio_destroy(cdio_); }
 void Ripper::AddTrack(int track_number, const QString& title,
                       const QString& transcoded_filename,
                       const TranscoderPreset& preset) {
+  if (track_number < 1 || track_number > TracksOnDisc()) {
+    qLog(Warning) << "Invalid track number:" << track_number << "Ignoring";
+    return;
+  }
   TrackInformation track(track_number, title, transcoded_filename, preset);
   tracks_.append(track);
 }
@@ -67,7 +71,12 @@ void Ripper::AddTrack(int track_number, const QString& title,
 void Ripper::SetAlbumInformation(const QString& album, const QString& artist,
                                  const QString& genre, int year, int disc,
                                  Song::FileType type) {
-  album_ = AlbumInformation(album, artist, genre, year, disc, type);
+  album_.album = album;
+  album_.artist = artist;
+  album_.genre = genre;
+  album_.year = year;
+  album_.disc = disc;
+  album_.type = type;
 }
 
 int Ripper::TracksOnDisc() const {
@@ -88,7 +97,9 @@ bool Ripper::CheckCDIOIsValid() {
   cdio_ = cdio_open(NULL, DRIVER_UNKNOWN);
   // Refresh the status of the cd media. This will prevent unnecessary
   // rebuilds of the track list table.
-  cdio_get_media_changed(cdio_);
+  if (cdio_) {
+    cdio_get_media_changed(cdio_);
+  }
   return cdio_;
 }
 

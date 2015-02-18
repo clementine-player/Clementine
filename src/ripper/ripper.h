@@ -28,22 +28,40 @@
 
 class QFile;
 
+// Rips selected tracks from an audio CD, transcodes them to a chosen
+// format, and finally tags the files with the supplied metadata.
+//
+// Usage: Add tracks with AddTrack() and album metadata with
+// SetAlbumInformation(). Then start the ripper with Start(). The ripper
+// emits the Finished() signal when it's done or the Cancelled()
+// signal if the ripping has been cancelled.
 class Ripper : public QObject {
   Q_OBJECT
 
  public:
   explicit Ripper(QObject* parent = nullptr);
   ~Ripper();
+
+  // Adds a track to the rip list if the track number corresponds to a
+  // track on the audio cd. The track will transcoded according to the
+  // chosen TranscoderPreset.
   void AddTrack(int track_number, const QString& title,
                 const QString& transcoded_filename,
                 const TranscoderPreset& preset);
+  // Sets album metadata. This information is used when tagging the
+  // final files.
   void SetAlbumInformation(const QString& album, const QString& artist,
                            const QString& genre, int year, int disc,
                            Song::FileType type);
+  // Returns the number of audio tracks on the disc.
   int TracksOnDisc() const;
+  // Returns the number of tracks added to the rip list.
   int AddedTracks() const;
+  // Clears the rip list.
   void ClearTracks();
+  // Returns true if a cd device was successfully opened.
   bool CheckCDIOIsValid();
+  // Returns true if the cd media has changed.
   bool MediaChanged() const;
 
 signals:
@@ -81,16 +99,7 @@ signals:
   };
 
   struct AlbumInformation {
-    AlbumInformation(const QString& album = QString(),
-                     const QString& artist = QString(),
-                     const QString& genre = QString(), int year = 0,
-                     int disc = 0, Song::FileType type = Song::Type_Unknown)
-        : album(album),
-          artist(artist),
-          genre(genre),
-          year(year),
-          disc(disc),
-          type(type) {}
+    AlbumInformation() : year(0), disc(0), type(Song::Type_Unknown) {}
 
     QString album;
     QString artist;
