@@ -95,6 +95,9 @@
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
 #include "internet/podcasts/podcastservice.h"
+#ifdef HAVE_AUDIOCD
+#include "ripper/ripcddialog.h"
+#endif
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
@@ -110,9 +113,6 @@
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
 #include "ui/qtsystemtrayicon.h"
-#ifdef HAVE_AUDIOCD
-#include "ripper/ripcd.h"
-#endif
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "ui/trackselectiondialog.h"
@@ -389,7 +389,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_open_cd, SIGNAL(triggered()), SLOT(AddCDTracks()));
 #ifdef HAVE_AUDIOCD
-  connect(ui_->action_rip_audio_cd, SIGNAL(triggered()), SLOT(OpenRipCD()));
+  connect(ui_->action_rip_audio_cd, SIGNAL(triggered()),
+          SLOT(OpenRipCDDialog()));
 #else
   ui_->action_rip_audio_cd->setVisible(false);
 #endif
@@ -1883,13 +1884,13 @@ void MainWindow::AddStreamAccepted() {
   AddToPlaylist(data);
 }
 
-void MainWindow::OpenRipCD() {
+void MainWindow::OpenRipCDDialog() {
 #ifdef HAVE_AUDIOCD
-  if (!rip_cd_) {
-    rip_cd_.reset(new RipCD);
+  if (!rip_cd_dialog_) {
+    rip_cd_dialog_.reset(new RipCDDialog);
   }
-  if (rip_cd_->CheckCDIOIsValid()) {
-    rip_cd_->show();
+  if (rip_cd_dialog_->CheckCDIOIsValid()) {
+    rip_cd_dialog_->show();
   } else {
     QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"),
                           tr("Failed reading CD drive"));
