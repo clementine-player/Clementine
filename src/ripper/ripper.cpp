@@ -133,16 +133,20 @@ void Ripper::Cancel() {
 
 void Ripper::TranscodingJobComplete(const QString& input, const QString& output,
                                     bool success) {
-  (*(success ? &finished_success_ : &finished_failed_))++;
+  if (success)
+    finished_success_++;
+  else
+    finished_failed_++;
   UpdateProgress();
 
   // The the transcoder does not overwrite files. Instead, it changes
   // the name of the output file. We need to update the transcoded
   // filename for the corresponding track so that we tag the correct
   // file later on.
-  for (TrackInformation& track : tracks_) {
-    if (track.temporary_filename == input) {
-      track.transcoded_filename = output;
+  for (QList<TrackInformation>::iterator it = tracks_.begin();
+       it != tracks_.end(); ++it) {
+    if (it->temporary_filename == input) {
+      it->transcoded_filename = output;
     }
   }
 }
@@ -209,14 +213,15 @@ void Ripper::Rip() {
   // Set up progress bar
   UpdateProgress();
 
-  for (TrackInformation& track : tracks_) {
+  for (QList<TrackInformation>::iterator it = tracks_.begin();
+       it != tracks_.end(); ++it) {
     QString filename =
-        QString("%1%2.wav").arg(temporary_directory_).arg(track.track_number);
+        QString("%1%2.wav").arg(temporary_directory_).arg(it->track_number);
     QFile destination_file(filename);
     destination_file.open(QIODevice::WriteOnly);
 
-    lsn_t i_first_lsn = cdio_get_track_lsn(cdio_, track.track_number);
-    lsn_t i_last_lsn = cdio_get_track_last_lsn(cdio_, track.track_number);
+    lsn_t i_first_lsn = cdio_get_track_lsn(cdio_, it->track_number);
+    lsn_t i_last_lsn = cdio_get_track_last_lsn(cdio_, it->track_number);
     WriteWAVHeader(&destination_file,
                    (i_last_lsn - i_first_lsn + 1) * CDIO_CD_FRAMESIZE_RAW);
 
@@ -241,8 +246,9 @@ void Ripper::Rip() {
     finished_success_++;
     UpdateProgress();
 
-    track.temporary_filename = filename;
-    transcoder_->AddJob(track.temporary_filename, track.preset, track.transcoded_filename);
+    it->temporary_filename = filename;
+    transcoder_->AddJob(it->temporary_filename, it->preset,
+                        it->transcoded_filename);
   }
   emit(RippingComplete());
 }

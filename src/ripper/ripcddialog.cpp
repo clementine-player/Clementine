@@ -99,7 +99,7 @@ RipCDDialog::RipCDDialog(QWidget* parent)
   qSort(presets.begin(), presets.end(), ComparePresetsByName);
   for (const TranscoderPreset& preset : presets) {
     ui_->format->addItem(
-        QString("%1 (.%2)").arg(preset.name_, preset.extension_),
+        QString("%1 (.%2)").arg(preset.name_).arg(preset.extension_),
         QVariant::fromValue(preset));
   }
 
@@ -220,11 +220,8 @@ void RipCDDialog::SelectNone() {
 
 void RipCDDialog::InvertSelection() {
   for (QCheckBox* checkbox : checkboxes_) {
-    if (checkbox->isChecked()) {
-      checkbox->setCheckState(Qt::Unchecked);
-    } else {
-      checkbox->setCheckState(Qt::Checked);
-    }
+    checkbox->setCheckState(checkbox->isChecked() ? Qt::Unchecked
+                                                  : Qt::Checked);
   }
 }
 
