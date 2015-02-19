@@ -76,7 +76,8 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   last_add_dir_ = s.value("last_add_dir", QDir::homePath()).toString();
   last_import_dir_ = s.value("last_import_dir", QDir::homePath()).toString();
 
-  QString last_output_format = s.value("last_output_format", "audio/x-vorbis").toString();
+  QString last_output_format =
+      s.value("last_output_format", "audio/x-vorbis").toString();
   for (int i = 0; i < ui_->format->count(); ++i) {
     if (last_output_format ==
         ui_->format->itemData(i).value<TranscoderPreset>().codec_mimetype_) {
@@ -171,8 +172,12 @@ void TranscodeDialog::Cancel() {
   SetWorking(false);
 }
 
-void TranscodeDialog::JobComplete(const QString& input, const QString& output, bool success) {
-  (*(success ? &finished_success_ : &finished_failed_))++;
+void TranscodeDialog::JobComplete(const QString& input, const QString& output,
+                                  bool success) {
+  if (success)
+    finished_success_++;
+  else
+    finished_failed_++;
   queued_--;
 
   UpdateStatusText();
