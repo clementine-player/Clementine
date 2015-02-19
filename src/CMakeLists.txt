@@ -1035,14 +1035,16 @@ optional_source(HAVE_AUDIOCD
     devices/cddadevice.cpp
     devices/cddalister.cpp
     devices/cddasongloader.cpp
-    ui/ripcd.cpp
+    ripper/ripcddialog.cpp
+    ripper/ripper.cpp
   HEADERS
     devices/cddadevice.h
     devices/cddalister.h
     devices/cddasongloader.h
-    ui/ripcd.h
+    ripper/ripcddialog.h
+    ripper/ripper.h
   UI
-    ui/ripcd.ui
+    ripper/ripcddialog.ui
 )
 
 # mtp device
