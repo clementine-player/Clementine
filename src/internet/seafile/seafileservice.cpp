@@ -55,7 +55,8 @@ SeafileService::SeafileService(Application* app, InternetModel* parent)
                        SettingsDialog::Page_Seafile),
       indexing_task_id_(-1),
       indexing_task_max_(0),
-      indexing_task_progress_(0) {
+      indexing_task_progress_(0),
+      changing_libary_(false) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   access_token_ = s.value("access_token").toString();
@@ -179,13 +180,18 @@ void SeafileService::GetLibrariesFinished(QNetworkReply* reply) {
 }
 
 void SeafileService::ChangeLibrary(const QString& new_library) {
+  if (new_library == library_updated_ || changing_libary_) return;
+
   if (indexing_task_id_ != -1) {
     qLog(Debug) << "Want to change the Seafile library, but Clementine waits "
                    "the previous indexing...";
+    changing_libary_ = true;
     NewClosure(this, SIGNAL(UpdatingLibrariesFinishedSignal()), this,
                SLOT(ChangeLibrary(QString)), new_library);
     return;
   }
+
+  AbortReadTagsReplies();
 
   qLog(Debug) << "Change the Seafile library";
 
@@ -198,6 +204,7 @@ void SeafileService::ChangeLibrary(const QString& new_library) {
     }
   }
 
+  changing_libary_ = false;
   UpdateLibraries();
 }
 

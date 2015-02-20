@@ -155,6 +155,8 @@ signals:
   int indexing_task_id_;
   int indexing_task_max_;
   int indexing_task_progress_;
+
+  bool changing_libary_;
 };
 
 #endif  // INTERNET_SEAFILE_SEAFILESERVICE_H_
