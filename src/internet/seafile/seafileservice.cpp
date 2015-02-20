@@ -178,17 +178,12 @@ void SeafileService::GetLibrariesFinished(QNetworkReply* reply) {
   emit GetLibrariesFinishedSignal(libraries);
 }
 
-void SeafileService::ChangeLibrary(const QString& new_library,
-                                   bool have_to_disconnect) {
-  if (have_to_disconnect) {
-    disconnect(this, SIGNAL(UpdatingLibrariesFinishedSignal()));
-  }
-
+void SeafileService::ChangeLibrary(const QString& new_library) {
   if (indexing_task_id_ != -1) {
     qLog(Debug) << "Want to change the Seafile library, but Clementine waits "
                    "the previous indexing...";
     NewClosure(this, SIGNAL(UpdatingLibrariesFinishedSignal()), this,
-               SLOT(ChangeLibrary(QString, bool)), new_library, true);
+               SLOT(ChangeLibrary(QString)), new_library);
     return;
   }
 

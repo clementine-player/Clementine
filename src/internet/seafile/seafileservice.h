@@ -80,8 +80,7 @@ class SeafileService : public CloudFileService {
  public slots:
   void Connect();
   void ForgetCredentials();
-  void ChangeLibrary(const QString& new_library,
-                     bool have_to_disconnect = false);
+  void ChangeLibrary(const QString& new_library);
 
 signals:
   void Connected();
