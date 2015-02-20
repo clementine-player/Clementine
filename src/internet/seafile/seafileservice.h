@@ -76,16 +76,18 @@ class SeafileService : public CloudFileService {
                 const QString& server);
   // Get all the libraries available for the user. Will emit a signal
   void GetLibraries();
-  void ChangeLibrary(const QString& new_library);
 
  public slots:
   void Connect();
   void ForgetCredentials();
+  void ChangeLibrary(const QString& new_library,
+                     bool have_to_disconnect = false);
 
- signals:
+signals:
   void Connected();
   // QMap, key : library's id, value : library's name
   void GetLibrariesFinishedSignal(QMap<QString, QString>);
+  void UpdatingLibrariesFinishedSignal();
 
  private slots:
   // Will emit the signal
@@ -143,10 +145,17 @@ class SeafileService : public CloudFileService {
   // argument
   bool CheckReply(QNetworkReply** reply, int tries = 1);
 
+  void StartTaskInProgress();
+  void FinishedTaskInProgress();
+
   SeafileTree tree_;
   QString access_token_;
   QString server_;
   QString library_updated_;
+
+  int indexing_task_id_;
+  int indexing_task_max_;
+  int indexing_task_progress_;
 };
 
 #endif  // INTERNET_SEAFILE_SEAFILESERVICE_H_
