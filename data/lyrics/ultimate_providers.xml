@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lyricproviders>
   <provider name="azlyrics.com" title="{artist} LYRICS - {title}" charset="utf-8" url="http://www.azlyrics.com/lyrics/{artist}/{title}.html">
-    <urlFormat replace=" ._@,;&amp;\/'&quot;-" with=""/>
+    <urlFormat replace=" ._@,;&amp;\/()'&quot;-" with=""/>
     <extract>
-      <item begin="&lt;!-- END OF RINGTONE 1 --&gt;" end="&lt;!-- RINGTONE 2 --&gt;"/>
+      <item begin="&lt;!-- start of lyrics --&gt;" end="&lt;!-- end of lyrics --&gt;"/>
     </extract>
     <exclude>
       <item tag="&lt;B&gt;"/>
