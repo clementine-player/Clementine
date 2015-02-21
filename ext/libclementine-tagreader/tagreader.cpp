@@ -172,7 +172,11 @@ void TagReader::ReadFile(const QString& filename,
 
       if (!map["TIT1"].isEmpty())  // content group
         Decode(map["TIT1"].front()->toString(), nullptr,
-               song->mutable_grouping());
+            song->mutable_grouping());
+
+      if (!map["TOPE"].isEmpty())  // original artist/performer
+        Decode(map["TOPE"].front()->toString(), nullptr,
+            song->mutable_performer());
 
       // Skip TPE1 (which is the artist) here because we already fetched it
 
@@ -612,6 +616,7 @@ bool TagReader::SaveFile(const QString& filename,
                  tag);
     SetTextFrame("TCOM", song.composer(), tag);
     SetTextFrame("TIT1", song.grouping(), tag);
+    SetTextFrame("TOPE", song.performer(), tag);
     // Skip TPE1 (which is the artist) here because we already set it
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);
