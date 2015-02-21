@@ -172,11 +172,11 @@ void TagReader::ReadFile(const QString& filename,
 
       if (!map["TIT1"].isEmpty())  // content group
         Decode(map["TIT1"].front()->toString(), nullptr,
-            song->mutable_grouping());
+               song->mutable_grouping());
 
       if (!map["TOPE"].isEmpty())  // original artist/performer
         Decode(map["TOPE"].front()->toString(), nullptr,
-            song->mutable_performer());
+               song->mutable_performer());
 
       // Skip TPE1 (which is the artist) here because we already fetched it
 
