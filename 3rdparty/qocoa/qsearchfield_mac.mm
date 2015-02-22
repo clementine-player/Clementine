@@ -30,6 +30,7 @@ THE SOFTWARE.
 
 #include <QApplication>
 #include <QClipboard>
+#include <QKeyEvent>
 
 class QSearchFieldPrivate : public QObject
 {
@@ -51,8 +52,19 @@ public:
 
     void returnPressed()
     {
-        if (qSearchField)
+        if (qSearchField) {
             emit qSearchField->returnPressed();
+            QKeyEvent* event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Return, Qt::NoModifier);
+            QApplication::postEvent(qSearchField, event);
+        }
+    }
+
+    void escapePressed()
+    {
+        if (qSearchField) {
+            QKeyEvent* event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Escape, Qt::NoModifier);
+            QApplication::postEvent(qSearchField, event);
+        }
     }
 
     QPointer<QSearchField> qSearchField;
@@ -82,7 +94,10 @@ public:
 
     if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSReturnTextMovement)
         pimpl->returnPressed();
+    else if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSOtherTextMovement)
+        pimpl->escapePressed();
 }
+
 @end
 
 @interface QocoaSearchField : NSSearchField
