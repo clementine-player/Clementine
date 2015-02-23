@@ -217,14 +217,13 @@ void SeafileService::Connect() {
 }
 
 void SeafileService::UpdateLibraries() {
-  if (indexing_task_id_ == -1) {
-    indexing_task_id_ =
-        app_->task_manager()->StartTask(tr("Build index of Seafile"));
-  }
   // Quit if we are already updating the libraries
-  else {
+  if (indexing_task_id_ != -1) {
     return;
   }
+
+  indexing_task_id_ =
+      app_->task_manager()->StartTask(tr("Building Seafile index..."));
 
   connect(this, SIGNAL(GetLibrariesFinishedSignal(QMap<QString, QString>)),
           this, SLOT(UpdateLibrariesInProgress(QMap<QString, QString>)));
