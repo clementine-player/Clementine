@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-15 21:38+0000\n"
+"PO-Revision-Date: 2015-02-19 15:24+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,12 +73,12 @@ msgstr ""
 msgid "%1 albums"
 msgstr "%1 آلبوم"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 #, qt-format
 msgid "%1 days"
 msgstr "%1 روز"
 
-#: core/utilities.cpp:139
+#: core/utilities.cpp:140
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 روز پیش"
@@ -148,19 +148,19 @@ msgstr "%L1 همه‌ی پخش‌ها"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:213
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n ناکام ماند"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:208
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n پایان یافت"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:202
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -174,7 +174,7 @@ msgstr "&چیدمان متن"
 msgid "&Center"
 msgstr "&میانه"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:188
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
 msgstr "&سفارشی‌"
 
@@ -203,7 +203,7 @@ msgstr "&چپ‌"
 msgid "&Music"
 msgstr "آ&هنگ"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:186
+#: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
 msgstr "&هیچ‌کدام‌"
 
@@ -259,7 +259,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 msgid "1 day"
 msgstr "۱ روز"
 
@@ -410,7 +410,7 @@ msgstr "ویژگی‌های اکانت (برتر)"
 msgid "Action"
 msgstr "کنش"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgctxt "Category label"
 msgid "Action"
 msgstr ""
@@ -451,7 +451,7 @@ msgstr "افزودن جریان دیگر..."
 msgid "Add directory..."
 msgstr "افزودن پوشه..."
 
-#: ui/mainwindow.cpp:1828
+#: ui/mainwindow.cpp:1830
 msgid "Add file"
 msgstr "افزودن پرونده"
 
@@ -467,11 +467,12 @@ msgstr ""
 msgid "Add file..."
 msgstr "افزودن پرونده..."
 
-#: transcoder/transcodedialog.cpp:218
+#: transcoder/transcodedialog.cpp:223
 msgid "Add files to transcode"
 msgstr "افزودن پرونده‌ها به تراکد"
 
-#: transcoder/transcodedialog.cpp:300 ui/mainwindow.cpp:1855 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:184
 msgid "Add folder"
 msgstr "افزودن پوشه"
 
@@ -595,7 +596,7 @@ msgstr ""
 msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1649
+#: ui/mainwindow.cpp:1651
 msgid "Add to another playlist"
 msgstr "افزودن به لیست‌پخش دیگر"
 
@@ -669,7 +670,7 @@ msgstr "پس از کپی‌کردن..."
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Album"
 msgstr "آلبوم"
 
@@ -845,7 +846,7 @@ msgstr ""
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:316
 msgid "Artist"
 msgstr "هنرمند"
 
@@ -866,7 +867,8 @@ msgid "Ask when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:222
-#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_ripcddialog.h:323
 msgid "Audio format"
 msgstr "گونه‌ی آوا"
 
@@ -1091,7 +1093,7 @@ msgstr "تغییر اندازه‌ی قلم..."
 msgid "Change repeat mode"
 msgstr "تغییر سبک تکرار"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:189
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "تغییر میانبر..."
 
@@ -1117,7 +1119,7 @@ msgstr "بررسی برای داستان‌های تازه"
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:719
 msgid "Check for updates..."
 msgstr "بررسی به‌روز رسانی..."
 
@@ -1341,7 +1343,7 @@ msgstr "پیکربندی گرووشارک..."
 msgid "Configure Magnatune..."
 msgstr "پیکربندی مگناتیون..."
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
 msgstr "پیکربندی میان‌برها"
 
@@ -1361,7 +1363,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr "پیکربندی جستجوی سراسری..."
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:569
 msgid "Configure library..."
 msgstr "پیکربندی کتابخانه..."
 
@@ -1437,11 +1439,11 @@ msgid "Copy to clipboard"
 msgstr "کپی به کلیپ‌بورد"
 
 #: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:618 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "کپی‌کردن در دستگاه..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:608
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "کپی‌کردن در کتابخانه..."
@@ -1648,7 +1650,7 @@ msgstr "تاریخ بازسازی"
 msgid "Days"
 msgstr "روز"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:187
+#: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
 msgstr "پیش‌&فرض"
 
@@ -1696,7 +1698,7 @@ msgid "Delete downloaded data"
 msgstr "پاک‌کردن دانستنی‌های بارگیری شده"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2193 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
 
@@ -1704,7 +1706,7 @@ msgstr "پاک کردن پرونده‌ها"
 msgid "Delete from device..."
 msgstr "پاک کردن از دستگاه..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:620
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "پاک کردن از دیسک..."
@@ -1729,16 +1731,16 @@ msgstr "پاک کردن اصل پرونده‌ها"
 msgid "Deleting files"
 msgstr "پاک کردن پرونده‌ها"
 
-#: ui/mainwindow.cpp:1570
+#: ui/mainwindow.cpp:1572
 msgid "Dequeue selected tracks"
 msgstr "صف‌بندی دوباره‌ی ترک‌های برگزیده"
 
-#: ui/mainwindow.cpp:1568
+#: ui/mainwindow.cpp:1570
 msgid "Dequeue track"
 msgstr "صف‌بندی دوباره‌ی ترک"
 
 #: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
-#: ../bin/src/ui_ripcd.h:321
+#: ../bin/src/ui_ripcddialog.h:321
 msgid "Destination"
 msgstr "مقصد"
 
@@ -1766,7 +1768,7 @@ msgstr "ویژگی‌های دستگاه..."
 msgid "Devices"
 msgstr "‌دستگاه‌ها"
 
-#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
+#: ../bin/src/ui_ripcddialog.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
 msgstr ""
 
@@ -1816,7 +1818,7 @@ msgstr ""
 #: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
-#: ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_ripcddialog.h:314
 msgid "Disc"
 msgstr "دیسک"
 
@@ -1984,7 +1986,7 @@ msgstr "دراپ‌باکس"
 msgid "Dubstep"
 msgstr ""
 
-#: ../bin/src/ui_ripcd.h:309
+#: ../bin/src/ui_ripcddialog.h:309
 msgid "Duration"
 msgstr ""
 
@@ -2000,7 +2002,7 @@ msgstr "درهم‌ریختن تصادفی دینامیک"
 msgid "Edit smart playlist..."
 msgstr "ویرایش لیست‌پخش هوشمند..."
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1614
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2140,12 +2142,12 @@ msgstr "برابر است با --log-levels *:3"
 
 #: internet/grooveshark/groovesharkservice.cpp:1054
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
-#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1896 ui/mainwindow.cpp:2143
+#: ui/mainwindow.cpp:2291 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "خطا"
 
-#: ui/ripcd.cpp:295
+#: ripper/ripcddialog.cpp:134
 msgid "Error Ripping CD"
 msgstr ""
 
@@ -2305,7 +2307,7 @@ msgstr "پژمردن"
 msgid "Fading duration"
 msgstr "زمان پژمردن"
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1897
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2363,7 +2365,7 @@ msgstr "واکشی کتابخانه‌ی ساب‌سونیک"
 msgid "Fetching cover error"
 msgstr "خطای واکشی جلد"
 
-#: ../bin/src/ui_ripcd.h:320
+#: ../bin/src/ui_ripcddialog.h:320
 msgid "File Format"
 msgstr ""
 
@@ -2528,7 +2530,7 @@ msgstr "تنظیم‌های عمومی"
 #: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
-#: ../bin/src/ui_ripcd.h:317
+#: ../bin/src/ui_ripcddialog.h:317
 msgid "Genre"
 msgstr "ژانر"
 
@@ -2752,12 +2754,12 @@ msgstr "تصاویر (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid "Import..."
 msgstr ""
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 #, qt-format
 msgid "In %1 days"
 msgstr "در %1 روز "
 
-#: core/utilities.cpp:154
+#: core/utilities.cpp:155
 #, qt-format
 msgid "In %1 weeks"
 msgstr "در %1 هفته"
@@ -2813,7 +2815,7 @@ msgstr "نمایه‌گذاری %1"
 msgid "Information"
 msgstr "اطلاعات"
 
-#: ../bin/src/ui_ripcd.h:301
+#: ../bin/src/ui_ripcddialog.h:301
 msgid "Input options"
 msgstr ""
 
@@ -2874,7 +2876,7 @@ msgstr "کلید جلسه‌ی نامعتبر"
 msgid "Invalid username and/or password"
 msgstr "شناسه و/یا گذرواژه‌ی نادرست"
 
-#: ../bin/src/ui_ripcd.h:312
+#: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
 msgstr ""
 
@@ -3026,7 +3028,7 @@ msgstr "کتابخانه"
 msgid "Library advanced grouping"
 msgstr "گروه‌بندی پیشرفته‌ی کتابخانه"
 
-#: ui/mainwindow.cpp:2413
+#: ui/mainwindow.cpp:2415
 msgid "Library rescan notice"
 msgstr "آگاه‌سازی پویش دوباره‌ی کتابخانه"
 
@@ -3266,7 +3268,7 @@ msgstr ""
 msgid "Maximum bitrate"
 msgstr "بیشترین ضرباهنگ"
 
-#: ui/ripcd.cpp:296
+#: ripper/ripcddialog.cpp:135
 msgid "Media has changed. Reloading"
 msgstr ""
 
@@ -3346,7 +3348,7 @@ msgstr "سوارگاه‌ها"
 msgid "Move down"
 msgstr "پایین بردن"
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:611 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "جابه‌جایی به کتابخانه..."
 
@@ -3355,7 +3357,7 @@ msgstr "جابه‌جایی به کتابخانه..."
 msgid "Move up"
 msgstr "بالا بردن"
 
-#: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "آهنگ"
@@ -3428,7 +3430,7 @@ msgstr "هرگز آغاز به پخش نمی‌کند"
 msgid "New folder"
 msgstr "پوشه‌ی تازه"
 
-#: ui/mainwindow.cpp:1666 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1668 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "لیست‌پخش تازه"
 
@@ -3457,7 +3459,7 @@ msgstr "پسین"
 msgid "Next track"
 msgstr "ترک پسین"
 
-#: core/utilities.cpp:152
+#: core/utilities.cpp:153
 msgid "Next week"
 msgstr "هفته‌ی پسین"
 
@@ -3491,7 +3493,7 @@ msgstr "بدون بلوک‌های کوتاه"
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2144 ui/mainwindow.cpp:2292
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های برگزیده مناسب کپی کردن در دستگاه نیستند"
 
@@ -3637,7 +3639,7 @@ msgstr "گشودن پرونده‌ی اوپی‌ام‌ال"
 msgid "Open OPML file..."
 msgstr "گشودن پرونده‌ی اوپی‌ام‌ال..."
 
-#: transcoder/transcodedialog.cpp:234
+#: transcoder/transcodedialog.cpp:239
 msgid "Open a directory to import music from"
 msgstr ""
 
@@ -3668,8 +3670,8 @@ msgstr ""
 msgid "Open in your browser"
 msgstr ""
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:178
-#: ../bin/src/ui_globalshortcutssettingspage.h:181
+#: ../bin/src/ui_globalshortcutssettingspage.h:169
+#: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
 msgstr "گشودن..."
 
@@ -3686,7 +3688,8 @@ msgid "Optimize for quality"
 msgstr "بهینه‌سازی کیفیت"
 
 #: ../bin/src/ui_transcodedialog.h:223
-#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_networkremotesettingspage.h:252
+#: ../bin/src/ui_ripcddialog.h:322
 msgid "Options..."
 msgstr "گزینه‌ها..."
 
@@ -3698,7 +3701,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "سازماندهی پرونده‌ها"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:614
 msgid "Organise files..."
 msgstr "سازماندهی پرونده‌ها..."
 
@@ -3722,7 +3725,7 @@ msgstr ""
 msgid "Output device"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcd.h:318
+#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcddialog.h:318
 msgid "Output options"
 msgstr "گزینه‌های بروندادی"
 
@@ -3760,7 +3763,7 @@ msgstr "مهمانی"
 msgid "Password"
 msgstr "گذرواژه"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1030 ui/mainwindow.cpp:1481
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "درنگ"
@@ -3786,8 +3789,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr "میله‌کنار ساده"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
-#: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:586 ui/mainwindow.cpp:998
+#: ui/mainwindow.cpp:1016 ui/mainwindow.cpp:1484 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3972,7 +3975,7 @@ msgstr "اطلاعات ویرایش را چاپ کن"
 msgid "Profile"
 msgstr "نمایه"
 
-#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcd.h:324
+#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcddialog.h:324
 msgid "Progress"
 msgstr "پیشرفت"
 
@@ -4015,12 +4018,12 @@ msgstr "جستجوی دستگاه..."
 msgid "Queue Manager"
 msgstr "مدیر به‌خط کردن"
 
-#: ui/mainwindow.cpp:1574
+#: ui/mainwindow.cpp:1576
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن ترک‌های گزیده"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1572
+#: ui/mainwindow.cpp:1574
 msgid "Queue track"
 msgstr "به‌خط کردن ترک"
 
@@ -4292,16 +4295,16 @@ msgstr "برگشتن به کلمنتاین"
 msgid "Right"
 msgstr ""
 
-#: ../bin/src/ui_ripcd.h:303
+#: ../bin/src/ui_ripcddialog.h:303
 msgid "Rip"
 msgstr ""
 
-#: ui/ripcd.cpp:114
+#: ripper/ripcddialog.cpp:94
 msgid "Rip CD"
 msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:716
-msgid "Rip audio CD..."
+msgid "Rip audio CD"
 msgstr ""
 
 #: ui/equalizer.cpp:148
@@ -4502,11 +4505,11 @@ msgstr "جستجوی ترک در حال پخش بوسیله‌ی مقداری ن
 msgid "Seek the currently playing track to an absolute position"
 msgstr "جستجوی ترک در حال پخش به یک جایگاه ویژه"
 
-#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
+#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "گزینش همه"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcd.h:311
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:311
 msgid "Select None"
 msgstr "برگزیدن هیچ‌کدام"
 
@@ -4534,7 +4537,7 @@ msgstr "گزینش فرتورسازها"
 msgid "Select visualizations..."
 msgstr "گزینش فرتورسازها..."
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
+#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:319
 msgid "Select..."
 msgstr ""
 
@@ -4558,7 +4561,7 @@ msgstr "جزئیات سرور"
 msgid "Service offline"
 msgstr "سرویس برون‌خط"
 
-#: ui/mainwindow.cpp:1611
+#: ui/mainwindow.cpp:1613
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 را برابر \"%2‌\"قرار بده..."
@@ -4575,12 +4578,12 @@ msgstr "این مقدار را برای همه‌ی ترک‌های گزیده �
 msgid "Settings"
 msgstr ""
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:183
+#: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "میان‌بر"
 
-#: ui/globalshortcutssettingspage.cpp:144
-#: ../bin/src/ui_globalshortcutssettingspage.h:185
+#: ui/globalshortcutssettingspage.cpp:130
+#: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "میان‌بر برای %1"
@@ -4634,7 +4637,7 @@ msgstr "نمایش یک OSD زیبا"
 msgid "Show above status bar"
 msgstr "نمایش در بالای میله‌ی وضعیت"
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:554
 msgid "Show all songs"
 msgstr "نمایش همه‌ی آهنگ‌ها"
 
@@ -4658,12 +4661,12 @@ msgstr "نمایش اندازه‌ی کامل..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:623
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "نمایش در مرورگر پرونده..."
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:626
 msgid "Show in library..."
 msgstr ""
 
@@ -4675,11 +4678,11 @@ msgstr "نمایش در هنرمندان گوناگون"
 msgid "Show moodbar"
 msgstr "نمایش میله‌مود"
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:556
 msgid "Show only duplicates"
 msgstr "نمایش تنها تکراری‌ها"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:558
 msgid "Show only untagged"
 msgstr "نمایش تنها بی‌برچسب‌ها"
 
@@ -4771,11 +4774,11 @@ msgstr "پرش شمار"
 msgid "Skip forwards in playlist"
 msgstr "پرش پیش در لیست‌پخش"
 
-#: ui/mainwindow.cpp:1585
+#: ui/mainwindow.cpp:1587
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1583
+#: ui/mainwindow.cpp:1585
 msgid "Skip track"
 msgstr ""
 
@@ -4892,7 +4895,7 @@ msgstr "استاندارد"
 msgid "Starred"
 msgstr "ستاره‌دار"
 
-#: ui/ripcd.cpp:86
+#: ripper/ripcddialog.cpp:68
 msgid "Start ripping"
 msgstr ""
 
@@ -4900,7 +4903,7 @@ msgstr ""
 msgid "Start the playlist currently playing"
 msgstr "شروع لیست‌پخش در حال پخش"
 
-#: transcoder/transcodedialog.cpp:89
+#: transcoder/transcodedialog.cpp:90
 msgid "Start transcoding"
 msgstr "آغاز تراکد"
 
@@ -4934,7 +4937,7 @@ msgstr "ایست"
 msgid "Stop after"
 msgstr "ایست پس از"
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:589 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "ایست پس از این آهنگ"
 
@@ -5058,7 +5061,7 @@ msgstr "گزینه‌های متن"
 msgid "Thanks to"
 msgstr "تشکر از"
 
-#: ui/globalshortcutssettingspage.cpp:184
+#: ui/globalshortcutssettingspage.cpp:170
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "فرمان «%1» نمی‌تواند شروع شود."
@@ -5090,7 +5093,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "زمان آزمایشی سرور ساب‌سونیک پایان یافته است. خواهش می‌کنیم هزینه‌ای را کمک کنید تا کلید پروانه را دریافت کنید. برای راهنمایی انجام کار تارنمای subsonic.org را ببینید."
 
-#: ui/mainwindow.cpp:2404
+#: ui/mainwindow.cpp:2406
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5132,7 +5135,7 @@ msgid ""
 "continue?"
 msgstr "این پرونده‌ها از دستگاه پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2192 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2194 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5211,7 +5214,7 @@ msgstr "این گونه از دستگاه پشتیبانی نمی‌شود: %1"
 #: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
-#: ../bin/src/ui_ripcd.h:307
+#: ../bin/src/ui_ripcddialog.h:307
 msgid "Title"
 msgstr "عنوان"
 
@@ -5221,7 +5224,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "برای راه‌اندازی رادیوی گرووشارک، ابتدا باید چند آهنگ دیگر از گرووشارک را بشنوید"
 
-#: core/utilities.cpp:137 core/utilities.cpp:149
+#: core/utilities.cpp:138 core/utilities.cpp:150
 msgid "Today"
 msgstr "امروز"
 
@@ -5233,7 +5236,7 @@ msgstr "تبدیل به OSD زیبا"
 msgid "Toggle fullscreen"
 msgstr "تبدیل به تمام‌صفحه"
 
-#: ui/mainwindow.cpp:1576
+#: ui/mainwindow.cpp:1578
 msgid "Toggle queue status"
 msgstr "تبدیل به وضعیت صف"
 
@@ -5245,7 +5248,7 @@ msgstr "تبدیل به وارانی"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "تبدیل به پدیداری برای نمایش‌برصفحه‌ی زیبا"
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 msgid "Tomorrow"
 msgstr "فردا"
 
@@ -5271,7 +5274,7 @@ msgstr "همه‌ی درخواست‌های شبکه انجام شد"
 
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
-#: ../bin/src/ui_ripcd.h:305
+#: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
 msgstr "ترک"
 
@@ -5355,11 +5358,11 @@ msgstr "خطای ناشناخته"
 msgid "Unset cover"
 msgstr "قرار ندادن جلد"
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1583
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1579
+#: ui/mainwindow.cpp:1581
 msgid "Unskip track"
 msgstr ""
 
@@ -5422,7 +5425,7 @@ msgstr "کاربرد"
 msgid "Use Album Artist tag when available"
 msgstr "بکاربردن برچسب «هنرمند آلبوم» زمانی که وجود داشته باشد"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "بکار بردن کلیدهای میان‌بر گنوم"
 
@@ -5679,7 +5682,7 @@ msgid ""
 "well?"
 msgstr "آیا می‌خواهید آهنگ‌های دیگر در این آلبوم را به «هنرمندان گوناگون» تراببرید؟"
 
-#: ui/mainwindow.cpp:2411
+#: ui/mainwindow.cpp:2413
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
 
@@ -5698,7 +5701,7 @@ msgstr "شناسه و گذرواژه‌ی نادرست"
 #: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
 msgid "Year"
 msgstr "سال"
 
@@ -5711,7 +5714,7 @@ msgstr "سال - آلبوم"
 msgid "Years"
 msgstr "سال"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 msgid "Yesterday"
 msgstr "دیروز"
 
@@ -5804,19 +5807,12 @@ msgstr "از اسپاتیفای بیرون آمده‌اید، خواهشمند�
 msgid "You love this track"
 msgstr "عاشق این آهنگ هستید"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:180
+#: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
-
-#: ../bin/src/ui_globalshortcutssettingspage.h:179
-msgid ""
-"You need to launch System Preferences and turn on \"<span style=\" font-"
-"style:italic;\">Enable access for assistive devices</span>\" to use global "
-"shortcuts in Clementine."
-msgstr "نیاز است که تنظیم‌های سیستم را راه‌اندازی کنید و   \"<span style=\" font-style:italic;\">Enable access for assistive devices</span>\" را پویا کنید تا بتوانید از میان‌برهای سراسری در کلمنتاین استفاده کنید."
 
 #: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."

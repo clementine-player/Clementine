@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-15 21:38+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-02-19 19:31+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -74,12 +74,12 @@ msgstr "%1 (%2 kappaletta)"
 msgid "%1 albums"
 msgstr "%1 albumia"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 #, qt-format
 msgid "%1 days"
 msgstr "%1 päivää"
 
-#: core/utilities.cpp:139
+#: core/utilities.cpp:140
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 päivää sitten"
@@ -149,19 +149,19 @@ msgstr "%L1 soittokertaa yhteensä"
 msgid "%filename%"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:213
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n epäonnistui"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:208
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n valmistui"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:202
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -175,7 +175,7 @@ msgstr "&Tasaa teksti"
 msgid "&Center"
 msgstr "&Keskelle"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:188
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
 msgstr "&Oma"
 
@@ -204,7 +204,7 @@ msgstr "&Vasemmalle"
 msgid "&Music"
 msgstr "&Musiikki"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:186
+#: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
 msgstr "&Ei mitään"
 
@@ -260,7 +260,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 msgid "1 day"
 msgstr "1 päivä"
 
@@ -411,7 +411,7 @@ msgstr "Tilitiedot (Premium)"
 msgid "Action"
 msgstr "Toiminto"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgctxt "Category label"
 msgid "Action"
 msgstr "Toiminto"
@@ -452,7 +452,7 @@ msgstr "Lisää toinen suoratoisto..."
 msgid "Add directory..."
 msgstr "Lisää kansio..."
 
-#: ui/mainwindow.cpp:1828
+#: ui/mainwindow.cpp:1830
 msgid "Add file"
 msgstr "Lisää tiedosto"
 
@@ -468,11 +468,12 @@ msgstr "Lisää tiedosto(ja) muuntajaan"
 msgid "Add file..."
 msgstr "Lisää tiedosto..."
 
-#: transcoder/transcodedialog.cpp:218
+#: transcoder/transcodedialog.cpp:223
 msgid "Add files to transcode"
 msgstr "Lisää tiedostoja muunnettavaksi"
 
-#: transcoder/transcodedialog.cpp:300 ui/mainwindow.cpp:1855 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:184
 msgid "Add folder"
 msgstr "Lisää kansio"
 
@@ -596,7 +597,7 @@ msgstr "Lisää Spotify-soittolistoihin"
 msgid "Add to Spotify starred"
 msgstr "Lisää Spotifyn tähdellä varustettuihin"
 
-#: ui/mainwindow.cpp:1649
+#: ui/mainwindow.cpp:1651
 msgid "Add to another playlist"
 msgstr "Lisää toiseen soittolistaan"
 
@@ -670,7 +671,7 @@ msgstr "Kopioinnin jälkeen..."
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Album"
 msgstr "Albumi"
 
@@ -846,7 +847,7 @@ msgstr "Oletko varma että haluat kirjoittaa kaikkien kirjastosi kappleiden tila
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:316
 msgid "Artist"
 msgstr "Esittäjä"
 
@@ -867,7 +868,8 @@ msgid "Ask when saving"
 msgstr "Kysy tallennettaessa"
 
 #: ../bin/src/ui_transcodedialog.h:222
-#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_ripcddialog.h:323
 msgid "Audio format"
 msgstr "Äänimuoto"
 
@@ -1092,7 +1094,7 @@ msgstr "Vaihda kirjasinkokoa..."
 msgid "Change repeat mode"
 msgstr "Vaihda toiston tilaa"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:189
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "Vaihda pikanäppäin..."
 
@@ -1118,7 +1120,7 @@ msgstr "Tarkista uudet jaksot"
 msgid "Check for updates"
 msgstr "Tarkista päivitykset"
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:719
 msgid "Check for updates..."
 msgstr "Tarkista päivitykset..."
 
@@ -1342,7 +1344,7 @@ msgstr "Grooveshark-asetukset..."
 msgid "Configure Magnatune..."
 msgstr "Magnatune-asetukset..."
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
 msgstr "Pikanäppäinten asetukset"
 
@@ -1362,7 +1364,7 @@ msgstr "Vk.com-asetukset..."
 msgid "Configure global search..."
 msgstr "Muokkaa hakua..."
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:569
 msgid "Configure library..."
 msgstr "Kirjaston asetukset..."
 
@@ -1438,11 +1440,11 @@ msgid "Copy to clipboard"
 msgstr "Kopioi leikepöydälle"
 
 #: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:618 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopioi laitteelle..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:608
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Kopioi kirjastoon"
@@ -1649,7 +1651,7 @@ msgstr "Muokattu"
 msgid "Days"
 msgstr "Päivää"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:187
+#: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
 msgstr "&Oletus"
 
@@ -1697,7 +1699,7 @@ msgid "Delete downloaded data"
 msgstr "Poista ladattu data"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2193 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Poista tiedostot"
 
@@ -1705,7 +1707,7 @@ msgstr "Poista tiedostot"
 msgid "Delete from device..."
 msgstr "Poista laitteelta..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:620
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Poista levyltä..."
@@ -1730,16 +1732,16 @@ msgstr "Poista alkuperäiset tiedostot"
 msgid "Deleting files"
 msgstr "Poistetaan tiedostoja"
 
-#: ui/mainwindow.cpp:1570
+#: ui/mainwindow.cpp:1572
 msgid "Dequeue selected tracks"
 msgstr "Poista valitut kappaleet jonosta"
 
-#: ui/mainwindow.cpp:1568
+#: ui/mainwindow.cpp:1570
 msgid "Dequeue track"
 msgstr "Poista kappale jonosta"
 
 #: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
-#: ../bin/src/ui_ripcd.h:321
+#: ../bin/src/ui_ripcddialog.h:321
 msgid "Destination"
 msgstr "Kohde"
 
@@ -1767,7 +1769,7 @@ msgstr "Laitteen ominaisuudet..."
 msgid "Devices"
 msgstr "Laitteet"
 
-#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
+#: ../bin/src/ui_ripcddialog.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
 msgstr ""
 
@@ -1817,7 +1819,7 @@ msgstr "Poissa käytöstä"
 #: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
-#: ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_ripcddialog.h:314
 msgid "Disc"
 msgstr "Levy"
 
@@ -1985,7 +1987,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcd.h:309
+#: ../bin/src/ui_ripcddialog.h:309
 msgid "Duration"
 msgstr "Kesto"
 
@@ -2001,7 +2003,7 @@ msgstr "Dynaaminen satunnainen sekoitus"
 msgid "Edit smart playlist..."
 msgstr "Muokkaa älykästä soittolistaa..."
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1614
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Muokkaa tunnistetta \"%1\"..."
@@ -2141,12 +2143,12 @@ msgstr "Vastaa --log-levels *:3"
 
 #: internet/grooveshark/groovesharkservice.cpp:1054
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
-#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1896 ui/mainwindow.cpp:2143
+#: ui/mainwindow.cpp:2291 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "Virhe"
 
-#: ui/ripcd.cpp:295
+#: ripper/ripcddialog.cpp:134
 msgid "Error Ripping CD"
 msgstr "Virhe CD:tä kopioitaessa"
 
@@ -2306,7 +2308,7 @@ msgstr "Häivytys"
 msgid "Fading duration"
 msgstr "Häivytyksen kesto"
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1897
 msgid "Failed reading CD drive"
 msgstr "CD-aseman lukeminen epäonnistui"
 
@@ -2364,7 +2366,7 @@ msgstr "Noudetaan Subsonic-kirjastoa"
 msgid "Fetching cover error"
 msgstr "Virhe kansikuvan noudossa"
 
-#: ../bin/src/ui_ripcd.h:320
+#: ../bin/src/ui_ripcddialog.h:320
 msgid "File Format"
 msgstr "Tiedostomuoto"
 
@@ -2529,7 +2531,7 @@ msgstr "Yleiset asetukset"
 #: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
-#: ../bin/src/ui_ripcd.h:317
+#: ../bin/src/ui_ripcddialog.h:317
 msgid "Genre"
 msgstr "Tyylilaji"
 
@@ -2753,12 +2755,12 @@ msgstr "Kuvat (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid "Import..."
 msgstr "Tuo..."
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 päivässä"
 
-#: core/utilities.cpp:154
+#: core/utilities.cpp:155
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 viikossa"
@@ -2814,7 +2816,7 @@ msgstr "Indeksoidaan %1"
 msgid "Information"
 msgstr "Tiedot"
 
-#: ../bin/src/ui_ripcd.h:301
+#: ../bin/src/ui_ripcddialog.h:301
 msgid "Input options"
 msgstr ""
 
@@ -2875,7 +2877,7 @@ msgstr "Virheellinen istuntoavain"
 msgid "Invalid username and/or password"
 msgstr "Virheellinen käyttäjätunnus ja / tai salasana"
 
-#: ../bin/src/ui_ripcd.h:312
+#: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
 msgstr "Käänteinen valinta"
 
@@ -3027,7 +3029,7 @@ msgstr "Kirjasto"
 msgid "Library advanced grouping"
 msgstr "Kirjaston tarkennettu ryhmittely"
 
-#: ui/mainwindow.cpp:2413
+#: ui/mainwindow.cpp:2415
 msgid "Library rescan notice"
 msgstr "Ilmoitus kirjaston läpikäynnistä"
 
@@ -3267,7 +3269,7 @@ msgstr ""
 msgid "Maximum bitrate"
 msgstr "Suurin bittinopeus"
 
-#: ui/ripcd.cpp:296
+#: ripper/ripcddialog.cpp:135
 msgid "Media has changed. Reloading"
 msgstr "Media vaihtui, ladataan uudelleen"
 
@@ -3347,7 +3349,7 @@ msgstr "Liitoskohdat"
 msgid "Move down"
 msgstr "Siirrä alas"
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:611 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Siirrä kirjastoon..."
 
@@ -3356,7 +3358,7 @@ msgstr "Siirrä kirjastoon..."
 msgid "Move up"
 msgstr "Siirrä ylös"
 
-#: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Musiikki"
@@ -3429,7 +3431,7 @@ msgstr "Älä koskaan aloita toistoa"
 msgid "New folder"
 msgstr "Uusi kansio"
 
-#: ui/mainwindow.cpp:1666 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1668 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "Uusi soittolista"
 
@@ -3458,7 +3460,7 @@ msgstr "Seuraava"
 msgid "Next track"
 msgstr "Seuraava kappale"
 
-#: core/utilities.cpp:152
+#: core/utilities.cpp:153
 msgid "Next week"
 msgstr "Ensi viikolla"
 
@@ -3492,7 +3494,7 @@ msgstr "Ei lyhyitä lohkoja"
 msgid "None"
 msgstr "Ei mitään"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2144 ui/mainwindow.cpp:2292
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Yksikään valitsemistasi kappaleista ei sovellu kopioitavaksi laitteelle"
 
@@ -3638,7 +3640,7 @@ msgstr "Avaa OPML-tiedosto"
 msgid "Open OPML file..."
 msgstr "Avaa OPML-tiedosto..."
 
-#: transcoder/transcodedialog.cpp:234
+#: transcoder/transcodedialog.cpp:239
 msgid "Open a directory to import music from"
 msgstr "Avaa kansio, josta musiikki tuodaan"
 
@@ -3669,8 +3671,8 @@ msgstr "Avaa uudessa soittolistassa"
 msgid "Open in your browser"
 msgstr "Avaa selaimessa"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:178
-#: ../bin/src/ui_globalshortcutssettingspage.h:181
+#: ../bin/src/ui_globalshortcutssettingspage.h:169
+#: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
 msgstr "Avaa..."
 
@@ -3687,7 +3689,8 @@ msgid "Optimize for quality"
 msgstr "Optimoi laatuun"
 
 #: ../bin/src/ui_transcodedialog.h:223
-#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_networkremotesettingspage.h:252
+#: ../bin/src/ui_ripcddialog.h:322
 msgid "Options..."
 msgstr "Valinnat..."
 
@@ -3699,7 +3702,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Hallitse tiedostoja"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:614
 msgid "Organise files..."
 msgstr "Hallitse tiedostoja..."
 
@@ -3723,7 +3726,7 @@ msgstr "Ulostulo"
 msgid "Output device"
 msgstr "Äänentoistolaite"
 
-#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcd.h:318
+#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcddialog.h:318
 msgid "Output options"
 msgstr "Muunnoksen asetukset"
 
@@ -3761,7 +3764,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Salasana"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1030 ui/mainwindow.cpp:1481
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Keskeytä"
@@ -3787,8 +3790,8 @@ msgstr "Pikseli"
 msgid "Plain sidebar"
 msgstr "Pelkistetty sivupalkki"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
-#: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:586 ui/mainwindow.cpp:998
+#: ui/mainwindow.cpp:1016 ui/mainwindow.cpp:1484 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3973,7 +3976,7 @@ msgstr "Tulosta versiotiedot"
 msgid "Profile"
 msgstr "Profiili"
 
-#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcd.h:324
+#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcddialog.h:324
 msgid "Progress"
 msgstr "Edistyminen"
 
@@ -4016,12 +4019,12 @@ msgstr "Kysytään tietoja laitteelta..."
 msgid "Queue Manager"
 msgstr "Jonohallinta"
 
-#: ui/mainwindow.cpp:1574
+#: ui/mainwindow.cpp:1576
 msgid "Queue selected tracks"
 msgstr "Aseta valitut kappaleet jonoon"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1572
+#: ui/mainwindow.cpp:1574
 msgid "Queue track"
 msgstr "Aseta kappale jonoon"
 
@@ -4293,17 +4296,17 @@ msgstr "Palaa Clementineen"
 msgid "Right"
 msgstr "Oikea"
 
-#: ../bin/src/ui_ripcd.h:303
+#: ../bin/src/ui_ripcddialog.h:303
 msgid "Rip"
 msgstr "Kopioi levy"
 
-#: ui/ripcd.cpp:114
+#: ripper/ripcddialog.cpp:94
 msgid "Rip CD"
 msgstr "Kopioi CD:n sisältö"
 
 #: ../bin/src/ui_mainwindow.h:716
-msgid "Rip audio CD..."
-msgstr "Kopioi ään-CD..."
+msgid "Rip audio CD"
+msgstr "Kopioi ääni-CD:n sisältö"
 
 #: ui/equalizer.cpp:148
 msgid "Rock"
@@ -4503,11 +4506,11 @@ msgstr "Siirry nykyisessä kappaleessa suhteellinen määrä"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Siirry nykyisessä kappaleessa tiettyyn kohtaan"
 
-#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
+#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Valitse kaikki"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcd.h:311
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:311
 msgid "Select None"
 msgstr "Poista valinnat"
 
@@ -4535,7 +4538,7 @@ msgstr "Valitse visualisoinnit"
 msgid "Select visualizations..."
 msgstr "Valitse visualisoinnit..."
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
+#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:319
 msgid "Select..."
 msgstr "Valitse..."
 
@@ -4559,7 +4562,7 @@ msgstr "Palvelimen tiedot"
 msgid "Service offline"
 msgstr "Ei yhteyttä palveluun"
 
-#: ui/mainwindow.cpp:1611
+#: ui/mainwindow.cpp:1613
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Aseta %1 %2:een"
@@ -4576,12 +4579,12 @@ msgstr "Aseta arvo kaikille valituille kappaleille..."
 msgid "Settings"
 msgstr "Asetukset"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:183
+#: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
-#: ui/globalshortcutssettingspage.cpp:144
-#: ../bin/src/ui_globalshortcutssettingspage.h:185
+#: ui/globalshortcutssettingspage.cpp:130
+#: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Pikanäppäin toiminnolle %1"
@@ -4635,7 +4638,7 @@ msgstr "Näytä kuvaruutunäyttö"
 msgid "Show above status bar"
 msgstr "Näytä tilapalkin yläpuolella"
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:554
 msgid "Show all songs"
 msgstr "Näytä kaikki kappaleet"
 
@@ -4659,12 +4662,12 @@ msgstr "Näytä oikeassa koossa..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:623
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Näytä tiedostoselaimessa..."
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:626
 msgid "Show in library..."
 msgstr "Näytä kirjastossa..."
 
@@ -4676,11 +4679,11 @@ msgstr "Näytä kohdassa \"Useita esittäjiä\""
 msgid "Show moodbar"
 msgstr "Näytä mielialapalkki"
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:556
 msgid "Show only duplicates"
 msgstr "Näytä vain kaksoiskappaleet"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:558
 msgid "Show only untagged"
 msgstr "Näytä vain vailla tunnistetta olevat"
 
@@ -4772,11 +4775,11 @@ msgstr "Ohituskerrat"
 msgid "Skip forwards in playlist"
 msgstr "Siirry soittolistan seuraavaan kappaleeseen"
 
-#: ui/mainwindow.cpp:1585
+#: ui/mainwindow.cpp:1587
 msgid "Skip selected tracks"
 msgstr "Ohita valitut kappaleet"
 
-#: ui/mainwindow.cpp:1583
+#: ui/mainwindow.cpp:1585
 msgid "Skip track"
 msgstr "Ohita kappale"
 
@@ -4893,7 +4896,7 @@ msgstr "Normaali"
 msgid "Starred"
 msgstr "Tähdellä merkitty"
 
-#: ui/ripcd.cpp:86
+#: ripper/ripcddialog.cpp:68
 msgid "Start ripping"
 msgstr "Aloita levyn kopiointi"
 
@@ -4901,7 +4904,7 @@ msgstr "Aloita levyn kopiointi"
 msgid "Start the playlist currently playing"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:89
+#: transcoder/transcodedialog.cpp:90
 msgid "Start transcoding"
 msgstr "Aloita muunnos"
 
@@ -4935,7 +4938,7 @@ msgstr "Pysäytä"
 msgid "Stop after"
 msgstr "Lopeta jälkeen"
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:589 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "Pysäytä toistettavan kappaleen jälkeen"
 
@@ -5059,7 +5062,7 @@ msgstr "Tekstivalinnat"
 msgid "Thanks to"
 msgstr "Kiitokset"
 
-#: ui/globalshortcutssettingspage.cpp:184
+#: ui/globalshortcutssettingspage.cpp:170
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "\"%1\"-komentoa ei voitu suorittaa."
@@ -5091,7 +5094,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic-palvelimen kokeiluaika on ohi. Lahjoita saadaksesi lisenssiavaimen. Lisätietoja osoitteessa subsonic.org."
 
-#: ui/mainwindow.cpp:2404
+#: ui/mainwindow.cpp:2406
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5133,7 +5136,7 @@ msgid ""
 "continue?"
 msgstr "Nämä tiedostot poistetaan laitteelta, haluatko varmasti jatkaa?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2192 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2194 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5212,7 +5215,7 @@ msgstr "Tämän tyyppinen laite ei ole tuettu: %1"
 #: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
-#: ../bin/src/ui_ripcd.h:307
+#: ../bin/src/ui_ripcddialog.h:307
 msgid "Title"
 msgstr "Nimi"
 
@@ -5222,7 +5225,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Ennen kuin alat käyttää Grooveshark-radiota, sinun tulisi kuunnella vähintään muutama kappale"
 
-#: core/utilities.cpp:137 core/utilities.cpp:149
+#: core/utilities.cpp:138 core/utilities.cpp:150
 msgid "Today"
 msgstr "Tänään"
 
@@ -5234,7 +5237,7 @@ msgstr "Kuvaruutunäyttö päälle / pois"
 msgid "Toggle fullscreen"
 msgstr "Koko näytön tila"
 
-#: ui/mainwindow.cpp:1576
+#: ui/mainwindow.cpp:1578
 msgid "Toggle queue status"
 msgstr "Vaihda jonon tila"
 
@@ -5246,7 +5249,7 @@ msgstr "Valitse scrobbling"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Kuvaruutunäyttö päälle / pois"
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 msgid "Tomorrow"
 msgstr "Huomenna"
 
@@ -5272,7 +5275,7 @@ msgstr "Yhteensä verkko pyyntöjä tehty"
 
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
-#: ../bin/src/ui_ripcd.h:305
+#: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
 msgstr "Kappale"
 
@@ -5356,11 +5359,11 @@ msgstr "Tuntematon virhe"
 msgid "Unset cover"
 msgstr "Poista kansikuva"
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1583
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1579
+#: ui/mainwindow.cpp:1581
 msgid "Unskip track"
 msgstr ""
 
@@ -5423,7 +5426,7 @@ msgstr "Käyttötaso"
 msgid "Use Album Artist tag when available"
 msgstr "Käytä 'Album Artist' -tietuetta, jos mahdollista"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "Käytä Gnomen pikanäppäimiä"
 
@@ -5680,7 +5683,7 @@ msgid ""
 "well?"
 msgstr "Haluatko siirtä albumin muut kappaleet luokkaan \"Useita esittäjiä\"?"
 
-#: ui/mainwindow.cpp:2411
+#: ui/mainwindow.cpp:2413
 msgid "Would you like to run a full rescan right now?"
 msgstr "Haluatko suorittaa kirjaston läpikäynnin nyt?"
 
@@ -5699,7 +5702,7 @@ msgstr "Väärä käyttäjätunnus tai salasana."
 #: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
 msgid "Year"
 msgstr "Vuosi"
 
@@ -5712,7 +5715,7 @@ msgstr "Vuosi - Albumi"
 msgid "Years"
 msgstr "Vuotta"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 msgid "Yesterday"
 msgstr "Eilen"
 
@@ -5805,19 +5808,12 @@ msgstr "Sinut on kirjattu ulos Spotifysta. Anna salasanasi uudelleen."
 msgid "You love this track"
 msgstr "Tykkäät tästä kappaleesta"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:180
+#: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
 msgstr "Avaa Järjestelmän asetukset ja salli Clementinen \"<span style=\"font-style:italic\">hallita tietokonettasi</span>\" käyttääksesi Clementinen yleisiä pikanäppäimiä."
-
-#: ../bin/src/ui_globalshortcutssettingspage.h:179
-msgid ""
-"You need to launch System Preferences and turn on \"<span style=\" font-"
-"style:italic;\">Enable access for assistive devices</span>\" to use global "
-"shortcuts in Clementine."
-msgstr "Avaa Järjestelmäasetukset -> Käyttöapu ja ota käyttön \"<span style=\" font-style:italic;\">Salli pääsy apulaitteisiin</span>\" käyttääksesi Clementinen yleisiä pikanäppäimiä."
 
 #: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."
