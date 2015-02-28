@@ -106,6 +106,7 @@ set(SOURCES
   core/stylesheetloader.cpp
   core/tagreaderclient.cpp
   core/taskmanager.cpp
+  core/thread.cpp
   core/urlhandler.cpp
   core/utilities.cpp
 

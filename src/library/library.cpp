@@ -24,11 +24,10 @@
 #include "core/player.h"
 #include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
+#include "core/thread.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/querygenerator.h"
 #include "smartplaylists/search.h"
-
-#include <QThread>
 
 const char* Library::kSongsTable = "songs";
 const char* Library::kDirsTable = "directories";
@@ -67,17 +66,15 @@ Library::Library(Application* app, QObject* parent)
                         Search::Sort_Random, SearchTerm::Field_Title, 50)))
           << GeneratorPtr(new QueryGenerator(
                  QT_TRANSLATE_NOOP("Library", "Ever played"),
-                 Search(Search::Type_And,
-                        Search::TermList()
-                            << SearchTerm(SearchTerm::Field_PlayCount,
-                                          SearchTerm::Op_GreaterThan, 0),
+                 Search(Search::Type_And, Search::TermList() << SearchTerm(
+                                              SearchTerm::Field_PlayCount,
+                                              SearchTerm::Op_GreaterThan, 0),
                         Search::Sort_Random, SearchTerm::Field_Title)))
           << GeneratorPtr(new QueryGenerator(
                  QT_TRANSLATE_NOOP("Library", "Never played"),
-                 Search(Search::Type_And,
-                        Search::TermList()
-                            << SearchTerm(SearchTerm::Field_PlayCount,
-                                          SearchTerm::Op_Equals, 0),
+                 Search(Search::Type_And, Search::TermList() << SearchTerm(
+                                              SearchTerm::Field_PlayCount,
+                                              SearchTerm::Op_Equals, 0),
                         Search::Sort_Random, SearchTerm::Field_Title)))
           << GeneratorPtr(new QueryGenerator(
                  QT_TRANSLATE_NOOP("Library", "Last played"),
@@ -110,12 +107,11 @@ Library::Library(Application* app, QObject* parent)
                             << SearchTerm(SearchTerm::Field_SkipCount,
                                           SearchTerm::Op_GreaterThan, 4),
                         Search::Sort_FieldDesc, SearchTerm::Field_SkipCount))))
-      << (LibraryModel::GeneratorList()
-          << GeneratorPtr(new QueryGenerator(
-                 QT_TRANSLATE_NOOP("Library", "Dynamic random mix"),
-                 Search(Search::Type_All, Search::TermList(),
-                        Search::Sort_Random, SearchTerm::Field_Title),
-                 true))));
+      << (LibraryModel::GeneratorList() << GeneratorPtr(new QueryGenerator(
+              QT_TRANSLATE_NOOP("Library", "Dynamic random mix"),
+              Search(Search::Type_All, Search::TermList(), Search::Sort_Random,
+                     SearchTerm::Field_Title),
+              true))));
 
   // full rescan revisions
   full_rescan_revisions_[26] = tr("CUE sheet support");
@@ -131,7 +127,8 @@ Library::~Library() {
 
 void Library::Init() {
   watcher_ = new LibraryWatcher;
-  watcher_thread_ = new QThread(this);
+  watcher_thread_ = new Thread(this);
+  watcher_thread_->SetIoPriority(Utilities::IOPRIO_CLASS_IDLE);
 
   watcher_->moveToThread(watcher_thread_);
   watcher_thread_->start(QThread::IdlePriority);
@@ -206,9 +203,7 @@ void Library::WriteAllSongsStatisticsToFiles() {
   app_->task_manager()->SetTaskFinished(task_id);
 }
 
-void Library::Stopped() {
-  CurrentSongChanged(Song());
-}
+void Library::Stopped() { CurrentSongChanged(Song()); }
 
 void Library::CurrentSongChanged(const Song& song) {
   TagReaderReply* reply = nullptr;
@@ -244,7 +239,7 @@ void Library::SongsStatisticsChanged(const SongList& songs) {
 }
 
 SongList Library::FilterCurrentWMASong(SongList songs, Song* queued) {
-  for (SongList::iterator it = songs.begin(); it != songs.end(); ) {
+  for (SongList::iterator it = songs.begin(); it != songs.end();) {
     if (it->url() == current_wma_song_url_) {
       *queued = *it;
       it = songs.erase(it);

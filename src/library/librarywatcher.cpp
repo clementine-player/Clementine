@@ -59,8 +59,6 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
       rescan_paused_(false),
       total_watches_(0),
       cue_parser_(new CueParser(backend_, this)) {
-  Utilities::SetThreadIOPriority(Utilities::IOPRIO_CLASS_IDLE);
-
   rescan_timer_->setInterval(1000);
   rescan_timer_->setSingleShot(true);
 
@@ -636,7 +634,6 @@ void LibraryWatcher::RescanPathsNow() {
 }
 
 QString LibraryWatcher::PickBestImage(const QStringList& images) {
-
   // This is used when there is more than one image in a directory.
   // Pick the biggest image that matches the most important filter
 
