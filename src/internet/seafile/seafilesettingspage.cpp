@@ -134,6 +134,8 @@ void SeafileSettingsPage::Login() {
 }
 
 void SeafileSettingsPage::Logout() {
+  // Forget the songs added
+  service_->ChangeLibrary("none");
   service_->ForgetCredentials();
 
   // We choose to keep the server

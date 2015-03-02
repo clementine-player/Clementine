@@ -52,7 +52,7 @@ class CloudFileService : public InternetService {
   virtual bool has_credentials() const = 0;
   bool is_indexing() const { return indexing_task_id_ != -1; }
 
- signals:
+signals:
   void AllIndexingTasksFinished();
 
  public slots:
@@ -67,6 +67,7 @@ class CloudFileService : public InternetService {
                                       const QString& authorisation);
   virtual bool IsSupportedMimeType(const QString& mime_type) const;
   QString GuessMimeTypeForFile(const QString& filename) const;
+  void AbortReadTagsReplies();
 
  protected slots:
   void ShowCoverManager();
@@ -86,6 +87,7 @@ class CloudFileService : public InternetService {
   std::unique_ptr<AlbumCoverManager> cover_manager_;
   PlaylistManager* playlist_manager_;
   TaskManager* task_manager_;
+  QList<TagReaderClient::ReplyType*> pending_tagreader_replies_;
 
  private:
   QIcon icon_;

@@ -68,8 +68,8 @@ CloudFileService::CloudFileService(Application* app, InternetModel* parent,
   library_sort_model_->setSortLocaleAware(true);
   library_sort_model_->sort(0);
 
-  app->global_search()->AddProvider(new CloudFileSearchProvider(
-      library_backend_, service_id, icon_, this));
+  app->global_search()->AddProvider(
+      new CloudFileSearchProvider(library_backend_, service_id, icon_, this));
 }
 
 QStandardItem* CloudFileService::CreateRootItem() {
@@ -160,6 +160,8 @@ void CloudFileService::MaybeAddFileToDatabase(const Song& metadata,
   TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
       download_url, metadata.title(), metadata.filesize(), mime_type,
       authorisation);
+  pending_tagreader_replies_.append(reply);
+
   NewClosure(reply, SIGNAL(Finished(bool)), this,
              SLOT(ReadTagsFinished(TagReaderClient::ReplyType*, Song)), reply,
              metadata);
@@ -167,7 +169,16 @@ void CloudFileService::MaybeAddFileToDatabase(const Song& metadata,
 
 void CloudFileService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
                                         const Song& metadata) {
+  int index_reply;
+
   reply->deleteLater();
+
+  if ((index_reply = pending_tagreader_replies_.indexOf(reply)) == -1) {
+    qLog(Debug) << "Ignore the reply";
+    return;
+  }
+
+  pending_tagreader_replies_.removeAt(index_reply);
 
   indexing_task_progress_++;
   if (indexing_task_progress_ == indexing_task_max_) {
@@ -218,4 +229,13 @@ QString CloudFileService::GuessMimeTypeForFile(const QString& filename) const {
     return "audio/x-ms-wma";
   }
   return QString::null;
+}
+
+void CloudFileService::AbortReadTagsReplies() {
+  qLog(Debug) << "Aborting the read tags replies";
+  pending_tagreader_replies_.clear();
+
+  task_manager_->SetTaskFinished(indexing_task_id_);
+  indexing_task_id_ = -1;
+  emit AllIndexingTasksFinished();
 }
