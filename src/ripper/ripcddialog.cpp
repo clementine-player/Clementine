@@ -20,6 +20,7 @@
 #include <cdio/cdio.h>
 #include <QCheckBox>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QSettings>
@@ -274,12 +275,12 @@ void RipCDDialog::BuildTrackListTable() {
 }
 
 QString RipCDDialog::GetOutputFileName(const QString& basename) const {
-  QString path =
-      ui_->destination->itemData(ui_->destination->currentIndex()).toString();
+  QFileInfo path(
+      ui_->destination->itemData(ui_->destination->currentIndex()).toString());
   QString extension = ui_->format->itemData(ui_->format->currentIndex())
                           .value<TranscoderPreset>()
                           .extension_;
-  return path + '/' + basename + '.' + extension;
+  return path.filePath() + '/' + basename + '.' + extension;
 }
 
 QString RipCDDialog::ParseFileFormatString(const QString& file_format,
