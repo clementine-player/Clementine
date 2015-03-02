@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-19 15:24+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-02-27 17:54+0000\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -73,12 +73,12 @@ msgstr "%1 (%2 pjesma)"
 msgid "%1 albums"
 msgstr "%1 albuma"
 
-#: core/utilities.cpp:121
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dana"
 
-#: core/utilities.cpp:140
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 dana prije"
@@ -259,7 +259,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0 piksela"
 
-#: core/utilities.cpp:121
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "1 dan"
 
@@ -276,7 +276,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40 %"
 
-#: library/library.cpp:65
+#: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 naizmjeničnih pjesama"
 
@@ -594,7 +594,7 @@ msgstr "Dodaj na Spotify popis izvođenja"
 
 #: internet/spotify/spotifyservice.cpp:610
 msgid "Add to Spotify starred"
-msgstr ""
+msgstr "Dodaj u Spotify ocjenjeno"
 
 #: ui/mainwindow.cpp:1651
 msgid "Add to another playlist"
@@ -738,7 +738,7 @@ msgstr "Svi popisi izvođenja (%1)"
 msgid "All the translators"
 msgstr "Svi prevoditelji"
 
-#: library/library.cpp:101
+#: library/library.cpp:98
 msgid "All tracks"
 msgstr "Sve pjesme"
 
@@ -1050,7 +1050,7 @@ msgstr "Uobičajeno, Grooveshark razvrstava pjesme prema datumu dodavanja"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:117
 msgid "CUE sheet support"
 msgstr "Podrška za CUE listu"
 
@@ -1994,7 +1994,7 @@ msgstr "Trajanje"
 msgid "Dynamic mode is on"
 msgstr "Dinamičan način je uključen"
 
-#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:111
 msgid "Dynamic random mix"
 msgstr "Dinamičan naizmjeničan mix"
 
@@ -2186,7 +2186,7 @@ msgstr "Greška pri obradi %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Greška pri učitavanju glazbenog CD-a"
 
-#: library/library.cpp:69
+#: library/library.cpp:68
 msgid "Ever played"
 msgstr "Ikada reproducirano"
 
@@ -2341,7 +2341,7 @@ msgstr "Brzo"
 msgid "Favorites"
 msgstr "Omiljeno"
 
-#: library/library.cpp:91
+#: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "Omiljene pjesme"
 
@@ -2754,12 +2754,12 @@ msgstr "Slike (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid "Import..."
 msgstr "Uvezi..."
 
-#: core/utilities.cpp:152
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "Za %1 dana"
 
-#: core/utilities.cpp:155
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Za %1 tjedna"
@@ -2969,7 +2969,7 @@ msgstr "Veliki omot albuma (bez pojedinosti)"
 msgid "Large sidebar"
 msgstr "Velika bočna traka"
 
-#: library/library.cpp:83
+#: library/library.cpp:80
 msgid "Last played"
 msgstr "Zadnje reproducirano"
 
@@ -3006,7 +3006,7 @@ msgstr "Last.fm korisničko ime"
 msgid "Last.fm wiki"
 msgstr "Last.fm wiki"
 
-#: library/library.cpp:105
+#: library/library.cpp:102
 msgid "Least favourite tracks"
 msgstr "Najmanje omiljene pjesme"
 
@@ -3331,7 +3331,7 @@ msgstr "Traka tonaliteta"
 msgid "More"
 msgstr "Više"
 
-#: library/library.cpp:87
+#: library/library.cpp:84
 msgid "Most played"
 msgstr "Najviše reproducirano"
 
@@ -3415,7 +3415,7 @@ msgstr "Mrežno upravljanje"
 msgid "Never"
 msgstr "Nikada"
 
-#: library/library.cpp:76
+#: library/library.cpp:74
 msgid "Never played"
 msgstr "Nikada reproducirano"
 
@@ -3446,7 +3446,7 @@ msgstr "Nove pjesme"
 msgid "New tracks will be added automatically."
 msgstr "Nova pjesma bit će automatski dodana."
 
-#: library/library.cpp:95
+#: library/library.cpp:92
 msgid "Newest tracks"
 msgstr "Najnovija pjesma"
 
@@ -3459,7 +3459,7 @@ msgstr "Sljedeća pjesma"
 msgid "Next track"
 msgstr "Sljedeća pjesma"
 
-#: core/utilities.cpp:153
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "Sljedeći tjedan"
 
@@ -4305,7 +4305,7 @@ msgstr "Ripaj CD"
 
 #: ../bin/src/ui_mainwindow.h:716
 msgid "Rip audio CD"
-msgstr ""
+msgstr "Ripaj glazbeni CD"
 
 #: ui/equalizer.cpp:148
 msgid "Rock"
@@ -4387,7 +4387,7 @@ msgstr "Spremi statistiku u datoteku oznaka kada je moguće"
 msgid "Save this stream in the Internet tab"
 msgstr "Spremite ovaj stream u internet kartici"
 
-#: library/library.cpp:196
+#: library/library.cpp:193
 msgid "Saving songs statistics into songs files"
 msgstr "Spremanje statistike pjesama u datoteke pjesama"
 
@@ -5224,7 +5224,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Za pokretanje Grooveshark radija, Prvo biste trebali poslušati nekoliko drugih Grooveshark pjesama"
 
-#: core/utilities.cpp:138 core/utilities.cpp:150
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Danas"
 
@@ -5248,7 +5248,7 @@ msgstr "Uključi/Isključi skrobblanje"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Uključi/Isključi vidljivost za ljepši OSD"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "Sutra"
 
@@ -5403,7 +5403,7 @@ msgstr "Ažuriraj ovaj podcast"
 msgid "Updating"
 msgstr "Ažuriranje"
 
-#: library/librarywatcher.cpp:94
+#: library/librarywatcher.cpp:92
 #, qt-format
 msgid "Updating %1"
 msgstr "Ažuriranje %1"
@@ -5413,7 +5413,7 @@ msgstr "Ažuriranje %1"
 msgid "Updating %1%..."
 msgstr "Ažuriranje %1..."
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Ažuriranje fonoteke"
 
@@ -5714,7 +5714,7 @@ msgstr "Godina - Album"
 msgid "Years"
 msgstr "Godine"
 
-#: core/utilities.cpp:139
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "Jučer"
 
