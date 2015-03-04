@@ -292,9 +292,8 @@ void PodcastParser::ParseOutline(QXmlStreamReader* reader,
           Podcast podcast;
           podcast.set_description(attributes.value("description").toString());
           QString title = attributes.value("text").toString();
-          // The OPML 2.0 specification requires a "text" attribue. Some
-          // applications, however, will leave this blank if the title
-          // and identical.
+          // The OPML 2.0 specification requires a "text" attribute. Some
+          // applications, however, will leave this empty if "title" exists.
           if (title.isEmpty()) {
              title = attributes.value("title").toString();
           }
