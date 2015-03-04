@@ -291,7 +291,14 @@ void PodcastParser::ParseOutline(QXmlStreamReader* reader,
           // Parse the feed and add it to this container
           Podcast podcast;
           podcast.set_description(attributes.value("description").toString());
-          podcast.set_title(attributes.value("text").toString());
+          QString title = attributes.value("text").toString();
+          // The OPML 2.0 specification requires a "text" attribue. Some
+          // applications, however, will leave this blank if the title
+          // and identical.
+          if (title.isEmpty()) {
+             title = attributes.value("title").toString();
+          }
+          podcast.set_title(title);
           podcast.set_image_url_large(QUrl::fromEncoded(
               attributes.value("imageHref").toString().toAscii()));
           podcast.set_url(QUrl::fromEncoded(
