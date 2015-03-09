@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-# BrLi <rainman59118@gmail.com>, 2013-2014
+# BrLi <rainman59118@gmail.com>, 2013-2015
 # Cheng-Hong Wu <stu2731652@gmail.com>, 2012
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # taijuin lee <taijuin@gmail.com>, 2011-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-19 15:24+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-03-05 05:53+0000\n"
+"Last-Translator: BrLi <rainman59118@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -147,19 +147,19 @@ msgstr "%L1總共播放"
 msgid "%filename%"
 msgstr "%檔案名稱%"
 
-#: transcoder/transcodedialog.cpp:213
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n 失敗的"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n 完成的"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -466,12 +466,12 @@ msgstr "加入檔案以便轉碼"
 msgid "Add file..."
 msgstr "加入檔案..."
 
-#: transcoder/transcodedialog.cpp:223
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
-#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
-#: ripper/ripcddialog.cpp:184
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "加入資料夾"
 
@@ -1033,6 +1033,10 @@ msgstr ""
 msgid "Buffering"
 msgstr "緩衝"
 
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr ""
+
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
 msgstr ""
@@ -1207,11 +1211,11 @@ msgstr "Clementine 可以自動轉換您複製到這個裝置的音樂為它可�
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr ""
+msgstr "Clementine 能播放您上傳到 Box 的音樂檔"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "Clementine 能播放您上傳到 Dropbox 的音樂檔"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
@@ -1219,7 +1223,7 @@ msgstr "Clementine 可以播放您已經上傳到Google 雲端硬碟的音樂"
 
 #: ../bin/src/ui_skydrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to OneDrive"
-msgstr ""
+msgstr "Clementine 能播放您上傳到 OneDrive 的音樂檔"
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Clementine can show a message when the track changes."
@@ -1248,7 +1252,7 @@ msgstr "Clementine 無法搜尋到任何符合此檔案的結果"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr ""
+msgstr "Clementine 將在以下位置搜尋音樂:"
 
 #: library/libraryview.cpp:351
 msgid "Click here to add some music"
@@ -1280,7 +1284,7 @@ msgstr "關閉"
 
 #: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
-msgstr ""
+msgstr "關閉播放清單"
 
 #: visualisations/visualisationcontainer.cpp:135
 msgid "Close visualization"
@@ -1313,7 +1317,7 @@ msgstr "評論"
 
 #: internet/vk/vkservice.cpp:154
 msgid "Community Radio"
-msgstr ""
+msgstr "社群廣播"
 
 #: ../bin/src/ui_edittagdialog.h:696
 msgid "Complete tags automatically"
@@ -1332,7 +1336,7 @@ msgstr "作曲家"
 #: internet/core/searchboxwidget.cpp:45
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "設定 %1 ..."
 
 #: internet/grooveshark/groovesharkservice.cpp:565
 msgid "Configure Grooveshark..."
@@ -1352,15 +1356,15 @@ msgstr "設定 Spotify..."
 
 #: internet/subsonic/subsonicservice.cpp:112
 msgid "Configure Subsonic..."
-msgstr ""
+msgstr "設定 Subsonic..."
 
 #: internet/vk/vkservice.cpp:337
 msgid "Configure Vk.com..."
-msgstr ""
+msgstr "設定 Vk.com..."
 
 #: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:472
 msgid "Configure global search..."
-msgstr ""
+msgstr "設定全域搜尋..."
 
 #: ui/mainwindow.cpp:569
 msgid "Configure library..."
@@ -1394,12 +1398,12 @@ msgstr "連接到 Spotify"
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "伺服器拒絕連線，請檢查伺服器網址。\n例如: http://localhost:4040/"
 
 #: internet/subsonic/subsonicsettingspage.cpp:140
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "連線逾時，請檢查伺服器網址。\n例如: http://localhost:4040/"
 
 #: internet/vk/vkservice.cpp:1095
 msgid "Connection trouble or audio is disabled by owner"
@@ -1407,7 +1411,7 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:682
 msgid "Console"
-msgstr ""
+msgstr "終端機"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
@@ -1423,15 +1427,15 @@ msgstr "轉換任何裝置無法播放的音樂"
 
 #: ../bin/src/ui_networkremotesettingspage.h:248
 msgid "Convert lossless audiofiles before sending them to the remote."
-msgstr ""
+msgstr "在上傳到遠端前轉換無損音樂檔。"
 
 #: ../bin/src/ui_networkremotesettingspage.h:250
 msgid "Convert lossless files"
-msgstr ""
+msgstr "轉換無損檔案"
 
 #: internet/vk/vkservice.cpp:324
 msgid "Copy share url to clipboard"
-msgstr ""
+msgstr "複製分享連結到剪貼簿"
 
 #: internet/core/internetservice.cpp:57
 msgid "Copy to clipboard"
@@ -2146,7 +2150,7 @@ msgstr ""
 msgid "Error"
 msgstr "錯誤"
 
-#: ripper/ripcddialog.cpp:134
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr ""
 
@@ -3267,7 +3271,7 @@ msgstr ""
 msgid "Maximum bitrate"
 msgstr "最大位元率"
 
-#: ripper/ripcddialog.cpp:135
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr ""
 
@@ -3356,7 +3360,7 @@ msgstr "移到音樂庫..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "音樂"
@@ -3638,7 +3642,7 @@ msgstr ""
 msgid "Open OPML file..."
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:239
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr ""
 
@@ -4298,7 +4302,7 @@ msgstr ""
 msgid "Rip"
 msgstr ""
 
-#: ripper/ripcddialog.cpp:94
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr ""
 
@@ -4894,7 +4898,7 @@ msgstr "標準"
 msgid "Starred"
 msgstr "已標記星號"
 
-#: ripper/ripcddialog.cpp:68
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr ""
 

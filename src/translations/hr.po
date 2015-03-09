@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-27 17:54+0000\n"
+"PO-Revision-Date: 2015-03-07 11:16+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,19 +148,19 @@ msgstr "%L1 ukupno izvođenja"
 msgid "%filename%"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:213
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n završeno"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -467,12 +467,12 @@ msgstr "Dodaj datoteku(e) u enkôder"
 msgid "Add file..."
 msgstr "Dodajte datoteku..."
 
-#: transcoder/transcodedialog.cpp:223
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "Dodajte datoteku za transkôdiranje..."
 
-#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
-#: ripper/ripcddialog.cpp:184
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Dodajte mapu"
 
@@ -1033,6 +1033,10 @@ msgstr "Trajanje međuspremnika"
 #: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "Međupohrana"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "Izgradnja Seafile rasporeda..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -1984,7 +1988,7 @@ msgstr "Dropbox"
 
 #: ui/equalizer.cpp:119
 msgid "Dubstep"
-msgstr ""
+msgstr "Udvostručen korak"
 
 #: ../bin/src/ui_ripcddialog.h:309
 msgid "Duration"
@@ -2147,7 +2151,7 @@ msgstr "Odgovara --log-levels *: 3"
 msgid "Error"
 msgstr "Greška"
 
-#: ripper/ripcddialog.cpp:134
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "Greška pri ripanju CD-a"
 
@@ -2692,7 +2696,7 @@ msgstr "Visoka (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "HipHop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2939,7 +2943,7 @@ msgstr "Mačići"
 
 #: ui/equalizer.cpp:131
 msgid "Kuduro"
-msgstr ""
+msgstr "Kuduro"
 
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
@@ -3268,7 +3272,7 @@ msgstr "Maksimalno rezultata globalne pretrage"
 msgid "Maximum bitrate"
 msgstr "Maksimalna brzina prijenosa"
 
-#: ripper/ripcddialog.cpp:135
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "Medij je promijenjen. Ponovno učitavanje"
 
@@ -3357,7 +3361,7 @@ msgstr "Premjesti u fonoteku..."
 msgid "Move up"
 msgstr "Pomakni gore"
 
-#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Glazba"
@@ -3639,7 +3643,7 @@ msgstr "Otvori OPML datoteku"
 msgid "Open OPML file..."
 msgstr "Otvori OPML datoteku..."
 
-#: transcoder/transcodedialog.cpp:239
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "Otvori direktorij za uvoz glazbe iz"
 
@@ -4299,7 +4303,7 @@ msgstr "Desno"
 msgid "Rip"
 msgstr "Ripaj"
 
-#: ripper/ripcddialog.cpp:94
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "Ripaj CD"
 
@@ -4895,7 +4899,7 @@ msgstr "Standardno"
 msgid "Starred"
 msgstr "Sa zvjezdicom"
 
-#: ripper/ripcddialog.cpp:68
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "Pokreni ripanje"
 

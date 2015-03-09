@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-19 15:44+0000\n"
+"PO-Revision-Date: 2015-03-02 12:39+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/clementine/language/pt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,19 +149,19 @@ msgstr "%L1 reproduções"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:213
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n falha(s)"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n concluída(s)"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -468,12 +468,12 @@ msgstr "Adicionar ficheiro(s) ao conversor"
 msgid "Add file..."
 msgstr "Adicionar ficheiro..."
 
-#: transcoder/transcodedialog.cpp:223
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "Adicionar ficheiros a converter"
 
-#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
-#: ripper/ripcddialog.cpp:184
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Adicionar pasta"
 
@@ -1034,6 +1034,10 @@ msgstr "Duração da memória"
 #: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "A processar..."
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "A criar índice Seafile..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -2148,7 +2152,7 @@ msgstr "Equivalente a --log-levels *:3"
 msgid "Error"
 msgstr "Erro"
 
-#: ripper/ripcddialog.cpp:134
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "Erro ao extrair CD"
 
@@ -3269,7 +3273,7 @@ msgstr "Resultados máximos na procura global"
 msgid "Maximum bitrate"
 msgstr "Taxa de dados máxima"
 
-#: ripper/ripcddialog.cpp:135
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "Multimédia alterada. A recarregar..."
 
@@ -3358,7 +3362,7 @@ msgstr "Mover para a coleção..."
 msgid "Move up"
 msgstr "Mover para cima"
 
-#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Música"
@@ -3640,7 +3644,7 @@ msgstr "Abrir um ficheiro OPML"
 msgid "Open OPML file..."
 msgstr "Abrir um ficheiro OPML..."
 
-#: transcoder/transcodedialog.cpp:239
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "Abrir um diretório para efetuar a importação"
 
@@ -4300,7 +4304,7 @@ msgstr "Direita"
 msgid "Rip"
 msgstr "Extrair"
 
-#: ripper/ripcddialog.cpp:94
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "Extrair CD"
 
@@ -4896,7 +4900,7 @@ msgstr "Padrão"
 msgid "Starred"
 msgstr "Com estrela"
 
-#: ripper/ripcddialog.cpp:68
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "Iniciar extração"
 

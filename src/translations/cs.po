@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-19 21:07+0000\n"
+"PO-Revision-Date: 2015-03-02 14:41+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,19 +157,19 @@ msgstr "%L1 celkových přehrání"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:213
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "nepodařilo se %n"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "dokončeno %n"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -476,12 +476,12 @@ msgstr "Přidat soubor(y) k překódování"
 msgid "Add file..."
 msgstr "Přidat soubor..."
 
-#: transcoder/transcodedialog.cpp:223
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
-#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
-#: ripper/ripcddialog.cpp:184
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Přidat složku"
 
@@ -1042,6 +1042,10 @@ msgstr "Délka vyrovnávací paměti"
 #: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "Ukládá se do vyrovnávací paměti"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "Sestavuje se index Seafile..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -2156,7 +2160,7 @@ msgstr "Rovnocenné s --log-levels *:3"
 msgid "Error"
 msgstr "Chyba"
 
-#: ripper/ripcddialog.cpp:134
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "Chyba při vytahování skladeb z CD"
 
@@ -3277,7 +3281,7 @@ msgstr "Nejvíce výsledků celkového hledání"
 msgid "Maximum bitrate"
 msgstr "Nejvyšší datový tok"
 
-#: ripper/ripcddialog.cpp:135
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "Médium se změnilo. Načítá se znovu."
 
@@ -3366,7 +3370,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Hudba"
@@ -3648,7 +3652,7 @@ msgstr "Otevřít soubor OPML"
 msgid "Open OPML file..."
 msgstr "Otevřít soubor OPML..."
 
-#: transcoder/transcodedialog.cpp:239
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "Otevřít adresář a zavést hudbu v něm"
 
@@ -4308,7 +4312,7 @@ msgstr "Vpravo"
 msgid "Rip"
 msgstr "Vytáhnout"
 
-#: ripper/ripcddialog.cpp:94
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "Vytáhnout skladby z CD"
 
@@ -4904,7 +4908,7 @@ msgstr "Obvyklý"
 msgid "Starred"
 msgstr "S hvězdičkou"
 
-#: ripper/ripcddialog.cpp:68
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "Začít vytahovat"
 

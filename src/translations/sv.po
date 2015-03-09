@@ -7,7 +7,7 @@
 # Christian Svensson <chris.sv88@gmail.com>, 2013
 # Daniel Sandman <revoltism@gmail.com>, 2012
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Kristian <kristianm24@gmail.com>, 2013-2014
+# Kristian <kristianm24@gmail.com>, 2013-2015
 # Kristian <kristianm24@gmail.com>, 2012
 # Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>, 2014
 # paperbagcorner <mandersson444@gmail.com>, 2014
@@ -20,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-19 15:24+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-03-02 16:42+0000\n"
+"Last-Translator: Kristian <kristianm24@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -157,19 +157,19 @@ msgstr "%L1 totala uppspelningar"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:213
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n misslyckades"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n färdig"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -476,12 +476,12 @@ msgstr "Lägg till fil(er) till transkodaren"
 msgid "Add file..."
 msgstr "Lägg till fil..."
 
-#: transcoder/transcodedialog.cpp:223
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "Lägg till filer för omkodning"
 
-#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
-#: ripper/ripcddialog.cpp:184
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Lägg till mapp"
 
@@ -1042,6 +1042,10 @@ msgstr "Längd på buffer"
 #: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "Buffrar"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "Skapar register för Seafile..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -2156,7 +2160,7 @@ msgstr "Motsvarar --log-levels *:3"
 msgid "Error"
 msgstr "Fel"
 
-#: ripper/ripcddialog.cpp:134
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "Något gick fel med CD-Rippningen"
 
@@ -2915,7 +2919,7 @@ msgstr "Jamendos databas"
 
 #: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Jump to previous song right away"
-msgstr ""
+msgstr "Hoppa till föregående låt direkt"
 
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
@@ -2948,7 +2952,7 @@ msgstr "Kattungar"
 
 #: ui/equalizer.cpp:131
 msgid "Kuduro"
-msgstr ""
+msgstr "Kuduro"
 
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
@@ -2972,7 +2976,7 @@ msgstr "Stora skivomslag (detaljer nedan)"
 
 #: widgets/nowplayingwidget.cpp:102
 msgid "Large album cover (no details)"
-msgstr ""
+msgstr "Stora skivomslag (inga detaljer)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3277,7 +3281,7 @@ msgstr "Max globala sökresultat"
 msgid "Maximum bitrate"
 msgstr "Maximal bithastighet"
 
-#: ripper/ripcddialog.cpp:135
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "Media har ändrats. Laddar om"
 
@@ -3366,7 +3370,7 @@ msgstr "Flytta till biblioteket..."
 msgid "Move up"
 msgstr "Flytta uppåt"
 
-#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Musik"
@@ -3648,7 +3652,7 @@ msgstr "Öppna OPML fil"
 msgid "Open OPML file..."
 msgstr "Öppna OPML fil..."
 
-#: transcoder/transcodedialog.cpp:239
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "Öppna en katalog att importera musik från"
 
@@ -3955,7 +3959,7 @@ msgstr "Tryck en tangentkombination till att använda för %1"
 
 #: ../bin/src/ui_behavioursettingspage.h:286
 msgid "Pressing \"Previous\" in player will..."
-msgstr ""
+msgstr "Klicka på \"Föregående spår\" i spelaren kommer att..."
 
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
@@ -4269,7 +4273,7 @@ msgstr "Återställ låtstatistik"
 
 #: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Restart song, then jump to previous if pressed again"
-msgstr ""
+msgstr "Starta om låten, hoppa till föregående låt vid dubbelklickning"
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4308,13 +4312,13 @@ msgstr "Höger"
 msgid "Rip"
 msgstr "Kopiera"
 
-#: ripper/ripcddialog.cpp:94
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "Kopiera CD-skiva"
 
 #: ../bin/src/ui_mainwindow.h:716
 msgid "Rip audio CD"
-msgstr ""
+msgstr "Rippa ljud CD"
 
 #: ui/equalizer.cpp:148
 msgid "Rock"
@@ -4882,7 +4886,7 @@ msgstr "Fel vid inloggning på Spotify"
 
 #: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
-msgstr ""
+msgstr "URL för Spotify's spellistor"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
@@ -4894,7 +4898,7 @@ msgstr "Spotify-insticksprogrammet är inte installerat"
 
 #: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
-msgstr ""
+msgstr "URL för Spotify's låtar"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
@@ -4904,7 +4908,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Stjärnmärkta"
 
-#: ripper/ripcddialog.cpp:68
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "Starta kopiering"
 

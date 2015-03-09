@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-20 07:46+0000\n"
+"PO-Revision-Date: 2015-03-05 12:21+0000\n"
 "Last-Translator: zhangmin <zm1990s@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,19 +155,19 @@ msgstr "%L1 合计播放"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:213
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n 失败"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n 完成"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -474,12 +474,12 @@ msgstr "添加文件至转码器"
 msgid "Add file..."
 msgstr "添加文件..."
 
-#: transcoder/transcodedialog.cpp:223
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "添加需转码文件"
 
-#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
-#: ripper/ripcddialog.cpp:184
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "添加文件夹"
 
@@ -1040,6 +1040,10 @@ msgstr "缓冲时长"
 #: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "缓冲中"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "建立 Seafile 索引..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -2154,7 +2158,7 @@ msgstr "相当于 --log-levels *:3"
 msgid "Error"
 msgstr "错误"
 
-#: ripper/ripcddialog.cpp:134
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "CD抓轨出错"
 
@@ -3275,7 +3279,7 @@ msgstr "最大全局搜索结果"
 msgid "Maximum bitrate"
 msgstr "最大位速率"
 
-#: ripper/ripcddialog.cpp:135
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "媒体库已改变，重新载入中"
 
@@ -3364,7 +3368,7 @@ msgstr "移动至媒体库..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "音乐"
@@ -3646,7 +3650,7 @@ msgstr "打开 OPML 文件"
 msgid "Open OPML file..."
 msgstr "打开 OPML 文件…"
 
-#: transcoder/transcodedialog.cpp:239
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "打开目录导入音乐"
 
@@ -4306,7 +4310,7 @@ msgstr "右"
 msgid "Rip"
 msgstr "抓轨"
 
-#: ripper/ripcddialog.cpp:94
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "CD 抓轨"
 
@@ -4902,7 +4906,7 @@ msgstr "标准"
 msgid "Starred"
 msgstr "用星号标记"
 
-#: ripper/ripcddialog.cpp:68
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "开始抓轨"
 

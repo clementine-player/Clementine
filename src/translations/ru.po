@@ -34,7 +34,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-25 22:38+0000\n"
+"PO-Revision-Date: 2015-03-02 12:55+0000\n"
 "Last-Translator: Andrei Stepanov\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -171,19 +171,19 @@ msgstr "всего %L1 прослушиваний"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:213
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n завершено"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -490,12 +490,12 @@ msgstr "Конвертировать файл(ы)"
 msgid "Add file..."
 msgstr "Добавить файл..."
 
-#: transcoder/transcodedialog.cpp:223
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "Конвертировать файлы"
 
-#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
-#: ripper/ripcddialog.cpp:184
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Добавить папку"
 
@@ -1056,6 +1056,10 @@ msgstr "Размер буфера"
 #: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "Буферизация"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "Построение индекса Seafile..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -2170,7 +2174,7 @@ msgstr "Аналогично --log-levels *:3"
 msgid "Error"
 msgstr "Ошибка"
 
-#: ripper/ripcddialog.cpp:134
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "Ошибка конвертирования CD"
 
@@ -3291,7 +3295,7 @@ msgstr "Максимум результатов глобального поис�
 msgid "Maximum bitrate"
 msgstr "Максимальный битрейт"
 
-#: ripper/ripcddialog.cpp:135
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "Источник медиа сменился. Перезагрузка"
 
@@ -3380,7 +3384,7 @@ msgstr "Переместить в фонотеку..."
 msgid "Move up"
 msgstr "Переместить вверх"
 
-#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Музыка"
@@ -3662,7 +3666,7 @@ msgstr "Открыть файл OPML"
 msgid "Open OPML file..."
 msgstr "Открыть файл OPML..."
 
-#: transcoder/transcodedialog.cpp:239
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "Открыть папку для импортирования музыки"
 
@@ -4322,7 +4326,7 @@ msgstr "Правый канал"
 msgid "Rip"
 msgstr "Конвертировать"
 
-#: ripper/ripcddialog.cpp:94
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "Конвертировать CD"
 
@@ -4918,7 +4922,7 @@ msgstr "Стандартнoe"
 msgid "Starred"
 msgstr "Оцененные"
 
-#: ripper/ripcddialog.cpp:68
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "Начать конвертирование"
 

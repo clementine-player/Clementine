@@ -14,6 +14,7 @@
 # Irfan YAZICI <irfanyazici@gmail.com>, 2011
 # Kadir Celep <kadirche@gmail.com>, 2012
 # Muhammet Kara <muhammetk@gmail.com>, 2012
+# Muhammet Kara <muhammetk@gmail.com>, 2015
 # Murat Ikilik <>, 2012
 # Murat Sahin <martinamca@gmail.com>, 2012
 # Mustafa YILMAZ <apshalasha@gmail.com>, 2013
@@ -24,8 +25,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-19 16:25+0000\n"
-"Last-Translator: Volkan Gezer <volkangezer@gmail.com>\n"
+"PO-Revision-Date: 2015-03-07 22:27+0000\n"
+"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -161,19 +162,19 @@ msgstr "%L1 toplam çalma"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:213
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -480,12 +481,12 @@ msgstr "Dosyayı/dosyaları dönüştürücüye ekle"
 msgid "Add file..."
 msgstr "Dosya ekle..."
 
-#: transcoder/transcodedialog.cpp:223
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "Dönüştürülecek dosyaları ekle"
 
-#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
-#: ripper/ripcddialog.cpp:184
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Klasör ekle"
 
@@ -1046,6 +1047,10 @@ msgstr "Önbellek süresi"
 #: engines/gstengine.cpp:876
 msgid "Buffering"
 msgstr "Arabelleğe alınıyor"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "Seafile dizini oluşturuluyor..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -2160,7 +2165,7 @@ msgstr "--log-levels *:3'e eşdeğer"
 msgid "Error"
 msgstr "Hata"
 
-#: ripper/ripcddialog.cpp:134
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "CD Kopyalanırken Hata"
 
@@ -3281,7 +3286,7 @@ msgstr "En fazla genel arama sonucu"
 msgid "Maximum bitrate"
 msgstr "Maksimum bit oranı"
 
-#: ripper/ripcddialog.cpp:135
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "Ortam değişti. Yeniden yükleniyor"
 
@@ -3370,7 +3375,7 @@ msgstr "Kütüphaneye taşı..."
 msgid "Move up"
 msgstr "Yukarı taşı"
 
-#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Müzik"
@@ -3652,7 +3657,7 @@ msgstr "OPML dosyası aç"
 msgid "Open OPML file..."
 msgstr "OPML dosyasını aç..."
 
-#: transcoder/transcodedialog.cpp:239
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "Müziğin içe aktarılacağı bir dizin aç"
 
@@ -4312,7 +4317,7 @@ msgstr "Sağ"
 msgid "Rip"
 msgstr "Dönüştür"
 
-#: ripper/ripcddialog.cpp:94
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "CD Dönüştür"
 
@@ -4908,7 +4913,7 @@ msgstr "Standart"
 msgid "Starred"
 msgstr "Yıldızlı"
 
-#: ripper/ripcddialog.cpp:68
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "Dönüştürmeyi başlat"
 

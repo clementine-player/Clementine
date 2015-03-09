@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-19 15:24+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-03-03 15:42+0000\n"
+"Last-Translator: 박정용 <kladess@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -154,19 +154,19 @@ msgstr "총 %L1번 재생"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:213
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n 실패"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n 끝냄"
 
-#: transcoder/transcodedialog.cpp:202
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -473,12 +473,12 @@ msgstr "transcoder 파일(들) 추가"
 msgid "Add file..."
 msgstr "파일 추가..."
 
-#: transcoder/transcodedialog.cpp:223
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "변환할 파일 추가"
 
-#: transcoder/transcodedialog.cpp:305 ui/mainwindow.cpp:1857
-#: ripper/ripcddialog.cpp:184
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1857
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "폴더 추가"
 
@@ -1040,6 +1040,10 @@ msgstr "버퍼 시간"
 msgid "Buffering"
 msgstr "버퍼링"
 
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "Seafile 목차 생성 중..."
+
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
 msgstr "하지만 다음 출처는 사용할 수 없습니다:"
@@ -1163,7 +1167,7 @@ msgstr "팟케스트 다운로드 경로를 선택하세요"
 
 #: ../bin/src/ui_internetshowsettingspage.h:89
 msgid "Choose the internet services you want to show."
-msgstr ""
+msgstr "당신이 보기 원하는 인터넷 서비스들을 선택하세요."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1880,7 +1884,7 @@ msgstr "다양한 음악가에 표시하지 않기"
 
 #: ../bin/src/ui_podcastsettingspage.h:278
 msgid "Don't show listened episodes"
-msgstr ""
+msgstr "이미 들은 에피소드 보이지 않기"
 
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
@@ -1932,7 +1936,7 @@ msgstr "다운로드 대기열 추가됨"
 
 #: ../bin/src/ui_networkremotesettingspage.h:246
 msgid "Download settings"
-msgstr ""
+msgstr "다운로드 설정"
 
 #: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
@@ -2153,9 +2157,9 @@ msgstr "동등한 --log-level *:3"
 msgid "Error"
 msgstr "오류"
 
-#: ripper/ripcddialog.cpp:134
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
-msgstr ""
+msgstr "CD 추출 중 에러"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2552,11 +2556,11 @@ msgstr " Grooveshark 음악을 공유하기 위한 URL 얻기"
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
-msgstr ""
+msgstr "이 Spotify 음악을 공유하기 위한 URL 얻기"
 
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
-msgstr ""
+msgstr "이 재생목록을 공유하기 위한 URL 얻기"
 
 #: internet/grooveshark/groovesharkservice.cpp:829
 msgid "Getting Grooveshark popular songs"
@@ -2698,7 +2702,7 @@ msgstr "높음 (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "HipHop"
-msgstr ""
+msgstr "힙합"
 
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2835,7 +2839,7 @@ msgstr "설치 됨"
 
 #: core/database.cpp:585
 msgid "Integrity check"
-msgstr ""
+msgstr "무결성 검사"
 
 #: ui/mainwindow.cpp:243
 msgid "Internet"
@@ -2848,7 +2852,7 @@ msgstr "인터넷 "
 #: ../bin/src/ui_internetshowsettingspage.h:87
 msgctxt "Global search settings dialog title."
 msgid "Internet services"
-msgstr ""
+msgstr "인터넷 서비스"
 
 #: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
@@ -2912,7 +2916,7 @@ msgstr "Jamendo 데이터베이스"
 
 #: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Jump to previous song right away"
-msgstr ""
+msgstr "바로 이전 곡으로 이동"
 
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
@@ -2945,7 +2949,7 @@ msgstr "고양이"
 
 #: ui/equalizer.cpp:131
 msgid "Kuduro"
-msgstr ""
+msgstr "쿠두루"
 
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
@@ -2965,11 +2969,11 @@ msgstr "큰 앨범 표지"
 
 #: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover (details below)"
-msgstr ""
+msgstr "큰 앨범 표지 (자세한 내용은 아래에)"
 
 #: widgets/nowplayingwidget.cpp:102
 msgid "Large album cover (no details)"
-msgstr ""
+msgstr "큰 앨범 표지 (자세한 내용 없음)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3049,7 +3053,7 @@ msgstr "제한"
 #: internet/grooveshark/groovesharkservice.cpp:626
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
-msgstr ""
+msgstr "이전에 들었던 것을 기반으로 Grooveshark에서 듣기"
 
 #: ui/equalizer.cpp:137
 msgid "Live"
@@ -3268,13 +3272,13 @@ msgstr "하나 이상의 검색조건 일치 (OR)"
 
 #: ../bin/src/ui_vksettingspage.h:221
 msgid "Max global search results"
-msgstr ""
+msgstr "전역 검색 결과의 최대 개수"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "최고 비트 전송률"
 
-#: ripper/ripcddialog.cpp:135
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr ""
 
@@ -3363,7 +3367,7 @@ msgstr "라이브러리로 이동..."
 msgid "Move up"
 msgstr "위로 이동"
 
-#: transcoder/transcodedialog.cpp:224 ui/mainwindow.cpp:1831
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1831
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "음악"
@@ -3645,7 +3649,7 @@ msgstr "OPML 파일 열기"
 msgid "Open OPML file..."
 msgstr "OPML 파일 열기"
 
-#: transcoder/transcodedialog.cpp:239
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr ""
 
@@ -4303,15 +4307,15 @@ msgstr "오른쪽"
 
 #: ../bin/src/ui_ripcddialog.h:303
 msgid "Rip"
-msgstr "굽기"
+msgstr "추출"
 
-#: ripper/ripcddialog.cpp:94
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
-msgstr "CD "
+msgstr "CD 추출"
 
 #: ../bin/src/ui_mainwindow.h:716
 msgid "Rip audio CD"
-msgstr ""
+msgstr "오디오 CD 추출"
 
 #: ui/equalizer.cpp:148
 msgid "Rock"
@@ -4415,11 +4419,11 @@ msgstr "점수"
 
 #: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
-msgstr "내가 들은 Scrobble 트랙"
+msgstr "내가 들은 청취 기록 트랙"
 
 #: ../bin/src/ui_seafilesettingspage.h:165
 msgid "Seafile"
-msgstr ""
+msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
@@ -4629,7 +4633,7 @@ msgstr "볼륨 변경시 알림 보기"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Show a notification when I pause playback"
-msgstr ""
+msgstr "재생/일시정지 할 때 알림 보기"
 
 #: ../bin/src/ui_notificationssettingspage.h:442
 msgid "Show a popup from the system tray"
@@ -4706,7 +4710,7 @@ msgstr "\"좋아요\" 버튼 보기"
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
-msgstr ""
+msgstr "메인 창에서 청취기록 버튼 보이기"
 
 #: ../bin/src/ui_behavioursettingspage.h:260
 msgid "Show tray icon"
@@ -4879,7 +4883,7 @@ msgstr "Spotify 로그인 에러"
 
 #: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
-msgstr ""
+msgstr "Spotify 재생목록 URL"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
@@ -4891,7 +4895,7 @@ msgstr "Spotify 플러그인이 설치되지 않았습니다."
 
 #: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
-msgstr ""
+msgstr "Spotify 음악 URL"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
@@ -4901,13 +4905,13 @@ msgstr "표준"
 msgid "Starred"
 msgstr "볊점"
 
-#: ripper/ripcddialog.cpp:68
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
-msgstr "굽기 시작"
+msgstr "추출 시작"
 
 #: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
-msgstr ""
+msgstr "현재 재생중인 재생목록 시작"
 
 #: transcoder/transcodedialog.cpp:90
 msgid "Start transcoding"
@@ -5173,7 +5177,7 @@ msgstr "이 앨범은 요청된 형식이 아닙니다."
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:98
 msgid "This can be changed later through the preferences"
-msgstr ""
+msgstr "이 환경설정들을 나중에 변경할 수 있습니다."
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
@@ -5252,7 +5256,7 @@ msgstr "잡음 토글"
 
 #: core/commandlineoptions.cpp:171
 msgid "Toggle visibility for the pretty on-screen-display"
-msgstr ""
+msgstr "예쁜 OSD 표시를 보이기 선택"
 
 #: core/utilities.cpp:150
 msgid "Tomorrow"
@@ -5429,7 +5433,7 @@ msgstr "사용"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "가능 하면 앨범 아티스트 태그 사용"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -5562,7 +5566,7 @@ msgstr "Vk.com"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
-msgstr ""
+msgstr "음성 활성도 감지"
 
 #: widgets/osd.cpp:186
 #, qt-format
@@ -5790,7 +5794,7 @@ msgstr "당신은 Spotify 프리미엄 계정이 아닙니다."
 
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
-msgstr ""
+msgstr "활성화된 구독이 없습니다."
 
 #: ../bin/src/ui_soundcloudsettingspage.h:105
 msgid ""
@@ -5848,7 +5852,7 @@ msgstr "당신의 라디오 스트림"
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr "당신의 scrobbles: %1"
+msgstr "당신의 청취 기록: %1"
 
 #: visualisations/visualisationcontainer.cpp:159
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
