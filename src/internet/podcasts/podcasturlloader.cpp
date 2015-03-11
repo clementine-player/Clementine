@@ -165,7 +165,8 @@ void PodcastUrlLoader::RequestFinished(RequestState* state,
   const QString content_type =
       reply->header(QNetworkRequest::ContentTypeHeader).toString();
   if (parser_->SupportsContentType(content_type)) {
-    const QVariant ret = parser_->Load(reply, reply->url());
+    QByteArray data(reply->readAll());
+    const QVariant ret = parser_->Load(data, reply->url());
 
     if (ret.canConvert<Podcast>()) {
       state->reply_->SetFinished(PodcastList() << ret.value<Podcast>());

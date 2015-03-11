@@ -99,6 +99,8 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name);
 
 // Parses a string containing an RFC822 time and date.
 QDateTime ParseRFC822DateTime(const QString& text);
+// Parses a string containing an ISO8601 time and date.
+QDateTime ParseISO8601DateTime(const QString& text);
 
 // Replaces some HTML entities with their normal characters.
 QString DecodeHtmlEntities(const QString& text);

@@ -346,9 +346,7 @@ void SongLoader::StopTypefind() {
   } else if (success_ && is_podcast_) {
     qLog(Debug) << "Parsing" << url_ << "as a podcast";
 
-    QBuffer buf(&buffer_);
-    buf.open(QIODevice::ReadOnly);
-    QVariant result = podcast_parser_->Load(&buf, url_);
+    QVariant result = podcast_parser_->Load(buffer_, url_);
 
     if (result.isNull()) {
       qLog(Warning) << "Failed to parse podcast";

@@ -21,6 +21,7 @@
 
 #include <QDateTime>
 #include <QXmlStreamReader>
+#include <tinyxml2.h>
 
 #include "core/logging.h"
 #include "core/utilities.h"
@@ -28,14 +29,14 @@
 
 // Namespace constants must be lower case.
 const char* PodcastParser::kAtomNamespace = "http://www.w3.org/2005/atom";
-const char* PodcastParser::kItunesNamespace =
-    "http://www.itunes.com/dtds/podcast-1.0.dtd";
+const char* PodcastParser::kItunesNamespace = "http://www.itunes.com/dtds/podcast-1.0.dtd";
 
 PodcastParser::PodcastParser() {
   supported_mime_types_ << "application/rss+xml"
                         << "application/xml"
                         << "text/x-opml"
-                        << "text/xml";
+                        << "text/xml"
+                        << "application/atom+xml";
 }
 
 bool PodcastParser::SupportsContentType(const QString& content_type) const {
@@ -57,204 +58,100 @@ bool PodcastParser::TryMagic(const QByteArray& data) const {
   return str.contains(QRegExp("<rss\\b")) || str.contains(QRegExp("<opml\\b"));
 }
 
-QVariant PodcastParser::Load(QIODevice* device, const QUrl& url) const {
-  QXmlStreamReader reader(device);
+QVariant PodcastParser::Load(QByteArray data, const QUrl& url) const {
+  QTextStream device(&data);
+  QXmlStreamReader reader(device.device());
+  tinyxml2::XMLDocument doc;
+  doc.Parse(data.data());
 
-  while (!reader.atEnd()) {
-    switch (reader.readNext()) {
-      case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader.name();
-        if (name == "rss") {
-          Podcast podcast;
-          if (!ParseRss(&reader, &podcast)) {
-            return QVariant();
-          } else {
-            podcast.set_url(url);
-            return QVariant::fromValue(podcast);
-          }
-        } else if (name == "opml") {
-          OpmlContainer container;
-          if (!ParseOpml(&reader, &container)) {
-            return QVariant();
-          } else {
-            container.url = url;
-            return QVariant::fromValue(container);
-          }
-        }
-
-        return QVariant();
-      }
-
-      default:
-        break;
+  const QString name(doc.RootElement()->Name());
+  qLog(Debug) << "Name of the reader:" << name << "on url" <<url;
+  if (name == "rss") {
+    Podcast podcast;
+    if (!ParseRss(data, &podcast)) {
+      return QVariant();
+    } else {
+      podcast.set_url(url);
+      return QVariant::fromValue(podcast);
+    }
+  } else if (name == "opml") {
+    OpmlContainer container;
+    if (!ParseOpml(&reader, &container)) {
+      return QVariant();
+    } else {
+      container.url = url;
+      return QVariant::fromValue(container);
+    }
+  } else if (name == "feed") {
+    Podcast podcast;
+    if (!ParseFeed(data, &podcast)) {
+      return QVariant();
+    } else {
+      podcast.set_url(url);
+      return QVariant::fromValue(podcast);
     }
   }
-
   return QVariant();
 }
 
-bool PodcastParser::ParseRss(QXmlStreamReader* reader, Podcast* ret) const {
-  if (!Utilities::ParseUntilElement(reader, "channel")) {
-    return false;
+bool PodcastParser::ParseRss(QByteArray xml_text, Podcast* ret) const {
+  tinyxml2::XMLDocument doc;
+  doc.Parse(xml_text.data());
+  tinyxml2::XMLElement* feedElement = doc.RootElement()->FirstChildElement("channel");
+  ret->set_title(findElement(feedElement, QStringList() << "title", "title"));
+  ret->set_link(QUrl(findElement(feedElement, QStringList() << "link", "link")));
+  ret->set_url(QUrl(findElement(feedElement, QStringList() << "itunes:new-feed-url", "url")));
+  ret->set_description(findElement(feedElement, QStringList() << "description", "description"));
+  ret->set_copyright(findElement(feedElement, QStringList() << "copyright", "copyright"));
+  ret->set_image_url_large(QUrl(findElement(feedElement, "image", "url", "image")));
+  ret->set_owner_name(findElement(feedElement, "itunes:owner", "itunes:name", "owner:name"));
+  if (ret->owner_name().isEmpty()) {
+    ret->set_owner_name(findElement(feedElement, QStringList() << "itunes:author", "owner:author"));
   }
-
-  ParseChannel(reader, ret);
+  if (ret->owner_name().isEmpty()) {
+    ret->set_owner_name(ret->title());
+  }
+  ret->set_owner_email(findElement(feedElement, "itunes:owner", "itunes:email", "owner:email"));
+  tinyxml2::XMLElement* itemElement = feedElement->FirstChildElement("item");
+  while (itemElement) {
+    ParseItem(itemElement, ret);
+    itemElement = itemElement->NextSiblingElement("item");
+  }
   return true;
 }
 
-void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
-  while (!reader->atEnd()) {
-    QXmlStreamReader::TokenType type = reader->readNext();
-    switch (type) {
-      case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
-        const QString lower_namespace =
-            reader->namespaceUri().toString().toLower();
-
-        if (name == "title") {
-          ret->set_title(reader->readElementText());
-        } else if (name == "link" && lower_namespace.isEmpty()) {
-          ret->set_link(QUrl::fromEncoded(reader->readElementText().toAscii()));
-        } else if (name == "description") {
-          ret->set_description(reader->readElementText());
-        } else if (name == "owner" && lower_namespace == kItunesNamespace) {
-          ParseItunesOwner(reader, ret);
-        } else if (name == "image") {
-          ParseImage(reader, ret);
-        } else if (name == "copyright") {
-          ret->set_copyright(reader->readElementText());
-        } else if (name == "link" && lower_namespace == kAtomNamespace &&
-                   ret->url().isEmpty() &&
-                   reader->attributes().value("rel") == "self") {
-          ret->set_url(QUrl::fromEncoded(reader->readElementText().toAscii()));
-        } else if (name == "item") {
-          ParseItem(reader, ret);
-        } else {
-          Utilities::ConsumeCurrentElement(reader);
-        }
-        break;
-      }
-
-      case QXmlStreamReader::EndElement:
-        return;
-
-      default:
-        break;
-    }
-  }
-}
-
-void PodcastParser::ParseImage(QXmlStreamReader* reader, Podcast* ret) const {
-  while (!reader->atEnd()) {
-    QXmlStreamReader::TokenType type = reader->readNext();
-    switch (type) {
-      case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
-        if (name == "url") {
-          ret->set_image_url_large(
-              QUrl::fromEncoded(reader->readElementText().toAscii()));
-        } else {
-          Utilities::ConsumeCurrentElement(reader);
-        }
-        break;
-      }
-
-      case QXmlStreamReader::EndElement:
-        return;
-
-      default:
-        break;
-    }
-  }
-}
-
-void PodcastParser::ParseItunesOwner(QXmlStreamReader* reader,
-                                     Podcast* ret) const {
-  while (!reader->atEnd()) {
-    QXmlStreamReader::TokenType type = reader->readNext();
-    switch (type) {
-      case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
-        if (name == "name") {
-          ret->set_owner_name(reader->readElementText());
-        } else if (name == "email") {
-          ret->set_owner_email(reader->readElementText());
-        } else {
-          Utilities::ConsumeCurrentElement(reader);
-        }
-        break;
-      }
-
-      case QXmlStreamReader::EndElement:
-        return;
-
-      default:
-        break;
-    }
-  }
-}
-
-void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
+void PodcastParser::ParseItem(tinyxml2::XMLElement* itemElement, Podcast* ret) const {
   PodcastEpisode episode;
+  episode.set_title(findElement(itemElement, QStringList() << "title", "item:title"));
 
-  while (!reader->atEnd()) {
-    QXmlStreamReader::TokenType type = reader->readNext();
-    switch (type) {
-      case QXmlStreamReader::StartElement: {
-        const QStringRef name = reader->name();
-        const QString lower_namespace =
-            reader->namespaceUri().toString().toLower();
+  episode.set_description(findElement(itemElement, QStringList() << "description", "item:description"));
+  QString date(findElement(itemElement, QStringList() << "pubDate", "item:pubdate"));
+  episode.set_publication_date(Utilities::ParseRFC822DateTime(date));
 
-        if (name == "title") {
-          episode.set_title(reader->readElementText());
-        } else if (name == "description") {
-          episode.set_description(reader->readElementText());
-        } else if (name == "pubDate") {
-          QString date = reader->readElementText();
-          episode.set_publication_date(Utilities::ParseRFC822DateTime(date));
-          if (!episode.publication_date().isValid()) {
-            qLog(Error) << "Unable to parse date:" << date
-                        << "Please submit it to "
-                        << "https://github.com/clementine-player/Clementine/issues/new?title="
-                         + QUrl::toPercentEncoding(QString("[podcast] Unable to parse date: %1").arg(date));
-          }
-        } else if (name == "duration" && lower_namespace == kItunesNamespace) {
-          // http://www.apple.com/itunes/podcasts/specs.html
-          QStringList parts = reader->readElementText().split(':');
-          if (parts.count() == 2) {
-            episode.set_duration_secs(parts[0].toInt() * 60 + parts[1].toInt());
-          } else if (parts.count() >= 3) {
-            episode.set_duration_secs(parts[0].toInt() * 60 * 60 +
-                                      parts[1].toInt() * 60 + parts[2].toInt());
-          }
-        } else if (name == "enclosure") {
-          const QString type = reader->attributes().value("type").toString();
-          if (type.startsWith("audio/") || type.startsWith("x-audio/")) {
-            episode.set_url(QUrl::fromEncoded(
-                reader->attributes().value("url").toString().toAscii()));
-          }
-          Utilities::ConsumeCurrentElement(reader);
-        } else if (name == "author" && lower_namespace == kItunesNamespace) {
-          episode.set_author(reader->readElementText());
-        } else {
-          Utilities::ConsumeCurrentElement(reader);
-        }
-        break;
-      }
-
-      case QXmlStreamReader::EndElement:
-        if (!episode.publication_date().isValid()) {
-          episode.set_publication_date(QDateTime::currentDateTime());
-        }
-        if (!episode.url().isEmpty()) {
-          ret->add_episode(episode);
-        }
-        return;
-
-      default:
-        break;
-    }
+  if (!episode.publication_date().isValid()) {
+    qLog(Error) << "Unable to parse date:" << date
+                << "Please submit it to "
+                << "https://github.com/clementine-player/Clementine/issues/new?title="
+                 + QUrl::toPercentEncoding(QString("[podcast] Unable to parse date: %1").arg(date));
+    episode.set_publication_date(QDateTime::currentDateTime());
   }
+
+  episode.set_author(findElement(itemElement, QStringList() << "itunes:author" << "author", "item:author"));
+  if (episode.author().isEmpty()) {
+    episode.set_author(ret->owner_name());
+  }
+
+  episode.set_url(QUrl::fromEncoded(findUrl(itemElement, QStringList() << "enclosure", "url", "item:url")));
+  qLog(Debug) << "Episodes url:" << episode.url();
+  if (episode.url().isEmpty()) {
+    return;
+  }
+
+  QString duration(findElement(itemElement, QStringList() << "itunes:duration", "item:duration"));
+  qint64 duration_episode = parseDuration(duration);
+  qLog(Debug) << "Duratio of an episode:" << duration_episode << "from:" <<duration;
+  episode.set_duration_secs(duration_episode);
+  ret->add_episode(episode);
 }
 
 bool PodcastParser::ParseOpml(QXmlStreamReader* reader,
@@ -325,4 +222,121 @@ void PodcastParser::ParseOutline(QXmlStreamReader* reader,
         break;
     }
   }
+}
+
+bool PodcastParser::ParseFeed(QByteArray xml_text, Podcast* ret) const {
+  tinyxml2::XMLDocument doc;
+  doc.Parse(xml_text.data());
+  tinyxml2::XMLElement* feedElement = doc.FirstChildElement("feed");
+  ret->set_title(findElement(feedElement, QStringList() << "title", "title"));
+  ret->set_link(QUrl(findElement(feedElement, QStringList() << "link", "href", "link:href")));
+  ret->set_url(QUrl(findElement(feedElement, QStringList() << "id", "id")));
+  tinyxml2::XMLElement* entryElement = feedElement->FirstChildElement("entry");
+  while (entryElement) {
+    ParseEntry(entryElement, ret);
+    entryElement = entryElement->NextSiblingElement();
+  }
+  return true;
+}
+
+void PodcastParser::ParseEntry(tinyxml2::XMLElement* entryElement, Podcast* ret) const {
+  PodcastEpisode episode;
+  episode.set_title(findElement(entryElement, QStringList() << "title", "title"));
+  episode.set_description(findElement(entryElement, QStringList() << "summary", "summary"));
+  QString date(findElement(entryElement, QStringList() << "published", "published"));
+  episode.set_publication_date(Utilities::ParseISO8601DateTime(date));
+
+  if (!episode.publication_date().isValid()) {
+    qLog(Error) << "Unable to parse date:" << date
+                << "Please submit it to "
+                << "https://github.com/clementine-player/Clementine/issues/new?title="
+                 + QUrl::toPercentEncoding(QString("[podcast] Unable to parse date: %1").arg(date));
+    episode.set_publication_date(QDateTime::currentDateTime());
+  }
+
+  episode.set_author(findElement(entryElement, "author", "name", "author:name"));
+
+  tinyxml2::XMLElement* linkElement = entryElement->FirstChildElement("link");
+  while (linkElement) {
+    if (QString(linkElement->Attribute("type")).contains("audio/")) {
+      episode.set_url(QUrl::fromEncoded(linkElement->Attribute("href")));
+      break;
+    }
+    linkElement = linkElement->NextSiblingElement("link");
+  }
+  ret->add_episode(episode);
+}
+
+QString PodcastParser::findElement(tinyxml2::XMLElement* searchedElement, QStringList names, QString tag) const {
+  for (QString name : names) {
+    tinyxml2::XMLElement* tmpElement = searchedElement->FirstChildElement(name.toStdString().c_str());
+    if (tmpElement) {
+      QString ret(QString().fromUtf8(tmpElement->GetText()));
+      return ret;
+    }
+  }
+  qLog(Error) << "Setting tag " << tag << " failed";
+  return QString();
+}
+
+QString PodcastParser::findElement(tinyxml2::XMLElement* searchedElement, QString namea, QString nameb, QString tag) const {
+    tinyxml2::XMLElement* tmpElement = searchedElement->FirstChildElement(namea.toStdString().c_str());
+    if (tmpElement) {
+      tmpElement = tmpElement->FirstChildElement(nameb.toStdString().c_str());
+        if (tmpElement) {
+          QString ret(QString().fromUtf8(tmpElement->GetText()));
+          return ret;
+        }
+    }
+  qLog(Error) << "Setting tag " << tag << " failed";
+  return QString();
+}
+
+QString PodcastParser::findElement(tinyxml2::XMLElement* searchedElement, QStringList names, QString attribute, QString tag) const {
+  for (QString name : names) {
+    tinyxml2::XMLElement* tmpElement = searchedElement->FirstChildElement(name.toStdString().c_str());
+    if (tmpElement) {
+      QString ret(QString().fromUtf8(tmpElement->Attribute(attribute.toStdString().c_str())));
+      return ret;
+    }
+  }
+  qLog(Error) << "Setting tag " << tag << " failed";
+  return QString();
+}
+
+QByteArray PodcastParser::findUrl(tinyxml2::XMLElement* searchedElement, QStringList names, QString tag) const {
+  for (QString name : names) {
+    tinyxml2::XMLElement* tmpElement = searchedElement->FirstChildElement(name.toStdString().c_str());
+    if (tmpElement) {
+      QByteArray ret(tmpElement->GetText());
+      return ret;
+    }
+  }
+  qLog(Error) << "Setting tag " << tag << " failed";
+  return QByteArray();
+}
+
+QByteArray PodcastParser::findUrl(tinyxml2::XMLElement* searchedElement, QStringList names, QString attribute, QString tag) const {
+  for (QString name : names) {
+    tinyxml2::XMLElement* tmpElement = searchedElement->FirstChildElement(name.toStdString().c_str());
+    if (tmpElement) {
+      QByteArray ret(tmpElement->Attribute(attribute.toStdString().c_str()));
+      return ret;
+    }
+  }
+  qLog(Error) << "Setting tag " << tag << " failed";
+  return QByteArray();
+}
+
+qint64 PodcastParser::parseDuration(QString duration) const {
+  QStringList durations = duration.split(':');
+  QList<int> tab;
+  tab << 3600 << 60 << 1;
+  int nums = 2;
+  qint64 ret = 0;
+  for (int num = durations.count()-1; num >= 0; --num) {
+    ret += durations[num].toInt()*tab[nums];
+    --nums;
+  }
+  return ret;
 }
