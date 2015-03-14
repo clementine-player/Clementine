@@ -948,6 +948,9 @@ void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
     SendPlaybackError("Spotify playback error: " +
                       QString::fromUtf8(sp_error_message(error)));
     sp_link_release(req.link_);
+
+    // Remove this from the pending list now
+    pending_playback_requests_.removeAll(req);
     return;
   }
 
