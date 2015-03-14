@@ -89,8 +89,9 @@ public:
 
 -(void)controlTextDidEndEditing:(NSNotification*)notification {
     // No Q_ASSERT here as it is called on destruction.
-    if (pimpl)
-        pimpl->textDidEndEditing();
+    if (!pimpl) return;
+
+    pimpl->textDidEndEditing();
 
     if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSReturnTextMovement)
         pimpl->returnPressed();
