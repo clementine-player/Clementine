@@ -132,6 +132,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   void BrowseToplist(const pb::spotify::BrowseToplistRequest& req);
   void SetPlaybackSettings(const pb::spotify::PlaybackSettings& req);
   void SetPaused(const pb::spotify::PauseRequest& req);
+  void PrefetchTrack(const pb::spotify::PrefetchRequest& req);
 
   void SendPlaylistList();
 
@@ -167,6 +168,12 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
     sp_image* image_;
   };
 
+  struct PrefetchTrackRequest {
+    QString uri_;
+    sp_link* link_;
+    sp_track* track_;
+  };
+
   void TryPlaybackAgain(const PendingPlaybackRequest& req);
   void TryImageAgain(sp_image* image);
   int GetDownloadProgress(sp_playlist* playlist);
@@ -194,6 +201,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   QMap<sp_albumbrowse*, QString> pending_album_browses_;
   QMap<sp_toplistbrowse*, pb::spotify::BrowseToplistRequest>
       pending_toplist_browses_;
+  QMap<QString, PrefetchTrackRequest> prefetched_tracks_;
 
   QMap<sp_search*, QList<sp_albumbrowse*>> pending_search_album_browses_;
   QMap<sp_albumbrowse*, sp_search*> pending_search_album_browse_responses_;

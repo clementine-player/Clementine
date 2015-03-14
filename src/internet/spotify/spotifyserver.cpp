@@ -328,3 +328,10 @@ void SpotifyServer::SetPaused(const bool paused) {
   req->set_paused(paused);
   SendOrQueueMessage(message);
 }
+
+void SpotifyServer::PrefetchTrack(const QUrl& url) {
+  pb::spotify::Message message;
+  pb::spotify::PrefetchRequest* req = message.mutable_prefetch_request();
+  req->set_track_uri(DataCommaSizeFromQString(url.toString()));
+  SendOrQueueMessage(message);
+}

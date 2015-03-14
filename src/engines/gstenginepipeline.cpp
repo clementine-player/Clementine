@@ -487,8 +487,8 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg,
                                                    gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  qLog(Debug) << instance->id() << "sync bus message"
-              << GST_MESSAGE_TYPE_NAME(msg);
+  //qLog(Debug) << instance->id() << "sync bus message"
+  //            << GST_MESSAGE_TYPE_NAME(msg);
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
@@ -867,6 +867,8 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin,
                                               gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
+  qDebug() << "SourceDrainedCallback" << instance->has_next_valid_url();
+
   if (instance->has_next_valid_url()) {
     instance->TransitionToNext();
   }
@@ -1155,4 +1157,10 @@ void GstEnginePipeline::SetNextUrl(const QUrl& url, qint64 beginning_nanosec,
   next_url_ = url;
   next_beginning_offset_nanosec_ = beginning_nanosec;
   next_end_offset_nanosec_ = end_nanosec;
+
+  if (url.scheme() == "spotify") {
+    SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+    QMetaObject::invokeMethod(spotify, "SetNextUrl", Qt::QueuedConnection,
+                              Q_ARG(QUrl, url));
+  }
 }
