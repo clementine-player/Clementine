@@ -107,32 +107,40 @@ public:
 
 @implementation QocoaSearchField
 -(BOOL)performKeyEquivalent:(NSEvent*)event {
-    if ([event type] == NSKeyDown && [event modifierFlags] & NSCommandKeyMask)
-    {
-        QString keyString = toQString([event characters]);
-        if (keyString == "a")  // Cmd+a
+
+    // First, check if we have the focus.
+    // If no, it probably means this event isn't for us.
+    NSResponder* firstResponder = [[NSApp keyWindow] firstResponder];
+    if ([firstResponder isKindOfClass:[NSText class]] &&
+            [(NSText*)firstResponder delegate] == self) {
+
+        if ([event type] == NSKeyDown && [event modifierFlags] & NSCommandKeyMask)
         {
-            [self performSelector:@selector(selectText:)];
-            return YES;
-        }
-        else if (keyString == "c")  // Cmd+c
-        {
-            QClipboard* clipboard = QApplication::clipboard();
-            clipboard->setText(toQString([self stringValue]));
-            return YES;
-        }
-        else if (keyString == "v")  // Cmd+v
-        {
-            QClipboard* clipboard = QApplication::clipboard();
-            [self setStringValue:fromQString(clipboard->text())];
-            return YES;
-        }
-        else if (keyString == "x")  // Cmd+x
-        {
-            QClipboard* clipboard = QApplication::clipboard();
-            clipboard->setText(toQString([self stringValue]));
-            [self setStringValue:@""];
-            return YES;
+            QString keyString = toQString([event characters]);
+            if (keyString == "a")  // Cmd+a
+            {
+                [self performSelector:@selector(selectText:)];
+                return YES;
+            }
+            else if (keyString == "c")  // Cmd+c
+            {
+                QClipboard* clipboard = QApplication::clipboard();
+                clipboard->setText(toQString([self stringValue]));
+                return YES;
+            }
+            else if (keyString == "v")  // Cmd+v
+            {
+                QClipboard* clipboard = QApplication::clipboard();
+                [self setStringValue:fromQString(clipboard->text())];
+                return YES;
+            }
+            else if (keyString == "x")  // Cmd+x
+            {
+                QClipboard* clipboard = QApplication::clipboard();
+                clipboard->setText(toQString([self stringValue]));
+                [self setStringValue:@""];
+                return YES;
+            }
         }
     }
 
