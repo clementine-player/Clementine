@@ -116,7 +116,7 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
 
   // Set size
   byte_rate_ = quint64(sample_rate) * channels * 2;
-  const quint64 bytes = byte_rate_ * length_msec_ / 1000;
+  const quint64 bytes = 2* byte_rate_ * length_msec_ / 1000;
   gst_app_src_set_size(appsrc_, bytes);
 
   // Ready to go

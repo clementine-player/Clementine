@@ -300,6 +300,8 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
     AddTracksToPlaylist(message.add_tracks_to_playlist());
   } else if (message.has_remove_tracks_from_playlist()) {
     RemoveTracksFromPlaylist(message.remove_tracks_from_playlist());
+  } else if (message.has_prefetch_request()) {
+    PrefetchTrack(message.prefetch_request());
   }
 }
 
@@ -905,20 +907,36 @@ int SpotifyClient::GetDownloadProgress(sp_playlist* playlist) {
 }
 
 void SpotifyClient::StartPlayback(const pb::spotify::PlaybackRequest& req) {
-  // Get a link object from the URI
-  sp_link* link = sp_link_create_from_string(req.track_uri().c_str());
-  if (!link) {
-    SendPlaybackError("Invalid Spotify URI");
-    return;
+  QString uri = QString::fromStdString(req.track_uri());
+
+  sp_link* link;
+  sp_track* track;
+
+  if (prefetched_tracks_.contains(uri)) {
+    PrefetchTrackRequest prefetch_request;
+    prefetch_request = prefetched_tracks_.take(uri);
+    link = prefetch_request.link_;
+    track = prefetch_request.track_;
+
+    qLog(Debug) << "Using prefetched track";
+  } else {
+    // Get a link object from the URI
+    link = sp_link_create_from_string(req.track_uri().c_str());
+    if (!link) {
+      SendPlaybackError("Invalid Spotify URI");
+      return;
+    }
+
+    // Get the track from the link
+    track = sp_link_as_track(link);
+    if (!track) {
+      SendPlaybackError("Spotify URI was not a track");
+      sp_link_release(link);
+      return;
+    }
   }
 
-  // Get the track from the link
-  sp_track* track = sp_link_as_track(link);
-  if (!track) {
-    SendPlaybackError("Spotify URI was not a track");
-    sp_link_release(link);
-    return;
-  }
+  prefetched_tracks_.clear();
 
   PendingPlaybackRequest pending_playback;
   pending_playback.request_ = req;
@@ -968,6 +986,39 @@ void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
 
   // Remove this from the pending list now
   pending_playback_requests_.removeAll(req);
+}
+
+void SpotifyClient::PrefetchTrack(const pb::spotify::PrefetchRequest &req) {
+  // Get a link object from the URI
+  sp_link* link = sp_link_create_from_string(req.track_uri().c_str());
+  if (!link) {
+    SendPlaybackError("Invalid Spotify URI");
+    return;
+  }
+
+  // Get the track from the link
+  sp_track* track = sp_link_as_track(link);
+  if (!track) {
+    SendPlaybackError("Spotify URI was not a track");
+    sp_link_release(link);
+    return;
+  }
+
+  // Prefetch track
+  sp_error error = sp_session_player_prefetch(session_, track);
+  if (error != SP_ERROR_OK) {
+    qLog(Debug) << sp_error_message(error);
+    return;
+  }
+
+  QString uri = QString::fromStdString(req.track_uri());
+
+  PrefetchTrackRequest prefetch_request;
+  prefetch_request.uri_ = uri;
+  prefetch_request.link_ = link;
+  prefetch_request.track_ = track;
+
+  prefetched_tracks_.insert(uri, prefetch_request);
 }
 
 void SpotifyClient::SendPlaybackError(const QString& error) {
