@@ -89,15 +89,11 @@ bool MacGlobalShortcutBackend::DoRegister() {
   // Always enable media keys.
   mac::SetShortcutHandler(this);
 
-  if (AXAPIEnabled()) {
-    for (const GlobalShortcuts::Shortcut& shortcut :
-         manager_->shortcuts().values()) {
-      shortcuts_[shortcut.action->shortcut()] = shortcut.action;
-    }
-    return p_->Register();
+  for (const GlobalShortcuts::Shortcut& shortcut :
+       manager_->shortcuts().values()) {
+    shortcuts_[shortcut.action->shortcut()] = shortcut.action;
   }
-
-  return false;
+  return p_->Register();
 }
 
 void MacGlobalShortcutBackend::DoUnregister() {
