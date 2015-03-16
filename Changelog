@@ -47,6 +47,11 @@ Next release:
     * Persistent cache for pixmaps. Huge improvement of the performance when
      scrolling the library for example
     * Add AppData file for Clementine (for GNOME and KDE Software Centers)
+    * Add iPod-like behaviour to previous button
+    * Add "no song details" now playing widget option
+    * Ability to add tracks to Spotify starred playlist by drag and drop
+    * Add HipHop and Kuduro equalizers
+    * Add AZLyrics lyric provider
 
   Bugfixes:
     * Fix crash when click on a SoundCloud entry in internet tab
@@ -86,6 +91,16 @@ Next release:
     * Fix socket leak in moodbar
     * Fix memory leak in tagreader
     * Remove Ubuntu One support
+    * Remove Discogs support
+    * Fix crash when trying to fingerprint but missing a plugin
+    * Fix infinite scan with Subsonic when the library is empty
+    * Fix shortcut/media keys issues on Mac
+    * Fix compilation issues on Yosemite
+    * Fix performer tag for mpeg
+    * Fix parsing issues with "innovative" datetime formats
+    * Fix laggy interface on Mac
+    * Fix crash in GrooveShark
+    * Fix playback breaks in Spotify
 
   Build system changes:
     * Update to gstreamer 1.0
@@ -93,6 +108,11 @@ Next release:
     * Use the system's sha2 library if it's available
     * (Windows) Add libgmp-10.dll which is required by libgiognutls.dll
     * (Fedora) Don't depend on libplist or usbmuxd
+    * Remove libindicate-qt
+    * (Debian/Ubuntu) Remove internal copy of chromaprint and add it as
+     dependency
+    * (Debian/Ubuntu) Add libmygpo-qt-dev (=> 1.0.7)
+    * Remove internal copy of libechonest and add it as dependency
 
 
 
