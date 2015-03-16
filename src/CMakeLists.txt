@@ -1250,6 +1250,7 @@ target_link_libraries(clementine_lib
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${SQLITE_LIBRARIES}
+  ${TINYXML2_LIBRARIES}
   z
   Qocoa
 )

@@ -37,11 +37,16 @@ TEST(UtilitiesTest, HmacFunctions) {
   EXPECT_TRUE(result_sha256);
 }
 
-TEST(UtilitiesTest, ParseRFC822DateTim) {
+TEST(UtilitiesTest, ParseRFC822DateTime) {
   QDateTime result_DateTime = Utilities::ParseRFC822DateTime(QString("22 Feb 2008 00:16:17 GMT"));
   EXPECT_TRUE(result_DateTime.isValid());
   result_DateTime = Utilities::ParseRFC822DateTime(QString("Thu, 13 Dec 2012 13:27:52 +0000"));
   EXPECT_TRUE(result_DateTime.isValid());
   result_DateTime = Utilities::ParseRFC822DateTime(QString("Mon, 12 March 2012 20:00:00 +0100"));
+  EXPECT_TRUE(result_DateTime.isValid());
+}
+
+TEST(UtilitiesTest, ParseISO8601DateTime) {
+  QDateTime result_DateTime = Utilities::ParseISO8601DateTime(QString("2015-01-28T00:02:24+01:00"));
   EXPECT_TRUE(result_DateTime.isValid());
 }

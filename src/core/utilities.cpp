@@ -558,6 +558,32 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
   return false;
 }
 
+QDateTime ParseISO8601DateTime(const QString& text) {
+  QRegExp regexp("(\\d{4,4})-(\\d{2,2})-(\\d{2,2})T(\\d{2,2}):(\\d{2,2}):(\\d{2,2})");
+  if (regexp.indexIn(text) == -1) {
+    return QDateTime();
+  }
+
+  enum class MatchNames {
+    YEARS = 1,
+    MONTHS,
+    DAYS,
+    HOURS,
+    MINUTES,
+    SECONDS
+  };
+
+  const QDate date(regexp.cap(static_cast<int>(MatchNames::YEARS)).toInt(),
+                   regexp.cap(static_cast<int>(MatchNames::MONTHS)).toInt(),
+                   regexp.cap(static_cast<int>(MatchNames::DAYS)).toInt());
+
+  const QTime time(regexp.cap(static_cast<int>(MatchNames::HOURS)).toInt(),
+                   regexp.cap(static_cast<int>(MatchNames::MINUTES)).toInt(),
+                   regexp.cap(static_cast<int>(MatchNames::SECONDS)).toInt());
+
+  return QDateTime (date, time);
+}
+
 QDateTime ParseRFC822DateTime(const QString& text) {
   QRegExp regexp("(\\d{1,2}) (\\w{3,12}) (\\d+) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
   if (regexp.indexIn(text) == -1) {

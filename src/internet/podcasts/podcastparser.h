@@ -21,6 +21,7 @@
 #define INTERNET_PODCASTS_PODCASTPARSER_H_
 
 #include <QStringList>
+#include <tinyxml2.h>
 
 #include "podcast.h"
 
@@ -46,21 +47,26 @@ class PodcastParser {
   // You should check the type of the returned QVariant to see whether it
   // contains a Podcast or an OpmlContainer.  If the QVariant isNull then an
   // error occurred parsing the XML.
-  QVariant Load(QIODevice* device, const QUrl& url) const;
+  QVariant Load(QByteArray data, const QUrl& url) const;
 
   // Really quick test to see if some data might be supported.  Load() might
   // still return a null QVariant.
   bool TryMagic(const QByteArray& data) const;
 
  private:
-  bool ParseRss(QXmlStreamReader* reader, Podcast* ret) const;
-  void ParseChannel(QXmlStreamReader* reader, Podcast* ret) const;
-  void ParseImage(QXmlStreamReader* reader, Podcast* ret) const;
-  void ParseItunesOwner(QXmlStreamReader* reader, Podcast* ret) const;
-  void ParseItem(QXmlStreamReader* reader, Podcast* ret) const;
+  bool ParseRss(QByteArray xml_text, Podcast* ret) const;
+  void ParseItem(tinyxml2::XMLElement* entryElement, Podcast* ret) const;
 
   bool ParseOpml(QXmlStreamReader* reader, OpmlContainer* ret) const;
   void ParseOutline(QXmlStreamReader* reader, OpmlContainer* ret) const;
+  bool ParseFeed(QByteArray xml_text, Podcast* ret) const;
+  void ParseEntry(tinyxml2::XMLElement* entryElement, Podcast* ret) const;
+  QString findElement(tinyxml2::XMLElement* searchedElement, QStringList names, QString tag) const;
+  QString findElement(tinyxml2::XMLElement* searchedElement, QString namea, QString namfb, QString tag) const;
+  QString findElement(tinyxml2::XMLElement* searchedElement, QStringList names, QString attribute, QString tag) const;
+  QByteArray findUrl(tinyxml2::XMLElement* searchedElement, QStringList names, QString tag) const;
+  QByteArray findUrl(tinyxml2::XMLElement* searchedElement, QStringList names, QString attribute, QString tag) const;
+  qint64 parseDuration(QString duration) const;
 
  private:
   QStringList supported_mime_types_;
