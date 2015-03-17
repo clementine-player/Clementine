@@ -321,11 +321,14 @@ void SpotifyClient::SetPlaybackSettings(
   }
 
   qLog(Debug) << "Setting playback settings: bitrate" << bitrate
-              << "normalisation" << req.volume_normalisation();
+              << "normalisation" << req.volume_normalisation()
+              << "gapless" << req.gapless();
 
   sp_session_preferred_bitrate(session_, bitrate);
   sp_session_preferred_offline_bitrate(session_, bitrate, false);
   sp_session_set_volume_normalization(session_, req.volume_normalisation());
+
+  gapless_playback_ = req.gapless();
 }
 
 void SpotifyClient::Login(const pb::spotify::LoginRequest& req) {
@@ -762,6 +765,38 @@ void SpotifyClient::MetadataUpdatedCallback(sp_session* session) {
        me->pending_playback_requests_) {
     me->TryPlaybackAgain(playback);
   }
+  if (me->gapless_playback_) {
+    for (const PrefetchTrackRequest req : me->prefetched_tracks_.values()) {
+      me->ContinueGaplessPlayback(req);
+    }
+  }
+
+  qLog(Debug) << "MetadataUpdatedCallback";
+}
+
+void SpotifyClient::ContinueGaplessPlayback(const PrefetchTrackRequest& req) {
+  if (!gapless_playback_)
+    return;
+
+  // If the track was not loaded then we have to come back later
+  if (!sp_track_is_loaded(req.track_)) {
+    qLog(Debug) << "Playback track not loaded yet, will try again later";
+    return;
+  }
+
+  sp_error error = sp_session_player_load(session_, req.track_);
+  qLog(Debug) << Q_FUNC_INFO << sp_error_message(error);
+
+  //int port = media_pipeline_->port();
+  //media_pipeline_.reset(new MediaPipeline(port,
+  //                                        sp_track_duration(req.track_)));
+
+  error = sp_session_player_play(session_, true);
+  qLog(Debug) << Q_FUNC_INFO << sp_error_message(error);
+
+  sp_link_release(req.link_);
+
+  prefetched_tracks_.clear();
 }
 
 int SpotifyClient::MusicDeliveryCallback(sp_session* session,
@@ -791,8 +826,23 @@ int SpotifyClient::MusicDeliveryCallback(sp_session* session,
     return 0;
   }
 
-  me->media_pipeline_->WriteData(reinterpret_cast<const char*>(frames),
-                                 num_frames * format->channels * 2);
+  const char* buf = reinterpret_cast<const char*>(frames);
+  bool buf_null = true;
+
+  // Spotify sends a buffer with only null at the end of each track. To get gapless playback
+  // we have to check if the buffer is empty and discard this data.
+  if (me->gapless_playback_) {
+    for (int i=0;i<num_frames;++i) {
+      if (buf[i] != '\0') {
+        buf_null = false;
+        break;
+      }
+    }
+  }
+
+  if (!me->gapless_playback_ || !buf_null) {
+    me->media_pipeline_->WriteData(buf, num_frames * format->channels * 2);
+  }
 
   return num_frames;
 }
@@ -801,7 +851,13 @@ void SpotifyClient::EndOfTrackCallback(sp_session* session) {
   SpotifyClient* me =
       reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
 
-  me->media_pipeline_.reset();
+  if (me->gapless_playback_ && !me->prefetched_tracks_.isEmpty()) {
+    for (const PrefetchTrackRequest req : me->prefetched_tracks_.values()) {
+      me->ContinueGaplessPlayback(req);
+    }
+  } else {
+    me->media_pipeline_.reset();
+  }
 }
 
 void SpotifyClient::StreamingErrorCallback(sp_session* session,
@@ -909,34 +965,20 @@ int SpotifyClient::GetDownloadProgress(sp_playlist* playlist) {
 void SpotifyClient::StartPlayback(const pb::spotify::PlaybackRequest& req) {
   QString uri = QString::fromStdString(req.track_uri());
 
-  sp_link* link;
-  sp_track* track;
-
-  if (prefetched_tracks_.contains(uri)) {
-    PrefetchTrackRequest prefetch_request;
-    prefetch_request = prefetched_tracks_.take(uri);
-    link = prefetch_request.link_;
-    track = prefetch_request.track_;
-
-    qLog(Debug) << "Using prefetched track";
-  } else {
-    // Get a link object from the URI
-    link = sp_link_create_from_string(req.track_uri().c_str());
-    if (!link) {
-      SendPlaybackError("Invalid Spotify URI");
-      return;
-    }
-
-    // Get the track from the link
-    track = sp_link_as_track(link);
-    if (!track) {
-      SendPlaybackError("Spotify URI was not a track");
-      sp_link_release(link);
-      return;
-    }
+  // Get a link object from the URI
+  sp_link* link = sp_link_create_from_string(req.track_uri().c_str());
+  if (!link) {
+    SendPlaybackError("Invalid Spotify URI");
+    return;
   }
 
-  prefetched_tracks_.clear();
+  // Get the track from the link
+  sp_track* track = sp_link_as_track(link);
+  if (!track) {
+    SendPlaybackError("Spotify URI was not a track");
+    sp_link_release(link);
+    return;
+  }
 
   PendingPlaybackRequest pending_playback;
   pending_playback.request_ = req;
@@ -1016,6 +1058,9 @@ void SpotifyClient::PrefetchTrack(const pb::spotify::PrefetchRequest &req) {
   prefetch_request.track_ = track;
 
   prefetched_tracks_.insert(uri, prefetch_request);
+
+  qDebug() << "Sending event";
+  media_pipeline_->SendEvent();
 }
 
 void SpotifyClient::SendPlaybackError(const QString& error) {

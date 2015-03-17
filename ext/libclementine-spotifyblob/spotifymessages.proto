@@ -190,6 +190,7 @@ enum Bitrate {
 message PlaybackSettings {
   optional Bitrate bitrate = 1 [default = Bitrate320k];
   optional bool volume_normalisation = 2 [default = false];
+  optional bool gapless = 3 [default = false];
 }
 
 message PauseRequest {

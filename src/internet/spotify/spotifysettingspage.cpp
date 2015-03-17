@@ -111,6 +111,7 @@ void SpotifySettingsPage::Load() {
       s.value("bitrate", pb::spotify::Bitrate320k).toInt()));
   ui_->volume_normalisation->setChecked(
       s.value("volume_normalisation", false).toBool());
+  ui_->gapless->setChecked(s.value("gapless", false).toBool());
 
   UpdateLoginState();
 }
@@ -125,6 +126,7 @@ void SpotifySettingsPage::Save() {
   s.setValue("bitrate",
              ui_->bitrate->itemData(ui_->bitrate->currentIndex()).toInt());
   s.setValue("volume_normalisation", ui_->volume_normalisation->isChecked());
+  s.setValue("gapless", ui_->gapless->isChecked());
 }
 
 void SpotifySettingsPage::LoginFinished(bool success) {

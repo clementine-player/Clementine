@@ -29,7 +29,16 @@
          <bool>true</bool>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item row="1" column="0">
@@ -135,7 +144,14 @@
       <item row="0" column="1">
        <widget class="QComboBox" name="bitrate"/>
       </item>
-      <item row="1" column="0" colspan="2">
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="gapless">
+        <property name="text">
+         <string>Gapless playback</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
        <widget class="QCheckBox" name="volume_normalisation">
         <property name="text">
          <string>Use volume normalisation</string>
@@ -188,7 +204,7 @@
         </size>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../data/data.qrc">:/spotify-attribution.png</pixmap>
+        <pixmap resource="../../../data/data.qrc">:/spotify-attribution.png</pixmap>
        </property>
       </widget>
      </item>
@@ -205,7 +221,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../data/data.qrc"/>
+  <include location="../../../data/data.qrc"/>
  </resources>
  <connections/>
 </ui>
