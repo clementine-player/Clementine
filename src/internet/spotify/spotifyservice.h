@@ -191,6 +191,7 @@ signals:
   LoginState login_state_;
   pb::spotify::Bitrate bitrate_;
   bool volume_normalisation_;
+  bool gapless_;
 };
 
 #endif  // INTERNET_SPOTIFY_SPOTIFYSERVICE_H_

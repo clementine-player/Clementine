@@ -487,12 +487,12 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg,
                                                    gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  //qLog(Debug) << instance->id() << "sync bus message"
-  //            << GST_MESSAGE_TYPE_NAME(msg);
+  qLog(Debug) << instance->id() << "sync bus message"
+              << GST_MESSAGE_TYPE_NAME(msg);
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
-      emit instance->EndOfStreamReached(instance->id(), false);
+      emit instance->EndOfStreamReached(instance->id(), instance->has_next_valid_url());
       break;
 
     case GST_MESSAGE_TAG:
@@ -1172,4 +1172,19 @@ void GstEnginePipeline::SetNextUrl(const QUrl& url, qint64 beginning_nanosec,
     QMetaObject::invokeMethod(spotify, "SetNextUrl", Qt::QueuedConnection,
                               Q_ARG(QUrl, url));
   }
+}
+
+void GstEnginePipeline::SpotifyMovedToNextTrack() {
+  url_ = next_url_;
+  end_offset_nanosec_ = next_end_offset_nanosec_;
+  next_url_ = QUrl();
+  next_beginning_offset_nanosec_ = 0;
+  next_end_offset_nanosec_ = 0;
+
+  // This function gets called when the source has been drained, even if the
+  // song hasn't finished playing yet.  We'll get a new stream when it really
+  // does finish, so emit TrackEnded then.
+  emit_track_ended_on_stream_start_ = true;
+
+  gst_element_seek_simple(pipeline_, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH, 0);
 }

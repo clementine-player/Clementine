@@ -37,6 +37,9 @@ class MediaPipeline {
 
   void WriteData(const char* data, qint64 length);
   void EndStream();
+  void SendEvent();
+
+  int port() const { return port_; }
 
  private:
   static void NeedDataCallback(GstAppSrc* src, guint length, void* data);

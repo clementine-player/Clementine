@@ -86,7 +86,8 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
       search_delay_(new QTimer(this)),
       login_state_(LoginState_OtherError),
       bitrate_(pb::spotify::Bitrate320k),
-      volume_normalisation_(false) {
+      volume_normalisation_(false),
+      gapless_(false) {
 // Build the search path for the binary blob.
 // Look for one distributed alongside clementine first, then check in the
 // user's home directory for any that have been downloaded.
@@ -249,6 +250,7 @@ void SpotifyService::ReloadSettings() {
   bitrate_ = static_cast<pb::spotify::Bitrate>(
       s.value("bitrate", pb::spotify::Bitrate320k).toInt());
   volume_normalisation_ = s.value("volume_normalisation", false).toBool();
+  gapless_ = s.value("gapless", false).toBool();
 
   if (server_ && blob_process_) {
     server_->SetPlaybackSettings(bitrate_, volume_normalisation_);
@@ -306,7 +308,7 @@ void SpotifyService::EnsureServerCreated(const QString& username,
   }
 
   server_->Login(login_username, login_password, bitrate_,
-                 volume_normalisation_);
+                 volume_normalisation_, gapless_);
 
   StartBlobProcess();
 }

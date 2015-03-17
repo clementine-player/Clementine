@@ -39,7 +39,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
 
   void Init();
   void Login(const QString& username, const QString& password,
-             pb::spotify::Bitrate bitrate, bool volume_normalisation);
+             pb::spotify::Bitrate bitrate, bool volume_normalisation, bool gapless);
 
   void LoadStarred();
   void SyncStarred();

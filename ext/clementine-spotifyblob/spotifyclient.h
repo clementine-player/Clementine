@@ -180,6 +180,8 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   void SendDownloadProgress(pb::spotify::PlaylistType type, int index,
                             int download_progress);
 
+  void ContinueGaplessPlayback(const PrefetchTrackRequest& req);
+
   QByteArray api_key_;
 
   QTcpSocket* protocol_socket_;
@@ -202,6 +204,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   QMap<sp_toplistbrowse*, pb::spotify::BrowseToplistRequest>
       pending_toplist_browses_;
   QMap<QString, PrefetchTrackRequest> prefetched_tracks_;
+  bool gapless_playback_;
 
   QMap<sp_search*, QList<sp_albumbrowse*>> pending_search_album_browses_;
   QMap<sp_albumbrowse*, sp_search*> pending_search_album_browse_responses_;

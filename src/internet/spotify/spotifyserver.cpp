@@ -77,7 +77,8 @@ void SpotifyServer::SendOrQueueMessage(const pb::spotify::Message& message) {
 
 void SpotifyServer::Login(const QString& username, const QString& password,
                           pb::spotify::Bitrate bitrate,
-                          bool volume_normalisation) {
+                          bool volume_normalisation,
+                          bool gapless) {
   pb::spotify::Message message;
 
   pb::spotify::LoginRequest* request = message.mutable_login_request();
@@ -88,6 +89,7 @@ void SpotifyServer::Login(const QString& username, const QString& password,
   request->mutable_playback_settings()->set_bitrate(bitrate);
   request->mutable_playback_settings()->set_volume_normalisation(
       volume_normalisation);
+  request->mutable_playback_settings()->set_gapless(gapless);
 
   SendOrQueueMessage(message);
 }
